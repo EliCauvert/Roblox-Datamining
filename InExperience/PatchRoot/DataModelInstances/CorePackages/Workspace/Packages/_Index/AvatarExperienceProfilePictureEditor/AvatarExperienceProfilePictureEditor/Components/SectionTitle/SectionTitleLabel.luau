@@ -1,15 +1,15 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local view = foundationModule.View
-local text = foundationModule.Text
-local icon = foundationModule.Icon
-local iconSize = foundationModule.Enums.IconSize
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local Icon = FoundationModule.Icon
+local IconSize = FoundationModule.Enums.IconSize
 
-return function(p1)
-	-- upvalues: reactModule (ref), text (ref), icon (ref), iconSize (ref), view (ref)
-	local t = {
-		Title = reactModule.createElement(text, {
+return function(p1) --[[ Line: 19 | Named "SectionTitleLabel" ]]
+	-- upvalues: ReactModule (copy), Text (copy), Icon (copy), IconSize (copy), View (copy)
+	local config = {
+		Title = ReactModule.createElement(Text, {
 			tag = "auto-xy text-heading-small content-emphasis",
 			Text = p1.title,
 			LayoutOrder = if p1.leadingIconName then 2 else 1
@@ -17,14 +17,14 @@ return function(p1)
 	}
 	
 	if p1.leadingIconName then
-		t.LeadingIcon = reactModule.createElement(icon, {
+		config.LeadingIcon = ReactModule.createElement(Icon, {
 			LayoutOrder = 1,
 			name = p1.leadingIconName,
-			size = iconSize.Medium
+			size = IconSize.Medium
 		})
 	end
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = if p1.leadingIconName then "row align-y-center gap-xsmall auto-xy" else "auto-xy",
 		LayoutOrder = p1.layoutOrder
-	}, t)
+	}, config)
 end

@@ -1,54 +1,54 @@
-﻿local guiService = game:GetService("GuiService")
-local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
-local inGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
-local roact = inGameMenuDependenciesModule.Roact
-local roactRodux = inGameMenuDependenciesModule.RoactRodux
-local t = inGameMenuDependenciesModule.t
-local parent = script.Parent.Parent.Parent
-local openEducationalPopupModule = require(parent.Thunks.OpenEducationalPopup)
-local externalEventConnectionModule = require(parent.Utility.ExternalEventConnection)
-local inGameMenuPolicyModule = require(parent.InGameMenuPolicy)
-local userLocalStoreModule = require(parent.Utility.UserLocalStore)
-local sendAnalyticsModule = require(parent.Utility.SendAnalytics)
-local constantsModule = require(parent.Resources.Constants)
-local nativeCloseEventConnector = roact.PureComponent:extend("NativeCloseEventConnector")
-nativeCloseEventConnector.validateProps = t.strictInterface({
-	isEducationalPopupEnabled = t.boolean,
-	maxDisplayCount = t.integer,
-	openEducationalPopup = t.optional(t.callback)
+﻿local GuiService = game:GetService("GuiService")
+local RbxAnalyticsService = game:GetService("RbxAnalyticsService")
+local InGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
+local Roact = InGameMenuDependenciesModule.Roact
+local RoactRodux = InGameMenuDependenciesModule.RoactRodux
+local T = InGameMenuDependenciesModule.t
+local Parent = script.Parent.Parent.Parent
+local OpenEducationalPopupModule = require(Parent.Thunks.OpenEducationalPopup)
+local ExternalEventConnectionModule = require(Parent.Utility.ExternalEventConnection)
+local InGameMenuPolicyModule = require(Parent.InGameMenuPolicy)
+local UserLocalStoreModule = require(Parent.Utility.UserLocalStore)
+local SendAnalyticsModule = require(Parent.Utility.SendAnalytics)
+local ConstantsModule = require(Parent.Resources.Constants)
+local NativeCloseEventConnector = Roact.PureComponent:extend("NativeCloseEventConnector")
+NativeCloseEventConnector.validateProps = T.strictInterface({
+	isEducationalPopupEnabled = T.boolean,
+	maxDisplayCount = T.integer,
+	openEducationalPopup = T.optional(T.callback)
 })
 
-function nativeCloseEventConnector.init(p1)
-	-- upvalues: rbxAnalyticsService (ref), userLocalStoreModule (ref), guiService (ref), sendAnalyticsModule (ref), constantsModule (ref)
-	function p0.onNativeCloseConnect()
-		-- upvalues: p1 (ref), rbxAnalyticsService (copy), userLocalStoreModule (copy), guiService (copy), sendAnalyticsModule (copy), constantsModule (copy)
+function NativeCloseEventConnector.init(p1) --[[ Line: 26 ]]
+	-- upvalues: RbxAnalyticsService (copy), UserLocalStoreModule (copy), GuiService (copy), SendAnalyticsModule (copy), ConstantsModule (copy)
+	function p1.onNativeCloseConnect() --[[ Line: 27 ]]
+		-- upvalues: p1 (copy), RbxAnalyticsService (upval), UserLocalStoreModule (upval), GuiService (upval), SendAnalyticsModule (upval), ConstantsModule (upval)
 		if p1.props.isEducationalPopupEnabled then
-			rbxAnalyticsService:ReportCounter("LeaveGame_NativeClose", 1)
-			p1.props.openEducationalPopup(guiService, userLocalStoreModule.new(), p1.props.maxDisplayCount)
+			RbxAnalyticsService:ReportCounter("LeaveGame_NativeClose", 1)
+			p1.props.openEducationalPopup(GuiService, UserLocalStoreModule.new(), p1.props.maxDisplayCount)
 		end
-		sendAnalyticsModule(constantsModule.AnalyticsInGameMenuName, "LeaveGame_NativeClose", {})
+		SendAnalyticsModule(ConstantsModule.AnalyticsInGameMenuName, "LeaveGame_NativeClose", {})
 	end
 end
 
-function nativeCloseEventConnector.render(p1)
-	-- upvalues: roact (ref), externalEventConnectionModule (ref), guiService (ref)
-	return roact.createElement(externalEventConnectionModule, {
-		event = guiService.NativeClose,
+function NativeCloseEventConnector.render(p1) --[[ Line: 39 ]]
+	-- upvalues: Roact (copy), ExternalEventConnectionModule (copy), GuiService (copy)
+	return Roact.createElement(ExternalEventConnectionModule, {
+		event = GuiService.NativeClose,
 		callback = p1.onNativeCloseConnect
 	})
 end
 
-return roactRodux.UNSTABLE_connect2(nil, function(p1)
-	-- upvalues: openEducationalPopupModule (ref)
+return RoactRodux.UNSTABLE_connect2(nil, function(Callback) --[[ Line: 53 ]]
+	-- upvalues: OpenEducationalPopupModule (copy)
 	return {
-		openEducationalPopup = function(p2, p3, p4)
-			-- upvalues: p1 (ref), openEducationalPopupModule (copy)
-			return p1(openEducationalPopupModule(p2, p3, p4))
+		openEducationalPopup = function(p1, p2, p3) --[[ Line: 55 ]]
+			-- upvalues: Callback (copy), OpenEducationalPopupModule (upval)
+			return Callback(OpenEducationalPopupModule(p1, p2, p3))
 		end
 	}
-end)(inGameMenuPolicyModule.connect(function(p1, _)
+end)((InGameMenuPolicyModule.connect(function(p1, _) --[[ Line: 46 ]]
 	return {
 		isEducationalPopupEnabled = p1.enableEducationalPopup(),
 		maxDisplayCount = p1.educationalPopupMaxDisplayCount()
 	}
-end)(nativeCloseEventConnector))
+end)(NativeCloseEventConnector)))

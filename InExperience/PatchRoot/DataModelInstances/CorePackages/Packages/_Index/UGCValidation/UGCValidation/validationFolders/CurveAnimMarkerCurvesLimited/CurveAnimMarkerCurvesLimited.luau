@@ -1,34 +1,35 @@
-﻿local parent = script.Parent.Parent.Parent
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local getFIntUGCValidateMaxTotalMarkerCurvesModule = require(parent.flags.getFIntUGCValidateMaxTotalMarkerCurves)
+﻿local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
+local GetFIntUGCValidateMaxTotalMarkerCurvesModule = require(Parent.flags.getFIntUGCValidateMaxTotalMarkerCurves)
 
 return {
 	categories = {
-		validationEnumsModule.UploadCategory.EMOTE_ANIMATION,
-		validationEnumsModule.UploadCategory.ANIMATION
+		ValidationEnumsModule.UploadCategory.EMOTE_ANIMATION,
+		ValidationEnumsModule.UploadCategory.ANIMATION
 	},
-	requiredData = { validationEnumsModule.SharedDataMember.curveAnimations },
+	requiredData = { ValidationEnumsModule.SharedDataMember.curveAnimations },
 	expectedFailures = {},
 	prereqTests = {
-		validationEnumsModule.ValidationModule.CurveAnimDataAvailable
+		ValidationEnumsModule.ValidationModule.CurveAnimDataAvailable
 	},
-	run = function(p1, p2)
-		-- upvalues: getFIntUGCValidateMaxTotalMarkerCurvesModule (ref), errorSourceStringsModule (ref)
-		local var1 = getFIntUGCValidateMaxTotalMarkerCurvesModule()
+	run = function(p1, p2) --[[ Line: 18 ]]
+		-- upvalues: GetFIntUGCValidateMaxTotalMarkerCurvesModule (copy), ErrorSourceStringsModule (copy)
+		local FIntUGCValidateMaxTotalMarkerCurvesModule = GetFIntUGCValidateMaxTotalMarkerCurvesModule()
 		
-		for i, v in p2.curveAnimations do
-			local var2 = 0
+		for _, curveAnimation in p2.curveAnimations do
+			local Count = 0
 			
-			for i_1, v_1 in v:GetDescendants() do
-				if v_1:IsA("MarkerCurve") then
-					var2 += 1
+			for _, MarkerCurve in curveAnimation:GetDescendants() do
+				if MarkerCurve:IsA("MarkerCurve") then
+					Count += 1
 					
-					if var1 < var2 then
-						p1:fail(errorSourceStringsModule.Keys.CurveAnim_TooManyMarkerCurves, { maxAllowed = tostring(var1) })
-						
-						return
+					if FIntUGCValidateMaxTotalMarkerCurvesModule < Count then
+						p1:fail(ErrorSourceStringsModule.Keys.CurveAnim_TooManyMarkerCurves, {
+							maxAllowed = tostring(FIntUGCValidateMaxTotalMarkerCurvesModule)
+						})
+						break
 					end
 				end
 			end

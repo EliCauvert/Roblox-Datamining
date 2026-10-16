@@ -1,6 +1,6 @@
-﻿local parent = script.Parent.Parent
-local _ = require(parent.roduxFriendsTypes)
+﻿local Parent = script.Parent.Parent
+local _ = require(Parent.roduxFriendsTypes)
 
-return require(parent.Parent.Rodux).makeActionCreator(script.Name, function(p1)
+return require(Parent.Parent.Rodux).makeActionCreator(script.Name, function(p1) --[[ Line: 8 ]]
 	return p1
 end)

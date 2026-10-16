@@ -1,7 +1,7 @@
-﻿local reactModule = require(script:FindFirstAncestor("AppChat").Parent.React)
-local contextModule = require(script.Parent.Context)
+﻿local ReactModule = require(script:FindFirstAncestor("AppChat").Parent.React)
+local ContextModule = require(script.Parent.Context)
 
-return function()
-	-- upvalues: reactModule (ref), contextModule (ref)
-	return reactModule.useContext(contextModule)
+return function() --[[ Line: 7 | Named "useChatPagePadding" ]]
+	-- upvalues: ReactModule (copy), ContextModule (copy)
+	return ReactModule.useContext(ContextModule)
 end

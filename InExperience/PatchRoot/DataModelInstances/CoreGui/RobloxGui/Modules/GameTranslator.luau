@@ -1,190 +1,194 @@
-﻿local localizationService = game:GetService("LocalizationService")
-local playersService = game:GetService("Players")
-local var1 = nil
-local var2 = nil
-local var3 = nil
-local var4 = nil
-local bindableEvent = Instance.new("BindableEvent")
+﻿local LocalizationService = game:GetService("LocalizationService")
+local Players = game:GetService("Players")
+local TranslatorForPlayer = nil
+local LocalPlayer = nil
+local LocaleId = nil
+local Connection = nil
+local BindableEvent = Instance.new("BindableEvent")
 
-local function handlePlayerOrLocaleChanged()
-	-- upvalues: var2 (write), var3 (write), bindableEvent (ref)
-	if var2 and var2.LocaleId ~= var3 then
-		var3 = var2.LocaleId
-		bindableEvent:Fire(var3)
+local function handlePlayerOrLocaleChanged() --[[ Line: 11 ]]
+	-- upvalues: LocalPlayer (ref), LocaleId (ref), BindableEvent (copy)
+	if LocalPlayer and LocalPlayer.LocaleId ~= LocaleId then
+		LocaleId = LocalPlayer.LocaleId
+		BindableEvent:Fire(LocaleId)
 	end
 end
 
-local function _()
-	-- upvalues: var1 (write), var2 (write), var4 (write)
-	var1 = nil
-	var2 = nil
+local function _() --[[ Line: 18 | Named "reset" ]]
+	-- upvalues: TranslatorForPlayer (ref), LocalPlayer (ref), Connection (ref)
+	TranslatorForPlayer = nil
+	LocalPlayer = nil
 	
-	if var4 then
-		var4:Disconnect()
-		var4 = nil
+	if Connection then
+		Connection:Disconnect()
+		Connection = nil
 	end
 end
 
-local _ = function()
-	-- upvalues: var1 (write), var2 (write), playersService (ref), localizationService (ref), var3 (write), bindableEvent (ref), var4 (write), handlePlayerOrLocaleChanged (ref)
-	if not var1 then
-		var2 = playersService.LocalPlayer
+local _ = function() --[[ Line: 28 | Named "getTranslator" ]]
+	-- upvalues: TranslatorForPlayer (ref), LocalPlayer (ref), Players (copy), LocalizationService (copy), LocaleId (ref), BindableEvent (copy), Connection (ref), handlePlayerOrLocaleChanged (copy)
+	if not TranslatorForPlayer then
+		LocalPlayer = Players.LocalPlayer
 		
-		if var2 then
-			var1 = localizationService:GetTranslatorForPlayer(var2)
+		if LocalPlayer then
+			TranslatorForPlayer = LocalizationService:GetTranslatorForPlayer(LocalPlayer)
 			
-			if var2 and var2.LocaleId ~= var3 then
-				var3 = var2.LocaleId
-				bindableEvent:Fire(var3)
+			if LocalPlayer and LocalPlayer.LocaleId ~= LocaleId then
+				LocaleId = LocalPlayer.LocaleId
+				BindableEvent:Fire(LocaleId)
 			end
-			var4 = var2:GetPropertyChangedSignal("LocaleId"):Connect(handlePlayerOrLocaleChanged)
+			Connection = LocalPlayer:GetPropertyChangedSignal("LocaleId"):Connect(handlePlayerOrLocaleChanged)
 		end
 	end
-	return var1
+	return TranslatorForPlayer
 end
 
 local t = {}
 
-local _ = function(p1)
-	-- upvalues: t (ref)
-	local var5 = t[p1]
+local _ = function(Key) --[[ Line: 43 | Named "unregisterGui" ]]
+	-- upvalues: t (copy)
+	local Entry = t[Key]
 	
-	if var5 then
-		var5.connection:Disconnect()
-		t[p1] = nil
+	if Entry then
+		Entry.connection:Disconnect()
+		t[Key] = nil
 		
 		return
 	end
 end
 
-local _ = function(p1, p2)
-	-- upvalues: t (ref)
-	return function(_, _)
-		-- upvalues: p1 (ref), p2 (ref), t (copy)
+local _ = function(p1, p2) --[[ Line: 52 | Named "makeAncestryChangedHandler" ]]
+	-- upvalues: t (copy)
+	return function(_, _) --[[ Line: 53 ]]
+		-- upvalues: p1 (copy), p2 (copy), t (upval)
 		if game:IsAncestorOf(p1) then
 			p2.hasBeenAdded = true
-		elseif not p2.hasBeenAdded then return end
-		local var5 = p1
-		local var6 = t[var5]
-		
-		if var6 then
-			var6.connection:Disconnect()
-			t[var5] = nil
+		elseif p2.hasBeenAdded then
+			local v1 = t[p1]
 			
+			if v1 then
+				v1.connection:Disconnect()
+				t[p1] = nil
+				
+				return
+			end
 			return
 		end
-		return
 	end
 end
 
-local _ = function(p1, p2, p3)
-	p1.context = p2
-	p1.text = p3
+local _ = function(p1, Context, Text) --[[ Line: 64 | Named "updateRegistryInfo" ]]
+	p1.context = Context
+	p1.text = Text
 end
 
-local function makeRegistryInfo(p1, p2, p3)
-	-- upvalues: t (ref)
-	local t_1 = {
-		hasBeenAdded = game:IsAncestorOf(p1),
-		context = p2,
-		text = p3
+local function makeRegistryInfo(Key, Context, Text) --[[ Line: 69 ]]
+	-- upvalues: t (copy)
+	local config = {
+		hasBeenAdded = game:IsAncestorOf(Key),
+		context = Context,
+		text = Text
 	}
-	t_1.connection = p1.AncestryChanged:Connect(function(_, _)
-		-- upvalues: p1 (ref), t_1 (ref), t (copy)
-		if game:IsAncestorOf(p1) then
-			t_1.hasBeenAdded = true
-		elseif not t_1.hasBeenAdded then return end
-		local var5 = p1
-		local var6 = t[var5]
-		
-		if var6 then
-			var6.connection:Disconnect()
-			t[var5] = nil
+	config.connection = Key.AncestryChanged:Connect(function(_, _) --[[ Line: 53 ]]
+		-- upvalues: Key (copy), config (copy), t (upval)
+		if game:IsAncestorOf(Key) then
+			config.hasBeenAdded = true
+		elseif config.hasBeenAdded then
+			local v1 = t[Key]
 			
+			if v1 then
+				v1.connection:Disconnect()
+				t[Key] = nil
+				
+				return
+			end
 			return
 		end
-		return
 	end)
 	
-	return t_1
+	return config
 end
 
-local _ = function(p1, p2, p3)
-	-- upvalues: t (ref), makeRegistryInfo (ref)
-	if t[p1] == nil then
-		t[p1] = makeRegistryInfo(p1, p2, p3)
+local _ = function(Key, Context, Text) --[[ Line: 77 | Named "registerGui" ]]
+	-- upvalues: t (copy), makeRegistryInfo (copy)
+	if t[Key] == nil then
+		t[Key] = makeRegistryInfo(Key, Context, Text)
 		
 		return
+	else
+		local Entry = t[Key]
+		Entry.context = Context
+		Entry.text = Text
 	end
-	local var5 = t[p1]
-	var5.context = p2
-	var5.text = p3
 end
 
-playersService:GetPropertyChangedSignal("LocalPlayer"):Connect(function()
-	-- upvalues: var1 (write), var2 (write), var4 (write), playersService (ref), localizationService (ref), var3 (write), bindableEvent (ref), handlePlayerOrLocaleChanged (ref)
-	var1 = nil
-	var2 = nil
+Players:GetPropertyChangedSignal("LocalPlayer"):Connect(function() --[[ Line: 85 ]]
+	-- upvalues: TranslatorForPlayer (ref), LocalPlayer (ref), Connection (ref), Players (copy), LocalizationService (copy), LocaleId (ref), BindableEvent (copy), handlePlayerOrLocaleChanged (copy)
+	TranslatorForPlayer = nil
+	LocalPlayer = nil
 	
-	if var4 then
-		var4:Disconnect()
-		var4 = nil
+	if Connection then
+		Connection:Disconnect()
+		Connection = nil
 	end
-	var2 = playersService.LocalPlayer
-	
-	if var2 then
-		var1 = localizationService:GetTranslatorForPlayer(var2)
+	if not TranslatorForPlayer then
+		LocalPlayer = Players.LocalPlayer
 		
-		if var2 and var2.LocaleId ~= var3 then
-			var3 = var2.LocaleId
-			bindableEvent:Fire(var3)
+		if LocalPlayer then
+			TranslatorForPlayer = LocalizationService:GetTranslatorForPlayer(LocalPlayer)
+			
+			if LocalPlayer and LocalPlayer.LocaleId ~= LocaleId then
+				LocaleId = LocalPlayer.LocaleId
+				BindableEvent:Fire(LocaleId)
+			end
+			Connection = LocalPlayer:GetPropertyChangedSignal("LocaleId"):Connect(handlePlayerOrLocaleChanged)
 		end
-		var4 = var2:GetPropertyChangedSignal("LocaleId"):Connect(handlePlayerOrLocaleChanged)
 	end
 end)
-local t_1 = {
-	LocaleChanged = bindableEvent.Event,
-	TranslateGameText = function(_, p1, p2)
-		-- upvalues: var1 (write), var2 (write), playersService (ref), localizationService (ref), var3 (write), bindableEvent (ref), var4 (write), handlePlayerOrLocaleChanged (ref)
-		if not var1 then
-			var2 = playersService.LocalPlayer
+local GameTranslatorModule = {
+	LocaleChanged = BindableEvent.Event,
+	TranslateGameText = function(_, Context, p1) --[[ Line: 101 ]]
+		-- upvalues: TranslatorForPlayer (ref), LocalPlayer (ref), Players (copy), LocalizationService (copy), LocaleId (ref), BindableEvent (copy), Connection (ref), handlePlayerOrLocaleChanged (copy)
+		if not TranslatorForPlayer then
+			LocalPlayer = Players.LocalPlayer
 			
-			if var2 then
-				var1 = localizationService:GetTranslatorForPlayer(var2)
+			if LocalPlayer then
+				TranslatorForPlayer = LocalizationService:GetTranslatorForPlayer(LocalPlayer)
 				
-				if var2 and var2.LocaleId ~= var3 then
-					var3 = var2.LocaleId
-					bindableEvent:Fire(var3)
+				if LocalPlayer and LocalPlayer.LocaleId ~= LocaleId then
+					LocaleId = LocalPlayer.LocaleId
+					BindableEvent:Fire(LocaleId)
 				end
-				var4 = var2:GetPropertyChangedSignal("LocaleId"):Connect(handlePlayerOrLocaleChanged)
+				Connection = LocalPlayer:GetPropertyChangedSignal("LocaleId"):Connect(handlePlayerOrLocaleChanged)
 			end
 		end
-		local var5 = var1
+		local TranslatorForPlayer1 = TranslatorForPlayer
 		
-		return if var5 then var5:RobloxOnlyTranslate(p1, p2) else p2
+		return if TranslatorForPlayer1 then TranslatorForPlayer1:RobloxOnlyTranslate(Context, p1) else p1
 	end
 }
-localizationService.AutoTranslateWillRun:Connect(function()
-	-- upvalues: t (ref), t_1 (ref)
-	for i, v in pairs(t) do
-		i.Text = t_1:TranslateGameText(v.context, v.text)
+LocalizationService.AutoTranslateWillRun:Connect(function() --[[ Line: 110 | Named "retranslateAll" ]]
+	-- upvalues: t (copy), GameTranslatorModule (copy)
+	for i, value in pairs(t) do
+		i.Text = GameTranslatorModule:TranslateGameText(value.context, value.text)
 	end
 end)
 
-function t_1.TranslateAndRegister(p1, p2, p3, p4)
-	-- upvalues: t (ref), makeRegistryInfo (ref)
-	p2.Text = p1:TranslateGameText(p3, p4)
+function GameTranslatorModule.TranslateAndRegister(p1, Key, Context, Text) --[[ Line: 118 ]]
+	-- upvalues: t (copy), makeRegistryInfo (copy)
+	Key.Text = p1:TranslateGameText(Context, Text)
 	
-	if t[p2] == nil then
-		t[p2] = makeRegistryInfo(p2, p3, p4)
+	if t[Key] == nil then
+		t[Key] = makeRegistryInfo(Key, Context, Text)
 		
-		return p4
+		return Text
+	else
+		local Entry = t[Key]
+		Entry.context = Context
+		Entry.text = Text
+		
+		return Text
 	end
-	local var5 = t[p2]
-	var5.context = p3
-	var5.text = p4
-	
-	return p4
 end
 
-return t_1
+return GameTranslatorModule

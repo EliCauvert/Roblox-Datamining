@@ -1,40 +1,38 @@
-﻿local bulkPurchaseApp = script:FindFirstAncestor("BulkPurchaseApp")
-local promiseModule = require(bulkPurchaseApp.Parent.Promise)
-local bulkPurchaseRequestedModule = require(bulkPurchaseApp.Store.Actions.BulkPurchaseRequested)
-local bulkPurchaseFailedModule = require(bulkPurchaseApp.Store.Actions.BulkPurchaseFailed)
-local bulkPurchaseStartedModule = require(bulkPurchaseApp.Store.Actions.BulkPurchaseStarted)
-local bulkPurchaseCountersEnumModule = require(bulkPurchaseApp.Enums.BulkPurchaseCountersEnum)
-local errorCodeEnumModule = require(bulkPurchaseApp.Enums.ErrorCodeEnum)
-local getAccountModule = require(bulkPurchaseApp.NetworkRequests.getAccount)
-local reportBulkPurchaseRequestCountersModule = require(bulkPurchaseApp.Utils.reportBulkPurchaseRequestCounters)
-local _ = require(bulkPurchaseApp.Store.Types)
-local fFlagBulkPurchaseRemoveStartedActionModule = require(bulkPurchaseApp.Flags.FFlagBulkPurchaseRemoveStartedAction)
-local fFlagBulkPurchaseReportCountersModule = require(bulkPurchaseApp.Flags.FFlagBulkPurchaseReportCounters)
-local fFlagAXAddOffersToBulkPurchaseModule = require(bulkPurchaseApp.Flags.FFlagAXAddOffersToBulkPurchase)
+﻿local BulkPurchaseApp = script:FindFirstAncestor("BulkPurchaseApp")
+local PromiseModule = require(BulkPurchaseApp.Parent.Promise)
+local BulkPurchaseRequestedModule = require(BulkPurchaseApp.Store.Actions.BulkPurchaseRequested)
+local BulkPurchaseFailedModule = require(BulkPurchaseApp.Store.Actions.BulkPurchaseFailed)
+local BulkPurchaseStartedModule = require(BulkPurchaseApp.Store.Actions.BulkPurchaseStarted)
+local BulkPurchaseCountersEnumModule = require(BulkPurchaseApp.Enums.BulkPurchaseCountersEnum)
+local ErrorCodeEnumModule = require(BulkPurchaseApp.Enums.ErrorCodeEnum)
+local GetAccountModule = require(BulkPurchaseApp.NetworkRequests.getAccount)
+local ReportBulkPurchaseRequestCountersModule = require(BulkPurchaseApp.Utils.reportBulkPurchaseRequestCounters)
+local _ = require(BulkPurchaseApp.Store.Types)
+local FFlagBulkPurchaseRemoveStartedActionModule = require(BulkPurchaseApp.Flags.FFlagBulkPurchaseRemoveStartedAction)
+local FFlagBulkPurchaseReportCountersModule = require(BulkPurchaseApp.Flags.FFlagBulkPurchaseReportCounters)
+local FFlagAXAddOffersToBulkPurchaseModule = require(BulkPurchaseApp.Flags.FFlagAXAddOffersToBulkPurchase)
 
-return function(p1, p2, p3, p4, p5, p6, p7, p8)
-	-- upvalues: fFlagAXAddOffersToBulkPurchaseModule (ref), bulkPurchaseRequestedModule (ref), fFlagBulkPurchaseReportCountersModule (ref), reportBulkPurchaseRequestCountersModule (ref), bulkPurchaseCountersEnumModule (ref), fFlagBulkPurchaseRemoveStartedActionModule (ref), getAccountModule (ref), promiseModule (ref), bulkPurchaseStartedModule (ref), bulkPurchaseFailedModule (ref), errorCodeEnumModule (ref)
-	return function(p9)
-		-- upvalues: fFlagAXAddOffersToBulkPurchaseModule (copy), bulkPurchaseRequestedModule (copy), p2 (ref), p3 (ref), p4 (ref), p5 (ref), p6 (ref), p7 (ref), p8 (ref), fFlagBulkPurchaseReportCountersModule (copy), reportBulkPurchaseRequestCountersModule (copy), bulkPurchaseCountersEnumModule (copy), fFlagBulkPurchaseRemoveStartedActionModule (copy), getAccountModule (copy), p1 (ref), promiseModule (copy), bulkPurchaseStartedModule (copy), bulkPurchaseFailedModule (copy), errorCodeEnumModule (copy)
-		if fFlagAXAddOffersToBulkPurchaseModule then
-			p9:dispatch(bulkPurchaseRequestedModule(p2, p3, p4, p5, p6, p7, p8))
+return function(p1, p2, p3, p4, p5, p6, p7, p8) --[[ Line: 24 | Named "InitiateBulkPurchaseFlow" ]]
+	-- upvalues: FFlagAXAddOffersToBulkPurchaseModule (copy), BulkPurchaseRequestedModule (copy), FFlagBulkPurchaseReportCountersModule (copy), ReportBulkPurchaseRequestCountersModule (copy), BulkPurchaseCountersEnumModule (copy), FFlagBulkPurchaseRemoveStartedActionModule (copy), GetAccountModule (copy), PromiseModule (copy), BulkPurchaseStartedModule (copy), BulkPurchaseFailedModule (copy), ErrorCodeEnumModule (copy)
+	return function(p9) --[[ Line: 34 ]]
+		-- upvalues: FFlagAXAddOffersToBulkPurchaseModule (upval), BulkPurchaseRequestedModule (upval), p2 (copy), p3 (copy), p4 (copy), p5 (copy), p6 (copy), p7 (copy), p8 (copy), FFlagBulkPurchaseReportCountersModule (upval), ReportBulkPurchaseRequestCountersModule (upval), BulkPurchaseCountersEnumModule (upval), FFlagBulkPurchaseRemoveStartedActionModule (upval), GetAccountModule (upval), p1 (copy), PromiseModule (upval), BulkPurchaseStartedModule (upval), BulkPurchaseFailedModule (upval), ErrorCodeEnumModule (upval)
+		if FFlagAXAddOffersToBulkPurchaseModule then
+			p9:dispatch(BulkPurchaseRequestedModule(p2, p3, p4, p5, p6, p7, p8))
 		else
-			p9:dispatch(bulkPurchaseRequestedModule(p2, p3, p4, p5, p6, p7))
+			p9:dispatch(BulkPurchaseRequestedModule(p2, p3, p4, p5, p6, p7))
 		end
-		if fFlagBulkPurchaseReportCountersModule then
-			reportBulkPurchaseRequestCountersModule(bulkPurchaseCountersEnumModule.BulkPurchaseRequestedCounter)
+		if FFlagBulkPurchaseReportCountersModule then
+			ReportBulkPurchaseRequestCountersModule(BulkPurchaseCountersEnumModule.BulkPurchaseRequestedCounter)
 		end
-		if fFlagBulkPurchaseRemoveStartedActionModule then
-			return
-		end
-		local var1, _ = getAccountModule(p1)
+		if FFlagBulkPurchaseRemoveStartedActionModule then return end
+		local AccountModule, _ = GetAccountModule(p1)
 		
-		return promiseModule.all({ var1 }):andThen(function(_)
-			-- upvalues: p9 (ref), bulkPurchaseStartedModule (copy), p4 (copy)
-			p9:dispatch(bulkPurchaseStartedModule(p4))
-		end):catch(function(_)
-			-- upvalues: p9 (ref), bulkPurchaseFailedModule (copy), errorCodeEnumModule (copy)
-			p9:dispatch(bulkPurchaseFailedModule(errorCodeEnumModule.Generic))
+		return PromiseModule.all({ AccountModule }):andThen(function(_) --[[ Line: 67 ]]
+			-- upvalues: p9 (copy), BulkPurchaseStartedModule (upval), p4 (upval)
+			p9:dispatch(BulkPurchaseStartedModule(p4))
+		end):catch(function(_) --[[ Line: 75 ]]
+			-- upvalues: p9 (copy), BulkPurchaseFailedModule (upval), ErrorCodeEnumModule (upval)
+			p9:dispatch(BulkPurchaseFailedModule(ErrorCodeEnumModule.Generic))
 		end)
 	end
 end

@@ -1,13 +1,13 @@
-﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
-local ampUpsellModule = require(parent.AmpUpsell)
-local accessResponseEnum = ampUpsellModule.AmpEnums.AccessResponseEnum
-local actionStatusEnum = ampUpsellModule.AmpEnums.ActionStatusEnum
-local actionTypeEnum = ampUpsellModule.AmpEnums.ActionTypeEnum
-local ageCheckUpsellDismissedData = require(parent.GameDetail).AgeCheckUpsellDismissedData
+﻿local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
+local AmpUpsellModule = require(Parent.AmpUpsell)
+local AccessResponseEnum = AmpUpsellModule.AmpEnums.AccessResponseEnum
+local ActionStatusEnum = AmpUpsellModule.AmpEnums.ActionStatusEnum
+local ActionTypeEnum = AmpUpsellModule.AmpEnums.ActionTypeEnum
+local AgeCheckUpsellDismissedData = require(Parent.GameDetail).AgeCheckUpsellDismissedData
 
-return function(p1, p2)
-	-- upvalues: accessResponseEnum (ref), actionTypeEnum (ref), actionStatusEnum (ref), ageCheckUpsellDismissedData (ref)
-	if p1 == accessResponseEnum.Granted and p2 and p2[actionTypeEnum.AgeEstimation] == actionStatusEnum.Success then
-		ageCheckUpsellDismissedData.setAgeCheckUpsellDismissed()
+return function(Granted, p1) --[[ Line: 17 | Named "onAmpWizardCompletion" ]]
+	-- upvalues: AccessResponseEnum (copy), ActionTypeEnum (copy), ActionStatusEnum (copy), AgeCheckUpsellDismissedData (copy)
+	if Granted == AccessResponseEnum.Granted and p1 and p1[ActionTypeEnum.AgeEstimation] == ActionStatusEnum.Success then
+		AgeCheckUpsellDismissedData.setAgeCheckUpsellDismissed()
 	end
 end

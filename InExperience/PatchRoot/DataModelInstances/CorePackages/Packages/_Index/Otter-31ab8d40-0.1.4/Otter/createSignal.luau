@@ -1,59 +1,59 @@
-﻿local function _(p1, p2, p3)
+﻿local function _(List, Key, p1) --[[ Line: 1 | Named "addToMap" ]]
 	local t = {}
 	
-	for i, v in pairs(p1) do
-		t[i] = v
+	for i, value in pairs(List) do
+		t[i] = value
 	end
-	t[p2] = p3
+	t[Key] = p1
 	
 	return t
 end
 
-local _ = function(p4, p5)
+local _ = function(List, p2) --[[ Line: 13 | Named "removeFromMap" ]]
 	local t = {}
 	
-	for i, v in pairs(p4) do
-		if i ~= p5 then
-			t[i] = v
+	for i, value in pairs(List) do
+		if i ~= p2 then
+			t[i] = value
 		end
 	end
 	return t
 end
 
-return function()
+return function() --[[ Line: 25 | Named "createSignal" ]]
 	local t = {}
 	
 	return {
-		subscribe = function(_, p6)
-			-- upvalues: t (write)
-			assert(typeof(p6) == "function", "Can only subscribe to signals with a function.")
-			local t_1 = { callback = p6 }
-			local t_2 = {}
+		subscribe = function(_, Callback) --[[ Line: 28 ]]
+			-- upvalues: t (ref)
+			assert(typeof(Callback) == "function", "Can only subscribe to signals with a function.")
+			local config = { callback = Callback }
+			local t1 = {}
 			
-			for i, v in pairs(t) do
-				t_2[i] = v
+			for i, value in pairs(t) do
+				t1[i] = value
 			end
-			t_2[p6] = t_1
-			t = t_2
+			t1[Callback] = config
+			t = t1
 			
-			return function()
-				-- upvalues: t_1 (ref), t (copy), p6 (ref)
-				assert(not t_1.disconnected, "Listeners can only be disconnected once.")
-				t_1.disconnected = true
-				local t_2 = {}
+			return function() --[[ Line: 37 | Named "disconnect" ]]
+				-- upvalues: config (copy), t (upval), Callback (copy)
+				assert(not config.disconnected, "Listeners can only be disconnected once.")
+				config.disconnected = true
+				local t2 = {}
 				
-				for i, v in pairs(t) do
-					if i ~= p6 then
-						t_2[i] = v
+				for i, value in pairs(t) do
+					if i ~= Callback then
+						t2[i] = value
 					end
 				end
-				t = t_2
+				t = t2
 			end
 		end,
-		fire = function(_, ...)
-			-- upvalues: t (write)
-			for i, v in pairs(t) do
-				if not v.disconnected then
+		fire = function(_, ...) --[[ Line: 47 ]]
+			-- upvalues: t (ref)
+			for i, value in pairs(t) do
+				if not value.disconnected then
 					i(...)
 				end
 			end

@@ -1,1 +1,1 @@
-﻿return require(script:FindFirstAncestor("Moments").Parent.Signals).createComputed(require(script.createToastStore))
+﻿return require(script:FindFirstAncestor("Moments").Parent.Signals).createComputed((require(script.createToastStore)))

@@ -1,45 +1,45 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local view = foundationModule.View
-local text = foundationModule.Text
-local stateLayerAffordance = foundationModule.Enums.StateLayerAffordance
-local _ = require(buildExperience.Analytics.AnalyticsWindow)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local StateLayerAffordance = FoundationModule.Enums.StateLayerAffordance
+local _ = require(BuildExperience.Analytics.AnalyticsWindow)
 
-return function(p1)
-	-- upvalues: reactModule (ref), view (ref), stateLayerAffordance (ref), text (ref)
-	local testId = p1.testId or "WindowSegmentedControl"
-	local t = {}
+return function(p1) --[[ Line: 33 | Named "WindowSegmentedControl" ]]
+	-- upvalues: ReactModule (copy), View (copy), StateLayerAffordance (copy), Text (copy)
+	local TestId = p1.testId or "WindowSegmentedControl"
+	local Elements = {}
 	
-	for i, v in p1.windows do
-		local var1 = v.id == p1.selectedWindowId
-		t[`Tab_{v.id}`] = reactModule.createElement(view, {
-			LayoutOrder = i,
+	for LayoutOrder, window in p1.windows do
+		local IsIdMatch = window.id == p1.selectedWindowId
+		Elements[`Tab_{window.id}`] = ReactModule.createElement(View, {
+			LayoutOrder = LayoutOrder,
 			tag = {
 				["row align-x-center align-y-center fill auto-y padding-x-medium padding-y-small radius-circle"] = true,
-				["bg-shift-300"] = var1
+				["bg-shift-300"] = IsIdMatch
 			},
-			stateLayer = { affordance = stateLayerAffordance.Background },
-			onActivated = function()
-				-- upvalues: p1 (ref), v (ref)
-				p1.onWindowSelected(v.id)
+			stateLayer = { affordance = StateLayerAffordance.Background },
+			onActivated = function() --[[ Line: 48 ]]
+				-- upvalues: p1 (copy), window (copy)
+				p1.onWindowSelected(window.id)
 			end,
-			testId = `{testId}-segment-{v.id}`
+			testId = `{TestId}-segment-{window.id}`
 		}, {
-			Label = reactModule.createElement(text, {
-				Text = v.label,
+			Label = ReactModule.createElement(Text, {
+				Text = window.label,
 				tag = {
 					["size-full-0 auto-y text-label-medium text-align-x-center text-truncate-end"] = true,
-					["content-emphasis"] = var1,
-					["content-default"] = not var1
+					["content-emphasis"] = IsIdMatch,
+					["content-default"] = not IsIdMatch
 				}
 			})
 		})
 	end
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "row align-y-center gap-xxsmall size-full-0 auto-y padding-xsmall stroke-standard stroke-emphasis radius-circle",
 		LayoutOrder = p1.layoutOrder,
-		testId = testId
-	}, t)
+		testId = TestId
+	}, Elements)
 end

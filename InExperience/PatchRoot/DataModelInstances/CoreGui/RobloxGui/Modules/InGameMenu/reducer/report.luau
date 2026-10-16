@@ -1,15 +1,14 @@
-﻿local inGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
-local rodux = inGameMenuDependenciesModule.Rodux
-local cryo = inGameMenuDependenciesModule.Cryo
-local parent = script.Parent.Parent
+﻿local InGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
+local Cryo = InGameMenuDependenciesModule.Cryo
+local Parent = script.Parent.Parent
 
-return rodux.createReducer({
+return InGameMenuDependenciesModule.Rodux.createReducer({
 	dialogOpen = false,
 	reportSentOpen = false,
 	userId = nil,
 	userName = nil
 }, {
-	[require(parent.Actions.OpenReportDialog).name] = function(p1, p2)
+	[require(Parent.Actions.OpenReportDialog).name] = function(p1, p2) --[[ Line: 21 ]]
 		return {
 			dialogOpen = true,
 			reportSentOpen = p1.reportSentOpen,
@@ -17,20 +16,20 @@ return rodux.createReducer({
 			userName = p2.userName
 		}
 	end,
-	[require(parent.Actions.SetCurrentPage).name] = function(p1, _)
-		-- upvalues: cryo (ref)
-		return cryo.Dictionary.join(p1, { dialogOpen = false })
+	[require(Parent.Actions.SetCurrentPage).name] = function(p1, _) --[[ Line: 31 ]]
+		-- upvalues: Cryo (copy)
+		return Cryo.Dictionary.join(p1, { dialogOpen = false })
 	end,
-	[require(parent.Actions.CloseReportDialog).name] = function(p1, _)
-		-- upvalues: cryo (ref)
-		return cryo.Dictionary.join(p1, { dialogOpen = false })
+	[require(Parent.Actions.CloseReportDialog).name] = function(p1, _) --[[ Line: 36 ]]
+		-- upvalues: Cryo (copy)
+		return Cryo.Dictionary.join(p1, { dialogOpen = false })
 	end,
-	[require(parent.Actions.OpenReportSentDialog).name] = function(p1, _)
-		-- upvalues: cryo (ref)
-		return cryo.Dictionary.join(p1, { reportSentOpen = true })
+	[require(Parent.Actions.OpenReportSentDialog).name] = function(p1, _) --[[ Line: 41 ]]
+		-- upvalues: Cryo (copy)
+		return Cryo.Dictionary.join(p1, { reportSentOpen = true })
 	end,
-	[require(parent.Actions.CloseReportSentDialog).name] = function(p1, _)
-		-- upvalues: cryo (ref)
-		return cryo.Dictionary.join(p1, { reportSentOpen = false })
+	[require(Parent.Actions.CloseReportSentDialog).name] = function(p1, _) --[[ Line: 46 ]]
+		-- upvalues: Cryo (copy)
+		return Cryo.Dictionary.join(p1, { reportSentOpen = false })
 	end
 })

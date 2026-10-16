@@ -1,8 +1,8 @@
-﻿local useSelector = require(script:FindFirstAncestor("RobloxAppHooks").Parent.RoactUtils).Hooks.RoactRodux.useSelector
+﻿local UseSelectorFunction = require(script:FindFirstAncestor("RobloxAppHooks").Parent.RoactUtils).Hooks.RoactRodux.useSelector
 
-return function()
-	-- upvalues: useSelector (ref)
-	return useSelector(function(p1)
+return function() --[[ Line: 6 ]]
+	-- upvalues: UseSelectorFunction (copy)
+	return UseSelectorFunction(function(p1) --[[ Line: 7 ]]
 		return p1.ScreenSize
 	end)
 end

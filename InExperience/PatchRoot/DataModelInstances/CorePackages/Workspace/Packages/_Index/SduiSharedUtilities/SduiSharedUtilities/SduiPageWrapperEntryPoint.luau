@@ -1,204 +1,200 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local sduiSharedUtilities = script:FindFirstAncestor("SduiSharedUtilities")
-local parent = sduiSharedUtilities.Parent
-local reactModule = require(parent.React)
-local reactRobloxModule = require(parent.ReactRoblox)
-local foundationModule = require(parent.Foundation)
-local loading = foundationModule.Loading
-local snackbar = foundationModule.Snackbar
-local useTokens = foundationModule.Hooks.useTokens
-local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local navigateBack = require(parent.NavigationRodux).Thunks.NavigateBack
-local visibilityControl = require(parent.AppNavBar).VisibilityControl
-local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
-local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
-local useCloseWithBackButton = require(parent.AppBlox).useCloseWithBackButton
-local getSduiComponentWrapper = require(parent.SduiCoreSystem).getSduiComponentWrapper
-local page = require(parent.AppPageShell).Page
-local signal = require(parent.AppCommonLib).Signal
-local useCreateClientBindingSduiContextModule = require(sduiSharedUtilities.useCreateClientBindingSduiContext)
-local uiStatus = require(sduiSharedUtilities.SduiIntegrationTypes).UiStatus
-local sduiPageErrorStateModule = require(sduiSharedUtilities.SduiPageErrorState)
-local _ = require(sduiSharedUtilities.SduiLoadTimer)
-local useLocalAnalyticsDataModule = require(sduiSharedUtilities.hooks.useLocalAnalyticsData)
-local useStatefulRefModule = require(sduiSharedUtilities.hooks.useStatefulRef)
-local useComponentConfigModule = require(sduiSharedUtilities.hooks.useComponentConfig)
-local useUiStatusModule = require(sduiSharedUtilities.hooks.useUiStatus)
-local useDataUpdatedTimestampModule = require(sduiSharedUtilities.hooks.useDataUpdatedTimestamp)
-local useSduiPageContentModule = require(sduiSharedUtilities.hooks.useSduiPageContent)
-local usePageEntrySnackbarModule = require(sduiSharedUtilities.usePageEntrySnackbar)
-local fFlagAppPageShellScrollToTopFocus = require(parent.SharedFlags).FFlagAppPageShellScrollToTopFocus
-local fFlagLuaAppsDefaultSelection = require(parent.SharedFlags).FFlagLuaAppsDefaultSelection
+﻿local CoreGui = game:GetService("CoreGui")
+local SduiSharedUtilities = script:FindFirstAncestor("SduiSharedUtilities")
+local Parent = SduiSharedUtilities.Parent
+local ReactModule = require(Parent.React)
+local ReactRobloxModule = require(Parent.ReactRoblox)
+local FoundationModule = require(Parent.Foundation)
+local Loading = FoundationModule.Loading
+local Snackbar = FoundationModule.Snackbar
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local NavigateBackFunction = require(Parent.NavigationRodux).Thunks.NavigateBack
+local VisibilityControl = require(Parent.AppNavBar).VisibilityControl
+local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3Dispatch
+local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
+local UseCloseWithBackButtonFunction = require(Parent.AppBlox).useCloseWithBackButton
+local GetSduiComponentWrapperFunction = require(Parent.SduiCoreSystem).getSduiComponentWrapper
+local Page = require(Parent.AppPageShell).Page
+local Signal = require(Parent.AppCommonLib).Signal
+local UseCreateClientBindingSduiContextModule = require(SduiSharedUtilities.useCreateClientBindingSduiContext)
+local UiStatus = require(SduiSharedUtilities.SduiIntegrationTypes).UiStatus
+local SduiPageErrorStateModule = require(SduiSharedUtilities.SduiPageErrorState)
+local _ = require(SduiSharedUtilities.SduiLoadTimer)
+local UseLocalAnalyticsDataModule = require(SduiSharedUtilities.hooks.useLocalAnalyticsData)
+local UseStatefulRefModule = require(SduiSharedUtilities.hooks.useStatefulRef)
+local UseComponentConfigModule = require(SduiSharedUtilities.hooks.useComponentConfig)
+local UseUiStatusModule = require(SduiSharedUtilities.hooks.useUiStatus)
+local UseDataUpdatedTimestampModule = require(SduiSharedUtilities.hooks.useDataUpdatedTimestamp)
+local UseSduiPageContentModule = require(SduiSharedUtilities.hooks.useSduiPageContent)
+local UsePageEntrySnackbarModule = require(SduiSharedUtilities.usePageEntrySnackbar)
+local FFlagAppPageShellScrollToTopFocus = require(Parent.SharedFlags).FFlagAppPageShellScrollToTopFocus
+local FFlagLuaAppsDefaultSelection = require(Parent.SharedFlags).FFlagLuaAppsDefaultSelection
+local FFlagAppThemeHalloween2026HomeBackground = require(Parent.SharedFlags).FFlagAppThemeHalloween2026HomeBackground
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useTokens (ref), useDispatch (ref), useComponentConfigModule (ref), useUiStatusModule (ref), uiStatus (ref), useLocalAnalyticsDataModule (ref), reactModule (ref), signal (ref), useStatefulRefModule (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateBack (ref), reactFocusNavigationModule (ref), useCloseWithBackButton (ref), fFlagAppPageShellScrollToTopFocus (ref), usePageEntrySnackbarModule (ref), useDataUpdatedTimestampModule (ref), useCreateClientBindingSduiContextModule (ref), useSduiPageContentModule (ref), fFlagLuaAppsDefaultSelection (ref), getSduiComponentWrapper (ref), foundationModule (ref), loading (ref), sduiPageErrorStateModule (ref), visibilityControl (ref), page (ref), reactRobloxModule (ref), snackbar (ref), coreGuiService (ref)
-	local appPage = p1.appPage
-	local configKey = p1.configKey or appPage
-	local var2 = `SduiPageWrapperEntryPoint-{configKey}`
-	local var3 = useTokens()
-	local var4 = useDispatch()
-	local var5 = useComponentConfigModule(configKey, p1.stickyIdentifier)
-	local var6 = useUiStatusModule(configKey)
-	local var7 = var6 == uiStatus.Loading
-	local var8 = var6 == uiStatus.Error
-	local var9 = useLocalAnalyticsDataModule(configKey, appPage, p1.additionalAnalyticsData)
-	local var10 = reactModule.useMemo(function()
-		-- upvalues: signal (copy)
-		return signal.new()
+return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 128 | Named "SduiPageWrapperEntryPoint" ]]
+	-- upvalues: UseTokensFunction (copy), UseDispatchFunction (copy), UseComponentConfigModule (copy), UseUiStatusModule (copy), UiStatus (copy), UseLocalAnalyticsDataModule (copy), ReactModule (copy), Signal (copy), UseStatefulRefModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateBackFunction (copy), ReactFocusNavigationModule (copy), UseCloseWithBackButtonFunction (copy), FFlagAppPageShellScrollToTopFocus (copy), UsePageEntrySnackbarModule (copy), UseDataUpdatedTimestampModule (copy), UseCreateClientBindingSduiContextModule (copy), UseSduiPageContentModule (copy), FFlagLuaAppsDefaultSelection (copy), GetSduiComponentWrapperFunction (copy), FoundationModule (copy), Loading (copy), SduiPageErrorStateModule (copy), VisibilityControl (copy), Page (copy), FFlagAppThemeHalloween2026HomeBackground (copy), ReactRobloxModule (copy), Snackbar (copy), CoreGui (copy)
+	local AppPage = p1.appPage
+	local ConfigKey = p1.configKey or AppPage
+	local SduiPageWrapperEntryPointName: string = `SduiPageWrapperEntryPoint-{ConfigKey}`
+	local UseTokensResult = UseTokensFunction()
+	local UseDispatchResult = UseDispatchFunction()
+	local UseComponentConfigModuleResult = UseComponentConfigModule(ConfigKey, p1.stickyIdentifier)
+	local UseUiStatusModuleResult = UseUiStatusModule(ConfigKey)
+	local IsUseUiStatusModuleResultMatch = UseUiStatusModuleResult == UiStatus.Loading
+	local IsUseUiStatusModuleResultMatch1 = UseUiStatusModuleResult == UiStatus.Error
+	local UseLocalAnalyticsDataModuleResult = UseLocalAnalyticsDataModule(ConfigKey, AppPage, p1.additionalAnalyticsData)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 142 ]]
+		-- upvalues: Signal (upval)
+		return Signal.new()
 	end, {})
-	local refresh = p1.refresh
-	local var11 = reactModule.useCallback(function()
-		-- upvalues: var10 (ref), refresh (ref)
-		var10:fire()
+	local RefreshFunction = p1.refresh
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 146 ]]
+		-- upvalues: UseMemoResult (copy), RefreshFunction (copy)
+		UseMemoResult:fire()
 		
-		return if refresh then refresh() else nil
-	end, { var10, refresh })
-	local _, var12 = useStatefulRefModule(p2)
-	local var13 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var4 (ref), navigateBack (copy)
+		return if RefreshFunction then RefreshFunction() else nil
+	end, { UseMemoResult, RefreshFunction })
+	local _, UseStatefulRefModuleResult2 = UseStatefulRefModule(p2)
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 156 ]]
+		-- upvalues: p1 (copy), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateBackFunction (upval)
 		if p1.onCloseActivated then
 			p1.onCloseActivated()
 			
 			return
-		elseif fFlagSignalsNavP3Dispatch then
-			var1.back()
+		end
+		if FFlagSignalsNavP3Dispatch then
+			NavigationCommands.back()
 			
 			return
+		else
+			UseDispatchResult(NavigateBackFunction())
 		end
-		var4(navigateBack())
-	end, { var4, p1.onCloseActivated })
-	local _, var14 = reactFocusNavigationModule.useMostRecentOrDefaultFocusBehavior(var12)
-	local var15 = useCloseWithBackButton(var14, if fFlagAppPageShellScrollToTopFocus and p1.handleBackButton == false then nil else var13)
-	local var16 = usePageEntrySnackbarModule(configKey)
-	local var17, var18 = reactModule.useState(nil)
-	local var19 = useCreateClientBindingSduiContextModule(appPage, var17, nil, useDataUpdatedTimestampModule(configKey, p1.contentIdentifier), configKey, nil, p1.routeName, p1.scrollAway, p1.videoPlaybackContext)
-	local var20 = useSduiPageContentModule({
-		configKey = configKey,
-		contentIdentifier = p1.contentIdentifier,
-		contentMode = p1.contentMode,
-		sduiContext = var19,
-		localAnalyticsData = var9,
-		debugName = var2,
-		pageTimer = p1.pageTimer,
-		refreshSignal = var10,
-		defaultFocusRef = if fFlagAppPageShellScrollToTopFocus and fFlagLuaAppsDefaultSelection then p1.defaultFocusRef else nil
-	})
-	local localStickyHeaderSlot = p1.localStickyHeaderSlot
-	local var21 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref), var5 (ref), getSduiComponentWrapper (copy), reactModule (copy), var2 (ref), var19 (ref), var9 (ref), localStickyHeaderSlot (ref)
-		local var22 = if not (p1.stickyIdentifier == nil or var5 == nil) then reactModule.createElement(getSduiComponentWrapper(var5), {
-			debugName = `{var2}-sticky`,
-			componentConfig = var5,
-			sduiContext = var19,
-			localAnalyticsData = var9
+	end, { UseDispatchResult, p1.onCloseActivated })
+	local _, UseMostRecentOrDefaultFocusBehaviorResult2 = ReactFocusNavigationModule.useMostRecentOrDefaultFocusBehavior(UseStatefulRefModuleResult2)
+	local UseCloseWithBackButtonResult = UseCloseWithBackButtonFunction(UseMostRecentOrDefaultFocusBehaviorResult2, if FFlagAppPageShellScrollToTopFocus and p1.handleBackButton == false then nil else UseResult1)
+	local UsePageEntrySnackbarModuleResult = UsePageEntrySnackbarModule(ConfigKey)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	local UseCreateClientBindingSduiContextModuleResult = UseCreateClientBindingSduiContextModule(AppPage, UseStateResult, nil, UseDataUpdatedTimestampModule(ConfigKey, p1.contentIdentifier), ConfigKey, nil, p1.routeName, p1.scrollAway, p1.videoPlaybackContext)
+	local LocalStickyHeaderSlot = p1.localStickyHeaderSlot
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 204 ]]
+		-- upvalues: p1 (copy), UseComponentConfigModuleResult (copy), GetSduiComponentWrapperFunction (upval), ReactModule (upval), SduiPageWrapperEntryPointName (copy), UseCreateClientBindingSduiContextModuleResult (copy), UseLocalAnalyticsDataModuleResult (copy), LocalStickyHeaderSlot (copy)
+		local Element = if p1.stickyIdentifier ~= nil and UseComponentConfigModuleResult ~= nil then ReactModule.createElement(GetSduiComponentWrapperFunction(UseComponentConfigModuleResult), {
+			debugName = `{SduiPageWrapperEntryPointName}-sticky`,
+			componentConfig = UseComponentConfigModuleResult,
+			sduiContext = UseCreateClientBindingSduiContextModuleResult,
+			localAnalyticsData = UseLocalAnalyticsDataModuleResult
 		}) else nil
 		
-		if localStickyHeaderSlot == nil and var22 == nil then
+		if LocalStickyHeaderSlot == nil and Element == nil then
 			return nil
 		end
-		local t = {}
+		local List = {}
 		
-		if localStickyHeaderSlot ~= nil then
-			for i, v in localStickyHeaderSlot do
-				table.insert(t, v)
+		if LocalStickyHeaderSlot ~= nil then
+			for _, value in LocalStickyHeaderSlot do
+				table.insert(List, value)
 			end
 		end
-		if var22 ~= nil then
-			table.insert(t, var22)
+		if Element ~= nil then
+			table.insert(List, Element)
 		end
-		return t
+		return List
 	end, {
-		p1.stickyIdentifier, var5, var19, var9, var2, localStickyHeaderSlot
+		p1.stickyIdentifier, UseComponentConfigModuleResult,
+		UseCreateClientBindingSduiContextModuleResult,
+		UseLocalAnalyticsDataModuleResult, SduiPageWrapperEntryPointName,
+		LocalStickyHeaderSlot
 	})
-	local var23 = nil
+	local HasNextEntry: boolean = UseMemoResult1 ~= nil and next(UseMemoResult1) ~= nil
+	local FeedTopMargin = p1.feedTopMargin
+	local ScrollAway = p1.scrollAway
+	local PageTopPadding = p1.pageTopPadding
 	
-	if var7 then
-		var23 = p1.loadingSlot or reactModule.createElement(foundationModule.View, { tag = "size-full", ZIndex = 2 }, reactModule.createElement(loading, {
-			AnchorPoint = Vector2.new(0.5, 0.5),
-			Position = UDim2.fromScale(0.5, 0.5)
-		}))
-	elseif var8 then
-		var23 = p1.errorSlot or reactModule.createElement(sduiPageErrorStateModule, { refresh = p1.refresh })
-	end
-	local var24 = var21 ~= nil and next(var21) ~= nil
-	local feedTopMargin = p1.feedTopMargin
-	local var25 = if var24 then p1.stickyTopPadding or feedTopMargin else nil
-	local var26 = if var24 then p1.stickyBottomPadding else feedTopMargin
-	local scrollAway = p1.scrollAway
-	local pageTopPadding = p1.pageTopPadding
-	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BorderSizePixel = 0,
 		ClipsDescendants = true,
 		Size = UDim2.new(1, 0, 1, 0),
 		BackgroundTransparency = if p1.backgroundStyle then p1.backgroundStyle.Transparency else 0,
-		BackgroundColor3 = if p1.backgroundStyle then p1.backgroundStyle.Color3 else var3.Color.Surface.Surface_0.Color3,
-		ref = var15
+		BackgroundColor3 = if p1.backgroundStyle then p1.backgroundStyle.Color3 else UseTokensResult.Color.Surface.Surface_0.Color3,
+		ref = UseCloseWithBackButtonResult
 	}, {
-		UIListLayout = reactModule.createElement("UIListLayout", {
+		UIListLayout = ReactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			HorizontalAlignment = Enum.HorizontalAlignment.Center
 		}),
-		PageBody = reactModule.createElement("Frame", {
+		PageBody = ReactModule.createElement("Frame", {
 			BorderSizePixel = 0,
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 1, 0),
-			ref = var18
+			ref = UseStateResult2
 		}, {
-			UIFlexItem = reactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.Fill }),
-			Content = reactModule.createElement(page, {
-				contentConfig = var20,
-				stickyHeaderSlot = var21,
+			UIFlexItem = ReactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.Fill }),
+			Content = ReactModule.createElement(Page, {
+				contentConfig = UseSduiPageContentModule({
+					configKey = ConfigKey,
+					contentIdentifier = p1.contentIdentifier,
+					contentMode = p1.contentMode,
+					sduiContext = UseCreateClientBindingSduiContextModuleResult,
+					localAnalyticsData = UseLocalAnalyticsDataModuleResult,
+					debugName = SduiPageWrapperEntryPointName,
+					pageTimer = p1.pageTimer,
+					refreshSignal = UseMemoResult,
+					defaultFocusRef = if FFlagAppPageShellScrollToTopFocus and FFlagLuaAppsDefaultSelection then p1.defaultFocusRef else nil
+				}),
+				stickyHeaderSlot = UseMemoResult1,
 				composition = p1.composition,
-				chrome = reactModule.useMemo(function()
-					-- upvalues: pageTopPadding (ref), scrollAway (ref), visibilityControl (copy)
-					local pageTopPadding_1 = pageTopPadding or 0
+				chrome = ReactModule.useMemo(function() --[[ Line: 264 ]]
+					-- upvalues: PageTopPadding (copy), ScrollAway (copy), VisibilityControl (upval)
+					local PageTopPadding1 = PageTopPadding or 0
 					
-					if pageTopPadding_1 <= 0 then
+					if PageTopPadding1 <= 0 then
 						return nil
 					end
-					local var27 = if scrollAway then scrollAway.headerHeightBinding else nil
+					local HeaderHeightBinding = if ScrollAway then ScrollAway.headerHeightBinding else nil
 					
-					if var27 == nil and scrollAway and scrollAway.scrollAwayHeight then
-						local scrollAwayHeight = scrollAway.scrollAwayHeight
-						var27 = visibilityControl.getHeaderBinding():map(function(p3)
-							-- upvalues: scrollAwayHeight (ref)
-							return p3 * scrollAwayHeight
+					if HeaderHeightBinding == nil and ScrollAway and ScrollAway.scrollAwayHeight then
+						local ScrollAwayHeight = ScrollAway.scrollAwayHeight
+						HeaderHeightBinding = VisibilityControl.getHeaderBinding():map(function(p3) --[[ Line: 272 ]]
+							-- upvalues: ScrollAwayHeight (copy)
+							return p3 * ScrollAwayHeight
 						end)
 					end
 					return {
-						height = pageTopPadding_1,
-						scrollAwayHeight = if scrollAway then scrollAway.scrollAwayHeight else nil,
-						liveHeightBinding = var27
+						height = PageTopPadding1,
+						scrollAwayHeight = if ScrollAway then ScrollAway.scrollAwayHeight else nil,
+						liveHeightBinding = HeaderHeightBinding
 					}
-				end, { pageTopPadding, scrollAway }),
-				stickyBackgroundStyle = p1.backgroundStyle,
+				end, { PageTopPadding, ScrollAway }),
+				stickyBackgroundStyle = FFlagAppThemeHalloween2026HomeBackground and p1.stickyBackgroundStyle or p1.backgroundStyle,
 				onScrollToEnd = p1.onScrollToEnd,
 				onScrollToEndThreshold = p1.onScrollToEndThreshold,
-				onRefresh = if refresh then var11 else nil,
-				appEventName = appPage,
-				contentTopPadding = var26,
-				stickyTopPadding = var25
+				onRefresh = if RefreshFunction then UseResult else nil,
+				appEventName = AppPage,
+				contentTopPadding = if HasNextEntry then p1.stickyBottomPadding else FeedTopMargin,
+				stickyTopPadding = if HasNextEntry then p1.stickyTopPadding or FeedTopMargin else nil
 			}),
-			StateOverlay = var23
+			StateOverlay = if IsUseUiStatusModuleResultMatch then p1.loadingSlot or ReactModule.createElement(FoundationModule.View, { tag = "size-full", ZIndex = 2 }, ReactModule.createElement(Loading, {
+				AnchorPoint = Vector2.new(0.5, 0.5),
+				Position = UDim2.fromScale(0.5, 0.5)
+			})) elseif IsUseUiStatusModuleResultMatch1 then p1.errorSlot or ReactModule.createElement(SduiPageErrorStateModule, { refresh = p1.refresh }) else nil
 		}),
-		SnackbarPortal = if var16 and var16.snackbarConfig then reactRobloxModule.createPortal({
-			SduiSnackbarScreenGui = reactModule.createElement("ScreenGui", {
+		SnackbarPortal = if UsePageEntrySnackbarModuleResult and UsePageEntrySnackbarModuleResult.snackbarConfig then ReactRobloxModule.createPortal({
+			SduiSnackbarScreenGui = ReactModule.createElement("ScreenGui", {
 				IgnoreGuiInset = true,
 				DisplayOrder = p1.snackbarPortalLayoutOrder,
 				ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 			}, {
-				Snackbar = reactModule.createElement(snackbar, {
-					title = var16.snackbarConfig.title,
-					icon = var16.snackbarConfig.icon,
-					Position = UDim2.new(0.5, 0, 1, -var3.Padding.XLarge),
+				Snackbar = ReactModule.createElement(Snackbar, {
+					title = UsePageEntrySnackbarModuleResult.snackbarConfig.title,
+					icon = UsePageEntrySnackbarModuleResult.snackbarConfig.icon,
+					Position = UDim2.new(0.5, 0, 1, -UseTokensResult.Padding.XLarge),
 					AnchorPoint = Vector2.new(0.5, 1),
 					AutomaticSize = Enum.AutomaticSize.XY,
-					onClose = var16.onDismiss
+					onClose = UsePageEntrySnackbarModuleResult.onDismiss
 				})
 			})
-		}, coreGuiService) else nil
+		}, CoreGui) else nil
 	})
 end))

@@ -1,34 +1,33 @@
-﻿local getFFlagLuaAppSignupPasskeyAvailabilityPreflight = require(script:FindFirstAncestor("AuthCommon").Parent.SharedFlags).GetFFlagLuaAppSignupPasskeyAvailabilityPreflight
+﻿local GetFFlagLuaAppSignupPasskeyAvailabilityPreflightFunction = require(script:FindFirstAncestor("AuthCommon").Parent.SharedFlags).GetFFlagLuaAppSignupPasskeyAvailabilityPreflight
 
-return function(p1)
-	-- upvalues: getFFlagLuaAppSignupPasskeyAvailabilityPreflight (ref)
-	local isAvailable_1, supportsDeviceBoundOnly
-	local _ = false
-	local _ = false
-	local var1 = true
-	local isAvailable = false
-	local var2 = false
+return function(p1) --[[ Line: 6 ]]
+	-- upvalues: GetFFlagLuaAppSignupPasskeyAvailabilityPreflightFunction (copy)
+	local IsSupportsPasskeyCreationOnDevice = true
+	local IsAvailable = false
+	local V2InterfaceSupported = false
+	local IsAvailable1 = nil
+	local SupportsDeviceBoundOnly = nil
 	
 	if p1.FIDO2 == nil then
-		isAvailable_1 = p1.isAvailable or false
-		supportsDeviceBoundOnly = p1.supportsDeviceBoundOnly or false
+		IsAvailable1 = p1.isAvailable or false
+		SupportsDeviceBoundOnly = p1.supportsDeviceBoundOnly or false
 	else
-		isAvailable_1 = p1.FIDO2.isAvailable
-		supportsDeviceBoundOnly = p1.FIDO2.supportsDeviceBoundOnly
+		IsAvailable1 = p1.FIDO2.isAvailable
+		SupportsDeviceBoundOnly = p1.FIDO2.supportsDeviceBoundOnly
 		
-		if getFFlagLuaAppSignupPasskeyAvailabilityPreflight() then
-			var1 = p1.FIDO2.supportsPasskeyCreationOnDevice ~= false
+		if GetFFlagLuaAppSignupPasskeyAvailabilityPreflightFunction() then
+			IsSupportsPasskeyCreationOnDevice = p1.FIDO2.supportsPasskeyCreationOnDevice ~= false
 		end
-		var2 = true
+		V2InterfaceSupported = true
 	end
 	if p1.password ~= nil then
-		isAvailable = p1.password.isAvailable
+		IsAvailable = p1.password.isAvailable
 	end
 	return {
-		fido2Available = isAvailable_1,
-		fido2SupportsDeviceBoundOnly = supportsDeviceBoundOnly,
-		fido2SupportsPasskeyCreationOnDevice = var1,
-		passwordsAvailable = isAvailable,
-		v2InterfaceSupported = var2
+		fido2Available = IsAvailable1,
+		fido2SupportsDeviceBoundOnly = SupportsDeviceBoundOnly,
+		fido2SupportsPasskeyCreationOnDevice = IsSupportsPasskeyCreationOnDevice,
+		passwordsAvailable = IsAvailable,
+		v2InterfaceSupported = V2InterfaceSupported
 	}
 end

@@ -1,3 +1,3 @@
-﻿local tModule = require(script.Parent.Parent.Parent.t)
+﻿local TModule = require(script.Parent.Parent.Parent.t)
 
-return tModule.optional(tModule.string)
+return TModule.optional(TModule.string)

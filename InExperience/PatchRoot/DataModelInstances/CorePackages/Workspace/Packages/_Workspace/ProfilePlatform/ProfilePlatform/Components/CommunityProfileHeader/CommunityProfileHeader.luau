@@ -1,96 +1,101 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local horizontalPageMargin = require(parent.UIBlox).App.Container.HorizontalPageMargin
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local abbreviateCount = require(parent.Localization).abbreviateCount
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local navigateDown = require(parent.NavigationRodux).Thunks.NavigateDown
-local appPage = require(parent.RobloxAppEnums).AppPage
-local enumsModule = require(profilePlatform.Common.Enums)
-local image = foundationModule.Image
-local text = foundationModule.Text
-local view = foundationModule.View
-local socialCountsItemModule = require(profilePlatform.Components.UserProfileHeader.SocialCountsItem)
-local textKeysModule = require(profilePlatform.Common.TextKeys)
-local fFlagEnablePressingCommunityOwnerInPeekViewModule = require(profilePlatform.Flags.FFlagEnablePressingCommunityOwnerInPeekView)
-local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
-local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local HorizontalPageMargin = require(Parent.UIBlox).App.Container.HorizontalPageMargin
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local AbbreviateCountFunction = require(Parent.Localization).abbreviateCount
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local NavigateDownFunction = require(Parent.NavigationRodux).Thunks.NavigateDown
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local Image = FoundationModule.Image
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local SocialCountsItemModule = require(ProfilePlatform.Components.UserProfileHeader.SocialCountsItem)
+local TextKeysModule = require(ProfilePlatform.Common.TextKeys)
+local FFlagEnablePressingCommunityOwnerInPeekViewModule = require(ProfilePlatform.Flags.FFlagEnablePressingCommunityOwnerInPeekView)
+local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3Dispatch
+local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
 
-return function(p1)
-	-- upvalues: useDispatch (ref), useLocalization (ref), textKeysModule (ref), reactModule (ref), fFlagEnablePressingCommunityOwnerInPeekViewModule (ref), appPage (ref), enumsModule (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), horizontalPageMargin (ref), view (ref), image (ref), text (ref), socialCountsItemModule (ref), abbreviateCount (ref)
-	local var2 = useDispatch()
-	local var3 = useLocalization({
-		byOwner = { textKeysModule.ByOwner, ownerName = p1.ownerName },
-		members = textKeysModule.Members,
-		followers = textKeysModule.Followers,
-		follower = textKeysModule.Follower
+return function(p1) --[[ Line: 40 | Named "CommunityProfileHeader" ]]
+	-- upvalues: UseDispatchFunction (copy), UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), FFlagEnablePressingCommunityOwnerInPeekViewModule (copy), AppPage (copy), EnumsModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), HorizontalPageMargin (copy), View (copy), Image (copy), Text (copy), SocialCountsItemModule (copy), AbbreviateCountFunction (copy)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseLocalizationResult = UseLocalizationFunction({
+		byOwner = { TextKeysModule.ByOwner, ownerName = p1.ownerName },
+		members = TextKeysModule.Members,
+		followers = TextKeysModule.Followers,
+		follower = TextKeysModule.Follower
 	})
+	local v1 = if FFlagEnablePressingCommunityOwnerInPeekViewModule then function() --[[ Line: 62 ]]
+		-- upvalues: p1 (copy), AppPage (upval), EnumsModule (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval)
+		if p1.ownerUserId then
+			local config = {
+				name = AppPage.ProfilePlatform,
+				detail = p1.ownerUserId,
+				extraProps = { profileType = EnumsModule.ProfileTypes.User }
+			}
+			
+			if FFlagSignalsNavP3Dispatch then
+				NavigationCommands.down(NavigationCommands.fromLegacyPage(config))
+				
+				return
+			end
+			UseDispatchResult(NavigateDownFunction(config))
+		end
+	end else nil
 	
-	return reactModule.createElement(horizontalPageMargin, {
+	return ReactModule.createElement(HorizontalPageMargin, {
 		backgroundTransparency = 1,
 		useAutomaticSizing = true,
 		layoutOrder = p1.layoutOrder,
 		size = UDim2.new(1, 0, 0, 0)
 	}, {
-		Container = reactModule.createElement(view, {
+		Container = ReactModule.createElement(View, {
 			LayoutOrder = 1,
 			tag = "col size-full-0 auto-xy gap-xsmall"
 		}, {
-			HeaderInformation = reactModule.createElement(view, {
+			HeaderInformation = ReactModule.createElement(View, {
 				LayoutOrder = 1,
 				tag = "row gap-medium size-full-0 auto-xy"
 			}, {
-				CommunityThumbnail = reactModule.createElement(image, {
+				CommunityThumbnail = ReactModule.createElement(Image, {
 					LayoutOrder = 1,
 					tag = "radius-medium self-center",
 					Image = p1.thumbnail,
 					Size = UDim2.new(0, 80, 0, 80)
 				}),
-				Names = reactModule.createElement(view, {
+				Names = ReactModule.createElement(View, {
 					LayoutOrder = 2,
 					tag = "fill col size-full-0 auto-y align-y-center gap-small",
 					Size = UDim2.new(1, 0, 0, 80)
 				}, {
-					CommunityName = if p1.name then reactModule.createElement(text, {
+					CommunityName = if p1.name then ReactModule.createElement(Text, {
 						LayoutOrder = 1,
 						tag = "content-emphasis auto-xy text-heading-small text-wrap text-align-x-left",
 						Text = p1.name
 					}) else nil,
-					OwnerName = if p1.ownerName then reactModule.createElement(text, {
+					OwnerName = if p1.ownerName then ReactModule.createElement(Text, {
 						LayoutOrder = 2,
 						tag = "content-default auto-xy text-body-medium text-wrap text-align-x-left",
-						Text = var3.byOwner,
-						onActivated = if fFlagEnablePressingCommunityOwnerInPeekViewModule then if fFlagEnablePressingCommunityOwnerInPeekViewModule then function()
-							-- upvalues: p1 (ref), appPage (copy), enumsModule (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var2 (ref), navigateDown (copy)
-							if p1.ownerUserId then
-								local t = {
-									name = appPage.ProfilePlatform,
-									detail = p1.ownerUserId,
-									extraProps = { profileType = enumsModule.ProfileTypes.User }
-								}
-								
-								if fFlagSignalsNavP3Dispatch then
-									var1.down(var1.fromLegacyPage(t))
-									
-									return
-								end
-								var2(navigateDown(t))
-							end
-						end else nil else nil
+						Text = UseLocalizationResult.byOwner,
+						onActivated = if FFlagEnablePressingCommunityOwnerInPeekViewModule then v1 else nil
 					}) else nil
 				})
 			}),
-			Counts = reactModule.createElement(view, { LayoutOrder = 2, tag = "size-full-0 auto-xy" }, {
-				MembersCount = reactModule.createElement(socialCountsItemModule, {
+			Counts = ReactModule.createElement(View, { LayoutOrder = 2, tag = "size-full-0 auto-xy" }, {
+				MembersCount = ReactModule.createElement(SocialCountsItemModule, {
 					layoutOrder = 1,
-					text = reactModule.useMemo(function()
-						-- upvalues: p1 (ref), var3 (ref)
-						return if p1.hasSocialModules then var3.members elseif p1.membersCount == 1 then var3.follower else var3.followers
-					end, { var3, p1.membersCount, p1.hasSocialModules }),
-					count = abbreviateCount(p1.membersCount),
-					onActivated = function() end
+					text = ReactModule.useMemo(function() --[[ Line: 50 ]]
+						-- upvalues: p1 (copy), UseLocalizationResult (copy)
+						return if p1.hasSocialModules then UseLocalizationResult.members elseif p1.membersCount == 1 then UseLocalizationResult.follower else UseLocalizationResult.followers
+					end, {
+						UseLocalizationResult,
+						p1.membersCount,
+						p1.hasSocialModules
+					}),
+					count = AbbreviateCountFunction(p1.membersCount),
+					onActivated = function() --[[ Line: 132 ]] end
 				})
 			})
 		})

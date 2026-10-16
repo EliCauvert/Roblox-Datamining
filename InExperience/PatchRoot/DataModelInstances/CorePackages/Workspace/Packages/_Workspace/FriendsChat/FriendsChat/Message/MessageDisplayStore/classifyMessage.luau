@@ -1,18 +1,16 @@
-﻿local fFlagChatModeratedMaskRandomLength = require(script:FindFirstAncestor("FriendsChat").Parent.SharedFlags).FFlagChatModeratedMaskRandomLength
-
-local function isPartySystemMessage(p1)
-	local cards = p1.cards
+﻿local function isPartySystemMessage(p1): boolean --[[ Line: 50 ]]
+	local Cards = p1.cards
 	
-	if type(cards) ~= "table" then
+	if type(Cards) ~= "table" then
 		return false
 	end
-	for i, v in cards do
-		if type(v) == "table" and type(v.components) == "table" then
-			for i_1, v_1 in v.components do
-				if type(v_1) == "table" then
-					local type = v_1.type
+	for _, card in Cards do
+		if type(card) == "table" and type(card.components) == "table" then
+			for _, component in card.components do
+				if type(component) == "table" then
+					local Type = component.type
 					
-					if type == "group_up" or type == "scheduled_group_up" then
+					if Type == "group_up" or Type == "scheduled_group_up" then
 						return true
 					end
 				end
@@ -22,65 +20,66 @@ local function isPartySystemMessage(p1)
 	return false
 end
 
-local function _(p2)
-	local cards = p2.cards
-	local var1 = if type(cards) == "table" then cards[1] else nil
+local function _(p2) --[[ Line: 74 | Named "getSystemMessageBody" ]]
+	local Cards = p2.cards
+	local Card = if type(Cards) == "table" then Cards[1] else nil
 	
-	return if type(var1) == "table" and type(var1.alt_text) == "string" and var1.alt_text ~= "" then var1.alt_text else p2.content or ""
+	return if type(Card) == "table" and type(Card.alt_text) == "string" and Card.alt_text ~= "" then Card.alt_text else p2.content or ""
 end
 
-local _ = function(p2)
-	-- upvalues: isPartySystemMessage (ref)
-	local t = { kind = "systemMessage" }
-	local cards = p2.cards
-	local var1 = if type(cards) == "table" then cards[1] else nil
-	t.body = if type(var1) == "table" and type(var1.alt_text) == "string" and var1.alt_text ~= "" then var1.alt_text else p2.content or ""
-	t.variant = if isPartySystemMessage(p2) then "party" else "default"
+local _ = function(p2) --[[ Line: 83 | Named "classifySystemMessage" ]]
+	-- upvalues: isPartySystemMessage (copy)
+	local Cards = p2.cards
+	local Card = if type(Cards) == "table" then Cards[1] else nil
 	
-	return t
+	return {
+		kind = "systemMessage",
+		body = if type(Card) == "table" and type(Card.alt_text) == "string" and Card.alt_text ~= "" then Card.alt_text else p2.content or "",
+		variant = if isPartySystemMessage(p2) then "party" else "default"
+	}
 end
 
-return function(p2)
-	-- upvalues: isPartySystemMessage (ref), fFlagChatModeratedMaskRandomLength (ref)
-	local var1
+return function(p2) --[[ Line: 91 | Named "classifyMessage" ]]
+	-- upvalues: isPartySystemMessage (copy)
 	if p2.type == "system" or p2.sender_user_id == nil then
-		local t = {}
-		local t_1 = { kind = "systemMessage" }
-		local cards = p2.cards
-		var1 = if type(cards) == "table" then cards[1] else nil
-		t_1.body = if type(var1) == "table" and type(var1.alt_text) == "string" and var1.alt_text ~= "" then var1.alt_text else p2.content or ""
-		t_1.variant = if isPartySystemMessage(p2) then "party" else "default"
-		-- Unknown statement at pc 6: <SetList>
+		local Cards = p2.cards
+		local Card = if type(Cards) == "table" then Cards[1] else nil
 		
-		return t
+		return {
+			{
+				kind = "systemMessage",
+				body = if type(Card) == "table" and type(Card.alt_text) == "string" and Card.alt_text ~= "" then Card.alt_text else p2.content or "",
+				variant = if isPartySystemMessage(p2) then "party" else "default"
+			}
+		}
 	end
-	local senderUserId = p2.sender_user_id
-	local t = {}
-	local repliesTo = p2.replies_to
+	local SenderUserId = p2.sender_user_id
+	local List = {}
+	local RepliesTo = p2.replies_to
 	
-	if type(repliesTo) == "table" and repliesTo.sender_user_id ~= nil then
-		table.insert(t, {
+	if type(RepliesTo) == "table" and RepliesTo.sender_user_id ~= nil then
+		table.insert(List, {
 			kind = "replyHeader",
-			senderUserId = senderUserId,
-			repliedToUserId = repliesTo.sender_user_id
+			senderUserId = SenderUserId,
+			repliedToUserId = RepliesTo.sender_user_id
 		})
 	end
-	local status = p2.status
-	var1 = if status ~= "Moderated" then status == "Failed" else true
+	local Status = p2.status
+	local IsModerated: boolean = Status == "Moderated" or Status == "Failed"
 	
 	if p2.visibility == "hidden" then
-		table.insert(t, { kind = "hiddenUser", senderUserId = senderUserId })
+		table.insert(List, { kind = "hiddenUser", senderUserId = SenderUserId })
 	else
-		table.insert(t, {
+		table.insert(List, {
 			kind = "userText",
-			senderUserId = senderUserId,
+			senderUserId = SenderUserId,
 			body = p2.content or "",
-			moderated = var1,
-			messageId = if fFlagChatModeratedMaskRandomLength then p2.id else nil
+			moderated = IsModerated,
+			messageId = p2.id
 		})
 	end
-	if var1 then
-		table.insert(t, { kind = "moderationNotice" })
+	if IsModerated then
+		table.insert(List, { kind = "moderationNotice" })
 	end
-	return t
+	return List
 end

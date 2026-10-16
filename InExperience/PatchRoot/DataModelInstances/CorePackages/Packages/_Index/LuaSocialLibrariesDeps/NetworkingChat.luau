@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.NetworkingChat.NetworkingChat)
+﻿return (require(script.Parent.Parent.Parent._Index.NetworkingChat.NetworkingChat))

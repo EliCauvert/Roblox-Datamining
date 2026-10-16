@@ -1,1 +1,1 @@
-﻿return require(script.ContactsGlimmer)
+﻿return (require(script.ContactsGlimmer))

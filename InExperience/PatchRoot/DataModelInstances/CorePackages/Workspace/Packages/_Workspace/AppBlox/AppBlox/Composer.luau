@@ -1,1 +1,1 @@
-﻿return require(script.Composer)
+﻿return (require(script.Composer))

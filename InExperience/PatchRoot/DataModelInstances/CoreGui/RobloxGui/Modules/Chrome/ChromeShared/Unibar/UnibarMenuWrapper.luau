@@ -1,23 +1,23 @@
-﻿local chromeShared = script:FindFirstAncestor("ChromeShared")
-local corePackagesService = game:GetService("CorePackages")
-local reactUtilsModule = require(corePackagesService.Packages.ReactUtils)
-local reactModule = require(corePackagesService.Packages.React)
-local unibarMenuModule = require(chromeShared.Unibar.UnibarMenu)
-local unibarStyle = require(corePackagesService.Workspace.Packages.Chrome).UnibarStyle
-local tooltipProviderModule = require(chromeShared.Unibar.Tooltips.TooltipProvider)
-local roactAppPolicy = require(corePackagesService.Workspace.Packages.UniversalAppPolicy).RoactAppPolicy
-local appFeaturePolicies = require(corePackagesService.Workspace.Packages.UniversalAppPolicy).AppFeaturePolicies
-local fFlagTokenizeUnibarConstantsWithStyleProvider = require(chromeShared.Flags).FFlagTokenizeUnibarConstantsWithStyleProvider
+﻿local ChromeShared = script:FindFirstAncestor("ChromeShared")
+local CorePackages = game:GetService("CorePackages")
+local ReactUtilsModule = require(CorePackages.Packages.ReactUtils)
+local ReactModule = require(CorePackages.Packages.React)
+local UnibarMenuModule = require(ChromeShared.Unibar.UnibarMenu)
+local UnibarStyle = require(CorePackages.Workspace.Packages.Chrome).UnibarStyle
+local TooltipProviderModule = require(ChromeShared.Unibar.Tooltips.TooltipProvider)
+local RoactAppPolicy = require(CorePackages.Workspace.Packages.UniversalAppPolicy).RoactAppPolicy
+local AppFeaturePolicies = require(CorePackages.Workspace.Packages.UniversalAppPolicy).AppFeaturePolicies
+local FFlagTokenizeUnibarConstantsWithStyleProvider = require(ChromeShared.Flags).FFlagTokenizeUnibarConstantsWithStyleProvider
 
-return function(p1)
-	-- upvalues: reactModule (ref), reactUtilsModule (ref), roactAppPolicy (ref), appFeaturePolicies (ref), tooltipProviderModule (ref), fFlagTokenizeUnibarConstantsWithStyleProvider (ref), unibarStyle (ref), unibarMenuModule (ref)
-	return reactModule.createElement(reactUtilsModule.ContextStack, {
+return function(p1) --[[ Line: 16 | Named "UnibarMenuWrapper" ]]
+	-- upvalues: ReactModule (copy), ReactUtilsModule (copy), RoactAppPolicy (copy), AppFeaturePolicies (copy), TooltipProviderModule (copy), FFlagTokenizeUnibarConstantsWithStyleProvider (copy), UnibarStyle (copy), UnibarMenuModule (copy)
+	return ReactModule.createElement(ReactUtilsModule.ContextStack, {
 		providers = {
-			reactModule.createElement(roactAppPolicy.Provider, { policy = { appFeaturePolicies } }),
-			reactModule.createElement(tooltipProviderModule),
-			if fFlagTokenizeUnibarConstantsWithStyleProvider then reactModule.createElement(unibarStyle.Provider) else nil
+			ReactModule.createElement(RoactAppPolicy.Provider, { policy = { AppFeaturePolicies } }),
+			ReactModule.createElement(TooltipProviderModule),
+			if FFlagTokenizeUnibarConstantsWithStyleProvider then ReactModule.createElement(UnibarStyle.Provider) else nil
 		}
 	}, {
-		UnibarMenu = reactModule.createElement(unibarMenuModule, p1)
+		UnibarMenu = ReactModule.createElement(UnibarMenuModule, p1)
 	})
 end

@@ -1,11 +1,11 @@
-﻿local profileQRCode = script:FindFirstAncestor("ProfileQRCode")
-local useSelector = require(profileQRCode.Parent.RoactUtils).Hooks.RoactRodux.useSelector
-local createOrGetProfileShareUrlModule = require(profileQRCode.Networking.createOrGetProfileShareUrl)
+﻿local ProfileQRCode = script:FindFirstAncestor("ProfileQRCode")
+local UseSelectorFunction = require(ProfileQRCode.Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local CreateOrGetProfileShareUrlModule = require(ProfileQRCode.Networking.createOrGetProfileShareUrl)
 
-return function()
-	-- upvalues: useSelector (ref), createOrGetProfileShareUrlModule (ref)
-	return useSelector(function(p1)
-		-- upvalues: createOrGetProfileShareUrlModule (copy)
-		return createOrGetProfileShareUrlModule.getStatus(p1)
+return function() --[[ Line: 7 ]]
+	-- upvalues: UseSelectorFunction (copy), CreateOrGetProfileShareUrlModule (copy)
+	return UseSelectorFunction(function(p1) --[[ Line: 8 ]]
+		-- upvalues: CreateOrGetProfileShareUrlModule (upval)
+		return CreateOrGetProfileShareUrlModule.getStatus(p1)
 	end)
 end

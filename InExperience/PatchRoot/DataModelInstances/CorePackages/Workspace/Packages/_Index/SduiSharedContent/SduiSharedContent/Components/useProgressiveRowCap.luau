@@ -1,31 +1,32 @@
-﻿local reactModule = require(script:FindFirstAncestor("SduiSharedContent").Parent.React)
+﻿local ReactModule = require(script:FindFirstAncestor("SduiSharedContent").Parent.React)
 
-return function(p1, p2, p3, p4)
-	-- upvalues: reactModule (ref)
-	local var1 = p2 ~= nil
-	local maxValue = math.max(1, p3 or 1)
-	local var2, var3 = reactModule.useState(function()
-		-- upvalues: var1 (ref), p1 (ref), p2 (ref)
-		return if var1 then math.min(math.max(0, p2), p1) else p1
+return function(p1: number, p2, p3, p4) --[[ Line: 17 | Named "useProgressiveRowCap" ]]
+	-- upvalues: ReactModule (copy)
+	local v1 = p2 ~= nil
+	local Largest = math.max(1, p3 or 1)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(function(): number --[[ Line: 26 ]]
+		-- upvalues: v1 (copy), p1 (copy), p2 (copy)
+		return if v1 then math.min(math.max(0, p2), p1) else p1
 	end)
-	local var4 = if var1 then math.min(var2, p1) else p1
-	local var5 = var1 and var4 < p1
-	reactModule.useEffect(function()
-		-- upvalues: var5 (ref), var3 (ref), maxValue (ref), p4 (ref)
-		if not var5 then
+	local Smallest = if v1 then math.min(UseStateResult, p1) else p1
+	local IsSmallestBelow: boolean = v1 and Smallest < p1
+	ReactModule.useEffect(function() --[[ Line: 36 ]]
+		-- upvalues: IsSmallestBelow (copy), UseStateResult2 (copy), Largest (copy), p4 (copy)
+		if not IsSmallestBelow then
 			return nil
 		end
-		local var6 = nil
+		local Flag = nil
 		
-		local function advance()
-			-- upvalues: var6 (write), var3 (copy), maxValue (copy)
-			if var6 then
+		local function advance() --[[ Line: 41 ]]
+			-- upvalues: Flag (ref), UseStateResult2 (upval), Largest (upval)
+			if not Flag then
+				UseStateResult2(function(p5) --[[ Line: 45 ]]
+					-- upvalues: Largest (upval)
+					return p5 + Largest
+				end)
+				
 				return
 			end
-			var3(function(p5)
-				-- upvalues: maxValue (copy)
-				return p5 + maxValue
-			end)
 		end
 		
 		if p4 and p4 > 0 then
@@ -33,11 +34,11 @@ return function(p1, p2, p3, p4)
 		else
 			task.defer(advance)
 		end
-		return function()
-			-- upvalues: var6 (write)
-			var6 = true
+		return function() --[[ Line: 56 ]]
+			-- upvalues: Flag (ref)
+			Flag = true
 		end
-	end, { var5, maxValue, var2, p4 })
+	end, { IsSmallestBelow, Largest, UseStateResult, p4 })
 	
-	return var4, var5
+	return Smallest, IsSmallestBelow
 end

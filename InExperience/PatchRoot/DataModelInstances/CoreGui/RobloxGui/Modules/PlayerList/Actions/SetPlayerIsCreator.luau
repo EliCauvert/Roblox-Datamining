@@ -1,3 +1,7 @@
-﻿return require(script.Parent.Parent.ActionCreator)("SetPlayerIsCreator", function(p1, p2)
-	return { player = p1, userId = p1.UserId, isCreator = p2 }
+﻿return require(script.Parent.Parent.ActionCreator)("SetPlayerIsCreator", function(Player: Player, IsCreator) --[[ Line: 4 ]]
+	return {
+		player = Player,
+		userId = Player.UserId,
+		isCreator = IsCreator
+	}
 end)

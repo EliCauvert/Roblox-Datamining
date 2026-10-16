@@ -1,13 +1,12 @@
-﻿local avatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
-local parent = avatarExperienceInspectAndBuy.Parent
-local reactModule = require(parent.React)
-local AXCommonModule = require(parent.AXCommon)
-local _ = require(avatarExperienceInspectAndBuy.Types)
-local useItemCardRowPropsModule = require(avatarExperienceInspectAndBuy.Components.useItemCardRowProps)
-local _ = require(avatarExperienceInspectAndBuy.Enums.ViewType)
-local catalogRowItemCard = AXCommonModule.Components.CatalogItemCard.CatalogRowItemCard
+﻿local AvatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
+local Parent = AvatarExperienceInspectAndBuy.Parent
+local ReactModule = require(Parent.React)
+local _ = require(AvatarExperienceInspectAndBuy.Types)
+local UseItemCardRowPropsModule = require(AvatarExperienceInspectAndBuy.Components.useItemCardRowProps)
+local _ = require(AvatarExperienceInspectAndBuy.Enums.ViewType)
+local CatalogRowItemCard = require(Parent.AXCommon).Components.CatalogItemCard.CatalogRowItemCard
 
-return function(p1)
-	-- upvalues: useItemCardRowPropsModule (ref), reactModule (ref), catalogRowItemCard (ref)
-	return reactModule.createElement(catalogRowItemCard, useItemCardRowPropsModule(p1.item, p1.LayoutOrder, p1.view, p1.onItemCardActivated, p1.itemCardWidth))
+return function(Frame) --[[ Line: 19 ]]
+	-- upvalues: UseItemCardRowPropsModule (copy), ReactModule (copy), CatalogRowItemCard (copy)
+	return ReactModule.createElement(CatalogRowItemCard, (UseItemCardRowPropsModule(Frame.item, Frame.LayoutOrder, Frame.view, Frame.onItemCardActivated, Frame.itemCardWidth)))
 end

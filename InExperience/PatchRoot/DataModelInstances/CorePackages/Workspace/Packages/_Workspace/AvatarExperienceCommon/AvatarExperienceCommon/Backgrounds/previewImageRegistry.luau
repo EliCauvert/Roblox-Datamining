@@ -1,29 +1,30 @@
 ﻿local t = {}
 
 return {
-	register = function(p1, p2)
-		-- upvalues: t (write)
-		t[p1] = p2
+	register = function(Key, p1) --[[ Line: 5 ]]
+		-- upvalues: t (ref)
+		t[Key] = p1
 	end,
-	resolve = function(p1)
-		-- upvalues: t (write)
+	resolve = function(p1) --[[ Line: 9 ]]
+		-- upvalues: t (ref)
 		return t[p1]
 	end,
-	destroy = function(p1)
-		-- upvalues: t (write)
-		local var1 = t[p1]
+	destroy = function(Key) --[[ Line: 13 ]]
+		-- upvalues: t (ref)
+		local Entry = t[Key]
 		
-		if var1 then
-			t[p1] = nil
-			var1:Destroy()
+		if Entry then
+			t[Key] = nil
+			Entry:Destroy()
 		end
 	end,
-	clear = function()
-		-- upvalues: t (write)
+	clear = function() --[[ Line: 21 ]]
+		-- upvalues: t (ref)
+		local t1 = t
 		t = {}
 		
-		for i, v in t do
-			v:Destroy()
+		for _, value in t1 do
+			value:Destroy()
 		end
 	end
 }

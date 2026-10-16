@@ -1,40 +1,40 @@
-﻿local parent = script:FindFirstAncestor("Achievements").Parent
-local promiseModule = require(parent.Promise)
-local dashModule = require(parent.Dash)
-local makeOmniRecommendationsRequest = require(parent.GraphQlShared).MakeOmniRecommendationsRequest
+﻿local Parent = script:FindFirstAncestor("Achievements").Parent
+local PromiseModule = require(Parent.Promise)
+local DashModule = require(Parent.Dash)
+local MakeOmniRecommendationsRequestFunction = require(Parent.GraphQlShared).MakeOmniRecommendationsRequest
 
-return function(p1, _)
-	-- upvalues: makeOmniRecommendationsRequest (ref), promiseModule (ref), dashModule (ref)
-	return makeOmniRecommendationsRequest(p1, "Home", "0", nil, nil, nil, { tostring(100000003) }):andThen(function(p2)
-		-- upvalues: promiseModule (copy), dashModule (copy)
-		if p2.responseBody == nil then
-			return promiseModule.reject("Response has no body.")
+return function(p1, _) --[[ Line: 44 ]]
+	-- upvalues: MakeOmniRecommendationsRequestFunction (copy), PromiseModule (copy), DashModule (copy)
+	return MakeOmniRecommendationsRequestFunction(p1, "Home", "0", nil, nil, nil, { (tostring(100000003)) }):andThen(function(Result) --[[ Line: 47 ]]
+		-- upvalues: PromiseModule (upval), DashModule (upval)
+		if Result.responseBody == nil then
+			return PromiseModule.reject("Response has no body.")
 		end
-		local sorts = p2.responseBody.sorts
+		local Sorts = Result.responseBody.sorts
 		
-		if not sorts then
-			return promiseModule.reject("Response has no sorts.")
+		if not Sorts then
+			return PromiseModule.reject("Response has no sorts.")
 		end
 		local t = {}
 		
-		for i, v in pairs(sorts) do
-			if v.topicId == 100000003 then
-				local recommendationList = v.recommendationList
+		for _, sort in pairs(Sorts) do
+			if sort.topicId == 100000003 then
+				local RecommendationList = sort.recommendationList
 				
-				if not recommendationList then
-					return promiseModule.reject("No recommendation list found in sorts.")
+				if not RecommendationList then
+					return PromiseModule.reject("No recommendation list found in sorts.")
 				end
-				t = recommendationList
+				t = RecommendationList
 				break
 			end
 		end
-		local tCount = #t
+		local CountT = #t
 		
-		if not dashModule.find(t, function(p3)
-			return p3.contentId == game.GameId
+		if not DashModule.find(t, function(p2): boolean --[[ Line: 73 ]]
+			return p2.contentId == game.GameId
 		end) then
-			tCount += 1
+			CountT += 1
 		end
-		return promiseModule.resolve(tCount)
+		return PromiseModule.resolve(CountT)
 	end)
 end

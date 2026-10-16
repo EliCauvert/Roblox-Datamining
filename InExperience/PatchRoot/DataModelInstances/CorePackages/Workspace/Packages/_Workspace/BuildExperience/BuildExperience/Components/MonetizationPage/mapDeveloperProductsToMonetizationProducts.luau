@@ -1,86 +1,88 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local _ = require(buildExperience.Parent.DataHydration.DeveloperProduct)
-local localizationStringsModule = require(buildExperience.LocalizationStrings)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local _ = require(BuildExperience.Parent.DataHydration.DeveloperProduct)
+local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local _ = require(script.Parent.MonetizationPageView)
-local t = {
-	formatDefaultProductName = function(p1)
-		-- upvalues: localizationStringsModule (ref)
-		return string.gsub(localizationStringsModule.MONETIZATION_DEFAULT_PRODUCT_NAME, "{PRODUCT_ID}", tostring(p1))
+local config = {
+	formatDefaultProductName = function(ProductId): string --[[ Line: 22 ]]
+		-- upvalues: LocalizationStringsModule (copy)
+		return (string.gsub(LocalizationStringsModule.MONETIZATION_DEFAULT_PRODUCT_NAME, "{PRODUCT_ID}", (tostring(ProductId))))
 	end,
-	priceUnavailable = localizationStringsModule.MONETIZATION_PRICE_UNAVAILABLE,
-	productType = localizationStringsModule.AGENT_DEV_PRODUCT_TITLE,
-	onSale = localizationStringsModule.MONETIZATION_ON_SALE,
-	offSale = localizationStringsModule.MONETIZATION_OFF_SALE
+	priceUnavailable = LocalizationStringsModule.MONETIZATION_PRICE_UNAVAILABLE,
+	productType = LocalizationStringsModule.AGENT_DEV_PRODUCT_TITLE,
+	onSale = LocalizationStringsModule.MONETIZATION_ON_SALE,
+	offSale = LocalizationStringsModule.MONETIZATION_OFF_SALE
 }
 
-local function _(p1, p2)
-	local priceInformation = p1.priceInformation
+local function _(p1, p2): boolean --[[ Line: 31 | Named "hasEnabledFeature" ]]
+	local PriceInformation = p1.priceInformation
 	
-	if priceInformation == nil then
+	if PriceInformation == nil then
 		return false
 	end
-	local enabledFeatures = priceInformation.enabledFeatures
+	local EnabledFeatures = PriceInformation.enabledFeatures
 	
-	if enabledFeatures == nil then
+	if EnabledFeatures == nil then
 		return false
 	end
-	for i, v in enabledFeatures do
-		if v == p2 then
+	for _, enabledFeature in EnabledFeatures do
+		if enabledFeature == p2 then
 			return true
 		end
 	end
 	return false
 end
 
-local function mapProduct(p3, p4)
-	local var1
-	local var2 = if p3.priceInformation ~= nil then nil else p3.priceInformation.defaultPriceInRobux
-	local t = {
+local function mapProduct(p3, p4) --[[ Line: 48 ]]
+	local DefaultPriceInRobux = if p3.priceInformation == nil then nil else p3.priceInformation.defaultPriceInRobux
+	local config = {
 		id = tostring(p3.productId),
 		name = p3.name or p4.formatDefaultProductName(p3.productId),
-		price = if var2 ~= nil then p4.priceUnavailable else tostring(var2),
-		priceInRobux = var2,
+		price = if DefaultPriceInRobux == nil then p4.priceUnavailable else tostring(DefaultPriceInRobux),
+		priceInRobux = DefaultPriceInRobux,
 		isForSale = p3.isForSale == true,
 		isManagedPricingEnabled = p3.isManagedPricingEnabled,
 		isArchived = p3.isArchived,
 		isImmutable = p3.isImmutable
 	}
-	local priceInformation = p3.priceInformation
+	local PriceInformation = p3.priceInformation
+	local Flag = nil
 	
-	if priceInformation == nil then
-		var1 = false
+	if PriceInformation == nil then
+		Flag = false
 	else
-		local enabledFeatures = priceInformation.enabledFeatures
+		local EnabledFeatures = PriceInformation.enabledFeatures
 		
-		if enabledFeatures == nil then
-			var1 = false
+		if EnabledFeatures == nil then
+			Flag = false
 		else
-			for i, v in enabledFeatures do
-				if v == "PriceOptimization" then
-					var1 = true
+			Flag = false
+			
+			for _, enabledFeature in EnabledFeatures do
+				if enabledFeature == "PriceOptimization" then
+					Flag = true
+					break
 				end
 			end
-			var1 = false
 		end
 	end
-	t.isInActivePriceOptimizationExperiment = var1
-	t.kind = p4.productType
-	t.saleStatus = if p3.isForSale == true then p4.onSale else p4.offSale
-	t.image = if p3.iconImageAssetId ~= nil then nil else `rbxassetid://{p3.iconImageAssetId}`
-	t.description = p3.description or ""
+	config.isInActivePriceOptimizationExperiment = Flag
+	config.kind = p4.productType
+	config.saleStatus = if p3.isForSale == true then p4.onSale else p4.offSale
+	config.image = if p3.iconImageAssetId == nil then nil else `rbxassetid://{p3.iconImageAssetId}`
+	config.description = p3.description or ""
 	
-	return t
+	return config
 end
 
-return function(p5, p6)
-	-- upvalues: mapProduct (ref), t (ref)
-	local t_1 = {}
+return function(p5, p6) --[[ Line: 68 | Named "mapDeveloperProductsToMonetizationProducts" ]]
+	-- upvalues: mapProduct (copy), config (copy)
+	local List = {}
 	
 	if p5 == nil then
-		return t_1
+		return List
 	end
-	for i, v in p5.developerProducts do
-		table.insert(t_1, mapProduct(v, p6 or t))
+	for _, developerProduct in p5.developerProducts do
+		table.insert(List, (mapProduct(developerProduct, p6 or config)))
 	end
-	return t_1
+	return List
 end

@@ -1,32 +1,32 @@
-﻿local dependenciesModule = require(script.Parent.Parent.dependencies)
-local eventNamesModule = require(script.Parent.Enums.EventNames)
-local dash = dependenciesModule.Dash
-local enums = dependenciesModule.SocialLuaAnalytics.Analytics.Enums
-local contexts = enums.Contexts
-local eventTypes = enums.EventTypes
-local btnValuesModule = require(script.Parent.Enums.BtnValues)
+﻿local DependenciesModule = require(script.Parent.Parent.dependencies)
+local EventNamesModule = require(script.Parent.Enums.EventNames)
+local Dash = DependenciesModule.Dash
+local Enums = DependenciesModule.SocialLuaAnalytics.Analytics.Enums
+local Contexts = Enums.Contexts
+local EventTypes = Enums.EventTypes
+local BtnValuesModule = require(script.Parent.Enums.BtnValues)
 
 return {
-	[eventNamesModule.DiscoverabilityModalLoad] = {
-		context = contexts.ContactImport,
-		eventType = eventTypes.DiscoverabilityModalLoad,
-		formatRulesForAdditionalInfo = { version = dash.identity, wordingVersion = dash.identity }
+	[EventNamesModule.DiscoverabilityModalLoad] = {
+		context = Contexts.ContactImport,
+		eventType = EventTypes.DiscoverabilityModalLoad,
+		formatRulesForAdditionalInfo = { version = Dash.identity, wordingVersion = Dash.identity }
 	},
-	[eventNamesModule.DiscoverabilityModalContinue] = {
-		context = contexts.ContactImport,
-		eventType = eventTypes.DiscoverabilityModalClick,
-		additionalInfo = { btn = btnValuesModule.ContactImporter },
-		formatRulesForAdditionalInfo = { selected = dash.identity }
+	[EventNamesModule.DiscoverabilityModalContinue] = {
+		context = Contexts.ContactImport,
+		eventType = EventTypes.DiscoverabilityModalClick,
+		additionalInfo = { btn = BtnValuesModule.ContactImporter },
+		formatRulesForAdditionalInfo = { selected = Dash.identity }
 	},
-	[eventNamesModule.DiscoverabilityModalClose] = {
-		context = contexts.ContactImport,
-		eventType = eventTypes.DiscoverabilityModalClick,
-		additionalInfo = { btn = btnValuesModule.Close },
-		formatRulesForAdditionalInfo = { selected = dash.identity }
+	[EventNamesModule.DiscoverabilityModalClose] = {
+		context = Contexts.ContactImport,
+		eventType = EventTypes.DiscoverabilityModalClick,
+		additionalInfo = { btn = BtnValuesModule.Close },
+		formatRulesForAdditionalInfo = { selected = Dash.identity }
 	},
-	[eventNamesModule.DiscoverabilityModalRadioButtonClick] = {
-		context = contexts.ContactImport,
-		eventType = eventTypes.DiscoverabilityModalRadioButtonClick,
-		formatRulesForAdditionalInfo = { selected = dash.identity }
+	[EventNamesModule.DiscoverabilityModalRadioButtonClick] = {
+		context = Contexts.ContactImport,
+		eventType = EventTypes.DiscoverabilityModalRadioButtonClick,
+		formatRulesForAdditionalInfo = { selected = Dash.identity }
 	}
 }

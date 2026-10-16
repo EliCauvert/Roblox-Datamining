@@ -1,22 +1,20 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local roduxModule = require(parent.Rodux)
-local cryoModule = require(parent.Cryo)
-local networkingCatalogModule = require(profilePlatform.Networking.NetworkingCatalog)
-local assetInfoModule = require(profilePlatform.Common.AssetInfo)
-local enumsModule = require(profilePlatform.Common.Enums)
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local CryoModule = require(Parent.Cryo)
+local AssetInfoModule = require(ProfilePlatform.Common.AssetInfo)
+local EnumsModule = require(ProfilePlatform.Common.Enums)
 
-return roduxModule.createReducer({}, {
-	[networkingCatalogModule.GetItemAndBundleDetails.Succeeded.name] = function(p1, p2)
-		-- upvalues: enumsModule (ref), assetInfoModule (ref), cryoModule (ref)
-		local t = {}
+return require(Parent.Rodux).createReducer({}, {
+	[require(ProfilePlatform.Networking.NetworkingCatalog).GetItemAndBundleDetails.Succeeded.name] = function(p1, p2) --[[ Line: 23 ]]
+		-- upvalues: EnumsModule (copy), AssetInfoModule (copy), CryoModule (copy)
+		local FromAssetResults = {}
 		
-		for i, v in p2.responseBody.data do
-			if v.itemType == enumsModule.ItemTypes.Asset then
-				local var1 = assetInfoModule.fromAsset(v)
-				t[var1.id] = var1
+		for _, entry in p2.responseBody.data do
+			if entry.itemType == EnumsModule.ItemTypes.Asset then
+				local FromAssetResult = AssetInfoModule.fromAsset(entry)
+				FromAssetResults[FromAssetResult.id] = FromAssetResult
 			end
 		end
-		return cryoModule.Dictionary.union(p1, t)
+		return CryoModule.Dictionary.union(p1, FromAssetResults)
 	end
 })

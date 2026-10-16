@@ -1,125 +1,128 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local libraryTileModule = require(script.Parent.Parent.LibraryTile)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local LibraryTileModule = require(script.Parent.Parent.LibraryTile)
 local _ = require(script.Parent.Parent.LibraryTypes)
-local useHardwareInsetsModule = require(buildExperience.Components.ChatSheet.useHardwareInsets)
-local scrollView = foundationModule.ScrollView
-local skeleton = foundationModule.Skeleton
-local view = foundationModule.View
-local radius = foundationModule.Enums.Radius
-local scrollBarVisibility = foundationModule.Enums.ScrollBarVisibility
+local UseHardwareInsetsModule = require(BuildExperience.Components.ChatSheet.useHardwareInsets)
+local ScrollView = FoundationModule.ScrollView
+local Skeleton = FoundationModule.Skeleton
+local View = FoundationModule.View
+local Radius = FoundationModule.Enums.Radius
+local ScrollBarVisibility = FoundationModule.Enums.ScrollBarVisibility
 
-return function(p1)
-	-- upvalues: foundationModule (ref), useHardwareInsetsModule (ref), reactModule (ref), view (ref), skeleton (ref), radius (ref), libraryTileModule (ref), scrollView (ref), scrollBarVisibility (ref)
-	local var1 = foundationModule.Hooks.useTokens()
-	local bottom = useHardwareInsetsModule().bottom
-	local medium = var1.Gap.Medium
-	local var2 = foundationModule.Hooks.useScaledValue(180)
-	local size1200 = var1.Size.Size_1200
-	local var3, var4 = reactModule.useState(Vector2.zero)
-	local maxValue = math.max(3, math.ceil((var3.X + medium) / (var2 + medium)))
-	local floored = math.floor(math.max(0, var3.X - medium * (maxValue - 1)) / maxValue)
-	local var5 = floored + size1200
-	local ceiled = math.ceil((if p1.isLoading then maxValue else #p1.items) / maxValue)
-	local maxValue_1 = math.max(0, ceiled * var5 + math.max(0, ceiled - 1) * medium)
-	local var6 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref)
-		if p1.hasMore then
-			p1.onLoadMore()
+return function(Frame) --[[ Line: 31 | Named "LibraryGridView" ]]
+	-- upvalues: FoundationModule (copy), UseHardwareInsetsModule (copy), ReactModule (copy), View (copy), Skeleton (copy), Radius (copy), LibraryTileModule (copy), ScrollView (copy), ScrollBarVisibility (copy)
+	local UseTokensResult = FoundationModule.Hooks.useTokens()
+	local Bottom = UseHardwareInsetsModule().bottom
+	local Medium = UseTokensResult.Gap.Medium
+	local UseScaledValueResult = FoundationModule.Hooks.useScaledValue(180)
+	local Size1200: number = UseTokensResult.Size.Size_1200
+	local UseStateResult, UseStateResult2 = ReactModule.useState(Vector2.zero)
+	local Largest = math.max(3, (math.ceil((UseStateResult.X + Medium) / (UseScaledValueResult + Medium))))
+	local Floored = math.floor(math.max(0, UseStateResult.X - Medium * (Largest - 1)) / Largest)
+	local YOffset = Floored + Size1200
+	local Ceiled = math.ceil((if Frame.isLoading then Largest else #Frame.items) / Largest)
+	local Largest1 = math.max(0, Ceiled * YOffset + math.max(0, Ceiled - 1) * Medium)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 47 ]]
+		-- upvalues: Frame (copy)
+		if Frame.hasMore then
+			Frame.onLoadMore()
 		end
-	end, { p1.hasMore, p1.onLoadMore })
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var3 (ref), maxValue_1 (ref), var6 (ref)
-		if p1.hasMore and var3.Y > 0 and maxValue_1 <= var3.Y then
-			var6()
+	end, { Frame.hasMore, Frame.onLoadMore })
+	ReactModule.useEffect(function() --[[ Line: 53 ]]
+		-- upvalues: Frame (copy), UseStateResult (copy), Largest1 (copy), UseResult (copy)
+		if Frame.hasMore and UseStateResult.Y > 0 and Largest1 <= UseStateResult.Y then
+			UseResult()
 		end
-	end, { var3.Y, maxValue_1, p1.hasMore, var6 })
-	local var7 = reactModule.useCallback(function(p2)
-		-- upvalues: p1 (ref), var5 (ref), var6 (ref)
-		if not p1.hasMore or var5 <= 0 then return end
-		if p2.AbsoluteCanvasSize.Y - var5 <= p2.CanvasPosition.Y + p2.AbsoluteWindowSize.Y then
-			var6()
+	end, { UseStateResult.Y, Largest1, Frame.hasMore, UseResult })
+	local UseResult1 = ReactModule.useCallback(function(ScrollFrame) --[[ Line: 59 ]]
+		-- upvalues: Frame (copy), YOffset (copy), UseResult (copy)
+		if not Frame.hasMore or YOffset <= 0 then return end
+		if ScrollFrame.AbsoluteCanvasSize.Y - YOffset <= ScrollFrame.CanvasPosition.Y + ScrollFrame.AbsoluteWindowSize.Y then
+			UseResult()
 		end
-	end, { var5, p1.hasMore, var6 })
-	local t = {}
+	end, { YOffset, Frame.hasMore, UseResult })
+	local Elements = {}
 	
-	if p1.isLoading then
-		for i = 1, maxValue do
-			t[tostring(i)] = reactModule.createElement(view, {
+	if Frame.isLoading then
+		for i = 1, Largest do
+			Elements[tostring(i)] = ReactModule.createElement(View, {
 				tag = "col gap-small",
 				LayoutOrder = i,
-				Size = UDim2.fromOffset(floored, var5),
+				Size = UDim2.fromOffset(Floored, YOffset),
 				testId = `Library.Category.Skeleton.{i}`
 			}, {
-				Thumbnail = reactModule.createElement(skeleton, {
+				Thumbnail = ReactModule.createElement(Skeleton, {
 					LayoutOrder = 1,
-					Size = UDim2.new(1, 0, 1, -size1200),
-					radius = radius.Medium
+					Size = UDim2.new(1, 0, 1, -Size1200),
+					radius = Radius.Medium
 				}),
-				Title = reactModule.createElement(skeleton, {
+				Title = ReactModule.createElement(Skeleton, {
 					LayoutOrder = 2,
-					Size = UDim2.new(0.75, 0, 0, var1.Size.Size_500),
-					radius = radius.Small
+					Size = UDim2.new(0.75, 0, 0, UseTokensResult.Size.Size_500),
+					radius = Radius.Small
 				})
 			})
 		end
 	else
-		for i, v in p1.items do
-			t[v.tileKey or (v.itemId or v.displayName)] = reactModule.createElement(view, { LayoutOrder = i, Size = UDim2.fromOffset(floored, var5) }, {
-				Tile = reactModule.createElement(libraryTileModule, {
-					tileKey = v.tileKey,
-					itemId = v.itemId,
-					itemKind = v.itemKind,
-					isFolder = v.isFolder,
-					folderPreview = v.folderPreview,
-					displayName = v.displayName,
-					unavailableText = v.unavailableText,
-					thumbnail = v.thumbnail,
-					model = v.model,
-					onActivated = v.onActivated,
+		for LayoutOrder, item in Frame.items do
+			Elements[item.tileKey or (item.itemId or item.displayName)] = ReactModule.createElement(View, {
+				LayoutOrder = LayoutOrder,
+				Size = UDim2.fromOffset(Floored, YOffset)
+			}, {
+				Tile = ReactModule.createElement(LibraryTileModule, {
+					tileKey = item.tileKey,
+					itemId = item.itemId,
+					itemKind = item.itemKind,
+					isFolder = item.isFolder,
+					folderPreview = item.folderPreview,
+					displayName = item.displayName,
+					unavailableText = item.unavailableText,
+					thumbnail = item.thumbnail,
+					model = item.model,
+					onActivated = item.onActivated,
 					Size = UDim2.fromScale(1, 1),
-					mediaSize = UDim2.new(1, 0, 1, -size1200)
+					mediaSize = UDim2.new(1, 0, 1, -Size1200)
 				})
 			})
 		end
 	end
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "size-full",
 		testId = "Library.Category.Grid",
-		LayoutOrder = p1.LayoutOrder,
-		onAbsoluteSizeChanged = function(value)
-			-- upvalues: var4 (ref)
-			var4(value.AbsoluteSize)
+		LayoutOrder = Frame.LayoutOrder,
+		onAbsoluteSizeChanged = function(Frame) --[[ Line: 118 ]]
+			-- upvalues: UseStateResult2 (copy)
+			UseStateResult2(Frame.AbsoluteSize)
 		end
 	}, {
-		Scroll = reactModule.createElement(scrollView, {
+		Scroll = ReactModule.createElement(ScrollView, {
 			BorderSizePixel = 0,
 			tag = "size-full",
 			testId = "Library.Category.Grid.Scroll",
-			onCanvasPositionChanged = var7,
-			scrollingFrameRef = p1.scrollingFrameRef,
+			onCanvasPositionChanged = UseResult1,
+			scrollingFrameRef = Frame.scrollingFrameRef,
 			scroll = {
 				AutomaticCanvasSize = Enum.AutomaticSize.Y,
-				CanvasSize = UDim2.new(1, 0, 0, maxValue_1),
+				CanvasSize = UDim2.new(1, 0, 0, Largest1),
 				ScrollingDirection = Enum.ScrollingDirection.Y,
-				scrollBarVisibility = scrollBarVisibility.None
+				scrollBarVisibility = ScrollBarVisibility.None
 			}
 		}, {
-			Content = reactModule.createElement(view, {
+			Content = ReactModule.createElement(View, {
 				tag = "size-full-0 auto-y",
 				testId = "Library.Category.Grid.Content",
-				padding = { bottom = UDim.new(0, bottom) }
+				padding = { bottom = UDim.new(0, Bottom) }
 			}, {
-				Layout = reactModule.createElement("UIGridLayout", {
-					CellPadding = UDim2.fromOffset(medium, medium),
-					CellSize = UDim2.fromOffset(floored, var5),
+				Layout = ReactModule.createElement("UIGridLayout", {
+					CellPadding = UDim2.fromOffset(Medium, Medium),
+					CellSize = UDim2.fromOffset(Floored, YOffset),
 					FillDirection = Enum.FillDirection.Horizontal,
 					HorizontalAlignment = Enum.HorizontalAlignment.Left,
 					SortOrder = Enum.SortOrder.LayoutOrder
 				}),
-				Items = reactModule.createElement(reactModule.Fragment, nil, t)
+				Items = ReactModule.createElement(ReactModule.Fragment, nil, Elements)
 			})
 		})
 	})

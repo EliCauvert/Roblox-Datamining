@@ -8,7 +8,7 @@
 	ADVERTISING_STANDARDS_START_MARKER = "<advertisingStandards>",
 	ADVERTISING_STANDARDS_END_MARKER = "</advertisingStandards>",
 	BALANCE_LOADING = "...",
-	BALANCE_UNAVAILABLE = "\226\128\148",
+	BALANCE_UNAVAILABLE = "—",
 	DEFAULT_RUN_START_TIME_MS = DateTime.fromUniversalTime(2026, 8, 25).UnixTimestampMillis,
 	DEFAULT_RUN_END_TIME_MS = DateTime.fromUniversalTime(2026, 8, 29).UnixTimestampMillis
 }

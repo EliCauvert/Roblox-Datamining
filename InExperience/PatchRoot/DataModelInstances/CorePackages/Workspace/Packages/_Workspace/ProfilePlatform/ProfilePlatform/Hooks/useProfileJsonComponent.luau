@@ -1,9 +1,9 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local _ = require(profilePlatform.Common.Enums)
-local getDeepValueModule = require(profilePlatform.Utils.getDeepValue)
-local useProfileJsonModule = require(profilePlatform.Hooks.useProfileJson)
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local _ = require(ProfilePlatform.Common.Enums)
+local GetDeepValueModule = require(ProfilePlatform.Utils.getDeepValue)
+local UseProfileJsonModule = require(ProfilePlatform.Hooks.useProfileJson)
 
-return function(p1)
-	-- upvalues: useProfileJsonModule (ref), getDeepValueModule (ref)
-	return getDeepValueModule(useProfileJsonModule(), `components.{p1}`) or {}
+return function(p1) --[[ Line: 7 ]]
+	-- upvalues: UseProfileJsonModule (copy), GetDeepValueModule (copy)
+	return GetDeepValueModule(UseProfileJsonModule(), `components.{p1}`) or {}
 end

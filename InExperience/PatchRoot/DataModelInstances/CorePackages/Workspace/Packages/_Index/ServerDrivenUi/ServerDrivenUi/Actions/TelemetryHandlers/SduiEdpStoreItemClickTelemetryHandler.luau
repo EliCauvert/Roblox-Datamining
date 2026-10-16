@@ -1,16 +1,19 @@
-﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
-local edpStoreAnalyticsModule = require(parent.EdpStoreAnalytics)
-local edpStoreAnalyticsLogger = edpStoreAnalyticsModule.EdpStoreAnalyticsLogger
-local storeEnums = edpStoreAnalyticsModule.Constants.StoreEnums
-local getActionTelemetryFieldValue = require(parent.SduiCoreSystem).getActionTelemetryFieldValue
+﻿local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
+local EdpStoreAnalyticsModule = require(Parent.EdpStoreAnalytics)
+local EdpStoreAnalyticsLogger = EdpStoreAnalyticsModule.EdpStoreAnalyticsLogger
+local StoreEnums = EdpStoreAnalyticsModule.Constants.StoreEnums
+local GetActionTelemetryFieldValueFunction = require(Parent.SduiCoreSystem).getActionTelemetryFieldValue
 
-return function(p1, p2, _)
-	-- upvalues: getActionTelemetryFieldValue (ref), edpStoreAnalyticsLogger (ref), storeEnums (ref)
-	local var1 = getActionTelemetryFieldValue(p1, p2, "productType")
+return function(p1, p2, _) --[[ Line: 16 | Named "SduiEdpStoreItemClickTelemetryHandler" ]]
+	-- upvalues: GetActionTelemetryFieldValueFunction (copy), EdpStoreAnalyticsLogger (copy), StoreEnums (copy)
+	local ProductType = GetActionTelemetryFieldValueFunction(p1, p2, "productType")
 	
-	if var1 == nil then
+	if ProductType ~= nil then
+		local EdpLocationType = GetActionTelemetryFieldValueFunction(p1, p2, "edpLocationType")
+		local UniverseId = GetActionTelemetryFieldValueFunction(p1, p2, "universeId")
+		local ProductId = GetActionTelemetryFieldValueFunction(p1, p2, "productId")
+		EdpStoreAnalyticsLogger.logEvent(StoreEnums.ActionType.ItemClick, ProductType, EdpLocationType, tonumber(UniverseId), tonumber(ProductId), (tostring(ProductId)))
+		
 		return
 	end
-	local var2 = getActionTelemetryFieldValue(p1, p2, "productId")
-	edpStoreAnalyticsLogger.logEvent(storeEnums.ActionType.ItemClick, var1, getActionTelemetryFieldValue(p1, p2, "edpLocationType"), tonumber(getActionTelemetryFieldValue(p1, p2, "universeId")), tonumber(var2), tostring(var2))
 end

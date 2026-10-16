@@ -1,90 +1,85 @@
-﻿local parent = script:FindFirstAncestor("SponsoredTiles").Parent
-local reactModule = require(parent.React)
-local useOverflowMenuOpen = require(parent.AppBlox).useOverflowMenuOpen
-local gameTileOverflowMenuAction = require(parent.DiscoveryAnalytics).Events.gameTileOverflowMenuAction
-local gameTileModule = require(parent.GameTile)
-local gameTileContextualActions = gameTileModule.GameTileContextualActions
-local gameTileOverflowMenu = gameTileModule.GameTileOverflowMenu
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagLuaAppGameTileNotInterestedDirectAction = sharedFlagsModule.FFlagLuaAppGameTileNotInterestedDirectAction
-local fFlagLuaAppEnableHomepageOneByTwoTile = sharedFlagsModule.FFlagLuaAppEnableHomepageOneByTwoTile
-local fFlagLuaAppNotInterestedReportPlaceId = sharedFlagsModule.FFlagLuaAppNotInterestedReportPlaceId
-local fFlagLuaAppEnableReportExperience = sharedFlagsModule.FFlagLuaAppEnableReportExperience
+﻿local Parent = script:FindFirstAncestor("SponsoredTiles").Parent
+local ReactModule = require(Parent.React)
+local UseOverflowMenuOpenFunction = require(Parent.AppBlox).useOverflowMenuOpen
+local GameTileOverflowMenuActionFunction = require(Parent.DiscoveryAnalytics).Events.gameTileOverflowMenuAction
+local GameTileModule = require(Parent.GameTile)
+local GameTileContextualActions = GameTileModule.GameTileContextualActions
+local GameTileOverflowMenu = GameTileModule.GameTileOverflowMenu
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagLuaAppGameTileNotInterestedDirectAction = SharedFlagsModule.FFlagLuaAppGameTileNotInterestedDirectAction
+local FFlagLuaAppEnableHomepageOneByTwoTile = SharedFlagsModule.FFlagLuaAppEnableHomepageOneByTwoTile
 
-return function(p1)
-	-- upvalues: useOverflowMenuOpen (ref), reactModule (ref), fFlagLuaAppEnableHomepageOneByTwoTile (ref), gameTileOverflowMenuAction (ref), fFlagLuaAppGameTileNotInterestedDirectAction (ref), gameTileContextualActions (ref), gameTileOverflowMenu (ref), fFlagLuaAppNotInterestedReportPlaceId (ref), fFlagLuaAppEnableReportExperience (ref)
-	local var1
-	local hoverKey = p1.hoverKey
-	local var2 = useOverflowMenuOpen(hoverKey)
-	local var3 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref)
-		local t = {}
+return function(p1) --[[ Line: 38 | Named "SpanTileOverflowMenu" ]]
+	-- upvalues: UseOverflowMenuOpenFunction (copy), ReactModule (copy), FFlagLuaAppEnableHomepageOneByTwoTile (copy), GameTileOverflowMenuActionFunction (copy), FFlagLuaAppGameTileNotInterestedDirectAction (copy), GameTileContextualActions (copy), GameTileOverflowMenu (copy)
+	local HoverKey = p1.hoverKey
+	local UseOverflowMenuOpenResult = UseOverflowMenuOpenFunction(HoverKey)
+	local UseMemoResult = ReactModule.useMemo(function(): string --[[ Line: 42 ]]
+		-- upvalues: p1 (copy)
+		local List = {}
 		
-		for i, v in p1.availableMenuItems do
-			table.insert(t, i)
+		for i, _ in p1.availableMenuItems do
+			table.insert(List, i)
 		end
-		return table.concat(t, ",")
+		return table.concat(List, ",")
 	end, { p1.availableMenuItems })
-	local var4 = reactModule.useCallback(function(p2, p3)
-		-- upvalues: fFlagLuaAppEnableHomepageOneByTwoTile (copy), p1 (ref), gameTileOverflowMenuAction (copy)
-		gameTileOverflowMenuAction({
-			universeId = if fFlagLuaAppEnableHomepageOneByTwoTile then tostring(p1.universeId or "") else p1.universeId,
+	local UseResult = ReactModule.useCallback(function(p2, AvailableMenuItems) --[[ Line: 51 ]]
+		-- upvalues: FFlagLuaAppEnableHomepageOneByTwoTile (upval), p1 (copy), GameTileOverflowMenuActionFunction (upval)
+		GameTileOverflowMenuActionFunction({
+			universeId = if FFlagLuaAppEnableHomepageOneByTwoTile then tostring(p1.universeId or "") else p1.universeId,
 			sortId = p1.topicId,
 			actionType = if p2 then "GameTileOverflowMenuClosed" else "GameTileOverflowMenuOpened",
-			availableMenuItems = p3,
-			contentType = if fFlagLuaAppEnableHomepageOneByTwoTile then p1.contentType else nil
+			availableMenuItems = AvailableMenuItems,
+			contentType = if FFlagLuaAppEnableHomepageOneByTwoTile then p1.contentType else nil
 		}, p1.appPage or "Unknown")
 	end, {
 		p1.universeId,
 		p1.appPage,
 		p1.topicId,
-		if fFlagLuaAppEnableHomepageOneByTwoTile then p1.contentType else nil
+		if FFlagLuaAppEnableHomepageOneByTwoTile then p1.contentType else nil
 	})
-	local var5 = reactModule.useRef(false)
-	local var6 = reactModule.useCallback(function(p2, p3)
-		-- upvalues: var5 (ref), var4 (ref)
-		var5.current = true
-		var4(p2, p3)
-	end, { var4 })
-	local var7 = reactModule.useRef(var2)
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), var7 (ref), var5 (ref), var4 (ref), var3 (ref)
-		if var2 ~= var7.current then
-			var7.current = var2
+	local UseRefResult = ReactModule.useRef(false)
+	local UseResult1 = ReactModule.useCallback(function(p2, p3) --[[ Line: 76 ]]
+		-- upvalues: UseRefResult (copy), UseResult (copy)
+		UseRefResult.current = true
+		UseResult(p2, p3)
+	end, { UseResult })
+	local UseRefResult1 = ReactModule.useRef(UseOverflowMenuOpenResult)
+	ReactModule.useEffect(function() --[[ Line: 84 ]]
+		-- upvalues: UseOverflowMenuOpenResult (copy), UseRefResult1 (copy), UseRefResult (copy), UseResult (copy), UseMemoResult (copy)
+		if UseOverflowMenuOpenResult ~= UseRefResult1.current then
+			UseRefResult1.current = UseOverflowMenuOpenResult
 			
-			if var2 and not var5.current then
-				var4(false, var3)
+			if UseOverflowMenuOpenResult and not UseRefResult.current then
+				UseResult(false, UseMemoResult)
 			end
-			var5.current = false
+			UseRefResult.current = false
 		end
-	end, { var2, var3, var4 })
+	end, { UseOverflowMenuOpenResult, UseMemoResult, UseResult })
+	local HasNextEntry: boolean = if p1.isHovered or p1.isSelected then next(p1.availableMenuItems) ~= nil else UseOverflowMenuOpenResult and next(p1.availableMenuItems) ~= nil
 	
-	if not p1.isHovered and not p1.isSelected then
-		var1 = var2 and next(p1.availableMenuItems) ~= nil
-	end
-	return if var1 then reactModule.createElement("Frame", {
+	return if HasNextEntry then ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.fromScale(1, 1),
 		ZIndex = p1.zIndex
 	}, {
-		OverflowMenu = reactModule.createElement(if fFlagLuaAppGameTileNotInterestedDirectAction then gameTileContextualActions else gameTileOverflowMenu, {
+		OverflowMenu = ReactModule.createElement(if FFlagLuaAppGameTileNotInterestedDirectAction then GameTileContextualActions else GameTileOverflowMenu, {
 			isHovered = p1.isHovered,
 			isSelected = p1.isSelected,
 			universeId = tostring(p1.universeId or ""),
-			placeId = if fFlagLuaAppNotInterestedReportPlaceId or fFlagLuaAppEnableReportExperience then p1.placeId else nil,
+			placeId = p1.placeId,
 			collectionId = p1.topicId,
 			appPage = p1.appPage,
 			setGameHidden = p1.setGameHidden,
-			menuKey = hoverKey,
-			menuOpen = var2,
-			onMenuOpenChanged = var6,
+			menuKey = HoverKey,
+			menuOpen = UseOverflowMenuOpenResult,
+			onMenuOpenChanged = UseResult1,
 			parentRef = p1.parentRef,
 			isSponsored = p1.isSponsored,
 			payerName = p1.payerName,
 			sponsoredUserCohort = p1.sponsoredUserCohort,
 			adId = p1.adId,
 			availableMenuItems = p1.availableMenuItems,
-			contentType = if fFlagLuaAppEnableHomepageOneByTwoTile then p1.contentType else nil
+			contentType = if FFlagLuaAppEnableHomepageOneByTwoTile then p1.contentType else nil
 		})
 	}) else nil
 end

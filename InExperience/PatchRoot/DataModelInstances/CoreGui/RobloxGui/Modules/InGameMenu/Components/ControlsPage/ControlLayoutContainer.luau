@@ -1,127 +1,126 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local inGameMenuDependenciesModule = require(corePackagesService.Packages.InGameMenuDependencies)
-local roact = inGameMenuDependenciesModule.Roact
-local roactRodux = inGameMenuDependenciesModule.RoactRodux
-local UIBlox = inGameMenuDependenciesModule.UIBlox
-local t = inGameMenuDependenciesModule.t
-local withFoundationOrUIBloxStyle = require(corePackagesService.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
-local foundationModule = require(corePackagesService.Packages.Foundation)
-local fFlagCoreUiMigrateUIBloxToFoundation = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
-local var1 = if fFlagCoreUiMigrateUIBloxToFoundation then foundationModule.UNSTABLE.withCursorMigration else UIBlox.App.SelectionImage.withSelectionCursorProvider
-local var2 = if fFlagCoreUiMigrateUIBloxToFoundation then foundationModule.Enums.CursorType else UIBlox.App.SelectionImage.CursorKind
-local parent = script.Parent.Parent.Parent
-local globalConfigModule = require(parent.GlobalConfig)
-local themedTextLabelModule = require(script.Parent.Parent.ThemedTextLabel)
-local dividerModule = require(script.Parent.Parent.Divider)
-local navigateBackModule = require(parent.Actions.NavigateBack)
-local withLocalizationModule = require(parent.Localization.withLocalization)
-local assetsModule = require(parent.Resources.Assets)
-local imageSetButton = UIBlox.Core.ImageSet.ImageSetButton
-local imageSetLabel = UIBlox.Core.ImageSet.ImageSetLabel
-local image = foundationModule.Image
-local var3 = t.strictInterface({
-	titleText = t.string,
-	[roact.Children] = t.optional(t.table),
-	onClosed = t.callback,
-	closeButtonRef = t.optional(t.table)
+﻿local CorePackages = game:GetService("CorePackages")
+local InGameMenuDependenciesModule = require(CorePackages.Packages.InGameMenuDependencies)
+local Roact = InGameMenuDependenciesModule.Roact
+local UIBlox = InGameMenuDependenciesModule.UIBlox
+local T = InGameMenuDependenciesModule.t
+local WithFoundationOrUIBloxStyleFunction = require(CorePackages.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local FFlagCoreUiMigrateUIBloxToFoundation = require(CorePackages.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
+local WithCursorMigration = if FFlagCoreUiMigrateUIBloxToFoundation then FoundationModule.UNSTABLE.withCursorMigration else UIBlox.App.SelectionImage.withSelectionCursorProvider
+local CursorType = if FFlagCoreUiMigrateUIBloxToFoundation then FoundationModule.Enums.CursorType else UIBlox.App.SelectionImage.CursorKind
+local Parent = script.Parent.Parent.Parent
+local GlobalConfigModule = require(Parent.GlobalConfig)
+local ThemedTextLabelModule = require(script.Parent.Parent.ThemedTextLabel)
+local DividerModule = require(script.Parent.Parent.Divider)
+local NavigateBackModule = require(Parent.Actions.NavigateBack)
+local WithLocalizationModule = require(Parent.Localization.withLocalization)
+local AssetsModule = require(Parent.Resources.Assets)
+local ImageSetButton = UIBlox.Core.ImageSet.ImageSetButton
+local ImageSetLabel = UIBlox.Core.ImageSet.ImageSetLabel
+local Image = FoundationModule.Image
+local StrictInterfaceResult = T.strictInterface({
+	titleText = T.string,
+	[Roact.Children] = T.optional(T.table),
+	onClosed = T.callback,
+	closeButtonRef = T.optional(T.table)
 })
 
-local function ControlLayoutContainerWithSelectionCursor(p1, p2)
-	-- upvalues: globalConfigModule (ref), var3 (ref), withLocalizationModule (ref), withFoundationOrUIBloxStyle (ref), roact (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), image (ref), assetsModule (ref), var2 (ref), imageSetButton (ref), themedTextLabelModule (ref), dividerModule (ref), imageSetLabel (ref)
-	if globalConfigModule.propValidation then
-		assert(var3(p1))
+local function ControlLayoutContainerWithSelectionCursor(p1, Callback) --[[ Line: 53 ]]
+	-- upvalues: GlobalConfigModule (copy), StrictInterfaceResult (copy), WithLocalizationModule (copy), WithFoundationOrUIBloxStyleFunction (copy), Roact (copy), FFlagCoreUiMigrateUIBloxToFoundation (copy), Image (copy), AssetsModule (copy), CursorType (copy), ImageSetButton (copy), ThemedTextLabelModule (copy), DividerModule (copy), ImageSetLabel (copy)
+	if GlobalConfigModule.propValidation then
+		assert(StrictInterfaceResult(p1))
 	end
-	return withLocalizationModule({ titleText = p1.titleText })(function(p3)
-		-- upvalues: withFoundationOrUIBloxStyle (copy), roact (copy), p1 (ref), fFlagCoreUiMigrateUIBloxToFoundation (copy), image (copy), assetsModule (copy), p2 (ref), var2 (copy), imageSetButton (copy), themedTextLabelModule (copy), dividerModule (copy), imageSetLabel (copy)
-		return withFoundationOrUIBloxStyle(function(p4)
+	return WithLocalizationModule({ titleText = p1.titleText })(function(p2) --[[ Line: 60 ]]
+		-- upvalues: WithFoundationOrUIBloxStyleFunction (upval), Roact (upval), p1 (copy), FFlagCoreUiMigrateUIBloxToFoundation (upval), Image (upval), AssetsModule (upval), Callback (copy), CursorType (upval), ImageSetButton (upval), ThemedTextLabelModule (upval), DividerModule (upval), ImageSetLabel (upval)
+		return WithFoundationOrUIBloxStyleFunction(function(p3) --[[ Line: 61 ]]
 			return {
 				Theme = {
 					Overlay = {
-						Color = p4.Color.Common.Scrim.Color3,
-						Transparency = p4.Color.Common.Scrim.Transparency
+						Color = p3.Color.Common.Scrim.Color3,
+						Transparency = p3.Color.Common.Scrim.Transparency
 					}
 				}
 			}
-		end, function(p4)
-			-- upvalues: roact (copy), p1 (copy), fFlagCoreUiMigrateUIBloxToFoundation (copy), image (copy), assetsModule (copy), p2 (copy), var2 (copy), imageSetButton (copy), themedTextLabelModule (copy), p3 (ref), dividerModule (copy), imageSetLabel (copy)
-			return roact.createElement("Frame", {
+		end, function(p3) --[[ Line: 70 ]]
+			-- upvalues: Roact (upval), p1 (upval), FFlagCoreUiMigrateUIBloxToFoundation (upval), Image (upval), AssetsModule (upval), Callback (upval), CursorType (upval), ImageSetButton (upval), ThemedTextLabelModule (upval), p2 (copy), DividerModule (upval), ImageSetLabel (upval)
+			return Roact.createElement("Frame", {
 				BackgroundTransparency = 0,
 				Active = true,
 				Size = UDim2.new(1, 0, 1, 0),
-				BackgroundColor3 = p4.Theme.Overlay.Color
+				BackgroundColor3 = p3.Theme.Overlay.Color
 			}, {
-				PageContent = roact.createElement("Frame", {
+				PageContent = Roact.createElement("Frame", {
 					BackgroundTransparency = 1,
 					ClipsDescendants = true,
 					Size = UDim2.new(1, 0, 1, -132),
 					Position = UDim2.new(0, 0, 0, 132)
-				}, p1[roact.Children]),
-				HeaderContainer = roact.createElement("Frame", {
+				}, p1[Roact.Children]),
+				HeaderContainer = Roact.createElement("Frame", {
 					BackgroundTransparency = 1,
 					Size = UDim2.new(1, 0, 0, 132)
 				}, {
-					Padding = roact.createElement("UIPadding", {
+					Padding = Roact.createElement("UIPadding", {
 						PaddingLeft = UDim.new(0, 95),
 						PaddingRight = UDim.new(0, 95)
 					}),
-					CloseButton = if fFlagCoreUiMigrateUIBloxToFoundation then roact.createElement(image, {
+					CloseButton = if FFlagCoreUiMigrateUIBloxToFoundation then Roact.createElement(Image, {
 						AnchorPoint = Vector2.new(0, 0.5),
 						Position = UDim2.new(0, 0, 0, 100),
 						Size = UDim2.new(0, 36, 0, 36),
 						backgroundStyle = { Transparency = 1 },
-						Image = assetsModule.Images.CloseModal,
-						selection = { SelectionImageObject = p2(var2.RoundedRect) },
+						Image = AssetsModule.Images.CloseModal,
+						selection = { SelectionImageObject = Callback(CursorType.RoundedRect) },
 						onActivated = p1.onClosed,
 						ref = p1.closeButtonRef
-					}) else roact.createElement(imageSetButton, {
+					}) else Roact.createElement(ImageSetButton, {
 						AnchorPoint = Vector2.new(0, 0.5),
 						Position = UDim2.new(0, 0, 0, 100),
 						Size = UDim2.new(0, 36, 0, 36),
-						Image = assetsModule.Images.CloseModal,
+						Image = AssetsModule.Images.CloseModal,
 						BackgroundTransparency = 1,
-						SelectionImageObject = p2(var2.RoundedRect),
-						[roact.Event.Activated] = p1.onClosed,
-						[roact.Ref] = p1.closeButtonRef
+						SelectionImageObject = Callback(CursorType.RoundedRect),
+						[Roact.Event.Activated] = p1.onClosed,
+						[Roact.Ref] = p1.closeButtonRef
 					}),
-					HeaderTextLabel = roact.createElement(themedTextLabelModule, {
+					HeaderTextLabel = Roact.createElement(ThemedTextLabelModule, {
 						fontKey = "Header1",
 						themeKey = "TextEmphasis",
 						Size = UDim2.new(0, 250, 0, 28),
 						AnchorPoint = Vector2.new(0.5, 0.5),
 						Position = UDim2.new(0.5, 0, 0, 100),
-						Text = p3.titleText
+						Text = p2.titleText
 					}),
-					HeaderDivider = roact.createElement(dividerModule, {
+					HeaderDivider = Roact.createElement(DividerModule, {
 						Size = UDim2.new(1, 0, 0, 2),
 						AnchorPoint = Vector2.new(0.5, 1),
 						Position = UDim2.new(0.5, 0, 1, 0)
 					})
 				}),
-				RadialGlowBig = if fFlagCoreUiMigrateUIBloxToFoundation then roact.createElement(image, {
-					Image = assetsModule.Images.RadialGlow,
+				RadialGlowBig = if FFlagCoreUiMigrateUIBloxToFoundation then Roact.createElement(Image, {
+					Image = AssetsModule.Images.RadialGlow,
 					AnchorPoint = Vector2.new(0.5, 0.5),
 					Position = UDim2.new(0.5, 0, 0.5, 0),
 					backgroundStyle = { Transparency = 1 },
 					SizeConstraint = Enum.SizeConstraint.RelativeXX,
 					Size = UDim2.new(1, 0, 1, 0)
-				}) else roact.createElement(imageSetLabel, {
+				}) else Roact.createElement(ImageSetLabel, {
 					BackgroundTransparency = 1,
-					Image = assetsModule.Images.RadialGlow,
+					Image = AssetsModule.Images.RadialGlow,
 					AnchorPoint = Vector2.new(0.5, 0.5),
 					Position = UDim2.new(0.5, 0, 0.5, 0),
 					SizeConstraint = Enum.SizeConstraint.RelativeXX,
 					Size = UDim2.new(1, 0, 1, 0)
 				}),
-				RadialGlowSquashed = if fFlagCoreUiMigrateUIBloxToFoundation then roact.createElement(image, {
-					Image = assetsModule.Images.RadialGlow,
+				RadialGlowSquashed = if FFlagCoreUiMigrateUIBloxToFoundation then Roact.createElement(Image, {
+					Image = AssetsModule.Images.RadialGlow,
 					AnchorPoint = Vector2.new(0.5, 0.5),
 					Position = UDim2.new(0.5, 0, 1, 0),
 					backgroundStyle = { Transparency = 1 },
 					SizeConstraint = Enum.SizeConstraint.RelativeXX,
 					Size = UDim2.new(1, 0, 0.6, 0)
-				}) else roact.createElement(imageSetLabel, {
+				}) else Roact.createElement(ImageSetLabel, {
 					BackgroundTransparency = 1,
-					Image = assetsModule.Images.RadialGlow,
+					Image = AssetsModule.Images.RadialGlow,
 					AnchorPoint = Vector2.new(0.5, 0.5),
 					Position = UDim2.new(0.5, 0, 1, 0),
 					SizeConstraint = Enum.SizeConstraint.RelativeXX,
@@ -132,18 +131,18 @@ local function ControlLayoutContainerWithSelectionCursor(p1, p2)
 	end)
 end
 
-return roactRodux.UNSTABLE_connect2(nil, function(p1)
-	-- upvalues: navigateBackModule (ref)
+return InGameMenuDependenciesModule.RoactRodux.UNSTABLE_connect2(nil, function(Callback) --[[ Line: 188 ]]
+	-- upvalues: NavigateBackModule (copy)
 	return {
-		onClosed = function()
-			-- upvalues: p1 (ref), navigateBackModule (copy)
-			p1(navigateBackModule())
+		onClosed = function() --[[ Line: 190 ]]
+			-- upvalues: Callback (copy), NavigateBackModule (upval)
+			Callback(NavigateBackModule())
 		end
 	}
-end)(function(p1)
-	-- upvalues: var1 (ref), ControlLayoutContainerWithSelectionCursor (ref)
-	return var1(function(p2)
-		-- upvalues: ControlLayoutContainerWithSelectionCursor (copy), p1 (ref)
+end)(function(p1) --[[ Line: 182 | Named "ControlLayoutContainer" ]]
+	-- upvalues: WithCursorMigration (copy), ControlLayoutContainerWithSelectionCursor (copy)
+	return WithCursorMigration(function(p2) --[[ Line: 183 ]]
+		-- upvalues: ControlLayoutContainerWithSelectionCursor (upval), p1 (copy)
 		return ControlLayoutContainerWithSelectionCursor(p1, p2)
 	end)
 end)

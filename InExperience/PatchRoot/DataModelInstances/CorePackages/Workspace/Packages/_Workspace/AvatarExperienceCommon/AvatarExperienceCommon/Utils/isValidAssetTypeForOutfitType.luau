@@ -1,10 +1,10 @@
-﻿local avatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
-local ASSET_TYPE_NAME_TO_ID_STRING = require(avatarExperienceCommon.Constants).ASSET_TYPE_NAME_TO_ID_STRING
-local isMakeupAssetTypeModule = require(avatarExperienceCommon.Utils.isMakeupAssetType)
-local _ = require(avatarExperienceCommon.Types.CategoryTypes.CategoryTypes)
-local outfitTypesModule = require(avatarExperienceCommon.Enums.OutfitTypes)
+﻿local AvatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
+local ASSETTYPENAMETOIDSTRING = require(AvatarExperienceCommon.Constants).ASSET_TYPE_NAME_TO_ID_STRING
+local IsMakeupAssetTypeModule = require(AvatarExperienceCommon.Utils.isMakeupAssetType)
+local _ = require(AvatarExperienceCommon.Types.CategoryTypes.CategoryTypes)
+local OutfitTypesModule = require(AvatarExperienceCommon.Enums.OutfitTypes)
 
-return function(value, p1)
-	-- upvalues: outfitTypesModule (ref), isMakeupAssetTypeModule (ref), ASSET_TYPE_NAME_TO_ID_STRING (ref)
-	return if p1 then if p1 == outfitTypesModule.Makeup then isMakeupAssetTypeModule(value) or (if value ~= ASSET_TYPE_NAME_TO_ID_STRING.EyebrowAccessory then value == ASSET_TYPE_NAME_TO_ID_STRING.EyelashAccessory else true) else true else true
+return function(EyebrowAccessory, Avatar) --[[ Line: 11 | Named "isValidAssetTypeForOutfitType" ]]
+	-- upvalues: OutfitTypesModule (copy), IsMakeupAssetTypeModule (copy), ASSETTYPENAMETOIDSTRING (copy)
+	return not Avatar or (if Avatar == OutfitTypesModule.Makeup then IsMakeupAssetTypeModule(EyebrowAccessory) or (EyebrowAccessory == ASSETTYPENAMETOIDSTRING.EyebrowAccessory or EyebrowAccessory == ASSETTYPENAMETOIDSTRING.EyelashAccessory) else Avatar == OutfitTypesModule.Avatar or Avatar == OutfitTypesModule.EditableAvatar or true)
 end

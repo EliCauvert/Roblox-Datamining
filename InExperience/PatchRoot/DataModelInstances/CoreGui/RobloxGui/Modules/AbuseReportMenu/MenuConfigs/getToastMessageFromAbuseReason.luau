@@ -1,20 +1,8 @@
-﻿local constantsModule = require(script:FindFirstAncestor("AbuseReportMenu").Components.Constants)
-local reportSuccessToast = constantsModule.ReportSuccessToast
-local playerAbuseTypes = constantsModule.PlayerAbuseTypes
+﻿local ConstantsModule = require(script:FindFirstAncestor("AbuseReportMenu").Components.Constants)
+local ReportSuccessToast = ConstantsModule.ReportSuccessToast
+local PlayerAbuseTypes = ConstantsModule.PlayerAbuseTypes
 
-return function(p1, p2)
-	-- upvalues: reportSuccessToast (ref), playerAbuseTypes (ref), constantsModule (ref)
-	local chatGeneric = reportSuccessToast.ChatGeneric
-	
-	if p1 == playerAbuseTypes.Cheating then
-		chatGeneric = reportSuccessToast.Cheating
-	elseif p1 == playerAbuseTypes.Username then
-		chatGeneric = reportSuccessToast.BadUserName
-	elseif p1 == playerAbuseTypes.Links or p1 == constantsModule.InappropriateContentAbuseReason then
-		chatGeneric = reportSuccessToast.Place
-	end
-	if p2 then
-		chatGeneric = reportSuccessToast.ReportAnythingGeneric
-	end
-	return chatGeneric
+return function(Cheating, p1) --[[ Line: 6 | Named "getToastMessageFromAbuseReason" ]]
+	-- upvalues: ReportSuccessToast (copy), PlayerAbuseTypes (copy), ConstantsModule (copy)
+	return if Cheating == PlayerAbuseTypes.Cheating then if p1 then ReportSuccessToast.ReportAnythingGeneric else ReportSuccessToast.Cheating elseif Cheating == PlayerAbuseTypes.Username then if p1 then ReportSuccessToast.ReportAnythingGeneric else ReportSuccessToast.BadUserName elseif Cheating == PlayerAbuseTypes.Links or Cheating == ConstantsModule.InappropriateContentAbuseReason then if p1 then ReportSuccessToast.ReportAnythingGeneric else ReportSuccessToast.Place elseif p1 then ReportSuccessToast.ReportAnythingGeneric else ReportSuccessToast.ChatGeneric
 end

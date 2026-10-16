@@ -1,24 +1,24 @@
-﻿local uiShellEvents = script:FindFirstAncestor("UiShellEvents")
-local parent = uiShellEvents.Parent
-local loggerModule = require(uiShellEvents.Logger)
-local tModule = require(parent.t)
-local _ = require(parent.RobloxAppEnums)
-local orientationUseTelemetryService = game:DefineFastFlag("OrientationUseTelemetryService", false)
-local var1 = if orientationUseTelemetryService then game:GetService("TelemetryService") else nil
-local var2 = tModule.strictInterface({
-	deviceOrientation = tModule.string,
-	experienceOrientation = tModule.optional(tModule.string),
-	page = tModule.optional(tModule.string),
-	viewportX = tModule.number,
-	viewportY = tModule.number,
-	universeId = tModule.optional(tModule.string),
-	l2a_session_id = tModule.optional(tModule.string),
-	l2b_session_id = tModule.optional(tModule.string),
-	l2a_session_tag = tModule.optional(tModule.string),
-	l2b_session_tag = tModule.optional(tModule.string)
+﻿local UiShellEvents = script:FindFirstAncestor("UiShellEvents")
+local Parent = UiShellEvents.Parent
+local LoggerModule = require(UiShellEvents.Logger)
+local TModule = require(Parent.t)
+local _ = require(Parent.RobloxAppEnums)
+local OrientationUseTelemetryService = game:DefineFastFlag("OrientationUseTelemetryService", false)
+local TelemetryService = if OrientationUseTelemetryService then game:GetService("TelemetryService") else nil
+local StrictInterfaceResult = TModule.strictInterface({
+	deviceOrientation = TModule.string,
+	experienceOrientation = TModule.optional(TModule.string),
+	page = TModule.optional(TModule.string),
+	viewportX = TModule.number,
+	viewportY = TModule.number,
+	universeId = TModule.optional(TModule.string),
+	l2a_session_id = TModule.optional(TModule.string),
+	l2b_session_id = TModule.optional(TModule.string),
+	l2a_session_tag = TModule.optional(TModule.string),
+	l2b_session_tag = TModule.optional(TModule.string)
 })
 game:DefineFastInt("UiShellOrientationChangedThrottleHundredthsPercent", 10000)
-local t = {
+local config = {
 	eventName = "uiShellOrientationChanged",
 	description = "Fired when device or app orientation changes on mobile.",
 	links = "",
@@ -27,21 +27,22 @@ local t = {
 	lastUpdated = { 2026, 5, 6 }
 }
 
-return function(p1, p2, p3)
-	-- upvalues: var2 (ref), loggerModule (ref), orientationUseTelemetryService (ref), var1 (ref), t (ref)
-	local var3, var4 = var2(p3)
+return function(p1, EventContext, CustomFields) --[[ Line: 50 ]]
+	-- upvalues: StrictInterfaceResult (copy), LoggerModule (copy), OrientationUseTelemetryService (copy), TelemetryService (copy), config (copy)
+	local StrictInterfaceResultResult, StrictInterfaceResultResult2 = StrictInterfaceResult(CustomFields)
 	
-	if not var3 then
-		loggerModule:error(var4)
+	if not StrictInterfaceResultResult then
+		LoggerModule:error(StrictInterfaceResultResult2)
 	end
-	if orientationUseTelemetryService and var1 then
-		var1:LogEvent(t, {
-			eventContext = p2,
-			customFields = p3,
+	if OrientationUseTelemetryService and TelemetryService then
+		TelemetryService:LogEvent(config, {
+			eventContext = EventContext,
+			customFields = CustomFields,
 			standardizedFields = { "addSessionInfo", "addSessionId", "addOSInfo" }
 		})
 		
 		return
+	else
+		p1:sendEventDeferred(EventContext, "uiShellOrientationChanged", CustomFields)
 	end
-	p1:sendEventDeferred(p2, "uiShellOrientationChanged", p3)
 end

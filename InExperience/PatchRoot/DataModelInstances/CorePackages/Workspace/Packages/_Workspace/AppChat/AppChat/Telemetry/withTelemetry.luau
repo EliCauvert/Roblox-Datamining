@@ -1,16 +1,16 @@
-﻿local reactModule = require(script:FindFirstAncestor("AppChat").Parent.React)
-local createTelemetryEmitterModule = require(script.Parent.createTelemetryEmitter)
+﻿local ReactModule = require(script:FindFirstAncestor("AppChat").Parent.React)
+local CreateTelemetryEmitterModule = require(script.Parent.createTelemetryEmitter)
 
-return function(p1)
-	-- upvalues: createTelemetryEmitterModule (ref), reactModule (ref)
-	return function(p2)
-		-- upvalues: createTelemetryEmitterModule (copy), reactModule (copy), p1 (ref)
-		assert(type(p2) == "function", "Expect renderCallback to be a function.")
+return function(p1) --[[ Line: 7 ]]
+	-- upvalues: CreateTelemetryEmitterModule (copy), ReactModule (copy)
+	return function(Callback) --[[ Line: 8 ]]
+		-- upvalues: CreateTelemetryEmitterModule (upval), ReactModule (upval), p1 (copy)
+		assert(type(Callback) == "function", "Expect renderCallback to be a function.")
 		
-		return reactModule.createElement(p1.Consumer, {
-			render = function(p3)
-				-- upvalues: createTelemetryEmitterModule (copy), p2 (ref)
-				return p2(createTelemetryEmitterModule(p3))
+		return ReactModule.createElement(p1.Consumer, {
+			render = function(p2) --[[ Line: 11 ]]
+				-- upvalues: CreateTelemetryEmitterModule (upval), Callback (copy)
+				return Callback((CreateTelemetryEmitterModule(p2)))
 			end
 		})
 	end

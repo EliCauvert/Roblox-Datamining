@@ -1,13 +1,13 @@
-﻿local telemetryService = game:GetService("TelemetryService")
-local parent = script:FindFirstAncestor("DiscoveryAnalytics").Parent
-local tModule = require(parent.t)
-local discoveryEventErrorLogger = require(parent.DiscoveryUtils).DiscoveryEventErrorLogger
-local var1 = tModule.strictInterface({
-	universeId = tModule.string,
-	playabilityStatus = tModule.optional(tModule.string),
-	contextualMessage = tModule.string
+﻿local TelemetryService = game:GetService("TelemetryService")
+local Parent = script:FindFirstAncestor("DiscoveryAnalytics").Parent
+local TModule = require(Parent.t)
+local DiscoveryEventErrorLogger = require(Parent.DiscoveryUtils).DiscoveryEventErrorLogger
+local StrictInterfaceResult = TModule.strictInterface({
+	universeId = TModule.string,
+	playabilityStatus = TModule.optional(TModule.string),
+	contextualMessage = TModule.string
 })
-local t = {
+local config = {
 	eventName = "playButtonContextualMessageImpression",
 	description = "Impressions for play button contextual message",
 	backends = { "EventIngest" },
@@ -15,16 +15,16 @@ local t = {
 	lastUpdated = { 26, 5, 6 }
 }
 
-return function(p1, p2)
-	-- upvalues: var1 (ref), discoveryEventErrorLogger (ref), telemetryService (ref), t (ref)
-	local var2, var3 = var1(p1)
+return function(CustomFields, EventContext) --[[ Line: 23 | Named "sendPlayButtonContextualMessageImpressionEvent" ]]
+	-- upvalues: StrictInterfaceResult (copy), DiscoveryEventErrorLogger (copy), TelemetryService (copy), config (copy)
+	local StrictInterfaceResultResult, StrictInterfaceResultResult2 = StrictInterfaceResult(CustomFields)
 	
-	if not var2 then
-		discoveryEventErrorLogger.reportError("PlayButtonContextualMessageImpressionInvalidInterface", var3)
+	if not StrictInterfaceResultResult then
+		DiscoveryEventErrorLogger.reportError("PlayButtonContextualMessageImpressionInvalidInterface", StrictInterfaceResultResult2)
 	end
-	telemetryService:LogEvent(t, {
-		eventContext = p2,
+	TelemetryService:LogEvent(config, {
+		eventContext = EventContext,
 		standardizedFields = { "addSessionInfo", "addSessionId", "addOSInfo" },
-		customFields = p1
+		customFields = CustomFields
 	})
 end

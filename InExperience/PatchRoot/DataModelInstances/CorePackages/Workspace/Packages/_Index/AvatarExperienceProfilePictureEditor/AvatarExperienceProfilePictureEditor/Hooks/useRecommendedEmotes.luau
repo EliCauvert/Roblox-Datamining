@@ -1,42 +1,44 @@
-﻿local avatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
-local reactModule = require(avatarExperienceProfilePictureEditor.Parent.React)
-local fetchInternalModule = require(avatarExperienceProfilePictureEditor.Api.fetchInternal)
-local getEmoteRecommendationsModule = require(avatarExperienceProfilePictureEditor.Shared.getEmoteRecommendations)
-local enumsModule = require(avatarExperienceProfilePictureEditor.Common.Enums)
+﻿local AvatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
+local ReactModule = require(AvatarExperienceProfilePictureEditor.Parent.React)
+local FetchInternalModule = require(AvatarExperienceProfilePictureEditor.Api.fetchInternal)
+local GetEmoteRecommendationsModule = require(AvatarExperienceProfilePictureEditor.Shared.getEmoteRecommendations)
+local EnumsModule = require(AvatarExperienceProfilePictureEditor.Common.Enums)
 
-return function()
-	-- upvalues: reactModule (ref), getEmoteRecommendationsModule (ref), fetchInternalModule (ref), enumsModule (ref)
-	local var1, var2 = reactModule.useState({})
-	local var3, var4 = reactModule.useState(true)
-	local var5, var6 = reactModule.useState(false)
-	reactModule.useEffect(function()
-		-- upvalues: getEmoteRecommendationsModule (copy), fetchInternalModule (copy), enumsModule (copy), var2 (ref), var4 (ref), var6 (ref)
-		local var7 = false
-		fetchInternalModule(getEmoteRecommendationsModule.getEmoteRecommendationsUrl(), enumsModule.RequestMethods.GET):andThen(function(p1)
-			-- upvalues: var7 (write), var2 (copy), getEmoteRecommendationsModule (copy), var4 (copy)
-			if var7 then
+return function() --[[ Line: 16 | Named "useRecommendedEmotes" ]]
+	-- upvalues: ReactModule (copy), GetEmoteRecommendationsModule (copy), FetchInternalModule (copy), EnumsModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState({})
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(true)
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(false)
+	ReactModule.useEffect(function() --[[ Line: 21 ]]
+		-- upvalues: GetEmoteRecommendationsModule (upval), FetchInternalModule (upval), EnumsModule (upval), UseStateResult2 (copy), UseStateResult2_1 (copy), UseStateResult2_2 (copy)
+		local Flag = false
+		FetchInternalModule(GetEmoteRecommendationsModule.getEmoteRecommendationsUrl(), EnumsModule.RequestMethods.GET):andThen(function(Result) --[[ Line: 26 ]]
+			-- upvalues: Flag (ref), UseStateResult2 (upval), GetEmoteRecommendationsModule (upval), UseStateResult2_1 (upval)
+			if not Flag then
+				UseStateResult2(GetEmoteRecommendationsModule.parseEmoteRecommendationsResponse(Result.responseBody))
+				UseStateResult2_1(false)
+				
 				return
 			end
-			var2(getEmoteRecommendationsModule.parseEmoteRecommendationsResponse(p1.responseBody))
-			var4(false)
-		end):catch(function()
-			-- upvalues: var7 (write), var6 (copy), var4 (copy)
-			if var7 then
+		end):catch(function() --[[ Line: 33 ]]
+			-- upvalues: Flag (ref), UseStateResult2_2 (upval), UseStateResult2_1 (upval)
+			if not Flag then
+				UseStateResult2_2(true)
+				UseStateResult2_1(false)
+				
 				return
 			end
-			var6(true)
-			var4(false)
 		end)
 		
-		return function()
-			-- upvalues: var7 (write)
-			var7 = true
+		return function() --[[ Line: 41 ]]
+			-- upvalues: Flag (ref)
+			Flag = true
 		end
 	end, {})
 	
 	return {
-		recommendedEmotes = var1,
-		isLoading = var3,
-		hasError = var5
+		recommendedEmotes = UseStateResult,
+		isLoading = UseStateResult1,
+		hasError = UseStateResult3
 	}
 end

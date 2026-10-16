@@ -1,58 +1,64 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local dialog = foundationModule.Dialog
-local dialogSize = foundationModule.Enums.DialogSize
-local buttonVariant = foundationModule.Enums.ButtonVariant
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
+local Dialog = FoundationModule.Dialog
+local DialogSize = FoundationModule.Enums.DialogSize
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
 
-return function(p1)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), reactModule (ref), buttonVariant (ref), dialog (ref), dialogSize (ref)
-	local var1 = useLocalization({
-		archiveGame = localizationStringsModule.ARCHIVE_GAME_ARCHIVE,
-		cancel = localizationStringsModule.ARCHIVE_GAME_CANCEL,
-		description = localizationStringsModule.ARCHIVE_GAME_DESCRIPTION,
-		title = localizationStringsModule.ARCHIVE_GAME_TITLE
+return function(p1) --[[ Line: 27 | Named "ArchiveGameDialog" ]]
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), ButtonVariant (copy), Dialog (copy), DialogSize (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
+		archiveGame = LocalizationStringsModule.ARCHIVE_GAME_ARCHIVE,
+		cancel = LocalizationStringsModule.ARCHIVE_GAME_CANCEL,
+		description = LocalizationStringsModule.ARCHIVE_GAME_DESCRIPTION,
+		title = LocalizationStringsModule.ARCHIVE_GAME_TITLE
 	})
-	local testId = p1.testId or "archive-game-dialog"
-	local var2 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref)
+	local TestId = p1.testId or "archive-game-dialog"
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 35 ]]
+		-- upvalues: p1 (copy)
 		p1.onArchive()
 	end, { p1.onArchive })
-	local var3 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref)
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 38 ]]
+		-- upvalues: p1 (copy)
 		p1.onCancel()
 	end, { p1.onCancel })
-	
-	return if p1.isOpen == false then nil else reactModule.createElement(dialog.Root, {
-		disablePortal = p1.disablePortal == true,
-		hasBackdrop = p1.hasBackdrop == nil or p1.hasBackdrop,
-		size = dialogSize.Small,
-		testId = testId
-	}, {
-		Title = reactModule.createElement(dialog.Title, { LayoutOrder = 1, text = p1.title or var1.title }),
-		Content = reactModule.createElement(dialog.Content, { LayoutOrder = 2 }, {
-			Description = reactModule.createElement(dialog.Text, { Text = p1.description or var1.description })
-		}),
-		Actions = reactModule.createElement(dialog.Actions, reactModule.useMemo(function()
-			-- upvalues: var1 (ref), buttonVariant (copy), var2 (ref), var3 (ref)
-			return {
-				LayoutOrder = 3,
-				actions = {
-					{
-						text = var1.archiveGame,
-						variant = buttonVariant.Standard,
-						onActivated = var2
-					},
-					{
-						text = var1.cancel,
-						variant = buttonVariant.Standard,
-						onActivated = var3
-					}
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 42 ]]
+		-- upvalues: UseLocalizationResult (copy), ButtonVariant (upval), UseResult (copy), UseResult1 (copy)
+		return {
+			LayoutOrder = 3,
+			actions = {
+				{
+					text = UseLocalizationResult.archiveGame,
+					variant = ButtonVariant.Standard,
+					onActivated = UseResult
+				},
+				{
+					text = UseLocalizationResult.cancel,
+					variant = ButtonVariant.Standard,
+					onActivated = UseResult1
 				}
 			}
-		end, { var2, var3 }))
+		}
+	end, { UseResult, UseResult1 })
+	
+	return if p1.isOpen == false then nil else ReactModule.createElement(Dialog.Root, {
+		disablePortal = p1.disablePortal == true,
+		hasBackdrop = p1.hasBackdrop == nil or p1.hasBackdrop,
+		size = DialogSize.Small,
+		testId = TestId
+	}, {
+		Title = ReactModule.createElement(Dialog.Title, {
+			LayoutOrder = 1,
+			text = p1.title or UseLocalizationResult.title
+		}),
+		Content = ReactModule.createElement(Dialog.Content, { LayoutOrder = 2 }, {
+			Description = ReactModule.createElement(Dialog.Text, {
+				Text = p1.description or UseLocalizationResult.description
+			})
+		}),
+		Actions = ReactModule.createElement(Dialog.Actions, UseMemoResult)
 	})
 end

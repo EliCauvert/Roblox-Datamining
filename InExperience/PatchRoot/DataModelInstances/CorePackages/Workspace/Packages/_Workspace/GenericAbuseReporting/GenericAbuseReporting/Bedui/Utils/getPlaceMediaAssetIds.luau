@@ -1,34 +1,33 @@
-﻿local parent = script:FindFirstAncestor("GenericAbuseReporting").Parent
-local promiseModule = require(parent.Promise)
-local url = require(parent.Http).Url
-local removeDuplicatesPlaceMediaAssets = game:DefineFastFlag("RemoveDuplicatesPlaceMediaAssets", false)
+﻿local Parent = script:FindFirstAncestor("GenericAbuseReporting").Parent
+local PromiseModule = require(Parent.Promise)
+local Url = require(Parent.Http).Url
+local RemoveDuplicatesPlaceMediaAssets = game:DefineFastFlag("RemoveDuplicatesPlaceMediaAssets", false)
 
-return function(p1, p2)
-	-- upvalues: url (ref), removeDuplicatesPlaceMediaAssets (ref), promiseModule (ref)
-	local formattedText = string.format("%sv2/games/%s/media", url.GAME_URL, p2)
+return function(Callback, p1) --[[ Line: 9 ]]
+	-- upvalues: Url (copy), RemoveDuplicatesPlaceMediaAssets (copy), PromiseModule (copy)
+	local List = {}
 	local t = {}
-	local t_1 = {}
 	
-	return p1(formattedText, "GET"):andThen(function(p3)
-		-- upvalues: removeDuplicatesPlaceMediaAssets (copy), t_1 (ref), t (ref)
-		if p3 and p3.responseBody and p3.responseBody.data then
-			for i, v in ipairs(p3.responseBody.data) do
-				if v.imageId then
-					if removeDuplicatesPlaceMediaAssets then
-						local var1 = tostring(v.imageId)
+	return Callback(string.format("%sv2/games/%s/media", Url.GAME_URL, p1), "GET"):andThen(function(Result) --[[ Line: 16 ]]
+		-- upvalues: RemoveDuplicatesPlaceMediaAssets (upval), t (copy), List (copy)
+		if Result and Result.responseBody and Result.responseBody.data then
+			for _, entry in ipairs(Result.responseBody.data) do
+				if entry.imageId then
+					if RemoveDuplicatesPlaceMediaAssets then
+						local Text = tostring(entry.imageId)
 						
-						if not t_1[var1] then
-							t_1[var1] = true
-							table.insert(t, var1)
+						if not t[Text] then
+							t[Text] = true
+							table.insert(List, Text)
 						end
 					else
-						table.insert(t, tostring(v.imageId))
+						table.insert(List, (tostring(entry.imageId)))
 					end
 				end
 			end
 		end
-	end):finally(function()
-		-- upvalues: promiseModule (copy), t (ref)
-		return promiseModule.resolve(t)
+	end):finally(function() --[[ Line: 33 ]]
+		-- upvalues: PromiseModule (upval), List (copy)
+		return PromiseModule.resolve(List)
 	end)
 end

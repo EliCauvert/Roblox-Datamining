@@ -1,81 +1,82 @@
-﻿local paginationDirectionModule = require(script:FindFirstAncestor("Foundation").Enums.PaginationDirection)
-local t = {
-	[paginationDirectionModule.First] = "first",
-	[paginationDirectionModule.Backward] = "back",
-	[paginationDirectionModule.Forward] = "forward",
-	[paginationDirectionModule.Last] = "last"
+﻿local PaginationDirectionModule = require(script:FindFirstAncestor("Foundation").Enums.PaginationDirection)
+local config = {
+	[PaginationDirectionModule.First] = "first",
+	[PaginationDirectionModule.Backward] = "back",
+	[PaginationDirectionModule.Forward] = "forward",
+	[PaginationDirectionModule.Last] = "last"
 }
 
 return {
-	NAV_SLOT_IDS = t,
-	getPageSlotId = function(p1)
+	NAV_SLOT_IDS = config,
+	getPageSlotId = function(p1): string --[[ Line: 71 ]]
 		return `page-{p1}`
 	end,
-	getPaginationSelectableSlotOrder = function(p1)
-		-- upvalues: t (ref), paginationDirectionModule (ref)
-		local t_1 = {}
+	getPaginationSelectableSlotOrder = function(p1) --[[ Line: 76 ]]
+		-- upvalues: config (copy), PaginationDirectionModule (copy)
+		local List = {}
 		
 		if p1.hasFirstLastButtons and not p1.isFirstDisabled then
-			table.insert(t_1, t[paginationDirectionModule.First])
+			table.insert(List, config[PaginationDirectionModule.First])
 		end
 		if not p1.isBackDisabled then
-			table.insert(t_1, t[paginationDirectionModule.Backward])
+			table.insert(List, config[PaginationDirectionModule.Backward])
 		end
 		if p1.pageSlots then
-			for i, v in p1.pageSlots do
-				if v ~= "ellipsis" and v ~= p1.currentPage then
-					table.insert(t_1, `page-{v}`)
+			for _, pageSlot in p1.pageSlots do
+				if pageSlot ~= "ellipsis" and pageSlot ~= p1.currentPage then
+					table.insert(List, `page-{pageSlot}`)
 				end
 			end
 		end
 		if not p1.isForwardDisabled then
-			table.insert(t_1, t[paginationDirectionModule.Forward])
+			table.insert(List, config[PaginationDirectionModule.Forward])
 		end
 		if p1.hasFirstLastButtons and not p1.isLastDisabled then
-			table.insert(t_1, t[paginationDirectionModule.Last])
+			table.insert(List, config[PaginationDirectionModule.Last])
 		end
-		return t_1
+		return List
 	end,
-	getVisiblePageSlots = function(p2, p3)
+	getVisiblePageSlots = function(p2: number, p3: number) --[[ Line: 30 ]]
 		if p3 <= 7 then
-			local t = {}
+			local List = {}
 			
 			for i = 1, p3 do
-				table.insert(t, i)
+				table.insert(List, i)
 			end
-			return t
+			return List
 		else
-			local t = {}
+			local List1 = {}
 			
 			if p2 <= 4 then
-				table.insert(t, 1)
-				table.insert(t, 2)
-				table.insert(t, 3)
-				table.insert(t, 4)
-				table.insert(t, 5)
-				table.insert(t, "ellipsis")
-				table.insert(t, p3)
+				table.insert(List1, 1)
+				table.insert(List1, 2)
+				table.insert(List1, 3)
+				table.insert(List1, 4)
+				table.insert(List1, 5)
+				table.insert(List1, "ellipsis")
+				table.insert(List1, p3)
 				
-				return t
-			elseif p3 - 4 + 1 <= p2 then
-				table.insert(t, 1)
-				table.insert(t, "ellipsis")
+				return List1
+			end
+			if p3 - 4 + 1 <= p2 then
+				table.insert(List1, 1)
+				table.insert(List1, "ellipsis")
 				
-				for i_1 = p3 - 4, p3 do
-					table.insert(t, i_1)
+				for i1 = p3 - 4, p3 do
+					table.insert(List1, i1)
 				end
-				return t
+				return List1
 			else
-				table.insert(t, 1)
-				table.insert(t, "ellipsis")
+				table.insert(List1, 1)
+				table.insert(List1, "ellipsis")
 				
-				for i_2 = p2 - 1, p2 + 1 do
-					table.insert(t, i_2)
+				for i2 = p2 - 1, p2 + 1 do
+					table.insert(List1, i2)
 				end
-				table.insert(t, "ellipsis")
-				table.insert(t, p3)
+				table.insert(List1, "ellipsis")
+				table.insert(List1, p3)
 				
-				return t
+				return List1
 			end
 		end
 	end

@@ -1,44 +1,47 @@
-﻿local experienceStateCaptureService = game:GetService("ExperienceStateCaptureService")
+﻿local ExperienceStateCaptureService = game:GetService("ExperienceStateCaptureService")
 local IXPService = game:GetService("IXPService")
-local sharedFlagsModule = require(script:FindFirstAncestor("GenericAbuseReporting").Parent.SharedFlags)
-local fStringReportMenuIXPLayer = sharedFlagsModule.FStringReportMenuIXPLayer
-local fStringSelectInSceneIXPField = sharedFlagsModule.FStringSelectInSceneIXPField
+local SharedFlagsModule = require(script:FindFirstAncestor("GenericAbuseReporting").Parent.SharedFlags)
+local FStringReportMenuIXPLayer = SharedFlagsModule.FStringReportMenuIXPLayer
+local FStringSelectInSceneIXPField = SharedFlagsModule.FStringSelectInSceneIXPField
 
-local function _()
-	-- upvalues: IXPService (ref), fStringReportMenuIXPLayer (ref), fStringSelectInSceneIXPField (ref)
-	local ok, status = pcall(function()
-		-- upvalues: IXPService (copy), fStringReportMenuIXPLayer (copy)
-		return IXPService:GetUserLayerVariables(fStringReportMenuIXPLayer)
+local function _() --[[ Line: 13 | Named "isInSelectInSceneExperiment" ]]
+	-- upvalues: IXPService (copy), FStringReportMenuIXPLayer (copy), FStringSelectInSceneIXPField (copy)
+	local Success, Result = pcall(function() --[[ Line: 14 ]]
+		-- upvalues: IXPService (upval), FStringReportMenuIXPLayer (upval)
+		return IXPService:GetUserLayerVariables(FStringReportMenuIXPLayer)
 	end)
 	
-	if ok and status and status[fStringSelectInSceneIXPField] ~= nil then
-		IXPService:LogUserLayerExposure(fStringReportMenuIXPLayer)
+	if Success and Result and Result[FStringSelectInSceneIXPField] ~= nil then
+		IXPService:LogUserLayerExposure(FStringReportMenuIXPLayer)
 		
-		return status[fStringSelectInSceneIXPField]
+		return Result[FStringSelectInSceneIXPField]
+	else
+		return false
 	end
-	return false
 end
 
-return function()
-	-- upvalues: experienceStateCaptureService (ref), IXPService (ref), fStringReportMenuIXPLayer (ref), fStringSelectInSceneIXPField (ref)
+return function() --[[ Line: 33 | Named "getIsInExpSceneSelectionAvailable" ]]
+	-- upvalues: ExperienceStateCaptureService (copy), IXPService (copy), FStringReportMenuIXPLayer (copy), FStringSelectInSceneIXPField (copy)
 	if not game:GetEngineFeature("SafetyServiceCaptureModeReportProp") then
 		return false
 	elseif not game:GetEngineFeature("CaptureModeEnabled") then
 		return false
 	elseif not game:GetEngineFeature("ExperienceStateCaptureHiddenSelection") then
 		return false
-	elseif game:GetEngineFeature("ExperienceStateCaptureMinMemEnabled") and not experienceStateCaptureService:CanEnterCaptureMode() then
+	elseif game:GetEngineFeature("ExperienceStateCaptureMinMemEnabled") and not ExperienceStateCaptureService:CanEnterCaptureMode() then
 		return false
-	end
-	local ok, status = pcall(function()
-		-- upvalues: IXPService (copy), fStringReportMenuIXPLayer (copy)
-		return IXPService:GetUserLayerVariables(fStringReportMenuIXPLayer)
-	end)
-	
-	if ok and status and status[fStringSelectInSceneIXPField] ~= nil then
-		IXPService:LogUserLayerExposure(fStringReportMenuIXPLayer)
+	else
+		local Success, Result = pcall(function() --[[ Line: 14 ]]
+			-- upvalues: IXPService (upval), FStringReportMenuIXPLayer (upval)
+			return IXPService:GetUserLayerVariables(FStringReportMenuIXPLayer)
+		end)
 		
-		return status[fStringSelectInSceneIXPField]
+		if Success and Result and Result[FStringSelectInSceneIXPField] ~= nil then
+			IXPService:LogUserLayerExposure(FStringReportMenuIXPLayer)
+			
+			return Result[FStringSelectInSceneIXPField]
+		else
+			return false
+		end
 	end
-	return false
 end

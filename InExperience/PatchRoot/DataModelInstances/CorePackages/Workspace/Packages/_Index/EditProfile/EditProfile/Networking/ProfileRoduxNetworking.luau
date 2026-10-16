@@ -1,14 +1,14 @@
-﻿local editProfile = script:FindFirstAncestor("EditProfile")
-local parent = editProfile.Parent
-local httpRequest = require(parent.LuaSocialLibrariesDeps).httpRequest
+﻿local EditProfile = script:FindFirstAncestor("EditProfile")
+local Parent = EditProfile.Parent
+local HttpRequest = require(Parent.LuaSocialLibrariesDeps).httpRequest
 
-return require(parent.RoduxNetworking).config({
-	keyPath = require(editProfile.Common.Constants).RODUX_KEY .. ".NetworkStatus",
-	networkImpl = httpRequest.config({
-		requestFunction = function(p1, p2, p3)
-			-- upvalues: httpRequest (ref)
-			return httpRequest.requestFunctions.RequestInternal(p1, p2, p3)
+return (require(Parent.RoduxNetworking).config({
+	keyPath = require(EditProfile.Common.Constants).RODUX_KEY .. ".NetworkStatus",
+	networkImpl = HttpRequest.config({
+		requestFunction = function(p1, p2, p3) --[[ Line: 11 ]]
+			-- upvalues: HttpRequest (copy)
+			return HttpRequest.requestFunctions.RequestInternal(p1, p2, p3)
 		end,
 		maxRetryCount = game:DefineFastInt("EditProfileMaxHttpRetries", 5)
 	})
-})
+}))

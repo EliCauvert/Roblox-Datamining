@@ -1,20 +1,20 @@
-﻿local createSignal = require(script:FindFirstAncestor("MomentsCreation").Parent.Signals).createSignal
+﻿local CreateSignalFunction = require(script:FindFirstAncestor("MomentsCreation").Parent.Signals).createSignal
 
-return function()
-	-- upvalues: createSignal (ref)
-	local var1, var2 = createSignal({})
+return function() --[[ Line: 25 | Named "createEditsStore" ]]
+	-- upvalues: CreateSignalFunction (copy)
+	local Signal, Signal2 = CreateSignalFunction({})
 	
 	return {
-		getMap = var1,
-		setCommitted = function(value, p1)
-			-- upvalues: var1 (ref), var2 (ref)
-			local cloned = table.clone(var1(false))
-			cloned[value] = p1
-			var2(cloned)
+		getMap = Signal,
+		setCommitted = function(Key, p1) --[[ Line: 28 ]]
+			-- upvalues: Signal (copy), Signal2 (copy)
+			local Copy = table.clone(Signal(false))
+			Copy[Key] = p1
+			Signal2(Copy)
 		end,
-		clear = function()
-			-- upvalues: var2 (ref)
-			var2({})
+		clear = function() --[[ Line: 34 ]]
+			-- upvalues: Signal2 (copy)
+			Signal2({})
 		end
 	}
 end

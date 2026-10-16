@@ -1,243 +1,253 @@
-﻿local localizationService = game:GetService("LocalizationService")
-local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
-local _ = require(parent.Foundation)
-local localizationModule = require(parent.Localization)
-local momentsCommonModule = require(parent.MomentsCommon)
-local _ = require(parent.MomentsTypes)
-local reactModule = require(parent.React)
-local sharedFlagsModule = require(parent.SharedFlags)
-local signalsModule = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local UIBloxModule = require(parent.UIBlox)
-local userProfileModule = require(parent.DataHydration.UserProfile)
-local momentsGetMomentsCommentsStoreModule = require(parent.DataHydration.MomentsGetMomentsCommentsStore)
-local getCommentReactionsStoreModule = require(moments.Stores.GetCommentReactionsStore)
-local useMomentGesturesModule = require(moments.Components.Feed.Items.Moment.Reactions.useMomentGestures)
-local usePreferredInputModule = require(moments.Hooks.usePreferredInput)
-local commentLongPressTimingModule = require(script.Parent.CommentLongPressTiming)
+﻿local LocalizationService = game:GetService("LocalizationService")
+local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
+local _ = require(Parent.Foundation)
+local LocalizationModule = require(Parent.Localization)
+local MomentsCommonModule = require(Parent.MomentsCommon)
+local _ = require(Parent.MomentsTypes)
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
+local UserProfileModule = require(Parent.DataHydration.UserProfile)
+local MomentsGetMomentsCommentsStoreModule = require(Parent.DataHydration.MomentsGetMomentsCommentsStore)
+local GetCommentReactionsStoreModule = require(Moments.Stores.GetCommentReactionsStore)
+local UseMomentGesturesModule = require(Moments.Components.Feed.Items.Moment.Reactions.useMomentGestures)
+local UsePreferredInputModule = require(Moments.Hooks.usePreferredInput)
+local CommentLongPressTimingModule = require(script.Parent.CommentLongPressTiming)
 local _ = require(script.Parent.CommentRowView)
-local useCommentActionsMenuModule = require(script.Parent.useCommentActionsMenu)
-local useCommentBodyClampModule = require(script.Parent.useCommentBodyClamp)
-local useCommentBodyPressFeedbackModule = require(script.Parent.useCommentBodyPressFeedback)
-local useCommentBodyToggleModule = require(script.Parent.useCommentBodyToggle)
-local useCommentTimestampModule = require(script.Parent.useCommentTimestamp)
-local fFlagMomentsEngagementMetricsFeature = momentsCommonModule.Flags.FFlagMomentsEngagementMetricsFeature
-local fFlagGuacMomentsFeatureList = sharedFlagsModule.FFlagGuacMomentsFeatureList
-local getMomentsCapabilities = momentsCommonModule.Stores.GetMomentsCapabilities
-local feedbackManagerInjectionContext = UIBloxModule.Core.Control.FeedbackManagerInjectionContext
-local useLocalization = localizationModule.Hooks.useLocalization
-local t = {
-	info = signalsModule.createComputed(function(_)
+local UseCommentActionsMenuModule = require(script.Parent.useCommentActionsMenu)
+local UseCommentBodyClampModule = require(script.Parent.useCommentBodyClamp)
+local UseCommentBodyPressFeedbackModule = require(script.Parent.useCommentBodyPressFeedback)
+local UseCommentBodyToggleModule = require(script.Parent.useCommentBodyToggle)
+local UseCommentTimestampModule = require(script.Parent.useCommentTimestamp)
+local FFlagMomentsEngagementMetricsFeature = MomentsCommonModule.Flags.FFlagMomentsEngagementMetricsFeature
+local GetMomentsCapabilitiesFunction = MomentsCommonModule.Stores.GetMomentsCapabilities
+local FeedbackManagerInjectionContext = require(Parent.UIBlox).Core.Control.FeedbackManagerInjectionContext
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
+local config = {
+	info = SignalsModule.createComputed(function(_) --[[ Line: 67 ]]
 		return nil
 	end),
-	status = signalsModule.createComputed(function(_)
+	status = SignalsModule.createComputed(function(_): string --[[ Line: 70 ]]
 		return "Ready"
 	end)
 }
 
-local function _(p1)
+local function _(p1) --[[ Line: 78 | Named "nonEmpty" ]]
 	return if p1 == nil or p1 == "" then nil else p1
 end
 
-local _ = function(p1, p2)
-	if p1 == nil or p2 == nil then
+local _ = function(p1, EmoteId) --[[ Line: 82 | Named "countForEmote" ]]
+	if p1 == nil or EmoteId == nil then
 		return 0
 	end
-	for i, v in p1.counts do
-		if v.emoteId == p2 then
-			return v.count
+	for _, count in p1.counts do
+		if count.emoteId == EmoteId then
+			return count.count
 		end
 	end
 	return 0
 end
 
-return function(p3)
-	-- upvalues: reactModule (ref), momentsGetMomentsCommentsStoreModule (ref), signalsReactModule (ref), userProfileModule (ref), t (ref), useLocalization (ref), useCommentTimestampModule (ref), getCommentReactionsStoreModule (ref), signalsModule (ref), localizationModule (ref), localizationService (ref), fFlagMomentsEngagementMetricsFeature (ref), fFlagGuacMomentsFeatureList (ref), getMomentsCapabilities (ref), usePreferredInputModule (ref), feedbackManagerInjectionContext (ref), useCommentActionsMenuModule (ref), useCommentBodyClampModule (ref), useCommentBodyToggleModule (ref), useCommentBodyPressFeedbackModule (ref), useMomentGesturesModule (ref), commentLongPressTimingModule (ref)
-	local var1 = signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: momentsGetMomentsCommentsStoreModule (copy), p3 (ref)
-		return momentsGetMomentsCommentsStoreModule(false).getCachedComment(p3.commentId)
-	end, { p3.commentId }).data)
-	local var2 = if var1 == nil or var1.author == nil then nil else var1.author.userId
-	local var3 = if var2 ~= nil then nil else tonumber(var2)
+return function(p2) --[[ Line: 94 | Named "useCommentRowViewModel" ]]
+	-- upvalues: ReactModule (copy), MomentsGetMomentsCommentsStoreModule (copy), SignalsReactModule (copy), UserProfileModule (copy), config (copy), UseLocalizationFunction (copy), UseCommentTimestampModule (copy), GetCommentReactionsStoreModule (copy), SignalsModule (copy), LocalizationModule (copy), LocalizationService (copy), FFlagMomentsEngagementMetricsFeature (copy), GetMomentsCapabilitiesFunction (copy), UsePreferredInputModule (copy), FeedbackManagerInjectionContext (copy), UseCommentActionsMenuModule (copy), UseCommentBodyClampModule (copy), UseCommentBodyToggleModule (copy), UseCommentBodyPressFeedbackModule (copy), UseMomentGesturesModule (copy), CommentLongPressTimingModule (copy)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(ReactModule.useMemo(function() --[[ Line: 95 ]]
+		-- upvalues: MomentsGetMomentsCommentsStoreModule (upval), p2 (copy)
+		return MomentsGetMomentsCommentsStoreModule(false).getCachedComment(p2.commentId)
+	end, { p2.commentId }).data)
+	local UserId = if UseSignalStateResult == nil or UseSignalStateResult.author == nil then nil else UseSignalStateResult.author.userId
+	local Number = if UserId == nil then nil else tonumber(UserId)
 	
-	if var3 ~= nil and var3 <= 0 then
-		var3 = nil
+	if Number ~= nil and Number <= 0 then
+		Number = nil
 	end
-	local var4, username
-	local var5 = reactModule.useMemo(function()
-		-- upvalues: var3 (write), userProfileModule (copy), t (copy)
-		return if var3 == nil then t else userProfileModule.getAndFetchUserInfo(var3)
-	end, { var3 })
-	local var6 = signalsReactModule.useSignalState(var5.info)
-	local var7 = signalsReactModule.useSignalState(var5.status)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 105 ]]
+		-- upvalues: Number (ref), UserProfileModule (upval), config (upval)
+		return if Number == nil then config else UserProfileModule.getAndFetchUserInfo(Number)
+	end, { Number })
+	local UseSignalStateResult1 = SignalsReactModule.useSignalState(UseMemoResult.info)
+	local UseSignalStateResult2 = SignalsReactModule.useSignalState(UseMemoResult.status)
+	local v1 = nil
 	
-	if var1 == nil or var1.author == nil then
-		var4 = nil
+	if UseSignalStateResult == nil or UseSignalStateResult.author == nil then
+		v1 = nil
 	else
-		username = var1.author.username
-		var4 = if username == nil or username == "" then nil else username
+		local Username = UseSignalStateResult.author.username
+		v1 = if Username == nil or Username == "" then nil else Username
 	end
-	local displayName
-	if var1 == nil or var1.author == nil then
-		username = nil
+	local v2 = nil
+	if UseSignalStateResult == nil or UseSignalStateResult.author == nil then
+		v2 = nil
 	else
-		displayName = var1.author.displayName
-		username = if displayName == nil or displayName == "" then nil else displayName
+		local DisplayName = UseSignalStateResult.author.displayName
+		v2 = if DisplayName == nil or DisplayName == "" then nil else DisplayName
 	end
-	local username_1
-	if var6 == nil then
-		displayName = nil
+	local Username1 = nil
+	if UseSignalStateResult1 == nil then
+		Username1 = nil
 	else
-		username_1 = var6.username
-		displayName = if username_1 == nil or username_1 == "" then nil else username_1
+		local Username = UseSignalStateResult1.username
+		Username1 = if Username == nil or Username == "" then nil else Username
 	end
-	local displayName_1
-	if var6 == nil then
-		username_1 = nil
+	local DisplayName1 = nil
+	if UseSignalStateResult1 == nil then
+		DisplayName1 = nil
 	else
-		displayName_1 = var6.displayName
-		username_1 = if displayName_1 == nil or displayName_1 == "" then nil else displayName_1
+		local DisplayName = UseSignalStateResult1.displayName
+		DisplayName1 = if DisplayName == nil or DisplayName == "" then nil else DisplayName
 	end
-	local var8, v
-	displayName_1 = useLocalization({
-		label = if var2 ~= nil then "Feature.Moments.Label.CommentAuthorUnknown" else {
+	local Label = UseLocalizationFunction({
+		label = if UserId == nil then "Feature.Moments.Label.CommentAuthorUnknown" else {
 			"Feature.Moments.Label.CommentAuthorFallback",
-			userId = var2
+			userId = UserId
 		}
 	}).label
-	local viewerUsername = p3.viewerUsername
-	viewerUsername = if var1 == nil or not var1.isAuthoredByViewer then nil elseif viewerUsername == nil or viewerUsername == "" then nil else viewerUsername
-	local var9 = var4 or (viewerUsername or username)
-	local var10 = useCommentTimestampModule(if p3.createdAt ~= "" then if var1 ~= nil then "" else var1.createdAt else p3.createdAt)
-	local var11 = if var1 ~= nil then nil else var1.reactions
-	local var12 = getCommentReactionsStoreModule(false)
-	local var13 = signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), var12 (ref), p3 (ref), var11 (ref)
-		return signalsModule.createComputed(function(p4)
-			-- upvalues: var12 (copy), p3 (copy), var11 (copy)
-			return var12.getProjection(p3.feedItemId, p3.commentId, var11, p4)
+	local ViewerUsername = p2.viewerUsername
+	local ViewerUsername1 = if ViewerUsername == nil or ViewerUsername == "" then nil else ViewerUsername
+	local ViewerUsername2 = if UseSignalStateResult == nil or not UseSignalStateResult.isAuthoredByViewer then nil else ViewerUsername1
+	local V33 = v1 or (ViewerUsername2 or v2)
+	local UseCommentTimestampModuleResult = UseCommentTimestampModule(if p2.createdAt == "" then if UseSignalStateResult == nil then "" else UseSignalStateResult.createdAt else p2.createdAt)
+	local Reactions = if UseSignalStateResult == nil then nil else UseSignalStateResult.reactions
+	local CommentReactionsStoreModule = GetCommentReactionsStoreModule(false)
+	local UseSignalStateResult3 = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 130 ]]
+		-- upvalues: SignalsModule (upval), CommentReactionsStoreModule (copy), p2 (copy), Reactions (copy)
+		return SignalsModule.createComputed(function(p3) --[[ Line: 131 ]]
+			-- upvalues: CommentReactionsStoreModule (upval), p2 (upval), Reactions (upval)
+			return CommentReactionsStoreModule.getProjection(p2.feedItemId, p2.commentId, Reactions, p3)
 		end)
-	end, { var12, p3.feedItemId, p3.commentId, var11 or false }))
-	local var14 = signalsReactModule.useSignalState(var12.getCooldownUntilMs)
-	local reactions = var13.reactions
-	local thumbsUpEmoteId = p3.thumbsUpEmoteId
-	local var15 = var11 ~= nil and (reactions ~= nil and thumbsUpEmoteId ~= nil)
-	local var16 = if reactions == nil or reactions.userReaction == nil then nil else reactions.userReaction.emoteId
-	local var17 = thumbsUpEmoteId ~= nil and var16 == thumbsUpEmoteId
-	local var18 = if p3.creatorEnabled then if p3.viewerCanWrite then if var13.restriction == nil then if DateTime.now().UnixTimestampMillis >= var14 then var16 ~= nil and not var17 else true else true else not p3.viewerCanWrite else not p3.creatorEnabled
+	end, {
+		CommentReactionsStoreModule,
+		p2.feedItemId,
+		p2.commentId,
+		Reactions or false
+	})))
+	local UseSignalStateResult4 = SignalsReactModule.useSignalState(CommentReactionsStoreModule.getCooldownUntilMs)
+	local Reactions1 = UseSignalStateResult3.reactions
+	local ThumbsUpEmoteId = p2.thumbsUpEmoteId
+	local HasThumbsUpEmoteId: boolean = Reactions ~= nil and (Reactions1 ~= nil and ThumbsUpEmoteId ~= nil)
+	local EmoteId = if Reactions1 == nil or Reactions1.userReaction == nil then nil else Reactions1.userReaction.emoteId
+	local IsEmoteIdMatch: boolean = ThumbsUpEmoteId ~= nil and EmoteId == ThumbsUpEmoteId
+	local NoCreatorEnabled: boolean = not p2.creatorEnabled or (not p2.viewerCanWrite or (UseSignalStateResult3.restriction ~= nil or (DateTime.now().UnixTimestampMillis < UseSignalStateResult4 or EmoteId ~= nil and not IsEmoteIdMatch)))
+	local Count = nil
 	
-	if reactions == nil or thumbsUpEmoteId == nil then
-		var8 = 0
+	if Reactions1 == nil or ThumbsUpEmoteId == nil then
+		Count = 0
 	else
-		for i, v in reactions.counts do
-			if v.emoteId == thumbsUpEmoteId then
-				var8 = v.count
+		Count = 0
+		
+		for _, count in Reactions1.counts do
+			if count.emoteId == ThumbsUpEmoteId then
+				Count = count.count
+				break
 			end
 		end
-		var8 = 0
 	end
-	local var19 = localizationModule.abbreviateCount(var8, localizationService.RobloxLocaleId) or tostring(var8)
-	local var20 = if fFlagMomentsEngagementMetricsFeature and fFlagGuacMomentsFeatureList then not signalsReactModule.useSignalState(getMomentsCapabilities(false).getIsEngagementMetricsEnabled) else nil
-	local var21 = var15 and (not var18 and not var17)
-	local var22 = reactModule.useCallback(function()
-		-- upvalues: var15 (ref), var18 (ref), var11 (ref), thumbsUpEmoteId (ref), p3 (ref), var17 (ref)
-		if var15 and not var18 and (var11 ~= nil and thumbsUpEmoteId ~= nil) then
-			p3.onToggleReaction(p3.commentId, thumbsUpEmoteId, var11, var17)
+	local AbbreviateCountResult = LocalizationModule.abbreviateCount(Count, LocalizationService.RobloxLocaleId) or tostring(Count)
+	local Inverted = if FFlagMomentsEngagementMetricsFeature then not SignalsReactModule.useSignalState(GetMomentsCapabilitiesFunction(false).getIsEngagementMetricsEnabled) else nil
+	local NoIsEmoteIdMatch: boolean = HasThumbsUpEmoteId and (not NoCreatorEnabled and not IsEmoteIdMatch)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 161 ]]
+		-- upvalues: HasThumbsUpEmoteId (copy), NoCreatorEnabled (copy), Reactions (copy), ThumbsUpEmoteId (copy), p2 (copy), IsEmoteIdMatch (copy)
+		if HasThumbsUpEmoteId and not NoCreatorEnabled and Reactions ~= nil and ThumbsUpEmoteId ~= nil then
+			p2.onToggleReaction(p2.commentId, ThumbsUpEmoteId, Reactions, IsEmoteIdMatch)
 			
 			return
 		end
 	end, {
-		var15, var18, var11, thumbsUpEmoteId, p3.onToggleReaction, p3.commentId, var17
+		HasThumbsUpEmoteId, NoCreatorEnabled, Reactions, ThumbsUpEmoteId,
+		p2.onToggleReaction, p2.commentId, IsEmoteIdMatch
 	})
-	v = reactModule.useCallback(function()
-		-- upvalues: var15 (ref), var18 (ref), var17 (ref), var11 (ref), thumbsUpEmoteId (ref), p3 (ref)
-		if var15 and not var18 and (not var17 and var11 ~= nil) and thumbsUpEmoteId ~= nil then
-			p3.onAddReaction(p3.commentId, thumbsUpEmoteId, var11)
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 178 ]]
+		-- upvalues: HasThumbsUpEmoteId (copy), NoCreatorEnabled (copy), IsEmoteIdMatch (copy), Reactions (copy), ThumbsUpEmoteId (copy), p2 (copy)
+		if HasThumbsUpEmoteId and not NoCreatorEnabled and not IsEmoteIdMatch and Reactions ~= nil and ThumbsUpEmoteId ~= nil then
+			p2.onAddReaction(p2.commentId, ThumbsUpEmoteId, Reactions)
 			
 			return
 		end
 	end, {
-		var15, var18, var17, var11, thumbsUpEmoteId, p3.onAddReaction, p3.commentId
+		HasThumbsUpEmoteId, NoCreatorEnabled, IsEmoteIdMatch, Reactions,
+		ThumbsUpEmoteId, p2.onAddReaction, p2.commentId
 	})
-	local var23 = usePreferredInputModule() == Enum.PreferredInput.Touch
-	local var24 = reactModule.useContext(feedbackManagerInjectionContext)
-	local var25 = useCommentActionsMenuModule({
-		commentId = p3.commentId,
-		isAuthoredByViewer = var1 ~= nil and var1.isAuthoredByViewer,
-		authorUserId = if var1 == nil or var3 == nil then nil else tostring(var3),
-		onReportComment = p3.onReportComment,
-		onBlockCommentAuthor = p3.onBlockCommentAuthor,
-		onDeleteComment = p3.onDeleteComment
+	local IsUsePreferredInputModuleResultMatch = UsePreferredInputModule() == Enum.PreferredInput.Touch
+	local UseContextResult = ReactModule.useContext(FeedbackManagerInjectionContext)
+	local UseCommentActionsMenuModuleResult = UseCommentActionsMenuModule({
+		commentId = p2.commentId,
+		isAuthoredByViewer = UseSignalStateResult ~= nil and UseSignalStateResult.isAuthoredByViewer,
+		authorUserId = if UseSignalStateResult == nil or Number == nil then nil else tostring(Number),
+		onReportComment = p2.onReportComment,
+		onBlockCommentAuthor = p2.onBlockCommentAuthor,
+		onDeleteComment = p2.onDeleteComment
 	})
-	local var26 = #var25.items > 0
-	local var27 = var23 and var26
-	local var28 = p3.isExpanded == true
-	local var29 = useCommentBodyClampModule(p3.text, var28)
-	local var30 = useCommentBodyToggleModule(var29, p3.onToggleExpanded, p3.commentId, var28, var21)
-	local var31 = useCommentBodyPressFeedbackModule(p3.commentId, var30.canToggle)
-	local var32 = var21 or (var27 or var30.isActive)
-	local var33, var34 = reactModule.useState(nil)
-	reactModule.useLayoutEffect(function()
-		-- upvalues: var34 (ref)
-		var34(nil)
-	end, { p3.commentId })
-	local openMenu = var25.openMenu
-	local var35 = useMomentGesturesModule(var32, {
-		onTap = var30.onTap,
-		onSingleTapConfirmed = var30.onSingleTapConfirmed,
-		onDoubleTap = v,
-		onLongPress = if var27 then reactModule.useCallback(function()
-			-- upvalues: var34 (ref), var24 (ref), openMenu (ref)
-			var34(nil)
-			var24("TileLongPress", "Press")
-			openMenu()
-		end, { var24, openMenu }) else nil,
-		onLongPressStart = if var27 then reactModule.useCallback(function()
-			-- upvalues: var34 (ref), p3 (ref)
-			var34(p3.commentId)
-		end, { p3.commentId }) else nil,
-		onLongPressCancel = if var27 then reactModule.useCallback(function()
-			-- upvalues: var34 (ref)
-			var34(nil)
-		end, {}) else nil
+	local v3 = #UseCommentActionsMenuModuleResult.items > 0
+	local V66: boolean = IsUsePreferredInputModuleResultMatch and v3
+	local IsIsExpanded = p2.isExpanded == true
+	local UseCommentBodyClampModuleResult = UseCommentBodyClampModule(p2.text, IsIsExpanded)
+	local UseCommentBodyToggleModuleResult = UseCommentBodyToggleModule(UseCommentBodyClampModuleResult, p2.onToggleExpanded, p2.commentId, IsIsExpanded, NoIsEmoteIdMatch)
+	local UseCommentBodyPressFeedbackModuleResult = UseCommentBodyPressFeedbackModule(p2.commentId, UseCommentBodyToggleModuleResult.canToggle)
+	local NoIsEmoteIdMatch1 = NoIsEmoteIdMatch or (V66 or UseCommentBodyToggleModuleResult.isActive)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	ReactModule.useLayoutEffect(function() --[[ Line: 223 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(nil)
+	end, { p2.commentId })
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 226 ]]
+		-- upvalues: UseStateResult2 (copy), p2 (copy)
+		UseStateResult2(p2.commentId)
+	end, { p2.commentId })
+	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 229 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(nil)
+	end, {})
+	local OpenMenuFunction = UseCommentActionsMenuModuleResult.openMenu
+	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 233 ]]
+		-- upvalues: UseStateResult2 (copy), UseContextResult (copy), OpenMenuFunction (copy)
+		UseStateResult2(nil)
+		UseContextResult("TileLongPress", "Press")
+		OpenMenuFunction()
+	end, { UseContextResult, OpenMenuFunction })
+	local UseMomentGesturesModuleResult = UseMomentGesturesModule(NoIsEmoteIdMatch1, {
+		onTap = UseCommentBodyToggleModuleResult.onTap,
+		onSingleTapConfirmed = UseCommentBodyToggleModuleResult.onSingleTapConfirmed,
+		onDoubleTap = UseResult1,
+		onLongPress = if V66 then UseResult4 else nil,
+		onLongPressStart = if V66 then UseResult2 else nil,
+		onLongPressCancel = if V66 then UseResult3 else nil
 	}, nil, {
 		cancelWhenInactive = true,
 		cancelOnUserScroll = true,
-		scrollingFrameRef = p3.scrollingFrameRef,
-		longPressThreshold = commentLongPressTimingModule.HOLD_SECONDS
+		scrollingFrameRef = p2.scrollingFrameRef,
+		longPressThreshold = CommentLongPressTimingModule.HOLD_SECONDS
 	})
 	
 	return {
-		commentId = p3.commentId,
-		avatarUserId = var3,
-		authorLabel = var4 or (viewerUsername or (displayName or (username or (username_1 or displayName_1)))),
-		isAuthorLoading = var9 == nil and (var6 == nil and var7 == "NotReady"),
-		text = p3.text,
-		bodyText = var29.bodyText,
-		bodyRef = var29.bodyRef,
-		bodyMeasureRef = var29.measureRef,
-		onBodyAbsoluteSizeChanged = var29.onBodyAbsoluteSizeChanged,
-		bodyTextStyle = var31.textStyle,
-		metadataLabel = var10,
-		avatarBackgroundStyle = p3.avatarBackgroundStyle,
-		gestureRef = var35.ref,
-		showReactionControl = var15,
-		isReactionSelected = var17,
-		isReactionDisabled = var18,
-		reactionCountLabel = var19,
-		isReactionCountHidden = var20,
-		onReactionActivated = var22,
-		actionsMenu = if var26 then {
-			items = var25.items,
-			isOpen = var25.isOpen,
-			anchorRef = if var23 then var35.ref else nil,
-			onButtonActivated = var25.toggleMenu,
-			onClose = var25.closeMenu
+		commentId = p2.commentId,
+		avatarUserId = Number,
+		authorLabel = v1 or (ViewerUsername2 or (Username1 or (v2 or (DisplayName1 or Label)))),
+		isAuthorLoading = V33 == nil and UseSignalStateResult1 == nil and UseSignalStateResult2 == "NotReady",
+		text = p2.text,
+		bodyText = UseCommentBodyClampModuleResult.bodyText,
+		bodyRef = UseCommentBodyClampModuleResult.bodyRef,
+		bodyMeasureRef = UseCommentBodyClampModuleResult.measureRef,
+		onBodyAbsoluteSizeChanged = UseCommentBodyClampModuleResult.onBodyAbsoluteSizeChanged,
+		bodyTextStyle = UseCommentBodyPressFeedbackModuleResult.textStyle,
+		metadataLabel = UseCommentTimestampModuleResult,
+		avatarBackgroundStyle = p2.avatarBackgroundStyle,
+		gestureRef = UseMomentGesturesModuleResult.ref,
+		showReactionControl = HasThumbsUpEmoteId,
+		isReactionSelected = IsEmoteIdMatch,
+		isReactionDisabled = NoCreatorEnabled,
+		reactionCountLabel = AbbreviateCountResult,
+		isReactionCountHidden = Inverted,
+		onReactionActivated = UseResult,
+		actionsMenu = if v3 then {
+			items = UseCommentActionsMenuModuleResult.items,
+			isOpen = UseCommentActionsMenuModuleResult.isOpen,
+			anchorRef = if IsUsePreferredInputModuleResultMatch then UseMomentGesturesModuleResult.ref else nil,
+			onButtonActivated = UseCommentActionsMenuModuleResult.toggleMenu,
+			onClose = UseCommentActionsMenuModuleResult.closeMenu
 		} else nil,
-		deleteConfirmation = var25.deleteConfirmation,
-		isLongPressCharging = var33 == p3.commentId and var27,
-		isGestureSurfaceActive = var32,
-		onContentStateChanged = var31.onStateChanged
+		deleteConfirmation = UseCommentActionsMenuModuleResult.deleteConfirmation,
+		isLongPressCharging = UseStateResult == p2.commentId and V66,
+		isGestureSurfaceActive = NoIsEmoteIdMatch1,
+		onContentStateChanged = UseCommentBodyPressFeedbackModuleResult.onStateChanged
 	}
 end

@@ -1,15 +1,15 @@
-﻿local parent = script.Parent.Parent
-local _ = require(parent.Parent.LuauPolyfill)
-local _ = require(parent.language.ast)
-local _ = require(parent.execution.execute)
-local _ = require(parent.type.schema)
-local _ = require(parent.type.definition)
+﻿local Parent = script.Parent.Parent
+local _ = require(Parent.Parent.LuauPolyfill)
+local _ = require(Parent.language.ast)
+local _ = require(Parent.execution.execute)
+local _ = require(Parent.type.schema)
+local _ = require(Parent.type.definition)
 
 return {
-	subscribe = function(_)
+	subscribe = function(_) --[[ Line: 35 ]]
 		error("graphql-lua does not currently implement subscriptions")
 	end,
-	createSourceEventStream = function(_, _, _, _, _, _, _)
+	createSourceEventStream = function(_, _, _, _, _, _, _) --[[ Line: 39 ]]
 		error("graphql-lua does not currently implement subscriptions")
 	end
 }

@@ -1,21 +1,21 @@
-﻿local constantsModule = require(script:FindFirstAncestor("UserLib").Utils.Constants)
-local t = {
-	new = function()
-		-- upvalues: constantsModule (ref)
+﻿local ConstantsModule = require(script:FindFirstAncestor("UserLib").Utils.Constants)
+local ThumbnailRequestModule = {
+	new = function() --[[ Line: 17 ]]
+		-- upvalues: ConstantsModule (copy)
 		return {
-			thumbnailType = constantsModule.RbxAvatarThumbnailTypesFromEnum.HeadShot,
-			thumbnailSize = constantsModule.RbxThumbnailSizes.Size150x150
+			thumbnailType = ConstantsModule.RbxAvatarThumbnailTypesFromEnum.HeadShot,
+			thumbnailSize = ConstantsModule.RbxThumbnailSizes.Size150x150
 		}
 	end
 }
 
-function t.fromData(p1, p2)
-	-- upvalues: t (ref)
-	local var1 = t.new()
-	var1.thumbnailType = p1
-	var1.thumbnailSize = p2
+function ThumbnailRequestModule.fromData(ThumbnailType, ThumbnailSize) --[[ Line: 26 ]]
+	-- upvalues: ThumbnailRequestModule (copy)
+	local NewThumbnailRequest = ThumbnailRequestModule.new()
+	NewThumbnailRequest.thumbnailType = ThumbnailType
+	NewThumbnailRequest.thumbnailSize = ThumbnailSize
 	
-	return var1
+	return NewThumbnailRequest
 end
 
-return t
+return ThumbnailRequestModule

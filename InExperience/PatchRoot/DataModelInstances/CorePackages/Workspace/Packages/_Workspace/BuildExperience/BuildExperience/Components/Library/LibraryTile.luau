@@ -1,89 +1,81 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
 local _ = require(script.Parent.LibraryTypes)
-local modelViewportModule = require(buildExperience.Components.Library.ModelViewport)
-local image = foundationModule.Image
-local icon = foundationModule.Icon
-local text = foundationModule.Text
-local view = foundationModule.View
-local iconName = foundationModule.Enums.IconName
-local iconSize = foundationModule.Enums.IconSize
+local ModelViewportModule = require(BuildExperience.Components.Library.ModelViewport)
+local Image = FoundationModule.Image
+local Icon = FoundationModule.Icon
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local IconName = FoundationModule.Enums.IconName
+local IconSize = FoundationModule.Enums.IconSize
 
-return reactModule.memo(function(p1)
-	-- upvalues: foundationModule (ref), iconName (ref), reactModule (ref), image (ref), modelViewportModule (ref), icon (ref), iconSize (ref), view (ref), text (ref)
-	local var1
-	local var2 = foundationModule.Hooks.useTokens()
-	local var3 = foundationModule.Hooks.useScaledValue(136)
-	local var4 = foundationModule.Hooks.useScaledValue(168)
-	local var5 = p1.onActivated ~= nil
-	local tileKey = p1.tileKey or (p1.itemId or p1.displayName)
-	local var6 = p1.isFolder and p1.folderPreview == nil
-	local var7 = if p1.folderPreview ~= nil then p1.model else p1.folderPreview.model
-	local var8 = if p1.folderPreview ~= nil then p1.thumbnail else p1.folderPreview.image
-	local var9 = if var6 then iconName.Folder elseif p1.itemKind == "Sound" then iconName.Speaker elseif p1.itemKind == "Image" then iconName.Image else iconName.TwoStackedSquares
+return ReactModule.memo(function(Frame) --[[ Line: 27 | Named "LibraryTile" ]]
+	-- upvalues: FoundationModule (copy), IconName (copy), ReactModule (copy), Image (copy), ModelViewportModule (copy), Icon (copy), IconSize (copy), View (copy), Text (copy)
+	local UseTokensResult = FoundationModule.Hooks.useTokens()
+	local UseScaledValueResult = FoundationModule.Hooks.useScaledValue(136)
+	local UseScaledValueResult1 = FoundationModule.Hooks.useScaledValue(168)
+	local TileKey = Frame.tileKey or (Frame.itemId or Frame.displayName)
+	local NoFolderPreview: boolean = Frame.isFolder and Frame.folderPreview == nil
+	local Model = if Frame.folderPreview == nil then Frame.model else Frame.folderPreview.model
+	local Thumbnail = if Frame.folderPreview == nil then Frame.thumbnail else Frame.folderPreview.image
+	local Folder = if NoFolderPreview then IconName.Folder elseif Frame.itemKind == "Sound" then IconName.Speaker elseif Frame.itemKind == "Image" then IconName.Image else IconName.TwoStackedSquares
 	
-	if p1.itemKind == "Image" and var8 ~= nil then
-		var1 = reactModule.createElement(image, {
-			tag = "size-full",
-			Image = var8,
-			ScaleType = Enum.ScaleType.Fit,
-			testId = `Library.Tile.{tileKey}.Image`
-		})
-	elseif var7 == nil then
-		var1 = reactModule.createElement
-		var1 = var1(icon, {
-			name = var9,
-			size = if var6 or p1.itemKind == "Sound" then var2.Size.Size_900 else iconSize.Large,
-			style = var2.Color.Content.Default,
-			testId = `Library.Tile.{tileKey}.Icon`
-		})
-	else
-		var1 = reactModule.createElement(modelViewportModule, {
-			backgroundTransparency = 1,
-			isInteractive = false,
-			model = var7,
-			unavailableText = p1.unavailableText,
-			size = UDim2.fromScale(1, 1),
-			testId = `Library.Tile.{tileKey}.Model`
-		})
-	end
-	return reactModule.createElement(view, {
-		LayoutOrder = p1.LayoutOrder,
-		onActivated = p1.onActivated,
-		selection = { Selectable = var5 },
+	return ReactModule.createElement(View, {
+		LayoutOrder = Frame.LayoutOrder,
+		onActivated = Frame.onActivated,
+		selection = { Selectable = Frame.onActivated ~= nil },
 		stateLayer = {
-			affordance = foundationModule.Enums.StateLayerAffordance.None
+			affordance = FoundationModule.Enums.StateLayerAffordance.None
 		},
-		Size = p1.Size or (if p1.compact then UDim2.fromOffset(var2.Size.Size_2400, var3) else UDim2.fromOffset(var2.Size.Size_3000, var4)),
+		Size = Frame.Size or (if Frame.compact then UDim2.fromOffset(UseTokensResult.Size.Size_2400, UseScaledValueResult) else UDim2.fromOffset(UseTokensResult.Size.Size_3000, UseScaledValueResult1)),
 		tag = {
 			["radius-medium"] = true,
-			["col gap-small"] = not p1.compact
+			["col gap-small"] = not Frame.compact
 		},
-		testId = `Library.Tile.{tileKey}`
+		testId = `Library.Tile.{TileKey}`
 	}, {
-		Thumbnail = reactModule.createElement(view, {
+		Thumbnail = ReactModule.createElement(View, {
 			LayoutOrder = 1,
 			tag = "align-x-center align-y-center radius-medium clip bg-shift-200",
-			Size = p1.mediaSize or UDim2.fromScale(1, 0),
-			aspectRatio = if p1.mediaSize == nil then 1 else nil,
-			testId = `Library.Tile.{tileKey}.MediaFrame`
-		}, { Media = var1 }),
-		Content = reactModule.createElement(view, {
+			Size = Frame.mediaSize or UDim2.fromScale(1, 0),
+			aspectRatio = if Frame.mediaSize == nil then 1 else nil,
+			testId = `Library.Tile.{TileKey}.MediaFrame`
+		}, {
+			Media = if Frame.itemKind == "Image" and Thumbnail ~= nil then ReactModule.createElement(Image, {
+				tag = "size-full",
+				Image = Thumbnail,
+				ScaleType = Enum.ScaleType.Fit,
+				testId = `Library.Tile.{TileKey}.Image`
+			}) elseif Model == nil then ReactModule.createElement(Icon, {
+				name = Folder,
+				size = if NoFolderPreview or Frame.itemKind == "Sound" then UseTokensResult.Size.Size_900 else IconSize.Large,
+				style = UseTokensResult.Color.Content.Default,
+				testId = `Library.Tile.{TileKey}.Icon`
+			}) else ReactModule.createElement(ModelViewportModule, {
+				backgroundTransparency = 1,
+				isInteractive = false,
+				model = Model,
+				unavailableText = Frame.unavailableText,
+				size = UDim2.fromScale(1, 1),
+				testId = `Library.Tile.{TileKey}.Model`
+			})
+		}),
+		Content = ReactModule.createElement(View, {
 			LayoutOrder = 2,
 			tag = {
-				["col position-bottom-left anchor-bottom-left size-full-800"] = p1.compact,
-				["col size-full-0 auto-y"] = not p1.compact
+				["col position-bottom-left anchor-bottom-left size-full-800"] = Frame.compact,
+				["col size-full-0 auto-y"] = not Frame.compact
 			},
-			testId = `Library.Tile.{tileKey}.Content`
+			testId = `Library.Tile.{TileKey}.Content`
 		}, {
-			Title = reactModule.createElement(text, {
+			Title = ReactModule.createElement(Text, {
 				LayoutOrder = 1,
 				tag = "text-title-medium text-align-x-left text-truncate-end content-emphasis",
-				Text = p1.displayName,
+				Text = Frame.displayName,
 				TextYAlignment = Enum.TextYAlignment.Top,
-				Size = UDim2.new(1, 0, 0, if p1.compact then var2.Size.Size_600 else var2.Size.Size_1000)
+				Size = UDim2.new(1, 0, 0, if Frame.compact then UseTokensResult.Size.Size_600 else UseTokensResult.Size.Size_1000)
 			})
 		})
 	})

@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.MusicPicker.MusicPicker)
+﻿return (require(script.Parent.Parent.Parent._Index.MusicPicker.MusicPicker))

@@ -1,70 +1,69 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local inGameMenuDependenciesModule = require(corePackagesService.Packages.InGameMenuDependencies)
-local roact = inGameMenuDependenciesModule.Roact
-local roactRodux = inGameMenuDependenciesModule.RoactRodux
-local t = inGameMenuDependenciesModule.t
-local UIBlox = inGameMenuDependenciesModule.UIBlox
-local foundationModule = require(corePackagesService.Packages.Foundation)
-local fFlagCoreUiMigrateUIBloxToFoundation = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
-local var1 = if fFlagCoreUiMigrateUIBloxToFoundation then foundationModule.UNSTABLE.withCursorMigration else UIBlox.App.SelectionImage.withSelectionCursorProvider
-local var2 = if fFlagCoreUiMigrateUIBloxToFoundation then foundationModule.Enums.CursorType else UIBlox.App.SelectionImage.CursorKind
-local parent = script.Parent.Parent
-local constantsModule = require(parent.Resources.Constants)
-local directionModule = require(parent.Enums.Direction)
-local setCurrentZoneModule = require(parent.Actions.SetCurrentZone)
-local portalSize = constantsModule.Zone.PortalSize
-local t_1 = {
-	[directionModule.Up] = {
-		size = UDim2.new(1, 0, 0, portalSize),
+﻿local CorePackages = game:GetService("CorePackages")
+local InGameMenuDependenciesModule = require(CorePackages.Packages.InGameMenuDependencies)
+local Roact = InGameMenuDependenciesModule.Roact
+local RoactRodux = InGameMenuDependenciesModule.RoactRodux
+local T = InGameMenuDependenciesModule.t
+local UIBlox = InGameMenuDependenciesModule.UIBlox
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local FFlagCoreUiMigrateUIBloxToFoundation = require(CorePackages.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
+local WithCursorMigration = if FFlagCoreUiMigrateUIBloxToFoundation then FoundationModule.UNSTABLE.withCursorMigration else UIBlox.App.SelectionImage.withSelectionCursorProvider
+local CursorType = if FFlagCoreUiMigrateUIBloxToFoundation then FoundationModule.Enums.CursorType else UIBlox.App.SelectionImage.CursorKind
+local Parent = script.Parent.Parent
+local DirectionModule = require(Parent.Enums.Direction)
+local SetCurrentZoneModule = require(Parent.Actions.SetCurrentZone)
+local PortalSize = require(Parent.Resources.Constants).Zone.PortalSize
+local config = {
+	[DirectionModule.Up] = {
+		size = UDim2.new(1, 0, 0, PortalSize),
 		position = UDim2.new(0, 0, 0, 0)
 	},
-	[directionModule.Down] = {
-		size = UDim2.new(1, 0, 0, portalSize),
-		position = UDim2.new(0, 0, 1, -portalSize)
+	[DirectionModule.Down] = {
+		size = UDim2.new(1, 0, 0, PortalSize),
+		position = UDim2.new(0, 0, 1, -PortalSize)
 	},
-	[directionModule.Left] = {
-		size = UDim2.new(0, portalSize, 1, 0),
+	[DirectionModule.Left] = {
+		size = UDim2.new(0, PortalSize, 1, 0),
 		position = UDim2.new(0, 0, 0, 0)
 	},
-	[directionModule.Right] = {
-		size = UDim2.new(0, portalSize, 1, 0),
-		position = UDim2.new(1, -portalSize, 0, 0)
+	[DirectionModule.Right] = {
+		size = UDim2.new(0, PortalSize, 1, 0),
+		position = UDim2.new(1, -PortalSize, 0, 0)
 	}
 }
-local zonePortal = roact.PureComponent:extend("ZonePortal")
-zonePortal.validateProps = t.strictInterface({
-	targetZone = t.number,
-	direction = directionModule.isEnumValue,
-	setCurrentZone = t.optional(t.callback)
+local ZonePortal = Roact.PureComponent:extend("ZonePortal")
+ZonePortal.validateProps = T.strictInterface({
+	targetZone = T.number,
+	direction = DirectionModule.isEnumValue,
+	setCurrentZone = T.optional(T.callback)
 })
 
-function zonePortal.render(p1)
-	-- upvalues: t_1 (ref), var1 (ref), roact (ref), var2 (ref)
-	local direction = t_1[p1.props.direction]
+function ZonePortal.render(p1) --[[ Line: 56 ]]
+	-- upvalues: config (copy), WithCursorMigration (copy), Roact (copy), CursorType (copy)
+	local Entry = config[p1.props.direction]
 	
-	return var1(function(p2)
-		-- upvalues: roact (copy), direction (ref), var2 (copy), p1 (ref)
-		return roact.createElement("Frame", {
-			Size = direction.size,
-			Position = direction.position,
+	return WithCursorMigration(function(Callback) --[[ Line: 60 ]]
+		-- upvalues: Roact (upval), Entry (copy), CursorType (upval), p1 (copy)
+		return Roact.createElement("Frame", {
+			Size = Entry.size,
+			Position = Entry.position,
 			BackgroundTransparency = 1,
 			Selectable = true,
 			ZIndex = 2147483647,
-			SelectionImageObject = p2(var2.Invisible),
-			[roact.Event.SelectionGained] = function()
-				-- upvalues: p1 (copy)
+			SelectionImageObject = Callback(CursorType.Invisible),
+			[Roact.Event.SelectionGained] = function() --[[ Line: 68 ]]
+				-- upvalues: p1 (upval)
 				p1.props.setCurrentZone(p1.props.targetZone)
 			end
 		})
 	end)
 end
 
-return roactRodux.UNSTABLE_connect2(nil, function(p1)
-	-- upvalues: setCurrentZoneModule (ref)
+return (RoactRodux.UNSTABLE_connect2(nil, function(Callback) --[[ Line: 75 ]]
+	-- upvalues: SetCurrentZoneModule (copy)
 	return {
-		setCurrentZone = function(value)
-			-- upvalues: p1 (ref), setCurrentZoneModule (copy)
-			return p1(setCurrentZoneModule(value))
+		setCurrentZone = function(p1) --[[ Line: 77 ]]
+			-- upvalues: Callback (copy), SetCurrentZoneModule (upval)
+			return Callback(SetCurrentZoneModule(p1))
 		end
 	}
-end)(zonePortal)
+end)(ZonePortal))

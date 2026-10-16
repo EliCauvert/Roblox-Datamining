@@ -2,21 +2,21 @@
 local _ = require(script.Parent.Parent.Types)
 local _ = require(script.Parent.Parent.Enums.Categories)
 
-return function(p1, p2)
-	local t = {}
+return function(List, p1) --[[ Line: 13 | Named "buildSlotCategoryTabItems" ]]
+	local List1 = {}
 	
-	for i, v in p1 do
-		if not v.hide then
-			table.insert(t, {
-				id = i,
-				text = p2[v.nameTranslationKey] or v.nameTranslationKey
+	for Id, value in List do
+		if not value.hide then
+			table.insert(List1, {
+				id = Id,
+				text = p1[value.nameTranslationKey] or value.nameTranslationKey
 			})
 		end
 	end
-	table.sort(t, function(p3, p4)
-		-- upvalues: p1 (ref)
-		return p1[p3.id].index < p1[p4.id].index
+	table.sort(List1, function(A, B): boolean --[[ Line: 26 ]]
+		-- upvalues: List (copy)
+		return List[A.id].index < List[B.id].index
 	end)
 	
-	return t
+	return List1
 end

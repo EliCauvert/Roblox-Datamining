@@ -1,71 +1,72 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
-local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
-local normalize = require(parent.AvatarExperienceCommon).Utils.normalize
-local normalizeBoolean = normalize.normalizeBoolean
-local normalizeNumber = normalize.normalizeNumber
-local normalizeNotEmptyString = normalize.normalizeNotEmptyString
-local makeNormalizeTableFn = normalize.makeNormalizeTableFn
-local makeNormalizeListFn = normalize.makeNormalizeListFn
-local makeRequired = normalize.makeRequired
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
+local Normalize = require(Parent.AvatarExperienceCommon).Utils.normalize
+local NormalizeBoolean = Normalize.normalizeBoolean
+local NormalizeNumber = Normalize.normalizeNumber
+local NormalizeNotEmptyStringFunction = Normalize.normalizeNotEmptyString
+local MakeNormalizeTableFnFunction = Normalize.makeNormalizeTableFn
+local MakeNormalizeListFnFunction = Normalize.makeNormalizeListFn
+local MakeRequiredFunction = Normalize.makeRequired
 local _ = require(script.Parent.CartPricingForOffersTypes)
-local var1 = makeNormalizeTableFn({
-	collectibleItemId = makeRequired(normalizeNotEmptyString),
+local FFlagAXUpdateOffersEndsUIWithBadge = require(Parent.AvatarExperienceFlags).FFlagAXUpdateOffersEndsUIWithBadge
+local NormalizeTableFn = MakeNormalizeTableFnFunction({
+	collectibleItemId = MakeRequiredFunction(NormalizeNotEmptyStringFunction),
 	discountInformation = {
-		fn = makeNormalizeTableFn({
+		fn = MakeNormalizeTableFnFunction({
 			discounts = {
-				fn = makeNormalizeListFn(makeNormalizeTableFn({
-					discountCampaign = { fn = normalizeNotEmptyString },
-					localizedDiscountAttribution = { fn = normalizeNotEmptyString },
-					robuxDiscountAmount = { fn = normalizeNumber },
-					robuxDiscountPercentage = { fn = normalizeNumber }
-				}))
+				fn = MakeNormalizeListFnFunction((MakeNormalizeTableFnFunction({
+					discountCampaign = { fn = NormalizeNotEmptyStringFunction },
+					localizedDiscountAttribution = { fn = NormalizeNotEmptyStringFunction },
+					robuxDiscountAmount = { fn = NormalizeNumber },
+					robuxDiscountPercentage = { fn = NormalizeNumber }
+				})))
 			},
-			originalPrice = { fn = normalizeNumber },
-			totalDiscountAmount = { fn = normalizeNumber },
-			totalDiscountPercentage = { fn = normalizeNumber }
+			originalPrice = { fn = NormalizeNumber },
+			totalDiscountAmount = { fn = NormalizeNumber },
+			totalDiscountPercentage = { fn = NormalizeNumber }
 		})
 	},
-	priceInRobux = { fn = normalizeNumber },
-	regularPriceInRobux = { fn = normalizeNumber }
+	priceInRobux = { fn = NormalizeNumber },
+	regularPriceInRobux = { fn = NormalizeNumber }
 })
-local var2 = if avatarExperienceFlagsModule.FFlagAXUpdateOffersEndsUIWithBadge then makeNormalizeTableFn({
-	expirationTimeUtc = { fn = normalizeNotEmptyString },
-	localizedDescription = { fn = normalizeNotEmptyString },
-	offerId = makeRequired(normalizeNotEmptyString),
-	selected = { fn = normalizeBoolean }
-}) else makeNormalizeTableFn({
-	localizedDescription = { fn = normalizeNotEmptyString },
-	offerId = makeRequired(normalizeNotEmptyString),
-	selected = { fn = normalizeBoolean }
+local NormalizeTableFn1 = if FFlagAXUpdateOffersEndsUIWithBadge then MakeNormalizeTableFnFunction({
+	expirationTimeUtc = { fn = NormalizeNotEmptyStringFunction },
+	localizedDescription = { fn = NormalizeNotEmptyStringFunction },
+	offerId = MakeRequiredFunction(NormalizeNotEmptyStringFunction),
+	selected = { fn = NormalizeBoolean }
+}) else MakeNormalizeTableFnFunction({
+	localizedDescription = { fn = NormalizeNotEmptyStringFunction },
+	offerId = MakeRequiredFunction(NormalizeNotEmptyStringFunction),
+	selected = { fn = NormalizeBoolean }
 })
 
-return function(p1)
-	-- upvalues: makeNormalizeListFn (ref), var1 (ref), var2 (ref), normalizeNotEmptyString (ref)
+return function(p1) --[[ Line: 57 | Named "normalizeCartPricingForOffersResponse" ]]
+	-- upvalues: MakeNormalizeListFnFunction (copy), NormalizeTableFn (copy), NormalizeTableFn1 (copy), NormalizeNotEmptyStringFunction (copy)
 	if p1 == nil then
 		return nil, nil
-	elseif type(p1) ~= "table" then
+	end
+	if type(p1) ~= "table" then
 		return nil, "CartPricingForOffers: unexpected response body type"
 	end
-	local t = { items = {} }
-	local t_1 = {}
+	local config = { items = {} }
+	local List = {}
 	
 	if p1.items ~= nil then
-		local var3, var4 = makeNormalizeListFn(var1)(p1.items)
+		local Items, v1 = MakeNormalizeListFnFunction(NormalizeTableFn)(p1.items)
 		
-		if var4 then
-			table.insert(t_1, `items normalization failed with: {var4}`)
+		if v1 then
+			table.insert(List, `items normalization failed with: {v1}`)
 		end
-		t.items = var3
+		config.items = Items
 	end
 	if p1.availableOffers ~= nil then
-		local var5, var6 = makeNormalizeListFn(var2)(p1.availableOffers)
+		local AvailableOffers, v2 = MakeNormalizeListFnFunction(NormalizeTableFn1)(p1.availableOffers)
 		
-		if var6 then
-			table.insert(t_1, `availableOffers normalization failed with: {var6}`)
+		if v2 then
+			table.insert(List, `availableOffers normalization failed with: {v2}`)
 		end
-		t.availableOffers = var5
+		config.availableOffers = AvailableOffers
 	end
-	t.savingsSummary = normalizeNotEmptyString(p1.savingsSummary)
+	config.savingsSummary = NormalizeNotEmptyStringFunction(p1.savingsSummary)
 	
-	return t, if next(t_1) then table.concat(t_1, " ") else nil
+	return config, if next(List) then table.concat(List, " ") else nil
 end

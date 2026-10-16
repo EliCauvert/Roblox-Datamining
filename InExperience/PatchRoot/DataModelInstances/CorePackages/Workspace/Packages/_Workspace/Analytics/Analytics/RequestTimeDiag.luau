@@ -1,16 +1,16 @@
-﻿local reportToDiagByCountryCodeModule = require(script.Parent.ReportToDiagByCountryCode)
-local t = {}
-t.__index = t
+﻿local ReportToDiagByCountryCodeModule = require(script.Parent.ReportToDiagByCountryCode)
+local RequestTimeDiagModule = {}
+RequestTimeDiagModule.__index = RequestTimeDiagModule
 
-function t.new(p1, p2)
-	assert(p2, "metricName is required")
+function RequestTimeDiagModule.new(p1, MetricName) --[[ Line: 6 ]]
+	assert(MetricName, "metricName is required")
 	
-	return setmetatable({ metricName = p2, startTime = tick() }, p1)
+	return (setmetatable({ metricName = MetricName, startTime = tick() }, p1))
 end
 
-function t:report()
-	-- upvalues: reportToDiagByCountryCodeModule (ref)
-	reportToDiagByCountryCodeModule(self.metricName, "RoundTripTime", tick() - self.startTime, 100)
+function RequestTimeDiagModule:report() --[[ Line: 14 ]]
+	-- upvalues: ReportToDiagByCountryCodeModule (copy)
+	ReportToDiagByCountryCodeModule(self.metricName, "RoundTripTime", tick() - self.startTime, 100)
 end
 
-return t
+return RequestTimeDiagModule

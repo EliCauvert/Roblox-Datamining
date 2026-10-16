@@ -1,42 +1,46 @@
-﻿local presenceTypeModule = require(script.Parent.Enums.PresenceType)
-local t = {
-	[0] = presenceTypeModule.Offline,
-	[1] = presenceTypeModule.Online,
-	[2] = presenceTypeModule.InGame,
-	[3] = presenceTypeModule.InStudio
+﻿local PresenceTypeModule = require(script.Parent.Enums.PresenceType)
+local config = {
+	[0] = PresenceTypeModule.Offline,
+	[1] = PresenceTypeModule.Online,
+	[2] = PresenceTypeModule.InGame,
+	[3] = PresenceTypeModule.InStudio
 }
 
-local function _(p1)
+local function _(p1): string --[[ Line: 34 | Named "coerceStringField" ]]
 	return if p1 == nil then "" else tostring(p1)
 end
 
-local function mapRawPresenceTypeToEnum(p1)
-	-- upvalues: t (ref), presenceTypeModule (ref)
-	return if type(p1) == "number" then t[p1] or presenceTypeModule.Offline elseif type(p1) == "string" and (p1 == "Offline" or p1 == "Online" or (p1 == "InGame" or p1 == "InStudio")) then p1 elseif p1 == presenceTypeModule.Offline or p1 == presenceTypeModule.Online or (p1 == presenceTypeModule.InGame or p1 == presenceTypeModule.InStudio) then p1 else presenceTypeModule.Offline
+local function mapRawPresenceTypeToEnum(UserPresenceType) --[[ Line: 41 ]]
+	-- upvalues: config (copy), PresenceTypeModule (copy)
+	return if type(UserPresenceType) == "number" then config[UserPresenceType] or PresenceTypeModule.Offline elseif type(UserPresenceType) == "string" and (UserPresenceType == "Offline" or UserPresenceType == "Online" or UserPresenceType == "InGame" or UserPresenceType == "InStudio") then UserPresenceType elseif UserPresenceType == PresenceTypeModule.Offline or UserPresenceType == PresenceTypeModule.Online or UserPresenceType == PresenceTypeModule.InGame or UserPresenceType == PresenceTypeModule.InStudio then UserPresenceType else PresenceTypeModule.Offline
 end
 
-return function(p1, p2)
-	-- upvalues: mapRawPresenceTypeToEnum (ref)
-	local var1 = if p1 then p1.userId else p2
+return function(p1, p2) --[[ Line: 61 | Named "fromApiPresenceTable" ]]
+	-- upvalues: mapRawPresenceTypeToEnum (copy)
+	local UserId = p1 and p1.userId or p2
 	
-	if p1 and type(p1) == "table" and var1 then
-		local t = {
-			id = tostring(var1),
-			userPresenceType = mapRawPresenceTypeToEnum(p1.userPresenceType)
-		}
-		local lastLocation = p1.lastLocation
-		t.lastLocation = if lastLocation == nil then "" else tostring(lastLocation)
-		t.lastOnline = p1.lastOnline
-		local gameId = p1.gameId
-		t.gameId = if gameId == nil then "" else tostring(gameId)
-		local placeId = p1.placeId
-		t.placeId = if placeId == nil then "" else tostring(placeId)
-		local rootPlaceId = p1.rootPlaceId
-		t.rootPlaceId = if rootPlaceId == nil then "" else tostring(rootPlaceId)
-		local universeId = p1.universeId
-		t.universeId = if universeId == nil then "" else tostring(universeId)
+	if p1 and type(p1) == "table" and UserId then
+		local LastLocation = p1.lastLocation
+		local Text: string = if LastLocation == nil then "" else tostring(LastLocation)
+		local GameId = p1.gameId
+		local Text1: string = if GameId == nil then "" else tostring(GameId)
+		local PlaceId = p1.placeId
+		local Text2: string = if PlaceId == nil then "" else tostring(PlaceId)
+		local RootPlaceId = p1.rootPlaceId
+		local Text3: string = if RootPlaceId == nil then "" else tostring(RootPlaceId)
+		local UniverseId = p1.universeId
 		
-		return t
+		return {
+			id = tostring(UserId),
+			userPresenceType = mapRawPresenceTypeToEnum(p1.userPresenceType),
+			lastLocation = Text,
+			lastOnline = p1.lastOnline,
+			gameId = Text1,
+			placeId = Text2,
+			rootPlaceId = Text3,
+			universeId = if UniverseId == nil then "" else tostring(UniverseId)
+		}
+	else
+		return nil
 	end
-	return nil
 end

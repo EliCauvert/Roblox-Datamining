@@ -1,65 +1,64 @@
-﻿local gameInvite = script:FindFirstAncestor("GameInvite")
-local context = gameInvite.Context
-local parent = gameInvite.Parent
-local reactModule = require(parent.React)
-local UIBloxModule = require(parent.UIBlox)
-local fFlagGameInviteModalUnlockMouse = require(parent.SharedFlags).FFlagGameInviteModalUnlockMouse
-local gameInviteModalLayoutContextModule = require(context.GameInviteModalLayoutContext)
-local gameInviteModalManagerModule = require(gameInvite.GameInviteModalManager)
-local useStyle = UIBloxModule.Core.Style.useStyle
-local imageSet = UIBloxModule.Core.ImageSet
-local images = UIBloxModule.App.ImageSet.Images
-local rect = Rect.new(8, 8, 9, 9)
+﻿local GameInvite = script:FindFirstAncestor("GameInvite")
+local Parent = GameInvite.Parent
+local ReactModule = require(Parent.React)
+local UIBloxModule = require(Parent.UIBlox)
+local FFlagGameInviteModalUnlockMouse = require(Parent.SharedFlags).FFlagGameInviteModalUnlockMouse
+local GameInviteModalLayoutContextModule = require(GameInvite.Context.GameInviteModalLayoutContext)
+local GameInviteModalManagerModule = require(GameInvite.GameInviteModalManager)
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local ImageSet = UIBloxModule.Core.ImageSet
+local Images = UIBloxModule.App.ImageSet.Images
+local _Rect = Rect.new(8, 8, 9, 9)
 
-return function(p1)
-	-- upvalues: useStyle (ref), reactModule (ref), gameInviteModalLayoutContextModule (ref), imageSet (ref), fFlagGameInviteModalUnlockMouse (ref), gameInviteModalManagerModule (ref), images (ref), rect (ref)
-	local vector2, var1, uDim2
-	local var2 = useStyle()
-	local theme = var2.Theme
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local var3 = reactModule.useContext(gameInviteModalLayoutContextModule)
-	local modalSize = var3.modalSize
+return function(p1) --[[ Line: 22 ]]
+	-- upvalues: UseStyleFunction (copy), ReactModule (copy), GameInviteModalLayoutContextModule (copy), ImageSet (copy), FFlagGameInviteModalUnlockMouse (copy), GameInviteModalManagerModule (copy), Images (copy), _Rect (copy)
+	local UseStyleResult = UseStyleFunction()
+	local Theme = UseStyleResult.Theme
+	local UseContextResult = ReactModule.useContext(GameInviteModalLayoutContextModule)
+	local IsFullHeight = UseContextResult.isFullHeight
+	local ModalSize = UseContextResult.modalSize
+	local _Vector2 = nil
+	local v1 = nil
+	local _UDim2 = nil
 	
-	if var3.isFullWidth or var3.isFullHeight then
-		vector2 = Vector2.new(0.5, 1)
-		var1 = "component_assets/bullet_17"
-		uDim2 = UDim2.new(0.5, 0, 1, 0)
+	if UseContextResult.isFullWidth or IsFullHeight then
+		_Vector2 = Vector2.new(0.5, 1)
+		v1 = "component_assets/bullet_17"
+		_UDim2 = UDim2.new(0.5, 0, 1, 0)
 	else
-		vector2 = Vector2.new(0.5, 0.5)
-		var1 = "component_assets/circle_17"
-		uDim2 = UDim2.new(0.5, 0, 0.5, 0)
+		_Vector2 = Vector2.new(0.5, 0.5)
+		v1 = "component_assets/circle_17"
+		_UDim2 = UDim2.new(0.5, 0, 0.5, 0)
 	end
-	return reactModule.createElement(imageSet.ImageSetButton, {
+	return ReactModule.createElement(ImageSet.ImageSetButton, {
 		Selectable = false,
 		Size = UDim2.new(1, 0, 1, 0),
 		Position = UDim2.new(0.5, 0, 0.5, 0),
 		AnchorPoint = Vector2.new(0.5, 0.5),
-		BackgroundColor3 = var2.Theme.Overlay.Color,
-		Transparency = var2.Theme.Overlay.Transparency,
+		BackgroundColor3 = UseStyleResult.Theme.Overlay.Color,
+		Transparency = UseStyleResult.Theme.Overlay.Transparency,
 		AutoButtonColor = false,
-		Modal = if fFlagGameInviteModalUnlockMouse then true else nil,
+		Modal = if FFlagGameInviteModalUnlockMouse then true else nil,
 		ZIndex = 0,
-		[reactModule.Event.Activated] = function()
-			-- upvalues: gameInviteModalManagerModule (copy)
-			gameInviteModalManagerModule:closeModal()
+		[ReactModule.Event.Activated] = function() --[[ Line: 52 ]]
+			-- upvalues: GameInviteModalManagerModule (upval)
+			GameInviteModalManagerModule:closeModal()
 		end
 	}, {
-		GameInviteModalContainer = reactModule.createElement(imageSet.ImageSetButton, {
+		GameInviteModalContainer = ReactModule.createElement(ImageSet.ImageSetButton, {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			AutoButtonColor = false,
 			ClipsDescendants = true,
 			Selectable = false,
-			Position = uDim2,
-			Size = modalSize,
-			AnchorPoint = vector2,
-			Image = images[var1],
-			ImageColor3 = theme.BackgroundDefault.Color,
-			ImageTransparency = theme.BackgroundDefault.Transparency,
+			Position = _UDim2,
+			Size = ModalSize,
+			AnchorPoint = _Vector2,
+			Image = Images[v1],
+			ImageColor3 = Theme.BackgroundDefault.Color,
+			ImageTransparency = Theme.BackgroundDefault.Transparency,
 			ScaleType = Enum.ScaleType.Slice,
-			SliceCenter = rect
+			SliceCenter = _Rect
 		}, p1.children)
 	})
 end

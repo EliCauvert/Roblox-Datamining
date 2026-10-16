@@ -1,0 +1,3 @@
+﻿local FFlagEnablePlusReferralLandingSheet = require(script:FindFirstAncestor("RobloxSubscriptionPurchaseApp").Parent.SharedFlags).FFlagEnablePlusReferralLandingSheet
+
+return game:DefineFastFlag("EnablePlusReferralLegalDisclosure", false) and FFlagEnablePlusReferralLandingSheet

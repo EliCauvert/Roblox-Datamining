@@ -1,14 +1,14 @@
-﻿local httpService = game:GetService("HttpService")
-local inExperienceShop = script:FindFirstAncestor("InExperienceShop")
-local _ = require(inExperienceShop.Parent.Promise)
-local _ = require(inExperienceShop.Types)
-local fetchShopItemIdsModule = require(script.Parent.fetchShopItemIds)
-local buildShopDataFromWidgetsModule = require(script.Parent.buildShopDataFromWidgets)
+﻿local HttpService = game:GetService("HttpService")
+local InExperienceShop = script:FindFirstAncestor("InExperienceShop")
+local _ = require(InExperienceShop.Parent.Promise)
+local _ = require(InExperienceShop.Types)
+local FetchShopItemIdsModule = require(script.Parent.fetchShopItemIds)
+local BuildShopDataFromWidgetsModule = require(script.Parent.buildShopDataFromWidgets)
 
-return function()
-	-- upvalues: httpService (ref), fetchShopItemIdsModule (ref), buildShopDataFromWidgetsModule (ref)
-	return fetchShopItemIdsModule(httpService:GenerateGUID(false)):andThen(function(p1)
-		-- upvalues: buildShopDataFromWidgetsModule (copy)
-		return buildShopDataFromWidgetsModule(p1, nil)
+return function() --[[ Line: 30 | Named "fetchShopWidgetsOnly" ]]
+	-- upvalues: HttpService (copy), FetchShopItemIdsModule (copy), BuildShopDataFromWidgetsModule (copy)
+	return FetchShopItemIdsModule((HttpService:GenerateGUID(false))):andThen(function(Result) --[[ Line: 35 ]]
+		-- upvalues: BuildShopDataFromWidgetsModule (upval)
+		return BuildShopDataFromWidgetsModule(Result, nil)
 	end)
 end

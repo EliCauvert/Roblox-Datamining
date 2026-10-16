@@ -1,37 +1,37 @@
-﻿local parent = script.Parent.Parent
-local parent_1 = parent.Parent.Parent
-local UIBloxConfigModule = require(parent_1.UIBloxConfig)
-local reactModule = require(parent_1.Parent.React)
-local useStyleModule = require(parent_1.Core.Style.useStyle)
-local iconSizeModule = require(parent_1.App.ImageSet.Enum.IconSize)
-local imagesModule = require(parent_1.App.ImageSet.Images)
-local imageSetComponentModule = require(parent_1.Core.ImageSet.ImageSetComponent)
-local itemTileEnumsModule = require(parent.Enum.ItemTileEnums)
-local getIconSizeModule = require(parent_1.App.ImageSet.getIconSize)
+﻿local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent.Parent
+local ReactModule = require(Parent1.Parent.React)
+local UseStyleModule = require(Parent1.Core.Style.useStyle)
+local IconSizeModule = require(Parent1.App.ImageSet.Enum.IconSize)
+local ImagesModule = require(Parent1.App.ImageSet.Images)
+local ImageSetComponentModule = require(Parent1.Core.ImageSet.ImageSetComponent)
+local ItemTileEnumsModule = require(Parent.Enum.ItemTileEnums)
+local GetIconSizeModule = require(Parent1.App.ImageSet.getIconSize)
 
-local function _(p1)
-	-- upvalues: itemTileEnumsModule (ref)
-	return if p1 == itemTileEnumsModule.StatusStyle.PendingIcon then "icons/status/pending_small" elseif p1 == itemTileEnumsModule.StatusStyle.AlertIcon then "icons/actions/info_small" else nil
+local function _(AlertIcon) --[[ Line: 21 | Named "getIconImage" ]]
+	-- upvalues: ItemTileEnumsModule (copy)
+	return if AlertIcon == ItemTileEnumsModule.StatusStyle.PendingIcon then "icons/status/pending_small" elseif AlertIcon == ItemTileEnumsModule.StatusStyle.AlertIcon then "icons/actions/info_small" else nil
 end
 
-return function(p1)
-	-- upvalues: useStyleModule (ref), itemTileEnumsModule (ref), getIconSizeModule (ref), iconSizeModule (ref), UIBloxConfigModule (ref), reactModule (ref), imageSetComponentModule (ref), imagesModule (ref)
-	local tokens = useStyleModule().Tokens
-	local statusStyle = p1.statusStyle
-	local var1 = if statusStyle == itemTileEnumsModule.StatusStyle.PendingIcon then "icons/status/pending_small" elseif statusStyle == itemTileEnumsModule.StatusStyle.AlertIcon then "icons/actions/info_small" else nil
+return function(p1) --[[ Line: 31 | Named "ItemTileStatusIcon" ]]
+	-- upvalues: UseStyleModule (copy), ItemTileEnumsModule (copy), GetIconSizeModule (copy), IconSizeModule (copy), ReactModule (copy), ImageSetComponentModule (copy), ImagesModule (copy)
+	local Tokens = UseStyleModule().Tokens
+	local StatusStyle = p1.statusStyle
+	local PendingSmall = if StatusStyle == ItemTileEnumsModule.StatusStyle.PendingIcon then "icons/status/pending_small" elseif StatusStyle == ItemTileEnumsModule.StatusStyle.AlertIcon then "icons/actions/info_small" else nil
 	
-	if var1 then
-		local var2 = getIconSizeModule(iconSizeModule.Small)
-		local var3 = if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Color.Content.Emphasis else tokens.Semantic.Color.Icon.Emphasis
+	if PendingSmall then
+		local IconSizeModule1 = GetIconSizeModule(IconSizeModule.Small)
+		local Emphasis = Tokens.Color.Content.Emphasis
 		
-		return reactModule.createElement(imageSetComponentModule.Label, {
+		return ReactModule.createElement(ImageSetComponentModule.Label, {
 			BackgroundTransparency = 1,
-			Position = UDim2.fromOffset(if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_200 else tokens.Global.Size_100, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_200 else tokens.Global.Size_100),
-			Size = UDim2.fromOffset(var2, var2),
-			Image = imagesModule[var1],
-			ImageColor3 = var3.Color3,
-			ImageTransparency = var3.Transparency
+			Position = UDim2.fromOffset(Tokens.Size.Size_200, Tokens.Size.Size_200),
+			Size = UDim2.fromOffset(IconSizeModule1, IconSizeModule1),
+			Image = ImagesModule[PendingSmall],
+			ImageColor3 = Emphasis.Color3,
+			ImageTransparency = Emphasis.Transparency
 		})
+	else
+		return nil
 	end
-	return nil
 end

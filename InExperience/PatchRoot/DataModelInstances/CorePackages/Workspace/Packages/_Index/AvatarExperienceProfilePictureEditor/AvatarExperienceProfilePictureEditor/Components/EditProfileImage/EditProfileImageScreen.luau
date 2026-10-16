@@ -1,32 +1,30 @@
-﻿local avatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
-local parent = avatarExperienceProfilePictureEditor.Parent
-local reactModule = require(parent.React)
-local roactNavigationModule = require(parent.RoactNavigation)
-local roactUtilsModule = require(parent.RoactUtils)
-local editProfileImageModule = require(script.Parent.EditProfileImage)
-local enumsModule = require(avatarExperienceProfilePictureEditor.Common.Enums)
-local closeProfilePictureEditorModule = require(avatarExperienceProfilePictureEditor.Utils.closeProfilePictureEditor)
-local showEditProfileImageToastModule = require(avatarExperienceProfilePictureEditor.Utils.showEditProfileImageToast)
-local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
+﻿local AvatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
+local Parent = AvatarExperienceProfilePictureEditor.Parent
+local ReactModule = require(Parent.React)
+local EditProfileImageModule = require(script.Parent.EditProfileImage)
+local EnumsModule = require(AvatarExperienceProfilePictureEditor.Common.Enums)
+local CloseProfilePictureEditorModule = require(AvatarExperienceProfilePictureEditor.Utils.closeProfilePictureEditor)
+local ShowEditProfileImageToastModule = require(AvatarExperienceProfilePictureEditor.Utils.showEditProfileImageToast)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
 
-return roactNavigationModule.withNavigationFocus(function(p1)
-	-- upvalues: useDispatch (ref), reactModule (ref), closeProfilePictureEditorModule (ref), showEditProfileImageToastModule (ref), enumsModule (ref), editProfileImageModule (ref)
-	local var1 = useDispatch()
+return require(Parent.RoactNavigation).withNavigationFocus(function(p1) --[[ Line: 27 | Named "EditProfileImageScreen" ]]
+	-- upvalues: UseDispatchFunction (copy), ReactModule (copy), CloseProfilePictureEditorModule (copy), ShowEditProfileImageToastModule (copy), EnumsModule (copy), EditProfileImageModule (copy)
+	local UseDispatchResult = UseDispatchFunction()
 	
-	return reactModule.createElement(editProfileImageModule, {
-		mode = if p1.navigation.getParam then p1.navigation.getParam("mode", enumsModule.EditProfileImageMode.Default) else enumsModule.EditProfileImageMode.Default,
+	return ReactModule.createElement(EditProfileImageModule, {
+		mode = if p1.navigation.getParam then p1.navigation.getParam("mode", EnumsModule.EditProfileImageMode.Default) else EnumsModule.EditProfileImageMode.Default,
 		initialFrameAssetId = p1.initialFrameAssetId,
 		initialFrameSelectionRequestId = p1.initialFrameSelectionRequestId,
 		showCloseButton = p1.isFocused ~= false,
-		onClose = reactModule.useCallback(function()
-			-- upvalues: closeProfilePictureEditorModule (copy), p1 (ref)
-			closeProfilePictureEditorModule(p1.navigation)
+		onClose = ReactModule.useCallback(function() --[[ Line: 30 ]]
+			-- upvalues: CloseProfilePictureEditorModule (upval), p1 (copy)
+			CloseProfilePictureEditorModule(p1.navigation)
 		end, { p1.navigation }),
-		onSaveSuccess = reactModule.useCallback(function()
-			-- upvalues: showEditProfileImageToastModule (copy), var1 (ref), closeProfilePictureEditorModule (copy), p1 (ref)
-			showEditProfileImageToastModule.showSaveSuccessToast(var1)
-			closeProfilePictureEditorModule(p1.navigation)
-		end, { var1, p1.navigation }),
+		onSaveSuccess = ReactModule.useCallback(function() --[[ Line: 34 ]]
+			-- upvalues: ShowEditProfileImageToastModule (upval), UseDispatchResult (copy), CloseProfilePictureEditorModule (upval), p1 (copy)
+			ShowEditProfileImageToastModule.showSaveSuccessToast(UseDispatchResult)
+			CloseProfilePictureEditorModule(p1.navigation)
+		end, { UseDispatchResult, p1.navigation }),
 		onOpenEmoteDetails = p1.onOpenEmoteDetails,
 		onPrepareRecommendedEmotePurchase = p1.onPrepareRecommendedEmotePurchase,
 		onShopForMoreEmotes = p1.onShopForMoreEmotes,

@@ -1,1 +1,1 @@
-﻿return require(script.ColorPicker)
+﻿return (require(script.ColorPicker))

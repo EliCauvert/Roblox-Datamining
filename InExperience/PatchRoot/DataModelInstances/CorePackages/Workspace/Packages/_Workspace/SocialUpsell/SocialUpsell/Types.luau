@@ -1,7 +1,6 @@
-﻿local socialUpsell = script:FindFirstAncestor("SocialUpsell")
-local foundationModule = require(socialUpsell.Parent.Foundation)
-local _ = require(socialUpsell.Analytics.Enum.UpsellEntrySurfaceType)
-local _ = require(socialUpsell.Enum.SocialUpsellType)
-local _ = foundationModule.Enums.ButtonVariant
+﻿local SocialUpsell = script:FindFirstAncestor("SocialUpsell")
+local _ = require(SocialUpsell.Analytics.Enum.UpsellEntrySurfaceType)
+local _ = require(SocialUpsell.Enum.SocialUpsellType)
+local _ = require(SocialUpsell.Parent.Foundation).Enums.ButtonVariant
 
 return {}

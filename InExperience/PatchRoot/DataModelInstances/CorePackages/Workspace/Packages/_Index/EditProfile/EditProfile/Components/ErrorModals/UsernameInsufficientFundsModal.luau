@@ -1,73 +1,84 @@
-﻿local editProfile = script:FindFirstAncestor("EditProfile")
-local parent = editProfile.Parent
-local reactModule = require(parent.React)
-local UIBloxModule = require(parent.UIBlox)
-local appPage = require(parent.RobloxAppEnums).AppPage
-local useScreenSize = require(parent.RobloxAppHooks).useScreenSize
-local localizationModule = require(parent.Localization)
-local textKeysModule = require(editProfile.Common.TextKeys)
-local fFlagEditProfileFixFocusNavigationModule = require(editProfile.Flags.FFlagEditProfileFixFocusNavigation)
-local focusNavigatorWrapperModule = require(editProfile.Utils.FocusNavigatorWrapper)
-local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
-local useLocalization = localizationModule.Hooks.useLocalization
-local buttonType = UIBloxModule.App.Button.Enum.ButtonType
-local char = utf8.char(57346)
+﻿local EditProfile = script:FindFirstAncestor("EditProfile")
+local Parent = EditProfile.Parent
+local ReactModule = require(Parent.React)
+local UIBloxModule = require(Parent.UIBlox)
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local UseScreenSizeFunction = require(Parent.RobloxAppHooks).useScreenSize
+local TextKeysModule = require(EditProfile.Common.TextKeys)
+local FFlagEditProfileFixFocusNavigationModule = require(EditProfile.Flags.FFlagEditProfileFixFocusNavigation)
+local FocusNavigatorWrapperModule = require(EditProfile.Utils.FocusNavigatorWrapper)
+local InteractiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
+local Character = utf8.char(57346)
 
-return function(p1)
-	-- upvalues: useScreenSize (ref), useLocalization (ref), textKeysModule (ref), char (ref), appPage (ref), fFlagEditProfileFixFocusNavigationModule (ref), focusNavigatorWrapperModule (ref), reactModule (ref), interactiveAlert (ref), buttonType (ref)
-	local var1 = useScreenSize()
-	local var2 = useLocalization({
-		cancelButtonText = textKeysModule.CancelButtonText,
-		buy = textKeysModule.Buy,
-		insufficientFunds = textKeysModule.InsufficientFunds,
+return function(p1) --[[ Line: 23 | Named "EditDisplayNameErrorModal" ]]
+	-- upvalues: UseScreenSizeFunction (copy), UseLocalizationFunction (copy), TextKeysModule (copy), Character (copy), AppPage (copy), FFlagEditProfileFixFocusNavigationModule (copy), FocusNavigatorWrapperModule (copy), ReactModule (copy), InteractiveAlert (copy), ButtonType (copy)
+	local UseScreenSizeResult = UseScreenSizeFunction()
+	local UseLocalizationResult = UseLocalizationFunction({
+		cancelButtonText = TextKeysModule.CancelButtonText,
+		buy = TextKeysModule.Buy,
+		insufficientFunds = TextKeysModule.InsufficientFunds,
 		message = {
-			textKeysModule.InsufficientFundsMessage,
-			icon = char,
+			TextKeysModule.InsufficientFundsMessage,
+			icon = Character,
 			rbx = p1.navigation.getParam("robux")
 		}
 	})
 	
-	local function onClose()
-		-- upvalues: p1 (ref)
+	local function onClose() --[[ Line: 33 ]]
+		-- upvalues: p1 (copy)
 		p1.navigation.goBack()
 	end
 	
-	local var3 = function()
-		-- upvalues: p1 (ref), appPage (copy)
-		p1.navigation.navigate(appPage.PurchaseRobux)
+	local function OnActivated() --[[ Line: 37 ]]
+		-- upvalues: p1 (copy), AppPage (upval)
+		p1.navigation.navigate(AppPage.PurchaseRobux)
 	end
 	
-	return if fFlagEditProfileFixFocusNavigationModule then focusNavigatorWrapperModule({ onClose = onClose }, {
-		reactModule.createElement(interactiveAlert, {
-			screenSize = var1,
-			title = var2.insufficientFunds,
-			bodyText = var2.message,
+	return if FFlagEditProfileFixFocusNavigationModule then FocusNavigatorWrapperModule({ onClose = onClose }, {
+		ReactModule.createElement(InteractiveAlert, {
+			screenSize = UseScreenSizeResult,
+			title = UseLocalizationResult.insufficientFunds,
+			bodyText = UseLocalizationResult.message,
 			buttonStackInfo = {
 				buttons = {
 					{
-						buttonType = buttonType.Secondary,
-						props = { onActivated = onClose, text = var2.cancelButtonText }
+						buttonType = ButtonType.Secondary,
+						props = {
+							onActivated = onClose,
+							text = UseLocalizationResult.cancelButtonText
+						}
 					},
 					{
-						buttonType = buttonType.PrimarySystem,
-						props = { onActivated = var3, text = var2.buy }
+						buttonType = ButtonType.PrimarySystem,
+						props = {
+							onActivated = OnActivated,
+							text = UseLocalizationResult.buy
+						}
 					}
 				}
 			}
 		})
-	}) else reactModule.createElement(interactiveAlert, {
-		screenSize = var1,
-		title = var2.insufficientFunds,
-		bodyText = var2.message,
+	}) else ReactModule.createElement(InteractiveAlert, {
+		screenSize = UseScreenSizeResult,
+		title = UseLocalizationResult.insufficientFunds,
+		bodyText = UseLocalizationResult.message,
 		buttonStackInfo = {
 			buttons = {
 				{
-					buttonType = buttonType.Secondary,
-					props = { onActivated = onClose, text = var2.cancelButtonText }
+					buttonType = ButtonType.Secondary,
+					props = {
+						onActivated = onClose,
+						text = UseLocalizationResult.cancelButtonText
+					}
 				},
 				{
-					buttonType = buttonType.PrimarySystem,
-					props = { onActivated = var3, text = var2.buy }
+					buttonType = ButtonType.PrimarySystem,
+					props = {
+						onActivated = OnActivated,
+						text = UseLocalizationResult.buy
+					}
 				}
 			}
 		}

@@ -1,29 +1,27 @@
-﻿local parent = script:FindFirstAncestor("SduiSharedUtilities").Parent
-local reactModule = require(parent.React)
-local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
-local inputHandlersModule = require(parent.InputHandlers)
-local focusNavigationEventNameEnum = require(parent.FocusNavigationUtils).FocusNavigationEventNameEnum
-local t = {}
+﻿local Parent = script:FindFirstAncestor("SduiSharedUtilities").Parent
+local ReactModule = require(Parent.React)
+local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
+local InputHandlersModule = require(Parent.InputHandlers)
+local FocusNavigationEventNameEnum = require(Parent.FocusNavigationUtils).FocusNavigationEventNameEnum
 
-local function useOnNavigateBack(p1, p2)
-	-- upvalues: reactModule (ref), inputHandlersModule (ref), reactFocusNavigationModule (ref), focusNavigationEventNameEnum (ref)
-	return reactFocusNavigationModule.useEventHandler(focusNavigationEventNameEnum.NavigateBack, reactModule.useCallback(inputHandlersModule.onRelease(function(p3)
-		-- upvalues: p1 (ref)
-		p3:cancel()
-		p1()
-	end), { p1 }), nil, p2)
+local function useOnNavigateBack(Callback, p1) --[[ Line: 21 ]]
+	-- upvalues: ReactModule (copy), InputHandlersModule (copy), ReactFocusNavigationModule (copy), FocusNavigationEventNameEnum (copy)
+	return ReactFocusNavigationModule.useEventHandler(FocusNavigationEventNameEnum.NavigateBack, ReactModule.useCallback(InputHandlersModule.onRelease(function(p2) --[[ Line: 23 ]]
+		-- upvalues: Callback (copy)
+		p2:cancel()
+		Callback()
+	end), { Callback }), nil, p1)
 end
 
-t.useOnNavigateBack = useOnNavigateBack
-
-function t.OnNavigateBackWrapper(p1)
-	-- upvalues: useOnNavigateBack (ref), reactModule (ref)
-	return reactModule.createElement("Frame", {
-		BackgroundTransparency = 1,
-		ref = useOnNavigateBack(p1.onNavigateBack),
-		Size = UDim2.new(1, 0, 0, 0),
-		AutomaticSize = Enum.AutomaticSize.Y
-	}, p1.children)
-end
-
-return t
+return {
+	useOnNavigateBack = useOnNavigateBack,
+	OnNavigateBackWrapper = function(p1) --[[ Line: 40 ]]
+		-- upvalues: useOnNavigateBack (copy), ReactModule (copy)
+		return ReactModule.createElement("Frame", {
+			BackgroundTransparency = 1,
+			ref = useOnNavigateBack(p1.onNavigateBack),
+			Size = UDim2.new(1, 0, 0, 0),
+			AutomaticSize = Enum.AutomaticSize.Y
+		}, p1.children)
+	end
+}

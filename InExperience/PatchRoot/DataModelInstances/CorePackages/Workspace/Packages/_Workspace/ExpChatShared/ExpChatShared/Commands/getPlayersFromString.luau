@@ -1,21 +1,26 @@
-﻿local dictionary = require(script:FindFirstAncestor("ExpChatShared").Parent.llama).Dictionary
+﻿local Dictionary = require(script:FindFirstAncestor("ExpChatShared").Parent.llama).Dictionary
 
-return function(p1, p2)
-	-- upvalues: dictionary (ref)
-	if not p2 then
+return function(p1, Text: string) --[[ Line: 12 | Named "getPlayersFromCommand" ]]
+	-- upvalues: Dictionary (copy)
+	if not Text then
 		return {}
 	end
-	assert(p2, "will exist")
-	local lowerText = string.lower(p2)
+	assert(Text, "will exist")
+	local Lowered = string.lower(Text)
 	
-	if lowerText and string.sub(lowerText, 1, 1) == "@" then
-		local var1 = p1.byUsername[string.sub(lowerText, 2)]
+	if Lowered and string.sub(Lowered, 1, 1) == "@" then
+		local ByUsernameEntry = p1.byUsername[string.sub(Lowered, 2)]
 		
-		return if var1 then {
-			dictionary.join(p1.byUserId[var1], { nameToDisplay = "@" .. p0.byUserId[var1].username })
-		} else dictionary.map(p1.byDisplayName[lowerText] or {}, function(p3)
-			-- upvalues: dictionary (copy), p1 (ref)
-			return dictionary.join(p1.byUserId[p3], { nameToDisplay = p1.byUserId[p3].displayName })
-		end)
+		if ByUsernameEntry then
+			return {
+				Dictionary.join(p1.byUserId[ByUsernameEntry], {
+					nameToDisplay = "@" .. p1.byUserId[ByUsernameEntry].username
+				})
+			}
+		end
 	end
+	return Dictionary.map(p1.byDisplayName[Lowered] or {}, function(p2) --[[ Line: 28 ]]
+		-- upvalues: Dictionary (upval), p1 (copy)
+		return Dictionary.join(p1.byUserId[p2], { nameToDisplay = p1.byUserId[p2].displayName })
+	end)
 end

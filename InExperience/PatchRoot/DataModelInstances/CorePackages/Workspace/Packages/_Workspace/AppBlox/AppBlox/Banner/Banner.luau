@@ -1,141 +1,143 @@
-﻿local parent = script:FindFirstAncestor("AppBlox").Parent
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local button = foundationModule.Button
-local bannerBadgeModule = require(script.Parent.BannerBadge)
-local icon = foundationModule.Icon
-local iconButton = foundationModule.IconButton
-local view = foundationModule.View
-local text = foundationModule.Text
-local image = foundationModule.Image
-local t = {
+﻿local Parent = script:FindFirstAncestor("AppBlox").Parent
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local Button = FoundationModule.Button
+local BannerBadgeModule = require(script.Parent.BannerBadge)
+local Icon = FoundationModule.Icon
+local IconButton = FoundationModule.IconButton
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local Image = FoundationModule.Image
+local config = {
 	isContained = true,
 	width = UDim.new(1, 0),
 	tags = { container = "col auto-y" }
 }
 
-return reactModule.memo(function(p1)
-	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), button (ref), foundationModule (ref), bannerBadgeModule (ref), iconButton (ref), view (ref), icon (ref), image (ref), text (ref)
-	local var1 = cryoModule.Dictionary.join(t, p1)
-	local var2 = "col auto-y"
+return ReactModule.memo(function(p1) --[[ Line: 48 | Named "Banner" ]]
+	-- upvalues: CryoModule (copy), config (copy), ReactModule (copy), Button (copy), FoundationModule (copy), BannerBadgeModule (copy), IconButton (copy), View (copy), Icon (copy), Image (copy), Text (copy)
+	local JoinResult = CryoModule.Dictionary.join(config, p1)
+	local Tag = "col auto-y"
 	
-	if var1.isContained then
-		var2 ..= " " .. "radius-medium padding-large stroke-standard stroke-default bg-shift-100"
+	if JoinResult.isContained then
+		Tag ..= " " .. "radius-medium padding-large stroke-standard stroke-default bg-shift-100"
 	end
-	local var3 = var1.badges and #var1.badges > 0
-	local var4 = var1.buttons and (#var1.buttons < 2 and (not var1.image and (not var1.body and (not var3 and not var1.onDismiss))))
-	local var5 = reactModule.useMemo(function()
-		-- upvalues: var1 (ref), reactModule (copy), iconButton (copy), var3 (ref), foundationModule (copy)
-		return if var1.onDismiss then reactModule.createElement(iconButton, {
+	local v1: boolean = JoinResult.badges and #JoinResult.badges > 0
+	local NoOnDismiss: boolean = JoinResult.buttons and (#JoinResult.buttons < 2 and (not JoinResult.image and (not JoinResult.body and (not v1 and not JoinResult.onDismiss))))
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 63 ]]
+		-- upvalues: JoinResult (copy), ReactModule (upval), Button (upval), CryoModule (upval), FoundationModule (upval)
+		local Elements = {}
+		
+		if JoinResult.buttons and #JoinResult.buttons > 0 then
+			for i, button in JoinResult.buttons do
+				Elements["banner-button-" .. i] = ReactModule.createElement(Button, CryoModule.Dictionary.join({
+					LayoutOrder = i + 1,
+					size = FoundationModule.Enums.InputSize.Small,
+					testId = "--banner-button-" .. i
+				}, button))
+			end
+		end
+		return Elements
+	end, { JoinResult.buttons })
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 80 ]]
+		-- upvalues: JoinResult (copy), ReactModule (upval), BannerBadgeModule (upval), CryoModule (upval)
+		local Elements = {}
+		
+		if JoinResult.badges then
+			for i, badge in ipairs(JoinResult.badges) do
+				Elements["banner-badge-" .. i] = ReactModule.createElement(BannerBadgeModule, CryoModule.Dictionary.join({ testId = "--banner-badge-" .. i, LayoutOrder = i + 1 }, badge))
+			end
+		end
+		return Elements
+	end, { JoinResult.badges })
+	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 96 ]]
+		-- upvalues: JoinResult (copy), ReactModule (upval), IconButton (upval), v1 (copy), FoundationModule (upval)
+		return if JoinResult.onDismiss then ReactModule.createElement(IconButton, {
 			isCircular = true,
-			testId = if var3 then "--banner-badges-dismiss" else "--banner-dismiss",
-			LayoutOrder = if var3 then 1 else 3,
-			icon = foundationModule.Enums.IconName.XSmall,
-			variant = foundationModule.Enums.ButtonVariant.Utility,
-			onActivated = var1.onDismiss
+			testId = if v1 then "--banner-badges-dismiss" else "--banner-dismiss",
+			LayoutOrder = if v1 then 1 else 3,
+			icon = FoundationModule.Enums.IconName.XSmall,
+			variant = FoundationModule.Enums.ButtonVariant.Utility,
+			onActivated = JoinResult.onDismiss
 		}) else nil
-	end, { var1.onDismiss, var3 })
+	end, { JoinResult.onDismiss, v1 })
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		testId = "--banner",
-		LayoutOrder = var1.LayoutOrder,
-		Size = UDim2.new(var1.width.Scale, var1.width.Offset, 0, 0),
-		tag = var2
+		LayoutOrder = JoinResult.LayoutOrder,
+		Size = UDim2.new(JoinResult.width.Scale, JoinResult.width.Offset, 0, 0),
+		tag = Tag
 	}, {
-		BadgesRow = if var3 then reactModule.createElement(view, {
+		BadgesRow = if v1 then ReactModule.createElement(View, {
 			tag = "row auto-y size-full-0 flex-between gap-large align-y-center padding-bottom-large",
 			LayoutOrder = 2
 		}, {
-			Badges = reactModule.createElement(view, {
+			Badges = ReactModule.createElement(View, {
 				LayoutOrder = 1,
 				testId = "--banner-badges",
 				tag = "row auto-xy gap-small fill"
-			}, reactModule.useMemo(function()
-				-- upvalues: var1 (ref), reactModule (copy), bannerBadgeModule (copy), cryoModule (copy)
-				local t = {}
-				
-				if var1.badges then
-					for i, v in ipairs(var1.badges) do
-						t["banner-badge-" .. i] = reactModule.createElement(bannerBadgeModule, cryoModule.Dictionary.join({ testId = "--banner-badge-" .. i, LayoutOrder = i + 1 }, v))
-					end
-				end
-				return t
-			end, { var1.badges })),
-			Dismiss = if var5 then reactModule.createElement(view, { tag = "auto-xy", LayoutOrder = 2 }, { Dismiss = var5 }) else nil
+			}, UseMemoResult1),
+			Dismiss = if UseMemoResult2 then ReactModule.createElement(View, { tag = "auto-xy", LayoutOrder = 2 }, { Dismiss = UseMemoResult2 }) else nil
 		}) else nil,
-		ContentRow = reactModule.createElement(view, {
+		ContentRow = ReactModule.createElement(View, {
 			LayoutOrder = 3,
 			tag = {
 				["row auto-y size-full-0 gap-large"] = true,
-				["align-y-center"] = var4
+				["align-y-center"] = NoOnDismiss
 			}
 		}, {
-			Icon = if var1.icon and not var1.image then reactModule.createElement(icon, {
+			Icon = if JoinResult.icon and not JoinResult.image then ReactModule.createElement(Icon, {
 				testId = "--banner-icon",
 				LayoutOrder = 1,
-				size = foundationModule.Enums.IconSize.Large,
-				name = var1.icon,
-				variant = var1.iconVariant,
-				style = var1.iconStyle
+				size = FoundationModule.Enums.IconSize.Large,
+				name = JoinResult.icon,
+				variant = JoinResult.iconVariant,
+				style = JoinResult.iconStyle
 			}) else nil,
-			Image = if var1.image then reactModule.createElement(view, { tag = "auto-xy flex-none bg-shift-100 radius-medium" }, {
-				Image = reactModule.createElement(image, {
+			Image = if JoinResult.image then ReactModule.createElement(View, { tag = "auto-xy flex-none bg-shift-100 radius-medium" }, {
+				Image = ReactModule.createElement(Image, {
 					testId = "--banner-image",
 					tag = "size-1800",
-					Image = var1.image,
+					Image = JoinResult.image,
 					ScaleType = Enum.ScaleType.Fit
 				})
 			}) else nil,
-			Content = reactModule.createElement(view, {
+			Content = ReactModule.createElement(View, {
 				LayoutOrder = 2,
 				tag = {
 					["auto-xy gap-small align-x-left fill"] = true,
-					["col flex-fill"] = not var4,
-					["row align-y-center flex-between"] = var4
+					["col flex-fill"] = not NoOnDismiss,
+					["row align-y-center flex-between"] = NoOnDismiss
 				}
 			}, {
-				Title = reactModule.createElement(text, {
+				Title = ReactModule.createElement(Text, {
 					testId = "--banner-title",
 					tag = "auto-xy text-title-medium content-emphasis fill text-wrap text-align-x-left",
 					LayoutOrder = 1,
-					Text = var1.title
+					Text = JoinResult.title
 				}),
-				InlineButton = if var4 and var1.buttons and var1.buttons[1] then reactModule.createElement(button, cryoModule.Dictionary.join({
+				InlineButton = if NoOnDismiss and JoinResult.buttons and JoinResult.buttons[1] then ReactModule.createElement(Button, CryoModule.Dictionary.join({
 					tag = "auto-xy shrink",
 					LayoutOrder = 2,
 					testId = "--banner-button-inline"
-				}, var1.buttons[1])) else nil,
-				Subcontent = if not var4 then reactModule.createElement(view, { tag = "auto-xy col gap-large shrink", LayoutOrder = 2 }, {
-					Body = if var1.body then reactModule.createElement(text, {
+				}, JoinResult.buttons[1])) else nil,
+				Subcontent = if NoOnDismiss then nil else ReactModule.createElement(View, { tag = "auto-xy col gap-large shrink", LayoutOrder = 2 }, {
+					Body = if JoinResult.body then ReactModule.createElement(Text, {
 						testId = "--banner-body",
 						tag = "auto-xy text-body-medium content-default text-wrap text-align-x-left",
 						LayoutOrder = 1,
 						RichText = true,
-						Text = var1.body
+						Text = JoinResult.body
 					}) else nil,
-					Buttons = reactModule.createElement(view, {
+					Buttons = ReactModule.createElement(View, {
 						tag = "row auto-xy grow gap-small wrap",
 						LayoutOrder = 2,
 						testId = "--banner-buttons"
-					}, reactModule.useMemo(function()
-						-- upvalues: var1 (ref), reactModule (copy), button (copy), cryoModule (copy), foundationModule (copy)
-						local t = {}
-						
-						if var1.buttons and #var1.buttons > 0 then
-							for i, v in var1.buttons do
-								t["banner-button-" .. i] = reactModule.createElement(button, cryoModule.Dictionary.join({
-									LayoutOrder = i + 1,
-									size = foundationModule.Enums.InputSize.Small,
-									testId = "--banner-button-" .. i
-								}, v))
-							end
-						end
-						return t
-					end, { var1.buttons }))
-				}) else nil
+					}, UseMemoResult)
+				})
 			}),
-			Dismiss = if not var3 then var5 else nil
+			Dismiss = if v1 then nil else UseMemoResult2
 		})
 	})
 end)

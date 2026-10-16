@@ -1,20 +1,20 @@
-﻿local reactModule = require(script:FindFirstAncestor("VideoUtils").Parent.React)
+﻿local ReactModule = require(script:FindFirstAncestor("VideoUtils").Parent.React)
 
-return function(p1)
-	-- upvalues: reactModule (ref)
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref)
-		local var1 = if p1.videoFrameRef then p1.videoFrameRef.current else nil
+return function(p1) --[[ Line: 20 | Named "VideoFrameWrapper" ]]
+	-- upvalues: ReactModule (copy)
+	ReactModule.useEffect(function() --[[ Line: 21 ]]
+		-- upvalues: p1 (copy)
+		local Current = if p1.videoFrameRef then p1.videoFrameRef.current else nil
 		
-		return function()
-			-- upvalues: var1 (ref)
-			if var1 then
-				var1.Video = ""
+		return function() --[[ Line: 24 ]]
+			-- upvalues: Current (copy)
+			if Current then
+				Current.Video = ""
 			end
 		end
 	end, { p1.videoFrameRef })
 	
-	return reactModule.createElement("VideoFrame", {
+	return ReactModule.createElement("VideoFrame", {
 		Size = UDim2.fromScale(1, 1),
 		Video = if p1.isPlaying then p1.video else "",
 		Playing = p1.isPlaying,
@@ -24,10 +24,10 @@ return function(p1)
 		BorderSizePixel = 0,
 		ZIndex = p1.zIndex or 1,
 		ref = p1.videoFrameRef,
-		[reactModule.Event.Loaded] = p1.onLoaded,
-		[reactModule.Event.DidLoop] = p1.onLooped,
-		[reactModule.Event.Ended] = p1.onEnded
+		[ReactModule.Event.Loaded] = p1.onLoaded,
+		[ReactModule.Event.DidLoop] = p1.onLooped,
+		[ReactModule.Event.Ended] = p1.onEnded
 	}, {
-		Corner = if p1.cornerRadius then reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, p1.cornerRadius) }) else nil
+		Corner = if p1.cornerRadius then ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0, p1.cornerRadius) }) else nil
 	})
 end

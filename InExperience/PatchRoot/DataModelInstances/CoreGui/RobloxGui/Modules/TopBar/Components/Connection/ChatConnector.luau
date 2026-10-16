@@ -1,62 +1,63 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local coreGuiService = game:GetService("CoreGui")
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local tModule = require(corePackagesService.Packages.t)
-local parent = script.Parent.Parent.Parent
+﻿local CorePackages = game:GetService("CorePackages")
+local CoreGui = game:GetService("CoreGui")
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local TModule = require(CorePackages.Packages.t)
+local Parent = script.Parent.Parent.Parent
 
-if require(parent.Flags.FFlagTopBarDeprecateChatRodux) then
+if require(Parent.Flags.FFlagTopBarDeprecateChatRodux) then
 	return nil
+else
+	local UpdateChatVisibleModule = require(Parent.Actions.UpdateChatVisible)
+	local UpdateChatMessagesModule = require(Parent.Actions.UpdateChatMessages)
+	local ChatSelectorModule = require(CoreGui:WaitForChild("RobloxGui").Modules.ChatSelector)
+	local GameSettings = UserSettings().GameSettings
+	local ChatConnector = RoactModule.PureComponent:extend("ChatConnector")
+	ChatConnector.validateProps = TModule.strictInterface({
+		isSmallTouchScreen = TModule.boolean,
+		updateChatVisible = TModule.callback,
+		updateChatMessages = TModule.callback
+	})
+	
+	function ChatConnector.didMount(p1) --[[ Line: 35 ]]
+		-- upvalues: GameSettings (copy), ChatSelectorModule (copy)
+		ChatSelectorModule:SetVisible(not p1.props.isSmallTouchScreen and GameSettings.ChatVisible)
+		p1.props.updateChatMessages(ChatSelectorModule:GetMessageCount())
+		p1.props.updateChatVisible(ChatSelectorModule:GetVisibility())
+		p1.chatVisibleConnection = ChatSelectorModule.VisibilityStateChanged:connect(function(p2) --[[ Line: 45 ]]
+			-- upvalues: p1 (copy)
+			p1.props.updateChatVisible(p2)
+		end)
+		p1.chatMessagesConnection = ChatSelectorModule.MessagesChanged:connect(function(p2) --[[ Line: 49 ]]
+			-- upvalues: p1 (copy)
+			p1.props.updateChatMessages(p2)
+		end)
+	end
+	
+	function ChatConnector:render() --[[ Line: 54 ]]
+		return nil
+	end
+	
+	function ChatConnector.willUnmount(p1) --[[ Line: 58 ]]
+		p1.chatVisibleConnection:disconnect()
+		p1.chatMessagesConnection:disconnect()
+	end
+	
+	return RoactRoduxModule.UNSTABLE_connect2(function(p1) --[[ Line: 63 | Named "mapStateToProps" ]]
+		return {
+			isSmallTouchScreen = p1.displayOptions.isSmallTouchDevice
+		}
+	end, function(Callback) --[[ Line: 69 | Named "mapDispatchToProps" ]]
+		-- upvalues: UpdateChatVisibleModule (copy), UpdateChatMessagesModule (copy)
+		return {
+			updateChatVisible = function(p1) --[[ Line: 71 ]]
+				-- upvalues: Callback (copy), UpdateChatVisibleModule (upval)
+				return Callback(UpdateChatVisibleModule(p1))
+			end,
+			updateChatMessages = function(p1) --[[ Line: 75 ]]
+				-- upvalues: Callback (copy), UpdateChatMessagesModule (upval)
+				return Callback(UpdateChatMessagesModule(p1))
+			end
+		}
+	end)(ChatConnector)
 end
-local updateChatVisibleModule = require(parent.Actions.UpdateChatVisible)
-local updateChatMessagesModule = require(parent.Actions.UpdateChatMessages)
-local chatSelectorModule = require(coreGuiService:WaitForChild("RobloxGui").Modules.ChatSelector)
-local gameSettings = UserSettings().GameSettings
-local chatConnector = roactModule.PureComponent:extend("ChatConnector")
-chatConnector.validateProps = tModule.strictInterface({
-	isSmallTouchScreen = tModule.boolean,
-	updateChatVisible = tModule.callback,
-	updateChatMessages = tModule.callback
-})
-
-function chatConnector.didMount(p1)
-	-- upvalues: gameSettings (ref), chatSelectorModule (ref)
-	chatSelectorModule:SetVisible(if p1.props.isSmallTouchScreen then false else gameSettings.ChatVisible)
-	p1.props.updateChatMessages(chatSelectorModule:GetMessageCount())
-	p1.props.updateChatVisible(chatSelectorModule:GetVisibility())
-	p1.chatVisibleConnection = chatSelectorModule.VisibilityStateChanged:connect(function(p2)
-		-- upvalues: p1 (ref)
-		p1.props.updateChatVisible(p2)
-	end)
-	p1.chatMessagesConnection = chatSelectorModule.MessagesChanged:connect(function(p2)
-		-- upvalues: p1 (ref)
-		p1.props.updateChatMessages(p2)
-	end)
-end
-
-function chatConnector.render(_)
-	return nil
-end
-
-function chatConnector.willUnmount(p1)
-	p1.chatVisibleConnection:disconnect()
-	p1.chatMessagesConnection:disconnect()
-end
-
-return roactRoduxModule.UNSTABLE_connect2(function(p1)
-	return {
-		isSmallTouchScreen = p1.displayOptions.isSmallTouchDevice
-	}
-end, function(p1)
-	-- upvalues: updateChatVisibleModule (ref), updateChatMessagesModule (ref)
-	return {
-		updateChatVisible = function(p2)
-			-- upvalues: p1 (ref), updateChatVisibleModule (copy)
-			return p1(updateChatVisibleModule(p2))
-		end,
-		updateChatMessages = function(p2)
-			-- upvalues: p1 (ref), updateChatMessagesModule (copy)
-			return p1(updateChatMessagesModule(p2))
-		end
-	}
-end)(chatConnector)

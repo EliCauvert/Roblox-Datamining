@@ -1,5 +1,5 @@
 ﻿local _ = require(script:FindFirstAncestor("AbuseReportMenu").Components.Types)
-local t = {
+local ConstantsModule = {
 	LegacyAbuseReportMenuRootName = "LegacyAbuseReportMenuRoot",
 	AbuseReportMenuPlaceholderFrame = "AbuseReportMenuPlaceholderFrame",
 	ModalBaseSelectorDialogRootName = "ModalBaseSelectorDialog",
@@ -32,31 +32,31 @@ local t = {
 		Avatar = "Avatar"
 	}
 }
-t.AbuseMethodToVectorMapping = {
-	[t.AbuseMethods.TextChat] = "chat",
-	[t.AbuseMethods.VoiceChat] = "voice",
-	[t.AbuseMethods.Other] = "other",
-	[t.AbuseMethods.Avatar] = "avatar"
+ConstantsModule.AbuseMethodToVectorMapping = {
+	[ConstantsModule.AbuseMethods.TextChat] = "chat",
+	[ConstantsModule.AbuseMethods.VoiceChat] = "voice",
+	[ConstantsModule.AbuseMethods.Other] = "other",
+	[ConstantsModule.AbuseMethods.Avatar] = "avatar"
 }
-t.AnalyticsAbuseMethods = {
+ConstantsModule.AnalyticsAbuseMethods = {
 	Chat = "Chat",
 	Voice = "Voice",
 	Other = "Other",
 	Game = "Game"
 }
-t.AbuseMethodToAnalyticsMapping = {
-	[t.AbuseMethods.TextChat] = t.AnalyticsAbuseMethods.Chat,
-	[t.AbuseMethods.VoiceChat] = t.AnalyticsAbuseMethods.Voice,
-	[t.AbuseMethods.Other] = t.AnalyticsAbuseMethods.Other,
-	[t.AbuseMethods.Avatar] = t.AnalyticsAbuseMethods.Other
+ConstantsModule.AbuseMethodToAnalyticsMapping = {
+	[ConstantsModule.AbuseMethods.TextChat] = ConstantsModule.AnalyticsAbuseMethods.Chat,
+	[ConstantsModule.AbuseMethods.VoiceChat] = ConstantsModule.AnalyticsAbuseMethods.Voice,
+	[ConstantsModule.AbuseMethods.Other] = ConstantsModule.AnalyticsAbuseMethods.Other,
+	[ConstantsModule.AbuseMethods.Avatar] = ConstantsModule.AnalyticsAbuseMethods.Other
 }
-t.AbuseMethodSublabel = {
+ConstantsModule.AbuseMethodSublabel = {
 	TextChat = "This person typed a mean word in text chat",
 	VoiceChat = "This person was screaming on top of their lungs",
 	Other = "This person is following me, wearing a bad shirt, etc.",
 	Avatar = "This person's avatar is wearing offensive clothing"
 }
-t.PlayerMenuActions = {
+ConstantsModule.PlayerMenuActions = {
 	UpdateAbuseReason = "UpdateAbuseReason",
 	UpdateComment = "UpdateComment",
 	UpdateMethodOfAbuse = "UpdateMethodOfAbuse",
@@ -68,7 +68,7 @@ t.PlayerMenuActions = {
 	SetMenuOpenTimestamp = "SetMenuOpenTimestamp",
 	SetPreselectedPlayer = "SetPreselectedPlayer"
 }
-t.ReportAnythingActions = {
+ConstantsModule.ReportAnythingActions = {
 	ClearAll = "ClearAll",
 	ClearAnnotationFlowProperties = "ClearAnnotationFlowProperties",
 	SetScreenshotId = "SetScreenshotId",
@@ -80,7 +80,7 @@ t.ReportAnythingActions = {
 	SetAnnotationCircleRadius = "SetAnnotationCircleRadius",
 	SetAnnotationOptionSeen = "SetAnnotationOptionSeen"
 }
-t.AnalyticsActions = {
+ConstantsModule.AnalyticsActions = {
 	Reset = "Reset",
 	SetMenuOpenedTimestamp = "SetMenuOpenedTimestamp",
 	IncrementExperiencePersonChanged = "IncrementExperiencePersonChanged",
@@ -98,39 +98,39 @@ t.AnalyticsActions = {
 	SwitchToExperienceInitialSelections = "SwitchToExperienceInitialSelections",
 	SwitchToPersonInitialSelections = "SwitchToPersonInitialSelections"
 }
-t.ReportSuccessToast = {
-	ReportAnythingGeneric = "We\226\128\153ve received your report and will take action soon if needed. Your feedback helps keep our community safe.",
+ConstantsModule.ReportSuccessToast = {
+	ReportAnythingGeneric = "We’ve received your report and will take action soon if needed. Your feedback helps keep our community safe.",
 	ChatGeneric = "Thanks for your report! Our moderators will review the chat logs and evaluate what happened.",
 	Cheating = "Thanks for your report! We've recorded your report for evaluation.",
 	BadUserName = "Thanks for your report! Our moderators will evaluate the username.",
 	Place = "Thanks for your report! Our moderators will review the place and make a determination."
 }
-t.localizationKeys = {
+ConstantsModule.localizationKeys = {
 	ReportType = "Feature.ReportAbuse.Label.ReportType",
 	Person = "Feature.ReportAbuse.Label.Person",
 	Experience = "Feature.ReportAbuse.Label.Experience",
 	SelectInScene = "Feature.ReportAbuse.Action.SelectInScene",
 	BuildAReport = "Feature.ReportAbuse.Action.BuildAReport",
-	[t.AbuseMethods.TextChat] = "Feature.ReportAbuse.Label.TextChat",
-	[t.AbuseMethods.VoiceChat] = "Feature.SettingsHub.MethodOfAbuse.VoiceChat.Title",
-	[t.AbuseMethods.Other] = "Feature.SettingsHub.MethodOfAbuse.Other.Title",
-	[t.AbuseMethods.Avatar] = "Feature.ReportAbuse.Label.Avatar",
-	[t.InappropriateContentAbuseReason] = "Feature.ReportAbuse.Label.Content",
-	[t.PlayerAbuseTypes.Swearing] = "Feature.ReportAbuse.Problem.Swearing",
-	[t.PlayerAbuseTypes.Username] = "Feature.ReportAbuse.ProblemSurface.Username",
-	[t.PlayerAbuseTypes.Bullying] = "Feature.ReportAbuse.Problem.Bullying",
-	[t.PlayerAbuseTypes.Scamming] = "Feature.ReportAbuse.Problem.Scamming",
-	[t.PlayerAbuseTypes.Dating] = "Feature.ReportAbuse.Problem.Dating",
-	[t.PlayerAbuseTypes.Cheating] = "Feature.ReportAbuse.Problem.Cheating",
-	[t.PlayerAbuseTypes.Personal] = "Feature.ReportAbuse.Problem.Personal",
-	[t.PlayerAbuseTypes.Links] = "Feature.ReportAbuse.Problem.Links",
-	[t.PlayerVoiceAbuseTypes.Swearing] = "Feature.ReportAbuse.Problem.Swearing",
-	[t.PlayerVoiceAbuseTypes.Username] = "Feature.ReportAbuse.ProblemSurface.Username",
-	[t.PlayerVoiceAbuseTypes.Bullying] = "Feature.ReportAbuse.Problem.Bullying",
-	[t.PlayerVoiceAbuseTypes.Scamming] = "Feature.ReportAbuse.Problem.Scamming",
-	[t.PlayerVoiceAbuseTypes.Dating] = "Feature.ReportAbuse.Problem.Dating",
-	[t.PlayerVoiceAbuseTypes.Cheating] = "Feature.ReportAbuse.Problem.Cheating",
-	[t.PlayerVoiceAbuseTypes.Personal] = "Feature.ReportAbuse.Problem.Personal",
+	[ConstantsModule.AbuseMethods.TextChat] = "Feature.ReportAbuse.Label.TextChat",
+	[ConstantsModule.AbuseMethods.VoiceChat] = "Feature.SettingsHub.MethodOfAbuse.VoiceChat.Title",
+	[ConstantsModule.AbuseMethods.Other] = "Feature.SettingsHub.MethodOfAbuse.Other.Title",
+	[ConstantsModule.AbuseMethods.Avatar] = "Feature.ReportAbuse.Label.Avatar",
+	[ConstantsModule.InappropriateContentAbuseReason] = "Feature.ReportAbuse.Label.Content",
+	[ConstantsModule.PlayerAbuseTypes.Swearing] = "Feature.ReportAbuse.Problem.Swearing",
+	[ConstantsModule.PlayerAbuseTypes.Username] = "Feature.ReportAbuse.ProblemSurface.Username",
+	[ConstantsModule.PlayerAbuseTypes.Bullying] = "Feature.ReportAbuse.Problem.Bullying",
+	[ConstantsModule.PlayerAbuseTypes.Scamming] = "Feature.ReportAbuse.Problem.Scamming",
+	[ConstantsModule.PlayerAbuseTypes.Dating] = "Feature.ReportAbuse.Problem.Dating",
+	[ConstantsModule.PlayerAbuseTypes.Cheating] = "Feature.ReportAbuse.Problem.Cheating",
+	[ConstantsModule.PlayerAbuseTypes.Personal] = "Feature.ReportAbuse.Problem.Personal",
+	[ConstantsModule.PlayerAbuseTypes.Links] = "Feature.ReportAbuse.Problem.Links",
+	[ConstantsModule.PlayerVoiceAbuseTypes.Swearing] = "Feature.ReportAbuse.Problem.Swearing",
+	[ConstantsModule.PlayerVoiceAbuseTypes.Username] = "Feature.ReportAbuse.ProblemSurface.Username",
+	[ConstantsModule.PlayerVoiceAbuseTypes.Bullying] = "Feature.ReportAbuse.Problem.Bullying",
+	[ConstantsModule.PlayerVoiceAbuseTypes.Scamming] = "Feature.ReportAbuse.Problem.Scamming",
+	[ConstantsModule.PlayerVoiceAbuseTypes.Dating] = "Feature.ReportAbuse.Problem.Dating",
+	[ConstantsModule.PlayerVoiceAbuseTypes.Cheating] = "Feature.ReportAbuse.Problem.Cheating",
+	[ConstantsModule.PlayerVoiceAbuseTypes.Personal] = "Feature.ReportAbuse.Problem.Personal",
 	ReasonForAbuse = "Feature.SettingsHub.Label.ReasonForAbuse",
 	AttachScreenshot = "Feature.SettingsHub.Label.AttachScreenshot",
 	SceneCaptured = "Feature.SettingsHub.Label.SceneCaptured",
@@ -143,20 +143,20 @@ t.localizationKeys = {
 	FooterInformation1 = "Feature.ReportAbuse.Message.OSACopy1",
 	FooterInformation2 = "Feature.ReportAbuse.Message.ReportInformationCopy"
 }
-t.InitialIdentificationResults = {
+ConstantsModule.InitialIdentificationResults = {
 	identifiedAvatars = {},
 	identifiedAds = {},
 	avatarIDStats = { totalPlayers = 0, checkedPlayers = 0, duration = 0 },
 	adIDStats = { totalPlayers = 0, checkedPlayers = 0, duration = 0 }
 }
-t.ReportAnythingInitialState = {
+ConstantsModule.ReportAnythingInitialState = {
 	screenshotId = "",
 	screenshotContentId = "",
 	attachCompleted = false,
-	identificationResults = t.InitialIdentificationResults,
+	identificationResults = ConstantsModule.InitialIdentificationResults,
 	annotationPoints = {}
 }
-t.AnalyticsInitialState = {
+ConstantsModule.AnalyticsInitialState = {
 	menuEverShown = false,
 	menuOpenedUnixTimestampMilliseconds = 0,
 	experiencePersonChangeCount = 0,
@@ -174,34 +174,34 @@ t.AnalyticsInitialState = {
 	experiencePersonSelection = nil,
 	memoryRequirementMet = -1
 }
-t.AnalyticsPersonInitialSelections = {
+ConstantsModule.AnalyticsPersonInitialSelections = {
 	typeofabuseSelection = nil,
 	reasonSelection = nil,
 	commentAdded = false,
-	experiencePersonSelection = string.lower(t.ReportTypes.Person)
+	experiencePersonSelection = string.lower(ConstantsModule.ReportTypes.Person)
 }
-t.AnalyticsExpeirenceInitialSelections = {
+ConstantsModule.AnalyticsExpeirenceInitialSelections = {
 	commentAdded = false,
-	typeofabuseSelection = t.AnalyticsAbuseMethods.Game,
-	reasonSelection = t.InappropriateContentAbuseReason,
-	experiencePersonSelection = string.lower(t.ReportTypes.Experience)
+	typeofabuseSelection = ConstantsModule.AnalyticsAbuseMethods.Game,
+	reasonSelection = ConstantsModule.InappropriateContentAbuseReason,
+	experiencePersonSelection = string.lower(ConstantsModule.ReportTypes.Experience)
 }
-t.AbuseVector = { Voice = "voice" }
-t.MenuItemHeight = 42
-t.MenuItemHeightTight = 36
-t.FreeCommentsMenuItemHeight = 60
-t.FieldLabelSize = 18
-t.LeftContainerWidth = 240
-t.RightContainerWidth = 300
-t.MenuItemDynamicWidthOffset = 100
-t.FieldLabelSizeSmall = 16
-t.LeftContainerWidthSmall = 100
-t.RightContainerWidthSmall = 180
-t.SmallLayoutThreshold = 540
-t.ReportMenuFontStyle = "Header1"
-t.ReportMenuButtonSize = 36
-t.ReportMenuButtonSizeConsole = 48
-t.InitPersonUIState = {
+ConstantsModule.AbuseVector = { Voice = "voice" }
+ConstantsModule.MenuItemHeight = 42
+ConstantsModule.MenuItemHeightTight = 36
+ConstantsModule.FreeCommentsMenuItemHeight = 60
+ConstantsModule.FieldLabelSize = 18
+ConstantsModule.LeftContainerWidth = 240
+ConstantsModule.RightContainerWidth = 300
+ConstantsModule.MenuItemDynamicWidthOffset = 100
+ConstantsModule.FieldLabelSizeSmall = 16
+ConstantsModule.LeftContainerWidthSmall = 100
+ConstantsModule.RightContainerWidthSmall = 180
+ConstantsModule.SmallLayoutThreshold = 540
+ConstantsModule.ReportMenuFontStyle = "Header1"
+ConstantsModule.ReportMenuButtonSize = 36
+ConstantsModule.ReportMenuButtonSizeConsole = 48
+ConstantsModule.InitPersonUIState = {
 	comment = "",
 	menuContainerWidth = 0,
 	allegedAbuserId = nil,
@@ -213,14 +213,14 @@ t.InitPersonUIState = {
 	modalSelectorCellData = nil,
 	isModalSelectorShown = nil,
 	preselectedPlayer = nil,
-	reportType = t.ReportTypes.Person,
+	reportType = ConstantsModule.ReportTypes.Person,
 	playerObjects = {}
 }
-t.InitExperienceUIState = {
+ConstantsModule.InitExperienceUIState = {
 	comment = "",
 	menuContainerWidth = 0,
-	reportType = t.ReportTypes.Experience,
-	abuseReason = t.InappropriateContentAbuseReason
+	reportType = ConstantsModule.ReportTypes.Experience,
+	abuseReason = ConstantsModule.InappropriateContentAbuseReason
 }
 
-return t
+return ConstantsModule

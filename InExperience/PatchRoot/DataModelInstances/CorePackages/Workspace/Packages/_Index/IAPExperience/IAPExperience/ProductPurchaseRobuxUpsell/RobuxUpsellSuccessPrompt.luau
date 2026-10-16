@@ -1,41 +1,40 @@
-﻿local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local roactModule = require(parent_1.Roact)
-local roactFitComponentsModule = require(parent_1.RoactFitComponents)
-local fitFrameVertical = roactFitComponentsModule.FitFrameVertical
-local fitTextLabel = roactFitComponentsModule.FitTextLabel
-local UIBloxModule = require(parent_1.UIBlox)
-local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
-local buttonType = UIBloxModule.App.Button.Enum.ButtonType
-local images = UIBloxModule.App.ImageSet.Images
-local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
-local iconSize = UIBloxModule.App.Constant.IconSize
-local withStyle = UIBloxModule.Core.Style.withStyle
-local multiTextLocalizerModule = require(parent.Locale.MultiTextLocalizer)
-local modelViewportModule = require(parent.Generic.ModelViewport)
-local imageunavailable = images["icons/status/imageunavailable"]
-local name = roactModule.Component:extend(script.Name)
-name.defaultProps = {
+﻿local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local RoactModule = require(Parent1.Roact)
+local RoactFitComponentsModule = require(Parent1.RoactFitComponents)
+local FitFrameVertical = RoactFitComponentsModule.FitFrameVertical
+local FitTextLabel = RoactFitComponentsModule.FitTextLabel
+local UIBloxModule = require(Parent1.UIBlox)
+local InteractiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
+local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
+local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
+local IconSize = UIBloxModule.App.Constant.IconSize
+local WithStyleFunction = UIBloxModule.Core.Style.withStyle
+local MultiTextLocalizerModule = require(Parent.Locale.MultiTextLocalizer)
+local ModelViewportModule = require(Parent.Generic.ModelViewport)
+local IconsStatusImageunavailable = UIBloxModule.App.ImageSet.Images["icons/status/imageunavailable"]
+local ExtendResult = RoactModule.Component:extend(script.Name)
+ExtendResult.defaultProps = {
 	anchorPoint = Vector2.new(0.5, 0.5),
 	position = UDim2.new(0.5, 0, 0.5, 0)
 }
 
-function name.init(p1)
-	-- upvalues: roactModule (ref)
-	p1.contentRef = roactModule.createRef()
+function ExtendResult.init(p1) --[[ Line: 48 ]]
+	-- upvalues: RoactModule (copy)
+	p1.contentRef = RoactModule.createRef()
 	p1.state = { contentSize = Vector2.new(0, 0) }
 	
-	function p0.changeContentSize(p2)
-		-- upvalues: p1 (ref)
-		if p1.state.contentSize ~= p2.AbsoluteSize then
-			p1:setState({ contentSize = p2.AbsoluteSize })
+	function p1.changeContentSize(Frame: Frame) --[[ Line: 54 ]]
+		-- upvalues: p1 (copy)
+		if p1.state.contentSize ~= Frame.AbsoluteSize then
+			p1:setState({ contentSize = Frame.AbsoluteSize })
 		end
 	end
 end
 
-function name.render(p1)
-	-- upvalues: roactModule (ref), multiTextLocalizerModule (ref)
-	return roactModule.createElement(multiTextLocalizerModule, {
+function ExtendResult.render(p1) --[[ Line: 63 ]]
+	-- upvalues: RoactModule (copy), MultiTextLocalizerModule (copy)
+	return RoactModule.createElement(MultiTextLocalizerModule, {
 		keys = {
 			PurchaseSucceededTitle = {
 				key = "IAPExperience.PurchaseSuccess.Title.PurchaseSucceeded"
@@ -49,77 +48,77 @@ function name.render(p1)
 			EquipText = { key = "IAPExperience.PurchaseSuccess.Action.Equip" },
 			BackToShopText = { key = "IAPExperience.PurchaseSuccess.Action.BackToShop" }
 		},
-		render = function(p2)
-			-- upvalues: p1 (ref)
+		render = function(p2) --[[ Line: 88 ]]
+			-- upvalues: p1 (copy)
 			return p1:renderAlert(p2)
 		end
 	})
 end
 
-function name.renderAlert(p1, p2)
-	-- upvalues: withStyle (ref), buttonType (ref), roactModule (ref), imageSetLabel (ref), iconSize (ref), imageunavailable (ref), modelViewportModule (ref), interactiveAlert (ref), fitFrameVertical (ref), fitTextLabel (ref)
-	local props = p1.props
+function ExtendResult.renderAlert(p1, p2) --[[ Line: 94 ]]
+	-- upvalues: WithStyleFunction (copy), ButtonType (copy), RoactModule (copy), ImageSetLabel (copy), IconSize (copy), IconsStatusImageunavailable (copy), ModelViewportModule (copy), InteractiveAlert (copy), FitFrameVertical (copy), FitTextLabel (copy)
+	local Props = p1.props
 	
-	return withStyle(function(p3)
-		-- upvalues: p2 (ref), props (ref), p1 (ref), buttonType (copy), roactModule (copy), imageSetLabel (copy), iconSize (copy), imageunavailable (copy), modelViewportModule (copy), interactiveAlert (copy), fitFrameVertical (copy), fitTextLabel (copy)
-		local theme = p3.Theme
-		local font = p3.Font
-		local text = p2.YouOwnText .. " " .. p5.BalanceNow:gsub("{robux}", utf8.char(57346) .. tostring(props.balance))
-		local var1 = if props.model then roactModule.createElement(modelViewportModule, {
-			model = props.model,
+	return WithStyleFunction(function(p3) --[[ Line: 97 ]]
+		-- upvalues: p2 (copy), Props (copy), p1 (copy), ButtonType (upval), RoactModule (upval), ImageSetLabel (upval), IconSize (upval), IconsStatusImageunavailable (upval), ModelViewportModule (upval), InteractiveAlert (upval), FitFrameVertical (upval), FitTextLabel (upval)
+		local Theme = p3.Theme
+		local _Font = p3.Font
+		local Text = p2.YouOwnText .. " " .. p2.BalanceNow:gsub("{robux}", utf8.char(57346) .. tostring(Props.balance))
+		local Element = if Props.model then RoactModule.createElement(ModelViewportModule, {
+			model = Props.model,
 			Position = UDim2.fromOffset(5, 5),
 			Size = UDim2.fromOffset(85, 85)
-		}) elseif props.itemIcon then roactModule.createElement(imageSetLabel, {
+		}) elseif Props.itemIcon then RoactModule.createElement(ImageSetLabel, {
 			BackgroundTransparency = 1,
 			ImageTransparency = 0,
 			Position = UDim2.new(0, 5, 0, 5),
 			Size = UDim2.new(0, 85, 0, 85),
 			ScaleType = Enum.ScaleType.Stretch,
-			Image = props.itemIcon
-		}) else roactModule.createElement(imageSetLabel, {
+			Image = Props.itemIcon
+		}) else RoactModule.createElement(ImageSetLabel, {
 			BackgroundTransparency = 1,
 			Position = UDim2.new(0, 5, 0, 5),
-			Size = UDim2.new(0, iconSize.Large, 0, iconSize.Large),
+			Size = UDim2.new(0, IconSize.Large, 0, IconSize.Large),
 			ScaleType = Enum.ScaleType.Stretch,
-			Image = imageunavailable,
-			ImageColor3 = theme.UIDefault.Color,
-			ImageTransparency = theme.UIDefault.Transparency
+			Image = IconsStatusImageunavailable,
+			ImageColor3 = Theme.UIDefault.Color,
+			ImageTransparency = Theme.UIDefault.Transparency
 		})
 		
-		return roactModule.createElement(interactiveAlert, {
-			screenSize = props.screenSize,
-			position = props.position,
-			anchorPoint = props.anchorPoint,
+		return RoactModule.createElement(InteractiveAlert, {
+			screenSize = Props.screenSize,
+			position = Props.position,
+			anchorPoint = Props.anchorPoint,
 			title = p2.PurchaseSucceededTitle,
-			middleContent = function()
-				-- upvalues: roactModule (copy), fitFrameVertical (copy), p1 (copy), var1 (write), fitTextLabel (copy), font (ref), text (ref), theme (ref)
-				return roactModule.createElement(fitFrameVertical, {
+			middleContent = function() --[[ Line: 175 ]]
+				-- upvalues: RoactModule (upval), FitFrameVertical (upval), p1 (upval), Element (ref), FitTextLabel (upval), _Font (copy), Text (copy), Theme (copy)
+				return RoactModule.createElement(FitFrameVertical, {
 					BackgroundTransparency = 1,
 					width = UDim.new(1, 0),
 					FillDirection = Enum.FillDirection.Vertical,
 					HorizontalAlignment = Enum.HorizontalAlignment.Center,
 					VerticalAlignment = Enum.VerticalAlignment.Center,
 					contentPadding = UDim.new(0, 24),
-					[roactModule.Ref] = p1.contentRef,
-					[roactModule.Change.AbsoluteSize] = p1.changeContentSize
+					[RoactModule.Ref] = p1.contentRef,
+					[RoactModule.Change.AbsoluteSize] = p1.changeContentSize
 				}, {
-					ItemIconFrame = roactModule.createElement(fitFrameVertical, {
+					ItemIconFrame = RoactModule.createElement(FitFrameVertical, {
 						LayoutOrder = 0,
 						BackgroundTransparency = 1,
 						width = UDim.new(1, 0),
 						HorizontalAlignment = Enum.HorizontalAlignment.Center,
 						VerticalAlignment = Enum.VerticalAlignment.Center
-					}, { ItemIcon = var1 }),
-					YouOwnText = roactModule.createElement(fitTextLabel, {
+					}, { ItemIcon = Element }),
+					YouOwnText = RoactModule.createElement(FitTextLabel, {
 						LayoutOrder = 1,
 						BackgroundTransparency = 1,
 						TextWrapped = true,
-						width = fitTextLabel.Width.FitToText,
+						width = FitTextLabel.Width.FitToText,
 						maximumWidth = p1.state.contentSize.X,
-						Font = font.Body.Font,
-						Text = text,
-						TextSize = font.BaseSize * font.Body.RelativeSize,
-						TextColor3 = theme.TextDefault.Color
+						Font = _Font.Body.Font,
+						Text = Text,
+						TextSize = _Font.BaseSize * _Font.Body.RelativeSize,
+						TextColor3 = Theme.TextDefault.Color
 					})
 				})
 			end,
@@ -127,28 +126,28 @@ function name.renderAlert(p1, p2)
 				buttons = {
 					{
 						props = {
-							onActivated = props.doneActivated,
+							onActivated = Props.doneActivated,
 							text = p2.BackToShopText,
-							inputIcon = props.cancelControllerIcon
+							inputIcon = Props.cancelControllerIcon
 						}
 					},
 					{
-						buttonType = buttonType.PrimarySystem,
+						buttonType = ButtonType.PrimarySystem,
 						props = {
-							onActivated = props.equipActivated,
+							onActivated = Props.equipActivated,
 							text = p2.EquipText,
-							inputIcon = props.confirmControllerIcon
+							inputIcon = Props.confirmControllerIcon
 						}
 					}
 				}
 			} else {
 				buttons = {
 					{
-						buttonType = buttonType.PrimarySystem,
+						buttonType = ButtonType.PrimarySystem,
 						props = {
-							onActivated = props.doneActivated,
+							onActivated = Props.doneActivated,
 							text = p2.BackToGameButtonText,
-							inputIcon = props.confirmControllerIcon
+							inputIcon = Props.confirmControllerIcon
 						}
 					}
 				}
@@ -157,4 +156,4 @@ function name.renderAlert(p1, p2)
 	end)
 end
 
-return name
+return ExtendResult

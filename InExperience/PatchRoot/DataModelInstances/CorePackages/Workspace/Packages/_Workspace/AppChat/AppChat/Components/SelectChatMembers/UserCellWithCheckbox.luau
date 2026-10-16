@@ -1,132 +1,129 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local fFlagAppChatUseProfileFrameThumbnailModule = require(appChat.Flags.FFlagAppChatUseProfileFrameThumbnail)
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local signalsReactModule = require(parent.SignalsReact)
-local text = require(parent.AppCommonLib).Text
-local getTextSize = require(parent.Style).GetTextSize
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local useSignalState = signalsReactModule.useSignalState
-local getSelectedUsersStoreModule = require(appChat.Stores.GetSelectedUsersStore)
-local useUserDataModule = require(appChat.Hooks.useUserData)
-local fFlagEnableBlackbirdCheck = require(parent.SharedFlags).FFlagEnableBlackbirdCheck
-local useIsRobloxSubscriber = require(parent.UserProfiles).Hooks.useIsRobloxSubscriber
-local fFlagDebugAppChatEnableDomLocatorsModule = require(appChat.Flags.FFlagDebugAppChatEnableDomLocators)
-local domLocatorsModule = require(appChat.Utils.DomLocators)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local FFlagAppChatUseProfileFrameThumbnailModule = require(AppChat.Flags.FFlagAppChatUseProfileFrameThumbnail)
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local Text = require(Parent.AppCommonLib).Text
+local GetTextSizeFunction = require(Parent.Style).GetTextSize
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local GetSelectedUsersStoreModule = require(AppChat.Stores.GetSelectedUsersStore)
+local UseUserDataModule = require(AppChat.Hooks.useUserData)
+local FFlagEnableBlackbirdCheck = require(Parent.SharedFlags).FFlagEnableBlackbirdCheck
+local UseIsRobloxSubscriberFunction = require(Parent.UserProfiles).Hooks.useIsRobloxSubscriber
+local FFlagDebugAppChatEnableDomLocatorsModule = require(AppChat.Flags.FFlagDebugAppChatEnableDomLocators)
+local DomLocatorsModule = require(AppChat.Utils.DomLocators)
 
-local function noOp() end
+local function noOp() --[[ Line: 32 ]] end
 
-local repeated = string.rep("W", 20)
+local Repeated = string.rep("W", 20)
 
-return reactModule.memo(function(p1)
-	-- upvalues: useUserDataModule (ref), foundationModule (ref), useIsRobloxSubscriber (ref), fFlagEnableBlackbirdCheck (ref), getSelectedUsersStoreModule (ref), useSignalState (ref), reactModule (ref), foundationFontFaceMigration (ref), getTextSize (ref), repeated (ref), text (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref), fFlagAppChatUseProfileFrameThumbnailModule (ref), noOp (ref)
-	local var1 = useUserDataModule(p1.userId)
-	local var2 = foundationModule.Hooks.useTokens()
-	local var3 = useIsRobloxSubscriber(if fFlagEnableBlackbirdCheck then p1.userId else nil)
-	local var4 = getSelectedUsersStoreModule(false)
-	local var5 = useSignalState(var4.getIsUserSelected(p1.userId))
-	local var6 = reactModule.useCallback(function()
-		-- upvalues: var4 (ref), p1 (ref)
-		var4.toggleUserId(p1.userId)
+return ReactModule.memo(function(p1) --[[ Line: 38 ]]
+	-- upvalues: UseUserDataModule (copy), FoundationModule (copy), UseIsRobloxSubscriberFunction (copy), FFlagEnableBlackbirdCheck (copy), GetSelectedUsersStoreModule (copy), UseSignalStateFunction (copy), ReactModule (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), Repeated (copy), Text (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), DomLocatorsModule (copy), FFlagAppChatUseProfileFrameThumbnailModule (copy), noOp (copy)
+	local UseUserDataModuleResult = UseUserDataModule(p1.userId)
+	local UseTokensResult = FoundationModule.Hooks.useTokens()
+	local UseIsRobloxSubscriberResult = UseIsRobloxSubscriberFunction(if FFlagEnableBlackbirdCheck then p1.userId else nil)
+	local SelectedUsersStoreModule = GetSelectedUsersStoreModule(false)
+	local UseSignalStateResult = UseSignalStateFunction(SelectedUsersStoreModule.getIsUserSelected(p1.userId))
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 47 ]]
+		-- upvalues: SelectedUsersStoreModule (copy), p1 (copy)
+		SelectedUsersStoreModule.toggleUserId(p1.userId)
 	end, { p1.userId })
-	local var7 = reactModule.useMemo(function()
-		-- upvalues: foundationFontFaceMigration (copy), getTextSize (copy), repeated (copy), var2 (ref), text (copy)
-		local var8 = if foundationFontFaceMigration then getTextSize(repeated, var2.Typography.TitleLarge.FontSize, var2.Typography.TitleLarge.Font, Vector2.zero) else text.GetTextBounds(repeated, var2.Typography.TitleLarge.Font, var2.Typography.TitleLarge.FontSize, Vector2.zero)
+	local UseMemoResult = ReactModule.useMemo(function(): UDim2 --[[ Line: 51 ]]
+		-- upvalues: FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), Repeated (upval), UseTokensResult (copy), Text (upval)
+		local TextSize = if FoundationFontFaceMigration then GetTextSizeFunction(Repeated, UseTokensResult.Typography.TitleLarge.FontSize, UseTokensResult.Typography.TitleLarge.Font, Vector2.zero) else Text.GetTextBounds(Repeated, UseTokensResult.Typography.TitleLarge.Font, UseTokensResult.Typography.TitleLarge.FontSize, Vector2.zero)
 		
-		return UDim2.fromOffset(var8.X, var8.Y)
+		return UDim2.fromOffset(TextSize.X, TextSize.Y)
 	end, {
-		var2.Typography.TitleLarge.Font,
-		var2.Typography.TitleLarge.FontSize
+		UseTokensResult.Typography.TitleLarge.Font,
+		UseTokensResult.Typography.TitleLarge.FontSize
 	})
-	local var8 = reactModule.useMemo(function()
-		-- upvalues: foundationFontFaceMigration (copy), getTextSize (copy), var2 (ref), text (copy)
-		local var9 = if foundationFontFaceMigration then getTextSize("Roblox Studio", var2.Typography.CaptionMedium.FontSize, var2.Typography.CaptionMedium.Font, Vector2.zero) else text.GetTextBounds("Roblox Studio", var2.Typography.CaptionMedium.Font, var2.Typography.CaptionMedium.FontSize, Vector2.zero)
+	local UseMemoResult1 = ReactModule.useMemo(function(): UDim2 --[[ Line: 68 ]]
+		-- upvalues: FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), UseTokensResult (copy), Text (upval)
+		local RobloxStudio = if FoundationFontFaceMigration then GetTextSizeFunction("Roblox Studio", UseTokensResult.Typography.CaptionMedium.FontSize, UseTokensResult.Typography.CaptionMedium.Font, Vector2.zero) else Text.GetTextBounds("Roblox Studio", UseTokensResult.Typography.CaptionMedium.Font, UseTokensResult.Typography.CaptionMedium.FontSize, Vector2.zero)
 		
-		return UDim2.fromOffset(var9.X, var9.Y)
+		return UDim2.fromOffset(RobloxStudio.X, RobloxStudio.Y)
 	end, {
-		var2.Typography.CaptionMedium.Font,
-		var2.Typography.CaptionMedium.FontSize
+		UseTokensResult.Typography.CaptionMedium.Font,
+		UseTokensResult.Typography.CaptionMedium.FontSize
 	})
-	local var9 = nil
-	local _ = nil
+	local v1 = nil
+	local UseStateResult2 = nil
 	
-	if fFlagDebugAppChatEnableDomLocatorsModule then
-		local var10, var11 = reactModule.useState("")
-		var9 = var10
-		local var12 = var11
-		reactModule.__subscribeToBinding(var1.username, function(p2)
-			-- upvalues: var12 (write)
-			var12(p2)
+	if FFlagDebugAppChatEnableDomLocatorsModule then
+		v1, UseStateResult2 = ReactModule.useState("")
+		ReactModule.__subscribeToBinding(UseUserDataModuleResult.username, function(p2) --[[ Line: 88 ]]
+			-- upvalues: UseStateResult2 (ref)
+			UseStateResult2(p2)
 		end)
 	end
-	return reactModule.createElement(foundationModule.View, {
+	return ReactModule.createElement(FoundationModule.View, {
 		tag = "row size-full-0 auto-y stroke-muted stroke-thin gap-medium padding-x-medium padding-y-small align-y-center",
-		onActivated = var6,
-		testId = if fFlagDebugAppChatEnableDomLocatorsModule then domLocatorsModule.selectChatMembersUserCellWithCheckbox(var9, var5) else nil
+		onActivated = UseResult,
+		testId = if FFlagDebugAppChatEnableDomLocatorsModule then DomLocatorsModule.selectChatMembersUserCellWithCheckbox(v1, UseSignalStateResult) else nil
 	}, {
-		Avatar = reactModule.createElement(foundationModule.Avatar, {
+		Avatar = ReactModule.createElement(FoundationModule.Avatar, {
 			LayoutOrder = 1,
-			userId = var1.id,
-			userPresence = var1.presence,
-			size = foundationModule.Enums.InputSize.Medium,
-			backgroundStyle = var2.Color.Shift.Shift_300,
-			includeProfileFrame = fFlagAppChatUseProfileFrameThumbnailModule
+			userId = UseUserDataModuleResult.id,
+			userPresence = UseUserDataModuleResult.presence,
+			size = FoundationModule.Enums.InputSize.Medium,
+			backgroundStyle = UseTokensResult.Color.Shift.Shift_300,
+			includeProfileFrame = FFlagAppChatUseProfileFrameThumbnailModule
 		}),
-		UserInfo = reactModule.createElement(foundationModule.View, { tag = "col fill auto-y clip", LayoutOrder = 2 }, {
-			UserDataSkeleton = reactModule.createElement(foundationModule.Skeleton, {
+		UserInfo = ReactModule.createElement(FoundationModule.View, { tag = "col fill auto-y clip", LayoutOrder = 2 }, {
+			UserDataSkeleton = ReactModule.createElement(FoundationModule.Skeleton, {
 				LayoutOrder = 1,
-				Size = UDim2.new(var7.X, var7.Y + var8.Y),
-				Visible = var1.isLoading
+				Size = UDim2.new(UseMemoResult.X, UseMemoResult.Y + UseMemoResult1.Y),
+				Visible = UseUserDataModuleResult.isLoading
 			}),
-			DisplayNameRow = if fFlagEnableBlackbirdCheck then reactModule.createElement(foundationModule.View, {
+			DisplayNameRow = if FFlagEnableBlackbirdCheck then ReactModule.createElement(FoundationModule.View, {
 				tag = "row auto-xy align-y-center gap-xsmall",
 				LayoutOrder = 1,
-				Visible = var1.isLoading:map(function(p2)
+				Visible = UseUserDataModuleResult.isLoading:map(function(p2): boolean --[[ Line: 122 ]]
 					return not p2
 				end)
 			}, {
-				DisplayName = reactModule.createElement(foundationModule.Text, {
+				DisplayName = ReactModule.createElement(FoundationModule.Text, {
 					tag = "auto-xy text-title-large text-truncate-end content-emphasis",
 					LayoutOrder = 1,
-					Text = var1.combinedName
+					Text = UseUserDataModuleResult.combinedName
 				}),
-				SubscriptionBadge = if var3 then reactModule.createElement(foundationModule.Icon, {
+				SubscriptionBadge = if UseIsRobloxSubscriberResult then ReactModule.createElement(FoundationModule.Icon, {
 					LayoutOrder = 2,
-					name = foundationModule.Enums.IconName.RobloxPlus,
-					size = foundationModule.Enums.IconSize.Small,
-					style = var2.Color.Content.Emphasis
+					name = FoundationModule.Enums.IconName.RobloxPlus,
+					size = FoundationModule.Enums.IconSize.Small,
+					style = UseTokensResult.Color.Content.Emphasis
 				}) else nil
 			}) else nil,
-			DisplayName = if not fFlagEnableBlackbirdCheck then reactModule.createElement(foundationModule.Text, {
+			DisplayName = if FFlagEnableBlackbirdCheck then nil else ReactModule.createElement(FoundationModule.Text, {
 				tag = "auto-xy text-title-large text-truncate-end content-emphasis",
 				LayoutOrder = 1,
-				Text = var1.combinedName,
-				Visible = var1.isLoading:map(function(p2)
+				Text = UseUserDataModuleResult.combinedName,
+				Visible = UseUserDataModuleResult.isLoading:map(function(p2): boolean --[[ Line: 146 ]]
 					return not p2
 				end)
-			}) else nil,
-			PresenceText = reactModule.createElement(foundationModule.Text, {
+			}),
+			PresenceText = ReactModule.createElement(FoundationModule.Text, {
 				tag = "auto-xy text-caption-medium text-truncate-end content-muted",
 				LayoutOrder = 3,
-				Text = var1.presenceText,
-				Visible = var1.isLoading:map(function(p2)
+				Text = UseUserDataModuleResult.presenceText,
+				Visible = UseUserDataModuleResult.isLoading:map(function(p2): boolean --[[ Line: 155 ]]
 					return not p2
 				end)
 			})
 		}),
-		CheckboxContainer = reactModule.createElement(foundationModule.View, {
+		CheckboxContainer = ReactModule.createElement(FoundationModule.View, {
 			tag = "auto-xy padding-x-medium",
 			isDisabled = true,
 			LayoutOrder = 3,
 			onActivated = noOp,
 			selection = { Selectable = false }
 		}, {
-			checkbox = reactModule.createElement(foundationModule.Checkbox, {
+			checkbox = ReactModule.createElement(FoundationModule.Checkbox, {
 				label = "",
 				Selectable = false,
-				isChecked = var5,
-				size = foundationModule.Enums.InputSize.XSmall,
+				isChecked = UseSignalStateResult,
+				size = FoundationModule.Enums.InputSize.XSmall,
 				onActivated = noOp
 			})
 		})

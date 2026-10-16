@@ -1,51 +1,51 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local coreGuiService = game:GetService("CoreGui")
-local localizationService = game:GetService("LocalizationService")
-local renderWithCoreScriptsStyleProviderModule = require(coreGuiService:WaitForChild("RobloxGui").Modules.Common.renderWithCoreScriptsStyleProvider)
-local roactModule = require(corePackagesService.Packages.Roact)
-local roduxModule = require(corePackagesService.Packages.Rodux)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local localization = require(corePackagesService.Workspace.Packages.InExperienceLocales).Localization
-local localizationProvider = require(corePackagesService.Workspace.Packages.Localization).LocalizationProvider
-local foundationModule = require(corePackagesService.Packages.Foundation)
-local avatarEditorPromptsAppModule = require(script.Components.AvatarEditorPromptsApp)
-local reducerModule = require(script.Reducer)
-local getGameNameModule = require(script.Thunks.GetGameName)
-local avatarEditorPromptsPolicyModule = require(script.AvatarEditorPromptsPolicy)
-local roactGlobalConfigModule = require(script.RoactGlobalConfig)
-local connectAvatarEditorServiceEventsModule = require(script.ConnectAvatarEditorServiceEvents)
-local t = {}
-t.__index = t
+﻿local CorePackages = game:GetService("CorePackages")
+local CoreGui = game:GetService("CoreGui")
+local LocalizationService = game:GetService("LocalizationService")
+local RenderWithCoreScriptsStyleProviderModule = require(CoreGui:WaitForChild("RobloxGui").Modules.Common.renderWithCoreScriptsStyleProvider)
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoduxModule = require(CorePackages.Packages.Rodux)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local Localization = require(CorePackages.Workspace.Packages.InExperienceLocales).Localization
+local LocalizationProvider = require(CorePackages.Workspace.Packages.Localization).LocalizationProvider
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local AvatarEditorPromptsAppModule = require(script.Components.AvatarEditorPromptsApp)
+local ReducerModule = require(script.Reducer)
+local GetGameNameModule = require(script.Thunks.GetGameName)
+local AvatarEditorPromptsPolicyModule = require(script.AvatarEditorPromptsPolicy)
+local RoactGlobalConfigModule = require(script.RoactGlobalConfig)
+local ConnectAvatarEditorServiceEventsModule = require(script.ConnectAvatarEditorServiceEvents)
+local Module = {}
+Module.__index = Module
 
-function t.new()
-	-- upvalues: t (ref), roactGlobalConfigModule (ref), roactModule (ref), roduxModule (ref), reducerModule (ref), getGameNameModule (ref), roactRoduxModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), foundationModule (ref), avatarEditorPromptsPolicyModule (ref), renderWithCoreScriptsStyleProviderModule (ref), avatarEditorPromptsAppModule (ref), coreGuiService (ref), connectAvatarEditorServiceEventsModule (ref)
-	local tbl = setmetatable({}, t)
+function Module.new() --[[ Line: 30 ]]
+	-- upvalues: Module (copy), RoactGlobalConfigModule (copy), RoactModule (copy), RoduxModule (copy), ReducerModule (copy), GetGameNameModule (copy), RoactRoduxModule (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), FoundationModule (copy), AvatarEditorPromptsPolicyModule (copy), RenderWithCoreScriptsStyleProviderModule (copy), AvatarEditorPromptsAppModule (copy), CoreGui (copy), ConnectAvatarEditorServiceEventsModule (copy)
+	local self = setmetatable({}, Module)
 	
-	if roactGlobalConfigModule.propValidation then
-		roactModule.setGlobalConfig({ propValidation = true })
+	if RoactGlobalConfigModule.propValidation then
+		RoactModule.setGlobalConfig({ propValidation = true })
 	end
-	if roactGlobalConfigModule.elementTracing then
-		roactModule.setGlobalConfig({ elementTracing = true })
+	if RoactGlobalConfigModule.elementTracing then
+		RoactModule.setGlobalConfig({ elementTracing = true })
 	end
-	tbl.store = roduxModule.Store.new(reducerModule, nil, { roduxModule.thunkMiddleware })
-	tbl.store:dispatch(getGameNameModule)
-	tbl.root = roactModule.createElement("Folder", { Name = "AvatarEditorPromptsApp" }, roactModule.createElement(roactRoduxModule.StoreProvider, { store = tbl.store }, {
-		LocalizationProvider = roactModule.createElement(localizationProvider, {
-			localization = localization.new(localizationService.RobloxLocaleId)
+	self.store = RoduxModule.Store.new(ReducerModule, nil, { RoduxModule.thunkMiddleware })
+	self.store:dispatch(GetGameNameModule)
+	self.root = RoactModule.createElement("Folder", { Name = "AvatarEditorPromptsApp" }, (RoactModule.createElement(RoactRoduxModule.StoreProvider, { store = self.store }, {
+		LocalizationProvider = RoactModule.createElement(LocalizationProvider, {
+			localization = Localization.new(LocalizationService.RobloxLocaleId)
 		}, {
-			FoundationProvider = roactModule.createElement(foundationModule.FoundationProvider, { colorMode = foundationModule.Enums.ColorMode.Dark }, {
-				PolicyProvider = roactModule.createElement(avatarEditorPromptsPolicyModule.Provider, { policy = { avatarEditorPromptsPolicyModule.Mapper } }, {
-					ThemeProvider = renderWithCoreScriptsStyleProviderModule({
-						AvatarEditorPromptsApp = roactModule.createElement(avatarEditorPromptsAppModule)
+			FoundationProvider = RoactModule.createElement(FoundationModule.FoundationProvider, { colorMode = FoundationModule.Enums.ColorMode.Dark }, {
+				PolicyProvider = RoactModule.createElement(AvatarEditorPromptsPolicyModule.Provider, { policy = { AvatarEditorPromptsPolicyModule.Mapper } }, {
+					ThemeProvider = RenderWithCoreScriptsStyleProviderModule({
+						AvatarEditorPromptsApp = RoactModule.createElement(AvatarEditorPromptsAppModule)
 					})
 				})
 			})
 		})
-	}))
-	tbl.element = roactModule.mount(tbl.root, coreGuiService, "AvatarEditorPrompts")
-	tbl.serviceConnections = connectAvatarEditorServiceEventsModule(tbl.store)
+	})))
+	self.element = RoactModule.mount(self.root, CoreGui, "AvatarEditorPrompts")
+	self.serviceConnections = ConnectAvatarEditorServiceEventsModule(self.store)
 	
-	return tbl
+	return self
 end
 
-return t.new()
+return Module.new()

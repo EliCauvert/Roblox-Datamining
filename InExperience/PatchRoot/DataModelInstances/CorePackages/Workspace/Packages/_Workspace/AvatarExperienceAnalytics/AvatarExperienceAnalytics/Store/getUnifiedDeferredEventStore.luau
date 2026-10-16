@@ -1,50 +1,49 @@
-﻿local signalsModule = require(script:FindFirstAncestor("AvatarExperienceAnalytics").Parent.Signals)
-local createSignal = signalsModule.createSignal
+﻿local SignalsModule = require(script:FindFirstAncestor("AvatarExperienceAnalytics").Parent.Signals)
+local CreateSignalFunction = SignalsModule.createSignal
 
-return signalsModule.createComputed(function()
-	-- upvalues: createSignal (ref)
-	local var1, var2 = createSignal(false)
-	local t = {}
+return SignalsModule.createComputed(function() --[[ Line: 18 | Named "createUnifiedLoggingDeferredEventStore" ]]
+	-- upvalues: CreateSignalFunction (copy)
+	local Signal, Signal2 = CreateSignalFunction(false)
+	local T = {}
 	
 	return {
-		isEntered = var1,
-		enqueue = function(p1, p2)
-			-- upvalues: t (write)
-			local var3 = t[p1]
+		isEntered = Signal,
+		enqueue = function(Key, p1) --[[ Line: 24 ]]
+			-- upvalues: T (ref)
+			local Entry = T[Key]
 			
-			if not var3 then
-				var3 = {}
-				t[p1] = var3
+			if not Entry then
+				Entry = {}
+				T[Key] = Entry
 			end
-			table.insert(var3, p2)
+			table.insert(Entry, p1)
 		end,
-		takePending = function(p1)
-			-- upvalues: t (write)
-			if p1 ~= nil then
-				local var3 = t[p1] or {}
-				t[p1] = nil
+		takePending = function(Key) --[[ Line: 32 ]]
+			-- upvalues: T (ref)
+			if Key ~= nil then
+				T[Key] = nil
 				
-				return var3
+				return T[Key] or {}
 			end
-			local t_1 = {}
+			local List = {}
 			
-			for i, v in t do
-				for i_1, v_1 in v do
-					table.insert(t_1, v_1)
+			for _, value in T do
+				for _, value1 in value do
+					table.insert(List, value1)
 				end
 			end
-			t = {}
+			T = {}
 			
-			return t_1
+			return List
 		end,
-		markEntered = function()
-			-- upvalues: var2 (ref)
-			var2(true)
+		markEntered = function() --[[ Line: 48 ]]
+			-- upvalues: Signal2 (copy)
+			Signal2(true)
 		end,
-		reset = function()
-			-- upvalues: var2 (ref), t (write)
-			var2(false)
-			t = {}
+		reset = function() --[[ Line: 51 ]]
+			-- upvalues: Signal2 (copy), T (ref)
+			Signal2(false)
+			T = {}
 		end
 	}
 end)

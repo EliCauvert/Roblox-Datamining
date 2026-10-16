@@ -1,39 +1,38 @@
-﻿local friendsLanding = script:FindFirstAncestor("FriendsLanding")
-local parent = friendsLanding.Parent
-local dependenciesModule = require(friendsLanding.dependencies)
-local roactRoduxModule = require(parent.RoactRodux)
-local roactAppPolicy = require(parent.UniversalAppPolicy).RoactAppPolicy
-local navigateDown = require(parent.NavigationRodux).Thunks.NavigateDown
-local appPage = require(parent.RobloxAppEnums).AppPage
-local coreGui = dependenciesModule.CoreGui
-local roact = dependenciesModule.Roact
-local textService = dependenciesModule.TextService
-local UIBlox = dependenciesModule.UIBlox
-local withLocalization = dependenciesModule.withLocalization
-local foundationModule = require(parent.Foundation)
-local chip = foundationModule.Chip
-local enums = foundationModule.Enums
-local view = foundationModule.View
-local text = foundationModule.Text
-local images = UIBlox.App.ImageSet.Images
-local impressionEventsModule = require(friendsLanding.FriendsLandingAnalytics.ImpressionEvents)
-local pill = UIBlox.App.Control.Pill
-local withStyle = UIBlox.Style.withStyle
-local withTooltip = UIBlox.App.Dialog.TooltipV2.withTooltip
-local tooltipOrientation = UIBlox.App.Dialog.Enum.TooltipOrientation
-local filterStatesModule = require(friendsLanding.Friends.filterStates)
-local pillWithAlertModule = require(friendsLanding.Components.PillWithAlert)
-local chipFilterGroupModule = require(friendsLanding.Components.ChipFilterGroup)
-local iconSize = UIBlox.App.ImageSet.Enum.IconSize
-local getIconSize = UIBlox.App.ImageSet.getIconSize
-local fFlagFixScalingOnFriendsLandingModule = require(friendsLanding.Flags.FFlagFixScalingOnFriendsLanding)
-local fFlagConnectionManagementChips = require(parent.SharedFlags).FFlagConnectionManagementChips
-local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
-local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
-local fFlagConnectionsToFriendsRename = require(parent.SharedFlags).FFlagConnectionsToFriendsRename
-local fFlagFriendsPageUserListEnabled = require(parent.SharedFlags).FFlagFriendsPageUserListEnabled
-local filterByButton = roact.PureComponent:extend("FilterByButton")
-filterByButton.defaultProps = {
+﻿local FriendsLanding = script:FindFirstAncestor("FriendsLanding")
+local Parent = FriendsLanding.Parent
+local DependenciesModule = require(FriendsLanding.dependencies)
+local RoactRoduxModule = require(Parent.RoactRodux)
+local RoactAppPolicy = require(Parent.UniversalAppPolicy).RoactAppPolicy
+local NavigateDownFunction = require(Parent.NavigationRodux).Thunks.NavigateDown
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local CoreGui = DependenciesModule.CoreGui
+local Roact = DependenciesModule.Roact
+local TextService = DependenciesModule.TextService
+local UIBlox = DependenciesModule.UIBlox
+local WithLocalizationFunction = DependenciesModule.withLocalization
+local FoundationModule = require(Parent.Foundation)
+local Chip = FoundationModule.Chip
+local Enums = FoundationModule.Enums
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local Images = UIBlox.App.ImageSet.Images
+local ImpressionEventsModule = require(FriendsLanding.FriendsLandingAnalytics.ImpressionEvents)
+local Pill = UIBlox.App.Control.Pill
+local WithStyleFunction = UIBlox.Style.withStyle
+local WithTooltipFunction = UIBlox.App.Dialog.TooltipV2.withTooltip
+local TooltipOrientation = UIBlox.App.Dialog.Enum.TooltipOrientation
+local FilterStatesModule = require(FriendsLanding.Friends.filterStates)
+local PillWithAlertModule = require(FriendsLanding.Components.PillWithAlert)
+local ChipFilterGroupModule = require(FriendsLanding.Components.ChipFilterGroup)
+local IconSize = UIBlox.App.ImageSet.Enum.IconSize
+local GetIconSizeFunction = UIBlox.App.ImageSet.getIconSize
+local FFlagFixScalingOnFriendsLandingModule = require(FriendsLanding.Flags.FFlagFixScalingOnFriendsLanding)
+local FFlagConnectionManagementChips = require(Parent.SharedFlags).FFlagConnectionManagementChips
+local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3Dispatch
+local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
+local FFlagFriendsPageUserListEnabled = require(Parent.SharedFlags).FFlagFriendsPageUserListEnabled
+local FilterByButton = Roact.PureComponent:extend("FilterByButton")
+FilterByButton.defaultProps = {
 	analytics = nil,
 	layoutOrder = 1,
 	friendCount = 0,
@@ -41,40 +40,40 @@ filterByButton.defaultProps = {
 	isDisabled = false,
 	showFriendPruningAlert = false,
 	initialShowFriendPruningTooltip = false,
-	onActivated = function() end,
-	filter = filterStatesModule.All,
-	onTooltipDismissal = function() end
+	onActivated = function() --[[ Line: 54 ]] end,
+	filter = FilterStatesModule.All,
+	onTooltipDismissal = function() --[[ Line: 61 ]] end
 }
 
-function filterByButton.init(p1)
-	-- upvalues: fFlagConnectionManagementChips (ref), filterStatesModule (ref), appPage (ref), fFlagConnectionsToFriendsRename (ref)
+function FilterByButton.init(p1) --[[ Line: 64 ]]
+	-- upvalues: FFlagConnectionManagementChips (copy), FilterStatesModule (copy), AppPage (copy)
 	p1.state = {
 		hasDismissedFriendPruningTooltip = false,
 		showFriendPruningTooltip = p1.props.initialShowFriendPruningTooltip
 	}
 	
-	if fFlagConnectionManagementChips then
+	if FFlagConnectionManagementChips then
 		p1.state.canAccessTrustedContacts = p1.props.canAccessTrustedContacts
 	end
-	function p0.convertFilterToTranslation(p2, p3)
-		-- upvalues: filterStatesModule (copy), fFlagConnectionManagementChips (copy)
-		return if p2 == filterStatesModule.All then p3.all elseif p2 == filterStatesModule.Online then p3.online elseif p2 == filterStatesModule.InExperience then p3.inExperience elseif p2 == filterStatesModule.Offline then p3.offline elseif p2 == filterStatesModule.Inactive then p3.inactive elseif fFlagConnectionManagementChips and p2 == filterStatesModule.Trusted then p3.trusted else nil
+	function p1.convertFilterToTranslation(All, p2) --[[ Line: 74 ]]
+		-- upvalues: FilterStatesModule (upval), FFlagConnectionManagementChips (upval)
+		return if All == FilterStatesModule.All then p2.all elseif All == FilterStatesModule.Online then p2.online elseif All == FilterStatesModule.InExperience then p2.inExperience elseif All == FilterStatesModule.Offline then p2.offline elseif All == FilterStatesModule.Inactive then p2.inactive elseif FFlagConnectionManagementChips and All == FilterStatesModule.Trusted then p2.trusted else nil
 	end
 	
-	function p0.buildFilterText(p2, p3, p4)
-		-- upvalues: p1 (ref)
-		local var2 = p1.convertFilterToTranslation(p2, p3)
+	function p1.buildFilterText(Filter, p2, FriendCount) --[[ Line: 92 ]]
+		-- upvalues: p1 (copy)
+		local ConvertFilterToTranslationResult = p1.convertFilterToTranslation(Filter, p2)
 		
-		return if p4 == 0 then var2 else var2 .. " (" .. p5 .. ")"
+		return if FriendCount == 0 then ConvertFilterToTranslationResult else ConvertFilterToTranslationResult .. " (" .. FriendCount .. ")"
 	end
 	
-	function p0.isSelected(p2)
-		-- upvalues: filterStatesModule (copy)
-		return p2 ~= filterStatesModule.All
+	function p1.isSelected(Filter): boolean --[[ Line: 101 ]]
+		-- upvalues: FilterStatesModule (upval)
+		return Filter ~= FilterStatesModule.All
 	end
 	
-	function p0.dismissFriendPruningTooltip()
-		-- upvalues: p1 (ref)
+	function p1.dismissFriendPruningTooltip() --[[ Line: 109 ]]
+		-- upvalues: p1 (copy)
 		p1:setState({
 			showFriendPruningTooltip = false,
 			hasDismissedFriendPruningTooltip = true
@@ -82,46 +81,46 @@ function filterByButton.init(p1)
 		p1.props.onTooltipDismissal()
 	end
 	
-	if fFlagConnectionManagementChips then
-		function p0.onLearnMoreClicked()
-			-- upvalues: p1 (ref), appPage (copy)
+	if FFlagConnectionManagementChips then
+		function p1.onLearnMoreClicked() --[[ Line: 118 ]]
+			-- upvalues: p1 (copy), AppPage (upval)
 			p1.props.navigateDown({
 				detail = "https://en.help.roblox.com/hc/articles/46158344285204",
-				name = appPage.GenericWebPage,
+				name = AppPage.GenericWebPage,
 				extraProps = { title = "" }
 			})
 		end
 	end
-	if fFlagConnectionManagementChips then
-		function p0.getTrustedFilterText(p2)
-			-- upvalues: fFlagConnectionsToFriendsRename (copy), p1 (ref)
-			return if fFlagConnectionsToFriendsRename then if p1.props.canAccessTrustedContacts then p2.doMoreWithTrustedFriends else p2.trustedFriendsUnavailable elseif p1.props.canAccessTrustedContacts then p2.doMoreWithTrustedConnections else p2.trustedConnectionsUnavailable
+	if FFlagConnectionManagementChips then
+		function p1.getTrustedFilterText(p2) --[[ Line: 128 ]]
+			-- upvalues: p1 (copy)
+			return if p1.props.canAccessTrustedContacts then p2.doMoreWithTrustedFriends else p2.trustedFriendsUnavailable
 		end
 	end
 end
 
-function filterByButton.didMount(p1)
-	-- upvalues: impressionEventsModule (ref)
+function FilterByButton.didMount(p1) --[[ Line: 137 ]]
+	-- upvalues: ImpressionEventsModule (copy)
 	if p1.props.initialShowFriendPruningTooltip and p1.props.analytics then
-		p1.props.analytics:impressionEvent(impressionEventsModule.FriendPruningTooltipSeen, {
+		p1.props.analytics:impressionEvent(ImpressionEventsModule.FriendPruningTooltipSeen, {
 			friendCount = tostring(p1.props.friendCount),
 			inactiveFriendCount = tostring(p1.props.inactiveFriendCount)
 		})
 	end
 end
 
-function filterByButton.didUpdate(p1)
+function FilterByButton.didUpdate(p1) --[[ Line: 148 ]]
 	p1:setState({
 		showFriendPruningTooltip = p1.props.initialShowFriendPruningTooltip and not p1.state.hasDismissedFriendPruningTooltip
 	})
 end
 
-function filterByButton.render(p1)
-	-- upvalues: withStyle (ref), fFlagFixScalingOnFriendsLandingModule (ref), images (ref), fFlagConnectionManagementChips (ref), withLocalization (ref), tooltipOrientation (ref), coreGui (ref), roact (ref), withTooltip (ref), getIconSize (ref), iconSize (ref), textService (ref), pillWithAlertModule (ref), pill (ref), view (ref), fFlagFriendsPageUserListEnabled (ref), chipFilterGroupModule (ref), filterStatesModule (ref), text (ref), chip (ref), enums (ref)
-	return withStyle(function(_)
-		-- upvalues: fFlagFixScalingOnFriendsLandingModule (copy), images (copy), fFlagConnectionManagementChips (copy), withLocalization (copy), p1 (ref), tooltipOrientation (copy), coreGui (copy), roact (copy), withStyle (copy), withTooltip (copy), getIconSize (copy), iconSize (copy), textService (copy), pillWithAlertModule (copy), pill (copy), view (copy), fFlagFriendsPageUserListEnabled (copy), chipFilterGroupModule (copy), filterStatesModule (copy), text (copy), chip (copy), enums (copy)
-		local var2 = if fFlagFixScalingOnFriendsLandingModule then "icons/actions/filter_small" else images["icons/actions/filter"]
-		local t = {
+function FilterByButton.render(p1) --[[ Line: 156 ]]
+	-- upvalues: WithStyleFunction (copy), FFlagFixScalingOnFriendsLandingModule (copy), Images (copy), FFlagConnectionManagementChips (copy), WithLocalizationFunction (copy), TooltipOrientation (copy), CoreGui (copy), Roact (copy), WithTooltipFunction (copy), GetIconSizeFunction (copy), IconSize (copy), TextService (copy), PillWithAlertModule (copy), Pill (copy), View (copy), FFlagFriendsPageUserListEnabled (copy), ChipFilterGroupModule (copy), FilterStatesModule (copy), Text (copy), Chip (copy), Enums (copy)
+	return WithStyleFunction(function(_) --[[ Line: 157 ]]
+		-- upvalues: FFlagFixScalingOnFriendsLandingModule (upval), Images (upval), FFlagConnectionManagementChips (upval), WithLocalizationFunction (upval), p1 (copy), TooltipOrientation (upval), CoreGui (upval), Roact (upval), WithStyleFunction (upval), WithTooltipFunction (upval), GetIconSizeFunction (upval), IconSize (upval), TextService (upval), PillWithAlertModule (upval), Pill (upval), View (upval), FFlagFriendsPageUserListEnabled (upval), ChipFilterGroupModule (upval), FilterStatesModule (upval), Text (upval), Chip (upval), Enums (upval)
+		local FilterSmall = if FFlagFixScalingOnFriendsLandingModule then "icons/actions/filter_small" else Images["icons/actions/filter"]
+		local config = {
 			all = "Feature.Friends.Label.All",
 			inactive = "Feature.Friends.Label.FewestInteractions",
 			inExperience = "Feature.Friends.Label.InGame",
@@ -131,195 +130,167 @@ function filterByButton.render(p1)
 			offline = "Common.Presence.Label.Offline"
 		}
 		
-		if fFlagConnectionManagementChips then
-			t.trusted = "Feature.Friends.TrustedConnection.Label.Trusted"
-			t.learnMore = "Feature.Chat.Action.LearnMore"
-			t.doMoreWithTrustedConnections = "Feature.Friends.Description.DoMoreWithTrustedConnections"
-			t.doMoreWithTrustedFriends = "Feature.Friends.Description.DoMoreWithTrustedFriends"
-			t.trustedConnectionsUnavailable = "Feature.Friends.Description.TrustedConnectionsUnavailable"
-			t.trustedFriendsUnavailable = "Feature.Friends.Description.TrustedFriendsUnavailable"
+		if FFlagConnectionManagementChips then
+			config.trusted = "Feature.Friends.TrustedConnection.Label.Trusted"
+			config.learnMore = "Feature.Chat.Action.LearnMore"
+			config.doMoreWithTrustedFriends = "Feature.Friends.Description.DoMoreWithTrustedFriends"
+			config.trustedFriendsUnavailable = "Feature.Friends.Description.TrustedFriendsUnavailable"
 		end
-		return withLocalization(t)(function(p2)
-			-- upvalues: p1 (copy), fFlagConnectionManagementChips (copy), tooltipOrientation (copy), coreGui (copy), roact (copy), withStyle (copy), withTooltip (copy), getIconSize (copy), iconSize (copy), textService (copy), pillWithAlertModule (copy), var2 (ref), pill (copy), view (copy), fFlagFriendsPageUserListEnabled (copy), chipFilterGroupModule (copy), filterStatesModule (copy), text (copy), fFlagFixScalingOnFriendsLandingModule (copy), chip (copy), enums (copy)
-			local filter = p1.props.filter
-			local friendCount = p1.props.friendCount
-			local isDisabled = p1.props.isDisabled
-			local onActivated = p1.props.onActivated
-			local var3 = p1.buildFilterText(filter, p2, friendCount)
-			local maxWidth = nil
-			local webViewSupported = nil
+		return WithLocalizationFunction(config)(function(p2) --[[ Line: 176 ]]
+			-- upvalues: p1 (upval), FFlagConnectionManagementChips (upval), TooltipOrientation (upval), CoreGui (upval), Roact (upval), WithStyleFunction (upval), WithTooltipFunction (upval), GetIconSizeFunction (upval), IconSize (upval), TextService (upval), PillWithAlertModule (upval), FilterSmall (copy), Pill (upval), View (upval), FFlagFriendsPageUserListEnabled (upval), ChipFilterGroupModule (upval), FilterStatesModule (upval), Text (upval), FFlagFixScalingOnFriendsLandingModule (upval), Chip (upval), Enums (upval)
+			local Filter = p1.props.filter
+			local IsDisabled = p1.props.isDisabled
+			local OnActivated = p1.props.onActivated
+			local FilterText = p1.buildFilterText(Filter, p2, p1.props.friendCount)
+			local X = nil
+			local WebViewSupported = nil
 			
-			if fFlagConnectionManagementChips then
-				maxWidth = p1.props.maxWidth
-				webViewSupported = p1.props.webViewSupported
+			if FFlagConnectionManagementChips then
+				X = p1.props.maxWidth
+				WebViewSupported = p1.props.webViewSupported
 			end
-			local var4
-			local t = {
+			local config = {
 				headerText = p2.tooltipHeader,
 				bodyText = p2.tooltipBody
 			}
-			local t_1 = {
+			local config1 = {
 				active = true,
 				DisplayOrder = 2,
-				preferredOrientation = tooltipOrientation.Bottom,
-				guiTarget = coreGui
+				preferredOrientation = TooltipOrientation.Bottom,
+				guiTarget = CoreGui
 			}
-			local createElement = roact.createElement
-			local var5 = "Frame"
-			local t_2 = {
+			
+			return Roact.createElement("Frame", {
 				BackgroundTransparency = 1,
 				AutomaticSize = Enum.AutomaticSize.Y,
 				Size = UDim2.new(1, 0, 0, 36),
 				LayoutOrder = p1.props.layoutOrder
-			}
-			local t_3 = {}
-			
-			if p1.state.showFriendPruningTooltip then
-				var4 = withStyle(function(p3)
-					-- upvalues: withTooltip (copy), t (ref), t_1 (ref), getIconSize (copy), iconSize (copy), textService (copy), var3 (ref), roact (copy), p1 (copy), coreGui (copy), pillWithAlertModule (copy), var2 (copy), isDisabled (ref), filter (ref), onActivated (ref), pill (copy)
-					return withTooltip(t, t_1, function(p4)
-						-- upvalues: p3 (ref), getIconSize (copy), iconSize (copy), textService (copy), var3 (copy), roact (copy), p1 (copy), coreGui (copy), pillWithAlertModule (copy), var2 (copy), isDisabled (copy), filter (copy), onActivated (copy), pill (copy)
-						local font = p3.Font
+			}, {
+				Button = if p1.state.showFriendPruningTooltip then WithStyleFunction(function(p3) --[[ Line: 206 ]]
+					-- upvalues: WithTooltipFunction (upval), config (copy), config1 (copy), GetIconSizeFunction (upval), IconSize (upval), TextService (upval), FilterText (copy), Roact (upval), p1 (upval), CoreGui (upval), PillWithAlertModule (upval), FilterSmall (upval), IsDisabled (copy), Filter (copy), OnActivated (copy), Pill (upval)
+					return WithTooltipFunction(config, config1, function(p4) --[[ Line: 207 ]]
+						-- upvalues: p3 (copy), GetIconSizeFunction (upval), IconSize (upval), TextService (upval), FilterText (upval), Roact (upval), p1 (upval), CoreGui (upval), PillWithAlertModule (upval), FilterSmall (upval), IsDisabled (upval), Filter (upval), OnActivated (upval), Pill (upval)
+						local _Font = p3.Font
 						
-						return roact.createElement("Frame", {
-							Size = UDim2.fromOffset(textService:GetTextSize(var3, font.CaptionHeader.RelativeSize * font.BaseSize, font.CaptionHeader.Font, Vector2.new(10000, 10000)).X + 24 + 4 + getIconSize(iconSize.Small), 28),
+						return Roact.createElement("Frame", {
+							Size = UDim2.fromOffset(TextService:GetTextSize(FilterText, _Font.CaptionHeader.RelativeSize * _Font.BaseSize, _Font.CaptionHeader.Font, Vector2.new(10000, 10000)).X + 24 + 4 + GetIconSizeFunction(IconSize.Small), 28),
 							LayoutOrder = p1.props.layoutOrder,
 							BackgroundTransparency = 1,
-							[roact.Change.AbsoluteSize] = p4,
-							[roact.Change.AbsolutePosition] = p4
+							[Roact.Change.AbsoluteSize] = p4,
+							[Roact.Change.AbsolutePosition] = p4
 						}, {
-							PortalToCoreGui = roact.createElement(roact.Portal, { target = coreGui }, {
-								ScreenGui = roact.createElement("ScreenGui", {
+							PortalToCoreGui = Roact.createElement(Roact.Portal, { target = CoreGui }, {
+								ScreenGui = Roact.createElement("ScreenGui", {
 									DisplayOrder = 1,
 									ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 								}, {
-									DismissFriendPruningTooltipButton = roact.createElement("TextButton", {
+									DismissFriendPruningTooltipButton = Roact.createElement("TextButton", {
 										ZIndex = 0,
 										BackgroundTransparency = 1,
 										Size = UDim2.fromScale(1, 1),
 										Text = "",
-										[roact.Event.Activated] = p1.dismissFriendPruningTooltip,
-										[roact.Event.TouchSwipe] = p1.dismissFriendPruningTooltip,
-										[roact.Event.MouseWheelForward] = p1.dismissFriendPruningTooltip,
-										[roact.Event.MouseWheelBackward] = p1.dismissFriendPruningTooltip
+										[Roact.Event.Activated] = p1.dismissFriendPruningTooltip,
+										[Roact.Event.TouchSwipe] = p1.dismissFriendPruningTooltip,
+										[Roact.Event.MouseWheelForward] = p1.dismissFriendPruningTooltip,
+										[Roact.Event.MouseWheelBackward] = p1.dismissFriendPruningTooltip
 									})
 								})
 							}),
-							FilterByButtonPillPossiblyWithAlert = if p1.props.showFriendPruningAlert then roact.createElement(pillWithAlertModule, {
-								icon = var2,
-								text = var3,
-								isDisabled = isDisabled,
-								isSelected = p1.isSelected(filter),
-								onActivated = onActivated
-							}) else roact.createElement(pill, {
-								icon = var2,
-								text = var3,
-								isDisabled = isDisabled,
-								isSelected = p1.isSelected(filter),
-								onActivated = onActivated
+							FilterByButtonPillPossiblyWithAlert = if p1.props.showFriendPruningAlert then Roact.createElement(PillWithAlertModule, {
+								icon = FilterSmall,
+								text = FilterText,
+								isDisabled = IsDisabled,
+								isSelected = p1.isSelected(Filter),
+								onActivated = OnActivated
+							}) else Roact.createElement(Pill, {
+								icon = FilterSmall,
+								text = FilterText,
+								isDisabled = IsDisabled,
+								isSelected = p1.isSelected(Filter),
+								onActivated = OnActivated
 							})
 						})
 					end)
-				end)
-			elseif p1.props.showFriendPruningAlert then
-				var4 = roact.createElement(pillWithAlertModule, {
-					icon = var2,
-					text = var3,
-					isDisabled = isDisabled,
-					isSelected = p1.isSelected(filter),
-					onActivated = onActivated
-				})
-			elseif fFlagConnectionManagementChips then
-				local createElement_1
-				var4 = roact.createElement
-				local var6 = view
-				local t_4 = {
-					tag = if fFlagFriendsPageUserListEnabled then "auto-y size-full-0 flex-between gap-large padding-top-large" else "auto-y size-full-0 flex-between gap-large padding-top-large padding-bottom-large"
-				}
-				local t_5 = {
-					UISizeConstraint = if maxWidth then roact.createElement("UISizeConstraint", { MaxSize = Vector2.new(maxWidth, 1e999) }) else nil,
-					Layout = roact.createElement("UIListLayout", {
+				end) elseif p1.props.showFriendPruningAlert then Roact.createElement(PillWithAlertModule, {
+					icon = FilterSmall,
+					text = FilterText,
+					isDisabled = IsDisabled,
+					isSelected = p1.isSelected(Filter),
+					onActivated = OnActivated
+				}) elseif FFlagConnectionManagementChips then Roact.createElement(View, {
+					tag = if FFlagFriendsPageUserListEnabled then "auto-y size-full-0 flex-between gap-large padding-top-large" else "auto-y size-full-0 flex-between gap-large padding-top-large padding-bottom-large"
+				}, {
+					UISizeConstraint = if X then Roact.createElement("UISizeConstraint", { MaxSize = Vector2.new(X, 1e999) }) else nil,
+					Layout = Roact.createElement("UIListLayout", {
 						FillDirection = Enum.FillDirection.Vertical,
 						SortOrder = Enum.SortOrder.LayoutOrder
 					}),
-					FilterGroup = roact.createElement(chipFilterGroupModule, {
+					FilterGroup = Roact.createElement(ChipFilterGroupModule, {
 						LayoutOrder = 1,
-						onActivated = onActivated,
-						isDisabled = isDisabled
-					})
-				}
-				
-				if filterStatesModule.Trusted == filter then
-					createElement_1 = roact.createElement
-					createElement_1 = createElement_1(view, { tag = "auto-y size-full-0", LayoutOrder = 2 }, {
-						Layout = roact.createElement("UIListLayout", {
+						onActivated = OnActivated,
+						isDisabled = IsDisabled
+					}),
+					EducationText = if FilterStatesModule.Trusted == Filter then Roact.createElement(View, { tag = "auto-y size-full-0", LayoutOrder = 2 }, {
+						Layout = Roact.createElement("UIListLayout", {
 							FillDirection = Enum.FillDirection.Vertical,
 							SortOrder = Enum.SortOrder.LayoutOrder,
 							VerticalAlignment = Enum.VerticalAlignment.Top
 						}),
-						Content = roact.createElement(text, {
+						Content = Roact.createElement(Text, {
 							LayoutOrder = 1,
 							tag = "auto-y size-full-0 text-caption-medium text-align-x-left text-align-y-top text-wrap",
 							Text = p1.getTrustedFilterText(p2)
 						}),
-						LearnMore = if webViewSupported and p1.props.canAccessTrustedContacts then roact.createElement(view, {
+						LearnMore = if WebViewSupported and p1.props.canAccessTrustedContacts then Roact.createElement(View, {
 							LayoutOrder = 2,
 							tag = "auto-y size-full-0 padding-top-xsmall"
 						}, {
-							Text = roact.createElement(text, {
+							Text = Roact.createElement(Text, {
 								tag = "auto-xy text-caption-medium text-align-x-left text-align-y-top",
 								RichText = true,
 								Text = `<u>{p2.learnMore}</u>`,
 								onActivated = p1.onLearnMoreClicked
 							})
 						}) else nil
-					})
-				else
-					createElement_1 = nil
-				end
-				t_5.EducationText = createElement_1
-				var4 = var4(var6, t_4, t_5)
-			else
-				var4 = if fFlagFixScalingOnFriendsLandingModule then roact.createElement(chip, {
+					}) else nil
+				}) elseif FFlagFixScalingOnFriendsLandingModule then Roact.createElement(Chip, {
 					leading = {
-						name = var2,
-						iconName = enums.IconName.ThreeBarsHorizontalNarrowing,
-						position = enums.IconPosition.Left
+						name = FilterSmall,
+						iconName = Enums.IconName.ThreeBarsHorizontalNarrowing,
+						position = Enums.IconPosition.Left
 					},
-					text = var3,
-					isChecked = p1.isSelected(filter),
-					onActivated = onActivated,
-					isDisabled = isDisabled
-				}) else roact.createElement(pill, {
-					icon = var2,
-					text = var3,
-					isDisabled = isDisabled,
-					isSelected = p1.isSelected(filter),
-					onActivated = onActivated
+					text = FilterText,
+					isChecked = p1.isSelected(Filter),
+					onActivated = OnActivated,
+					isDisabled = IsDisabled
+				}) else Roact.createElement(Pill, {
+					icon = FilterSmall,
+					text = FilterText,
+					isDisabled = IsDisabled,
+					isSelected = p1.isSelected(Filter),
+					onActivated = OnActivated
 				})
-			end
-			t_3.Button = var4
-			
-			return createElement(var5, t_2, t_3)
+			})
 		end)
 	end)
 end
 
-if fFlagConnectionManagementChips then
-	filterByButton = roactRoduxModule.connect(function(_, _)
+if FFlagConnectionManagementChips then
+	FilterByButton = RoactRoduxModule.connect(function(_, _) --[[ Line: 351 ]]
 		return {}
-	end, function(p1)
-		-- upvalues: fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref)
+	end, function(Callback) --[[ Line: 353 ]]
+		-- upvalues: FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy)
 		return {
-			navigateDown = function(p2)
-				-- upvalues: fFlagSignalsNavP3Dispatch (copy), var1 (copy), p1 (ref), navigateDown (copy)
-				return if fFlagSignalsNavP3Dispatch then var1.down(var1.fromLegacyPage(p2)) else p1(navigateDown(p2))
+			navigateDown = function(p1) --[[ Line: 355 ]]
+				-- upvalues: FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), Callback (copy), NavigateDownFunction (upval)
+				return if FFlagSignalsNavP3Dispatch then NavigationCommands.down(NavigationCommands.fromLegacyPage(p1)) else Callback(NavigateDownFunction(p1))
 			end
 		}
-	end)(filterByButton)
+	end)(FilterByButton)
 	
-	return roactAppPolicy.connect(function(p1)
+	return RoactAppPolicy.connect(function(p1) --[[ Line: 365 ]]
 		return { webViewSupported = p1.getWebViewSupport() }
-	end)(filterByButton)
+	end)(FilterByButton)
+else
+	return FilterByButton
 end
-return filterByButton

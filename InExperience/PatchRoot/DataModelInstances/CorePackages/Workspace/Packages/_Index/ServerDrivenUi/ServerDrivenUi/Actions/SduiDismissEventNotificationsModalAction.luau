@@ -1,37 +1,37 @@
-﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local virtualEventsModule = require(parent.VirtualEvents)
-local closeCentralOverlay = require(parent.CentralOverlay).Thunks.CloseCentralOverlay
-local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
-local sduiParseHelpers = sduiCoreSystemModule.SduiParseHelpers
+﻿local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local VirtualEventsModule = require(Parent.VirtualEvents)
+local CloseCentralOverlayFunction = require(Parent.CentralOverlay).Thunks.CloseCentralOverlay
+local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
+local SduiParseHelpers = SduiCoreSystemModule.SduiParseHelpers
 
-return function(p1, _, p2)
-	-- upvalues: sduiErrorType (ref), virtualEventsModule (ref), sduiParseHelpers (ref), closeCentralOverlay (ref)
-	local var1 = if p1 then p1.actionParams else nil
+return function(p1, _, p2) --[[ Line: 17 | Named "SduiDismissEventNotificationsModalAction" ]]
+	-- upvalues: SduiErrorType (copy), VirtualEventsModule (copy), SduiParseHelpers (copy), CloseCentralOverlayFunction (copy)
+	local ActionParams = p1 and p1.actionParams or nil
 	
-	if var1 == nil then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if ActionParams == nil then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			name = "DismissEventNotificationsModal",
 			message = "Missing actionParams"
 		}, p2.appPage)
 		
 		return
 	end
-	assert(var1, "actionParams must exist")
+	assert(ActionParams, "actionParams must exist")
 	
-	if var1.eventId == nil then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if ActionParams.eventId == nil then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			name = "DismissEventNotificationsModal",
 			message = "Missing eventId",
 			propName = "eventId"
 		}, p2.appPage)
 	end
-	virtualEventsModule.neverShowNotificationsModalAgain(p2.dependencies.networking):catch(function(p3)
-		-- upvalues: p2 (ref), sduiErrorType (copy), sduiParseHelpers (copy)
-		p2.dependencies.logger.reportError(sduiErrorType.ActionNetworkRequestFailed, {
+	VirtualEventsModule.neverShowNotificationsModalAgain(p2.dependencies.networking):catch(function(Err) --[[ Line: 44 ]]
+		-- upvalues: p2 (copy), SduiErrorType (upval), SduiParseHelpers (upval)
+		p2.dependencies.logger.reportError(SduiErrorType.ActionNetworkRequestFailed, {
 			name = "DismissEventNotificationsModal",
-			message = "neverShowNotificationsModalAgain failed: " .. sduiParseHelpers.stringifyValue(p3)
+			message = "neverShowNotificationsModalAgain failed: " .. SduiParseHelpers.stringifyValue(Err)
 		}, p2.appPage)
 	end)
-	p2.dependencies.dispatch(closeCentralOverlay())
+	p2.dependencies.dispatch(CloseCentralOverlayFunction())
 end

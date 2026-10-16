@@ -1,16 +1,16 @@
-﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
-local parent = momentsCreation.Parent
-local builderIconsModule = require(parent.BuilderIcons)
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local iconButton = foundationModule.IconButton
-local text = foundationModule.Text
-local view = foundationModule.View
-local useTokens = foundationModule.Hooks.useTokens
-local constantsModule = require(momentsCreation.Constants)
-local _ = require(momentsCreation.Types.CreationFlowTypes)
-local useTextFontRowStateModule = require(momentsCreation.Components.TextOverlay.useTextFontRowState)
-local fFlagMomentsTextOverlayColorPickerIconModule = require(momentsCreation.Flags.FFlagMomentsTextOverlayColorPickerIcon)
+﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
+local Parent = MomentsCreation.Parent
+local BuilderIconsModule = require(Parent.BuilderIcons)
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local IconButton = FoundationModule.IconButton
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local ConstantsModule = require(MomentsCreation.Constants)
+local _ = require(MomentsCreation.Types.CreationFlowTypes)
+local UseTextFontRowStateModule = require(MomentsCreation.Components.TextOverlay.useTextFontRowState)
+local FFlagMomentsTextOverlayColorPickerIconModule = require(MomentsCreation.Flags.FFlagMomentsTextOverlayColorPickerIcon)
 local list = {
 	{ label = "Builder", font = Enum.Font.BuilderSansMedium },
 	{ label = "Source Sans", font = Enum.Font.SourceSans },
@@ -27,76 +27,76 @@ local list = {
 	{ label = "Grenze Gotisch", font = Enum.Font.GrenzeGotisch },
 	{ label = "Special Elite", font = Enum.Font.SpecialElite }
 }
-local t = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) }
+local config = { Transparency = 0, Color3 = Color3.fromRGB(32, 34, 39) }
 
-return function(p1)
-	-- upvalues: useTokens (ref), useTextFontRowStateModule (ref), list (ref), reactModule (ref), view (ref), fFlagMomentsTextOverlayColorPickerIconModule (ref), text (ref), t (ref), constantsModule (ref), foundationModule (ref), iconButton (ref), builderIconsModule (ref)
-	local var1 = useTokens()
-	local var2 = useTextFontRowStateModule(p1.controller)
-	local t_1 = {}
+return function(Frame) --[[ Line: 58 | Named "TextFontRow" ]]
+	-- upvalues: UseTokensFunction (copy), UseTextFontRowStateModule (copy), list (copy), ReactModule (copy), View (copy), FFlagMomentsTextOverlayColorPickerIconModule (copy), Text (copy), config (copy), ConstantsModule (copy), FoundationModule (copy), IconButton (copy), BuilderIconsModule (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseTextFontRowStateModuleResult = UseTextFontRowStateModule(Frame.controller)
+	local Elements = {}
 	
-	for i, v in list do
-		local var3 = var2.font == v.font
-		t_1["Chip" .. i] = reactModule.createElement(view, {
+	for LayoutOrder, value in list do
+		local v1 = UseTextFontRowStateModuleResult.font == value.font
+		Elements["Chip" .. LayoutOrder] = ReactModule.createElement(View, {
 			tag = "row align-x-center align-y-center size-0-800 auto-x radius-circle clip",
-			LayoutOrder = i,
+			LayoutOrder = LayoutOrder,
 			padding = {
-				left = UDim.new(0, var1.Padding.Medium),
-				right = UDim.new(0, var1.Padding.Medium),
-				top = if fFlagMomentsTextOverlayColorPickerIconModule and v.font == Enum.Font.LuckiestGuy then UDim.new(0, var1.Size.Size_100) else nil
+				left = UDim.new(0, UseTokensResult.Padding.Medium),
+				right = UDim.new(0, UseTokensResult.Padding.Medium),
+				top = if FFlagMomentsTextOverlayColorPickerIconModule and value.font == Enum.Font.LuckiestGuy then UDim.new(0, UseTokensResult.Size.Size_100) else nil
 			},
-			backgroundStyle = if var3 then var1.Inverse.Surface.Surface_0 else var1.Color.ActionStandard.Background,
-			onActivated = function()
-				-- upvalues: var2 (ref), v (ref), i (ref)
-				var2.onChipActivated(v.font, i)
+			backgroundStyle = if v1 then UseTokensResult.Inverse.Surface.Surface_0 else UseTokensResult.Color.ActionStandard.Background,
+			onActivated = function() --[[ Line: 82 ]]
+				-- upvalues: UseTextFontRowStateModuleResult (copy), value (copy), LayoutOrder (copy)
+				UseTextFontRowStateModuleResult.onChipActivated(value.font, LayoutOrder)
 			end
 		}, {
-			Label = reactModule.createElement(text, {
+			Label = ReactModule.createElement(Text, {
 				tag = "shrink auto-x text-label-medium text-truncate-end",
-				Text = v.label,
-				fontStyle = { Font = v.font },
-				textStyle = if var3 then t else var1.Color.ActionStandard.Foreground
+				Text = value.label,
+				fontStyle = { Font = value.font },
+				textStyle = if v1 then config else UseTokensResult.Color.ActionStandard.Foreground
 			})
 		})
 	end
-	return reactModule.createElement(view, {
-		LayoutOrder = p1.LayoutOrder,
-		Size = UDim2.new(1, 0, 0, constantsModule.TextOverlay.PickerRowHeight)
+	return ReactModule.createElement(View, {
+		LayoutOrder = Frame.LayoutOrder,
+		Size = UDim2.new(1, 0, 0, ConstantsModule.TextOverlay.PickerRowHeight)
 	}, {
-		Scroll = reactModule.createElement(foundationModule.ScrollView, {
+		Scroll = ReactModule.createElement(FoundationModule.ScrollView, {
 			Size = UDim2.new(1, 0, 1, 0),
-			scrollingFrameRef = var2.scrollingFrameRef,
-			onCanvasPositionChanged = var2.onScrollViewportChanged,
-			onAbsoluteCanvasSizeChanged = var2.onScrollViewportChanged,
-			onAbsoluteWindowSizeChanged = var2.onScrollViewportChanged,
+			scrollingFrameRef = UseTextFontRowStateModuleResult.scrollingFrameRef,
+			onCanvasPositionChanged = UseTextFontRowStateModuleResult.onScrollViewportChanged,
+			onAbsoluteCanvasSizeChanged = UseTextFontRowStateModuleResult.onScrollViewportChanged,
+			onAbsoluteWindowSizeChanged = UseTextFontRowStateModuleResult.onScrollViewportChanged,
 			scroll = {
-				scrollBarVisibility = foundationModule.Enums.Visibility.None,
+				scrollBarVisibility = FoundationModule.Enums.Visibility.None,
 				ScrollingDirection = Enum.ScrollingDirection.X,
 				AutomaticCanvasSize = Enum.AutomaticSize.X
 			}
 		}, {
-			Row = reactModule.createElement(view, {
+			Row = ReactModule.createElement(View, {
 				tag = "row align-y-center gap-medium size-0-full auto-x padding-x-large"
-			}, t_1)
+			}, Elements)
 		}),
-		LeftChevron = if var2.showLeftChevron then reactModule.createElement(view, {
+		LeftChevron = if UseTextFontRowStateModuleResult.showLeftChevron then ReactModule.createElement(View, {
 			ZIndex = 2,
 			tag = "position-center-left anchor-center-left auto-xy"
 		}, {
-			Icon = reactModule.createElement(iconButton, {
-				icon = builderIconsModule.Icon.ChevronSmallLeft,
-				onActivated = var2.onLeftChevronActivated,
-				size = foundationModule.Enums.InputSize.Medium
+			Icon = ReactModule.createElement(IconButton, {
+				icon = BuilderIconsModule.Icon.ChevronSmallLeft,
+				onActivated = UseTextFontRowStateModuleResult.onLeftChevronActivated,
+				size = FoundationModule.Enums.InputSize.Medium
 			})
 		}) else nil,
-		RightChevron = if var2.showRightChevron then reactModule.createElement(view, {
+		RightChevron = if UseTextFontRowStateModuleResult.showRightChevron then ReactModule.createElement(View, {
 			ZIndex = 2,
 			tag = "position-center-right anchor-center-right auto-xy"
 		}, {
-			Icon = reactModule.createElement(iconButton, {
-				icon = builderIconsModule.Icon.ChevronSmallRight,
-				onActivated = var2.onRightChevronActivated,
-				size = foundationModule.Enums.InputSize.Medium
+			Icon = ReactModule.createElement(IconButton, {
+				icon = BuilderIconsModule.Icon.ChevronSmallRight,
+				onActivated = UseTextFontRowStateModuleResult.onRightChevronActivated,
+				size = FoundationModule.Enums.InputSize.Medium
 			})
 		}) else nil
 	})

@@ -1,6 +1,6 @@
-﻿local adCampaignEligibilityModule = require(script:FindFirstAncestor("BuildExperience").Parent.DataHydration.AdCampaignEligibility)
+﻿local AdCampaignEligibilityModule = require(script:FindFirstAncestor("BuildExperience").Parent.DataHydration.AdCampaignEligibility)
 
-return function(p1)
-	-- upvalues: adCampaignEligibilityModule (ref)
-	adCampaignEligibilityModule.getAdCampaignEligibilityStore(false).fetchEligibility(p1)
+return function(p1) --[[ Line: 9 | Named "refreshAdCampaignEligibility" ]]
+	-- upvalues: AdCampaignEligibilityModule (copy)
+	AdCampaignEligibilityModule.getAdCampaignEligibilityStore(false).fetchEligibility(p1)
 end

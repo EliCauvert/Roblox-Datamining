@@ -1,21 +1,21 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local textModule = require(foundation.Components.Text)
-local viewModule = require(foundation.Components.View)
-local _ = require(foundation.Enums.PaginationSize)
-local paginationUtilsModule = require(script.Parent.Parent.paginationUtils)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local TextModule = require(Foundation.Components.Text)
+local ViewModule = require(Foundation.Components.View)
+local _ = require(Foundation.Enums.PaginationSize)
+local PaginationUtilsModule = require(script.Parent.Parent.paginationUtils)
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), viewModule (ref), paginationUtilsModule (ref), textModule (ref)
-	return reactModule.createElement(viewModule, {
-		LayoutOrder = p1.LayoutOrder,
-		tag = paginationUtilsModule.getCircularSlotTag(p1.slotSize),
-		testId = p1.testId
+return ReactModule.memo(function(Frame) --[[ Line: 21 | Named "Ellipsis" ]]
+	-- upvalues: ReactModule (copy), ViewModule (copy), PaginationUtilsModule (copy), TextModule (copy)
+	return ReactModule.createElement(ViewModule, {
+		LayoutOrder = Frame.LayoutOrder,
+		tag = PaginationUtilsModule.getCircularSlotTag(Frame.slotSize),
+		testId = Frame.testId
 	}, {
-		Text = reactModule.createElement(textModule, {
+		Text = ReactModule.createElement(TextModule, {
 			Text = "...",
 			LayoutOrder = 1,
-			tag = paginationUtilsModule.getPageLabelTag(p1.slotSize)
+			tag = PaginationUtilsModule.getPageLabelTag(Frame.slotSize)
 		})
 	})
 end)

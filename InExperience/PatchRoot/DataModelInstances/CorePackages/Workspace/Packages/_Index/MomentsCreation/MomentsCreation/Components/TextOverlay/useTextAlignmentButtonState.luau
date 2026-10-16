@@ -1,81 +1,80 @@
-﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
-local parent = momentsCreation.Parent
-local builderIconsModule = require(parent.BuilderIcons)
-local dashModule = require(parent.Dash)
-local momentsCommonModule = require(parent.MomentsCommon)
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local useCallback = reactModule.useCallback
-local useMemo = reactModule.useMemo
-local useSignalState = signalsReactModule.useSignalState
-local eventNames = momentsCommonModule.Analytics.EventNames
-local fireAnalyticsEventModule = require(momentsCreation.Analytics.fireAnalyticsEvent)
-local makeCreationEventFieldsModule = require(momentsCreation.Analytics.makeCreationEventFields)
-local fFlagMomentsTextOverlayV2Redesign = momentsCommonModule.Flags.FFlagMomentsTextOverlayV2Redesign
-local _ = require(momentsCreation.Types.CreationFlowTypes)
-local _ = require(parent.MomentsTypes)
-local list = {
+﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
+local Parent = MomentsCreation.Parent
+local BuilderIconsModule = require(Parent.BuilderIcons)
+local DashModule = require(Parent.Dash)
+local MomentsCommonModule = require(Parent.MomentsCommon)
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local UseCallbackFunction = ReactModule.useCallback
+local UseMemoFunction = ReactModule.useMemo
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local EventNames = MomentsCommonModule.Analytics.EventNames
+local FireAnalyticsEventModule = require(MomentsCreation.Analytics.fireAnalyticsEvent)
+local MakeCreationEventFieldsModule = require(MomentsCreation.Analytics.makeCreationEventFields)
+local FFlagMomentsTextOverlayV2Redesign = MomentsCommonModule.Flags.FFlagMomentsTextOverlayV2Redesign
+local _ = require(MomentsCreation.Types.CreationFlowTypes)
+local _ = require(Parent.MomentsTypes)
+local TextXAlignments = {
 	Enum.TextXAlignment.Center,
 	Enum.TextXAlignment.Left,
 	Enum.TextXAlignment.Right
 }
-local t = {
-	[Enum.TextXAlignment.Left.Name] = builderIconsModule.Icon.FourBarsHorizontalRightAligned,
-	[Enum.TextXAlignment.Center.Name] = builderIconsModule.Icon.FourBarsHorizontalCenterAligned,
-	[Enum.TextXAlignment.Right.Name] = builderIconsModule.Icon.FourBarsHorizontalLeftAligned
+local config = {
+	[Enum.TextXAlignment.Left.Name] = BuilderIconsModule.Icon.FourBarsHorizontalRightAligned,
+	[Enum.TextXAlignment.Center.Name] = BuilderIconsModule.Icon.FourBarsHorizontalCenterAligned,
+	[Enum.TextXAlignment.Right.Name] = BuilderIconsModule.Icon.FourBarsHorizontalLeftAligned
 }
 
-local function _(p1)
-	-- upvalues: list (ref)
-	for i, v in list do
-		if v == p1 then
-			return list[i % #list + 1]
+local function _(p1) --[[ Line: 41 | Named "nextAlignment" ]]
+	-- upvalues: TextXAlignments (copy)
+	for i, textXAlignment in TextXAlignments do
+		if textXAlignment == p1 then
+			return TextXAlignments[i % #TextXAlignments + 1]
 		end
 	end
 	return Enum.TextXAlignment.Center
 end
 
-return function(value)
-	-- upvalues: useMemo (ref), signalsModule (ref), useSignalState (ref), useCallback (ref), list (ref), dashModule (ref), fFlagMomentsTextOverlayV2Redesign (ref), fireAnalyticsEventModule (ref), eventNames (ref), makeCreationEventFieldsModule (ref), t (ref), builderIconsModule (ref)
+return function(p2) --[[ Line: 55 | Named "useTextAlignmentButtonState" ]]
+	-- upvalues: UseMemoFunction (copy), SignalsModule (copy), UseSignalStateFunction (copy), UseCallbackFunction (copy), TextXAlignments (copy), DashModule (copy), FFlagMomentsTextOverlayV2Redesign (copy), FireAnalyticsEventModule (copy), EventNames (copy), MakeCreationEventFieldsModule (copy), config (copy), BuilderIconsModule (copy)
 	return {
-		icon = t[useSignalState(useMemo(function()
-			-- upvalues: signalsModule (copy), value (ref)
-			return signalsModule.createComputed(function(p2)
-				-- upvalues: value (copy)
-				local activeSession = value.getActiveSession(p2)
-				local var1 = if activeSession ~= nil then nil else activeSession.getDraft(p2)
-				local var2 = var1 and var1[1]
+		icon = config[UseSignalStateFunction((UseMemoFunction(function() --[[ Line: 57 ]]
+			-- upvalues: SignalsModule (upval), p2 (copy)
+			return SignalsModule.createComputed(function(p3) --[[ Line: 58 ]]
+				-- upvalues: p2 (upval)
+				local ActiveSession = p2.getActiveSession(p3)
+				local Draft = if ActiveSession == nil then nil else ActiveSession.getDraft(p3)
+				local DraftEntry = Draft and Draft[1]
 				
-				return if var2 == nil then Enum.TextXAlignment.Center else var2.textOverlayStyle.textXAlignment
+				return if DraftEntry == nil then Enum.TextXAlignment.Center else DraftEntry.textOverlayStyle.textXAlignment
 			end)
-		end, { value })).Name] or builderIconsModule.Icon.FourBarsHorizontalCenterAligned,
-		onActivated = useCallback(function()
-			-- upvalues: value (ref), list (copy), dashModule (copy), fFlagMomentsTextOverlayV2Redesign (copy), fireAnalyticsEventModule (copy), eventNames (copy), makeCreationEventFieldsModule (copy)
-			local activeSession = value.getActiveSession(false)
+		end, { p2 }))).Name] or BuilderIconsModule.Icon.FourBarsHorizontalCenterAligned,
+		onActivated = UseCallbackFunction(function() --[[ Line: 67 ]]
+			-- upvalues: p2 (copy), TextXAlignments (upval), DashModule (upval), FFlagMomentsTextOverlayV2Redesign (upval), FireAnalyticsEventModule (upval), EventNames (upval), MakeCreationEventFieldsModule (upval)
+			local ActiveSession = p2.getActiveSession(false)
 			
-			if activeSession == nil then return end
-			local draft = activeSession.getDraft(false)
-			local var1 = draft and draft[1]
+			if ActiveSession == nil then return end
+			local Draft = ActiveSession.getDraft(false)
+			local DraftEntry = Draft and Draft[1]
 			
-			if var1 == nil then return end
-			local center
-			local textXAlignment = var1.textOverlayStyle.textXAlignment
+			if DraftEntry == nil then return end
+			local TextXAlignment = DraftEntry.textOverlayStyle.textXAlignment
+			local TextXAlignment1 = nil
 			
-			for i, v in list do
-				if v == textXAlignment then
-					center = list[i % #list + 1]
-					activeSession.update({
-						dashModule.joinDeep(var1, { textOverlayStyle = { textXAlignment = center } })
+			for i, textXAlignment in TextXAlignments do
+				if textXAlignment == TextXAlignment then
+					TextXAlignment1 = TextXAlignments[i % #TextXAlignments + 1]
+					ActiveSession.update({
+						DashModule.joinDeep(DraftEntry, { textOverlayStyle = { textXAlignment = TextXAlignment1 } })
 					})
 					
-					if fFlagMomentsTextOverlayV2Redesign then
-						fireAnalyticsEventModule(eventNames.EditingFlowTextOverlayAlignmentSelected, makeCreationEventFieldsModule.makeTextOverlayEventFields({ alignment = center.Name }))
+					if FFlagMomentsTextOverlayV2Redesign then
+						FireAnalyticsEventModule(EventNames.EditingFlowTextOverlayAlignmentSelected, MakeCreationEventFieldsModule.makeTextOverlayEventFields({ alignment = TextXAlignment1.Name }))
 					end
 					return
 				end
 			end
-			center = Enum.TextXAlignment.Center
-		end, { value })
+			TextXAlignment1 = Enum.TextXAlignment.Center
+		end, { p2 })
 	}
 end

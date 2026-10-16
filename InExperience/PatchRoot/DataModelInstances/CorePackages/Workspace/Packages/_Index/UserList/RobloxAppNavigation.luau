@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.RobloxAppNavigation.RobloxAppNavigation)
+﻿return (require(script.Parent.Parent.Parent._Index.RobloxAppNavigation.RobloxAppNavigation))

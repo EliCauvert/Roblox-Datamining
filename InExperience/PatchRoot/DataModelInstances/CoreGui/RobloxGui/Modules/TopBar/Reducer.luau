@@ -1,32 +1,35 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local roduxModule = require(corePackagesService.Packages.Rodux)
-local crossExperienceVoiceModule = require(corePackagesService.Workspace.Packages.CrossExperienceVoice)
-local crossExperienceModule = require(corePackagesService.Workspace.Packages.CrossExperience)
-local createPersistenceMiddleware = crossExperienceModule.Middlewares.createPersistenceMiddleware
-local fFlagTopBarSignalizeHealthBar = require(corePackagesService.Workspace.Packages.CoreGuiCommon).Flags.FFlagTopBarSignalizeHealthBar
-local getFFlagEnableCrossExpVoice = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagEnableCrossExpVoice
-local parent = script.Parent
-local t = {
+﻿local CorePackages = game:GetService("CorePackages")
+local RoduxModule = require(CorePackages.Packages.Rodux)
+local CrossExperienceVoiceModule = require(CorePackages.Workspace.Packages.CrossExperienceVoice)
+local CrossExperienceModule = require(CorePackages.Workspace.Packages.CrossExperience)
+local CreatePersistenceMiddlewareFunction = CrossExperienceModule.Middlewares.createPersistenceMiddleware
+local FFlagTopBarSignalizeHealthBar = require(CorePackages.Workspace.Packages.CoreGuiCommon).Flags.FFlagTopBarSignalizeHealthBar
+local Parent = script.Parent
+local FFlagTopBarDeprecateChatRoduxModule = require(Parent.Flags.FFlagTopBarDeprecateChatRodux)
+local CoreGuiEnabledModule = require(script.CoreGuiEnabled)
+local HealthModule = require(script.Health)
+local ChatModule = require(script.Chat)
+local config = {
 	displayOptions = require(script.DisplayOptions),
-	coreGuiEnabled = if require(parent.Flags.FFlagTopBarDeprecateCoreGuiRodux) then nil else require(script.CoreGuiEnabled),
-	health = if fFlagTopBarSignalizeHealthBar then nil else require(script.Health),
+	coreGuiEnabled = if require(Parent.Flags.FFlagTopBarDeprecateCoreGuiRodux) then nil else CoreGuiEnabledModule,
+	health = if FFlagTopBarSignalizeHealthBar then nil else HealthModule,
 	moreMenu = require(script.MoreMenu),
-	chat = if require(parent.Flags.FFlagTopBarDeprecateChatRodux) then nil else require(script.Chat),
+	chat = if FFlagTopBarDeprecateChatRoduxModule then nil else ChatModule,
 	respawn = require(script.Respawn),
 	gameInfo = require(script.GameInfo)
 }
 
-if getFFlagEnableCrossExpVoice() then
-	local crossExperienceVoice = nil
-	local var1 = createPersistenceMiddleware({
-		storeKey = crossExperienceModule.Constants.STORAGE_CEV_STORE_KEY
+if require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagEnableCrossExpVoice() then
+	local CrossExperienceVoice = nil
+	local RestoreResult = CreatePersistenceMiddlewareFunction({
+		storeKey = CrossExperienceModule.Constants.STORAGE_CEV_STORE_KEY
 	}).restore()
 	
-	if var1 and var1.Squad and var1.Squad.CrossExperienceVoice then
-		crossExperienceVoice = var1.Squad.CrossExperienceVoice
+	if RestoreResult and RestoreResult.Squad and RestoreResult.Squad.CrossExperienceVoice then
+		CrossExperienceVoice = RestoreResult.Squad.CrossExperienceVoice
 	end
-	t.Squad = roduxModule.combineReducers({
-		CrossExperienceVoice = crossExperienceVoiceModule.installReducer(crossExperienceVoice)
+	config.Squad = RoduxModule.combineReducers({
+		CrossExperienceVoice = CrossExperienceVoiceModule.installReducer(CrossExperienceVoice)
 	})
 end
-return roduxModule.combineReducers(t)
+return (RoduxModule.combineReducers(config))

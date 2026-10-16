@@ -1,27 +1,28 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local appChatNetworkingModule = require(parent.AppChatNetworking)
-local removedConversationModule = require(appChat.Conversations.Actions.RemovedConversation)
-local getChatModerationStatusDataHydrationModule = require(appChat.Stores.GetChatModerationStatusDataHydration)
-local fFlagAppChatReactiveFeatureRestrictions = require(parent.SharedFlags).FFlagAppChatReactiveFeatureRestrictions
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local AppChatNetworkingModule = require(Parent.AppChatNetworking)
+local RemovedConversationModule = require(AppChat.Conversations.Actions.RemovedConversation)
+local GetChatModerationStatusDataHydrationModule = require(AppChat.Stores.GetChatModerationStatusDataHydration)
+local FFlagAppChatReactiveFeatureRestrictions = require(Parent.SharedFlags).FFlagAppChatReactiveFeatureRestrictions
 
-return function(p1, _)
-	-- upvalues: appChatNetworkingModule (ref), getChatModerationStatusDataHydrationModule (ref), fFlagAppChatReactiveFeatureRestrictions (ref), removedConversationModule (ref)
-	return function(p2)
-		-- upvalues: p1 (ref), appChatNetworkingModule (copy), getChatModerationStatusDataHydrationModule (copy), fFlagAppChatReactiveFeatureRestrictions (copy), removedConversationModule (copy)
-		local var1 = p1(p2)
+return function(Callback, _) --[[ Line: 13 | Named "ChatModerationStatusHydrationMiddleware" ]]
+	-- upvalues: AppChatNetworkingModule (copy), GetChatModerationStatusDataHydrationModule (copy), FFlagAppChatReactiveFeatureRestrictions (copy), RemovedConversationModule (copy)
+	return function(p1) --[[ Line: 14 ]]
+		-- upvalues: Callback (copy), AppChatNetworkingModule (upval), GetChatModerationStatusDataHydrationModule (upval), FFlagAppChatReactiveFeatureRestrictions (upval), RemovedConversationModule (upval)
+		local CallbackResult = Callback(p1)
 		
-		if p2.type == appChatNetworkingModule.rodux.GetChatModerationStatuses.Succeeded.name then
-			local var2 = if p2.postBody then p2.postBody.ids or {} else {}
-			getChatModerationStatusDataHydrationModule(false).ingestResponse(p2.responseBody, {
-				includeUser = fFlagAppChatReactiveFeatureRestrictions or #var2 == 0,
-				conversationIds = var2
+		if p1.type == AppChatNetworkingModule.rodux.GetChatModerationStatuses.Succeeded.name then
+			local Ids = if p1.postBody then p1.postBody.ids or {} else {}
+			GetChatModerationStatusDataHydrationModule(false).ingestResponse(p1.responseBody, {
+				includeUser = FFlagAppChatReactiveFeatureRestrictions or #Ids == 0,
+				conversationIds = Ids
 			})
 			
-			return var1
-		elseif p2.type == removedConversationModule.name and p2.conversationId then
-			getChatModerationStatusDataHydrationModule(false).setConversationStatusNone(p2.conversationId)
+			return CallbackResult
 		end
-		return var1
+		if p1.type == RemovedConversationModule.name and p1.conversationId then
+			GetChatModerationStatusDataHydrationModule(false).setConversationStatusNone(p1.conversationId)
+		end
+		return CallbackResult
 	end
 end

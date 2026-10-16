@@ -1,54 +1,54 @@
-﻿local engineFeaturePresetChatUseExpressionTrayOptionsEndpoint = require(script:FindFirstAncestor("ChatUIPrimitives").Parent.SharedFlags).EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint
+﻿local EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint = require(script:FindFirstAncestor("ChatUIPrimitives").Parent.SharedFlags).EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint
 local _ = require(script.Parent.Types)
 local _ = require(script.Parent.Parent.UniversalMessage.Types)
-local presetMessageToContentModule = require(script.Parent.presetMessageToContent)
+local PresetMessageToContentModule = require(script.Parent.presetMessageToContent)
 
-local function _(p1)
+local function _(p1): string --[[ Line: 23 | Named "accessLevelToStatus" ]]
 	return if p1 == "Enabled" then "enabled" else "disabled"
 end
 
-local function presetCategoryToExpressionCategory(value)
-	-- upvalues: engineFeaturePresetChatUseExpressionTrayOptionsEndpoint (ref), presetMessageToContentModule (ref)
-	local t = {}
+local function presetCategoryToExpressionCategory(p1) --[[ Line: 30 ]]
+	-- upvalues: EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint (copy), PresetMessageToContentModule (copy)
+	local Items = {}
 	
-	for i, v in if engineFeaturePresetChatUseExpressionTrayOptionsEndpoint then value.contents else value.messages do
-		local var1 = presetMessageToContentModule.presetMessageToExpressionItem(v)
+	for _, value in if EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint then p1.contents else p1.messages do
+		local PresetMessageToExpressionItemResult = PresetMessageToContentModule.presetMessageToExpressionItem(value)
 		
-		if var1 ~= nil then
-			table.insert(t, var1)
+		if PresetMessageToExpressionItemResult ~= nil then
+			table.insert(Items, PresetMessageToExpressionItemResult)
 		end
 	end
 	return {
-		categoryId = value.categoryId,
-		name = value.name,
-		items = t
+		categoryId = p1.categoryId,
+		name = p1.name,
+		items = Items
 	}
 end
 
-local function presetCategoryGroupToExpressionGroup(value)
-	-- upvalues: presetCategoryToExpressionCategory (ref)
-	local t = {}
+local function presetCategoryGroupToExpressionGroup(p2) --[[ Line: 50 ]]
+	-- upvalues: presetCategoryToExpressionCategory (copy)
+	local Categories = {}
 	
-	for i, v in value.categories do
-		table.insert(t, presetCategoryToExpressionCategory(v))
+	for _, category in p2.categories do
+		table.insert(Categories, (presetCategoryToExpressionCategory(category)))
 	end
 	return {
-		categoryGroupId = value.categoryGroupId,
-		name = value.name,
-		categories = t
+		categoryGroupId = p2.categoryGroupId,
+		name = p2.name,
+		categories = Categories
 	}
 end
 
-return function(value)
-	-- upvalues: presetCategoryGroupToExpressionGroup (ref)
-	local t = {}
+return function(p3) --[[ Line: 62 | Named "presetCatalogToExpressionCatalog" ]]
+	-- upvalues: presetCategoryGroupToExpressionGroup (copy)
+	local CategoryGroups = {}
 	
-	for i, v in value.categoryGroups do
-		table.insert(t, presetCategoryGroupToExpressionGroup(v))
+	for _, categoryGroup in p3.categoryGroups do
+		table.insert(CategoryGroups, (presetCategoryGroupToExpressionGroup(categoryGroup)))
 	end
 	return {
-		status = if value.accessLevel == "Enabled" then "enabled" else "disabled",
-		categoryGroups = t,
-		version = value.version
+		status = if p3.accessLevel == "Enabled" then "enabled" else "disabled",
+		categoryGroups = CategoryGroups,
+		version = p3.version
 	}
 end

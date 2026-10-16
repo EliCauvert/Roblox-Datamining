@@ -1,9 +1,9 @@
-﻿local parent = script:FindFirstAncestor("InExperienceShop").Parent
-local reactModule = require(parent.React)
-local reactTestingLibraryModule = require(parent.Dev.ReactTestingLibrary)
-local foundationProvider = require(parent.Foundation).FoundationProvider
+﻿local Parent = script:FindFirstAncestor("InExperienceShop").Parent
+local ReactModule = require(Parent.React)
+local ReactTestingLibraryModule = require(Parent.Dev.ReactTestingLibrary)
+local FoundationProvider = require(Parent.Foundation).FoundationProvider
 
-return function(p1)
-	-- upvalues: reactTestingLibraryModule (ref), reactModule (ref), foundationProvider (ref)
-	return reactTestingLibraryModule.render(reactModule.createElement(foundationProvider, { colorMode = "Dark" }, p1))
+return function(p1) --[[ Line: 9 | Named "renderWithProviders" ]]
+	-- upvalues: ReactTestingLibraryModule (copy), ReactModule (copy), FoundationProvider (copy)
+	return ReactTestingLibraryModule.render(ReactModule.createElement(FoundationProvider, { colorMode = "Dark" }, p1))
 end

@@ -1,38 +1,41 @@
-﻿local constantsModule = require(script.Parent.Parent.Constants)
+﻿local ConstantsModule = require(script.Parent.Parent.Constants)
 
-return function(p1, p2)
-	-- upvalues: constantsModule (ref)
-	local character = p1.Character
+return function(Player, Callback: (any) -> ()): boolean --[[ Line: 16 | Named "MaybeSendEmoteFailureAnalyticsFromPlayer" ]]
+	-- upvalues: ConstantsModule (copy)
+	local Character = Player.Character
 	
-	if not character then
-		p2(constantsModule.ErrorTypes.TemporarilyUnavailable)
+	if not Character then
+		Callback(ConstantsModule.ErrorTypes.TemporarilyUnavailable)
 		
 		return true
 	end
-	local humanoid = character and character:FindFirstChildOfClass("Humanoid") or nil
+	local Humanoid = Character and Character:FindFirstChildOfClass("Humanoid") or nil
 	
-	if not humanoid then
-		p2(constantsModule.ErrorTypes.TemporarilyUnavailable)
+	if not Humanoid then
+		Callback(ConstantsModule.ErrorTypes.TemporarilyUnavailable)
 		
 		return true
-	elseif humanoid and humanoid.RigType ~= Enum.HumanoidRigType.R15 then
-		p2(constantsModule.ErrorTypes.SwitchToR15)
+	elseif Humanoid and Humanoid.RigType ~= Enum.HumanoidRigType.R15 then
+		Callback(ConstantsModule.ErrorTypes.SwitchToR15)
 		
 		return true
-	end
-	local animate = character and character:FindFirstChild("Animate") or nil
-	
-	if not animate or not (humanoid and humanoid:FindFirstChildOfClass("HumanoidDescription") or nil) then
-		p2(constantsModule.ErrorTypes.NotSupported)
+	else
+		local Animate = Character and Character:FindFirstChild("Animate") or nil
+		local HumanoidDescription = Humanoid and Humanoid:FindFirstChildOfClass("HumanoidDescription") or nil
 		
-		return true
+		if not Animate or not HumanoidDescription then
+			Callback(ConstantsModule.ErrorTypes.NotSupported)
+			
+			return true
+		end
+		local PlayEmote = Animate and Animate:FindFirstChild("PlayEmote") or nil
+		
+		if PlayEmote and PlayEmote:IsA("BindableFunction") then
+			return false
+		else
+			Callback(ConstantsModule.ErrorTypes.NotSupported)
+			
+			return true
+		end
 	end
-	local playEmote = animate and animate:FindFirstChild("PlayEmote") or nil
-	
-	if playEmote and playEmote:IsA("BindableFunction") then
-		return false
-	end
-	p2(constantsModule.ErrorTypes.NotSupported)
-	
-	return true
 end

@@ -1,6 +1,6 @@
-﻿local reactModule = require(script:FindFirstAncestor("ServerDrivenUi").Parent.React)
-local luaAppSduiSlotOverlayZIndex = game:DefineFastFlag("LuaAppSduiSlotOverlayZIndex", false)
-local t = {
+﻿local ReactModule = require(script:FindFirstAncestor("ServerDrivenUi").Parent.React)
+local LuaAppSduiSlotOverlayZIndex = game:DefineFastFlag("LuaAppSduiSlotOverlayZIndex", false)
+local config = {
 	topLeftSlot = {
 		AnchorPoint = Vector2.zero,
 		Position = UDim2.fromScale(0, 0)
@@ -39,46 +39,46 @@ local t = {
 	}
 }
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), t (ref), luaAppSduiSlotOverlayZIndex (ref)
-	local padding = p1.padding or 0
+return ReactModule.memo(function(Frames) --[[ Line: 70 | Named "SduiSlotOverlay" ]]
+	-- upvalues: ReactModule (copy), config (copy), LuaAppSduiSlotOverlayZIndex (copy)
+	local Padding = Frames.padding or 0
 	
-	return reactModule.createElement("Frame", {
-		LayoutOrder = p1.layoutOrder,
-		AnchorPoint = p1.anchorPoint,
-		AutomaticSize = p1.automaticSize,
-		Size = p1.size or UDim2.new(1, 0, 1, 0),
-		Position = p1.position,
+	return ReactModule.createElement("Frame", {
+		LayoutOrder = Frames.layoutOrder,
+		AnchorPoint = Frames.anchorPoint,
+		AutomaticSize = Frames.automaticSize,
+		Size = Frames.size or UDim2.new(1, 0, 1, 0),
+		Position = Frames.position,
 		BackgroundTransparency = 1,
-		ZIndex = if luaAppSduiSlotOverlayZIndex then p1.zIndex else nil,
-		[reactModule.Tag] = "data-testid=--sdui-slot-overlay"
-	}, reactModule.useMemo(function()
-		-- upvalues: reactModule (copy), padding (ref), t (copy), p1 (ref)
-		local t_1 = {
-			UIPadding = reactModule.createElement("UIPadding", {
-				PaddingLeft = UDim.new(0, padding),
-				PaddingTop = UDim.new(0, padding),
-				PaddingRight = UDim.new(0, padding),
-				PaddingBottom = UDim.new(0, padding)
+		ZIndex = if LuaAppSduiSlotOverlayZIndex then Frames.zIndex else nil,
+		[ReactModule.Tag] = "data-testid=--sdui-slot-overlay"
+	}, (ReactModule.useMemo(function() --[[ Line: 79 ]]
+		-- upvalues: ReactModule (upval), Padding (copy), config (upval), Frames (copy)
+		local config1 = {
+			UIPadding = ReactModule.createElement("UIPadding", {
+				PaddingLeft = UDim.new(0, Padding),
+				PaddingTop = UDim.new(0, Padding),
+				PaddingRight = UDim.new(0, Padding),
+				PaddingBottom = UDim.new(0, Padding)
 			})
 		}
 		
-		for i, v in t do
-			if p1[i] ~= nil then
-				t_1[i] = reactModule.createElement("Frame", {
-					AnchorPoint = v.AnchorPoint,
+		for i, Frame in config do
+			if Frames[i] ~= nil then
+				config1[i] = ReactModule.createElement("Frame", {
+					AnchorPoint = Frame.AnchorPoint,
 					AutomaticSize = Enum.AutomaticSize.XY,
-					Position = v.Position,
+					Position = Frame.Position,
 					BackgroundTransparency = 1,
 					Size = UDim2.new(0, 0, 0, 0),
-					[reactModule.Tag] = `data-testid=--sdui-slot-{i}`
-				}, { item = p1[i] })
+					[ReactModule.Tag] = `data-testid=--sdui-slot-{i}`
+				}, { item = Frames[i] })
 			end
 		end
-		return t_1
+		return config1
 	end, {
-		p1.topLeftSlot, p1.topMiddleSlot, p1.topRightSlot, p1.centerLeftSlot,
-		p1.centerMiddleSlot, p1.centerRightSlot, p1.bottomLeftSlot,
-		p1.bottomMiddleSlot, p1.bottomRightSlot, padding
-	}))
+		Frames.topLeftSlot, Frames.topMiddleSlot, Frames.topRightSlot,
+		Frames.centerLeftSlot, Frames.centerMiddleSlot, Frames.centerRightSlot,
+		Frames.bottomLeftSlot, Frames.bottomMiddleSlot, Frames.bottomRightSlot, Padding
+	})))
 end)

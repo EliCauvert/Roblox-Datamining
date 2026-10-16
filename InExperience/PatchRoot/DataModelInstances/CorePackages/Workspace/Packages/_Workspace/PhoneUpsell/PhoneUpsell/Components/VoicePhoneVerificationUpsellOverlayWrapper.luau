@@ -1,112 +1,125 @@
-﻿local phoneUpsell = script:FindFirstAncestor("PhoneUpsell")
-local parent = phoneUpsell.Parent
-local reactModule = require(parent.React)
-local roactNetworking = require(parent.RoactServiceTags).RoactNetworking
-local _ = require(parent.LuauPolyfill)
-local postUserOptIn = require(parent.VoiceChat).PostUserOptIn
-local _ = require(phoneUpsell.Components.PhoneVerificationUpsellOverlay)
-local upsellContainerModule = require(phoneUpsell.Components.UpsellContainer)
-local phoneVerificationStatusOverlayModule = require(phoneUpsell.Components.PhoneVerificationStatusOverlay)
-local cryoModule = require(parent.Cryo)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useRoactService = require(parent.RobloxAppHooks).useRoactService
-local useAppPolicy = require(parent.UniversalAppPolicy).useAppPolicy
-local mergePropsModule = require(phoneUpsell.Utils.mergeProps)
-local UIBloxModule = require(parent.UIBlox)
-local images = UIBloxModule.App.ImageSet.Images
-local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
-local logging = require(parent.AppCommonLib).Logging
-local fFlagFixUpsellVerificationToNavigateToOverlaysModule = require(phoneUpsell.Flags.FFlagFixUpsellVerificationToNavigateToOverlays)
-local getFFlagDisablePVUpsellDataConsent = require(parent.SharedFlags).GetFFlagDisablePVUpsellDataConsent
-local fFlagHomePhoneVerificationUpsellNewCopy = require(parent.SharedFlags).FFlagHomePhoneVerificationUpsellNewCopy
-local t = {
+﻿local PhoneUpsell = script:FindFirstAncestor("PhoneUpsell")
+local Parent = PhoneUpsell.Parent
+local ReactModule = require(Parent.React)
+local RoactNetworking = require(Parent.RoactServiceTags).RoactNetworking
+local _ = require(Parent.LuauPolyfill)
+local PostUserOptInFunction = require(Parent.VoiceChat).PostUserOptIn
+local _ = require(PhoneUpsell.Components.PhoneVerificationUpsellOverlay)
+local UpsellContainerModule = require(PhoneUpsell.Components.UpsellContainer)
+local PhoneVerificationStatusOverlayModule = require(PhoneUpsell.Components.PhoneVerificationStatusOverlay)
+local CryoModule = require(Parent.Cryo)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
+local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
+local MergePropsModule = require(PhoneUpsell.Utils.mergeProps)
+local UIBloxModule = require(Parent.UIBlox)
+local Images = UIBloxModule.App.ImageSet.Images
+local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
+local Logging = require(Parent.AppCommonLib).Logging
+local FFlagFixUpsellVerificationToNavigateToOverlaysModule = require(PhoneUpsell.Flags.FFlagFixUpsellVerificationToNavigateToOverlays)
+local GetFFlagDisablePVUpsellDataConsentFunction = require(Parent.SharedFlags).GetFFlagDisablePVUpsellDataConsent
+local FFlagHomePhoneVerificationUpsellNewCopy = require(Parent.SharedFlags).FFlagHomePhoneVerificationUpsellNewCopy
+local config = {
 	addPhoneTitleKey = "Feature.VerificationUpsell.Action.AddPhoneVoice",
 	addPhoneDescriptionKey = "Feature.VerificationUpsell.Description.AddPhoneBodyVoice",
-	onSuccess = function() end,
-	closeUpsell = function() end
+	onSuccess = function() --[[ Line: 41 ]] end,
+	closeUpsell = function() --[[ Line: 42 ]] end
 }
 
-return function(p1)
-	-- upvalues: mergePropsModule (ref), t (ref), useRoactService (ref), roactNetworking (ref), reactModule (ref), useAppPolicy (ref), imageSetLabel (ref), images (ref), postUserOptIn (ref), fFlagFixUpsellVerificationToNavigateToOverlaysModule (ref), logging (ref), useLocalization (ref), upsellContainerModule (ref), cryoModule (ref), fFlagHomePhoneVerificationUpsellNewCopy (ref), getFFlagDisablePVUpsellDataConsent (ref), phoneVerificationStatusOverlayModule (ref)
-	local var1 = mergePropsModule(t, p1)
-	local var2 = useRoactService(roactNetworking)
-	local var3, var4 = reactModule.useState(false)
-	local var5, var6 = reactModule.useState(false)
-	local var7 = useAppPolicy(function(p2)
+return function(p1) --[[ Line: 49 | Named "VoicePhoneVerificationUpsellOverlayWrapper" ]]
+	-- upvalues: MergePropsModule (copy), config (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), ReactModule (copy), UseAppPolicyFunction (copy), ImageSetLabel (copy), Images (copy), PostUserOptInFunction (copy), FFlagFixUpsellVerificationToNavigateToOverlaysModule (copy), Logging (copy), UseLocalizationFunction (copy), UpsellContainerModule (copy), CryoModule (copy), FFlagHomePhoneVerificationUpsellNewCopy (copy), GetFFlagDisablePVUpsellDataConsentFunction (copy), PhoneVerificationStatusOverlayModule (copy)
+	local MergePropsModuleResult = MergePropsModule(config, p1)
+	local UseRoactServiceResult = UseRoactServiceFunction(RoactNetworking)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
+	local UseAppPolicyResult = UseAppPolicyFunction(function(p2) --[[ Line: 56 ]]
 		return p2.RequireExplicitVoiceConsent()
 	end)
-	local var8 = reactModule.createElement(imageSetLabel, {
+	local Element = ReactModule.createElement(ImageSetLabel, {
 		BackgroundTransparency = 1,
 		Size = UDim2.fromOffset(40, 40),
-		Image = images["icons/status/success_large"]
+		Image = Images["icons/status/success_large"]
 	})
-	local var9 = useLocalization({
+	
+	local function OnSuccess() --[[ Line: 66 ]]
+		-- upvalues: PostUserOptInFunction (upval), UseRoactServiceResult (copy), UseStateResult2 (copy), FFlagFixUpsellVerificationToNavigateToOverlaysModule (upval), MergePropsModuleResult (copy), UseStateResult2_1 (copy), Logging (upval)
+		PostUserOptInFunction(UseRoactServiceResult, true, false):andThen(function(Result) --[[ Line: 68 ]]
+			-- upvalues: UseStateResult2 (upval), FFlagFixUpsellVerificationToNavigateToOverlaysModule (upval), MergePropsModuleResult (upval), UseStateResult2_1 (upval), Logging (upval)
+			if Result then
+				UseStateResult2(true)
+				task.delay(3, function() --[[ Line: 71 ]]
+					-- upvalues: FFlagFixUpsellVerificationToNavigateToOverlaysModule (upval), MergePropsModuleResult (upval)
+					if FFlagFixUpsellVerificationToNavigateToOverlaysModule then
+						MergePropsModuleResult.closeUpsell()
+						MergePropsModuleResult.onSuccess()
+						
+						return
+					else
+						MergePropsModuleResult.onSuccess()
+						MergePropsModuleResult.closeUpsell()
+					end
+				end)
+				
+				return
+			else
+				UseStateResult2_1(true)
+				task.delay(5, function() --[[ Line: 82 ]]
+					-- upvalues: FFlagFixUpsellVerificationToNavigateToOverlaysModule (upval), MergePropsModuleResult (upval)
+					if FFlagFixUpsellVerificationToNavigateToOverlaysModule then
+						MergePropsModuleResult.closeUpsell()
+						MergePropsModuleResult.onSuccess()
+						
+						return
+					else
+						MergePropsModuleResult.onSuccess()
+						MergePropsModuleResult.closeUpsell()
+					end
+				end)
+				Logging.warn("Error getting UserOptIn. " .. tostring(Result))
+			end
+		end):catch(function() --[[ Line: 94 ]]
+			-- upvalues: UseStateResult2_1 (upval), FFlagFixUpsellVerificationToNavigateToOverlaysModule (upval), MergePropsModuleResult (upval), Logging (upval)
+			UseStateResult2_1(true)
+			task.delay(5, function() --[[ Line: 96 ]]
+				-- upvalues: FFlagFixUpsellVerificationToNavigateToOverlaysModule (upval), MergePropsModuleResult (upval)
+				if FFlagFixUpsellVerificationToNavigateToOverlaysModule then
+					MergePropsModuleResult.closeUpsell()
+					MergePropsModuleResult.onSuccess()
+					
+					return
+				else
+					MergePropsModuleResult.onSuccess()
+					MergePropsModuleResult.closeUpsell()
+				end
+			end)
+			Logging.warn("Exception posting PostUserOptIn")
+		end)
+	end
+	
+	local UseLocalizationResult = UseLocalizationFunction({
 		verifySuccessKey = "Feature.VerificationUpsell.Heading.VoiceChatEnabledMobile",
 		voiceErrorKey = "Feature.VerificationUpsell.Heading.VoiceChatError"
 	})
 	
-	return reactModule.createElement(reactModule.Fragment, nil, {
-		PhoneVerificationUpsellOverlay = reactModule.createElement(upsellContainerModule, cryoModule.Dictionary.join(var1, {
+	return ReactModule.createElement(ReactModule.Fragment, nil, {
+		PhoneVerificationUpsellOverlay = ReactModule.createElement(UpsellContainerModule, CryoModule.Dictionary.join(MergePropsModuleResult, {
 			alwaysShowAddPhoneLegalText = true,
-			onSuccess = function()
-				-- upvalues: postUserOptIn (copy), var2 (ref), var4 (ref), fFlagFixUpsellVerificationToNavigateToOverlaysModule (copy), var1 (ref), var6 (ref), logging (copy)
-				postUserOptIn(var2, true, false):andThen(function(p2)
-					-- upvalues: var4 (copy), fFlagFixUpsellVerificationToNavigateToOverlaysModule (copy), var1 (copy), var6 (copy), logging (copy)
-					if p2 then
-						var4(true)
-						task.delay(3, function()
-							-- upvalues: fFlagFixUpsellVerificationToNavigateToOverlaysModule (copy), var1 (copy)
-							if fFlagFixUpsellVerificationToNavigateToOverlaysModule then
-								var1.closeUpsell()
-								var1.onSuccess()
-								
-								return
-							end
-							var1.onSuccess()
-							var1.closeUpsell()
-						end)
-						
-						return
-					end
-					var6(true)
-					task.delay(5, function()
-						-- upvalues: fFlagFixUpsellVerificationToNavigateToOverlaysModule (copy), var1 (copy)
-						if fFlagFixUpsellVerificationToNavigateToOverlaysModule then
-							var1.closeUpsell()
-							var1.onSuccess()
-							
-							return
-						end
-						var1.onSuccess()
-						var1.closeUpsell()
-					end)
-					logging.warn("Error getting UserOptIn. " .. tostring(p2))
-				end):catch(function()
-					-- upvalues: var6 (copy), fFlagFixUpsellVerificationToNavigateToOverlaysModule (copy), var1 (copy), logging (copy)
-					var6(true)
-					task.delay(5, function()
-						-- upvalues: fFlagFixUpsellVerificationToNavigateToOverlaysModule (copy), var1 (copy)
-						if fFlagFixUpsellVerificationToNavigateToOverlaysModule then
-							var1.closeUpsell()
-							var1.onSuccess()
-							
-							return
-						end
-						var1.onSuccess()
-						var1.closeUpsell()
-					end)
-					logging.warn("Exception posting PostUserOptIn")
-				end)
-			end,
-			addPhoneTitleKey = var1.addPhoneTitleKey,
-			addPhoneDescriptionKey = var1.addPhoneDescriptionKey,
-			addPhoneButtonKey = if fFlagHomePhoneVerificationUpsellNewCopy then "Feature.AccountSettings.Action.Verify" else "Feature.VerificationUpsell.Action.EnableVoice",
-			addPhoneLegalTextKey = if var7 then "Feature.VerificationUpsell.Description.VoiceLegalConsent" elseif fFlagHomePhoneVerificationUpsellNewCopy then "Feature.VerificationUpsell.Description.VoiceLegalDisclaimer3" else "Feature.VerificationUpsell.Description.VoiceLegalDisclaimer",
-			requireAddPhoneLegalTextCheckbox = var7,
-			disableLegalText = getFFlagDisablePVUpsellDataConsent(),
-			shouldShowVerificationText = if fFlagHomePhoneVerificationUpsellNewCopy then true else nil
+			onSuccess = OnSuccess,
+			addPhoneTitleKey = MergePropsModuleResult.addPhoneTitleKey,
+			addPhoneDescriptionKey = MergePropsModuleResult.addPhoneDescriptionKey,
+			addPhoneButtonKey = if FFlagHomePhoneVerificationUpsellNewCopy then "Feature.AccountSettings.Action.Verify" else "Feature.VerificationUpsell.Action.EnableVoice",
+			addPhoneLegalTextKey = if UseAppPolicyResult then "Feature.VerificationUpsell.Description.VoiceLegalConsent" elseif FFlagHomePhoneVerificationUpsellNewCopy then "Feature.VerificationUpsell.Description.VoiceLegalDisclaimer3" else "Feature.VerificationUpsell.Description.VoiceLegalDisclaimer",
+			requireAddPhoneLegalTextCheckbox = UseAppPolicyResult,
+			disableLegalText = GetFFlagDisablePVUpsellDataConsentFunction(),
+			shouldShowVerificationText = if FFlagHomePhoneVerificationUpsellNewCopy then true else nil
 		})),
-		SuccessOverlay = var3 and reactModule.createElement(phoneVerificationStatusOverlayModule, { image = var8, text = var9.verifySuccessKey }),
-		ErrorOverlay = var5 and reactModule.createElement(phoneVerificationStatusOverlayModule, { image = var8, text = var9.voiceErrorKey })
+		SuccessOverlay = UseStateResult and ReactModule.createElement(PhoneVerificationStatusOverlayModule, {
+			image = Element,
+			text = UseLocalizationResult.verifySuccessKey
+		}),
+		ErrorOverlay = UseStateResult1 and ReactModule.createElement(PhoneVerificationStatusOverlayModule, {
+			image = Element,
+			text = UseLocalizationResult.voiceErrorKey
+		})
 	})
 end

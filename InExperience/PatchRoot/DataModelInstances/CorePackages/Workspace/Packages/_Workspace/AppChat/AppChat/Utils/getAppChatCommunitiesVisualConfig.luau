@@ -1,10 +1,10 @@
-﻿local getFFlagUseCommunitiesTranslation = require(script:FindFirstAncestor("AppChat").Parent.SharedFlags).GetFFlagUseCommunitiesTranslation
+﻿local GetFFlagUseCommunitiesTranslationFunction = require(script:FindFirstAncestor("AppChat").Parent.SharedFlags).GetFFlagUseCommunitiesTranslation
 
-return function()
-	-- upvalues: getFFlagUseCommunitiesTranslation (ref)
+return function() --[[ Line: 13 ]]
+	-- upvalues: GetFFlagUseCommunitiesTranslationFunction (copy)
 	return {
 		icon = "icons/menu/groups",
 		iconLarge = "icons/menu/groups_large",
-		label = if getFFlagUseCommunitiesTranslation() then "Feature.SocialTab.Label.Groups" else "CommonUI.Features.Label.sGroups"
+		label = if GetFFlagUseCommunitiesTranslationFunction() then "Feature.SocialTab.Label.Groups" else "CommonUI.Features.Label.sGroups"
 	}
 end

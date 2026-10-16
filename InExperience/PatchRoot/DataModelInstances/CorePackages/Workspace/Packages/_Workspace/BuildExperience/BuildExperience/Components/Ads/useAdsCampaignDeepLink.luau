@@ -1,43 +1,56 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local getAdsCampaignDeepLinkStoreModule = require(buildExperience.Stores.GetAdsCampaignDeepLinkStore)
-local adCampaignEligibilityModule = require(parent.DataHydration.AdCampaignEligibility)
-local sendBuildExperienceEventModule = require(buildExperience.Telemetry.sendBuildExperienceEvent)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local ReactModule = require(Parent.React)
+local FFlagBuildAdsNotificationRouting = require(Parent.SharedFlags).FFlagBuildAdsNotificationRouting
+local SignalsReactModule = require(Parent.SignalsReact)
+local GetAdsCampaignDeepLinkStoreModule = require(BuildExperience.Stores.GetAdsCampaignDeepLinkStore)
+local AdCampaignEligibilityModule = require(Parent.DataHydration.AdCampaignEligibility)
+local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
 
-return function(p1)
-	-- upvalues: getAdsCampaignDeepLinkStoreModule (ref), adCampaignEligibilityModule (ref), sendBuildExperienceEventModule (ref), reactModule (ref), signalsReactModule (ref)
-	local requestStore = p1.requestStore or getAdsCampaignDeepLinkStoreModule(false)
-	local eligibilityStore = p1.eligibilityStore or adCampaignEligibilityModule.getAdCampaignEligibilityStore(false)
-	local sendEvent = p1.sendEvent or sendBuildExperienceEventModule
-	local var1 = reactModule.useMemo(function()
-		-- upvalues: requestStore (ref)
-		return requestStore.createChat()
-	end, { requestStore })
-	local var2 = signalsReactModule.useSignalState(var1.getScopeRevision)
-	local var3 = reactModule.useRef(p1.onOpen)
-	var3.current = p1.onOpen
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), p1 (ref)
-		var1.updateScope(p1.universeId, p1.sessionId, p1.isPageVisible)
-	end, { var1, p1.universeId, p1.sessionId, p1.isPageVisible })
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), eligibilityStore (ref), sendEvent (ref), var3 (ref)
-		return var1.connect(eligibilityStore, sendEvent, function(p2)
-			-- upvalues: var3 (copy)
-			return var3.current(p2)
+return function(p1) --[[ Line: 32 | Named "useAdsCampaignDeepLink" ]]
+	-- upvalues: GetAdsCampaignDeepLinkStoreModule (copy), AdCampaignEligibilityModule (copy), SendBuildExperienceEventModule (copy), ReactModule (copy), SignalsReactModule (copy), FFlagBuildAdsNotificationRouting (copy)
+	local RequestStore = p1.requestStore or GetAdsCampaignDeepLinkStoreModule(false)
+	local EligibilityStore = p1.eligibilityStore or AdCampaignEligibilityModule.getAdCampaignEligibilityStore(false)
+	local SendEvent = p1.sendEvent or SendBuildExperienceEventModule
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 36 ]]
+		-- upvalues: RequestStore (copy)
+		return RequestStore.createChat()
+	end, { RequestStore })
+	local UseSignalStateResult = SignalsReactModule.useSignalState(UseMemoResult.getScopeRevision)
+	local UseRefResult = ReactModule.useRef(p1.onOpen)
+	UseRefResult.current = p1.onOpen
+	ReactModule.useEffect(function() --[[ Line: 43 ]]
+		-- upvalues: FFlagBuildAdsNotificationRouting (upval), UseMemoResult (copy), p1 (copy)
+		if FFlagBuildAdsNotificationRouting then
+			UseMemoResult.updateScope(p1.universeId, p1.sessionId, p1.isPageVisible, p1.canPresent)
+			
+			return
+		else
+			UseMemoResult.updateScope(p1.universeId, p1.sessionId, p1.isPageVisible)
+		end
+	end, {
+		UseMemoResult,
+		p1.universeId,
+		p1.sessionId,
+		p1.isPageVisible,
+		p1.canPresent
+	})
+	ReactModule.useEffect(function() --[[ Line: 51 ]]
+		-- upvalues: UseMemoResult (copy), EligibilityStore (copy), SendEvent (copy), UseRefResult (copy)
+		return UseMemoResult.connect(EligibilityStore, SendEvent, function(p2) --[[ Line: 52 ]]
+			-- upvalues: UseRefResult (upval)
+			return UseRefResult.current(p2)
 		end)
-	end, { var1, eligibilityStore, sendEvent })
+	end, { UseMemoResult, EligibilityStore, SendEvent })
 	
-	return reactModule.useMemo(function()
-		-- upvalues: var2 (ref), var1 (ref)
+	return ReactModule.useMemo(function() --[[ Line: 57 ]]
+		-- upvalues: UseSignalStateResult (copy), UseMemoResult (copy)
 		return {
-			scopeRevision = var2,
-			clearPresentedRequest = var1.clearPresentedRequest,
-			getPresentedRequestId = var1.getPresentedRequestId,
-			startCreate = var1.startCreate,
-			finishCreate = var1.finishCreate
+			scopeRevision = UseSignalStateResult,
+			clearPresentedRequest = UseMemoResult.clearPresentedRequest,
+			getPresentedRequestId = UseMemoResult.getPresentedRequestId,
+			startCreate = UseMemoResult.startCreate,
+			finishCreate = UseMemoResult.finishCreate
 		}
-	end, { var1, var2 })
+	end, { UseMemoResult, UseSignalStateResult })
 end

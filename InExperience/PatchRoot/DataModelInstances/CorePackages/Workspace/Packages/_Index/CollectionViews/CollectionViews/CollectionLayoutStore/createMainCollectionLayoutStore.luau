@@ -1,33 +1,33 @@
-﻿local collectionViews = script:FindFirstAncestor("CollectionViews")
-local parent = collectionViews.Parent
-local displayModule = require(parent.Display)
-local signalsModule = require(parent.Signals)
-local _ = require(collectionViews.CollectionViewTypes)
-local createCollectionLayoutStoreModule = require(script.Parent.createCollectionLayoutStore)
-local fFlagEnableHomePageSduiPrefetch = require(parent.SharedFlags).FFlagEnableHomePageSduiPrefetch
+﻿local CollectionViews = script:FindFirstAncestor("CollectionViews")
+local Parent = CollectionViews.Parent
+local DisplayModule = require(Parent.Display)
+local SignalsModule = require(Parent.Signals)
+local _ = require(CollectionViews.CollectionViewTypes)
+local CreateCollectionLayoutStoreModule = require(script.Parent.createCollectionLayoutStore)
+local FFlagEnableHomePageSduiPrefetch = require(Parent.SharedFlags).FFlagEnableHomePageSduiPrefetch
 
-return function()
-	-- upvalues: displayModule (ref), signalsModule (ref), fFlagEnableHomePageSduiPrefetch (ref), createCollectionLayoutStoreModule (ref)
-	local displayStore = displayModule.GetDisplayStore(false)
-	local var1, var2 = signalsModule.createSignal(nil)
-	local var3 = createCollectionLayoutStoreModule(signalsModule.createComputed(function(p1)
-		-- upvalues: var1 (ref), displayStore (ref)
-		local var4 = var1(p1)
+return function() --[[ Line: 20 | Named "createMainCollectionLayoutStore" ]]
+	-- upvalues: DisplayModule (copy), SignalsModule (copy), FFlagEnableHomePageSduiPrefetch (copy), CreateCollectionLayoutStoreModule (copy)
+	local DisplayStore = DisplayModule.GetDisplayStore(false)
+	local Signal, Signal2 = SignalsModule.createSignal(nil)
+	local CollectionLayoutStoreModule = CreateCollectionLayoutStoreModule((SignalsModule.createComputed(function(p1) --[[ Line: 25 ]]
+		-- upvalues: Signal (copy), DisplayStore (copy)
+		local SignalResult = Signal(p1)
 		
-		return var4 or displayStore.getViewportSize(p1).X
-	end))
+		return if SignalResult then SignalResult else DisplayStore.getViewportSize(p1).X
+	end)))
 	
 	return {
-		getContainerWidth = var3.getContainerWidth,
-		getDesignSpaceContainerWidth = var3.getDesignSpaceContainerWidth,
-		getItemsPerRow = var3.getItemsPerRow,
-		getNumItemsForAllCategories = var3.getNumItemsForAllCategories,
-		getIsContainerMeasured = if fFlagEnableHomePageSduiPrefetch then signalsModule.createComputed(function(p1)
-			-- upvalues: var1 (ref)
-			local var4 = var1(p1)
+		getContainerWidth = CollectionLayoutStoreModule.getContainerWidth,
+		getDesignSpaceContainerWidth = CollectionLayoutStoreModule.getDesignSpaceContainerWidth,
+		getItemsPerRow = CollectionLayoutStoreModule.getItemsPerRow,
+		getNumItemsForAllCategories = CollectionLayoutStoreModule.getNumItemsForAllCategories,
+		getIsContainerMeasured = if FFlagEnableHomePageSduiPrefetch then SignalsModule.createComputed(function(p1): boolean --[[ Line: 38 ]]
+			-- upvalues: Signal (copy)
+			local SignalResult: number = Signal(p1)
 			
-			return var4 ~= nil and var4 > 0
+			return SignalResult ~= nil and SignalResult > 0
 		end) else nil,
-		setDefaultContentRegionWidth = var2
+		setDefaultContentRegionWidth = Signal2
 	}
 end

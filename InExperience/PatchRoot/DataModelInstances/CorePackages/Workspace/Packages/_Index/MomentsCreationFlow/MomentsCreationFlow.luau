@@ -1,1 +1,1 @@
-﻿return require(game:GetService("CorePackages").Packages.MomentsCreationFlow)
+﻿return (require(game:GetService("CorePackages").Packages.MomentsCreationFlow))

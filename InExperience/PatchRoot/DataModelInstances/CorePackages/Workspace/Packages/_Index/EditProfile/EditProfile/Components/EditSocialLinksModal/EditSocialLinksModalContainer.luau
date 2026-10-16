@@ -1,100 +1,87 @@
-﻿local editProfile = script:FindFirstAncestor("EditProfile")
-local httpService = game:GetService("HttpService")
-local editSocialLinksModalModule = require(script.Parent.EditSocialLinksModal)
-local parent = editProfile.Parent
-local reactModule = require(parent.React)
-local luaSocialLibrariesDepsModule = require(parent.LuaSocialLibrariesDeps)
-local navigateDown = require(parent.NavigationRodux).Thunks.NavigateDown
-local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
-local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
-local appPage = require(parent.RobloxAppEnums).AppPage
-local getDeepValue = luaSocialLibrariesDepsModule.SocialLibraries.config({}).Dictionary.getDeepValue
-local socialLinksNetworkingModule = require(editProfile.Networking.SocialLinksNetworking)
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local useLocalUserId = require(parent.RobloxAppHooks).useLocalUserId
-local useNavigation = require(parent.Navigation).useNavigation
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local fFlagProfileEnableSocialNetworksUsernames = require(parent.SharedFlags).FFlagProfileEnableSocialNetworksUsernames
+﻿local EditProfile = script:FindFirstAncestor("EditProfile")
+local HttpService = game:GetService("HttpService")
+local EditSocialLinksModalModule = require(script.Parent.EditSocialLinksModal)
+local Parent = EditProfile.Parent
+local ReactModule = require(Parent.React)
+local NavigateDownFunction = require(Parent.NavigationRodux).Thunks.NavigateDown
+local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3Dispatch
+local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local GetDeepValueFunction = require(Parent.LuaSocialLibrariesDeps).SocialLibraries.config({}).Dictionary.getDeepValue
+local SocialLinksNetworkingModule = require(EditProfile.Networking.SocialLinksNetworking)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseLocalUserIdFunction = require(Parent.RobloxAppHooks).useLocalUserId
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local FFlagProfileEnableSocialNetworksUsernames = require(Parent.SharedFlags).FFlagProfileEnableSocialNetworksUsernames
 
-return function()
-	-- upvalues: useDispatch (ref), useLocalUserId (ref), useNavigation (ref), useSelector (ref), getDeepValue (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), socialLinksNetworkingModule (ref), fFlagProfileEnableSocialNetworksUsernames (ref), httpService (ref), reactModule (ref), editSocialLinksModalModule (ref)
-	local var2 = useDispatch()
-	local var3 = useLocalUserId()
-	local var4 = useNavigation()
-	local var5 = useSelector(function(p1)
-		-- upvalues: getDeepValue (copy)
-		return getDeepValue(p1, "Profile.SocialLinks.selfSocialLinks")
+return function() --[[ Line: 25 | Named "EditSocialLinksModalContainer" ]]
+	-- upvalues: UseDispatchFunction (copy), UseLocalUserIdFunction (copy), UseNavigationFunction (copy), UseSelectorFunction (copy), GetDeepValueFunction (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), SocialLinksNetworkingModule (copy), FFlagProfileEnableSocialNetworksUsernames (copy), HttpService (copy), ReactModule (copy), EditSocialLinksModalModule (copy)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseLocalUserIdResult = UseLocalUserIdFunction()
+	local UseNavigationResult = UseNavigationFunction()
+	local UseSelectorResult = UseSelectorFunction(function(p1) --[[ Line: 30 ]]
+		-- upvalues: GetDeepValueFunction (upval)
+		return GetDeepValueFunction(p1, "Profile.SocialLinks.selfSocialLinks")
 	end)
 	
-	local function openEditSocialNetworksErrorModal(p1)
-		-- upvalues: appPage (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var2 (ref), navigateDown (copy)
-		local t = {
-			name = appPage.EditSocialNetworksError,
-			extraProps = { errorCode = p1 }
+	local function openEditSocialNetworksErrorModal(ErrorCode) --[[ Line: 38 ]]
+		-- upvalues: AppPage (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval)
+		local config = {
+			name = AppPage.EditSocialNetworksError,
+			extraProps = { errorCode = ErrorCode }
 		}
 		
-		if fFlagSignalsNavP3Dispatch then
-			var1.down(var1.fromLegacyPage(t))
+		if FFlagSignalsNavP3Dispatch then
+			NavigationCommands.down(NavigationCommands.fromLegacyPage(config))
 			
 			return
+		else
+			UseDispatchResult(NavigateDownFunction(config))
 		end
-		var2(navigateDown(t))
 	end
 	
-	return reactModule.createElement(editSocialLinksModalModule, {
-		socialNetworksVisbility = var5.visibility,
-		socialNetworks = var5.socialLinks,
-		cancelOnActivated = function()
-			-- upvalues: var4 (ref)
-			var4.goBack()
+	return ReactModule.createElement(EditSocialLinksModalModule, {
+		socialNetworksVisbility = UseSelectorResult.visibility,
+		socialNetworks = UseSelectorResult.socialLinks,
+		cancelOnActivated = function() --[[ Line: 34 ]]
+			-- upvalues: UseNavigationResult (copy)
+			UseNavigationResult.goBack()
 		end,
-		saveOnActivated = function(p1, p2, p3, p4, p5, p6)
-			-- upvalues: var2 (ref), socialLinksNetworkingModule (copy), var3 (ref), fFlagProfileEnableSocialNetworksUsernames (copy), var4 (ref), httpService (copy), openEditSocialNetworksErrorModal (ref)
-			return var2(socialLinksNetworkingModule.SetSocialLinks.API({
-				promotionChannelsVisibilityPrivacy = p1,
-				facebook = p2,
-				twitter = p3,
-				youtube = p4,
-				twitch = p5,
-				guilded = p6
-			})):andThen(function(_)
-				-- upvalues: var2 (copy), socialLinksNetworkingModule (copy), var3 (copy), fFlagProfileEnableSocialNetworksUsernames (copy), var4 (copy)
-				var2(socialLinksNetworkingModule.GetSelfSocialLinks.API({ alwaysReturnUrls = false, filterLink = false })):catch(function(_) end)
-				var2(socialLinksNetworkingModule.GetSocialLinks.API({
+		saveOnActivated = function(PromotionChannelsVisibilityPrivacy, Facebook, Twitter, Youtube, Twitch, Guilded) --[[ Line: 52 ]]
+			-- upvalues: UseDispatchResult (copy), SocialLinksNetworkingModule (upval), UseLocalUserIdResult (copy), FFlagProfileEnableSocialNetworksUsernames (upval), UseNavigationResult (copy), HttpService (upval), openEditSocialNetworksErrorModal (copy)
+			return UseDispatchResult(SocialLinksNetworkingModule.SetSocialLinks.API({
+				promotionChannelsVisibilityPrivacy = PromotionChannelsVisibilityPrivacy,
+				facebook = Facebook,
+				twitter = Twitter,
+				youtube = Youtube,
+				twitch = Twitch,
+				guilded = Guilded
+			})):andThen(function(_) --[[ Line: 68 ]]
+				-- upvalues: UseDispatchResult (upval), SocialLinksNetworkingModule (upval), UseLocalUserIdResult (upval), FFlagProfileEnableSocialNetworksUsernames (upval), UseNavigationResult (upval)
+				UseDispatchResult(SocialLinksNetworkingModule.GetSelfSocialLinks.API({ alwaysReturnUrls = false, filterLink = false })):catch(function(_) --[[ Line: 70 ]] end)
+				UseDispatchResult(SocialLinksNetworkingModule.GetSocialLinks.API({
 					alwaysReturnUrls = true,
 					filterLink = true,
-					userId = var3
-				})):andThen(function(_)
-					-- upvalues: fFlagProfileEnableSocialNetworksUsernames (copy), var2 (copy), socialLinksNetworkingModule (copy), var3 (copy)
-					if fFlagProfileEnableSocialNetworksUsernames then
-						var2(socialLinksNetworkingModule.GetSocialLinks.API({
+					userId = UseLocalUserIdResult
+				})):andThen(function(_) --[[ Line: 77 ]]
+					-- upvalues: FFlagProfileEnableSocialNetworksUsernames (upval), UseDispatchResult (upval), SocialLinksNetworkingModule (upval), UseLocalUserIdResult (upval)
+					if FFlagProfileEnableSocialNetworksUsernames then
+						UseDispatchResult(SocialLinksNetworkingModule.GetSocialLinks.API({
 							alwaysReturnUrls = false,
 							filterLink = true,
-							userId = var3
+							userId = UseLocalUserIdResult
 						}))
 					end
-				end):catch(function(_) end)
-				var4.goBack()
-			end):catch(function(p7)
-				-- upvalues: httpService (copy), openEditSocialNetworksErrorModal (copy)
-				local ok, status = pcall(function()
-					-- upvalues: httpService (copy), p7 (ref)
-					return httpService:JSONDecode(p7.Body)
+				end):catch(function(_) --[[ Line: 86 ]] end)
+				UseNavigationResult.goBack()
+			end):catch(function(Err) --[[ Line: 89 ]]
+				-- upvalues: HttpService (upval), openEditSocialNetworksErrorModal (upval)
+				local Success, Result = pcall(function() --[[ Line: 90 ]]
+					-- upvalues: HttpService (upval), Err (copy)
+					return HttpService:JSONDecode(Err.Body)
 				end)
-				local var6 = -1
-				
-				if ok then
-					local code
-					if status and status.errors and status.errors[1] then
-						code = status.errors[1].code
-						
-						if not code then
-							code = -1
-						end
-						var6 = code
-					end
-				end
-				openEditSocialNetworksErrorModal(var6)
+				openEditSocialNetworksErrorModal(Success and (Result and Result.errors and Result.errors[1] and Result.errors[1].code) or -1)
 			end)
 		end
 	})

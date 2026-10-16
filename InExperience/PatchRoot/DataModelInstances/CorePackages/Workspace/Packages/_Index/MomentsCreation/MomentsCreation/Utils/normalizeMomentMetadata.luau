@@ -1,14 +1,15 @@
-﻿local function normalizeValue(p1)
-	-- upvalues: normalizeValue (ref)
-	if typeof(p1) == "EnumItem" then
-		return p1.Name
-	elseif typeof(p1) ~= "table" then
-		return p1
+﻿local function normalizeValue(List) --[[ Line: 10 ]]
+	-- upvalues: normalizeValue (copy)
+	if typeof(List) == "EnumItem" then
+		return List.Name
+	end
+	if typeof(List) ~= "table" then
+		return List
 	end
 	local t = {}
 	
-	for i, v in p1 do
-		t[i] = normalizeValue(v)
+	for i, value in List do
+		t[i] = normalizeValue(value)
 	end
 	return t
 end

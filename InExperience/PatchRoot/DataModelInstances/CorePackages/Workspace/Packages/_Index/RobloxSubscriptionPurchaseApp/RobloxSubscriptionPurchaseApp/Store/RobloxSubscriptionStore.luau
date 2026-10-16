@@ -1,109 +1,108 @@
-﻿local robloxSubscriptionPurchaseApp = script:FindFirstAncestor("RobloxSubscriptionPurchaseApp")
-local signalsModule = require(robloxSubscriptionPurchaseApp.Parent.Signals)
-local promptStateModule = require(robloxSubscriptionPurchaseApp.Enums.PromptState)
-local _ = require(robloxSubscriptionPurchaseApp.Enums.RobloxSubscriptionFlowCompleteReason)
-local _ = require(robloxSubscriptionPurchaseApp.Models.GetRobloxSubscriptionProductsModel)
-local _ = require(robloxSubscriptionPurchaseApp.Enums.ErrorReason)
-local _ = require(robloxSubscriptionPurchaseApp.types)
-local var1 = nil
+﻿local RobloxSubscriptionPurchaseApp = script:FindFirstAncestor("RobloxSubscriptionPurchaseApp")
+local SignalsModule = require(RobloxSubscriptionPurchaseApp.Parent.Signals)
+local PromptStateModule = require(RobloxSubscriptionPurchaseApp.Enums.PromptState)
+local _ = require(RobloxSubscriptionPurchaseApp.Enums.RobloxSubscriptionFlowCompleteReason)
+local _ = require(RobloxSubscriptionPurchaseApp.Models.GetRobloxSubscriptionProductsModel)
+local _ = require(RobloxSubscriptionPurchaseApp.Enums.ErrorReason)
+local _ = require(RobloxSubscriptionPurchaseApp.types)
+local v1 = nil
 
-local var2 = function()
-	-- upvalues: signalsModule (ref), promptStateModule (ref)
-	local var3, var4 = signalsModule.createSignal(promptStateModule.Unspecified)
-	local var5, var6 = signalsModule.createSignal(nil)
-	local var7, var8 = signalsModule.createSignal(false)
-	local var9, var10 = signalsModule.createSignal({})
-	local var11, var12 = signalsModule.createSignal("")
-	local var13, var14 = signalsModule.createSignal(false)
-	local var15, var16 = signalsModule.createSignal({})
-	local var17, var18 = signalsModule.createSignal({})
-	local var19, var20 = signalsModule.createSignal(nil)
-	local var21, var22 = signalsModule.createSignal(nil)
-	local var23 = signalsModule.createComputed(function(p1)
-		-- upvalues: var5 (ref)
-		local var24 = var5(p1)
-		
-		return var24 and (var24.ProductKey and (var24.ProductKey.Id or ""))
-	end)
-	local var24 = nil
-	local var25 = nil
-	local var26 = nil
-	local var27 = nil
+local function v8() --[[ Line: 58 ]]
+	-- upvalues: SignalsModule (copy), PromptStateModule (copy)
+	local Signal, Signal2 = SignalsModule.createSignal(PromptStateModule.Unspecified)
+	local Signal1, Signal2_1 = SignalsModule.createSignal(nil)
+	local Signal3, Signal2_2 = SignalsModule.createSignal(false)
+	local Signal4, Signal2_3 = SignalsModule.createSignal({})
+	local Signal5, Signal2_4 = SignalsModule.createSignal("")
+	local Signal6, Signal2_5 = SignalsModule.createSignal(false)
+	local Signal7, Signal2_6 = SignalsModule.createSignal({})
+	local Signal8, Signal2_7 = SignalsModule.createSignal({})
+	local Signal9, Signal2_8 = SignalsModule.createSignal(nil)
+	local Signal10, Signal2_9 = SignalsModule.createSignal(nil)
+	local Callback1 = nil
+	local Callback2 = nil
+	local Callback = nil
+	local OnCtaOverride = nil
 	
 	return {
-		getPromptState = var3,
-		setPromptState = var4,
-		getRobloxSubscriptionProduct = var5,
-		setRobloxSubscriptionProduct = var6,
-		getPurchaseFlowOptions = var17,
-		setPurchaseFlowOptions = var18,
-		getDidTryPurchasing = var7,
-		setDidTryPurchasing = var8,
-		getPaymentSessionId = var11,
-		setPaymentSessionId = var12,
-		getEntryContext = var15,
-		setEntryContext = var16,
-		getErrorReason = var19,
-		setErrorReason = var20,
-		getReferrerId = var21,
-		setReferrerId = var22,
-		setOnFlowComplete = function(value)
-			-- upvalues: var24 (write)
-			var24 = value
+		getPromptState = Signal,
+		setPromptState = Signal2,
+		getRobloxSubscriptionProduct = Signal1,
+		setRobloxSubscriptionProduct = Signal2_1,
+		getPurchaseFlowOptions = Signal8,
+		setPurchaseFlowOptions = Signal2_7,
+		getDidTryPurchasing = Signal3,
+		setDidTryPurchasing = Signal2_2,
+		getPaymentSessionId = Signal5,
+		setPaymentSessionId = Signal2_4,
+		getEntryContext = Signal7,
+		setEntryContext = Signal2_6,
+		getErrorReason = Signal9,
+		setErrorReason = Signal2_8,
+		getReferrerId = Signal10,
+		setReferrerId = Signal2_9,
+		setOnFlowComplete = function(Value) --[[ Line: 83 ]]
+			-- upvalues: Callback1 (ref)
+			Callback1 = Value
 		end,
-		triggerOnFlowComplete = function(p1)
-			-- upvalues: var24 (write)
-			if var24 then
-				var24(p1)
+		triggerOnFlowComplete = function(p1) --[[ Line: 87 ]]
+			-- upvalues: Callback1 (ref)
+			if Callback1 then
+				Callback1(p1)
 			end
 		end,
-		getPurchaseUIOptions = var9,
-		setPurchaseUIOptions = var10,
-		getIsNativePurchase = var13,
-		setIsNativePurchase = var14,
-		getRobloxSubscriptionProductId = var23,
-		setOnUnmountUI = function(value)
-			-- upvalues: var25 (write)
-			var25 = value
+		getPurchaseUIOptions = Signal4,
+		setPurchaseUIOptions = Signal2_3,
+		getIsNativePurchase = Signal6,
+		setIsNativePurchase = Signal2_5,
+		getRobloxSubscriptionProductId = SignalsModule.createComputed(function(p1) --[[ Line: 71 ]]
+			-- upvalues: Signal1 (copy)
+			local SignalResult = Signal1(p1)
+			
+			return SignalResult and SignalResult.ProductKey and SignalResult.ProductKey.Id or ""
+		end),
+		setOnUnmountUI = function(Value) --[[ Line: 111 ]]
+			-- upvalues: Callback2 (ref)
+			Callback2 = Value
 		end,
-		triggerUnmountUI = function()
-			-- upvalues: var25 (write)
-			if var25 then
-				var25()
-				var25 = nil
+		triggerUnmountUI = function() --[[ Line: 115 ]]
+			-- upvalues: Callback2 (ref)
+			if Callback2 then
+				Callback2()
+				Callback2 = nil
 			end
 		end,
-		setOnBackButtonActivated = function(value)
-			-- upvalues: var26 (write)
-			var26 = value
+		setOnBackButtonActivated = function(Value) --[[ Line: 93 ]]
+			-- upvalues: Callback (ref)
+			Callback = Value
 		end,
-		triggerOnBackButtonActivated = function()
-			-- upvalues: var26 (write)
-			if var26 then
-				var26()
+		triggerOnBackButtonActivated = function() --[[ Line: 97 ]]
+			-- upvalues: Callback (ref)
+			if Callback then
+				Callback()
 			end
 		end,
-		setOnCtaOverride = function(value)
-			-- upvalues: var27 (write)
-			var27 = value
+		setOnCtaOverride = function(Value) --[[ Line: 103 ]]
+			-- upvalues: OnCtaOverride (ref)
+			OnCtaOverride = Value
 		end,
-		getOnCtaOverride = function()
-			-- upvalues: var27 (write)
-			return var27
+		getOnCtaOverride = function() --[[ Line: 107 ]]
+			-- upvalues: OnCtaOverride (ref)
+			return OnCtaOverride
 		end
 	}
 end
 
 return {
-	get = function()
-		-- upvalues: var1 (write), signalsModule (ref), var2 (ref)
-		if var1 == nil then
-			var1 = signalsModule.createComputed(var2)(false)
+	get = function() --[[ Line: 157 ]]
+		-- upvalues: v1 (ref), SignalsModule (copy), v8 (copy)
+		if v1 == nil then
+			v1 = SignalsModule.createComputed(v8)(false)
 		end
-		return var1
+		return v1
 	end,
-	cleanup = function()
-		-- upvalues: var1 (write)
-		var1 = nil
+	cleanup = function() --[[ Line: 164 ]]
+		-- upvalues: v1 (ref)
+		v1 = nil
 	end
 }

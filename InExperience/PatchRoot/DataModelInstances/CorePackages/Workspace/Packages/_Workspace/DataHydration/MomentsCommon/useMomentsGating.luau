@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent.Parent._Index.MomentsCommon.MomentsCommon.Hooks.useMomentsGating)
+﻿return (require(script.Parent.Parent.Parent.Parent._Index.MomentsCommon.MomentsCommon.Hooks.useMomentsGating))

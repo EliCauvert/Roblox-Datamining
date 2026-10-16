@@ -1,16 +1,15 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local cryoModule = require(corePackagesService.Packages.Cryo)
-local roduxModule = require(corePackagesService.Packages.Rodux)
-local actions = script.Parent.Parent.Actions
-local t = { focusedSegmentIndex = 0 }
+﻿local CorePackages = game:GetService("CorePackages")
+local CryoModule = require(CorePackages.Packages.Cryo)
+local Actions = script.Parent.Parent.Actions
+local config = { focusedSegmentIndex = 0 }
 
-return roduxModule.createReducer(t, {
-	[require(actions.FocusSegment).name] = function(p1, p2)
-		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p1, { focusedSegmentIndex = p2.segmentIndex })
+return require(CorePackages.Packages.Rodux).createReducer(config, {
+	[require(Actions.FocusSegment).name] = function(p1, p2) --[[ Line: 18 ]]
+		-- upvalues: CryoModule (copy)
+		return CryoModule.Dictionary.join(p1, { focusedSegmentIndex = p2.segmentIndex })
 	end,
-	[require(actions.HideMenu).name] = function(p1, _)
-		-- upvalues: cryoModule (ref), t (ref)
-		return cryoModule.Dictionary.join(p1, t)
+	[require(Actions.HideMenu).name] = function(p1, _) --[[ Line: 25 ]]
+		-- upvalues: CryoModule (copy), config (copy)
+		return CryoModule.Dictionary.join(p1, config)
 	end
 })

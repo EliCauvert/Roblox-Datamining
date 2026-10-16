@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.InExperienceSideSheet.InExperienceSideSheet)
+﻿return (require(script.Parent._Workspace.InExperienceSideSheet.InExperienceSideSheet))

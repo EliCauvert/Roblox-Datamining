@@ -1,84 +1,83 @@
-﻿local notificationsCommon = script:FindFirstAncestor("NotificationsCommon")
-local parent = notificationsCommon.Parent
-local components = notificationsCommon.components
-local context = notificationsCommon.context
-local dependenciesModule = require(notificationsCommon.dependencies)
-local notificationStyledTextModule = require(components.NotificationStyledText)
-local notificationThumbnailModule = require(components.NotificationThumbnail)
-local _ = require(notificationsCommon.type)
-local react = dependenciesModule.React
-local UIBlox = dependenciesModule.UIBlox
-local foundationModule = require(parent.Foundation)
-local useStyle = UIBlox.Core.Style.useStyle
-local useTokens = foundationModule.Hooks.useTokens
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local constantsModule = require(notificationsCommon.constants)
-local useNotificationCardStateModule = require(context.useNotificationCardState)
-local useNotificationCardDataModule = require(context.useNotificationCardData)
-local notificationActionsFrameModule = require(components.NotificationActionsFrame)
-local iconButton = UIBlox.App.Button.IconButton
-local iconSize = UIBlox.App.ImageSet.Enum.IconSize
-local overflow = UIBlox.App.ImageSet.Images["icons/common/overflow"]
-local defaultContentPadding = constantsModule.DefaultContentPadding
-local defaultTextContentPadding = constantsModule.DefaultTextContentPadding
-local metaActionsWidth = constantsModule.MetaActionsWidth
-local timestampWidth = constantsModule.TimestampWidth
-local timestampHeight = constantsModule.TimestampHeight
+﻿local NotificationsCommon = script:FindFirstAncestor("NotificationsCommon")
+local Components = NotificationsCommon.components
+local Context = NotificationsCommon.context
+local DependenciesModule = require(NotificationsCommon.dependencies)
+local NotificationStyledTextModule = require(Components.NotificationStyledText)
+local NotificationThumbnailModule = require(Components.NotificationThumbnail)
+local _ = require(NotificationsCommon.type)
+local React = DependenciesModule.React
+local UIBlox = DependenciesModule.UIBlox
+local FoundationModule = require(NotificationsCommon.Parent.Foundation)
+local UseStyleFunction = UIBlox.Core.Style.useStyle
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local ConstantsModule = require(NotificationsCommon.constants)
+local UseNotificationCardStateModule = require(Context.useNotificationCardState)
+local UseNotificationCardDataModule = require(Context.useNotificationCardData)
+local NotificationActionsFrameModule = require(Components.NotificationActionsFrame)
+local IconButton = UIBlox.App.Button.IconButton
+local IconSize = UIBlox.App.ImageSet.Enum.IconSize
+local IconsCommonOverflow = UIBlox.App.ImageSet.Images["icons/common/overflow"]
+local DefaultContentPadding = ConstantsModule.DefaultContentPadding
+local DefaultTextContentPadding = ConstantsModule.DefaultTextContentPadding
+local MetaActionsWidth = ConstantsModule.MetaActionsWidth
+local TimestampWidth = ConstantsModule.TimestampWidth
+local TimestampHeight = ConstantsModule.TimestampHeight
 
-return function()
-	-- upvalues: useStyle (ref), foundationFontFaceMigration (ref), useTokens (ref), useNotificationCardDataModule (ref), constantsModule (ref), useNotificationCardStateModule (ref), normalizeFontFace (ref), defaultTextContentPadding (ref), metaActionsWidth (ref), timestampWidth (ref), timestampHeight (ref), react (ref), defaultContentPadding (ref), notificationThumbnailModule (ref), notificationStyledTextModule (ref), iconButton (ref), iconSize (ref), overflow (ref), notificationActionsFrameModule (ref)
-	local var1 = useStyle()
-	local var2 = if foundationFontFaceMigration then useTokens() else nil
-	local var3 = if foundationFontFaceMigration then var2.Typography.CaptionLarge.FontSize else var1.Font.BaseSize * var1.Font.CaptionHeader.RelativeSize
-	local var4 = if foundationFontFaceMigration then var2.Typography.BodySmall.FontSize else var1.Font.BaseSize * var1.Font.CaptionBody.RelativeSize
-	local var5 = useNotificationCardDataModule()
-	local cardSize = var5.cardSize
-	local readOnly = var5.readOnly
-	local var6 = if cardSize then cardSize.thumbnail else constantsModule.CardSizeDefault.thumbnail
-	local openMetaActions = var5.openMetaActions
-	local notificationPayload = var5.notificationPayload
-	local handleActions = var5.handleActions
-	local var7 = useNotificationCardStateModule("textBody")
-	local var8 = var7 and var7[1]
-	local var9 = var8 and (var8.title and {
+return function() --[[ Line: 32 ]]
+	-- upvalues: UseStyleFunction (copy), FoundationFontFaceMigration (copy), UseTokensFunction (copy), UseNotificationCardDataModule (copy), ConstantsModule (copy), UseNotificationCardStateModule (copy), NormalizeFontFaceFunction (copy), DefaultTextContentPadding (copy), MetaActionsWidth (copy), TimestampWidth (copy), TimestampHeight (copy), React (copy), DefaultContentPadding (copy), NotificationThumbnailModule (copy), NotificationStyledTextModule (copy), IconButton (copy), IconSize (copy), IconsCommonOverflow (copy), NotificationActionsFrameModule (copy)
+	local UseStyleResult = UseStyleFunction()
+	local UseTokensResult = if FoundationFontFaceMigration then UseTokensFunction() else nil
+	local FontSize = if FoundationFontFaceMigration then UseTokensResult.Typography.CaptionLarge.FontSize else UseStyleResult.Font.BaseSize * UseStyleResult.Font.CaptionHeader.RelativeSize
+	local FontSize1 = if FoundationFontFaceMigration then UseTokensResult.Typography.BodySmall.FontSize else UseStyleResult.Font.BaseSize * UseStyleResult.Font.CaptionBody.RelativeSize
+	local UseNotificationCardDataModuleResult = UseNotificationCardDataModule()
+	local CardSize = UseNotificationCardDataModuleResult.cardSize
+	local ReadOnly = UseNotificationCardDataModuleResult.readOnly
+	local Thumbnail = CardSize and CardSize.thumbnail or ConstantsModule.CardSizeDefault.thumbnail
+	local OpenMetaActionsFunction = UseNotificationCardDataModuleResult.openMetaActions
+	local NotificationPayload = UseNotificationCardDataModuleResult.notificationPayload
+	local HandleActionsFunction = UseNotificationCardDataModuleResult.handleActions
+	local TextBody = UseNotificationCardStateModule("textBody")
+	local TextBodyEntry = TextBody and TextBody[1]
+	local Config = TextBodyEntry and (TextBodyEntry.title and {
 		LayoutOrder = 1,
-		Text = var8.title,
+		Text = TextBodyEntry.title,
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
-		TextSize = var3,
+		TextSize = FontSize,
 		TextXAlignment = Enum.TextXAlignment.Left,
-		Font = if foundationFontFaceMigration then nil else var1.Font.CaptionHeader.Font,
-		FontFace = if foundationFontFaceMigration then normalizeFontFace(var2.Typography.CaptionLarge.Font) else nil,
-		TextColor3 = var1.Theme.TextEmphasis.Color
+		Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.CaptionHeader.Font,
+		FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.CaptionLarge.Font) else nil,
+		TextColor3 = UseStyleResult.Theme.TextEmphasis.Color
 	})
-	local var10 = var8 and (var8.label and {
+	local Config1 = TextBodyEntry and (TextBodyEntry.label and {
 		LayoutOrder = 2,
-		Text = var8.label,
+		Text = TextBodyEntry.label,
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
-		TextSize = var4,
+		TextSize = FontSize1,
 		TextXAlignment = Enum.TextXAlignment.Left,
-		Font = if foundationFontFaceMigration then nil else var1.Font.CaptionBody.Font,
-		FontFace = if foundationFontFaceMigration then normalizeFontFace(var2.Typography.BodySmall.Font) else nil,
-		TextColor3 = var1.Theme.TextEmphasis.Color
+		Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.CaptionBody.Font,
+		FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.BodySmall.Font) else nil,
+		TextColor3 = UseStyleResult.Theme.TextEmphasis.Color
 	})
-	local var11 = notificationPayload and (notificationPayload.timestamp and {
+	local Config2 = NotificationPayload and (NotificationPayload.timestamp and {
 		LayoutOrder = 2,
 		TextTransparency = 0,
-		Text = { text = notificationPayload.timestamp },
-		Size = UDim2.new(0, timestampWidth + defaultTextContentPadding, 0, timestampHeight),
-		TextSize = var3,
+		Text = { text = NotificationPayload.timestamp },
+		Size = UDim2.new(0, TimestampWidth + DefaultTextContentPadding, 0, TimestampHeight),
+		TextSize = FontSize,
 		AutomaticSize = Enum.AutomaticSize.Y,
 		TextXAlignment = Enum.TextXAlignment.Right,
 		AnchorPoint = Vector2.new(1, 0),
-		Position = UDim2.new(1, if readOnly then -defaultTextContentPadding else -(metaActionsWidth + defaultTextContentPadding), 0, 0),
-		Font = if foundationFontFaceMigration then nil else var1.Font.CaptionHeader.Font,
-		FontFace = if foundationFontFaceMigration then normalizeFontFace(var2.Typography.CaptionLarge.Font) else nil,
-		TextColor3 = var1.Theme.TextEmphasis.Color
+		Position = UDim2.new(1, if ReadOnly then -DefaultTextContentPadding else -(MetaActionsWidth + DefaultTextContentPadding), 0, 0),
+		Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.CaptionHeader.Font,
+		FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.CaptionLarge.Font) else nil,
+		TextColor3 = UseStyleResult.Theme.TextEmphasis.Color
 	})
 	
-	return react.createElement("TextButton", {
+	return React.createElement("TextButton", {
 		Selectable = false,
 		AutomaticSize = Enum.AutomaticSize.Y,
 		LayoutOrder = 1,
@@ -87,75 +86,75 @@ return function()
 		Text = "",
 		AutoButtonColor = false,
 		BorderSizePixel = 0,
-		[react.Event.Activated] = function()
-			-- upvalues: handleActions (ref), var8 (ref), notificationPayload (ref)
-			if handleActions and var8 and notificationPayload then
-				handleActions(var8, notificationPayload)
+		[React.Event.Activated] = function() --[[ Line: 116 ]]
+			-- upvalues: HandleActionsFunction (copy), TextBodyEntry (copy), NotificationPayload (copy)
+			if HandleActionsFunction and TextBodyEntry and NotificationPayload then
+				HandleActionsFunction(TextBodyEntry, NotificationPayload)
 			end
 		end
 	}, {
-		UIListLayout = react.createElement("UIListLayout", {
+		UIListLayout = React.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Horizontal,
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			VerticalAlignment = Enum.VerticalAlignment.Top,
-			Padding = UDim.new(0, defaultContentPadding)
+			Padding = UDim.new(0, DefaultContentPadding)
 		}),
-		NotificationThumbnailFrame = react.createElement("Frame", {
+		NotificationThumbnailFrame = React.createElement("Frame", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 1,
 			AutomaticSize = Enum.AutomaticSize.Y,
-			Size = UDim2.new(0, var6, 0, var6)
+			Size = UDim2.new(0, Thumbnail, 0, Thumbnail)
 		}, {
-			NotificationThumbnail = react.createElement(notificationThumbnailModule)
+			NotificationThumbnail = React.createElement(NotificationThumbnailModule)
 		}),
-		ContentFrame = react.createElement("Frame", {
+		ContentFrame = React.createElement("Frame", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 2,
 			AutomaticSize = Enum.AutomaticSize.Y,
-			Size = UDim2.new(1, -(var6 + defaultContentPadding), 0, 0)
+			Size = UDim2.new(1, -(Thumbnail + DefaultContentPadding), 0, 0)
 		}, {
-			UIListLayout = react.createElement("UIListLayout", {
+			UIListLayout = React.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Vertical,
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				VerticalAlignment = Enum.VerticalAlignment.Top,
-				Padding = UDim.new(0, defaultTextContentPadding)
+				Padding = UDim.new(0, DefaultTextContentPadding)
 			}),
-			NotificationsBody = react.createElement("Frame", {
+			NotificationsBody = React.createElement("Frame", {
 				LayoutOrder = 1,
 				BackgroundTransparency = 1,
-				Size = UDim2.new(1, 0, 0, constantsModule.MetaActionsHeight),
+				Size = UDim2.new(1, 0, 0, ConstantsModule.MetaActionsHeight),
 				AutomaticSize = Enum.AutomaticSize.Y
 			}, {
-				NotificationsText = react.createElement("Frame", {
+				NotificationsText = React.createElement("Frame", {
 					BackgroundTransparency = 1,
-					Size = UDim2.new(1, if readOnly then -(timestampWidth + defaultTextContentPadding) else -(metaActionsWidth + timestampWidth + defaultTextContentPadding * 2), 0, 0),
+					Size = UDim2.new(1, if ReadOnly then -(TimestampWidth + DefaultTextContentPadding) else -(MetaActionsWidth + TimestampWidth + DefaultTextContentPadding * 2), 0, 0),
 					AutomaticSize = Enum.AutomaticSize.Y
 				}, {
-					UIPadding = react.createElement("UIPadding", { PaddingTop = UDim.new(0, defaultTextContentPadding) }),
-					UIListLayout = react.createElement("UIListLayout", {
+					UIPadding = React.createElement("UIPadding", { PaddingTop = UDim.new(0, DefaultTextContentPadding) }),
+					UIListLayout = React.createElement("UIListLayout", {
 						FillDirection = Enum.FillDirection.Vertical,
 						SortOrder = Enum.SortOrder.LayoutOrder,
 						VerticalAlignment = Enum.VerticalAlignment.Top,
-						Padding = UDim.new(0, defaultTextContentPadding)
+						Padding = UDim.new(0, DefaultTextContentPadding)
 					}),
-					Title = if var9 then react.createElement(notificationStyledTextModule, var9) else nil,
-					Subtitle = if var10 then react.createElement(notificationStyledTextModule, var10) else nil
+					Title = if Config then React.createElement(NotificationStyledTextModule, Config) else nil,
+					Subtitle = if Config1 then React.createElement(NotificationStyledTextModule, Config1) else nil
 				}),
-				Timestamp = if var11 then react.createElement(notificationStyledTextModule, var11) else nil,
-				MetaActionsButton = if openMetaActions and not readOnly then react.createElement(iconButton, {
+				Timestamp = if Config2 then React.createElement(NotificationStyledTextModule, Config2) else nil,
+				MetaActionsButton = if OpenMetaActionsFunction and not ReadOnly then React.createElement(IconButton, {
 					layoutOrder = 3,
 					anchorPoint = Vector2.new(1, 0),
 					position = UDim2.new(1, 0, 0, 0),
 					size = UDim2.fromOffset(0, 0),
-					iconSize = iconSize.Medium,
-					icon = overflow,
-					onActivated = function()
-						-- upvalues: openMetaActions (ref), notificationPayload (ref)
-						openMetaActions(notificationPayload)
+					iconSize = IconSize.Medium,
+					icon = IconsCommonOverflow,
+					onActivated = function() --[[ Line: 191 ]]
+						-- upvalues: OpenMetaActionsFunction (copy), NotificationPayload (copy)
+						OpenMetaActionsFunction(NotificationPayload)
 					end
 				}) else nil
 			}),
-			NotificationActionsFrame = if not readOnly then react.createElement(notificationActionsFrameModule) else nil
+			NotificationActionsFrame = if ReadOnly then nil else React.createElement(NotificationActionsFrameModule)
 		})
 	})
 end

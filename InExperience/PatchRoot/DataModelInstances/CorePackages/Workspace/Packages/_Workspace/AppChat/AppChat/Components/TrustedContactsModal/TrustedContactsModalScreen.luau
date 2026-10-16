@@ -1,29 +1,28 @@
-﻿local parent = script:FindFirstAncestor("AppChat").Parent
-local reactModule = require(parent.React)
-local cryoModule = require(parent.Cryo)
-local trustedContactsModule = require(parent.TrustedContacts)
-local setTabBarVisibleFromChat = require(parent.AppTabBarRodux).Thunks.SetTabBarVisibleFromChat
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local trustedFriendsModalEntry = trustedContactsModule.TrustedFriendsModalEntry
+﻿local Parent = script:FindFirstAncestor("AppChat").Parent
+local ReactModule = require(Parent.React)
+local CryoModule = require(Parent.Cryo)
+local SetTabBarVisibleFromChatFunction = require(Parent.AppTabBarRodux).Thunks.SetTabBarVisibleFromChat
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local TrustedFriendsModalEntry = require(Parent.TrustedContacts).TrustedFriendsModalEntry
 
-return function(p1)
-	-- upvalues: useDispatch (ref), reactModule (ref), setTabBarVisibleFromChat (ref), trustedFriendsModalEntry (ref), cryoModule (ref)
-	local navigation = p1.navigation
-	local props = navigation.getParam("props")
-	local var1 = useDispatch()
-	local var2 = reactModule.useCallback(function()
-		-- upvalues: navigation (ref)
-		navigation.pop()
-	end, { navigation })
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), setTabBarVisibleFromChat (copy)
-		var1(setTabBarVisibleFromChat(false))
+return function(p1) --[[ Line: 40 | Named "TrustedContactsModalScreen" ]]
+	-- upvalues: UseDispatchFunction (copy), ReactModule (copy), SetTabBarVisibleFromChatFunction (copy), TrustedFriendsModalEntry (copy), CryoModule (copy)
+	local Navigation = p1.navigation
+	local PropsParam = Navigation.getParam("props")
+	local UseDispatchResult = UseDispatchFunction()
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 45 ]]
+		-- upvalues: Navigation (copy)
+		Navigation.pop()
+	end, { Navigation })
+	ReactModule.useEffect(function() --[[ Line: 49 ]]
+		-- upvalues: UseDispatchResult (copy), SetTabBarVisibleFromChatFunction (upval)
+		UseDispatchResult(SetTabBarVisibleFromChatFunction(false))
 		
-		return function()
-			-- upvalues: var1 (copy), setTabBarVisibleFromChat (copy)
-			var1(setTabBarVisibleFromChat(true))
+		return function() --[[ Line: 51 ]]
+			-- upvalues: UseDispatchResult (upval), SetTabBarVisibleFromChatFunction (upval)
+			UseDispatchResult(SetTabBarVisibleFromChatFunction(true))
 		end
-	end, { var1 })
+	end, { UseDispatchResult })
 	
-	return reactModule.createElement(trustedFriendsModalEntry, cryoModule.Dictionary.join(props, { onClosed = var2 }))
+	return ReactModule.createElement(TrustedFriendsModalEntry, CryoModule.Dictionary.join(PropsParam, { onClosed = UseResult }))
 end

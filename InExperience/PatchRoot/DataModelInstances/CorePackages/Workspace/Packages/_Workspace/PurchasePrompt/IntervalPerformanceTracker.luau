@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.IntervalPerformanceTracker.IntervalPerformanceTracker)
+﻿return (require(script.Parent.Parent.Parent._Index.IntervalPerformanceTracker.IntervalPerformanceTracker))

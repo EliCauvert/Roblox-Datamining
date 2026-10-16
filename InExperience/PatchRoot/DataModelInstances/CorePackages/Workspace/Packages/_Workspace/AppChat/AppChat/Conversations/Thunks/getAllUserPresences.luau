@@ -1,19 +1,19 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local networkingPresenceModule = require(appChat.Http.NetworkingPresence)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local NetworkingPresenceModule = require(AppChat.Http.NetworkingPresence)
 
-return if require(appChat.Flags.FFlagAppChatPresenceStoreMigration) then nil else function()
-	-- upvalues: networkingPresenceModule (ref)
-	return function(p1)
-		-- upvalues: networkingPresenceModule (copy)
-		local t = {}
+return if require(AppChat.Flags.FFlagAppChatPresenceStoreMigration) then nil else function() --[[ Line: 8 ]]
+	-- upvalues: NetworkingPresenceModule (copy)
+	return function(p1) --[[ Line: 9 ]]
+		-- upvalues: NetworkingPresenceModule (upval)
+		local List = {}
 		
-		for i, v in pairs(p1:getState().Users) do
+		for i, _ in pairs(p1:getState().Users) do
 			if i ~= "-1" then
-				table.insert(t, i)
+				table.insert(List, i)
 			end
 		end
-		p1:dispatch(networkingPresenceModule.GetPresencesFromUserIds.API(t)):catch(function(p2)
-			warn("NetworkingPresence failure in getAllUserPresences, Status: " .. tostring(p2))
+		p1:dispatch(NetworkingPresenceModule.GetPresencesFromUserIds.API(List)):catch(function(Err) --[[ Line: 20 ]]
+			warn("NetworkingPresence failure in getAllUserPresences, Status: " .. tostring(Err))
 		end)
 	end
 end

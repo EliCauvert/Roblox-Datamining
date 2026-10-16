@@ -1,284 +1,270 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local guiService = game:GetService("GuiService")
-local httpRbxApiService = game:GetService("HttpRbxApiService")
-local sortFriendsByCorrectedPresenceAndRank = require(corePackagesService.Packages.LuaSocialLibrariesDeps).SocialLibraries.config({}).User.sortFriendsByCorrectedPresenceAndRank
-local coreGuiService = game:GetService("CoreGui")
-local robloxGui = coreGuiService:WaitForChild("RobloxGui")
-local playersService = game:GetService("Players")
-local userInputService = game:GetService("UserInputService")
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local modules = coreGuiService.RobloxGui.Modules
-local shareGame = robloxGui.Modules.Settings.Pages.ShareGame
-local themeModule = require(modules.Settings.Theme)
-local constantsModule = require(shareGame.Constants)
-local gameInviteEvents = require(corePackagesService.Workspace.Packages.GameInvite).GameInviteEvents
-local conversationEntryModule = require(shareGame.Components.ConversationEntry)
-local inviteListEntryModule = require(shareGame.Components.InviteListEntry)
-local friendsErrorPageModule = require(shareGame.Components.FriendsErrorPage)
-local inviteUserIdToPlaceIdModule = require(shareGame.Thunks.InviteUserIdToPlaceId)
-local inviteUserIdToPlaceIdCustomizedModule = require(shareGame.Thunks.InviteUserIdToPlaceIdCustomized)
-local newInviteMenuExperimentManagerModule = require(shareGame.NewInviteMenuExperimentManager)
-local loadingFriendsPageModule = require(shareGame.Components.LoadingFriendsPage)
-local noFriendsPageModule = require(shareGame.Components.NoFriendsPage)
-local playerSearchPredicateModule = require(coreGuiService.RobloxGui.Modules.InGameMenu.Utility.PlayerSearchPredicate)
-local getFFlagAbuseReportAnalyticsHasLaunchDataModule = require(modules.Settings.Flags.GetFFlagAbuseReportAnalyticsHasLaunchData)
-local getFFlagEnableNewInviteMenuModule = require(modules.Flags.GetFFlagEnableNewInviteMenu)
-local getFFlagEnableNewInviteSendEndpointModule = require(modules.Flags.GetFFlagEnableNewInviteSendEndpoint)
-local userModel = require(corePackagesService.Workspace.Packages.UserLib).Models.UserModel
-local httpRequestModule = require(modules.Common.httpRequest)
-local memoize = require(corePackagesService.Workspace.Packages.AppCommonLib).memoize
-local retrievalStatus = require(corePackagesService.Workspace.Packages.Http).Enum.RetrievalStatus
-local getFFlagInviteListRerank = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagInviteListRerank
-local var1 = require(shareGame.getTranslator)()
-local var2 = themeModule.font(Enum.Font.SourceSans)
-local GRAY3 = constantsModule.Color.GRAY3
-local var3 = themeModule.textSize(19)
-local t = {
-	[userModel.PresenceType.ONLINE] = 3,
-	[userModel.PresenceType.IN_GAME] = 2,
-	[userModel.PresenceType.IN_STUDIO] = 1,
-	[userModel.PresenceType.OFFLINE] = 0
+﻿local CorePackages = game:GetService("CorePackages")
+local GuiService = game:GetService("GuiService")
+local HttpRbxApiService = game:GetService("HttpRbxApiService")
+local SortFriendsByCorrectedPresenceAndRank = require(CorePackages.Packages.LuaSocialLibrariesDeps).SocialLibraries.config({}).User.sortFriendsByCorrectedPresenceAndRank
+local CoreGui = game:GetService("CoreGui")
+local Players = game:GetService("Players")
+local UserInputService = game:GetService("UserInputService")
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local Modules = CoreGui.RobloxGui.Modules
+local ShareGame = CoreGui:WaitForChild("RobloxGui").Modules.Settings.Pages.ShareGame
+local ThemeModule = require(Modules.Settings.Theme)
+local ConstantsModule = require(ShareGame.Constants)
+local GameInviteEvents = require(CorePackages.Workspace.Packages.GameInvite).GameInviteEvents
+local ConversationEntryModule = require(ShareGame.Components.ConversationEntry)
+local InviteListEntryModule = require(ShareGame.Components.InviteListEntry)
+local FriendsErrorPageModule = require(ShareGame.Components.FriendsErrorPage)
+local InviteUserIdToPlaceIdModule = require(ShareGame.Thunks.InviteUserIdToPlaceId)
+local InviteUserIdToPlaceIdCustomizedModule = require(ShareGame.Thunks.InviteUserIdToPlaceIdCustomized)
+local NewInviteMenuExperimentManagerModule = require(ShareGame.NewInviteMenuExperimentManager)
+local LoadingFriendsPageModule = require(ShareGame.Components.LoadingFriendsPage)
+local NoFriendsPageModule = require(ShareGame.Components.NoFriendsPage)
+local PlayerSearchPredicateModule = require(CoreGui.RobloxGui.Modules.InGameMenu.Utility.PlayerSearchPredicate)
+local GetFFlagAbuseReportAnalyticsHasLaunchDataModule = require(Modules.Settings.Flags.GetFFlagAbuseReportAnalyticsHasLaunchData)
+local GetFFlagEnableNewInviteMenuModule = require(Modules.Flags.GetFFlagEnableNewInviteMenu)
+local GetFFlagEnableNewInviteSendEndpointModule = require(Modules.Flags.GetFFlagEnableNewInviteSendEndpoint)
+local UserModel = require(CorePackages.Workspace.Packages.UserLib).Models.UserModel
+local HttpRequestModule = require(Modules.Common.httpRequest)
+local MemoizeFunction = require(CorePackages.Workspace.Packages.AppCommonLib).memoize
+local RetrievalStatus = require(CorePackages.Workspace.Packages.Http).Enum.RetrievalStatus
+local GetFFlagInviteListRerankFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagInviteListRerank
+local Translator = require(ShareGame.getTranslator)()
+local FontResult = ThemeModule.font(Enum.Font.SourceSans)
+local GRAY3 = ConstantsModule.Color.GRAY3
+local TextSizeResult = ThemeModule.textSize(19)
+local config = {
+	[UserModel.PresenceType.ONLINE] = 3,
+	[UserModel.PresenceType.IN_GAME] = 2,
+	[UserModel.PresenceType.IN_STUDIO] = 1,
+	[UserModel.PresenceType.OFFLINE] = 0
 }
-local t_1 = {
+local config1 = {
 	SORT_BY_FREQUENCY = 1,
 	SORT_BY_PRESENCE_AND_FREQUENCY = 2
 }
-local conversationList = roactModule.PureComponent:extend("ConversationList")
-conversationList.defaultProps = { entryHeight = 62, entryPadding = 16 }
+local ConversationList = RoactModule.PureComponent:extend("ConversationList")
+ConversationList.defaultProps = { entryHeight = 62, entryPadding = 16 }
 
-function conversationList.init(p1)
-	-- upvalues: roactModule (ref)
-	p1.scrollingRef = roactModule.createRef()
+function ConversationList.init(p1) --[[ Line: 76 ]]
+	-- upvalues: RoactModule (copy)
+	p1.scrollingRef = RoactModule.createRef()
 	
-	function p0.inviteUser(p2)
-		-- upvalues: p1 (ref)
+	function p1.inviteUser(p2) --[[ Line: 78 ]]
+		-- upvalues: p1 (copy)
 		return p1.props.inviteUser(p2, p1.props.analytics, p1.props.trigger, p1.props.inviteMessageId, p1.props.launchData)
 	end
 end
 
-function conversationList.render(p1)
-	-- upvalues: roactModule (ref), getFFlagEnableNewInviteSendEndpointModule (ref), getFFlagEnableNewInviteMenuModule (ref), playerSearchPredicateModule (ref), inviteListEntryModule (ref), userInputService (ref), conversationEntryModule (ref), retrievalStatus (ref), loadingFriendsPageModule (ref), noFriendsPageModule (ref), friendsErrorPageModule (ref), var2 (ref), var1 (ref), GRAY3 (ref), var3 (ref)
-	local analytics = p1.props.analytics
-	local children = p1.props[roactModule.Children] or {}
-	local entryHeight = p1.props.entryHeight
-	local entryPadding = p1.props.entryPadding
-	local friends = p1.props.friends
-	local friendsRetrievalStatus = p1.props.friendsRetrievalStatus
-	local layoutOrder = p1.props.layoutOrder
-	local size = p1.props.size
-	local zIndex = p1.props.zIndex
-	local topPadding = p1.props.topPadding
-	local invites = p1.props.invites
-	local inviteUser = p1.props.inviteUser
-	local searchText = p1.props.searchText
+function ConversationList.render(p1) --[[ Line: 89 ]]
+	-- upvalues: RoactModule (copy), GetFFlagEnableNewInviteSendEndpointModule (copy), GetFFlagEnableNewInviteMenuModule (copy), PlayerSearchPredicateModule (copy), InviteListEntryModule (copy), UserInputService (copy), ConversationEntryModule (copy), RetrievalStatus (copy), LoadingFriendsPageModule (copy), NoFriendsPageModule (copy), FriendsErrorPageModule (copy), FontResult (copy), Translator (copy), GRAY3 (copy), TextSizeResult (copy)
+	local Analytics = p1.props.analytics
+	local Prop = p1.props[RoactModule.Children] or {}
+	local EntryHeight = p1.props.entryHeight
+	local EntryPadding = p1.props.entryPadding
+	local Friends = p1.props.friends
+	local FriendsRetrievalStatus = p1.props.friendsRetrievalStatus
+	local LayoutOrder = p1.props.layoutOrder
+	local Size = p1.props.size
+	local ZIndex = p1.props.zIndex
+	local TopPadding = p1.props.topPadding
+	local Invites = p1.props.invites
+	local InviteUser = p1.props.inviteUser
+	local SearchText = p1.props.searchText
 	
-	if getFFlagEnableNewInviteSendEndpointModule() then
-		inviteUser = p1.inviteUser
+	if GetFFlagEnableNewInviteSendEndpointModule() then
+		InviteUser = p1.inviteUser
 	end
-	local var4 = getFFlagEnableNewInviteMenuModule()
-	children.RowListLayout = roactModule.createElement("UIListLayout", {
+	local FFlagEnableNewInviteMenuModule = GetFFlagEnableNewInviteMenuModule()
+	Prop.RowListLayout = RoactModule.createElement("UIListLayout", {
 		FillDirection = Enum.FillDirection.Vertical,
 		HorizontalAlignment = Enum.HorizontalAlignment.Center,
 		VerticalAlignment = Enum.VerticalAlignment.Top,
 		SortOrder = Enum.SortOrder.LayoutOrder,
-		Padding = UDim.new(0, entryPadding)
+		Padding = UDim.new(0, EntryPadding)
 	})
-	local var5 = 0
+	local Count = 0
 	
-	for i, v in ipairs(friends) do
-		local var6 = playerSearchPredicateModule(searchText, v.name, v.displayName)
+	for LayoutOrder1, friend in ipairs(Friends) do
+		local PlayerSearchPredicateModuleResult = PlayerSearchPredicateModule(SearchText, friend.name, friend.displayName)
 		
-		if var4 then
-			children["User-" .. tostring(i)] = roactModule.createElement(inviteListEntryModule, {
-				analytics = analytics,
-				user = v,
-				visible = var6,
-				layoutOrder = i,
-				inviteUser = inviteUser,
-				inviteStatus = invites[v.id],
-				isFullRowActivatable = userInputService.GamepadEnabled,
+		if FFlagEnableNewInviteMenuModule then
+			Prop["User-" .. tostring(LayoutOrder1)] = RoactModule.createElement(InviteListEntryModule, {
+				analytics = Analytics,
+				user = friend,
+				visible = PlayerSearchPredicateModuleResult,
+				layoutOrder = LayoutOrder1,
+				inviteUser = InviteUser,
+				inviteStatus = Invites[friend.id],
+				isFullRowActivatable = UserInputService.GamepadEnabled,
 				trigger = p1.props.trigger,
 				inviteMessageId = p1.props.inviteMessageId,
 				launchData = p1.props.launchData
 			})
 		else
-			children["User-" .. tostring(i)] = roactModule.createElement(conversationEntryModule, {
-				analytics = analytics,
-				visible = var6,
-				size = UDim2.new(1, 0, 0, entryHeight),
-				layoutOrder = i,
-				zIndex = zIndex,
-				title = v.displayName,
-				subtitle = "@" .. v.name,
-				presence = v.presence,
-				users = { v },
-				inviteUser = inviteUser,
-				inviteStatus = invites[v.id]
+			Prop["User-" .. tostring(LayoutOrder1)] = RoactModule.createElement(ConversationEntryModule, {
+				analytics = Analytics,
+				visible = PlayerSearchPredicateModuleResult,
+				size = UDim2.new(1, 0, 0, EntryHeight),
+				layoutOrder = LayoutOrder1,
+				zIndex = ZIndex,
+				title = friend.displayName,
+				subtitle = "@" .. friend.name,
+				presence = friend.presence,
+				users = { friend },
+				inviteUser = InviteUser,
+				inviteStatus = Invites[friend.id]
 			})
 		end
-		if var6 then
-			var5 += 1
+		if PlayerSearchPredicateModuleResult then
+			Count += 1
 		end
 	end
-	if #friends == 0 or friendsRetrievalStatus == retrievalStatus.Fetching then
-		local var7 = loadingFriendsPageModule
-		
-		if friendsRetrievalStatus == retrievalStatus.Done then
-			var7 = noFriendsPageModule
-		elseif friendsRetrievalStatus == retrievalStatus.Failed then
-			var7 = friendsErrorPageModule
-		end
-		return roactModule.createElement(var7, {
-			BorderSizePixel = 0,
-			LayoutOrder = layoutOrder,
-			Position = UDim2.new(0, 0, 0, topPadding),
-			ZIndex = zIndex
-		})
-	else
-		return if var5 == 0 then roactModule.createElement("TextLabel", {
-			BackgroundTransparency = 1,
-			TextTransparency = 0.22,
-			LayoutOrder = layoutOrder,
-			Font = var2,
-			Size = UDim2.new(1, 0, 0, entryHeight),
-			Text = var1:FormatByKey("Feature.SettingsHub.Label.InviteSearchNoResults"),
-			TextColor3 = GRAY3,
-			TextSize = var3,
-			ZIndex = zIndex,
-			Position = UDim2.new(0, 0, 0, topPadding)
-		}) else roactModule.createElement("ScrollingFrame", {
-			BackgroundTransparency = 1,
-			LayoutOrder = layoutOrder,
-			Size = size,
-			BorderSizePixel = 0,
-			Position = UDim2.new(0, 0, 0, topPadding),
-			CanvasSize = if var4 then UDim2.new() else UDim2.new(0, 0, 0, var5 * (entryHeight + entryPadding)),
-			AutomaticCanvasSize = if var4 then Enum.AutomaticSize.Y else nil,
-			ScrollBarThickness = 0,
-			ZIndex = zIndex,
-			Selectable = false,
-			[roactModule.Ref] = p1.scrollingRef
-		}, children)
-	end
+	return if #Friends == 0 or FriendsRetrievalStatus == RetrievalStatus.Fetching then RoactModule.createElement(if FriendsRetrievalStatus == RetrievalStatus.Done then NoFriendsPageModule elseif FriendsRetrievalStatus == RetrievalStatus.Failed then FriendsErrorPageModule else LoadingFriendsPageModule, {
+		BorderSizePixel = 0,
+		LayoutOrder = LayoutOrder,
+		Position = UDim2.new(0, 0, 0, TopPadding),
+		ZIndex = ZIndex
+	}) elseif Count == 0 then RoactModule.createElement("TextLabel", {
+		BackgroundTransparency = 1,
+		TextTransparency = 0.22,
+		LayoutOrder = LayoutOrder,
+		Font = FontResult,
+		Size = UDim2.new(1, 0, 0, EntryHeight),
+		Text = Translator:FormatByKey("Feature.SettingsHub.Label.InviteSearchNoResults"),
+		TextColor3 = GRAY3,
+		TextSize = TextSizeResult,
+		ZIndex = ZIndex,
+		Position = UDim2.new(0, 0, 0, TopPadding)
+	}) else RoactModule.createElement("ScrollingFrame", {
+		BackgroundTransparency = 1,
+		LayoutOrder = LayoutOrder,
+		Size = Size,
+		BorderSizePixel = 0,
+		Position = UDim2.new(0, 0, 0, TopPadding),
+		CanvasSize = if FFlagEnableNewInviteMenuModule then UDim2.new() else UDim2.new(0, 0, 0, Count * (EntryHeight + EntryPadding)),
+		AutomaticCanvasSize = if FFlagEnableNewInviteMenuModule then Enum.AutomaticSize.Y else nil,
+		ScrollBarThickness = 0,
+		ZIndex = ZIndex,
+		Selectable = false,
+		[RoactModule.Ref] = p1.scrollingRef
+	}, Prop)
 end
 
-local function handleBinding(p2)
-	-- upvalues: getFFlagEnableNewInviteMenuModule (ref), userInputService (ref), guiService (ref)
-	if getFFlagEnableNewInviteMenuModule() and not userInputService.GamepadEnabled then return end
-	local value = p2.scrollingRef:getValue()
+local function handleBinding(p2) --[[ Line: 211 ]]
+	-- upvalues: GetFFlagEnableNewInviteMenuModule (copy), UserInputService (copy), GuiService (copy)
+	if GetFFlagEnableNewInviteMenuModule() and not UserInputService.GamepadEnabled then return end
+	local Value = p2.scrollingRef:getValue()
 	
-	if value and value:FindFirstAncestorOfClass("ScreenGui").Enabled and guiService.SelectedCoreObject == nil then
-		guiService:AddSelectionParent("invitePrompt", value)
+	if Value and Value:FindFirstAncestorOfClass("ScreenGui").Enabled and GuiService.SelectedCoreObject == nil then
+		GuiService:AddSelectionParent("invitePrompt", Value)
 		
-		for i, v in ipairs(value:GetChildren()) do
-			if v:IsA("GuiObject") and v.LayoutOrder == 1 then
-				guiService.SelectedCoreObject = v
-				
-				return
+		for _, Gui in ipairs(Value:GetChildren()) do
+			if Gui:IsA("GuiObject") and Gui.LayoutOrder == 1 then
+				GuiService.SelectedCoreObject = Gui
+				break
 			end
 		end
 	end
 end
 
-conversationList.didUpdate = handleBinding
+ConversationList.didUpdate = handleBinding
 
-if getFFlagEnableNewInviteSendEndpointModule() then
-	function conversationList.didMount(p3)
-		-- upvalues: constantsModule (ref), gameInviteEvents (ref), getFFlagAbuseReportAnalyticsHasLaunchDataModule (ref), handleBinding (ref)
-		if p3.props.analytics and p3.props.trigger == constantsModule.Triggers.GameMenu then
-			p3.props.analytics:sendEvent(p3.props.trigger, gameInviteEvents.ModalOpened, if getFFlagAbuseReportAnalyticsHasLaunchDataModule() then {
-				isLaunchDataProvided = p3.props.launchData ~= nil and p3.props.launchData ~= ""
-			} else nil)
+if GetFFlagEnableNewInviteSendEndpointModule() then
+	function ConversationList.didMount(p3) --[[ Line: 237 ]]
+		-- upvalues: ConstantsModule (copy), GameInviteEvents (copy), GetFFlagAbuseReportAnalyticsHasLaunchDataModule (copy), handleBinding (copy)
+		if p3.props.analytics and p3.props.trigger == ConstantsModule.Triggers.GameMenu then
+			local IsNotLaunchDataMatch: boolean = p3.props.launchData ~= nil and p3.props.launchData ~= ""
+			p3.props.analytics:sendEvent(p3.props.trigger, GameInviteEvents.ModalOpened, if GetFFlagAbuseReportAnalyticsHasLaunchDataModule() then { isLaunchDataProvided = IsNotLaunchDataMatch } else nil)
 		end
 		handleBinding(p3)
 	end
 else
-	conversationList.didMount = handleBinding
+	ConversationList.didMount = handleBinding
 end
-local var8 = memoize(function(p3)
-	-- upvalues: t (ref)
-	local t_1 = {}
+local MemoizeResult = MemoizeFunction(function(List) --[[ Line: 256 ]]
+	-- upvalues: config (copy)
+	local List1 = {}
 	
-	local function friendPreference(p4, p5)
-		-- upvalues: t (copy)
-		local presence = t[p4.presence]
-		local presence_1 = t[p5.presence]
+	local function friendPreference(A, B): boolean --[[ Line: 258 ]]
+		-- upvalues: config (upval)
+		local Entry = config[A.presence]
+		local Entry1 = config[B.presence]
 		
-		return if presence == presence_1 then p4.name:lower() < p5.name:lower() else presence_1 < presence
+		return if Entry == Entry1 then A.name:lower() < B.name:lower() else Entry1 < Entry
 	end
 	
-	for i, v in pairs(p3) do
-		if v.isFriend then
-			t_1[#t_1 + 1] = v
+	for _, value in pairs(List) do
+		if value.isFriend then
+			List1[#List1 + 1] = value
 		end
 	end
-	table.sort(t_1, friendPreference)
+	table.sort(List1, friendPreference)
 	
-	return t_1
+	return List1
 end)
-local var9 = memoize(function(p4)
-	-- upvalues: sortFriendsByCorrectedPresenceAndRank (ref)
-	local t = {}
+local MemoizeResult1 = MemoizeFunction(function(List) --[[ Line: 280 ]]
+	-- upvalues: SortFriendsByCorrectedPresenceAndRank (copy)
+	local List1 = {}
 	
-	for i, v in pairs(p4) do
-		if v.isFriend then
-			t[#t + 1] = v
+	for _, value in pairs(List) do
+		if value.isFriend then
+			List1[#List1 + 1] = value
 		end
 	end
-	table.sort(t, sortFriendsByCorrectedPresenceAndRank)
+	table.sort(List1, SortFriendsByCorrectedPresenceAndRank)
 	
-	return t
+	return List1
 end)
-local var10 = memoize(function(p5)
-	local t = {}
+local MemoizeResult2 = MemoizeFunction(function(List) --[[ Line: 293 ]]
+	local List1 = {}
 	
-	local function friendPreference(p6, p7)
-		local friendFrequentRank = tonumber(p6.friendFrequentRank) or 0
-		local friendFrequentRank_1 = tonumber(p7.friendFrequentRank) or 0
+	local function friendPreference(A, B): boolean --[[ Line: 295 ]]
+		local Number: number = tonumber(A.friendFrequentRank) or 0
+		local Number1: number = tonumber(B.friendFrequentRank) or 0
 		
-		return if friendFrequentRank == friendFrequentRank_1 then p6.name:lower() < p7.name:lower() else friendFrequentRank < friendFrequentRank_1
+		return if Number == Number1 then A.name:lower() < B.name:lower() else Number < Number1
 	end
 	
-	for i, v in pairs(p5) do
-		if v.isFriend then
-			t[#t + 1] = v
+	for _, value in pairs(List) do
+		if value.isFriend then
+			List1[#List1 + 1] = value
 		end
 	end
-	table.sort(t, friendPreference)
+	table.sort(List1, friendPreference)
 	
-	return t
+	return List1
 end)
 
-local _ = function()
-	-- upvalues: newInviteMenuExperimentManagerModule (ref), var10 (ref), var9 (ref), var8 (ref)
-	local var11 = newInviteMenuExperimentManagerModule.default:getInviteListSortOrder() or 0
+local function _() --[[ Line: 317 ]]
+	-- upvalues: NewInviteMenuExperimentManagerModule (copy), MemoizeResult2 (copy), MemoizeResult1 (copy), MemoizeResult (copy)
+	local InviteListSortOrder = NewInviteMenuExperimentManagerModule.default:getInviteListSortOrder() or 0
 	
-	return if var11 == 1 then var10 elseif var11 == 2 then var9 else var8
+	return if InviteListSortOrder == 1 then MemoizeResult2 elseif InviteListSortOrder == 2 then MemoizeResult1 else MemoizeResult
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p6, _)
-	-- upvalues: var8 (ref), getFFlagInviteListRerank (ref), newInviteMenuExperimentManagerModule (ref), t_1 (ref), var10 (ref), var9 (ref), playersService (ref)
-	local var11 = var8
+return RoactRoduxModule.UNSTABLE_connect2(function(p3, _) --[[ Line: 329 ]]
+	-- upvalues: MemoizeResult (copy), GetFFlagInviteListRerankFunction (copy), NewInviteMenuExperimentManagerModule (copy), config1 (copy), MemoizeResult2 (copy), MemoizeResult1 (copy), Players (copy)
+	local Callback = MemoizeResult
 	
-	if getFFlagInviteListRerank() then
-		local var12 = newInviteMenuExperimentManagerModule.default:getInviteListSortOrder() or 0
-		var11 = if var12 == t_1.SORT_BY_FREQUENCY then var10 elseif var12 == t_1.SORT_BY_PRESENCE_AND_FREQUENCY then var9 else var8
+	if GetFFlagInviteListRerankFunction() then
+		local InviteListSortOrder = NewInviteMenuExperimentManagerModule.default:getInviteListSortOrder() or 0
+		Callback = if InviteListSortOrder == config1.SORT_BY_FREQUENCY then MemoizeResult2 elseif InviteListSortOrder == config1.SORT_BY_PRESENCE_AND_FREQUENCY then MemoizeResult1 else MemoizeResult
 	end
 	return {
-		friends = var11(p6.Users),
-		friendsRetrievalStatus = p6.Friends.retrievalStatus[tostring(playersService.LocalPlayer.UserId)],
-		invites = p6.Invites
+		friends = Callback(p3.Users),
+		friendsRetrievalStatus = p3.Friends.retrievalStatus[tostring(Players.LocalPlayer.UserId)],
+		invites = p3.Invites
 	}
-end, function(p6)
-	-- upvalues: httpRequestModule (ref), httpRbxApiService (ref), getFFlagEnableNewInviteSendEndpointModule (ref), inviteUserIdToPlaceIdCustomizedModule (ref), inviteUserIdToPlaceIdModule (ref)
+end, function(Callback) --[[ Line: 341 ]]
+	-- upvalues: HttpRequestModule (copy), HttpRbxApiService (copy), GetFFlagEnableNewInviteSendEndpointModule (copy), InviteUserIdToPlaceIdCustomizedModule (copy), InviteUserIdToPlaceIdModule (copy)
 	return {
-		inviteUser = function(p7, p8, p9, p10, p11)
-			-- upvalues: httpRequestModule (copy), httpRbxApiService (copy), getFFlagEnableNewInviteSendEndpointModule (copy), p6 (ref), inviteUserIdToPlaceIdCustomizedModule (copy), inviteUserIdToPlaceIdModule (copy)
-			local var11 = httpRequestModule(httpRbxApiService)
-			local var12 = tostring(game.PlaceId)
+		inviteUser = function(p3, p4, p5, p6, p7) --[[ Line: 343 ]]
+			-- upvalues: HttpRequestModule (upval), HttpRbxApiService (upval), GetFFlagEnableNewInviteSendEndpointModule (upval), Callback (copy), InviteUserIdToPlaceIdCustomizedModule (upval), InviteUserIdToPlaceIdModule (upval)
+			local HttpRequestModuleResult = HttpRequestModule(HttpRbxApiService)
+			local Text = tostring(game.PlaceId)
 			
-			return if getFFlagEnableNewInviteSendEndpointModule() then p6(inviteUserIdToPlaceIdCustomizedModule(var11, p7, var12, p8, p9, p10, p11)) else p6(inviteUserIdToPlaceIdModule(var11, p7, var12))
+			return if GetFFlagEnableNewInviteSendEndpointModule() then Callback(InviteUserIdToPlaceIdCustomizedModule(HttpRequestModuleResult, p3, Text, p4, p5, p6, p7)) else Callback(InviteUserIdToPlaceIdModule(HttpRequestModuleResult, p3, Text))
 		end
 	}
-end)(conversationList)
+end)(ConversationList)

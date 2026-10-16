@@ -1,8 +1,8 @@
-﻿local parent = script:FindFirstAncestor("SduiSharedContent").Parent
-local reactModule = require(parent.React)
-local plusEarlyAccessUpsellBanner = require(parent.GamePlayButton).PlusEarlyAccessUpsellBanner
+﻿local Parent = script:FindFirstAncestor("SduiSharedContent").Parent
+local ReactModule = require(Parent.React)
+local PlusEarlyAccessUpsellBanner = require(Parent.GamePlayButton).PlusEarlyAccessUpsellBanner
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), plusEarlyAccessUpsellBanner (ref)
-	return if p1.universeId == nil then nil else reactModule.createElement(plusEarlyAccessUpsellBanner, { universeId = p1.universeId, LayoutOrder = p1.layoutOrder })
+return ReactModule.memo(function(p1) --[[ Line: 14 | Named "SduiPlusEarlyAccessUpsell" ]]
+	-- upvalues: ReactModule (copy), PlusEarlyAccessUpsellBanner (copy)
+	return if p1.universeId == nil then nil else ReactModule.createElement(PlusEarlyAccessUpsellBanner, { universeId = p1.universeId, LayoutOrder = p1.layoutOrder })
 end)

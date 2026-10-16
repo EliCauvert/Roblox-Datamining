@@ -1,45 +1,45 @@
-﻿local parent = script:FindFirstAncestor("SduiSharedContent").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local _ = require(parent.SduiCompat)
+﻿local Parent = script:FindFirstAncestor("SduiSharedContent").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local _ = require(Parent.SduiCompat)
 
-local function normalizeAvatars(p1)
-	if typeof(p1) ~= "table" then
+local function normalizeAvatars(Avatars) --[[ Line: 26 ]]
+	if typeof(Avatars) ~= "table" then
 		return nil
 	end
-	local t = {}
+	local List = {}
 	
-	for i, v in p1 do
-		if typeof(v) == "table" then
-			local var1 = tonumber(v.userId)
+	for _, avatar in Avatars do
+		if typeof(avatar) == "table" then
+			local Number: number? = tonumber(avatar.userId)
 			
-			if var1 then
-				table.insert(t, { userId = var1, userPresence = v.userPresence })
+			if Number then
+				table.insert(List, { userId = Number, userPresence = avatar.userPresence })
 			end
 		else
-			local var2 = tonumber(v)
+			local Number1: number? = tonumber(avatar)
 			
-			if var2 then
-				table.insert(t, { userId = var2 })
+			if Number1 then
+				table.insert(List, { userId = Number1 })
 			end
 		end
 	end
-	return t
+	return List
 end
 
-return reactModule.memo(function(p2)
-	-- upvalues: normalizeAvatars (ref), reactModule (ref), foundationModule (ref)
-	local var3 = normalizeAvatars(p2.avatars)
+return ReactModule.memo(function(p1) --[[ Line: 52 | Named "SduiAvatarGroup" ]]
+	-- upvalues: normalizeAvatars (copy), ReactModule (copy), FoundationModule (copy)
+	local NormalizeAvatarsResult = normalizeAvatars(p1.avatars)
 	
-	return if var3 then reactModule.createElement(foundationModule.AvatarGroup, {
-		LayoutOrder = p2.layoutOrder,
-		Visible = p2.visible,
-		ZIndex = p2.zIndex,
-		avatars = var3,
-		backplateStyle = p2.backplateStyle,
-		max = p2.max,
-		size = p2.size,
-		testId = p2.testId,
-		type = p2.type
+	return if NormalizeAvatarsResult then ReactModule.createElement(FoundationModule.AvatarGroup, {
+		LayoutOrder = p1.layoutOrder,
+		Visible = p1.visible,
+		ZIndex = p1.zIndex,
+		avatars = NormalizeAvatarsResult,
+		backplateStyle = p1.backplateStyle,
+		max = p1.max,
+		size = p1.size,
+		testId = p1.testId,
+		type = p1.type
 	}) else nil
 end)

@@ -1,4 +1,4 @@
-﻿local fFlagRemoveClassicHeadsAndFaces = require(script:FindFirstAncestor("AvatarExperienceModel").Parent.AvatarExperienceFlags).FFlagRemoveClassicHeadsAndFaces
+﻿local FFlagRemoveClassicHeadsAndFaces = require(script:FindFirstAncestor("AvatarExperienceModel").Parent.AvatarExperienceFlags).FFlagRemoveClassicHeadsAndFaces
 
 return {
 	CreatedCharacters = "CreatedCharacters",
@@ -7,9 +7,9 @@ return {
 	AllHeads = "AllHeads",
 	Hair = "Hair",
 	Skin = "Skin",
-	ClassicHeads = if not fFlagRemoveClassicHeadsAndFaces then "ClassicHeads" else nil,
+	ClassicHeads = if FFlagRemoveClassicHeadsAndFaces then nil else "ClassicHeads",
 	DynamicHeads = "DynamicHeads",
-	ClassicFaces = if not fFlagRemoveClassicHeadsAndFaces then "ClassicFaces" else nil,
+	ClassicFaces = if FFlagRemoveClassicHeadsAndFaces then nil else "ClassicFaces",
 	FullBody = "FullBody",
 	Torsos = "Torsos",
 	LeftArms = "LeftArms",
@@ -44,7 +44,6 @@ return {
 	FallAnimations = "FallAnimations",
 	ClimbAnimations = "ClimbAnimations",
 	SwimAnimations = "SwimAnimations",
-	Photobooth = "Photobooth",
 	MakeupLooks = "MakeupLooks",
 	EyeMakeup = "EyeMakeup",
 	FaceMakeup = "FaceMakeup",

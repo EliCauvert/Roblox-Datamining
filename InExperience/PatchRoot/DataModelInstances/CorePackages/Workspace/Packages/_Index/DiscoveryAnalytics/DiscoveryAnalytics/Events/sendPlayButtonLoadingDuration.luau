@@ -1,33 +1,33 @@
-﻿local telemetryService = game:GetService("TelemetryService")
-local parent = script:FindFirstAncestor("DiscoveryAnalytics").Parent
-local tModule = require(parent.t)
-local discoveryEventErrorLogger = require(parent.DiscoveryUtils).DiscoveryEventErrorLogger
-local t = {
+﻿local TelemetryService = game:GetService("TelemetryService")
+local Parent = script:FindFirstAncestor("DiscoveryAnalytics").Parent
+local TModule = require(Parent.t)
+local DiscoveryEventErrorLogger = require(Parent.DiscoveryUtils).DiscoveryEventErrorLogger
+local config = {
 	eventName = "playButtonLoadingDuration",
 	description = "Fires when a mounted Play Button leaves the Loading state.",
 	backends = { "EventIngest", "Points" },
 	throttlingPercentage = game:DefineFastInt("LuaAppPlayButtonLoadingDurationTelemetryThrottleHundredthsPercent", 10000),
 	lastUpdated = { 26, 5, 12 }
 }
-local var1 = tModule.strictInterface({
-	universeId = tModule.string,
-	durationMs = tModule.number,
-	endReason = tModule.string,
-	endPlayButtonState = tModule.optional(tModule.string),
-	endPlayabilityStatus = tModule.optional(tModule.string),
-	pageName = tModule.optional(tModule.string)
+local StrictInterfaceResult = TModule.strictInterface({
+	universeId = TModule.string,
+	durationMs = TModule.number,
+	endReason = TModule.string,
+	endPlayButtonState = TModule.optional(TModule.string),
+	endPlayabilityStatus = TModule.optional(TModule.string),
+	pageName = TModule.optional(TModule.string)
 })
 
-return function(p1, p2)
-	-- upvalues: var1 (ref), discoveryEventErrorLogger (ref), telemetryService (ref), t (ref)
-	local var2, var3 = var1(p1)
+return function(CustomFields, EventContext) --[[ Line: 29 ]]
+	-- upvalues: StrictInterfaceResult (copy), DiscoveryEventErrorLogger (copy), TelemetryService (copy), config (copy)
+	local StrictInterfaceResultResult, StrictInterfaceResultResult2 = StrictInterfaceResult(CustomFields)
 	
-	if not var2 then
-		discoveryEventErrorLogger.reportError("PlayButtonLoadingDurationInvalidInterface", var3)
+	if not StrictInterfaceResultResult then
+		DiscoveryEventErrorLogger.reportError("PlayButtonLoadingDurationInvalidInterface", StrictInterfaceResultResult2)
 	end
-	telemetryService:LogEvent(t, {
-		eventContext = p2,
+	TelemetryService:LogEvent(config, {
+		eventContext = EventContext,
 		standardizedFields = { "addSessionInfo", "addSessionId", "addOSInfo" },
-		customFields = p1
+		customFields = CustomFields
 	})
 end

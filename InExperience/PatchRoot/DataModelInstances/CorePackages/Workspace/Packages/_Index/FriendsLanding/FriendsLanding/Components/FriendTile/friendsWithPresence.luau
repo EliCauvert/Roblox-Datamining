@@ -1,4 +1,4 @@
-﻿local presenceType = require(script:FindFirstAncestor("FriendsLanding").dependencies).RoduxPresence.Enums.PresenceType
+﻿local PresenceType = require(script:FindFirstAncestor("FriendsLanding").dependencies).RoduxPresence.Enums.PresenceType
 
 return {
 	OnlineFriend = {
@@ -12,7 +12,7 @@ return {
 		thumbnail = "rbxthumb://type=Avatar&id=37&w=150&h=150",
 		universeId = 345,
 		userId = 456,
-		userPresenceType = presenceType.Online,
+		userPresenceType = PresenceType.Online,
 		username = "username37"
 	},
 	DeletedFriend = {
@@ -26,7 +26,7 @@ return {
 		thumbnail = "rbxthumb://type=Avatar&id=37&w=150&h=150",
 		universeId = 345,
 		userId = 456,
-		userPresenceType = presenceType.Offline,
+		userPresenceType = PresenceType.Offline,
 		username = "username37",
 		isDeleted = true
 	},
@@ -41,7 +41,7 @@ return {
 		thumbnail = "rbxthumb://type=Avatar&id=37&w=150&h=150",
 		universeId = 345,
 		userId = 456,
-		userPresenceType = presenceType.Offline,
+		userPresenceType = PresenceType.Offline,
 		username = "username37"
 	},
 	InGameFriend = {
@@ -55,7 +55,7 @@ return {
 		thumbnail = "rbxthumb://type=Avatar&id=37&w=150&h=150",
 		universeId = 345,
 		userId = 456,
-		userPresenceType = presenceType.InGame,
+		userPresenceType = PresenceType.InGame,
 		username = "username37"
 	},
 	InStudioFriend = {
@@ -69,7 +69,7 @@ return {
 		thumbnail = "rbxthumb://type=Avatar&id=37&w=150&h=150",
 		universeId = 345,
 		userId = 456,
-		userPresenceType = presenceType.InStudio,
+		userPresenceType = PresenceType.InStudio,
 		username = "username37"
 	},
 	InGameWithoutLastLocationFriend = {
@@ -83,7 +83,7 @@ return {
 		thumbnail = "rbxthumb://type=Avatar&id=37&w=150&h=150",
 		universeId = 345,
 		userId = 456,
-		userPresenceType = presenceType.InGame,
+		userPresenceType = PresenceType.InGame,
 		username = "username37"
 	},
 	InStudioWithoutLastLocationFriend = {
@@ -97,7 +97,7 @@ return {
 		thumbnail = "rbxthumb://type=Avatar&id=37&w=150&h=150",
 		universeId = 345,
 		userId = 456,
-		userPresenceType = presenceType.InStudio,
+		userPresenceType = PresenceType.InStudio,
 		username = "username37"
 	}
 }

@@ -1,41 +1,41 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local roactModule = require(corePackagesService.Packages.Roact)
-local tModule = require(corePackagesService.Packages.t)
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local foundationModule = require(corePackagesService.Packages.Foundation)
-local checkbox = foundationModule.Checkbox
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local withFoundationOrUIBloxStyle = require(corePackagesService.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
-local fFlagCoreUiMigrateUIBloxToFoundation = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
-local images = UIBloxModule.App.ImageSet.Images
-local checkboxRow = roactModule.PureComponent:extend("CheckboxRow")
-checkboxRow.defaultProps = {
+﻿local CorePackages = game:GetService("CorePackages")
+local RoactModule = require(CorePackages.Packages.Roact)
+local TModule = require(CorePackages.Packages.t)
+local UIBloxModule = require(CorePackages.Packages.UIBlox)
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local Checkbox = FoundationModule.Checkbox
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local WithFoundationOrUIBloxStyleFunction = require(CorePackages.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
+local FFlagCoreUiMigrateUIBloxToFoundation = require(CorePackages.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
+local Images = UIBloxModule.App.ImageSet.Images
+local CheckboxRow = RoactModule.PureComponent:extend("CheckboxRow")
+CheckboxRow.defaultProps = {
 	height = 28,
 	image = "icons/controls/microphone",
 	descriptionText = "Description Text",
 	checkboxSelected = false,
 	actionDisabled = false,
 	LayoutOrder = 1,
-	onCheckboxActivated = function() end
+	onCheckboxActivated = function() --[[ Line: 29 ]] end
 }
-checkboxRow.validateProps = tModule.interface({
-	height = tModule.number,
-	image = tModule.string,
-	descriptionText = tModule.string,
-	checkboxSelected = tModule.boolean,
-	actionDisabled = tModule.boolean,
-	onCheckboxActivated = tModule.callback,
-	LayoutOrder = tModule.optional(tModule.number)
+CheckboxRow.validateProps = TModule.interface({
+	height = TModule.number,
+	image = TModule.string,
+	descriptionText = TModule.string,
+	checkboxSelected = TModule.boolean,
+	actionDisabled = TModule.boolean,
+	onCheckboxActivated = TModule.callback,
+	LayoutOrder = TModule.optional(TModule.number)
 })
 
-function checkboxRow.render(p1)
-	-- upvalues: withFoundationOrUIBloxStyle (ref), foundationFontFaceMigration (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), roactModule (ref), foundationModule (ref), imageSetLabel (ref), images (ref), normalizeFontFace (ref), checkbox (ref)
-	return withFoundationOrUIBloxStyle(function(p2)
-		-- upvalues: foundationFontFaceMigration (copy)
+function CheckboxRow.render(p1) --[[ Line: 43 ]]
+	-- upvalues: WithFoundationOrUIBloxStyleFunction (copy), FoundationFontFaceMigration (copy), FFlagCoreUiMigrateUIBloxToFoundation (copy), RoactModule (copy), FoundationModule (copy), ImageSetLabel (copy), Images (copy), NormalizeFontFaceFunction (copy), Checkbox (copy)
+	return WithFoundationOrUIBloxStyleFunction(function(p2) --[[ Line: 44 ]]
+		-- upvalues: FoundationFontFaceMigration (upval)
 		return {
-			Tokens = if foundationFontFaceMigration then p2 else nil,
+			Tokens = if FoundationFontFaceMigration then p2 else nil,
 			Theme = {
 				IconDefault = {
 					Color = p2.Color.Content.Default.Color3,
@@ -62,61 +62,60 @@ function checkboxRow.render(p1)
 				}
 			}
 		}
-	end, function(p2)
-		-- upvalues: p1 (ref), fFlagCoreUiMigrateUIBloxToFoundation (copy), roactModule (copy), foundationModule (copy), imageSetLabel (copy), images (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy), checkbox (copy)
-		local textMuted, iconDefault
-		local baseSize = p2.Font.BaseSize
-		local _ = nil
-		local _ = nil
+	end, function(p2) --[[ Line: 73 ]]
+		-- upvalues: p1 (copy), FFlagCoreUiMigrateUIBloxToFoundation (upval), RoactModule (upval), FoundationModule (upval), ImageSetLabel (upval), Images (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), Checkbox (upval)
+		local BaseSize = p2.Font.BaseSize
+		local TextMuted = nil
+		local IconDefault = nil
 		
 		if p1.props.actionDisabled then
-			textMuted = p2.Theme.TextMuted
-			iconDefault = p2.Theme.IconDefault
+			TextMuted = p2.Theme.TextMuted
+			IconDefault = p2.Theme.IconDefault
 		else
-			textMuted = p2.Theme.TextEmphasis
-			iconDefault = p2.Theme.IconEmphasis
+			TextMuted = p2.Theme.TextEmphasis
+			IconDefault = p2.Theme.IconEmphasis
 		end
-		return roactModule.createElement("Frame", {
+		return RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 0, p1.props.height),
 			LayoutOrder = p1.props.LayoutOrder
 		}, {
-			layout = roactModule.createElement("UIListLayout", {
+			layout = RoactModule.createElement("UIListLayout", {
 				VerticalAlignment = Enum.VerticalAlignment.Center,
 				HorizontalAlignment = Enum.HorizontalAlignment.Center,
 				Padding = UDim.new(0, 12),
 				FillDirection = Enum.FillDirection.Horizontal,
 				SortOrder = Enum.SortOrder.LayoutOrder
 			}),
-			image = if fFlagCoreUiMigrateUIBloxToFoundation then roactModule.createElement(foundationModule.Icon, {
+			image = if FFlagCoreUiMigrateUIBloxToFoundation then RoactModule.createElement(FoundationModule.Icon, {
 				LayoutOrder = 1,
 				name = p1.props.image,
-				size = foundationModule.Enums.IconSize.Medium,
+				size = FoundationModule.Enums.IconSize.Medium,
 				style = {
-					Color3 = iconDefault.Color,
-					Transparency = iconDefault.Transparency
+					Color3 = IconDefault.Color,
+					Transparency = IconDefault.Transparency
 				}
-			}) else roactModule.createElement(imageSetLabel, {
+			}) else RoactModule.createElement(ImageSetLabel, {
 				BackgroundTransparency = 1,
 				LayoutOrder = 1,
 				Size = UDim2.fromOffset(p1.props.height, p1.props.height),
-				Image = images[p1.props.image],
-				ImageColor3 = iconDefault.Color,
-				ImageTransparency = iconDefault.Transparency
+				Image = Images[p1.props.image],
+				ImageColor3 = IconDefault.Color,
+				ImageTransparency = IconDefault.Transparency
 			}),
-			text = roactModule.createElement("TextLabel", {
+			text = RoactModule.createElement("TextLabel", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 2,
 				Size = UDim2.new(1, -(p1.props.height + 12) * 4, 1, 0),
 				Text = p1.props.descriptionText,
-				TextColor3 = textMuted.Color,
-				TextTransparency = textMuted.Transparency,
-				TextSize = p2.Font.Header2.RelativeSize * baseSize,
-				Font = if foundationFontFaceMigration then nil else p2.Font.Header2.Font,
-				FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.TitleLarge.Font) else nil,
+				TextColor3 = TextMuted.Color,
+				TextTransparency = TextMuted.Transparency,
+				TextSize = p2.Font.Header2.RelativeSize * BaseSize,
+				Font = if FoundationFontFaceMigration then nil else p2.Font.Header2.Font,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Tokens.Typography.TitleLarge.Font) else nil,
 				TextXAlignment = Enum.TextXAlignment.Left
 			}),
-			checkbox = roactModule.createElement(checkbox, {
+			checkbox = RoactModule.createElement(Checkbox, {
 				label = "",
 				LayoutOrder = 3,
 				isDisabled = p1.props.actionDisabled,
@@ -127,4 +126,4 @@ function checkboxRow.render(p1)
 	end)
 end
 
-return checkboxRow
+return CheckboxRow

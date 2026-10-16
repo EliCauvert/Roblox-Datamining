@@ -1,31 +1,31 @@
-﻿local parent = script:FindFirstAncestor("GameCollections").Parent
-local reactModule = require(parent.React)
-local useTriggerFeedback = require(parent.InteractionFeedback).useTriggerFeedback
+﻿local Parent = script:FindFirstAncestor("GameCollections").Parent
+local ReactModule = require(Parent.React)
+local UseTriggerFeedbackFunction = require(Parent.InteractionFeedback).useTriggerFeedback
 
-return function()
-	-- upvalues: useTriggerFeedback (ref), reactModule (ref)
-	local var1 = useTriggerFeedback()
-	local var2 = reactModule.useRef(nil)
+return function() --[[ Line: 8 | Named "useTriggerGameTileFeedbackCallbacks" ]]
+	-- upvalues: UseTriggerFeedbackFunction (copy), ReactModule (copy)
+	local UseTriggerFeedbackResult = UseTriggerFeedbackFunction()
+	local UseRefResult = ReactModule.useRef(nil)
 	
-	return reactModule.useCallback(function(p1)
-		-- upvalues: var2 (ref), var1 (ref)
-		local guiState = p1.GuiState
+	return ReactModule.useCallback(function(p1) --[[ Line: 11 ]]
+		-- upvalues: UseRefResult (copy), UseTriggerFeedbackResult (copy)
+		local GuiState = p1.GuiState
 		
-		if var2.current == Enum.GuiState.Press then
-			var1("Default", "Release")
+		if UseRefResult.current == Enum.GuiState.Press then
+			UseTriggerFeedbackResult("Default", "Release")
 		end
-		if guiState == Enum.GuiState.Hover then
-			var1("Default", "Hover")
+		if GuiState == Enum.GuiState.Hover then
+			UseTriggerFeedbackResult("Default", "Hover")
 		end
-		if guiState == Enum.GuiState.Press then
-			var1("Default", "Press")
+		if GuiState == Enum.GuiState.Press then
+			UseTriggerFeedbackResult("Default", "Press")
 		end
-		var2.current = guiState
-	end, { var1, var2 }), reactModule.useCallback(function()
-		-- upvalues: var2 (ref), var1 (ref)
-		if var2.current == Enum.GuiState.Press then
-			var1("Default", "Release")
+		UseRefResult.current = GuiState
+	end, { UseTriggerFeedbackResult, UseRefResult }), (ReactModule.useCallback(function() --[[ Line: 25 ]]
+		-- upvalues: UseRefResult (copy), UseTriggerFeedbackResult (copy)
+		if UseRefResult.current == Enum.GuiState.Press then
+			UseTriggerFeedbackResult("Default", "Release")
 		end
-		var2.current = Enum.GuiState.Idle
-	end, { var1, var2 })
+		UseRefResult.current = Enum.GuiState.Idle
+	end, { UseTriggerFeedbackResult, UseRefResult }))
 end

@@ -1,64 +1,64 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local microProfilerService = game:GetService("MicroProfilerService")
-local telemetryService = game:GetService("TelemetryService")
-local boxButtonModule = require(script.Parent.Parent.BoxButton)
-local constantsModule = require(script.Parent.Parent.Parent.Constants)
-local microProfilerPanelModule = require(script.Parent.MicroProfilerPanel)
-local numberInputModule = require(script.Parent.Parent.NumberInput)
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local gameSettings = UserSettings().GameSettings
-local actions = script.Parent.Parent.Parent.Actions
-local appendRecentDumpPathModule = require(actions.AppendRecentDumpPath)
-local setRCCProfilerStateModule = require(actions.SetRCCProfilerState)
-local getClientReplicatorModule = require(script.Parent.Parent.Parent.Util.getClientReplicator)
-local recordAndDumpView = roactModule.Component:extend("RecordAndDumpView")
-local t = {
+﻿local CorePackages = game:GetService("CorePackages")
+local MicroProfilerService = game:GetService("MicroProfilerService")
+local TelemetryService = game:GetService("TelemetryService")
+local BoxButtonModule = require(script.Parent.Parent.BoxButton)
+local ConstantsModule = require(script.Parent.Parent.Parent.Constants)
+local MicroProfilerPanelModule = require(script.Parent.MicroProfilerPanel)
+local NumberInputModule = require(script.Parent.Parent.NumberInput)
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local GameSettings = UserSettings().GameSettings
+local Actions = script.Parent.Parent.Parent.Actions
+local AppendRecentDumpPathModule = require(Actions.AppendRecentDumpPath)
+local SetRCCProfilerStateModule = require(Actions.SetRCCProfilerState)
+local GetClientReplicatorModule = require(script.Parent.Parent.Parent.Util.getClientReplicator)
+local RecordAndDumpView = RoactModule.Component:extend("RecordAndDumpView")
+local config = {
 	eventName = "DevConsoleMpRecordAndDumpCounter",
 	description = "\t\tCounter to track the action of using the Developer Console to record and save MicroProfiler\n\t\tdumps for either the client or server.\n\t",
 	backends = { "RobloxTelemetryCounter" },
 	lastUpdated = { 2025, 11, 24 }
 }
 
-function recordAndDumpView.logRecordAndDumpAction(p1, p2)
-	-- upvalues: telemetryService (ref), t (ref)
-	telemetryService:LogCounter(t, {
+function RecordAndDumpView.logRecordAndDumpAction(p1, Context) --[[ Line: 41 ]]
+	-- upvalues: TelemetryService (copy), config (copy)
+	TelemetryService:LogCounter(config, {
 		customFields = {
-			context = p2,
-			secondsToDelay = p1.state[`{p2}SecondsToDelay`],
-			framesToRecord = p1.state[`{p2}FramesToRecord`]
+			context = Context,
+			secondsToDelay = p1.state[`{Context}SecondsToDelay`],
+			framesToRecord = p1.state[`{Context}FramesToRecord`]
 		}
 	}, 1)
 end
 
-function recordAndDumpView.numericInputRow(_, p1)
-	-- upvalues: roactModule (ref), constantsModule (ref), numberInputModule (ref)
+function RecordAndDumpView:numericInputRow(p1) --[[ Line: 51 ]]
+	-- upvalues: RoactModule (copy), ConstantsModule (copy), NumberInputModule (copy)
 	return {
-		UIListLayout = roactModule.createElement("UIListLayout", {
+		UIListLayout = RoactModule.createElement("UIListLayout", {
 			Padding = UDim.new(0, 8),
 			FillDirection = Enum.FillDirection.Horizontal,
 			SortOrder = Enum.SortOrder.LayoutOrder
 		}),
-		UIPadding = roactModule.createElement("UIPadding", {
+		UIPadding = RoactModule.createElement("UIPadding", {
 			PaddingBottom = UDim.new(0, 4),
-			PaddingLeft = UDim.new(0, constantsModule.MicroProfilerFormatting.OptionTextPadding),
+			PaddingLeft = UDim.new(0, ConstantsModule.MicroProfilerFormatting.OptionTextPadding),
 			PaddingRight = UDim.new(0, 4),
 			PaddingTop = UDim.new(0, 4)
 		}),
-		OptionLabel = roactModule.createElement("TextLabel", {
+		OptionLabel = RoactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 1,
-			Font = constantsModule.Font.MainWindow,
+			Font = ConstantsModule.Font.MainWindow,
 			Text = p1.Text,
 			TextColor3 = Color3.fromRGB(255, 255, 255),
-			TextSize = constantsModule.MicroProfilerFormatting.OptionTextSize,
+			TextSize = ConstantsModule.MicroProfilerFormatting.OptionTextSize,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			Position = UDim2.fromOffset(8, 0),
 			Size = UDim2.fromScale(0, 1)
 		}, {
-			UIFlexItem = roactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.Fill })
+			UIFlexItem = RoactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.Fill })
 		}),
-		NumberInput = roactModule.createElement(numberInputModule, {
+		NumberInput = RoactModule.createElement(NumberInputModule, {
 			LayoutOrder = 3,
 			Size = UDim2.new(0, 72, 1, 0),
 			OnNumberInputChanged = p1.OnNumberInputChanged,
@@ -66,13 +66,13 @@ function recordAndDumpView.numericInputRow(_, p1)
 			DefaultValue = p1.DefaultValue,
 			IntegerOnly = p1.IntegerOnly
 		}),
-		NumberLimitsHint = roactModule.createElement("TextLabel", {
+		NumberLimitsHint = RoactModule.createElement("TextLabel", {
 			TextSize = 12,
 			TextTransparency = 0.5,
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			LayoutOrder = 2,
-			Font = constantsModule.Font.Log,
+			Font = ConstantsModule.Font.Log,
 			Text = `({p1.Range.Min}-{p1.Range.Max})`,
 			TextColor3 = Color3.fromRGB(255, 255, 255),
 			BackgroundColor3 = Color3.fromRGB(255, 255, 255),
@@ -83,84 +83,86 @@ function recordAndDumpView.numericInputRow(_, p1)
 	}
 end
 
-function recordAndDumpView.recordAndDumpRows(p1, p2)
-	-- upvalues: gameSettings (ref), roactModule (ref), boxButtonModule (ref)
-	local isClient = p2.Context == "Client"
+function RecordAndDumpView.recordAndDumpRows(p1, p2) --[[ Line: 104 ]]
+	-- upvalues: GameSettings (copy), RoactModule (copy), BoxButtonModule (copy)
+	local IsClient = p2.Context == "Client"
 	
 	return {
 		p1:numericInputRow({
 			Text = "Number of frames to record",
 			IntegerOnly = true,
 			Context = p2.Context,
-			DefaultValue = if isClient then p1.state.ClientFramesToRecord else p1.state.ServerFramesToRecord,
+			DefaultValue = if IsClient then p1.state.ClientFramesToRecord else p1.state.ServerFramesToRecord,
 			Range = NumberRange.new(1, 60),
-			OnNumberInputChanged = function(p3)
-				-- upvalues: isClient (ref), p1 (ref), gameSettings (copy)
-				if isClient then
-					p1:setState({ ClientFramesToRecord = p3 })
+			OnNumberInputChanged = function(ClientFramesToRecord) --[[ Line: 114 ]]
+				-- upvalues: IsClient (copy), p1 (copy), GameSettings (upval)
+				if IsClient then
+					p1:setState({ ClientFramesToRecord = ClientFramesToRecord })
 					
 					return
+				else
+					GameSettings.RCCProfilerRecordFrameRate = ClientFramesToRecord
+					p1:setState({ ServerFramesToRecord = ClientFramesToRecord })
 				end
-				gameSettings.RCCProfilerRecordFrameRate = p3
-				p1:setState({ ServerFramesToRecord = p3 })
 			end
 		}),
 		p1:numericInputRow({
 			Text = "Seconds to delay",
 			IntegerOnly = true,
 			Context = p2.Context,
-			DefaultValue = if isClient then p1.state.ClientSecondsToDelay else p1.state.ServerSecondsToDelay,
+			DefaultValue = if IsClient then p1.state.ClientSecondsToDelay else p1.state.ServerSecondsToDelay,
 			Range = NumberRange.new(1, 4),
-			OnNumberInputChanged = function(p3)
-				-- upvalues: isClient (ref), p1 (ref), gameSettings (copy)
-				if isClient then
-					p1:setState({ ClientSecondsToDelay = p3 })
+			OnNumberInputChanged = function(ClientSecondsToDelay) --[[ Line: 133 ]]
+				-- upvalues: IsClient (copy), p1 (copy), GameSettings (upval)
+				if IsClient then
+					p1:setState({ ClientSecondsToDelay = ClientSecondsToDelay })
 					
 					return
+				else
+					GameSettings.RCCProfilerRecordTimeFrame = ClientSecondsToDelay
+					p1:setState({ ServerSecondsToDelay = ClientSecondsToDelay })
 				end
-				gameSettings.RCCProfilerRecordTimeFrame = p3
-				p1:setState({ ServerSecondsToDelay = p3 })
 			end
 		}),
 		{
-			UIPadding = roactModule.createElement("UIPadding", {
+			UIPadding = RoactModule.createElement("UIPadding", {
 				PaddingBottom = UDim.new(0, 2),
 				PaddingLeft = UDim.new(0, 2),
 				PaddingRight = UDim.new(0, 2),
 				PaddingTop = UDim.new(0, 2)
 			}),
-			Button = roactModule.createElement(boxButtonModule, {
-				text = if isClient then if p1.state.IsClientRecording then p2.RecordButtonText.Recording else p2.RecordButtonText.Idle elseif p1.props.IsServerRecording then p2.RecordButtonText.Recording else p2.RecordButtonText.Idle,
+			Button = RoactModule.createElement(BoxButtonModule, {
+				text = if IsClient then if p1.state.IsClientRecording then p2.RecordButtonText.Recording else p2.RecordButtonText.Idle elseif p1.props.IsServerRecording then p2.RecordButtonText.Recording else p2.RecordButtonText.Idle,
 				size = UDim2.fromScale(1, 1),
 				pos = UDim2.new(0, 0, 0, 0),
 				onClicked = p2.OnRecordButtonClicked,
-				enabled = if isClient then not p1.state.IsClientRecording else not p1.props.IsServerRecording
+				enabled = if IsClient then not p1.state.IsClientRecording else not p1.props.IsServerRecording
 			})
 		}
 	}
 end
 
-function recordAndDumpView.init(p1)
-	-- upvalues: gameSettings (ref)
+function RecordAndDumpView.init(p1) --[[ Line: 170 ]]
+	-- upvalues: GameSettings (copy)
 	p1.state = {
 		IsClientRecording = false,
 		ClientFramesToRecord = 32,
 		ClientSecondsToDelay = 1,
-		ServerFramesToRecord = gameSettings.RCCProfilerRecordFrameRate,
-		ServerSecondsToDelay = gameSettings.RCCProfilerRecordTimeFrame
+		ServerFramesToRecord = GameSettings.RCCProfilerRecordFrameRate,
+		ServerSecondsToDelay = GameSettings.RCCProfilerRecordTimeFrame
 	}
 	p1.RecordingTasks = { Client = nil }
 end
 
-function recordAndDumpView.willUnmount(p1)
+function RecordAndDumpView.willUnmount(p1) --[[ Line: 187 ]]
 	if p1.RecordingTasks.Client and coroutine.status(p1.RecordingTasks.Client) ~= "dead" then
 		task.cancel(p1.RecordingTasks.Client)
 	end
 end
 
-function recordAndDumpView.render(p1)
-	-- upvalues: roactModule (ref), microProfilerPanelModule (ref), microProfilerService (ref), getClientReplicatorModule (ref)
-	return roactModule.createElement(microProfilerPanelModule, {
+function RecordAndDumpView.render(p1) --[[ Line: 193 ]]
+	-- upvalues: RoactModule (copy), MicroProfilerPanelModule (copy), MicroProfilerService (copy), GetClientReplicatorModule (copy)
+	return RoactModule.createElement(MicroProfilerPanelModule, {
 		Title = "Record and dump",
 		LayoutOrder = p1.props.LayoutOrder,
 		Sections = {
@@ -172,21 +174,22 @@ function recordAndDumpView.render(p1)
 						Idle = "Begin client recording",
 						Recording = "Recording client..."
 					},
-					OnRecordButtonClicked = function()
-						-- upvalues: p1 (ref), microProfilerService (copy)
-						if p1.state.IsClientRecording then
+					OnRecordButtonClicked = function() --[[ Line: 203 ]]
+						-- upvalues: p1 (copy), MicroProfilerService (upval)
+						if not p1.state.IsClientRecording then
+							p1:logRecordAndDumpAction("Client")
+							p1:setState({ IsClientRecording = true })
+							p1.RecordingTasks.Client = task.spawn(function() --[[ Line: 211 ]]
+								-- upvalues: MicroProfilerService (upval), p1 (upval)
+								p1.props.dispatchAppendRecentDumpPath((MicroProfilerService:DumpToFileAsync(p1.state.ClientSecondsToDelay, p1.state.ClientFramesToRecord)))
+								p1:setState(function(_) --[[ Line: 219 ]]
+									return { IsClientRecording = false }
+								end)
+								p1.RecordingTasks.Client = nil
+							end)
+							
 							return
 						end
-						p1:logRecordAndDumpAction("Client")
-						p1:setState({ IsClientRecording = true })
-						p1.RecordingTasks.Client = task.spawn(function()
-							-- upvalues: microProfilerService (copy), p1 (copy)
-							p1.props.dispatchAppendRecentDumpPath(microProfilerService:DumpToFileAsync(p1.state.ClientSecondsToDelay, p1.state.ClientFramesToRecord))
-							p1:setState(function(_)
-								return { IsClientRecording = false }
-							end)
-							p1.RecordingTasks.Client = nil
-						end)
 					end
 				})
 			},
@@ -198,14 +201,14 @@ function recordAndDumpView.render(p1)
 						Idle = "Begin server recording",
 						Recording = "Recording server..."
 					},
-					OnRecordButtonClicked = function()
-						-- upvalues: p1 (ref), getClientReplicatorModule (copy)
+					OnRecordButtonClicked = function() --[[ Line: 235 ]]
+						-- upvalues: p1 (copy), GetClientReplicatorModule (upval)
 						if p1.props.IsServerRecording then return end
-						local var1 = getClientReplicatorModule()
+						local ClientReplicatorModule = GetClientReplicatorModule()
 						
-						if var1 then
+						if ClientReplicatorModule then
 							p1:logRecordAndDumpAction("Server")
-							var1:RequestRCCProfilerData(p1.state.ServerFramesToRecord, p1.state.ServerSecondsToDelay)
+							ClientReplicatorModule:RequestRCCProfilerData(p1.state.ServerFramesToRecord, p1.state.ServerSecondsToDelay)
 							p1.props.dispatchSetRCCProfilerState(true)
 							
 							return
@@ -217,20 +220,20 @@ function recordAndDumpView.render(p1)
 	})
 end
 
-return roactRoduxModule.connect(function(p1, _)
+return RoactRoduxModule.connect(function(p1, _) --[[ Line: 260 | Named "mapStateToProps" ]]
 	return {
 		IsServerRecording = p1.MicroProfiler.waitingForRecording
 	}
-end, function(p1)
-	-- upvalues: appendRecentDumpPathModule (ref), setRCCProfilerStateModule (ref)
+end, function(Callback) --[[ Line: 266 | Named "mapDispatchToProps" ]]
+	-- upvalues: AppendRecentDumpPathModule (copy), SetRCCProfilerStateModule (copy)
 	return {
-		dispatchAppendRecentDumpPath = function(p2)
-			-- upvalues: p1 (ref), appendRecentDumpPathModule (copy)
-			p1(appendRecentDumpPathModule(p2))
+		dispatchAppendRecentDumpPath = function(p1) --[[ Line: 268 ]]
+			-- upvalues: Callback (copy), AppendRecentDumpPathModule (upval)
+			Callback(AppendRecentDumpPathModule(p1))
 		end,
-		dispatchSetRCCProfilerState = function(value, p2)
-			-- upvalues: p1 (ref), setRCCProfilerStateModule (copy)
-			p1(setRCCProfilerStateModule(value, p2))
+		dispatchSetRCCProfilerState = function(p1, p2) --[[ Line: 271 ]]
+			-- upvalues: Callback (copy), SetRCCProfilerStateModule (upval)
+			Callback(SetRCCProfilerStateModule(p1, p2))
 		end
 	}
-end)(recordAndDumpView)
+end)(RecordAndDumpView)

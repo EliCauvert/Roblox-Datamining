@@ -1,10 +1,10 @@
-﻿local squadsCore = script:FindFirstAncestor("SquadsCore")
-local cryoModule = require(squadsCore.Parent.Cryo)
-local encodeUserIdsModule = require(squadsCore.Common.encodeUserIds)
+﻿local SquadsCore = script:FindFirstAncestor("SquadsCore")
+local CryoModule = require(SquadsCore.Parent.Cryo)
+local EncodeUserIdsModule = require(SquadsCore.Common.encodeUserIds)
 
-return function(p1)
-	-- upvalues: cryoModule (ref), encodeUserIdsModule (ref)
-	return encodeUserIdsModule(cryoModule.List.map(p1 or {}, function(p2)
+return function(p1) --[[ Line: 8 | Named "encodeSquadMembers" ]]
+	-- upvalues: CryoModule (copy), EncodeUserIdsModule (copy)
+	return EncodeUserIdsModule((CryoModule.List.map(p1 or {}, function(p2) --[[ Line: 9 ]]
 		return p2.userId
-	end))
+	end)))
 end

@@ -1,51 +1,53 @@
-﻿local settingsSdui = script:FindFirstAncestor("SettingsSdui")
-local parent = settingsSdui.Parent
-local appPage = require(parent.RobloxAppEnums).AppPage
-local compositionTags = require(parent.AppComposition).CompositionTags
-local reactModule = require(parent.React)
-local sduiSharedUtilitiesModule = require(parent.SduiSharedUtilities)
-local sduiPageWrapperEntryPoint = sduiSharedUtilitiesModule.SduiPageWrapperEntryPoint
-local sduiSurfaceLoadTimeTracker = sduiSharedUtilitiesModule.SduiSurfaceLoadTimeTracker
-local usePageScopeRef = sduiSharedUtilitiesModule.usePageScopeRef
-local settingsSduiConstantsModule = require(settingsSdui.SettingsSduiConstants)
-local fetchSettingsPageModule = require(settingsSdui.fetchSettingsPage)
-local settings = appPage.Settings
-local configKey = settingsSduiConstantsModule.ConfigKey
-local surfaceLoadTimeEventName = settingsSduiConstantsModule.SurfaceLoadTimeEventName
-local t = { layout = compositionTags.Layout.Detail }
+﻿local SettingsSdui = script:FindFirstAncestor("SettingsSdui")
+local Parent = SettingsSdui.Parent
+local ReactModule = require(Parent.React)
+local SduiSharedUtilitiesModule = require(Parent.SduiSharedUtilities)
+local FFlagSduiSettingsFocusRef = require(Parent.SharedFlags).FFlagSduiSettingsFocusRef
+local SduiPageWrapperEntryPoint = SduiSharedUtilitiesModule.SduiPageWrapperEntryPoint
+local SduiSurfaceLoadTimeTracker = SduiSharedUtilitiesModule.SduiSurfaceLoadTimeTracker
+local UsePageScopeRefFunction = SduiSharedUtilitiesModule.usePageScopeRef
+local SettingsSduiConstantsModule = require(SettingsSdui.SettingsSduiConstants)
+local FetchSettingsPageModule = require(SettingsSdui.fetchSettingsPage)
+local Settings = require(Parent.RobloxAppEnums).AppPage.Settings
+local ConfigKey = SettingsSduiConstantsModule.ConfigKey
+local SurfaceLoadTimeEventName = SettingsSduiConstantsModule.SurfaceLoadTimeEventName
+local Composition = {
+	layout = require(Parent.AppComposition).CompositionTags.Layout.Detail
+}
 
-return reactModule.memo(function(value)
-	-- upvalues: usePageScopeRef (ref), configKey (ref), reactModule (ref), sduiSurfaceLoadTimeTracker (ref), surfaceLoadTimeEventName (ref), fetchSettingsPageModule (ref), sduiPageWrapperEntryPoint (ref), settings (ref), t (ref)
-	usePageScopeRef(configKey)
-	local var1 = reactModule.useMemo(function()
-		-- upvalues: sduiSurfaceLoadTimeTracker (copy), configKey (copy), surfaceLoadTimeEventName (copy)
-		local var2 = sduiSurfaceLoadTimeTracker.createLoadTimerWithSurfaceLoadTime(configKey, {
-			eventName = surfaceLoadTimeEventName,
+return ReactModule.memo(function(p1) --[[ Line: 28 | Named "SduiSettingsPage" ]]
+	-- upvalues: UsePageScopeRefFunction (copy), ConfigKey (copy), ReactModule (copy), SduiSurfaceLoadTimeTracker (copy), SurfaceLoadTimeEventName (copy), FetchSettingsPageModule (copy), SduiPageWrapperEntryPoint (copy), Settings (copy), Composition (copy), FFlagSduiSettingsFocusRef (copy)
+	UsePageScopeRefFunction(ConfigKey)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 30 ]]
+		-- upvalues: SduiSurfaceLoadTimeTracker (upval), ConfigKey (upval), SurfaceLoadTimeEventName (upval)
+		local LoadTimerWithSurfaceLoadTime = SduiSurfaceLoadTimeTracker.createLoadTimerWithSurfaceLoadTime(ConfigKey, {
+			eventName = SurfaceLoadTimeEventName,
 			metadata = { page = "mount" }
 		})
-		var2.start("mount")
+		LoadTimerWithSurfaceLoadTime.start("mount")
 		
-		return var2
+		return LoadTimerWithSurfaceLoadTime
 	end, {})
-	reactModule.useEffect(function()
-		-- upvalues: fetchSettingsPageModule (copy), var1 (ref)
-		fetchSettingsPageModule(var1)
-	end, { var1 })
+	ReactModule.useEffect(function() --[[ Line: 41 ]]
+		-- upvalues: FetchSettingsPageModule (upval), UseMemoResult (copy)
+		FetchSettingsPageModule(UseMemoResult)
+	end, { UseMemoResult })
 	
-	return reactModule.createElement(sduiPageWrapperEntryPoint, {
-		appPage = settings,
-		configKey = configKey,
-		pageTimer = var1,
-		refresh = reactModule.useCallback(function()
-			-- upvalues: sduiSurfaceLoadTimeTracker (copy), configKey (copy), surfaceLoadTimeEventName (copy), fetchSettingsPageModule (copy)
-			local var2 = sduiSurfaceLoadTimeTracker.createLoadTimerWithSurfaceLoadTime(configKey, {
-				eventName = surfaceLoadTimeEventName,
+	return ReactModule.createElement(SduiPageWrapperEntryPoint, {
+		appPage = Settings,
+		configKey = ConfigKey,
+		pageTimer = UseMemoResult,
+		refresh = ReactModule.useCallback(function() --[[ Line: 45 ]]
+			-- upvalues: SduiSurfaceLoadTimeTracker (upval), ConfigKey (upval), SurfaceLoadTimeEventName (upval), FetchSettingsPageModule (upval)
+			local LoadTimerWithSurfaceLoadTime = SduiSurfaceLoadTimeTracker.createLoadTimerWithSurfaceLoadTime(ConfigKey, {
+				eventName = SurfaceLoadTimeEventName,
 				metadata = { page = "refresh" }
 			})
-			var2.start("refresh")
-			fetchSettingsPageModule(var2, true)
+			LoadTimerWithSurfaceLoadTime.start("refresh")
+			FetchSettingsPageModule(LoadTimerWithSurfaceLoadTime, true)
 		end, {}),
-		composition = t,
-		pageTopPadding = value.pageTopPadding
+		composition = Composition,
+		pageTopPadding = p1.pageTopPadding,
+		defaultFocusRef = if FFlagSduiSettingsFocusRef then p1.defaultFocusRef else nil
 	})
 end)

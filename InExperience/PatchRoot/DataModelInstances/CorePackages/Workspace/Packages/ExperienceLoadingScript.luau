@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.ExperienceLoadingScript.ExperienceLoadingScript)
+﻿return (require(script.Parent._Workspace.ExperienceLoadingScript.ExperienceLoadingScript))

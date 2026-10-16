@@ -1,55 +1,55 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local appChatNetworkingModule = require(parent.AppChatNetworking)
-local promiseModule = require(parent.Promise)
-local constantsModule = require(appChat.Constants)
-local reportToDiagByCountryCodeModule = require(appChat.Utils.reportToDiagByCountryCode)
-local name = require(appChat.Logger):new(script.Name)
-local fFlagAppChatPerfTrackingModule = require(appChat.Flags.FFlagAppChatPerfTracking)
-local fFlagAppChatMessageTTIMilestonesModule = require(appChat.Flags.FFlagAppChatMessageTTIMilestones)
-local appChatPerfTrackerModule = require(appChat.Telemetry.AppChatPerfTracker)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local AppChatNetworkingModule = require(Parent.AppChatNetworking)
+local PromiseModule = require(Parent.Promise)
+local ConstantsModule = require(AppChat.Constants)
+local ReportToDiagByCountryCodeModule = require(AppChat.Utils.reportToDiagByCountryCode)
+local NewResult = require(AppChat.Logger):new(script.Name)
+local FFlagAppChatPerfTrackingModule = require(AppChat.Flags.FFlagAppChatPerfTracking)
+local FFlagAppChatMessageTTIMilestonesModule = require(AppChat.Flags.FFlagAppChatMessageTTIMilestones)
+local AppChatPerfTrackerModule = require(AppChat.Telemetry.AppChatPerfTracker)
 
-local _ = function(p1)
-	-- upvalues: reportToDiagByCountryCodeModule (ref), constantsModule (ref)
-	reportToDiagByCountryCodeModule(constantsModule.PerformanceMeasurement.LUA_CHAT_RECEIVE_MESSAGE, "MessageReceivedTime", tick() - p1)
+local function _(p1) --[[ Line: 14 ]]
+	-- upvalues: ReportToDiagByCountryCodeModule (copy), ConstantsModule (copy)
+	ReportToDiagByCountryCodeModule(ConstantsModule.PerformanceMeasurement.LUA_CHAT_RECEIVE_MESSAGE, "MessageReceivedTime", tick() - p1)
 end
 
-return function(p1, p2, p3)
-	-- upvalues: name (ref), appChatNetworkingModule (ref), fFlagAppChatPerfTrackingModule (ref), fFlagAppChatMessageTTIMilestonesModule (ref), appChatPerfTrackerModule (ref), reportToDiagByCountryCodeModule (ref), constantsModule (ref), promiseModule (ref)
-	name:info("Getting new messages for {}", p1)
+return function(ConversationId, p1, p2) --[[ Line: 23 ]]
+	-- upvalues: NewResult (copy), AppChatNetworkingModule (copy), FFlagAppChatPerfTrackingModule (copy), FFlagAppChatMessageTTIMilestonesModule (copy), AppChatPerfTrackerModule (copy), ReportToDiagByCountryCodeModule (copy), ConstantsModule (copy), PromiseModule (copy)
+	NewResult:info("Getting new messages for {}", ConversationId)
 	
-	return function(p4)
-		-- upvalues: p1 (ref), appChatNetworkingModule (copy), name (copy), fFlagAppChatPerfTrackingModule (copy), fFlagAppChatMessageTTIMilestonesModule (copy), p2 (ref), appChatPerfTrackerModule (copy), p3 (ref), reportToDiagByCountryCodeModule (copy), constantsModule (copy), promiseModule (copy)
-		local t = {}
+	return function(p3) --[[ Line: 25 ]]
+		-- upvalues: ConversationId (copy), AppChatNetworkingModule (upval), NewResult (upval), FFlagAppChatPerfTrackingModule (upval), FFlagAppChatMessageTTIMilestonesModule (upval), p1 (copy), AppChatPerfTrackerModule (upval), p2 (copy), ReportToDiagByCountryCodeModule (upval), ConstantsModule (upval), PromiseModule (upval)
+		local List = {}
 		
-		if not p4:getState().ChatAppReducer.Conversations[p1] then
-			table.insert(t, p4:dispatch(appChatNetworkingModule.rodux.GetConversationDetails.API(p1)):catch(function(p5)
-				-- upvalues: name (copy)
-				name:error(`AppChatNetworking failure in GetConversationDetails: {tostring(p5)}`)
+		if not p3:getState().ChatAppReducer.Conversations[ConversationId] then
+			table.insert(List, p3:dispatch(AppChatNetworkingModule.rodux.GetConversationDetails.API(ConversationId)):catch(function(Err) --[[ Line: 32 ]]
+				-- upvalues: NewResult (upval)
+				NewResult:error(`AppChatNetworking failure in GetConversationDetails: {tostring(Err)}`)
 			end))
 		end
-		local var1 = fFlagAppChatPerfTrackingModule and (fFlagAppChatMessageTTIMilestonesModule and not p2)
+		local NoP2: boolean = FFlagAppChatPerfTrackingModule and (FFlagAppChatMessageTTIMilestonesModule and not p1)
 		
-		if var1 then
-			local t_1 = { conversationId = p1 }
-			appChatPerfTrackerModule.trackMilestone(appChatPerfTrackerModule.Events.MessageReceiveTTI, appChatPerfTrackerModule.Milestone.PrimaryDataStarted.Name, t_1)
-			appChatPerfTrackerModule.trackSubphase(appChatPerfTrackerModule.Events.MessageReceiveTTI, appChatPerfTrackerModule.Milestone.PrimaryDataStarted.Name, appChatPerfTrackerModule.Milestone.PrimaryDataStarted.Subphase.NetworkFetch, t_1)
-			appChatPerfTrackerModule.trackRequest(appChatPerfTrackerModule.Events.MessageReceiveTTI, appChatPerfTrackerModule.Milestone.PrimaryDataStarted.Name, "GetNewerMessages", t_1)
+		if NoP2 then
+			local config = { conversationId = ConversationId }
+			AppChatPerfTrackerModule.trackMilestone(AppChatPerfTrackerModule.Events.MessageReceiveTTI, AppChatPerfTrackerModule.Milestone.PrimaryDataStarted.Name, config)
+			AppChatPerfTrackerModule.trackSubphase(AppChatPerfTrackerModule.Events.MessageReceiveTTI, AppChatPerfTrackerModule.Milestone.PrimaryDataStarted.Name, AppChatPerfTrackerModule.Milestone.PrimaryDataStarted.Subphase.NetworkFetch, config)
+			AppChatPerfTrackerModule.trackRequest(AppChatPerfTrackerModule.Events.MessageReceiveTTI, AppChatPerfTrackerModule.Milestone.PrimaryDataStarted.Name, "GetNewerMessages", config)
 		end
-		table.insert(t, p4:dispatch(appChatNetworkingModule.rodux.GetNewerMessages.API(p1)):andThen(function()
-			-- upvalues: p3 (copy), reportToDiagByCountryCodeModule (copy), constantsModule (copy), var1 (ref), p1 (copy), appChatPerfTrackerModule (copy)
-			reportToDiagByCountryCodeModule(constantsModule.PerformanceMeasurement.LUA_CHAT_RECEIVE_MESSAGE, "MessageReceivedTime", tick() - p3)
+		table.insert(List, p3:dispatch(AppChatNetworkingModule.rodux.GetNewerMessages.API(ConversationId)):andThen(function() --[[ Line: 67 ]]
+			-- upvalues: p2 (upval), ReportToDiagByCountryCodeModule (upval), ConstantsModule (upval), NoP2 (copy), ConversationId (upval), AppChatPerfTrackerModule (upval)
+			ReportToDiagByCountryCodeModule(ConstantsModule.PerformanceMeasurement.LUA_CHAT_RECEIVE_MESSAGE, "MessageReceivedTime", tick() - p2)
 			
-			if var1 then
-				local t = { conversationId = p1 }
-				appChatPerfTrackerModule.trackMilestone(appChatPerfTrackerModule.Events.MessageReceiveTTI, appChatPerfTrackerModule.Milestone.PrimaryDataReady.Name, t)
-				appChatPerfTrackerModule.trackSubphase(appChatPerfTrackerModule.Events.MessageReceiveTTI, appChatPerfTrackerModule.Milestone.PrimaryDataReady.Name, appChatPerfTrackerModule.Milestone.PrimaryDataReady.Subphase.ResponseReceived, t)
+			if NoP2 then
+				local config = { conversationId = ConversationId }
+				AppChatPerfTrackerModule.trackMilestone(AppChatPerfTrackerModule.Events.MessageReceiveTTI, AppChatPerfTrackerModule.Milestone.PrimaryDataReady.Name, config)
+				AppChatPerfTrackerModule.trackSubphase(AppChatPerfTrackerModule.Events.MessageReceiveTTI, AppChatPerfTrackerModule.Milestone.PrimaryDataReady.Name, AppChatPerfTrackerModule.Milestone.PrimaryDataReady.Subphase.ResponseReceived, config)
 			end
-		end):catch(function(p5)
-			-- upvalues: name (copy)
-			name:error(`AppChatNetworking failure in GetNewerMessages: {tostring(p5)}`)
+		end):catch(function(Err) --[[ Line: 84 ]]
+			-- upvalues: NewResult (upval)
+			NewResult:error(`AppChatNetworking failure in GetNewerMessages: {tostring(Err)}`)
 		end))
 		
-		return promiseModule.allSettled(t)
+		return PromiseModule.allSettled(List)
 	end
 end

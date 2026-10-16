@@ -1,22 +1,24 @@
-﻿local sduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
-local _ = require(sduiCoreSystem.Parent.Signals)
-local buildRepeatedPropModule = require(sduiCoreSystem.ClientBinding.PropBuilder.buildRepeatedProp)
-local buildTablePropModule = require(sduiCoreSystem.ClientBinding.PropBuilder.buildTableProp)
-local _ = require(sduiCoreSystem.SduiBuilderTypes)
-local propResultCategory = require(sduiCoreSystem.ClientBinding.SduiClientBindingTypes).PropResultCategory
+﻿local SduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
+local _ = require(SduiCoreSystem.Parent.Signals)
+local BuildRepeatedPropModule = require(SduiCoreSystem.ClientBinding.PropBuilder.buildRepeatedProp)
+local BuildTablePropModule = require(SduiCoreSystem.ClientBinding.PropBuilder.buildTableProp)
+local _ = require(SduiCoreSystem.SduiBuilderTypes)
+local PropResultCategory = require(SduiCoreSystem.ClientBinding.SduiClientBindingTypes).PropResultCategory
 
-local function _(p1)
-	local p0Count = #p1
+local function _(p1): boolean --[[ Line: 21 | Named "isArrayLike" ]]
+	local CountP0 = #p1
 	
-	return p0Count > 0 and next(p1, p0Count) == nil
+	return CountP0 > 0 and next(p1, CountP0) == nil
 end
 
-return function(_, p1, p2, p3, p4, p5)
-	-- upvalues: propResultCategory (ref), buildRepeatedPropModule (ref), buildTablePropModule (ref)
-	if next(p1) == nil then
-		return p1, propResultCategory.Literal
+return function(_, Array, p1, p2, p3, p4) --[[ Line: 26 | Named "buildContainerProp" ]]
+	-- upvalues: PropResultCategory (copy), BuildRepeatedPropModule (copy), BuildTablePropModule (copy)
+	if next(Array) == nil then
+		return Array, PropResultCategory.Literal
+	else
+		local CountArray = #Array
+		local NoNextEntry: boolean = CountArray > 0 and next(Array, CountArray) == nil
+		
+		return if NoNextEntry then BuildRepeatedPropModule("literal", { array = Array }, p1, p2, p3, p4) else BuildTablePropModule("literal", Array, p1, p2, p3, p4)
 	end
-	local p1Count = #p1
-	
-	return if p1Count > 0 and next(p1, p1Count) == nil then buildRepeatedPropModule("literal", { array = p1 }, p2, p3, p4, p5) else buildTablePropModule("literal", p1, p2, p3, p4, p5)
 end

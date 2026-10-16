@@ -1,15 +1,16 @@
-﻿local textService = game:GetService("TextService")
-local parent = script:FindFirstAncestor("Style").Parent
-local foundationFontFaceMigration = require(parent.Foundation).Utility.Flags.FoundationFontFaceMigration
-local getTextSize = require(parent.UIBlox).Core.Text.GetTextSize
-local vector2 = Vector2.new(2, 2)
+﻿local TextService = game:GetService("TextService")
+local Parent = script:FindFirstAncestor("Style").Parent
+local FoundationFontFaceMigration = require(Parent.Foundation).Utility.Flags.FoundationFontFaceMigration
+local GetTextSizeFunction = require(Parent.UIBlox).Core.Text.GetTextSize
+local _Vector2 = Vector2.new(2, 2)
 
-return function(p1, p2, p3, p4, p5)
-	-- upvalues: foundationFontFaceMigration (ref), getTextSize (ref), vector2 (ref), textService (ref)
-	if not foundationFontFaceMigration then
-		return textService:GetTextSize(p1, p2, p3, p4) + vector2
+return function(String, FontSize, p1, FrameSize, p2) --[[ Line: 22 | Named "getTextSize" ]]
+	-- upvalues: FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), _Vector2 (copy), TextService (copy)
+	if FoundationFontFaceMigration then
+		local TextSize = GetTextSizeFunction(String, FontSize, p1, FrameSize)
+		
+		return if p2 == nil or p2.addTemporaryPadding ~= false then TextSize else TextSize - _Vector2
+	else
+		return TextService:GetTextSize(String, FontSize, p1, FrameSize) + _Vector2
 	end
-	local var1 = getTextSize(p1, p2, p3, p4)
-	
-	return if p5 == nil or p5.addTemporaryPadding ~= false then var1 else var1 - vector2
 end

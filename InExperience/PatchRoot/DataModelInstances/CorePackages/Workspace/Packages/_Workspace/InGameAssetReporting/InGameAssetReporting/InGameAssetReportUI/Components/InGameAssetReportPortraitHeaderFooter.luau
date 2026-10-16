@@ -1,106 +1,106 @@
-﻿local parent = script:FindFirstAncestor("InGameAssetReporting").Parent
-local reactModule = require(parent.React)
-local UIBloxModule = require(parent.UIBlox)
-local foundationModule = require(parent.Foundation)
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local buttonStack = UIBloxModule.App.Button.ButtonStack
-local buttonType = UIBloxModule.App.Button.Enum.ButtonType
-local headerBar = UIBloxModule.App.Bar.HeaderBar
-local iconButton = UIBloxModule.App.Button.IconButton
-local iconSize = UIBloxModule.App.ImageSet.Enum.IconSize
-local images = UIBloxModule.App.ImageSet.Images
-local withStyle = UIBloxModule.Style.withStyle
+﻿local Parent = script:FindFirstAncestor("InGameAssetReporting").Parent
+local ReactModule = require(Parent.React)
+local UIBloxModule = require(Parent.UIBlox)
+local FoundationModule = require(Parent.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local ButtonStack = UIBloxModule.App.Button.ButtonStack
+local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
+local HeaderBar = UIBloxModule.App.Bar.HeaderBar
+local IconButton = UIBloxModule.App.Button.IconButton
+local IconSize = UIBloxModule.App.ImageSet.Enum.IconSize
+local Images = UIBloxModule.App.ImageSet.Images
+local WithStyleFunction = UIBloxModule.Style.withStyle
 
-local function _(p1, _, _)
-	-- upvalues: reactModule (ref), iconButton (ref), iconSize (ref), images (ref)
-	return function()
-		-- upvalues: reactModule (copy), iconButton (copy), iconSize (copy), images (copy), p1 (ref)
-		return reactModule.createElement("Frame", {
+local function _(OnActivated, _, _) --[[ Line: 33 | Named "renderHeaderBarLeft" ]]
+	-- upvalues: ReactModule (copy), IconButton (copy), IconSize (copy), Images (copy)
+	return function() --[[ Line: 34 ]]
+		-- upvalues: ReactModule (upval), IconButton (upval), IconSize (upval), Images (upval), OnActivated (copy)
+		return ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.new(0, 30, 1, 0)
 		}, {
-			Layout = reactModule.createElement("UIListLayout", {
+			Layout = ReactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Horizontal,
 				HorizontalAlignment = Enum.HorizontalAlignment.Left,
 				VerticalAlignment = Enum.VerticalAlignment.Center,
 				SortOrder = Enum.SortOrder.LayoutOrder
 			}),
-			BackButton = reactModule.createElement(iconButton, {
+			BackButton = ReactModule.createElement(IconButton, {
 				layoutOrder = 1,
-				iconSize = iconSize.Medium,
-				icon = images["icons/navigation/pushBack"],
-				onActivated = p1
+				iconSize = IconSize.Medium,
+				icon = Images["icons/navigation/pushBack"],
+				onActivated = OnActivated
 			})
 		})
 	end
 end
 
-local _ = function(p1)
-	-- upvalues: withStyle (ref), reactModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
-	return function()
-		-- upvalues: withStyle (copy), reactModule (copy), p1 (ref), foundationFontFaceMigration (copy), normalizeFontFace (copy)
-		return withStyle(function(p2)
-			-- upvalues: reactModule (copy), p1 (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy)
-			local currentCamera = game.Workspace.CurrentCamera
-			local theme = p2.Theme
+local _ = function(Text) --[[ Line: 55 | Named "renderHeaderBarCenter" ]]
+	-- upvalues: WithStyleFunction (copy), ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	return function() --[[ Line: 56 ]]
+		-- upvalues: WithStyleFunction (upval), ReactModule (upval), Text (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
+		return WithStyleFunction(function(p1) --[[ Line: 57 ]]
+			-- upvalues: ReactModule (upval), Text (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
+			local CurrentCamera = game.Workspace.CurrentCamera
+			local Theme = p1.Theme
+			local _Font = p1.Font
 			
-			return reactModule.createElement("TextLabel", {
+			return ReactModule.createElement("TextLabel", {
 				TextSize = 20,
 				TextWrapped = true,
 				BackgroundTransparency = 1,
-				Text = p1,
-				Font = if foundationFontFaceMigration then nil else p2.Font.Header2.Font,
-				FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.TitleLarge.Font) else nil,
-				TextColor3 = theme.TextEmphasis.Color,
-				TextTransparency = theme.TextEmphasis.Transparency,
+				Text = Text,
+				Font = if FoundationFontFaceMigration then nil else _Font.Header2.Font,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p1.Tokens.Typography.TitleLarge.Font) else nil,
+				TextColor3 = Theme.TextEmphasis.Color,
+				TextTransparency = Theme.TextEmphasis.Transparency,
 				TextXAlignment = Enum.TextXAlignment.Center,
 				TextYAlignment = Enum.TextYAlignment.Center,
-				Size = UDim2.new(0, if currentCamera ~= nil then currentCamera.ViewportSize.X - 150 else 300, 1, 0)
+				Size = UDim2.new(0, if CurrentCamera == nil then 300 else CurrentCamera.ViewportSize.X - 150, 1, 0)
 			})
 		end)
 	end
 end
 
-local _ = function(_, p1, p2, p3, p4)
-	-- upvalues: reactModule (ref), iconButton (ref), iconSize (ref), images (ref)
-	return function()
-		-- upvalues: reactModule (copy), iconButton (copy), iconSize (copy), images (copy), p3 (ref), p1 (ref), p4 (ref), p2 (ref)
-		return reactModule.createElement("Frame", {
+local _ = function(_, OnActivated, OnActivated1, p1, p2) --[[ Line: 87 | Named "renderHeaderBarRight" ]]
+	-- upvalues: ReactModule (copy), IconButton (copy), IconSize (copy), Images (copy)
+	return function() --[[ Line: 94 ]]
+		-- upvalues: ReactModule (upval), IconButton (upval), IconSize (upval), Images (upval), p1 (copy), OnActivated (copy), p2 (copy), OnActivated1 (copy)
+		return ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.new(0, 60, 1, 0)
 		}, {
-			Layout = reactModule.createElement("UIListLayout", {
+			Layout = ReactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Horizontal,
 				HorizontalAlignment = Enum.HorizontalAlignment.Center,
 				VerticalAlignment = Enum.VerticalAlignment.Center,
 				SortOrder = Enum.SortOrder.LayoutOrder
 			}),
-			UndoButton = reactModule.createElement(iconButton, {
+			UndoButton = ReactModule.createElement(IconButton, {
 				layoutOrder = 1,
-				iconSize = iconSize.Medium,
-				icon = images["icons/actions/edit/undo"],
-				isDisabled = not p3,
-				onActivated = p1
+				iconSize = IconSize.Medium,
+				icon = Images["icons/actions/edit/undo"],
+				isDisabled = not p1,
+				onActivated = OnActivated
 			}),
-			RedoButton = reactModule.createElement(iconButton, {
+			RedoButton = ReactModule.createElement(IconButton, {
 				layoutOrder = 2,
-				iconSize = iconSize.Medium,
-				icon = images["icons/actions/edit/redo"],
-				isDisabled = not p4,
-				onActivated = p2
+				iconSize = IconSize.Medium,
+				icon = Images["icons/actions/edit/redo"],
+				isDisabled = not p2,
+				onActivated = OnActivated1
 			})
 		})
 	end
 end
 
 return {
-	PortraitModeHeader = function(p1)
-		-- upvalues: reactModule (ref), headerBar (ref), iconButton (ref), iconSize (ref), images (ref), withStyle (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
-		local isRedoEnabled = p1.isRedoEnabled or p1.isUndoEnabled
-		local createElement = reactModule.createElement
-		local var1 = "Frame"
-		local t = {
+	PortraitModeHeader = function(p1) --[[ Line: 123 ]]
+		-- upvalues: ReactModule (copy), HeaderBar (copy), IconButton (copy), IconSize (copy), Images (copy), WithStyleFunction (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+		local CreateElementFunction1 = ReactModule.createElement
+		local v1 = "Frame"
+		local config = {
 			BorderSizePixel = 0,
 			BackgroundTransparency = 0.1,
 			LayoutOrder = 1,
@@ -108,110 +108,110 @@ return {
 			BackgroundColor3 = Color3.fromHex("#000000"),
 			Size = UDim2.new(1, 0, 0, 72)
 		}
-		local t_1 = {}
-		local createElement_1 = reactModule.createElement
-		local t_2 = {
+		local t = {}
+		local CreateElementFunction = ReactModule.createElement
+		local BackAction = p1.backAction
+		local _ = p1.isRedoEnabled
+		local _ = p1.isUndoEnabled
+		local config1 = {
 			backgroundTransparency = 1,
 			barHeight = 72,
 			margin = 12,
-			isSecondary = true
-		}
-		local backAction = p1.backAction
-		local _ = p1.isRedoEnabled
-		local _ = p1.isUndoEnabled
-		
-		function t_2.renderLeft()
-			-- upvalues: reactModule (copy), iconButton (copy), iconSize (copy), images (copy), backAction (ref)
-			return reactModule.createElement("Frame", {
-				BackgroundTransparency = 1,
-				Size = UDim2.new(0, 30, 1, 0)
-			}, {
-				Layout = reactModule.createElement("UIListLayout", {
-					FillDirection = Enum.FillDirection.Horizontal,
-					HorizontalAlignment = Enum.HorizontalAlignment.Left,
-					VerticalAlignment = Enum.VerticalAlignment.Center,
-					SortOrder = Enum.SortOrder.LayoutOrder
-				}),
-				BackButton = reactModule.createElement(iconButton, {
-					layoutOrder = 1,
-					iconSize = iconSize.Medium,
-					icon = images["icons/navigation/pushBack"],
-					onActivated = backAction
+			isSecondary = true,
+			renderLeft = function() --[[ Line: 34 ]]
+				-- upvalues: ReactModule (upval), IconButton (upval), IconSize (upval), Images (upval), BackAction (copy)
+				return ReactModule.createElement("Frame", {
+					BackgroundTransparency = 1,
+					Size = UDim2.new(0, 30, 1, 0)
+				}, {
+					Layout = ReactModule.createElement("UIListLayout", {
+						FillDirection = Enum.FillDirection.Horizontal,
+						HorizontalAlignment = Enum.HorizontalAlignment.Left,
+						VerticalAlignment = Enum.VerticalAlignment.Center,
+						SortOrder = Enum.SortOrder.LayoutOrder
+					}),
+					BackButton = ReactModule.createElement(IconButton, {
+						layoutOrder = 1,
+						iconSize = IconSize.Medium,
+						icon = Images["icons/navigation/pushBack"],
+						onActivated = BackAction
+					})
 				})
-			})
-		end
+			end
+		}
 		
-		if isRedoEnabled then
+		if p1.isRedoEnabled or p1.isUndoEnabled then
 			local _ = p1.annotationPoints
-			local undoAnnotationPoints = p1.undoAnnotationPoints
-			local redoAnnotationPoints = p1.redoAnnotationPoints
-			local isUndoEnabled = p1.isUndoEnabled
-			local isRedoEnabled_1 = p1.isRedoEnabled
+			local UndoAnnotationPoints = p1.undoAnnotationPoints
+			local RedoAnnotationPoints = p1.redoAnnotationPoints
+			local IsUndoEnabled = p1.isUndoEnabled
+			local IsRedoEnabled = p1.isRedoEnabled
 			
-			local var2 = function()
-				-- upvalues: reactModule (copy), iconButton (copy), iconSize (copy), images (copy), isUndoEnabled (ref), undoAnnotationPoints (ref), isRedoEnabled_1 (ref), redoAnnotationPoints (ref)
-				return reactModule.createElement("Frame", {
+			local function RenderRight() --[[ Line: 94 ]]
+				-- upvalues: ReactModule (upval), IconButton (upval), IconSize (upval), Images (upval), IsUndoEnabled (copy), UndoAnnotationPoints (copy), IsRedoEnabled (copy), RedoAnnotationPoints (copy)
+				return ReactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					Size = UDim2.new(0, 60, 1, 0)
 				}, {
-					Layout = reactModule.createElement("UIListLayout", {
+					Layout = ReactModule.createElement("UIListLayout", {
 						FillDirection = Enum.FillDirection.Horizontal,
 						HorizontalAlignment = Enum.HorizontalAlignment.Center,
 						VerticalAlignment = Enum.VerticalAlignment.Center,
 						SortOrder = Enum.SortOrder.LayoutOrder
 					}),
-					UndoButton = reactModule.createElement(iconButton, {
+					UndoButton = ReactModule.createElement(IconButton, {
 						layoutOrder = 1,
-						iconSize = iconSize.Medium,
-						icon = images["icons/actions/edit/undo"],
-						isDisabled = not isUndoEnabled,
-						onActivated = undoAnnotationPoints
+						iconSize = IconSize.Medium,
+						icon = Images["icons/actions/edit/undo"],
+						isDisabled = not IsUndoEnabled,
+						onActivated = UndoAnnotationPoints
 					}),
-					RedoButton = reactModule.createElement(iconButton, {
+					RedoButton = ReactModule.createElement(IconButton, {
 						layoutOrder = 2,
-						iconSize = iconSize.Medium,
-						icon = images["icons/actions/edit/redo"],
-						isDisabled = not isRedoEnabled_1,
-						onActivated = redoAnnotationPoints
+						iconSize = IconSize.Medium,
+						icon = Images["icons/actions/edit/redo"],
+						isDisabled = not IsRedoEnabled,
+						onActivated = RedoAnnotationPoints
 					})
 				})
 			end
 		else
-			local var2 = function() end
+			local function RenderRight() --[[ Line: 147 ]] end
 		end
-		t_2.renderRight = var2
-		local titleText = p1.titleText
+		config1.renderRight = RenderRight
+		local TitleText = p1.titleText
 		
-		function t_2.renderCenter()
-			-- upvalues: withStyle (copy), reactModule (copy), titleText (ref), foundationFontFaceMigration (copy), normalizeFontFace (copy)
-			return withStyle(function(p2)
-				-- upvalues: reactModule (copy), titleText (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy)
-				local currentCamera = game.Workspace.CurrentCamera
-				local theme = p2.Theme
+		function config1.renderCenter() --[[ Line: 56 ]]
+			-- upvalues: WithStyleFunction (upval), ReactModule (upval), TitleText (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
+			return WithStyleFunction(function(p2) --[[ Line: 57 ]]
+				-- upvalues: ReactModule (upval), TitleText (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
+				local CurrentCamera = game.Workspace.CurrentCamera
+				local Theme = p2.Theme
+				local _Font = p2.Font
 				
-				return reactModule.createElement("TextLabel", {
+				return ReactModule.createElement("TextLabel", {
 					TextSize = 20,
 					TextWrapped = true,
 					BackgroundTransparency = 1,
-					Text = titleText,
-					Font = if foundationFontFaceMigration then nil else p2.Font.Header2.Font,
-					FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.TitleLarge.Font) else nil,
-					TextColor3 = theme.TextEmphasis.Color,
-					TextTransparency = theme.TextEmphasis.Transparency,
+					Text = TitleText,
+					Font = if FoundationFontFaceMigration then nil else _Font.Header2.Font,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Tokens.Typography.TitleLarge.Font) else nil,
+					TextColor3 = Theme.TextEmphasis.Color,
+					TextTransparency = Theme.TextEmphasis.Transparency,
 					TextXAlignment = Enum.TextXAlignment.Center,
 					TextYAlignment = Enum.TextYAlignment.Center,
-					Size = UDim2.new(0, if currentCamera ~= nil then currentCamera.ViewportSize.X - 150 else 300, 1, 0)
+					Size = UDim2.new(0, if CurrentCamera == nil then 300 else CurrentCamera.ViewportSize.X - 150, 1, 0)
 				})
 			end)
 		end
 		
-		t_1.Bar = createElement_1(headerBar, t_2)
+		t.Bar = CreateElementFunction(HeaderBar, config1)
 		
-		return createElement(var1, t, t_1)
+		return CreateElementFunction1(v1, config, t)
 	end,
-	PortraitModeFooter = function(p1)
-		-- upvalues: reactModule (ref), buttonStack (ref), buttonType (ref)
-		return reactModule.createElement("Frame", {
+	PortraitModeFooter = function(p1) --[[ Line: 154 ]]
+		-- upvalues: ReactModule (copy), ButtonStack (copy), ButtonType (copy)
+		return ReactModule.createElement("Frame", {
 			BorderSizePixel = 0,
 			BackgroundTransparency = 0.1,
 			LayoutOrder = 4,
@@ -220,25 +220,25 @@ return {
 			AnchorPoint = Vector2.new(0, 1),
 			Position = UDim2.fromScale(0, 1)
 		}, {
-			Layout = reactModule.createElement("UIListLayout", {
+			Layout = ReactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Vertical,
 				HorizontalAlignment = Enum.HorizontalAlignment.Center
 			}),
-			Container = reactModule.createElement("Frame", {
+			Container = ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				Size = UDim2.new(0, 400, 1, 0)
 			}, {
-				Padding = reactModule.createElement("UIPadding", {
+				Padding = ReactModule.createElement("UIPadding", {
 					PaddingTop = UDim.new(0, 12),
 					PaddingBottom = UDim.new(0, 12),
 					PaddingLeft = UDim.new(0, 32),
 					PaddingRight = UDim.new(0, 32)
 				}),
-				ActionButtons = reactModule.createElement(buttonStack, {
+				ActionButtons = ReactModule.createElement(ButtonStack, {
 					marginBetween = 8,
 					buttons = {
 						{
-							buttonType = buttonType.PrimarySystem,
+							buttonType = ButtonType.PrimarySystem,
 							props = { onActivated = p1.nextAction, text = p1.nextText }
 						}
 					}

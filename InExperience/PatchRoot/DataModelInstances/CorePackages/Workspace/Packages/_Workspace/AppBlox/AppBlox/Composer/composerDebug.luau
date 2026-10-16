@@ -1,22 +1,23 @@
-﻿local var1 = false
+﻿local Enabled = false
 
 return {
-	setEnabled = function(value)
-		-- upvalues: var1 (write)
-		var1 = value
+	setEnabled = function(Value) --[[ Line: 6 ]]
+		-- upvalues: Enabled (ref)
+		Enabled = Value
 	end,
-	isEnabled = function()
-		-- upvalues: var1 (write)
-		return var1
+	isEnabled = function() --[[ Line: 10 ]]
+		-- upvalues: Enabled (ref)
+		return Enabled
 	end,
-	log = function(p1, p2)
-		-- upvalues: var1 (write)
-		if not var1 then return end
+	log = function(p1, p2) --[[ Line: 14 ]]
+		-- upvalues: Enabled (ref)
+		if not Enabled then return end
 		if p2 then
 			print(`[Composer] {p1} | {p2}`)
 			
 			return
+		else
+			print(`[Composer] {p1}`)
 		end
-		print(`[Composer] {p1}`)
 	end
 }

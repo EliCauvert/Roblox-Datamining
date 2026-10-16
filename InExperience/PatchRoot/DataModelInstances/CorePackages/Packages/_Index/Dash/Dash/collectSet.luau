@@ -1,13 +1,13 @@
 ﻿local _ = require(script.Parent.Types)
 
-return function(value, p1)
+return function(List, Callback) --[[ Line: 16 | Named "collectSet" ]]
 	local t = {}
 	
-	for i, v in value do
-		local var1 = if p1 == nil then v else p1(i, v)
+	for i, value in List do
+		local CallbackResult = if Callback == nil then value else Callback(i, value)
 		
-		if var1 ~= nil then
-			t[var1] = true
+		if CallbackResult ~= nil then
+			t[CallbackResult] = true
 		end
 	end
 	return t

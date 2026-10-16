@@ -1,214 +1,220 @@
-﻿local _ = require(script.Parent.Parent.Types)
-local unpackContentModule = require(script.Parent.Parent.ContentKinds.unpackContent)
+﻿local UnpackContentModule = require(script.Parent.Parent.ContentKinds.unpackContent)
+local _ = require(script.Parent.projectMessageEnvelope)
 
-local function _(p1, p2)
-	local author = p1.author
-	local author_1 = p2.author
+local function _(p1, p2): boolean --[[ Line: 33 | Named "sameSender" ]]
+	local Author = p1.author
+	local Author1 = p2.author
 	
-	return if author == nil or author_1 == nil then false else author.userId == author_1.userId
+	return Author ~= nil and Author1 ~= nil and Author.userId == Author1.userId
 end
 
-local _ = function(p1, p2, p3, p4, p5)
-	if p5 ~= nil and p5 <= p2.sentAtUnixMilliseconds - p1.sentAtUnixMilliseconds then
+local _ = function(p1, p2, p3, p4, p5) --[[ Line: 44 | Named "getGroupBreakReason" ]]
+	if p5 == nil or p5 > p2.sentAtUnixMilliseconds - p1.sentAtUnixMilliseconds then
+		local Author = p1.author
+		local Author1 = p2.author
+		local IsUserIdMatch: boolean = Author ~= nil and Author1 ~= nil and Author.userId == Author1.userId
+		
+		return if IsUserIdMatch then if p4 == nil or p4 > p3 then nil else "count" else "sender"
+	else
 		return "time"
 	end
-	local author = p1.author
-	local author_1 = p2.author
-	
-	return if if author == nil or author_1 == nil then false else author.userId == author_1.userId then if p4 == nil or p4 > p3 then nil else "count" else "sender"
 end
 
-local _ = function(p1)
-	-- upvalues: unpackContentModule (ref)
-	local contents = p1.contents
+local _ = function(p1): boolean --[[ Line: 65 | Named "hasRenderableContent" ]]
+	-- upvalues: UnpackContentModule (copy)
+	local Contents = p1.contents
 	
-	if type(contents) ~= "table" then
+	if type(Contents) ~= "table" then
 		return false
 	end
-	for i, v in contents do
-		if unpackContentModule(v) ~= nil then
+	for _, content in Contents do
+		if UnpackContentModule(content) ~= nil then
 			return true
 		end
 	end
 	return false
 end
 
-local function orderedMessages(p2)
-	-- upvalues: unpackContentModule (ref)
-	local t = {}
+local function orderedMessages(List) --[[ Line: 78 ]]
+	-- upvalues: UnpackContentModule (copy)
+	local List1 = {}
+	local Flag = nil
 	
-	for i, v in p2 do
-		if type(v) == "table" then
-			local var1
-			local contents = v.contents
+	for _, value in List do
+		if type(value) == "table" then
+			local Contents = value.contents
 			
-			if type(contents) == "table" then
-				for i_1, v_1 in contents do
-					if unpackContentModule(v_1) ~= nil then
-						var1 = true
+			if type(Contents) == "table" then
+				Flag = false
+				
+				for _, content in Contents do
+					if UnpackContentModule(content) ~= nil then
+						Flag = true
+						break
 					end
 				end
-				var1 = false
 			else
-				var1 = false
+				Flag = false
 			end
-			if var1 then
-				table.insert(t, v)
+			if Flag then
+				table.insert(List1, value)
 			end
 		end
 	end
-	table.sort(t, function(p3, p4)
-		return if p3.sentAtUnixMilliseconds == p4.sentAtUnixMilliseconds then p3.id < p4.id else p3.sentAtUnixMilliseconds < p4.sentAtUnixMilliseconds
+	table.sort(List1, function(A, B): boolean --[[ Line: 85 ]]
+		return if A.sentAtUnixMilliseconds == B.sentAtUnixMilliseconds then A.id < B.id else A.sentAtUnixMilliseconds < B.sentAtUnixMilliseconds
 	end)
 	
-	return t
+	return List1
 end
 
-local _ = function(p3)
+local _ = function(List) --[[ Line: 94 | Named "indexPrevious" ]]
 	local t = {}
 	
-	if p3 == nil then
+	if List == nil then
 		return t
 	end
-	for i, v in p3 do
-		t[v.id] = v
+	for _, value in List do
+		t[value.id] = value
 	end
 	return t
 end
 
-local function messageRow(p4, p5, p6, p7)
-	local id = p4[p5.id]
+local function messageRow(p2, Message, IsFirst, IsLast) --[[ Line: 109 ]]
+	local v1 = p2[Message.id]
 	
-	return if id == nil or id.kind ~= "message" or (id.message ~= p5 or id.groupPosition.isFirst ~= p6) or id.groupPosition.isLast ~= p7 then {
+	return if v1 == nil or v1.kind ~= "message" or v1.message ~= Message or v1.groupPosition.isFirst ~= IsFirst or v1.groupPosition.isLast ~= IsLast then {
 		kind = "message",
-		id = p5.id,
-		message = p5,
-		groupPosition = { isFirst = p6, isLast = p7 }
-	} else id
+		id = Message.id,
+		message = Message,
+		groupPosition = { isFirst = IsFirst, isLast = IsLast }
+	} else v1
 end
 
-local function timestampRow(p4, p5, p6)
-	local id = `timestamp:{p5.id}`
-	local var2 = if p6 ~= nil then nil else p6.sentAtUnixMilliseconds
-	local var3 = p4[id]
+local function timestampRow(p2, p3, p4) --[[ Line: 133 ]]
+	local TimestampName: string = `timestamp:{p3.id}`
+	local SentAtUnixMilliseconds = if p4 == nil then nil else p4.sentAtUnixMilliseconds
+	local v1 = p2[TimestampName]
 	
-	return if var3 == nil or var3.kind ~= "timestamp" or (var3.displayUnixMilliseconds ~= p5.sentAtUnixMilliseconds or var3.referenceUnixMilliseconds ~= var2) then {
+	return if v1 == nil or v1.kind ~= "timestamp" or v1.displayUnixMilliseconds ~= p3.sentAtUnixMilliseconds or v1.referenceUnixMilliseconds ~= SentAtUnixMilliseconds then {
 		kind = "timestamp",
-		id = id,
-		displayUnixMilliseconds = p5.sentAtUnixMilliseconds,
-		referenceUnixMilliseconds = var2
-	} else var3
+		id = TimestampName,
+		displayUnixMilliseconds = p3.sentAtUnixMilliseconds,
+		referenceUnixMilliseconds = SentAtUnixMilliseconds
+	} else v1
 end
 
-local _ = function(p4, p5)
-	if p4 == nil or #p4 ~= #p5 then
-		return p5
+local _ = function(p2, List) --[[ Line: 153 | Named "finish" ]]
+	if p2 == nil or #p2 ~= #List then
+		return List
 	end
-	for i, v in p5 do
-		if p4[i] ~= v then
-			return p5
+	for i, value in List do
+		if p2[i] ~= value then
+			return List
 		end
 	end
-	return p4
+	return p2
 end
 
 return {
-	groupMessages = function(p6, p7, p8, p9)
-		-- upvalues: orderedMessages (ref), messageRow (ref), timestampRow (ref)
-		local var2
-		local var3 = orderedMessages(p6)
+	groupMessages = function(p3, p4, p5, List) --[[ Line: 175 ]]
+		-- upvalues: orderedMessages (copy), messageRow (copy), timestampRow (copy)
+		local OrderedMessagesResult = orderedMessages(p3)
 		local t = {}
+		local t1 = nil
 		
-		if p9 == nil then
-			var2 = t
+		if List == nil then
+			t1 = t
 		else
-			for i, v in p9 do
-				t[v.id] = v
+			for _, value in List do
+				t[value.id] = value
 			end
-			var2 = t
+			t1 = t
 		end
-		local var4
-		local t_1 = {}
-		local var5 = 1
+		local List1 = {}
+		local v1 = 1
 		
-		local function appendGroup(p10)
-			-- upvalues: var5 (write), var3 (ref), t_1 (ref), messageRow (copy), var2 (ref)
-			local var6 = p10 - var5 + 1
+		local function appendGroup(Count: number) --[[ Line: 186 ]]
+			-- upvalues: v1 (ref), OrderedMessagesResult (copy), List1 (copy), messageRow (upval), t1 (copy)
+			local NewCount = Count - v1 + 1
 			
-			for i = 0, var6 - 1 do
-				table.insert(t_1, messageRow(var2, var3[var5 + i], i == 0, i == var6 - 1))
+			for i = 0, NewCount - 1 do
+				table.insert(List1, (messageRow(t1, OrderedMessagesResult[v1 + i], i == 0, i == NewCount - 1)))
 			end
 		end
 		
-		local function _(p11, p12)
-			-- upvalues: t_1 (ref), timestampRow (copy), var2 (ref)
-			table.insert(t_1, timestampRow(var2, p11, p12))
+		local function _(p6, p7) --[[ Line: 194 | Named "appendTimestamp" ]]
+			-- upvalues: List1 (copy), timestampRow (upval), t1 (copy)
+			table.insert(List1, (timestampRow(t1, p6, p7)))
 		end
 		
-		for i = 2, #var3 do
-			local var7
-			local var8 = i - var5
-			var4 = var3[i - 1]
-			local var9 = var3[i]
+		for i = 2, #OrderedMessagesResult do
+			local IDelta = i - v1
+			local OrderedMessagesResultEntry = OrderedMessagesResult[i - 1]
+			local OrderedMessagesResultEntry1 = OrderedMessagesResult[i]
+			local Count = nil
 			
-			if p8 ~= nil and p8 <= var9.sentAtUnixMilliseconds - var4.sentAtUnixMilliseconds then
-				var7 = "time"
-				if var7 ~= nil then
-					appendGroup(i - 1)
-					
-					if var7 == "time" then
-						table.insert(t_1, timestampRow(var2, var3[i], var3[i - 1]))
-					end
-					var5 = i
+			if p5 == nil or p5 > OrderedMessagesResultEntry1.sentAtUnixMilliseconds - OrderedMessagesResultEntry.sentAtUnixMilliseconds then
+				local Author = OrderedMessagesResultEntry.author
+				local Author1 = OrderedMessagesResultEntry1.author
+				Count = if Author ~= nil and Author1 ~= nil and Author.userId == Author1.userId then if p4 == nil or p4 > IDelta then nil else "count" else "sender"
+			else
+				Count = "time"
+			end
+			if Count ~= nil then
+				appendGroup(i - 1)
+				
+				if Count == "time" then
+					table.insert(List1, (timestampRow(t1, OrderedMessagesResult[i], OrderedMessagesResult[i - 1])))
+				end
+				v1 = i
+			end
+		end
+		if #OrderedMessagesResult > 0 then
+			appendGroup(#OrderedMessagesResult)
+		end
+		local List2 = nil
+		if List == nil or #List ~= #List1 then
+			List2 = List1
+		else
+			for i1, value1 in List1 do
+				if List[i1] ~= value1 then
+					List2 = List1
+				else
+					continue
 				end
 			end
-			local author = var4.author
-			local author_1 = var9.author
-			var7 = if not (if author == nil or author_1 == nil then false else author.userId == author_1.userId) then if p7 == nil or p7 > var8 then nil else "count" else "sender"
+			List2 = List
 		end
-		local var10
-		if #var3 > 0 then
-			appendGroup(#var3)
-		end
-		if p9 == nil or #p9 ~= #t_1 then
-			var10 = t_1
-		else
-			for i_1, var4 in t_1 do
-				if p9[i_1] ~= var4 then
-					var10 = t_1
-				end
-			end
-			var10 = p9
-		end
-		return var10
+		return List2
 	end,
-	ungroupedRows = function(p11, p12)
-		-- upvalues: orderedMessages (ref), messageRow (ref)
-		local var11
-		local var12 = orderedMessages(p11)
+	ungroupedRows = function(p6, List) --[[ Line: 165 ]]
+		-- upvalues: orderedMessages (copy), messageRow (copy)
+		local OrderedMessagesResult = orderedMessages(p6)
 		local t = {}
+		local t2 = nil
 		
-		if p12 == nil then
-			var11 = t
+		if List == nil then
+			t2 = t
 		else
-			for i, v in p12 do
-				t[v.id] = v
+			for _, value in List do
+				t[value.id] = value
 			end
-			var11 = t
+			t2 = t
 		end
-		local list = table.create(#var12)
+		local Buffer = table.create(#OrderedMessagesResult)
 		
-		for i, v in var12 do
-			list[i] = messageRow(var11, v, true, true)
+		for i, value1 in OrderedMessagesResult do
+			Buffer[i] = messageRow(t2, value1, true, true)
 		end
-		if p12 == nil or #p12 ~= #list then
-			return list
+		if List == nil or #List ~= #Buffer then
+			return Buffer
 		end
-		for i_1, v_1 in list do
-			if p12[i_1] ~= v_1 then
-				return list
+		for i1, value2 in Buffer do
+			if List[i1] ~= value2 then
+				return Buffer
 			end
 		end
-		return p12
+		return List
 	end
 }

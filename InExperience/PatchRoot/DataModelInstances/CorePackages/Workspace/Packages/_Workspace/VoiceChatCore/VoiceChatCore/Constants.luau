@@ -1,47 +1,15 @@
-﻿local contentProviderService = game:GetService("ContentProvider")
-local t = {
-	PlaceNotAvailable = -1,
-	UserNotAvailable = 0,
-	Checking = 1,
-	Available = 2
-}
-local t_1 = { VoiceNotifications = true, VoiceModeration = true }
-local list = {
-	"ParticipantModeratedFromVoice",
-	"VoiceToxicityModal",
-	"VoiceToxicityToast",
-	"VoiceReverseNudgeIconColorChange"
-}
-local t_2 = {
-	IDLE = "Idle",
-	VOICE_DISABLED = "Voice Disabled",
-	LISTEN_AND_TALK = "Listen and Talk",
-	LISTEN_ONLY = "Listen Only",
-	PENDING_MIC = "Pending Mic"
-}
-local t_3 = {
-	Idle = "Idle",
-	Joining = "Joining",
-	Suspended = "Suspended",
-	Joined = "Joined",
-	Left = "Left"
-}
-local t_4 = {
-	ALL = "all",
-	FRIENDS = "friends",
-	NONFRIENDS = "nonfriends"
-}
-local _, _, var1 = (function()
-	-- upvalues: contentProviderService (ref)
-	local baseUrl = contentProviderService.BaseUrl
+﻿local ContentProvider = game:GetService("ContentProvider")
+local _, _, v1 = (function() --[[ Line: 54 | Named "parseBaseUrlInformation" ]]
+	-- upvalues: ContentProvider (copy)
+	local BaseUrl = ContentProvider.BaseUrl
 	
-	if baseUrl:sub(#baseUrl) ~= "/" then
-		baseUrl ..= "/"
+	if BaseUrl:sub(#BaseUrl) ~= "/" then
+		BaseUrl ..= "/"
 	end
-	local _, var2 = baseUrl:find("://")
-	local var3, var4 = baseUrl:find("%.", var2 + 1)
+	local _, EndIndex = BaseUrl:find("://")
+	local StartIndex, EndIndex1 = BaseUrl:find("%.", EndIndex + 1)
 	
-	return baseUrl, baseUrl:sub(var2 + 1, var3 - 1), baseUrl:sub(var4 + 1)
+	return BaseUrl, BaseUrl:sub(EndIndex + 1, StartIndex - 1), (BaseUrl:sub(EndIndex1 + 1))
 end)()
 
 return {
@@ -58,14 +26,40 @@ return {
 	REWARDED_VIDEO_AD_ENDED = "RewardedVideoAdEnded",
 	FAE_ENABLED = "Enabled",
 	FAE_SETTINGS_TOAST = "SettingsToast",
-	VOICE_JOIN_PROGRESS = t_3,
-	VOICE_CHAT_AVAILABILITY = t,
-	WATCHED_NAMESPACES = t_1,
-	VOICE_GROUP_TYPE = t_4,
-	WATCHED_MESSAGE_TYPES = list,
-	PERMISSION_STATE = t_2,
-	VOICE_URL = string.format("https://voice.%s", var1),
-	UPSELL_CARD_URL = string.format("https://apis.%supsellcard", var1),
+	VOICE_JOIN_PROGRESS = {
+		Idle = "Idle",
+		Joining = "Joining",
+		Suspended = "Suspended",
+		Joined = "Joined",
+		Left = "Left"
+	},
+	VOICE_CHAT_AVAILABILITY = {
+		PlaceNotAvailable = -1,
+		UserNotAvailable = 0,
+		Checking = 1,
+		Available = 2
+	},
+	WATCHED_NAMESPACES = { VoiceNotifications = true, VoiceModeration = true },
+	VOICE_GROUP_TYPE = {
+		ALL = "all",
+		FRIENDS = "friends",
+		NONFRIENDS = "nonfriends"
+	},
+	WATCHED_MESSAGE_TYPES = {
+		"ParticipantModeratedFromVoice",
+		"VoiceToxicityModal",
+		"VoiceToxicityToast",
+		"VoiceReverseNudgeIconColorChange"
+	},
+	PERMISSION_STATE = {
+		IDLE = "Idle",
+		VOICE_DISABLED = "Voice Disabled",
+		LISTEN_AND_TALK = "Listen and Talk",
+		LISTEN_ONLY = "Listen Only",
+		PENDING_MIC = "Pending Mic"
+	},
+	VOICE_URL = string.format("https://voice.%s", v1),
+	UPSELL_CARD_URL = string.format("https://apis.%supsellcard", v1),
 	IN_EXP_UPSELL_VARIANT = {
 		CONTROL = "control",
 		VARIANT1 = "variant1",

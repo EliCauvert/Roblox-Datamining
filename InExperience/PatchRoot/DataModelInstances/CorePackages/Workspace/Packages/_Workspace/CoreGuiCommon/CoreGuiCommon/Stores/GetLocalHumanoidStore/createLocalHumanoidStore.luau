@@ -1,75 +1,75 @@
-﻿local playersService = game:GetService("Players")
-local parent = script:FindFirstAncestor("CoreGuiCommon").Parent
-local cryoModule = require(parent.Cryo)
-local createSignal = require(parent.Signals).createSignal
+﻿local Players = game:GetService("Players")
+local Parent = script:FindFirstAncestor("CoreGuiCommon").Parent
+local CryoModule = require(Parent.Cryo)
+local CreateSignalFunction = require(Parent.Signals).createSignal
 
-return function()
-	-- upvalues: createSignal (ref), cryoModule (ref), playersService (ref)
-	local var1, var2 = createSignal(nil)
-	local var3, var4 = createSignal({}, cryoModule.Dictionary.equals)
-	local var5 = nil
-	local var6 = nil
-	local var7 = nil
-	local localPlayer = playersService.LocalPlayer
-	while not localPlayer do
-		playersService:GetPropertyChangedSignal("LocalPlayer"):Wait()
-		localPlayer = playersService.LocalPlayer
+return function() --[[ Line: 24 ]]
+	-- upvalues: CreateSignalFunction (copy), CryoModule (copy), Players (copy)
+	local Signal, Signal2 = CreateSignalFunction(nil)
+	local Signal1, Signal2_1 = CreateSignalFunction({}, CryoModule.Dictionary.equals)
+	local HealthChangedConnection = nil
+	local DiedConnection = nil
+	local ChildAddedConnection = nil
+	local LocalPlayer = Players.LocalPlayer
+	while not LocalPlayer do
+		Players:GetPropertyChangedSignal("LocalPlayer"):Wait()
+		LocalPlayer = Players.LocalPlayer
 	end
-	local function updateHealthValue()
-		-- upvalues: var1 (ref), var4 (ref)
-		local var8 = var1(false)
-		var4(if var8 then {
-			health = var8.Health,
-			maxHealth = var8.MaxHealth,
-			isDead = var8.Health <= 0
+	local function updateHealthValue() --[[ Line: 41 ]]
+		-- upvalues: Signal (copy), Signal2_1 (copy)
+		local SignalResult = Signal(false)
+		Signal2_1(if SignalResult then {
+			health = SignalResult.Health,
+			maxHealth = SignalResult.MaxHealth,
+			isDead = SignalResult.Health <= 0
 		} else {})
 	end
 	
-	local function _()
-		-- upvalues: var7 (write), var5 (write), var6 (write), var2 (ref)
-		if var7 then
-			var7:Disconnect()
-			var7 = nil
+	local function _() --[[ Line: 52 | Named "unobserveHumanoid" ]]
+		-- upvalues: ChildAddedConnection (ref), HealthChangedConnection (ref), DiedConnection (ref), Signal2 (copy)
+		if ChildAddedConnection then
+			ChildAddedConnection:Disconnect()
+			ChildAddedConnection = nil
 		end
-		if var5 then
-			var5:Disconnect()
-			var5 = nil
+		if HealthChangedConnection then
+			HealthChangedConnection:Disconnect()
+			HealthChangedConnection = nil
 		end
-		if var6 then
-			var6:Disconnect()
-			var6 = nil
+		if DiedConnection then
+			DiedConnection:Disconnect()
+			DiedConnection = nil
 		end
-		var2(nil)
+		Signal2(nil)
 	end
 	
-	local function observeHumanoid()
-		-- upvalues: var7 (write), var5 (write), var6 (write), var2 (ref), localPlayer (ref), updateHealthValue (ref), observeHumanoid (ref)
-		if var7 then
-			var7:Disconnect()
-			var7 = nil
+	local function observeHumanoid() --[[ Line: 69 ]]
+		-- upvalues: ChildAddedConnection (ref), HealthChangedConnection (ref), DiedConnection (ref), Signal2 (copy), LocalPlayer (copy), updateHealthValue (copy), observeHumanoid (copy)
+		if ChildAddedConnection then
+			ChildAddedConnection:Disconnect()
+			ChildAddedConnection = nil
 		end
-		if var5 then
-			var5:Disconnect()
-			var5 = nil
+		if HealthChangedConnection then
+			HealthChangedConnection:Disconnect()
+			HealthChangedConnection = nil
 		end
-		if var6 then
-			var6:Disconnect()
-			var6 = nil
+		if DiedConnection then
+			DiedConnection:Disconnect()
+			DiedConnection = nil
 		end
-		var2(nil)
-		local character = localPlayer.Character
+		Signal2(nil)
+		local Character = LocalPlayer.Character
 		
-		if character then
-			local humanoid = character:FindFirstChildOfClass("Humanoid")
+		if Character then
+			local Humanoid = Character:FindFirstChildOfClass("Humanoid")
 			
-			if humanoid then
-				var2(humanoid)
-				var5 = humanoid.HealthChanged:Connect(updateHealthValue)
-				var6 = humanoid.Died:Connect(updateHealthValue)
+			if Humanoid then
+				Signal2(Humanoid)
+				HealthChangedConnection = Humanoid.HealthChanged:Connect(updateHealthValue)
+				DiedConnection = Humanoid.Died:Connect(updateHealthValue)
 			else
-				var7 = character.ChildAdded:Connect(function(p1)
-					-- upvalues: observeHumanoid (copy)
-					if p1:IsA("Humanoid") then
+				ChildAddedConnection = Character.ChildAdded:Connect(function(Child: Humanoid) --[[ Line: 79 ]]
+					-- upvalues: observeHumanoid (upval)
+					if Child:IsA("Humanoid") then
 						observeHumanoid()
 					end
 				end)
@@ -78,31 +78,31 @@ return function()
 		updateHealthValue()
 	end
 	
-	local characterAddedConnection = localPlayer.CharacterAdded:Connect(observeHumanoid)
-	local characterRemovingConnection = localPlayer.CharacterRemoving:Connect(observeHumanoid)
+	local CharacterAddedConnection = LocalPlayer.CharacterAdded:Connect(observeHumanoid)
+	local CharacterRemovingConnection = LocalPlayer.CharacterRemoving:Connect(observeHumanoid)
 	observeHumanoid()
 	
 	return {
-		getLocalHumanoid = var1,
-		getHealthValue = var3,
-		cleanup = function()
-			-- upvalues: characterAddedConnection (ref), characterRemovingConnection (ref), var7 (write), var5 (write), var6 (write), var2 (ref)
-			characterAddedConnection:Disconnect()
-			characterRemovingConnection:Disconnect()
+		getLocalHumanoid = Signal,
+		getHealthValue = Signal1,
+		cleanup = function() --[[ Line: 93 ]]
+			-- upvalues: CharacterAddedConnection (copy), CharacterRemovingConnection (copy), ChildAddedConnection (ref), HealthChangedConnection (ref), DiedConnection (ref), Signal2 (copy)
+			CharacterAddedConnection:Disconnect()
+			CharacterRemovingConnection:Disconnect()
 			
-			if var7 then
-				var7:Disconnect()
-				var7 = nil
+			if ChildAddedConnection then
+				ChildAddedConnection:Disconnect()
+				ChildAddedConnection = nil
 			end
-			if var5 then
-				var5:Disconnect()
-				var5 = nil
+			if HealthChangedConnection then
+				HealthChangedConnection:Disconnect()
+				HealthChangedConnection = nil
 			end
-			if var6 then
-				var6:Disconnect()
-				var6 = nil
+			if DiedConnection then
+				DiedConnection:Disconnect()
+				DiedConnection = nil
 			end
-			var2(nil)
+			Signal2(nil)
 		end
 	}
 end

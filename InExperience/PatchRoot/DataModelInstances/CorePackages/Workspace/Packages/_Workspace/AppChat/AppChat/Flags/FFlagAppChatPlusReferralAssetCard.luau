@@ -1,0 +1,4 @@
+﻿local FFlagAppChatResolveShareLinkV2Module = require(script.Parent.FFlagAppChatResolveShareLinkV2)
+local FFlagEnablePlusReferralLandingSheet = require(script:FindFirstAncestor("AppChat").Parent.SharedFlags).FFlagEnablePlusReferralLandingSheet
+
+return game:DefineFastFlag("AppChatPlusReferralAssetCard", false) and (FFlagAppChatResolveShareLinkV2Module and FFlagEnablePlusReferralLandingSheet)

@@ -1,61 +1,65 @@
-﻿local playerFeedback = script:FindFirstAncestor("PlayerFeedback")
-local parent = playerFeedback.Parent
-local reactModule = require(parent.React)
-local UIBloxModule = require(parent.UIBlox)
-local inlinePrompt = require(parent.AppBlox).InlinePrompt
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useRoactService = require(parent.RobloxAppHooks).useRoactService
-local appEventIngestService = require(parent.RoactServiceTags).AppEventIngestService
-local playerFeedbackEventsModule = require(playerFeedback.Analytics.Events.PlayerFeedbackEvents)
-local getFFlagEdpPlayerFeedbackPromptTitleOnly = require(parent.SharedFlags).GetFFlagEdpPlayerFeedbackPromptTitleOnly
-local images = UIBloxModule.App.ImageSet.Images
-local standardButtonSize = UIBloxModule.App.Button.Enum.StandardButtonSize
-local buttonType = UIBloxModule.App.Button.Enum.ButtonType
+﻿local PlayerFeedback = script:FindFirstAncestor("PlayerFeedback")
+local Parent = PlayerFeedback.Parent
+local ReactModule = require(Parent.React)
+local UIBloxModule = require(Parent.UIBlox)
+local InlinePrompt = require(Parent.AppBlox).InlinePrompt
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
+local AppEventIngestService = require(Parent.RoactServiceTags).AppEventIngestService
+local PlayerFeedbackEventsModule = require(PlayerFeedback.Analytics.Events.PlayerFeedbackEvents)
+local GetFFlagEdpPlayerFeedbackPromptTitleOnlyFunction = require(Parent.SharedFlags).GetFFlagEdpPlayerFeedbackPromptTitleOnly
+local Images = UIBloxModule.App.ImageSet.Images
+local StandardButtonSize = UIBloxModule.App.Button.Enum.StandardButtonSize
+local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
 
-return function(p1)
-	-- upvalues: useLocalization (ref), getFFlagEdpPlayerFeedbackPromptTitleOnly (ref), useRoactService (ref), appEventIngestService (ref), reactModule (ref), playerFeedbackEventsModule (ref), inlinePrompt (ref), images (ref), buttonType (ref), standardButtonSize (ref)
-	local var1 = useLocalization({
+return function(Frame) --[[ Line: 26 | Named "GamePlayerFeedbackPrompt" ]]
+	-- upvalues: UseLocalizationFunction (copy), GetFFlagEdpPlayerFeedbackPromptTitleOnlyFunction (copy), UseRoactServiceFunction (copy), AppEventIngestService (copy), ReactModule (copy), PlayerFeedbackEventsModule (copy), InlinePrompt (copy), Images (copy), ButtonType (copy), StandardButtonSize (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
 		buttonLabelKey = "PlayerFeedbacks.VoteForm.PromptBanner.GiveFeedbackButton",
 		messageKey = "PlayerFeedbacks.VoteForm.PromptBanner.Message",
 		titleKey = "PlayerFeedbacks.VoteForm.PromptBanner.Title",
-		titleOnlyKey = if getFFlagEdpPlayerFeedbackPromptTitleOnly() then "PlayerFeedbacks.VoteForm.PromptBanner.TitleOnly" else nil
+		titleOnlyKey = if GetFFlagEdpPlayerFeedbackPromptTitleOnlyFunction() then "PlayerFeedbacks.VoteForm.PromptBanner.TitleOnly" else nil
 	})
-	local var2 = useRoactService(appEventIngestService)
-	local var3 = reactModule.useCallback(function()
-		-- upvalues: playerFeedbackEventsModule (copy), var2 (ref), p1 (ref)
-		playerFeedbackEventsModule.ClickPlayerFeedbackPromptCta(var2, p1.placeId)
-		p1.onButtonClick()
-	end, { var2, p1.placeId, p1.onButtonClick })
-	local var4 = reactModule.useCallback(function()
-		-- upvalues: playerFeedbackEventsModule (copy), var2 (ref), p1 (ref)
-		playerFeedbackEventsModule.DismissPlayerFeedbackPrompt(var2, p1.placeId)
-		p1.onDimiss()
-	end, { var2, p1.placeId, p1.onDimiss })
-	reactModule.useEffect(function()
-		-- upvalues: playerFeedbackEventsModule (copy), var2 (ref), p1 (ref)
-		playerFeedbackEventsModule.PlayerFeedbackPromptMounted(var2, p1.placeId)
-	end, { var2, p1.placeId })
+	local UseRoactServiceResult = UseRoactServiceFunction(AppEventIngestService)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 36 ]]
+		-- upvalues: PlayerFeedbackEventsModule (upval), UseRoactServiceResult (copy), Frame (copy)
+		PlayerFeedbackEventsModule.ClickPlayerFeedbackPromptCta(UseRoactServiceResult, Frame.placeId)
+		Frame.onButtonClick()
+	end, {
+		UseRoactServiceResult,
+		Frame.placeId,
+		Frame.onButtonClick
+	})
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 41 ]]
+		-- upvalues: PlayerFeedbackEventsModule (upval), UseRoactServiceResult (copy), Frame (copy)
+		PlayerFeedbackEventsModule.DismissPlayerFeedbackPrompt(UseRoactServiceResult, Frame.placeId)
+		Frame.onDimiss()
+	end, { UseRoactServiceResult, Frame.placeId, Frame.onDimiss })
+	ReactModule.useEffect(function() --[[ Line: 46 ]]
+		-- upvalues: PlayerFeedbackEventsModule (upval), UseRoactServiceResult (copy), Frame (copy)
+		PlayerFeedbackEventsModule.PlayerFeedbackPromptMounted(UseRoactServiceResult, Frame.placeId)
+	end, { UseRoactServiceResult, Frame.placeId })
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		AutomaticSize = Enum.AutomaticSize.Y,
-		Size = if p1.width then UDim2.new(0, p1.width, 0, 0) else UDim2.new(1, 0, 0, 0),
-		LayoutOrder = p1.LayoutOrder
+		Size = if Frame.width then UDim2.new(0, Frame.width, 0, 0) else UDim2.new(1, 0, 0, 0),
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		InlinePrompt = reactModule.createElement(inlinePrompt, {
+		InlinePrompt = ReactModule.createElement(InlinePrompt, {
 			showDismiss = true,
-			iconImage = if getFFlagEdpPlayerFeedbackPromptTitleOnly() then nil else images["icons/menu/platformChatOff"],
-			titleMessage = if getFFlagEdpPlayerFeedbackPromptTitleOnly() then var1.titleOnlyKey else var1.titleKey,
-			sublineMessage = if getFFlagEdpPlayerFeedbackPromptTitleOnly() then nil else var1.messageKey,
+			iconImage = if GetFFlagEdpPlayerFeedbackPromptTitleOnlyFunction() then nil else Images["icons/menu/platformChatOff"],
+			titleMessage = if GetFFlagEdpPlayerFeedbackPromptTitleOnlyFunction() then UseLocalizationResult.titleOnlyKey else UseLocalizationResult.titleKey,
+			sublineMessage = if GetFFlagEdpPlayerFeedbackPromptTitleOnlyFunction() then nil else UseLocalizationResult.messageKey,
 			buttonProps = {
-				text = var1.buttonLabelKey,
-				buttonType = buttonType.Secondary,
-				standardSize = standardButtonSize.XSmall,
-				onActivated = var3
+				text = UseLocalizationResult.buttonLabelKey,
+				buttonType = ButtonType.Secondary,
+				standardSize = StandardButtonSize.XSmall,
+				onActivated = UseResult
 			},
-			onDismiss = var4,
-			backgroundTransparency = p1.backgroundTransparency,
-			backgroundColor3 = p1.backgroundColor3
+			onDismiss = UseResult1,
+			backgroundTransparency = Frame.backgroundTransparency,
+			backgroundColor3 = Frame.backgroundColor3
 		})
 	})
 end

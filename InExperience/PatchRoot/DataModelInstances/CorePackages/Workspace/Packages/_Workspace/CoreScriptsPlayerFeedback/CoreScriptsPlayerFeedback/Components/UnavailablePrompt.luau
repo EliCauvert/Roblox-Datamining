@@ -1,34 +1,33 @@
-﻿local coreScriptsPlayerFeedback = script:FindFirstAncestor("CoreScriptsPlayerFeedback")
-local parent = coreScriptsPlayerFeedback.Parent
-local reactModule = require(parent.React)
-local UIBloxModule = require(parent.UIBlox)
-local foundationModule = require(parent.Foundation)
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local useStyle = UIBloxModule.Core.Style.useStyle
-local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
-local buttonType = UIBloxModule.App.Button.Enum.ButtonType
-local useScreenSize = require(parent.CoreScriptsRoactCommon).useScreenSize
-local useLastInputMethod = require(parent.FocusNavigationUtils).useLastInputMethod
-local guiService = game:GetService("GuiService")
-local useEscapeDismissModule = require(coreScriptsPlayerFeedback.Hooks.useEscapeDismiss)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
+﻿local CoreScriptsPlayerFeedback = script:FindFirstAncestor("CoreScriptsPlayerFeedback")
+local Parent = CoreScriptsPlayerFeedback.Parent
+local ReactModule = require(Parent.React)
+local UIBloxModule = require(Parent.UIBlox)
+local FoundationModule = require(Parent.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local InteractiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
+local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
+local UseScreenSizeFunction = require(Parent.CoreScriptsRoactCommon).useScreenSize
+local UseLastInputMethodFunction = require(Parent.FocusNavigationUtils).useLastInputMethod
+local GuiService = game:GetService("GuiService")
+local UseEscapeDismissModule = require(CoreScriptsPlayerFeedback.Hooks.useEscapeDismiss)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 
-return reactModule.memo(function(p1)
-	-- upvalues: useScreenSize (ref), useStyle (ref), reactModule (ref), useLastInputMethod (ref), useLocalization (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), useEscapeDismissModule (ref), guiService (ref), buttonType (ref), interactiveAlert (ref)
-	local headerUnder13, hintUnder13
-	local var1 = useScreenSize()
-	local var2 = useStyle()
-	local var3 = reactModule.useRef(nil)
-	local var4 = useLastInputMethod()
-	local var5, var6 = reactModule.useState(false)
-	reactModule.useEffect(function()
-		-- upvalues: var5 (ref), var4 (ref), var6 (ref)
-		if not var5 and (var4 == "Keyboard" or var4 == "Gamepad") then
-			var6(true)
+return (ReactModule.memo(function(p1) --[[ Line: 31 ]]
+	-- upvalues: UseScreenSizeFunction (copy), UseStyleFunction (copy), ReactModule (copy), UseLastInputMethodFunction (copy), UseLocalizationFunction (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), UseEscapeDismissModule (copy), GuiService (copy), ButtonType (copy), InteractiveAlert (copy)
+	local UseScreenSizeResult = UseScreenSizeFunction()
+	local UseStyleResult = UseStyleFunction()
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseLastInputMethodResult = UseLastInputMethodFunction()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	ReactModule.useEffect(function() --[[ Line: 39 ]]
+		-- upvalues: UseStateResult (copy), UseLastInputMethodResult (copy), UseStateResult2 (copy)
+		if not UseStateResult and (UseLastInputMethodResult == "Keyboard" or UseLastInputMethodResult == "Gamepad") then
+			UseStateResult2(true)
 		end
-	end, { var5, var4 })
-	local var7 = useLocalization({
+	end, { UseStateResult, UseLastInputMethodResult })
+	local UseLocalizationResult = UseLocalizationFunction({
 		Title = "CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Title",
 		HeaderUnder13 = "CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Header.Under13",
 		HintUnder13 = "CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.Under13",
@@ -38,126 +37,131 @@ return reactModule.memo(function(p1)
 		HintDefault = "CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.Hint.Default",
 		OkayButton = "CoreScripts.FeedbackPrompt.FeedbackPrompt.Unavailable.OkayButton"
 	})
-	local _ = var7.Title
-	local _ = ""
-	local _ = ""
+	local _ = UseLocalizationResult.Title
+	local HeaderUnder13 = ""
+	local HintUnder13 = ""
 	
 	if p1.reason == "Under13" then
-		headerUnder13 = var7.HeaderUnder13
-		hintUnder13 = var7.HintUnder13
+		HeaderUnder13 = UseLocalizationResult.HeaderUnder13
+		HintUnder13 = UseLocalizationResult.HintUnder13
 	elseif p1.reason == "RateLimited" then
-		headerUnder13 = var7.HeaderRateLimited
-		hintUnder13 = var7.HintRateLimited
+		HeaderUnder13 = UseLocalizationResult.HeaderRateLimited
+		HintUnder13 = UseLocalizationResult.HintRateLimited
 	else
-		headerUnder13 = var7.HeaderDefault
-		hintUnder13 = var7.HintDefault
+		HeaderUnder13 = UseLocalizationResult.HeaderDefault
+		HintUnder13 = UseLocalizationResult.HintDefault
 	end
-	local var8 = reactModule.useCallback(function()
-		-- upvalues: var2 (ref), reactModule (copy), headerUnder13 (write), foundationFontFaceMigration (copy), normalizeFontFace (copy), hintUnder13 (write)
-		local body = var2.Font.Body
-		local header2 = var2.Font.Header2 or var2.Font.Body
-		local baseSize = var2.Font.BaseSize
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 71 ]]
+		-- upvalues: UseStyleResult (copy), ReactModule (upval), HeaderUnder13 (ref), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), HintUnder13 (ref)
+		local Body = UseStyleResult.Font.Body
+		local Header2 = UseStyleResult.Font.Header2 or UseStyleResult.Font.Body
+		local BaseSize = UseStyleResult.Font.BaseSize
 		
-		return reactModule.createElement("Frame", {
+		return ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			AutomaticSize = Enum.AutomaticSize.Y,
 			Size = UDim2.new(1, 0, 0, 0)
 		}, {
-			Layout = reactModule.createElement("UIListLayout", {
+			Layout = ReactModule.createElement("UIListLayout", {
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				Padding = UDim.new(0, 10),
 				FillDirection = Enum.FillDirection.Vertical,
 				HorizontalAlignment = Enum.HorizontalAlignment.Left
 			}),
-			Header = reactModule.createElement("TextLabel", {
+			Header = ReactModule.createElement("TextLabel", {
 				BackgroundTransparency = 1,
 				TextWrapped = true,
 				LayoutOrder = 1,
-				Text = headerUnder13,
+				Text = HeaderUnder13,
 				TextXAlignment = Enum.TextXAlignment.Left,
 				TextYAlignment = Enum.TextYAlignment.Top,
-				TextColor3 = var2.Theme.TextEmphasis.Color,
-				TextTransparency = var2.Theme.TextEmphasis.Transparency,
-				Font = if foundationFontFaceMigration then nil else header2.Font,
-				FontFace = if foundationFontFaceMigration then normalizeFontFace(var2.Tokens.Typography.TitleLarge.Font) else nil,
-				TextSize = math.floor(header2.RelativeSize * baseSize),
+				TextColor3 = UseStyleResult.Theme.TextEmphasis.Color,
+				TextTransparency = UseStyleResult.Theme.TextEmphasis.Transparency,
+				Font = if FoundationFontFaceMigration then nil else Header2.Font,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.TitleLarge.Font) else nil,
+				TextSize = math.floor(Header2.RelativeSize * BaseSize),
 				Size = UDim2.new(1, 0, 0, 0),
 				AutomaticSize = Enum.AutomaticSize.Y
 			}),
-			Hint = reactModule.createElement("TextLabel", {
+			Hint = ReactModule.createElement("TextLabel", {
 				BackgroundTransparency = 1,
 				TextWrapped = true,
 				LayoutOrder = 2,
-				Text = hintUnder13,
+				Text = HintUnder13,
 				TextXAlignment = Enum.TextXAlignment.Left,
 				TextYAlignment = Enum.TextYAlignment.Top,
-				TextColor3 = var2.Theme.TextMuted.Color,
-				TextTransparency = var2.Theme.TextMuted.Transparency,
-				Font = if foundationFontFaceMigration then nil else body.Font,
-				FontFace = if foundationFontFaceMigration then normalizeFontFace(var2.Tokens.Typography.BodyLarge.Font) else nil,
-				TextSize = math.floor(body.RelativeSize * baseSize),
+				TextColor3 = UseStyleResult.Theme.TextMuted.Color,
+				TextTransparency = UseStyleResult.Theme.TextMuted.Transparency,
+				Font = if FoundationFontFaceMigration then nil else Body.Font,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font) else nil,
+				TextSize = math.floor(Body.RelativeSize * BaseSize),
 				Size = UDim2.new(1, 0, 0, 0),
 				AutomaticSize = Enum.AutomaticSize.Y
 			})
 		})
-	end, { var2, headerUnder13, hintUnder13 })
-	local var9 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref)
+	end, { UseStyleResult, HeaderUnder13, HintUnder13 })
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 125 ]]
+		-- upvalues: p1 (copy)
 		p1.closePrompt()
 	end, { p1.closePrompt })
-	useEscapeDismissModule("UnavailablePromptCancel", var9)
-	local var10 = reactModule.useCallback(function(p2)
-		-- upvalues: var3 (ref), var5 (ref), guiService (copy)
-		var3.current = p2
+	UseEscapeDismissModule("UnavailablePromptCancel", UseResult1)
+	local UseResult2 = ReactModule.useCallback(function(Current) --[[ Line: 131 ]]
+		-- upvalues: UseRefResult (copy), UseStateResult (copy), GuiService (upval)
+		UseRefResult.current = Current
 		
-		if var5 and p2 then
-			pcall(function()
-				-- upvalues: guiService (copy), p2 (ref)
-				guiService:Select(p2)
+		if UseStateResult and Current then
+			pcall(function() --[[ Line: 134 ]]
+				-- upvalues: GuiService (upval), Current (copy)
+				GuiService:Select(Current)
 			end)
 		end
-	end, { var5 })
-	reactModule.useEffect(function()
-		-- upvalues: var5 (ref), var3 (ref), guiService (copy)
-		if not var5 then return end
-		local current = var3.current
+	end, { UseStateResult })
+	ReactModule.useEffect(function() --[[ Line: 140 ]]
+		-- upvalues: UseStateResult (copy), UseRefResult (copy), GuiService (upval)
+		if not UseStateResult then return end
+		local Current = UseRefResult.current
 		
-		if current then
-			pcall(function()
-				-- upvalues: guiService (copy), current (ref)
-				guiService:Select(current)
+		if Current then
+			pcall(function() --[[ Line: 146 ]]
+				-- upvalues: GuiService (upval), Current (copy)
+				GuiService:Select(Current)
 			end)
 		end
-	end, { var5 })
+	end, { UseStateResult })
 	
-	return reactModule.createElement(interactiveAlert, {
+	return ReactModule.createElement(InteractiveAlert, {
 		isMiddleContentFocusable = false,
-		title = var7.Title,
-		buttonStackInfo = reactModule.useMemo(function()
-			-- upvalues: buttonType (copy), var9 (ref), var7 (ref), var10 (ref), var5 (ref)
+		title = UseLocalizationResult.Title,
+		buttonStackInfo = ReactModule.useMemo(function() --[[ Line: 152 ]]
+			-- upvalues: ButtonType (upval), UseResult1 (copy), UseLocalizationResult (copy), UseResult2 (copy), UseStateResult (copy)
 			return {
 				buttons = {
 					{
-						buttonType = buttonType.PrimarySystem,
+						buttonType = ButtonType.PrimarySystem,
 						props = {
 							isDelayedInput = false,
 							enableInputDelayed = false,
 							delayInputSeconds = 1,
 							isDisabled = false,
-							onActivated = var9,
-							text = var7.OkayButton,
-							buttonRef = var10
+							onActivated = UseResult1,
+							text = UseLocalizationResult.OkayButton,
+							buttonRef = UseResult2
 						},
-						isDefaultChild = var5
+						isDefaultChild = UseStateResult
 					}
 				}
 			}
-		end, { var9, var7.OkayButton, var5, var10 }),
-		middleContent = var8,
+		end, {
+			UseResult1,
+			UseLocalizationResult.OkayButton,
+			UseStateResult,
+			UseResult2
+		}),
+		middleContent = UseResult,
 		position = UDim2.fromScale(0.5, 0.5),
-		screenSize = var1,
-		defaultChildRef = if var5 then var3 else nil,
-		isRoactGamepadEnabled = var5,
-		onCloseClicked = var9
+		screenSize = UseScreenSizeResult,
+		defaultChildRef = if UseStateResult then UseRefResult else nil,
+		isRoactGamepadEnabled = UseStateResult,
+		onCloseClicked = UseResult1
 	})
-end)
+end))

@@ -1,26 +1,26 @@
-﻿local avatarSwitcher = script:FindFirstAncestor("AvatarSwitcher")
-local parent = avatarSwitcher.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local outfitTileModule = require(avatarSwitcher.Components.OutfitTile)
-local _ = require(avatarSwitcher.types)
+﻿local AvatarSwitcher = script:FindFirstAncestor("AvatarSwitcher")
+local Parent = AvatarSwitcher.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local OutfitTileModule = require(AvatarSwitcher.Components.OutfitTile)
+local _ = require(AvatarSwitcher.types)
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), outfitTileModule (ref), foundationModule (ref)
-	local t = {}
+return ReactModule.memo(function(p1) --[[ Line: 22 | Named "OutfitsRow" ]]
+	-- upvalues: ReactModule (copy), OutfitTileModule (copy), FoundationModule (copy)
+	local Elements = {}
 	
-	for i, v in p1.outfits do
-		t["Outfit" .. (v.id or i)] = reactModule.createElement(outfitTileModule, {
-			outfitInfo = v,
+	for Column, outfit in p1.outfits do
+		Elements["Outfit" .. (outfit.id or Column)] = ReactModule.createElement(OutfitTileModule, {
+			outfitInfo = outfit,
 			disabled = p1.disabled,
-			LayoutOrder = i,
-			gridPosition = { row = p1.rowNumber, column = i }
+			LayoutOrder = Column,
+			gridPosition = { row = p1.rowNumber, column = Column }
 		})
 	end
-	for i_1 = #p1.outfits + 1, p1.desiredItemsCount do
-		t["Filler" .. i_1] = reactModule.createElement(foundationModule.View, { tag = "size-full-0", LayoutOrder = i_1 })
+	for i = #p1.outfits + 1, p1.desiredItemsCount do
+		Elements["Filler" .. i] = ReactModule.createElement(FoundationModule.View, { tag = "size-full-0", LayoutOrder = i })
 	end
-	return reactModule.createElement(foundationModule.View, {
+	return ReactModule.createElement(FoundationModule.View, {
 		tag = "row size-full-0 auto-y gap-medium flex-x-fill padding-bottom-large"
-	}, t)
+	}, Elements)
 end)

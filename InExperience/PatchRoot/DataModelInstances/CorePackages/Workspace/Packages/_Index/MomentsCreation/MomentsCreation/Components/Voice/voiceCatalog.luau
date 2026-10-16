@@ -1,4 +1,4 @@
-﻿local getFIntMomentsTTSDefaultVoiceIdModule = require(script:FindFirstAncestor("MomentsCreation").Flags.GetFIntMomentsTTSDefaultVoiceId)
+﻿local GetFIntMomentsTTSDefaultVoiceIdModule = require(script:FindFirstAncestor("MomentsCreation").Flags.GetFIntMomentsTTSDefaultVoiceId)
 local list = {
 	{
 		id = 9,
@@ -117,35 +117,35 @@ local list = {
 }
 local t = {}
 
-for i, v in list do
-	t[v.id] = v
+for _, value in list do
+	t[value.id] = value
 end
-local t_1 = {
-	getDefaultVoiceId = function()
-		-- upvalues: getFIntMomentsTTSDefaultVoiceIdModule (ref)
-		return getFIntMomentsTTSDefaultVoiceIdModule()
+local VoiceCatalogModule = {
+	getDefaultVoiceId = function() --[[ Line: 53 ]]
+		-- upvalues: GetFIntMomentsTTSDefaultVoiceIdModule (copy)
+		return GetFIntMomentsTTSDefaultVoiceIdModule()
 	end,
-	getVoiceById = function(p1)
-		-- upvalues: t (ref)
+	getVoiceById = function(p1) --[[ Line: 57 ]]
+		-- upvalues: t (copy)
 		return t[p1]
 	end
 }
 
-function t_1.getOrderedVoices()
-	-- upvalues: t_1 (ref), t (ref), list (ref)
-	local defaultVoiceId = t_1.getDefaultVoiceId()
-	local t_2 = {}
-	local var1 = t[defaultVoiceId]
+function VoiceCatalogModule.getOrderedVoices() --[[ Line: 62 ]]
+	-- upvalues: VoiceCatalogModule (copy), t (copy), list (copy)
+	local DefaultVoiceId = VoiceCatalogModule.getDefaultVoiceId()
+	local List = {}
+	local Entry = t[DefaultVoiceId]
 	
-	if var1 ~= nil then
-		table.insert(t_2, var1)
+	if Entry ~= nil then
+		table.insert(List, Entry)
 	end
-	for i, v in list do
-		if v.id ~= defaultVoiceId then
-			table.insert(t_2, v)
+	for _, value in list do
+		if value.id ~= DefaultVoiceId then
+			table.insert(List, value)
 		end
 	end
-	return t_2
+	return List
 end
 
-return t_1
+return VoiceCatalogModule

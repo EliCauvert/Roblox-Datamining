@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.DiscoveryUtils.DiscoveryUtils)
+﻿return (require(script.Parent.Parent.Parent._Index.DiscoveryUtils.DiscoveryUtils))

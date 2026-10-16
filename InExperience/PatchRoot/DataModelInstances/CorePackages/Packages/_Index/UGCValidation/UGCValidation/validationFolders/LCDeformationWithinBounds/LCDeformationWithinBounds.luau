@@ -1,46 +1,44 @@
 ﻿local UGCValidationService = game:GetService("UGCValidationService")
-local parent = script.Parent.Parent.Parent
-local _ = require(parent.util.Types)
-local validationRulesUtilModule = require(parent.util.ValidationRulesUtil)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local vector3UtilsModule = require(parent.util.Vector3Utils)
-local valueToStringModule = require(parent.util.valueToString)
-local t = {
-	fflag = require(parent.flags.getEngineFeatureEngineUGCValidationExactLCDeformationSize),
+local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.util.Types)
+local ValidationRulesUtilModule = require(Parent.util.ValidationRulesUtil)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
+local Vector3UtilsModule = require(Parent.util.Vector3Utils)
+local ValueToStringModule = require(Parent.util.valueToString)
+local GetEngineFeatureLayeredClothingDecompositionModule = require(Parent.flags.getEngineFeatureLayeredClothingDecomposition)
+local LCPostDeformSizeMultiplierEyebrowEyelashHundredthsRatio = game:DefineFastInt("LCPostDeformSizeMultiplierEyebrowEyelashHundredths", 100) / 100
+local config = {
+	[Enum.AssetType.EyebrowAccessory] = LCPostDeformSizeMultiplierEyebrowEyelashHundredthsRatio,
+	[Enum.AssetType.EyelashAccessory] = LCPostDeformSizeMultiplierEyebrowEyelashHundredthsRatio
+}
+local LCPostDeformSizeMultiplierGeneralHundredthsRatio = game:DefineFastInt("LCPostDeformSizeMultiplierGeneralHundredths", 100) / 100
+
+return {
+	fflag = require(Parent.flags.getEngineFeatureEngineUGCValidationExactLCDeformationSize),
 	categories = {
-		validationEnumsModule.UploadCategory.LAYERED_CLOTHING,
-		validationEnumsModule.UploadCategory.EYEBROW_EYELASH
+		ValidationEnumsModule.UploadCategory.LAYERED_CLOTHING,
+		ValidationEnumsModule.UploadCategory.EYEBROW_EYELASH
 	},
-	requiredData = { validationEnumsModule.SharedDataMember.renderMeshesData }
+	requiredData = { ValidationEnumsModule.SharedDataMember.renderMeshesData },
+	run = function(p1, p2) --[[ Line: 33 ]]
+		-- upvalues: ValidationRulesUtilModule (copy), config (copy), LCPostDeformSizeMultiplierGeneralHundredthsRatio (copy), GetEngineFeatureLayeredClothingDecompositionModule (copy), UGCValidationService (copy), Vector3UtilsModule (copy), ErrorSourceStringsModule (copy), ValueToStringModule (copy)
+		local Handle = p2.rootInstance:FindFirstChild("Handle")
+		local Handle1 = p2.renderMeshesData.Handle
+		local AssetType = p2.uploadEnum.assetType
+		
+		if Handle == nil or Handle1 == nil then
+			error("Schema should have ensured data exists for handle")
+		end
+		local LCSizeLimit, LCSizeLimit2 = ValidationRulesUtilModule:getLCSizeLimit(AssetType, Handle)
+		
+		if not LCSizeLimit or LCSizeLimit2 == nil then
+			error("Could not find matching attachment on Handle for " .. AssetType.Name)
+		end
+		local ScaledLCSizeLimit = LCSizeLimit2 * (config[AssetType] or LCPostDeformSizeMultiplierGeneralHundredthsRatio)
+		
+		if not Vector3UtilsModule.isFirstLessOrEqual(if GetEngineFeatureLayeredClothingDecompositionModule() then UGCValidationService:GetLayeredClothingPostDeformationSizeAsync(p2.rootInstance, Handle1.editable, Handle1.scale) else UGCValidationService:GetLayeredClothingPostDeformationSize(p2.rootInstance, Handle1.editable, Handle1.scale), ScaledLCSizeLimit) then
+			p1:fail(ErrorSourceStringsModule.Keys.LCDeformTooLarge, { maxSize = ValueToStringModule(ScaledLCSizeLimit) }, Handle)
+		end
+	end
 }
-local getEngineFeatureLayeredClothingDecompositionModule = require(parent.flags.getEngineFeatureLayeredClothingDecomposition)
-local var1 = game:DefineFastInt("LCPostDeformSizeMultiplierEyebrowEyelashHundredths", 100) / 100
-local t_1 = {
-	[Enum.AssetType.EyebrowAccessory] = var1,
-	[Enum.AssetType.EyelashAccessory] = var1
-}
-local var2 = game:DefineFastInt("LCPostDeformSizeMultiplierGeneralHundredths", 100) / 100
-
-function t.run(p1, p2)
-	-- upvalues: validationRulesUtilModule (ref), t_1 (ref), var2 (ref), getEngineFeatureLayeredClothingDecompositionModule (ref), UGCValidationService (ref), vector3UtilsModule (ref), errorSourceStringsModule (ref), valueToStringModule (ref)
-	local handle = p2.rootInstance:FindFirstChild("Handle")
-	local handle_1 = p2.renderMeshesData.Handle
-	local assetType = p2.uploadEnum.assetType
-	
-	if handle == nil or handle_1 == nil then
-		error("Schema should have ensured data exists for handle")
-	end
-	local var3, var4 = validationRulesUtilModule:getLCSizeLimit(assetType, handle)
-	
-	if not var3 or var4 == nil then
-		error("Could not find matching attachment on Handle for " .. assetType.Name)
-	end
-	local var5 = var4 * (t_1[assetType] or var2)
-	
-	if not vector3UtilsModule.isFirstLessOrEqual(if getEngineFeatureLayeredClothingDecompositionModule() then UGCValidationService:GetLayeredClothingPostDeformationSizeAsync(p2.rootInstance, handle_1.editable, handle_1.scale) else UGCValidationService:GetLayeredClothingPostDeformationSize(p2.rootInstance, handle_1.editable, handle_1.scale), var5) then
-		p1:fail(errorSourceStringsModule.Keys.LCDeformTooLarge, { maxSize = valueToStringModule(var5) }, handle)
-	end
-end
-
-return t

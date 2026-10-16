@@ -1,70 +1,69 @@
-﻿local momentsCommon = script:FindFirstAncestor("MomentsCommon")
-local parent = momentsCommon.Parent
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local _ = require(momentsCommon.Media.MediaTypes)
-local _ = require(momentsCommon.Media.mediaNodeRegistry)
-local getCropSizeModule = require(momentsCommon.Utils.getCropSize)
-local getFitSizeModule = require(momentsCommon.Utils.getFitSize)
-local fFlagMomentsVideoCropRoundedCornersModule = require(momentsCommon.Flags.FFlagMomentsVideoCropRoundedCorners)
-local fFlagMomentsPreloadVideoPlayerInstanceModule = require(momentsCommon.Flags.FFlagMomentsPreloadVideoPlayerInstance)
-local fFlagMomentsVideoPermissionContextFixModule = require(momentsCommon.Flags.FFlagMomentsVideoPermissionContextFix)
-local fFlagMomentsOptimisticProfilePending = require(parent.SharedFlags).FFlagMomentsOptimisticProfilePending
-local useSignalState = signalsReactModule.useSignalState
-local createSignal = signalsModule.createSignal
-local createComputed = signalsModule.createComputed
-local var1 = createSignal(Enum.ScaleType.Crop)
+﻿local MomentsCommon = script:FindFirstAncestor("MomentsCommon")
+local Parent = MomentsCommon.Parent
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local _ = require(MomentsCommon.Media.MediaTypes)
+local _ = require(MomentsCommon.Media.mediaNodeRegistry)
+local GetFitSizeModule = require(MomentsCommon.Utils.getFitSize)
+local FFlagMomentsPreloadVideoPlayerInstanceModule = require(MomentsCommon.Flags.FFlagMomentsPreloadVideoPlayerInstance)
+local FFlagMomentsVideoPermissionContextFixModule = require(MomentsCommon.Flags.FFlagMomentsVideoPermissionContextFix)
+local FFlagMomentsVideoLoadAsyncLoadingFixModule = require(MomentsCommon.Flags.FFlagMomentsVideoLoadAsyncLoadingFix)
+local FFlagMomentsOptimisticProfilePending = require(Parent.SharedFlags).FFlagMomentsOptimisticProfilePending
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local CreateSignalFunction = SignalsModule.createSignal
+local CreateComputedFunction = SignalsModule.createComputed
+local Signal = CreateSignalFunction(Enum.ScaleType.Crop)
 
-local function VideoSurface(p1)
-	-- upvalues: useSignalState (ref), reactModule (ref), createComputed (ref), var1 (ref), fFlagMomentsVideoCropRoundedCornersModule (ref), getFitSizeModule (ref), getCropSizeModule (ref)
-	local var2 = useSignalState(p1.getItemSize)
-	local getResolution = p1.getResolution
-	local var3 = useSignalState(reactModule.useMemo(function()
-		-- upvalues: createComputed (copy), getResolution (ref)
-		return createComputed(function(p2)
-			-- upvalues: getResolution (copy)
-			return getResolution(p2)
+local function VideoSurface(p1) --[[ Line: 77 ]]
+	-- upvalues: UseSignalStateFunction (copy), ReactModule (copy), CreateComputedFunction (copy), Signal (copy), GetFitSizeModule (copy)
+	local UseSignalStateResult = UseSignalStateFunction(p1.getItemSize)
+	local GetResolutionFunction = p1.getResolution
+	local UseSignalStateResult1 = UseSignalStateFunction((ReactModule.useMemo(function() --[[ Line: 83 ]]
+		-- upvalues: CreateComputedFunction (upval), GetResolutionFunction (copy)
+		return CreateComputedFunction(function(p2) --[[ Line: 84 ]]
+			-- upvalues: GetResolutionFunction (upval)
+			return GetResolutionFunction(p2)
 		end)
-	end, { getResolution }))
-	local var4 = useSignalState(p1.getScaleType or var1)
-	local uDim2 = UDim2.fromScale(1, 1)
-	local stretch = Enum.ScaleType.Stretch
+	end, { GetResolutionFunction })))
+	local _UDim2 = UDim2.fromScale(1, 1)
+	local Stretch = Enum.ScaleType.Stretch
 	
-	if fFlagMomentsVideoCropRoundedCornersModule and var4 ~= Enum.ScaleType.Fit then
-		stretch = Enum.ScaleType.Crop
-	elseif var3 ~= nil and var3.X > 0 and var3.Y > 0 then
-		uDim2 = if var4 == Enum.ScaleType.Fit then getFitSizeModule(var2, var3) else getCropSizeModule(var2, var3)
+	if UseSignalStateFunction(p1.getScaleType or Signal) == Enum.ScaleType.Fit then
+		if UseSignalStateResult1 ~= nil and UseSignalStateResult1.X > 0 and UseSignalStateResult1.Y > 0 then
+			_UDim2 = GetFitSizeModule(UseSignalStateResult, UseSignalStateResult1)
+		end
+	else
+		Stretch = Enum.ScaleType.Crop
 	end
-	return reactModule.createElement("VideoDisplay", {
+	return ReactModule.createElement("VideoDisplay", {
 		BackgroundTransparency = 1,
 		AnchorPoint = Vector2.new(0.5, 0.5),
 		Position = UDim2.fromScale(0.5, 0.5),
-		Size = uDim2,
-		ScaleType = stretch,
+		Size = _UDim2,
+		ScaleType = Stretch,
 		ZIndex = p1.zIndex,
 		ref = p1.setSurface
 	}, {
-		Corner = if p1.cornerRadius ~= nil then if p1.surfaceCornerRadius ~= nil then nil else reactModule.createElement("UICorner", { CornerRadius = p1.surfaceCornerRadius }) else reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, p1.cornerRadius) })
+		Corner = if p1.cornerRadius == nil then if p1.surfaceCornerRadius == nil then nil else ReactModule.createElement("UICorner", { CornerRadius = p1.surfaceCornerRadius }) else ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0, p1.cornerRadius) })
 	})
 end
 
-local function defaultObserveLoaded(p1)
+local function defaultObserveLoaded(Object) --[[ Line: 176 ]]
 	return {
-		getIsLoaded = function()
-			-- upvalues: p1 (ref)
-			return p1.IsLoaded
+		getIsLoaded = function() --[[ Line: 178 ]]
+			-- upvalues: Object (copy)
+			return Object.IsLoaded
 		end,
-		connect = function(p2)
-			-- upvalues: p1 (ref)
-			local var2 = p1:GetPropertyChangedSignal("IsLoaded"):Connect(function()
-				-- upvalues: p2 (ref), p1 (copy)
-				p2(p1.IsLoaded)
+		connect = function(Callback) --[[ Line: 181 ]]
+			-- upvalues: Object (copy)
+			local Connection = Object:GetPropertyChangedSignal("IsLoaded"):Connect(function() --[[ Line: 182 ]]
+				-- upvalues: Callback (copy), Object (upval)
+				Callback(Object.IsLoaded)
 			end)
 			
-			return function()
-				-- upvalues: var2 (ref)
-				var2:Disconnect()
+			return function() --[[ Line: 185 ]]
+				-- upvalues: Connection (copy)
+				Connection:Disconnect()
 			end
 		end
 	}
@@ -72,215 +71,244 @@ end
 
 return {
 	kind = "video",
-	create = function(p1, p2)
-		-- upvalues: fFlagMomentsVideoPermissionContextFixModule (ref), createSignal (ref), defaultObserveLoaded (ref), createComputed (ref), fFlagMomentsPreloadVideoPlayerInstanceModule (ref), fFlagMomentsOptimisticProfilePending (ref), reactModule (ref), VideoSurface (ref)
-		local id = p1.id
-		local content = p1.content
-		local var2 = if fFlagMomentsVideoPermissionContextFixModule then p1.preloadContent or content else content
-		local var3, var4 = createSignal(p1.region)
-		local parent = p1.parent
-		local zIndex = p1.zIndex or 0
-		local cornerRadius = p1.cornerRadius
-		local runService = p2.runService
-		local contentProvider = p2.contentProvider
-		local observeLoaded = p2.observeLoaded or defaultObserveLoaded
-		local loadVideo = p2.loadVideo or function(p3)
+	create = function(p1, p2) --[[ Line: 192 ]]
+		-- upvalues: FFlagMomentsVideoPermissionContextFixModule (copy), CreateSignalFunction (copy), defaultObserveLoaded (copy), CreateComputedFunction (copy), FFlagMomentsPreloadVideoPlayerInstanceModule (copy), FFlagMomentsVideoLoadAsyncLoadingFixModule (copy), FFlagMomentsOptimisticProfilePending (copy), ReactModule (copy), VideoSurface (copy)
+		local Id = p1.id
+		local Content = p1.content
+		local PreloadContent = FFlagMomentsVideoPermissionContextFixModule and p1.preloadContent or Content
+		local Signal, Signal2 = CreateSignalFunction(p1.region)
+		local Parent = p1.parent
+		local ZIndex = p1.zIndex or 0
+		local CornerRadius = p1.cornerRadius
+		local RunService = p2.runService
+		local ContentProvider = p2.contentProvider
+		local ObserveLoaded = p2.observeLoaded or defaultObserveLoaded
+		local LoadVideo = p2.loadVideo or function(p3) --[[ Line: 217 ]]
 			return p3:LoadAsync()
 		end
 		
-		local function _()
-			-- upvalues: var3 (ref)
-			local var5 = var3(false)
+		local function _() --[[ Line: 221 | Named "getRegionStart" ]]
+			-- upvalues: Signal (copy)
+			local SignalResult = Signal(false)
 			
-			return if var5 == nil then 0 else var5.startTime
+			return if SignalResult == nil then 0 else SignalResult.startTime
 		end
 		
-		local var5, var6 = createSignal(false)
-		local var7, var8 = createSignal(false)
-		local var9, var10 = createSignal(false)
-		local var11, var12 = createSignal(false)
-		local var13, var14 = createSignal(nil)
-		local var15, var16 = createSignal(nil)
-		local var17, var18 = createSignal(0)
-		local var19, var20 = createSignal(0)
-		local var21 = createComputed(function(p3)
-			-- upvalues: var9 (ref), var7 (ref), var5 (ref)
-			return if var9(p3) then "Playing" elseif var7(p3) then "Decoded" elseif var5(p3) then "Downloaded" else "Idle"
+		local Signal1, Signal2_1 = CreateSignalFunction(false)
+		local Signal3, Signal2_2 = CreateSignalFunction(false)
+		local Signal4, Signal2_3 = CreateSignalFunction(false)
+		local Signal5, Signal2_4 = CreateSignalFunction(false)
+		local Signal6, Signal2_5 = CreateSignalFunction(nil)
+		local Signal7, Signal2_6 = CreateSignalFunction(nil)
+		local Signal8, Signal2_7 = CreateSignalFunction(0)
+		local Signal9, Signal2_8 = CreateSignalFunction(0)
+		local Computed = CreateComputedFunction(function(p3): string --[[ Line: 243 ]]
+			-- upvalues: Signal4 (copy), Signal3 (copy), Signal1 (copy)
+			return if Signal4(p3) then "Playing" elseif Signal3(p3) then "Decoded" elseif Signal1(p3) then "Downloaded" else "Idle"
 		end)
-		local var22 = createComputed(function(p3)
-			-- upvalues: var3 (ref), var17 (ref)
-			local var23 = var3(p3)
+		local Computed1 = CreateComputedFunction(function(p3) --[[ Line: 254 ]]
+			-- upvalues: Signal (copy), Signal8 (copy)
+			local SignalResult = Signal(p3)
 			
-			return if var23 == nil then var17(p3) else var23.endTime - var23.startTime
+			return if SignalResult == nil then Signal8(p3) else SignalResult.endTime - SignalResult.startTime
 		end)
-		local var23 = nil
-		local var24 = nil
-		local var25 = nil
-		local t = {}
-		local var26 = nil
-		local var27 = nil
-		local var28 = nil
-		local var29 = false
-		local var30 = false
-		local var31 = false
-		local var32 = false
-		local var33 = false
-		local var34 = false
-		local var35 = false
-		local var36 = nil
-		local var37 = false
-		local var38 = 0
-		local var39 = false
+		local Object = nil
+		local Object1 = nil
+		local Surface = nil
+		local List = {}
+		local v1 = nil
+		local ConnectResult = nil
+		local RenderSteppedConnection = nil
+		local v2 = false
+		local Flag = false
+		local Flag1 = false
+		local Flag2 = false
+		local Flag3 = false
+		local Flag4 = false
+		local Flag5 = false
+		local v3 = nil
+		local Flag6 = false
+		local Flag7 = false
+		local Count = 0
+		local Flag8 = false
 		
-		local _ = function()
-			-- upvalues: var3 (ref), var17 (ref)
-			local var40 = var3(false)
+		local _ = function() --[[ Line: 286 | Named "regionEnd" ]]
+			-- upvalues: Signal (copy), Signal8 (copy)
+			local SignalResult = Signal(false)
 			
-			return if var40 == nil then var17(false) else var40.endTime
+			return if SignalResult == nil then Signal8(false) else SignalResult.endTime
 		end
 		
-		local _ = function()
-			-- upvalues: var23 (write), var3 (ref), var17 (ref), var29 (write)
-			if not var23 then return end
-			local var40 = var3(false)
-			local var41 = var17(false)
-			local var42 = if var40 ~= nil then var41 > 0 and (var40.startTime <= 0.05 and var41 - 0.05 <= var40.endTime) else true
-			var29 = var42
-			var23.Looping = var42
-		end
-		
-		local _ = function()
-			-- upvalues: var23 (write), var25 (write), var30 (write), var24 (write)
-			if var30 and var23 and (var25 and not var24) then
-				local wire = Instance.new("Wire")
-				wire.SourceInstance = var23
-				wire.TargetInstance = var25
-				wire.Parent = var23
-				var24 = wire
+		local _ = function() --[[ Line: 293 | Named "applyLoopingMode" ]]
+			-- upvalues: Object (ref), Signal (copy), Signal8 (copy), v2 (ref)
+			local Object1 = Object
+			
+			if Object1 then
+				local SignalResult = Signal(false)
+				local SignalResult1: number = Signal8(false)
+				local NoSignalResult: boolean = SignalResult == nil or SignalResult1 > 0 and SignalResult.startTime <= 0.05 and SignalResult1 - 0.05 <= SignalResult.endTime
+				v2 = NoSignalResult
+				Object1.Looping = NoSignalResult
 				
 				return
 			end
 		end
 		
-		local _ = function()
-			-- upvalues: var24 (write)
-			if var24 then
-				var24:Destroy()
-				var24 = nil
-			end
-		end
-		
-		local function onStep()
-			-- upvalues: var23 (write), var3 (ref), var29 (write), var17 (ref), var20 (ref)
-			if not var23 then return end
-			local var40 = var3(false)
-			local var41 = if var40 ~= nil then 0 else var40.startTime
-			local timePosition = var23.TimePosition
+		local _ = function() --[[ Line: 306 | Named "ensureWire" ]]
+			-- upvalues: Object (ref), Surface (ref), Flag (ref), Object1 (ref)
+			local Parent = Object
+			local TargetInstance = Surface
 			
-			if not var29 then
-				local var42 = var3(false)
+			if Flag and Parent and TargetInstance and not Object1 then
+				local Wire = Instance.new("Wire")
+				Wire.SourceInstance = Parent
+				Wire.TargetInstance = TargetInstance
+				Wire.Parent = Parent
+				Object1 = Wire
 				
-				if (if var42 ~= nil then var17(false) else var42.endTime) - 0.05 <= timePosition then
-					timePosition = var41
-					var23.TimePosition = var41
-				end
-			end
-			var20(timePosition - var41)
-		end
-		
-		local _ = function()
-			-- upvalues: var28 (write), runService (ref), onStep (ref)
-			if var28 then
 				return
 			end
-			var28 = runService.RenderStepped:Connect(onStep)
 		end
 		
-		local _ = function()
-			-- upvalues: var28 (write)
-			if var28 then
-				var28:Disconnect()
-				var28 = nil
+		local _ = function() --[[ Line: 321 | Named "tearWire" ]]
+			-- upvalues: Object1 (ref)
+			if Object1 then
+				Object1:Destroy()
+				Object1 = nil
 			end
 		end
 		
-		local function startPlayerPlaybackIfReady()
-			-- upvalues: var23 (write), var35 (write), var9 (ref), var30 (write), fFlagMomentsPreloadVideoPlayerInstanceModule (copy), var34 (write), var11 (ref), var10 (ref), var28 (write), runService (ref), onStep (ref)
-			if not var35 or var9(false) or (not var30 or var23 == nil) or fFlagMomentsPreloadVideoPlayerInstanceModule and not var34 and not var11(false) then return end
-			var23:Play()
-			var10(true)
+		local function onStep() --[[ Line: 328 ]]
+			-- upvalues: Object (ref), Signal (copy), v2 (ref), Signal8 (copy), Signal2_8 (copy)
+			local Object1 = Object
 			
-			if var28 then
+			if not Object1 then return end
+			local SignalResult = Signal(false)
+			local StartTime = if SignalResult == nil then 0 else SignalResult.startTime
+			local TimePosition = Object1.TimePosition
+			
+			if not v2 then
+				local SignalResult1 = Signal(false)
+				
+				if (if SignalResult1 == nil then Signal8(false) else SignalResult1.endTime) - 0.05 <= TimePosition then
+					TimePosition = StartTime
+					Object1.TimePosition = StartTime
+				end
+			end
+			Signal2_8(TimePosition - StartTime)
+		end
+		
+		local _ = function() --[[ Line: 342 | Named "startPlaybackLoop" ]]
+			-- upvalues: RenderSteppedConnection (ref), RunService (copy), onStep (copy)
+			if not RenderSteppedConnection then
+				RenderSteppedConnection = RunService.RenderStepped:Connect(onStep)
+				
 				return
 			end
-			var28 = runService.RenderStepped:Connect(onStep)
 		end
 		
-		local function assets()
-			-- upvalues: var2 (write)
-			return { var2 }
-		end
-		
-		local _ = function()
-			-- upvalues: content (ref), fFlagMomentsPreloadVideoPlayerInstanceModule (copy), var3 (ref), parent (ref), var23 (write)
-			local videoPlayer_1 = Instance.new("VideoPlayer")
-			videoPlayer_1.Name = "VideoPlayer"
-			videoPlayer_1.Looping = false
-			videoPlayer_1.InternalVideoUsage = Enum.InternalVideoUsage.WatchPage
-			videoPlayer_1.VideoContent = content
-			
-			if fFlagMomentsPreloadVideoPlayerInstanceModule then
-				local var40 = var3(false)
-				videoPlayer_1.TimePosition = if var40 ~= nil then 0 else var40.startTime
+		local _ = function() --[[ Line: 349 | Named "stopPlaybackLoop" ]]
+			-- upvalues: RenderSteppedConnection (ref)
+			if RenderSteppedConnection then
+				RenderSteppedConnection:Disconnect()
+				RenderSteppedConnection = nil
 			end
-			videoPlayer_1.Parent = parent
-			var23 = videoPlayer_1
-			
-			return videoPlayer_1
 		end
 		
-		local function startLoadIfReady()
-			-- upvalues: var23 (write), var26 (write), var39 (write), var30 (write), var33 (write), fFlagMomentsPreloadVideoPlayerInstanceModule (copy), var31 (write), var32 (write), var37 (write), var36 (write), startLoadIfReady (ref), var34 (write), loadVideo (ref), var14 (ref), var12 (ref), startPlayerPlaybackIfReady (ref)
-			if var39 or not var30 or (var33 or var23 == nil) or var26 == nil then return end
-			if fFlagMomentsPreloadVideoPlayerInstanceModule and var31 and (not var32 and not var37) then
-				if var36 == nil then
-					var36 = var26
-					task.delay(2, function()
-						-- upvalues: var36 (copy), var26 (ref), var39 (copy), var30 (copy), var23 (copy), var23 (ref), var26 (copy), var37 (copy), startLoadIfReady (copy)
-						if var36 ~= var26 then return end
-						var36 = nil
-						
-						if var39 or not var30 or (var23 ~= var23 or var26 ~= var26) then
-							return
-						end
-						var37 = true
-						startLoadIfReady()
-					end)
-				end
+		local function startPlayerPlaybackIfReady() --[[ Line: 356 ]]
+			-- upvalues: Object (ref), Flag5 (ref), Signal4 (copy), Flag (ref), FFlagMomentsPreloadVideoPlayerInstanceModule (upval), Flag4 (ref), Signal5 (copy), Signal2_3 (copy), RenderSteppedConnection (ref), RunService (copy), onStep (copy)
+			local Object1 = Object
+			
+			if not Flag5 or Signal4(false) or not Flag or Object1 == nil or FFlagMomentsPreloadVideoPlayerInstanceModule and not Flag4 and not Signal5(false) then return end
+			Object1:Play()
+			Signal2_3(true)
+			
+			if not RenderSteppedConnection then
+				RenderSteppedConnection = RunService.RenderStepped:Connect(onStep)
+				
+				return
+			end
+		end
+		
+		local _ = function() --[[ Line: 376 | Named "createPlayer" ]]
+			-- upvalues: Content (copy), FFlagMomentsPreloadVideoPlayerInstanceModule (upval), Signal (copy), Parent (copy), Object (ref)
+			local VideoPlayer = Instance.new("VideoPlayer")
+			VideoPlayer.Name = "VideoPlayer"
+			VideoPlayer.Looping = false
+			VideoPlayer.InternalVideoUsage = Enum.InternalVideoUsage.WatchPage
+			VideoPlayer.VideoContent = Content
+			
+			if FFlagMomentsPreloadVideoPlayerInstanceModule then
+				local SignalResult = Signal(false)
+				VideoPlayer.TimePosition = if SignalResult == nil then 0 else SignalResult.startTime
+			end
+			VideoPlayer.Parent = Parent
+			Object = VideoPlayer
+			
+			return VideoPlayer
+		end
+		
+		local function runLoad(p3, p4, p5) --[[ Line: 394 ]]
+			-- upvalues: Flag8 (ref), Object (ref), Flag (ref), LoadVideo (copy), Signal2_5 (copy), Flag4 (ref), Signal2_4 (copy), startPlayerPlaybackIfReady (copy), FFlagMomentsVideoLoadAsyncLoadingFixModule (upval), Flag1 (ref), Flag2 (ref), Flag7 (ref), runLoad (copy)
+			if Flag8 or Object ~= p3 or not Flag then return end
+			local Success, Result = pcall(LoadVideo, p3)
+			
+			if Flag8 or Object ~= p3 or not Flag then return end
+			if not Success then
+				Signal2_5(`video load errored: {tostring(Result)}`)
+				
+				return
+			end
+			if Result == Enum.AssetFetchStatus.Success then
+				Flag4 = true
+				Signal2_4(p4.getIsLoaded())
+				Signal2_5(nil)
+				startPlayerPlaybackIfReady()
+				
+				return
+			end
+			if not FFlagMomentsVideoLoadAsyncLoadingFixModule or Result ~= Enum.AssetFetchStatus.Loading or p5 then
+				Signal2_5(`video load failed: {Result.Name}`)
+				
+				return
+			end
+			Signal2_4(p4.getIsLoaded())
+			
+			if Flag1 and not Flag2 then
+				Flag7 = true
+				
 				return
 			else
-				var36 = nil
-				var33 = true
-				var34 = false
-				task.spawn(function()
-					-- upvalues: var39 (copy), var23 (copy), var23 (ref), var30 (copy), loadVideo (copy), var14 (copy), var34 (copy), var12 (copy), var26 (ref), startPlayerPlaybackIfReady (copy)
-					if var39 or var23 ~= var23 or not var30 then return end
-					local ok, status = pcall(loadVideo, var23)
+				runLoad(p3, p4, true)
+			end
+		end
+		
+		local function startLoadIfReady() --[[ Line: 427 ]]
+			-- upvalues: Object (ref), v1 (ref), Flag8 (ref), Flag (ref), Flag3 (ref), FFlagMomentsPreloadVideoPlayerInstanceModule (upval), Flag1 (ref), Flag2 (ref), Flag6 (ref), v3 (ref), startLoadIfReady (copy), Flag4 (ref), runLoad (copy)
+			local Object1 = Object
+			local v4 = v1
+			
+			if Flag8 or not Flag or Flag3 or Object1 == nil or v4 == nil then return end
+			if not FFlagMomentsPreloadVideoPlayerInstanceModule or not Flag1 or Flag2 or Flag6 then
+				v3 = nil
+				Flag3 = true
+				Flag4 = false
+				task.spawn(runLoad, Object1, v4, false)
+				
+				return
+			elseif v3 == nil then
+				v3 = v4
+				task.delay(2, function() --[[ Line: 443 ]]
+					-- upvalues: v3 (upval), v4 (copy), Flag8 (upval), Flag (upval), Object (upval), Object1 (copy), v1 (upval), Flag6 (upval), startLoadIfReady (upval)
+					if v3 ~= v4 then return end
+					v3 = nil
 					
-					if var39 or var23 ~= var23 or not var30 then return end
-					if not ok then
-						var14(`video load errored: {tostring(status)}`)
-						
-						return
-					elseif status == Enum.AssetFetchStatus.Success then
-						var34 = true
-						var12(var26.getIsLoaded())
-						var14(nil)
-						startPlayerPlaybackIfReady()
+					if not Flag8 and Flag and Object == Object1 and v1 == v4 then
+						Flag6 = true
+						startLoadIfReady()
 						
 						return
 					end
-					var14(`video load failed: {status.Name}`)
 				end)
 			end
 		end
@@ -288,316 +316,356 @@ return {
 		return {
 			kind = "video",
 			usesDecoder = true,
-			id = id,
-			zIndex = zIndex,
-			audioStem = { defaultVolume = 1, stemId = id },
-			assets = assets,
-			download = function()
-				-- upvalues: var38 (write), fFlagMomentsPreloadVideoPlayerInstanceModule (copy), var23 (write), content (ref), var3 (ref), parent (ref), var31 (write), contentProvider (ref), var39 (write), var32 (write), fFlagMomentsOptimisticProfilePending (copy), var2 (write), var6 (ref), startLoadIfReady (ref)
-				if fFlagMomentsPreloadVideoPlayerInstanceModule then
-					local var40 = var23
+			id = Id,
+			zIndex = ZIndex,
+			audioStem = { defaultVolume = 1, stemId = Id },
+			assets = function() --[[ Line: 372 ]]
+				-- upvalues: PreloadContent (ref)
+				return { PreloadContent }
+			end,
+			download = function() --[[ Line: 464 ]]
+				-- upvalues: Count (ref), FFlagMomentsPreloadVideoPlayerInstanceModule (upval), Object (ref), Content (copy), Signal (copy), Parent (copy), Flag1 (ref), ContentProvider (copy), Flag8 (ref), Flag2 (ref), FFlagMomentsVideoLoadAsyncLoadingFixModule (upval), Flag7 (ref), v1 (ref), Flag (ref), runLoad (copy), FFlagMomentsOptimisticProfilePending (upval), PreloadContent (ref), Signal2_1 (copy), startLoadIfReady (copy)
+				local Count1 = Count
+				
+				if FFlagMomentsPreloadVideoPlayerInstanceModule then
+					local VideoPlayer = Object
 					
-					if not var40 then
-						local videoPlayer_1 = Instance.new("VideoPlayer")
-						videoPlayer_1.Name = "VideoPlayer"
-						videoPlayer_1.Looping = false
-						videoPlayer_1.InternalVideoUsage = Enum.InternalVideoUsage.WatchPage
-						videoPlayer_1.VideoContent = content
+					if not VideoPlayer then
+						local VideoPlayer1 = Instance.new("VideoPlayer")
+						VideoPlayer1.Name = "VideoPlayer"
+						VideoPlayer1.Looping = false
+						VideoPlayer1.InternalVideoUsage = Enum.InternalVideoUsage.WatchPage
+						VideoPlayer1.VideoContent = Content
 						
-						if fFlagMomentsPreloadVideoPlayerInstanceModule then
-							local var41 = var3(false)
-							videoPlayer_1.TimePosition = if var41 ~= nil then 0 else var41.startTime
+						if FFlagMomentsPreloadVideoPlayerInstanceModule then
+							local SignalResult = Signal(false)
+							VideoPlayer1.TimePosition = if SignalResult == nil then 0 else SignalResult.startTime
 						end
-						videoPlayer_1.Parent = parent
-						var23 = videoPlayer_1
-						var40 = videoPlayer_1
+						VideoPlayer1.Parent = Parent
+						Object = VideoPlayer1
+						VideoPlayer = VideoPlayer1
 					end
-					var31 = true
-					pcall(function()
-						-- upvalues: contentProvider (copy), var40 (ref)
-						contentProvider:PreloadAsync({ var40 })
+					Flag1 = true
+					pcall(function() --[[ Line: 472 ]]
+						-- upvalues: ContentProvider (upval), VideoPlayer (copy)
+						ContentProvider:PreloadAsync({ VideoPlayer })
 					end)
 					
-					if var39 or var38 ~= var38 or var23 ~= var40 then return end
-					var32 = true
-				elseif not fFlagMomentsOptimisticProfilePending or var2.Uri ~= nil then
-					contentProvider:PreloadAsync({ var2.Uri })
+					if Flag8 or Count1 ~= Count or Object ~= VideoPlayer then return end
+					Flag2 = true
+					
+					if FFlagMomentsVideoLoadAsyncLoadingFixModule and Flag7 then
+						Flag7 = false
+						local v4 = v1
+						
+						if Flag and v4 ~= nil and not v4.getIsLoaded() then
+							task.spawn(runLoad, VideoPlayer, v4, true)
+						end
+					end
+				elseif not FFlagMomentsOptimisticProfilePending or PreloadContent.Uri ~= nil then
+					ContentProvider:PreloadAsync({ PreloadContent.Uri })
 				end
-				if var39 or var38 ~= var38 then
+				if not Flag8 and Count1 == Count then
+					Signal2_1(true)
+					startLoadIfReady()
+					
 					return
 				end
-				var6(true)
-				startLoadIfReady()
 			end,
-			decode = function()
-				-- upvalues: var39 (write), var30 (write), var14 (ref), var23 (write), content (ref), fFlagMomentsPreloadVideoPlayerInstanceModule (copy), var3 (ref), parent (ref), observeLoaded (ref), var26 (write), var12 (ref), var27 (write), startPlayerPlaybackIfReady (ref), var16 (ref), t (ref), var18 (ref), var17 (ref), var29 (write), var25 (write), var24 (write), startLoadIfReady (ref), var8 (ref)
-				if var39 or var30 then return end
-				var14(nil)
-				local var40 = var23
+			decode = function() --[[ Line: 497 ]]
+				-- upvalues: Flag8 (ref), Flag (ref), Signal2_5 (copy), Object (ref), Content (copy), FFlagMomentsPreloadVideoPlayerInstanceModule (upval), Signal (copy), Parent (copy), ObserveLoaded (copy), v1 (ref), Signal2_4 (copy), ConnectResult (ref), startPlayerPlaybackIfReady (copy), Signal2_6 (copy), List (copy), Signal2_7 (copy), Signal8 (copy), v2 (ref), Surface (ref), Object1 (ref), startLoadIfReady (copy), Signal2_2 (copy)
+				if Flag8 or Flag then return end
+				Signal2_5(nil)
+				local VideoPlayer = Object
 				
-				if not var40 then
-					local videoPlayer_1 = Instance.new("VideoPlayer")
-					videoPlayer_1.Name = "VideoPlayer"
-					videoPlayer_1.Looping = false
-					videoPlayer_1.InternalVideoUsage = Enum.InternalVideoUsage.WatchPage
-					videoPlayer_1.VideoContent = content
+				if not VideoPlayer then
+					local VideoPlayer1 = Instance.new("VideoPlayer")
+					VideoPlayer1.Name = "VideoPlayer"
+					VideoPlayer1.Looping = false
+					VideoPlayer1.InternalVideoUsage = Enum.InternalVideoUsage.WatchPage
+					VideoPlayer1.VideoContent = Content
 					
-					if fFlagMomentsPreloadVideoPlayerInstanceModule then
-						local var41 = var3(false)
-						videoPlayer_1.TimePosition = if var41 ~= nil then 0 else var41.startTime
+					if FFlagMomentsPreloadVideoPlayerInstanceModule then
+						local SignalResult = Signal(false)
+						VideoPlayer1.TimePosition = if SignalResult == nil then 0 else SignalResult.startTime
 					end
-					videoPlayer_1.Parent = parent
-					var23 = videoPlayer_1
-					var40 = videoPlayer_1
+					VideoPlayer1.Parent = Parent
+					Object = VideoPlayer1
+					VideoPlayer = VideoPlayer1
 				end
-				local var42 = observeLoaded(var40)
-				var26 = var42
-				var12(var42.getIsLoaded())
-				var27 = var42.connect(function(p3)
-					-- upvalues: var12 (copy), startPlayerPlaybackIfReady (copy)
-					var12(p3)
+				local ObserveLoadedResult = ObserveLoaded(VideoPlayer)
+				v1 = ObserveLoadedResult
+				Signal2_4(ObserveLoadedResult.getIsLoaded())
+				ConnectResult = ObserveLoadedResult.connect(function(p3) --[[ Line: 508 ]]
+					-- upvalues: Signal2_4 (upval), startPlayerPlaybackIfReady (upval)
+					Signal2_4(p3)
 					
 					if p3 then
 						startPlayerPlaybackIfReady()
 					end
 				end)
 				
-				local function readResolution()
-					-- upvalues: var40 (ref), var16 (copy)
-					local resolution = var40.Resolution
-					var16(if resolution.X > 0 and resolution.Y > 0 then resolution else nil)
+				local function readResolution() --[[ Line: 515 ]]
+					-- upvalues: VideoPlayer (copy), Signal2_6 (upval)
+					local Resolution = VideoPlayer.Resolution
+					Signal2_6(if Resolution.X > 0 and Resolution.Y > 0 then Resolution else nil)
 				end
 				
-				local resolution = var40.Resolution
-				var16(if resolution.X > 0 and resolution.Y > 0 then resolution else nil)
-				table.insert(t, var40:GetPropertyChangedSignal("Resolution"):Connect(readResolution))
-				var18(var40.TimeLength)
-				table.insert(t, var40:GetPropertyChangedSignal("TimeLength"):Connect(function()
-					-- upvalues: var18 (copy), var40 (ref), var23 (copy), var3 (copy), var17 (copy), var29 (copy)
-					var18(var40.TimeLength)
+				local Resolution = VideoPlayer.Resolution
+				Signal2_6(if Resolution.X > 0 and Resolution.Y > 0 then Resolution else nil)
+				table.insert(List, VideoPlayer:GetPropertyChangedSignal("Resolution"):Connect(readResolution))
+				Signal2_7(VideoPlayer.TimeLength)
+				table.insert(List, VideoPlayer:GetPropertyChangedSignal("TimeLength"):Connect(function() --[[ Line: 525 ]]
+					-- upvalues: Signal2_7 (upval), VideoPlayer (copy), Object (upval), Signal (upval), Signal8 (upval), v2 (upval)
+					Signal2_7(VideoPlayer.TimeLength)
+					local Object1 = Object
 					
-					if not var23 then return end
-					local var43 = var3(false)
-					local var44 = var17(false)
-					local var45 = if var43 ~= nil then var44 > 0 and (var43.startTime <= 0.05 and var44 - 0.05 <= var43.endTime) else true
-					var29 = var45
-					var23.Looping = var45
+					if Object1 then
+						local SignalResult = Signal(false)
+						local SignalResult1: number = Signal8(false)
+						local NoSignalResult: boolean = SignalResult == nil or SignalResult1 > 0 and SignalResult.startTime <= 0.05 and SignalResult1 - 0.05 <= SignalResult.endTime
+						v2 = NoSignalResult
+						Object1.Looping = NoSignalResult
+						
+						return
+					end
 				end))
-				var30 = true
-				resolution = var23
+				Flag = true
+				local Object2 = Object
 				
-				if resolution then
-					local var43 = var3(false)
-					local var44 = var17(false)
-					local var45 = if var43 ~= nil then var44 > 0 and (var43.startTime <= 0.05 and var44 - 0.05 <= var43.endTime) else true
-					var29 = var45
-					resolution.Looping = var45
+				if Object2 then
+					local SignalResult = Signal(false)
+					local SignalResult1: number = Signal8(false)
+					local NoSignalResult: boolean = SignalResult == nil or SignalResult1 > 0 and SignalResult.startTime <= 0.05 and SignalResult1 - 0.05 <= SignalResult.endTime
+					v2 = NoSignalResult
+					Object2.Looping = NoSignalResult
 				end
-				resolution = var23
+				local Parent1 = Object
+				local TargetInstance = Surface
 				
-				if resolution and var25 and not var24 then
-					local wire = Instance.new("Wire")
-					wire.SourceInstance = resolution
-					wire.TargetInstance = var25
-					wire.Parent = resolution
-					var24 = wire
+				if Flag and Parent1 and TargetInstance and not Object1 then
+					local Wire = Instance.new("Wire")
+					Wire.SourceInstance = Parent1
+					Wire.TargetInstance = TargetInstance
+					Wire.Parent = Parent1
+					Object1 = Wire
 				end
 				startLoadIfReady()
-				var8(true)
+				Signal2_2(true)
 			end,
-			releaseDecoder = function()
-				-- upvalues: var23 (write), var30 (write), var36 (write), var35 (write), var28 (write), var10 (ref), var24 (write), var27 (write), var26 (write), t (ref), fFlagMomentsPreloadVideoPlayerInstanceModule (copy), var31 (write), var32 (write), var33 (write), var34 (write), var8 (ref), var12 (ref), var14 (ref), var20 (ref)
-				if not var23 or not var30 then return end
-				var30 = false
-				var36 = nil
-				var35 = false
+			releaseDecoder = function() --[[ Line: 538 ]]
+				-- upvalues: Object (ref), Flag (ref), v3 (ref), Flag7 (ref), Flag5 (ref), RenderSteppedConnection (ref), Signal2_3 (copy), Object1 (ref), ConnectResult (ref), v1 (ref), List (copy), FFlagMomentsPreloadVideoPlayerInstanceModule (upval), Flag1 (ref), Flag2 (ref), Flag3 (ref), Flag4 (ref), Signal2_2 (copy), Signal2_4 (copy), Signal2_5 (copy), Signal2_8 (copy)
+				local Object2 = Object
 				
-				if var28 then
-					var28:Disconnect()
-					var28 = nil
-				end
-				var10(false)
+				if not Object2 or not Flag then return end
+				Flag = false
+				v3 = nil
+				Flag7 = false
+				Flag5 = false
 				
-				if var24 then
-					var24:Destroy()
-					var24 = nil
+				if RenderSteppedConnection then
+					RenderSteppedConnection:Disconnect()
+					RenderSteppedConnection = nil
 				end
-				if var27 then
-					var27()
-					var27 = nil
-				end
-				var26 = nil
+				Signal2_3(false)
 				
-				for i, v in t do
-					v:Disconnect()
+				if Object1 then
+					Object1:Destroy()
+					Object1 = nil
 				end
-				table.clear(t)
+				if ConnectResult then
+					ConnectResult()
+					ConnectResult = nil
+				end
+				v1 = nil
 				
-				if not fFlagMomentsPreloadVideoPlayerInstanceModule or (not var31 or (var32 or var33)) then
-					var23 = nil
-					var23:Destroy()
+				for _, Connection in List do
+					Connection:Disconnect()
 				end
-				var33 = false
-				var34 = false
-				var8(false)
-				var12(false)
-				var14(nil)
-				var20(0)
+				table.clear(List)
+				
+				if not FFlagMomentsPreloadVideoPlayerInstanceModule or (not Flag1 or (Flag2 or Flag3)) then
+					Object = nil
+					Object2:Destroy()
+				end
+				Flag3 = false
+				Flag4 = false
+				Signal2_2(false)
+				Signal2_4(false)
+				Signal2_5(nil)
+				Signal2_8(0)
 			end,
-			getResourceLevel = var21,
-			getAudioSource = function()
-				-- upvalues: var23 (write), var30 (write)
-				assert(var23 and var30, "createVideoNode: getAudioSource() requires decode() first")
+			getResourceLevel = Computed,
+			getAudioSource = function() --[[ Line: 648 ]]
+				-- upvalues: Object (ref), Flag (ref)
+				local Object1 = Object
+				assert(Object1 and Flag, "createVideoNode: getAudioSource() requires decode() first")
 				
-				return var23
+				return Object1
 			end,
-			render = function(p3)
-				-- upvalues: reactModule (copy), VideoSurface (copy), zIndex (ref), cornerRadius (ref)
-				return reactModule.createElement(VideoSurface, {
+			render = function(p3) --[[ Line: 669 ]]
+				-- upvalues: ReactModule (upval), VideoSurface (upval), ZIndex (copy), CornerRadius (copy)
+				return ReactModule.createElement(VideoSurface, {
 					getItemSize = p3.getItemSize,
 					getResolution = p3.getResolution,
 					getScaleType = p3.getScaleType,
 					setSurface = p3.setSurface,
-					zIndex = zIndex,
-					cornerRadius = cornerRadius,
+					zIndex = ZIndex,
+					cornerRadius = CornerRadius,
 					surfaceCornerRadius = p3.cornerRadius
 				})
 			end,
-			play = function()
-				-- upvalues: var23 (write), var30 (write), var3 (ref), var20 (ref), fFlagMomentsPreloadVideoPlayerInstanceModule (copy), var35 (write), startPlayerPlaybackIfReady (ref), var10 (ref), var28 (write), runService (ref), onStep (ref)
-				if not var23 or not var30 then return end
-				local var40 = var3(false)
-				var23.TimePosition = if var40 ~= nil then 0 else var40.startTime
-				var20(0)
+			play = function() --[[ Line: 583 ]]
+				-- upvalues: Object (ref), Flag (ref), Signal (copy), Signal2_8 (copy), FFlagMomentsPreloadVideoPlayerInstanceModule (upval), Flag5 (ref), startPlayerPlaybackIfReady (copy), Signal2_3 (copy), RenderSteppedConnection (ref), RunService (copy), onStep (copy)
+				local Object1 = Object
 				
-				if fFlagMomentsPreloadVideoPlayerInstanceModule then
-					var35 = true
+				if not Object1 or not Flag then return end
+				local SignalResult = Signal(false)
+				Object1.TimePosition = if SignalResult == nil then 0 else SignalResult.startTime
+				Signal2_8(0)
+				
+				if FFlagMomentsPreloadVideoPlayerInstanceModule then
+					Flag5 = true
 					startPlayerPlaybackIfReady()
 					
 					return
 				end
-				var23:Play()
-				var10(true)
+				Object1:Play()
+				Signal2_3(true)
 				
-				if var28 then
-					return
-				end
-				var28 = runService.RenderStepped:Connect(onStep)
-			end,
-			pause = function()
-				-- upvalues: var23 (write), fFlagMomentsPreloadVideoPlayerInstanceModule (copy), var35 (write), var30 (write), var9 (ref), var10 (ref), var28 (write)
-				if fFlagMomentsPreloadVideoPlayerInstanceModule then
-					var35 = false
-				end
-				if not var23 or not var30 then return end
-				if not fFlagMomentsPreloadVideoPlayerInstanceModule then
-					var23:Pause()
-				elseif var9(false) then
-					var23:Pause()
-				end
-				var10(false)
-				
-				if var28 then
-					var28:Disconnect()
-					var28 = nil
-				end
-			end,
-			seek = function(p3)
-				-- upvalues: var23 (write), var3 (ref), var17 (ref), var20 (ref)
-				if var23 then
-					local var40 = var3(false)
-					local var41 = if var40 ~= nil then 0 else var40.startTime
-					local var42 = var3(false)
-					local clampedValue = math.clamp(var41 + p3, var41, if var42 ~= nil then var17(false) else var42.endTime)
-					var23.TimePosition = clampedValue
-					var20(clampedValue - var41)
+				if not RenderSteppedConnection then
+					RenderSteppedConnection = RunService.RenderStepped:Connect(onStep)
 					
 					return
 				end
 			end,
-			setRegion = function(value)
-				-- upvalues: var4 (ref), var23 (write), var3 (ref), var17 (ref), var29 (write), var20 (ref)
-				var4(value)
+			pause = function() --[[ Line: 602 ]]
+				-- upvalues: Object (ref), FFlagMomentsPreloadVideoPlayerInstanceModule (upval), Flag5 (ref), Flag (ref), Signal4 (copy), Signal2_3 (copy), RenderSteppedConnection (ref)
+				local Object1 = Object
 				
-				if var23 then
-					local var40 = var3(false)
-					local var41 = var17(false)
-					local var42 = if var40 ~= nil then var41 > 0 and (var40.startTime <= 0.05 and var41 - 0.05 <= var40.endTime) else true
-					var29 = var42
-					var23.Looping = var42
+				if FFlagMomentsPreloadVideoPlayerInstanceModule then
+					Flag5 = false
 				end
-				if var23 ~= nil then
-					local var43 = var3(false)
-					local var44 = if var43 ~= nil then 0 else var43.startTime
-					local var45 = var3(false)
-					local clampedValue = math.clamp(var23.TimePosition, var44, if var45 ~= nil then var17(false) else var45.endTime)
-					var23.TimePosition = clampedValue
-					var20(clampedValue - var44)
+				if not Object1 or not Flag then return end
+				if FFlagMomentsPreloadVideoPlayerInstanceModule then
+					if Signal4(false) then
+						Object1:Pause()
+					end
+				else
+					Object1:Pause()
+				end
+				Signal2_3(false)
+				
+				if RenderSteppedConnection then
+					RenderSteppedConnection:Disconnect()
+					RenderSteppedConnection = nil
 				end
 			end,
-			dispose = function()
-				-- upvalues: var39 (write), var38 (write), var30 (write), var36 (write), var33 (write), var34 (write), var35 (write), var28 (write), var24 (write), var27 (write), var26 (write), t (ref), var23 (write), var25 (write)
-				if var39 then return end
-				var39 = true
-				var38 += 1
-				var30 = false
-				var36 = nil
-				var33 = false
-				var34 = false
-				var35 = false
+			seek = function(p3: number) --[[ Line: 621 ]]
+				-- upvalues: Object (ref), Signal (copy), Signal8 (copy), Signal2_8 (copy)
+				local Object1 = Object
 				
-				if var28 then
-					var28:Disconnect()
-					var28 = nil
+				if Object1 then
+					local SignalResult = Signal(false)
+					local StartTime = if SignalResult == nil then 0 else SignalResult.startTime
+					local Value = StartTime + p3
+					local SignalResult1 = Signal(false)
+					local ClampedValue = math.clamp(Value, StartTime, if SignalResult1 == nil then Signal8(false) else SignalResult1.endTime)
+					Object1.TimePosition = ClampedValue
+					Signal2_8(ClampedValue - StartTime)
+					
+					return
 				end
-				if var24 then
-					var24:Destroy()
-					var24 = nil
-				end
-				if var27 then
-					var27()
-					var27 = nil
-				end
-				var26 = nil
-				
-				for i, v in t do
-					v:Disconnect()
-				end
-				table.clear(t)
-				
-				if var23 then
-					var23:Destroy()
-					var23 = nil
-				end
-				var25 = nil
 			end,
-			getIsLoaded = var11,
-			getFailureReason = var13,
-			getResolution = var15,
-			getTimeLength = var17,
-			getDuration = var22,
-			getPosition = var19,
-			isPlaybackReady = function()
-				-- upvalues: fFlagMomentsPreloadVideoPlayerInstanceModule (copy), var11 (ref)
-				return not fFlagMomentsPreloadVideoPlayerInstanceModule or var11(false)
-			end,
-			setSurface = function(value)
-				-- upvalues: var25 (write), var24 (write), var23 (write), var30 (write)
-				if value == var25 then return end
-				if var24 then
-					var24:Destroy()
-					var24 = nil
-				end
-				var25 = value
-				local var40 = var25
+			setRegion = function(p3) --[[ Line: 634 ]]
+				-- upvalues: Signal2 (copy), Object (ref), Signal (copy), Signal8 (copy), v2 (ref), Signal2_8 (copy)
+				Signal2(p3)
+				local Object1 = Object
 				
-				if var30 and var23 and var40 then
-					if var24 then return end
-					local wire = Instance.new("Wire")
-					wire.SourceInstance = var23
-					wire.TargetInstance = var40
-					wire.Parent = var23
-					var24 = wire
+				if Object1 then
+					local SignalResult = Signal(false)
+					local SignalResult1: number = Signal8(false)
+					local NoSignalResult: boolean = SignalResult == nil or SignalResult1 > 0 and SignalResult.startTime <= 0.05 and SignalResult1 - 0.05 <= SignalResult.endTime
+					v2 = NoSignalResult
+					Object1.Looping = NoSignalResult
+				end
+				local Object2 = Object
+				
+				if Object2 ~= nil then
+					local SignalResult = Signal(false)
+					local StartTime = if SignalResult == nil then 0 else SignalResult.startTime
+					local TimePosition: number = Object2.TimePosition
+					local SignalResult2 = Signal(false)
+					local ClampedValue = math.clamp(TimePosition, StartTime, if SignalResult2 == nil then Signal8(false) else SignalResult2.endTime)
+					Object2.TimePosition = ClampedValue
+					Signal2_8(ClampedValue - StartTime)
+				end
+			end,
+			dispose = function() --[[ Line: 681 ]]
+				-- upvalues: Flag8 (ref), Count (ref), Flag (ref), v3 (ref), Flag7 (ref), Flag3 (ref), Flag4 (ref), Flag5 (ref), RenderSteppedConnection (ref), Object1 (ref), ConnectResult (ref), v1 (ref), List (copy), Object (ref), Surface (ref)
+				if Flag8 then return end
+				Flag8 = true
+				Count += 1
+				Flag = false
+				v3 = nil
+				Flag7 = false
+				Flag3 = false
+				Flag4 = false
+				Flag5 = false
+				
+				if RenderSteppedConnection then
+					RenderSteppedConnection:Disconnect()
+					RenderSteppedConnection = nil
+				end
+				if Object1 then
+					Object1:Destroy()
+					Object1 = nil
+				end
+				if ConnectResult then
+					ConnectResult()
+					ConnectResult = nil
+				end
+				v1 = nil
+				
+				for _, Connection in List do
+					Connection:Disconnect()
+				end
+				table.clear(List)
+				
+				if Object then
+					Object:Destroy()
+					Object = nil
+				end
+				Surface = nil
+			end,
+			getIsLoaded = Signal5,
+			getFailureReason = Signal6,
+			getResolution = Signal7,
+			getTimeLength = Signal8,
+			getDuration = Computed1,
+			getPosition = Signal9,
+			isPlaybackReady = function() --[[ Line: 654 ]]
+				-- upvalues: FFlagMomentsPreloadVideoPlayerInstanceModule (upval), Signal5 (copy)
+				return not FFlagMomentsPreloadVideoPlayerInstanceModule or Signal5(false)
+			end,
+			setSurface = function(Value) --[[ Line: 660 ]]
+				-- upvalues: Surface (ref), Object1 (ref), Object (ref), Flag (ref)
+				if Value == Surface then return end
+				if Object1 then
+					Object1:Destroy()
+					Object1 = nil
+				end
+				Surface = Value
+				local Parent = Object
+				local TargetInstance = Surface
+				
+				if Flag and Parent and TargetInstance then
+					if Object1 then return end
+					local Wire = Instance.new("Wire")
+					Wire.SourceInstance = Parent
+					Wire.TargetInstance = TargetInstance
+					Wire.Parent = Parent
+					Object1 = Wire
 				end
 			end
 		}

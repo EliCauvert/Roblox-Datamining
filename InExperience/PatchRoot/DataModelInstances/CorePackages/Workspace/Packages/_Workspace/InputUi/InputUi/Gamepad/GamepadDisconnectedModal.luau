@@ -1,36 +1,36 @@
-﻿local reactModule = require(script:FindFirstAncestor("InputUi").Parent.React)
-local playersService = game:GetService("Players")
-local var1 = nil
-pcall(function()
-	-- upvalues: var1 (write)
-	var1 = game:GetService("ThirdPartyUserService")
+﻿local ReactModule = require(script:FindFirstAncestor("InputUi").Parent.React)
+local Players = game:GetService("Players")
+local ThirdPartyUserService = nil
+pcall(function() --[[ Line: 6 ]]
+	-- upvalues: ThirdPartyUserService (ref)
+	ThirdPartyUserService = game:GetService("ThirdPartyUserService")
 end)
-local gamepadDisconnectedModalViewModule = require(script.Parent.GamepadDisconnectedModalView)
+local GamepadDisconnectedModalViewModule = require(script.Parent.GamepadDisconnectedModalView)
 
-local function _()
-	-- upvalues: var1 (write), playersService (ref)
-	local var2 = if var1 then var1:GetUserPlatformName() else ""
+local function _() --[[ Line: 11 | Named "getPlatformOrRobloxUsername" ]]
+	-- upvalues: ThirdPartyUserService (ref), Players (copy)
+	local UserPlatformName = if ThirdPartyUserService then ThirdPartyUserService:GetUserPlatformName() else ""
 	
-	if var2 == "" or var2 == nil then
-		local localPlayer = playersService.LocalPlayer
+	if UserPlatformName == "" or UserPlatformName == nil then
+		local LocalPlayer = Players.LocalPlayer
 		
-		if localPlayer then
-			var2 = localPlayer.DisplayName or localPlayer.Name
+		if LocalPlayer then
+			UserPlatformName = LocalPlayer.DisplayName or LocalPlayer.Name
 		end
 	end
-	return var2 or ""
+	return UserPlatformName or ""
 end
 
-return function(_)
-	-- upvalues: var1 (write), playersService (ref), reactModule (ref), gamepadDisconnectedModalViewModule (ref)
-	local var2 = if var1 then var1:GetUserPlatformName() else ""
+return function(_) --[[ Line: 25 ]]
+	-- upvalues: ThirdPartyUserService (ref), Players (copy), ReactModule (copy), GamepadDisconnectedModalViewModule (copy)
+	local UserPlatformName = if ThirdPartyUserService then ThirdPartyUserService:GetUserPlatformName() else ""
 	
-	if var2 == "" or var2 == nil then
-		local localPlayer = playersService.LocalPlayer
+	if UserPlatformName == "" or UserPlatformName == nil then
+		local LocalPlayer = Players.LocalPlayer
 		
-		if localPlayer then
-			var2 = localPlayer.DisplayName or localPlayer.Name
+		if LocalPlayer then
+			UserPlatformName = LocalPlayer.DisplayName or LocalPlayer.Name
 		end
 	end
-	return reactModule.createElement(gamepadDisconnectedModalViewModule, { username = var2 or "" })
+	return ReactModule.createElement(GamepadDisconnectedModalViewModule, { username = UserPlatformName or "" })
 end

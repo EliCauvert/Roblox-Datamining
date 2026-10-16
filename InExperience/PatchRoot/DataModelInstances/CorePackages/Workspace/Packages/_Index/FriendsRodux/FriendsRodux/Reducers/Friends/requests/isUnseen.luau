@@ -1,31 +1,31 @@
-﻿local parent = script.Parent.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local roduxModule = require(parent_1.Rodux)
-local friendRequestCreatedModule = require(parent.Actions.FriendRequestCreated)
-local _ = require(parent.roduxFriendsTypes)
-local llamaModule = require(parent_1.llama)
+﻿local Parent = script.Parent.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local RoduxModule = require(Parent1.Rodux)
+local FriendRequestCreatedModule = require(Parent.Actions.FriendRequestCreated)
+local _ = require(Parent.roduxFriendsTypes)
+local LlamaModule = require(Parent1.llama)
 local t = {}
 
-return function(p1)
-	-- upvalues: roduxModule (ref), t (ref), llamaModule (ref), friendRequestCreatedModule (ref)
-	local friendsNetworking = p1.friendsNetworking
+return function(p1) --[[ Line: 15 ]]
+	-- upvalues: RoduxModule (copy), t (copy), LlamaModule (copy), FriendRequestCreatedModule (copy)
+	local FriendsNetworking = p1.friendsNetworking
 	
-	return roduxModule.createReducer(t, {
-		[friendsNetworking.GetFriendRequests.Succeeded.name] = function(p2, p3)
-			-- upvalues: llamaModule (copy)
+	return RoduxModule.createReducer(t, {
+		[FriendsNetworking.GetFriendRequests.Succeeded.name] = function(p2, p3) --[[ Line: 19 ]]
+			-- upvalues: LlamaModule (upval)
 			local t = {}
 			
-			for i, v in pairs(p3.responseBody.data) do
-				t[tostring(v.id)] = v.isUnseen
+			for _, entry in pairs(p3.responseBody.data) do
+				t[tostring(entry.id)] = entry.isUnseen
 			end
-			return llamaModule.Dictionary.join(p2, t)
+			return (LlamaModule.Dictionary.join(p2, t))
 		end,
-		[friendRequestCreatedModule.name] = function(p4, p5)
-			-- upvalues: llamaModule (copy)
-			return llamaModule.Dictionary.join(p4, { [tostring(p5.requesteeId)] = true })
+		[FriendRequestCreatedModule.name] = function(p4, p5) --[[ Line: 34 ]]
+			-- upvalues: LlamaModule (upval)
+			return LlamaModule.Dictionary.join(p4, { [tostring(p5.requesteeId)] = true })
 		end,
-		[friendsNetworking.ClearNewFriendRequests.Succeeded.name] = function(_, _)
-			-- upvalues: t (copy)
+		[FriendsNetworking.ClearNewFriendRequests.Succeeded.name] = function(_, _) --[[ Line: 41 ]]
+			-- upvalues: t (upval)
 			return t
 		end
 	})

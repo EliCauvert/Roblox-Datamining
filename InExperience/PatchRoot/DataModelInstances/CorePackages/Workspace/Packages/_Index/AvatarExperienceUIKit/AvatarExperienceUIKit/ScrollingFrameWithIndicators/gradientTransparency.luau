@@ -1,63 +1,64 @@
-﻿local function fitKeypoints(p1)
-	local t = {}
+﻿local function fitKeypoints(List) --[[ Line: 6 ]]
+	local List1 = {}
 	
-	for i, v in p1 do
-		local clampedValue = math.clamp(v.Time, 0, 1)
-		local value = v.Value
-		local var1 = t[#t]
+	for _, value in List do
+		local ClampedValue = math.clamp(value.Time, 0, 1)
+		local Value = value.Value
+		local Entry = List1[#List1]
 		
-		if var1 == nil then
-			table.insert(t, NumberSequenceKeypoint.new(0, value))
-		elseif var1.Time < clampedValue then
-			table.insert(t, NumberSequenceKeypoint.new(clampedValue, value))
+		if Entry == nil then
+			table.insert(List1, NumberSequenceKeypoint.new(0, Value))
+		elseif Entry.Time < ClampedValue then
+			table.insert(List1, NumberSequenceKeypoint.new(ClampedValue, Value))
 		end
 	end
-	local var2 = t[#t]
+	local Entry = List1[#List1]
 	
-	if var2 == nil then
+	if Entry == nil then
 		return {
 			NumberSequenceKeypoint.new(0, 1),
 			NumberSequenceKeypoint.new(1, 1)
 		}
-	elseif var2.Time < 1 then
-		table.insert(t, NumberSequenceKeypoint.new(1, var2.Value))
 	end
-	return t
+	if Entry.Time < 1 then
+		table.insert(List1, NumberSequenceKeypoint.new(1, Entry.Value))
+	end
+	return List1
 end
 
 return {
-	fittedGradientTransparency = function(p2, p3, p4)
-		-- upvalues: fitKeypoints (ref)
-		local var3 = 1 - p4
-		local clampedValue = math.clamp(var3 * p2[1], 0, 1)
-		local clampedValue_1 = math.clamp(var3 * p2[2], 0, 1)
-		local var4 = p2[3]
+	fittedGradientTransparency = function(Entry, p1, p2: number): NumberSequence? --[[ Line: 34 ]]
+		-- upvalues: fitKeypoints (copy)
+		local v1 = 1 - p2
+		local ClampedValue = math.clamp(v1 * Entry[1], 0, 1)
+		local ClampedValue1 = math.clamp(v1 * Entry[2], 0, 1)
+		local Entry1: number = Entry[3]
 		
-		if var4 < 1 then
+		if Entry1 < 1 then
 			return nil
 		end
-		local var5 = if var4 < p3 then 1 else p3 / var4
-		local var6 = (if clampedValue > 0 then var5 * (clampedValue + 1) else 0) + (if clampedValue_1 > 0 then var5 * (clampedValue_1 + 1) else 0)
+		local v2 = if Entry1 < p1 then 1 else p1 / Entry1
+		local v3 = (if ClampedValue > 0 then v2 * (ClampedValue + 1) else 0) + (if ClampedValue1 > 0 then v2 * (ClampedValue1 + 1) else 0)
 		
-		if var6 > 1 then
-			var5 /= var6
+		if v3 > 1 then
+			v2 /= v3
 		end
-		local t = {}
+		local List = {}
 		
-		if clampedValue > 0 then
-			table.insert(t, NumberSequenceKeypoint.new(0, 1 - clampedValue))
-			table.insert(t, NumberSequenceKeypoint.new(var5, 1 - clampedValue))
-			table.insert(t, NumberSequenceKeypoint.new(var5 + var5 * clampedValue, 1))
+		if ClampedValue > 0 then
+			table.insert(List, NumberSequenceKeypoint.new(0, 1 - ClampedValue))
+			table.insert(List, NumberSequenceKeypoint.new(v2, 1 - ClampedValue))
+			table.insert(List, NumberSequenceKeypoint.new(v2 + v2 * ClampedValue, 1))
 		else
-			table.insert(t, NumberSequenceKeypoint.new(0, 1))
+			table.insert(List, NumberSequenceKeypoint.new(0, 1))
 		end
-		if clampedValue_1 > 0 then
-			table.insert(t, NumberSequenceKeypoint.new(1 - var5 * clampedValue_1 - var5, 1))
-			table.insert(t, NumberSequenceKeypoint.new(1 - var5, 1 - clampedValue_1))
-			table.insert(t, NumberSequenceKeypoint.new(1, 1 - clampedValue_1))
+		if ClampedValue1 > 0 then
+			table.insert(List, NumberSequenceKeypoint.new(1 - v2 * ClampedValue1 - v2, 1))
+			table.insert(List, NumberSequenceKeypoint.new(1 - v2, 1 - ClampedValue1))
+			table.insert(List, NumberSequenceKeypoint.new(1, 1 - ClampedValue1))
 		else
-			table.insert(t, NumberSequenceKeypoint.new(1, 1))
+			table.insert(List, NumberSequenceKeypoint.new(1, 1))
 		end
-		return NumberSequence.new(fitKeypoints(t))
+		return NumberSequence.new((fitKeypoints(List)))
 	end
 }

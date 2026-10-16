@@ -1,15 +1,4 @@
-﻿local avatarEditorCategoriesModule = require(script.Enums.AvatarEditorCategories)
-local avatarEditorSubcategoriesModule = require(script.Enums.AvatarEditorSubcategories)
-local catalogCategoriesModule = require(script.Enums.CatalogCategories)
-local catalogCategoryTaxonomyUUIDsModule = require(script.Enums.CatalogCategoryTaxonomyUUIDs)
-local constantsModule = require(script.Constants)
-local focusTypeModule = require(script.Enums.FocusType)
-local headShapeModule = require(script.Enums.HeadShape)
-local inventoryOutfitTypeModule = require(script.Enums.InventoryOutfitType)
-local itemTypeEnumModule = require(script.Enums.ItemTypeEnum)
-local itemLicenseTypeModule = require(script.Enums.ItemLicenseType)
-local recommendationsTypeModule = require(script.Enums.RecommendationsType)
-local _ = require(script.Types.CommonTypes)
+﻿local _ = require(script.Types.CommonTypes)
 local _ = require(script.Types.DiscountType)
 local _ = require(script.Types.TimedOptionType)
 local _ = require(script.Types.IncludedItem)
@@ -19,17 +8,17 @@ local _ = require(script.Types.AXCollectibleItemInfo)
 local _ = require(script.Types.AXCollectibleInstance)
 
 return {
-	Constants = constantsModule,
+	Constants = require(script.Constants),
 	Enums = {
-		AvatarEditorCategories = avatarEditorCategoriesModule,
-		AvatarEditorSubcategories = avatarEditorSubcategoriesModule,
-		CatalogCategories = catalogCategoriesModule,
-		CatalogCategoryTaxonomyUUIDs = catalogCategoryTaxonomyUUIDsModule,
-		FocusType = focusTypeModule,
-		HeadShape = headShapeModule,
-		InventoryOutfitType = inventoryOutfitTypeModule,
-		ItemTypeEnum = itemTypeEnumModule,
-		ItemLicenseType = itemLicenseTypeModule,
-		RecommendationsType = recommendationsTypeModule
+		AvatarEditorCategories = require(script.Enums.AvatarEditorCategories),
+		AvatarEditorSubcategories = require(script.Enums.AvatarEditorSubcategories),
+		CatalogCategories = require(script.Enums.CatalogCategories),
+		CatalogCategoryTaxonomyUUIDs = require(script.Enums.CatalogCategoryTaxonomyUUIDs),
+		FocusType = require(script.Enums.FocusType),
+		HeadShape = require(script.Enums.HeadShape),
+		InventoryOutfitType = require(script.Enums.InventoryOutfitType),
+		ItemTypeEnum = require(script.Enums.ItemTypeEnum),
+		ItemLicenseType = require(script.Enums.ItemLicenseType),
+		RecommendationsType = require(script.Enums.RecommendationsType)
 	}
 }

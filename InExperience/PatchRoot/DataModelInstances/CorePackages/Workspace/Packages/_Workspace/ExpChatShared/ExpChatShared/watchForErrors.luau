@@ -1,11 +1,11 @@
-﻿local analyticsModule = require(script:FindFirstAncestor("ExpChatShared").Analytics)
+﻿local AnalyticsModule = require(script:FindFirstAncestor("ExpChatShared").Analytics)
 
-return function(p1, p2, p3)
-	-- upvalues: analyticsModule (ref)
-	p1.Error:Connect(function(_, p4, p5)
-		-- upvalues: p2 (ref), p3 (ref), analyticsModule (copy)
-		if p5 == p2 or p4 and string.find(p4, "ExpChat") then
-			analyticsModule.reportCounter(if p3 then "expChatErrorCountServer" else "expChatErrorCountClient")
+return function(p1, p2, p3) --[[ Line: 4 ]]
+	-- upvalues: AnalyticsModule (copy)
+	p1.Error:Connect(function(_, Text: string, SourceScript) --[[ Line: 5 ]]
+		-- upvalues: p2 (copy), p3 (copy), AnalyticsModule (upval)
+		if SourceScript == p2 or Text and string.find(Text, "ExpChat") then
+			AnalyticsModule.reportCounter(if p3 then "expChatErrorCountServer" else "expChatErrorCountClient")
 		end
 	end)
 end

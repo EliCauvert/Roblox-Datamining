@@ -1,38 +1,37 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local robloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local playerListModule = require(corePackagesService.Workspace.Packages.PlayerList)
-local uiModeStyleProvider = require(corePackagesService.Workspace.Packages.Style).UiModeStyleProvider
-local parent = script.Parent
-local connection = parent.Components.Connection
-local playerListAppModule = require(parent.Components.Presentation.PlayerListApp)
-local playerListAppModule_1 = require(parent.Components.PresentationMobile.PlayerListApp)
-local provider = require(connection.LayoutValues).Provider
-local createLayoutValuesModule = require(parent.CreateLayoutValues)
-local tenFootInterfaceModule = require(robloxGui.Modules.TenFootInterface)
-local setPlayerListVisibilityModule = require(parent.Actions.SetPlayerListVisibility)
-local playerListInitialVisibleStateModule = require(parent.PlayerListInitialVisibleState)
-local fFlagEnableMobilePlayerListOnConsole = playerListModule.Flags.FFlagEnableMobilePlayerListOnConsole
-local fFlagPlayerListTwoTabsOnLegacy = playerListModule.Flags.FFlagPlayerListTwoTabsOnLegacy
-local fFlagPlayerListKeepModalHiddenOnRemountModule = require(parent.Flags.FFlagPlayerListKeepModalHiddenOnRemount)
-local platformLeaderboardContainer = playerListModule.Container.PlatformLeaderboardContainer
-local playerListSwitcher = roactModule.PureComponent:extend("PlayerListSwitcher")
+﻿local CorePackages = game:GetService("CorePackages")
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local PlayerListModule = require(CorePackages.Workspace.Packages.PlayerList)
+local UiModeStyleProvider = require(CorePackages.Workspace.Packages.Style).UiModeStyleProvider
+local Parent = script.Parent
+local PlayerListAppModule = require(Parent.Components.Presentation.PlayerListApp)
+local PlayerListAppModule1 = require(Parent.Components.PresentationMobile.PlayerListApp)
+local Provider = require(Parent.Components.Connection.LayoutValues).Provider
+local CreateLayoutValuesModule = require(Parent.CreateLayoutValues)
+local TenFootInterfaceModule = require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.TenFootInterface)
+local SetPlayerListVisibilityModule = require(Parent.Actions.SetPlayerListVisibility)
+local PlayerListInitialVisibleStateModule = require(Parent.PlayerListInitialVisibleState)
+local FFlagEnableMobilePlayerListOnConsole = PlayerListModule.Flags.FFlagEnableMobilePlayerListOnConsole
+local FFlagPlayerListTwoTabsOnLegacy = PlayerListModule.Flags.FFlagPlayerListTwoTabsOnLegacy
+local FFlagPlayerListKeepModalHiddenOnRemountModule = require(Parent.Flags.FFlagPlayerListKeepModalHiddenOnRemount)
+local PlatformLeaderboardContainer = PlayerListModule.Container.PlatformLeaderboardContainer
+local PlayerListSwitcher = RoactModule.PureComponent:extend("PlayerListSwitcher")
 
-function playerListSwitcher.didMount(p1)
-	-- upvalues: fFlagPlayerListKeepModalHiddenOnRemountModule (ref), playerListInitialVisibleStateModule (ref)
-	if fFlagPlayerListKeepModalHiddenOnRemountModule and p1.props.isSmallTouchDevice then
+function PlayerListSwitcher.didMount(p1) --[[ Line: 31 ]]
+	-- upvalues: FFlagPlayerListKeepModalHiddenOnRemountModule (copy), PlayerListInitialVisibleStateModule (copy)
+	if FFlagPlayerListKeepModalHiddenOnRemountModule and p1.props.isSmallTouchDevice then
 		p1.props.setPlayerListVisible(false)
 		
 		return
+	else
+		p1.props.setPlayerListVisible(PlayerListInitialVisibleStateModule())
 	end
-	p1.props.setPlayerListVisible(playerListInitialVisibleStateModule())
 end
 
-function playerListSwitcher.wrapWithUiModeStyleProvider(p1, p2)
-	-- upvalues: roactModule (ref), uiModeStyleProvider (ref)
+function PlayerListSwitcher.wrapWithUiModeStyleProvider(p1, p2) --[[ Line: 39 ]]
+	-- upvalues: RoactModule (copy), UiModeStyleProvider (copy)
 	return {
-		ThemeProvider = roactModule.createElement(uiModeStyleProvider, {
+		ThemeProvider = RoactModule.createElement(UiModeStyleProvider, {
 			style = {
 				themeName = p1.props.appStyleForUiModeStyleProvider.themeName,
 				fontName = p1.props.appStyleForUiModeStyleProvider.fontName
@@ -41,35 +40,35 @@ function playerListSwitcher.wrapWithUiModeStyleProvider(p1, p2)
 	}
 end
 
-function playerListSwitcher.render(p1)
-	-- upvalues: roactModule (ref), provider (ref), createLayoutValuesModule (ref), fFlagEnableMobilePlayerListOnConsole (ref), tenFootInterfaceModule (ref), playerListAppModule_1 (ref), playerListAppModule (ref), fFlagPlayerListTwoTabsOnLegacy (ref), platformLeaderboardContainer (ref)
-	local var1 = roactModule.createElement(provider, {
-		layoutValues = createLayoutValuesModule(if fFlagEnableMobilePlayerListOnConsole then false else tenFootInterfaceModule:IsEnabled())
+function PlayerListSwitcher.render(p1) --[[ Line: 50 ]]
+	-- upvalues: RoactModule (copy), Provider (copy), CreateLayoutValuesModule (copy), FFlagEnableMobilePlayerListOnConsole (copy), TenFootInterfaceModule (copy), PlayerListAppModule1 (copy), PlayerListAppModule (copy), FFlagPlayerListTwoTabsOnLegacy (copy), PlatformLeaderboardContainer (copy)
+	local Element = RoactModule.createElement(Provider, {
+		layoutValues = CreateLayoutValuesModule(not FFlagEnableMobilePlayerListOnConsole and TenFootInterfaceModule:IsEnabled())
 	}, p1:wrapWithUiModeStyleProvider({
-		PlayerListApp = p1.props.isSmallTouchDevice and roactModule.createElement(playerListAppModule_1, {
+		PlayerListApp = p1.props.isSmallTouchDevice and RoactModule.createElement(PlayerListAppModule1, {
 			setLayerCollectorEnabled = p1.props.setLayerCollectorEnabled
-		}) or roactModule.createElement(playerListAppModule, {
+		}) or RoactModule.createElement(PlayerListAppModule, {
 			setLayerCollectorEnabled = p1.props.setLayerCollectorEnabled
 		})
 	}))
 	
-	return if fFlagPlayerListTwoTabsOnLegacy then roactModule.createElement(platformLeaderboardContainer, {}, var1) else var1
+	return if FFlagPlayerListTwoTabsOnLegacy then RoactModule.createElement(PlatformLeaderboardContainer, {}, Element) else Element
 end
 
-function playerListSwitcher.didUpdate(p1)
+function PlayerListSwitcher.didUpdate(p1) --[[ Line: 72 ]]
 	p1.props.setPlayerListVisible(not p1.props.isSmallTouchDevice)
 end
 
-return roactRoduxModule.connect(function(p1)
+return RoactRoduxModule.connect(function(p1) --[[ Line: 76 | Named "mapStateToProps" ]]
 	return {
 		isSmallTouchDevice = p1.displayOptions.isSmallTouchDevice
 	}
-end, function(p1)
-	-- upvalues: setPlayerListVisibilityModule (ref)
+end, function(Callback) --[[ Line: 82 | Named "mapDispatchToProps" ]]
+	-- upvalues: SetPlayerListVisibilityModule (copy)
 	return {
-		setPlayerListVisible = function(value)
-			-- upvalues: p1 (ref), setPlayerListVisibilityModule (copy)
-			return p1(setPlayerListVisibilityModule(value))
+		setPlayerListVisible = function(p1) --[[ Line: 84 ]]
+			-- upvalues: Callback (copy), SetPlayerListVisibilityModule (upval)
+			return Callback(SetPlayerListVisibilityModule(p1))
 		end
 	}
-end)(playerListSwitcher)
+end)(PlayerListSwitcher)

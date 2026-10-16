@@ -1,37 +1,37 @@
-﻿local parent = script:FindFirstAncestor("SduiSharedUtilities").Parent
-local collectionService = game:GetService("CollectionService")
-local reactModule = require(parent.React)
-local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
-local sduiFocusTagsModule = require(script.Parent.SduiFocusTags)
+﻿local Parent = script:FindFirstAncestor("SduiSharedUtilities").Parent
+local CollectionService = game:GetService("CollectionService")
+local ReactModule = require(Parent.React)
+local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
+local SduiFocusTagsModule = require(script.Parent.SduiFocusTags)
 
-return function(p1, p2, p3)
-	-- upvalues: reactModule (ref), collectionService (ref), sduiFocusTagsModule (ref), reactFocusNavigationModule (ref)
-	local var1, var2 = reactModule.useState(true)
-	reactModule.useEffect(function()
-		-- upvalues: collectionService (copy), sduiFocusTagsModule (copy), p1 (ref), var2 (ref)
-		local function updateSuppression()
-			-- upvalues: collectionService (copy), sduiFocusTagsModule (copy), p1 (copy), var2 (copy)
-			local var3 = false
+return function(p1, p2, p3) --[[ Line: 16 | Named "usePageButtonBindings" ]]
+	-- upvalues: ReactModule (copy), CollectionService (copy), SduiFocusTagsModule (copy), ReactFocusNavigationModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(true)
+	ReactModule.useEffect(function() --[[ Line: 23 ]]
+		-- upvalues: CollectionService (upval), SduiFocusTagsModule (upval), p1 (copy), UseStateResult2 (copy)
+		local function updateSuppression() --[[ Line: 24 ]]
+			-- upvalues: CollectionService (upval), SduiFocusTagsModule (upval), p1 (upval), UseStateResult2 (upval)
+			local Flag = false
 			
-			for i, v in collectionService:GetTagged(sduiFocusTagsModule.SuppressBindings) do
-				if p1.current and v:IsDescendantOf(p1.current) then
-					var3 = true
+			for _, value in CollectionService:GetTagged(SduiFocusTagsModule.SuppressBindings) do
+				if p1.current and value:IsDescendantOf(p1.current) then
+					Flag = true
 					break
 				end
 			end
-			var2(not var3)
+			UseStateResult2(not Flag)
 		end
 		
 		updateSuppression()
-		local var4 = collectionService:GetInstanceAddedSignal(sduiFocusTagsModule.SuppressBindings):Connect(updateSuppression)
-		local var5 = collectionService:GetInstanceRemovedSignal(sduiFocusTagsModule.SuppressBindings):Connect(updateSuppression)
+		local Connection = CollectionService:GetInstanceAddedSignal(SduiFocusTagsModule.SuppressBindings):Connect(updateSuppression)
+		local Connection1 = CollectionService:GetInstanceRemovedSignal(SduiFocusTagsModule.SuppressBindings):Connect(updateSuppression)
 		
-		return function()
-			-- upvalues: var4 (ref), var5 (ref)
-			var4:Disconnect()
-			var5:Disconnect()
+		return function() --[[ Line: 42 ]]
+			-- upvalues: Connection (copy), Connection1 (copy)
+			Connection:Disconnect()
+			Connection1:Disconnect()
 		end
 	end, { p1 })
 	
-	return reactFocusNavigationModule.useEventHandlerMap(if var1 then p3 else {}, reactFocusNavigationModule.useEventMap(if var1 then p2 else {}, reactModule.useRef(nil)))
+	return (ReactFocusNavigationModule.useEventHandlerMap(if UseStateResult then p3 else {}, (ReactFocusNavigationModule.useEventMap(if UseStateResult then p2 else {}, (ReactModule.useRef(nil))))))
 end

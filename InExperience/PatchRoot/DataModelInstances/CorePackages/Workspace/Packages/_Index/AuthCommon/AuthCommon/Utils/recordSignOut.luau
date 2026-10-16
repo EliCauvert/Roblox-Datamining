@@ -1,58 +1,58 @@
-﻿local authCommon = script:FindFirstAncestor("AuthCommon")
-local appStorageUtilitiesModule = require(authCommon.Utils.AppStorageUtilities)
-local _ = require(authCommon.Utils.PreviousAccountEntry)
-local userModule = require(authCommon.Thunks.User)
-local cryoModule = require(authCommon.Parent.Cryo)
-local prunePreviousAccountsListModule = require(authCommon.Utils.prunePreviousAccountsList)
+﻿local AuthCommon = script:FindFirstAncestor("AuthCommon")
+local AppStorageUtilitiesModule = require(AuthCommon.Utils.AppStorageUtilities)
+local _ = require(AuthCommon.Utils.PreviousAccountEntry)
+local UserModule = require(AuthCommon.Thunks.User)
+local CryoModule = require(AuthCommon.Parent.Cryo)
+local PrunePreviousAccountsListModule = require(AuthCommon.Utils.prunePreviousAccountsList)
 
-return function(value, p1)
-	-- upvalues: userModule (ref), appStorageUtilitiesModule (ref), cryoModule (ref), prunePreviousAccountsListModule (ref)
-	local var1, var2
-	local _ = nil
-	p1 = p1 or true
+return function(p1, p2): boolean? --[[ Line: 16 | Named "recordSignOut" ]]
+	-- upvalues: UserModule (copy), AppStorageUtilitiesModule (copy), CryoModule (copy), PrunePreviousAccountsListModule (copy)
+	local P1 = p2 or true
+	local config = nil
 	
-	if value then
-		var2 = {
-			userId = value.user_id,
-			username = value.username,
-			displayName = value.display_name
+	if p1 then
+		config = {
+			userId = p1.user_id,
+			username = p1.username,
+			displayName = p1.display_name
 		}
 	else
-		var1 = userModule.fromLocalStorage()
+		local FromLocalStorageResult = UserModule.fromLocalStorage()
 		
-		if var1 == nil or var1.userId == -1 then return end
-		if var1.username == nil or var1.username == "" then return end
-		var2 = var1
+		if FromLocalStorageResult == nil or FromLocalStorageResult.userId == -1 then return end
+		if FromLocalStorageResult.username == nil or FromLocalStorageResult.username == "" then return end
+		config = FromLocalStorageResult
 	end
-	var1 = appStorageUtilitiesModule.getPreviousAccountsList()
-	local var3 = tostring(var2.userId)
-	local var4 = var1[var3]
+	local PreviousAccountsList = AppStorageUtilitiesModule.getPreviousAccountsList()
+	local Text = tostring(config.userId)
+	local PreviousAccounts = PreviousAccountsList[Text]
 	
-	if var4 then
-		var1[var3] = cryoModule.Dictionary.join(var4, {
-			userId = var3,
-			username = var2.username,
-			displayName = if var2.displayName and var2.displayName ~= "nil" then var2.displayName else "",
+	if PreviousAccounts then
+		PreviousAccountsList[Text] = CryoModule.Dictionary.join(PreviousAccounts, {
+			userId = Text,
+			username = config.username,
+			displayName = if config.displayName and config.displayName ~= "nil" then config.displayName else "",
 			signOutTimestamp = os.time(),
-			showInAccountPicker = p1
+			showInAccountPicker = P1
 		})
-		appStorageUtilitiesModule.setPreviousAccountsList(var1)
-		prunePreviousAccountsListModule()
+		AppStorageUtilitiesModule.setPreviousAccountsList(PreviousAccountsList)
+		PrunePreviousAccountsListModule()
+		
+		return true
+	else
+		PreviousAccountsList[Text] = {
+			loginMethod = nil,
+			signInTimestamp = nil,
+			userId = Text,
+			username = config.username,
+			userIdentifier = config.username,
+			displayName = if config.displayName and config.displayName ~= "nil" then config.displayName else "",
+			signOutTimestamp = os.time(),
+			showInAccountPicker = P1
+		}
+		AppStorageUtilitiesModule.setPreviousAccountsList(PreviousAccountsList)
+		PrunePreviousAccountsListModule()
 		
 		return true
 	end
-	var1[var3] = {
-		loginMethod = nil,
-		signInTimestamp = nil,
-		userId = var3,
-		username = var2.username,
-		userIdentifier = var2.username,
-		displayName = if var2.displayName and var2.displayName ~= "nil" then var2.displayName else "",
-		signOutTimestamp = os.time(),
-		showInAccountPicker = p1
-	}
-	appStorageUtilitiesModule.setPreviousAccountsList(var1)
-	prunePreviousAccountsListModule()
-	
-	return true
 end

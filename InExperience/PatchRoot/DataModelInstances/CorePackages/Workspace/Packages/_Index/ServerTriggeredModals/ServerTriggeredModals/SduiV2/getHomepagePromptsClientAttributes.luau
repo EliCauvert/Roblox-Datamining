@@ -1,152 +1,159 @@
-﻿local appStorageService = game:GetService("AppStorageService")
-local parent = script:FindFirstAncestor("ServerTriggeredModals").Parent
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagEdpGameLeavePromptsHandlerEnabled = sharedFlagsModule.FFlagEdpGameLeavePromptsHandlerEnabled
-local fFlagSduiClientDrivenTemplates = sharedFlagsModule.FFlagSplitPaneEducationalTour and sharedFlagsModule.FFlagSduiClientDrivenTemplates
-local promiseModule = require(parent.Promise)
-local notificationsUpsellModule = require(parent.NotificationsUpsell)
-local reactModule = require(parent.React)
-local robloxAppEnumsModule = require(parent.RobloxAppEnums)
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local useLocalUserId = require(parent.RobloxAppHooks).useLocalUserId
-local promptsEntryPointModule = require(script.Parent.PromptsEntryPoint)
-local appPage = robloxAppEnumsModule.AppPage
-local pushNotificationsUpsellPromptsClientAttributesTimeoutMs = game:DefineFastInt("PushNotificationsUpsellPromptsClientAttributesTimeoutMs", 1000)
-local var1 = nil
-local var2 = 0
+﻿local AppStorageService = game:GetService("AppStorageService")
+local ServerTriggeredModals = script:FindFirstAncestor("ServerTriggeredModals")
+local Parent = ServerTriggeredModals.Parent
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagEdpGameLeavePromptsHandlerEnabled = SharedFlagsModule.FFlagEdpGameLeavePromptsHandlerEnabled
+local FFlagSplitPaneEducationalTour = SharedFlagsModule.FFlagSplitPaneEducationalTour
+local FFlagHomepagePromptsHalloween2026ThemeModule = require(ServerTriggeredModals.Flags.FFlagHomepagePromptsHalloween2026Theme)
+local FFlagAppThemeHalloween2026Module = require(Parent.SharedFlags.FFlagAppThemeHalloween2026)
+local FFlagAppThemeHalloween2026ForAllModule = require(Parent.SharedFlags.FFlagAppThemeHalloween2026ForAll)
+local PromiseModule = require(Parent.Promise)
+local NotificationsUpsellModule = require(Parent.NotificationsUpsell)
+local ReactModule = require(Parent.React)
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local UseLocalUserIdFunction = require(Parent.RobloxAppHooks).useLocalUserId
+local PromptsEntryPointModule = require(script.Parent.PromptsEntryPoint)
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local PushNotificationsUpsellPromptsClientAttributesTimeoutMs = game:DefineFastInt("PushNotificationsUpsellPromptsClientAttributesTimeoutMs", 1000)
+local HomePageSessionTimestamp = nil
+local Count = 0
 
-local function _(p1)
-	-- upvalues: var1 (write), var2 (write)
-	if p1 ~= nil and p1 ~= var1 then
-		var1 = p1
-		var2 += 1
+local function _(p1): number --[[ Line: 43 | Named "homePageSessionOrdinalFor" ]]
+	-- upvalues: HomePageSessionTimestamp (ref), Count (ref)
+	if p1 ~= nil and p1 ~= HomePageSessionTimestamp then
+		HomePageSessionTimestamp = p1
+		Count += 1
 	end
-	return var2
+	return Count
 end
 
-local _ = function(p1)
-	-- upvalues: appStorageService (ref)
-	local ok, status = pcall(appStorageService.GetItem, appStorageService, p1)
+local _ = function(p1) --[[ Line: 52 | Named "readStoredNumber" ]]
+	-- upvalues: AppStorageService (copy)
+	local Success, Result = pcall(AppStorageService.GetItem, AppStorageService, p1)
 	
-	if ok then
-		return true, tonumber(status) or 0
+	if Success then
+		return true, tonumber(Result) or 0
+	else
+		return false, -1
 	end
-	return false, -1
 end
 
-local function getExistingHomepageClientAttributes()
-	-- upvalues: fFlagSduiClientDrivenTemplates (ref), parent (ref), appStorageService (ref)
+local function getExistingHomepageClientAttributes() --[[ Line: 61 ]]
+	-- upvalues: FFlagSplitPaneEducationalTour (copy), Parent (copy), AppStorageService (copy), FFlagHomepagePromptsHalloween2026ThemeModule (copy), FFlagAppThemeHalloween2026Module (copy), FFlagAppThemeHalloween2026ForAllModule (copy)
 	local t = {}
 	
-	if fFlagSduiClientDrivenTemplates and require(parent.SplitPane).isSplitPaneTourSupported() then
+	if FFlagSplitPaneEducationalTour and require(Parent.SplitPane).isSplitPaneTourSupported() then
 		t.isSplitPaneTourSupported = "true"
 	end
-	local ok, status = pcall(appStorageService.GetItem, appStorageService, "KidsAccountHasResetToDefaultTheme")
+	local Success, Result = pcall(AppStorageService.GetItem, AppStorageService, "KidsAccountHasResetToDefaultTheme")
 	
-	if ok and typeof(status) == "string" and status ~= "" then
-		t.KidsAccountHasResetToDefaultTheme = status
+	if Success and typeof(Result) == "string" and Result ~= "" then
+		t.KidsAccountHasResetToDefaultTheme = Result
+	end
+	if FFlagHomepagePromptsHalloween2026ThemeModule then
+		t.applicablePlusThemes = if FFlagAppThemeHalloween2026Module then "Halloween2026" else ""
+		t.applicableDeviceThemes = if FFlagAppThemeHalloween2026Module and FFlagAppThemeHalloween2026ForAllModule then "Halloween2026" else ""
 	end
 	return t
 end
 
 return {
-	get = function()
-		-- upvalues: getExistingHomepageClientAttributes (ref)
-		local var3 = getExistingHomepageClientAttributes()
+	get = function() --[[ Line: 84 ]]
+		-- upvalues: getExistingHomepageClientAttributes (copy)
+		local ExistingHomepageClientAttributes = getExistingHomepageClientAttributes()
 		
-		return if next(var3) == nil then nil else var3
+		return if next(ExistingHomepageClientAttributes) == nil then nil else ExistingHomepageClientAttributes
 	end,
-	use = function(p1, p2)
-		-- upvalues: promptsEntryPointModule (ref), fFlagEdpGameLeavePromptsHandlerEnabled (ref), useLocalUserId (ref), useSelector (ref), appPage (ref), reactModule (ref), getExistingHomepageClientAttributes (ref), notificationsUpsellModule (ref), appStorageService (ref), var1 (write), var2 (write), promiseModule (ref), pushNotificationsUpsellPromptsClientAttributesTimeoutMs (ref)
-		local var3 = false
-		
-		if p1 == promptsEntryPointModule.HomepageLaunch then
-			var3 = not (fFlagEdpGameLeavePromptsHandlerEnabled and p2 ~= nil)
-		end
-		local var4 = useLocalUserId()
-		local var5 = useSelector(function(p3)
-			return p3.LaunchContext
+	use = function(HomepageLaunch, p1) --[[ Line: 90 ]]
+		-- upvalues: PromptsEntryPointModule (copy), FFlagEdpGameLeavePromptsHandlerEnabled (copy), UseLocalUserIdFunction (copy), UseSelectorFunction (copy), AppPage (copy), ReactModule (copy), getExistingHomepageClientAttributes (copy), NotificationsUpsellModule (copy), AppStorageService (copy), HomePageSessionTimestamp (ref), Count (ref), PromiseModule (copy), PushNotificationsUpsellPromptsClientAttributesTimeoutMs (copy)
+		local Inverted: boolean = HomepageLaunch == PromptsEntryPointModule.HomepageLaunch and not (FFlagEdpGameLeavePromptsHandlerEnabled and p1 ~= nil)
+		local UseLocalUserIdResult = UseLocalUserIdFunction()
+		local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 97 ]]
+			return p2.LaunchContext
 		end)
-		local var6 = useSelector(function(p3)
-			-- upvalues: appPage (copy)
-			return p3.Personalization and p3.Personalization.PageSessionTimestamp[appPage.Home]
+		local UseSelectorResult1 = UseSelectorFunction(function(p2) --[[ Line: 100 ]]
+			-- upvalues: AppPage (upval)
+			return p2.Personalization and p2.Personalization.PageSessionTimestamp[AppPage.Home]
 		end)
-		local var7, var8 = reactModule.useState(nil)
-		local var9 = tonumber(var4) or 0
-		reactModule.useEffect(function()
-			-- upvalues: var3 (ref), var5 (ref), getExistingHomepageClientAttributes (copy), notificationsUpsellModule (copy), appStorageService (copy), var6 (ref), var1 (copy), var2 (copy), var8 (ref), var9 (ref), promiseModule (copy), pushNotificationsUpsellPromptsClientAttributesTimeoutMs (copy)
-			if not var3 then return end
-			local var10, var11
-			local var12 = true
-			local var13 = var5 or "Unknown"
-			local var14 = getExistingHomepageClientAttributes()
-			local var15 = (if next(var14) == nil then nil else var14) or {}
-			local sysPromptShownTimestamp = notificationsUpsellModule.NotificationsUpsellConstants.LocalStorageKeys.SysPromptShownTimestamp
-			local ok, status = pcall(appStorageService.GetItem, appStorageService, notificationsUpsellModule.NotificationsUpsellConstants.LocalStorageKeys.PromptShownCount)
+		local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+		local Number: number = tonumber(UseLocalUserIdResult) or 0
+		ReactModule.useEffect(function() --[[ Line: 106 ]]
+			-- upvalues: Inverted (copy), UseSelectorResult (copy), getExistingHomepageClientAttributes (upval), NotificationsUpsellModule (upval), AppStorageService (upval), UseSelectorResult1 (copy), HomePageSessionTimestamp (upval), Count (upval), UseStateResult2 (copy), Number (copy), PromiseModule (upval), PushNotificationsUpsellPromptsClientAttributesTimeoutMs (upval)
+			if not Inverted then return end
+			local Flag = true
+			local UseSelectorResult2 = UseSelectorResult or "Unknown"
+			local ExistingHomepageClientAttributes = getExistingHomepageClientAttributes()
+			local ExistingHomepageClientAttributes1 = (if next(ExistingHomepageClientAttributes) == nil then nil else ExistingHomepageClientAttributes) or {}
+			local SysPromptShownTimestamp = NotificationsUpsellModule.NotificationsUpsellConstants.LocalStorageKeys.SysPromptShownTimestamp
+			local Success, Result = pcall(AppStorageService.GetItem, AppStorageService, NotificationsUpsellModule.NotificationsUpsellConstants.LocalStorageKeys.PromptShownCount)
+			local Flag1 = nil
+			local Number1 = nil
 			
-			if ok then
-				var10 = true
-				var11 = tonumber(status) or 0
+			if Success then
+				Flag1 = true
+				Number1 = tonumber(Result) or 0
 			else
-				var10 = false
-				var11 = -1
+				Flag1 = false
+				Number1 = -1
 			end
-			local var16, var17
-			local ok_1, status_1 = pcall(appStorageService.GetItem, appStorageService, sysPromptShownTimestamp)
+			local Success1, Result1 = pcall(AppStorageService.GetItem, AppStorageService, SysPromptShownTimestamp)
+			local Flag2 = nil
+			local Number2 = nil
 			
-			if ok_1 then
-				var16 = true
-				var17 = tonumber(status_1) or 0
+			if Success1 then
+				Flag2 = true
+				Number2 = tonumber(Result1) or 0
 			else
-				var16 = false
-				var17 = -1
+				Flag2 = false
+				Number2 = -1
 			end
-			local var18 = var6
+			local HomePageSessionTimestamp1 = UseSelectorResult1
 			
-			if var18 ~= nil and var18 ~= var1 then
-				var1 = var18
-				var2 += 1
+			if HomePageSessionTimestamp1 ~= nil and HomePageSessionTimestamp1 ~= HomePageSessionTimestamp then
+				HomePageSessionTimestamp = HomePageSessionTimestamp1
+				Count += 1
 			end
-			local var19 = var2
-			local var20 = false
+			local Count1: number = Count
+			local Flag3 = false
 			
-			local function resolveWithNativeStatus(p3)
-				-- upvalues: var20 (write), var15 (ref), var13 (ref), var6 (copy), var19 (ref), var10 (ref), var16 (ref), var11 (ref), var17 (ref), var12 (write), var8 (copy), var9 (copy)
-				if var20 then return end
-				var20 = true
-				var15.nativePushPermissionUpsellStatus = p3
-				var15.launchContext = var13
+			local function resolveWithNativeStatus(Result) --[[ Line: 122 ]]
+				-- upvalues: Flag3 (ref), ExistingHomepageClientAttributes1 (copy), UseSelectorResult2 (copy), UseSelectorResult1 (upval), Count1 (copy), Flag1 (copy), Flag2 (copy), Number1 (copy), Number2 (copy), Flag (ref), UseStateResult2 (upval), Number (upval)
+				if Flag3 then return end
+				Flag3 = true
+				ExistingHomepageClientAttributes1.nativePushPermissionUpsellStatus = Result
+				ExistingHomepageClientAttributes1.launchContext = UseSelectorResult2
 				
-				if var6 ~= nil then
-					var15.homePageSessionTimestamp = tostring(var6)
-					var15.homePageSessionOrdinal = tostring(var19)
+				if UseSelectorResult1 ~= nil then
+					ExistingHomepageClientAttributes1.homePageSessionTimestamp = tostring(UseSelectorResult1)
+					ExistingHomepageClientAttributes1.homePageSessionOrdinal = tostring(Count1)
 				end
-				var15.legacyPushHistoryReadStatus = if var10 and var16 then "SUCCESS" else "ERROR"
-				var15.legacyPushPromptShownCount = tostring(var11)
-				var15.legacyPushSystemPromptShownTimestamp = tostring(var17)
+				ExistingHomepageClientAttributes1.legacyPushHistoryReadStatus = if Flag1 and Flag2 then "SUCCESS" else "ERROR"
+				ExistingHomepageClientAttributes1.legacyPushPromptShownCount = tostring(Number1)
+				ExistingHomepageClientAttributes1.legacyPushSystemPromptShownTimestamp = tostring(Number2)
 				
-				if var12 then
-					var8({
-						attributes = var15,
-						homePageSessionTimestamp = var6,
-						launchContext = var13,
-						userId = var9
+				if Flag then
+					UseStateResult2({
+						attributes = ExistingHomepageClientAttributes1,
+						homePageSessionTimestamp = UseSelectorResult1,
+						launchContext = UseSelectorResult2,
+						userId = Number
 					})
 				end
 			end
 			
-			notificationsUpsellModule.setupPushNotificationsUpsell.GetPushNotificationPermissionUpsellStatus():andThen(resolveWithNativeStatus)
-			promiseModule.delay(pushNotificationsUpsellPromptsClientAttributesTimeoutMs / 1000):andThen(function()
-				-- upvalues: resolveWithNativeStatus (ref)
+			NotificationsUpsellModule.setupPushNotificationsUpsell.GetPushNotificationPermissionUpsellStatus():andThen(resolveWithNativeStatus)
+			PromiseModule.delay(PushNotificationsUpsellPromptsClientAttributesTimeoutMs / 1000):andThen(function() --[[ Line: 153 ]]
+				-- upvalues: resolveWithNativeStatus (copy)
 				resolveWithNativeStatus("TIMEOUT")
 			end)
 			
-			return function()
-				-- upvalues: var12 (write)
-				var12 = false
+			return function() --[[ Line: 157 ]]
+				-- upvalues: Flag (ref)
+				Flag = false
 			end
-		end, { var3, var6, var5, var9 })
+		end, { Inverted, UseSelectorResult1, UseSelectorResult, Number })
+		local Attributes = if UseStateResult == nil or UseStateResult.homePageSessionTimestamp ~= UseSelectorResult1 or UseStateResult.launchContext ~= (UseSelectorResult or "Unknown") or UseStateResult.userId ~= Number then nil else UseStateResult.attributes
 		
-		return if var3 then if var7 == nil or var7.homePageSessionTimestamp ~= var6 or (var7.launchContext ~= (var5 or "Unknown") or var7.userId ~= var9) then nil else var7.attributes else nil
+		return if Inverted then Attributes else nil
 	end
 }

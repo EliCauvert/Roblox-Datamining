@@ -1,42 +1,43 @@
-﻿local parent = script:FindFirstAncestor("GameJoinCard").Parent
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local dataHydrationModule = require(parent.DataHydration)
-local fFlagJoinabilityCTARefactor = require(parent.SharedFlags).FFlagJoinabilityCTARefactor
-local profileCTAStore = dataHydrationModule.Profile.ProfileCTAStore
-local dataStatus = dataHydrationModule.DataStatus
-local useSignalState = signalsReactModule.useSignalState
-local createComputed = signalsModule.createComputed
-local var1 = createComputed(function()
+﻿local Parent = script:FindFirstAncestor("GameJoinCard").Parent
+local ReactModule = require(Parent.React)
+local DataHydrationModule = require(Parent.DataHydration)
+local FFlagJoinabilityCTARefactor = require(Parent.SharedFlags).FFlagJoinabilityCTARefactor
+local ProfileCTAStore = DataHydrationModule.Profile.ProfileCTAStore
+local DataStatus = DataHydrationModule.DataStatus
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local CreateComputedFunction = require(Parent.Signals).createComputed
+local Computed = CreateComputedFunction(function() --[[ Line: 40 ]]
 	return nil
 end)
-local var2 = createComputed(function()
-	-- upvalues: dataStatus (ref)
-	return dataStatus.NotReady
+local Computed1 = CreateComputedFunction(function() --[[ Line: 43 ]]
+	-- upvalues: DataStatus (copy)
+	return DataStatus.NotReady
 end)
 
-return function(p1, p2, p3)
-	-- upvalues: reactModule (ref), fFlagJoinabilityCTARefactor (ref), profileCTAStore (ref), useSignalState (ref), var1 (ref), var2 (ref)
-	local var3 = p2 == true
-	local var4 = reactModule.useRef(nil)
-	local var5 = reactModule.useMemo(function()
-		-- upvalues: fFlagJoinabilityCTARefactor (copy), p1 (ref), var3 (ref), profileCTAStore (copy)
-		if fFlagJoinabilityCTARefactor and p1 ~= "" and var3 then
-			local getJoinUserActions = profileCTAStore.get().getJoinUserActions
+return function(UserId, Enabled, p1) --[[ Line: 47 | Named "useJoinUserActions" ]]
+	-- upvalues: ReactModule (copy), FFlagJoinabilityCTARefactor (copy), ProfileCTAStore (copy), UseSignalStateFunction (copy), Computed (copy), Computed1 (copy)
+	local IsEnabled = Enabled == true
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 55 ]]
+		-- upvalues: FFlagJoinabilityCTARefactor (upval), UserId (copy), IsEnabled (copy), ProfileCTAStore (upval)
+		if FFlagJoinabilityCTARefactor and UserId ~= "" and IsEnabled then
+			local GetJoinUserActionsFunction = ProfileCTAStore.get().getJoinUserActions
 			
-			return if getJoinUserActions then getJoinUserActions(p1, true) else nil
+			if GetJoinUserActionsFunction then
+				return GetJoinUserActionsFunction(UserId, true)
+			end
 		end
-	end, { p1, var3, p3 })
+		return nil
+	end, { UserId, IsEnabled, p1 })
 	
-	if var5 then
-		var4.current = { userId = p1, result = var5 }
+	if UseMemoResult then
+		UseRefResult.current = { userId = UserId, result = UseMemoResult }
 	end
-	local current = var4.current
-	local var6 = var5
+	local Current = UseRefResult.current
+	local UseMemoResult1 = UseMemoResult
 	
-	if var6 == nil and current and current.userId == p1 then
-		var6 = current.result
+	if UseMemoResult1 == nil and Current and Current.userId == UserId then
+		UseMemoResult1 = Current.result
 	end
-	return useSignalState(if var6 then var6.data else var1), useSignalState(if var6 then var6.status else var2)
+	return UseSignalStateFunction(if UseMemoResult1 then UseMemoResult1.data else Computed), (UseSignalStateFunction(if UseMemoResult1 then UseMemoResult1.status else Computed1))
 end

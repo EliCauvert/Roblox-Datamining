@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.FriendsCalling.FriendsCalling)
+﻿return (require(script.Parent._Workspace.FriendsCalling.FriendsCalling))

@@ -1,26 +1,27 @@
-﻿local httpService = game:GetService("HttpService")
+﻿local HttpService = game:GetService("HttpService")
 local _ = require(script:FindFirstAncestor("MomentsCommon").Analytics.FunnelEventNames)
-local t = {}
+local Guids = {}
 
 return {
-	startSession = function(p1)
-		-- upvalues: httpService (ref), t (ref)
-		local var1 = httpService:GenerateGUID()
-		t[p1] = var1
+	startSession = function(Key) --[[ Line: 16 ]]
+		-- upvalues: HttpService (copy), Guids (copy)
+		local Guid = HttpService:GenerateGUID()
+		Guids[Key] = Guid
 		
-		return var1
+		return Guid
 	end,
-	getSessionId = function(p1)
-		-- upvalues: t (ref)
-		return t[p1]
+	getSessionId = function(p1) --[[ Line: 22 ]]
+		-- upvalues: Guids (copy)
+		return Guids[p1]
 	end,
-	endSession = function(p1)
-		-- upvalues: t (ref)
-		if t[p1] then
-			t[p1] = nil
+	endSession = function(Key): boolean --[[ Line: 26 ]]
+		-- upvalues: Guids (copy)
+		if Guids[Key] then
+			Guids[Key] = nil
 			
 			return true
+		else
+			return false
 		end
-		return false
 	end
 }

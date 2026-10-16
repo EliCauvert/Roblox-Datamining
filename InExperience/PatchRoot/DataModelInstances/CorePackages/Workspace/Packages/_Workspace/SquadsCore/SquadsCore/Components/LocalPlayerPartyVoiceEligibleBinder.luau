@@ -1,16 +1,19 @@
-﻿local parent = script:FindFirstAncestor("SquadsCore").Parent
-local reactModule = require(parent.React)
-local useIsLocalPlayerPartyVoiceEligibleModule = require(script.Parent.Parent.Hooks.useIsLocalPlayerPartyVoiceEligible)
-local useIsBackgroundDMActive = require(parent.CrossExperienceVoice).Hooks.useIsBackgroundDMActive
+﻿local Parent = script:FindFirstAncestor("SquadsCore").Parent
+local ReactModule = require(Parent.React)
+local UseIsLocalPlayerPartyVoiceEligibleModule = require(script.Parent.Parent.Hooks.useIsLocalPlayerPartyVoiceEligible)
+local UseIsBackgroundDMActiveFunction = require(Parent.CrossExperienceVoice).Hooks.useIsBackgroundDMActive
 
-return function(p1)
-	-- upvalues: useIsLocalPlayerPartyVoiceEligibleModule (ref), useIsBackgroundDMActive (ref), reactModule (ref)
-	local var1 = useIsLocalPlayerPartyVoiceEligibleModule()
-	local var2 = useIsBackgroundDMActive()
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var1 (ref), var2 (ref)
-		p1.onChange(var1 and var2)
-	end, { var1, var2 })
+return function(p1) --[[ Line: 14 ]]
+	-- upvalues: UseIsLocalPlayerPartyVoiceEligibleModule (copy), UseIsBackgroundDMActiveFunction (copy), ReactModule (copy)
+	local UseIsLocalPlayerPartyVoiceEligibleModuleResult = UseIsLocalPlayerPartyVoiceEligibleModule()
+	local UseIsBackgroundDMActiveResult = UseIsBackgroundDMActiveFunction()
+	ReactModule.useEffect(function() --[[ Line: 18 ]]
+		-- upvalues: p1 (copy), UseIsLocalPlayerPartyVoiceEligibleModuleResult (copy), UseIsBackgroundDMActiveResult (copy)
+		p1.onChange(UseIsLocalPlayerPartyVoiceEligibleModuleResult and UseIsBackgroundDMActiveResult)
+	end, {
+		UseIsLocalPlayerPartyVoiceEligibleModuleResult,
+		UseIsBackgroundDMActiveResult
+	})
 	
 	return nil
 end

@@ -1,34 +1,34 @@
-﻿local avatarExperienceSlotBasedEditor = script:FindFirstAncestor("AvatarExperienceSlotBasedEditor")
-local parent = avatarExperienceSlotBasedEditor.Parent
-local signalsModule = require(parent.Signals)
-local deviceOrientationMode = require(parent.RobloxAppEnums).DeviceOrientationMode
-local constantsModule = require(avatarExperienceSlotBasedEditor.Constants)
-local categoriesModule = require(avatarExperienceSlotBasedEditor.Enums.Categories)
-local createSelectorSignal = require(parent.AXCommon).Utils.createSelectorSignal
-local buildSlotsModule = require(avatarExperienceSlotBasedEditor.Utils.buildSlots)
-local _ = require(avatarExperienceSlotBasedEditor.Types)
-local fFlagAXSlotsDesktopRedesign = require(parent.AvatarExperienceFlags).FFlagAXSlotsDesktopRedesign
+﻿local AvatarExperienceSlotBasedEditor = script:FindFirstAncestor("AvatarExperienceSlotBasedEditor")
+local Parent = AvatarExperienceSlotBasedEditor.Parent
+local SignalsModule = require(Parent.Signals)
+local DeviceOrientationMode = require(Parent.RobloxAppEnums).DeviceOrientationMode
+local ConstantsModule = require(AvatarExperienceSlotBasedEditor.Constants)
+local CategoriesModule = require(AvatarExperienceSlotBasedEditor.Enums.Categories)
+local CreateSelectorSignalFunction = require(Parent.AXCommon).Utils.createSelectorSignal
+local BuildSlotsModule = require(AvatarExperienceSlotBasedEditor.Utils.buildSlots)
+local _ = require(AvatarExperienceSlotBasedEditor.Types)
+local FFlagAXSlotsDesktopRedesign = require(Parent.AvatarExperienceFlags).FFlagAXSlotsDesktopRedesign
 
-return function(p1)
-	-- upvalues: createSelectorSignal (ref), deviceOrientationMode (ref), fFlagAXSlotsDesktopRedesign (ref), categoriesModule (ref), signalsModule (ref), buildSlotsModule (ref), constantsModule (ref)
-	local var1 = createSelectorSignal(p1, function(p2)
-		-- upvalues: deviceOrientationMode (copy)
-		return p2.DeviceOrientation == deviceOrientationMode.Portrait
+return function(p1) --[[ Line: 30 | Named "createSlotBasedEditorStore" ]]
+	-- upvalues: CreateSelectorSignalFunction (copy), DeviceOrientationMode (copy), FFlagAXSlotsDesktopRedesign (copy), CategoriesModule (copy), SignalsModule (copy), BuildSlotsModule (copy), ConstantsModule (copy)
+	local SelectorSignal = CreateSelectorSignalFunction(p1, function(p2): boolean --[[ Line: 32 ]]
+		-- upvalues: DeviceOrientationMode (upval)
+		return p2.DeviceOrientation == DeviceOrientationMode.Portrait
 	end)
-	local var2, var3 = signalsModule.createSignal(if fFlagAXSlotsDesktopRedesign then if var1(false) then categoriesModule.Avatars else categoriesModule.All elseif var1(false) then categoriesModule.Avatars else categoriesModule.Body)
-	local var4, var5 = signalsModule.createSignal(1)
-	local var6 = createSelectorSignal(p1, function(p2)
+	local Signal, Signal2 = SignalsModule.createSignal(if FFlagAXSlotsDesktopRedesign then if SelectorSignal(false) then CategoriesModule.Avatars else CategoriesModule.All elseif SelectorSignal(false) then CategoriesModule.Avatars else CategoriesModule.Body)
+	local Signal1, Signal2_1 = SignalsModule.createSignal(1)
+	local SelectorSignal1 = CreateSelectorSignalFunction(p1, function(p2) --[[ Line: 45 ]]
 		return p2.AvatarExperience.AvatarEditor.Character.EquippedAssets or {}
 	end)
 	
 	return {
-		getSlotCategory = var2,
-		setSlotCategory = var3,
-		getSlotIndex = var4,
-		setSlotIndex = var5,
-		getSlots = signalsModule.createComputed(function(p2)
-			-- upvalues: buildSlotsModule (copy), constantsModule (copy), var2 (ref), var6 (ref)
-			return buildSlotsModule(constantsModule.SlotEditorCategories[var2(p2)].slots, var6(p2))
+		getSlotCategory = Signal,
+		setSlotCategory = Signal2,
+		getSlotIndex = Signal1,
+		setSlotIndex = Signal2_1,
+		getSlots = SignalsModule.createComputed(function(p2) --[[ Line: 52 ]]
+			-- upvalues: BuildSlotsModule (upval), ConstantsModule (upval), Signal (copy), SelectorSignal1 (copy)
+			return BuildSlotsModule(ConstantsModule.SlotEditorCategories[Signal(p2)].slots, SelectorSignal1(p2))
 		end)
 	}
 end

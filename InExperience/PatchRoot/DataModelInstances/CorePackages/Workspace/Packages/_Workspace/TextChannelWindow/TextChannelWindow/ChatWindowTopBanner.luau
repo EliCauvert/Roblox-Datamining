@@ -1,167 +1,170 @@
-﻿local guiService = game:GetService("GuiService")
-local parent = script.Parent.Parent
-local reactModule = require(parent.React)
-local useEventConnection = require(parent.ReactUtils).useEventConnection
-local foundationModule = require(parent.Foundation)
-local _ = require(parent.Signals)
-local chatLineReportingModule = require(parent.ChatLineReporting)
-local chatLineReportRoot = chatLineReportingModule.ChatLineReportRoot
-local constants = chatLineReportingModule.Constants
-local useInExperienceLocalization = require(parent.ChatUIPrimitives).Hooks.useInExperienceLocalization
-local useReportMenuFocusNavigationModule = require(script.Parent.useReportMenuFocusNavigation)
-local fFlagExpChatTextChannelWindowFocusNavModule = require(script.Parent.Flags.FFlagExpChatTextChannelWindowFocusNav)
-local t = {
+﻿local GuiService = game:GetService("GuiService")
+local Parent = script.Parent.Parent
+local ReactModule = require(Parent.React)
+local UseEventConnectionFunction = require(Parent.ReactUtils).useEventConnection
+local FoundationModule = require(Parent.Foundation)
+local _ = require(Parent.Signals)
+local ChatLineReportingModule = require(Parent.ChatLineReporting)
+local ChatLineReportRoot = ChatLineReportingModule.ChatLineReportRoot
+local Constants = ChatLineReportingModule.Constants
+local UseInExperienceLocalizationFunction = require(Parent.ChatUIPrimitives).Hooks.useInExperienceLocalization
+local UseReportMenuFocusNavigationModule = require(script.Parent.useReportMenuFocusNavigation)
+local FFlagExpChatTextChannelWindowFocusNavModule = require(script.Parent.Flags.FFlagExpChatTextChannelWindowFocusNav)
+local config = {
 	SelectionBehaviorUp = Enum.SelectionBehavior.Stop,
 	SelectionBehaviorDown = Enum.SelectionBehavior.Stop,
 	SelectionBehaviorLeft = Enum.SelectionBehavior.Stop,
 	SelectionBehaviorRight = Enum.SelectionBehavior.Stop
 }
-local view = foundationModule.View
-local icon = foundationModule.Icon
-local menu = foundationModule.Menu
-local iconName = foundationModule.Enums.IconName
-local iconSize = foundationModule.Enums.IconSize
-local inputSize = foundationModule.Enums.InputSize
-local popoverSide = foundationModule.Enums.PopoverSide
-local popoverAlign = foundationModule.Enums.PopoverAlign
+local View = FoundationModule.View
+local Icon = FoundationModule.Icon
+local Menu = FoundationModule.Menu
+local IconName = FoundationModule.Enums.IconName
+local IconSize = FoundationModule.Enums.IconSize
+local InputSize = FoundationModule.Enums.InputSize
+local PopoverSide = FoundationModule.Enums.PopoverSide
+local PopoverAlign = FoundationModule.Enums.PopoverAlign
 
-local function mapMessagesForReport(p1, p2)
-	local list = table.create(#p1)
+local function mapMessagesForReport(MessagesSignalResult, TextChannel) --[[ Line: 72 ]]
+	local Buffer = table.create(#MessagesSignalResult)
 	
-	for i, v in p1 do
-		if v.messageType == "user" then
-			table.insert(list, {
-				userId = v.senderUserId,
-				text = v.content,
-				textChannel = p2,
-				messageId = v.messageId,
-				prefixText = v.prefixText
+	for _, value in MessagesSignalResult do
+		if value.messageType == "user" then
+			table.insert(Buffer, {
+				userId = value.senderUserId,
+				text = value.content,
+				textChannel = TextChannel,
+				messageId = value.messageId,
+				prefixText = value.prefixText
 			})
 		end
 	end
-	return list
+	return Buffer
 end
 
-local function TopBannerView(p3)
-	-- upvalues: reactModule (ref), constants (ref), menu (ref), inputSize (ref), popoverSide (ref), popoverAlign (ref), t (ref), view (ref), icon (ref), iconName (ref), iconSize (ref)
-	return reactModule.createElement("Frame", {
+local function TopBannerView(p1) --[[ Line: 89 ]]
+	-- upvalues: ReactModule (copy), Constants (copy), Menu (copy), InputSize (copy), PopoverSide (copy), PopoverAlign (copy), config (copy), View (copy), Icon (copy), IconName (copy), IconSize (copy)
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		Size = UDim2.new(1, 0, 0, constants.TopBannerSize),
-		ZIndex = p3.ZIndex
+		Size = UDim2.new(1, 0, 0, Constants.TopBannerSize),
+		ZIndex = p1.ZIndex
 	}, {
-		Menu = reactModule.createElement(menu, {
-			isOpen = p3.isOpen,
-			items = p3.items,
-			size = inputSize.Medium,
-			side = popoverSide.Right,
-			align = popoverAlign.Start,
-			onPressedOutside = p3.onPressedOutside,
-			Position = UDim2.new(1, constants.IconButtonPositionXOffset, 0, 0),
-			ref = if p3.focusNavEnabled then p3.menuContentRef else nil,
-			selectionGroup = if p3.focusNavEnabled then t else nil
+		Menu = ReactModule.createElement(Menu, {
+			isOpen = p1.isOpen,
+			items = p1.items,
+			size = InputSize.Medium,
+			side = PopoverSide.Right,
+			align = PopoverAlign.Start,
+			onPressedOutside = p1.onPressedOutside,
+			Position = UDim2.new(1, Constants.IconButtonPositionXOffset, 0, 0),
+			ref = if p1.focusNavEnabled then p1.menuContentRef else nil,
+			selectionGroup = if p1.focusNavEnabled then config else nil
 		}, {
-			Button = reactModule.createElement(view, {
+			Button = ReactModule.createElement(View, {
 				tag = "align-x-center align-y-center radius-medium",
-				Size = UDim2.fromOffset(constants.IconButtonSize, constants.IconButtonSize),
-				onActivated = p3.onTriggerActivated,
-				ref = if p3.focusNavEnabled then p3.triggerRef else nil
+				Size = UDim2.fromOffset(Constants.IconButtonSize, Constants.IconButtonSize),
+				onActivated = p1.onTriggerActivated,
+				ref = if p1.focusNavEnabled then p1.triggerRef else nil
 			}, {
-				icon = reactModule.createElement(icon, {
-					name = iconName.ThreeDotsHorizontal,
-					size = iconSize.Large
+				icon = ReactModule.createElement(Icon, {
+					name = IconName.ThreeDotsHorizontal,
+					size = IconSize.Large
 				})
 			})
 		})
 	})
 end
 
-local function TopBannerFocusNav(p3)
-	-- upvalues: reactModule (ref), useReportMenuFocusNavigationModule (ref), TopBannerView (ref)
-	local var1 = reactModule.useRef(nil)
-	local var2 = reactModule.useRef(nil)
-	local setIsOpen = p3.setIsOpen
-	useReportMenuFocusNavigationModule({
-		enabled = p3.focusNavEnabled == true,
-		isOpen = p3.isOpen,
-		menuContentRef = var1,
-		triggerRef = var2,
-		onClose = reactModule.useCallback(function()
-			-- upvalues: setIsOpen (ref)
-			setIsOpen(false)
-		end, { setIsOpen })
+local function TopBannerFocusNav(p1) --[[ Line: 124 ]]
+	-- upvalues: ReactModule (copy), UseReportMenuFocusNavigationModule (copy), TopBannerView (copy)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local SetIsOpenFunction = p1.setIsOpen
+	UseReportMenuFocusNavigationModule({
+		enabled = p1.focusNavEnabled == true,
+		isOpen = p1.isOpen,
+		menuContentRef = UseRefResult,
+		triggerRef = UseRefResult1,
+		onClose = ReactModule.useCallback(function() --[[ Line: 129 ]]
+			-- upvalues: SetIsOpenFunction (copy)
+			SetIsOpenFunction(false)
+		end, { SetIsOpenFunction })
 	})
-	local isOpen = p3.isOpen
-	local onOpenChanged = p3.onOpenChanged
-	reactModule.useEffect(function()
-		-- upvalues: onOpenChanged (ref), isOpen (ref)
-		if onOpenChanged then
-			onOpenChanged(isOpen)
+	local IsOpen = p1.isOpen
+	local OnOpenChangedFunction = p1.onOpenChanged
+	ReactModule.useEffect(function() --[[ Line: 143 ]]
+		-- upvalues: OnOpenChangedFunction (copy), IsOpen (copy)
+		if OnOpenChangedFunction then
+			OnOpenChangedFunction(IsOpen)
 		end
-	end, { isOpen, onOpenChanged })
+	end, { IsOpen, OnOpenChangedFunction })
 	
-	return reactModule.createElement(TopBannerView, {
-		ZIndex = p3.ZIndex,
-		isOpen = p3.isOpen,
-		items = p3.items,
-		onTriggerActivated = p3.onTriggerActivated,
-		onPressedOutside = p3.onPressedOutside,
-		focusNavEnabled = p3.focusNavEnabled,
-		menuContentRef = var1,
-		triggerRef = var2
+	return ReactModule.createElement(TopBannerView, {
+		ZIndex = p1.ZIndex,
+		isOpen = p1.isOpen,
+		items = p1.items,
+		onTriggerActivated = p1.onTriggerActivated,
+		onPressedOutside = p1.onPressedOutside,
+		focusNavEnabled = p1.focusNavEnabled,
+		menuContentRef = UseRefResult,
+		triggerRef = UseRefResult1
 	})
 end
 
-return reactModule.memo(function(p3)
-	-- upvalues: useInExperienceLocalization (ref), reactModule (ref), useEventConnection (ref), guiService (ref), chatLineReportRoot (ref), mapMessagesForReport (ref), iconName (ref), fFlagExpChatTextChannelWindowFocusNavModule (ref), TopBannerFocusNav (ref), TopBannerView (ref)
-	local var1 = useInExperienceLocalization()
-	local var2, var3 = reactModule.useState(false)
-	useEventConnection(guiService:GetPropertyChangedSignal("MenuIsOpen"), function()
-		-- upvalues: guiService (copy), var3 (ref)
-		if guiService.MenuIsOpen then
-			var3(false)
+return ReactModule.memo(function(p1) --[[ Line: 163 | Named "ChatWindowTopBanner" ]]
+	-- upvalues: UseInExperienceLocalizationFunction (copy), ReactModule (copy), UseEventConnectionFunction (copy), GuiService (copy), ChatLineReportRoot (copy), mapMessagesForReport (copy), IconName (copy), FFlagExpChatTextChannelWindowFocusNavModule (copy), TopBannerFocusNav (copy), TopBannerView (copy)
+	local UseInExperienceLocalizationResult = UseInExperienceLocalizationFunction()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	UseEventConnectionFunction(GuiService:GetPropertyChangedSignal("MenuIsOpen"), function() --[[ Line: 167 ]]
+		-- upvalues: GuiService (upval), UseStateResult2 (copy)
+		if GuiService.MenuIsOpen then
+			UseStateResult2(false)
 		end
 	end)
-	local var4 = var1("Feature.ReportAbuse.Action.EnterChatLineReporting")
-	local var5 = reactModule.useCallback(function()
-		-- upvalues: var3 (ref), var2 (ref)
-		var3(not var2)
-	end, { var2 })
-	local var6 = reactModule.useCallback(function()
-		-- upvalues: var3 (ref)
-		var3(false)
+	local FeatureReportAbuseActionEnterChatLineReporting = UseInExperienceLocalizationResult("Feature.ReportAbuse.Action.EnterChatLineReporting")
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 175 ]]
+		-- upvalues: UseStateResult2 (copy), UseStateResult (copy)
+		UseStateResult2(not UseStateResult)
+	end, { UseStateResult })
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 179 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(false)
 	end, {})
-	local var7 = reactModule.useCallback(function()
-		-- upvalues: p3 (ref), chatLineReportRoot (copy), mapMessagesForReport (copy), var3 (ref)
-		chatLineReportRoot.initialize(mapMessagesForReport(if p3.messagesSignal then p3.messagesSignal(false) else {}, p3.targetChannel))
-		var3(false)
-	end, { p3.messagesSignal, p3.targetChannel })
-	local var8 = reactModule.useMemo(function()
-		-- upvalues: iconName (copy), var4 (ref), var7 (ref)
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 183 ]]
+		-- upvalues: p1 (copy), ChatLineReportRoot (upval), mapMessagesForReport (upval), UseStateResult2 (copy)
+		ChatLineReportRoot.initialize((mapMessagesForReport(if p1.messagesSignal then p1.messagesSignal(false) else {}, p1.targetChannel)))
+		UseStateResult2(false)
+	end, { p1.messagesSignal, p1.targetChannel })
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 189 ]]
+		-- upvalues: IconName (upval), FeatureReportAbuseActionEnterChatLineReporting (copy), UseResult2 (copy)
 		return {
 			{
 				id = "report",
-				icon = iconName.SpeechBubbleExclamation,
-				text = var4,
-				onActivated = var7
+				icon = IconName.SpeechBubbleExclamation,
+				text = FeatureReportAbuseActionEnterChatLineReporting,
+				onActivated = UseResult2
 			}
 		}
-	end, { var4, var7 })
+	end, {
+		FeatureReportAbuseActionEnterChatLineReporting,
+		UseResult2
+	})
 	
-	return if fFlagExpChatTextChannelWindowFocusNavModule then reactModule.createElement(TopBannerFocusNav, {
-		ZIndex = p3.ZIndex,
-		isOpen = var2,
-		setIsOpen = var3,
-		items = var8,
-		onTriggerActivated = var5,
-		onPressedOutside = var6,
-		focusNavEnabled = p3.focusNavEnabled,
-		onOpenChanged = p3.onOpenChanged
-	}) else reactModule.createElement(TopBannerView, {
-		ZIndex = p3.ZIndex,
-		isOpen = var2,
-		items = var8,
-		onTriggerActivated = var5,
-		onPressedOutside = var6,
-		focusNavEnabled = p3.focusNavEnabled
+	return if FFlagExpChatTextChannelWindowFocusNavModule then ReactModule.createElement(TopBannerFocusNav, {
+		ZIndex = p1.ZIndex,
+		isOpen = UseStateResult,
+		setIsOpen = UseStateResult2,
+		items = UseMemoResult,
+		onTriggerActivated = UseResult,
+		onPressedOutside = UseResult1,
+		focusNavEnabled = p1.focusNavEnabled,
+		onOpenChanged = p1.onOpenChanged
+	}) else ReactModule.createElement(TopBannerView, {
+		ZIndex = p1.ZIndex,
+		isOpen = UseStateResult,
+		items = UseMemoResult,
+		onTriggerActivated = UseResult,
+		onPressedOutside = UseResult1,
+		focusNavEnabled = p1.focusNavEnabled
 	})
 end)

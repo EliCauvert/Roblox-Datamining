@@ -1,66 +1,67 @@
-﻿local userInputService = game:GetService("UserInputService")
-local parent = script.Parent.Parent
-local reactModule = require(parent.React)
-local otterModule = require(parent.Otter)
-local sharedFlagsModule = require(parent.SharedFlags)
-local appIaScrollAwayIgnoreHorizontal = game:DefineFastFlag("AppIaScrollAwayIgnoreHorizontal", false)
-local appIaScrollAwayThreshold = game:DefineFastInt("AppIaScrollAwayThreshold", 10)
-local fFlagAppIaScrollAwayPinHeader = sharedFlagsModule.FFlagAppIaScrollAwayPinHeader
-local fFlagAppIaScopedScrollAway = sharedFlagsModule.FFlagAppIaScopedScrollAway
-local fFlagEnableScrollAwayContentScrollableFix = sharedFlagsModule.FFlagEnableScrollAwayContentScrollableFix
-local t = {
+﻿local UserInputService = game:GetService("UserInputService")
+local Parent = script.Parent.Parent
+local ReactModule = require(Parent.React)
+local OtterModule = require(Parent.Otter)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local AppIaScrollAwayIgnoreHorizontal = game:DefineFastFlag("AppIaScrollAwayIgnoreHorizontal", false)
+local AppIaScrollAwayThreshold = game:DefineFastInt("AppIaScrollAwayThreshold", 10)
+local FFlagAppIaScrollAwayPinHeader = SharedFlagsModule.FFlagAppIaScrollAwayPinHeader
+local FFlagAppIaScopedScrollAway = SharedFlagsModule.FFlagAppIaScopedScrollAway
+local FFlagEnableScrollAwayContentScrollableFix = SharedFlagsModule.FFlagEnableScrollAwayContentScrollableFix
+local config = {
 	dampingRatio = 1,
 	frequency = 3,
 	restingVelocityLimit = 0.1,
 	restingPositionLimit = 0.1
 }
-local t_1 = { binding = nil, motor = nil }
-t_1.__index = t_1
+local Module = { binding = nil, motor = nil }
+Module.__index = Module
 
-function t_1.create(p1)
-	-- upvalues: reactModule (ref), otterModule (ref), t_1 (ref)
-	local var1, var2 = reactModule.createBinding(p1)
-	local var3 = otterModule.createSingleMotor(p1)
-	var3:onStep(var2)
-	local t = { binding = var1, motor = var3 }
-	setmetatable(t, t_1)
+function Module.create(p1) --[[ Line: 40 ]]
+	-- upvalues: ReactModule (copy), OtterModule (copy), Module (copy)
+	local Binding, Binding2 = ReactModule.createBinding(p1)
+	local SingleMotor = OtterModule.createSingleMotor(p1)
+	SingleMotor:onStep(Binding2)
+	local config = { binding = Binding, motor = SingleMotor }
+	setmetatable(config, Module)
 	
-	return t
+	return config
 end
 
-function t_1.destroy(p1)
+function Module.destroy(p1) --[[ Line: 54 ]]
 	p1.motor:destroy()
 end
 
-function t_1.getBinding(p1)
+function Module.getBinding(p1) --[[ Line: 58 ]]
 	return p1.binding
 end
 
-function t_1.show(p1)
-	-- upvalues: otterModule (ref), t (ref)
-	p1.motor:setGoal(otterModule.spring(1, t))
+function Module.show(p1) --[[ Line: 62 ]]
+	-- upvalues: OtterModule (copy), config (copy)
+	p1.motor:setGoal(OtterModule.spring(1, config))
 end
 
-function t_1.hide(p1)
-	-- upvalues: otterModule (ref), t (ref)
-	p1.motor:setGoal(otterModule.spring(0, t))
+function Module.hide(p1) --[[ Line: 66 ]]
+	-- upvalues: OtterModule (copy), config (copy)
+	p1.motor:setGoal(OtterModule.spring(0, config))
 end
 
-function t_1.update(p1, p2)
-	-- upvalues: otterModule (ref)
-	p1.motor:setGoal(otterModule.instant(math.clamp(p1.binding:getValue() + p2, 0, 1)))
+function Module.update(p1, p2) --[[ Line: 70 ]]
+	-- upvalues: OtterModule (copy)
+	p1.motor:setGoal(OtterModule.instant((math.clamp(p1.binding:getValue() + p2, 0, 1))))
 end
 
-function t_1.finishUp(p1)
+function Module.finishUp(p1) --[[ Line: 76 ]]
 	if p1.binding:getValue() < 0.5 then
 		p1:hide()
 		
 		return
+	else
+		p1:show()
 	end
-	p1:show()
 end
 
-local t_2 = {
+local Module1 = {
 	enabled = false,
 	header = nil,
 	footer = nil,
@@ -73,104 +74,97 @@ local t_2 = {
 	horizontalLocked = false,
 	scrollDistance = 50,
 	contentScrollable = true,
-	headerScrollAwayDisabled = if fFlagAppIaScrollAwayPinHeader then false else nil,
-	globalTouchDisabled = if fFlagAppIaScopedScrollAway then false else nil
+	headerScrollAwayDisabled = not FFlagAppIaScrollAwayPinHeader and nil,
+	globalTouchDisabled = not FFlagAppIaScopedScrollAway and nil
 }
-t_2.__index = t_2
-local var1 = nil
+Module1.__index = Module1
+local T = nil
 
-function t_2.onTouchMoved(p1, p2)
-	-- upvalues: fFlagEnableScrollAwayContentScrollableFix (ref), fFlagAppIaScrollAwayPinHeader (ref)
-	if fFlagEnableScrollAwayContentScrollableFix and not p1.contentScrollable then return end
-	local var2 = p2 / p1.scrollDistance
+function Module1.onTouchMoved(p1, p2) --[[ Line: 120 ]]
+	-- upvalues: FFlagEnableScrollAwayContentScrollableFix (copy), FFlagAppIaScrollAwayPinHeader (copy)
+	if FFlagEnableScrollAwayContentScrollableFix and not p1.contentScrollable then return end
+	local v1 = p2 / p1.scrollDistance
 	
 	if p1.footerVisible then
-		p1.footer:update(var2)
+		p1.footer:update(v1)
 	end
-	if fFlagAppIaScrollAwayPinHeader then
-		if p1.headerScrollAwayDisabled then
-			return
-		else
-			p1.header:update(var2)
-			
-			return
-		end
-	else
-		p1.header:update(var2)
+	if not FFlagAppIaScrollAwayPinHeader then
+		p1.header:update(v1)
+	elseif not p1.headerScrollAwayDisabled then
+		p1.header:update(v1)
+		
+		return
 	end
 end
 
-function t_2.onTouchEnded(p1)
-	-- upvalues: fFlagAppIaScrollAwayPinHeader (ref)
+function Module1.onTouchEnded(p1) --[[ Line: 139 ]]
+	-- upvalues: FFlagAppIaScrollAwayPinHeader (copy)
 	if p1.footerVisible then
 		p1.footer:finishUp()
 	end
-	if fFlagAppIaScrollAwayPinHeader then
-		if p1.headerScrollAwayDisabled then
-			return
-		else
-			p1.header:finishUp()
-			
-			return
-		end
-	else
+	if not FFlagAppIaScrollAwayPinHeader then
 		p1.header:finishUp()
+	elseif not p1.headerScrollAwayDisabled then
+		p1.header:finishUp()
+		
+		return
 	end
 end
 
-function t_2.connectTouch(p1)
-	-- upvalues: userInputService (ref), appIaScrollAwayIgnoreHorizontal (ref), appIaScrollAwayThreshold (ref)
+function Module1.connectTouch(p1) --[[ Line: 154 ]]
+	-- upvalues: UserInputService (copy), AppIaScrollAwayIgnoreHorizontal (copy), AppIaScrollAwayThreshold (copy)
 	if p1.connections == nil then
 		p1.connections = {}
-		p1.connections.started = userInputService.TouchStarted:Connect(function(p2)
-			-- upvalues: p1 (ref), appIaScrollAwayIgnoreHorizontal (copy)
+		p1.connections.started = UserInputService.TouchStarted:Connect(function(Touch) --[[ Line: 159 ]]
+			-- upvalues: p1 (copy), AppIaScrollAwayIgnoreHorizontal (upval)
 			p1.touching = true
 			
-			if appIaScrollAwayIgnoreHorizontal then
+			if AppIaScrollAwayIgnoreHorizontal then
 				p1.moving = false
 				p1.horizontalLocked = false
-				p1.touchPositionX = p2.Position.X
+				p1.touchPositionX = Touch.Position.X
 			end
-			p1.touchPositionY = p2.Position.Y
+			p1.touchPositionY = Touch.Position.Y
 		end)
-		p1.connections.moved = userInputService.TouchMoved:Connect(function(p2)
-			-- upvalues: p1 (ref), appIaScrollAwayIgnoreHorizontal (copy), appIaScrollAwayThreshold (copy)
+		p1.connections.moved = UserInputService.TouchMoved:Connect(function(Touch) --[[ Line: 168 ]]
+			-- upvalues: p1 (copy), AppIaScrollAwayIgnoreHorizontal (upval), AppIaScrollAwayThreshold (upval)
 			if not p1.touching then return end
-			if appIaScrollAwayIgnoreHorizontal and p1.horizontalLocked then return end
-			local y = p2.Position.Y
+			if AppIaScrollAwayIgnoreHorizontal and p1.horizontalLocked then return end
+			local Y = Touch.Position.Y
 			
 			if p1.moving then
-				local var2 = y - p1.touchPositionY
-				p1.touchPositionY = y
-				p1:onTouchMoved(var2)
+				p1.touchPositionY = Y
+				p1:onTouchMoved(Y - p1.touchPositionY)
 				
 				return
-			elseif appIaScrollAwayIgnoreHorizontal then
-				local absValue = math.abs(p2.Position.X - p1.touchPositionX)
-				local absValue_1 = math.abs(y - p1.touchPositionY)
+			end
+			if AppIaScrollAwayIgnoreHorizontal then
+				local Magnitude = math.abs(Touch.Position.X - p1.touchPositionX)
+				local Magnitude1 = math.abs(Y - p1.touchPositionY)
 				
-				if appIaScrollAwayThreshold < absValue and absValue_1 < absValue then
+				if AppIaScrollAwayThreshold < Magnitude and Magnitude1 < Magnitude then
 					p1.horizontalLocked = true
 					
 					return
-				elseif appIaScrollAwayThreshold < absValue_1 then
+				end
+				if AppIaScrollAwayThreshold < Magnitude1 then
 					p1.moving = true
-					p1.touchPositionY = y
+					p1.touchPositionY = Y
 					
 					return
 				end
-			elseif appIaScrollAwayThreshold < math.abs(y - p1.touchPositionY) then
+			elseif AppIaScrollAwayThreshold < math.abs(Y - p1.touchPositionY) then
 				p1.moving = true
-				p1.touchPositionY = y
+				p1.touchPositionY = Y
 			end
 		end)
-		p1.connections.ended = userInputService.TouchEnded:Connect(function(_)
-			-- upvalues: p1 (ref), appIaScrollAwayIgnoreHorizontal (copy)
+		p1.connections.ended = UserInputService.TouchEnded:Connect(function(_) --[[ Line: 202 ]]
+			-- upvalues: p1 (copy), AppIaScrollAwayIgnoreHorizontal (upval)
 			if not p1.touching then return end
 			p1.touching = false
 			p1.moving = false
 			
-			if appIaScrollAwayIgnoreHorizontal then
+			if AppIaScrollAwayIgnoreHorizontal then
 				p1.horizontalLocked = false
 			end
 			p1:onTouchEnded()
@@ -180,101 +174,96 @@ function t_2.connectTouch(p1)
 	end
 end
 
-function t_2.disconnectTouch(p1)
+function Module1.disconnectTouch(p1) --[[ Line: 215 ]]
 	if p1.connections == nil then return end
-	for i, v in pairs(p1.connections) do
-		v:Disconnect()
+	for _, connection in pairs(p1.connections) do
+		connection:Disconnect()
 	end
 	p1.connections = nil
 end
 
-function t_2.isEnabled(p2)
+function Module1.isEnabled(p2) --[[ Line: 228 ]]
 	return p2.enabled
 end
 
-function t_2.setEnabled(value, p2)
-	-- upvalues: fFlagAppIaScopedScrollAway (ref), fFlagEnableScrollAwayContentScrollableFix (ref)
-	if value.enabled == p2 then return end
-	value.enabled = p2
+function Module1.setEnabled(p2, Enabled) --[[ Line: 235 ]]
+	-- upvalues: FFlagAppIaScopedScrollAway (copy), FFlagEnableScrollAwayContentScrollableFix (copy)
+	if p2.enabled == Enabled then return end
+	p2.enabled = Enabled
 	
-	if p2 then
-		if fFlagAppIaScopedScrollAway then
-			if value.globalTouchDisabled then
-				return
-			else
-				value:connectTouch()
-				
-				return
-			end
-		else
-			value:connectTouch()
-			
-			return
-		end
-	else
-		value:disconnectTouch()
+	if not Enabled then
+		p2:disconnectTouch()
 		
-		if fFlagEnableScrollAwayContentScrollableFix then
-			value.contentScrollable = true
+		if FFlagEnableScrollAwayContentScrollableFix then
+			p2.contentScrollable = true
 		end
-	end
-end
-
-function t_2.setGlobalTouchEnabled(value, p2)
-	value.globalTouchDisabled = not p2
-	
-	if p2 then
-		if value.enabled then
-			value:connectTouch()
+	elseif not FFlagAppIaScopedScrollAway then
+		p2:connectTouch()
+		
+		return
+	else
+		if not p2.globalTouchDisabled then
+			p2:connectTouch()
 			
 			return
 		end
-	else
-		value:disconnectTouch()
 	end
 end
 
-function t_2.setContentScrollable(value, p2)
-	if value.contentScrollable == p2 then return end
-	if not p2 then
-		value:show()
-	end
-	value.contentScrollable = p2
-end
-
-function t_2.setFooterVisible(value, p2)
-	if value.footerVisible == p2 then return end
-	value.footerVisible = p2
+function Module1.setGlobalTouchEnabled(p2, p3) --[[ Line: 261 ]]
+	p2.globalTouchDisabled = not p3
 	
-	if p2 then
-		value.footer:show()
+	if not p3 then
+		p2:disconnectTouch()
+	elseif p2.enabled then
+		p2:connectTouch()
 		
 		return
 	end
-	value.footer:hide()
 end
 
-function t_2.getHeaderBinding(p2)
-	return p2.header:getBinding()
+function Module1.setContentScrollable(p2, ContentScrollable) --[[ Line: 272 ]]
+	if p2.contentScrollable == ContentScrollable then return end
+	if not ContentScrollable then
+		p2:show()
+	end
+	p2.contentScrollable = ContentScrollable
 end
 
-function t_2.getFooterBinding(p2)
-	return p2.footer:getBinding()
-end
-
-function t_2.setHeaderScrollAwayDisabled(value, p2)
-	-- upvalues: fFlagAppIaScrollAwayPinHeader (ref)
-	if not fFlagAppIaScrollAwayPinHeader then return end
-	value.headerScrollAwayDisabled = p2
+function Module1.setFooterVisible(p2, FooterVisible) --[[ Line: 285 ]]
+	if p2.footerVisible == FooterVisible then return end
+	p2.footerVisible = FooterVisible
 	
-	if p2 then
-		value.header:show()
+	if FooterVisible then
+		p2.footer:show()
+		
+		return
+	else
+		p2.footer:hide()
 	end
 end
 
-function t_2.show(p2)
-	-- upvalues: fFlagEnableScrollAwayContentScrollableFix (ref)
-	if fFlagEnableScrollAwayContentScrollableFix then
+function Module1.getHeaderBinding(p2) --[[ Line: 300 ]]
+	return p2.header:getBinding()
+end
+
+function Module1.getFooterBinding(p2) --[[ Line: 307 ]]
+	return p2.footer:getBinding()
+end
+
+function Module1.setHeaderScrollAwayDisabled(p2, HeaderScrollAwayDisabled) --[[ Line: 315 ]]
+	-- upvalues: FFlagAppIaScrollAwayPinHeader (copy)
+	if not FFlagAppIaScrollAwayPinHeader then return end
+	p2.headerScrollAwayDisabled = HeaderScrollAwayDisabled
+	
+	if HeaderScrollAwayDisabled then
+		p2.header:show()
+	end
+end
+
+function Module1.show(p2) --[[ Line: 328 ]]
+	-- upvalues: FFlagEnableScrollAwayContentScrollableFix (copy)
+	if FFlagEnableScrollAwayContentScrollableFix then
 		p2.contentScrollable = true
 	end
 	p2.header:show()
@@ -284,11 +273,13 @@ function t_2.show(p2)
 	end
 end
 
-function t_2.hide(p2)
-	-- upvalues: fFlagAppIaScrollAwayPinHeader (ref)
-	if not fFlagAppIaScrollAwayPinHeader then
-		p2.header:hide()
-	elseif not p2.headerScrollAwayDisabled then
+function Module1.hide(p2) --[[ Line: 341 ]]
+	-- upvalues: FFlagAppIaScrollAwayPinHeader (copy)
+	if FFlagAppIaScrollAwayPinHeader then
+		if not p2.headerScrollAwayDisabled then
+			p2.header:hide()
+		end
+	else
 		p2.header:hide()
 	end
 	if p2.footerVisible then
@@ -296,100 +287,101 @@ function t_2.hide(p2)
 	end
 end
 
-function t_2.getInstance()
-	-- upvalues: var1 (write), t_2 (ref)
-	if not var1 then
-		var1 = {}
-		setmetatable(var1, t_2)
-		var1:initialize()
+function Module1.getInstance() --[[ Line: 357 ]]
+	-- upvalues: T (ref), Module1 (copy)
+	if not T then
+		T = {}
+		setmetatable(T, Module1)
+		T:initialize()
 	end
-	return var1
+	return T
 end
 
-function t_2.initialize(p2)
-	-- upvalues: t_1 (ref)
-	p2.header = t_1.create(1)
-	p2.footer = t_1.create(0)
+function Module1.initialize(p2) --[[ Line: 367 ]]
+	-- upvalues: Module (copy)
+	p2.header = Module.create(1)
+	p2.footer = Module.create(0)
 end
 
-function t_2.destroy(p2)
-	-- upvalues: var1 (write)
+function Module1.destroy(p2) --[[ Line: 377 ]]
+	-- upvalues: T (ref)
 	p2.header:destroy()
 	p2.footer:destroy()
 	p2:disconnectTouch()
-	var1 = nil
+	T = nil
 end
 
-function t_2.setScrollDistance(value, p2)
-	if p2 == 0 then
+function Module1.setScrollDistance(p2, ScrollDistance) --[[ Line: 387 ]]
+	if ScrollDistance ~= 0 then
+		p2.scrollDistance = ScrollDistance
+		
 		return
 	end
-	value.scrollDistance = p2
 end
 
 return {
-	isEnabled = function()
-		-- upvalues: t_2 (ref)
-		return t_2.getInstance():isEnabled()
+	isEnabled = function() --[[ Line: 399 ]]
+		-- upvalues: Module1 (copy)
+		return Module1.getInstance():isEnabled()
 	end,
-	setEnabled = function(value)
-		-- upvalues: t_2 (ref)
-		t_2.getInstance():setEnabled(value)
+	setEnabled = function(p2) --[[ Line: 402 ]]
+		-- upvalues: Module1 (copy)
+		Module1.getInstance():setEnabled(p2)
 	end,
-	getHeaderBinding = function()
-		-- upvalues: t_2 (ref)
-		return t_2.getInstance():getHeaderBinding()
+	getHeaderBinding = function() --[[ Line: 405 ]]
+		-- upvalues: Module1 (copy)
+		return Module1.getInstance():getHeaderBinding()
 	end,
-	getFooterBinding = function()
-		-- upvalues: t_2 (ref)
-		return t_2.getInstance():getFooterBinding()
+	getFooterBinding = function() --[[ Line: 408 ]]
+		-- upvalues: Module1 (copy)
+		return Module1.getInstance():getFooterBinding()
 	end,
-	setFooterVisible = function(value)
-		-- upvalues: t_2 (ref)
-		t_2.getInstance():setFooterVisible(value)
+	setFooterVisible = function(p2) --[[ Line: 411 ]]
+		-- upvalues: Module1 (copy)
+		Module1.getInstance():setFooterVisible(p2)
 	end,
-	setHeaderScrollAwayDisabled = if fFlagAppIaScrollAwayPinHeader then function(p2)
-		-- upvalues: t_2 (ref)
-		t_2.getInstance():setHeaderScrollAwayDisabled(p2)
+	setHeaderScrollAwayDisabled = if FFlagAppIaScrollAwayPinHeader then function(p2) --[[ Line: 415 ]]
+		-- upvalues: Module1 (copy)
+		Module1.getInstance():setHeaderScrollAwayDisabled(p2)
 	end else nil,
-	show = function()
-		-- upvalues: t_2 (ref)
-		t_2.getInstance():show()
+	show = function() --[[ Line: 419 ]]
+		-- upvalues: Module1 (copy)
+		Module1.getInstance():show()
 	end,
-	hide = function()
-		-- upvalues: t_2 (ref)
-		t_2.getInstance():hide()
+	hide = function() --[[ Line: 422 ]]
+		-- upvalues: Module1 (copy)
+		Module1.getInstance():hide()
 	end,
-	destroy = function()
-		-- upvalues: t_2 (ref)
-		t_2.getInstance():destroy()
+	destroy = function() --[[ Line: 425 ]]
+		-- upvalues: Module1 (copy)
+		Module1.getInstance():destroy()
 	end,
-	setScrollDistance = function(value)
-		-- upvalues: t_2 (ref)
-		t_2.getInstance():setScrollDistance(value)
+	setScrollDistance = function(p2) --[[ Line: 428 ]]
+		-- upvalues: Module1 (copy)
+		Module1.getInstance():setScrollDistance(p2)
 	end,
-	setGlobalTouchEnabled = if fFlagAppIaScopedScrollAway then function(p2)
-		-- upvalues: t_2 (ref)
-		t_2.getInstance():setGlobalTouchEnabled(p2)
+	setGlobalTouchEnabled = if FFlagAppIaScopedScrollAway then function(p2) --[[ Line: 432 ]]
+		-- upvalues: Module1 (copy)
+		Module1.getInstance():setGlobalTouchEnabled(p2)
 	end else nil,
-	onTouchMoved = if fFlagAppIaScopedScrollAway then function(p2)
-		-- upvalues: t_2 (ref)
-		local instance = t_2.getInstance()
+	onTouchMoved = if FFlagAppIaScopedScrollAway then function(p2) --[[ Line: 437 ]]
+		-- upvalues: Module1 (copy)
+		local _Instance = Module1.getInstance()
 		
-		if instance.enabled then
-			instance:onTouchMoved(p2)
+		if _Instance.enabled then
+			_Instance:onTouchMoved(p2)
 		end
 	end else nil,
-	onTouchEnded = if fFlagAppIaScopedScrollAway then function()
-		-- upvalues: t_2 (ref)
-		local instance = t_2.getInstance()
+	onTouchEnded = if FFlagAppIaScopedScrollAway then function() --[[ Line: 445 ]]
+		-- upvalues: Module1 (copy)
+		local _Instance = Module1.getInstance()
 		
-		if instance.enabled then
-			instance:onTouchEnded()
+		if _Instance.enabled then
+			_Instance:onTouchEnded()
 		end
 	end else nil,
-	setContentScrollable = function(value)
-		-- upvalues: t_2 (ref)
-		t_2.getInstance():setContentScrollable(value)
+	setContentScrollable = function(p2) --[[ Line: 452 ]]
+		-- upvalues: Module1 (copy)
+		Module1.getInstance():setContentScrollable(p2)
 	end
 }

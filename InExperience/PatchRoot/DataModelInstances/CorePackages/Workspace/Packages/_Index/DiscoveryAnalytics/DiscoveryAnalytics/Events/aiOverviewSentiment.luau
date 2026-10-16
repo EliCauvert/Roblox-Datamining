@@ -1,33 +1,33 @@
-﻿local telemetryService = game:GetService("TelemetryService")
-local discoveryAnalytics = script:FindFirstAncestor("DiscoveryAnalytics")
-local parent = discoveryAnalytics.Parent
-local tModule = require(parent.t)
-local discoveryEventErrorLogger = require(parent.DiscoveryUtils).DiscoveryEventErrorLogger
-local aiOverviewSentimentModule = require(discoveryAnalytics.Constants.AiOverviewSentiment)
-local aiOverviewSentimentThrottleHundrethsPercent = game:DefineFastInt("AiOverviewSentimentThrottleHundrethsPercent", 10000)
-local var1 = tModule.strictInterface({
-	sentiment = tModule.union(tModule.literal(aiOverviewSentimentModule.ThumbsUp), tModule.literal(aiOverviewSentimentModule.ThumbsDown)),
-	searchSessionId = tModule.string,
-	query = tModule.string,
-	universeIds = tModule.optional(tModule.string)
+﻿local TelemetryService = game:GetService("TelemetryService")
+local DiscoveryAnalytics = script:FindFirstAncestor("DiscoveryAnalytics")
+local Parent = DiscoveryAnalytics.Parent
+local TModule = require(Parent.t)
+local DiscoveryEventErrorLogger = require(Parent.DiscoveryUtils).DiscoveryEventErrorLogger
+local AiOverviewSentimentModule = require(DiscoveryAnalytics.Constants.AiOverviewSentiment)
+local AiOverviewSentimentThrottleHundrethsPercent = game:DefineFastInt("AiOverviewSentimentThrottleHundrethsPercent", 10000)
+local StrictInterfaceResult = TModule.strictInterface({
+	sentiment = TModule.union(TModule.literal(AiOverviewSentimentModule.ThumbsUp), TModule.literal(AiOverviewSentimentModule.ThumbsDown)),
+	searchSessionId = TModule.string,
+	query = TModule.string,
+	universeIds = TModule.optional(TModule.string)
 })
 
-return function(p1, p2)
-	-- upvalues: var1 (ref), discoveryEventErrorLogger (ref), aiOverviewSentimentThrottleHundrethsPercent (ref), telemetryService (ref)
-	local var2, var3 = var1(p1)
+return function(CustomFields, EventContext) --[[ Line: 26 ]]
+	-- upvalues: StrictInterfaceResult (copy), DiscoveryEventErrorLogger (copy), AiOverviewSentimentThrottleHundrethsPercent (copy), TelemetryService (copy)
+	local StrictInterfaceResultResult, StrictInterfaceResultResult2 = StrictInterfaceResult(CustomFields)
 	
-	if not var2 then
-		discoveryEventErrorLogger.reportError("AiOverviewSentimentInvalidInterface", var3)
+	if not StrictInterfaceResultResult then
+		DiscoveryEventErrorLogger.reportError("AiOverviewSentimentInvalidInterface", StrictInterfaceResultResult2)
 	end
-	telemetryService:LogEvent({
+	TelemetryService:LogEvent({
 		eventName = "aiOverviewSentiment",
 		description = "User tapped thumbs up or down on AI Overview card",
 		backends = { "EventIngest" },
-		throttlingPercentage = aiOverviewSentimentThrottleHundrethsPercent,
+		throttlingPercentage = AiOverviewSentimentThrottleHundrethsPercent,
 		lastUpdated = { 26, 6, 24 }
 	}, {
-		eventContext = p2,
+		eventContext = EventContext,
 		standardizedFields = { "addSessionInfo" },
-		customFields = p1
+		customFields = CustomFields
 	})
 end

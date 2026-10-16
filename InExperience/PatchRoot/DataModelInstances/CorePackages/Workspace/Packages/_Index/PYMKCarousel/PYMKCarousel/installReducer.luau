@@ -1,21 +1,21 @@
 ﻿local PYMKCarousel = script:FindFirstAncestor("PYMKCarousel")
-local dependenciesModule = require(PYMKCarousel.dependencies)
-local rodux = dependenciesModule.Rodux
-local roduxNetworking = dependenciesModule.RoduxNetworking
-local roduxAnalyticsModule = require(script.RoduxAnalytics)
-local usersModule = require(script.Users)
-local friendsModule = require(script.Friends)
-local roduxPresenceModule = require(script.RoduxPresence)
+local DependenciesModule = require(PYMKCarousel.dependencies)
+local Rodux = DependenciesModule.Rodux
+local RoduxNetworking = DependenciesModule.RoduxNetworking
+local RoduxAnalyticsModule = require(script.RoduxAnalytics)
+local UsersModule = require(script.Users)
+local FriendsModule = require(script.Friends)
+local RoduxPresenceModule = require(script.RoduxPresence)
 local _ = require(PYMKCarousel.Common.OmniTypes)
-local fFlagPymkCarouselPresenceStoreMigrationModule = require(PYMKCarousel.Flags.FFlagPymkCarouselPresenceStoreMigration)
+local FFlagPymkCarouselPresenceStoreMigrationModule = require(PYMKCarousel.Flags.FFlagPymkCarouselPresenceStoreMigration)
 
-return function(p1)
-	-- upvalues: rodux (ref), usersModule (ref), friendsModule (ref), roduxNetworking (ref), roduxAnalyticsModule (ref), fFlagPymkCarouselPresenceStoreMigrationModule (ref), roduxPresenceModule (ref)
-	return if p1.contentType and p1.treatmentType then rodux.combineReducers({
-		Users = usersModule(p1),
-		Friends = friendsModule(p1),
-		NetworkStatus = roduxNetworking.installReducer(),
-		Analytics = roduxAnalyticsModule(p1),
-		Presence = if fFlagPymkCarouselPresenceStoreMigrationModule then nil else roduxPresenceModule.installReducer()
+return function(p1) --[[ Line: 15 ]]
+	-- upvalues: Rodux (copy), UsersModule (copy), FriendsModule (copy), RoduxNetworking (copy), RoduxAnalyticsModule (copy), FFlagPymkCarouselPresenceStoreMigrationModule (copy), RoduxPresenceModule (copy)
+	return if p1.contentType and p1.treatmentType then Rodux.combineReducers({
+		Users = UsersModule(p1),
+		Friends = FriendsModule(p1),
+		NetworkStatus = RoduxNetworking.installReducer(),
+		Analytics = RoduxAnalyticsModule(p1),
+		Presence = if FFlagPymkCarouselPresenceStoreMigrationModule then nil else RoduxPresenceModule.installReducer()
 	}) else nil
 end

@@ -1,97 +1,89 @@
-﻿local bulkPurchaseApp = script:FindFirstAncestor("BulkPurchaseApp")
-local roduxModule = require(bulkPurchaseApp.Parent.Rodux)
-local bulkPurchasePromptStateEnumModule = require(bulkPurchaseApp.Enums.BulkPurchasePromptStateEnum)
-local bulkPurchaseEndedModule = require(bulkPurchaseApp.Store.Actions.BulkPurchaseEnded)
-local bulkPurchaseSucceededModule = require(bulkPurchaseApp.Store.Actions.BulkPurchaseSucceeded)
-local bulkPurchaseFailedModule = require(bulkPurchaseApp.Store.Actions.BulkPurchaseFailed)
-local bulkPurchaseStartedModule = require(bulkPurchaseApp.Store.Actions.BulkPurchaseStarted)
-local bulkPurchaseRequestedModule = require(bulkPurchaseApp.Store.Actions.BulkPurchaseRequested)
-local bulkPurchaseRefreshedModule = require(bulkPurchaseApp.Store.Actions.BulkPurchaseRefreshed)
-local bulkPurchaseDisablePurchaseModule = require(bulkPurchaseApp.Store.Actions.BulkPurchaseDisablePurchase)
-local _ = require(bulkPurchaseApp.Store.Types)
-local fFlagBulkPurchaseRemoveStartedActionModule = require(bulkPurchaseApp.Flags.FFlagBulkPurchaseRemoveStartedAction)
-local fFlagAXAddPlusUpsellToBulkPurchaseModule = require(bulkPurchaseApp.Flags.FFlagAXAddPlusUpsellToBulkPurchase)
-local fFlagAXAddOffersToBulkPurchaseModule = require(bulkPurchaseApp.Flags.FFlagAXAddOffersToBulkPurchase)
+﻿local BulkPurchaseApp = script:FindFirstAncestor("BulkPurchaseApp")
+local BulkPurchasePromptStateEnumModule = require(BulkPurchaseApp.Enums.BulkPurchasePromptStateEnum)
+local _ = require(BulkPurchaseApp.Store.Types)
+local FFlagBulkPurchaseRemoveStartedActionModule = require(BulkPurchaseApp.Flags.FFlagBulkPurchaseRemoveStartedAction)
+local FFlagAXAddPlusUpsellToBulkPurchaseModule = require(BulkPurchaseApp.Flags.FFlagAXAddPlusUpsellToBulkPurchase)
+local FFlagAXAddOffersToBulkPurchaseModule = require(BulkPurchaseApp.Flags.FFlagAXAddOffersToBulkPurchase)
 
-local function _()
-	-- upvalues: bulkPurchasePromptStateEnumModule (ref)
-	return { promptState = bulkPurchasePromptStateEnumModule.None }
+local function _() --[[ Line: 27 | Named "createInitialState" ]]
+	-- upvalues: BulkPurchasePromptStateEnumModule (copy)
+	return { promptState = BulkPurchasePromptStateEnumModule.None }
 end
 
-return roduxModule.createReducer({ promptState = bulkPurchasePromptStateEnumModule.None }, {
-	[bulkPurchaseEndedModule.name] = function(_, _)
-		-- upvalues: bulkPurchasePromptStateEnumModule (ref)
-		return { promptState = bulkPurchasePromptStateEnumModule.None }
+return (require(BulkPurchaseApp.Parent.Rodux).createReducer({ promptState = BulkPurchasePromptStateEnumModule.None }, {
+	[require(BulkPurchaseApp.Store.Actions.BulkPurchaseEnded).name] = function(_, _) --[[ Line: 34 ]]
+		-- upvalues: BulkPurchasePromptStateEnumModule (copy)
+		return { promptState = BulkPurchasePromptStateEnumModule.None }
 	end,
-	[bulkPurchaseSucceededModule.name] = function(p1, p2)
-		-- upvalues: fFlagAXAddPlusUpsellToBulkPurchaseModule (ref)
-		local cloned = table.clone(p1)
-		cloned.itemStatuses = p2.itemStatuses
-		cloned.promptState = p2.promptState
+	[require(BulkPurchaseApp.Store.Actions.BulkPurchaseSucceeded).name] = function(Tbl, p1) --[[ Line: 37 ]]
+		-- upvalues: FFlagAXAddPlusUpsellToBulkPurchaseModule (copy)
+		local Copy = table.clone(Tbl)
+		Copy.itemStatuses = p1.itemStatuses
+		Copy.promptState = p1.promptState
 		
-		if fFlagAXAddPlusUpsellToBulkPurchaseModule then
-			cloned.disablePurchase = false
+		if FFlagAXAddPlusUpsellToBulkPurchaseModule then
+			Copy.disablePurchase = false
 		end
-		return cloned
+		return Copy
 	end,
-	[bulkPurchaseFailedModule.name] = function(p1, p2)
-		-- upvalues: bulkPurchasePromptStateEnumModule (ref), fFlagAXAddPlusUpsellToBulkPurchaseModule (ref)
-		local cloned = table.clone(p1)
-		cloned.errorCode = p2.errorCode
-		cloned.promptState = bulkPurchasePromptStateEnumModule.Error
-		cloned.errorMetadata = p2.errorMetadata
+	[require(BulkPurchaseApp.Store.Actions.BulkPurchaseFailed).name] = function(Tbl, p1) --[[ Line: 46 ]]
+		-- upvalues: BulkPurchasePromptStateEnumModule (copy), FFlagAXAddPlusUpsellToBulkPurchaseModule (copy)
+		local Copy = table.clone(Tbl)
+		Copy.errorCode = p1.errorCode
+		Copy.promptState = BulkPurchasePromptStateEnumModule.Error
+		Copy.errorMetadata = p1.errorMetadata
 		
-		if fFlagAXAddPlusUpsellToBulkPurchaseModule then
-			cloned.disablePurchase = false
+		if FFlagAXAddPlusUpsellToBulkPurchaseModule then
+			Copy.disablePurchase = false
 		end
-		return cloned
+		return Copy
 	end,
-	[bulkPurchaseRequestedModule.name] = function(p1, p2)
-		-- upvalues: fFlagBulkPurchaseRemoveStartedActionModule (ref), bulkPurchasePromptStateEnumModule (ref), fFlagAXAddOffersToBulkPurchaseModule (ref)
-		local cloned = table.clone(p1)
-		cloned.itemData = p2.itemData
-		cloned.options = p2.options
-		cloned.orderRequest = p2.orderRequest
-		cloned.balance = p2.balance
-		cloned.totalCost = p2.totalCost
-		cloned.discountInformation = p2.discountInformation
+	[require(BulkPurchaseApp.Store.Actions.BulkPurchaseRequested).name] = function(Tbl, p1) --[[ Line: 56 ]]
+		-- upvalues: FFlagBulkPurchaseRemoveStartedActionModule (copy), BulkPurchasePromptStateEnumModule (copy), FFlagAXAddOffersToBulkPurchaseModule (copy)
+		local Copy = table.clone(Tbl)
+		Copy.itemData = p1.itemData
+		Copy.options = p1.options
+		Copy.orderRequest = p1.orderRequest
+		Copy.balance = p1.balance
+		Copy.totalCost = p1.totalCost
+		Copy.discountInformation = p1.discountInformation
 		
-		if fFlagBulkPurchaseRemoveStartedActionModule then
-			cloned.promptState = bulkPurchasePromptStateEnumModule.Request
+		if FFlagBulkPurchaseRemoveStartedActionModule then
+			Copy.promptState = BulkPurchasePromptStateEnumModule.Request
 		end
-		if fFlagAXAddOffersToBulkPurchaseModule then
-			cloned.offerData = p2.offerData
+		if FFlagAXAddOffersToBulkPurchaseModule then
+			Copy.offerData = p1.offerData
 		end
-		return cloned
+		return Copy
 	end,
-	[bulkPurchaseRefreshedModule.name] = function(p1, p2)
-		-- upvalues: fFlagAXAddOffersToBulkPurchaseModule (ref)
-		local cloned = table.clone(p1)
-		cloned.itemData = p2.itemData
-		cloned.options = p2.options
-		cloned.orderRequest = p2.orderRequest
-		cloned.balance = p2.balance
-		cloned.totalCost = p2.totalCost
-		cloned.discountInformation = p2.discountInformation
-		cloned.disablePurchase = false
+	[require(BulkPurchaseApp.Store.Actions.BulkPurchaseRefreshed).name] = function(Tbl, p1) --[[ Line: 72 ]]
+		-- upvalues: FFlagAXAddOffersToBulkPurchaseModule (copy)
+		local Copy = table.clone(Tbl)
+		Copy.itemData = p1.itemData
+		Copy.options = p1.options
+		Copy.orderRequest = p1.orderRequest
+		Copy.balance = p1.balance
+		Copy.totalCost = p1.totalCost
+		Copy.discountInformation = p1.discountInformation
+		Copy.disablePurchase = false
 		
-		if fFlagAXAddOffersToBulkPurchaseModule then
-			cloned.offerData = p2.offerData
+		if FFlagAXAddOffersToBulkPurchaseModule then
+			Copy.offerData = p1.offerData
 		end
-		return cloned
+		return Copy
 	end,
-	[bulkPurchaseDisablePurchaseModule.name] = function(p1, _)
-		local cloned = table.clone(p1)
-		cloned.disablePurchase = true
+	[require(BulkPurchaseApp.Store.Actions.BulkPurchaseDisablePurchase).name] = function(Tbl, _) --[[ Line: 89 ]]
+		local Copy = table.clone(Tbl)
+		Copy.disablePurchase = true
 		
-		return cloned
+		return Copy
 	end,
-	[bulkPurchaseStartedModule.name] = function(p1, p2)
-		-- upvalues: bulkPurchasePromptStateEnumModule (ref)
-		local cloned = table.clone(p1)
-		cloned.promptState = bulkPurchasePromptStateEnumModule.Request
-		cloned.balance = p2.balance
+	[require(BulkPurchaseApp.Store.Actions.BulkPurchaseStarted).name] = function(Tbl, p1) --[[ Line: 97 ]]
+		-- upvalues: BulkPurchasePromptStateEnumModule (copy)
+		local Copy = table.clone(Tbl)
+		Copy.promptState = BulkPurchasePromptStateEnumModule.Request
+		Copy.balance = p1.balance
 		
-		return cloned
+		return Copy
 	end
-})
+}))

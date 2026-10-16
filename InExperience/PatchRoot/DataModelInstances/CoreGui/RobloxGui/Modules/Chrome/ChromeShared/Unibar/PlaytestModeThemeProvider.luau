@@ -1,30 +1,30 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local reactModule = require(corePackagesService.Packages.React)
-local constants = require(corePackagesService.Packages.UIBlox).App.Style.Constants
-local styleModule = require(corePackagesService.Workspace.Packages.Style)
-local uiModeStyleProvider = styleModule.UiModeStyleProvider
-local appearanceContext = styleModule.AppearanceContext
-local colorMode = require(corePackagesService.Packages.Foundation).Enums.ColorMode
-local useIsPlaytestModeModule = require(script.Parent.Parent.Hooks.useIsPlaytestMode)
+﻿local CorePackages = game:GetService("CorePackages")
+local ReactModule = require(CorePackages.Packages.React)
+local Constants = require(CorePackages.Packages.UIBlox).App.Style.Constants
+local StyleModule = require(CorePackages.Workspace.Packages.Style)
+local UiModeStyleProvider = StyleModule.UiModeStyleProvider
+local AppearanceContext = StyleModule.AppearanceContext
+local ColorMode = require(CorePackages.Packages.Foundation).Enums.ColorMode
+local UseIsPlaytestModeModule = require(script.Parent.Parent.Hooks.useIsPlaytestMode)
 
-local function ThemeSwitcher(p1)
-	-- upvalues: reactModule (ref), appearanceContext (ref)
-	local var1 = reactModule.useContext(appearanceContext)
-	reactModule.useLayoutEffect(function()
-		-- upvalues: var1 (ref), p1 (ref)
-		var1.setTheme(p1.themeName)
-	end, { p1.themeName, var1 })
+local function ThemeSwitcher(p1) --[[ Line: 23 ]]
+	-- upvalues: ReactModule (copy), AppearanceContext (copy)
+	local UseContextResult = ReactModule.useContext(AppearanceContext)
+	ReactModule.useLayoutEffect(function() --[[ Line: 26 ]]
+		-- upvalues: UseContextResult (copy), p1 (copy)
+		UseContextResult.setTheme(p1.themeName)
+	end, { p1.themeName, UseContextResult })
 	
-	return reactModule.createElement(reactModule.Fragment, nil, p1.children)
+	return ReactModule.createElement(ReactModule.Fragment, nil, p1.children)
 end
 
-return function(p1)
-	-- upvalues: useIsPlaytestModeModule (ref), colorMode (ref), reactModule (ref), uiModeStyleProvider (ref), constants (ref), ThemeSwitcher (ref)
-	local var1 = if useIsPlaytestModeModule() then colorMode.Light else colorMode.Dark
+return function(p1) --[[ Line: 33 | Named "PlaytestModeThemeProvider" ]]
+	-- upvalues: UseIsPlaytestModeModule (copy), ColorMode (copy), ReactModule (copy), UiModeStyleProvider (copy), Constants (copy), ThemeSwitcher (copy)
+	local Light = if UseIsPlaytestModeModule() then ColorMode.Light else ColorMode.Dark
 	
-	return reactModule.createElement(uiModeStyleProvider, {
-		style = { themeName = var1, fontName = constants.FontName.Gotham }
+	return ReactModule.createElement(UiModeStyleProvider, {
+		style = { themeName = Light, fontName = Constants.FontName.Gotham }
 	}, {
-		ThemeSwitcher = reactModule.createElement(ThemeSwitcher, { themeName = var1 }, p1.children)
+		ThemeSwitcher = ReactModule.createElement(ThemeSwitcher, { themeName = Light }, p1.children)
 	})
 end

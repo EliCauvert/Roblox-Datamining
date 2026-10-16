@@ -1,32 +1,31 @@
-﻿local performFetch = require(game:GetService("CorePackages").Workspace.Packages.Http).PerformFetch
-local parent = script.Parent.Parent
-local thunkModule = require(parent.Thunk)
-local networkModule = require(parent.Services.Network)
-local createInspectAndBuyKeyMapperModule = require(parent.createInspectAndBuyKeyMapper)
-local sendCounterModule = require(parent.Thunks.SendCounter)
-local constantsModule = require(parent.Constants)
-local list = { networkModule }
-local var1 = createInspectAndBuyKeyMapperModule("getHumanoidDescriptionFromCostumeId")
+﻿local PerformFetch = require(game:GetService("CorePackages").Workspace.Packages.Http).PerformFetch
+local Parent = script.Parent.Parent
+local ThunkModule = require(Parent.Thunk)
+local NetworkModule = require(Parent.Services.Network)
+local SendCounterModule = require(Parent.Thunks.SendCounter)
+local ConstantsModule = require(Parent.Constants)
+local list = { NetworkModule }
+local GetHumanoidDescriptionFromCostumeId = require(Parent.createInspectAndBuyKeyMapper)("getHumanoidDescriptionFromCostumeId")
 
-return function(p1, p2)
-	-- upvalues: thunkModule (ref), list (ref), networkModule (ref), var1 (ref), performFetch (ref), sendCounterModule (ref), constantsModule (ref)
-	return thunkModule.new(script.Name, list, function(p3, p4)
-		-- upvalues: networkModule (copy), var1 (copy), p1 (ref), performFetch (copy), p2 (ref), sendCounterModule (copy), constantsModule (copy)
-		local var2 = p4[networkModule]
+return function(p1, Callback) --[[ Line: 19 | Named "GetHumanoidDescriptionFromCostumeId" ]]
+	-- upvalues: ThunkModule (copy), list (copy), NetworkModule (copy), GetHumanoidDescriptionFromCostumeId (copy), PerformFetch (copy), SendCounterModule (copy), ConstantsModule (copy)
+	return ThunkModule.new(script.Name, list, function(p2, p3) --[[ Line: 20 ]]
+		-- upvalues: NetworkModule (upval), GetHumanoidDescriptionFromCostumeId (upval), p1 (copy), PerformFetch (upval), Callback (copy), SendCounterModule (upval), ConstantsModule (upval)
+		local v1 = p3[NetworkModule]
 		
-		return performFetch.Single(var1(p3:getState().storeId, p1), function()
-			-- upvalues: var2 (ref), p1 (copy), p2 (copy), p3 (ref), sendCounterModule (copy), constantsModule (copy)
-			return var2.getHumanoidDescriptionFromCostumeId(p1):andThen(function(p5)
-				-- upvalues: p2 (copy), p3 (copy), sendCounterModule (copy), constantsModule (copy)
-				p2(p5)
-				p3:dispatch(sendCounterModule(constantsModule.Counters.GetHumanoidDescriptionFromCostumeId .. constantsModule.CounterSuffix.RequestSucceeded))
-			end, function(_)
-				-- upvalues: p3 (copy), sendCounterModule (copy), constantsModule (copy)
-				p3:dispatch(sendCounterModule(constantsModule.Counters.GetHumanoidDescriptionFromCostumeId .. constantsModule.CounterSuffix.RequestRejected))
+		return PerformFetch.Single(GetHumanoidDescriptionFromCostumeId(p2:getState().storeId, p1), function() --[[ Line: 25 ]]
+			-- upvalues: v1 (copy), p1 (upval), Callback (upval), p2 (copy), SendCounterModule (upval), ConstantsModule (upval)
+			return v1.getHumanoidDescriptionFromCostumeId(p1):andThen(function(Result) --[[ Line: 26 ]]
+				-- upvalues: Callback (upval), p2 (upval), SendCounterModule (upval), ConstantsModule (upval)
+				Callback(Result)
+				p2:dispatch(SendCounterModule(ConstantsModule.Counters.GetHumanoidDescriptionFromCostumeId .. ConstantsModule.CounterSuffix.RequestSucceeded))
+			end, function(_) --[[ Line: 34 ]]
+				-- upvalues: p2 (upval), SendCounterModule (upval), ConstantsModule (upval)
+				p2:dispatch(SendCounterModule(ConstantsModule.Counters.GetHumanoidDescriptionFromCostumeId .. ConstantsModule.CounterSuffix.RequestRejected))
 			end)
-		end)(p3):catch(function(_)
-			-- upvalues: p3 (ref), sendCounterModule (copy), constantsModule (copy)
-			p3:dispatch(sendCounterModule(constantsModule.Counters.GetHumanoidDescriptionFromCostumeId .. constantsModule.CounterSuffix.RequestFailed))
+		end)(p2):catch(function(_) --[[ Line: 42 ]]
+			-- upvalues: p2 (copy), SendCounterModule (upval), ConstantsModule (upval)
+			p2:dispatch(SendCounterModule(ConstantsModule.Counters.GetHumanoidDescriptionFromCostumeId .. ConstantsModule.CounterSuffix.RequestFailed))
 		end)
 	end)
 end

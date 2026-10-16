@@ -1,3 +1,5 @@
-﻿return require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator(script.Name, function(p1)
-	return { numFeedbackSubmissionAttempts = p1 }
+﻿return require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator(script.Name, function(NumFeedbackSubmissionAttempts) --[[ Line: 8 ]]
+	return {
+		numFeedbackSubmissionAttempts = NumFeedbackSubmissionAttempts
+	}
 end)

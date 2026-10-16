@@ -1,60 +1,59 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local colorMode = require(corePackagesService.Packages.Foundation).Enums.ColorMode
-local tModule = require(corePackagesService.Packages.t)
-local parent = script.Parent.Parent
-local withStyle = UIBloxModule.Core.Style.withStyle
-local appStyleProvider = UIBloxModule.App.Style.AppStyleProvider
-local dark = colorMode.Dark
-local setFeedbackFlowStateModule = require(parent.Actions.SetFeedbackFlowState)
-local setScreenSizeModule = require(parent.Actions.SetScreenSize)
-local withLocalization = require(corePackagesService.Workspace.Packages.Localization).withLocalization
-local assetsModule = require(parent.Resources.Assets)
-local feedbackReportDialogModule = require(parent.Components.FeedbackReportDialog)
-local refinedFeedbackBarModule = require(parent.Components.RefinedFeedbackBar)
-local feedbackSubmissionToastModule = require(parent.Components.FeedbackSubmissionToast)
-local helpModalModule = require(parent.Components.HelpModal)
-local onboardingModalModule = require(parent.Components.OnboardingModal)
-local fFlagInExperienceUseAppStyleProvider = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagInExperienceUseAppStyleProvider
-local feedbackApp = roactModule.PureComponent:extend("FeedbackApp")
-feedbackApp.validateProps = tModule.strictInterface({ setScreenGuiSize = tModule.callback })
+﻿local CorePackages = game:GetService("CorePackages")
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local UIBloxModule = require(CorePackages.Packages.UIBlox)
+local TModule = require(CorePackages.Packages.t)
+local Parent = script.Parent.Parent
+local WithStyleFunction = UIBloxModule.Core.Style.withStyle
+local AppStyleProvider = UIBloxModule.App.Style.AppStyleProvider
+local Dark = require(CorePackages.Packages.Foundation).Enums.ColorMode.Dark
+local SetFeedbackFlowStateModule = require(Parent.Actions.SetFeedbackFlowState)
+local SetScreenSizeModule = require(Parent.Actions.SetScreenSize)
+local WithLocalizationFunction = require(CorePackages.Workspace.Packages.Localization).withLocalization
+local AssetsModule = require(Parent.Resources.Assets)
+local FeedbackReportDialogModule = require(Parent.Components.FeedbackReportDialog)
+local RefinedFeedbackBarModule = require(Parent.Components.RefinedFeedbackBar)
+local FeedbackSubmissionToastModule = require(Parent.Components.FeedbackSubmissionToast)
+local HelpModalModule = require(Parent.Components.HelpModal)
+local OnboardingModalModule = require(Parent.Components.OnboardingModal)
+local FFlagInExperienceUseAppStyleProvider = require(CorePackages.Workspace.Packages.SharedFlags).FFlagInExperienceUseAppStyleProvider
+local FeedbackApp = RoactModule.PureComponent:extend("FeedbackApp")
+FeedbackApp.validateProps = TModule.strictInterface({ setScreenGuiSize = TModule.callback })
 
-function feedbackApp.render(p1)
-	-- upvalues: roactModule (ref), fFlagInExperienceUseAppStyleProvider (ref), appStyleProvider (ref), UIBloxModule (ref), dark (ref), feedbackSubmissionToastModule (ref), helpModalModule (ref), onboardingModalModule (ref), feedbackReportDialogModule (ref), withLocalization (ref), withStyle (ref), refinedFeedbackBarModule (ref), assetsModule (ref)
-	return roactModule.createElement(if fFlagInExperienceUseAppStyleProvider then appStyleProvider else UIBloxModule.Core.Style.Provider, if fFlagInExperienceUseAppStyleProvider then { style = { themeName = dark } } else {}, {
-		Gui = roactModule.createElement("ScreenGui", {
+function FeedbackApp.render(p1) --[[ Line: 48 ]]
+	-- upvalues: RoactModule (copy), FFlagInExperienceUseAppStyleProvider (copy), AppStyleProvider (copy), UIBloxModule (copy), Dark (copy), FeedbackSubmissionToastModule (copy), HelpModalModule (copy), OnboardingModalModule (copy), FeedbackReportDialogModule (copy), WithLocalizationFunction (copy), WithStyleFunction (copy), RefinedFeedbackBarModule (copy), AssetsModule (copy)
+	return RoactModule.createElement(if FFlagInExperienceUseAppStyleProvider then AppStyleProvider else UIBloxModule.Core.Style.Provider, if FFlagInExperienceUseAppStyleProvider then { style = { themeName = Dark } } else {}, {
+		Gui = RoactModule.createElement("ScreenGui", {
 			AutoLocalize = false,
 			IgnoreGuiInset = true,
 			OnTopOfCoreBlur = true,
 			ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
-			[roactModule.Change.AbsoluteSize] = p1.props.setScreenGuiSize
+			[RoactModule.Change.AbsoluteSize] = p1.props.setScreenGuiSize
 		}, {
-			ScreenFrame = roactModule.createElement("Frame", {
+			ScreenFrame = RoactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				ZIndex = 10,
 				Size = UDim2.new(1, 0, 1, 0)
 			}, {
-				FeedbackSubmissionToast = roactModule.createElement(feedbackSubmissionToastModule),
-				HelpModal = roactModule.createElement(helpModalModule),
-				OnboardingModal = roactModule.createElement(onboardingModalModule),
-				FeedbackReportDialog = roactModule.createElement(feedbackReportDialogModule)
+				FeedbackSubmissionToast = RoactModule.createElement(FeedbackSubmissionToastModule),
+				HelpModal = RoactModule.createElement(HelpModalModule),
+				OnboardingModal = RoactModule.createElement(OnboardingModalModule),
+				FeedbackReportDialog = RoactModule.createElement(FeedbackReportDialogModule)
 			}),
-			RefinedFeedbackBar = withLocalization({
+			RefinedFeedbackBar = WithLocalizationFunction({
 				feedbackBarText = "CoreScripts.Feedback.FeedbackBar.MainLabel"
-			})(function(p2)
-				-- upvalues: withStyle (copy), roactModule (copy), refinedFeedbackBarModule (copy), assetsModule (copy)
-				return withStyle(function(p3)
-					-- upvalues: roactModule (copy), refinedFeedbackBarModule (copy), p2 (ref), assetsModule (copy)
-					local font = p3.Font
+			})(function(p2) --[[ Line: 80 ]]
+				-- upvalues: WithStyleFunction (upval), RoactModule (upval), RefinedFeedbackBarModule (upval), AssetsModule (upval)
+				return WithStyleFunction(function(p3) --[[ Line: 81 ]]
+					-- upvalues: RoactModule (upval), RefinedFeedbackBarModule (upval), p2 (copy), AssetsModule (upval)
+					local _Font = p3.Font
 					
-					return roactModule.createElement(refinedFeedbackBarModule, {
+					return RoactModule.createElement(RefinedFeedbackBarModule, {
 						leftHint = {
 							maxWidth = 200,
 							text = p2.feedbackBarText,
-							hintTextSize = font.BaseSize * font.Body.RelativeSize,
-							icon = assetsModule.Images.FeedbackBarHintIcon
+							hintTextSize = _Font.BaseSize * _Font.Body.RelativeSize,
+							icon = AssetsModule.Images.FeedbackBarHintIcon
 						}
 					}, {})
 				end)
@@ -63,19 +62,19 @@ function feedbackApp.render(p1)
 	})
 end
 
-return roactRoduxModule.connect(function() end, function(p1)
-	-- upvalues: setScreenSizeModule (ref), setFeedbackFlowStateModule (ref)
+return RoactRoduxModule.connect(function() --[[ Line: 98 ]] end, function(Callback) --[[ Line: 98 ]]
+	-- upvalues: SetScreenSizeModule (copy), SetFeedbackFlowStateModule (copy)
 	return {
-		setScreenGuiSize = function(value)
-			-- upvalues: p1 (ref), setScreenSizeModule (copy)
-			p1(setScreenSizeModule(value.AbsoluteSize))
+		setScreenGuiSize = function(Frame) --[[ Line: 100 ]]
+			-- upvalues: Callback (copy), SetScreenSizeModule (upval)
+			Callback(SetScreenSizeModule(Frame.AbsoluteSize))
 		end,
-		setFeedbackFlowState = function(value)
-			-- upvalues: p1 (ref), setFeedbackFlowStateModule (copy)
-			p1(function(p2)
-				-- upvalues: setFeedbackFlowStateModule (copy), value (ref)
-				p2:dispatch(setFeedbackFlowStateModule(value))
+		setFeedbackFlowState = function(p1) --[[ Line: 103 ]]
+			-- upvalues: Callback (copy), SetFeedbackFlowStateModule (upval)
+			Callback(function(p2) --[[ Line: 104 ]]
+				-- upvalues: SetFeedbackFlowStateModule (upval), p1 (copy)
+				p2:dispatch(SetFeedbackFlowStateModule(p1))
 			end)
 		end
 	}
-end)(feedbackApp)
+end)(FeedbackApp)

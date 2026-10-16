@@ -1,43 +1,47 @@
-﻿local friendsCommon = script:FindFirstAncestor("FriendsCommon")
-local parent = friendsCommon.Parent
-local reactModule = require(parent.React)
-local apolloFriendsModule = require(parent.ApolloFriends)
-local queries = require(parent.ApolloLocalState).queries
-local userIdExists = require(parent.SocialCommon).Utils.userIdExists
-local apolloClientModule = require(parent.ApolloClient)
-local useQuery = apolloClientModule.useQuery
-local useApolloClient = apolloClientModule.useApolloClient
-local useLocalUserId = require(parent.RobloxAppHooks).useLocalUserId
-local handlePresenceEventWithScoresModule = require(friendsCommon.EventHandlers.handlePresenceEventWithScores)
+﻿local FriendsCommon = script:FindFirstAncestor("FriendsCommon")
+local Parent = FriendsCommon.Parent
+local ReactModule = require(Parent.React)
+local ApolloFriendsModule = require(Parent.ApolloFriends)
+local Queries = require(Parent.ApolloLocalState).queries
+local UserIdExistsFunction = require(Parent.SocialCommon).Utils.userIdExists
+local ApolloClientModule = require(Parent.ApolloClient)
+local UseQueryFunction = ApolloClientModule.useQuery
+local UseApolloClientFunction = ApolloClientModule.useApolloClient
+local UseLocalUserIdFunction = require(Parent.RobloxAppHooks).useLocalUserId
+local HandlePresenceEventWithScoresModule = require(FriendsCommon.EventHandlers.handlePresenceEventWithScores)
 
-return function()
-	-- upvalues: useLocalUserId (ref), useApolloClient (ref), useQuery (ref), queries (ref), userIdExists (ref), apolloFriendsModule (ref), reactModule (ref), handlePresenceEventWithScoresModule (ref)
-	local var1 = useLocalUserId()
-	local var2 = useApolloClient()
-	local var3 = useQuery(queries.onlineFriendsByUserId, {
+return function() --[[ Line: 38 | Named "useHandlePresenceEvent" ]]
+	-- upvalues: UseLocalUserIdFunction (copy), UseApolloClientFunction (copy), UseQueryFunction (copy), Queries (copy), UserIdExistsFunction (copy), ApolloFriendsModule (copy), ReactModule (copy), HandlePresenceEventWithScoresModule (copy)
+	local UseLocalUserIdResult = UseLocalUserIdFunction()
+	local UseApolloClientResult = UseApolloClientFunction()
+	local UseQueryResult = UseQueryFunction(Queries.onlineFriendsByUserId, {
 		notifyOnNetworkStatusChange = true,
-		skip = not userIdExists(var1),
+		skip = not UserIdExistsFunction(UseLocalUserIdResult),
 		variables = {
-			userId = var1,
-			sort = apolloFriendsModule.Enums.Sort.FriendshipScore
+			userId = UseLocalUserIdResult,
+			sort = ApolloFriendsModule.Enums.Sort.FriendshipScore
 		}
 	})
 	
 	return {
-		handleNewEvent = reactModule.useCallback(function(p1, p2, p3)
-			-- upvalues: handlePresenceEventWithScoresModule (copy), var1 (ref), var2 (ref), var3 (ref)
-			handlePresenceEventWithScoresModule({
-				localUserId = var1,
-				apolloClient = var2,
-				onlineFriendsRef = var3,
-				updatedPresences = p1,
-				updatedSortScores = p2,
-				rtnMessageId = p3
+		handleNewEvent = ReactModule.useCallback(function(UpdatedPresences, UpdatedSortScores, RtnMessageId) --[[ Line: 52 ]]
+			-- upvalues: HandlePresenceEventWithScoresModule (upval), UseLocalUserIdResult (copy), UseApolloClientResult (copy), UseQueryResult (copy)
+			HandlePresenceEventWithScoresModule({
+				localUserId = UseLocalUserIdResult,
+				apolloClient = UseApolloClientResult,
+				onlineFriendsRef = UseQueryResult,
+				updatedPresences = UpdatedPresences,
+				updatedSortScores = UpdatedSortScores,
+				rtnMessageId = RtnMessageId
 			})
-		end, { var1, var2, var3 }),
-		refetchOnlineFriends = reactModule.useCallback(function()
-			-- upvalues: var3 (ref)
-			return var3.refetch()
-		end, { var3 })
+		end, {
+			UseLocalUserIdResult,
+			UseApolloClientResult,
+			UseQueryResult
+		}),
+		refetchOnlineFriends = ReactModule.useCallback(function() --[[ Line: 63 ]]
+			-- upvalues: UseQueryResult (copy)
+			return UseQueryResult.refetch()
+		end, { UseQueryResult })
 	}
 end

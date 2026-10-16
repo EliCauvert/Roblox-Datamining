@@ -1,1 +1,1 @@
-﻿return require(script.Waveform)
+﻿return (require(script.Waveform))

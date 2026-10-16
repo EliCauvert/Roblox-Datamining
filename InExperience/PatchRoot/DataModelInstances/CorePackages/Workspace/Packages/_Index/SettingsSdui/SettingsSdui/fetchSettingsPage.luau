@@ -1,51 +1,51 @@
-﻿local settingsSdui = script:FindFirstAncestor("SettingsSdui")
-local parent = settingsSdui.Parent
-local appPage = require(parent.RobloxAppEnums).AppPage
-local sduiSharedUtilitiesModule = require(parent.SduiSharedUtilities)
-local sduiResponseType = sduiSharedUtilitiesModule.SduiResponseType
-local getSduiApiStore = sduiSharedUtilitiesModule.getSduiApiStore
-local getSduiTemplateStore = sduiSharedUtilitiesModule.getSduiTemplateStore
-local sduiApiStorePostConfigContentType = sduiSharedUtilitiesModule.SduiApiStorePostConfigContentType
-local sduiCapabilities = sduiSharedUtilitiesModule.SduiCapabilities
-local settingsSduiConstantsModule = require(settingsSdui.SettingsSduiConstants)
-local settingsPageSessionModule = require(settingsSdui.SettingsPageSession)
-local getSettingsPageUrlModule = require(settingsSdui.getSettingsPageUrl)
-local buildSettingsPageRequestModule = require(settingsSdui.buildSettingsPageRequest)
-local fFlagSduiAdvertiseRuntimeSupportSets = require(parent.SharedFlags).FFlagSduiAdvertiseRuntimeSupportSets
+﻿local SettingsSdui = script:FindFirstAncestor("SettingsSdui")
+local Parent = SettingsSdui.Parent
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local SduiSharedUtilitiesModule = require(Parent.SduiSharedUtilities)
+local SduiResponseType = SduiSharedUtilitiesModule.SduiResponseType
+local GetSduiApiStoreFunction = SduiSharedUtilitiesModule.getSduiApiStore
+local GetSduiTemplateStoreFunction = SduiSharedUtilitiesModule.getSduiTemplateStore
+local SduiApiStorePostConfigContentType = SduiSharedUtilitiesModule.SduiApiStorePostConfigContentType
+local SduiCapabilities = SduiSharedUtilitiesModule.SduiCapabilities
+local SettingsSduiConstantsModule = require(SettingsSdui.SettingsSduiConstants)
+local SettingsPageSessionModule = require(SettingsSdui.SettingsPageSession)
+local GetSettingsPageUrlModule = require(SettingsSdui.getSettingsPageUrl)
+local BuildSettingsPageRequestModule = require(SettingsSdui.buildSettingsPageRequest)
+local FFlagSduiAdvertiseRuntimeSupportSets = require(Parent.SharedFlags).FFlagSduiAdvertiseRuntimeSupportSets
 
-local function fetchSettingsPage(value, p1)
-	-- upvalues: settingsSduiConstantsModule (ref), getSduiApiStore (ref), settingsPageSessionModule (ref), parent (ref), fFlagSduiAdvertiseRuntimeSupportSets (ref), sduiCapabilities (ref), getSduiTemplateStore (ref), appPage (ref), getSettingsPageUrlModule (ref), buildSettingsPageRequestModule (ref), sduiResponseType (ref), sduiApiStorePostConfigContentType (ref), fetchSettingsPage (ref)
-	local configKey = settingsSduiConstantsModule.ConfigKey
-	local var1 = getSduiApiStore()
-	local _, data = var1.getData(configKey)
+local function fetchSettingsPage(LoadTimer, p1) --[[ Line: 20 ]]
+	-- upvalues: SettingsSduiConstantsModule (copy), GetSduiApiStoreFunction (copy), SettingsPageSessionModule (copy), Parent (copy), FFlagSduiAdvertiseRuntimeSupportSets (copy), SduiCapabilities (copy), GetSduiTemplateStoreFunction (copy), AppPage (copy), GetSettingsPageUrlModule (copy), BuildSettingsPageRequestModule (copy), SduiResponseType (copy), SduiApiStorePostConfigContentType (copy), fetchSettingsPage (copy)
+	local ConfigKey = SettingsSduiConstantsModule.ConfigKey
+	local SduiApiStore = GetSduiApiStoreFunction()
+	local _, Data2 = SduiApiStore.getData(ConfigKey)
 	
-	if (p1 or data) and not var1.isInFlight(configKey) then
-		settingsPageSessionModule:Refresh()
+	if (p1 or Data2) and not SduiApiStore.isInFlight(ConfigKey) then
+		SettingsPageSessionModule:Refresh()
 	end
-	local serviceContractsProtoModule = require(parent.ServiceContractsProto)
-	local settingsPage = serviceContractsProtoModule.apppageplatform.settings.settings_page
+	local ServiceContractsProtoModule = require(Parent.ServiceContractsProto)
+	local SettingsPage = ServiceContractsProtoModule.apppageplatform.settings.settings_page
 	
-	return var1.fetchIfNeeded({
+	return SduiApiStore.fetchIfNeeded({
 		enableTemplateCache = true,
-		responseType = sduiResponseType.Protobuf,
-		url = getSettingsPageUrlModule(),
-		surfaceKey = appPage.Settings,
-		configKey = configKey,
-		loadTimer = value,
-		apiProto = settingsPage.SettingsPageResponse,
+		responseType = SduiResponseType.Protobuf,
+		url = GetSettingsPageUrlModule(),
+		surfaceKey = AppPage.Settings,
+		configKey = ConfigKey,
+		loadTimer = LoadTimer,
+		apiProto = SettingsPage.SettingsPageResponse,
 		postConfig = {
-			contentType = sduiApiStorePostConfigContentType.Json,
-			body = buildSettingsPageRequestModule(settingsPage, {
-				sessionId = settingsPageSessionModule:Get(),
-				cachedRobloxComponentToTemplateId = getSduiTemplateStore().getCachedRobloxComponentToTemplateId(appPage.Settings),
-				clientCapabilities = serviceContractsProtoModule.apppageplatform.shared.client_capabilities.ClientCapabilities.new({
-					enabled_capabilities = if fFlagSduiAdvertiseRuntimeSupportSets then sduiCapabilities.getEnabledCapabilityNumbersWithoutExtendedMarker() else sduiCapabilities.getEnabledCapabilityNumbers(sduiCapabilities.getEnabledCapabilities())
+			contentType = SduiApiStorePostConfigContentType.Json,
+			body = BuildSettingsPageRequestModule(SettingsPage, {
+				sessionId = SettingsPageSessionModule:Get(),
+				cachedRobloxComponentToTemplateId = GetSduiTemplateStoreFunction().getCachedRobloxComponentToTemplateId(AppPage.Settings),
+				clientCapabilities = ServiceContractsProtoModule.apppageplatform.shared.client_capabilities.ClientCapabilities.new({
+					enabled_capabilities = if FFlagSduiAdvertiseRuntimeSupportSets then SduiCapabilities.getEnabledCapabilityNumbersWithoutExtendedMarker() else SduiCapabilities.getEnabledCapabilityNumbers(SduiCapabilities.getEnabledCapabilities())
 				})
 			})
 		},
-		refresh = function(p2)
-			-- upvalues: fetchSettingsPage (copy)
-			return fetchSettingsPage(p2, true)
+		refresh = function(LoadTimer) --[[ Line: 63 ]]
+			-- upvalues: fetchSettingsPage (upval)
+			return fetchSettingsPage(LoadTimer, true)
 		end
 	}, p1)
 end

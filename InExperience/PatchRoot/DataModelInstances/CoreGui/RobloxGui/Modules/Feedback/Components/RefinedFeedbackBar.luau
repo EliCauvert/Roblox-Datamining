@@ -1,30 +1,30 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local textService = game:GetService("TextService")
-local experienceStateCaptureService = game:GetService("ExperienceStateCaptureService")
-local showHelpModalThunkModule = require(script.Parent.Parent.Thunks.ShowHelpModalThunk)
-local withLocalization = require(corePackagesService.Workspace.Packages.Localization).withLocalization
-local feedbackBarHintModule = require(script.Parent.FeedbackBarHint)
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local tModule = require(corePackagesService.Packages.t)
-local cryoModule = require(corePackagesService.Packages.Cryo)
-local withStyle = UIBloxModule.Core.Style.withStyle
-local buttonStack = UIBloxModule.App.Button.ButtonStack
-local buttonType = UIBloxModule.App.Button.Enum.ButtonType
-local refinedFeedbackBar = roactModule.PureComponent:extend("RefinedFeedbackBar")
+﻿local CorePackages = game:GetService("CorePackages")
+local TextService = game:GetService("TextService")
+local ExperienceStateCaptureService = game:GetService("ExperienceStateCaptureService")
+local ShowHelpModalThunkModule = require(script.Parent.Parent.Thunks.ShowHelpModalThunk)
+local WithLocalizationFunction = require(CorePackages.Workspace.Packages.Localization).withLocalization
+local FeedbackBarHintModule = require(script.Parent.FeedbackBarHint)
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local UIBloxModule = require(CorePackages.Packages.UIBlox)
+local TModule = require(CorePackages.Packages.t)
+local CryoModule = require(CorePackages.Packages.Cryo)
+local WithStyleFunction = UIBloxModule.Core.Style.withStyle
+local ButtonStack = UIBloxModule.App.Button.ButtonStack
+local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
+local RefinedFeedbackBar = RoactModule.PureComponent:extend("RefinedFeedbackBar")
 
-local function GetTextSize(...)
-	-- upvalues: textService (ref)
-	return textService:GetTextSize(...) + Vector2.new(2, 2)
+local function GetTextSize(...): Vector2 --[[ Line: 41 ]]
+	-- upvalues: TextService (copy)
+	return TextService:GetTextSize(...) + Vector2.new(2, 2)
 end
 
-refinedFeedbackBar.validateProps = tModule.strictInterface({
-	leftHint = tModule.strictInterface({ text = tModule.string })
+RefinedFeedbackBar.validateProps = TModule.strictInterface({
+	leftHint = TModule.strictInterface({ text = TModule.string })
 })
 
-function refinedFeedbackBar.init(p1)
-	-- upvalues: experienceStateCaptureService (ref)
+function RefinedFeedbackBar.init(p1) --[[ Line: 55 ]]
+	-- upvalues: ExperienceStateCaptureService (copy)
 	p1.state = {
 		barWidth = 0,
 		hintStringsConcat = nil,
@@ -32,100 +32,100 @@ function refinedFeedbackBar.init(p1)
 		hintRatios = nil
 	}
 	
-	function p0.onExitFeedbackMode()
-		-- upvalues: experienceStateCaptureService (copy)
-		experienceStateCaptureService:ToggleCaptureMode()
+	function p1.onExitFeedbackMode() --[[ Line: 63 ]]
+		-- upvalues: ExperienceStateCaptureService (upval)
+		ExperienceStateCaptureService:ToggleCaptureMode()
 	end
 	
-	function p0.openHelpModal()
-		-- upvalues: p1 (ref)
+	function p1.openHelpModal() --[[ Line: 67 ]]
+		-- upvalues: p1 (copy)
 		p1.props.showHelpModal(true)
 	end
 end
 
-function refinedFeedbackBar.calculateHintRatios(p1)
-	-- upvalues: cryoModule (ref), GetTextSize (ref)
-	local var1 = 84
-	local var2 = ""
+function RefinedFeedbackBar.calculateHintRatios(LeftHint) --[[ Line: 73 ]]
+	-- upvalues: CryoModule (copy), GetTextSize (copy)
+	local v1 = 84
+	local Text = ""
 	local t = {}
-	local var3 = 0
-	local var4 = cryoModule.List.join({ p1 }, {})
+	local Total = 0
+	local JoinResult = CryoModule.List.join({ LeftHint }, {})
 	
-	for i, v in ipairs(var4) do
-		t[v.text] = GetTextSize(v.text, 17, 2, Vector2.new(10000, 10000)).X
-		var3 += t[v.text]
-		var1 = var1 + 36 + 8
-		var2 ..= v.text
+	for _, value in ipairs(JoinResult) do
+		t[value.text] = GetTextSize(value.text, 17, 2, Vector2.new(10000, 10000)).X
+		Total += t[value.text]
+		v1 = v1 + 36 + 8
+		Text ..= value.text
 	end
-	for i_1, v_1 in pairs(t) do
-		t[i_1] = v_1 / var3
+	for i, value1 in pairs(t) do
+		t[i] = value1 / Total
 	end
-	return t, var1 + math.max(#var4 - 2, 0) * 40, var2
+	return t, v1 + math.max(#JoinResult - 2, 0) * 40, Text
 end
 
-function refinedFeedbackBar.getDerivedStateFromProps(p2)
-	-- upvalues: refinedFeedbackBar (ref)
-	local var5, var6, var7 = refinedFeedbackBar.calculateHintRatios(p2.leftHint)
+function RefinedFeedbackBar.getDerivedStateFromProps(p1) --[[ Line: 105 ]]
+	-- upvalues: RefinedFeedbackBar (copy)
+	local HintRatios, HintRatios2, HintRatios3 = RefinedFeedbackBar.calculateHintRatios(p1.leftHint)
 	
 	return {
-		hintRatios = var5,
-		requiredSpace = var6,
-		hintStringsConcat = var7
+		hintRatios = HintRatios,
+		requiredSpace = HintRatios2,
+		hintStringsConcat = HintRatios3
 	}
 end
 
-function refinedFeedbackBar.calculateHintSize(p2, p3, p4)
-	-- upvalues: GetTextSize (ref)
-	local var5 = p3 - p2.state.requiredSpace
-	local var6 = p4.Header2.RelativeSize * p4.BaseSize
-	local var7 = p4.Header2.RelativeMinSize * p4.BaseSize
-	local x = GetTextSize(p2.state.hintStringsConcat, var7, p4.Header2.Font, Vector2.new(10000, 10000)).X
+function RefinedFeedbackBar.calculateHintSize(p1, p2, p3) --[[ Line: 116 ]]
+	-- upvalues: GetTextSize (copy)
+	local v2 = p2 - p1.state.requiredSpace
+	local ScaledRelativeSize = p3.Header2.RelativeSize * p3.BaseSize
+	local ScaledRelativeMinSize = p3.Header2.RelativeMinSize * p3.BaseSize
+	local X = GetTextSize(p1.state.hintStringsConcat, ScaledRelativeMinSize, p3.Header2.Font, Vector2.new(10000, 10000)).X
 	
-	if x <= var5 then
-		local x_1 = GetTextSize(p2.state.hintStringsConcat, var6, p4.Header2.Font, Vector2.new(10000, 10000)).X
-		local var8 = (var6 - var7) / (x_1 - x)
+	if X <= v2 then
+		local X1 = GetTextSize(p1.state.hintStringsConcat, ScaledRelativeSize, p3.Header2.Font, Vector2.new(10000, 10000)).X
+		local ScaledRelativeSizeRatio = (ScaledRelativeSize - ScaledRelativeMinSize) / (X1 - X)
 		
-		return nil, math.clamp(var5 * var8 + (var6 - var8 * x_1), var7, var6)
+		return nil, (math.clamp(v2 * ScaledRelativeSizeRatio + (ScaledRelativeSize - ScaledRelativeSizeRatio * X1), ScaledRelativeMinSize, ScaledRelativeSize))
 	end
 	local t = {}
 	
-	for i, v in pairs(p2.state.hintRatios) do
-		t[i] = v * var5
+	for i, hintRatio in pairs(p1.state.hintRatios) do
+		t[i] = hintRatio * v2
 	end
 	return t
 end
 
-function refinedFeedbackBar.render(p5)
-	-- upvalues: withStyle (ref), roactModule (ref), feedbackBarHintModule (ref), withLocalization (ref), buttonStack (ref), buttonType (ref)
-	return withStyle(function(p6)
-		-- upvalues: roactModule (copy), feedbackBarHintModule (copy), p5 (ref), withLocalization (copy), buttonStack (copy), buttonType (copy)
-		local theme = p6.Theme
+function RefinedFeedbackBar.render(p4) --[[ Line: 155 ]]
+	-- upvalues: WithStyleFunction (copy), RoactModule (copy), FeedbackBarHintModule (copy), WithLocalizationFunction (copy), ButtonStack (copy), ButtonType (copy)
+	return WithStyleFunction(function(p5) --[[ Line: 156 ]]
+		-- upvalues: RoactModule (upval), FeedbackBarHintModule (upval), p4 (copy), WithLocalizationFunction (upval), ButtonStack (upval), ButtonType (upval)
+		local Theme = p5.Theme
 		
-		return roactModule.createElement("Frame", {
+		return RoactModule.createElement("Frame", {
 			BorderSizePixel = 0,
-			BackgroundTransparency = theme.BackgroundUIContrast.Transparency,
-			BackgroundColor3 = theme.BackgroundUIContrast.Color,
+			BackgroundTransparency = Theme.BackgroundUIContrast.Transparency,
+			BackgroundColor3 = Theme.BackgroundUIContrast.Color,
 			Size = UDim2.new(1, 0, 0, 72),
 			Position = UDim2.fromScale(0, 1),
 			AnchorPoint = Vector2.new(0, 1),
-			[roactModule.Change.AbsoluteSize] = function(p7)
-				-- upvalues: p5 (copy)
-				p5:setState({ barWidth = p7.AbsoluteSize.X })
+			[RoactModule.Change.AbsoluteSize] = function(Frame) --[[ Line: 169 ]]
+				-- upvalues: p4 (upval)
+				p4:setState({ barWidth = Frame.AbsoluteSize.X })
 			end,
-			[roactModule.Event.AncestryChanged] = function(p7)
-				-- upvalues: p5 (copy)
-				p5:setState({ barWidth = p7.AbsoluteSize.X })
+			[RoactModule.Event.AncestryChanged] = function(Frame) --[[ Line: 174 ]]
+				-- upvalues: p4 (upval)
+				p4:setState({ barWidth = Frame.AbsoluteSize.X })
 			end
 		}, {
-			Padding = roactModule.createElement("UIPadding", {
+			Padding = RoactModule.createElement("UIPadding", {
 				PaddingLeft = UDim.new(0, 24),
 				PaddingRight = UDim.new(0, 24)
 			}),
-			LeftFrame = roactModule.createElement("Frame", {
+			LeftFrame = RoactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				Size = UDim2.fromScale(0.5, 1)
 			}, {
-				roactModule.createElement("UIListLayout", {
+				RoactModule.createElement("UIListLayout", {
 					key = "Layout",
 					SortOrder = Enum.SortOrder.LayoutOrder,
 					FillDirection = Enum.FillDirection.Horizontal,
@@ -133,45 +133,45 @@ function refinedFeedbackBar.render(p5)
 					VerticalAlignment = Enum.VerticalAlignment.Center,
 					Padding = UDim.new(0, 40)
 				}),
-				(function(p7)
-					-- upvalues: roactModule (copy), feedbackBarHintModule (copy)
-					return roactModule.createElement(feedbackBarHintModule, p7)
-				end)(p5.props.leftHint)
+				(function(p6) --[[ Line: 158 | Named "makeHint" ]]
+					-- upvalues: RoactModule (upval), FeedbackBarHintModule (upval)
+					return RoactModule.createElement(FeedbackBarHintModule, p6)
+				end)(p4.props.leftHint)
 			}),
-			RightFrame = roactModule.createElement("Frame", {
+			RightFrame = RoactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				Size = UDim2.fromScale(0.35, 1),
 				Position = UDim2.fromScale(1, 0),
 				AnchorPoint = Vector2.new(1, 0)
 			}, {
-				Layout = roactModule.createElement("UIListLayout", {
+				Layout = RoactModule.createElement("UIListLayout", {
 					SortOrder = Enum.SortOrder.LayoutOrder,
 					FillDirection = Enum.FillDirection.Horizontal,
 					HorizontalAlignment = Enum.HorizontalAlignment.Right,
 					VerticalAlignment = Enum.VerticalAlignment.Center,
 					Padding = UDim.new(0, 40)
 				}),
-				Buttons = withLocalization({
+				Buttons = WithLocalizationFunction({
 					helpButtonText = "CoreScripts.Feedback.FeedbackBar.HelpButton",
 					exitFeedbackButtonText = "CoreScripts.Feedback.FeedbackBar.ExitFeedbackButton"
-				})(function(p7)
-					-- upvalues: roactModule (copy), buttonStack (copy), buttonType (copy), p5 (copy)
-					return roactModule.createElement(buttonStack, {
+				})(function(p6) --[[ Line: 217 ]]
+					-- upvalues: RoactModule (upval), ButtonStack (upval), ButtonType (upval), p4 (upval)
+					return RoactModule.createElement(ButtonStack, {
 						buttonHeight = 50,
 						buttons = {
 							{
-								buttonType = buttonType.Secondary,
+								buttonType = ButtonType.Secondary,
 								props = {
-									onActivated = p5.openHelpModal,
-									text = p7.helpButtonText
+									onActivated = p4.openHelpModal,
+									text = p6.helpButtonText
 								}
 							},
 							{
-								buttonType = buttonType.PrimarySystem,
+								buttonType = ButtonType.PrimarySystem,
 								props = {
 									isDisabled = false,
-									onActivated = p5.onExitFeedbackMode,
-									text = p7.exitFeedbackButtonText
+									onActivated = p4.onExitFeedbackMode,
+									text = p6.exitFeedbackButtonText
 								}
 							}
 						},
@@ -183,14 +183,14 @@ function refinedFeedbackBar.render(p5)
 	end)
 end
 
-return roactRoduxModule.connect(function()
+return RoactRoduxModule.connect(function() --[[ Line: 245 ]]
 	return {}
-end, function(p5)
-	-- upvalues: showHelpModalThunkModule (ref)
+end, function(Callback) --[[ Line: 247 ]]
+	-- upvalues: ShowHelpModalThunkModule (copy)
 	return {
-		showHelpModal = function(p6)
-			-- upvalues: p5 (ref), showHelpModalThunkModule (copy)
-			p5(showHelpModalThunkModule(p6))
+		showHelpModal = function(p4) --[[ Line: 249 ]]
+			-- upvalues: Callback (copy), ShowHelpModalThunkModule (upval)
+			Callback(ShowHelpModalThunkModule(p4))
 		end
 	}
-end)(refinedFeedbackBar)
+end)(RefinedFeedbackBar)

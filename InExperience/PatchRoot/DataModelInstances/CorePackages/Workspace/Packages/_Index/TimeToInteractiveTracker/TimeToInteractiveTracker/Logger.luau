@@ -1,1 +1,1 @@
-﻿return require(script:FindFirstAncestor("TimeToInteractiveTracker").Parent.Loggers).Logger:new("TimeToInteractiveTracker")
+﻿return (require(script:FindFirstAncestor("TimeToInteractiveTracker").Parent.Loggers).Logger:new("TimeToInteractiveTracker"))

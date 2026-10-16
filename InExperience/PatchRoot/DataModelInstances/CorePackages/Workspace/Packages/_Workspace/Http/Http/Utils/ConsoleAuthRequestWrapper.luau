@@ -1,29 +1,27 @@
-﻿local messageBusService = game:GetService("MessageBusService")
-local http = script:FindFirstAncestor("Http")
-local parent = http.Parent
-local promiseModule = require(parent.Promise)
-local cryoModule = require(parent.Cryo)
-local logging = require(parent.AppCommonLib).Logging
-local _ = require(http.RequestTypes)
-local fFlagEnableStrictConsoleAuthCredentialHeadersModule = require(http.Flags.FFlagEnableStrictConsoleAuthCredentialHeaders)
+﻿local MessageBusService = game:GetService("MessageBusService")
+local Http = script:FindFirstAncestor("Http")
+local Parent = Http.Parent
+local PromiseModule = require(Parent.Promise)
+local CryoModule = require(Parent.Cryo)
+local Logging = require(Parent.AppCommonLib).Logging
+local _ = require(Http.RequestTypes)
+local FFlagEnableStrictConsoleAuthCredentialHeadersModule = require(Http.Flags.FFlagEnableStrictConsoleAuthCredentialHeaders)
 
-return function(p1, p2, p3, p4, p5)
-	-- upvalues: promiseModule (ref), messageBusService (ref), logging (ref), fFlagEnableStrictConsoleAuthCredentialHeadersModule (ref), cryoModule (ref)
-	return promiseModule.new(function(p6, p7)
-		-- upvalues: p2 (ref), p3 (ref), messageBusService (copy), logging (copy), fFlagEnableStrictConsoleAuthCredentialHeadersModule (copy), p5 (ref), p4 (ref), cryoModule (copy), p1 (ref)
-		messageBusService:MakeRequest("CredentialsProtocol", "getHeaders", { url = p2, method = p3 }, function(p8)
-			-- upvalues: logging (copy), p7 (ref), fFlagEnableStrictConsoleAuthCredentialHeadersModule (copy), p5 (copy), p4 (copy), cryoModule (copy), p1 (copy), p2 (copy), p3 (copy), p6 (ref)
-			if not p8 or not p8.success then
-				logging.warn("credential headers error")
-				p7({})
+return function(Callback, Url, Method, p1, p2) --[[ Line: 17 ]]
+	-- upvalues: PromiseModule (copy), MessageBusService (copy), Logging (copy), FFlagEnableStrictConsoleAuthCredentialHeadersModule (copy), CryoModule (copy)
+	return PromiseModule.new(function(p3, Callback1) --[[ Line: 24 ]]
+		-- upvalues: Url (copy), Method (copy), MessageBusService (upval), Logging (upval), FFlagEnableStrictConsoleAuthCredentialHeadersModule (upval), p2 (copy), p1 (copy), CryoModule (upval), Callback (copy)
+		MessageBusService:MakeRequest("CredentialsProtocol", "getHeaders", { url = Url, method = Method }, function(p4) --[[ Line: 29 ]]
+			-- upvalues: Logging (upval), Callback1 (copy), FFlagEnableStrictConsoleAuthCredentialHeadersModule (upval), p2 (upval), p1 (upval), CryoModule (upval), Callback (upval), Url (upval), Method (upval), p3 (copy)
+			if not p4 or not p4.success then
+				Logging.warn("credential headers error")
+				Callback1({})
 				
-				if fFlagEnableStrictConsoleAuthCredentialHeadersModule and p5 then
-					return
-				end
+				if FFlagEnableStrictConsoleAuthCredentialHeadersModule and p2 then return end
 			end
-			p4.headers = cryoModule.Dictionary.join(p4.headers or {}, p8.headers or {})
+			p1.headers = CryoModule.Dictionary.join(p1.headers or {}, p4.headers or {})
 			
-			return p1(p2, p3, p4):andThen(p6):catch(p7)
+			return Callback(Url, Method, p1):andThen(p3):catch(Callback1)
 		end, {})
 	end)
 end

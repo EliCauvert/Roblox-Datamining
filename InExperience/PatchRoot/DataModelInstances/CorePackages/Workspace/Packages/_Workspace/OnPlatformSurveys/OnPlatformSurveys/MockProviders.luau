@@ -1,50 +1,46 @@
-﻿local parent = script:FindFirstAncestor("OnPlatformSurveys").Parent
-local localizationModule = require(parent.Localization)
-local reactModule = require(parent.React)
-local roactRoduxModule = require(parent.RoactRodux)
-local roactUtilsModule = require(parent.RoactUtils)
-local roduxModule = require(parent.Rodux)
-local styleModule = require(parent.Style)
-local UIBloxModule = require(parent.UIBlox)
-local universalAppPolicyModule = require(parent.UniversalAppPolicy)
-local appFeaturePolicies = universalAppPolicyModule.AppFeaturePolicies
-local layerCollectorProvider = UIBloxModule.Core.Layout.LayerCollector.LayerCollectorProvider
-local localizationProvider = localizationModule.LocalizationProvider
-local providerContainer = roactUtilsModule.Components.ProviderContainer
-local roactAppPolicy = universalAppPolicyModule.RoactAppPolicy
-local styleProviderWithDefaultTheme = styleModule.StyleProviderWithDefaultTheme
+﻿local Parent = script:FindFirstAncestor("OnPlatformSurveys").Parent
+local ReactModule = require(Parent.React)
+local RoactRoduxModule = require(Parent.RoactRodux)
+local RoduxModule = require(Parent.Rodux)
+local UniversalAppPolicyModule = require(Parent.UniversalAppPolicy)
+local AppFeaturePolicies = UniversalAppPolicyModule.AppFeaturePolicies
+local LayerCollectorProvider = require(Parent.UIBlox).Core.Layout.LayerCollector.LayerCollectorProvider
+local LocalizationProvider = require(Parent.Localization).LocalizationProvider
+local ProviderContainer = require(Parent.RoactUtils).Components.ProviderContainer
+local RoactAppPolicy = UniversalAppPolicyModule.RoactAppPolicy
+local StyleProviderWithDefaultTheme = require(Parent.Style).StyleProviderWithDefaultTheme
 
-local function reducer(p1)
+local function reducer(p1) --[[ Line: 30 ]]
 	return p1 or {}
 end
 
-return function(p1)
-	-- upvalues: roduxModule (ref), reducer (ref), styleProviderWithDefaultTheme (ref), localizationProvider (ref), layerCollectorProvider (ref), roactRoduxModule (ref), roactAppPolicy (ref), appFeaturePolicies (ref), reactModule (ref), providerContainer (ref)
-	local t = {}
-	local var1 = roduxModule.Store.new(reducer, {}, { roduxModule.thunkMiddleware })
-	table.insert(t, {
-		class = styleProviderWithDefaultTheme,
+return function(p1) --[[ Line: 34 | Named "MockProviders" ]]
+	-- upvalues: RoduxModule (copy), reducer (copy), StyleProviderWithDefaultTheme (copy), LocalizationProvider (copy), LayerCollectorProvider (copy), RoactRoduxModule (copy), RoactAppPolicy (copy), AppFeaturePolicies (copy), ReactModule (copy), ProviderContainer (copy)
+	local List = {}
+	local NewResult = RoduxModule.Store.new(reducer, {}, { RoduxModule.thunkMiddleware })
+	table.insert(List, {
+		class = StyleProviderWithDefaultTheme,
 		props = { withDarkTheme = true }
 	})
-	table.insert(t, {
-		class = localizationProvider,
+	table.insert(List, {
+		class = LocalizationProvider,
 		props = {
 			localization = {
-				Format = function(_, p2)
+				Format = function(_, p2) --[[ Line: 52 ]]
 					return p2
 				end
 			}
 		}
 	})
-	table.insert(t, { class = layerCollectorProvider, props = {} })
-	table.insert(t, {
-		class = roactRoduxModule.StoreProvider,
-		props = { store = var1 }
+	table.insert(List, { class = LayerCollectorProvider, props = {} })
+	table.insert(List, {
+		class = RoactRoduxModule.StoreProvider,
+		props = { store = NewResult }
 	})
-	table.insert(t, {
-		class = roactAppPolicy.Provider,
-		props = { policy = { appFeaturePolicies } }
+	table.insert(List, {
+		class = RoactAppPolicy.Provider,
+		props = { policy = { AppFeaturePolicies } }
 	})
 	
-	return reactModule.createElement(providerContainer, { providers = t }, p1.children)
+	return ReactModule.createElement(ProviderContainer, { providers = List }, p1.children)
 end

@@ -1,35 +1,35 @@
-﻿local cryoModule = require(game:GetService("CorePackages").Packages.Cryo)
-local actions = script.Parent.Parent.Actions
-local addPlayerModule = require(actions.AddPlayer)
-local removePlayerModule = require(actions.RemovePlayer)
-local setPlayerLeaderstatModule = require(actions.SetPlayerLeaderstat)
+﻿local CryoModule = require(game:GetService("CorePackages").Packages.Cryo)
+local Actions = script.Parent.Parent.Actions
+local AddPlayerModule = require(Actions.AddPlayer)
+local RemovePlayerModule = require(Actions.RemovePlayer)
+local SetPlayerLeaderstatModule = require(Actions.SetPlayerLeaderstat)
 
-local function createKey(p1, p2, p3)
-	local var1 = if not (p2 == nil or p3 == nil or p3[p1.UserId] == nil) then p3[p1.UserId][p2] else nil
+local function createKey(Player: Player, Name, PlayerStats) --[[ Line: 10 ]]
+	local PlayerStatEntry = if Name == nil or PlayerStats == nil or PlayerStats[Player.UserId] == nil then nil else PlayerStats[Player.UserId][Name]
 	
 	return {
-		name = p1.DisplayName:upper(),
-		stat = var1 and tonumber(var1) or var1
+		name = Player.DisplayName:upper(),
+		stat = PlayerStatEntry and tonumber(PlayerStatEntry) or PlayerStatEntry
 	}
 end
 
-return function(p1, p2, p3)
-	-- upvalues: createKey (ref), addPlayerModule (ref), setPlayerLeaderstatModule (ref), cryoModule (ref), removePlayerModule (ref)
-	local var1 = if p3.gameStats[1] then p3.gameStats[1].name else nil
+return function(p1, p2, p3) --[[ Line: 22 | Named "PlayerKeys" ]]
+	-- upvalues: createKey (copy), AddPlayerModule (copy), SetPlayerLeaderstatModule (copy), CryoModule (copy), RemovePlayerModule (copy)
+	local Name = p3.gameStats[1] and p3.gameStats[1].name or nil
 	
-	if p1 and var1 == p1.primaryStat then
-		return if p2.type == addPlayerModule.name or p2.type == setPlayerLeaderstatModule.name then {
-			primaryStat = var1,
-			keys = cryoModule.Dictionary.join(p1.keys, { [p2.player] = createKey(p2.player, var1, p3.playerStats) })
-		} elseif p2.type == removePlayerModule.name then {
-			primaryStat = var1,
-			keys = cryoModule.Dictionary.join(p1.keys, { [p2.player] = cryoModule.None })
+	if p1 and Name == p1.primaryStat then
+		return if p2.type == AddPlayerModule.name or p2.type == SetPlayerLeaderstatModule.name then {
+			primaryStat = Name,
+			keys = CryoModule.Dictionary.join(p1.keys, { [p2.player] = createKey(p2.player, Name, p3.playerStats) })
+		} elseif p2.type == RemovePlayerModule.name then {
+			primaryStat = Name,
+			keys = CryoModule.Dictionary.join(p1.keys, { [p2.player] = CryoModule.None })
 		} else p1
 	end
-	local t = {}
+	local Keys = {}
 	
-	for i, v in pairs(p3.players) do
-		t[v] = createKey(v, var1, p3.playerStats)
+	for _, player in pairs(p3.players) do
+		Keys[player] = createKey(player, Name, p3.playerStats)
 	end
-	return { primaryStat = var1, keys = t }
+	return { primaryStat = Name, keys = Keys }
 end

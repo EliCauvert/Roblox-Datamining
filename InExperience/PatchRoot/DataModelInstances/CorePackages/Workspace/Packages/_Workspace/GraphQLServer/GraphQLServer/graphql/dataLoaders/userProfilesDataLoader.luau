@@ -1,89 +1,91 @@
-﻿local parent = script:FindFirstAncestor("GraphQLServer").Parent
-local dataLoader = require(parent.DataLoader).DataLoader
-local cryoModule = require(parent.Cryo)
-local fFlagUserProfilePlatformProfile = require(parent.SharedFlags).FFlagUserProfilePlatformProfile
-local fetchProfilesByIds = require(script.Parent.Parent.connectors.UserProfileConnector).fetchProfilesByIds
-local t = {}
-t.__index = t
-local userProfilesDataLoaderClearTimeV1 = game:DefineFastInt("UserProfilesDataLoaderClearTime_v1", 15)
-local getFFlagRemoveDataLoaderTimer = require(parent.SharedFlags).getFFlagRemoveDataLoaderTimer
+﻿local Parent = script:FindFirstAncestor("GraphQLServer").Parent
+local DataLoader = require(Parent.DataLoader).DataLoader
+local CryoModule = require(Parent.Cryo)
+local FFlagUserProfilePlatformProfile = require(Parent.SharedFlags).FFlagUserProfilePlatformProfile
+local FetchProfilesByIdsFunction = require(script.Parent.Parent.connectors.UserProfileConnector).fetchProfilesByIds
+local UserProfilesDataLoaderModule = {}
+UserProfilesDataLoaderModule.__index = UserProfilesDataLoaderModule
+local UserProfilesDataLoaderClearTimeV1 = game:DefineFastInt("UserProfilesDataLoaderClearTime_v1", 15)
+local GetFFlagRemoveDataLoaderTimerFunction = require(Parent.SharedFlags).getFFlagRemoveDataLoaderTimer
 
-function t.new()
-	-- upvalues: t (ref)
-	local t_1 = {
+function UserProfilesDataLoaderModule.new() --[[ Line: 23 ]]
+	-- upvalues: UserProfilesDataLoaderModule (copy)
+	local config = {
 		loader = nil,
 		lastTime = 0,
 		fieldsSet = {},
 		loadersByFields = {},
 		dataLoaderOptions = { batchSize = 50, batchDelay = 0 }
 	}
-	setmetatable(t_1, t)
+	setmetatable(config, UserProfilesDataLoaderModule)
 	
-	return t_1
+	return config
 end
 
-function convertToSet(value)
+function convertToSet(List) --[[ Line: 39 ]]
 	local t = {}
 	
-	for i, v in value do
-		t[v] = true
+	for _, value in List do
+		t[value] = true
 	end
 	return t
 end
 
-function t:getFields()
-	local t = {}
+function UserProfilesDataLoaderModule.getFields(p1) --[[ Line: 47 ]]
+	local List = {}
 	
-	for i, v in self.fieldsSet do
-		table.insert(t, i)
+	for i, _ in p1.fieldsSet do
+		table.insert(List, i)
 	end
-	return t
+	return List
 end
 
-function t:makeDataLoader(p1, p2, p3)
-	-- upvalues: cryoModule (ref), dataLoader (ref), fetchProfilesByIds (ref), fFlagUserProfilePlatformProfile (ref)
-	self.fieldsSet = cryoModule.Dictionary.join(self.fieldsSet, convertToSet(p2))
-	p3 = p3 or self.dataLoaderOptions
+function UserProfilesDataLoaderModule:makeDataLoader(p2, p3, p4) --[[ Line: 55 ]]
+	-- upvalues: CryoModule (copy), DataLoader (copy), FetchProfilesByIdsFunction (copy), FFlagUserProfilePlatformProfile (copy)
+	self.fieldsSet = CryoModule.Dictionary.join(self.fieldsSet, convertToSet(p3))
+	local P5 = p4 or self.dataLoaderOptions
 	
-	return dataLoader.new(function(p4)
-		-- upvalues: fetchProfilesByIds (copy), fFlagUserProfilePlatformProfile (copy), p2 (ref), self (ref), p1 (ref)
-		return fetchProfilesByIds(p4, if fFlagUserProfilePlatformProfile then p2 else self:getFields(), p1)
+	return DataLoader.new(function(p5) --[[ Line: 58 ]]
+		-- upvalues: FetchProfilesByIdsFunction (upval), FFlagUserProfilePlatformProfile (upval), p3 (copy), self (copy), p2 (copy)
+		return FetchProfilesByIdsFunction(p5, if FFlagUserProfilePlatformProfile then p3 else self:getFields(), p2)
 	end, {
 		cache = true,
-		maxBatchSize = p3.batchSize,
-		batchScheduleFn = function(p4)
-			-- upvalues: p3 (ref)
-			task.delay(p3.batchDelay, p4)
+		maxBatchSize = P5.batchSize,
+		batchScheduleFn = function(p5) --[[ Line: 67 ]]
+			-- upvalues: P5 (copy)
+			task.delay(P5.batchDelay, p5)
 		end
 	})
 end
 
-function t:getLoader(p1, p2, p3)
-	-- upvalues: fFlagUserProfilePlatformProfile (ref), getFFlagRemoveDataLoaderTimer (ref), userProfilesDataLoaderClearTimeV1 (ref), cryoModule (ref)
-	if fFlagUserProfilePlatformProfile then
-		local cloned = table.clone(p2)
-		table.sort(cloned)
-		local joined = table.concat(cloned, ",")
-		local processTime = os.clock()
-		local var1 = self.loadersByFields[joined]
+function UserProfilesDataLoaderModule:getLoader(p2, Tbl, p3) --[[ Line: 74 ]]
+	-- upvalues: FFlagUserProfilePlatformProfile (copy), GetFFlagRemoveDataLoaderTimerFunction (copy), UserProfilesDataLoaderClearTimeV1 (copy), CryoModule (copy)
+	if FFlagUserProfilePlatformProfile then
+		local Copy = table.clone(Tbl)
+		table.sort(Copy)
+		local Joined = table.concat(Copy, ",")
+		local ClockTime = os.clock()
+		local LoadersByField = self.loadersByFields[Joined]
 		
-		if var1 and (getFFlagRemoveDataLoaderTimer() or userProfilesDataLoaderClearTimeV1 >= processTime - var1.lastTime) then
-			return var1.loader
+		if LoadersByField and (GetFFlagRemoveDataLoaderTimerFunction() or UserProfilesDataLoaderClearTimeV1 >= ClockTime - LoadersByField.lastTime) then
+			return LoadersByField.loader
+		else
+			local DataLoader = self:makeDataLoader(p2, Copy, p3)
+			self.loadersByFields[Joined] = { loader = DataLoader, lastTime = ClockTime }
+			
+			return DataLoader
 		end
-		local var2 = self:makeDataLoader(p1, cloned, p3)
-		self.loadersByFields[joined] = { loader = var2, lastTime = processTime }
-		
-		return var2
 	else
-		self.fieldsSet = cryoModule.Dictionary.join(self.fieldsSet, convertToSet(p2))
-		local processTime = os.clock()
+		self.fieldsSet = CryoModule.Dictionary.join(self.fieldsSet, convertToSet(Tbl))
+		local ClockTime1 = os.clock()
+		local IsClockTimeAbove: boolean = not GetFFlagRemoveDataLoaderTimerFunction() and ClockTime1 - self.lastTime > UserProfilesDataLoaderClearTimeV1
 		
-		if not self.loader or (if getFFlagRemoveDataLoaderTimer() then false else userProfilesDataLoaderClearTimeV1 < processTime - self.lastTime) then
-			self.lastTime = processTime
-			self.loader = self:makeDataLoader(p1, p2, p3)
+		if not self.loader or IsClockTimeAbove then
+			self.lastTime = ClockTime1
+			self.loader = self:makeDataLoader(p2, Tbl, p3)
 		end
 		return self.loader
 	end
 end
 
-return t
+return UserProfilesDataLoaderModule

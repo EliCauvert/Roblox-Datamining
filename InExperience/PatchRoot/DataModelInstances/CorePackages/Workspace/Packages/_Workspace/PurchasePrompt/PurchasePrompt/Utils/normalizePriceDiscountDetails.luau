@@ -1,61 +1,66 @@
-﻿local purchasePrompt = script:FindFirstAncestor("PurchasePrompt")
-local discountType = require(purchasePrompt.Parent.IAPExperience).DiscountType
-local fFlagNormalizePriceDiscountAcceptLowercaseModule = require(purchasePrompt.Flags.FFlagNormalizePriceDiscountAcceptLowercase)
-local fFlagPurchasePromptCartPricingEnabledModule = require(purchasePrompt.Flags.FFlagPurchasePromptCartPricingEnabled)
-local t = {
-	[discountType.BlackbirdSubscription] = true,
-	[discountType.RobloxPlusSubscription] = true
+﻿local PurchasePrompt = script:FindFirstAncestor("PurchasePrompt")
+local DiscountType = require(PurchasePrompt.Parent.IAPExperience).DiscountType
+local FFlagNormalizePriceDiscountAcceptLowercaseModule = require(PurchasePrompt.Flags.FFlagNormalizePriceDiscountAcceptLowercase)
+local FFlagPurchasePromptCartPricingEnabledModule = require(PurchasePrompt.Flags.FFlagPurchasePromptCartPricingEnabled)
+local config = {
+	[DiscountType.BlackbirdSubscription] = true,
+	[DiscountType.RobloxPlusSubscription] = true
 }
 
-local function isValidRawDiscount(p1)
-	-- upvalues: fFlagNormalizePriceDiscountAcceptLowercaseModule (ref)
+local function isValidRawDiscount(p1): boolean --[[ Line: 16 ]]
+	-- upvalues: FFlagNormalizePriceDiscountAcceptLowercaseModule (copy)
 	if type(p1) ~= "table" then
 		return false
-	elseif fFlagNormalizePriceDiscountAcceptLowercaseModule then
-		local type = p1.Type or p1.type
-		local amountInRobux = p1.AmountInRobux or p1.amountInRobux
-		local percent = p1.Percent or p1.percent
+	end
+	if FFlagNormalizePriceDiscountAcceptLowercaseModule then
+		local Type = p1.Type or p1.type
+		local AmountInRobux = p1.AmountInRobux or p1.amountInRobux
+		local Percent = p1.Percent or p1.percent
 		
-		if type(type) ~= "string" or type == "" then
+		if type(Type) ~= "string" or Type == "" then
 			return false
-		elseif type(amountInRobux) ~= "number" then
+		elseif type(AmountInRobux) ~= "number" then
 			return false
-		elseif type(percent) == "number" then
-		else
+		elseif type(Percent) ~= "number" then
 			return false
 		end
-	else
-		return not (type(p1.Type) ~= "string" or p1.Type == "") and (type(p1.AmountInRobux) == "number" and type(p1.Percent) == "number")
+	elseif type(p1.Type) ~= "string" or p1.Type == "" then
+		return false
+	elseif type(p1.AmountInRobux) ~= "number" then
+		return false
+	elseif type(p1.Percent) ~= "number" then
+		return false
 	end
+	return true
 end
 
-return function(p1)
-	-- upvalues: isValidRawDiscount (ref), fFlagNormalizePriceDiscountAcceptLowercaseModule (ref), t (ref), discountType (ref), fFlagPurchasePromptCartPricingEnabledModule (ref)
-	if type(p1) ~= "table" or #p1 == 0 then
+return function(List) --[[ Line: 50 | Named "normalizePriceDiscountDetails" ]]
+	-- upvalues: isValidRawDiscount (copy), FFlagNormalizePriceDiscountAcceptLowercaseModule (copy), config (copy), DiscountType (copy), FFlagPurchasePromptCartPricingEnabledModule (copy)
+	if type(List) ~= "table" or #List == 0 then
 		return {}
 	end
-	local t_1 = {}
+	local List1 = {}
 	
-	for i, v in ipairs(p1) do
-		if isValidRawDiscount(v) then
-			if fFlagNormalizePriceDiscountAcceptLowercaseModule then
-				local type = v.Type or v.type
-				table.insert(t_1, {
-					type = if t[type] then type else discountType.Uncategorized,
-					amountInRobux = v.AmountInRobux or v.amountInRobux,
-					percent = v.Percent or v.percent,
-					localizedDiscountAttribution = if fFlagPurchasePromptCartPricingEnabledModule then v.LocalizedDiscountAttribution else nil
-				})
-			else
-				table.insert(t_1, {
-					type = if t[v.Type] then v.Type else discountType.Uncategorized,
-					amountInRobux = v.AmountInRobux,
-					percent = v.Percent,
-					localizedDiscountAttribution = if fFlagPurchasePromptCartPricingEnabledModule then v.LocalizedDiscountAttribution else nil
-				})
-			end
+	for _, value in ipairs(List) do
+		if not isValidRawDiscount(value) then
+			return {}
 		end
-		return {}
+		if FFlagNormalizePriceDiscountAcceptLowercaseModule then
+			local Type = value.Type or value.type
+			table.insert(List1, {
+				type = if config[Type] then Type else DiscountType.Uncategorized,
+				amountInRobux = value.AmountInRobux or value.amountInRobux,
+				percent = value.Percent or value.percent,
+				localizedDiscountAttribution = if FFlagPurchasePromptCartPricingEnabledModule then value.LocalizedDiscountAttribution else nil
+			})
+		else
+			table.insert(List1, {
+				type = if config[value.Type] then value.Type else DiscountType.Uncategorized,
+				amountInRobux = value.AmountInRobux,
+				percent = value.Percent,
+				localizedDiscountAttribution = if FFlagPurchasePromptCartPricingEnabledModule then value.LocalizedDiscountAttribution else nil
+			})
+		end
 	end
-	return t_1
+	return List1
 end

@@ -1,8 +1,8 @@
-﻿local shareSheet = script:FindFirstAncestor("ShareSheet")
+﻿local ShareSheet = script:FindFirstAncestor("ShareSheet")
 
 return {
 	projects = {
-		shareSheet["jest.main.config"],
-		shareSheet["jest.mockDataModel.config"]
+		ShareSheet["jest.main.config"],
+		ShareSheet["jest.mockDataModel.config"]
 	}
 }

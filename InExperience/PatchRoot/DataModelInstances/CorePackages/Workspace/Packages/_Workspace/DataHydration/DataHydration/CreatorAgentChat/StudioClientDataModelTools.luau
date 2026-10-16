@@ -1,69 +1,48 @@
-﻿local httpService = game:GetService("HttpService")
+﻿local HttpService = game:GetService("HttpService")
 local _ = require(script.Parent.types)
-local t = {
-	name = "search_client_datamodel",
-	inputSchema = {
-		type = "object",
-		properties = {
-			path = { type = "string" },
-			instance_type = { type = "string" },
-			keywords = { type = "string" },
-			max_depth = { type = "integer" },
-			head_limit = { type = "integer" }
-		}
-	}
-}
-local t_1 = {
-	name = "inspect_client_instance",
-	inputSchema = {
-		type = "object",
-		properties = { path = { type = "string" } },
-		required = { "path" }
-	}
-}
 
-local function _(p1, p2)
-	return typeof(p1) == "string" and string.lower(p1) == p2
+local function _(Text: string, Lowered): boolean --[[ Line: 38 | Named "valueLooksLikeToolName" ]]
+	return typeof(Text) == "string" and string.lower(Text) == Lowered
 end
 
-local function toolCallLooksLikeRequest(p1, p2)
-	local kind = p1.kind
+local function toolCallLooksLikeRequest(ToolCall, Lowered): boolean --[[ Line: 42 ]]
+	local Kind: string = ToolCall.kind
 	
-	if not (typeof(kind) == "string" and string.lower(kind) == p2) then
-		kind = p1.title
+	if typeof(Kind) ~= "string" or string.lower(Kind) ~= Lowered then
+		local Title: string = ToolCall.title
 		
-		if typeof(kind) == "string" and string.lower(kind) == p2 then
-			return true
+		if typeof(Title) ~= "string" or string.lower(Title) ~= Lowered then
+			local RawInput = ToolCall.rawInput
+			
+			if typeof(RawInput) ~= "table" then
+				return false
+			end
+			local Name: string = RawInput.name
+			local IsLoweredMatch: boolean = typeof(Name) == "string" and string.lower(Name) == Lowered
+			
+			if not IsLoweredMatch then
+				local ToolName: string = RawInput.toolName
+				IsLoweredMatch = typeof(ToolName) == "string" and string.lower(ToolName) == Lowered
+			end
+			return IsLoweredMatch
 		end
-		local rawInput = p1.rawInput
-		
-		if typeof(rawInput) ~= "table" then
-			return false
-		end
-		local name = rawInput.name
-		kind = typeof(name) == "string" and string.lower(name) == p2
-		
-		if not kind then
-			local toolName = rawInput.toolName
-			kind = typeof(toolName) == "string" and string.lower(toolName) == p2
-		end
-		return kind
 	end
+	return true
 end
 
-local function hasPersistedToolResult(p1)
-	-- upvalues: httpService (ref)
-	if p1.content == nil then
+local function hasPersistedToolResult(ToolCall): boolean --[[ Line: 59 ]]
+	-- upvalues: HttpService (copy)
+	if ToolCall.content == nil then
 		return false
 	end
-	for i, v in p1.content do
-		if v.type == "content" and v.content ~= nil then
-			local content = v.content
+	for _, value in ToolCall.content do
+		if value.type == "content" and value.content ~= nil then
+			local Content = value.content
 			
-			if content.type == "text" and typeof(content.text) == "string" then
-				local ok, status = pcall(httpService.JSONDecode, httpService, content.text)
+			if Content.type == "text" and typeof(Content.text) == "string" then
+				local Success, Result = pcall(HttpService.JSONDecode, HttpService, Content.text)
 				
-				if ok and typeof(status) == "table" and (typeof(status.text) == "string" and status.text ~= "") then
+				if Success and typeof(Result) == "table" and typeof(Result.text) == "string" and Result.text ~= "" then
 					return true
 				end
 			end
@@ -72,21 +51,22 @@ local function hasPersistedToolResult(p1)
 	return false
 end
 
-local function findRequestInTurnState(p2, p3, p4)
-	-- upvalues: hasPersistedToolResult (ref), toolCallLooksLikeRequest (ref)
-	local t = {}
+local function findRequestInTurnState(p1, Lowered, p2) --[[ Line: 85 ]]
+	-- upvalues: hasPersistedToolResult (copy), toolCallLooksLikeRequest (copy)
+	local List = {}
 	
-	for i in p2.toolCalls do
-		table.insert(t, i)
+	for toolCall in p1.toolCalls do
+		table.insert(List, toolCall)
 	end
-	table.sort(t)
+	table.sort(List)
+	local ToolCall = nil
 	
-	for i_1, v in t do
-		if not p4 or not p4[v] then
-			local var1 = p2.toolCalls[v]
+	for _, value in List do
+		if not p2 or not p2[value] then
+			ToolCall = p1.toolCalls[value]
 			
-			if (var1.status == nil or var1.status == "pending" or var1.status == "in_progress") and (not hasPersistedToolResult(var1) and toolCallLooksLikeRequest(var1, p3)) then
-				return v, var1.rawInput, var1.turnId, var1.referenceId
+			if (ToolCall.status == nil or ToolCall.status == "pending" or ToolCall.status == "in_progress") and not hasPersistedToolResult(ToolCall) and toolCallLooksLikeRequest(ToolCall, Lowered) then
+				return value, ToolCall.rawInput, ToolCall.turnId, ToolCall.referenceId
 			end
 		end
 	end
@@ -96,28 +76,47 @@ end
 return {
 	SEARCH_TOOL_NAME = "search_client_datamodel",
 	INSPECT_TOOL_NAME = "inspect_client_instance",
-	SEARCH_LOCAL_TOOL_DEFINITION = t,
-	INSPECT_LOCAL_TOOL_DEFINITION = t_1,
+	SEARCH_LOCAL_TOOL_DEFINITION = {
+		name = "search_client_datamodel",
+		inputSchema = {
+			type = "object",
+			properties = {
+				path = { type = "string" },
+				instance_type = { type = "string" },
+				keywords = { type = "string" },
+				max_depth = { type = "integer" },
+				head_limit = { type = "integer" }
+			}
+		}
+	},
+	INSPECT_LOCAL_TOOL_DEFINITION = {
+		name = "inspect_client_instance",
+		inputSchema = {
+			type = "object",
+			properties = { path = { type = "string" } },
+			required = { "path" }
+		}
+	},
 	toolCallLooksLikeRequest = toolCallLooksLikeRequest,
-	findSearchRequestInTurnState = function(p5, p6)
-		-- upvalues: findRequestInTurnState (ref)
-		return findRequestInTurnState(p5, "search_client_datamodel", p6)
+	findSearchRequestInTurnState = function(p3, p4) --[[ Line: 115 ]]
+		-- upvalues: findRequestInTurnState (copy)
+		return findRequestInTurnState(p3, "search_client_datamodel", p4)
 	end,
-	findInspectRequestInTurnState = function(p5, p6)
-		-- upvalues: findRequestInTurnState (ref)
-		return findRequestInTurnState(p5, "inspect_client_instance", p6)
+	findInspectRequestInTurnState = function(p3, p4) --[[ Line: 122 ]]
+		-- upvalues: findRequestInTurnState (copy)
+		return findRequestInTurnState(p3, "inspect_client_instance", p4)
 	end,
-	formatResultContent = function(p5)
-		-- upvalues: httpService (ref)
-		local ok, status = pcall(httpService.JSONEncode, httpService, p5)
+	formatResultContent = function(p3) --[[ Line: 129 ]]
+		-- upvalues: HttpService (copy)
+		local Success, Result = pcall(HttpService.JSONEncode, HttpService, p3)
 		
-		return if ok then if #status > 524288 then {
-			text = httpService:JSONEncode({
+		return if Success then if #Result > 524288 then {
+			text = HttpService:JSONEncode({
 				status = "result_too_large",
 				message = "The client tool result exceeded the response size limit."
 			})
-		} else { text = status } else {
-			text = httpService:JSONEncode({
+		} else { text = Result } else {
+			text = HttpService:JSONEncode({
 				status = "serialization_failed",
 				message = "The client tool result could not be serialized."
 			})

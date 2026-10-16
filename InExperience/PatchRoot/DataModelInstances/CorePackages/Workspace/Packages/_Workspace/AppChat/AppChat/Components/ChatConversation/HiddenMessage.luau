@@ -1,9 +1,9 @@
-﻿local parent = script:FindFirstAncestor("AppChat").Parent
-local reactModule = require(parent.React)
-local cryoModule = require(parent.Cryo)
-local foundationModule = require(parent.Foundation)
-local chatBubbleContainerModule = require(script.Parent.Bubble.ChatBubbleContainer)
-local t = {
+﻿local Parent = script:FindFirstAncestor("AppChat").Parent
+local ReactModule = require(Parent.React)
+local CryoModule = require(Parent.Cryo)
+local FoundationModule = require(Parent.Foundation)
+local ChatBubbleContainerModule = require(script.Parent.Bubble.ChatBubbleContainer)
+local config = {
 	isIncoming = false,
 	hasTail = false,
 	isPending = false,
@@ -15,37 +15,37 @@ local t = {
 	isLastMessageInMessageGroup = false
 }
 
-return function(p1)
-	-- upvalues: cryoModule (ref), t (ref), foundationModule (ref), reactModule (ref), chatBubbleContainerModule (ref)
-	local var1 = cryoModule.Dictionary.union(t, p1)
-	local var2 = foundationModule.Hooks.useTokens()
+return function(p1) --[[ Line: 39 | Named "HiddenMessage" ]]
+	-- upvalues: CryoModule (copy), config (copy), FoundationModule (copy), ReactModule (copy), ChatBubbleContainerModule (copy)
+	local UnionResult = CryoModule.Dictionary.union(config, p1)
+	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	
-	return reactModule.createElement(chatBubbleContainerModule, {
-		isIncoming = var1.isIncoming,
-		hasTail = var1.hasTail,
-		isPending = var1.isPending,
+	return ReactModule.createElement(ChatBubbleContainerModule, {
+		isIncoming = UnionResult.isIncoming,
+		hasTail = UnionResult.hasTail,
+		isPending = UnionResult.isPending,
 		isUnfiltered = false,
 		padding = {
-			top = UDim.new(0, var2.Padding.Small),
-			bottom = UDim.new(0, var2.Padding.Small),
-			left = UDim.new(0, var2.Padding.Medium),
-			right = UDim.new(0, var2.Padding.Medium)
+			top = UDim.new(0, UseTokensResult.Padding.Small),
+			bottom = UDim.new(0, UseTokensResult.Padding.Small),
+			left = UDim.new(0, UseTokensResult.Padding.Medium),
+			right = UDim.new(0, UseTokensResult.Padding.Medium)
 		},
-		LayoutOrder = var1.LayoutOrder,
-		isRepliedTo = var1.isRepliedTo,
-		isPressed = var1.isPressed,
-		isLastMessageInMessageGroup = var1.isLastMessageInMessageGroup,
-		bubbleRef = var1.bubbleRef,
-		[reactModule.Change.AbsoluteSize] = var1[reactModule.Change.AbsoluteSize]
+		LayoutOrder = UnionResult.LayoutOrder,
+		isRepliedTo = UnionResult.isRepliedTo,
+		isPressed = UnionResult.isPressed,
+		isLastMessageInMessageGroup = UnionResult.isLastMessageInMessageGroup,
+		bubbleRef = UnionResult.bubbleRef,
+		[ReactModule.Change.AbsoluteSize] = UnionResult[ReactModule.Change.AbsoluteSize]
 	}, {
-		IconContainer = reactModule.createElement(foundationModule.View, {
+		IconContainer = ReactModule.createElement(FoundationModule.View, {
 			tag = "row align-x-center align-y-center content-muted",
-			Size = UDim2.fromOffset(180 - var2.Padding.Medium * 2, 40 - var2.Padding.Small * 2)
+			Size = UDim2.fromOffset(180 - UseTokensResult.Padding.Medium * 2, 40 - UseTokensResult.Padding.Small * 2)
 		}, {
-			LockIcon = reactModule.createElement(foundationModule.Icon, {
-				name = foundationModule.Enums.IconName.LockClosed,
-				size = foundationModule.Enums.IconSize.Medium,
-				variant = foundationModule.Enums.IconVariant.Regular
+			LockIcon = ReactModule.createElement(FoundationModule.Icon, {
+				name = FoundationModule.Enums.IconName.LockClosed,
+				size = FoundationModule.Enums.IconSize.Medium,
+				variant = FoundationModule.Enums.IconVariant.Regular
 			})
 		})
 	})

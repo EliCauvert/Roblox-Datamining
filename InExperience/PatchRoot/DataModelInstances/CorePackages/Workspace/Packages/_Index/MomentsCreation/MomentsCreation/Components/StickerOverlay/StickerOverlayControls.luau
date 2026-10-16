@@ -1,179 +1,183 @@
-﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
-local parent = momentsCreation.Parent
-local dashModule = require(parent.Dash)
-local foundationModule = require(parent.Foundation)
-local momentsCommonModule = require(parent.MomentsCommon)
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local button = foundationModule.Button
-local knob = foundationModule.Knob
-local scrollView = foundationModule.ScrollView
-local slider = foundationModule.Slider
-local view = foundationModule.View
-local useCallback = reactModule.useCallback
-local useMemo = reactModule.useMemo
-local useDeviceInsets = momentsCommonModule.Hooks.useDeviceInsets
-local useFormFactor = momentsCommonModule.Hooks.useFormFactor
-local useTokens = foundationModule.Hooks.useTokens
-local useSignalState = signalsReactModule.useSignalState
-local formFactor = momentsCommonModule.Enums.FormFactor
-local reactionType = momentsCommonModule.Enums.ReactionType
-local reactionAssets = momentsCommonModule.Components.ReactionAssets
-local eventNames = momentsCommonModule.Analytics.EventNames
-local sessionManager = momentsCommonModule.Analytics.SessionManager
-local funnelEventNames = momentsCommonModule.Analytics.FunnelEventNames
-local constantsModule = require(momentsCreation.Constants)
-local stickerPickerItemModule = require(momentsCreation.Components.StickerOverlay.StickerPickerItem)
-local fireAnalyticsEventModule = require(momentsCreation.Analytics.fireAnalyticsEvent)
-local makeCreationEventFieldsModule = require(momentsCreation.Analytics.makeCreationEventFields)
-local makeDefaultStickerOverlayEditModule = require(momentsCreation.Utils.makeDefaultStickerOverlayEdit)
-local useCreationFlowStringsModule = require(momentsCreation.Hooks.useCreationFlowStrings)
-local _ = require(momentsCreation.Types.CreationFlowTypes)
-local _ = require(parent.MomentsTypes)
+﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
+local Parent = MomentsCreation.Parent
+local DashModule = require(Parent.Dash)
+local FoundationModule = require(Parent.Foundation)
+local MomentsCommonModule = require(Parent.MomentsCommon)
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local Button = FoundationModule.Button
+local Knob = FoundationModule.Knob
+local ScrollView = FoundationModule.ScrollView
+local Slider = FoundationModule.Slider
+local View = FoundationModule.View
+local UseCallbackFunction = ReactModule.useCallback
+local UseMemoFunction = ReactModule.useMemo
+local UseDeviceInsetsFunction = MomentsCommonModule.Hooks.useDeviceInsets
+local UseFormFactorFunction = MomentsCommonModule.Hooks.useFormFactor
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local FormFactor = MomentsCommonModule.Enums.FormFactor
+local ReactionType = MomentsCommonModule.Enums.ReactionType
+local ReactionAssets = MomentsCommonModule.Components.ReactionAssets
+local EventNames = MomentsCommonModule.Analytics.EventNames
+local SessionManager = MomentsCommonModule.Analytics.SessionManager
+local FunnelEventNames = MomentsCommonModule.Analytics.FunnelEventNames
+local ConstantsModule = require(MomentsCreation.Constants)
+local StickerPickerItemModule = require(MomentsCreation.Components.StickerOverlay.StickerPickerItem)
+local FireAnalyticsEventModule = require(MomentsCreation.Analytics.fireAnalyticsEvent)
+local MakeCreationEventFieldsModule = require(MomentsCreation.Analytics.makeCreationEventFields)
+local MakeDefaultStickerOverlayEditModule = require(MomentsCreation.Utils.makeDefaultStickerOverlayEdit)
+local UseCreationFlowStringsModule = require(MomentsCreation.Hooks.useCreationFlowStrings)
+local _ = require(MomentsCreation.Types.CreationFlowTypes)
+local _ = require(Parent.MomentsTypes)
 
-return function(p1)
-	-- upvalues: useDeviceInsets (ref), useTokens (ref), useCreationFlowStringsModule (ref), useMemo (ref), signalsModule (ref), constantsModule (ref), useSignalState (ref), useCallback (ref), dashModule (ref), makeDefaultStickerOverlayEditModule (ref), makeCreationEventFieldsModule (ref), sessionManager (ref), funnelEventNames (ref), fireAnalyticsEventModule (ref), eventNames (ref), useFormFactor (ref), formFactor (ref), reactionType (ref), reactionAssets (ref), reactModule (ref), stickerPickerItemModule (ref), view (ref), slider (ref), knob (ref), foundationModule (ref), button (ref), scrollView (ref)
-	local controller = p1.controller
-	local var1 = useDeviceInsets()
-	local var2 = useTokens()
-	local var3 = useCreationFlowStringsModule()
-	local var4 = useSignalState(useMemo(function()
-		-- upvalues: signalsModule (copy), controller (ref), constantsModule (copy)
-		return signalsModule.createComputed(function(p2)
-			-- upvalues: controller (copy), constantsModule (copy)
-			local activeSession = controller.getActiveSession(p2)
-			local var5 = if activeSession ~= nil then nil else activeSession.getDraft(p2)
-			local var6 = var5 and var5[1]
+return function(p1) --[[ Line: 57 | Named "StickerOverlayControls" ]]
+	-- upvalues: UseDeviceInsetsFunction (copy), UseTokensFunction (copy), UseCreationFlowStringsModule (copy), UseMemoFunction (copy), SignalsModule (copy), ConstantsModule (copy), UseSignalStateFunction (copy), UseCallbackFunction (copy), DashModule (copy), MakeDefaultStickerOverlayEditModule (copy), MakeCreationEventFieldsModule (copy), SessionManager (copy), FunnelEventNames (copy), FireAnalyticsEventModule (copy), EventNames (copy), UseFormFactorFunction (copy), FormFactor (copy), ReactionType (copy), ReactionAssets (copy), ReactModule (copy), StickerPickerItemModule (copy), View (copy), Slider (copy), Knob (copy), FoundationModule (copy), Button (copy), ScrollView (copy)
+	local Controller = p1.controller
+	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
+	local UseTokensResult = UseTokensFunction()
+	local UseCreationFlowStringsModuleResult = UseCreationFlowStringsModule()
+	local UseSignalStateResult = UseSignalStateFunction((UseMemoFunction(function() --[[ Line: 64 ]]
+		-- upvalues: SignalsModule (upval), Controller (copy), ConstantsModule (upval)
+		return SignalsModule.createComputed(function(p2) --[[ Line: 65 ]]
+			-- upvalues: Controller (upval), ConstantsModule (upval)
+			local ActiveSession = Controller.getActiveSession(p2)
+			local Draft = if ActiveSession == nil then nil else ActiveSession.getDraft(p2)
+			local DraftEntry = Draft and Draft[1]
 			
-			return if var6 == nil then constantsModule.StickerOverlay.DefaultStickerSize else var6.stickerSize
+			return if DraftEntry == nil then ConstantsModule.StickerOverlay.DefaultStickerSize else DraftEntry.stickerSize
 		end)
-	end, { controller }))
-	local var5 = useCallback(function(p2)
-		-- upvalues: controller (ref), dashModule (copy)
-		local activeSession = controller.getActiveSession(false)
+	end, { Controller })))
+	local UseCallbackResult = UseCallbackFunction(function(StickerSize) --[[ Line: 74 ]]
+		-- upvalues: Controller (copy), DashModule (upval)
+		local ActiveSession = Controller.getActiveSession(false)
 		
-		if activeSession == nil then return end
-		local draft = activeSession.getDraft(false)
-		local var6 = draft and draft[1]
+		if ActiveSession == nil then return end
+		local Draft = ActiveSession.getDraft(false)
+		local DraftEntry = Draft and Draft[1]
 		
-		if var6 == nil then
-			return
-		end
-		activeSession.update({ dashModule.joinDeep(var6, { stickerSize = p2 }) })
-	end, { controller })
-	local var6 = useCallback(function()
-		-- upvalues: controller (ref)
-		controller.discardActiveTool()
-	end, { controller })
-	local var7 = useCallback(function()
-		-- upvalues: controller (ref)
-		controller.commitActiveTool()
-	end, { controller })
-	local var8 = useCallback(function(p2)
-		-- upvalues: controller (ref), dashModule (copy), makeDefaultStickerOverlayEditModule (copy), makeCreationEventFieldsModule (copy), sessionManager (copy), funnelEventNames (copy), fireAnalyticsEventModule (copy), eventNames (copy)
-		local activeSession = controller.getActiveSession(false)
-		
-		if activeSession == nil then return end
-		local draft = activeSession.getDraft(false)
-		local var9 = draft and draft[1]
-		
-		if var9 ~= nil and var9.stickerURI == p2 then
-			activeSession.update({ dashModule.join(var9, { stickerURI = dashModule.None }) })
+		if DraftEntry ~= nil then
+			ActiveSession.update({
+				DashModule.joinDeep(DraftEntry, { stickerSize = StickerSize })
+			})
 			
 			return
 		end
-		activeSession.update({
-			dashModule.join(var9 or makeDefaultStickerOverlayEditModule(), { stickerURI = p2 })
-		})
-		local t = { stickerURI = p2 }
+	end, { Controller })
+	local UseCallbackResult1 = UseCallbackFunction(function() --[[ Line: 87 ]]
+		-- upvalues: Controller (copy)
+		Controller.discardActiveTool()
+	end, { Controller })
+	local UseCallbackResult2 = UseCallbackFunction(function() --[[ Line: 91 ]]
+		-- upvalues: Controller (copy)
+		Controller.commitActiveTool()
+	end, { Controller })
+	local UseCallbackResult3 = UseCallbackFunction(function(StickerURI) --[[ Line: 95 ]]
+		-- upvalues: Controller (copy), DashModule (upval), MakeDefaultStickerOverlayEditModule (upval), MakeCreationEventFieldsModule (upval), SessionManager (upval), FunnelEventNames (upval), FireAnalyticsEventModule (upval), EventNames (upval)
+		local ActiveSession = Controller.getActiveSession(false)
 		
-		for i, v in makeCreationEventFieldsModule.makeToolFieldFromKind("sticker") do
-			t[i] = v
+		if ActiveSession == nil then return end
+		local Draft = ActiveSession.getDraft(false)
+		local DraftEntry = Draft and Draft[1]
+		
+		if DraftEntry ~= nil and DraftEntry.stickerURI == StickerURI then
+			ActiveSession.update({
+				DashModule.join(DraftEntry, { stickerURI = DashModule.None })
+			})
+			
+			return
 		end
-		for i_1, v_1 in makeCreationEventFieldsModule.makeCreationBaseFields(sessionManager.getSessionId(funnelEventNames.FunnelTypes.CreationFlow)) do
-			t[i_1] = v_1
+		ActiveSession.update({
+			DashModule.join(DraftEntry or MakeDefaultStickerOverlayEditModule(), { stickerURI = StickerURI })
+		})
+		local config = { stickerURI = StickerURI }
+		
+		for i, value in MakeCreationEventFieldsModule.makeToolFieldFromKind("sticker") do
+			config[i] = value
 		end
-		fireAnalyticsEventModule(eventNames.EditingFlowStickerSelected, t)
-	end, { controller })
-	local var10 = useFormFactor() == formFactor.Wide
+		for i1, value1 in MakeCreationEventFieldsModule.makeCreationBaseFields((SessionManager.getSessionId(FunnelEventNames.FunnelTypes.CreationFlow))) do
+			config[i1] = value1
+		end
+		FireAnalyticsEventModule(EventNames.EditingFlowStickerSelected, config)
+	end, { Controller })
+	local IsUseFormFactorResultMatch = UseFormFactorFunction() == FormFactor.Wide
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "col align-x-center align-y-bottom gap-large position-bottom-center anchor-bottom-center size-full-0 auto-y",
 		LayoutOrder = p1.layoutOrder,
 		padding = {
-			top = UDim.new(0, var2.Padding.Small),
-			bottom = UDim.new(0, math.max(var1.bottom, var2.Padding.Small)),
-			left = UDim.new(0, math.max(var1.left, var2.Padding.XLarge)),
-			right = UDim.new(0, math.max(var1.right, var2.Padding.XLarge))
+			top = UDim.new(0, UseTokensResult.Padding.Small),
+			bottom = UDim.new(0, (math.max(UseDeviceInsetsResult.bottom, UseTokensResult.Padding.Small))),
+			left = UDim.new(0, (math.max(UseDeviceInsetsResult.left, UseTokensResult.Padding.XLarge))),
+			right = UDim.new(0, (math.max(UseDeviceInsetsResult.right, UseTokensResult.Padding.XLarge)))
 		}
 	}, {
-		StickerSizeSlider = reactModule.createElement(slider, {
+		StickerSizeSlider = ReactModule.createElement(Slider, {
 			LayoutOrder = 1,
-			knob = reactModule.createElement(knob, { size = foundationModule.Enums.InputSize.Large }),
-			knobVisibility = foundationModule.Enums.Visibility.Always,
-			onValueChanged = var5,
-			size = foundationModule.Enums.InputSize.XSmall,
-			range = NumberRange.new(constantsModule.StickerOverlay.MinStickerSize, constantsModule.StickerOverlay.MaxStickerSize),
-			value = math.clamp(var4 or constantsModule.StickerOverlay.DefaultStickerSize, constantsModule.StickerOverlay.MinStickerSize, constantsModule.StickerOverlay.MaxStickerSize),
-			variant = foundationModule.Enums.SliderVariant.Standard
+			knob = ReactModule.createElement(Knob, { size = FoundationModule.Enums.InputSize.Large }),
+			knobVisibility = FoundationModule.Enums.Visibility.Always,
+			onValueChanged = UseCallbackResult,
+			size = FoundationModule.Enums.InputSize.XSmall,
+			range = NumberRange.new(ConstantsModule.StickerOverlay.MinStickerSize, ConstantsModule.StickerOverlay.MaxStickerSize),
+			value = math.clamp(UseSignalStateResult or ConstantsModule.StickerOverlay.DefaultStickerSize, ConstantsModule.StickerOverlay.MinStickerSize, ConstantsModule.StickerOverlay.MaxStickerSize),
+			variant = FoundationModule.Enums.SliderVariant.Standard
 		}),
-		Nav = reactModule.createElement(view, {
+		Nav = ReactModule.createElement(View, {
 			LayoutOrder = 2,
 			tag = "row flex-x-between align-x-center align-y-center gap-medium size-full-0 auto-y"
 		}, {
-			BackButton = reactModule.createElement(button, {
+			BackButton = ReactModule.createElement(Button, {
 				LayoutOrder = 1,
-				fillBehavior = foundationModule.Enums.FillBehavior.Fit,
-				text = var3.GeneralCtaBack,
-				variant = foundationModule.Enums.ButtonVariant.Text,
-				onActivated = var6,
-				size = foundationModule.Enums.InputSize.Medium
+				fillBehavior = FoundationModule.Enums.FillBehavior.Fit,
+				text = UseCreationFlowStringsModuleResult.GeneralCtaBack,
+				variant = FoundationModule.Enums.ButtonVariant.Text,
+				onActivated = UseCallbackResult1,
+				size = FoundationModule.Enums.InputSize.Medium
 			}),
-			StickerRow = reactModule.createElement(scrollView, {
+			StickerRow = ReactModule.createElement(ScrollView, {
 				LayoutOrder = 2,
 				flexItem = { FlexMode = Enum.UIFlexMode.Fill },
-				Size = UDim2.fromOffset(0, var2.Size.Size_1000),
+				Size = UDim2.fromOffset(0, UseTokensResult.Size.Size_1000),
 				layout = {
 					FillDirection = Enum.FillDirection.Horizontal,
-					HorizontalAlignment = if var10 then Enum.HorizontalAlignment.Center else Enum.HorizontalAlignment.Left,
+					HorizontalAlignment = if IsUseFormFactorResultMatch then Enum.HorizontalAlignment.Center else Enum.HorizontalAlignment.Left,
 					VerticalAlignment = Enum.VerticalAlignment.Center,
-					Padding = UDim.new(0, var2.Padding.Small),
+					Padding = UDim.new(0, UseTokensResult.Padding.Small),
 					SortOrder = Enum.SortOrder.LayoutOrder
 				},
 				scroll = {
 					ScrollingDirection = Enum.ScrollingDirection.X,
 					AutomaticCanvasSize = Enum.AutomaticSize.X,
 					CanvasSize = UDim2.fromOffset(0, 0),
-					scrollBarVisibility = if var10 then foundationModule.Enums.Visibility.None else foundationModule.Enums.Visibility.Auto
+					scrollBarVisibility = if IsUseFormFactorResultMatch then FoundationModule.Enums.Visibility.None else FoundationModule.Enums.Visibility.Auto
 				}
-			}, useMemo(function()
-				-- upvalues: reactionType (copy), reactionAssets (copy), reactModule (copy), stickerPickerItemModule (copy), var8 (ref)
-				local t = {}
-				local var11 = 0
+			}, (UseMemoFunction(function() --[[ Line: 137 ]]
+				-- upvalues: ReactionType (upval), ReactionAssets (upval), ReactModule (upval), StickerPickerItemModule (upval), UseCallbackResult3 (copy)
+				local Elements = {}
+				local LayoutOrder = 0
 				
-				for i, v in reactionType do
-					local stickerImageUri = reactionAssets.getStickerImageUri(v)
+				for _, Key in ReactionType do
+					local StickerImageUri = ReactionAssets.getStickerImageUri(Key)
 					
-					if stickerImageUri ~= nil then
-						var11 += 1
-						table.insert(t, reactModule.createElement(stickerPickerItemModule, {
-							key = v,
-							layoutOrder = var11,
-							stickerURI = stickerImageUri,
-							onStickerSelected = var8
+					if StickerImageUri ~= nil then
+						LayoutOrder += 1
+						table.insert(Elements, ReactModule.createElement(StickerPickerItemModule, {
+							key = Key,
+							layoutOrder = LayoutOrder,
+							stickerURI = StickerImageUri,
+							onStickerSelected = UseCallbackResult3
 						}))
 					end
 				end
-				return t
-			end, { var8 })),
-			DoneButton = reactModule.createElement(button, {
+				return Elements
+			end, { UseCallbackResult3 }))),
+			DoneButton = ReactModule.createElement(Button, {
 				LayoutOrder = 3,
-				fillBehavior = foundationModule.Enums.FillBehavior.Fit,
-				text = var3.GeneralCtaDone,
-				variant = foundationModule.Enums.ButtonVariant.Text,
-				onActivated = var7,
-				size = foundationModule.Enums.InputSize.Medium
+				fillBehavior = FoundationModule.Enums.FillBehavior.Fit,
+				text = UseCreationFlowStringsModuleResult.GeneralCtaDone,
+				variant = FoundationModule.Enums.ButtonVariant.Text,
+				onActivated = UseCallbackResult2,
+				size = FoundationModule.Enums.InputSize.Medium
 			})
 		})
 	})

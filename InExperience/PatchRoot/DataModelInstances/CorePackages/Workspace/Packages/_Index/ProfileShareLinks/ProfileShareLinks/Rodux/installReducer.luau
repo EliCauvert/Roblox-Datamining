@@ -1,12 +1,12 @@
-﻿local profileShareLinks = script:FindFirstAncestor("ProfileShareLinks")
-local roduxModule = require(profileShareLinks.Parent.Rodux)
-local configuredRoduxNetworkingModule = require(profileShareLinks.Networking.configuredRoduxNetworking)
-local profileShareLinksReducerModule = require(script.Parent.ProfileShareLinksReducer)
+﻿local ProfileShareLinks = script:FindFirstAncestor("ProfileShareLinks")
+local RoduxModule = require(ProfileShareLinks.Parent.Rodux)
+local ConfiguredRoduxNetworkingModule = require(ProfileShareLinks.Networking.configuredRoduxNetworking)
+local ProfileShareLinksReducerModule = require(script.Parent.ProfileShareLinksReducer)
 
-return function()
-	-- upvalues: roduxModule (ref), profileShareLinksReducerModule (ref), configuredRoduxNetworkingModule (ref)
-	return roduxModule.combineReducers({
-		ProfileShareLinks = profileShareLinksReducerModule,
-		NetworkingStatus = configuredRoduxNetworkingModule.installReducer()
+return function() --[[ Line: 8 ]]
+	-- upvalues: RoduxModule (copy), ProfileShareLinksReducerModule (copy), ConfiguredRoduxNetworkingModule (copy)
+	return RoduxModule.combineReducers({
+		ProfileShareLinks = ProfileShareLinksReducerModule,
+		NetworkingStatus = ConfiguredRoduxNetworkingModule.installReducer()
 	})
 end

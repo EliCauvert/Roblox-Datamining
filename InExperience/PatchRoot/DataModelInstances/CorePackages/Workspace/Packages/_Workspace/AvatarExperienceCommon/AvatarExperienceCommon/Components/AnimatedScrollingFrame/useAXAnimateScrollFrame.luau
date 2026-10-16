@@ -1,9 +1,9 @@
-﻿local userGameSettingsService = UserSettings():GetService("UserGameSettings")
-local useAnimateScrollViewToSelection = require(script:FindFirstAncestor("AvatarExperienceCommon").Parent.AppBlox).useAnimateScrollViewToSelection
-local AXAnimatedScrollingFrameScrollTimeMs = game:DefineFastInt("AXAnimatedScrollingFrameScrollTimeMs", 200)
-local var1 = if AXAnimatedScrollingFrameScrollTimeMs > 0 then AXAnimatedScrollingFrameScrollTimeMs / 1000 else 0.2
+﻿local UserGameSettings = UserSettings():GetService("UserGameSettings")
+local UseAnimateScrollViewToSelectionFunction = require(script:FindFirstAncestor("AvatarExperienceCommon").Parent.AppBlox).useAnimateScrollViewToSelection
+local AXAnimatedScrollingFrameScrollTimeMs: number = game:DefineFastInt("AXAnimatedScrollingFrameScrollTimeMs", 200)
+local AXAnimatedScrollingFrameScrollTimeMsRatio = if AXAnimatedScrollingFrameScrollTimeMs > 0 then AXAnimatedScrollingFrameScrollTimeMs / 1000 else 0.2
 
-return function(p1, p2)
-	-- upvalues: useAnimateScrollViewToSelection (ref), userGameSettingsService (ref), var1 (ref)
-	return useAnimateScrollViewToSelection(p1, if userGameSettingsService.ReducedMotion then 0 else p2 or var1)
+return function(p1, p2) --[[ Line: 12 | Named "useAXAnimateScrollFrame" ]]
+	-- upvalues: UseAnimateScrollViewToSelectionFunction (copy), UserGameSettings (copy), AXAnimatedScrollingFrameScrollTimeMsRatio (copy)
+	return UseAnimateScrollViewToSelectionFunction(p1, if UserGameSettings.ReducedMotion then 0 elseif p2 then p2 else AXAnimatedScrollingFrameScrollTimeMsRatio)
 end

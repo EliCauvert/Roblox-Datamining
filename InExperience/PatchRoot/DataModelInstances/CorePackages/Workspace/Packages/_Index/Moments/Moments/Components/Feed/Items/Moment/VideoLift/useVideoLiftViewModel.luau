@@ -1,23 +1,23 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
-local foundationModule = require(parent.Foundation)
-local momentsCommonModule = require(parent.MomentsCommon)
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local getCommentsSheetStoreModule = require(moments.Components.Comments.Sheet.getCommentsSheetStore)
-local getMomentsPreferencesStoreModule = require(moments.Stores.GetMomentsPreferencesStore)
-local momentContextModule = require(script.Parent.Parent.MomentContext)
-local computeVideoLiftLayoutModule = require(script.Parent.computeVideoLiftLayout)
-local runService = game:GetService("RunService")
-local tweenService = game:GetService("TweenService")
-local usePreferences = foundationModule.Hooks.usePreferences
-local useTokens = foundationModule.Hooks.useTokens
-local getSmartFillScaleType = momentsCommonModule.Utils.getSmartFillScaleType
-local fFlagMomentsSmartVideoFill = momentsCommonModule.Flags.FFlagMomentsSmartVideoFill
-local uDim2 = UDim2.fromScale(1, 1)
-local uDim2_1 = UDim2.fromScale(0.5, 0.5)
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
+local FoundationModule = require(Parent.Foundation)
+local MomentsCommonModule = require(Parent.MomentsCommon)
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local GetCommentsSheetStoreModule = require(Moments.Components.Comments.Sheet.getCommentsSheetStore)
+local GetMomentsPreferencesStoreModule = require(Moments.Stores.GetMomentsPreferencesStore)
+local MomentContextModule = require(script.Parent.Parent.MomentContext)
+local ComputeVideoLiftLayoutModule = require(script.Parent.computeVideoLiftLayout)
+local RunService = game:GetService("RunService")
+local TweenService = game:GetService("TweenService")
+local UsePreferencesFunction = FoundationModule.Hooks.usePreferences
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local GetSmartFillScaleTypeFunction = MomentsCommonModule.Utils.getSmartFillScaleType
+local FFlagMomentsSmartVideoFill = MomentsCommonModule.Flags.FFlagMomentsSmartVideoFill
+local _UDim2 = UDim2.fromScale(1, 1)
+local _UDim2_1 = UDim2.fromScale(0.5, 0.5)
 
-local function _(p1, p2)
+local function _(p1, p2) --[[ Line: 36 | Named "scaleLayout" ]]
 	return {
 		scale = 1 + (p1.scale - 1) * p2,
 		offsetY = p1.offsetY * p2,
@@ -25,150 +25,153 @@ local function _(p1, p2)
 	}
 end
 
-local function useSettlingLayout(value, p1)
-	-- upvalues: reactModule (ref), runService (ref), tweenService (ref), signalsModule (ref)
-	local var1, var2 = reactModule.useBinding(value(false))
-	reactModule.useLayoutEffect(function()
-		-- upvalues: var1 (ref), p1 (ref), var2 (ref), runService (copy), tweenService (copy), signalsModule (copy), value (ref)
-		local var3 = nil
+local function useSettlingLayout(Callback, Time) --[[ Line: 46 ]]
+	-- upvalues: ReactModule (copy), RunService (copy), TweenService (copy), SignalsModule (copy)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(Callback(false))
+	ReactModule.useLayoutEffect(function() --[[ Line: 52 ]]
+		-- upvalues: UseBindingResult (copy), Time (copy), UseBindingResult2 (copy), RunService (upval), TweenService (upval), SignalsModule (upval), Callback (copy)
+		local HeartbeatConnection = nil
 		
-		local function _()
-			-- upvalues: var3 (write)
-			if var3 ~= nil then
-				var3:Disconnect()
-				var3 = nil
+		local function _() --[[ Line: 54 | Named "stopSettling" ]]
+			-- upvalues: HeartbeatConnection (ref)
+			if HeartbeatConnection ~= nil then
+				HeartbeatConnection:Disconnect()
+				HeartbeatConnection = nil
 			end
 		end
 		
-		local function settle()
-			-- upvalues: var1 (copy), var3 (write), p1 (copy), var2 (copy), runService (copy), tweenService (copy)
-			local value = var1:getValue()
+		local function settle() --[[ Line: 61 ]]
+			-- upvalues: UseBindingResult (upval), HeartbeatConnection (ref), Time (upval), UseBindingResult2 (upval), RunService (upval), TweenService (upval)
+			local Value = UseBindingResult:getValue()
 			
-			if value == nil or var3 ~= nil then return end
-			if p1 <= 0 then
-				var2(nil)
+			if Value == nil or HeartbeatConnection ~= nil then return end
+			if Time <= 0 then
+				UseBindingResult2(nil)
 				
 				return
-			end
-			local var4 = 0
-			var3 = runService.Heartbeat:Connect(function(p2)
-				-- upvalues: var4 (write), p1 (copy), var3 (copy), var2 (copy), tweenService (copy), value (ref)
-				var4 += p2
-				local var5 = var4 / p1
-				
-				if var5 < 1 then
-					local var6 = 1 - tweenService:GetValue(var5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
-					var2({
-						scale = 1 + (value.scale - 1) * var6,
-						offsetY = value.offsetY * var6,
-						cornerRadius = value.cornerRadius * var6
-					})
+			else
+				local Total = 0
+				HeartbeatConnection = RunService.Heartbeat:Connect(function(DeltaTime) --[[ Line: 72 ]]
+					-- upvalues: Total (ref), Time (upval), HeartbeatConnection (upval), UseBindingResult2 (upval), TweenService (upval), Value (copy)
+					Total += DeltaTime
+					local TotalRatio = Total / Time
 					
-					return
-				elseif var3 ~= nil then
-					var3:Disconnect()
-					var3 = nil
-				end
-				var2(nil)
-			end)
+					if TotalRatio < 1 then
+						local v1 = 1 - TweenService:GetValue(TotalRatio, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+						UseBindingResult2({
+							scale = 1 + (Value.scale - 1) * v1,
+							offsetY = Value.offsetY * v1,
+							cornerRadius = Value.cornerRadius * v1
+						})
+						
+						return
+					end
+					if HeartbeatConnection ~= nil then
+						HeartbeatConnection:Disconnect()
+						HeartbeatConnection = nil
+					end
+					UseBindingResult2(nil)
+				end)
+			end
 		end
 		
-		local var4 = signalsModule.createEffect(function(p2)
-			-- upvalues: value (copy), settle (ref), var3 (write), var2 (copy)
-			local var5 = value(p2)
+		local Effect = SignalsModule.createEffect(function(p1) --[[ Line: 85 ]]
+			-- upvalues: Callback (upval), settle (copy), HeartbeatConnection (ref), UseBindingResult2 (upval)
+			local CallbackResult = Callback(p1)
 			
-			if var5 == nil then
+			if CallbackResult == nil then
 				settle()
 				
 				return
-			elseif var3 ~= nil then
-				var3:Disconnect()
-				var3 = nil
 			end
-			var2(var5)
+			if HeartbeatConnection ~= nil then
+				HeartbeatConnection:Disconnect()
+				HeartbeatConnection = nil
+			end
+			UseBindingResult2(CallbackResult)
 		end)
 		
-		return function()
-			-- upvalues: var3 (write), var4 (ref)
-			if var3 ~= nil then
-				var3:Disconnect()
-				var3 = nil
+		return function() --[[ Line: 94 ]]
+			-- upvalues: HeartbeatConnection (ref), Effect (copy)
+			if HeartbeatConnection ~= nil then
+				HeartbeatConnection:Disconnect()
+				HeartbeatConnection = nil
 			end
-			var4()
+			Effect()
 		end
-	end, { value, p1, var1, var2 })
+	end, { Callback, Time, UseBindingResult, UseBindingResult2 })
 	
-	return var1
+	return UseBindingResult
 end
 
-return function(p1)
-	-- upvalues: useTokens (ref), usePreferences (ref), momentContextModule (ref), reactModule (ref), signalsModule (ref), getCommentsSheetStoreModule (ref), computeVideoLiftLayoutModule (ref), fFlagMomentsSmartVideoFill (ref), getSmartFillScaleType (ref), getMomentsPreferencesStoreModule (ref), useSettlingLayout (ref), uDim2 (ref), uDim2_1 (ref)
-	local var1 = useTokens()
-	local small = var1.Padding.Small
-	local medium = var1.Radius.Medium
-	local var2 = if usePreferences().reducedMotion then 0 else var1.Time.Time_200
-	local controller = momentContextModule.useMoment().controller
-	local var3 = reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy)
-		local var4, var5 = signalsModule.createSignal(0)
-		local var6, var7 = signalsModule.createSignal(Vector2.zero)
+return function(FeedItemId) --[[ Line: 103 | Named "useVideoLiftViewModel" ]]
+	-- upvalues: UseTokensFunction (copy), UsePreferencesFunction (copy), MomentContextModule (copy), ReactModule (copy), SignalsModule (copy), GetCommentsSheetStoreModule (copy), ComputeVideoLiftLayoutModule (copy), FFlagMomentsSmartVideoFill (copy), GetSmartFillScaleTypeFunction (copy), GetMomentsPreferencesStoreModule (copy), useSettlingLayout (copy), _UDim2 (copy), _UDim2_1 (copy)
+	local UseTokensResult = UseTokensFunction()
+	local Small = UseTokensResult.Padding.Small
+	local Medium = UseTokensResult.Radius.Medium
+	local Controller = MomentContextModule.useMoment().controller
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 110 ]]
+		-- upvalues: SignalsModule (upval)
+		local Signal, Signal2 = SignalsModule.createSignal(0)
+		local Signal1, Signal2_1 = SignalsModule.createSignal(Vector2.zero)
 		
 		return {
-			getTop = var4,
-			getSize = var6,
-			onChanged = function(p2)
-				-- upvalues: var5 (ref), var7 (ref)
-				var5(p2.AbsolutePosition.Y)
-				var7(p2.AbsoluteSize)
+			getTop = Signal,
+			getSize = Signal1,
+			onChanged = function(Frame: Frame) --[[ Line: 116 ]]
+				-- upvalues: Signal2 (copy), Signal2_1 (copy)
+				Signal2(Frame.AbsolutePosition.Y)
+				Signal2_1(Frame.AbsoluteSize)
 			end
 		}
 	end, {})
-	local var4 = useSettlingLayout(reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), getCommentsSheetStoreModule (copy), p1 (ref), computeVideoLiftLayoutModule (copy), var3 (ref), controller (ref), fFlagMomentsSmartVideoFill (copy), getSmartFillScaleType (copy), getMomentsPreferencesStoreModule (copy), small (ref), medium (ref)
-		return signalsModule.createComputed(function(p2)
-			-- upvalues: getCommentsSheetStoreModule (copy), p1 (copy), computeVideoLiftLayoutModule (copy), var3 (copy), controller (copy), fFlagMomentsSmartVideoFill (copy), getSmartFillScaleType (copy), getMomentsPreferencesStoreModule (copy), small (copy), medium (copy)
-			local var5 = getCommentsSheetStoreModule(false)
+	local UseSettlingLayoutResult = useSettlingLayout(ReactModule.useMemo(function() --[[ Line: 123 ]]
+		-- upvalues: SignalsModule (upval), GetCommentsSheetStoreModule (upval), FeedItemId (copy), ComputeVideoLiftLayoutModule (upval), UseMemoResult (copy), Controller (copy), FFlagMomentsSmartVideoFill (upval), GetSmartFillScaleTypeFunction (upval), GetMomentsPreferencesStoreModule (upval), Small (copy), Medium (copy)
+		return SignalsModule.createComputed(function(p1) --[[ Line: 124 ]]
+			-- upvalues: GetCommentsSheetStoreModule (upval), FeedItemId (upval), ComputeVideoLiftLayoutModule (upval), UseMemoResult (upval), Controller (upval), FFlagMomentsSmartVideoFill (upval), GetSmartFillScaleTypeFunction (upval), GetMomentsPreferencesStoreModule (upval), Small (upval), Medium (upval)
+			local CommentsSheetStoreModule = GetCommentsSheetStoreModule(false)
 			
-			if p1 == nil or var5.getFeedItemId(p2) ~= p1 then
+			if FeedItemId == nil or CommentsSheetStoreModule.getFeedItemId(p1) ~= FeedItemId then
 				return nil
+			else
+				local VideoLift = CommentsSheetStoreModule.getVideoLift(p1)
+				
+				return if VideoLift == nil then nil else ComputeVideoLiftLayoutModule({
+					lift = VideoLift,
+					itemTop = UseMemoResult.getTop(p1),
+					itemSize = UseMemoResult.getSize(p1),
+					resolution = if Controller == nil then nil else Controller.getState(p1).resolution,
+					scaleType = if FFlagMomentsSmartVideoFill then GetSmartFillScaleTypeFunction(GetMomentsPreferencesStoreModule(false).getMediaScaleType(p1), UseMemoResult.getSize(p1), if Controller == nil then nil else Controller.getState(p1).resolution) else GetMomentsPreferencesStoreModule(false).getMediaScaleType(p1),
+					padding = Small,
+					cornerRadius = Medium
+				})
 			end
-			local videoLift = var5.getVideoLift(p2)
-			
-			return if videoLift == nil then nil else computeVideoLiftLayoutModule({
-				lift = videoLift,
-				itemTop = var3.getTop(p2),
-				itemSize = var3.getSize(p2),
-				resolution = if controller ~= nil then nil else controller.getState(p2).resolution,
-				scaleType = if fFlagMomentsSmartVideoFill then getSmartFillScaleType(getMomentsPreferencesStoreModule(false).getMediaScaleType(p2), var3.getSize(p2), if controller ~= nil then nil else controller.getState(p2).resolution) else getMomentsPreferencesStoreModule(false).getMediaScaleType(p2),
-				padding = small,
-				cornerRadius = medium
-			})
 		end)
 	end, {
-		p1 or false,
-		controller or false,
-		var3,
-		small,
-		medium
-	}), var2)
+		FeedItemId or false,
+		Controller or false,
+		UseMemoResult,
+		Small,
+		Medium
+	}), if UsePreferencesFunction().reducedMotion then 0 else UseTokensResult.Time.Time_200)
 	
-	return reactModule.useMemo(function()
-		-- upvalues: var4 (ref), uDim2 (copy), uDim2_1 (copy), var3 (ref)
+	return ReactModule.useMemo(function() --[[ Line: 155 ]]
+		-- upvalues: UseSettlingLayoutResult (copy), _UDim2 (upval), _UDim2_1 (upval), UseMemoResult (copy)
 		return {
-			size = var4:map(function(p2)
-				-- upvalues: uDim2 (copy)
-				return if p2 == nil then uDim2 else UDim2.fromScale(p2.scale, p2.scale)
+			size = UseSettlingLayoutResult:map(function(p1) --[[ Line: 157 ]]
+				-- upvalues: _UDim2 (upval)
+				return if p1 == nil then _UDim2 else UDim2.fromScale(p1.scale, p1.scale)
 			end),
-			position = var4:map(function(p2)
-				-- upvalues: uDim2_1 (copy)
-				return if p2 == nil then uDim2_1 else UDim2.new(0.5, 0, 0.5, p2.offsetY)
+			position = UseSettlingLayoutResult:map(function(p1) --[[ Line: 160 ]]
+				-- upvalues: _UDim2_1 (upval)
+				return if p1 == nil then _UDim2_1 else UDim2.new(0.5, 0, 0.5, p1.offsetY)
 			end),
 			mediaSurface = {
-				cornerRadius = var4:map(function(p2)
-					return UDim.new(0, if p2 ~= nil then 0 else p2.cornerRadius)
+				cornerRadius = UseSettlingLayoutResult:map(function(p1): UDim --[[ Line: 164 ]]
+					return UDim.new(0, if p1 == nil then 0 else p1.cornerRadius)
 				end)
 			},
-			onItemRectChanged = var3.onChanged
+			onItemRectChanged = UseMemoResult.onChanged
 		}
-	end, { var4, var3 })
+	end, { UseSettlingLayoutResult, UseMemoResult })
 end

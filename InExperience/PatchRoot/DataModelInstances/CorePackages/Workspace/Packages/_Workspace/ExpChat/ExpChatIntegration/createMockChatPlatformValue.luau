@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent.Parent._Index.ExpChatIntegration.ExpChatIntegration.createMockChatPlatformValue)
+﻿return (require(script.Parent.Parent.Parent.Parent._Index.ExpChatIntegration.ExpChatIntegration.createMockChatPlatformValue))

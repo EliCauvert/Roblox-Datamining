@@ -1,31 +1,30 @@
-﻿local expChat = script:FindFirstAncestor("ExpChat")
-local parent = expChat.Parent
-local fFlagExpChatUseGuacForFOMOUpsell = require(parent.SharedFlags).FFlagExpChatUseGuacForFOMOUpsell
-local var1 = if fFlagExpChatUseGuacForFOMOUpsell then require(parent.UniversalAppPolicy) else nil
-local IXPServiceWrapperModule = require(expChat.IXPServiceWrapper)
-local expChatFOMOUpsellIXPLayerName = game:DefineFastString("ExpChatFOMOUpsellIXPLayerName", "User.Communication.NonAgeCheckedUser")
-local expChatFOMOUpsellIXPLayerValue = game:DefineFastString("ExpChatFOMOUpsellIXPLayerValue", "FOMOUpsellEnabled")
-local var2 = nil
-local var3 = nil
+﻿local ExpChat = script:FindFirstAncestor("ExpChat")
+local Parent = ExpChat.Parent
+local FFlagExpChatUseGuacForFOMOUpsell = require(Parent.SharedFlags).FFlagExpChatUseGuacForFOMOUpsell
+local UniversalAppPolicyModule = if FFlagExpChatUseGuacForFOMOUpsell then require(Parent.UniversalAppPolicy) else nil
+local IXPServiceWrapperModule = require(ExpChat.IXPServiceWrapper)
+local ExpChatFOMOUpsellIXPLayerName = game:DefineFastString("ExpChatFOMOUpsellIXPLayerName", "User.Communication.NonAgeCheckedUser")
+local ExpChatFOMOUpsellIXPLayerValue = game:DefineFastString("ExpChatFOMOUpsellIXPLayerValue", "FOMOUpsellEnabled")
+local v1 = nil
+local v2 = nil
 
-local function fetchIXPData()
-	-- upvalues: var2 (write), var3 (write), IXPServiceWrapperModule (ref), expChatFOMOUpsellIXPLayerName (ref), expChatFOMOUpsellIXPLayerValue (ref)
-	local ok, status = pcall(function()
-		-- upvalues: IXPServiceWrapperModule (copy), expChatFOMOUpsellIXPLayerName (copy)
-		return IXPServiceWrapperModule:GetLayerData(expChatFOMOUpsellIXPLayerName)
+local function fetchIXPData() --[[ Line: 21 ]]
+	-- upvalues: v1 (ref), v2 (ref), IXPServiceWrapperModule (copy), ExpChatFOMOUpsellIXPLayerName (copy), ExpChatFOMOUpsellIXPLayerValue (copy)
+	v1, v8 = pcall(function() --[[ Line: 22 ]]
+		-- upvalues: IXPServiceWrapperModule (upval), ExpChatFOMOUpsellIXPLayerName (upval)
+		return IXPServiceWrapperModule:GetLayerData(ExpChatFOMOUpsellIXPLayerName)
 	end)
-	var2 = ok
-	var3 = status
 	
-	if var2 and var3 and var3[expChatFOMOUpsellIXPLayerValue] ~= nil then
-		IXPServiceWrapperModule:LogUserLayerExposure(expChatFOMOUpsellIXPLayerName)
+	if v1 and v2 and v2[ExpChatFOMOUpsellIXPLayerValue] ~= nil then
+		IXPServiceWrapperModule:LogUserLayerExposure(ExpChatFOMOUpsellIXPLayerName)
 		
-		return var3[expChatFOMOUpsellIXPLayerValue]
+		return v2[ExpChatFOMOUpsellIXPLayerValue]
+	else
+		return false
 	end
-	return false
 end
 
-return function()
-	-- upvalues: fFlagExpChatUseGuacForFOMOUpsell (ref), var1 (write), var2 (write), var3 (write), expChatFOMOUpsellIXPLayerValue (ref), fetchIXPData (ref)
-	return if fFlagExpChatUseGuacForFOMOUpsell then if var1.getAppFeaturePolicies().getShowFOMOUpsell() then if var2 and var3 then var3[expChatFOMOUpsellIXPLayerValue] else fetchIXPData() else false else false
+return function() --[[ Line: 35 ]]
+	-- upvalues: FFlagExpChatUseGuacForFOMOUpsell (copy), UniversalAppPolicyModule (ref), v1 (ref), v2 (ref), ExpChatFOMOUpsellIXPLayerValue (copy), fetchIXPData (copy)
+	return if FFlagExpChatUseGuacForFOMOUpsell and UniversalAppPolicyModule.getAppFeaturePolicies().getShowFOMOUpsell() then if v1 and v2 then v2[ExpChatFOMOUpsellIXPLayerValue] else fetchIXPData() else false
 end

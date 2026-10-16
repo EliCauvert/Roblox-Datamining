@@ -1,14 +1,14 @@
-﻿local localizationService = game:GetService("LocalizationService")
-local parent = script:FindFirstAncestor("IdentityVerification").Parent
-local localization = require(parent.RobloxAppLocales).Localization
-local _ = require(parent.UniversalFeatureRestrictions)
+﻿local LocalizationService = game:GetService("LocalizationService")
+local Parent = script:FindFirstAncestor("IdentityVerification").Parent
+local Localization = require(Parent.RobloxAppLocales).Localization
+local _ = require(Parent.UniversalFeatureRestrictions)
 
-return function()
-	-- upvalues: localization (ref), localizationService (ref)
-	local var1 = localization.new(localizationService.RobloxLocaleId)
+return function() --[[ Line: 24 | Named "buildAgeVerificationFeatureRestrictionOverrides" ]]
+	-- upvalues: Localization (copy), LocalizationService (copy)
+	local NewLocalization = Localization.new(LocalizationService.RobloxLocaleId)
 	
 	return {
-		titleOverride = var1:Format("Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogTitle.Suspended"),
-		bodyOverride = var1:Format("Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogBody.Suspended")
+		titleOverride = NewLocalization:Format("Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogTitle.Suspended"),
+		bodyOverride = NewLocalization:Format("Feature.UniversalFeatureRestrictions.AbuseVector.AgeVerification.DialogBody.Suspended")
 	}
 end

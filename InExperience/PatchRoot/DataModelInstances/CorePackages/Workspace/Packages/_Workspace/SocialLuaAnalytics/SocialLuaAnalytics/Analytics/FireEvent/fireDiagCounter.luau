@@ -1,17 +1,17 @@
-﻿local dashModule = require(script.Parent.Parent.Parent.Parent.Dash)
+﻿local DashModule = require(script.Parent.Parent.Parent.Parent.Dash)
 local _ = require(script.Parent.Parent.Types)
-local getEventInfoModule = require(script.Parent.getEventInfo)
-local optionallyLogModule = require(script.Parent.optionallyLog)
-local reportCounterModule = require(script.Parent.reportCounter)
+local GetEventInfoModule = require(script.Parent.getEventInfo)
+local OptionallyLogModule = require(script.Parent.optionallyLog)
+local ReportCounterModule = require(script.Parent.reportCounter)
 
-local var1 = function(p1)
-	return "Fired diagCounter: " .. p0.name .. ", count: " .. (p1.count and tostring(p1.count) or "1")
+local function v5(p1): string --[[ Line: 12 ]]
+	return "Fired diagCounter: " .. p1.name .. ", count: " .. (p1.count and tostring(p1.count) or "1")
 end
 
-return function(p1)
-	-- upvalues: dashModule (ref), getEventInfoModule (ref), optionallyLogModule (ref), var1 (ref), reportCounterModule (ref)
-	return function(p2)
-		-- upvalues: dashModule (copy), getEventInfoModule (copy), p1 (ref), optionallyLogModule (copy), var1 (copy), reportCounterModule (copy)
-		return dashModule.pipe(getEventInfoModule(p1.eventList), optionallyLogModule(p1.loggerImpl, var1), reportCounterModule(p1.diagImpl))(p2)
+return function(p1) --[[ Line: 19 ]]
+	-- upvalues: DashModule (copy), GetEventInfoModule (copy), OptionallyLogModule (copy), v5 (copy), ReportCounterModule (copy)
+	return function(p2) --[[ Line: 24 ]]
+		-- upvalues: DashModule (upval), GetEventInfoModule (upval), p1 (copy), OptionallyLogModule (upval), v5 (upval), ReportCounterModule (upval)
+		return DashModule.pipe(GetEventInfoModule(p1.eventList), OptionallyLogModule(p1.loggerImpl, v5), ReportCounterModule(p1.diagImpl))(p2)
 	end
 end

@@ -1,32 +1,32 @@
-﻿local authCommon = script:FindFirstAncestor("AuthCommon")
-local promiseModule = require(authCommon.Parent.Promise)
-local getGameMediaModule = require(authCommon.Http.Requests.GetGameMedia)
+﻿local AuthCommon = script:FindFirstAncestor("AuthCommon")
+local PromiseModule = require(AuthCommon.Parent.Promise)
+local GetGameMediaModule = require(AuthCommon.Http.Requests.GetGameMedia)
 
-function FetchGameMedia(p1, p2)
-	-- upvalues: getGameMediaModule (ref), promiseModule (ref)
+function FetchGameMedia(p1, p2) --[[ Line: 8 ]]
+	-- upvalues: GetGameMediaModule (copy), PromiseModule (copy)
 	assert(typeof(p2) == "string", "universeId must be a string")
 	assert(#p2 > 0, "universeId must be a non-empty string")
 	
-	return getGameMediaModule(p1, p2):andThen(function(p3)
-		-- upvalues: promiseModule (copy)
-		if not p3 or not p3.responseBody then
-			return promiseModule.reject()
+	return GetGameMediaModule(p1, p2):andThen(function(Result) --[[ Line: 12 ]]
+		-- upvalues: PromiseModule (upval)
+		if not Result or not Result.responseBody then
+			return PromiseModule.reject()
 		end
-		local data = p3.responseBody.data
+		local Data = Result.responseBody.data
 		
-		if data == nil then
-			return promiseModule.reject()
+		if Data == nil then
+			return PromiseModule.reject()
 		end
-		local t = {}
+		local List = {}
 		
-		for i, v in ipairs(data) do
-			table.insert(t, {
-				id = v.id,
-				assetTypeId = v.assetTypeId,
-				imageId = v.imageId
+		for _, entry in ipairs(Data) do
+			table.insert(List, {
+				id = entry.id,
+				assetTypeId = entry.assetTypeId,
+				imageId = entry.imageId
 			})
 		end
-		return promiseModule.resolve(t)
+		return PromiseModule.resolve(List)
 	end)
 end
 

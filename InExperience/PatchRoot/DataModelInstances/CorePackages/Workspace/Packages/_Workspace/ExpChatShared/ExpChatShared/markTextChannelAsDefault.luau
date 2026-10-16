@@ -1,8 +1,8 @@
-﻿local getFFlagExpChatUseIsDefaultTextChannelModule = require(script.Parent.Flags.GetFFlagExpChatUseIsDefaultTextChannel)
+﻿local GetFFlagExpChatUseIsDefaultTextChannelModule = require(script.Parent.Flags.GetFFlagExpChatUseIsDefaultTextChannel)
 
-return function(p1)
-	-- upvalues: getFFlagExpChatUseIsDefaultTextChannelModule (ref)
-	if getFFlagExpChatUseIsDefaultTextChannelModule() then
+return function(p1) --[[ Line: 16 | Named "markTextChannelAsDefault" ]]
+	-- upvalues: GetFFlagExpChatUseIsDefaultTextChannelModule (copy)
+	if GetFFlagExpChatUseIsDefaultTextChannelModule() then
 		p1.IsDefaultTextChannel = true
 		
 		return

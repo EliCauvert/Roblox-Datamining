@@ -1,32 +1,32 @@
-﻿local parent = script:FindFirstAncestor("VideoUtils").Parent
-local reactModule = require(parent.React)
-local useTokens = require(parent.Foundation).Hooks.useTokens
+﻿local Parent = script:FindFirstAncestor("VideoUtils").Parent
+local ReactModule = require(Parent.React)
+local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
 
-return function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref)
-	local var1 = useTokens()
-	local muted = var1.DarkMode.Content.Muted
-	local emphasis = var1.Color.Content.Emphasis
+return function(Frame: Frame) --[[ Line: 17 | Named "VideoProgressBar" ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy)
+	local UseTokensResult = UseTokensFunction()
+	local Muted = UseTokensResult.DarkMode.Content.Muted
+	local Emphasis = UseTokensResult.Color.Content.Emphasis
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BorderSizePixel = 0,
-		AnchorPoint = p1.AnchorPoint,
-		Position = p1.Position,
-		Size = p1.Size,
-		BackgroundColor3 = muted.Color3,
-		BackgroundTransparency = muted.Transparency,
-		LayoutOrder = p1.LayoutOrder
+		AnchorPoint = Frame.AnchorPoint,
+		Position = Frame.Position,
+		Size = Frame.Size,
+		BackgroundColor3 = Muted.Color3,
+		BackgroundTransparency = Muted.Transparency,
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) }),
-		ProgressFill = reactModule.createElement("Frame", {
+		UICorner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) }),
+		ProgressFill = ReactModule.createElement("Frame", {
 			BorderSizePixel = 0,
-			Size = p1.progressBinding:map(function(p2)
-				return UDim2.fromScale(p2, 1)
+			Size = Frame.progressBinding:map(function(XScale): UDim2 --[[ Line: 37 ]]
+				return UDim2.fromScale(XScale, 1)
 			end),
-			BackgroundColor3 = emphasis.Color3,
-			BackgroundTransparency = emphasis.Transparency
+			BackgroundColor3 = Emphasis.Color3,
+			BackgroundTransparency = Emphasis.Transparency
 		}, {
-			UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) })
+			UICorner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) })
 		})
 	})
 end

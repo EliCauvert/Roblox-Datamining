@@ -1,20 +1,28 @@
-﻿local userInputService = game:GetService("UserInputService")
-local expChat = script:FindFirstAncestor("ExpChat")
-local parent = expChat.Parent
-local signalsReactModule = require(parent.SignalsReact)
-local getPresetChatStoreModule = require(expChat.Stores.GetPresetChatStore)
-local constantsModule = require(script.Parent.Constants)
-local fFlagExpChatPresetChatGamepadEnabledModule = require(expChat.Flags.FFlagExpChatPresetChatGamepadEnabled)
-local fFlagLuaSupportMicroGamepadPreferredInput = require(parent.SharedFlags).FFlagLuaSupportMicroGamepadPreferredInput
+﻿local UserInputService = game:GetService("UserInputService")
+local ExpChat = script:FindFirstAncestor("ExpChat")
+local Parent = ExpChat.Parent
+local SignalsReactModule = require(Parent.SignalsReact)
+local GetPresetChatStoreModule = require(ExpChat.Stores.GetPresetChatStore)
+local ConstantsModule = require(script.Parent.Constants)
+local FFlagExpChatPresetChatGamepadEnabledModule = require(ExpChat.Flags.FFlagExpChatPresetChatGamepadEnabled)
+local FFlagLuaSupportMicroGamepadPreferredInput = require(Parent.SharedFlags).FFlagLuaSupportMicroGamepadPreferredInput
 
-local function _()
-	-- upvalues: userInputService (ref)
-	return userInputService.TouchEnabled and not userInputService.MouseEnabled
+local function _(): boolean --[[ Line: 15 | Named "isTouchDevice" ]]
+	-- upvalues: UserInputService (copy)
+	return UserInputService.TouchEnabled and not UserInputService.MouseEnabled
 end
 
-return function()
-	-- upvalues: getPresetChatStoreModule (ref), signalsReactModule (ref), constantsModule (ref), fFlagExpChatPresetChatGamepadEnabledModule (ref), userInputService (ref), fFlagLuaSupportMicroGamepadPreferredInput (ref)
-	local var1 = signalsReactModule.useSignalState(getPresetChatStoreModule(false).getLayoutModeOverride)
+return function() --[[ Line: 19 | Named "useLayoutMode" ]]
+	-- upvalues: GetPresetChatStoreModule (copy), SignalsReactModule (copy), ConstantsModule (copy), FFlagExpChatPresetChatGamepadEnabledModule (copy), UserInputService (copy), FFlagLuaSupportMicroGamepadPreferredInput (copy)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(GetPresetChatStoreModule(false).getLayoutModeOverride)
 	
-	return if var1 == constantsModule.LayoutMode.Tray or var1 == constantsModule.LayoutMode.FlyOut then var1 elseif fFlagExpChatPresetChatGamepadEnabledModule and (userInputService.PreferredInput == Enum.PreferredInput.Gamepad or fFlagLuaSupportMicroGamepadPreferredInput and userInputService.PreferredInput == Enum.PreferredInput.MicroGamepad) then constantsModule.LayoutMode.FlyOut elseif userInputService.TouchEnabled and not userInputService.MouseEnabled then constantsModule.LayoutMode.Tray else constantsModule.LayoutMode.FlyOut
+	if UseSignalStateResult == ConstantsModule.LayoutMode.Tray or UseSignalStateResult == ConstantsModule.LayoutMode.FlyOut then
+		return UseSignalStateResult
+	elseif FFlagExpChatPresetChatGamepadEnabledModule and (UserInputService.PreferredInput == Enum.PreferredInput.Gamepad or FFlagLuaSupportMicroGamepadPreferredInput and UserInputService.PreferredInput == Enum.PreferredInput.MicroGamepad) then
+		return ConstantsModule.LayoutMode.FlyOut
+	else
+		local NoMouseEnabled: boolean = UserInputService.TouchEnabled and not UserInputService.MouseEnabled
+		
+		return if NoMouseEnabled then ConstantsModule.LayoutMode.Tray else ConstantsModule.LayoutMode.FlyOut
+	end
 end

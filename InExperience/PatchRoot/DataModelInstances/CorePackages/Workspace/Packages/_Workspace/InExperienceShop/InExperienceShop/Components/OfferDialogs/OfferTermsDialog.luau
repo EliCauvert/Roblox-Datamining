@@ -1,31 +1,31 @@
-﻿local parent = script:FindFirstAncestor("InExperienceShop").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local _ = require(parent.InExperienceOffers)
-local dialog = foundationModule.Dialog
-local dialogSize = foundationModule.Enums.DialogSize
-local buttonVariant = foundationModule.Enums.ButtonVariant
+﻿local Parent = script:FindFirstAncestor("InExperienceShop").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local _ = require(Parent.InExperienceOffers)
+local Dialog = FoundationModule.Dialog
+local DialogSize = FoundationModule.Enums.DialogSize
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
 
-return function(p1)
-	-- upvalues: reactModule (ref), dialog (ref), dialogSize (ref), buttonVariant (ref)
-	local terms = p1.terms
+return function(p1) --[[ Line: 22 | Named "OfferTermsDialog" ]]
+	-- upvalues: ReactModule (copy), Dialog (copy), DialogSize (copy), ButtonVariant (copy)
+	local Terms = p1.terms
 	
-	return reactModule.createElement(dialog.Root, {
+	return ReactModule.createElement(Dialog.Root, {
 		hasBackdrop = true,
 		disablePortal = false,
-		size = dialogSize.Medium,
+		size = DialogSize.Medium,
 		onClose = p1.onClose
 	}, {
-		Title = reactModule.createElement(dialog.Title, { LayoutOrder = 1, text = terms.title }),
-		Content = reactModule.createElement(dialog.Content, { LayoutOrder = 2 }, {
-			BodyText = reactModule.createElement(dialog.Text, { Text = terms.body })
+		Title = ReactModule.createElement(Dialog.Title, { LayoutOrder = 1, text = Terms.title }),
+		Content = ReactModule.createElement(Dialog.Content, { LayoutOrder = 2 }, {
+			BodyText = ReactModule.createElement(Dialog.Text, { Text = Terms.body })
 		}),
-		Actions = reactModule.createElement(dialog.Actions, {
+		Actions = ReactModule.createElement(Dialog.Actions, {
 			LayoutOrder = 3,
 			actions = {
 				{
-					text = terms.buttonText,
-					variant = buttonVariant.Emphasis,
+					text = Terms.buttonText,
+					variant = ButtonVariant.Emphasis,
 					onActivated = p1.onClose
 				}
 			}

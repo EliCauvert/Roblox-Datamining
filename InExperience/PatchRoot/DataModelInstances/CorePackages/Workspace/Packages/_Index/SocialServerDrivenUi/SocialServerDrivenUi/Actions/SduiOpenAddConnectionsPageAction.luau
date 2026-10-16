@@ -1,24 +1,25 @@
-﻿local parent = script:FindFirstAncestor("SocialServerDrivenUi").Parent
-local appPage = require(parent.RobloxAppEnums).AppPage
-local navigateDown = require(parent.NavigationRodux).Thunks.NavigateDown
-local _ = require(parent.SduiCoreSystem)
-local fFlagCreateConnectionsHub = require(parent.SharedFlags).FFlagCreateConnectionsHub
-local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
-local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
+﻿local Parent = script:FindFirstAncestor("SocialServerDrivenUi").Parent
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local NavigateDownFunction = require(Parent.NavigationRodux).Thunks.NavigateDown
+local _ = require(Parent.SduiCoreSystem)
+local FFlagCreateConnectionsHub = require(Parent.SharedFlags).FFlagCreateConnectionsHub
+local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3Dispatch
+local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
 
-return function(_, _, p1, _)
-	-- upvalues: fFlagCreateConnectionsHub (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref)
-	if fFlagCreateConnectionsHub then
-		p1.dependencies.getNavigation().navigate(appPage.CoHubAddConnections)
+return function(_, _, p1, _) --[[ Line: 18 ]]
+	-- upvalues: FFlagCreateConnectionsHub (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy)
+	if FFlagCreateConnectionsHub then
+		p1.dependencies.getNavigation().navigate(AppPage.CoHubAddConnections)
 		
 		return
 	end
-	local t = { name = appPage.AddFriendsPage }
+	local config = { name = AppPage.AddFriendsPage }
 	
-	if fFlagSignalsNavP3Dispatch then
-		var1.down(var1.fromLegacyPage(t))
+	if FFlagSignalsNavP3Dispatch then
+		NavigationCommands.down(NavigationCommands.fromLegacyPage(config))
 		
 		return
+	else
+		p1.dependencies.dispatch(NavigateDownFunction(config))
 	end
-	p1.dependencies.dispatch(navigateDown(t))
 end

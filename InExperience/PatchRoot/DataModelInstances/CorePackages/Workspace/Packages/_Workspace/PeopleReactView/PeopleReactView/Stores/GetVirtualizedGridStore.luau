@@ -1,1 +1,1 @@
-﻿return require(script:FindFirstAncestor("PeopleReactView").Parent.Signals).createComputed(require(script.createVirtualizedGridStore))
+﻿return require(script:FindFirstAncestor("PeopleReactView").Parent.Signals).createComputed((require(script.createVirtualizedGridStore)))

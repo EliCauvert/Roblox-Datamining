@@ -1,152 +1,157 @@
-﻿local sduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
-local _ = require(sduiCoreSystem.Parent.ServiceContractsProto)
-local sduiActionTypeModule = require(sduiCoreSystem.SduiActionType)
-local sduiComponentTypeModule = require(sduiCoreSystem.SduiComponentType)
-local sduiDataBindingContentTypeModule = require(sduiCoreSystem.ClientBinding.SduiDataBindingContentType)
-local snakeToCamel = require(sduiCoreSystem.ClientBinding.SduiDataBinderTransformUtils).snakeToCamel
-local t = {
+﻿local SduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
+local _ = require(SduiCoreSystem.Parent.ServiceContractsProto)
+local SduiActionTypeModule = require(SduiCoreSystem.SduiActionType)
+local SduiComponentTypeModule = require(SduiCoreSystem.SduiComponentType)
+local SduiDataBindingContentTypeModule = require(SduiCoreSystem.ClientBinding.SduiDataBindingContentType)
+local SnakeToCamelFunction = require(SduiCoreSystem.ClientBinding.SduiDataBinderTransformUtils).snakeToCamel
+local config = {
 	AUTOMATIC_SIZE_XY = "XY",
 	SIZE_CONSTRAINT_RELATIVE_XY = "RelativeXY",
 	SIZE_CONSTRAINT_RELATIVE_XX = "RelativeXX",
 	SIZE_CONSTRAINT_RELATIVE_YY = "RelativeYY"
 }
-local t_1 = {}
+local t = {}
 
-local function convertToLuaEnum(p1, p2, p3)
-	local match = string.match(p1, "^" .. p1 .. "(.*)")
+local function convertToLuaEnum(Text: string, Text1, p1): string --[[ Line: 50 ]]
+	local Match: string? = string.match(Text, "^" .. Text1 .. "(.*)")
 	
-	if not match then
-		return p1
+	if Match then
+		local L: string = Match:lower():gsub("_(%l)", function(Text: string): string --[[ Line: 64 ]]
+			return Text:upper()
+		end)
+		
+		return if p1 then L:gsub("^%l", string.upper) else L
+	else
+		return Text
 	end
-	local var1 = match:lower():gsub("_(%l)", function(p4)
-		return p4:upper()
-	end)
-	
-	return if p3 then var1:gsub("^%l", string.upper) else var1
 end
 
 return {
-	mapProtoEnumFormatToLua = function(p1, p2, p3)
-		-- upvalues: t (ref), convertToLuaEnum (ref)
-		local var1 = t[p1]
+	mapProtoEnumFormatToLua = function(Key, p1, p2) --[[ Line: 82 ]]
+		-- upvalues: config (copy), convertToLuaEnum (copy)
+		local Entry = config[Key]
 		
-		if not var1 then
-			var1 = convertToLuaEnum(p1, p2, p3)
-			t[p1] = var1
+		if not Entry then
+			Entry = convertToLuaEnum(Key, p1, p2)
+			config[Key] = Entry
 		end
-		return var1
+		return Entry
 	end,
-	mapLuaEnumFormatToProto = function(p1, p2, p3)
-		-- upvalues: t_1 (ref)
-		local text = p2 .. p7
-		local var1 = t_1[text]
+	mapLuaEnumFormatToProto = function(Text: string, Text1, p1) --[[ Line: 95 ]]
+		-- upvalues: t (copy)
+		local Text2 = Text1 .. Text
+		local Entry = t[Text2]
 		
-		if var1 == false then
+		if Entry == false then
 			return nil
-		elseif var1 == nil then
-			local var2 = p3.fromName(p2 .. string.upper(p1:gsub("(%l)(%u)", "%1_%2")))
-			t_1[text] = var2 or false
+		elseif Entry == nil then
+			local FromNameResult = p1.fromName(Text1 .. string.upper((Text:gsub("(%l)(%u)", "%1_%2"))))
+			t[Text2] = FromNameResult or false
 			
-			return var2
+			return FromNameResult
+		else
+			return Entry
 		end
-		return var1
 	end,
-	mapUiComponentTypeToLua = function(p1)
-		-- upvalues: t (ref), convertToLuaEnum (ref), sduiComponentTypeModule (ref)
-		if p1 == nil then
+	mapUiComponentTypeToLua = function(Key) --[[ Line: 132 ]]
+		-- upvalues: config (copy), convertToLuaEnum (copy), SduiComponentTypeModule (copy)
+		if Key == nil then
 			return nil
 		end
-		local var1 = t[p1]
+		local Entry = config[Key]
 		
-		if not var1 then
-			var1 = convertToLuaEnum(p1, "UI_COMPONENT_TYPE_", true)
-			t[p1] = var1
+		if not Entry then
+			Entry = convertToLuaEnum(Key, "UI_COMPONENT_TYPE_", true)
+			config[Key] = Entry
 		end
-		return if sduiComponentTypeModule[var1] then sduiComponentTypeModule[var1] else nil
+		return if SduiComponentTypeModule[Entry] then SduiComponentTypeModule[Entry] else nil
 	end,
-	mapHydrationContentTypeToLua = function(p1)
-		-- upvalues: t (ref), sduiDataBindingContentTypeModule (ref)
-		if p1 == nil then
+	mapHydrationContentTypeToLua = function(Text: string) --[[ Line: 166 ]]
+		-- upvalues: config (copy), SduiDataBindingContentTypeModule (copy)
+		if Text == nil then
 			return nil
 		end
-		local var1 = t[p1]
+		local Entry = config[Text]
 		
-		if not var1 then
-			local match = string.match(p1, "^HYDRATION_CONTENT_TYPE_(.*)")
-			var1 = if not match then p1 else match:lower():gsub("_(%l)", function(p2)
-				return p2:upper()
-			end)
-			t[p1] = var1
+		if not Entry then
+			local Match: string? = string.match(Text, "^HYDRATION_CONTENT_TYPE_(.*)")
+			Entry = if Match then Match:lower():gsub("_(%l)", function(Text: string): string --[[ Line: 64 ]]
+				return Text:upper()
+			end) else Text
+			config[Text] = Entry
 		end
-		return if sduiDataBindingContentTypeModule[var1] then sduiDataBindingContentTypeModule[var1] else nil
+		return if SduiDataBindingContentTypeModule[Entry] then SduiDataBindingContentTypeModule[Entry] else nil
 	end,
-	mapActionTypeToLua = function(p1)
-		-- upvalues: t (ref), convertToLuaEnum (ref), sduiActionTypeModule (ref)
-		if p1 == nil then
+	mapActionTypeToLua = function(Key) --[[ Line: 149 ]]
+		-- upvalues: config (copy), convertToLuaEnum (copy), SduiActionTypeModule (copy)
+		if Key == nil then
 			return nil
 		end
-		local var1 = t[p1]
+		local Entry = config[Key]
 		
-		if not var1 then
-			var1 = convertToLuaEnum(p1, "ACTION_TYPE_", true)
-			t[p1] = var1
+		if not Entry then
+			Entry = convertToLuaEnum(Key, "ACTION_TYPE_", true)
+			config[Key] = Entry
 		end
-		return if sduiActionTypeModule[var1] then sduiActionTypeModule[var1] else nil
+		return if SduiActionTypeModule[Entry] then SduiActionTypeModule[Entry] else nil
 	end,
-	mapPropName = function(p1)
-		-- upvalues: t (ref), snakeToCamel (ref)
-		if p1 == nil then
+	mapPropName = function(Key) --[[ Line: 186 ]]
+		-- upvalues: config (copy), SnakeToCamelFunction (copy)
+		if Key == nil then
 			return nil
-		elseif typeof(p1) == "number" then
-			return p1
 		end
-		local var1 = t[p1]
+		if typeof(Key) == "number" then
+			return Key
+		end
+		local Entry = config[Key]
 		
-		if not var1 then
-			var1 = snakeToCamel(p1)
-			t[p1] = var1
+		if not Entry then
+			Entry = SnakeToCamelFunction(Key)
+			config[Key] = Entry
 		end
-		return var1
+		return Entry
 	end,
-	camelCaseKeys = function(p1)
-		-- upvalues: t (ref), snakeToCamel (ref)
-		if type(p1) ~= "table" then
-			return p1
+	camelCaseKeys = function(List) --[[ Line: 207 ]]
+		-- upvalues: config (copy), SnakeToCamelFunction (copy)
+		if type(List) ~= "table" then
+			return List
 		end
-		local t_1 = {}
+		local t = {}
 		
-		for i, v in p1 do
-			local var1
-			if type(i) ~= "string" then
-				var1 = i
-			elseif i == nil then
-				var1 = nil
-			elseif typeof(i) == "number" then
-				var1 = i
-			else
-				local var2 = t[i]
-				
-				if not var2 then
-					var2 = snakeToCamel(i)
-					t[i] = var2
+		for i, value in List do
+			local i1 = nil
+			if type(i) == "string" then
+				if i == nil then
+					i1 = nil
+				elseif typeof(i) == "number" then
+					i1 = i
+				else
+					local Entry = config[i]
+					
+					if not Entry then
+						Entry = SnakeToCamelFunction(i)
+						config[i] = Entry
+					end
+					i1 = Entry
 				end
-				var1 = var2
+			else
+				i1 = i
 			end
-			t_1[var1] = v
+			t[i1] = value
 		end
-		return t_1
+		return t
 	end,
-	mapProtoEngineEnumToLua = function(p2, p3, p4)
-		-- upvalues: t (ref), convertToLuaEnum (ref)
-		if p2 == nil then
+	mapProtoEngineEnumToLua = function(Key, p1, Callback) --[[ Line: 111 ]]
+		-- upvalues: config (copy), convertToLuaEnum (copy)
+		if Key == nil then
 			return nil
 		end
-		local var3 = t[p2]
+		local Entry = config[Key]
 		
-		if not var3 then
-			var3 = convertToLuaEnum(p2, p3, true)
-			t[p2] = var3
+		if not Entry then
+			Entry = convertToLuaEnum(Key, p1, true)
+			config[Key] = Entry
 		end
-		return if var3 then p4(var3) else nil
+		return if Entry then Callback(Entry) else nil
 	end
 }

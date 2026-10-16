@@ -1,54 +1,49 @@
-﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local signalsReactModule = require(parent.SignalsReact)
-local game = require(parent.DataHydration).Game
-local sduiSharedContentModule = require(parent.SduiSharedContent)
-local roactUtilsModule = require(parent.RoactUtils)
-local universalAppPolicyModule = require(parent.UniversalAppPolicy)
-local sharedFlagsModule = require(parent.SharedFlags)
-local centralOverlayModule = require(parent.CentralOverlay)
-local localizationModule = require(parent.Localization)
-local sduiChip = sduiSharedContentModule.SduiChip
-local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
-local useAppPolicy = universalAppPolicyModule.useAppPolicy
-local closeCentralOverlay = centralOverlayModule.Thunks.CloseCentralOverlay
-local useLocalization = localizationModule.Hooks.useLocalization
-local abuseVectorModule = require(parent.GenericAbuseReporting.AbuseVector)
-local openDynamicAbuseReportModule = require(parent.GenericAbuseReporting.OpenDynamicAbuseReport)
-local fFlagAddThumbnailSelectorReport = sharedFlagsModule.FFlagAddThumbnailSelectorReport
+﻿local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local SignalsReactModule = require(Parent.SignalsReact)
+local Game = require(Parent.DataHydration).Game
+local SduiChip = require(Parent.SduiSharedContent).SduiChip
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
+local CloseCentralOverlayFunction = require(Parent.CentralOverlay).Thunks.CloseCentralOverlay
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local AbuseVectorModule = require(Parent.GenericAbuseReporting.AbuseVector)
+local OpenDynamicAbuseReportModule = require(Parent.GenericAbuseReporting.OpenDynamicAbuseReport)
+local FFlagAddThumbnailSelectorReport = require(Parent.SharedFlags).FFlagAddThumbnailSelectorReport
 
-return reactModule.memo(function(p1)
-	-- upvalues: useDispatch (ref), useAppPolicy (ref), useLocalization (ref), signalsReactModule (ref), game (ref), reactModule (ref), openDynamicAbuseReportModule (ref), abuseVectorModule (ref), fFlagAddThumbnailSelectorReport (ref), closeCentralOverlay (ref), sduiChip (ref), foundationModule (ref)
-	local layoutOrder = p1.layoutOrder
-	local universeId = p1.universeId
-	local var1 = useDispatch()
-	local var2 = useAppPolicy(function(p2)
+return ReactModule.memo(function(p1) --[[ Line: 32 | Named "ExperienceDetailsReportChip" ]]
+	-- upvalues: UseDispatchFunction (copy), UseAppPolicyFunction (copy), UseLocalizationFunction (copy), SignalsReactModule (copy), Game (copy), ReactModule (copy), OpenDynamicAbuseReportModule (copy), AbuseVectorModule (copy), FFlagAddThumbnailSelectorReport (copy), CloseCentralOverlayFunction (copy), SduiChip (copy), FoundationModule (copy)
+	local LayoutOrder = p1.layoutOrder
+	local UniverseId = p1.universeId
+	local UseDispatchResult = UseDispatchFunction()
+	local UseAppPolicyResult = UseAppPolicyFunction(function(p2) --[[ Line: 37 ]]
 		return p2.getGameReportingDisabled()
 	end)
-	local var3 = useLocalization({ report = "Feature.GameDetails.Action.Report" })
-	local var4 = signalsReactModule.useSignalState(game.getGameInfoStore(false).getAndFetchGameInfo(universeId).data)
-	local rootPlaceId = var4 and var4.rootPlaceId
+	local UseLocalizationResult = UseLocalizationFunction({ report = "Feature.GameDetails.Action.Report" })
+	local UseSignalStateResult = SignalsReactModule.useSignalState(Game.getGameInfoStore(false).getAndFetchGameInfo(UniverseId).data)
+	local RootPlaceId = UseSignalStateResult and UseSignalStateResult.rootPlaceId
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 49 ]]
+		-- upvalues: RootPlaceId (copy), UseDispatchResult (copy), OpenDynamicAbuseReportModule (upval), AbuseVectorModule (upval), FFlagAddThumbnailSelectorReport (upval), UniverseId (copy), CloseCentralOverlayFunction (upval)
+		if RootPlaceId then
+			UseDispatchResult(OpenDynamicAbuseReportModule({
+				abuseVector = AbuseVectorModule.Place,
+				targetId = RootPlaceId,
+				custom = if FFlagAddThumbnailSelectorReport then { universeId = UniverseId } else nil,
+				onClose = function() --[[ Line: 61 ]]
+					-- upvalues: UseDispatchResult (upval), CloseCentralOverlayFunction (upval)
+					UseDispatchResult(CloseCentralOverlayFunction())
+				end
+			}))
+			
+			return
+		end
+	end, { UniverseId, RootPlaceId, UseDispatchResult })
 	
-	return if var2 then nil else reactModule.createElement(sduiChip, {
-		text = var3.report,
-		leadingIconName = foundationModule.Enums.IconName.Flag,
-		onActivated = reactModule.useCallback(function()
-			-- upvalues: rootPlaceId (ref), var1 (ref), openDynamicAbuseReportModule (copy), abuseVectorModule (copy), fFlagAddThumbnailSelectorReport (copy), universeId (ref), closeCentralOverlay (copy)
-			if rootPlaceId then
-				var1(openDynamicAbuseReportModule({
-					abuseVector = abuseVectorModule.Place,
-					targetId = rootPlaceId,
-					custom = if fFlagAddThumbnailSelectorReport then { universeId = universeId } else nil,
-					onClose = function()
-						-- upvalues: var1 (copy), closeCentralOverlay (copy)
-						var1(closeCentralOverlay())
-					end
-				}))
-				
-				return
-			end
-		end, { universeId, rootPlaceId, var1 }),
-		layoutOrder = layoutOrder
+	return if UseAppPolicyResult then nil else ReactModule.createElement(SduiChip, {
+		text = UseLocalizationResult.report,
+		leadingIconName = FoundationModule.Enums.IconName.Flag,
+		onActivated = UseResult,
+		layoutOrder = LayoutOrder
 	})
 end)

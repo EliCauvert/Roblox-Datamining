@@ -1,54 +1,66 @@
-﻿local parent = script:FindFirstAncestor("DataHydration").Parent
-local url = require(parent.Http).Url
-local httpClientModule = require(parent.HttpClient)
-local fetch = httpClientModule.fetch
-local asPromise = httpClientModule.asPromise
-local urlBuilder = require(parent.UrlBuilder).UrlBuilder
-local IXPServiceWrapper = require(parent.IxpServiceWrapper).IXPServiceWrapper
-local appUserLayers = require(parent.ExperimentLayers).AppUserLayers
-local gameIconConstantsModule = require(script.Parent.GameIconConstants)
-local sizeString = gameIconConstantsModule.sizeString
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagGetGameIconsFromThumbnailsDeliveryApiIxp = sharedFlagsModule.FFlagGetGameIconsFromThumbnailsDeliveryApiIxp
-local fFlagForceGetGameIconsFromThumbnailsDeliveryApi = sharedFlagsModule.FFlagForceGetGameIconsFromThumbnailsDeliveryApi
-local fIntGameIconSmallSizePx = gameIconConstantsModule.FIntGameIconSmallSizePx
+﻿local Parent = script:FindFirstAncestor("DataHydration").Parent
+local Url = require(Parent.Http).Url
+local HttpClientModule = require(Parent.HttpClient)
+local FetchFunction = HttpClientModule.fetch
+local AsPromiseFunction = HttpClientModule.asPromise
+local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
+local IXPServiceWrapper = require(Parent.IxpServiceWrapper).IXPServiceWrapper
+local AppUserLayers = require(Parent.ExperimentLayers).AppUserLayers
+local GameIconConstantsModule = require(script.Parent.GameIconConstants)
+local SizeStringFunction = GameIconConstantsModule.sizeString
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagGetGameIconsFromThumbnailsDeliveryApiIxp = SharedFlagsModule.FFlagGetGameIconsFromThumbnailsDeliveryApiIxp
+local FFlagForceGetGameIconsFromThumbnailsDeliveryApi = SharedFlagsModule.FFlagForceGetGameIconsFromThumbnailsDeliveryApi
+local FIntGameIconSmallSizePx = GameIconConstantsModule.FIntGameIconSmallSizePx
 
-local function _()
-	-- upvalues: fFlagForceGetGameIconsFromThumbnailsDeliveryApi (ref), url (ref), fFlagGetGameIconsFromThumbnailsDeliveryApiIxp (ref), IXPServiceWrapper (ref), appUserLayers (ref)
-	if fFlagForceGetGameIconsFromThumbnailsDeliveryApi then
-		return url.THUMBNAILSDELIVERY_URL
-	elseif fFlagGetGameIconsFromThumbnailsDeliveryApiIxp then
-		local serveThumbnailsFromEdgeLayerData = IXPServiceWrapper:GetLayerData(appUserLayers.ServeThumbnailsFromEdge)
-		
-		return if serveThumbnailsFromEdgeLayerData and serveThumbnailsFromEdgeLayerData.get_gamesicons_from_edge then url.THUMBNAILSDELIVERY_URL else url.THUMBNAILS_URL
+local function _() --[[ Line: 27 | Named "resolveThumbnailHost" ]]
+	-- upvalues: FFlagForceGetGameIconsFromThumbnailsDeliveryApi (copy), Url (copy), FFlagGetGameIconsFromThumbnailsDeliveryApiIxp (copy), IXPServiceWrapper (copy), AppUserLayers (copy)
+	if FFlagForceGetGameIconsFromThumbnailsDeliveryApi then
+		return Url.THUMBNAILSDELIVERY_URL
 	end
+	if FFlagGetGameIconsFromThumbnailsDeliveryApiIxp then
+		local LayerData = IXPServiceWrapper:GetLayerData(AppUserLayers.ServeThumbnailsFromEdge)
+		
+		if LayerData and LayerData.get_gamesicons_from_edge then
+			return Url.THUMBNAILSDELIVERY_URL
+		end
+	end
+	return Url.THUMBNAILS_URL
 end
 
-return function(p1, p2, p3)
-	-- upvalues: urlBuilder (ref), fFlagForceGetGameIconsFromThumbnailsDeliveryApi (ref), url (ref), fFlagGetGameIconsFromThumbnailsDeliveryApiIxp (ref), IXPServiceWrapper (ref), appUserLayers (ref), sizeString (ref), fIntGameIconSmallSizePx (ref), fetch (ref), asPromise (ref)
-	local var1
-	p3 = p3 or {}
-	local addQueryString = urlBuilder.addQueryString
-	local format = string.format
-	local var2 = "%sv1/games/icons"
-	
-	if fFlagForceGetGameIconsFromThumbnailsDeliveryApi then
-		var1 = url.THUMBNAILSDELIVERY_URL
-	elseif fFlagGetGameIconsFromThumbnailsDeliveryApiIxp then
-		local serveThumbnailsFromEdgeLayerData = IXPServiceWrapper:GetLayerData(appUserLayers.ServeThumbnailsFromEdge)
-		var1 = if serveThumbnailsFromEdgeLayerData and serveThumbnailsFromEdgeLayerData.get_gamesicons_from_edge then url.THUMBNAILSDELIVERY_URL else url.THUMBNAILS_URL
-	end
-	return asPromise(fetch({
+return function(List, p1, p2) --[[ Line: 39 | Named "fetchGameIcons" ]]
+	-- upvalues: UrlBuilder (copy), FFlagForceGetGameIconsFromThumbnailsDeliveryApi (copy), Url (copy), FFlagGetGameIconsFromThumbnailsDeliveryApiIxp (copy), IXPServiceWrapper (copy), AppUserLayers (copy), SizeStringFunction (copy), FIntGameIconSmallSizePx (copy), FetchFunction (copy), AsPromiseFunction (copy)
+	local P1 = p2 or {}
+	local AddQueryStringFunction = UrlBuilder.addQueryString
+	local FormatFunction = string.format
+	local v1 = "%sv1/games/icons"
+	local THUMBNAILSDELIVERYURL = nil
+	repeat
+		if FFlagForceGetGameIconsFromThumbnailsDeliveryApi then
+			THUMBNAILSDELIVERYURL = Url.THUMBNAILSDELIVERY_URL
+			break
+		end
+		if FFlagGetGameIconsFromThumbnailsDeliveryApiIxp then
+			local LayerData = IXPServiceWrapper:GetLayerData(AppUserLayers.ServeThumbnailsFromEdge)
+			
+			if LayerData and LayerData.get_gamesicons_from_edge then
+				THUMBNAILSDELIVERYURL = Url.THUMBNAILSDELIVERY_URL
+				break
+			end
+		end
+		THUMBNAILSDELIVERYURL = Url.THUMBNAILS_URL
+	until true
+	return AsPromiseFunction((FetchFunction({
 		method = "GET",
 		analyticsKey = "games-icons.get",
-		network = p3.network,
-		url = addQueryString(format(var2, var1), {
+		network = P1.network,
+		url = AddQueryStringFunction(FormatFunction(v1, THUMBNAILSDELIVERYURL), {
 			format = "png",
-			universeIds = table.concat(p1, ","),
-			size = p2 or sizeString(fIntGameIconSmallSizePx)
+			universeIds = table.concat(List, ","),
+			size = p1 or SizeStringFunction(FIntGameIconSmallSizePx)
 		}),
-		decode = function(p4)
-			return p4.data or {}
+		decode = function(p3) --[[ Line: 56 ]]
+			return p3.data or {}
 		end
-	}))
+	})))
 end

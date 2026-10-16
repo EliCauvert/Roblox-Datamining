@@ -1,31 +1,31 @@
 ﻿local _ = require(script.Parent.Parent.RegExp)
 
-local function matchAllRegex(p1, p2)
-	-- upvalues: matchAllRegex (ref)
-	local var1 = p2:exec(p1)
+local function matchAllRegex(Text: string, p1) --[[ Line: 6 ]]
+	-- upvalues: matchAllRegex (copy)
+	local ExecResult = p1:exec(Text)
 	
-	if not var1 then
+	if not ExecResult then
 		return {}
 	end
-	local index = var1.index
-	local var2 = var1[1]
-	local t = {}
+	local Index = ExecResult.index
+	local ExecResultEntry = ExecResult[1]
+	local CapturedGroups = {}
 	
-	if #var1 > 1 then
-		for i = 2, #var1 do
-			table.insert(t, var1[i])
+	if #ExecResult > 1 then
+		for i = 2, #ExecResult do
+			table.insert(CapturedGroups, ExecResult[i])
 		end
 	end
-	local byteOffset = utf8.offset(p1, index)
+	local OffsetResult = utf8.offset(Text, Index)
 	
 	return {
 		{
-			index = byteOffset,
-			input = p1,
-			matchedText = var2,
-			capturedGroups = t
+			index = OffsetResult,
+			input = Text,
+			matchedText = ExecResultEntry,
+			capturedGroups = CapturedGroups
 		},
-		unpack(matchAllRegex(p1:sub(byteOffset + #var2), p2))
+		unpack((matchAllRegex(Text:sub(OffsetResult + #ExecResultEntry), p1)))
 	}
 end
 

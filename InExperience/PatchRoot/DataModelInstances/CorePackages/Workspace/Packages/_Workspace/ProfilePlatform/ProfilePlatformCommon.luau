@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.ProfilePlatformCommon.ProfilePlatformCommon)
+﻿return (require(script.Parent.Parent.Parent._Index.ProfilePlatformCommon.ProfilePlatformCommon))

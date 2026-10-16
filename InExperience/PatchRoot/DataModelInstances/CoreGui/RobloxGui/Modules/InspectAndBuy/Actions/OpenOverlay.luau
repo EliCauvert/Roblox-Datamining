@@ -1,3 +1,3 @@
-﻿return require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator(script.Name, function(p1, p2)
-	return { overlay = p1, overlayProps = p2 }
+﻿return require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator(script.Name, function(Overlay, OverlayProps) --[[ Line: 4 ]]
+	return { overlay = Overlay, overlayProps = OverlayProps }
 end)

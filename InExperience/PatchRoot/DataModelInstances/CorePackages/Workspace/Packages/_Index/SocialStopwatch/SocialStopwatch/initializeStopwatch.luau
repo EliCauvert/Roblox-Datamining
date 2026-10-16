@@ -1,138 +1,140 @@
-﻿local socialStopwatch = script:FindFirstAncestor("SocialStopwatch")
-local parent = socialStopwatch.Parent
-local httpService = game:GetService("HttpService")
-local timers = require(parent.SocialLuaAnalytics).Analytics.Timing.Timers
-local _ = require(socialStopwatch.Events)
-local eventModesModule = require(socialStopwatch.EventModes)
-local eventRegisterModule = require(socialStopwatch.EventRegister)
-local loggingProtocolModule = require(parent.LoggingProtocol)
-local stopwatchTelemetryConfigModule = require(socialStopwatch.StopwatchTelemetryConfig)
+﻿local SocialStopwatch = script:FindFirstAncestor("SocialStopwatch")
+local Parent = SocialStopwatch.Parent
+local HttpService = game:GetService("HttpService")
+local TimersFunction = require(Parent.SocialLuaAnalytics).Analytics.Timing.Timers
+local _ = require(SocialStopwatch.Events)
+local EventModesModule = require(SocialStopwatch.EventModes)
+local EventRegisterModule = require(SocialStopwatch.EventRegister)
+local LoggingProtocolModule = require(Parent.LoggingProtocol)
+local StopwatchTelemetryConfigModule = require(SocialStopwatch.StopwatchTelemetryConfig)
 local _ = require(script.Parent.Types)
 
-return function()
-	-- upvalues: timers (ref), loggingProtocolModule (ref), eventRegisterModule (ref), stopwatchTelemetryConfigModule (ref), eventModesModule (ref), httpService (ref)
-	local t = {}
-	local var1 = timers()
-	local default = loggingProtocolModule.default
+return function() --[[ Line: 21 ]]
+	-- upvalues: TimersFunction (copy), LoggingProtocolModule (copy), EventRegisterModule (copy), StopwatchTelemetryConfigModule (copy), EventModesModule (copy), HttpService (copy)
+	local StartResults = {}
+	local TimersResult = TimersFunction()
+	local Default = LoggingProtocolModule.default
 	
-	local _ = function(p1)
-		-- upvalues: eventRegisterModule (copy)
-		local var2 = eventRegisterModule[p1]
+	local function _(Text) --[[ Line: 26 ]]
+		-- upvalues: EventRegisterModule (upval)
+		local EventRegisterModuleEntry = EventRegisterModule[Text]
 		
-		if not var2 then
-			error("Event not registered: " .. p0)
+		if not EventRegisterModuleEntry then
+			error("Event not registered: " .. Text)
 		end
-		return var2
+		return EventRegisterModuleEntry
 	end
 	
-	local _ = function(p1)
-		-- upvalues: eventRegisterModule (copy), t (write), default (ref), stopwatchTelemetryConfigModule (copy), eventModesModule (copy), var1 (ref)
-		return function(p2)
-			-- upvalues: eventRegisterModule (copy), t (copy), default (copy), stopwatchTelemetryConfigModule (copy), p1 (ref), eventModesModule (copy), var1 (copy)
-			local var2 = eventRegisterModule[p2]
+	local _ = function(p1) --[[ Line: 34 ]]
+		-- upvalues: EventRegisterModule (upval), StartResults (ref), Default (copy), StopwatchTelemetryConfigModule (upval), EventModesModule (upval), TimersResult (copy)
+		return function(Key) --[[ Line: 35 ]]
+			-- upvalues: EventRegisterModule (upval), StartResults (upval), Default (upval), StopwatchTelemetryConfigModule (upval), p1 (copy), EventModesModule (upval), TimersResult (upval)
+			local EventRegisterModuleEntry = EventRegisterModule[Key]
 			
-			if not var2 then
-				error("Event not registered: " .. p2)
+			if not EventRegisterModuleEntry then
+				error("Event not registered: " .. Key)
 			end
-			local var3 = t[p2]
+			local StartResult = StartResults[Key]
 			
-			if not var3 then
-				default:logRobloxTelemetryEvent(stopwatchTelemetryConfigModule, { default.StandardizedFields.addOsInfo }, { count = 1, eventName = `FailedOn{p1}{p2}` })
+			if not StartResult then
+				Default:logRobloxTelemetryEvent(StopwatchTelemetryConfigModule, { Default.StandardizedFields.addOsInfo }, { count = 1, eventName = `FailedOn{p1}{Key}` })
 				
-				if var2.mode == eventModesModule.Strict then
-					error(`Cannot {p1} an event that has not been started: {p2}`)
+				if EventRegisterModuleEntry.mode == EventModesModule.Strict then
+					error(`Cannot {p1} an event that has not been started: {Key}`)
 				end
 			end
-			return if var3 and var1.getStartTimestamp(var3) then {
-				startTime = var1.getStartTimestamp(var3),
-				id = var3,
-				timeElapsed = var1.getTime(var3)
+			return if StartResult and TimersResult.getStartTimestamp(StartResult) then {
+				startTime = TimersResult.getStartTimestamp(StartResult),
+				id = StartResult,
+				timeElapsed = TimersResult.getTime(StartResult)
 			} else nil
 		end
 	end
 	
-	local var2 = "Get"
+	local v1 = "Get"
 	
-	local var3 = function(p1)
-		-- upvalues: eventRegisterModule (copy), t (write), default (ref), stopwatchTelemetryConfigModule (copy), var2 (ref), eventModesModule (copy), var1 (ref)
-		local var4 = eventRegisterModule[p1]
+	local function Get(Key) --[[ Line: 35 ]]
+		-- upvalues: EventRegisterModule (upval), StartResults (ref), Default (copy), StopwatchTelemetryConfigModule (upval), v1 (copy), EventModesModule (upval), TimersResult (copy)
+		local EventRegisterModuleEntry = EventRegisterModule[Key]
 		
-		if not var4 then
-			error("Event not registered: " .. p3)
+		if not EventRegisterModuleEntry then
+			error("Event not registered: " .. Key)
 		end
-		local var5 = t[p1]
+		local StartResult = StartResults[Key]
 		
-		if not var5 then
-			default:logRobloxTelemetryEvent(stopwatchTelemetryConfigModule, { default.StandardizedFields.addOsInfo }, { count = 1, eventName = `FailedOn{var2}{p1}` })
+		if not StartResult then
+			Default:logRobloxTelemetryEvent(StopwatchTelemetryConfigModule, { Default.StandardizedFields.addOsInfo }, { count = 1, eventName = `FailedOn{v1}{Key}` })
 			
-			if var4.mode == eventModesModule.Strict then
-				error(`Cannot {var2} an event that has not been started: {p1}`)
+			if EventRegisterModuleEntry.mode == EventModesModule.Strict then
+				error(`Cannot {v1} an event that has not been started: {Key}`)
 			end
 		end
-		return if var5 and var1.getStartTimestamp(var5) then {
-			startTime = var1.getStartTimestamp(var5),
-			id = var5,
-			timeElapsed = var1.getTime(var5)
+		return if StartResult and TimersResult.getStartTimestamp(StartResult) then {
+			startTime = TimersResult.getStartTimestamp(StartResult),
+			id = StartResult,
+			timeElapsed = TimersResult.getTime(StartResult)
 		} else nil
 	end
 	
-	local var4 = "Stop"
+	local v2 = "Stop"
 	
-	local var5 = function(p1)
-		-- upvalues: eventRegisterModule (copy), t (write), default (ref), stopwatchTelemetryConfigModule (copy), var4 (ref), eventModesModule (copy), var1 (ref)
-		local var6 = eventRegisterModule[p1]
+	local function v17(Key) --[[ Line: 35 ]]
+		-- upvalues: EventRegisterModule (upval), StartResults (ref), Default (copy), StopwatchTelemetryConfigModule (upval), v2 (copy), EventModesModule (upval), TimersResult (copy)
+		local EventRegisterModuleEntry = EventRegisterModule[Key]
 		
-		if not var6 then
-			error("Event not registered: " .. p4)
+		if not EventRegisterModuleEntry then
+			error("Event not registered: " .. Key)
 		end
-		local var7 = t[p1]
+		local StartResult = StartResults[Key]
 		
-		if not var7 then
-			default:logRobloxTelemetryEvent(stopwatchTelemetryConfigModule, { default.StandardizedFields.addOsInfo }, { count = 1, eventName = `FailedOn{var4}{p1}` })
+		if not StartResult then
+			Default:logRobloxTelemetryEvent(StopwatchTelemetryConfigModule, { Default.StandardizedFields.addOsInfo }, { count = 1, eventName = `FailedOn{v2}{Key}` })
 			
-			if var6.mode == eventModesModule.Strict then
-				error(`Cannot {var4} an event that has not been started: {p1}`)
+			if EventRegisterModuleEntry.mode == EventModesModule.Strict then
+				error(`Cannot {v2} an event that has not been started: {Key}`)
 			end
 		end
-		return if var7 and var1.getStartTimestamp(var7) then {
-			startTime = var1.getStartTimestamp(var7),
-			id = var7,
-			timeElapsed = var1.getTime(var7)
+		return if StartResult and TimersResult.getStartTimestamp(StartResult) then {
+			startTime = TimersResult.getStartTimestamp(StartResult),
+			id = StartResult,
+			timeElapsed = TimersResult.getTime(StartResult)
 		} else nil
 	end
 	
 	return {
-		start = function(p1, p2)
-			-- upvalues: eventRegisterModule (copy), var1 (ref), httpService (copy), t (write), default (ref), stopwatchTelemetryConfigModule (copy), eventModesModule (copy)
-			local var6 = eventRegisterModule[p1]
+		start = function(Text, p1) --[[ Line: 65 ]]
+			-- upvalues: EventRegisterModule (upval), TimersResult (copy), HttpService (upval), StartResults (ref), Default (copy), StopwatchTelemetryConfigModule (upval), EventModesModule (upval)
+			local EventRegisterModuleEntry = EventRegisterModule[Text]
 			
-			if not var6 then
-				error("Event not registered: " .. p5)
+			if not EventRegisterModuleEntry then
+				error("Event not registered: " .. Text)
 			end
-			local var7 = var1.start(httpService:GenerateGUID(false), p2)
+			local StartResult = TimersResult.start(HttpService:GenerateGUID(false), p1)
 			
-			if t[p1] then
-				default:logRobloxTelemetryEvent(stopwatchTelemetryConfigModule, { default.StandardizedFields.addOsInfo }, { count = 1, eventName = `FailedOnStart{p1}` })
+			if StartResults[Text] then
+				Default:logRobloxTelemetryEvent(StopwatchTelemetryConfigModule, { Default.StandardizedFields.addOsInfo }, { count = 1, eventName = `FailedOnStart{Text}` })
 				
-				if var6.mode == eventModesModule.Strict then
-					error("Cannot start event twice: " .. p5)
+				if EventRegisterModuleEntry.mode == EventModesModule.Strict then
+					error("Cannot start event twice: " .. Text)
 				end
 			end
-			t[p1] = var7
+			StartResults[Text] = StartResult
 			
-			return { startTime = var1.getStartTimestamp(var7), id = var7 }
+			return {
+				startTime = TimersResult.getStartTimestamp(StartResult),
+				id = StartResult
+			}
 		end,
-		get = var3,
-		stop = function(p1)
-			-- upvalues: var5 (ref), t (write)
-			local var6 = var5(p1)
-			t[p1] = nil
+		get = Get,
+		stop = function(Key) --[[ Line: 90 ]]
+			-- upvalues: v17 (copy), StartResults (ref)
+			StartResults[Key] = nil
 			
-			return var6
+			return (v17(Key))
 		end,
-		_unsafeClearEventLog = function()
-			-- upvalues: t (write)
-			t = {}
+		_unsafeClearEventLog = function() --[[ Line: 95 ]]
+			-- upvalues: StartResults (ref)
+			StartResults = {}
 		end
 	}
 end

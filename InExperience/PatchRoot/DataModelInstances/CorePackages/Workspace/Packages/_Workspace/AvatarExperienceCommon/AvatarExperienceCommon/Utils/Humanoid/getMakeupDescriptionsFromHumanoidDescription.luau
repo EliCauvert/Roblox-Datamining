@@ -1,10 +1,10 @@
-﻿return function(p1)
-	local t = {}
+﻿return function(Object) --[[ Line: 5 | Named "getMakeupDescriptionsFromHumanoidDescription" ]]
+	local List = {}
 	
-	for i, v in p1:GetChildren() do
-		if v:IsA("MakeupDescription") then
-			table.insert(t, v)
+	for _, MakeupDescription in Object:GetChildren() do
+		if MakeupDescription:IsA("MakeupDescription") then
+			table.insert(List, MakeupDescription)
 		end
 	end
-	return t
+	return List
 end

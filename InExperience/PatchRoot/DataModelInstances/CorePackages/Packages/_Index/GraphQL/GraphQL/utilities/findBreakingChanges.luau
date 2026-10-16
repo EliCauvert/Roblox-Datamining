@@ -1,47 +1,47 @@
-﻿local parent = script.Parent.Parent
-local luauPolyfillModule = require(parent.Parent.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local object = luauPolyfillModule.Object
-local keyMapOrdered = require(parent.luaUtils.keyMapOrdered).keyMapOrdered
-local jsutils = parent.jsutils
-local inspect = require(jsutils.inspect).inspect
-local invariant = require(jsutils.invariant).invariant
-local naturalCompare = require(jsutils.naturalCompare).naturalCompare
-local language = parent.language
-local print = require(language.printer).print
-local visit = require(language.visitor).visit
-local _ = require(language.ast)
-local type = parent.type
-local _ = require(type.schema)
-local definitionModule = require(type.definition)
-local isSpecifiedScalarType = require(type.scalars).isSpecifiedScalarType
-local isScalarType = definitionModule.isScalarType
-local isObjectType = definitionModule.isObjectType
-local isInterfaceType = definitionModule.isInterfaceType
-local isUnionType = definitionModule.isUnionType
-local isEnumType = definitionModule.isEnumType
-local isInputObjectType = definitionModule.isInputObjectType
-local isNonNullType = definitionModule.isNonNullType
-local isListType = definitionModule.isListType
-local isNamedType = definitionModule.isNamedType
-local isRequiredArgument = definitionModule.isRequiredArgument
-local isRequiredInputField = definitionModule.isRequiredInputField
-local astFromValue = require(script.Parent.astFromValue).astFromValue
-local findSchemaChanges = nil
-local findTypeChanges = nil
-local findDirectiveChanges = nil
-local diff = nil
-local findEnumTypeChanges = nil
-local findUnionTypeChanges = nil
-local findInputObjectTypeChanges = nil
-local findFieldChanges = nil
-local findImplementedInterfacesChanges = nil
-local typeKindName = nil
-local isChangeSafeForInputObjectFieldOrFieldArg = nil
-local findArgChanges = nil
-local isChangeSafeForObjectOrInterfaceField = nil
-local stringifyValue = nil
-local var1 = object.freeze({
+﻿local Parent = script.Parent.Parent
+local LuauPolyfillModule = require(Parent.Parent.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local Object = LuauPolyfillModule.Object
+local KeyMapOrderedFunction = require(Parent.luaUtils.keyMapOrdered).keyMapOrdered
+local Jsutils = Parent.jsutils
+local InspectFunction = require(Jsutils.inspect).inspect
+local InvariantFunction = require(Jsutils.invariant).invariant
+local NaturalCompareFunction = require(Jsutils.naturalCompare).naturalCompare
+local Language = Parent.language
+local PrintFunction = require(Language.printer).print
+local VisitFunction = require(Language.visitor).visit
+local _ = require(Language.ast)
+local Type = Parent.type
+local _ = require(Type.schema)
+local DefinitionModule = require(Type.definition)
+local IsSpecifiedScalarTypeFunction = require(Type.scalars).isSpecifiedScalarType
+local IsScalarTypeFunction = DefinitionModule.isScalarType
+local IsObjectTypeFunction = DefinitionModule.isObjectType
+local IsInterfaceTypeFunction = DefinitionModule.isInterfaceType
+local IsUnionTypeFunction = DefinitionModule.isUnionType
+local IsEnumTypeFunction = DefinitionModule.isEnumType
+local IsInputObjectTypeFunction = DefinitionModule.isInputObjectType
+local IsNonNullTypeFunction = DefinitionModule.isNonNullType
+local IsListTypeFunction = DefinitionModule.isListType
+local IsNamedTypeFunction = DefinitionModule.isNamedType
+local IsRequiredArgumentFunction = DefinitionModule.isRequiredArgument
+local IsRequiredInputFieldFunction = DefinitionModule.isRequiredInputField
+local AstFromValueFunction = require(script.Parent.astFromValue).astFromValue
+local Callback = nil
+local Callback1 = nil
+local Callback2 = nil
+local Callback3 = nil
+local Callback4 = nil
+local Callback5 = nil
+local Callback6 = nil
+local Callback7 = nil
+local Callback8 = nil
+local Callback9 = nil
+local Callback10 = nil
+local Callback11 = nil
+local Callback12 = nil
+local Callback13 = nil
+local FreezeResult = Object.freeze({
 	TYPE_REMOVED = "TYPE_REMOVED",
 	TYPE_CHANGED_KIND = "TYPE_CHANGED_KIND",
 	TYPE_REMOVED_FROM_UNION = "TYPE_REMOVED_FROM_UNION",
@@ -59,7 +59,7 @@ local var1 = object.freeze({
 	DIRECTIVE_REPEATABLE_REMOVED = "DIRECTIVE_REPEATABLE_REMOVED",
 	DIRECTIVE_LOCATION_REMOVED = "DIRECTIVE_LOCATION_REMOVED"
 })
-local var2 = object.freeze({
+local FreezeResult1 = Object.freeze({
 	VALUE_ADDED_TO_ENUM = "VALUE_ADDED_TO_ENUM",
 	TYPE_ADDED_TO_UNION = "TYPE_ADDED_TO_UNION",
 	OPTIONAL_INPUT_FIELD_ADDED = "OPTIONAL_INPUT_FIELD_ADDED",
@@ -68,384 +68,385 @@ local var2 = object.freeze({
 	ARG_DEFAULT_VALUE_CHANGE = "ARG_DEFAULT_VALUE_CHANGE"
 })
 
-local function findBreakingChanges(p1, p2)
-	-- upvalues: array (ref), findSchemaChanges (write), var1 (ref)
-	return array.filter(findSchemaChanges(p1, p2), function(p3)
-		-- upvalues: var1 (copy)
-		return var1[p3.type] ~= nil
-	end)
+local function findBreakingChanges(p1, p2) --[[ Line: 122 ]]
+	-- upvalues: Array (copy), Callback (ref), FreezeResult (copy)
+	return (Array.filter(Callback(p1, p2), function(p3): boolean --[[ Line: 126 ]]
+		-- upvalues: FreezeResult (upval)
+		return FreezeResult[p3.type] ~= nil
+	end))
 end
 
-local function findDangerousChanges(p1, p2)
-	-- upvalues: array (ref), findSchemaChanges (write), var2 (ref)
-	return array.filter(findSchemaChanges(p1, p2), function(p3)
-		-- upvalues: var2 (copy)
-		return var2[p3.type] ~= nil
-	end)
+local function findDangerousChanges(p1, p2) --[[ Line: 136 ]]
+	-- upvalues: Array (copy), Callback (ref), FreezeResult1 (copy)
+	return (Array.filter(Callback(p1, p2), function(p3): boolean --[[ Line: 140 ]]
+		-- upvalues: FreezeResult1 (upval)
+		return FreezeResult1[p3.type] ~= nil
+	end))
 end
 
-findSchemaChanges = function(p1, p2)
-	-- upvalues: array (ref), findTypeChanges (write), findDirectiveChanges (write)
-	return array.concat(findTypeChanges(p1, p2), findDirectiveChanges(p1, p2))
+Callback = function(p1, p2) --[[ Line: 146 | Named "findSchemaChanges" ]]
+	-- upvalues: Array (copy), Callback1 (ref), Callback2 (ref)
+	return Array.concat(Callback1(p1, p2), Callback2(p1, p2))
 end
 
-findDirectiveChanges = function(p1, p2)
-	-- upvalues: diff (write), var1 (ref), isRequiredArgument (ref)
-	local t = {}
-	local var3 = diff(p1:getDirectives(), p2:getDirectives())
+Callback2 = function(p1, p2) --[[ Line: 156 | Named "findDirectiveChanges" ]]
+	-- upvalues: Callback3 (ref), FreezeResult (copy), IsRequiredArgumentFunction (copy)
+	local List = {}
+	local CallbackResult = Callback3(p1:getDirectives(), p2:getDirectives())
 	
-	for i, v in ipairs(var3.removed) do
-		table.insert(t, {
-			type = var1.DIRECTIVE_REMOVED,
-			description = ("%s was removed."):format(v.name)
+	for _, value in ipairs(CallbackResult.removed) do
+		table.insert(List, {
+			type = FreezeResult.DIRECTIVE_REMOVED,
+			description = ("%s was removed."):format(value.name)
 		})
 	end
-	for i, v_1 in ipairs(var3.persisted) do
-		local var4 = v_1[1]
-		local var5 = v_1[2]
-		local var6 = diff(var4.args, var5.args)
+	for _, value1 in ipairs(CallbackResult.persisted) do
+		local v1 = value1[1]
+		local v2 = value1[2]
+		local CallbackResult1 = Callback3(v1.args, v2.args)
 		
-		for i_2, v_2 in ipairs(var6.added) do
-			if isRequiredArgument(v_2) then
-				table.insert(t, {
-					type = var1.REQUIRED_DIRECTIVE_ARG_ADDED,
-					description = ("A required arg %s on directive %s was added."):format(v_2.name, var4.name)
+		for _, value2 in ipairs(CallbackResult1.added) do
+			if IsRequiredArgumentFunction(value2) then
+				table.insert(List, {
+					type = FreezeResult.REQUIRED_DIRECTIVE_ARG_ADDED,
+					description = ("A required arg %s on directive %s was added."):format(value2.name, v1.name)
 				})
 			end
 		end
-		for i_2, v_2 in ipairs(var6.removed) do
-			table.insert(t, {
-				type = var1.DIRECTIVE_ARG_REMOVED,
-				description = ("%s was removed from %s."):format(v_2.name, var4.name)
+		for _, value3 in ipairs(CallbackResult1.removed) do
+			table.insert(List, {
+				type = FreezeResult.DIRECTIVE_ARG_REMOVED,
+				description = ("%s was removed from %s."):format(value3.name, v1.name)
 			})
 		end
-		if var4.isRepeatable and not var5.isRepeatable then
-			table.insert(t, {
-				type = var1.DIRECTIVE_REPEATABLE_REMOVED,
-				description = ("Repeatable flag was removed from %s."):format(var4.name)
+		if v1.isRepeatable and not v2.isRepeatable then
+			table.insert(List, {
+				type = FreezeResult.DIRECTIVE_REPEATABLE_REMOVED,
+				description = ("Repeatable flag was removed from %s."):format(v1.name)
 			})
 		end
-		for i_2, v_2 in ipairs(var4.locations) do
-			if table.find(var5.locations, v_2) == nil then
-				table.insert(t, {
-					type = var1.DIRECTIVE_LOCATION_REMOVED,
-					description = ("%s was removed from %s."):format(v_2, var4.name)
+		for _, location in ipairs(v1.locations) do
+			if table.find(v2.locations, location) == nil then
+				table.insert(List, {
+					type = FreezeResult.DIRECTIVE_LOCATION_REMOVED,
+					description = ("%s was removed from %s."):format(location, v1.name)
 				})
 			end
 		end
 	end
-	return t
+	return List
 end
 
-findTypeChanges = function(p3, p4)
-	-- upvalues: diff (write), var1 (ref), isSpecifiedScalarType (ref), isEnumType (ref), findEnumTypeChanges (write), isUnionType (ref), findUnionTypeChanges (write), isInputObjectType (ref), findInputObjectTypeChanges (write), isObjectType (ref), array (ref), findFieldChanges (write), findImplementedInterfacesChanges (write), isInterfaceType (ref), typeKindName (write)
-	local t = {}
-	local var7 = diff(p3:getTypeMap():values(), p4:getTypeMap():values())
+Callback1 = function(p3, p4) --[[ Line: 215 | Named "findTypeChanges" ]]
+	-- upvalues: Callback3 (ref), FreezeResult (copy), IsSpecifiedScalarTypeFunction (copy), IsEnumTypeFunction (copy), Callback4 (ref), IsUnionTypeFunction (copy), Callback5 (ref), IsInputObjectTypeFunction (copy), Callback6 (ref), IsObjectTypeFunction (copy), Array (copy), Callback7 (ref), Callback8 (ref), IsInterfaceTypeFunction (copy), Callback9 (ref)
+	local List = {}
+	local CallbackResult = Callback3(p3:getTypeMap():values(), p4:getTypeMap():values())
 	
-	for i, v in ipairs(var7.removed) do
-		table.insert(t, {
-			type = var1.TYPE_REMOVED,
-			description = isSpecifiedScalarType(v) and ("Standard scalar %s was removed because it is not referenced anymore."):format(v.name) or ("%s was removed."):format(v.name)
+	for _, value in ipairs(CallbackResult.removed) do
+		table.insert(List, {
+			type = FreezeResult.TYPE_REMOVED,
+			description = IsSpecifiedScalarTypeFunction(value) and ("Standard scalar %s was removed because it is not referenced anymore."):format(value.name) or ("%s was removed."):format(value.name)
 		})
 	end
-	for i, v_1 in ipairs(var7.persisted) do
-		local var8 = v_1[1]
-		local var9 = v_1[2]
+	for _, value1 in ipairs(CallbackResult.persisted) do
+		local v3 = value1[1]
+		local v4 = value1[2]
 		
-		if isEnumType(var8) and isEnumType(var9) then
-			for i_2, v_2 in ipairs(findEnumTypeChanges(var8, var9)) do
-				table.insert(t, v_2)
+		if IsEnumTypeFunction(v3) and IsEnumTypeFunction(v4) then
+			for _, value2 in ipairs(Callback4(v3, v4)) do
+				table.insert(List, value2)
 			end
-		end
-		if isUnionType(var8) and isUnionType(var9) then
-			for i_2, v_2 in ipairs(findUnionTypeChanges(var8, var9)) do
-				table.insert(t, v_2)
+		elseif IsUnionTypeFunction(v3) and IsUnionTypeFunction(v4) then
+			for _, value3 in ipairs(Callback5(v3, v4)) do
+				table.insert(List, value3)
 			end
-		end
-		if isInputObjectType(var8) and isInputObjectType(var9) then
-			for i_2, v_2 in ipairs(findInputObjectTypeChanges(var8, var9)) do
-				table.insert(t, v_2)
+		else
+			if IsInputObjectTypeFunction(v3) and IsInputObjectTypeFunction(v4) then
+				for _, value4 in ipairs(Callback6(v3, v4)) do
+					table.insert(List, value4)
+				end
+			elseif IsObjectTypeFunction(v3) and IsObjectTypeFunction(v4) then
+				for _, value5 in ipairs(Array.concat(Callback7(v3, v4), Callback8(v3, v4))) do
+					table.insert(List, value5)
+				end
+			elseif IsInterfaceTypeFunction(v3) and IsInterfaceTypeFunction(v4) then
+				for _, value6 in ipairs(Array.concat(Callback7(v3, v4), Callback8(v3, v4))) do
+					table.insert(List, value6)
+				end
+			elseif v3.new ~= v4.new then
+				table.insert(List, {
+					type = FreezeResult.TYPE_CHANGED_KIND,
+					description = ("%s changed from %s to %s."):format(v3.name, Callback9(v3), Callback9(v4))
+				})
 			end
-		elseif isObjectType(var8) and isObjectType(var9) then
-			for i_2, v_2 in ipairs(array.concat(findFieldChanges(var8, var9), findImplementedInterfacesChanges(var8, var9))) do
-				table.insert(t, v_2)
-			end
-		elseif isInterfaceType(var8) and isInterfaceType(var9) then
-			for i_2, v_2 in ipairs(array.concat(findFieldChanges(var8, var9), findImplementedInterfacesChanges(var8, var9))) do
-				table.insert(t, v_2)
-			end
-		elseif var8.new ~= var9.new then
-			table.insert(t, {
-				type = var1.TYPE_CHANGED_KIND,
-				description = ("%s changed from %s to %s."):format(var8.name, typeKindName(var8), typeKindName(var9))
-			})
 		end
 	end
-	return t
+	return List
 end
 
-findInputObjectTypeChanges = function(p5, p6)
-	-- upvalues: diff (write), isRequiredInputField (ref), var1 (ref), var2 (ref), isChangeSafeForInputObjectFieldOrFieldArg (write)
-	local t = {}
-	local var10 = diff(p5:getFields():values(), p6:getFields():values())
+Callback6 = function(p5, p6) --[[ Line: 284 | Named "findInputObjectTypeChanges" ]]
+	-- upvalues: Callback3 (ref), IsRequiredInputFieldFunction (copy), FreezeResult (copy), FreezeResult1 (copy), Callback10 (ref)
+	local List = {}
+	local CallbackResult = Callback3(p5:getFields():values(), p6:getFields():values())
 	
-	for i, v in ipairs(var10.added) do
-		if isRequiredInputField(v) then
-			table.insert(t, {
-				type = var1.REQUIRED_INPUT_FIELD_ADDED,
-				description = ("A required field %s on input type %s was added."):format(v.name, p5.name)
+	for _, value in ipairs(CallbackResult.added) do
+		if IsRequiredInputFieldFunction(value) then
+			table.insert(List, {
+				type = FreezeResult.REQUIRED_INPUT_FIELD_ADDED,
+				description = ("A required field %s on input type %s was added."):format(value.name, p5.name)
 			})
 		else
-			table.insert(t, {
-				type = var2.OPTIONAL_INPUT_FIELD_ADDED,
-				description = ("An optional field %s on input type %s was added."):format(v.name, p5.name)
+			table.insert(List, {
+				type = FreezeResult1.OPTIONAL_INPUT_FIELD_ADDED,
+				description = ("An optional field %s on input type %s was added."):format(value.name, p5.name)
 			})
 		end
 	end
-	for i, v_1 in ipairs(var10.removed) do
-		table.insert(t, {
-			type = var1.FIELD_REMOVED,
-			description = ("%s.%s was removed."):format(p5.name, v_1.name)
+	for _, value1 in ipairs(CallbackResult.removed) do
+		table.insert(List, {
+			type = FreezeResult.FIELD_REMOVED,
+			description = ("%s.%s was removed."):format(p5.name, value1.name)
 		})
 	end
-	for i, v_2 in ipairs(var10.persisted) do
-		local var11 = v_2[1]
-		local var12 = v_2[2]
+	for _, value2 in ipairs(CallbackResult.persisted) do
+		local v5 = value2[1]
+		local v6 = value2[2]
 		
-		if not isChangeSafeForInputObjectFieldOrFieldArg(var11.type, var12.type) then
-			table.insert(t, {
-				type = var1.FIELD_CHANGED_KIND,
-				description = ("%s.%s changed type from %s to %s."):format(p5.name, var11.name, tostring(var11.type), tostring(var12.type))
+		if not Callback10(v5.type, v6.type) then
+			table.insert(List, {
+				type = FreezeResult.FIELD_CHANGED_KIND,
+				description = ("%s.%s changed type from %s to %s."):format(p5.name, v5.name, tostring(v5.type), (tostring(v6.type)))
 			})
 		end
 	end
-	return t
+	return List
 end
 
-findUnionTypeChanges = function(p7, p8)
-	-- upvalues: diff (write), var2 (ref), var1 (ref)
-	local t = {}
-	local var13 = diff(p7:getTypes(), p8:getTypes())
+Callback5 = function(p7, p8) --[[ Line: 339 | Named "findUnionTypeChanges" ]]
+	-- upvalues: Callback3 (ref), FreezeResult1 (copy), FreezeResult (copy)
+	local List = {}
+	local CallbackResult = Callback3(p7:getTypes(), p8:getTypes())
 	
-	for i, v in ipairs(var13.added) do
-		table.insert(t, {
-			type = var2.TYPE_ADDED_TO_UNION,
-			description = ("%s was added to union type %s."):format(v.name, p7.name)
+	for _, value in ipairs(CallbackResult.added) do
+		table.insert(List, {
+			type = FreezeResult1.TYPE_ADDED_TO_UNION,
+			description = ("%s was added to union type %s."):format(value.name, p7.name)
 		})
 	end
-	for i, v_1 in ipairs(var13.removed) do
-		table.insert(t, {
-			type = var1.TYPE_REMOVED_FROM_UNION,
-			description = ("%s was removed from union type %s."):format(v_1.name, p7.name)
+	for _, value1 in ipairs(CallbackResult.removed) do
+		table.insert(List, {
+			type = FreezeResult.TYPE_REMOVED_FROM_UNION,
+			description = ("%s was removed from union type %s."):format(value1.name, p7.name)
 		})
 	end
-	return t
+	return List
 end
 
-findEnumTypeChanges = function(p9, p10)
-	-- upvalues: diff (write), var2 (ref), var1 (ref)
-	local t = {}
-	local var14 = diff(p9:getValues(), p10:getValues())
+Callback4 = function(p9, p10) --[[ Line: 368 | Named "findEnumTypeChanges" ]]
+	-- upvalues: Callback3 (ref), FreezeResult1 (copy), FreezeResult (copy)
+	local List = {}
+	local CallbackResult = Callback3(p9:getValues(), p10:getValues())
 	
-	for i, v in ipairs(var14.added) do
-		table.insert(t, {
-			type = var2.VALUE_ADDED_TO_ENUM,
-			description = ("%s was added to enum type %s."):format(v.name, p9.name)
+	for _, value in ipairs(CallbackResult.added) do
+		table.insert(List, {
+			type = FreezeResult1.VALUE_ADDED_TO_ENUM,
+			description = ("%s was added to enum type %s."):format(value.name, p9.name)
 		})
 	end
-	for i, v_1 in ipairs(var14.removed) do
-		table.insert(t, {
-			type = var1.VALUE_REMOVED_FROM_ENUM,
-			description = ("%s was removed from enum type %s."):format(v_1.name, p9.name)
+	for _, value1 in ipairs(CallbackResult.removed) do
+		table.insert(List, {
+			type = FreezeResult.VALUE_REMOVED_FROM_ENUM,
+			description = ("%s was removed from enum type %s."):format(value1.name, p9.name)
 		})
 	end
-	return t
+	return List
 end
 
-findImplementedInterfacesChanges = function(p11, p12)
-	-- upvalues: diff (write), var2 (ref), var1 (ref)
-	local t = {}
-	local var15 = diff(p11:getInterfaces(), p12:getInterfaces())
+Callback8 = function(p11, p12) --[[ Line: 390 | Named "findImplementedInterfacesChanges" ]]
+	-- upvalues: Callback3 (ref), FreezeResult1 (copy), FreezeResult (copy)
+	local List = {}
+	local CallbackResult = Callback3(p11:getInterfaces(), p12:getInterfaces())
 	
-	for i, v in ipairs(var15.added) do
-		table.insert(t, {
-			type = var2.IMPLEMENTED_INTERFACE_ADDED,
-			description = ("%s added to interfaces implemented by %s."):format(v.name, p11.name)
+	for _, value in ipairs(CallbackResult.added) do
+		table.insert(List, {
+			type = FreezeResult1.IMPLEMENTED_INTERFACE_ADDED,
+			description = ("%s added to interfaces implemented by %s."):format(value.name, p11.name)
 		})
 	end
-	for i, v_1 in ipairs(var15.removed) do
-		table.insert(t, {
-			type = var1.IMPLEMENTED_INTERFACE_REMOVED,
-			description = ("%s no longer implements interface %s."):format(p11.name, v_1.name)
+	for _, value1 in ipairs(CallbackResult.removed) do
+		table.insert(List, {
+			type = FreezeResult.IMPLEMENTED_INTERFACE_REMOVED,
+			description = ("%s no longer implements interface %s."):format(p11.name, value1.name)
 		})
 	end
-	return t
+	return List
 end
 
-findFieldChanges = function(p13, p14)
-	-- upvalues: diff (write), var1 (ref), findArgChanges (write), isChangeSafeForObjectOrInterfaceField (write)
-	local t = {}
-	local var16 = diff(p13:getFields():values(), p14:getFields():values())
+Callback7 = function(p13, p14) --[[ Line: 420 | Named "findFieldChanges" ]]
+	-- upvalues: Callback3 (ref), FreezeResult (copy), Callback11 (ref), Callback12 (ref)
+	local List = {}
+	local CallbackResult = Callback3(p13:getFields():values(), p14:getFields():values())
 	
-	for i, v in ipairs(var16.removed) do
-		table.insert(t, {
-			type = var1.FIELD_REMOVED,
-			description = ("%s.%s was removed."):format(p13.name, v.name)
+	for _, value in ipairs(CallbackResult.removed) do
+		table.insert(List, {
+			type = FreezeResult.FIELD_REMOVED,
+			description = ("%s.%s was removed."):format(p13.name, value.name)
 		})
 	end
-	for i, v_1 in ipairs(var16.persisted) do
-		local var17 = v_1[1]
-		local var18 = v_1[2]
+	for _, value1 in ipairs(CallbackResult.persisted) do
+		local v7 = value1[1]
+		local v8 = value1[2]
 		
-		for i_2, v_2 in ipairs(findArgChanges(p13, var17, var18)) do
-			table.insert(t, v_2)
+		for _, value2 in ipairs(Callback11(p13, v7, v8)) do
+			table.insert(List, value2)
 		end
-		if not isChangeSafeForObjectOrInterfaceField(var17.type, var18.type) then
-			table.insert(t, {
-				type = var1.FIELD_CHANGED_KIND,
-				description = ("%s.%s changed type from "):format(p13.name, var17.name) .. ("%s to %s."):format(tostring(var17.type), tostring(var18.type))
+		if not Callback12(v7.type, v8.type) then
+			table.insert(List, {
+				type = FreezeResult.FIELD_CHANGED_KIND,
+				description = ("%s.%s changed type from "):format(p13.name, v7.name) .. ("%s to %s."):format(tostring(v7.type), (tostring(v8.type)))
 			})
 		end
 	end
-	return t
+	return List
 end
 
-findArgChanges = function(p15, p16, p17)
-	-- upvalues: diff (write), var1 (ref), isChangeSafeForInputObjectFieldOrFieldArg (write), var2 (ref), stringifyValue (write), isRequiredArgument (ref)
-	local t = {}
-	local var19 = diff(p16.args, p17.args)
+Callback11 = function(p15, p16, p17) --[[ Line: 461 | Named "findArgChanges" ]]
+	-- upvalues: Callback3 (ref), FreezeResult (copy), Callback10 (ref), FreezeResult1 (copy), Callback13 (ref), IsRequiredArgumentFunction (copy)
+	local List = {}
+	local CallbackResult = Callback3(p16.args, p17.args)
 	
-	for i, v in ipairs(var19.removed) do
-		table.insert(t, {
-			type = var1.ARG_REMOVED,
-			description = ("%s.%s arg %s was removed."):format(p15.name, p16.name, v.name)
+	for _, value in ipairs(CallbackResult.removed) do
+		table.insert(List, {
+			type = FreezeResult.ARG_REMOVED,
+			description = ("%s.%s arg %s was removed."):format(p15.name, p16.name, value.name)
 		})
 	end
-	for i, v_1 in ipairs(var19.persisted) do
-		local var20 = v_1[1]
-		local var21 = v_1[2]
+	for _, value1 in ipairs(CallbackResult.persisted) do
+		local v9 = value1[1]
+		local v10 = value1[2]
 		
-		if not isChangeSafeForInputObjectFieldOrFieldArg(var20.type, var21.type) then
-			table.insert(t, {
-				type = var1.ARG_CHANGED_KIND,
-				description = ("%s.%s arg %s has changed type from "):format(p15.name, p16.name, var20.name) .. ("%s to %s."):format(tostring(var20.type), tostring(var21.type))
+		if not Callback10(v9.type, v10.type) then
+			table.insert(List, {
+				type = FreezeResult.ARG_CHANGED_KIND,
+				description = ("%s.%s arg %s has changed type from "):format(p15.name, p16.name, v9.name) .. ("%s to %s."):format(tostring(v9.type), (tostring(v10.type)))
 			})
-		elseif var20.defaultValue ~= nil then
-			if var21.defaultValue == nil then
-				table.insert(t, {
-					type = var2.ARG_DEFAULT_VALUE_CHANGE,
-					description = ("%s.%s arg %s defaultValue was removed."):format(p15.name, p16.name, var20.name)
+		elseif v9.defaultValue ~= nil then
+			if v10.defaultValue == nil then
+				table.insert(List, {
+					type = FreezeResult1.ARG_DEFAULT_VALUE_CHANGE,
+					description = ("%s.%s arg %s defaultValue was removed."):format(p15.name, p16.name, v9.name)
 				})
 			else
-				local var22 = stringifyValue(var20.defaultValue, var20.type)
-				local var23 = stringifyValue(var21.defaultValue, var21.type)
+				local CallbackResult1 = Callback13(v9.defaultValue, v9.type)
+				local CallbackResult2 = Callback13(v10.defaultValue, v10.type)
 				
-				if var22 ~= var23 then
-					table.insert(t, {
-						type = var2.ARG_DEFAULT_VALUE_CHANGE,
-						description = ("%s.%s arg %s has changed defaultValue from %s to %s."):format(p15.name, p16.name, var20.name, var22, var23)
+				if CallbackResult1 ~= CallbackResult2 then
+					table.insert(List, {
+						type = FreezeResult1.ARG_DEFAULT_VALUE_CHANGE,
+						description = ("%s.%s arg %s has changed defaultValue from %s to %s."):format(p15.name, p16.name, v9.name, CallbackResult1, CallbackResult2)
 					})
 				end
 			end
 		end
 	end
-	for i, v_2 in ipairs(var19.added) do
-		if isRequiredArgument(v_2) then
-			table.insert(t, {
-				type = var1.REQUIRED_ARG_ADDED,
-				description = ("A required arg %s on %s.%s was added."):format(v_2.name, p15.name, p16.name)
+	for _, value2 in ipairs(CallbackResult.added) do
+		if IsRequiredArgumentFunction(value2) then
+			table.insert(List, {
+				type = FreezeResult.REQUIRED_ARG_ADDED,
+				description = ("A required arg %s on %s.%s was added."):format(value2.name, p15.name, p16.name)
 			})
 		else
-			table.insert(t, {
-				type = var2.OPTIONAL_ARG_ADDED,
-				description = ("An optional arg %s on %s.%s was added."):format(v_2.name, p15.name, p16.name)
+			table.insert(List, {
+				type = FreezeResult1.OPTIONAL_ARG_ADDED,
+				description = ("An optional arg %s on %s.%s was added."):format(value2.name, p15.name, p16.name)
 			})
 		end
 	end
-	return t
+	return List
 end
 
-isChangeSafeForObjectOrInterfaceField = function(p18, p19)
-	-- upvalues: isListType (ref), isChangeSafeForObjectOrInterfaceField (write), isNonNullType (ref), isNamedType (ref)
-	return if isListType(p18) then isListType(p19) and isChangeSafeForObjectOrInterfaceField(p18.ofType, p19.ofType) or isNonNullType(p19) and isChangeSafeForObjectOrInterfaceField(p18, p19.ofType) elseif isNonNullType(p18) then isNonNullType(p19) and isChangeSafeForObjectOrInterfaceField(p18.ofType, p19.ofType) elseif isNamedType(p19) then true else isNonNullType(p19) and isChangeSafeForObjectOrInterfaceField(p18, p19.ofType)
+Callback12 = function(OfType, OfType1) --[[ Line: 550 | Named "isChangeSafeForObjectOrInterfaceField" ]]
+	-- upvalues: IsListTypeFunction (copy), Callback12 (ref), IsNonNullTypeFunction (copy), IsNamedTypeFunction (copy)
+	return if IsListTypeFunction(OfType) then IsListTypeFunction(OfType1) and Callback12(OfType.ofType, OfType1.ofType) or IsNonNullTypeFunction(OfType1) and Callback12(OfType, OfType1.ofType) elseif IsNonNullTypeFunction(OfType) then IsNonNullTypeFunction(OfType1) and Callback12(OfType.ofType, OfType1.ofType) else IsNamedTypeFunction(OfType1) and OfType.name == OfType1.name or IsNonNullTypeFunction(OfType1) and Callback12(OfType, OfType1.ofType)
 end
 
-isChangeSafeForInputObjectFieldOrFieldArg = function(p18, p19)
-	-- upvalues: isListType (ref), isChangeSafeForInputObjectFieldOrFieldArg (write), isNonNullType (ref), isNamedType (ref)
-	return if isListType(p18) then isListType(p19) and isChangeSafeForInputObjectFieldOrFieldArg(p18.ofType, p19.ofType) elseif isNonNullType(p18) then isNonNullType(p19) and isChangeSafeForInputObjectFieldOrFieldArg(p18.ofType, p19.ofType) or not isNonNullType(p19) and isChangeSafeForInputObjectFieldOrFieldArg(p18.ofType, p19) else isNamedType(p19) and p18.name == p19.name
+Callback10 = function(OfType, OfType1) --[[ Line: 572 | Named "isChangeSafeForInputObjectFieldOrFieldArg" ]]
+	-- upvalues: IsListTypeFunction (copy), Callback10 (ref), IsNonNullTypeFunction (copy), IsNamedTypeFunction (copy)
+	return if IsListTypeFunction(OfType) then IsListTypeFunction(OfType1) and Callback10(OfType.ofType, OfType1.ofType) elseif IsNonNullTypeFunction(OfType) then IsNonNullTypeFunction(OfType1) and Callback10(OfType.ofType, OfType1.ofType) or not IsNonNullTypeFunction(OfType1) and Callback10(OfType.ofType, OfType1) else IsNamedTypeFunction(OfType1) and OfType.name == OfType1.name
 end
 
-typeKindName = function(p18)
-	-- upvalues: isScalarType (ref), isObjectType (ref), isInterfaceType (ref), isUnionType (ref), isEnumType (ref), isInputObjectType (ref), invariant (ref), inspect (ref)
-	if isScalarType(p18) then
+Callback9 = function(p18): string --[[ Line: 593 | Named "typeKindName" ]]
+	-- upvalues: IsScalarTypeFunction (copy), IsObjectTypeFunction (copy), IsInterfaceTypeFunction (copy), IsUnionTypeFunction (copy), IsEnumTypeFunction (copy), IsInputObjectTypeFunction (copy), InvariantFunction (copy), InspectFunction (copy)
+	if IsScalarTypeFunction(p18) then
 		return "a Scalar type"
-	elseif isObjectType(p18) then
+	elseif IsObjectTypeFunction(p18) then
 		return "an Object type"
-	elseif isInterfaceType(p18) then
+	elseif IsInterfaceTypeFunction(p18) then
 		return "an Interface type"
-	elseif isUnionType(p18) then
+	elseif IsUnionTypeFunction(p18) then
 		return "a Union type"
-	elseif isEnumType(p18) then
+	elseif IsEnumTypeFunction(p18) then
 		return "an Enum type"
-	elseif isInputObjectType(p18) then
+	elseif IsInputObjectTypeFunction(p18) then
 		return "an Input type"
+	else
+		InvariantFunction(false, "Unexpected type: " .. InspectFunction(p18))
+		
+		return ""
 	end
-	invariant(false, "Unexpected type: " .. inspect(p18))
-	
-	return ""
 end
 
-stringifyValue = function(p18, p19)
-	-- upvalues: astFromValue (ref), invariant (ref), visit (ref), array (ref), naturalCompare (ref), object (ref), print (ref)
-	local var24 = astFromValue(p18, p19)
-	invariant(var24 ~= nil)
+Callback13 = function(DefaultValue, Type) --[[ Line: 620 | Named "stringifyValue" ]]
+	-- upvalues: AstFromValueFunction (copy), InvariantFunction (copy), VisitFunction (copy), Array (copy), NaturalCompareFunction (copy), Object (copy), PrintFunction (copy)
+	local AstFromValueResult = AstFromValueFunction(DefaultValue, Type)
+	InvariantFunction(AstFromValueResult ~= nil)
 	
-	return print(visit(var24, {
-		ObjectValue = function(_, p20)
-			-- upvalues: array (copy), naturalCompare (copy), object (copy)
-			local var25 = array.concat({}, p20.fields)
-			array.sort(var25, function(p21, p22)
-				-- upvalues: naturalCompare (copy)
-				return naturalCompare(p21.name.value, p22.name.value)
+	return PrintFunction((VisitFunction(AstFromValueResult, {
+		ObjectValue = function(_, p18) --[[ Line: 628 ]]
+			-- upvalues: Array (upval), NaturalCompareFunction (upval), Object (upval)
+			local ConcatResult = Array.concat({}, p18.fields)
+			Array.sort(ConcatResult, function(p19, p20) --[[ Line: 632 ]]
+				-- upvalues: NaturalCompareFunction (upval)
+				return NaturalCompareFunction(p19.name.value, p20.name.value)
 			end)
 			
-			return object.assign({}, p20, { fields = var25 })
+			return Object.assign({}, p18, { fields = ConcatResult })
 		end
-	}))
+	})))
 end
 
-diff = function(p18, p19)
-	-- upvalues: keyMapOrdered (ref)
-	local t = {}
-	local t_1 = {}
-	local t_2 = {}
-	local var24 = keyMapOrdered(p18, function(p20)
-		return p20.name
+Callback3 = function(ValuesResult, ValuesResult1) --[[ Line: 645 | Named "diff" ]]
+	-- upvalues: KeyMapOrderedFunction (copy)
+	local Added = {}
+	local Removed = {}
+	local Persisted = {}
+	local KeyMapOrderedResult = KeyMapOrderedFunction(ValuesResult, function(p18) --[[ Line: 656 ]]
+		return p18.name
 	end)
-	local var25 = keyMapOrdered(p19, function(p20)
-		return p20.name
+	local KeyMapOrderedResult1 = KeyMapOrderedFunction(ValuesResult1, function(p18) --[[ Line: 659 ]]
+		return p18.name
 	end)
 	
-	for i, v in ipairs(p18) do
-		local name = var25:get(v.name)
+	for _, value in ipairs(ValuesResult) do
+		local GetResult = KeyMapOrderedResult1:get(value.name)
 		
-		if name == nil then
-			table.insert(t_1, v)
+		if GetResult == nil then
+			table.insert(Removed, value)
 		else
-			table.insert(t_2, { v, name })
+			table.insert(Persisted, { value, GetResult })
 		end
 	end
-	for i, v_1 in ipairs(p19) do
-		if var24:get(v_1.name) == nil then
-			table.insert(t, v_1)
+	for _, value1 in ipairs(ValuesResult1) do
+		if KeyMapOrderedResult:get(value1.name) == nil then
+			table.insert(Added, value1)
 		end
 	end
-	return { added = t, persisted = t_2, removed = t_1 }
+	return { added = Added, persisted = Persisted, removed = Removed }
 end
 
 return {
-	BreakingChangeType = var1,
-	DangerousChangeType = var2,
+	BreakingChangeType = FreezeResult,
+	DangerousChangeType = FreezeResult1,
 	findBreakingChanges = findBreakingChanges,
 	findDangerousChanges = findDangerousChanges
 }

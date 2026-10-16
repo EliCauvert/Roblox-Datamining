@@ -1,6 +1,6 @@
-﻿local createUserSettingsStoreModule = require(script.Parent.createUserSettingsStore)
+﻿local CreateUserSettingsStoreModule = require(script.Parent.createUserSettingsStore)
 
-return require(script:FindFirstAncestor("DataHydration").Parent.Signals).createComputed(function()
-	-- upvalues: createUserSettingsStoreModule (ref)
-	return createUserSettingsStoreModule()
+return require(script:FindFirstAncestor("DataHydration").Parent.Signals).createComputed(function() --[[ Line: 8 ]]
+	-- upvalues: CreateUserSettingsStoreModule (copy)
+	return CreateUserSettingsStoreModule()
 end)

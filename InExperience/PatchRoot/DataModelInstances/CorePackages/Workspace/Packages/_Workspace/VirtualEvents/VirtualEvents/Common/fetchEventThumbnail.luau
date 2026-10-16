@@ -1,14 +1,14 @@
-﻿local urlBuilder = require(script:FindFirstAncestor("VirtualEvents").Parent.UrlBuilder).UrlBuilder
+﻿local UrlBuilder = require(script:FindFirstAncestor("VirtualEvents").Parent.UrlBuilder).UrlBuilder
 
-return function(p1, p2, p3)
-	-- upvalues: urlBuilder (ref)
-	return p1(urlBuilder.fromString("apis:virtual-events/v1/virtual-events/{id}")({ id = p2 }), "GET"):andThen(function(p4)
-		-- upvalues: p3 (ref)
-		local mediaId = p4.responseBody and (p4.responseBody.thumbnails and (p4.responseBody.thumbnails[1] and (p4.responseBody.thumbnails[1].mediaId or nil)))
+return function(Callback, Id, p1) --[[ Line: 5 ]]
+	-- upvalues: UrlBuilder (copy)
+	return Callback(UrlBuilder.fromString("apis:virtual-events/v1/virtual-events/{id}")({ id = Id }), "GET"):andThen(function(Result) --[[ Line: 8 ]]
+		-- upvalues: p1 (copy)
+		local MediaId = Result.responseBody and Result.responseBody.thumbnails and Result.responseBody.thumbnails[1] and Result.responseBody.thumbnails[1].mediaId or nil
 		
-		return if mediaId then "rbxassetid://" .. mediaId else p3
-	end, function()
-		-- upvalues: p3 (ref)
-		return p3
+		return if MediaId then "rbxassetid://" .. MediaId else p1
+	end, function() --[[ Line: 20 ]]
+		-- upvalues: p1 (copy)
+		return p1
 	end)
 end

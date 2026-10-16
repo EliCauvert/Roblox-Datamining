@@ -1,1 +1,1 @@
-﻿return require(script.CommunityVerificationModal)
+﻿return (require(script.CommunityVerificationModal))

@@ -1,100 +1,103 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local _ = require(buildExperience.Chat.chatTypes)
-local icon = foundationModule.Icon
-local iconButton = foundationModule.IconButton
-local progress = foundationModule.Progress
-local view = foundationModule.View
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local iconName = foundationModule.Enums.IconName
-local iconSize = foundationModule.Enums.IconSize
-local inputSize = foundationModule.Enums.InputSize
-local progressShape = foundationModule.Enums.ProgressShape
-local progressSize = foundationModule.Enums.ProgressSize
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local _ = require(BuildExperience.Chat.chatTypes)
+local Icon = FoundationModule.Icon
+local IconButton = FoundationModule.IconButton
+local Progress = FoundationModule.Progress
+local View = FoundationModule.View
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local IconName = FoundationModule.Enums.IconName
+local IconSize = FoundationModule.Enums.IconSize
+local InputSize = FoundationModule.Enums.InputSize
+local ProgressShape = FoundationModule.Enums.ProgressShape
+local ProgressSize = FoundationModule.Enums.ProgressSize
 
-return reactModule.memo(function(p1)
-	-- upvalues: foundationModule (ref), reactModule (ref), progress (ref), progressShape (ref), progressSize (ref), icon (ref), iconName (ref), iconSize (ref), iconButton (ref), inputSize (ref), buttonVariant (ref), view (ref)
-	local var1 = foundationModule.Hooks.useTokens()
-	local t = {}
-	local testId = p1.testId or "ChatImagePreviewList"
+return ReactModule.memo(function(Frame) --[[ Line: 32 | Named "ChatImagePreviewList" ]]
+	-- upvalues: FoundationModule (copy), ReactModule (copy), Progress (copy), ProgressShape (copy), ProgressSize (copy), Icon (copy), IconName (copy), IconSize (copy), IconButton (copy), InputSize (copy), ButtonVariant (copy), View (copy)
+	local UseTokensResult = FoundationModule.Hooks.useTokens()
+	local ImageLabels = {}
+	local TestId = Frame.testId or "ChatImagePreviewList"
 	
-	for i, v in p1.images do
-		local isFailed = v.uploadStatus == "failed"
-		t[`Image-{i}`] = reactModule.createElement("ImageLabel", {
+	for LayoutOrder, image in Frame.images do
+		local IsUploading = image.uploadStatus == "uploading"
+		local IsFailed = image.uploadStatus == "failed"
+		ImageLabels[`Image-{LayoutOrder}`] = ReactModule.createElement("ImageLabel", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			ClipsDescendants = true,
-			Image = if typeof(v.capture) == "Object" then "" else v.uri or "",
-			ImageContent = if typeof(v.capture) == "Object" then Content.fromObject(v.capture) else nil,
-			LayoutOrder = i,
+			Image = if typeof(image.capture) == "Object" then "" else image.uri or "",
+			ImageContent = if typeof(image.capture) == "Object" then Content.fromObject(image.capture) else nil,
+			LayoutOrder = LayoutOrder,
 			ScaleType = Enum.ScaleType.Crop,
-			Size = UDim2.fromOffset(var1.Size.Size_2400, var1.Size.Size_2400),
-			[reactModule.Tag] = `data-testid={testId}.Image.{i}`
+			Size = UDim2.fromOffset(UseTokensResult.Size.Size_2400, UseTokensResult.Size.Size_2400),
+			[ReactModule.Tag] = `data-testid={TestId}.Image.{LayoutOrder}`
 		}, {
-			Corner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, var1.Size.Size_200) }),
-			FailedStroke = if isFailed then reactModule.createElement("UIStroke", {
+			Corner = ReactModule.createElement("UICorner", {
+				CornerRadius = UDim.new(0, UseTokensResult.Size.Size_200)
+			}),
+			FailedStroke = if IsFailed then ReactModule.createElement("UIStroke", {
 				ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
-				Color = var1.Color.System.Alert.Color3,
-				Thickness = var1.Stroke.Thick
+				Color = UseTokensResult.Color.System.Alert.Color3,
+				Thickness = UseTokensResult.Stroke.Thick
 			}) else nil,
-			Progress = if v.uploadStatus == "uploading" then reactModule.createElement(progress, {
+			Progress = if IsUploading then ReactModule.createElement(Progress, {
 				ZIndex = 2,
 				AnchorPoint = Vector2.new(0.5, 0.5),
 				Position = UDim2.fromScale(0.5, 0.5),
-				shape = progressShape.Circle,
-				size = progressSize.Medium,
-				testId = `{testId}.Progress.{i}`
+				shape = ProgressShape.Circle,
+				size = ProgressSize.Medium,
+				testId = `{TestId}.Progress.{LayoutOrder}`
 			}) else nil,
-			Error = if isFailed then reactModule.createElement(icon, {
+			Error = if IsFailed then ReactModule.createElement(Icon, {
 				tag = "auto-xy",
 				ZIndex = 2,
 				AnchorPoint = Vector2.new(0.5, 0.5),
-				name = iconName.TriangleExclamation,
+				name = IconName.TriangleExclamation,
 				Position = UDim2.fromScale(0.5, 0.5),
-				size = iconSize.Medium,
-				style = var1.Color.System.Alert,
-				testId = `{testId}.Error.{i}`
+				size = IconSize.Medium,
+				style = UseTokensResult.Color.System.Alert,
+				testId = `{TestId}.Error.{LayoutOrder}`
 			}) else nil,
-			Retry = if isFailed and p1.onRetry ~= nil then reactModule.createElement(iconButton, {
+			Retry = if IsFailed and Frame.onRetry ~= nil then ReactModule.createElement(IconButton, {
 				isCircular = true,
 				ZIndex = 3,
-				icon = iconName.ArrowSpinClockwise,
-				onActivated = function()
-					-- upvalues: p1 (ref), i (ref)
-					p1.onRetry(i)
+				icon = IconName.ArrowSpinClockwise,
+				onActivated = function() --[[ Line: 88 ]]
+					-- upvalues: Frame (copy), LayoutOrder (copy)
+					Frame.onRetry(LayoutOrder)
 				end,
 				Position = UDim2.new(0, 4, 1, -4),
 				AnchorPoint = Vector2.new(0, 1),
-				size = inputSize.Small,
-				variant = buttonVariant.OverMedia,
-				testId = `{testId}.Retry.{i}`
+				size = InputSize.Small,
+				variant = ButtonVariant.OverMedia,
+				testId = `{TestId}.Retry.{LayoutOrder}`
 			}) else nil,
-			Remove = if p1.onRemove ~= nil then nil else reactModule.createElement(iconButton, {
+			Remove = if Frame.onRemove == nil then nil else ReactModule.createElement(IconButton, {
 				isCircular = true,
 				ZIndex = 2,
 				AnchorPoint = Vector2.new(1, 0),
-				icon = iconName.X,
-				onActivated = function()
-					-- upvalues: p1 (ref), i (ref)
-					p1.onRemove(i)
+				icon = IconName.X,
+				onActivated = function() --[[ Line: 104 ]]
+					-- upvalues: Frame (copy), LayoutOrder (copy)
+					Frame.onRemove(LayoutOrder)
 				end,
 				Position = UDim2.new(1, -4, 0, 4),
-				size = inputSize.Small,
-				variant = buttonVariant.OverMedia,
-				testId = `{testId}.Remove.{i}`
+				size = InputSize.Small,
+				variant = ButtonVariant.OverMedia,
+				testId = `{TestId}.Remove.{LayoutOrder}`
 			})
 		})
 	end
-	return reactModule.createElement(view, {
-		LayoutOrder = p1.LayoutOrder,
+	return ReactModule.createElement(View, {
+		LayoutOrder = Frame.LayoutOrder,
 		tag = {
 			["row wrap gap-small size-full-0 auto-y"] = true,
-			["align-x-right"] = p1.alignRight == true
+			["align-x-right"] = Frame.alignRight == true
 		},
-		testId = testId
+		testId = TestId
 	}, {
-		Images = reactModule.createElement(reactModule.Fragment, nil, t)
+		Images = ReactModule.createElement(ReactModule.Fragment, nil, ImageLabels)
 	})
 end)

@@ -1,62 +1,62 @@
-﻿local avatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
-local parent = avatarExperienceInspectAndBuy.Parent
-local _ = require(parent.AXCommon)
-local _ = require(parent.Foundation)
-local priceStatusModule = require(avatarExperienceInspectAndBuy.Enums.PriceStatus)
-local getPriceStatusModule = require(avatarExperienceInspectAndBuy.Utils.getPriceStatus)
-local _ = require(avatarExperienceInspectAndBuy.Types)
-local fFlagAXIaBDiscountPriceLine = require(parent.AvatarExperienceFlags).FFlagAXIaBDiscountPriceLine
-local fFlagSocialEnableProfileInspectAndBuy = require(parent.SharedFlags).FFlagSocialEnableProfileInspectAndBuy or require(parent.AvatarExperienceFlags).FFlagAXIaBEnableShopContext
-local var1 = if fFlagSocialEnableProfileInspectAndBuy then require(avatarExperienceInspectAndBuy.Utils.getPriceStatusInShop) else nil
+﻿local AvatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
+local Parent = AvatarExperienceInspectAndBuy.Parent
+local _ = require(Parent.AXCommon)
+local _ = require(Parent.Foundation)
+local PriceStatusModule = require(AvatarExperienceInspectAndBuy.Enums.PriceStatus)
+local GetPriceStatusModule = require(AvatarExperienceInspectAndBuy.Utils.getPriceStatus)
+local _ = require(AvatarExperienceInspectAndBuy.Types)
+local FFlagAXIaBDiscountPriceLine = require(Parent.AvatarExperienceFlags).FFlagAXIaBDiscountPriceLine
+local FFlagAXIaBEnableShopContext = require(Parent.AvatarExperienceFlags).FFlagAXIaBEnableShopContext
+local FFlagSocialEnableProfileInspectAndBuy = require(Parent.SharedFlags).FFlagSocialEnableProfileInspectAndBuy or FFlagAXIaBEnableShopContext
+local GetPriceStatusInShopModule = if FFlagSocialEnableProfileInspectAndBuy then require(AvatarExperienceInspectAndBuy.Utils.getPriceStatusInShop) else nil
 
-return function(p1, p2, p3, p4)
-	-- upvalues: fFlagSocialEnableProfileInspectAndBuy (ref), var1 (ref), getPriceStatusModule (ref), fFlagAXIaBDiscountPriceLine (ref), priceStatusModule (ref)
-	local var2
+return function(p1, p2, p3, p4) --[[ Line: 35 | Named "getPriceLineContent" ]]
+	-- upvalues: FFlagSocialEnableProfileInspectAndBuy (copy), GetPriceStatusInShopModule (copy), GetPriceStatusModule (copy), FFlagAXIaBDiscountPriceLine (copy), PriceStatusModule (copy)
 	local t = {}
-	local _ = nil
+	local PriceStatusModule1 = nil
 	
-	if fFlagSocialEnableProfileInspectAndBuy and p4 and p4.isShopContext then
+	if FFlagSocialEnableProfileInspectAndBuy and p4 and p4.isShopContext then
 		assert(not p4.disableResaleWhenStockIsAvailable, "disableResaleWhenStockIsAvailable is not applicable when isShopContext is true")
-		var2 = var1(p1)
+		PriceStatusModule1 = GetPriceStatusInShopModule(p1)
 	else
-		var2 = getPriceStatusModule(p1, true)
+		PriceStatusModule1 = GetPriceStatusModule(p1, true)
 	end
-	local var3 = nil
+	local v1 = nil
 	
-	if fFlagAXIaBDiscountPriceLine and p1.discountInformation then
-		local discountInformation = p1.discountInformation
+	if FFlagAXIaBDiscountPriceLine and p1.discountInformation then
+		local DiscountInformation = p1.discountInformation
 		
-		if discountInformation.totalDiscountAmount and discountInformation.totalDiscountAmount > 0 then
-			var3 = discountInformation
+		if DiscountInformation.totalDiscountAmount and DiscountInformation.totalDiscountAmount > 0 then
+			v1 = DiscountInformation
 		end
 	end
-	local t_1 = {
-		[priceStatusModule.Owned] = { { type = "text", text = p3[priceStatusModule.Owned] } },
-		[priceStatusModule.Free] = { { type = "text", text = p3[priceStatusModule.Free] } },
-		[priceStatusModule.QuantityLimitReached] = {
+	local config = {
+		[PriceStatusModule.Owned] = { { type = "text", text = p3[PriceStatusModule.Owned] } },
+		[PriceStatusModule.Free] = { { type = "text", text = p3[PriceStatusModule.Free] } },
+		[PriceStatusModule.QuantityLimitReached] = {
 			{
 				type = "text",
 				colorStyle = p2.Color.System.Warning,
-				text = p3[priceStatusModule.QuantityLimitReached]
+				text = p3[PriceStatusModule.QuantityLimitReached]
 			}
 		},
-		[priceStatusModule.InExperienceOnly] = {
+		[PriceStatusModule.InExperienceOnly] = {
 			{
 				type = "text",
-				text = p3[priceStatusModule.InExperienceOnly],
+				text = p3[PriceStatusModule.InExperienceOnly],
 				colorStyle = p2.Color.System.Warning
 			}
 		},
-		[priceStatusModule.PurchaseFromRoblox] = if var3 then {
+		[PriceStatusModule.PurchaseFromRoblox] = if v1 then {
 			{
 				type = "price",
 				strikethrough = true,
 				isOriginalPrice = true,
-				price = var3.originalPrice
+				price = v1.originalPrice
 			},
 			{ type = "price", price = p1.priceInRobux }
 		} else { { type = "price", price = p1.priceInRobux } },
-		[priceStatusModule.PurchaseFromResale] = if p1.isOffSale then {
+		[PriceStatusModule.PurchaseFromResale] = if p1.isOffSale then {
 			{
 				type = "price",
 				price = if p1.collectibleItemDetails then p1.collectibleItemDetails.lowestResalePrice else 0
@@ -73,31 +73,31 @@ return function(p1, p2, p3, p4)
 				colorStyle = p2.Color.System.Warning
 			}
 		},
-		[priceStatusModule.SoldOut] = {
+		[PriceStatusModule.SoldOut] = {
 			{
 				type = "text",
-				text = p3[priceStatusModule.SoldOut],
+				text = p3[PriceStatusModule.SoldOut],
 				colorStyle = p2.Color.System.Warning
 			}
 		},
-		[priceStatusModule.OffSale] = {
+		[PriceStatusModule.OffSale] = {
 			{
 				type = "text",
-				text = p3[priceStatusModule.OffSale],
+				text = p3[PriceStatusModule.OffSale],
 				colorStyle = p2.Color.System.Warning
 			}
 		},
-		[priceStatusModule.Unavailable] = {
+		[PriceStatusModule.Unavailable] = {
 			{
 				type = "text",
-				text = p3[priceStatusModule.Unavailable],
+				text = p3[PriceStatusModule.Unavailable],
 				colorStyle = p2.Color.System.Warning
 			}
 		}
 	}
 	
-	if t_1[var2] then
-		t = t_1[var2]
+	if config[PriceStatusModule1] then
+		t = config[PriceStatusModule1]
 	end
 	return t
 end

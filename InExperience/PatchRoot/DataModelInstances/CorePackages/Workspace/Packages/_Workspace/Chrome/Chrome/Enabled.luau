@@ -1,14 +1,14 @@
-﻿local parent = script:FindFirstAncestor("Chrome").Parent
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagEnableConsoleExpControls = sharedFlagsModule.FFlagEnableConsoleExpControls
-local fFlagExperienceMenuGamepadExposureEnabled = sharedFlagsModule.FFlagExperienceMenuGamepadExposureEnabled
+﻿local Parent = script:FindFirstAncestor("Chrome").Parent
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagEnableConsoleExpControls = SharedFlagsModule.FFlagEnableConsoleExpControls
+local FFlagExperienceMenuGamepadExposureEnabled = SharedFlagsModule.FFlagExperienceMenuGamepadExposureEnabled
 game:DefineFastFlag("EnableInGameMenuChrome", false)
-local debugEnableChromeOnUnsupportedDevices = game:DefineFastFlag("DebugEnableChromeOnUnsupportedDevices", false)
+local DebugEnableChromeOnUnsupportedDevices = game:DefineFastFlag("DebugEnableChromeOnUnsupportedDevices", false)
 local VRService = game:GetService("VRService")
-local var1 = require(parent.AppCommonLib).isTenFootInterface()
-local isInExperienceUIVREnabled = require(parent.SharedExperimentDefinition).isInExperienceUIVREnabled
+local IsTenFootInterface = require(Parent.AppCommonLib).isTenFootInterface()
+local IsInExperienceUIVREnabled = require(Parent.SharedExperimentDefinition).isInExperienceUIVREnabled
 
-return function()
-	-- upvalues: debugEnableChromeOnUnsupportedDevices (ref), VRService (ref), isInExperienceUIVREnabled (ref), fFlagExperienceMenuGamepadExposureEnabled (ref), var1 (ref), fFlagEnableConsoleExpControls (ref)
-	return if debugEnableChromeOnUnsupportedDevices then true elseif VRService.VREnabled then isInExperienceUIVREnabled elseif fFlagExperienceMenuGamepadExposureEnabled then true elseif var1 and not fFlagEnableConsoleExpControls then false else game:GetFastFlag("EnableInGameMenuChrome")
+return function() --[[ Line: 16 ]]
+	-- upvalues: DebugEnableChromeOnUnsupportedDevices (copy), VRService (copy), IsInExperienceUIVREnabled (copy), FFlagExperienceMenuGamepadExposureEnabled (copy), IsTenFootInterface (copy), FFlagEnableConsoleExpControls (copy)
+	return if DebugEnableChromeOnUnsupportedDevices then true elseif VRService.VREnabled then if IsInExperienceUIVREnabled then true else false elseif FFlagExperienceMenuGamepadExposureEnabled then true else (not IsTenFootInterface or FFlagEnableConsoleExpControls) and game:GetFastFlag("EnableInGameMenuChrome")
 end

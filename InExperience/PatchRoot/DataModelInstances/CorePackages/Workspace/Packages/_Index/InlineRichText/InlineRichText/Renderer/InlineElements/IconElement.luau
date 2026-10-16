@@ -1,17 +1,16 @@
-﻿local parent = script:FindFirstAncestor("InlineRichText").Parent
-local cryoModule = require(parent.Cryo)
-local renderableInlineElement = require(parent.InlineLayout).Components.InlineLayoutElements.RenderableInlineElement
-local icon = require(parent.Foundation).Icon
-local t = {}
+﻿local Parent = script:FindFirstAncestor("InlineRichText").Parent
+local CryoModule = require(Parent.Cryo)
+local RenderableInlineElement = require(Parent.InlineLayout).Components.InlineLayoutElements.RenderableInlineElement
+local Icon = require(Parent.Foundation).Icon
 
-local function mapProps(p1)
-	-- upvalues: cryoModule (ref)
-	return cryoModule.Dictionary.omit(p1, "id", "Size")
+local function mapProps(p1) --[[ Line: 13 ]]
+	-- upvalues: CryoModule (copy)
+	return CryoModule.Dictionary.omit(p1, "id", "Size")
 end
 
-function t.new(p1)
-	-- upvalues: renderableInlineElement (ref), icon (ref), cryoModule (ref), mapProps (ref)
-	return renderableInlineElement.new(icon, cryoModule.Dictionary.join(p1, { Size = UDim2.fromOffset(p1.size, p1.size) }), mapProps)
-end
-
-return t
+return {
+	new = function(Icon1) --[[ Line: 25 ]]
+		-- upvalues: RenderableInlineElement (copy), Icon (copy), CryoModule (copy), mapProps (copy)
+		return RenderableInlineElement.new(Icon, CryoModule.Dictionary.join(Icon1, { Size = UDim2.fromOffset(Icon1.size, Icon1.size) }), mapProps)
+	end
+}

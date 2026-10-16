@@ -1,25 +1,25 @@
-﻿local inlineRichText = script:FindFirstAncestor("InlineRichText")
-local _ = require(inlineRichText.Types)
-local nodeTypeModule = require(inlineRichText.Enums.NodeType)
+﻿local InlineRichText = script:FindFirstAncestor("InlineRichText")
+local _ = require(InlineRichText.Types)
+local NodeTypeModule = require(InlineRichText.Enums.NodeType)
 
 return {
 	TagConfigurations = {
-		b = { NodeType = nodeTypeModule.EngineTag },
-		i = { NodeType = nodeTypeModule.EngineTag },
-		u = { NodeType = nodeTypeModule.EngineTag },
-		s = { NodeType = nodeTypeModule.EngineTag },
-		font = { NodeType = nodeTypeModule.EngineTag },
-		stroke = { NodeType = nodeTypeModule.EngineTag },
-		uc = { NodeType = nodeTypeModule.EngineTag },
-		sc = { NodeType = nodeTypeModule.EngineTag },
-		mark = { NodeType = nodeTypeModule.EngineTag },
+		b = { NodeType = NodeTypeModule.EngineTag },
+		i = { NodeType = NodeTypeModule.EngineTag },
+		u = { NodeType = NodeTypeModule.EngineTag },
+		s = { NodeType = NodeTypeModule.EngineTag },
+		font = { NodeType = NodeTypeModule.EngineTag },
+		stroke = { NodeType = NodeTypeModule.EngineTag },
+		uc = { NodeType = NodeTypeModule.EngineTag },
+		sc = { NodeType = NodeTypeModule.EngineTag },
+		mark = { NodeType = NodeTypeModule.EngineTag },
 		a = {
 			OverrideName = "LINK",
-			NodeType = nodeTypeModule.InlineCustom
+			NodeType = NodeTypeModule.InlineCustom
 		},
 		icon = {
 			OverrideName = "ICON",
-			NodeType = nodeTypeModule.InlineCustom
+			NodeType = NodeTypeModule.InlineCustom
 		}
 	},
 	TagAliases = {

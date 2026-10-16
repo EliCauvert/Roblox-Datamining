@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.ServiceContractsProto.ServiceContractsProto)
+﻿return (require(script.Parent.Parent.Parent._Index.ServiceContractsProto.ServiceContractsProto))

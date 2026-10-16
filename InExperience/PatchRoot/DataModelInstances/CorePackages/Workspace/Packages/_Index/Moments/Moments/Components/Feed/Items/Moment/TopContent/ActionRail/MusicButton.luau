@@ -1,63 +1,65 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
-local foundationModule = require(parent.Foundation)
-local momentsCommonModule = require(parent.MomentsCommon)
-local _ = require(parent.MomentsTypes)
-local reactModule = require(parent.React)
-local view = foundationModule.View
-local musicThumbnailIcon = momentsCommonModule.Components.MusicThumbnailIcon
-local musicThumbnailIconSize = momentsCommonModule.Enums.MusicThumbnailIconSize
-local useMusicInfoModule = require(moments.Hooks.useMusicInfo)
-local musicModalModule = require(moments.Components.MusicModal)
-local fFlagMomentsActionRailSpacingModule = require(moments.Flags.FFlagMomentsActionRailSpacing)
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
+local MomentsCommonModule = require(Parent.MomentsCommon)
+local _ = require(Parent.MomentsTypes)
+local ReactModule = require(Parent.React)
+local View = require(Parent.Foundation).View
+local MusicThumbnailIcon = MomentsCommonModule.Components.MusicThumbnailIcon
+local MusicThumbnailIconSize = MomentsCommonModule.Enums.MusicThumbnailIconSize
+local UseMusicInfoModule = require(Moments.Hooks.useMusicInfo)
+local MusicModalModule = require(Moments.Components.MusicModal)
+local FFlagMomentsActionRailSpacingModule = require(Moments.Flags.FFlagMomentsActionRailSpacing)
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), useMusicInfoModule (ref), view (ref), fFlagMomentsActionRailSpacingModule (ref), musicThumbnailIcon (ref), musicThumbnailIconSize (ref), musicModalModule (ref)
-	local moment = p1.moment
-	local var1, var2 = reactModule.useState(false)
-	local var3 = useMusicInfoModule(reactModule.useMemo(function()
-		-- upvalues: moment (ref)
-		if moment == nil then
+return ReactModule.memo(function(Frame) --[[ Line: 27 | Named "MusicButton" ]]
+	-- upvalues: ReactModule (copy), UseMusicInfoModule (copy), View (copy), FFlagMomentsActionRailSpacingModule (copy), MusicThumbnailIcon (copy), MusicThumbnailIconSize (copy), MusicModalModule (copy)
+	local Moment = Frame.moment
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseMusicInfoModuleResult = UseMusicInfoModule((ReactModule.useMemo(function() --[[ Line: 31 ]]
+		-- upvalues: Moment (copy)
+		if Moment == nil then
 			return nil
 		end
-		local edits = moment.metadata.edits
+		local Edits = Moment.metadata.edits
 		
-		if edits == nil then
+		if Edits == nil then
 			return nil
+		else
+			local Music = Edits.music
+			
+			return if Music == nil then nil else Music.assetId
 		end
-		local music = edits.music
-		
-		return if music == nil then nil else music.assetId
-	end, { moment }))
+	end, { Moment })))
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 48 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(true)
+	end, {})
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 52 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(false)
+	end, {})
 	
-	return if var3 == nil then nil else reactModule.createElement(reactModule.Fragment, nil, {
-		Button = reactModule.createElement("CanvasGroup", {
+	return if UseMusicInfoModuleResult == nil then nil else ReactModule.createElement(ReactModule.Fragment, nil, {
+		Button = ReactModule.createElement("CanvasGroup", {
 			BackgroundTransparency = 1,
-			GroupTransparency = p1.animationRatio,
-			LayoutOrder = p1.LayoutOrder,
+			GroupTransparency = Frame.animationRatio,
+			LayoutOrder = Frame.LayoutOrder,
 			Size = UDim2.fromOffset(0, 0),
 			AutomaticSize = Enum.AutomaticSize.XY
 		}, {
-			Inner = reactModule.createElement(view, {
-				isDisabled = p1.isDisabled,
-				onActivated = reactModule.useCallback(function()
-					-- upvalues: var2 (ref)
-					var2(true)
-				end, {}),
-				tag = if fFlagMomentsActionRailSpacingModule then "align-x-center align-y-center size-1000-1000 radius-medium" else "align-x-center align-y-center size-1200-1200 radius-medium"
+			Inner = ReactModule.createElement(View, {
+				isDisabled = Frame.isDisabled,
+				onActivated = UseResult,
+				tag = if FFlagMomentsActionRailSpacingModule then "align-x-center align-y-center size-1000-1000 radius-medium" else "align-x-center align-y-center size-1200-1200 radius-medium"
 			}, {
-				MusicThumbnail = reactModule.createElement(musicThumbnailIcon, {
-					assetId = var3.AssetId,
-					size = musicThumbnailIconSize.Small
+				MusicThumbnail = ReactModule.createElement(MusicThumbnailIcon, {
+					assetId = UseMusicInfoModuleResult.AssetId,
+					size = MusicThumbnailIconSize.Small
 				})
 			})
 		}),
-		Modal = if var1 then reactModule.createElement(musicModalModule, {
-			musicInfo = var3,
-			onClose = reactModule.useCallback(function()
-				-- upvalues: var2 (ref)
-				var2(false)
-			end, {})
+		Modal = if UseStateResult then ReactModule.createElement(MusicModalModule, {
+			musicInfo = UseMusicInfoModuleResult,
+			onClose = UseResult1
 		}) else nil
 	})
 end)

@@ -1,51 +1,52 @@
-﻿local purchasePrompt = script:FindFirstAncestor("PurchasePrompt")
-local parent = purchasePrompt.Parent
-local httpService = game:GetService("HttpService")
-local _ = require(purchasePrompt.Promise)
-local purchaseErrorModule = require(purchasePrompt.Enums.PurchaseError)
-local setPurchaseFlowUUIDModule = require(purchasePrompt.Actions.SetPurchaseFlowUUID)
-local requestSubscriptionPurchaseModule = require(purchasePrompt.Actions.RequestSubscriptionPurchase)
-local errorOccurredModule = require(purchasePrompt.Actions.ErrorOccurred)
-local _ = require(purchasePrompt.Network.getPremiumUpsellPrecheck)
-local getSubscriptionPurchaseInfoModule = require(purchasePrompt.Network.getSubscriptionPurchaseInfo)
-local networkModule = require(purchasePrompt.Services.Network)
-local externalSettingsModule = require(purchasePrompt.Services.ExternalSettings)
-local resolveSubscriptionPromptStateModule = require(purchasePrompt.Thunks.resolveSubscriptionPromptState)
-local hasPendingRequestModule = require(purchasePrompt.Utils.hasPendingRequest)
-local _ = require(parent.AppCommonLib).Logging
-local thunkModule = require(purchasePrompt.Thunk)
-local loggingProtocolModule = require(parent.LoggingProtocol)
-local fFlagEnablePurchaseFlowUUIDMigrationModule = require(purchasePrompt.Flags.FFlagEnablePurchaseFlowUUIDMigration)
-local purchaseFlowUUIDTelemetryModule = require(purchasePrompt.Events.PurchaseFlowUUIDTelemetry)
-local list = { networkModule, externalSettingsModule }
+﻿local PurchasePrompt = script:FindFirstAncestor("PurchasePrompt")
+local Parent = PurchasePrompt.Parent
+local HttpService = game:GetService("HttpService")
+local _ = require(PurchasePrompt.Promise)
+local PurchaseErrorModule = require(PurchasePrompt.Enums.PurchaseError)
+local SetPurchaseFlowUUIDModule = require(PurchasePrompt.Actions.SetPurchaseFlowUUID)
+local RequestSubscriptionPurchaseModule = require(PurchasePrompt.Actions.RequestSubscriptionPurchase)
+local ErrorOccurredModule = require(PurchasePrompt.Actions.ErrorOccurred)
+local _ = require(PurchasePrompt.Network.getPremiumUpsellPrecheck)
+local GetSubscriptionPurchaseInfoModule = require(PurchasePrompt.Network.getSubscriptionPurchaseInfo)
+local NetworkModule = require(PurchasePrompt.Services.Network)
+local ExternalSettingsModule = require(PurchasePrompt.Services.ExternalSettings)
+local ResolveSubscriptionPromptStateModule = require(PurchasePrompt.Thunks.resolveSubscriptionPromptState)
+local HasPendingRequestModule = require(PurchasePrompt.Utils.hasPendingRequest)
+local _ = require(Parent.AppCommonLib).Logging
+local ThunkModule = require(PurchasePrompt.Thunk)
+local LoggingProtocolModule = require(Parent.LoggingProtocol)
+local FFlagEnablePurchaseFlowUUIDMigrationModule = require(PurchasePrompt.Flags.FFlagEnablePurchaseFlowUUIDMigration)
+local PurchaseFlowUUIDTelemetryModule = require(PurchasePrompt.Events.PurchaseFlowUUIDTelemetry)
+local list = { NetworkModule, ExternalSettingsModule }
 
-return function(p1)
-	-- upvalues: thunkModule (ref), list (ref), networkModule (ref), externalSettingsModule (ref), fFlagEnablePurchaseFlowUUIDMigrationModule (ref), httpService (ref), setPurchaseFlowUUIDModule (ref), loggingProtocolModule (ref), purchaseFlowUUIDTelemetryModule (ref), hasPendingRequestModule (ref), requestSubscriptionPurchaseModule (ref), errorOccurredModule (ref), purchaseErrorModule (ref), getSubscriptionPurchaseInfoModule (ref), resolveSubscriptionPromptStateModule (ref)
-	return thunkModule.new(script.Name, list, function(p2, p3)
-		-- upvalues: networkModule (copy), externalSettingsModule (copy), fFlagEnablePurchaseFlowUUIDMigrationModule (copy), httpService (copy), setPurchaseFlowUUIDModule (copy), loggingProtocolModule (copy), purchaseFlowUUIDTelemetryModule (copy), hasPendingRequestModule (copy), requestSubscriptionPurchaseModule (copy), p1 (ref), errorOccurredModule (copy), purchaseErrorModule (copy), getSubscriptionPurchaseInfoModule (copy), resolveSubscriptionPromptStateModule (copy)
-		local var1 = p3[networkModule]
-		local var2 = p3[externalSettingsModule]
+return function(p1) --[[ Line: 31 | Named "initiateSubscriptionPurchase" ]]
+	-- upvalues: ThunkModule (copy), list (copy), NetworkModule (copy), ExternalSettingsModule (copy), FFlagEnablePurchaseFlowUUIDMigrationModule (copy), HttpService (copy), SetPurchaseFlowUUIDModule (copy), LoggingProtocolModule (copy), PurchaseFlowUUIDTelemetryModule (copy), HasPendingRequestModule (copy), RequestSubscriptionPurchaseModule (copy), ErrorOccurredModule (copy), PurchaseErrorModule (copy), GetSubscriptionPurchaseInfoModule (copy), ResolveSubscriptionPromptStateModule (copy)
+	return ThunkModule.new(script.Name, list, function(p2, p3) --[[ Line: 32 ]]
+		-- upvalues: NetworkModule (upval), ExternalSettingsModule (upval), FFlagEnablePurchaseFlowUUIDMigrationModule (upval), HttpService (upval), SetPurchaseFlowUUIDModule (upval), LoggingProtocolModule (upval), PurchaseFlowUUIDTelemetryModule (upval), HasPendingRequestModule (upval), RequestSubscriptionPurchaseModule (upval), p1 (copy), ErrorOccurredModule (upval), PurchaseErrorModule (upval), GetSubscriptionPurchaseInfoModule (upval), ResolveSubscriptionPromptStateModule (upval)
+		local v1 = p3[NetworkModule]
+		local v2 = p3[ExternalSettingsModule]
 		
-		if fFlagEnablePurchaseFlowUUIDMigrationModule then
-			p2:dispatch(setPurchaseFlowUUIDModule(httpService:GenerateGUID(false)))
-			loggingProtocolModule.default:logRobloxTelemetryCounter(purchaseFlowUUIDTelemetryModule.InitiatePurchaseCounter, 1, { method = "initiateSubscriptionPurchase" })
+		if FFlagEnablePurchaseFlowUUIDMigrationModule then
+			p2:dispatch(SetPurchaseFlowUUIDModule((HttpService:GenerateGUID(false))))
+			LoggingProtocolModule.default:logRobloxTelemetryCounter(PurchaseFlowUUIDTelemetryModule.InitiatePurchaseCounter, 1, { method = "initiateSubscriptionPurchase" })
 		end
-		if hasPendingRequestModule(p2:getState()) then
+		if HasPendingRequestModule(p2:getState()) then
 			return nil
 		end
-		p2:dispatch(requestSubscriptionPurchaseModule(p1))
+		p2:dispatch(RequestSubscriptionPurchaseModule(p1))
 		
-		if var2.getFlagOrder66() then
-			p2:dispatch(errorOccurredModule(purchaseErrorModule.PurchaseDisabled))
+		if v2.getFlagOrder66() then
+			p2:dispatch(ErrorOccurredModule(PurchaseErrorModule.PurchaseDisabled))
 			
 			return nil
+		else
+			return GetSubscriptionPurchaseInfoModule(v1, p1):andThen(function(Result) --[[ Line: 58 ]]
+				-- upvalues: p2 (copy), ResolveSubscriptionPromptStateModule (upval)
+				p2:dispatch(ResolveSubscriptionPromptStateModule(Result))
+			end):catch(function(Err) --[[ Line: 61 ]]
+				-- upvalues: p2 (copy), ErrorOccurredModule (upval)
+				p2:dispatch(ErrorOccurredModule(Err))
+			end)
 		end
-		return getSubscriptionPurchaseInfoModule(var1, p1):andThen(function(p4)
-			-- upvalues: p2 (ref), resolveSubscriptionPromptStateModule (copy)
-			p2:dispatch(resolveSubscriptionPromptStateModule(p4))
-		end):catch(function(p4)
-			-- upvalues: p2 (ref), errorOccurredModule (copy)
-			p2:dispatch(errorOccurredModule(p4))
-		end)
 	end)
 end

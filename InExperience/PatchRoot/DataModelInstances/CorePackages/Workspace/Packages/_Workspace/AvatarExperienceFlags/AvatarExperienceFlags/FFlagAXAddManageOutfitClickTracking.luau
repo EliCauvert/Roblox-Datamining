@@ -1,1 +1,1 @@
-﻿return require(script.Parent.FFlagAXRootSlotBasedEditorFlag) and game:DefineFastFlag("AXAddManageOutfitClickTracking2", false)
+﻿return game:DefineFastFlag("AXAddManageOutfitClickTracking2", false)

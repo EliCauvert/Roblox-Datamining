@@ -1,66 +1,66 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
-local reactModule = require(parent.React)
-local roactUtilsModule = require(parent.RoactUtils)
-local _ = require(parent.AvatarExperienceRodux)
-local logging = require(parent.AppCommonLib).Logging
-local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
-local fFlagAXSduiSeeAllPageRequestId = require(parent.AvatarExperienceFlags).FFlagAXSduiSeeAllPageRequestId
-local buildFocusedSortWidgetInfoModule = require(script.Parent.buildFocusedSortWidgetInfo)
-local hydrateCatalogSortByIdModule = require(script.Parent.hydrateCatalogSortById)
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
+local ReactModule = require(Parent.React)
+local _ = require(Parent.AvatarExperienceRodux)
+local Logging = require(Parent.AppCommonLib).Logging
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local FFlagAXSduiSeeAllPageRequestId = require(Parent.AvatarExperienceFlags).FFlagAXSduiSeeAllPageRequestId
+local BuildFocusedSortWidgetInfoModule = require(script.Parent.buildFocusedSortWidgetInfo)
+local HydrateCatalogSortByIdModule = require(script.Parent.hydrateCatalogSortById)
 
-local function buildAlreadyHydratedSet(value)
-	if not value then
+local function buildAlreadyHydratedSet(HydratedWidgetData) --[[ Line: 63 ]]
+	if not HydratedWidgetData then
 		return nil
 	end
 	local t = {}
 	
-	for i, v in value do
-		if typeof(v) == "table" then
-			local t_1 = {}
+	for i, value in HydratedWidgetData do
+		if typeof(value) == "table" then
+			local t1 = {}
 			
-			for i_1, v_1 in v do
-				if typeof(v_1) == "table" and v_1.failedToHydrate ~= true then
-					t_1[tostring(i_1)] = true
+			for i1, value1 in value do
+				if typeof(value1) == "table" and value1.failedToHydrate ~= true then
+					t1[tostring(i1)] = true
 				end
 			end
-			if next(t_1) ~= nil then
-				t[tostring(i)] = t_1
+			if next(t1) ~= nil then
+				t[tostring(i)] = t1
 			end
 		end
 	end
 	return if next(t) == nil then nil else t
 end
 
-return function(p1)
-	-- upvalues: useDispatch (ref), reactModule (ref), logging (ref), fFlagAXSduiSeeAllPageRequestId (ref), buildFocusedSortWidgetInfoModule (ref), buildAlreadyHydratedSet (ref), hydrateCatalogSortByIdModule (ref)
-	local var1 = useDispatch()
+return function(p1) --[[ Line: 92 | Named "useApplySduiFocusedSort" ]]
+	-- upvalues: UseDispatchFunction (copy), ReactModule (copy), Logging (copy), FFlagAXSduiSeeAllPageRequestId (copy), BuildFocusedSortWidgetInfoModule (copy), buildAlreadyHydratedSet (copy), HydrateCatalogSortByIdModule (copy)
+	local UseDispatchResult = UseDispatchFunction()
 	
-	return reactModule.useCallback(function(p2, p3, p4)
-		-- upvalues: logging (copy), fFlagAXSduiSeeAllPageRequestId (copy), p1 (ref), buildFocusedSortWidgetInfoModule (copy), var1 (ref), buildAlreadyHydratedSet (copy), hydrateCatalogSortByIdModule (copy)
+	return ReactModule.useCallback(function(p2, p3, p4): boolean --[[ Line: 95 ]]
+		-- upvalues: Logging (upval), FFlagAXSduiSeeAllPageRequestId (upval), p1 (copy), BuildFocusedSortWidgetInfoModule (upval), UseDispatchResult (copy), buildAlreadyHydratedSet (upval), HydrateCatalogSortByIdModule (upval)
 		if not p3 or p3 == "" then
-			logging.warn("useApplySduiFocusedSort: missing context for sortId=" .. tostring(p2 and p2.sortId) .. "; SDUI catalog isn't propagating context to ResultsList. " .. "Verify FFlagAXMigrateAllTabToSduiDev is on.")
+			Logging.warn("useApplySduiFocusedSort: missing context for sortId=" .. tostring(p2 and p2.sortId) .. "; SDUI catalog isn't propagating context to ResultsList. " .. "Verify FFlagAXMigrateAllTabToSduiDev is on.")
 			
 			return false
 		end
-		local t = {
+		local config = {
 			title = p2.title,
 			description = p2.description,
 			tooltipText = p2.tooltipText
 		}
-		local var2 = if fFlagAXSduiSeeAllPageRequestId then buildFocusedSortWidgetInfoModule(p2.sortId, p3, t, if p1.getPageRequestId then p1.getPageRequestId() else nil) else buildFocusedSortWidgetInfoModule(p2.sortId, p3, t)
+		local FocusedSortWidgetInfoModule = if FFlagAXSduiSeeAllPageRequestId then BuildFocusedSortWidgetInfoModule(p2.sortId, p3, config, if p1.getPageRequestId then p1.getPageRequestId() else nil) else BuildFocusedSortWidgetInfoModule(p2.sortId, p3, config)
 		
-		if var2 then
-			var1(p1.SetWidgetInfo(var2.widgetInfo, var2.requestId, nil, p3))
-			hydrateCatalogSortByIdModule(var1, p4, p1.SetHydratedWidgetData, p1.CatalogWebApi, p2.sortId, if p1.getHydratedWidgetData then buildAlreadyHydratedSet(p1.getHydratedWidgetData()) else nil)
+		if FocusedSortWidgetInfoModule then
+			UseDispatchResult(p1.SetWidgetInfo(FocusedSortWidgetInfoModule.widgetInfo, FocusedSortWidgetInfoModule.requestId, nil, p3))
+			HydrateCatalogSortByIdModule(UseDispatchResult, p4, p1.SetHydratedWidgetData, p1.CatalogWebApi, p2.sortId, if p1.getHydratedWidgetData then buildAlreadyHydratedSet(p1.getHydratedWidgetData()) else nil)
 			
 			return true
+		else
+			Logging.warn("useApplySduiFocusedSort: synthesizer returned nil for sortId=" .. tostring(p2.sortId) .. " context=" .. tostring(p3))
+			
+			return false
 		end
-		logging.warn("useApplySduiFocusedSort: synthesizer returned nil for sortId=" .. tostring(p2.sortId) .. " context=" .. tostring(p3))
-		
-		return false
 	end, {
-		var1, p1.SetWidgetInfo, p1.SetHydratedWidgetData, p1.CatalogWebApi,
-		p1.getHydratedWidgetData,
-		if fFlagAXSduiSeeAllPageRequestId then p1.getPageRequestId else nil
+		UseDispatchResult, p1.SetWidgetInfo, p1.SetHydratedWidgetData,
+		p1.CatalogWebApi, p1.getHydratedWidgetData,
+		if FFlagAXSduiSeeAllPageRequestId then p1.getPageRequestId else nil
 	})
 end

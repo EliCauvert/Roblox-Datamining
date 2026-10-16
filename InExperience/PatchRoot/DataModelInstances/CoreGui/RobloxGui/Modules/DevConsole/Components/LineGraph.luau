@@ -1,48 +1,46 @@
-﻿local roactModule = require(game:GetService("CorePackages").Packages.Roact)
-local lineGraphHoverDisplayModule = require(script.Parent.LineGraphHoverDisplay)
-local constantsModule = require(script.Parent.Parent.Constants)
-local text = constantsModule.Color.Text
-local highlightBlue = constantsModule.Color.HighlightBlue
-local lineWidth = constantsModule.GeneralFormatting.LineWidth
-local lineColor = constantsModule.GeneralFormatting.LineColor
-local pointWidth = constantsModule.Graph.PointWidth
-local pointOffset = constantsModule.Graph.PointOffset
-local padding = constantsModule.Graph.Padding
-local scale = constantsModule.Graph.Scale
-local innerPaddingY = constantsModule.Graph.InnerPaddingY
-local innerScaleY = constantsModule.Graph.InnerScaleY
-local textPadding = constantsModule.Graph.TextPadding
-local lineGraph = roactModule.Component:extend("LineGraph")
+﻿local RoactModule = require(game:GetService("CorePackages").Packages.Roact)
+local LineGraphHoverDisplayModule = require(script.Parent.LineGraphHoverDisplay)
+local ConstantsModule = require(script.Parent.Parent.Constants)
+local Text = ConstantsModule.Color.Text
+local HighlightBlue = ConstantsModule.Color.HighlightBlue
+local LineWidth = ConstantsModule.GeneralFormatting.LineWidth
+local LineColor = ConstantsModule.GeneralFormatting.LineColor
+local PointWidth = ConstantsModule.Graph.PointWidth
+local PointOffset = ConstantsModule.Graph.PointOffset
+local Padding = ConstantsModule.Graph.Padding
+local Scale = ConstantsModule.Graph.Scale
+local InnerPaddingY = ConstantsModule.Graph.InnerPaddingY
+local InnerScaleY = ConstantsModule.Graph.InnerScaleY
+local TextPadding = ConstantsModule.Graph.TextPadding
+local LineGraph = RoactModule.Component:extend("LineGraph")
 
-function lineGraph.init(p1)
-	-- upvalues: roactModule (ref)
-	function p0.onGraphInputChanged(_, p2)
-		-- upvalues: p1 (ref)
-		if p2.UserInputType == Enum.UserInputType.MouseMovement and not p1.state.holdPos then
-			p1:setState({ inputPosition = p2.Position })
+function LineGraph.init(p1) --[[ Line: 24 ]]
+	-- upvalues: RoactModule (copy)
+	function p1:onGraphInputChanged(Input) --[[ Line: 25 ]]
+		-- upvalues: p1 (copy)
+		if Input.UserInputType == Enum.UserInputType.MouseMovement and not p1.state.holdPos then
+			p1:setState({ inputPosition = Input.Position })
 		end
 	end
 	
-	function p0.onGraphInputEnded(_, p2)
-		-- upvalues: p1 (ref)
-		if p2.UserInputType == Enum.UserInputType.MouseMovement then
-			if p1.state.holdPos then
-				return
-			else
+	function p1:onGraphInputEnded(Input) --[[ Line: 35 ]]
+		-- upvalues: p1 (copy)
+		if Input.UserInputType == Enum.UserInputType.MouseMovement then
+			if not p1.state.holdPos then
 				p1:setState({ inputPosition = false })
 				
 				return
 			end
-		elseif p2.UserInputType == Enum.UserInputType.MouseButton1 then
+		elseif Input.UserInputType == Enum.UserInputType.MouseButton1 then
 			p1:setState({ holdPos = not p1.state.holdPos })
 		end
 	end
 	
-	p1.graphRef = roactModule.createRef()
+	p1.graphRef = RoactModule.createRef()
 	p1.state = { selectedTimeStamps = {} }
 end
 
-function lineGraph.didUpdate(p1)
+function LineGraph.didUpdate(p1) --[[ Line: 55 ]]
 	if p1.state.absGraphSize ~= p1.graphRef.current.AbsoluteSize then
 		p1:setState({
 			absGraphSize = p1.graphRef.current.AbsoluteSize,
@@ -51,186 +49,185 @@ function lineGraph.didUpdate(p1)
 	end
 end
 
-function lineGraph.didMount(p1)
+function LineGraph.didMount(p1) --[[ Line: 67 ]]
 	p1:setState({
 		absGraphSize = p1.graphRef.current.AbsoluteSize,
 		absGraphPos = p1.graphRef.current.AbsolutePosition
 	})
 end
 
-function lineGraph.render(p1)
-	-- upvalues: innerScaleY (ref), roactModule (ref), lineWidth (ref), innerPaddingY (ref), highlightBlue (ref), pointWidth (ref), pointOffset (ref), lineGraphHoverDisplayModule (ref), textPadding (ref), lineColor (ref), text (ref), padding (ref), scale (ref)
-	local size = p1.props.size
-	local pos = p1.props.pos
-	local graphData = p1.props.graphData
-	local getX = p1.props.getX
-	local getY = p1.props.getY
-	local stringFormatX = p1.props.stringFormatX
-	local stringFormatY = p1.props.stringFormatY
-	local axisLabelX = p1.props.axisLabelX
-	local axisLabelY = p1.props.axisLabelY
-	local layoutOrder = p1.props.layoutOrder
-	local inputPosition = p1.state.inputPosition
-	local absGraphSize = p1.state.absGraphSize
-	local absGraphPos = p1.state.absGraphPos
-	local var1 = getX(graphData:back())
-	local var2 = getX(graphData:front())
-	local maxY = p1.props.maxY
-	local minY = p1.props.minY
-	local var3 = nil
-	local t = {}
+function LineGraph.render(p1) --[[ Line: 77 ]]
+	-- upvalues: InnerScaleY (copy), RoactModule (copy), LineWidth (copy), InnerPaddingY (copy), HighlightBlue (copy), PointWidth (copy), PointOffset (copy), LineGraphHoverDisplayModule (copy), TextPadding (copy), LineColor (copy), Text (copy), Padding (copy), Scale (copy)
+	local Size = p1.props.size
+	local Pos = p1.props.pos
+	local GraphData = p1.props.graphData
+	local GetXFunction = p1.props.getX
+	local GetYFunction = p1.props.getY
+	local StringFormatXFunction = p1.props.stringFormatX
+	local StringFormatYFunction = p1.props.stringFormatY
+	local AxisLabelX = p1.props.axisLabelX
+	local AxisLabelY = p1.props.axisLabelY
+	local LayoutOrder = p1.props.layoutOrder
+	local InputPosition = p1.state.inputPosition
+	local AbsGraphSize = p1.state.absGraphSize
+	local AbsGraphPos = p1.state.absGraphPos
+	local GetXResult = GetXFunction(GraphData:back())
+	local GetXResult1 = GetXFunction(GraphData:front())
+	local MaxY = p1.props.maxY
+	local MinY = p1.props.minY
+	local Value: number? = nil
+	local Frames = {}
 	
-	if absGraphSize then
-		local t_1 = {}
-		local var4 = graphData:iterator()
-		local var5 = var4:next()
-		while var5 do
-			local var6 = getY(var5)
-			local var7 = var1 - var2
-			local var8 = maxY - minY
-			table.insert(t_1, {
-				X = if var7 > 0 then (getX(var5) - var2) / var7 else 0,
-				Y = if var8 > 0 then (var6 - minY) / var8 else 1,
-				data = var5
+	if AbsGraphSize then
+		local List = {}
+		local IteratorResult = GraphData:iterator()
+		local Key = IteratorResult:next()
+		while Key do
+			local GetYResult = GetYFunction(Key)
+			local GetXResult2 = GetXFunction(Key)
+			local GetXResultDelta = GetXResult - GetXResult1
+			local MaxYDelta = MaxY - MinY
+			table.insert(List, {
+				X = GetXResultDelta > 0 and (GetXResult2 - GetXResult1) / GetXResultDelta or 0,
+				Y = MaxYDelta > 0 and (GetYResult - MinY) / MaxYDelta or 1,
+				data = Key
 			})
-			var5 = var4:next()
+			Key = IteratorResult:next()
 		end
-		for i = 2, #t_1 do
-			local var9 = t_1[i].X * absGraphSize.X
-			local var10 = t_1[i].Y * absGraphSize.Y * innerScaleY
-			local var11 = t_1[i - 1].X * absGraphSize.X
-			local var12 = t_1[i - 1].Y * absGraphSize.Y * innerScaleY
+		for i = 2, #List do
+			local ScaledX = List[i].X * AbsGraphSize.X
+			local ScaledY = List[i].Y * AbsGraphSize.Y * InnerScaleY
+			local ScaledX1 = List[i - 1].X * AbsGraphSize.X
+			local ScaledY1 = List[i - 1].Y * AbsGraphSize.Y * InnerScaleY
 			
-			if var9 ~= var11 then
-				local var13 = (var9 + var11) / 2
-				local var14 = (var10 + var12) / 2
-				local var15 = var9 - var11
-				local var16 = var10 - var12
-				local squareRoot = math.sqrt(var15 * var15 + var16 * var16)
-				table.insert(t, roactModule.createElement("Frame", {
+			if ScaledX ~= ScaledX1 then
+				local X = ScaledX - ScaledX1
+				local Y = ScaledY - ScaledY1
+				local SquareRoot = math.sqrt(X * X + Y * Y)
+				table.insert(Frames, RoactModule.createElement("Frame", {
 					BorderSizePixel = 0,
-					Size = UDim2.new(0, squareRoot, 0, lineWidth),
-					Position = UDim2.new(0, var13 - squareRoot / 2, 1 - innerPaddingY, -var14),
-					BackgroundColor3 = highlightBlue,
-					Rotation = -math.deg(math.atan2(var16, var15))
+					Size = UDim2.new(0, SquareRoot, 0, LineWidth),
+					Position = UDim2.new(0, (ScaledX + ScaledX1) / 2 - SquareRoot / 2, 1 - InnerPaddingY, -((ScaledY + ScaledY1) / 2)),
+					BackgroundColor3 = HighlightBlue,
+					Rotation = -math.deg((math.atan2(Y, X)))
 				}))
-				table.insert(t, roactModule.createElement("Frame", {
+				table.insert(Frames, RoactModule.createElement("Frame", {
 					BorderSizePixel = 0,
-					Size = UDim2.new(0, pointWidth, 0, pointWidth),
-					Position = UDim2.new(0, var9, 1 - innerPaddingY, (-var10) - pointOffset),
-					BackgroundColor3 = highlightBlue
+					Size = UDim2.new(0, PointWidth, 0, PointWidth),
+					Position = UDim2.new(0, ScaledX, 1 - InnerPaddingY, -ScaledY - PointOffset),
+					BackgroundColor3 = HighlightBlue
 				}))
 				
-				if inputPosition then
-					local var17 = inputPosition.X - absGraphPos.X
+				if InputPosition then
+					local XDelta = InputPosition.X - AbsGraphPos.X
 					
-					if var17 < var9 and var11 < var17 then
-						local var18 = getX(t_1[i].data)
-						local var19 = getX(t_1[i - 1].data)
-						local var20 = getY(t_1[i].data)
-						local var21 = getY(t_1[i - 1].data)
-						local var22 = (var17 - var11) / var15
-						var3 = var12 + var16 * var22
-						t.HoverDetails = roactModule.createElement(lineGraphHoverDisplayModule, {
-							hoverLineX = var17,
-							hoverLineY = var3,
-							hoverValX = (var18 - var19) * var22 + var19,
-							hoverValY = (var20 - var21) * var22 + var21,
-							stringFormatX = stringFormatX,
-							stringFormatY = stringFormatY
+					if XDelta < ScaledX and ScaledX1 < XDelta then
+						local GetXResult3 = GetXFunction(List[i].data)
+						local GetXResult31 = GetXFunction(List[i - 1].data)
+						local GetYResult = GetYFunction(List[i].data)
+						local GetYResult1 = GetYFunction(List[i - 1].data)
+						local XDeltaRatio = (XDelta - ScaledX1) / X
+						Value = ScaledY1 + Y * XDeltaRatio
+						Frames.HoverDetails = RoactModule.createElement(LineGraphHoverDisplayModule, {
+							hoverLineX = XDelta,
+							hoverLineY = Value,
+							hoverValX = (GetXResult3 - GetXResult31) * XDeltaRatio + GetXResult31,
+							hoverValY = (GetYResult - GetYResult1) * XDeltaRatio + GetYResult1,
+							stringFormatX = StringFormatXFunction,
+							stringFormatY = StringFormatYFunction
 						})
 					end
 				end
 			end
 		end
-		if #t_1 > 0 then
-			local var23 = t_1[#t_1].Y * absGraphSize.Y * innerScaleY
-			local var24 = getY(t_1[#t_1].data)
-			local var25 = not (var3 and math.abs(var3) < 10 or math.abs(var23) < 10)
+		if #List > 0 then
+			local ScaledY = List[#List].Y * AbsGraphSize.Y * InnerScaleY
+			local GetYResult = GetYFunction(List[#List].data)
+			local Inverted = not (Value and math.abs(Value) < 10 or math.abs(ScaledY) < 10)
 			
-			if var3 and math.abs(var23 - var3) < 10 then
-				t.LatestEntryLine = roactModule.createElement("Frame", {
+			if not (Value and math.abs(ScaledY - Value) < 10) then
+				Frames.LatestEntryLine = RoactModule.createElement("Frame", {
 					BackgroundTransparency = 0.5,
 					BorderSizePixel = 0,
-					Size = UDim2.new(1, textPadding, 0, lineWidth),
-					Position = UDim2.new(0, -textPadding, 1 - innerPaddingY, -var23),
-					BackgroundColor3 = lineColor
+					Size = UDim2.new(1, TextPadding, 0, LineWidth),
+					Position = UDim2.new(0, -TextPadding, 1 - InnerPaddingY, -ScaledY),
+					BackgroundColor3 = LineColor
 				})
-				t.LatestEntryText = roactModule.createElement("TextLabel", {
+				Frames.LatestEntryText = RoactModule.createElement("TextLabel", {
 					BackgroundTransparency = 1,
-					Text = stringFormatY and stringFormatY(var24) or var24,
-					TextColor3 = text,
+					Text = StringFormatYFunction and StringFormatYFunction(GetYResult) or GetYResult,
+					TextColor3 = Text,
 					TextXAlignment = Enum.TextXAlignment.Right,
-					Position = UDim2.new(0, (-textPadding) - 2, 1 - innerPaddingY, -var23)
+					Position = UDim2.new(0, -TextPadding - 2, 1 - InnerPaddingY, -ScaledY)
 				})
 			end
-			if var25 then
-				t.AxisTextY0 = roactModule.createElement("TextLabel", {
+			if Inverted then
+				Frames.AxisTextY0 = RoactModule.createElement("TextLabel", {
 					BackgroundTransparency = 1,
-					Text = stringFormatY and stringFormatY(minY) or minY,
-					TextColor3 = text,
+					Text = StringFormatYFunction and StringFormatYFunction(MinY) or MinY,
+					TextColor3 = Text,
 					TextXAlignment = Enum.TextXAlignment.Right,
-					Position = UDim2.new(0, (-textPadding) - 2, 1 - innerPaddingY, 0)
+					Position = UDim2.new(0, -TextPadding - 2, 1 - InnerPaddingY, 0)
 				})
 			end
-			t.AxisX = roactModule.createElement("Frame", {
+			Frames.AxisX = RoactModule.createElement("Frame", {
 				BorderSizePixel = 0,
-				Size = UDim2.new(1, 0, 0, lineWidth),
+				Size = UDim2.new(1, 0, 0, LineWidth),
 				Position = UDim2.new(0, 0, 1, 0),
-				BackgroundColor3 = lineColor
+				BackgroundColor3 = LineColor
 			})
-			t.AxisY = roactModule.createElement("Frame", {
+			Frames.AxisY = RoactModule.createElement("Frame", {
 				BorderSizePixel = 0,
-				Size = UDim2.new(0, lineWidth, 1, 0),
-				BackgroundColor3 = lineColor
+				Size = UDim2.new(0, LineWidth, 1, 0),
+				BackgroundColor3 = LineColor
 			})
 		end
 	end
-	local var26 = 2 * textPadding + 2
+	local NewTextPadding = 2 * TextPadding + 2
 	
-	return roactModule.createElement("Frame", {
+	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		Size = size,
-		Position = pos,
-		LayoutOrder = layoutOrder
+		Size = Size,
+		Position = Pos,
+		LayoutOrder = LayoutOrder
 	}, {
-		name = roactModule.createElement("TextLabel", {
+		name = RoactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
-			Text = axisLabelY,
-			TextColor3 = text,
+			Text = AxisLabelY,
+			TextColor3 = Text,
 			TextXAlignment = Enum.TextXAlignment.Left,
-			Position = UDim2.new(padding, 0, padding, -textPadding)
+			Position = UDim2.new(Padding, 0, Padding, -TextPadding)
 		}),
-		minX = roactModule.createElement("TextLabel", {
+		minX = RoactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
-			Text = stringFormatX and stringFormatX(var2) or var2,
-			TextColor3 = text,
+			Text = StringFormatXFunction and StringFormatXFunction(GetXResult1) or GetXResult1,
+			TextColor3 = Text,
 			TextXAlignment = Enum.TextXAlignment.Center,
-			Position = UDim2.new(padding, 0, padding + scale, var26)
+			Position = UDim2.new(Padding, 0, Padding + Scale, NewTextPadding)
 		}),
-		maxX = roactModule.createElement("TextLabel", {
+		maxX = RoactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
-			Text = stringFormatX and stringFormatX(var1) or var1,
-			TextColor3 = text,
+			Text = StringFormatXFunction and StringFormatXFunction(GetXResult) or GetXResult,
+			TextColor3 = Text,
 			TextXAlignment = Enum.TextXAlignment.Center,
-			Position = UDim2.new(padding + scale, 0, padding + scale, var26)
+			Position = UDim2.new(Padding + Scale, 0, Padding + Scale, NewTextPadding)
 		}),
-		axisLabelX = roactModule.createElement("TextLabel", {
+		axisLabelX = RoactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
-			Text = axisLabelX,
-			TextColor3 = text,
+			Text = AxisLabelX,
+			TextColor3 = Text,
 			TextXAlignment = Enum.TextXAlignment.Center,
-			Position = UDim2.new(0.5, 0, padding + scale, var26)
+			Position = UDim2.new(0.5, 0, Padding + Scale, NewTextPadding)
 		}),
-		graph = roactModule.createElement("Frame", {
-			Position = UDim2.new(padding, 0, padding, 0),
-			Size = UDim2.new(scale, 0, scale, 0),
+		graph = RoactModule.createElement("Frame", {
+			Position = UDim2.new(Padding, 0, Padding, 0),
+			Size = UDim2.new(Scale, 0, Scale, 0),
 			BackgroundTransparency = 1,
-			[roactModule.Ref] = p1.graphRef,
-			[roactModule.Event.InputChanged] = p1.onGraphInputChanged,
-			[roactModule.Event.InputEnded] = p1.onGraphInputEnded
-		}, t)
+			[RoactModule.Ref] = p1.graphRef,
+			[RoactModule.Event.InputChanged] = p1.onGraphInputChanged,
+			[RoactModule.Event.InputEnded] = p1.onGraphInputEnded
+		}, Frames)
 	})
 end
 
-return lineGraph
+return LineGraph

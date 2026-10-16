@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.VirtualEventsState.VirtualEventsState)
+﻿return (require(script.Parent.Parent.Parent._Index.VirtualEventsState.VirtualEventsState))

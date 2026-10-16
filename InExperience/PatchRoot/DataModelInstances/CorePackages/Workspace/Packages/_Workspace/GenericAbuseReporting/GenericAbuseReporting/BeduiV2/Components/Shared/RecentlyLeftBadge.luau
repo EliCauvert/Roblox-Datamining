@@ -1,17 +1,17 @@
-﻿local genericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
-local parent = genericAbuseReporting.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local _ = require(genericAbuseReporting.BeduiV2.Utils.Translate.translate)
-local useArTranslation = require(genericAbuseReporting.BeduiV2.Utils.Translate.arTranslation).useArTranslation
-local badge = foundationModule.Badge
-local badgeVariant = foundationModule.Enums.BadgeVariant
+﻿local GenericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
+local Parent = GenericAbuseReporting.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local _ = require(GenericAbuseReporting.BeduiV2.Utils.Translate.translate)
+local UseArTranslationFunction = require(GenericAbuseReporting.BeduiV2.Utils.Translate.arTranslation).useArTranslation
+local Badge = FoundationModule.Badge
+local BadgeVariant = FoundationModule.Enums.BadgeVariant
 
-return reactModule.memo(function(p1)
-	-- upvalues: useArTranslation (ref), reactModule (ref), badge (ref), badgeVariant (ref)
-	return reactModule.createElement(badge, {
-		text = useArTranslation().translateIntoString(p1.text),
-		variant = badgeVariant.Neutral,
+return ReactModule.memo(function(p1) --[[ Line: 23 | Named "RecentlyLeftBadge" ]]
+	-- upvalues: UseArTranslationFunction (copy), ReactModule (copy), Badge (copy), BadgeVariant (copy)
+	return ReactModule.createElement(Badge, {
+		text = UseArTranslationFunction().translateIntoString(p1.text),
+		variant = BadgeVariant.Neutral,
 		LayoutOrder = p1.layoutOrder
 	})
 end)

@@ -1,52 +1,51 @@
-﻿local notificationService = game:GetService("NotificationService")
-local playersService = game:GetService("Players")
-local parent = script:FindFirstAncestor("ProfileCtaService").Parent
-local var1 = require(parent.RealtimeDelivery).RobloxEventReceiver.new(notificationService)
-local getLocalPlayerUserId = require(parent.DataHydration).DataHydrationUtils.getLocalPlayerUserId
-local constantsModule = require(script.Parent.Constants)
+﻿local Players = game:GetService("Players")
+local Parent = script:FindFirstAncestor("ProfileCtaService").Parent
+local NewResult = require(Parent.RealtimeDelivery).RobloxEventReceiver.new((game:GetService("NotificationService")))
+local GetLocalPlayerUserIdFunction = require(Parent.DataHydration).DataHydrationUtils.getLocalPlayerUserId
+local ConstantsModule = require(script.Parent.Constants)
 
-return function(p1)
-	-- upvalues: getLocalPlayerUserId (ref), playersService (ref), var1 (ref), constantsModule (ref)
-	local var2 = getLocalPlayerUserId()
-	local var3 = playersService:GetPropertyChangedSignal("LocalPlayer"):Connect(function()
-		-- upvalues: getLocalPlayerUserId (copy), var2 (write)
-		local var4 = getLocalPlayerUserId()
+return function(Callback) --[[ Line: 24 | Named "createProfileCTAEventListener" ]]
+	-- upvalues: GetLocalPlayerUserIdFunction (copy), Players (copy), NewResult (copy), ConstantsModule (copy)
+	local LocalPlayerUserId = GetLocalPlayerUserIdFunction()
+	local Connection = Players:GetPropertyChangedSignal("LocalPlayer"):Connect(function() --[[ Line: 27 ]]
+		-- upvalues: GetLocalPlayerUserIdFunction (upval), LocalPlayerUserId (ref)
+		local LocalPlayerUserId1 = GetLocalPlayerUserIdFunction()
 		
-		if var4 ~= var2 then
-			var2 = var4
+		if LocalPlayerUserId1 ~= LocalPlayerUserId then
+			LocalPlayerUserId = LocalPlayerUserId1
 		end
 	end)
-	local friendship_notifications = var1:observeEvent(constantsModule.FRIENDSHIP_NOTIFICATIONS, function(p2)
-		-- upvalues: var2 (write), p1 (ref)
-		if p2.EventArgs and p2.EventArgs.UserId1 and p2.EventArgs.UserId2 then
-			p1(if tostring(var2) == tostring(p2.EventArgs.UserId1) then tostring(p2.EventArgs.UserId2) else tostring(p2.EventArgs.UserId1))
+	local ObserveEventResult = NewResult:observeEvent(ConstantsModule.FRIENDSHIP_NOTIFICATIONS, function(p1) --[[ Line: 36 ]]
+		-- upvalues: LocalPlayerUserId (ref), Callback (copy)
+		if p1.EventArgs and p1.EventArgs.UserId1 and p1.EventArgs.UserId2 then
+			Callback(if tostring(LocalPlayerUserId) == tostring(p1.EventArgs.UserId1) then tostring(p1.EventArgs.UserId2) else tostring(p1.EventArgs.UserId1))
 			
 			return
 		end
 	end)
-	local presence_bulk_notifications = var1:observeEvent(constantsModule.PRESENCE_BULK_NOTIFICATIONS, function(p2)
-		-- upvalues: p1 (ref)
-		if not p2 or type(p2) ~= "table" then return end
-		for i, v in ipairs(p2) do
-			if v and v.UserId then
-				p1(tostring(v.UserId))
+	local ObserveEventResult1 = NewResult:observeEvent(ConstantsModule.PRESENCE_BULK_NOTIFICATIONS, function(List) --[[ Line: 50 ]]
+		-- upvalues: Callback (copy)
+		if not List or type(List) ~= "table" then return end
+		for _, Player in ipairs(List) do
+			if Player and Player.UserId then
+				Callback((tostring(Player.UserId)))
 			end
 		end
 	end)
 	
-	return function()
-		-- upvalues: var3 (write), friendship_notifications (write), presence_bulk_notifications (write)
-		if var3 then
-			var3:Disconnect()
-			var3 = nil
+	return function() --[[ Line: 63 ]]
+		-- upvalues: Connection (ref), ObserveEventResult (ref), ObserveEventResult1 (ref)
+		if Connection then
+			Connection:Disconnect()
+			Connection = nil
 		end
-		if friendship_notifications then
-			friendship_notifications:disconnect()
-			friendship_notifications = nil
+		if ObserveEventResult then
+			ObserveEventResult:disconnect()
+			ObserveEventResult = nil
 		end
-		if presence_bulk_notifications then
-			presence_bulk_notifications:disconnect()
-			presence_bulk_notifications = nil
+		if ObserveEventResult1 then
+			ObserveEventResult1:disconnect()
+			ObserveEventResult1 = nil
 		end
 	end
 end

@@ -1,1 +1,3 @@
-﻿return game:DefineFastFlag("BuildExperienceMonetizationProductEditing", false) and require(script.Parent.FFlagBuildExperienceMonetizationNativeUI)
+﻿local FFlagBuildExperienceMonetizationNativeUIModule = require(script.Parent.FFlagBuildExperienceMonetizationNativeUI)
+
+return game:DefineFastFlag("BuildExperienceMonetizationProductEditing", false) and FFlagBuildExperienceMonetizationNativeUIModule

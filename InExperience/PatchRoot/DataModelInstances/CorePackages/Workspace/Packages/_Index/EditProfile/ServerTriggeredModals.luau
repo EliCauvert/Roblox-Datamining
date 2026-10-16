@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.ServerTriggeredModals.ServerTriggeredModals)
+﻿return (require(script.Parent.Parent.Parent._Index.ServerTriggeredModals.ServerTriggeredModals))

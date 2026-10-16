@@ -1,12 +1,12 @@
-﻿local copyModule = require(script.Parent.copy)
+﻿local CopyModule = require(script.Parent.copy)
 
-return function(value, p1, p2)
-	-- upvalues: copyModule (ref)
-	local var1 = type(value)
-	assert(var1 == "table", "expected a table for first argument, got " .. var1)
-	assert(p1 ~= nil, "expected second argument to be anything but nil, got nil")
-	local var2 = copyModule(value)
-	var2[p1] = p2
+return function(p1, Key, p2) --[[ Line: 4 | Named "set" ]]
+	-- upvalues: CopyModule (copy)
+	local ValueType = type(p1)
+	assert(ValueType == "table", "expected a table for first argument, got " .. ValueType)
+	assert(Key ~= nil, "expected second argument to be anything but nil, got nil")
+	local CopyModuleResult = CopyModule(p1)
+	CopyModuleResult[Key] = p2
 	
-	return var2
+	return CopyModuleResult
 end

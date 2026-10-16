@@ -1,105 +1,110 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent
-local parent_2 = parent_1.Parent
-local roactModule = require(parent_2.Roact)
-local UIBloxModule = require(parent_2.UIBlox)
-local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
-local buttonType = UIBloxModule.App.Button.Enum.ButtonType
-local images = UIBloxModule.App.ImageSet.Images
-local localizationService = game:GetService("LocalizationService")
-local localization = require(parent_2.AppLocales).Localization
-local localizationProvider = require(parent_2.Localization).LocalizationProvider
-local withLocalization = require(parent_2.Localization).withLocalization
-local purchaseErrorTypeModule = require(parent_1.Enums.PurchaseErrorType)
-local economicRestrictionsViolationTypeModule = require(parent_1.Enums.EconomicRestrictionsViolationType)
-local purchaseFlowTypeModule = require(parent.PurchaseFlowType)
-local default = require(parent_2.LoggingProtocol).default
-local loggerModule = require(parent_1.Utility.logger)
-local getAppContextModule = require(parent_1.Utility.getAppContext)
-local name = roactModule.Component:extend(script.Name)
-local purchaseErrorPromptCounterModule = require(parent_1.Generic.Events.PurchaseErrorPromptCounter)
-local purchaseErrorPromptShownCounter = purchaseErrorPromptCounterModule.PurchaseErrorPromptShownCounter
-local economicRestrictionsPromptShownCounter = purchaseErrorPromptCounterModule.EconomicRestrictionsPromptShownCounter
-name.defaultProps = {
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent
+local Parent2 = Parent1.Parent
+local RoactModule = require(Parent2.Roact)
+local UIBloxModule = require(Parent2.UIBlox)
+local InteractiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
+local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
+local Images = UIBloxModule.App.ImageSet.Images
+local LocalizationService = game:GetService("LocalizationService")
+local Localization = require(Parent2.AppLocales).Localization
+local LocalizationProvider = require(Parent2.Localization).LocalizationProvider
+local WithLocalizationFunction = require(Parent2.Localization).withLocalization
+local PurchaseErrorTypeModule = require(Parent1.Enums.PurchaseErrorType)
+local EconomicRestrictionsViolationTypeModule = require(Parent1.Enums.EconomicRestrictionsViolationType)
+local PurchaseFlowTypeModule = require(Parent.PurchaseFlowType)
+local Default = require(Parent2.LoggingProtocol).default
+local LoggerModule = require(Parent1.Utility.logger)
+local GetAppContextModule = require(Parent1.Utility.getAppContext)
+local ExtendResult = RoactModule.Component:extend(script.Name)
+local PurchaseErrorPromptCounterModule = require(Parent1.Generic.Events.PurchaseErrorPromptCounter)
+local PurchaseErrorPromptShownCounter = PurchaseErrorPromptCounterModule.PurchaseErrorPromptShownCounter
+local EconomicRestrictionsPromptShownCounter = PurchaseErrorPromptCounterModule.EconomicRestrictionsPromptShownCounter
+ExtendResult.defaultProps = {
 	anchorPoint = Vector2.new(0.5, 0.5),
 	position = UDim2.new(0.5, 0, 0.5, 0)
 }
 
-function name.getErrorTitle(_, p1, p2, p3)
-	-- upvalues: purchaseErrorTypeModule (ref), purchaseFlowTypeModule (ref)
-	return if p2 == purchaseErrorTypeModule.FailedRobuxPurchase then p1.robuxFailedPurchaseTitle elseif p2 == purchaseErrorTypeModule.AlreadySubscribed then p1.alreadySubscribedTitle elseif p3 == purchaseFlowTypeModule.Subscription then p1.cantSubscribeTitle else p1.titleText
+function ExtendResult:getErrorTitle(p1, ErrorType, FlowType) --[[ Line: 49 ]]
+	-- upvalues: PurchaseErrorTypeModule (copy), PurchaseFlowTypeModule (copy)
+	return if ErrorType == PurchaseErrorTypeModule.FailedRobuxPurchase then p1.robuxFailedPurchaseTitle elseif ErrorType == PurchaseErrorTypeModule.AlreadySubscribed then p1.alreadySubscribedTitle elseif FlowType == PurchaseFlowTypeModule.Subscription then p1.cantSubscribeTitle else p1.titleText
 end
 
-function name.getErrorMessage(_, p1, p2, p3)
-	-- upvalues: purchaseErrorTypeModule (ref)
-	return if p2 == purchaseErrorTypeModule.AlreadyOwn then p1.alreadyOwnText elseif p2 == purchaseErrorTypeModule.FailedGrant then p1.failedGrantText elseif p2 == purchaseErrorTypeModule.FailedGrantUnknown then p1.failedGrantUnknownText elseif p2 == purchaseErrorTypeModule.Limited then p1.limitedText elseif p2 == purchaseErrorTypeModule.NotEnoughRobux then p1.notEnoughRobuxText elseif p2 == purchaseErrorTypeModule.NotForSale then p1.notForSaleText elseif p2 == purchaseErrorTypeModule.NotForSaleExperience then p1.notForSaleExperienceText elseif p2 == purchaseErrorTypeModule.PremiumOnly then p1.premiumOnlyText elseif p2 == purchaseErrorTypeModule.ThirdPartyDisabled then p1.thirdPartyDisabledText elseif p2 == purchaseErrorTypeModule.Under13 then p1.under13Text elseif p2 == purchaseErrorTypeModule.PremiumPlatformUnavailable then p1.premiumPlatformUnavailable elseif p2 == purchaseErrorTypeModule.AlreadyPremium then p1.alreadyPremium elseif p2 == purchaseErrorTypeModule.PurchaseLimit then p1.purchaseLimitText elseif p2 == purchaseErrorTypeModule.ParentalLimit then p1.parentalLimitText elseif p2 == purchaseErrorTypeModule.FailedRobuxPurchase then p1.robuxFailedPurchaseText elseif p2 == purchaseErrorTypeModule.AlreadySubscribed then p1.alreadySubscribedText elseif p2 == purchaseErrorTypeModule.SubscriptionNotForSale then p1.subscriptionNotForSaleText elseif p2 == purchaseErrorTypeModule.SubscriptionExceededUserSpendLimit then p1.parentalRestrictionSubscriptionText elseif p2 == purchaseErrorTypeModule.SubscriptionUnsupportedLocale then p1.subscriptionUnsupportedLocaleText elseif p2 == purchaseErrorTypeModule.RestrictedUser then p1.restrictedUserText elseif p2 == purchaseErrorTypeModule.SubscriptionPurchasePlatformNotSupported or p2 == purchaseErrorTypeModule.SubscriptionInvalidSaleLocation then p1.subscriptionUnsupportedPlatformText elseif p2 == purchaseErrorTypeModule.VpcRequired then p1.vpcRequiredText elseif p2 == purchaseErrorTypeModule.ExceedParentalSpendLimit then p1.exceedParentalSpendLimitText elseif p2 == purchaseErrorTypeModule.EconomicRestriction then formatEconomicRestrictionText(p1, p3) else p1.unknownText
+function ExtendResult:getErrorMessage(p1, ErrorType, EconomicRestrictionError) --[[ Line: 61 ]]
+	-- upvalues: PurchaseErrorTypeModule (copy)
+	return if ErrorType == PurchaseErrorTypeModule.AlreadyOwn then p1.alreadyOwnText elseif ErrorType == PurchaseErrorTypeModule.FailedGrant then p1.failedGrantText elseif ErrorType == PurchaseErrorTypeModule.FailedGrantUnknown then p1.failedGrantUnknownText elseif ErrorType == PurchaseErrorTypeModule.Limited then p1.limitedText elseif ErrorType == PurchaseErrorTypeModule.NotEnoughRobux then p1.notEnoughRobuxText elseif ErrorType == PurchaseErrorTypeModule.NotForSale then p1.notForSaleText elseif ErrorType == PurchaseErrorTypeModule.NotForSaleExperience then p1.notForSaleExperienceText elseif ErrorType == PurchaseErrorTypeModule.PremiumOnly then p1.premiumOnlyText elseif ErrorType == PurchaseErrorTypeModule.ThirdPartyDisabled then p1.thirdPartyDisabledText elseif ErrorType == PurchaseErrorTypeModule.Under13 then p1.under13Text elseif ErrorType == PurchaseErrorTypeModule.PremiumPlatformUnavailable then p1.premiumPlatformUnavailable elseif ErrorType == PurchaseErrorTypeModule.AlreadyPremium then p1.alreadyPremium elseif ErrorType == PurchaseErrorTypeModule.PurchaseLimit then p1.purchaseLimitText elseif ErrorType == PurchaseErrorTypeModule.ParentalLimit then p1.parentalLimitText elseif ErrorType == PurchaseErrorTypeModule.FailedRobuxPurchase then p1.robuxFailedPurchaseText elseif ErrorType == PurchaseErrorTypeModule.AlreadySubscribed then p1.alreadySubscribedText elseif ErrorType == PurchaseErrorTypeModule.SubscriptionNotForSale then p1.subscriptionNotForSaleText elseif ErrorType == PurchaseErrorTypeModule.SubscriptionExceededUserSpendLimit then p1.parentalRestrictionSubscriptionText elseif ErrorType == PurchaseErrorTypeModule.SubscriptionUnsupportedLocale then p1.subscriptionUnsupportedLocaleText elseif ErrorType == PurchaseErrorTypeModule.RestrictedUser then p1.restrictedUserText elseif ErrorType == PurchaseErrorTypeModule.SubscriptionPurchasePlatformNotSupported or ErrorType == PurchaseErrorTypeModule.SubscriptionInvalidSaleLocation then p1.subscriptionUnsupportedPlatformText elseif ErrorType == PurchaseErrorTypeModule.VpcRequired then p1.vpcRequiredText elseif ErrorType == PurchaseErrorTypeModule.ExceedParentalSpendLimit then p1.exceedParentalSpendLimitText elseif ErrorType == PurchaseErrorTypeModule.EconomicRestriction then formatEconomicRestrictionText(p1, EconomicRestrictionError) else p1.unknownText
 end
 
-function formatEconomicRestrictionText(p1, p2)
-	-- upvalues: default (ref), economicRestrictionsPromptShownCounter (ref), getAppContextModule (ref), loggerModule (ref)
-	local timeoutMinutes = p2.timeoutMinutes
-	local violationType = p2.violationType
-	default:logRobloxTelemetryCounter(economicRestrictionsPromptShownCounter, 1, {
-		violationType = tostring(violationType),
-		appContext = getAppContextModule()
+function formatEconomicRestrictionText(p1, p2) --[[ Line: 123 ]]
+	-- upvalues: Default (copy), EconomicRestrictionsPromptShownCounter (copy), GetAppContextModule (copy), LoggerModule (copy)
+	local TimeoutMinutes: number = p2.timeoutMinutes
+	local ViolationType = p2.violationType
+	Default:logRobloxTelemetryCounter(EconomicRestrictionsPromptShownCounter, 1, {
+		violationType = tostring(ViolationType),
+		appContext = GetAppContextModule()
 	})
 	
-	if not timeoutMinutes or not violationType then
-		loggerModule.error({
+	if TimeoutMinutes and ViolationType then
+		local EconomicRestrictionViolationLabel = getEconomicRestrictionViolationLabel(p1, ViolationType)
+		local Ceiled = math.ceil(TimeoutMinutes / 60)
+		
+		return if Ceiled >= 24 then p1.economicRestrictionBaseTextDays:gsub("{day}", (tostring((math.ceil(Ceiled / 24))))):gsub("{violation}", EconomicRestrictionViolationLabel) else p1.economicRestrictionBaseTextHours:gsub("{hour}", (tostring(Ceiled))):gsub("{violation}", EconomicRestrictionViolationLabel)
+	else
+		LoggerModule.error({
 			error = "Timeout and violationType is required for economic restriction text. Showing unknown error.",
-			timeoutMinutes = timeoutMinutes,
-			violationType = violationType
+			timeoutMinutes = TimeoutMinutes,
+			violationType = ViolationType
 		})
 		
 		return p1.unknownText
 	end
-	local var1 = getEconomicRestrictionViolationLabel(p1, violationType)
-	local ceiled = math.ceil(timeoutMinutes / 60)
-	
-	return if ceiled >= 24 then p1.economicRestrictionBaseTextDays:gsub("{day}", tostring(math.ceil(ceiled / 24))):gsub("{violation}", var1) else p1.economicRestrictionBaseTextHours:gsub("{hour}", tostring(ceiled)):gsub("{violation}", var1)
 end
 
-function getEconomicRestrictionViolationLabel(p1, p2)
-	-- upvalues: economicRestrictionsViolationTypeModule (ref), loggerModule (ref)
-	if p2 == economicRestrictionsViolationTypeModule.Chargeback then
+function getEconomicRestrictionViolationLabel(p1, ViolationType) --[[ Line: 154 ]]
+	-- upvalues: EconomicRestrictionsViolationTypeModule (copy), LoggerModule (copy)
+	if ViolationType == EconomicRestrictionsViolationTypeModule.Chargeback then
 		return p1.chargebackViolationLabel
-	elseif p2 == economicRestrictionsViolationTypeModule.AbuseOfAffiliateSystem then
+	elseif ViolationType == EconomicRestrictionsViolationTypeModule.AbuseOfAffiliateSystem then
 		return p1.fraudAbuseOfAffiliateSystemViolationLabel
-	elseif p2 == economicRestrictionsViolationTypeModule.AttemptedUnauthorizedPaymentMethodUse then
+	elseif ViolationType == EconomicRestrictionsViolationTypeModule.AttemptedUnauthorizedPaymentMethodUse then
 		return p1.fraudAttemptedUnauthorizedPaymentMethodUseViolationLabel
-	elseif p2 == economicRestrictionsViolationTypeModule.PaymentAuthorizationAttempt then
+	elseif ViolationType == EconomicRestrictionsViolationTypeModule.PaymentAuthorizationAttempt then
 		return p1.fraudPaymentAbuseViolationLabel
-	elseif p2 == economicRestrictionsViolationTypeModule.RepeatedRefundRequests then
+	elseif ViolationType == EconomicRestrictionsViolationTypeModule.RepeatedRefundRequests then
 		return p1.fraudRepeatedRefundRequestsViolationLabel
-	elseif p2 == economicRestrictionsViolationTypeModule.SuspiciousAccountPatterns then
+	elseif ViolationType == EconomicRestrictionsViolationTypeModule.SuspiciousAccountPatterns then
 		return p1.fraudSuspiciousAccountPatternsViolationLabel
-	elseif p2 == economicRestrictionsViolationTypeModule.SuspiciousRefundRequests then
+	elseif ViolationType == EconomicRestrictionsViolationTypeModule.SuspiciousRefundRequests then
 		return p1.fraudSuspiciousRefundRequestsViolationLabel
-	elseif p2 == economicRestrictionsViolationTypeModule.UnauthorizedPurchase then
+	elseif ViolationType == EconomicRestrictionsViolationTypeModule.UnauthorizedPurchase then
 		return p1.fraudUnauthorizedPurchaseViolationLabel
-	elseif p2 == economicRestrictionsViolationTypeModule.UseOfUnauthorizedOffPlatformTransactions then
+	elseif ViolationType == EconomicRestrictionsViolationTypeModule.UseOfUnauthorizedOffPlatformTransactions then
 		return p1.fraudUseOfUnauthorizedOffPlatformTransactionsViolationLabel
-	elseif p2 == economicRestrictionsViolationTypeModule.VirtualEconomyAbuse then
+	elseif ViolationType == EconomicRestrictionsViolationTypeModule.VirtualEconomyAbuse then
 		return p1.fraudVirtualEconomyAbuseViolationLabel
+	else
+		LoggerModule.error({
+			message = "Invalid violation type",
+			violationType = ViolationType
+		})
+		
+		return ""
 	end
-	loggerModule.error({ message = "Invalid violation type", violationType = p2 })
-	
-	return ""
 end
 
-function getIsAlreadyOwnedError(p1)
-	-- upvalues: purchaseErrorTypeModule (ref)
-	return if p1 ~= purchaseErrorTypeModule.AlreadyOwn then if p1 ~= purchaseErrorTypeModule.AlreadyPremium then p1 == purchaseErrorTypeModule.AlreadySubscribed else true else true
+function getIsAlreadyOwnedError(AlreadyOwn): boolean --[[ Line: 185 ]]
+	-- upvalues: PurchaseErrorTypeModule (copy)
+	return AlreadyOwn == PurchaseErrorTypeModule.AlreadyOwn or (AlreadyOwn == PurchaseErrorTypeModule.AlreadyPremium or AlreadyOwn == PurchaseErrorTypeModule.AlreadySubscribed)
 end
 
-function getErrorTitleIcon(p1)
-	-- upvalues: images (ref)
-	return if getIsAlreadyOwnedError(p1) then images["icons/status/success_large"] else images["icons/status/error_large"]
+function getErrorTitleIcon(p1) --[[ Line: 191 ]]
+	-- upvalues: Images (copy)
+	return if getIsAlreadyOwnedError(p1) then Images["icons/status/success_large"] else Images["icons/status/error_large"]
 end
 
-function name.renderNewAlertWithLocalization(p1)
-	-- upvalues: withLocalization (ref)
-	return withLocalization({
+function ExtendResult.renderNewAlertWithLocalization(p1) --[[ Line: 198 ]]
+	-- upvalues: WithLocalizationFunction (copy)
+	return WithLocalizationFunction({
 		titleText = "IAPExperience.PurchaseError.Title.Error",
 		robuxFailedPurchaseTitle = "IAPExperience.PurchaseError.Title.RobuxPurchaseFailed",
 		robuxFailedPurchaseText = "IAPExperience.PurchaseError.Text.FailedRobuxPurchase",
@@ -141,58 +146,58 @@ function name.renderNewAlertWithLocalization(p1)
 		fraudVirtualEconomyAbuseViolationLabel = "Feature.NotApproved.Label.Sublabel.FraudVirtualEconomyAbuse",
 		economicRestrictionBaseTextHours = "IAPExperience.PurchaseError.Text.EconomicRestrictionsHours",
 		economicRestrictionBaseTextDays = "IAPExperience.PurchaseError.Text.EconomicRestrictionsDays"
-	})(function(p2)
-		-- upvalues: p1 (ref)
+	})(function(p2) --[[ Line: 241 ]]
+		-- upvalues: p1 (copy)
 		return p1:renderAlert(p2)
 	end)
 end
 
-function name.render(p1)
-	-- upvalues: roactModule (ref), localizationProvider (ref), localization (ref), localizationService (ref)
-	return roactModule.createElement(localizationProvider, {
-		localization = localization.new(localizationService.RobloxLocaleId)
+function ExtendResult.render(p1) --[[ Line: 246 ]]
+	-- upvalues: RoactModule (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy)
+	return RoactModule.createElement(LocalizationProvider, {
+		localization = Localization.new(LocalizationService.RobloxLocaleId)
 	}, { Alert = p1:renderNewAlertWithLocalization() })
 end
 
-function name.renderAlert(p1, p2)
-	-- upvalues: purchaseErrorTypeModule (ref), loggerModule (ref), getAppContextModule (ref), default (ref), purchaseErrorPromptShownCounter (ref), roactModule (ref), interactiveAlert (ref), buttonType (ref)
-	local props = p1.props
-	local errorType = props.errorType and purchaseErrorTypeModule.toRawValue(props.errorType) or tostring(props.errorType)
-	loggerModule.debug({
+function ExtendResult.renderAlert(p1, p2) --[[ Line: 254 ]]
+	-- upvalues: PurchaseErrorTypeModule (copy), LoggerModule (copy), GetAppContextModule (copy), Default (copy), PurchaseErrorPromptShownCounter (copy), RoactModule (copy), InteractiveAlert (copy), ButtonType (copy)
+	local Props = p1.props
+	local RawValue = Props.errorType and PurchaseErrorTypeModule.toRawValue(Props.errorType) or tostring(Props.errorType)
+	LoggerModule.debug({
 		message = "Purchase Error Prompt Shown",
-		errorType = tostring(props.errorType),
-		errorLabel = errorType,
-		flowType = tostring(props.flowType),
-		screenHeight = props.screenSize.Y,
-		screenWidth = props.screenSize.X,
-		portrait = props.screenSize.X < props.screenSize.Y,
-		appContext = getAppContextModule()
+		errorType = tostring(Props.errorType),
+		errorLabel = RawValue,
+		flowType = tostring(Props.flowType),
+		screenHeight = Props.screenSize.Y,
+		screenWidth = Props.screenSize.X,
+		portrait = Props.screenSize.X < Props.screenSize.Y,
+		appContext = GetAppContextModule()
 	})
-	default:logRobloxTelemetryCounter(purchaseErrorPromptShownCounter, 1, {
-		errorType = tostring(props.errorType),
-		errorLabel = errorType,
-		flowType = tostring(props.flowType),
-		screenHeight = props.screenSize.Y,
-		screenWidth = props.screenSize.X,
-		portrait = props.screenSize.X < props.screenSize.Y,
-		appContext = getAppContextModule()
+	Default:logRobloxTelemetryCounter(PurchaseErrorPromptShownCounter, 1, {
+		errorType = tostring(Props.errorType),
+		errorLabel = RawValue,
+		flowType = tostring(Props.flowType),
+		screenHeight = Props.screenSize.Y,
+		screenWidth = Props.screenSize.X,
+		portrait = Props.screenSize.X < Props.screenSize.Y,
+		appContext = GetAppContextModule()
 	})
 	
-	return roactModule.createElement(interactiveAlert, {
-		anchorPoint = props.anchorPoint,
-		position = props.position,
-		screenSize = props.screenSize,
-		title = p1:getErrorTitle(p2, props.errorType, props.flowType),
-		titleIcon = getErrorTitleIcon(props.errorType),
-		bodyText = p1:getErrorMessage(p2, props.errorType, props.economicRestrictionError),
+	return RoactModule.createElement(InteractiveAlert, {
+		anchorPoint = Props.anchorPoint,
+		position = Props.position,
+		screenSize = Props.screenSize,
+		title = p1:getErrorTitle(p2, Props.errorType, Props.flowType),
+		titleIcon = getErrorTitleIcon(Props.errorType),
+		bodyText = p1:getErrorMessage(p2, Props.errorType, Props.economicRestrictionError),
 		buttonStackInfo = {
 			buttons = {
 				{
-					buttonType = buttonType.PrimarySystem,
+					buttonType = ButtonType.PrimarySystem,
 					props = {
-						onActivated = props.doneActivated,
+						onActivated = Props.doneActivated,
 						text = p2.okText,
-						inputIcon = props.doneControllerIcon
+						inputIcon = Props.doneControllerIcon
 					}
 				}
 			}
@@ -200,4 +205,4 @@ function name.renderAlert(p1, p2)
 	})
 end
 
-return name
+return ExtendResult

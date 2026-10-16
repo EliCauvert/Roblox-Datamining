@@ -1,17 +1,17 @@
-﻿local createSignal = require(script:FindFirstAncestor("InExperienceShop").Parent.Signals).createSignal
+﻿local CreateSignalFunction = require(script:FindFirstAncestor("InExperienceShop").Parent.Signals).createSignal
 
-return function()
-	-- upvalues: createSignal (ref)
-	local var1, var2 = createSignal(false)
-	local var3, var4 = createSignal(false)
-	local var5, var6 = createSignal(nil)
+return function() --[[ Line: 15 ]]
+	-- upvalues: CreateSignalFunction (copy)
+	local Signal, Signal2 = CreateSignalFunction(false)
+	local Signal1, Signal2_1 = CreateSignalFunction(false)
+	local Signal3, Signal2_2 = CreateSignalFunction(nil)
 	
 	return {
-		getEnabled = var1,
-		setEnabled = var2,
-		getStatusIndicatorEnabled = var3,
-		setStatusIndicatorEnabled = var4,
-		getIconInstance = var5,
-		setIconInstance = var6
+		getEnabled = Signal,
+		setEnabled = Signal2,
+		getStatusIndicatorEnabled = Signal1,
+		setStatusIndicatorEnabled = Signal2_1,
+		getIconInstance = Signal3,
+		setIconInstance = Signal2_2
 	}
 end

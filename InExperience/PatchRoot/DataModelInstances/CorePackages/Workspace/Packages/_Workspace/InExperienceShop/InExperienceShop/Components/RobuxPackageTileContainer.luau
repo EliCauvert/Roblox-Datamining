@@ -1,274 +1,281 @@
-﻿local inExperienceShop = script:FindFirstAncestor("InExperienceShop")
-local parent = inExperienceShop.Parent
-local sessionService = game:GetService("SessionService")
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local signalsReactModule = require(parent.SignalsReact)
-local purchasePromptModule = require(parent.PurchasePrompt)
-local promiseModule = require(parent.Promise)
-local view = foundationModule.View
-local fIntShopOwnershipFetchMaxAttemptsModule = require(inExperienceShop.Flags.FIntShopOwnershipFetchMaxAttempts)
-local fFlagEnableInExperienceShopUnifiedLoggingModule = require(inExperienceShop.Flags.FFlagEnableInExperienceShopUnifiedLogging)
-local fFlagEnableCategoryLoggingInShopModule = require(inExperienceShop.Flags.FFlagEnableCategoryLoggingInShop)
-local fFlagShopUseMockUserOwnsGamePassModule = require(inExperienceShop.Flags.FFlagShopUseMockUserOwnsGamePass)
-local fFlagSkipPaymentSessionForPlainRobuxModule = require(inExperienceShop.Flags.FFlagSkipPaymentSessionForPlainRobux)
-local fFlagHideBonusInShopWhenNotClaimableModule = require(inExperienceShop.Flags.FFlagHideBonusInShopWhenNotClaimable)
-local fFlagEnableBonusJwtInShop = require(parent.SharedFlags).FFlagEnableBonusJwtInShop
-local fFlagShopListenNativePurchaseFinishedModule = require(inExperienceShop.Flags.FFlagShopListenNativePurchaseFinished)
-local fFlagShopRobuxPurchaseCompletionModalModule = require(inExperienceShop.Flags.FFlagShopRobuxPurchaseCompletionModal)
-local fFlagRefetchRobuxWidgetAfterPurchaseModule = require(inExperienceShop.Flags.FFlagRefetchRobuxWidgetAfterPurchase)
-local fFlagEnableShopRobuxBuyTelemetryModule = require(inExperienceShop.Flags.FFlagEnableShopRobuxBuyTelemetry)
-local getBlockRobuxTileClickInShopModule = require(inExperienceShop.Flags.GetBlockRobuxTileClickInShop)
-local userOwnsGamePassHttpModule = require(inExperienceShop.Api.userOwnsGamePassHttp)
-local mockUserOwnsGamePassModule = require(inExperienceShop.Mocks.MockUserOwnsGamePass)
-local robuxPackageTileModule = require(inExperienceShop.Components.RobuxPackageTile)
-local shopDebugLoggerModule = require(inExperienceShop.Internal.ShopDebugLogger)
-local getInExperienceShopStoreModule = require(inExperienceShop.Stores.getInExperienceShopStore)
-local getRobuxPackageBonusPresentationModule = require(inExperienceShop.Utils.getRobuxPackageBonusPresentation)
-local promoteBonusRobuxPackageToTopPicksModule = require(inExperienceShop.Api.promoteBonusRobuxPackageToTopPicks)
-local redeemBonusTokenModule = require(inExperienceShop.Api.redeemBonusToken)
-local _ = require(inExperienceShop.Types)
+﻿local InExperienceShop = script:FindFirstAncestor("InExperienceShop")
+local Parent = InExperienceShop.Parent
+local SessionService = game:GetService("SessionService")
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local PurchasePromptModule = require(Parent.PurchasePrompt)
+local PromiseModule = require(Parent.Promise)
+local View = require(Parent.Foundation).View
+local FIntShopOwnershipFetchMaxAttemptsModule = require(InExperienceShop.Flags.FIntShopOwnershipFetchMaxAttempts)
+local FFlagEnableInExperienceShopUnifiedLoggingModule = require(InExperienceShop.Flags.FFlagEnableInExperienceShopUnifiedLogging)
+local FFlagEnableCategoryLoggingInShopModule = require(InExperienceShop.Flags.FFlagEnableCategoryLoggingInShop)
+local FFlagShopUseMockUserOwnsGamePassModule = require(InExperienceShop.Flags.FFlagShopUseMockUserOwnsGamePass)
+local FFlagSkipPaymentSessionForPlainRobuxModule = require(InExperienceShop.Flags.FFlagSkipPaymentSessionForPlainRobux)
+local FFlagHideBonusInShopWhenNotClaimableModule = require(InExperienceShop.Flags.FFlagHideBonusInShopWhenNotClaimable)
+local FFlagEnableBonusJwtInShop = require(Parent.SharedFlags).FFlagEnableBonusJwtInShop
+local FFlagShopListenNativePurchaseFinishedModule = require(InExperienceShop.Flags.FFlagShopListenNativePurchaseFinished)
+local FFlagShopRobuxPurchaseCompletionModalModule = require(InExperienceShop.Flags.FFlagShopRobuxPurchaseCompletionModal)
+local FFlagRefetchRobuxWidgetAfterPurchaseModule = require(InExperienceShop.Flags.FFlagRefetchRobuxWidgetAfterPurchase)
+local FFlagEnableShopRobuxBuyTelemetryModule = require(InExperienceShop.Flags.FFlagEnableShopRobuxBuyTelemetry)
+local GetBlockRobuxTileClickInShopModule = require(InExperienceShop.Flags.GetBlockRobuxTileClickInShop)
+local UserOwnsGamePassHttpModule = require(InExperienceShop.Api.userOwnsGamePassHttp)
+local MockUserOwnsGamePassModule = require(InExperienceShop.Mocks.MockUserOwnsGamePass)
+local RobuxPackageTileModule = require(InExperienceShop.Components.RobuxPackageTile)
+local ShopDebugLoggerModule = require(InExperienceShop.Internal.ShopDebugLogger)
+local GetInExperienceShopStoreModule = require(InExperienceShop.Stores.getInExperienceShopStore)
+local GetRobuxPackageBonusPresentationModule = require(InExperienceShop.Utils.getRobuxPackageBonusPresentation)
+local PromoteBonusRobuxPackageToTopPicksModule = require(InExperienceShop.Api.promoteBonusRobuxPackageToTopPicks)
+local RedeemBonusTokenModule = require(InExperienceShop.Api.redeemBonusToken)
+local _ = require(InExperienceShop.Types)
 
-local function _(p1)
+local function _(p1): boolean --[[ Line: 57 | Named "isPromise" ]]
 	return typeof(p1) == "table" and typeof(p1.andThen) == "function"
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), signalsReactModule (ref), getInExperienceShopStoreModule (ref), promoteBonusRobuxPackageToTopPicksModule (ref), fFlagEnableBonusJwtInShop (ref), getRobuxPackageBonusPresentationModule (ref), fFlagHideBonusInShopWhenNotClaimableModule (ref), fFlagEnableInExperienceShopUnifiedLoggingModule (ref), parent (ref), fFlagEnableCategoryLoggingInShopModule (ref), sessionService (ref), shopDebugLoggerModule (ref), fFlagShopUseMockUserOwnsGamePassModule (ref), mockUserOwnsGamePassModule (ref), userOwnsGamePassHttpModule (ref), fIntShopOwnershipFetchMaxAttemptsModule (ref), fFlagRefetchRobuxWidgetAfterPurchaseModule (ref), fFlagSkipPaymentSessionForPlainRobuxModule (ref), fFlagShopListenNativePurchaseFinishedModule (ref), fFlagShopRobuxPurchaseCompletionModalModule (ref), purchasePromptModule (ref), fFlagEnableShopRobuxBuyTelemetryModule (ref), inExperienceShop (ref), redeemBonusTokenModule (ref), promiseModule (ref), getBlockRobuxTileClickInShopModule (ref), view (ref), robuxPackageTileModule (ref)
-	local pkg = p1.pkg
-	local var1 = reactModule.useRef(nil)
-	local var2 = signalsReactModule.useSignalState(getInExperienceShopStoreModule)
-	local bonusGamePassId = promoteBonusRobuxPackageToTopPicksModule.getBonusGamePassId(pkg)
-	local var3 = nil
-	local var4 = nil
-	local var5 = nil
-	local var6 = nil
-	local var7 = nil
+return ReactModule.memo(function(Frame) --[[ Line: 61 | Named "RobuxPackageTileContainer" ]]
+	-- upvalues: ReactModule (copy), SignalsReactModule (copy), GetInExperienceShopStoreModule (copy), PromoteBonusRobuxPackageToTopPicksModule (copy), FFlagEnableBonusJwtInShop (copy), GetRobuxPackageBonusPresentationModule (copy), FFlagHideBonusInShopWhenNotClaimableModule (copy), FFlagEnableInExperienceShopUnifiedLoggingModule (copy), Parent (copy), FFlagEnableCategoryLoggingInShopModule (copy), SessionService (copy), ShopDebugLoggerModule (copy), FFlagShopUseMockUserOwnsGamePassModule (copy), MockUserOwnsGamePassModule (copy), UserOwnsGamePassHttpModule (copy), FIntShopOwnershipFetchMaxAttemptsModule (copy), FFlagRefetchRobuxWidgetAfterPurchaseModule (copy), FFlagSkipPaymentSessionForPlainRobuxModule (copy), FFlagShopListenNativePurchaseFinishedModule (copy), FFlagShopRobuxPurchaseCompletionModalModule (copy), PurchasePromptModule (copy), FFlagEnableShopRobuxBuyTelemetryModule (copy), InExperienceShop (copy), RedeemBonusTokenModule (copy), PromiseModule (copy), GetBlockRobuxTileClickInShopModule (copy), View (copy), RobuxPackageTileModule (copy)
+	local Pkg = Frame.pkg
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(GetInExperienceShopStoreModule)
+	local BonusGamePassId = PromoteBonusRobuxPackageToTopPicksModule.getBonusGamePassId(Pkg)
+	local v1 = nil
+	local Callback = nil
+	local UseRefResult1 = nil
+	local UseRefResult2 = nil
+	local UseRefResult3 = nil
 	
-	if fFlagEnableBonusJwtInShop then
-		local var8, var9 = reactModule.useState(false)
-		var3 = var8
-		var4 = var9
-		var5 = reactModule.useRef(false)
-		var6 = reactModule.useRef(true)
-		var7 = reactModule.useRef(nil)
-		reactModule.useEffect(function()
-			-- upvalues: var6 (write), var7 (write)
-			var6.current = true
+	if FFlagEnableBonusJwtInShop then
+		v1, Callback = ReactModule.useState(false)
+		UseRefResult1 = ReactModule.useRef(false)
+		UseRefResult2 = ReactModule.useRef(true)
+		UseRefResult3 = ReactModule.useRef(nil)
+		ReactModule.useEffect(function() --[[ Line: 82 ]]
+			-- upvalues: UseRefResult2 (ref), UseRefResult3 (ref)
+			UseRefResult2.current = true
 			
-			return function()
-				-- upvalues: var6 (copy), var7 (copy)
-				var6.current = false
-				local current = var7.current
-				var7.current = nil
+			return function() --[[ Line: 84 ]]
+				-- upvalues: UseRefResult2 (upval), UseRefResult3 (upval)
+				UseRefResult2.current = false
+				local Current = UseRefResult3.current
+				UseRefResult3.current = nil
 				
-				if current ~= nil and typeof(current.cancel) == "function" then
-					current:cancel()
+				if Current ~= nil and typeof(Current.cancel) == "function" then
+					Current:cancel()
 				end
 			end
 		end, {})
 	end
-	local var10
-	local var11 = getRobuxPackageBonusPresentationModule(pkg, signalsReactModule.useSignalState(function(p2)
-		-- upvalues: var2 (ref), bonusGamePassId (ref)
-		return if bonusGamePassId == nil then nil else var2.getOwnership(p2)[bonusGamePassId]
-	end), signalsReactModule.useSignalState(function(p2)
-		-- upvalues: var2 (ref), bonusGamePassId (ref)
-		return if bonusGamePassId == nil then nil else var2.getBonusPromotionEligibility(p2)[bonusGamePassId]
-	end))
-	local mobileProductId = pkg.mobileProductId
-	local productId = pkg.productId
-	local paymentSessionId = p1.paymentSessionId
-	local var12 = if fFlagEnableBonusJwtInShop then p1.bonusJwt else nil
-	local hasBonusItem = var11.hasBonusItem
-	
-	if paymentSessionId ~= nil then
-		var10 = true
+	local RobuxPackageBonusPresentationModule = GetRobuxPackageBonusPresentationModule(Pkg, SignalsReactModule.useSignalState(function(p1) --[[ Line: 95 ]]
+		-- upvalues: UseSignalStateResult (copy), BonusGamePassId (copy)
+		local Ownership = UseSignalStateResult.getOwnership(p1)
 		
-		if paymentSessionId == "" then
-			var10 = var12 ~= nil and var12 ~= ""
+		return if BonusGamePassId == nil then nil else Ownership[BonusGamePassId]
+	end), (SignalsReactModule.useSignalState(function(p1) --[[ Line: 105 ]]
+		-- upvalues: UseSignalStateResult (copy), BonusGamePassId (copy)
+		local BonusPromotionEligibility = UseSignalStateResult.getBonusPromotionEligibility(p1)
+		
+		return if BonusGamePassId == nil then nil else BonusPromotionEligibility[BonusGamePassId]
+	end)))
+	local MobileProductId = Pkg.mobileProductId
+	local ProductId = Pkg.productId
+	local PaymentSessionId = Frame.paymentSessionId
+	local BonusJwt = if FFlagEnableBonusJwtInShop then Frame.bonusJwt else nil
+	local HasBonusItem = RobuxPackageBonusPresentationModule.hasBonusItem
+	local NoFFlagHideBonusInShopWhenNotClaimableModule: boolean = HasBonusItem and (not FFlagHideBonusInShopWhenNotClaimableModule or (if PaymentSessionId == nil then BonusJwt ~= nil and BonusJwt ~= "" else PaymentSessionId ~= "" or BonusJwt ~= nil and BonusJwt ~= ""))
+	ReactModule.useEffect(function() --[[ Line: 129 ]]
+		-- upvalues: FFlagEnableInExperienceShopUnifiedLoggingModule (upval), Parent (upval), Pkg (copy), ProductId (copy), Frame (copy), FFlagEnableCategoryLoggingInShopModule (upval), UseRefResult (copy), SessionService (upval)
+		if FFlagEnableInExperienceShopUnifiedLoggingModule then
+			task.defer(function() --[[ Line: 134 ]]
+				-- upvalues: Parent (upval), Pkg (upval), ProductId (upval), Frame (upval), FFlagEnableCategoryLoggingInShopModule (upval), UseRefResult (upval), SessionService (upval)
+				local AvatarExperienceAnalyticsModule = require(Parent.AvatarExperienceAnalytics)
+				local MarketplaceUnifiedItemType = AvatarExperienceAnalyticsModule.UnifiedEventLogEnums.MarketplaceUnifiedItemType
+				local HasBonusItem = Pkg.bonusItem ~= nil
+				AvatarExperienceAnalyticsModule.addUnifiedEventLogging(UseRefResult, {
+					universeId = game.GameId,
+					itemId = if ProductId == nil then Pkg.id else ProductId,
+					itemType = if HasBonusItem then MarketplaceUnifiedItemType.ROBUX_WITH_BONUS else MarketplaceUnifiedItemType.ROBUX,
+					categoryId = Frame.categoryId,
+					categoryType = Frame.categoryType,
+					gridPositionRow = Frame.gridPositionRow,
+					gridPositionColumn = Frame.gridPositionColumn,
+					stableCategoryId = if FFlagEnableCategoryLoggingInShopModule then Frame.stableCategoryId else nil,
+					categoryGroup = if FFlagEnableCategoryLoggingInShopModule then Frame.categoryGroup else nil,
+					categoryName = if FFlagEnableCategoryLoggingInShopModule then Frame.categoryName else nil
+				}, { sessionTagName = SessionService:GetSessionTag("level2a") })
+			end)
+			
+			return
 		end
-		local var13 = hasBonusItem and (not fFlagHideBonusInShopWhenNotClaimableModule or var10)
-		reactModule.useEffect(function()
-			-- upvalues: fFlagEnableInExperienceShopUnifiedLoggingModule (copy), parent (copy), pkg (ref), productId (ref), p1 (ref), fFlagEnableCategoryLoggingInShopModule (copy), var1 (ref), sessionService (copy)
-			if fFlagEnableInExperienceShopUnifiedLoggingModule then
-				task.defer(function()
-					-- upvalues: parent (copy), pkg (copy), productId (copy), p1 (copy), fFlagEnableCategoryLoggingInShopModule (copy), var1 (copy), sessionService (copy)
-					local avatarExperienceAnalyticsModule = require(parent.AvatarExperienceAnalytics)
-					local marketplaceUnifiedItemType = avatarExperienceAnalyticsModule.UnifiedEventLogEnums.MarketplaceUnifiedItemType
-					avatarExperienceAnalyticsModule.addUnifiedEventLogging(var1, {
-						universeId = game.GameId,
-						itemId = if productId ~= nil then pkg.id else productId,
-						itemType = if pkg.bonusItem ~= nil then marketplaceUnifiedItemType.ROBUX_WITH_BONUS else marketplaceUnifiedItemType.ROBUX,
-						categoryId = p1.categoryId,
-						categoryType = p1.categoryType,
-						gridPositionRow = p1.gridPositionRow,
-						gridPositionColumn = p1.gridPositionColumn,
-						stableCategoryId = if fFlagEnableCategoryLoggingInShopModule then p1.stableCategoryId else nil,
-						categoryGroup = if fFlagEnableCategoryLoggingInShopModule then p1.categoryGroup else nil,
-						categoryName = if fFlagEnableCategoryLoggingInShopModule then p1.categoryName else nil
-					}, { sessionTagName = sessionService:GetSessionTag("level2a") })
-				end)
-				
-				return
-			end
-		end, {
-			pkg.id, productId, pkg.bonusItem, p1.categoryId, p1.categoryType,
-			p1.gridPositionRow, p1.gridPositionColumn,
-			if fFlagEnableCategoryLoggingInShopModule then p1.stableCategoryId else nil,
-			if fFlagEnableCategoryLoggingInShopModule then p1.categoryGroup else nil,
-			if fFlagEnableCategoryLoggingInShopModule then p1.categoryName else nil
-		})
-		local var14 = reactModule.useCallback(function()
-			-- upvalues: bonusGamePassId (ref), shopDebugLoggerModule (copy), fFlagShopUseMockUserOwnsGamePassModule (copy), mockUserOwnsGamePassModule (copy), userOwnsGamePassHttpModule (copy), var2 (ref), fIntShopOwnershipFetchMaxAttemptsModule (copy), fFlagRefetchRobuxWidgetAfterPurchaseModule (copy), fFlagSkipPaymentSessionForPlainRobuxModule (copy)
-			if bonusGamePassId == nil then
-				shopDebugLoggerModule.log("refreshBonusOwnership: skip poll, no bonus game pass")
-			else
-				shopDebugLoggerModule.logLazy(function()
-					-- upvalues: bonusGamePassId (copy)
-					return "refreshBonusOwnership: polling bonusGamePassId=" .. bonusGamePassId
-				end)
-				var2.pollGamePassOwnership(bonusGamePassId, fIntShopOwnershipFetchMaxAttemptsModule, if fFlagShopUseMockUserOwnsGamePassModule then mockUserOwnsGamePassModule else userOwnsGamePassHttpModule, true)
-			end
-			if fFlagRefetchRobuxWidgetAfterPurchaseModule and (bonusGamePassId ~= nil or not fFlagSkipPaymentSessionForPlainRobuxModule) then
-				var2.refreshRobuxWidgetsAfterPurchase()
-			end
-		end, { bonusGamePassId, var2 })
-		local var15 = if fFlagShopListenNativePurchaseFinishedModule then reactModule.useCallback(function()
-			-- upvalues: mobileProductId (ref), shopDebugLoggerModule (copy), fFlagRefetchRobuxWidgetAfterPurchaseModule (copy), fFlagShopRobuxPurchaseCompletionModalModule (copy), bonusGamePassId (ref), var2 (ref), pkg (ref)
-			if mobileProductId == nil or mobileProductId == "" then
-				shopDebugLoggerModule.log("onNativePurchaseLaunched: skip, no store SKU")
-				
-				return
-			elseif not fFlagRefetchRobuxWidgetAfterPurchaseModule and not fFlagShopRobuxPurchaseCompletionModalModule and bonusGamePassId == nil then
-				shopDebugLoggerModule.log("onNativePurchaseLaunched: skip, no bonus game pass")
-				
-				return
-			end
-			shopDebugLoggerModule.logLazy(function()
-				-- upvalues: bonusGamePassId (copy), mobileProductId (copy)
-				return "onNativePurchaseLaunched: recording bonusGamePassId=" .. tostring(bonusGamePassId) .. " storeSku=" .. mobileProductId
+	end, {
+		Pkg.id, ProductId, Pkg.bonusItem, Frame.categoryId, Frame.categoryType,
+		Frame.gridPositionRow, Frame.gridPositionColumn,
+		if FFlagEnableCategoryLoggingInShopModule then Frame.stableCategoryId else nil,
+		if FFlagEnableCategoryLoggingInShopModule then Frame.categoryGroup else nil,
+		if FFlagEnableCategoryLoggingInShopModule then Frame.categoryName else nil
+	})
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 179 ]]
+		-- upvalues: BonusGamePassId (copy), ShopDebugLoggerModule (upval), FFlagShopUseMockUserOwnsGamePassModule (upval), MockUserOwnsGamePassModule (upval), UserOwnsGamePassHttpModule (upval), UseSignalStateResult (copy), FIntShopOwnershipFetchMaxAttemptsModule (upval), FFlagRefetchRobuxWidgetAfterPurchaseModule (upval), FFlagSkipPaymentSessionForPlainRobuxModule (upval)
+		if BonusGamePassId == nil then
+			ShopDebugLoggerModule.log("refreshBonusOwnership: skip poll, no bonus game pass")
+		else
+			ShopDebugLoggerModule.logLazy(function(): string --[[ Line: 181 ]]
+				-- upvalues: BonusGamePassId (upval)
+				return "refreshBonusOwnership: polling bonusGamePassId=" .. BonusGamePassId
 			end)
+			UseSignalStateResult.pollGamePassOwnership(BonusGamePassId, FIntShopOwnershipFetchMaxAttemptsModule, if FFlagShopUseMockUserOwnsGamePassModule then MockUserOwnsGamePassModule else UserOwnsGamePassHttpModule, true)
+		end
+		if FFlagRefetchRobuxWidgetAfterPurchaseModule and (BonusGamePassId ~= nil or not FFlagSkipPaymentSessionForPlainRobuxModule) then
+			UseSignalStateResult.refreshRobuxWidgetsAfterPurchase()
+		end
+	end, { BonusGamePassId, UseSignalStateResult })
+	local UseResult1 = if FFlagShopListenNativePurchaseFinishedModule then ReactModule.useCallback(function() --[[ Line: 208 ]]
+		-- upvalues: MobileProductId (copy), ShopDebugLoggerModule (upval), FFlagRefetchRobuxWidgetAfterPurchaseModule (upval), FFlagShopRobuxPurchaseCompletionModalModule (upval), BonusGamePassId (copy), UseSignalStateResult (copy), Pkg (copy)
+		if MobileProductId == nil or MobileProductId == "" then
+			ShopDebugLoggerModule.log("onNativePurchaseLaunched: skip, no store SKU")
 			
-			if fFlagShopRobuxPurchaseCompletionModalModule then
-				var2.bonusGamePassIdForNativePurchase(bonusGamePassId, mobileProductId, pkg.robuxAmount)
-				
-				return
-			end
-			var2.bonusGamePassIdForNativePurchase(bonusGamePassId, mobileProductId)
-		end, { bonusGamePassId, mobileProductId, pkg.robuxAmount, var2 }) else nil
-		local var16 = reactModule.useCallback(function()
-			-- upvalues: purchasePromptModule (copy), shopDebugLoggerModule (copy), fFlagEnableBonusJwtInShop (copy), var5 (write), fFlagEnableShopRobuxBuyTelemetryModule (copy), fFlagEnableInExperienceShopUnifiedLoggingModule (copy), var1 (ref), inExperienceShop (copy), p1 (ref), paymentSessionId (ref), fFlagSkipPaymentSessionForPlainRobuxModule (copy), hasBonusItem (ref), mobileProductId (ref), productId (ref), bonusGamePassId (ref), var14 (ref), fFlagShopListenNativePurchaseFinishedModule (copy), var15 (write), var12 (ref), fFlagRefetchRobuxWidgetAfterPurchaseModule (copy), redeemBonusTokenModule (copy), promiseModule (copy), var2 (ref), var7 (write), var4 (write), var6 (write)
-			local launchRobuxPackagePurchase = purchasePromptModule.launchRobuxPackagePurchase
+			return
+		end
+		if not FFlagRefetchRobuxWidgetAfterPurchaseModule and not FFlagShopRobuxPurchaseCompletionModalModule and BonusGamePassId == nil then
+			ShopDebugLoggerModule.log("onNativePurchaseLaunched: skip, no bonus game pass")
 			
-			if launchRobuxPackagePurchase == nil then
-				shopDebugLoggerModule.log("onBuyActivated: skip, launchRobuxPackagePurchase missing")
-				
-				return
-			elseif fFlagEnableBonusJwtInShop and var5.current then return end
-			if fFlagEnableShopRobuxBuyTelemetryModule and fFlagEnableInExperienceShopUnifiedLoggingModule and var1.current ~= nil then
-				require(inExperienceShop.Analytics.sendRobuxBuyClickUnifiedEvent)(var1.current, p1.shopPageType)
-			end
-			local var17 = if fFlagSkipPaymentSessionForPlainRobuxModule and not hasBonusItem then "" else paymentSessionId
-			shopDebugLoggerModule.logLazy(function()
-				-- upvalues: mobileProductId (copy), productId (copy), bonusGamePassId (copy)
-				return "onBuyActivated: launch mobileProductId=" .. tostring(mobileProductId) .. " productId=" .. tostring(productId) .. " bonusGamePassId=" .. tostring(bonusGamePassId)
-			end)
-			local t = {
-				mobileProductId = mobileProductId or "",
-				productId = productId,
-				paymentSessionId = var17,
-				onWebViewClosed = var14
-			}
-			
-			if fFlagShopListenNativePurchaseFinishedModule then
-				t.onNativePurchaseLaunched = var15
-			end
-			if not fFlagEnableBonusJwtInShop then
-				launchRobuxPackagePurchase(t)
-				
-				return
-			end
-			t.bonusJwt = if fFlagSkipPaymentSessionForPlainRobuxModule and not hasBonusItem then "" else var12
-			
-			if fFlagRefetchRobuxWidgetAfterPurchaseModule then
-				function t.redeemBonusToken(p2, p3)
-					-- upvalues: redeemBonusTokenModule (copy), promiseModule (copy), shopDebugLoggerModule (copy), var2 (copy)
-					return redeemBonusTokenModule(p2, p3):catch(function(p4)
-						-- upvalues: promiseModule (copy), shopDebugLoggerModule (copy), var2 (copy)
-						if typeof(p4) == "table" and p4.kind == "BadRequest" then
-							shopDebugLoggerModule.log("redeemBonusToken: HTTP 400, refreshing Robux widgets")
-							local var18 = var2.refreshRobuxWidgetsAfterPurchase()
-							
-							return (if typeof(var18) == "table" and typeof(var18.andThen) == "function" then var18 else promiseModule.resolve()):andThen(function()
-								-- upvalues: promiseModule (copy), p4 (ref)
-								return promiseModule.reject(p4)
-							end)
-						end
-						return promiseModule.reject(p4)
-					end)
-				end
-			else
-				t.redeemBonusToken = redeemBonusTokenModule
-			end
-			local var18 = launchRobuxPackagePurchase(t)
-			
-			if typeof(var18) == "table" and typeof(var18.andThen) == "function" then
-				var5.current = true
-				var7.current = var18
-				var4(true)
-				var18:catch(function(p2)
-					-- upvalues: shopDebugLoggerModule (copy)
-					shopDebugLoggerModule.logLazy(function()
-						-- upvalues: p2 (ref)
-						return "RobuxPackageTile: purchase launch failed err=" .. (if typeof(p2) == "table" then tostring(p2.message) else tostring(p2))
-					end)
-				end):finally(function()
-					-- upvalues: var5 (copy), var7 (copy), var6 (copy), var4 (copy)
-					var5.current = false
-					var7.current = nil
-					
-					if var6.current then
-						var4(false)
-					end
-				end)
-				
-				return
-			end
-		end, {
-			mobileProductId, productId, paymentSessionId, var12, var14, var15,
-			hasBonusItem, bonusGamePassId, var2, p1.shopPageType
-		})
-		local bonusItemDetails = pkg.bonusItemDetails
-		local onBonusItemActivated = p1.onBonusItemActivated
+			return
+		end
+		ShopDebugLoggerModule.logLazy(function(): string --[[ Line: 221 ]]
+			-- upvalues: BonusGamePassId (upval), MobileProductId (upval)
+			return "onNativePurchaseLaunched: recording bonusGamePassId=" .. tostring(BonusGamePassId) .. " storeSku=" .. MobileProductId
+		end)
 		
-		return reactModule.createElement(view, {
-			tag = "fill size-full-0",
-			LayoutOrder = p1.LayoutOrder,
-			ref = if fFlagEnableInExperienceShopUnifiedLoggingModule then var1 else nil
-		}, {
-			Tile = reactModule.createElement(robuxPackageTileModule, {
-				robuxAmount = pkg.robuxAmount,
-				currencyAmountStr = pkg.currencyAmountStr,
-				robuxImage = pkg.robuxImage,
-				hasBonusItem = var13,
-				bonusItemThumbnail = var11.bonusItemThumbnail,
-				onTileActivated = reactModule.useCallback(function()
-					-- upvalues: getBlockRobuxTileClickInShopModule (copy), var13 (ref), bonusItemDetails (ref), onBonusItemActivated (ref)
-					if getBlockRobuxTileClickInShopModule() then return end
-					if not var13 or bonusItemDetails == nil or onBonusItemActivated == nil then return end
-					local itemType = bonusItemDetails.itemType
+		if FFlagShopRobuxPurchaseCompletionModalModule then
+			UseSignalStateResult.bonusGamePassIdForNativePurchase(BonusGamePassId, MobileProductId, Pkg.robuxAmount)
+			
+			return
+		else
+			UseSignalStateResult.bonusGamePassIdForNativePurchase(BonusGamePassId, MobileProductId)
+		end
+	end, {
+		BonusGamePassId,
+		MobileProductId,
+		Pkg.robuxAmount,
+		UseSignalStateResult
+	}) else nil
+	local BonusItemDetails = Pkg.bonusItemDetails
+	local OnBonusItemActivatedFunction = Frame.onBonusItemActivated
+	
+	return ReactModule.createElement(View, {
+		tag = "fill size-full-0",
+		LayoutOrder = Frame.LayoutOrder,
+		ref = if FFlagEnableInExperienceShopUnifiedLoggingModule then UseRefResult else nil
+	}, {
+		Tile = ReactModule.createElement(RobuxPackageTileModule, {
+			robuxAmount = Pkg.robuxAmount,
+			currencyAmountStr = Pkg.currencyAmountStr,
+			robuxImage = Pkg.robuxImage,
+			hasBonusItem = NoFFlagHideBonusInShopWhenNotClaimableModule,
+			bonusItemThumbnail = RobuxPackageBonusPresentationModule.bonusItemThumbnail,
+			onTileActivated = ReactModule.useCallback(function() --[[ Line: 353 ]]
+				-- upvalues: GetBlockRobuxTileClickInShopModule (upval), NoFFlagHideBonusInShopWhenNotClaimableModule (copy), BonusItemDetails (copy), OnBonusItemActivatedFunction (copy)
+				if GetBlockRobuxTileClickInShopModule() then return end
+				if not NoFFlagHideBonusInShopWhenNotClaimableModule or BonusItemDetails == nil or OnBonusItemActivatedFunction == nil then return end
+				local ItemType = BonusItemDetails.itemType
+				
+				if ItemType ~= nil then
+					OnBonusItemActivatedFunction(BonusItemDetails.id, ItemType)
 					
-					if itemType == nil then
-						return
+					return
+				end
+			end, {
+				NoFFlagHideBonusInShopWhenNotClaimableModule,
+				BonusItemDetails,
+				OnBonusItemActivatedFunction
+			}),
+			onBuyActivated = ReactModule.useCallback(function() --[[ Line: 236 ]]
+				-- upvalues: PurchasePromptModule (upval), ShopDebugLoggerModule (upval), FFlagEnableBonusJwtInShop (upval), UseRefResult1 (ref), FFlagEnableShopRobuxBuyTelemetryModule (upval), FFlagEnableInExperienceShopUnifiedLoggingModule (upval), UseRefResult (copy), InExperienceShop (upval), Frame (copy), PaymentSessionId (copy), FFlagSkipPaymentSessionForPlainRobuxModule (upval), HasBonusItem (copy), MobileProductId (copy), ProductId (copy), BonusGamePassId (copy), UseResult (copy), FFlagShopListenNativePurchaseFinishedModule (upval), UseResult1 (ref), BonusJwt (copy), FFlagRefetchRobuxWidgetAfterPurchaseModule (upval), RedeemBonusTokenModule (upval), PromiseModule (upval), UseSignalStateResult (copy), UseRefResult3 (ref), Callback (ref), UseRefResult2 (ref)
+				local LaunchRobuxPackagePurchaseFunction = PurchasePromptModule.launchRobuxPackagePurchase
+				
+				if LaunchRobuxPackagePurchaseFunction == nil then
+					ShopDebugLoggerModule.log("onBuyActivated: skip, launchRobuxPackagePurchase missing")
+					
+					return
+				end
+				if FFlagEnableBonusJwtInShop and UseRefResult1.current then return end
+				if FFlagEnableShopRobuxBuyTelemetryModule and FFlagEnableInExperienceShopUnifiedLoggingModule and UseRefResult.current ~= nil then
+					require(InExperienceShop.Analytics.sendRobuxBuyClickUnifiedEvent)(UseRefResult.current, Frame.shopPageType)
+				end
+				local PaymentSessionId1 = if FFlagSkipPaymentSessionForPlainRobuxModule and not HasBonusItem then "" else PaymentSessionId
+				ShopDebugLoggerModule.logLazy(function(): string --[[ Line: 261 ]]
+					-- upvalues: MobileProductId (upval), ProductId (upval), BonusGamePassId (upval)
+					return "onBuyActivated: launch mobileProductId=" .. tostring(MobileProductId) .. " productId=" .. tostring(ProductId) .. " bonusGamePassId=" .. tostring(BonusGamePassId)
+				end)
+				local config = {
+					mobileProductId = MobileProductId or "",
+					productId = ProductId,
+					paymentSessionId = PaymentSessionId1,
+					onWebViewClosed = UseResult
+				}
+				
+				if FFlagShopListenNativePurchaseFinishedModule then
+					config.onNativePurchaseLaunched = UseResult1
+				end
+				if not FFlagEnableBonusJwtInShop then
+					LaunchRobuxPackagePurchaseFunction(config)
+					
+					return
+				end
+				config.bonusJwt = if FFlagSkipPaymentSessionForPlainRobuxModule and not HasBonusItem then "" else BonusJwt
+				
+				if FFlagRefetchRobuxWidgetAfterPurchaseModule then
+					function config.redeemBonusToken(p1, p2) --[[ Line: 288 ]]
+						-- upvalues: RedeemBonusTokenModule (upval), PromiseModule (upval), ShopDebugLoggerModule (upval), UseSignalStateResult (upval)
+						return RedeemBonusTokenModule(p1, p2):catch(function(Err) --[[ Line: 289 ]]
+							-- upvalues: PromiseModule (upval), ShopDebugLoggerModule (upval), UseSignalStateResult (upval)
+							if typeof(Err) == "table" and Err.kind == "BadRequest" then
+								ShopDebugLoggerModule.log("redeemBonusToken: HTTP 400, refreshing Robux widgets")
+								local RefreshRobuxWidgetsAfterPurchaseResult = UseSignalStateResult.refreshRobuxWidgetsAfterPurchase()
+								local IsFunction: boolean = typeof(RefreshRobuxWidgetsAfterPurchaseResult) == "table" and typeof(RefreshRobuxWidgetsAfterPurchaseResult.andThen) == "function"
+								
+								return (if IsFunction then RefreshRobuxWidgetsAfterPurchaseResult else PromiseModule.resolve()):andThen(function() --[[ Line: 299 ]]
+									-- upvalues: PromiseModule (upval), Err (copy)
+									return PromiseModule.reject(Err)
+								end)
+							else
+								return PromiseModule.reject(Err)
+							end
+						end)
 					end
-					onBonusItemActivated(bonusItemDetails.id, itemType)
-				end, { var13, bonusItemDetails, onBonusItemActivated }),
-				onBuyActivated = var16,
-				isBuyLoading = if fFlagEnableBonusJwtInShop then var3 else nil,
-				isPrimaryRobuxPackage = pkg.isPrimaryRobuxPackage == true,
-				mediaHeightScale = p1.mediaHeightScale
-			})
+				else
+					config.redeemBonusToken = RedeemBonusTokenModule
+				end
+				local LaunchRobuxPackagePurchaseResult = LaunchRobuxPackagePurchaseFunction(config)
+				
+				if typeof(LaunchRobuxPackagePurchaseResult) == "table" and typeof(LaunchRobuxPackagePurchaseResult.andThen) == "function" then
+					UseRefResult1.current = true
+					UseRefResult3.current = LaunchRobuxPackagePurchaseResult
+					Callback(true)
+					LaunchRobuxPackagePurchaseResult:catch(function(Err) --[[ Line: 329 ]]
+						-- upvalues: ShopDebugLoggerModule (upval)
+						ShopDebugLoggerModule.logLazy(function(): string --[[ Line: 330 ]]
+							-- upvalues: Err (copy)
+							return "RobuxPackageTile: purchase launch failed err=" .. (if typeof(Err) == "table" then tostring(Err.message) else tostring(Err))
+						end)
+					end):finally(function() --[[ Line: 320 | Named "settle" ]]
+						-- upvalues: UseRefResult1 (upval), UseRefResult3 (upval), UseRefResult2 (upval), Callback (upval)
+						UseRefResult1.current = false
+						UseRefResult3.current = nil
+						
+						if UseRefResult2.current then
+							Callback(false)
+						end
+					end)
+					
+					return
+				end
+			end, {
+				MobileProductId, ProductId, PaymentSessionId, BonusJwt, UseResult, UseResult1,
+				HasBonusItem, BonusGamePassId, UseSignalStateResult, Frame.shopPageType
+			}),
+			isBuyLoading = if FFlagEnableBonusJwtInShop then v1 else nil,
+			isPrimaryRobuxPackage = Pkg.isPrimaryRobuxPackage == true,
+			mediaHeightScale = Frame.mediaHeightScale
 		})
-	end
+	})
 end)

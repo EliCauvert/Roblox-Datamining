@@ -1,6 +1,6 @@
-﻿local socialTabsPage = script:FindFirstAncestor("SocialTabsPage")
+﻿local SocialTabsPage = script:FindFirstAncestor("SocialTabsPage")
 
-return require(socialTabsPage.Parent.RoduxNetworking).config({
-	keyPath = require(socialTabsPage.Common.Constants).RODUX_KEY .. ".NetworkStatus",
-	networkImpl = require(socialTabsPage.Networking.networkImpl)
+return require(SocialTabsPage.Parent.RoduxNetworking).config({
+	keyPath = require(SocialTabsPage.Common.Constants).RODUX_KEY .. ".NetworkStatus",
+	networkImpl = require(SocialTabsPage.Networking.networkImpl)
 })

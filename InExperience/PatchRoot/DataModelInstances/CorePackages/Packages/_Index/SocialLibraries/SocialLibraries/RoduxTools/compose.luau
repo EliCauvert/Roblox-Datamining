@@ -1,22 +1,22 @@
-﻿return function(...)
+﻿return function(...) --[[ Line: 4 ]]
 	local list = { ... }
-	local listCount = #list
+	local CountList = #list
 	
-	if listCount == 0 then
-		return function(p1)
+	if CountList == 0 then
+		return function(p1) --[[ Line: 9 ]]
 			return p1
 		end
 	end
-	local var1 = list[1]
+	local Callback = list[1]
 	
-	for i = 2, listCount do
-		local var2 = list[i]
-		local var3 = var1
+	for i = 2, CountList do
+		local Callback1 = list[i]
 		
-		var1 = function(...)
-			-- upvalues: var3 (ref), var2 (ref)
-			return var3(var2(...))
+		Callback = function(...) --[[ Line: 18 ]]
+			-- upvalues: Callback (copy), Callback1 (copy)
+			return Callback(Callback1(...))
 		end
+		
 	end
-	return var1
+	return Callback
 end

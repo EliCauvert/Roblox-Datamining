@@ -1,10 +1,11 @@
-﻿local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
+﻿local RbxAnalyticsService = game:GetService("RbxAnalyticsService")
 math.randomseed(tick())
 
-return function(p1, p2, p3, p4)
-	-- upvalues: rbxAnalyticsService (ref)
-	if p4 < 100 * math.random() then
+return function(FeatureName, MeasureName, Seconds, p1) --[[ Line: 5 ]]
+	-- upvalues: RbxAnalyticsService (copy)
+	if p1 >= 100 * math.random() then
+		RbxAnalyticsService:ReportToDiagByCountryCode(FeatureName, MeasureName, Seconds)
+		
 		return
 	end
-	rbxAnalyticsService:ReportToDiagByCountryCode(p1, p2, p3)
 end

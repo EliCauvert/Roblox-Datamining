@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.ChatUIPrimitives.ChatUIPrimitives)
+﻿return (require(script.Parent.Parent.Parent._Index.ChatUIPrimitives.ChatUIPrimitives))

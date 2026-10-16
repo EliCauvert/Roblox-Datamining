@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.SocialToast.SocialToast)
+﻿return (require(script.Parent.Parent.Parent._Index.SocialToast.SocialToast))

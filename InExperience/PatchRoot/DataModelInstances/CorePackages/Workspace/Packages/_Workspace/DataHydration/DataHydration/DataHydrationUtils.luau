@@ -1,122 +1,125 @@
-﻿local parent = script:FindFirstAncestor("DataHydration").Parent
-local playersService = game:GetService("Players")
-local fFlagAddFriendsPageTrustedFriendRequestSection = require(parent.SharedFlags).FFlagAddFriendsPageTrustedFriendRequestSection
-local fFlagFriendsRequestsMergeListsWithoutDuplicates = require(parent.SharedFlags).FFlagFriendsRequestsMergeListsWithoutDuplicates
-local var1 = if fFlagAddFriendsPageTrustedFriendRequestSection or fFlagFriendsRequestsMergeListsWithoutDuplicates then require(parent.Cryo) else nil
+﻿local Parent = script:FindFirstAncestor("DataHydration").Parent
+local Players = game:GetService("Players")
+local FFlagAddFriendsPageTrustedFriendRequestSection = require(Parent.SharedFlags).FFlagAddFriendsPageTrustedFriendRequestSection
+local FFlagFriendsRequestsMergeListsWithoutDuplicates = require(Parent.SharedFlags).FFlagFriendsRequestsMergeListsWithoutDuplicates
+local CryoModule = if FFlagAddFriendsPageTrustedFriendRequestSection or FFlagFriendsRequestsMergeListsWithoutDuplicates then require(Parent.Cryo) else nil
+
+local function mergeListsWithoutDuplicates(Tbl, p1, p2) --[[ Line: 86 ]]
+	-- upvalues: CryoModule (copy)
+	if not p1 or #p1 == 0 then
+		return if Tbl then Tbl else {}
+	elseif Tbl and #Tbl ~= 0 then
+		local Set = CryoModule.List.toSet(CryoModule.List.map(Tbl, function(p3) --[[ Line: 94 ]]
+			-- upvalues: p2 (copy)
+			return if p2 then p3[p2] else p3
+		end))
+		
+		return CryoModule.List.join(table.clone(Tbl), (CryoModule.List.filter(p1, function(p3): boolean --[[ Line: 99 ]]
+			-- upvalues: p2 (copy), Set (copy)
+			return not Set[if p2 then p3[p2] else p3]
+		end)))
+	else
+		return p1
+	end
+end
 
 return {
-	areAllKeysPresent = function(p1, p2)
-		if p1 == nil or type(p1) ~= "table" then
-			return #p2 == 0
+	areAllKeysPresent = function(p3, List): boolean --[[ Line: 74 ]]
+		if p3 == nil or type(p3) ~= "table" then
+			return #List == 0
 		end
-		for i, v in p2 do
-			if p1[v] == nil then
+		for _, value in List do
+			if p3[value] == nil then
 				return false
 			end
 		end
 		return true
 	end,
-	getLocalPlayerUserId = function()
-		-- upvalues: playersService (ref)
-		local var2 = if playersService.LocalPlayer then playersService.LocalPlayer.UserId else nil
+	getLocalPlayerUserId = function() --[[ Line: 15 ]]
+		-- upvalues: Players (copy)
+		local UserId = Players.LocalPlayer and Players.LocalPlayer.UserId or nil
 		
-		return if var2 == nil or var2 <= 0 then nil else var2
+		return if UserId == nil or UserId <= 0 then nil else UserId
 	end,
-	observeLocalPlayerUserId = function(p3)
-		-- upvalues: playersService (ref)
-		local var2 = if playersService.LocalPlayer then playersService.LocalPlayer.UserId else nil
-		local var3 = if var2 == nil or var2 <= 0 then nil else var2
-		var2 = nil
-		local _ = nil
-		local var4 = false
+	observeLocalPlayerUserId = function(Callback) --[[ Line: 24 ]]
+		-- upvalues: Players (copy)
+		local UserId = Players.LocalPlayer and Players.LocalPlayer.UserId or nil
+		local UserId1 = if UserId == nil or UserId <= 0 then nil else UserId
+		local Connection = nil
+		local Connection1 = nil
+		local Flag = false
 		
-		local function notifyIfChanged()
-			-- upvalues: playersService (copy), var3 (write), p3 (ref)
-			local var5 = if playersService.LocalPlayer then playersService.LocalPlayer.UserId else nil
-			local var6 = if var5 == nil or var5 <= 0 then nil else var5
+		local function notifyIfChanged() --[[ Line: 30 ]]
+			-- upvalues: Players (upval), UserId1 (ref), Callback (copy)
+			local UserId = Players.LocalPlayer and Players.LocalPlayer.UserId or nil
+			local UserId2 = if UserId == nil or UserId <= 0 then nil else UserId
 			
-			if var6 == var3 then
+			if UserId2 ~= UserId1 then
+				UserId1 = UserId2
+				Callback(UserId2)
+				
 				return
 			end
-			var3 = var6
-			p3(var6)
 		end
 		
-		local function _()
-			-- upvalues: var2 (write), playersService (copy), notifyIfChanged (ref)
-			if var2 ~= nil then
-				var2:Disconnect()
-				var2 = nil
+		local function _() --[[ Line: 39 | Named "bindLocalPlayer" ]]
+			-- upvalues: Connection (ref), Players (upval), notifyIfChanged (copy)
+			if Connection ~= nil then
+				Connection:Disconnect()
+				Connection = nil
 			end
-			local localPlayer = playersService.LocalPlayer
+			local LocalPlayer = Players.LocalPlayer
 			
-			if localPlayer ~= nil then
-				var2 = localPlayer:GetPropertyChangedSignal("UserId"):Connect(notifyIfChanged)
+			if LocalPlayer ~= nil then
+				Connection = LocalPlayer:GetPropertyChangedSignal("UserId"):Connect(notifyIfChanged)
 			end
 		end
 		
-		if var2 ~= nil then
-			var2:Disconnect()
-			var2 = nil
+		if Connection ~= nil then
+			Connection:Disconnect()
+			Connection = nil
 		end
-		local localPlayer = playersService.LocalPlayer
+		local LocalPlayer = Players.LocalPlayer
 		
-		if localPlayer ~= nil then
-			var2 = localPlayer:GetPropertyChangedSignal("UserId"):Connect(notifyIfChanged)
+		if LocalPlayer ~= nil then
+			Connection = LocalPlayer:GetPropertyChangedSignal("UserId"):Connect(notifyIfChanged)
 		end
-		local var5 = playersService:GetPropertyChangedSignal("LocalPlayer"):Connect(function()
-			-- upvalues: var2 (write), playersService (copy), notifyIfChanged (ref), var3 (write), p3 (ref)
-			if var2 ~= nil then
-				var2:Disconnect()
-				var2 = nil
+		Connection1 = Players:GetPropertyChangedSignal("LocalPlayer"):Connect(function() --[[ Line: 52 ]]
+			-- upvalues: Connection (ref), Players (upval), notifyIfChanged (copy), UserId1 (ref), Callback (copy)
+			if Connection ~= nil then
+				Connection:Disconnect()
+				Connection = nil
 			end
-			local localPlayer = playersService.LocalPlayer
+			local LocalPlayer = Players.LocalPlayer
 			
-			if localPlayer ~= nil then
-				var2 = localPlayer:GetPropertyChangedSignal("UserId"):Connect(notifyIfChanged)
+			if LocalPlayer ~= nil then
+				Connection = LocalPlayer:GetPropertyChangedSignal("UserId"):Connect(notifyIfChanged)
 			end
-			local var6 = if playersService.LocalPlayer then playersService.LocalPlayer.UserId else nil
-			local var7 = if var6 == nil or var6 <= 0 then nil else var6
+			local UserId = Players.LocalPlayer and Players.LocalPlayer.UserId or nil
+			local UserId2 = if UserId == nil or UserId <= 0 then nil else UserId
 			
-			if var7 == var3 then
+			if UserId2 ~= UserId1 then
+				UserId1 = UserId2
+				Callback(UserId2)
+				
 				return
 			end
-			var3 = var7
-			p3(var7)
 		end)
 		
-		return function()
-			-- upvalues: var4 (write), var2 (write), var5 (write)
-			if var4 then return end
-			var4 = true
+		return function() --[[ Line: 57 ]]
+			-- upvalues: Flag (ref), Connection (ref), Connection1 (ref)
+			if Flag then return end
+			Flag = true
 			
-			if var2 ~= nil then
-				var2:Disconnect()
-				var2 = nil
+			if Connection ~= nil then
+				Connection:Disconnect()
+				Connection = nil
 			end
-			if var5 ~= nil then
-				var5:Disconnect()
-				var5 = nil
+			if Connection1 ~= nil then
+				Connection1:Disconnect()
+				Connection1 = nil
 			end
 		end
 	end,
-	mergeListsWithoutDuplicates = if fFlagAddFriendsPageTrustedFriendRequestSection or fFlagFriendsRequestsMergeListsWithoutDuplicates then function(p3, p4, p5)
-		-- upvalues: var1 (ref)
-		if p4 and #p4 ~= 0 then
-			if p3 and #p3 ~= 0 then
-				local var2 = var1.List.toSet(var1.List.map(p3, function(p6)
-					-- upvalues: p5 (ref)
-					return if p5 then p6[p5] else p6
-				end))
-				
-				return var1.List.join(table.clone(p3), var1.List.filter(p4, function(p6)
-					-- upvalues: p5 (ref), var2 (ref)
-					return not var2[if p5 then p6[p5] else p6]
-				end))
-			end
-			return p4
-		else
-			return p3 or {}
-		end
-	end else nil
+	mergeListsWithoutDuplicates = if FFlagAddFriendsPageTrustedFriendRequestSection or FFlagFriendsRequestsMergeListsWithoutDuplicates then mergeListsWithoutDuplicates else nil
 }

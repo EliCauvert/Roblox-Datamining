@@ -1,1 +1,1 @@
-﻿return game:DefineFastString("HelpPageIxpLayer", "")
+﻿return (game:DefineFastString("HelpPageIxpLayer", ""))

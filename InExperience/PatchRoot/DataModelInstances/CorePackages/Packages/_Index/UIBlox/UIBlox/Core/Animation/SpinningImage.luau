@@ -1,61 +1,59 @@
-﻿local runService = game:GetService("RunService")
-local parent = script.Parent.Parent.Parent
-local roactModule = require(parent.Parent.Roact)
-local tModule = require(parent.Parent.t)
-local label = require(parent.Core.ImageSet.ImageSetComponent).Label
-local spinningImage = roactModule.PureComponent:extend("SpinningImage")
-spinningImage.validateProps = tModule.strictInterface({
-	image = tModule.table,
-	size = tModule.optional(tModule.UDim2),
-	anchorPoint = tModule.optional(tModule.Vector2),
-	position = tModule.optional(tModule.union(tModule.UDim2, tModule.table)),
-	rotationRate = tModule.optional(tModule.number)
+﻿local RunService = game:GetService("RunService")
+local Parent = script.Parent.Parent.Parent
+local RoactModule = require(Parent.Parent.Roact)
+local TModule = require(Parent.Parent.t)
+local Label = require(Parent.Core.ImageSet.ImageSetComponent).Label
+local SpinningImage = RoactModule.PureComponent:extend("SpinningImage")
+SpinningImage.validateProps = TModule.strictInterface({
+	image = TModule.table,
+	size = TModule.optional(TModule.UDim2),
+	anchorPoint = TModule.optional(TModule.Vector2),
+	position = TModule.optional(TModule.union(TModule.UDim2, TModule.table)),
+	rotationRate = TModule.optional(TModule.number)
 })
-spinningImage.defaultProps = { rotationRate = 360 }
+SpinningImage.defaultProps = { rotationRate = 360 }
 
-function spinningImage.init(p1)
-	-- upvalues: roactModule (ref)
-	local var1, var2 = roactModule.createBinding(0)
-	p1.angle = var1
-	p1.updateAngle = var2
+function SpinningImage.init(p1) --[[ Line: 25 ]]
+	-- upvalues: RoactModule (copy)
+	p1.angle, p1.updateAngle = RoactModule.createBinding(0)
 end
 
-function spinningImage.didMount(p1)
-	-- upvalues: runService (ref)
-	p1.heartbeatConnection = runService.Heartbeat:Connect(function(p2)
-		-- upvalues: p1 (ref)
-		local var1 = p1.angle:getValue() + p1.props.rotationRate * p2
+function SpinningImage.didMount(p1) --[[ Line: 29 ]]
+	-- upvalues: RunService (copy)
+	p1.heartbeatConnection = RunService.Heartbeat:Connect(function(DeltaTime) --[[ Line: 30 ]]
+		-- upvalues: p1 (copy)
+		local NewValue = p1.angle:getValue() + p1.props.rotationRate * DeltaTime
 		
-		if var1 > 360 then
-			var1 -= 360
-		elseif var1 < 0 then
-			var1 += 360
+		if NewValue > 360 then
+			NewValue -= 360
+		elseif NewValue < 0 then
+			NewValue += 360
 		end
-		p1.updateAngle(var1)
+		p1.updateAngle(NewValue)
 	end)
 end
 
-function spinningImage.willUnmount(p1)
+function SpinningImage.willUnmount(p1) --[[ Line: 41 ]]
 	p1.heartbeatConnection:Disconnect()
 end
 
-function spinningImage.getDerivedStateFromProps(p1, _)
-	local imageRectSize = p1.image.ImageRectSize
+function SpinningImage.getDerivedStateFromProps(p1, _) --[[ Line: 45 ]]
+	local ImageRectSize = p1.image.ImageRectSize
 	
 	return {
-		size = p1.size or UDim2.fromOffset(imageRectSize.X, imageRectSize.Y)
+		size = p1.size or UDim2.fromOffset(ImageRectSize.X, ImageRectSize.Y)
 	}
 end
 
-function spinningImage.render(p1)
-	-- upvalues: roactModule (ref), label (ref)
-	return roactModule.createElement("Frame", {
+function SpinningImage.render(p1) --[[ Line: 52 ]]
+	-- upvalues: RoactModule (copy), Label (copy)
+	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = p1.state.size,
 		AnchorPoint = p1.props.anchorPoint,
 		Position = p1.props.position
 	}, {
-		inner = roactModule.createElement(label, {
+		inner = RoactModule.createElement(Label, {
 			BackgroundTransparency = 1,
 			Size = p1.state.size,
 			AnchorPoint = Vector2.new(0.5, 0.5),
@@ -66,4 +64,4 @@ function spinningImage.render(p1)
 	})
 end
 
-return spinningImage
+return SpinningImage

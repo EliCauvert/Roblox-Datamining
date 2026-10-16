@@ -1,83 +1,85 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local _ = require(appChat.types)
-local name = require(appChat.Logger):new(script.Name)
-local appChatNetworkingModule = require(parent.AppChatNetworking)
-local reactModule = require(parent.React)
-local conversationOverlay = appChatNetworkingModule.Constants.ConversationOverlay
-local modalSequence = appChatNetworkingModule.Constants.ModalSequence
-local getDeepValue2Module = require(appChat.Utils.getDeepValue2)
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local useShouldShowConversationOverlayModule = require(appChat.Hooks.useShouldShowConversationOverlay)
-local useRecordModalSeenWithDelayModule = require(appChat.Hooks.useRecordModalSeenWithDelay)
-local modalConfigurationModule = require(appChat.Models.ModalConfiguration)
-local trustedConnectionsUpsellContainerModule = require(appChat.Components.TrustedConnectionsUpsell.TrustedConnectionsUpsellContainer)
-local trustedFriendsUpsellContainerModule = require(appChat.Components.TrustedFriendsUpsell.TrustedFriendsUpsellContainer)
-local useGetOneToOneFriendIdFromConversationIdModule = require(appChat.Hooks.useGetOneToOneFriendIdFromConversationId)
-local useRecordModalSequenceResponseForConversationModule = require(appChat.Hooks.useRecordModalSequenceResponseForConversation)
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local dismissedChatModalModule = require(appChat.Conversations.Actions.DismissedChatModal)
-local fIntAppChatModalSeenImpressionDelayMsModule = require(appChat.Flags.FIntAppChatModalSeenImpressionDelayMs)
-local fFlagAppChatEnableDoubleOptIn = require(parent.SharedFlags).FFlagAppChatEnableDoubleOptIn
-local fFlagAppChatConsolidateTrustedFriendsModalModule = require(appChat.Flags.FFlagAppChatConsolidateTrustedFriendsModal)
-local t = {
-	[conversationOverlay.TrustedConnectionCreated] = trustedConnectionsUpsellContainerModule,
-	[conversationOverlay.AddTrustedConnectionU18] = if fFlagAppChatEnableDoubleOptIn then trustedConnectionsUpsellContainerModule else nil,
-	[conversationOverlay.TrustedConnectionRequestU18] = if fFlagAppChatEnableDoubleOptIn then trustedConnectionsUpsellContainerModule else nil
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local _ = require(AppChat.types)
+local NewResult = require(AppChat.Logger):new(script.Name)
+local AppChatNetworkingModule = require(Parent.AppChatNetworking)
+local ReactModule = require(Parent.React)
+local ConversationOverlay = AppChatNetworkingModule.Constants.ConversationOverlay
+local ModalSequence = AppChatNetworkingModule.Constants.ModalSequence
+local GetDeepValue2Module = require(AppChat.Utils.getDeepValue2)
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local UseShouldShowConversationOverlayModule = require(AppChat.Hooks.useShouldShowConversationOverlay)
+local UseRecordModalSeenWithDelayModule = require(AppChat.Hooks.useRecordModalSeenWithDelay)
+local ModalConfigurationModule = require(AppChat.Models.ModalConfiguration)
+local TrustedConnectionsUpsellContainerModule = require(AppChat.Components.TrustedConnectionsUpsell.TrustedConnectionsUpsellContainer)
+local TrustedFriendsUpsellContainerModule = require(AppChat.Components.TrustedFriendsUpsell.TrustedFriendsUpsellContainer)
+local UseGetOneToOneFriendIdFromConversationIdModule = require(AppChat.Hooks.useGetOneToOneFriendIdFromConversationId)
+local UseRecordModalSequenceResponseForConversationModule = require(AppChat.Hooks.useRecordModalSequenceResponseForConversation)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local DismissedChatModalModule = require(AppChat.Conversations.Actions.DismissedChatModal)
+local FIntAppChatModalSeenImpressionDelayMsModule = require(AppChat.Flags.FIntAppChatModalSeenImpressionDelayMs)
+local FFlagAppChatEnableDoubleOptIn = require(Parent.SharedFlags).FFlagAppChatEnableDoubleOptIn
+local FFlagAppChatConsolidateTrustedFriendsModalModule = require(AppChat.Flags.FFlagAppChatConsolidateTrustedFriendsModal)
+local config = {
+	[ConversationOverlay.TrustedConnectionCreated] = TrustedConnectionsUpsellContainerModule,
+	[ConversationOverlay.AddTrustedConnectionU18] = if FFlagAppChatEnableDoubleOptIn then TrustedConnectionsUpsellContainerModule else nil,
+	[ConversationOverlay.TrustedConnectionRequestU18] = if FFlagAppChatEnableDoubleOptIn then TrustedConnectionsUpsellContainerModule else nil
 }
 
-return reactModule.memo(function(p1)
-	-- upvalues: useSelector (ref), getDeepValue2Module (ref), modalConfigurationModule (ref), reactModule (ref), t (ref), useShouldShowConversationOverlayModule (ref), useRecordModalSequenceResponseForConversationModule (ref), useDispatch (ref), fFlagAppChatConsolidateTrustedFriendsModalModule (ref), useGetOneToOneFriendIdFromConversationIdModule (ref), useRecordModalSeenWithDelayModule (ref), modalSequence (ref), fIntAppChatModalSeenImpressionDelayMsModule (ref), appChatNetworkingModule (ref), name (ref), dismissedChatModalModule (ref), trustedFriendsUpsellContainerModule (ref)
-	local var1 = useSelector(function(p2)
-		-- upvalues: getDeepValue2Module (copy), p1 (ref), modalConfigurationModule (copy)
-		return getDeepValue2Module(p2, `ChatAppReducer.Modals.conversationOverlays.{p1.conversationId}`) or modalConfigurationModule.default
+return ReactModule.memo(function(p1) --[[ Line: 52 ]]
+	-- upvalues: UseSelectorFunction (copy), GetDeepValue2Module (copy), ModalConfigurationModule (copy), ReactModule (copy), config (copy), UseShouldShowConversationOverlayModule (copy), UseRecordModalSequenceResponseForConversationModule (copy), UseDispatchFunction (copy), FFlagAppChatConsolidateTrustedFriendsModalModule (copy), UseGetOneToOneFriendIdFromConversationIdModule (copy), UseRecordModalSeenWithDelayModule (copy), ModalSequence (copy), FIntAppChatModalSeenImpressionDelayMsModule (copy), AppChatNetworkingModule (copy), NewResult (copy), DismissedChatModalModule (copy), TrustedFriendsUpsellContainerModule (copy)
+	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 54 ]]
+		-- upvalues: GetDeepValue2Module (upval), p1 (copy), ModalConfigurationModule (upval)
+		return GetDeepValue2Module(p2, `ChatAppReducer.Modals.conversationOverlays.{p1.conversationId}`) or ModalConfigurationModule.default
 	end)
-	var1 = reactModule.useMemo(function()
-		-- upvalues: var1 (write)
-		return var1
+	UseSelectorResult = ReactModule.useMemo(function() --[[ Line: 60 ]]
+		-- upvalues: UseSelectorResult (ref)
+		return UseSelectorResult
 	end, { p1.conversationId })
-	local modalLayout = var1.modal_layout
-	local modalVariant = t[var1.modal_variant]
-	local var2 = useShouldShowConversationOverlayModule(p1.conversationId) and modalVariant ~= nil
-	local var3 = useRecordModalSequenceResponseForConversationModule(p1.conversationId)
-	local var4 = useDispatch()
-	local var5 = if fFlagAppChatConsolidateTrustedFriendsModalModule then useGetOneToOneFriendIdFromConversationIdModule(p1.conversationId) else nil
-	useRecordModalSeenWithDelayModule({
-		modalSequence = modalSequence.ConversationOverlay,
-		modalId = modalLayout.id,
-		modalVariant = var1.modal_variant,
-		actionToRecord = modalLayout.seen_record_action,
-		delayMs = fIntAppChatModalSeenImpressionDelayMsModule,
-		canRecordAction = var2,
+	local ModalLayout = UseSelectorResult.modal_layout
+	local Entry = config[UseSelectorResult.modal_variant]
+	local HasEntry: boolean = UseShouldShowConversationOverlayModule(p1.conversationId) and Entry ~= nil
+	local UseRecordModalSequenceResponseForConversationModuleResult = UseRecordModalSequenceResponseForConversationModule(p1.conversationId)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseGetOneToOneFriendIdFromConversationIdModuleResult = if FFlagAppChatConsolidateTrustedFriendsModalModule then UseGetOneToOneFriendIdFromConversationIdModule(p1.conversationId) else nil
+	UseRecordModalSeenWithDelayModule({
+		modalSequence = ModalSequence.ConversationOverlay,
+		modalId = ModalLayout.id,
+		modalVariant = UseSelectorResult.modal_variant,
+		actionToRecord = ModalLayout.seen_record_action,
+		delayMs = FIntAppChatModalSeenImpressionDelayMsModule,
+		canRecordAction = HasEntry,
 		conversationId = p1.conversationId
 	})
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), p1 (ref)
-		if not var2 then
+	ReactModule.useEffect(function() --[[ Line: 82 ]]
+		-- upvalues: HasEntry (copy), p1 (copy)
+		if not HasEntry then
 			p1.dismissModal()
 		end
-	end, { var2 })
-	local var6 = reactModule.useCallback(function()
-		-- upvalues: var3 (ref), var1 (write), appChatNetworkingModule (copy), name (copy), p1 (ref), var4 (ref), dismissedChatModalModule (copy)
-		var3(var1.modal_layout.dismissed_record_action, appChatNetworkingModule.Constants.ModalSequence.ConversationOverlay, var1.modal_layout.id, var1.modal_variant):catch(function(p2)
-			-- upvalues: name (copy), var1 (copy)
-			name:warning(`Error in ConversationOverlayContainer {var1.modal_layout.id} -> RecordModalSequenceResponse: {tostring(p2)}`)
+	end, { HasEntry })
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 89 ]]
+		-- upvalues: UseRecordModalSequenceResponseForConversationModuleResult (copy), UseSelectorResult (ref), AppChatNetworkingModule (upval), NewResult (upval), p1 (copy), UseDispatchResult (copy), DismissedChatModalModule (upval)
+		UseRecordModalSequenceResponseForConversationModuleResult(UseSelectorResult.modal_layout.dismissed_record_action, AppChatNetworkingModule.Constants.ModalSequence.ConversationOverlay, UseSelectorResult.modal_layout.id, UseSelectorResult.modal_variant):catch(function(Err) --[[ Line: 95 ]]
+			-- upvalues: NewResult (upval), UseSelectorResult (upval)
+			NewResult:warning(`Error in ConversationOverlayContainer {UseSelectorResult.modal_layout.id} -> RecordModalSequenceResponse: {tostring(Err)}`)
 		end)
 		p1.dismissModal()
-		var4(dismissedChatModalModule(appChatNetworkingModule.Constants.ModalSequence.ConversationOverlay, p1.conversationId))
+		UseDispatchResult(DismissedChatModalModule(AppChatNetworkingModule.Constants.ModalSequence.ConversationOverlay, p1.conversationId))
 	end, {
-		p1.conversationId, var1.modal_layout.dismissed_record_action,
-		var1.modal_layout.id, var1.modal_variant, var3, var4, p1.dismissModal
+		p1.conversationId, UseSelectorResult.modal_layout.dismissed_record_action,
+		UseSelectorResult.modal_layout.id, UseSelectorResult.modal_variant,
+		UseRecordModalSequenceResponseForConversationModuleResult, UseDispatchResult,
+		p1.dismissModal
 	})
 	
-	return if var2 then if fFlagAppChatConsolidateTrustedFriendsModalModule then if var5 then reactModule.createElement(trustedFriendsUpsellContainerModule, {
-		userId = var5,
+	return if HasEntry then if FFlagAppChatConsolidateTrustedFriendsModalModule then if UseGetOneToOneFriendIdFromConversationIdModuleResult then ReactModule.createElement(TrustedFriendsUpsellContainerModule, {
+		userId = UseGetOneToOneFriendIdFromConversationIdModuleResult,
 		conversationId = p1.conversationId,
-		analyticsModalVariant = var1.modal_variant,
-		dismissModal = var6
-	}) else nil else reactModule.createElement(modalVariant, {
+		analyticsModalVariant = UseSelectorResult.modal_variant,
+		dismissModal = UseResult
+	}) else nil else ReactModule.createElement(Entry, {
 		conversationId = p1.conversationId,
-		modalVariant = var1.modal_variant,
-		dismissModal = var6
+		modalVariant = UseSelectorResult.modal_variant,
+		dismissModal = UseResult
 	}) else nil
 end)

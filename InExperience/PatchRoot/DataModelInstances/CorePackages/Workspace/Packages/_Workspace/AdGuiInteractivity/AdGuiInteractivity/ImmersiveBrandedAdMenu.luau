@@ -1,83 +1,87 @@
-﻿local guiService = game:GetService("GuiService")
-local adGuiInteractivity = script:FindFirstAncestor("AdGuiInteractivity")
-local parent = adGuiInteractivity.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local localizationModule = require(parent.Localization)
-local immersiveBrandedAdWhyThisAdDialogModule = require(adGuiInteractivity.ImmersiveBrandedAdWhyThisAdDialog)
-local immersiveBrandedAdReportAdDialogModule = require(adGuiInteractivity.ImmersiveBrandedAdReportAdDialog)
-local adsInteractivityTelemetryModule = require(adGuiInteractivity.AdsInteractivityTelemetry)
-local menu = foundationModule.Menu
-local inputSize = foundationModule.Enums.InputSize
-local popoverSide = foundationModule.Enums.PopoverSide
-local useLocalization = localizationModule.Hooks.useLocalization
-local useMeasurableRef = foundationModule.Hooks.useMeasurableRef
-local _ = { WhyThisAd = "whyThisAd", ReportAd = "reportAd" }
+﻿local GuiService = game:GetService("GuiService")
+local AdGuiInteractivity = script:FindFirstAncestor("AdGuiInteractivity")
+local Parent = AdGuiInteractivity.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local ImmersiveBrandedAdWhyThisAdDialogModule = require(AdGuiInteractivity.ImmersiveBrandedAdWhyThisAdDialog)
+local ImmersiveBrandedAdReportAdDialogModule = require(AdGuiInteractivity.ImmersiveBrandedAdReportAdDialog)
+local AdsInteractivityTelemetryModule = require(AdGuiInteractivity.AdsInteractivityTelemetry)
+local Menu = FoundationModule.Menu
+local InputSize = FoundationModule.Enums.InputSize
+local PopoverSide = FoundationModule.Enums.PopoverSide
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseMeasurableRefFunction = FoundationModule.Hooks.useMeasurableRef
 
-return function(p1)
-	-- upvalues: useLocalization (ref), reactModule (ref), useMeasurableRef (ref), guiService (ref), adsInteractivityTelemetryModule (ref), immersiveBrandedAdWhyThisAdDialogModule (ref), immersiveBrandedAdReportAdDialogModule (ref), menu (ref), inputSize (ref), popoverSide (ref)
-	local screenPosition = p1.screenPosition
-	local var1 = useLocalization({
+return function(p1) --[[ Line: 34 ]]
+	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), UseMeasurableRefFunction (copy), GuiService (copy), AdsInteractivityTelemetryModule (copy), ImmersiveBrandedAdWhyThisAdDialogModule (copy), ImmersiveBrandedAdReportAdDialogModule (copy), Menu (copy), InputSize (copy), PopoverSide (copy)
+	local ScreenPosition = p1.screenPosition
+	local UseLocalizationResult = UseLocalizationFunction({
 		WhyThisAdText = "CoreScripts.Ads.Label.WhyThisAd",
 		ReportAdText = "CoreScripts.Ads.Label.ReportAd"
 	})
-	local var2, var3 = reactModule.useState(nil)
-	local var4 = useMeasurableRef(screenPosition)
-	reactModule.useEffect(function()
-		-- upvalues: guiService (copy), p1 (ref)
-		local menuOpenedConnection = guiService.MenuOpened:Connect(function()
-			-- upvalues: p1 (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	local UseMeasurableRefResult = UseMeasurableRefFunction(ScreenPosition)
+	ReactModule.useEffect(function() --[[ Line: 44 ]]
+		-- upvalues: GuiService (upval), p1 (copy)
+		local MenuOpenedConnection = GuiService.MenuOpened:Connect(function() --[[ Line: 45 ]]
+			-- upvalues: p1 (upval)
 			p1.onDismiss()
 		end)
 		
-		return function()
-			-- upvalues: menuOpenedConnection (ref)
-			menuOpenedConnection:Disconnect()
+		return function() --[[ Line: 49 ]]
+			-- upvalues: MenuOpenedConnection (copy)
+			MenuOpenedConnection:Disconnect()
 		end
 	end, { p1.onDismiss })
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 54 ]]
+		-- upvalues: UseLocalizationResult (copy)
+		return {
+			{
+				id = "whyThisAd",
+				icon = "icons/actions/info_small",
+				text = UseLocalizationResult.WhyThisAdText
+			},
+			{
+				id = "reportAd",
+				icon = "icons/actions/feedback",
+				text = UseLocalizationResult.ReportAdText
+			}
+		}
+	end, {
+		UseLocalizationResult.WhyThisAdText,
+		UseLocalizationResult.ReportAdText
+	})
+	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 69 ]]
+		-- upvalues: AdsInteractivityTelemetryModule (upval), UseStateResult2 (copy)
+		if p2 == "whyThisAd" then
+			AdsInteractivityTelemetryModule.logImmersiveBrandedAdButtonClickCounter("whyThisAd")
+			UseStateResult2("whyThisAd")
+			
+			return
+		end
+		if p2 == "reportAd" then
+			AdsInteractivityTelemetryModule.logImmersiveBrandedAdButtonClickCounter("reportAd")
+			UseStateResult2("reportAd")
+		end
+	end, {})
 	
-	return if var2 == "whyThisAd" then reactModule.createElement(immersiveBrandedAdWhyThisAdDialogModule, {
+	return if UseStateResult == "whyThisAd" then ReactModule.createElement(ImmersiveBrandedAdWhyThisAdDialogModule, {
 		advertiserName = p1.advertiserName,
 		onDismiss = p1.onDismiss
-	}) elseif var2 == "reportAd" then reactModule.createElement(immersiveBrandedAdReportAdDialogModule, {
+	}) elseif UseStateResult == "reportAd" then ReactModule.createElement(ImmersiveBrandedAdReportAdDialogModule, {
 		immersiveBrandedAdId = p1.immersiveBrandedAdId,
 		onDismiss = p1.onDismiss
-	}) else reactModule.createElement(reactModule.Fragment, nil, {
-		menu = reactModule.createElement(menu, {
+	}) else ReactModule.createElement(ReactModule.Fragment, nil, {
+		menu = ReactModule.createElement(Menu, {
 			isOpen = true,
-			items = reactModule.useMemo(function()
-				-- upvalues: var1 (ref)
-				return {
-					{
-						id = "whyThisAd",
-						icon = "icons/actions/info_small",
-						text = var1.WhyThisAdText
-					},
-					{
-						id = "reportAd",
-						icon = "icons/actions/feedback",
-						text = var1.ReportAdText
-					}
-				}
-			end, { var1.WhyThisAdText, var1.ReportAdText }),
-			size = inputSize.Small,
-			side = popoverSide.Right,
-			onActivated = reactModule.useCallback(function(p2)
-				-- upvalues: adsInteractivityTelemetryModule (copy), var3 (ref)
-				if p2 == "whyThisAd" then
-					adsInteractivityTelemetryModule.logImmersiveBrandedAdButtonClickCounter("whyThisAd")
-					var3("whyThisAd")
-					
-					return
-				elseif p2 == "reportAd" then
-					adsInteractivityTelemetryModule.logImmersiveBrandedAdButtonClickCounter("reportAd")
-					var3("reportAd")
-				end
-			end, {}),
+			items = UseMemoResult,
+			size = InputSize.Small,
+			side = PopoverSide.Right,
+			onActivated = UseResult,
 			onPressedOutside = p1.onDismiss,
-			anchorRef = var4
+			anchorRef = UseMeasurableRefResult
 		}),
-		modal = reactModule.createElement("TextButton", {
+		modal = ReactModule.createElement("TextButton", {
 			Text = "",
 			BackgroundTransparency = 1,
 			Modal = true,

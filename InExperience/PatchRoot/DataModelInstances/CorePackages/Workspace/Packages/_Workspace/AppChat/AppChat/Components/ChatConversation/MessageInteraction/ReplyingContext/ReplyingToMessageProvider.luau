@@ -1,12 +1,12 @@
-﻿local reactModule = require(script:FindFirstAncestor("AppChat").Parent.React)
-local replyingToMessageContextModule = require(script.Parent.ReplyingToMessageContext)
-local replyingToMessageDispatchContextModule = require(script.Parent.ReplyingToMessageDispatchContext)
+﻿local ReactModule = require(script:FindFirstAncestor("AppChat").Parent.React)
+local ReplyingToMessageContextModule = require(script.Parent.ReplyingToMessageContext)
+local ReplyingToMessageDispatchContextModule = require(script.Parent.ReplyingToMessageDispatchContext)
 
-return function(p1)
-	-- upvalues: reactModule (ref), replyingToMessageContextModule (ref), replyingToMessageDispatchContextModule (ref)
-	local var1, var2 = reactModule.useState(nil)
+return function(p1) --[[ Line: 13 | Named "ReplyingToMessageProvider" ]]
+	-- upvalues: ReactModule (copy), ReplyingToMessageContextModule (copy), ReplyingToMessageDispatchContextModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	
-	return reactModule.createElement(replyingToMessageContextModule.Provider, { value = var1 }, {
-		ReplyingToMessageDispatch = reactModule.createElement(replyingToMessageDispatchContextModule.Provider, { value = var2 }, p1.children)
+	return ReactModule.createElement(ReplyingToMessageContextModule.Provider, { value = UseStateResult }, {
+		ReplyingToMessageDispatch = ReactModule.createElement(ReplyingToMessageDispatchContextModule.Provider, { value = UseStateResult2 }, p1.children)
 	})
 end

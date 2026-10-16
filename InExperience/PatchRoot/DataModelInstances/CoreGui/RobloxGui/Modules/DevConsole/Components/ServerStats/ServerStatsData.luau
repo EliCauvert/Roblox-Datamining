@@ -1,95 +1,95 @@
-﻿local circularBufferModule = require(script.Parent.Parent.Parent.CircularBuffer)
-local signalModule = require(script.Parent.Parent.Parent.Signal)
-local var1 = tonumber(settings():GetFVariable("NewDevConsoleMaxGraphCount"))
-local getClientReplicatorModule = require(script.Parent.Parent.Parent.Util.getClientReplicator)
-local t = {}
-t.__index = t
+﻿local CircularBufferModule = require(script.Parent.Parent.Parent.CircularBuffer)
+local SignalModule = require(script.Parent.Parent.Parent.Signal)
+local Number: number? = tonumber(settings():GetFVariable("NewDevConsoleMaxGraphCount"))
+local GetClientReplicatorModule = require(script.Parent.Parent.Parent.Util.getClientReplicator)
+local ServerStatsDataModule = {}
+ServerStatsDataModule.__index = ServerStatsDataModule
 
-function t.new()
-	-- upvalues: t (ref), signalModule (ref)
-	local t_1 = {}
-	setmetatable(t_1, t)
-	t_1._serverStatsUpdated = signalModule.new()
-	t_1._serverStatsPing = signalModule.new()
-	t_1._serverStatsData = {}
-	t_1._serverStatsDataCount = 0
-	t_1._lastUpdateTime = 0
-	t_1._isRunning = false
+function ServerStatsDataModule.new() --[[ Line: 14 ]]
+	-- upvalues: ServerStatsDataModule (copy), SignalModule (copy)
+	local t = {}
+	setmetatable(t, ServerStatsDataModule)
+	t._serverStatsUpdated = SignalModule.new()
+	t._serverStatsPing = SignalModule.new()
+	t._serverStatsData = {}
+	t._serverStatsDataCount = 0
+	t._lastUpdateTime = 0
+	t._isRunning = false
 	
-	return t_1
+	return t
 end
 
-function t:avgPing()
+function ServerStatsDataModule:avgPing() --[[ Line: 27 ]]
 	return self._serverStatsPing
 end
 
-function t:Signal()
+function ServerStatsDataModule:Signal() --[[ Line: 31 ]]
 	return self._serverStatsUpdated
 end
 
-function t:getCurrentData()
+function ServerStatsDataModule:getCurrentData() --[[ Line: 35 ]]
 	return self._serverStatsData
 end
 
-function t:updateValue(p1, p2)
-	-- upvalues: circularBufferModule (ref), var1 (ref)
+function ServerStatsDataModule:updateValue(p1, Value) --[[ Line: 39 ]]
+	-- upvalues: CircularBufferModule (copy), Number (copy)
 	if not self._serverStatsData[p1] then
-		local var2 = circularBufferModule.new(var1)
-		var2:push_back({ value = p2, time = self._lastUpdateTime })
-		self._serverStatsData[p1] = { max = p2, min = p2, dataSet = var2 }
+		local NewCircularBuffer = CircularBufferModule.new(Number)
+		NewCircularBuffer:push_back({ value = Value, time = self._lastUpdateTime })
+		self._serverStatsData[p1] = { max = Value, min = Value, dataSet = NewCircularBuffer }
 		
 		return
 	end
-	local var3 = self._serverStatsData[p1]
-	local max = var3.max
-	local min = var3.min
-	local var4 = self._serverStatsData[p1].dataSet:push_back({ value = p2, time = self._lastUpdateTime })
+	local ServerStats = self._serverStatsData[p1]
+	local Max = ServerStats.max
+	local Min = ServerStats.min
+	local Push_backResult = self._serverStatsData[p1].dataSet:push_back({ value = Value, time = self._lastUpdateTime })
 	
-	if var4 then
-		local var5 = self._serverStatsData[p1].dataSet:iterator()
-		local var6 = var5:next()
+	if Push_backResult then
+		local IteratorResult = self._serverStatsData[p1].dataSet:iterator()
+		local Key = IteratorResult:next()
 		
-		if max == var4.value then
-			max = min
-			while var6 do
-				max = if var6.value < max then max else var6.value
-				var6 = var5:next()
+		if Max == Push_backResult.value then
+			Max = Min
+			while Key do
+				Max = Key.value < Max and Max or Key.value
+				Key = IteratorResult:next()
 			end
 		end
-		if min == var4.value then
-			min = max
-			while var6 do
-				min = if min < var6.value then min else var6.value
-				var6 = var5:next()
+		if Min == Push_backResult.value then
+			Min = Max
+			while Key do
+				Min = Min < Key.value and Min or Key.value
+				Key = IteratorResult:next()
 			end
 		end
 	end
-	self._serverStatsData[p1].max = if max < p2 then p2 else max
-	self._serverStatsData[p1].min = if min < p2 then min else p2
+	self._serverStatsData[p1].max = Max < Value and Value or Max
+	self._serverStatsData[p1].min = Min < Value and Min or Value
 end
 
-function t:isRunning()
+function ServerStatsDataModule:isRunning() --[[ Line: 87 ]]
 	return self._isRunning
 end
 
-function t:start()
-	-- upvalues: getClientReplicatorModule (ref)
-	local var7 = getClientReplicatorModule()
+function ServerStatsDataModule:start() --[[ Line: 91 ]]
+	-- upvalues: GetClientReplicatorModule (copy)
+	local ClientReplicatorModule = GetClientReplicatorModule()
 	
-	if var7 and not self._statsListenerConnection then
-		self._statsListenerConnection = var7.StatsReceived:connect(function(p3)
-			-- upvalues: self (ref)
-			if p3 then
+	if ClientReplicatorModule and not self._statsListenerConnection then
+		self._statsListenerConnection = ClientReplicatorModule.StatsReceived:connect(function(Stats) --[[ Line: 94 ]]
+			-- upvalues: self (copy)
+			if Stats then
 				self._lastUpdateTime = os.time()
-				local var8 = 0
+				local _serverStatsDataCount = 0
 				
-				for i, v in pairs(p3) do
-					if type(v) == "number" then
-						self:updateValue(i, v)
-						var8 += 1
+				for i, stat in pairs(Stats) do
+					if type(stat) == "number" then
+						self:updateValue(i, stat)
+						_serverStatsDataCount += 1
 					end
 				end
-				self._serverStatsDataCount = var8
+				self._serverStatsDataCount = _serverStatsDataCount
 				self._serverStatsUpdated:Fire(self._serverStatsData)
 				
 				if self._serverStatsData["Avg Data Ping ms"] then
@@ -97,12 +97,12 @@ function t:start()
 				end
 			end
 		end)
-		var7:RequestServerStats(true)
+		ClientReplicatorModule:RequestServerStats(true)
 		self._isRunning = true
 	end
 end
 
-function t:stop()
+function ServerStatsDataModule:stop() --[[ Line: 117 ]]
 	if self._statsListenerConnection then
 		self._statsListenerConnection:Disconnect()
 		self._statsListenerConnection = nil
@@ -110,4 +110,4 @@ function t:stop()
 	self._isRunning = false
 end
 
-return t
+return ServerStatsDataModule

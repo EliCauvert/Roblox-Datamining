@@ -1,1 +1,1 @@
-﻿return require(game:GetService("CorePackages").Packages.Dash)
+﻿return (require(game:GetService("CorePackages").Packages.Dash))

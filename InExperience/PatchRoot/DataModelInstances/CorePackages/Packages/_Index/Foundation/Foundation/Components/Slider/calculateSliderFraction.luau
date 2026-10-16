@@ -1,6 +1,6 @@
-﻿return function(p1, p2, p3)
-	local absoluteSize = p2.AbsoluteSize
-	local radians = math.rad(p2.AbsoluteRotation)
+﻿return function(p1, Frame: Frame, p2): number --[[ Line: 1 | Named "calculateSliderFraction" ]]
+	local AbsoluteSize: number = Frame.AbsoluteSize
+	local Radians = math.rad(Frame.AbsoluteRotation)
 	
-	return math.clamp((p1 - (p2.AbsolutePosition + absoluteSize * 0.5)):Dot(if p3 then Vector2.new(math.sin(radians), -math.cos(radians)) else Vector2.new(math.cos(radians), math.sin(radians))) / (if p3 then absoluteSize.Y else absoluteSize.X) + 0.5, 0, 1)
+	return (math.clamp((p1 - (Frame.AbsolutePosition + AbsoluteSize * 0.5)):Dot(if p2 then Vector2.new(math.sin(Radians), -math.cos(Radians)) else Vector2.new(math.cos(Radians), (math.sin(Radians)))) / (if p2 then AbsoluteSize.Y else AbsoluteSize.X) + 0.5, 0, 1))
 end

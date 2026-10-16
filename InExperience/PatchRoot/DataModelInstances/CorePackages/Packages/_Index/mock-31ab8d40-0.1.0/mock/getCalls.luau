@@ -1,23 +1,23 @@
-﻿local symbolsModule = require(script.Parent.symbols)
-local spyModule = require(script.Parent.Spy)
+﻿local SymbolsModule = require(script.Parent.symbols)
+local SpyModule = require(script.Parent.Spy)
 
-return function(p1)
-	-- upvalues: spyModule (ref), symbolsModule (ref)
-	if type(p1) == "function" then
-		local var1 = spyModule.lookup(p1)
+return function(Callback) --[[ Line: 4 ]]
+	-- upvalues: SpyModule (copy), SymbolsModule (copy)
+	if type(Callback) == "function" then
+		local LookupResult = SpyModule.lookup(Callback)
 		
-		if var1 then
-			return var1[symbolsModule.Calls]
+		if LookupResult then
+			return LookupResult[SymbolsModule.Calls]
 		end
 		error("Calling getCalls on a non-spy function")
 	end
-	local var2 = rawget(p1, symbolsModule.Calls)
+	local RawValue = rawget(Callback, SymbolsModule.Calls)
 	
-	if var2 == nil then
-		var2 = getmetatable(p1)[symbolsModule.Calls]
+	if RawValue == nil then
+		RawValue = getmetatable(Callback)[SymbolsModule.Calls]
 	end
-	if var2 == nil then
+	if RawValue == nil then
 		error("Calling getCalls on a non-mock")
 	end
-	return var2
+	return RawValue
 end

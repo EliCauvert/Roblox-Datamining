@@ -1,251 +1,228 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local builderIconsModule = require(parent.BuilderIcons)
-local reactModule = require(parent.React)
-local components = foundation.Components
-local checkboxModule = require(components.Checkbox)
-local dividerModule = require(components.Divider)
-local flagsModule = require(foundation.Utility.Flags)
-local iconModule = require(components.Icon)
-local inputSizeModule = require(foundation.Enums.InputSize)
-local listItemInputTypeModule = require(foundation.Enums.ListItemInputType)
-local radioGroupModule = require(components.RadioGroup)
-local textModule = require(components.Text)
-local toggleModule = require(components.Toggle)
-local _ = require(foundation.Components.Types)
-local viewModule = require(components.View)
-local devAssertModule = require(foundation.Utility.devAssert)
-local escapeRichTextModule = require(foundation.Utility.escapeRichText)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local useListItemVariantsModule = require(script.Parent.useListItemVariants)
-local listAccessoryModule = require(script.Parent.ListAccessory)
-local useListAccessoryVariantsModule = require(script.Parent.useListAccessoryVariants)
-local useListModule = require(script.Parent.Parent.useList)
-local t = {
-	[inputSizeModule.XSmall] = "gap-xxsmall",
-	[inputSizeModule.Small] = "gap-xxsmall",
-	[inputSizeModule.Medium] = "gap-xsmall",
-	[inputSizeModule.Large] = "gap-xsmall"
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local BuilderIconsModule = require(Parent.BuilderIcons)
+local ReactModule = require(Parent.React)
+local Components = Foundation.Components
+local CheckboxModule = require(Components.Checkbox)
+local DividerModule = require(Components.Divider)
+local FlagsModule = require(Foundation.Utility.Flags)
+local IconModule = require(Components.Icon)
+local InputSizeModule = require(Foundation.Enums.InputSize)
+local ListItemInputTypeModule = require(Foundation.Enums.ListItemInputType)
+local RadioGroupModule = require(Components.RadioGroup)
+local TextModule = require(Components.Text)
+local ToggleModule = require(Components.Toggle)
+local _ = require(Foundation.Components.Types)
+local ViewModule = require(Components.View)
+local DevAssertModule = require(Foundation.Utility.devAssert)
+local EscapeRichTextModule = require(Foundation.Utility.escapeRichText)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local UseListItemVariantsModule = require(script.Parent.useListItemVariants)
+local ListAccessoryModule = require(script.Parent.ListAccessory)
+local UseListAccessoryVariantsModule = require(script.Parent.useListAccessoryVariants)
+local UseListModule = require(script.Parent.Parent.useList)
+local config = {
+	[InputSizeModule.XSmall] = "gap-xxsmall",
+	[InputSizeModule.Small] = "gap-xxsmall",
+	[InputSizeModule.Medium] = "gap-xsmall",
+	[InputSizeModule.Large] = "gap-xsmall"
 }
-local t_1 = {}
+local t = {}
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t_1 (ref), flagsModule (ref), devAssertModule (ref), useListModule (ref), inputSizeModule (ref), useTokensModule (ref), useListItemVariantsModule (ref), useListAccessoryVariantsModule (ref), t (ref), reactModule (ref), listItemInputTypeModule (ref), viewModule (ref), listAccessoryModule (ref), textModule (ref), escapeRichTextModule (ref), iconModule (ref), builderIconsModule (ref), radioGroupModule (ref), checkboxModule (ref), toggleModule (ref), dividerModule (ref)
-	local var1 = withDefaultsModule(p1, t_1)
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 94 | Named "ListItem" ]]
+	-- upvalues: WithDefaultsModule (copy), t (copy), FlagsModule (copy), DevAssertModule (copy), UseListModule (copy), InputSizeModule (copy), UseTokensModule (copy), UseListItemVariantsModule (copy), UseListAccessoryVariantsModule (copy), config (copy), ReactModule (copy), ListItemInputTypeModule (copy), ViewModule (copy), ListAccessoryModule (copy), TextModule (copy), EscapeRichTextModule (copy), IconModule (copy), BuilderIconsModule (copy), RadioGroupModule (copy), CheckboxModule (copy), ToggleModule (copy), DividerModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, t)
 	
-	if flagsModule.FoundationListItemDecoupledInput then
-		devAssertModule(not (var1.onActivated ~= nil and (typeof(var1.input) == "table" and var1.input.onActivated ~= nil)), "ListItem: set `onActivated` on the item or on `input`, not both.")
+	if FlagsModule.FoundationListItemDecoupledInput then
+		local HasOnActivated: boolean = typeof(WithDefaultsModuleResult.input) == "table" and WithDefaultsModuleResult.input.onActivated ~= nil
+		DevAssertModule(not (WithDefaultsModuleResult.onActivated ~= nil and HasOnActivated), "ListItem: set `onActivated` on the item or on `input`, not both.")
 	end
-	local var2
-	local var3 = useListModule()
-	local size = var3.size or inputSizeModule.Medium
-	local var4 = useTokensModule()
-	local var5 = useListItemVariantsModule(var4, size)
-	local var6 = useListAccessoryVariantsModule(var4, size, "Icon")
-	local var7 = if flagsModule.FoundationListItemTypographySpacing then t[size] else "gap-small"
-	local var8 = typeof(var1.onActivated) == "table" and var1.onActivated.onActivated ~= nil
-	local var9 = reactModule.useMemo(function()
-		-- upvalues: var8 (ref), var1 (ref)
-		return if var8 then var1.onActivated.onActivated elseif var1.onActivated == nil then nil else var1.onActivated
-	end, { var1.onActivated, var8 })
-	local var10 = reactModule.useMemo(function()
-		-- upvalues: flagsModule (copy), var1 (ref), var8 (ref), listItemInputTypeModule (copy)
-		if not flagsModule.FoundationListItemDecoupledInput then
+	local UseListModuleResult = UseListModule()
+	local Size = UseListModuleResult.size or InputSizeModule.Medium
+	local UseTokensModuleResult = UseTokensModule()
+	local UseListItemVariantsModuleResult = UseListItemVariantsModule(UseTokensModuleResult, Size)
+	local Icon = UseListAccessoryVariantsModule(UseTokensModuleResult, Size, "Icon")
+	local Entry = if FlagsModule.FoundationListItemTypographySpacing then config[Size] else "gap-small"
+	local HasOnActivated: boolean = typeof(WithDefaultsModuleResult.onActivated) == "table" and WithDefaultsModuleResult.onActivated.onActivated ~= nil
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 121 ]]
+		-- upvalues: HasOnActivated (copy), WithDefaultsModuleResult (copy)
+		return if HasOnActivated then WithDefaultsModuleResult.onActivated.onActivated elseif WithDefaultsModuleResult.onActivated == nil then nil else WithDefaultsModuleResult.onActivated
+	end, { WithDefaultsModuleResult.onActivated, HasOnActivated })
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 135 ]]
+		-- upvalues: FlagsModule (upval), WithDefaultsModuleResult (copy), HasOnActivated (copy), ListItemInputTypeModule (upval)
+		if not FlagsModule.FoundationListItemDecoupledInput then
 			return nil
-		elseif var1.input == nil then
-			if var8 then
-				local onActivated = var1.onActivated
+		elseif WithDefaultsModuleResult.input == nil then
+			if HasOnActivated then
+				local OnActivated = WithDefaultsModuleResult.onActivated
 				
 				return {
-					type = onActivated.inputType or listItemInputTypeModule.Chevron,
-					isChecked = onActivated.isChecked
+					type = OnActivated.inputType or ListItemInputTypeModule.Chevron,
+					isChecked = OnActivated.isChecked
 				}
+			else
+				return if WithDefaultsModuleResult.onActivated == nil then nil else { type = ListItemInputTypeModule.Chevron }
 			end
-			return if var1.onActivated == nil then nil else { type = listItemInputTypeModule.Chevron }
-		elseif typeof(var1.input) == "table" then
-			local input = var1.input
+		elseif typeof(WithDefaultsModuleResult.input) == "table" then
+			local Input = WithDefaultsModuleResult.input
 			
 			return {
-				type = input.type,
-				isChecked = input.isChecked,
-				onActivated = input.onActivated
+				type = Input.type,
+				isChecked = Input.isChecked,
+				onActivated = Input.onActivated
 			}
+		else
+			return { type = WithDefaultsModuleResult.input }
 		end
-		return { type = var1.input }
-	end, { var1.onActivated, var1.input, var8 })
-	local var11 = reactModule.useMemo(function()
-		-- upvalues: var8 (ref), var1 (ref)
-		return if var8 then var1.onActivated.inputType else nil
-	end, { var1.onActivated, var8 })
-	local var12 = reactModule.useMemo(function()
-		-- upvalues: var8 (ref), var1 (ref)
-		return if var8 then var1.onActivated.isChecked else nil
-	end, { var1.onActivated, var8 })
-	local var13 = reactModule.useMemo(function()
-		-- upvalues: var1 (ref)
-		return if typeof(var1.title) == "string" then var1.title elseif typeof(var1.title) == "table" then var1.title.title else nil
-	end, { var1.title })
-	local var14 = reactModule.useMemo(function()
-		-- upvalues: var1 (ref)
-		return if typeof(var1.title) == "table" then if var1.title.title == nil then nil else var1.title.metadata else nil
-	end, { var1.title })
-	var1.testId = if var1.testId then var1.testId else `{var3.testId}--item-{reactModule.useMemo(function()
-		-- upvalues: var13 (ref)
-		return var13 and string.gsub(var13, "%s+", "-") or ""
-	end, { var35 })}`
-	
-	if flagsModule.FoundationListItemDecoupledInput then
-		var37 = false
-		
-		if var32 ~= nil then
-			local _ = var32.type ~= listItemInputTypeModule.None
-		end
-	else
-		var37 = var23.onActivated ~= nil
-	end
-	local var1
-	local var2 = if flagsModule.FoundationListItemDecoupledInput then if var32 then var32.type else nil else var33
-	local var3 = if flagsModule.FoundationListItemDecoupledInput then if var32 then var32.isChecked else nil else var34
-	local var4 = reactModule.useCallback(function(p1)
-		-- upvalues: flagsModule (copy), var32 (ref), var31 (ref)
-		if flagsModule.FoundationListItemDecoupledInput and var32 and var32.onActivated then
-			var32.onActivated(p1)
+	end, {
+		WithDefaultsModuleResult.onActivated,
+		WithDefaultsModuleResult.input,
+		HasOnActivated
+	})
+	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 154 ]]
+		-- upvalues: HasOnActivated (copy), WithDefaultsModuleResult (copy)
+		return if HasOnActivated then WithDefaultsModuleResult.onActivated.inputType else nil
+	end, { WithDefaultsModuleResult.onActivated, HasOnActivated })
+	local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 161 ]]
+		-- upvalues: HasOnActivated (copy), WithDefaultsModuleResult (copy)
+		return if HasOnActivated then WithDefaultsModuleResult.onActivated.isChecked else nil
+	end, { WithDefaultsModuleResult.onActivated, HasOnActivated })
+	local UseMemoResult4 = ReactModule.useMemo(function() --[[ Line: 168 ]]
+		-- upvalues: WithDefaultsModuleResult (copy)
+		return if typeof(WithDefaultsModuleResult.title) == "string" then WithDefaultsModuleResult.title elseif typeof(WithDefaultsModuleResult.title) == "table" then WithDefaultsModuleResult.title.title else nil
+	end, { WithDefaultsModuleResult.title })
+	local UseMemoResult5 = ReactModule.useMemo(function() --[[ Line: 177 ]]
+		-- upvalues: WithDefaultsModuleResult (copy)
+		return if typeof(WithDefaultsModuleResult.title) == "table" then if WithDefaultsModuleResult.title.title == nil then nil else WithDefaultsModuleResult.title.metadata else nil
+	end, { WithDefaultsModuleResult.title })
+	local UseMemoResult6 = ReactModule.useMemo(function(): string --[[ Line: 185 ]]
+		-- upvalues: UseMemoResult4 (copy)
+		return UseMemoResult4 and string.gsub(UseMemoResult4, "%s+", "-") or ""
+	end, { UseMemoResult4 })
+	WithDefaultsModuleResult.testId = if WithDefaultsModuleResult.testId then WithDefaultsModuleResult.testId else `{UseListModuleResult.testId}--item-{UseMemoResult6}`
+	local Type = if FlagsModule.FoundationListItemDecoupledInput then if UseMemoResult1 then UseMemoResult1.type else nil else UseMemoResult2
+	local IsChecked = if FlagsModule.FoundationListItemDecoupledInput then if UseMemoResult1 then UseMemoResult1.isChecked else nil else UseMemoResult3
+	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 202 ]]
+		-- upvalues: FlagsModule (upval), UseMemoResult1 (copy), UseMemoResult (copy)
+		if FlagsModule.FoundationListItemDecoupledInput and UseMemoResult1 and UseMemoResult1.onActivated then
+			UseMemoResult1.onActivated(p2)
 			
 			return
-		elseif var31 then
-			var31()
 		end
-	end, { var32, var31 })
-	local var5 = reactModule.useCallback(function(p1)
-		-- upvalues: var4 (ref)
-		var4(p1 == "radio")
-	end, { var4 })
-	local createElement = reactModule.createElement
-	local t_2 = {
+		if UseMemoResult then
+			UseMemoResult()
+		end
+	end, { UseMemoResult1, UseMemoResult })
+	local UseResult1 = ReactModule.useCallback(function(p2) --[[ Line: 210 ]]
+		-- upvalues: UseResult (copy)
+		UseResult(p2 == "radio")
+	end, { UseResult })
+	
+	return ReactModule.createElement(ViewModule, {
 		tag = "col size-full-0 auto-y",
-		LayoutOrder = var23.LayoutOrder,
-		ref = p1
-	}
-	local t_3 = {}
-	local createElement_1 = reactModule.createElement
-	local t_4 = {
-		tag = "size-full-0 auto-y padding-y-xsmall",
-		LayoutOrder = 1,
-		padding = if var24.isContained then var26.Padding.Small else {
-			left = UDim.new(0, if var24.hasMargin then var26.Padding.Small else -var26.Padding.Small),
-			right = UDim.new(0, if var24.hasMargin then var26.Padding.Small else -var26.Padding.Small)
-		}
-	}
-	local t_5 = {}
-	local createElement_2 = reactModule.createElement
-	local var6 = viewModule
-	local t_6 = {
-		onActivated = var31,
-		tag = {
-			["size-full-0 auto-y radius-medium"] = true,
-			["margin-x-small"] = var24.hasMargin,
-			["padding-x-small"] = not var24.hasMargin
-		}
-	}
-	local t_7 = {}
-	local createElement_3 = reactModule.createElement
-	local var7 = viewModule
-	local t_8 = {
-		tag = "row align-y-center gap-medium size-full-0 auto-y padding-y-small radius-medium",
-		testId = var23.testId
-	}
-	local t_9 = {
-		LeadingContainer = if var23.leading then reactModule.createElement(listAccessoryModule, {
-			LayoutOrder = 0,
-			config = var23.leading,
-			size = size,
-			testId = `{var23.testId}--leading-accessory`
-		}) else nil
-	}
-	local createElement_4 = reactModule.createElement
-	local t_10 = {
-		tag = "row flex-between align-x-center align-y-center fill gap-medium auto-y",
-		LayoutOrder = 1
-	}
-	local t_11 = {
-		TextContainer = reactModule.createElement(viewModule, {
+		LayoutOrder = WithDefaultsModuleResult.LayoutOrder,
+		ref = Ref
+	}, {
+		HoverWrapper = ReactModule.createElement(ViewModule, {
+			tag = "size-full-0 auto-y padding-y-xsmall",
 			LayoutOrder = 1,
-			tag = {
-				["col fill auto-y padding-y-xsmall"] = true,
-				[var29] = true
+			padding = if UseListModuleResult.isContained then UseTokensModuleResult.Padding.Small else {
+				left = UDim.new(0, if UseListModuleResult.hasMargin then UseTokensModuleResult.Padding.Small else -UseTokensModuleResult.Padding.Small),
+				right = UDim.new(0, if UseListModuleResult.hasMargin then UseTokensModuleResult.Padding.Small else -UseTokensModuleResult.Padding.Small)
 			}
 		}, {
-			TitleContainer = if var35 then reactModule.createElement(viewModule, {
-				LayoutOrder = 0,
+			ListItemContainer = ReactModule.createElement(ViewModule, {
+				onActivated = UseMemoResult,
+				onSecondaryActivated = WithDefaultsModuleResult.onSecondaryActivated,
 				tag = {
-					["col auto-xy"] = true,
-					["gap-xsmall"] = not flagsModule.FoundationListItemTypographySpacing
+					["size-full-0 auto-y radius-medium"] = true,
+					["margin-x-small"] = UseListModuleResult.hasMargin,
+					["padding-x-small"] = not UseListModuleResult.hasMargin
 				}
 			}, {
-				Title = if var35 then reactModule.createElement(textModule, {
-					RichText = true,
-					LayoutOrder = 0,
-					Text = escapeRichTextModule(var35),
-					tag = var27.title.tag
-				}) else nil,
-				Metadata = if var36 then reactModule.createElement(textModule, {
-					RichText = true,
-					LayoutOrder = 1,
-					Text = var36,
-					tag = var27.metadata.tag
-				}) else nil
-			}) else nil,
-			Description = var23.description and reactModule.createElement(textModule, {
-				RichText = true,
-				LayoutOrder = 1,
-				Text = var23.description,
-				tag = var27.description.tag
+				ListItem = ReactModule.createElement(ViewModule, {
+					tag = "row align-y-center gap-medium size-full-0 auto-y padding-y-small radius-medium",
+					testId = WithDefaultsModuleResult.testId
+				}, {
+					LeadingContainer = if WithDefaultsModuleResult.leading then ReactModule.createElement(ListAccessoryModule, {
+						LayoutOrder = 0,
+						config = WithDefaultsModuleResult.leading,
+						size = Size,
+						testId = `{WithDefaultsModuleResult.testId}--leading-accessory`
+					}) else nil,
+					Content = ReactModule.createElement(ViewModule, {
+						tag = "row flex-between align-x-center align-y-center fill gap-medium auto-y",
+						LayoutOrder = 1
+					}, {
+						TextContainer = ReactModule.createElement(ViewModule, {
+							LayoutOrder = 1,
+							tag = {
+								["col fill auto-y padding-y-xsmall"] = true,
+								[Entry] = true
+							}
+						}, {
+							TitleContainer = if UseMemoResult4 then ReactModule.createElement(ViewModule, {
+								LayoutOrder = 0,
+								tag = {
+									["col auto-xy"] = true,
+									["gap-xsmall"] = not FlagsModule.FoundationListItemTypographySpacing
+								}
+							}, {
+								Title = if UseMemoResult4 then ReactModule.createElement(TextModule, {
+									RichText = true,
+									LayoutOrder = 0,
+									Text = EscapeRichTextModule(UseMemoResult4),
+									tag = UseListItemVariantsModuleResult.title.tag
+								}) else nil,
+								Metadata = if UseMemoResult5 then ReactModule.createElement(TextModule, {
+									RichText = true,
+									LayoutOrder = 1,
+									Text = UseMemoResult5,
+									tag = UseListItemVariantsModuleResult.metadata.tag
+								}) else nil
+							}) else nil,
+							Description = WithDefaultsModuleResult.description and ReactModule.createElement(TextModule, {
+								RichText = true,
+								LayoutOrder = 1,
+								Text = WithDefaultsModuleResult.description,
+								tag = UseListItemVariantsModuleResult.description.tag
+							})
+						}),
+						TrailingContainer = if WithDefaultsModuleResult.trailing then ReactModule.createElement(ViewModule, {
+							tag = "align-x-center align-y-center auto-xy",
+							LayoutOrder = 2
+						}, WithDefaultsModuleResult.trailing) else nil,
+						ActivatedIconContainer = if if FlagsModule.FoundationListItemDecoupledInput then UseMemoResult1 ~= nil and UseMemoResult1.type ~= ListItemInputTypeModule.None else WithDefaultsModuleResult.onActivated ~= nil then ReactModule.createElement(ViewModule, {
+							tag = "align-x-center align-y-center auto-xy",
+							LayoutOrder = 3
+						}, {
+							ActivatedIcon = if Type == nil or FlagsModule.FoundationListItemDecoupledInput and Type == ListItemInputTypeModule.Chevron then ReactModule.createElement(IconModule, {
+								name = BuilderIconsModule.Icon.ChevronLargeRight,
+								size = UseListItemVariantsModuleResult.icon.size,
+								testId = `{WithDefaultsModuleResult.testId}--activated-icon`
+							}) elseif Type == ListItemInputTypeModule.Radio then ReactModule.createElement(RadioGroupModule.Root, {
+								Selectable = false,
+								value = if IsChecked then "radio" else "",
+								onValueChanged = UseResult1
+							}, ReactModule.createElement(RadioGroupModule.Item, { value = "radio", label = "", size = Size })) else ReactModule.createElement(if Type == ListItemInputTypeModule.Checkbox then CheckboxModule else ToggleModule, {
+								label = "",
+								Selectable = false,
+								onActivated = UseResult,
+								isChecked = IsChecked,
+								size = Size
+							})
+						}) else nil
+					})
+				})
 			})
 		}),
-		TrailingContainer = if var23.trailing then reactModule.createElement(viewModule, {
-			tag = "align-x-center align-y-center auto-xy",
-			LayoutOrder = 2
-		}, var23.trailing) else nil
-	}
-	
-	if var37 then
-		var1 = reactModule.createElement
-		var1 = var1(viewModule, {
-			tag = "align-x-center align-y-center auto-xy",
-			LayoutOrder = 3
-		}, {
-			ActivatedIcon = if var2 == nil or flagsModule.FoundationListItemDecoupledInput and var2 == listItemInputTypeModule.Chevron then reactModule.createElement(iconModule, {
-				name = builderIconsModule.Icon.ChevronLargeRight,
-				size = var27.icon.size,
-				testId = `{var23.testId}--activated-icon`
-			}) elseif var2 == listItemInputTypeModule.Radio then reactModule.createElement(radioGroupModule.Root, {
-				Selectable = false,
-				value = if var3 then "radio" else "",
-				onValueChanged = var5
-			}, reactModule.createElement(radioGroupModule.Item, { value = "radio", label = "", size = size })) else reactModule.createElement(if var2 == listItemInputTypeModule.Checkbox then checkboxModule else toggleModule, {
-				label = "",
-				Selectable = false,
-				onActivated = var4,
-				isChecked = var3,
-				size = size
-			})
-		})
-	else
-		var1 = nil
-	end
-	t_11.ActivatedIconContainer = var1
-	t_9.Content = createElement_4(viewModule, t_10, t_11)
-	t_7.ListItem = createElement_3(var7, t_8, t_9)
-	t_5.ListItemContainer = createElement_2(var6, t_6, t_7)
-	t_3.HoverWrapper = createElement_1(viewModule, t_4, t_5)
-	t_3.Divider = if var24.hasDivider and var23.LayoutOrder ~= var24.lastLayoutOrder then if var24.isInset then reactModule.createElement(viewModule, { tag = "row size-full-0 auto-y", LayoutOrder = 2 }, {
-		LeadingSpacer = reactModule.createElement(viewModule, {
-			LayoutOrder = 0,
-			Size = UDim2.fromOffset((if var24.hasMargin then var26.Padding.Small + var26.Margin.Small else 0) + (if var23.leading then var28.container.Size.X.Offset + var26.Gap.Medium else 0), 0)
-		}),
-		DividerLine = reactModule.createElement(viewModule, { tag = "fill auto-y", LayoutOrder = 1 }, reactModule.createElement(dividerModule))
-	}) else reactModule.createElement(dividerModule, { LayoutOrder = 2 }) else nil
-	
-	return createElement(viewModule, t_2, t_3)
+		Divider = if UseListModuleResult.hasDivider and WithDefaultsModuleResult.LayoutOrder ~= UseListModuleResult.lastLayoutOrder then if UseListModuleResult.isInset then ReactModule.createElement(ViewModule, { tag = "row size-full-0 auto-y", LayoutOrder = 2 }, {
+			LeadingSpacer = ReactModule.createElement(ViewModule, {
+				LayoutOrder = 0,
+				Size = UDim2.fromOffset((if UseListModuleResult.hasMargin then UseTokensModuleResult.Padding.Small + UseTokensModuleResult.Margin.Small else 0) + (if WithDefaultsModuleResult.leading then Icon.container.Size.X.Offset + UseTokensModuleResult.Gap.Medium else 0), 0)
+			}),
+			DividerLine = ReactModule.createElement(ViewModule, { tag = "fill auto-y", LayoutOrder = 1 }, ReactModule.createElement(DividerModule))
+		}) else ReactModule.createElement(DividerModule, { LayoutOrder = 2 }) else nil
+	})
 end))

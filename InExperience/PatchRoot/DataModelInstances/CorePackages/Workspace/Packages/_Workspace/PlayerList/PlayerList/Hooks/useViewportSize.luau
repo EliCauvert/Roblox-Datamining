@@ -1,27 +1,28 @@
-﻿local reactModule = require(script.Parent.Parent.Parent.React)
+﻿local ReactModule = require(script.Parent.Parent.Parent.React)
 
-return function()
-	-- upvalues: reactModule (ref)
-	local currentCamera = workspace.CurrentCamera
-	local var1, var2 = reactModule.useState(if currentCamera then currentCamera.ViewportSize else Vector2.new(1280, 720))
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref)
-		local currentCamera = workspace.CurrentCamera
+return function() --[[ Line: 6 | Named "useViewportSize" ]]
+	-- upvalues: ReactModule (copy)
+	local CurrentCamera = workspace.CurrentCamera
+	local UseStateResult, UseStateResult2 = ReactModule.useState(if CurrentCamera then CurrentCamera.ViewportSize else Vector2.new(1280, 720))
+	ReactModule.useEffect(function() --[[ Line: 11 ]]
+		-- upvalues: UseStateResult2 (copy)
+		local CurrentCamera = workspace.CurrentCamera
 		
-		if currentCamera then
-			var2(currentCamera.ViewportSize)
-			local var3 = currentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(function()
-				-- upvalues: var2 (copy), currentCamera (ref)
-				var2(currentCamera.ViewportSize)
+		if CurrentCamera then
+			UseStateResult2(CurrentCamera.ViewportSize)
+			local Connection = CurrentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(function() --[[ Line: 17 ]]
+				-- upvalues: UseStateResult2 (upval), CurrentCamera (copy)
+				UseStateResult2(CurrentCamera.ViewportSize)
 			end)
 			
-			return function()
-				-- upvalues: var3 (ref)
-				var3:Disconnect()
+			return function() --[[ Line: 20 ]]
+				-- upvalues: Connection (copy)
+				Connection:Disconnect()
 			end
+		else
+			return function() --[[ Line: 14 ]] end
 		end
-		return function() end
 	end, {})
 	
-	return var1
+	return UseStateResult
 end

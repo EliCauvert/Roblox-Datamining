@@ -1,34 +1,35 @@
-﻿local localizationService = game:GetService("LocalizationService")
-local profileCard = script:FindFirstAncestor("ProfileCard")
-local parent = profileCard.Parent
-local foundationModule = require(parent.Foundation)
-local localizationProvider = require(parent.Localization).LocalizationProvider
-local reactModule = require(parent.React)
-local reactRobloxModule = require(parent.Dev.ReactRoblox)
-local localization = require(parent.Dev.RobloxAppLocales).Localization
-local UIBloxModule = require(parent.UIBlox)
-local universalAppPolicyModule = require(parent.UniversalAppPolicy)
-UIBloxModule.init(require(parent.Dev.RobloxAppUIBloxConfig))
-local appFeaturePolicies = universalAppPolicyModule.AppFeaturePolicies
-local appStyleProvider = UIBloxModule.App.Style.AppStyleProvider
-local roactAppPolicy = universalAppPolicyModule.RoactAppPolicy
-local colorMode = foundationModule.Enums.ColorMode
-local device = foundationModule.Enums.Device
-local foundationProvider = foundationModule.FoundationProvider
-local t = {
-	Default = colorMode.Dark,
-	Dark = colorMode.Dark,
-	Light = colorMode.Light
+﻿local LocalizationService = game:GetService("LocalizationService")
+local ProfileCard = script:FindFirstAncestor("ProfileCard")
+local Parent = ProfileCard.Parent
+local FoundationModule = require(Parent.Foundation)
+local LocalizationProvider = require(Parent.Localization).LocalizationProvider
+local ReactModule = require(Parent.React)
+local ReactRobloxModule = require(Parent.Dev.ReactRoblox)
+local Localization = require(Parent.Dev.RobloxAppLocales).Localization
+local UIBloxModule = require(Parent.UIBlox)
+local UniversalAppPolicyModule = require(Parent.UniversalAppPolicy)
+UIBloxModule.init(require(Parent.Dev.RobloxAppUIBloxConfig))
+local AppFeaturePolicies = UniversalAppPolicyModule.AppFeaturePolicies
+local AppStyleProvider = UIBloxModule.App.Style.AppStyleProvider
+local RoactAppPolicy = UniversalAppPolicyModule.RoactAppPolicy
+local ColorMode = FoundationModule.Enums.ColorMode
+local Device = FoundationModule.Enums.Device
+local FoundationProvider = FoundationModule.FoundationProvider
+local config = {
+	Default = ColorMode.Dark,
+	Dark = ColorMode.Dark,
+	Light = ColorMode.Light
 }
 
-local function isControlEnabled(p1, p2)
-	if p1 == nil then
+local function isControlEnabled(Controls, Segment): boolean --[[ Line: 32 ]]
+	if Controls == nil then
 		return false
-	elseif p1[p2] == true then
+	end
+	if Controls[Segment] == true then
 		return true
 	end
-	for i, v in p1 do
-		if type(i) == "string" and string.sub(i, 1, #p2) == p2 and v == true then
+	for i, control in Controls do
+		if type(i) == "string" and string.sub(i, 1, #Segment) == Segment and control == true then
 			return true
 		end
 	end
@@ -37,36 +38,36 @@ end
 
 return {
 	name = "ProfileCard",
-	roact = reactModule,
-	reactRoblox = reactRobloxModule,
-	mapStory = function(p3)
-		-- upvalues: reactModule (ref), localization (ref), localizationService (ref), t (ref), isControlEnabled (ref), localizationProvider (ref), roactAppPolicy (ref), appFeaturePolicies (ref), foundationProvider (ref), device (ref), appStyleProvider (ref)
-		return function(p4)
-			-- upvalues: reactModule (copy), localization (copy), localizationService (copy), t (copy), isControlEnabled (copy), localizationProvider (copy), roactAppPolicy (copy), appFeaturePolicies (copy), foundationProvider (copy), device (copy), appStyleProvider (copy), p3 (ref)
-			local var1 = reactModule.useMemo(function()
-				-- upvalues: localization (copy), localizationService (copy)
-				return localization.new(localizationService.RobloxLocaleId)
+	roact = ReactModule,
+	reactRoblox = ReactRobloxModule,
+	mapStory = function(p1) --[[ Line: 47 ]]
+		-- upvalues: ReactModule (copy), Localization (copy), LocalizationService (copy), config (copy), isControlEnabled (copy), LocalizationProvider (copy), RoactAppPolicy (copy), AppFeaturePolicies (copy), FoundationProvider (copy), Device (copy), AppStyleProvider (copy)
+		return function(p2) --[[ Line: 48 ]]
+			-- upvalues: ReactModule (upval), Localization (upval), LocalizationService (upval), config (upval), isControlEnabled (upval), LocalizationProvider (upval), RoactAppPolicy (upval), AppFeaturePolicies (upval), FoundationProvider (upval), Device (upval), AppStyleProvider (upval), p1 (copy)
+			local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 49 ]]
+				-- upvalues: Localization (upval), LocalizationService (upval)
+				return Localization.new(LocalizationService.RobloxLocaleId)
 			end, {})
-			local theme = t[p4.theme] or t.Default
-			local var2 = isControlEnabled(p4.controls, "showUncheckedBadge")
+			local Entry = config[p2.theme] or config.Default
+			local ShowUncheckedBadge = isControlEnabled(p2.controls, "showUncheckedBadge")
 			
-			return reactModule.createElement(localizationProvider, { localization = var1 }, {
-				Policy = reactModule.createElement(roactAppPolicy.Provider, {
-					key = tostring(var2),
-					policy = { appFeaturePolicies },
-					policyData = { ShowUncheckedBadge = var2 }
+			return ReactModule.createElement(LocalizationProvider, { localization = UseMemoResult }, {
+				Policy = ReactModule.createElement(RoactAppPolicy.Provider, {
+					key = tostring(ShowUncheckedBadge),
+					policy = { AppFeaturePolicies },
+					policyData = { ShowUncheckedBadge = ShowUncheckedBadge }
 				}, {
-					Foundation = reactModule.createElement(foundationProvider, {
-						colorMode = theme,
-						device = device[p4.platform] or device.Desktop,
-						preferences = p4.settings,
-						scale = p4.settings and p4.settings.scale
+					Foundation = ReactModule.createElement(FoundationProvider, {
+						colorMode = Entry,
+						device = Device[p2.platform] or Device.Desktop,
+						preferences = p2.settings,
+						scale = p2.settings and p2.settings.scale
 					}, {
-						AppStyle = reactModule.createElement(appStyleProvider, { style = { fontName = "Gotham", themeName = theme } }, { Story = reactModule.createElement(p3, p4) })
+						AppStyle = ReactModule.createElement(AppStyleProvider, { style = { fontName = "Gotham", themeName = Entry } }, { Story = ReactModule.createElement(p1, p2) })
 					})
 				})
 			})
 		end
 	end,
-	storyRoots = { profileCard }
+	storyRoots = { ProfileCard }
 }

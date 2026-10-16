@@ -1,28 +1,46 @@
-﻿local showPinExperienceResultModule = require(script.Parent.showPinExperienceResult)
+﻿local ShowPinExperienceResultModule = require(script.Parent.showPinExperienceResult)
 
-local function pinExperienceAndNotify(p1, p2, p3, p4, p5)
-	-- upvalues: showPinExperienceResultModule (ref), pinExperienceAndNotify (ref)
-	p5 = p5 or game:GetService("PinShortcutService")
-	local onPinExperienceCompletedConnection = nil
-	onPinExperienceCompletedConnection = p5.OnPinExperienceCompleted:Connect(function(p6, p7, p8, p9)
-		-- upvalues: onPinExperienceCompletedConnection (write), p5 (ref), showPinExperienceResultModule (copy), p4 (ref), pinExperienceAndNotify (copy)
-		if onPinExperienceCompletedConnection then
-			onPinExperienceCompletedConnection:Disconnect()
-			onPinExperienceCompletedConnection = nil
+local function pinExperienceAndNotify(PlaceId, UniverseId, ExperienceName, p1, PinShortcutService) --[[ Line: 22 ]]
+	-- upvalues: ShowPinExperienceResultModule (copy), pinExperienceAndNotify (copy)
+	local PinShortcutService1 = PinShortcutService or game:GetService("PinShortcutService")
+	local Connection = nil
+	Connection = PinShortcutService1.OnPinExperienceCompleted:Connect(function(Status, PlaceId, UniverseId, ExperienceName) --[[ Line: 34 ]]
+		-- upvalues: Connection (ref), PinShortcutService1 (copy), ShowPinExperienceResultModule (upval), p1 (copy), pinExperienceAndNotify (upval)
+		if Connection then
+			Connection:Disconnect()
+			Connection = nil
 		end
-		local var1 = false
-		pcall(function()
-			-- upvalues: var1 (write), p5 (copy)
-			var1 = p5:ShouldShowLuaNotificationOnPinExperienceCompleted()
+		local ShouldShowLuaNotificationOnPinExperienceCompleted = false
+		pcall(function() --[[ Line: 46 ]]
+			-- upvalues: ShouldShowLuaNotificationOnPinExperienceCompleted (ref), PinShortcutService1 (upval)
+			ShouldShowLuaNotificationOnPinExperienceCompleted = PinShortcutService1:ShouldShowLuaNotificationOnPinExperienceCompleted()
 		end)
+		
+		if ShouldShowLuaNotificationOnPinExperienceCompleted then
+			ShowPinExperienceResultModule(p1, Status, ExperienceName, {
+				onViewShortcut = if PinShortcutService1:IsRevealPinnedExperienceAvailable() then function() --[[ Line: 56 ]]
+					-- upvalues: PinShortcutService1 (upval), PlaceId (copy)
+					pcall(function() --[[ Line: 57 ]]
+						-- upvalues: PinShortcutService1 (upval), PlaceId (upval)
+						PinShortcutService1:RevealPinnedExperience(PlaceId)
+					end)
+				end else nil,
+				onRetry = function() --[[ Line: 62 ]]
+					-- upvalues: pinExperienceAndNotify (upval), PlaceId (copy), UniverseId (copy), ExperienceName (copy), p1 (upval), PinShortcutService1 (upval)
+					pinExperienceAndNotify(PlaceId, UniverseId, ExperienceName, p1, PinShortcutService1)
+				end
+			})
+			
+			return
+		end
 	end)
 	
-	if not pcall(function()
-		-- upvalues: p5 (ref), p1 (ref), p2 (ref), p3 (ref)
-		p5:PinExperience(p1, p2, p3)
-	end) and onPinExperienceCompletedConnection then
-		onPinExperienceCompletedConnection:Disconnect()
-		onPinExperienceCompletedConnection = nil
+	if not pcall(function() --[[ Line: 69 ]]
+		-- upvalues: PinShortcutService1 (copy), PlaceId (copy), UniverseId (copy), ExperienceName (copy)
+		PinShortcutService1:PinExperience(PlaceId, UniverseId, ExperienceName)
+	end) and Connection then
+		Connection:Disconnect()
+		Connection = nil
 	end
 end
 

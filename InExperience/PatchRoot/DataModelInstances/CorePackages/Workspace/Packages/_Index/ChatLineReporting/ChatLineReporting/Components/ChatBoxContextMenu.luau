@@ -1,82 +1,81 @@
-﻿local guiService = game:GetService("GuiService")
-local chatLineReporting = script:FindFirstAncestor("ChatLineReporting")
-local parent = chatLineReporting.Parent
-local UIBloxModule = require(parent.UIBlox)
-local otterModule = require(parent.Otter)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local currentCamera = game.Workspace.CurrentCamera
-local constantsModule = require(chatLineReporting.Common.Constants)
-local reactModule = require(parent.React)
-local images = UIBloxModule.App.ImageSet.Images
-local contextualMenu = UIBloxModule.App.Menu.ContextualMenu
-local menuDirection = UIBloxModule.App.Menu.MenuDirection
-local chatLineReportRootModule = require(chatLineReporting.Components.ChatLineReportRoot)
-local getFFlagMemoizeChatReportingMenu = require(parent.SharedFlags).GetFFlagMemoizeChatReportingMenu
-local t = {
-	motorCallback = otterModule.instant,
+﻿local GuiService = game:GetService("GuiService")
+local ChatLineReporting = script:FindFirstAncestor("ChatLineReporting")
+local Parent = ChatLineReporting.Parent
+local UIBloxModule = require(Parent.UIBlox)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local CurrentCamera = game.Workspace.CurrentCamera
+local ConstantsModule = require(ChatLineReporting.Common.Constants)
+local ReactModule = require(Parent.React)
+local Images = UIBloxModule.App.ImageSet.Images
+local ContextualMenu = UIBloxModule.App.Menu.ContextualMenu
+local MenuDirection = UIBloxModule.App.Menu.MenuDirection
+local ChatLineReportRootModule = require(ChatLineReporting.Components.ChatLineReportRoot)
+local GetFFlagMemoizeChatReportingMenuFunction = require(Parent.SharedFlags).GetFFlagMemoizeChatReportingMenu
+local MotorOverrideOptions = {
+	motorCallback = require(Parent.Otter).instant,
 	open = { targetValue = 1 },
 	close = { targetValue = 0 }
 }
-local t_1 = {
+local config = {
 	reportAbuse = "Feature.ReportAbuse.Action.EnterChatLineReporting"
 }
 
-return function(p1)
-	-- upvalues: useLocalization (ref), t_1 (ref), currentCamera (ref), constantsModule (ref), reactModule (ref), contextualMenu (ref), images (ref), guiService (ref), chatLineReportRootModule (ref), getFFlagMemoizeChatReportingMenu (ref), menuDirection (ref), t (ref)
-	local var1 = useLocalization(t_1)
-	local var2 = if currentCamera then currentCamera.ViewportSize else Vector2.new(constantsModule.ViewportSize, constantsModule.ViewportSize)
-	local var3 = reactModule.useRef(nil)
-	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), var2 (ref), constantsModule (copy)
-		if var3.current and var2.X < var3.current.AbsolutePosition.X + var3.current.AbsoluteSize.X then
-			var3.current.AnchorPoint = Vector2.new(1, 0)
-			var3.current.Position = UDim2.new(1, constantsModule.FramePositionXOffsetLeft, 0, constantsModule.FramePositionYOffset)
+return function(p1) --[[ Line: 34 ]]
+	-- upvalues: UseLocalizationFunction (copy), config (copy), CurrentCamera (copy), ConstantsModule (copy), ReactModule (copy), ContextualMenu (copy), Images (copy), GuiService (copy), ChatLineReportRootModule (copy), GetFFlagMemoizeChatReportingMenuFunction (copy), MenuDirection (copy), MotorOverrideOptions (copy)
+	local UseLocalizationResult = UseLocalizationFunction(config)
+	local ViewportSize = if CurrentCamera then CurrentCamera.ViewportSize else Vector2.new(ConstantsModule.ViewportSize, ConstantsModule.ViewportSize)
+	local UseRefResult = ReactModule.useRef(nil)
+	ReactModule.useEffect(function() --[[ Line: 41 ]]
+		-- upvalues: UseRefResult (copy), ViewportSize (copy), ConstantsModule (upval)
+		if UseRefResult.current and ViewportSize.X < UseRefResult.current.AbsolutePosition.X + UseRefResult.current.AbsoluteSize.X then
+			UseRefResult.current.AnchorPoint = Vector2.new(1, 0)
+			UseRefResult.current.Position = UDim2.new(1, ConstantsModule.FramePositionXOffsetLeft, 0, ConstantsModule.FramePositionYOffset)
 		end
-	end, { var3, var2 })
+	end, { UseRefResult, ViewportSize })
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		Size = UDim2.new(constantsModule.FrameSizeXScale, constantsModule.FrameSizeXOffset, 1, 0),
-		Position = UDim2.new(1, constantsModule.FramePositionXOffset, 0, constantsModule.FramePositionYOffset),
-		ref = var3
+		Size = UDim2.new(ConstantsModule.FrameSizeXScale, ConstantsModule.FrameSizeXOffset, 1, 0),
+		Position = UDim2.new(1, ConstantsModule.FramePositionXOffset, 0, ConstantsModule.FramePositionYOffset),
+		ref = UseRefResult
 	}, {
-		ContextualMenu = reactModule.createElement(contextualMenu, {
+		ContextualMenu = ReactModule.createElement(ContextualMenu, {
 			closeBackgroundVisible = false,
 			open = true,
 			buttonProps = {
 				{
-					icon = images["icons/actions/feedback"],
-					text = var1.reportAbuse,
-					onActivated = function()
-						-- upvalues: guiService (copy), chatLineReportRootModule (copy), getFFlagMemoizeChatReportingMenu (copy), p1 (ref)
-						if guiService.MenuIsOpen then
-							local menuClosedConnection = nil
-							menuClosedConnection = guiService.MenuClosed:Connect(function()
-								-- upvalues: chatLineReportRootModule (copy), getFFlagMemoizeChatReportingMenu (copy), p1 (copy), menuClosedConnection (write)
-								chatLineReportRootModule.initialize(if getFFlagMemoizeChatReportingMenu() then p1.getMessages() else p1.messages)
-								menuClosedConnection:Disconnect()
+					icon = Images["icons/actions/feedback"],
+					text = UseLocalizationResult.reportAbuse,
+					onActivated = function() --[[ Line: 66 ]]
+						-- upvalues: GuiService (upval), ChatLineReportRootModule (upval), GetFFlagMemoizeChatReportingMenuFunction (upval), p1 (copy)
+						if GuiService.MenuIsOpen then
+							local Connection = nil
+							Connection = GuiService.MenuClosed:Connect(function() --[[ Line: 72 ]]
+								-- upvalues: ChatLineReportRootModule (upval), GetFFlagMemoizeChatReportingMenuFunction (upval), p1 (upval), Connection (ref)
+								ChatLineReportRootModule.initialize(if GetFFlagMemoizeChatReportingMenuFunction() then p1.getMessages() else p1.messages)
+								Connection:Disconnect()
 							end)
 						else
-							chatLineReportRootModule.initialize(if getFFlagMemoizeChatReportingMenu() then p1.getMessages() else p1.messages)
+							ChatLineReportRootModule.initialize(if GetFFlagMemoizeChatReportingMenuFunction() then p1.getMessages() else p1.messages)
 						end
 						p1.setContextMenuOpen(false)
 					end
 				}
 			},
-			elementHeight = constantsModule.TopBannerSize,
-			menuDirection = menuDirection.Down,
+			elementHeight = ConstantsModule.TopBannerSize,
+			menuDirection = MenuDirection.Down,
 			horizontalAlignment = Enum.HorizontalAlignment.Left,
 			openPositionX = UDim.new(0, 0),
 			openPositionY = UDim.new(0, 0),
-			borderCornerRadius = constantsModule.ContextualMenuBorderRadius,
-			motorOverrideOptions = t,
+			borderCornerRadius = ConstantsModule.ContextualMenuBorderRadius,
+			motorOverrideOptions = MotorOverrideOptions,
 			background = {
 				Transparency = p1.backgroundTransparency,
 				Color = p1.backgroundColor3
 			},
-			screenSize = var2,
-			onDismiss = function()
-				-- upvalues: p1 (ref)
+			screenSize = ViewportSize,
+			onDismiss = function() --[[ Line: 51 ]]
+				-- upvalues: p1 (copy)
 				p1.setContextMenuOpen(false)
 			end
 		})

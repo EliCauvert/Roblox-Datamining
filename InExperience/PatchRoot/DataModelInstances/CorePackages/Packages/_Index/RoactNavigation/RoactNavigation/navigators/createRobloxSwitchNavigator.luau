@@ -1,9 +1,9 @@
-﻿local parent = script.Parent.Parent
-local createNavigatorModule = require(script.Parent.createNavigator)
-local switchRouterModule = require(parent.routers.SwitchRouter)
-local robloxSwitchViewModule = require(parent.views.RobloxSwitchView)
+﻿local Parent = script.Parent.Parent
+local CreateNavigatorModule = require(script.Parent.createNavigator)
+local SwitchRouterModule = require(Parent.routers.SwitchRouter)
+local RobloxSwitchViewModule = require(Parent.views.RobloxSwitchView)
 
-return function(p1, p2)
-	-- upvalues: switchRouterModule (ref), createNavigatorModule (ref), robloxSwitchViewModule (ref)
-	return createNavigatorModule(robloxSwitchViewModule, switchRouterModule(p1, p2), p2 or {})
+return function(p1, p2) --[[ Line: 21 ]]
+	-- upvalues: SwitchRouterModule (copy), CreateNavigatorModule (copy), RobloxSwitchViewModule (copy)
+	return CreateNavigatorModule(RobloxSwitchViewModule, SwitchRouterModule(p1, p2), p2 or {})
 end

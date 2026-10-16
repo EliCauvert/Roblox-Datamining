@@ -1,35 +1,37 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local fFlagBuildExperienceInGameShell = require(parent.SharedFlags).FFlagBuildExperienceInGameShell
-local var1 = if fFlagBuildExperienceInGameShell then nil else require(parent.Display)
-local signalsModule = require(parent.Signals)
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local FFlagBuildExperienceInGameShell = require(Parent.SharedFlags).FFlagBuildExperienceInGameShell
+local DisplayModule = if FFlagBuildExperienceInGameShell then nil else require(Parent.Display)
+local SignalsModule = require(Parent.Signals)
 
-return function()
-	-- upvalues: fFlagBuildExperienceInGameShell (ref), signalsModule (ref), var1 (ref)
-	local var2 = if fFlagBuildExperienceInGameShell then signalsModule.createSignal(false) else signalsModule.createComputed(function(p1)
-		-- upvalues: var1 (copy)
-		local displayStore = var1.GetDisplayStore(p1)
-		local viewportSize = displayStore.getViewportSize(p1)
+return function() --[[ Line: 17 | Named "createAssistantBuildStore" ]]
+	-- upvalues: FFlagBuildExperienceInGameShell (copy), SignalsModule (copy), DisplayModule (copy)
+	local Signal = nil
+	Signal = if FFlagBuildExperienceInGameShell then SignalsModule.createSignal(false) else SignalsModule.createComputed(function(p1): boolean --[[ Line: 22 ]]
+		-- upvalues: DisplayModule (upval)
+		local DisplayStore = DisplayModule.GetDisplayStore(p1)
+		local ViewportSize = DisplayStore.getViewportSize(p1)
 		
-		return displayStore.getDisplaySize(p1) == Enum.DisplaySize.Small and viewportSize.Y < viewportSize.X
+		return DisplayStore.getDisplaySize(p1) == Enum.DisplaySize.Small and ViewportSize.Y < ViewportSize.X
 	end)
-	local var3, var4 = signalsModule.createSignal(false)
-	local var5, var6 = signalsModule.createSignal(true)
+	local Signal1, Signal2 = SignalsModule.createSignal(false)
+	local Signal3, Signal2_1 = SignalsModule.createSignal(true)
 	
 	return {
-		getIsDisabled = var2,
-		getIsDisabledTooltipOpen = var3,
-		getIsOverlayVisible = var5,
-		activate = function()
-			-- upvalues: var2 (write), var4 (ref), var3 (ref), var6 (ref), var5 (ref)
-			if var2(false) then
-				var4(not var3(false))
+		getIsDisabled = Signal,
+		getIsDisabledTooltipOpen = Signal1,
+		getIsOverlayVisible = Signal3,
+		activate = function() --[[ Line: 32 ]]
+			-- upvalues: Signal (ref), Signal2 (copy), Signal1 (copy), Signal2_1 (copy), Signal3 (copy)
+			if Signal(false) then
+				Signal2(not Signal1(false))
 				
 				return
+			else
+				Signal2(false)
+				Signal2_1(not Signal3(false))
 			end
-			var4(false)
-			var6(not var5(false))
 		end,
-		setIsDisabledTooltipOpen = var4,
-		setIsOverlayVisible = var6
+		setIsDisabledTooltipOpen = Signal2,
+		setIsOverlayVisible = Signal2_1
 	}
 end

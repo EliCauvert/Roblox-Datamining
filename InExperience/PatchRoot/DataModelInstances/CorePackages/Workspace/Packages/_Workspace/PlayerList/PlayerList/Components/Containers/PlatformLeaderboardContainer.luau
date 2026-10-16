@@ -1,28 +1,28 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local reactModule = require(parent_1.React)
-local platformLeaderboardsClientModule = require(parent_1.PlatformLeaderboardsClient)
-local platformLeaderboardStoreContextModule = require(parent.Common.PlatformLeaderboardStoreContext)
-local fFlagPlatformLeaderboardPersistStoreOnRemount = require(parent_1.SharedFlags).FFlagPlatformLeaderboardPersistStoreOnRemount
-local platformLeaderboardClientStore = platformLeaderboardsClientModule.PlatformLeaderboardClientStore
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
+local PlatformLeaderboardsClientModule = require(Parent1.PlatformLeaderboardsClient)
+local PlatformLeaderboardStoreContextModule = require(Parent.Common.PlatformLeaderboardStoreContext)
+local FFlagPlatformLeaderboardPersistStoreOnRemount = require(Parent1.SharedFlags).FFlagPlatformLeaderboardPersistStoreOnRemount
+local PlatformLeaderboardClientStore = PlatformLeaderboardsClientModule.PlatformLeaderboardClientStore
 
-return reactModule.memo(function(p1)
-	-- upvalues: fFlagPlatformLeaderboardPersistStoreOnRemount (ref), platformLeaderboardsClientModule (ref), reactModule (ref), platformLeaderboardClientStore (ref), platformLeaderboardStoreContextModule (ref)
-	local var1 = if fFlagPlatformLeaderboardPersistStoreOnRemount and p1.store == nil then platformLeaderboardsClientModule.getPlatformLeaderboardClientStore() else nil
-	local var2 = reactModule.useMemo(function()
-		-- upvalues: fFlagPlatformLeaderboardPersistStoreOnRemount (copy), p1 (ref), platformLeaderboardClientStore (copy)
-		return if fFlagPlatformLeaderboardPersistStoreOnRemount or p1.store ~= nil or not platformLeaderboardClientStore then nil else platformLeaderboardClientStore.new()
+return ReactModule.memo(function(p1) --[[ Line: 19 ]]
+	-- upvalues: FFlagPlatformLeaderboardPersistStoreOnRemount (copy), PlatformLeaderboardsClientModule (copy), ReactModule (copy), PlatformLeaderboardClientStore (copy), PlatformLeaderboardStoreContextModule (copy)
+	local PlatformLeaderboardClientStore1 = if FFlagPlatformLeaderboardPersistStoreOnRemount and p1.store == nil then PlatformLeaderboardsClientModule.getPlatformLeaderboardClientStore() else nil
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 26 ]]
+		-- upvalues: FFlagPlatformLeaderboardPersistStoreOnRemount (upval), p1 (copy), PlatformLeaderboardClientStore (upval)
+		return if FFlagPlatformLeaderboardPersistStoreOnRemount or p1.store ~= nil or not PlatformLeaderboardClientStore then nil else PlatformLeaderboardClientStore.new()
 	end, {})
-	reactModule.useEffect(function()
-		-- upvalues: fFlagPlatformLeaderboardPersistStoreOnRemount (copy), var2 (ref)
-		return function()
-			-- upvalues: fFlagPlatformLeaderboardPersistStoreOnRemount (copy), var2 (copy)
-			if not fFlagPlatformLeaderboardPersistStoreOnRemount and var2 then
-				var2:destroy()
+	ReactModule.useEffect(function() --[[ Line: 34 ]]
+		-- upvalues: FFlagPlatformLeaderboardPersistStoreOnRemount (upval), UseMemoResult (copy)
+		return function() --[[ Line: 35 ]]
+			-- upvalues: FFlagPlatformLeaderboardPersistStoreOnRemount (upval), UseMemoResult (upval)
+			if not FFlagPlatformLeaderboardPersistStoreOnRemount and UseMemoResult then
+				UseMemoResult:destroy()
 			end
 		end
-	end, { var2 })
-	local store = p1.store or (var1 or var2)
+	end, { UseMemoResult })
+	local Store = p1.store or (PlatformLeaderboardClientStore1 or UseMemoResult)
 	
-	return if store == nil then p1.children else reactModule.createElement(platformLeaderboardStoreContextModule.Provider, { value = store }, p1.children)
+	return if Store == nil then p1.children else ReactModule.createElement(PlatformLeaderboardStoreContextModule.Provider, { value = Store }, p1.children)
 end)

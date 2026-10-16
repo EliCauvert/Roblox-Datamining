@@ -1,58 +1,58 @@
-﻿local vrSpatialUi = script:FindFirstAncestor("VrSpatialUi")
-local dragBarModule = require(vrSpatialUi.DragBar)
-local constantsModule = require(vrSpatialUi.Constants)
-local coreGuiService = game:GetService("CoreGui")
+﻿local VrSpatialUi = script:FindFirstAncestor("VrSpatialUi")
+local DragBarModule = require(VrSpatialUi.DragBar)
+local ConstantsModule = require(VrSpatialUi.Constants)
+local CoreGui = game:GetService("CoreGui")
 
-return function(p1)
-	-- upvalues: coreGuiService (ref), constantsModule (ref), dragBarModule (ref)
-	local part = Instance.new("Part")
-	part.Size = if p1.dragBarPartSize then Vector3.new(p1.dragBarPartSize.X, p1.dragBarPartSize.Y, 0.00001) else Vector3.new(0.600000023842, 0.119999997318, 0.00001)
-	part.Name = p1.name .. "_DragBar"
-	part.Color = Color3.new(1, 1, 1)
-	part.Parent = workspace.CurrentCamera
-	part.Anchored = true
-	part.CanTouch = true
-	part.CanCollide = false
-	part.CastShadow = false
-	part.Material = Enum.Material.Glass
-	part.Transparency = 1
-	local dragDetector = Instance.new("DragDetector")
-	dragDetector.Enabled = true
-	dragDetector.Parent = part
-	dragDetector.DragStyle = Enum.DragDetectorDragStyle.BestForDevice
-	local dragBarSurfaceGui = Instance.new("SurfaceGui")
-	dragBarSurfaceGui.Parent = coreGuiService
-	dragBarSurfaceGui.Name = "dragBar_SurfaceGui"
-	dragBarSurfaceGui.Enabled = true
-	dragBarSurfaceGui.CanvasSize = Vector2.new(part.Size.X, part.Size.Y) * constantsModule.VR_PANEL_RESOLUTION_MULTIPLIER
-	dragBarSurfaceGui.AlwaysOnTop = true
-	dragBarSurfaceGui.Shape = Enum.SurfaceGuiShape.Flat
-	dragBarSurfaceGui.HorizontalCurvature = 0
-	dragBarSurfaceGui.Active = true
-	dragBarSurfaceGui.Adornee = part
-	dragBarSurfaceGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-	dragBarSurfaceGui.LightInfluence = 0
-	dragBarSurfaceGui.ZOffset = 0
-	dragBarSurfaceGui.Face = Enum.NormalId.Back
-	local imageLabel = Instance.new("ImageLabel")
-	imageLabel.Image = "rbxasset://textures/ui/InGameMenu/DragBar_Bright.png"
-	imageLabel.Parent = dragBarSurfaceGui
-	imageLabel.BackgroundTransparency = 1
-	imageLabel.BackgroundColor3 = Color3.new(1, 1, 1)
-	imageLabel.AnchorPoint = Vector2.new(0.5, 0.5)
-	imageLabel.Position = UDim2.new(0.5, 0, 0.5, 0)
-	imageLabel.Size = UDim2.new(0.5, 0, 0.25, 0)
-	imageLabel.ImageColor3 = Color3.new(1, 1, 1)
-	dragDetector.RunLocally = true
+return function(p1) --[[ Line: 9 ]]
+	-- upvalues: CoreGui (copy), ConstantsModule (copy), DragBarModule (copy)
+	local Part = Instance.new("Part")
+	Part.Size = if p1.dragBarPartSize then Vector3.new(p1.dragBarPartSize.X, p1.dragBarPartSize.Y, 0.00001) else vector.create(0.6000000238418579, 0.11999999731779099, 9.999999747378752e-06)
+	Part.Name = p1.name .. "_DragBar"
+	Part.Color = Color3.new(1, 1, 1)
+	Part.Parent = workspace.CurrentCamera
+	Part.Anchored = true
+	Part.CanTouch = true
+	Part.CanCollide = false
+	Part.CastShadow = false
+	Part.Material = Enum.Material.Glass
+	Part.Transparency = 1
+	local DragDetector = Instance.new("DragDetector")
+	DragDetector.Enabled = true
+	DragDetector.Parent = Part
+	DragDetector.DragStyle = Enum.DragDetectorDragStyle.BestForDevice
+	local dragBar_SurfaceGui = Instance.new("SurfaceGui")
+	dragBar_SurfaceGui.Parent = CoreGui
+	dragBar_SurfaceGui.Name = "dragBar_SurfaceGui"
+	dragBar_SurfaceGui.Enabled = true
+	dragBar_SurfaceGui.CanvasSize = Vector2.new(Part.Size.X, Part.Size.Y) * ConstantsModule.VR_PANEL_RESOLUTION_MULTIPLIER
+	dragBar_SurfaceGui.AlwaysOnTop = true
+	dragBar_SurfaceGui.Shape = Enum.SurfaceGuiShape.Flat
+	dragBar_SurfaceGui.HorizontalCurvature = 0
+	dragBar_SurfaceGui.Active = true
+	dragBar_SurfaceGui.Adornee = Part
+	dragBar_SurfaceGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+	dragBar_SurfaceGui.LightInfluence = 0
+	dragBar_SurfaceGui.ZOffset = 0
+	dragBar_SurfaceGui.Face = Enum.NormalId.Back
+	local Image = Instance.new("ImageLabel")
+	Image.Image = "rbxasset://textures/ui/InGameMenu/DragBar_Bright.png"
+	Image.Parent = dragBar_SurfaceGui
+	Image.BackgroundTransparency = 1
+	Image.BackgroundColor3 = Color3.new(1, 1, 1)
+	Image.AnchorPoint = Vector2.new(0.5, 0.5)
+	Image.Position = UDim2.new(0.5, 0, 0.5, 0)
+	Image.Size = UDim2.new(0.5, 0, 0.25, 0)
+	Image.ImageColor3 = Color3.new(1, 1, 1)
+	DragDetector.RunLocally = true
 	
 	if p1.dragFunction then
-		dragDetector.DragContinue:Connect(p1.dragFunction)
+		DragDetector.DragContinue:Connect(p1.dragFunction)
 	end
 	if p1.dragStartFunction then
-		dragDetector.DragStart:Connect(p1.dragStartFunction)
+		DragDetector.DragStart:Connect(p1.dragStartFunction)
 	end
 	if p1.dragEndFunction then
-		dragDetector.DragEnd:Connect(p1.dragEndFunction)
+		DragDetector.DragEnd:Connect(p1.dragEndFunction)
 	end
-	return dragBarModule.new(part, imageLabel)
+	return (DragBarModule.new(Part, Image))
 end

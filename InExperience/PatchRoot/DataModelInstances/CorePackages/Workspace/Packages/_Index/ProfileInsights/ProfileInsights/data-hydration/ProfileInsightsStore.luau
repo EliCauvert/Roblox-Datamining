@@ -1,174 +1,196 @@
-﻿local parent = script:FindFirstAncestor("ProfileInsights").Parent
-local signalsModule = require(parent.Signals)
-local createSignal = signalsModule.createSignal
-local createComputed = signalsModule.createComputed
-local profileInsightsModelModule = require(script.Parent.ProfileInsightsModel)
-local httpService = game:GetService("HttpService")
-local profileInsightsStoreHttpTimeout = game:DefineFastInt("ProfileInsightsStoreHttpTimeout", 1500)
-local fFlagAddFriendsPageTrustedFriendRequestSection = require(parent.SharedFlags).FFlagAddFriendsPageTrustedFriendRequestSection
-local fFlagTFProfileInsightsBypassCache = require(parent.SharedFlags).FFlagTFProfileInsightsBypassCache
-local fFlagProfileInsightsSkipFetchNoCacheEntry = require(parent.SharedFlags).FFlagProfileInsightsSkipFetchNoCacheEntry
-local fFlagUserSearchClassmatesInsight = require(parent.SharedFlags).FFlagUserSearchClassmatesInsight
-local urlBuilderModule = require(parent.UrlBuilder)
-local var1 = urlBuilderModule.UrlBuilder.new({
+﻿local Parent = script:FindFirstAncestor("ProfileInsights").Parent
+local SignalsModule = require(Parent.Signals)
+local CreateSignalFunction = SignalsModule.createSignal
+local ProfileInsightsModelModule = require(script.Parent.ProfileInsightsModel)
+local HttpService = game:GetService("HttpService")
+local ProfileInsightsStoreHttpTimeout = game:DefineFastInt("ProfileInsightsStoreHttpTimeout", 1500)
+local FFlagAddFriendsPageTrustedFriendRequestSection = require(Parent.SharedFlags).FFlagAddFriendsPageTrustedFriendRequestSection
+local FFlagProfileInsightsSkipFetchNoCacheEntry = require(Parent.SharedFlags).FFlagProfileInsightsSkipFetchNoCacheEntry
+local FFlagUserSearchClassmatesInsight = require(Parent.SharedFlags).FFlagUserSearchClassmatesInsight
+local UrlBuilderModule = require(Parent.UrlBuilder)
+local Url = UrlBuilderModule.UrlBuilder.new({
 	path = "profile-insights-api/v1/multiProfileInsights",
-	base = urlBuilderModule.UrlBase.APIS
+	base = UrlBuilderModule.UrlBase.APIS
 })()
 
-local function makeHttpCall(p1, p2, p3, p4)
-	-- upvalues: httpService (ref), var1 (ref), fFlagUserSearchClassmatesInsight (ref), profileInsightsStoreHttpTimeout (ref)
-	httpService:RequestInternal({
+local function makeHttpCall(UserIds, Count, RankingStrategy, Callback) --[[ Line: 53 ]]
+	-- upvalues: HttpService (copy), Url (copy), FFlagUserSearchClassmatesInsight (copy), ProfileInsightsStoreHttpTimeout (copy)
+	HttpService:RequestInternal({
 		Method = "POST",
 		Priority = 0,
-		Url = var1,
-		Body = httpService:JSONEncode({
-			userIds = p1,
-			count = if fFlagUserSearchClassmatesInsight and p2 then p2 elseif p3 then nil else p2 or 2,
-			rankingStrategy = p3
+		Url = Url,
+		Body = HttpService:JSONEncode({
+			userIds = UserIds,
+			count = if FFlagUserSearchClassmatesInsight and Count then Count elseif RankingStrategy then nil else Count or 2,
+			rankingStrategy = RankingStrategy
 		}),
-		Timeout = profileInsightsStoreHttpTimeout,
+		Timeout = ProfileInsightsStoreHttpTimeout,
 		CachePolicy = Enum.HttpCachePolicy.None,
 		Headers = {
 			["Content-Type"] = "application/json",
 			Accept = "application/json"
 		},
 		RequestType = Enum.HttpRequestType.Default
-	}):Start(function(p5, p6)
-		-- upvalues: httpService (copy), p4 (ref)
-		local var2 = nil
-		local var3 = false
+	}):Start(function(p1, p2) --[[ Line: 79 ]]
+		-- upvalues: HttpService (upval), Callback (copy)
+		local v1 = nil
+		local v2 = false
 		
-		if p6 and p6.Body then
-			local ok, status = pcall(function()
-				-- upvalues: httpService (copy), p6 (ref)
-				return httpService:JSONDecode(p6.Body)
+		if p2 and p2.Body then
+			v2, v12 = pcall(function() --[[ Line: 83 ]]
+				-- upvalues: HttpService (upval), p2 (copy)
+				return HttpService:JSONDecode(p2.Body)
 			end)
-			var3 = ok
-			var2 = status
 		end
-		p4(if p5 then var3 else false, var2)
+		Callback(if p1 then v2 else false, v1)
 	end)
 end
 
-local function _(p1, p2)
-	return { status = p1, data = p2 }
+local function _(Status, Data) --[[ Line: 91 | Named "createFetchResult" ]]
+	return { status = Status, data = Data }
 end
 
-return createComputed(function(_)
-	-- upvalues: profileInsightsModelModule (ref), createSignal (ref), fFlagProfileInsightsSkipFetchNoCacheEntry (ref), fFlagAddFriendsPageTrustedFriendRequestSection (ref), fFlagTFProfileInsightsBypassCache (ref), makeHttpCall (ref), httpService (ref)
-	local t = {}
-	local t_1 = {}
-	local var2 = profileInsightsModelModule.createProfileInsightsSignalList()
+return SignalsModule.createComputed(function(_) --[[ Line: 102 ]]
+	-- upvalues: ProfileInsightsModelModule (copy), CreateSignalFunction (copy), FFlagProfileInsightsSkipFetchNoCacheEntry (copy), FFlagAddFriendsPageTrustedFriendRequestSection (copy), makeHttpCall (copy), HttpService (copy)
+	local ProfileInsightsSignalLists = {}
+	local ProfileInsightsSignalLists1 = {}
+	local ProfileInsightsSignalList = ProfileInsightsModelModule.createProfileInsightsSignalList()
 	
-	local function _(p1, p2, p3)
-		return table.concat(p1, ",") .. tostring(p2) .. tostring(p3)
+	local function _(List, p1, p2): string --[[ Line: 111 | Named "getCacheKey" ]]
+		return table.concat(List, ",") .. tostring(p1) .. tostring(p2)
 	end
 	
-	local function mergeWithExisting(p1, p2)
-		-- upvalues: t_1 (ref)
-		local var3 = t_1[p1]
+	local function mergeWithExisting(PageId, ProfileInsights) --[[ Line: 115 ]]
+		-- upvalues: ProfileInsightsSignalLists1 (copy)
+		local ProfileInsightsSignalList = ProfileInsightsSignalLists1[PageId]
 		
-		if not var3 then
-			return p2
+		if not ProfileInsightsSignalList then
+			return ProfileInsights
 		end
 		local t = {}
-		local list = { table.unpack(var3.getProfileInsights(false)) }
-		local var4 = false
+		local List = {
+			table.unpack(ProfileInsightsSignalList.getProfileInsights(false))
+		}
+		local Flag = false
 		
-		for i, v in list do
-			t[v.targetUserId] = true
+		for _, value in List do
+			t[value.targetUserId] = true
 		end
-		for i, v_1 in p2 do
-			if not t[v_1.targetUserId] then
-				t[v_1.targetUserId] = true
-				table.insert(list, v_1)
-				var4 = true
+		for _, profileInsight in ProfileInsights do
+			if not t[profileInsight.targetUserId] then
+				t[profileInsight.targetUserId] = true
+				table.insert(List, profileInsight)
+				Flag = true
 			end
 		end
-		return if var4 then list else var3.getProfileInsights(false)
+		return if Flag then List else ProfileInsightsSignalList.getProfileInsights(false)
 	end
 	
 	return {
-		getProfileInsightsByUserId = function(p3)
-			-- upvalues: createSignal (copy), fFlagProfileInsightsSkipFetchNoCacheEntry (copy), fFlagAddFriendsPageTrustedFriendRequestSection (copy), t (ref), var2 (ref), fFlagTFProfileInsightsBypassCache (copy), profileInsightsModelModule (copy), makeHttpCall (copy)
-			local userIds = p3.userIds
-			local count = p3.count
-			local rankingStrategy = p3.rankingStrategy
+		getProfileInsightsByUserId = function(p1) --[[ Line: 142 ]]
+			-- upvalues: CreateSignalFunction (upval), FFlagProfileInsightsSkipFetchNoCacheEntry (upval), FFlagAddFriendsPageTrustedFriendRequestSection (upval), ProfileInsightsSignalLists (copy), ProfileInsightsSignalList (copy), ProfileInsightsModelModule (upval), makeHttpCall (upval)
+			local UserIds = p1.userIds
+			local Count = p1.count
+			local RankingStrategy = p1.rankingStrategy
 			
-			if not userIds or #userIds == 0 then
-				return createSignal({ status = "success", data = {} })
+			if not UserIds or #UserIds == 0 then
+				return CreateSignalFunction({ status = "success", data = {} })
 			end
-			local text = table.concat(userIds, ",") .. tostring(count) .. tostring(rankingStrategy)
+			local Text = table.concat(UserIds, ",") .. tostring(Count) .. tostring(RankingStrategy)
 			
-			if fFlagProfileInsightsSkipFetchNoCacheEntry and fFlagAddFriendsPageTrustedFriendRequestSection and (p3.skipFetch and not t[text]) then
-				return createSignal({ status = "success", data = var2 })
-			elseif fFlagTFProfileInsightsBypassCache then
-				if t[text] and not p3.forceFetch then
-					return createSignal({ status = "success", data = t[text] })
-				elseif not t[text] then
-					t[text] = profileInsightsModelModule.createProfileInsightsSignalList()
-				end
-			elseif t[text] then
-				return createSignal({ status = "success", data = t[text] })
+			if FFlagProfileInsightsSkipFetchNoCacheEntry and FFlagAddFriendsPageTrustedFriendRequestSection and p1.skipFetch and not ProfileInsightsSignalLists[Text] then
+				return CreateSignalFunction({ status = "success", data = ProfileInsightsSignalList })
 			end
-			t[text] = profileInsightsModelModule.createProfileInsightsSignalList()
-			if fFlagAddFriendsPageTrustedFriendRequestSection and p3.skipFetch then
-				return createSignal({ status = "success", data = t[text] })
+			if ProfileInsightsSignalLists[Text] and not p1.forceFetch then
+				return CreateSignalFunction({
+					status = "success",
+					data = ProfileInsightsSignalLists[Text]
+				})
 			end
-			local var5, var6 = createSignal({ status = "fetching", data = t[text] })
-			makeHttpCall(userIds, count, rankingStrategy, function(p4, p5)
-				-- upvalues: t (copy), text (ref), profileInsightsModelModule (copy), var6 (ref), fFlagTFProfileInsightsBypassCache (copy)
-				if p4 and p5.userInsights then
-					t[text].setProfileInsights(profileInsightsModelModule.createProfileInsightsList(p5.userInsights))
-					var6({ status = "success", data = t[text] })
-					
-					return
-				elseif fFlagTFProfileInsightsBypassCache then
-					var6({ status = "failed", data = t[text] })
-					
-					return
-				end
-				var6({ status = "failed", data = {} })
-			end)
-			
-			return var5
-		end,
-		getProfileInsightsByPage = function(p3)
-			-- upvalues: httpService (copy), t_1 (ref), profileInsightsModelModule (copy), createSignal (copy), t (ref), mergeWithExisting (ref), makeHttpCall (copy)
-			local var5 = if p3.pageId then p3.pageId else httpService:GenerateGUID(false)
-			local userIds = p3.userIds
-			local count = p3.count
-			local rankingStrategy = p3.rankingStrategy
-			
-			if not t_1[var5] then
-				t_1[var5] = profileInsightsModelModule.createProfileInsightsSignalList()
+			if not ProfileInsightsSignalLists[Text] then
+				ProfileInsightsSignalLists[Text] = ProfileInsightsModelModule.createProfileInsightsSignalList()
 			end
-			if not userIds or #userIds == 0 then
-				return createSignal({ status = "success", data = t_1[var5] })
-			end
-			local text = table.concat(userIds, ",") .. tostring(count) .. tostring(rankingStrategy)
-			
-			if t[text] then
-				t_1[var5].setProfileInsights(mergeWithExisting(var5, t[text].getProfileInsights(false)))
+			if FFlagAddFriendsPageTrustedFriendRequestSection and p1.skipFetch then
+				return CreateSignalFunction({
+					status = "success",
+					data = ProfileInsightsSignalLists[Text]
+				})
+			else
+				local Signal, Signal2 = CreateSignalFunction({
+					status = "fetching",
+					data = ProfileInsightsSignalLists[Text]
+				})
+				makeHttpCall(UserIds, Count, RankingStrategy, function(p2, p3) --[[ Line: 175 ]]
+					-- upvalues: ProfileInsightsSignalLists (upval), Text (copy), ProfileInsightsModelModule (upval), Signal2 (copy)
+					if p2 and p3.userInsights then
+						ProfileInsightsSignalLists[Text].setProfileInsights(ProfileInsightsModelModule.createProfileInsightsList(p3.userInsights))
+						Signal2({
+							status = "success",
+							data = ProfileInsightsSignalLists[Text]
+						})
+						
+						return
+					else
+						Signal2({
+							status = "failed",
+							data = ProfileInsightsSignalLists[Text]
+						})
+					end
+				end)
 				
-				return createSignal({ status = "success", data = t_1[var5] })
+				return Signal
 			end
-			t[text] = profileInsightsModelModule.createProfileInsightsSignalList()
-			local var6, var7 = createSignal({ status = "success", data = t_1[var5] })
-			makeHttpCall(userIds, count, rankingStrategy, function(p4, p5)
-				-- upvalues: profileInsightsModelModule (copy), t (copy), text (ref), t_1 (copy), var5 (ref), mergeWithExisting (copy), var7 (ref)
-				if p4 and p5.userInsights then
-					local var8 = profileInsightsModelModule.createProfileInsightsList(p5.userInsights)
-					t[text].setProfileInsights(var8)
-					t_1[var5].setProfileInsights(mergeWithExisting(var5, var8))
-					var7({ status = "success", data = t_1[var5] })
-					
-					return
-				end
-				var7({ status = "failed", data = {} })
-			end)
+		end,
+		getProfileInsightsByPage = function(p1) --[[ Line: 189 ]]
+			-- upvalues: HttpService (upval), ProfileInsightsSignalLists1 (copy), ProfileInsightsModelModule (upval), CreateSignalFunction (upval), ProfileInsightsSignalLists (copy), mergeWithExisting (copy), makeHttpCall (upval)
+			local PageId = if p1.pageId then p1.pageId else HttpService:GenerateGUID(false)
+			local UserIds = p1.userIds
+			local Count = p1.count
+			local RankingStrategy = p1.rankingStrategy
 			
-			return var6
+			if not ProfileInsightsSignalLists1[PageId] then
+				ProfileInsightsSignalLists1[PageId] = ProfileInsightsModelModule.createProfileInsightsSignalList()
+			end
+			if not UserIds or #UserIds == 0 then
+				return CreateSignalFunction({
+					status = "success",
+					data = ProfileInsightsSignalLists1[PageId]
+				})
+			end
+			local Text = table.concat(UserIds, ",") .. tostring(Count) .. tostring(RankingStrategy)
+			
+			if ProfileInsightsSignalLists[Text] then
+				ProfileInsightsSignalLists1[PageId].setProfileInsights((mergeWithExisting(PageId, ProfileInsightsSignalLists[Text].getProfileInsights(false))))
+				
+				return CreateSignalFunction({
+					status = "success",
+					data = ProfileInsightsSignalLists1[PageId]
+				})
+			else
+				ProfileInsightsSignalLists[Text] = ProfileInsightsModelModule.createProfileInsightsSignalList()
+				local Signal, Signal2 = CreateSignalFunction({
+					status = "success",
+					data = ProfileInsightsSignalLists1[PageId]
+				})
+				makeHttpCall(UserIds, Count, RankingStrategy, function(p2, p3) --[[ Line: 211 ]]
+					-- upvalues: ProfileInsightsModelModule (upval), ProfileInsightsSignalLists (upval), Text (copy), ProfileInsightsSignalLists1 (upval), PageId (copy), mergeWithExisting (upval), Signal2 (copy)
+					if p2 and p3.userInsights then
+						local ProfileInsightsList = ProfileInsightsModelModule.createProfileInsightsList(p3.userInsights)
+						ProfileInsightsSignalLists[Text].setProfileInsights(ProfileInsightsList)
+						ProfileInsightsSignalLists1[PageId].setProfileInsights((mergeWithExisting(PageId, ProfileInsightsList)))
+						Signal2({
+							status = "success",
+							data = ProfileInsightsSignalLists1[PageId]
+						})
+						
+						return
+					else
+						Signal2({ status = "failed", data = {} })
+					end
+				end)
+				
+				return Signal
+			end
 		end
 	}
 end)

@@ -1,19 +1,19 @@
-﻿local setUserTypingModule = require(script.Parent.SetUserTyping)
-local var1 = 0
+﻿local SetUserTypingModule = require(script.Parent.SetUserTyping)
+local Count = 0
 
-return function(p1, p2)
-	-- upvalues: var1 (write), setUserTypingModule (ref)
-	return function(p3)
-		-- upvalues: var1 (copy), setUserTypingModule (copy), p1 (ref), p2 (ref)
-		spawn(function()
-			-- upvalues: var1 (copy), p3 (ref), setUserTypingModule (copy), p1 (copy), p2 (copy)
-			var1 += 1
-			local var2 = var1
-			p3:dispatch(setUserTypingModule(p1, p2, true))
+return function(p1, p2) --[[ Line: 7 ]]
+	-- upvalues: Count (ref), SetUserTypingModule (copy)
+	return function(p3) --[[ Line: 8 ]]
+		-- upvalues: Count (upval), SetUserTypingModule (upval), p1 (copy), p2 (copy)
+		spawn(function() --[[ Line: 9 ]]
+			-- upvalues: Count (upval), p3 (copy), SetUserTypingModule (upval), p1 (upval), p2 (upval)
+			Count += 1
+			local Count1: number = Count
+			p3:dispatch(SetUserTypingModule(p1, p2, true))
 			wait(8)
 			
-			if var1 == var2 then
-				p3:dispatch(setUserTypingModule(p1, p2, false))
+			if Count == Count1 then
+				p3:dispatch(SetUserTypingModule(p1, p2, false))
 			end
 		end)
 	end

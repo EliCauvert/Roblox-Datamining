@@ -1,3 +1,3 @@
-﻿return require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator(script.Name, function(p1)
-	return { screenSize = p1 }
+﻿return require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator(script.Name, function(ScreenSize) --[[ Line: 9 ]]
+	return { screenSize = ScreenSize }
 end)

@@ -1,52 +1,52 @@
-﻿local momentsCreationFlow = script:FindFirstAncestor("MomentsCreationFlow")
-local parent = momentsCreationFlow.Parent
-local foundationModule = require(parent.Foundation)
-local momentsCommonModule = require(parent.MomentsCommon)
-local reactModule = require(parent.React)
-local icon = foundationModule.Icon
-local view = foundationModule.View
-local captureViewModule = require(momentsCreationFlow.Components.CaptureView)
-local descriptionViewModule = require(momentsCreationFlow.Components.DescriptionView)
-local editCTABarModule = require(momentsCreationFlow.Components.EditCTABar)
-local galleryViewModule = require(momentsCreationFlow.Components.GalleryView)
-local musicChipModule = require(momentsCreationFlow.Components.MusicChip)
-local musicOverlayModule = require(momentsCreationFlow.Components.MusicOverlay)
-local playbackControlsModule = require(momentsCreationFlow.Components.PlaybackControls)
-local previewViewModule = require(momentsCreationFlow.Components.PreviewView)
-local textOverlayDisplay = momentsCommonModule.TextOverlayDisplay
-local exitConfirmationDialogModule = require(momentsCreationFlow.Components.Dialogs.ExitConfirmationDialog)
-local textFilteredDialogModule = require(momentsCreationFlow.Components.Dialogs.TextFilteredDialog)
-local textOverlayEditorModule = require(momentsCreationFlow.Components.TextOverlay.TextOverlayEditor)
-local textOverlayViewModule = require(momentsCreationFlow.Components.TextOverlay.TextOverlayView)
-local trimmingViewModule = require(momentsCreationFlow.Components.TrimmingView)
-local clearEditsModule = require(momentsCreationFlow.Actions.ClearEdits)
-local creationFlowStateUpdatedModule = require(momentsCreationFlow.Actions.CreationFlowStateUpdated)
-local musicEditUpdatedModule = require(momentsCreationFlow.Actions.MusicEditUpdated)
-local selectedCaptureUpdatedModule = require(momentsCreationFlow.Actions.SelectedCaptureUpdated)
-local textOverlayEditsUpdatedModule = require(momentsCreationFlow.Actions.TextOverlayEditsUpdated)
-local trimEditUpdatedModule = require(momentsCreationFlow.Actions.TrimEditUpdated)
-local useAutoDismissStateModule = require(momentsCreationFlow.Hooks.useAutoDismissState)
-local useCallback = reactModule.useCallback
-local useDeviceInsets = momentsCommonModule.Hooks.useDeviceInsets
-local useDispatch = momentsCommonModule.Hooks.useDispatch
-local useFormFactor = momentsCommonModule.Hooks.useFormFactor
-local useMemo = reactModule.useMemo
-local useRef = reactModule.useRef
-local useSelector = momentsCommonModule.Hooks.useSelector
-local useToggleState = momentsCommonModule.Hooks.useToggleState
-local useTokens = foundationModule.Hooks.useTokens
-local useUnifiedPlayback = momentsCommonModule.Hooks.useUnifiedPlayback
-local creationFlowContextModule = require(momentsCreationFlow.Context.CreationFlowContext)
-local getContentFromCaptureModule = require(momentsCreationFlow.Utils.getContentFromCapture)
-local makeMomentMetadataModule = require(momentsCreationFlow.Utils.makeMomentMetadata)
-local makeRegistrationInfoModule = require(momentsCreationFlow.Utils.makeRegistrationInfo)
-local creationFlowStateModule = require(momentsCreationFlow.Enums.CreationFlowState)
-local dialogTypeModule = require(momentsCreationFlow.Enums.DialogType)
-local formFactor = momentsCommonModule.Enums.FormFactor
-local constantsModule = require(momentsCreationFlow.Constants)
-local creationFlowLocalizationModule = require(momentsCreationFlow.Enums.CreationFlowLocalization)
-local eventNamesModule = require(momentsCreationFlow.Analytics.EventNames)
-local t = {
+﻿local MomentsCreationFlow = script:FindFirstAncestor("MomentsCreationFlow")
+local Parent = MomentsCreationFlow.Parent
+local FoundationModule = require(Parent.Foundation)
+local MomentsCommonModule = require(Parent.MomentsCommon)
+local ReactModule = require(Parent.React)
+local Icon = FoundationModule.Icon
+local View = FoundationModule.View
+local CaptureViewModule = require(MomentsCreationFlow.Components.CaptureView)
+local DescriptionViewModule = require(MomentsCreationFlow.Components.DescriptionView)
+local EditCTABarModule = require(MomentsCreationFlow.Components.EditCTABar)
+local GalleryViewModule = require(MomentsCreationFlow.Components.GalleryView)
+local MusicChipModule = require(MomentsCreationFlow.Components.MusicChip)
+local MusicOverlayModule = require(MomentsCreationFlow.Components.MusicOverlay)
+local PlaybackControlsModule = require(MomentsCreationFlow.Components.PlaybackControls)
+local PreviewViewModule = require(MomentsCreationFlow.Components.PreviewView)
+local TextOverlayDisplay = MomentsCommonModule.TextOverlayDisplay
+local ExitConfirmationDialogModule = require(MomentsCreationFlow.Components.Dialogs.ExitConfirmationDialog)
+local TextFilteredDialogModule = require(MomentsCreationFlow.Components.Dialogs.TextFilteredDialog)
+local TextOverlayEditorModule = require(MomentsCreationFlow.Components.TextOverlay.TextOverlayEditor)
+local TextOverlayViewModule = require(MomentsCreationFlow.Components.TextOverlay.TextOverlayView)
+local TrimmingViewModule = require(MomentsCreationFlow.Components.TrimmingView)
+local ClearEditsModule = require(MomentsCreationFlow.Actions.ClearEdits)
+local CreationFlowStateUpdatedModule = require(MomentsCreationFlow.Actions.CreationFlowStateUpdated)
+local MusicEditUpdatedModule = require(MomentsCreationFlow.Actions.MusicEditUpdated)
+local SelectedCaptureUpdatedModule = require(MomentsCreationFlow.Actions.SelectedCaptureUpdated)
+local TextOverlayEditsUpdatedModule = require(MomentsCreationFlow.Actions.TextOverlayEditsUpdated)
+local TrimEditUpdatedModule = require(MomentsCreationFlow.Actions.TrimEditUpdated)
+local UseAutoDismissStateModule = require(MomentsCreationFlow.Hooks.useAutoDismissState)
+local UseCallbackFunction = ReactModule.useCallback
+local UseDeviceInsetsFunction = MomentsCommonModule.Hooks.useDeviceInsets
+local UseDispatchFunction = MomentsCommonModule.Hooks.useDispatch
+local UseFormFactorFunction = MomentsCommonModule.Hooks.useFormFactor
+local UseMemoFunction = ReactModule.useMemo
+local UseRefFunction = ReactModule.useRef
+local UseSelectorFunction = MomentsCommonModule.Hooks.useSelector
+local UseToggleStateFunction = MomentsCommonModule.Hooks.useToggleState
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UseUnifiedPlaybackFunction = MomentsCommonModule.Hooks.useUnifiedPlayback
+local CreationFlowContextModule = require(MomentsCreationFlow.Context.CreationFlowContext)
+local GetContentFromCaptureModule = require(MomentsCreationFlow.Utils.getContentFromCapture)
+local MakeMomentMetadataModule = require(MomentsCreationFlow.Utils.makeMomentMetadata)
+local MakeRegistrationInfoModule = require(MomentsCreationFlow.Utils.makeRegistrationInfo)
+local CreationFlowStateModule = require(MomentsCreationFlow.Enums.CreationFlowState)
+local DialogTypeModule = require(MomentsCreationFlow.Enums.DialogType)
+local FormFactor = MomentsCommonModule.Enums.FormFactor
+local ConstantsModule = require(MomentsCreationFlow.Constants)
+local CreationFlowLocalizationModule = require(MomentsCreationFlow.Enums.CreationFlowLocalization)
+local EventNamesModule = require(MomentsCreationFlow.Analytics.EventNames)
+local config = {
 	rotation = 0,
 	scale = 1,
 	text = "",
@@ -60,440 +60,451 @@ local t = {
 	}
 }
 
-return function(p1)
-	-- upvalues: useDispatch (ref), useDeviceInsets (ref), useTokens (ref), useFormFactor (ref), useToggleState (ref), useAutoDismissStateModule (ref), reactModule (ref), creationFlowContextModule (ref), useCallback (ref), useRef (ref), useSelector (ref), constantsModule (ref), useMemo (ref), useUnifiedPlayback (ref), getContentFromCaptureModule (ref), eventNamesModule (ref), creationFlowStateUpdatedModule (ref), creationFlowStateModule (ref), dialogTypeModule (ref), makeMomentMetadataModule (ref), makeRegistrationInfoModule (ref), clearEditsModule (ref), trimEditUpdatedModule (ref), musicEditUpdatedModule (ref), textOverlayEditsUpdatedModule (ref), t (ref), selectedCaptureUpdatedModule (ref), view (ref), foundationModule (ref), creationFlowLocalizationModule (ref), exitConfirmationDialogModule (ref), textFilteredDialogModule (ref), formFactor (ref), icon (ref), musicChipModule (ref), playbackControlsModule (ref), textOverlayEditorModule (ref), captureViewModule (ref), textOverlayDisplay (ref), editCTABarModule (ref), galleryViewModule (ref), previewViewModule (ref), trimmingViewModule (ref), textOverlayViewModule (ref), descriptionViewModule (ref), musicOverlayModule (ref)
-	local var1 = useDispatch()
-	local var2 = useDeviceInsets()
-	local var3 = useTokens()
-	local var4 = useFormFactor()
-	local var5 = useToggleState(false)
-	local var6, var7 = useAutoDismissStateModule()
-	local var8 = reactModule.useContext(creationFlowContextModule)
-	local var9, var10 = reactModule.useState(Vector2.new(0, 0))
-	local var11, var12 = reactModule.useState(Vector2.new(0, 0))
-	local var13, var14 = reactModule.useState({ modalType = nil, modalProps = nil })
-	local var15 = useCallback(function(p2)
-		-- upvalues: var12 (ref)
-		var12(p2.AbsoluteSize)
+return function(p1) --[[ Line: 86 ]]
+	-- upvalues: UseDispatchFunction (copy), UseDeviceInsetsFunction (copy), UseTokensFunction (copy), UseFormFactorFunction (copy), UseToggleStateFunction (copy), UseAutoDismissStateModule (copy), ReactModule (copy), CreationFlowContextModule (copy), UseCallbackFunction (copy), UseRefFunction (copy), UseSelectorFunction (copy), ConstantsModule (copy), UseMemoFunction (copy), UseUnifiedPlaybackFunction (copy), GetContentFromCaptureModule (copy), EventNamesModule (copy), CreationFlowStateUpdatedModule (copy), CreationFlowStateModule (copy), DialogTypeModule (copy), MakeMomentMetadataModule (copy), MakeRegistrationInfoModule (copy), ClearEditsModule (copy), TrimEditUpdatedModule (copy), MusicEditUpdatedModule (copy), TextOverlayEditsUpdatedModule (copy), config (copy), SelectedCaptureUpdatedModule (copy), View (copy), FoundationModule (copy), CreationFlowLocalizationModule (copy), ExitConfirmationDialogModule (copy), TextFilteredDialogModule (copy), FormFactor (copy), Icon (copy), MusicChipModule (copy), PlaybackControlsModule (copy), TextOverlayEditorModule (copy), CaptureViewModule (copy), TextOverlayDisplay (copy), EditCTABarModule (copy), GalleryViewModule (copy), PreviewViewModule (copy), TrimmingViewModule (copy), TextOverlayViewModule (copy), DescriptionViewModule (copy), MusicOverlayModule (copy)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
+	local UseTokensResult = UseTokensFunction()
+	local UseFormFactorResult = UseFormFactorFunction()
+	local UseToggleStateResult = UseToggleStateFunction(false)
+	local UseAutoDismissStateModuleResult, UseAutoDismissStateModuleResult2 = UseAutoDismissStateModule()
+	local UseContextResult = ReactModule.useContext(CreationFlowContextModule)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(Vector2.new(0, 0))
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(Vector2.new(0, 0))
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState({ modalType = nil, modalProps = nil })
+	local UseCallbackResult = UseCallbackFunction(function(Frame) --[[ Line: 99 ]]
+		-- upvalues: UseStateResult2_1 (copy)
+		UseStateResult2_1(Frame.AbsoluteSize)
 	end, {})
-	local captures = var8.captures
-	local var16 = useRef(0)
-	local var17 = useSelector(function(p2)
-		-- upvalues: constantsModule (copy)
-		return p2[constantsModule.RoduxKey].CreationFlow.currentState
+	local Captures = UseContextResult.captures
+	local UseRefResult = UseRefFunction(0)
+	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 107 ]]
+		-- upvalues: ConstantsModule (upval)
+		return p2[ConstantsModule.RoduxKey].CreationFlow.currentState
 	end)
-	local var18 = useSelector(function(p2)
-		-- upvalues: constantsModule (copy)
-		return p2[constantsModule.RoduxKey].CreationFlow.capture
+	local UseSelectorResult1 = UseSelectorFunction(function(p2) --[[ Line: 111 ]]
+		-- upvalues: ConstantsModule (upval)
+		return p2[ConstantsModule.RoduxKey].CreationFlow.capture
 	end)
-	local var19 = useSelector(function(p2)
-		-- upvalues: constantsModule (copy)
-		return p2[constantsModule.RoduxKey].CreationFlow.textOverlayEdits
+	local UseSelectorResult2 = UseSelectorFunction(function(p2) --[[ Line: 115 ]]
+		-- upvalues: ConstantsModule (upval)
+		return p2[ConstantsModule.RoduxKey].CreationFlow.textOverlayEdits
 	end)
-	local var20 = useSelector(function(p2)
-		-- upvalues: constantsModule (copy)
-		return p2[constantsModule.RoduxKey].CreationFlow.trimEdit
+	local UseSelectorResult3 = UseSelectorFunction(function(p2) --[[ Line: 119 ]]
+		-- upvalues: ConstantsModule (upval)
+		return p2[ConstantsModule.RoduxKey].CreationFlow.trimEdit
 	end)
-	local var21 = useSelector(function(p2)
-		-- upvalues: constantsModule (copy)
-		return p2[constantsModule.RoduxKey].CreationFlow.musicEdit
+	local UseSelectorResult4 = UseSelectorFunction(function(p2) --[[ Line: 123 ]]
+		-- upvalues: ConstantsModule (upval)
+		return p2[ConstantsModule.RoduxKey].CreationFlow.musicEdit
 	end)
-	local var22 = useSelector(function(p2)
-		-- upvalues: constantsModule (copy)
-		return p2[constantsModule.RoduxKey].CreationFlow.description
+	local UseSelectorResult5 = UseSelectorFunction(function(p2) --[[ Line: 127 ]]
+		-- upvalues: ConstantsModule (upval)
+		return p2[ConstantsModule.RoduxKey].CreationFlow.description
 	end)
-	local var23, var24 = reactModule.useState(nil)
-	local var25, var26 = reactModule.useState(nil)
-	local var27, var28 = reactModule.useState(nil)
-	local var29 = useMemo(function()
-		-- upvalues: var27 (ref), var21 (ref)
-		return var27 or var21
-	end, { var27, var21 })
-	local var30 = useMemo(function()
-		-- upvalues: var25 (ref), var20 (ref)
-		return var25 or var20
-	end, { var25, var20 })
-	local var31 = useUnifiedPlayback(true, {
+	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(nil)
+	local UseStateResult5, UseStateResult2_4 = ReactModule.useState(nil)
+	local UseStateResult6, UseStateResult2_5 = ReactModule.useState(nil)
+	local UseMemoResult = UseMemoFunction(function() --[[ Line: 136 ]]
+		-- upvalues: UseStateResult6 (copy), UseSelectorResult4 (copy)
+		return UseStateResult6 or UseSelectorResult4
+	end, { UseStateResult6, UseSelectorResult4 })
+	local UseMemoResult1 = UseMemoFunction(function() --[[ Line: 140 ]]
+		-- upvalues: UseStateResult5 (copy), UseSelectorResult3 (copy)
+		return UseStateResult5 or UseSelectorResult3
+	end, { UseStateResult5, UseSelectorResult3 })
+	local UseUnifiedPlaybackResult = UseUnifiedPlaybackFunction(true, {
 		autoplay = true,
 		looping = true,
-		edits = { trim = var30, music = var29 },
-		content = if var18 then getContentFromCaptureModule(var18) else nil,
-		captureType = if var18 then var18.CaptureType else nil
+		edits = { trim = UseMemoResult1, music = UseMemoResult },
+		content = if UseSelectorResult1 then GetContentFromCaptureModule(UseSelectorResult1) else nil,
+		captureType = if UseSelectorResult1 then UseSelectorResult1.CaptureType else nil
 	})
-	local var32 = useCallback(function()
-		-- upvalues: var8 (ref), eventNamesModule (copy), var17 (ref), var1 (ref), creationFlowStateUpdatedModule (copy), creationFlowStateModule (copy), var7 (ref)
-		var8.fireEvent(eventNamesModule.EditingFlowNextButtonPressed, { editFlowState = var17 })
-		var1(creationFlowStateUpdatedModule(creationFlowStateModule.Preview))
-		var7()
-		var8.fireEvent(eventNamesModule.MomentsEditingFlowContinueToEditButtonPressed)
-	end, { var7, var17 })
-	local var33 = useCallback(function()
-		-- upvalues: var8 (ref), eventNamesModule (copy), var17 (ref), var1 (ref), creationFlowStateUpdatedModule (copy), creationFlowStateModule (copy), var5 (ref)
-		var8.fireEvent(eventNamesModule.EditingFlowNextButtonPressed, { editFlowState = var17 })
-		var1(creationFlowStateUpdatedModule(creationFlowStateModule.Description))
-		var5.disable()
-		var8.fireEvent(eventNamesModule.MomentsEditingFlowContinueToDescriptionButtonPressed)
-	end, { var17 })
-	local var34 = useCallback(function(p2)
-		-- upvalues: var8 (ref), var14 (ref), dialogTypeModule (copy)
-		local var35 = var8.isTextFiltered(p2)
+	local UseCallbackResult1 = UseCallbackFunction(function() --[[ Line: 155 ]]
+		-- upvalues: UseContextResult (copy), EventNamesModule (upval), UseSelectorResult (copy), UseDispatchResult (copy), CreationFlowStateUpdatedModule (upval), CreationFlowStateModule (upval), UseAutoDismissStateModuleResult2 (copy)
+		UseContextResult.fireEvent(EventNamesModule.EditingFlowNextButtonPressed, { editFlowState = UseSelectorResult })
+		UseDispatchResult(CreationFlowStateUpdatedModule(CreationFlowStateModule.Preview))
+		UseAutoDismissStateModuleResult2()
+		UseContextResult.fireEvent(EventNamesModule.MomentsEditingFlowContinueToEditButtonPressed)
+	end, { UseAutoDismissStateModuleResult2, UseSelectorResult })
+	local UseCallbackResult2 = UseCallbackFunction(function() --[[ Line: 164 ]]
+		-- upvalues: UseContextResult (copy), EventNamesModule (upval), UseSelectorResult (copy), UseDispatchResult (copy), CreationFlowStateUpdatedModule (upval), CreationFlowStateModule (upval), UseToggleStateResult (copy)
+		UseContextResult.fireEvent(EventNamesModule.EditingFlowNextButtonPressed, { editFlowState = UseSelectorResult })
+		UseDispatchResult(CreationFlowStateUpdatedModule(CreationFlowStateModule.Description))
+		UseToggleStateResult.disable()
+		UseContextResult.fireEvent(EventNamesModule.MomentsEditingFlowContinueToDescriptionButtonPressed)
+	end, { UseSelectorResult })
+	local UseCallbackResult3 = UseCallbackFunction(function(p2) --[[ Line: 174 ]]
+		-- upvalues: UseContextResult (copy), UseStateResult2_2 (copy), DialogTypeModule (upval)
+		local IsTextFiltered = UseContextResult.isTextFiltered(p2)
 		
-		if var35 then
-			var14({
-				modalType = dialogTypeModule.TextFiltered,
+		if IsTextFiltered then
+			UseStateResult2_2({
+				modalType = DialogTypeModule.TextFiltered,
 				modalProps = {
-					onConfirm = function()
-						-- upvalues: var14 (copy)
-						var14(nil)
+					onConfirm = function() --[[ Line: 180 ]]
+						-- upvalues: UseStateResult2_2 (upval)
+						UseStateResult2_2(nil)
 					end
 				}
 			})
 		end
-		return var35
+		return IsTextFiltered
 	end, {})
-	local var35 = useCallback(function()
-		-- upvalues: var34 (ref), var22 (ref), var16 (ref), var20 (ref), var21 (ref), var19 (ref), makeMomentMetadataModule (copy), var18 (ref), makeRegistrationInfoModule (copy), var8 (ref), p1 (ref), var1 (ref), clearEditsModule (copy), creationFlowStateModule (copy), eventNamesModule (copy)
-		if var34(var22) then return end
-		local processTime = os.clock()
+	local UseCallbackResult4 = UseCallbackFunction(function() --[[ Line: 189 ]]
+		-- upvalues: UseCallbackResult3 (copy), UseSelectorResult5 (copy), UseRefResult (copy), UseSelectorResult3 (copy), UseSelectorResult4 (copy), UseSelectorResult2 (copy), MakeMomentMetadataModule (upval), UseSelectorResult1 (copy), MakeRegistrationInfoModule (upval), UseContextResult (copy), p1 (copy), UseDispatchResult (copy), ClearEditsModule (upval), CreationFlowStateModule (upval), EventNamesModule (upval)
+		if UseCallbackResult3(UseSelectorResult5) then return end
+		local ClockTime = os.clock()
 		
-		if processTime - var16.current < 0.5 then return end
-		var16.current = processTime
-		local var36 = makeMomentMetadataModule(var18, var22, { trim = var20, music = var21, textOverlays = var19 })
-		var8.createMoment(var18, var36, makeRegistrationInfoModule(var18, var36))
+		if ClockTime - UseRefResult.current < 0.5 then return end
+		UseRefResult.current = ClockTime
+		local MomentMetadataModule = MakeMomentMetadataModule(UseSelectorResult1, UseSelectorResult5, {
+			trim = UseSelectorResult3,
+			music = UseSelectorResult4,
+			textOverlays = UseSelectorResult2
+		})
+		UseContextResult.createMoment(UseSelectorResult1, MomentMetadataModule, (MakeRegistrationInfoModule(UseSelectorResult1, MomentMetadataModule)))
 		
 		if p1.excludeGallery then
-			var1(clearEditsModule(creationFlowStateModule.Preview))
+			UseDispatchResult(ClearEditsModule(CreationFlowStateModule.Preview))
 		else
-			var1(clearEditsModule(creationFlowStateModule.Gallery))
+			UseDispatchResult(ClearEditsModule(CreationFlowStateModule.Gallery))
 		end
-		var8.fireEvent(eventNamesModule.MomentsEditingFlowPublished)
-		var8.exitCreationFlow()
+		UseContextResult.fireEvent(EventNamesModule.MomentsEditingFlowPublished)
+		UseContextResult.exitCreationFlow()
 	end, {
-		var18, var22, var21, var8, var19, var20, p1.excludeGallery
+		UseSelectorResult1, UseSelectorResult5, UseSelectorResult4, UseContextResult,
+		UseSelectorResult2, UseSelectorResult3, p1.excludeGallery
 	})
-	local var36 = useCallback(function()
-		-- upvalues: var8 (ref), eventNamesModule (copy), var17 (ref), var1 (ref), creationFlowStateUpdatedModule (copy), creationFlowStateModule (copy)
-		var8.fireEvent(eventNamesModule.EditingFlowReturnButtonPressed, { editFlowState = var17 })
-		var1(creationFlowStateUpdatedModule(creationFlowStateModule.Preview))
-	end, { var17 })
-	local var37 = useCallback(function()
-		-- upvalues: var8 (ref), eventNamesModule (copy), var17 (ref), var14 (ref), var1 (ref), clearEditsModule (copy), creationFlowStateModule (copy), var5 (ref), dialogTypeModule (copy)
-		var8.fireEvent(eventNamesModule.EditingFlowReturnButtonPressed, { editFlowState = var17 })
-		var14({
-			modalType = dialogTypeModule.ExitCreationConfirmation,
+	local UseCallbackResult5 = UseCallbackFunction(function() --[[ Line: 227 ]]
+		-- upvalues: UseContextResult (copy), EventNamesModule (upval), UseSelectorResult (copy), UseDispatchResult (copy), CreationFlowStateUpdatedModule (upval), CreationFlowStateModule (upval)
+		UseContextResult.fireEvent(EventNamesModule.EditingFlowReturnButtonPressed, { editFlowState = UseSelectorResult })
+		UseDispatchResult(CreationFlowStateUpdatedModule(CreationFlowStateModule.Preview))
+	end, { UseSelectorResult })
+	local UseCallbackResult6 = UseCallbackFunction(function() --[[ Line: 235 ]]
+		-- upvalues: UseContextResult (copy), EventNamesModule (upval), UseSelectorResult (copy), UseStateResult2_2 (copy), UseDispatchResult (copy), ClearEditsModule (upval), CreationFlowStateModule (upval), UseToggleStateResult (copy), DialogTypeModule (upval)
+		UseContextResult.fireEvent(EventNamesModule.EditingFlowReturnButtonPressed, { editFlowState = UseSelectorResult })
+		UseStateResult2_2({
+			modalType = DialogTypeModule.ExitCreationConfirmation,
 			modalProps = {
-				onCancel = function()
-					-- upvalues: var14 (copy)
-					var14(nil)
+				onCancel = function() --[[ Line: 249 ]]
+					-- upvalues: UseStateResult2_2 (upval)
+					UseStateResult2_2(nil)
 				end,
-				onConfirm = function()
-					-- upvalues: var14 (copy), var1 (copy), clearEditsModule (copy), creationFlowStateModule (copy), var5 (copy)
-					var14(nil)
-					var1(clearEditsModule(creationFlowStateModule.Gallery))
-					var5.disable()
+				onConfirm = function() --[[ Line: 240 ]]
+					-- upvalues: UseStateResult2_2 (upval), UseDispatchResult (upval), ClearEditsModule (upval), CreationFlowStateModule (upval), UseToggleStateResult (upval)
+					UseStateResult2_2(nil)
+					UseDispatchResult(ClearEditsModule(CreationFlowStateModule.Gallery))
+					UseToggleStateResult.disable()
 				end
 			}
 		})
-	end, { var17 })
-	local var38 = useCallback(function()
-		-- upvalues: var26 (ref), var1 (ref), creationFlowStateUpdatedModule (copy), creationFlowStateModule (copy), var8 (ref), eventNamesModule (copy)
-		var26(nil)
-		var1(creationFlowStateUpdatedModule(creationFlowStateModule.Preview))
-		var8.fireEvent(eventNamesModule.EditingFlowTrimBackButtonPressed)
-	end, { var8 })
-	local var39 = useCallback(function()
-		-- upvalues: var1 (ref), trimEditUpdatedModule (copy), var25 (ref), var26 (ref), creationFlowStateUpdatedModule (copy), creationFlowStateModule (copy), var8 (ref), eventNamesModule (copy)
-		var1(trimEditUpdatedModule(var25))
-		var26(nil)
-		var1(creationFlowStateUpdatedModule(creationFlowStateModule.Preview))
-		var8.fireEvent(eventNamesModule.EditingFlowTrimDoneButtonPressed)
-	end, { var25, var8 })
-	local var40 = useCallback(function(p2)
-		-- upvalues: var26 (ref)
-		var26(p2)
+	end, { UseSelectorResult })
+	local UseCallbackResult7 = UseCallbackFunction(function() --[[ Line: 257 ]]
+		-- upvalues: UseStateResult2_4 (copy), UseDispatchResult (copy), CreationFlowStateUpdatedModule (upval), CreationFlowStateModule (upval), UseContextResult (copy), EventNamesModule (upval)
+		UseStateResult2_4(nil)
+		UseDispatchResult(CreationFlowStateUpdatedModule(CreationFlowStateModule.Preview))
+		UseContextResult.fireEvent(EventNamesModule.EditingFlowTrimBackButtonPressed)
+	end, { UseContextResult })
+	local UseCallbackResult8 = UseCallbackFunction(function() --[[ Line: 263 ]]
+		-- upvalues: UseDispatchResult (copy), TrimEditUpdatedModule (upval), UseStateResult5 (copy), UseStateResult2_4 (copy), CreationFlowStateUpdatedModule (upval), CreationFlowStateModule (upval), UseContextResult (copy), EventNamesModule (upval)
+		UseDispatchResult(TrimEditUpdatedModule(UseStateResult5))
+		UseStateResult2_4(nil)
+		UseDispatchResult(CreationFlowStateUpdatedModule(CreationFlowStateModule.Preview))
+		UseContextResult.fireEvent(EventNamesModule.EditingFlowTrimDoneButtonPressed)
+	end, { UseStateResult5, UseContextResult })
+	local UseCallbackResult9 = UseCallbackFunction(function(p2) --[[ Line: 270 ]]
+		-- upvalues: UseStateResult2_4 (copy)
+		UseStateResult2_4(p2)
 	end, {})
-	local var41 = useCallback(function()
-		-- upvalues: var28 (ref), var1 (ref), creationFlowStateUpdatedModule (copy), creationFlowStateModule (copy), var8 (ref), eventNamesModule (copy)
-		var28(nil)
-		var1(creationFlowStateUpdatedModule(creationFlowStateModule.Preview))
-		var8.fireEvent(eventNamesModule.EditingFlowMusicBackButtonPressed)
+	local UseCallbackResult10 = UseCallbackFunction(function() --[[ Line: 274 ]]
+		-- upvalues: UseStateResult2_5 (copy), UseDispatchResult (copy), CreationFlowStateUpdatedModule (upval), CreationFlowStateModule (upval), UseContextResult (copy), EventNamesModule (upval)
+		UseStateResult2_5(nil)
+		UseDispatchResult(CreationFlowStateUpdatedModule(CreationFlowStateModule.Preview))
+		UseContextResult.fireEvent(EventNamesModule.EditingFlowMusicBackButtonPressed)
 	end, {})
-	local var42 = useCallback(function()
-		-- upvalues: var1 (ref), musicEditUpdatedModule (copy), var27 (ref), var28 (ref), creationFlowStateUpdatedModule (copy), creationFlowStateModule (copy), var8 (ref), eventNamesModule (copy)
-		var1(musicEditUpdatedModule(var27))
-		var28(nil)
-		var1(creationFlowStateUpdatedModule(creationFlowStateModule.Preview))
-		var8.fireEvent(eventNamesModule.EditingFlowMusicDoneButtonPressed)
-	end, { var27 })
-	local var43 = useCallback(function(p2)
-		-- upvalues: var28 (ref)
-		var28(p2)
+	local UseCallbackResult11 = UseCallbackFunction(function() --[[ Line: 280 ]]
+		-- upvalues: UseDispatchResult (copy), MusicEditUpdatedModule (upval), UseStateResult6 (copy), UseStateResult2_5 (copy), CreationFlowStateUpdatedModule (upval), CreationFlowStateModule (upval), UseContextResult (copy), EventNamesModule (upval)
+		UseDispatchResult(MusicEditUpdatedModule(UseStateResult6))
+		UseStateResult2_5(nil)
+		UseDispatchResult(CreationFlowStateUpdatedModule(CreationFlowStateModule.Preview))
+		UseContextResult.fireEvent(EventNamesModule.EditingFlowMusicDoneButtonPressed)
+	end, { UseStateResult6 })
+	local UseCallbackResult12 = UseCallbackFunction(function(p2) --[[ Line: 287 ]]
+		-- upvalues: UseStateResult2_5 (copy)
+		UseStateResult2_5(p2)
 	end, {})
-	local var44 = useCallback(function()
-		-- upvalues: var24 (ref), var1 (ref), creationFlowStateUpdatedModule (copy), creationFlowStateModule (copy), var8 (ref), eventNamesModule (copy)
-		var24(nil)
-		var1(creationFlowStateUpdatedModule(creationFlowStateModule.Preview))
-		var8.fireEvent(eventNamesModule.EditingFlowTextOverlayBackButtonPressed)
-	end, { var23, var8 })
-	local var45 = useCallback(function()
-		-- upvalues: var23 (ref), var1 (ref), textOverlayEditsUpdatedModule (copy), var34 (ref), creationFlowStateUpdatedModule (copy), creationFlowStateModule (copy), var8 (ref), eventNamesModule (copy), var24 (ref)
-		local text = var23 and (var23[1] and var23[1].text)
+	local UseCallbackResult13 = UseCallbackFunction(function() --[[ Line: 291 ]]
+		-- upvalues: UseStateResult2_3 (copy), UseDispatchResult (copy), CreationFlowStateUpdatedModule (upval), CreationFlowStateModule (upval), UseContextResult (copy), EventNamesModule (upval)
+		UseStateResult2_3(nil)
+		UseDispatchResult(CreationFlowStateUpdatedModule(CreationFlowStateModule.Preview))
+		UseContextResult.fireEvent(EventNamesModule.EditingFlowTextOverlayBackButtonPressed)
+	end, { UseStateResult4, UseContextResult })
+	local UseCallbackResult14 = UseCallbackFunction(function() --[[ Line: 297 ]]
+		-- upvalues: UseStateResult4 (copy), UseDispatchResult (copy), TextOverlayEditsUpdatedModule (upval), UseCallbackResult3 (copy), CreationFlowStateUpdatedModule (upval), CreationFlowStateModule (upval), UseContextResult (copy), EventNamesModule (upval), UseStateResult2_3 (copy)
+		local Text = UseStateResult4 and (UseStateResult4[1] and UseStateResult4[1].text)
 		
-		if text == "" then
-			var1(textOverlayEditsUpdatedModule(nil))
-		elseif var34(text) then return end
-		var1(textOverlayEditsUpdatedModule(var23))
-		var1(creationFlowStateUpdatedModule(creationFlowStateModule.Preview))
-		var8.fireEvent(eventNamesModule.EditingFlowTextOverlayDoneButtonPressed)
-		var24(nil)
-	end, { var23, var8, var34 })
-	local var46 = useCallback(function(p2)
-		-- upvalues: var24 (ref)
-		var24(p2)
-	end, {})
-	local var47 = useCallback(function(p2)
-		-- upvalues: var1 (ref), textOverlayEditsUpdatedModule (copy)
-		var1(textOverlayEditsUpdatedModule(p2))
-	end, {})
-	local var48 = useCallback(function()
-		-- upvalues: var24 (ref), var19 (ref), var1 (ref), creationFlowStateUpdatedModule (copy), creationFlowStateModule (copy)
-		var24(var19)
-		var1(creationFlowStateUpdatedModule(creationFlowStateModule.TextOverlay))
-	end, { var19 })
-	reactModule.useEffect(function()
-		-- upvalues: var17 (ref), creationFlowStateModule (copy), var24 (ref), var19 (ref), t (copy)
-		if var17 == creationFlowStateModule.TextOverlay then
-			var24(var19 or { t })
+		if Text == "" then
+			UseDispatchResult(TextOverlayEditsUpdatedModule(nil))
+		else
+			if UseCallbackResult3(Text) then return end
+			UseDispatchResult(TextOverlayEditsUpdatedModule(UseStateResult4))
 		end
-	end, { var19, var17 })
-	local var49 = useCallback(function()
-		-- upvalues: var1 (ref), creationFlowStateUpdatedModule (copy), creationFlowStateModule (copy), var8 (ref), eventNamesModule (copy)
-		var1(creationFlowStateUpdatedModule(creationFlowStateModule.Music))
-		var8.fireEvent(eventNamesModule.EditingFlowMusicButtonPressed)
+		UseDispatchResult(CreationFlowStateUpdatedModule(CreationFlowStateModule.Preview))
+		UseContextResult.fireEvent(EventNamesModule.EditingFlowTextOverlayDoneButtonPressed)
+		UseStateResult2_3(nil)
+	end, { UseStateResult4, UseContextResult, UseCallbackResult3 })
+	local UseCallbackResult15 = UseCallbackFunction(function(p2) --[[ Line: 312 ]]
+		-- upvalues: UseStateResult2_3 (copy)
+		UseStateResult2_3(p2)
 	end, {})
-	local var50 = useCallback(function(p2)
-		-- upvalues: var1 (ref), selectedCaptureUpdatedModule (copy), var7 (ref), var8 (ref), eventNamesModule (copy)
-		var1(selectedCaptureUpdatedModule(p2))
-		var7()
-		var8.fireEvent(eventNamesModule.EditingFlowGalleryItemSelected)
-	end, { var7, var8 })
-	local var51 = reactModule.useCallback(function()
-		-- upvalues: reactModule (copy), view (copy), foundationModule (copy), var8 (ref), creationFlowLocalizationModule (copy), var3 (ref)
-		return reactModule.createElement(view, {
+	local UseCallbackResult16 = UseCallbackFunction(function(p2) --[[ Line: 316 ]]
+		-- upvalues: UseDispatchResult (copy), TextOverlayEditsUpdatedModule (upval)
+		UseDispatchResult(TextOverlayEditsUpdatedModule(p2))
+	end, {})
+	local UseCallbackResult17 = UseCallbackFunction(function() --[[ Line: 320 ]]
+		-- upvalues: UseStateResult2_3 (copy), UseSelectorResult2 (copy), UseDispatchResult (copy), CreationFlowStateUpdatedModule (upval), CreationFlowStateModule (upval)
+		UseStateResult2_3(UseSelectorResult2)
+		UseDispatchResult(CreationFlowStateUpdatedModule(CreationFlowStateModule.TextOverlay))
+	end, { UseSelectorResult2 })
+	ReactModule.useEffect(function() --[[ Line: 325 ]]
+		-- upvalues: UseSelectorResult (copy), CreationFlowStateModule (upval), UseStateResult2_3 (copy), UseSelectorResult2 (copy), config (upval)
+		if UseSelectorResult == CreationFlowStateModule.TextOverlay then
+			UseStateResult2_3(UseSelectorResult2 or { config })
+		end
+	end, { UseSelectorResult2, UseSelectorResult })
+	local UseCallbackResult18 = UseCallbackFunction(function() --[[ Line: 331 ]]
+		-- upvalues: UseDispatchResult (copy), CreationFlowStateUpdatedModule (upval), CreationFlowStateModule (upval), UseContextResult (copy), EventNamesModule (upval)
+		UseDispatchResult(CreationFlowStateUpdatedModule(CreationFlowStateModule.Music))
+		UseContextResult.fireEvent(EventNamesModule.EditingFlowMusicButtonPressed)
+	end, {})
+	local UseCallbackResult19 = UseCallbackFunction(function(p2) --[[ Line: 336 ]]
+		-- upvalues: UseDispatchResult (copy), SelectedCaptureUpdatedModule (upval), UseAutoDismissStateModuleResult2 (copy), UseContextResult (copy), EventNamesModule (upval)
+		UseDispatchResult(SelectedCaptureUpdatedModule(p2))
+		UseAutoDismissStateModuleResult2()
+		UseContextResult.fireEvent(EventNamesModule.EditingFlowGalleryItemSelected)
+	end, { UseAutoDismissStateModuleResult2, UseContextResult })
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 342 ]]
+		-- upvalues: ReactModule (upval), View (upval), FoundationModule (upval), UseContextResult (copy), CreationFlowLocalizationModule (upval), UseTokensResult (copy)
+		return (ReactModule.createElement(View, {
 			Size = UDim2.fromScale(1, 1),
 			stateLayer = {
-				affordance = foundationModule.Enums.StateLayerAffordance.None
+				affordance = FoundationModule.Enums.StateLayerAffordance.None
 			}
 		}, {
-			ModeratedText = reactModule.createElement("TextLabel", {
+			ModeratedText = ReactModule.createElement("TextLabel", {
 				BackgroundTransparency = 1,
 				AnchorPoint = Vector2.new(0.5, 0.5),
 				Position = UDim2.fromScale(0.5, 0.5),
 				Size = UDim2.fromScale(1, 1),
-				Text = var8.getLocalization(creationFlowLocalizationModule.PostRemovedTitle),
-				TextColor3 = var3.Color.Extended.White.White_70
+				Text = UseContextResult.getLocalization(CreationFlowLocalizationModule.PostRemovedTitle),
+				TextColor3 = UseTokensResult.Color.Extended.White.White_70
 			})
-		})
+		}))
 	end, {})
-	local var52 = useCallback(function()
-		-- upvalues: var8 (ref), eventNamesModule (copy), var14 (ref), p1 (ref), var1 (ref), clearEditsModule (copy), creationFlowStateModule (copy), var18 (ref), dialogTypeModule (copy)
-		local function onExitCreation()
-			-- upvalues: var8 (copy), eventNamesModule (copy), var14 (copy), p1 (copy), var1 (copy), clearEditsModule (copy), creationFlowStateModule (copy)
-			var8.fireEvent(eventNamesModule.MomentsEditingFlowExited)
-			var14(nil)
+	local UseCallbackResult20 = UseCallbackFunction(function() --[[ Line: 358 ]]
+		-- upvalues: UseContextResult (copy), EventNamesModule (upval), UseStateResult2_2 (copy), p1 (copy), UseDispatchResult (copy), ClearEditsModule (upval), CreationFlowStateModule (upval), UseSelectorResult1 (copy), DialogTypeModule (upval)
+		local function onExitCreation() --[[ Line: 359 ]]
+			-- upvalues: UseContextResult (upval), EventNamesModule (upval), UseStateResult2_2 (upval), p1 (upval), UseDispatchResult (upval), ClearEditsModule (upval), CreationFlowStateModule (upval)
+			UseContextResult.fireEvent(EventNamesModule.MomentsEditingFlowExited)
+			UseStateResult2_2(nil)
 			
 			if p1.excludeGallery then
-				var1(clearEditsModule(creationFlowStateModule.Preview))
+				UseDispatchResult(ClearEditsModule(CreationFlowStateModule.Preview))
 			else
-				var1(clearEditsModule(creationFlowStateModule.Gallery))
+				UseDispatchResult(ClearEditsModule(CreationFlowStateModule.Gallery))
 			end
-			var8.exitCreationFlow()
+			UseContextResult.exitCreationFlow()
 		end
 		
-		if var18 then
-			var14({
-				modalType = dialogTypeModule.ExitCreationConfirmation,
+		if UseSelectorResult1 then
+			UseStateResult2_2({
+				modalType = DialogTypeModule.ExitCreationConfirmation,
 				modalProps = {
-					onCancel = function()
-						-- upvalues: var14 (copy)
-						var14(nil)
+					onCancel = function() --[[ Line: 374 ]]
+						-- upvalues: UseStateResult2_2 (upval)
+						UseStateResult2_2(nil)
 					end,
 					onConfirm = onExitCreation
 				}
 			})
 			
 			return
+		else
+			onExitCreation()
 		end
-		onExitCreation()
-	end, { var18, var8, p1.excludeGallery })
-	reactModule.useEffect(function()
-		-- upvalues: var8 (ref)
-		var8.setScreenOrientation(Enum.ScreenOrientation.Portrait)
+	end, { UseSelectorResult1, UseContextResult, p1.excludeGallery })
+	ReactModule.useEffect(function() --[[ Line: 385 ]]
+		-- upvalues: UseContextResult (copy)
+		UseContextResult.setScreenOrientation(Enum.ScreenOrientation.Portrait)
 		
-		return function()
-			-- upvalues: var8 (copy)
-			var8.setScreenOrientation(Enum.ScreenOrientation.Sensor)
+		return function() --[[ Line: 388 ]]
+			-- upvalues: UseContextResult (upval)
+			UseContextResult.setScreenOrientation(Enum.ScreenOrientation.Sensor)
 		end
 	end, {})
-	reactModule.useEffect(function()
-		-- upvalues: var17 (ref), creationFlowStateModule (copy), var5 (ref)
-		if var17 == creationFlowStateModule.Gallery or var17 == creationFlowStateModule.Music or var17 == creationFlowStateModule.Description then
-			var5.disable()
+	ReactModule.useEffect(function() --[[ Line: 393 ]]
+		-- upvalues: UseSelectorResult (copy), CreationFlowStateModule (upval), UseToggleStateResult (copy)
+		if UseSelectorResult == CreationFlowStateModule.Gallery or UseSelectorResult == CreationFlowStateModule.Music or UseSelectorResult == CreationFlowStateModule.Description then
+			UseToggleStateResult.disable()
 		end
-	end, { var17 })
+	end, { UseSelectorResult })
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "anchor-center-center position-center-center size-full-full",
-		backgroundStyle = var3.Color.Common.Scrim
+		backgroundStyle = UseTokensResult.Color.Common.Scrim
 	}, {
-		CreationFlowView = reactModule.createElement(view, {
+		CreationFlowView = ReactModule.createElement(View, {
 			tag = "anchor-center-center bg-surface-0 position-center-center radius-large size-full-full",
 			sizeConstraint = {
-				MaxSize = if var4 == formFactor.Wide then Vector2.new(600, 700) else nil
+				MaxSize = if UseFormFactorResult == FormFactor.Wide then Vector2.new(600, 700) else nil
 			}
 		}, {
-			CloseButtonContainer = reactModule.createElement(view, { tag = "auto-xy anchor-top-right position-top-right" }, {
-				Padding = reactModule.createElement("UIPadding", {
-					PaddingTop = UDim.new(0, var2.top + var3.Padding.Medium),
-					PaddingRight = UDim.new(0, var2.right + var3.Padding.Medium)
+			CloseButtonContainer = ReactModule.createElement(View, { tag = "auto-xy anchor-top-right position-top-right" }, {
+				Padding = ReactModule.createElement("UIPadding", {
+					PaddingTop = UDim.new(0, UseDeviceInsetsResult.top + UseTokensResult.Padding.Medium),
+					PaddingRight = UDim.new(0, UseDeviceInsetsResult.right + UseTokensResult.Padding.Medium)
 				}),
-				CloseButton = reactModule.createElement(view, {
+				CloseButton = ReactModule.createElement(View, {
 					LayoutOrder = 1,
 					tag = "size-1100-1100 bg-over-media-0 padding-medium radius-circle",
-					onActivated = var52
+					onActivated = UseCallbackResult20
 				}, {
-					CloseIcon = reactModule.createElement(icon, {
+					CloseIcon = ReactModule.createElement(Icon, {
 						name = "icons/navigation/close_small",
 						ZIndex = 2,
 						AnchorPoint = Vector2.new(0.5, 0.5),
 						Position = UDim2.fromScale(0.5, 0.5),
-						size = foundationModule.Enums.IconSize.Small,
-						style = var3.Color.ActionEmphasis.Foreground
+						size = FoundationModule.Enums.IconSize.Small,
+						style = UseTokensResult.Color.ActionEmphasis.Foreground
 					})
 				})
 			}),
-			MainViewContainer = reactModule.createElement(view, { tag = "size-full" }, {
-				MainView = reactModule.createElement(view, { tag = "size-full col align-x-center" }, {
-					PreviewContainer = reactModule.createElement("CanvasGroup", {
+			MainViewContainer = ReactModule.createElement(View, { tag = "size-full" }, {
+				MainView = ReactModule.createElement(View, { tag = "size-full col align-x-center" }, {
+					PreviewContainer = ReactModule.createElement("CanvasGroup", {
 						LayoutOrder = 1,
 						Size = UDim2.fromScale(1, 1),
-						BackgroundTransparency = var3.Color.None.Transparency
+						BackgroundTransparency = UseTokensResult.Color.None.Transparency
 					}, {
-						UIFlexItem = reactModule.createElement("UIFlexItem", {
+						UIFlexItem = ReactModule.createElement("UIFlexItem", {
 							FlexMode = Enum.UIFlexMode.Custom,
-							ShrinkRatio = if var18 then 1 else 2
+							ShrinkRatio = if UseSelectorResult1 then 1 else 2
 						}),
-						UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, var3.Radius.Large) }),
-						ClickCapture = reactModule.createElement(view, {
+						UICorner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0, UseTokensResult.Radius.Large) }),
+						ClickCapture = ReactModule.createElement(View, {
 							tag = "size-full",
 							ZIndex = 0,
-							onActivated = var7,
+							onActivated = UseAutoDismissStateModuleResult2,
 							stateLayer = {
-								affordance = foundationModule.Enums.StateLayerAffordance.None
+								affordance = FoundationModule.Enums.StateLayerAffordance.None
 							}
 						}),
-						PreviewMediaOverlay = reactModule.createElement(view, {
+						PreviewMediaOverlay = ReactModule.createElement(View, {
 							tag = "auto-y anchor-bottom-center col position-bottom-center size-full-0",
 							ZIndex = 5
 						}, {
-							OtherControls = reactModule.createElement(view, {
+							OtherControls = ReactModule.createElement(View, {
 								tag = "auto-y padding-x-large padding-bottom-large size-full-0",
 								LayoutOrder = 1
 							}, {
-								Padding = reactModule.createElement("UIPadding", {
-									PaddingLeft = UDim.new(0, math.max(var2.right, var3.Padding.Large)),
-									PaddingRight = UDim.new(0, math.max(var2.right, var3.Padding.Large))
+								Padding = ReactModule.createElement("UIPadding", {
+									PaddingLeft = UDim.new(0, (math.max(UseDeviceInsetsResult.right, UseTokensResult.Padding.Large))),
+									PaddingRight = UDim.new(0, (math.max(UseDeviceInsetsResult.right, UseTokensResult.Padding.Large)))
 								}),
-								MusicIndicator = if var21 and (var17 == creationFlowStateModule.Preview or var17 == creationFlowStateModule.Description) then reactModule.createElement(view, { tag = "anchor-bottom-left auto-xy position-bottom-left" }, {
-									MusicChip = reactModule.createElement(musicChipModule, { musicAssetId = var21.assetId, onActivated = var49 })
+								MusicIndicator = if UseSelectorResult4 and (UseSelectorResult == CreationFlowStateModule.Preview or UseSelectorResult == CreationFlowStateModule.Description) then ReactModule.createElement(View, { tag = "anchor-bottom-left auto-xy position-bottom-left" }, {
+									MusicChip = ReactModule.createElement(MusicChipModule, {
+										musicAssetId = UseSelectorResult4.assetId,
+										onActivated = UseCallbackResult18
+									})
 								}) else nil
 							}),
-							PlaybackControls = if var18 and var18.CaptureType == Enum.CaptureType.Video and var6 and (var17 == creationFlowStateModule.Gallery or var17 == creationFlowStateModule.Preview) then reactModule.createElement(playbackControlsModule, {
+							PlaybackControls = if UseSelectorResult1 and UseSelectorResult1.CaptureType == Enum.CaptureType.Video and UseAutoDismissStateModuleResult and (UseSelectorResult == CreationFlowStateModule.Gallery or UseSelectorResult == CreationFlowStateModule.Preview) then ReactModule.createElement(PlaybackControlsModule, {
 								layoutOrder = 2,
-								playbackController = var31,
-								toggleFitMode = var5.toggle,
-								isFitMode = var5.enabled
+								playbackController = UseUnifiedPlaybackResult,
+								toggleFitMode = UseToggleStateResult.toggle,
+								isFitMode = UseToggleStateResult.enabled
 							}) else nil
 						}),
-						TextOverlayEditor = if var17 == creationFlowStateModule.TextOverlay then reactModule.createElement(textOverlayEditorModule, {
+						TextOverlayEditor = if UseSelectorResult == CreationFlowStateModule.TextOverlay then ReactModule.createElement(TextOverlayEditorModule, {
 							layoutOrder = 2,
-							onTextOverlayDiscard = var44,
-							onTextOverlaySave = var45,
-							onTextOverlayUpdated = var46,
-							textOverlayEdits = var23
+							onTextOverlayDiscard = UseCallbackResult13,
+							onTextOverlaySave = UseCallbackResult14,
+							onTextOverlayUpdated = UseCallbackResult15,
+							textOverlayEdits = UseStateResult4
 						}) else nil,
-						CaptureView = reactModule.createElement(captureViewModule, {
-							capture = var18,
-							playbackController = var31,
-							onAbsoluteSizeChanged = var15,
-							onRenderFailed = var51,
-							onResolutionChanged = var10,
-							scaleType = if var5.enabled then Enum.ScaleType.Fit else Enum.ScaleType.Crop
+						CaptureView = ReactModule.createElement(CaptureViewModule, {
+							capture = UseSelectorResult1,
+							playbackController = UseUnifiedPlaybackResult,
+							onAbsoluteSizeChanged = UseCallbackResult,
+							onRenderFailed = UseResult,
+							onResolutionChanged = UseStateResult2,
+							scaleType = if UseToggleStateResult.enabled then Enum.ScaleType.Fit else Enum.ScaleType.Crop
 						}, {
-							TextOverlayDisplay = reactModule.createElement(textOverlayDisplay, {
+							TextOverlayDisplay = ReactModule.createElement(TextOverlayDisplay, {
 								zIndex = 3,
-								draggable = var17 == creationFlowStateModule.Preview,
-								editable = var17 == creationFlowStateModule.TextOverlay,
-								itemResolution = var9,
-								itemSize = var11,
-								scaleType = if var5.enabled then Enum.ScaleType.Fit else Enum.ScaleType.Crop,
-								onTextOverlayActivated = var48,
-								onTextOverlayDragEnd = var47,
-								textOverlayEdits = var19
+								draggable = UseSelectorResult == CreationFlowStateModule.Preview,
+								editable = UseSelectorResult == CreationFlowStateModule.TextOverlay,
+								itemResolution = UseStateResult,
+								itemSize = UseStateResult1,
+								scaleType = if UseToggleStateResult.enabled then Enum.ScaleType.Fit else Enum.ScaleType.Crop,
+								onTextOverlayActivated = UseCallbackResult17,
+								onTextOverlayDragEnd = UseCallbackResult16,
+								textOverlayEdits = UseSelectorResult2
 							})
 						}),
-						EditCTABar = if var17 == creationFlowStateModule.Preview then reactModule.createElement(editCTABarModule, {
+						EditCTABar = if UseSelectorResult == CreationFlowStateModule.Preview then ReactModule.createElement(EditCTABarModule, {
 							zIndex = 4,
-							captureType = if var18 then var18.CaptureType else nil,
-							showText = var6
+							captureType = if UseSelectorResult1 then UseSelectorResult1.CaptureType else nil,
+							showText = UseAutoDismissStateModuleResult
 						}) else nil
 					}),
-					GalleryView = if var17 == creationFlowStateModule.Gallery then reactModule.createElement(galleryViewModule, {
+					GalleryView = if UseSelectorResult == CreationFlowStateModule.Gallery then ReactModule.createElement(GalleryViewModule, {
 						layoutOrder = 2,
-						captures = captures,
-						selectedCapture = var18,
-						onCaptureSelected = var50,
-						onNextCallback = var32
+						captures = Captures,
+						selectedCapture = UseSelectorResult1,
+						onCaptureSelected = UseCallbackResult19,
+						onNextCallback = UseCallbackResult1
 					}) else nil,
-					PreviewView = if var17 == creationFlowStateModule.Preview then reactModule.createElement(previewViewModule, {
+					PreviewView = if UseSelectorResult == CreationFlowStateModule.Preview then ReactModule.createElement(PreviewViewModule, {
 						layoutOrder = 2,
-						onContinueCallback = var33,
-						onReturnToGalleryCallback = if not p1.excludeGallery then var37 else nil
+						onContinueCallback = UseCallbackResult2,
+						onReturnToGalleryCallback = if p1.excludeGallery then nil else UseCallbackResult6
 					}) else nil,
-					TrimmingView = if var17 == creationFlowStateModule.Trimming then reactModule.createElement(trimmingViewModule, {
+					TrimmingView = if UseSelectorResult == CreationFlowStateModule.Trimming then ReactModule.createElement(TrimmingViewModule, {
 						layoutOrder = 2,
-						playbackController = var31,
-						onTrimDiscard = var38,
-						onTrimSave = var39,
-						onTrimUpdate = var40,
-						selectedCapture = var18,
-						trimEdit = var30
+						playbackController = UseUnifiedPlaybackResult,
+						onTrimDiscard = UseCallbackResult7,
+						onTrimSave = UseCallbackResult8,
+						onTrimUpdate = UseCallbackResult9,
+						selectedCapture = UseSelectorResult1,
+						trimEdit = UseMemoResult1
 					}) else nil,
-					TextOverlayView = if var17 == creationFlowStateModule.TextOverlay then reactModule.createElement(textOverlayViewModule, {
+					TextOverlayView = if UseSelectorResult == CreationFlowStateModule.TextOverlay then ReactModule.createElement(TextOverlayViewModule, {
 						layoutOrder = 2,
-						onTextOverlayDiscard = var44,
-						onTextOverlaySave = var45
+						onTextOverlayDiscard = UseCallbackResult13,
+						onTextOverlaySave = UseCallbackResult14
 					}) else nil,
-					DescriptionView = if var17 == creationFlowStateModule.Description then reactModule.createElement(descriptionViewModule, {
+					DescriptionView = if UseSelectorResult == CreationFlowStateModule.Description then ReactModule.createElement(DescriptionViewModule, {
 						layoutOrder = 2,
-						onPublish = var35,
-						onReturnToEditing = var36
+						onPublish = UseCallbackResult4,
+						onReturnToEditing = UseCallbackResult5
 					}) else nil
 				}),
-				MusicView = if var17 == creationFlowStateModule.Music then reactModule.createElement(view, { LayoutOrder = 2, Size = UDim2.fromScale(1, 1) }, {
-					MusicOverlay = reactModule.createElement(musicOverlayModule, {
-						musicEdit = var29,
-						playbackController = var31,
-						onMusicDiscard = var41,
-						onMusicSave = var42,
-						onMusicUpdate = var43
+				MusicView = if UseSelectorResult == CreationFlowStateModule.Music then ReactModule.createElement(View, { LayoutOrder = 2, Size = UDim2.fromScale(1, 1) }, {
+					MusicOverlay = ReactModule.createElement(MusicOverlayModule, {
+						musicEdit = UseMemoResult,
+						playbackController = UseUnifiedPlaybackResult,
+						onMusicDiscard = UseCallbackResult10,
+						onMusicSave = UseCallbackResult11,
+						onMusicUpdate = UseCallbackResult12
 					})
 				}) else nil
 			})
 		}),
-		Modal = reactModule.useCallback(function()
-			-- upvalues: var13 (ref), dialogTypeModule (copy), reactModule (copy), exitConfirmationDialogModule (copy), textFilteredDialogModule (copy)
-			return if var13 then if var13.modalType == dialogTypeModule.ExitCreationConfirmation then reactModule.createElement(exitConfirmationDialogModule, var13.modalProps) elseif var13.modalType == dialogTypeModule.TextFiltered then reactModule.createElement(textFilteredDialogModule, var13.modalProps) else nil else nil
-		end, { var13 })()
+		Modal = ReactModule.useCallback(function() --[[ Line: 403 ]]
+			-- upvalues: UseStateResult3 (copy), DialogTypeModule (upval), ReactModule (upval), ExitConfirmationDialogModule (upval), TextFilteredDialogModule (upval)
+			return if UseStateResult3 then if UseStateResult3.modalType == DialogTypeModule.ExitCreationConfirmation then ReactModule.createElement(ExitConfirmationDialogModule, UseStateResult3.modalProps) elseif UseStateResult3.modalType == DialogTypeModule.TextFiltered then ReactModule.createElement(TextFilteredDialogModule, UseStateResult3.modalProps) else nil else nil
+		end, { UseStateResult3 })()
 	})
 end

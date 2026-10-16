@@ -1,67 +1,65 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local navigationRoduxModule = require(parent.NavigationRodux)
-local appPage = require(parent.RobloxAppEnums).AppPage
-local roactUtilsModule = require(parent.RoactUtils)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local textKeysModule = require(profilePlatform.Common.TextKeys)
-local useAboutSectionsModule = require(profilePlatform.Hooks.useAboutSections)
-local enumsModule = require(profilePlatform.Common.Enums)
-local useProfileJsonComponentModule = require(profilePlatform.Hooks.useProfileJsonComponent)
-local descriptionModule = require(profilePlatform.Components.Description)
-local useProfileWrapperContextModule = require(profilePlatform.Contexts.useProfileWrapperContext)
-local parseSectionsFromDataModule = require(script.Parent.parseSectionsFromData)
-local navigateDown = navigationRoduxModule.Thunks.NavigateDown
-local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagProfilePlatformNewProfileHeader = sharedFlagsModule.FFlagProfilePlatformNewProfileHeader
-local fFlagProfileAboutDetailsUseSheet = sharedFlagsModule.FFlagProfileAboutDetailsUseSheet
-local fFlagSignalsNavP3Dispatch = sharedFlagsModule.FFlagSignalsNavP3Dispatch
-local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local TextKeysModule = require(ProfilePlatform.Common.TextKeys)
+local UseAboutSectionsModule = require(ProfilePlatform.Hooks.useAboutSections)
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local UseProfileJsonComponentModule = require(ProfilePlatform.Hooks.useProfileJsonComponent)
+local DescriptionModule = require(ProfilePlatform.Components.Description)
+local UseProfileWrapperContextModule = require(ProfilePlatform.Contexts.useProfileWrapperContext)
+local ParseSectionsFromDataModule = require(script.Parent.parseSectionsFromData)
+local NavigateDownFunction = require(Parent.NavigationRodux).Thunks.NavigateDown
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagProfilePlatformNewProfileHeader = SharedFlagsModule.FFlagProfilePlatformNewProfileHeader
+local FFlagProfileAboutDetailsUseSheet = SharedFlagsModule.FFlagProfileAboutDetailsUseSheet
+local FFlagSignalsNavP3Dispatch = SharedFlagsModule.FFlagSignalsNavP3Dispatch
+local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
 
-return function(p1)
-	-- upvalues: useDispatch (ref), fFlagProfilePlatformNewProfileHeader (ref), useAboutSectionsModule (ref), useProfileWrapperContextModule (ref), useProfileJsonComponentModule (ref), enumsModule (ref), reactModule (ref), parseSectionsFromDataModule (ref), fFlagProfileAboutDetailsUseSheet (ref), useLocalization (ref), textKeysModule (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), descriptionModule (ref)
-	local aboutDetails, aboutSections
-	local var2 = useDispatch()
-	local _ = nil
-	local _ = nil
+return function(p1) --[[ Line: 31 | Named "AboutDescriptionContainer" ]]
+	-- upvalues: UseDispatchFunction (copy), FFlagProfilePlatformNewProfileHeader (copy), UseAboutSectionsModule (copy), UseProfileWrapperContextModule (copy), UseProfileJsonComponentModule (copy), EnumsModule (copy), ReactModule (copy), ParseSectionsFromDataModule (copy), FFlagProfileAboutDetailsUseSheet (copy), UseLocalizationFunction (copy), TextKeysModule (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), DescriptionModule (copy)
+	local UseDispatchResult = UseDispatchFunction()
+	local AboutDetails = nil
+	local AboutSections = nil
 	
-	if fFlagProfilePlatformNewProfileHeader then
-		local var3 = useAboutSectionsModule()
-		aboutDetails = var3.aboutDetails
-		aboutSections = var3.aboutSections
+	if FFlagProfilePlatformNewProfileHeader then
+		local UseAboutSectionsModuleResult = UseAboutSectionsModule()
+		AboutDetails = UseAboutSectionsModuleResult.aboutDetails
+		AboutSections = UseAboutSectionsModuleResult.aboutSections
 	else
-		local profileType = useProfileWrapperContextModule().profileType
-		aboutDetails = useProfileJsonComponentModule(enumsModule.Components.About)
-		aboutSections = reactModule.useMemo(function()
-			-- upvalues: parseSectionsFromDataModule (copy), aboutDetails (write), profileType (ref), enumsModule (copy)
-			return parseSectionsFromDataModule(aboutDetails, profileType, if profileType == enumsModule.ProfileTypes.User then `@{aboutDetails.name}` else aboutDetails.name)
-		end, { aboutDetails, profileType, aboutDetails.name })
+		local ProfileType = UseProfileWrapperContextModule().profileType
+		AboutDetails = UseProfileJsonComponentModule(EnumsModule.Components.About)
+		AboutSections = ReactModule.useMemo(function() --[[ Line: 43 ]]
+			-- upvalues: ParseSectionsFromDataModule (upval), AboutDetails (ref), ProfileType (copy), EnumsModule (upval)
+			return ParseSectionsFromDataModule(AboutDetails, ProfileType, if ProfileType == EnumsModule.ProfileTypes.User then `@{AboutDetails.name}` else AboutDetails.name)
+		end, { AboutDetails, ProfileType, AboutDetails.name })
 	end
-	local var4 = if fFlagProfileAboutDetailsUseSheet then if useProfileWrapperContextModule().profileType == enumsModule.ProfileTypes.User then `@{aboutDetails.name}` else aboutDetails.name else nil
-	local description = aboutDetails.description
-	local var5 = useLocalization({ noBioYet = textKeysModule.NoBioYet })
+	local Text = if FFlagProfileAboutDetailsUseSheet then if UseProfileWrapperContextModule().profileType == EnumsModule.ProfileTypes.User then `@{AboutDetails.name}` else AboutDetails.name else nil
+	local Description = AboutDetails.description
+	local UseLocalizationResult = UseLocalizationFunction({ noBioYet = TextKeysModule.NoBioYet })
 	
-	if description == nil or description == "" then
-		description = if fFlagProfilePlatformNewProfileHeader then nil else var5.noBioYet
+	if Description == nil or Description == "" then
+		Description = if FFlagProfilePlatformNewProfileHeader then nil else UseLocalizationResult.noBioYet
 	end
-	return reactModule.createElement(descriptionModule, {
-		description = description,
+	return ReactModule.createElement(DescriptionModule, {
+		description = Description,
 		layoutOrder = p1.layoutOrder,
-		onActivateMoreButton = reactModule.useCallback(function()
-			-- upvalues: appPage (copy), aboutSections (write), var4 (ref), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var2 (ref), navigateDown (copy)
-			local t = {
-				name = appPage.AboutDetailsSheet,
-				extraProps = { sections = aboutSections, profileName = var4 }
+		onActivateMoreButton = ReactModule.useCallback(function() --[[ Line: 69 ]]
+			-- upvalues: AppPage (upval), AboutSections (ref), Text (copy), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval)
+			local config = {
+				name = AppPage.AboutDetailsSheet,
+				extraProps = { sections = AboutSections, profileName = Text }
 			}
 			
-			if fFlagSignalsNavP3Dispatch then
-				var1.down(var1.fromLegacyPage(t))
+			if FFlagSignalsNavP3Dispatch then
+				NavigationCommands.down(NavigationCommands.fromLegacyPage(config))
 				
 				return
+			else
+				UseDispatchResult(NavigateDownFunction(config))
 			end
-			var2(navigateDown(t))
-		end, { var2, aboutSections, var4 })
+		end, { UseDispatchResult, AboutSections, Text })
 	})
 end

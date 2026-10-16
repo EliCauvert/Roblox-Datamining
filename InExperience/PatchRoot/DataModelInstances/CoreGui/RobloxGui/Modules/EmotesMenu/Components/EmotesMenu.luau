@@ -1,53 +1,53 @@
-﻿local contextActionService = game:GetService("ContextActionService")
-local corePackagesService = game:GetService("CorePackages")
-local guiService = game:GetService("GuiService")
-local userInputService = game:GetService("UserInputService")
-local workspaceService = game:GetService("Workspace")
-local playersService = game:GetService("Players")
+﻿local ContextActionService = game:GetService("ContextActionService")
+local CorePackages = game:GetService("CorePackages")
+local GuiService = game:GetService("GuiService")
+local UserInputService = game:GetService("UserInputService")
+local Workspace = game:GetService("Workspace")
 local VRService = game:GetService("VRService")
-local coreGuiService = game:GetService("CoreGui")
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local parent = script.Parent
-local parent_1 = parent.Parent
-local actions = parent_1.Actions
-local thunks = parent_1.Thunks
-local hideMenuModule = require(actions.HideMenu)
-local setLayoutModule = require(actions.SetLayout)
-local showErrorModule = require(actions.ShowError)
-local hideErrorModule = require(actions.HideError)
-local openMenuModule = require(thunks.OpenMenu)
-local emotesWheelModule = require(parent.EmotesWheel)
-local errorMessageModule = require(parent.ErrorMessage)
-local constantsModule = require(parent_1.Constants)
-local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
-local localPlayer = playersService.LocalPlayer
-local var1 = nil
-local emotesMenu = roactModule.PureComponent:extend("EmotesMenu")
+local CoreGui = game:GetService("CoreGui")
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local Parent = script.Parent
+local Parent1 = Parent.Parent
+local Actions = Parent1.Actions
+local HideMenuModule = require(Actions.HideMenu)
+local SetLayoutModule = require(Actions.SetLayout)
+local ShowErrorModule = require(Actions.ShowError)
+local HideErrorModule = require(Actions.HideError)
+local OpenMenuModule = require(Parent1.Thunks.OpenMenu)
+local EmotesWheelModule = require(Parent.EmotesWheel)
+local ErrorMessageModule = require(Parent.ErrorMessage)
+local ConstantsModule = require(Parent1.Constants)
+local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
+local LocalPlayer = game:GetService("Players").LocalPlayer
+local PlayerGui = nil
+local EmotesMenu = RoactModule.PureComponent:extend("EmotesMenu")
 
-function emotesMenu.init(p1)
+function EmotesMenu.init(p1) --[[ Line: 39 ]]
 	p1.savedSelectedCoreObject = nil
 	p1.savedSelectedObject = nil
 end
 
-function emotesMenu.displayVisitShopMessage(p1)
-	-- upvalues: robloxTranslatorModule (ref), constantsModule (ref)
-	p1.props.showError(robloxTranslatorModule:FormatByKeyForLocale(constantsModule.LocalizationKeys.VisitShopToGetEmotes, p1.props.locale))
-	delay(constantsModule.ErrorDisplayTimeSeconds, function()
-		-- upvalues: p1 (ref)
+function EmotesMenu.displayVisitShopMessage(p1) --[[ Line: 44 ]]
+	-- upvalues: RobloxTranslatorModule (copy), ConstantsModule (copy)
+	p1.props.showError((RobloxTranslatorModule:FormatByKeyForLocale(ConstantsModule.LocalizationKeys.VisitShopToGetEmotes, p1.props.locale)))
+	delay(ConstantsModule.ErrorDisplayTimeSeconds, function() --[[ Line: 48 ]]
+		-- upvalues: p1 (copy)
 		p1.props.hideError()
 	end)
 end
 
-function emotesMenu.bindActions(p1)
-	-- upvalues: guiService (ref), userInputService (ref), contextActionService (ref), constantsModule (ref)
-	contextActionService:BindAction(constantsModule.ToggleMenuAction, function(_, p2, _)
-		-- upvalues: guiService (copy), userInputService (copy), p1 (ref)
-		if guiService.MenuIsOpen then
+function EmotesMenu.bindActions(p1) --[[ Line: 53 ]]
+	-- upvalues: GuiService (copy), UserInputService (copy), ContextActionService (copy), ConstantsModule (copy)
+	ContextActionService:BindAction(ConstantsModule.ToggleMenuAction, function(_, InputState, _) --[[ Line: 54 | Named "toggleMenuFunc" ]]
+		-- upvalues: GuiService (upval), UserInputService (upval), p1 (copy)
+		if GuiService.MenuIsOpen then
 			return Enum.ContextActionResult.Pass
-		elseif userInputService:IsKeyDown(Enum.KeyCode.LeftShift) or userInputService:IsKeyDown(Enum.KeyCode.RightShift) then
+		end
+		if UserInputService:IsKeyDown(Enum.KeyCode.LeftShift) or UserInputService:IsKeyDown(Enum.KeyCode.RightShift) then
 			return Enum.ContextActionResult.Pass
-		elseif p2 == Enum.UserInputState.Begin then
+		end
+		if InputState == Enum.UserInputState.Begin then
 			if p1.props.displayOptions.menuVisible then
 				p1.props.hideMenu()
 			else
@@ -55,99 +55,98 @@ function emotesMenu.bindActions(p1)
 			end
 		end
 		return nil
-	end, false, constantsModule.EmoteMenuOpenKey)
+	end, false, ConstantsModule.EmoteMenuOpenKey)
 end
 
-function emotesMenu.unbindActions(_)
-	-- upvalues: contextActionService (ref), constantsModule (ref)
-	contextActionService:UnbindAction(constantsModule.ToggleMenuAction)
+function EmotesMenu:unbindActions() --[[ Line: 84 ]]
+	-- upvalues: ContextActionService (copy), ConstantsModule (copy)
+	ContextActionService:UnbindAction(ConstantsModule.ToggleMenuAction)
 end
 
-function emotesMenu.saveSelectedObject(p1)
-	-- upvalues: guiService (ref)
-	p1.savedSelectedCoreObject = guiService.SelectedCoreObject
-	guiService.SelectedCoreObject = nil
-	p1.savedSelectedObject = guiService.SelectedObject
-	guiService.SelectedObject = nil
+function EmotesMenu.saveSelectedObject(p1) --[[ Line: 88 ]]
+	-- upvalues: GuiService (copy)
+	p1.savedSelectedCoreObject = GuiService.SelectedCoreObject
+	GuiService.SelectedCoreObject = nil
+	p1.savedSelectedObject = GuiService.SelectedObject
+	GuiService.SelectedObject = nil
 end
 
-function emotesMenu.resetSelectedObject(value)
-	-- upvalues: guiService (ref), coreGuiService (ref), var1 (write), localPlayer (ref)
-	if guiService.SelectedCoreObject == nil then
-		if if value.savedSelectedCoreObject ~= nil then value.savedSelectedCoreObject:IsDescendantOf(coreGuiService) else true then
-			guiService.SelectedCoreObject = value.savedSelectedCoreObject
+function EmotesMenu.resetSelectedObject(p1) --[[ Line: 95 ]]
+	-- upvalues: GuiService (copy), CoreGui (copy), PlayerGui (ref), LocalPlayer (copy)
+	if GuiService.SelectedCoreObject == nil and (p1.savedSelectedCoreObject == nil or p1.savedSelectedCoreObject:IsDescendantOf(CoreGui)) then
+		GuiService.SelectedCoreObject = p1.savedSelectedCoreObject
+	end
+	if GuiService.SelectedObject == nil then
+		if PlayerGui == nil then
+			PlayerGui = LocalPlayer:FindFirstChildOfClass("PlayerGui")
+		end
+		if if PlayerGui then p1.savedSelectedObject == nil or p1.savedSelectedObject:IsDescendantOf(PlayerGui) else false then
+			GuiService.SelectedObject = p1.savedSelectedObject
 		end
 	end
-	if guiService.SelectedObject == nil then
-		if var1 == nil then
-			var1 = localPlayer:FindFirstChildOfClass("PlayerGui")
-		end
-		if if var1 then if value.savedSelectedObject ~= nil then value.savedSelectedObject:IsDescendantOf(var1) else true else false then
-			guiService.SelectedObject = value.savedSelectedObject
-		end
-	end
 end
 
-function emotesMenu.viewPortSizeChanged(p1)
-	-- upvalues: constantsModule (ref), workspaceService (ref)
-	if p1.props.layout == constantsModule.Layout.TenFoot then return end
-	local currentCamera = workspaceService.CurrentCamera
+function EmotesMenu.viewPortSizeChanged(p1) --[[ Line: 119 ]]
+	-- upvalues: ConstantsModule (copy), Workspace (copy)
+	if p1.props.layout == ConstantsModule.Layout.TenFoot then return end
+	local CurrentCamera = Workspace.CurrentCamera
 	
-	if not currentCamera then return end
-	local viewportSize = currentCamera.ViewportSize
+	if not CurrentCamera then return end
+	local ViewportSize = CurrentCamera.ViewportSize
 	
-	if viewportSize == Vector2.new(1, 1) then return end
-	local large = constantsModule.Layout.Large
+	if ViewportSize == Vector2.new(1, 1) then return end
+	local Large = ConstantsModule.Layout.Large
+	local IsYBelow = ViewportSize.Y < ConstantsModule.SmallScreenMaxSize.Y
 	
-	if viewportSize.X < constantsModule.SmallScreenMaxSize.X or viewportSize.Y < constantsModule.SmallScreenMaxSize.Y then
-		large = constantsModule.Layout.Small
+	if ViewportSize.X < ConstantsModule.SmallScreenMaxSize.X or IsYBelow then
+		Large = ConstantsModule.Layout.Small
 	end
-	p1.props.setLayout(large)
+	p1.props.setLayout(Large)
 end
 
-function emotesMenu.currentCameraChanged(p1)
-	-- upvalues: workspaceService (ref)
+function EmotesMenu.currentCameraChanged(p1) --[[ Line: 147 ]]
+	-- upvalues: Workspace (copy)
 	if p1.viewportSizeChangedConn then
 		p1.viewportSizeChangedConn:Disconnect()
 	end
-	local currentCamera = workspaceService.CurrentCamera
+	local CurrentCamera = Workspace.CurrentCamera
 	
-	if currentCamera then
-		p1.viewportSizeChangedConn = currentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(function()
-			-- upvalues: p1 (ref)
+	if CurrentCamera then
+		p1.viewportSizeChangedConn = CurrentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(function() --[[ Line: 154 ]]
+			-- upvalues: p1 (copy)
 			p1:viewPortSizeChanged()
 		end)
 		p1:viewPortSizeChanged()
 	end
 end
 
-function emotesMenu.didMount(p1)
-	-- upvalues: workspaceService (ref), guiService (ref), VRService (ref), userInputService (ref)
-	p1.currentCameraChangedConn = workspaceService:GetPropertyChangedSignal("CurrentCamera"):Connect(function()
-		-- upvalues: p1 (ref)
+function EmotesMenu.didMount(p1) --[[ Line: 161 ]]
+	-- upvalues: Workspace (copy), GuiService (copy), VRService (copy), UserInputService (copy)
+	p1.currentCameraChangedConn = Workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function() --[[ Line: 162 ]]
+		-- upvalues: p1 (copy)
 		p1:currentCameraChanged()
 	end)
 	p1:currentCameraChanged()
-	p1.menuOpenedConn = guiService.MenuOpened:Connect(function()
-		-- upvalues: p1 (ref), VRService (copy)
+	p1.menuOpenedConn = GuiService.MenuOpened:Connect(function() --[[ Line: 167 ]]
+		-- upvalues: p1 (copy), VRService (upval)
 		if p1.props.displayOptions.menuVisible and not VRService.VREnabled then
 			p1.props.hideMenu()
 		end
 	end)
-	p1.inputOutsideMenuConn = userInputService.InputBegan:Connect(function(p2, p3)
-		-- upvalues: p1 (ref)
-		if p3 then return end
+	p1.inputOutsideMenuConn = UserInputService.InputBegan:Connect(function(Input, GameProcessed) --[[ Line: 173 ]]
+		-- upvalues: p1 (copy)
+		if GameProcessed then return end
 		if not p1.props.displayOptions.menuVisible then return end
-		local userInputType = p2.UserInputType
+		local UserInputType = Input.UserInputType
 		
-		if userInputType == Enum.UserInputType.MouseButton1 or userInputType == Enum.UserInputType.Touch then
+		if UserInputType == Enum.UserInputType.MouseButton1 or UserInputType == Enum.UserInputType.Touch then
 			p1.props.hideMenu()
 		end
 	end)
 	p1:bindActions()
 end
 
-function emotesMenu.willUnmount(p1)
+function EmotesMenu.willUnmount(p1) --[[ Line: 193 ]]
 	p1.currentCameraChangedConn:Disconnect()
 	p1.viewportSizeChangedConn:Disconnect()
 	p1.menuOpenedConn:Disconnect()
@@ -159,7 +158,7 @@ function emotesMenu.willUnmount(p1)
 	p1:unbindActions()
 end
 
-function emotesMenu.didUpdate(p1, p2, _)
+function EmotesMenu.didUpdate(p1, p2, _) --[[ Line: 207 ]]
 	if p1.props.displayOptions.menuVisible ~= p2.displayOptions.menuVisible then
 		if p1.props.displayOptions.menuVisible then
 			p1:saveSelectedObject()
@@ -170,65 +169,65 @@ function emotesMenu.didUpdate(p1, p2, _)
 	end
 end
 
-function emotesMenu.render(p1)
-	-- upvalues: constantsModule (ref), roactModule (ref), emotesWheelModule (ref), errorMessageModule (ref)
-	local layout = constantsModule.Layouts[p1.props.layout]
-	local guiInset = p1.props.displayOptions.guiInset
+function EmotesMenu.render(p1) --[[ Line: 217 ]]
+	-- upvalues: ConstantsModule (copy), RoactModule (copy), EmotesWheelModule (copy), ErrorMessageModule (copy)
+	local Layout = ConstantsModule.Layouts[p1.props.layout]
+	local GuiInset = p1.props.displayOptions.guiInset
 	
-	return roactModule.createElement("Frame", {
+	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
 		AutoLocalize = false,
-		Position = UDim2.new(0, 0, 0, -guiInset),
-		Size = UDim2.new(1, 0, 1, guiInset),
-		ZIndex = constantsModule.EmotesMenuZIndex
+		Position = UDim2.new(0, 0, 0, -GuiInset),
+		Size = UDim2.new(1, 0, 1, GuiInset),
+		ZIndex = ConstantsModule.EmotesMenuZIndex
 	}, {
-		Main = roactModule.createElement("Frame", {
+		Main = RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			Position = UDim2.new(0.5, 0, 0.5, 0),
-			Size = constantsModule.ScreenAvailable
+			Size = ConstantsModule.ScreenAvailable
 		}, {
-			AsspectRatioConstraint = roactModule.createElement("UIAspectRatioConstraint", { AspectRatio = 1 }),
-			SizeConstraint = roactModule.createElement("UISizeConstraint", {
-				MinSize = layout.EmotesWheelMinSize,
-				MaxSize = layout.EmotesWheelMaxSize
+			AsspectRatioConstraint = RoactModule.createElement("UIAspectRatioConstraint", { AspectRatio = 1 }),
+			SizeConstraint = RoactModule.createElement("UISizeConstraint", {
+				MinSize = Layout.EmotesWheelMinSize,
+				MaxSize = Layout.EmotesWheelMaxSize
 			}),
-			EmotesWheel = roactModule.createElement(emotesWheelModule)
+			EmotesWheel = RoactModule.createElement(EmotesWheelModule)
 		}),
-		ErrorMessage = roactModule.createElement(errorMessageModule)
+		ErrorMessage = RoactModule.createElement(ErrorMessageModule)
 	})
 end
 
-return roactRoduxModule.connect(function(p1)
+return RoactRoduxModule.connect(function(p1) --[[ Line: 251 | Named "mapStateToProps" ]]
 	return {
 		displayOptions = p1.displayOptions,
 		emotesInfo = p1.emotesPage.emotesInfo,
 		layout = p1.layout,
 		locale = p1.locale
 	}
-end, function(p1)
-	-- upvalues: openMenuModule (ref), hideMenuModule (ref), setLayoutModule (ref), showErrorModule (ref), hideErrorModule (ref)
+end, function(Callback) --[[ Line: 260 | Named "mapDispatchToProps" ]]
+	-- upvalues: OpenMenuModule (copy), HideMenuModule (copy), SetLayoutModule (copy), ShowErrorModule (copy), HideErrorModule (copy)
 	return {
-		openMenu = function()
-			-- upvalues: p1 (ref), openMenuModule (copy)
-			return p1(openMenuModule())
+		openMenu = function() --[[ Line: 262 ]]
+			-- upvalues: Callback (copy), OpenMenuModule (upval)
+			return Callback(OpenMenuModule())
 		end,
-		hideMenu = function()
-			-- upvalues: p1 (ref), hideMenuModule (copy)
-			return p1(hideMenuModule())
+		hideMenu = function() --[[ Line: 266 ]]
+			-- upvalues: Callback (copy), HideMenuModule (upval)
+			return Callback(HideMenuModule())
 		end,
-		setLayout = function(value)
-			-- upvalues: p1 (ref), setLayoutModule (copy)
-			return p1(setLayoutModule(value))
+		setLayout = function(p1) --[[ Line: 270 ]]
+			-- upvalues: Callback (copy), SetLayoutModule (upval)
+			return Callback(SetLayoutModule(p1))
 		end,
-		showError = function(p2)
-			-- upvalues: p1 (ref), showErrorModule (copy)
-			return p1(showErrorModule(p2))
+		showError = function(p1) --[[ Line: 274 ]]
+			-- upvalues: Callback (copy), ShowErrorModule (upval)
+			return Callback(ShowErrorModule(p1))
 		end,
-		hideError = function()
-			-- upvalues: p1 (ref), hideErrorModule (copy)
-			return p1(hideErrorModule())
+		hideError = function() --[[ Line: 278 ]]
+			-- upvalues: Callback (copy), HideErrorModule (upval)
+			return Callback(HideErrorModule())
 		end
 	}
-end)(emotesMenu)
+end)(EmotesMenu)

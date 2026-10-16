@@ -1,17 +1,17 @@
-﻿local parent = script:FindFirstAncestor("BulkPurchaseApp").Parent
-local reactModule = require(parent.React)
-local useDesignTokens = require(parent.Style).useDesignTokens
+﻿local Parent = script:FindFirstAncestor("BulkPurchaseApp").Parent
+local ReactModule = require(Parent.React)
+local UseDesignTokensFunction = require(Parent.Style).useDesignTokens
 
-return function(p1)
-	-- upvalues: useDesignTokens (ref), reactModule (ref)
-	local var1 = useDesignTokens()
+return function(Frame) --[[ Line: 10 | Named "Divider" ]]
+	-- upvalues: UseDesignTokensFunction (copy), ReactModule (copy)
+	local UseDesignTokensResult = UseDesignTokensFunction()
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BorderSizePixel = 0,
 		Size = UDim2.new(1, 0, 0, 1),
-		BackgroundColor3 = var1.Color.Stroke.Emphasis.Color3,
-		BackgroundTransparency = var1.Color.Stroke.Emphasis.Transparency,
-		LayoutOrder = p1.LayoutOrder,
-		[reactModule.Tag] = "data-testid=BulkPurchaseApp_Divider"
+		BackgroundColor3 = UseDesignTokensResult.Color.Stroke.Emphasis.Color3,
+		BackgroundTransparency = UseDesignTokensResult.Color.Stroke.Emphasis.Transparency,
+		LayoutOrder = Frame.LayoutOrder,
+		[ReactModule.Tag] = "data-testid=BulkPurchaseApp_Divider"
 	})
 end

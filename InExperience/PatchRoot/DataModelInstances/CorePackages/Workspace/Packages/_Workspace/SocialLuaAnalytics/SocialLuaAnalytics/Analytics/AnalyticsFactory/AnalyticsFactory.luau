@@ -1,19 +1,19 @@
-﻿local socialLuaAnalytics = script:FindFirstAncestor("SocialLuaAnalytics")
-local cryoModule = require(socialLuaAnalytics.Parent.Cryo)
-local createFireEventModule = require(socialLuaAnalytics.Analytics.FireEvent.createFireEvent)
+﻿local SocialLuaAnalytics = script:FindFirstAncestor("SocialLuaAnalytics")
+local CryoModule = require(SocialLuaAnalytics.Parent.Cryo)
+local CreateFireEventModule = require(SocialLuaAnalytics.Analytics.FireEvent.createFireEvent)
 local _ = require(script.Parent.Parent.Types)
 
-return function(p1)
-	-- upvalues: cryoModule (ref), createFireEventModule (ref)
-	local infoForAllEvents = p1.infoForAllEvents or {}
+return function(p1) --[[ Line: 34 | Named "AnalyticsFactory" ]]
+	-- upvalues: CryoModule (copy), CreateFireEventModule (copy)
+	local InfoForAllEvents = p1.infoForAllEvents or {}
 	
-	local var1 = function()
-		-- upvalues: infoForAllEvents (write)
-		return infoForAllEvents
+	local function GetInfoForAllEvents() --[[ Line: 42 ]]
+		-- upvalues: InfoForAllEvents (ref)
+		return InfoForAllEvents
 	end
 	
 	return {
-		fireAnalyticsEvent = createFireEventModule({
+		fireAnalyticsEvent = CreateFireEventModule({
 			EventStream = p1.eventLists.EventStream,
 			Diag = p1.eventLists.Diag,
 			Telemetry = p1.eventLists.Telemetry
@@ -23,15 +23,15 @@ return function(p1)
 				Diag = p1.analyticsImpl.Diag,
 				Telemetry = p1.analyticsImpl.Telemetry
 			},
-			getInfoForAllEvents = var1,
+			getInfoForAllEvents = GetInfoForAllEvents,
 			loggerImpl = p1.loggerImpl
 		}),
-		updateInfoForAllEvents = function(p2)
-			-- upvalues: infoForAllEvents (write), cryoModule (copy)
-			infoForAllEvents = cryoModule.Dictionary.join(infoForAllEvents, p2)
+		updateInfoForAllEvents = function(p2) --[[ Line: 37 ]]
+			-- upvalues: InfoForAllEvents (ref), CryoModule (upval)
+			InfoForAllEvents = CryoModule.Dictionary.join(InfoForAllEvents, p2)
 			
-			return infoForAllEvents
+			return InfoForAllEvents
 		end,
-		getInfoForAllEvents = var1
+		getInfoForAllEvents = GetInfoForAllEvents
 	}
 end

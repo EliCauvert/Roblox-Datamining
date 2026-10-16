@@ -1,13 +1,13 @@
-﻿local var1 = newproxy(true)
+﻿local Proxy = newproxy(true)
 
-getmetatable(var1).__tostring = function()
+getmetatable(Proxy).__tostring = function(): string --[[ Line: 10 ]]
 	return "UsageGraphSentinel"
 end
 
 return {
-	UsageGraphKey = var1,
-	getUsageGraph = function(p1)
-		-- upvalues: var1 (ref)
-		return table.clone(p1[var1])
+	UsageGraphKey = Proxy,
+	getUsageGraph = function(p1) --[[ Line: 14 ]]
+		-- upvalues: Proxy (copy)
+		return table.clone(p1[Proxy])
 	end
 }

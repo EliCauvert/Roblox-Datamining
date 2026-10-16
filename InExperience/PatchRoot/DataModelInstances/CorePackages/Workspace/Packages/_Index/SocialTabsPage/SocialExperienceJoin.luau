@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.SocialExperienceJoin.SocialExperienceJoin)
+﻿return (require(script.Parent.Parent.Parent._Index.SocialExperienceJoin.SocialExperienceJoin))

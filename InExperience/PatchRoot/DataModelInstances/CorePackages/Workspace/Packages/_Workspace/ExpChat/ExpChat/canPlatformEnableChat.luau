@@ -1,47 +1,47 @@
-﻿local userInputService = game:GetService("UserInputService")
-local avatarChatService = game:GetService("AvatarChatService")
-local parent = script:FindFirstAncestor("ExpChat").Parent
-local socialExperimentsModule = require(parent.SocialExperiments)
-local fFlagTestDeviceForFAEUpsell = socialExperimentsModule.FFlagTestDeviceForFAEUpsell
-local deviceMeetsRequirementsForFAE = socialExperimentsModule.deviceMeetsRequirementsForFAE
-local fFlagAEGIS2UseGuacToShowFAEUpsell = require(parent.SharedFlags).FFlagAEGIS2UseGuacToShowFAEUpsell
-local var1 = if fFlagAEGIS2UseGuacToShowFAEUpsell then require(parent.UniversalAppPolicy) else nil
+﻿local UserInputService = game:GetService("UserInputService")
+local AvatarChatService = game:GetService("AvatarChatService")
+local Parent = script:FindFirstAncestor("ExpChat").Parent
+local SocialExperimentsModule = require(Parent.SocialExperiments)
+local FFlagTestDeviceForFAEUpsell = SocialExperimentsModule.FFlagTestDeviceForFAEUpsell
+local DeviceMeetsRequirementsForFAEFunction = SocialExperimentsModule.deviceMeetsRequirementsForFAE
+local FFlagAEGIS2UseGuacToShowFAEUpsell = require(Parent.SharedFlags).FFlagAEGIS2UseGuacToShowFAEUpsell
+local UniversalAppPolicyModule = if FFlagAEGIS2UseGuacToShowFAEUpsell then require(Parent.UniversalAppPolicy) else nil
 
-return function()
-	-- upvalues: fFlagAEGIS2UseGuacToShowFAEUpsell (ref), userInputService (ref), avatarChatService (ref), fFlagTestDeviceForFAEUpsell (ref), deviceMeetsRequirementsForFAE (ref), var1 (write)
-	local platform
-	if fFlagAEGIS2UseGuacToShowFAEUpsell then
-		platform = var1.getAppFeaturePolicies().getShowInExpFAEUpsell()
+return function() --[[ Line: 21 ]]
+	-- upvalues: FFlagAEGIS2UseGuacToShowFAEUpsell (copy), UserInputService (copy), AvatarChatService (copy), FFlagTestDeviceForFAEUpsell (copy), DeviceMeetsRequirementsForFAEFunction (copy), UniversalAppPolicyModule (ref)
+	if FFlagAEGIS2UseGuacToShowFAEUpsell then
+		local ShowInExpFAEUpsell = UniversalAppPolicyModule.getAppFeaturePolicies().getShowInExpFAEUpsell()
 		
-		if platform then
-			platform = avatarChatService:deviceMeetsRequirementsForFeature(Enum.DeviceFeatureType.InExperienceFAE)
+		if ShowInExpFAEUpsell then
+			ShowInExpFAEUpsell = AvatarChatService:deviceMeetsRequirementsForFeature(Enum.DeviceFeatureType.InExperienceFAE)
 			
-			if platform then
-				if fFlagTestDeviceForFAEUpsell then
-					return deviceMeetsRequirementsForFAE()
+			if ShowInExpFAEUpsell then
+				if FFlagTestDeviceForFAEUpsell then
+					return (DeviceMeetsRequirementsForFAEFunction())
 				end
-				platform = true
+				ShowInExpFAEUpsell = true
 			end
 		end
-		return platform
+		return ShowInExpFAEUpsell
 	else
-		local inExperienceFAE
-		platform = userInputService:GetPlatform()
+		local Platform = UserInputService:GetPlatform()
+		local IsPlatformMatch: boolean = Platform == Enum.Platform.IOS or Platform == Enum.Platform.Android or Platform == Enum.Platform.Windows
+		local DeviceMeetsRequirementsForFeatureResult = nil
 		
-		if platform ~= Enum.Platform.IOS and platform ~= Enum.Platform.Android and platform ~= Enum.Platform.Windows then
-			inExperienceFAE = false
-			
-			if platform == Enum.Platform.OSX then
-				inExperienceFAE = avatarChatService:deviceMeetsRequirementsForFeature(Enum.DeviceFeatureType.InExperienceFAE)
-				
-				if inExperienceFAE then
-					if fFlagTestDeviceForFAEUpsell then
-						return deviceMeetsRequirementsForFAE()
-					end
-					inExperienceFAE = true
-				end
-			end
-			return inExperienceFAE
+		if not IsPlatformMatch then
+			DeviceMeetsRequirementsForFeatureResult = false
+			IsPlatformMatch = Platform == Enum.Platform.OSX
 		end
+		if IsPlatformMatch then
+			DeviceMeetsRequirementsForFeatureResult = AvatarChatService:deviceMeetsRequirementsForFeature(Enum.DeviceFeatureType.InExperienceFAE)
+			
+			if DeviceMeetsRequirementsForFeatureResult then
+				if FFlagTestDeviceForFAEUpsell then
+					return (DeviceMeetsRequirementsForFAEFunction())
+				end
+				DeviceMeetsRequirementsForFeatureResult = true
+			end
+		end
+		return DeviceMeetsRequirementsForFeatureResult
 	end
 end

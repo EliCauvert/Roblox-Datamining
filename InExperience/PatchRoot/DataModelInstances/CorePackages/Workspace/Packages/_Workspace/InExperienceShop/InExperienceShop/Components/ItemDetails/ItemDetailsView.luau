@@ -1,35 +1,36 @@
-﻿local inExperienceShop = script:FindFirstAncestor("InExperienceShop")
-local parent = inExperienceShop.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local verifiedBadgesModule = require(parent.VerifiedBadges)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local _ = require(inExperienceShop.Types)
-local formatPriceModule = require(inExperienceShop.Utils.formatPrice)
-local view = foundationModule.View
-local text = foundationModule.Text
-local image = foundationModule.Image
-local icon = foundationModule.Icon
-local button = foundationModule.Button
-local iconButton = foundationModule.IconButton
-local divider = foundationModule.Divider
-local menu = foundationModule.Menu
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local iconName = foundationModule.Enums.IconName
-local inputSize = foundationModule.Enums.InputSize
-local iconSize = foundationModule.Enums.IconSize
-local fillBehavior = foundationModule.Enums.FillBehavior
-local popoverSide = foundationModule.Enums.PopoverSide
-local popoverAlign = foundationModule.Enums.PopoverAlign
-local constantsModule = require(inExperienceShop.Constants)
-local shopOverflowConstantsModule = require(inExperienceShop.Components.Shared.shopOverflowConstants)
-local _ = require(inExperienceShop.Hooks.useShopReportOverflow)
-local OVERFLOW_ICON = shopOverflowConstantsModule.OVERFLOW_ICON
-local REPORT_ICON = shopOverflowConstantsModule.REPORT_ICON
-local REPORT_MENU_ITEM_ID = shopOverflowConstantsModule.REPORT_MENU_ITEM_ID
-local t = {
+﻿local InExperienceShop = script:FindFirstAncestor("InExperienceShop")
+local Parent = InExperienceShop.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local VerifiedBadgesModule = require(Parent.VerifiedBadges)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local _ = require(InExperienceShop.Types)
+local FormatPriceModule = require(InExperienceShop.Utils.formatPrice)
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local Image = FoundationModule.Image
+local Icon = FoundationModule.Icon
+local Button = FoundationModule.Button
+local IconButton = FoundationModule.IconButton
+local Divider = FoundationModule.Divider
+local Menu = FoundationModule.Menu
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local IconName = FoundationModule.Enums.IconName
+local InputSize = FoundationModule.Enums.InputSize
+local IconSize = FoundationModule.Enums.IconSize
+local FillBehavior = FoundationModule.Enums.FillBehavior
+local PopoverSide = FoundationModule.Enums.PopoverSide
+local PopoverAlign = FoundationModule.Enums.PopoverAlign
+local ConstantsModule = require(InExperienceShop.Constants)
+local ShopOverflowConstantsModule = require(InExperienceShop.Components.Shared.shopOverflowConstants)
+local _ = require(InExperienceShop.Hooks.useShopReportOverflow)
+local OVERFLOWICON = ShopOverflowConstantsModule.OVERFLOW_ICON
+local REPORTICON = ShopOverflowConstantsModule.REPORT_ICON
+local REPORTMENUITEMID = ShopOverflowConstantsModule.REPORT_MENU_ITEM_ID
+local config = {
 	owned = "Feature.Catalog.Label.Owned",
 	buy = "Feature.Catalog.Action.Buy",
+	try = "Feature.Catalog.Action.Try",
 	total = "Feature.Catalog.Label.TotalUnformatted",
 	category = "Feature.Catalog.Label.Category",
 	updated = "Feature.GameDetails.Label.Updated",
@@ -37,226 +38,235 @@ local t = {
 	noDescription = "Feature.InExperienceShop.Label.NoDescription"
 }
 
-local function CreatorRow(p1)
-	-- upvalues: verifiedBadgesModule (ref), reactModule (ref), text (ref)
-	local creator = p1.creator
+local function CreatorRow(Frame) --[[ Line: 83 ]]
+	-- upvalues: VerifiedBadgesModule (copy), ReactModule (copy), Text (copy)
+	local Creator = Frame.creator
 	
-	return reactModule.createElement(text, {
+	return ReactModule.createElement(Text, {
 		tag = "size-full-0 auto-y text-body-large text-align-x-left text-truncate-end content-muted",
 		testId = "ItemDetailsView_CreatorRow",
-		Text = if creator.hasVerifiedBadge then creator.name .. verifiedBadgesModule.emoji.verified else creator.name,
-		LayoutOrder = p1.LayoutOrder
+		Text = if Creator.hasVerifiedBadge then Creator.name .. VerifiedBadgesModule.emoji.verified else Creator.name,
+		LayoutOrder = Frame.LayoutOrder
 	})
 end
 
-local function DetailRow(p1)
-	-- upvalues: reactModule (ref), view (ref), text (ref)
-	return reactModule.createElement(view, {
+local function DetailRow(Frame) --[[ Line: 95 ]]
+	-- upvalues: ReactModule (copy), View (copy), Text (copy)
+	return ReactModule.createElement(View, {
 		tag = "row flex-x-between align-y-center size-full-0 auto-y padding-y-medium",
-		LayoutOrder = p1.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		Label = reactModule.createElement(text, {
+		Label = ReactModule.createElement(Text, {
 			tag = "auto-xy text-body-medium content-muted",
 			LayoutOrder = 1,
-			Text = p1.label
+			Text = Frame.label
 		}),
-		Value = reactModule.createElement(text, {
+		Value = ReactModule.createElement(Text, {
 			tag = "auto-xy text-caption-large content-emphasis",
 			LayoutOrder = 2,
-			Text = p1.value
+			Text = Frame.value
 		})
 	})
 end
 
-return function(p1)
-	-- upvalues: useLocalization (ref), t (ref), reactModule (ref), DetailRow (ref), divider (ref), view (ref), text (ref), CreatorRow (ref), icon (ref), constantsModule (ref), iconSize (ref), formatPriceModule (ref), REPORT_MENU_ITEM_ID (ref), REPORT_ICON (ref), menu (ref), inputSize (ref), popoverSide (ref), popoverAlign (ref), iconButton (ref), OVERFLOW_ICON (ref), buttonVariant (ref), button (ref), fillBehavior (ref), image (ref), iconName (ref)
-	local var1 = useLocalization(t)
-	local var2 = if p1.description == nil or p1.description == "" then var1.noDescription else p1.description
-	local var3 = p1.isOwned == true
-	local var4 = p1.isBuyDisabled == true
-	local var5 = p1.price ~= nil
-	local isCompact = p1.isCompact
-	local t_1 = {
-		Category = reactModule.createElement(DetailRow, {
+return function(p1) --[[ Line: 117 | Named "ItemDetailsView" ]]
+	-- upvalues: UseLocalizationFunction (copy), config (copy), ReactModule (copy), DetailRow (copy), Divider (copy), View (copy), Text (copy), CreatorRow (copy), Icon (copy), ConstantsModule (copy), IconSize (copy), FormatPriceModule (copy), REPORTMENUITEMID (copy), REPORTICON (copy), Menu (copy), InputSize (copy), PopoverSide (copy), PopoverAlign (copy), IconButton (copy), OVERFLOWICON (copy), ButtonVariant (copy), Button (copy), FillBehavior (copy), Image (copy), IconName (copy)
+	local UseLocalizationResult = UseLocalizationFunction(config)
+	local NoDescription = if p1.description == nil or p1.description == "" then UseLocalizationResult.noDescription else p1.description
+	local IsIsOwned = p1.isOwned == true
+	local IsIsBuyDisabled = p1.isBuyDisabled == true
+	local HasPrice = p1.price ~= nil
+	local IsCompact = p1.isCompact
+	local config1 = {
+		Category = ReactModule.createElement(DetailRow, {
 			LayoutOrder = 1,
-			label = var1.category,
+			label = UseLocalizationResult.category,
 			value = p1.categoryLabel
 		}),
-		CategoryDivider = reactModule.createElement(divider, { LayoutOrder = 2 })
+		CategoryDivider = ReactModule.createElement(Divider, { LayoutOrder = 2 })
 	}
 	
 	if p1.updated ~= nil and p1.updated ~= "" then
-		t_1.Updated = reactModule.createElement(DetailRow, {
+		config1.Updated = ReactModule.createElement(DetailRow, {
 			LayoutOrder = 3,
-			label = var1.updated,
+			label = UseLocalizationResult.updated,
 			value = p1.updated
 		})
-		t_1.UpdatedDivider = reactModule.createElement(divider, { LayoutOrder = 4 })
+		config1.UpdatedDivider = ReactModule.createElement(Divider, { LayoutOrder = 4 })
 	end
-	local var6 = reactModule.createElement(view, {
+	local IsNotNameMatch: boolean = p1.creator ~= nil and (p1.creator.name ~= nil and p1.creator.name ~= "")
+	local Element = ReactModule.createElement(View, {
 		tag = "col gap-xxsmall size-full-0 auto-y",
 		LayoutOrder = 1
 	}, {
-		Name = reactModule.createElement(text, {
+		Name = ReactModule.createElement(Text, {
 			tag = "size-full-0 auto-y text-heading-small text-align-x-left text-truncate-end content-emphasis",
 			LayoutOrder = 1,
 			Text = p1.name
 		}),
-		Creator = if p1.creator ~= nil and (p1.creator.name ~= nil and p1.creator.name ~= "") then reactModule.createElement(CreatorRow, { LayoutOrder = 2, creator = p1.creator }) else nil
+		Creator = if IsNotNameMatch then ReactModule.createElement(CreatorRow, { LayoutOrder = 2, creator = p1.creator }) else nil
 	})
-	local var7 = reactModule.createElement(text, {
+	local Element1 = ReactModule.createElement(Text, {
 		tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-default",
 		LayoutOrder = 2,
-		Text = var2
+		Text = NoDescription
 	})
-	local var8 = reactModule.createElement(view, { tag = "col size-full-0 auto-y", LayoutOrder = 3 }, t_1)
-	local var9 = reactModule.createElement(view, {
+	local Element2 = ReactModule.createElement(View, { tag = "col size-full-0 auto-y", LayoutOrder = 3 }, config1)
+	local Element3 = ReactModule.createElement(View, {
 		tag = "row flex-x-between align-y-center size-full-0 auto-y",
 		LayoutOrder = 2
 	}, {
-		TotalLabel = reactModule.createElement(text, {
+		TotalLabel = ReactModule.createElement(Text, {
 			tag = "auto-xy text-title-medium content-emphasis",
 			LayoutOrder = 1,
-			Text = var1.total
+			Text = UseLocalizationResult.total
 		}),
-		Price = if var5 then reactModule.createElement(view, {
+		Price = if HasPrice then ReactModule.createElement(View, {
 			tag = "row align-y-center gap-xsmall auto-xy",
 			LayoutOrder = 2
 		}, {
-			RobuxIcon = reactModule.createElement(icon, {
+			RobuxIcon = ReactModule.createElement(Icon, {
 				LayoutOrder = 1,
-				name = constantsModule.ROBUX_ICON,
-				size = iconSize.Small
+				name = ConstantsModule.ROBUX_ICON,
+				size = IconSize.Small
 			}),
-			PriceLabel = reactModule.createElement(text, {
+			PriceLabel = ReactModule.createElement(Text, {
 				tag = "auto-xy text-body-medium content-default",
 				LayoutOrder = 2,
-				Text = formatPriceModule(p1.price)
+				Text = FormatPriceModule(p1.price)
 			})
 		}) else nil
 	})
-	local t_2 = {}
+	local Items = {}
 	
 	if p1.isReportingEnabled then
-		table.insert(t_2, {
-			id = REPORT_MENU_ITEM_ID,
-			icon = REPORT_ICON,
-			text = var1.report
+		table.insert(Items, {
+			id = REPORTMENUITEMID,
+			icon = REPORTICON,
+			text = UseLocalizationResult.report
 		})
 	end
-	local var10 = reactModule.createElement(view, {
+	local Element4 = ReactModule.createElement(View, {
 		tag = "col gap-medium size-full-0 auto-y padding-x-large padding-y-medium",
-		LayoutOrder = if isCompact then 3 else 2
+		LayoutOrder = if IsCompact then 3 else 2
 	}, {
-		TopDivider = reactModule.createElement(divider, { LayoutOrder = 1 }),
-		TotalRow = var9,
-		ActionRow = reactModule.createElement(view, {
+		TopDivider = ReactModule.createElement(Divider, { LayoutOrder = 1 }),
+		TotalRow = Element3,
+		ActionRow = ReactModule.createElement(View, {
 			tag = "row align-y-center gap-small size-full-0 auto-y",
 			LayoutOrder = 3
 		}, {
-			Buy = reactModule.createElement(button, {
+			Buy = ReactModule.createElement(Button, {
 				LayoutOrder = 1,
-				text = if var3 then var1.owned else var1.buy,
-				variant = if var3 then buttonVariant.Standard else buttonVariant.Emphasis,
-				size = inputSize.Medium,
-				fillBehavior = fillBehavior.Fill,
-				isDisabled = var3 or var4,
+				text = if IsIsOwned then UseLocalizationResult.owned else UseLocalizationResult.buy,
+				variant = if IsIsOwned then ButtonVariant.Standard else ButtonVariant.Emphasis,
+				size = InputSize.Medium,
+				fillBehavior = FillBehavior.Fill,
+				isDisabled = IsIsOwned or IsIsBuyDisabled,
 				onActivated = p1.onBuyActivated
 			}),
-			Overflow = if p1.isReportingEnabled then reactModule.createElement(menu, {
+			Try = if p1.showTry and not IsIsOwned then ReactModule.createElement(Button, {
 				LayoutOrder = 2,
+				text = UseLocalizationResult.try,
+				variant = ButtonVariant.Standard,
+				size = InputSize.Medium,
+				fillBehavior = FillBehavior.Fill,
+				onActivated = function() --[[ Line: 274 ]] end
+			}) else nil,
+			Overflow = if p1.isReportingEnabled then ReactModule.createElement(Menu, {
+				LayoutOrder = 3,
 				testId = "ItemDetailsView_OverflowMenu",
 				isOpen = p1.isOverflowMenuOpen,
-				items = t_2,
-				size = inputSize.Medium,
-				side = popoverSide.Top,
-				align = popoverAlign.End,
+				items = Items,
+				size = InputSize.Medium,
+				side = PopoverSide.Top,
+				align = PopoverAlign.End,
 				onPressedOutside = p1.onOverflowMenuClosed,
 				onActivated = p1.onMenuItemActivated
 			}, {
-				Trigger = reactModule.createElement(iconButton, {
+				Trigger = ReactModule.createElement(IconButton, {
 					testId = "ItemDetailsView_OverflowButton",
-					icon = OVERFLOW_ICON,
-					size = inputSize.Medium,
-					variant = buttonVariant.Standard,
+					icon = OVERFLOWICON,
+					size = InputSize.Medium,
+					variant = ButtonVariant.Standard,
 					onActivated = p1.onOverflowActivated
 				})
-			}) else reactModule.createElement(iconButton, {
-				LayoutOrder = 2,
+			}) else ReactModule.createElement(IconButton, {
+				LayoutOrder = 3,
 				testId = "ItemDetailsView_OverflowButton",
-				icon = OVERFLOW_ICON,
-				size = inputSize.Medium,
-				variant = buttonVariant.Standard,
+				icon = OVERFLOWICON,
+				size = InputSize.Medium,
+				variant = ButtonVariant.Standard,
 				onActivated = p1.onOverflowActivated
 			})
 		})
 	})
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "col size-full",
 		testId = "ItemDetailsView",
 		onAbsoluteSizeChanged = p1.onAbsoluteSizeChanged
 	}, {
-		TopBarRow = reactModule.createElement(view, {
+		TopBarRow = ReactModule.createElement(View, {
 			tag = "row align-y-center size-full-0 auto-y padding-x-medium padding-top-medium",
 			LayoutOrder = 1
 		}, {
-			BackButton = reactModule.createElement(iconButton, {
+			BackButton = ReactModule.createElement(IconButton, {
 				isCircular = true,
 				LayoutOrder = 1,
 				testId = "ItemDetailsView_BackButton",
-				icon = iconName.ChevronLargeLeft,
-				size = inputSize.Medium,
-				variant = buttonVariant.Utility,
+				icon = IconName.ChevronLargeLeft,
+				size = InputSize.Medium,
+				variant = ButtonVariant.Utility,
 				onActivated = p1.onClose
 			})
 		}),
-		Body = if isCompact then reactModule.createElement(view, { tag = "col fill size-full-0", LayoutOrder = 2 }, {
-			Preview = reactModule.createElement(view, {
+		Body = if IsCompact then ReactModule.createElement(View, { tag = "col fill size-full-0", LayoutOrder = 2 }, {
+			Preview = ReactModule.createElement(View, {
 				tag = "col align-x-center size-full-0 auto-y padding-x-xlarge padding-bottom-medium padding-top-large",
 				LayoutOrder = 1
 			}, {
-				Thumbnail = reactModule.createElement(image, {
+				Thumbnail = ReactModule.createElement(Image, {
 					tag = "radius-medium",
 					Size = UDim2.fromOffset(180, 180),
 					Image = p1.thumbnail,
 					ScaleType = Enum.ScaleType.Fit
 				})
 			}),
-			Info = reactModule.createElement(view, {
+			Info = ReactModule.createElement(View, {
 				tag = "col fill gap-large size-full-0 padding-x-xlarge padding-bottom-large",
 				LayoutOrder = 2
 			}, {
-				TitleBlock = var6,
-				Description = var7,
-				DetailsList = var8
+				TitleBlock = Element,
+				Description = Element1,
+				DetailsList = Element2
 			}),
-			BuyBar = var10
-		}) else reactModule.createElement(view, {
+			BuyBar = Element4
+		}) else ReactModule.createElement(View, {
 			tag = "row align-y-top fill size-full-0",
 			LayoutOrder = 2
 		}, {
-			LeftPane = reactModule.createElement(view, {
+			LeftPane = ReactModule.createElement(View, {
 				tag = "col fill gap-large size-full padding-x-xlarge padding-y-large",
 				LayoutOrder = 1
 			}, {
-				TitleBlock = var6,
-				Description = var7,
-				DetailsList = var8
+				TitleBlock = Element,
+				Description = Element1,
+				DetailsList = Element2
 			}),
-			RightPane = reactModule.createElement(view, {
+			RightPane = ReactModule.createElement(View, {
 				tag = "col",
 				LayoutOrder = 2,
 				Size = UDim2.new(0, 236, 1, 0)
 			}, {
-				Preview = reactModule.createElement(view, { tag = "fill size-full-0 padding-large", LayoutOrder = 1 }, {
-					Thumbnail = reactModule.createElement(image, {
+				Preview = ReactModule.createElement(View, { tag = "fill size-full-0 padding-large", LayoutOrder = 1 }, {
+					Thumbnail = ReactModule.createElement(Image, {
 						tag = "size-full radius-medium",
 						Image = p1.thumbnail,
 						ScaleType = Enum.ScaleType.Fit
 					})
 				}),
-				BuyBar = var10
+				BuyBar = Element4
 			})
 		})
 	})

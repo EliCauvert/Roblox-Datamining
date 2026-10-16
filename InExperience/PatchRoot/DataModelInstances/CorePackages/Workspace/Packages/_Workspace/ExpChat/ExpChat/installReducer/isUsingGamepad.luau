@@ -1,11 +1,11 @@
-﻿local expChat = script:FindFirstAncestor("ExpChat")
-local parent = expChat.Parent
+﻿local ExpChat = script:FindFirstAncestor("ExpChat")
+local Parent = ExpChat.Parent
 
-return require(parent.Rodux).createReducer(false, {
-	[require(parent.ExpChatShared).Actions.ClientAppLoaded.name] = function(_, p1)
+return require(Parent.Rodux).createReducer(false, {
+	[require(Parent.ExpChatShared).Actions.ClientAppLoaded.name] = function(_, p1) --[[ Line: 10 ]]
 		return p1.isGamepadEnabled
 	end,
-	[require(expChat.Actions.LastInputTypeChanged).name] = function(p1, p2)
-		return p2.lastInputTypeUsed == Enum.UserInputType.Gamepad1 or (if p2.lastInputTypeUsed == Enum.UserInputType.Keyboard then false else p1)
+	[require(ExpChat.Actions.LastInputTypeChanged).name] = function(p1, p2) --[[ Line: 13 ]]
+		return p2.lastInputTypeUsed == Enum.UserInputType.Gamepad1 or p2.lastInputTypeUsed ~= Enum.UserInputType.Keyboard and p1
 	end
 })

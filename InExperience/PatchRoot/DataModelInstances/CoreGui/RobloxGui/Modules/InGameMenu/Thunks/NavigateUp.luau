@@ -1,8 +1,8 @@
-﻿local parent = script.Parent.Parent
-local setCurrentPageModule = require(parent.Actions.SetCurrentPage)
-local pagesModule = require(parent.Components.Pages)
+﻿local Parent = script.Parent.Parent
+local SetCurrentPageModule = require(Parent.Actions.SetCurrentPage)
+local PagesModule = require(Parent.Components.Pages)
 
-return function(p1)
-	-- upvalues: setCurrentPageModule (ref), pagesModule (ref)
-	p1:dispatch(setCurrentPageModule(pagesModule.pagesByKey[p1:getState().menuPage].parentPage))
+return function(p1) --[[ Line: 5 ]]
+	-- upvalues: SetCurrentPageModule (copy), PagesModule (copy)
+	p1:dispatch(SetCurrentPageModule(PagesModule.pagesByKey[p1:getState().menuPage].parentPage))
 end

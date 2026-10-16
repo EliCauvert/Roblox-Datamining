@@ -1,18 +1,18 @@
-﻿local parent = script:FindFirstAncestor("InterventionShared").Parent
-local reactModule = require(parent.React)
-local useStyle = require(parent.UIBlox).Core.Style.useStyle
+﻿local Parent = script:FindFirstAncestor("InterventionShared").Parent
+local ReactModule = require(Parent.React)
+local UseStyleFunction = require(Parent.UIBlox).Core.Style.useStyle
 
-return function(p1)
-	-- upvalues: useStyle (ref), reactModule (ref)
-	local var1 = useStyle()
+return function(p1) --[[ Line: 13 | Named "InterventionOverlay" ]]
+	-- upvalues: UseStyleFunction (copy), ReactModule (copy)
+	local UseStyleResult = UseStyleFunction()
 	
-	return reactModule.createElement("TextButton", {
+	return ReactModule.createElement("TextButton", {
 		AutoButtonColor = false,
 		Size = UDim2.fromScale(1, 1),
-		BackgroundColor3 = var1.Tokens.Color.Common.Scrim.Color3,
-		BackgroundTransparency = var1.Tokens.Color.Common.Scrim.Transparency,
+		BackgroundColor3 = UseStyleResult.Tokens.Color.Common.Scrim.Color3,
+		BackgroundTransparency = UseStyleResult.Tokens.Color.Common.Scrim.Transparency,
 		BorderSizePixel = 0,
 		Text = "",
-		[reactModule.Event.Activated] = p1.onDismiss
+		[ReactModule.Event.Activated] = p1.onDismiss
 	}, p1.children)
 end

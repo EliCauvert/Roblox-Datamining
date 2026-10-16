@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.CapturesInExperience.CapturesInExperience)
+﻿return (require(script.Parent._Workspace.CapturesInExperience.CapturesInExperience))

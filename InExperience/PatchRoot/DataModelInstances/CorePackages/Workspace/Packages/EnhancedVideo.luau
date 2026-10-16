@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.EnhancedVideo.EnhancedVideo)
+﻿return (require(script.Parent._Workspace.EnhancedVideo.EnhancedVideo))

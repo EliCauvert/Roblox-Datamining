@@ -1,29 +1,29 @@
 ﻿return {
-	substituteAmount = function(p1, p2)
-		local replaced, _ = string.gsub(p1, "{amount}", tostring(p2))
+	substituteAmount = function(Text: string, p1) --[[ Line: 5 ]]
+		local Replaced, _ = string.gsub(Text, "{amount}", (tostring(p1)))
 		
-		return replaced
+		return Replaced
 	end,
-	substituteReceiverNotAllowed = function(p1, p2)
-		local var1 = tostring(p2)
-		local replaced, _ = string.gsub(p1, "{userName}", var1)
-		local replaced_1, _ = string.gsub(replaced, "{username}", var1)
+	substituteReceiverNotAllowed = function(Text: string, p1) --[[ Line: 10 ]]
+		local Text1 = tostring(p1)
+		local Replaced, _ = string.gsub(Text, "{userName}", Text1)
+		local Replaced1, _ = string.gsub(Replaced, "{username}", Text1)
 		
-		return replaced_1
+		return Replaced1
 	end,
-	substituteUsername = function(p1, p2)
-		local replaced, _ = string.gsub(p1, "{username}", tostring(p2))
+	substituteUsername = function(Text: string, p1) --[[ Line: 17 ]]
+		local Replaced, _ = string.gsub(Text, "{username}", (tostring(p1)))
 		
-		return replaced
+		return Replaced
 	end,
-	substituteMinAmount = function(a, b)
-		local replaced, _ = string.gsub(a, "{minAmount}", tostring(b))
+	substituteMinAmount = function(Text: string, p1) --[[ Line: 22 ]]
+		local Replaced, _ = string.gsub(Text, "{minAmount}", (tostring(p1)))
 		
-		return replaced
+		return Replaced
 	end,
-	substituteMaxAmount = function(a, b)
-		local replaced, _ = string.gsub(a, "{maxAmount}", tostring(b))
+	substituteMaxAmount = function(Text: string, p1) --[[ Line: 27 ]]
+		local Replaced, _ = string.gsub(Text, "{maxAmount}", (tostring(p1)))
 		
-		return replaced
+		return Replaced
 	end
 }

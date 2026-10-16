@@ -1,27 +1,26 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local appChatToastEventReceiverModule = require(appChat.Components.EventReceivers.AppChatToastEventReceiver)
-local enteredChatFromEntryPointModule = require(appChat.Actions.EnteredChatFromEntryPoint)
-local navigateIntoChatModule = require(appChat.Conversations.Thunks.NavigateIntoChat)
-local reactModule = require(parent.React)
-local roactUtilsModule = require(parent.RoactUtils)
-local socialCommonModule = require(parent.SocialCommon)
-local overlayHostModule = require(appChat.Components.OSA.OverlayHost)
-local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local AppChatToastEventReceiverModule = require(AppChat.Components.EventReceivers.AppChatToastEventReceiver)
+local EnteredChatFromEntryPointModule = require(AppChat.Actions.EnteredChatFromEntryPoint)
+local NavigateIntoChatModule = require(AppChat.Conversations.Thunks.NavigateIntoChat)
+local ReactModule = require(Parent.React)
+local SocialCommonModule = require(Parent.SocialCommon)
+local OverlayHostModule = require(AppChat.Components.OSA.OverlayHost)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
 
-function AppChatToastManagerUA()
-	-- upvalues: useDispatch (ref), reactModule (ref), navigateIntoChatModule (ref), enteredChatFromEntryPointModule (ref), socialCommonModule (ref), appChatToastEventReceiverModule (ref), overlayHostModule (ref)
-	local var1 = useDispatch()
+function AppChatToastManagerUA() --[[ Line: 16 ]]
+	-- upvalues: UseDispatchFunction (copy), ReactModule (copy), NavigateIntoChatModule (copy), EnteredChatFromEntryPointModule (copy), SocialCommonModule (copy), AppChatToastEventReceiverModule (copy), OverlayHostModule (copy)
+	local UseDispatchResult = UseDispatchFunction()
 	
-	return reactModule.createElement(reactModule.Fragment, nil, {
-		ToastEventReceiver = reactModule.createElement(appChatToastEventReceiverModule, {
-			navigateToChat = reactModule.useCallback(function(p1)
-				-- upvalues: var1 (ref), navigateIntoChatModule (copy), enteredChatFromEntryPointModule (copy), socialCommonModule (copy)
-				var1(navigateIntoChatModule({ conversationId = p1 }, true))
-				var1(enteredChatFromEntryPointModule(socialCommonModule.Enums.ChatEntryPointNames.ToastUniversalApp))
-			end, { var1 })
+	return ReactModule.createElement(ReactModule.Fragment, nil, {
+		ToastEventReceiver = ReactModule.createElement(AppChatToastEventReceiverModule, {
+			navigateToChat = ReactModule.useCallback(function(ConversationId) --[[ Line: 19 ]]
+				-- upvalues: UseDispatchResult (copy), NavigateIntoChatModule (upval), EnteredChatFromEntryPointModule (upval), SocialCommonModule (upval)
+				UseDispatchResult(NavigateIntoChatModule({ conversationId = ConversationId }, true))
+				UseDispatchResult(EnteredChatFromEntryPointModule(SocialCommonModule.Enums.ChatEntryPointNames.ToastUniversalApp))
+			end, { UseDispatchResult })
 		}),
-		OverlayHost = reactModule.createElement(overlayHostModule)
+		OverlayHost = ReactModule.createElement(OverlayHostModule)
 	})
 end
 

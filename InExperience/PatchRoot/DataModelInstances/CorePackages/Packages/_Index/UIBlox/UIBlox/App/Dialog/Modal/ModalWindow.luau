@@ -1,118 +1,109 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent.Parent
-local parent_2 = parent_1.Parent
-local parent_3 = parent_2.Parent
-local roactModule = require(parent_3.Roact)
-local tModule = require(parent_3.t)
-local fitFrameVertical = require(parent_3.FitFrame).FitFrameVertical
-local imagesModule = require(parent_1.ImageSet.Images)
-local withStyleModule = require(parent_2.Core.Style.withStyle)
-local imageSetComponentModule = require(parent_2.Core.ImageSet.ImageSetComponent)
-local getModalWindowWidthModule = require(parent.getModalWindowWidth)
-local rect = Rect.new(8, 8, 9, 9)
-local modalWindow = roactModule.PureComponent:extend("ModalWindow")
-modalWindow.validateProps = tModule.strictInterface({
-	isFullHeight = tModule.boolean,
-	screenSize = tModule.Vector2,
-	[roactModule.Children] = tModule.table,
-	position = tModule.optional(tModule.UDim2),
-	anchorPoint = tModule.optional(tModule.Vector2),
-	distanceFromTop = tModule.optional(tModule.number)
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent.Parent
+local Parent2 = Parent1.Parent
+local Parent3 = Parent2.Parent
+local RoactModule = require(Parent3.Roact)
+local TModule = require(Parent3.t)
+local FitFrameVertical = require(Parent3.FitFrame).FitFrameVertical
+local ImagesModule = require(Parent1.ImageSet.Images)
+local WithStyleModule = require(Parent2.Core.Style.withStyle)
+local ImageSetComponentModule = require(Parent2.Core.ImageSet.ImageSetComponent)
+local GetModalWindowWidthModule = require(Parent.getModalWindowWidth)
+local _Rect = Rect.new(8, 8, 9, 9)
+local ModalWindow = RoactModule.PureComponent:extend("ModalWindow")
+ModalWindow.validateProps = TModule.strictInterface({
+	isFullHeight = TModule.boolean,
+	screenSize = TModule.Vector2,
+	[RoactModule.Children] = TModule.table,
+	position = TModule.optional(TModule.UDim2),
+	anchorPoint = TModule.optional(TModule.Vector2),
+	distanceFromTop = TModule.optional(TModule.number)
 })
-modalWindow.defaultProps = { distanceFromTop = 0 }
+ModalWindow.defaultProps = { distanceFromTop = 0 }
 
-function modalWindow.init(p1)
-	-- upvalues: roactModule (ref)
-	local var1, var2 = roactModule.createBinding(Vector2.new(0, 0))
-	p1.contentSize = var1
-	p1.changeContentSize = var2
+function ModalWindow.init(p1) --[[ Line: 48 ]]
+	-- upvalues: RoactModule (copy)
+	p1.contentSize, p1.changeContentSize = RoactModule.createBinding(Vector2.new(0, 0))
 end
 
-function modalWindow.isFullWidth(_, p1)
-	return p1 < 540
+function ModalWindow:isFullWidth(X: number): boolean --[[ Line: 53 ]]
+	return X < 540
 end
 
-function modalWindow.render(p1)
-	-- upvalues: withStyleModule (ref), getModalWindowWidthModule (ref), roactModule (ref), imageSetComponentModule (ref), imagesModule (ref), rect (ref), fitFrameVertical (ref)
-	return withStyleModule(function(p2)
-		-- upvalues: p1 (ref), getModalWindowWidthModule (copy), roactModule (copy), imageSetComponentModule (copy), imagesModule (copy), rect (copy), fitFrameVertical (copy)
-		local vector2, var1, var2
-		local theme = p2.Theme
-		local screenSize = p1.props.screenSize
-		local _ = nil
-		local _ = nil
-		local _ = nil
-		local _ = nil
-		local uDim = UDim.new(0, getModalWindowWidthModule(screenSize.X))
+function ModalWindow.render(p1) --[[ Line: 57 ]]
+	-- upvalues: WithStyleModule (copy), GetModalWindowWidthModule (copy), RoactModule (copy), ImageSetComponentModule (copy), ImagesModule (copy), _Rect (copy), FitFrameVertical (copy)
+	return WithStyleModule(function(p2) --[[ Line: 58 ]]
+		-- upvalues: p1 (copy), GetModalWindowWidthModule (upval), RoactModule (upval), ImageSetComponentModule (upval), ImagesModule (upval), _Rect (upval), FitFrameVertical (upval)
+		local Theme = p2.Theme
+		local ScreenSize = p1.props.screenSize
+		local _UDim = UDim.new(0, GetModalWindowWidthModule(ScreenSize.X))
+		local _Vector2 = nil
+		local v1 = nil
+		local Position = nil
 		
-		if p1:isFullWidth(screenSize.X) then
-			vector2 = Vector2.new(0.5, 1)
-			var1 = "component_assets/bullet_17"
-			var2 = p1.props.position or UDim2.new(0.5, 0, 1, 0)
+		if p1:isFullWidth(ScreenSize.X) then
+			_Vector2 = Vector2.new(0.5, 1)
+			v1 = "component_assets/bullet_17"
+			Position = p1.props.position or UDim2.new(0.5, 0, 1, 0)
 		else
-			vector2 = Vector2.new(0.5, 0.5)
-			var1 = "component_assets/circle_17"
-			var2 = p1.props.position or UDim2.new(0.5, 0, 0.5, 0)
+			_Vector2 = Vector2.new(0.5, 0.5)
+			v1 = "component_assets/circle_17"
+			Position = p1.props.position or UDim2.new(0.5, 0, 0.5, 0)
 		end
-		vector2 = p1.props.anchorPoint or vector2
+		local AnchorPoint = p1.props.anchorPoint or _Vector2
 		
-		if not p1.props.isFullHeight then
-			return roactModule.createElement(imageSetComponentModule.Button, {
-				BackgroundTransparency = 1,
-				BorderSizePixel = 0,
-				AutoButtonColor = false,
-				ClipsDescendants = true,
-				Selectable = false,
-				Position = var2,
-				Size = p1.contentSize:map(function(p3)
-					return UDim2.new(0, p3.X, 0, p3.Y)
-				end),
-				AnchorPoint = vector2,
-				Image = imagesModule[var1],
-				ImageColor3 = theme.BackgroundUIDefault.Color,
-				ImageTransparency = theme.BackgroundUIDefault.Transparency,
-				ScaleType = Enum.ScaleType.Slice,
-				SliceCenter = rect
-			}, {
-				BackgroundImage = roactModule.createElement(fitFrameVertical, {
-					Position = UDim2.new(0.5, 0, 0.5, 0),
-					AnchorPoint = Vector2.new(0.5, 0.5),
-					BackgroundTransparency = 1,
-					BorderSizePixel = 0,
-					width = uDim,
-					[roactModule.Change.AbsoluteSize] = function(p3)
-						-- upvalues: p1 (copy)
-						p1.changeContentSize(p3.AbsoluteSize)
-					end
-				}, p1.props[roactModule.Children])
-			})
-		end
-		local _ = nil
-		
-		return roactModule.createElement(imageSetComponentModule.Button, {
+		return if p1.props.isFullHeight then RoactModule.createElement(ImageSetComponentModule.Button, {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			AutoButtonColor = false,
 			ClipsDescendants = true,
 			Selectable = false,
-			Position = var2,
-			Size = UDim2.new(uDim, if p1.props.distanceFromTop > 0 then UDim.new(1, -p1.props.distanceFromTop) elseif screenSize.X >= 540 and screenSize.Y >= 700 then UDim.new(0.8, 0) else UDim.new(1, 0)),
-			AnchorPoint = vector2,
-			Image = imagesModule[var1],
-			ImageColor3 = theme.BackgroundUIDefault.Color,
-			ImageTransparency = theme.BackgroundUIDefault.Transparency,
+			Position = Position,
+			Size = UDim2.new(_UDim, if p1.props.distanceFromTop > 0 then UDim.new(1, -p1.props.distanceFromTop) elseif ScreenSize.X >= 540 and ScreenSize.Y >= 700 then UDim.new(0.8, 0) else UDim.new(1, 0)),
+			AnchorPoint = AnchorPoint,
+			Image = ImagesModule[v1],
+			ImageColor3 = Theme.BackgroundUIDefault.Color,
+			ImageTransparency = Theme.BackgroundUIDefault.Transparency,
 			ScaleType = Enum.ScaleType.Slice,
-			SliceCenter = rect
+			SliceCenter = _Rect
 		}, {
-			BackgroundImage = roactModule.createElement(imageSetComponentModule.Label, {
+			BackgroundImage = RoactModule.createElement(ImageSetComponentModule.Label, {
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
 				Size = UDim2.new(1, 0, 1, 0),
 				AnchorPoint = Vector2.new(0.5, 0.5),
 				Position = UDim2.new(0.5, 0, 0.5, 0)
-			}, p1.props[roactModule.Children])
+			}, p1.props[RoactModule.Children])
+		}) else RoactModule.createElement(ImageSetComponentModule.Button, {
+			BackgroundTransparency = 1,
+			BorderSizePixel = 0,
+			AutoButtonColor = false,
+			ClipsDescendants = true,
+			Selectable = false,
+			Position = Position,
+			Size = p1.contentSize:map(function(Vector): UDim2 --[[ Line: 112 ]]
+				return UDim2.new(0, Vector.X, 0, Vector.Y)
+			end),
+			AnchorPoint = AnchorPoint,
+			Image = ImagesModule[v1],
+			ImageColor3 = Theme.BackgroundUIDefault.Color,
+			ImageTransparency = Theme.BackgroundUIDefault.Transparency,
+			ScaleType = Enum.ScaleType.Slice,
+			SliceCenter = _Rect
+		}, {
+			BackgroundImage = RoactModule.createElement(FitFrameVertical, {
+				Position = UDim2.new(0.5, 0, 0.5, 0),
+				AnchorPoint = Vector2.new(0.5, 0.5),
+				BackgroundTransparency = 1,
+				BorderSizePixel = 0,
+				width = _UDim,
+				[RoactModule.Change.AbsoluteSize] = function(Frame) --[[ Line: 133 ]]
+					-- upvalues: p1 (upval)
+					p1.changeContentSize(Frame.AbsoluteSize)
+				end
+			}, p1.props[RoactModule.Children])
 		})
 	end)
 end
 
-return modalWindow
+return ModalWindow

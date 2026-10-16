@@ -1,56 +1,48 @@
-﻿local gameInfosRodux = script:FindFirstAncestor("GameInfosRodux")
-local gameInfosReducerModule = require(gameInfosRodux.GameInfosReducer)
-local addGamesModule = require(gameInfosRodux.AddGames)
-local syncGameInfosToStoreModule = require(gameInfosRodux.syncGameInfosToStore)
-local parent = gameInfosRodux.Parent
-local tutilsModule = require(parent.tutils)
-local apiFetchGameIcons = require(parent.GameIconRodux).GameIcons.ApiFetchGameIcons
-local dataHydrationModule = require(parent.DataHydration)
-local _ = require(parent.DiscoveryTypes)
-local fFlagMigrateGameIconsToStore = require(parent.SharedFlags).FFlagMigrateGameIconsToStore
-local fFlagMigrateGameInfoToStore = require(parent.SharedFlags).FFlagMigrateGameInfoToStore
+﻿local GameInfosRodux = script:FindFirstAncestor("GameInfosRodux")
+local GameInfosReducerModule = require(GameInfosRodux.GameInfosReducer)
+local AddGamesModule = require(GameInfosRodux.AddGames)
+local SyncGameInfosToStoreModule = require(GameInfosRodux.syncGameInfosToStore)
+local Parent = GameInfosRodux.Parent
+local TutilsModule = require(Parent.tutils)
+local DataHydrationModule = require(Parent.DataHydration)
+local _ = require(Parent.DiscoveryTypes)
+local FFlagMigrateGameInfoToStore = require(Parent.SharedFlags).FFlagMigrateGameInfoToStore
 
-return function(p1, p2, p3, p4, p5, p6)
-	-- upvalues: gameInfosReducerModule (ref), fFlagMigrateGameInfoToStore (ref), tutilsModule (ref), addGamesModule (ref), syncGameInfosToStoreModule (ref), fFlagMigrateGameIconsToStore (ref), dataHydrationModule (ref), apiFetchGameIcons (ref)
-	local key = p2:getState().Personalization[gameInfosReducerModule.key]
+return function(_, p1, List, Callback, Callback2, Callback1) --[[ Line: 12 | Named "parseAndAddGameInfos" ]]
+	-- upvalues: GameInfosReducerModule (copy), FFlagMigrateGameInfoToStore (copy), TutilsModule (copy), AddGamesModule (copy), SyncGameInfosToStoreModule (copy), DataHydrationModule (copy)
+	local PersonalizationEntry = p1:getState().Personalization[GameInfosReducerModule.key]
 	local t = {}
-	local t_1 = {}
-	local var1 = if fFlagMigrateGameInfoToStore then {} else nil
-	
-	for i, v in p3 do
-		p4(v):match(function(p7)
-			-- upvalues: fFlagMigrateGameInfoToStore (copy), var1 (ref), tutilsModule (copy), key (ref), t (ref), p6 (ref), t_1 (ref), p5 (ref), v (ref)
-			local universeId = p7.universeId
+	local List1 = {}
+	local T = if FFlagMigrateGameInfoToStore then {} else nil
+	for _, value in List do
+		Callback(value):match(function(p2) --[[ Line: 33 ]]
+			-- upvalues: FFlagMigrateGameInfoToStore (upval), T (copy), TutilsModule (upval), PersonalizationEntry (copy), t (copy), Callback1 (copy), List1 (copy), Callback2 (copy), value (copy)
+			local UniverseId = p2.universeId
 			
-			if fFlagMigrateGameInfoToStore then
-				var1[universeId] = p7
+			if FFlagMigrateGameInfoToStore then
+				T[UniverseId] = p2
 			end
-			if not tutilsModule.shallowEqual(p7, key[universeId]) then
-				t[universeId] = p7
+			if not TutilsModule.shallowEqual(p2, PersonalizationEntry[UniverseId]) then
+				t[UniverseId] = p2
 				
-				if not p6 or p6(universeId) then
-					table.insert(t_1, universeId)
+				if not Callback1 or Callback1(UniverseId) then
+					table.insert(List1, UniverseId)
 				end
 			end
-			if p5 then
-				p5(v, p7)
+			if Callback2 then
+				Callback2(value, p2)
 			end
-		end):matchError(function(p7)
-			warn(`parseAndAddGameInfos could not parse gameInfo: {p7}`)
+		end):matchError(function(p2) --[[ Line: 52 ]]
+			warn(`parseAndAddGameInfos could not parse gameInfo: {p2}`)
 		end)
 	end
 	if next(t) then
-		p2:dispatch(addGamesModule(t))
+		p1:dispatch(AddGamesModule(t))
 	end
-	if fFlagMigrateGameInfoToStore and next(var1) then
-		syncGameInfosToStoreModule(var1)
+	if FFlagMigrateGameInfoToStore and next(T) then
+		SyncGameInfosToStoreModule(T)
 	end
-	if #t_1 > 0 then
-		if fFlagMigrateGameIconsToStore then
-			dataHydrationModule.Game.getGameIconStore(false).getAndFetchGameIcons(t_1)
-			
-			return
-		end
-		p2:dispatch(apiFetchGameIcons(p1, t_1))
+	if #List1 > 0 then
+		DataHydrationModule.Game.getGameIconStore(false).getAndFetchGameIcons(List1)
 	end
 end

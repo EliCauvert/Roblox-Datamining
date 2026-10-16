@@ -1,357 +1,376 @@
-﻿local streamNotifications = script:FindFirstAncestor("StreamNotifications")
-local components = streamNotifications.components
-local parent = streamNotifications.Parent
-local constantsModule = require(streamNotifications.constants)
-local cryoModule = require(parent.Cryo)
-local var1 = require(parent.Analytics).AnalyticsReporters.EventIngest.new(game:GetService("EventIngestService"))
-local sessionService = game:GetService("SessionService")
-local userInputService = game:GetService("UserInputService")
-local guiService = game:GetService("GuiService")
-local thirdPartyUserService = game:GetService("ThirdPartyUserService")
-local emptyNotificationsModule = require(components.EmptyNotifications)
-local metaActionsMenuModule = require(components.MetaActionsMenu)
-local streamNotificationAnimationWrapperModule = require(components.StreamNotificationAnimationWrapper)
-local streamNotificationBundleWrapperModule = require(components.StreamNotificationBundleWrapper)
-local reactModule = require(parent.React)
-local notificationsCommonModule = require(parent.NotificationsCommon)
-local joinExperience = notificationsCommonModule.JoinExperience
-local type = notificationsCommonModule.type
-local notificationHelper = notificationsCommonModule.NotificationHelper
-local enumStreamNotificationsDisplayStateModule = require(streamNotifications.EnumStreamNotificationsDisplayState)
-local enumStreamNotificationsLoadingMoreStateModule = require(streamNotifications.EnumStreamNotificationsLoadingMoreState)
-local httpRequestModule = require(parent.HttpRequest)
-local var2 = httpRequestModule.config({
-	requestFunction = httpRequestModule.requestFunctions.HttpRbxApi,
-	maxRetryCount = if require(parent.SharedFlags).FFlagLuaAppDefaultHttpRetry then game:DefineFastInt("StreamNotificationsContentHttpRetryCount", 4) else nil
+﻿local StreamNotifications = script:FindFirstAncestor("StreamNotifications")
+local Components = StreamNotifications.components
+local Parent = StreamNotifications.Parent
+local ConstantsModule = require(StreamNotifications.constants)
+local CryoModule = require(Parent.Cryo)
+local NewResult = require(Parent.Analytics).AnalyticsReporters.EventIngest.new((game:GetService("EventIngestService")))
+local SessionService = game:GetService("SessionService")
+local UserInputService = game:GetService("UserInputService")
+local GuiService = game:GetService("GuiService")
+local ThirdPartyUserService = game:GetService("ThirdPartyUserService")
+local EmptyNotificationsModule = require(Components.EmptyNotifications)
+local MetaActionsMenuModule = require(Components.MetaActionsMenu)
+local StreamNotificationAnimationWrapperModule = require(Components.StreamNotificationAnimationWrapper)
+local StreamNotificationBundleWrapperModule = require(Components.StreamNotificationBundleWrapper)
+local ReactModule = require(Parent.React)
+local NotificationsCommonModule = require(Parent.NotificationsCommon)
+local JoinExperienceFunction = NotificationsCommonModule.JoinExperience
+local Type = NotificationsCommonModule.type
+local NotificationHelper = NotificationsCommonModule.NotificationHelper
+local EnumStreamNotificationsDisplayStateModule = require(StreamNotifications.EnumStreamNotificationsDisplayState)
+local EnumStreamNotificationsLoadingMoreStateModule = require(StreamNotifications.EnumStreamNotificationsLoadingMoreState)
+local HttpRequestModule = require(Parent.HttpRequest)
+local ConfigResult = HttpRequestModule.config({
+	requestFunction = HttpRequestModule.requestFunctions.HttpRbxApi,
+	maxRetryCount = if require(Parent.SharedFlags).FFlagLuaAppDefaultHttpRetry then game:DefineFastInt("StreamNotificationsContentHttpRetryCount", 4) else nil
 })
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local UIBloxModule = require(parent.UIBlox)
-local foundationModule = require(parent.Foundation)
-local iconSize = foundationModule.Enums.IconSize
-local loading = foundationModule.Loading
-local useStyle = UIBloxModule.Core.Style.useStyle
-local useClientTriggerEventHandlerModule = require(streamNotifications.eventHandler.useClientTriggerEventHandler)
-local getStreamNotificationsModule = require(streamNotifications.utils.getStreamNotifications)
-local clearUnreadNotificationsModule = require(streamNotifications.utils.clearUnreadNotifications)
-local postNotificationsApiModule = require(streamNotifications.utils.postNotificationsApi)
-local postReportNotificationModule = require(streamNotifications.utils.postReportNotification)
-local reportEventModule = require(streamNotifications.utils.reportEvent)
-local sortNotificationsModule = require(streamNotifications.utils.sortNotifications)
-local eventStream = require(streamNotifications.analytics.analyticsService).EventStream
-local analyticsConstantsModule = require(streamNotifications.analytics.analyticsConstants)
-local closeCentralOverlay = require(parent.CentralOverlay).Thunks.CloseCentralOverlay
-local abuseVectorModule = require(parent.GenericAbuseReporting.AbuseVector)
-local openDynamicAbuseReportModule = require(parent.GenericAbuseReporting.OpenDynamicAbuseReport)
-local luaAppNewStreamNotificationsLogFix = game:DefineFastFlag("LuaAppNewStreamNotificationsLogFix", false)
-local sharedFlagsModule = require(parent.SharedFlags)
-local getFStringPCGDKFilteredNotificationTypes = sharedFlagsModule.GetFStringPCGDKFilteredNotificationTypes
-local fFlagStreamNotificationsStandardizeClickEvents = sharedFlagsModule.FFlagStreamNotificationsStandardizeClickEvents
-local fFlagStreamNotificationImpressionLogging = sharedFlagsModule.FFlagStreamNotificationImpressionLogging
-local frameBoundsImpressionsTracker = require(parent.Impressions).FrameBoundsImpressionsTracker
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local FoundationModule = require(Parent.Foundation)
+local IconSize = FoundationModule.Enums.IconSize
+local Loading = FoundationModule.Loading
+local UseStyleFunction = require(Parent.UIBlox).Core.Style.useStyle
+local UseClientTriggerEventHandlerModule = require(StreamNotifications.eventHandler.useClientTriggerEventHandler)
+local GetStreamNotificationsModule = require(StreamNotifications.utils.getStreamNotifications)
+local ClearUnreadNotificationsModule = require(StreamNotifications.utils.clearUnreadNotifications)
+local PostNotificationsApiModule = require(StreamNotifications.utils.postNotificationsApi)
+local PostReportNotificationModule = require(StreamNotifications.utils.postReportNotification)
+local ReportEventModule = require(StreamNotifications.utils.reportEvent)
+local SortNotificationsModule = require(StreamNotifications.utils.sortNotifications)
+local EventStream = require(StreamNotifications.analytics.analyticsService).EventStream
+local AnalyticsConstantsModule = require(StreamNotifications.analytics.analyticsConstants)
+local CloseCentralOverlayFunction = require(Parent.CentralOverlay).Thunks.CloseCentralOverlay
+local AbuseVectorModule = require(Parent.GenericAbuseReporting.AbuseVector)
+local OpenDynamicAbuseReportModule = require(Parent.GenericAbuseReporting.OpenDynamicAbuseReport)
+local LuaAppNewStreamNotificationsLogFix = game:DefineFastFlag("LuaAppNewStreamNotificationsLogFix", false)
+local StreamNotificationFixInitialPageFill = game:DefineFastFlag("StreamNotificationFixInitialPageFill", false)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local GetFStringPCGDKFilteredNotificationTypesFunction = SharedFlagsModule.GetFStringPCGDKFilteredNotificationTypes
+local FFlagStreamNotificationsStandardizeClickEvents = SharedFlagsModule.FFlagStreamNotificationsStandardizeClickEvents
+local FFlagStreamNotificationImpressionLogging = SharedFlagsModule.FFlagStreamNotificationImpressionLogging
+local FrameBoundsImpressionsTracker = require(Parent.Impressions).FrameBoundsImpressionsTracker
 
-local function _()
-	-- upvalues: thirdPartyUserService (ref)
-	return thirdPartyUserService and (thirdPartyUserService:IsChatRestrictionSupported() and thirdPartyUserService.FriendCommunicationRestrictionStatus ~= Enum.ChatRestrictionStatus.NotRestricted)
+local function _(): boolean --[[ Line: 77 | Named "GetIsFriendCommunicationRestricted" ]]
+	-- upvalues: ThirdPartyUserService (copy)
+	return ThirdPartyUserService and (ThirdPartyUserService:IsChatRestrictionSupported() and ThirdPartyUserService.FriendCommunicationRestrictionStatus ~= Enum.ChatRestrictionStatus.NotRestricted)
 end
 
-local streamNotificationDropdownExperimentationModule = require(streamNotifications.StreamNotificationDropdownExperimentation)
+local StreamNotificationDropdownExperimentationModule = require(StreamNotifications.StreamNotificationDropdownExperimentation)
 
-local function createImpressionSignal()
-	local bindableEvent = Instance.new("BindableEvent")
+local function createImpressionSignal() --[[ Line: 113 ]]
+	local BindableEvent = Instance.new("BindableEvent")
 	
 	return {
-		connect = function(_, p1)
-			-- upvalues: bindableEvent (ref)
-			return bindableEvent.Event:Connect(p1)
+		connect = function(_, Callback) --[[ Line: 116 ]]
+			-- upvalues: BindableEvent (copy)
+			return BindableEvent.Event:Connect(Callback)
 		end,
-		fire = function()
-			-- upvalues: bindableEvent (ref)
-			bindableEvent:Fire()
+		fire = function() --[[ Line: 119 ]]
+			-- upvalues: BindableEvent (copy)
+			BindableEvent:Fire()
 		end,
-		destroy = function()
-			-- upvalues: bindableEvent (ref)
-			bindableEvent:Destroy()
+		destroy = function() --[[ Line: 122 ]]
+			-- upvalues: BindableEvent (copy)
+			BindableEvent:Destroy()
 		end
 	}
 end
 
-return function(p1)
-	-- upvalues: useStyle (ref), streamNotificationDropdownExperimentationModule (ref), useDispatch (ref), useClientTriggerEventHandlerModule (ref), reactModule (ref), enumStreamNotificationsDisplayStateModule (ref), enumStreamNotificationsLoadingMoreStateModule (ref), fFlagStreamNotificationImpressionLogging (ref), createImpressionSignal (ref), userInputService (ref), constantsModule (ref), getStreamNotificationsModule (ref), var2 (ref), sortNotificationsModule (ref), getFStringPCGDKFilteredNotificationTypes (ref), thirdPartyUserService (ref), cryoModule (ref), notificationHelper (ref), eventStream (ref), analyticsConstantsModule (ref), fFlagStreamNotificationsStandardizeClickEvents (ref), clearUnreadNotificationsModule (ref), postReportNotificationModule (ref), openDynamicAbuseReportModule (ref), abuseVectorModule (ref), closeCentralOverlay (ref), luaAppNewStreamNotificationsLogFix (ref), type (ref), joinExperience (ref), sessionService (ref), reportEventModule (ref), var1 (ref), postNotificationsApiModule (ref), notificationsCommonModule (ref), metaActionsMenuModule (ref), loading (ref), iconSize (ref), streamNotificationBundleWrapperModule (ref), streamNotificationAnimationWrapperModule (ref), emptyNotificationsModule (ref), guiService (ref), frameBoundsImpressionsTracker (ref)
-	local var3 = useStyle()
-	local dropdownEnabled = streamNotificationDropdownExperimentationModule.getDropdownEnabled()
-	local var4 = useDispatch()
-	local var5 = useClientTriggerEventHandlerModule()
-	local var6, var7 = reactModule.useState({})
-	local var8, var9 = reactModule.useState(nil)
-	local var10, var11 = reactModule.useState(enumStreamNotificationsDisplayStateModule.Initializing)
-	local var12 = nil
-	local var13 = nil
-	local var14 = nil
-	local showOverlay = p1.showOverlay or function(_) end
-	local var15 = reactModule.useRef(enumStreamNotificationsLoadingMoreStateModule.Loading)
-	local var16, var17 = reactModule.useState(enumStreamNotificationsLoadingMoreStateModule.Loading)
-	local var18 = reactModule.useRef(0)
-	local var19 = reactModule.useRef(nil)
-	local var20 = reactModule.useRef(if fFlagStreamNotificationImpressionLogging then createImpressionSignal() else nil)
-	local var21 = constantsModule.Modal.HeaderHeight + (if userInputService.StatusBarSize then userInputService.StatusBarSize.Y else 0)
-	local var22 = reactModule.useMemo(function()
-		-- upvalues: fFlagStreamNotificationImpressionLogging (copy), var6 (ref)
-		if not fFlagStreamNotificationImpressionLogging then
+return function(p1) --[[ Line: 128 ]]
+	-- upvalues: UseStyleFunction (copy), StreamNotificationDropdownExperimentationModule (copy), UseDispatchFunction (copy), UseClientTriggerEventHandlerModule (copy), ReactModule (copy), EnumStreamNotificationsDisplayStateModule (copy), EnumStreamNotificationsLoadingMoreStateModule (copy), FFlagStreamNotificationImpressionLogging (copy), createImpressionSignal (copy), UserInputService (copy), ConstantsModule (copy), GetStreamNotificationsModule (copy), ConfigResult (copy), SortNotificationsModule (copy), GetFStringPCGDKFilteredNotificationTypesFunction (copy), ThirdPartyUserService (copy), StreamNotificationFixInitialPageFill (copy), CryoModule (copy), NotificationHelper (copy), EventStream (copy), AnalyticsConstantsModule (copy), FFlagStreamNotificationsStandardizeClickEvents (copy), ClearUnreadNotificationsModule (copy), PostReportNotificationModule (copy), OpenDynamicAbuseReportModule (copy), AbuseVectorModule (copy), CloseCentralOverlayFunction (copy), LuaAppNewStreamNotificationsLogFix (copy), Type (copy), JoinExperienceFunction (copy), SessionService (copy), ReportEventModule (copy), NewResult (copy), PostNotificationsApiModule (copy), NotificationsCommonModule (copy), MetaActionsMenuModule (copy), Loading (copy), IconSize (copy), StreamNotificationBundleWrapperModule (copy), StreamNotificationAnimationWrapperModule (copy), EmptyNotificationsModule (copy), GuiService (copy), FrameBoundsImpressionsTracker (copy)
+	local UseStyleResult = UseStyleFunction()
+	local DropdownEnabled = StreamNotificationDropdownExperimentationModule.getDropdownEnabled()
+	local UseDispatchResult = UseDispatchFunction()
+	local UseClientTriggerEventHandlerModuleResult = UseClientTriggerEventHandlerModule()
+	local UseStateResult, UseStateResult2 = ReactModule.useState({})
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(EnumStreamNotificationsDisplayStateModule.Initializing)
+	local Callback = nil
+	local Callback1 = nil
+	local Callback2 = nil
+	local ShowOverlay = p1.showOverlay or function(_) --[[ Line: 149 ]] end
+	local UseRefResult = ReactModule.useRef(EnumStreamNotificationsLoadingMoreStateModule.Loading)
+	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(EnumStreamNotificationsLoadingMoreStateModule.Loading)
+	local UseRefResult1 = ReactModule.useRef(0)
+	local UseRefResult2 = ReactModule.useRef({})
+	local UseRefResult3 = ReactModule.useRef(0)
+	local UseRefResult4 = ReactModule.useRef(nil)
+	local UseRefResult5 = ReactModule.useRef(if FFlagStreamNotificationImpressionLogging then createImpressionSignal() else nil)
+	local NewHeaderHeight = ConstantsModule.Modal.HeaderHeight + (if UserInputService.StatusBarSize then UserInputService.StatusBarSize.Y else 0)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 169 ]]
+		-- upvalues: FFlagStreamNotificationImpressionLogging (upval), UseStateResult (copy)
+		if not FFlagStreamNotificationImpressionLogging then
 			return { byNotificationId = {}, byIndex = {} }
 		end
-		local t = {}
-		local t_1 = {}
-		local t_2 = {}
+		local ByNotificationId = {}
+		local ByIndex = {}
+		local BundlePositions = {}
 		
-		for i, v in ipairs(var6) do
-			if v.notificationSourceType == "Sendr" then
-				local bundleKey = v.content.bundleKey
-				local var23 = nil
+		for ImpressionIndex, Notification in ipairs(UseStateResult) do
+			if Notification.notificationSourceType == "Sendr" then
+				local BundleKey = Notification.content.bundleKey
+				local BundlePosition: number? = nil
 				
-				if bundleKey and bundleKey ~= "" then
-					var23 = (t_2[bundleKey] or 0) + 1
-					t_2[bundleKey] = var23
+				if BundleKey and BundleKey ~= "" then
+					BundlePosition = (BundlePositions[BundleKey] or 0) + 1
+					BundlePositions[BundleKey] = BundlePosition
 				end
-				local t_3 = {
-					impressionIndex = i,
-					bundlePosition = var23,
-					notification = v
+				local config = {
+					impressionIndex = ImpressionIndex,
+					bundlePosition = BundlePosition,
+					notification = Notification
 				}
-				t_1[i] = t_3
+				ByIndex[ImpressionIndex] = config
 				
-				if v.id then
-					t[v.id] = t_3
+				if Notification.id then
+					ByNotificationId[Notification.id] = config
 				end
 			end
 		end
-		return { byNotificationId = t, byIndex = t_1 }
-	end, { var6 })
-	reactModule.useEffect(function()
-		-- upvalues: var12 (write)
-		var12()
+		return { byNotificationId = ByNotificationId, byIndex = ByIndex }
+	end, { UseStateResult })
+	ReactModule.useEffect(function() --[[ Line: 206 ]]
+		-- upvalues: Callback (ref)
+		Callback()
 	end, {})
-	reactModule.useEffect(function()
-		-- upvalues: fFlagStreamNotificationImpressionLogging (copy), var20 (ref)
-		if fFlagStreamNotificationImpressionLogging then
-			return function()
-				-- upvalues: var20 (copy)
-				if var20.current then
-					var20.current:destroy()
-				end
+	ReactModule.useEffect(function() --[[ Line: 210 ]]
+		-- upvalues: FFlagStreamNotificationImpressionLogging (upval), UseRefResult5 (copy)
+		if not FFlagStreamNotificationImpressionLogging then return end
+		return function() --[[ Line: 214 ]]
+			-- upvalues: UseRefResult5 (upval)
+			if UseRefResult5.current then
+				UseRefResult5.current:destroy()
 			end
 		end
 	end, {})
 	
-	local _ = function(p2)
-		-- upvalues: var15 (ref), var17 (ref)
-		var15.current = p2
-		var17(p2)
+	local function _(Current) --[[ Line: 221 ]]
+		-- upvalues: UseRefResult (copy), UseStateResult2_3 (copy)
+		UseRefResult.current = Current
+		UseStateResult2_3(Current)
 	end
 	
-	var12 = function()
-		-- upvalues: var15 (ref), enumStreamNotificationsLoadingMoreStateModule (copy), var17 (ref), getStreamNotificationsModule (copy), var2 (copy), constantsModule (copy), var18 (ref), sortNotificationsModule (copy), getFStringPCGDKFilteredNotificationTypes (copy), thirdPartyUserService (copy), var7 (ref), cryoModule (copy), notificationHelper (copy), eventStream (copy), analyticsConstantsModule (copy), fFlagStreamNotificationsStandardizeClickEvents (copy), var11 (ref), enumStreamNotificationsDisplayStateModule (copy), clearUnreadNotificationsModule (copy), var6 (ref), var12 (write)
-		if var15.current == enumStreamNotificationsLoadingMoreStateModule.NoMoreNotifications then
+	Callback = function() --[[ Line: 226 ]]
+		-- upvalues: UseRefResult (copy), EnumStreamNotificationsLoadingMoreStateModule (upval), UseStateResult2_3 (copy), GetStreamNotificationsModule (upval), ConfigResult (upval), ConstantsModule (upval), UseRefResult1 (copy), SortNotificationsModule (upval), GetFStringPCGDKFilteredNotificationTypesFunction (upval), ThirdPartyUserService (upval), StreamNotificationFixInitialPageFill (upval), UseRefResult2 (copy), UseRefResult3 (copy), UseStateResult2 (copy), CryoModule (upval), NotificationHelper (upval), EventStream (upval), AnalyticsConstantsModule (upval), FFlagStreamNotificationsStandardizeClickEvents (upval), UseStateResult2_2 (copy), EnumStreamNotificationsDisplayStateModule (upval), ClearUnreadNotificationsModule (upval), Callback (ref), UseStateResult (copy)
+		if UseRefResult.current ~= EnumStreamNotificationsLoadingMoreStateModule.NoMoreNotifications then
+			local Loading = EnumStreamNotificationsLoadingMoreStateModule.Loading
+			UseRefResult.current = Loading
+			UseStateResult2_3(Loading)
+			GetStreamNotificationsModule(ConfigResult, ConstantsModule.DefaultMaxRows, UseRefResult1.current):andThen(function(Result) --[[ Line: 234 ]]
+				-- upvalues: SortNotificationsModule (upval), GetFStringPCGDKFilteredNotificationTypesFunction (upval), ThirdPartyUserService (upval), StreamNotificationFixInitialPageFill (upval), UseRefResult2 (upval), UseRefResult3 (upval), UseStateResult2 (upval), CryoModule (upval), EnumStreamNotificationsLoadingMoreStateModule (upval), UseRefResult (upval), UseStateResult2_3 (upval), NotificationHelper (upval), EventStream (upval), AnalyticsConstantsModule (upval), ConstantsModule (upval), FFlagStreamNotificationsStandardizeClickEvents (upval), UseStateResult2_2 (upval), EnumStreamNotificationsDisplayStateModule (upval), ClearUnreadNotificationsModule (upval), ConfigResult (upval), UseRefResult1 (upval), Callback (upval), UseStateResult (upval)
+				local SortNotificationsModuleResult = SortNotificationsModule(Result)
+				local FStringPCGDKFilteredNotificationTypes = GetFStringPCGDKFilteredNotificationTypesFunction()
+				local List = {}
+				
+				for _, value in ipairs(SortNotificationsModuleResult) do
+					if not FStringPCGDKFilteredNotificationTypes[value.content.notificationType] or (not ThirdPartyUserService or (not ThirdPartyUserService:IsChatRestrictionSupported() or ThirdPartyUserService.FriendCommunicationRestrictionStatus == Enum.ChatRestrictionStatus.NotRestricted)) then
+						table.insert(List, value)
+					end
+				end
+				local List1 = List
+				
+				if List1 and #List1 > 0 then
+					if StreamNotificationFixInitialPageFill then
+						for _, value1 in ipairs(List1) do
+							if value1.notificationSourceType == "Sendr" then
+								local BundleKey = value1.content.bundleKey
+								local BundleKey1 = if BundleKey and BundleKey ~= "" then BundleKey else value1.id
+								
+								if BundleKey1 and not UseRefResult2.current[BundleKey1] then
+									UseRefResult2.current[BundleKey1] = true
+									UseRefResult3.current += 1
+								end
+							end
+						end
+					end
+					UseStateResult2(function(p2) --[[ Line: 270 ]]
+						-- upvalues: CryoModule (upval), List1 (ref)
+						return (CryoModule.List.join(p2, List1))
+					end)
+					local Default = EnumStreamNotificationsLoadingMoreStateModule.Default
+					UseRefResult.current = Default
+					UseStateResult2_3(Default)
+					
+					for _, value2 in ipairs(List1) do
+						NotificationHelper.fireEvent(EventStream, AnalyticsConstantsModule.Context.fetched, AnalyticsConstantsModule.EventNames.notificationRetrieved, CryoModule.Dictionary.join(value2.content.clientEventsPayload or {}, {
+							sendrVersion = ConstantsModule.SENDRVersion,
+							notificationType = value2.content.notificationType or nil,
+							notificationId = value2.id or nil,
+							notificationState = FFlagStreamNotificationsStandardizeClickEvents and value2.content.currentState or nil
+						}))
+					end
+				else
+					local NoMoreNotifications = EnumStreamNotificationsLoadingMoreStateModule.NoMoreNotifications
+					UseRefResult.current = NoMoreNotifications
+					UseStateResult2_3(NoMoreNotifications)
+				end
+				UseStateResult2_2(EnumStreamNotificationsDisplayStateModule.Default)
+				ClearUnreadNotificationsModule(ConfigResult)
+				UseRefResult1.current = (tonumber(UseRefResult1.current) or 0) + ConstantsModule.DefaultMaxRows
+				
+				if StreamNotificationFixInitialPageFill then
+					if UseRefResult3.current < ConstantsModule.DefaultMaxRows then
+						Callback()
+					end
+				elseif UseStateResult and #UseStateResult < ConstantsModule.DefaultMaxRows then
+					Callback()
+				end
+			end):catch(function(_) --[[ Line: 307 ]]
+				-- upvalues: UseStateResult2_2 (upval), EnumStreamNotificationsDisplayStateModule (upval)
+				UseStateResult2_2(EnumStreamNotificationsDisplayStateModule.ErrorRetrieving)
+			end)
+			
 			return
 		end
-		local loading = enumStreamNotificationsLoadingMoreStateModule.Loading
-		var15.current = loading
-		var17(loading)
-		getStreamNotificationsModule(var2, constantsModule.DefaultMaxRows, var18.current):andThen(function(p2)
-			-- upvalues: sortNotificationsModule (copy), getFStringPCGDKFilteredNotificationTypes (copy), thirdPartyUserService (copy), var7 (copy), cryoModule (copy), enumStreamNotificationsLoadingMoreStateModule (copy), var15 (copy), var17 (copy), notificationHelper (copy), eventStream (copy), analyticsConstantsModule (copy), constantsModule (copy), fFlagStreamNotificationsStandardizeClickEvents (copy), var11 (copy), enumStreamNotificationsDisplayStateModule (copy), clearUnreadNotificationsModule (copy), var2 (copy), var18 (copy), var6 (copy), var12 (copy)
-			p2 = sortNotificationsModule(p2)
-			local var24 = getFStringPCGDKFilteredNotificationTypes()
-			local t = {}
-			
-			for i, v in ipairs(p2) do
-				if not var24[v.content.notificationType] or (not thirdPartyUserService or (not thirdPartyUserService:IsChatRestrictionSupported() or thirdPartyUserService.FriendCommunicationRestrictionStatus == Enum.ChatRestrictionStatus.NotRestricted)) then
-					table.insert(t, v)
-				end
-			end
-			var73 = t
-			
-			if var73 and #var73 > 0 then
-				var7(function(p3)
-					-- upvalues: cryoModule (copy), var73 (write)
-					return cryoModule.List.join(p3, var73)
-				end)
-				local default = enumStreamNotificationsLoadingMoreStateModule.Default
-				var15.current = default
-				var17(default)
-				
-				for i, v in ipairs(var73) do
-					notificationHelper.fireEvent(eventStream, analyticsConstantsModule.Context.fetched, analyticsConstantsModule.EventNames.notificationRetrieved, cryoModule.Dictionary.join(v.content.clientEventsPayload or {}, {
-						sendrVersion = constantsModule.SENDRVersion,
-						notificationType = v.content.notificationType or nil,
-						notificationId = v.id or nil,
-						notificationState = if fFlagStreamNotificationsStandardizeClickEvents then v.content.currentState or nil else nil
-					}))
-				end
-			else
-				local noMoreNotifications = enumStreamNotificationsLoadingMoreStateModule.NoMoreNotifications
-				var15.current = noMoreNotifications
-				var17(noMoreNotifications)
-			end
-			var11(enumStreamNotificationsDisplayStateModule.Default)
-			clearUnreadNotificationsModule(var2)
-			var18.current = (tonumber(var18.current) or 0) + constantsModule.DefaultMaxRows
-			
-			if var6 and #var6 < constantsModule.DefaultMaxRows then
-				var12()
-			end
-		end):catch(function(_)
-			-- upvalues: var11 (copy), enumStreamNotificationsDisplayStateModule (copy)
-			var11(enumStreamNotificationsDisplayStateModule.ErrorRetrieving)
-		end)
 	end
 	
-	local var25 = function(p3, p4)
-		-- upvalues: dropdownEnabled (ref), p1 (ref), postReportNotificationModule (copy), var2 (copy), var13 (write), var11 (ref), enumStreamNotificationsDisplayStateModule (copy), var4 (ref), openDynamicAbuseReportModule (copy), abuseVectorModule (copy), closeCentralOverlay (copy)
-		if dropdownEnabled then
+	local function v68(CurrentState, p2) --[[ Line: 312 ]]
+		-- upvalues: DropdownEnabled (copy), p1 (copy), PostReportNotificationModule (upval), ConfigResult (upval), Callback1 (ref), UseStateResult2_2 (copy), EnumStreamNotificationsDisplayStateModule (upval), UseDispatchResult (copy), OpenDynamicAbuseReportModule (upval), AbuseVectorModule (upval), CloseCentralOverlayFunction (upval)
+		if DropdownEnabled then
 			p1.displayStream(false)
 		end
-		local _ = function()
-			-- upvalues: dropdownEnabled (copy), p1 (copy), var11 (copy), enumStreamNotificationsDisplayStateModule (copy)
-			if dropdownEnabled then
+		local function _() --[[ Line: 338 ]]
+			-- upvalues: DropdownEnabled (upval), p1 (upval), UseStateResult2_2 (upval), EnumStreamNotificationsDisplayStateModule (upval)
+			if DropdownEnabled then
 				p1.displayStream(true)
 			else
 				p1.setDisplayScreenGuiEnabled(true)
 			end
-			var11(enumStreamNotificationsDisplayStateModule.Default)
+			UseStateResult2_2(EnumStreamNotificationsDisplayStateModule.Default)
 		end
 		
-		var4(openDynamicAbuseReportModule({
-			abuseVector = abuseVectorModule.Notifications,
-			targetId = p4.id,
-			onSubmit = function()
-				-- upvalues: postReportNotificationModule (copy), var2 (copy), p4 (ref), var13 (copy), p3 (ref), dropdownEnabled (copy), p1 (copy), var11 (copy), enumStreamNotificationsDisplayStateModule (copy)
-				postReportNotificationModule(var2, p4.id):andThen(function(_) end):catch(function(_) end)
-				var13(p3, p4)
+		UseDispatchResult(OpenDynamicAbuseReportModule({
+			abuseVector = AbuseVectorModule.Notifications,
+			targetId = p2.id,
+			onSubmit = function() --[[ Line: 324 ]]
+				-- upvalues: PostReportNotificationModule (upval), ConfigResult (upval), p2 (copy), Callback1 (upval), CurrentState (copy), DropdownEnabled (upval), p1 (upval), UseStateResult2_2 (upval), EnumStreamNotificationsDisplayStateModule (upval)
+				PostReportNotificationModule(ConfigResult, p2.id):andThen(function(_) --[[ Line: 326 ]] end):catch(function(_) --[[ Line: 327 ]] end)
+				Callback1(CurrentState, p2)
 				
-				if not dropdownEnabled then
+				if not DropdownEnabled then
 					p1.setDisplayScreenGuiEnabled(true)
 				end
-				var11(enumStreamNotificationsDisplayStateModule.Default)
+				UseStateResult2_2(EnumStreamNotificationsDisplayStateModule.Default)
 			end,
-			onClose = function()
-				-- upvalues: var4 (copy), closeCentralOverlay (copy), dropdownEnabled (copy), p1 (copy), var11 (copy), enumStreamNotificationsDisplayStateModule (copy)
-				var4(closeCentralOverlay())
+			onClose = function() --[[ Line: 350 ]]
+				-- upvalues: UseDispatchResult (upval), CloseCentralOverlayFunction (upval), DropdownEnabled (upval), p1 (upval), UseStateResult2_2 (upval), EnumStreamNotificationsDisplayStateModule (upval)
+				UseDispatchResult(CloseCentralOverlayFunction())
 				
-				if dropdownEnabled then
+				if DropdownEnabled then
 					p1.displayStream(true)
 				else
 					p1.setDisplayScreenGuiEnabled(true)
 				end
-				var11(enumStreamNotificationsDisplayStateModule.Default)
+				UseStateResult2_2(EnumStreamNotificationsDisplayStateModule.Default)
 			end
 		}))
 	end
 	
-	local _ = function(p3)
-		-- upvalues: var14 (write), var6 (ref), cryoModule (copy), var7 (ref)
-		var14()
+	local _ = function(p2) --[[ Line: 358 ]]
+		-- upvalues: Callback2 (ref), UseStateResult (copy), CryoModule (upval), UseStateResult2 (copy)
+		Callback2()
 		
-		if var6 and p3 then
-			var7(cryoModule.List.map(var6, function(p4)
-				-- upvalues: p3 (ref)
-				if p4.id == p3 then
-					p4.dismiss = true
+		if UseStateResult and p2 then
+			UseStateResult2((CryoModule.List.map(UseStateResult, function(p3) --[[ Line: 361 ]]
+				-- upvalues: p2 (copy)
+				if p3.id == p2 then
+					p3.dismiss = true
 				end
-				return p4
-			end))
+				return p3
+			end)))
 		end
 	end
 	
-	local var26 = reactModule.useCallback(function(p3)
-		-- upvalues: var6 (ref), cryoModule (copy), var7 (ref)
-		if var6 and p3 then
-			var7(cryoModule.List.filter(var6, function(p4)
-				-- upvalues: p3 (ref)
-				return p4.id ~= p3 and p4.dismiss ~= true
-			end))
+	local UseResult = ReactModule.useCallback(function(Id) --[[ Line: 372 ]]
+		-- upvalues: UseStateResult (copy), CryoModule (upval), UseStateResult2 (copy)
+		if UseStateResult and Id then
+			UseStateResult2((CryoModule.List.filter(UseStateResult, function(p2): boolean --[[ Line: 374 ]]
+				-- upvalues: Id (copy)
+				return p2.id ~= Id and p2.dismiss ~= true
+			end)))
 		end
 	end)
-	local var27 = reactModule.useCallback(function(p3)
-		-- upvalues: fFlagStreamNotificationImpressionLogging (copy), var22 (ref), notificationHelper (copy), eventStream (copy), analyticsConstantsModule (copy), cryoModule (copy), constantsModule (copy), fFlagStreamNotificationsStandardizeClickEvents (copy)
-		if not fFlagStreamNotificationImpressionLogging then return end
-		for i, v in ipairs(p3) do
-			local var28 = var22.byIndex[v]
-			local var29 = if var28 then var28.notification else nil
+	local UseResult1 = ReactModule.useCallback(function(List) --[[ Line: 383 ]]
+		-- upvalues: FFlagStreamNotificationImpressionLogging (upval), UseMemoResult (copy), NotificationHelper (upval), EventStream (upval), AnalyticsConstantsModule (upval), CryoModule (upval), ConstantsModule (upval), FFlagStreamNotificationsStandardizeClickEvents (upval)
+		if not FFlagStreamNotificationImpressionLogging then return end
+		for _, value in ipairs(List) do
+			local ByIndexEntry = UseMemoResult.byIndex[value]
+			local Notification = if ByIndexEntry then ByIndexEntry.notification else nil
 			
-			if var29 then
-				notificationHelper.fireEvent(eventStream, analyticsConstantsModule.Context.impression, analyticsConstantsModule.EventNames.notificationImpression, cryoModule.Dictionary.join(var29.content.clientEventsPayload or {}, {
-					sendrVersion = constantsModule.SENDRVersion,
-					notificationType = var29.content.notificationType or nil,
-					notificationId = var29.id or nil,
-					notificationState = if fFlagStreamNotificationsStandardizeClickEvents then var29.content.currentState or nil else nil,
-					bundlePosition = var28.bundlePosition or nil,
-					bundleKey = var29.content.bundleKey or nil
+			if Notification then
+				NotificationHelper.fireEvent(EventStream, AnalyticsConstantsModule.Context.impression, AnalyticsConstantsModule.EventNames.notificationImpression, CryoModule.Dictionary.join(Notification.content.clientEventsPayload or {}, {
+					sendrVersion = ConstantsModule.SENDRVersion,
+					notificationType = Notification.content.notificationType or nil,
+					notificationId = Notification.id or nil,
+					notificationState = FFlagStreamNotificationsStandardizeClickEvents and Notification.content.currentState or nil,
+					bundlePosition = ByIndexEntry.bundlePosition or nil,
+					bundleKey = Notification.content.bundleKey or nil
 				}))
 			end
 		end
-	end, { var22 })
-	local var30 = reactModule.useCallback(function(p4, p5)
-		-- upvalues: var8 (ref), var9 (ref), notificationHelper (copy), eventStream (copy), analyticsConstantsModule (copy), cryoModule (copy), fFlagStreamNotificationsStandardizeClickEvents (copy), luaAppNewStreamNotificationsLogFix (copy), constantsModule (copy), type (copy), joinExperience (copy), p1 (ref), sessionService (copy), reportEventModule (copy), var1 (copy), postNotificationsApiModule (copy), var2 (copy), var13 (write), var14 (write), var11 (ref), enumStreamNotificationsDisplayStateModule (copy), var25 (ref), var6 (ref), var7 (ref), var5 (ref)
-		p5 = p5 or var8
-		var9(p5)
-		notificationHelper.fireEvent(eventStream, analyticsConstantsModule.Context.click, p4.eventName or "", cryoModule.Dictionary.join(p4.clientEventsPayload or {}, {
-			notifType = if fFlagStreamNotificationsStandardizeClickEvents then nil elseif luaAppNewStreamNotificationsLogFix then p5 and (p5.content and p5.content.notificationType) else nil,
-			notifId = if fFlagStreamNotificationsStandardizeClickEvents then nil elseif luaAppNewStreamNotificationsLogFix then p5 and p5.id else nil,
-			notificationType = if fFlagStreamNotificationsStandardizeClickEvents then p5 and (p5.content and p5.content.notificationType) else nil,
-			notificationId = if fFlagStreamNotificationsStandardizeClickEvents then p5 and p5.id else nil,
-			notificationState = if fFlagStreamNotificationsStandardizeClickEvents then p5 and (p5.content and p5.content.currentState) else nil,
-			visualItemType = p4.visualItemType or nil,
-			visualItemName = p4.visualItemName or nil,
-			sendrVersion = constantsModule.SENDRVersion
+	end, { UseMemoResult })
+	local UseResult2 = ReactModule.useCallback(function(p2, p3) --[[ Line: 413 ]]
+		-- upvalues: UseStateResult1 (copy), UseStateResult2_1 (copy), NotificationHelper (upval), EventStream (upval), AnalyticsConstantsModule (upval), CryoModule (upval), FFlagStreamNotificationsStandardizeClickEvents (upval), LuaAppNewStreamNotificationsLogFix (upval), ConstantsModule (upval), Type (upval), JoinExperienceFunction (upval), p1 (copy), SessionService (upval), ReportEventModule (upval), NewResult (upval), PostNotificationsApiModule (upval), ConfigResult (upval), Callback1 (ref), Callback2 (ref), UseStateResult2_2 (copy), EnumStreamNotificationsDisplayStateModule (upval), v68 (copy), UseStateResult (copy), UseStateResult2 (copy), UseClientTriggerEventHandlerModuleResult (copy)
+		local P18 = p3 or UseStateResult1
+		UseStateResult2_1(P18)
+		NotificationHelper.fireEvent(EventStream, AnalyticsConstantsModule.Context.click, p2.eventName or "", CryoModule.Dictionary.join(p2.clientEventsPayload or {}, {
+			notifType = if FFlagStreamNotificationsStandardizeClickEvents then nil elseif LuaAppNewStreamNotificationsLogFix then P18 and (P18.content and P18.content.notificationType) else nil,
+			notifId = if FFlagStreamNotificationsStandardizeClickEvents then nil elseif LuaAppNewStreamNotificationsLogFix then P18 and P18.id else nil,
+			notificationType = if FFlagStreamNotificationsStandardizeClickEvents then P18 and (P18.content and P18.content.notificationType) else nil,
+			notificationId = if FFlagStreamNotificationsStandardizeClickEvents then P18 and P18.id else nil,
+			notificationState = if FFlagStreamNotificationsStandardizeClickEvents then P18 and (P18.content and P18.content.currentState) else nil,
+			visualItemType = p2.visualItemType or nil,
+			visualItemName = p2.visualItemName or nil,
+			sendrVersion = ConstantsModule.SENDRVersion
 		}))
 		
-		if p4.actions and #p4.actions > 0 and p5 then
-			for i, v in ipairs(p4.actions) do
-				if v.actionType then
-					if v.actionType == type.ActionTypeEnum.Deeplink then
-						if joinExperience(v.path, false) then
+		if p2.actions and #p2.actions > 0 and P18 then
+			for _, action in ipairs(p2.actions) do
+				if action.actionType then
+					if action.actionType == Type.ActionTypeEnum.Deeplink then
+						if JoinExperienceFunction(action.path, false) then
 							p1.displayStream(false)
-							sessionService:SetSession(constantsModule.StreamSessionStructuralIdentifier.Level1, constantsModule.StreamSessionStructuralIdentifier.StreamNotification, constantsModule.StreamSessionStructuralIdentifier.StreamNotification)
-							sessionService:SetMetadata(constantsModule.StreamSessionStructuralIdentifier.StreamNotification, constantsModule.StreamSessionStructuralIdentifier.DeleteOnGameLeave, "True")
-							reportEventModule(var1, {
-								action_type = v.actionType,
-								delivery_channel = constantsModule.DeliveryChannel,
-								notification_type = p5.notificationSourceType,
-								notification_id = p5.id
+							SessionService:SetSession(ConstantsModule.StreamSessionStructuralIdentifier.Level1, ConstantsModule.StreamSessionStructuralIdentifier.StreamNotification, ConstantsModule.StreamSessionStructuralIdentifier.StreamNotification)
+							SessionService:SetMetadata(ConstantsModule.StreamSessionStructuralIdentifier.StreamNotification, ConstantsModule.StreamSessionStructuralIdentifier.DeleteOnGameLeave, "True")
+							ReportEventModule(NewResult, {
+								action_type = action.actionType,
+								delivery_channel = ConstantsModule.DeliveryChannel,
+								notification_type = P18.notificationSourceType,
+								notification_id = P18.id
 							})
 						end
-					elseif v.actionType == type.ActionTypeEnum.NotificationApi then
-						postNotificationsApiModule(var2, if p5 then p5.id else nil, v.path or nil):andThen(function(_)
-							-- upvalues: v (ref), var13 (copy), p5 (ref)
-							if v.nextState ~= nil and v.nextState ~= "" then
-								var13(v.nextState, p5)
+					elseif action.actionType == Type.ActionTypeEnum.NotificationApi then
+						PostNotificationsApiModule(ConfigResult, P18 and P18.id or nil, action.path or nil):andThen(function(_) --[[ Line: 486 ]]
+							-- upvalues: action (copy), Callback1 (upval), P18 (copy)
+							if action.nextState ~= nil and action.nextState ~= "" then
+								Callback1(action.nextState, P18)
 							end
-						end):catch(function(_) end)
-						var14()
-					elseif v.actionType == type.ActionTypeEnum.Report then
-						var11(enumStreamNotificationsDisplayStateModule.AbuseReport)
-						var25(v.nextState, p5)
-					elseif v.actionType == type.ActionTypeEnum.Dismiss then
-						local id = p5.id
-						var14()
+						end):catch(function(_) --[[ Line: 491 ]] end)
+						Callback2()
+					elseif action.actionType == Type.ActionTypeEnum.Report then
+						UseStateResult2_2(EnumStreamNotificationsDisplayStateModule.AbuseReport)
+						v68(action.nextState, P18)
+					elseif action.actionType == Type.ActionTypeEnum.Dismiss then
+						local Id = P18.id
+						Callback2()
 						
-						if var6 and id then
-							var7(cryoModule.List.map(var6, function(p6)
-								-- upvalues: id (ref)
-								if p6.id == id then
-									p6.dismiss = true
+						if UseStateResult and Id then
+							UseStateResult2((CryoModule.List.map(UseStateResult, function(p4) --[[ Line: 361 ]]
+								-- upvalues: Id (copy)
+								if p4.id == Id then
+									p4.dismiss = true
 								end
-								return p6
-							end))
+								return p4
+							end)))
 						end
-					elseif v.actionType == type.ActionTypeEnum.ClientTrigger then
-						if v.path == "TrustedContactsDoubleOptInModal" then
+					elseif action.actionType == Type.ActionTypeEnum.ClientTrigger then
+						if action.path == "TrustedContactsDoubleOptInModal" then
 							p1.displayStream(false)
 						end
-						var5(v.path, {
-							clientEventsPayload = p5.content.clientEventsPayload,
-							callback = function()
-								-- upvalues: var13 (copy), v (ref), p5 (ref)
-								var13(v.nextState, p5)
+						UseClientTriggerEventHandlerModuleResult(action.path, {
+							clientEventsPayload = P18.content.clientEventsPayload,
+							callback = function() --[[ Line: 512 ]]
+								-- upvalues: Callback1 (upval), action (copy), P18 (copy)
+								Callback1(action.nextState, P18)
 							end
 						})
 					end
@@ -360,251 +379,257 @@ return function(p1)
 		end
 	end)
 	
-	local var31 = function(p6)
-		-- upvalues: var9 (ref), var11 (ref), enumStreamNotificationsDisplayStateModule (copy), notificationHelper (copy), eventStream (copy), analyticsConstantsModule (copy), notificationsCommonModule (copy), constantsModule (copy), fFlagStreamNotificationsStandardizeClickEvents (copy)
-		var9(p6)
-		var11(enumStreamNotificationsDisplayStateModule.MetaActions)
-		notificationHelper.fireEvent(eventStream, analyticsConstantsModule.Context.click, analyticsConstantsModule.EventNames.openMetaActions, {
-			visualItemType = notificationsCommonModule.type.VisualItemTypeEnum.MetaAction,
-			sendrVersion = constantsModule.SENDRVersion,
-			notificationState = if fFlagStreamNotificationsStandardizeClickEvents then p6 and (p6.content and (p6.content.currentState or nil)) else nil
+	local function OpenMetaActions(p4) --[[ Line: 523 ]]
+		-- upvalues: UseStateResult2_1 (copy), UseStateResult2_2 (copy), EnumStreamNotificationsDisplayStateModule (upval), NotificationHelper (upval), EventStream (upval), AnalyticsConstantsModule (upval), NotificationsCommonModule (upval), ConstantsModule (upval), FFlagStreamNotificationsStandardizeClickEvents (upval)
+		UseStateResult2_1(p4)
+		UseStateResult2_2(EnumStreamNotificationsDisplayStateModule.MetaActions)
+		NotificationHelper.fireEvent(EventStream, AnalyticsConstantsModule.Context.click, AnalyticsConstantsModule.EventNames.openMetaActions, {
+			visualItemType = NotificationsCommonModule.type.VisualItemTypeEnum.MetaAction,
+			sendrVersion = ConstantsModule.SENDRVersion,
+			notificationState = FFlagStreamNotificationsStandardizeClickEvents and (p4 and p4.content and p4.content.currentState) or nil
 		})
 	end
 	
-	var14 = function()
-		-- upvalues: showOverlay (ref), var9 (ref), var10 (ref), enumStreamNotificationsDisplayStateModule (copy), notificationHelper (copy), eventStream (copy), analyticsConstantsModule (copy), notificationsCommonModule (copy), constantsModule (copy), var11 (ref)
-		showOverlay(true)
-		var9(nil)
+	Callback2 = function() --[[ Line: 545 ]]
+		-- upvalues: ShowOverlay (copy), UseStateResult2_1 (copy), UseStateResult3 (copy), EnumStreamNotificationsDisplayStateModule (upval), NotificationHelper (upval), EventStream (upval), AnalyticsConstantsModule (upval), NotificationsCommonModule (upval), ConstantsModule (upval), UseStateResult2_2 (copy)
+		ShowOverlay(true)
+		UseStateResult2_1(nil)
 		
-		if var10 == enumStreamNotificationsDisplayStateModule.MetaActions then
-			notificationHelper.fireEvent(eventStream, analyticsConstantsModule.Context.click, analyticsConstantsModule.EventNames.closeMetaActions, {
-				visualItemType = notificationsCommonModule.type.VisualItemTypeEnum.MetaAction,
-				sendrVersion = constantsModule.SENDRVersion
+		if UseStateResult3 == EnumStreamNotificationsDisplayStateModule.MetaActions then
+			NotificationHelper.fireEvent(EventStream, AnalyticsConstantsModule.Context.click, AnalyticsConstantsModule.EventNames.closeMetaActions, {
+				visualItemType = NotificationsCommonModule.type.VisualItemTypeEnum.MetaAction,
+				sendrVersion = ConstantsModule.SENDRVersion
 			})
 		end
-		var11(enumStreamNotificationsDisplayStateModule.Default)
+		UseStateResult2_2(EnumStreamNotificationsDisplayStateModule.Default)
 	end
 	
-	var13 = function(p6, p7)
-		-- upvalues: var6 (ref), var7 (ref)
-		local t = {}
+	Callback1 = function(CurrentState, p4) --[[ Line: 562 ]]
+		-- upvalues: UseStateResult (copy), UseStateResult2 (copy)
+		local List = {}
 		
-		if var6 and p7 then
-			for i, v in ipairs(var6) do
-				if v.id == p7.id then
-					v.content.currentState = p6
+		if UseStateResult and p4 then
+			for _, value in ipairs(UseStateResult) do
+				if value.id == p4.id then
+					value.content.currentState = CurrentState
 				end
-				table.insert(t, v)
+				table.insert(List, value)
 			end
 		end
-		var7(t)
+		UseStateResult2(List)
 	end
 	
-	local var32 = reactModule.useMemo(function()
-		-- upvalues: reactModule (copy), metaActionsMenuModule (copy), var10 (ref), var8 (ref), p1 (ref), var30 (ref), var14 (write)
-		return reactModule.createElement(metaActionsMenuModule, {
-			displayState = var10,
-			activeNotification = var8,
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 578 ]]
+		-- upvalues: ReactModule (upval), MetaActionsMenuModule (upval), UseStateResult3 (copy), UseStateResult1 (copy), p1 (copy), UseResult2 (copy), Callback2 (ref)
+		return ReactModule.createElement(MetaActionsMenuModule, {
+			displayState = UseStateResult3,
+			activeNotification = UseStateResult1,
 			isSmallScreen = p1.isSmallScreen,
-			handleActions = var30,
-			closeNotificationDisplay = var14
+			handleActions = UseResult2,
+			closeNotificationDisplay = Callback2
 		})
-	end, { var10, var8 })
-	local var33 = reactModule.useMemo(function()
-		-- upvalues: var10 (ref), enumStreamNotificationsDisplayStateModule (copy), reactModule (copy), loading (copy), iconSize (copy), var6 (ref), dropdownEnabled (ref), constantsModule (copy), streamNotificationBundleWrapperModule (copy), var26 (ref), var30 (ref), var31 (ref), fFlagStreamNotificationImpressionLogging (copy), var22 (ref), streamNotificationAnimationWrapperModule (copy), var15 (ref), enumStreamNotificationsLoadingMoreStateModule (copy), var21 (ref), emptyNotificationsModule (copy)
-		if var10 == enumStreamNotificationsDisplayStateModule.Initializing then
-			return reactModule.createElement(loading, {
-				size = iconSize.Large,
+	end, { UseStateResult3, UseStateResult1 })
+	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 588 ]]
+		-- upvalues: UseStateResult3 (copy), EnumStreamNotificationsDisplayStateModule (upval), ReactModule (upval), Loading (upval), IconSize (upval), UseStateResult (copy), DropdownEnabled (copy), ConstantsModule (upval), StreamNotificationBundleWrapperModule (upval), UseResult (copy), UseResult2 (copy), OpenMetaActions (copy), FFlagStreamNotificationImpressionLogging (upval), UseMemoResult (copy), StreamNotificationAnimationWrapperModule (upval), UseRefResult (copy), EnumStreamNotificationsLoadingMoreStateModule (upval), NewHeaderHeight (copy), EmptyNotificationsModule (upval)
+		if UseStateResult3 == EnumStreamNotificationsDisplayStateModule.Initializing then
+			return ReactModule.createElement(Loading, {
+				size = IconSize.Large,
 				Position = UDim2.fromScale(0.5, 0.5),
 				AnchorPoint = Vector2.new(0.5, 0.5)
 			})
-		elseif var6 and #var6 > 0 then
-			local t = {
-				UIListLayout = reactModule.createElement("UIListLayout", {
+		end
+		if UseStateResult and #UseStateResult > 0 then
+			local Elements = {
+				UIListLayout = ReactModule.createElement("UIListLayout", {
 					FillDirection = Enum.FillDirection.Vertical,
 					SortOrder = Enum.SortOrder.LayoutOrder,
 					HorizontalAlignment = Enum.HorizontalAlignment.Center,
-					Padding = if dropdownEnabled then UDim.new(0, constantsModule.Dropdown.CardGap) else nil
+					Padding = if DropdownEnabled then UDim.new(0, ConstantsModule.Dropdown.CardGap) else nil
 				})
 			}
 			
-			if dropdownEnabled then
-				t.UIPadding = reactModule.createElement("UIPadding", {
-					PaddingRight = UDim.new(0, constantsModule.Dropdown.ScrollBarThickness)
+			if DropdownEnabled then
+				Elements.UIPadding = ReactModule.createElement("UIPadding", {
+					PaddingRight = UDim.new(0, ConstantsModule.Dropdown.ScrollBarThickness)
 				})
 			end
-			local var34 = false
-			local t_1 = {}
+			local Flag = false
+			local t = {}
 			
-			for i, v in ipairs(var6) do
-				if v.notificationSourceType == "Sendr" then
-					var34 = true
-					local bundleKey = v.content.bundleKey
+			for _, value in ipairs(UseStateResult) do
+				if value.notificationSourceType == "Sendr" then
+					Flag = true
+					local BundleKey = value.content.bundleKey
 					
-					if bundleKey and bundleKey ~= "" then
-						if t_1[bundleKey] then
-							table.insert(t_1[bundleKey], v)
+					if BundleKey and BundleKey ~= "" then
+						if t[BundleKey] then
+							table.insert(t[BundleKey], value)
 						else
-							t_1[bundleKey] = { v }
+							t[BundleKey] = { value }
 						end
 					end
 				end
 			end
-			for i_1, v_1 in ipairs(var6) do
-				if v_1.notificationSourceType == "Sendr" then
-					local bundleKey = v_1.content.bundleKey
+			for LayoutOrder, Notification in ipairs(UseStateResult) do
+				if Notification.notificationSourceType == "Sendr" then
+					local BundleKey = Notification.content.bundleKey
 					
-					if not bundleKey or bundleKey == "" or #t_1[bundleKey] <= 1 then
-						local var35 = if fFlagStreamNotificationImpressionLogging then var22.byNotificationId[v_1.id] else nil
-						t[v_1.id] = reactModule.createElement(streamNotificationAnimationWrapperModule, {
+					if not BundleKey or BundleKey == "" or #t[BundleKey] <= 1 then
+						local ByNotificationIdEntry = if FFlagStreamNotificationImpressionLogging then UseMemoResult.byNotificationId[Notification.id] else nil
+						Elements[Notification.id] = ReactModule.createElement(StreamNotificationAnimationWrapperModule, {
 							collapsed = false,
-							layoutOrder = i_1,
-							notification = v_1,
-							finishDismissNotification = var26,
-							handleActions = var30,
-							openMetaActions = var31,
-							impressionsTag = if fFlagStreamNotificationImpressionLogging then "StreamNotificationImpression" else nil,
-							impressionIndex = if fFlagStreamNotificationImpressionLogging then if var35 then var35.impressionIndex else nil else nil
+							layoutOrder = LayoutOrder,
+							notification = Notification,
+							finishDismissNotification = UseResult,
+							handleActions = UseResult2,
+							openMetaActions = OpenMetaActions,
+							impressionsTag = if FFlagStreamNotificationImpressionLogging then "StreamNotificationImpression" else nil,
+							impressionIndex = FFlagStreamNotificationImpressionLogging and (ByNotificationIdEntry and ByNotificationIdEntry.impressionIndex) or nil
 						}, {})
-					elseif not t[bundleKey] then
-						t[bundleKey] = reactModule.createElement(streamNotificationBundleWrapperModule, {
-							layoutOrder = i_1,
-							notifications = t_1[bundleKey],
-							finishDismissNotification = var26,
-							handleActions = var30,
-							openMetaActions = var31,
-							impressionsTag = if fFlagStreamNotificationImpressionLogging then "StreamNotificationImpression" else nil,
-							impressionMetadataByNotificationId = if fFlagStreamNotificationImpressionLogging then var22.byNotificationId else nil
+					elseif not Elements[BundleKey] then
+						Elements[BundleKey] = ReactModule.createElement(StreamNotificationBundleWrapperModule, {
+							layoutOrder = LayoutOrder,
+							notifications = t[BundleKey],
+							finishDismissNotification = UseResult,
+							handleActions = UseResult2,
+							openMetaActions = OpenMetaActions,
+							impressionsTag = if FFlagStreamNotificationImpressionLogging then "StreamNotificationImpression" else nil,
+							impressionMetadataByNotificationId = if FFlagStreamNotificationImpressionLogging then UseMemoResult.byNotificationId else nil
 						}, {})
 					end
 				end
 			end
-			if var15.current == enumStreamNotificationsLoadingMoreStateModule.Loading then
-				t.LoadingMore = reactModule.createElement("Frame", {
+			if UseRefResult.current == EnumStreamNotificationsLoadingMoreStateModule.Loading then
+				Elements.LoadingMore = ReactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 1e999,
-					Size = UDim2.new(1, 0, 0, constantsModule.LoadingMoreNotifications.Size)
+					Size = UDim2.new(1, 0, 0, ConstantsModule.LoadingMoreNotifications.Size)
 				}, {
-					LoadingMoreSpinner = reactModule.createElement(loading, {
-						size = iconSize.Small,
+					LoadingMoreSpinner = ReactModule.createElement(Loading, {
+						size = IconSize.Small,
 						Position = UDim2.fromScale(0.5, 0.5),
 						AnchorPoint = Vector2.new(0.5, 0.5)
 					})
 				})
 			end
-			return if var34 then reactModule.createElement("Frame", {
-				BackgroundTransparency = 1,
-				Size = if dropdownEnabled then UDim2.new(1, 0, 0, 0) else UDim2.new(1, 0, 0, -var21),
-				AutomaticSize = Enum.AutomaticSize.Y
-			}, t) else reactModule.createElement(emptyNotificationsModule)
+			if Flag then
+				return ReactModule.createElement("Frame", {
+					BackgroundTransparency = 1,
+					Size = if DropdownEnabled then UDim2.new(1, 0, 0, 0) else UDim2.new(1, 0, 0, -NewHeaderHeight),
+					AutomaticSize = Enum.AutomaticSize.Y
+				}, Elements)
+			end
 		end
+		return ReactModule.createElement(EmptyNotificationsModule)
 	end, {
-		var6,
-		var10,
-		var16,
-		dropdownEnabled,
-		var22
+		UseStateResult,
+		UseStateResult3,
+		UseStateResult4,
+		DropdownEnabled,
+		UseMemoResult
 	})
 	
-	local var36 = function(p8)
-		-- upvalues: var10 (ref), enumStreamNotificationsDisplayStateModule (copy), fFlagStreamNotificationImpressionLogging (copy), var20 (ref), constantsModule (copy), var15 (ref), enumStreamNotificationsLoadingMoreStateModule (copy), var12 (write)
-		local y = p8.AbsoluteCanvasSize.Y
-		local y_1 = p8.AbsoluteWindowSize.Y
-		local y_2 = p8.CanvasPosition.Y
+	local function v76(ScrollFrame) --[[ Line: 729 ]]
+		-- upvalues: UseStateResult3 (copy), EnumStreamNotificationsDisplayStateModule (upval), FFlagStreamNotificationImpressionLogging (upval), UseRefResult5 (copy), ConstantsModule (upval), UseRefResult (copy), EnumStreamNotificationsLoadingMoreStateModule (upval), Callback (ref)
+		local Y = ScrollFrame.AbsoluteCanvasSize.Y
+		local Y1 = ScrollFrame.AbsoluteWindowSize.Y
+		local Y2 = ScrollFrame.CanvasPosition.Y
 		
-		if y_1 == 0 or y == 0 or var10 ~= enumStreamNotificationsDisplayStateModule.Default then return end
-		if fFlagStreamNotificationImpressionLogging and var20.current then
-			var20.current:fire()
+		if Y1 == 0 or Y == 0 or UseStateResult3 ~= EnumStreamNotificationsDisplayStateModule.Default then return end
+		if FFlagStreamNotificationImpressionLogging and UseRefResult5.current then
+			UseRefResult5.current:fire()
 		end
-		if y - y_1 - constantsModule.LoadingMoreNotifications.TriggerDistance <= y_2 and var15.current == enumStreamNotificationsLoadingMoreStateModule.Default then
-			var12()
+		if Y - Y1 - ConstantsModule.LoadingMoreNotifications.TriggerDistance <= Y2 and UseRefResult.current == EnumStreamNotificationsLoadingMoreStateModule.Default then
+			Callback()
 		end
 	end
 	
-	local var37 = if p1.isSmallScreen then math.max(if userInputService.BottomBarSize then userInputService.BottomBarSize.Y else 0, if guiService:GetSafeZoneOffsets() then guiService:GetSafeZoneOffsets().bottom else 0) else 0
+	local Y = if UserInputService.BottomBarSize then UserInputService.BottomBarSize.Y else 0
+	local Bottom = if GuiService:GetSafeZoneOffsets() then GuiService:GetSafeZoneOffsets().bottom else 0
+	local Largest: number = if p1.isSmallScreen then math.max(Y, Bottom) else 0
 	
-	return if dropdownEnabled then reactModule.createElement("Frame", {
+	return if DropdownEnabled then ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		LayoutOrder = 2,
 		ClipsDescendants = true,
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y
 	}, {
-		MetaActionsOpen = reactModule.createElement("TextButton", {
+		MetaActionsOpen = ReactModule.createElement("TextButton", {
 			Size = UDim2.new(1, 0, 1, 0),
 			Position = UDim2.new(0.5, 0, 0.5, 0),
 			AnchorPoint = Vector2.new(0.5, 0.5),
-			Visible = var10 == enumStreamNotificationsDisplayStateModule.MetaActions,
-			BackgroundTransparency = var3.Theme.Overlay.Transparency,
-			BackgroundColor3 = var3.Theme.Overlay.Color,
+			Visible = UseStateResult3 == EnumStreamNotificationsDisplayStateModule.MetaActions,
+			BackgroundTransparency = UseStyleResult.Theme.Overlay.Transparency,
+			BackgroundColor3 = UseStyleResult.Theme.Overlay.Color,
 			Text = "",
 			AutoButtonColor = false,
 			ZIndex = 2,
-			[reactModule.Event.Activated] = var14,
+			[ReactModule.Event.Activated] = Callback2,
 			BorderSizePixel = 0,
 			Selectable = false
-		}, { var32 }),
-		NotificationsList = reactModule.createElement("ScrollingFrame", {
-			Size = UDim2.new(1, 0, 0, (p1.dropdownHeight or constantsModule.Dropdown.MaxHeight) - constantsModule.Dropdown.HeaderMinHeight - constantsModule.Dropdown.HeaderBodyGap),
+		}, { UseMemoResult1 }),
+		NotificationsList = ReactModule.createElement("ScrollingFrame", {
+			Size = UDim2.new(1, 0, 0, (p1.dropdownHeight or ConstantsModule.Dropdown.MaxHeight) - ConstantsModule.Dropdown.HeaderMinHeight - ConstantsModule.Dropdown.HeaderBodyGap),
 			CanvasSize = UDim2.new(1, 0, 0, 0),
 			BackgroundTransparency = 1,
-			ScrollBarThickness = constantsModule.Dropdown.ScrollBarThickness,
+			ScrollBarThickness = ConstantsModule.Dropdown.ScrollBarThickness,
 			BorderSizePixel = 0,
 			VerticalScrollBarInset = Enum.ScrollBarInset.None,
 			VerticalScrollBarPosition = Enum.VerticalScrollBarPosition.Right,
-			ScrollBarImageColor3 = var3.Theme.UIEmphasis.Color,
+			ScrollBarImageColor3 = UseStyleResult.Theme.UIEmphasis.Color,
 			AutomaticCanvasSize = Enum.AutomaticSize.Y,
 			ElasticBehavior = Enum.ElasticBehavior.Always,
-			ScrollingEnabled = var10 == enumStreamNotificationsDisplayStateModule.Default,
+			ScrollingEnabled = UseStateResult3 == EnumStreamNotificationsDisplayStateModule.Default,
 			ScrollingDirection = Enum.ScrollingDirection.Y,
-			[reactModule.Change.CanvasPosition] = var36,
+			[ReactModule.Change.CanvasPosition] = v76,
 			Selectable = false
-		}, var33)
-	}) else reactModule.createElement("Frame", {
+		}, UseMemoResult2)
+	}) else ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.new(1, 0, 1, 0),
 		Position = UDim2.new(0.5, 0, 0, 0),
 		AnchorPoint = Vector2.new(0.5, 0)
 	}, {
-		MetaActionsOpen = reactModule.createElement("TextButton", {
+		MetaActionsOpen = ReactModule.createElement("TextButton", {
 			Size = UDim2.new(1, 0, 1, 0),
 			Position = UDim2.new(0.5, 0, 0.5, 0),
 			AnchorPoint = Vector2.new(0.5, 0.5),
-			Visible = var10 == enumStreamNotificationsDisplayStateModule.MetaActions,
-			BackgroundTransparency = var3.Theme.Overlay.Transparency,
-			BackgroundColor3 = var3.Theme.Overlay.Color,
+			Visible = UseStateResult3 == EnumStreamNotificationsDisplayStateModule.MetaActions,
+			BackgroundTransparency = UseStyleResult.Theme.Overlay.Transparency,
+			BackgroundColor3 = UseStyleResult.Theme.Overlay.Color,
 			Text = "",
 			AutoButtonColor = false,
 			ZIndex = 2,
-			[reactModule.Event.Activated] = var14,
+			[ReactModule.Event.Activated] = Callback2,
 			BorderSizePixel = 0,
 			Selectable = false
-		}, { var32 }),
-		NotificationsList = reactModule.createElement("ScrollingFrame", {
-			ref = if fFlagStreamNotificationImpressionLogging then var19 else nil,
-			Size = UDim2.new(1, 0, 1, -(var21 + constantsModule.DefaultPadding + var37)),
-			CanvasSize = UDim2.new(1, 0, 1, -(var21 + constantsModule.DefaultPadding + var37)),
+		}, { UseMemoResult1 }),
+		NotificationsList = ReactModule.createElement("ScrollingFrame", {
+			ref = if FFlagStreamNotificationImpressionLogging then UseRefResult4 else nil,
+			Size = UDim2.new(1, 0, 1, -(NewHeaderHeight + ConstantsModule.DefaultPadding + Largest)),
+			CanvasSize = UDim2.new(1, 0, 1, -(NewHeaderHeight + ConstantsModule.DefaultPadding + Largest)),
 			BackgroundTransparency = 1,
-			Position = UDim2.new(0, 0, 0, var21),
+			Position = UDim2.new(0, 0, 0, NewHeaderHeight),
 			AnchorPoint = Vector2.new(0, 0),
 			ScrollBarThickness = 4,
 			BorderSizePixel = 0,
 			VerticalScrollBarInset = Enum.ScrollBarInset.ScrollBar,
 			VerticalScrollBarPosition = Enum.VerticalScrollBarPosition.Right,
-			ScrollBarImageColor3 = var3.Theme.UIEmphasis.Color,
+			ScrollBarImageColor3 = UseStyleResult.Theme.UIEmphasis.Color,
 			AutomaticCanvasSize = Enum.AutomaticSize.XY,
 			ElasticBehavior = Enum.ElasticBehavior.Always,
-			ScrollingEnabled = var10 == enumStreamNotificationsDisplayStateModule.Default,
+			ScrollingEnabled = UseStateResult3 == EnumStreamNotificationsDisplayStateModule.Default,
 			ScrollingDirection = Enum.ScrollingDirection.Y,
-			[reactModule.Change.CanvasPosition] = var36,
+			[ReactModule.Change.CanvasPosition] = v76,
 			Selectable = false
-		}, var33),
-		ImpressionTracker = if fFlagStreamNotificationImpressionLogging then reactModule.createElement(frameBoundsImpressionsTracker, {
+		}, UseMemoResult2),
+		ImpressionTracker = if FFlagStreamNotificationImpressionLogging then ReactModule.createElement(FrameBoundsImpressionsTracker, {
 			pageContext = nil,
 			impressionsTag = "StreamNotificationImpression",
-			parentRef = var19,
-			scrollViewPositionChangedSignal = var20.current,
-			sendImpressions = var27
+			parentRef = UseRefResult4,
+			scrollViewPositionChangedSignal = UseRefResult5.current,
+			sendImpressions = UseResult1
 		}) else nil
 	})
 end

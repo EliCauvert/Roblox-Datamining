@@ -1,4 +1,4 @@
-﻿local parseUserAvatarConfigurationsV4Module = require(script.Shared.parseUserAvatarConfigurationsV4)
+﻿local ParseUserAvatarConfigurationsV4Module = require(script.Shared.parseUserAvatarConfigurationsV4)
 
 return {
 	["jest.config"] = script["jest.config"],
@@ -16,8 +16,8 @@ return {
 	useUserAvatarConfigurations = require(script.Hooks.useUserAvatarConfigurations),
 	parseCloseupCameraConfig = require(script.Shared.parseCloseupCameraConfig),
 	parseProfileFrameAssetId = require(script.Shared.parseProfileFrameAssetId),
-	parseUserAvatarConfigurationsV4 = parseUserAvatarConfigurationsV4Module.parseUserAvatarConfigurationsV4,
-	parseProfileFrameAssetIdFromV4 = parseUserAvatarConfigurationsV4Module.parseProfileFrameAssetIdFromV4,
+	parseUserAvatarConfigurationsV4 = ParseUserAvatarConfigurationsV4Module.parseUserAvatarConfigurationsV4,
+	parseProfileFrameAssetIdFromV4 = ParseUserAvatarConfigurationsV4Module.parseProfileFrameAssetIdFromV4,
 	savePPEConfig = require(script.Shared.savePPEConfig),
 	getEmoteRecommendations = require(script.Shared.getEmoteRecommendations),
 	applyCloseupPreviewPose = require(script.Shared.applyCloseupPreviewPose),

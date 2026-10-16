@@ -1,90 +1,92 @@
-﻿local userInputService = game:GetService("UserInputService")
-local guiService = game:GetService("GuiService")
-local notificationsCommon = script:FindFirstAncestor("NotificationsCommon")
-local cryoModule = require(notificationsCommon.Parent.Cryo)
-local typeModule = require(notificationsCommon.type)
-local constantsModule = require(notificationsCommon.constants)
-local fFlagLuaAppFixToastNotificationClosePosition = game:DefineFastFlag("FFlagLuaAppFixToastNotificationClosePosition", false)
+﻿local UserInputService = game:GetService("UserInputService")
+local GuiService = game:GetService("GuiService")
+local NotificationsCommon = script:FindFirstAncestor("NotificationsCommon")
+local CryoModule = require(NotificationsCommon.Parent.Cryo)
+local TypeModule = require(NotificationsCommon.type)
+local ConstantsModule = require(NotificationsCommon.constants)
+local FFlagLuaAppFixToastNotificationClosePosition = game:DefineFastFlag("FFlagLuaAppFixToastNotificationClosePosition", false)
 
 return {
-	calculateToastPosition = function(p1, p2, p3)
-		-- upvalues: fFlagLuaAppFixToastNotificationClosePosition (ref), guiService (ref)
+	calculateToastPosition = function(p1, p2, PositionYOffset) --[[ Line: 67 ]]
+		-- upvalues: FFlagLuaAppFixToastNotificationClosePosition (copy), GuiService (copy)
+		local NewY: number = if FFlagLuaAppFixToastNotificationClosePosition and GuiService then GuiService:GetGuiInset().Y + 20 else 60
+		
 		return if p1 then if p2 then {
 			positionX = 1,
 			positionXOffset = -20,
 			positionY = 0,
 			anchorX = 1,
 			anchorY = 0,
-			positionYOffset = p3
+			positionYOffset = PositionYOffset
 		} else {
 			positionX = 0.5,
 			positionXOffset = 0,
 			positionY = 0,
 			anchorX = 0.5,
 			anchorY = 0,
-			positionYOffset = p3
+			positionYOffset = PositionYOffset
 		} elseif p2 then {
 			positionX = 1,
 			positionXOffset = 20,
 			positionY = 0,
 			anchorX = 0,
 			anchorY = 0,
-			positionYOffset = p3
+			positionYOffset = PositionYOffset
 		} else {
 			positionX = 0.5,
 			positionXOffset = 0,
 			positionY = 0,
 			anchorX = 0.5,
 			anchorY = 1,
-			positionYOffset = if fFlagLuaAppFixToastNotificationClosePosition then (if fFlagLuaAppFixToastNotificationClosePosition and guiService then guiService:GetGuiInset().Y + 20 else 60) * -1 else -50
+			positionYOffset = if FFlagLuaAppFixToastNotificationClosePosition then NewY * -1 else -50
 		}
 	end,
-	getDeviceOrientation = function(p1)
-		-- upvalues: typeModule (ref)
-		return if p1.Y < p1.X then typeModule.DeviceOrientationEnum.Landscape else typeModule.DeviceOrientationEnum.Portrait
+	getDeviceOrientation = function(Vector) --[[ Line: 22 ]]
+		-- upvalues: TypeModule (copy)
+		return if Vector.Y < Vector.X then TypeModule.DeviceOrientationEnum.Landscape else TypeModule.DeviceOrientationEnum.Portrait
 	end,
-	getNotificationSize = function(p1, p2)
-		-- upvalues: constantsModule (ref)
-		return if p2 < constantsModule.FullWidthDeviceThreshold then UDim2.new(0, p2 - 24, 0, 0) elseif p1 then if p2 < constantsModule.CompactCardThreashold then UDim2.new(0, constantsModule.InExperienceToastWidth, 0, 0) else UDim2.new(0, constantsModule.InAppToastWidth, 0, 0) else UDim2.new(0, constantsModule.InAppToastWidth, 0, 0)
+	getNotificationSize = function(p1, p2: number): UDim2 --[[ Line: 28 ]]
+		-- upvalues: ConstantsModule (copy)
+		return if p2 < ConstantsModule.FullWidthDeviceThreshold then UDim2.new(0, p2 - 24, 0, 0) elseif p1 and p2 < ConstantsModule.CompactCardThreashold then UDim2.new(0, ConstantsModule.InExperienceToastWidth, 0, 0) else UDim2.new(0, ConstantsModule.InAppToastWidth, 0, 0)
 	end,
-	marshalStreamNotificationData = function(p1, _)
-		local t = {
+	marshalStreamNotificationData = function(p1, _) --[[ Line: 42 ]]
+		local config = {
 			currentState = p1.content.currentState,
 			notificationType = p1.content.notificationType,
 			id = p1.id
 		}
 		
 		if p1.content.states then
-			local currentState = p1.content.states[p1.content.currentState]
-			t.state = {
-				layoutKey = currentState.layoutKey,
-				name = currentState.name,
-				visualItems = currentState.visualItems
+			local State = p1.content.states[p1.content.currentState]
+			config.state = {
+				layoutKey = State.layoutKey,
+				name = State.name,
+				visualItems = State.visualItems
 			}
 		end
-		return t
+		return config
 	end,
-	isToastToRight = function(p1)
-		-- upvalues: typeModule (ref)
-		return p1 == typeModule.DeviceOrientationEnum.Landscape
+	isToastToRight = function(Landscape): boolean --[[ Line: 63 ]]
+		-- upvalues: TypeModule (copy)
+		return Landscape == TypeModule.DeviceOrientationEnum.Landscape
 	end,
-	isDesktopDevice = function()
-		-- upvalues: userInputService (ref)
-		local none = Enum.Platform.None
-		pcall(function()
-			-- upvalues: none (write), userInputService (copy)
-			none = userInputService:GetPlatform()
+	isDesktopDevice = function(): boolean --[[ Line: 141 ]]
+		-- upvalues: UserInputService (copy)
+		local None = Enum.Platform.None
+		pcall(function() --[[ Line: 143 ]]
+			-- upvalues: None (ref), UserInputService (upval)
+			None = UserInputService:GetPlatform()
 		end)
 		
-		return if none ~= Enum.Platform.Windows then if none ~= Enum.Platform.OSX then none == Enum.Platform.UWP else true else true
+		return None == Enum.Platform.Windows or (None == Enum.Platform.OSX or None == Enum.Platform.UWP)
 	end,
-	fireEvent = function(p1, p2, p3, p4)
-		-- upvalues: constantsModule (ref), cryoModule (ref)
-		local t = { streamContext = "InApp" }
+	fireEvent = function(p1, p2, p3, p4) --[[ Line: 121 ]]
+		-- upvalues: ConstantsModule (copy), CryoModule (copy)
+		local config = { streamContext = "InApp" }
 		
 		if p3 == nil or p3 == "" then
-			p3 = constantsModule.NotificationsClientEventNameDefault
+			p3 = ConstantsModule.NotificationsClientEventNameDefault
 		end
-		p1.sendEventDeferred(p2, p3, cryoModule.Dictionary.join(p4, t))
+		p1.sendEventDeferred(p2, p3, CryoModule.Dictionary.join(p4, config))
 	end
 }

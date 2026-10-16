@@ -1,128 +1,131 @@
-﻿local coreScriptsPlayerFeedback = script:FindFirstAncestor("CoreScriptsPlayerFeedback")
-local reactModule = require(coreScriptsPlayerFeedback.Parent.React)
-local _ = require(coreScriptsPlayerFeedback.CaptureTypes)
-local fetchGalleryCapturesModule = require(coreScriptsPlayerFeedback.Utils.fetchGalleryCaptures)
+﻿local CoreScriptsPlayerFeedback = script:FindFirstAncestor("CoreScriptsPlayerFeedback")
+local ReactModule = require(CoreScriptsPlayerFeedback.Parent.React)
+local _ = require(CoreScriptsPlayerFeedback.CaptureTypes)
+local FetchGalleryCapturesModule = require(CoreScriptsPlayerFeedback.Utils.fetchGalleryCaptures)
 
-return function()
-	-- upvalues: reactModule (ref), fetchGalleryCapturesModule (ref)
-	local var1, var2 = reactModule.useState({})
-	local var3, var4 = reactModule.useState(false)
-	local var5 = reactModule.useRef(false)
-	local var6 = reactModule.useRef(nil)
-	local var7 = reactModule.useRef({})
-	local var8, var9 = reactModule.useState(true)
-	local var10 = reactModule.useCallback(function()
-		-- upvalues: var7 (ref), var2 (ref)
-		local current = var7.current
+return function() --[[ Line: 28 | Named "useGalleryCaptures" ]]
+	-- upvalues: ReactModule (copy), FetchGalleryCapturesModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState({})
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
+	local UseRefResult = ReactModule.useRef(false)
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseRefResult2 = ReactModule.useRef({})
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(true)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 36 ]]
+		-- upvalues: UseRefResult2 (copy), UseStateResult2 (copy)
+		local Current = UseRefResult2.current
 		
-		if #current == 0 then return end
-		local t = {}
+		if #Current == 0 then return end
+		local List = {}
 		
-		for i = 1, math.min(30, #current) do
-			table.insert(t, current[i])
+		for i = 1, math.min(30, #Current) do
+			table.insert(List, Current[i])
 		end
-		local t_1 = {}
+		local Current1 = {}
 		
-		for i_1 = 31, #current do
-			table.insert(t_1, current[i_1])
+		for i1 = 31, #Current do
+			table.insert(Current1, Current[i1])
 		end
-		var7.current = t_1
-		var2(function(p1)
-			-- upvalues: t (ref)
-			local cloned = table.clone(p1)
+		UseRefResult2.current = Current1
+		UseStateResult2(function(Tbl) --[[ Line: 50 ]]
+			-- upvalues: List (copy)
+			local Copy = table.clone(Tbl)
 			
-			for i, v in t do
-				table.insert(cloned, v)
+			for _, value in List do
+				table.insert(Copy, value)
 			end
-			return cloned
+			return Copy
 		end)
 	end, {})
-	local var11 = reactModule.useCallback(function()
-		-- upvalues: var6 (ref), var9 (ref), var4 (ref), var7 (ref), var10 (ref)
-		local current = var6.current
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 59 ]]
+		-- upvalues: UseRefResult1 (copy), UseStateResult2_2 (copy), UseStateResult2_1 (copy), UseRefResult2 (copy), UseResult (copy)
+		local Current = UseRefResult1.current
 		
-		if current == nil or current.IsFinished then
-			var9(false)
-			var4(false)
+		if Current == nil or Current.IsFinished then
+			UseStateResult2_2(false)
+			UseStateResult2_1(false)
 			
 			return
-		end
-		var4(true)
-		task.spawn(function()
-			-- upvalues: var7 (copy), current (ref), var4 (copy), var9 (copy), var10 (copy)
-			local gameId = game.GameId
-			repeat
-				if #var7.current ~= 0 then break end
-				if pcall(function()
-					-- upvalues: current (copy)
-					current:AdvanceToNextPageAsync()
-				end) then
-					for i, v in current:GetCurrentPage() do
-						if gameId == 0 or v.SourceUniverseId == gameId then
-							table.insert(var7.current, v)
+		else
+			UseStateResult2_1(true)
+			task.spawn(function() --[[ Line: 67 ]]
+				-- upvalues: UseRefResult2 (upval), Current (copy), UseStateResult2_1 (upval), UseStateResult2_2 (upval), UseResult (upval)
+				local GameId = game.GameId
+				while #UseRefResult2.current == 0 do
+					if not pcall(function() --[[ Line: 71 ]]
+						-- upvalues: Current (upval)
+						Current:AdvanceToNextPageAsync()
+					end) then
+						UseStateResult2_1(false)
+						UseStateResult2_2(false)
+						
+						return
+					end
+					for _, value in Current:GetCurrentPage() do
+						if GameId == 0 or value.SourceUniverseId == GameId then
+							table.insert(UseRefResult2.current, value)
 						end
 					end
+					if Current.IsFinished then break end
 				end
-				var4(false)
-				var9(false)
-				
-				return
-			until current.IsFinished
-			var10()
-			var9(if #var7.current <= 0 then not current.IsFinished else true)
-			var4(false)
-		end)
-	end, { var10 })
+				UseResult()
+				UseStateResult2_2(#UseRefResult2.current > 0 or not Current.IsFinished)
+				UseStateResult2_1(false)
+			end)
+		end
+	end, { UseResult })
 	
 	return {
-		captures = var1,
-		isLoading = var3,
-		hasMore = var8,
-		load = reactModule.useCallback(function()
-			-- upvalues: var5 (ref), var3 (ref), var4 (ref), fetchGalleryCapturesModule (copy), var9 (ref), var6 (ref), var7 (ref), var10 (ref)
-			if var5.current or var3 then
-				return
-			end
-			var5.current = true
-			var4(true)
-			task.spawn(function()
-				-- upvalues: fetchGalleryCapturesModule (copy), var4 (copy), var9 (copy), var6 (copy), var7 (copy), var10 (copy)
-				local var12 = fetchGalleryCapturesModule()
-				
-				if var12 == nil then
-					var4(false)
-					var9(false)
+		captures = UseStateResult,
+		isLoading = UseStateResult1,
+		hasMore = UseStateResult3,
+		load = ReactModule.useCallback(function() --[[ Line: 95 ]]
+			-- upvalues: UseRefResult (copy), UseStateResult1 (copy), UseStateResult2_1 (copy), FetchGalleryCapturesModule (upval), UseStateResult2_2 (copy), UseRefResult1 (copy), UseRefResult2 (copy), UseResult (copy)
+			if not UseRefResult.current and not UseStateResult1 then
+				UseRefResult.current = true
+				UseStateResult2_1(true)
+				task.spawn(function() --[[ Line: 101 ]]
+					-- upvalues: FetchGalleryCapturesModule (upval), UseStateResult2_1 (upval), UseStateResult2_2 (upval), UseRefResult1 (upval), UseRefResult2 (upval), UseResult (upval)
+					local GalleryCapturesModule = FetchGalleryCapturesModule()
 					
-					return
-				end
-				var6.current = var12
-				local gameId = game.GameId
-				repeat
-					for i, v in var12:GetCurrentPage() do
-						if gameId == 0 or v.SourceUniverseId == gameId then
-							table.insert(var7.current, v)
-						end
+					if GalleryCapturesModule == nil then
+						UseStateResult2_1(false)
+						UseStateResult2_2(false)
+						
+						return
 					end
-				until #var7.current >= 30 or var12.IsFinished or not pcall(function()
-					-- upvalues: var12 (ref)
-					var12:AdvanceToNextPageAsync()
+					UseRefResult1.current = GalleryCapturesModule
+					local GameId = game.GameId
+					repeat
+						for _, value in GalleryCapturesModule:GetCurrentPage() do
+							if GameId == 0 or value.SourceUniverseId == GameId then
+								table.insert(UseRefResult2.current, value)
+							end
+						end
+					until #UseRefResult2.current >= 30 or GalleryCapturesModule.IsFinished or not pcall(function() --[[ Line: 121 ]]
+						-- upvalues: GalleryCapturesModule (copy)
+						GalleryCapturesModule:AdvanceToNextPageAsync()
+					end)
+					UseResult()
+					UseStateResult2_2(#UseRefResult2.current > 0 or not GalleryCapturesModule.IsFinished)
+					UseStateResult2_1(false)
 				end)
-				var10()
-				var9(if #var7.current <= 0 then not var12.IsFinished else true)
-				var4(false)
-			end)
-		end, { var3, var10 }),
-		loadMore = reactModule.useCallback(function()
-			-- upvalues: var3 (ref), var7 (ref), var10 (ref), var6 (ref), var9 (ref), var11 (ref)
-			if var3 then return end
-			if #var7.current <= 0 then
-				var11()
 				
 				return
 			end
-			var10()
-			local current = var6.current
-			var9(if #var7.current <= 0 then current ~= nil and not current.IsFinished else true)
-		end, { var3, var10, var11 })
+		end, { UseStateResult1, UseResult }),
+		loadMore = ReactModule.useCallback(function() --[[ Line: 134 ]]
+			-- upvalues: UseStateResult1 (copy), UseRefResult2 (copy), UseResult (copy), UseRefResult1 (copy), UseStateResult2_2 (copy), UseResult1 (copy)
+			if UseStateResult1 then return end
+			if #UseRefResult2.current > 0 then
+				UseResult()
+				local Current = UseRefResult1.current
+				UseStateResult2_2(#UseRefResult2.current > 0 or Current ~= nil and not Current.IsFinished)
+				
+				return
+			else
+				UseResult1()
+			end
+		end, { UseStateResult1, UseResult, UseResult1 })
 	}
 end

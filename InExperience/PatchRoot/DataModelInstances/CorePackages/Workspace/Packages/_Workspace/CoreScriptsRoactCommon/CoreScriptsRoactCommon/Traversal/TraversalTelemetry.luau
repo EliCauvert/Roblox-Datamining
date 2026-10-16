@@ -1,12 +1,12 @@
-﻿local telemetryService = game:GetService("TelemetryService")
-local traversalTelemetryThrottleHundrethsPercent = game:DefineFastInt("TraversalTelemetryThrottleHundrethsPercent", 0)
-local t = {
+﻿local TelemetryService = game:GetService("TelemetryService")
+local TraversalTelemetryThrottleHundrethsPercent = game:DefineFastInt("TraversalTelemetryThrottleHundrethsPercent", 0)
+local config = {
 	BackButtonActions = {
 		eventName = "coreui_inexp_back_button_actions",
 		description = "Event fired every time the User engages with Traversal Back Button",
 		links = "https://github.rbx.com/Roblox/proto-schemas/pull/8339",
 		backends = { "EventIngest" },
-		throttlingPercentage = traversalTelemetryThrottleHundrethsPercent,
+		throttlingPercentage = TraversalTelemetryThrottleHundrethsPercent,
 		lastUpdated = { 22, 10, 25 }
 	},
 	HistoryMenuButtonActions = {
@@ -14,7 +14,7 @@ local t = {
 		description = "Event fired every time the User engages with Traversal History Menu Button",
 		links = "https://github.rbx.com/Roblox/proto-schemas/pull/8339",
 		backends = { "EventIngest" },
-		throttlingPercentage = traversalTelemetryThrottleHundrethsPercent,
+		throttlingPercentage = TraversalTelemetryThrottleHundrethsPercent,
 		lastUpdated = { 22, 10, 25 }
 	},
 	HistoryMenuItemClick = {
@@ -22,7 +22,7 @@ local t = {
 		description = "Event fired every time the User engages with Traversal History Menu Items",
 		links = "https://github.rbx.com/Roblox/proto-schemas/pull/8339",
 		backends = { "EventIngest" },
-		throttlingPercentage = traversalTelemetryThrottleHundrethsPercent,
+		throttlingPercentage = TraversalTelemetryThrottleHundrethsPercent,
 		lastUpdated = { 22, 10, 25 }
 	},
 	HistoryMenuHistoryClick = {
@@ -30,7 +30,7 @@ local t = {
 		description = "Event fired every time the User engages with Traversal History Menu's History Item",
 		links = "https://github.rbx.com/Roblox/proto-schemas/pull/8339",
 		backends = { "EventIngest" },
-		throttlingPercentage = traversalTelemetryThrottleHundrethsPercent,
+		throttlingPercentage = TraversalTelemetryThrottleHundrethsPercent,
 		lastUpdated = { 22, 10, 25 }
 	},
 	HistoryPageBackButtonClick = {
@@ -38,7 +38,7 @@ local t = {
 		description = "Event fired every time the User engages with Traversal History Page's Back Button",
 		links = "https://github.rbx.com/Roblox/proto-schemas/pull/8339",
 		backends = { "EventIngest" },
-		throttlingPercentage = traversalTelemetryThrottleHundrethsPercent,
+		throttlingPercentage = TraversalTelemetryThrottleHundrethsPercent,
 		lastUpdated = { 22, 10, 25 }
 	},
 	HistoryPageExperienceTileClick = {
@@ -46,7 +46,7 @@ local t = {
 		description = "Event fired every time the User engages with Traversal History Page Tiles",
 		links = "https://github.rbx.com/Roblox/proto-schemas/pull/8339",
 		backends = { "EventIngest" },
-		throttlingPercentage = traversalTelemetryThrottleHundrethsPercent,
+		throttlingPercentage = TraversalTelemetryThrottleHundrethsPercent,
 		lastUpdated = { 22, 10, 25 }
 	},
 	TeleportConfirmationActions = {
@@ -54,72 +54,67 @@ local t = {
 		description = "Event fired every time the User engages with Traversal History Leave Confirmation",
 		links = "https://github.rbx.com/Roblox/proto-schemas/pull/8339",
 		backends = { "EventIngest" },
-		throttlingPercentage = traversalTelemetryThrottleHundrethsPercent,
+		throttlingPercentage = TraversalTelemetryThrottleHundrethsPercent,
 		lastUpdated = { 22, 10, 25 }
 	}
 }
-local _ = {
-	placeId = "addPlaceId",
-	universeId = "addUniverseId",
-	playsessionId = "addPlaySessionId"
-}
-local t_1 = {}
-t_1.__index = t_1
+local TraversalTelemetryModule = {}
+TraversalTelemetryModule.__index = TraversalTelemetryModule
 
-function t_1.sendBackButtonActionEvent(p1)
-	-- upvalues: telemetryService (ref), t (ref)
-	telemetryService:LogEvent(t.BackButtonActions, {
+function TraversalTelemetryModule.sendBackButtonActionEvent(CustomFields) --[[ Line: 142 ]]
+	-- upvalues: TelemetryService (copy), config (copy)
+	TelemetryService:LogEvent(config.BackButtonActions, {
 		standardizedFields = { "addPlaceId", "addUniverseId", "addPlaySessionId" },
-		customFields = p1
+		customFields = CustomFields
 	})
 end
 
-function t_1.sendHistoryMenuButtonActionEvent(p1)
-	-- upvalues: telemetryService (ref), t (ref)
-	telemetryService:LogEvent(t.HistoryMenuButtonActions, {
+function TraversalTelemetryModule.sendHistoryMenuButtonActionEvent(CustomFields) --[[ Line: 149 ]]
+	-- upvalues: TelemetryService (copy), config (copy)
+	TelemetryService:LogEvent(config.HistoryMenuButtonActions, {
 		standardizedFields = { "addPlaceId", "addUniverseId", "addPlaySessionId" },
-		customFields = p1
+		customFields = CustomFields
 	})
 end
 
-function t_1.sendHistoryMenuItemClick(p1)
-	-- upvalues: telemetryService (ref), t (ref)
-	telemetryService:LogEvent(t.HistoryMenuItemClick, {
+function TraversalTelemetryModule.sendHistoryMenuItemClick(CustomFields) --[[ Line: 156 ]]
+	-- upvalues: TelemetryService (copy), config (copy)
+	TelemetryService:LogEvent(config.HistoryMenuItemClick, {
 		standardizedFields = { "addPlaceId", "addUniverseId", "addPlaySessionId" },
-		customFields = p1
+		customFields = CustomFields
 	})
 end
 
-function t_1.sendHistoryMenuHistoryClick(p1)
-	-- upvalues: telemetryService (ref), t (ref)
-	telemetryService:LogEvent(t.HistoryMenuHistoryClick, {
+function TraversalTelemetryModule.sendHistoryMenuHistoryClick(CustomFields) --[[ Line: 163 ]]
+	-- upvalues: TelemetryService (copy), config (copy)
+	TelemetryService:LogEvent(config.HistoryMenuHistoryClick, {
 		standardizedFields = { "addPlaceId", "addUniverseId", "addPlaySessionId" },
-		customFields = p1
+		customFields = CustomFields
 	})
 end
 
-function t_1.sendHistoryPageBackButtonClick(p1)
-	-- upvalues: telemetryService (ref), t (ref)
-	telemetryService:LogEvent(t.HistoryPageBackButtonClick, {
+function TraversalTelemetryModule.sendHistoryPageBackButtonClick(CustomFields) --[[ Line: 170 ]]
+	-- upvalues: TelemetryService (copy), config (copy)
+	TelemetryService:LogEvent(config.HistoryPageBackButtonClick, {
 		standardizedFields = { "addPlaceId", "addUniverseId", "addPlaySessionId" },
-		customFields = p1
+		customFields = CustomFields
 	})
 end
 
-function t_1.sendHistoryPageExperienceTileClick(p1)
-	-- upvalues: telemetryService (ref), t (ref)
-	telemetryService:LogEvent(t.HistoryPageExperienceTileClick, {
+function TraversalTelemetryModule.sendHistoryPageExperienceTileClick(CustomFields) --[[ Line: 177 ]]
+	-- upvalues: TelemetryService (copy), config (copy)
+	TelemetryService:LogEvent(config.HistoryPageExperienceTileClick, {
 		standardizedFields = { "addPlaceId", "addUniverseId", "addPlaySessionId" },
-		customFields = p1
+		customFields = CustomFields
 	})
 end
 
-function t_1.sendTeleportConfirmationActions(p1)
-	-- upvalues: telemetryService (ref), t (ref)
-	telemetryService:LogEvent(t.TeleportConfirmationActions, {
+function TraversalTelemetryModule.sendTeleportConfirmationActions(CustomFields) --[[ Line: 184 ]]
+	-- upvalues: TelemetryService (copy), config (copy)
+	TelemetryService:LogEvent(config.TeleportConfirmationActions, {
 		standardizedFields = { "addPlaceId", "addUniverseId", "addPlaySessionId" },
-		customFields = p1
+		customFields = CustomFields
 	})
 end
 
-return t_1
+return TraversalTelemetryModule

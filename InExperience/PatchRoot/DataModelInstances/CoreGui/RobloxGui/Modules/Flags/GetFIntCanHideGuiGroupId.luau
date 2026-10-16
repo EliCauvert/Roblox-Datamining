@@ -1,7 +1,7 @@
-﻿return function()
-	local ok, status = pcall(function()
+﻿return function() --[[ Line: 1 ]]
+	local Success, Result = pcall(function() --[[ Line: 2 ]]
 		return game:GetFastInt("CanHideGuiGroupId")
 	end)
 	
-	return ok and status
+	return Success and Result
 end

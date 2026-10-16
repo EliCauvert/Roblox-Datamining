@@ -1,8 +1,8 @@
-﻿return function(p1, p2, p3)
-	local var1 = p3
+﻿return function(p1, Callback, p2) --[[ Line: 4 | Named "foldLeft" ]]
+	local v1 = p2
 	
 	for i = 1, #p1 do
-		var1 = p2(var1, p1[i], i)
+		v1 = Callback(v1, p1[i], i)
 	end
-	return var1
+	return v1
 end

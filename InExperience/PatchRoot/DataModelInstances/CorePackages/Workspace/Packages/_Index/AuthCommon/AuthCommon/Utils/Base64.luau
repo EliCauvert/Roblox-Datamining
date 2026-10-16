@@ -1,8 +1,8 @@
-﻿local t = {
-	MakeEncoder = function(p1, p2, p3)
-		local t = {}
+﻿local Base64Module = {
+	MakeEncoder = function(p1, p2, p3) --[[ Line: 8 ]]
+		local ByteValues = {}
 		
-		for i, v in pairs({
+		for i, Text in pairs({
 			[0] = "A",
 			"B",
 			"C",
@@ -69,137 +69,136 @@
 			p2 or "/",
 			p3 or "="
 		}) do
-			t[i] = v:byte()
+			ByteValues[i] = Text:byte()
 		end
-		return t
+		return ByteValues
 	end
 }
 
-function t.MakeDecoder(p4, p5, p6)
-	-- upvalues: t (ref)
-	local t_1 = {}
+function Base64Module.MakeDecoder(p4, p5, p6) --[[ Line: 82 ]]
+	-- upvalues: Base64Module (copy)
+	local t = {}
 	
-	for i, v in pairs(t.MakeEncoder(p4, p5, p6)) do
-		t_1[v] = i
+	for i, value in pairs(Base64Module.MakeEncoder(p4, p5, p6)) do
+		t[value] = i
 	end
-	return t_1
+	return t
 end
 
-local var1 = t.MakeEncoder()
-local var2 = t.MakeDecoder()
-local char = string.char
-local concat = table.concat
-local extract = bit32.extract
+local Encoder = Base64Module.MakeEncoder()
+local Decoder = Base64Module.MakeDecoder()
+local CharFunction = string.char
+local ConcatFunction = table.concat
+local ExtractFunction = bit32.extract
 
-function t.Encode(p7, p8, p9)
-	-- upvalues: var1 (ref), extract (ref), char (ref), concat (ref)
-	p8 = p8 or var1
+function Base64Module.Encode(Text: string, p7, p8) --[[ Line: 97 ]]
+	-- upvalues: Encoder (copy), ExtractFunction (copy), CharFunction (copy), ConcatFunction (copy)
+	local P7 = p7 or Encoder
 	local t = {}
-	local var3 = 1
-	local p6Count = #p7
-	local var4 = p6Count % 3
-	local t_1 = {}
+	local Count = 1
+	local CountText = #Text
+	local CountTextRemainder = CountText % 3
+	local t1 = {}
 	
-	for i = 1, p6Count - var4, 3 do
-		local var5
-		local var6, var7, var8 = p7:byte(i, i + 2)
-		local var9 = var6 * 65536 + var7 * 256 + var8
-		local _ = nil
+	for i = 1, CountText - CountTextRemainder, 3 do
+		local ByteValue, ByteValue2, ByteValue3 = Text:byte(i, i + 2)
+		local NewByteValue = ByteValue * 65536 + ByteValue2 * 256 + ByteValue3
+		local Entry = nil
 		
-		if p9 then
-			var5 = t_1[var9]
+		if p8 then
+			Entry = t1[NewByteValue]
 			
-			if not var5 then
-				var5 = char(p8[extract(var9, 18, 6)], p8[extract(var9, 12, 6)], p8[extract(var9, 6, 6)], p8[extract(var9, 0, 6)])
-				t_1[var9] = var5
+			if not Entry then
+				Entry = CharFunction(P7[ExtractFunction(NewByteValue, 18, 6)], P7[ExtractFunction(NewByteValue, 12, 6)], P7[ExtractFunction(NewByteValue, 6, 6)], P7[ExtractFunction(NewByteValue, 0, 6)])
+				t1[NewByteValue] = Entry
 			end
 		else
-			var5 = char(p8[extract(var9, 18, 6)], p8[extract(var9, 12, 6)], p8[extract(var9, 6, 6)], p8[extract(var9, 0, 6)])
+			Entry = CharFunction(P7[ExtractFunction(NewByteValue, 18, 6)], P7[ExtractFunction(NewByteValue, 12, 6)], P7[ExtractFunction(NewByteValue, 6, 6)], P7[ExtractFunction(NewByteValue, 0, 6)])
 		end
-		t[var3] = var5
-		var3 += 1
+		t[Count] = Entry
+		Count += 1
 	end
-	if var4 == 2 then
-		local var10, var11 = p7:byte(p6Count - 1, p6Count)
-		local var12 = var10 * 65536 + var11 * 256
-		t[var3] = char(p8[extract(var12, 18, 6)], p8[extract(var12, 12, 6)], p8[extract(var12, 6, 6)], p8[64])
-	elseif var4 == 1 then
-		local var13 = p7:byte(p6Count) * 65536
-		t[var3] = char(p8[extract(var13, 18, 6)], p8[extract(var13, 12, 6)], p8[64], p8[64])
+	if CountTextRemainder == 2 then
+		local ByteValue1, ByteValue2_1 = Text:byte(CountText - 1, CountText)
+		local NewByteValue = ByteValue1 * 65536 + ByteValue2_1 * 256
+		t[Count] = CharFunction(P7[ExtractFunction(NewByteValue, 18, 6)], P7[ExtractFunction(NewByteValue, 12, 6)], P7[ExtractFunction(NewByteValue, 6, 6)], P7[64])
+	elseif CountTextRemainder == 1 then
+		local ScaledByteValue = Text:byte(CountText) * 65536
+		t[Count] = CharFunction(P7[ExtractFunction(ScaledByteValue, 18, 6)], P7[ExtractFunction(ScaledByteValue, 12, 6)], P7[64], P7[64])
 	end
-	return concat(t)
+	return ConcatFunction(t)
 end
 
-function t.EncodeUrl(p10, p11)
-	-- upvalues: t (ref)
-	return t.ToUrlSafeBase64(t.Encode(p10, nil, p11))
+function Base64Module.EncodeUrl(p9, p10) --[[ Line: 152 ]]
+	-- upvalues: Base64Module (copy)
+	return Base64Module.ToUrlSafeBase64((Base64Module.Encode(p9, nil, p10)))
 end
 
-function t.Decode(p10, p11, p12)
-	-- upvalues: var2 (ref), char (ref), extract (ref), concat (ref)
-	p11 = p11 or var2
-	local var14 = nil
-	local var15 = nil
+function Base64Module.Decode(Text: string, p9, p10) --[[ Line: 158 ]]
+	-- upvalues: Decoder (copy), CharFunction (copy), ExtractFunction (copy), ConcatFunction (copy)
+	local P12 = p9 or Decoder
+	local v1 = nil
+	local v2 = nil
 	
-	for i, v in pairs(p11) do
-		if v == 62 then
-			var14 = i
-		elseif v == 63 then
-			var15 = i
+	for i, value in pairs(P12) do
+		if value == 62 then
+			v1 = i
+		elseif value == 63 then
+			v2 = i
 		end
 	end
-	local var16 = p10:gsub(("[^%%w%%%s%%%s%%=]"):format(char(var14), char(var15)), "")
+	local Replaced: string = Text:gsub(("[^%%w%%%s%%%s%%=]"):format(CharFunction(v1), (CharFunction(v2))), "")
 	local t = {}
-	local t_1 = {}
-	local var17 = 1
-	local var23Count = #var16
-	local var18 = if var16:sub(-2) == "==" then 2 elseif var16:sub(-1) == "=" then 1 else 0
-	
-	for i_1 = 1, if var18 > 0 then var23Count - 4 else var23Count, 4 do
-		local var19
-		local var20, var21, var22, var23 = var16:byte(i_1, i_1 + 3)
-		local _ = nil
+	local t2 = {}
+	local Count = 1
+	local CountReplaced = #Replaced
+	local v3: number = if Replaced:sub(-2) == "==" then 2 elseif Replaced:sub(-1) == "=" then 1 else 0
+	local v4 = 1
+	local CountReplacedDelta: number = if v3 > 0 then CountReplaced - 4 else CountReplaced
+	for i1 = v4, CountReplacedDelta, 4 do
+		local ByteValue, ByteValue2, ByteValue3, ByteValue4 = Replaced:byte(i1, i1 + 3)
+		local Entry = nil
 		
-		if p12 then
-			local var24 = var20 * 16777216 + var21 * 65536 + var22 * 256 + var23
-			var19 = t[var24]
+		if p10 then
+			local NewByteValue = ByteValue * 16777216 + ByteValue2 * 65536 + ByteValue3 * 256 + ByteValue4
+			Entry = t[NewByteValue]
 			
-			if not var19 then
-				local var25 = p11[var20] * 262144 + p11[var21] * 4096 + p11[var22] * 64 + p11[var23]
-				var19 = char(extract(var25, 16, 8), extract(var25, 8, 8), extract(var25, 0, 8))
-				t[var24] = var19
+			if not Entry then
+				local NewEntry = P12[ByteValue] * 262144 + P12[ByteValue2] * 4096 + P12[ByteValue3] * 64 + P12[ByteValue4]
+				Entry = CharFunction(ExtractFunction(NewEntry, 16, 8), ExtractFunction(NewEntry, 8, 8), (ExtractFunction(NewEntry, 0, 8)))
+				t[NewByteValue] = Entry
 			end
 		else
-			local var26 = p11[var20] * 262144 + p11[var21] * 4096 + p11[var22] * 64 + p11[var23]
-			var19 = char(extract(var26, 16, 8), extract(var26, 8, 8), extract(var26, 0, 8))
+			local NewEntry = P12[ByteValue] * 262144 + P12[ByteValue2] * 4096 + P12[ByteValue3] * 64 + P12[ByteValue4]
+			Entry = CharFunction(ExtractFunction(NewEntry, 16, 8), ExtractFunction(NewEntry, 8, 8), (ExtractFunction(NewEntry, 0, 8)))
 		end
-		t_1[var17] = var19
-		var17 += 1
+		t2[Count] = Entry
+		Count += 1
 	end
-	if var18 == 1 then
-		local var27, var28, var29 = var16:byte(var23Count - 3, var23Count - 1)
-		local var30 = p11[var27] * 262144 + p11[var28] * 4096 + p11[var29] * 64
-		t_1[var17] = char(extract(var30, 16, 8), extract(var30, 8, 8))
-	elseif var18 == 2 then
-		local var31, var32 = var16:byte(var23Count - 3, var23Count - 2)
-		t_1[var17] = char(extract(p11[var31] * 262144 + p11[var32] * 4096, 16, 8))
+	if v3 == 1 then
+		local ByteValue1, ByteValue2_1, ByteValue3_1 = Replaced:byte(CountReplaced - 3, CountReplaced - 1)
+		local NewEntry = P12[ByteValue1] * 262144 + P12[ByteValue2_1] * 4096 + P12[ByteValue3_1] * 64
+		t2[Count] = CharFunction(ExtractFunction(NewEntry, 16, 8), (ExtractFunction(NewEntry, 8, 8)))
+	elseif v3 == 2 then
+		local ByteValue5, ByteValue2_2 = Replaced:byte(CountReplaced - 3, CountReplaced - 2)
+		t2[Count] = CharFunction((ExtractFunction(P12[ByteValue5] * 262144 + P12[ByteValue2_2] * 4096, 16, 8)))
 	end
-	return concat(t_1)
+	return ConcatFunction(t2)
 end
 
-function t.DecodeUrl(p13, p14)
-	-- upvalues: t (ref)
-	return t.Decode(t.FromUrlSafeBase64(p13), nil, p14)
+function Base64Module.DecodeUrl(p11, p12) --[[ Line: 213 ]]
+	-- upvalues: Base64Module (copy)
+	return Base64Module.Decode(Base64Module.FromUrlSafeBase64(p11), nil, p12)
 end
 
-function t.ToUrlSafeBase64(p13)
-	return string.gsub(string.gsub(string.gsub(p13, "+", "-"), "/", "_"), "=", "")
+function Base64Module.ToUrlSafeBase64(Text: string): string --[[ Line: 218 ]]
+	return (string.gsub(string.gsub(string.gsub(Text, "+", "-"), "/", "_"), "=", ""))
 end
 
-function t.FromUrlSafeBase64(p13)
-	local var33 = p13:gsub("[^%w%-_]", "")
+function Base64Module.FromUrlSafeBase64(Text: string): string --[[ Line: 225 ]]
+	local W = Text:gsub("[^%w%-_]", "")
 	
-	return string.gsub(string.gsub(var33 .. string.rep("=", (4 - #var33 % 4) % 4), "_", "/"), "-", "+")
+	return (string.gsub(string.gsub(W .. string.rep("=", (4 - #W % 4) % 4), "_", "/"), "-", "+"))
 end
 
-return t
+return Base64Module

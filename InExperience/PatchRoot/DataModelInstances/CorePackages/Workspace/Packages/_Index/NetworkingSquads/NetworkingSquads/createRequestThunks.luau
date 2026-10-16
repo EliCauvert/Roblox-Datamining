@@ -1,34 +1,34 @@
 ﻿local _ = require(script.Parent.networkingSquadTypes)
-local networkRequests = script.Parent.networkRequests
-local createCreateOrJoinSquadModule = require(networkRequests.createCreateOrJoinSquad)
-local createGetSquadActiveModule = require(networkRequests.createGetSquadActive)
-local createGetSquadFromSquadIdModule = require(networkRequests.createGetSquadFromSquadId)
-local createJoinSquadModule = require(networkRequests.createJoinSquad)
-local createActOnPartyNudgeModule = require(networkRequests.createActOnPartyNudge)
-local createLeaveSquadModule = require(networkRequests.createLeaveSquad)
-local createSquadInviteModule = require(networkRequests.createSquadInvite)
-local createCreateExperienceInviteModule = require(networkRequests.createCreateExperienceInvite)
-local createGetExperienceInviteModule = require(networkRequests.createGetExperienceInvite)
-local createVoteForExperienceInviteModule = require(networkRequests.createVoteForExperienceInvite)
-local createSendSquadVoiceAbuseReportModule = require(networkRequests.createSendSquadVoiceAbuseReport)
-local createReinviteToSquadModule = require(networkRequests.createReinviteToSquad)
-local createSetRegroupPromptShownModule = require(networkRequests.createSetRegroupPromptShown)
+local NetworkRequests = script.Parent.networkRequests
+local CreateCreateOrJoinSquadModule = require(NetworkRequests.createCreateOrJoinSquad)
+local CreateGetSquadActiveModule = require(NetworkRequests.createGetSquadActive)
+local CreateGetSquadFromSquadIdModule = require(NetworkRequests.createGetSquadFromSquadId)
+local CreateJoinSquadModule = require(NetworkRequests.createJoinSquad)
+local CreateActOnPartyNudgeModule = require(NetworkRequests.createActOnPartyNudge)
+local CreateLeaveSquadModule = require(NetworkRequests.createLeaveSquad)
+local CreateSquadInviteModule = require(NetworkRequests.createSquadInvite)
+local CreateCreateExperienceInviteModule = require(NetworkRequests.createCreateExperienceInvite)
+local CreateGetExperienceInviteModule = require(NetworkRequests.createGetExperienceInvite)
+local CreateVoteForExperienceInviteModule = require(NetworkRequests.createVoteForExperienceInvite)
+local CreateSendSquadVoiceAbuseReportModule = require(NetworkRequests.createSendSquadVoiceAbuseReport)
+local CreateReinviteToSquadModule = require(NetworkRequests.createReinviteToSquad)
+local CreateSetRegroupPromptShownModule = require(NetworkRequests.createSetRegroupPromptShown)
 
-return function(p1)
-	-- upvalues: createCreateOrJoinSquadModule (ref), createGetSquadActiveModule (ref), createGetSquadFromSquadIdModule (ref), createJoinSquadModule (ref), createActOnPartyNudgeModule (ref), createLeaveSquadModule (ref), createSquadInviteModule (ref), createCreateExperienceInviteModule (ref), createGetExperienceInviteModule (ref), createVoteForExperienceInviteModule (ref), createReinviteToSquadModule (ref), createSendSquadVoiceAbuseReportModule (ref), createSetRegroupPromptShownModule (ref)
+return function(p1) --[[ Line: 25 ]]
+	-- upvalues: CreateCreateOrJoinSquadModule (copy), CreateGetSquadActiveModule (copy), CreateGetSquadFromSquadIdModule (copy), CreateJoinSquadModule (copy), CreateActOnPartyNudgeModule (copy), CreateLeaveSquadModule (copy), CreateSquadInviteModule (copy), CreateCreateExperienceInviteModule (copy), CreateGetExperienceInviteModule (copy), CreateVoteForExperienceInviteModule (copy), CreateReinviteToSquadModule (copy), CreateSendSquadVoiceAbuseReportModule (copy), CreateSetRegroupPromptShownModule (copy)
 	return {
-		CreateOrJoinSquad = createCreateOrJoinSquadModule(p1),
-		GetSquadActive = createGetSquadActiveModule(p1),
-		GetSquadFromSquadId = createGetSquadFromSquadIdModule(p1),
-		JoinSquad = createJoinSquadModule(p1),
-		ActOnPartyNudge = createActOnPartyNudgeModule(p1),
-		LeaveSquad = createLeaveSquadModule(p1),
-		SquadInvite = createSquadInviteModule(p1),
-		CreateExperienceInvite = createCreateExperienceInviteModule(p1),
-		GetExperienceInvite = createGetExperienceInviteModule(p1),
-		VoteForExperienceInvite = createVoteForExperienceInviteModule(p1),
-		ReinviteToSquad = createReinviteToSquadModule(p1),
-		SendSquadVoiceAbuseReport = createSendSquadVoiceAbuseReportModule(p1),
-		SetRegroupPromptShown = createSetRegroupPromptShownModule(p1)
+		CreateOrJoinSquad = CreateCreateOrJoinSquadModule(p1),
+		GetSquadActive = CreateGetSquadActiveModule(p1),
+		GetSquadFromSquadId = CreateGetSquadFromSquadIdModule(p1),
+		JoinSquad = CreateJoinSquadModule(p1),
+		ActOnPartyNudge = CreateActOnPartyNudgeModule(p1),
+		LeaveSquad = CreateLeaveSquadModule(p1),
+		SquadInvite = CreateSquadInviteModule(p1),
+		CreateExperienceInvite = CreateCreateExperienceInviteModule(p1),
+		GetExperienceInvite = CreateGetExperienceInviteModule(p1),
+		VoteForExperienceInvite = CreateVoteForExperienceInviteModule(p1),
+		ReinviteToSquad = CreateReinviteToSquadModule(p1),
+		SendSquadVoiceAbuseReport = CreateSendSquadVoiceAbuseReportModule(p1),
+		SetRegroupPromptShown = CreateSetRegroupPromptShownModule(p1)
 	}
 end

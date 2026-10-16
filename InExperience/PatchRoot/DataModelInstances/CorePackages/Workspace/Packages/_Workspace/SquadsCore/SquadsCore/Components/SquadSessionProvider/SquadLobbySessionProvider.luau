@@ -1,58 +1,64 @@
-﻿local squadsCore = script:FindFirstAncestor("SquadsCore")
-local parent = squadsCore.Parent
-local sessionService = game:GetService("SessionService")
-local loggerModule = require(squadsCore.Logger)
-local squadExternalContractContextModule = require(squadsCore.Components.SquadExternalContractProvider.SquadExternalContractContext)
-local squadLocationEnumModule = require(squadsCore.Enums.SquadLocationEnum)
-local squadRootViewTypeModule = require(squadsCore.Enums.SquadRootViewType)
-local squadViewFlagsModule = require(squadsCore.Components.SquadExternalContractProvider.SquadViewFlags)
-local reactModule = require(parent.React)
-local sessionType = require(parent.RobloxAppSessionization).SessionType
-local var1 = reactModule.createContext({ updateMetadata = function() end })
+﻿local SquadsCore = script:FindFirstAncestor("SquadsCore")
+local Parent = SquadsCore.Parent
+local SessionService = game:GetService("SessionService")
+local LoggerModule = require(SquadsCore.Logger)
+local SquadExternalContractContextModule = require(SquadsCore.Components.SquadExternalContractProvider.SquadExternalContractContext)
+local SquadLocationEnumModule = require(SquadsCore.Enums.SquadLocationEnum)
+local SquadRootViewTypeModule = require(SquadsCore.Enums.SquadRootViewType)
+local SquadViewFlagsModule = require(SquadsCore.Components.SquadExternalContractProvider.SquadViewFlags)
+local ReactModule = require(Parent.React)
+local SessionType = require(Parent.RobloxAppSessionization).SessionType
+local Context = ReactModule.createContext({ updateMetadata = function() --[[ Line: 29 ]] end })
 
 return {
-	Context = var1,
-	Provider = function(p1)
-		-- upvalues: reactModule (ref), squadExternalContractContextModule (ref), squadLocationEnumModule (ref), sessionType (ref), squadViewFlagsModule (ref), squadRootViewTypeModule (ref), sessionService (ref), loggerModule (ref), var1 (ref)
-		local var2 = reactModule.useContext(squadExternalContractContextModule)
-		local var3 = if var2.squadLocation == squadLocationEnumModule.InExperience then sessionType.StructuralIdentifier.SquadLobbyPageInExpSessionInfo else sessionType.StructuralIdentifier.SquadLobbyPageUASessionInfo
-		local var4 = bit32.band(var2.useSquadViewFlags(), squadViewFlagsModule.SquadLobby) ~= 0 and var2.useSquadRootView() ~= squadRootViewTypeModule.None
-		local var5 = reactModule.useCallback(function()
-			-- upvalues: sessionType (copy), sessionService (copy), var3 (ref)
-			local level1 = sessionType.StructuralIdentifier.Level1
+	Context = Context,
+	Provider = function(p1) --[[ Line: 32 ]]
+		-- upvalues: ReactModule (copy), SquadExternalContractContextModule (copy), SquadLocationEnumModule (copy), SessionType (copy), SquadViewFlagsModule (copy), SquadRootViewTypeModule (copy), SessionService (copy), LoggerModule (copy), Context (copy)
+		local UseContextResult = ReactModule.useContext(SquadExternalContractContextModule)
+		local UseSquadRootViewResult = UseContextResult.useSquadRootView()
+		local SquadLobbyPageInExpSessionInfo = if UseContextResult.squadLocation == SquadLocationEnumModule.InExperience then SessionType.StructuralIdentifier.SquadLobbyPageInExpSessionInfo else SessionType.StructuralIdentifier.SquadLobbyPageUASessionInfo
+		local IsNotUseSquadRootViewResultMatch: boolean = bit32.band(UseContextResult.useSquadViewFlags(), SquadViewFlagsModule.SquadLobby) ~= 0 and UseSquadRootViewResult ~= SquadRootViewTypeModule.None
+		local UseResult = ReactModule.useCallback(function() --[[ Line: 44 ]]
+			-- upvalues: SessionType (upval), SessionService (upval), SquadLobbyPageInExpSessionInfo (copy)
+			local Level1 = SessionType.StructuralIdentifier.Level1
 			
-			if level1 and sessionService:SessionExists(level1) and not sessionService:SessionExists(var3) then
-				sessionService:SetSession(level1, var3, var3)
+			if Level1 and SessionService:SessionExists(Level1) and not SessionService:SessionExists(SquadLobbyPageInExpSessionInfo) then
+				SessionService:SetSession(Level1, SquadLobbyPageInExpSessionInfo, SquadLobbyPageInExpSessionInfo)
 			end
-		end, { var3, var2.squadLocation })
-		local var6 = reactModule.useCallback(function()
-			-- upvalues: sessionService (copy), var3 (ref)
-			if sessionService:SessionExists(var3) then
-				sessionService:RemoveSession(var3)
+		end, {
+			SquadLobbyPageInExpSessionInfo,
+			UseContextResult.squadLocation
+		})
+		local UseResult1 = ReactModule.useCallback(function() --[[ Line: 52 ]]
+			-- upvalues: SessionService (upval), SquadLobbyPageInExpSessionInfo (copy)
+			if SessionService:SessionExists(SquadLobbyPageInExpSessionInfo) then
+				SessionService:RemoveSession(SquadLobbyPageInExpSessionInfo)
 			end
-		end, { var3 })
-		local var7 = reactModule.useCallback(function(p2, p3)
-			-- upvalues: sessionService (copy), var3 (ref), loggerModule (copy)
-			if sessionService:SessionExists(var3) then
-				sessionService:SetMetadata(var3, p2, p3)
+		end, { SquadLobbyPageInExpSessionInfo })
+		local UseResult2 = ReactModule.useCallback(function(Key, Value) --[[ Line: 58 ]]
+			-- upvalues: SessionService (upval), SquadLobbyPageInExpSessionInfo (copy), LoggerModule (upval)
+			if SessionService:SessionExists(SquadLobbyPageInExpSessionInfo) then
+				SessionService:SetMetadata(SquadLobbyPageInExpSessionInfo, Key, Value)
 				
 				return
+			else
+				LoggerModule:warning("Squad {} session does not exist, cannot update metadata with key {}, value {}", SquadLobbyPageInExpSessionInfo, Key, Value)
 			end
-			loggerModule:warning("Squad {} session does not exist, cannot update metadata with key {}, value {}", var3, p2, p3)
-		end, { var3 })
-		reactModule.useEffect(function()
-			-- upvalues: var4 (ref), var5 (ref), var6 (ref)
-			if var4 then
-				var5()
+		end, { SquadLobbyPageInExpSessionInfo })
+		ReactModule.useEffect(function() --[[ Line: 71 ]]
+			-- upvalues: IsNotUseSquadRootViewResultMatch (copy), UseResult (copy), UseResult1 (copy)
+			if IsNotUseSquadRootViewResultMatch then
+				UseResult()
 				
-				return function()
-					-- upvalues: var6 (copy)
-					var6()
+				return function() --[[ Line: 75 ]]
+					-- upvalues: UseResult1 (upval)
+					UseResult1()
 				end
+			else
+				return function() --[[ Line: 80 ]] end
 			end
-			return function() end
-		end, { var4, var5, var6 })
+		end, { IsNotUseSquadRootViewResultMatch, UseResult, UseResult1 })
 		
-		return reactModule.createElement(var1.Provider, { value = { updateMetadata = var7 } }, p1.children)
+		return ReactModule.createElement(Context.Provider, { value = { updateMetadata = UseResult2 } }, p1.children)
 	end
 }

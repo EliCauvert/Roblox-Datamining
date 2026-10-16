@@ -1,70 +1,70 @@
-﻿local parent = script:FindFirstAncestor("PeekView").Parent
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local useRoactService = require(parent.RobloxAppHooks).useRoactService
-local useRouteName = require(parent.Navigation).useRouteName
-local appEventIngestService = require(parent.RoactServiceTags).AppEventIngestService
-local useStyle = require(parent.UIBlox).Core.Style.useStyle
-local peekViewModule = require(script.Parent.PeekView)
-local peekViewStateModule = require(script.Parent.PeekViewState)
-local peekViewDismissedEventModule = require(script.Parent.analytics.peekViewDismissedEvent)
-local fFlagProfilePlatformNewProfileHeader = require(parent.SharedFlags).FFlagProfilePlatformNewProfileHeader
+﻿local Parent = script:FindFirstAncestor("PeekView").Parent
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
+local UseRouteNameFunction = require(Parent.Navigation).useRouteName
+local AppEventIngestService = require(Parent.RoactServiceTags).AppEventIngestService
+local UseStyleFunction = require(Parent.UIBlox).Core.Style.useStyle
+local PeekViewModule = require(script.Parent.PeekView)
+local PeekViewStateModule = require(script.Parent.PeekViewState)
+local PeekViewDismissedEventModule = require(script.Parent.analytics.peekViewDismissedEvent)
+local FFlagProfilePlatformNewProfileHeader = require(Parent.SharedFlags).FFlagProfilePlatformNewProfileHeader
 
-return function(p1)
-	-- upvalues: useRoactService (ref), appEventIngestService (ref), useRouteName (ref), useStyle (ref), reactModule (ref), peekViewStateModule (ref), peekViewDismissedEventModule (ref), cryoModule (ref), peekViewModule (ref), fFlagProfilePlatformNewProfileHeader (ref)
-	local var1 = useRoactService(appEventIngestService)
-	local var2 = useRouteName()
-	local var3 = useStyle()
-	local onClosed = p1.onClosed
-	local onViewStateChanged = p1.onViewStateChanged
-	local var4 = reactModule.useCallback(function(p2, p3, p4)
-		-- upvalues: peekViewStateModule (copy), onClosed (ref), var1 (ref), p1 (ref), peekViewDismissedEventModule (copy), cryoModule (copy), var2 (ref), onViewStateChanged (ref)
-		if p2 == peekViewStateModule.Closed then
-			if onClosed then
-				onClosed()
+return function(p1) --[[ Line: 48 | Named "PeekViewWithTopBar" ]]
+	-- upvalues: UseRoactServiceFunction (copy), AppEventIngestService (copy), UseRouteNameFunction (copy), UseStyleFunction (copy), ReactModule (copy), PeekViewStateModule (copy), PeekViewDismissedEventModule (copy), CryoModule (copy), PeekViewModule (copy), FFlagProfilePlatformNewProfileHeader (copy)
+	local UseRoactServiceResult = UseRoactServiceFunction(AppEventIngestService)
+	local UseRouteNameResult = UseRouteNameFunction()
+	local UseStyleResult = UseStyleFunction()
+	local OnClosedFunction = p1.onClosed
+	local OnViewStateChangedFunction = p1.onViewStateChanged
+	local UseResult = ReactModule.useCallback(function(Closed, p2, p3) --[[ Line: 55 ]]
+		-- upvalues: PeekViewStateModule (upval), OnClosedFunction (copy), UseRoactServiceResult (copy), p1 (copy), PeekViewDismissedEventModule (upval), CryoModule (upval), UseRouteNameResult (copy), OnViewStateChangedFunction (copy)
+		if Closed == PeekViewStateModule.Closed then
+			if OnClosedFunction then
+				OnClosedFunction()
 			end
-			if p4.dismissMethod and var1 then
-				peekViewDismissedEventModule.logEvent(var1, "PeekView", cryoModule.Dictionary.join(p1.viewChangedEventMeta or {}, p4, { page = var2 }))
+			if p3.dismissMethod and UseRoactServiceResult then
+				PeekViewDismissedEventModule.logEvent(UseRoactServiceResult, "PeekView", CryoModule.Dictionary.join(p1.viewChangedEventMeta or {}, p3, { page = UseRouteNameResult }))
 			end
 		end
-		if onViewStateChanged then
-			onViewStateChanged(p2, p3)
+		if OnViewStateChangedFunction then
+			OnViewStateChangedFunction(Closed, p2)
 		end
 	end, {
-		onClosed,
-		onViewStateChanged,
+		OnClosedFunction,
+		OnViewStateChangedFunction,
 		p1.viewChangedEventMeta,
-		var1,
-		var2
+		UseRoactServiceResult,
+		UseRouteNameResult
 	})
-	local var5, var6 = reactModule.useBinding(0)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
 		Position = UDim2.fromOffset(0, 0),
 		Size = UDim2.new(p1.viewWidth or UDim.new(1, 0), UDim.new(1, 0))
 	}, {
-		PeekViewTopBar = reactModule.createElement("CanvasGroup", {
+		PeekViewTopBar = ReactModule.createElement("CanvasGroup", {
 			Active = false,
 			BackgroundTransparency = 0,
 			BorderSizePixel = 0,
 			ZIndex = 2,
 			Position = UDim2.new(0, 0, 0, 0),
 			Size = UDim2.new(1, 0, 0, p1.topBarHeight),
-			BackgroundColor3 = var3.Theme.BackgroundDefault.Color,
-			BorderColor3 = var3.Tokens.Color.Common.Shimmer.Color3,
-			GroupTransparency = var5:map(function(p2)
+			BackgroundColor3 = UseStyleResult.Theme.BackgroundDefault.Color,
+			BorderColor3 = UseStyleResult.Tokens.Color.Common.Shimmer.Color3,
+			GroupTransparency = UseBindingResult:map(function(p2: number): number --[[ Line: 101 ]]
 				return 1 - p2
 			end)
 		}, { PeekViewTopBarInner = p1.topBarSlot }),
-		PeekViewContainer = reactModule.createElement("Frame", {
+		PeekViewContainer = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			ClipsDescendants = true,
 			Size = UDim2.new(1, 0, 1, 0),
 			Position = UDim2.new(0, 0, 0, 0)
 		}, {
-			PeekView = reactModule.createElement(peekViewModule, {
+			PeekView = ReactModule.createElement(PeekViewModule, {
 				hasScrim = true,
 				fullViewContentHeight = p1.fullViewContentHeight,
 				briefViewContentHeight = p1.briefViewContentHeight,
@@ -72,19 +72,19 @@ return function(p1)
 				bottomDockedContainerContent = { PeekViewBottomBar = p1.bottomBarSlot },
 				mountAsFullView = p1.mountAsFullView,
 				mountAnimation = p1.mountAnimation,
-				viewStateChanged = var4,
-				briefToFullTransitionPercent = function(p2)
-					-- upvalues: var6 (ref), p1 (ref)
-					var6(p2)
+				viewStateChanged = UseResult,
+				briefToFullTransitionPercent = function(p2) --[[ Line: 80 ]]
+					-- upvalues: UseBindingResult2 (copy), p1 (copy)
+					UseBindingResult2(p2)
 					
 					if p1.transitionPercentCallback then
 						p1.transitionPercentCallback(p2)
 					end
 				end,
-				hasSolidDragger = if fFlagProfilePlatformNewProfileHeader then p1.hasSolidDragger else nil,
+				hasSolidDragger = if FFlagProfilePlatformNewProfileHeader then p1.hasSolidDragger else nil,
 				scrollingFrameRef = p1.scrollingFrameRef
 			}, {
-				UIListLayout = reactModule.createElement("UIListLayout", {
+				UIListLayout = ReactModule.createElement("UIListLayout", {
 					Padding = UDim.new(0, 0),
 					SortOrder = Enum.SortOrder.LayoutOrder,
 					HorizontalAlignment = Enum.HorizontalAlignment.Left,

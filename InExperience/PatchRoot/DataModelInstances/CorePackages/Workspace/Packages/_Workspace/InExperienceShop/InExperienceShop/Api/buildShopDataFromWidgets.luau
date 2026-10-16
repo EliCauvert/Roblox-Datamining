@@ -1,189 +1,193 @@
-﻿local inExperienceShop = script:FindFirstAncestor("InExperienceShop")
-local parent = inExperienceShop.Parent
-local promiseModule = require(parent.Promise)
-local sharedFlagsModule = require(parent.SharedFlags)
-local constantsModule = require(inExperienceShop.Constants)
-local _ = require(inExperienceShop.Types)
-local fFlagEnableRobuxInExperienceShop = sharedFlagsModule.FFlagEnableRobuxInExperienceShop
-local fFlagEnableBonusJwtInShop = sharedFlagsModule.FFlagEnableBonusJwtInShop
+﻿local InExperienceShop = script:FindFirstAncestor("InExperienceShop")
+local Parent = InExperienceShop.Parent
+local PromiseModule = require(Parent.Promise)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local ConstantsModule = require(InExperienceShop.Constants)
+local _ = require(InExperienceShop.Types)
+local FFlagEnableRobuxInExperienceShop = SharedFlagsModule.FFlagEnableRobuxInExperienceShop
+local FFlagEnableBonusJwtInShop = SharedFlagsModule.FFlagEnableBonusJwtInShop
 local _ = require(script.Parent.multiGetProductInfo)
-local shopItemMappingModule = require(script.Parent.shopItemMapping)
-local hydrateRobuxBonusItemsModule = require(script.Parent.hydrateRobuxBonusItems)
-local toRobuxPackageItem = require(script.Parent.robuxWidgetMapping).toRobuxPackageItem
-local appendBonusItemRequests = hydrateRobuxBonusItemsModule.appendBonusItemRequests
-local mergeBonusItemDetailsIntoSections = hydrateRobuxBonusItemsModule.mergeBonusItemDetailsIntoSections
-local makeRequestKey = shopItemMappingModule.makeRequestKey
-local toShopItem = shopItemMappingModule.toShopItem
-local logCounterModule = require(inExperienceShop.Internal.logCounter)
-local productInfoFailedItemsCounterModule = require(inExperienceShop.Events.ProductInfoFailedItemsCounter)
-local fFlagEnableExperienceShopGlobalIconModule = require(inExperienceShop.Flags.FFlagEnableExperienceShopGlobalIcon)
-local fFlagIdentifyTopPicksByCategoryTypeModule = require(inExperienceShop.Flags.FFlagIdentifyTopPicksByCategoryType)
-local fFlagParseStableCategoryIdModule = require(inExperienceShop.Flags.FFlagParseStableCategoryId)
-local t = {
+local ShopItemMappingModule = require(script.Parent.shopItemMapping)
+local HydrateRobuxBonusItemsModule = require(script.Parent.hydrateRobuxBonusItems)
+local ToRobuxPackageItemFunction = require(script.Parent.robuxWidgetMapping).toRobuxPackageItem
+local AppendBonusItemRequestsFunction = HydrateRobuxBonusItemsModule.appendBonusItemRequests
+local MergeBonusItemDetailsIntoSectionsFunction = HydrateRobuxBonusItemsModule.mergeBonusItemDetailsIntoSections
+local MakeRequestKeyFunction = ShopItemMappingModule.makeRequestKey
+local ToShopItemFunction = ShopItemMappingModule.toShopItem
+local LogCounterModule = require(InExperienceShop.Internal.logCounter)
+local ProductInfoFailedItemsCounterModule = require(InExperienceShop.Events.ProductInfoFailedItemsCounter)
+local FFlagEnableExperienceShopGlobalIconModule = require(InExperienceShop.Flags.FFlagEnableExperienceShopGlobalIcon)
+local FFlagIdentifyTopPicksByCategoryTypeModule = require(InExperienceShop.Flags.FFlagIdentifyTopPicksByCategoryType)
+local FFlagParseStableCategoryIdModule = require(InExperienceShop.Flags.FFlagParseStableCategoryId)
+local config = {
 	name = "CommonUI.Features.Label.Home",
-	id = constantsModule.HOME_CATEGORY_ID
+	id = ConstantsModule.HOME_CATEGORY_ID
 }
 
-return function(p1, p2)
-	-- upvalues: t (ref), constantsModule (ref), fFlagIdentifyTopPicksByCategoryTypeModule (ref), fFlagParseStableCategoryIdModule (ref), fFlagEnableRobuxInExperienceShop (ref), fFlagEnableBonusJwtInShop (ref), toRobuxPackageItem (ref), promiseModule (ref), fFlagEnableExperienceShopGlobalIconModule (ref), appendBonusItemRequests (ref), makeRequestKey (ref), toShopItem (ref), logCounterModule (ref), productInfoFailedItemsCounterModule (ref), mergeBonusItemDetailsIntoSections (ref)
-	local list = { t }
-	local t_1 = {}
-	local t_2 = {}
-	local t_3 = {}
-	local t_4 = {}
+return function(p1, Callback) --[[ Line: 92 | Named "buildShopDataFromWidgets" ]]
+	-- upvalues: config (copy), ConstantsModule (copy), FFlagIdentifyTopPicksByCategoryTypeModule (copy), FFlagParseStableCategoryIdModule (copy), FFlagEnableRobuxInExperienceShop (copy), FFlagEnableBonusJwtInShop (copy), ToRobuxPackageItemFunction (copy), PromiseModule (copy), FFlagEnableExperienceShopGlobalIconModule (copy), AppendBonusItemRequestsFunction (copy), MakeRequestKeyFunction (copy), ToShopItemFunction (copy), LogCounterModule (copy), ProductInfoFailedItemsCounterModule (copy), MergeBonusItemDetailsIntoSectionsFunction (copy)
+	local List = { config }
+	local t = {}
+	local List1 = {}
+	local List2 = {}
+	local t1 = {}
 	
-	for i, v in ipairs(p1.categories) do
-		if not constantsModule.BLACKLISTED_CATEGORY_NAMES[string.lower(v.name)] then
-			local var1 = tostring(v.id)
-			table.insert(list, { id = var1, name = v.name })
-			local var2 = #t_1 + 1
-			local t_5 = { id = var1, name = v.name, items = {} }
-			local metadata = v.metadata
+	for _, category in ipairs(p1.categories) do
+		if not ConstantsModule.BLACKLISTED_CATEGORY_NAMES[string.lower(category.name)] then
+			local Text = tostring(category.id)
+			table.insert(List, { id = Text, name = category.name })
+			local CategoryIndex = #t + 1
+			local config1 = { id = Text, name = category.name, items = {} }
+			local Metadata = category.metadata
 			
-			if fFlagIdentifyTopPicksByCategoryTypeModule and metadata ~= nil and metadata.categoryType ~= nil then
-				t_5.categoryType = metadata.categoryType
+			if FFlagIdentifyTopPicksByCategoryTypeModule and Metadata ~= nil and Metadata.categoryType ~= nil then
+				config1.categoryType = Metadata.categoryType
 			end
-			if fFlagParseStableCategoryIdModule and metadata ~= nil and metadata.categoryId ~= nil then
-				t_5.stableCategoryId = metadata.categoryId
+			if FFlagParseStableCategoryIdModule and Metadata ~= nil and Metadata.categoryId ~= nil then
+				config1.stableCategoryId = Metadata.categoryId
 			end
-			if fFlagParseStableCategoryIdModule and metadata ~= nil and metadata.categoryGroup ~= nil then
-				t_5.categoryGroup = metadata.categoryGroup
+			if FFlagParseStableCategoryIdModule and Metadata ~= nil and Metadata.categoryGroup ~= nil then
+				config1.categoryGroup = Metadata.categoryGroup
 			end
-			if fFlagEnableRobuxInExperienceShop and metadata ~= nil and metadata.paymentSessionId ~= nil then
-				t_5.paymentSessionId = metadata.paymentSessionId
+			if FFlagEnableRobuxInExperienceShop and Metadata ~= nil and Metadata.paymentSessionId ~= nil then
+				config1.paymentSessionId = Metadata.paymentSessionId
 			end
-			if fFlagEnableBonusJwtInShop and metadata ~= nil and metadata.bonusJwt ~= nil then
-				t_5.bonusJwt = metadata.bonusJwt
+			if FFlagEnableBonusJwtInShop and Metadata ~= nil and Metadata.bonusJwt ~= nil then
+				config1.bonusJwt = Metadata.bonusJwt
 			end
-			t_1[var2] = t_5
-			local var3 = 0
+			t[CategoryIndex] = config1
+			local SectionItemIndex = 0
 			
-			for i_1, v_1 in ipairs(v.items) do
-				local product, var4
-				local type = v_1.type
-				local _ = nil
-				local _ = nil
+			for _, item in ipairs(category.items) do
+				local Type = item.type
+				local Product = nil
+				local ItemType = nil
 				
-				if type == "Product" then
-					product = Enum.InfoType.Product
-					var4 = type
-				elseif type == "GamePass" then
-					product = Enum.InfoType.GamePass
-					var4 = type
-				elseif type == "Robux" and fFlagEnableRobuxInExperienceShop then
-					local var5 = toRobuxPackageItem(v_1)
-					
-					if var5 ~= nil then
-						if t_5.robuxPackages == nil then
-							t_5.robuxPackages = {}
-						end
-						local robuxPackages = t_5.robuxPackages
+				if Type == "Product" then
+					Product = Enum.InfoType.Product
+					ItemType = Type
+				elseif Type == "GamePass" then
+					Product = Enum.InfoType.GamePass
+					ItemType = Type
+				else
+					if Type == "Robux" and FFlagEnableRobuxInExperienceShop then
+						local RobuxPackageItem = ToRobuxPackageItemFunction(item)
 						
-						if #robuxPackages == 0 then
-							var5.isPrimaryRobuxPackage = true
+						if RobuxPackageItem ~= nil then
+							if config1.robuxPackages == nil then
+								config1.robuxPackages = {}
+							end
+							local RobuxPackages = config1.robuxPackages
+							
+							if #RobuxPackages == 0 then
+								RobuxPackageItem.isPrimaryRobuxPackage = true
+							end
+							table.insert(RobuxPackages, RobuxPackageItem)
+							continue
 						end
-						table.insert(robuxPackages, var5)
+						continue
 					end
+					continue
 				end
-				var3 += 1
-				t_4[var2] = true
-				table.insert(t_2, { id = v_1.id, infoType = product })
-				table.insert(t_3, {
-					categoryIndex = var2,
-					sectionId = var1,
-					itemType = var4,
-					sectionItemIndex = var3
+				SectionItemIndex += 1
+				t1[CategoryIndex] = true
+				table.insert(List1, { id = item.id, infoType = Product })
+				table.insert(List2, {
+					categoryIndex = CategoryIndex,
+					sectionId = Text,
+					itemType = ItemType,
+					sectionItemIndex = SectionItemIndex
 				})
 			end
 		end
 	end
-	local function filterOutput(p3)
-		-- upvalues: t_4 (ref), list (ref), constantsModule (copy)
+	local function filterOutput(List1) --[[ Line: 215 ]]
+		-- upvalues: t1 (copy), List (copy), ConstantsModule (upval)
+		local List2 = {}
 		local t = {}
-		local t_1 = {}
 		
-		for i, v in ipairs(p3) do
-			if t_4[i] or v.robuxPackages ~= nil and #v.robuxPackages > 0 then
-				table.insert(t, v)
-				t_1[v.id] = true
+		for i, value in ipairs(List1) do
+			if t1[i] or value.robuxPackages ~= nil and #value.robuxPackages > 0 then
+				table.insert(List2, value)
+				t[value.id] = true
 			end
 		end
-		local t_2 = {}
+		local List3 = {}
 		
-		for i_1, v_1 in ipairs(list) do
-			if v_1.id == constantsModule.HOME_CATEGORY_ID or t_1[v_1.id] then
-				table.insert(t_2, v_1)
+		for _, value1 in ipairs(List) do
+			if value1.id == ConstantsModule.HOME_CATEGORY_ID or t[value1.id] then
+				table.insert(List3, value1)
 			end
 		end
-		return t_2, t
+		return List3, List2
 	end
 	
-	if p2 == nil then
-		local list_1 = table.create(#t_2)
+	if Callback == nil then
+		local Buffer = table.create(#List1)
 		
-		for i_1, v_1 in ipairs(t_2) do
-			local var6 = t_3[i_1]
-			list_1[i_1] = {
-				id = v_1.id,
-				infoType = v_1.infoType,
-				itemType = var6.itemType,
-				sectionId = var6.sectionId,
-				originalIndex = var6.sectionItemIndex
+		for i, value in ipairs(List1) do
+			local Entry = List2[i]
+			Buffer[i] = {
+				id = value.id,
+				infoType = value.infoType,
+				itemType = Entry.itemType,
+				sectionId = Entry.sectionId,
+				originalIndex = Entry.sectionItemIndex
 			}
 		end
-		local var7, var8 = filterOutput(t_1)
+		local FilterOutputResult, FilterOutputResult2 = filterOutput(t)
 		
-		return promiseModule.resolve({
-			categories = var7,
-			sections = var8,
-			failedItems = list_1,
-			metadata = if fFlagEnableExperienceShopGlobalIconModule then p1.metadata else nil
+		return PromiseModule.resolve({
+			categories = FilterOutputResult,
+			sections = FilterOutputResult2,
+			failedItems = Buffer,
+			metadata = if FFlagEnableExperienceShopGlobalIconModule then p1.metadata else nil
 		})
 	else
-		local t_2Count = #t_2
+		local CountList1 = #List1
 		
-		if fFlagEnableRobuxInExperienceShop then
-			appendBonusItemRequests(t_2, t_1)
+		if FFlagEnableRobuxInExperienceShop then
+			AppendBonusItemRequestsFunction(List1, t)
 		end
-		return p2(t_2):andThen(function(p4)
-			-- upvalues: makeRequestKey (copy), t_2Count (ref), t_2 (ref), t_3 (ref), t_1 (ref), toShopItem (copy), logCounterModule (copy), productInfoFailedItemsCounterModule (copy), fFlagEnableRobuxInExperienceShop (copy), mergeBonusItemDetailsIntoSections (copy), filterOutput (ref), fFlagEnableExperienceShopGlobalIconModule (copy), p1 (ref)
-			local t = {}
+		return Callback(List1):andThen(function(Result) --[[ Line: 260 ]]
+			-- upvalues: MakeRequestKeyFunction (upval), CountList1 (copy), List1 (copy), List2 (copy), t (copy), ToShopItemFunction (upval), LogCounterModule (upval), ProductInfoFailedItemsCounterModule (upval), FFlagEnableRobuxInExperienceShop (upval), MergeBonusItemDetailsIntoSectionsFunction (upval), filterOutput (copy), FFlagEnableExperienceShopGlobalIconModule (upval), p1 (copy)
+			local t2 = {}
 			
-			for i, v in ipairs(p4) do
-				t[makeRequestKey(v.request.id, v.request.infoType)] = v
+			for _, value in ipairs(Result) do
+				t2[MakeRequestKeyFunction(value.request.id, value.request.infoType)] = value
 			end
-			local t_4 = {}
+			local FailedItems = {}
 			
-			for i_1 = 1, t_2Count do
-				local var9 = t_2[i_1]
-				local var10 = t_3[i_1]
-				local id = t[makeRequestKey(var9.id, var9.infoType)]
+			for i = 1, CountList1 do
+				local Entry = List1[i]
+				local Entry1 = List2[i]
+				local Entry2 = t2[MakeRequestKeyFunction(Entry.id, Entry.infoType)]
 				
-				if id == nil or not id.ok then
-					table.insert(t_4, {
-						id = var9.id,
-						infoType = var9.infoType,
-						itemType = var10.itemType,
-						sectionId = var10.sectionId,
-						originalIndex = var10.sectionItemIndex
+				if Entry2 == nil or not Entry2.ok then
+					table.insert(FailedItems, {
+						id = Entry.id,
+						infoType = Entry.infoType,
+						itemType = Entry1.itemType,
+						sectionId = Entry1.sectionId,
+						originalIndex = Entry1.sectionItemIndex
 					})
 				else
-					local categoryIndex = t_1[var10.categoryIndex]
-					local var11 = toShopItem(id.value, var10.itemType, var9.id)
-					var11.originalIndex = var10.sectionItemIndex
-					table.insert(categoryIndex.items, var11)
+					local Entry3 = t[Entry1.categoryIndex]
+					local ShopItem = ToShopItemFunction(Entry2.value, Entry1.itemType, Entry.id)
+					ShopItem.originalIndex = Entry1.sectionItemIndex
+					table.insert(Entry3.items, ShopItem)
 				end
 			end
-			if #t_4 > 0 then
-				logCounterModule(productInfoFailedItemsCounterModule, #t_4)
+			if #FailedItems > 0 then
+				LogCounterModule(ProductInfoFailedItemsCounterModule, #FailedItems)
 			end
-			local var12, var13 = filterOutput(if fFlagEnableRobuxInExperienceShop then mergeBonusItemDetailsIntoSections(t_1, p4) else t_1)
+			local FilterOutputResult, FilterOutputResult2 = filterOutput(if FFlagEnableRobuxInExperienceShop then MergeBonusItemDetailsIntoSectionsFunction(t, Result) else t)
 			
 			return {
-				categories = var12,
-				sections = var13,
-				failedItems = t_4,
-				metadata = if fFlagEnableExperienceShopGlobalIconModule then p1.metadata else nil
+				categories = FilterOutputResult,
+				sections = FilterOutputResult2,
+				failedItems = FailedItems,
+				metadata = if FFlagEnableExperienceShopGlobalIconModule then p1.metadata else nil
 			}
 		end)
 	end

@@ -1,1 +1,1 @@
-﻿return require(script.Snackbar)
+﻿return (require(script.Snackbar))

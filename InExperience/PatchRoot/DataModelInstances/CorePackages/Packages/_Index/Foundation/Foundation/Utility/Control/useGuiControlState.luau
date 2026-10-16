@@ -1,66 +1,66 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local reactModule = require(parent.React)
-local useForwardRef = require(parent.ReactUtils).useForwardRef
-local controlStateModule = require(foundation.Enums.ControlState)
-local _ = require(foundation.Enums.ControlStateEvent)
-local _ = require(foundation.Components.Types)
-local t = {
-	[Enum.GuiState.Idle] = controlStateModule.Default,
-	[Enum.GuiState.Hover] = controlStateModule.Hover,
-	[Enum.GuiState.Press] = controlStateModule.Pressed,
-	[Enum.GuiState.NonInteractable] = controlStateModule.Disabled
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local ReactModule = require(Parent.React)
+local UseForwardRefFunction = require(Parent.ReactUtils).useForwardRef
+local ControlStateModule = require(Foundation.Enums.ControlState)
+local _ = require(Foundation.Enums.ControlStateEvent)
+local _ = require(Foundation.Components.Types)
+local config = {
+	[Enum.GuiState.Idle] = ControlStateModule.Default,
+	[Enum.GuiState.Hover] = ControlStateModule.Hover,
+	[Enum.GuiState.Press] = ControlStateModule.Pressed,
+	[Enum.GuiState.NonInteractable] = ControlStateModule.Disabled
 }
 
-return function(p1, p2)
-	-- upvalues: reactModule (ref), controlStateModule (ref), t (ref), useForwardRef (ref)
-	local var1 = reactModule.useRef(false)
-	local var2 = reactModule.useRef(controlStateModule.Initialize)
-	local var3 = reactModule.useCallback(function(p3)
-		-- upvalues: var2 (ref), var1 (ref), controlStateModule (copy), p2 (ref)
-		local current = var2.current
+return function(p1, Callback) --[[ Line: 22 | Named "useGuiControlState" ]]
+	-- upvalues: ReactModule (copy), ControlStateModule (copy), config (copy), UseForwardRefFunction (copy)
+	local UseRefResult = ReactModule.useRef(false)
+	local UseRefResult1 = ReactModule.useRef(ControlStateModule.Initialize)
+	local UseResult = ReactModule.useCallback(function(Current) --[[ Line: 26 ]]
+		-- upvalues: UseRefResult1 (copy), UseRefResult (copy), ControlStateModule (upval), Callback (copy)
+		local Current1 = UseRefResult1.current
 		
-		if var1.current then
-			if p3 == controlStateModule.Default or p3 == controlStateModule.Hover then
-				p3 = controlStateModule.Selected
-			elseif p3 == controlStateModule.Pressed then
-				p3 = controlStateModule.SelectedPressed
+		if UseRefResult.current then
+			if Current == ControlStateModule.Default or Current == ControlStateModule.Hover then
+				Current = ControlStateModule.Selected
+			elseif Current == ControlStateModule.Pressed then
+				Current = ControlStateModule.SelectedPressed
 			end
 		end
-		if current == p3 then return end
-		var2.current = p3
+		if Current1 == Current then return end
+		UseRefResult1.current = Current
 		
-		if p2 ~= nil then
-			p2(p3)
+		if Callback ~= nil then
+			Callback(Current)
 		end
-	end, { p2 })
+	end, { Callback })
 	
-	return useForwardRef(p1, reactModule.useCallback(function(p3)
-		-- upvalues: var3 (ref), t (copy), var1 (ref), var2 (ref)
-		local t_1 = {}
+	return UseForwardRefFunction(p1, (ReactModule.useCallback(function(Object) --[[ Line: 48 ]]
+		-- upvalues: UseResult (copy), config (upval), UseRefResult (copy), UseRefResult1 (copy)
+		local List = {}
 		
-		if p3 then
-			var3(t[p3.GuiState])
-			table.insert(t_1, p3:GetPropertyChangedSignal("GuiState"):Connect(function()
-				-- upvalues: t (copy), p3 (ref), var3 (copy)
-				var3(t[p3.GuiState])
+		if Object then
+			UseResult(config[Object.GuiState])
+			table.insert(List, Object:GetPropertyChangedSignal("GuiState"):Connect(function() --[[ Line: 55 ]]
+				-- upvalues: config (upval), Object (copy), UseResult (upval)
+				UseResult(config[Object.GuiState])
 			end))
-			table.insert(t_1, p3.SelectionGained:Connect(function()
-				-- upvalues: var1 (copy), var3 (copy), var2 (copy)
-				var1.current = true
-				var3(var2.current)
+			table.insert(List, Object.SelectionGained:Connect(function() --[[ Line: 64 ]]
+				-- upvalues: UseRefResult (upval), UseResult (upval), UseRefResult1 (upval)
+				UseRefResult.current = true
+				UseResult(UseRefResult1.current)
 			end))
-			table.insert(t_1, p3.SelectionLost:Connect(function()
-				-- upvalues: var1 (copy), var3 (copy), var2 (copy)
-				var1.current = false
-				var3(var2.current)
+			table.insert(List, Object.SelectionLost:Connect(function() --[[ Line: 71 ]]
+				-- upvalues: UseRefResult (upval), UseResult (upval), UseRefResult1 (upval)
+				UseRefResult.current = false
+				UseResult(UseRefResult1.current)
 			end))
 		end
-		return function()
-			-- upvalues: t_1 (ref)
-			for i, v in t_1 do
-				v:Disconnect()
+		return function() --[[ Line: 78 ]]
+			-- upvalues: List (copy)
+			for _, Connection in List do
+				Connection:Disconnect()
 			end
 		end
-	end, { var3 }))
+	end, { UseResult })))
 end

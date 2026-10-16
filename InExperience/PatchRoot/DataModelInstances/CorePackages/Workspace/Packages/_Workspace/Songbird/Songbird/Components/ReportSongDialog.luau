@@ -1,20 +1,19 @@
-﻿local songbird = script:FindFirstAncestor("Songbird")
-local httpService = game:GetService("HttpService")
-local playersService = game:GetService("Players")
-local assetFavoritesModule = require(songbird.Parent.AssetFavorites)
-local foundationModule = require(songbird.Parent.Foundation)
-local reactModule = require(songbird.Parent.React)
-local focusNavigationUtilsModule = require(songbird.Parent.FocusNavigationUtils)
-local loggerModule = require(songbird.logger)
-local _ = require(songbird.types)
-local focusRoot = focusNavigationUtilsModule.FocusRoot
-local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
-local defaultTwoStepReportFlowModule = require(songbird.Parent.GenericAbuseReporting.DefaultTwoStepReportFlow)
-local abuseCategoryModule = require(songbird.Parent.GenericAbuseReporting.AbuseCategory)
-local abuseEntrypointModule = require(songbird.Parent.GenericAbuseReporting.AbuseEntrypoint)
-local useCallback = reactModule.useCallback
-local useLocalUserId = assetFavoritesModule.useLocalUserId
-local list = {
+﻿local Songbird = script:FindFirstAncestor("Songbird")
+local HttpService = game:GetService("HttpService")
+local Players = game:GetService("Players")
+local FoundationModule = require(Songbird.Parent.Foundation)
+local ReactModule = require(Songbird.Parent.React)
+local FocusNavigationUtilsModule = require(Songbird.Parent.FocusNavigationUtils)
+local LoggerModule = require(Songbird.logger)
+local _ = require(Songbird.types)
+local FocusRoot = FocusNavigationUtilsModule.FocusRoot
+local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
+local DefaultTwoStepReportFlowModule = require(Songbird.Parent.GenericAbuseReporting.DefaultTwoStepReportFlow)
+local AbuseCategoryModule = require(Songbird.Parent.GenericAbuseReporting.AbuseCategory)
+local AbuseEntrypointModule = require(Songbird.Parent.GenericAbuseReporting.AbuseEntrypoint)
+local UseCallbackFunction = ReactModule.useCallback
+local UseLocalUserIdFunction = require(Songbird.Parent.AssetFavorites).useLocalUserId
+local ReportCategories = {
 	{
 		localizationKey = "Feature.SongDetails.Label.InappropriateAudio",
 		value = "InappropriateAudio"
@@ -24,17 +23,16 @@ local list = {
 		value = "InappropriateThumbnail"
 	}
 }
-local _ = { Audio = "audio", Image = "image" }
 
-local function buildReport(p1)
-	-- upvalues: abuseEntrypointModule (ref), abuseCategoryModule (ref), httpService (ref)
-	local t = {
+local function buildReport(p1) --[[ Line: 57 ]]
+	-- upvalues: AbuseEntrypointModule (copy), AbuseCategoryModule (copy), HttpService (copy)
+	local config = {
 		tags = {
-			ENTRY_POINT = { valueList = { { data = abuseEntrypointModule.APP } } },
+			ENTRY_POINT = { valueList = { { data = AbuseEntrypointModule.APP } } },
 			SUBMITTER_USER_ID = { valueList = { { data = tostring(p1.userId) } } },
 			REPORTED_ABUSE_CATEGORY = {
 				valueList = {
-					{ data = abuseCategoryModule.ABUSE_CATEGORY_INAPT_CONTENT }
+					{ data = AbuseCategoryModule.ABUSE_CATEGORY_INAPT_CONTENT }
 				}
 			},
 			REPORTER_COMMENT = { valueList = { { data = p1.comment } } },
@@ -43,62 +41,62 @@ local function buildReport(p1)
 			VARIANT = { valueList = { { data = p1.variant } } }
 		}
 	}
-	local ok, status = pcall(function()
-		-- upvalues: httpService (copy), t (ref)
-		return httpService:JSONEncode(t)
+	local Success, Result = pcall(function() --[[ Line: 110 ]]
+		-- upvalues: HttpService (upval), config (copy)
+		return HttpService:JSONEncode(config)
 	end)
 	
-	return if ok then status else nil
+	return if Success then Result else nil
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: useLocalUserId (ref), useCallback (ref), list (ref), buildReport (ref), playersService (ref), loggerModule (ref), reactModule (ref), foundationModule (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), defaultTwoStepReportFlowModule (ref)
-	local var1 = useLocalUserId()
-	local var2 = useCallback(function()
-		-- upvalues: p1 (ref)
+return ReactModule.memo(function(p1) --[[ Line: 117 | Named "ReportSongDialog" ]]
+	-- upvalues: UseLocalUserIdFunction (copy), UseCallbackFunction (copy), ReportCategories (copy), buildReport (copy), Players (copy), LoggerModule (copy), ReactModule (copy), FoundationModule (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), DefaultTwoStepReportFlowModule (copy)
+	local UseLocalUserIdResult = UseLocalUserIdFunction()
+	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 120 ]]
+		-- upvalues: p1 (copy)
 		if p1.onClose then
 			p1.onClose()
 		end
 	end, { p1.onClose })
 	
-	return reactModule.createElement(foundationModule.View, { tag = "size-full-0 auto-y", selectionGroup = true }, {
-		FocusRoot = reactModule.createElement(focusRoot, {
+	return ReactModule.createElement(FoundationModule.View, { tag = "size-full-0 auto-y", selectionGroup = true }, {
+		FocusRoot = ReactModule.createElement(FocusRoot, {
 			isIsolated = true,
 			isAutoFocusRoot = true,
-			surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.CentralOverlay
+			surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.CentralOverlay
 		}, {
-			AbuseReportFlow = reactModule.createElement(defaultTwoStepReportFlowModule, {
+			AbuseReportFlow = ReactModule.createElement(DefaultTwoStepReportFlowModule, {
 				analyticsContext = p1.analyticsSource,
-				onCloseProps = { hasPreviousSteps = false, onAbandon = var2 },
+				onCloseProps = { hasPreviousSteps = false, onAbandon = UseCallbackResult },
 				onSubmitProps = {
 					hasNextSteps = false,
-					onSubmit = useCallback(function(p2, p3)
-						-- upvalues: list (copy), p1 (ref), buildReport (copy), var1 (ref), playersService (copy), loggerModule (copy)
-						local var3 = p2 == list[1].value
-						local var4 = if var3 then p1.audio.assetId else p1.audio.thumbnailAssetId
+					onSubmit = UseCallbackFunction(function(p2, Comment): boolean --[[ Line: 126 ]]
+						-- upvalues: ReportCategories (upval), p1 (copy), buildReport (upval), UseLocalUserIdResult (copy), Players (upval), LoggerModule (upval)
+						local IsValueMatch = p2 == ReportCategories[1].value
+						local AssetId = if IsValueMatch then p1.audio.assetId else p1.audio.thumbnailAssetId
 						
-						if var4 then
-							local var5 = buildReport({
-								userId = var1,
-								comment = p3,
-								assetId = var4,
-								abuseVector = if var3 then "audio" else "image",
+						if AssetId then
+							local Report = buildReport({
+								userId = UseLocalUserIdResult,
+								comment = Comment,
+								assetId = AssetId,
+								abuseVector = if IsValueMatch then "audio" else "image",
 								variant = p1.analyticsSource
 							})
 							
-							if var5 then
-								local localPlayer = playersService.LocalPlayer
+							if Report then
+								local LocalPlayer = Players.LocalPlayer
 								
-								if localPlayer then
-									local ok, status = pcall(function()
-										-- upvalues: playersService (copy), localPlayer (ref), var5 (ref)
-										playersService:ReportAbuseV3(localPlayer, var5)
+								if LocalPlayer then
+									local Success, Result = pcall(function() --[[ Line: 142 ]]
+										-- upvalues: Players (upval), LocalPlayer (copy), Report (copy)
+										Players:ReportAbuseV3(LocalPlayer, Report)
 									end)
 									
-									if ok then
-										loggerModule:info(`Abuse report sent for asset [{var4}] with reason [{p2}] and comment [{p3}]`)
+									if Success then
+										LoggerModule:info(`Abuse report sent for asset [{AssetId}] with reason [{p2}] and comment [{Comment}]`)
 									else
-										loggerModule:warning(`Failed to submit abuse report for asset {var4}: {status}`)
+										LoggerModule:warning(`Failed to submit abuse report for asset {AssetId}: {Result}`)
 									end
 								end
 							end
@@ -108,12 +106,12 @@ return reactModule.memo(function(p1)
 						p1.analyticsSource,
 						p1.audio.assetId,
 						p1.audio.thumbnailAssetId,
-						var1
+						UseLocalUserIdResult
 					})
 				},
-				onComplete = var2,
-				reportCategories = list,
-				reportCategoryDefaultKey = list[1].value,
+				onComplete = UseCallbackResult,
+				reportCategories = ReportCategories,
+				reportCategoryDefaultKey = ReportCategories[1].value,
 				localizationKeys = { formTitle = "Feature.SongDetails.Action.ReportAudio" }
 			})
 		})

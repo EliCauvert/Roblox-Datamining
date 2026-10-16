@@ -1,23 +1,23 @@
-﻿local inExperienceIntervention = script:FindFirstAncestor("InExperienceIntervention")
-local parent = inExperienceIntervention.Parent
-local reactModule = require(parent.React)
-local constants = require(parent.InterventionShared).Utils.Constants
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local inExperienceInterventionAnalyticsModule = require(inExperienceIntervention.InExperienceInterventionAnalytics)
-local chatInterventionGenericToastModule = require(inExperienceIntervention.Components.ChatInterventionGenericToast)
+﻿local InExperienceIntervention = script:FindFirstAncestor("InExperienceIntervention")
+local Parent = InExperienceIntervention.Parent
+local ReactModule = require(Parent.React)
+local Constants = require(Parent.InterventionShared).Utils.Constants
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local InExperienceInterventionAnalyticsModule = require(InExperienceIntervention.InExperienceInterventionAnalytics)
+local ChatInterventionGenericToastModule = require(InExperienceIntervention.Components.ChatInterventionGenericToast)
 
-function ChatNudgeToast(p1)
-	-- upvalues: useLocalization (ref), constants (ref), reactModule (ref), chatInterventionGenericToastModule (ref), inExperienceInterventionAnalyticsModule (ref)
-	local var1 = useLocalization(constants.localizationKeys)
+function ChatNudgeToast(p1) --[[ Line: 14 ]]
+	-- upvalues: UseLocalizationFunction (copy), Constants (copy), ReactModule (copy), ChatInterventionGenericToastModule (copy), InExperienceInterventionAnalyticsModule (copy)
+	local UseLocalizationResult = UseLocalizationFunction(Constants.localizationKeys)
 	
-	return reactModule.createElement(chatInterventionGenericToastModule, {
+	return ReactModule.createElement(ChatInterventionGenericToastModule, {
 		eventId = p1.eventId,
 		violatingChatLine = p1.violatingChatLine,
-		toastTitle = var1.ChatBreaksRulesText,
-		toastBody = var1.TextChatMayBeSuspendedText,
-		interventionType = inExperienceInterventionAnalyticsModule.Constants.InterventionTypes.Nudge,
-		toastAppearEventName = inExperienceInterventionAnalyticsModule.Constants.EventTypes.NudgeToastAppeared,
-		toastDismissEventName = inExperienceInterventionAnalyticsModule.Constants.EventTypes.NudgeToastDismissed
+		toastTitle = UseLocalizationResult.ChatBreaksRulesText,
+		toastBody = UseLocalizationResult.TextChatMayBeSuspendedText,
+		interventionType = InExperienceInterventionAnalyticsModule.Constants.InterventionTypes.Nudge,
+		toastAppearEventName = InExperienceInterventionAnalyticsModule.Constants.EventTypes.NudgeToastAppeared,
+		toastDismissEventName = InExperienceInterventionAnalyticsModule.Constants.EventTypes.NudgeToastDismissed
 	})
 end
 

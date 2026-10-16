@@ -1,93 +1,105 @@
-﻿local var1
-local foundation = script:FindFirstAncestor("Foundation")
-local _ = require(foundation.Parent.RbxDesignFoundations)
-local colorModeModule = require(foundation.Enums.ColorMode)
-local deviceModule = require(foundation.Enums.Device)
-local flagsModule = require(foundation.Utility.Flags)
-local themeNameModule = require(foundation.Enums.ThemeName)
-local tokenProcessingUtilitiesModule = require(script.TokenProcessingUtilities)
-local _ = require(foundation.Components.Types)
-local themeGeneratorsModule = require(script.themeGenerators)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local _ = require(Foundation.Parent.RbxDesignFoundations)
+local DeprecatedTokenUtilitiesModule = require(script.DeprecatedTokenUtilities)
+local DeviceModule = require(Foundation.Enums.Device)
+local FlagsModule = require(Foundation.Utility.Flags)
+local ThemeNameModule = require(Foundation.Enums.ThemeName)
+local TokenProcessingUtilitiesModule = require(script.TokenProcessingUtilities)
+local _ = require(Foundation.Components.Types)
+local ThemeGeneratorsModule = require(script.themeGenerators)
 
-local function _(p1, p2)
-	-- upvalues: flagsModule (ref), deviceModule (ref)
-	if flagsModule.FoundationDisableTokenScaling then
+local function _(Console, Value: number): number --[[ Line: 25 | Named "getPlatformScale" ]]
+	-- upvalues: FlagsModule (copy), DeviceModule (copy)
+	if FlagsModule.FoundationDisableTokenScaling then
 		return 1
-	elseif p2 == nil then
-		p2 = 1
 	end
-	return (if p1 == deviceModule.Console then 1.5 else 1) * u159
+	if Value == nil then
+		Value = 1
+	end
+	return (if Console == DeviceModule.Console then 1.5 else 1) * math.clamp(Value, 0, 1e999)
 end
 
-local function applyTokenOverrides(p1, p2)
-	-- upvalues: tokenProcessingUtilitiesModule (ref)
-	for i, v in p2 do
-		local var2 = tokenProcessingUtilitiesModule.resolveTokenOverride(p1, i, v)
+local function applyTokenOverrides(p1, List) --[[ Line: 40 ]]
+	-- upvalues: TokenProcessingUtilitiesModule (copy)
+	for i, value in List do
+		local ResolveTokenOverrideResult = TokenProcessingUtilitiesModule.resolveTokenOverride(p1, i, value)
 		
-		if var2 ~= nil then
-			tokenProcessingUtilitiesModule.setTokenValue(p1, i, var2)
+		if ResolveTokenOverrideResult ~= nil then
+			TokenProcessingUtilitiesModule.setTokenValue(p1, i, ResolveTokenOverrideResult)
 		end
 	end
 	return p1
 end
 
-local function buildTokens(p3, p4, p5)
-	-- upvalues: applyTokenOverrides (ref)
-	local var3 = p3(p4)
-	local t = {
-		Color = var3.Color,
-		Config = var3.Config,
-		DarkMode = var3.DarkMode,
-		Ease = var3.Ease,
-		LightMode = var3.LightMode,
-		Inverse = var3.Inverse,
-		Semantic = var3.Semantic,
-		Size = var3.Size,
-		Padding = var3.Padding,
-		Margin = var3.Margin,
-		Gap = var3.Gap,
-		Gutter = var3.Gutter,
-		Radius = var3.Radius,
-		Stroke = var3.Stroke,
-		LineHeight = var3.LineHeight,
-		FontSize = var3.FontSize,
-		FontWeight = var3.FontWeight,
-		Time = var3.Time,
-		Typography = var3.Typography
+local function buildTokens(Callback, ScaledClampedValue, p2) --[[ Line: 51 ]]
+	-- upvalues: applyTokenOverrides (copy), FlagsModule (copy), DeprecatedTokenUtilitiesModule (copy)
+	local CallbackResult = Callback(ScaledClampedValue)
+	local config = {
+		Color = CallbackResult.Color,
+		Config = CallbackResult.Config,
+		DarkMode = CallbackResult.DarkMode,
+		Ease = CallbackResult.Ease,
+		LightMode = CallbackResult.LightMode,
+		Inverse = CallbackResult.Inverse,
+		Size = CallbackResult.Size,
+		Padding = CallbackResult.Padding,
+		Margin = CallbackResult.Margin,
+		Gap = CallbackResult.Gap,
+		Gutter = CallbackResult.Gutter,
+		Radius = CallbackResult.Radius,
+		Stroke = CallbackResult.Stroke,
+		LineHeight = CallbackResult.LineHeight,
+		FontSize = CallbackResult.FontSize,
+		FontWeight = CallbackResult.FontWeight,
+		Time = CallbackResult.Time,
+		Typography = CallbackResult.Typography
 	}
 	
-	if p5 then
-		applyTokenOverrides(t, p5)
+	if p2 then
+		applyTokenOverrides(config, p2)
 	end
-	return t
+	if FlagsModule.FoundationRemoveDeprecatedSemanticTokens then
+		config.Semantic = nil
+		
+		return config
+	else
+		config.Semantic = DeprecatedTokenUtilitiesModule.getDeprecatedSemanticTokens(config, ScaledClampedValue)
+		
+		return config
+	end
 end
 
-local function getTokens(p3, p4, p5, p6, p7)
-	-- upvalues: deviceModule (ref), flagsModule (ref), themeGeneratorsModule (ref), themeNameModule (ref), buildTokens (ref)
-	local var3
-	p4 = p4 or deviceModule.Desktop
-	local var4 = p5
+local function getTokens(p2, p3, p4, p5, p6) --[[ Line: 88 ]]
+	-- upvalues: DeviceModule (copy), FlagsModule (copy), ThemeGeneratorsModule (copy), ThemeNameModule (copy), buildTokens (copy)
+	local P6 = p3 or DeviceModule.Desktop
+	local Value: number = p4
+	local ScaledClampedValue = nil
 	
-	if flagsModule.FoundationDisableTokenScaling then
-		var3 = 1
-	elseif var4 == nil then
-		var4 = 1
+	if FlagsModule.FoundationDisableTokenScaling then
+		ScaledClampedValue = 1
+	else
+		if Value == nil then
+			Value = 1
+		end
+		ScaledClampedValue = (if P6 == DeviceModule.Console then 1.5 else 1) * math.clamp(Value, 0, 1e999)
 	end
-	var3 = (if p4 == deviceModule.Console then 1.5 else 1) * math.clamp(var4, 0, 1e999)
-	return buildTokens(themeGeneratorsModule.getGenerator(p7 or themeNameModule.Default, p3), var3, p6)
+	return (buildTokens(ThemeGeneratorsModule.getGenerator(p6 or ThemeNameModule.Default, p2), ScaledClampedValue, p5))
 end
 
-local dark = colorModeModule.Dark
-local desktop = deviceModule.Desktop or deviceModule.Desktop
-local var3 = nil
+local Dark = require(Foundation.Enums.ColorMode).Dark
+local Desktop = DeviceModule.Desktop or DeviceModule.Desktop
+local Value: number? = nil
+local ScaledClampedValue = nil
 
-if flagsModule.FoundationDisableTokenScaling then
-	var1 = 1
-elseif var3 == nil then
-	var3 = 1
+if FlagsModule.FoundationDisableTokenScaling then
+	ScaledClampedValue = 1
+else
+	if Value == nil then
+		Value = 1
+	end
+	ScaledClampedValue = (if Desktop == DeviceModule.Console then 1.5 else 1) * math.clamp(Value, 0, 1e999)
 end
-var1 = (if desktop == deviceModule.Console then 1.5 else 1) * math.clamp(var3, 0, 1e999)
 return {
 	getTokens = getTokens,
-	defaultTokens = buildTokens(themeGeneratorsModule.getGenerator(themeNameModule.Default, dark), var1, nil)
+	defaultTokens = buildTokens(ThemeGeneratorsModule.getGenerator(ThemeNameModule.Default, Dark), ScaledClampedValue, nil)
 }

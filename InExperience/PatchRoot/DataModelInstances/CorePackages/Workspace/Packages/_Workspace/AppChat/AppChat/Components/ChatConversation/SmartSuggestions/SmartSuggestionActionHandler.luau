@@ -1,31 +1,31 @@
-﻿local suggestionType = require(script.Parent.Types).SuggestionType
+﻿local SuggestionType = require(script.Parent.Types).SuggestionType
 
 return {
-	createSmartSuggestionActionHandler = function(p1)
-		-- upvalues: suggestionType (ref)
-		local t = {
-			[suggestionType.Message] = function(p2, p3)
-				-- upvalues: p1 (ref)
+	createSmartSuggestionActionHandler = function(p1) --[[ Line: 21 ]]
+		-- upvalues: SuggestionType (copy)
+		local config = {
+			[SuggestionType.Message] = function(p2, p3) --[[ Line: 25 ]]
+				-- upvalues: p1 (copy)
 				return p1.sendMessage(p3, p2.message.text)
 			end,
-			[suggestionType.GameCard] = function(p2, p3)
-				-- upvalues: p1 (ref)
+			[SuggestionType.GameCard] = function(p2, p3) --[[ Line: 28 ]]
+				-- upvalues: p1 (copy)
 				return p1.sendGameLinkChatMessage(p3, p2.game_card.universe_id)
 			end,
-			[suggestionType.StartParty] = function(_, p2)
-				-- upvalues: p1 (ref)
+			[SuggestionType.StartParty] = function(_, p2) --[[ Line: 31 ]]
+				-- upvalues: p1 (copy)
 				return p1.startParty(p2)
 			end
 		}
 		
-		return function(p2, p3)
-			-- upvalues: t (ref)
-			local type = t[p2.type]
+		return function(p2, p3) --[[ Line: 36 ]]
+			-- upvalues: config (copy)
+			local Entry = config[p2.type]
 			
-			if not type then
-				error(`SmartSuggestionActionHandler: unknown suggestion type "{tostring(p6.type)}"`)
+			if not Entry then
+				error(`SmartSuggestionActionHandler: unknown suggestion type "{tostring(p7.type)}"`)
 			end
-			return type(p2, p3)
+			return Entry(p2, p3)
 		end
 	end
 }

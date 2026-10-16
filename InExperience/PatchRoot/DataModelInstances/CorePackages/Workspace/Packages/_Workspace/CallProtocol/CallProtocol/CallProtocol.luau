@@ -1,129 +1,129 @@
-﻿local parent = script.Parent
-local promiseModule = require(parent.Parent.Promise)
-local callProtocolConstantsModule = require(parent.CallProtocolConstants)
-local _ = require(parent.CallProtocolTypes)
-local messageBusService = game:GetService("MessageBusService")
-local t = {}
-t.__index = t
+﻿local Parent = script.Parent
+local PromiseModule = require(Parent.Parent.Promise)
+local CallProtocolConstantsModule = require(Parent.CallProtocolConstants)
+local _ = require(Parent.CallProtocolTypes)
+local MessageBusService = game:GetService("MessageBusService")
+local CallProtocolModule = {}
+CallProtocolModule.__index = CallProtocolModule
 
-function t.new()
-	-- upvalues: t (ref)
-	return setmetatable({}, t)
+function CallProtocolModule.new() --[[ Line: 35 ]]
+	-- upvalues: CallProtocolModule (copy)
+	return (setmetatable({}, CallProtocolModule))
 end
 
-function t.initCall(_, p1, p2, p3, p4, p5, p6, p7, p8)
-	-- upvalues: messageBusService (ref), callProtocolConstantsModule (ref)
-	messageBusService:Publish(callProtocolConstantsModule.MESSAGE_INIT_CALL, {
-		callerId = p1,
-		calleeId = p2,
-		callerCombinedName = p3,
-		calleeCombinedName = p4,
-		muted = p5,
-		camEnabled = p6,
-		callerUniqueIdentifier = p7,
-		tag = p8 or ""
+function CallProtocolModule:initCall(CallerId, CalleeId, CallerCombinedName, CalleeCombinedName, Muted, CamEnabled, CallerUniqueIdentifier, p1) --[[ Line: 40 ]]
+	-- upvalues: MessageBusService (copy), CallProtocolConstantsModule (copy)
+	MessageBusService:Publish(CallProtocolConstantsModule.MESSAGE_INIT_CALL, {
+		callerId = CallerId,
+		calleeId = CalleeId,
+		callerCombinedName = CallerCombinedName,
+		calleeCombinedName = CalleeCombinedName,
+		muted = Muted,
+		camEnabled = CamEnabled,
+		callerUniqueIdentifier = CallerUniqueIdentifier,
+		tag = p1 or ""
 	})
 end
 
-function t.answerCall(_, p1)
-	-- upvalues: messageBusService (ref), callProtocolConstantsModule (ref)
-	messageBusService:Publish(callProtocolConstantsModule.MESSAGE_ANSWER_CALL, { callId = p1 })
+function CallProtocolModule:answerCall(CallId) --[[ Line: 64 ]]
+	-- upvalues: MessageBusService (copy), CallProtocolConstantsModule (copy)
+	MessageBusService:Publish(CallProtocolConstantsModule.MESSAGE_ANSWER_CALL, { callId = CallId })
 end
 
-function t.answerSuccessCall(_, p1)
-	-- upvalues: messageBusService (ref), callProtocolConstantsModule (ref)
-	messageBusService:Publish(callProtocolConstantsModule.MESSAGE_ANSWER_SUCCESS_CALL, { callId = p1 })
+function CallProtocolModule:answerSuccessCall(CallId) --[[ Line: 73 ]]
+	-- upvalues: MessageBusService (copy), CallProtocolConstantsModule (copy)
+	MessageBusService:Publish(CallProtocolConstantsModule.MESSAGE_ANSWER_SUCCESS_CALL, { callId = CallId })
 end
 
-function t.rejectCall(_, p1)
-	-- upvalues: messageBusService (ref), callProtocolConstantsModule (ref)
-	messageBusService:Publish(callProtocolConstantsModule.MESSAGE_REJECT_CALL, { callId = p1 })
+function CallProtocolModule:rejectCall(CallId) --[[ Line: 82 ]]
+	-- upvalues: MessageBusService (copy), CallProtocolConstantsModule (copy)
+	MessageBusService:Publish(CallProtocolConstantsModule.MESSAGE_REJECT_CALL, { callId = CallId })
 end
 
-function t.cancelCall(_, p1)
-	-- upvalues: messageBusService (ref), callProtocolConstantsModule (ref)
-	messageBusService:Publish(callProtocolConstantsModule.MESSAGE_CANCEL_CALL, { callId = p1 })
+function CallProtocolModule:cancelCall(CallId) --[[ Line: 91 ]]
+	-- upvalues: MessageBusService (copy), CallProtocolConstantsModule (copy)
+	MessageBusService:Publish(CallProtocolConstantsModule.MESSAGE_CANCEL_CALL, { callId = CallId })
 end
 
-function t.teleportSuccessCall(_, p1)
-	-- upvalues: messageBusService (ref), callProtocolConstantsModule (ref)
-	messageBusService:Publish(callProtocolConstantsModule.MESSAGE_TELEPORT_SUCCESS_CALL, { callId = p1 })
+function CallProtocolModule:teleportSuccessCall(CallId) --[[ Line: 100 ]]
+	-- upvalues: MessageBusService (copy), CallProtocolConstantsModule (copy)
+	MessageBusService:Publish(CallProtocolConstantsModule.MESSAGE_TELEPORT_SUCCESS_CALL, { callId = CallId })
 end
 
-function t.finishCall(_, p1)
-	-- upvalues: messageBusService (ref), callProtocolConstantsModule (ref)
-	messageBusService:Publish(callProtocolConstantsModule.MESSAGE_FINISH_CALL, { callId = p1 })
+function CallProtocolModule:finishCall(CallId) --[[ Line: 109 ]]
+	-- upvalues: MessageBusService (copy), CallProtocolConstantsModule (copy)
+	MessageBusService:Publish(CallProtocolConstantsModule.MESSAGE_FINISH_CALL, { callId = CallId })
 end
 
-function t.getCallState(_)
-	-- upvalues: promiseModule (ref), messageBusService (ref), callProtocolConstantsModule (ref)
-	return promiseModule.new(function(p1, _)
-		-- upvalues: messageBusService (copy), callProtocolConstantsModule (copy)
-		messageBusService:MakeRequest(callProtocolConstantsModule.NAME, callProtocolConstantsModule.METHOD_GET_CALL_STATE, {}, function(p2)
-			-- upvalues: p1 (ref)
-			p1(p2)
+function CallProtocolModule:getCallState() --[[ Line: 118 ]]
+	-- upvalues: PromiseModule (copy), MessageBusService (copy), CallProtocolConstantsModule (copy)
+	return (PromiseModule.new(function(Callback, _) --[[ Line: 119 ]]
+		-- upvalues: MessageBusService (upval), CallProtocolConstantsModule (upval)
+		MessageBusService:MakeRequest(CallProtocolConstantsModule.NAME, CallProtocolConstantsModule.METHOD_GET_CALL_STATE, {}, function(p1) --[[ Line: 124 ]]
+			-- upvalues: Callback (copy)
+			Callback(p1)
 		end, {})
-	end)
+	end))
 end
 
-function t.updateMicAndCamState(_, p1, p2)
-	-- upvalues: messageBusService (ref), callProtocolConstantsModule (ref)
+function CallProtocolModule:updateMicAndCamState(Muted, CamEnabled) --[[ Line: 133 ]]
+	-- upvalues: MessageBusService (copy), CallProtocolConstantsModule (copy)
 	local t = {}
 	
-	if p1 ~= nil then
-		t.muted = p1
+	if Muted ~= nil then
+		t.muted = Muted
 	end
-	if p2 ~= nil then
-		t.camEnabled = p2
+	if CamEnabled ~= nil then
+		t.camEnabled = CamEnabled
 	end
-	messageBusService:Publish(callProtocolConstantsModule.MESSAGE_UDPATE_MIC_AND_CAM_STATE, t)
+	MessageBusService:Publish(CallProtocolConstantsModule.MESSAGE_UDPATE_MIC_AND_CAM_STATE, t)
 end
 
-function t.listenToHandleInitCall(_, p1)
-	-- upvalues: messageBusService (ref), callProtocolConstantsModule (ref)
-	return messageBusService:Subscribe(callProtocolConstantsModule.MESSAGE_HANDLE_INIT_CALL, p1, false, true)
+function CallProtocolModule:listenToHandleInitCall(Callback) --[[ Line: 145 ]]
+	-- upvalues: MessageBusService (copy), CallProtocolConstantsModule (copy)
+	return MessageBusService:Subscribe(CallProtocolConstantsModule.MESSAGE_HANDLE_INIT_CALL, Callback, false, true)
 end
 
-function t.listenToHandleConnectingCall(_, p1)
-	-- upvalues: messageBusService (ref), callProtocolConstantsModule (ref)
-	return messageBusService:Subscribe(callProtocolConstantsModule.MESSAGE_HANDLE_CONNECTING_CALL, p1, false, true)
+function CallProtocolModule:listenToHandleConnectingCall(Callback) --[[ Line: 149 ]]
+	-- upvalues: MessageBusService (copy), CallProtocolConstantsModule (copy)
+	return MessageBusService:Subscribe(CallProtocolConstantsModule.MESSAGE_HANDLE_CONNECTING_CALL, Callback, false, true)
 end
 
-function t.listenToHandleTeleportingCall(_, p1)
-	-- upvalues: messageBusService (ref), callProtocolConstantsModule (ref)
-	return messageBusService:Subscribe(callProtocolConstantsModule.MESSAGE_HANDLE_TELEPORTING_CALL, p1, false, true)
+function CallProtocolModule:listenToHandleTeleportingCall(Callback) --[[ Line: 153 ]]
+	-- upvalues: MessageBusService (copy), CallProtocolConstantsModule (copy)
+	return MessageBusService:Subscribe(CallProtocolConstantsModule.MESSAGE_HANDLE_TELEPORTING_CALL, Callback, false, true)
 end
 
-function t.listenToHandleActiveCall(_, p1)
-	-- upvalues: messageBusService (ref), callProtocolConstantsModule (ref)
-	return messageBusService:Subscribe(callProtocolConstantsModule.MESSAGE_HANDLE_ACTIVE_CALL, p1, false, true)
+function CallProtocolModule:listenToHandleActiveCall(Callback) --[[ Line: 157 ]]
+	-- upvalues: MessageBusService (copy), CallProtocolConstantsModule (copy)
+	return MessageBusService:Subscribe(CallProtocolConstantsModule.MESSAGE_HANDLE_ACTIVE_CALL, Callback, false, true)
 end
 
-function t.listenToHandleEndCall(_, p1)
-	-- upvalues: messageBusService (ref), callProtocolConstantsModule (ref)
-	return messageBusService:Subscribe(callProtocolConstantsModule.MESSAGE_HANDLE_END_CALL, p1, false, true)
+function CallProtocolModule:listenToHandleEndCall(Callback) --[[ Line: 161 ]]
+	-- upvalues: MessageBusService (copy), CallProtocolConstantsModule (copy)
+	return MessageBusService:Subscribe(CallProtocolConstantsModule.MESSAGE_HANDLE_END_CALL, Callback, false, true)
 end
 
-function t.listenToHandleCallMessage(_, p1)
-	-- upvalues: messageBusService (ref), callProtocolConstantsModule (ref)
-	return messageBusService:Subscribe(callProtocolConstantsModule.MESSAGE_HANDLE_CALL_MESSAGE, p1, false, true)
+function CallProtocolModule:listenToHandleCallMessage(Callback) --[[ Line: 165 ]]
+	-- upvalues: MessageBusService (copy), CallProtocolConstantsModule (copy)
+	return MessageBusService:Subscribe(CallProtocolConstantsModule.MESSAGE_HANDLE_CALL_MESSAGE, Callback, false, true)
 end
 
-function t.listenToHandleMicAndCamChanged(_, p1)
-	-- upvalues: messageBusService (ref), callProtocolConstantsModule (ref)
-	return messageBusService:Subscribe(callProtocolConstantsModule.MESSAGE_HANDLE_MIC_AND_CAM_CHANGED, p1, false, true)
+function CallProtocolModule:listenToHandleMicAndCamChanged(Callback) --[[ Line: 169 ]]
+	-- upvalues: MessageBusService (copy), CallProtocolConstantsModule (copy)
+	return MessageBusService:Subscribe(CallProtocolConstantsModule.MESSAGE_HANDLE_MIC_AND_CAM_CHANGED, Callback, false, true)
 end
 
-function t.listenToHandleTransferCallTeleportLeave(_, p1)
-	-- upvalues: messageBusService (ref), callProtocolConstantsModule (ref)
-	return messageBusService:Subscribe(callProtocolConstantsModule.MESSAGE_HANDLE_TRANSFER_CALL_TELEPORT_LEAVE, p1, false, true)
+function CallProtocolModule:listenToHandleTransferCallTeleportLeave(Callback) --[[ Line: 173 ]]
+	-- upvalues: MessageBusService (copy), CallProtocolConstantsModule (copy)
+	return MessageBusService:Subscribe(CallProtocolConstantsModule.MESSAGE_HANDLE_TRANSFER_CALL_TELEPORT_LEAVE, Callback, false, true)
 end
 
-function t.listenToHandleTransferCallTeleportJoin(_, p1)
-	-- upvalues: messageBusService (ref), callProtocolConstantsModule (ref)
-	return messageBusService:Subscribe(callProtocolConstantsModule.MESSAGE_HANDLE_TRANSFER_CALL_TELEPORT_JOIN, p1, false, true)
+function CallProtocolModule:listenToHandleTransferCallTeleportJoin(Callback) --[[ Line: 177 ]]
+	-- upvalues: MessageBusService (copy), CallProtocolConstantsModule (copy)
+	return MessageBusService:Subscribe(CallProtocolConstantsModule.MESSAGE_HANDLE_TRANSFER_CALL_TELEPORT_JOIN, Callback, false, true)
 end
 
-t.default = t.new()
+CallProtocolModule.default = CallProtocolModule.new()
 
-return t
+return CallProtocolModule

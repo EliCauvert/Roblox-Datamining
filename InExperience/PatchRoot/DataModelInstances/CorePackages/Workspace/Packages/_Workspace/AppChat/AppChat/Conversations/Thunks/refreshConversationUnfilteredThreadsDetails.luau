@@ -1,65 +1,65 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local name = require(appChat.Logger):new(script.Name)
-local getDeepValue2Module = require(appChat.Utils.getDeepValue2)
-local appChatNetworkingModule = require(parent.AppChatNetworking)
-local _ = require(appChat.Models.ConversationChannels)
-local getOtherParticipantsModule = require(appChat.Conversations.getOtherParticipants)
-local fFlagAppChatConversationTrustedFriendUpsellBanner = require(parent.SharedFlags).FFlagAppChatConversationTrustedFriendUpsellBanner
-local var1 = if fFlagAppChatConversationTrustedFriendUpsellBanner then require(appChat.Sdui.seedConversationTopModalFromRequest) else nil
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local NewResult = require(AppChat.Logger):new(script.Name)
+local GetDeepValue2Module = require(AppChat.Utils.getDeepValue2)
+local AppChatNetworkingModule = require(Parent.AppChatNetworking)
+local _ = require(AppChat.Models.ConversationChannels)
+local GetOtherParticipantsModule = require(AppChat.Conversations.getOtherParticipants)
+local FFlagAppChatConversationTrustedFriendUpsellBanner = require(Parent.SharedFlags).FFlagAppChatConversationTrustedFriendUpsellBanner
+local SeedConversationTopModalFromRequestModule = if FFlagAppChatConversationTrustedFriendUpsellBanner then require(AppChat.Sdui.seedConversationTopModalFromRequest) else nil
 
-return function(p1, p2)
-	-- upvalues: getDeepValue2Module (ref), name (ref), getOtherParticipantsModule (ref), appChatNetworkingModule (ref), fFlagAppChatConversationTrustedFriendUpsellBanner (ref), var1 (ref)
-	return function(p3)
-		-- upvalues: getDeepValue2Module (copy), p1 (ref), name (copy), getOtherParticipantsModule (copy), appChatNetworkingModule (copy), p2 (ref), fFlagAppChatConversationTrustedFriendUpsellBanner (copy), var1 (copy)
-		local state = p3:getState()
-		local var2 = getDeepValue2Module(state, `ChatAppReducer.Conversations.{p1}`)
+return function(p1, IsInExperience) --[[ Line: 21 ]]
+	-- upvalues: GetDeepValue2Module (copy), NewResult (copy), GetOtherParticipantsModule (copy), AppChatNetworkingModule (copy), FFlagAppChatConversationTrustedFriendUpsellBanner (copy), SeedConversationTopModalFromRequestModule (copy)
+	return function(p2) --[[ Line: 22 ]]
+		-- upvalues: GetDeepValue2Module (upval), p1 (copy), NewResult (upval), GetOtherParticipantsModule (upval), AppChatNetworkingModule (upval), IsInExperience (copy), FFlagAppChatConversationTrustedFriendUpsellBanner (upval), SeedConversationTopModalFromRequestModule (upval)
+		local State = p2:getState()
+		local DeepValue2Module = GetDeepValue2Module(State, `ChatAppReducer.Conversations.{p1}`)
 		
-		if not var2 then
-			name:warning(`refreshConversationUnfilteredThreadsDetails: Conversation {p1} not found`)
+		if not DeepValue2Module then
+			NewResult:warning(`refreshConversationUnfilteredThreadsDetails: Conversation {p1} not found`)
 			
 			return
 		end
-		local var3 = p1
-		local localUserId = state.LocalUserId
+		local v1 = p1
+		local LocalUserId = State.LocalUserId
 		
-		if var2.source == "friends" then
-			local var4 = getOtherParticipantsModule(var2, localUserId)
+		if DeepValue2Module.source == "friends" then
+			local OtherParticipantsModule = GetOtherParticipantsModule(DeepValue2Module, LocalUserId)
 			
-			if #var4 ~= 1 then
-				name:warning(`refreshConversationUnfilteredThreadsDetails: Friends Conversation {p1} has invalid number of participants {#var4}`)
+			if #OtherParticipantsModule ~= 1 then
+				NewResult:warning(`refreshConversationUnfilteredThreadsDetails: Friends Conversation {p1} has invalid number of participants {#OtherParticipantsModule}`)
 				
 				return
 			end
-			var3 = var4[1]
+			v1 = OtherParticipantsModule[1]
 		end
-		if var2.source ~= "channels" and var2.source ~= "friends" then
-			name:warning(`refreshConversationUnfilteredThreadsDetails: Conversation {p1} has invalid source {var2.source}`)
+		if DeepValue2Module.source ~= "channels" and DeepValue2Module.source ~= "friends" then
+			NewResult:warning(`refreshConversationUnfilteredThreadsDetails: Conversation {p1} has invalid source {DeepValue2Module.source}`)
 			
 			return
 		end
-		local var5 = p3:dispatch(appChatNetworkingModule.rodux.GetModalSequence.API({
-			modalSequence = appChatNetworkingModule.Constants.ModalSequence.ConversationTopModal,
-			isInExperience = p2,
-			conversationId = if var2.source == "channels" then var3 else nil,
-			friendId = if var2.source == "friends" then var3 else nil
+		local DispatchResult = p2:dispatch(AppChatNetworkingModule.rodux.GetModalSequence.API({
+			modalSequence = AppChatNetworkingModule.Constants.ModalSequence.ConversationTopModal,
+			isInExperience = IsInExperience,
+			conversationId = if DeepValue2Module.source == "channels" then v1 else nil,
+			friendId = if DeepValue2Module.source == "friends" then v1 else nil
 		}))
 		
-		if fFlagAppChatConversationTrustedFriendUpsellBanner then
-			var5 = var1(var5, p1)
+		if FFlagAppChatConversationTrustedFriendUpsellBanner then
+			DispatchResult = SeedConversationTopModalFromRequestModule(DispatchResult, p1)
 		end
-		var5:catch(function(p4)
-			-- upvalues: name (copy)
-			name:warning(`refreshConversationUnfilteredThreadsDetails: Error in GetModalSequence -> conversationTopModal request. Error: {tostring(p4)}`)
+		DispatchResult:catch(function(Err) --[[ Line: 56 ]]
+			-- upvalues: NewResult (upval)
+			NewResult:warning(`refreshConversationUnfilteredThreadsDetails: Error in GetModalSequence -> conversationTopModal request. Error: {tostring(Err)}`)
 		end)
-		p3:dispatch(appChatNetworkingModule.rodux.GetModalSequence.API({
-			modalSequence = appChatNetworkingModule.Constants.ModalSequence.ConversationOverlay,
-			isInExperience = p2,
-			conversationId = if var2.source == "channels" then var3 else nil,
-			friendId = if var2.source == "friends" then var3 else nil
-		})):catch(function(p4)
-			-- upvalues: name (copy)
-			name:warning(`refreshConversationUnfilteredThreadsDetails: Error in GetModalSequence -> conversationOverlay request. Error: {tostring(p4)}`)
+		p2:dispatch(AppChatNetworkingModule.rodux.GetModalSequence.API({
+			modalSequence = AppChatNetworkingModule.Constants.ModalSequence.ConversationOverlay,
+			isInExperience = IsInExperience,
+			conversationId = if DeepValue2Module.source == "channels" then v1 else nil,
+			friendId = if DeepValue2Module.source == "friends" then v1 else nil
+		})):catch(function(Err) --[[ Line: 71 ]]
+			-- upvalues: NewResult (upval)
+			NewResult:warning(`refreshConversationUnfilteredThreadsDetails: Error in GetModalSequence -> conversationOverlay request. Error: {tostring(Err)}`)
 		end)
 	end
 end

@@ -1,30 +1,31 @@
 ﻿local UGCValidationService = game:GetService("UGCValidationService")
 local UGCValidationAddThumbnailFrustumCheckingv2 = game:DefineFastFlag("UGCValidationAddThumbnailFrustumCheckingv2", false)
-local parent = script.Parent.Parent
-local _ = require(parent.util.Types)
-local analyticsModule = require(parent.Analytics)
+local Parent = script.Parent.Parent
+local _ = require(Parent.util.Types)
+local AnalyticsModule = require(Parent.Analytics)
 
-return function(p1, p2, p3, p4, p5)
-	-- upvalues: analyticsModule (ref), UGCValidationAddThumbnailFrustumCheckingv2 (ref), UGCValidationService (ref)
-	local thumbnailConfiguration = p1:FindFirstChild("ThumbnailConfiguration")
+return function(Object, Object1, p1, MeshScale, p2) --[[ Line: 14 | Named "validateThumbnailConfiguration" ]]
+	-- upvalues: AnalyticsModule (copy), UGCValidationAddThumbnailFrustumCheckingv2 (copy), UGCValidationService (copy)
+	local ThumbnailConfiguration = Object:FindFirstChild("ThumbnailConfiguration")
 	
-	if thumbnailConfiguration then
-		local thumbnailCameraTarget = thumbnailConfiguration:FindFirstChild("ThumbnailCameraTarget")
+	if ThumbnailConfiguration then
+		local ThumbnailCameraTarget = ThumbnailConfiguration:FindFirstChild("ThumbnailCameraTarget")
 		
-		if thumbnailCameraTarget.Value ~= p2 then
-			analyticsModule.reportFailure(analyticsModule.ErrorType.validateThumbnailConfiguration_InvalidTarget, nil, p5)
+		if ThumbnailCameraTarget.Value ~= Object1 then
+			AnalyticsModule.reportFailure(AnalyticsModule.ErrorType.validateThumbnailConfiguration_InvalidTarget, nil, p2)
 			
 			return false, {
-				string.format("Invalid target asset for thumbnail generation. Expected it to be '%s'.", p2:GetFullName())
+				string.format("Invalid target asset for thumbnail generation. Expected it to be '%s'.", Object1:GetFullName())
 			}
-		elseif game:GetEngineFeature("EngineUGCValidateThumbnailerMeshInFrustum") and UGCValidationAddThumbnailFrustumCheckingv2 then
-			local cFrame = thumbnailCameraTarget.Value.CFrame
+		end
+		if game:GetEngineFeature("EngineUGCValidateThumbnailerMeshInFrustum") and UGCValidationAddThumbnailFrustumCheckingv2 then
+			local ValueCFrame = ThumbnailCameraTarget.Value.CFrame
 			
-			if UGCValidationService:CheckEditableMeshInCameraFrustum(p3.editableMesh, p4, cFrame, cFrame * thumbnailConfiguration:FindFirstChild("ThumbnailCameraValue").Value) == false then
-				analyticsModule.reportFailure(analyticsModule.ErrorType.validateThumbnailConfiguration_OutsideView, nil, p5)
+			if UGCValidationService:CheckEditableMeshInCameraFrustum(p1.editableMesh, MeshScale, ValueCFrame, ValueCFrame * ThumbnailConfiguration:FindFirstChild("ThumbnailCameraValue").Value) == false then
+				AnalyticsModule.reportFailure(AnalyticsModule.ErrorType.validateThumbnailConfiguration_OutsideView, nil, p2)
 				
 				return false, {
-					string.format("Asset '%s' is positioned outside the thumbnail camera view. You need to reposition the asset at the center of the camera view and try again.", p3.fullName)
+					string.format("Asset '%s' is positioned outside the thumbnail camera view. You need to reposition the asset at the center of the camera view and try again.", p1.fullName)
 				}
 			end
 		end

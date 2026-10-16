@@ -1,35 +1,29 @@
-﻿local dependenciesModule = require(script:FindFirstAncestor("VoiceChat").dependencies)
-local sharedFlags = dependenciesModule.SharedFlags
-local default = dependenciesModule.LinkingProtocol.LinkingProtocol.default
-local settingsRoute = dependenciesModule.LinkingProtocol.Enums.SettingsRoute
-local fFlagEnableRetryForLinkingProtocolFetch = sharedFlags.FFlagEnableRetryForLinkingProtocolFetch
-local fIntLinkingProtocolFetchRetries = sharedFlags.FIntLinkingProtocolFetchRetries
-local fIntLinkingProtocolFetchTimeoutMS = sharedFlags.FIntLinkingProtocolFetchTimeoutMS
+﻿local DependenciesModule = require(script:FindFirstAncestor("VoiceChat").dependencies)
+local SharedFlags = DependenciesModule.SharedFlags
+local Default = DependenciesModule.LinkingProtocol.LinkingProtocol.default
+local SettingsRoute = DependenciesModule.LinkingProtocol.Enums.SettingsRoute
+local FFlagEnableRetryForLinkingProtocolFetch = SharedFlags.FFlagEnableRetryForLinkingProtocolFetch
+local FIntLinkingProtocolFetchRetries = SharedFlags.FIntLinkingProtocolFetchRetries
+local FIntLinkingProtocolFetchTimeoutMS = SharedFlags.FIntLinkingProtocolFetchTimeoutMS
 
-return function()
-	-- upvalues: fFlagEnableRetryForLinkingProtocolFetch (ref), fIntLinkingProtocolFetchRetries (ref), default (ref), settingsRoute (ref), fIntLinkingProtocolFetchTimeoutMS (ref)
-	local var1 = false
-	local var2 = false
+return function(): boolean --[[ Line: 20 ]]
+	-- upvalues: FFlagEnableRetryForLinkingProtocolFetch (copy), FIntLinkingProtocolFetchRetries (copy), Default (copy), SettingsRoute (copy), FIntLinkingProtocolFetchTimeoutMS (copy)
+	local v1 = false
+	local Enabled = false
 	
-	if fFlagEnableRetryForLinkingProtocolFetch then
-		for _ = 0, fIntLinkingProtocolFetchRetries do
-			local thread = task.spawn(function()
-				-- upvalues: var1 (write), var2 (write), default (copy), settingsRoute (copy)
-				local var3, var4 = default:supportsSwitchToSettingsApp(settingsRoute.Microphone):await()
-				var1 = var3
-				var2 = var4
+	if FFlagEnableRetryForLinkingProtocolFetch then
+		for _ = 0, FIntLinkingProtocolFetchRetries do
+			local SpawnedThread = task.spawn(function() --[[ Line: 26 ]]
+				-- upvalues: v1 (ref), Enabled (ref), Default (upval), SettingsRoute (upval)
+				v1, Enabled = Default:supportsSwitchToSettingsApp(SettingsRoute.Microphone):await()
 			end)
-			task.wait(fIntLinkingProtocolFetchTimeoutMS / 1000)
-			task.cancel(thread)
+			task.wait(FIntLinkingProtocolFetchTimeoutMS / 1000)
+			task.cancel(SpawnedThread)
 			
-			if var2 == nil then
-				continue
-			end
+			if Enabled ~= nil then break end
 		end
 	else
-		local var3, var4 = default:supportsSwitchToSettingsApp(settingsRoute.Microphone):await()
-		var1 = var3
-		var2 = var4
+		v1, Enabled = Default:supportsSwitchToSettingsApp(SettingsRoute.Microphone):await()
 	end
-	return var1 and var2 == true
+	return v1 and Enabled == true
 end

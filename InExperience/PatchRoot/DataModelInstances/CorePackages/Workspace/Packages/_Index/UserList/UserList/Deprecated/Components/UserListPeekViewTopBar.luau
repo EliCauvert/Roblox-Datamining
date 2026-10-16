@@ -1,29 +1,28 @@
-﻿local parent = script:FindFirstAncestor("UserList").Parent
-local reactModule = require(parent.React)
-local roactUtilsModule = require(parent.RoactUtils)
-local foundationModule = require(parent.Foundation)
-local useTopBarHeight = require(parent.RobloxAppHooks).useTopBarHeight
-local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
-local view = foundationModule.View
-local iconButton = foundationModule.IconButton
+﻿local Parent = script:FindFirstAncestor("UserList").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UseTopBarHeightFunction = require(Parent.RobloxAppHooks).useTopBarHeight
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local View = FoundationModule.View
+local IconButton = FoundationModule.IconButton
 
-return function(p1)
-	-- upvalues: useSelector (ref), useTopBarHeight (ref), reactModule (ref), view (ref), iconButton (ref)
-	return reactModule.createElement(view, {
+return function(p1) --[[ Line: 20 ]]
+	-- upvalues: UseSelectorFunction (copy), UseTopBarHeightFunction (copy), ReactModule (copy), View (copy), IconButton (copy)
+	return ReactModule.createElement(View, {
 		tag = "bg-surface-100",
 		Active = true,
 		BorderSizePixel = 0,
 		Position = UDim2.new(0, 0, 0, 0),
-		Size = UDim2.new(0, 0, 0, useTopBarHeight())
+		Size = UDim2.new(0, 0, 0, (UseTopBarHeightFunction()))
 	}, {
-		LeftNavigationButton = reactModule.createElement(iconButton, {
+		LeftNavigationButton = ReactModule.createElement(IconButton, {
 			BackgroundTransparency = 1,
 			icon = "icons/navigation/close",
-			Position = UDim2.new(0, 15, 0, useSelector(function(p2)
+			Position = UDim2.new(0, 15, 0, (UseSelectorFunction(function(p2) --[[ Line: 21 ]]
 				return p2.TopBar.statusBarHeight
-			end)),
-			onActivated = reactModule.useCallback(function()
-				-- upvalues: p1 (ref)
+			end))),
+			onActivated = ReactModule.useCallback(function() --[[ Line: 26 ]]
+				-- upvalues: p1 (copy)
 				p1.navigateBack()
 			end, { p1.navigateBack })
 		})

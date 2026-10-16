@@ -1,12 +1,12 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local reactModule = require(parent.React)
-local defaultTwoStepReportFlow = require(parent.AbuseReporting).UXFlows.DefaultTwoStepReportFlow
-local appChatNetworkingModule = require(parent.AppChatNetworking)
-local name = require(appChat.Logger):new(script.Name)
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local playersService = game:GetService("Players")
-local list = {
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local ReactModule = require(Parent.React)
+local DefaultTwoStepReportFlow = require(Parent.AbuseReporting).UXFlows.DefaultTwoStepReportFlow
+local AppChatNetworkingModule = require(Parent.AppChatNetworking)
+local NewResult = require(AppChat.Logger):new(script.Name)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local Players = game:GetService("Players")
+local ReportCategories = {
 	{
 		localizationKey = "Feature.ReportAbuse.Label.CategoryInappropriate",
 		value = "ABUSE_TYPE_PROFANITY"
@@ -45,46 +45,45 @@ local list = {
 	}
 }
 
-local function _()
-	-- upvalues: playersService (ref)
-	local localPlayer = playersService.LocalPlayer
+local function _() --[[ Line: 44 | Named "getLocalPlayerUserId" ]]
+	-- upvalues: Players (copy)
+	local LocalPlayer = Players.LocalPlayer
 	
-	return if localPlayer then localPlayer.UserId else 0
+	return if LocalPlayer then LocalPlayer.UserId else 0
 end
 
-return function(p1)
-	-- upvalues: useDispatch (ref), reactModule (ref), appChatNetworkingModule (ref), playersService (ref), name (ref), defaultTwoStepReportFlow (ref), list (ref)
-	local var1 = useDispatch()
+return function(p1) --[[ Line: 49 | Named "ChatAbuseReport" ]]
+	-- upvalues: UseDispatchFunction (copy), ReactModule (copy), AppChatNetworkingModule (copy), Players (copy), NewResult (copy), DefaultTwoStepReportFlow (copy), ReportCategories (copy)
+	local UseDispatchResult = UseDispatchFunction()
 	
-	return reactModule.createElement(defaultTwoStepReportFlow, {
+	return ReactModule.createElement(DefaultTwoStepReportFlow, {
 		analyticsContext = "AppChat",
 		onSubmitProps = {
 			hasNextSteps = false,
-			onSubmit = reactModule.useCallback(function(p2, p3)
-				-- upvalues: var1 (ref), appChatNetworkingModule (copy), p1 (ref), playersService (copy), name (copy)
-				local API = appChatNetworkingModule.rodux.SubmitAppChatAbuseReport.API
-				local t = {
-					comment = p3,
+			onSubmit = ReactModule.useCallback(function(ReportCategory, Comment) --[[ Line: 52 ]]
+				-- upvalues: UseDispatchResult (copy), AppChatNetworkingModule (upval), p1 (copy), Players (upval), NewResult (upval)
+				local LocalPlayer = Players.LocalPlayer
+				local v1, v2 = UseDispatchResult(AppChatNetworkingModule.rodux.SubmitAppChatAbuseReport.API({
+					comment = Comment,
 					reportedUserId = p1.participantId,
-					reportCategory = p2,
-					conversationId = p1.conversationId
-				}
-				local localPlayer = playersService.LocalPlayer
-				t.submitterUserId = if localPlayer then localPlayer.UserId else 0
-				var8, API = var1(API(t)):await()
+					reportCategory = ReportCategory,
+					conversationId = p1.conversationId,
+					submitterUserId = if LocalPlayer then LocalPlayer.UserId else 0
+				})):await()
 				
-				if var8 then
-					name:info("Abuse report submitted successfully. Response: {}", tostring(API))
+				if v1 then
+					NewResult:info("Abuse report submitted successfully. Response: {}", (tostring(v2)))
 					
-					return var8
+					return v1
+				else
+					NewResult:error("Failed to submit abuse report. Response: {}", (tostring(v2)))
+					
+					return v1
 				end
-				name:error("Failed to submit abuse report. Response: {}", tostring(API))
-				
-				return var8
-			end, { var1, p1.conversationId, p1.participantId })
+			end, { UseDispatchResult, p1.conversationId, p1.participantId })
 		},
 		onCloseProps = { hasPreviousSteps = false, onAbandon = p1.onAbandon },
 		onComplete = p1.onComplete,
-		reportCategories = list
+		reportCategories = ReportCategories
 	})
 end

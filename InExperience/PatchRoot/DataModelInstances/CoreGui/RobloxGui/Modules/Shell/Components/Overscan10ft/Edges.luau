@@ -1,68 +1,69 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local userGameSettingsService = UserSettings():GetService("UserGameSettings")
-local var1 = settings():FindFirstChild("Game Options")
-local userInputService = game:GetService("UserInputService")
-local var2 = nil
-pcall(function()
-	-- upvalues: var2 (write)
-	var2 = game:GetService("PlatformService")
+﻿local CorePackages = game:GetService("CorePackages")
+local UserGameSettings = UserSettings():GetService("UserGameSettings")
+local GameOptions = settings():FindFirstChild("Game Options")
+local UserInputService = game:GetService("UserInputService")
+local PlatformService = nil
+pcall(function() --[[ Line: 8 ]]
+	-- upvalues: PlatformService (ref)
+	PlatformService = game:GetService("PlatformService")
 end)
-local modules = game:GetService("CoreGui").RobloxGui.Modules
-local reactModule = require(corePackagesService.Packages.React)
-local utilityModule = require(modules.Shell.Utility)
-local contextActionEventModule = require(modules.Shell.Components.ContextActionEvent)
-local externalEventConnection = require(corePackagesService.Workspace.Packages.RoactUtils).ExternalEventConnection
-local renderStepModule = require(modules.Shell.Components.RenderStep)
-local migrateOverscanToGameBasicSettingsEngineFeature = game:GetEngineFeature("MigrateOverscanToGameBasicSettings")
-local vector2 = Vector2.new(0.85, 0.85)
-local vector2_1 = Vector2.new(0.9, 0.9)
-local vector2_2 = Vector2.new(1920, 1080)
-local vector2_3 = Vector2.new(0, 0)
+local Modules = game:GetService("CoreGui").RobloxGui.Modules
+local ReactModule = require(CorePackages.Packages.React)
+local UtilityModule = require(Modules.Shell.Utility)
+local ContextActionEventModule = require(Modules.Shell.Components.ContextActionEvent)
+local ExternalEventConnection = require(CorePackages.Workspace.Packages.RoactUtils).ExternalEventConnection
+local RenderStepModule = require(Modules.Shell.Components.RenderStep)
+local MigrateOverscanToGameBasicSettingsEngineFeature = game:GetEngineFeature("MigrateOverscanToGameBasicSettings")
+local _Vector2 = Vector2.new(0.85, 0.85)
+local _Vector2_1 = Vector2.new(0.9, 0.9)
+local _Vector2_2 = Vector2.new(1920, 1080)
+local _Vector2_3 = Vector2.new(0, 0)
 
-local function EdgeImage(p1)
-	-- upvalues: reactModule (ref)
-	return reactModule.createElement("ImageLabel", {
+local function EdgeImage(Frame) --[[ Line: 28 ]]
+	-- upvalues: ReactModule (copy)
+	return ReactModule.createElement("ImageLabel", {
 		BackgroundTransparency = 1,
 		Image = "rbxasset://textures/ui/Shell/ScreenAdjustment/ScreenAdjustmentArrow.png",
 		Size = UDim2.new(0, 95, 0, 95),
-		Position = p1.Position,
-		AnchorPoint = p1.AnchorPoint,
-		Rotation = p1.Rotation
+		Position = Frame.Position,
+		AnchorPoint = Frame.AnchorPoint,
+		Rotation = Frame.Rotation
 	})
 end
 
-local edges = reactModule.Component:extend("Edges")
+local Edges = ReactModule.Component:extend("Edges")
 
-function edges.init(p1)
-	-- upvalues: utilityModule (ref), vector2 (ref), vector2_2 (ref), vector2_3 (ref), migrateOverscanToGameBasicSettingsEngineFeature (ref), userGameSettingsService (ref), var1 (ref), vector2_1 (ref), userInputService (ref)
-	local function _(p2)
-		-- upvalues: utilityModule (copy), vector2 (copy)
-		return utilityModule.ClampVector2(vector2, Vector2.new(1, 1), p2)
+function Edges.init(p1) --[[ Line: 41 ]]
+	-- upvalues: UtilityModule (copy), _Vector2 (copy), _Vector2_2 (copy), _Vector2_3 (copy), MigrateOverscanToGameBasicSettingsEngineFeature (copy), UserGameSettings (copy), GameOptions (copy), _Vector2_1 (copy), UserInputService (copy)
+	local function _(p2) --[[ Line: 42 | Named "getCurrentEdgePercent" ]]
+		-- upvalues: UtilityModule (upval), _Vector2 (upval)
+		return UtilityModule.ClampVector2(_Vector2, Vector2.new(1, 1), p2)
 	end
 	
-	local _ = function(p2)
-		-- upvalues: vector2_2 (copy), utilityModule (copy), vector2_3 (copy)
-		local var3 = p2 * vector2_2
+	local _ = function(p2) --[[ Line: 46 | Named "getCurrentEdgeSize" ]]
+		-- upvalues: _Vector2_2 (upval), UtilityModule (upval), _Vector2_3 (upval)
+		local ScaledVector = p2 * _Vector2_2
 		
-		return utilityModule.ClampVector2(vector2_3, vector2_2, Vector2.new(utilityModule.Round(var3.X / 2), utilityModule.Round(var3.Y / 2)) * 2)
+		return UtilityModule.ClampVector2(_Vector2_3, _Vector2_2, Vector2.new(UtilityModule.Round(ScaledVector.X / 2), UtilityModule.Round(ScaledVector.Y / 2)) * 2)
 	end
 	
-	function p1.onAdjustThumbstick(_, _, p2)
-		-- upvalues: p1 (ref), utilityModule (copy)
-		p1._stickPosition = utilityModule.GamepadLinearToCurve(Vector2.new(p2.Position.X, -p2.Position.Y), 0.2)
+	function p1:onAdjustThumbstick(_, p2) --[[ Line: 52 ]]
+		-- upvalues: p1 (copy), UtilityModule (upval)
+		p1._stickPosition = UtilityModule.GamepadLinearToCurve(Vector2.new(p2.Position.X, -p2.Position.Y), 0.2)
 	end
 	
-	function p1.onAccept()
-		-- upvalues: migrateOverscanToGameBasicSettingsEngineFeature (copy), userGameSettingsService (copy), p1 (ref), var1 (copy)
-		local _, _ = pcall(function()
-			-- upvalues: migrateOverscanToGameBasicSettingsEngineFeature (copy), userGameSettingsService (copy), p1 (copy), var1 (copy)
-			if migrateOverscanToGameBasicSettingsEngineFeature then
-				userGameSettingsService.Overscan = Vector2.new(math.min(1, p1._edgePercent.X), math.min(1, p1._edgePercent.Y))
+	function p1.onAccept() --[[ Line: 56 ]]
+		-- upvalues: MigrateOverscanToGameBasicSettingsEngineFeature (upval), UserGameSettings (upval), p1 (copy), GameOptions (upval)
+		local _, _ = pcall(function() --[[ Line: 57 ]]
+			-- upvalues: MigrateOverscanToGameBasicSettingsEngineFeature (upval), UserGameSettings (upval), p1 (upval), GameOptions (upval)
+			if MigrateOverscanToGameBasicSettingsEngineFeature then
+				UserGameSettings.Overscan = Vector2.new(math.min(1, p1._edgePercent.X), (math.min(1, p1._edgePercent.Y)))
 				
 				return
+			else
+				GameOptions.OverscanPX = math.min(1, p1._edgePercent.X)
+				GameOptions.OverscanPY = math.min(1, p1._edgePercent.Y)
 			end
-			var1.OverscanPX = math.min(1, p1._edgePercent.X)
-			var1.OverscanPY = math.min(1, p1._edgePercent.Y)
 		end)
 		
 		if p1.props.onSetEdges then
@@ -70,87 +71,87 @@ function edges.init(p1)
 		end
 	end
 	
-	function p1.onRenderStep()
-		-- upvalues: p1 (ref), vector2_3 (copy), utilityModule (copy), vector2 (copy), vector2_2 (copy)
-		local currentTime = tick()
+	function p1.onRenderStep() --[[ Line: 73 ]]
+		-- upvalues: p1 (copy), _Vector2_3 (upval), UtilityModule (upval), _Vector2 (upval), _Vector2_2 (upval)
+		local CurrentTime = tick()
 		
 		if p1._lastUpdate then
-			if p1._stickPosition == vector2_3 then
+			if p1._stickPosition == _Vector2_3 then
 				p1._acceleration = 1
 			else
-				local var3 = currentTime - p1._lastUpdate
-				p1._edgePercent = utilityModule.ClampVector2(vector2, Vector2.new(1, 1), p1._stickPosition * p1._acceleration * var3 * 0.05 + p1._edgePercent)
-				p1._acceleration = math.min(p1._acceleration + var3 * 1, 3)
-				local var4 = p1
-				local t = {}
-				local var5 = p1._edgePercent * vector2_2
-				t.currentSize = utilityModule.ClampVector2(vector2_3, vector2_2, Vector2.new(utilityModule.Round(var5.X / 2), utilityModule.Round(var5.Y / 2)) * 2)
-				var4:setState(t)
+				local CurrentTimeDelta = CurrentTime - p1._lastUpdate
+				p1._edgePercent = UtilityModule.ClampVector2(_Vector2, Vector2.new(1, 1), p1._stickPosition * p1._acceleration * CurrentTimeDelta * 0.05 + p1._edgePercent)
+				p1._acceleration = math.min(p1._acceleration + CurrentTimeDelta * 1, 3)
+				local ScaledEdgePercent = p1._edgePercent * _Vector2_2
+				p1:setState({
+					currentSize = UtilityModule.ClampVector2(_Vector2_3, _Vector2_2, Vector2.new(UtilityModule.Round(ScaledEdgePercent.X / 2), UtilityModule.Round(ScaledEdgePercent.Y / 2)) * 2)
+				})
 			end
 		end
-		p1._lastUpdate = currentTime
+		p1._lastUpdate = CurrentTime
 	end
 	
-	function p1.onSuspended()
-		-- upvalues: migrateOverscanToGameBasicSettingsEngineFeature (copy), userGameSettingsService (copy), p1 (ref), var1 (copy)
-		pcall(function()
-			-- upvalues: migrateOverscanToGameBasicSettingsEngineFeature (copy), userGameSettingsService (copy), p1 (copy), var1 (copy)
-			if migrateOverscanToGameBasicSettingsEngineFeature then
-				userGameSettingsService.Overscan = Vector2.new(p1._lastSavedOverscan.X, p1._lastSavedOverscan.Y)
+	function p1.onSuspended() --[[ Line: 92 ]]
+		-- upvalues: MigrateOverscanToGameBasicSettingsEngineFeature (upval), UserGameSettings (upval), p1 (copy), GameOptions (upval)
+		pcall(function() --[[ Line: 93 ]]
+			-- upvalues: MigrateOverscanToGameBasicSettingsEngineFeature (upval), UserGameSettings (upval), p1 (upval), GameOptions (upval)
+			if MigrateOverscanToGameBasicSettingsEngineFeature then
+				UserGameSettings.Overscan = Vector2.new(p1._lastSavedOverscan.X, p1._lastSavedOverscan.Y)
 				
 				return
+			else
+				GameOptions.OverscanPX = p1._lastSavedOverscan.X
+				GameOptions.OverscanPY = p1._lastSavedOverscan.Y
 			end
-			var1.OverscanPX = p1._lastSavedOverscan.X
-			var1.OverscanPY = p1._lastSavedOverscan.Y
 		end)
 	end
 	
-	local var3 = utilityModule.ClampVector2(vector2, Vector2.new(1, 1), vector2_1)
-	local var4 = var3 * vector2_2
-	local var5 = utilityModule.ClampVector2(vector2_3, vector2_2, Vector2.new(utilityModule.Round(var4.X / 2), utilityModule.Round(var4.Y / 2)) * 2)
+	local ClampVector2Result = UtilityModule.ClampVector2(_Vector2, Vector2.new(1, 1), _Vector2_1)
+	local ScaledClampVector2Result = ClampVector2Result * _Vector2_2
+	local ClampVector2Result1 = UtilityModule.ClampVector2(_Vector2_3, _Vector2_2, Vector2.new(UtilityModule.Round(ScaledClampVector2Result.X / 2), UtilityModule.Round(ScaledClampVector2Result.Y / 2)) * 2)
 	
-	if userInputService:GetPlatform() == Enum.Platform.XBoxOne then
-		pcall(function()
-			-- upvalues: migrateOverscanToGameBasicSettingsEngineFeature (copy), userGameSettingsService (copy), var3 (write), utilityModule (copy), vector2 (copy), var5 (write), vector2_2 (copy), vector2_3 (copy), p1 (ref), var1 (copy)
-			if migrateOverscanToGameBasicSettingsEngineFeature then
-				if userGameSettingsService.Overscan.x > 0 and userGameSettingsService.Overscan.y > 0 then
-					var3 = Vector2.new(userGameSettingsService.Overscan.x, userGameSettingsService.Overscan.y)
-					var3 = utilityModule.ClampVector2(vector2, Vector2.new(1, 1), var3)
-					local var6 = var3 * vector2_2
-					var5 = utilityModule.ClampVector2(vector2_3, vector2_2, Vector2.new(utilityModule.Round(var6.X / 2), utilityModule.Round(var6.Y / 2)) * 2)
-					p1._lastSavedOverscan = Vector2.new(userGameSettingsService.Overscan.x, userGameSettingsService.Overscan.y)
-					userGameSettingsService.Overscan = Vector2.new(1, 1)
+	if UserInputService:GetPlatform() == Enum.Platform.XBoxOne then
+		pcall(function() --[[ Line: 106 ]]
+			-- upvalues: MigrateOverscanToGameBasicSettingsEngineFeature (upval), UserGameSettings (upval), ClampVector2Result (ref), UtilityModule (upval), _Vector2 (upval), ClampVector2Result1 (ref), _Vector2_2 (upval), _Vector2_3 (upval), p1 (copy), GameOptions (upval)
+			if MigrateOverscanToGameBasicSettingsEngineFeature then
+				if UserGameSettings.Overscan.x > 0 and UserGameSettings.Overscan.y > 0 then
+					ClampVector2Result = Vector2.new(UserGameSettings.Overscan.x, UserGameSettings.Overscan.y)
+					ClampVector2Result = UtilityModule.ClampVector2(_Vector2, Vector2.new(1, 1), ClampVector2Result)
+					local ScaledClampVector2Result: Vector2 = ClampVector2Result * _Vector2_2
+					ClampVector2Result1 = UtilityModule.ClampVector2(_Vector2_3, _Vector2_2, Vector2.new(UtilityModule.Round(ScaledClampVector2Result.X / 2), UtilityModule.Round(ScaledClampVector2Result.Y / 2)) * 2)
+					p1._lastSavedOverscan = Vector2.new(UserGameSettings.Overscan.x, UserGameSettings.Overscan.y)
+					UserGameSettings.Overscan = Vector2.new(1, 1)
 					
 					return
 				end
-			elseif var1.OverscanPX > 0 and var1.OverscanPY > 0 then
-				var3 = Vector2.new(var1.OverscanPX, var1.OverscanPY)
-				var3 = utilityModule.ClampVector2(vector2, Vector2.new(1, 1), var3)
-				local var7 = var3 * vector2_2
-				var5 = utilityModule.ClampVector2(vector2_3, vector2_2, Vector2.new(utilityModule.Round(var7.X / 2), utilityModule.Round(var7.Y / 2)) * 2)
-				p1._lastSavedOverscan = Vector2.new(var1.OverscanPX, var1.OverscanPY)
-				var1.OverscanPX = 1
-				var1.OverscanPY = 1
+			elseif GameOptions.OverscanPX > 0 and GameOptions.OverscanPY > 0 then
+				ClampVector2Result = Vector2.new(GameOptions.OverscanPX, GameOptions.OverscanPY)
+				ClampVector2Result = UtilityModule.ClampVector2(_Vector2, Vector2.new(1, 1), ClampVector2Result)
+				local ScaledClampVector2Result: Vector2 = ClampVector2Result * _Vector2_2
+				ClampVector2Result1 = UtilityModule.ClampVector2(_Vector2_3, _Vector2_2, Vector2.new(UtilityModule.Round(ScaledClampVector2Result.X / 2), UtilityModule.Round(ScaledClampVector2Result.Y / 2)) * 2)
+				p1._lastSavedOverscan = Vector2.new(GameOptions.OverscanPX, GameOptions.OverscanPY)
+				GameOptions.OverscanPX = 1
+				GameOptions.OverscanPY = 1
 			end
 		end)
 	end
-	p1._stickPosition = vector2_3
-	p1._edgePercent = var3
+	p1._stickPosition = _Vector2_3
+	p1._edgePercent = ClampVector2Result
 	p1._lastUpdate = nil
 	p1._acceleration = 1
 	p1._seenAPressed = false
-	p1.state = { currentSize = var5 }
+	p1.state = { currentSize = ClampVector2Result1 }
 end
 
-function edges.render(p1)
-	-- upvalues: reactModule (ref), EdgeImage (ref), renderStepModule (ref), contextActionEventModule (ref), var2 (write), externalEventConnection (ref)
-	return reactModule.createElement("Frame", {
+function Edges.render(p1) --[[ Line: 145 ]]
+	-- upvalues: ReactModule (copy), EdgeImage (copy), RenderStepModule (copy), ContextActionEventModule (copy), PlatformService (ref), ExternalEventConnection (copy)
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.new(0, p1.state.currentSize.X, 0, p1.state.currentSize.Y),
 		Position = UDim2.new(0.5, 0, 0.5, 0),
 		AnchorPoint = Vector2.new(0.5, 0.5)
 	}, {
-		SelectionImage = reactModule.createElement("ImageLabel", {
+		SelectionImage = ReactModule.createElement("ImageLabel", {
 			BackgroundTransparency = 1,
 			Image = "rbxasset://textures/ui/Shell/ScreenAdjustment/ScreenRangeOverlay.png",
 			Size = UDim2.new(1, 2, 1, 2),
@@ -158,38 +159,41 @@ function edges.render(p1)
 			ScaleType = Enum.ScaleType.Slice,
 			SliceCenter = Rect.new(21, 21, 41, 41)
 		}),
-		TopLeft = reactModule.createElement(EdgeImage, {
+		TopLeft = ReactModule.createElement(EdgeImage, {
 			Rotation = 0,
 			Position = UDim2.new(0, 0, 0, 0),
 			AnchorPoint = Vector2.new(0, 0)
 		}),
-		TopRight = reactModule.createElement(EdgeImage, {
+		TopRight = ReactModule.createElement(EdgeImage, {
 			Rotation = 90,
 			Position = UDim2.new(1, 0, 0, 0),
 			AnchorPoint = Vector2.new(1, 0)
 		}),
-		BottomRight = reactModule.createElement(EdgeImage, {
+		BottomRight = ReactModule.createElement(EdgeImage, {
 			Rotation = 180,
 			Position = UDim2.new(1, 0, 1, 0),
 			AnchorPoint = Vector2.new(1, 1)
 		}),
-		BottomLeft = reactModule.createElement(EdgeImage, {
+		BottomLeft = ReactModule.createElement(EdgeImage, {
 			Rotation = 270,
 			Position = UDim2.new(0, 0, 1, 0),
 			AnchorPoint = Vector2.new(0, 1)
 		}),
-		Render = reactModule.createElement(renderStepModule, {
+		Render = ReactModule.createElement(RenderStepModule, {
 			name = "UpdateAdjustmentScreen",
 			priority = Enum.RenderPriority.Input.Value,
 			callback = p1.onRenderStep
 		}),
-		AdjustConnectorThumbstick = reactModule.createElement(contextActionEventModule, {
+		AdjustConnectorThumbstick = ReactModule.createElement(ContextActionEventModule, {
 			name = "ThumbstickAdjustmentScreen",
 			callback = p1.onAdjustThumbstick,
 			binds = { Enum.KeyCode.Thumbstick2 }
 		}),
-		SuspendedCn = var2 and reactModule.createElement(externalEventConnection, { event = var2.Suspended, callback = p1.onSuspended })
+		SuspendedCn = PlatformService and ReactModule.createElement(ExternalEventConnection, {
+			event = PlatformService.Suspended,
+			callback = p1.onSuspended
+		})
 	})
 end
 
-return edges
+return Edges

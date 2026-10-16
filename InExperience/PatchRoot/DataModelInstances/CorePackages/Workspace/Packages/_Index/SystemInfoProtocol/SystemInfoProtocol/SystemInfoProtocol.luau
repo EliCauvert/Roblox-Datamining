@@ -1,10 +1,10 @@
-﻿local parent = script.Parent.Parent
-local messageBus = require(parent.MessageBus).MessageBus
+﻿local Parent = script.Parent.Parent
+local MessageBus = require(Parent.MessageBus).MessageBus
 local _ = require(script.Parent.SystemInfoProtocolTypes)
-local t = {
+local SystemInfoProtocolModule = {
 	GET_SYSTEM_INFO_DESCRIPTOR = {
-		fid = messageBus.getMessageId("SystemInfo", "getSystemInfo"),
-		validateParams = require(parent.t).table
+		fid = MessageBus.getMessageId("SystemInfo", "getSystemInfo"),
+		validateParams = require(Parent.t).table
 	},
 	InfoNames = {
 		MANUFACTURER = "manufacturer",
@@ -27,30 +27,40 @@ local t = {
 		THERMAL_STATUS = "thermalStatus"
 	}
 }
-t.ALL_INFO_NAMES = {
-	t.InfoNames.MANUFACTURER, t.InfoNames.DEVICE_NAME, t.InfoNames.MAX_MEMORY,
-	t.InfoNames.MAX_RESOLUTION, t.InfoNames.BASE_OS, t.InfoNames.SYSTEM_VERSION,
-	t.InfoNames.APP_VERSION, t.InfoNames.CPU_MAKE, t.InfoNames.IS_64BIT,
-	t.InfoNames.CPU_LOGICAL_COUNT, t.InfoNames.CPU_CORE_COUNT,
-	t.InfoNames.CPU_PHYS_COUNT, t.InfoNames.CPU_SPEED, t.InfoNames.GPU,
-	t.InfoNames.AVAIL_RAM, t.InfoNames.NETWORK_TYPE
+SystemInfoProtocolModule.ALL_INFO_NAMES = {
+	SystemInfoProtocolModule.InfoNames.MANUFACTURER,
+	SystemInfoProtocolModule.InfoNames.DEVICE_NAME,
+	SystemInfoProtocolModule.InfoNames.MAX_MEMORY,
+	SystemInfoProtocolModule.InfoNames.MAX_RESOLUTION,
+	SystemInfoProtocolModule.InfoNames.BASE_OS,
+	SystemInfoProtocolModule.InfoNames.SYSTEM_VERSION,
+	SystemInfoProtocolModule.InfoNames.APP_VERSION,
+	SystemInfoProtocolModule.InfoNames.CPU_MAKE,
+	SystemInfoProtocolModule.InfoNames.IS_64BIT,
+	SystemInfoProtocolModule.InfoNames.CPU_LOGICAL_COUNT,
+	SystemInfoProtocolModule.InfoNames.CPU_CORE_COUNT,
+	SystemInfoProtocolModule.InfoNames.CPU_PHYS_COUNT,
+	SystemInfoProtocolModule.InfoNames.CPU_SPEED,
+	SystemInfoProtocolModule.InfoNames.GPU,
+	SystemInfoProtocolModule.InfoNames.AVAIL_RAM,
+	SystemInfoProtocolModule.InfoNames.NETWORK_TYPE
 }
 
 if game:GetEngineFeature("NewSystemInfoFeaturesEnabled") then
-	table.insert(t.ALL_INFO_NAMES, t.InfoNames.BATTERY_LEVEL)
-	table.insert(t.ALL_INFO_NAMES, t.InfoNames.THERMAL_STATUS)
+	table.insert(SystemInfoProtocolModule.ALL_INFO_NAMES, SystemInfoProtocolModule.InfoNames.BATTERY_LEVEL)
+	table.insert(SystemInfoProtocolModule.ALL_INFO_NAMES, SystemInfoProtocolModule.InfoNames.THERMAL_STATUS)
 end
-t.__index = t
+SystemInfoProtocolModule.__index = SystemInfoProtocolModule
 
-function t.new(p1)
-	-- upvalues: messageBus (ref), t (ref)
-	return setmetatable({ messageBus = p1 or messageBus }, t)
-end
-
-function t:getSystemInfo(b)
-	return self.messageBus.call(self.GET_SYSTEM_INFO_DESCRIPTOR, b)
+function SystemInfoProtocolModule.new(p1) --[[ Line: 76 ]]
+	-- upvalues: MessageBus (copy), SystemInfoProtocolModule (copy)
+	return (setmetatable({ messageBus = p1 or MessageBus }, SystemInfoProtocolModule))
 end
 
-t.default = t.new()
+function SystemInfoProtocolModule:getSystemInfo(p1) --[[ Line: 97 ]]
+	return self.messageBus.call(self.GET_SYSTEM_INFO_DESCRIPTOR, p1)
+end
 
-return t
+SystemInfoProtocolModule.default = SystemInfoProtocolModule.new()
+
+return SystemInfoProtocolModule

@@ -1,172 +1,176 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local chipGroupVariantModule = require(foundation.Enums.ChipGroupVariant)
-local flagsModule = require(foundation.Utility.Flags)
-local chipSizeModule = require(foundation.Enums.ChipSize)
-local _ = require(foundation.Enums.ChipVariant)
-local _ = require(foundation.Components.Chip.Accessory)
-local visibilityModule = require(foundation.Enums.Visibility)
-local useBackgroundStyle = require(foundation.Providers.Style.BackgroundStyleContext).useBackgroundStyle
-local chipModule = require(foundation.Components.Chip)
-local overflowScrollContainerModule = require(foundation.Components.OverflowScrollContainer)
-local scrollViewModule = require(foundation.Components.ScrollView)
-local _ = require(foundation.Components.Types)
-local viewModule = require(foundation.Components.View)
-local useChipGroupVariantsModule = require(foundation.Components.ChipGroup.useChipGroupVariants)
-local useClippingRectModule = require(foundation.Components.ChipGroup.useClippingRect)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local numberSequence = NumberSequence.new({
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local FlagsModule = require(Foundation.Utility.Flags)
+local _ = require(Foundation.Enums.ChipVariant)
+local _ = require(Foundation.Components.Chip.Accessory)
+local VisibilityModule = require(Foundation.Enums.Visibility)
+local UseBackgroundStyleFunction = require(Foundation.Providers.Style.BackgroundStyleContext).useBackgroundStyle
+local ChipModule = require(Foundation.Components.Chip)
+local OverflowScrollContainerModule = require(Foundation.Components.OverflowScrollContainer)
+local ScrollViewModule = require(Foundation.Components.ScrollView)
+local _ = require(Foundation.Components.Types)
+local ViewModule = require(Foundation.Components.View)
+local UseChipGroupVariantsModule = require(Foundation.Components.ChipGroup.useChipGroupVariants)
+local UseClippingRectModule = require(Foundation.Components.ChipGroup.useClippingRect)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local NumberSequence1 = NumberSequence.new({
 	NumberSequenceKeypoint.new(0, 0),
 	NumberSequenceKeypoint.new(0.5, 0),
 	NumberSequenceKeypoint.new(1, 1)
 })
-local numberSequence_1 = NumberSequence.new({
+local NumberSequence2 = NumberSequence.new({
 	NumberSequenceKeypoint.new(0, 1),
 	NumberSequenceKeypoint.new(0.5, 0),
 	NumberSequenceKeypoint.new(1, 0)
 })
-local t = {
+local config = {
 	testId = "--foundation-chip-group",
-	size = chipSizeModule.Medium,
-	variant = chipGroupVariantModule.Row
+	size = require(Foundation.Enums.ChipSize).Medium,
+	variant = require(Foundation.Enums.ChipGroupVariant).Row
 }
 
-local function Scrim(p1)
-	-- upvalues: useBackgroundStyle (ref), reactModule (ref), viewModule (ref)
-	return reactModule.createElement(viewModule, {
-		LayoutOrder = p1.LayoutOrder,
-		Size = UDim2.new(0, p1.width, 1, 0),
-		backgroundStyle = useBackgroundStyle(),
-		testId = p1.testId
+local function Scrim(Frame) --[[ Line: 84 ]]
+	-- upvalues: UseBackgroundStyleFunction (copy), ReactModule (copy), ViewModule (copy)
+	return ReactModule.createElement(ViewModule, {
+		LayoutOrder = Frame.LayoutOrder,
+		Size = UDim2.new(0, Frame.width, 1, 0),
+		backgroundStyle = UseBackgroundStyleFunction(),
+		testId = Frame.testId
 	}, {
-		UIGradient = reactModule.createElement("UIGradient", { Transparency = p1.gradient })
+		UIGradient = ReactModule.createElement("UIGradient", { Transparency = Frame.gradient })
 	})
 end
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useChipGroupVariantsModule (ref), flagsModule (ref), reactModule (ref), chipModule (ref), viewModule (ref), withCommonPropsModule (ref), overflowScrollContainerModule (ref), useClippingRectModule (ref), scrollViewModule (ref), visibilityModule (ref), Scrim (ref), numberSequence (ref), numberSequence_1 (ref)
-	local var1 = withDefaultsModule(p1, t)
-	local var2 = useChipGroupVariantsModule(useTokensModule(), var1.variant, var1.size)
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 104 | Named "ChipGroup" ]]
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UseChipGroupVariantsModule (copy), FlagsModule (copy), ReactModule (copy), ChipModule (copy), ViewModule (copy), WithCommonPropsModule (copy), OverflowScrollContainerModule (copy), UseClippingRectModule (copy), ScrollViewModule (copy), VisibilityModule (copy), Scrim (copy), NumberSequence1 (copy), NumberSequence2 (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
+	local UseChipGroupVariantsModuleResult = UseChipGroupVariantsModule(UseTokensModule(), WithDefaultsModuleResult.variant, WithDefaultsModuleResult.size)
 	
-	if flagsModule.FoundationUnifiedScrimScrolling then
-		local size = var1.size
-		local t_1 = {}
+	if FlagsModule.FoundationUnifiedScrimScrolling then
+		local Size = WithDefaultsModuleResult.size
+		local Elements = {}
 		
-		for i, v in var1.chips do
-			t_1[`Chip{i}`] = reactModule.createElement(chipModule, {
-				text = v.text,
-				leading = v.leading,
-				trailing = v.trailing,
-				onActivated = v.onActivated,
-				isChecked = v.isChecked,
-				variant = v.variant,
-				size = size,
-				LayoutOrder = i,
-				testId = `{var1.testId}--chip-{i}`
+		for LayoutOrder, chip in WithDefaultsModuleResult.chips do
+			Elements[`Chip{LayoutOrder}`] = ReactModule.createElement(ChipModule, {
+				text = chip.text,
+				leading = chip.leading,
+				trailing = chip.trailing,
+				onActivated = chip.onActivated,
+				isChecked = chip.isChecked,
+				variant = chip.variant,
+				size = Size,
+				LayoutOrder = LayoutOrder,
+				testId = `{WithDefaultsModuleResult.testId}--chip-{LayoutOrder}`
 			})
 		end
-		local var3 = reactModule.createElement(viewModule, {
+		local Element = ReactModule.createElement(ViewModule, {
 			tag = "auto-xy",
 			layout = {
 				FillDirection = Enum.FillDirection.Horizontal,
-				Padding = UDim.new(0, var2.gap),
-				Wraps = var2.isWrapped
+				Padding = UDim.new(0, UseChipGroupVariantsModuleResult.gap),
+				Wraps = UseChipGroupVariantsModuleResult.isWrapped
 			}
-		}, t_1)
+		}, Elements)
 		
-		return if var2.isWrapped then reactModule.createElement(viewModule, withCommonPropsModule(var1, { tag = "size-full-0 auto-y", ref = p2 }), { ChipContainer = var3 }) else reactModule.createElement(overflowScrollContainerModule, withCommonPropsModule(var1, { size = var1.size, ref = p2 }), { ChipContainer = var3 })
+		return if UseChipGroupVariantsModuleResult.isWrapped then ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, { tag = "size-full-0 auto-y", ref = Ref }), { ChipContainer = Element }) else ReactModule.createElement(OverflowScrollContainerModule, WithCommonPropsModule(WithDefaultsModuleResult, { size = WithDefaultsModuleResult.size, ref = Ref }), { ChipContainer = Element })
 	else
-		local var4, var5 = reactModule.useBinding(false)
-		local var6, var7 = reactModule.useBinding(false)
-		local var8 = reactModule.useRef(nil)
-		local var9 = useClippingRectModule(var8)
-		local var10 = reactModule.useCallback(function(p3)
-			-- upvalues: var2 (ref), var5 (ref), var7 (ref)
-			if var2.hasScrim and p3.AbsoluteWindowSize.X ~= 0 then
-				var5(p3.CanvasPosition.X ~= 0)
-				var7(p3.AbsoluteWindowSize.X + p3.CanvasPosition.X < p3.AbsoluteCanvasSize.X - 1)
+		local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(false)
+		local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(false)
+		local UseRefResult = ReactModule.useRef(nil)
+		local UseClippingRectModuleResult = UseClippingRectModule(UseRefResult)
+		local UseResult = ReactModule.useCallback(function(ScrollFrame) --[[ Line: 161 ]]
+			-- upvalues: UseChipGroupVariantsModuleResult (copy), UseBindingResult2 (copy), UseBindingResult2_1 (copy)
+			if UseChipGroupVariantsModuleResult.hasScrim and ScrollFrame.AbsoluteWindowSize.X ~= 0 then
+				UseBindingResult2(ScrollFrame.CanvasPosition.X ~= 0)
+				UseBindingResult2_1(ScrollFrame.AbsoluteWindowSize.X + ScrollFrame.CanvasPosition.X < ScrollFrame.AbsoluteCanvasSize.X - 1)
 				
 				return
 			end
-		end, { var2.hasScrim })
-		local var11 = reactModule.useCallback(function()
-			-- upvalues: var8 (ref), var10 (ref)
-			if var8.current then
-				var10(var8.current)
+		end, { UseChipGroupVariantsModuleResult.hasScrim })
+		local UseResult1 = ReactModule.useCallback(function() --[[ Line: 173 ]]
+			-- upvalues: UseRefResult (copy), UseResult (copy)
+			if UseRefResult.current then
+				UseResult(UseRefResult.current)
 			end
-		end, { var1.onAbsoluteSizeChanged, var10 })
-		local var12 = reactModule.useCallback(function()
-			-- upvalues: var8 (ref), var10 (ref)
-			if var8.current then
-				var10(var8.current)
+		end, {
+			WithDefaultsModuleResult.onAbsoluteSizeChanged,
+			UseResult
+		})
+		local UseResult2 = ReactModule.useCallback(function() --[[ Line: 179 ]]
+			-- upvalues: UseRefResult (copy), UseResult (copy)
+			if UseRefResult.current then
+				UseResult(UseRefResult.current)
 			end
-		end, { var1.onAbsolutePositionChanged, var10 })
-		local size = var1.size
-		local scrimWidth = var2.scrimWidth
-		local t_1 = {}
+		end, {
+			WithDefaultsModuleResult.onAbsolutePositionChanged,
+			UseResult
+		})
+		local Size1 = WithDefaultsModuleResult.size
+		local ScrimWidth = UseChipGroupVariantsModuleResult.scrimWidth
+		local Elements1 = {}
 		
-		for i, v in var1.chips do
-			t_1[`Chip{i}`] = reactModule.createElement(chipModule, {
-				text = v.text,
-				leading = v.leading,
-				trailing = v.trailing,
-				onActivated = v.onActivated,
-				isChecked = v.isChecked,
-				variant = v.variant,
-				size = size,
-				LayoutOrder = i,
-				testId = `{var1.testId}--chip-{i}`
+		for LayoutOrder1, chip1 in WithDefaultsModuleResult.chips do
+			Elements1[`Chip{LayoutOrder1}`] = ReactModule.createElement(ChipModule, {
+				text = chip1.text,
+				leading = chip1.leading,
+				trailing = chip1.trailing,
+				onActivated = chip1.onActivated,
+				isChecked = chip1.isChecked,
+				variant = chip1.variant,
+				size = Size1,
+				LayoutOrder = LayoutOrder1,
+				testId = `{WithDefaultsModuleResult.testId}--chip-{LayoutOrder1}`
 			})
 		end
-		local var13 = withCommonPropsModule(var1, { tag = "size-full-0 auto-y", ref = p2 })
-		var13.onAbsoluteSizeChanged = var11
-		var13.onAbsolutePositionChanged = var12
+		local WithCommonPropsModuleResult = WithCommonPropsModule(WithDefaultsModuleResult, { tag = "size-full-0 auto-y", ref = Ref })
+		WithCommonPropsModuleResult.onAbsoluteSizeChanged = UseResult1
+		WithCommonPropsModuleResult.onAbsolutePositionChanged = UseResult2
 		
-		return reactModule.createElement(viewModule, var13, {
-			ScrollView = reactModule.createElement(scrollViewModule, {
+		return ReactModule.createElement(ViewModule, WithCommonPropsModuleResult, {
+			ScrollView = ReactModule.createElement(ScrollViewModule, {
 				tag = "size-full-0 auto-y",
 				scroll = {
 					AutomaticSize = Enum.AutomaticSize.Y,
 					AutomaticCanvasSize = Enum.AutomaticSize.X,
 					CanvasSize = UDim2.fromScale(0, 1),
 					ScrollingDirection = Enum.ScrollingDirection.X,
-					ScrollingEnabled = not var2.isWrapped,
-					scrollBarVisibility = visibilityModule.None
+					ScrollingEnabled = not UseChipGroupVariantsModuleResult.isWrapped,
+					scrollBarVisibility = VisibilityModule.None
 				},
 				layout = {
 					FillDirection = Enum.FillDirection.Horizontal,
-					Padding = UDim.new(0, var2.gap),
-					Wraps = var2.isWrapped
+					Padding = UDim.new(0, UseChipGroupVariantsModuleResult.gap),
+					Wraps = UseChipGroupVariantsModuleResult.isWrapped
 				},
-				ClipsDescendants = var2.isWrapped,
-				scrollingFrameRef = var8,
-				onCanvasPositionChanged = if var2.hasScrim then var10 else nil,
-				onAbsoluteCanvasSizeChanged = if var2.hasScrim then var10 else nil,
-				onAbsoluteWindowSizeChanged = if var2.hasScrim then var10 else nil
-			}, t_1),
-			ScrimWrapper = if var2.hasScrim then reactModule.createElement(viewModule, {
+				ClipsDescendants = UseChipGroupVariantsModuleResult.isWrapped,
+				scrollingFrameRef = UseRefResult,
+				onCanvasPositionChanged = if UseChipGroupVariantsModuleResult.hasScrim then UseResult else nil,
+				onAbsoluteCanvasSizeChanged = if UseChipGroupVariantsModuleResult.hasScrim then UseResult else nil,
+				onAbsoluteWindowSizeChanged = if UseChipGroupVariantsModuleResult.hasScrim then UseResult else nil
+			}, Elements1),
+			ScrimWrapper = if UseChipGroupVariantsModuleResult.hasScrim then ReactModule.createElement(ViewModule, {
 				tag = "row flex-between",
 				ZIndex = 2,
-				Size = var9:map(function(p3)
-					-- upvalues: scrimWidth (ref)
-					return UDim2.fromOffset(p3.Max.X - p3.Min.X, scrimWidth)
+				Size = UseClippingRectModuleResult:map(function(p2): UDim2 --[[ Line: 235 ]]
+					-- upvalues: ScrimWidth (copy)
+					return UDim2.fromOffset(p2.Max.X - p2.Min.X, ScrimWidth)
 				end),
 				AnchorPoint = Vector2.new(0.5, 0),
 				Position = UDim2.fromScale(0.5, 0)
 			}, {
-				ScrimStart = var4 and reactModule.createElement(Scrim, {
+				ScrimStart = UseBindingResult and ReactModule.createElement(Scrim, {
 					LayoutOrder = 1,
-					gradient = numberSequence,
-					width = scrimWidth,
-					testId = `{var1.testId}--scrim-start`
+					gradient = NumberSequence1,
+					width = ScrimWidth,
+					testId = `{WithDefaultsModuleResult.testId}--scrim-start`
 				}),
-				ScrimEnd = var6 and reactModule.createElement(Scrim, {
+				ScrimEnd = UseBindingResult1 and ReactModule.createElement(Scrim, {
 					LayoutOrder = 2,
-					gradient = numberSequence_1,
-					width = scrimWidth,
-					testId = `{var1.testId}--scrim-end`
+					gradient = NumberSequence2,
+					width = ScrimWidth,
+					testId = `{WithDefaultsModuleResult.testId}--scrim-end`
 				})
 			}) else nil
 		})

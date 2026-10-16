@@ -1,6 +1,6 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local _ = require(dataHydration.DataHydrationTypes)
-local _ = require(dataHydration.Parent.Signals)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local _ = require(DataHydration.DataHydrationTypes)
+local _ = require(DataHydration.Parent.Signals)
 
 return {
 	SaveType = { Null = 0, AutoSave = 1, ManualSave = 2 },

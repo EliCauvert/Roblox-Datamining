@@ -1,142 +1,140 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local playersService = game:GetService("Players")
-local userGameSettingsService = UserSettings():GetService("UserGameSettings")
-local computerMovementModePropertyChangedSignal = userGameSettingsService:GetPropertyChangedSignal("ComputerMovementMode")
-local localPlayer = playersService.LocalPlayer
-local playerScripts = require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.CoreUtility).waitForChildOfClass(localPlayer, "PlayerScripts")
-local devComputerMovementModePropertyChangedSignal = localPlayer:GetPropertyChangedSignal("DevComputerMovementMode")
-local inGameMenuDependenciesModule = require(corePackagesService.Packages.InGameMenuDependencies)
-local roact = inGameMenuDependenciesModule.Roact
-local t = inGameMenuDependenciesModule.t
-local parent = script.Parent.Parent.Parent
-local dropDownSelectionModule = require(parent.Components.DropDownSelection)
-local externalEventConnectionModule = require(parent.Utility.ExternalEventConnection)
-local inputLabelModule = require(script.Parent.InputLabel)
-local developerLockLabelModule = require(script.Parent.DeveloperLockLabel)
-local withLocalizationModule = require(parent.Localization.withLocalization)
-local sendAnalyticsModule = require(parent.Utility.SendAnalytics)
-local constantsModule = require(parent.Resources.Constants)
-local t_1 = {
+﻿local UserGameSettings = UserSettings():GetService("UserGameSettings")
+local ComputerMovementModePropertyChangedSignal = UserGameSettings:GetPropertyChangedSignal("ComputerMovementMode")
+local LocalPlayer = game:GetService("Players").LocalPlayer
+local PlayerScripts = require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.CoreUtility).waitForChildOfClass(LocalPlayer, "PlayerScripts")
+local DevComputerMovementModePropertyChangedSignal = LocalPlayer:GetPropertyChangedSignal("DevComputerMovementMode")
+local InGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
+local Roact = InGameMenuDependenciesModule.Roact
+local T = InGameMenuDependenciesModule.t
+local Parent = script.Parent.Parent.Parent
+local DropDownSelectionModule = require(Parent.Components.DropDownSelection)
+local ExternalEventConnectionModule = require(Parent.Utility.ExternalEventConnection)
+local InputLabelModule = require(script.Parent.InputLabel)
+local DeveloperLockLabelModule = require(script.Parent.DeveloperLockLabel)
+local WithLocalizationModule = require(Parent.Localization.withLocalization)
+local SendAnalyticsModule = require(Parent.Utility.SendAnalytics)
+local ConstantsModule = require(Parent.Resources.Constants)
+local config = {
 	[Enum.ComputerMovementMode.KeyboardMouse] = "CoreScripts.InGameMenu.GameSettings.ComputerMoveModeKeyboardMouse",
 	[Enum.ComputerMovementMode.ClickToMove] = "CoreScripts.InGameMenu.GameSettings.ComputerMoveModeClickToMove",
 	[Enum.ComputerMovementMode.Default] = "CoreScripts.InGameMenu.GameSettings.Default"
 }
-local t_2 = {
+local config1 = {
 	[Enum.DevComputerMovementMode.KeyboardMouse] = "CoreScripts.InGameMenu.GameSettings.ComputerMoveModeKeyboardMouse",
 	[Enum.DevComputerMovementMode.ClickToMove] = "CoreScripts.InGameMenu.GameSettings.ComputerMoveModeClickToMove"
 }
-local movementModeEntry = roact.PureComponent:extend("MovementModeEntry")
-movementModeEntry.validateProps = t.strictInterface({
-	LayoutOrder = t.integer,
-	canOpen = t.optional(t.boolean),
-	canCaptureFocus = t.optional(t.boolean)
+local MovementModeEntry = Roact.PureComponent:extend("MovementModeEntry")
+MovementModeEntry.validateProps = T.strictInterface({
+	LayoutOrder = T.integer,
+	canOpen = T.optional(T.boolean),
+	canCaptureFocus = T.optional(T.boolean)
 })
-movementModeEntry.defaultProps = { canOpen = true }
+MovementModeEntry.defaultProps = { canOpen = true }
 
-function movementModeEntry.init(p1)
-	-- upvalues: userGameSettingsService (ref), playerScripts (ref), localPlayer (ref)
+function MovementModeEntry.init(p1) --[[ Line: 55 ]]
+	-- upvalues: UserGameSettings (copy), PlayerScripts (copy), LocalPlayer (copy)
 	p1:setState({
-		selectedComputerMode = userGameSettingsService.ComputerMovementMode,
-		computerOptions = playerScripts and playerScripts:GetRegisteredComputerMovementModes() or {},
-		developerComputerMode = localPlayer.DevComputerMovementMode
+		selectedComputerMode = UserGameSettings.ComputerMovementMode,
+		computerOptions = PlayerScripts and PlayerScripts:GetRegisteredComputerMovementModes() or {},
+		developerComputerMode = LocalPlayer.DevComputerMovementMode
 	})
 end
 
-function movementModeEntry.render(p1)
-	-- upvalues: roact (ref), externalEventConnectionModule (ref), computerMovementModePropertyChangedSignal (ref), userGameSettingsService (ref), playerScripts (ref), devComputerMovementModePropertyChangedSignal (ref), localPlayer (ref), t_1 (ref), inputLabelModule (ref), withLocalizationModule (ref), t_2 (ref), dropDownSelectionModule (ref), sendAnalyticsModule (ref), constantsModule (ref), developerLockLabelModule (ref)
-	local t = {
-		ComputerMovementModeListener = roact.createElement(externalEventConnectionModule, {
-			event = computerMovementModePropertyChangedSignal,
-			callback = function()
-				-- upvalues: p1 (ref), userGameSettingsService (copy)
+function MovementModeEntry.render(p1) --[[ Line: 63 ]]
+	-- upvalues: Roact (copy), ExternalEventConnectionModule (copy), ComputerMovementModePropertyChangedSignal (copy), UserGameSettings (copy), PlayerScripts (copy), DevComputerMovementModePropertyChangedSignal (copy), LocalPlayer (copy), config (copy), InputLabelModule (copy), WithLocalizationModule (copy), config1 (copy), DropDownSelectionModule (copy), SendAnalyticsModule (copy), ConstantsModule (copy), DeveloperLockLabelModule (copy)
+	local config2 = {
+		ComputerMovementModeListener = Roact.createElement(ExternalEventConnectionModule, {
+			event = ComputerMovementModePropertyChangedSignal,
+			callback = function() --[[ Line: 69 ]]
+				-- upvalues: p1 (copy), UserGameSettings (upval)
 				p1:setState({
-					selectedComputerMode = userGameSettingsService.ComputerMovementMode
+					selectedComputerMode = UserGameSettings.ComputerMovementMode
 				})
 			end
 		}),
-		ComputerMovementModeRegisteredListener = playerScripts and roact.createElement(externalEventConnectionModule, {
-			event = playerScripts.ComputerMovementModeRegistered,
-			callback = function()
-				-- upvalues: p1 (ref), playerScripts (copy)
+		ComputerMovementModeRegisteredListener = PlayerScripts and Roact.createElement(ExternalEventConnectionModule, {
+			event = PlayerScripts.ComputerMovementModeRegistered,
+			callback = function() --[[ Line: 77 ]]
+				-- upvalues: p1 (copy), PlayerScripts (upval)
 				p1:setState({
-					computerOptions = playerScripts:GetRegisteredComputerMovementModes()
+					computerOptions = PlayerScripts:GetRegisteredComputerMovementModes()
 				})
 			end
 		}),
-		DevComputerMovementMode = roact.createElement(externalEventConnectionModule, {
-			event = devComputerMovementModePropertyChangedSignal,
-			callback = function()
-				-- upvalues: p1 (ref), localPlayer (copy)
+		DevComputerMovementMode = Roact.createElement(ExternalEventConnectionModule, {
+			event = DevComputerMovementModePropertyChangedSignal,
+			callback = function() --[[ Line: 85 ]]
+				-- upvalues: p1 (copy), LocalPlayer (upval)
 				p1:setState({
-					developerComputerMode = localPlayer.DevComputerMovementMode
+					developerComputerMode = LocalPlayer.DevComputerMovementMode
 				})
 			end
 		})
 	}
 	
 	if #p1.state.computerOptions == 0 then
-		return roact.createFragment(t)
+		return Roact.createFragment(config2)
 	end
-	local var1 = p1.state.developerComputerMode ~= Enum.DevComputerMovementMode.UserChoice
-	local t_3 = {}
-	local var2 = 0
+	local IsNotDeveloperComputerModeMatch = p1.state.developerComputerMode ~= Enum.DevComputerMovementMode.UserChoice
+	local Selections = {}
+	local SelectedIndex = 0
 	
-	if not var1 then
-		for i, v in ipairs(p1.state.computerOptions) do
-			t_3[i] = t_1[v]
-			assert(t_3[i] ~= nil, "Movement mode " .. v.Name .. " has no localization key")
+	if not IsNotDeveloperComputerModeMatch then
+		for i, computerOption in ipairs(p1.state.computerOptions) do
+			Selections[i] = config[computerOption]
+			assert(Selections[i] ~= nil, "Movement mode " .. computerOption.Name .. " has no localization key")
 			
-			if p1.state.selectedComputerMode.Value == v.Value then
-				var2 = i
+			if p1.state.selectedComputerMode.Value == computerOption.Value then
+				SelectedIndex = i
 			end
 		end
 	end
-	t.MovementModeEntrySelector = roact.createElement("Frame", {
+	config2.MovementModeEntrySelector = Roact.createElement("Frame", {
 		BackgroundTransparency = 1,
 		ZIndex = 2,
 		Size = UDim2.new(1, 0, 0, 120),
 		LayoutOrder = p1.props.LayoutOrder
 	}, {
-		Padding = roact.createElement("UIPadding", {
+		Padding = Roact.createElement("UIPadding", {
 			PaddingLeft = UDim.new(0, 24),
 			PaddingRight = UDim.new(0, 24)
 		}),
-		InputLabel = roact.createElement(inputLabelModule, {
+		InputLabel = Roact.createElement(InputLabelModule, {
 			localizationKey = "CoreScripts.InGameMenu.GameSettings.MovementMode",
 			Size = UDim2.new(1, 0, 0, 56),
 			Position = UDim2.new(0, 0, 0, 0),
 			AnchorPoint = Vector2.new(0, 0)
 		}),
-		Dropdown = withLocalizationModule({
-			placeholder = if var1 then t_2[p1.state.developerComputerMode] else nil
-		})(function(p2)
-			-- upvalues: roact (copy), dropDownSelectionModule (copy), t_3 (ref), var2 (write), var1 (ref), p1 (ref), userGameSettingsService (copy), sendAnalyticsModule (copy), constantsModule (copy)
-			return roact.createElement(dropDownSelectionModule, {
+		Dropdown = WithLocalizationModule({
+			placeholder = IsNotDeveloperComputerModeMatch and config1[p1.state.developerComputerMode] or nil
+		})(function(p2) --[[ Line: 130 ]]
+			-- upvalues: Roact (upval), DropDownSelectionModule (upval), Selections (copy), SelectedIndex (ref), IsNotDeveloperComputerModeMatch (copy), p1 (copy), UserGameSettings (upval), SendAnalyticsModule (upval), ConstantsModule (upval)
+			return Roact.createElement(DropDownSelectionModule, {
 				localize = true,
 				selectionParentName = "MovementModeEntryDropdown",
 				Size = UDim2.new(1, 0, 0, 44),
 				Position = UDim2.new(0, 0, 0, 56),
-				selections = t_3,
-				selectedIndex = var2,
+				selections = Selections,
+				selectedIndex = SelectedIndex,
 				placeHolderText = p2.placeholder,
-				enabled = not var1,
+				enabled = not IsNotDeveloperComputerModeMatch,
 				canOpen = p1.props.canOpen,
 				canCaptureFocus = p1.props.canCaptureFocus,
-				selectionChanged = function(p3)
-					-- upvalues: userGameSettingsService (copy), p1 (copy), sendAnalyticsModule (copy), constantsModule (copy)
-					userGameSettingsService.ComputerMovementMode = p1.state.computerOptions[p3]
-					sendAnalyticsModule(constantsModule.AnalyticsSettingsChangeName, nil, {}, true)
+				selectionChanged = function(p3) --[[ Line: 142 ]]
+					-- upvalues: UserGameSettings (upval), p1 (upval), SendAnalyticsModule (upval), ConstantsModule (upval)
+					UserGameSettings.ComputerMovementMode = p1.state.computerOptions[p3]
+					SendAnalyticsModule(ConstantsModule.AnalyticsSettingsChangeName, nil, {}, true)
 				end
 			})
 		end),
-		LockedLabel = var1 and roact.createElement(developerLockLabelModule, {
+		LockedLabel = IsNotDeveloperComputerModeMatch and Roact.createElement(DeveloperLockLabelModule, {
 			AnchorPoint = Vector2.new(0, 1),
 			Position = UDim2.new(0, 0, 1, 0),
 			Size = UDim2.new(1, -72, 0.25, 0)
 		})
 	})
 	
-	return roact.createFragment(t)
+	return Roact.createFragment(config2)
 end
 
-return movementModeEntry
+return MovementModeEntry

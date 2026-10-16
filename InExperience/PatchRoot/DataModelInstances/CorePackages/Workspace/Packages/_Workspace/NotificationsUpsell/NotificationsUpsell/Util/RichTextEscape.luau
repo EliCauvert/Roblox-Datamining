@@ -1,16 +1,16 @@
-﻿local t = {
+﻿local config = {
 	["<"] = "&lt;",
 	[">"] = "&gt;",
 	["\""] = "&quot;",
 	["'"] = "&apos;"
 }
 
-return function(p1)
-	-- upvalues: t (ref)
-	local var1 = p1:gsub("&", "&amp;")
+return function(Text: string) --[[ Line: 11 ]]
+	-- upvalues: config (copy)
+	local Text1 = Text:gsub("&", "&amp;")
 	
-	for i, v in pairs(t) do
-		var1 = var1:gsub(i, v)
+	for i, value in pairs(config) do
+		Text1 = Text1:gsub(i, value)
 	end
-	return var1
+	return Text1
 end

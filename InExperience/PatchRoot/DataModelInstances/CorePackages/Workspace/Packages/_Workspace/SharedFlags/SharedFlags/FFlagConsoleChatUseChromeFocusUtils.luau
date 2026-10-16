@@ -1,1 +1,3 @@
-﻿return require(script.Parent:WaitForChild("FFlagEnableConsoleExpControls")) and game:DefineFastFlag("ConsoleChatUseChromeFocusUtils", false)
+﻿local ConsoleChatUseChromeFocusUtils = game:DefineFastFlag("ConsoleChatUseChromeFocusUtils", false)
+
+return require(script.Parent:WaitForChild("FFlagEnableConsoleExpControls")) and ConsoleChatUseChromeFocusUtils

@@ -1,139 +1,142 @@
-﻿local avatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
-local parent = avatarExperienceInspectAndBuy.Parent
-local sessionService = game:GetService("SessionService")
-local useTokens = require(parent.Foundation).Hooks.useTokens
-local localizationModule = require(parent.Localization)
-local AXCommonModule = require(parent.AXCommon)
-local itemTypeEnum = require(parent.AvatarExperienceModel).Enums.ItemTypeEnum
-local itemCardThumbnail = require(parent.AvatarExperienceUIKit).ItemCardComponents.ItemCardThumbnail
-local wearTimeSelectedOptionInList = require(parent.AvatarExperienceTimedOptions).WearTimeSelectedOptionInList
-local useLocalization = localizationModule.Hooks.useLocalization
-local reactModule = require(parent.React)
-local useConvertedItemDataModule = require(avatarExperienceInspectAndBuy.Hooks.useConvertedItemData)
-local _ = require(avatarExperienceInspectAndBuy.Types)
-local constantsModule = require(avatarExperienceInspectAndBuy.Constants)
-local assetLocalizationKeys = constantsModule.AssetLocalizationKeys
-local bundleLocalizationKeys = constantsModule.BundleLocalizationKeys
-local priceStatusLocalizationKeys = constantsModule.PriceStatusLocalizationKeys
-local avatarExperienceAnalyticsModule = require(parent.AvatarExperienceAnalytics)
-local addUnifiedEventLogging = avatarExperienceAnalyticsModule.addUnifiedEventLogging
-local unifiedEventLogEnums = avatarExperienceAnalyticsModule.UnifiedEventLogEnums
-local unifiedLoggingSurface = require(parent.AvatarExperienceNavigation).Enums.UnifiedLoggingSurface
-local _ = require(avatarExperienceInspectAndBuy.Enums.ViewType)
-local priceStatusModule = require(avatarExperienceInspectAndBuy.Enums.PriceStatus)
-local retrievalStatus = require(parent.Http).Enum.RetrievalStatus
-local getItemThumbnailUrlModule = require(avatarExperienceInspectAndBuy.Utils.getItemThumbnailUrl)
-local getCatalogCardItemTypeModule = require(avatarExperienceInspectAndBuy.Utils.getCatalogCardItemType)
-local getPriceLineContentModule = require(avatarExperienceInspectAndBuy.Utils.getPriceLineContent)
-local getPriceInRobux = require(avatarExperienceInspectAndBuy.Utils.itemDetailsUtils).getPriceInRobux
-local getPriceStatusModule = require(avatarExperienceInspectAndBuy.Utils.getPriceStatus)
-local cryoModule = require(parent.Cryo)
-local useSignalState = require(parent.SignalsReact).useSignalState
-local useItemSelectionStore = require(avatarExperienceInspectAndBuy.Contexts.ItemSelectionStoreContext).useItemSelectionStore
-local fFlagAXMarketplaceLicensingItemCards = require(parent.AvatarExperienceFlags).FFlagAXMarketplaceLicensingItemCards
-local catalogItemCardStatusIconTypeEnum = AXCommonModule.Components.CatalogItemCard.CatalogItemCardStatusIconTypeEnum
+﻿local AvatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
+local Parent = AvatarExperienceInspectAndBuy.Parent
+local SessionService = game:GetService("SessionService")
+local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
+local ItemTypeEnum = require(Parent.AvatarExperienceModel).Enums.ItemTypeEnum
+local ItemCardThumbnail = require(Parent.AvatarExperienceUIKit).ItemCardComponents.ItemCardThumbnail
+local WearTimeSelectedOptionInList = require(Parent.AvatarExperienceTimedOptions).WearTimeSelectedOptionInList
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local ReactModule = require(Parent.React)
+local UseConvertedItemDataModule = require(AvatarExperienceInspectAndBuy.Hooks.useConvertedItemData)
+local _ = require(AvatarExperienceInspectAndBuy.Types)
+local ConstantsModule = require(AvatarExperienceInspectAndBuy.Constants)
+local AssetLocalizationKeys = ConstantsModule.AssetLocalizationKeys
+local BundleLocalizationKeys = ConstantsModule.BundleLocalizationKeys
+local PriceStatusLocalizationKeys = ConstantsModule.PriceStatusLocalizationKeys
+local AvatarExperienceAnalyticsModule = require(Parent.AvatarExperienceAnalytics)
+local AddUnifiedEventLoggingFunction = AvatarExperienceAnalyticsModule.addUnifiedEventLogging
+local UnifiedEventLogEnums = AvatarExperienceAnalyticsModule.UnifiedEventLogEnums
+local UnifiedLoggingSurface = require(Parent.AvatarExperienceNavigation).Enums.UnifiedLoggingSurface
+local _ = require(AvatarExperienceInspectAndBuy.Enums.ViewType)
+local PriceStatusModule = require(AvatarExperienceInspectAndBuy.Enums.PriceStatus)
+local RetrievalStatus = require(Parent.Http).Enum.RetrievalStatus
+local GetItemThumbnailUrlModule = require(AvatarExperienceInspectAndBuy.Utils.getItemThumbnailUrl)
+local GetCatalogCardItemTypeModule = require(AvatarExperienceInspectAndBuy.Utils.getCatalogCardItemType)
+local GetPriceLineContentModule = require(AvatarExperienceInspectAndBuy.Utils.getPriceLineContent)
+local GetPriceInRobuxFunction = require(AvatarExperienceInspectAndBuy.Utils.itemDetailsUtils).getPriceInRobux
+local GetPriceStatusModule = require(AvatarExperienceInspectAndBuy.Utils.getPriceStatus)
+local CryoModule = require(Parent.Cryo)
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local UseItemSelectionStoreFunction = require(AvatarExperienceInspectAndBuy.Contexts.ItemSelectionStoreContext).useItemSelectionStore
+local FFlagAXMarketplaceLicensingItemCards = require(Parent.AvatarExperienceFlags).FFlagAXMarketplaceLicensingItemCards
+local CatalogItemCardStatusIconTypeEnum = require(Parent.AXCommon).Components.CatalogItemCard.CatalogItemCardStatusIconTypeEnum
 
-return function(p1, p2, _, p3, p4)
-	-- upvalues: useTokens (ref), useConvertedItemDataModule (ref), itemTypeEnum (ref), bundleLocalizationKeys (ref), assetLocalizationKeys (ref), cryoModule (ref), priceStatusLocalizationKeys (ref), useLocalization (ref), useItemSelectionStore (ref), useSignalState (ref), reactModule (ref), getPriceStatusModule (ref), priceStatusModule (ref), getPriceInRobux (ref), getItemThumbnailUrlModule (ref), getCatalogCardItemTypeModule (ref), catalogItemCardStatusIconTypeEnum (ref), retrievalStatus (ref), getPriceLineContentModule (ref), addUnifiedEventLogging (ref), unifiedEventLogEnums (ref), unifiedLoggingSurface (ref), sessionService (ref), itemCardThumbnail (ref), fFlagAXMarketplaceLicensingItemCards (ref), wearTimeSelectedOptionInList (ref)
-	local var1 = useTokens()
-	local var2, var3 = useConvertedItemDataModule(p1)
-	local var4 = useLocalization(cryoModule.Dictionary.join(if p1.itemType == itemTypeEnum.Bundle then bundleLocalizationKeys else assetLocalizationKeys, priceStatusLocalizationKeys))
-	local var5 = useItemSelectionStore()
-	local var6 = useSignalState(var5.getItemData(p1.id))
-	local var7 = reactModule.useMemo(function()
-		-- upvalues: getPriceStatusModule (copy), var2 (ref), priceStatusModule (copy)
-		return getPriceStatusModule(var2) == priceStatusModule.Owned
-	end, { var2 })
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), getPriceInRobux (copy), getPriceStatusModule (copy), var5 (ref), p1 (ref)
-		if var2 and var2.timedOptions then
-			local cloned = table.clone(var2.timedOptions)
-			table.insert(cloned, {
+return function(p1, LayoutOrder, _, Callback, XOffset) --[[ Line: 54 ]]
+	-- upvalues: UseTokensFunction (copy), UseConvertedItemDataModule (copy), ItemTypeEnum (copy), BundleLocalizationKeys (copy), AssetLocalizationKeys (copy), CryoModule (copy), PriceStatusLocalizationKeys (copy), UseLocalizationFunction (copy), UseItemSelectionStoreFunction (copy), UseSignalStateFunction (copy), ReactModule (copy), GetPriceStatusModule (copy), PriceStatusModule (copy), GetPriceInRobuxFunction (copy), GetItemThumbnailUrlModule (copy), GetCatalogCardItemTypeModule (copy), CatalogItemCardStatusIconTypeEnum (copy), RetrievalStatus (copy), GetPriceLineContentModule (copy), AddUnifiedEventLoggingFunction (copy), UnifiedEventLogEnums (copy), UnifiedLoggingSurface (copy), SessionService (copy), ItemCardThumbnail (copy), FFlagAXMarketplaceLicensingItemCards (copy), WearTimeSelectedOptionInList (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseConvertedItemDataModuleResult, UseConvertedItemDataModuleResult2 = UseConvertedItemDataModule(p1)
+	local UseLocalizationResult = UseLocalizationFunction((CryoModule.Dictionary.join(if p1.itemType == ItemTypeEnum.Bundle then BundleLocalizationKeys else AssetLocalizationKeys, PriceStatusLocalizationKeys)))
+	local UseItemSelectionStoreResult = UseItemSelectionStoreFunction()
+	local UseSignalStateResult = UseSignalStateFunction(UseItemSelectionStoreResult.getItemData(p1.id))
+	local UseMemoResult = ReactModule.useMemo(function(): boolean --[[ Line: 73 ]]
+		-- upvalues: GetPriceStatusModule (upval), UseConvertedItemDataModuleResult (copy), PriceStatusModule (upval)
+		return GetPriceStatusModule(UseConvertedItemDataModuleResult) == PriceStatusModule.Owned
+	end, { UseConvertedItemDataModuleResult })
+	ReactModule.useEffect(function() --[[ Line: 81 ]]
+		-- upvalues: UseConvertedItemDataModuleResult (copy), GetPriceInRobuxFunction (upval), GetPriceStatusModule (upval), UseItemSelectionStoreResult (copy), p1 (copy)
+		if UseConvertedItemDataModuleResult and UseConvertedItemDataModuleResult.timedOptions then
+			local Copy = table.clone(UseConvertedItemDataModuleResult.timedOptions)
+			table.insert(Copy, {
 				days = 0,
 				selected = true,
-				price = getPriceInRobux(var2, getPriceStatusModule(var2)) or 0
+				price = GetPriceInRobuxFunction(UseConvertedItemDataModuleResult, GetPriceStatusModule(UseConvertedItemDataModuleResult)) or 0
 			})
-			var5.setItemData(p1.id, { timedOptions = cloned })
+			UseItemSelectionStoreResult.setItemData(p1.id, { timedOptions = Copy })
 			
 			return
 		end
-	end, { var2, p1.id, var5 })
-	local var8 = reactModule.useCallback(function(p5, p6)
-		-- upvalues: var6 (ref), var5 (ref), p1 (ref)
-		if not var6 or not var6.timedOptions then return end
-		local t = {}
+	end, {
+		UseConvertedItemDataModuleResult,
+		p1.id,
+		UseItemSelectionStoreResult
+	})
+	local UseResult = ReactModule.useCallback(function(Price, Days) --[[ Line: 97 ]]
+		-- upvalues: UseSignalStateResult (copy), UseItemSelectionStoreResult (copy), p1 (copy)
+		if not UseSignalStateResult or not UseSignalStateResult.timedOptions then return end
+		local TimedOptions = {}
 		
-		for i, v in var6.timedOptions do
-			table.insert(t, {
-				days = v.days,
-				price = v.price,
-				selected = v.price == p5 and (if p6 ~= nil then v.days == p6 else true)
+		for _, timedOption in UseSignalStateResult.timedOptions do
+			table.insert(TimedOptions, {
+				days = timedOption.days,
+				price = timedOption.price,
+				selected = timedOption.price == Price and (Days == nil or timedOption.days == Days)
 			})
 		end
-		var5.setItemData(p1.id, { timedOptions = t })
-	end, { p1.id, var6, var5 })
-	local var9 = if var6 then var6.timedOptions else nil
-	local var10 = reactModule.useMemo(function()
-		-- upvalues: var9 (ref)
-		if not var9 then
+		UseItemSelectionStoreResult.setItemData(p1.id, { timedOptions = TimedOptions })
+	end, { p1.id, UseSignalStateResult, UseItemSelectionStoreResult })
+	local TimedOptions = UseSignalStateResult and UseSignalStateResult.timedOptions or nil
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 117 ]]
+		-- upvalues: TimedOptions (copy)
+		if not TimedOptions then
 			return nil
 		end
-		for i, v in var9 do
-			if v.selected then
-				return v.price
+		for _, timedOption in TimedOptions do
+			if timedOption.selected then
+				return timedOption.price
 			end
 		end
 		return nil
-	end, { var9 })
+	end, { TimedOptions })
 	
-	if not var2 then
+	if UseConvertedItemDataModuleResult then
+		local ItemThumbnailUrlModule = GetItemThumbnailUrlModule(p1)
+		local UseLocalizationResultEntry = UseLocalizationResult[UseConvertedItemDataModuleResult.itemSubType]
+		local CatalogCardItemTypeModule = GetCatalogCardItemTypeModule(UseConvertedItemDataModuleResult.itemRestrictions)
+		local Config = if UseConvertedItemDataModuleResult.timedOptions and not UseMemoResult then {
+			type = "icon",
+			iconType = CatalogItemCardStatusIconTypeEnum.Durable
+		} else nil
+		local PriceLineContentModule = if UseConvertedItemDataModuleResult2 == RetrievalStatus.Done then GetPriceLineContentModule(UseConvertedItemDataModuleResult, UseTokensResult, UseLocalizationResult) else nil
+		local Config1 = if UseConvertedItemDataModuleResult.creator then {
+			name = UseConvertedItemDataModuleResult.creator.creatorName or "",
+			verified = UseConvertedItemDataModuleResult.creator.creatorHasVerifiedBadge
+		} else nil
+		local UseRefResult = ReactModule.useRef(nil)
+		ReactModule.useEffect(function() --[[ Line: 151 ]]
+			-- upvalues: AddUnifiedEventLoggingFunction (upval), UseRefResult (copy), UnifiedEventLogEnums (upval), UnifiedLoggingSurface (upval), p1 (copy), SessionService (upval)
+			AddUnifiedEventLoggingFunction(UseRefResult, {
+				action = UnifiedEventLogEnums.MarketplaceUnifiedAction.UI_ELEMENT_CLICK,
+				surface = UnifiedLoggingSurface.IN_EXPERIENCE_INSPECT_BUY,
+				elementName = "CLICK_INSPECTBUY_ITEM_" .. p1.id
+			}, { sessionTagName = SessionService:GetSessionTag("level2a") })
+		end, { p1.id })
+		
+		return {
+			title = UseConvertedItemDataModuleResult.name,
+			presentationSlot = ReactModule.createElement(ItemCardThumbnail, { url = ItemThumbnailUrlModule }),
+			itemSubType = UseLocalizationResultEntry,
+			itemType = CatalogCardItemTypeModule,
+			creator = Config1,
+			itemLicensingInfo = if FFlagAXMarketplaceLicensingItemCards then UseConvertedItemDataModuleResult.itemLicensingInfo else nil,
+			priceLineContent = PriceLineContentModule,
+			LayoutOrder = LayoutOrder,
+			Size = UDim2.fromOffset(XOffset, 0),
+			headerSize = UDim2.fromOffset(XOffset, XOffset),
+			footerAutomaticSize = Enum.AutomaticSize.XY,
+			AutomaticSize = Enum.AutomaticSize.XY,
+			onActivated = ReactModule.useCallback(function() --[[ Line: 161 ]]
+				-- upvalues: Callback (copy), p1 (copy)
+				Callback(p1)
+			end, { Callback, p1 }),
+			ref = UseRefResult,
+			itemStatus = Config,
+			isOwned = UseMemoResult,
+			timedOptions = TimedOptions,
+			onTimedOptionPriceChanged = UseResult,
+			selectedTimedOptionPrice = UseMemoResult1,
+			wearTimeSelectedOptionInList = WearTimeSelectedOptionInList
+		}
+	else
 		return {}
 	end
-	local var11 = getItemThumbnailUrlModule(p1)
-	local itemSubType = var4[var2.itemSubType]
-	local var12 = getCatalogCardItemTypeModule(var2.itemRestrictions)
-	local var13 = if var2.timedOptions and not var7 then {
-		type = "icon",
-		iconType = catalogItemCardStatusIconTypeEnum.Durable
-	} else nil
-	local var14 = if var3 == retrievalStatus.Done then getPriceLineContentModule(var2, var1, var4) else nil
-	local var15 = if var2.creator then {
-		name = var2.creator.creatorName or "",
-		verified = var2.creator.creatorHasVerifiedBadge
-	} else nil
-	local var16 = reactModule.useRef(nil)
-	reactModule.useEffect(function()
-		-- upvalues: addUnifiedEventLogging (copy), var16 (ref), unifiedEventLogEnums (copy), unifiedLoggingSurface (copy), p1 (ref), sessionService (copy)
-		addUnifiedEventLogging(var16, {
-			action = unifiedEventLogEnums.MarketplaceUnifiedAction.UI_ELEMENT_CLICK,
-			surface = unifiedLoggingSurface.IN_EXPERIENCE_INSPECT_BUY,
-			elementName = "CLICK_INSPECTBUY_ITEM_" .. p0.id
-		}, { sessionTagName = sessionService:GetSessionTag("level2a") })
-	end, { p1.id })
-	
-	return {
-		title = var2.name,
-		presentationSlot = reactModule.createElement(itemCardThumbnail, { url = var11 }),
-		itemSubType = itemSubType,
-		itemType = var12,
-		creator = var15,
-		itemLicensingInfo = if fFlagAXMarketplaceLicensingItemCards then var2.itemLicensingInfo else nil,
-		priceLineContent = var14,
-		LayoutOrder = p2,
-		Size = UDim2.fromOffset(p4, 0),
-		headerSize = UDim2.fromOffset(p4, p4),
-		footerAutomaticSize = Enum.AutomaticSize.XY,
-		AutomaticSize = Enum.AutomaticSize.XY,
-		onActivated = reactModule.useCallback(function()
-			-- upvalues: p3 (ref), p1 (ref)
-			p3(p1)
-		end, { p3, p1 }),
-		ref = var16,
-		itemStatus = var13,
-		isOwned = var7,
-		timedOptions = var9,
-		onTimedOptionPriceChanged = var8,
-		selectedTimedOptionPrice = var10,
-		wearTimeSelectedOptionInList = wearTimeSelectedOptionInList
-	}
 end

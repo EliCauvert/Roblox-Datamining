@@ -1,11 +1,11 @@
 ﻿return {
-	isActivationInput = function(p1)
-		return if p1.UserInputType ~= Enum.UserInputType.MouseButton1 then p1.UserInputType == Enum.UserInputType.Touch else true
+	isActivationInput = function(Input): boolean --[[ Line: 3 ]]
+		return Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch
 	end,
-	isPointerInput = function(p1)
-		return if p1.UserInputType ~= Enum.UserInputType.MouseMovement then p1.UserInputType == Enum.UserInputType.Touch else true
+	isPointerInput = function(Input): boolean --[[ Line: 8 ]]
+		return Input.UserInputType == Enum.UserInputType.MouseMovement or Input.UserInputType == Enum.UserInputType.Touch
 	end,
-	isTouchInput = function(p1)
-		return p1.UserInputType == Enum.UserInputType.Touch
+	isTouchInput = function(Input): boolean --[[ Line: 13 ]]
+		return Input.UserInputType == Enum.UserInputType.Touch
 	end
 }

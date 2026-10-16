@@ -1,36 +1,36 @@
-﻿local currencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
-local reactModule = require(currencyTransfers.Parent.React)
-local transferFAEBlockSheetModule = require(currencyTransfers.Components.Generic.TransferFAEBlockSheet)
-local VPCBlockContainerModule = require(currencyTransfers.Components.Generic.VPCBlockContainer)
-local useTransferStoreModule = require(currencyTransfers.Hooks.useTransferStore)
-local _ = require(currencyTransfers.Enums.TransferDirection)
-local ampWizardTransferConstantsModule = require(currencyTransfers.Constants.AmpWizardTransferConstants)
+﻿local CurrencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
+local ReactModule = require(CurrencyTransfers.Parent.React)
+local TransferFAEBlockSheetModule = require(CurrencyTransfers.Components.Generic.TransferFAEBlockSheet)
+local VPCBlockContainerModule = require(CurrencyTransfers.Components.Generic.VPCBlockContainer)
+local UseTransferStoreModule = require(CurrencyTransfers.Hooks.useTransferStore)
+local _ = require(CurrencyTransfers.Enums.TransferDirection)
+local AmpWizardTransferConstantsModule = require(CurrencyTransfers.Constants.AmpWizardTransferConstants)
 
-return function(_)
-	-- upvalues: useTransferStoreModule (ref), ampWizardTransferConstantsModule (ref), reactModule (ref), transferFAEBlockSheetModule (ref), VPCBlockContainerModule (ref)
-	local var1 = useTransferStoreModule()
-	local direction = var1.getDirection(false)
-	local ampRecourseActions = var1.getAmpRecourseActions(false)
-	local ampFeatureCheck = var1.getAmpFeatureCheck(false)
-	local var2 = false
-	local var3 = false
+return function(_) --[[ Line: 22 | Named "ReceiveBlockSheet" ]]
+	-- upvalues: UseTransferStoreModule (copy), AmpWizardTransferConstantsModule (copy), ReactModule (copy), TransferFAEBlockSheetModule (copy), VPCBlockContainerModule (copy)
+	local UseTransferStoreModuleResult = UseTransferStoreModule()
+	local Direction = UseTransferStoreModuleResult.getDirection(false)
+	local AmpRecourseActions = UseTransferStoreModuleResult.getAmpRecourseActions(false)
+	local AmpFeatureCheck = UseTransferStoreModuleResult.getAmpFeatureCheck(false)
+	local Flag = false
+	local Flag1 = false
 	
-	if ampRecourseActions then
-		for i, v in ipairs(ampRecourseActions) do
-			if v == ampWizardTransferConstantsModule.RECOURSE_ID_VERIFICATION or v == ampWizardTransferConstantsModule.RECOURSE_AGE_ESTIMATION then
-				var2 = true
-			elseif v == ampWizardTransferConstantsModule.RECOURSE_PARENT_LINK or v == ampWizardTransferConstantsModule.RECOURSE_PARENT_CONSENT then
-				var3 = true
+	if AmpRecourseActions then
+		for _, ampRecourseAction in ipairs(AmpRecourseActions) do
+			if ampRecourseAction == AmpWizardTransferConstantsModule.RECOURSE_ID_VERIFICATION or ampRecourseAction == AmpWizardTransferConstantsModule.RECOURSE_AGE_ESTIMATION then
+				Flag = true
+			elseif ampRecourseAction == AmpWizardTransferConstantsModule.RECOURSE_PARENT_LINK or ampRecourseAction == AmpWizardTransferConstantsModule.RECOURSE_PARENT_CONSENT then
+				Flag1 = true
 			end
 		end
 	end
-	return if var2 and direction then reactModule.createElement(transferFAEBlockSheetModule, {
-		direction = direction,
-		ampRecourseActions = ampRecourseActions,
-		ampFeatureCheck = ampFeatureCheck
-	}) elseif var3 and direction then reactModule.createElement(VPCBlockContainerModule, {
-		direction = direction,
-		ampRecourseActions = ampRecourseActions,
-		ampFeatureCheck = ampFeatureCheck
-	}) else reactModule.createElement(reactModule.Fragment)
+	return if Flag and Direction then ReactModule.createElement(TransferFAEBlockSheetModule, {
+		direction = Direction,
+		ampRecourseActions = AmpRecourseActions,
+		ampFeatureCheck = AmpFeatureCheck
+	}) elseif Flag1 and Direction then ReactModule.createElement(VPCBlockContainerModule, {
+		direction = Direction,
+		ampRecourseActions = AmpRecourseActions,
+		ampFeatureCheck = AmpFeatureCheck
+	}) else ReactModule.createElement(ReactModule.Fragment)
 end

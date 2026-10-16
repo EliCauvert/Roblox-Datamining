@@ -1,97 +1,113 @@
-﻿local socialTabsPage = script:FindFirstAncestor("SocialTabsPage")
-local parent = socialTabsPage.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local view = foundationModule.View
-local useTokens = foundationModule.Hooks.useTokens
-local stateLayerAffordance = foundationModule.Enums.StateLayerAffordance
-local fullscreenPageWithSafeArea = require(parent.AppBlox).FullscreenPageWithSafeArea
-local useNavigation = require(parent.Navigation).useNavigation
-local socialTabsHeaderModule = require(socialTabsPage.Components.SocialTabsHeader)
-local socialTabBarModule = require(socialTabsPage.Components.SocialTabBar)
-local socialTabsContextModule = require(socialTabsPage.Contexts.SocialTabsContext)
-local useLocalizedTabsModule = require(socialTabsPage.Hooks.useLocalizedTabs)
-local _ = require(socialTabsPage.Common.Types)
+﻿local SocialTabsPage = script:FindFirstAncestor("SocialTabsPage")
+local Parent = SocialTabsPage.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local StateLayerAffordance = FoundationModule.Enums.StateLayerAffordance
+local FullscreenPageWithSafeArea = require(Parent.AppBlox).FullscreenPageWithSafeArea
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local DisplayModule = require(Parent.Display)
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local FFlagSocialTabsPageDockedPanelSafeAreaModule = require(SocialTabsPage.Flags.FFlagSocialTabsPageDockedPanelSafeArea)
+local SocialTabsHeaderModule = require(SocialTabsPage.Components.SocialTabsHeader)
+local SocialTabBarModule = require(SocialTabsPage.Components.SocialTabBar)
+local SocialTabsContextModule = require(SocialTabsPage.Contexts.SocialTabsContext)
+local UseLocalizedTabsModule = require(SocialTabsPage.Hooks.useLocalizedTabs)
+local _ = require(SocialTabsPage.Common.Types)
 
-return function(value)
-	-- upvalues: reactModule (ref), useLocalizedTabsModule (ref), useTokens (ref), useNavigation (ref), view (ref), socialTabsHeaderModule (ref), socialTabBarModule (ref), stateLayerAffordance (ref), socialTabsContextModule (ref), fullscreenPageWithSafeArea (ref)
-	local color3, var1, t_1
-	local renderNavigator = value.renderNavigator
-	local renderHeader = value.renderHeader
-	local tabConfig = value.tabConfig
-	local profileId = value.profileId
-	local title = value.title
-	local initialTabId = value.initialTabId
-	local pageWidth = value.pageWidth
-	local var2 = reactModule.useMemo(function()
-		-- upvalues: profileId (ref), title (ref)
-		return { profileId = profileId, title = title }
-	end, { profileId, title })
-	local var3 = useLocalizedTabsModule(tabConfig)
-	local var4 = useTokens()
-	local var5 = useNavigation()
-	local var6 = reactModule.useRef(false)
-	local var7 = reactModule.useCallback(function()
-		-- upvalues: var5 (ref)
-		var5.goBack()
-	end, { var5 })
-	reactModule.useEffect(function()
-		-- upvalues: var6 (ref), initialTabId (ref), tabConfig (ref), var5 (ref)
-		if var6.current then return end
-		if not initialTabId or #tabConfig == 0 then return end
-		local var8 = false
+return function(p1) --[[ Line: 24 | Named "SocialTabsPageComponent" ]]
+	-- upvalues: ReactModule (copy), UseLocalizedTabsModule (copy), UseTokensFunction (copy), UseNavigationFunction (copy), FFlagSocialTabsPageDockedPanelSafeAreaModule (copy), UseSignalStateFunction (copy), DisplayModule (copy), View (copy), SocialTabsHeaderModule (copy), SocialTabBarModule (copy), StateLayerAffordance (copy), SocialTabsContextModule (copy), FullscreenPageWithSafeArea (copy)
+	local RenderNavigatorFunction = p1.renderNavigator
+	local RenderHeaderFunction = p1.renderHeader
+	local TabConfig = p1.tabConfig
+	local ProfileId = p1.profileId
+	local Title = p1.title
+	local InitialTabId = p1.initialTabId
+	local PageWidth = p1.pageWidth
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 33 ]]
+		-- upvalues: ProfileId (copy), Title (copy)
+		return { profileId = ProfileId, title = Title }
+	end, { ProfileId, Title })
+	local UseLocalizedTabsModuleResult = UseLocalizedTabsModule(TabConfig)
+	local UseTokensResult = UseTokensFunction()
+	local UseNavigationResult = UseNavigationFunction()
+	local UseSignalStateResult = if FFlagSocialTabsPageDockedPanelSafeAreaModule then UseSignalStateFunction(DisplayModule.GetDisplayStore().getDeviceSafePadding) else nil
+	local UseRefResult = ReactModule.useRef(false)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 48 ]]
+		-- upvalues: UseNavigationResult (copy)
+		UseNavigationResult.goBack()
+	end, { UseNavigationResult })
+	ReactModule.useEffect(function() --[[ Line: 52 ]]
+		-- upvalues: UseRefResult (copy), InitialTabId (copy), TabConfig (copy), UseNavigationResult (copy)
+		if UseRefResult.current then return end
+		if not InitialTabId or #TabConfig == 0 then return end
+		local Flag = false
 		
-		for i, v in tabConfig do
-			if v.id == initialTabId then
-				var8 = true
+		for _, value in TabConfig do
+			if value.id == InitialTabId then
+				Flag = true
 				break
 			end
 		end
-		local var9 = if var8 then initialTabId else tabConfig[1].id
+		local InitialTabId1 = if Flag then InitialTabId else TabConfig[1].id
 		
-		if var5.state.routes[var5.state.index].routeName ~= var9 then
-			var5.navigate(var9)
+		if UseNavigationResult.state.routes[UseNavigationResult.state.index].routeName ~= InitialTabId1 then
+			UseNavigationResult.navigate(InitialTabId1)
 		end
-		var6.current = true
-	end, { initialTabId, tabConfig, var5 })
-	local var10 = reactModule.createElement(view, { tag = "col size-full" }, {
-		HeaderSection = reactModule.createElement(view, {
+		UseRefResult.current = true
+	end, { InitialTabId, TabConfig, UseNavigationResult })
+	local Element = ReactModule.createElement(View, { tag = "col size-full" }, {
+		HeaderSection = ReactModule.createElement(View, {
 			tag = "col size-full-0 auto-y bg-surface-0",
 			LayoutOrder = 1
 		}, {
-			Header = if renderHeader then renderHeader() else reactModule.createElement(socialTabsHeaderModule, { layoutOrder = 1 }),
-			TabBar = reactModule.createElement(socialTabBarModule, { layoutOrder = 2, tabs = var3 })
+			Header = if RenderHeaderFunction then RenderHeaderFunction() else ReactModule.createElement(SocialTabsHeaderModule, { layoutOrder = 1 }),
+			TabBar = ReactModule.createElement(SocialTabBarModule, { layoutOrder = 2, tabs = UseLocalizedTabsModuleResult })
 		}),
-		TabContent = reactModule.createElement(view, { tag = "fill size-full-0", LayoutOrder = 2 }, { Navigator = renderNavigator() })
+		TabContent = ReactModule.createElement(View, { tag = "fill size-full-0", LayoutOrder = 2 }, { Navigator = RenderNavigatorFunction() })
 	})
-	local _ = nil
-	local _ = nil
-	local _ = nil
+	local config = nil
+	local SurfaceColor3 = nil
+	local Transparency = nil
 	
-	if pageWidth == nil then
-		color3 = var4.Color.Surface.Surface_0.Color3
-		var1 = var4.Color.Surface.Surface_0.Transparency
-		t_1 = { SocialTabsPageContent = var10 }
+	if PageWidth == nil then
+		SurfaceColor3 = UseTokensResult.Color.Surface.Surface_0.Color3
+		Transparency = UseTokensResult.Color.Surface.Surface_0.Transparency
+		config = { SocialTabsPageContent = Element }
 	else
-		local t = { affordance = stateLayerAffordance.None }
-		color3 = var4.Color.Surface.Surface_0.Color3
-		var1 = 1
-		t_1 = {
-			ScrimClickHandler = reactModule.createElement(view, { tag = "size-full", stateLayer = t, onActivated = var7 }, {
-				Panel = reactModule.createElement(view, {
-					tag = "col position-top-right anchor-top-right padding-top-xxlarge bg-surface-0",
-					Size = UDim2.new(0, pageWidth, 1, 0),
-					stateLayer = t,
-					onActivated = function() end
-				}, { Content = var10 })
+		local StateLayer = { affordance = StateLayerAffordance.None }
+		SurfaceColor3 = UseTokensResult.Color.Surface.Surface_0.Color3
+		Transparency = 1
+		config = {
+			ScrimClickHandler = ReactModule.createElement(View, {
+				tag = "size-full",
+				stateLayer = StateLayer,
+				onActivated = UseResult
+			}, {
+				Panel = ReactModule.createElement(View, {
+					tag = {
+						["col anchor-top-right bg-surface-0"] = true,
+						["position-top-right padding-top-xxlarge"] = not FFlagSocialTabsPageDockedPanelSafeAreaModule
+					},
+					Position = if FFlagSocialTabsPageDockedPanelSafeAreaModule then UDim2.new(1, UseSignalStateResult.right, 0, -UseSignalStateResult.top) else nil,
+					Size = if FFlagSocialTabsPageDockedPanelSafeAreaModule then UDim2.new(0, PageWidth, 1, UseSignalStateResult.top + UseSignalStateResult.bottom) else UDim2.new(0, PageWidth, 1, 0),
+					padding = if FFlagSocialTabsPageDockedPanelSafeAreaModule then {
+						top = UDim.new(0, UseSignalStateResult.top + UseTokensResult.Padding.XXLarge),
+						right = UDim.new(0, UseSignalStateResult.right),
+						bottom = UDim.new(0, UseSignalStateResult.bottom)
+					} else nil,
+					stateLayer = StateLayer,
+					onActivated = function() --[[ Line: 138 ]] end
+				}, { Content = Element })
 			})
 		}
 	end
-	return reactModule.createElement(socialTabsContextModule.Provider, { value = var2 }, {
-		Page = reactModule.createElement(fullscreenPageWithSafeArea, {
+	return ReactModule.createElement(SocialTabsContextModule.Provider, { value = UseMemoResult }, {
+		Page = ReactModule.createElement(FullscreenPageWithSafeArea, {
 			includeStatusBar = true,
-			BackgroundColor3 = color3,
-			BackgroundTransparency = var1
-		}, t_1)
+			BackgroundColor3 = SurfaceColor3,
+			BackgroundTransparency = Transparency
+		}, config)
 	})
 end

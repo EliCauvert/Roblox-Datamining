@@ -1,133 +1,138 @@
-﻿local onPlatformSurveys = script:FindFirstAncestor("OnPlatformSurveys")
-local parent = onPlatformSurveys.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local roactNetworking = require(parent.RoactServiceTags).RoactNetworking
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useRoactService = require(parent.RobloxAppHooks).useRoactService
-local fFlagInlineSurveyEnhancements = require(parent.SharedFlags).FFlagInlineSurveyEnhancements
-local button = foundationModule.Button
-local fillBehavior = foundationModule.Enums.FillBehavior
-local useTokens = foundationModule.Hooks.useTokens
-local makeDevSurveyRequestImplModule = require(onPlatformSurveys.Dev.makeDevSurveyRequestImpl)
-local inlineEventTypeModule = require(onPlatformSurveys.Enums.InlineEventType)
-local _ = require(onPlatformSurveys.Enums.InlineSurveyPreset)
-local inviteBannerModule = require(onPlatformSurveys.Components.InviteBanner)
-local inlineSurveyLocalizationKeysModule = require(onPlatformSurveys.Constants.InlineSurveyLocalizationKeys)
-local phaseModule = require(onPlatformSurveys.Enums.Phase)
-local inlineSurveyPresetsModule = require(onPlatformSurveys.Constants.InlineSurveyPresets)
-local surveyPhaseSlotsModule = require(onPlatformSurveys.Components.surveyPhaseSlots)
-local surfaceModule = require(onPlatformSurveys.Enums.Surface)
-local surfaceWrapperModule = require(onPlatformSurveys.Components.SurfaceWrapper)
-local surveyCardModule = require(onPlatformSurveys.Components.SurveyCard)
-local surveyModalModule = require(onPlatformSurveys.Components.SurveyModal)
-local _ = require(onPlatformSurveys.Types.InlineSurveyTypes)
-local useInlineSurveyFlowModule = require(onPlatformSurveys.Hooks.useInlineSurveyFlow)
+﻿local OnPlatformSurveys = script:FindFirstAncestor("OnPlatformSurveys")
+local Parent = OnPlatformSurveys.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local RoactNetworking = require(Parent.RoactServiceTags).RoactNetworking
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
+local FFlagInlineSurveyEnhancements = require(Parent.SharedFlags).FFlagInlineSurveyEnhancements
+local Button = FoundationModule.Button
+local FillBehavior = FoundationModule.Enums.FillBehavior
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local MakeDevSurveyRequestImplModule = require(OnPlatformSurveys.Dev.makeDevSurveyRequestImpl)
+local InlineEventTypeModule = require(OnPlatformSurveys.Enums.InlineEventType)
+local _ = require(OnPlatformSurveys.Enums.InlineSurveyPreset)
+local InviteBannerModule = require(OnPlatformSurveys.Components.InviteBanner)
+local InlineSurveyLocalizationKeysModule = require(OnPlatformSurveys.Constants.InlineSurveyLocalizationKeys)
+local PhaseModule = require(OnPlatformSurveys.Enums.Phase)
+local InlineSurveyPresetsModule = require(OnPlatformSurveys.Constants.InlineSurveyPresets)
+local SurveyPhaseSlotsModule = require(OnPlatformSurveys.Components.surveyPhaseSlots)
+local SurfaceModule = require(OnPlatformSurveys.Enums.Surface)
+local SurfaceWrapperModule = require(OnPlatformSurveys.Components.SurfaceWrapper)
+local SurveyCardModule = require(OnPlatformSurveys.Components.SurveyCard)
+local SurveyModalModule = require(OnPlatformSurveys.Components.SurveyModal)
+local _ = require(OnPlatformSurveys.Types.InlineSurveyTypes)
+local UseInlineSurveyFlowModule = require(OnPlatformSurveys.Hooks.useInlineSurveyFlow)
 
-local function noop() end
+local function noop() --[[ Line: 48 ]] end
 
-return reactModule.memo(function(p1)
-	-- upvalues: useRoactService (ref), roactNetworking (ref), inlineEventTypeModule (ref), reactModule (ref), makeDevSurveyRequestImplModule (ref), useTokens (ref), useLocalization (ref), inlineSurveyLocalizationKeysModule (ref), fFlagInlineSurveyEnhancements (ref), inlineSurveyPresetsModule (ref), useInlineSurveyFlowModule (ref), phaseModule (ref), surfaceWrapperModule (ref), surfaceModule (ref), noop (ref), surveyModalModule (ref), surveyPhaseSlotsModule (ref), button (ref), fillBehavior (ref), inviteBannerModule (ref), surveyCardModule (ref)
-	local var1 = useRoactService(roactNetworking)
-	local var2 = p1.eventType == inlineEventTypeModule.DevDoNotPushToProd
-	local var3 = reactModule.useMemo(function()
-		-- upvalues: var2 (ref), makeDevSurveyRequestImplModule (copy), var1 (ref)
-		return if var2 then makeDevSurveyRequestImplModule.makeRequestImpl() else var1
-	end, { var2, var1 })
-	local var4 = useTokens()
-	local var5 = useLocalization({
-		surveyTitle = inlineSurveyLocalizationKeysModule.surveyTitle,
-		completedTitle = inlineSurveyLocalizationKeysModule.completedTitle,
-		inviteBody = inlineSurveyLocalizationKeysModule.inviteBody,
-		inviteAccept = inlineSurveyLocalizationKeysModule.inviteAccept,
-		next = inlineSurveyLocalizationKeysModule.next,
-		send = inlineSurveyLocalizationKeysModule.send,
-		done = inlineSurveyLocalizationKeysModule.done,
-		errorText = inlineSurveyLocalizationKeysModule.errorText,
-		retry = inlineSurveyLocalizationKeysModule.retry
+return ReactModule.memo(function(p1) --[[ Line: 50 | Named "InlineSurvey" ]]
+	-- upvalues: UseRoactServiceFunction (copy), RoactNetworking (copy), InlineEventTypeModule (copy), ReactModule (copy), MakeDevSurveyRequestImplModule (copy), UseTokensFunction (copy), UseLocalizationFunction (copy), InlineSurveyLocalizationKeysModule (copy), FFlagInlineSurveyEnhancements (copy), InlineSurveyPresetsModule (copy), UseInlineSurveyFlowModule (copy), PhaseModule (copy), SurfaceWrapperModule (copy), SurfaceModule (copy), noop (copy), SurveyModalModule (copy), SurveyPhaseSlotsModule (copy), Button (copy), FillBehavior (copy), InviteBannerModule (copy), SurveyCardModule (copy)
+	local UseRoactServiceResult = UseRoactServiceFunction(RoactNetworking)
+	local IsEventTypeMatch = p1.eventType == InlineEventTypeModule.DevDoNotPushToProd
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 53 ]]
+		-- upvalues: IsEventTypeMatch (copy), MakeDevSurveyRequestImplModule (upval), UseRoactServiceResult (copy)
+		return if IsEventTypeMatch then MakeDevSurveyRequestImplModule.makeRequestImpl() else UseRoactServiceResult
+	end, { IsEventTypeMatch, UseRoactServiceResult })
+	local UseTokensResult = UseTokensFunction()
+	local UseLocalizationResult = UseLocalizationFunction({
+		surveyTitle = InlineSurveyLocalizationKeysModule.surveyTitle,
+		completedTitle = InlineSurveyLocalizationKeysModule.completedTitle,
+		inviteBody = InlineSurveyLocalizationKeysModule.inviteBody,
+		inviteAccept = InlineSurveyLocalizationKeysModule.inviteAccept,
+		next = InlineSurveyLocalizationKeysModule.next,
+		send = InlineSurveyLocalizationKeysModule.send,
+		done = InlineSurveyLocalizationKeysModule.done,
+		errorText = InlineSurveyLocalizationKeysModule.errorText,
+		retry = InlineSurveyLocalizationKeysModule.retry
 	})
-	local var6 = if fFlagInlineSurveyEnhancements then inlineSurveyPresetsModule.getPresentationConfig(p1.preset) else nil
-	local var7 = useInlineSurveyFlowModule({
-		networkImpl = var3,
+	local PresentationConfig = if FFlagInlineSurveyEnhancements then InlineSurveyPresetsModule.getPresentationConfig(p1.preset) else nil
+	local UseInlineSurveyFlowModuleResult = UseInlineSurveyFlowModule({
+		networkImpl = UseMemoResult,
 		eventType = p1.eventType,
-		hasInvite = var6 ~= nil and var6.hasInvite,
+		hasInvite = PresentationConfig ~= nil and PresentationConfig.hasInvite,
 		onClose = p1.onClose,
 		onComplete = p1.onComplete,
 		onEligible = p1.onEligible
 	})
-	local phase = var7.state.phase
-	local var8 = reactModule.useRef(false)
-	local dismiss = var7.dismiss
-	local errorType = var7.state.errorType
-	reactModule.useEffect(function()
-		-- upvalues: phase (ref), phaseModule (copy), errorType (ref), dismiss (ref)
-		if phase == phaseModule.Error and errorType == "fetch" then
-			dismiss()
+	local Phase = UseInlineSurveyFlowModuleResult.state.phase
+	local UseRefResult = ReactModule.useRef(false)
+	local DismissFunction = UseInlineSurveyFlowModuleResult.dismiss
+	local ErrorType = UseInlineSurveyFlowModuleResult.state.errorType
+	ReactModule.useEffect(function() --[[ Line: 88 ]]
+		-- upvalues: Phase (copy), PhaseModule (upval), ErrorType (copy), DismissFunction (copy)
+		if Phase == PhaseModule.Error and ErrorType == "fetch" then
+			DismissFunction()
 		end
-	end, { phase, errorType, dismiss })
+	end, { Phase, ErrorType, DismissFunction })
 	
-	if phase == phaseModule.Closed then
-		return if var8.current then if fFlagInlineSurveyEnhancements then reactModule.createElement(surfaceWrapperModule, {
+	if Phase == PhaseModule.Closed then
+		return if UseRefResult.current then if FFlagInlineSurveyEnhancements then ReactModule.createElement(SurfaceWrapperModule, {
 			isOpen = false,
 			children = nil,
-			surface = surfaceModule.Modal,
+			surface = SurfaceModule.Modal,
 			onClose = noop
-		}) else reactModule.createElement(surveyModalModule, { isOpen = false, children = nil, onClose = noop }) else nil
-	elseif phase == phaseModule.Loading or phase == phaseModule.Error and var7.state.errorType == "fetch" then
+		}) else ReactModule.createElement(SurveyModalModule, { isOpen = false, children = nil, onClose = noop }) else nil
+	elseif Phase == PhaseModule.Loading or Phase == PhaseModule.Error and UseInlineSurveyFlowModuleResult.state.errorType == "fetch" then
 		return nil
-	end
-	local slots = surveyPhaseSlotsModule.getSlots(var7.state, var5, var4, {
-		onAnswerChanged = var7.setAnswer,
-		onSubmit = var7.submit,
-		onRetry = var7.retry,
-		onDismiss = var7.dismiss,
-		onAccept = var7.acceptInvite
-	})
-	local var9 = slots.primaryAction and reactModule.createElement(button, {
-		text = slots.primaryAction.text,
-		variant = slots.primaryAction.variant,
-		fillBehavior = fillBehavior.Fill,
-		isLoading = slots.primaryAction.isLoading,
-		isDisabled = slots.primaryAction.isDisabled,
-		onActivated = slots.primaryAction.onActivated
-	}) or nil
-	
-	if not fFlagInlineSurveyEnhancements or not var6 then
-		var8.current = true
+	else
+		local Slots = SurveyPhaseSlotsModule.getSlots(UseInlineSurveyFlowModuleResult.state, UseLocalizationResult, UseTokensResult, {
+			onAnswerChanged = UseInlineSurveyFlowModuleResult.setAnswer,
+			onSubmit = UseInlineSurveyFlowModuleResult.submit,
+			onRetry = UseInlineSurveyFlowModuleResult.retry,
+			onDismiss = UseInlineSurveyFlowModuleResult.dismiss,
+			onAccept = UseInlineSurveyFlowModuleResult.acceptInvite
+		})
+		local Element = Slots.primaryAction and ReactModule.createElement(Button, {
+			text = Slots.primaryAction.text,
+			variant = Slots.primaryAction.variant,
+			fillBehavior = FillBehavior.Fill,
+			isLoading = Slots.primaryAction.isLoading,
+			isDisabled = Slots.primaryAction.isDisabled,
+			onActivated = Slots.primaryAction.onActivated
+		}) or nil
 		
-		return reactModule.createElement(surveyModalModule, {
-			isOpen = true,
-			onClose = var7.dismiss,
-			title = slots.headerTitle,
-			footer = var9,
-			children = slots.body
-		})
-	end
-	local var10 = phase == phaseModule.Invite
-	local var11 = if var6.hasInvite and var10 then var6.inviteSurface or var6.surveySurface else var6.surveySurface
-	local var12 = if var10 then var7.declineInvite else var7.dismiss
-	
-	if var11 == surfaceModule.InContent and var10 then
-		return reactModule.createElement(surfaceWrapperModule, {
-			surface = surfaceModule.InContent,
-			onClose = var12,
-			children = reactModule.createElement(inviteBannerModule, { onAccept = var7.acceptInvite })
-		})
-	elseif var11 == surfaceModule.Modal then
-		var8.current = true
+		if not FFlagInlineSurveyEnhancements or not PresentationConfig then
+			UseRefResult.current = true
+			
+			return ReactModule.createElement(SurveyModalModule, {
+				isOpen = true,
+				onClose = UseInlineSurveyFlowModuleResult.dismiss,
+				title = Slots.headerTitle,
+				footer = Element,
+				children = Slots.body
+			})
+		end
+		local IsPhaseMatch = Phase == PhaseModule.Invite
+		local InviteSurface = PresentationConfig.hasInvite and IsPhaseMatch and PresentationConfig.inviteSurface or PresentationConfig.surveySurface
+		local DeclineInvite = if IsPhaseMatch then UseInlineSurveyFlowModuleResult.declineInvite else UseInlineSurveyFlowModuleResult.dismiss
 		
-		return reactModule.createElement(surfaceWrapperModule, {
-			isOpen = true,
-			surface = surfaceModule.Modal,
-			onClose = var12,
-			title = slots.headerTitle,
-			footer = var9,
-			children = slots.body
-		})
+		if InviteSurface == SurfaceModule.InContent and IsPhaseMatch then
+			return ReactModule.createElement(SurfaceWrapperModule, {
+				surface = SurfaceModule.InContent,
+				onClose = DeclineInvite,
+				children = ReactModule.createElement(InviteBannerModule, { onAccept = UseInlineSurveyFlowModuleResult.acceptInvite })
+			})
+		elseif InviteSurface == SurfaceModule.Modal then
+			UseRefResult.current = true
+			
+			return ReactModule.createElement(SurfaceWrapperModule, {
+				isOpen = true,
+				surface = SurfaceModule.Modal,
+				onClose = DeclineInvite,
+				title = Slots.headerTitle,
+				footer = Element,
+				children = Slots.body
+			})
+		else
+			return ReactModule.createElement(SurfaceWrapperModule, {
+				surface = SurfaceModule.InContent,
+				onClose = DeclineInvite,
+				children = ReactModule.createElement(SurveyCardModule, {
+					slots = Slots,
+					onDismiss = UseInlineSurveyFlowModuleResult.dismiss
+				})
+			})
+		end
 	end
-	return reactModule.createElement(surfaceWrapperModule, {
-		surface = surfaceModule.InContent,
-		onClose = var12,
-		children = reactModule.createElement(surveyCardModule, { slots = slots, onDismiss = var7.dismiss })
-	})
 end)

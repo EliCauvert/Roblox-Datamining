@@ -1,3 +1,3 @@
-﻿return function(p1)
-	return "@" .. p0
+﻿return function(Text): string --[[ Line: 1 ]]
+	return "@" .. Text
 end

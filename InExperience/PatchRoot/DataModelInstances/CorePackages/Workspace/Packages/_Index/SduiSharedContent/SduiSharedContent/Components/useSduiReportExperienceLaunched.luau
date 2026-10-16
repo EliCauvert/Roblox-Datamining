@@ -1,25 +1,31 @@
-﻿local parent = script:FindFirstAncestor("SduiSharedContent").Parent
-local reactModule = require(parent.React)
-local _ = require(parent.SduiCoreSystem)
-local sduiReportGamePlayIntentModule = require(script.Parent.sduiReportGamePlayIntent)
-local fFlagLuaAppDemoModePlayButtonTelemetry = require(parent.SharedFlags).FFlagLuaAppDemoModePlayButtonTelemetry
+﻿local Parent = script:FindFirstAncestor("SduiSharedContent").Parent
+local ReactModule = require(Parent.React)
+local _ = require(Parent.SduiCoreSystem)
+local SduiReportGamePlayIntentModule = require(script.Parent.sduiReportGamePlayIntent)
+local HoverTileCoordinator = require(Parent.GameTile).HoverTileCoordinator
+local FFlagSduiResetHoverOnExperienceLaunch = require(Parent.SharedFlags).FFlagSduiResetHoverOnExperienceLaunch
+local FFlagLuaAppDemoModePlayButtonTelemetry = require(Parent.SharedFlags).FFlagLuaAppDemoModePlayButtonTelemetry
 
-return function(p1, p2, p3, p4, p5, p6, p7)
-	-- upvalues: reactModule (ref), sduiReportGamePlayIntentModule (ref), fFlagLuaAppDemoModePlayButtonTelemetry (ref)
-	return reactModule.useCallback(function(p8)
-		-- upvalues: sduiReportGamePlayIntentModule (copy), p1 (ref), p2 (ref), p3 (ref), p4 (ref), p5 (ref), p6 (ref), p7 (ref), fFlagLuaAppDemoModePlayButtonTelemetry (copy)
-		sduiReportGamePlayIntentModule({
-			sduiContext = p1,
-			analyticsContext = p2,
-			universeId = p3,
-			placeId = p4,
-			rootPlaceId = p5,
-			appliedFilters = p6,
-			launchData = p7,
-			actionType = if fFlagLuaAppDemoModePlayButtonTelemetry then p8 else nil
+return function(SduiContext, AnalyticsContext, UniverseId, PlaceId, RootPlaceId, AppliedFilters, LaunchData) --[[ Line: 15 | Named "useSduiReportExperienceLaunched" ]]
+	-- upvalues: ReactModule (copy), FFlagSduiResetHoverOnExperienceLaunch (copy), HoverTileCoordinator (copy), SduiReportGamePlayIntentModule (copy), FFlagLuaAppDemoModePlayButtonTelemetry (copy)
+	return ReactModule.useCallback(function(p1) --[[ Line: 28 ]]
+		-- upvalues: FFlagSduiResetHoverOnExperienceLaunch (upval), HoverTileCoordinator (upval), SduiReportGamePlayIntentModule (upval), SduiContext (copy), AnalyticsContext (copy), UniverseId (copy), PlaceId (copy), RootPlaceId (copy), AppliedFilters (copy), LaunchData (copy), FFlagLuaAppDemoModePlayButtonTelemetry (upval)
+		if FFlagSduiResetHoverOnExperienceLaunch then
+			HoverTileCoordinator.default:reset()
+		end
+		SduiReportGamePlayIntentModule({
+			sduiContext = SduiContext,
+			analyticsContext = AnalyticsContext,
+			universeId = UniverseId,
+			placeId = PlaceId,
+			rootPlaceId = RootPlaceId,
+			appliedFilters = AppliedFilters,
+			launchData = LaunchData,
+			actionType = if FFlagLuaAppDemoModePlayButtonTelemetry then p1 else nil
 		})
 	end, {
-		p1.dependencies.eventIngest, p2, p3, p4, p5, p6, p7,
-		p1.dependencies.sessionService, p1
+		SduiContext.dependencies.eventIngest, AnalyticsContext, UniverseId, PlaceId,
+		RootPlaceId, AppliedFilters, LaunchData,
+		SduiContext.dependencies.sessionService, SduiContext
 	})
 end

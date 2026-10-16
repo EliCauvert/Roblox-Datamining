@@ -1,1 +1,1 @@
-﻿return require(script:FindFirstAncestor("ApolloLocalState").Parent.ApolloClient).gql(require(script.Parent.schema.UserProfilesCombinedNameUsernameAndIsVerifiedByUserIds))
+﻿return (require(script:FindFirstAncestor("ApolloLocalState").Parent.ApolloClient).gql(require(script.Parent.schema.UserProfilesCombinedNameUsernameAndIsVerifiedByUserIds)))

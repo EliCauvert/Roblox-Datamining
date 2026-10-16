@@ -1,24 +1,24 @@
-﻿local genericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
-local reactModule = require(genericAbuseReporting.Parent.React)
-local localizationKeysContextModule = require(genericAbuseReporting.LocalizationKeys.LocalizationKeysContext)
-local defaultLocalizationKeysModule = require(genericAbuseReporting.LocalizationKeys.DefaultLocalizationKeys)
+﻿local GenericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
+local ReactModule = require(GenericAbuseReporting.Parent.React)
+local LocalizationKeysContextModule = require(GenericAbuseReporting.LocalizationKeys.LocalizationKeysContext)
+local DefaultLocalizationKeysModule = require(GenericAbuseReporting.LocalizationKeys.DefaultLocalizationKeys)
 
-return function(p1)
-	-- upvalues: reactModule (ref), defaultLocalizationKeysModule (ref), localizationKeysContextModule (ref)
-	return reactModule.createElement(localizationKeysContextModule.Provider, {
-		value = reactModule.useMemo(function()
-			-- upvalues: p1 (ref), defaultLocalizationKeysModule (copy)
-			local localizationKeys = p1.localizationKeys
+return function(p1) --[[ Line: 25 | Named "LocalizationKeysProvider" ]]
+	-- upvalues: ReactModule (copy), DefaultLocalizationKeysModule (copy), LocalizationKeysContextModule (copy)
+	return ReactModule.createElement(LocalizationKeysContextModule.Provider, {
+		value = ReactModule.useMemo(function() --[[ Line: 26 ]]
+			-- upvalues: p1 (copy), DefaultLocalizationKeysModule (upval)
+			local LocalizationKeys = p1.localizationKeys
 			
 			return {
-				formTitle = if localizationKeys then localizationKeys.formTitle else defaultLocalizationKeysModule.formTitle,
-				formSubmit = if localizationKeys then localizationKeys.formSubmit else defaultLocalizationKeysModule.formSubmit,
-				completeTitle = if localizationKeys then localizationKeys.completeTitle else defaultLocalizationKeysModule.completeTitle,
-				completeDescription = if localizationKeys then localizationKeys.completeDescription else defaultLocalizationKeysModule.completeDescription,
-				completeClose = if localizationKeys then localizationKeys.completeClose else defaultLocalizationKeysModule.completeClose,
-				failedTitle = if localizationKeys then localizationKeys.failedTitle else defaultLocalizationKeysModule.failedTitle,
-				failedDescription = if localizationKeys then localizationKeys.failedDescription else defaultLocalizationKeysModule.failedDescription,
-				failedClose = if localizationKeys then localizationKeys.failedClose else defaultLocalizationKeysModule.failedClose
+				formTitle = LocalizationKeys and LocalizationKeys.formTitle or DefaultLocalizationKeysModule.formTitle,
+				formSubmit = LocalizationKeys and LocalizationKeys.formSubmit or DefaultLocalizationKeysModule.formSubmit,
+				completeTitle = LocalizationKeys and LocalizationKeys.completeTitle or DefaultLocalizationKeysModule.completeTitle,
+				completeDescription = LocalizationKeys and LocalizationKeys.completeDescription or DefaultLocalizationKeysModule.completeDescription,
+				completeClose = LocalizationKeys and LocalizationKeys.completeClose or DefaultLocalizationKeysModule.completeClose,
+				failedTitle = LocalizationKeys and LocalizationKeys.failedTitle or DefaultLocalizationKeysModule.failedTitle,
+				failedDescription = LocalizationKeys and LocalizationKeys.failedDescription or DefaultLocalizationKeysModule.failedDescription,
+				failedClose = LocalizationKeys and LocalizationKeys.failedClose or DefaultLocalizationKeysModule.failedClose
 			}
 		end, { p1.localizationKeys })
 	}, p1.children)

@@ -1,22 +1,22 @@
-﻿local reactModule = require(script:FindFirstAncestor("SplashScreenManager").Parent.React)
-local splashScreenManagerModule = require(script.Parent.SplashScreenManager)
+﻿local ReactModule = require(script:FindFirstAncestor("SplashScreenManager").Parent.React)
+local SplashScreenManagerModule = require(script.Parent.SplashScreenManager)
 
-return function()
-	-- upvalues: reactModule (ref), splashScreenManagerModule (ref)
-	local var1, var2 = reactModule.useState(splashScreenManagerModule.isFPSAtTarget())
-	local var3 = reactModule.useCallback(function(p1)
-		-- upvalues: var2 (ref)
-		var2(p1)
-	end, { var2 })
-	reactModule.useEffect(function()
-		-- upvalues: splashScreenManagerModule (copy), var3 (ref)
-		splashScreenManagerModule.addStatusChangeListener(var3)
+return function() --[[ Line: 9 | Named "useIsFPSAtTarget" ]]
+	-- upvalues: ReactModule (copy), SplashScreenManagerModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(SplashScreenManagerModule.isFPSAtTarget())
+	local UseResult = ReactModule.useCallback(function(p1) --[[ Line: 11 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(p1)
+	end, { UseStateResult2 })
+	ReactModule.useEffect(function() --[[ Line: 15 ]]
+		-- upvalues: SplashScreenManagerModule (upval), UseResult (copy)
+		SplashScreenManagerModule.addStatusChangeListener(UseResult)
 		
-		return function()
-			-- upvalues: splashScreenManagerModule (copy), var3 (copy)
-			splashScreenManagerModule.removeStatusChangeListener(var3)
+		return function() --[[ Line: 17 ]]
+			-- upvalues: SplashScreenManagerModule (upval), UseResult (upval)
+			SplashScreenManagerModule.removeStatusChangeListener(UseResult)
 		end
 	end, {})
 	
-	return var1
+	return UseStateResult
 end

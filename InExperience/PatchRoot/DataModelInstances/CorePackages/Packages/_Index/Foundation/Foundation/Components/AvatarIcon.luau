@@ -1,1 +1,1 @@
-﻿return require(script.AvatarIcon)
+﻿return (require(script.AvatarIcon))

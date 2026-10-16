@@ -1,20 +1,24 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local numberLocalization = require(buildExperience.Parent.Localization).NumberLocalization
-local analyticsUnitModule = require(buildExperience.Analytics.AnalyticsUnit)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local NumberLocalization = require(BuildExperience.Parent.Localization).NumberLocalization
+local AnalyticsUnitModule = require(BuildExperience.Analytics.AnalyticsUnit)
+local RoundToDecimalsModule = require(BuildExperience.Analytics.roundToDecimals)
 
-local function formatNumber(p1, p2, p3)
-	-- upvalues: numberLocalization (ref)
-	return if p2 == "Regular" then numberLocalization.localizeDecimal(p1, p3, 2) else numberLocalization.abbreviate(p1, p3)
+local function formatNumber(p1, p2, p3) --[[ Line: 25 ]]
+	-- upvalues: NumberLocalization (copy)
+	return if p2 == "Regular" then NumberLocalization.localizeDecimal(p1, p3, 2) else NumberLocalization.abbreviate(p1, p3)
 end
 
-return function(p1, p2, p3, p4)
-	-- upvalues: analyticsUnitModule (ref), formatNumber (ref), numberLocalization (ref)
-	if p2 == analyticsUnitModule.Percent then
-		return formatNumber(p1 * 100, p3, p4)
-	elseif p2 ~= analyticsUnitModule.Temporal then
-		return formatNumber(p1, p3, p4)
+return function(p1: number, Minutes, p2, p3) --[[ Line: 32 | Named "formatStatNumber" ]]
+	-- upvalues: AnalyticsUnitModule (copy), NumberLocalization (copy), formatNumber (copy), RoundToDecimalsModule (copy)
+	if Minutes == AnalyticsUnitModule.Minutes then
+		return NumberLocalization.localizeDecimal(p1, p3, 2)
+	elseif Minutes == AnalyticsUnitModule.Percent then
+		return formatNumber(p1 * 100, p2, p3)
+	elseif Minutes == AnalyticsUnitModule.Temporal then
+		local Value = p1 / 60
+		
+		return if math.abs(Value) < 1 then NumberLocalization.localizeDecimal(RoundToDecimalsModule(Value, 2), p3, 2) else formatNumber(RoundToDecimalsModule(Value, 1), p2, p3)
+	else
+		return formatNumber(p1, p2, p3)
 	end
-	local var1 = p1 / 60
-	
-	return if math.abs(var1) < 1 then numberLocalization.localizeDecimal(math.floor(var1 * 100 + 0.5) / 100, p4, 2) else formatNumber(math.floor(var1 * 10 + 0.5) / 10, p3, p4)
 end

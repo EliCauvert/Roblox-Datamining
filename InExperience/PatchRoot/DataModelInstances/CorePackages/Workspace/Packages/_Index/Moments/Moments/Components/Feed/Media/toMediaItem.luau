@@ -1,124 +1,171 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
-local httpService = game:GetService("HttpService")
-local foundationModule = require(parent.Foundation)
-local momentsCommonModule = require(parent.MomentsCommon)
-local fFlagMomentsOptimisticProfilePending = require(parent.SharedFlags).FFlagMomentsOptimisticProfilePending
-local tutilsModule = require(parent.tutils)
-local _ = require(moments.Components.Feed.FeedTypes)
-local fFlagMomentsTTSFeedPlaybackModule = require(moments.Flags.FFlagMomentsTTSFeedPlayback)
-local getFFlagMomentsRenderPostAssetsModule = require(parent.MomentsCommon.GetFFlagMomentsRenderPostAssets)
-local deriveMomentFromPostModule = require(moments.Utils.deriveMomentFromPost)
-local momentsGetPostAssetStoreModule = require(parent.DataHydration.MomentsGetPostAssetStore)
-local fFlagMomentsVideoPermissionContextFix = momentsCommonModule.Flags.FFlagMomentsVideoPermissionContextFix
-local getRbxThumb = foundationModule.Utility.getRbxThumb
-local thumbnailType = foundationModule.Enums.ThumbnailType
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
+local HttpService = game:GetService("HttpService")
+local FoundationModule = require(Parent.Foundation)
+local _ = require(Parent.MomentsTypes)
+local FFlagMomentsOptimisticProfilePending = require(Parent.SharedFlags).FFlagMomentsOptimisticProfilePending
+local TutilsModule = require(Parent.tutils)
+local _ = require(Moments.Components.Feed.FeedTypes)
+local FFlagMomentsServeEDPVideos = require(Parent.SharedFlags).FFlagMomentsServeEDPVideos
+local FFlagMomentsTTSFeedPlaybackModule = require(Moments.Flags.FFlagMomentsTTSFeedPlayback)
+local FFlagMomentsTTSPendingPreviewPlaybackModule = require(Moments.Flags.FFlagMomentsTTSPendingPreviewPlayback)
+local GetFFlagMomentsRenderPostAssetsModule = require(Parent.MomentsCommon.GetFFlagMomentsRenderPostAssets)
+local DeriveMomentFromPostModule = require(Moments.Utils.deriveMomentFromPost)
+local MomentsGetPostAssetStoreModule = require(Parent.DataHydration.MomentsGetPostAssetStore)
+local FFlagMomentsVideoPermissionContextFix = require(Parent.MomentsCommon).Flags.FFlagMomentsVideoPermissionContextFix
+local GetRbxThumbFunction = FoundationModule.Utility.getRbxThumb
+local ThumbnailType = FoundationModule.Enums.ThumbnailType
 
-local function _(p1, p2, p3)
-	local var1 = `rbxassetid://{p1}`
+local function _(p1, CaptureType, p2): string --[[ Line: 54 | Named "getMediaContentUri" ]]
+	local AssetId: string = `rbxassetid://{p1}`
 	
-	return if p2 == Enum.CaptureType.Video and p3 ~= nil then `{var1}&accessContext={p3}&permissionContext=ignoreUniverse` else var1
+	return if CaptureType == Enum.CaptureType.Video and p2 ~= nil then `{AssetId}&accessContext={p2}&permissionContext=ignoreUniverse` else AssetId
 end
 
-local function getMediaContents(p1, p2, p3)
-	-- upvalues: fFlagMomentsVideoPermissionContextFix (ref)
-	local fromUri = Content.fromUri
-	local var1 = `rbxassetid://{p1}`
-	fromUri = fromUri(if p2 == Enum.CaptureType.Video and p3 ~= nil then `{var1}&accessContext={p3}&permissionContext=ignoreUniverse` else var1)
+local function getMediaContents(AssetId, CaptureType, p1) --[[ Line: 63 ]]
+	-- upvalues: FFlagMomentsVideoPermissionContextFix (copy)
+	local AssetId1: string = `rbxassetid://{AssetId}`
+	local Content1 = Content.fromUri(if CaptureType == Enum.CaptureType.Video and p1 ~= nil then `{AssetId1}&accessContext={p1}&permissionContext=ignoreUniverse` else AssetId1)
 	
-	if fFlagMomentsVideoPermissionContextFix and game.GameId == 0 and (p2 == Enum.CaptureType.Video and p3 ~= nil) then
-		return Content.fromUri(`rbxassetid://{p1}&accessContext={p3}`), fromUri
+	if FFlagMomentsVideoPermissionContextFix and game.GameId == 0 and CaptureType == Enum.CaptureType.Video and p1 ~= nil then
+		return Content.fromUri(`rbxassetid://{AssetId}&accessContext={p1}`), Content1
+	else
+		return Content1, nil
 	end
-	return fromUri, nil
 end
 
-return function(p1)
-	-- upvalues: getFFlagMomentsRenderPostAssetsModule (ref), fFlagMomentsOptimisticProfilePending (ref), httpService (ref), getRbxThumb (ref), thumbnailType (ref), fFlagMomentsTTSFeedPlaybackModule (ref), getMediaContents (ref), momentsGetPostAssetStoreModule (ref), deriveMomentFromPostModule (ref), tutilsModule (ref)
+local _ = function(p1, p2) --[[ Line: 85 | Named "getLocalTts" ]]
+	if p1 == nil or p2 == nil then
+		return nil
+	else
+		local Tts = p2.tts
+		
+		return if Tts == nil or Tts.text == nil or Tts.text == "" then nil else Tts
+	end
+end
+
+return function(p1, p2) --[[ Line: 96 | Named "toMediaItem" ]]
+	-- upvalues: GetFFlagMomentsRenderPostAssetsModule (copy), FFlagMomentsOptimisticProfilePending (copy), FFlagMomentsServeEDPVideos (copy), HttpService (copy), GetRbxThumbFunction (copy), ThumbnailType (copy), FFlagMomentsTTSFeedPlaybackModule (copy), getMediaContents (copy), FFlagMomentsTTSPendingPreviewPlaybackModule (copy), MomentsGetPostAssetStoreModule (copy), DeriveMomentFromPostModule (copy), TutilsModule (copy)
+	local IsIncludeLocalTts: boolean = p2 ~= nil and p2.includeLocalTts == true
+	
 	if p1.kind ~= "moment" then
 		return nil
 	end
-	local var1
-	local moment = p1.moment
+	local Moment = p1.moment
 	
-	if moment == nil or moment.metadata == nil then
+	if Moment == nil or Moment.metadata == nil then
 		return nil
-	elseif getFFlagMomentsRenderPostAssetsModule() then
-		local function createMediaItem(p2, p3)
-			-- upvalues: fFlagMomentsOptimisticProfilePending (copy), httpService (copy), getRbxThumb (copy), thumbnailType (copy), fFlagMomentsTTSFeedPlaybackModule (copy), getMediaContents (copy)
-			local var2 = if fFlagMomentsOptimisticProfilePending then p2.localContent else nil
-			local assetId = p2.assetId
-			local assetAccessContext = p2.metadata.assetAccessContext
-			local var3 = if assetAccessContext == nil or assetAccessContext == "" then nil else httpService:UrlEncode(assetAccessContext)
-			local var4 = if var2 ~= nil then if assetId > 0 then Content.fromUri(if var3 ~= nil then getRbxThumb(thumbnailType.Asset, assetId) else `{getRbxThumb(thumbnailType.Asset, assetId)}&accessContext={var3}`) else nil else var2
-			local edits = p2.metadata.edits
+	end
+	if GetFFlagMomentsRenderPostAssetsModule() then
+		local function createMediaItem(Moment, SourceKey) --[[ Line: 108 ]]
+			-- upvalues: FFlagMomentsOptimisticProfilePending (upval), FFlagMomentsServeEDPVideos (upval), HttpService (upval), GetRbxThumbFunction (upval), ThumbnailType (upval), FFlagMomentsTTSFeedPlaybackModule (upval), getMediaContents (upval), FFlagMomentsTTSPendingPreviewPlaybackModule (upval), IsIncludeLocalTts (copy)
+			local LocalContent = if FFlagMomentsOptimisticProfilePending then Moment.localContent else nil
+			local AssetId: number = Moment.assetId
+			local AssetAccessContext = if FFlagMomentsServeEDPVideos and Moment.entityType == "edpVideo" then nil else Moment.metadata.assetAccessContext
+			local v1 = if AssetAccessContext == nil or AssetAccessContext == "" then nil else HttpService:UrlEncode(AssetAccessContext)
+			local Content1 = if LocalContent == nil then if AssetId > 0 then Content.fromUri(if v1 == nil then GetRbxThumbFunction(ThumbnailType.Asset, AssetId) else `{GetRbxThumbFunction(ThumbnailType.Asset, AssetId)}&accessContext={v1}`) else nil else LocalContent
+			local Edits = Moment.metadata.edits
 			
-			if not fFlagMomentsTTSFeedPlaybackModule and edits ~= nil and edits.ttsAudios ~= nil then
-				local cloned = table.clone(edits)
-				cloned.ttsAudios = nil
-				edits = cloned
+			if not FFlagMomentsTTSFeedPlaybackModule and Edits ~= nil and Edits.ttsAudios ~= nil then
+				local Copy = table.clone(Edits)
+				Copy.ttsAudios = nil
+				Edits = Copy
 			end
-			local var5, var6 = getMediaContents(assetId, p2.metadata.captureType, var3)
-			
-			return {
-				momentId = p2.momentId,
-				sourceKey = p3,
-				content = var2 or var5,
-				preloadContent = if var2 == nil then var6 else nil,
-				posterContent = var4,
-				captureType = p2.metadata.captureType,
-				edits = edits
+			local MediaContents, MediaContents2 = getMediaContents(AssetId, Moment.metadata.captureType, v1)
+			local config = {
+				momentId = Moment.momentId,
+				sourceKey = SourceKey,
+				content = LocalContent or MediaContents,
+				preloadContent = if LocalContent == nil then MediaContents2 else nil,
+				posterContent = Content1,
+				captureType = Moment.metadata.captureType,
+				edits = Edits
 			}
-		end
-		
-		local var2 = createMediaItem(moment, `json:{moment.assetId}`)
-		var1 = if moment.postAsset ~= nil then nil else moment.postAsset.postAssetId
-		
-		if var1 == nil or var1 <= 0 then
-			return var2
-		end
-		function var2.resolve(p2)
-			-- upvalues: momentsGetPostAssetStoreModule (copy), var1 (ref), deriveMomentFromPostModule (copy), moment (ref), createMediaItem (ref), var2 (ref), tutilsModule (copy)
-			local var3 = momentsGetPostAssetStoreModule(false).getAndFetchPostAsset(var1).data(p2)
+			local LocalTts = nil
 			
-			if var3 ~= nil then
-				local var4 = deriveMomentFromPostModule(moment, var3)
+			if FFlagMomentsTTSPendingPreviewPlaybackModule and FFlagMomentsTTSFeedPlaybackModule and IsIncludeLocalTts then
+				local Edits1 = Edits
 				
-				if var4 == nil then
-					return var2
+				if LocalContent == nil or Edits1 == nil then
+					LocalTts = nil
+				else
+					local Tts = Edits1.tts
+					LocalTts = if Tts == nil or Tts.text == nil or Tts.text == "" then nil else Tts
 				end
-				local var5 = createMediaItem(var4, `post:{var1}`)
-				var5.cornerRadius = var2.cornerRadius
-				
-				if var5.content.Uri == var2.content.Uri and var5.captureType == var2.captureType and tutilsModule.deepEqual(var5.edits or {}, var2.edits or {}) then
-					var5.sourceKey = var2.sourceKey
-				end
-				return var5
+			else
+				LocalTts = nil
 			end
+			config.localTts = LocalTts
+			
+			return config
 		end
 		
-		return var2
+		local MediaItem = createMediaItem(Moment, `json:{Moment.assetId}`)
+		local PostAssetId = if Moment.postAsset == nil then nil else Moment.postAsset.postAssetId
+		
+		if PostAssetId == nil or PostAssetId <= 0 then
+			return MediaItem
+		else
+			function MediaItem.resolve(p3) --[[ Line: 164 ]]
+				-- upvalues: MomentsGetPostAssetStoreModule (upval), PostAssetId (copy), DeriveMomentFromPostModule (upval), Moment (copy), createMediaItem (copy), MediaItem (copy), TutilsModule (upval)
+				local DataResult = MomentsGetPostAssetStoreModule(false).getAndFetchPostAsset(PostAssetId).data(p3)
+				
+				if DataResult ~= nil then
+					local DeriveMomentFromPostModuleResult = DeriveMomentFromPostModule(Moment, DataResult)
+					
+					if DeriveMomentFromPostModuleResult ~= nil then
+						local MediaItem1 = createMediaItem(DeriveMomentFromPostModuleResult, `post:{PostAssetId}`)
+						MediaItem1.cornerRadius = MediaItem.cornerRadius
+						
+						if MediaItem1.content.Uri == MediaItem.content.Uri and MediaItem1.captureType == MediaItem.captureType and TutilsModule.deepEqual(MediaItem1.edits or {}, MediaItem.edits or {}) then
+							MediaItem1.sourceKey = MediaItem.sourceKey
+						end
+						return MediaItem1
+					end
+				end
+				return MediaItem
+			end
+			
+			return MediaItem
+		end
 	else
-		local assetId = moment.assetId
-		local var3 = if fFlagMomentsOptimisticProfilePending then moment.localContent else nil
-		var1 = moment.metadata.assetAccessContext
-		local var4 = if var1 == nil or var1 == "" then nil else httpService:UrlEncode(var1)
-		local var5 = if var3 ~= nil then if assetId > 0 then Content.fromUri(if var4 ~= nil then getRbxThumb(thumbnailType.Asset, assetId) else `{getRbxThumb(thumbnailType.Asset, assetId)}&accessContext={var4}`) else nil else var3
-		local edits = moment.metadata.edits
+		local AssetId: number = Moment.assetId
+		local LocalContent = if FFlagMomentsOptimisticProfilePending then Moment.localContent else nil
+		local AssetAccessContext = if FFlagMomentsServeEDPVideos and Moment.entityType == "edpVideo" then nil else Moment.metadata.assetAccessContext
+		local v1 = if AssetAccessContext == nil or AssetAccessContext == "" then nil else HttpService:UrlEncode(AssetAccessContext)
+		local Content1 = if LocalContent == nil then if AssetId > 0 then Content.fromUri(if v1 == nil then GetRbxThumbFunction(ThumbnailType.Asset, AssetId) else `{GetRbxThumbFunction(ThumbnailType.Asset, AssetId)}&accessContext={v1}`) else nil else LocalContent
+		local Edits = Moment.metadata.edits
 		
-		if not fFlagMomentsTTSFeedPlaybackModule and edits ~= nil and edits.ttsAudios ~= nil then
-			local cloned = table.clone(edits)
-			cloned.ttsAudios = nil
-			edits = cloned
+		if not FFlagMomentsTTSFeedPlaybackModule and Edits ~= nil and Edits.ttsAudios ~= nil then
+			local Copy = table.clone(Edits)
+			Copy.ttsAudios = nil
+			Edits = Copy
 		end
-		local var6, var7 = getMediaContents(assetId, moment.metadata.captureType, var4)
-		
-		return {
-			momentId = moment.momentId,
-			content = var3 or var6,
-			preloadContent = if var3 == nil then var7 else nil,
-			posterContent = var5,
-			captureType = moment.metadata.captureType,
-			edits = edits
+		local MediaContents, MediaContents2 = getMediaContents(AssetId, Moment.metadata.captureType, v1)
+		local config = {
+			momentId = Moment.momentId,
+			content = LocalContent or MediaContents,
+			preloadContent = if LocalContent == nil then MediaContents2 else nil,
+			posterContent = Content1,
+			captureType = Moment.metadata.captureType,
+			edits = Edits
 		}
+		local LocalTts = nil
+		
+		if FFlagMomentsTTSPendingPreviewPlaybackModule and FFlagMomentsTTSFeedPlaybackModule and IsIncludeLocalTts then
+			local Edits1 = Edits
+			
+			if LocalContent == nil or Edits1 == nil then
+				LocalTts = nil
+			else
+				local Tts = Edits1.tts
+				LocalTts = if Tts == nil or Tts.text == nil or Tts.text == "" then nil else Tts
+			end
+		else
+			LocalTts = nil
+		end
+		config.localTts = LocalTts
+		
+		return config
 	end
 end

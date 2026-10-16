@@ -1,11 +1,11 @@
-﻿local t = {
+﻿local config = {
 	AMS = "Amsterdam",
 	ATL = "Atlanta",
 	BOM = "Mumbai",
 	CDG = "Paris",
 	DFW = "Dallas",
 	FRA = "Frankfurt",
-	GRU = "S\195\163o Paulo",
+	GRU = "São Paulo",
 	HKG = "Hong Kong",
 	IAD = "Washington, DC",
 	ICN = "Seoul",
@@ -20,66 +20,70 @@
 	SYD = "Sydney"
 }
 
-local function _(p1)
-	return type(p1) == "number" and (p1 >= 0 and p1 < 1e999)
+local function _(p1: number): boolean --[[ Line: 34 | Named "isReachablePing" ]]
+	return type(p1) == "number" and p1 >= 0 and p1 < 1e999
 end
 
 return {
-	buildRoster = function(p1, p2)
+	buildRoster = function(List, PopCode) --[[ Line: 38 ]]
 		local t = {}
-		local t_1 = {}
+		local List1 = {}
 		
-		for i, v in ipairs(p1) do
-			local popCode = v.popCode
+		for _, value in ipairs(List) do
+			local PopCode1 = value.popCode
 			
-			if type(popCode) == "string" and popCode ~= "" then
-				local var1 = t[popCode]
-				local var2 = var1 or { popCode = popCode }
+			if type(PopCode1) == "string" and PopCode1 ~= "" then
+				local Entry = t[PopCode1]
+				local Entry1 = Entry or { popCode = PopCode1 }
 				
-				if not var1 then
-					t[popCode] = var2
-					table.insert(t_1, var2)
+				if not Entry then
+					t[PopCode1] = Entry1
+					table.insert(List1, Entry1)
 				end
-				local rttMs = v.rttMs
+				local RttMs: number = value.rttMs
 				
-				if (type(rttMs) == "number" and (rttMs >= 0 and rttMs < 1e999)) and (var2.rttMs == nil or rttMs < var2.rttMs) then
-					var2.rttMs = rttMs
+				if type(RttMs) == "number" and (RttMs >= 0 and RttMs < 1e999) and (Entry1.rttMs == nil or RttMs < Entry1.rttMs) then
+					Entry1.rttMs = RttMs
 				end
 			end
 		end
-		if p2 ~= "" and t[p2] == nil then
-			table.insert(t_1, { popCode = p2 })
+		if PopCode ~= "" and t[PopCode] == nil then
+			table.insert(List1, { popCode = PopCode })
 		end
-		table.sort(t_1, function(p3, p4)
-			return if p3.rttMs == nil or p4.rttMs == nil then if p3.rttMs == nil then p4.rttMs == nil and p3.popCode < p4.popCode else true elseif p3.rttMs == p4.rttMs then p3.popCode < p4.popCode else p3.rttMs < p4.rttMs
+		table.sort(List1, function(A, B): boolean --[[ Line: 62 ]]
+			return if A.rttMs == nil or B.rttMs == nil then A.rttMs ~= nil or B.rttMs == nil and A.popCode < B.popCode elseif A.rttMs == B.rttMs then A.popCode < B.popCode else A.rttMs < B.rttMs
 		end)
 		
-		return t_1
+		return List1
 	end,
-	getDisplayCode = function(p3)
-		return string.upper(p3)
+	getDisplayCode = function(Text: string): string --[[ Line: 76 ]]
+		return string.upper(Text)
 	end,
-	getLocationName = function(p3)
-		-- upvalues: t (ref)
-		local upperText = string.upper(p3)
-		local match = string.match(upperText, "^([A-Z][A-Z][A-Z])%d*$")
+	getLocationName = function(Text: string) --[[ Line: 80 ]]
+		-- upvalues: config (copy)
+		local Uppered = string.upper(Text)
+		local Match: string? = string.match(Uppered, "^([A-Z][A-Z][A-Z])%d*$")
 		
-		return if match then t[match] or upperText else upperText
+		return Match and config[Match] or Uppered
 	end,
-	formatPing = function(p3)
-		return if p3 == nil or not (type(p3) == "number" and (p3 >= 0 and p3 < 1e999)) then "Ping unavailable" else string.format("%.0f ms", math.floor(p3 + 0.5))
-	end,
-	getVisibleRoster = function(p3, p4, p5)
-		if p5 then
-			return table.clone(p3)
+	formatPing = function(p1: number): string --[[ Line: 86 ]]
+		if p1 == nil or (type(p1) ~= "number" or (p1 < 0 or p1 >= 1e999)) then
+			return "Ping unavailable"
+		else
+			return (string.format("%.0f ms", (math.floor(p1 + 0.5))))
 		end
-		local t = {}
+	end,
+	getVisibleRoster = function(Tbl, PopCode, p1) --[[ Line: 92 ]]
+		if p1 then
+			return table.clone(Tbl)
+		end
+		local List = {}
 		
-		for i, v in ipairs(p3) do
-			if i <= 5 or v.popCode == p4 then
-				table.insert(t, v)
+		for i, value in ipairs(Tbl) do
+			if i <= 5 or value.popCode == PopCode then
+				table.insert(List, value)
 			end
 		end
-		return t
+		return List
 	end
 }

@@ -1,270 +1,280 @@
-﻿local streamNotifications = script:FindFirstAncestor("StreamNotifications")
-local parent = streamNotifications.Parent
-local reactModule = require(parent.React)
-local streamNotificationsModule = require(streamNotifications.StreamNotifications)
-local streamNotificationStoreModule = require(streamNotifications.StreamNotificationStore)
-local sharedFlagsModule = require(parent.SharedFlags)
-local thirdPartyUserService = game:GetService("ThirdPartyUserService")
-local httpService = game:GetService("HttpService")
-local UIBloxModule = require(parent.UIBlox)
-local badge = UIBloxModule.App.Indicator.Badge
-local iconButton = UIBloxModule.App.Button.IconButton
-local iconSize = UIBloxModule.App.Constant.IconSize
-local images = UIBloxModule.App.ImageSet.Images
-local badgeVariant = UIBloxModule.App.Indicator.Enum.BadgeVariant
-local utilityActionIcon = UIBloxModule.App.Button.UtilityActionIcon
-local foundationModule = require(parent.Foundation)
-local popover = foundationModule.Popover
-local popoverSide = foundationModule.Enums.PopoverSide
-local popoverAlign = foundationModule.Enums.PopoverAlign
-local useTokens = foundationModule.Hooks.useTokens
-local eventStream = require(streamNotifications.analytics.analyticsService).EventStream
-local notificationHelper = require(parent.NotificationsCommon).NotificationHelper
-local ixpHelper = require(parent.NotificationsCommon).ixpHelper
-local constantsModule = require(streamNotifications.constants)
-local analyticsConstantsModule = require(streamNotifications.analytics.analyticsConstants)
-local getFStringNotificationsStreamNotificationUXLayer = require(parent.SharedFlags).GetFStringNotificationsStreamNotificationUXLayer
-local isAppNavEnabled = require(parent.SharedFlags).isAppNavEnabled
-local useSignalState = require(parent.SignalsReact).useSignalState
-local streamNotificationDropdownExperimentationModule = require(streamNotifications.StreamNotificationDropdownExperimentation)
-local roactAppPolicy = require(parent.UniversalAppPolicy).RoactAppPolicy
-local getFFlagNotificationsComplianceShouldRestrictStream = sharedFlagsModule.GetFFlagNotificationsComplianceShouldRestrictStream
-local fFlagEnableNotificationsDeeplink = sharedFlagsModule.FFlagEnableNotificationsDeeplink
-local fFlagStreamNotificationBellEntryPoint = sharedFlagsModule.FFlagStreamNotificationBellEntryPoint
-local fFlagEnableHeaderBarButtonsUpdate = sharedFlagsModule.FFlagEnableHeaderBarButtonsUpdate
-local fFlagStreamNotificationDropdownSingleOwner = sharedFlagsModule.FFlagStreamNotificationDropdownSingleOwner
-local fFlagStreamNotificationDropdownFocusedOwner = sharedFlagsModule.FFlagStreamNotificationDropdownFocusedOwner
-local notificationOff = images["icons/common/notificationOff"]
+﻿local StreamNotifications = script:FindFirstAncestor("StreamNotifications")
+local Parent = StreamNotifications.Parent
+local ReactModule = require(Parent.React)
+local StreamNotificationsModule = require(StreamNotifications.StreamNotifications)
+local StreamNotificationStoreModule = require(StreamNotifications.StreamNotificationStore)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local ThirdPartyUserService = game:GetService("ThirdPartyUserService")
+local HttpService = game:GetService("HttpService")
+local UIBloxModule = require(Parent.UIBlox)
+local Badge = UIBloxModule.App.Indicator.Badge
+local IconButton = UIBloxModule.App.Button.IconButton
+local IconSize = UIBloxModule.App.Constant.IconSize
+local BadgeVariant = UIBloxModule.App.Indicator.Enum.BadgeVariant
+local UtilityActionIcon = UIBloxModule.App.Button.UtilityActionIcon
+local FoundationModule = require(Parent.Foundation)
+local Popover = FoundationModule.Popover
+local PopoverSide = FoundationModule.Enums.PopoverSide
+local PopoverAlign = FoundationModule.Enums.PopoverAlign
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local EventStream = require(StreamNotifications.analytics.analyticsService).EventStream
+local NotificationHelper = require(Parent.NotificationsCommon).NotificationHelper
+local IxpHelper = require(Parent.NotificationsCommon).ixpHelper
+local ConstantsModule = require(StreamNotifications.constants)
+local AnalyticsConstantsModule = require(StreamNotifications.analytics.analyticsConstants)
+local GetFStringNotificationsStreamNotificationUXLayerFunction = require(Parent.SharedFlags).GetFStringNotificationsStreamNotificationUXLayer
+local IsAppNavEnabledFunction = require(Parent.SharedFlags).isAppNavEnabled
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local StreamNotificationDropdownExperimentationModule = require(StreamNotifications.StreamNotificationDropdownExperimentation)
+local RoactAppPolicy = require(Parent.UniversalAppPolicy).RoactAppPolicy
+local GetFFlagNotificationsComplianceShouldRestrictStreamFunction = SharedFlagsModule.GetFFlagNotificationsComplianceShouldRestrictStream
+local FFlagEnableNotificationsDeeplink = SharedFlagsModule.FFlagEnableNotificationsDeeplink
+local FFlagStreamNotificationBellEntryPoint = SharedFlagsModule.FFlagStreamNotificationBellEntryPoint
+local FFlagEnableHeaderBarButtonsUpdate = SharedFlagsModule.FFlagEnableHeaderBarButtonsUpdate
+local FFlagStreamNotificationDropdownSingleOwner = SharedFlagsModule.FFlagStreamNotificationDropdownSingleOwner
+local FFlagStreamNotificationDropdownFocusedOwner = SharedFlagsModule.FFlagStreamNotificationDropdownFocusedOwner
+local IconsCommonNotificationOff = UIBloxModule.App.ImageSet.Images["icons/common/notificationOff"]
 
-local function _()
-	-- upvalues: thirdPartyUserService (ref)
-	return thirdPartyUserService and (thirdPartyUserService:IsChatRestrictionSupported() and thirdPartyUserService.FriendCommunicationRestrictionStatus ~= Enum.ChatRestrictionStatus.NotRestricted)
+local function _(): boolean --[[ Line: 46 | Named "GetIsFriendCommunicationRestricted" ]]
+	-- upvalues: ThirdPartyUserService (copy)
+	return ThirdPartyUserService and (ThirdPartyUserService:IsChatRestrictionSupported() and ThirdPartyUserService.FriendCommunicationRestrictionStatus ~= Enum.ChatRestrictionStatus.NotRestricted)
 end
 
-local var1 = function(p1)
-	-- upvalues: reactModule (ref), fFlagStreamNotificationDropdownSingleOwner (ref), fFlagStreamNotificationDropdownFocusedOwner (ref), httpService (ref), streamNotificationStoreModule (ref), fFlagEnableNotificationsDeeplink (ref), useSignalState (ref), streamNotificationDropdownExperimentationModule (ref), useTokens (ref), notificationHelper (ref), eventStream (ref), analyticsConstantsModule (ref), constantsModule (ref), fFlagStreamNotificationBellEntryPoint (ref), streamNotificationsModule (ref), getFFlagNotificationsComplianceShouldRestrictStream (ref), thirdPartyUserService (ref), ixpHelper (ref), getFStringNotificationsStreamNotificationUXLayer (ref), fFlagEnableHeaderBarButtonsUpdate (ref), foundationModule (ref), isAppNavEnabled (ref), popover (ref), popoverSide (ref), popoverAlign (ref), notificationOff (ref), utilityActionIcon (ref), iconButton (ref), iconSize (ref), badge (ref), badgeVariant (ref)
-	local var2, var3 = reactModule.useState(false)
-	local current = nil
+local function v32(p1) --[[ Line: 66 ]]
+	-- upvalues: ReactModule (copy), FFlagStreamNotificationDropdownSingleOwner (copy), FFlagStreamNotificationDropdownFocusedOwner (copy), HttpService (copy), StreamNotificationStoreModule (copy), FFlagEnableNotificationsDeeplink (copy), UseSignalStateFunction (copy), StreamNotificationDropdownExperimentationModule (copy), UseTokensFunction (copy), NotificationHelper (copy), EventStream (copy), AnalyticsConstantsModule (copy), ConstantsModule (copy), FFlagStreamNotificationBellEntryPoint (copy), StreamNotificationsModule (copy), GetFFlagNotificationsComplianceShouldRestrictStreamFunction (copy), ThirdPartyUserService (copy), IxpHelper (copy), GetFStringNotificationsStreamNotificationUXLayerFunction (copy), FFlagEnableHeaderBarButtonsUpdate (copy), FoundationModule (copy), IsAppNavEnabledFunction (copy), Popover (copy), PopoverSide (copy), PopoverAlign (copy), IconsCommonNotificationOff (copy), UtilityActionIcon (copy), IconButton (copy), IconSize (copy), Badge (copy), BadgeVariant (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local Current = nil
 	
-	if fFlagStreamNotificationDropdownSingleOwner then
-		local var4 = reactModule.useRef(nil)
+	if FFlagStreamNotificationDropdownSingleOwner then
+		local UseRefResult = ReactModule.useRef(nil)
 		
-		if var4.current == nil then
-			var4.current = if fFlagStreamNotificationDropdownFocusedOwner then httpService:GenerateGUID(false) elseif p1.isPrimary then streamNotificationStoreModule.PrimaryBellId else httpService:GenerateGUID(false)
+		if UseRefResult.current == nil then
+			UseRefResult.current = if FFlagStreamNotificationDropdownFocusedOwner then HttpService:GenerateGUID(false) elseif p1.isPrimary then StreamNotificationStoreModule.PrimaryBellId else HttpService:GenerateGUID(false)
 		end
-		current = var4.current
+		Current = UseRefResult.current
 	end
-	local var5 = var2
-	local var6 = nil
-	local var7 = p1.isFocused ~= false
-	local var8 = var2
+	local UseStateResult1 = UseStateResult
+	local Current1 = nil
+	local IsIsFocused = p1.isFocused ~= false
+	local IsOpen = UseStateResult
 	
-	if fFlagEnableNotificationsDeeplink then
-		var5 = useSignalState(streamNotificationStoreModule.getStreamPresented)
+	if FFlagEnableNotificationsDeeplink then
+		UseStateResult1 = UseSignalStateFunction(StreamNotificationStoreModule.getStreamPresented)
 		
-		if fFlagStreamNotificationDropdownSingleOwner then
-			var6 = useSignalState(streamNotificationStoreModule.getActiveBellId)
-			var8 = if fFlagStreamNotificationDropdownFocusedOwner then streamNotificationStoreModule.isBellActive(var5, var6, current, p1.isPrimary, var7) else streamNotificationStoreModule.isBellActive(var5, var6, current, p1.isPrimary)
+		if FFlagStreamNotificationDropdownSingleOwner then
+			Current1 = UseSignalStateFunction(StreamNotificationStoreModule.getActiveBellId)
+			IsOpen = if FFlagStreamNotificationDropdownFocusedOwner then StreamNotificationStoreModule.isBellActive(UseStateResult1, Current1, Current, p1.isPrimary, IsIsFocused) else StreamNotificationStoreModule.isBellActive(UseStateResult1, Current1, Current, p1.isPrimary)
 		else
-			var8 = var5
+			IsOpen = UseStateResult1
 		end
 	end
-	if fFlagStreamNotificationDropdownFocusedOwner and not var7 then
-		var8 = false
+	if FFlagStreamNotificationDropdownFocusedOwner and not IsIsFocused then
+		IsOpen = false
 	end
-	local dropdownEnabled = streamNotificationDropdownExperimentationModule.getDropdownEnabled()
-	local var9 = useTokens()
-	local notificationCount = p1.notificationCount and tonumber(p1.notificationCount) or 0
-	local layoutOrder = p1.layoutOrder
-	local var10 = if p1.compactWidth then 34 else 44
+	local DropdownEnabled = StreamNotificationDropdownExperimentationModule.getDropdownEnabled()
+	local UseTokensResult = UseTokensFunction()
+	local Number: number = p1.notificationCount and tonumber(p1.notificationCount) or 0
+	local LayoutOrder = p1.layoutOrder
+	local XOffset: number = if p1.compactWidth then 34 else 44
 	
-	if fFlagStreamNotificationDropdownFocusedOwner then
-		reactModule.useEffect(function()
-			-- upvalues: var7 (ref), fFlagEnableNotificationsDeeplink (copy), var6 (write), current (write), var5 (write), streamNotificationStoreModule (copy), var2 (ref), var3 (ref)
-			if var7 then return end
-			if fFlagEnableNotificationsDeeplink and var6 == current then
-				if var5 then
-					streamNotificationStoreModule.setActiveBellId(nil)
-					streamNotificationStoreModule.setStreamPresented(false)
+	if FFlagStreamNotificationDropdownFocusedOwner then
+		ReactModule.useEffect(function() --[[ Line: 121 ]]
+			-- upvalues: IsIsFocused (copy), FFlagEnableNotificationsDeeplink (upval), Current1 (ref), Current (ref), UseStateResult1 (ref), StreamNotificationStoreModule (upval), UseStateResult (copy), UseStateResult2 (copy)
+			if IsIsFocused then return end
+			if FFlagEnableNotificationsDeeplink and Current1 == Current then
+				if UseStateResult1 then
+					StreamNotificationStoreModule.setActiveBellId(nil)
+					StreamNotificationStoreModule.setStreamPresented(false)
+					
+					return
+				else
+					StreamNotificationStoreModule.setActiveBellId(StreamNotificationStoreModule.PrimaryBellId)
 					
 					return
 				end
-				streamNotificationStoreModule.setActiveBellId(streamNotificationStoreModule.PrimaryBellId)
-				
-				return
-			elseif not fFlagEnableNotificationsDeeplink and var2 then
-				var3(false)
+			elseif not FFlagEnableNotificationsDeeplink and UseStateResult then
+				UseStateResult2(false)
 			end
 		end, {
-			var6,
-			current,
-			var7,
-			var5,
-			var2
+			Current1,
+			Current,
+			IsIsFocused,
+			UseStateResult1,
+			UseStateResult
 		})
 	end
-	reactModule.useEffect(function()
-		-- upvalues: notificationCount (ref), notificationHelper (copy), eventStream (copy), analyticsConstantsModule (copy), constantsModule (copy), fFlagStreamNotificationBellEntryPoint (copy), p1 (ref)
-		if notificationCount > 0 then
-			notificationHelper.fireEvent(eventStream, analyticsConstantsModule.Context.seen, analyticsConstantsModule.EventNames.openCTAShown, {
-				count = notificationCount,
-				sendrVersion = constantsModule.SENDRVersion,
-				entryPoint = if fFlagStreamNotificationBellEntryPoint then p1.entryPoint else nil
+	ReactModule.useEffect(function() --[[ Line: 143 ]]
+		-- upvalues: Number (copy), NotificationHelper (upval), EventStream (upval), AnalyticsConstantsModule (upval), ConstantsModule (upval), FFlagStreamNotificationBellEntryPoint (upval), p1 (copy)
+		if Number > 0 then
+			NotificationHelper.fireEvent(EventStream, AnalyticsConstantsModule.Context.seen, AnalyticsConstantsModule.EventNames.openCTAShown, {
+				count = Number,
+				sendrVersion = ConstantsModule.SENDRVersion,
+				entryPoint = if FFlagStreamNotificationBellEntryPoint then p1.entryPoint else nil
 			})
 		end
-	end, { notificationCount })
-	local var11 = reactModule.useMemo(function()
-		-- upvalues: var8 (write), reactModule (copy), streamNotificationsModule (copy), fFlagEnableNotificationsDeeplink (copy), streamNotificationStoreModule (copy), var3 (ref)
-		return if var8 then reactModule.createElement(streamNotificationsModule, {
-			displayStream = if fFlagEnableNotificationsDeeplink then streamNotificationStoreModule.setStreamPresented else var3
+	end, { Number })
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 158 ]]
+		-- upvalues: IsOpen (ref), ReactModule (upval), StreamNotificationsModule (upval), FFlagEnableNotificationsDeeplink (upval), StreamNotificationStoreModule (upval), UseStateResult2 (copy)
+		return if IsOpen then ReactModule.createElement(StreamNotificationsModule, {
+			displayStream = if FFlagEnableNotificationsDeeplink then StreamNotificationStoreModule.setStreamPresented else UseStateResult2
 		}) else nil
-	end, { var8 })
+	end, { IsOpen })
 	
-	if getFFlagNotificationsComplianceShouldRestrictStream() and p1.shouldRestrictStream then
+	if GetFFlagNotificationsComplianceShouldRestrictStreamFunction() and p1.shouldRestrictStream then
 		return nil
 	end
-	local var12 = if thirdPartyUserService and (thirdPartyUserService:IsChatRestrictionSupported() and thirdPartyUserService.FriendCommunicationRestrictionStatus ~= Enum.ChatRestrictionStatus.NotRestricted) then nil elseif notificationCount > 0 then notificationCount else nil
+	local IsNotFriendCommunicationRestrictionStatusMatch: boolean = ThirdPartyUserService and (ThirdPartyUserService:IsChatRestrictionSupported() and ThirdPartyUserService.FriendCommunicationRestrictionStatus ~= Enum.ChatRestrictionStatus.NotRestricted)
+	local Number1 = if IsNotFriendCommunicationRestrictionStatusMatch then nil elseif Number > 0 then Number else nil
 	
-	local function onBellActivated()
-		-- upvalues: streamNotificationDropdownExperimentationModule (copy), ixpHelper (copy), getFStringNotificationsStreamNotificationUXLayer (copy), dropdownEnabled (ref), fFlagEnableNotificationsDeeplink (copy), fFlagStreamNotificationDropdownSingleOwner (copy), streamNotificationStoreModule (copy), var8 (write), current (write), var3 (ref), notificationHelper (copy), eventStream (copy), analyticsConstantsModule (copy), notificationCount (ref), constantsModule (copy), fFlagStreamNotificationBellEntryPoint (copy), p1 (ref)
-		streamNotificationDropdownExperimentationModule.logExposure()
-		ixpHelper.logUserLayerExposure(getFStringNotificationsStreamNotificationUXLayer())
+	local function onBellActivated() --[[ Line: 186 ]]
+		-- upvalues: StreamNotificationDropdownExperimentationModule (upval), IxpHelper (upval), GetFStringNotificationsStreamNotificationUXLayerFunction (upval), DropdownEnabled (copy), FFlagEnableNotificationsDeeplink (upval), FFlagStreamNotificationDropdownSingleOwner (upval), StreamNotificationStoreModule (upval), IsOpen (ref), Current (ref), UseStateResult2 (copy), NotificationHelper (upval), EventStream (upval), AnalyticsConstantsModule (upval), Number (copy), ConstantsModule (upval), FFlagStreamNotificationBellEntryPoint (upval), p1 (copy)
+		StreamNotificationDropdownExperimentationModule.logExposure()
+		IxpHelper.logUserLayerExposure(GetFStringNotificationsStreamNotificationUXLayerFunction())
 		
-		if dropdownEnabled then
-			if fFlagEnableNotificationsDeeplink then
-				if fFlagStreamNotificationDropdownSingleOwner then
-					streamNotificationStoreModule.setActiveBellId(if var8 then nil else current)
+		if DropdownEnabled then
+			if FFlagEnableNotificationsDeeplink then
+				if FFlagStreamNotificationDropdownSingleOwner then
+					StreamNotificationStoreModule.setActiveBellId(if IsOpen then nil else Current)
 				end
-				streamNotificationStoreModule.setStreamPresented(not var8)
+				StreamNotificationStoreModule.setStreamPresented(not IsOpen)
 			else
-				var3(not var8)
+				UseStateResult2(not IsOpen)
 			end
-			if var8 then
-				notificationHelper.fireEvent(eventStream, analyticsConstantsModule.Context.click, analyticsConstantsModule.EventNames.closeContent, {
-					closeMethod = analyticsConstantsModule.CloseMethod.bellIcon
+			if IsOpen then
+				NotificationHelper.fireEvent(EventStream, AnalyticsConstantsModule.Context.click, AnalyticsConstantsModule.EventNames.closeContent, {
+					closeMethod = AnalyticsConstantsModule.CloseMethod.bellIcon
+				})
+				
+				return
+			else
+				NotificationHelper.fireEvent(EventStream, AnalyticsConstantsModule.Context.click, AnalyticsConstantsModule.EventNames.openContent, {
+					countOfUnreadNotification = Number,
+					sendrVersion = ConstantsModule.SENDRVersion,
+					entryPoint = if FFlagStreamNotificationBellEntryPoint then p1.entryPoint else nil
 				})
 				
 				return
 			end
-			notificationHelper.fireEvent(eventStream, analyticsConstantsModule.Context.click, analyticsConstantsModule.EventNames.openContent, {
-				countOfUnreadNotification = notificationCount,
-				sendrVersion = constantsModule.SENDRVersion,
-				entryPoint = if fFlagStreamNotificationBellEntryPoint then p1.entryPoint else nil
+		else
+			if FFlagEnableNotificationsDeeplink then
+				if FFlagStreamNotificationDropdownSingleOwner then
+					StreamNotificationStoreModule.setActiveBellId(Current)
+				end
+				StreamNotificationStoreModule.setStreamPresented(true)
+			else
+				UseStateResult2(true)
+			end
+			NotificationHelper.fireEvent(EventStream, AnalyticsConstantsModule.Context.click, AnalyticsConstantsModule.EventNames.openContent, {
+				countOfUnreadNotification = Number,
+				sendrVersion = ConstantsModule.SENDRVersion,
+				entryPoint = if FFlagStreamNotificationBellEntryPoint then p1.entryPoint else nil
 			})
-			
-			return
-		elseif fFlagEnableNotificationsDeeplink then
-			if fFlagStreamNotificationDropdownSingleOwner then
-				streamNotificationStoreModule.setActiveBellId(current)
-			end
-			streamNotificationStoreModule.setStreamPresented(true)
-		else
-			var3(true)
 		end
-		notificationHelper.fireEvent(eventStream, analyticsConstantsModule.Context.click, analyticsConstantsModule.EventNames.openContent, {
-			countOfUnreadNotification = notificationCount,
-			sendrVersion = constantsModule.SENDRVersion,
-			entryPoint = if fFlagStreamNotificationBellEntryPoint then p1.entryPoint else nil
+	end
+	
+	local function onPopoverDismiss() --[[ Line: 250 ]]
+		-- upvalues: FFlagEnableNotificationsDeeplink (upval), FFlagStreamNotificationDropdownSingleOwner (upval), StreamNotificationStoreModule (upval), UseStateResult2 (copy), NotificationHelper (upval), EventStream (upval), AnalyticsConstantsModule (upval)
+		if FFlagEnableNotificationsDeeplink then
+			if FFlagStreamNotificationDropdownSingleOwner then
+				StreamNotificationStoreModule.setActiveBellId(nil)
+			end
+			StreamNotificationStoreModule.setStreamPresented(false)
+		else
+			UseStateResult2(false)
+		end
+		NotificationHelper.fireEvent(EventStream, AnalyticsConstantsModule.Context.click, AnalyticsConstantsModule.EventNames.closeContent, {
+			closeMethod = AnalyticsConstantsModule.CloseMethod.backgroundOverlay
 		})
 	end
 	
-	local function onPopoverDismiss()
-		-- upvalues: fFlagEnableNotificationsDeeplink (copy), fFlagStreamNotificationDropdownSingleOwner (copy), streamNotificationStoreModule (copy), var3 (ref), notificationHelper (copy), eventStream (copy), analyticsConstantsModule (copy)
-		if fFlagEnableNotificationsDeeplink then
-			if fFlagStreamNotificationDropdownSingleOwner then
-				streamNotificationStoreModule.setActiveBellId(nil)
-			end
-			streamNotificationStoreModule.setStreamPresented(false)
-		else
-			var3(false)
-		end
-		notificationHelper.fireEvent(eventStream, analyticsConstantsModule.Context.click, analyticsConstantsModule.EventNames.closeContent, {
-			closeMethod = analyticsConstantsModule.CloseMethod.backgroundOverlay
-		})
-	end
-	
-	if fFlagEnableHeaderBarButtonsUpdate then
-		local var13 = reactModule.createElement(foundationModule.View, {
-			tag = "auto-xy radius-circle",
-			LayoutOrder = layoutOrder or 3,
-			ref = p1.buttonRef,
-			testId = p1.testId
-		}, {
-			IconButton = reactModule.createElement(foundationModule.IconButton, {
+	if FFlagEnableHeaderBarButtonsUpdate then
+		local config = {
+			IconButton = ReactModule.createElement(FoundationModule.IconButton, {
 				ZIndex = 1,
 				isCircular = true,
-				icon = foundationModule.Enums.IconName.Bell,
+				icon = FoundationModule.Enums.IconName.Bell,
 				onActivated = onBellActivated
 			}),
-			Badge = if thirdPartyUserService and (thirdPartyUserService:IsChatRestrictionSupported() and thirdPartyUserService.FriendCommunicationRestrictionStatus ~= Enum.ChatRestrictionStatus.NotRestricted) then nil elseif notificationCount > 0 then reactModule.createElement(foundationModule.StatusIndicator, {
+			Badge = if IsNotFriendCommunicationRestrictionStatusMatch then nil elseif Number > 0 then ReactModule.createElement(FoundationModule.StatusIndicator, {
 				ZIndex = 2,
 				max = 99,
 				AnchorPoint = Vector2.new(0, 1),
 				Position = UDim2.fromScale(0.5, 0.5),
-				variant = foundationModule.Enums.StatusIndicatorVariant.Emphasis,
-				value = notificationCount
+				variant = FoundationModule.Enums.StatusIndicatorVariant.Emphasis,
+				value = Number
 			}) else nil,
-			DisplayStreamNotifications = if not dropdownEnabled then var11 else nil
-		})
+			DisplayStreamNotifications = if DropdownEnabled then nil else UseMemoResult
+		}
+		local IsNotFriendCommunicationRestrictionStatusMatch1: boolean = ThirdPartyUserService and (ThirdPartyUserService:IsChatRestrictionSupported() and ThirdPartyUserService.FriendCommunicationRestrictionStatus ~= Enum.ChatRestrictionStatus.NotRestricted)
+		local Element = ReactModule.createElement(FoundationModule.View, {
+			tag = "auto-xy radius-circle",
+			LayoutOrder = LayoutOrder or 3,
+			ref = p1.buttonRef,
+			testId = p1.testId
+		}, config)
 		
-		return if isAppNavEnabled() and dropdownEnabled then reactModule.createElement(popover.Root, { isOpen = var8 }, {
-			Anchor = reactModule.createElement(popover.Anchor, nil, { BellIcon = var13 }),
-			Content = reactModule.createElement(popover.Content, {
+		return if IsAppNavEnabledFunction() and DropdownEnabled then ReactModule.createElement(Popover.Root, { isOpen = IsOpen }, {
+			Anchor = ReactModule.createElement(Popover.Anchor, nil, { BellIcon = Element }),
+			Content = ReactModule.createElement(Popover.Content, {
 				hasArrow = true,
-				side = popoverSide.Bottom,
-				align = popoverAlign.End,
+				side = PopoverSide.Bottom,
+				align = PopoverAlign.End,
 				onPressedOutside = onPopoverDismiss,
-				backgroundStyle = var9.Color.Surface.Surface_200
-			}, { DisplayStreamNotifications = var11 })
-		}) else var13
-	elseif not isAppNavEnabled() then
-		return reactModule.createElement(iconButton, {
-			size = UDim2.new(0, var10, 1, 0),
-			icon = notificationOff,
-			iconSize = iconSize.Medium,
-			layoutOrder = layoutOrder or 3,
+				backgroundStyle = UseTokensResult.Color.Surface.Surface_200
+			}, { DisplayStreamNotifications = UseMemoResult })
+		}) else Element
+	elseif IsAppNavEnabledFunction() then
+		local BellIconOpen = if DropdownEnabled and IsOpen then ConstantsModule.Dropdown.BellIconOpen else IconsCommonNotificationOff
+		
+		return if DropdownEnabled then ReactModule.createElement(Popover.Root, { isOpen = IsOpen }, {
+			Anchor = ReactModule.createElement(Popover.Anchor, nil, {
+				BellIcon = ReactModule.createElement(UtilityActionIcon, {
+					icon = BellIconOpen,
+					onActivated = onBellActivated,
+					badgeValue = Number1,
+					buttonRef = p1.buttonRef
+				})
+			}),
+			Content = ReactModule.createElement(Popover.Content, {
+				hasArrow = true,
+				side = PopoverSide.Bottom,
+				align = PopoverAlign.End,
+				onPressedOutside = onPopoverDismiss,
+				backgroundStyle = UseTokensResult.Color.Surface.Surface_200
+			}, { DisplayStreamNotifications = UseMemoResult })
+		}) else ReactModule.createElement(UtilityActionIcon, {
+			icon = BellIconOpen,
 			onActivated = onBellActivated,
+			badgeValue = Number1,
 			buttonRef = p1.buttonRef
-		}, {
-			notificationBadge = if thirdPartyUserService and (thirdPartyUserService:IsChatRestrictionSupported() and thirdPartyUserService.FriendCommunicationRestrictionStatus ~= Enum.ChatRestrictionStatus.NotRestricted) then nil elseif notificationCount > 0 then reactModule.createElement(badge, {
+		}, { DisplayStreamNotifications = UseMemoResult })
+	else
+		local config = {
+			notificationBadge = if IsNotFriendCommunicationRestrictionStatusMatch1 then nil elseif Number > 0 then ReactModule.createElement(Badge, {
 				position = UDim2.new(0.5, 0, 0.5, 0),
 				anchorPoint = Vector2.new(0, 1),
-				value = notificationCount,
-				badgeVariant = badgeVariant.Alert
+				value = Number,
+				badgeVariant = BadgeVariant.Alert
 			}) else nil
-		}, { var11 })
+		}
+		local IsNotFriendCommunicationRestrictionStatusMatch1: boolean = ThirdPartyUserService and (ThirdPartyUserService:IsChatRestrictionSupported() and ThirdPartyUserService.FriendCommunicationRestrictionStatus ~= Enum.ChatRestrictionStatus.NotRestricted)
+		
+		return (ReactModule.createElement(IconButton, {
+			size = UDim2.new(0, XOffset, 1, 0),
+			icon = IconsCommonNotificationOff,
+			iconSize = IconSize.Medium,
+			layoutOrder = LayoutOrder or 3,
+			onActivated = onBellActivated,
+			buttonRef = p1.buttonRef
+		}, config, { UseMemoResult }))
 	end
-	local var14 = if dropdownEnabled and var8 then constantsModule.Dropdown.BellIconOpen else notificationOff
-	
-	return if dropdownEnabled then reactModule.createElement(popover.Root, { isOpen = var8 }, {
-		Anchor = reactModule.createElement(popover.Anchor, nil, {
-			BellIcon = reactModule.createElement(utilityActionIcon, {
-				icon = var14,
-				onActivated = onBellActivated,
-				badgeValue = var12,
-				buttonRef = p1.buttonRef
-			})
-		}),
-		Content = reactModule.createElement(popover.Content, {
-			hasArrow = true,
-			side = popoverSide.Bottom,
-			align = popoverAlign.End,
-			onPressedOutside = onPopoverDismiss,
-			backgroundStyle = var9.Color.Surface.Surface_200
-		}, { DisplayStreamNotifications = var11 })
-	}) else reactModule.createElement(utilityActionIcon, {
-		icon = var14,
-		onActivated = onBellActivated,
-		badgeValue = var12,
-		buttonRef = p1.buttonRef
-	}, { DisplayStreamNotifications = var11 })
 end
 
-if getFFlagNotificationsComplianceShouldRestrictStream() then
-	var1 = roactAppPolicy.connect(function(p1, _)
+if GetFFlagNotificationsComplianceShouldRestrictStreamFunction() then
+	v32 = RoactAppPolicy.connect(function(p1, _) --[[ Line: 383 ]]
 		return {
 			shouldRestrictStream = p1.getNotificationsCanReceiveStream() or false
 		}
-	end)(var1)
+	end)(v32)
 end
-return var1
+return v32

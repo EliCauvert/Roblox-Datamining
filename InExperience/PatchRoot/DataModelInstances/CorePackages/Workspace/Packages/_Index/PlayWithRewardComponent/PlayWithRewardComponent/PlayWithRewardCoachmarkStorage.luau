@@ -1,20 +1,20 @@
-﻿local appStorageService = game:GetService("AppStorageService")
-local httpService = game:GetService("HttpService")
-local parent = script:FindFirstAncestor("PlayWithRewardComponent").Parent
-local tModule = require(parent.t)
-local fFlagPlayWithRewardCoachmarkOverlayFix = require(parent.SharedFlags).FFlagPlayWithRewardCoachmarkOverlayFix
-local playWithRewardCoachmarkWindowResets = game:DefineFastFlag("PlayWithRewardCoachmarkWindowResets", false)
-local playWithRewardCoachmarkMaxImpressions = game:DefineFastInt("PlayWithRewardCoachmarkMaxImpressions", 3)
-local playWithRewardCoachmarkMaxImpressions2 = game:DefineFastInt("PlayWithRewardCoachmarkMaxImpressions2", 3)
-local playWithRewardCoachmarkStorageKeyEngineFeature = game:GetEngineFeature("PlayWithRewardCoachmarkStorageKey")
-local var1 = game:DefineFastInt("PlayWithRewardCoachmarkWindowDays", 30) * 86400
-local var2 = tModule.interface({
-	windowStartTime = tModule.number,
-	impressionCount = tModule.number,
-	isDismissed = tModule.boolean
+﻿local AppStorageService = game:GetService("AppStorageService")
+local HttpService = game:GetService("HttpService")
+local Parent = script:FindFirstAncestor("PlayWithRewardComponent").Parent
+local TModule = require(Parent.t)
+local FFlagPlayWithRewardCoachmarkOverlayFix = require(Parent.SharedFlags).FFlagPlayWithRewardCoachmarkOverlayFix
+local PlayWithRewardCoachmarkWindowResets = game:DefineFastFlag("PlayWithRewardCoachmarkWindowResets", false)
+local PlayWithRewardCoachmarkMaxImpressions = game:DefineFastInt("PlayWithRewardCoachmarkMaxImpressions", 3)
+local PlayWithRewardCoachmarkMaxImpressions2 = game:DefineFastInt("PlayWithRewardCoachmarkMaxImpressions2", 3)
+local PlayWithRewardCoachmarkStorageKeyEngineFeature = game:GetEngineFeature("PlayWithRewardCoachmarkStorageKey")
+local ScaledPlayWithRewardCoachmarkWindowDays = game:DefineFastInt("PlayWithRewardCoachmarkWindowDays", 30) * 86400
+local InterfaceResult = TModule.interface({
+	windowStartTime = TModule.number,
+	impressionCount = TModule.number,
+	isDismissed = TModule.boolean
 })
 
-local function _()
+local function _() --[[ Line: 49 | Named "getDefaultState" ]]
 	return {
 		windowStartTime = 0,
 		impressionCount = 0,
@@ -22,173 +22,179 @@ local function _()
 	}
 end
 
-local _ = function(p1)
-	-- upvalues: var2 (ref)
-	return if var2(p1) then p1 else {
+local _ = function(p1) --[[ Line: 57 | Named "parseState" ]]
+	-- upvalues: InterfaceResult (copy)
+	return if InterfaceResult(p1) then p1 else {
 		windowStartTime = 0,
 		impressionCount = 0,
 		isDismissed = false
 	}
 end
 
-local function readStateLookup()
-	-- upvalues: playWithRewardCoachmarkStorageKeyEngineFeature (ref), appStorageService (ref), httpService (ref)
-	if not playWithRewardCoachmarkStorageKeyEngineFeature then
+local function readStateLookup() --[[ Line: 66 ]]
+	-- upvalues: PlayWithRewardCoachmarkStorageKeyEngineFeature (copy), AppStorageService (copy), HttpService (copy)
+	if not PlayWithRewardCoachmarkStorageKeyEngineFeature then
 		return nil
 	end
-	local ok, status = pcall(function()
-		-- upvalues: appStorageService (copy)
-		return appStorageService:GetItem("PlayWithRewardCoachmark")
+	local Success, Result = pcall(function() --[[ Line: 71 ]]
+		-- upvalues: AppStorageService (upval)
+		return AppStorageService:GetItem("PlayWithRewardCoachmark")
 	end)
 	
-	if not ok or type(status) ~= "string" then
+	if not Success or type(Result) ~= "string" then
 		return nil
-	elseif status == "" then
+	elseif Result == "" then
 		return {}
+	else
+		local Success1, Result1 = pcall(function() --[[ Line: 82 ]]
+			-- upvalues: HttpService (upval), Result (copy)
+			return HttpService:JSONDecode(Result)
+		end)
+		
+		return if Success1 and type(Result1) == "table" then Result1 else {}
 	end
-	local ok_1, status_1 = pcall(function()
-		-- upvalues: httpService (copy), status (ref)
-		return httpService:JSONDecode(status)
-	end)
-	
-	return if ok_1 and type(status_1) == "table" then status_1 else {}
 end
 
-local function writeStateLookup(p1)
-	-- upvalues: httpService (ref), appStorageService (ref)
-	local ok, status = pcall(function()
-		-- upvalues: httpService (copy), p1 (ref)
-		return httpService:JSONEncode(p1)
+local function writeStateLookup(Input) --[[ Line: 92 ]]
+	-- upvalues: HttpService (copy), AppStorageService (copy)
+	local Success, Result = pcall(function() --[[ Line: 93 ]]
+		-- upvalues: HttpService (upval), Input (copy)
+		return HttpService:JSONEncode(Input)
 	end)
 	
-	return if ok and type(status) == "string" then pcall(function()
-		-- upvalues: appStorageService (copy), status (ref)
-		appStorageService:SetItem("PlayWithRewardCoachmark", status)
-		appStorageService:Flush()
+	return if Success and type(Result) == "string" then pcall(function() --[[ Line: 100 ]]
+		-- upvalues: AppStorageService (upval), Result (copy)
+		AppStorageService:SetItem("PlayWithRewardCoachmark", Result)
+		AppStorageService:Flush()
 	end) else false
 end
 
-local _ = function(p1, p2)
-	-- upvalues: readStateLookup (ref), var2 (ref), writeStateLookup (ref)
-	local var3 = readStateLookup()
+local _ = function(p1, Callback) --[[ Line: 107 | Named "mutateStateLookup" ]]
+	-- upvalues: readStateLookup (copy), InterfaceResult (copy), writeStateLookup (copy)
+	local StateLookup = readStateLookup()
 	
-	if var3 == nil then
+	if StateLookup == nil then
 		return false
 	end
-	local var4 = tostring(p1)
-	local var5 = var3[var4]
-	local var6 = p2(if not var2(var5) then {
+	local Text = tostring(p1)
+	local State = StateLookup[Text]
+	local CallbackResult = Callback(if InterfaceResult(State) then State else {
 		windowStartTime = 0,
 		impressionCount = 0,
 		isDismissed = false
-	} else var5)
+	})
 	
-	if var6 == nil then
+	if CallbackResult == nil then
 		return false
+	else
+		StateLookup[Text] = CallbackResult
+		
+		return (writeStateLookup(StateLookup))
 	end
-	var3[var4] = var6
-	
-	return writeStateLookup(var3)
 end
 
-local _ = function(p1, p2)
-	-- upvalues: var1 (ref)
-	return p1.windowStartTime > 0 and var1 <= p2 - p1.windowStartTime
+local _ = function(p1, p2): boolean --[[ Line: 126 | Named "hasWindowExpired" ]]
+	-- upvalues: ScaledPlayWithRewardCoachmarkWindowDays (copy)
+	return p1.windowStartTime > 0 and ScaledPlayWithRewardCoachmarkWindowDays <= p2 - p1.windowStartTime
 end
 
 return {
-	consumeImpressionIfEligible = function(p1)
-		-- upvalues: fFlagPlayWithRewardCoachmarkOverlayFix (ref), playWithRewardCoachmarkMaxImpressions2 (ref), playWithRewardCoachmarkMaxImpressions (ref), playWithRewardCoachmarkStorageKeyEngineFeature (ref), var1 (ref), playWithRewardCoachmarkWindowResets (ref), readStateLookup (ref), var2 (ref), writeStateLookup (ref)
-		local var3 = if fFlagPlayWithRewardCoachmarkOverlayFix then playWithRewardCoachmarkMaxImpressions2 else playWithRewardCoachmarkMaxImpressions
+	consumeImpressionIfEligible = function(p1) --[[ Line: 132 ]]
+		-- upvalues: FFlagPlayWithRewardCoachmarkOverlayFix (copy), PlayWithRewardCoachmarkMaxImpressions2 (copy), PlayWithRewardCoachmarkMaxImpressions (copy), PlayWithRewardCoachmarkStorageKeyEngineFeature (copy), ScaledPlayWithRewardCoachmarkWindowDays (copy), PlayWithRewardCoachmarkWindowResets (copy), readStateLookup (copy), InterfaceResult (copy), writeStateLookup (copy)
+		local PlayWithRewardCoachmarkMaxImpressions1 = if FFlagPlayWithRewardCoachmarkOverlayFix then PlayWithRewardCoachmarkMaxImpressions2 else PlayWithRewardCoachmarkMaxImpressions
 		
-		if not playWithRewardCoachmarkStorageKeyEngineFeature or var3 <= 0 or var1 <= 0 then
+		if not PlayWithRewardCoachmarkStorageKeyEngineFeature or PlayWithRewardCoachmarkMaxImpressions1 <= 0 or ScaledPlayWithRewardCoachmarkWindowDays <= 0 then
 			return false
 		end
-		local timestamp = os.time()
-		local t = {
+		local Timestamp = os.time()
+		local config = {
 			impressionCount = 1,
 			isDismissed = false,
-			windowStartTime = timestamp
+			windowStartTime = Timestamp
 		}
 		
-		local _ = function(p2)
-			-- upvalues: t (ref), timestamp (ref), var1 (copy), playWithRewardCoachmarkWindowResets (copy), var3 (ref)
-			if p2.windowStartTime == 0 then
-				return t
-			elseif p2.windowStartTime > 0 and var1 <= timestamp - p2.windowStartTime then
-				return if playWithRewardCoachmarkWindowResets then t else nil
-			elseif p2.isDismissed or var3 <= p2.impressionCount then
+		local function _(DefaultState) --[[ Line: 148 ]]
+			-- upvalues: config (copy), Timestamp (copy), ScaledPlayWithRewardCoachmarkWindowDays (upval), PlayWithRewardCoachmarkWindowResets (upval), PlayWithRewardCoachmarkMaxImpressions1 (copy)
+			if DefaultState.windowStartTime == 0 then
+				return config
+			elseif DefaultState.windowStartTime > 0 and Timestamp - DefaultState.windowStartTime >= ScaledPlayWithRewardCoachmarkWindowDays then
+				return if PlayWithRewardCoachmarkWindowResets then config else nil
+			elseif DefaultState.isDismissed or PlayWithRewardCoachmarkMaxImpressions1 <= DefaultState.impressionCount then
 				return nil
+			else
+				DefaultState.impressionCount += 1
+				
+				return DefaultState
 			end
-			p2.impressionCount += 1
-			
-			return p2
 		end
 		
-		local var4 = readStateLookup()
+		local StateLookup = readStateLookup()
 		
-		if var4 == nil then
+		if StateLookup == nil then
 			return false
 		end
-		local var5
-		local var6 = tostring(p1)
-		local var7 = var4[var6]
-		local var8 = if not var2(var7) then {
+		local Text = tostring(p1)
+		local State = StateLookup[Text]
+		local State1 = if InterfaceResult(State) then State else {
 			windowStartTime = 0,
 			impressionCount = 0,
 			isDismissed = false
-		} else var7
+		}
+		local config1 = nil
 		
-		if var8.windowStartTime == 0 then
-			var5 = t
-		elseif var8.windowStartTime > 0 and var1 <= timestamp - var8.windowStartTime then
-			var5 = if playWithRewardCoachmarkWindowResets then t else nil
-		elseif var8.isDismissed or var3 <= var8.impressionCount then
-			var5 = nil
+		if State1.windowStartTime == 0 then
+			config1 = config
+		elseif State1.windowStartTime > 0 and Timestamp - State1.windowStartTime >= ScaledPlayWithRewardCoachmarkWindowDays then
+			config1 = if PlayWithRewardCoachmarkWindowResets then config else nil
+		elseif State1.isDismissed or PlayWithRewardCoachmarkMaxImpressions1 <= State1.impressionCount then
+			config1 = nil
 		else
-			var8.impressionCount += 1
-			var5 = var8
+			State1.impressionCount += 1
+			config1 = State1
 		end
-		if var5 == nil then
+		if config1 == nil then
 			return false
+		else
+			StateLookup[Text] = config1
+			
+			return (writeStateLookup(StateLookup))
 		end
-		var4[var6] = var5
-		
-		return writeStateLookup(var4)
 	end,
-	dismissCurrentWindow = function(p1)
-		-- upvalues: readStateLookup (ref), var2 (ref), writeStateLookup (ref)
-		local _ = function(p2)
-			if p2.windowStartTime == 0 or p2.isDismissed then
+	dismissCurrentWindow = function(p1) --[[ Line: 166 ]]
+		-- upvalues: readStateLookup (copy), InterfaceResult (copy), writeStateLookup (copy)
+		local function _(DefaultState) --[[ Line: 167 ]]
+			if DefaultState.windowStartTime == 0 or DefaultState.isDismissed then
 				return nil
+			else
+				DefaultState.isDismissed = true
+				
+				return DefaultState
 			end
-			p2.isDismissed = true
-			
-			return p2
 		end
 		
-		local var3 = readStateLookup()
+		local StateLookup = readStateLookup()
 		
-		if var3 == nil then return end
-		local var4
-		local var5 = tostring(p1)
-		local var6 = var3[var5]
-		local var7 = if not var2(var6) then {
+		if StateLookup == nil then return end
+		local Text = tostring(p1)
+		local State = StateLookup[Text]
+		local State1 = if InterfaceResult(State) then State else {
 			windowStartTime = 0,
 			impressionCount = 0,
 			isDismissed = false
-		} else var6
+		}
+		local v1 = nil
 		
-		if var7.windowStartTime == 0 or var7.isDismissed then
-			var4 = nil
+		if State1.windowStartTime == 0 or State1.isDismissed then
+			v1 = nil
 		else
-			var7.isDismissed = true
-			var4 = var7
+			State1.isDismissed = true
+			v1 = State1
 		end
-		if var4 == nil then
+		if v1 ~= nil then
+			StateLookup[Text] = v1
+			local _ = writeStateLookup(StateLookup)
+			
 			return
 		end
-		var3[var5] = var4
-		var7 = writeStateLookup(var3)
 	end
 }

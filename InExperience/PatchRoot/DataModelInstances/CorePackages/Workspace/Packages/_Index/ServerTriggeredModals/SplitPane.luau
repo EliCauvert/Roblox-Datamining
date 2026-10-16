@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.SplitPane.SplitPane)
+﻿return (require(script.Parent.Parent.Parent._Index.SplitPane.SplitPane))

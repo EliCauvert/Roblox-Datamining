@@ -1,3 +1,7 @@
-﻿return require(script.Parent.FFlagAXBackgroundsRoot) and (require(script.Parent.FFlagAXBackgroundCycloramaRendering) and (game:DefineFastFlag("AXBackgroundsCustomizeHydration4", false) and pcall(function()
+﻿local FFlagAXBackgroundCycloramaRenderingModule = require(script.Parent.FFlagAXBackgroundCycloramaRendering)
+local AXBackgroundsCustomizeHydration4 = game:DefineFastFlag("AXBackgroundsCustomizeHydration4", false)
+local Success = pcall(function() --[[ Line: 7 ]]
 	return Enum.AvatarAssetType.AvatarBackground
-end)))
+end)
+
+return require(script.Parent.FFlagAXBackgroundsRoot) and (FFlagAXBackgroundCycloramaRenderingModule and (AXBackgroundsCustomizeHydration4 and Success))

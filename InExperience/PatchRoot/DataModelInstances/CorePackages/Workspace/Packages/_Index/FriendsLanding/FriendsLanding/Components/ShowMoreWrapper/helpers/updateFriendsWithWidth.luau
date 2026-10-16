@@ -1,27 +1,27 @@
-﻿local dependenciesModule = require(script:FindFirstAncestor("FriendsLanding").dependencies)
-local t = dependenciesModule.t
-local dictionary = dependenciesModule.llama.Dictionary
-local friendsPerLoadGroupModule = require(script.Parent.friendsPerLoadGroup)
-local var1 = t.interface({
-	visibleRows = t.number,
-	itemSize = t.number,
-	filter = t.string
+﻿local DependenciesModule = require(script:FindFirstAncestor("FriendsLanding").dependencies)
+local T = DependenciesModule.t
+local Dictionary = DependenciesModule.llama.Dictionary
+local FriendsPerLoadGroupModule = require(script.Parent.friendsPerLoadGroup)
+local InterfaceResult = T.interface({
+	visibleRows = T.number,
+	itemSize = T.number,
+	filter = T.string
 })
-local var2 = t.interface({ filterFriendCounts = t.table })
+local InterfaceResult1 = T.interface({ filterFriendCounts = T.table })
 
-return function(p1)
-	-- upvalues: var1 (ref), var2 (ref), friendsPerLoadGroupModule (ref), dictionary (ref)
-	return function(p2, p3)
-		-- upvalues: var1 (copy), var2 (copy), friendsPerLoadGroupModule (copy), p1 (ref), dictionary (copy)
-		assert(var1(p3))
-		assert(var2(p2))
-		local var3 = friendsPerLoadGroupModule({ width = p1 }, p3)
+return function(Width) --[[ Line: 20 ]]
+	-- upvalues: InterfaceResult (copy), InterfaceResult1 (copy), FriendsPerLoadGroupModule (copy), Dictionary (copy)
+	return function(p1, p2) --[[ Line: 21 ]]
+		-- upvalues: InterfaceResult (upval), InterfaceResult1 (upval), FriendsPerLoadGroupModule (upval), Width (copy), Dictionary (upval)
+		assert(InterfaceResult(p2))
+		assert(InterfaceResult1(p1))
+		local FriendsPerLoadGroupModuleResult = FriendsPerLoadGroupModule({ width = Width }, p2)
 		
 		return {
-			width = p1,
-			filterFriendCounts = dictionary.join(p2.filterFriendCounts, dictionary.map(p2.filterFriendCounts, function(p4)
-				-- upvalues: var3 (ref)
-				return math.max(var3, p4)
+			width = Width,
+			filterFriendCounts = Dictionary.join(p1.filterFriendCounts, Dictionary.map(p1.filterFriendCounts, function(p3: number): number --[[ Line: 31 ]]
+				-- upvalues: FriendsPerLoadGroupModuleResult (copy)
+				return (math.max(FriendsPerLoadGroupModuleResult, p3))
 			end))
 		}
 	end

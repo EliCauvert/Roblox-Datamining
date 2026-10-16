@@ -1,19 +1,19 @@
-﻿local collectionViews = script:FindFirstAncestor("CollectionViews")
-local reactModule = require(collectionViews.Parent.React)
-local collectionItemSize = require(collectionViews.CollectionViewTypes).CollectionItemSize
-local useCollectionLayoutParamsComputedModule = require(collectionViews.useCollectionLayoutParamsComputed)
+﻿local CollectionViews = script:FindFirstAncestor("CollectionViews")
+local ReactModule = require(CollectionViews.Parent.React)
+local CollectionItemSize = require(CollectionViews.CollectionViewTypes).CollectionItemSize
+local UseCollectionLayoutParamsComputedModule = require(CollectionViews.useCollectionLayoutParamsComputed)
 
-return function(p1, p2)
-	-- upvalues: useCollectionLayoutParamsComputedModule (ref), reactModule (ref), collectionItemSize (ref)
-	local var1 = useCollectionLayoutParamsComputedModule(p1, p2)
+return function(p1, p2) --[[ Line: 15 | Named "useCollectionLayoutConfig" ]]
+	-- upvalues: UseCollectionLayoutParamsComputedModule (copy), ReactModule (copy), CollectionItemSize (copy)
+	local UseCollectionLayoutParamsComputedModuleResult = UseCollectionLayoutParamsComputedModule(p1, p2)
 	
-	return reactModule.useMemo(function()
-		-- upvalues: collectionItemSize (copy), var1 (ref)
+	return (ReactModule.useMemo(function() --[[ Line: 21 ]]
+		-- upvalues: CollectionItemSize (upval), UseCollectionLayoutParamsComputedModuleResult (copy)
 		local t = {}
 		
-		for i, v in collectionItemSize do
-			t[v] = var1(v)
+		for _, value in CollectionItemSize do
+			t[value] = UseCollectionLayoutParamsComputedModuleResult(value)
 		end
 		return t
-	end, { var1 })
+	end, { UseCollectionLayoutParamsComputedModuleResult }))
 end

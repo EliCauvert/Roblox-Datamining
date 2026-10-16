@@ -1,93 +1,93 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local button = foundationModule.Button
-local icon = foundationModule.Icon
-local skeleton = foundationModule.Skeleton
-local text = foundationModule.Text
-local view = foundationModule.View
-local iconName = foundationModule.Enums.IconName
-local iconSize = foundationModule.Enums.IconSize
-local radius = foundationModule.Enums.Radius
-local useTokens = foundationModule.Hooks.useTokens
-local imageWithSkeletonModule = require(moments.Components.ImageWithSkeleton)
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local Button = FoundationModule.Button
+local Icon = FoundationModule.Icon
+local Skeleton = FoundationModule.Skeleton
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local IconName = FoundationModule.Enums.IconName
+local IconSize = FoundationModule.Enums.IconSize
+local Radius = FoundationModule.Enums.Radius
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local ImageWithSkeletonModule = require(Moments.Components.ImageWithSkeleton)
 
-return function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), view (ref), skeleton (ref), radius (ref), imageWithSkeletonModule (ref), icon (ref), iconName (ref), iconSize (ref), text (ref), button (ref), foundationModule (ref)
-	local var1 = useTokens()
-	local size1000 = var1.Size.Size_1000
+return function(Frame: Frame) --[[ Line: 53 | Named "AvatarActionBar" ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Skeleton (copy), Radius (copy), ImageWithSkeletonModule (copy), Icon (copy), IconName (copy), IconSize (copy), Text (copy), Button (copy), FoundationModule (copy)
+	local UseTokensResult = UseTokensFunction()
+	local Size1000 = UseTokensResult.Size.Size_1000
 	
-	return if p1.isLoading then reactModule.createElement(view, {
+	return if Frame.isLoading then ReactModule.createElement(View, {
 		tag = "row align-x-left align-y-center gap-medium size-full-0 auto-y",
 		testId = "moments-avatar-action-bar-skeleton",
-		LayoutOrder = p1.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		Thumbnail = reactModule.createElement(skeleton, {
+		Thumbnail = ReactModule.createElement(Skeleton, {
 			LayoutOrder = 1,
-			Size = UDim2.fromOffset(size1000, size1000),
-			radius = radius.Medium
+			Size = UDim2.fromOffset(Size1000, Size1000),
+			radius = Radius.Medium
 		}),
-		Lines = reactModule.createElement(view, {
+		Lines = ReactModule.createElement(View, {
 			LayoutOrder = 2,
 			tag = "col align-x-left align-y-center gap-xsmall auto-xy"
 		}, {
-			Price = reactModule.createElement(skeleton, {
+			Price = ReactModule.createElement(Skeleton, {
 				LayoutOrder = 1,
-				Size = UDim2.fromOffset(64, var1.Size.Size_400)
+				Size = UDim2.fromOffset(64, UseTokensResult.Size.Size_400)
 			}),
-			ItemCount = reactModule.createElement(skeleton, {
+			ItemCount = ReactModule.createElement(Skeleton, {
 				LayoutOrder = 2,
-				Size = UDim2.fromOffset(112, var1.Size.Size_300)
+				Size = UDim2.fromOffset(112, UseTokensResult.Size.Size_300)
 			})
 		})
-	}) else reactModule.createElement(view, {
+	}) else ReactModule.createElement(View, {
 		tag = "row align-x-left align-y-center gap-medium size-full-0 auto-y",
 		testId = "moments-avatar-action-bar",
-		LayoutOrder = p1.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		Thumbnail = reactModule.createElement(imageWithSkeletonModule, {
+		Thumbnail = ReactModule.createElement(ImageWithSkeletonModule, {
 			LayoutOrder = 1,
-			Image = p1.thumbnailImage,
-			Size = UDim2.fromOffset(size1000, size1000),
-			radius = radius.Medium,
-			backgroundStyle = var1.Color.Shift.Shift_300
+			Image = Frame.thumbnailImage,
+			Size = UDim2.fromOffset(Size1000, Size1000),
+			radius = Radius.Medium,
+			backgroundStyle = UseTokensResult.Color.Shift.Shift_300
 		}),
-		Totals = reactModule.createElement(view, {
+		Totals = ReactModule.createElement(View, {
 			LayoutOrder = 2,
 			tag = "col align-x-left align-y-center grow gap-xsmall auto-y"
 		}, {
-			Price = if p1.priceText then reactModule.createElement(view, {
+			Price = if Frame.priceText then ReactModule.createElement(View, {
 				LayoutOrder = 1,
 				tag = "row align-x-left align-y-center gap-xsmall auto-xy"
 			}, {
-				RobuxIcon = reactModule.createElement(icon, {
+				RobuxIcon = ReactModule.createElement(Icon, {
 					LayoutOrder = 1,
-					name = iconName.Robux,
-					size = iconSize.Small
+					name = IconName.Robux,
+					size = IconSize.Small
 				}),
-				Amount = reactModule.createElement(text, {
+				Amount = ReactModule.createElement(Text, {
 					LayoutOrder = 2,
 					tag = "auto-xy text-title-medium text-align-x-left content-emphasis",
 					testId = "moments-look-price",
-					Text = p1.priceText
+					Text = Frame.priceText
 				})
 			}) else nil,
-			ItemCount = reactModule.createElement(text, {
+			ItemCount = ReactModule.createElement(Text, {
 				LayoutOrder = 2,
 				tag = "auto-xy text-body-medium text-align-x-left content-default",
 				testId = "moments-look-item-count",
-				Text = p1.itemCountText
+				Text = Frame.itemCountText
 			})
 		}),
-		ShopButton = if p1.showShopButton then reactModule.createElement(button, {
+		ShopButton = if Frame.showShopButton then ReactModule.createElement(Button, {
 			LayoutOrder = 3,
 			testId = "moments-shop-cta",
-			isDisabled = p1.isShopDisabled,
-			onActivated = p1.onShop,
-			size = foundationModule.Enums.InputSize.Medium,
-			text = p1.shopText,
-			variant = foundationModule.Enums.ButtonVariant.Emphasis
+			isDisabled = Frame.isShopDisabled,
+			onActivated = Frame.onShop,
+			size = FoundationModule.Enums.InputSize.Medium,
+			text = Frame.shopText,
+			variant = FoundationModule.Enums.ButtonVariant.Emphasis
 		}) else nil
 	})
 end

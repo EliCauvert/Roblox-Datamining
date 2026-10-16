@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.RobloxAppHooks.RobloxAppHooks)
+﻿return (require(script.Parent._Workspace.RobloxAppHooks.RobloxAppHooks))

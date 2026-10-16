@@ -1,57 +1,58 @@
-﻿local textService = game:GetService("TextService")
-local parent = script:FindFirstAncestor("BuildExperience").Parent
-local styleModule = require(parent.Style)
-local foundationFontFaceMigration = require(parent.Foundation).Utility.Flags.FoundationFontFaceMigration
-local getVisibleLineCountModule = require(script.Parent.getVisibleLineCount)
-local chatTextAreaDebugModule = require(script.Parent.chatTextAreaDebug)
+﻿local TextService = game:GetService("TextService")
+local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local StyleModule = require(Parent.Style)
+local FoundationFontFaceMigration = require(Parent.Foundation).Utility.Flags.FoundationFontFaceMigration
+local GetVisibleLineCountModule = require(script.Parent.getVisibleLineCount)
+local ChatTextAreaDebugModule = require(script.Parent.chatTextAreaDebug)
 
-return function(p1)
-	-- upvalues: getVisibleLineCountModule (ref), chatTextAreaDebugModule (ref), foundationFontFaceMigration (ref), styleModule (ref), textService (ref)
-	local var1 = getVisibleLineCountModule(p1.text, p1.maxLines)
-	local var2 = 1
+return function(p1) --[[ Line: 29 | Named "measureTextLineCount" ]]
+	-- upvalues: GetVisibleLineCountModule (copy), ChatTextAreaDebugModule (copy), FoundationFontFaceMigration (copy), StyleModule (copy), TextService (copy)
+	local VisibleLineCountModule = GetVisibleLineCountModule(p1.text, p1.maxLines)
+	local Count = 1
 	
 	if p1.text ~= "" then
-		for i in string.gmatch(p1.text, "\n") do
-			var2 += 1
+		for _ in string.gmatch(p1.text, "\n") do
+			Count += 1
 		end
 	end
-	local layoutWidth = p1.layoutWidth or 0
-	local var3 = nil
-	local var4 = nil
-	local var5 = var1
+	local LayoutWidth = p1.layoutWidth or 0
+	local ScaledSingleLineHeight: number? = nil
+	local WrappedLineCount: number? = nil
+	local ClampedValue: number = VisibleLineCountModule
 	
 	if p1.text == "" then
-		local t = {
+		local config = {
 			lineCount = 1,
 			newlineLineCount = 1,
 			wrappedLineCount = nil,
 			boundsY = nil,
-			layoutWidth = layoutWidth
+			layoutWidth = LayoutWidth
 		}
-		chatTextAreaDebugModule.log("measure", `empty -> lineCount=1 layoutWidth={layoutWidth}`)
+		ChatTextAreaDebugModule.log("measure", `empty -> lineCount=1 layoutWidth={LayoutWidth}`)
 		
-		return t
-	elseif layoutWidth > 0 then
-		local y = (if foundationFontFaceMigration then styleModule.GetTextSize("M", p1.fontSize, p1.font, Vector2.new(layoutWidth, 100000), { addTemporaryPadding = false }) else textService:GetTextSize("M", p1.fontSize, p1.font, Vector2.new(layoutWidth, 100000))).Y
-		local y_1 = (if foundationFontFaceMigration then styleModule.GetTextSize(p1.text, p1.fontSize, p1.font, Vector2.new(layoutWidth, 100000), { addTemporaryPadding = false }) else textService:GetTextSize(p1.text, p1.fontSize, p1.font, Vector2.new(layoutWidth, 100000))).Y
-		var3 = y_1
+		return config
+	end
+	if LayoutWidth > 0 then
+		local Y: number = (if FoundationFontFaceMigration then StyleModule.GetTextSize("M", p1.fontSize, p1.font, Vector2.new(LayoutWidth, 100000), { addTemporaryPadding = false }) else TextService:GetTextSize("M", p1.fontSize, p1.font, Vector2.new(LayoutWidth, 100000))).Y
+		local Y1: number = (if FoundationFontFaceMigration then StyleModule.GetTextSize(p1.text, p1.fontSize, p1.font, Vector2.new(LayoutWidth, 100000), { addTemporaryPadding = false }) else TextService:GetTextSize(p1.text, p1.fontSize, p1.font, Vector2.new(LayoutWidth, 100000))).Y
+		ScaledSingleLineHeight = Y1
 		
-		if y_1 > 0 and y > 0 then
-			local ceiled = math.ceil(y_1 / y)
-			local maxValue = math.max(var2, ceiled)
-			var4 = ceiled
-			var5 = math.clamp(maxValue, 1, p1.maxLines)
-			var3 = maxValue * p1.singleLineHeight
+		if Y1 > 0 and Y > 0 then
+			local Ceiled = math.ceil(Y1 / Y)
+			local Largest = math.max(Count, Ceiled)
+			WrappedLineCount = Ceiled
+			ClampedValue = math.clamp(Largest, 1, p1.maxLines)
+			ScaledSingleLineHeight = Largest * p1.singleLineHeight
 		end
 	end
-	local t = {
-		lineCount = var5,
-		newlineLineCount = var1,
-		wrappedLineCount = var4,
-		layoutWidth = layoutWidth,
-		boundsY = var3
+	local config = {
+		lineCount = ClampedValue,
+		newlineLineCount = VisibleLineCountModule,
+		wrappedLineCount = WrappedLineCount,
+		layoutWidth = LayoutWidth,
+		boundsY = ScaledSingleLineHeight
 	}
-	chatTextAreaDebugModule.log("measure", `lineCount={var5} newlines={var1} wrapped={var4 or "nil"} boundsY={var3 or "nil"} layoutWidth={layoutWidth} textLen={utf8.len(p1.text) or #p1.text}`)
+	ChatTextAreaDebugModule.log("measure", `lineCount={ClampedValue} newlines={VisibleLineCountModule} wrapped={WrappedLineCount or "nil"} boundsY={ScaledSingleLineHeight or "nil"} layoutWidth={LayoutWidth} textLen={utf8.len(p1.text) or #p1.text}`)
 	
-	return t
+	return config
 end

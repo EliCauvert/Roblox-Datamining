@@ -1,17 +1,16 @@
-﻿local parent = script:FindFirstAncestor("AppChat").Parent
-local roactModule = require(parent.Roact)
-local withStyle = require(parent.UIBlox).Style.withStyle
-local otterModule = require(parent.Otter)
-local foundationModule = require(parent.Foundation)
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local UIBloxModule = require(parent.UIBlox)
-local images = UIBloxModule.App.ImageSet.Images
-local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
-local messageCharacterLimitModule = require(script.Parent.MessageCharacterLimit)
-local userTypingIndicator = roactModule.PureComponent:extend("UserTypingIndicator")
-local t = { dampingRatio = 1.5, frequency = 1.6 }
-userTypingIndicator.defaultProps = {
+﻿local Parent = script:FindFirstAncestor("AppChat").Parent
+local RoactModule = require(Parent.Roact)
+local WithStyleFunction = require(Parent.UIBlox).Style.withStyle
+local OtterModule = require(Parent.Otter)
+local FoundationModule = require(Parent.Foundation)
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local UIBloxModule = require(Parent.UIBlox)
+local Images = UIBloxModule.App.ImageSet.Images
+local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
+local UserTypingIndicator = RoactModule.PureComponent:extend("UserTypingIndicator")
+local config = { dampingRatio = 1.5, frequency = 1.6 }
+UserTypingIndicator.defaultProps = {
 	LayoutOrder = 1,
 	ZIndex = 1,
 	oneUserTyping = "PLACEHOLDER {DISPLAY_NAME} is typing...",
@@ -21,45 +20,53 @@ userTypingIndicator.defaultProps = {
 	AnchorPoint = Vector2.new(0, 0),
 	Position = UDim2.new(0, 0, 0, 0),
 	usersTyping = {},
-	maxCharacterLength = messageCharacterLimitModule
+	maxCharacterLength = require(script.Parent.MessageCharacterLimit)
 }
 
-function userTypingIndicator.init(p1)
-	-- upvalues: roactModule (ref), otterModule (ref), t (ref)
-	function p0.getDisplayText()
-		-- upvalues: p1 (ref)
+function UserTypingIndicator.init(p1) --[[ Line: 36 ]]
+	-- upvalues: RoactModule (copy), OtterModule (copy), config (copy)
+	function p1.getDisplayText() --[[ Line: 37 ]]
+		-- upvalues: p1 (copy)
 		if p1.props.usersTyping then
-			return if #p1.props.usersTyping == 1 then p1.props.oneUserTyping elseif #p1.props.usersTyping == 2 then p1.props.twoUsersTyping elseif #p1.props.usersTyping > 2 then p1.props.severalUsersTyping else ""
+			if #p1.props.usersTyping == 1 then
+				return p1.props.oneUserTyping
+			elseif #p1.props.usersTyping == 2 then
+				return p1.props.twoUsersTyping
+			elseif #p1.props.usersTyping > 2 then
+				return p1.props.severalUsersTyping
+			end
 		end
+		return ""
 	end
 	
-	local var1, var2 = roactModule.createBinding(1)
-	p1.motor = otterModule.createSingleMotor(1)
+	local Binding, Binding2 = RoactModule.createBinding(1)
+	p1.motor = OtterModule.createSingleMotor(1)
 	p1.motor:start()
-	p1.motor:onStep(var2)
-	p1.animationProgress = var1
+	p1.motor:onStep(Binding2)
+	p1.animationProgress = Binding
 	
-	function p0.updateAnimationGoal()
-		-- upvalues: p1 (ref), otterModule (copy), t (copy)
-		p1.motor:setGoal(otterModule.spring(if #p1.props.usersTyping > 0 then 0 else 1, t))
+	function p1.updateAnimationGoal() --[[ Line: 58 ]]
+		-- upvalues: p1 (copy), OtterModule (upval), config (upval)
+		p1.motor:setGoal(OtterModule.spring(if #p1.props.usersTyping > 0 then 0 else 1, config))
 	end
 	
 	p1.updateAnimationGoal()
 end
 
-function userTypingIndicator.didUpdate(p1, p2, _)
+function UserTypingIndicator.didUpdate(p1, p2, _) --[[ Line: 66 ]]
 	if #p2.usersTyping ~= #p1.props.usersTyping then
 		p1.updateAnimationGoal()
 	end
 end
 
-function userTypingIndicator.render(p1)
-	-- upvalues: withStyle (ref), roactModule (ref), imageSetLabel (ref), images (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
-	return withStyle(function(p2)
-		-- upvalues: roactModule (copy), p1 (ref), imageSetLabel (copy), images (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy)
-		local font = p2.Font
+function UserTypingIndicator.render(p1) --[[ Line: 72 ]]
+	-- upvalues: WithStyleFunction (copy), RoactModule (copy), ImageSetLabel (copy), Images (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	return WithStyleFunction(function(p2) --[[ Line: 73 ]]
+		-- upvalues: RoactModule (upval), p1 (copy), ImageSetLabel (upval), Images (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
+		local _Font = p2.Font
+		local FooterFont = _Font.Footer.Font
 		
-		return roactModule.createElement("Frame", {
+		return RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			AnchorPoint = p1.props.AnchorPoint,
 			LayoutOrder = p1.props.LayoutOrder,
@@ -67,17 +74,17 @@ function userTypingIndicator.render(p1)
 			Size = UDim2.new(1, 0, 0, p1.props.height),
 			ZIndex = p1.props.ZIndex
 		}, {
-			Layout = roactModule.createElement("UIListLayout", {
+			Layout = RoactModule.createElement("UIListLayout", {
 				VerticalAlignment = Enum.VerticalAlignment.Center,
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				FillDirection = Enum.FillDirection.Vertical,
 				HorizontalAlignment = Enum.HorizontalAlignment.Center
 			}),
-			Padding = roactModule.createElement("UIPadding", {
+			Padding = RoactModule.createElement("UIPadding", {
 				PaddingTop = UDim.new(0, 4),
 				PaddingBottom = UDim.new(0, 4)
 			}),
-			ImageContainer = roactModule.createElement(imageSetLabel, {
+			ImageContainer = RoactModule.createElement(ImageSetLabel, {
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
 				Size = UDim2.new(0.9, 0, 1, 0),
@@ -85,37 +92,37 @@ function userTypingIndicator.render(p1)
 				BorderColor3 = p2.Theme.Divider.Color,
 				ScaleType = Enum.ScaleType.Slice,
 				SliceCenter = Rect.new(8, 8, 9, 9),
-				Image = images["component_assets/circle_17"],
+				Image = Images["component_assets/circle_17"],
 				ImageColor3 = p2.Theme.BackgroundUIDefault.Color,
-				ImageTransparency = p1.animationProgress:map(function(p3)
+				ImageTransparency = p1.animationProgress:map(function(p3) --[[ Line: 108 ]]
 					return p3
 				end),
-				Position = p1.animationProgress:map(function(p3)
-					return UDim2.new(0, 0, p3, 0)
+				Position = p1.animationProgress:map(function(YScale): UDim2 --[[ Line: 111 ]]
+					return UDim2.new(0, 0, YScale, 0)
 				end)
 			}, {
-				Layout = roactModule.createElement("UIListLayout", {
+				Layout = RoactModule.createElement("UIListLayout", {
 					VerticalAlignment = Enum.VerticalAlignment.Center,
 					HorizontalAlignment = Enum.HorizontalAlignment.Left,
 					FillDirection = Enum.FillDirection.Horizontal,
 					SortOrder = Enum.SortOrder.LayoutOrder
 				}),
-				Padding = roactModule.createElement("UIPadding", {
+				Padding = RoactModule.createElement("UIPadding", {
 					PaddingLeft = UDim.new(0, 12),
 					PaddingTop = UDim.new(0, 4),
 					PaddingBottom = UDim.new(0, 4),
 					PaddingRight = UDim.new(0, 12)
 				}),
-				TextLabel = roactModule.createElement("TextLabel", {
+				TextLabel = RoactModule.createElement("TextLabel", {
 					BackgroundTransparency = 1,
 					Text = p1.getDisplayText(),
-					TextSize = font.BaseSize * font.Footer.RelativeSize,
-					Font = if foundationFontFaceMigration then nil else font.Footer.Font,
-					FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.CaptionSmall.Font) else nil,
+					TextSize = _Font.BaseSize * _Font.Footer.RelativeSize,
+					Font = if FoundationFontFaceMigration then nil else FooterFont,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Tokens.Typography.CaptionSmall.Font) else nil,
 					TextColor3 = p2.Theme.TextMuted.Color,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					TextYAlignment = Enum.TextYAlignment.Center,
-					TextTransparency = p1.animationProgress:map(function(p3)
+					TextTransparency = p1.animationProgress:map(function(p3) --[[ Line: 140 ]]
 						return p3
 					end)
 				})
@@ -124,10 +131,10 @@ function userTypingIndicator.render(p1)
 	end)
 end
 
-function userTypingIndicator.willUnmount(p1)
+function UserTypingIndicator.willUnmount(p1) --[[ Line: 149 ]]
 	if p1.motor then
 		p1.motor:destroy()
 	end
 end
 
-return userTypingIndicator
+return UserTypingIndicator

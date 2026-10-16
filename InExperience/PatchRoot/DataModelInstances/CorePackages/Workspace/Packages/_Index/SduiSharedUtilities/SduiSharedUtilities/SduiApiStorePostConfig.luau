@@ -1,20 +1,25 @@
-﻿local httpService = game:GetService("HttpService")
-local t = { Json = "Json", Proto = "Proto" }
-local t_1 = {
-	[t.Json] = "application/json",
-	[t.Proto] = "application/x-protobuf"
+﻿local HttpService = game:GetService("HttpService")
+local SduiApiStorePostConfigContentType = { Json = "Json", Proto = "Proto" }
+local config = {
+	[SduiApiStorePostConfigContentType.Json] = "application/json",
+	[SduiApiStorePostConfigContentType.Proto] = "application/x-protobuf"
 }
 
 return {
-	SduiApiStorePostConfigContentType = t,
-	getBodyFromPostConfig = function(p1)
-		-- upvalues: t (ref), httpService (ref)
+	SduiApiStorePostConfigContentType = SduiApiStorePostConfigContentType,
+	getBodyFromPostConfig = function(p1) --[[ Line: 30 ]]
+		-- upvalues: SduiApiStorePostConfigContentType (copy), HttpService (copy)
 		if p1.body then
-			return if p1.contentType == t.Json then httpService:JSONEncode(p1.body) elseif p1.contentType == t.Proto then buffer.tostring(p1.protoMessage.encode(p1.body)) else nil
+			if p1.contentType == SduiApiStorePostConfigContentType.Json then
+				return HttpService:JSONEncode(p1.body)
+			elseif p1.contentType == SduiApiStorePostConfigContentType.Proto then
+				return buffer.tostring(p1.protoMessage.encode(p1.body))
+			end
 		end
+		return nil
 	end,
-	getContentTypeHeaderFromPostConfig = function(p1)
-		-- upvalues: t_1 (ref)
-		return if p1.contentType then t_1[p1.contentType] else nil
+	getContentTypeHeaderFromPostConfig = function(p1) --[[ Line: 45 ]]
+		-- upvalues: config (copy)
+		return if p1.contentType then config[p1.contentType] else nil
 	end
 }

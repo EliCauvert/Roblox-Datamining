@@ -1,20 +1,20 @@
-﻿local invariantModule = require(script.Parent.Parent.utils.invariant)
-local isValidScreenComponentModule = require(script.Parent.Parent.utils.isValidScreenComponent)
+﻿local InvariantModule = require(script.Parent.Parent.utils.invariant)
+local IsValidScreenComponentModule = require(script.Parent.Parent.utils.isValidScreenComponent)
 
-return function(p1)
-	-- upvalues: invariantModule (ref), isValidScreenComponentModule (ref)
-	invariantModule(type(p1) == "table", "routeConfigs must be an array table")
+return function(List) --[[ Line: 20 ]]
+	-- upvalues: InvariantModule (copy), IsValidScreenComponentModule (copy)
+	InvariantModule(type(List) == "table", "routeConfigs must be an array table")
 	
-	for i, v in p1 do
-		invariantModule(type(i) == "number", ("routeConfigs must be an array table (found non-number key %q of type %q)"):format(i, type(i)))
-		local var1, var2 = next(v)
-		invariantModule(next(v, var1) == nil, ("only one route must be defined in each entry (found multiple at index %d)"):format(i))
-		local var3 = if type(var2) ~= "table" then false else true
-		local var4 = if var3 then var2 else {}
-		invariantModule(isValidScreenComponentModule(if var3 then var2.screen else var2) or (type(var4.getScreen) == "function" and isValidScreenComponentModule(var4.getScreen())), "The component for route '%s' must be a Roact Function/Stateful component or table with 'getScreen'.getScreen function must return Roact Function/Stateful component.", var1)
-		invariantModule(if var4.screen ~= nil then var4.getScreen == nil else true, "Route '%s' should provide 'screen' or 'getScreen', but not both.", var1)
+	for i, value in List do
+		InvariantModule(type(i) == "number", ("routeConfigs must be an array table (found non-number key %q of type %q)"):format(i, (type(i))))
+		local Key, Value = next(value)
+		InvariantModule(next(value, Key) == nil, ("only one route must be defined in each entry (found multiple at index %d)"):format(i))
+		local IsTable = type(Value) == "table"
+		local Value1 = if IsTable then Value else {}
+		InvariantModule(IsValidScreenComponentModule(IsTable and Value.screen or Value) or type(Value1.getScreen) == "function" and IsValidScreenComponentModule(Value1.getScreen()), "The component for route '%s' must be a Roact Function/Stateful component or table with 'getScreen'.getScreen function must return Roact Function/Stateful component.", Key)
+		InvariantModule(Value1.screen == nil or Value1.getScreen == nil, "Route '%s' should provide 'screen' or 'getScreen', but not both.", Key)
 	end
-	invariantModule(#p1 > 0, "Please specify at least one route when configuring a navigator.")
+	InvariantModule(#List > 0, "Please specify at least one route when configuring a navigator.")
 	
-	return p1
+	return List
 end

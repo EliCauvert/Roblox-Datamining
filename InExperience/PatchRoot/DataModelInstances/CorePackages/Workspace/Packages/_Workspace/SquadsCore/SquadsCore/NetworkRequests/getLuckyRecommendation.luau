@@ -1,54 +1,54 @@
-﻿local httpService = game:GetService("HttpService")
-local squadsCore = script:FindFirstAncestor("SquadsCore")
-local urlBuilderModule = require(squadsCore.Parent.UrlBuilder)
-local loggerModule = require(squadsCore.Logger)
-local serializeTableModule = require(squadsCore.Utils.serializeTable)
-local squadLuckyRecommendationErrorModule = require(squadsCore.Enums.SquadLuckyRecommendationError)
-local _ = require(squadsCore.Types)
-local urlBuilder = urlBuilderModule.UrlBuilder
-local urlBase = urlBuilderModule.UrlBase
+﻿local HttpService = game:GetService("HttpService")
+local SquadsCore = script:FindFirstAncestor("SquadsCore")
+local UrlBuilderModule = require(SquadsCore.Parent.UrlBuilder)
+local LoggerModule = require(SquadsCore.Logger)
+local SerializeTableModule = require(SquadsCore.Utils.serializeTable)
+local SquadLuckyRecommendationErrorModule = require(SquadsCore.Enums.SquadLuckyRecommendationError)
+local _ = require(SquadsCore.Types)
+local UrlBuilder = UrlBuilderModule.UrlBuilder
+local UrlBase = UrlBuilderModule.UrlBase
 
-return function(p1, p2, p3)
-	-- upvalues: urlBuilder (ref), urlBase (ref), httpService (ref), loggerModule (ref), serializeTableModule (ref), squadLuckyRecommendationErrorModule (ref)
-	local var1 = httpService:RequestInternal({
+return function(PickRequestId, Callback1, Callback) --[[ Line: 20 ]]
+	-- upvalues: UrlBuilder (copy), UrlBase (copy), HttpService (copy), LoggerModule (copy), SerializeTableModule (copy), SquadLuckyRecommendationErrorModule (copy)
+	local RequestInternalResult = HttpService:RequestInternal({
 		Method = "GET",
 		Headers = {
 			["Content-Type"] = "application/json",
 			Accept = "application/json"
 		},
-		Url = urlBuilder.new({
+		Url = UrlBuilder.new({
 			path = "group-up/v1/get-lucky-recommendation",
-			base = urlBase.APIS,
-			query = { pickRequestId = p1 }
+			base = UrlBase.APIS,
+			query = { pickRequestId = PickRequestId }
 		})()
 	})
-	local var2 = false
-	var1:Start(function(_, p4)
-		-- upvalues: var2 (write), httpService (copy), loggerModule (copy), serializeTableModule (copy), p3 (ref), squadLuckyRecommendationErrorModule (copy), p2 (ref)
-		if var2 then return end
-		if p4 == nil or p4.StatusCode ~= 200 then
-			local var3 = if p4 ~= nil then nil else p4.StatusCode
+	local Flag = false
+	RequestInternalResult:Start(function(_, p1) --[[ Line: 44 ]]
+		-- upvalues: Flag (ref), HttpService (upval), LoggerModule (upval), SerializeTableModule (upval), Callback (copy), SquadLuckyRecommendationErrorModule (upval), Callback1 (copy)
+		if Flag then return end
+		if p1 == nil or p1.StatusCode ~= 200 then
+			local StatusCode = if p1 == nil then nil else p1.StatusCode
 			
-			if p3 then
-				p3(if var3 == 404 then squadLuckyRecommendationErrorModule.NoRecommendations else squadLuckyRecommendationErrorModule.Failed)
+			if Callback then
+				Callback(if StatusCode == 404 then SquadLuckyRecommendationErrorModule.NoRecommendations else SquadLuckyRecommendationErrorModule.Failed)
 			end
-			loggerModule:error("Error getting lucky recommendation: {}", if p4 ~= nil then "request aborted" else p4.StatusMessage)
+			LoggerModule:error("Error getting lucky recommendation: {}", if p1 == nil then "request aborted" else p1.StatusMessage)
 		else
-			local recommendations = httpService:JSONDecode(p4.Body).recommendations
-			local var4 = if recommendations then recommendations[1] else nil
-			loggerModule:debug("Response: {}", serializeTableModule(p4.Body))
+			local Recommendations = HttpService:JSONDecode(p1.Body).recommendations
+			local Recommendation = if Recommendations then Recommendations[1] else nil
+			LoggerModule:debug("Response: {}", SerializeTableModule(p1.Body))
 			
-			if var4 == nil then
-				if p3 then
-					p3(squadLuckyRecommendationErrorModule.NoRecommendations)
+			if Recommendation == nil then
+				if Callback then
+					Callback(SquadLuckyRecommendationErrorModule.NoRecommendations)
 					
 					return
 				end
-			elseif p2 then
-				p2({
-					universeId = var4.universeId,
-					rootPlaceId = var4.rootPlaceId,
-					universeName = var4.universeName
+			elseif Callback1 then
+				Callback1({
+					universeId = Recommendation.universeId,
+					rootPlaceId = Recommendation.rootPlaceId,
+					universeName = Recommendation.universeName
 				})
 				
 				return
@@ -56,9 +56,9 @@ return function(p1, p2, p3)
 		end
 	end)
 	
-	return function()
-		-- upvalues: var2 (write), var1 (ref)
-		var2 = true
-		var1:Cancel()
+	return function() --[[ Line: 84 ]]
+		-- upvalues: Flag (ref), RequestInternalResult (copy)
+		Flag = true
+		RequestInternalResult:Cancel()
 	end
 end

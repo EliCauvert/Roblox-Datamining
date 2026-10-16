@@ -1,126 +1,127 @@
-﻿local starterGuiService = game:GetService("StarterGui")
-local coreGuiCommon = script:FindFirstAncestor("CoreGuiCommon")
-local parent = coreGuiCommon.Parent
-local constantsModule = require(coreGuiCommon.Constants)
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local robloxAppHooksModule = require(parent.RobloxAppHooks)
-local robloxAppEnumsModule = require(parent.RobloxAppEnums)
-local signalsModule = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local getLocalHumanoidStore = require(coreGuiCommon.Stores).GetLocalHumanoidStore
-local view = foundationModule.View
-local useDeviceOrientation = robloxAppHooksModule.useDeviceOrientation
-local useTokens = foundationModule.Hooks.useTokens
-local healthBarColors = constantsModule.HealthBarColors
+﻿local StarterGui = game:GetService("StarterGui")
+local CoreGuiCommon = script:FindFirstAncestor("CoreGuiCommon")
+local Parent = CoreGuiCommon.Parent
+local ConstantsModule = require(CoreGuiCommon.Constants)
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local RobloxAppEnumsModule = require(Parent.RobloxAppEnums)
+local SignalsModule = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
+local GetLocalHumanoidStore = require(CoreGuiCommon.Stores).GetLocalHumanoidStore
+local View = FoundationModule.View
+local UseDeviceOrientationFunction = require(Parent.RobloxAppHooks).useDeviceOrientation
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local HealthBarColors = ConstantsModule.HealthBarColors
 
-local function getHealthBarColor(p1)
-	-- upvalues: healthBarColors (ref)
-	if p1 <= healthBarColors.Red.Fraction then
-		return healthBarColors.Red.Color
-	elseif healthBarColors.Green.Fraction <= p1 then
-		return healthBarColors.Green.Color
+local function getHealthBarColor(p1) --[[ Line: 25 ]]
+	-- upvalues: HealthBarColors (copy)
+	if p1 <= HealthBarColors.Red.Fraction then
+		return HealthBarColors.Red.Color
 	end
-	local var1 = Vector3.new(0, 0, 0)
-	local var2 = 0
+	if HealthBarColors.Green.Fraction <= p1 then
+		return HealthBarColors.Green.Color
+	end
+	local Total: vector = vector.create(0, 0, 0)
+	local Total1 = 0
+	local _Vector3 = nil
 	
-	for i, v in healthBarColors do
-		local vector3 = Vector3.new(v.Color.R, v.Color.G, v.Color.B)
-		local var3 = p1 - v.Fraction
+	for _, healthBarColor in HealthBarColors do
+		_Vector3 = Vector3.new(healthBarColor.Color.R, healthBarColor.Color.G, healthBarColor.Color.B)
+		local v1 = p1 - healthBarColor.Fraction
 		
-		if var3 ~= 0 then
-			local var4 = 1 / (var3 * var3)
-			var1 += var4 * vector3
-			var2 += var4
-			continue
+		if v1 == 0 then
+			return Color3.new(_Vector3.X, _Vector3.Y, _Vector3.Z)
 		end
-		return Color3.new(vector3.X, vector3.Y, vector3.Z)
+		local Amount = 1 / (v1 * v1)
+		Total += Amount * _Vector3
+		Total1 += Amount
 	end
-	local var5 = var1 / var2
+	local TotalRatio: vector = Total / Total1
 	
-	return Color3.new(var5.X, var5.Y, var5.Z)
+	return Color3.new(TotalRatio.X, TotalRatio.Y, TotalRatio.Z)
 end
 
-return reactModule.memo(function(p2)
-	-- upvalues: starterGuiService (ref), useTokens (ref), useDeviceOrientation (ref), signalsReactModule (ref), getLocalHumanoidStore (ref), reactModule (ref), constantsModule (ref), signalsModule (ref), view (ref), robloxAppEnumsModule (ref), getHealthBarColor (ref)
-	local mockStarterGui = p2.mockStarterGui or starterGuiService
-	local var6 = useTokens()
-	local var7 = useDeviceOrientation()
-	local var8 = signalsReactModule.useSignalState(getLocalHumanoidStore)
-	local var9, var10 = reactModule.useState(mockStarterGui:GetCoreGuiEnabled(Enum.CoreGuiType.Health))
-	local var11, var12 = reactModule.useBinding(constantsModule.InitialHealth)
-	local var13, var14 = reactModule.useBinding(constantsModule.InitialHealth)
-	local var15, var16 = reactModule.useBinding(false)
-	local var17 = reactModule.joinBindings({ var11, var13, var15 }):map(function(p3)
-		local var18 = p3[1]
-		local var19 = p3[2]
-		local var20 = 1
+return ReactModule.memo(function(p2) --[[ Line: 54 | Named "HealthBar" ]]
+	-- upvalues: StarterGui (copy), UseTokensFunction (copy), UseDeviceOrientationFunction (copy), SignalsReactModule (copy), GetLocalHumanoidStore (copy), ReactModule (copy), ConstantsModule (copy), SignalsModule (copy), View (copy), RobloxAppEnumsModule (copy), getHealthBarColor (copy)
+	local MockStarterGui = p2.mockStarterGui or StarterGui
+	local UseTokensResult = UseTokensFunction()
+	local UseDeviceOrientationResult = UseDeviceOrientationFunction()
+	local UseSignalStateResult = SignalsReactModule.useSignalState(GetLocalHumanoidStore)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(MockStarterGui:GetCoreGuiEnabled(Enum.CoreGuiType.Health))
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(ConstantsModule.InitialHealth)
+	local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(ConstantsModule.InitialHealth)
+	local UseBindingResult3, UseBindingResult2_2 = ReactModule.useBinding(false)
+	local MapResult = ReactModule.joinBindings({ UseBindingResult, UseBindingResult1, UseBindingResult3 }):map(function(Entry): number --[[ Line: 67 ]]
+		local Entry1 = Entry[1]
+		local Entry2: number = Entry[2]
+		local ClampedValue = 1
 		
-		if p3[3] then
-			var20 = 0
+		if Entry[3] then
+			ClampedValue = 0
 			
-			return var20
-		elseif var19 > 0 then
-			var20 = math.clamp(var18 / var19, 0, 1)
+			return ClampedValue
 		end
-		return var20
+		if Entry2 > 0 then
+			ClampedValue = math.clamp(Entry1 / Entry2, 0, 1)
+		end
+		return ClampedValue
 	end)
-	local var18 = reactModule.joinBindings({ var11, var13 }):map(function(p3)
-		return p3[1] < p3[2]
+	local MapResult1 = ReactModule.joinBindings({ UseBindingResult, UseBindingResult1 }):map(function(Entry): boolean --[[ Line: 82 ]]
+		return Entry[1] < Entry[2]
 	end)
-	reactModule.useEffect(function()
-		-- upvalues: signalsModule (copy), var8 (ref), var12 (ref), constantsModule (copy), var14 (ref), var16 (ref), mockStarterGui (ref), var10 (ref)
-		local var19 = signalsModule.createEffect(function(p3)
-			-- upvalues: var8 (copy), var12 (copy), constantsModule (copy), var14 (copy), var16 (copy)
-			local healthValue = var8.getHealthValue(p3)
-			var12(healthValue.health or constantsModule.InitialHealth)
-			var14(healthValue.maxHealth or constantsModule.InitialHealth)
-			var16(healthValue.isDead or false)
+	ReactModule.useEffect(function() --[[ Line: 86 ]]
+		-- upvalues: SignalsModule (upval), UseSignalStateResult (copy), UseBindingResult2 (copy), ConstantsModule (upval), UseBindingResult2_1 (copy), UseBindingResult2_2 (copy), MockStarterGui (copy), UseStateResult2 (copy)
+		local Effect = SignalsModule.createEffect(function(p3) --[[ Line: 87 ]]
+			-- upvalues: UseSignalStateResult (upval), UseBindingResult2 (upval), ConstantsModule (upval), UseBindingResult2_1 (upval), UseBindingResult2_2 (upval)
+			local HealthValue = UseSignalStateResult.getHealthValue(p3)
+			UseBindingResult2(HealthValue.health or ConstantsModule.InitialHealth)
+			UseBindingResult2_1(HealthValue.maxHealth or ConstantsModule.InitialHealth)
+			UseBindingResult2_2(HealthValue.isDead or false)
 		end)
-		local coreGuiChangedSignalConnection = mockStarterGui.CoreGuiChangedSignal:Connect(function(p3, p4)
-			-- upvalues: var10 (copy)
-			if p3 == Enum.CoreGuiType.Health or p3 == Enum.CoreGuiType.All then
-				var10(p4)
+		local CoreGuiChangedSignalConnection = MockStarterGui.CoreGuiChangedSignal:Connect(function(CoreGuiType, Enabled) --[[ Line: 96 ]]
+			-- upvalues: UseStateResult2 (upval)
+			if CoreGuiType == Enum.CoreGuiType.Health or CoreGuiType == Enum.CoreGuiType.All then
+				UseStateResult2(Enabled)
 			end
 		end)
 		
-		return function()
-			-- upvalues: var19 (ref), coreGuiChangedSignalConnection (ref)
-			var19()
-			coreGuiChangedSignalConnection:Disconnect()
+		return function() --[[ Line: 103 ]]
+			-- upvalues: Effect (copy), CoreGuiChangedSignalConnection (copy)
+			Effect()
+			CoreGuiChangedSignalConnection:Disconnect()
 		end
-	end, { var8 })
+	end, { UseSignalStateResult })
 	
-	return if var9 then reactModule.createElement(view, {
+	return if UseStateResult then ReactModule.createElement(View, {
 		tag = "anchor-top-right position-top-right",
 		testId = "health-bar",
-		Visible = var18,
-		Size = UDim2.fromOffset(if var7 == robloxAppEnumsModule.DeviceOrientationMode.Portrait then var6.Size.Size_2000 else var6.Size.Size_3000, var6.Size.Size_400),
+		Visible = MapResult1,
+		Size = UDim2.fromOffset(if UseDeviceOrientationResult == RobloxAppEnumsModule.DeviceOrientationMode.Portrait then UseTokensResult.Size.Size_2000 else UseTokensResult.Size.Size_3000, UseTokensResult.Size.Size_400),
 		LayoutOrder = p2.layoutOrder
 	}, {
-		HealthBar = reactModule.createElement(view, {
+		HealthBar = ReactModule.createElement(View, {
 			tag = "bg-surface-300 radius-medium size-full",
 			backgroundStyle = {
 				Transparency = 0.2,
-				Color3 = var6.Color.Extended.Gray.Gray_700.Color3
+				Color3 = UseTokensResult.Color.Extended.Gray.Gray_700.Color3
 			},
 			stroke = {
 				Transparency = 0.2,
-				Thickness = var6.Stroke.Thicker,
+				Thickness = UseTokensResult.Stroke.Thicker,
 				BorderStrokePosition = Enum.BorderStrokePosition.Outer
 			},
 			Position = UDim2.fromScale(0, 0.5),
 			AnchorPoint = Vector2.new(0, 0.5)
 		}, {
-			Fill = reactModule.createElement(view, {
+			Fill = ReactModule.createElement(View, {
 				tag = "anchor-left-center radius-medium",
 				testId = "health-bar-fill",
-				backgroundStyle = var17:map(function(p3)
-					-- upvalues: getHealthBarColor (copy)
+				backgroundStyle = MapResult:map(function(p3) --[[ Line: 138 ]]
+					-- upvalues: getHealthBarColor (upval)
 					return { Transparency = 0, Color3 = getHealthBarColor(p3) }
 				end),
-				Size = var17:map(function(p3)
-					return UDim2.fromScale(p3, 1)
+				Size = MapResult:map(function(XScale): UDim2 --[[ Line: 144 ]]
+					return UDim2.fromScale(XScale, 1)
 				end)
 			})
 		})

@@ -1,39 +1,44 @@
-﻿local parent = script:FindFirstAncestor("ExpChat").Parent
-local list = require(parent.llama).List
-local var1 = require(parent.ExpChatShared).Logger:new("ExpChat/" .. script.Name)
-local sanitizeForRichTextModule = require(script.Parent.sanitizeForRichText)
-local fFlagEnableClientSummarySystemMessageOnLua = require(parent.SharedFlags).FFlagEnableClientSummarySystemMessageOnLua
+﻿local Parent = script:FindFirstAncestor("ExpChat").Parent
+local List = require(Parent.llama).List
+local NewResult = require(Parent.ExpChatShared).Logger:new("ExpChat/" .. script.Name)
+local SanitizeForRichTextModule = require(script.Parent.sanitizeForRichText)
+local FFlagEnableClientSummarySystemMessageOnLua = require(Parent.SharedFlags).FFlagEnableClientSummarySystemMessageOnLua
 
-return function(p1, p2, p3, p4, p5, p6, p7)
-	-- upvalues: var1 (ref), list (ref), fFlagEnableClientSummarySystemMessageOnLua (ref), sanitizeForRichTextModule (ref)
-	var1:debug("Display system message: {}", p3)
-	local var2 = nil
+return function(p1, p2, Metadata, Translator, TextChannel, p3, Callback) --[[ Line: 12 | Named "displaySystemMessage" ]]
+	-- upvalues: NewResult (copy), List (copy), FFlagEnableClientSummarySystemMessageOnLua (copy), SanitizeForRichTextModule (copy)
+	NewResult:debug("Display system message: {}", Metadata)
+	local Joined = nil
 	
-	if type(p1) ~= "string" then
-		var2 = table.concat(list.map(p1, function(p8)
-			-- upvalues: p4 (ref), p2 (ref)
-			return p4:FormatByKey(p8, p2)
-		end), "\n")
-	elseif p1 ~= "" then
-		local _ = nil
-		local ok, status = pcall(function()
-			-- upvalues: p4 (ref), p1 (ref), p2 (ref)
-			return p4:FormatByKey(p1, p2)
-		end)
-		var2 = if not ok then p6 else status
-	end
-	if p5 and var2 then
-		if fFlagEnableClientSummarySystemMessageOnLua then
-			var2 = sanitizeForRichTextModule(var2)
+	if type(p1) == "string" then
+		if p1 ~= "" then
+			local Success
+			Success, Joined = pcall(function() --[[ Line: 27 ]]
+				-- upvalues: Translator (copy), p1 (copy), p2 (copy)
+				return Translator:FormatByKey(p1, p2)
+			end)
 			
-			if p7 then
-				var2 = p7(var2)
+			if not Success then
+				Joined = p3
 			end
-			p5:DisplaySystemMessage(var2, p3)
+		end
+	else
+		Joined = table.concat(List.map(p1, function(p4) --[[ Line: 38 ]]
+			-- upvalues: Translator (copy), p2 (copy)
+			return Translator:FormatByKey(p4, p2)
+		end), "\n")
+	end
+	if TextChannel and Joined then
+		if FFlagEnableClientSummarySystemMessageOnLua then
+			Joined = SanitizeForRichTextModule(Joined)
+			
+			if Callback then
+				Joined = Callback(Joined)
+			end
+			TextChannel:DisplaySystemMessage(Joined, Metadata)
 			
 			return
 		else
-			p5:DisplaySystemMessage(sanitizeForRichTextModule(var2), p3)
+			TextChannel:DisplaySystemMessage(SanitizeForRichTextModule(Joined), Metadata)
 		end
 	end
 end

@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("LuaIdentityGetPhoneNumber", false)
 
-return function()
+return function() --[[ Line: 3 ]]
 	return game:GetFastFlag("LuaIdentityGetPhoneNumber")
 end

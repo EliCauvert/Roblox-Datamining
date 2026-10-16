@@ -1,1 +1,0 @@
-﻿return game:DefineFastFlag("ConnectionsToFriendsRenameP1_v1", false) and require(script.Parent.FFlagConnectionsToFriendsRename)

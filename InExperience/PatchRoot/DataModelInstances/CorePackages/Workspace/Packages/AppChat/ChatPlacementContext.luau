@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent._Workspace.AppChat.AppChat.Contexts.ChatPlacementContext)
+﻿return (require(script.Parent.Parent._Workspace.AppChat.AppChat.Contexts.ChatPlacementContext))

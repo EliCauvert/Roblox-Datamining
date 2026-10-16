@@ -1,34 +1,34 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local useTokens = foundationModule.Hooks.useTokens
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local var1, _ = require(appChat.Utils.loadFoundationCloudAsset)("pictograms/alert")
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local Alert, _ = require(AppChat.Utils.loadFoundationCloudAsset)("pictograms/alert")
 
-function GameCardError()
-	-- upvalues: useTokens (ref), useLocalization (ref), reactModule (ref), foundationModule (ref), var1 (ref)
-	local var2 = useTokens()
+function GameCardError() --[[ Line: 14 ]]
+	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), FoundationModule (copy), Alert (copy)
+	local UseTokensResult = UseTokensFunction()
 	
-	return reactModule.createElement(foundationModule.View, {
+	return ReactModule.createElement(FoundationModule.View, {
 		tag = "size-full-0 auto-xy bg-action-subtle align-x-center col padding-xxlarge"
 	}, {
-		LoadingFailedImage = reactModule.createElement(foundationModule.Image, {
+		LoadingFailedImage = ReactModule.createElement(FoundationModule.Image, {
 			tag = "size-1600",
-			Image = var1,
-			imageStyle = var2.Color.System.Contrast,
+			Image = Alert,
+			imageStyle = UseTokensResult.Color.System.Contrast,
 			ScaleType = Enum.ScaleType.Fit
 		}),
-		LoadingFailedText = reactModule.createElement(foundationModule.Text, {
+		LoadingFailedText = ReactModule.createElement(FoundationModule.Text, {
 			tag = "auto-xy text-wrap",
 			LayoutOrder = 2,
-			Text = useLocalization({
+			Text = UseLocalizationFunction({
 				contentLoadingFailed = "Feature.Chat.Label.ContentLoadingFailed"
 			}).contentLoadingFailed,
-			textStyle = var2.Color.System.Contrast,
-			fontStyle = var2.Typography.BodyLarge
+			textStyle = UseTokensResult.Color.System.Contrast,
+			fontStyle = UseTokensResult.Typography.BodyLarge
 		})
 	})
 end
 
-return reactModule.memo(GameCardError)
+return ReactModule.memo(GameCardError)

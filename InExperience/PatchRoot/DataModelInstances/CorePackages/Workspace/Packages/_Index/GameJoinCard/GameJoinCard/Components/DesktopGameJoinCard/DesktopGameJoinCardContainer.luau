@@ -1,389 +1,390 @@
-﻿local gameJoinCard = script:FindFirstAncestor("GameJoinCard")
-local parent = gameJoinCard.Parent
-local httpService = game:GetService("HttpService")
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local responsiveModule = require(parent.Responsive)
-local gameDetailModule = require(parent.GameDetail)
-local dataHydrationModule = require(parent.DataHydration)
-local userCtaAction = require(parent.UserCtaCommon).Enums.UserCtaAction
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local socialCommonModule = require(parent.SocialCommon)
-local chatEntryPointNames = socialCommonModule.Enums.ChatEntryPointNames
-local enteredChatFromEntryPoint = socialCommonModule.Actions.EnteredChatFromEntryPoint
-local discoveryAnalyticsModule = require(parent.DiscoveryAnalytics)
-local socialExperienceJoinModule = require(parent.SocialExperienceJoin)
-local gamePlayIntent = discoveryAnalyticsModule.Events.gamePlayIntent
-local gameDetailReferral = discoveryAnalyticsModule.Events.gameDetailReferral
-local peopleListInHomePage = discoveryAnalyticsModule.Constants.Context.PeopleListInHomePage
-local robloxAppEnumsModule = require(parent.RobloxAppEnums)
-local appPage = robloxAppEnumsModule.AppPage
-local notificationType = robloxAppEnumsModule.NotificationType
-local roactServiceTagsModule = require(parent.RoactServiceTags)
-local appEventIngestService = roactServiceTagsModule.AppEventIngestService
-local appSessionService = roactServiceTagsModule.AppSessionService
-local appGuiService = roactServiceTagsModule.AppGuiService
-local setGamePlaySession = require(parent.RobloxAppSessionization).SetGamePlaySession
-local sessionType = require(parent.RobloxAppSessionization).SessionType
-local useRoactService = require(parent.RobloxAppHooks).useRoactService
-local contentProviderService = game:GetService("ContentProvider")
-local desktopGameJoinCardModule = require(script.Parent.DesktopGameJoinCard)
-local gamepadJoinFocusBehaviorModule = require(script.Parent.GamepadJoinFocusBehavior)
-local openGameDetails = gameDetailModule.OpenGameDetails
-local useNavigation = require(parent.Navigation).useNavigation
-local useNavigationFocus = require(parent.Navigation).useNavigationFocus
-local hooks = require(parent.RoactUtils).Hooks
-local dependencyArray = hooks.dependencyArray
-local useDispatch = hooks.RoactRodux.useDispatch
-local getRbxThumb = foundationModule.Utility.getRbxThumb
-local thumbnailType = foundationModule.Enums.ThumbnailType
-local thumbnailSize = foundationModule.Enums.ThumbnailSize
-local useJoinUserInExperience = socialExperienceJoinModule.useJoinUserInExperience
-local usePreferredInput = responsiveModule.usePreferredInput
-local useAppPolicy = require(parent.UniversalAppPolicy).useAppPolicy
-local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-local useAppFocusRoot = focusNavigationUtilsModule.useAppFocusRoot
-local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagEnableConsoleGameJoinCard = sharedFlagsModule.FFlagEnableConsoleGameJoinCard
-local fFlagEnableSplitPane = sharedFlagsModule.FFlagEnableSplitPane
-local fFlagGameJoinCardAnalyticsCardId = sharedFlagsModule.FFlagGameJoinCardAnalyticsCardId
-local fFlagJoinabilityCTARefactor = sharedFlagsModule.FFlagJoinabilityCTARefactor
-local fFlagJoinUserCTAsIxpEnabled = sharedFlagsModule.FFlagJoinUserCTAsIxpEnabled
-local fStringJoinUserCTAsIxpLayer = sharedFlagsModule.FStringJoinUserCTAsIxpLayer
-local var1 = if fFlagJoinUserCTAsIxpEnabled then require(parent.IXPServiceWrapper).IXPServiceWrapper else nil
-local fFlagGameJoinCardChatEntryPointModule = require(gameJoinCard.Flags.FFlagGameJoinCardChatEntryPoint)
-local getPlatformFriendsServiceModule = require(gameJoinCard.Utils.getPlatformFriendsService)
-local analyticsConstantsModule = require(script.Parent.Parent.Parent.Analytics.AnalyticsConstants)
-local gameJoinCardButtonAction = analyticsConstantsModule.GameJoinCardButtonAction
-local gameJoinCardSurface = analyticsConstantsModule.GameJoinCardSurface
-local viewEDPsourceValues = analyticsConstantsModule.viewEDPsourceValues
-local viewProfileSourceValues = analyticsConstantsModule.viewProfileSourceValues
-local useGameJoinCardAnalyticsModule = require(script.Parent.Parent.Parent.Analytics.useGameJoinCardAnalytics)
-local useAgeCheckUpsellAnalyticsModule = require(script.Parent.Parent.Parent.Analytics.useAgeCheckUpsellAnalytics)
-local useAgeCheckCompletionLogger = useAgeCheckUpsellAnalyticsModule.useAgeCheckCompletionLogger
-local useAgeCheckPressLogger = useAgeCheckUpsellAnalyticsModule.useAgeCheckPressLogger
-local actionsModule = require(gameJoinCard.Components.Actions)
-local containsActionModule = require(gameJoinCard.Components.Actions.containsAction)
-local useJoinUserActionsModule = require(gameJoinCard.Hooks.useJoinUserActions)
-local useLogActionsResolveTimeModule = require(gameJoinCard.Telemetry.useLogActionsResolveTime)
-local dataStatus = dataHydrationModule.DataStatus
+﻿local GameJoinCard = script:FindFirstAncestor("GameJoinCard")
+local Parent = GameJoinCard.Parent
+local HttpService = game:GetService("HttpService")
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local ResponsiveModule = require(Parent.Responsive)
+local DataHydrationModule = require(Parent.DataHydration)
+local UserCtaAction = require(Parent.UserCtaCommon).Enums.UserCtaAction
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local SocialCommonModule = require(Parent.SocialCommon)
+local ChatEntryPointNames = SocialCommonModule.Enums.ChatEntryPointNames
+local EnteredChatFromEntryPointFunction = SocialCommonModule.Actions.EnteredChatFromEntryPoint
+local DiscoveryAnalyticsModule = require(Parent.DiscoveryAnalytics)
+local GamePlayIntentFunction = DiscoveryAnalyticsModule.Events.gamePlayIntent
+local GameDetailReferralFunction = DiscoveryAnalyticsModule.Events.gameDetailReferral
+local PeopleListInHomePage = DiscoveryAnalyticsModule.Constants.Context.PeopleListInHomePage
+local RobloxAppEnumsModule = require(Parent.RobloxAppEnums)
+local AppPage = RobloxAppEnumsModule.AppPage
+local NotificationType = RobloxAppEnumsModule.NotificationType
+local RoactServiceTagsModule = require(Parent.RoactServiceTags)
+local AppEventIngestService = RoactServiceTagsModule.AppEventIngestService
+local AppSessionService = RoactServiceTagsModule.AppSessionService
+local AppGuiService = RoactServiceTagsModule.AppGuiService
+local SetGamePlaySessionFunction = require(Parent.RobloxAppSessionization).SetGamePlaySession
+local SessionType = require(Parent.RobloxAppSessionization).SessionType
+local RobloxAppHooksModule = require(Parent.RobloxAppHooks)
+local UseRoactServiceFunction = RobloxAppHooksModule.useRoactService
+local UseDeviceTypeFunction = RobloxAppHooksModule.useDeviceType
+local ContentProvider = game:GetService("ContentProvider")
+local DesktopGameJoinCardModule = require(script.Parent.DesktopGameJoinCard)
+local GamepadJoinFocusBehaviorModule = require(script.Parent.GamepadJoinFocusBehavior)
+local OpenGameDetailsFunction = require(Parent.GameDetail).OpenGameDetails
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local UseNavigationFocusFunction = require(Parent.Navigation).useNavigationFocus
+local Hooks = require(Parent.RoactUtils).Hooks
+local DependencyArrayFunction = Hooks.dependencyArray
+local UseDispatchFunction = Hooks.RoactRodux.useDispatch
+local GetRbxThumbFunction = FoundationModule.Utility.getRbxThumb
+local ThumbnailType = FoundationModule.Enums.ThumbnailType
+local ThumbnailSize = FoundationModule.Enums.ThumbnailSize
+local UseJoinUserInExperienceFunction = require(Parent.SocialExperienceJoin).useJoinUserInExperience
+local UsePreferredInputFunction = ResponsiveModule.usePreferredInput
+local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
+local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
+local UseAppFocusRootFunction = FocusNavigationUtilsModule.useAppFocusRoot
+local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagDesktopGameJoinCardGamepadSupport = SharedFlagsModule.FFlagDesktopGameJoinCardGamepadSupport
+local FFlagEnableSplitPane = SharedFlagsModule.FFlagEnableSplitPane
+local FFlagEnableOnScreenAPIIntegration = SharedFlagsModule.FFlagEnableOnScreenAPIIntegration
+local FFlagGameJoinCardAnalyticsCardId = SharedFlagsModule.FFlagGameJoinCardAnalyticsCardId
+local FFlagJoinabilityCTARefactor = SharedFlagsModule.FFlagJoinabilityCTARefactor
+local FFlagJoinUserCTAsIxpEnabled = SharedFlagsModule.FFlagJoinUserCTAsIxpEnabled
+local FStringJoinUserCTAsIxpLayer = SharedFlagsModule.FStringJoinUserCTAsIxpLayer
+local IXPServiceWrapper = if FFlagJoinUserCTAsIxpEnabled then require(Parent.IXPServiceWrapper).IXPServiceWrapper else nil
+local FFlagGameJoinCardChatEntryPointModule = require(GameJoinCard.Flags.FFlagGameJoinCardChatEntryPoint)
+local UseIsRouteOnScreen = if FFlagEnableOnScreenAPIIntegration then require(Parent.RobloxAppNavigation).useIsRouteOnScreen else nil
+local GetPlatformFriendsServiceModule = require(GameJoinCard.Utils.getPlatformFriendsService)
+local AnalyticsConstantsModule = require(script.Parent.Parent.Parent.Analytics.AnalyticsConstants)
+local GameJoinCardButtonAction = AnalyticsConstantsModule.GameJoinCardButtonAction
+local GameJoinCardSurface = AnalyticsConstantsModule.GameJoinCardSurface
+local ViewEDPsourceValues = AnalyticsConstantsModule.viewEDPsourceValues
+local ViewProfileSourceValues = AnalyticsConstantsModule.viewProfileSourceValues
+local UseGameJoinCardAnalyticsModule = require(script.Parent.Parent.Parent.Analytics.useGameJoinCardAnalytics)
+local UseAgeCheckUpsellAnalyticsModule = require(script.Parent.Parent.Parent.Analytics.useAgeCheckUpsellAnalytics)
+local UseAgeCheckCompletionLoggerFunction = UseAgeCheckUpsellAnalyticsModule.useAgeCheckCompletionLogger
+local UseAgeCheckPressLoggerFunction = UseAgeCheckUpsellAnalyticsModule.useAgeCheckPressLogger
+local ActionsModule = require(GameJoinCard.Components.Actions)
+local ContainsActionModule = require(GameJoinCard.Components.Actions.containsAction)
+local UseJoinUserActionsModule = require(GameJoinCard.Hooks.useJoinUserActions)
+local UseLogActionsResolveTimeModule = require(GameJoinCard.Telemetry.useLogActionsResolveTime)
+local DataStatus = DataHydrationModule.DataStatus
 
-return function(p1)
-	-- upvalues: useDispatch (ref), useNavigation (ref), useNavigationFocus (ref), fFlagGameJoinCardAnalyticsCardId (ref), reactModule (ref), getRbxThumb (ref), thumbnailType (ref), thumbnailSize (ref), contentProviderService (ref), useAgeCheckCompletionLogger (ref), useJoinUserInExperience (ref), useAgeCheckPressLogger (ref), fFlagJoinabilityCTARefactor (ref), useJoinUserActionsModule (ref), useLocalization (ref), actionsModule (ref), useLogActionsResolveTimeModule (ref), gameJoinCardSurface (ref), dataStatus (ref), containsActionModule (ref), userCtaAction (ref), httpService (ref), fFlagJoinUserCTAsIxpEnabled (ref), var1 (ref), fStringJoinUserCTAsIxpLayer (ref), useGameJoinCardAnalyticsModule (ref), dependencyArray (ref), usePreferredInput (ref), responsiveModule (ref), fFlagEnableConsoleGameJoinCard (ref), getPlatformFriendsServiceModule (ref), useAppFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), useRoactService (ref), appEventIngestService (ref), appSessionService (ref), appGuiService (ref), useAppPolicy (ref), gamePlayIntent (ref), peopleListInHomePage (ref), setGamePlaySession (ref), sessionType (ref), gameDetailReferral (ref), openGameDetails (ref), viewEDPsourceValues (ref), gameJoinCardButtonAction (ref), viewProfileSourceValues (ref), fFlagEnableSplitPane (ref), appPage (ref), fFlagGameJoinCardChatEntryPointModule (ref), enteredChatFromEntryPoint (ref), chatEntryPointNames (ref), notificationType (ref), desktopGameJoinCardModule (ref), gamepadJoinFocusBehaviorModule (ref)
-	local var2 = useDispatch()
-	local var3 = useNavigation()
-	local var4 = useNavigationFocus() ~= false
-	local var5 = nil
-	local var6 = nil
+return function(p1) --[[ Line: 117 | Named "DesktopGameJoinCardContainer" ]]
+	-- upvalues: UseDispatchFunction (copy), UseNavigationFunction (copy), FFlagEnableOnScreenAPIIntegration (copy), UseIsRouteOnScreen (copy), UseNavigationFocusFunction (copy), FFlagGameJoinCardAnalyticsCardId (copy), ReactModule (copy), GetRbxThumbFunction (copy), ThumbnailType (copy), ThumbnailSize (copy), ContentProvider (copy), UseAgeCheckCompletionLoggerFunction (copy), UseJoinUserInExperienceFunction (copy), UseAgeCheckPressLoggerFunction (copy), FFlagJoinabilityCTARefactor (copy), UseJoinUserActionsModule (copy), UseLocalizationFunction (copy), ActionsModule (copy), UseLogActionsResolveTimeModule (copy), GameJoinCardSurface (copy), DataStatus (copy), ContainsActionModule (copy), UserCtaAction (copy), HttpService (copy), FFlagJoinUserCTAsIxpEnabled (copy), IXPServiceWrapper (copy), FStringJoinUserCTAsIxpLayer (copy), UseGameJoinCardAnalyticsModule (copy), DependencyArrayFunction (copy), UsePreferredInputFunction (copy), FFlagDesktopGameJoinCardGamepadSupport (copy), UseDeviceTypeFunction (copy), ResponsiveModule (copy), RobloxAppEnumsModule (copy), GetPlatformFriendsServiceModule (copy), UseAppFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), UseRoactServiceFunction (copy), AppEventIngestService (copy), AppSessionService (copy), AppGuiService (copy), UseAppPolicyFunction (copy), GamePlayIntentFunction (copy), PeopleListInHomePage (copy), SetGamePlaySessionFunction (copy), SessionType (copy), GameDetailReferralFunction (copy), OpenGameDetailsFunction (copy), ViewEDPsourceValues (copy), GameJoinCardButtonAction (copy), ViewProfileSourceValues (copy), FFlagEnableSplitPane (copy), AppPage (copy), FFlagGameJoinCardChatEntryPointModule (copy), EnteredChatFromEntryPointFunction (copy), ChatEntryPointNames (copy), NotificationType (copy), DesktopGameJoinCardModule (copy), GamepadJoinFocusBehaviorModule (copy)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseNavigationResult = UseNavigationFunction()
+	local UseIsRouteOnScreenResult = if FFlagEnableOnScreenAPIIntegration then UseIsRouteOnScreen() else UseNavigationFocusFunction() ~= false
+	local v1 = nil
+	local Callback = nil
 	
-	if fFlagGameJoinCardAnalyticsCardId then
-		local var7, var8 = reactModule.useState(nil)
-		var5 = var7
-		var6 = var8
+	if FFlagGameJoinCardAnalyticsCardId then
+		v1, Callback = ReactModule.useState(nil)
 	end
-	local layoutOrder = p1.layoutOrder
-	local playerName = p1.playerName
-	local platformName = p1.platformName
-	local presence = p1.presence
-	local var9 = tostring(presence.universeId)
-	local lastLocation = presence.lastLocation
-	local var10 = reactModule.useMemo(function()
-		-- upvalues: getRbxThumb (copy), thumbnailType (copy), var9 (ref), thumbnailSize (copy)
-		return getRbxThumb(thumbnailType.GameIcon, var9, thumbnailSize.Small)
-	end, { var9 })
-	local var11, var12 = reactModule.useState(Enum.AssetFetchStatus.None)
-	reactModule.useEffect(function()
-		-- upvalues: var12 (ref), contentProviderService (copy), var10 (ref)
-		var12(contentProviderService:GetAssetFetchStatus(var10))
-	end, { var10 })
-	reactModule.useEffect(function()
-		-- upvalues: contentProviderService (copy), var10 (ref), var12 (ref)
-		local var13 = contentProviderService:GetAssetFetchStatusChangedSignal(var10):Connect(var12)
+	local LayoutOrder = p1.layoutOrder
+	local PlayerName = p1.playerName
+	local PlatformName = p1.platformName
+	local Presence = p1.presence
+	local Text = tostring(Presence.universeId)
+	local LastLocation = Presence.lastLocation
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 134 ]]
+		-- upvalues: GetRbxThumbFunction (upval), ThumbnailType (upval), Text (copy), ThumbnailSize (upval)
+		return GetRbxThumbFunction(ThumbnailType.GameIcon, Text, ThumbnailSize.Small)
+	end, { Text })
+	local UseStateResult, UseStateResult2 = ReactModule.useState(Enum.AssetFetchStatus.None)
+	ReactModule.useEffect(function() --[[ Line: 138 ]]
+		-- upvalues: UseStateResult2 (copy), ContentProvider (upval), UseMemoResult (copy)
+		UseStateResult2(ContentProvider:GetAssetFetchStatus(UseMemoResult))
+	end, { UseMemoResult })
+	ReactModule.useEffect(function() --[[ Line: 141 ]]
+		-- upvalues: ContentProvider (upval), UseMemoResult (copy), UseStateResult2 (copy)
+		local Connection = ContentProvider:GetAssetFetchStatusChangedSignal(UseMemoResult):Connect(UseStateResult2)
 		
-		return function()
-			-- upvalues: var13 (ref)
-			var13:Disconnect()
+		return function() --[[ Line: 144 ]]
+			-- upvalues: Connection (copy)
+			Connection:Disconnect()
 		end
-	end, { var10 })
-	local var13 = useJoinUserInExperience(p1.userId, {
+	end, { UseMemoResult })
+	local UseJoinUserInExperienceResult = UseJoinUserInExperienceFunction(p1.userId, {
 		isHomePageCarousel = true,
 		homepageCarouselAbsolutePosition = p1.homepageCarouselAbsolutePosition,
 		presence = p1.presence,
-		onAgeCheckCompletion = useAgeCheckCompletionLogger(var9)
+		onAgeCheckCompletion = UseAgeCheckCompletionLoggerFunction(Text)
 	})
-	local var14 = useAgeCheckPressLogger({
+	local UseAgeCheckPressLoggerResult = UseAgeCheckPressLoggerFunction({
 		userId = p1.userId,
-		universeId = var9,
+		universeId = Text,
 		absolutePosition = p1.homepageCarouselAbsolutePosition,
-		joinGameCardId = if fFlagGameJoinCardAnalyticsCardId then var5 else nil,
-		joinAgeCheckUpsellFlow = var13.joinAgeCheckUpsellFlow
+		joinGameCardId = if FFlagGameJoinCardAnalyticsCardId then v1 else nil,
+		joinAgeCheckUpsellFlow = UseJoinUserInExperienceResult.joinAgeCheckUpsellFlow
 	})
-	local var15 = nil
-	local var16 = nil
-	local var17 = nil
+	local v2 = nil
+	local Ready = nil
+	local Localized = nil
 	
-	if fFlagJoinabilityCTARefactor then
-		local var18, var19 = useJoinUserActionsModule(p1.userId, p1.isOpen == true and var4, `{tostring(presence.userPresenceType)}:{tostring(presence.universeId)}:{tostring(presence.placeId)}:{tostring(presence.rootPlaceId)}:{tostring(var13.ageCheckRequired)}`)
-		var15 = var18
-		var16 = var19
-		var17 = useLocalization(actionsModule.TextKeys)
+	if FFlagJoinabilityCTARefactor then
+		v2, Ready = UseJoinUserActionsModule(p1.userId, p1.isOpen == true and UseIsRouteOnScreenResult, `{tostring(Presence.userPresenceType)}:{tostring(Presence.universeId)}:{tostring(Presence.placeId)}:{tostring(Presence.rootPlaceId)}:{tostring(UseJoinUserInExperienceResult.ageCheckRequired)}`)
+		Localized = UseLocalizationFunction(ActionsModule.TextKeys)
 	end
-	useLogActionsResolveTimeModule(if fFlagJoinabilityCTARefactor then var16 else nil, p1.isOpen == true and var4, gameJoinCardSurface.Desktop)
-	local var20 = if fFlagJoinabilityCTARefactor then var16 == dataStatus.Ready and containsActionModule(var15, userCtaAction.UnlockExperience) else var13.ageCheckRequired == true
-	local var21 = reactModule.useRef(false)
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var4 (ref), var21 (ref), fFlagGameJoinCardAnalyticsCardId (copy), httpService (copy), var6 (write), fFlagJoinUserCTAsIxpEnabled (copy), var1 (copy), fStringJoinUserCTAsIxpLayer (copy), useGameJoinCardAnalyticsModule (copy)
-		local var22 = p1.isOpen == true and var4
+	UseLogActionsResolveTimeModule(if FFlagJoinabilityCTARefactor then Ready else nil, p1.isOpen == true and UseIsRouteOnScreenResult, GameJoinCardSurface.Desktop)
+	local ContainsActionModuleResult = if FFlagJoinabilityCTARefactor then Ready == DataStatus.Ready and ContainsActionModule(v2, UserCtaAction.UnlockExperience) else UseJoinUserInExperienceResult.ageCheckRequired == true
+	local UseRefResult = ReactModule.useRef(false)
+	ReactModule.useEffect(function() --[[ Line: 192 ]]
+		-- upvalues: p1 (copy), UseIsRouteOnScreenResult (copy), UseRefResult (copy), FFlagGameJoinCardAnalyticsCardId (upval), HttpService (upval), Callback (ref), FFlagJoinUserCTAsIxpEnabled (upval), IXPServiceWrapper (upval), FStringJoinUserCTAsIxpLayer (upval), UseGameJoinCardAnalyticsModule (upval)
+		local UseIsRouteOnScreenResult1 = p1.isOpen == true and UseIsRouteOnScreenResult
 		
-		if var22 and not var21.current then
-			local var23 = if fFlagGameJoinCardAnalyticsCardId then httpService:GenerateGUID(false) else nil
+		if UseIsRouteOnScreenResult1 and not UseRefResult.current then
+			local Guid = if FFlagGameJoinCardAnalyticsCardId then HttpService:GenerateGUID(false) else nil
 			
-			if fFlagGameJoinCardAnalyticsCardId then
-				var6(var23)
+			if FFlagGameJoinCardAnalyticsCardId then
+				Callback(Guid)
 			end
-			if fFlagJoinUserCTAsIxpEnabled then
-				var1:LogFlagLinkedUserLayerExposure(fStringJoinUserCTAsIxpLayer)
+			if FFlagJoinUserCTAsIxpEnabled then
+				IXPServiceWrapper:LogFlagLinkedUserLayerExposure(FStringJoinUserCTAsIxpLayer)
 			end
-			local universeId = p1.presence.universeId
-			useGameJoinCardAnalyticsModule.logGameJoinCardPageLoaded({
+			local UniverseId = p1.presence.universeId
+			UseGameJoinCardAnalyticsModule.logGameJoinCardPageLoaded({
 				friendId = p1.userId,
-				universeId = if universeId == nil or tostring(universeId) == "" then nil else tostring(universeId),
+				universeId = if UniverseId == nil or tostring(UniverseId) == "" then nil else tostring(UniverseId),
 				absolutePosition = p1.homepageCarouselAbsolutePosition,
-				joinGameCardId = if fFlagGameJoinCardAnalyticsCardId then var23 else nil
+				joinGameCardId = if FFlagGameJoinCardAnalyticsCardId then Guid else nil
 			})
 		end
-		var21.current = var22
-	end, dependencyArray(p1.isOpen, var4, p1.userId, p1.presence, p1.homepageCarouselAbsolutePosition))
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var4 (ref)
-		if p1.isOpen and not var4 then
+		UseRefResult.current = UseIsRouteOnScreenResult1
+	end, DependencyArrayFunction(p1.isOpen, UseIsRouteOnScreenResult, p1.userId, p1.presence, p1.homepageCarouselAbsolutePosition))
+	ReactModule.useEffect(function() --[[ Line: 224 ]]
+		-- upvalues: p1 (copy), UseIsRouteOnScreenResult (copy)
+		if p1.isOpen and not UseIsRouteOnScreenResult then
 			p1.onClose()
 		end
-	end, dependencyArray(var4, p1))
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var4 (ref), var20 (ref), useGameJoinCardAnalyticsModule (copy), var9 (ref)
-		if p1.isOpen and var4 and var20 then
-			useGameJoinCardAnalyticsModule.logJoinCardAgeCheckUpsellImpression({ universeId = if var9 ~= "" then nil else var9 })
+	end, DependencyArrayFunction(UseIsRouteOnScreenResult, p1))
+	ReactModule.useEffect(function() --[[ Line: 231 ]]
+		-- upvalues: p1 (copy), UseIsRouteOnScreenResult (copy), ContainsActionModuleResult (copy), UseGameJoinCardAnalyticsModule (upval), Text (copy)
+		if p1.isOpen and UseIsRouteOnScreenResult and ContainsActionModuleResult then
+			UseGameJoinCardAnalyticsModule.logJoinCardAgeCheckUpsellImpression({ universeId = if Text == "" then nil else Text })
 			
 			return
 		end
-	end, dependencyArray(p1.isOpen, var4, var20, var9))
-	local var22 = if var9 ~= "" then if lastLocation ~= nil then if lastLocation ~= "" then var11 == Enum.AssetFetchStatus.Loading else true else true else true
-	local var23 = usePreferredInput() == responsiveModule.Input.Directional
-	local var24 = nil
-	
-	if fFlagEnableConsoleGameJoinCard then
-		local platformProfileId = p1.platformProfileId
-		var24 = reactModule.useCallback(function()
-			-- upvalues: getPlatformFriendsServiceModule (copy), platformProfileId (ref)
-			if getPlatformFriendsServiceModule == nil or platformProfileId == nil or platformProfileId == "" then
-				return
-			end
-			getPlatformFriendsServiceModule:ShowProfile(platformProfileId)
-		end, { platformProfileId })
-	end
-	local v
-	local var25 = if fFlagEnableConsoleGameJoinCard then useAppFocusRoot({
+	end, DependencyArrayFunction(p1.isOpen, UseIsRouteOnScreenResult, ContainsActionModuleResult, Text))
+	local IsTextMatch: boolean = Text == "" or (LastLocation == nil or (LastLocation == "" or UseStateResult == Enum.AssetFetchStatus.Loading))
+	local UseDeviceTypeResult = if FFlagDesktopGameJoinCardGamepadSupport then UseDeviceTypeFunction() else nil
+	local Inverted: boolean = UsePreferredInputFunction() == ResponsiveModule.Input.Directional and not (FFlagDesktopGameJoinCardGamepadSupport and UseDeviceTypeResult == RobloxAppEnumsModule.DeviceType.Desktop)
+	local PlatformProfileId = p1.platformProfileId
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 254 ]]
+		-- upvalues: GetPlatformFriendsServiceModule (upval), PlatformProfileId (copy)
+		if GetPlatformFriendsServiceModule ~= nil and PlatformProfileId ~= nil and PlatformProfileId ~= "" then
+			GetPlatformFriendsServiceModule:ShowProfile(PlatformProfileId)
+			
+			return
+		end
+	end, { PlatformProfileId })
+	local UseAppFocusRootResult = UseAppFocusRootFunction({
 		isAutoFocusRoot = false,
-		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.PopUp,
-		isFocusable = p1.isFocused == true and var4
-	}) else nil
-	local var26 = reactModule.useRef(nil)
-	local var27 = reactModule.useCallback(function(p2)
-		-- upvalues: fFlagEnableConsoleGameJoinCard (copy), var26 (ref), var25 (ref), p1 (ref)
-		if not fFlagEnableConsoleGameJoinCard then return end
-		var26.current = p2
+		surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.PopUp,
+		isFocusable = p1.isFocused == true and UseIsRouteOnScreenResult
+	})
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local Inverted1 = not (FFlagDesktopGameJoinCardGamepadSupport and not Inverted)
+	local UseResult1 = ReactModule.useCallback(function(Current) --[[ Line: 270 ]]
+		-- upvalues: UseRefResult1 (copy), UseAppFocusRootResult (copy), Inverted1 (copy), p1 (copy)
+		UseRefResult1.current = Current
 		
-		if var25 then
-			var25(p2)
+		if UseAppFocusRootResult and Inverted1 then
+			UseAppFocusRootResult(Current)
 		end
 		if p1.onCardGuiObjectChanged then
-			p1.onCardGuiObjectChanged(p2)
+			p1.onCardGuiObjectChanged(Current)
 		end
-	end, { var25, p1.onCardGuiObjectChanged })
-	local var28 = useRoactService(appEventIngestService)
-	local var29 = useRoactService(appSessionService)
-	local var30 = useRoactService(appGuiService)
-	local var31 = useAppPolicy(function(p2)
+	end, {
+		UseAppFocusRootResult,
+		p1.onCardGuiObjectChanged,
+		Inverted1
+	})
+	local UseRoactServiceResult = UseRoactServiceFunction(AppEventIngestService)
+	local UseRoactServiceResult1 = UseRoactServiceFunction(AppSessionService)
+	local UseRoactServiceResult2 = UseRoactServiceFunction(AppGuiService)
+	local UseAppPolicyResult = UseAppPolicyFunction(function(p2) --[[ Line: 284 ]]
 		return p2.getCanUsePlatformChat()
 	end)
-	local var32 = nil
-	local var33 = false
+	local v3 = nil
+	local IsNotReadyMatch = false
 	
-	if fFlagJoinabilityCTARefactor then
-		var33 = var16 == dataStatus.NotReady
-		local t = {}
+	if FFlagJoinabilityCTARefactor then
+		IsNotReadyMatch = Ready == DataStatus.NotReady
+		local List = {}
 		
-		if var16 == dataStatus.Ready and var17 ~= nil then
-			for i, v in actionsModule.resolveJoinCardActions(var15, {
-				localized = var17,
+		if Ready == DataStatus.Ready and Localized ~= nil then
+			for _, value in ActionsModule.resolveJoinCardActions(v2, {
+				localized = Localized,
 				userId = p1.userId,
 				telemetry = {
-					universeId = if var9 ~= "" then nil else var9,
+					universeId = if Text == "" then nil else Text,
 					absolutePosition = p1.homepageCarouselAbsolutePosition,
-					joinGameCardId = if fFlagGameJoinCardAnalyticsCardId then var5 else nil
+					joinGameCardId = if FFlagGameJoinCardAnalyticsCardId then v1 else nil
 				},
 				presence = {
-					placeId = if presence.placeId ~= nil then nil else tostring(presence.placeId),
-					rootPlaceId = if presence.rootPlaceId ~= nil then nil else tostring(presence.rootPlaceId)
+					placeId = if Presence.placeId == nil then nil else tostring(Presence.placeId),
+					rootPlaceId = if Presence.rootPlaceId == nil then nil else tostring(Presence.rootPlaceId)
 				},
 				experience = {
-					isLoading = var22,
-					isInExperience = var13.isInExperience,
-					joinExperience = var13.joinExperience,
-					playExperience = var13.playExperience
+					isLoading = IsTextMatch,
+					isInExperience = UseJoinUserInExperienceResult.isInExperience,
+					joinExperience = UseJoinUserInExperienceResult.joinExperience,
+					playExperience = UseJoinUserInExperienceResult.playExperience
 				},
-				eventIngest = var28,
-				dispatch = var2,
-				guiService = var30,
-				navigation = var3,
-				joinAgeCheckUpsellFlow = var13.joinAgeCheckUpsellFlow
+				eventIngest = UseRoactServiceResult,
+				dispatch = UseDispatchResult,
+				guiService = UseRoactServiceResult2,
+				navigation = UseNavigationResult,
+				joinAgeCheckUpsellFlow = UseJoinUserInExperienceResult.joinAgeCheckUpsellFlow
 			}) do
-				if v.id ~= userCtaAction.Chat or var31 then
-					table.insert(t, v)
+				if value.id ~= UserCtaAction.Chat or UseAppPolicyResult then
+					table.insert(List, value)
 				end
 			end
 		end
-		var32 = t
+		v3 = List
 	end
-	local var34 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref), presence (ref), gamePlayIntent (copy), var28 (ref), peopleListInHomePage (copy), httpService (copy)
-		local userId = p1.userId
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 327 ]]
+		-- upvalues: p1 (copy), Presence (copy), GamePlayIntentFunction (upval), UseRoactServiceResult (copy), PeopleListInHomePage (upval), HttpService (upval)
+		local UserId = p1.userId
 		
-		if userId == "" then return end
-		local var35 = if presence.placeId == nil or tostring(presence.placeId) == "" then "" else tostring(presence.placeId)
-		local var36 = tonumber(presence.rootPlaceId)
+		if UserId == "" then return end
+		local Text: string = if Presence.placeId == nil or tostring(Presence.placeId) == "" then "" else tostring(Presence.placeId)
+		local Number: number? = tonumber(Presence.rootPlaceId)
 		
-		if var35 == "" or var36 == nil then
+		if Text ~= "" and Number ~= nil then
+			GamePlayIntentFunction(UseRoactServiceResult, PeopleListInHomePage, {
+				placeId = Text,
+				rootPlaceId = Number,
+				friendId = UserId,
+				joinAttemptId = HttpService:GenerateGUID(false)
+			})
+			
 			return
 		end
-		gamePlayIntent(var28, peopleListInHomePage, {
-			placeId = var35,
-			rootPlaceId = var36,
-			friendId = userId,
-			joinAttemptId = httpService:GenerateGUID(false)
-		})
-	end, dependencyArray(p1.userId, presence))
-	local var35 = reactModule.useCallback(function()
-		-- upvalues: var9 (ref), presence (ref), p1 (ref), var29 (ref), setGamePlaySession (copy), sessionType (copy), gameDetailReferral (copy), var28 (ref), var2 (ref), openGameDetails (copy), var3 (ref)
-		if var9 == "" then return end
-		local rootPlaceId = presence.rootPlaceId
-		local var36 = if rootPlaceId == nil or tostring(rootPlaceId) == "" then var9 else tostring(rootPlaceId)
-		local homepageCarouselAbsolutePosition = p1.homepageCarouselAbsolutePosition or 0
+	end, DependencyArrayFunction(p1.userId, Presence))
+	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 348 ]]
+		-- upvalues: Text (copy), Presence (copy), p1 (copy), UseRoactServiceResult1 (copy), SetGamePlaySessionFunction (upval), SessionType (upval), GameDetailReferralFunction (upval), UseRoactServiceResult (copy), UseDispatchResult (copy), OpenGameDetailsFunction (upval), UseNavigationResult (copy)
+		if Text == "" then return end
+		local RootPlaceId = Presence.rootPlaceId
+		local Text1 = if RootPlaceId == nil or tostring(RootPlaceId) == "" then Text else tostring(RootPlaceId)
+		local HomepageCarouselAbsolutePosition = p1.homepageCarouselAbsolutePosition or 0
 		
-		if var29 then
-			setGamePlaySession(var29, sessionType.StructuralIdentifier.GameDetailSource, false)
+		if UseRoactServiceResult1 then
+			SetGamePlaySessionFunction(UseRoactServiceResult1, SessionType.StructuralIdentifier.GameDetailSource, false)
 		end
-		gameDetailReferral(var28, "home", {
+		GameDetailReferralFunction(UseRoactServiceResult, "home", {
 			ad = "no",
 			pg = "home",
 			rowOnPage = 1,
 			tis = 1,
 			friendId = p1.userId,
-			pid = var36,
-			pos = homepageCarouselAbsolutePosition,
+			pid = Text1,
+			pos = HomepageCarouselAbsolutePosition,
 			sortPos = p1.layoutOrder,
-			universeId = var9
+			universeId = Text
 		})
-		var2(openGameDetails(var9, var3))
-	end, dependencyArray(var2, var3, var9, presence, p1.homepageCarouselAbsolutePosition, p1.layoutOrder, p1.userId))
-	local var36 = reactModule.useCallback(function(p2)
-		-- upvalues: var9 (ref), p1 (ref), fFlagGameJoinCardAnalyticsCardId (copy), var5 (write), viewEDPsourceValues (copy), useGameJoinCardAnalyticsModule (copy), gameJoinCardButtonAction (copy), var35 (ref)
-		if var9 == "" then return end
+		UseDispatchResult(OpenGameDetailsFunction(Text, UseNavigationResult))
+	end, DependencyArrayFunction(UseDispatchResult, UseNavigationResult, Text, Presence, p1.homepageCarouselAbsolutePosition, p1.layoutOrder, p1.userId))
+	local UseResult4 = ReactModule.useCallback(function(Thumbnail) --[[ Line: 385 ]]
+		-- upvalues: Text (copy), p1 (copy), FFlagGameJoinCardAnalyticsCardId (upval), v1 (ref), ViewEDPsourceValues (upval), UseGameJoinCardAnalyticsModule (upval), GameJoinCardButtonAction (upval), UseResult3 (copy)
+		if Text == "" then return end
 		if p1.userId ~= "" then
-			local t = {
+			local config = {
 				friendId = p1.userId,
-				universeId = if var9 ~= "" then nil else var9,
+				universeId = if Text == "" then nil else Text,
 				absolutePosition = p1.homepageCarouselAbsolutePosition,
-				joinGameCardId = if fFlagGameJoinCardAnalyticsCardId then var5 else nil
+				joinGameCardId = if FFlagGameJoinCardAnalyticsCardId then v1 else nil
 			}
 			
-			if p2 == viewEDPsourceValues.Thumbnail then
-				useGameJoinCardAnalyticsModule.logGameJoinCardButtonEvent(gameJoinCardButtonAction.ViewExperienceDetailsFromThumbnail, t)
-			elseif p2 == viewEDPsourceValues.Title then
-				useGameJoinCardAnalyticsModule.logGameJoinCardButtonEvent(gameJoinCardButtonAction.ViewExperienceDetailsFromTitle, t)
+			if Thumbnail == ViewEDPsourceValues.Thumbnail then
+				UseGameJoinCardAnalyticsModule.logGameJoinCardButtonEvent(GameJoinCardButtonAction.ViewExperienceDetailsFromThumbnail, config)
+			elseif Thumbnail == ViewEDPsourceValues.Title then
+				UseGameJoinCardAnalyticsModule.logGameJoinCardButtonEvent(GameJoinCardButtonAction.ViewExperienceDetailsFromTitle, config)
 			end
 		end
-		var35()
-	end, dependencyArray(var35, var9, p1.userId, p1.homepageCarouselAbsolutePosition, var5))
-	local var37 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref), useGameJoinCardAnalyticsModule (copy), gameJoinCardButtonAction (copy), var9 (ref), fFlagGameJoinCardAnalyticsCardId (copy), var5 (write), var34 (ref), var13 (ref)
+		UseResult3()
+	end, DependencyArrayFunction(UseResult3, Text, p1.userId, p1.homepageCarouselAbsolutePosition, v1))
+	local UseResult5 = ReactModule.useCallback(function() --[[ Line: 420 ]]
+		-- upvalues: p1 (copy), UseGameJoinCardAnalyticsModule (upval), GameJoinCardButtonAction (upval), Text (copy), FFlagGameJoinCardAnalyticsCardId (upval), v1 (ref), UseResult2 (copy), UseJoinUserInExperienceResult (copy)
 		if p1.userId ~= "" then
-			useGameJoinCardAnalyticsModule.logGameJoinCardButtonEvent(gameJoinCardButtonAction.JoinGame, {
+			UseGameJoinCardAnalyticsModule.logGameJoinCardButtonEvent(GameJoinCardButtonAction.JoinGame, {
 				friendId = p1.userId,
-				universeId = if var9 ~= "" then nil else var9,
+				universeId = if Text == "" then nil else Text,
 				absolutePosition = p1.homepageCarouselAbsolutePosition,
-				joinGameCardId = if fFlagGameJoinCardAnalyticsCardId then var5 else nil
+				joinGameCardId = if FFlagGameJoinCardAnalyticsCardId then v1 else nil
 			})
 		end
-		var34()
-		var13.joinExperience()
+		UseResult2()
+		UseJoinUserInExperienceResult.joinExperience()
 		p1.onClose()
-	end, dependencyArray(var34, var13.joinExperience, p1.userId, var9, p1.homepageCarouselAbsolutePosition, p1.onClose, var5))
-	v = reactModule.createElement
-	v = v(desktopGameJoinCardModule, {
-		layoutOrder = layoutOrder,
-		playerName = playerName,
-		experienceName = lastLocation,
-		gameIconUrl = var10,
-		isLoading = var22,
-		onJoin = var37,
-		onViewExperienceDetails = var36,
-		anchorRef = p1.anchorRef,
-		isOpen = p1.isOpen and var4,
-		onClose = p1.onClose,
-		isConsole = var23,
-		consolePlatformLabel = platformName,
-		focusRootRef = if fFlagEnableConsoleGameJoinCard then var27 else nil,
-		ageCheckRequired = var13.ageCheckRequired,
-		onAgeCheckPressed = var14,
-		onPlatformProfilePressed = if fFlagEnableConsoleGameJoinCard and var23 then var24 else nil,
-		onChat = if var23 or not var31 then nil else reactModule.useCallback(function()
-			-- upvalues: p1 (ref), useGameJoinCardAnalyticsModule (copy), gameJoinCardButtonAction (copy), var9 (ref), fFlagGameJoinCardAnalyticsCardId (copy), var5 (write), fFlagGameJoinCardChatEntryPointModule (copy), var2 (ref), enteredChatFromEntryPoint (copy), chatEntryPointNames (copy), var30 (ref), notificationType (copy)
-			if p1.userId == "" then return end
-			useGameJoinCardAnalyticsModule.logGameJoinCardButtonEvent(gameJoinCardButtonAction.Chat, {
+	end, DependencyArrayFunction(UseResult2, UseJoinUserInExperienceResult.joinExperience, p1.userId, Text, p1.homepageCarouselAbsolutePosition, p1.onClose, v1))
+	local UseResult6 = ReactModule.useCallback(function(UserTile) --[[ Line: 445 ]]
+		-- upvalues: p1 (copy), Text (copy), FFlagGameJoinCardAnalyticsCardId (upval), v1 (ref), ViewProfileSourceValues (upval), UseGameJoinCardAnalyticsModule (upval), GameJoinCardButtonAction (upval), FFlagEnableSplitPane (upval), UseNavigationResult (copy), AppPage (upval)
+		if p1.userId ~= "" then
+			local config = {
 				friendId = p1.userId,
-				universeId = if var9 ~= "" then nil else var9,
+				universeId = if Text == "" then nil else Text,
 				absolutePosition = p1.homepageCarouselAbsolutePosition,
-				joinGameCardId = if fFlagGameJoinCardAnalyticsCardId then var5 else nil
-			})
+				joinGameCardId = if FFlagGameJoinCardAnalyticsCardId then v1 else nil
+			}
 			
-			if fFlagGameJoinCardChatEntryPointModule then
-				var2(enteredChatFromEntryPoint(chatEntryPointNames.GameJoinCard))
+			if UserTile == ViewProfileSourceValues.UserTile then
+				UseGameJoinCardAnalyticsModule.logGameJoinCardButtonEvent(GameJoinCardButtonAction.OpenProfileFromUserTile, config)
+			elseif UserTile == ViewProfileSourceValues.ViewProfileButton then
+				UseGameJoinCardAnalyticsModule.logGameJoinCardButtonEvent(GameJoinCardButtonAction.OpenProfileFromViewProfile, config)
 			end
-			var30:BroadcastNotification(p1.userId, notificationType.LAUNCH_CONVERSATION)
-			p1.onClose()
-		end, dependencyArray(p1.userId, var9, p1.homepageCarouselAbsolutePosition, var30, p1.onClose, var5, var2)),
-		onViewProfile = if not var23 then reactModule.useCallback(function(p2)
-			-- upvalues: p1 (ref), var9 (ref), fFlagGameJoinCardAnalyticsCardId (copy), var5 (write), viewProfileSourceValues (copy), useGameJoinCardAnalyticsModule (copy), gameJoinCardButtonAction (copy), fFlagEnableSplitPane (copy), var3 (ref), appPage (copy)
-			if p1.userId ~= "" then
-				local t = {
-					friendId = p1.userId,
-					universeId = if var9 ~= "" then nil else var9,
-					absolutePosition = p1.homepageCarouselAbsolutePosition,
-					joinGameCardId = if fFlagGameJoinCardAnalyticsCardId then var5 else nil
-				}
-				
-				if p2 == viewProfileSourceValues.UserTile then
-					useGameJoinCardAnalyticsModule.logGameJoinCardButtonEvent(gameJoinCardButtonAction.OpenProfileFromUserTile, t)
-				elseif p2 == viewProfileSourceValues.ViewProfileButton then
-					useGameJoinCardAnalyticsModule.logGameJoinCardButtonEvent(gameJoinCardButtonAction.OpenProfileFromViewProfile, t)
-				end
-			end;
-			(if fFlagEnableSplitPane then var3.push else var3.navigate)(appPage.ProfilePlatform, { detail = p1.userId })
-			p1.onClose()
-		end, dependencyArray(var3, p1.userId, var9, p1.homepageCarouselAbsolutePosition, p1.onClose, var5)) else nil,
-		actions = if fFlagJoinabilityCTARefactor then var32 else {},
-		areActionsLoading = if fFlagJoinabilityCTARefactor then var33 else nil
+		end;
+		(if FFlagEnableSplitPane then UseNavigationResult.push else UseNavigationResult.navigate)(AppPage.ProfilePlatform, { detail = p1.userId })
+		p1.onClose()
+	end, DependencyArrayFunction(UseNavigationResult, p1.userId, Text, p1.homepageCarouselAbsolutePosition, p1.onClose, v1))
+	local UseResult7 = ReactModule.useCallback(function() --[[ Line: 482 ]]
+		-- upvalues: p1 (copy), UseGameJoinCardAnalyticsModule (upval), GameJoinCardButtonAction (upval), Text (copy), FFlagGameJoinCardAnalyticsCardId (upval), v1 (ref), FFlagGameJoinCardChatEntryPointModule (upval), UseDispatchResult (copy), EnteredChatFromEntryPointFunction (upval), ChatEntryPointNames (upval), UseRoactServiceResult2 (copy), NotificationType (upval)
+		if p1.userId == "" then return end
+		UseGameJoinCardAnalyticsModule.logGameJoinCardButtonEvent(GameJoinCardButtonAction.Chat, {
+			friendId = p1.userId,
+			universeId = if Text == "" then nil else Text,
+			absolutePosition = p1.homepageCarouselAbsolutePosition,
+			joinGameCardId = if FFlagGameJoinCardAnalyticsCardId then v1 else nil
+		})
+		
+		if FFlagGameJoinCardChatEntryPointModule then
+			UseDispatchResult(EnteredChatFromEntryPointFunction(ChatEntryPointNames.GameJoinCard))
+		end
+		UseRoactServiceResult2:BroadcastNotification(p1.userId, NotificationType.LAUNCH_CONVERSATION)
+		p1.onClose()
+	end, DependencyArrayFunction(p1.userId, Text, p1.homepageCarouselAbsolutePosition, UseRoactServiceResult2, p1.onClose, v1, UseDispatchResult))
+	local Element = ReactModule.createElement(DesktopGameJoinCardModule, {
+		layoutOrder = LayoutOrder,
+		playerName = PlayerName,
+		experienceName = LastLocation,
+		gameIconUrl = UseMemoResult,
+		isLoading = IsTextMatch,
+		onJoin = UseResult5,
+		onViewExperienceDetails = UseResult4,
+		anchorRef = p1.anchorRef,
+		isOpen = p1.isOpen and UseIsRouteOnScreenResult,
+		onClose = p1.onClose,
+		isConsole = Inverted,
+		consolePlatformLabel = PlatformName,
+		focusRootRef = UseResult1,
+		ageCheckRequired = UseJoinUserInExperienceResult.ageCheckRequired,
+		onAgeCheckPressed = UseAgeCheckPressLoggerResult,
+		onPlatformProfilePressed = if Inverted then UseResult else nil,
+		onChat = if Inverted or not UseAppPolicyResult then nil else UseResult7,
+		onViewProfile = if Inverted then nil else UseResult6,
+		actions = if FFlagJoinabilityCTARefactor then v3 else {},
+		areActionsLoading = if FFlagJoinabilityCTARefactor then IsNotReadyMatch else nil
 	})
 	
-	return if p1.showGamepadJoinFocus then reactModule.createElement(reactModule.Fragment, nil, {
-		GamepadJoinFocus = reactModule.createElement(gamepadJoinFocusBehaviorModule, {
+	return if p1.showGamepadJoinFocus then ReactModule.createElement(ReactModule.Fragment, nil, {
+		GamepadJoinFocus = ReactModule.createElement(GamepadJoinFocusBehaviorModule, {
 			tileRef = p1.anchorRef,
-			cardRef = if fFlagEnableConsoleGameJoinCard then var26 else nil,
-			joinExperience = var37
+			cardRef = UseRefResult1,
+			joinExperience = UseResult5
 		}),
-		Card = v
-	}) else v
+		Card = Element
+	}) else Element
 end

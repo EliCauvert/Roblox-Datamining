@@ -1,81 +1,81 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local robloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
-local guiService = game:GetService("GuiService")
-local runService = game:GetService("RunService")
-local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
-local playersService = game:GetService("Players")
-local sharedFlagsModule = require(corePackagesService.Workspace.Packages.SharedFlags)
-local fFlagEnableGameLeftMessage = sharedFlagsModule.FFlagEnableGameLeftMessage
-local fFlagSurvBloxEventTypeEnabled = sharedFlagsModule.FFlagSurvBloxEventTypeEnabled
-local rbxAnalyticsServiceExposePlaySessionIdEngineFeature = game:GetEngineFeature("RbxAnalyticsServiceExposePlaySessionId")
-local isExitModalRemovedModule = require(robloxGui.Modules.Settings.Flags.isExitModalRemoved)
-local fFlagVoiceVolumeControlsEnableVoiceVolumeImpressionsTelemetry = require(corePackagesService.Workspace.Packages.VoiceChatCore).Flags.GetFFlagVoiceVolumeControlsEnableVoiceVolumeImpressionsTelemetry()
-local perfUtilsModule = require(robloxGui.Modules.Common.PerfUtils)
-local cryoModule = require(corePackagesService.Packages.Cryo)
-local messageBus = require(corePackagesService.Workspace.Packages.MessageBus).MessageBus
-local surveyEventPublisherModule = require(corePackagesService.Workspace.Packages.OnPlatformSurveys.SurveyEventPublisher)
-local webViewEventTypeModule = require(corePackagesService.Workspace.Packages.OnPlatformSurveys.WebViewEventType)
-local var1 = require(script:FindFirstAncestor("Settings").Analytics.CoreGuiFinalStateAnalytics).new()
-robloxGui:WaitForChild("Modules"):WaitForChild("TenFootInterface")
-local getFFlagEnableInGameMenuDurationLoggerModule = require(robloxGui.Modules.Common.Flags.GetFFlagEnableInGameMenuDurationLogger)
-local fFlagLeaveActionChromeShortcutTelemetryModule = require(robloxGui.Modules.Chrome.Flags.FFlagLeaveActionChromeShortcutTelemetry)
-local getDefaultQualityLevel = require(corePackagesService.Workspace.Packages.AppCommonLib).GetDefaultQualityLevel
-local constantsModule = require(robloxGui.Modules:WaitForChild("InGameMenu"):WaitForChild("Resources"):WaitForChild("Constants"))
-local reactSchedulingTrackerModule = require(robloxGui.Modules.Common.ReactSchedulingTracker)
-local var2 = if fFlagVoiceVolumeControlsEnableVoiceVolumeImpressionsTelemetry then require(robloxGui.Modules.VoiceChat.VoiceChatServiceManager).default else nil
+﻿local CorePackages = game:GetService("CorePackages")
+local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
+local GuiService = game:GetService("GuiService")
+local RunService = game:GetService("RunService")
+local RbxAnalyticsService = game:GetService("RbxAnalyticsService")
+local Players = game:GetService("Players")
+local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
+local FFlagEnableGameLeftMessage = SharedFlagsModule.FFlagEnableGameLeftMessage
+local FFlagSurvBloxEventTypeEnabled = SharedFlagsModule.FFlagSurvBloxEventTypeEnabled
+local RbxAnalyticsServiceExposePlaySessionIdEngineFeature = game:GetEngineFeature("RbxAnalyticsServiceExposePlaySessionId")
+local IsExitModalRemovedModule = require(RobloxGui.Modules.Settings.Flags.isExitModalRemoved)
+local FFlagVoiceVolumeControlsEnableVoiceVolumeImpressionsTelemetry = require(CorePackages.Workspace.Packages.VoiceChatCore).Flags.GetFFlagVoiceVolumeControlsEnableVoiceVolumeImpressionsTelemetry()
+local PerfUtilsModule = require(RobloxGui.Modules.Common.PerfUtils)
+local CryoModule = require(CorePackages.Packages.Cryo)
+local MessageBus = require(CorePackages.Workspace.Packages.MessageBus).MessageBus
+local SurveyEventPublisherModule = require(CorePackages.Workspace.Packages.OnPlatformSurveys.SurveyEventPublisher)
+local WebViewEventTypeModule = require(CorePackages.Workspace.Packages.OnPlatformSurveys.WebViewEventType)
+local NewResult = require(script:FindFirstAncestor("Settings").Analytics.CoreGuiFinalStateAnalytics).new()
+RobloxGui:WaitForChild("Modules"):WaitForChild("TenFootInterface")
+local GetFFlagEnableInGameMenuDurationLoggerModule = require(RobloxGui.Modules.Common.Flags.GetFFlagEnableInGameMenuDurationLogger)
+local FFlagLeaveActionChromeShortcutTelemetryModule = require(RobloxGui.Modules.Chrome.Flags.FFlagLeaveActionChromeShortcutTelemetry)
+local GetDefaultQualityLevelFunction = require(CorePackages.Workspace.Packages.AppCommonLib).GetDefaultQualityLevel
+local ConstantsModule = require(RobloxGui.Modules:WaitForChild("InGameMenu"):WaitForChild("Resources"):WaitForChild("Constants"))
+local ReactSchedulingTrackerModule = require(RobloxGui.Modules.Common.ReactSchedulingTracker)
+local Default = if FFlagVoiceVolumeControlsEnableVoiceVolumeImpressionsTelemetry then require(RobloxGui.Modules.VoiceChat.VoiceChatServiceManager).default else nil
 
-return function(p1, p2)
-	-- upvalues: fFlagEnableGameLeftMessage (ref), messageBus (ref), constantsModule (ref), getFFlagEnableInGameMenuDurationLoggerModule (ref), perfUtilsModule (ref), reactSchedulingTrackerModule (ref), corePackagesService (ref), guiService (ref), rbxAnalyticsServiceExposePlaySessionIdEngineFeature (ref), rbxAnalyticsService (ref), fFlagLeaveActionChromeShortcutTelemetryModule (ref), cryoModule (ref), fFlagSurvBloxEventTypeEnabled (ref), surveyEventPublisherModule (ref), webViewEventTypeModule (ref), playersService (ref), var1 (ref), fFlagVoiceVolumeControlsEnableVoiceVolumeImpressionsTelemetry (ref), var2 (ref), runService (ref), isExitModalRemovedModule (ref), getDefaultQualityLevel (ref)
-	if fFlagEnableGameLeftMessage and (not p2 or not p2.inhibitAppRating) then
-		messageBus.publish(constantsModule.OnAppRatingPromptEventDescriptor, { gameTime = game:getGameTime() })
+return function(p1, p2) --[[ Line: 52 ]]
+	-- upvalues: FFlagEnableGameLeftMessage (copy), MessageBus (copy), ConstantsModule (copy), GetFFlagEnableInGameMenuDurationLoggerModule (copy), PerfUtilsModule (copy), ReactSchedulingTrackerModule (copy), CorePackages (copy), GuiService (copy), RbxAnalyticsServiceExposePlaySessionIdEngineFeature (copy), RbxAnalyticsService (copy), FFlagLeaveActionChromeShortcutTelemetryModule (copy), CryoModule (copy), FFlagSurvBloxEventTypeEnabled (copy), SurveyEventPublisherModule (copy), WebViewEventTypeModule (copy), Players (copy), NewResult (copy), FFlagVoiceVolumeControlsEnableVoiceVolumeImpressionsTelemetry (copy), Default (copy), RunService (copy), IsExitModalRemovedModule (copy), GetDefaultQualityLevelFunction (copy)
+	if FFlagEnableGameLeftMessage and (not p2 or not p2.inhibitAppRating) then
+		MessageBus.publish(ConstantsModule.OnAppRatingPromptEventDescriptor, { gameTime = game:getGameTime() })
 	end
-	if getFFlagEnableInGameMenuDurationLoggerModule() then
-		perfUtilsModule.leavingGame()
+	if GetFFlagEnableInGameMenuDurationLoggerModule() then
+		PerfUtilsModule.leavingGame()
 	end
-	reactSchedulingTrackerModule:reportSession()
-	local var3 = require(corePackagesService.Workspace.Packages.Memory).MemoryTracker()
+	ReactSchedulingTrackerModule:reportSession()
+	local MemoryTrackerResult = require(CorePackages.Workspace.Packages.Memory).MemoryTracker()
 	
-	if var3 then
-		var3:destroy()
+	if MemoryTrackerResult then
+		MemoryTrackerResult:destroy()
 	end
-	guiService.SelectedCoreObject = nil
-	local t = {
-		confirmed = constantsModule.AnalyticsConfirmedName,
+	GuiService.SelectedCoreObject = nil
+	local JoinResult = {
+		confirmed = ConstantsModule.AnalyticsConfirmedName,
 		universeid = tostring(game.GameId),
-		source = constantsModule.AnalyticsLeaveGameSource,
-		playsessionid = if rbxAnalyticsServiceExposePlaySessionIdEngineFeature then rbxAnalyticsService:GetPlaySessionId() else ""
+		source = ConstantsModule.AnalyticsLeaveGameSource,
+		playsessionid = if RbxAnalyticsServiceExposePlaySessionIdEngineFeature then RbxAnalyticsService:GetPlaySessionId() else ""
 	}
 	
-	if fFlagLeaveActionChromeShortcutTelemetryModule and p2 and p2.telemetryFields then
-		t = cryoModule.Dictionary.join(t, p2.telemetryFields)
+	if FFlagLeaveActionChromeShortcutTelemetryModule and p2 and p2.telemetryFields then
+		JoinResult = CryoModule.Dictionary.join(JoinResult, p2.telemetryFields)
 	end
-	rbxAnalyticsService:SetRBXEventStream(constantsModule.AnalyticsTargetName, if p2 and p2.telemetryContext then p2.telemetryContext else constantsModule.AnalyticsInGameMenuName, constantsModule.AnalyticsLeaveGameName, t)
+	RbxAnalyticsService:SetRBXEventStream(ConstantsModule.AnalyticsTargetName, if p2 and p2.telemetryContext then p2.telemetryContext else ConstantsModule.AnalyticsInGameMenuName, ConstantsModule.AnalyticsLeaveGameName, JoinResult)
 	
 	if p1 then
-		if fFlagSurvBloxEventTypeEnabled then
-			surveyEventPublisherModule.publishSurveyEvent(webViewEventTypeModule.LeaveButtonClick)
+		if FFlagSurvBloxEventTypeEnabled then
+			SurveyEventPublisherModule.publishSurveyEvent(WebViewEventTypeModule.LeaveButtonClick)
 		else
-			messageBus.publish(constantsModule.OnSurveyEventDescriptor, {
-				eventType = constantsModule.SurveyEventType,
-				userId = tostring(playersService.LocalPlayer.UserId),
+			MessageBus.publish(ConstantsModule.OnSurveyEventDescriptor, {
+				eventType = ConstantsModule.SurveyEventType,
+				userId = tostring(Players.LocalPlayer.UserId),
 				customProps = { chromeSeenCount = tostring(0) }
 			})
 		end
 	end
-	var1:sendCoreGuiFinalAnalytic()
+	NewResult:sendCoreGuiFinalAnalytic()
 	
-	if fFlagVoiceVolumeControlsEnableVoiceVolumeImpressionsTelemetry then
-		var2:ReportVoiceVolumeImpressionsIfNeeded()
+	if FFlagVoiceVolumeControlsEnableVoiceVolumeImpressionsTelemetry then
+		Default:ReportVoiceVolumeImpressionsIfNeeded()
 	end
-	runService.RenderStepped:wait()
-	runService.RenderStepped:wait()
+	RunService.RenderStepped:wait()
+	RunService.RenderStepped:wait()
 	
-	if not isExitModalRemovedModule or not p2 or not p2.shouldNativeExit then
+	if not IsExitModalRemovedModule or not p2 or not p2.shouldNativeExit then
 		game:Shutdown()
 	end
-	settings().Rendering.QualityLevel = getDefaultQualityLevel()
+	settings().Rendering.QualityLevel = GetDefaultQualityLevelFunction()
 	
-	if isExitModalRemovedModule and p2 and p2.shouldNativeExit then
-		guiService:BroadcastNotification("", guiService:GetNotificationTypeList().NATIVE_EXIT)
+	if IsExitModalRemovedModule and p2 and p2.shouldNativeExit then
+		GuiService:BroadcastNotification("", GuiService:GetNotificationTypeList().NATIVE_EXIT)
 	end
 end

@@ -1,95 +1,97 @@
-﻿local appPageShell = script:FindFirstAncestor("AppPageShell")
-local parent = appPageShell.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local responsiveModule = require(parent.Responsive)
-local _ = require(appPageShell.PageTypes)
-local computeStickyOffsetModule = require(appPageShell.computeStickyOffset)
-local view = foundationModule.View
-local useDeviceInsets = responsiveModule.useDeviceInsets
-local useTokens = foundationModule.Hooks.useTokens
-local fFlagSduiFeedScrollBarFixes = require(parent.SharedFlags).FFlagSduiFeedScrollBarFixes
+﻿local AppPageShell = script:FindFirstAncestor("AppPageShell")
+local Parent = AppPageShell.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local _ = require(AppPageShell.PageTypes)
+local ComputeStickyOffsetModule = require(AppPageShell.computeStickyOffset)
+local View = FoundationModule.View
+local UseDeviceInsetsFunction = require(Parent.Responsive).useDeviceInsets
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local FFlagSduiFeedScrollBarFixes = require(Parent.SharedFlags).FFlagSduiFeedScrollBarFixes
 
-return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), fFlagSduiFeedScrollBarFixes (ref), useDeviceInsets (ref), computeStickyOffsetModule (ref), view (ref)
-	local topPadding = p1.topPadding
-	local backgroundStyle = p1.backgroundStyle
-	local slots = p1.slots
-	local chromeHeight = p1.chromeHeight or 0
-	local liveChromeHeightBinding = p1.liveChromeHeightBinding
-	local var1 = useTokens()
-	local var2, var3 = reactModule.useBinding(0)
-	local var4 = nil
+return ReactModule.memo(function(p1) --[[ Line: 34 | Named "PageStickyHeader" ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), FFlagSduiFeedScrollBarFixes (copy), UseDeviceInsetsFunction (copy), ComputeStickyOffsetModule (copy), View (copy)
+	local TopPadding: number = p1.topPadding
+	local BackgroundStyle = p1.backgroundStyle
+	local Slots = p1.slots
+	local ChromeHeight = p1.chromeHeight or 0
+	local LiveChromeHeightBinding = p1.liveChromeHeightBinding
+	local UseTokensResult = UseTokensFunction()
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
+	local UseMemoResult = nil
 	
-	if not fFlagSduiFeedScrollBarFixes then
-		local top = useDeviceInsets().top
-		var4 = reactModule.useMemo(function()
-			-- upvalues: liveChromeHeightBinding (ref), chromeHeight (ref), computeStickyOffsetModule (copy), top (ref)
-			return if liveChromeHeightBinding == nil or chromeHeight <= 0 then UDim2.fromOffset(0, 0) else liveChromeHeightBinding:map(function(p2)
-				-- upvalues: computeStickyOffsetModule (copy), chromeHeight (copy), top (copy)
-				return UDim2.fromOffset(0, computeStickyOffsetModule(p2, chromeHeight, top))
+	if not FFlagSduiFeedScrollBarFixes then
+		local Top = UseDeviceInsetsFunction().top
+		UseMemoResult = ReactModule.useMemo(function() --[[ Line: 49 ]]
+			-- upvalues: LiveChromeHeightBinding (copy), ChromeHeight (copy), ComputeStickyOffsetModule (upval), Top (copy)
+			return if LiveChromeHeightBinding == nil or ChromeHeight <= 0 then UDim2.fromOffset(0, 0) else LiveChromeHeightBinding:map(function(p2): UDim2 --[[ Line: 53 ]]
+				-- upvalues: ComputeStickyOffsetModule (upval), ChromeHeight (upval), Top (upval)
+				return UDim2.fromOffset(0, ComputeStickyOffsetModule(p2, ChromeHeight, Top))
 			end)
-		end, { liveChromeHeightBinding, chromeHeight, top })
+		end, { LiveChromeHeightBinding, ChromeHeight, Top })
 	end
-	local var5 = reactModule.useMemo(function()
-		-- upvalues: slots (ref)
-		if slots == nil or next(slots) == nil then
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 62 ]]
+		-- upvalues: UseBindingResult (copy), ChromeHeight (copy)
+		return UseBindingResult:map(function(p2): UDim2 --[[ Line: 63 ]]
+			-- upvalues: ChromeHeight (upval)
+			return UDim2.new(1, 0, 0, p2 + ChromeHeight)
+		end)
+	end, { UseBindingResult, ChromeHeight })
+	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 68 ]]
+		-- upvalues: Slots (copy)
+		if Slots == nil or next(Slots) == nil then
 			return nil
 		end
 		local t = {}
 		
-		for i, v in slots do
-			t[`Sticky{i}`] = v
+		for i, slot in Slots do
+			t[`Sticky{i}`] = slot
 		end
 		return t
-	end, { slots })
+	end, { Slots })
+	local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 79 ]]
+		-- upvalues: UseBindingResult (copy)
+		return UseBindingResult:map(function(YOffset): UDim2 --[[ Line: 80 ]]
+			return UDim2.new(1, 0, 0, YOffset)
+		end)
+	end, { UseBindingResult })
+	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 85 ]]
+		-- upvalues: UseBindingResult2 (copy)
+		UseBindingResult2(Frame.AbsoluteSize.Y)
+	end, {})
 	
-	return if var5 == nil then nil else reactModule.createElement(view, {
+	return if UseMemoResult2 == nil then nil else ReactModule.createElement(View, {
 		LayoutOrder = 1,
 		ZIndex = 2,
 		ClipsDescendants = false,
-		Size = reactModule.useMemo(function()
-			-- upvalues: var2 (ref)
-			return var2:map(function(p2)
-				return UDim2.new(1, 0, 0, p2)
-			end)
-		end, { var2 })
+		Size = UseMemoResult3
 	}, {
-		Translation = reactModule.createElement("Frame", {
+		Translation = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
-			Position = if fFlagSduiFeedScrollBarFixes then nil else var4,
+			Position = if FFlagSduiFeedScrollBarFixes then nil else UseMemoResult,
 			Size = UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y,
 			ClipsDescendants = false,
-			[reactModule.Change.AbsoluteSize] = reactModule.useCallback(function(p2)
-				-- upvalues: var3 (ref)
-				var3(p2.AbsoluteSize.Y)
-			end, {})
+			[ReactModule.Change.AbsoluteSize] = UseResult
 		}, {
-			Background = reactModule.createElement("Frame", {
+			Background = ReactModule.createElement("Frame", {
 				BorderSizePixel = 0,
 				ZIndex = 0,
 				AnchorPoint = Vector2.new(0, 1),
 				Position = UDim2.new(0, 0, 1, 0),
-				Size = reactModule.useMemo(function()
-					-- upvalues: var2 (ref), chromeHeight (ref)
-					return var2:map(function(p2)
-						-- upvalues: chromeHeight (copy)
-						return UDim2.new(1, 0, 0, p2 + chromeHeight)
-					end)
-				end, { var2, chromeHeight }),
-				BackgroundColor3 = if backgroundStyle then backgroundStyle.Color3 else var1.Color.Surface.Surface_0.Color3,
-				BackgroundTransparency = if backgroundStyle and backgroundStyle.Transparency ~= nil then backgroundStyle.Transparency else 0
+				Size = UseMemoResult1,
+				BackgroundColor3 = if BackgroundStyle then BackgroundStyle.Color3 else UseTokensResult.Color.Surface.Surface_0.Color3,
+				BackgroundTransparency = if BackgroundStyle and BackgroundStyle.Transparency ~= nil then BackgroundStyle.Transparency else 0
 			}),
-			Content = reactModule.createElement(view, { tag = `col size-full-0 auto-y {p1.tag or ""}` }, {
-				TopSpacer = if topPadding and topPadding > 0 then reactModule.createElement("Frame", {
+			Content = ReactModule.createElement(View, { tag = `col size-full-0 auto-y {p1.tag or ""}` }, {
+				TopSpacer = if TopPadding and TopPadding > 0 then ReactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					BorderSizePixel = 0,
 					LayoutOrder = 1,
-					Size = UDim2.new(1, 0, 0, topPadding)
+					Size = UDim2.new(1, 0, 0, TopPadding)
 				}) else nil,
-				Body = reactModule.createElement(view, { tag = "col size-full-0 auto-y", LayoutOrder = 2 }, var5)
+				Body = ReactModule.createElement(View, { tag = "col size-full-0 auto-y", LayoutOrder = 2 }, UseMemoResult2)
 			})
 		})
 	})

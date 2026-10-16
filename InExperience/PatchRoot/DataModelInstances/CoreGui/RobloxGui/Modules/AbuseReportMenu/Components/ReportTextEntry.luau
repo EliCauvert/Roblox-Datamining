@@ -1,45 +1,45 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local reactModule = require(corePackagesService.Packages.React)
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local foundationModule = require(corePackagesService.Packages.Foundation)
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local useStyle = UIBloxModule.Core.Style.useStyle
+﻿local CorePackages = game:GetService("CorePackages")
+local ReactModule = require(CorePackages.Packages.React)
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local UseStyleFunction = require(CorePackages.Packages.UIBlox).Core.Style.useStyle
 
-return function(p1)
-	-- upvalues: useStyle (ref), reactModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
-	local var1 = useStyle()
-	local theme = var1.Theme
+return function(p1) --[[ Line: 14 | Named "ReportTextEntry" ]]
+	-- upvalues: UseStyleFunction (copy), ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	local UseStyleResult = UseStyleFunction()
+	local BodyFont = UseStyleResult.Font.Body.Font
+	local Theme = UseStyleResult.Theme
 	
-	return reactModule.createElement("Frame", {
-		Size = UDim2.new(1, 0, 0, 40 + var1.Tokens.Size.Size_600 + 20),
-		BackgroundTransparency = var1.Theme.BackgroundDefault.Transparency,
-		BackgroundColor3 = var1.Theme.BackgroundUIDefault.Color,
+	return ReactModule.createElement("Frame", {
+		Size = UDim2.new(1, 0, 0, 40 + UseStyleResult.Tokens.Size.Size_600 + 20),
+		BackgroundTransparency = UseStyleResult.Theme.BackgroundDefault.Transparency,
+		BackgroundColor3 = UseStyleResult.Theme.BackgroundUIDefault.Color,
 		AutomaticSize = Enum.AutomaticSize.Y
 	}, {
-		UIPadding = reactModule.createElement("UIPadding", {
+		UIPadding = ReactModule.createElement("UIPadding", {
 			PaddingLeft = UDim.new(0, 10),
 			PaddingRight = UDim.new(0, 10),
 			PaddingTop = UDim.new(0, 10),
 			PaddingBottom = UDim.new(0, 10)
 		}),
-		UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) }),
-		AbuseReportsText = reactModule.createElement("TextBox", {
-			Size = UDim2.new(1, 0, 0, 40 + var1.Tokens.Size.Size_600),
+		UICorner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) }),
+		AbuseReportsText = ReactModule.createElement("TextBox", {
+			Size = UDim2.new(1, 0, 0, 40 + UseStyleResult.Tokens.Size.Size_600),
 			AutomaticSize = Enum.AutomaticSize.Y,
 			Position = UDim2.new(0, 0, 0, 0),
 			AnchorPoint = Vector2.new(0, 0),
-			BackgroundColor3 = theme.BackgroundUIDefault.Color,
+			BackgroundColor3 = Theme.BackgroundUIDefault.Color,
 			PlaceholderText = p1.placeholderText,
-			Font = if foundationFontFaceMigration then nil else var1.Font.Body.Font,
-			FontFace = if foundationFontFaceMigration then normalizeFontFace(var1.Tokens.Typography.BodyLarge.Font) else nil,
+			Font = if FoundationFontFaceMigration then nil else BodyFont,
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font) else nil,
 			Text = p1.text,
-			TextSize = var1.Tokens.FontSize.FontSize_400,
-			TextColor3 = theme.TextDefault.Color,
-			TextTransparency = theme.TextDefault.Transparency,
+			TextSize = UseStyleResult.Tokens.FontSize.FontSize_400,
+			TextColor3 = Theme.TextDefault.Color,
+			TextTransparency = Theme.TextDefault.Transparency,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextYAlignment = Enum.TextYAlignment.Top,
-			BackgroundTransparency = theme.BackgroundDefault.Transparency,
+			BackgroundTransparency = Theme.BackgroundDefault.Transparency,
 			BorderSizePixel = 0,
 			LayoutOrder = 1,
 			RichText = false,
@@ -47,11 +47,11 @@ return function(p1)
 			TextWrapped = true,
 			ClearTextOnFocus = false,
 			OverlayNativeInput = true,
-			[reactModule.Event.FocusLost] = function() end,
-			[reactModule.Event.Focused] = function() end,
-			[reactModule.Change.AbsoluteSize] = function() end,
-			[reactModule.Change.Text] = function(p2)
-				-- upvalues: p1 (ref)
+			[ReactModule.Event.FocusLost] = function() --[[ Line: 60 ]] end,
+			[ReactModule.Event.Focused] = function() --[[ Line: 61 ]] end,
+			[ReactModule.Change.AbsoluteSize] = function() --[[ Line: 62 ]] end,
+			[ReactModule.Change.Text] = function(p2) --[[ Line: 63 ]]
+				-- upvalues: p1 (copy)
 				if p1.text ~= p2.Text then
 					p1.onUpdate(p2.Text)
 				end

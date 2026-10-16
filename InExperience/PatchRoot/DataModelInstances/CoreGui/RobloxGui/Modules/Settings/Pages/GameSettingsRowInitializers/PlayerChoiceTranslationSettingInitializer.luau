@@ -1,23 +1,20 @@
-﻿local localizationService = game:GetService("LocalizationService")
-local utilityModule = require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.Settings.Utility)
-local localization = require(game:GetService("CorePackages").Workspace.Packages.InExperienceLocales).Localization
-local t = { [1] = "On", [2] = "Off" }
+﻿local LocalizationService = game:GetService("LocalizationService")
+local UtilityModule = require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.Settings.Utility)
+local Localization = require(game:GetService("CorePackages").Workspace.Packages.InExperienceLocales).Localization
+local config = { [1] = "On", [2] = "Off" }
 
-return function(p1, p2, p3)
-	-- upvalues: localization (ref), localizationService (ref), utilityModule (ref), t (ref)
-	local var1 = localization.new(localizationService.RobloxLocaleId)
-	local var2 = if localizationService:GetIsLoadingInternalTranslations() then 1 else 2
-	local var3, var4, var5 = utilityModule:AddNewRow(p1, var1:Format("Translation.PlayerChoiceSettings.GameSettings.PlayerChoiceSettingLabel"), "Selector", t, var2, nil, var1:Format("Translation.PlayerChoiceSettings.GameSettings.PlayerChoiceSettingDescription"))
-	p1.PlayerChoiceTranslationFrame = var3
-	p1.PlayerChoiceSettingLabel = var4
-	p1.PlayerChoiceSettingMode = var5
+return function(p1, p2, Callback) --[[ Line: 19 ]]
+	-- upvalues: Localization (copy), LocalizationService (copy), UtilityModule (copy), config (copy)
+	local NewLocalization = Localization.new(LocalizationService.RobloxLocaleId)
+	local v1: number = if LocalizationService:GetIsLoadingInternalTranslations() then 1 else 2
+	p1.PlayerChoiceTranslationFrame, p1.PlayerChoiceSettingLabel, p1.PlayerChoiceSettingMode = UtilityModule:AddNewRow(p1, NewLocalization:Format("Translation.PlayerChoiceSettings.GameSettings.PlayerChoiceSettingLabel"), "Selector", config, v1, nil, (NewLocalization:Format("Translation.PlayerChoiceSettings.GameSettings.PlayerChoiceSettingDescription")))
 	p1.PlayerChoiceTranslationFrame.LayoutOrder = p2.PlayerChoiceTranslationFrame
-	p1.PlayerChoiceSettingMode.IndexChanged:connect(function(p4)
-		-- upvalues: var2 (ref), localizationService (copy), p3 (ref)
-		local var6 = p4 == 1
-		local var7 = var2 == 1
-		localizationService:IsLoadingInternalTranslationsSettingChanged(var6)
-		p3("player_choice_translation", var7, var6)
+	p1.PlayerChoiceSettingMode.IndexChanged:connect(function(p3) --[[ Line: 38 ]]
+		-- upvalues: v1 (copy), LocalizationService (upval), Callback (copy)
+		local NewIsLoadingInternalTranslations = p3 == 1
+		local v2 = v1 == 1
+		LocalizationService:IsLoadingInternalTranslationsSettingChanged(NewIsLoadingInternalTranslations)
+		Callback("player_choice_translation", v2, NewIsLoadingInternalTranslations)
 	end)
 	
 	return p1.PlayerChoiceTranslationFrame, p1.PlayerChoiceSettingLabel, p1.PlayerChoiceSettingMode

@@ -1,97 +1,91 @@
-﻿local avatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
-local parent = avatarExperienceInspectAndBuy.Parent
-local _ = require(parent.AXCommon)
-local _ = require(avatarExperienceInspectAndBuy.Types)
-local priceStatusModule = require(avatarExperienceInspectAndBuy.Enums.PriceStatus)
-local getPriceStatusModule = require(avatarExperienceInspectAndBuy.Utils.getPriceStatus)
-local _ = require(avatarExperienceInspectAndBuy.Utils.getPriceLineContent)
-local getPriceInRobux = require(avatarExperienceInspectAndBuy.Utils.itemDetailsUtils).getPriceInRobux
-local getPriceStatusInShopModule = require(avatarExperienceInspectAndBuy.Utils.getPriceStatusInShop)
-local isPurchasableItem = require(avatarExperienceInspectAndBuy.Utils.bulkPurchaseUtils).isPurchasableItem
-local fFlagAXIaBEnableShopContext = require(parent.AvatarExperienceFlags).FFlagAXIaBEnableShopContext
-local fIntBlackbirdUpsellMinPriceForDiscountInclusive = require(parent.SharedFlags).FIntBlackbirdUpsellMinPriceForDiscountInclusive
-local fIntBlackbirdUpsellMaxPriceForDiscountInclusive = require(parent.SharedFlags).FIntBlackbirdUpsellMaxPriceForDiscountInclusive
-local t = { isShopContext = true }
+﻿local AvatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
+local Parent = AvatarExperienceInspectAndBuy.Parent
+local _ = require(Parent.AXCommon)
+local _ = require(AvatarExperienceInspectAndBuy.Types)
+local PriceStatusModule = require(AvatarExperienceInspectAndBuy.Enums.PriceStatus)
+local GetPriceStatusModule = require(AvatarExperienceInspectAndBuy.Utils.getPriceStatus)
+local _ = require(AvatarExperienceInspectAndBuy.Utils.getPriceLineContent)
+local GetPriceInRobuxFunction = require(AvatarExperienceInspectAndBuy.Utils.itemDetailsUtils).getPriceInRobux
+local GetPriceStatusInShopModule = require(AvatarExperienceInspectAndBuy.Utils.getPriceStatusInShop)
+local IsPurchasableItemFunction = require(AvatarExperienceInspectAndBuy.Utils.bulkPurchaseUtils).isPurchasableItem
+local FFlagAXIaBEnableShopContext = require(Parent.AvatarExperienceFlags).FFlagAXIaBEnableShopContext
+local FIntBlackbirdUpsellMinPriceForDiscountInclusive = require(Parent.SharedFlags).FIntBlackbirdUpsellMinPriceForDiscountInclusive
+local FIntBlackbirdUpsellMaxPriceForDiscountInclusive = require(Parent.SharedFlags).FIntBlackbirdUpsellMaxPriceForDiscountInclusive
+local config = { isShopContext = true }
 
-local function _(p1, p2)
-	-- upvalues: priceStatusModule (ref)
-	if p2 ~= priceStatusModule.PurchaseFromRoblox then
+local function _(p1, PurchaseFromRoblox) --[[ Line: 52 | Named "getDiscount" ]]
+	-- upvalues: PriceStatusModule (copy)
+	if PurchaseFromRoblox == PriceStatusModule.PurchaseFromRoblox then
+		local DiscountInformation = p1.discountInformation
+		
+		return if DiscountInformation and DiscountInformation.totalDiscountAmount and DiscountInformation.totalDiscountAmount > 0 then DiscountInformation else nil
+	else
 		return nil
 	end
-	local discountInformation = p1.discountInformation
+end
+
+local _ = function(p1): boolean --[[ Line: 68 | Named "isDiscountEligible" ]]
+	-- upvalues: FIntBlackbirdUpsellMaxPriceForDiscountInclusive (copy), FIntBlackbirdUpsellMinPriceForDiscountInclusive (copy)
+	return p1 ~= nil and (FIntBlackbirdUpsellMinPriceForDiscountInclusive < p1.originalPrice and (FIntBlackbirdUpsellMaxPriceForDiscountInclusive == 0 or p1.originalPrice < FIntBlackbirdUpsellMaxPriceForDiscountInclusive))
+end
+
+local _ = function(p1, p2) --[[ Line: 77 | Named "classifyPriceStatus" ]]
+	-- upvalues: FFlagAXIaBEnableShopContext (copy), GetPriceStatusInShopModule (copy), GetPriceStatusModule (copy)
+	return if FFlagAXIaBEnableShopContext and p2.isShopContext then GetPriceStatusInShopModule(p1) else GetPriceStatusModule(p1, true)
+end
+
+return function(List, p1) --[[ Line: 85 | Named "getTryOnItemsTotalPrice" ]]
+	-- upvalues: config (copy), FFlagAXIaBEnableShopContext (copy), GetPriceStatusInShopModule (copy), GetPriceStatusModule (copy), IsPurchasableItemFunction (copy), PriceStatusModule (copy), GetPriceInRobuxFunction (copy), FIntBlackbirdUpsellMaxPriceForDiscountInclusive (copy), FIntBlackbirdUpsellMinPriceForDiscountInclusive (copy)
+	local P6 = p1 or config
+	local TotalPrice = 0
+	local OriginalPrice = 0
+	local ItemCount = 0
+	local Flag = false
+	local Flag1 = false
 	
-	return if discountInformation and discountInformation.totalDiscountAmount and discountInformation.totalDiscountAmount > 0 then discountInformation else nil
-end
-
-local _ = function(p1)
-	-- upvalues: fIntBlackbirdUpsellMaxPriceForDiscountInclusive (ref), fIntBlackbirdUpsellMinPriceForDiscountInclusive (ref)
-	return if p1 == nil then false else fIntBlackbirdUpsellMinPriceForDiscountInclusive < p1.originalPrice and (if fIntBlackbirdUpsellMaxPriceForDiscountInclusive ~= 0 then p1.originalPrice < fIntBlackbirdUpsellMaxPriceForDiscountInclusive else true)
-end
-
-local _ = function(p1, p2)
-	-- upvalues: fFlagAXIaBEnableShopContext (ref), getPriceStatusInShopModule (ref), getPriceStatusModule (ref)
-	return if fFlagAXIaBEnableShopContext and p2.isShopContext then getPriceStatusInShopModule(p1) else getPriceStatusModule(p1, true)
-end
-
-return function(p1, p2)
-	-- upvalues: t (ref), fFlagAXIaBEnableShopContext (ref), getPriceStatusInShopModule (ref), getPriceStatusModule (ref), isPurchasableItem (ref), priceStatusModule (ref), getPriceInRobux (ref), fIntBlackbirdUpsellMaxPriceForDiscountInclusive (ref), fIntBlackbirdUpsellMinPriceForDiscountInclusive (ref)
-	p2 = p2 or t
-	local var1 = 0
-	local var2 = 0
-	local var3 = 0
-	local var4 = false
-	local var5 = false
-	
-	for i, v in p1 do
-		if v.isEquipped then
-			local itemData = v.itemData
-			local var6 = if fFlagAXIaBEnableShopContext and p2.isShopContext then getPriceStatusInShopModule(itemData) else getPriceStatusModule(itemData, true)
+	for _, value in List do
+		if value.isEquipped then
+			local ItemData = value.itemData
+			local PriceStatusInShopModule = if FFlagAXIaBEnableShopContext and P6.isShopContext then GetPriceStatusInShopModule(ItemData) else GetPriceStatusModule(ItemData, true)
 			
-			if isPurchasableItem(var6) then
-				local itemData_1, var7
-				local _ = nil
-				
-				if var6 == priceStatusModule.Free then
-					itemData_1 = getPriceInRobux(v.itemData, var6) or 0
+			if IsPurchasableItemFunction(PriceStatusInShopModule) then
+				local PriceInRobux = nil
+				if PriceStatusInShopModule == PriceStatusModule.Free then
+					PriceInRobux = GetPriceInRobuxFunction(value.itemData, PriceStatusInShopModule) or 0
 				else
-					var7 = getPriceInRobux(v.itemData, var6)
+					local PriceInRobux1 = GetPriceInRobuxFunction(value.itemData, PriceStatusInShopModule)
 					
-					if var7 ~= nil then
-						itemData_1 = var7
+					if PriceInRobux1 ~= nil then
+						PriceInRobux = PriceInRobux1
+					else
+						continue
 					end
 				end
-				local discountInformation
-				local itemData_2 = v.itemData
+				local ItemData1 = value.itemData
+				local v1 = nil
 				
-				if var6 == priceStatusModule.PurchaseFromRoblox then
-					discountInformation = itemData_2.discountInformation
-					var7 = if discountInformation and discountInformation.totalDiscountAmount and discountInformation.totalDiscountAmount > 0 then discountInformation else nil
+				if PriceStatusInShopModule == PriceStatusModule.PurchaseFromRoblox then
+					local DiscountInformation = ItemData1.discountInformation
+					v1 = if DiscountInformation and DiscountInformation.totalDiscountAmount and DiscountInformation.totalDiscountAmount > 0 then DiscountInformation else nil
 				else
-					var7 = nil
+					v1 = nil
 				end
-				local var8
-				var1 += itemData_1
-				var2 += if var7 then var7.originalPrice else itemData_1
+				TotalPrice += PriceInRobux
+				OriginalPrice += if v1 then v1.originalPrice else PriceInRobux
 				
-				if var7 == nil then
-					var8 = false
+				if v1 ~= nil and (FIntBlackbirdUpsellMinPriceForDiscountInclusive < v1.originalPrice and (FIntBlackbirdUpsellMaxPriceForDiscountInclusive == 0 or FIntBlackbirdUpsellMaxPriceForDiscountInclusive > v1.originalPrice)) then
+					Flag = true
 				else
-					discountInformation = fIntBlackbirdUpsellMaxPriceForDiscountInclusive
-					var8 = fIntBlackbirdUpsellMinPriceForDiscountInclusive < var7.originalPrice and (if discountInformation ~= 0 then var7.originalPrice < discountInformation else true)
+					Flag1 = true
 				end
-				if var8 then
-					var4 = true
-				else
-					var5 = true
-				end
-				var3 += 1
+				ItemCount += 1
 			end
 		end
 	end
 	return {
-		totalPrice = var1,
-		originalPrice = var2,
-		itemCount = var3,
-		hasNonDiscountedItems = var4 and var5
+		totalPrice = TotalPrice,
+		originalPrice = OriginalPrice,
+		itemCount = ItemCount,
+		hasNonDiscountedItems = Flag and Flag1
 	}
 end

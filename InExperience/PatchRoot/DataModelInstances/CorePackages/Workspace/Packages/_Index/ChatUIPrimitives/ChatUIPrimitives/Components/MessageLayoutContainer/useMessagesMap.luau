@@ -1,19 +1,19 @@
-﻿local parent = script:FindFirstAncestor("ChatUIPrimitives").Parent
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
+﻿local Parent = script:FindFirstAncestor("ChatUIPrimitives").Parent
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
 
-return function(p1, p2)
-	-- upvalues: reactModule (ref), signalsModule (ref)
-	return reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), p1 (ref), p2 (ref)
-		return signalsModule.createComputed(function(p3)
-			-- upvalues: p1 (copy), p2 (copy)
+return function(Callback, Callback1) --[[ Line: 28 | Named "useMessagesMap" ]]
+	-- upvalues: ReactModule (copy), SignalsModule (copy)
+	return ReactModule.useMemo(function() --[[ Line: 32 ]]
+		-- upvalues: SignalsModule (upval), Callback (copy), Callback1 (copy)
+		return SignalsModule.createComputed(function(p1) --[[ Line: 33 ]]
+			-- upvalues: Callback (upval), Callback1 (upval)
 			local t = {}
 			
-			for i, v in p1(p3) do
-				t[if p2 then p2(v) else v.messageId] = v
+			for _, value in Callback(p1) do
+				t[if Callback1 then Callback1(value) else value.messageId] = value
 			end
 			return t
 		end)
-	end, { p1, p2 })
+	end, { Callback, Callback1 })
 end

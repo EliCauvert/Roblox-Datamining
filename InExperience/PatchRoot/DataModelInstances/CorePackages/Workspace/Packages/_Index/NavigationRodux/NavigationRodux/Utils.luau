@@ -1,46 +1,47 @@
-﻿local navigationRodux = script:FindFirstAncestor("NavigationRodux")
-local parent = navigationRodux.Parent
-local cryoModule = require(parent.Cryo)
-local getActiveRoutes = require(parent.Navigation).getActiveRoutes
-local appPage = require(parent.RobloxAppEnums).AppPage
-local _ = require(navigationRodux.types)
-local constantsModule = require(navigationRodux.Constants)
+﻿local NavigationRodux = script:FindFirstAncestor("NavigationRodux")
+local Parent = NavigationRodux.Parent
+local CryoModule = require(Parent.Cryo)
+local GetActiveRoutesFunction = require(Parent.Navigation).getActiveRoutes
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local _ = require(NavigationRodux.types)
+local ConstantsModule = require(NavigationRodux.Constants)
 
-local function legacyRouteFilter(p1)
-	-- upvalues: constantsModule (ref)
-	return p1.routeName ~= constantsModule.TempRnSwitchNavigatorName and p1.key ~= "StackRouterRoot"
+local function legacyRouteFilter(p1): boolean --[[ Line: 18 ]]
+	-- upvalues: ConstantsModule (copy)
+	return p1.routeName ~= ConstantsModule.TempRnSwitchNavigatorName and p1.key ~= "StackRouterRoot"
 end
 
-local function getLegacyPageFromRoactNavigationRoute(p1)
-	-- upvalues: cryoModule (ref)
-	return cryoModule.Dictionary.join(p1.params or {}, { name = p1.routeName, rnKey = p1.key })
+local function getLegacyPageFromRoactNavigationRoute(p1) --[[ Line: 22 ]]
+	-- upvalues: CryoModule (copy)
+	return CryoModule.Dictionary.join(p1.params or {}, { name = p1.routeName, rnKey = p1.key })
 end
 
-local function getTabNavigatorState(p1)
-	-- upvalues: constantsModule (ref), getTabNavigatorState (ref)
-	if p1.routeName == constantsModule.TempRnSwitchNavigatorName then
-		return p1
+local function getTabNavigatorState(Route) --[[ Line: 36 ]]
+	-- upvalues: ConstantsModule (copy), getTabNavigatorState (copy)
+	if Route.routeName == ConstantsModule.TempRnSwitchNavigatorName then
+		return Route
+	else
+		local Route1 = Route.routes[Route.index]
+		
+		return if Route1.routes then getTabNavigatorState(Route1) else nil
 	end
-	local index = p1.routes[p1.index]
-	
-	return if index.routes then getTabNavigatorState(index) else nil
 end
 
 return {
 	getLegacyPageFromRoactNavigationRoute = getLegacyPageFromRoactNavigationRoute,
-	getLegacyRouteFromRoactNavigationState = function(p1)
-		-- upvalues: cryoModule (ref), getActiveRoutes (ref), legacyRouteFilter (ref), getLegacyPageFromRoactNavigationRoute (ref)
-		return cryoModule.List.map(cryoModule.List.filter(getActiveRoutes(p1), legacyRouteFilter), getLegacyPageFromRoactNavigationRoute)
+	getLegacyRouteFromRoactNavigationState = function(p1) --[[ Line: 29 ]]
+		-- upvalues: CryoModule (copy), GetActiveRoutesFunction (copy), legacyRouteFilter (copy), getLegacyPageFromRoactNavigationRoute (copy)
+		return CryoModule.List.map(CryoModule.List.filter(GetActiveRoutesFunction(p1), legacyRouteFilter), getLegacyPageFromRoactNavigationRoute)
 	end,
-	getCurrentTabName = function(p1)
-		-- upvalues: constantsModule (ref), getTabNavigatorState (ref), appPage (ref)
-		local var1
-		if p1.routeName == constantsModule.TempRnSwitchNavigatorName then
-			var1 = p1
+	getCurrentTabName = function(p1) --[[ Line: 49 ]]
+		-- upvalues: ConstantsModule (copy), getTabNavigatorState (copy), AppPage (copy)
+		local v1 = nil
+		if p1.routeName == ConstantsModule.TempRnSwitchNavigatorName then
+			v1 = p1
 		else
-			local index = p1.routes[p1.index]
-			var1 = if index.routes then getTabNavigatorState(index) else nil
+			local Route = p1.routes[p1.index]
+			v1 = if Route.routes then getTabNavigatorState(Route) else nil
 		end
-		return if var1 == nil then appPage.None else var1.routes[var1.index].routeName
+		return if v1 == nil then AppPage.None else v1.routes[v1.index].routeName
 	end
 }

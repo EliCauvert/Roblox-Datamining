@@ -1,6 +1,6 @@
-﻿local httpRequestModule = require(script:FindFirstAncestor("PlayerContextualMenu").Parent.HttpRequest)
+﻿local HttpRequestModule = require(script:FindFirstAncestor("PlayerContextualMenu").Parent.HttpRequest)
 
-return httpRequestModule.config({
+return HttpRequestModule.config({
 	maxRetryCount = 0,
-	requestFunction = httpRequestModule.requestFunctions.HttpRbxApi
+	requestFunction = HttpRequestModule.requestFunctions.HttpRbxApi
 })

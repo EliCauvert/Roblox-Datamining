@@ -1,1 +1,1 @@
-﻿return require(script.TextArea)
+﻿return (require(script.TextArea))

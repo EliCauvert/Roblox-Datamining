@@ -1,80 +1,80 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local reactModule = require(parent_1.React)
-local cryoModule = require(parent_1.Cryo)
-local signalsModule = require(parent_1.Signals)
-local view = require(parent_1.Foundation).View
-local leaderboardTabsBodyModule = require(parent.Components.Presentation.LeaderboardTabsBody)
-local usePlatformLeaderboardModule = require(parent.Hooks.usePlatformLeaderboard)
-local fallbackSignalsModule = require(parent.Common.FallbackSignals)
-local fFlagPlayerListReskinModule = require(parent.Flags.FFlagPlayerListReskin)
-local var1 = nil
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
+local CryoModule = require(Parent1.Cryo)
+local SignalsModule = require(Parent1.Signals)
+local View = require(Parent1.Foundation).View
+local LeaderboardTabsBodyModule = require(Parent.Components.Presentation.LeaderboardTabsBody)
+local UsePlatformLeaderboardModule = require(Parent.Hooks.usePlatformLeaderboard)
+local FallbackSignalsModule = require(Parent.Common.FallbackSignals)
+local FFlagPlayerListReskinModule = require(Parent.Flags.FFlagPlayerListReskin)
+local LeaderboardViewChangeTelemetryModule = nil
 
-local function _()
-	-- upvalues: var1 (write), parent (ref)
-	if var1 == nil then
-		var1 = require(parent.Common.LeaderboardViewChangeTelemetry)
+local function _() --[[ Line: 20 | Named "getLeaderboardViewChangeTelemetry" ]]
+	-- upvalues: LeaderboardViewChangeTelemetryModule (ref), Parent (copy)
+	if LeaderboardViewChangeTelemetryModule == nil then
+		LeaderboardViewChangeTelemetryModule = require(Parent.Common.LeaderboardViewChangeTelemetry)
 	end
-	return var1
+	return LeaderboardViewChangeTelemetryModule
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), fFlagPlayerListReskinModule (ref), usePlatformLeaderboardModule (ref), fallbackSignalsModule (ref), signalsModule (ref), var1 (write), parent (ref), leaderboardTabsBodyModule (ref), cryoModule (ref), view (ref)
-	local server, server_1 = reactModule.useState("server")
-	local var2 = server_1
+return ReactModule.memo(function(p1) --[[ Line: 35 | Named "TabbedLeaderboardBody" ]]
+	-- upvalues: ReactModule (copy), FFlagPlayerListReskinModule (copy), UsePlatformLeaderboardModule (copy), FallbackSignalsModule (copy), SignalsModule (copy), LeaderboardViewChangeTelemetryModule (ref), Parent (copy), LeaderboardTabsBodyModule (copy), CryoModule (copy), View (copy)
+	local Server, Server2 = ReactModule.useState("server")
+	local UseResult = Server2
 	
-	if fFlagPlayerListReskinModule then
-		local var3 = usePlatformLeaderboardModule()
-		local var4 = if var3 ~= nil then fallbackSignalsModule.getHasActiveLeaderboard else var3.getHasActiveLeaderboard
-		reactModule.useEffect(function()
-			-- upvalues: signalsModule (copy), var4 (ref), var1 (copy), parent (copy), server (ref)
-			return signalsModule.createEffect(function(p2)
-				-- upvalues: var4 (copy), var1 (copy), parent (copy), server (copy)
-				local var5 = var4(p2)
+	if FFlagPlayerListReskinModule then
+		local UsePlatformLeaderboardModuleResult = UsePlatformLeaderboardModule()
+		local GetHasActiveLeaderboard = if UsePlatformLeaderboardModuleResult == nil then FallbackSignalsModule.getHasActiveLeaderboard else UsePlatformLeaderboardModuleResult.getHasActiveLeaderboard
+		ReactModule.useEffect(function() --[[ Line: 46 ]]
+			-- upvalues: SignalsModule (upval), GetHasActiveLeaderboard (copy), LeaderboardViewChangeTelemetryModule (upval), Parent (upval), Server (copy)
+			return SignalsModule.createEffect(function(p2) --[[ Line: 47 ]]
+				-- upvalues: GetHasActiveLeaderboard (upval), LeaderboardViewChangeTelemetryModule (upval), Parent (upval), Server (upval)
+				local HasActiveLeaderboard = GetHasActiveLeaderboard(p2)
 				
-				if var1 == nil then
-					var1 = require(parent.Common.LeaderboardViewChangeTelemetry)
+				if LeaderboardViewChangeTelemetryModule == nil then
+					LeaderboardViewChangeTelemetryModule = require(Parent.Common.LeaderboardViewChangeTelemetry)
 				end
-				var1.setCurrentTab(if var5 then server else nil)
+				LeaderboardViewChangeTelemetryModule.setCurrentTab(if HasActiveLeaderboard then Server else nil)
 			end)
-		end, { server, var4 })
-		reactModule.useEffect(function()
-			-- upvalues: var1 (copy), parent (copy)
-			return function()
-				-- upvalues: var1 (copy), parent (copy)
-				if var1 == nil then
-					var1 = require(parent.Common.LeaderboardViewChangeTelemetry)
+		end, { Server, GetHasActiveLeaderboard })
+		ReactModule.useEffect(function() --[[ Line: 53 ]]
+			-- upvalues: LeaderboardViewChangeTelemetryModule (upval), Parent (upval)
+			return function() --[[ Line: 54 ]]
+				-- upvalues: LeaderboardViewChangeTelemetryModule (upval), Parent (upval)
+				if LeaderboardViewChangeTelemetryModule == nil then
+					LeaderboardViewChangeTelemetryModule = require(Parent.Common.LeaderboardViewChangeTelemetry)
 				end
-				var1.clearCurrentTab()
+				LeaderboardViewChangeTelemetryModule.clearCurrentTab()
 			end
 		end, {})
-		var2 = reactModule.useCallback(function(p2)
-			-- upvalues: server (ref), var1 (copy), parent (copy), server_1 (ref)
-			if p2 ~= server then
-				if var1 == nil then
-					var1 = require(parent.Common.LeaderboardViewChangeTelemetry)
+		UseResult = ReactModule.useCallback(function(ActiveTabId) --[[ Line: 59 ]]
+			-- upvalues: Server (copy), LeaderboardViewChangeTelemetryModule (upval), Parent (upval), Server2 (copy)
+			if ActiveTabId ~= Server then
+				if LeaderboardViewChangeTelemetryModule == nil then
+					LeaderboardViewChangeTelemetryModule = require(Parent.Common.LeaderboardViewChangeTelemetry)
 				end
-				var1.logSwitchTab(p2)
+				LeaderboardViewChangeTelemetryModule.logSwitchTab(ActiveTabId)
 			end
-			server_1(p2)
-		end, { server })
+			Server2(ActiveTabId)
+		end, { Server })
 	end
-	local t = {
+	local JoinResult = {
 		Header = p1.panelHeader,
 		HeaderDivider = p1.panelDivider,
-		LeaderboardTabsBody = reactModule.createElement(leaderboardTabsBodyModule, {
-			activeTabId = server,
-			onActivated = var2,
-			onPlatformTabsUnavailable = reactModule.useCallback(function()
-				-- upvalues: server_1 (ref)
-				server_1("server")
+		LeaderboardTabsBody = ReactModule.createElement(LeaderboardTabsBodyModule, {
+			activeTabId = Server,
+			onActivated = UseResult,
+			onPlatformTabsUnavailable = ReactModule.useCallback(function() --[[ Line: 67 ]]
+				-- upvalues: Server2 (copy)
+				Server2("server")
 			end, {}),
 			serverBody = p1.serverBody
 		})
 	}
 	
 	if p1.children then
-		t = cryoModule.Dictionary.join(t, p1.children)
+		JoinResult = CryoModule.Dictionary.join(JoinResult, p1.children)
 	end
-	return reactModule.createElement(view, p1.panelProps, t)
+	return ReactModule.createElement(View, p1.panelProps, JoinResult)
 end)

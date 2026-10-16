@@ -1,47 +1,51 @@
-﻿local parent = script.Parent.Parent.Parent
-local parseContentIdsModule = require(parent.util.ParseContentIds)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local _ = require(parent.util.Types)
+﻿local Parent = script.Parent.Parent.Parent
+local ParseContentIdsModule = require(Parent.util.ParseContentIds)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local _ = require(Parent.util.Types)
+local GetFFlagUGCValidateVersionedContentIdsModule = require(Parent.flags.getFFlagUGCValidateVersionedContentIds)
 
 return {
-	getData = function(p1, p2)
-		-- upvalues: validationEnumsModule (ref), parseContentIdsModule (ref)
-		if p2.consumerEnv == validationEnumsModule.ConsumerEnv.IEC then
+	getData = function(Object, p1) --[[ Line: 11 ]]
+		-- upvalues: ValidationEnumsModule (copy), GetFFlagUGCValidateVersionedContentIdsModule (copy), ParseContentIdsModule (copy)
+		if p1.consumerEnv == ValidationEnumsModule.ConsumerEnv.IEC then
 			return {}
 		end
-		local HSRAssetId, var1
-		local t = {}
-		local descendants = p1:GetDescendants()
-		table.insert(descendants, p1)
+		local PreloadedHsrAssets = {}
+		local Descendants = Object:GetDescendants()
+		table.insert(Descendants, Object)
 		
-		for i, v in descendants do
-			if v:IsA("WrapLayer") then
-				HSRAssetId = v.HSRAssetId
+		for _, WrapLayer in Descendants do
+			if WrapLayer:IsA("WrapLayer") then
+				local HSRAssetId = WrapLayer.HSRAssetId
 				
 				if HSRAssetId and HSRAssetId ~= "" then
-					var1 = parseContentIdsModule.tryGetAssetIdFromContentId(HSRAssetId)
-					
-					if var1 and not t[var1] then
-						local var2 = p2.preloadedHsrAssets[var1]
+					local ReferenceKey = nil
+					if GetFFlagUGCValidateVersionedContentIdsModule() then
+						local TryParseContentIdResult, TryParseContentIdResult2 = ParseContentIdsModule.tryParseContentId(HSRAssetId)
+						ReferenceKey = if TryParseContentIdResult then ParseContentIdsModule.getReferenceKey(TryParseContentIdResult, TryParseContentIdResult2) else nil
+					else
+						ReferenceKey = ParseContentIdsModule.tryGetAssetIdFromContentId(HSRAssetId)
+					end
+					if ReferenceKey and not PreloadedHsrAssets[ReferenceKey] then
+						local PreloadedHsrAsset = p1.preloadedHsrAssets[ReferenceKey]
 						
-						if var2 then
-							t[var1] = var2
+						if PreloadedHsrAsset then
+							PreloadedHsrAssets[ReferenceKey] = PreloadedHsrAsset
 						else
-							local ok, status = pcall(function()
-								-- upvalues: HSRAssetId (ref)
+							local Success, Result = pcall(function() --[[ Line: 57 ]]
+								-- upvalues: HSRAssetId (copy)
 								return game:GetObjectsAllOrNone(HSRAssetId)
 							end)
 							
-							if ok then
-								t[var1] = status or {}
-								continue
+							if not Success then
+								return nil
 							end
-							return nil
+							PreloadedHsrAssets[ReferenceKey] = Result or {}
 						end
 					end
 				end
 			end
 		end
-		return t
+		return PreloadedHsrAssets
 	end
 }

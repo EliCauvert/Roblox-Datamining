@@ -1,11 +1,16 @@
-﻿local momentsCommonModule = require(script:FindFirstAncestor("Moments").Parent.MomentsCommon)
+﻿local MomentsCommonModule = require(script:FindFirstAncestor("Moments").Parent.MomentsCommon)
 
-return function(p1, p2, p3, p4)
-	-- upvalues: momentsCommonModule (ref)
-	if p2 == nil or p2 == "" then
-		momentsCommonModule.Analytics.reportMomentSkip("feed_action", if p2 == nil then "nil" else "empty", { action = p4 })
+return function(MomentId, FeedItemId, p1, Action) --[[ Line: 31 | Named "makeFeedActionFields" ]]
+	-- upvalues: MomentsCommonModule (copy)
+	if FeedItemId == nil or FeedItemId == "" then
+		MomentsCommonModule.Analytics.reportMomentSkip("feed_action", if FeedItemId == nil then "nil" else "empty", { action = Action })
 		
 		return nil
+	else
+		return {
+			momentId = MomentId,
+			feedItemId = FeedItemId,
+			feedSessionId = p1 or ""
+		}
 	end
-	return { momentId = p1, feedItemId = p2, feedSessionId = p3 or "" }
 end

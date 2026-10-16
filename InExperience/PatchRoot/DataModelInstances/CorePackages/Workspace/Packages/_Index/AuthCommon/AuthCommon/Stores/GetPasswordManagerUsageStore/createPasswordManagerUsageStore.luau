@@ -1,23 +1,23 @@
-﻿local signalsModule = require(script:FindFirstAncestor("AuthCommon").Parent.Signals)
+﻿local SignalsModule = require(script:FindFirstAncestor("AuthCommon").Parent.Signals)
 
-return function()
-	-- upvalues: signalsModule (ref)
-	local var1, var2 = signalsModule.createSignal(false)
-	local var3, var4 = signalsModule.createSignal(false)
-	local var5, var6 = signalsModule.createSignal(false)
+return function() --[[ Line: 16 ]]
+	-- upvalues: SignalsModule (copy)
+	local Signal, Signal2 = SignalsModule.createSignal(false)
+	local Signal1, Signal2_1 = SignalsModule.createSignal(false)
+	local Signal3, Signal2_2 = SignalsModule.createSignal(false)
 	
 	return {
-		getLoggedinUsingSavedPassword = var1,
-		setLoggedinUsingSavedPassword = var2,
-		getSavedPasswordAfterLogin = var3,
-		setSavedPasswordAfterLogin = var4,
-		getPasswordManagerMediatedSignup = var5,
-		setPasswordManagerMediatedSignup = var6,
-		resetAll = function()
-			-- upvalues: var2 (ref), var4 (ref), var6 (ref)
-			var2(false)
-			var4(false)
-			var6(false)
+		getLoggedinUsingSavedPassword = Signal,
+		setLoggedinUsingSavedPassword = Signal2,
+		getSavedPasswordAfterLogin = Signal1,
+		setSavedPasswordAfterLogin = Signal2_1,
+		getPasswordManagerMediatedSignup = Signal3,
+		setPasswordManagerMediatedSignup = Signal2_2,
+		resetAll = function() --[[ Line: 21 ]]
+			-- upvalues: Signal2 (copy), Signal2_1 (copy), Signal2_2 (copy)
+			Signal2(false)
+			Signal2_1(false)
+			Signal2_2(false)
 		end
 	}
 end

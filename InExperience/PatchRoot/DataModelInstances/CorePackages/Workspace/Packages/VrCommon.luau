@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.VrCommon.VrCommon)
+﻿return (require(script.Parent._Workspace.VrCommon.VrCommon))

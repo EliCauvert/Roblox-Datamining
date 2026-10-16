@@ -1,15 +1,15 @@
-﻿local telemetryService = game:GetService("TelemetryService")
-local fIntCrossExperienceEventThrottleHunderedthsPercent = game:DefineFastInt("FIntCrossExperienceEventThrottleHunderedthsPercent", 10000)
+﻿local TelemetryService = game:GetService("TelemetryService")
+local FIntCrossExperienceEventThrottleHunderedthsPercent = game:DefineFastInt("FIntCrossExperienceEventThrottleHunderedthsPercent", 10000)
 
-function logEvent(p1, p2)
-	-- upvalues: fIntCrossExperienceEventThrottleHunderedthsPercent (ref), telemetryService (ref)
-	telemetryService:LogEvent({
+function logEvent(EventName, CustomFields) --[[ Line: 7 ]]
+	-- upvalues: FIntCrossExperienceEventThrottleHunderedthsPercent (copy), TelemetryService (copy)
+	TelemetryService:LogEvent({
 		description = "Cross Experience Analytics Events",
-		eventName = p1,
+		eventName = EventName,
 		backends = { "EventIngest" },
-		throttlingPercentage = fIntCrossExperienceEventThrottleHunderedthsPercent,
+		throttlingPercentage = FIntCrossExperienceEventThrottleHunderedthsPercent,
 		lastUpdated = { 2025, 6, 30 }
-	}, { customFields = p2 })
+	}, { customFields = CustomFields })
 end
 
 return { logEvent = logEvent }

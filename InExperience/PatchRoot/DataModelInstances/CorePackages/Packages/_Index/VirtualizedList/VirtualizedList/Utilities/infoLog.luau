@@ -1,6 +1,6 @@
-﻿local console = require(script.Parent.Parent.Parent.LuauPolyfill).console
+﻿local Console = require(script.Parent.Parent.Parent.LuauPolyfill).console
 
-return function(...)
-	-- upvalues: console (ref)
-	return console.log(...)
+return function(...) --[[ Line: 18 | Named "infoLog" ]]
+	-- upvalues: Console (copy)
+	return Console.log(...)
 end

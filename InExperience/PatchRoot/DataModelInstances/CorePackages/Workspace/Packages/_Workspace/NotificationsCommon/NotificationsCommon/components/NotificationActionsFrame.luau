@@ -1,68 +1,71 @@
-﻿local parent = script.Parent.Parent
-local context = parent.context
-local dependenciesModule = require(parent.dependencies)
-local react = dependenciesModule.React
-local UIBlox = dependenciesModule.UIBlox
-local foundationModule = require(parent.Parent.Foundation)
-local useStyle = UIBlox.Core.Style.useStyle
-local useTokens = foundationModule.Hooks.useTokens
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local typeModule = require(parent.type)
-local buttonStack = UIBlox.App.Button.ButtonStack
-local buttonType = UIBlox.App.Button.Enum.ButtonType
-local constantsModule = require(parent.constants)
-local defaultContentPadding = constantsModule.DefaultContentPadding
-local defaultButtonHeight = constantsModule.DefaultButtonHeight
-local useNotificationCardStateModule = require(context.useNotificationCardState)
-local useNotificationCardDataModule = require(context.useNotificationCardData)
+﻿local Parent = script.Parent.Parent
+local Context = Parent.context
+local DependenciesModule = require(Parent.dependencies)
+local React = DependenciesModule.React
+local UIBlox = DependenciesModule.UIBlox
+local FoundationModule = require(Parent.Parent.Foundation)
+local UseStyleFunction = UIBlox.Core.Style.useStyle
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local TypeModule = require(Parent.type)
+local ButtonStack = UIBlox.App.Button.ButtonStack
+local ButtonType = UIBlox.App.Button.Enum.ButtonType
+local ConstantsModule = require(Parent.constants)
+local DefaultContentPadding = ConstantsModule.DefaultContentPadding
+local DefaultButtonHeight = ConstantsModule.DefaultButtonHeight
+local UseNotificationCardStateModule = require(Context.useNotificationCardState)
+local UseNotificationCardDataModule = require(Context.useNotificationCardData)
 
-local _ = function(p1)
-	-- upvalues: typeModule (ref), buttonType (ref)
-	return if p1 == typeModule.SENDERButtonStyleEnum.Growth then buttonType.PrimaryContextual elseif p1 == typeModule.SENDERButtonStyleEnum.Primary then buttonType.PrimarySystem elseif p1 == typeModule.SENDERButtonStyleEnum.Secondary then buttonType.Secondary elseif p1 == typeModule.SENDERButtonStyleEnum.Alert then buttonType.Alert else buttonType.Secondary
+local function _(Alert) --[[ Line: 20 ]]
+	-- upvalues: TypeModule (copy), ButtonType (copy)
+	return if Alert == TypeModule.SENDERButtonStyleEnum.Growth then ButtonType.PrimaryContextual elseif Alert == TypeModule.SENDERButtonStyleEnum.Primary then ButtonType.PrimarySystem elseif Alert == TypeModule.SENDERButtonStyleEnum.Secondary then ButtonType.Secondary elseif Alert == TypeModule.SENDERButtonStyleEnum.Alert then ButtonType.Alert else ButtonType.Secondary
 end
 
-local var1 = function(p1, p2, p3)
-	-- upvalues: useStyle (ref), foundationFontFaceMigration (ref), useTokens (ref), typeModule (ref), buttonType (ref)
-	local var2 = if foundationFontFaceMigration then (if foundationFontFaceMigration then useTokens() else nil).Typography.CaptionLarge else useStyle().Font.CaptionHeader
-	local t = {}
+local function v16(Button, Callback, NotificationPayload) --[[ Line: 34 ]]
+	-- upvalues: UseStyleFunction (copy), FoundationFontFaceMigration (copy), UseTokensFunction (copy), TypeModule (copy), ButtonType (copy)
+	local UseStyleResult = UseStyleFunction()
+	local UseTokensResult = if FoundationFontFaceMigration then UseTokensFunction() else nil
+	local CaptionLarge = if FoundationFontFaceMigration then UseTokensResult.Typography.CaptionLarge else UseStyleResult.Font.CaptionHeader
+	local List = {}
 	
-	if p1 then
-		for i, v in ipairs(p1) do
-			local t_1 = {}
-			local buttonStyle = v.buttonStyle
-			t_1.buttonType = if buttonStyle == typeModule.SENDERButtonStyleEnum.Growth then buttonType.PrimaryContextual elseif buttonStyle == typeModule.SENDERButtonStyleEnum.Primary then buttonType.PrimarySystem elseif buttonStyle == typeModule.SENDERButtonStyleEnum.Secondary then buttonType.Secondary elseif buttonStyle == typeModule.SENDERButtonStyleEnum.Alert then buttonType.Alert else buttonType.Secondary
-			t_1.props = {
-				text = v.label.text,
-				fontStyle = var2,
-				onActivated = function()
-					-- upvalues: p2 (ref), p3 (ref), v (ref)
-					if p2 and p3 then
-						p2(v, p3)
+	if Button then
+		for _, value in ipairs(Button) do
+			local ButtonStyle = value.buttonStyle
+			table.insert(List, {
+				buttonType = if ButtonStyle == TypeModule.SENDERButtonStyleEnum.Growth then ButtonType.PrimaryContextual elseif ButtonStyle == TypeModule.SENDERButtonStyleEnum.Primary then ButtonType.PrimarySystem elseif ButtonStyle == TypeModule.SENDERButtonStyleEnum.Secondary then ButtonType.Secondary elseif ButtonStyle == TypeModule.SENDERButtonStyleEnum.Alert then ButtonType.Alert else ButtonType.Secondary,
+				props = {
+					text = value.label.text,
+					fontStyle = CaptionLarge,
+					onActivated = function() --[[ Line: 51 ]]
+						-- upvalues: Callback (copy), NotificationPayload (copy), value (copy)
+						if Callback and NotificationPayload then
+							Callback(value, NotificationPayload)
+						end
 					end
-				end
-			}
-			table.insert(t, t_1)
+				}
+			})
 		end
 	end
-	return t
+	return List
 end
 
-return function()
-	-- upvalues: useNotificationCardStateModule (ref), useNotificationCardDataModule (ref), var1 (ref), react (ref), defaultContentPadding (ref), buttonStack (ref), defaultButtonHeight (ref)
-	local var3 = useNotificationCardDataModule()
-	local var4 = var1(useNotificationCardStateModule("button"), var3.handleActions, var3.notificationPayload)
+return function() --[[ Line: 64 ]]
+	-- upvalues: UseNotificationCardStateModule (copy), UseNotificationCardDataModule (copy), v16 (copy), React (copy), DefaultContentPadding (copy), ButtonStack (copy), DefaultButtonHeight (copy)
+	local Button = UseNotificationCardStateModule("button")
+	local UseNotificationCardDataModuleResult = UseNotificationCardDataModule()
+	local Buttons = v16(Button, UseNotificationCardDataModuleResult.handleActions, UseNotificationCardDataModuleResult.notificationPayload)
 	
-	return if #var4 > 0 then react.createElement("Frame", {
+	return if #Buttons > 0 then React.createElement("Frame", {
 		BackgroundTransparency = 1,
 		LayoutOrder = 3,
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y
 	}, {
-		UIPadding = react.createElement("UIPadding", { PaddingTop = UDim.new(0, defaultContentPadding) }),
-		ActionButtons = var4 and react.createElement(buttonStack, {
-			buttonHeight = defaultButtonHeight,
-			buttons = var4,
-			marginBetween = defaultContentPadding
+		UIPadding = React.createElement("UIPadding", { PaddingTop = UDim.new(0, DefaultContentPadding) }),
+		ActionButtons = Buttons and React.createElement(ButtonStack, {
+			buttonHeight = DefaultButtonHeight,
+			buttons = Buttons,
+			marginBetween = DefaultContentPadding
 		})
 	}) else nil
 end

@@ -1,116 +1,117 @@
-﻿local gameInvite = script:FindFirstAncestor("GameInvite")
-local parent = gameInvite.Parent
-local reactModule = require(parent.React)
-local UIBloxModule = require(parent.UIBlox)
-local roactUtilsModule = require(parent.RoactUtils)
-local throttle = require(parent.NotificationsCommon).Throttle
-local reducerDependencies = require(parent.NotificationsCommon).ReducerDependencies
-local default = require(parent.ExternalContentSharingProtocol).ExternalContentSharingProtocol.default
-local localizationHelper = require(parent.NotificationsCommon).LocalizationHelper
-local gameInviteAnalyticsManagerModule = require(gameInvite.analytics.GameInviteAnalyticsManager)
-local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
-local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
-local roduxNetworking = reducerDependencies.RoduxNetworking
-local shareLinksNetworking = reducerDependencies.ShareLinksNetworking
-local shareLinksRodux = reducerDependencies.ShareLinksRodux
-local networkStatus = roduxNetworking.Enum.NetworkStatus
-local getLocalizedStrings = localizationHelper.getLocalizedStrings
-local linkButton = UIBloxModule.App.Button.LinkButton
-local useStyle = UIBloxModule.Core.Style.useStyle
-local imageSetButton = UIBloxModule.Core.ImageSet.ImageSetButton
-local images = UIBloxModule.App.ImageSet.Images
+﻿local GameInvite = script:FindFirstAncestor("GameInvite")
+local Parent = GameInvite.Parent
+local ReactModule = require(Parent.React)
+local UIBloxModule = require(Parent.UIBlox)
+local RoactUtilsModule = require(Parent.RoactUtils)
+local ThrottleFunction = require(Parent.NotificationsCommon).Throttle
+local ReducerDependencies = require(Parent.NotificationsCommon).ReducerDependencies
+local Default = require(Parent.ExternalContentSharingProtocol).ExternalContentSharingProtocol.default
+local GameInviteAnalyticsManagerModule = require(GameInvite.analytics.GameInviteAnalyticsManager)
+local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
+local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
+local ShareLinksNetworking = ReducerDependencies.ShareLinksNetworking
+local ShareLinksRodux = ReducerDependencies.ShareLinksRodux
+local NetworkStatus = ReducerDependencies.RoduxNetworking.Enum.NetworkStatus
+local GetLocalizedStringsFunction = require(Parent.NotificationsCommon).LocalizationHelper.getLocalizedStrings
+local LinkButton = UIBloxModule.App.Button.LinkButton
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local ImageSetButton = UIBloxModule.Core.ImageSet.ImageSetButton
+local Images = UIBloxModule.App.ImageSet.Images
 game:DefineFastFlag("generateGameInviteShareLinkOnClick", false)
-local share = images["icons/actions/share"]
-local link = images["icons/menu/link"]
-local t = {
+local IconsActionsShare = Images["icons/actions/share"]
+local IconsMenuLink = Images["icons/menu/link"]
+local config = {
 	copied = "Feature.SocialShare.Label.Copied",
 	copyLink = "Feature.SocialShare.Action.CopyLink"
 }
 
-return function(p1)
-	-- upvalues: reactModule (ref), useSelector (ref), useStyle (ref), useDispatch (ref), getLocalizedStrings (ref), t (ref), shareLinksNetworking (ref), shareLinksRodux (ref), gameInviteAnalyticsManagerModule (ref), default (ref), throttle (ref), linkButton (ref), networkStatus (ref), imageSetButton (ref), link (ref), share (ref)
-	local var1, var2 = reactModule.useState(false)
-	local var3 = useSelector(function(p2)
+return function(p1) --[[ Line: 46 ]]
+	-- upvalues: ReactModule (copy), UseSelectorFunction (copy), UseStyleFunction (copy), UseDispatchFunction (copy), GetLocalizedStringsFunction (copy), config (copy), ShareLinksNetworking (copy), ShareLinksRodux (copy), GameInviteAnalyticsManagerModule (copy), Default (copy), ThrottleFunction (copy), LinkButton (copy), NetworkStatus (copy), ImageSetButton (copy), IconsMenuLink (copy), IconsActionsShare (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 49 ]]
 		return p2
 	end)
-	local var4 = useStyle()
-	local var5 = useDispatch()
-	local var6 = getLocalizedStrings(t)
-	local shareInviteLink = var3.ShareLinks.Invites.ShareInviteLink
+	local UseStyleResult = UseStyleFunction()
+	local UseDispatchResult = UseDispatchFunction()
+	local LocalizedStrings = GetLocalizedStringsFunction(config)
+	local ShareInviteLink = UseSelectorResult.ShareLinks.Invites.ShareInviteLink
 	
-	local var7 = function()
-		-- upvalues: var5 (ref), shareLinksNetworking (copy), shareLinksRodux (copy), gameInviteAnalyticsManagerModule (copy), default (copy)
-		var5(shareLinksNetworking.GenerateLink.API({
-			linkType = shareLinksRodux.Enums.LinkType.ExperienceInvite.rawValue()
-		})):andThen(function(p2)
-			-- upvalues: gameInviteAnalyticsManagerModule (copy), shareLinksRodux (copy), default (copy)
-			gameInviteAnalyticsManagerModule:linkGenerated({
-				linkType = shareLinksRodux.Enums.LinkType.ExperienceInvite.rawValue(),
-				linkId = p2.responseBody.linkId
+	local function v24() --[[ Line: 61 ]]
+		-- upvalues: UseDispatchResult (copy), ShareLinksNetworking (upval), ShareLinksRodux (upval), GameInviteAnalyticsManagerModule (upval), Default (upval)
+		UseDispatchResult(ShareLinksNetworking.GenerateLink.API({
+			linkType = ShareLinksRodux.Enums.LinkType.ExperienceInvite.rawValue()
+		})):andThen(function(Result) --[[ Line: 64 ]]
+			-- upvalues: GameInviteAnalyticsManagerModule (upval), ShareLinksRodux (upval), Default (upval)
+			GameInviteAnalyticsManagerModule:linkGenerated({
+				linkType = ShareLinksRodux.Enums.LinkType.ExperienceInvite.rawValue(),
+				linkId = Result.responseBody.linkId
 			})
 			
-			if game:GetFastFlag("generateGameInviteShareLinkOnClick") and p2 and (p2.responseBody and p2.responseBody.shortUrl) and default then
-				default:shareUrl({ context = "V1Menu", url = p2.responseBody.shortUrl })
+			if game:GetFastFlag("generateGameInviteShareLinkOnClick") and Result and Result.responseBody and Result.responseBody.shortUrl and Default then
+				Default:shareUrl({ context = "V1Menu", url = Result.responseBody.shortUrl })
 			end
 		end)
 	end
 	
-	reactModule.useEffect(function()
-		-- upvalues: shareInviteLink (ref), var7 (ref)
-		if not game:GetFastFlag("generateGameInviteShareLinkOnClick") and not shareInviteLink then
-			var7()
+	ReactModule.useEffect(function() --[[ Line: 86 ]]
+		-- upvalues: ShareInviteLink (copy), v24 (copy)
+		if not game:GetFastFlag("generateGameInviteShareLinkOnClick") and not ShareInviteLink then
+			v24()
 		end
 	end, {})
-	local var8 = throttle(function()
-		-- upvalues: shareInviteLink (ref), gameInviteAnalyticsManagerModule (copy), default (copy), var7 (ref), p1 (ref), var2 (ref)
-		gameInviteAnalyticsManagerModule:onShareButtonClick(if shareInviteLink then shareInviteLink.linkId else nil)
+	local Status = ShareLinksNetworking.GenerateLink.getStatus(UseSelectorResult, {
+		linkType = ShareLinksRodux.Enums.LinkType.ExperienceInvite.rawValue()
+	})
+	local ThrottleResult = ThrottleFunction(function() --[[ Line: 100 ]]
+		-- upvalues: ShareInviteLink (copy), GameInviteAnalyticsManagerModule (upval), Default (upval), v24 (copy), p1 (copy), UseStateResult2 (copy)
+		GameInviteAnalyticsManagerModule:onShareButtonClick(if ShareInviteLink then ShareInviteLink.linkId else nil)
 		
-		if not shareInviteLink then
-			var7()
-		elseif default then
-			default:shareUrl({ context = "V1Menu", url = shareInviteLink.shortUrl })
+		if ShareInviteLink then
+			if Default then
+				Default:shareUrl({ context = "V1Menu", url = ShareInviteLink.shortUrl })
+			end
+		else
+			v24()
 		end
 		if p1.isDesktop then
-			var2(true)
-			task.delay(1, function()
-				-- upvalues: var2 (copy)
-				var2(false)
+			UseStateResult2(true)
+			task.delay(1, function() --[[ Line: 116 ]]
+				-- upvalues: UseStateResult2 (upval)
+				UseStateResult2(false)
 			end)
 		end
 	end)
 	
-	return if p1.isDesktop then if p1.isFullSize then reactModule.createElement("Frame", {
+	return if p1.isDesktop then if p1.isFullSize then ReactModule.createElement("Frame", {
 		BorderSizePixel = 0,
 		BackgroundTransparency = 1,
 		Size = p1.size,
 		LayoutOrder = p1.layoutOrder
 	}, {
-		LinkButton = reactModule.createElement(linkButton, {
+		LinkButton = ReactModule.createElement(LinkButton, {
 			isLoading = false,
-			isDisabled = if shareLinksNetworking.GenerateLink.getStatus(var3, {
-				linkType = shareLinksRodux.Enums.LinkType.ExperienceInvite.rawValue()
-			}) ~= networkStatus.Fetching then var1 else true,
-			onActivated = var8,
+			isDisabled = Status == NetworkStatus.Fetching or UseStateResult,
+			onActivated = ThrottleResult,
 			size = p1.size,
-			text = if var1 then var6.copied else var6.copyLink
+			text = UseStateResult and LocalizedStrings.copied or LocalizedStrings.copyLink
 		})
-	}) else reactModule.createElement(imageSetButton, {
+	}) else ReactModule.createElement(ImageSetButton, {
 		LayoutOrder = p1.layoutOrder,
 		BackgroundTransparency = 1,
 		Size = p1.size,
-		[reactModule.Event.Activated] = var8,
-		Image = link,
-		ImageColor3 = var4.Theme.IconEmphasis.Color,
-		ImageTransparency = var4.Theme.IconEmphasis.Transparency,
+		[ReactModule.Event.Activated] = ThrottleResult,
+		Image = IconsMenuLink,
+		ImageColor3 = UseStyleResult.Theme.IconEmphasis.Color,
+		ImageTransparency = UseStyleResult.Theme.IconEmphasis.Transparency,
 		BorderSizePixel = 0
-	}) else reactModule.createElement(imageSetButton, {
+	}) else ReactModule.createElement(ImageSetButton, {
 		LayoutOrder = p1.layoutOrder,
 		BackgroundTransparency = 1,
 		Size = p1.size,
-		[reactModule.Event.Activated] = var8,
-		Image = share,
-		ImageColor3 = var4.Theme.IconEmphasis.Color,
-		ImageTransparency = var4.Theme.IconEmphasis.Transparency,
+		[ReactModule.Event.Activated] = ThrottleResult,
+		Image = IconsActionsShare,
+		ImageColor3 = UseStyleResult.Theme.IconEmphasis.Color,
+		ImageTransparency = UseStyleResult.Theme.IconEmphasis.Transparency,
 		BorderSizePixel = 0
 	})
 end

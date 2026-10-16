@@ -1,36 +1,36 @@
-﻿local parent = script:FindFirstAncestor("PeekView").Parent
-local userInputService = game:GetService("UserInputService")
-local runService = game:GetService("RunService")
-local reactModule = require(parent.React)
+﻿local UserInputService = game:GetService("UserInputService")
+local RunService = game:GetService("RunService")
+local ReactModule = require(script:FindFirstAncestor("PeekView").Parent.React)
 
-return function(p1)
-	-- upvalues: reactModule (ref), runService (ref), userInputService (ref)
-	reactModule.useEffect(function()
-		-- upvalues: runService (copy), p1 (ref), userInputService (copy)
-		local var1 = nil
-		local heartbeatConnection = runService.Heartbeat:Connect(function(p2)
-			-- upvalues: var1 (write), p1 (copy)
-			if var1 and var1.KeyCode == Enum.KeyCode.Thumbstick2 then
-				p1(var1, p2)
+return function(Callback) --[[ Line: 7 | Named "usePeekViewFocusNavigationBindings" ]]
+	-- upvalues: ReactModule (copy), RunService (copy), UserInputService (copy)
+	ReactModule.useEffect(function() --[[ Line: 8 ]]
+		-- upvalues: RunService (upval), Callback (copy), UserInputService (upval)
+		local Input = nil
+		local HeartbeatConnection = RunService.Heartbeat:Connect(function(DeltaTime) --[[ Line: 10 ]]
+			-- upvalues: Input (ref), Callback (upval)
+			if Input and Input.KeyCode == Enum.KeyCode.Thumbstick2 then
+				Callback(Input, DeltaTime)
 			end
 		end)
-		local inputChangedConnection = userInputService.InputChanged:Connect(function(p2, _)
-			-- upvalues: var1 (write)
-			if p2.KeyCode == Enum.KeyCode.Thumbstick2 then
-				if p2.UserInputState == Enum.UserInputState.Change then
-					var1 = p2
+		local InputChangedConnection = UserInputService.InputChanged:Connect(function(Input1, _) --[[ Line: 15 ]]
+			-- upvalues: Input (ref)
+			if Input1.KeyCode == Enum.KeyCode.Thumbstick2 then
+				if Input1.UserInputState == Enum.UserInputState.Change then
+					Input = Input1
 					
 					return
-				elseif p2.UserInputState == Enum.UserInputState.End then
-					var1 = nil
+				end
+				if Input1.UserInputState == Enum.UserInputState.End then
+					Input = nil
 				end
 			end
 		end)
 		
-		return function()
-			-- upvalues: heartbeatConnection (ref), inputChangedConnection (ref)
-			heartbeatConnection:Disconnect()
-			inputChangedConnection:Disconnect()
+		return function() --[[ Line: 25 ]]
+			-- upvalues: HeartbeatConnection (copy), InputChangedConnection (copy)
+			HeartbeatConnection:Disconnect()
+			InputChangedConnection:Disconnect()
 		end
-	end, { p1 })
+	end, { Callback })
 end

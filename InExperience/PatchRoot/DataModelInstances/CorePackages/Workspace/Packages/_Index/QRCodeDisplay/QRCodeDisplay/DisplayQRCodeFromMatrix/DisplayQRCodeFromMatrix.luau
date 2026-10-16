@@ -1,9 +1,9 @@
-﻿local assetService = game:GetService("AssetService")
-local parent = script:FindFirstAncestor("QRCodeDisplay").Parent
-local reactModule = require(parent.React)
-local dashModule = require(parent.Dash)
-local drawImageModule = require(script.Parent.drawImage)
-local t = {
+﻿local AssetService = game:GetService("AssetService")
+local Parent = script:FindFirstAncestor("QRCodeDisplay").Parent
+local ReactModule = require(Parent.React)
+local DashModule = require(Parent.Dash)
+local DrawImageModule = require(script.Parent.drawImage)
+local config = {
 	backgroundTransparency = 0,
 	pixelTransparency = 0,
 	sideLength = 200,
@@ -11,68 +11,69 @@ local t = {
 	pixelColor3 = Color3.fromRGB(0, 0, 0)
 }
 
-local function _(p1, p2)
-	if not p2 then
+local function _(p1, Degrees: number) --[[ Line: 36 | Named "getQrCodeImageSize" ]]
+	if not Degrees then
 		return p1
 	end
-	assert(type(p2) == "number", "rotation must be a number")
+	assert(type(Degrees) == "number", "rotation must be a number")
 	
-	if p2 % 90 == 0 then
+	if Degrees % 90 == 0 then
 		return p1
+	else
+		local Radians = math.rad(Degrees)
+		
+		return (math.round(p1 / (math.sin(Radians) + math.cos(Radians))))
 	end
-	local radians = math.rad(p2)
-	
-	return math.round(p1 / (math.sin(radians) + math.cos(radians)))
 end
 
-return function(p1)
-	-- upvalues: dashModule (ref), t (ref), reactModule (ref), assetService (ref), drawImageModule (ref)
-	local var1
-	local var2 = dashModule.join(t, p1)
-	local var3, var4 = reactModule.useState(nil)
-	local var5 = reactModule.createRef()
-	local sideLength = var2.sideLength
-	local qrCodeRotation = var2.qrCodeRotation
+return function(p1) --[[ Line: 51 ]]
+	-- upvalues: DashModule (copy), config (copy), ReactModule (copy), AssetService (copy), DrawImageModule (copy)
+	local JoinResult = DashModule.join(config, p1)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	local Ref = ReactModule.createRef()
+	local SideLength = JoinResult.sideLength
+	local QrCodeRotation: number = JoinResult.qrCodeRotation
+	local X = nil
 	
-	if qrCodeRotation then
-		assert(type(qrCodeRotation) == "number", "rotation must be a number")
+	if QrCodeRotation then
+		assert(type(QrCodeRotation) == "number", "rotation must be a number")
 		
-		if qrCodeRotation % 90 == 0 then
-			var1 = sideLength
+		if QrCodeRotation % 90 == 0 then
+			X = SideLength
 		else
-			local radians = math.rad(qrCodeRotation)
-			var1 = math.round(sideLength / (math.sin(radians) + math.cos(radians)))
+			local Radians = math.rad(QrCodeRotation)
+			X = math.round(SideLength / (math.sin(Radians) + math.cos(Radians)))
 		end
 	else
-		var1 = sideLength
+		X = SideLength
 	end
-	reactModule.useEffect(function()
-		-- upvalues: var5 (ref), var1 (ref), assetService (copy), var4 (ref), drawImageModule (copy), var2 (ref)
-		if not var5.current or var5.current.Size.X ~= var1 then
-			var5.current = assetService:CreateEditableImage({ Size = Vector2.new(var1, var1) })
-			var4(Content.fromObject(var5.current))
+	ReactModule.useEffect(function() --[[ Line: 58 ]]
+		-- upvalues: Ref (copy), X (copy), AssetService (upval), UseStateResult2 (copy), DrawImageModule (upval), JoinResult (copy)
+		if not Ref.current or Ref.current.Size.X ~= X then
+			Ref.current = AssetService:CreateEditableImage({ Size = Vector2.new(X, X) })
+			UseStateResult2(Content.fromObject(Ref.current))
 		end
-		drawImageModule(var5.current, var1, var2.qrCodeMatrix, var2.pixelColor3, var2.pixelTransparency)
+		DrawImageModule(Ref.current, X, JoinResult.qrCodeMatrix, JoinResult.pixelColor3, JoinResult.pixelTransparency)
 	end, {
-		var1,
-		var2.qrCodeMatrix,
-		var2.pixelColor3,
-		var2.pixelTransparency
+		X,
+		JoinResult.qrCodeMatrix,
+		JoinResult.pixelColor3,
+		JoinResult.pixelTransparency
 	})
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BorderSizePixel = 0,
-		BackgroundColor3 = var2.backgroundColor3,
-		BackgroundTransparency = var2.backgroundTransparency,
-		Size = UDim2.fromOffset(var2.sideLength, var2.sideLength)
+		BackgroundColor3 = JoinResult.backgroundColor3,
+		BackgroundTransparency = JoinResult.backgroundTransparency,
+		Size = UDim2.fromOffset(JoinResult.sideLength, JoinResult.sideLength)
 	}, {
-		ImageLabel = reactModule.createElement("ImageLabel", {
+		ImageLabel = ReactModule.createElement("ImageLabel", {
 			BackgroundTransparency = 1,
 			AnchorPoint = Vector2.new(0.5, 0.5),
-			ImageContent = var3,
+			ImageContent = UseStateResult,
 			Position = UDim2.fromScale(0.5, 0.5),
-			Rotation = var2.qrCodeRotation,
-			Size = UDim2.fromOffset(var1, var1)
+			Rotation = JoinResult.qrCodeRotation,
+			Size = UDim2.fromOffset(X, X)
 		})
 	})
 end

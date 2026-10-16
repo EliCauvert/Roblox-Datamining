@@ -1,102 +1,95 @@
-﻿local httpService = game:GetService("HttpService")
-local inExperienceContainer = script:FindFirstAncestor("InExperienceContainer")
-local localizationService = game:GetService("LocalizationService")
+﻿local HttpService = game:GetService("HttpService")
+local InExperienceContainer = script:FindFirstAncestor("InExperienceContainer")
+local LocalizationService = game:GetService("LocalizationService")
 local IXPService = game:GetService("IXPService")
-local parent = inExperienceContainer.Parent
-local reactModule = require(parent.React)
-local styleProviderWithDefaultTheme = require(parent.Style).StyleProviderWithDefaultTheme
-local openWebviewModule = require(inExperienceContainer.Http.openWebview)
-local roactRoduxModule = require(parent.RoactRodux)
-local fetchingStatus = require(parent.Http).Reducers.FetchingStatus
-local roactAnalytics = require(parent.RoactServiceTags).RoactAnalytics
-local roactNetworking = require(parent.RoactServiceTags).RoactNetworking
-local appLinking = require(parent.RoactServiceTags).AppLinking
-local linkingProtocol = require(parent.LinkingProtocol).LinkingProtocol
-local analytics = require(parent.Analytics).Analytics
-local requestInternalWrapper = require(parent.Http).NetworkLayers.requestInternalWrapper
-local roactServices = require(parent.RoactServices).RoactServices
-local providerContainer = require(parent.RoactUtils).Components.ProviderContainer
-local useSelectedTheme = require(parent.RoactUtils).Hooks.useSelectedTheme
-local roactAppExperimentModule = require(parent.RoactAppExperiment)
-local roactAppPolicy = require(parent.UniversalAppPolicy).RoactAppPolicy
-local appFeaturePolicies = require(parent.UniversalAppPolicy).AppFeaturePolicies
-local localization = require(parent.RobloxAppLocales).Localization
-local localizationProvider = require(parent.Localization).LocalizationProvider
-local UIBloxModule = require(parent.UIBlox)
-local selectionCursorProvider = UIBloxModule.App.SelectionImage.SelectionCursorProvider
-local cursorProvider = UIBloxModule.App.SelectionCursor.CursorProvider
-local roduxModule = require(parent.Rodux)
-local countryCodeList = require(parent.AuthCommon).Reducers.CountryCodeList
-local cryoModule = require(parent.Cryo)
-local getFFlagInExperienceContainerScreenSizeReducer = require(parent.SharedFlags).GetFFlagInExperienceContainerScreenSizeReducer
-local var1 = if getFFlagInExperienceContainerScreenSizeReducer() then require(inExperienceContainer.Actions.SetScreenSize) else nil
-local getFFlagInExperienceContainerAppLinking = require(parent.SharedFlags).GetFFlagInExperienceContainerAppLinking
-local getFFlagInExperienceContainerRespectUserTheme = require(parent.SharedFlags).GetFFlagInExperienceContainerRespectUserTheme
-local fFlagUseSignalsForCountryCodeList = require(parent.SharedFlags).FFlagUseSignalsForCountryCodeList
-local t = { reducer = {} }
+local Parent = InExperienceContainer.Parent
+local ReactModule = require(Parent.React)
+local StyleProviderWithDefaultTheme = require(Parent.Style).StyleProviderWithDefaultTheme
+local OpenWebviewModule = require(InExperienceContainer.Http.openWebview)
+local RoactRoduxModule = require(Parent.RoactRodux)
+local FetchingStatus = require(Parent.Http).Reducers.FetchingStatus
+local RoactAnalytics = require(Parent.RoactServiceTags).RoactAnalytics
+local RoactNetworking = require(Parent.RoactServiceTags).RoactNetworking
+local AppLinking = require(Parent.RoactServiceTags).AppLinking
+local LinkingProtocol = require(Parent.LinkingProtocol).LinkingProtocol
+local Analytics = require(Parent.Analytics).Analytics
+local RequestInternalWrapperFunction = require(Parent.Http).NetworkLayers.requestInternalWrapper
+local RoactServices = require(Parent.RoactServices).RoactServices
+local ProviderContainer = require(Parent.RoactUtils).Components.ProviderContainer
+local UseSelectedThemeFunction = require(Parent.RoactUtils).Hooks.useSelectedTheme
+local RoactAppExperimentModule = require(Parent.RoactAppExperiment)
+local RoactAppPolicy = require(Parent.UniversalAppPolicy).RoactAppPolicy
+local AppFeaturePolicies = require(Parent.UniversalAppPolicy).AppFeaturePolicies
+local Localization = require(Parent.RobloxAppLocales).Localization
+local LocalizationProvider = require(Parent.Localization).LocalizationProvider
+local UIBloxModule = require(Parent.UIBlox)
+local SelectionCursorProvider = UIBloxModule.App.SelectionImage.SelectionCursorProvider
+local CursorProvider = UIBloxModule.App.SelectionCursor.CursorProvider
+local RoduxModule = require(Parent.Rodux)
+local CountryCodeList = require(Parent.AuthCommon).Reducers.CountryCodeList
+local CryoModule = require(Parent.Cryo)
+local GetFFlagInExperienceContainerScreenSizeReducerFunction = require(Parent.SharedFlags).GetFFlagInExperienceContainerScreenSizeReducer
+local SetScreenSizeModule = if GetFFlagInExperienceContainerScreenSizeReducerFunction() then require(InExperienceContainer.Actions.SetScreenSize) else nil
+local GetFFlagInExperienceContainerAppLinkingFunction = require(Parent.SharedFlags).GetFFlagInExperienceContainerAppLinking
+local GetFFlagInExperienceContainerRespectUserThemeFunction = require(Parent.SharedFlags).GetFFlagInExperienceContainerRespectUserTheme
+local FFlagUseSignalsForCountryCodeList = require(Parent.SharedFlags).FFlagUseSignalsForCountryCodeList
+local config = { reducer = {} }
 
-return function(p1)
-	-- upvalues: useSelectedTheme (ref), cryoModule (ref), t (ref), reactModule (ref), roduxModule (ref), fFlagUseSignalsForCountryCodeList (ref), countryCodeList (ref), fetchingStatus (ref), getFFlagInExperienceContainerScreenSizeReducer (ref), var1 (ref), styleProviderWithDefaultTheme (ref), getFFlagInExperienceContainerRespectUserTheme (ref), roactRoduxModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), roactAppExperimentModule (ref), IXPService (ref), roactAppPolicy (ref), appFeaturePolicies (ref), roactServices (ref), roactAnalytics (ref), analytics (ref), roactNetworking (ref), requestInternalWrapper (ref), httpService (ref), appLinking (ref), getFFlagInExperienceContainerAppLinking (ref), linkingProtocol (ref), selectionCursorProvider (ref), cursorProvider (ref), providerContainer (ref), openWebviewModule (ref)
-	local isNotLight
-	local var2 = useSelectedTheme()
-	local var3 = cryoModule.Dictionary.union(t, p1)
-	local var4 = reactModule.Children.only(var3.children)
-	local var5 = roduxModule.Store.new(roduxModule.combineReducers(cryoModule.Dictionary.join({
-		CountryCodeList = if fFlagUseSignalsForCountryCodeList then nil else countryCodeList,
-		FetchingStatus = fetchingStatus,
-		ScreenSize = if getFFlagInExperienceContainerScreenSizeReducer() then roduxModule.createReducer(Vector2.new(400, 400), {
-			[var1.name] = function(_, p2)
+return function(p1) --[[ Line: 54 | Named "InExperienceProviderContainer" ]]
+	-- upvalues: UseSelectedThemeFunction (copy), CryoModule (copy), config (copy), ReactModule (copy), RoduxModule (copy), FFlagUseSignalsForCountryCodeList (copy), CountryCodeList (copy), FetchingStatus (copy), GetFFlagInExperienceContainerScreenSizeReducerFunction (copy), SetScreenSizeModule (copy), StyleProviderWithDefaultTheme (copy), GetFFlagInExperienceContainerRespectUserThemeFunction (copy), RoactRoduxModule (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), RoactAppExperimentModule (copy), IXPService (copy), RoactAppPolicy (copy), AppFeaturePolicies (copy), RoactServices (copy), RoactAnalytics (copy), Analytics (copy), RoactNetworking (copy), RequestInternalWrapperFunction (copy), HttpService (copy), AppLinking (copy), GetFFlagInExperienceContainerAppLinkingFunction (copy), LinkingProtocol (copy), SelectionCursorProvider (copy), CursorProvider (copy), ProviderContainer (copy), OpenWebviewModule (copy)
+	local UseSelectedThemeResult = UseSelectedThemeFunction()
+	local UnionResult = CryoModule.Dictionary.union(config, p1)
+	local OnlyResult = ReactModule.Children.only(UnionResult.children)
+	local NewResult = RoduxModule.Store.new(RoduxModule.combineReducers(CryoModule.Dictionary.join({
+		CountryCodeList = if FFlagUseSignalsForCountryCodeList then nil else CountryCodeList,
+		FetchingStatus = FetchingStatus,
+		ScreenSize = if GetFFlagInExperienceContainerScreenSizeReducerFunction() then RoduxModule.createReducer(Vector2.new(400, 400), {
+			[SetScreenSizeModule.name] = function(_, p2) --[[ Line: 69 ]]
 				return p2.screenSize
 			end
-		}) else function(_, _)
+		}) else function(_, _): Vector2 --[[ Line: 73 ]]
 			return Vector2.new(400, 400)
 		end
-	}, var3.reducer)), nil, { roduxModule.thunkMiddleware })
-	local t_1 = {}
-	local t_2 = { class = styleProviderWithDefaultTheme }
-	local t_3 = {}
-	
-	if getFFlagInExperienceContainerRespectUserTheme() then
-		isNotLight = var2 ~= "light"
-		isNotLight = nil
-	else
-		isNotLight = true
-	end
-	t_3.withDarkTheme = isNotLight
-	t_2.props = t_3
-	table.insert(t_1, t_2)
-	table.insert(t_1, {
-		class = roactRoduxModule.StoreProvider,
-		props = { store = var5 }
-	})
-	table.insert(t_1, {
-		class = localizationProvider,
+	}, UnionResult.reducer)), nil, { RoduxModule.thunkMiddleware })
+	local List = {}
+	table.insert(List, {
+		class = StyleProviderWithDefaultTheme,
 		props = {
-			localization = localization.new(localizationService.RobloxLocaleId)
+			withDarkTheme = not GetFFlagInExperienceContainerRespectUserThemeFunction() or UseSelectedThemeResult ~= "light"
 		}
 	})
-	table.insert(t_1, {
-		class = roactAppExperimentModule.Provider,
+	table.insert(List, {
+		class = RoactRoduxModule.StoreProvider,
+		props = { store = NewResult }
+	})
+	table.insert(List, {
+		class = LocalizationProvider,
+		props = {
+			localization = Localization.new(LocalizationService.RobloxLocaleId)
+		}
+	})
+	table.insert(List, {
+		class = RoactAppExperimentModule.Provider,
 		props = { value = IXPService }
 	})
-	table.insert(t_1, {
-		class = roactAppPolicy.Provider,
-		props = { policy = { appFeaturePolicies } }
+	table.insert(List, {
+		class = RoactAppPolicy.Provider,
+		props = { policy = { AppFeaturePolicies } }
 	})
-	table.insert(t_1, {
-		class = roactServices.ServiceProvider,
+	table.insert(List, {
+		class = RoactServices.ServiceProvider,
 		props = {
 			services = {
-				[roactAnalytics] = analytics.new(),
-				[roactNetworking] = requestInternalWrapper(httpService),
-				[appLinking] = if getFFlagInExperienceContainerAppLinking() then linkingProtocol.default else nil
+				[RoactAnalytics] = Analytics.new(),
+				[RoactNetworking] = RequestInternalWrapperFunction(HttpService),
+				[AppLinking] = if GetFFlagInExperienceContainerAppLinkingFunction() then LinkingProtocol.default else nil
 			}
 		}
 	})
-	table.insert(t_1, { class = selectionCursorProvider })
-	table.insert(t_1, { class = cursorProvider })
+	table.insert(List, { class = SelectionCursorProvider })
+	table.insert(List, { class = CursorProvider })
 	
-	return reactModule.createElement(providerContainer, { providers = t_1 }, {
-		Child = reactModule.cloneElement(var4, { showWebpage = openWebviewModule })
+	return ReactModule.createElement(ProviderContainer, { providers = List }, {
+		Child = ReactModule.cloneElement(OnlyResult, { showWebpage = OpenWebviewModule })
 	})
 end

@@ -1,1 +1,3 @@
-﻿return game:DefineFastFlag("FriendsMenuUseProfileFrameThumbnail", false) and require(script:FindFirstAncestor("FriendsMenu").Parent.SharedFlags).GetFFlagProfileFrameThumbnailEnabled()
+﻿local GetFFlagProfileFrameThumbnailEnabledFunction = require(script:FindFirstAncestor("FriendsMenu").Parent.SharedFlags).GetFFlagProfileFrameThumbnailEnabled
+
+return game:DefineFastFlag("FriendsMenuUseProfileFrameThumbnail", false) and GetFFlagProfileFrameThumbnailEnabledFunction()

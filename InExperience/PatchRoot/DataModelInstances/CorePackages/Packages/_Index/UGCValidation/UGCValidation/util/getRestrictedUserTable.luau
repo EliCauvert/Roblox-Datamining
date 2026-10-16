@@ -1,10 +1,10 @@
-﻿local ok, status = pcall(function()
+﻿local Success, Result = pcall(function() --[[ Line: 1 ]]
 	return game:GetService("StudioService")
 end)
-local var1 = if ok then status else nil
+local Result1 = if Success then Result else nil
 local _ = require(script.Parent.Parent.util.Types)
 
-return function()
-	-- upvalues: var1 (ref)
-	return if var1 then { { creatorType = "User", id = var1:GetUserId() } } else {}
+return function() --[[ Line: 10 | Named "getRestrictedUserTable" ]]
+	-- upvalues: Result1 (copy)
+	return if Result1 then { { creatorType = "User", id = Result1:GetUserId() } } else {}
 end

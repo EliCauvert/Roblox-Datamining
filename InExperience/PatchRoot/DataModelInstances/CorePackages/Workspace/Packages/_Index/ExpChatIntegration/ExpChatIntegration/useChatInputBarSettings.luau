@@ -1,7 +1,7 @@
-﻿local signalsReactModule = require(script:FindFirstAncestor("ExpChatIntegration").Parent.SignalsReact)
-local useChatPlatformModule = require(script.Parent.useChatPlatform)
+﻿local SignalsReactModule = require(script:FindFirstAncestor("ExpChatIntegration").Parent.SignalsReact)
+local UseChatPlatformModule = require(script.Parent.useChatPlatform)
 
-return function()
-	-- upvalues: useChatPlatformModule (ref), signalsReactModule (ref)
-	return signalsReactModule.useSignalState(useChatPlatformModule().getChatInputBarSettings)
+return function() --[[ Line: 8 | Named "useChatInputBarSettings" ]]
+	-- upvalues: UseChatPlatformModule (copy), SignalsReactModule (copy)
+	return SignalsReactModule.useSignalState(UseChatPlatformModule().getChatInputBarSettings)
 end

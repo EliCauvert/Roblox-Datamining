@@ -1,20 +1,20 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent
-local messageBus = require(parent_1.MessageBus).MessageBus
-local tModule = require(parent_1.t)
-local argCheckModule = require(parent_1.ArgCheck)
-local _ = require(parent.LoggingProtocolTypes)
-local appCommonLibModule = require(parent_1.AppCommonLib)
-local callOnce = appCommonLibModule.callOnce
-local callOncePerDMModule = require(parent.callOncePerDM)
-local signal = appCommonLibModule.Signal
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent
+local MessageBus = require(Parent1.MessageBus).MessageBus
+local TModule = require(Parent1.t)
+local ArgCheckModule = require(Parent1.ArgCheck)
+local _ = require(Parent.LoggingProtocolTypes)
+local AppCommonLibModule = require(Parent1.AppCommonLib)
+local CallOnceFunction = AppCommonLibModule.callOnce
+local CallOncePerDMModule = require(Parent.callOncePerDM)
+local Signal = AppCommonLibModule.Signal
 game:DefineFastFlag("EnableTelemetryProtocol", false)
 
-function getDomainName()
+function getDomainName(): string --[[ Line: 82 ]]
 	return if game:GetFastFlag("EnableTelemetryProtocol") then "Telemetry" else "Logging"
 end
 
-local t = {
+local TelemetryBackends = {
 	UNSPECIFIED = "UNSPECIFIED",
 	EventIngest = "EventIngest",
 	Points = "Points",
@@ -23,8 +23,8 @@ local t = {
 	Counter = "RobloxTelemetryCounter",
 	Stats = "RobloxTelemetryStat"
 }
-local t_1 = {
-	TelemetryBackends = t,
+local LoggingProtocolModule = {
+	TelemetryBackends = TelemetryBackends,
 	StandardizedFields = {
 		addPlaceId = "addPlaceId",
 		addUniverseId = "addUniverseId",
@@ -33,130 +33,138 @@ local t_1 = {
 		addOsInfo = "addOSInfo"
 	},
 	LOG_EVENT_WITH_TIMESTAMP_DESCRIPTOR = {
-		fid = messageBus.getMessageId(getDomainName(), "logEventWithTimestamp"),
-		validateParams = tModule.strictInterface({
-			eventName = tModule.string,
-			timestamp = tModule.optional(tModule.number),
-			metadata = tModule.optional(tModule.keys(tModule.string))
+		fid = MessageBus.getMessageId(getDomainName(), "logEventWithTimestamp"),
+		validateParams = TModule.strictInterface({
+			eventName = TModule.string,
+			timestamp = TModule.optional(TModule.number),
+			metadata = TModule.optional(TModule.keys(TModule.string))
 		})
 	},
 	GET_TIMESTAMP_DESCRIPTOR = {
-		fid = messageBus.getMessageId(getDomainName(), "getTimestamp"),
-		validateParams = tModule.table
+		fid = MessageBus.getMessageId(getDomainName(), "getTimestamp"),
+		validateParams = TModule.table
 	},
 	LOG_EVENT_FROM_LUA_DESCRIPTOR = {
-		fid = messageBus.getMessageId(getDomainName(), "logEventFromLua"),
-		validateParams = tModule.interface({
-			eventType = tModule.string,
-			config = tModule.optional(tModule.strictInterface({
-				eventName = tModule.string,
-				backends = tModule.array(tModule.valueOf(t)),
-				throttlingPercentage = tModule.optional(tModule.number),
-				lastUpdated = tModule.optional(tModule.array(tModule.integer)),
-				description = tModule.optional(tModule.string),
-				links = tModule.optional(tModule.string)
+		fid = MessageBus.getMessageId(getDomainName(), "logEventFromLua"),
+		validateParams = TModule.interface({
+			eventType = TModule.string,
+			config = TModule.optional(TModule.strictInterface({
+				eventName = TModule.string,
+				backends = TModule.array(TModule.valueOf(TelemetryBackends)),
+				throttlingPercentage = TModule.optional(TModule.number),
+				lastUpdated = TModule.optional(TModule.array(TModule.integer)),
+				description = TModule.optional(TModule.string),
+				links = TModule.optional(TModule.string)
 			})),
-			data = tModule.optional(tModule.table)
+			data = TModule.optional(TModule.table)
 		})
 	}
 }
-t_1.__index = t_1
+LoggingProtocolModule.__index = LoggingProtocolModule
 
-function t_1.new(p1)
-	-- upvalues: messageBus (ref), signal (ref), t_1 (ref)
-	local t = {
-		messageBus = p1 or messageBus,
-		durationLoggerSignal = signal.new()
+function LoggingProtocolModule.new(p1) --[[ Line: 150 ]]
+	-- upvalues: MessageBus (copy), Signal (copy), LoggingProtocolModule (copy)
+	local config = {
+		messageBus = p1 or MessageBus,
+		durationLoggerSignal = Signal.new()
 	}
-	setmetatable(t, t_1)
+	setmetatable(config, LoggingProtocolModule)
 	
-	return t
+	return config
 end
 
-function t_1:setDurationLoggerListener(p1)
+function LoggingProtocolModule:setDurationLoggerListener(p1) --[[ Line: 159 ]]
 	return self.durationLoggerSignal:connect(p1)
 end
 
-function t_1:logEventWithTimestamp(p1, p2, p3)
-	-- upvalues: argCheckModule (ref)
-	argCheckModule.isType(p1, "string", "eventName")
-	argCheckModule.isType(p2, "number", "timestamp")
-	self.messageBus.call(self.LOG_EVENT_WITH_TIMESTAMP_DESCRIPTOR, { eventName = p1, timestamp = p2, metadata = p3 })
-	self.durationLoggerSignal:fire(p1)
+function LoggingProtocolModule:logEventWithTimestamp(EventName, Timestamp, Metadata) --[[ Line: 163 ]]
+	-- upvalues: ArgCheckModule (copy)
+	ArgCheckModule.isType(EventName, "string", "eventName")
+	ArgCheckModule.isType(Timestamp, "number", "timestamp")
+	self.messageBus.call(self.LOG_EVENT_WITH_TIMESTAMP_DESCRIPTOR, {
+		eventName = EventName,
+		timestamp = Timestamp,
+		metadata = Metadata
+	})
+	self.durationLoggerSignal:fire(EventName)
 end
 
-function t_1:logEvent(p1, p2)
-	-- upvalues: argCheckModule (ref)
-	argCheckModule.isType(p1, "string", "eventName")
-	self:logEventWithTimestamp(p1, 0, p2)
+function LoggingProtocolModule:logEvent(EventName, Metadata) --[[ Line: 175 ]]
+	-- upvalues: ArgCheckModule (copy)
+	ArgCheckModule.isType(EventName, "string", "eventName")
+	self:logEventWithTimestamp(EventName, 0, Metadata)
 end
 
-function t_1.logEventOnce(p1, p2, p3)
-	-- upvalues: argCheckModule (ref), callOncePerDMModule (ref), callOnce (ref)
-	argCheckModule.isType(p2, "string", "eventName")
+function LoggingProtocolModule.logEventOnce(p1, p2, p3) --[[ Line: 180 ]]
+	-- upvalues: ArgCheckModule (copy), CallOncePerDMModule (copy), CallOnceFunction (copy)
+	ArgCheckModule.isType(p2, "string", "eventName")
 	
 	if game:DefineFastFlag("LuaAppSendTTIEventsPerDM", false) then
-		callOncePerDMModule(string.format("logging_protocol_key-%s", p2), function()
-			-- upvalues: p1 (ref), p2 (ref), p3 (ref)
+		CallOncePerDMModule(string.format("logging_protocol_key-%s", p2), function() --[[ Line: 184 ]]
+			-- upvalues: p1 (copy), p2 (copy), p3 (copy)
 			p1:logEvent(p2, p3)
 		end)
 		
 		return
+	else
+		CallOnceFunction(string.format("logging_protocol_key-%s", p2), function() --[[ Line: 188 ]]
+			-- upvalues: p1 (copy), p2 (copy), p3 (copy)
+			p1:logEvent(p2, p3)
+		end)
 	end
-	callOnce(string.format("logging_protocol_key-%s", p2), function()
-		-- upvalues: p1 (ref), p2 (ref), p3 (ref)
-		p1:logEvent(p2, p3)
-	end)
 end
 
-function t_1:getTimestamp()
+function LoggingProtocolModule:getTimestamp() --[[ Line: 195 ]]
 	return self.messageBus.call(self.GET_TIMESTAMP_DESCRIPTOR, {})
 end
 
-function t_1:logRobloxTelemetryCounter(p1, p2, p3)
+function LoggingProtocolModule:logRobloxTelemetryCounter(Config, IncrementValue, CustomFields) --[[ Line: 199 ]]
 	self.messageBus.call(self.LOG_EVENT_FROM_LUA_DESCRIPTOR, {
 		eventType = "RobloxTelemetryCounter",
-		config = p1,
-		data = if p2 then { incrementValue = p2, customFields = p3 } elseif p3 then { customFields = p3 } else nil
+		config = Config,
+		data = if IncrementValue then {
+			incrementValue = IncrementValue,
+			customFields = CustomFields
+		} elseif CustomFields then { customFields = CustomFields } else nil
 	})
 end
 
-function t_1:logRobloxTelemetryStat(p1, p2, p3)
+function LoggingProtocolModule:logRobloxTelemetryStat(Config, StatValue, CustomFields) --[[ Line: 221 ]]
 	self.messageBus.call(self.LOG_EVENT_FROM_LUA_DESCRIPTOR, {
 		eventType = "RobloxTelemetryStat",
-		config = p1,
-		data = { statValue = p2, customFields = p3 }
+		config = Config,
+		data = { statValue = StatValue, customFields = CustomFields }
 	})
 end
 
-function t_1:logRobloxTelemetryEvent(p1, p2, p3, p4)
+function LoggingProtocolModule:logRobloxTelemetryEvent(Config, StandardizedFields, CustomFields, EventContext) --[[ Line: 237 ]]
 	self.messageBus.call(self.LOG_EVENT_FROM_LUA_DESCRIPTOR, {
 		eventType = "RobloxTelemetry",
-		config = p1,
+		config = Config,
 		data = {
-			standardizedFields = p2,
-			customFields = p3,
-			eventContext = p4
+			standardizedFields = StandardizedFields,
+			customFields = CustomFields,
+			eventContext = EventContext
 		}
 	})
 end
 
-function t_1:logEphemeralCounterEvent(p1, p2)
+function LoggingProtocolModule:logEphemeralCounterEvent(Config, IncrementValue) --[[ Line: 255 ]]
 	self.messageBus.call(self.LOG_EVENT_FROM_LUA_DESCRIPTOR, {
 		eventType = "EphemeralCounter",
-		config = p1,
-		data = if p2 then { incrementValue = p2 } else nil
+		config = Config,
+		data = if IncrementValue then { incrementValue = IncrementValue } else nil
 	})
 end
 
-function t_1:logEphemeralStatEvent(p1, p2)
+function LoggingProtocolModule:logEphemeralStatEvent(Config, StatValue) --[[ Line: 269 ]]
 	self.messageBus.call(self.LOG_EVENT_FROM_LUA_DESCRIPTOR, {
 		eventType = "EphemeralStat",
-		config = p1,
-		data = { statValue = p2 }
+		config = Config,
+		data = { statValue = StatValue }
 	})
 end
 
-t_1.default = t_1.new()
+LoggingProtocolModule.default = LoggingProtocolModule.new()
 
-return t_1
+return LoggingProtocolModule

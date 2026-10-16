@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent._Workspace.AppBlox.AppBlox.Composer)
+﻿return (require(script.Parent.Parent._Workspace.AppBlox.AppBlox.Composer))

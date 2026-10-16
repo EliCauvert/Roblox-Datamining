@@ -1,41 +1,41 @@
-﻿local telemetryService = game:GetService("TelemetryService")
-local standardFieldEnumModule = require(script.Parent.StandardFieldEnum)
-local helpPageThrottleHundredthsPercent = game:DefineFastInt("HelpPageThrottleHundredthsPercent", 0)
-local t = {}
-t.__index = t
+﻿local TelemetryService = game:GetService("TelemetryService")
+local StandardFieldEnumModule = require(script.Parent.StandardFieldEnum)
+local HelpPageThrottleHundredthsPercent = game:DefineFastInt("HelpPageThrottleHundredthsPercent", 0)
+local HelpPageTelemetryModule = {}
+HelpPageTelemetryModule.__index = HelpPageTelemetryModule
 
-function t.new()
-	-- upvalues: t (ref)
-	return setmetatable({}, t)
+function HelpPageTelemetryModule.new() --[[ Line: 35 ]]
+	-- upvalues: HelpPageTelemetryModule (copy)
+	return (setmetatable({}, HelpPageTelemetryModule))
 end
 
-t.telemetryConfigs = {
+HelpPageTelemetryModule.telemetryConfigs = {
 	helpPageInteraction = {
 		eventConfig = {
 			eventName = "ingame_menu_action",
 			description = "[[Event to track input type and screen orientation for the help page.]]",
 			backends = { "EventIngest" },
-			throttlingPercentage = helpPageThrottleHundredthsPercent,
+			throttlingPercentage = HelpPageThrottleHundredthsPercent,
 			lastUpdated = { 2025, 8, 25 }
 		},
 		standardizedFields = {
-			standardFieldEnumModule.addUniverseId,
-			standardFieldEnumModule.addPlaySessionId,
-			standardFieldEnumModule.addPlaceId,
-			standardFieldEnumModule.addSessionInfo
+			StandardFieldEnumModule.addUniverseId,
+			StandardFieldEnumModule.addPlaySessionId,
+			StandardFieldEnumModule.addPlaceId,
+			StandardFieldEnumModule.addSessionInfo
 		}
 	}
 }
 
-function t.logHelpPageInteraction(_, p1, p2)
-	-- upvalues: t (ref), telemetryService (ref)
-	telemetryService:LogEvent(t.telemetryConfigs.helpPageInteraction.eventConfig, {
-		eventContext = p1,
-		standardizedFields = t.telemetryConfigs.helpPageInteraction.standardizedFields,
-		customFields = p2
+function HelpPageTelemetryModule:logHelpPageInteraction(EventContext, CustomFields) --[[ Line: 59 ]]
+	-- upvalues: HelpPageTelemetryModule (copy), TelemetryService (copy)
+	TelemetryService:LogEvent(HelpPageTelemetryModule.telemetryConfigs.helpPageInteraction.eventConfig, {
+		eventContext = EventContext,
+		standardizedFields = HelpPageTelemetryModule.telemetryConfigs.helpPageInteraction.standardizedFields,
+		customFields = CustomFields
 	})
 end
 
-t.default = t.new()
+HelpPageTelemetryModule.default = HelpPageTelemetryModule.new()
 
-return t
+return HelpPageTelemetryModule

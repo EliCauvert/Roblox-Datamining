@@ -1,64 +1,60 @@
-﻿local parent = script.Parent.Parent.Parent
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local t = {
-	categories = {
-		validationEnumsModule.UploadCategory.EMOTE_ANIMATION,
-		validationEnumsModule.UploadCategory.ANIMATION
-	},
-	requiredData = {
-		validationEnumsModule.SharedDataMember.curveAnimations,
-		validationEnumsModule.SharedDataMember.curveAnimComputedFrames
-	},
-	expectedFailures = {},
-	prereqTests = {
-		validationEnumsModule.ValidationModule.CurveAnimDataAvailable
-	}
-}
+﻿local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
 
-local function areNumbersGood(...)
-	local function _(p1)
+local function areNumbersGood(...): boolean --[[ Line: 18 ]]
+	local function _(p1): boolean --[[ Line: 19 | Named "isNaN" ]]
 		return p1 ~= p1
 	end
 	
-	local _ = function(p1)
-		return if p1 ~= 1e999 then p1 == -1e999 else true
+	local _ = function(p1): boolean --[[ Line: 23 | Named "isInfinite" ]]
+		return p1 == 1e999 or p1 == -1e999
 	end
 	
-	for i, v in { ... } do
-		if v == v then
-			if if v ~= 1e999 then v == -1e999 else true then
-				return false
-			end
+	for _, value in { ... } do
+		if value ~= value then
+			return false
+		elseif value == 1e999 or value == -1e999 then
+			return false
 		end
-		return false
 	end
 	return true
 end
 
-function t.run(p1, p2)
-	-- upvalues: areNumbersGood (ref), errorSourceStringsModule (ref)
-	local curveAnimComputedFrames = p2.curveAnimComputedFrames
-	
-	for i, v in curveAnimComputedFrames.animFrames do
-		for i_2, v_2 in v do
-			if not areNumbersGood(v_2:GetComponents()) then
-				p1:fail(errorSourceStringsModule.Keys.CurveAnim_InvalidNumericalData)
-				
-				return
+return {
+	categories = {
+		ValidationEnumsModule.UploadCategory.EMOTE_ANIMATION,
+		ValidationEnumsModule.UploadCategory.ANIMATION
+	},
+	requiredData = {
+		ValidationEnumsModule.SharedDataMember.curveAnimations,
+		ValidationEnumsModule.SharedDataMember.curveAnimComputedFrames
+	},
+	expectedFailures = {},
+	prereqTests = {
+		ValidationEnumsModule.ValidationModule.CurveAnimDataAvailable
+	},
+	run = function(p1, p2) --[[ Line: 38 ]]
+		-- upvalues: areNumbersGood (copy), ErrorSourceStringsModule (copy)
+		local CurveAnimComputedFrames = p2.curveAnimComputedFrames
+		
+		for _, animFrame in CurveAnimComputedFrames.animFrames do
+			for _, CF in animFrame do
+				if not areNumbersGood(CF:GetComponents()) then
+					p1:fail(ErrorSourceStringsModule.Keys.CurveAnim_InvalidNumericalData)
+					
+					return
+				end
+			end
+		end
+		for _, positionMagnitudeFrame in CurveAnimComputedFrames.positionMagnitudeFrames do
+			for _, value in positionMagnitudeFrame do
+				if not areNumbersGood(value) then
+					p1:fail(ErrorSourceStringsModule.Keys.CurveAnim_InvalidNumericalData)
+					break
+				end
 			end
 		end
 	end
-	for i, v_1 in curveAnimComputedFrames.positionMagnitudeFrames do
-		for i_2, v_2 in v_1 do
-			if not areNumbersGood(v_2) then
-				p1:fail(errorSourceStringsModule.Keys.CurveAnim_InvalidNumericalData)
-				
-				return
-			end
-		end
-	end
-end
-
-return t
+}

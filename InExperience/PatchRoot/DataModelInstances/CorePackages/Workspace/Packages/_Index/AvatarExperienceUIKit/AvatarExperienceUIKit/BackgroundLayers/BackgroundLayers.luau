@@ -1,37 +1,37 @@
-﻿local reactModule = require(script:FindFirstAncestor("AvatarExperienceUIKit").Parent.React)
-local backgroundGradientModule = require(script.Parent.BackgroundGradient)
-local backgroundImageModule = require(script.Parent.BackgroundImage)
+﻿local ReactModule = require(script:FindFirstAncestor("AvatarExperienceUIKit").Parent.React)
+local BackgroundGradientModule = require(script.Parent.BackgroundGradient)
+local BackgroundImageModule = require(script.Parent.BackgroundImage)
 
-return function(value)
-	-- upvalues: reactModule (ref), backgroundGradientModule (ref), backgroundImageModule (ref)
-	local t = {}
+return function(p1) --[[ Line: 36 | Named "BackgroundLayers" ]]
+	-- upvalues: ReactModule (copy), BackgroundGradientModule (copy), BackgroundImageModule (copy)
+	local Elements = {}
 	
-	for i, v in value.backgroundLayers do
-		local var1 = (value.ZIndex or 0) - (#value.backgroundLayers - i)
+	for i, backgroundLayer in p1.backgroundLayers do
+		local ZIndex = (p1.ZIndex or 0) - (#p1.backgroundLayers - i)
 		
-		if v.type == "GradientBackground" then
-			t[`GradientBackground_{i}`] = reactModule.createElement(backgroundGradientModule, {
-				colorSequence = v.colorSequence,
-				cornerRadius = value.cornerRadius,
-				offset = v.offset,
-				rotation = v.rotation,
-				transparency = v.transparency,
-				ZIndex = var1,
-				tag = v.tag
+		if backgroundLayer.type == "GradientBackground" then
+			Elements[`GradientBackground_{i}`] = ReactModule.createElement(BackgroundGradientModule, {
+				colorSequence = backgroundLayer.colorSequence,
+				cornerRadius = p1.cornerRadius,
+				offset = backgroundLayer.offset,
+				rotation = backgroundLayer.rotation,
+				transparency = backgroundLayer.transparency,
+				ZIndex = ZIndex,
+				tag = backgroundLayer.tag
 			})
-		elseif v.type == "ImageBackground" then
-			t[`ImageBackground_{i}`] = reactModule.createElement(backgroundImageModule, {
-				anchorPoint = v.anchorPoint,
-				color = v.color,
-				cornerRadius = value.cornerRadius,
-				position = v.position,
-				resourceIdentifier = v.resourceIdentifier,
-				transparency = v.transparency,
-				ZIndex = var1,
-				tag = v.tag,
-				scaleType = value.imageScaleType
+		elseif backgroundLayer.type == "ImageBackground" then
+			Elements[`ImageBackground_{i}`] = ReactModule.createElement(BackgroundImageModule, {
+				anchorPoint = backgroundLayer.anchorPoint,
+				color = backgroundLayer.color,
+				cornerRadius = p1.cornerRadius,
+				position = backgroundLayer.position,
+				resourceIdentifier = backgroundLayer.resourceIdentifier,
+				transparency = backgroundLayer.transparency,
+				ZIndex = ZIndex,
+				tag = backgroundLayer.tag,
+				scaleType = p1.imageScaleType
 			})
 		end
 	end
-	return reactModule.createElement(reactModule.Fragment, nil, t)
+	return ReactModule.createElement(ReactModule.Fragment, nil, Elements)
 end

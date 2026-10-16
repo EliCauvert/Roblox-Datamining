@@ -1,7 +1,9 @@
-﻿local avatarExperienceFlagsModule = require(script:FindFirstAncestor("AvatarExperienceCatalog").Parent.AvatarExperienceFlags)
-local useHasAtLeastOneCatalogOfferModule = require(script.Parent.useHasAtLeastOneCatalogOffer)
+﻿local AvatarExperienceFlagsModule = require(script:FindFirstAncestor("AvatarExperienceCatalog").Parent.AvatarExperienceFlags)
+local UseHasAtLeastOneCatalogOfferModule = require(script.Parent.useHasAtLeastOneCatalogOffer)
 
-return function()
-	-- upvalues: useHasAtLeastOneCatalogOfferModule (ref), avatarExperienceFlagsModule (ref)
-	return avatarExperienceFlagsModule.FFlagPurchasePromptCartPricingRequireOffer and not useHasAtLeastOneCatalogOfferModule()
+return function() --[[ Line: 22 | Named "useShouldFetchCartPricingForLookPurchasePrompt" ]]
+	-- upvalues: UseHasAtLeastOneCatalogOfferModule (copy), AvatarExperienceFlagsModule (copy)
+	local UseHasAtLeastOneCatalogOfferModuleResult = UseHasAtLeastOneCatalogOfferModule()
+	
+	return not AvatarExperienceFlagsModule.FFlagPurchasePromptCartPricingRequireOffer or UseHasAtLeastOneCatalogOfferModuleResult
 end

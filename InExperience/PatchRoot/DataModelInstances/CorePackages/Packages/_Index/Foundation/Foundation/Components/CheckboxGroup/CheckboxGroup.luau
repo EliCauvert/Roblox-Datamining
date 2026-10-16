@@ -1,19 +1,19 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local internalInputGroupModule = require(foundation.Components.InternalInputGroup)
-local _ = require(foundation.Components.Types)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local t = { testId = "--foundation-checkbox-group" }
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local InternalInputGroupModule = require(Foundation.Components.InternalInputGroup)
+local _ = require(Foundation.Components.Types)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local config = { testId = "--foundation-checkbox-group" }
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), internalInputGroupModule (ref), withCommonPropsModule (ref)
-	local var1 = withDefaultsModule(p1, t)
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 21 | Named "CheckboxGroup" ]]
+	-- upvalues: WithDefaultsModule (copy), config (copy), ReactModule (copy), InternalInputGroupModule (copy), WithCommonPropsModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	
-	return reactModule.createElement(internalInputGroupModule, withCommonPropsModule(var1, {
-		legend = var1.legend,
-		size = var1.size,
-		placement = var1.placement,
-		ref = p2
-	}), var1.children)
+	return ReactModule.createElement(InternalInputGroupModule, WithCommonPropsModule(WithDefaultsModuleResult, {
+		legend = WithDefaultsModuleResult.legend,
+		size = WithDefaultsModuleResult.size,
+		placement = WithDefaultsModuleResult.placement,
+		ref = Ref
+	}), WithDefaultsModuleResult.children)
 end))

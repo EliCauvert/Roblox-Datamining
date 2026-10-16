@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.ExperienceStateReplay.ExperienceStateReplay)
+﻿return (require(script.Parent._Workspace.ExperienceStateReplay.ExperienceStateReplay))

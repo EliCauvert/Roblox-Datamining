@@ -1,11 +1,11 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local _ = require(parent.AppChatNetworking)
-local getFFlagEnableSocialCards = require(parent.SharedFlags).GetFFlagEnableSocialCards
-local _ = require(appChat.MessageData.Types)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local _ = require(Parent.AppChatNetworking)
+local GetFFlagEnableSocialCardsFunction = require(Parent.SharedFlags).GetFFlagEnableSocialCards
+local _ = require(AppChat.MessageData.Types)
 
-return function(p1, p2)
-	-- upvalues: getFFlagEnableSocialCards (ref)
+return function(p1, ConversationId) --[[ Line: 22 | Named "buildConversationMessageFromApi" ]]
+	-- upvalues: GetFFlagEnableSocialCardsFunction (copy)
 	return {
 		id = p1.id,
 		type = p1.type,
@@ -17,9 +17,10 @@ return function(p1, p2)
 		preview_content = p1.preview_content,
 		content_to_display = p1.content_to_display or p1.content,
 		replies_to = p1.replies_to,
-		cards = if getFFlagEnableSocialCards() then p1.cards else nil,
+		cards = if GetFFlagEnableSocialCardsFunction() then p1.cards else nil,
 		filtered_for_receivers = p1.filtered_for_receivers,
-		conversationId = p2,
+		is_previewable = p1.is_previewable,
+		conversationId = ConversationId,
 		stableKey = p1.id
 	}
 end

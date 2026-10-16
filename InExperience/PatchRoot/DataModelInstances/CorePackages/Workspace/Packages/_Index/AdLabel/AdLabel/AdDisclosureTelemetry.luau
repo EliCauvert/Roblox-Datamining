@@ -1,18 +1,18 @@
-﻿local telemetryService = game:GetService("TelemetryService")
-local list = { "addOSInfo", "addSessionInfo", "addSessionId" }
-local t = {
+﻿local TelemetryService = game:GetService("TelemetryService")
+local StandardizedFields = { "addOSInfo", "addSessionInfo", "addSessionId" }
+local config = {
 	eventName = "AdDisclosureMenuToggledCounter",
 	description = "\t\tCounts the number of times the ad disclosure menu is toggled. \n\t\tCustom field \"isOpened\" indicates whether the menu was opened (true) or closed (false).\n\t",
 	backends = { "RobloxTelemetryCounter" },
 	lastUpdated = { 26, 1, 13 }
 }
-local t_1 = {
+local config1 = {
 	eventName = "AdDisclosureWhyThisAdToggledCounter",
 	description = "\t\tCounts the number of times the \"Why This Ad\" modal is toggled. \n\t\tCustom field \"isOpened\" indicates whether the modal was opened (true) or closed (false).\n\t",
 	backends = { "RobloxTelemetryCounter" },
 	lastUpdated = { 26, 1, 13 }
 }
-local t_2 = {
+local config2 = {
 	eventName = "AdPreferencesLinkClickedCounter",
 	description = "\t\tCounts the number of times the ad preferences link is clicked.\n\t",
 	backends = { "RobloxTelemetryCounter" },
@@ -20,22 +20,25 @@ local t_2 = {
 }
 
 return {
-	logAdDisclosureMenuToggled = function(p1)
-		-- upvalues: telemetryService (ref), t (ref), list (ref)
-		telemetryService:LogCounter(t, {
-			standardizedFields = list,
-			customFields = { isOpened = p1 }
+	logAdDisclosureMenuToggled = function(IsOpened) --[[ Line: 42 ]]
+		-- upvalues: TelemetryService (copy), config (copy), StandardizedFields (copy)
+		TelemetryService:LogCounter(config, {
+			standardizedFields = StandardizedFields,
+			customFields = { isOpened = IsOpened }
 		}, 1)
 	end,
-	logAdDisclosureWhyThisAdToggled = function(p1)
-		-- upvalues: telemetryService (ref), t_1 (ref), list (ref)
-		telemetryService:LogCounter(t_1, {
-			standardizedFields = list,
-			customFields = { isOpened = p1 }
+	logAdDisclosureWhyThisAdToggled = function(IsOpened) --[[ Line: 50 ]]
+		-- upvalues: TelemetryService (copy), config1 (copy), StandardizedFields (copy)
+		TelemetryService:LogCounter(config1, {
+			standardizedFields = StandardizedFields,
+			customFields = { isOpened = IsOpened }
 		}, 1)
 	end,
-	logAdPreferencesLinkClicked = function()
-		-- upvalues: telemetryService (ref), t_2 (ref), list (ref)
-		telemetryService:LogCounter(t_2, { standardizedFields = list, customFields = {} }, 1)
+	logAdPreferencesLinkClicked = function() --[[ Line: 58 ]]
+		-- upvalues: TelemetryService (copy), config2 (copy), StandardizedFields (copy)
+		TelemetryService:LogCounter(config2, {
+			standardizedFields = StandardizedFields,
+			customFields = {}
+		}, 1)
 	end
 }

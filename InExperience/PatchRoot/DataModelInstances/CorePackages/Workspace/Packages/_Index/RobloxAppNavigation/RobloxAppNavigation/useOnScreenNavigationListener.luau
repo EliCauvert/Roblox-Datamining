@@ -1,25 +1,23 @@
-﻿local reactModule = require(script:FindFirstAncestor("RobloxAppNavigation").Parent.React)
-local useIsRouteOnScreenModule = require(script.Parent.useIsRouteOnScreen)
+﻿local ReactModule = require(script:FindFirstAncestor("RobloxAppNavigation").Parent.React)
+local UseIsRouteOnScreenModule = require(script.Parent.useIsRouteOnScreen)
 
-return function(p1, p2)
-	-- upvalues: useIsRouteOnScreenModule (ref), reactModule (ref)
-	local var1 = useIsRouteOnScreenModule()
-	local var2 = reactModule.useRef(var1)
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), var2 (ref), p1 (ref), p2 (ref)
-		if var1 == var2.current then return end
-		var2.current = var1
+return function(Callback, Callback1) --[[ Line: 8 | Named "useOnScreenNavigationListener" ]]
+	-- upvalues: UseIsRouteOnScreenModule (copy), ReactModule (copy)
+	local UseIsRouteOnScreenModuleResult = UseIsRouteOnScreenModule()
+	local UseRefResult = ReactModule.useRef(UseIsRouteOnScreenModuleResult)
+	ReactModule.useEffect(function() --[[ Line: 11 ]]
+		-- upvalues: UseIsRouteOnScreenModuleResult (copy), UseRefResult (copy), Callback (copy), Callback1 (copy)
+		if UseIsRouteOnScreenModuleResult == UseRefResult.current then return end
+		UseRefResult.current = UseIsRouteOnScreenModuleResult
 		
-		if var1 then
-			if p1 == nil then
-				return
-			else
-				p1()
+		if UseIsRouteOnScreenModuleResult then
+			if Callback ~= nil then
+				Callback()
 				
 				return
 			end
-		elseif p2 ~= nil then
-			p2()
+		elseif Callback1 ~= nil then
+			Callback1()
 		end
-	end, { p1, p2, var1 })
+	end, { Callback, Callback1, UseIsRouteOnScreenModuleResult })
 end

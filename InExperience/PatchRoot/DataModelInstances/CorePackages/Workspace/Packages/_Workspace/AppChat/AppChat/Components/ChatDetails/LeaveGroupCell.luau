@@ -1,13 +1,13 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local memo = reactModule.memo
-local iconWithTextCellModule = require(appChat.Components.Cells.IconWithTextCell)
-local roactFitComponents = require(parent.LuaSocialLibrariesDeps).RoactFitComponents
-local fFlagDebugAppChatEnableDomLocatorsModule = require(appChat.Flags.FFlagDebugAppChatEnableDomLocators)
-local domLocatorsModule = require(appChat.Utils.DomLocators)
-local t = {
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local MemoFunction = ReactModule.memo
+local IconWithTextCellModule = require(AppChat.Components.Cells.IconWithTextCell)
+local RoactFitComponents = require(Parent.LuaSocialLibrariesDeps).RoactFitComponents
+local FFlagDebugAppChatEnableDomLocatorsModule = require(AppChat.Flags.FFlagDebugAppChatEnableDomLocators)
+local DomLocatorsModule = require(AppChat.Utils.DomLocators)
+local config = {
 	leaveGroupText = "leaveGroupText",
 	onActivated = nil,
 	iconImage = nil,
@@ -18,28 +18,33 @@ local t = {
 	style = nil
 }
 
-function LeaveGroupCell(p1)
-	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), roactFitComponents (ref), iconWithTextCellModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref)
-	local var1 = cryoModule.Dictionary.join(t, p1)
+function LeaveGroupCell(p1) --[[ Line: 37 ]]
+	-- upvalues: CryoModule (copy), config (copy), ReactModule (copy), RoactFitComponents (copy), IconWithTextCellModule (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), DomLocatorsModule (copy)
+	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	
-	return reactModule.createElement(roactFitComponents.FitFrameVertical, {
+	return ReactModule.createElement(RoactFitComponents.FitFrameVertical, {
 		BackgroundTransparency = 1,
-		LayoutOrder = var1.LayoutOrder,
+		LayoutOrder = JoinResult.LayoutOrder,
 		width = UDim.new(1, 0),
-		margin = { left = 0, right = 0, bottom = 0, top = var1.marginTop }
+		margin = {
+			left = 0,
+			right = 0,
+			bottom = 0,
+			top = JoinResult.marginTop
+		}
 	}, {
-		LeaveGroupRow = reactModule.createElement(iconWithTextCellModule, {
+		LeaveGroupRow = ReactModule.createElement(IconWithTextCellModule, {
 			showDivider = false,
-			LayoutOrder = var1.LayoutOrder,
-			onActivated = var1.onActivated,
-			primaryIcon = var1.iconImage,
-			Size = UDim2.new(1, 0, 0, var1.cellHeight),
-			style = var1.style,
-			Text = var1.leaveGroupText,
-			iconCellWidth = var1.iconCellWidth,
-			testId = if fFlagDebugAppChatEnableDomLocatorsModule then domLocatorsModule.chatDetailsListActionButton(var1.leaveGroupText) else nil
+			LayoutOrder = JoinResult.LayoutOrder,
+			onActivated = JoinResult.onActivated,
+			primaryIcon = JoinResult.iconImage,
+			Size = UDim2.new(1, 0, 0, JoinResult.cellHeight),
+			style = JoinResult.style,
+			Text = JoinResult.leaveGroupText,
+			iconCellWidth = JoinResult.iconCellWidth,
+			testId = if FFlagDebugAppChatEnableDomLocatorsModule then DomLocatorsModule.chatDetailsListActionButton(JoinResult.leaveGroupText) else nil
 		})
 	})
 end
 
-return memo(LeaveGroupCell)
+return MemoFunction(LeaveGroupCell)

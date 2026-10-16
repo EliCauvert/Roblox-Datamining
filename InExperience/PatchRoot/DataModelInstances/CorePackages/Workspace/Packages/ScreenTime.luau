@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.ScreenTime.ScreenTime)
+﻿return (require(script.Parent._Workspace.ScreenTime.ScreenTime))

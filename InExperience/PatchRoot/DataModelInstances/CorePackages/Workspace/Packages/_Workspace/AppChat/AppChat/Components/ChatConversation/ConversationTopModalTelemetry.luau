@@ -1,27 +1,27 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local _ = require(appChat.Telemetry.Layers.ChatConversationTelemetryLayer)
-local modalTelemetryModule = require(appChat.Components.ModalTelemetry)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local _ = require(AppChat.Telemetry.Layers.ChatConversationTelemetryLayer)
+local ModalTelemetryModule = require(AppChat.Components.ModalTelemetry)
 
 return {
 	Events = {
-		ModalRendered = modalTelemetryModule.Events.modalRenderedWithSequence({
-			modalSequence = modalTelemetryModule.Enums.ModalSequence.ConversationTopModal,
-			counterFormat = function(p1, _)
+		ModalRendered = ModalTelemetryModule.Events.modalRenderedWithSequence({
+			modalSequence = ModalTelemetryModule.Enums.ModalSequence.ConversationTopModal,
+			counterFormat = function(p1, _) --[[ Line: 12 ]]
 				return { modalVariant = p1.modalVariant }
 			end,
-			eventStreamFormat = function(p1, _)
+			eventStreamFormat = function(p1, _) --[[ Line: 17 ]]
 				return {
 					modalVariant = p1.modalVariant,
 					modalContext = p1.modalContext
 				}
 			end
 		}),
-		ModalAction = modalTelemetryModule.Events.modalActionWithSequence({
-			modalSequence = modalTelemetryModule.Enums.ModalSequence.ConversationTopModal,
-			counterFormat = function(p1, _)
+		ModalAction = ModalTelemetryModule.Events.modalActionWithSequence({
+			modalSequence = ModalTelemetryModule.Enums.ModalSequence.ConversationTopModal,
+			counterFormat = function(p1, _) --[[ Line: 26 ]]
 				return { modalVariant = p1.modalVariant, action = p1.action }
 			end,
-			eventStreamFormat = function(p1, _)
+			eventStreamFormat = function(p1, _) --[[ Line: 35 ]]
 				return {
 					modalVariant = p1.modalVariant,
 					action = p1.action,

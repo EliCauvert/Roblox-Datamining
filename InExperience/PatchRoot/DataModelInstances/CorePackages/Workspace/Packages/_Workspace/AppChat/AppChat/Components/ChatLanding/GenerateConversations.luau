@@ -1,44 +1,42 @@
-﻿local cryoModule = require(script:FindFirstAncestor("AppChat").Parent.Cryo)
+﻿local CryoModule = require(script:FindFirstAncestor("AppChat").Parent.Cryo)
 
 return {
-	init = function()
-		-- upvalues: cryoModule (ref)
-		local function generate(p1)
+	init = function() --[[ Line: 11 ]]
+		-- upvalues: CryoModule (copy)
+		local function generate(Id) --[[ Line: 12 ]]
 			return {
 				presenceImage = "",
 				alias = "(alias)",
-				id = p1,
-				title = string.format("default dog chat no. %d", p1),
+				id = Id,
+				title = string.format("default dog chat no. %d", Id),
 				thumbnails = { "rbxassetid://2610133241" },
 				messages = {
 					keys = { "messageId" },
 					values = {
-						messageId = {
-							content = "a message placeholder \240\159\142\183\240\159\144\155"
-						}
+						messageId = { content = "a message placeholder 🎷🐛" }
 					}
 				},
-				shortRelativeTime = "now+" .. p0
+				shortRelativeTime = "now+" .. Id
 			}
 		end
 		
-		local t = {}
+		local List = {}
 		
 		for i = 0, 200 do
-			table.insert(t, generate(i))
+			table.insert(List, (generate(i)))
 		end
 		return {
-			getItemList = function()
-				-- upvalues: t (ref)
-				return t
+			getItemList = function() --[[ Line: 38 ]]
+				-- upvalues: List (copy)
+				return List
 			end,
-			loadNext = function(p1)
-				-- upvalues: cryoModule (copy), generate (ref)
-				return cryoModule.List.join(p1, { generate(p1[#p1].id + 1) })
+			loadNext = function(p1) --[[ Line: 42 ]]
+				-- upvalues: CryoModule (upval), generate (copy)
+				return CryoModule.List.join(p1, { (generate(p1[#p1].id + 1)) })
 			end,
-			loadPrevious = function(p1)
-				-- upvalues: cryoModule (copy), generate (ref)
-				return cryoModule.List.join({ generate(p1[1].id - 1) }, p1)
+			loadPrevious = function(Entry) --[[ Line: 46 ]]
+				-- upvalues: CryoModule (upval), generate (copy)
+				return CryoModule.List.join({ (generate(Entry[1].id - 1)) }, Entry)
 			end
 		}
 	end

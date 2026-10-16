@@ -1,9 +1,8 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
-local constantsModule = require(moments.Constants)
-local fFlagMomentsRecommendationClientEventTimestampModule = require(moments.Flags.FFlagMomentsRecommendationClientEventTimestamp)
-local fFlagMomentsComments = require(parent.SharedFlags).FFlagMomentsComments
-local t = {
+﻿local Moments = script:FindFirstAncestor("Moments")
+local ConstantsModule = require(Moments.Constants)
+local FFlagMomentsRecommendationClientEventTimestampModule = require(Moments.Flags.FFlagMomentsRecommendationClientEventTimestamp)
+local FFlagMomentsComments = require(Moments.Parent.SharedFlags).FFlagMomentsComments
+local config = {
 	eventName = "RecommendationActionEvent",
 	throttlingPercentage = 10000,
 	description = "Fires on user actions in the moments platform feed",
@@ -11,29 +10,30 @@ local t = {
 	lastUpdated = { 26, 6, 2 }
 }
 
-return function(p1)
-	-- upvalues: constantsModule (ref), t (ref), fFlagMomentsRecommendationClientEventTimestampModule (ref), fFlagMomentsComments (ref)
-	local var1 = if p1.actionType == constantsModule.RecommendationActionType.Play then game:GetService("HttpService"):GenerateGUID(false) else nil
-	game:GetService("TelemetryService"):LogEvent(t, {
+return function(p1) --[[ Line: 34 | Named "emitRecommendationAction" ]]
+	-- upvalues: ConstantsModule (copy), config (copy), FFlagMomentsRecommendationClientEventTimestampModule (copy), FFlagMomentsComments (copy)
+	local HttpService = game:GetService("HttpService")
+	local Guid = if p1.actionType == ConstantsModule.RecommendationActionType.Play then HttpService:GenerateGUID(false) else nil
+	game:GetService("TelemetryService"):LogEvent(config, {
 		standardizedFields = { "addSessionInfo", "addSessionId", "addOSInfo" },
 		customFields = {
 			playsessionid = "",
-			universeid = constantsModule.MOMENTS_UNIVERSE_ID,
-			placeid = constantsModule.MOMENTS_PLACE_ID,
-			client_event_timestamp_ms = if fFlagMomentsRecommendationClientEventTimestampModule then DateTime.now().UnixTimestampMillis else nil,
+			universeid = ConstantsModule.MOMENTS_UNIVERSE_ID,
+			placeid = ConstantsModule.MOMENTS_PLACE_ID,
+			client_event_timestamp_ms = if FFlagMomentsRecommendationClientEventTimestampModule then DateTime.now().UnixTimestampMillis else nil,
 			item_id = p1.itemId,
 			tracing_id = p1.tracingId,
 			action_type = tostring(p1.actionType),
 			moments_session_id = p1.momentsSessionId,
-			source_surface = constantsModule.SOURCE_SURFACE,
+			source_surface = ConstantsModule.SOURCE_SURFACE,
 			reaction_type = p1.reactionType,
 			destination_placeid = if p1.destinationPlaceId then tostring(p1.destinationPlaceId) else nil,
 			comment_text = p1.commentText,
-			comment_section_open_duration_seconds = if fFlagMomentsComments and p1.commentSectionOpenDurationSeconds ~= nil then tostring(p1.commentSectionOpenDurationSeconds) else nil,
+			comment_section_open_duration_seconds = if FFlagMomentsComments and p1.commentSectionOpenDurationSeconds ~= nil then tostring(p1.commentSectionOpenDurationSeconds) else nil,
 			action_weight = if p1.actionWeight then tostring(p1.actionWeight) else nil,
-			moments_play_intent_id = var1
+			moments_play_intent_id = Guid
 		}
 	})
 	
-	return var1
+	return Guid
 end

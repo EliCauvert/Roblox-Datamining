@@ -1,38 +1,38 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local view = foundationModule.View
-local useBreakpoint = foundationModule.Hooks.useBreakpoint
-local statsCardModule = require(script.Parent.StatsCard.StatsCard)
-local getStatsCardColumnsModule = require(script.Parent.getStatsCardColumns)
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local UseBreakpointFunction = FoundationModule.Hooks.useBreakpoint
+local StatsCardModule = require(script.Parent.StatsCard.StatsCard)
+local GetStatsCardColumnsModule = require(script.Parent.getStatsCardColumns)
 
-return function(p1)
-	-- upvalues: reactModule (ref), useBreakpoint (ref), getStatsCardColumnsModule (ref), view (ref), statsCardModule (ref)
-	local var1, var2 = reactModule.useState(nil)
-	local _, var3 = useBreakpoint(var1)
-	local var4 = if var3.X > 0 then getStatsCardColumnsModule(var3.X) else 2
-	local cards = p1.cards
-	local t = {}
+return function(p1) --[[ Line: 19 | Named "StatsCardContainer" ]]
+	-- upvalues: ReactModule (copy), UseBreakpointFunction (copy), GetStatsCardColumnsModule (copy), View (copy), StatsCardModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	local _, UseBreakpointResult2 = UseBreakpointFunction(UseStateResult)
+	local StatsCardColumnsModule = if UseBreakpointResult2.X > 0 then GetStatsCardColumnsModule(UseBreakpointResult2.X) else 2
+	local Cards = p1.cards
+	local Elements = {}
 	
-	for i_1 = 1, math.ceil(#cards / var4) do
-		local t_1 = {}
+	for i = 1, math.ceil(#Cards / StatsCardColumnsModule) do
+		local Elements1 = {}
 		
-		for i = 1, var4 do
-			local var5 = cards[(i_1 - 1) * var4 + i]
+		for i1 = 1, StatsCardColumnsModule do
+			local Card = Cards[(i - 1) * StatsCardColumnsModule + i1]
 			
-			if var5 ~= nil then
-				t_1[`Cell{i}`] = reactModule.createElement(view, { tag = "fill auto-y", LayoutOrder = i }, { Card = reactModule.createElement(statsCardModule, var5) })
+			if Card ~= nil then
+				Elements1[`Cell{i1}`] = ReactModule.createElement(View, { tag = "fill auto-y", LayoutOrder = i1 }, { Card = ReactModule.createElement(StatsCardModule, Card) })
 			end
 		end
-		t[`Row{i_1}`] = reactModule.createElement(view, {
+		Elements[`Row{i}`] = ReactModule.createElement(View, {
 			tag = "row gap-medium size-full-0 auto-y",
-			LayoutOrder = i_1
-		}, t_1)
+			LayoutOrder = i
+		}, Elements1)
 	end
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "col gap-medium size-full-0 auto-y",
 		LayoutOrder = p1.layoutOrder,
 		testId = p1.testId or "StatsCardContainer",
-		ref = var2
-	}, t)
+		ref = UseStateResult2
+	}, Elements)
 end

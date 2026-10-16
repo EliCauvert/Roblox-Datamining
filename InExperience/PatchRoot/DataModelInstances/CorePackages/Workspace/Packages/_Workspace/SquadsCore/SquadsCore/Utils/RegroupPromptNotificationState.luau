@@ -1,42 +1,40 @@
-﻿local guiService = game:GetService("GuiService")
-local t = {}
-local var1 = nil
-local var2 = nil
-
-function t.setActive(value, p1)
-	-- upvalues: var1 (write), var2 (write)
-	var1 = value
-	var2 = p1
-end
-
-function t.getActiveNotifId()
-	-- upvalues: var1 (write)
-	return var1
-end
-
-function t.getActiveSquadId()
-	-- upvalues: var2 (write)
-	return var2
-end
-
-function t.clearActive(p1)
-	-- upvalues: var1 (write), var2 (write)
-	if p1 == nil or var1 == p1 then
-		var1 = nil
-		var2 = nil
+﻿local GuiService = game:GetService("GuiService")
+local Active = nil
+local Active1 = nil
+local RegroupPromptNotificationStateModule = {
+	setActive = function(Value, Value1) --[[ Line: 7 ]]
+		-- upvalues: Active (ref), Active1 (ref)
+		Active = Value
+		Active1 = Value1
+	end,
+	getActiveNotifId = function() --[[ Line: 12 ]]
+		-- upvalues: Active (ref)
+		return Active
+	end,
+	getActiveSquadId = function() --[[ Line: 16 ]]
+		-- upvalues: Active1 (ref)
+		return Active1
+	end,
+	clearActive = function(NotificationId) --[[ Line: 20 ]]
+		-- upvalues: Active (ref), Active1 (ref)
+		if NotificationId == nil or Active == NotificationId then
+			Active = nil
+			Active1 = nil
+		end
 	end
-end
+}
 
-function t.dismissNotification(p1)
-	-- upvalues: guiService (ref), t (ref)
-	if p1 == nil then
+function RegroupPromptNotificationStateModule.dismissNotification(NotificationId) --[[ Line: 27 ]]
+	-- upvalues: GuiService (copy), RegroupPromptNotificationStateModule (copy)
+	if NotificationId ~= nil then
+		pcall(function() --[[ Line: 31 ]]
+			-- upvalues: GuiService (upval), NotificationId (copy)
+			GuiService:DismissNotification(NotificationId)
+		end)
+		RegroupPromptNotificationStateModule.clearActive(NotificationId)
+		
 		return
 	end
-	pcall(function()
-		-- upvalues: guiService (copy), p1 (ref)
-		guiService:DismissNotification(p1)
-	end)
-	t.clearActive(p1)
 end
 
-return t
+return RegroupPromptNotificationStateModule

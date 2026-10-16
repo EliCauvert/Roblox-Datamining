@@ -1,60 +1,59 @@
-﻿local httpService = game:GetService("HttpService")
-local playersService = game:GetService("Players")
-local squadsCore = script:FindFirstAncestor("SquadsCore")
-local parent = squadsCore.Parent
-local eventNamesModule = require(squadsCore.Analytics.EventNames)
-local _ = require(squadsCore.Enums.SquadCoplayJoin)
-local squadLocationEnumModule = require(squadsCore.Enums.SquadLocationEnum)
-local fFlagEncodeSquadMembersUpdatedModule = require(squadsCore.Flags.FFlagEncodeSquadMembersUpdated)
-local encodeSquadMembersModule = require(squadsCore.Common.encodeSquadMembers)
-local cryoModule = require(parent.Cryo)
-local _ = require(parent.RoduxSquads)
-local var1 = if fFlagEncodeSquadMembersUpdatedModule then require(squadsCore.Common.encodeUserIds) else function(p1)
-	-- upvalues: httpService (ref)
-	local ok, status = pcall(function()
-		-- upvalues: httpService (copy), p1 (ref)
-		return httpService:JSONEncode(p1)
+﻿local HttpService = game:GetService("HttpService")
+local Players = game:GetService("Players")
+local SquadsCore = script:FindFirstAncestor("SquadsCore")
+local Parent = SquadsCore.Parent
+local EventNamesModule = require(SquadsCore.Analytics.EventNames)
+local _ = require(SquadsCore.Enums.SquadCoplayJoin)
+local SquadLocationEnumModule = require(SquadsCore.Enums.SquadLocationEnum)
+local FFlagEncodeSquadMembersUpdatedModule = require(SquadsCore.Flags.FFlagEncodeSquadMembersUpdated)
+local EncodeSquadMembersModule = require(SquadsCore.Common.encodeSquadMembers)
+local CryoModule = require(Parent.Cryo)
+local _ = require(Parent.RoduxSquads)
+local EncodeUserIdsModule = if FFlagEncodeSquadMembersUpdatedModule then require(SquadsCore.Common.encodeUserIds) else function(Input) --[[ Line: 21 ]]
+	-- upvalues: HttpService (copy)
+	local Success, Result = pcall(function() --[[ Line: 22 ]]
+		-- upvalues: HttpService (upval), Input (copy)
+		return HttpService:JSONEncode(Input)
 	end)
 	
-	return if ok then status else "[]"
+	return if Success then Result else "[]"
 end
 
-return function(p1, p2, p3, p4, p5)
-	-- upvalues: squadLocationEnumModule (ref), playersService (ref), fFlagEncodeSquadMembersUpdatedModule (ref), var1 (ref), encodeSquadMembersModule (ref), cryoModule (ref), eventNamesModule (ref)
-	if p3 == squadLocationEnumModule.InExperience then
+return function(PartyId, List, InExperience, PartyCoplayEvent, Callback: (any, any) -> ()) --[[ Line: 33 ]]
+	-- upvalues: SquadLocationEnumModule (copy), Players (copy), FFlagEncodeSquadMembersUpdatedModule (copy), EncodeUserIdsModule (copy), EncodeSquadMembersModule (copy), CryoModule (copy), EventNamesModule (copy)
+	if InExperience == SquadLocationEnumModule.InExperience then
 		local t = {}
-		local t_1 = {}
+		local List1 = {}
 		
-		for i, v in ipairs(p2) do
-			t[v.userId] = true
+		for _, value in ipairs(List) do
+			t[value.userId] = true
 		end
-		for i, v_1 in playersService:GetPlayers() do
-			if t[v_1.UserId] then
-				table.insert(t_1, v_1.UserId)
+		for _, player in Players:GetPlayers() do
+			if t[player.UserId] then
+				table.insert(List1, player.UserId)
 			end
 		end
-		local var2, var3
-		local var4 = nil
-		local _ = nil
-		local _ = nil
+		local MapResult = nil
+		local EncodeSquadMembersModuleResult = nil
+		local EncodeUserIdsModuleResult = nil
 		
-		if fFlagEncodeSquadMembersUpdatedModule then
-			var2 = var1(t_1)
-			var3 = encodeSquadMembersModule(p2)
+		if FFlagEncodeSquadMembersUpdatedModule then
+			EncodeUserIdsModuleResult = EncodeUserIdsModule(List1)
+			EncodeSquadMembersModuleResult = EncodeSquadMembersModule(List)
 		else
-			var4 = cryoModule.List.map(p2, function(p6)
-				return p6.userId
+			MapResult = CryoModule.List.map(List, function(p1) --[[ Line: 63 ]]
+				return p1.userId
 			end)
-			var2 = var1(t_1)
-			var3 = var1(var4)
+			EncodeUserIdsModuleResult = EncodeUserIdsModule(List1)
+			EncodeSquadMembersModuleResult = EncodeUserIdsModule(MapResult)
 		end
-		p5(eventNamesModule.PartyCoplay, {
-			partyCoplayEvent = p4,
-			partyId = p1,
-			partyPlayersInGameInstanceCount = #t_1,
-			partyPlayersInGameInstanceUserIds = var2,
-			partyTotalSize = if fFlagEncodeSquadMembersUpdatedModule then #p2 else #var4,
-			partyTotalSizeUserIds = var3
+		Callback(EventNamesModule.PartyCoplay, {
+			partyCoplayEvent = PartyCoplayEvent,
+			partyId = PartyId,
+			partyPlayersInGameInstanceCount = #List1,
+			partyPlayersInGameInstanceUserIds = EncodeUserIdsModuleResult,
+			partyTotalSize = if FFlagEncodeSquadMembersUpdatedModule then #List else #MapResult,
+			partyTotalSizeUserIds = EncodeSquadMembersModuleResult
 		})
 	end
 end

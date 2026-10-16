@@ -1,9 +1,8 @@
-﻿local progressLoading = script:FindFirstAncestor("ProgressLoading")
-local signalsModule = require(progressLoading.Parent.Signals)
-local createDeferredAssetStoreModule = require(script.Parent.createDeferredAssetStore)
-local engineFeatureEnableDeferredAssetManagerServiceModule = require(progressLoading.Flags.EngineFeatureEnableDeferredAssetManagerService)
+﻿local ProgressLoading = script:FindFirstAncestor("ProgressLoading")
+local CreateDeferredAssetStoreModule = require(script.Parent.createDeferredAssetStore)
+local EngineFeatureEnableDeferredAssetManagerServiceModule = require(ProgressLoading.Flags.EngineFeatureEnableDeferredAssetManagerService)
 
-return signalsModule.createComputed(function()
-	-- upvalues: engineFeatureEnableDeferredAssetManagerServiceModule (ref), createDeferredAssetStoreModule (ref)
-	return if engineFeatureEnableDeferredAssetManagerServiceModule then createDeferredAssetStoreModule() else nil
+return require(ProgressLoading.Parent.Signals).createComputed(function() --[[ Line: 12 ]]
+	-- upvalues: EngineFeatureEnableDeferredAssetManagerServiceModule (copy), CreateDeferredAssetStoreModule (copy)
+	return if EngineFeatureEnableDeferredAssetManagerServiceModule then CreateDeferredAssetStoreModule() else nil
 end)

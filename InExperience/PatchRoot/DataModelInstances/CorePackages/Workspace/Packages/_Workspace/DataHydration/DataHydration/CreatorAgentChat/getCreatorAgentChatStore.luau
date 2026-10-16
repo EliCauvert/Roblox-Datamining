@@ -1,26 +1,25 @@
-﻿local signalsModule = require(script:FindFirstAncestor("DataHydration").Parent.Signals)
-local acpProtocolModule = require(script.Parent.Acp.AcpProtocol)
-local createCreatorAgentChatStoreModule = require(script.Parent.createCreatorAgentChatStore)
-local debugModule = require(script.Parent.debug)
-local getDefaultAuthHeadersModule = require(script.Parent.Acp.getDefaultAuthHeaders)
-local resolveAcpUrlModule = require(script.Parent.Env.resolveAcpUrl)
+﻿local AcpProtocolModule = require(script.Parent.Acp.AcpProtocol)
+local CreateCreatorAgentChatStoreModule = require(script.Parent.createCreatorAgentChatStore)
+local DebugModule = require(script.Parent.debug)
+local GetDefaultAuthHeadersModule = require(script.Parent.Acp.getDefaultAuthHeaders)
+local ResolveAcpUrlModule = require(script.Parent.Env.resolveAcpUrl)
 local _ = require(script.Parent.types)
-local wireCapDeliveryModule = require(script.Parent.Acp.wireCapDelivery)
+local WireCapDeliveryModule = require(script.Parent.Acp.wireCapDelivery)
 
-return signalsModule.createComputed(function()
-	-- upvalues: resolveAcpUrlModule (ref), debugModule (ref), acpProtocolModule (ref), createCreatorAgentChatStoreModule (ref), getDefaultAuthHeadersModule (ref), wireCapDeliveryModule (ref)
-	local var1 = resolveAcpUrlModule.resolveCreatorAgentAcp()
-	debugModule.log("info", "creating CreatorAgentChatStore", {
-		acpUrl = var1.url,
-		gateway = var1.gateway,
-		sitetestNumber = var1.sitetestNumber,
-		capRtnNamespace = acpProtocolModule.CapRtnNamespace
+return require(script:FindFirstAncestor("DataHydration").Parent.Signals).createComputed(function() --[[ Line: 19 | Named "createDefaultStore" ]]
+	-- upvalues: ResolveAcpUrlModule (copy), DebugModule (copy), AcpProtocolModule (copy), CreateCreatorAgentChatStoreModule (copy), GetDefaultAuthHeadersModule (copy), WireCapDeliveryModule (copy)
+	local ResolveCreatorAgentAcpResult = ResolveAcpUrlModule.resolveCreatorAgentAcp()
+	DebugModule.log("info", "creating CreatorAgentChatStore", {
+		acpUrl = ResolveCreatorAgentAcpResult.url,
+		gateway = ResolveCreatorAgentAcpResult.gateway,
+		sitetestNumber = ResolveCreatorAgentAcpResult.sitetestNumber,
+		capRtnNamespace = AcpProtocolModule.CapRtnNamespace
 	})
-	local var2 = createCreatorAgentChatStoreModule({
-		baseUrl = var1.url,
-		getAuthHeaders = getDefaultAuthHeadersModule
+	local CreatorAgentChatStoreModule = CreateCreatorAgentChatStoreModule({
+		baseUrl = ResolveCreatorAgentAcpResult.url,
+		getAuthHeaders = GetDefaultAuthHeadersModule
 	})
-	wireCapDeliveryModule(var2)
+	WireCapDeliveryModule(CreatorAgentChatStoreModule)
 	
-	return var2
+	return CreatorAgentChatStoreModule
 end)

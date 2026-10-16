@@ -1,1 +1,1 @@
-﻿return require(script.DisplayQRCode)
+﻿return (require(script.DisplayQRCode))

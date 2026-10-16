@@ -1,46 +1,46 @@
-﻿local textService = game:GetService("TextService")
-local corePackagesService = game:GetService("CorePackages")
-local guiService = game:GetService("GuiService")
-local inGameMenuDependenciesModule = require(corePackagesService.Packages.InGameMenuDependencies)
-local roact = inGameMenuDependenciesModule.Roact
-local roactRodux = inGameMenuDependenciesModule.RoactRodux
-local t = inGameMenuDependenciesModule.t
-local UIBlox = inGameMenuDependenciesModule.UIBlox
-local button = UIBlox.App.Button.Button
-local buttonType = UIBlox.App.Button.Enum.ButtonType
-local getTextSize = require(corePackagesService.Workspace.Packages.Style).GetTextSize
-local withFoundationOrUIBloxStyle = require(corePackagesService.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
-local parent = script.Parent.Parent.Parent
-local withLocalizationModule = require(parent.Localization.withLocalization)
-local assetsModule = require(parent.Resources.Assets)
-local themedTextLabelModule = require(parent.Components.ThemedTextLabel)
-local focusHandlerModule = require(parent.Components.Connection.FocusHandler)
-local rootedConnectionModule = require(parent.Components.Connection.RootedConnection)
-local setCurrentPageModule = require(parent.Actions.SetCurrentPage)
-local imageSetLabel = UIBlox.Core.ImageSet.ImageSetLabel
-local foundationModule = require(corePackagesService.Packages.Foundation)
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local image = foundationModule.Image
-local fFlagCoreUiMigrateUIBloxToFoundation = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
-local addFriendsNow = roact.PureComponent:extend("AddFriendsNow")
-addFriendsNow.validateProps = t.strictInterface({
-	switchToPlayers = t.callback,
-	canCaptureFocus = t.boolean
+﻿local TextService = game:GetService("TextService")
+local CorePackages = game:GetService("CorePackages")
+local GuiService = game:GetService("GuiService")
+local InGameMenuDependenciesModule = require(CorePackages.Packages.InGameMenuDependencies)
+local Roact = InGameMenuDependenciesModule.Roact
+local RoactRodux = InGameMenuDependenciesModule.RoactRodux
+local T = InGameMenuDependenciesModule.t
+local UIBlox = InGameMenuDependenciesModule.UIBlox
+local Button = UIBlox.App.Button.Button
+local ButtonType = UIBlox.App.Button.Enum.ButtonType
+local GetTextSizeFunction = require(CorePackages.Workspace.Packages.Style).GetTextSize
+local WithFoundationOrUIBloxStyleFunction = require(CorePackages.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
+local Parent = script.Parent.Parent.Parent
+local WithLocalizationModule = require(Parent.Localization.withLocalization)
+local AssetsModule = require(Parent.Resources.Assets)
+local ThemedTextLabelModule = require(Parent.Components.ThemedTextLabel)
+local FocusHandlerModule = require(Parent.Components.Connection.FocusHandler)
+local RootedConnectionModule = require(Parent.Components.Connection.RootedConnection)
+local SetCurrentPageModule = require(Parent.Actions.SetCurrentPage)
+local ImageSetLabel = UIBlox.Core.ImageSet.ImageSetLabel
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local Image = FoundationModule.Image
+local FFlagCoreUiMigrateUIBloxToFoundation = require(CorePackages.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
+local AddFriendsNow = Roact.PureComponent:extend("AddFriendsNow")
+AddFriendsNow.validateProps = T.strictInterface({
+	switchToPlayers = T.callback,
+	canCaptureFocus = T.boolean
 })
 
-function addFriendsNow.init(p1)
-	-- upvalues: roact (ref)
-	p1.buttonRef = roact.createRef()
+function AddFriendsNow.init(p1) --[[ Line: 48 ]]
+	-- upvalues: Roact (copy)
+	p1.buttonRef = Roact.createRef()
 end
 
-function addFriendsNow.render(p1)
-	-- upvalues: withFoundationOrUIBloxStyle (ref), foundationFontFaceMigration (ref), withLocalizationModule (ref), getTextSize (ref), textService (ref), roact (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), image (ref), assetsModule (ref), imageSetLabel (ref), themedTextLabelModule (ref), rootedConnectionModule (ref), focusHandlerModule (ref), guiService (ref), button (ref), buttonType (ref)
-	local props = p1.props
+function AddFriendsNow.render(p1) --[[ Line: 52 ]]
+	-- upvalues: WithFoundationOrUIBloxStyleFunction (copy), FoundationFontFaceMigration (copy), WithLocalizationModule (copy), GetTextSizeFunction (copy), TextService (copy), Roact (copy), FFlagCoreUiMigrateUIBloxToFoundation (copy), Image (copy), AssetsModule (copy), ImageSetLabel (copy), ThemedTextLabelModule (copy), RootedConnectionModule (copy), FocusHandlerModule (copy), GuiService (copy), Button (copy), ButtonType (copy)
+	local Props = p1.props
 	
-	return withFoundationOrUIBloxStyle(function(p2)
-		-- upvalues: foundationFontFaceMigration (copy)
+	return WithFoundationOrUIBloxStyleFunction(function(p2) --[[ Line: 55 ]]
+		-- upvalues: FoundationFontFaceMigration (upval)
 		return {
-			Tokens = if foundationFontFaceMigration then p2 else nil,
+			Tokens = if FoundationFontFaceMigration then p2 else nil,
 			Font = {
 				BaseSize = 1,
 				Body = {
@@ -49,49 +49,50 @@ function addFriendsNow.render(p1)
 				}
 			}
 		}
-	end, function(p2)
-		-- upvalues: withLocalizationModule (copy), foundationFontFaceMigration (copy), getTextSize (copy), textService (copy), roact (copy), fFlagCoreUiMigrateUIBloxToFoundation (copy), image (copy), assetsModule (copy), imageSetLabel (copy), themedTextLabelModule (copy), rootedConnectionModule (copy), focusHandlerModule (copy), props (ref), guiService (copy), p1 (ref), button (copy), buttonType (copy)
-		return withLocalizationModule({
+	end, function(p2) --[[ Line: 66 ]]
+		-- upvalues: WithLocalizationModule (upval), FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), TextService (upval), Roact (upval), FFlagCoreUiMigrateUIBloxToFoundation (upval), Image (upval), AssetsModule (upval), ImageSetLabel (upval), ThemedTextLabelModule (upval), RootedConnectionModule (upval), FocusHandlerModule (upval), Props (copy), GuiService (upval), p1 (copy), Button (upval), ButtonType (upval)
+		return WithLocalizationModule({
 			noFriendsText = "CoreScripts.InGameMenu.InviteFriends.NoFriends",
 			makeFriendsNow = "CoreScripts.InGameMenu.InviteFriends.MakeFriendsNow"
-		})(function(p3)
-			-- upvalues: p2 (ref), foundationFontFaceMigration (copy), getTextSize (copy), textService (copy), roact (copy), fFlagCoreUiMigrateUIBloxToFoundation (copy), image (copy), assetsModule (copy), imageSetLabel (copy), themedTextLabelModule (copy), rootedConnectionModule (copy), focusHandlerModule (copy), props (copy), guiService (copy), p1 (copy), button (copy), buttonType (copy)
-			local var1 = p2.Font.Body.RelativeSize * p2.Font.BaseSize
+		})(function(p3) --[[ Line: 70 ]]
+			-- upvalues: p2 (copy), FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), TextService (upval), Roact (upval), FFlagCoreUiMigrateUIBloxToFoundation (upval), Image (upval), AssetsModule (upval), ImageSetLabel (upval), ThemedTextLabelModule (upval), RootedConnectionModule (upval), FocusHandlerModule (upval), Props (upval), GuiService (upval), p1 (upval), Button (upval), ButtonType (upval)
+			local BodyFont = p2.Font.Body.Font
+			local ScaledRelativeSize = p2.Font.Body.RelativeSize * p2.Font.BaseSize
 			
-			return roact.createElement("Frame", {
+			return Roact.createElement("Frame", {
 				BackgroundTransparency = 1,
 				Size = UDim2.new(0, 304, 1, 0),
 				Position = UDim2.new(0.5, 0, 0, 0),
 				AnchorPoint = Vector2.new(0.5, 0)
 			}, {
-				Layout = roact.createElement("UIListLayout", {
+				Layout = Roact.createElement("UIListLayout", {
 					FillDirection = Enum.FillDirection.Vertical,
 					HorizontalAlignment = Enum.HorizontalAlignment.Center,
 					VerticalAlignment = Enum.VerticalAlignment.Center,
 					SortOrder = Enum.SortOrder.LayoutOrder
 				}),
-				Icon = if fFlagCoreUiMigrateUIBloxToFoundation then roact.createElement(image, {
+				Icon = if FFlagCoreUiMigrateUIBloxToFoundation then Roact.createElement(Image, {
 					LayoutOrder = 1,
-					Image = assetsModule.Images.AddFriend.Image,
+					Image = AssetsModule.Images.AddFriend.Image,
 					imageRect = {
-						offset = assetsModule.Images.AddFriend.ImageRectOffset,
-						size = assetsModule.Images.AddFriend.ImageRectSize
+						offset = AssetsModule.Images.AddFriend.ImageRectOffset,
+						size = AssetsModule.Images.AddFriend.ImageRectSize
 					},
 					Size = UDim2.new(0, 64, 0, 64),
 					imageStyle = { Transparency = 0.5, Color3 = Color3.new(1, 1, 1) }
-				}) else roact.createElement(imageSetLabel, {
+				}) else Roact.createElement(ImageSetLabel, {
 					BackgroundTransparency = 1,
 					ImageTransparency = 0.5,
 					LayoutOrder = 1,
-					Image = assetsModule.Images.AddFriend,
+					Image = AssetsModule.Images.AddFriend,
 					Size = UDim2.new(0, 64, 0, 64)
 				}),
-				TextContainer = roact.createElement("Frame", {
+				TextContainer = Roact.createElement("Frame", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 2,
-					Size = UDim2.new(1, 0, 0, (if foundationFontFaceMigration then getTextSize(p3.noFriendsText, var1, p2.Tokens.Typography.BodyLarge.Font, Vector2.new(304, 1e999), { addTemporaryPadding = false }).Y else textService:GetTextSize(p3.noFriendsText, var1, p2.Font.Body.Font, Vector2.new(304, 1e999)).Y) + 20)
+					Size = UDim2.new(1, 0, 0, (if FoundationFontFaceMigration then GetTextSizeFunction(p3.noFriendsText, ScaledRelativeSize, p2.Tokens.Typography.BodyLarge.Font, Vector2.new(304, 1e999), { addTemporaryPadding = false }).Y else TextService:GetTextSize(p3.noFriendsText, ScaledRelativeSize, BodyFont, Vector2.new(304, 1e999)).Y) + 20)
 				}, {
-					Text = roact.createElement(themedTextLabelModule, {
+					Text = Roact.createElement(ThemedTextLabelModule, {
 						fontKey = "Body",
 						themeKey = "TextEmphasis",
 						TextWrapped = true,
@@ -101,22 +102,22 @@ function addFriendsNow.render(p1)
 						TextXAlignment = Enum.TextXAlignment.Center
 					})
 				}),
-				RootedConnection = roact.createElement(rootedConnectionModule, {
-					render = function(p4)
-						-- upvalues: roact (copy), focusHandlerModule (copy), props (copy), guiService (copy), p1 (copy), button (copy), buttonType (copy), p3 (ref)
-						return roact.createElement(focusHandlerModule, {
-							isFocused = props.canCaptureFocus and p4,
-							didFocus = function()
-								-- upvalues: guiService (copy), p1 (copy)
-								guiService.SelectedCoreObject = p1.buttonRef:getValue()
+				RootedConnection = Roact.createElement(RootedConnectionModule, {
+					render = function(p4) --[[ Line: 139 ]]
+						-- upvalues: Roact (upval), FocusHandlerModule (upval), Props (upval), GuiService (upval), p1 (upval), Button (upval), ButtonType (upval), p3 (copy)
+						return Roact.createElement(FocusHandlerModule, {
+							isFocused = Props.canCaptureFocus and p4,
+							didFocus = function() --[[ Line: 143 ]]
+								-- upvalues: GuiService (upval), p1 (upval)
+								GuiService.SelectedCoreObject = p1.buttonRef:getValue()
 							end
 						}, {
-							MakeFriendsButton = p4 and roact.createElement(button, {
+							MakeFriendsButton = p4 and Roact.createElement(Button, {
 								layoutOrder = 3,
-								buttonType = buttonType.Secondary,
+								buttonType = ButtonType.Secondary,
 								size = UDim2.new(1, 0, 0, 48),
 								text = p3.makeFriendsNow,
-								onActivated = props.switchToPlayers,
+								onActivated = Props.switchToPlayers,
 								buttonRef = p1.buttonRef
 							}) or nil
 						})
@@ -127,12 +128,12 @@ function addFriendsNow.render(p1)
 	end)
 end
 
-return roactRodux.UNSTABLE_connect2(nil, function(p1)
-	-- upvalues: setCurrentPageModule (ref)
+return RoactRodux.UNSTABLE_connect2(nil, function(Callback) --[[ Line: 163 ]]
+	-- upvalues: SetCurrentPageModule (copy)
 	return {
-		switchToPlayers = function()
-			-- upvalues: p1 (ref), setCurrentPageModule (copy)
-			p1(setCurrentPageModule("Players"))
+		switchToPlayers = function() --[[ Line: 165 ]]
+			-- upvalues: Callback (copy), SetCurrentPageModule (upval)
+			Callback(SetCurrentPageModule("Players"))
 		end
 	}
-end)(addFriendsNow)
+end)(AddFriendsNow)

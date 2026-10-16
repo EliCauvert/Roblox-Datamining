@@ -1,26 +1,27 @@
-﻿local reactModule = require(script.Parent.Parent.React)
-local focusNavigationContextModule = require(script.Parent.FocusNavigationContext)
+﻿local ReactModule = require(script.Parent.Parent.React)
+local FocusNavigationContextModule = require(script.Parent.FocusNavigationContext)
 
-return function()
-	-- upvalues: reactModule (ref), focusNavigationContextModule (ref)
-	local var1 = reactModule.useContext(focusNavigationContextModule)
-	local var2 = if var1 then var1.focusedGuiObject:getValue() else nil
-	local var3, var4 = reactModule.useState(var2)
-	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), var2 (ref), var4 (ref), var1 (ref)
-		if var3 ~= var2 then
-			var4(var2)
+return function() --[[ Line: 11 | Named "useCurrentFocus" ]]
+	-- upvalues: ReactModule (copy), FocusNavigationContextModule (copy)
+	local UseContextResult = ReactModule.useContext(FocusNavigationContextModule)
+	local Value = if UseContextResult then UseContextResult.focusedGuiObject:getValue() else nil
+	local UseStateResult, UseStateResult2 = ReactModule.useState(Value)
+	ReactModule.useEffect(function() --[[ Line: 16 ]]
+		-- upvalues: UseStateResult (copy), Value (copy), UseStateResult2 (copy), UseContextResult (copy)
+		if UseStateResult ~= Value then
+			UseStateResult2(Value)
 		end
-		if var1 then
-			local var5 = var1.focusedGuiObject:subscribe(var4)
+		if UseContextResult then
+			local SubscribeResult = UseContextResult.focusedGuiObject:subscribe(UseStateResult2)
 			
-			return function()
-				-- upvalues: var5 (ref)
-				var5:unsubscribe()
+			return function() --[[ Line: 25 ]]
+				-- upvalues: SubscribeResult (copy)
+				SubscribeResult:unsubscribe()
 			end
+		else
+			return nil
 		end
-		return nil
-	end, { var1 })
+	end, { UseContextResult })
 	
-	return var3
+	return UseStateResult
 end

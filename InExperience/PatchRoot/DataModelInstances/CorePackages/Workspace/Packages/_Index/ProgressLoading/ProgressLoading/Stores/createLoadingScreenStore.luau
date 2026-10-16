@@ -1,101 +1,98 @@
-﻿local progressLoading = script:FindFirstAncestor("ProgressLoading")
-local parent = progressLoading.Parent
-local experienceService = game:GetService("ExperienceService")
-local guiService = game:GetService("GuiService")
-local dataHydrationModule = require(parent.DataHydration)
-local signalsModule = require(parent.Signals)
-local createDataCache = dataHydrationModule.createDataCache
-local createDataResolver = dataHydrationModule.createDataResolver
-local fetchPlayerLocalizationChoiceModule = require(script.Parent.fetchPlayerLocalizationChoice)
-local loadingScreenTelemetryModule = require(progressLoading.LoadingScreenTelemetry)
-local queueExperimentation = require(parent.SocialExperiments).QueueExperimentation
-local var1 = game:GetEngineFeature("PlaceJoinStateEnabled") and (queueExperimentation.getIsJoinNewServerButtonEnabled() or queueExperimentation.getIsAutoJoinNewServerEnabled())
+﻿local ProgressLoading = script:FindFirstAncestor("ProgressLoading")
+local Parent = ProgressLoading.Parent
+local ExperienceService = game:GetService("ExperienceService")
+local GuiService = game:GetService("GuiService")
+local DataHydrationModule = require(Parent.DataHydration)
+local SignalsModule = require(Parent.Signals)
+local CreateDataCacheFunction = DataHydrationModule.createDataCache
+local CreateDataResolverFunction = DataHydrationModule.createDataResolver
+local FetchPlayerLocalizationChoiceModule = require(script.Parent.fetchPlayerLocalizationChoice)
+local LoadingScreenTelemetryModule = require(ProgressLoading.LoadingScreenTelemetry)
+local QueueExperimentation = require(Parent.SocialExperiments).QueueExperimentation
+local IsJoinNewServerButtonEnabled = game:GetEngineFeature("PlaceJoinStateEnabled") and (QueueExperimentation.getIsJoinNewServerButtonEnabled() or QueueExperimentation.getIsAutoJoinNewServerEnabled())
 
-return function()
-	-- upvalues: createDataCache (ref), createDataResolver (ref), loadingScreenTelemetryModule (ref), fetchPlayerLocalizationChoiceModule (ref), var1 (ref), signalsModule (ref), experienceService (ref), guiService (ref)
-	local var2 = createDataCache()
-	local var3 = createDataResolver({
+return function() --[[ Line: 27 | Named "createLoadingScreenStore" ]]
+	-- upvalues: CreateDataCacheFunction (copy), CreateDataResolverFunction (copy), LoadingScreenTelemetryModule (copy), FetchPlayerLocalizationChoiceModule (copy), IsJoinNewServerButtonEnabled (copy), SignalsModule (copy), ExperienceService (copy), GuiService (copy)
+	local DataCache = CreateDataCacheFunction()
+	local DataResolver = CreateDataResolverFunction({
 		supportsMultiGet = false,
-		cache = var2,
-		logError = function(p1)
-			-- upvalues: loadingScreenTelemetryModule (copy)
+		cache = DataCache,
+		logError = function(p1) --[[ Line: 32 ]]
+			-- upvalues: LoadingScreenTelemetryModule (upval)
 			if type(p1) == "table" then
-				loadingScreenTelemetryModule.countPlayerLocalizationChoiceFailed({ responseCode = p1.responseCode, errorType = p1.errorType })
+				LoadingScreenTelemetryModule.countPlayerLocalizationChoiceFailed({ responseCode = p1.responseCode, errorType = p1.errorType })
 				
 				return
+			else
+				LoadingScreenTelemetryModule.countPlayerLocalizationChoiceFailed({ errorType = "PlayerLocalizationChoiceFetchError" })
 			end
-			loadingScreenTelemetryModule.countPlayerLocalizationChoiceFailed({ errorType = "PlayerLocalizationChoiceFetchError" })
 		end,
-		fetchFn = function(p1, _)
-			-- upvalues: fetchPlayerLocalizationChoiceModule (copy)
-			return fetchPlayerLocalizationChoiceModule(p1):andThen(function(p2)
-				-- upvalues: p1 (ref)
-				if not p2 or not p2.responseBody then
+		fetchFn = function(UniverseId, _) --[[ Line: 49 ]]
+			-- upvalues: FetchPlayerLocalizationChoiceModule (upval)
+			return FetchPlayerLocalizationChoiceModule(UniverseId):andThen(function(Result) --[[ Line: 51 ]]
+				-- upvalues: UniverseId (copy)
+				if not Result or not Result.responseBody then
 					error({
 						errorType = "PlayerLocalizationChoiceResponseError",
-						responseCode = p2 and p2.responseCode,
-						errorMessage = if p2 then "Missing response body" else "No response",
-						customFields = { universeId = p1 }
+						responseCode = Result and Result.responseCode,
+						errorMessage = if Result then "Missing response body" else "No response",
+						customFields = { universeId = UniverseId }
 					})
 				end
-				local responseBody = p2.responseBody
+				local ResponseBody = Result.responseBody
 				
-				if responseBody.IsPlayerChoiceEnabled == nil then
+				if ResponseBody.IsPlayerChoiceEnabled == nil then
 					error({
 						errorType = "PlayerLocalizationChoiceMissingKey",
 						errorMessage = "Missing IsPlayerChoiceEnabled in response body",
-						responseCode = p2.responseCode,
-						customFields = { universeId = p1, responseBody = responseBody }
+						responseCode = Result.responseCode,
+						customFields = { universeId = UniverseId, responseBody = ResponseBody }
 					})
 				end
-				return responseBody
-			end):catch(function(p2)
-				error(p2)
+				return ResponseBody
+			end):catch(function(Err) --[[ Line: 74 ]]
+				error(Err)
 			end)
 		end
 	})
-	local uiMessageChangedConnection = nil
-	local placeJoinStateChangedConnection = nil
-	local var4 = nil
-	local _ = nil
-	local var5 = nil
-	local _ = nil
+	local Connection = nil
+	local Connection1 = nil
+	local GetJoinState = nil
+	local Signal2 = nil
+	local GetServerStatusText = nil
+	local Signal2_1 = nil
 	
-	if var1 then
-		local var6, var7 = signalsModule.createSignal(experienceService:GetPlaceJoinState() or "")
-		var4 = var6
-		local var8 = var7
-		placeJoinStateChangedConnection = experienceService.PlaceJoinStateChanged:Connect(function(p1)
-			-- upvalues: var8 (write)
-			var8(p1)
+	if IsJoinNewServerButtonEnabled then
+		GetJoinState, Signal2 = SignalsModule.createSignal(ExperienceService:GetPlaceJoinState() or "")
+		Connection1 = ExperienceService.PlaceJoinStateChanged:Connect(function(State) --[[ Line: 83 ]]
+			-- upvalues: Signal2 (ref)
+			Signal2(State)
 		end)
-		local var9, var10 = signalsModule.createSignal(guiService:GetUiMessage() or "")
-		var5 = var9
-		local var11 = var10
-		uiMessageChangedConnection = guiService.UiMessageChanged:Connect(function(p1, p2)
-			-- upvalues: var11 (write)
-			if p1 == Enum.UiMessageType.UiMessageInfo then
-				var11(p2)
+		GetServerStatusText, Signal2_1 = SignalsModule.createSignal(GuiService:GetUiMessage() or "")
+		Connection = GuiService.UiMessageChanged:Connect(function(MsgType, NewUiMessage) --[[ Line: 89 ]]
+			-- upvalues: Signal2_1 (ref)
+			if MsgType == Enum.UiMessageType.UiMessageInfo then
+				Signal2_1(NewUiMessage)
 			end
 		end)
 	end
 	return {
-		getJoinState = var4,
-		getServerStatusText = var5,
-		getAndFetchPlayerLocalizationChoice = var3.getAndFetchItem,
-		getCachedPlayerLocalizationChoice = var3.getCachedItem,
-		clear = function()
-			-- upvalues: var2 (ref), var3 (ref)
-			var2.clear()
-			var3.clear()
+		getJoinState = GetJoinState,
+		getServerStatusText = GetServerStatusText,
+		getAndFetchPlayerLocalizationChoice = DataResolver.getAndFetchItem,
+		getCachedPlayerLocalizationChoice = DataResolver.getCachedItem,
+		clear = function() --[[ Line: 96 ]]
+			-- upvalues: DataCache (copy), DataResolver (copy)
+			DataCache.clear()
+			DataResolver.clear()
 		end,
-		dispose = function()
-			-- upvalues: var3 (ref), var1 (copy), placeJoinStateChangedConnection (write), uiMessageChangedConnection (write)
-			var3.dispose()
+		dispose = function() --[[ Line: 101 ]]
+			-- upvalues: DataResolver (copy), IsJoinNewServerButtonEnabled (upval), Connection1 (ref), Connection (ref)
+			DataResolver.dispose()
 			
-			if var1 then
-				placeJoinStateChangedConnection:Disconnect()
-				uiMessageChangedConnection:Disconnect()
+			if IsJoinNewServerButtonEnabled then
+				Connection1:Disconnect()
+				Connection:Disconnect()
 			end
 		end
 	}

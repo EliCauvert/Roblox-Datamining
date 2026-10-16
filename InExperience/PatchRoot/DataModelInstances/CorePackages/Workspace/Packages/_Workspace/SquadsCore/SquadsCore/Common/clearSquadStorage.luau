@@ -1,11 +1,11 @@
-﻿local squadsCore = script:FindFirstAncestor("SquadsCore")
-local appStorageService = game:GetService("AppStorageService")
-local constantsModule = require(squadsCore.Common.Constants)
-local roduxSquadsModule = require(squadsCore.RoduxSquads)
+﻿local SquadsCore = script:FindFirstAncestor("SquadsCore")
+local AppStorageService = game:GetService("AppStorageService")
+local ConstantsModule = require(SquadsCore.Common.Constants)
+local RoduxSquadsModule = require(SquadsCore.RoduxSquads)
 
-return function()
-	-- upvalues: appStorageService (ref), constantsModule (ref), roduxSquadsModule (ref)
-	appStorageService:SetItem(constantsModule.ACTIVE_SQUAD_APP_STORAGE_KEY, "")
-	appStorageService:Flush()
-	roduxSquadsModule.PersistManagers.currentSquadPersistManager.reset()
+return function() --[[ Line: 8 ]]
+	-- upvalues: AppStorageService (copy), ConstantsModule (copy), RoduxSquadsModule (copy)
+	AppStorageService:SetItem(ConstantsModule.ACTIVE_SQUAD_APP_STORAGE_KEY, "")
+	AppStorageService:Flush()
+	RoduxSquadsModule.PersistManagers.currentSquadPersistManager.reset()
 end

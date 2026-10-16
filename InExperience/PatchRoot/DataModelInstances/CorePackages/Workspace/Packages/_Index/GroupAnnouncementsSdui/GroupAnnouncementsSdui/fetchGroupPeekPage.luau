@@ -1,0 +1,39 @@
+﻿local GroupAnnouncementsSdui = script:FindFirstAncestor("GroupAnnouncementsSdui")
+local Parent = GroupAnnouncementsSdui.Parent
+local SduiSharedUtilitiesModule = require(Parent.SduiSharedUtilities)
+local SduiResponseType = SduiSharedUtilitiesModule.SduiResponseType
+local GetSduiApiStoreFunction = SduiSharedUtilitiesModule.getSduiApiStore
+local GetSduiTemplateStoreFunction = SduiSharedUtilitiesModule.getSduiTemplateStore
+local SduiLoadTimer = SduiSharedUtilitiesModule.SduiLoadTimer
+local SduiApiStorePostConfigContentType = SduiSharedUtilitiesModule.SduiApiStorePostConfigContentType
+local SduiCapabilities = SduiSharedUtilitiesModule.SduiCapabilities
+local GroupAnnouncementSduiConstantsModule = require(GroupAnnouncementsSdui.GroupAnnouncementSduiConstants)
+local GetGroupPeekPageUrlModule = require(GroupAnnouncementsSdui.getGroupPeekPageUrl)
+
+return function(Group_id, p1) --[[ Line: 17 | Named "fetchGroupPeekPage" ]]
+	-- upvalues: GetGroupPeekPageUrlModule (copy), GroupAnnouncementSduiConstantsModule (copy), SduiLoadTimer (copy), Parent (copy), SduiCapabilities (copy), GetSduiTemplateStoreFunction (copy), GetSduiApiStoreFunction (copy), SduiResponseType (copy), SduiApiStorePostConfigContentType (copy)
+	local AppPage = GroupAnnouncementSduiConstantsModule.AppPage
+	local ServiceContractsProtoModule = require(Parent.ServiceContractsProto)
+	local GroupPeekPage = ServiceContractsProtoModule.apppageplatform.groups.group_peek_page
+	
+	return GetSduiApiStoreFunction().fetchIfNeeded({
+		enableTemplateCache = true,
+		responseType = SduiResponseType.ProtobufJson,
+		url = GetGroupPeekPageUrlModule(Group_id),
+		surfaceKey = AppPage,
+		configKey = GroupAnnouncementSduiConstantsModule.getConfigKey(Group_id),
+		loadTimer = SduiLoadTimer.createLoadTimer(AppPage),
+		apiProto = GroupPeekPage.GroupPeekPageResponse,
+		postConfig = {
+			contentType = SduiApiStorePostConfigContentType.Proto,
+			protoMessage = GroupPeekPage.GroupPeekPageRequest,
+			body = {
+				group_id = Group_id,
+				client_capabilities = ServiceContractsProtoModule.apppageplatform.shared.client_capabilities.ClientCapabilities.new({
+					enabled_capabilities = SduiCapabilities.getEnabledCapabilityNumbers({ "CAPABILITY_SUPPORTS_GROUP_ANNOUNCEMENTS" })
+				}),
+				cached_roblox_component_to_template_id = GetSduiTemplateStoreFunction().getCachedRobloxComponentToTemplateId(AppPage)
+			}
+		}
+	}, p1)
+end

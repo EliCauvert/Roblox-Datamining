@@ -1,377 +1,483 @@
-﻿local inExperienceOffers = script:FindFirstAncestor("InExperienceOffers")
-local parent = inExperienceOffers.Parent
-local _ = require(parent.Promise)
-local sharedFlagsModule = require(parent.SharedFlags)
-local signalsModule = require(parent.Signals)
-local createSessionScopedSignal = require(parent.SignalsUtils).createSessionScopedSignal
-local getAllUserOffersModule = require(inExperienceOffers.Api.getAllUserOffers)
-local offersDebugLoggerModule = require(inExperienceOffers.Internal.OffersDebugLogger)
-local _ = require(inExperienceOffers.Types)
-local mockGetAllUserOffersModule = require(inExperienceOffers.Mocks.MockGetAllUserOffers)
-local getSecondsUntilNextExpirationModule = require(inExperienceOffers.Utils.getSecondsUntilNextExpiration)
-local isNotificationEligibleModule = require(inExperienceOffers.Utils.isNotificationEligible)
-local featureKeyModule = require(inExperienceOffers.Enums.FeatureKey)
-local notificationLocationModule = require(inExperienceOffers.Enums.NotificationLocation)
-local fFlagEnableUserOffers = sharedFlagsModule.FFlagEnableUserOffers
-local fFlagHideOfferNotificationsWhenShopEmpty = sharedFlagsModule.FFlagHideOfferNotificationsWhenShopEmpty
-local fFlagOffersRespectExpirationModule = require(inExperienceOffers.Flags.FFlagOffersRespectExpiration)
-local fFlagOffersMergeStoreResultsModule = require(inExperienceOffers.Flags.FFlagOffersMergeStoreResults)
-local fFlagUseMockUserOffersModule = require(inExperienceOffers.Flags.FFlagUseMockUserOffers)
-local fIntOfferExpirationRefetchBufferSecondsModule = require(inExperienceOffers.Flags.FIntOfferExpirationRefetchBufferSeconds)
-local fIntOfferExpirationRefetchJitterSecondsModule = require(inExperienceOffers.Flags.FIntOfferExpirationRefetchJitterSeconds)
-local fIntOfferExpirationRefetchMaxCountModule = require(inExperienceOffers.Flags.FIntOfferExpirationRefetchMaxCount)
+﻿local InExperienceOffers = script:FindFirstAncestor("InExperienceOffers")
+local Parent = InExperienceOffers.Parent
+local _ = require(Parent.Promise)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local SignalsModule = require(Parent.Signals)
+local CreateSessionScopedSignalFunction = require(Parent.SignalsUtils).createSessionScopedSignal
+local GetAllUserOffersModule = require(InExperienceOffers.Api.getAllUserOffers)
+local OffersDebugLoggerModule = require(InExperienceOffers.Internal.OffersDebugLogger)
+local _ = require(InExperienceOffers.Types)
+local MockGetAllUserOffersModule = require(InExperienceOffers.Mocks.MockGetAllUserOffers)
+local GetSecondsUntilNextExpirationModule = require(InExperienceOffers.Utils.getSecondsUntilNextExpiration)
+local GetSecondsUntilAnyKeyEmptiesModule = require(InExperienceOffers.Utils.getSecondsUntilAnyKeyEmpties)
+local IsNotificationEligibleModule = require(InExperienceOffers.Utils.isNotificationEligible)
+local FeatureKeyModule = require(InExperienceOffers.Enums.FeatureKey)
+local NotificationLocationModule = require(InExperienceOffers.Enums.NotificationLocation)
+local FFlagEnableUserOffers = SharedFlagsModule.FFlagEnableUserOffers
+local FFlagHideOfferNotificationsWhenShopEmpty = SharedFlagsModule.FFlagHideOfferNotificationsWhenShopEmpty
+local FFlagOffersRespectExpirationModule = require(InExperienceOffers.Flags.FFlagOffersRespectExpiration)
+local FFlagOffersMergeStoreResultsModule = require(InExperienceOffers.Flags.FFlagOffersMergeStoreResults)
+local FFlagUseMockUserOffersModule = require(InExperienceOffers.Flags.FFlagUseMockUserOffers)
+local FIntOfferExpirationRefetchBufferSecondsModule = require(InExperienceOffers.Flags.FIntOfferExpirationRefetchBufferSeconds)
+local FIntOfferExpirationRefetchJitterSecondsModule = require(InExperienceOffers.Flags.FIntOfferExpirationRefetchJitterSeconds)
+local FIntOfferExpirationRefetchMaxCountModule = require(InExperienceOffers.Flags.FIntOfferExpirationRefetchMaxCount)
+local FFlagOffersPerKeyExpiryRefetchModule = require(InExperienceOffers.Flags.FFlagOffersPerKeyExpiryRefetch)
+local FFlagOffersShopScopedNotificationModule = require(InExperienceOffers.Flags.FFlagOffersShopScopedNotification)
 
-local function normalizePresentationData(p1)
-	if p1 == nil then
+local function normalizePresentationData(PresentationData) --[[ Line: 103 ]]
+	if PresentationData == nil then
 		return nil
 	end
 	local t = {}
 	
-	for i, v in p1 do
-		if v.banner ~= nil then
-			t.banner = v.banner
+	for _, value in PresentationData do
+		if value.banner ~= nil then
+			t.banner = value.banner
 		end
-		if v.menuBadge ~= nil then
-			t.menuBadge = v.menuBadge
+		if value.menuBadge ~= nil then
+			t.menuBadge = value.menuBadge
 		end
-		if v.tooltip ~= nil then
-			t.tooltip = v.tooltip
+		if value.tooltip ~= nil then
+			t.tooltip = value.tooltip
 		end
 	end
 	return t
 end
 
-local function _(p2)
-	-- upvalues: normalizePresentationData (ref)
+local function _(p1) --[[ Line: 122 | Named "normalizeOffer" ]]
+	-- upvalues: normalizePresentationData (copy)
 	return {
-		offerId = p2.offerId,
-		offerStatus = p2.offerStatus,
-		featureKeys = p2.featureKeys,
-		expirationTimeInUTC = p2.expirationTimeInUTC,
-		presentationData = normalizePresentationData(p2.presentationData)
+		offerId = p1.offerId,
+		offerStatus = p1.offerStatus,
+		featureKeys = p1.featureKeys,
+		expirationTimeInUTC = p1.expirationTimeInUTC,
+		presentationData = normalizePresentationData(p1.presentationData)
 	}
 end
 
-local function bucketResponse(p2)
-	-- upvalues: normalizePresentationData (ref)
+local function bucketResponse(p1) --[[ Line: 135 ]]
+	-- upvalues: normalizePresentationData (copy)
 	local t = {}
 	
-	for i, v in p2.offers do
-		local t_1 = {
-			offerId = v.offerId,
-			offerStatus = v.offerStatus,
-			featureKeys = v.featureKeys,
-			expirationTimeInUTC = v.expirationTimeInUTC,
-			presentationData = normalizePresentationData(v.presentationData)
+	for _, offer in p1.offers do
+		local config = {
+			offerId = offer.offerId,
+			offerStatus = offer.offerStatus,
+			featureKeys = offer.featureKeys,
+			expirationTimeInUTC = offer.expirationTimeInUTC,
+			presentationData = normalizePresentationData(offer.presentationData)
 		}
 		
-		for i_1, v_1 in t_1.featureKeys do
-			local var1 = t[v_1]
+		for _, featureKey in config.featureKeys do
+			local List = t[featureKey]
 			
-			if var1 == nil then
-				var1 = {}
-				t[v_1] = var1
+			if List == nil then
+				List = {}
+				t[featureKey] = List
 			end
-			table.insert(var1, t_1)
+			table.insert(List, config)
 		end
 	end
 	return t
 end
 
-local function mergeRequestedKeys(p3, p4, p5)
-	local var2 = if p3 ~= nil then {} else table.clone(p3)
-	
-	for i, v in p5 do
-		var2[v] = p4[v]
+local function mergeRequestedKeys(Tbl, p2, List) --[[ Line: 155 ]]
+	local T = if Tbl == nil then {} else table.clone(Tbl)
+	for _, value in List do
+		T[value] = p2[value]
 	end
-	return var2
+	return T
 end
 
-return function()
-	-- upvalues: createSessionScopedSignal (ref), signalsModule (ref), fFlagHideOfferNotificationsWhenShopEmpty (ref), isNotificationEligibleModule (ref), notificationLocationModule (ref), fFlagUseMockUserOffersModule (ref), mockGetAllUserOffersModule (ref), getAllUserOffersModule (ref), normalizePresentationData (ref), fFlagOffersRespectExpirationModule (ref), bucketResponse (ref), mergeRequestedKeys (ref), featureKeyModule (ref), fFlagEnableUserOffers (ref), fFlagOffersMergeStoreResultsModule (ref), offersDebugLoggerModule (ref), getSecondsUntilNextExpirationModule (ref), fIntOfferExpirationRefetchMaxCountModule (ref), fIntOfferExpirationRefetchBufferSecondsModule (ref), fIntOfferExpirationRefetchJitterSecondsModule (ref)
-	local var3, var4 = createSessionScopedSignal(nil)
-	local var5, var6 = createSessionScopedSignal(nil)
-	local var7, var8 = createSessionScopedSignal(false)
-	local var9, var10 = signalsModule.createSignal(false)
-	local var11, var12 = signalsModule.createSignal(true)
-	local var13, var14 = signalsModule.createSignal(true)
-	local var15 = signalsModule.createComputed(function(p6)
-		-- upvalues: var3 (ref), var5 (ref), var11 (ref), fFlagHideOfferNotificationsWhenShopEmpty (copy), var13 (ref), isNotificationEligibleModule (copy)
-		local var16 = var3(p6)
-		local var17 = var5(p6)
-		
-		if var16 == nil or var17 == nil then
-			return false
-		elseif not var11(p6) then
-			return false
-		elseif fFlagHideOfferNotificationsWhenShopEmpty and not var13(p6) then
-			return false
-		end
-		for i, v in var16 do
-			for i_1, v_1 in v do
-				if isNotificationEligibleModule(v_1, var17) then
-					return true
-				end
-			end
-		end
-		return false
-	end)
-	local var18 = signalsModule.createComputed(function(p7)
-		-- upvalues: var7 (ref), notificationLocationModule (copy), var3 (ref), var5 (ref), fFlagHideOfferNotificationsWhenShopEmpty (copy), var13 (ref), var9 (ref), var11 (ref), isNotificationEligibleModule (copy)
-		if var7(p7) then
-			return notificationLocationModule.None
-		end
-		local var19 = var3(p7)
-		local var20 = var5(p7)
-		
-		if var19 == nil or var20 == nil then
-			return notificationLocationModule.None
-		elseif fFlagHideOfferNotificationsWhenShopEmpty and not var13(p7) then
-			return notificationLocationModule.None
-		end
-		local var21 = var9(p7)
-		
-		if not var21 and not var11(p7) then
-			return notificationLocationModule.None
-		end
-		local var22 = if var21 then notificationLocationModule.GlobalIcon else notificationLocationModule.Hamburger
-		
-		for i, v in var19 do
-			for i_1, v_1 in v do
-				if isNotificationEligibleModule(v_1, var20) then
-					return var22
-				end
-			end
-		end
-		return notificationLocationModule.None
-	end)
+local _ = function(List) --[[ Line: 168 | Named "keysOf" ]]
+	local List1 = {}
 	
-	local function hydrateOfferExposureSnapshot(p8)
-		-- upvalues: var5 (ref), var6 (ref)
-		if var5(false) == nil then
-			var6(p8)
+	for i in List do
+		table.insert(List1, i)
+	end
+	return List1
+end
+
+return function() --[[ Line: 176 | Named "createOffersStore" ]]
+	-- upvalues: CreateSessionScopedSignalFunction (copy), SignalsModule (copy), FFlagHideOfferNotificationsWhenShopEmpty (copy), FFlagOffersShopScopedNotificationModule (copy), FeatureKeyModule (copy), IsNotificationEligibleModule (copy), NotificationLocationModule (copy), FFlagUseMockUserOffersModule (copy), MockGetAllUserOffersModule (copy), GetAllUserOffersModule (copy), normalizePresentationData (copy), FFlagOffersRespectExpirationModule (copy), bucketResponse (copy), mergeRequestedKeys (copy), FFlagEnableUserOffers (copy), FFlagOffersMergeStoreResultsModule (copy), OffersDebugLoggerModule (copy), FIntOfferExpirationRefetchMaxCountModule (copy), FIntOfferExpirationRefetchBufferSecondsModule (copy), FIntOfferExpirationRefetchJitterSecondsModule (copy), GetSecondsUntilAnyKeyEmptiesModule (copy), FFlagOffersPerKeyExpiryRefetchModule (copy), GetSecondsUntilNextExpirationModule (copy)
+	local SessionScopedSignal, SessionScopedSignal2 = CreateSessionScopedSignalFunction(nil)
+	local SessionScopedSignal1, SessionScopedSignal2_1 = CreateSessionScopedSignalFunction(nil)
+	local SessionScopedSignal3, SessionScopedSignal2_2 = CreateSessionScopedSignalFunction(false)
+	local Signal, Signal2 = SignalsModule.createSignal(false)
+	local Signal1, Signal2_1 = SignalsModule.createSignal(true)
+	local Signal3, Signal2_2 = SignalsModule.createSignal(true)
+	local MockGetAllUserOffersModule1 = if FFlagUseMockUserOffersModule then MockGetAllUserOffersModule else GetAllUserOffersModule
+	local v1 = nil
+	local DelayedThread = nil
+	local Count = 0
+	local Count1 = 0
+	local Callback = nil
+	
+	local function _() --[[ Line: 345 | Named "cancelExpirationRefetch" ]]
+		-- upvalues: DelayedThread (ref)
+		if DelayedThread ~= nil then
+			pcall(task.cancel, DelayedThread)
+			DelayedThread = nil
 		end
 	end
 	
-	local function markInExperienceShopOpened()
-		-- upvalues: var8 (ref)
-		var8(true)
-	end
-	
-	local var23 = if fFlagUseMockUserOffersModule then mockGetAllUserOffersModule else getAllUserOffersModule
-	local var24 = nil
-	local var25 = nil
-	local var26 = 0
-	local var27 = 0
-	local scheduleExpirationRefetch = nil
-	
-	local function _()
-		-- upvalues: var25 (write)
-		if var25 ~= nil then
-			pcall(task.cancel, var25)
-			var25 = nil
-		end
-	end
-	
-	local function commitOffers(p8)
-		-- upvalues: normalizePresentationData (copy), var4 (ref), fFlagOffersRespectExpirationModule (copy), scheduleExpirationRefetch (write)
+	local function commitOffers(p3) --[[ Line: 361 ]]
+		-- upvalues: normalizePresentationData (upval), SessionScopedSignal2 (copy), FFlagOffersRespectExpirationModule (upval), Callback (ref)
 		local t = {}
 		
-		for i, v in p8.offers do
-			local t_1 = {
-				offerId = v.offerId,
-				offerStatus = v.offerStatus,
-				featureKeys = v.featureKeys,
-				expirationTimeInUTC = v.expirationTimeInUTC,
-				presentationData = normalizePresentationData(v.presentationData)
+		for _, offer in p3.offers do
+			local config = {
+				offerId = offer.offerId,
+				offerStatus = offer.offerStatus,
+				featureKeys = offer.featureKeys,
+				expirationTimeInUTC = offer.expirationTimeInUTC,
+				presentationData = normalizePresentationData(offer.presentationData)
 			}
 			
-			for i_1, v_1 in t_1.featureKeys do
-				local var28 = t[v_1]
+			for _, featureKey in config.featureKeys do
+				local List = t[featureKey]
 				
-				if var28 == nil then
-					var28 = {}
-					t[v_1] = var28
+				if List == nil then
+					List = {}
+					t[featureKey] = List
 				end
-				table.insert(var28, t_1)
+				table.insert(List, config)
 			end
 		end
-		var4(t)
+		SessionScopedSignal2(t)
 		
-		if fFlagOffersRespectExpirationModule then
-			scheduleExpirationRefetch(t)
+		if FFlagOffersRespectExpirationModule then
+			Callback(t)
 		end
 	end
 	
-	local _ = function(p9, p10)
-		-- upvalues: bucketResponse (copy), mergeRequestedKeys (copy), var3 (ref), var4 (ref), fFlagOffersRespectExpirationModule (copy), scheduleExpirationRefetch (write)
-		local var29 = mergeRequestedKeys(var3(false), bucketResponse(p10), p9)
-		var4(var29)
+	local _ = function(p4, p5) --[[ Line: 384 | Named "commitMergedOffers" ]]
+		-- upvalues: bucketResponse (upval), mergeRequestedKeys (upval), SessionScopedSignal (copy), SessionScopedSignal2 (copy), FFlagOffersRespectExpirationModule (upval), Callback (ref)
+		local MergeRequestedKeysResult = mergeRequestedKeys(SessionScopedSignal(false), bucketResponse(p5), p4)
+		SessionScopedSignal2(MergeRequestedKeysResult)
 		
-		if fFlagOffersRespectExpirationModule then
-			scheduleExpirationRefetch(var29)
+		if FFlagOffersRespectExpirationModule then
+			Callback(MergeRequestedKeysResult)
 		end
 	end
 	
-	local function expireShopOffers()
-		-- upvalues: var3 (ref), featureKeyModule (copy), var4 (ref)
-		local var29 = var3(false)
+	local function expireShopOffers() --[[ Line: 398 ]]
+		-- upvalues: SessionScopedSignal (copy), FeatureKeyModule (upval), SessionScopedSignal2 (copy)
+		local SessionScopedSignalResult = SessionScopedSignal(false)
 		
-		if var29 == nil or var29[featureKeyModule.RobloxShop] == nil then return end
+		if SessionScopedSignalResult == nil or SessionScopedSignalResult[FeatureKeyModule.RobloxShop] == nil then return end
 		local t = {}
 		
-		for i, v in var29 do
-			if i ~= featureKeyModule.RobloxShop then
-				t[i] = v
+		for i, value in SessionScopedSignalResult do
+			if i ~= FeatureKeyModule.RobloxShop then
+				t[i] = value
 			end
 		end
-		var4(t)
+		SessionScopedSignal2(t)
 	end
 	
-	local _ = function(p9, p10)
-		-- upvalues: var27 (write), commitOffers (ref)
-		if p9 == var27 then
-			commitOffers(p10)
+	local _ = function(Count, p4) --[[ Line: 412 | Named "commitOffersIfCurrent" ]]
+		-- upvalues: Count1 (ref), commitOffers (copy)
+		if Count == Count1 then
+			commitOffers(p4)
 			
 			return
 		end
 	end
 	
-	local _ = function(p9, p10, p11)
-		-- upvalues: var27 (write), bucketResponse (copy), mergeRequestedKeys (copy), var3 (ref), var4 (ref), fFlagOffersRespectExpirationModule (copy), scheduleExpirationRefetch (write)
-		if p9 ~= var27 then return end
-		local var30 = mergeRequestedKeys(var3(false), bucketResponse(p11), p10)
-		var4(var30)
+	local _ = function(Count, p4, p5) --[[ Line: 419 | Named "commitMergedOffersIfCurrent" ]]
+		-- upvalues: Count1 (ref), bucketResponse (upval), mergeRequestedKeys (upval), SessionScopedSignal (copy), SessionScopedSignal2 (copy), FFlagOffersRespectExpirationModule (upval), Callback (ref)
+		if Count ~= Count1 then return end
+		local MergeRequestedKeysResult = mergeRequestedKeys(SessionScopedSignal(false), bucketResponse(p5), p4)
+		SessionScopedSignal2(MergeRequestedKeysResult)
 		
-		if fFlagOffersRespectExpirationModule then
-			scheduleExpirationRefetch(var30)
+		if FFlagOffersRespectExpirationModule then
+			Callback(MergeRequestedKeysResult)
 		end
 	end
 	
-	local function fetchOffers(p9)
-		-- upvalues: fFlagEnableUserOffers (copy), fFlagOffersRespectExpirationModule (copy), var24 (write), var25 (write), var27 (write), var23 (ref), fFlagOffersMergeStoreResultsModule (copy), bucketResponse (copy), mergeRequestedKeys (copy), var3 (ref), var4 (ref), scheduleExpirationRefetch (write), commitOffers (ref), offersDebugLoggerModule (copy)
-		if not fFlagEnableUserOffers then return end
-		if not fFlagOffersRespectExpirationModule then
-			var23(p9):andThen(function(p10)
-				-- upvalues: fFlagOffersMergeStoreResultsModule (copy), p9 (ref), bucketResponse (copy), mergeRequestedKeys (copy), var3 (copy), var4 (copy), fFlagOffersRespectExpirationModule (copy), scheduleExpirationRefetch (copy), commitOffers (copy)
-				if fFlagOffersMergeStoreResultsModule then
-					local var30 = mergeRequestedKeys(var3(false), bucketResponse(p10), p9)
-					var4(var30)
+	local function fetchOffers(p4) --[[ Line: 440 ]]
+		-- upvalues: FFlagEnableUserOffers (upval), FFlagOffersRespectExpirationModule (upval), v1 (ref), DelayedThread (ref), Count1 (ref), MockGetAllUserOffersModule1 (copy), FFlagOffersMergeStoreResultsModule (upval), bucketResponse (upval), mergeRequestedKeys (upval), SessionScopedSignal (copy), SessionScopedSignal2 (copy), Callback (ref), commitOffers (copy), OffersDebugLoggerModule (upval)
+		if not FFlagEnableUserOffers then return end
+		if not FFlagOffersRespectExpirationModule then
+			MockGetAllUserOffersModule1(p4):andThen(function(Result) --[[ Line: 472 ]]
+				-- upvalues: FFlagOffersMergeStoreResultsModule (upval), p4 (copy), bucketResponse (upval), mergeRequestedKeys (upval), SessionScopedSignal (upval), SessionScopedSignal2 (upval), FFlagOffersRespectExpirationModule (upval), Callback (upval), commitOffers (upval)
+				if FFlagOffersMergeStoreResultsModule then
+					local MergeRequestedKeysResult = mergeRequestedKeys(SessionScopedSignal(false), bucketResponse(Result), p4)
+					SessionScopedSignal2(MergeRequestedKeysResult)
 					
-					if fFlagOffersRespectExpirationModule then
-						scheduleExpirationRefetch(var30)
+					if FFlagOffersRespectExpirationModule then
+						Callback(MergeRequestedKeysResult)
 						
 						return
 					end
 				else
-					commitOffers(p10)
+					commitOffers(Result)
 				end
-			end):catch(function(p10)
-				-- upvalues: offersDebugLoggerModule (copy)
-				offersDebugLoggerModule.log("fetchOffers failed: " .. tostring(p10))
+			end):catch(function(Err) --[[ Line: 479 ]]
+				-- upvalues: OffersDebugLoggerModule (upval)
+				OffersDebugLoggerModule.log("fetchOffers failed: " .. tostring(Err))
 			end)
 			
 			return
 		end
-		var24 = p9
+		v1 = p4
 		
-		if var25 ~= nil then
-			pcall(task.cancel, var25)
-			var25 = nil
+		if DelayedThread ~= nil then
+			pcall(task.cancel, DelayedThread)
+			DelayedThread = nil
 		end
-		var27 += 1
-		local var30 = var27
-		var23(p9):andThen(function(p10)
-			-- upvalues: fFlagOffersMergeStoreResultsModule (copy), var30 (ref), p9 (ref), var27 (copy), bucketResponse (copy), mergeRequestedKeys (copy), var3 (copy), var4 (copy), fFlagOffersRespectExpirationModule (copy), scheduleExpirationRefetch (copy), commitOffers (copy)
-			if fFlagOffersMergeStoreResultsModule then
-				local var31 = p9
+		Count1 += 1
+		local Count: number = Count1
+		MockGetAllUserOffersModule1(p4):andThen(function(Result) --[[ Line: 450 ]]
+			-- upvalues: FFlagOffersMergeStoreResultsModule (upval), Count (copy), p4 (copy), Count1 (upval), bucketResponse (upval), mergeRequestedKeys (upval), SessionScopedSignal (upval), SessionScopedSignal2 (upval), FFlagOffersRespectExpirationModule (upval), Callback (upval), commitOffers (upval)
+			if FFlagOffersMergeStoreResultsModule then
+				if Count ~= Count1 then return end
+				local MergeRequestedKeysResult = mergeRequestedKeys(SessionScopedSignal(false), bucketResponse(Result), p4)
+				SessionScopedSignal2(MergeRequestedKeysResult)
 				
-				if var30 ~= var27 then return end
-				local var32 = mergeRequestedKeys(var3(false), bucketResponse(p10), var31)
-				var4(var32)
-				
-				if fFlagOffersRespectExpirationModule then
-					scheduleExpirationRefetch(var32)
+				if FFlagOffersRespectExpirationModule then
+					Callback(MergeRequestedKeysResult)
 					
 					return
 				end
-			elseif var30 ~= var27 then return end
-			commitOffers(p10)
-		end):catch(function(p10)
-			-- upvalues: offersDebugLoggerModule (copy), var30 (ref), var27 (copy), var3 (copy), scheduleExpirationRefetch (copy)
-			offersDebugLoggerModule.log("fetchOffers failed: " .. tostring(p10))
+			elseif Count ~= Count1 then return end
+			commitOffers(Result)
+		end):catch(function(Err) --[[ Line: 457 ]]
+			-- upvalues: OffersDebugLoggerModule (upval), Count (copy), Count1 (upval), SessionScopedSignal (upval), Callback (upval)
+			OffersDebugLoggerModule.log("fetchOffers failed: " .. tostring(Err))
 			
-			if var30 == var27 then
-				local var31 = var3(false)
+			if Count == Count1 then
+				local SessionScopedSignalResult = SessionScopedSignal(false)
 				
-				if var31 ~= nil then
-					scheduleExpirationRefetch(var31)
+				if SessionScopedSignalResult ~= nil then
+					Callback(SessionScopedSignalResult)
 				end
 			end
 		end)
 	end
 	
-	scheduleExpirationRefetch = function(p9)
-		-- upvalues: var25 (write), var24 (write), getSecondsUntilNextExpirationModule (copy), var26 (write), fIntOfferExpirationRefetchMaxCountModule (copy), fIntOfferExpirationRefetchBufferSecondsModule (copy), fIntOfferExpirationRefetchJitterSecondsModule (copy), var27 (write), var23 (ref), fFlagOffersMergeStoreResultsModule (copy), bucketResponse (copy), mergeRequestedKeys (copy), var3 (ref), var4 (ref), fFlagOffersRespectExpirationModule (copy), scheduleExpirationRefetch (write), commitOffers (ref), offersDebugLoggerModule (copy), expireShopOffers (ref)
-		if var25 ~= nil then
-			pcall(task.cancel, var25)
-			var25 = nil
-		end
-		local var30 = getSecondsUntilNextExpirationModule(p9)
+	local function armExpirationRefetch(p4, p5) --[[ Line: 488 ]]
+		-- upvalues: Count (ref), FIntOfferExpirationRefetchMaxCountModule (upval), FIntOfferExpirationRefetchBufferSecondsModule (upval), FIntOfferExpirationRefetchJitterSecondsModule (upval), DelayedThread (ref), Count1 (ref), MockGetAllUserOffersModule1 (copy), FFlagOffersMergeStoreResultsModule (upval), bucketResponse (upval), mergeRequestedKeys (upval), SessionScopedSignal (copy), SessionScopedSignal2 (copy), FFlagOffersRespectExpirationModule (upval), Callback (ref), commitOffers (copy), OffersDebugLoggerModule (upval)
+		if FIntOfferExpirationRefetchMaxCountModule <= Count then return end
+		local NewFIntOfferExpirationRefetchBufferSecondsModule = p5 + FIntOfferExpirationRefetchBufferSecondsModule
 		
-		if var24 == nil or var30 == nil then return end
-		if fIntOfferExpirationRefetchMaxCountModule <= var26 then return end
-		local var31 = var30 + fIntOfferExpirationRefetchBufferSecondsModule
-		
-		if fIntOfferExpirationRefetchJitterSecondsModule > 0 then
-			var31 += math.random() * fIntOfferExpirationRefetchJitterSecondsModule
+		if FIntOfferExpirationRefetchJitterSecondsModule > 0 then
+			NewFIntOfferExpirationRefetchBufferSecondsModule += math.random() * FIntOfferExpirationRefetchJitterSecondsModule
 		end
-		var25 = task.delay(var31, function()
-			-- upvalues: var25 (copy), var26 (copy), var27 (copy), var23 (copy), var24 (ref), fFlagOffersMergeStoreResultsModule (copy), bucketResponse (copy), mergeRequestedKeys (copy), var3 (copy), var4 (copy), fFlagOffersRespectExpirationModule (copy), scheduleExpirationRefetch (copy), commitOffers (copy), offersDebugLoggerModule (copy), expireShopOffers (copy)
-			var25 = nil
-			var26 += 1
-			var23(var24):andThen(function(p10)
-				-- upvalues: fFlagOffersMergeStoreResultsModule (copy), var27 (ref), var24 (copy), var27 (copy), bucketResponse (copy), mergeRequestedKeys (copy), var3 (copy), var4 (copy), fFlagOffersRespectExpirationModule (copy), scheduleExpirationRefetch (copy), commitOffers (copy)
-				if fFlagOffersMergeStoreResultsModule then
-					local var32 = var24
+		DelayedThread = task.delay(NewFIntOfferExpirationRefetchBufferSecondsModule, function() --[[ Line: 497 ]]
+			-- upvalues: DelayedThread (upval), Count (upval), Count1 (upval), MockGetAllUserOffersModule1 (upval), p4 (copy), FFlagOffersMergeStoreResultsModule (upval), bucketResponse (upval), mergeRequestedKeys (upval), SessionScopedSignal (upval), SessionScopedSignal2 (upval), FFlagOffersRespectExpirationModule (upval), Callback (upval), commitOffers (upval), OffersDebugLoggerModule (upval)
+			DelayedThread = nil
+			Count += 1
+			local Count2 = Count1
+			MockGetAllUserOffersModule1(p4):andThen(function(Result) --[[ Line: 502 ]]
+				-- upvalues: FFlagOffersMergeStoreResultsModule (upval), Count2 (copy), p4 (upval), Count1 (upval), bucketResponse (upval), mergeRequestedKeys (upval), SessionScopedSignal (upval), SessionScopedSignal2 (upval), FFlagOffersRespectExpirationModule (upval), Callback (upval), commitOffers (upval)
+				if FFlagOffersMergeStoreResultsModule then
+					if Count2 ~= Count1 then return end
+					local MergeRequestedKeysResult = mergeRequestedKeys(SessionScopedSignal(false), bucketResponse(Result), p4)
+					SessionScopedSignal2(MergeRequestedKeysResult)
 					
-					if var27 ~= var27 then return end
-					local var33 = mergeRequestedKeys(var3(false), bucketResponse(p10), var32)
-					var4(var33)
-					
-					if fFlagOffersRespectExpirationModule then
-						scheduleExpirationRefetch(var33)
+					if FFlagOffersRespectExpirationModule then
+						Callback(MergeRequestedKeysResult)
 						
 						return
 					end
-				elseif var27 ~= var27 then return end
-				commitOffers(p10)
-			end):catch(function(p10)
-				-- upvalues: var27 (ref), var27 (copy), offersDebugLoggerModule (copy), expireShopOffers (copy)
-				if var27 == var27 then
-					offersDebugLoggerModule.log("expiration refetch failed, expiring shop offers: " .. tostring(p10))
-					expireShopOffers()
-					
-					return
+				elseif Count2 ~= Count1 then return end
+				commitOffers(Result)
+			end):catch(function(Err) --[[ Line: 509 ]]
+				-- upvalues: Count2 (copy), Count1 (upval), OffersDebugLoggerModule (upval), SessionScopedSignal (upval), Callback (upval)
+				if Count2 ~= Count1 then return end
+				OffersDebugLoggerModule.log("expiration refetch failed: " .. tostring(Err))
+				local SessionScopedSignalResult = SessionScopedSignal(false)
+				
+				if SessionScopedSignalResult ~= nil then
+					Callback(SessionScopedSignalResult)
 				end
 			end)
 		end)
 	end
 	
+	local _ = function(List) --[[ Line: 526 | Named "scheduleExpirationRefetchPerKey" ]]
+		-- upvalues: DelayedThread (ref), GetSecondsUntilAnyKeyEmptiesModule (upval), armExpirationRefetch (copy)
+		if DelayedThread ~= nil then
+			pcall(task.cancel, DelayedThread)
+			DelayedThread = nil
+		end
+		local SecondsUntilAnyKeyEmptiesModule = GetSecondsUntilAnyKeyEmptiesModule(List)
+		
+		if SecondsUntilAnyKeyEmptiesModule == nil then return end
+		local List1 = {}
+		
+		for i in List do
+			table.insert(List1, i)
+		end
+		armExpirationRefetch(List1, SecondsUntilAnyKeyEmptiesModule)
+	end
+	
+	Callback = function(List) --[[ Line: 545 | Named "scheduleExpirationRefetch" ]]
+		-- upvalues: FFlagOffersPerKeyExpiryRefetchModule (upval), DelayedThread (ref), GetSecondsUntilAnyKeyEmptiesModule (upval), armExpirationRefetch (copy), v1 (ref), GetSecondsUntilNextExpirationModule (upval), Count (ref), FIntOfferExpirationRefetchMaxCountModule (upval), FIntOfferExpirationRefetchBufferSecondsModule (upval), FIntOfferExpirationRefetchJitterSecondsModule (upval), Count1 (ref), MockGetAllUserOffersModule1 (copy), FFlagOffersMergeStoreResultsModule (upval), bucketResponse (upval), mergeRequestedKeys (upval), SessionScopedSignal (copy), SessionScopedSignal2 (copy), FFlagOffersRespectExpirationModule (upval), Callback (ref), commitOffers (copy), OffersDebugLoggerModule (upval), expireShopOffers (copy)
+		if FFlagOffersPerKeyExpiryRefetchModule then
+			if DelayedThread ~= nil then
+				pcall(task.cancel, DelayedThread)
+				DelayedThread = nil
+			end
+			local SecondsUntilAnyKeyEmptiesModule = GetSecondsUntilAnyKeyEmptiesModule(List)
+			
+			if SecondsUntilAnyKeyEmptiesModule == nil then return end
+			local List1 = {}
+			
+			for i in List do
+				table.insert(List1, i)
+			end
+			armExpirationRefetch(List1, SecondsUntilAnyKeyEmptiesModule)
+			
+			return
+		else
+			if DelayedThread ~= nil then
+				pcall(task.cancel, DelayedThread)
+				DelayedThread = nil
+			end
+			local v2 = v1
+			local SecondsUntilNextExpirationModule = GetSecondsUntilNextExpirationModule(List)
+			
+			if v2 == nil or SecondsUntilNextExpirationModule == nil then return end
+			if FIntOfferExpirationRefetchMaxCountModule <= Count then return end
+			local NewSecondsUntilNextExpirationModule = SecondsUntilNextExpirationModule + FIntOfferExpirationRefetchBufferSecondsModule
+			
+			if FIntOfferExpirationRefetchJitterSecondsModule > 0 then
+				NewSecondsUntilNextExpirationModule += math.random() * FIntOfferExpirationRefetchJitterSecondsModule
+			end
+			DelayedThread = task.delay(NewSecondsUntilNextExpirationModule, function() --[[ Line: 566 ]]
+				-- upvalues: DelayedThread (upval), Count (upval), Count1 (upval), MockGetAllUserOffersModule1 (upval), v2 (copy), FFlagOffersMergeStoreResultsModule (upval), bucketResponse (upval), mergeRequestedKeys (upval), SessionScopedSignal (upval), SessionScopedSignal2 (upval), FFlagOffersRespectExpirationModule (upval), Callback (upval), commitOffers (upval), OffersDebugLoggerModule (upval), expireShopOffers (upval)
+				DelayedThread = nil
+				Count += 1
+				local Count2 = Count1
+				MockGetAllUserOffersModule1(v2):andThen(function(Result) --[[ Line: 573 ]]
+					-- upvalues: FFlagOffersMergeStoreResultsModule (upval), Count2 (copy), v2 (upval), Count1 (upval), bucketResponse (upval), mergeRequestedKeys (upval), SessionScopedSignal (upval), SessionScopedSignal2 (upval), FFlagOffersRespectExpirationModule (upval), Callback (upval), commitOffers (upval)
+					if FFlagOffersMergeStoreResultsModule then
+						if Count2 ~= Count1 then return end
+						local MergeRequestedKeysResult = mergeRequestedKeys(SessionScopedSignal(false), bucketResponse(Result), v2)
+						SessionScopedSignal2(MergeRequestedKeysResult)
+						
+						if FFlagOffersRespectExpirationModule then
+							Callback(MergeRequestedKeysResult)
+							
+							return
+						end
+					elseif Count2 ~= Count1 then return end
+					commitOffers(Result)
+				end):catch(function(Err) --[[ Line: 580 ]]
+					-- upvalues: Count2 (copy), Count1 (upval), OffersDebugLoggerModule (upval), expireShopOffers (upval)
+					if Count2 == Count1 then
+						OffersDebugLoggerModule.log("expiration refetch failed, expiring shop offers: " .. tostring(Err))
+						expireShopOffers()
+						
+						return
+					end
+				end)
+			end)
+		end
+	end
+	
 	return {
-		getOffers = var3,
-		getOfferNotificationShown = var15,
-		getOfferNotificationShownWithEnum = var18,
-		getOfferExposureSnapshot = var5,
-		getHasInExperienceShopOpened = var7,
-		getIsInExperienceShopGlobalIconAvailable = var9,
-		getIsShopAvailable = var11,
-		getShopHasItems = var13,
+		getOffers = SessionScopedSignal,
+		getOfferNotificationShown = SignalsModule.createComputed(function(p4): boolean --[[ Line: 211 ]]
+			-- upvalues: SessionScopedSignal (copy), SessionScopedSignal1 (copy), Signal1 (copy), FFlagHideOfferNotificationsWhenShopEmpty (upval), Signal3 (copy), FFlagOffersShopScopedNotificationModule (upval), FeatureKeyModule (upval), IsNotificationEligibleModule (upval)
+			local SessionScopedSignalResult = SessionScopedSignal(p4)
+			local SessionScopedSignalResult1 = SessionScopedSignal1(p4)
+			
+			if SessionScopedSignalResult == nil or SessionScopedSignalResult1 == nil then
+				return false
+			end
+			if not Signal1(p4) then
+				return false
+			end
+			if FFlagHideOfferNotificationsWhenShopEmpty and not Signal3(p4) then
+				return false
+			end
+			if FFlagOffersShopScopedNotificationModule then
+				local SessionScopedSignalResultEntry = SessionScopedSignalResult[FeatureKeyModule.RobloxShop]
+				
+				if SessionScopedSignalResultEntry ~= nil then
+					for _, value in SessionScopedSignalResultEntry do
+						if IsNotificationEligibleModule(value, SessionScopedSignalResult1) then
+							return true
+						end
+					end
+				end
+				return false
+			else
+				for _, value1 in SessionScopedSignalResult do
+					for _, value2 in value1 do
+						if IsNotificationEligibleModule(value2, SessionScopedSignalResult1) then
+							return true
+						end
+					end
+				end
+				return false
+			end
+		end),
+		getOfferNotificationShownWithEnum = SignalsModule.createComputed(function(p5) --[[ Line: 256 ]]
+			-- upvalues: SessionScopedSignal3 (copy), NotificationLocationModule (upval), SessionScopedSignal (copy), SessionScopedSignal1 (copy), FFlagHideOfferNotificationsWhenShopEmpty (upval), Signal3 (copy), Signal (copy), Signal1 (copy), FFlagOffersShopScopedNotificationModule (upval), FeatureKeyModule (upval), IsNotificationEligibleModule (upval)
+			if SessionScopedSignal3(p5) then
+				return NotificationLocationModule.None
+			end
+			local SessionScopedSignalResult = SessionScopedSignal(p5)
+			local SessionScopedSignalResult1 = SessionScopedSignal1(p5)
+			
+			if SessionScopedSignalResult == nil or SessionScopedSignalResult1 == nil then
+				return NotificationLocationModule.None
+			end
+			if FFlagHideOfferNotificationsWhenShopEmpty and not Signal3(p5) then
+				return NotificationLocationModule.None
+			end
+			local SignalResult = Signal(p5)
+			
+			if not SignalResult and not Signal1(p5) then
+				return NotificationLocationModule.None
+			end
+			local GlobalIcon = if SignalResult then NotificationLocationModule.GlobalIcon else NotificationLocationModule.Hamburger
+			
+			if FFlagOffersShopScopedNotificationModule then
+				local SessionScopedSignalResultEntry = SessionScopedSignalResult[FeatureKeyModule.RobloxShop]
+				
+				if SessionScopedSignalResultEntry ~= nil then
+					for _, value in SessionScopedSignalResultEntry do
+						if IsNotificationEligibleModule(value, SessionScopedSignalResult1) then
+							return GlobalIcon
+						end
+					end
+				end
+				return NotificationLocationModule.None
+			else
+				for _, value1 in SessionScopedSignalResult do
+					for _, value2 in value1 do
+						if IsNotificationEligibleModule(value2, SessionScopedSignalResult1) then
+							return GlobalIcon
+						end
+					end
+				end
+				return NotificationLocationModule.None
+			end
+		end),
+		getOfferExposureSnapshot = SessionScopedSignal1,
+		getHasInExperienceShopOpened = SessionScopedSignal3,
+		getIsInExperienceShopGlobalIconAvailable = Signal,
+		getIsShopAvailable = Signal1,
+		getShopHasItems = Signal3,
 		fetchOffers = fetchOffers,
-		hydrateOfferExposureSnapshot = hydrateOfferExposureSnapshot,
-		markInExperienceShopOpened = markInExperienceShopOpened,
-		setInExperienceShopGlobalIconAvailable = var10,
-		setIsShopAvailable = var12,
-		setShopHasItems = var14
+		hydrateOfferExposureSnapshot = function(p6) --[[ Line: 315 ]]
+			-- upvalues: SessionScopedSignal1 (copy), SessionScopedSignal2_1 (copy)
+			if SessionScopedSignal1(false) == nil then
+				SessionScopedSignal2_1(p6)
+			end
+		end,
+		markInExperienceShopOpened = function() --[[ Line: 321 ]]
+			-- upvalues: SessionScopedSignal2_2 (copy)
+			SessionScopedSignal2_2(true)
+		end,
+		setInExperienceShopGlobalIconAvailable = Signal2,
+		setIsShopAvailable = Signal2_1,
+		setShopHasItems = Signal2_2
 	}
 end

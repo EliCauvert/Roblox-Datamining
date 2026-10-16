@@ -1,103 +1,105 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local userPickerRowModule = require(script.Parent.UserPickerRow)
-local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local list = foundationModule.List
-local skeleton = foundationModule.Skeleton
-local text = foundationModule.Text
-local view = foundationModule.View
-local inputSize = foundationModule.Enums.InputSize
-local radius = foundationModule.Enums.Radius
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UserPickerRowModule = require(script.Parent.UserPickerRow)
+local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
+local List = FoundationModule.List
+local Skeleton = FoundationModule.Skeleton
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local InputSize = FoundationModule.Enums.InputSize
+local Radius = FoundationModule.Enums.Radius
 
-local function _(p1)
-	return string.gsub(p1, "^%s*(.-)%s*$", "%1")
+local function _(Text: string): string --[[ Line: 41 | Named "trim" ]]
+	return (string.gsub(Text, "^%s*(.-)%s*$", "%1"))
 end
 
-local function renderSkeletonRow(p1, p2)
-	-- upvalues: reactModule (ref), view (ref), skeleton (ref), radius (ref)
-	return reactModule.createElement(view, {
+local function renderSkeletonRow(LayoutOrder, TestId) --[[ Line: 47 ]]
+	-- upvalues: ReactModule (copy), View (copy), Skeleton (copy), Radius (copy)
+	return ReactModule.createElement(View, {
 		tag = "row align-y-center gap-medium size-full-0 auto-y padding-y-small",
-		LayoutOrder = p1,
-		testId = p2
+		LayoutOrder = LayoutOrder,
+		testId = TestId
 	}, {
-		Avatar = reactModule.createElement(skeleton, {
+		Avatar = ReactModule.createElement(Skeleton, {
 			LayoutOrder = 1,
 			Size = UDim2.fromOffset(36, 36),
-			radius = radius.Circle
+			radius = Radius.Circle
 		}),
-		Lines = reactModule.createElement(view, { LayoutOrder = 2, tag = "col fill gap-small auto-y" }, {
-			Title = reactModule.createElement(skeleton, {
+		Lines = ReactModule.createElement(View, { LayoutOrder = 2, tag = "col fill gap-small auto-y" }, {
+			Title = ReactModule.createElement(Skeleton, {
 				LayoutOrder = 1,
 				Size = UDim2.new(0.5, 0, 0, 12),
-				radius = radius.Small
+				radius = Radius.Small
 			}),
-			Description = reactModule.createElement(skeleton, {
+			Description = ReactModule.createElement(Skeleton, {
 				LayoutOrder = 2,
 				Size = UDim2.new(0.3, 0, 0, 10),
-				radius = radius.Small
+				radius = Radius.Small
 			})
 		})
 	})
 end
 
-return function(p1)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), renderSkeletonRow (ref), reactModule (ref), view (ref), text (ref), userPickerRowModule (ref), list (ref), inputSize (ref)
-	local noResults = useLocalization({
-		noResults = localizationStringsModule.USER_PICKER_NO_RESULTS
+return function(p1) --[[ Line: 76 | Named "UserPickerList" ]]
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), renderSkeletonRow (copy), ReactModule (copy), View (copy), Text (copy), UserPickerRowModule (copy), List (copy), InputSize (copy)
+	local NoResults = UseLocalizationFunction({
+		noResults = LocalizationStringsModule.USER_PICKER_NO_RESULTS
 	}).noResults
-	local testId = p1.testId or "user-picker-list"
-	local userIds = p1.userIds
+	local TestId = p1.testId or "user-picker-list"
+	local UserIds = p1.userIds
 	
-	if #userIds == 0 and p1.isLoading then
+	if #UserIds == 0 and p1.isLoading then
 		local t = {}
 		
 		for i = 1, 6 do
-			t[`skeleton-{i}`] = renderSkeletonRow(i, `{testId}-skeleton-{i}`)
+			t[`skeleton-{i}`] = renderSkeletonRow(i, `{TestId}-skeleton-{i}`)
 		end
-		return reactModule.createElement(view, {
+		return ReactModule.createElement(View, {
 			tag = "col gap-small size-full-0 auto-y",
 			LayoutOrder = p1.layoutOrder,
-			testId = `{testId}-loading`
+			testId = `{TestId}-loading`
 		}, t)
-	elseif #userIds == 0 and not p1.isLoading then
-		local var1 = if string.gsub(p1.searchText, "^%s*(.-)%s*$", "%1") ~= "" then p1.emptyText else noResults
-		
-		if var1 ~= nil then
-			return reactModule.createElement(view, {
-				tag = "col align-x-center size-full-0 auto-y padding-y-xlarge",
-				LayoutOrder = p1.layoutOrder,
-				testId = `{testId}-empty`
-			}, {
-				Text = reactModule.createElement(text, {
-					tag = "auto-xy text-body-large text-align-x-center content-muted",
-					Text = var1
+	else
+		if #UserIds == 0 and not p1.isLoading then
+			local EmptyText = if string.gsub(p1.searchText, "^%s*(.-)%s*$", "%1") == "" then p1.emptyText else NoResults
+			
+			if EmptyText ~= nil then
+				return ReactModule.createElement(View, {
+					tag = "col align-x-center size-full-0 auto-y padding-y-xlarge",
+					LayoutOrder = p1.layoutOrder,
+					testId = `{TestId}-empty`
+				}, {
+					Text = ReactModule.createElement(Text, {
+						tag = "auto-xy text-body-large text-align-x-center content-muted",
+						Text = EmptyText
+					})
 				})
+			end
+		end
+		local Elements = {}
+		
+		for LayoutOrder, userId in UserIds do
+			Elements[`row-{userId}`] = ReactModule.createElement(UserPickerRowModule, {
+				userId = userId,
+				isSelected = p1.isSelected(userId),
+				isDisabled = not p1.canSelect(userId),
+				onToggle = function() --[[ Line: 121 ]]
+					-- upvalues: p1 (copy), userId (copy)
+					p1.toggleSelected(userId)
+				end,
+				layoutOrder = LayoutOrder,
+				testId = `{TestId}-user-{userId}`
 			})
 		end
+		return ReactModule.createElement(List.Root, {
+			hasDivider = false,
+			isContained = false,
+			LayoutOrder = p1.layoutOrder,
+			size = InputSize.Medium,
+			testId = `{TestId}-results`
+		}, Elements)
 	end
-	local t = {}
-	
-	for i_1, v in userIds do
-		t[`row-{v}`] = reactModule.createElement(userPickerRowModule, {
-			userId = v,
-			isSelected = p1.isSelected(v),
-			isDisabled = not p1.canSelect(v),
-			onToggle = function()
-				-- upvalues: p1 (ref), v (ref)
-				p1.toggleSelected(v)
-			end,
-			layoutOrder = i_1,
-			testId = `{testId}-user-{v}`
-		})
-	end
-	return reactModule.createElement(list.Root, {
-		hasDivider = false,
-		isContained = false,
-		LayoutOrder = p1.layoutOrder,
-		size = inputSize.Medium,
-		testId = `{testId}-results`
-	}, t)
 end

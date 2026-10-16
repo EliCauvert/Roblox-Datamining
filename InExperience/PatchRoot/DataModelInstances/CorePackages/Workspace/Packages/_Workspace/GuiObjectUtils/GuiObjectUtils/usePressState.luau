@@ -1,6 +1,6 @@
-﻿local useGuiStateModule = require(script.Parent.useGuiState)
+﻿local UseGuiStateModule = require(script.Parent.useGuiState)
 
-return function(p1)
-	-- upvalues: useGuiStateModule (ref)
-	return useGuiStateModule(p1) == Enum.GuiState.Press
+return function(p1): boolean --[[ Line: 9 | Named "usePressState" ]]
+	-- upvalues: UseGuiStateModule (copy)
+	return UseGuiStateModule(p1) == Enum.GuiState.Press
 end

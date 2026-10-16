@@ -1,99 +1,100 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local dashModule = require(parent.Dash)
-local reactModule = require(parent.React)
-local loggerModule = require(foundation.Utility.Logger)
-local buttonModule = require(foundation.Components.Button)
-local imageModule = require(foundation.Components.Image)
-local textModule = require(foundation.Components.Text)
-local _ = require(foundation.Components.Types)
-local viewModule = require(foundation.Components.View)
-local useCursorModule = require(foundation.Providers.Cursor.useCursor)
-local useScaledValueModule = require(foundation.Utility.useScaledValue)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local _ = require(foundation.Enums.ButtonVariant)
-local fillBehaviorModule = require(foundation.Enums.FillBehavior)
-local inputSizeModule = require(foundation.Enums.InputSize)
-local t = { testId = "--foundation-toast" }
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local DashModule = require(Parent.Dash)
+local ReactModule = require(Parent.React)
+local LoggerModule = require(Foundation.Utility.Logger)
+local ButtonModule = require(Foundation.Components.Button)
+local ImageModule = require(Foundation.Components.Image)
+local TextModule = require(Foundation.Components.Text)
+local _ = require(Foundation.Components.Types)
+local ViewModule = require(Foundation.Components.View)
+local UseCursorModule = require(Foundation.Providers.Cursor.useCursor)
+local UseScaledValueModule = require(Foundation.Utility.useScaledValue)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local _ = require(Foundation.Enums.ButtonVariant)
+local FillBehaviorModule = require(Foundation.Enums.FillBehavior)
+local InputSizeModule = require(Foundation.Enums.InputSize)
+local config = { testId = "--foundation-toast" }
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useCursorModule (ref), reactModule (ref), loggerModule (ref), inputSizeModule (ref), fillBehaviorModule (ref), dashModule (ref), buttonModule (ref), useScaledValueModule (ref), viewModule (ref), withCommonPropsModule (ref), imageModule (ref), textModule (ref)
-	local var1 = withDefaultsModule(p1, t)
-	local var2 = useTokensModule()
-	local var3 = useCursorModule({
-		radius = UDim.new(0, var2.Radius.Medium),
-		offset = var2.Size.Size_200,
-		borderWidth = var2.Stroke.Thicker
-	})
-	local actions = var1.actions
-	local var4 = reactModule.useMemo(function()
-		-- upvalues: actions (ref), loggerModule (copy), inputSizeModule (copy), fillBehaviorModule (copy), dashModule (copy), reactModule (copy), buttonModule (copy)
-		local t = {}
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 44 | Named "Toast" ]]
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UseCursorModule (copy), ReactModule (copy), LoggerModule (copy), InputSizeModule (copy), FillBehaviorModule (copy), DashModule (copy), ButtonModule (copy), UseScaledValueModule (copy), ViewModule (copy), WithCommonPropsModule (copy), ImageModule (copy), TextModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
+	local UseTokensModuleResult = UseTokensModule()
+	local Actions = WithDefaultsModuleResult.actions
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 54 ]]
+		-- upvalues: Actions (copy), LoggerModule (upval), InputSizeModule (upval), FillBehaviorModule (upval), DashModule (upval), ReactModule (upval), ButtonModule (upval)
+		local Elements = {}
 		
-		if actions then
-			for i, v in actions do
-				if i <= 2 then
-					t["ToastButton" .. i] = reactModule.createElement(buttonModule, dashModule.union(v, {
-						LayoutOrder = #actions - i,
-						size = inputSizeModule.Medium,
-						fillBehavior = fillBehaviorModule.Fill
-					}))
-					continue
+		if Actions then
+			for i, action in Actions do
+				if i > 2 then
+					LoggerModule:warning(`Toast only supports up to {2} actions`)
+					
+					return Elements
 				end
-				loggerModule:warning(`Toast only supports up to {2} actions`)
-				
-				return t
+				Elements["ToastButton" .. i] = ReactModule.createElement(ButtonModule, (DashModule.union(action, {
+					LayoutOrder = #Actions - i,
+					size = InputSizeModule.Medium,
+					fillBehavior = FillBehaviorModule.Fill
+				})))
 			end
 		end
-		return t
-	end, { actions })
-	local var5 = var1.icon and var1.icon ~= ""
-	local var6 = var1.title and var1.title ~= ""
-	local var7 = var1.text and var1.text ~= ""
+		return Elements
+	end, { Actions })
+	local IsNotIconMatch: boolean = WithDefaultsModuleResult.icon and WithDefaultsModuleResult.icon ~= ""
+	local IsNotTitleMatch: boolean = WithDefaultsModuleResult.title and WithDefaultsModuleResult.title ~= ""
+	local IsNotTextMatch: boolean = WithDefaultsModuleResult.text and WithDefaultsModuleResult.text ~= ""
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var1, {
+	return ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, {
 		tag = "row gap-small auto-y padding-medium radius-medium bg-over-media-0",
-		Size = UDim2.new(var1.width or UDim.new(0, useScaledValueModule(400)), UDim.new()),
+		Size = UDim2.new(WithDefaultsModuleResult.width or UDim.new(0, UseScaledValueModule(400)), UDim.new()),
 		Position = UDim2.fromScale(0.5, 0.1),
-		selection = { Selectable = false, SelectionImageObject = var3 },
-		ref = p2
+		selection = {
+			Selectable = false,
+			SelectionImageObject = UseCursorModule({
+				radius = UDim.new(0, UseTokensModuleResult.Radius.Medium),
+				offset = UseTokensModuleResult.Size.Size_200,
+				borderWidth = UseTokensModuleResult.Stroke.Thicker
+			})
+		},
+		ref = Ref
 	}), {
-		Media = if var5 then reactModule.createElement(imageModule, {
+		Media = if IsNotIconMatch then ReactModule.createElement(ImageModule, {
 			LayoutOrder = 1,
 			tag = "size-1200-1200",
-			Image = var1.icon,
-			testId = `{var1.testId}--media`
+			Image = WithDefaultsModuleResult.icon,
+			testId = `{WithDefaultsModuleResult.testId}--media`
 		}) else nil,
-		Content = reactModule.createElement(viewModule, {
+		Content = ReactModule.createElement(ViewModule, {
 			LayoutOrder = 2,
 			tag = {
 				["fill self-center auto-y"] = true,
-				["col gap-xxsmall"] = var6 or var7
+				["col gap-xxsmall"] = IsNotTitleMatch or IsNotTextMatch
 			},
-			testId = `{var1.testId}--content`
+			testId = `{WithDefaultsModuleResult.testId}--content`
 		}, {
-			Header = if var6 then reactModule.createElement(textModule, {
+			Header = if IsNotTitleMatch then ReactModule.createElement(TextModule, {
 				LayoutOrder = 1,
 				tag = "size-full-0 auto-y text-title-small text-align-x-left text-truncate-end content-emphasis",
-				Text = var1.title,
-				testId = `{var1.testId}--header`
+				Text = WithDefaultsModuleResult.title,
+				testId = `{WithDefaultsModuleResult.testId}--header`
 			}) else nil,
-			Body = if var7 then reactModule.createElement(textModule, {
+			Body = if IsNotTextMatch then ReactModule.createElement(TextModule, {
 				LayoutOrder = 2,
 				tag = "size-full-0 auto-y text-body-small text-wrap text-align-x-left content-default",
-				Text = var1.text,
-				testId = `{var1.testId}--body`
+				Text = WithDefaultsModuleResult.text,
+				testId = `{WithDefaultsModuleResult.testId}--body`
 			}) else nil,
-			Actions = if actions and #actions > 0 then reactModule.createElement(viewModule, {
+			Actions = if Actions and #Actions > 0 then ReactModule.createElement(ViewModule, {
 				LayoutOrder = 3,
 				tag = {
 					["row gap-small size-full-0 auto-y"] = true,
-					["padding-top-small"] = var6 or var7
+					["padding-top-small"] = IsNotTitleMatch or IsNotTextMatch
 				},
-				testId = `{var1.testId}--actions`
-			}, var4) else nil
+				testId = `{WithDefaultsModuleResult.testId}--actions`
+			}, UseMemoResult) else nil
 		})
 	})
 end))

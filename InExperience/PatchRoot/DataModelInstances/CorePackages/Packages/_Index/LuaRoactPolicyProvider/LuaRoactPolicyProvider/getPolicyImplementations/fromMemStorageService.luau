@@ -1,183 +1,184 @@
-﻿local httpService = game:GetService("HttpService")
-local memStorageService = game:GetService("MemStorageService")
-local playersService = game:GetService("Players")
-local fFlagLogFirstGuacRead = game:DefineFastFlag("FFlagLogFirstGuacRead", false)
-local fFlagLogAllGuacRead = game:DefineFastFlag("FFlagLogAllGuacRead", false)
-local cacheReadParsePolicy = game:DefineFastFlag("CacheReadParsePolicy", false)
-local fixPolicyStalePlayerUpdates = game:DefineFastFlag("FixPolicyStalePlayerUpdates", false)
-local clearPolicyOnLogout = game:DefineFastFlag("ClearPolicyOnLogout", false)
-local _ = nil
-local var1 = if fFlagLogFirstGuacRead then require(game:GetService("CorePackages").Workspace.Packages.LoggingProtocol).default else nil
+﻿local HttpService = game:GetService("HttpService")
+local MemStorageService = game:GetService("MemStorageService")
+local Players = game:GetService("Players")
+local FFlagLogFirstGuacRead = game:DefineFastFlag("FFlagLogFirstGuacRead", false)
+local FFlagLogAllGuacRead = game:DefineFastFlag("FFlagLogAllGuacRead", false)
+local CacheReadParsePolicy = game:DefineFastFlag("CacheReadParsePolicy", false)
+local FixPolicyStalePlayerUpdates = game:DefineFastFlag("FixPolicyStalePlayerUpdates", false)
+local ClearPolicyOnLogout = game:DefineFastFlag("ClearPolicyOnLogout", false)
+local Default = if FFlagLogFirstGuacRead then require(game:GetService("CorePackages").Workspace.Packages.LoggingProtocol).default else nil
 
-return function(p1)
-	-- upvalues: httpService (ref), memStorageService (ref), playersService (ref), cacheReadParsePolicy (ref), clearPolicyOnLogout (ref), fixPolicyStalePlayerUpdates (ref), fFlagLogAllGuacRead (ref), var1 (write), fFlagLogFirstGuacRead (ref)
-	p1 = p1 or {}
-	p1.HttpService = p1.HttpService or httpService
-	p1.MemStorageService = p1.MemStorageService or memStorageService
-	p1.PlayersService = p1.PlayersService or playersService
-	assert(p1.HttpService, "expected dependencies.HttpService")
-	assert(p1.MemStorageService, "expected dependencies.MemStorageService")
-	assert(p1.PlayersService, "expected dependencies.PlayersService")
-	p1 = p1.HttpService
-	local memStorageService_1 = p1.MemStorageService
-	local playersService_1 = p1.PlayersService
-	local var2 = false
+return function(p1) --[[ Line: 21 ]]
+	-- upvalues: HttpService (copy), MemStorageService (copy), Players (copy), CacheReadParsePolicy (copy), ClearPolicyOnLogout (copy), FixPolicyStalePlayerUpdates (copy), FFlagLogAllGuacRead (copy), Default (ref), FFlagLogFirstGuacRead (copy)
+	local P0 = p1 or {}
+	P0.HttpService = P0.HttpService or HttpService
+	P0.MemStorageService = P0.MemStorageService or MemStorageService
+	P0.PlayersService = P0.PlayersService or Players
+	assert(P0.HttpService, "expected dependencies.HttpService")
+	assert(P0.MemStorageService, "expected dependencies.MemStorageService")
+	assert(P0.PlayersService, "expected dependencies.PlayersService")
+	local HttpService1 = P0.HttpService
+	local MemStorageService1 = P0.MemStorageService
+	local PlayersService = P0.PlayersService
+	local Flag = false
 	
-	return function(p2)
-		-- upvalues: playersService_1 (ref), p1 (ref), cacheReadParsePolicy (copy), clearPolicyOnLogout (copy), memStorageService_1 (ref), fixPolicyStalePlayerUpdates (copy), fFlagLogAllGuacRead (copy), var1 (copy), fFlagLogFirstGuacRead (copy), var2 (write)
-		assert(p2, "expected behavior")
+	return function(Text) --[[ Line: 36 ]]
+		-- upvalues: PlayersService (copy), HttpService1 (copy), CacheReadParsePolicy (upval), ClearPolicyOnLogout (upval), MemStorageService1 (copy), FixPolicyStalePlayerUpdates (upval), FFlagLogAllGuacRead (upval), Default (upval), FFlagLogFirstGuacRead (upval), Flag (ref)
+		assert(Text, "expected behavior")
 		
-		local function _()
-			-- upvalues: playersService_1 (copy), p2 (ref)
-			local var3 = -1
-			local localPlayer = playersService_1.LocalPlayer
+		local function _(): string --[[ Line: 39 | Named "getStoreKey" ]]
+			-- upvalues: PlayersService (upval), Text (copy)
+			local UserId = -1
+			local LocalPlayer = PlayersService.LocalPlayer
 			
-			if localPlayer and localPlayer.UserId > 0 then
-				var3 = localPlayer.UserId
+			if LocalPlayer and LocalPlayer.UserId > 0 then
+				UserId = LocalPlayer.UserId
 			end
-			return "GUAC:" .. var21 .. ":" .. p1
+			return "GUAC:" .. UserId .. ":" .. Text
 		end
 		
-		local text = "GUAC:" .. -1 .. ":" .. p1
-		local var3 = nil
-		local var4 = nil
-		local var5 = nil
-		local var6 = nil
-		local bindableEvent = Instance.new("BindableEvent")
+		local Text1 = "GUAC:" .. -1 .. ":" .. Text
+		local v1 = nil
+		local BindAndFireResult = nil
+		local Input = nil
+		local v2 = nil
+		local BindableEvent = Instance.new("BindableEvent")
 		
-		local function onPolicyUpdated(p3)
-			-- upvalues: var5 (write), p1 (copy), var6 (write), bindableEvent (ref)
-			if p3 ~= var5 and p3 and #p3 > 0 then
-				local ok, status = pcall(function()
-					-- upvalues: p1 (copy), p3 (ref)
-					return p1:JSONDecode(p3)
+		local function onPolicyUpdated(Input1) --[[ Line: 57 ]]
+			-- upvalues: Input (ref), HttpService1 (upval), v2 (ref), BindableEvent (copy)
+			if Input1 ~= Input and Input1 and #Input1 > 0 then
+				local Success, Result = pcall(function() --[[ Line: 61 ]]
+					-- upvalues: HttpService1 (upval), Input1 (copy)
+					return HttpService1:JSONDecode(Input1)
 				end)
 				
-				if ok then
-					var5 = p3
-					var6 = status
-					bindableEvent:Fire(status)
+				if Success then
+					Input = Input1
+					v2 = Result
+					BindableEvent:Fire(Result)
 				end
 			end
 		end
 		
-		if cacheReadParsePolicy then
-			local var7 = nil
+		if CacheReadParsePolicy then
+			local Connection = nil
 			
-			local function invalidateForKeyChange()
-				-- upvalues: clearPolicyOnLogout (copy), var3 (write), var6 (write), var5 (write), var4 (write), playersService_1 (copy), p2 (ref), text (ref), memStorageService_1 (copy), onPolicyUpdated (ref)
-				local var8 = if clearPolicyOnLogout then var3 else nil
-				var6 = nil
-				var5 = nil
+			local function invalidateForKeyChange() --[[ Line: 77 ]]
+				-- upvalues: ClearPolicyOnLogout (upval), v1 (ref), v2 (ref), Input (ref), BindAndFireResult (ref), PlayersService (upval), Text (copy), Text1 (copy), MemStorageService1 (upval), onPolicyUpdated (copy)
+				local Key = if ClearPolicyOnLogout then v1 else nil
+				v2 = nil
+				Input = nil
 				
-				if not var4 then
-					var3 = nil
+				if not BindAndFireResult then
+					v1 = nil
 					
 					return
 				end
-				var4:Disconnect()
-				var4 = nil
-				local var9 = -1
-				local localPlayer = playersService_1.LocalPlayer
+				BindAndFireResult:Disconnect()
+				BindAndFireResult = nil
+				local UserId = -1
+				local LocalPlayer = PlayersService.LocalPlayer
 				
-				if localPlayer and localPlayer.UserId > 0 then
-					var9 = localPlayer.UserId
+				if LocalPlayer and LocalPlayer.UserId > 0 then
+					UserId = LocalPlayer.UserId
 				end
-				local text_1 = "GUAC:" .. var23 .. ":" .. p1
+				local Text2 = "GUAC:" .. UserId .. ":" .. Text
 				
-				if clearPolicyOnLogout and var8 and (var8 ~= text_1 and text_1 == text) then
-					memStorageService_1:RemoveItem(text_1)
+				if ClearPolicyOnLogout and Key and Key ~= Text2 and Text2 == Text1 then
+					MemStorageService1:RemoveItem(Text2)
 				end
-				var3 = text_1
-				var4 = memStorageService_1:BindAndFire(text_1, onPolicyUpdated)
+				v1 = Text2
+				BindAndFireResult = MemStorageService1:BindAndFire(Text2, onPolicyUpdated)
 			end
 			
-			local function localPlayerChanged()
-				-- upvalues: var7 (write), playersService_1 (copy), fixPolicyStalePlayerUpdates (copy), invalidateForKeyChange (ref), var6 (write)
-				if var7 then
-					var7:Disconnect()
-					var7 = nil
+			local function localPlayerChanged() --[[ Line: 104 ]]
+				-- upvalues: Connection (ref), PlayersService (upval), FixPolicyStalePlayerUpdates (upval), invalidateForKeyChange (copy), v2 (ref)
+				if Connection then
+					Connection:Disconnect()
+					Connection = nil
 				end
-				if playersService_1.LocalPlayer then
-					var7 = playersService_1.LocalPlayer:GetPropertyChangedSignal("UserId"):Connect(function()
-						-- upvalues: fixPolicyStalePlayerUpdates (copy), invalidateForKeyChange (copy), var6 (copy)
-						if fixPolicyStalePlayerUpdates then
+				if PlayersService.LocalPlayer then
+					Connection = PlayersService.LocalPlayer:GetPropertyChangedSignal("UserId"):Connect(function() --[[ Line: 110 ]]
+						-- upvalues: FixPolicyStalePlayerUpdates (upval), invalidateForKeyChange (upval), v2 (upval)
+						if FixPolicyStalePlayerUpdates then
 							invalidateForKeyChange()
 							
 							return
+						else
+							v2 = nil
 						end
-						var6 = nil
 					end)
 				end
-				if fixPolicyStalePlayerUpdates then
+				if FixPolicyStalePlayerUpdates then
 					invalidateForKeyChange()
 					
 					return
+				else
+					v2 = nil
 				end
-				var6 = nil
 			end
 			
-			playersService_1:GetPropertyChangedSignal("LocalPlayer"):Connect(localPlayerChanged)
+			PlayersService:GetPropertyChangedSignal("LocalPlayer"):Connect(localPlayerChanged)
 			localPlayerChanged()
 		end
 		return {
-			read = function()
-				-- upvalues: cacheReadParsePolicy (copy), var6 (write), playersService_1 (copy), p2 (ref), memStorageService_1 (copy), p1 (copy), fFlagLogAllGuacRead (copy), var1 (copy), fFlagLogFirstGuacRead (copy), var2 (copy), var5 (write)
-				if cacheReadParsePolicy and var6 then
-					return var6
+			read = function() --[[ Line: 129 ]]
+				-- upvalues: CacheReadParsePolicy (upval), v2 (ref), PlayersService (upval), Text (copy), MemStorageService1 (upval), HttpService1 (upval), FFlagLogAllGuacRead (upval), Default (upval), FFlagLogFirstGuacRead (upval), Flag (upval), Input (ref)
+				if CacheReadParsePolicy and v2 then
+					return v2
 				end
-				local var8 = -1
-				local localPlayer = playersService_1.LocalPlayer
+				local UserId = -1
+				local LocalPlayer = PlayersService.LocalPlayer
 				
-				if localPlayer and localPlayer.UserId > 0 then
-					var8 = localPlayer.UserId
+				if LocalPlayer and LocalPlayer.UserId > 0 then
+					UserId = LocalPlayer.UserId
 				end
-				var8 = memStorageService_1:GetItem("GUAC:" .. var25 .. ":" .. p1)
+				local Item = MemStorageService1:GetItem("GUAC:" .. UserId .. ":" .. Text)
 				
-				if var8 and #var8 > 0 then
-					local ok, status = pcall(function()
-						-- upvalues: p1 (copy), var8 (ref)
-						return p1:JSONDecode(var8)
+				if Item and #Item > 0 then
+					local Success, Result = pcall(function() --[[ Line: 136 ]]
+						-- upvalues: HttpService1 (upval), Item (copy)
+						return HttpService1:JSONDecode(Item)
 					end)
 					
-					if not ok then
-						return nil
-					end
-					if fFlagLogAllGuacRead then
-						var1:logEvent("lua_policy_read_success")
-					elseif fFlagLogFirstGuacRead and not var2 then
-						var1:logEvent("lua_policy_read_success")
-						var2 = true
-					end
-					var6 = status
-					var5 = var8
-					
-					return status
-				end
-			end,
-			onPolicyChanged = function(p3)
-				-- upvalues: playersService_1 (copy), p2 (ref), bindableEvent (ref), var4 (write), var3 (write), var6 (write), memStorageService_1 (copy), onPolicyUpdated (ref)
-				local var8 = -1
-				local localPlayer = playersService_1.LocalPlayer
-				
-				if localPlayer and localPlayer.UserId > 0 then
-					var8 = localPlayer.UserId
-				end
-				local text = "GUAC:" .. var26 .. ":" .. p1
-				local eventConnection = bindableEvent.Event:Connect(p3)
-				
-				if var4 and var3 == text then
-					if var6 then
-						p3(var6)
+					if Success then
+						if FFlagLogAllGuacRead then
+							Default:logEvent("lua_policy_read_success")
+						elseif FFlagLogFirstGuacRead and not Flag then
+							Default:logEvent("lua_policy_read_success")
+							Flag = true
+						end
+						v2 = Result
+						Input = Item
 						
-						return eventConnection
+						return Result
 					end
-				elseif var4 then
-					var4:Disconnect()
 				end
-				var3 = text
-				var4 = memStorageService_1:BindAndFire(text, onPolicyUpdated)
-				return eventConnection
+				return nil
+			end,
+			onPolicyChanged = function(Callback: (any) -> ()) --[[ Line: 158 ]]
+				-- upvalues: PlayersService (upval), Text (copy), BindableEvent (copy), BindAndFireResult (ref), v1 (ref), v2 (ref), MemStorageService1 (upval), onPolicyUpdated (copy)
+				local UserId = -1
+				local LocalPlayer = PlayersService.LocalPlayer
+				
+				if LocalPlayer and LocalPlayer.UserId > 0 then
+					UserId = LocalPlayer.UserId
+				end
+				local Text1 = "GUAC:" .. UserId .. ":" .. Text
+				local EventConnection = BindableEvent.Event:Connect(Callback)
+				
+				if not BindAndFireResult or v1 ~= Text1 then
+					if BindAndFireResult then
+						BindAndFireResult:Disconnect()
+					end
+					v1 = Text1
+					BindAndFireResult = MemStorageService1:BindAndFire(Text1, onPolicyUpdated)
+				elseif v2 then
+					Callback(v2)
+					
+					return EventConnection
+				end
+				return EventConnection
 			end
 		}
 	end

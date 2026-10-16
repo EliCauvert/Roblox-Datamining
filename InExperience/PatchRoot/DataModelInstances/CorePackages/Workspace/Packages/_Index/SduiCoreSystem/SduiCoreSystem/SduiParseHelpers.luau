@@ -1,22 +1,22 @@
-﻿local tutilsModule = require(script:FindFirstAncestor("SduiCoreSystem").Parent.tutils)
+﻿local TutilsModule = require(script:FindFirstAncestor("SduiCoreSystem").Parent.tutils)
 
-local function hasCycle(p1, p2)
-	-- upvalues: hasCycle (ref)
-	if p2 == nil then
-		p2 = {}
+local function hasCycle(List, p1): boolean --[[ Line: 5 ]]
+	-- upvalues: hasCycle (copy)
+	if p1 == nil then
+		p1 = {}
 	end
-	assert(p2, "seenNodes must exist")
+	assert(p1, "seenNodes must exist")
 	
-	for i, v in p1 do
-		if typeof(v) == "table" then
-			if not p2[v] then
-				p2[v] = true
-				
-				if hasCycle(v, p2) then
-					return true
-				end
+	for _, value in List do
+		if typeof(value) == "table" then
+			if p1[value] then
+				return true
 			end
-			return true
+			p1[value] = true
+			
+			if hasCycle(value, p1) then
+				return true
+			end
 		end
 	end
 	return false
@@ -24,8 +24,8 @@ end
 
 return {
 	hasCycle = hasCycle,
-	stringifyValue = function(p3)
-		-- upvalues: hasCycle (ref), tutilsModule (ref)
-		return if typeof(p3) == "table" then if hasCycle(p3) then "table-with-cycle" else tutilsModule.toString(p3) else tutilsModule.toString(p3)
+	stringifyValue = function(p2) --[[ Line: 26 ]]
+		-- upvalues: hasCycle (copy), TutilsModule (copy)
+		return if typeof(p2) == "table" and hasCycle(p2) then "table-with-cycle" else TutilsModule.toString(p2)
 	end
 }

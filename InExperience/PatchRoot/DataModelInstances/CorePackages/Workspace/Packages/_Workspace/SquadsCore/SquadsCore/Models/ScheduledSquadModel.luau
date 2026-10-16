@@ -1,34 +1,34 @@
-﻿local tModule = require(script:FindFirstAncestor("SquadsCore").Parent.t)
-local t = {}
+﻿local TModule = require(script:FindFirstAncestor("SquadsCore").Parent.t)
+local ScheduledSquadModelModule = {}
 
-function t.new(p1)
-	-- upvalues: t (ref)
-	assert(t.isValid(p1))
-	t.__index = t
-	setmetatable(p1, t)
+function ScheduledSquadModelModule.new(p1) --[[ Line: 8 ]]
+	-- upvalues: ScheduledSquadModelModule (copy)
+	assert(ScheduledSquadModelModule.isValid(p1))
+	ScheduledSquadModelModule.__index = ScheduledSquadModelModule
+	setmetatable(p1, ScheduledSquadModelModule)
 	
 	return p1
 end
 
-function t.mock(p1)
-	-- upvalues: t (ref)
-	p1 = p1 or {}
+function ScheduledSquadModelModule.mock(p1) --[[ Line: 20 ]]
+	-- upvalues: ScheduledSquadModelModule (copy)
+	local P1 = p1 or {}
 	
-	return t.new({
-		createdAtTime = p1.createdAtTime or "2025-07-02T18:00:00Z",
-		initiatorId = p1.initiatorId or 54321,
-		parentChannelId = p1.parentChannelId or "23456",
-		scheduledGroupUpId = p1.scheduledGroupUpId or 12345,
-		startTime = p1.startTime or "2500-07-02T18:00:00Z",
-		subscribers = p1.subscribers or { { userId = 12345 } },
-		title = p1.title or "Cool Test Scheduled Party",
-		updatedAtTime = p1.updatedAtTime or "2025-07-02T18:00:00Z"
-	})
+	return (ScheduledSquadModelModule.new({
+		createdAtTime = P1.createdAtTime or "2025-07-02T18:00:00Z",
+		initiatorId = P1.initiatorId or 54321,
+		parentChannelId = P1.parentChannelId or "23456",
+		scheduledGroupUpId = P1.scheduledGroupUpId or 12345,
+		startTime = P1.startTime or "2500-07-02T18:00:00Z",
+		subscribers = P1.subscribers or { { userId = 12345 } },
+		title = P1.title or "Cool Test Scheduled Party",
+		updatedAtTime = P1.updatedAtTime or "2025-07-02T18:00:00Z"
+	}))
 end
 
-function t.format(p1)
-	-- upvalues: t (ref)
-	return t.new({
+function ScheduledSquadModelModule.format(p1) --[[ Line: 37 ]]
+	-- upvalues: ScheduledSquadModelModule (copy)
+	return (ScheduledSquadModelModule.new({
 		createdAtTime = p1.scheduledGroupUp.createdAtTime,
 		initiatorId = p1.scheduledGroupUp.initiatorId,
 		parentChannelId = p1.scheduledGroupUp.parentChannelId,
@@ -37,18 +37,18 @@ function t.format(p1)
 		subscribers = p1.scheduledGroupUp.subscribers,
 		title = p1.scheduledGroupUp.title,
 		updatedAtTime = p1.scheduledGroupUp.updatedAtTime
-	})
+	}))
 end
 
-t.isValid = tModule.strictInterface({
-	createdAtTime = tModule.string,
-	initiatorId = tModule.number,
-	parentChannelId = tModule.string,
-	scheduledGroupUpId = tModule.number,
-	startTime = tModule.string,
-	subscribers = tModule.array(tModule.strictInterface({ userId = tModule.number })),
-	title = tModule.string,
-	updatedAtTime = tModule.string
+ScheduledSquadModelModule.isValid = TModule.strictInterface({
+	createdAtTime = TModule.string,
+	initiatorId = TModule.number,
+	parentChannelId = TModule.string,
+	scheduledGroupUpId = TModule.number,
+	startTime = TModule.string,
+	subscribers = TModule.array(TModule.strictInterface({ userId = TModule.number })),
+	title = TModule.string,
+	updatedAtTime = TModule.string
 })
 
-return t
+return ScheduledSquadModelModule

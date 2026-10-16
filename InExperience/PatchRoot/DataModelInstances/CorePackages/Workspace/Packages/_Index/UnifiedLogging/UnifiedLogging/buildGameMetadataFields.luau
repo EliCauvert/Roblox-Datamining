@@ -1,25 +1,25 @@
-﻿local unifiedLogging = script:FindFirstAncestor("UnifiedLogging")
-local gameEntryUtilsModule = require(unifiedLogging.gameEntryUtils)
-local flaggedMutedError = require(unifiedLogging.Parent.Loggers).flaggedMutedError
+﻿local UnifiedLogging = script:FindFirstAncestor("UnifiedLogging")
+local GameEntryUtilsModule = require(UnifiedLogging.gameEntryUtils)
+local FlaggedMutedErrorFunction = require(UnifiedLogging.Parent.Loggers).flaggedMutedError
 
-return function(p1, p2, p3)
-	-- upvalues: gameEntryUtilsModule (ref), flaggedMutedError (ref)
-	local t = {}
-	local t_1 = {}
+return function(List, p1, p2) --[[ Line: 8 ]]
+	-- upvalues: GameEntryUtilsModule (copy), FlaggedMutedErrorFunction (copy)
+	local List1 = {}
+	local List2 = {}
 	
-	for i, v in p1 do
-		local var1 = p2[v]
+	for _, value in List do
+		local v1 = p1[value]
 		
-		if var1 == nil then
-			flaggedMutedError("BuildGameMetadataFields", `Entry at index {v} was nil when building game metadata fields for collection {p3}`)
+		if v1 == nil then
+			FlaggedMutedErrorFunction("BuildGameMetadataFields", `Entry at index {value} was nil when building game metadata fields for collection {p2}`)
 		else
-			local var2 = gameEntryUtilsModule.extractFieldsFromGameEntry(var1)
-			table.insert(t, var2.universeId or "")
-			table.insert(t_1, var2.placeId or "")
+			local ExtractFieldsFromGameEntryResult = GameEntryUtilsModule.extractFieldsFromGameEntry(v1)
+			table.insert(List1, ExtractFieldsFromGameEntryResult.universeId or "")
+			table.insert(List2, ExtractFieldsFromGameEntryResult.placeId or "")
 		end
 	end
 	return {
-		universeId_arr = table.concat(t, ","),
-		placeId_arr = table.concat(t_1, ",")
+		universeId_arr = table.concat(List1, ","),
+		placeId_arr = table.concat(List2, ",")
 	}
 end

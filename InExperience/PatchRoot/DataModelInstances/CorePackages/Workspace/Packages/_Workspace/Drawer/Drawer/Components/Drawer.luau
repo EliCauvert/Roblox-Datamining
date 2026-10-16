@@ -1,334 +1,345 @@
-﻿local drawer = script:FindFirstAncestor("Drawer")
-local userInputService = game:GetService("UserInputService")
-local parent = drawer.Parent
-local reactModule = require(parent.React)
-local reactIsModule = require(parent.ReactIs)
-local foundationModule = require(parent.Foundation)
-local reactOtterModule = require(parent.ReactOtter)
-local signalsModule = require(parent.Signals)
-local getDrawerVisibleStoreModule = require(script.Parent.Parent.Stores.GetDrawerVisibleStore)
-local useSetDrawerVisibleModule = require(script.Parent.Parent.Hooks.useSetDrawerVisible)
-local useSetDrawerShouldMountModule = require(script.Parent.Parent.Hooks.useSetDrawerShouldMount)
-local useSetDrawerAnimatingModule = require(script.Parent.Parent.Hooks.useSetDrawerAnimating)
-local scrimModule = require(script.Parent.Scrim)
-local constantsModule = require(script.Parent.Parent.Constants)
+﻿local Drawer = script:FindFirstAncestor("Drawer")
+local UserInputService = game:GetService("UserInputService")
+local Parent = Drawer.Parent
+local ReactModule = require(Parent.React)
+local ReactIsModule = require(Parent.ReactIs)
+local FoundationModule = require(Parent.Foundation)
+local ReactOtterModule = require(Parent.ReactOtter)
+local SignalsModule = require(Parent.Signals)
+local GetDrawerVisibleStoreModule = require(script.Parent.Parent.Stores.GetDrawerVisibleStore)
+local UseSetDrawerVisibleModule = require(script.Parent.Parent.Hooks.useSetDrawerVisible)
+local UseSetDrawerShouldMountModule = require(script.Parent.Parent.Hooks.useSetDrawerShouldMount)
+local UseSetDrawerAnimatingModule = require(script.Parent.Parent.Hooks.useSetDrawerAnimating)
+local ScrimModule = require(script.Parent.Scrim)
+local ConstantsModule = require(script.Parent.Parent.Constants)
 local _ = require(script.Parent.Parent.Types)
-local drawerPanelStatus = require(script.Parent.Parent.Enum).DrawerPanelStatus
-local _ = nil
-local focusNavigableSurfaceWrapper = nil
-local focusNavigableSurfaceIdentifierEnum = nil
-local focusNavigationEventNameEnum = nil
-local inputHandlersModule = nil
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagEnableDrawerFocusNav = sharedFlagsModule.FFlagEnableDrawerFocusNav
-local fFlagEnableDrawerAnimatingHook = sharedFlagsModule.FFlagEnableDrawerAnimatingHook
-local fFlagSideSheetOpenPeoplePage = sharedFlagsModule.FFlagSideSheetOpenPeoplePage
-local fFlagFixDrawerNavigateBackWhileClosing = require(drawer.Flags).FFlagFixDrawerNavigateBackWhileClosing
+local DrawerPanelStatus = require(script.Parent.Parent.Enum).DrawerPanelStatus
+local FocusNavigableSurfaceWrapper = nil
+local FocusNavigableSurfaceIdentifierEnum = nil
+local FocusNavigationEventNameEnum = nil
+local InputHandlersModule = nil
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagEnableDrawerFocusNav = SharedFlagsModule.FFlagEnableDrawerFocusNav
+local FFlagEnableDrawerAnimatingHook = SharedFlagsModule.FFlagEnableDrawerAnimatingHook
+local FFlagSideSheetOpenPeoplePage = SharedFlagsModule.FFlagSideSheetOpenPeoplePage
+local FFlagFixDrawerNavigateBackWhileClosing = require(Drawer.Flags).FFlagFixDrawerNavigateBackWhileClosing
 
-if fFlagEnableDrawerFocusNav then
-	local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-	focusNavigableSurfaceWrapper = focusNavigationUtilsModule.FocusNavigableSurfaceWrapper
-	focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
-	focusNavigationEventNameEnum = focusNavigationUtilsModule.FocusNavigationEventNameEnum
-	inputHandlersModule = require(parent.InputHandlers)
+if FFlagEnableDrawerFocusNav then
+	local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
+	FocusNavigableSurfaceWrapper = FocusNavigationUtilsModule.FocusNavigableSurfaceWrapper
+	FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
+	FocusNavigationEventNameEnum = FocusNavigationUtilsModule.FocusNavigationEventNameEnum
+	InputHandlersModule = require(Parent.InputHandlers)
 end
-return reactModule.memo(function(p1)
-	-- upvalues: useSetDrawerVisibleModule (ref), useSetDrawerShouldMountModule (ref), fFlagEnableDrawerAnimatingHook (ref), useSetDrawerAnimatingModule (ref), reactModule (ref), drawerPanelStatus (ref), fFlagEnableDrawerFocusNav (ref), reactIsModule (ref), fFlagSideSheetOpenPeoplePage (ref), reactOtterModule (ref), constantsModule (ref), getDrawerVisibleStoreModule (ref), signalsModule (ref), userInputService (ref), focusNavigationEventNameEnum (write), inputHandlersModule (write), fFlagFixDrawerNavigateBackWhileClosing (ref), foundationModule (ref), scrimModule (ref), focusNavigableSurfaceWrapper (write), focusNavigableSurfaceIdentifierEnum (write)
-	local var1 = useSetDrawerVisibleModule()
-	local var2 = useSetDrawerShouldMountModule()
-	local var3 = if fFlagEnableDrawerAnimatingHook then useSetDrawerAnimatingModule() else function(_) end
-	local var4 = reactModule.useRef(nil)
-	local var5 = reactModule.useRef(nil)
-	local var6, var7 = reactModule.useBinding(drawerPanelStatus.Scrollable)
-	local var8 = reactModule.useMemo(function()
-		-- upvalues: var6 (ref), drawerPanelStatus (copy)
-		return var6:map(function(p2)
-			-- upvalues: drawerPanelStatus (copy)
-			return p2 == drawerPanelStatus.Scrollable
+return ReactModule.memo(function(p1) --[[ Line: 41 ]]
+	-- upvalues: UseSetDrawerVisibleModule (copy), UseSetDrawerShouldMountModule (copy), FFlagEnableDrawerAnimatingHook (copy), UseSetDrawerAnimatingModule (copy), ReactModule (copy), DrawerPanelStatus (copy), FFlagEnableDrawerFocusNav (copy), ReactIsModule (copy), FFlagSideSheetOpenPeoplePage (copy), ReactOtterModule (copy), ConstantsModule (copy), GetDrawerVisibleStoreModule (copy), SignalsModule (copy), UserInputService (copy), FocusNavigationEventNameEnum (ref), InputHandlersModule (ref), FFlagFixDrawerNavigateBackWhileClosing (copy), FoundationModule (copy), ScrimModule (copy), FocusNavigableSurfaceWrapper (ref), FocusNavigableSurfaceIdentifierEnum (ref)
+	local UseSetDrawerVisibleModuleResult = UseSetDrawerVisibleModule()
+	local UseSetDrawerShouldMountModuleResult = UseSetDrawerShouldMountModule()
+	local UseSetDrawerAnimatingModuleResult = if FFlagEnableDrawerAnimatingHook then UseSetDrawerAnimatingModule() else function(_) --[[ Line: 46 ]] end
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(DrawerPanelStatus.Scrollable)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 50 ]]
+		-- upvalues: UseBindingResult (copy), DrawerPanelStatus (upval)
+		return UseBindingResult:map(function(Scrollable): boolean --[[ Line: 51 ]]
+			-- upvalues: DrawerPanelStatus (upval)
+			return Scrollable == DrawerPanelStatus.Scrollable
 		end)
 	end, {})
-	local var9 = reactModule.useMemo(function()
-		-- upvalues: var6 (ref), drawerPanelStatus (copy)
-		return var6:map(function(p2)
-			-- upvalues: drawerPanelStatus (copy)
-			return if p2 == drawerPanelStatus.Movable then 3 else 1
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 56 ]]
+		-- upvalues: UseBindingResult (copy), DrawerPanelStatus (upval)
+		return UseBindingResult:map(function(Movable): number --[[ Line: 57 ]]
+			-- upvalues: DrawerPanelStatus (upval)
+			return if Movable == DrawerPanelStatus.Movable then 3 else 1
 		end)
 	end, {})
-	local var10 = if fFlagEnableDrawerFocusNav then reactModule.useMemo(function()
-		-- upvalues: p1 (ref), reactIsModule (copy)
-		local backgroundStyle = p1.backgroundStyle
+	local UseMemoResult2 = if FFlagEnableDrawerFocusNav then ReactModule.useMemo(function() --[[ Line: 69 ]]
+		-- upvalues: p1 (copy), ReactIsModule (upval)
+		local BackgroundStyle = p1.backgroundStyle
 		
-		return if backgroundStyle == nil then nil elseif reactIsModule.isBinding(backgroundStyle) then backgroundStyle:map(function(p2)
+		return if BackgroundStyle == nil then nil elseif ReactIsModule.isBinding(BackgroundStyle) then BackgroundStyle:map(function(p2) --[[ Line: 75 ]]
 			return p2.Color3
-		end) else backgroundStyle.Color3
+		end) else BackgroundStyle.Color3
 	end, { p1.backgroundStyle }) else nil
-	local var11 = if fFlagEnableDrawerFocusNav then reactModule.useMemo(function()
-		-- upvalues: p1 (ref), reactIsModule (copy)
-		local backgroundStyle = p1.backgroundStyle
+	local UseMemoResult3 = if FFlagEnableDrawerFocusNav then ReactModule.useMemo(function() --[[ Line: 84 ]]
+		-- upvalues: p1 (copy), ReactIsModule (upval)
+		local BackgroundStyle = p1.backgroundStyle
 		
-		return if backgroundStyle == nil then nil elseif reactIsModule.isBinding(backgroundStyle) then backgroundStyle:map(function(p2)
+		return if BackgroundStyle == nil then nil elseif ReactIsModule.isBinding(BackgroundStyle) then BackgroundStyle:map(function(p2) --[[ Line: 90 ]]
 			return p2.Transparency
-		end) else backgroundStyle.Transparency
+		end) else BackgroundStyle.Transparency
 	end, { p1.backgroundStyle }) else nil
-	local topOffset = p1.topOffset or 0
-	local bottomOffset = p1.bottomOffset or 0
-	local leftOffset = p1.leftOffset or 0
-	local var12 = fFlagSideSheetOpenPeoplePage and p1.allowOutsideInteraction == true
-	local var13 = p1.menuWidth + leftOffset
-	local var14 = reactModule.useRef(false)
-	local useCallback = reactModule.useCallback
-	
-	local var15 = function(p2)
-		-- upvalues: fFlagEnableDrawerAnimatingHook (copy), var3 (ref), var6 (ref), drawerPanelStatus (copy), var7 (ref), var13 (ref), var2 (ref)
-		if fFlagEnableDrawerAnimatingHook then
-			var3(false)
+	local TopOffset = p1.topOffset or 0
+	local BottomOffset = p1.bottomOffset or 0
+	local LeftOffset = p1.leftOffset or 0
+	local IsAllowOutsideInteraction: boolean = FFlagSideSheetOpenPeoplePage and p1.allowOutsideInteraction == true
+	local NewMenuWidth = p1.menuWidth + LeftOffset
+	local UseRefResult2 = ReactModule.useRef(false)
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(-NewMenuWidth, (ReactModule.useCallback(function(p2) --[[ Line: 105 ]]
+		-- upvalues: FFlagEnableDrawerAnimatingHook (upval), UseSetDrawerAnimatingModuleResult (copy), UseBindingResult (copy), DrawerPanelStatus (upval), UseBindingResult2 (copy), NewMenuWidth (copy), UseSetDrawerShouldMountModuleResult (copy)
+		if FFlagEnableDrawerAnimatingHook then
+			UseSetDrawerAnimatingModuleResult(false)
 		end
-		if var6:getValue() == drawerPanelStatus.Closing then
-			var7(drawerPanelStatus.Scrollable)
+		if UseBindingResult:getValue() == DrawerPanelStatus.Closing then
+			UseBindingResult2(DrawerPanelStatus.Scrollable)
 		end
-		if p2 == -var13 then
-			var2(false)
+		if p2 == -NewMenuWidth then
+			UseSetDrawerShouldMountModuleResult(false)
 		end
-	end
-	
-	local var16 = if fFlagSideSheetOpenPeoplePage or fFlagEnableDrawerAnimatingHook then { var13, var3, var2 } else {}
-	var15, var34 = reactOtterModule.useAnimatedBinding(-var13, useCallback(var15, var16))
-	local var17 = reactModule.useRef(var13)
-	var17.current = var13
-	local var18 = reactModule.useRef(nil)
-	local var19, var20 = reactOtterModule.useAnimatedBinding(1)
-	local var21 = if fFlagSideSheetOpenPeoplePage then reactModule.useCallback(function(p2)
-		-- upvalues: var18 (ref)
-		local current = var18.current
+	end, if FFlagSideSheetOpenPeoplePage or FFlagEnableDrawerAnimatingHook then {
+		NewMenuWidth,
+		UseSetDrawerAnimatingModuleResult,
+		UseSetDrawerShouldMountModuleResult
+	} else {})))
+	local UseRefResult3 = ReactModule.useRef(NewMenuWidth)
+	UseRefResult3.current = NewMenuWidth
+	local UseRefResult4 = ReactModule.useRef(nil)
+	local UseAnimatedBindingResult1, UseAnimatedBindingResult2_1 = ReactOtterModule.useAnimatedBinding(1)
+	local UseResult = if FFlagSideSheetOpenPeoplePage then ReactModule.useCallback(function(p2): boolean --[[ Line: 129 ]]
+		-- upvalues: UseRefResult4 (copy)
+		local Current = UseRefResult4.current
 		
-		if current == nil then
+		if Current == nil then
 			return false
+		else
+			local Position = p2.Position
+			local AbsolutePosition = Current.AbsolutePosition
+			local AbsoluteSize = Current.AbsoluteSize
+			
+			return AbsolutePosition.X <= Position.X and (Position.X <= AbsolutePosition.X + AbsoluteSize.X and AbsolutePosition.Y <= Position.Y) and Position.Y <= AbsolutePosition.Y + AbsoluteSize.Y
 		end
-		local position = p2.Position
-		local absolutePosition = current.AbsolutePosition
-		local absoluteSize = current.AbsoluteSize
-		
-		return absolutePosition.X <= position.X and (position.X <= absolutePosition.X + absoluteSize.X and (absolutePosition.Y <= position.Y and position.Y <= absolutePosition.Y + absoluteSize.Y))
 	end, {}) else nil
-	local var22 = reactModule.useCallback(function(p2)
-		-- upvalues: var1 (ref), var7 (ref), drawerPanelStatus (copy), p1 (ref)
-		var1(false)
-		var7(drawerPanelStatus.Closing)
+	local UseResult1 = ReactModule.useCallback(function(Source) --[[ Line: 149 ]]
+		-- upvalues: UseSetDrawerVisibleModuleResult (copy), UseBindingResult2 (copy), DrawerPanelStatus (upval), p1 (copy)
+		UseSetDrawerVisibleModuleResult(false)
+		UseBindingResult2(DrawerPanelStatus.Closing)
 		
 		if p1.onDrawerClosedAnalytics then
-			p1.onDrawerClosedAnalytics({ source = p2 })
+			p1.onDrawerClosedAnalytics({ source = Source })
 		end
-	end, if fFlagSideSheetOpenPeoplePage then { p1.onDrawerClosedAnalytics, var1 } else { p1.onDrawerClosedAnalytics })
-	local var23 = reactModule.useCallback(function(p2)
-		-- upvalues: var14 (ref), var6 (ref), drawerPanelStatus (copy), var12 (ref), var21 (ref), var4 (ref), var5 (ref), var7 (ref)
-		if not var14.current then return end
-		if var6:getValue() == drawerPanelStatus.Closing then return end
-		if var12 and not var21(p2) then
-			return
-		end
-		var4.current = p2.Position
-		var5.current = DateTime.now().UnixTimestampMillis
-		var7(drawerPanelStatus.Static)
-	end, if fFlagSideSheetOpenPeoplePage then { var12, var21 } else {})
-	local var24 = reactModule.useCallback(function(p2)
-		-- upvalues: var14 (ref), var4 (ref), var5 (ref), var6 (ref), drawerPanelStatus (copy), var17 (ref), constantsModule (copy), var22 (ref), fFlagEnableDrawerAnimatingHook (copy), var3 (ref), var16 (ref), reactOtterModule (copy), var7 (ref)
-		if not var14.current then
-			var4.current = nil
-			var5.current = nil
-			
-			return
-		elseif var4.current == nil or var5.current == nil or var6:getValue() ~= drawerPanelStatus.Movable then
-			var4.current = nil
-			var5.current = nil
+	end, if FFlagSideSheetOpenPeoplePage then {
+		p1.onDrawerClosedAnalytics,
+		UseSetDrawerVisibleModuleResult
+	} else { p1.onDrawerClosedAnalytics })
+	local UseResult2 = ReactModule.useCallback(function(p2) --[[ Line: 165 ]]
+		-- upvalues: UseRefResult2 (copy), UseBindingResult (copy), DrawerPanelStatus (upval), IsAllowOutsideInteraction (copy), UseResult (copy), UseRefResult (copy), UseRefResult1 (copy), UseBindingResult2 (copy)
+		if not UseRefResult2.current then return end
+		if UseBindingResult:getValue() == DrawerPanelStatus.Closing then return end
+		if not IsAllowOutsideInteraction or UseResult(p2) then
+			UseRefResult.current = p2.Position
+			UseRefResult1.current = DateTime.now().UnixTimestampMillis
+			UseBindingResult2(DrawerPanelStatus.Static)
 			
 			return
 		end
-		local var25 = var4.current.X - p2.Position.X
+	end, if FFlagSideSheetOpenPeoplePage then { IsAllowOutsideInteraction, UseResult } else {})
+	local UseResult3 = ReactModule.useCallback(function(p2) --[[ Line: 182 ]]
+		-- upvalues: UseRefResult2 (copy), UseRefResult (copy), UseRefResult1 (copy), UseBindingResult (copy), DrawerPanelStatus (upval), UseRefResult3 (copy), ConstantsModule (upval), UseResult1 (copy), FFlagEnableDrawerAnimatingHook (upval), UseSetDrawerAnimatingModuleResult (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), UseBindingResult2 (copy)
+		if not UseRefResult2.current then
+			UseRefResult.current = nil
+			UseRefResult1.current = nil
+			
+			return
+		end
+		if UseRefResult.current == nil or UseRefResult1.current == nil or UseBindingResult:getValue() ~= DrawerPanelStatus.Movable then
+			UseRefResult.current = nil
+			UseRefResult1.current = nil
+			
+			return
+		end
+		local XDelta = UseRefResult.current.X - p2.Position.X
 		
-		if var17.current * constantsModule.DRAWER_SWIPE_THRESHOLD_PERCENT <= var25 then
-			var22("swipe")
-		elseif var25 > 0 then
-			local var26 = (DateTime.now().UnixTimestampMillis - var5.current) / 1000
+		if UseRefResult3.current * ConstantsModule.DRAWER_SWIPE_THRESHOLD_PERCENT <= XDelta then
+			UseResult1("swipe")
+		elseif XDelta > 0 then
+			local UnixTimestampMillisRatio = (DateTime.now().UnixTimestampMillis - UseRefResult1.current) / 1000
 			
-			if var26 > 0.01 and constantsModule.DRAWER_VELOCITY_THRESHOLD <= var25 / var26 then
-				var22("swipe")
+			if UnixTimestampMillisRatio > 0.01 and ConstantsModule.DRAWER_VELOCITY_THRESHOLD <= XDelta / UnixTimestampMillisRatio then
+				UseResult1("swipe")
 			end
 		end
-		if var6:getValue() ~= drawerPanelStatus.Closing then
-			if fFlagEnableDrawerAnimatingHook then
-				var3(true)
+		if UseBindingResult:getValue() ~= DrawerPanelStatus.Closing then
+			if FFlagEnableDrawerAnimatingHook then
+				UseSetDrawerAnimatingModuleResult(true)
 			end
-			var16(reactOtterModule.ease(0, constantsModule.DRAWER_ANIM_SETTINGS))
-			var7(drawerPanelStatus.Scrollable)
+			UseAnimatedBindingResult2(ReactOtterModule.ease(0, ConstantsModule.DRAWER_ANIM_SETTINGS))
+			UseBindingResult2(DrawerPanelStatus.Scrollable)
 		end
-		var4.current = nil
-		var5.current = nil
-	end, if fFlagEnableDrawerAnimatingHook then { var22, var3 } else {})
-	local var25 = reactModule.useCallback(function(p2)
-		-- upvalues: var14 (ref), var4 (ref), var6 (ref), drawerPanelStatus (copy), var7 (ref), var16 (ref), reactOtterModule (copy)
-		if not var14.current then return end
-		if var4.current == nil or var6:getValue() == drawerPanelStatus.Closing then return end
-		local var26 = p2.Position.X - var4.current.X
+		UseRefResult.current = nil
+		UseRefResult1.current = nil
+	end, if FFlagEnableDrawerAnimatingHook then { UseResult1, UseSetDrawerAnimatingModuleResult } else {})
+	local UseResult4 = ReactModule.useCallback(function(p2) --[[ Line: 223 ]]
+		-- upvalues: UseRefResult2 (copy), UseRefResult (copy), UseBindingResult (copy), DrawerPanelStatus (upval), UseBindingResult2 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval)
+		if not UseRefResult2.current then return end
+		if UseRefResult.current == nil or UseBindingResult:getValue() == DrawerPanelStatus.Closing then return end
+		local XDelta = p2.Position.X - UseRefResult.current.X
 		
-		if var6:getValue() == drawerPanelStatus.Static then
-			if math.abs(p2.Position.Y - var4.current.Y) < math.abs(var26) then
-				var7(drawerPanelStatus.Movable)
+		if UseBindingResult:getValue() == DrawerPanelStatus.Static then
+			if math.abs(p2.Position.Y - UseRefResult.current.Y) < math.abs(XDelta) then
+				UseBindingResult2(DrawerPanelStatus.Movable)
 			else
-				var7(drawerPanelStatus.Scrollable)
+				UseBindingResult2(DrawerPanelStatus.Scrollable)
 			end
 		end
-		if var6:getValue() == drawerPanelStatus.Movable and var26 < 0 then
-			var16(reactOtterModule.instant(var26))
+		if UseBindingResult:getValue() == DrawerPanelStatus.Movable and XDelta < 0 then
+			UseAnimatedBindingResult2((ReactOtterModule.instant(XDelta)))
 		end
-		if var4.current.X < p2.Position.X then
-			var4.current = p2.Position
+		if UseRefResult.current.X < p2.Position.X then
+			UseRefResult.current = p2.Position
 		end
 	end, {})
-	reactModule.useEffect(function()
-		-- upvalues: getDrawerVisibleStoreModule (copy), signalsModule (copy), var14 (ref), var17 (ref), fFlagEnableDrawerAnimatingHook (copy), var3 (ref), var16 (ref), reactOtterModule (copy), constantsModule (copy), fFlagSideSheetOpenPeoplePage (copy), var20 (ref)
-		local getDrawerVisible = getDrawerVisibleStoreModule(false).getDrawerVisible
+	ReactModule.useEffect(function() --[[ Line: 253 ]]
+		-- upvalues: GetDrawerVisibleStoreModule (upval), SignalsModule (upval), UseRefResult2 (copy), UseRefResult3 (copy), FFlagEnableDrawerAnimatingHook (upval), UseSetDrawerAnimatingModuleResult (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), ConstantsModule (upval), FFlagSideSheetOpenPeoplePage (upval), UseAnimatedBindingResult2_1 (copy)
+		local GetDrawerVisibleFunction = GetDrawerVisibleStoreModule(false).getDrawerVisible
 		
-		return signalsModule.createEffect(function(p2)
-			-- upvalues: getDrawerVisible (ref), var14 (copy), var17 (copy), fFlagEnableDrawerAnimatingHook (copy), var3 (copy), var16 (copy), reactOtterModule (copy), constantsModule (copy), fFlagSideSheetOpenPeoplePage (copy), var20 (copy)
-			local var26 = getDrawerVisible(p2)
-			var14.current = var26
-			local var27 = if var26 then 0 else -var17.current
+		return SignalsModule.createEffect(function(p2) --[[ Line: 255 ]]
+			-- upvalues: GetDrawerVisibleFunction (copy), UseRefResult2 (upval), UseRefResult3 (upval), FFlagEnableDrawerAnimatingHook (upval), UseSetDrawerAnimatingModuleResult (upval), UseAnimatedBindingResult2 (upval), ReactOtterModule (upval), ConstantsModule (upval), FFlagSideSheetOpenPeoplePage (upval), UseAnimatedBindingResult2_1 (upval)
+			local DrawerVisible = GetDrawerVisibleFunction(p2)
+			UseRefResult2.current = DrawerVisible
+			local Negated = if DrawerVisible then 0 else -UseRefResult3.current
 			
-			if fFlagEnableDrawerAnimatingHook then
-				var3(true)
+			if FFlagEnableDrawerAnimatingHook then
+				UseSetDrawerAnimatingModuleResult(true)
 			end
-			var16(reactOtterModule.ease(var27, constantsModule.DRAWER_ANIM_SETTINGS))
+			UseAnimatedBindingResult2(ReactOtterModule.ease(Negated, ConstantsModule.DRAWER_ANIM_SETTINGS))
 			
-			if not fFlagSideSheetOpenPeoplePage then
-				var20(reactOtterModule.ease(if var26 then constantsModule.SCRIM_TRANSPARENCY else 1, constantsModule.DRAWER_ANIM_SETTINGS))
+			if not FFlagSideSheetOpenPeoplePage then
+				UseAnimatedBindingResult2_1(ReactOtterModule.ease(if DrawerVisible then ConstantsModule.SCRIM_TRANSPARENCY else 1, ConstantsModule.DRAWER_ANIM_SETTINGS))
 			end
 		end)
-	end, if fFlagEnableDrawerAnimatingHook then { var3 } else {})
+	end, if FFlagEnableDrawerAnimatingHook then { UseSetDrawerAnimatingModuleResult } else {})
 	
-	if fFlagSideSheetOpenPeoplePage then
-		reactModule.useEffect(function()
-			-- upvalues: getDrawerVisibleStoreModule (copy), signalsModule (copy), var12 (ref), constantsModule (copy), var20 (ref), reactOtterModule (copy)
-			local getDrawerVisible = getDrawerVisibleStoreModule(false).getDrawerVisible
+	if FFlagSideSheetOpenPeoplePage then
+		ReactModule.useEffect(function() --[[ Line: 273 ]]
+			-- upvalues: GetDrawerVisibleStoreModule (upval), SignalsModule (upval), IsAllowOutsideInteraction (copy), ConstantsModule (upval), UseAnimatedBindingResult2_1 (copy), ReactOtterModule (upval)
+			local GetDrawerVisibleFunction = GetDrawerVisibleStoreModule(false).getDrawerVisible
 			
-			return signalsModule.createEffect(function(p2)
-				-- upvalues: getDrawerVisible (ref), var12 (copy), constantsModule (copy), var20 (copy), reactOtterModule (copy)
-				var20(reactOtterModule.ease(if getDrawerVisible(p2) and not var12 then constantsModule.SCRIM_TRANSPARENCY else 1, constantsModule.DRAWER_ANIM_SETTINGS))
+			return SignalsModule.createEffect(function(p2) --[[ Line: 275 ]]
+				-- upvalues: GetDrawerVisibleFunction (copy), IsAllowOutsideInteraction (upval), ConstantsModule (upval), UseAnimatedBindingResult2_1 (upval), ReactOtterModule (upval)
+				UseAnimatedBindingResult2_1(ReactOtterModule.ease(if GetDrawerVisibleFunction(p2) and not IsAllowOutsideInteraction then ConstantsModule.SCRIM_TRANSPARENCY else 1, ConstantsModule.DRAWER_ANIM_SETTINGS))
 			end)
-		end, { var12 })
+		end, { IsAllowOutsideInteraction })
 	end
-	reactModule.useEffect(function()
-		-- upvalues: fFlagSideSheetOpenPeoplePage (copy), var14 (ref), var15 (ref), var13 (ref), var16 (ref), reactOtterModule (copy)
-		if fFlagSideSheetOpenPeoplePage and not var14.current and var15:getValue() ~= -var13 then
-			var16(reactOtterModule.instant(-var13))
+	ReactModule.useEffect(function() --[[ Line: 287 ]]
+		-- upvalues: FFlagSideSheetOpenPeoplePage (upval), UseRefResult2 (copy), UseAnimatedBindingResult (copy), NewMenuWidth (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval)
+		if FFlagSideSheetOpenPeoplePage and not UseRefResult2.current and UseAnimatedBindingResult:getValue() ~= -NewMenuWidth then
+			UseAnimatedBindingResult2((ReactOtterModule.instant(-NewMenuWidth)))
 		end
-	end, { var13 })
-	reactModule.useEffect(function()
-		-- upvalues: userInputService (copy), var23 (ref), var24 (ref), var25 (ref)
-		local touchStartedConnection = userInputService.TouchStarted:Connect(var23)
-		local touchEndedConnection = userInputService.TouchEnded:Connect(var24)
-		local touchMovedConnection = userInputService.TouchMoved:Connect(var25)
+	end, { NewMenuWidth })
+	ReactModule.useEffect(function() --[[ Line: 297 ]]
+		-- upvalues: UserInputService (upval), UseResult2 (copy), UseResult3 (copy), UseResult4 (copy)
+		local TouchStartedConnection = UserInputService.TouchStarted:Connect(UseResult2)
+		local TouchEndedConnection = UserInputService.TouchEnded:Connect(UseResult3)
+		local TouchMovedConnection = UserInputService.TouchMoved:Connect(UseResult4)
 		
-		return function()
-			-- upvalues: touchStartedConnection (ref), touchEndedConnection (ref), touchMovedConnection (ref)
-			touchStartedConnection:Disconnect()
-			touchEndedConnection:Disconnect()
-			touchMovedConnection:Disconnect()
+		return function() --[[ Line: 301 ]]
+			-- upvalues: TouchStartedConnection (copy), TouchEndedConnection (copy), TouchMovedConnection (copy)
+			TouchStartedConnection:Disconnect()
+			TouchEndedConnection:Disconnect()
+			TouchMovedConnection:Disconnect()
 		end
-	end, if fFlagSideSheetOpenPeoplePage then { var24, var25, var23 } else {})
-	local t = {
-		DrawerContent = reactModule.createElement("ScrollingFrame", {
+	end, if FFlagSideSheetOpenPeoplePage then { UseResult3, UseResult4, UseResult2 } else {})
+	local UseResult5 = ReactModule.useCallback(function() --[[ Line: 308 ]]
+		-- upvalues: UseBindingResult (copy), DrawerPanelStatus (upval), UseResult1 (copy)
+		if UseBindingResult:getValue() == DrawerPanelStatus.Closing then return end
+		if UseBindingResult:getValue() ~= DrawerPanelStatus.Movable then
+			UseResult1("shield")
+		end
+	end, { UseBindingResult, UseResult1 })
+	local config = {
+		DrawerContent = ReactModule.createElement("ScrollingFrame", {
 			BackgroundTransparency = 1,
 			Selectable = false,
 			BorderSizePixel = 0,
 			ScrollBarThickness = 0,
 			ClipsDescendants = true,
 			ZIndex = 2,
-			ref = var18,
+			ref = UseRefResult4,
 			AutomaticCanvasSize = Enum.AutomaticSize.Y,
-			Size = UDim2.new(0, p1.menuWidth, 1, (-topOffset) - bottomOffset),
-			Position = UDim2.new(0, leftOffset, 0, topOffset),
+			Size = UDim2.new(0, p1.menuWidth, 1, -TopOffset - BottomOffset),
+			Position = UDim2.new(0, LeftOffset, 0, TopOffset),
 			CanvasSize = UDim2.new(0, p1.menuWidth, 0, 0),
-			Active = var8,
+			Active = UseMemoResult,
 			ScrollingDirection = Enum.ScrollingDirection.Y,
-			ScrollingEnabled = var8
+			ScrollingEnabled = UseMemoResult
 		}, p1.children),
-		SinkInput = reactModule.createElement("ImageButton", {
+		SinkInput = ReactModule.createElement("ImageButton", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			Selectable = false,
 			AutoButtonColor = false,
 			Size = UDim2.fromScale(1, 1),
-			ZIndex = var9
+			ZIndex = UseMemoResult1
 		})
 	}
+	local UseMemoResult4 = ReactModule.useMemo(function() --[[ Line: 361 ]]
+		-- upvalues: FFlagEnableDrawerFocusNav (upval), FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), FFlagFixDrawerNavigateBackWhileClosing (upval), UseBindingResult (copy), DrawerPanelStatus (upval), UseResult1 (copy)
+		return if FFlagEnableDrawerFocusNav then {
+			[FocusNavigationEventNameEnum.NavigateBack] = {
+				handler = InputHandlersModule.onRelease(function(p2) --[[ Line: 367 ]]
+					-- upvalues: FFlagFixDrawerNavigateBackWhileClosing (upval), UseBindingResult (upval), DrawerPanelStatus (upval), UseResult1 (upval)
+					if FFlagFixDrawerNavigateBackWhileClosing then
+						if UseBindingResult:getValue() ~= DrawerPanelStatus.Closing then
+							UseResult1("focus-navigation-back")
+						end
+					else
+						UseResult1("focus-navigation-back")
+					end
+					p2:cancel()
+				end)
+			}
+		} else {}
+	end, { UseResult1 })
 	
-	return reactModule.createElement(foundationModule.View, {
-		testId = if fFlagSideSheetOpenPeoplePage then "drawer-root" else nil,
-		Size = if var12 then UDim2.new(0, var13, 1, 0) else UDim2.fromScale(1, 1),
-		ClipsDescendants = var12,
+	return ReactModule.createElement(FoundationModule.View, {
+		testId = if FFlagSideSheetOpenPeoplePage then "drawer-root" else nil,
+		Size = if IsAllowOutsideInteraction then UDim2.new(0, NewMenuWidth, 1, 0) else UDim2.fromScale(1, 1),
+		ClipsDescendants = IsAllowOutsideInteraction,
 		backgroundStyle = { Transparency = 1 },
-		Visible = if fFlagSideSheetOpenPeoplePage then reactModule.useMemo(function()
-			-- upvalues: reactModule (copy), var15 (ref), var19 (ref), var13 (ref)
-			return reactModule.joinBindings({ menuPosX = var15, scrimTransparency = var19 }):map(function(p2)
-				-- upvalues: var13 (copy)
-				return if -var13 >= p2.menuPosX then p2.scrimTransparency < 1 else true
+		Visible = if FFlagSideSheetOpenPeoplePage then ReactModule.useMemo(function() --[[ Line: 321 ]]
+			-- upvalues: ReactModule (upval), UseAnimatedBindingResult (copy), UseAnimatedBindingResult1 (copy), NewMenuWidth (copy)
+			return ReactModule.joinBindings({
+				menuPosX = UseAnimatedBindingResult,
+				scrimTransparency = UseAnimatedBindingResult1
+			}):map(function(p2): boolean --[[ Line: 325 ]]
+				-- upvalues: NewMenuWidth (upval)
+				return -NewMenuWidth < p2.menuPosX or p2.scrimTransparency < 1
 			end)
-		end, { var13 }) else var19:map(function(p2)
+		end, { NewMenuWidth }) else UseAnimatedBindingResult1:map(function(p2: number): boolean --[[ Line: 330 ]]
 			return p2 < 1
 		end)
 	}, {
-		Scrim = if var12 then nil else reactModule.createElement(scrimModule, {
+		Scrim = if IsAllowOutsideInteraction then nil else ReactModule.createElement(ScrimModule, {
 			zIndex = 1,
-			onActivated = reactModule.useCallback(function()
-				-- upvalues: var6 (ref), drawerPanelStatus (copy), var22 (ref)
-				if var6:getValue() == drawerPanelStatus.Closing then return end
-				if var6:getValue() ~= drawerPanelStatus.Movable then
-					var22("shield")
-				end
-			end, { var6, var22 }),
-			transparencyBinding = var19,
+			onActivated = UseResult5,
+			transparencyBinding = UseAnimatedBindingResult1,
 			isModal = p1.scrimIsModal
 		}),
-		DrawerAnimatedFrame = if fFlagEnableDrawerFocusNav then reactModule.createElement(focusNavigableSurfaceWrapper, {
+		DrawerAnimatedFrame = if FFlagEnableDrawerFocusNav then ReactModule.createElement(FocusNavigableSurfaceWrapper, {
 			isIsolated = true,
-			surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.Drawer,
+			surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.Drawer,
 			frameProps = {
 				ZIndex = 2,
 				BorderSizePixel = 0,
 				Selectable = false,
-				Position = var15:map(function(p2)
-					return UDim2.fromOffset(p2, 0)
+				Position = UseAnimatedBindingResult:map(function(XOffset): UDim2 --[[ Line: 402 ]]
+					return UDim2.fromOffset(XOffset, 0)
 				end),
-				Size = UDim2.new(0, var13, 1, 0),
-				BackgroundColor3 = var10,
-				BackgroundTransparency = var11,
-				SelectionBehaviorRight = if var12 then Enum.SelectionBehavior.Escape else nil
+				Size = UDim2.new(0, NewMenuWidth, 1, 0),
+				BackgroundColor3 = UseMemoResult2,
+				BackgroundTransparency = UseMemoResult3,
+				SelectionBehaviorRight = if IsAllowOutsideInteraction then Enum.SelectionBehavior.Escape else nil
 			},
-			customEventHandlers = reactModule.useMemo(function()
-				-- upvalues: fFlagEnableDrawerFocusNav (copy), focusNavigationEventNameEnum (copy), inputHandlersModule (copy), fFlagFixDrawerNavigateBackWhileClosing (copy), var6 (ref), drawerPanelStatus (copy), var22 (ref)
-				return if fFlagEnableDrawerFocusNav then {
-					[focusNavigationEventNameEnum.NavigateBack] = {
-						handler = inputHandlersModule.onRelease(function(p2)
-							-- upvalues: fFlagFixDrawerNavigateBackWhileClosing (copy), var6 (copy), drawerPanelStatus (copy), var22 (copy)
-							if not fFlagFixDrawerNavigateBackWhileClosing then
-								var22("focus-navigation-back")
-							elseif var6:getValue() ~= drawerPanelStatus.Closing then
-								var22("focus-navigation-back")
-							end
-							p2:cancel()
-						end)
-					}
-				} else {}
-			end, { var22 })
-		}, t) else reactModule.createElement(foundationModule.View, {
+			customEventHandlers = UseMemoResult4
+		}, config) else ReactModule.createElement(FoundationModule.View, {
 			ZIndex = 2,
 			BorderSizePixel = 0,
 			Selectable = false,
-			Position = var15:map(function(p2)
-				return UDim2.fromOffset(p2, 0)
+			Position = UseAnimatedBindingResult:map(function(XOffset): UDim2 --[[ Line: 417 ]]
+				return UDim2.fromOffset(XOffset, 0)
 			end),
-			Size = UDim2.new(0, var13, 1, 0),
+			Size = UDim2.new(0, NewMenuWidth, 1, 0),
 			backgroundStyle = p1.backgroundStyle
-		}, t)
+		}, config)
 	})
 end)

@@ -1,184 +1,185 @@
-﻿local chrome = script:FindFirstAncestor("Chrome")
-local corePackagesService = game:GetService("CorePackages")
-local guiService = game:GetService("GuiService")
-local marketplaceService = game:GetService("MarketplaceService")
-local playersService = game:GetService("Players")
-local starterGuiService = game:GetService("StarterGui")
-local reactModule = require(corePackagesService.Packages.React)
-local serviceModule = require(chrome.Service)
-local chromeModule = require(corePackagesService.Workspace.Packages.Chrome)
-local windowSizeSignalModule = require(chrome.ChromeShared.Service.WindowSizeSignal)
-local constantsModule = require(chrome.ChromeShared.Unibar.Constants)
-local commonIconModule = require(chrome.Integrations.CommonIcon)
-local initializeShopMenuControllerModule = require(chrome.Integrations.InExperienceShop.initializeShopMenuController)
-local shopChromeWrapperModule = require(chrome.Integrations.InExperienceShop.ShopChromeWrapper)
-local shopWindowLayoutModule = require(chrome.Integrations.InExperienceShop.ShopWindowLayout)
-local chromeUtilsModule = require(chrome.ChromeShared.Service.ChromeUtils)
-local mappedSignal = chromeUtilsModule.MappedSignal
-local sideSheetPlacement = chromeModule.Enums.SideSheetPlacement
-local inExperienceShopModule = require(corePackagesService.Workspace.Packages.InExperienceShop)
-local fFlagEnableShopPrefetch = inExperienceShopModule.FFlagEnableShopPrefetch
-local fFlagHideShopMenuOnFailure = inExperienceShopModule.FFlagHideShopMenuOnFailure
-local fFlagCenterInExperienceShopWindow = inExperienceShopModule.FFlagCenterInExperienceShopWindow
-local fFlagFixInExperienceShopCursorLock = inExperienceShopModule.FFlagFixInExperienceShopCursorLock
-local sharedFlagsModule = require(corePackagesService.Workspace.Packages.SharedFlags)
-local fFlagEnableMenuTrailingBadge = sharedFlagsModule.FFlagEnableMenuTrailingBadge
-local fFlagShowOfferBadge = sharedFlagsModule.FFlagShowOfferBadge
-local fFlagExperienceShopNewIconography = inExperienceShopModule.FFlagExperienceShopNewIconography
-local shopCoreGuiToggleSupportedEngineFeature = game:GetEngineFeature("ShopCoreGuiToggleSupported")
-local enableOpenShopSignalEngineFeature = game:GetEngineFeature("EnableOpenShopSignal")
-local var1 = mappedSignal.new(serviceModule:onIntegrationStatusChanged(), function()
-	-- upvalues: serviceModule (ref), constantsModule (ref)
-	return serviceModule:isWindowOpen(constantsModule.IN_EXPERIENCE_SHOP_ID)
+﻿local Chrome = script:FindFirstAncestor("Chrome")
+local CorePackages = game:GetService("CorePackages")
+local GuiService = game:GetService("GuiService")
+local MarketplaceService = game:GetService("MarketplaceService")
+local Players = game:GetService("Players")
+local StarterGui = game:GetService("StarterGui")
+local ReactModule = require(CorePackages.Packages.React)
+local ServiceModule = require(Chrome.Service)
+local ConstantsModule = require(Chrome.ChromeShared.Unibar.Constants)
+local CommonIconModule = require(Chrome.Integrations.CommonIcon)
+local InitializeShopMenuControllerModule: (any, any) -> () = require(Chrome.Integrations.InExperienceShop.initializeShopMenuController)
+local ShopChromeWrapperModule = require(Chrome.Integrations.InExperienceShop.ShopChromeWrapper)
+local ShopWindowLayoutModule = require(Chrome.Integrations.InExperienceShop.ShopWindowLayout)
+local ChromeUtilsModule = require(Chrome.ChromeShared.Service.ChromeUtils)
+local SideSheetPlacement = require(CorePackages.Workspace.Packages.Chrome).Enums.SideSheetPlacement
+local InExperienceShopModule = require(CorePackages.Workspace.Packages.InExperienceShop)
+local FFlagEnableShopPrefetch = InExperienceShopModule.FFlagEnableShopPrefetch
+local FFlagHideShopMenuOnFailure = InExperienceShopModule.FFlagHideShopMenuOnFailure
+local FFlagCenterInExperienceShopWindow = InExperienceShopModule.FFlagCenterInExperienceShopWindow
+local FFlagFixInExperienceShopCursorLock = InExperienceShopModule.FFlagFixInExperienceShopCursorLock
+local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
+local FFlagEnableMenuTrailingBadge = SharedFlagsModule.FFlagEnableMenuTrailingBadge
+local FFlagExperienceShopNewIconography = InExperienceShopModule.FFlagExperienceShopNewIconography
+local ShopCoreGuiToggleSupportedEngineFeature = game:GetEngineFeature("ShopCoreGuiToggleSupported")
+local EnableOpenShopSignalEngineFeature = game:GetEngineFeature("EnableOpenShopSignal")
+local NewResult = ChromeUtilsModule.MappedSignal.new(ServiceModule:onIntegrationStatusChanged(), function() --[[ Line: 35 ]]
+	-- upvalues: ServiceModule (copy), ConstantsModule (copy)
+	return ServiceModule:isWindowOpen(ConstantsModule.IN_EXPERIENCE_SHOP_ID)
 end)
-local MAX_WINDOW_WIDTH = shopWindowLayoutModule.MAX_WINDOW_WIDTH
-local MAX_WINDOW_HEIGHT = shopWindowLayoutModule.MAX_WINDOW_HEIGHT
-local var2 = windowSizeSignalModule.new(MAX_WINDOW_WIDTH, MAX_WINDOW_HEIGHT, false, true)
-local inExperienceShopNewBadgeStorageKey = game:DefineFastString("InExperienceShopNewBadgeStorageKey", "InExperienceShopNewBadgeStorageKey")
-local newBadgeDismissalMaxCountInExperienceShop = game:DefineFastInt("NewBadgeDismissalMaxCountInExperienceShop", 5)
-local fFlagEnableMenuTrailingBadge_1 = game:DefineFastFlag("EnableNewBadgeInExperienceShop", false) and fFlagEnableMenuTrailingBadge
-local var3 = nil
+local MAXWINDOWWIDTH = ShopWindowLayoutModule.MAX_WINDOW_WIDTH
+local MAXWINDOWHEIGHT = ShopWindowLayoutModule.MAX_WINDOW_HEIGHT
+local NewResult1 = require(Chrome.ChromeShared.Service.WindowSizeSignal).new(MAXWINDOWWIDTH, MAXWINDOWHEIGHT, false, true)
+local InExperienceShopNewBadgeStorageKey = game:DefineFastString("InExperienceShopNewBadgeStorageKey", "InExperienceShopNewBadgeStorageKey")
+local NewBadgeDismissalMaxCountInExperienceShop = game:DefineFastInt("NewBadgeDismissalMaxCountInExperienceShop", 5)
+local FFlagEnableMenuTrailingBadge1 = game:DefineFastFlag("EnableNewBadgeInExperienceShop", false) and FFlagEnableMenuTrailingBadge
+local OfferBadgeTextSignal = nil
 
-if fFlagShowOfferBadge then
-	local inExperienceOffersModule = require(corePackagesService.Workspace.Packages.InExperienceOffers)
-	var3 = inExperienceOffersModule.Utils.createOfferBadgeTextSignal(inExperienceOffersModule.FeatureKeys.RobloxShop)
+if SharedFlagsModule.FFlagShowOfferBadge then
+	local InExperienceOffersModule = require(CorePackages.Workspace.Packages.InExperienceOffers)
+	OfferBadgeTextSignal = InExperienceOffersModule.Utils.createOfferBadgeTextSignal(InExperienceOffersModule.FeatureKeys.RobloxShop)
 end
-local unavailable
-local var4 = if fFlagEnableMenuTrailingBadge_1 or var3 ~= nil then {
-	localStorageKey = inExperienceShopNewBadgeStorageKey,
-	maxViewCount = if fFlagEnableMenuTrailingBadge_1 then newBadgeDismissalMaxCountInExperienceShop else 0,
-	customText = var3
+local Config = if FFlagEnableMenuTrailingBadge1 or OfferBadgeTextSignal ~= nil then {
+	localStorageKey = InExperienceShopNewBadgeStorageKey,
+	maxViewCount = if FFlagEnableMenuTrailingBadge1 then NewBadgeDismissalMaxCountInExperienceShop else 0,
+	customText = OfferBadgeTextSignal
 } else nil
-local var5 = if shopCoreGuiToggleSupportedEngineFeature then starterGuiService:GetCoreGuiEnabled(Enum.CoreGuiType.All) or starterGuiService:GetCoreGuiEnabled(Enum.CoreGuiType.ExperienceShop) else false
-local var6 = true
+local CoreGuiEnabled = if ShopCoreGuiToggleSupportedEngineFeature then StarterGui:GetCoreGuiEnabled(Enum.CoreGuiType.All) or StarterGui:GetCoreGuiEnabled(Enum.CoreGuiType.ExperienceShop) else false
+local Flag = true
 
-local function _()
-	-- upvalues: var5 (write), fFlagHideShopMenuOnFailure (ref), var6 (write), serviceModule (ref)
-	if var5 and not fFlagHideShopMenuOnFailure then
-		return serviceModule.AvailabilitySignal.Available
+local function _() --[[ Line: 85 | Named "getInitialAvailability" ]]
+	-- upvalues: CoreGuiEnabled (ref), FFlagHideShopMenuOnFailure (copy), Flag (ref), ServiceModule (copy)
+	if CoreGuiEnabled and not FFlagHideShopMenuOnFailure then
+		return ServiceModule.AvailabilitySignal.Available
+	else
+		Flag = false
+		
+		return ServiceModule.AvailabilitySignal.Unavailable
 	end
-	var6 = false
-	
-	return serviceModule.AvailabilitySignal.Unavailable
 end
 
-local _ = function()
-	-- upvalues: fFlagCenterInExperienceShopWindow (ref), shopWindowLayoutModule (ref), serviceModule (ref), constantsModule (ref)
-	if fFlagCenterInExperienceShopWindow then
-		shopWindowLayoutModule.toggleInExperienceShopWindow()
+local _ = function() --[[ Line: 93 | Named "toggleShopWindow" ]]
+	-- upvalues: FFlagCenterInExperienceShopWindow (copy), ShopWindowLayoutModule (copy), ServiceModule (copy), ConstantsModule (copy)
+	if FFlagCenterInExperienceShopWindow then
+		ShopWindowLayoutModule.toggleInExperienceShopWindow()
 		
 		return
+	else
+		ServiceModule:toggleWindow(ConstantsModule.IN_EXPERIENCE_SHOP_ID)
 	end
-	serviceModule:toggleWindow(constantsModule.IN_EXPERIENCE_SHOP_ID)
 end
 
-local t = {
+local config = {
 	label = "Feature.Avatar.Action.Shop",
 	cachePosition = true,
 	draggable = true
 }
+local Unavailable = nil
 
-if var5 and not fFlagHideShopMenuOnFailure then
-	unavailable = serviceModule.AvailabilitySignal.Available
+if CoreGuiEnabled and not FFlagHideShopMenuOnFailure then
+	Unavailable = ServiceModule.AvailabilitySignal.Available
 else
-	var6 = false
-	unavailable = serviceModule.AvailabilitySignal.Unavailable
+	Flag = false
+	Unavailable = ServiceModule.AvailabilitySignal.Unavailable
 end
-t.initialAvailability = unavailable
-t.id = constantsModule.IN_EXPERIENCE_SHOP_ID
-t.sideSheetPlacement = sideSheetPlacement.AboveFold
-t.windowSize = var2
-t.startingWindowPosition = shopWindowLayoutModule.getStartingWindowPosition()
+config.initialAvailability = Unavailable
+config.id = ConstantsModule.IN_EXPERIENCE_SHOP_ID
+config.sideSheetPlacement = SideSheetPlacement.AboveFold
+config.windowSize = NewResult1
+config.startingWindowPosition = ShopWindowLayoutModule.getStartingWindowPosition()
 
-function t.activated(_)
-	-- upvalues: fFlagCenterInExperienceShopWindow (ref), shopWindowLayoutModule (ref), serviceModule (ref), constantsModule (ref)
-	if fFlagCenterInExperienceShopWindow then
-		shopWindowLayoutModule.toggleInExperienceShopWindow()
+function config:activated() --[[ Line: 111 ]]
+	-- upvalues: FFlagCenterInExperienceShopWindow (copy), ShopWindowLayoutModule (copy), ServiceModule (copy), ConstantsModule (copy)
+	if FFlagCenterInExperienceShopWindow then
+		ShopWindowLayoutModule.toggleInExperienceShopWindow()
 		
 		return
+	else
+		ServiceModule:toggleWindow(ConstantsModule.IN_EXPERIENCE_SHOP_ID)
 	end
-	serviceModule:toggleWindow(constantsModule.IN_EXPERIENCE_SHOP_ID)
 end
 
-t.menuTrailingBadgeConfig = var4
-t.isActivated = var1
-t.components = {
-	Icon = function()
-		-- upvalues: commonIconModule (ref), fFlagExperienceShopNewIconography (ref), var1 (ref)
-		return commonIconModule(if fFlagExperienceShopNewIconography then "ShoppingBasket" else "BuildingStore", nil, var1)
+config.menuTrailingBadgeConfig = Config
+config.isActivated = NewResult
+config.components = {
+	Icon = function() --[[ Line: 117 ]]
+		-- upvalues: CommonIconModule (copy), FFlagExperienceShopNewIconography (copy), NewResult (copy)
+		return CommonIconModule(if FFlagExperienceShopNewIconography then "ShoppingBasket" else "BuildingStore", nil, NewResult)
 	end,
-	Window = function()
-		-- upvalues: reactModule (ref), shopChromeWrapperModule (ref), var2 (ref), MAX_WINDOW_WIDTH (ref), MAX_WINDOW_HEIGHT (ref)
-		return reactModule.createElement(shopChromeWrapperModule, {
-			windowSize = var2,
-			maxWindowWidth = MAX_WINDOW_WIDTH,
-			maxWindowHeight = MAX_WINDOW_HEIGHT
+	Window = function() --[[ Line: 124 ]]
+		-- upvalues: ReactModule (copy), ShopChromeWrapperModule (copy), NewResult1 (copy), MAXWINDOWWIDTH (copy), MAXWINDOWHEIGHT (copy)
+		return ReactModule.createElement(ShopChromeWrapperModule, {
+			windowSize = NewResult1,
+			maxWindowWidth = MAXWINDOWWIDTH,
+			maxWindowHeight = MAXWINDOWHEIGHT
 		})
 	end
 }
-local var7 = serviceModule:register(t)
+local RegisterResult = ServiceModule:register(config)
 
-if fFlagFixInExperienceShopCursorLock then
-	initializeShopMenuControllerModule(guiService, var1)
+if FFlagFixInExperienceShopCursorLock then
+	InitializeShopMenuControllerModule(GuiService, NewResult)
 end
-if fFlagEnableShopPrefetch then
-	local prefetchShopDataOnGameJoinModule = require(corePackagesService.Workspace.Packages.InExperienceShop.prefetchShopDataOnGameJoin)
+if FFlagEnableShopPrefetch then
+	local PrefetchShopDataOnGameJoinModule = require(CorePackages.Workspace.Packages.InExperienceShop.prefetchShopDataOnGameJoin)
 	
-	if fFlagHideShopMenuOnFailure then
-		task.spawn(prefetchShopDataOnGameJoinModule, function(p1)
-			-- upvalues: var6 (write), var5 (write), var7 (ref)
+	if FFlagHideShopMenuOnFailure then
+		task.spawn(PrefetchShopDataOnGameJoinModule, function(p1) --[[ Line: 146 ]]
+			-- upvalues: Flag (ref), CoreGuiEnabled (ref), RegisterResult (copy)
 			if not p1 then return end
-			var6 = true
+			Flag = true
 			
-			if var5 then
-				var7.availability:available()
+			if CoreGuiEnabled then
+				RegisterResult.availability:available()
 			end
 		end)
 	else
-		task.spawn(prefetchShopDataOnGameJoinModule)
+		task.spawn(PrefetchShopDataOnGameJoinModule)
 	end
 end
-if enableOpenShopSignalEngineFeature then
-	marketplaceService.OpenShopRequested:Connect(function(p1)
-		-- upvalues: playersService (ref), fFlagHideShopMenuOnFailure (ref), var6 (write), serviceModule (ref), constantsModule (ref), fFlagCenterInExperienceShopWindow (ref), shopWindowLayoutModule (ref)
-		if p1 == playersService.LocalPlayer then
-			if fFlagHideShopMenuOnFailure and not var6 then return end
-			if not serviceModule:isWindowOpen(constantsModule.IN_EXPERIENCE_SHOP_ID) then
-				if fFlagCenterInExperienceShopWindow then
-					shopWindowLayoutModule.toggleInExperienceShopWindow()
+if EnableOpenShopSignalEngineFeature then
+	MarketplaceService.OpenShopRequested:Connect(function(Player) --[[ Line: 170 ]]
+		-- upvalues: Players (copy), FFlagHideShopMenuOnFailure (copy), Flag (ref), ServiceModule (copy), ConstantsModule (copy), FFlagCenterInExperienceShopWindow (copy), ShopWindowLayoutModule (copy)
+		if Player == Players.LocalPlayer then
+			if FFlagHideShopMenuOnFailure and not Flag then return end
+			if not ServiceModule:isWindowOpen(ConstantsModule.IN_EXPERIENCE_SHOP_ID) then
+				if FFlagCenterInExperienceShopWindow then
+					ShopWindowLayoutModule.toggleInExperienceShopWindow()
 					
 					return
 				end
-				serviceModule:toggleWindow(constantsModule.IN_EXPERIENCE_SHOP_ID)
+				ServiceModule:toggleWindow(ConstantsModule.IN_EXPERIENCE_SHOP_ID)
 			end
 		end
 	end)
 end
-if shopCoreGuiToggleSupportedEngineFeature then
-	local _ = function()
-		-- upvalues: var5 (write), fFlagHideShopMenuOnFailure (ref), var6 (write), var7 (ref), serviceModule (ref), constantsModule (ref)
-		if var5 and (not fFlagHideShopMenuOnFailure or var6) then
-			var7.availability:available()
+if ShopCoreGuiToggleSupportedEngineFeature then
+	local _ = function() --[[ Line: 188 | Named "updateShopAvailability" ]]
+		-- upvalues: CoreGuiEnabled (ref), FFlagHideShopMenuOnFailure (copy), Flag (ref), RegisterResult (copy), ServiceModule (copy), ConstantsModule (copy)
+		if CoreGuiEnabled and (not FFlagHideShopMenuOnFailure or Flag) then
+			RegisterResult.availability:available()
 			
 			return
-		elseif serviceModule:isWindowOpen(constantsModule.IN_EXPERIENCE_SHOP_ID) then
-			serviceModule:toggleWindow(constantsModule.IN_EXPERIENCE_SHOP_ID)
 		end
-		var7.availability:unavailable()
+		if ServiceModule:isWindowOpen(ConstantsModule.IN_EXPERIENCE_SHOP_ID) then
+			ServiceModule:toggleWindow(ConstantsModule.IN_EXPERIENCE_SHOP_ID)
+		end
+		RegisterResult.availability:unavailable()
 	end
 	
-	chromeUtilsModule.setCoreGuiAvailability(var7, Enum.CoreGuiType.ExperienceShop, function(p1)
-		-- upvalues: var5 (write), fFlagHideShopMenuOnFailure (ref), var6 (write), var7 (ref), serviceModule (ref), constantsModule (ref)
-		var5 = p1
+	ChromeUtilsModule.setCoreGuiAvailability(RegisterResult, Enum.CoreGuiType.ExperienceShop, function(p1) --[[ Line: 200 ]]
+		-- upvalues: CoreGuiEnabled (ref), FFlagHideShopMenuOnFailure (copy), Flag (ref), RegisterResult (copy), ServiceModule (copy), ConstantsModule (copy)
+		CoreGuiEnabled = p1
 		
-		if var5 and (not fFlagHideShopMenuOnFailure or var6) then
-			var7.availability:available()
+		if CoreGuiEnabled and (not FFlagHideShopMenuOnFailure or Flag) then
+			RegisterResult.availability:available()
 			
 			return
-		elseif serviceModule:isWindowOpen(constantsModule.IN_EXPERIENCE_SHOP_ID) then
-			serviceModule:toggleWindow(constantsModule.IN_EXPERIENCE_SHOP_ID)
 		end
-		var7.availability:unavailable()
+		if ServiceModule:isWindowOpen(ConstantsModule.IN_EXPERIENCE_SHOP_ID) then
+			ServiceModule:toggleWindow(ConstantsModule.IN_EXPERIENCE_SHOP_ID)
+		end
+		RegisterResult.availability:unavailable()
 	end)
 end
-return var7
+return RegisterResult

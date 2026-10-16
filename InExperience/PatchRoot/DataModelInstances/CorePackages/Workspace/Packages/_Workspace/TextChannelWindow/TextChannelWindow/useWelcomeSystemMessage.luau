@@ -1,70 +1,74 @@
-﻿local parent = script.Parent.Parent
-local playersService = game:GetService("Players")
-local reactModule = require(parent.React)
-local messageModule = require(script.Parent.Message)
-local messageWriterContextModule = require(script.Parent.MessageWriterContext)
-local getWhisperChannelOtherDisplayNameModule = require(script.Parent.getWhisperChannelOtherDisplayName)
-local useInExperienceLocalization = require(parent.ChatUIPrimitives).Hooks.useInExperienceLocalization
-local fFlagExpChatTextChannelWindowWelcomeAndSummaryModule = require(script.Parent.Flags.FFlagExpChatTextChannelWindowWelcomeAndSummary)
-local tbl = setmetatable({}, { __mode = "k" })
+﻿local Parent = script.Parent.Parent
+local Players = game:GetService("Players")
+local ReactModule = require(Parent.React)
+local MessageModule = require(script.Parent.Message)
+local MessageWriterContextModule = require(script.Parent.MessageWriterContext)
+local GetWhisperChannelOtherDisplayNameModule = require(script.Parent.getWhisperChannelOtherDisplayName)
+local UseInExperienceLocalizationFunction = require(Parent.ChatUIPrimitives).Hooks.useInExperienceLocalization
+local FFlagExpChatTextChannelWindowWelcomeAndSummaryModule = require(script.Parent.Flags.FFlagExpChatTextChannelWindowWelcomeAndSummary)
+local self = setmetatable({}, { __mode = "k" })
 
-local function _(p1)
+local function _(p1): boolean --[[ Line: 27 | Named "isWhisperChannel" ]]
 	return string.find(p1.Name, "^RBXWhisper") ~= nil
 end
 
-return function(p1, p2)
-	-- upvalues: messageWriterContextModule (ref), useInExperienceLocalization (ref), reactModule (ref), fFlagExpChatTextChannelWindowWelcomeAndSummaryModule (ref), tbl (ref), getWhisperChannelOtherDisplayNameModule (ref), messageModule (ref), playersService (ref)
-	local var1 = messageWriterContextModule.useMessageWriter()
-	local var2 = useInExperienceLocalization()
-	reactModule.useEffect(function()
-		-- upvalues: fFlagExpChatTextChannelWindowWelcomeAndSummaryModule (copy), var1 (ref), p1 (ref), tbl (copy), getWhisperChannelOtherDisplayNameModule (copy), p2 (ref), var2 (ref), messageModule (copy), playersService (copy)
-		if not fFlagExpChatTextChannelWindowWelcomeAndSummaryModule then return end
-		if not var1 or p1 == nil then return end
-		if string.find(p1.Name, "^RBXWhisper") == nil or tbl[p1] then return end
-		local function trySend()
-			-- upvalues: tbl (copy), p1 (ref), getWhisperChannelOtherDisplayNameModule (copy), p2 (copy), var2 (copy), var1 (copy), messageModule (copy)
-			if tbl[p1] then
+return function(p1, p2) --[[ Line: 31 | Named "useWelcomeSystemMessage" ]]
+	-- upvalues: MessageWriterContextModule (copy), UseInExperienceLocalizationFunction (copy), ReactModule (copy), FFlagExpChatTextChannelWindowWelcomeAndSummaryModule (copy), self (copy), GetWhisperChannelOtherDisplayNameModule (copy), MessageModule (copy), Players (copy)
+	local UseMessageWriterResult = MessageWriterContextModule.useMessageWriter()
+	local UseInExperienceLocalizationResult = UseInExperienceLocalizationFunction()
+	ReactModule.useEffect(function() --[[ Line: 35 ]]
+		-- upvalues: FFlagExpChatTextChannelWindowWelcomeAndSummaryModule (upval), UseMessageWriterResult (copy), p1 (copy), self (upval), GetWhisperChannelOtherDisplayNameModule (upval), p2 (copy), UseInExperienceLocalizationResult (copy), MessageModule (upval), Players (upval)
+		if not FFlagExpChatTextChannelWindowWelcomeAndSummaryModule then return end
+		if not UseMessageWriterResult or p1 == nil then return end
+		if string.find(p1.Name, "^RBXWhisper") == nil or self[p1] then return end
+		local function trySend(): boolean --[[ Line: 47 ]]
+			-- upvalues: self (upval), p1 (copy), GetWhisperChannelOtherDisplayNameModule (upval), p2 (upval), UseInExperienceLocalizationResult (upval), UseMessageWriterResult (upval), MessageModule (upval)
+			if self[p1] then
 				return true
 			end
-			local var3 = getWhisperChannelOtherDisplayNameModule(p1, p2)
+			local WhisperChannelOtherDisplayNameModule = GetWhisperChannelOtherDisplayNameModule(p1, p2)
 			
-			if not var3 then
+			if not WhisperChannelOtherDisplayNameModule then
 				return false
 			end
-			local var4 = var2("CoreScripts.TextChat.Notification.WhisperChat.Created", { RBX_NAME = var3 })
+			local CoreScriptsTextChatNotificationWhisperChatCreated = UseInExperienceLocalizationResult("CoreScripts.TextChat.Notification.WhisperChat.Created", { RBX_NAME = WhisperChannelOtherDisplayNameModule })
 			
-			if var4 == "" then
+			if CoreScriptsTextChatNotificationWhisperChatCreated == "" then
 				return false
+			else
+				self[p1] = true
+				UseMessageWriterResult.write(MessageModule.createSystemMessage(CoreScriptsTextChatNotificationWhisperChatCreated, "Roblox.Whisper.Welcome.Sent:" .. p1.Name))
+				
+				return true
 			end
-			tbl[p1] = true
-			var1.write(messageModule.createSystemMessage(var4, "Roblox.Whisper.Welcome.Sent:" .. p1.Name))
-			
-			return true
 		end
 		
-		if trySend() then
-			return
-		end
-		local childAddedConnection = nil
-		local playerAddedConnection = nil
+		if trySend() then return end
+		local Connection = nil
+		local Connection1 = nil
 		
-		local function cleanup()
-			-- upvalues: childAddedConnection (write), playerAddedConnection (write)
-			childAddedConnection:Disconnect()
-			playerAddedConnection:Disconnect()
+		local function cleanup() --[[ Line: 72 ]]
+			-- upvalues: Connection (ref), Connection1 (ref)
+			Connection:Disconnect()
+			Connection1:Disconnect()
 		end
 		
-		local function retry()
-			-- upvalues: trySend (ref), childAddedConnection (write), playerAddedConnection (write)
+		local function retry() --[[ Line: 76 ]]
+			-- upvalues: trySend (copy), Connection (ref), Connection1 (ref)
 			if trySend() then
-				childAddedConnection:Disconnect()
-				playerAddedConnection:Disconnect()
+				Connection:Disconnect()
+				Connection1:Disconnect()
 			end
 		end
 		
-		childAddedConnection = p1.ChildAdded:Connect(retry)
-		playerAddedConnection = playersService.PlayerAdded:Connect(retry)
+		Connection = p1.ChildAdded:Connect(retry)
+		Connection1 = Players.PlayerAdded:Connect(retry)
 		
 		return cleanup
-	end, { var1, var2, p1, p2 })
+	end, {
+		UseMessageWriterResult,
+		UseInExperienceLocalizationResult,
+		p1,
+		p2
+	})
 end

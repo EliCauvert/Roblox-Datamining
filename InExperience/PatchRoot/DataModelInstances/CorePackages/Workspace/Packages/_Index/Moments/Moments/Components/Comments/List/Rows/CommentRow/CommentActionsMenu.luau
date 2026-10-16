@@ -1,60 +1,59 @@
-﻿local parent = script:FindFirstAncestor("Moments").Parent
-local builderIconsModule = require(parent.BuilderIcons)
-local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-local foundationModule = require(parent.Foundation)
-local inputHandlersModule = require(parent.InputHandlers)
-local reactModule = require(parent.React)
-local _ = require(parent.ReactFocusNavigation)
-local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
-local focusNavigationEventNameEnum = focusNavigationUtilsModule.FocusNavigationEventNameEnum
-local useFocusRoot = focusNavigationUtilsModule.useFocusRoot
-local inputSize = foundationModule.Enums.InputSize
-local popoverAlign = foundationModule.Enums.PopoverAlign
-local popoverSide = foundationModule.Enums.PopoverSide
-local threeDotsHorizontal = builderIconsModule.Icon.ThreeDotsHorizontal
-local t = {
-	[Enum.KeyCode.ButtonB] = focusNavigationEventNameEnum.NavigateBack,
-	[Enum.KeyCode.Escape] = focusNavigationEventNameEnum.NavigateBack
+﻿local Parent = script:FindFirstAncestor("Moments").Parent
+local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
+local FoundationModule = require(Parent.Foundation)
+local InputHandlersModule = require(Parent.InputHandlers)
+local ReactModule = require(Parent.React)
+local _ = require(Parent.ReactFocusNavigation)
+local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
+local FocusNavigationEventNameEnum = FocusNavigationUtilsModule.FocusNavigationEventNameEnum
+local UseFocusRootFunction = FocusNavigationUtilsModule.useFocusRoot
+local InputSize = FoundationModule.Enums.InputSize
+local PopoverAlign = FoundationModule.Enums.PopoverAlign
+local PopoverSide = FoundationModule.Enums.PopoverSide
+local ThreeDotsHorizontal = require(Parent.BuilderIcons).Icon.ThreeDotsHorizontal
+local EventMap = {
+	[Enum.KeyCode.ButtonB] = FocusNavigationEventNameEnum.NavigateBack,
+	[Enum.KeyCode.Escape] = FocusNavigationEventNameEnum.NavigateBack
 }
 
-return function(p1)
-	-- upvalues: reactModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), useFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), t (ref), foundationModule (ref), popoverSide (ref), popoverAlign (ref), threeDotsHorizontal (ref), inputSize (ref)
-	local onClose = p1.onClose
+return function(Frame) --[[ Line: 38 | Named "CommentActionsMenu" ]]
+	-- upvalues: ReactModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), EventMap (copy), FoundationModule (copy), PopoverSide (copy), PopoverAlign (copy), ThreeDotsHorizontal (copy), InputSize (copy)
+	local OnCloseFunction = Frame.onClose
 	
-	return reactModule.createElement(foundationModule.Menu, {
-		isOpen = p1.isOpen,
-		items = p1.items,
-		side = if p1.anchorRef ~= nil then popoverSide.Bottom else popoverSide.Top,
-		align = popoverAlign.End,
-		anchorRef = p1.anchorRef,
-		onPressedOutside = onClose,
-		ref = useFocusRoot({
+	return ReactModule.createElement(FoundationModule.Menu, {
+		isOpen = Frame.isOpen,
+		items = Frame.items,
+		side = if Frame.anchorRef == nil then PopoverSide.Bottom else PopoverSide.Top,
+		align = PopoverAlign.End,
+		anchorRef = Frame.anchorRef,
+		onPressedOutside = OnCloseFunction,
+		ref = UseFocusRootFunction({
 			isAutoFocusRoot = true,
-			surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.ContextualMenu,
-			isFocusable = p1.isOpen,
-			eventMap = t,
-			eventHandlers = reactModule.useMemo(function()
-				-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), onClose (ref)
+			surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.ContextualMenu,
+			isFocusable = Frame.isOpen,
+			eventMap = EventMap,
+			eventHandlers = ReactModule.useMemo(function() --[[ Line: 40 ]]
+				-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), OnCloseFunction (copy)
 				return {
-					[focusNavigationEventNameEnum.NavigateBack] = {
-						handler = inputHandlersModule.onRelease(function(p2)
-							-- upvalues: onClose (copy)
-							onClose()
-							p2:cancel()
+					[FocusNavigationEventNameEnum.NavigateBack] = {
+						handler = InputHandlersModule.onRelease(function(p1) --[[ Line: 43 ]]
+							-- upvalues: OnCloseFunction (upval)
+							OnCloseFunction()
+							p1:cancel()
 						end)
 					}
 				}
-			end, { onClose })
+			end, { OnCloseFunction })
 		}),
-		LayoutOrder = p1.LayoutOrder,
-		testId = `moments-comment-actions-menu-{p1.commentId}`
-	}, if p1.anchorRef == nil then {
-		Button = reactModule.createElement(foundationModule.IconButton, {
+		LayoutOrder = Frame.LayoutOrder,
+		testId = `moments-comment-actions-menu-{Frame.commentId}`
+	}, if Frame.anchorRef == nil then {
+		Button = ReactModule.createElement(FoundationModule.IconButton, {
 			isCircular = true,
-			icon = threeDotsHorizontal,
-			size = inputSize.XSmall,
-			onActivated = p1.onButtonActivated,
-			testId = `moments-comment-actions-button-{p1.commentId}`
+			icon = ThreeDotsHorizontal,
+			size = InputSize.XSmall,
+			onActivated = Frame.onButtonActivated,
+			testId = `moments-comment-actions-button-{Frame.commentId}`
 		})
 	} else nil)
 end

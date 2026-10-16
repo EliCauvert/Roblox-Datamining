@@ -1,37 +1,37 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local llama = require(appChat.Parent.LuaSocialLibrariesDeps).llama
-local roduxAliasesModule = require(appChat.Http.RoduxAliases)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Llama = require(AppChat.Parent.LuaSocialLibrariesDeps).llama
+local RoduxAliasesModule = require(AppChat.Http.RoduxAliases)
 
-local function convertToNewAliasUpdatedActions(p1)
-	-- upvalues: roduxAliasesModule (ref)
-	local t = {}
+local function convertToNewAliasUpdatedActions(Aliases) --[[ Line: 8 ]]
+	-- upvalues: RoduxAliasesModule (copy)
+	local AliasUpdatedResults = {}
 	
-	for i, v in ipairs(p1) do
-		table.insert(t, roduxAliasesModule.Actions.AliasUpdated(tostring(v.targetUserId), v.targetUserTag))
+	for _, alias in ipairs(Aliases) do
+		table.insert(AliasUpdatedResults, RoduxAliasesModule.Actions.AliasUpdated(tostring(alias.targetUserId), alias.targetUserTag))
 	end
-	return t
+	return AliasUpdatedResults
 end
 
-local t = {
-	GetAliases_Success = function(p2)
-		-- upvalues: convertToNewAliasUpdatedActions (ref)
-		return convertToNewAliasUpdatedActions(p2.responseBody)
+local config = {
+	GetAliases_Success = function(p1) --[[ Line: 20 ]]
+		-- upvalues: convertToNewAliasUpdatedActions (copy)
+		return (convertToNewAliasUpdatedActions(p1.responseBody))
 	end,
-	ReceivedAliases = function(p2)
-		-- upvalues: convertToNewAliasUpdatedActions (ref)
-		return convertToNewAliasUpdatedActions(p2.aliases)
+	ReceivedAliases = function(p1) --[[ Line: 24 ]]
+		-- upvalues: convertToNewAliasUpdatedActions (copy)
+		return (convertToNewAliasUpdatedActions(p1.aliases))
 	end
 }
-local var1 = roduxAliasesModule.installReducer()
+local InstallReducerResult = RoduxAliasesModule.installReducer()
 
-return function(p2, p3)
-	-- upvalues: t (ref), llama (ref), var1 (ref)
-	p2 = p2 or { byUserId = { ShowUserAlias = true } }
-	local list = { p3 }
-	local type = t[p3.type]
+return function(p1, p2) --[[ Line: 31 ]]
+	-- upvalues: config (copy), Llama (copy), InstallReducerResult (copy)
+	local P3 = p1 or { byUserId = { ShowUserAlias = true } }
+	local list = { p2 }
+	local Entry = config[p2.type]
 	
-	if type then
-		list = type(p3)
+	if Entry then
+		list = Entry(p2)
 	end
-	return llama.List.reduce(list, var1, p2)
+	return Llama.List.reduce(list, InstallReducerResult, P3)
 end

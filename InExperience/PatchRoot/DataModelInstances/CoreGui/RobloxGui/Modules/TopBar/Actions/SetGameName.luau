@@ -1,3 +1,5 @@
-﻿return if require(script.Parent.Parent.Flags.FFlagTopBarDeprecateGameInfoRodux) then nil else require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator(script.Name, function(p1)
-	return { gameName = p1 }
+﻿local MakeActionCreatorFunction = require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator
+
+return if require(script.Parent.Parent.Flags.FFlagTopBarDeprecateGameInfoRodux) then nil else MakeActionCreatorFunction(script.Name, function(GameName) --[[ Line: 11 ]]
+	return { gameName = GameName }
 end)

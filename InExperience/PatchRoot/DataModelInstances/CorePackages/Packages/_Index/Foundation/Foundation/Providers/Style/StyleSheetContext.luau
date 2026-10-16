@@ -1,14 +1,14 @@
-﻿local parent = script:FindFirstAncestor("Foundation").Parent
-local reactModule = require(parent.React)
-local none = require(parent.Dash).None
-local var1 = reactModule.createContext(none)
+﻿local Parent = script:FindFirstAncestor("Foundation").Parent
+local ReactModule = require(Parent.React)
+local None = require(Parent.Dash).None
+local Context = ReactModule.createContext(None)
 
 return {
-	Provider = var1.Provider,
-	useStyleSheet = function()
-		-- upvalues: reactModule (ref), var1 (ref), none (ref)
-		local var2 = reactModule.useContext(var1)
+	Provider = Context.Provider,
+	useStyleSheet = function() --[[ Line: 11 ]]
+		-- upvalues: ReactModule (copy), Context (copy), None (copy)
+		local UseContextResult = ReactModule.useContext(Context)
 		
-		return if var2 == none then nil else var2
+		return if UseContextResult == None then nil else UseContextResult
 	end
 }

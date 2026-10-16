@@ -1,10 +1,10 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceSlotBasedEditor").Parent
-local colorGradientCircle = require(parent.AXCommon).Components.ColorGradientCircle
-local reactModule = require(parent.React)
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceSlotBasedEditor").Parent
+local ColorGradientCircle = require(Parent.AXCommon).Components.ColorGradientCircle
+local ReactModule = require(Parent.React)
 
-return function(p1)
-	-- upvalues: reactModule (ref), colorGradientCircle (ref)
-	return reactModule.createElement(colorGradientCircle, {
+return function(p1) --[[ Line: 18 | Named "SlotCircularGradientFrame" ]]
+	-- upvalues: ReactModule (copy), ColorGradientCircle (copy)
+	return ReactModule.createElement(ColorGradientCircle, {
 		hasBorder = true,
 		Colors = p1.Colors,
 		Size = UDim2.fromScale(0.4, 0.4),

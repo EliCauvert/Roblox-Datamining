@@ -1,10 +1,10 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local sendTextMessageModule = require(appChat.Conversations.Thunks.SendTextMessage)
-local name = require(appChat.Logger):new(script.Name)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local SendTextMessageModule = require(AppChat.Conversations.Thunks.SendTextMessage)
+local NewResult = require(AppChat.Logger):new(script.Name)
 
-return function(...)
-	-- upvalues: name (ref), sendTextMessageModule (ref)
-	name:info("Sending text message")
+return function(...) --[[ Line: 5 ]]
+	-- upvalues: NewResult (copy), SendTextMessageModule (copy)
+	NewResult:info("Sending text message")
 	
-	return sendTextMessageModule(...)
+	return SendTextMessageModule(...)
 end

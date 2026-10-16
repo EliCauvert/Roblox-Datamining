@@ -1,97 +1,98 @@
-﻿local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local reactModule = require(parent_1.React)
-local luauPolyfillModule = require(parent_1.LuauPolyfill)
-local object = luauPolyfillModule.Object
-local array = luauPolyfillModule.Array
-local invariantModule = require(parent.utils.invariant)
-local navigationFocusEventsModule = require(parent.views.NavigationFocusEvents)
+﻿local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
+local LuauPolyfillModule = require(Parent1.LuauPolyfill)
+local Object = LuauPolyfillModule.Object
+local Array = LuauPolyfillModule.Array
+local InvariantModule = require(Parent.utils.invariant)
+local NavigationFocusEventsModule = require(Parent.views.NavigationFocusEvents)
 
-return function(p1, p2, p3)
-	-- upvalues: reactModule (ref), invariantModule (ref), array (ref), object (ref), navigationFocusEventsModule (ref)
-	local navigator = reactModule.Component:extend("Navigator")
-	navigator.router = p2
-	navigator.navigationOptions = p3.navigationOptions
+return function(p1, Router, NavigationConfig) --[[ Line: 12 ]]
+	-- upvalues: ReactModule (copy), InvariantModule (copy), Array (copy), Object (copy), NavigationFocusEventsModule (copy)
+	local Navigator = ReactModule.Component:extend("Navigator")
+	Navigator.router = Router
+	Navigator.navigationOptions = NavigationConfig.navigationOptions
 	
-	function navigator.init(p4)
-		p4.state = {
+	function Navigator.init(p2) --[[ Line: 20 ]]
+		p2.state = {
 			descriptors = {},
 			transitioningDescriptors = {},
-			screenProps = p4.props.screenProps
+			screenProps = p2.props.screenProps
 		}
 	end
 	
-	function navigator.getDerivedStateFromProps(p4, p5)
-		-- upvalues: invariantModule (copy), array (copy), p2 (ref), object (copy)
-		local descriptors = p5.descriptors
-		local transitioningDescriptors = p5.transitioningDescriptors
-		local navigation = p4.navigation
-		local screenProps = p4.screenProps
-		invariantModule(navigation ~= nil, "The navigation prop is missing for this navigator. In react-navigation v3 and v4 you must set up your app container directly. More info: https://reactnavigation.org/docs/en/app-containers.html")
-		local routes = navigation.state.routes
-		invariantModule(type(routes) == "table", "No \"routes\" found in navigation state. Did you try to pass the navigation prop of a React component to a Navigator child? See https://reactnavigation.org/docs/en/custom-navigators.html#navigator-navigation-prop")
+	function Navigator.getDerivedStateFromProps(p2, State) --[[ Line: 32 ]]
+		-- upvalues: InvariantModule (upval), Array (upval), Router (copy), Object (upval)
+		local Descriptors = State.descriptors
+		local TransitioningDescriptors = State.transitioningDescriptors
+		local Navigation = p2.navigation
+		local ScreenProps = p2.screenProps
+		InvariantModule(Navigation ~= nil, "The navigation prop is missing for this navigator. In react-navigation v3 and v4 you must set up your app container directly. More info: https://reactnavigation.org/docs/en/app-containers.html")
+		local Routes = Navigation.state.routes
+		InvariantModule(type(Routes) == "table", "No \"routes\" found in navigation state. Did you try to pass the navigation prop of a React component to a Navigator child? See https://reactnavigation.org/docs/en/custom-navigators.html#navigator-navigation-prop")
 		
 		return {
-			descriptors = array.reduce(routes, function(p6, p7)
-				-- upvalues: descriptors (ref), screenProps (ref), p5 (ref), p2 (copy), navigation (ref)
-				if descriptors and descriptors[p7.key] and (p7 == descriptors[p7.key].state and screenProps == p5.screenProps) then
-					p6[p7.key] = descriptors[p7.key]
+			descriptors = Array.reduce(Routes, function(p3, State1) --[[ Line: 55 ]]
+				-- upvalues: Descriptors (copy), ScreenProps (copy), State (copy), Router (upval), Navigation (copy)
+				if Descriptors and Descriptors[State1.key] and State1 == Descriptors[State1.key].state and ScreenProps == State.screenProps then
+					p3[State1.key] = Descriptors[State1.key]
 					
-					return p6
+					return p3
+				else
+					local ChildNavigation = Navigation.getChildNavigation(State1.key)
+					p3[State1.key] = {
+						key = State1.key,
+						getComponent = function() --[[ Line: 65 ]]
+							-- upvalues: Router (upval), State1 (copy)
+							return Router.getComponentForRouteName(State1.routeName)
+						end,
+						options = Router.getScreenOptions(ChildNavigation, ScreenProps),
+						state = State1,
+						navigation = ChildNavigation
+					}
+					
+					return p3
 				end
-				local childNavigation = navigation.getChildNavigation(p7.key)
-				p6[p7.key] = {
-					key = p7.key,
-					getComponent = function()
-						-- upvalues: p2 (copy), p7 (ref)
-						return p2.getComponentForRouteName(p7.routeName)
-					end,
-					options = p2.getScreenOptions(childNavigation, screenProps),
-					state = p7,
-					navigation = childNavigation
-				}
-				
-				return p6
 			end, {}),
-			transitioningDescriptors = if navigation.state.isTransitioning then object.assign({}, transitioningDescriptors, descriptors, array.reduce(routes, function(p6, p7)
-				-- upvalues: object (copy)
-				p6[p7.key] = object.None
+			transitioningDescriptors = if Navigation.state.isTransitioning then Object.assign({}, TransitioningDescriptors, Descriptors, Array.reduce(Routes, function(Nones, p3) --[[ Line: 92 ]]
+				-- upvalues: Object (upval)
+				Nones[p3.key] = Object.None
 				
-				return p6
+				return Nones
 			end, {})) else {},
-			screenProps = screenProps
+			screenProps = ScreenProps
 		}
 	end
 	
-	function navigator.render(p4)
-		-- upvalues: reactModule (copy), navigationFocusEventsModule (copy), p1 (ref), object (copy), p3 (ref)
-		local navigation = p4.props.navigation
-		local screenProps = p4.state.screenProps
-		local descriptors = p4.state.descriptors
-		local transitioningDescriptors = p4.state.transitioningDescriptors
+	function Navigator.render(p2) --[[ Line: 111 ]]
+		-- upvalues: ReactModule (upval), NavigationFocusEventsModule (upval), p1 (copy), Object (upval), NavigationConfig (copy)
+		local Navigation = p2.props.navigation
+		local Descriptors = p2.state.descriptors
+		local TransitioningDescriptors = p2.state.transitioningDescriptors
 		
-		return reactModule.createElement(reactModule.Fragment, {}, {
-			Events = reactModule.createElement(navigationFocusEventsModule, {
-				navigation = navigation,
-				onEvent = function(p5, p6, p7)
-					-- upvalues: descriptors (ref), transitioningDescriptors (ref)
-					if descriptors[p5] then
-						descriptors[p5].navigation.emit(p6, p7)
+		return ReactModule.createElement(ReactModule.Fragment, {}, {
+			Events = ReactModule.createElement(NavigationFocusEventsModule, {
+				navigation = Navigation,
+				onEvent = function(p3, p4, p5) --[[ Line: 121 ]]
+					-- upvalues: Descriptors (copy), TransitioningDescriptors (copy)
+					if Descriptors[p3] then
+						Descriptors[p3].navigation.emit(p4, p5)
 						
 						return
-					elseif transitioningDescriptors[p5] then
-						transitioningDescriptors[p5].navigation.emit(p6, p7)
+					end
+					if TransitioningDescriptors[p3] then
+						TransitioningDescriptors[p3].navigation.emit(p4, p5)
 					end
 				end
 			}),
-			View = reactModule.createElement(p1, object.assign(table.clone(p4.props), {
-				screenProps = screenProps,
-				navigation = navigation,
-				navigationConfig = p3,
-				descriptors = descriptors
+			View = ReactModule.createElement(p1, Object.assign(table.clone(p2.props), {
+				screenProps = p2.state.screenProps,
+				navigation = Navigation,
+				navigationConfig = NavigationConfig,
+				descriptors = Descriptors
 			}))
 		})
 	end
 	
-	return navigator
+	return Navigator
 end

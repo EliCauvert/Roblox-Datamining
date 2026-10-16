@@ -1,115 +1,116 @@
 ﻿local _ = require(script.Parent.types)
-local studioAskUserToolModule = require(script.Parent.StudioAskUserTool)
-local studioProposePlanToolModule = require(script.Parent.StudioProposePlanTool)
-local subagentTasksModule = require(script.Parent.SubagentTasks)
+local StudioAskUserToolModule = require(script.Parent.StudioAskUserTool)
+local StudioProposePlanToolModule = require(script.Parent.StudioProposePlanTool)
+local SubagentTasksModule = require(script.Parent.SubagentTasks)
 
 return {
-	getAskItemKey = function(p1, p2)
+	getAskItemKey = function(p1, p2): string --[[ Line: 12 ]]
 		return `ask-{p1.toolCallId or p1.question.id}-{p1.question.id}-{p2}`
 	end,
-	getPlanItemKey = function(p1)
+	getPlanItemKey = function(p1): string --[[ Line: 16 ]]
 		return `plan-{p1.toolCallId or p1.title}`
 	end,
-	getSubagentTasksItemKey = function()
+	getSubagentTasksItemKey = function(): string --[[ Line: 20 ]]
 		return "subagent-tasks"
 	end,
-	getSubagentTasksCallOrder = function(p1)
-		-- upvalues: subagentTasksModule (ref)
-		for i, v in p1.activityItems do
-			if v.kind == "tool_call" and v.title == subagentTasksModule.TOOL_NAME then
+	getSubagentTasksCallOrder = function(p1) --[[ Line: 24 ]]
+		-- upvalues: SubagentTasksModule (copy)
+		for i, activityItem in p1.activityItems do
+			if activityItem.kind == "tool_call" and activityItem.title == SubagentTasksModule.TOOL_NAME then
 				return i
 			end
 		end
 		return 0
 	end,
-	sortClientToolItems = function(p2)
-		table.sort(p2, function(p3, p4)
-			return if p3.callOrder == p4.callOrder then p3.key < p4.key else p3.callOrder < p4.callOrder
+	sortClientToolItems = function(List) --[[ Line: 33 ]]
+		table.sort(List, function(A, B): boolean --[[ Line: 34 ]]
+			return if A.callOrder == B.callOrder then A.key < B.key else A.callOrder < B.callOrder
 		end)
 		
-		return p2
+		return List
 	end,
-	makeAskItem = function(p2, p3, p4, p5)
+	makeAskItem = function(AnswerStackPrompt, p2, IsActive, p3) --[[ Line: 43 ]]
 		return {
 			kind = "ask_user",
-			key = `ask-{p2.toolCallId or p2.question.id}-{p2.question.id}-{p3}`,
-			toolCallId = p2.toolCallId,
-			callOrder = (p2.callOrder or p3) * 1000 + p3,
-			isActive = p4,
-			answerStackPrompt = p2,
-			onAnswerSelected = if p4 then p5 else nil
+			key = `ask-{AnswerStackPrompt.toolCallId or AnswerStackPrompt.question.id}-{AnswerStackPrompt.question.id}-{p2}`,
+			toolCallId = AnswerStackPrompt.toolCallId,
+			callOrder = (AnswerStackPrompt.callOrder or p2) * 1000 + p2,
+			isActive = IsActive,
+			answerStackPrompt = AnswerStackPrompt,
+			onAnswerSelected = if IsActive then p3 else nil
 		}
 	end,
-	makePlanItem = function(p2, p3, p4)
+	makePlanItem = function(AskItem, IsActive, p2) --[[ Line: 60 ]]
 		return {
 			kind = "plan",
-			key = `plan-{p2.toolCallId or p2.title}`,
-			toolCallId = p2.toolCallId,
-			callOrder = (p2.callOrder or 0) * 1000,
-			isActive = p3,
-			planProposal = p2,
-			onPlanAccepted = if p3 then p4 else nil
+			key = `plan-{AskItem.toolCallId or AskItem.title}`,
+			toolCallId = AskItem.toolCallId,
+			callOrder = (AskItem.callOrder or 0) * 1000,
+			isActive = IsActive,
+			planProposal = AskItem,
+			onPlanAccepted = if IsActive then p2 else nil
 		}
 	end,
-	makeSubagentTasksItem = function(p2, p3, p4)
+	makeSubagentTasksItem = function(SubagentTaskState, p2: number, IsActive) --[[ Line: 72 ]]
 		return {
 			kind = "subagent_tasks",
 			toolCallId = nil,
 			key = "subagent-tasks",
-			callOrder = p3 * 1000,
-			isActive = p4,
-			subagentTaskState = p2
+			callOrder = p2 * 1000,
+			isActive = IsActive,
+			subagentTaskState = SubagentTaskState
 		}
 	end,
-	getCompletedItemsFromTurnState = function(p2)
-		-- upvalues: studioAskUserToolModule (ref), studioProposePlanToolModule (ref), subagentTasksModule (ref)
-		local t = {}
+	getCompletedItemsFromTurnState = function(p2) --[[ Line: 83 ]]
+		-- upvalues: StudioAskUserToolModule (copy), StudioProposePlanToolModule (copy), SubagentTasksModule (copy)
+		local List = {}
 		
-		for i, v in studioAskUserToolModule.getAnsweredPromptsFromTurnState(p2) do
-			table.insert(t, {
+		for i, AnswerStackPrompt in StudioAskUserToolModule.getAnsweredPromptsFromTurnState(p2) do
+			table.insert(List, {
 				kind = "ask_user",
 				isActive = false,
 				onAnswerSelected = nil,
-				key = `ask-{v.toolCallId or v.question.id}-{v.question.id}-{i}`,
-				toolCallId = v.toolCallId,
-				callOrder = (v.callOrder or i) * 1000 + i,
-				answerStackPrompt = v
+				key = `ask-{AnswerStackPrompt.toolCallId or AnswerStackPrompt.question.id}-{AnswerStackPrompt.question.id}-{i}`,
+				toolCallId = AnswerStackPrompt.toolCallId,
+				callOrder = (AnswerStackPrompt.callOrder or i) * 1000 + i,
+				answerStackPrompt = AnswerStackPrompt
 			})
 		end
-		for i_1, v_1 in studioProposePlanToolModule.getCompletedPlansFromTurnState(p2) do
-			table.insert(t, {
+		for _, AskItem in StudioProposePlanToolModule.getCompletedPlansFromTurnState(p2) do
+			table.insert(List, {
 				kind = "plan",
 				isActive = false,
 				onPlanAccepted = nil,
-				key = `plan-{v_1.toolCallId or v_1.title}`,
-				toolCallId = v_1.toolCallId,
-				callOrder = (v_1.callOrder or 0) * 1000,
-				planProposal = v_1
+				key = `plan-{AskItem.toolCallId or AskItem.title}`,
+				toolCallId = AskItem.toolCallId,
+				callOrder = (AskItem.callOrder or 0) * 1000,
+				planProposal = AskItem
 			})
 		end
-		local var1 = subagentTasksModule.fromTurnState(p2)
+		local FromTurnStateResult = SubagentTasksModule.fromTurnState(p2)
 		
-		if var1 ~= nil then
-			local var2
-			for i_2, v_2 in p2.activityItems do
-				if v_2.kind == "tool_call" and v_2.title == subagentTasksModule.TOOL_NAME then
-					var2 = i_2
-					table.insert(t, {
-						kind = "subagent_tasks",
-						toolCallId = nil,
-						isActive = false,
-						key = "subagent-tasks",
-						callOrder = var2 * 1000,
-						subagentTaskState = var1
-					})
+		if FromTurnStateResult ~= nil then
+			local v1 = 0
+			
+			for i1, activityItem in p2.activityItems do
+				if activityItem.kind == "tool_call" and activityItem.title == SubagentTasksModule.TOOL_NAME then
+					v1 = i1
+					break
 				end
 			end
-			var2 = 0
+			table.insert(List, {
+				kind = "subagent_tasks",
+				toolCallId = nil,
+				isActive = false,
+				key = "subagent-tasks",
+				callOrder = v1 * 1000,
+				subagentTaskState = FromTurnStateResult
+			})
 		end
-		table.sort(t, function(p3, p4)
-			return if p3.callOrder == p4.callOrder then p3.key < p4.key else p3.callOrder < p4.callOrder
+		table.sort(List, function(A, B): boolean --[[ Line: 34 ]]
+			return if A.callOrder == B.callOrder then A.key < B.key else A.callOrder < B.callOrder
 		end)
 		
-		return t
+		return List
 	end
 }

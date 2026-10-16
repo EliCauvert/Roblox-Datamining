@@ -1,62 +1,54 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local coreGuiService = game:GetService("CoreGui")
-local roactModule = require(corePackagesService.Packages.Roact)
-local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
-local controllerBar = require(corePackagesService.Packages.UIBlox).App.Bar.ControllerBar
-local controllerShortcutKeycodesModule = require(script.Parent.Common.ControllerShortcutKeycodes)
-local favorite = controllerShortcutKeycodesModule.Favorite
-local tryOn = controllerShortcutKeycodesModule.TryOn
-local tModule = require(corePackagesService.Packages.t)
-local _ = {
-	back = "CoreScripts.TopBar.Back",
-	confirm = "InGame.InspectMenu.Action.Confirm",
-	favorite = "InGame.InspectMenu.Action.Favorite",
-	unfavorite = "InGame.InspectMenu.Action.Unfavorite",
-	tryOn = "InGame.InspectMenu.Action.TryOn",
-	takeOff = "InGame.InspectMenu.Action.TakeOff"
-}
-local inspectAndBuyControllerBar = roactModule.PureComponent:extend("InspectAndBuyControllerBar")
-inspectAndBuyControllerBar.validateProps = tModule.strictInterface({
-	showTryOn = tModule.boolean,
-	showFavorite = tModule.boolean,
-	isFavorited = tModule.boolean
+﻿local CorePackages = game:GetService("CorePackages")
+local CoreGui = game:GetService("CoreGui")
+local RoactModule = require(CorePackages.Packages.Roact)
+local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
+local ControllerBar = require(CorePackages.Packages.UIBlox).App.Bar.ControllerBar
+local ControllerShortcutKeycodesModule = require(script.Parent.Common.ControllerShortcutKeycodes)
+local Favorite = ControllerShortcutKeycodesModule.Favorite
+local TryOn = ControllerShortcutKeycodesModule.TryOn
+local TModule = require(CorePackages.Packages.t)
+local InspectAndBuyControllerBar = RoactModule.PureComponent:extend("InspectAndBuyControllerBar")
+InspectAndBuyControllerBar.validateProps = TModule.strictInterface({
+	showTryOn = TModule.boolean,
+	showFavorite = TModule.boolean,
+	isFavorited = TModule.boolean
 })
 
-function inspectAndBuyControllerBar.render(p1)
-	-- upvalues: robloxTranslatorModule (ref), tryOn (ref), favorite (ref), roactModule (ref), coreGuiService (ref), controllerBar (ref)
-	local list = {
+function InspectAndBuyControllerBar.render(p1) --[[ Line: 31 ]]
+	-- upvalues: RobloxTranslatorModule (copy), TryOn (copy), Favorite (copy), RoactModule (copy), CoreGui (copy), ControllerBar (copy)
+	local List = {
 		{
-			text = robloxTranslatorModule:FormatByKey("InGame.InspectMenu.Action.Confirm"),
+			text = RobloxTranslatorModule:FormatByKey("InGame.InspectMenu.Action.Confirm"),
 			keyCode = Enum.KeyCode.ButtonA
 		}
 	}
 	
 	if p1.props.showTryOn then
-		table.insert(list, 1, {
-			text = p1.props.tryingOn and robloxTranslatorModule:FormatByKey("InGame.InspectMenu.Action.TakeOff") or robloxTranslatorModule:FormatByKey("InGame.InspectMenu.Action.TryOn"),
-			keyCode = tryOn
+		table.insert(List, 1, {
+			text = p1.props.tryingOn and RobloxTranslatorModule:FormatByKey("InGame.InspectMenu.Action.TakeOff") or RobloxTranslatorModule:FormatByKey("InGame.InspectMenu.Action.TryOn"),
+			keyCode = TryOn
 		})
 	end
 	if p1.props.showFavorite then
-		table.insert(list, 1, {
-			text = p1.props.isFavorited and robloxTranslatorModule:FormatByKey("InGame.InspectMenu.Action.Unfavorite") or robloxTranslatorModule:FormatByKey("InGame.InspectMenu.Action.Favorite"),
-			keyCode = favorite
+		table.insert(List, 1, {
+			text = p1.props.isFavorited and RobloxTranslatorModule:FormatByKey("InGame.InspectMenu.Action.Unfavorite") or RobloxTranslatorModule:FormatByKey("InGame.InspectMenu.Action.Favorite"),
+			keyCode = Favorite
 		})
 	end
-	return roactModule.createElement(roactModule.Portal, { target = coreGuiService }, {
-		InspectAndBuyControllerBar = roactModule.createElement("ScreenGui", {
+	return RoactModule.createElement(RoactModule.Portal, { target = CoreGui }, {
+		InspectAndBuyControllerBar = RoactModule.createElement("ScreenGui", {
 			DisplayOrder = 1,
 			ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 		}, {
-			ControllerBar = roactModule.createElement(controllerBar, {
+			ControllerBar = RoactModule.createElement(ControllerBar, {
 				leftHint = {
-					text = robloxTranslatorModule:FormatByKey("CoreScripts.TopBar.Back"),
+					text = RobloxTranslatorModule:FormatByKey("CoreScripts.TopBar.Back"),
 					keyCode = Enum.KeyCode.ButtonB
 				},
-				rightHints = list
+				rightHints = List
 			})
 		})
 	})
 end
 
-return inspectAndBuyControllerBar
+return InspectAndBuyControllerBar

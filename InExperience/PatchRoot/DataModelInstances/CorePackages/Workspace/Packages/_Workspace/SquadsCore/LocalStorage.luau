@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.LocalStorage.LocalStorage)
+﻿return (require(script.Parent.Parent.Parent._Index.LocalStorage.LocalStorage))

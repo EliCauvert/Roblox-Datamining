@@ -1,185 +1,184 @@
 ﻿local _ = game:GetService("CoreGui"):WaitForChild("RobloxGui")
-local userInputService = game:GetService("UserInputService")
-local runService = game:GetService("RunService")
-local corePackagesService = game:GetService("CorePackages")
-local create = require(corePackagesService.Workspace.Packages.AppCommonLib).Create
-local panel3D = require(corePackagesService.Workspace.Packages.VrCommon).Panel3D
+local UserInputService = game:GetService("UserInputService")
+local RunService = game:GetService("RunService")
+local CorePackages = game:GetService("CorePackages")
+local Panel3D = require(CorePackages.Workspace.Packages.VrCommon).Panel3D
 local _ = Color3.new(0.2, 0.2, 0.2)
 local _ = Enum.FontSize.Size36
 local _ = Color3.new(1, 1, 1)
-local var1 = CFrame.new(0, 0, -7) * CFrame.Angles(0, 3.14159265359, 0)
-local _ = create("ImageLabel")({
+local LocalCF = CFrame.new(0, 0, -7) * CFrame.Angles(0, 3.141592653589793, 0)
+local _ = require(CorePackages.Workspace.Packages.AppCommonLib).Create("ImageLabel")({
 	Name = "EmptySelectionImage",
 	Image = "",
 	BackgroundTransparency = 1,
 	ImageTransparency = 1
 })
-local dialog = panel3D.Get("Dialog")
-dialog:SetType(panel3D.Type.Fixed)
-dialog.localCF = var1
-dialog:SetCanFade(true)
-local var2 = 0
-local t = {}
-local var3 = false
-local var4 = 0
+local Dialog = Panel3D.Get("Dialog")
+Dialog:SetType(Panel3D.Type.Fixed)
+Dialog.localCF = LocalCF
+Dialog:SetCanFade(true)
+local v1 = 0
+local T = {}
+local Flag = false
+local v2 = 0
 
-local function _(p1)
-	-- upvalues: var2 (write), userInputService (ref), dialog (ref), var1 (ref)
-	var2 = p1
-	dialog.localCF = CFrame.new(userInputService:GetUserCFrame(Enum.UserCFrame.Head).p) * CFrame.Angles(0, p1, 0) * var1
+local function _(p1) --[[ Line: 46 | Named "positionDialogPanel" ]]
+	-- upvalues: v1 (ref), UserInputService (copy), Dialog (copy), LocalCF (copy)
+	v1 = p1
+	Dialog.localCF = CFrame.new(UserInputService:GetUserCFrame(Enum.UserCFrame.Head).p) * CFrame.Angles(0, p1, 0) * LocalCF
 end
 
-function dialog.CalculateTransparency(_)
-	-- upvalues: userInputService (ref), var4 (write), var2 (write), var3 (write)
-	local headUserCFrame = userInputService:GetUserCFrame(Enum.UserCFrame.Head)
-	local var5 = headUserCFrame.lookVector * Vector3.new(1, 0, 1)
-	local vector3 = Vector3.new(math.cos(var4 + var2 + 1.570796326795), 0, -math.sin(var4 + var2 + 1.570796326795))
+function Dialog:CalculateTransparency(): number --[[ Line: 53 ]]
+	-- upvalues: UserInputService (copy), v2 (ref), v1 (ref), Flag (ref)
+	local UserCFrame = UserInputService:GetUserCFrame(Enum.UserCFrame.Head)
+	local ScaledLookVector = UserCFrame.lookVector * vector.create(1, 0, 1)
+	local _Vector3 = Vector3.new(math.cos(v2 + v1 + 1.5707963267948966), 0, -math.sin(v2 + v1 + 1.5707963267948966))
 	
-	if math.abs(math.asin(headUserCFrame.lookVector.Y)) > 0.767944870878 then
-		var3 = true
+	if math.abs((math.asin(UserCFrame.lookVector.Y))) > 0.767944870877505 then
+		Flag = true
 	end
-	return math.min(math.max(0, (math.acos(var5:Dot(vector3)) - 0.654498469498) / 0.11344640138), 1)
+	return (math.min(math.max(0, (math.acos((ScaledLookVector:Dot(_Vector3))) - 0.6544984694978736) / 0.11344640137963136), 1))
 end
 
-local function updatePanelPosition()
-	-- upvalues: userInputService (ref), var4 (write), var3 (write), var2 (write), dialog (ref), var1 (ref)
-	local var5 = userInputService:GetUserCFrame(Enum.UserCFrame.Head).lookVector * Vector3.new(1, 0, 1)
-	local var6 = (math.atan2(-var5.Z, var5.X) - 1.570796326795) % 6.28318530718
-	local var7 = var4 + math.floor(var6 / 1.570796326795 + 0.5) * 1.570796326795
+local function updatePanelPosition() --[[ Line: 69 ]]
+	-- upvalues: UserInputService (copy), v2 (ref), Flag (ref), v1 (ref), Dialog (copy), LocalCF (copy)
+	local ScaledLookVector = UserInputService:GetUserCFrame(Enum.UserCFrame.Head).lookVector * vector.create(1, 0, 1)
+	local AngleRemainder = (math.atan2(-ScaledLookVector.Z, ScaledLookVector.X) - 1.5707963267948966) % 6.283185307179586
+	local NewFloored = v2 + math.floor(AngleRemainder / 1.5707963267948966 + 0.5) * 1.5707963267948966
 	
-	if var3 then
-		var3 = false
-		var4 = var6
+	if Flag then
+		Flag = false
+		v2 = AngleRemainder
 	end
-	var2 = var7
-	dialog.localCF = CFrame.new(userInputService:GetUserCFrame(Enum.UserCFrame.Head).p) * CFrame.Angles(0, var7, 0) * var1
+	v1 = NewFloored
+	Dialog.localCF = CFrame.new(UserInputService:GetUserCFrame(Enum.UserCFrame.Head).p) * CFrame.Angles(0, NewFloored, 0) * LocalCF
 end
 
-function dialogPanelRenderUpdate()
-	-- upvalues: dialog (ref), var3 (write), updatePanelPosition (ref), t (write)
-	if dialog.transparency == 1 or var3 then
+function dialogPanelRenderUpdate() --[[ Line: 84 ]]
+	-- upvalues: Dialog (copy), Flag (ref), updatePanelPosition (copy), T (ref)
+	if Dialog.transparency == 1 or Flag then
 		updatePanelPosition()
 	end
-	local var5 = 1 - dialog.transparency
+	local v3 = 1 - Dialog.transparency
 	
-	for i, v in pairs(t) do
-		local var6 = 1 - v * var5
+	for Object, value in pairs(T) do
+		local BackgroundTransparency = 1 - value * v3
 		
-		if i:IsA("TextLabel") or i:IsA("TextButton") then
-			i.TextTransparency = var6
-		elseif i:IsA("ImageLabel") or i:IsA("ImageButton") then
-			i.ImageTransparency = var6
-		elseif i:IsA("Frame") then
-			i.BackgroundTransparency = var6
+		if Object:IsA("TextLabel") or Object:IsA("TextButton") then
+			Object.TextTransparency = BackgroundTransparency
+		elseif Object:IsA("ImageLabel") or Object:IsA("ImageButton") then
+			Object.ImageTransparency = BackgroundTransparency
+		elseif Object:IsA("Frame") then
+			Object.BackgroundTransparency = BackgroundTransparency
 		end
 	end
 end
 
-local t_1 = {}
-local var7 = nil
-local var8 = nil
+local List = {}
+local DescendantAddedConnection = nil
+local v4 = nil
 
-local function updatePanel()
-	-- upvalues: t_1 (ref), var8 (write), dialog (ref), t (write), var7 (write), var3 (write), updatePanelPosition (ref)
-	local var9 = t_1[1]
+local function updatePanel() --[[ Line: 107 ]]
+	-- upvalues: List (copy), v4 (ref), Dialog (copy), T (ref), DescendantAddedConnection (ref), Flag (ref), updatePanelPosition (copy)
+	local Entry = List[1]
 	
-	if var8 and var8.content then
-		var8.content.Parent = nil
+	if v4 and v4.content then
+		v4.content.Parent = nil
 	end
-	if var9 and var9.content then
-		var9.content.Parent = dialog:GetGUI()
-		var8 = var9
-		local absoluteSize = var9.content.AbsoluteSize
-		dialog:ResizePixels(absoluteSize.X, absoluteSize.Y, 100)
-		var3 = true
+	if Entry and Entry.content then
+		Entry.content.Parent = Dialog:GetGUI()
+		v4 = Entry
+		local AbsoluteSize = Entry.content.AbsoluteSize
+		Dialog:ResizePixels(AbsoluteSize.X, AbsoluteSize.Y, 100)
+		Flag = true
 		updatePanelPosition()
-		dialog:SetVisible(true)
-		t = {}
+		Dialog:SetVisible(true)
+		T = {}
 		
-		local function search(p1)
-			-- upvalues: t (copy), search (ref)
-			if p1:IsA("ImageLabel") or p1:IsA("ImageButton") then
-				t[p1] = 1 - p1.ImageTransparency
-			elseif p1:IsA("TextLabel") or p1:IsA("TextButton") then
-				t[p1] = 1 - p1.TextTransparency
-			elseif p1:IsA("Frame") then
-				t[p1] = 1 - p1.BackgroundTransparency
+		local function search(Object) --[[ Line: 131 ]]
+			-- upvalues: T (upval), search (copy)
+			if Object:IsA("ImageLabel") or Object:IsA("ImageButton") then
+				T[Object] = 1 - Object.ImageTransparency
+			elseif Object:IsA("TextLabel") or Object:IsA("TextButton") then
+				T[Object] = 1 - Object.TextTransparency
+			elseif Object:IsA("Frame") then
+				T[Object] = 1 - Object.BackgroundTransparency
 			end
-			for i, v in pairs(p1:GetChildren()) do
-				search(v)
+			for _, child in pairs(Object:GetChildren()) do
+				search(child)
 			end
 		end
 		
-		search(dialog:GetGUI())
+		search(Dialog:GetGUI())
 		
-		if var7 then
-			var7:disconnect()
-			var7 = nil
+		if DescendantAddedConnection then
+			DescendantAddedConnection:disconnect()
+			DescendantAddedConnection = nil
 		end
-		var7 = dialog:GetGUI().DescendantAdded:connect(function(p2)
-			-- upvalues: search (ref)
-			search(p2)
+		DescendantAddedConnection = Dialog:GetGUI().DescendantAdded:connect(function(Descendant) --[[ Line: 148 ]]
+			-- upvalues: search (copy)
+			search(Descendant)
 		end)
 	else
-		dialog:SetVisible(false)
-		t = {}
+		Dialog:SetVisible(false)
+		T = {}
 		
-		if var7 then
-			var7:disconnect()
-			var7 = nil
+		if DescendantAddedConnection then
+			DescendantAddedConnection:disconnect()
+			DescendantAddedConnection = nil
 			
 			return
 		end
 	end
 end
 
-local t_2 = {}
-t_2.__index = t_2
+local DialogModule = {}
+DialogModule.__index = DialogModule
 
-function t_2.new(p1)
-	-- upvalues: t_2 (ref)
-	local tbl = setmetatable({}, t_2)
-	tbl.content = p1
+function DialogModule.new(Content) --[[ Line: 160 ]]
+	-- upvalues: DialogModule (copy)
+	local self = setmetatable({}, DialogModule)
+	self.content = Content
 	
-	return tbl
+	return self
 end
 
-function t_2:SetContent(p1)
-	if not p1 and self.content then
+function DialogModule:SetContent(Content) --[[ Line: 166 ]]
+	if not Content and self.content then
 		self.content.Parent = nil
 	end
-	self.content = p1
+	self.content = Content
 end
 
-local var10 = false
+local Flag1 = false
 
-function t_2.Show(p1, p2)
-	-- upvalues: var10 (write), runService (ref), t_1 (ref), updatePanel (ref)
-	if not var10 then
-		var10 = true
-		runService:BindToRenderStep("DialogPanel", Enum.RenderPriority.First.Value, dialogPanelRenderUpdate)
+function DialogModule.Show(p1, p2) --[[ Line: 174 ]]
+	-- upvalues: Flag1 (ref), RunService (copy), List (copy), updatePanel (copy)
+	if not Flag1 then
+		Flag1 = true
+		RunService:BindToRenderStep("DialogPanel", Enum.RenderPriority.First.Value, dialogPanelRenderUpdate)
 	end
 	if p2 then
-		table.insert(t_1, 1, p1)
+		table.insert(List, 1, p1)
 	else
-		table.insert(t_1, p1)
+		table.insert(List, p1)
 	end
 	updatePanel()
 end
 
-function t_2.Close(p1)
-	-- upvalues: t_1 (ref), var10 (write), runService (ref), updatePanel (ref)
-	for i, v in pairs(t_1) do
-		if v == p1 then
-			table.remove(t_1, i)
+function DialogModule.Close(p1) --[[ Line: 187 ]]
+	-- upvalues: List (copy), Flag1 (ref), RunService (copy), updatePanel (copy)
+	for i, value in pairs(List) do
+		if value == p1 then
+			table.remove(List, i)
 			break
 		end
 	end
-	if var10 and #t_1 == 0 then
-		var10 = false
-		runService:UnbindFromRenderStep("DialogPanel")
+	if Flag1 and #List == 0 then
+		Flag1 = false
+		RunService:UnbindFromRenderStep("DialogPanel")
 	end
 	updatePanel()
 end
 
-return t_2
+return DialogModule

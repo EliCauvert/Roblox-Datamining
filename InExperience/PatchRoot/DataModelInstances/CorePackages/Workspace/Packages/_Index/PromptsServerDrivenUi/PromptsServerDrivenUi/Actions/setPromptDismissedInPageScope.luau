@@ -1,10 +1,10 @@
-﻿local getSduiClientPageScope = require(script:FindFirstAncestor("PromptsServerDrivenUi").Parent.SduiCoreSystem).getSduiClientPageScope
+﻿local GetSduiClientPageScopeFunction = require(script:FindFirstAncestor("PromptsServerDrivenUi").Parent.SduiCoreSystem).getSduiClientPageScope
 
-return function(value, p1)
-	-- upvalues: getSduiClientPageScope (ref)
-	local var1 = getSduiClientPageScope(value)
-	local dismissedPromptTypes = var1.get("dismissedPromptTypes")
-	local var2 = if typeof(dismissedPromptTypes) == "table" then table.clone(dismissedPromptTypes) else {}
-	var2[p1] = true
-	var1.set("dismissedPromptTypes", var2)
+return function(p1, Key) --[[ Line: 8 | Named "setPromptDismissedInPageScope" ]]
+	-- upvalues: GetSduiClientPageScopeFunction (copy)
+	local SduiClientPageScope = GetSduiClientPageScopeFunction(p1)
+	local DismissedPromptTypes = SduiClientPageScope.get("dismissedPromptTypes")
+	local Copy = if typeof(DismissedPromptTypes) == "table" then table.clone(DismissedPromptTypes) else {}
+	Copy[Key] = true
+	SduiClientPageScope.set("dismissedPromptTypes", Copy)
 end

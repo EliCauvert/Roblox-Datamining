@@ -1,30 +1,27 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
-local reactModule = require(parent.React)
-local reactOtterModule = require(parent.ReactOtter)
-local signalsModule = require(parent.Signals)
-local getImmersiveChromeStoreModule = require(moments.Stores.GetImmersiveChromeStore)
-local fFlagMomentsImmersiveChromeModule = require(moments.Flags.FFlagMomentsImmersiveChrome)
-local t = {
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
+local ReactModule = require(Parent.React)
+local ReactOtterModule = require(Parent.ReactOtter)
+local SignalsModule = require(Parent.Signals)
+local GetImmersiveChromeStoreModule = require(Moments.Stores.GetImmersiveChromeStore)
+local config = {
 	dampingRatio = 1,
 	frequency = 3,
 	restingVelocityLimit = 0.1,
 	restingPositionLimit = 0.1
 }
 
-return function()
-	-- upvalues: fFlagMomentsImmersiveChromeModule (ref), getImmersiveChromeStoreModule (ref), reactOtterModule (ref), reactModule (ref), signalsModule (ref), t (ref)
-	local var1 = getImmersiveChromeStoreModule(false)
-	local var2, var3 = reactOtterModule.useAnimatedBinding(1)
-	reactModule.useEffect(function()
-		-- upvalues: fFlagMomentsImmersiveChromeModule (ref), signalsModule (copy), var1 (ref), var3 (ref), reactOtterModule (copy), t (copy)
-		if fFlagMomentsImmersiveChromeModule then
-			return signalsModule.createEffect(function(p1)
-				-- upvalues: var1 (copy), var3 (copy), reactOtterModule (copy), t (copy)
-				var3(reactOtterModule.spring(if var1.getChromeVisible(p1) then 1 else 0, t))
-			end)
-		end
-	end, { fFlagMomentsImmersiveChromeModule, var1 })
+return function() --[[ Line: 29 | Named "useChromeRatio" ]]
+	-- upvalues: GetImmersiveChromeStoreModule (copy), ReactOtterModule (copy), ReactModule (copy), SignalsModule (copy), config (copy)
+	local ImmersiveChromeStoreModule = GetImmersiveChromeStoreModule(false)
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(1)
+	ReactModule.useEffect(function() --[[ Line: 34 ]]
+		-- upvalues: SignalsModule (upval), ImmersiveChromeStoreModule (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), config (upval)
+		return (SignalsModule.createEffect(function(p1) --[[ Line: 35 ]]
+			-- upvalues: ImmersiveChromeStoreModule (upval), UseAnimatedBindingResult2 (upval), ReactOtterModule (upval), config (upval)
+			UseAnimatedBindingResult2((ReactOtterModule.spring(if ImmersiveChromeStoreModule.getChromeVisible(p1) then 1 else 0, config)))
+		end))
+	end, { ImmersiveChromeStoreModule })
 	
-	return var2
+	return UseAnimatedBindingResult
 end

@@ -1,8 +1,8 @@
 ﻿game:DefineFastFlag("EnableShopGiftCardsURL", false)
 
-return function(p1)
-	local function _()
-		-- upvalues: p1 (ref)
+return function(p1) --[[ Line: 3 ]]
+	local function _(): number --[[ Line: 4 | Named "isQQ" ]]
+		-- upvalues: p1 (copy)
 		return string.find(p1.fromString("corp:")(), "qq.com")
 	end
 	
@@ -19,22 +19,26 @@ return function(p1)
 		develop = p1.fromString("www:develop"),
 		creatorHub = p1.fromString("create:"),
 		blog = p1.fromString("blog:"),
-		giftCards = function(p2)
-			-- upvalues: p1 (ref)
+		giftCards = function(p2) --[[ Line: 21 ]]
+			-- upvalues: p1 (copy)
 			return p1.fromString(if game:GetFastFlag("EnableShopGiftCardsURL") then "www:shopgiftcards?ref={source}" else "www:giftcards?ref={source}")({ source = p2 or "" })
 		end,
-		giftCardsWithRedeem = function(p2, p3)
-			-- upvalues: p1 (ref)
-			return if p3 and p3 ~= "" then p1.fromString("www:giftcards-" .. p3 .. "?ref={source}")({ source = p2 }) else p1.fromString("www:shopgiftcards?ref={source}")({ source = p2 })
+		giftCardsWithRedeem = function(Source, Text) --[[ Line: 29 ]]
+			-- upvalues: p1 (copy)
+			return if Text and Text ~= "" then p1.fromString("www:giftcards-" .. Text .. "?ref={source}")({ source = Source }) else p1.fromString("www:shopgiftcards?ref={source}")({ source = Source })
 		end,
 		redeem = p1.fromString("www:redeem"),
 		amazonStore = p1.fromString("https://www.amazon.com/roblox"),
 		help = p1.fromString(if string.find(p1.fromString("corp:")(), "qq.com") then "corp:faq" else "www:help"),
 		safetyDashboard = {
 			main = p1.fromString("www:safety-dashboard?t_source={source|app}"),
+			reportInbox = function(p2): string --[[ Line: 42 ]]
+				-- upvalues: p1 (copy)
+				return p1.fromString("www:safety-dashboard?t_source={source|app}")(p2) .. "#/report-inbox"
+			end,
 			violation = p1.fromString("www:safety-dashboard?vid={id}&t_source={source|app}"),
-			violations = function(p2)
-				-- upvalues: p1 (ref)
+			violations = function(p2): string --[[ Line: 46 ]]
+				-- upvalues: p1 (copy)
 				return p1.fromString("www:safety-dashboard?t_source={source|app}")(p2) .. "#/violations"
 			end
 		},
@@ -51,24 +55,24 @@ return function(p1)
 			sendVerificationEmail = p1.fromString("accountSettings:v1/email/verify")
 		},
 		about = {
-			us = function(p2)
-				-- upvalues: p1 (ref)
+			us = function(p2) --[[ Line: 67 ]]
+				-- upvalues: p1 (copy)
 				return p1.fromString("www:info/about-us?locale={localeCode}")({ localeCode = p2 or "" })
 			end,
-			careers = function(p2)
-				-- upvalues: p1 (ref)
+			careers = function(p2) --[[ Line: 71 ]]
+				-- upvalues: p1 (copy)
 				return if string.find(p1.fromString("corp:")(), "qq.com") then p1.fromString("corp:careers.html") else p1.fromString("www:info/jobs?locale={localeCode}")({ localeCode = p2 or "" })
 			end,
-			parents = function(p2)
-				-- upvalues: p1 (ref)
+			parents = function(p2) --[[ Line: 79 ]]
+				-- upvalues: p1 (copy)
 				return p1.fromString("www:info/parents?locale={localeCode}")({ localeCode = p2 or "" })
 			end,
-			terms = function(p2)
-				-- upvalues: p1 (ref)
+			terms = function(p2) --[[ Line: 83 ]]
+				-- upvalues: p1 (copy)
 				return if string.find(p1.fromString("corp:")(), "qq.com") and p2.useGameQQUrls then p1.fromString("https://game.qq.com/contract.shtml")() else p1.fromString("www:info/terms")()
 			end,
-			privacy = function(p2)
-				-- upvalues: p1 (ref)
+			privacy = function(p2) --[[ Line: 90 ]]
+				-- upvalues: p1 (copy)
 				return if string.find(p1.fromString("corp:")(), "qq.com") and p2.useGameQQUrls then p1.fromString("https://game.qq.com/privacy_guide.shtml")() else p1.fromString("www:info/privacy")()
 			end,
 			guidelines = p1.fromString("www:info/community-guidelines"),

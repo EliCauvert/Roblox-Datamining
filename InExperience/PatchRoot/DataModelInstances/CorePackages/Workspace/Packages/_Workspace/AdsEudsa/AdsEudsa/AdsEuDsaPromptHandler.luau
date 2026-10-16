@@ -1,75 +1,75 @@
-﻿local adService = game:GetService("AdService")
-local coreGuiService = game:GetService("CoreGui")
-local guiService = game:GetService("GuiService")
-local parent = script.Parent.Parent
-local roactModule = require(parent.Roact)
-local colorMode = require(parent.Foundation).Enums.ColorMode
-local UIBloxModule = require(parent.UIBlox)
-local adsEuDsaPromptUIModule = require(script.Parent.AdsEuDsaPromptUI)
-local robloxTranslatorModule = require(parent.RobloxTranslator)
+﻿local AdService = game:GetService("AdService")
+local CoreGui = game:GetService("CoreGui")
+local GuiService = game:GetService("GuiService")
+local Parent = script.Parent.Parent
+local RoactModule = require(Parent.Roact)
+local ColorMode = require(Parent.Foundation).Enums.ColorMode
+local UIBloxModule = require(Parent.UIBlox)
+local AdsEuDsaPromptUIModule = require(script.Parent.AdsEuDsaPromptUI)
+local RobloxTranslatorModule = require(Parent.RobloxTranslator)
 
-local function getBodyText(p1, p2)
-	-- upvalues: robloxTranslatorModule (ref)
-	return if not (p1 ~= "" and p2 == "") then if p1 == "" or p2 == "" then robloxTranslatorModule:FormatByKey("CoreScripts.Ads.Label.InExperienceDisclosureStatic") else robloxTranslatorModule:FormatByKey("CoreScripts.Ads.Label.InExperienceDisclosureDynamicWithPayer", { AdvertiserName = p1, PayerName = p2 }) else robloxTranslatorModule:FormatByKey("CoreScripts.Ads.Label.InExperienceDisclosureDynamic", { AdvertiserName = p1 })
+local function getBodyText(AdvertiserName, PayerName) --[[ Line: 19 ]]
+	-- upvalues: RobloxTranslatorModule (copy)
+	return if AdvertiserName == "" or PayerName ~= "" then if AdvertiserName == "" or PayerName == "" then RobloxTranslatorModule:FormatByKey("CoreScripts.Ads.Label.InExperienceDisclosureStatic") else RobloxTranslatorModule:FormatByKey("CoreScripts.Ads.Label.InExperienceDisclosureDynamicWithPayer", { AdvertiserName = AdvertiserName, PayerName = PayerName }) else RobloxTranslatorModule:FormatByKey("CoreScripts.Ads.Label.InExperienceDisclosureDynamic", { AdvertiserName = AdvertiserName })
 end
 
-local adsEuDsaPromptHandler = roactModule.PureComponent:extend("AdsEuDsaPromptHandler")
+local AdsEuDsaPromptHandler = RoactModule.PureComponent:extend("AdsEuDsaPromptHandler")
 
-function adsEuDsaPromptHandler.init(p1)
-	-- upvalues: adService (ref), getBodyText (ref)
+function AdsEuDsaPromptHandler.init(p1) --[[ Line: 36 ]]
+	-- upvalues: AdService (copy), getBodyText (copy)
 	p1:setState({ enabled = false })
 	p1.savedSelectedCoreObject = nil
 	p1:setState({ bodyText = "" })
-	adService.ShowDynamicEudsaDisclosure:Connect(function(p2, p3)
-		-- upvalues: p1 (ref), getBodyText (copy)
-		p1:setState({ bodyText = getBodyText(p2, p3) })
+	AdService.ShowDynamicEudsaDisclosure:Connect(function(AdvertiserName, PayerName) --[[ Line: 46 ]]
+		-- upvalues: p1 (copy), getBodyText (upval)
+		p1:setState({ bodyText = getBodyText(AdvertiserName, PayerName) })
 		p1:showPrompt()
 	end)
 end
 
-function adsEuDsaPromptHandler.saveSelectedObject(p1)
-	-- upvalues: guiService (ref)
-	p1.savedSelectedCoreObject = guiService.SelectedCoreObject
-	guiService.SelectedCoreObject = nil
+function AdsEuDsaPromptHandler.saveSelectedObject(p1) --[[ Line: 54 ]]
+	-- upvalues: GuiService (copy)
+	p1.savedSelectedCoreObject = GuiService.SelectedCoreObject
+	GuiService.SelectedCoreObject = nil
 end
 
-function adsEuDsaPromptHandler.restoreSelectedObject(p1)
-	-- upvalues: coreGuiService (ref), guiService (ref)
-	if p1.savedSelectedCoreObject == nil or p1.savedSelectedCoreObject:IsDescendantOf(coreGuiService) then
-		guiService.SelectedCoreObject = p1.savedSelectedCoreObject
+function AdsEuDsaPromptHandler.restoreSelectedObject(p1) --[[ Line: 59 ]]
+	-- upvalues: CoreGui (copy), GuiService (copy)
+	if p1.savedSelectedCoreObject == nil or p1.savedSelectedCoreObject:IsDescendantOf(CoreGui) then
+		GuiService.SelectedCoreObject = p1.savedSelectedCoreObject
 	end
 end
 
-function adsEuDsaPromptHandler.showPrompt(p1)
+function AdsEuDsaPromptHandler.showPrompt(p1) --[[ Line: 66 ]]
 	p1:saveSelectedObject()
 	p1:setState({ enabled = true })
 end
 
-function adsEuDsaPromptHandler.hidePrompt(p1)
-	-- upvalues: adService (ref)
+function AdsEuDsaPromptHandler.hidePrompt(p1) --[[ Line: 73 ]]
+	-- upvalues: AdService (copy)
 	p1:setState({ enabled = false })
-	adService:HideEudsaDisclosure()
+	AdService:HideEudsaDisclosure()
 	p1:restoreSelectedObject()
 end
 
-function adsEuDsaPromptHandler.render(p1)
-	-- upvalues: UIBloxModule (ref), colorMode (ref), roactModule (ref), adsEuDsaPromptUIModule (ref)
-	return if p1.state.enabled then roactModule.createElement("ScreenGui", {
+function AdsEuDsaPromptHandler.render(Handler) --[[ Line: 81 ]]
+	-- upvalues: UIBloxModule (copy), ColorMode (copy), RoactModule (copy), AdsEuDsaPromptUIModule (copy)
+	return if Handler.state.enabled then RoactModule.createElement("ScreenGui", {
 		ResetOnSpawn = false,
 		IgnoreGuiInset = true,
 		DisplayOrder = 15,
 		AutoLocalize = false,
 		ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
-		Enabled = p1.state.enabled
-	}, roactModule.createElement(UIBloxModule.App.Style.AppStyleProvider, {
+		Enabled = Handler.state.enabled
+	}, RoactModule.createElement(UIBloxModule.App.Style.AppStyleProvider, {
 		style = ({
 			Dark = {
-				themeName = colorMode.Dark,
+				themeName = ColorMode.Dark,
 				fontName = UIBloxModule.App.Style.Constants.FontName.Gotham
 			}
 		}).Dark
 	}, {
-		Frame = roactModule.createElement("Frame", {
+		Frame = RoactModule.createElement("Frame", {
 			Selectable = false,
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
@@ -77,8 +77,8 @@ function adsEuDsaPromptHandler.render(p1)
 			Position = UDim2.fromScale(0.5, 0.5),
 			AnchorPoint = Vector2.new(0.5, 0.5)
 		}, {
-			Prompt = roactModule.createElement(adsEuDsaPromptUIModule, { handler = p1, bodyText = p1.state.bodyText }),
-			ModalFix = roactModule.createElement("ImageButton", {
+			Prompt = RoactModule.createElement(AdsEuDsaPromptUIModule, { handler = Handler, bodyText = Handler.state.bodyText }),
+			ModalFix = RoactModule.createElement("ImageButton", {
 				BackgroundTransparency = 0,
 				Modal = true,
 				Size = UDim2.new(0, 0, 0, 0)
@@ -87,4 +87,4 @@ function adsEuDsaPromptHandler.render(p1)
 	})) else nil
 end
 
-return adsEuDsaPromptHandler
+return AdsEuDsaPromptHandler

@@ -1,50 +1,52 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useUserProfileInfoModule = require(script.Parent.useUserProfileInfo)
-local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local iconButton = foundationModule.IconButton
-local list = foundationModule.List
-local loading = foundationModule.Loading
-local view = foundationModule.View
-local useTokens = foundationModule.Hooks.useTokens
-local iconName = foundationModule.Enums.IconName
-local iconSize = foundationModule.Enums.IconSize
-local accessoryType = foundationModule.Enums.AccessoryType
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseUserProfileInfoModule = require(script.Parent.useUserProfileInfo)
+local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
+local IconButton = FoundationModule.IconButton
+local List = FoundationModule.List
+local Loading = FoundationModule.Loading
+local View = FoundationModule.View
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local IconName = FoundationModule.Enums.IconName
+local IconSize = FoundationModule.Enums.IconSize
+local AccessoryType = FoundationModule.Enums.AccessoryType
 
-return function(p1)
-	-- upvalues: useUserProfileInfoModule (ref), useLocalization (ref), localizationStringsModule (ref), useTokens (ref), reactModule (ref), view (ref), loading (ref), iconSize (ref), iconButton (ref), iconName (ref), list (ref), accessoryType (ref)
-	local var1 = useUserProfileInfoModule(p1.userId)
-	local var2 = useLocalization({
-		unknownUser = localizationStringsModule.PRIVATE_INVITES_UNKNOWN_USER,
+return function(Frame) --[[ Line: 35 | Named "PickedUserRow" ]]
+	-- upvalues: UseUserProfileInfoModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseTokensFunction (copy), ReactModule (copy), View (copy), Loading (copy), IconSize (copy), IconButton (copy), IconName (copy), List (copy), AccessoryType (copy)
+	local UseUserProfileInfoModuleResult = UseUserProfileInfoModule(Frame.userId)
+	local UseLocalizationResult = UseLocalizationFunction({
+		unknownUser = LocalizationStringsModule.PRIVATE_INVITES_UNKNOWN_USER,
 		username = {
-			localizationStringsModule.USER_PICKER_USERNAME,
-			USERNAME = var1.username
+			LocalizationStringsModule.USER_PICKER_USERNAME,
+			USERNAME = UseUserProfileInfoModuleResult.username
 		}
 	})
-	local size1000 = useTokens().Size.Size_1000
+	local UnknownUser = UseLocalizationResult.unknownUser
+	local Username = UseLocalizationResult.username
+	local Size1000 = UseTokensFunction().Size.Size_1000
 	
-	return reactModule.createElement(list.Item, {
-		LayoutOrder = p1.LayoutOrder,
-		leading = { type = accessoryType.Avatar, userId = p1.userId },
-		title = if var1.displayName ~= "" then var2.unknownUser else var1.displayName,
-		description = var2.username,
-		trailing = if p1.isRemoving then reactModule.createElement(view, {
+	return ReactModule.createElement(List.Item, {
+		LayoutOrder = Frame.LayoutOrder,
+		leading = { type = AccessoryType.Avatar, userId = Frame.userId },
+		title = if UseUserProfileInfoModuleResult.displayName == "" then UnknownUser else UseUserProfileInfoModuleResult.displayName,
+		description = Username,
+		trailing = if Frame.isRemoving then ReactModule.createElement(View, {
 			tag = "align-x-center align-y-center",
-			Size = UDim2.fromOffset(size1000, size1000),
-			testId = `{p1.testId}-removing`
+			Size = UDim2.fromOffset(Size1000, Size1000),
+			testId = `{Frame.testId}-removing`
 		}, {
-			Spinner = reactModule.createElement(loading, { size = iconSize.Small })
-		}) else reactModule.createElement(iconButton, {
-			icon = iconName.TrashCan,
-			onActivated = function()
-				-- upvalues: p1 (ref)
-				p1.onRemove(p1.userId)
+			Spinner = ReactModule.createElement(Loading, { size = IconSize.Small })
+		}) else ReactModule.createElement(IconButton, {
+			icon = IconName.TrashCan,
+			onActivated = function() --[[ Line: 65 ]]
+				-- upvalues: Frame (copy)
+				Frame.onRemove(Frame.userId)
 			end,
-			testId = `{p1.testId}-remove`
+			testId = `{Frame.testId}-remove`
 		}),
-		testId = p1.testId
+		testId = Frame.testId
 	})
 end

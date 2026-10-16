@@ -1,169 +1,179 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local captureService = game:GetService("CaptureService")
-local reactModule = require(parent_1.React)
-local roactUtilsModule = require(parent_1.RoactUtils)
-local foundationModule = require(parent_1.Foundation)
-local IXPServiceWrapper = require(parent_1.IXPServiceWrapper).IXPServiceWrapper
-local localizationModule = require(parent_1.Localization)
-local socialStopwatchModule = require(parent_1.SocialStopwatch)
-local icon = foundationModule.Icon
-local image = foundationModule.Image
-local popoverAlign = foundationModule.Enums.PopoverAlign
-local popoverSide = foundationModule.Enums.PopoverSide
-local tooltip = foundationModule.Tooltip
-local view = foundationModule.View
-local videoCaptureControlModule = require(parent.Components.CoreUI.VideoCaptureControl)
-local voiceChatIndicatorModule = require(parent.Components.CoreUI.VoiceChatIndicator)
-local capturesPolicyModule = require(parent.App.CapturesPolicy)
-local constantsModule = require(parent.Constants)
-local eventNamesModule = require(parent.Analytics.EventNames)
-local takeCaptureModule = require(parent.Thunks.TakeCapture)
-local snapDirectionModule = require(parent.Enums.SnapDirection)
-local useAnalyticsModule = require(parent.Analytics.useAnalytics)
-local useCallback = reactModule.useCallback
-local useCaptureControlsControllerModule = require(parent.Hooks.useCaptureControlsController)
-local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
-local useEffect = reactModule.useEffect
-local useLocalization = localizationModule.Hooks.useLocalization
-local usePlayShutterSoundModule = require(parent.Hooks.usePlayShutterSound)
-local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
-local useTokens = foundationModule.Hooks.useTokens
-local useTopbarInsetModule = require(parent.Hooks.useTopbarInset)
-local debugOverrideCaptureControlsVideoGuacPolicy = game:DefineFastFlag("DebugOverrideCaptureControlsVideoGuacPolicy", false)
-local fStringSocialCaptureIXPLayer = require(parent_1.SharedFlags).FStringSocialCaptureIXPLayer
-local t = {
-	[snapDirectionModule.Bottom] = popoverSide.Top,
-	[snapDirectionModule.Left] = popoverSide.Right,
-	[snapDirectionModule.Right] = popoverSide.Left,
-	[snapDirectionModule.Top] = popoverSide.Bottom
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local CaptureService = game:GetService("CaptureService")
+local ReactModule = require(Parent1.React)
+local RoactUtilsModule = require(Parent1.RoactUtils)
+local FoundationModule = require(Parent1.Foundation)
+local IXPServiceWrapper = require(Parent1.IXPServiceWrapper).IXPServiceWrapper
+local SocialStopwatchModule = require(Parent1.SocialStopwatch)
+local Icon = FoundationModule.Icon
+local IconName = FoundationModule.Enums.IconName
+local IconSize = FoundationModule.Enums.IconSize
+local Image = FoundationModule.Image
+local PopoverAlign = FoundationModule.Enums.PopoverAlign
+local PopoverSide = FoundationModule.Enums.PopoverSide
+local Tooltip = FoundationModule.Tooltip
+local View = FoundationModule.View
+local VideoCaptureControlModule = require(Parent.Components.CoreUI.VideoCaptureControl)
+local VoiceChatIndicatorModule = require(Parent.Components.CoreUI.VoiceChatIndicator)
+local ConstantsModule = require(Parent.Constants)
+local EventNamesModule = require(Parent.Analytics.EventNames)
+local TakeCaptureModule = require(Parent.Thunks.TakeCapture)
+local SnapDirectionModule = require(Parent.Enums.SnapDirection)
+local UseAnalyticsModule = require(Parent.Analytics.useAnalytics)
+local UseCallbackFunction = ReactModule.useCallback
+local UseCaptureControlsControllerModule = require(Parent.Hooks.useCaptureControlsController)
+local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
+local UseEffectFunction = ReactModule.useEffect
+local UseLocalizationFunction = require(Parent1.Localization).Hooks.useLocalization
+local UsePlayShutterSoundModule = require(Parent.Hooks.usePlayShutterSound)
+local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UseTopbarInsetModule = require(Parent.Hooks.useTopbarInset)
+local DebugOverrideCaptureControlsVideoGuacPolicy = game:DefineFastFlag("DebugOverrideCaptureControlsVideoGuacPolicy", false)
+local FStringSocialCaptureIXPLayer = require(Parent1.SharedFlags).FStringSocialCaptureIXPLayer
+local FFlagCapturesControlsUseBuilderIconsModule = require(Parent.Flags.FFlagCapturesControlsUseBuilderIcons)
+local FrameCameraCenter = if FFlagCapturesControlsUseBuilderIconsModule then IconName.FrameCameraCenter else "icons/controls/screenCapture"
+local Large = if FFlagCapturesControlsUseBuilderIconsModule then IconSize.Large else nil
+local config = {
+	[SnapDirectionModule.Bottom] = PopoverSide.Top,
+	[SnapDirectionModule.Left] = PopoverSide.Right,
+	[SnapDirectionModule.Right] = PopoverSide.Left,
+	[SnapDirectionModule.Top] = PopoverSide.Bottom
 }
 
-return capturesPolicyModule.connect(function(p1)
-	-- upvalues: captureService (ref), debugOverrideCaptureControlsVideoGuacPolicy (ref)
+return (require(Parent.App.CapturesPolicy).connect(function(p1) --[[ Line: 240 ]]
+	-- upvalues: CaptureService (copy), DebugOverrideCaptureControlsVideoGuacPolicy (copy)
 	return {
-		hasVideoCaptureCapability = p1.hasVideoCaptureCapability() and captureService:CanCaptureVideo() or debugOverrideCaptureControlsVideoGuacPolicy
+		hasVideoCaptureCapability = p1.hasVideoCaptureCapability() and CaptureService:CanCaptureVideo() or DebugOverrideCaptureControlsVideoGuacPolicy
 	}
-end)(function(p1)
-	-- upvalues: useAnalyticsModule (ref), useDispatch (ref), useLocalization (ref), useTokens (ref), useTopbarInsetModule (ref), useSelector (ref), constantsModule (ref), useEffect (ref), IXPServiceWrapper (ref), fStringSocialCaptureIXPLayer (ref), usePlayShutterSoundModule (ref), reactModule (ref), useCaptureControlsControllerModule (ref), eventNamesModule (ref), useCallback (ref), socialStopwatchModule (ref), takeCaptureModule (ref), view (ref), foundationModule (ref), videoCaptureControlModule (ref), t (ref), tooltip (ref), popoverAlign (ref), icon (ref), voiceChatIndicatorModule (ref), image (ref)
-	local var1 = useAnalyticsModule()
-	local var2 = useDispatch()
-	local var3 = useLocalization({
+end)(function(p1) --[[ Line: 71 ]]
+	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), UseLocalizationFunction (copy), UseTokensFunction (copy), UseTopbarInsetModule (copy), UseSelectorFunction (copy), ConstantsModule (copy), UseEffectFunction (copy), IXPServiceWrapper (copy), FStringSocialCaptureIXPLayer (copy), UsePlayShutterSoundModule (copy), ReactModule (copy), UseCaptureControlsControllerModule (copy), EventNamesModule (copy), UseCallbackFunction (copy), SocialStopwatchModule (copy), TakeCaptureModule (copy), View (copy), FoundationModule (copy), VideoCaptureControlModule (copy), config (copy), Tooltip (copy), PopoverAlign (copy), Icon (copy), FrameCameraCenter (copy), Large (copy), VoiceChatIndicatorModule (copy), FFlagCapturesControlsUseBuilderIconsModule (copy), IconName (copy), Image (copy)
+	local UseAnalyticsModuleResult = UseAnalyticsModule()
+	local UseDispatchResult = UseDispatchFunction()
+	local UseLocalizationResult = UseLocalizationFunction({
 		captureScreenshot = "Feature.Captures.Title.CaptureScreenshotTooltip"
 	})
-	local var4 = useTokens()
-	local var5 = useTopbarInsetModule()
-	local var6 = useSelector(function(p2)
-		-- upvalues: constantsModule (copy)
-		return p2[constantsModule.RoduxKey].IsActive
+	local UseTokensResult = UseTokensFunction()
+	local UseTopbarInsetModuleResult = UseTopbarInsetModule()
+	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 81 ]]
+		-- upvalues: ConstantsModule (upval)
+		return p2[ConstantsModule.RoduxKey].IsActive
 	end)
-	local var7 = useSelector(function(p2)
-		-- upvalues: constantsModule (copy)
-		return p2[constantsModule.RoduxKey].IsVideoCaptureActive.status
+	local UseSelectorResult1 = UseSelectorFunction(function(p2) --[[ Line: 85 ]]
+		-- upvalues: ConstantsModule (upval)
+		return p2[ConstantsModule.RoduxKey].IsVideoCaptureActive.status
 	end)
-	useEffect(function()
-		-- upvalues: var6 (ref), IXPServiceWrapper (copy), fStringSocialCaptureIXPLayer (copy)
-		if var6 then
-			IXPServiceWrapper:LogFlagLinkedUserLayerExposure(fStringSocialCaptureIXPLayer)
+	UseEffectFunction(function() --[[ Line: 89 ]]
+		-- upvalues: UseSelectorResult (copy), IXPServiceWrapper (upval), FStringSocialCaptureIXPLayer (upval)
+		if UseSelectorResult then
+			IXPServiceWrapper:LogFlagLinkedUserLayerExposure(FStringSocialCaptureIXPLayer)
 		end
-	end, { var6 })
-	local var8 = usePlayShutterSoundModule()
-	local var9 = useCaptureControlsControllerModule(var6, reactModule.useMemo(function()
-		-- upvalues: var5 (ref), var4 (ref)
-		return Vector2.new(var5.Min.X - var4.Padding.Small, var5.Height - var4.Padding.XSmall - var4.Padding.XXSmall)
-	end, { var5, var4 }))
-	local dragContainerRef = var9.dragContainerRef
-	local dragDetectorRef = var9.dragDetectorRef
-	local dragItemAnchorPointBinding = var9.dragItemAnchorPointBinding
-	local dragItemPositionBinding = var9.dragItemPositionBinding
-	local dragItemRef = var9.dragItemRef
-	local isItemHorizontal = var9.isItemHorizontal
-	local screenshotButtonRef = var9.screenshotButtonRef
-	local snapDirection = var9.snapDirection
-	useEffect(function()
-		-- upvalues: var6 (ref), var1 (ref), eventNamesModule (copy)
-		if var6 then
-			var1.fireEvent(eventNamesModule.CapturesEntrypointViewed)
+	end, { UseSelectorResult })
+	local UsePlayShutterSoundModuleResult = UsePlayShutterSoundModule()
+	local UseCaptureControlsControllerModuleResult = UseCaptureControlsControllerModule(UseSelectorResult, (ReactModule.useMemo(function(): Vector2 --[[ Line: 97 ]]
+		-- upvalues: UseTopbarInsetModuleResult (copy), UseTokensResult (copy)
+		return Vector2.new(UseTopbarInsetModuleResult.Min.X - UseTokensResult.Padding.Small, UseTopbarInsetModuleResult.Height - UseTokensResult.Padding.XSmall - UseTokensResult.Padding.XXSmall)
+	end, { UseTopbarInsetModuleResult, UseTokensResult })))
+	local DragContainerRef = UseCaptureControlsControllerModuleResult.dragContainerRef
+	local DragDetectorRef = UseCaptureControlsControllerModuleResult.dragDetectorRef
+	local DragItemAnchorPointBinding = UseCaptureControlsControllerModuleResult.dragItemAnchorPointBinding
+	local DragItemPositionBinding = UseCaptureControlsControllerModuleResult.dragItemPositionBinding
+	local DragItemRef = UseCaptureControlsControllerModuleResult.dragItemRef
+	local IsItemHorizontal = UseCaptureControlsControllerModuleResult.isItemHorizontal
+	local ScreenshotButtonRef = UseCaptureControlsControllerModuleResult.screenshotButtonRef
+	local SnapDirection = UseCaptureControlsControllerModuleResult.snapDirection
+	UseEffectFunction(function() --[[ Line: 115 ]]
+		-- upvalues: UseSelectorResult (copy), UseAnalyticsModuleResult (copy), EventNamesModule (upval)
+		if UseSelectorResult then
+			UseAnalyticsModuleResult.fireEvent(EventNamesModule.CapturesEntrypointViewed)
 		end
-	end, { var6 })
+	end, { UseSelectorResult })
+	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 121 ]]
+		-- upvalues: SocialStopwatchModule (upval), UseAnalyticsModuleResult (copy), EventNamesModule (upval), UsePlayShutterSoundModuleResult (copy), UseDispatchResult (copy), TakeCaptureModule (upval)
+		if not SocialStopwatchModule.Stopwatch.get(SocialStopwatchModule.Events.CaptureTaken) then
+			SocialStopwatchModule.Stopwatch.start(SocialStopwatchModule.Events.CaptureTaken)
+		end
+		UseAnalyticsModuleResult.fireEvent(EventNamesModule.CapturesEntrypointActivated)
+		UsePlayShutterSoundModuleResult()
+		UseDispatchResult(TakeCaptureModule())
+	end, { UsePlayShutterSoundModuleResult })
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "padding-x-large padding-y-medium",
-		Position = UDim2.fromOffset(0, -var5.Height),
-		Size = UDim2.new(1, 0, 1, var5.Height),
-		ZIndex = constantsModule.ZIndex.Entrypoint
+		Position = UDim2.fromOffset(0, -UseTopbarInsetModuleResult.Height),
+		Size = UDim2.new(1, 0, 1, UseTopbarInsetModuleResult.Height),
+		ZIndex = ConstantsModule.ZIndex.Entrypoint
 	}, {
-		PaddedContainer = reactModule.createElement(view, {
+		PaddedContainer = ReactModule.createElement(View, {
 			tag = "anchor-center-center position-center-center size-full",
-			ref = dragContainerRef
+			ref = DragContainerRef
 		}, {
-			CaptureControls = if var6 then reactModule.createElement(view, {
-				AnchorPoint = dragItemAnchorPointBinding:map(function(p2)
-					return Vector2.new(p2.x, p2.y)
+			CaptureControls = if UseSelectorResult then ReactModule.createElement(View, {
+				AnchorPoint = DragItemAnchorPointBinding:map(function(Vector): Vector2 --[[ Line: 144 ]]
+					return Vector2.new(Vector.x, Vector.y)
 				end),
-				onActivated = function() end,
-				Position = dragItemPositionBinding:map(function(p2)
+				onActivated = function() --[[ Line: 147 ]] end,
+				Position = DragItemPositionBinding:map(function(p2): UDim2 --[[ Line: 148 ]]
 					return UDim2.fromOffset(p2.xOffset, p2.yOffset)
 				end),
-				ref = dragItemRef,
+				ref = DragItemRef,
 				stateLayer = {
-					affordance = foundationModule.Enums.StateLayerAffordance.None
+					affordance = FoundationModule.Enums.StateLayerAffordance.None
 				},
 				tag = {
-					["row auto-x padding-x-small padding-y-xsmall size-0-1100"] = isItemHorizontal,
-					["col auto-y padding-y-small padding-x-xsmall size-1100-0"] = not isItemHorizontal,
+					["row auto-x padding-x-small padding-y-xsmall size-0-1100"] = IsItemHorizontal,
+					["col auto-y padding-y-small padding-x-xsmall size-1100-0"] = not IsItemHorizontal,
 					["align-x-center align-y-center bg-over-media-0 flex-evenly radius-circle"] = true
 				}
 			}, {
-				DragDetector = reactModule.createElement("UIDragDetector", {
+				DragDetector = ReactModule.createElement("UIDragDetector", {
 					DragStyle = Enum.UIDragDetectorDragStyle.Scriptable,
-					BoundingUI = dragContainerRef,
-					ref = dragDetectorRef,
+					BoundingUI = DragContainerRef,
+					ref = DragDetectorRef,
 					ResponseStyle = Enum.UIDragDetectorResponseStyle.CustomOffset
 				}),
-				VideoCaptureControl = if p1.hasVideoCaptureCapability then reactModule.createElement(videoCaptureControlModule, { layoutOrder = 1, popoverSide = t[snapDirection] }) else nil,
-				ScreenshotCTA = if not var7 then reactModule.createElement(view, {
+				VideoCaptureControl = if p1.hasVideoCaptureCapability then ReactModule.createElement(VideoCaptureControlModule, { layoutOrder = 1, popoverSide = config[SnapDirection] }) else nil,
+				ScreenshotCTA = if UseSelectorResult1 then nil else ReactModule.createElement(View, {
 					LayoutOrder = 2,
 					tag = {
 						["size-1200-1200"] = true,
 						["anchor-center-center auto-xy clip position-center-center radius-circle"] = true
 					},
-					onActivated = useCallback(function()
-						-- upvalues: socialStopwatchModule (copy), var1 (ref), eventNamesModule (copy), var8 (ref), var2 (ref), takeCaptureModule (copy)
-						if not socialStopwatchModule.Stopwatch.get(socialStopwatchModule.Events.CaptureTaken) then
-							socialStopwatchModule.Stopwatch.start(socialStopwatchModule.Events.CaptureTaken)
-						end
-						var1.fireEvent(eventNamesModule.CapturesEntrypointActivated)
-						var8()
-						var2(takeCaptureModule())
-					end, { var8 }),
-					ref = screenshotButtonRef
+					onActivated = UseCallbackResult,
+					ref = ScreenshotButtonRef
 				}, {
-					ScreenshotIconWithTooltip = reactModule.createElement(tooltip, {
-						align = popoverAlign.Center,
-						side = t[snapDirection],
-						title = var3.captureScreenshot
-					}, reactModule.createElement(view, { tag = "size-1200-1200" }, {
-						reactModule.createElement(icon, {
-							name = "icons/controls/screenCapture",
+					ScreenshotIconWithTooltip = ReactModule.createElement(Tooltip, {
+						align = PopoverAlign.Center,
+						side = config[SnapDirection],
+						title = UseLocalizationResult.captureScreenshot
+					}, ReactModule.createElement(View, { tag = "size-1200-1200" }, {
+						ReactModule.createElement(Icon, {
 							AnchorPoint = Vector2.new(0.5, 0.5),
 							Position = UDim2.fromScale(0.5, 0.5),
-							style = var4.Color.Content.Emphasis
+							name = FrameCameraCenter,
+							size = Large,
+							style = UseTokensResult.Color.Content.Emphasis
 						})
 					}))
-				}) else nil,
-				VoiceChatIndicator = if var7 then reactModule.createElement(voiceChatIndicatorModule, { layoutOrder = 3, popoverSide = t[snapDirection] }) else nil,
-				DragAffordance = reactModule.createElement(view, {
+				}),
+				VoiceChatIndicator = if UseSelectorResult1 then ReactModule.createElement(VoiceChatIndicatorModule, { layoutOrder = 3, popoverSide = config[SnapDirection] }) else nil,
+				DragAffordance = ReactModule.createElement(View, {
 					LayoutOrder = 4,
 					tag = "anchor-center-center auto-xy padding-xxsmall position-center-center"
 				}, {
-					DragAffordanceIcon = reactModule.createElement(image, {
+					DragAffordanceIcon = if FFlagCapturesControlsUseBuilderIconsModule then ReactModule.createElement(Icon, {
+						tag = "position-center-center anchor-center-center",
+						name = IconName.SixDotsTwoColumnGrid,
+						Rotation = if IsItemHorizontal then 0 else 90,
+						style = UseTokensResult.Color.Content.Muted
+					}) else ReactModule.createElement(Image, {
 						Image = "component_assets/dragger_small",
 						tag = "anchor-center-center content-muted position-center-center size-600-400",
-						Rotation = if isItemHorizontal then 90 else 0
+						Rotation = if IsItemHorizontal then 90 else 0
 					})
 				})
 			}) else nil
 		})
 	})
-end)
+end))

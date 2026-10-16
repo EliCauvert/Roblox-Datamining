@@ -1,12 +1,12 @@
-﻿local avatarExperienceControlBar = script:FindFirstAncestor("AvatarExperienceControlBar")
-local parent = avatarExperienceControlBar.Parent
-local reactModule = require(parent.React)
-local roactGamepadModule = require(parent.RoactGamepad)
-local useTokens = require(parent.Foundation).Hooks.useTokens
-local debounce = require(parent.AvatarExperienceCommon).Utils.debounce
-local fFlagAXFixVRControlBarFlicker = require(parent.AvatarExperienceFlags).FFlagAXFixVRControlBarFlicker
-local _ = require(avatarExperienceControlBar.ControlBarTypes)
-local t = {
+﻿local AvatarExperienceControlBar = script:FindFirstAncestor("AvatarExperienceControlBar")
+local Parent = AvatarExperienceControlBar.Parent
+local ReactModule = require(Parent.React)
+local RoactGamepadModule = require(Parent.RoactGamepad)
+local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
+local DebounceFunction = require(Parent.AvatarExperienceCommon).Utils.debounce
+local FFlagAXFixVRControlBarFlicker = require(Parent.AvatarExperienceFlags).FFlagAXFixVRControlBarFlicker
+local _ = require(AvatarExperienceControlBar.ControlBarTypes)
+local config = {
 	[Enum.KeyCode.Up] = true,
 	[Enum.KeyCode.Down] = true,
 	[Enum.KeyCode.Left] = true,
@@ -18,93 +18,96 @@ local t = {
 	[Enum.KeyCode.Thumbstick1] = true
 }
 
-return function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), roactGamepadModule (ref), debounce (ref), t (ref), fFlagAXFixVRControlBarFlicker (ref)
-	local var1 = useTokens()
-	local var2 = reactModule.useRef(false)
-	local var3 = reactModule.useRef(nil)
-	local var4 = reactModule.useRef(nil)
-	local var5 = roactGamepadModule.useRefCache()
-	local var6 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref), var5 (ref)
+return function(Frame) --[[ Line: 39 | Named "useBaseControlBarProps" ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), RoactGamepadModule (copy), DebounceFunction (copy), config (copy), FFlagAXFixVRControlBarFlicker (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseRefResult = ReactModule.useRef(false)
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseRefResult2 = ReactModule.useRef(nil)
+	local UseRefCacheResult = RoactGamepadModule.useRefCache()
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 58 ]]
+		-- upvalues: Frame (copy), UseRefCacheResult (copy)
+		local List = {}
 		local t = {}
-		local t_1 = {}
 		
-		if p1.config then
-			for i, v in p1.config do
-				if v.children then
-					t_1[v.id] = v.children
+		if Frame.config then
+			for _, value in Frame.config do
+				if value.children then
+					t[value.id] = value.children
 				end
-				v.ref = var5[v.id]
-				table.insert(t, v)
+				value.ref = UseRefCacheResult[value.id]
+				table.insert(List, value)
 			end
 		end
-		return t, t_1
-	end, { p1.config })
-	local var7, var8 = var6()
-	local var9, var10 = reactModule.useState(var7)
-	local var11, var12 = reactModule.useState(var8)
-	local var13, var14 = reactModule.useState("")
-	reactModule.useEffect(function()
-		-- upvalues: var6 (ref), var10 (ref), var12 (ref)
-		local var15, var16 = var6()
-		var10(var15)
-		var12(var16)
-	end, { var6 })
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var13 (ref), var11 (ref)
-		if p1.onActiveMenuItemChanged then
-			p1.onActiveMenuItemChanged(var13, var11[var13] ~= nil)
+		return List, t
+	end, { Frame.config })
+	local UseResultResult, UseResultResult2 = UseResult()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(UseResultResult)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(UseResultResult2)
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState("")
+	ReactModule.useEffect(function() --[[ Line: 85 ]]
+		-- upvalues: UseResult (copy), UseStateResult2 (copy), UseStateResult2_1 (copy)
+		local UseResultResult, UseResultResult2 = UseResult()
+		UseStateResult2(UseResultResult)
+		UseStateResult2_1(UseResultResult2)
+	end, { UseResult })
+	ReactModule.useEffect(function() --[[ Line: 91 ]]
+		-- upvalues: Frame (copy), UseStateResult3 (copy), UseStateResult1 (copy)
+		if Frame.onActiveMenuItemChanged then
+			Frame.onActiveMenuItemChanged(UseStateResult3, UseStateResult1[UseStateResult3] ~= nil)
 		end
-	end, { var13, var11 })
-	local var15 = reactModule.useCallback(debounce(function()
-		-- upvalues: var2 (ref)
-		var2.current = false
+	end, { UseStateResult3, UseStateResult1 })
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 97 ]]
+		-- upvalues: UseStateResult1 (copy), UseStateResult3 (copy)
+		return UseStateResult1[UseStateResult3]
+	end, { UseStateResult3, UseStateResult1 })
+	local UseMemoResult1 = ReactModule.useMemo(function(): UDim2? --[[ Line: 101 ]]
+		-- upvalues: UseRefCacheResult (copy), UseStateResult3 (copy), UseRefResult1 (copy), UseRefResult2 (copy), UseTokensResult (copy)
+		local UseRefCacheResultEntry = UseRefCacheResult[UseStateResult3]
+		
+		if UseRefCacheResultEntry and UseRefCacheResultEntry.current and UseRefResult1.current and UseRefResult2.current then
+			local NewAbsolutePosition = UseRefCacheResultEntry.current.AbsolutePosition - UseRefResult1.current.AbsolutePosition + Vector2.new(UseRefResult2.current.AbsoluteSize.X + UseTokensResult.Size.Size_50, 0)
+			
+			return UDim2.new(0, NewAbsolutePosition.X, 0, NewAbsolutePosition.Y)
+		else
+			return nil
+		end
+	end, { UseStateResult3 })
+	local UseResult1 = ReactModule.useCallback(DebounceFunction(function() --[[ Line: 118 ]]
+		-- upvalues: UseRefResult (copy)
+		UseRefResult.current = false
 	end, 0.1), {})
 	
 	return {
-		activeMenuItemId = var13,
-		menus = var9,
-		submenus = var11,
-		submenuItems = reactModule.useMemo(function()
-			-- upvalues: var11 (ref), var13 (ref)
-			return var11[var13]
-		end, { var13, var11 }),
-		submenuPosition = reactModule.useMemo(function()
-			-- upvalues: var5 (ref), var13 (ref), var3 (ref), var4 (ref), var1 (ref)
-			local var16 = var5[var13]
-			
-			if var16 and var16.current and (var3.current and var4.current) then
-				local var17 = var16.current.AbsolutePosition - var3.current.AbsolutePosition + Vector2.new(var4.current.AbsoluteSize.X + var1.Size.Size_50, 0)
-				
-				return UDim2.new(0, var17.X, 0, var17.Y)
-			end
-			return nil
-		end, { var13 }),
-		onMenuItemActivated = reactModule.useCallback(function(p2)
-			-- upvalues: var14 (ref), var13 (ref), var2 (ref), var15 (ref)
-			var14(if p2 == var13 then "" else p2)
-			var2.current = true
-			var15()
-		end, { var13 }),
-		onSubmenuItemActivated = reactModule.useCallback(function(_)
-			-- upvalues: var14 (ref), var2 (ref), var15 (ref)
-			var14("")
-			var2.current = true
-			var15()
+		activeMenuItemId = UseStateResult3,
+		menus = UseStateResult,
+		submenus = UseStateResult1,
+		submenuItems = UseMemoResult,
+		submenuPosition = UseMemoResult1,
+		onMenuItemActivated = ReactModule.useCallback(function(ActiveMenuItemId) --[[ Line: 124 ]]
+			-- upvalues: UseStateResult2_2 (copy), UseStateResult3 (copy), UseRefResult (copy), UseResult1 (copy)
+			UseStateResult2_2(if ActiveMenuItemId == UseStateResult3 then "" else ActiveMenuItemId)
+			UseRefResult.current = true
+			UseResult1()
+		end, { UseStateResult3 }),
+		onSubmenuItemActivated = ReactModule.useCallback(function(_) --[[ Line: 130 ]]
+			-- upvalues: UseStateResult2_2 (copy), UseRefResult (copy), UseResult1 (copy)
+			UseStateResult2_2("")
+			UseRefResult.current = true
+			UseResult1()
 		end, {}),
-		onInputEnded = reactModule.useCallback(function(p2)
-			-- upvalues: var13 (ref), var2 (ref), t (copy), var14 (ref), fFlagAXFixVRControlBarFlicker (copy)
-			if var13 ~= "" and not var2.current and not t[p2.KeyCode] then
-				var14("")
+		onInputEnded = ReactModule.useCallback(function(Input) --[[ Line: 140 ]]
+			-- upvalues: UseStateResult3 (copy), UseRefResult (copy), config (upval), UseStateResult2_2 (copy), FFlagAXFixVRControlBarFlicker (upval)
+			if UseStateResult3 ~= "" and not UseRefResult.current and not config[Input.KeyCode] then
+				UseStateResult2_2("")
 			end
-			if not fFlagAXFixVRControlBarFlicker then
-				var2.current = false
+			if not FFlagAXFixVRControlBarFlicker then
+				UseRefResult.current = false
 			end
-		end, { var13 }),
-		containerRef = var3,
-		iconMenuRef = var4,
-		menuItemsRefCache = var5,
-		LayoutOrder = p1.LayoutOrder
+		end, { UseStateResult3 }),
+		containerRef = UseRefResult1,
+		iconMenuRef = UseRefResult2,
+		menuItemsRefCache = UseRefCacheResult,
+		LayoutOrder = Frame.LayoutOrder
 	}
 end

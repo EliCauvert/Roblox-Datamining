@@ -1,10 +1,10 @@
-﻿return function(p1, p2)
-	local var1 = 1
+﻿return function(Text: string, MaxValue: number): number --[[ Line: 1 | Named "getVisibleLineCount" ]]
+	local Value = 1
 	
-	if p1 ~= "" then
-		for i in string.gmatch(p1, "\n") do
-			var1 += 1
+	if Text ~= "" then
+		for _ in string.gmatch(Text, "\n") do
+			Value += 1
 		end
 	end
-	return math.clamp(var1, 1, p2)
+	return (math.clamp(Value, 1, MaxValue))
 end

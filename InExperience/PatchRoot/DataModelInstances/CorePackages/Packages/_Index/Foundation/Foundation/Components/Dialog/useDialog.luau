@@ -1,9 +1,9 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local _ = require(foundation.Enums.DialogSize)
-local dialogContextModule = require(script.Parent.DialogContext)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local _ = require(Foundation.Enums.DialogSize)
+local DialogContextModule = require(script.Parent.DialogContext)
 
-return function()
-	-- upvalues: reactModule (ref), dialogContextModule (ref)
-	return reactModule.useContext(dialogContextModule)
+return function() --[[ Line: 23 | Named "useDialog" ]]
+	-- upvalues: ReactModule (copy), DialogContextModule (copy)
+	return ReactModule.useContext(DialogContextModule)
 end

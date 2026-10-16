@@ -1,30 +1,28 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local coreGuiService = game:GetService("CoreGui")
-local eventIngestService = game:GetService("EventIngestService")
-local reactModule = require(corePackagesService.Packages.React)
-local inputUiModule = require(corePackagesService.Workspace.Packages.InputUi)
-local gamepadDisconnectedModal = inputUiModule.Gamepad.GamepadDisconnectedModal
-local useGamepadDisconnectOverlayEffect = inputUiModule.Gamepad.useGamepadDisconnectOverlayEffect
-local inGameMenuConstantsModule = require(coreGuiService.RobloxGui.Modules.InGameMenuConstants)
-local var1 = require(corePackagesService.Workspace.Packages.Analytics).AnalyticsReporters.EventIngest.new(eventIngestService)
+﻿local CorePackages = game:GetService("CorePackages")
+local ReactModule = require(CorePackages.Packages.React)
+local InputUiModule = require(CorePackages.Workspace.Packages.InputUi)
+local GamepadDisconnectedModal = InputUiModule.Gamepad.GamepadDisconnectedModal
+local UseGamepadDisconnectOverlayEffectFunction = InputUiModule.Gamepad.useGamepadDisconnectOverlayEffect
+local InGameMenuConstantsModule = require(game:GetService("CoreGui").RobloxGui.Modules.InGameMenuConstants)
+local NewResult = require(CorePackages.Workspace.Packages.Analytics).AnalyticsReporters.EventIngest.new((game:GetService("EventIngestService")))
 
-return function()
-	-- upvalues: reactModule (ref), useGamepadDisconnectOverlayEffect (ref), var1 (ref), inGameMenuConstantsModule (ref), gamepadDisconnectedModal (ref)
-	local var2, var3 = reactModule.useState(false)
-	useGamepadDisconnectOverlayEffect(reactModule.useCallback(function()
-		-- upvalues: var3 (ref)
-		var3(true)
-	end, { var3 }), reactModule.useCallback(function()
-		-- upvalues: var3 (ref)
-		var3(false)
-	end, { var3 }), var1, "InExperience")
+return function() --[[ Line: 14 | Named "CoreScriptsGamepadDisconnectListener" ]]
+	-- upvalues: ReactModule (copy), UseGamepadDisconnectOverlayEffectFunction (copy), NewResult (copy), InGameMenuConstantsModule (copy), GamepadDisconnectedModal (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	UseGamepadDisconnectOverlayEffectFunction(ReactModule.useCallback(function() --[[ Line: 19 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(true)
+	end, { UseStateResult2 }), ReactModule.useCallback(function() --[[ Line: 16 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(false)
+	end, { UseStateResult2 }), NewResult, "InExperience")
 	
-	return if var2 then reactModule.createElement("ScreenGui", {
+	return if UseStateResult then ReactModule.createElement("ScreenGui", {
 		IgnoreGuiInset = true,
 		OnTopOfCoreBlur = true,
-		DisplayOrder = inGameMenuConstantsModule.DisplayOrder.HeadsetDisconnectedDialog,
+		DisplayOrder = InGameMenuConstantsModule.DisplayOrder.HeadsetDisconnectedDialog,
 		ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 	}, {
-		GamepadDisconnectedModal = reactModule.createElement(gamepadDisconnectedModal)
+		GamepadDisconnectedModal = ReactModule.createElement(GamepadDisconnectedModal)
 	}) else nil
 end

@@ -1,76 +1,76 @@
-﻿local parent = script:FindFirstAncestor("GameDetail").Parent
-local reactModule = require(parent.React)
-local inputHandlersModule = require(parent.InputHandlers)
-local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
-local sduiSharedUtilitiesModule = require(parent.SduiSharedUtilities)
-local sduiFocusTags = sduiSharedUtilitiesModule.SduiFocusTags
-local useInitialFocusOnTag = sduiSharedUtilitiesModule.useInitialFocusOnTag
-local useSelectionOrderTracking = sduiSharedUtilitiesModule.useSelectionOrderTracking
-local usePageButtonBindings = sduiSharedUtilitiesModule.usePageButtonBindings
-local useOnNavigateBack = sduiSharedUtilitiesModule.useOnNavigateBack
-local getSduiFocusActivationStore = sduiSharedUtilitiesModule.getSduiFocusActivationStore
-local focusNavigationEventNameEnum = focusNavigationUtilsModule.FocusNavigationEventNameEnum
-local fFlagLuaAppMediaGalleryGamepadSupport = require(parent.SharedFlags).FFlagLuaAppMediaGalleryGamepadSupport
-local collectionService = game:GetService("CollectionService")
-local t = {
-	[Enum.KeyCode.ButtonX] = focusNavigationEventNameEnum.Play,
-	[Enum.KeyCode.ButtonY] = if fFlagLuaAppMediaGalleryGamepadSupport then nil else focusNavigationEventNameEnum.DisplayStatsAndInfo,
-	[Enum.KeyCode.ButtonB] = focusNavigationEventNameEnum.NavigateBack,
-	[Enum.KeyCode.Escape] = focusNavigationEventNameEnum.NavigateBack
+﻿local Parent = script:FindFirstAncestor("GameDetail").Parent
+local ReactModule = require(Parent.React)
+local InputHandlersModule = require(Parent.InputHandlers)
+local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
+local SduiSharedUtilitiesModule = require(Parent.SduiSharedUtilities)
+local SduiFocusTags = SduiSharedUtilitiesModule.SduiFocusTags
+local UseInitialFocusOnTagFunction = SduiSharedUtilitiesModule.useInitialFocusOnTag
+local UseSelectionOrderTrackingFunction = SduiSharedUtilitiesModule.useSelectionOrderTracking
+local UsePageButtonBindingsFunction = SduiSharedUtilitiesModule.usePageButtonBindings
+local UseOnNavigateBackFunction = SduiSharedUtilitiesModule.useOnNavigateBack
+local GetSduiFocusActivationStoreFunction = SduiSharedUtilitiesModule.getSduiFocusActivationStore
+local FocusNavigationEventNameEnum = require(Parent.FocusNavigationUtils).FocusNavigationEventNameEnum
+local FFlagLuaAppMediaGalleryGamepadSupport = require(Parent.SharedFlags).FFlagLuaAppMediaGalleryGamepadSupport
+local CollectionService = game:GetService("CollectionService")
+local config = {
+	[Enum.KeyCode.ButtonX] = FocusNavigationEventNameEnum.Play,
+	[Enum.KeyCode.ButtonY] = if FFlagLuaAppMediaGalleryGamepadSupport then nil else FocusNavigationEventNameEnum.DisplayStatsAndInfo,
+	[Enum.KeyCode.ButtonB] = FocusNavigationEventNameEnum.NavigateBack,
+	[Enum.KeyCode.Escape] = FocusNavigationEventNameEnum.NavigateBack
 }
 
-local function findTaggedDescendant(p1, p2)
-	-- upvalues: collectionService (ref)
-	local current = p2.current
+local function findTaggedDescendant(Tag, UseRefResult) --[[ Line: 34 ]]
+	-- upvalues: CollectionService (copy)
+	local Current = UseRefResult.current
 	
-	if not current then
+	if not Current then
 		return nil
 	end
-	for i, v in collectionService:GetTagged(p1) do
-		if v:IsDescendantOf(current) then
-			return v
+	for _, value in CollectionService:GetTagged(Tag) do
+		if value:IsDescendantOf(Current) then
+			return value
 		end
 	end
 	return nil
 end
 
-return function(p3)
-	-- upvalues: reactModule (ref), useInitialFocusOnTag (ref), sduiFocusTags (ref), useSelectionOrderTracking (ref), reactFocusNavigationModule (ref), getSduiFocusActivationStore (ref), findTaggedDescendant (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref), usePageButtonBindings (ref), t (ref), useOnNavigateBack (ref)
-	local var1 = reactModule.useRef(nil)
-	useInitialFocusOnTag(sduiFocusTags.PrimaryAction, var1)
-	useSelectionOrderTracking(var1)
-	local var2 = reactFocusNavigationModule.useFocusGuiObject()
-	local var3 = reactModule.useCallback(function()
-		-- upvalues: getSduiFocusActivationStore (copy), sduiFocusTags (copy)
-		getSduiFocusActivationStore().activate(sduiFocusTags.PrimaryAction)
+return function(p1) --[[ Line: 57 | Named "useExperienceDetailsFocusNavigation" ]]
+	-- upvalues: ReactModule (copy), UseInitialFocusOnTagFunction (copy), SduiFocusTags (copy), UseSelectionOrderTrackingFunction (copy), ReactFocusNavigationModule (copy), GetSduiFocusActivationStoreFunction (copy), findTaggedDescendant (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), FFlagLuaAppMediaGalleryGamepadSupport (copy), UsePageButtonBindingsFunction (copy), config (copy), UseOnNavigateBackFunction (copy)
+	local UseRefResult = ReactModule.useRef(nil)
+	UseInitialFocusOnTagFunction(SduiFocusTags.PrimaryAction, UseRefResult)
+	UseSelectionOrderTrackingFunction(UseRefResult)
+	local UseFocusGuiObjectResult = ReactFocusNavigationModule.useFocusGuiObject()
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 64 ]]
+		-- upvalues: GetSduiFocusActivationStoreFunction (upval), SduiFocusTags (upval)
+		GetSduiFocusActivationStoreFunction().activate(SduiFocusTags.PrimaryAction)
 	end, {})
-	local var4 = reactModule.useCallback(function()
-		-- upvalues: findTaggedDescendant (copy), sduiFocusTags (copy), var1 (ref), var2 (ref)
-		local var5 = findTaggedDescendant(sduiFocusTags.StatsSection, var1)
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 68 ]]
+		-- upvalues: findTaggedDescendant (upval), SduiFocusTags (upval), UseRefResult (copy), UseFocusGuiObjectResult (copy)
+		local TaggedDescendant = findTaggedDescendant(SduiFocusTags.StatsSection, UseRefResult)
 		
-		if var5 then
-			var2(var5)
+		if TaggedDescendant then
+			UseFocusGuiObjectResult(TaggedDescendant)
 		end
-	end, { var2, var1 })
-	local var5 = useOnNavigateBack(p3, usePageButtonBindings(var1, t, reactModule.useMemo(function()
-		-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), var3 (ref), fFlagLuaAppMediaGalleryGamepadSupport (copy), var4 (ref)
+	end, { UseFocusGuiObjectResult, UseRefResult })
+	local UseOnNavigateBackResult = UseOnNavigateBackFunction(p1, (UsePageButtonBindingsFunction(UseRefResult, config, (ReactModule.useMemo(function() --[[ Line: 75 ]]
+		-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), UseResult (copy), FFlagLuaAppMediaGalleryGamepadSupport (upval), UseResult1 (copy)
 		return {
-			[focusNavigationEventNameEnum.Play] = { handler = inputHandlersModule.onRelease(var3) },
-			[focusNavigationEventNameEnum.DisplayStatsAndInfo] = if fFlagLuaAppMediaGalleryGamepadSupport then nil else { handler = inputHandlersModule.onRelease(var4) }
+			[FocusNavigationEventNameEnum.Play] = { handler = InputHandlersModule.onRelease(UseResult) },
+			[FocusNavigationEventNameEnum.DisplayStatsAndInfo] = if FFlagLuaAppMediaGalleryGamepadSupport then nil else { handler = InputHandlersModule.onRelease(UseResult1) }
 		}
-	end, { var3, var4 })))
+	end, { UseResult, UseResult1 })))))
 	
-	return reactModule.useCallback(function(p4)
-		-- upvalues: var1 (ref), var5 (ref)
-		var1.current = p4
+	return (ReactModule.useCallback(function(Current) --[[ Line: 89 ]]
+		-- upvalues: UseRefResult (copy), UseOnNavigateBackResult (copy)
+		UseRefResult.current = Current
 		
-		if type(var5) == "function" then
-			var5(p4)
+		if type(UseOnNavigateBackResult) == "function" then
+			UseOnNavigateBackResult(Current)
 			
 			return
-		elseif var5 ~= nil then
-			var5.current = p4
 		end
-	end, { var5 })
+		if UseOnNavigateBackResult ~= nil then
+			UseOnNavigateBackResult.current = Current
+		end
+	end, { UseOnNavigateBackResult }))
 end

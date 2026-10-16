@@ -1,60 +1,61 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceCommon").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local useTokens = foundationModule.Hooks.useTokens
-local t = {
-	affordance = foundationModule.Enums.StateLayerAffordance.None
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceCommon").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local StateLayer = {
+	affordance = FoundationModule.Enums.StateLayerAffordance.None
 }
 
-local function getHoverTransparency(p1)
+local function getHoverTransparency(p1): number --[[ Line: 13 ]]
 	return if p1 then 0 else 0.2
 end
 
-local function useHoverBinding()
-	-- upvalues: reactModule (ref), foundationModule (ref)
-	local var1, var2 = reactModule.useBinding(false)
+local function useHoverBinding() --[[ Line: 17 ]]
+	-- upvalues: ReactModule (copy), FoundationModule (copy)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(false)
 	
-	return var1, reactModule.useCallback(function(p1)
-		-- upvalues: foundationModule (copy), var2 (ref)
-		if p1 == foundationModule.Enums.ControlState.Default then
-			var2(false)
+	return UseBindingResult, (ReactModule.useCallback(function(Default) --[[ Line: 21 ]]
+		-- upvalues: FoundationModule (upval), UseBindingResult2 (copy)
+		if Default == FoundationModule.Enums.ControlState.Default then
+			UseBindingResult2(false)
 			
 			return
-		elseif p1 == foundationModule.Enums.ControlState.Hover then
-			var2(true)
 		end
-	end, {})
+		if Default == FoundationModule.Enums.ControlState.Hover then
+			UseBindingResult2(true)
+		end
+	end, {}))
 end
 
-return reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useTokens (ref), useHoverBinding (ref), reactModule (ref), foundationModule (ref), t (ref), getHoverTransparency (ref)
-	local var1 = useTokens()
-	local var2, var3 = useHoverBinding()
+return ReactModule.forwardRef(function(Frame, Ref) --[[ Line: 45 | Named "ContextualActionButton" ]]
+	-- upvalues: UseTokensFunction (copy), useHoverBinding (copy), ReactModule (copy), FoundationModule (copy), StateLayer (copy), getHoverTransparency (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseHoverBindingResult, UseHoverBindingResult2 = useHoverBinding()
 	
-	return reactModule.createElement(foundationModule.View, {
+	return ReactModule.createElement(FoundationModule.View, {
 		tag = "radius-circle clip auto-xy",
-		ref = p2,
-		backgroundStyle = var1.Color.OverMedia.OverMedia_0,
-		LayoutOrder = p1.LayoutOrder,
-		stateLayer = t,
-		onStateChanged = if p1.disabled then nil else var3,
-		onActivated = p1.onActivated,
-		disabled = p1.disabled,
-		selection = { Selectable = p1.Selectable or false }
+		ref = Ref,
+		backgroundStyle = UseTokensResult.Color.OverMedia.OverMedia_0,
+		LayoutOrder = Frame.LayoutOrder,
+		stateLayer = StateLayer,
+		onStateChanged = if Frame.disabled then nil else UseHoverBindingResult2,
+		onActivated = Frame.onActivated,
+		disabled = Frame.disabled,
+		selection = { Selectable = Frame.Selectable or false }
 	}, {
-		HoverHandler = reactModule.createElement(foundationModule.View, {
+		HoverHandler = ReactModule.createElement(FoundationModule.View, {
 			tag = "padding-small radius-circle clip auto-xy",
-			Size = if p1.size then UDim2.new(p1.size, p1.size) else UDim2.fromScale(1, 1),
-			GroupTransparency = p1.GroupTransparencyOverwrite or var2:map(getHoverTransparency),
-			backgroundStyle = var2:map(reactModule.useCallback(function(p3)
-				-- upvalues: var1 (ref), p1 (ref)
-				return if p3 then var1.Color.Shift.Shift_200 elseif p1.isActive then var1.Color.Shift.Shift_400 else {
+			Size = if Frame.size then UDim2.new(Frame.size, Frame.size) else UDim2.fromScale(1, 1),
+			GroupTransparency = Frame.GroupTransparencyOverwrite or UseHoverBindingResult:map(getHoverTransparency),
+			backgroundStyle = UseHoverBindingResult:map((ReactModule.useCallback(function(p1) --[[ Line: 50 ]]
+				-- upvalues: UseTokensResult (copy), Frame (copy)
+				return if p1 then UseTokensResult.Color.Shift.Shift_200 elseif Frame.isActive then UseTokensResult.Color.Shift.Shift_400 else {
 					Transparency = 1,
-					Color3 = var1.Color.Shift.Shift_200.Color3
+					Color3 = UseTokensResult.Color.Shift.Shift_200.Color3
 				}
-			end, { p1.isActive, var1 }))
+			end, { Frame.isActive, UseTokensResult })))
 		}, {
-			Children = reactModule.createElement(reactModule.Fragment, nil, p1.children)
+			Children = ReactModule.createElement(ReactModule.Fragment, nil, Frame.children)
 		})
 	})
 end)

@@ -1,36 +1,36 @@
-﻿local tModule = require(script:FindFirstAncestor("RoduxSquads").Parent.t)
-local t = {}
+﻿local TModule = require(script:FindFirstAncestor("RoduxSquads").Parent.t)
+local SquadMemberModelModule = {}
 
-function t.new(p1)
-	-- upvalues: t (ref)
-	assert(t.isValid(p1))
-	t.__index = t
-	setmetatable(p1, t)
+function SquadMemberModelModule.new(p1) --[[ Line: 8 ]]
+	-- upvalues: SquadMemberModelModule (copy)
+	assert(SquadMemberModelModule.isValid(p1))
+	SquadMemberModelModule.__index = SquadMemberModelModule
+	setmetatable(p1, SquadMemberModelModule)
 	
 	return p1
 end
 
-function t.mock(p1)
-	-- upvalues: t (ref)
-	p1 = p1 or {}
+function SquadMemberModelModule.mock(p1) --[[ Line: 20 ]]
+	-- upvalues: SquadMemberModelModule (copy)
+	local P1 = p1 or {}
 	
-	return t.new({
-		userId = p1.userId or 1234,
-		partyVoiceEligible = p1.partyVoiceEligible or false
-	})
+	return (SquadMemberModelModule.new({
+		userId = P1.userId or 1234,
+		partyVoiceEligible = P1.partyVoiceEligible or false
+	}))
 end
 
-function t.format(p1)
-	-- upvalues: t (ref)
-	return t.new({
+function SquadMemberModelModule.format(p1) --[[ Line: 31 ]]
+	-- upvalues: SquadMemberModelModule (copy)
+	return (SquadMemberModelModule.new({
 		userId = p1.userId,
 		partyVoiceEligible = p1.partyVoiceEligible
-	})
+	}))
 end
 
-t.isValid = tModule.interface({
-	userId = tModule.number,
-	partyVoiceEligible = tModule.optional(tModule.boolean)
+SquadMemberModelModule.isValid = TModule.interface({
+	userId = TModule.number,
+	partyVoiceEligible = TModule.optional(TModule.boolean)
 })
 
-return t
+return SquadMemberModelModule

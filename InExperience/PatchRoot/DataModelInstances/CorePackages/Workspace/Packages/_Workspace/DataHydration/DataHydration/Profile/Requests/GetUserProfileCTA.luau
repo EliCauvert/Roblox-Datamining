@@ -1,32 +1,29 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local profile = dataHydration.Profile
-local parent = dataHydration.Parent
-local url = require(parent.Http).Url
-local urlBuilder = require(parent.UrlBuilder).UrlBuilder
-local myHttpRequestModule = require(profile.Networking.myHttpRequest)
-local fFlagJoinabilityCTARefactor = require(parent.SharedFlags).FFlagJoinabilityCTARefactor
-local var1 = urlBuilder.new({
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local Parent = DataHydration.Parent
+local MyHttpRequestModule = require(DataHydration.Profile.Networking.myHttpRequest)
+local FFlagJoinabilityCTARefactor = require(Parent.SharedFlags).FFlagJoinabilityCTARefactor
+local v1 = require(Parent.UrlBuilder).UrlBuilder.new({
 	path = "profile-platform-api/v1/profiles/batch/get",
-	base = url.APIS_URL
+	base = require(Parent.Http).Url.APIS_URL
 })()
 local list = {
 	{ component = "Actions", excludeContextualActions = true }
 }
 
-return function(p1, p2)
-	-- upvalues: fFlagJoinabilityCTARefactor (ref), list (ref), myHttpRequestModule (ref), var1 (ref)
-	return myHttpRequestModule(var1, "POST", {
-		postBody = if fFlagJoinabilityCTARefactor then {
+return function(ProfileIds, p1) --[[ Line: 41 ]]
+	-- upvalues: FFlagJoinabilityCTARefactor (copy), list (copy), MyHttpRequestModule (copy), v1 (copy)
+	return MyHttpRequestModule(v1, "POST", {
+		postBody = if FFlagJoinabilityCTARefactor then {
 			profileType = "User",
-			profileIds = p1,
-			components = p2 or list
+			profileIds = ProfileIds,
+			components = p1 or list
 		} else {
 			profileType = "User",
 			excludeContextualActions = true,
-			profileIds = p1,
+			profileIds = ProfileIds,
 			components = { { component = "Actions" } }
 		}
-	}):catch(function(p3)
-		error(p3)
+	}):catch(function(Err) --[[ Line: 62 ]]
+		error(Err)
 	end)
 end

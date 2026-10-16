@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.AvatarExperienceProfilePictureEditor.AvatarExperienceProfilePictureEditor)
+﻿return (require(script.Parent.Parent.Parent._Index.AvatarExperienceProfilePictureEditor.AvatarExperienceProfilePictureEditor))

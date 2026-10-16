@@ -1,22 +1,23 @@
-﻿local reactModule = require(script:FindFirstAncestor("RoactUtils").Parent.React)
+﻿local ReactModule = require(script:FindFirstAncestor("RoactUtils").Parent.React)
 
-return function(p1)
-	-- upvalues: reactModule (ref)
-	local var1 = reactModule.useRef(false)
-	local var2 = reactModule.useRef(false)
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), var2 (ref), p1 (ref)
-		if not var1.current then
-			var1.current = true
+return function(Callback) --[[ Line: 10 ]]
+	-- upvalues: ReactModule (copy)
+	local UseRefResult = ReactModule.useRef(false)
+	local UseRefResult1 = ReactModule.useRef(false)
+	ReactModule.useEffect(function() --[[ Line: 14 ]]
+		-- upvalues: UseRefResult (copy), UseRefResult1 (copy), Callback (copy)
+		if not UseRefResult.current then
+			UseRefResult.current = true
 			
 			return
-		elseif not var2.current then
-			var2.current = true
 		end
-		if p1 then
-			p1()
+		if not UseRefResult1.current then
+			UseRefResult1.current = true
+		end
+		if Callback then
+			Callback()
 		end
 	end)
 	
-	return var2
+	return UseRefResult1
 end

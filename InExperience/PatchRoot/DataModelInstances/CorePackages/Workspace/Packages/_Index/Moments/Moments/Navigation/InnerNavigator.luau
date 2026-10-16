@@ -1,13 +1,13 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local roactNavigationModule = require(moments.Parent.RoactNavigation)
-local momentsFeed = require(moments.Navigation.Routes).MomentsFeed
+﻿local Moments = script:FindFirstAncestor("Moments")
+local RoactNavigationModule = require(Moments.Parent.RoactNavigation)
+local MomentsFeed = require(Moments.Navigation.Routes).MomentsFeed
 
-return roactNavigationModule.createRobloxSwitchNavigator({
+return (RoactNavigationModule.createRobloxSwitchNavigator({
 	{
-		[momentsFeed] = { screen = require(moments.Components.TrendingScreen) }
+		[MomentsFeed] = { screen = require(Moments.Components.TrendingScreen) }
 	}
 }, {
 	keepVisitedScreensMounted = true,
-	initialRouteName = momentsFeed,
-	backBehavior = roactNavigationModule.BackBehavior.History
-})
+	initialRouteName = MomentsFeed,
+	backBehavior = RoactNavigationModule.BackBehavior.History
+}))

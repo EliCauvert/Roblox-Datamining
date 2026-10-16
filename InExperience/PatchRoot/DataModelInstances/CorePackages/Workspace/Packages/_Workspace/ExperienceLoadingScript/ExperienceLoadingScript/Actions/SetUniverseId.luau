@@ -1,9 +1,9 @@
-﻿local parent = script:FindFirstAncestor("ExperienceLoadingScript").Parent
-local argCheckModule = require(parent.ArgCheck)
+﻿local Parent = script:FindFirstAncestor("ExperienceLoadingScript").Parent
+local ArgCheckModule = require(Parent.ArgCheck)
 
-return require(parent.Rodux).makeActionCreator(script.Name, function(p1)
-	-- upvalues: argCheckModule (ref)
-	argCheckModule.isType(p1, "table", "SetUniverseId action expects gameIds to be a table")
+return require(Parent.Rodux).makeActionCreator(script.Name, function(p1) --[[ Line: 7 ]]
+	-- upvalues: ArgCheckModule (copy)
+	ArgCheckModule.isType(p1, "table", "SetUniverseId action expects gameIds to be a table")
 	
 	return { universeId = p1.universeId, placeId = p1.placeId }
 end)

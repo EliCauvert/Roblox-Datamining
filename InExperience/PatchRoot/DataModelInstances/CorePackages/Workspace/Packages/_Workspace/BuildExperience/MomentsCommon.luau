@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.MomentsCommon.MomentsCommon)
+﻿return (require(script.Parent.Parent.Parent._Index.MomentsCommon.MomentsCommon))

@@ -1,92 +1,100 @@
 ﻿local _ = require(script:FindFirstAncestor("Moments").Parent.MomentsCommon)
 
-return function(p1)
-	local now = p1.now
-	local var1 = nil
-	local var2 = 0
+return function(p1) --[[ Line: 68 | Named "swipeLatencyMachine" ]]
+	local NowFunction = p1.now
+	local Config = nil
+	local Count = 0
 	
-	local function _()
-		-- upvalues: var1 (write), p1 (ref)
-		if var1 == nil then return end
-		local settledAt = var1.settledAt
-		local frameAt = var1.frameAt
+	local function _() --[[ Line: 76 | Named "tryComplete" ]]
+		-- upvalues: Config (ref), p1 (copy)
+		local Config1 = Config
 		
-		if settledAt == nil or frameAt == nil then
+		if Config1 == nil then return end
+		local SettledAt: number = Config1.settledAt
+		local FrameAt: number = Config1.frameAt
+		
+		if SettledAt ~= nil and FrameAt ~= nil then
+			Config = nil
+			p1.onMeasurement(math.round((math.max(0, FrameAt - SettledAt))), math.round(math.max(FrameAt, SettledAt) - Config1.committedAt), Config1.dimensions)
+			
 			return
 		end
-		var1 = nil
-		p1.onMeasurement(math.round(math.max(0, frameAt - settledAt)), math.round(math.max(frameAt, settledAt) - var1.committedAt), var1.dimensions)
 	end
 	
-	local schedule = p1.schedule or task.delay
+	local Schedule = p1.schedule or task.delay
 	
-	local _ = function(p2)
-		-- upvalues: p1 (ref), schedule (ref), var2 (write), var1 (write)
-		if p1.capMs <= 0 then
+	local _ = function(Count1) --[[ Line: 97 | Named "armCap" ]]
+		-- upvalues: p1 (copy), Schedule (copy), Count (ref), Config (ref)
+		if p1.capMs > 0 then
+			Schedule(p1.capMs / 1000, function() --[[ Line: 101 ]]
+				-- upvalues: Count1 (copy), Count (upval), Config (upval)
+				if Count1 == Count then
+					Config = nil
+					
+					return
+				end
+			end)
+			
 			return
 		end
-		schedule(p1.capMs / 1000, function()
-			-- upvalues: p2 (ref), var2 (copy), var1 (copy)
-			if p2 == var2 then
-				var1 = nil
-				
-				return
-			end
-		end)
 	end
 	
 	return {
-		start = function(p2, p3, p4)
-			-- upvalues: var2 (write), now (ref), var1 (write), p1 (ref), schedule (ref)
-			var2 += 1
-			local var3 = now()
-			var1 = {
-				committedAt = var3,
-				settledAt = if p2 then var3 else nil,
-				frameAt = if p3 then var3 else nil,
-				dimensions = p4
+		start = function(p2, p3, Dimensions) --[[ Line: 110 ]]
+			-- upvalues: Count (ref), NowFunction (copy), Config (ref), p1 (copy), Schedule (copy)
+			Count += 1
+			local NowResult = NowFunction()
+			Config = {
+				committedAt = NowResult,
+				settledAt = if p2 then NowResult else nil,
+				frameAt = if p3 then NowResult else nil,
+				dimensions = Dimensions
 			}
-			local var4 = var2
+			local Count1: number = Count
 			
 			if p1.capMs > 0 then
-				schedule(p1.capMs / 1000, function()
-					-- upvalues: var4 (ref), var2 (copy), var1 (copy)
-					if var4 == var2 then
-						var1 = nil
+				Schedule(p1.capMs / 1000, function() --[[ Line: 101 ]]
+					-- upvalues: Count1 (copy), Count (upval), Config (upval)
+					if Count1 == Count then
+						Config = nil
 						
 						return
 					end
 				end)
 			end
-			local var5 = var1
+			local Config1 = Config
 			
-			if var5 == nil then return end
-			local settledAt = var5.settledAt
-			local frameAt = var5.frameAt
+			if Config1 == nil then return end
+			local SettledAt: number = Config1.settledAt
+			local FrameAt: number = Config1.frameAt
 			
-			if settledAt ~= nil then
-				if frameAt == nil then return end
-				var1 = nil
-				p1.onMeasurement(math.round(math.max(0, frameAt - settledAt)), math.round(math.max(frameAt, settledAt) - var5.committedAt), var5.dimensions)
+			if SettledAt ~= nil then
+				if FrameAt == nil then return end
+				Config = nil
+				p1.onMeasurement(math.round((math.max(0, FrameAt - SettledAt))), math.round(math.max(FrameAt, SettledAt) - Config1.committedAt), Config1.dimensions)
 			end
 		end,
-		update = function(p2, p3)
-			-- upvalues: var1 (write), now (ref), p1 (ref)
-			if var1 == nil then return end
-			if var1.settledAt == nil and p2 then
-				var1.settledAt = now()
-			end
-			if var1.frameAt == nil and p3 then
-				var1.frameAt = now()
-			end
-			if var1 == nil then return end
-			local settledAt = var1.settledAt
-			local frameAt = var1.frameAt
+		update = function(p2, p3) --[[ Line: 126 ]]
+			-- upvalues: Config (ref), NowFunction (copy), p1 (copy)
+			local Config1 = Config
 			
-			if settledAt ~= nil then
-				if frameAt == nil then return end
-				var1 = nil
-				p1.onMeasurement(math.round(math.max(0, frameAt - settledAt)), math.round(math.max(frameAt, settledAt) - var1.committedAt), var1.dimensions)
+			if Config1 == nil then return end
+			if Config1.settledAt == nil and p2 then
+				Config1.settledAt = NowFunction()
+			end
+			if Config1.frameAt == nil and p3 then
+				Config1.frameAt = NowFunction()
+			end
+			local Config2 = Config
+			
+			if Config2 == nil then return end
+			local SettledAt: number = Config2.settledAt
+			local FrameAt: number = Config2.frameAt
+			
+			if SettledAt ~= nil then
+				if FrameAt == nil then return end
+				Config = nil
+				p1.onMeasurement(math.round((math.max(0, FrameAt - SettledAt))), math.round(math.max(FrameAt, SettledAt) - Config2.committedAt), Config2.dimensions)
 			end
 		end
 	}

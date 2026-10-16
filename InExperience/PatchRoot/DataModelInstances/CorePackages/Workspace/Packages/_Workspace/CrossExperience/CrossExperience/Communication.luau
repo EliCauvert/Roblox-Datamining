@@ -1,100 +1,98 @@
-﻿local crossExperience = script:FindFirstAncestor("CrossExperience")
-local experienceService = game:GetService("ExperienceService")
-local httpService = game:GetService("HttpService")
-local logEvent = require(crossExperience.Analytics.CrossExperienceAnalytics).logEvent
-local constantsModule = require(crossExperience.Constants)
-local getMemStorageKeyModule = require(crossExperience.Utils.getMemStorageKey)
-local eventNamesModule = require(crossExperience.Analytics.EventNames)
-local loggerModule = require(crossExperience.Logger)
-local _ = require(crossExperience.Types)
-local fFlagFixCrossExperienceVoiceExecutePrint = require(crossExperience.dependencies).SharedFlags.FFlagFixCrossExperienceVoiceExecutePrint
+﻿local CrossExperience = script:FindFirstAncestor("CrossExperience")
+local ExperienceService = game:GetService("ExperienceService")
+local HttpService = game:GetService("HttpService")
+local LogEventFunction = require(CrossExperience.Analytics.CrossExperienceAnalytics).logEvent
+local ConstantsModule = require(CrossExperience.Constants)
+local GetMemStorageKeyModule = require(CrossExperience.Utils.getMemStorageKey)
+local EventNamesModule = require(CrossExperience.Analytics.EventNames)
+local LoggerModule = require(CrossExperience.Logger)
+local _ = require(CrossExperience.Types)
+local FFlagFixCrossExperienceVoiceExecutePrint = require(CrossExperience.dependencies).SharedFlags.FFlagFixCrossExperienceVoiceExecutePrint
 
-local var1 = function() end
+local function v9() --[[ Line: 21 ]] end
 
-local var2 = function(p1, p2, p3, p4)
-	-- upvalues: experienceService (ref), fFlagFixCrossExperienceVoiceExecutePrint (ref), loggerModule (ref)
-	local ok, status = pcall(function()
-		-- upvalues: experienceService (copy), p1 (ref), p2 (ref), p3 (ref), fFlagFixCrossExperienceVoiceExecutePrint (copy), loggerModule (copy), p4 (ref)
-		experienceService:ExecuteCrossExperienceCall(p1, p2, function(p5)
-			-- upvalues: p3 (copy)
-			if p3 then
-				p3(p5)
+local function Execute(ADDOBSERVER, p1, Callback1, Callback: (any) -> ()) --[[ Line: 23 ]]
+	-- upvalues: ExperienceService (copy), FFlagFixCrossExperienceVoiceExecutePrint (copy), LoggerModule (copy)
+	local Success, Result = pcall(function() --[[ Line: 24 ]]
+		-- upvalues: ExperienceService (upval), ADDOBSERVER (copy), p1 (copy), Callback1 (copy), FFlagFixCrossExperienceVoiceExecutePrint (upval), LoggerModule (upval), Callback (copy)
+		ExperienceService:ExecuteCrossExperienceCall(ADDOBSERVER, p1, function(p2) --[[ Line: 25 ]]
+			-- upvalues: Callback1 (upval)
+			if Callback1 then
+				Callback1(p2)
 			end
-		end, function(p5)
-			-- upvalues: fFlagFixCrossExperienceVoiceExecutePrint (copy), loggerModule (copy), p4 (copy)
-			if fFlagFixCrossExperienceVoiceExecutePrint then
-				loggerModule:warning("Error executing call: {}", p5)
+		end, function(p2) --[[ Line: 29 ]]
+			-- upvalues: FFlagFixCrossExperienceVoiceExecutePrint (upval), LoggerModule (upval), Callback (upval)
+			if FFlagFixCrossExperienceVoiceExecutePrint then
+				LoggerModule:warning("Error executing call: {}", p2)
 			else
-				print("[CrossExperience] Error executing call", p5)
+				print("[CrossExperience] Error executing call", p2)
 			end
-			if p4 then
-				p4(p5)
+			if Callback then
+				Callback(p2)
 			end
 		end)
 	end)
 	
-	if not ok then
-		if fFlagFixCrossExperienceVoiceExecutePrint then
-			loggerModule:warning("Error executing call pcall: {} {}", p1, status)
+	if not Success then
+		if FFlagFixCrossExperienceVoiceExecutePrint then
+			LoggerModule:warning("Error executing call pcall: {} {}", ADDOBSERVER, Result)
 		else
-			print("[CrossExperience] Error executing call pcall", p1, status)
+			print("[CrossExperience] Error executing call pcall", ADDOBSERVER, Result)
 		end
-		if p4 then
-			p4("[CrossExperience] Error executing call pcall")
+		if Callback then
+			Callback("[CrossExperience] Error executing call pcall")
 		end
 	end
 end
 
-local var3 = function(p1, p2, p3, p4)
-	-- upvalues: getMemStorageKeyModule (ref), constantsModule (ref), logEvent (ref), eventNamesModule (ref), var2 (ref)
-	logEvent(eventNamesModule.NotifyObserver, {
+local function NotifyWithCallbacks(p1, p2, p3, p4) --[[ Line: 54 ]]
+	-- upvalues: GetMemStorageKeyModule (copy), ConstantsModule (copy), LogEventFunction (copy), EventNamesModule (copy), Execute (copy)
+	LogEventFunction(EventNamesModule.NotifyObserver, {
 		eventName = p1.NOTIFY,
 		clientTimeStamp = os.time(),
-		cevJoinAttemptId = getMemStorageKeyModule(constantsModule.CEV_JOIN_ATTEMPT_ID_KEY)
+		cevJoinAttemptId = GetMemStorageKeyModule(ConstantsModule.CEV_JOIN_ATTEMPT_ID_KEY)
 	})
-	var2(p1.NOTIFY, p2, p3, p4)
+	Execute(p1.NOTIFY, p2, p3, p4)
 end
 
-local var4 = function(p1, p2)
-	-- upvalues: var3 (ref), var1 (ref)
-	var3(p1, p2, var1, var1)
-end
-
-local var5 = function(p1, p2, p3, _, p4)
-	-- upvalues: httpService (ref), logEvent (ref), eventNamesModule (ref), getMemStorageKeyModule (ref), constantsModule (ref), var2 (ref)
-	local var6 = httpService:GenerateGUID(false)
-	logEvent(eventNamesModule.AddObserver, {
-		eventName = p2.ADD_OBSERVER,
+local function AddObserverWithCallbacks(ExperienceType, p1, p2, _, p3) --[[ Line: 74 ]]
+	-- upvalues: HttpService (copy), LogEventFunction (copy), EventNamesModule (copy), GetMemStorageKeyModule (copy), ConstantsModule (copy), Execute (copy)
+	local Guid = HttpService:GenerateGUID(false)
+	LogEventFunction(EventNamesModule.AddObserver, {
+		eventName = p1.ADD_OBSERVER,
 		clientTimeStamp = os.time(),
-		cevJoinAttemptId = getMemStorageKeyModule(constantsModule.CEV_JOIN_ATTEMPT_ID_KEY)
+		cevJoinAttemptId = GetMemStorageKeyModule(ConstantsModule.CEV_JOIN_ATTEMPT_ID_KEY)
 	})
-	var2(p2.ADD_OBSERVER, { observerId = var6, experienceType = p1 }, p3, p4)
+	Execute(p1.ADD_OBSERVER, { observerId = Guid, experienceType = ExperienceType }, p2, p3)
 	
-	return var6
+	return Guid
 end
 
-local var6 = function(p1, p2, p3, p4, p5)
-	-- upvalues: logEvent (ref), eventNamesModule (ref), getMemStorageKeyModule (ref), constantsModule (ref), var2 (ref)
-	logEvent(eventNamesModule.RemoveObserver, {
-		eventName = p2.REMOVE_OBSERVER,
+local function RemoveObserverWithCallbacks(ExperienceType, p1, ObserverId, p2, p3) --[[ Line: 99 ]]
+	-- upvalues: LogEventFunction (copy), EventNamesModule (copy), GetMemStorageKeyModule (copy), ConstantsModule (copy), Execute (copy)
+	LogEventFunction(EventNamesModule.RemoveObserver, {
+		eventName = p1.REMOVE_OBSERVER,
 		clientTimeStamp = os.time(),
-		cevJoinAttemptId = getMemStorageKeyModule(constantsModule.CEV_JOIN_ATTEMPT_ID_KEY)
+		cevJoinAttemptId = GetMemStorageKeyModule(ConstantsModule.CEV_JOIN_ATTEMPT_ID_KEY)
 	})
-	var2(p2.REMOVE_OBSERVER, { observerId = p3, experienceType = p1 }, p4, p5)
+	Execute(p1.REMOVE_OBSERVER, { observerId = ObserverId, experienceType = ExperienceType }, p2, p3)
 end
 
 return {
-	execute = var2,
-	notify = var4,
-	notifyWithCallbacks = var3,
-	addObserver = function(p1, p2, p3)
-		-- upvalues: var5 (ref), var1 (ref)
-		return var5(p1, p2, p3, var1, var1)
+	execute = Execute,
+	notify = function(p1, p2) --[[ Line: 70 ]]
+		-- upvalues: NotifyWithCallbacks (copy), v9 (copy)
+		NotifyWithCallbacks(p1, p2, v9, v9)
 	end,
-	addObserverWithCallbacks = var5,
-	removeObserver = function(p1, p2, p3)
-		-- upvalues: var6 (ref), var1 (ref)
-		return var6(p1, p2, p3, var1, var1)
+	notifyWithCallbacks = NotifyWithCallbacks,
+	addObserver = function(ExperienceType, p1, p2) --[[ Line: 95 ]]
+		-- upvalues: AddObserverWithCallbacks (copy), v9 (copy)
+		return (AddObserverWithCallbacks(ExperienceType, p1, p2, v9, v9))
 	end,
-	removeObserverWithCallbacks = var6
+	addObserverWithCallbacks = AddObserverWithCallbacks,
+	removeObserver = function(ExperienceType, p1, ObserverId) --[[ Line: 117 ]]
+		-- upvalues: RemoveObserverWithCallbacks (copy), v9 (copy)
+		return RemoveObserverWithCallbacks(ExperienceType, p1, ObserverId, v9, v9)
+	end,
+	removeObserverWithCallbacks = RemoveObserverWithCallbacks
 }

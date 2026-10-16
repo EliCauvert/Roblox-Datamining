@@ -1,112 +1,112 @@
-﻿local playersService = game:GetService("Players")
+﻿local Players = game:GetService("Players")
 local list = { "/team ", "/t ", "% " }
 
-function IsTeamCommand(p1)
-	-- upvalues: list (ref)
+function IsTeamCommand(Text: string): boolean --[[ Line: 10 ]]
+	-- upvalues: list (copy)
 	for i = 1, #list do
-		local var1 = list[i]
+		local Entry = list[i]
 		
-		if string.sub(p1, 1, var1:len()):lower() ~= var1 then
-			continue
+		if string.sub(Text, 1, Entry:len()):lower() == Entry then
+			return true
 		end
-		return true
 	end
 	return false
 end
 
-local t = {}
-t.__index = t
-local utilModule = require(script.Parent:WaitForChild("Util"))
-local t_1 = {
-	new = function(p2, p3, p4)
-		-- upvalues: t (ref)
-		local tbl = setmetatable({}, t)
-		tbl.Destroyed = false
-		tbl.ChatWindow = p2
-		tbl.ChatBar = p3
-		tbl.ChatSettings = p4
-		tbl.TextBox = p3:GetTextBox()
-		tbl.MessageModeButton = p3:GetMessageModeTextButton()
-		tbl.OriginalTeamText = ""
-		tbl.TeamChatEntered = false
-		tbl.MessageModeConnection = tbl.MessageModeButton.MouseButton1Click:connect(function()
-			-- upvalues: tbl (ref)
-			local text = tbl.TextBox.Text
-			
-			if string.sub(text, 1, 1) == " " then
-				text = string.sub(text, 2)
-			end
-			tbl.ChatBar:ResetCustomState()
-			tbl.ChatBar:SetTextBoxText(text)
-			tbl.ChatBar:CaptureFocus()
-		end)
-		tbl:EnterTeamChat()
+local Module = {}
+Module.__index = Module
+local UtilModule = require(script.Parent:WaitForChild("Util"))
+
+function Module.EnterTeamChat(p1) --[[ Line: 27 ]]
+	p1.TeamChatEntered = true
+	p1.MessageModeButton.Size = UDim2.new(0, 1000, 1, 0)
+	p1.MessageModeButton.Text = "[Team]"
+	p1.MessageModeButton.TextColor3 = p1:GetTeamChatColor()
+	local X = p1.MessageModeButton.TextBounds.X
+	p1.MessageModeButton.Size = UDim2.new(0, X, 1, 0)
+	p1.TextBox.Size = UDim2.new(1, -X, 1, 0)
+	p1.TextBox.Position = UDim2.new(0, X, 0, 0)
+	p1.OriginalTeamText = p1.TextBox.Text
+	p1.TextBox.Text = " "
+end
+
+function Module.TextUpdated(p1) --[[ Line: 41 ]]
+	local Text = p1.TextBox.Text
+	
+	if p1.TeamChatEntered then
+		if Text == "" then
+			p1.MessageModeButton.Text = ""
+			p1.MessageModeButton.Size = UDim2.new(0, 0, 0, 0)
+			p1.TextBox.Size = UDim2.new(1, 0, 1, 0)
+			p1.TextBox.Position = UDim2.new(0, 0, 0, 0)
+			p1.TextBox.Text = ""
+			p1.TeamChatEntered = false
+			p1.ChatBar:ResetCustomState()
+			p1.ChatBar:CaptureFocus()
+		end
+	elseif IsTeamCommand(Text) then
+		p1:EnterTeamChat()
 		
-		return tbl
+		return
+	end
+end
+
+function Module.GetMessage(p1) --[[ Line: 64 ]]
+	return if p1.TeamChatEntered then "/t " .. p1.TextBox.Text else p1.TextBox.Text
+end
+
+function Module:ProcessCompletedMessage(): boolean --[[ Line: 71 ]]
+	return false
+end
+
+function Module.Destroy(p1) --[[ Line: 75 ]]
+	p1.MessageModeConnection:disconnect()
+	p1.Destroyed = true
+end
+
+function Module.GetTeamChatColor(p1) --[[ Line: 80 ]]
+	-- upvalues: Players (copy)
+	local LocalPlayer = Players.LocalPlayer
+	
+	return if LocalPlayer.Team then LocalPlayer.Team.TeamColor.Color elseif p1.ChatSettings.DefaultChannelNameColor then p1.ChatSettings.DefaultChannelNameColor else Color3.fromRGB(35, 76, 142)
+end
+
+local config = {
+	new = function(ChatWindow, ChatBar, ChatSettings) --[[ Line: 91 ]]
+		-- upvalues: Module (copy)
+		local self = setmetatable({}, Module)
+		self.Destroyed = false
+		self.ChatWindow = ChatWindow
+		self.ChatBar = ChatBar
+		self.ChatSettings = ChatSettings
+		self.TextBox = ChatBar:GetTextBox()
+		self.MessageModeButton = ChatBar:GetMessageModeTextButton()
+		self.OriginalTeamText = ""
+		self.TeamChatEntered = false
+		self.MessageModeConnection = self.MessageModeButton.MouseButton1Click:connect(function() --[[ Line: 102 ]]
+			-- upvalues: self (copy)
+			local Text = self.TextBox.Text
+			
+			if string.sub(Text, 1, 1) == " " then
+				Text = string.sub(Text, 2)
+			end
+			self.ChatBar:ResetCustomState()
+			self.ChatBar:SetTextBoxText(Text)
+			self.ChatBar:CaptureFocus()
+		end)
+		self:EnterTeamChat()
+		
+		return self
 	end
 }
 
-function t.EnterTeamChat(p2)
-	p2.TeamChatEntered = true
-	p2.MessageModeButton.Size = UDim2.new(0, 1000, 1, 0)
-	p2.MessageModeButton.Text = "[Team]"
-	p2.MessageModeButton.TextColor3 = p2:GetTeamChatColor()
-	local x = p2.MessageModeButton.TextBounds.X
-	p2.MessageModeButton.Size = UDim2.new(0, x, 1, 0)
-	p2.TextBox.Size = UDim2.new(1, -x, 1, 0)
-	p2.TextBox.Position = UDim2.new(0, x, 0, 0)
-	p2.OriginalTeamText = p2.TextBox.Text
-	p2.TextBox.Text = " "
-end
-
-function t.TextUpdated(p2)
-	local text = p2.TextBox.Text
-	
-	if not p2.TeamChatEntered then
-		if IsTeamCommand(text) then
-			p2:EnterTeamChat()
-			
-			return
-		end
-	elseif text == "" then
-		p2.MessageModeButton.Text = ""
-		p2.MessageModeButton.Size = UDim2.new(0, 0, 0, 0)
-		p2.TextBox.Size = UDim2.new(1, 0, 1, 0)
-		p2.TextBox.Position = UDim2.new(0, 0, 0, 0)
-		p2.TextBox.Text = ""
-		p2.TeamChatEntered = false
-		p2.ChatBar:ResetCustomState()
-		p2.ChatBar:CaptureFocus()
-	end
-end
-
-function t.GetMessage(p2)
-	return if p2.TeamChatEntered then "/t " .. p6.TextBox.Text else p2.TextBox.Text
-end
-
-function t.ProcessCompletedMessage(_)
-	return false
-end
-
-function t.Destroy(p2)
-	p2.MessageModeConnection:disconnect()
-	p2.Destroyed = true
-end
-
-function t.GetTeamChatColor(p2)
-	-- upvalues: playersService (ref)
-	local localPlayer = playersService.LocalPlayer
-	
-	return if localPlayer.Team then localPlayer.Team.TeamColor.Color elseif p2.ChatSettings.DefaultChannelNameColor then p2.ChatSettings.DefaultChannelNameColor else Color3.fromRGB(35, 76, 142)
-end
-
-function ProcessMessage(p2, p3, p4, p5)
-	-- upvalues: t_1 (ref)
-	if p4.TargetChannel == "Team" then return end
-	return if IsTeamCommand(p2) then t_1.new(p3, p4, p5) else nil
+function ProcessMessage(p1, ChatWindow, ChatBar, ChatSettings) --[[ Line: 117 ]]
+	-- upvalues: config (copy)
+	if ChatBar.TargetChannel == "Team" then return end
+	return if IsTeamCommand(p1) then config.new(ChatWindow, ChatBar, ChatSettings) else nil
 end
 
 return {
-	[utilModule.KEY_COMMAND_PROCESSOR_TYPE] = utilModule.IN_PROGRESS_MESSAGE_PROCESSOR,
-	[utilModule.KEY_PROCESSOR_FUNCTION] = ProcessMessage
+	[UtilModule.KEY_COMMAND_PROCESSOR_TYPE] = UtilModule.IN_PROGRESS_MESSAGE_PROCESSOR,
+	[UtilModule.KEY_PROCESSOR_FUNCTION] = ProcessMessage
 }

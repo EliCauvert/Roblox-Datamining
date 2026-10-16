@@ -1,28 +1,29 @@
-﻿local t = {}
-t.__index = t
+﻿local MockVRService = {}
+MockVRService.__index = MockVRService
 
-function t:GetPropertyChangedSignal(p1)
+function MockVRService:GetPropertyChangedSignal(p1) --[[ Line: 4 ]]
 	if p1 == "VRDeviceAvailable" then
 		return self._vrDeviceAvailableChanged.Event
+	else
+		error(("%s is not a valid property name"):format((tostring(p1))))
 	end
-	error(("%s is not a valid property name"):format(tostring(p1)))
 end
 
-function t:toggleHeadsetConnectionState()
-	local var1 = not self.VRDeviceAvailable
-	self.VRDeviceAvailable = var1
-	self._vrDeviceAvailableChanged:Fire(var1)
+function MockVRService:toggleHeadsetConnectionState() --[[ Line: 11 ]]
+	local NoVRDeviceAvailable = not self.VRDeviceAvailable
+	self.VRDeviceAvailable = NoVRDeviceAvailable
+	self._vrDeviceAvailableChanged:Fire(NoVRDeviceAvailable)
 end
 
-function t.new()
-	-- upvalues: t (ref)
-	local t_1 = {
+function MockVRService.new() --[[ Line: 18 ]]
+	-- upvalues: MockVRService (copy)
+	local config = {
 		VRDeviceAvailable = true,
 		_vrDeviceAvailableChanged = Instance.new("BindableEvent")
 	}
-	setmetatable(t_1, { __index = t })
+	setmetatable(config, { __index = MockVRService })
 	
-	return t_1
+	return config
 end
 
-return t
+return MockVRService

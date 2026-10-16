@@ -1,19 +1,20 @@
-﻿local otterModule = require(game:GetService("CorePackages").Packages.Otter)
+﻿local OtterModule = require(game:GetService("CorePackages").Packages.Otter)
 
-return function(value)
-	-- upvalues: otterModule (ref)
-	local sizeAnimation = value.SizeAnimation
+return function(p1) --[[ Line: 5 | Named "getSizeSpringFromSettings" ]]
+	-- upvalues: OtterModule (copy)
+	local SizeAnimation = p1.SizeAnimation
 	
-	if sizeAnimation.Enabled then
-		local t = {
-			dampingRatio = sizeAnimation.SpringDampingRatio,
-			frequency = sizeAnimation.SpringFrequency
+	if SizeAnimation.Enabled then
+		local config = {
+			dampingRatio = SizeAnimation.SpringDampingRatio,
+			frequency = SizeAnimation.SpringFrequency
 		}
 		
-		return function(p1)
-			-- upvalues: otterModule (copy), t (ref)
-			return otterModule.spring(p1, t)
+		return function(p2) --[[ Line: 15 ]]
+			-- upvalues: OtterModule (upval), config (copy)
+			return OtterModule.spring(p2, config)
 		end
+	else
+		return OtterModule.instant
 	end
-	return otterModule.instant
 end

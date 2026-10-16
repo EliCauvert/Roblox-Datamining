@@ -1,6 +1,6 @@
-﻿return function(p1)
-	local joinData = p1:GetJoinData()
-	local referredByPlayerId = joinData and tonumber(joinData.ReferredByPlayerId)
+﻿return function(Player: Player): boolean --[[ Line: 1 ]]
+	local JoinData = Player:GetJoinData()
+	local Number = JoinData and tonumber(JoinData.ReferredByPlayerId)
 	
-	return if referredByPlayerId ~= nil then referredByPlayerId == 0 else true
+	return Number == nil or Number == 0
 end

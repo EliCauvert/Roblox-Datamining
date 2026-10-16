@@ -1,32 +1,32 @@
-﻿local signalsModule = require(script:FindFirstAncestor("AppChat").Parent.Signals)
+﻿local SignalsModule = require(script:FindFirstAncestor("AppChat").Parent.Signals)
 
-return function()
-	-- upvalues: signalsModule (ref)
-	local var1, var2 = signalsModule.createSignal(false)
-	local var3 = 0
-	local var4 = nil
+return function() --[[ Line: 14 | Named "createRootedNavigationStore" ]]
+	-- upvalues: SignalsModule (copy)
+	local Signal, Signal2 = SignalsModule.createSignal(false)
+	local Count = 0
+	local v1 = nil
 	
-	local function cancelNavigation()
-		-- upvalues: var4 (write), var2 (ref)
-		var4 = nil
-		var2(false)
+	local function cancelNavigation() --[[ Line: 19 ]]
+		-- upvalues: v1 (ref), Signal2 (copy)
+		v1 = nil
+		Signal2(false)
 	end
 	
 	return {
-		getIsNavigationPending = var1,
-		beginNavigation = function()
-			-- upvalues: var3 (write), var4 (write), var2 (ref)
-			var3 += 1
-			var4 = var3
-			var2(true)
+		getIsNavigationPending = Signal,
+		beginNavigation = function(): number --[[ Line: 26 ]]
+			-- upvalues: Count (ref), v1 (ref), Signal2 (copy)
+			Count += 1
+			v1 = Count
+			Signal2(true)
 			
-			return var3
+			return Count
 		end,
-		completeNavigation = function(p1)
-			-- upvalues: var1 (ref), var4 (write), var2 (ref)
-			if var1(false) and p1 == var4 then
-				var4 = nil
-				var2(false)
+		completeNavigation = function(p1) --[[ Line: 32 ]]
+			-- upvalues: Signal (copy), v1 (ref), Signal2 (copy)
+			if Signal(false) and p1 == v1 then
+				v1 = nil
+				Signal2(false)
 			end
 		end,
 		cancelNavigation = cancelNavigation,

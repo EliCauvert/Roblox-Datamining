@@ -1,20 +1,20 @@
-﻿local sduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
-local parent = sduiCoreSystem.Parent
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local tutilsModule = require(parent.tutils)
-local compareSduiPropsModule = require(sduiCoreSystem.compareSduiProps)
-local sduiErrorType = require(sduiCoreSystem.SduiErrors).SduiErrorType
-local _ = require(sduiCoreSystem.SduiBuilderTypes)
-local _ = require(sduiCoreSystem.SduiConfigTypes)
-local _ = require(sduiCoreSystem.SduiComponentType)
-local getSduiComponentRegistryModule = require(sduiCoreSystem.getSduiComponentRegistry)
-local validateInterfaceModule = require(sduiCoreSystem.validateInterface)
+﻿local SduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
+local Parent = SduiCoreSystem.Parent
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
+local TutilsModule = require(Parent.tutils)
+local CompareSduiPropsModule = require(SduiCoreSystem.compareSduiProps)
+local SduiErrorType = require(SduiCoreSystem.SduiErrors).SduiErrorType
+local _ = require(SduiCoreSystem.SduiBuilderTypes)
+local _ = require(SduiCoreSystem.SduiConfigTypes)
+local _ = require(SduiCoreSystem.SduiComponentType)
+local GetSduiComponentRegistryModule = require(SduiCoreSystem.getSduiComponentRegistry)
+local ValidateInterfaceModule = require(SduiCoreSystem.validateInterface)
 
-local function SduiErrorComponent(_)
-	-- upvalues: reactModule (ref)
-	return reactModule.createElement("Frame", {
+local function SduiErrorComponent(_) --[[ Line: 21 ]]
+	-- upvalues: ReactModule (copy)
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.new(0, 100, 0, 100)
 	})
@@ -22,135 +22,136 @@ end
 
 local t = {}
 
-local function buildWrappedComponent(p1, p2, p3)
-	-- upvalues: t (ref), reactModule (ref), getSduiComponentRegistryModule (ref), sduiErrorType (ref), SduiErrorComponent (ref), validateInterfaceModule (ref)
-	local componentType = p2.componentConfig.componentType
-	local sduiContext = p2.sduiContext
+local function buildWrappedComponent(Callback, p1, List) --[[ Line: 38 ]]
+	-- upvalues: t (copy), ReactModule (copy), GetSduiComponentRegistryModule (copy), SduiErrorType (copy), SduiErrorComponent (copy), ValidateInterfaceModule (copy)
+	local ComponentType = p1.componentConfig.componentType
+	local SduiContext = p1.sduiContext
 	
-	if p2.localAnalyticsData then
-		p2.componentConfig.analyticsContext.setLocalAnalyticsData(p2.localAnalyticsData)
+	if p1.localAnalyticsData then
+		p1.componentConfig.analyticsContext.setLocalAnalyticsData(p1.localAnalyticsData)
 	end
-	local var1 = if p2.componentConfig.props then table.clone(p2.componentConfig.props) else {}
-	local var2 = if p2.componentConfig.nestedComponentConfigListPropSignalNames then p2.componentConfig.nestedComponentConfigListPropSignalNames else t
+	local Copy = if p1.componentConfig.props then table.clone(p1.componentConfig.props) else {}
+	local NestedComponentConfigListPropSignalNames = if p1.componentConfig.nestedComponentConfigListPropSignalNames then p1.componentConfig.nestedComponentConfigListPropSignalNames else t
 	
-	if p3 then
-		for i, v in p3 do
-			if not v.isNestedComponentConfig and not var2[i] then
-				var1[i] = v.data
+	if List then
+		for i, value in List do
+			if not value.isNestedComponentConfig and not NestedComponentConfigListPropSignalNames[i] then
+				Copy[i] = value.data
 			end
 		end
 	end
-	if p2.extraLocalProps then
-		for i, v in p2.extraLocalProps do
-			var1[i] = v
+	if p1.extraLocalProps then
+		for i1, extraLocalProp in p1.extraLocalProps do
+			Copy[i1] = extraLocalProp
 		end
 	end
-	var1.componentConfig = p2.componentConfig
-	var1.sduiContext = p2.sduiContext
-	var1.debugName = p2.debugName
-	var1.analyticsContext = p2.componentConfig.analyticsContext
-	local var3 = nil
+	Copy.componentConfig = p1.componentConfig
+	Copy.sduiContext = p1.sduiContext
+	Copy.debugName = p1.debugName
+	Copy.analyticsContext = p1.componentConfig.analyticsContext
+	local v1 = nil
 	
-	if p3 then
-		for i, v in p3 do
-			if v.isNestedComponentConfig then
-				if var3 == nil then
-					var3 = if p2.componentConfig.nestedComponentConfigs then table.clone(p2.componentConfig.nestedComponentConfigs) else {}
+	if List then
+		for i2, value1 in List do
+			if value1.isNestedComponentConfig then
+				if v1 == nil then
+					v1 = if p1.componentConfig.nestedComponentConfigs then table.clone(p1.componentConfig.nestedComponentConfigs) else {}
 				end
-				var3[i] = v.data
+				v1[i2] = value1.data
 			end
 		end
 	end
-	local var4 = var3 or p2.componentConfig.nestedComponentConfigs
+	local V20 = v1 or p1.componentConfig.nestedComponentConfigs
 	
-	if var4 then
-		for i, v in var4 do
-			var1[i] = reactModule.createElement(p1(v), {
-				sduiContext = p2.sduiContext,
-				componentConfig = v,
-				debugName = `{p2.debugName}.{i}`
+	if V20 then
+		for i3, ComponentConfig in V20 do
+			Copy[i3] = ReactModule.createElement(Callback(ComponentConfig), {
+				sduiContext = p1.sduiContext,
+				componentConfig = ComponentConfig,
+				debugName = `{p1.debugName}.{i3}`
 			})
 		end
 	end
-	if p3 and next(var2) then
-		for i in var2 do
-			local var5 = p3[i]
+	if List and next(NestedComponentConfigListPropSignalNames) then
+		for nestedComponentConfigListPropSignalName in NestedComponentConfigListPropSignalNames do
+			local Entry = List[nestedComponentConfigListPropSignalName]
 			
-			if var5 then
-				local data = var5.data
+			if Entry then
+				local Data = Entry.data
 				
-				if data then
-					local t_1 = {}
+				if Data then
+					local Elements = {}
 					
-					for i_1, v in data do
-						t_1[`{i}_{i_1}_{v.componentType}`] = reactModule.createElement(p1(v), {
-							sduiContext = p2.sduiContext,
-							componentConfig = v,
-							extraLocalProps = { layoutOrder = i_1 },
-							debugName = `{p2.debugName}.{i}[{i_1}]`
+					for LayoutOrder, entry in Data do
+						Elements[`{nestedComponentConfigListPropSignalName}_{LayoutOrder}_{entry.componentType}`] = ReactModule.createElement(Callback(entry), {
+							sduiContext = p1.sduiContext,
+							componentConfig = entry,
+							extraLocalProps = { layoutOrder = LayoutOrder },
+							debugName = `{p1.debugName}.{nestedComponentConfigListPropSignalName}[{LayoutOrder}]`
 						})
 					end
-					var1[i] = t_1
+					Copy[nestedComponentConfigListPropSignalName] = Elements
 				end
 			end
 		end
 	end
-	local componentDefinition = getSduiComponentRegistryModule().getComponentDefinition(componentType)
-	local var6 = if componentDefinition then componentDefinition.component else nil
+	local ComponentDefinition = GetSduiComponentRegistryModule().getComponentDefinition(ComponentType)
+	local Component = ComponentDefinition and ComponentDefinition.component or nil
 	
-	if var6 == nil then
-		sduiContext.dependencies.logger.reportError(sduiErrorType.NoComponentRegistered, { componentType = componentType, name = p2.debugName }, sduiContext.appPage)
+	if Component == nil then
+		SduiContext.dependencies.logger.reportError(SduiErrorType.NoComponentRegistered, { componentType = ComponentType, name = p1.debugName }, SduiContext.appPage)
 		
-		return reactModule.createElement(SduiErrorComponent)
+		return ReactModule.createElement(SduiErrorComponent)
+	else
+		local PropInterface = ComponentDefinition and ComponentDefinition.propInterface
+		
+		return if PropInterface and not ValidateInterfaceModule(Copy, PropInterface) then nil else ReactModule.createElement(Component, Copy)
 	end
-	local propInterface = componentDefinition and componentDefinition.propInterface
-	
-	return if propInterface and not validateInterfaceModule(var1, propInterface) then nil else reactModule.createElement(var6, var1)
 end
 
-return function(p4)
-	-- upvalues: reactModule (ref), buildWrappedComponent (ref), compareSduiPropsModule (ref), signalsModule (ref), tutilsModule (ref), signalsReactModule (ref)
+return function(p2) --[[ Line: 167 | Named "createSduiClientBindingWrappers" ]]
+	-- upvalues: ReactModule (copy), buildWrappedComponent (copy), CompareSduiPropsModule (copy), SignalsModule (copy), TutilsModule (copy), SignalsReactModule (copy)
 	return {
-		SduiClientBindingThinWrapper = reactModule.memo(function(p5)
-			-- upvalues: buildWrappedComponent (copy), p4 (ref)
-			return buildWrappedComponent(p4, p5)
-		end, compareSduiPropsModule),
-		SduiDataBindingWrapper = reactModule.memo(function(p5)
-			-- upvalues: reactModule (copy), signalsModule (copy), tutilsModule (copy), signalsReactModule (copy), buildWrappedComponent (copy), p4 (ref)
-			local propSignals = p5.componentConfig.propSignals
-			local isComponentFilteredSignal = p5.componentConfig.isComponentFilteredSignal
-			local extraLocalPropSignals = p5.extraLocalPropSignals
-			local var7 = signalsReactModule.useSignalState(reactModule.useMemo(function()
-				-- upvalues: propSignals (ref), isComponentFilteredSignal (ref), extraLocalPropSignals (ref), signalsModule (copy), tutilsModule (copy)
-				assert(propSignals or (isComponentFilteredSignal or extraLocalPropSignals), "propSignals, isComponentFilteredSignal, or extraLocalPropSignals must exist")
+		SduiClientBindingThinWrapper = ReactModule.memo(function(p3) --[[ Line: 173 ]]
+			-- upvalues: buildWrappedComponent (upval), p2 (copy)
+			return buildWrappedComponent(p2, p3)
+		end, CompareSduiPropsModule),
+		SduiDataBindingWrapper = ReactModule.memo(function(p3) --[[ Line: 179 ]]
+			-- upvalues: ReactModule (upval), SignalsModule (upval), TutilsModule (upval), SignalsReactModule (upval), buildWrappedComponent (upval), p2 (copy)
+			local PropSignals = p3.componentConfig.propSignals
+			local IsComponentFilteredSignalFunction = p3.componentConfig.isComponentFilteredSignal
+			local ExtraLocalPropSignals = p3.extraLocalPropSignals
+			local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 186 ]]
+				-- upvalues: PropSignals (copy), IsComponentFilteredSignalFunction (copy), ExtraLocalPropSignals (copy), SignalsModule (upval), TutilsModule (upval)
+				assert(PropSignals or (IsComponentFilteredSignalFunction or ExtraLocalPropSignals), "propSignals, isComponentFilteredSignal, or extraLocalPropSignals must exist")
 				
-				return signalsModule.createComputed(function(p6)
-					-- upvalues: propSignals (copy), extraLocalPropSignals (copy), isComponentFilteredSignal (copy)
+				return SignalsModule.createComputed(function(p4) --[[ Line: 191 ]]
+					-- upvalues: PropSignals (upval), ExtraLocalPropSignals (upval), IsComponentFilteredSignalFunction (upval)
 					local t = {}
 					
-					if propSignals then
-						for i, v in propSignals do
-							t[i] = v(p6)
+					if PropSignals then
+						for i, propSignal in PropSignals do
+							t[i] = propSignal(p4)
 						end
 					end
-					if extraLocalPropSignals then
-						for i, v in extraLocalPropSignals do
-							t[i] = { data = v(p6) }
+					if ExtraLocalPropSignals then
+						for i1, extraLocalPropSignal in ExtraLocalPropSignals do
+							t[i1] = { data = extraLocalPropSignal(p4) }
 						end
 					end
-					if isComponentFilteredSignal and isComponentFilteredSignal(p6).data == true then
+					if IsComponentFilteredSignalFunction and IsComponentFilteredSignalFunction(p4).data == true then
 						t.__isComponentFiltered = true
 					end
 					return t
-				end, tutilsModule.shallowEqual)
+				end, TutilsModule.shallowEqual)
 			end, {
-				propSignals,
-				isComponentFilteredSignal,
-				extraLocalPropSignals,
-				p5.componentConfig.componentType
-			}))
+				PropSignals,
+				IsComponentFilteredSignalFunction,
+				ExtraLocalPropSignals,
+				p3.componentConfig.componentType
+			})))
 			
-			return if var7.__isComponentFiltered == true then nil else buildWrappedComponent(p4, p5, var7)
-		end, compareSduiPropsModule)
+			return if UseSignalStateResult.__isComponentFiltered == true then nil else buildWrappedComponent(p2, p3, UseSignalStateResult)
+		end, CompareSduiPropsModule)
 	}
 end

@@ -1,13 +1,13 @@
-﻿local chatUIPrimitives = script:FindFirstAncestor("ChatUIPrimitives")
-local reactModule = require(chatUIPrimitives.Parent.React)
-local expChatPerfTrackerModule = require(chatUIPrimitives.Telemetry.ExpChatPerfTracker)
+﻿local ChatUIPrimitives = script:FindFirstAncestor("ChatUIPrimitives")
+local ReactModule = require(ChatUIPrimitives.Parent.React)
+local ExpChatPerfTrackerModule = require(ChatUIPrimitives.Telemetry.ExpChatPerfTracker)
 
-return function(p1)
-	-- upvalues: reactModule (ref), expChatPerfTrackerModule (ref)
-	return reactModule.useCallback(function()
-		-- upvalues: p1 (ref), expChatPerfTrackerModule (copy)
-		local var1 = p1() or "UNKNOWN_MESSAGE_ID"
-		expChatPerfTrackerModule.finish(expChatPerfTrackerModule.Events.MessageReceiveToWindowRenderInterval, { messageId = var1 })
-		expChatPerfTrackerModule.finish(expChatPerfTrackerModule.Events.MessageSendToWindowRenderInterval, { messageId = var1 })
-	end, { p1 })
+return function(Callback) --[[ Line: 29 | Named "useFinishChatWindowMessageRenderIntervals" ]]
+	-- upvalues: ReactModule (copy), ExpChatPerfTrackerModule (copy)
+	return ReactModule.useCallback(function() --[[ Line: 30 ]]
+		-- upvalues: Callback (copy), ExpChatPerfTrackerModule (upval)
+		local CallbackResult = Callback() or "UNKNOWN_MESSAGE_ID"
+		ExpChatPerfTrackerModule.finish(ExpChatPerfTrackerModule.Events.MessageReceiveToWindowRenderInterval, { messageId = CallbackResult })
+		ExpChatPerfTrackerModule.finish(ExpChatPerfTrackerModule.Events.MessageSendToWindowRenderInterval, { messageId = CallbackResult })
+	end, { Callback })
 end

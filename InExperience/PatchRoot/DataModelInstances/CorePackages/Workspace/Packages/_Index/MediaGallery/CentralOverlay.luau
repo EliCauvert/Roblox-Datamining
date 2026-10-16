@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.CentralOverlay.CentralOverlay)
+﻿return (require(script.Parent.Parent.Parent._Index.CentralOverlay.CentralOverlay))

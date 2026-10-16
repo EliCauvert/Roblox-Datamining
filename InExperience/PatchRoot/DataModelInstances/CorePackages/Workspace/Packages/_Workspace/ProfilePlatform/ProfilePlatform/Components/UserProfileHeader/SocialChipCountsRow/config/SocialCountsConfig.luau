@@ -1,60 +1,62 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local foundationModule = require(parent.Foundation)
-local textKeysModule = require(profilePlatform.Common.TextKeys)
-local socialCountEnableKeys = require(profilePlatform.Common.Enums).SocialCountEnableKeys
-local avatarGroupType = foundationModule.Enums.AvatarGroupType
-local fFlagConnectionsToFriendsRename = require(parent.SharedFlags).FFlagConnectionsToFriendsRename
-local fFlagEnableSocialTabsPage = require(parent.SharedFlags).FFlagEnableSocialTabsPage
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local TextKeysModule = require(ProfilePlatform.Common.TextKeys)
+local SocialCountEnableKeys = require(ProfilePlatform.Common.Enums).SocialCountEnableKeys
+local AvatarGroupType = require(Parent.Foundation).Enums.AvatarGroupType
+local FFlagEnableSocialTabsPage = require(Parent.SharedFlags).FFlagEnableSocialTabsPage
 
 return {
 	RowConfig = {
 		mutualFriendsCount = {
 			layoutOrder = 1,
-			textKey = textKeysModule.MutualsText,
-			singleTextKey = textKeysModule.MutualText,
-			enabledKey = socialCountEnableKeys.IsMutualFriendsCountEnabled,
-			getIsDisabled = function(_, _, p1)
-				return p1
+			textKey = TextKeysModule.MutualsText,
+			singleTextKey = TextKeysModule.MutualText,
+			enabledKey = SocialCountEnableKeys.IsMutualFriendsCountEnabled,
+			getIsDisabled = function(_, _, p1): boolean --[[ Line: 29 ]]
+				return not p1
 			end,
-			getLeading = function(p1)
-				-- upvalues: avatarGroupType (ref)
-				local list = {
-					table.unpack(p1.mutualFriendIds, 1, math.min(2, #p1.mutualFriendIds))
+			getLeading = function(p1) --[[ Line: 35 ]]
+				-- upvalues: AvatarGroupType (copy)
+				local Avatars = {
+					table.unpack(p1.mutualFriendIds, 1, (math.min(2, #p1.mutualFriendIds)))
 				}
 				
-				return if list and #list > 0 then {
+				return if Avatars and #Avatars > 0 then {
 					type = "AvatarGroup",
-					props = { max = 2, avatars = list, type = avatarGroupType.Stacked }
+					props = {
+						max = 2,
+						avatars = Avatars,
+						type = AvatarGroupType.Stacked
+					}
 				} else nil
 			end
 		},
 		friendsCount = {
 			layoutOrder = 2,
-			textKey = if fFlagConnectionsToFriendsRename then textKeysModule.Friends else textKeysModule.Connections,
-			singleTextKey = if fFlagConnectionsToFriendsRename then textKeysModule.Friend else textKeysModule.Connection,
-			enabledKey = socialCountEnableKeys.IsFriendsCountEnabled,
-			getIsDisabled = function(p1, p2, p3)
-				-- upvalues: fFlagEnableSocialTabsPage (ref)
-				return if p3 then if fFlagEnableSocialTabsPage then false elseif p2 then false else not p1 else true
+			textKey = TextKeysModule.Friends,
+			singleTextKey = TextKeysModule.Friend,
+			enabledKey = SocialCountEnableKeys.IsFriendsCountEnabled,
+			getIsDisabled = function(p1, p2, p3): boolean --[[ Line: 56 ]]
+				-- upvalues: FFlagEnableSocialTabsPage (copy)
+				return not p3 or not FFlagEnableSocialTabsPage and (not p2 and not p1)
 			end
 		},
 		followersCount = {
 			layoutOrder = 3,
-			textKey = textKeysModule.Followers,
-			singleTextKey = textKeysModule.Follower,
-			enabledKey = socialCountEnableKeys.IsFollowersCountEnabled,
-			getIsDisabled = function(p1, _, p2)
-				return if p2 then not p1 else true
+			textKey = TextKeysModule.Followers,
+			singleTextKey = TextKeysModule.Follower,
+			enabledKey = SocialCountEnableKeys.IsFollowersCountEnabled,
+			getIsDisabled = function(p1, _, p2): boolean --[[ Line: 75 ]]
+				return not p2 or not p1
 			end
 		},
 		followingsCount = {
 			layoutOrder = 4,
-			textKey = textKeysModule.Following,
-			singleTextKey = textKeysModule.Following,
-			enabledKey = socialCountEnableKeys.IsFollowingsCountEnabled,
-			getIsDisabled = function(p1, _, p2)
-				return if p2 then not p1 else true
+			textKey = TextKeysModule.Following,
+			singleTextKey = TextKeysModule.Following,
+			enabledKey = SocialCountEnableKeys.IsFollowingsCountEnabled,
+			getIsDisabled = function(p1, _, p2): boolean --[[ Line: 87 ]]
+				return not p2 or not p1
 			end
 		}
 	}

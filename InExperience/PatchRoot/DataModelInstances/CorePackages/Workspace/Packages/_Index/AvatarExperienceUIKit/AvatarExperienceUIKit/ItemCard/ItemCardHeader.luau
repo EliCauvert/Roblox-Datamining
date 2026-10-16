@@ -1,32 +1,33 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceUIKit").Parent
-local reactModule = require(parent.React)
-local useDesignTokens = require(parent.Style).useDesignTokens
-local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
-local fFlagAXAddTransparencyToItemCardHeader = avatarExperienceFlagsModule.FFlagAXAddTransparencyToItemCardHeader
-local fFlagAXCatalogItemCardDarkerBackground = avatarExperienceFlagsModule.FFlagAXCatalogItemCardDarkerBackground
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceUIKit").Parent
+local ReactModule = require(Parent.React)
+local UseDesignTokensFunction = require(Parent.Style).useDesignTokens
+local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
+local FFlagAXAddTransparencyToItemCardHeader = AvatarExperienceFlagsModule.FFlagAXAddTransparencyToItemCardHeader
 
-local function ItemCardHeader(p1)
-	-- upvalues: useDesignTokens (ref), fFlagAXCatalogItemCardDarkerBackground (ref), reactModule (ref), fFlagAXAddTransparencyToItemCardHeader (ref)
-	local var1 = useDesignTokens()
-	local var2 = if fFlagAXCatalogItemCardDarkerBackground then var1.Color.Shift.Shift_100 else var1.Color.Common.Shimmer
+local function ItemCardHeader(Frame: Frame) --[[ Line: 20 ]]
+	-- upvalues: UseDesignTokensFunction (copy), ReactModule (copy), FFlagAXAddTransparencyToItemCardHeader (copy)
+	local UseDesignTokensResult = UseDesignTokensFunction()
+	local Shimmer = UseDesignTokensResult.Color.Common.Shimmer
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BorderSizePixel = 0,
-		Size = if p1.Size then p1.Size else UDim2.fromScale(1, 1),
-		BackgroundColor3 = var2.Color3,
-		BackgroundTransparency = if fFlagAXAddTransparencyToItemCardHeader then p1.BackgroundTransparency or var2.Transparency else var2.Transparency,
-		LayoutOrder = p1.LayoutOrder,
-		ZIndex = p1.ZIndex
+		Size = if Frame.Size then Frame.Size else UDim2.fromScale(1, 1),
+		BackgroundColor3 = Shimmer.Color3,
+		BackgroundTransparency = FFlagAXAddTransparencyToItemCardHeader and Frame.BackgroundTransparency or Shimmer.Transparency,
+		LayoutOrder = Frame.LayoutOrder,
+		ZIndex = Frame.ZIndex
 	}, {
-		CornerRadius = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, var1.Radius.Medium) }),
-		AspectRatio = if not p1.Size then reactModule.createElement("UIAspectRatioConstraint", {
-			AspectRatio = p1.aspectRatio or 1,
+		CornerRadius = ReactModule.createElement("UICorner", {
+			CornerRadius = UDim.new(0, UseDesignTokensResult.Radius.Medium)
+		}),
+		AspectRatio = if Frame.Size then nil else ReactModule.createElement("UIAspectRatioConstraint", {
+			AspectRatio = Frame.aspectRatio or 1,
 			AspectType = Enum.AspectType.FitWithinMaxSize,
 			DominantAxis = Enum.DominantAxis.Width
-		}) else nil,
-		ItemCardHeaderChildren = reactModule.createElement(reactModule.Fragment, nil, p1.children),
-		ItemCardHeaderOverlaySlot = p1.overlaySlot
+		}),
+		ItemCardHeaderChildren = ReactModule.createElement(ReactModule.Fragment, nil, Frame.children),
+		ItemCardHeaderOverlaySlot = Frame.overlaySlot
 	})
 end
 
-return if avatarExperienceFlagsModule.FFlagAXItemCardComponentsMemo then reactModule.memo(ItemCardHeader) else ItemCardHeader
+return if AvatarExperienceFlagsModule.FFlagAXItemCardComponentsMemo then ReactModule.memo(ItemCardHeader) else ItemCardHeader

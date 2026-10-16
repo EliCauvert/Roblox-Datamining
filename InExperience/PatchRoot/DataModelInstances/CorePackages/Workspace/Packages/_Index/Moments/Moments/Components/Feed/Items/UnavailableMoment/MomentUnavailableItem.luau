@@ -1,28 +1,31 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local useFeed = require(moments.Components.Feed.FeedContext).useFeed
-local momentOverlayInsetContextModule = require(moments.Components.Feed.Items.Moment.MomentOverlayInsetContext)
-local momentUnavailableViewModule = require(script.Parent.MomentUnavailableView)
-local useIsPagerItemActive = require(moments.Components.VerticalPager).useIsPagerItemActive
-local usePreferences = foundationModule.Hooks.usePreferences
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
+local ReactModule = require(Parent.React)
+local UseFeedFunction = require(Moments.Components.Feed.FeedContext).useFeed
+local MomentOverlayInsetContextModule = require(Moments.Components.Feed.Items.Moment.MomentOverlayInsetContext)
+local MomentUnavailableViewModule = require(script.Parent.MomentUnavailableView)
+local UseIsPagerItemActiveFunction = require(Moments.Components.VerticalPager).useIsPagerItemActive
+local FFlagMomentsFeedAboveNavBarModule = require(Moments.Flags.FFlagMomentsFeedAboveNavBar)
+local UsePreferencesFunction = require(Parent.Foundation).Hooks.usePreferences
 
-return function(p1)
-	-- upvalues: useFeed (ref), usePreferences (ref), momentOverlayInsetContextModule (ref), useIsPagerItemActive (ref), reactModule (ref), momentUnavailableViewModule (ref)
-	local var1 = useFeed()
-	local scrollToNext = var1.scrollToNext
+return function(Frame) --[[ Line: 32 | Named "MomentUnavailableItem" ]]
+	-- upvalues: UseFeedFunction (copy), UsePreferencesFunction (copy), MomentOverlayInsetContextModule (copy), FFlagMomentsFeedAboveNavBarModule (copy), UseIsPagerItemActiveFunction (copy), ReactModule (copy), MomentUnavailableViewModule (copy)
+	local UseFeedResult = UseFeedFunction()
+	local ReducedMotion = UsePreferencesFunction().reducedMotion
+	local UseMomentOverlayInsetResult = MomentOverlayInsetContextModule.useMomentOverlayInset()
+	local UseIsPagerItemActiveResult = UseIsPagerItemActiveFunction()
+	local ScrollToNextFunction = UseFeedResult.scrollToNext
 	
-	return reactModule.createElement(momentUnavailableViewModule, {
-		LayoutOrder = p1.LayoutOrder,
-		isModerated = p1.isModerated,
-		onNext = reactModule.useCallback(function()
-			-- upvalues: scrollToNext (ref)
-			if scrollToNext ~= nil then
-				scrollToNext()
+	return ReactModule.createElement(MomentUnavailableViewModule, {
+		LayoutOrder = Frame.LayoutOrder,
+		isModerated = Frame.isModerated,
+		onNext = ReactModule.useCallback(function() --[[ Line: 41 ]]
+			-- upvalues: ScrollToNextFunction (copy)
+			if ScrollToNextFunction ~= nil then
+				ScrollToNextFunction()
 			end
-		end, { scrollToNext }),
-		animate = var1.isActiveFeed and (var1.isPlaybackActive and (useIsPagerItemActive() and not usePreferences().reducedMotion)),
-		bottomInset = momentOverlayInsetContextModule.useMomentOverlayInset()
+		end, { ScrollToNextFunction }),
+		animate = UseFeedResult.isActiveFeed and (UseFeedResult.isPlaybackActive and (UseIsPagerItemActiveResult and not ReducedMotion)),
+		bottomInset = if FFlagMomentsFeedAboveNavBarModule then 0 else UseMomentOverlayInsetResult
 	})
 end

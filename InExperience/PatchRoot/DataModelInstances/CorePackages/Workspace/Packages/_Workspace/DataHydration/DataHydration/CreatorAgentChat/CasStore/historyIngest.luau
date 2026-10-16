@@ -1,7 +1,7 @@
-﻿local acpProtocolModule = require(script.Parent.Parent.Acp.AcpProtocol)
+﻿local AcpProtocolModule = require(script.Parent.Parent.Acp.AcpProtocol)
 local _ = require(script.Parent.Parent.createTurnHandle)
 local _ = require(script.Parent.Parent.types)
-local t = {
+local config = {
 	agent_message = true,
 	agent_message_chunk = true,
 	tool_call_update = true,
@@ -9,69 +9,71 @@ local t = {
 	state_change = true
 }
 
-local function _(p1)
-	local sequenceId = p1.sequenceId
+local function _(p1) --[[ Line: 18 | Named "getHistorySequenceId" ]]
+	local SequenceId = p1.sequenceId
 	
-	return if typeof(sequenceId) == "number" then sequenceId else nil
+	return if typeof(SequenceId) == "number" then SequenceId else nil
 end
 
-local _ = function(p1)
-	-- upvalues: t (ref)
-	local sessionUpdate = p1.sessionUpdate
+local _ = function(p1): boolean --[[ Line: 23 | Named "isAssistantSessionUpdate" ]]
+	-- upvalues: config (copy)
+	local SessionUpdate = p1.sessionUpdate
 	
-	return typeof(sessionUpdate) == "string" and t[sessionUpdate] == true
+	return typeof(SessionUpdate) == "string" and config[SessionUpdate] == true
 end
 
-local function orderHistoryItems(p1)
-	local t = {}
+local function orderHistoryItems(List) --[[ Line: 34 ]]
+	local List1 = {}
 	
-	for i, v in p1 do
-		local t_1 = { update = v, originalIndex = i }
-		local sequenceId = v.sequenceId
-		t_1.sequenceId = if typeof(sequenceId) == "number" then sequenceId else nil
-		table.insert(t, t_1)
+	for OriginalIndex, Update in List do
+		local SequenceId = Update.sequenceId
+		table.insert(List1, {
+			update = Update,
+			originalIndex = OriginalIndex,
+			sequenceId = if typeof(SequenceId) == "number" then SequenceId else nil
+		})
 	end
-	table.sort(t, function(p2, p3)
-		return if p2.sequenceId == nil or p3.sequenceId == nil then p2.originalIndex < p3.originalIndex else p2.sequenceId < p3.sequenceId
+	table.sort(List1, function(A, B): boolean --[[ Line: 44 ]]
+		return if A.sequenceId == nil or B.sequenceId == nil then A.originalIndex < B.originalIndex else A.sequenceId < B.sequenceId
 	end)
 	
-	return t
+	return List1
 end
 
 return {
-	ingestSessionHistory = function(p2, p3, p4, p5)
-		-- upvalues: orderHistoryItems (ref), t (ref), acpProtocolModule (ref)
-		assert(typeof(p3) == "string" and p3 ~= "", "sessionId is required")
-		local activeTurnInternals = p2.getActiveTurnInternals(p3)
+	ingestSessionHistory = function(p1, SessionId, p2, p3) --[[ Line: 59 ]]
+		-- upvalues: orderHistoryItems (copy), config (copy), AcpProtocolModule (copy)
+		assert(typeof(SessionId) == "string" and SessionId ~= "", "sessionId is required")
+		local ActiveTurnInternals = p1.getActiveTurnInternals(SessionId)
 		
-		if activeTurnInternals == nil then
+		if ActiveTurnInternals == nil then
 			return {}
 		end
-		local t_1 = {}
+		local List = {}
 		
-		for i, v in orderHistoryItems(p4) do
-			local sequenceId = v.sequenceId
+		for _, value in orderHistoryItems(p2) do
+			local SequenceId = value.sequenceId
 			
-			if sequenceId ~= nil and (p5 == nil or p5 < sequenceId) then
-				local _ = false
-				local sessionUpdate = v.update.sessionUpdate
+			if SequenceId ~= nil and (p3 == nil or p3 < SequenceId) then
+				local SessionUpdate = value.update.sessionUpdate
+				local IsEntry: boolean = typeof(SessionUpdate) == "string" and config[SessionUpdate] == true
 				
-				if if typeof(sessionUpdate) == "string" and t[sessionUpdate] == true then activeTurnInternals.dispatchFrame({
+				if if IsEntry then ActiveTurnInternals.dispatchFrame({
 					kind = "notification",
 					notification = {
-						method = acpProtocolModule.Notifications.SessionUpdate,
-						params = { sessionId = p3, update = v.update }
+						method = AcpProtocolModule.Notifications.SessionUpdate,
+						params = { sessionId = SessionId, update = value.update }
 					}
-				}, { sequenceNumber = sequenceId }, false) else activeTurnInternals.noteProcessedSequenceNumber(sequenceId) then
-					table.insert(t_1, sequenceId)
+				}, { sequenceNumber = SequenceId }, false) else ActiveTurnInternals.noteProcessedSequenceNumber(SequenceId) then
+					table.insert(List, SequenceId)
 				end
-				if activeTurnInternals.isDone() then
-					p2.onTurnDone(activeTurnInternals)
+				if ActiveTurnInternals.isDone() then
+					p1.onTurnDone(ActiveTurnInternals)
 					
-					return t_1
+					return List
 				end
 			end
 		end
-		return t_1
+		return List
 	end
 }

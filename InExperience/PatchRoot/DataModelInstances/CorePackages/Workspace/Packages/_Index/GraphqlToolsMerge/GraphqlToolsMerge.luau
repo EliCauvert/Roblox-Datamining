@@ -1,1 +1,1 @@
-﻿return require(game:GetService("CorePackages").Packages.Merge)
+﻿return (require(game:GetService("CorePackages").Packages.Merge))

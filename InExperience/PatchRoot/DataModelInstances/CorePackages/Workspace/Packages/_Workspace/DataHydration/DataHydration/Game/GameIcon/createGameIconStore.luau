@@ -1,131 +1,131 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local dashModule = require(dataHydration.Parent.Dash)
-local createDataCacheModule = require(dataHydration.createDataCache)
-local createDataResolverModule = require(dataHydration.createDataResolver)
-local _ = require(dataHydration.DataHydrationTypes)
-local fetchGameIconsModule = require(script.Parent.fetchGameIcons)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local DashModule = require(DataHydration.Parent.Dash)
+local CreateDataCacheModule = require(DataHydration.createDataCache)
+local CreateDataResolverModule = require(DataHydration.createDataResolver)
+local _ = require(DataHydration.DataHydrationTypes)
+local FetchGameIconsModule = require(script.Parent.fetchGameIcons)
 local _ = require(script.Parent.GameIconStoreTypes)
-local gameIconSizeModule = require(script.Parent.GameIconSize)
-local gameIconConstantsModule = require(script.Parent.GameIconConstants)
-local sizeString = gameIconConstantsModule.sizeString
-local fIntGameIconSmallSizePx = gameIconConstantsModule.FIntGameIconSmallSizePx
-local fIntGameIconLargeSizePx = gameIconConstantsModule.FIntGameIconLargeSizePx
+local GameIconSizeModule = require(script.Parent.GameIconSize)
+local GameIconConstantsModule = require(script.Parent.GameIconConstants)
+local SizeStringFunction = GameIconConstantsModule.sizeString
+local FIntGameIconSmallSizePx = GameIconConstantsModule.FIntGameIconSmallSizePx
+local FIntGameIconLargeSizePx = GameIconConstantsModule.FIntGameIconLargeSizePx
 
-local function _(p1)
-	return tostring(p1)
+local function _(p1): string --[[ Line: 31 | Named "toId" ]]
+	return (tostring(p1))
 end
 
-local _ = function(p1)
-	local t = {}
+local _ = function(List) --[[ Line: 35 | Named "toIds" ]]
+	local List1 = {}
 	
-	for i, v in p1 do
-		table.insert(t, tostring(v))
+	for _, value in List do
+		table.insert(List1, (tostring(value)))
 	end
-	return t
+	return List1
 end
 
-local function createResolver(p2)
-	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), dashModule (ref), fetchGameIconsModule (ref)
-	local var1 = createDataCacheModule()
+local function createResolver(Size) --[[ Line: 43 ]]
+	-- upvalues: CreateDataCacheModule (copy), CreateDataResolverModule (copy), DashModule (copy), FetchGameIconsModule (copy)
+	local DataCacheModule = CreateDataCacheModule()
 	
-	return var1, createDataResolverModule({
+	return DataCacheModule, (CreateDataResolverModule({
 		queueProcessDelaySec = 0,
 		requestBatchSize = 100,
-		cache = var1,
-		fetchFn = function(p3)
-			-- upvalues: dashModule (copy), fetchGameIconsModule (copy), p2 (ref)
-			return fetchGameIconsModule(dashModule.keys(p3), p2):andThen(function(p4)
-				-- upvalues: p2 (copy)
+		cache = DataCacheModule,
+		fetchFn = function(p1) --[[ Line: 49 ]]
+			-- upvalues: DashModule (upval), FetchGameIconsModule (upval), Size (copy)
+			return FetchGameIconsModule(DashModule.keys(p1), Size):andThen(function(Result) --[[ Line: 53 ]]
+				-- upvalues: Size (upval)
 				local t = {}
 				
-				for i, v in p4 do
-					if type(v) == "table" and type(v.targetId) == "number" and v.state ~= "Pending" then
-						local var2 = tostring(v.targetId)
-						t[var2] = {
-							universeId = var2,
-							state = v.state,
-							url = v.imageUrl,
-							size = p2
+				for _, value in Result do
+					if type(value) == "table" and type(value.targetId) == "number" and value.state ~= "Pending" then
+						local Text = tostring(value.targetId)
+						t[Text] = {
+							universeId = Text,
+							state = value.state,
+							url = value.imageUrl,
+							size = Size
 						}
 					end
 				end
 				return t
 			end)
 		end
-	})
+	}))
 end
 
-return function()
-	-- upvalues: createResolver (ref), sizeString (ref), fIntGameIconSmallSizePx (ref), fIntGameIconLargeSizePx (ref), gameIconSizeModule (ref)
-	local var2, var3 = createResolver(sizeString(fIntGameIconSmallSizePx))
-	local var4, var5 = createResolver(sizeString(fIntGameIconLargeSizePx))
+return function() --[[ Line: 80 | Named "createGameIconStore" ]]
+	-- upvalues: createResolver (copy), SizeStringFunction (copy), FIntGameIconSmallSizePx (copy), FIntGameIconLargeSizePx (copy), GameIconSizeModule (copy)
+	local Resolver, Resolver2 = createResolver(SizeStringFunction(FIntGameIconSmallSizePx))
+	local Resolver1, Resolver2_1 = createResolver(SizeStringFunction(FIntGameIconLargeSizePx))
 	
-	local function _(p3)
-		-- upvalues: gameIconSizeModule (copy), var5 (ref), var3 (ref)
-		return if p3 == gameIconSizeModule.Large then var5 else var3
+	local function _(Large) --[[ Line: 84 | Named "resolverFor" ]]
+		-- upvalues: GameIconSizeModule (upval), Resolver2_1 (copy), Resolver2 (copy)
+		return if Large == GameIconSizeModule.Large then Resolver2_1 else Resolver2
 	end
 	
-	local _ = function(p3)
-		-- upvalues: gameIconSizeModule (copy), var4 (ref), var2 (ref)
-		return if p3 == gameIconSizeModule.Large then var4 else var2
+	local _ = function(Large) --[[ Line: 91 | Named "cacheFor" ]]
+		-- upvalues: GameIconSizeModule (upval), Resolver1 (copy), Resolver (copy)
+		return if Large == GameIconSizeModule.Large then Resolver1 else Resolver
 	end
 	
 	return {
-		fetchGameIcon = function(p3, p4)
-			-- upvalues: gameIconSizeModule (copy), var5 (ref), var3 (ref)
-			return (if p4 == gameIconSizeModule.Large then var5 else var3).fetchItem(tostring(p3))
+		fetchGameIcon = function(p1, Large) --[[ Line: 99 ]]
+			-- upvalues: GameIconSizeModule (upval), Resolver2_1 (copy), Resolver2 (copy)
+			return (if Large == GameIconSizeModule.Large then Resolver2_1 else Resolver2).fetchItem((tostring(p1)))
 		end,
-		fetchGameIcons = function(p3, p4)
-			-- upvalues: gameIconSizeModule (copy), var5 (ref), var3 (ref)
-			local fetchItems = (if p4 == gameIconSizeModule.Large then var5 else var3).fetchItems
-			local t = {}
+		fetchGameIcons = function(List, Large) --[[ Line: 102 ]]
+			-- upvalues: GameIconSizeModule (upval), Resolver2_1 (copy), Resolver2 (copy)
+			local FetchItemsFunction = (if Large == GameIconSizeModule.Large then Resolver2_1 else Resolver2).fetchItems
+			local List1 = {}
 			
-			for i, v in p3 do
-				table.insert(t, tostring(v))
+			for _, value in List do
+				table.insert(List1, (tostring(value)))
 			end
-			return fetchItems(t)
+			return FetchItemsFunction(List1)
 		end,
-		getGameIcon = function(p5, p6)
-			-- upvalues: gameIconSizeModule (copy), var5 (ref), var3 (ref)
-			return (if p6 == gameIconSizeModule.Large then var5 else var3).getCachedItem(tostring(p5))
+		getGameIcon = function(p1, Large) --[[ Line: 105 ]]
+			-- upvalues: GameIconSizeModule (upval), Resolver2_1 (copy), Resolver2 (copy)
+			return (if Large == GameIconSizeModule.Large then Resolver2_1 else Resolver2).getCachedItem((tostring(p1)))
 		end,
-		getGameIcons = function(p5, p6)
-			-- upvalues: gameIconSizeModule (copy), var5 (ref), var3 (ref)
-			local getCachedItems = (if p6 == gameIconSizeModule.Large then var5 else var3).getCachedItems
-			local t = {}
+		getGameIcons = function(List, Large) --[[ Line: 108 ]]
+			-- upvalues: GameIconSizeModule (upval), Resolver2_1 (copy), Resolver2 (copy)
+			local GetCachedItemsFunction = (if Large == GameIconSizeModule.Large then Resolver2_1 else Resolver2).getCachedItems
+			local List1 = {}
 			
-			for i, v in p5 do
-				table.insert(t, tostring(v))
+			for _, value in List do
+				table.insert(List1, (tostring(value)))
 			end
-			return getCachedItems(t)
+			return GetCachedItemsFunction(List1)
 		end,
-		getAndFetchGameIcon = function(p7, p8, p9)
-			-- upvalues: gameIconSizeModule (copy), var5 (ref), var3 (ref)
-			return (if p8 == gameIconSizeModule.Large then var5 else var3).getAndFetchItem(tostring(p7), p9)
+		getAndFetchGameIcon = function(p1, Large, p2) --[[ Line: 111 ]]
+			-- upvalues: GameIconSizeModule (upval), Resolver2_1 (copy), Resolver2 (copy)
+			return (if Large == GameIconSizeModule.Large then Resolver2_1 else Resolver2).getAndFetchItem(tostring(p1), p2)
 		end,
-		getAndFetchGameIcons = function(p7, p8, p9)
-			-- upvalues: gameIconSizeModule (copy), var5 (ref), var3 (ref)
-			local getAndFetchItems = (if p8 == gameIconSizeModule.Large then var5 else var3).getAndFetchItems
-			local t = {}
+		getAndFetchGameIcons = function(List, Large, p1) --[[ Line: 114 ]]
+			-- upvalues: GameIconSizeModule (upval), Resolver2_1 (copy), Resolver2 (copy)
+			local GetAndFetchItemsFunction = (if Large == GameIconSizeModule.Large then Resolver2_1 else Resolver2).getAndFetchItems
+			local List1 = {}
 			
-			for i, v in p7 do
-				table.insert(t, tostring(v))
+			for _, value in List do
+				table.insert(List1, (tostring(value)))
 			end
-			return getAndFetchItems(t, p9)
+			return GetAndFetchItemsFunction(List1, p1)
 		end,
-		updateGameIcons = function(p10, p11)
-			-- upvalues: gameIconSizeModule (copy), var4 (ref), var2 (ref)
-			;(if p11 == gameIconSizeModule.Large then var4 else var2).updateItems(p10)
+		updateGameIcons = function(p2, Large) --[[ Line: 118 ]]
+			-- upvalues: GameIconSizeModule (upval), Resolver1 (copy), Resolver (copy)
+			(if Large == GameIconSizeModule.Large then Resolver1 else Resolver).updateItems(p2)
 		end,
-		clear = function()
-			-- upvalues: var3 (ref), var5 (ref)
-			var3.clear()
-			var5.clear()
+		clear = function() --[[ Line: 122 ]]
+			-- upvalues: Resolver2 (copy), Resolver2_1 (copy)
+			Resolver2.clear()
+			Resolver2_1.clear()
 		end,
-		dispose = function()
-			-- upvalues: var3 (ref), var5 (ref)
-			var3.dispose()
-			var5.dispose()
+		dispose = function() --[[ Line: 126 ]]
+			-- upvalues: Resolver2 (copy), Resolver2_1 (copy)
+			Resolver2.dispose()
+			Resolver2_1.dispose()
 		end
 	}
 end

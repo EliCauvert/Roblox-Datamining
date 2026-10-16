@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent.Parent._Workspace.AppChat.AppChat.Hooks.useExternalChatConversationEligibility)
+﻿return (require(script.Parent.Parent.Parent.Parent._Workspace.AppChat.AppChat.Hooks.useExternalChatConversationEligibility))

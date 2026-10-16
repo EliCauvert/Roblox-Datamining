@@ -1,127 +1,124 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local corePackagesService = game:GetService("CorePackages")
-local contextActionService = game:GetService("ContextActionService")
-local tweenService = game:GetService("TweenService")
-local robloxGui = coreGuiService:WaitForChild("RobloxGui")
-local textService = game:GetService("TextService")
-local guiService = game:GetService("GuiService")
-local localizationService = game:GetService("LocalizationService")
+﻿local CorePackages = game:GetService("CorePackages")
+local ContextActionService = game:GetService("ContextActionService")
+local TweenService = game:GetService("TweenService")
+local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
+local TextService = game:GetService("TextService")
+local GuiService = game:GetService("GuiService")
 local VRService = game:GetService("VRService")
-local userInputService = game:GetService("UserInputService")
-local runService = game:GetService("RunService")
-local create = require(corePackagesService.Workspace.Packages.AppCommonLib).Create
-local mouseIconOverrideService = require(corePackagesService.Workspace.Packages.CoreScriptsCommon).MouseIconOverrideService
-local constants = require(corePackagesService.Workspace.Packages.CoreScriptsCommon).Constants
-local shimmerModule = require(robloxGui.Modules.Shimmer)
-local getFFlagDisplayChannelNameOnErrorPromptModule = require(robloxGui.Modules.Flags.GetFFlagDisplayChannelNameOnErrorPrompt)
-local fFlagLuaSupportMicroGamepadPreferredInput = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagLuaSupportMicroGamepadPreferredInput
-local localization = require(corePackagesService.Workspace.Packages.InExperienceLocales).Localization
-local localizeErrorCodeStringFFlag = settings():GetFFlag("LocalizeErrorCodeString")
-local tweenInfo = TweenInfo.new(0.15, Enum.EasingStyle.Quint, Enum.EasingDirection.InOut, 0, false, 0)
-local var1 = localization.new(localizationService.RobloxLocaleId)
+local UserInputService = game:GetService("UserInputService")
+local RunService = game:GetService("RunService")
+local CreateFunction = require(CorePackages.Workspace.Packages.AppCommonLib).Create
+local MouseIconOverrideService = require(CorePackages.Workspace.Packages.CoreScriptsCommon).MouseIconOverrideService
+local Constants = require(CorePackages.Workspace.Packages.CoreScriptsCommon).Constants
+local ShimmerModule = require(RobloxGui.Modules.Shimmer)
+local GetFFlagDisplayChannelNameOnErrorPromptModule = require(RobloxGui.Modules.Flags.GetFFlagDisplayChannelNameOnErrorPrompt)
+local FFlagLuaSupportMicroGamepadPreferredInput = require(CorePackages.Workspace.Packages.SharedFlags).FFlagLuaSupportMicroGamepadPreferredInput
+local LocalizeErrorCodeStringFFlag = settings():GetFFlag("LocalizeErrorCodeString")
+local _TweenInfo = TweenInfo.new(0.15, Enum.EasingStyle.Quint, Enum.EasingDirection.InOut, 0, false, 0)
+local NewResult = require(CorePackages.Workspace.Packages.InExperienceLocales).Localization.new(game:GetService("LocalizationService").RobloxLocaleId)
 
-local function _(p1, p2, p3)
-	-- upvalues: var1 (ref)
-	local ok, status = pcall(function()
-		-- upvalues: var1 (copy), p1 (ref), p3 (ref)
-		return var1:Format(p1, p3)
+local function _(p1, p2, p3) --[[ Line: 36 | Named "attemptTranslate" ]]
+	-- upvalues: NewResult (copy)
+	local Success, Result = pcall(function() --[[ Line: 37 ]]
+		-- upvalues: NewResult (upval), p1 (copy), p3 (copy)
+		return NewResult:Format(p1, p3)
 	end)
 	
-	return if ok then status else p2
+	return Success and Result or p2
 end
 
-local t = {
-	Default = function()
-		-- upvalues: create (ref), constants (ref)
-		return create("Frame")({
+local config = {
+	Default = function() --[[ Line: 45 ]]
+		-- upvalues: CreateFunction (copy), Constants (copy)
+		return CreateFunction("Frame")({
 			Name = "ErrorPrompt",
 			BackgroundTransparency = 0,
 			BorderSizePixel = 0,
-			BackgroundColor3 = constants.COLORS.FLINT,
+			BackgroundColor3 = Constants.COLORS.FLINT,
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			Position = UDim2.new(0.5, 0, 0.5, 0),
-			Size = UDim2.new(0, constants.ERROR_PROMPT_MAX_WIDTH.Default, 0, constants.ERROR_PROMPT_HEIGHT.Default),
+			Size = UDim2.new(0, Constants.ERROR_PROMPT_MAX_WIDTH.Default, 0, Constants.ERROR_PROMPT_HEIGHT.Default),
 			Visible = false,
 			AutoLocalize = false,
 			ZIndex = 8,
-			create("UIListLayout")({
+			CreateFunction("UIListLayout")({
 				Name = "PromptLayout",
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				HorizontalAlignment = Enum.HorizontalAlignment.Center
 			}),
-			create("UIScale")({ Name = "PromptScale", Scale = 0 }),
-			create("Frame")({
+			CreateFunction("UIScale")({ Name = "PromptScale", Scale = 0 }),
+			CreateFunction("Frame")({
 				Name = "TitleFrame",
 				LayoutOrder = 1,
 				BackgroundTransparency = 1,
-				Size = UDim2.new(1, 0, 0, constants.ERROR_TITLE_FRAME_HEIGHT.Default),
+				Size = UDim2.new(1, 0, 0, Constants.ERROR_TITLE_FRAME_HEIGHT.Default),
 				BorderSizePixel = 0,
 				ZIndex = 8,
-				create("UIPadding")({
+				CreateFunction("UIPadding")({
 					Name = "TitleFramePadding",
 					PaddingBottom = UDim.new(0, 11),
 					PaddingTop = UDim.new(0, 11)
 				}),
-				create("TextLabel")({
+				CreateFunction("TextLabel")({
 					Name = "ErrorTitle",
 					TextSize = 25,
 					BackgroundTransparency = 1,
 					ZIndex = 8,
-					TextColor3 = constants.COLORS.WHITE,
+					TextColor3 = Constants.COLORS.WHITE,
 					Size = UDim2.new(1, 0, 0, 28),
 					Font = Enum.Font.SourceSansSemibold,
 					TextXAlignment = Enum.TextXAlignment.Center,
 					TextYAlignment = Enum.TextYAlignment.Center
 				})
 			}),
-			create("Frame")({
+			CreateFunction("Frame")({
 				Name = "SplitLine",
 				LayoutOrder = 2,
 				BorderSizePixel = 0,
 				ZIndex = 8,
-				Size = UDim2.new(1, -2 * constants.SIDE_PADDING, 0, constants.SPLIT_LINE_THICKNESS),
-				BackgroundColor3 = constants.COLORS.PUMICE
+				Size = UDim2.new(1, -2 * Constants.SIDE_PADDING, 0, Constants.SPLIT_LINE_THICKNESS),
+				BackgroundColor3 = Constants.COLORS.PUMICE
 			}),
-			create("Frame")({
+			CreateFunction("Frame")({
 				Name = "MessageArea",
 				LayoutOrder = 3,
-				Size = UDim2.new(1, 0, 1, (-constants.ERROR_TITLE_FRAME_HEIGHT.Default) - constants.SPLIT_LINE_THICKNESS),
+				Size = UDim2.new(1, 0, 1, -Constants.ERROR_TITLE_FRAME_HEIGHT.Default - Constants.SPLIT_LINE_THICKNESS),
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
 				ZIndex = 8,
-				create("UIPadding")({
+				CreateFunction("UIPadding")({
 					Name = "MessageAreaPadding",
-					PaddingBottom = UDim.new(0, constants.SIDE_PADDING),
-					PaddingLeft = UDim.new(0, constants.SIDE_PADDING),
-					PaddingRight = UDim.new(0, constants.SIDE_PADDING),
-					PaddingTop = UDim.new(0, constants.SIDE_PADDING)
+					PaddingBottom = UDim.new(0, Constants.SIDE_PADDING),
+					PaddingLeft = UDim.new(0, Constants.SIDE_PADDING),
+					PaddingRight = UDim.new(0, Constants.SIDE_PADDING),
+					PaddingTop = UDim.new(0, Constants.SIDE_PADDING)
 				}),
-				create("Frame")({
+				CreateFunction("Frame")({
 					Name = "ErrorFrame",
 					BackgroundTransparency = 1,
 					Size = UDim2.new(1, 0, 1, 0),
 					ZIndex = 8,
-					create("UIListLayout")({
+					CreateFunction("UIListLayout")({
 						Name = "ErrorFrameLayout",
-						Padding = UDim.new(0, constants.LAYOUT_PADDING),
+						Padding = UDim.new(0, Constants.LAYOUT_PADDING),
 						HorizontalAlignment = Enum.HorizontalAlignment.Center,
 						SortOrder = Enum.SortOrder.LayoutOrder
 					}),
-					create("TextLabel")({
+					CreateFunction("TextLabel")({
 						Name = "ErrorMessage",
 						LayoutOrder = 1,
 						TextSize = 20,
 						ZIndex = 8,
 						BackgroundTransparency = 1,
 						TextWrapped = true,
-						Size = UDim2.new(1, 0, 1, (-constants.BUTTON_HEIGHT) - constants.LAYOUT_PADDING),
-						TextColor3 = constants.COLORS.PUMICE,
+						Size = UDim2.new(1, 0, 1, -Constants.BUTTON_HEIGHT - Constants.LAYOUT_PADDING),
+						TextColor3 = Constants.COLORS.PUMICE,
 						Font = Enum.Font.SourceSans
 					}),
-					create("Frame")({
+					CreateFunction("Frame")({
 						Name = "ButtonArea",
 						BackgroundTransparency = 1,
-						Size = UDim2.new(1, 0, 0, constants.BUTTON_HEIGHT),
+						Size = UDim2.new(1, 0, 0, Constants.BUTTON_HEIGHT),
 						ZIndex = 8,
 						LayoutOrder = 2,
 						SelectionGroup = true,
@@ -129,10 +126,10 @@ local t = {
 						SelectionBehaviorDown = Enum.SelectionBehavior.Stop,
 						SelectionBehaviorLeft = Enum.SelectionBehavior.Stop,
 						SelectionBehaviorRight = Enum.SelectionBehavior.Stop,
-						create("UIGridLayout")({
+						CreateFunction("UIGridLayout")({
 							Name = "ButtonLayout",
-							CellPadding = UDim2.new(0, constants.BUTTON_CELL_PADDING, 0, 0),
-							CellSize = UDim2.new(1, 0, 0, constants.BUTTON_HEIGHT),
+							CellPadding = UDim2.new(0, Constants.BUTTON_CELL_PADDING, 0, 0),
+							CellSize = UDim2.new(1, 0, 0, Constants.BUTTON_HEIGHT),
 							HorizontalAlignment = Enum.HorizontalAlignment.Center,
 							VerticalAlignment = Enum.VerticalAlignment.Center,
 							SortOrder = Enum.SortOrder.LayoutOrder
@@ -143,28 +140,28 @@ local t = {
 		})
 	end
 }
-local t_1 = {
-	Default = function(p1, p2, p3)
-		-- upvalues: create (ref), constants (ref)
-		return create("ImageButton")({
-			Name = p1 .. "Button",
+local config1 = {
+	Default = function(Text, LayoutOrder, p1) --[[ Line: 161 ]]
+		-- upvalues: CreateFunction (copy), Constants (copy)
+		return CreateFunction("ImageButton")({
+			Name = Text .. "Button",
 			BackgroundTransparency = 1,
-			ImageColor3 = if p3 then constants.COLORS.WHITE else constants.COLORS.PUMICE,
+			ImageColor3 = p1 and Constants.COLORS.WHITE or Constants.COLORS.PUMICE,
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			Size = UDim2.new(1, 0, 1, 0),
-			Image = if p3 then constants.PRIMARY_BUTTON_TEXTURE else constants.SECONDARY_BUTTON_TEXTURE,
+			Image = p1 and Constants.PRIMARY_BUTTON_TEXTURE or Constants.SECONDARY_BUTTON_TEXTURE,
 			ScaleType = Enum.ScaleType.Slice,
 			SliceCenter = Rect.new(8, 8, 9, 9),
-			LayoutOrder = p2,
+			LayoutOrder = LayoutOrder,
 			ZIndex = 8,
-			create("TextLabel")({
+			CreateFunction("TextLabel")({
 				Name = "ButtonText",
 				BackgroundTransparency = 1,
 				TextSize = 20,
 				ZIndex = 8,
-				Text = p1,
+				Text = Text,
 				Size = UDim2.new(1, 0, 1, 0),
-				TextColor3 = if p3 then constants.COLORS.SLATE else constants.COLORS.PUMICE,
+				TextColor3 = p1 and Constants.COLORS.SLATE or Constants.COLORS.PUMICE,
 				TextXAlignment = Enum.TextXAlignment.Center,
 				TextYAlignment = Enum.TextYAlignment.Center,
 				Font = Enum.Font.SourceSans
@@ -172,56 +169,56 @@ local t_1 = {
 		})
 	end
 }
-local t_2 = {}
-t_2.__index = t_2
+local ErrorPromptModule = {}
+ErrorPromptModule.__index = ErrorPromptModule
 
-function t_2.new(p1, p2)
-	-- upvalues: t_2 (ref), t (ref), tweenService (ref), tweenInfo (ref), VRService (ref), userInputService (ref), guiService (ref)
-	local tbl = setmetatable({}, t_2)
-	tbl._frame = p1 and t[p1]() or t.Default()
-	tbl._isOpen = false
-	tbl._openAnimation = tweenService:Create(tbl._frame.PromptScale, tweenInfo, { Scale = 1 })
-	tbl._closeAnimation = tweenService:Create(tbl._frame.PromptScale, tweenInfo, { Scale = 0 })
-	tbl._buttonCount = 0
-	tbl._playAnimation = true
-	tbl._hideErrorCode = false
-	tbl._menuIsOpenKey = "ErrorPrompt"
+function ErrorPromptModule.new(p1, p2) --[[ Line: 199 ]]
+	-- upvalues: ErrorPromptModule (copy), config (copy), TweenService (copy), _TweenInfo (copy), VRService (copy), UserInputService (copy), GuiService (copy)
+	local self = setmetatable({}, ErrorPromptModule)
+	self._frame = p1 and config[p1]() or config.Default()
+	self._isOpen = false
+	self._openAnimation = TweenService:Create(self._frame.PromptScale, _TweenInfo, { Scale = 1 })
+	self._closeAnimation = TweenService:Create(self._frame.PromptScale, _TweenInfo, { Scale = 0 })
+	self._buttonCount = 0
+	self._playAnimation = true
+	self._hideErrorCode = false
+	self._menuIsOpenKey = "ErrorPrompt"
 	
 	if p2 then
 		if p2.PlayAnimation ~= nil then
-			tbl._playAnimation = p2.PlayAnimation
+			self._playAnimation = p2.PlayAnimation
 		end
 		if p2.HideErrorCode ~= nil then
-			tbl._hideErrorCode = p2.HideErrorCode
+			self._hideErrorCode = p2.HideErrorCode
 		end
 		if p2.MenuIsOpenKey ~= nil then
-			tbl._menuIsOpenKey = p2.MenuIsOpenKey
+			self._menuIsOpenKey = p2.MenuIsOpenKey
 		end
-		tbl._frame.MessageArea.ErrorFrame.ErrorMessage.TextScaled = p2.MessageTextScaled or false
+		self._frame.MessageArea.ErrorFrame.ErrorMessage.TextScaled = p2.MessageTextScaled or false
 	end
-	if not VRService.VREnabled and userInputService.GamepadEnabled then
-		guiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(function()
-			-- upvalues: tbl (ref), guiService (copy)
-			if tbl._isOpen and guiService.SelectedCoreObject == nil then
-				guiService:Select(tbl._frame.MessageArea.ErrorFrame.ButtonArea)
+	if not VRService.VREnabled and UserInputService.GamepadEnabled then
+		GuiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(function() --[[ Line: 232 ]]
+			-- upvalues: self (copy), GuiService (upval)
+			if self._isOpen and GuiService.SelectedCoreObject == nil then
+				GuiService:Select(self._frame.MessageArea.ErrorFrame.ButtonArea)
 			end
 		end)
 	end
-	return tbl
+	return self
 end
 
-local function sinkInput(_, _, _)
+local function sinkInput(_, _, _) --[[ Line: 242 ]]
 	return Enum.ContextActionResult.Sink
 end
 
-function t_2:_open(p1, p2, p3)
-	-- upvalues: robloxGui (ref), mouseIconOverrideService (ref), guiService (ref), VRService (ref), userInputService (ref), fFlagLuaSupportMicroGamepadPreferredInput (ref), contextActionService (ref), sinkInput (ref)
+function ErrorPromptModule:_open(p1, p2, p3) --[[ Line: 246 ]]
+	-- upvalues: RobloxGui (copy), MouseIconOverrideService (copy), GuiService (copy), VRService (copy), UserInputService (copy), FFlagLuaSupportMicroGamepadPreferredInput (copy), ContextActionService (copy), sinkInput (copy)
 	self:setErrorText(p1, p2, p3)
-	self:_resizeHeight(robloxGui.AbsoluteSize.Y)
+	self:_resizeHeight(RobloxGui.AbsoluteSize.Y)
 	
 	if not self._isOpen then
-		mouseIconOverrideService.push("ErrorPromptOverride", Enum.OverrideMouseIconBehavior.ForceShow)
-		guiService:SetMenuIsOpen(true, self._menuIsOpenKey)
+		MouseIconOverrideService.push("ErrorPromptOverride", Enum.OverrideMouseIconBehavior.ForceShow)
+		GuiService:SetMenuIsOpen(true, self._menuIsOpenKey)
 		self._frame.Visible = true
 		self._isOpen = true
 		
@@ -233,17 +230,17 @@ function t_2:_open(p1, p2, p3)
 			self._frame.PromptScale.Scale = 1
 		end
 	end
-	if self._isOpen and (VRService.VREnabled or userInputService.PreferredInput == Enum.PreferredInput.Gamepad or fFlagLuaSupportMicroGamepadPreferredInput and userInputService.PreferredInput == Enum.PreferredInput.MicroGamepad) then
-		guiService:Select(self._frame.MessageArea.ErrorFrame.ButtonArea)
+	if self._isOpen and (VRService.VREnabled or UserInputService.PreferredInput == Enum.PreferredInput.Gamepad or FFlagLuaSupportMicroGamepadPreferredInput and UserInputService.PreferredInput == Enum.PreferredInput.MicroGamepad) then
+		GuiService:Select(self._frame.MessageArea.ErrorFrame.ButtonArea)
 	end
-	contextActionService:BindCoreAction("ErrorPromptAction", sinkInput, false, Enum.KeyCode.ButtonSelect, Enum.KeyCode.ButtonStart)
+	ContextActionService:BindCoreAction("ErrorPromptAction", sinkInput, false, Enum.KeyCode.ButtonSelect, Enum.KeyCode.ButtonStart)
 end
 
-function t_2:_close()
-	-- upvalues: mouseIconOverrideService (ref), guiService (ref), contextActionService (ref)
+function ErrorPromptModule:_close() --[[ Line: 278 ]]
+	-- upvalues: MouseIconOverrideService (copy), GuiService (copy), ContextActionService (copy)
 	if self._isOpen then
-		mouseIconOverrideService.pop("ErrorPromptOverride")
-		guiService:SetMenuIsOpen(false, self._menuIsOpenKey)
+		MouseIconOverrideService.pop("ErrorPromptOverride")
+		GuiService:SetMenuIsOpen(false, self._menuIsOpenKey)
 		self._isOpen = false
 		
 		if self._playAnimation then
@@ -253,182 +250,181 @@ function t_2:_close()
 			self._frame.PromptScale.Scale = 0
 		end
 		self._frame.Visible = false
-		contextActionService:UnbindCoreAction("ErrorPromptAction")
+		ContextActionService:UnbindCoreAction("ErrorPromptAction")
 	end
 end
 
-function t_2:setParent(p1)
-	self._frame.Parent = p1
+function ErrorPromptModule:setParent(Parent) --[[ Line: 294 ]]
+	self._frame.Parent = Parent
 end
 
-function t_2:setErrorText(p1, p2, p3)
-	-- upvalues: runService (ref), localizeErrorCodeStringFFlag (ref), var1 (ref), getFFlagDisplayChannelNameOnErrorPromptModule (ref)
-	local errorMessage = self._frame.MessageArea.ErrorFrame.ErrorMessage
-	local robloxClientChannel = runService:GetRobloxClientChannel()
+function ErrorPromptModule:setErrorText(Text, p1, p2) --[[ Line: 298 ]]
+	-- upvalues: RunService (copy), LocalizeErrorCodeStringFFlag (copy), NewResult (copy), GetFFlagDisplayChannelNameOnErrorPromptModule (copy)
+	local ErrorMessage = self._frame.MessageArea.ErrorFrame.ErrorMessage
+	local RobloxClientChannel = RunService:GetRobloxClientChannel()
 	
 	if self._hideErrorCode then
-		errorMessage.Text = p1
-		
-		return
-	elseif localizeErrorCodeStringFFlag then
-		local var2 = if p2 then p2.Value else -1
-		local var3 = ("Error Code: %d"):format(var2)
-		local t = { ERROR_CODE = tostring(var2) }
-		local var4 = "InGame.ConnectionError.Message.ErrorCode"
-		local ok, status = pcall(function()
-			-- upvalues: var1 (copy), var4 (ref), t (ref)
-			return var1:Format(var4, t)
-		end)
-		local var5 = if ok then status else var3
-		local var6 = nil
-		
-		if getFFlagDisplayChannelNameOnErrorPromptModule() and p3 and robloxClientChannel then
-			var6 = ("%s\n(%s, %s)"):format(p1, var5, var1:Format("InGame.ConnectionError.Message.ChannelName", { CHANNEL_NAME = robloxClientChannel }) or ("Channel: %s"):format(robloxClientChannel))
-		end
-		errorMessage.Text = var6 or ("%s\n(%s)"):format(p1, var5)
-		
-		return
-	elseif p2 then
-		errorMessage.Text = ("%s\n(Error Code: %d)"):format(p1, p2.Value)
+		ErrorMessage.Text = Text
 		
 		return
 	end
-	errorMessage.Text = ("%s\n(Error Code: -1)"):format(p1)
+	if LocalizeErrorCodeStringFFlag then
+		local Value = if p1 then p1.Value else -1
+		local Message: string = ("Error Code: %d"):format(Value)
+		local config = { ERROR_CODE = tostring(Value) }
+		local v1 = "InGame.ConnectionError.Message.ErrorCode"
+		local Success, Result = pcall(function() --[[ Line: 37 ]]
+			-- upvalues: NewResult (upval), v1 (copy), config (copy)
+			return NewResult:Format(v1, config)
+		end)
+		local Result1 = Success and Result or Message
+		ErrorMessage.Text = (if GetFFlagDisplayChannelNameOnErrorPromptModule() and p2 and RobloxClientChannel then ("%s\n(%s, %s)"):format(Text, Result1, NewResult:Format("InGame.ConnectionError.Message.ChannelName", { CHANNEL_NAME = RobloxClientChannel }) or ("Channel: %s"):format(RobloxClientChannel)) else nil) or ("%s\n(%s)"):format(Text, Result1)
+		
+		return
+	elseif p1 then
+		ErrorMessage.Text = ("%s\n(Error Code: %d)"):format(Text, p1.Value)
+		
+		return
+	else
+		ErrorMessage.Text = ("%s\n(Error Code: -1)"):format(Text)
+	end
 end
 
-function t_2:setErrorTitle(p1, p2)
-	-- upvalues: var1 (ref)
-	if not p1 then return end
-	local errorTitle = self._frame.TitleFrame.ErrorTitle
+function ErrorPromptModule:setErrorTitle(Text, p1) --[[ Line: 337 ]]
+	-- upvalues: NewResult (copy)
+	if not Text then return end
+	local ErrorTitle = self._frame.TitleFrame.ErrorTitle
 	
-	if p2 then
-		local var2 = nil
-		local ok, status = pcall(function()
-			-- upvalues: var1 (copy), p2 (ref), var2 (ref)
-			return var1:Format(p2, var2)
+	if p1 then
+		local v1 = nil
+		local Success, Result = pcall(function() --[[ Line: 37 ]]
+			-- upvalues: NewResult (upval), p1 (copy), v1 (copy)
+			return NewResult:Format(p1, v1)
 		end)
-		errorTitle.Text = if ok then status else p1
+		ErrorTitle.Text = Success and Result or Text
 		
 		return
+	else
+		ErrorTitle.Text = Text
 	end
-	errorTitle.Text = p1
 end
 
-function t_2:onErrorChanged(p1, p2, p3)
+function ErrorPromptModule:onErrorChanged(p1, p2, p3) --[[ Line: 349 ]]
 	if p1 == "" then
 		self:_close()
 		
 		return
-	elseif p1 ~= "" then
+	end
+	if p1 ~= "" then
 		self:_open(p1, p2, p3)
 	end
 end
 
-function t_2:_relayout()
-	-- upvalues: constants (ref)
-	local buttonArea = self._frame.MessageArea.ErrorFrame.ButtonArea
+function ErrorPromptModule:_relayout() --[[ Line: 358 ]]
+	-- upvalues: Constants (copy)
+	local ButtonArea = self._frame.MessageArea.ErrorFrame.ButtonArea
 	
 	if self._buttonCount == 0 then
-		buttonArea.Visible = false
+		ButtonArea.Visible = false
 		
 		return
+	else
+		ButtonArea.Visible = true
+		ButtonArea.ButtonLayout.CellSize = UDim2.new(0, (self._frame.Size.X.Offset - (self._buttonCount - 1) * Constants.BUTTON_CELL_PADDING - 2 * Constants.SIDE_PADDING) / self._buttonCount, 0, Constants.BUTTON_HEIGHT)
 	end
-	local var2 = (self._frame.Size.X.Offset - (self._buttonCount - 1) * constants.BUTTON_CELL_PADDING - 2 * constants.SIDE_PADDING) / self._buttonCount
-	buttonArea.Visible = true
-	buttonArea.ButtonLayout.CellSize = UDim2.new(0, var2, 0, constants.BUTTON_HEIGHT)
 end
 
-function t_2:clearButtons()
-	local buttonArea = self._frame.MessageArea.ErrorFrame.ButtonArea
+function ErrorPromptModule:clearButtons() --[[ Line: 370 ]]
+	local ButtonArea = self._frame.MessageArea.ErrorFrame.ButtonArea
 	
 	if self._primaryShimmer then
 		self._primaryShimmer = nil
 	end
-	for i, v in pairs(buttonArea:GetChildren()) do
-		if v.name ~= "ButtonLayout" then
-			v:Destroy()
+	for _, child in pairs((ButtonArea:GetChildren())) do
+		if child.name ~= "ButtonLayout" then
+			child:Destroy()
 		end
 	end
 end
 
-function t_2:updateButtons(p1, p2)
-	-- upvalues: var1 (ref), t_1 (ref), shimmerModule (ref)
-	if not p1 then
-		p1 = {}
+function ErrorPromptModule:updateButtons(Frames, p1: string) --[[ Line: 403 ]]
+	-- upvalues: NewResult (copy), config1 (copy), ShimmerModule (copy)
+	if not Frames then
+		Frames = {}
 	end
-	if not p2 then
-		p2 = "Default"
+	if not p1 then
+		p1 = "Default"
 	end
 	self:clearButtons()
-	local buttonArea = self._frame.MessageArea.ErrorFrame.ButtonArea
-	local var2 = 0
+	local ButtonArea = self._frame.MessageArea.ErrorFrame.ButtonArea
+	local _buttonCount = 0
 	
-	for i, v in pairs(p1) do
-		local text = v.Text
+	for _, frame in pairs(Frames) do
+		local Text = frame.Text
 		
-		if v.LocalizationKey then
-			local localizationKey = v.LocalizationKey
-			local text_1 = v.Text
-			local var3 = nil
-			local ok, status = pcall(function()
-				-- upvalues: var1 (copy), localizationKey (ref), var3 (ref)
-				return var1:Format(localizationKey, var3)
+		if frame.LocalizationKey then
+			local LocalizationKey = frame.LocalizationKey
+			local Text1 = frame.Text
+			local v1 = nil
+			local Success, Result = pcall(function() --[[ Line: 37 ]]
+				-- upvalues: NewResult (upval), LocalizationKey (copy), v1 (copy)
+				return NewResult:Format(LocalizationKey, v1)
 			end)
-			text = if ok then status else text_1
+			Text = Success and Result or Text1
 		end
-		local var4 = t_1[p2](text, v.LayoutOrder, v.Primary)
+		local v2 = config1[p1](Text, frame.LayoutOrder, frame.Primary)
 		
-		if v.Primary then
-			self._primaryShimmer = shimmerModule.new(var4, "PrimaryButton")
+		if frame.Primary then
+			self._primaryShimmer = ShimmerModule.new(v2, "PrimaryButton")
 		end
-		var4.Parent = buttonArea
-		var4.Activated:connect(v.Callback)
-		var2 += 1
+		v2.Parent = ButtonArea
+		v2.Activated:connect(frame.Callback)
+		_buttonCount += 1
 	end
-	if self._buttonCount ~= var2 then
-		self._buttonCount = var2
+	if self._buttonCount ~= _buttonCount then
+		self._buttonCount = _buttonCount
 		self:_relayout()
 	end
 end
 
-function t_2:primaryShimmerPlay()
+function ErrorPromptModule:primaryShimmerPlay() --[[ Line: 437 ]]
 	if self._primaryShimmer then
 		self._primaryShimmer:play()
 	end
 end
 
-function t_2:primaryShimmerStop()
+function ErrorPromptModule:primaryShimmerStop() --[[ Line: 443 ]]
 	if self._primaryShimmer then
 		self._primaryShimmer:stop()
 	end
 end
 
-function t_2:resizeWidthAndHeight(p3, p4)
-	self:_resizeWidth(p3)
-	self:_resizeHeight(p4)
+function ErrorPromptModule:resizeWidthAndHeight(p2, p3) --[[ Line: 449 ]]
+	self:_resizeWidth(p2)
+	self:_resizeHeight(p3)
 	self:_relayout()
 end
 
-function t_2:_resizeWidth(p3)
-	-- upvalues: constants (ref)
-	local offset = self._frame.Size.X.Offset
-	local var5 = p3 - 2 * constants.SIDE_MARGIN
+function ErrorPromptModule:_resizeWidth(p2) --[[ Line: 455 ]]
+	-- upvalues: Constants (copy)
+	local Offset = self._frame.Size.X.Offset
+	local XOffset = p2 - 2 * Constants.SIDE_MARGIN
 	
-	if constants.ERROR_PROMPT_MAX_WIDTH.Default < var5 then
-		if offset == constants.ERROR_PROMPT_MAX_WIDTH.Default then return end
-		var5 = constants.ERROR_PROMPT_MAX_WIDTH.Default
+	if Constants.ERROR_PROMPT_MAX_WIDTH.Default < XOffset then
+		if Offset == Constants.ERROR_PROMPT_MAX_WIDTH.Default then return end
+		XOffset = Constants.ERROR_PROMPT_MAX_WIDTH.Default
 	end
-	if var5 < constants.ERROR_PROMPT_MIN_WIDTH.Default then
-		if offset == constants.ERROR_PROMPT_MIN_WIDTH.Default then return end
-		var5 = constants.ERROR_PROMPT_MIN_WIDTH.Default
+	if XOffset < Constants.ERROR_PROMPT_MIN_WIDTH.Default then
+		if Offset == Constants.ERROR_PROMPT_MIN_WIDTH.Default then return end
+		XOffset = Constants.ERROR_PROMPT_MIN_WIDTH.Default
 	end
-	self._frame.Size = UDim2.new(0, var5, 0, self._frame.Size.Y.Offset)
+	self._frame.Size = UDim2.new(0, XOffset, 0, self._frame.Size.Y.Offset)
 end
 
-function t_2:_resizeHeight(p3)
-	-- upvalues: constants (ref), textService (ref)
-	local errorMessage = self._frame.MessageArea.ErrorFrame.ErrorMessage
-	self._frame.Size = UDim2.new(0, self._frame.Size.X.Offset, 0, math.max(math.min(constants.ERROR_TITLE_FRAME_HEIGHT.Default + textService:GetTextSize(errorMessage.Text, errorMessage.TextSize, errorMessage.Font, Vector2.new(self._frame.Size.X.Offset - 2 * constants.SIDE_PADDING, 1000)).Y + constants.SPLIT_LINE_THICKNESS + constants.BUTTON_HEIGHT + constants.LAYOUT_PADDING + 2 * constants.SIDE_PADDING + 1, p3 - 2 * constants.VERTICAL_MARGIN), constants.ERROR_PROMPT_MIN_HEIGHT.Default))
+function ErrorPromptModule:_resizeHeight(Y) --[[ Line: 478 ]]
+	-- upvalues: Constants (copy), TextService (copy)
+	local ErrorMessage = self._frame.MessageArea.ErrorFrame.ErrorMessage
+	self._frame.Size = UDim2.new(0, self._frame.Size.X.Offset, 0, (math.max(math.min(Constants.ERROR_TITLE_FRAME_HEIGHT.Default + TextService:GetTextSize(ErrorMessage.Text, ErrorMessage.TextSize, ErrorMessage.Font, (Vector2.new(self._frame.Size.X.Offset - 2 * Constants.SIDE_PADDING, 1000))).Y + Constants.SPLIT_LINE_THICKNESS + Constants.BUTTON_HEIGHT + Constants.LAYOUT_PADDING + 2 * Constants.SIDE_PADDING + 1, Y - 2 * Constants.VERTICAL_MARGIN), Constants.ERROR_PROMPT_MIN_HEIGHT.Default)))
 end
 
-return t_2
+return ErrorPromptModule

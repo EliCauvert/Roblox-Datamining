@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Workspace.DataHydration.DataHydration)
+﻿return (require(script.Parent.Parent.Parent._Workspace.DataHydration.DataHydration))

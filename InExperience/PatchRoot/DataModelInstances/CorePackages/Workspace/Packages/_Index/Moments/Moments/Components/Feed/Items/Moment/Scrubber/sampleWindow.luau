@@ -1,135 +1,137 @@
-﻿local function _(p1)
+﻿local function _(p1): boolean --[[ Line: 65 | Named "isNaN" ]]
 	return p1 ~= p1
 end
 
 return {
-	estimateVelocity = function(p1)
-		local p1Count = #p1
+	estimateVelocity = function(Entry) --[[ Line: 74 ]]
+		local CountEntry = #Entry
 		
-		if p1Count < 2 then
+		if CountEntry < 2 then
 			return 0
 		end
-		local var1 = p1[1]
-		local var2 = p1[p1Count]
-		local var3 = var2.time - var1.time
+		local Entry1 = Entry[1]
+		local Entry2 = Entry[CountEntry]
+		local TimeDelta = Entry2.time - Entry1.time
 		
-		if var3 <= 0 or var3 ~= var3 then
+		if TimeDelta <= 0 or TimeDelta ~= TimeDelta then
 			return 0
+		else
+			local PositionRatio = (Entry2.position - Entry1.position) / TimeDelta
+			
+			return if PositionRatio ~= PositionRatio then 0 else PositionRatio
 		end
-		local var4 = (var2.position - var1.position) / var3
-		
-		return if var4 ~= var4 then 0 else var4
 	end,
-	planTargets = function(p1, p2, p3, p4)
-		local granularity = p4.granularity
+	planTargets = function(p1, p2, p3, p4) --[[ Line: 97 ]]
+		local Granularity: number = p4.granularity
 		
-		if p1 ~= p1 or granularity <= 0 or (#p4.bands == 0 or p4.maxSamples <= 0) then
+		if p1 ~= p1 or Granularity <= 0 or #p4.bands == 0 or p4.maxSamples <= 0 then
 			return {}
 		end
-		local var1 = p4.maxLeadFraction * (p3.max - p3.min)
-		local rounded = math.round((p1 + math.clamp((if p2 ~= p2 then 0 else p2) * p4.predictionLead, -var1, var1)) / granularity)
+		local v1 = p2 ~= p2
+		local v2 = if v1 then 0 else p2
+		local ScaledMaxLeadFraction = p4.maxLeadFraction * (p3.max - p3.min)
+		local Rounded = math.round((p1 + math.clamp(v2 * p4.predictionLead, -ScaledMaxLeadFraction, ScaledMaxLeadFraction)) / Granularity)
 		
-		local function _(p5)
-			-- upvalues: p4 (ref)
-			for i, v in p4.bands do
-				if p5 <= v.radius + 0.000000001 then
-					return v.stride
+		local function _(p5) --[[ Line: 111 | Named "strideForDistance" ]]
+			-- upvalues: p4 (copy)
+			for _, band in p4.bands do
+				if p5 <= band.radius + 0.000000001 then
+					return band.stride
 				end
 			end
 			return nil
 		end
 		
-		local floored = math.floor(p4.bands[#p4.bands].radius / granularity + 0.000000001)
+		local Floored = math.floor(p4.bands[#p4.bands].radius / Granularity + 0.000000001)
+		local List = {}
 		local t = {}
-		local t_1 = {}
 		
-		local function consider(p6)
-			-- upvalues: t (ref), p4 (ref), granularity (ref), rounded (ref), p3 (ref), t_1 (ref)
-			if p4.maxSamples <= #t then return end
-			local stride
-			local var2 = math.abs(p6) * granularity
+		local function consider(Value: number) --[[ Line: 126 ]]
+			-- upvalues: List (copy), p4 (copy), Granularity (copy), Rounded (copy), p3 (copy), t (copy)
+			if p4.maxSamples <= #List then return end
+			local ScaledMagnitude = math.abs(Value) * Granularity
+			local Stride = nil
 			
-			for i, v in p4.bands do
-				if var2 <= v.radius + 0.000000001 then
-					stride = v.stride
-					if stride == nil or p6 % stride ~= 0 then return end
-					var2 = (rounded + p6) * granularity
-					
-					if var2 < p3.min or p3.max < var2 or t_1[var2] then
-						return
-					end
-					t_1[var2] = true
-					table.insert(t, var2)
-					
-					return
+			for _, band in p4.bands do
+				if ScaledMagnitude <= band.radius + 0.000000001 then
+					Stride = band.stride
+					break
 				end
 			end
-			stride = nil
+			if Stride == nil or Value % Stride ~= 0 then return end
+			local ScaledRounded = (Rounded + Value) * Granularity
+			
+			if ScaledRounded >= p3.min and p3.max >= ScaledRounded and not t[ScaledRounded] then
+				t[ScaledRounded] = true
+				table.insert(List, ScaledRounded)
+				
+				return
+			end
 		end
 		
-		if p4.maxSamples > #t then
-			local stride
-			local var3 = granularity * 0
+		if p4.maxSamples > #List then
+			local ScaledGranularity = Granularity * 0
+			local Stride = nil
 			
-			for i, v in p4.bands do
-				if var3 <= v.radius + 0.000000001 then
-					stride = v.stride
-					if stride ~= nil and 0 % stride == 0 then
-						var3 = (rounded + 0) * granularity
-						
-						if var3 >= p3.min and p3.max >= var3 and not t_1[var3] then
-							t_1[var3] = true
-							table.insert(t, var3)
-						end
-					end
+			for _, band in p4.bands do
+				if ScaledGranularity <= band.radius + 0.000000001 then
+					Stride = band.stride
+					break
 				end
 			end
-			stride = nil
+			if Stride ~= nil and 0 % Stride == 0 then
+				local ScaledRounded = (Rounded + 0) * Granularity
+				
+				if ScaledRounded >= p3.min and p3.max >= ScaledRounded and not t[ScaledRounded] then
+					t[ScaledRounded] = true
+					table.insert(List, ScaledRounded)
+				end
+			end
 		end
-		for i = 1, floored do
-			if p4.maxSamples <= #t then break end
+		for i = 1, Floored do
+			if p4.maxSamples <= #List then break end
 			consider(i)
 			consider(-i)
 		end
-		table.sort(t)
+		table.sort(List)
 		
-		return t
+		return List
 	end,
-	diff = function(p7, p8)
+	diff = function(List, List1) --[[ Line: 160 ]]
 		local t = {}
-		local t_1 = {}
+		local Fetch = {}
 		
-		for i, v in p7 do
-			t[v] = true
+		for _, value in List do
+			t[value] = true
 			
-			if not p8[v] then
-				table.insert(t_1, v)
+			if not List1[value] then
+				table.insert(Fetch, value)
 			end
 		end
-		local t_2 = {}
+		local List2 = {}
 		
-		for i_1 in p8 do
-			if not t[i_1] then
-				table.insert(t_2, i_1)
+		for i in List1 do
+			if not t[i] then
+				table.insert(List2, i)
 			end
 		end
-		table.sort(t_2)
+		table.sort(List2)
 		
-		return { fetch = t_1, evict = t_2 }
+		return { fetch = Fetch, evict = List2 }
 	end,
-	selectFrameTime = function(p9, p10)
-		local var4 = nil
-		local var5 = 1e999
+	selectFrameTime = function(p6, List) --[[ Line: 185 ]]
+		local v3 = nil
+		local v4 = 1e999
 		
-		for i, v in p10 do
-			local absValue = math.abs(v - p9)
+		for _, value in List do
+			local Magnitude = math.abs(value - p6)
 			
-			if absValue < var5 then
-				var5 = absValue
-				var4 = v
+			if Magnitude < v4 then
+				v4 = Magnitude
+				v3 = value
 			end
 		end
-		return var4
+		return v3
 	end,
 	defaultConfig = {
 		granularity = 0.2,

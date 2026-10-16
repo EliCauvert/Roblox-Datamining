@@ -1,25 +1,25 @@
-﻿local parent = script.Parent.Parent
-local object = require(parent.Parent.LuauPolyfill).Object
-local invariant = require(parent.jsutils.invariant).invariant
-local _ = require(parent.type.schema)
-local parse = require(parent.language.parser).parse
-local executeSync = require(parent.execution.execute).executeSync
-local getIntrospectionQuery = require(script.Parent.getIntrospectionQuery).getIntrospectionQuery
+﻿local Parent = script.Parent.Parent
+local Object = require(Parent.Parent.LuauPolyfill).Object
+local InvariantFunction = require(Parent.jsutils.invariant).invariant
+local _ = require(Parent.type.schema)
+local ParseFunction = require(Parent.language.parser).parse
+local ExecuteSyncFunction = require(Parent.execution.execute).executeSync
+local GetIntrospectionQueryFunction = require(script.Parent.getIntrospectionQuery).getIntrospectionQuery
 
 return {
-	introspectionFromSchema = function(p1, p2)
-		-- upvalues: object (ref), parse (ref), getIntrospectionQuery (ref), executeSync (ref), invariant (ref)
-		local var1 = executeSync({
-			schema = p1,
-			document = parse(getIntrospectionQuery(object.assign({
+	introspectionFromSchema = function(Schema, p1) --[[ Line: 37 ]]
+		-- upvalues: Object (copy), ParseFunction (copy), GetIntrospectionQueryFunction (copy), ExecuteSyncFunction (copy), InvariantFunction (copy)
+		local ExecuteSyncResult = ExecuteSyncFunction({
+			schema = Schema,
+			document = ParseFunction(GetIntrospectionQueryFunction((Object.assign({
 				specifiedByUrl = true,
 				directiveIsRepeatable = true,
 				schemaDescription = true,
 				inputValueDeprecation = true
-			}, p2)))
+			}, p1))))
 		})
-		invariant(not var1.errors and var1.data)
+		InvariantFunction(not ExecuteSyncResult.errors and ExecuteSyncResult.data)
 		
-		return var1.data
+		return ExecuteSyncResult.data
 	end
 }

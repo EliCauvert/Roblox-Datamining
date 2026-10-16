@@ -1,19 +1,18 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local inGameMenuDependenciesModule = require(corePackagesService.Packages.InGameMenuDependencies)
-local roact = inGameMenuDependenciesModule.Roact
-local UIBlox = inGameMenuDependenciesModule.UIBlox
-local inGameMenu = script:FindFirstAncestor("InGameMenu")
-local array = require(corePackagesService.Packages.LuauPolyfill).Array
-local controlLayoutContainerModule = require(script.Parent.Parent.ControlLayoutContainer)
-local themedTextLabelModule = require(inGameMenu.Components.ThemedTextLabel)
-local assetsModule = require(inGameMenu.Resources.Assets)
-local controlsModule = require(inGameMenu.Resources.Controls)
-local reactModule = require(corePackagesService.Packages.React)
-local withLocalizationModule = require(inGameMenu.Localization.withLocalization)
-local imageSetLabel = UIBlox.Core.ImageSet.ImageSetLabel
-local image = require(corePackagesService.Packages.Foundation).Image
-local fFlagCoreUiMigrateUIBloxToFoundation = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
-local t = {
+﻿local CorePackages = game:GetService("CorePackages")
+local InGameMenuDependenciesModule = require(CorePackages.Packages.InGameMenuDependencies)
+local Roact = InGameMenuDependenciesModule.Roact
+local InGameMenu = script:FindFirstAncestor("InGameMenu")
+local Array = require(CorePackages.Packages.LuauPolyfill).Array
+local ControlLayoutContainerModule = require(script.Parent.Parent.ControlLayoutContainer)
+local ThemedTextLabelModule = require(InGameMenu.Components.ThemedTextLabel)
+local AssetsModule = require(InGameMenu.Resources.Assets)
+local ControlsModule = require(InGameMenu.Resources.Controls)
+local ReactModule = require(CorePackages.Packages.React)
+local WithLocalizationModule = require(InGameMenu.Localization.withLocalization)
+local ImageSetLabel = InGameMenuDependenciesModule.UIBlox.Core.ImageSet.ImageSetLabel
+local Image = require(CorePackages.Packages.Foundation).Image
+local FFlagCoreUiMigrateUIBloxToFoundation = require(CorePackages.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
+local config = {
 	ResetCameraLabel = "CoreScripts.InGameMenu.Controls.ResetCameraLabel",
 	MenuLabel = "CoreScripts.InGameMenu.Controls.MenuLabel",
 	SelectItemLabel = "CoreScripts.InGameMenu.Controls.SelectItemLabel",
@@ -22,35 +21,35 @@ local t = {
 	JumpSelectLabel = "CoreScripts.InGameMenu.Controls.JumpSelectLabel"
 }
 
-return function(_)
-	-- upvalues: roact (ref), controlLayoutContainerModule (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), image (ref), imageSetLabel (ref), assetsModule (ref), reactModule (ref), array (ref), controlsModule (ref), t (ref), withLocalizationModule (ref), themedTextLabelModule (ref)
-	return roact.createElement(controlLayoutContainerModule, {
+return function(_) --[[ Line: 43 | Named "GamepadControls" ]]
+	-- upvalues: Roact (copy), ControlLayoutContainerModule (copy), FFlagCoreUiMigrateUIBloxToFoundation (copy), Image (copy), ImageSetLabel (copy), AssetsModule (copy), ReactModule (copy), Array (copy), ControlsModule (copy), config (copy), WithLocalizationModule (copy), ThemedTextLabelModule (copy)
+	return Roact.createElement(ControlLayoutContainerModule, {
 		titleText = "CoreScripts.InGameMenu.Controls.GamepadTitle"
 	}, {
-		GamepadImage = roact.createElement(if fFlagCoreUiMigrateUIBloxToFoundation then image else imageSetLabel, {
-			BackgroundTransparency = if fFlagCoreUiMigrateUIBloxToFoundation then nil else 1,
-			backgroundStyle = if fFlagCoreUiMigrateUIBloxToFoundation then { Transparency = 1 } else nil,
-			Image = assetsModule.Images.GamepadQuest,
+		GamepadImage = Roact.createElement(if FFlagCoreUiMigrateUIBloxToFoundation then Image else ImageSetLabel, {
+			BackgroundTransparency = if FFlagCoreUiMigrateUIBloxToFoundation then nil else 1,
+			backgroundStyle = if FFlagCoreUiMigrateUIBloxToFoundation then { Transparency = 1 } else nil,
+			Image = AssetsModule.Images.GamepadQuest,
 			Size = UDim2.new(1, 0, 0.6, 0),
 			Position = UDim2.new(0.5, 16.5, 0.5, 0),
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			SizeConstraint = Enum.SizeConstraint.RelativeXX,
-			testId = if fFlagCoreUiMigrateUIBloxToFoundation then "VRGamepadInstructions" else nil,
-			[reactModule.Tag] = if fFlagCoreUiMigrateUIBloxToFoundation then nil else "data-testid=VRGamepadInstructions"
+			testId = if FFlagCoreUiMigrateUIBloxToFoundation then "VRGamepadInstructions" else nil,
+			[ReactModule.Tag] = if FFlagCoreUiMigrateUIBloxToFoundation then nil else "data-testid=VRGamepadInstructions"
 		}, {
-			array.map(controlsModule.questGamepadLabels, function(p1, p2)
-				-- upvalues: t (copy), withLocalizationModule (copy), roact (copy), themedTextLabelModule (copy)
-				return withLocalizationModule({ t[p1.labelKey] })(function(p3)
-					-- upvalues: roact (copy), themedTextLabelModule (copy), p1 (ref), p2 (ref)
-					return roact.createElement(themedTextLabelModule, {
+			Array.map(ControlsModule.questGamepadLabels, function(p1, LayoutOrder) --[[ Line: 58 ]]
+				-- upvalues: config (upval), WithLocalizationModule (upval), Roact (upval), ThemedTextLabelModule (upval)
+				return WithLocalizationModule({ config[p1.labelKey] })(function(Entry) --[[ Line: 61 ]]
+					-- upvalues: Roact (upval), ThemedTextLabelModule (upval), p1 (copy), LayoutOrder (copy)
+					return Roact.createElement(ThemedTextLabelModule, {
 						fontKey = "Header2",
 						themeKey = "TextEmphasis",
 						TextScaled = true,
 						key = p1.labelKey,
 						TextXAlignment = p1.xAlignment or Enum.TextXAlignment.Right,
 						Size = UDim2.new(p1.width, 0, 0.026, 0),
-						Text = p3[1],
-						LayoutOrder = p2,
+						Text = Entry[1],
+						LayoutOrder = LayoutOrder,
 						Position = UDim2.new(p1.xPosition, 0, p1.yPosition, 0)
 					})
 				end)

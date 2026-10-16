@@ -1,11 +1,12 @@
 ﻿local _ = require(script:FindFirstAncestor("Foundation").Providers.Style.Tokens)
 
-return function(p1, p2)
-	local size100 = p2.Size.Size_100
-	local size600 = p2.Size.Size_600
+return function(Size, p1) --[[ Line: 6 | Named "migrateFontSize" ]]
+	local Size100 = p1.Size.Size_100
+	local Size600 = p1.Size.Size_600
+	local Size900 = p1.Size.Size_900
 	
-	if size600 <= p1 and p1 <= p2.Size.Size_900 then
-		p1 = size600
+	if Size600 <= Size and Size <= Size900 then
+		Size = Size600
 	end
-	return math.round(p1 / size100) * size100
+	return math.round(Size / Size100) * Size100
 end

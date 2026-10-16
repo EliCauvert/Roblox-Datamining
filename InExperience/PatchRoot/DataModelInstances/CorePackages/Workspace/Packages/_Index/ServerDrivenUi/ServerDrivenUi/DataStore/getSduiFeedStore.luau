@@ -1,16 +1,16 @@
-﻿local serverDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
-local _ = require(serverDrivenUi.Parent.RobloxAppEnums)
-local _ = require(serverDrivenUi.DataStore.SduiFeedStoreTypes)
-local createSduiFeedStoreModule = require(serverDrivenUi.DataStore.createSduiFeedStore)
+﻿local ServerDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
+local _ = require(ServerDrivenUi.Parent.RobloxAppEnums)
+local _ = require(ServerDrivenUi.DataStore.SduiFeedStoreTypes)
+local CreateSduiFeedStoreModule = require(ServerDrivenUi.DataStore.createSduiFeedStore)
 local t = {}
 
-return function(p1)
-	-- upvalues: t (ref), createSduiFeedStoreModule (ref)
-	local var1 = t[p1]
+return function(Key) --[[ Line: 19 ]]
+	-- upvalues: t (copy), CreateSduiFeedStoreModule (copy)
+	local Entry = t[Key]
 	
-	if var1 == nil then
-		t[p1] = createSduiFeedStoreModule()
-		var1 = t[p1]
+	if Entry == nil then
+		t[Key] = CreateSduiFeedStoreModule()
+		Entry = t[Key]
 	end
-	return var1
+	return Entry
 end

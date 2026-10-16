@@ -1,28 +1,29 @@
-﻿local style = script:FindFirstAncestor("Style")
-local parent = style.Parent
-local reactModule = require(parent.React)
-local cryoModule = require(parent.Cryo)
-local UIBloxModule = require(parent.UIBlox)
-local appStyleProvider = UIBloxModule.App.Style.AppStyleProvider
-local constants = UIBloxModule.App.Style.Constants
-local uiModeStyleProviderModule = require(style.UiModeStyleProvider)
-local foundationModule = require(parent.Foundation)
-local foundationProvider = foundationModule.FoundationProvider
-local colorMode = foundationModule.Enums.ColorMode
-local useTokens = foundationModule.Hooks.useTokens
-local t = { withUiModeSupport = true, withDarkTheme = true }
+﻿local Style = script:FindFirstAncestor("Style")
+local Parent = Style.Parent
+local ReactModule = require(Parent.React)
+local CryoModule = require(Parent.Cryo)
+local UIBloxModule = require(Parent.UIBlox)
+local AppStyleProvider = UIBloxModule.App.Style.AppStyleProvider
+local Constants = UIBloxModule.App.Style.Constants
+local UiModeStyleProviderModule = require(Style.UiModeStyleProvider)
+local FoundationModule = require(Parent.Foundation)
+local FoundationProvider = FoundationModule.FoundationProvider
+local ColorMode = FoundationModule.Enums.ColorMode
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local config = { withUiModeSupport = true, withDarkTheme = true }
 
-return function(p1)
-	-- upvalues: cryoModule (ref), t (ref), useTokens (ref), reactModule (ref), uiModeStyleProviderModule (ref), appStyleProvider (ref), colorMode (ref), constants (ref), foundationProvider (ref)
-	local var1 = cryoModule.Dictionary.join(t, p1)
-	local var2 = reactModule.createElement(if p1.withUiModeSupport then uiModeStyleProviderModule else appStyleProvider, {
+return function(p1) --[[ Line: 35 ]]
+	-- upvalues: CryoModule (copy), config (copy), UseTokensFunction (copy), ReactModule (copy), UiModeStyleProviderModule (copy), AppStyleProvider (copy), ColorMode (copy), Constants (copy), FoundationProvider (copy)
+	local JoinResult = CryoModule.Dictionary.join(config, p1)
+	local HasConfig = UseTokensFunction().Config ~= nil
+	local Element = ReactModule.createElement(if p1.withUiModeSupport then UiModeStyleProviderModule else AppStyleProvider, {
 		style = {
-			themeName = if var1.withDarkTheme then colorMode.Dark else colorMode.Light,
-			fontName = constants.FontName.Gotham
+			themeName = if JoinResult.withDarkTheme then ColorMode.Dark else ColorMode.Light,
+			fontName = Constants.FontName.Gotham
 		}
-	}, var1.children)
+	}, JoinResult.children)
 	
-	return if p1.withUiModeSupport or useTokens().Config ~= nil then var2 else reactModule.createElement(foundationProvider, {
-		colorMode = if var1.withDarkTheme then colorMode.Dark else colorMode.Light
-	}, var2)
+	return if p1.withUiModeSupport or HasConfig then Element else ReactModule.createElement(FoundationProvider, {
+		colorMode = if JoinResult.withDarkTheme then ColorMode.Dark else ColorMode.Light
+	}, Element)
 end

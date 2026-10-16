@@ -1,23 +1,23 @@
-﻿local checkAndSendEventModule = require(script.Parent.Parent.Utils.checkAndSendEvent)
+﻿local CheckAndSendEventModule = require(script.Parent.Parent.Utils.checkAndSendEvent)
 
-return function(p1, p2, p3, p4, p5, p6)
-	-- upvalues: checkAndSendEventModule (ref)
+return function(p1, Field, State, Origin, p2, AssociatedText) --[[ Line: 4 ]]
+	-- upvalues: CheckAndSendEventModule (copy)
 	local t = {}
 	
-	if p2 then
-		t.field = p2
+	if Field then
+		t.field = Field
 	end
-	if p3 then
-		t.state = p3
+	if State then
+		t.state = State
 	end
-	if p4 then
-		t.origin = p4
+	if Origin then
+		t.origin = Origin
 	end
-	if p5 ~= nil then
-		t.entered = tostring(p5)
+	if p2 ~= nil then
+		t.entered = tostring(p2)
 	end
-	if p6 then
-		t.associatedText = p6
+	if AssociatedText then
+		t.associatedText = AssociatedText
 	end
-	checkAndSendEventModule(p1, "authFormInteraction", t)
+	CheckAndSendEventModule(p1, "authFormInteraction", t)
 end

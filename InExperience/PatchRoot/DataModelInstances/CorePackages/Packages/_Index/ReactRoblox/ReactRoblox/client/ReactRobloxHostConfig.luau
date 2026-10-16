@@ -1,59 +1,58 @@
-﻿local function _(p1)
+﻿local function _(Text) --[[ Line: 13 | Named "unimplemented" ]]
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-	print("UNIMPLEMENTED ERROR: " .. tostring(p1))
-	error("FIXME (roblox): " .. p1 .. " is unimplemented", 2)
+	print("UNIMPLEMENTED ERROR: " .. tostring(Text))
+	error("FIXME (roblox): " .. Text .. " is unimplemented", 2)
 end
 
-local collectionService = game:GetService("CollectionService")
-local parent = script.Parent.Parent.Parent
-local reactGlobalsModule = require(parent.ReactGlobals)
-local luauPolyfillModule = require(parent.LuauPolyfill)
-local inspect = luauPolyfillModule.util.inspect
-local console = require(parent.Shared).console
-local object = luauPolyfillModule.Object
-local setTimeout = luauPolyfillModule.setTimeout
-local clearTimeout = luauPolyfillModule.clearTimeout
+local CollectionService = game:GetService("CollectionService")
+local Parent = script.Parent.Parent.Parent
+local ReactGlobalsModule = require(Parent.ReactGlobals)
+local LuauPolyfillModule = require(Parent.LuauPolyfill)
+local InspectFunction = LuauPolyfillModule.util.inspect
+local Console = require(Parent.Shared).console
+local SetTimeout = LuauPolyfillModule.setTimeout
+local ClearTimeout = LuauPolyfillModule.clearTimeout
 local _ = require(script.Parent["ReactRobloxHostTypes.roblox"])
-local reactRobloxComponentTreeModule = require(script.Parent.ReactRobloxComponentTree)
-local precacheFiberNode = reactRobloxComponentTreeModule.precacheFiberNode
-local uncacheFiberNode = reactRobloxComponentTreeModule.uncacheFiberNode
-local updateFiberProps = reactRobloxComponentTreeModule.updateFiberProps
-local reactRobloxComponentModule = require(script.Parent.ReactRobloxComponent)
-local setInitialProperties = reactRobloxComponentModule.setInitialProperties
-local diffProperties = reactRobloxComponentModule.diffProperties
-local updateProperties = reactRobloxComponentModule.updateProperties
-local cleanupHostComponent = reactRobloxComponentModule.cleanupHostComponent
-local enableCreateEventHandleAPI = require(parent.Shared).ReactFeatureFlags.enableCreateEventHandleAPI
+local ReactRobloxComponentTreeModule = require(script.Parent.ReactRobloxComponentTree)
+local PrecacheFiberNodeFunction = ReactRobloxComponentTreeModule.precacheFiberNode
+local UncacheFiberNodeFunction = ReactRobloxComponentTreeModule.uncacheFiberNode
+local UpdateFiberPropsFunction = ReactRobloxComponentTreeModule.updateFiberProps
+local ReactRobloxComponentModule = require(script.Parent.ReactRobloxComponent)
+local SetInitialPropertiesFunction = ReactRobloxComponentModule.setInitialProperties
+local DiffPropertiesFunction = ReactRobloxComponentModule.diffProperties
+local UpdatePropertiesFunction = ReactRobloxComponentModule.updateProperties
+local CleanupHostComponentFunction = ReactRobloxComponentModule.cleanupHostComponent
+local EnableCreateEventHandleAPI = require(Parent.Shared).ReactFeatureFlags.enableCreateEventHandleAPI
 
-local _ = function(p1)
-	-- upvalues: uncacheFiberNode (ref)
-	if typeof(p1) ~= "Instance" then return end
-	uncacheFiberNode(p1)
+local _ = function(Object) --[[ Line: 206 | Named "recursivelyUncacheFiberNode" ]]
+	-- upvalues: UncacheFiberNodeFunction (copy)
+	if typeof(Object) ~= "Instance" then return end
+	UncacheFiberNodeFunction(Object)
 	
-	for i, v in p1:GetDescendants() do
-		uncacheFiberNode(v)
+	for _, descendant in Object:GetDescendants() do
+		UncacheFiberNodeFunction(descendant)
 	end
 end
 
-local t = {}
-object.assign(t, require(parent.Shared).ReactFiberHostConfig.WithNoPersistence)
+local ReactRobloxHostConfig = {}
+LuauPolyfillModule.Object.assign(ReactRobloxHostConfig, require(Parent.Shared).ReactFiberHostConfig.WithNoPersistence)
 
-function t.getRootHostContext(p2)
-	return p2.ClassName
+function ReactRobloxHostConfig.getRootHostContext(p1) --[[ Line: 224 ]]
+	return p1.ClassName
 end
 
-function t.getChildHostContext(p2, _, _)
-	return p2
+function ReactRobloxHostConfig.getChildHostContext(p1, _, _) --[[ Line: 262 ]]
+	return p1
 end
 
-function t.getPublicInstance(p2)
-	return p2
+function ReactRobloxHostConfig.getPublicInstance(p1) --[[ Line: 283 ]]
+	return p1
 end
 
-function t.prepareForCommit(_)
-	-- upvalues: enableCreateEventHandleAPI (ref)
-	if enableCreateEventHandleAPI then
+function ReactRobloxHostConfig:prepareForCommit() --[[ Line: 287 ]]
+	-- upvalues: EnableCreateEventHandleAPI (copy)
+	if EnableCreateEventHandleAPI then
 		print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 		print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 		print("UNIMPLEMENTED ERROR: " .. tostring("enableCreateEventHandleAPI"))
@@ -62,9 +61,9 @@ function t.prepareForCommit(_)
 	return nil
 end
 
-function t.beforeActiveInstanceBlur()
-	-- upvalues: enableCreateEventHandleAPI (ref)
-	if enableCreateEventHandleAPI then
+function ReactRobloxHostConfig.beforeActiveInstanceBlur() --[[ Line: 302 ]]
+	-- upvalues: EnableCreateEventHandleAPI (copy)
+	if EnableCreateEventHandleAPI then
 		print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 		print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 		print("UNIMPLEMENTED ERROR: " .. tostring("enableCreateEventHandleAPI"))
@@ -72,9 +71,9 @@ function t.beforeActiveInstanceBlur()
 	end
 end
 
-function t.afterActiveInstanceBlur()
-	-- upvalues: enableCreateEventHandleAPI (ref)
-	if enableCreateEventHandleAPI then
+function ReactRobloxHostConfig.afterActiveInstanceBlur() --[[ Line: 311 ]]
+	-- upvalues: EnableCreateEventHandleAPI (copy)
+	if EnableCreateEventHandleAPI then
 		print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 		print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 		print("UNIMPLEMENTED ERROR: " .. tostring("enableCreateEventHandleAPI"))
@@ -82,52 +81,52 @@ function t.afterActiveInstanceBlur()
 	end
 end
 
-function t.resetAfterCommit(_) end
+function ReactRobloxHostConfig:resetAfterCommit() --[[ Line: 320 ]] end
 
-function t.createInstance(p2, p3, _, _, p4)
-	-- upvalues: precacheFiberNode (ref), updateFiberProps (ref)
-	local var1 = Instance.new(p2)
+function ReactRobloxHostConfig.createInstance(p1, p2, _, _, p3) --[[ Line: 328 ]]
+	-- upvalues: PrecacheFiberNodeFunction (copy), UpdateFiberPropsFunction (copy)
+	local NewInstance = Instance.new(p1)
 	
-	if p4.key then
-		var1.Name = p4.key
+	if p3.key then
+		NewInstance.Name = p3.key
 	else
-		local _return = p4.return_
-		while _return do
-			if not _return.key then
-				_return = _return.return_
+		local Return = p3.return_
+		while Return do
+			if not Return.key then
+				Return = Return.return_
 				continue
 			end
-			var1.Name = _return.key
+			NewInstance.Name = Return.key
 			break
 		end
 	end
-	precacheFiberNode(p4, var1)
-	updateFiberProps(var1, p3)
+	PrecacheFiberNodeFunction(p3, NewInstance)
+	UpdateFiberPropsFunction(NewInstance, p2)
 	
-	return var1
+	return NewInstance
 end
 
-function t.appendInitialChild(p5, p6)
-	p6.Parent = p5
+function ReactRobloxHostConfig.appendInitialChild(Parent, p4) --[[ Line: 395 ]]
+	p4.Parent = Parent
 end
 
-function t.finalizeInitialChildren(p5, p6, p7, p8, _)
-	-- upvalues: setInitialProperties (ref)
-	setInitialProperties(p5, p6, p7, p8)
+function ReactRobloxHostConfig.finalizeInitialChildren(p4, p5, p6, p7, _): boolean --[[ Line: 400 ]]
+	-- upvalues: SetInitialPropertiesFunction (copy)
+	SetInitialPropertiesFunction(p4, p5, p6, p7)
 	
 	return false
 end
 
-function t.prepareUpdate(p5, p6, p7, p8, p9, _)
-	-- upvalues: diffProperties (ref)
-	return diffProperties(p5, p6, p7, p8, p9)
+function ReactRobloxHostConfig.prepareUpdate(p4, p5, p6, p7, p8, _) --[[ Line: 412 ]]
+	-- upvalues: DiffPropertiesFunction (copy)
+	return DiffPropertiesFunction(p4, p5, p6, p7, p8)
 end
 
-function t.shouldSetTextContent(_, _)
+function ReactRobloxHostConfig:shouldSetTextContent(_): boolean --[[ Line: 439 ]]
 	return false
 end
 
-function t.createTextInstance(_, _, _, _)
+function ReactRobloxHostConfig:createTextInstance(_, _, _) --[[ Line: 455 ]]
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("UNIMPLEMENTED ERROR: " .. tostring("createTextInstance"))
@@ -136,133 +135,135 @@ function t.createTextInstance(_, _, _, _)
 	return nil
 end
 
-t.isPrimaryRenderer = true
-t.warnsIfNotActing = true
-t.scheduleTimeout = setTimeout
-t.cancelTimeout = clearTimeout
-t.noTimeout = -1
-t.supportsMutation = true
+ReactRobloxHostConfig.isPrimaryRenderer = true
+ReactRobloxHostConfig.warnsIfNotActing = true
+ReactRobloxHostConfig.scheduleTimeout = SetTimeout
+ReactRobloxHostConfig.cancelTimeout = ClearTimeout
+ReactRobloxHostConfig.noTimeout = -1
+ReactRobloxHostConfig.supportsMutation = true
+ReactRobloxHostConfig.supportsChildOrdering = false
 
-function t.commitMount(_, _, _, _)
+function ReactRobloxHostConfig:commitMount(_, _, _) --[[ Line: 484 ]]
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("UNIMPLEMENTED ERROR: " .. tostring("commitMount"))
 	error("FIXME (roblox): commitMount is unimplemented", 2)
 end
 
-function t.commitUpdate(p5, p6, _, p7, p8, _)
-	-- upvalues: updateFiberProps (ref), updateProperties (ref)
-	updateFiberProps(p5, p8)
-	updateProperties(p5, p6, p7)
+function ReactRobloxHostConfig.commitUpdate(p4, p5, _, p6, p7, _) --[[ Line: 506 ]]
+	-- upvalues: UpdateFiberPropsFunction (copy), UpdatePropertiesFunction (copy)
+	UpdateFiberPropsFunction(p4, p7)
+	UpdatePropertiesFunction(p4, p5, p6)
 end
 
-local function checkTags(p5)
-	-- upvalues: console (ref), inspect (ref), collectionService (ref)
-	if typeof(p5) ~= "Instance" then
-		console.warn("Could not check tags on non-instance %s.", inspect(p5))
+local function checkTags(Object) --[[ Line: 535 ]]
+	-- upvalues: Console (copy), InspectFunction (copy), CollectionService (copy)
+	if typeof(Object) ~= "Instance" then
+		Console.warn("Could not check tags on non-instance %s.", InspectFunction(Object))
 		
 		return
-	elseif not p5:IsDescendantOf(game) and #collectionService:GetTags(p5) > 0 then
-		console.warn("Tags applied to orphaned %s \"%s\" cannot be accessed via CollectionService:GetTagged. If you're relying on tag behavior in a unit test, consider mounting your test root into the DataModel.", p5.ClassName, p5.Name)
+	end
+	if not Object:IsDescendantOf(game) and #CollectionService:GetTags(Object) > 0 then
+		Console.warn("Tags applied to orphaned %s \"%s\" cannot be accessed via CollectionService:GetTagged. If you're relying on tag behavior in a unit test, consider mounting your test root into the DataModel.", Object.ClassName, Object.Name)
 	end
 end
 
-function t.appendChild(p5, p6)
-	-- upvalues: reactGlobalsModule (ref), checkTags (ref)
-	p6.Parent = p5
+function ReactRobloxHostConfig.appendChild(Parent, p4) --[[ Line: 554 ]]
+	-- upvalues: ReactGlobalsModule (copy), checkTags (copy)
+	p4.Parent = Parent
 	
-	if reactGlobalsModule.__DEV__ then
-		checkTags(p6)
+	if ReactGlobalsModule.__DEV__ then
+		checkTags(p4)
 	end
 end
 
-function t.appendChildToContainer(p5, p6)
-	-- upvalues: t (ref)
-	t.appendChild(p5, p6)
+function ReactRobloxHostConfig.appendChildToContainer(Parent, p4) --[[ Line: 563 ]]
+	-- upvalues: ReactRobloxHostConfig (copy)
+	ReactRobloxHostConfig.appendChild(Parent, p4)
 end
 
-function t.insertBefore(p5, p6, _)
-	-- upvalues: reactGlobalsModule (ref), checkTags (ref)
-	p6.Parent = p5
+function ReactRobloxHostConfig.insertBefore(Parent, p4, _) --[[ Line: 592 ]]
+	-- upvalues: ReactGlobalsModule (copy), checkTags (copy)
+	p4.Parent = Parent
 	
-	if reactGlobalsModule.__DEV__ then
-		checkTags(p6)
+	if ReactGlobalsModule.__DEV__ then
+		checkTags(p4)
 	end
 end
 
-function t.insertInContainerBefore(p5, p6, p7)
-	-- upvalues: t (ref)
-	t.insertBefore(p5, p6, p7)
+function ReactRobloxHostConfig.insertInContainerBefore(Parent, p4, p5) --[[ Line: 605 ]]
+	-- upvalues: ReactRobloxHostConfig (copy)
+	ReactRobloxHostConfig.insertBefore(Parent, p4, p5)
 end
 
-function t.removeChild(_, p5)
-	-- upvalues: uncacheFiberNode (ref), cleanupHostComponent (ref)
-	if typeof(p5) == "Instance" then
-		uncacheFiberNode(p5)
+function ReactRobloxHostConfig:removeChild(Object) --[[ Line: 647 ]]
+	-- upvalues: UncacheFiberNodeFunction (copy), CleanupHostComponentFunction (copy)
+	if typeof(Object) == "Instance" then
+		UncacheFiberNodeFunction(Object)
 		
-		for i, v in p5:GetDescendants() do
-			uncacheFiberNode(v)
+		for _, descendant in Object:GetDescendants() do
+			UncacheFiberNodeFunction(descendant)
 		end
 	end
-	cleanupHostComponent(p5)
-	p5.Parent = nil
-	p5:Destroy()
+	CleanupHostComponentFunction(Object)
+	Object.Parent = nil
+	Object:Destroy()
 end
 
-function t.removeChildFromContainer(p6, p7)
-	-- upvalues: t (ref)
-	t.removeChild(p6, p7)
+function ReactRobloxHostConfig.removeChildFromContainer(p4, p5) --[[ Line: 659 ]]
+	-- upvalues: ReactRobloxHostConfig (copy)
+	ReactRobloxHostConfig.removeChild(p4, p5)
 end
 
-function t.clearSuspenseBoundary(_, _)
+function ReactRobloxHostConfig:clearSuspenseBoundary(_) --[[ Line: 670 ]]
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("UNIMPLEMENTED ERROR: " .. tostring("clearSuspenseBoundary"))
 	error("FIXME (roblox): clearSuspenseBoundary is unimplemented", 2)
 end
 
-function t.clearSuspenseBoundaryFromContainer(_, _)
+function ReactRobloxHostConfig:clearSuspenseBoundaryFromContainer(_) --[[ Line: 710 ]]
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("UNIMPLEMENTED ERROR: " .. tostring("clearSuspenseBoundaryFromContainer"))
 	error("FIXME (roblox): clearSuspenseBoundaryFromContainer is unimplemented", 2)
 end
 
-function t.hideInstance(_)
+function ReactRobloxHostConfig:hideInstance() --[[ Line: 727 ]]
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("UNIMPLEMENTED ERROR: " .. tostring("hideInstance"))
 	error("FIXME (roblox): hideInstance is unimplemented", 2)
 end
 
-function t.hideTextInstance(_)
+function ReactRobloxHostConfig:hideTextInstance() --[[ Line: 741 ]]
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("UNIMPLEMENTED ERROR: " .. tostring("hideTextInstance"))
 	error("FIXME (roblox): hideTextInstance is unimplemented", 2)
 end
 
-function t.unhideInstance(_, _)
+function ReactRobloxHostConfig:unhideInstance(_) --[[ Line: 746 ]]
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("UNIMPLEMENTED ERROR: " .. tostring("unhideInstance"))
 	error("FIXME (roblox): unhideInstance is unimplemented", 2)
 end
 
-function t.unhideTextInstance(_, _)
+function ReactRobloxHostConfig:unhideTextInstance(_) --[[ Line: 760 ]]
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	print("UNIMPLEMENTED ERROR: " .. tostring("unhideTextInstance"))
 	error("FIXME (roblox): unhideTextInstance is unimplemented", 2)
 end
 
-function t.clearContainer(p6)
-	-- upvalues: t (ref)
-	for i, v in p6:GetChildren() do
-		t.removeChild(p6, v)
+function ReactRobloxHostConfig.clearContainer(Object) --[[ Line: 765 ]]
+	-- upvalues: ReactRobloxHostConfig (copy)
+	for _, child in Object:GetChildren() do
+		ReactRobloxHostConfig.removeChild(Object, child)
 	end
 end
 
-function t.preparePortalMount(_) end
+function ReactRobloxHostConfig:preparePortalMount() --[[ Line: 1208 ]] end
 
-return t
+return ReactRobloxHostConfig

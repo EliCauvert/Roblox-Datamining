@@ -1,10 +1,13 @@
-﻿local workspaceService = game:GetService("Workspace")
+﻿local Workspace = game:GetService("Workspace")
 
-return function(p1)
-	-- upvalues: workspaceService (ref)
+return function(p1): boolean --[[ Line: 7 ]]
+	-- upvalues: Workspace (copy)
 	if p1 ~= nil and p1.Created ~= nil then
-		local dateTime = DateTime.fromIsoDate(p1.Created)
+		local _DateTime = DateTime.fromIsoDate(p1.Created)
 		
-		return dateTime and workspaceService:GetServerTimeNow() * 1000 - dateTime.UnixTimestampMillis > 604800000
+		if _DateTime and Workspace:GetServerTimeNow() * 1000 - _DateTime.UnixTimestampMillis > 604800000 then
+			return true
+		end
 	end
+	return false
 end

@@ -1,10 +1,10 @@
-﻿local t = {
+﻿local ModalKey = {
 	PushUpsellHome = "homePushUpsell",
 	PushUpsellChat = "chatPushUpsell"
 }
 
 return {
-	ModalKey = t,
+	ModalKey = ModalKey,
 	LocalStorageKeys = {
 		PromptShownCount = "PushUpsellPromptShownCount",
 		ChatPromptShownCount = "PushUpsellChatPromptShownCount",
@@ -13,14 +13,14 @@ return {
 		EduPromptResponse = "PushUpsellEduPromptResponse"
 	},
 	TranslationKeys = {
-		[t.PushUpsellHome] = {
+		[ModalKey.PushUpsellHome] = {
 			CancelAction = "Feature.Notifications.Action.PushUpsellNotNow",
 			ConfirmAction = "Feature.Notifications.Action.PushUpsellAllow",
 			Heading = "Feature.Notifications.Heading.PushUpsellGeneric",
 			Body = "Feature.Notifications.Label.PushUpsellGeneric",
 			SomethingWentWrong = "Feature.Call.Error.Description.Generic"
 		},
-		[t.PushUpsellChat] = {
+		[ModalKey.PushUpsellChat] = {
 			CancelAction = "Feature.Notifications.Action.PushUpsellNotNow",
 			ConfirmAction = "Feature.Notifications.Action.PushUpsellAllow",
 			Heading = "Feature.Notifications.Heading.PushUpsellChat",

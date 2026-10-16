@@ -1,21 +1,21 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local reactModule = require(parent.React)
-local enumScreensModule = require(appChat.EnumScreens)
-local useNavigation = require(parent.Navigation).useNavigation
-local conversationOverlayContainerModule = require(script.Parent.ConversationOverlayContainer)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local ReactModule = require(Parent.React)
+local EnumScreensModule = require(AppChat.EnumScreens)
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local ConversationOverlayContainerModule = require(script.Parent.ConversationOverlayContainer)
 
-return function(_)
-	-- upvalues: useNavigation (ref), reactModule (ref), enumScreensModule (ref), conversationOverlayContainerModule (ref)
-	local var1 = useNavigation()
+return function(_) --[[ Line: 17 ]]
+	-- upvalues: UseNavigationFunction (copy), ReactModule (copy), EnumScreensModule (copy), ConversationOverlayContainerModule (copy)
+	local UseNavigationResult = UseNavigationFunction()
 	
-	return reactModule.createElement(conversationOverlayContainerModule, {
-		conversationId = var1 and var1.getParam("conversationId", nil),
-		dismissModal = reactModule.useCallback(function()
-			-- upvalues: var1 (ref), enumScreensModule (copy)
-			if var1 and var1.state.routeName == enumScreensModule.ConversationOverlay then
-				var1.goBack(var1.state.key)
+	return ReactModule.createElement(ConversationOverlayContainerModule, {
+		conversationId = UseNavigationResult and UseNavigationResult.getParam("conversationId", nil),
+		dismissModal = ReactModule.useCallback(function() --[[ Line: 20 ]]
+			-- upvalues: UseNavigationResult (copy), EnumScreensModule (upval)
+			if UseNavigationResult and UseNavigationResult.state.routeName == EnumScreensModule.ConversationOverlay then
+				UseNavigationResult.goBack(UseNavigationResult.state.key)
 			end
-		end, { var1 })
+		end, { UseNavigationResult })
 	})
 end

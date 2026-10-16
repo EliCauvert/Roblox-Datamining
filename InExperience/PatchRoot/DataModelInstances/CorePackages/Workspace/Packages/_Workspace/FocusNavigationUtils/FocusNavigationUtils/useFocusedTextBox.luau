@@ -1,34 +1,34 @@
-﻿local userInputService = game:GetService("UserInputService")
-local reactModule = require(script:FindFirstAncestor("FocusNavigationUtils").Parent.React)
+﻿local UserInputService = game:GetService("UserInputService")
+local ReactModule = require(script:FindFirstAncestor("FocusNavigationUtils").Parent.React)
 
-return function(p1, p2)
-	-- upvalues: reactModule (ref), userInputService (ref)
-	local var1, var2 = reactModule.useState(nil)
-	reactModule.useEffect(function()
-		-- upvalues: userInputService (copy), var2 (ref), p1 (ref), p2 (ref)
-		local textBoxFocusedConnection = userInputService.TextBoxFocused:Connect(function(p3)
-			-- upvalues: var2 (copy), p1 (copy)
-			var2(p3)
+return function(Callback, Callback1) --[[ Line: 9 ]]
+	-- upvalues: ReactModule (copy), UserInputService (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	ReactModule.useEffect(function() --[[ Line: 11 ]]
+		-- upvalues: UserInputService (upval), UseStateResult2 (copy), Callback (copy), Callback1 (copy)
+		local TextBoxFocusedConnection = UserInputService.TextBoxFocused:Connect(function(TextboxFocused) --[[ Line: 12 ]]
+			-- upvalues: UseStateResult2 (upval), Callback (upval)
+			UseStateResult2(TextboxFocused)
 			
-			if p1 then
-				p1(p3)
+			if Callback then
+				Callback(TextboxFocused)
 			end
 		end)
-		local textBoxFocusReleasedConnection = userInputService.TextBoxFocusReleased:Connect(function(p3)
-			-- upvalues: var2 (copy), p2 (copy)
-			var2(nil)
+		local TextBoxFocusReleasedConnection = UserInputService.TextBoxFocusReleased:Connect(function(TextboxReleased) --[[ Line: 20 ]]
+			-- upvalues: UseStateResult2 (upval), Callback1 (upval)
+			UseStateResult2(nil)
 			
-			if p2 then
-				p2(p3)
+			if Callback1 then
+				Callback1(TextboxReleased)
 			end
 		end)
 		
-		return function()
-			-- upvalues: textBoxFocusedConnection (ref), textBoxFocusReleasedConnection (ref)
-			textBoxFocusedConnection:Disconnect()
-			textBoxFocusReleasedConnection:Disconnect()
+		return function() --[[ Line: 28 ]]
+			-- upvalues: TextBoxFocusedConnection (copy), TextBoxFocusReleasedConnection (copy)
+			TextBoxFocusedConnection:Disconnect()
+			TextBoxFocusReleasedConnection:Disconnect()
 		end
-	end, { var2 })
+	end, { UseStateResult2 })
 	
-	return var1
+	return UseStateResult
 end

@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.CommercePurchaseApp.CommercePurchaseApp)
+﻿return (require(script.Parent._Workspace.CommercePurchaseApp.CommercePurchaseApp))

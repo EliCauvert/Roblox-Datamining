@@ -1,21 +1,20 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local roduxModule = require(corePackagesService.Packages.Rodux)
-local cryoModule = require(corePackagesService.Packages.Cryo)
-local actions = script.Parent.Parent.Actions
+﻿local CorePackages = game:GetService("CorePackages")
+local CryoModule = require(CorePackages.Packages.Cryo)
+local Actions = script.Parent.Parent.Actions
 
-return roduxModule.createReducer({}, {
-	[require(actions.AddPlayer).name] = function(p1, p2)
-		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p1, { [p2.userId] = {} })
+return (require(CorePackages.Packages.Rodux).createReducer({}, {
+	[require(Actions.AddPlayer).name] = function(p1, p2) --[[ Line: 13 ]]
+		-- upvalues: CryoModule (copy)
+		return CryoModule.Dictionary.join(p1, { [p2.userId] = {} })
 	end,
-	[require(actions.RemovePlayer).name] = function(p1, p2)
-		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p1, { [p2.userId] = cryoModule.None })
+	[require(Actions.RemovePlayer).name] = function(p1, p2) --[[ Line: 19 ]]
+		-- upvalues: CryoModule (copy)
+		return CryoModule.Dictionary.join(p1, { [p2.userId] = CryoModule.None })
 	end,
-	[require(actions.SetPlayerLeaderstat).name] = function(p1, p2)
-		-- upvalues: cryoModule (ref)
-		return if p1[p2.userId] == nil then p1 else cryoModule.Dictionary.join(p1, {
-			[p2.userId] = cryoModule.Dictionary.join(p1[p2.userId], { [p2.leaderstat] = p2.value })
+	[require(Actions.SetPlayerLeaderstat).name] = function(p1, p2) --[[ Line: 25 ]]
+		-- upvalues: CryoModule (copy)
+		return if p1[p2.userId] == nil then p1 else CryoModule.Dictionary.join(p1, {
+			[p2.userId] = CryoModule.Dictionary.join(p1[p2.userId], { [p2.leaderstat] = p2.value })
 		})
 	end
-})
+}))

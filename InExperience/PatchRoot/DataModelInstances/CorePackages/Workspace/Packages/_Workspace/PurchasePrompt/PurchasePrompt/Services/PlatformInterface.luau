@@ -1,138 +1,144 @@
-﻿local purchasePrompt = script:FindFirstAncestor("PurchasePrompt")
-local parent = purchasePrompt.Parent
-local contentProviderService = game:GetService("ContentProvider")
-local guiService = game:GetService("GuiService")
-local base64Module = require(purchasePrompt.Utils.Base64)
-local purchaseFlowModule = require(purchasePrompt.Enums.PurchaseFlow)
-local constantsModule = require(purchasePrompt.Misc.Constants)
-local marketplaceService = game:GetService("MarketplaceService")
-local browserService = game:GetService("BrowserService")
-local httpService = game:GetService("HttpService")
-local var1 = nil
-pcall(function()
-	-- upvalues: var1 (write)
-	var1 = game:GetService("PlatformService")
+﻿local PurchasePrompt = script:FindFirstAncestor("PurchasePrompt")
+local Parent = PurchasePrompt.Parent
+local ContentProvider = game:GetService("ContentProvider")
+local GuiService = game:GetService("GuiService")
+local Base64Module = require(PurchasePrompt.Utils.Base64)
+local PurchaseFlowModule = require(PurchasePrompt.Enums.PurchaseFlow)
+local ConstantsModule = require(PurchasePrompt.Misc.Constants)
+local MarketplaceService = game:GetService("MarketplaceService")
+local BrowserService = game:GetService("BrowserService")
+local HttpService = game:GetService("HttpService")
+local PlatformService = nil
+pcall(function() --[[ Line: 15 ]]
+	-- upvalues: PlatformService (ref)
+	PlatformService = game:GetService("PlatformService")
 end)
-local getFStringVNGWebshopUrl = require(parent.SharedFlags).GetFStringVNGWebshopUrl
-local urlBuilder = require(parent.PurchasePromptDeps).UrlBuilder.UrlBuilder
-local replaced = string.gsub(contentProviderService.BaseUrl:lower(), "/m.", "/www.")
-local t = {}
+local GetFStringVNGWebshopUrlFunction = require(Parent.SharedFlags).GetFStringVNGWebshopUrl
+local UrlBuilder = require(Parent.PurchasePromptDeps).UrlBuilder.UrlBuilder
+local Replaced = string.gsub(ContentProvider.BaseUrl:lower(), "/m.", "/www.")
 
-local function addContextToUrl(p1, p2)
-	for i, v in p2 do
-		if v then
-			p1 = if p1:find("?") then p1 .. ("&%s=%s"):format(i, v) else p1 .. ("?%s=%s"):format(i, v)
-		end
-	end
-	return p1
-end
-
-function t.new()
-	-- upvalues: marketplaceService (ref), replaced (ref), guiService (ref), addContextToUrl (ref), purchaseFlowModule (ref), base64Module (ref), urlBuilder (ref), httpService (ref), constantsModule (ref), browserService (ref), var1 (write), getFStringVNGWebshopUrl (ref)
-	local t = {}
-	setmetatable(t, {
-		__tostring = function()
-			return "Service(PlatformInterface)"
-		end
-	})
-	
-	function t.signalMockPurchasePremium()
-		-- upvalues: marketplaceService (copy)
-		marketplaceService:SignalMockPurchasePremium()
-	end
-	
-	function t.startPremiumUpsell(p3)
-		-- upvalues: replaced (copy), guiService (copy)
-		guiService:OpenBrowserWindow(("%supgrades/paymentmethods?ap=%d"):format(replaced, p3))
-	end
-	
-	function t.startPremiumUpsellWithContext(p3, p4)
-		-- upvalues: replaced (copy), addContextToUrl (copy), guiService (copy)
-		guiService:OpenBrowserWindow(addContextToUrl(("%supgrades/paymentmethods?ap=%d"):format(replaced, p4), p3))
-	end
-	
-	function t.startRobuxUpsellWebByFlow(p3, p4)
-		-- upvalues: purchaseFlowModule (copy), guiService (copy), replaced (copy)
-		if p3 == purchaseFlowModule.RobuxUpsellV2 or p3 == purchaseFlowModule.LargeRobuxUpsell then
-			guiService:OpenBrowserWindow(("%supgrades/paymentmethods?ap=%s"):format(replaced, p4))
-			
-			return
-		end
-		guiService:OpenBrowserWindow(("%sUpgrades/Robux.aspx?product_id=%s"):format(replaced, p4))
-	end
-	
-	function t.startRobuxUpsellWebByFlowWithContext(p3, p4, p5)
-		-- upvalues: purchaseFlowModule (copy), replaced (copy), addContextToUrl (copy), guiService (copy)
-		guiService:OpenBrowserWindow(addContextToUrl(if if p4 ~= purchaseFlowModule.RobuxUpsellV2 then p4 == purchaseFlowModule.LargeRobuxUpsell else true then ("%supgrades/paymentmethods?ap=%s"):format(replaced, p5) else ("%sUpgrades/Robux.aspx?product_id=%s"):format(replaced, p5), p3))
-	end
-	
-	function t.openSecuritySettings(value)
-		-- upvalues: base64Module (copy), replaced (copy), guiService (copy)
+local function addContextToUrl(PaymentmethodsName: string, List): string --[[ Line: 32 ]]
+	for i, value in List do
 		if value then
-			guiService:OpenBrowserWindow(("%smy/account?challenge=%s#!/security"):format(replaced, base64Module.Encode(value)))
-			
-			return
+			if PaymentmethodsName:find("?") then
+				PaymentmethodsName ..= ("&%s=%s"):format(i, value)
+			else
+				PaymentmethodsName ..= ("?%s=%s"):format(i, value)
+			end
 		end
-		guiService:OpenBrowserWindow(("%smy/account#!/security"):format(replaced))
 	end
-	
-	function t.openTermsOfUse()
-		-- upvalues: urlBuilder (copy), guiService (copy)
-		guiService:OpenBrowserWindow(urlBuilder.static.about.terms())
-	end
-	
-	function t.openTermsOfUseDMCCA()
-		-- upvalues: httpService (copy), constantsModule (copy), browserService (copy)
-		browserService:SendCommand(httpService:JSONEncode({
-			command = "open",
-			url = constantsModule.TermsOfUse.DMCCAUrl
-		}))
-	end
-	
-	function t.openRobuxStore()
-		-- upvalues: guiService (copy), replaced (copy)
-		guiService:OpenBrowserWindow(("%sUpgrades/Robux.aspx"):format(replaced))
-	end
-	
-	function t.openRobuxStoreWithContext(p3, p4)
-		-- upvalues: replaced (copy), addContextToUrl (copy), guiService (copy)
-		local var2 = ("%sUpgrades/Robux.aspx"):format(replaced)
-		
-		if p4 then
-			var2 ..= ("?product_id=%s"):format(p4)
-		end
-		guiService:OpenBrowserWindow(addContextToUrl(var2, p3))
-	end
-	
-	function t.openPaymentsPageWithContext(p3, p4)
-		-- upvalues: replaced (copy), addContextToUrl (copy), guiService (copy)
-		guiService:OpenBrowserWindow(addContextToUrl(("%supgrades/paymentmethods?ap=%s"):format(replaced, p4), p3))
-	end
-	
-	function t.promptNativePurchaseWithLocalPlayer(p3)
-		-- upvalues: marketplaceService (copy)
-		return marketplaceService:PromptNativePurchaseWithLocalPlayer(p3)
-	end
-	
-	function t.promptNativePurchase(p3, p4)
-		-- upvalues: marketplaceService (copy)
-		return marketplaceService:PromptNativePurchase(p3, p4)
-	end
-	
-	function t.beginPlatformStorePurchase(p3)
-		-- upvalues: var1 (copy)
-		return var1:BeginPlatformStorePurchase(p3)
-	end
-	
-	function t.openVngStore(p3)
-		-- upvalues: getFStringVNGWebshopUrl (copy), guiService (copy)
-		if not p3 or p3 == "" then
-			p3 = getFStringVNGWebshopUrl()
-		end
-		guiService:OpenBrowserWindow(p3)
-	end
-	
-	return t
+	return PaymentmethodsName
 end
 
-return t
+return {
+	new = function() --[[ Line: 45 ]]
+		-- upvalues: MarketplaceService (copy), Replaced (copy), GuiService (copy), addContextToUrl (copy), PurchaseFlowModule (copy), Base64Module (copy), UrlBuilder (copy), HttpService (copy), ConstantsModule (copy), BrowserService (copy), PlatformService (ref), GetFStringVNGWebshopUrlFunction (copy)
+		local t = {}
+		setmetatable(t, {
+			__tostring = function(): string --[[ Line: 49 ]]
+				return "Service(PlatformInterface)"
+			end
+		})
+		
+		function t.signalMockPurchasePremium() --[[ Line: 54 ]]
+			-- upvalues: MarketplaceService (upval)
+			MarketplaceService:SignalMockPurchasePremium()
+		end
+		
+		function t.startPremiumUpsell(p1) --[[ Line: 58 ]]
+			-- upvalues: Replaced (upval), GuiService (upval)
+			GuiService:OpenBrowserWindow((("%supgrades/paymentmethods?ap=%d"):format(Replaced, p1)))
+		end
+		
+		function t.startPremiumUpsellWithContext(p1, p2) --[[ Line: 64 ]]
+			-- upvalues: Replaced (upval), addContextToUrl (upval), GuiService (upval)
+			GuiService:OpenBrowserWindow((addContextToUrl(("%supgrades/paymentmethods?ap=%d"):format(Replaced, p2), p1)))
+		end
+		
+		function t.startRobuxUpsellWebByFlow(LargeRobuxUpsell, p1) --[[ Line: 70 ]]
+			-- upvalues: PurchaseFlowModule (upval), GuiService (upval), Replaced (upval)
+			if LargeRobuxUpsell == PurchaseFlowModule.RobuxUpsellV2 or LargeRobuxUpsell == PurchaseFlowModule.LargeRobuxUpsell then
+				GuiService:OpenBrowserWindow(("%supgrades/paymentmethods?ap=%s"):format(Replaced, p1))
+				
+				return
+			else
+				GuiService:OpenBrowserWindow(("%sUpgrades/Robux.aspx?product_id=%s"):format(Replaced, p1))
+			end
+		end
+		
+		function t.startRobuxUpsellWebByFlowWithContext(p1, LargeRobuxUpsell, p2) --[[ Line: 78 ]]
+			-- upvalues: PurchaseFlowModule (upval), Replaced (upval), addContextToUrl (upval), GuiService (upval)
+			local IsLargeRobuxUpsellMatch: boolean = LargeRobuxUpsell == PurchaseFlowModule.RobuxUpsellV2 or LargeRobuxUpsell == PurchaseFlowModule.LargeRobuxUpsell
+			GuiService:OpenBrowserWindow((addContextToUrl(if IsLargeRobuxUpsellMatch then ("%supgrades/paymentmethods?ap=%s"):format(Replaced, p2) else ("%sUpgrades/Robux.aspx?product_id=%s"):format(Replaced, p2), p1)))
+		end
+		
+		function t.openSecuritySettings(p1) --[[ Line: 89 ]]
+			-- upvalues: Base64Module (upval), Replaced (upval), GuiService (upval)
+			if p1 then
+				GuiService:OpenBrowserWindow((("%smy/account?challenge=%s#!/security"):format(Replaced, (Base64Module.Encode(p1)))))
+				
+				return
+			else
+				GuiService:OpenBrowserWindow((("%smy/account#!/security"):format(Replaced)))
+			end
+		end
+		
+		function t.openTermsOfUse() --[[ Line: 103 ]]
+			-- upvalues: UrlBuilder (upval), GuiService (upval)
+			GuiService:OpenBrowserWindow((UrlBuilder.static.about.terms()))
+		end
+		
+		function t.openTermsOfUseDMCCA() --[[ Line: 109 ]]
+			-- upvalues: HttpService (upval), ConstantsModule (upval), BrowserService (upval)
+			BrowserService:SendCommand((HttpService:JSONEncode({
+				command = "open",
+				url = ConstantsModule.TermsOfUse.DMCCAUrl
+			})))
+		end
+		
+		function t.openRobuxStore() --[[ Line: 117 ]]
+			-- upvalues: GuiService (upval), Replaced (upval)
+			GuiService:OpenBrowserWindow(("%sUpgrades/Robux.aspx"):format(Replaced))
+		end
+		
+		function t.openRobuxStoreWithContext(p1, p2) --[[ Line: 121 ]]
+			-- upvalues: Replaced (upval), addContextToUrl (upval), GuiService (upval)
+			local SUpgradesName: string = ("%sUpgrades/Robux.aspx"):format(Replaced)
+			
+			if p2 then
+				SUpgradesName ..= ("?product_id=%s"):format(p2)
+			end
+			GuiService:OpenBrowserWindow((addContextToUrl(SUpgradesName, p1)))
+		end
+		
+		function t.openPaymentsPageWithContext(p1, p2) --[[ Line: 130 ]]
+			-- upvalues: Replaced (upval), addContextToUrl (upval), GuiService (upval)
+			GuiService:OpenBrowserWindow((addContextToUrl(("%supgrades/paymentmethods?ap=%s"):format(Replaced, p2), p1)))
+		end
+		
+		function t.promptNativePurchaseWithLocalPlayer(ProductId) --[[ Line: 136 ]]
+			-- upvalues: MarketplaceService (upval)
+			return MarketplaceService:PromptNativePurchaseWithLocalPlayer(ProductId)
+		end
+		
+		function t.promptNativePurchase(Player, ProductId) --[[ Line: 140 ]]
+			-- upvalues: MarketplaceService (upval)
+			return MarketplaceService:PromptNativePurchase(Player, ProductId)
+		end
+		
+		function t.beginPlatformStorePurchase(p1) --[[ Line: 144 ]]
+			-- upvalues: PlatformService (upval)
+			return PlatformService:BeginPlatformStorePurchase(p1)
+		end
+		
+		function t.openVngStore(Url) --[[ Line: 148 ]]
+			-- upvalues: GetFStringVNGWebshopUrlFunction (upval), GuiService (upval)
+			if not Url or Url == "" then
+				Url = GetFStringVNGWebshopUrlFunction()
+			end
+			GuiService:OpenBrowserWindow(Url)
+		end
+		
+		return t
+	end
+}

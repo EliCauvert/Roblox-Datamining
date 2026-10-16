@@ -1,3 +1,3 @@
-﻿return function(p1)
-	return if utf8.len(p1) == nil then nil else utf8.len(utf8.nfcnormalize(p1))
+﻿return function(Text) --[[ Line: 4 | Named "getTextLengthIfValidUtf8" ]]
+	return if utf8.len(Text) == nil then nil else utf8.len(utf8.nfcnormalize(Text))
 end

@@ -1,265 +1,276 @@
-﻿local currencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
-local parent = currencyTransfers.Parent
-local reactModule = require(parent.React)
-local sharedFlagsModule = require(parent.SharedFlags)
-local transferLocalizationKeysModule = require(currencyTransfers.Localization.TransferLocalizationKeys)
-local foundationModule = require(parent.Foundation)
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local dialog = foundationModule.Dialog
-local dialogSize = foundationModule.Enums.DialogSize
-local orientation = foundationModule.Enums.Orientation
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useTransferStoreModule = require(currencyTransfers.Hooks.useTransferStore)
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local processTransferModule = require(currencyTransfers.Actions.Send.processTransfer)
-local acceptTransferModule = require(currencyTransfers.Actions.Receive.acceptTransfer)
-local initiateTransferModule = require(currencyTransfers.Actions.Send.initiateTransfer)
-local promptStateModule = require(currencyTransfers.Enums.PromptState)
-local transferDirectionModule = require(currencyTransfers.Enums.TransferDirection)
-local transferOriginationModule = require(currencyTransfers.Enums.TransferOrigination)
-local transferRetryOriginModule = require(currencyTransfers.Enums.TransferRetryOrigin)
-local ampUpsellModule = require(parent.AmpUpsell)
-local accessResponseEnum = ampUpsellModule.AmpEnums.AccessResponseEnum
-local actionTypeEnum = ampUpsellModule.AmpEnums.ActionTypeEnum
-local actionStatusEnum = ampUpsellModule.AmpEnums.ActionStatusEnum
-local inExpAmpWizardController = ampUpsellModule.InExpAmpWizardController
-local openAmpWizardContainer = ampUpsellModule.OpenAmpWizardContainer
-local fFlagEnableCurrencyTransferWizardVPCPrologueModule = require(currencyTransfers.Flags.FFlagEnableCurrencyTransferWizardVPCPrologue)
-local fFlagCurrencyTransferVPCUseAmpWizardContainerForInAppModule = require(currencyTransfers.Flags.FFlagCurrencyTransferVPCUseAmpWizardContainerForInApp)
-local ampWizardTransferConstantsModule = require(currencyTransfers.Constants.AmpWizardTransferConstants)
-local getCounterUserIdModule = require(currencyTransfers.Utils.getCounterUserId)
-local currencyTransferTelemetryModule = require(currencyTransfers.Events.CurrencyTransferTelemetry)
-local robuxTransferFlowEventNameModule = require(currencyTransfers.Enums.RobuxTransferFlowEventName)
-local logCurrencyTransferCounterModule = require(currencyTransfers.Utils.logCurrencyTransferCounter)
-local logRobuxTransferFlowEventModule = require(currencyTransfers.Utils.logRobuxTransferFlowEvent)
-local getTransferRequestInternalIdModule = require(currencyTransfers.Utils.getTransferRequestInternalId)
+﻿local CurrencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
+local Parent = CurrencyTransfers.Parent
+local ReactModule = require(Parent.React)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local TransferLocalizationKeysModule = require(CurrencyTransfers.Localization.TransferLocalizationKeys)
+local FoundationModule = require(Parent.Foundation)
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local Dialog = FoundationModule.Dialog
+local DialogSize = FoundationModule.Enums.DialogSize
+local Orientation = FoundationModule.Enums.Orientation
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseTransferStoreModule = require(CurrencyTransfers.Hooks.useTransferStore)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local ProcessTransferModule = require(CurrencyTransfers.Actions.Send.processTransfer)
+local AcceptTransferModule = require(CurrencyTransfers.Actions.Receive.acceptTransfer)
+local InitiateTransferModule = require(CurrencyTransfers.Actions.Send.initiateTransfer)
+local PromptStateModule = require(CurrencyTransfers.Enums.PromptState)
+local TransferDirectionModule = require(CurrencyTransfers.Enums.TransferDirection)
+local TransferOriginationModule = require(CurrencyTransfers.Enums.TransferOrigination)
+local TransferRetryOriginModule = require(CurrencyTransfers.Enums.TransferRetryOrigin)
+local AmpUpsellModule = require(Parent.AmpUpsell)
+local AccessResponseEnum = AmpUpsellModule.AmpEnums.AccessResponseEnum
+local ActionTypeEnum = AmpUpsellModule.AmpEnums.ActionTypeEnum
+local ActionStatusEnum = AmpUpsellModule.AmpEnums.ActionStatusEnum
+local InExpAmpWizardController = AmpUpsellModule.InExpAmpWizardController
+local OpenAmpWizardContainerFunction = AmpUpsellModule.OpenAmpWizardContainer
+local FFlagEnableCurrencyTransferWizardVPCPrologueModule = require(CurrencyTransfers.Flags.FFlagEnableCurrencyTransferWizardVPCPrologue)
+local FFlagCurrencyTransferVPCUseAmpWizardContainerForInAppModule = require(CurrencyTransfers.Flags.FFlagCurrencyTransferVPCUseAmpWizardContainerForInApp)
+local AmpWizardTransferConstantsModule = require(CurrencyTransfers.Constants.AmpWizardTransferConstants)
+local GetCounterUserIdModule = require(CurrencyTransfers.Utils.getCounterUserId)
+local CurrencyTransferTelemetryModule = require(CurrencyTransfers.Events.CurrencyTransferTelemetry)
+local RobuxTransferFlowEventNameModule = require(CurrencyTransfers.Enums.RobuxTransferFlowEventName)
+local LogCurrencyTransferCounterModule = require(CurrencyTransfers.Utils.logCurrencyTransferCounter)
+local LogRobuxTransferFlowEventModule = require(CurrencyTransfers.Utils.logRobuxTransferFlowEvent)
+local GetTransferRequestInternalIdModule = require(CurrencyTransfers.Utils.getTransferRequestInternalId)
 
-local function _(p1)
-	-- upvalues: actionTypeEnum (ref), actionStatusEnum (ref)
-	return type(p1) == "table" and (if p1[actionTypeEnum.ParentConsent] ~= actionStatusEnum.Success then p1[actionTypeEnum.ParentLink] == actionStatusEnum.Success else true)
+local function _(p1): boolean --[[ Line: 63 | Named "isVpcRequestSubmitted" ]]
+	-- upvalues: ActionTypeEnum (copy), ActionStatusEnum (copy)
+	return type(p1) == "table" and (p1[ActionTypeEnum.ParentConsent] == ActionStatusEnum.Success or p1[ActionTypeEnum.ParentLink] == ActionStatusEnum.Success)
 end
 
-local function WizardPrologueOpener(p1)
-	-- upvalues: reactModule (ref)
-	local openAmpWizard = p1.openAmpWizard
-	local var1 = reactModule.useRef(false)
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), openAmpWizard (ref)
-		if not var1.current then
-			var1.current = true
-			openAmpWizard()
+local function WizardPrologueOpener(p1) --[[ Line: 72 ]]
+	-- upvalues: ReactModule (copy)
+	local OpenAmpWizardFunction = p1.openAmpWizard
+	local UseRefResult = ReactModule.useRef(false)
+	ReactModule.useEffect(function() --[[ Line: 76 ]]
+		-- upvalues: UseRefResult (copy), OpenAmpWizardFunction (copy)
+		if not UseRefResult.current then
+			UseRefResult.current = true
+			OpenAmpWizardFunction()
 		end
 		return nil
-	end, { openAmpWizard })
+	end, { OpenAmpWizardFunction })
 	
 	return nil
 end
 
-return function(p1)
-	-- upvalues: useLocalization (ref), transferLocalizationKeysModule (ref), useTransferStoreModule (ref), fFlagCurrencyTransferVPCUseAmpWizardContainerForInAppModule (ref), useDispatch (ref), transferOriginationModule (ref), transferDirectionModule (ref), fFlagEnableCurrencyTransferWizardVPCPrologueModule (ref), ampUpsellModule (ref), reactModule (ref), logCurrencyTransferCounterModule (ref), currencyTransferTelemetryModule (ref), sharedFlagsModule (ref), logRobuxTransferFlowEventModule (ref), robuxTransferFlowEventNameModule (ref), promptStateModule (ref), getTransferRequestInternalIdModule (ref), getCounterUserIdModule (ref), openAmpWizardContainer (ref), actionTypeEnum (ref), actionStatusEnum (ref), accessResponseEnum (ref), transferRetryOriginModule (ref), acceptTransferModule (ref), initiateTransferModule (ref), processTransferModule (ref), ampWizardTransferConstantsModule (ref), inExpAmpWizardController (ref), WizardPrologueOpener (ref), dialog (ref), dialogSize (ref), orientation (ref), buttonVariant (ref)
-	local var1 = useLocalization(transferLocalizationKeysModule.Presets.VPCBlockContainer)
-	local var2 = useTransferStoreModule()
-	local var3 = if fFlagCurrencyTransferVPCUseAmpWizardContainerForInAppModule then useDispatch() else nil
-	local direction = p1.direction
-	local triggerOnClose = var2.triggerOnClose
-	local selectedAmount = var2.getSelectedAmount(false)
-	local transferRetryOrigin = var2.getTransferRetryOrigin(false)
-	local transferRequestId = var2.getTransferRequestId(false)
-	local var4 = fFlagCurrencyTransferVPCUseAmpWizardContainerForInAppModule and var2.getTransferOrigination(false) == transferOriginationModule.InExperience
-	local var5 = if direction == transferDirectionModule.Send then var1.AskParentBodySend else var1.AskParentBodyReceive
-	local var6 = fFlagEnableCurrencyTransferWizardVPCPrologueModule and (ampUpsellModule.GetFFlagEnableAmpVPCPrologue() and ampUpsellModule.GetFFlagEnableReusableVPCPrologue())
-	reactModule.useEffect(function()
-		-- upvalues: logCurrencyTransferCounterModule (copy), var2 (ref), currencyTransferTelemetryModule (copy), sharedFlagsModule (copy), logRobuxTransferFlowEventModule (copy), robuxTransferFlowEventNameModule (copy)
-		logCurrencyTransferCounterModule(var2, currencyTransferTelemetryModule.CurrencyTransferVPCBlockDialogShownCounter, { recourseSurface = "vpc" })
+return function(p1) --[[ Line: 87 | Named "VPCBlockContainer" ]]
+	-- upvalues: UseLocalizationFunction (copy), TransferLocalizationKeysModule (copy), UseTransferStoreModule (copy), FFlagCurrencyTransferVPCUseAmpWizardContainerForInAppModule (copy), UseDispatchFunction (copy), TransferOriginationModule (copy), TransferDirectionModule (copy), FFlagEnableCurrencyTransferWizardVPCPrologueModule (copy), AmpUpsellModule (copy), ReactModule (copy), LogCurrencyTransferCounterModule (copy), CurrencyTransferTelemetryModule (copy), SharedFlagsModule (copy), LogRobuxTransferFlowEventModule (copy), RobuxTransferFlowEventNameModule (copy), PromptStateModule (copy), GetTransferRequestInternalIdModule (copy), GetCounterUserIdModule (copy), OpenAmpWizardContainerFunction (copy), ActionTypeEnum (copy), ActionStatusEnum (copy), AccessResponseEnum (copy), TransferRetryOriginModule (copy), AcceptTransferModule (copy), InitiateTransferModule (copy), ProcessTransferModule (copy), AmpWizardTransferConstantsModule (copy), InExpAmpWizardController (copy), WizardPrologueOpener (copy), Dialog (copy), DialogSize (copy), Orientation (copy), ButtonVariant (copy)
+	local UseLocalizationResult = UseLocalizationFunction(TransferLocalizationKeysModule.Presets.VPCBlockContainer)
+	local UseTransferStoreModuleResult = UseTransferStoreModule()
+	local UseDispatchResult = if FFlagCurrencyTransferVPCUseAmpWizardContainerForInAppModule then UseDispatchFunction() else nil
+	local Direction = p1.direction
+	local TriggerOnCloseFunction = UseTransferStoreModuleResult.triggerOnClose
+	local SelectedAmount = UseTransferStoreModuleResult.getSelectedAmount(false)
+	local TransferRetryOrigin = UseTransferStoreModuleResult.getTransferRetryOrigin(false)
+	local TransferRequestId = UseTransferStoreModuleResult.getTransferRequestId(false)
+	local IsTransferOriginationMatch: boolean = FFlagCurrencyTransferVPCUseAmpWizardContainerForInAppModule and UseTransferStoreModuleResult.getTransferOrigination(false) == TransferOriginationModule.InExperience
+	local AskParentBodySend = if Direction == TransferDirectionModule.Send then UseLocalizationResult.AskParentBodySend else UseLocalizationResult.AskParentBodyReceive
+	local FFlagEnableReusableVPCPrologue = FFlagEnableCurrencyTransferWizardVPCPrologueModule and (AmpUpsellModule.GetFFlagEnableAmpVPCPrologue() and AmpUpsellModule.GetFFlagEnableReusableVPCPrologue())
+	ReactModule.useEffect(function() --[[ Line: 109 ]]
+		-- upvalues: LogCurrencyTransferCounterModule (upval), UseTransferStoreModuleResult (copy), CurrencyTransferTelemetryModule (upval), SharedFlagsModule (upval), LogRobuxTransferFlowEventModule (upval), RobuxTransferFlowEventNameModule (upval)
+		LogCurrencyTransferCounterModule(UseTransferStoreModuleResult, CurrencyTransferTelemetryModule.CurrencyTransferVPCBlockDialogShownCounter, { recourseSurface = "vpc" })
 		
-		if sharedFlagsModule.FFlagEnableRobuxTransferFlowEventIngest then
-			logRobuxTransferFlowEventModule(var2, robuxTransferFlowEventNameModule.vpc_block_shown)
+		if SharedFlagsModule.FFlagEnableRobuxTransferFlowEventIngest then
+			LogRobuxTransferFlowEventModule(UseTransferStoreModuleResult, RobuxTransferFlowEventNameModule.vpc_block_shown)
 		end
 		return nil
-	end, { var2 })
+	end, { UseTransferStoreModuleResult })
 	
-	local function logAskClicked()
-		-- upvalues: logCurrencyTransferCounterModule (copy), var2 (ref), currencyTransferTelemetryModule (copy), sharedFlagsModule (copy), logRobuxTransferFlowEventModule (copy), robuxTransferFlowEventNameModule (copy)
-		logCurrencyTransferCounterModule(var2, currencyTransferTelemetryModule.CurrencyTransferVPCBlockAskClickedCounter, { recourseSurface = "vpc" })
+	local function logAskClicked() --[[ Line: 119 ]]
+		-- upvalues: LogCurrencyTransferCounterModule (upval), UseTransferStoreModuleResult (copy), CurrencyTransferTelemetryModule (upval), SharedFlagsModule (upval), LogRobuxTransferFlowEventModule (upval), RobuxTransferFlowEventNameModule (upval)
+		LogCurrencyTransferCounterModule(UseTransferStoreModuleResult, CurrencyTransferTelemetryModule.CurrencyTransferVPCBlockAskClickedCounter, { recourseSurface = "vpc" })
 		
-		if sharedFlagsModule.FFlagEnableRobuxTransferFlowEventIngest then
-			logRobuxTransferFlowEventModule(var2, robuxTransferFlowEventNameModule.vpc_ask_clicked)
+		if SharedFlagsModule.FFlagEnableRobuxTransferFlowEventIngest then
+			LogRobuxTransferFlowEventModule(UseTransferStoreModuleResult, RobuxTransferFlowEventNameModule.vpc_ask_clicked)
 		end
 	end
 	
-	local function logCancelClicked()
-		-- upvalues: logCurrencyTransferCounterModule (copy), var2 (ref), currencyTransferTelemetryModule (copy), sharedFlagsModule (copy), logRobuxTransferFlowEventModule (copy), robuxTransferFlowEventNameModule (copy)
-		logCurrencyTransferCounterModule(var2, currencyTransferTelemetryModule.CurrencyTransferVPCBlockCancelClickedCounter, { recourseSurface = "vpc" })
+	local function logCancelClicked() --[[ Line: 128 ]]
+		-- upvalues: LogCurrencyTransferCounterModule (upval), UseTransferStoreModuleResult (copy), CurrencyTransferTelemetryModule (upval), SharedFlagsModule (upval), LogRobuxTransferFlowEventModule (upval), RobuxTransferFlowEventNameModule (upval)
+		LogCurrencyTransferCounterModule(UseTransferStoreModuleResult, CurrencyTransferTelemetryModule.CurrencyTransferVPCBlockCancelClickedCounter, { recourseSurface = "vpc" })
 		
-		if sharedFlagsModule.FFlagEnableRobuxTransferFlowEventIngest then
-			logRobuxTransferFlowEventModule(var2, robuxTransferFlowEventNameModule.vpc_cancel_clicked)
+		if SharedFlagsModule.FFlagEnableRobuxTransferFlowEventIngest then
+			LogRobuxTransferFlowEventModule(UseTransferStoreModuleResult, RobuxTransferFlowEventNameModule.vpc_cancel_clicked)
 		end
 	end
 	
-	local function openAmpWizard()
-		-- upvalues: var6 (ref), logCurrencyTransferCounterModule (copy), var2 (ref), currencyTransferTelemetryModule (copy), sharedFlagsModule (copy), logRobuxTransferFlowEventModule (copy), robuxTransferFlowEventNameModule (copy), p1 (ref), triggerOnClose (ref), promptStateModule (copy), getTransferRequestInternalIdModule (copy), transferRequestId (ref), selectedAmount (ref), getCounterUserIdModule (copy), direction (ref), fFlagCurrencyTransferVPCUseAmpWizardContainerForInAppModule (copy), var4 (ref), var3 (ref), openAmpWizardContainer (copy), actionTypeEnum (copy), actionStatusEnum (copy), transferDirectionModule (copy), accessResponseEnum (copy), transferRetryOrigin (ref), transferRetryOriginModule (copy), acceptTransferModule (copy), initiateTransferModule (copy), processTransferModule (copy), ampWizardTransferConstantsModule (copy), var1 (ref), var5 (ref), logAskClicked (ref), logCancelClicked (ref), inExpAmpWizardController (copy)
-		if not var6 then
-			logCurrencyTransferCounterModule(var2, currencyTransferTelemetryModule.CurrencyTransferVPCBlockAskClickedCounter, { recourseSurface = "vpc" })
+	local function onCancelClicked() --[[ Line: 137 ]]
+		-- upvalues: LogCurrencyTransferCounterModule (upval), UseTransferStoreModuleResult (copy), CurrencyTransferTelemetryModule (upval), SharedFlagsModule (upval), LogRobuxTransferFlowEventModule (upval), RobuxTransferFlowEventNameModule (upval), TriggerOnCloseFunction (copy)
+		LogCurrencyTransferCounterModule(UseTransferStoreModuleResult, CurrencyTransferTelemetryModule.CurrencyTransferVPCBlockCancelClickedCounter, { recourseSurface = "vpc" })
+		
+		if SharedFlagsModule.FFlagEnableRobuxTransferFlowEventIngest then
+			LogRobuxTransferFlowEventModule(UseTransferStoreModuleResult, RobuxTransferFlowEventNameModule.vpc_cancel_clicked)
+		end
+		TriggerOnCloseFunction()
+	end
+	
+	local function openAmpWizard() --[[ Line: 142 ]]
+		-- upvalues: FFlagEnableReusableVPCPrologue (copy), LogCurrencyTransferCounterModule (upval), UseTransferStoreModuleResult (copy), CurrencyTransferTelemetryModule (upval), SharedFlagsModule (upval), LogRobuxTransferFlowEventModule (upval), RobuxTransferFlowEventNameModule (upval), p1 (copy), TriggerOnCloseFunction (copy), PromptStateModule (upval), GetTransferRequestInternalIdModule (upval), TransferRequestId (copy), SelectedAmount (copy), GetCounterUserIdModule (upval), Direction (copy), FFlagCurrencyTransferVPCUseAmpWizardContainerForInAppModule (upval), IsTransferOriginationMatch (copy), UseDispatchResult (copy), OpenAmpWizardContainerFunction (upval), ActionTypeEnum (upval), ActionStatusEnum (upval), TransferDirectionModule (upval), AccessResponseEnum (upval), TransferRetryOrigin (copy), TransferRetryOriginModule (upval), AcceptTransferModule (upval), InitiateTransferModule (upval), ProcessTransferModule (upval), AmpWizardTransferConstantsModule (upval), UseLocalizationResult (copy), AskParentBodySend (copy), logAskClicked (copy), logCancelClicked (copy), InExpAmpWizardController (upval)
+		if not FFlagEnableReusableVPCPrologue then
+			LogCurrencyTransferCounterModule(UseTransferStoreModuleResult, CurrencyTransferTelemetryModule.CurrencyTransferVPCBlockAskClickedCounter, { recourseSurface = "vpc" })
 			
-			if sharedFlagsModule.FFlagEnableRobuxTransferFlowEventIngest then
-				logRobuxTransferFlowEventModule(var2, robuxTransferFlowEventNameModule.vpc_ask_clicked)
+			if SharedFlagsModule.FFlagEnableRobuxTransferFlowEventIngest then
+				LogRobuxTransferFlowEventModule(UseTransferStoreModuleResult, RobuxTransferFlowEventNameModule.vpc_ask_clicked)
 			end
 		end
 		if not p1.ampFeatureCheck then
-			triggerOnClose()
+			TriggerOnCloseFunction()
 			
 			return
 		end
-		var2.setPreviousPromptState(var2.getPromptState(false))
-		var2.setPromptState(promptStateModule.Hidden)
-		local t = {
+		UseTransferStoreModuleResult.setPreviousPromptState((UseTransferStoreModuleResult.getPromptState(false)))
+		UseTransferStoreModuleResult.setPromptState(PromptStateModule.Hidden)
+		local config = {
 			transferType = "Robux",
-			transferId = getTransferRequestInternalIdModule(transferRequestId),
-			robuxTransferAmount = tostring(selectedAmount or 0)
+			transferId = GetTransferRequestInternalIdModule(TransferRequestId),
+			robuxTransferAmount = tostring(SelectedAmount or 0)
 		}
-		local var7 = getCounterUserIdModule(var2, direction)
-		local var8 = if var7 then {
+		local CounterUserIdModule = GetCounterUserIdModule(UseTransferStoreModuleResult, Direction)
+		local List = if CounterUserIdModule then {
 			{
 				name = "targetUser",
 				type = "UserId",
-				value = tostring(var7)
+				value = tostring(CounterUserIdModule)
 			}
 		} else nil
 		
-		if fFlagCurrencyTransferVPCUseAmpWizardContainerForInAppModule and not var4 then
-			var3(openAmpWizardContainer(p1.ampFeatureCheck, function(p2, p3)
-				-- upvalues: actionTypeEnum (copy), actionStatusEnum (copy), sharedFlagsModule (copy), logRobuxTransferFlowEventModule (copy), var2 (copy), robuxTransferFlowEventNameModule (copy), direction (copy), transferDirectionModule (copy), accessResponseEnum (copy), transferRetryOrigin (copy), transferRetryOriginModule (copy), acceptTransferModule (copy), initiateTransferModule (copy), processTransferModule (copy), selectedAmount (copy), triggerOnClose (copy)
-				local var9 = type(p3) == "table" and (if p3[actionTypeEnum.ParentConsent] ~= actionStatusEnum.Success then p3[actionTypeEnum.ParentLink] == actionStatusEnum.Success else true)
+		if FFlagCurrencyTransferVPCUseAmpWizardContainerForInAppModule and not IsTransferOriginationMatch then
+			UseDispatchResult(OpenAmpWizardContainerFunction(p1.ampFeatureCheck, function(Granted, p2) --[[ Line: 173 ]]
+				-- upvalues: ActionTypeEnum (upval), ActionStatusEnum (upval), SharedFlagsModule (upval), LogRobuxTransferFlowEventModule (upval), UseTransferStoreModuleResult (upval), RobuxTransferFlowEventNameModule (upval), Direction (upval), TransferDirectionModule (upval), AccessResponseEnum (upval), TransferRetryOrigin (upval), TransferRetryOriginModule (upval), AcceptTransferModule (upval), InitiateTransferModule (upval), ProcessTransferModule (upval), SelectedAmount (upval), TriggerOnCloseFunction (upval)
+				local IsSuccessMatch: boolean = type(p2) == "table" and (p2[ActionTypeEnum.ParentConsent] == ActionStatusEnum.Success or p2[ActionTypeEnum.ParentLink] == ActionStatusEnum.Success)
 				
-				if sharedFlagsModule.FFlagEnableRobuxTransferFlowEventIngest and var9 then
-					logRobuxTransferFlowEventModule(var2, robuxTransferFlowEventNameModule.vpc_submitted)
+				if SharedFlagsModule.FFlagEnableRobuxTransferFlowEventIngest and IsSuccessMatch then
+					LogRobuxTransferFlowEventModule(UseTransferStoreModuleResult, RobuxTransferFlowEventNameModule.vpc_submitted)
 				end
-				if sharedFlagsModule.FFlagSduiOpenIncomingTransferUpsellAction and var9 and direction == transferDirectionModule.Receive then
-					var2.triggerOnPromptOptimisticHide()
+				if SharedFlagsModule.FFlagSduiOpenIncomingTransferUpsellAction and IsSuccessMatch and Direction == TransferDirectionModule.Receive then
+					UseTransferStoreModuleResult.triggerOnPromptOptimisticHide()
 				end
-				if p2 ~= accessResponseEnum.Granted then
-					triggerOnClose()
+				if Granted ~= AccessResponseEnum.Granted then
+					TriggerOnCloseFunction()
 					
 					return
 				end
-				local previousPromptState = var2.getPreviousPromptState(false)
+				local PreviousPromptState = UseTransferStoreModuleResult.getPreviousPromptState(false)
 				
-				if previousPromptState then
-					var2.setPromptState(previousPromptState)
+				if PreviousPromptState then
+					UseTransferStoreModuleResult.setPromptState(PreviousPromptState)
 				end
-				if transferRetryOrigin == transferRetryOriginModule.AcceptTransfer then
-					acceptTransferModule(var2)
-					
-					return
-				elseif transferRetryOrigin == transferRetryOriginModule.InitiateTransfer then
-					initiateTransferModule(var2)
-					
-					return
-				elseif transferRetryOrigin == transferRetryOriginModule.ProcessTransfer then
-					processTransferModule(var2, selectedAmount or 0)
-					
-					return
-				elseif direction == transferDirectionModule.Receive then
-					acceptTransferModule(var2)
+				if TransferRetryOrigin == TransferRetryOriginModule.AcceptTransfer then
+					AcceptTransferModule(UseTransferStoreModuleResult)
 					
 					return
 				end
-				processTransferModule(var2, selectedAmount or 0)
-			end, t, ampWizardTransferConstantsModule.ENTRY_POINT_EVENT_CTX, var8, ampWizardTransferConstantsModule.NAMESPACE_NAME, nil, nil, nil, if var6 then true else nil, if var6 then {
+				if TransferRetryOrigin == TransferRetryOriginModule.InitiateTransfer then
+					InitiateTransferModule(UseTransferStoreModuleResult)
+					
+					return
+				end
+				if TransferRetryOrigin == TransferRetryOriginModule.ProcessTransfer then
+					ProcessTransferModule(UseTransferStoreModuleResult, SelectedAmount or 0)
+					
+					return
+				end
+				if Direction == TransferDirectionModule.Receive then
+					AcceptTransferModule(UseTransferStoreModuleResult)
+					
+					return
+				else
+					ProcessTransferModule(UseTransferStoreModuleResult, SelectedAmount or 0)
+				end
+			end, config, AmpWizardTransferConstantsModule.ENTRY_POINT_EVENT_CTX, List, AmpWizardTransferConstantsModule.NAMESPACE_NAME, nil, nil, nil, if FFlagEnableReusableVPCPrologue then true else nil, if FFlagEnableReusableVPCPrologue then {
 				config = {
 					hideCancel = true,
 					actionOrientation = "Vertical",
 					hasBackdrop = true,
 					closeOnClickOutside = true,
 					onCloseCancels = true,
-					titleText = var1.AskParentTitle,
-					bodyText = var5,
-					confirmText = var1.Ask
+					titleText = UseLocalizationResult.AskParentTitle,
+					bodyText = AskParentBodySend,
+					confirmText = UseLocalizationResult.Ask
 				},
 				onConfirm = logAskClicked,
 				onCancel = logCancelClicked
 			} else nil))
 			
 			return
+		else
+			InExpAmpWizardController.OpenAmpWizardContainerInExp(p1.ampFeatureCheck, function(Granted, p2) --[[ Line: 238 ]]
+				-- upvalues: ActionTypeEnum (upval), ActionStatusEnum (upval), SharedFlagsModule (upval), LogRobuxTransferFlowEventModule (upval), UseTransferStoreModuleResult (upval), RobuxTransferFlowEventNameModule (upval), Direction (upval), TransferDirectionModule (upval), AccessResponseEnum (upval), TransferRetryOrigin (upval), TransferRetryOriginModule (upval), AcceptTransferModule (upval), InitiateTransferModule (upval), ProcessTransferModule (upval), SelectedAmount (upval), TriggerOnCloseFunction (upval)
+				local IsSuccessMatch: boolean = type(p2) == "table" and (p2[ActionTypeEnum.ParentConsent] == ActionStatusEnum.Success or p2[ActionTypeEnum.ParentLink] == ActionStatusEnum.Success)
+				
+				if SharedFlagsModule.FFlagEnableRobuxTransferFlowEventIngest and IsSuccessMatch then
+					LogRobuxTransferFlowEventModule(UseTransferStoreModuleResult, RobuxTransferFlowEventNameModule.vpc_submitted)
+				end
+				if SharedFlagsModule.FFlagSduiOpenIncomingTransferUpsellAction and IsSuccessMatch and Direction == TransferDirectionModule.Receive then
+					UseTransferStoreModuleResult.triggerOnPromptOptimisticHide()
+				end
+				if Granted ~= AccessResponseEnum.Granted then
+					TriggerOnCloseFunction()
+					
+					return
+				end
+				local PreviousPromptState = UseTransferStoreModuleResult.getPreviousPromptState(false)
+				
+				if PreviousPromptState then
+					UseTransferStoreModuleResult.setPromptState(PreviousPromptState)
+				end
+				if TransferRetryOrigin == TransferRetryOriginModule.AcceptTransfer then
+					AcceptTransferModule(UseTransferStoreModuleResult)
+					
+					return
+				end
+				if TransferRetryOrigin == TransferRetryOriginModule.InitiateTransfer then
+					InitiateTransferModule(UseTransferStoreModuleResult)
+					
+					return
+				end
+				if TransferRetryOrigin == TransferRetryOriginModule.ProcessTransfer then
+					ProcessTransferModule(UseTransferStoreModuleResult, SelectedAmount or 0)
+					
+					return
+				end
+				if Direction == TransferDirectionModule.Receive then
+					AcceptTransferModule(UseTransferStoreModuleResult)
+					
+					return
+				else
+					ProcessTransferModule(UseTransferStoreModuleResult, SelectedAmount or 0)
+				end
+			end, config, AmpWizardTransferConstantsModule.ENTRY_POINT_EVENT_CTX, List, AmpWizardTransferConstantsModule.NAMESPACE_NAME, nil, nil, nil, if FFlagEnableReusableVPCPrologue then true else nil, if FFlagEnableReusableVPCPrologue then {
+				config = {
+					hideCancel = true,
+					actionOrientation = "Vertical",
+					hasBackdrop = true,
+					closeOnClickOutside = true,
+					onCloseCancels = true,
+					titleText = UseLocalizationResult.AskParentTitle,
+					bodyText = AskParentBodySend,
+					confirmText = UseLocalizationResult.Ask
+				},
+				onConfirm = logAskClicked,
+				onCancel = logCancelClicked
+			} else nil)
 		end
-		inExpAmpWizardController.OpenAmpWizardContainerInExp(p1.ampFeatureCheck, function(p2, p3)
-			-- upvalues: actionTypeEnum (copy), actionStatusEnum (copy), sharedFlagsModule (copy), logRobuxTransferFlowEventModule (copy), var2 (copy), robuxTransferFlowEventNameModule (copy), direction (copy), transferDirectionModule (copy), accessResponseEnum (copy), transferRetryOrigin (copy), transferRetryOriginModule (copy), acceptTransferModule (copy), initiateTransferModule (copy), processTransferModule (copy), selectedAmount (copy), triggerOnClose (copy)
-			local var9 = type(p3) == "table" and (if p3[actionTypeEnum.ParentConsent] ~= actionStatusEnum.Success then p3[actionTypeEnum.ParentLink] == actionStatusEnum.Success else true)
-			
-			if sharedFlagsModule.FFlagEnableRobuxTransferFlowEventIngest and var9 then
-				logRobuxTransferFlowEventModule(var2, robuxTransferFlowEventNameModule.vpc_submitted)
-			end
-			if sharedFlagsModule.FFlagSduiOpenIncomingTransferUpsellAction and var9 and direction == transferDirectionModule.Receive then
-				var2.triggerOnPromptOptimisticHide()
-			end
-			if p2 ~= accessResponseEnum.Granted then
-				triggerOnClose()
-				
-				return
-			end
-			local previousPromptState = var2.getPreviousPromptState(false)
-			
-			if previousPromptState then
-				var2.setPromptState(previousPromptState)
-			end
-			if transferRetryOrigin == transferRetryOriginModule.AcceptTransfer then
-				acceptTransferModule(var2)
-				
-				return
-			elseif transferRetryOrigin == transferRetryOriginModule.InitiateTransfer then
-				initiateTransferModule(var2)
-				
-				return
-			elseif transferRetryOrigin == transferRetryOriginModule.ProcessTransfer then
-				processTransferModule(var2, selectedAmount or 0)
-				
-				return
-			elseif direction == transferDirectionModule.Receive then
-				acceptTransferModule(var2)
-				
-				return
-			end
-			processTransferModule(var2, selectedAmount or 0)
-		end, t, ampWizardTransferConstantsModule.ENTRY_POINT_EVENT_CTX, var8, ampWizardTransferConstantsModule.NAMESPACE_NAME, nil, nil, nil, if var6 then true else nil, if var6 then {
-			config = {
-				hideCancel = true,
-				actionOrientation = "Vertical",
-				hasBackdrop = true,
-				closeOnClickOutside = true,
-				onCloseCancels = true,
-				titleText = var1.AskParentTitle,
-				bodyText = var5,
-				confirmText = var1.Ask
-			},
-			onConfirm = logAskClicked,
-			onCancel = logCancelClicked
-		} else nil)
 	end
 	
-	return if var6 then reactModule.createElement(WizardPrologueOpener, { openAmpWizard = openAmpWizard }) else reactModule.createElement(dialog.Root, {
+	return if FFlagEnableReusableVPCPrologue then ReactModule.createElement(WizardPrologueOpener, { openAmpWizard = openAmpWizard }) else ReactModule.createElement(Dialog.Root, {
 		hasBackdrop = true,
 		closeOnClickOutside = true,
-		size = dialogSize.Small,
-		onClose = function()
-			-- upvalues: logCurrencyTransferCounterModule (copy), var2 (ref), currencyTransferTelemetryModule (copy), sharedFlagsModule (copy), logRobuxTransferFlowEventModule (copy), robuxTransferFlowEventNameModule (copy), triggerOnClose (ref)
-			logCurrencyTransferCounterModule(var2, currencyTransferTelemetryModule.CurrencyTransferVPCBlockCancelClickedCounter, { recourseSurface = "vpc" })
-			
-			if sharedFlagsModule.FFlagEnableRobuxTransferFlowEventIngest then
-				logRobuxTransferFlowEventModule(var2, robuxTransferFlowEventNameModule.vpc_cancel_clicked)
-			end
-			triggerOnClose()
-		end
+		size = DialogSize.Small,
+		onClose = onCancelClicked
 	}, {
-		DialogTitle = reactModule.createElement(dialog.Title, { text = var1.AskParentTitle }),
-		DialogContent = reactModule.createElement(dialog.Content, nil, {
-			DialogText = reactModule.createElement(dialog.Text, { Text = var5 })
+		DialogTitle = ReactModule.createElement(Dialog.Title, { text = UseLocalizationResult.AskParentTitle }),
+		DialogContent = ReactModule.createElement(Dialog.Content, nil, {
+			DialogText = ReactModule.createElement(Dialog.Text, { Text = AskParentBodySend })
 		}),
-		DialogActions = reactModule.createElement(dialog.Actions, {
-			orientation = orientation.Vertical,
+		DialogActions = ReactModule.createElement(Dialog.Actions, {
+			orientation = Orientation.Vertical,
 			actions = {
 				{
-					text = var1.Ask,
-					variant = buttonVariant.Emphasis,
+					text = UseLocalizationResult.Ask,
+					variant = ButtonVariant.Emphasis,
 					onActivated = openAmpWizard
 				}
 			}

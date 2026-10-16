@@ -1,14 +1,17 @@
-﻿local chatMuteModule = require(script:FindFirstAncestor("TextChannelWindow").Parent.ChatMute)
+﻿local ChatMuteModule = require(script:FindFirstAncestor("TextChannelWindow").Parent.ChatMute)
 
 return {
 	aliases = { "/mute", "/m" },
-	run = function(p1, p2)
-		-- upvalues: chatMuteModule (ref)
-		local var1 = chatMuteModule.resolveMuteTarget(string.split(p1, " ")[2], p2)
+	run = function(Text: string, p1) --[[ Line: 13 ]]
+		-- upvalues: ChatMuteModule (copy)
+		local ResolveMuteTargetResult = ChatMuteModule.resolveMuteTarget(string.split(Text, " ")[2], p1)
 		
-		if var1.playerInfo then
-			chatMuteModule.mutePlayer(var1.playerInfo)
+		if ResolveMuteTargetResult.playerInfo then
+			ChatMuteModule.mutePlayer(ResolveMuteTargetResult.playerInfo)
 		end
-		return { key = var1.key, args = var1.args }
+		return {
+			key = ResolveMuteTargetResult.key,
+			args = ResolveMuteTargetResult.args
+		}
 	end
 }

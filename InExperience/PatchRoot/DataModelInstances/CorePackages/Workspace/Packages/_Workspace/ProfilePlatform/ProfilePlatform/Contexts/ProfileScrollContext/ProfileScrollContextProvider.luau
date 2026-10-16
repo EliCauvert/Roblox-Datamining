@@ -1,38 +1,46 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local useTopBarHeight = require(parent.RobloxAppHooks).useTopBarHeight
-local enumsModule = require(profilePlatform.Common.Enums)
-local useProfileFormFactorModule = require(profilePlatform.Hooks.useProfileFormFactor)
-local fFlagFixCommunityProfileWideCoverLayoutModule = require(profilePlatform.Flags.FFlagFixCommunityProfileWideCoverLayout)
-local profileScrollContextModule = require(script.Parent.ProfileScrollContext)
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local UseTopBarHeightFunction = require(Parent.RobloxAppHooks).useTopBarHeight
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local UseProfileFormFactorModule = require(ProfilePlatform.Hooks.useProfileFormFactor)
+local FFlagFixCommunityProfileWideCoverLayoutModule = require(ProfilePlatform.Flags.FFlagFixCommunityProfileWideCoverLayout)
+local ProfileScrollContextModule = require(script.Parent.ProfileScrollContext)
 
-return function(p1)
-	-- upvalues: useProfileFormFactorModule (ref), reactModule (ref), enumsModule (ref), useTopBarHeight (ref), fFlagFixCommunityProfileWideCoverLayoutModule (ref), profileScrollContextModule (ref)
-	local var1 = useProfileFormFactorModule()
-	local var2, var3 = reactModule.useState(if var1.formFactor == enumsModule.ProfileFormFactor.PeekView then 0 else 1)
-	local var4, var5 = reactModule.useState(0)
-	local var6 = useTopBarHeight()
-	local var7 = reactModule.useMemo(function()
-		-- upvalues: fFlagFixCommunityProfileWideCoverLayoutModule (copy), var1 (ref), enumsModule (copy), var6 (ref), var4 (ref)
-		local _ = nil
-		local var8 = if not fFlagFixCommunityProfileWideCoverLayoutModule then if var1.isFullView or var1.formFactor == enumsModule.ProfileFormFactor.Wide then 0 else var6 elseif var1.isFullView then 0 else var6
+return function(p1) --[[ Line: 15 ]]
+	-- upvalues: UseProfileFormFactorModule (copy), ReactModule (copy), EnumsModule (copy), UseTopBarHeightFunction (copy), FFlagFixCommunityProfileWideCoverLayoutModule (copy), ProfileScrollContextModule (copy)
+	local UseProfileFormFactorModuleResult = UseProfileFormFactorModule()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(if UseProfileFormFactorModuleResult.formFactor == EnumsModule.ProfileFormFactor.PeekView then 0 else 1)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(0)
+	local UseTopBarHeightResult = UseTopBarHeightFunction()
+	local UseMemoResult = ReactModule.useMemo(function(): number --[[ Line: 23 ]]
+		-- upvalues: FFlagFixCommunityProfileWideCoverLayoutModule (upval), UseProfileFormFactorModuleResult (copy), EnumsModule (upval), UseTopBarHeightResult (copy), UseStateResult1 (copy)
+		local UseTopBarHeightResult1 = if FFlagFixCommunityProfileWideCoverLayoutModule then if UseProfileFormFactorModuleResult.isFullView or UseProfileFormFactorModuleResult.formFactor == EnumsModule.ProfileFormFactor.Wide then 0 else UseTopBarHeightResult elseif UseProfileFormFactorModuleResult.isFullView then 0 else UseTopBarHeightResult
 		
-		if var1.formFactor == enumsModule.ProfileFormFactor.PeekView and not var1.isFullView then
-			var8 += 25
+		if UseProfileFormFactorModuleResult.formFactor == EnumsModule.ProfileFormFactor.PeekView and not UseProfileFormFactorModuleResult.isFullView then
+			UseTopBarHeightResult1 += 25
 		end
-		return math.max(var8 - var4, 0)
-	end, { var6, var4, var1 })
+		return (math.max(UseTopBarHeightResult1 - UseStateResult1, 0))
+	end, {
+		UseTopBarHeightResult,
+		UseStateResult1,
+		UseProfileFormFactorModuleResult
+	})
 	
-	return reactModule.createElement(profileScrollContextModule.Provider, {
-		value = reactModule.useMemo(function()
-			-- upvalues: var7 (ref), var5 (ref), var2 (ref), var3 (ref)
+	return ReactModule.createElement(ProfileScrollContextModule.Provider, {
+		value = ReactModule.useMemo(function() --[[ Line: 44 ]]
+			-- upvalues: UseMemoResult (copy), UseStateResult2_1 (copy), UseStateResult (copy), UseStateResult2 (copy)
 			return {
-				scrollY = var7,
-				setAbsoluteYPosition = var5,
-				peekViewOpenPercent = var2,
-				setPeekViewOpenPercent = var3
+				scrollY = UseMemoResult,
+				setAbsoluteYPosition = UseStateResult2_1,
+				peekViewOpenPercent = UseStateResult,
+				setPeekViewOpenPercent = UseStateResult2
 			}
-		end, { var7, var5, var2, var3 })
+		end, {
+			UseMemoResult,
+			UseStateResult2_1,
+			UseStateResult,
+			UseStateResult2
+		})
 	}, p1.children)
 end

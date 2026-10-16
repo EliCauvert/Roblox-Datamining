@@ -1,33 +1,33 @@
-﻿local roduxModule = require(script.Parent.Parent.Parent.Rodux)
-local captureManagerModule = require(script.Parent.CaptureManager)
-local capturesModule = require(script.Parent.Captures)
-local carouselModule = require(script.Parent.Carousel)
-local isActiveModule = require(script.Parent.IsActive)
-local isCapturesCoreGuiEnabledModule = require(script.Parent.IsCapturesCoreGuiEnabled)
-local isMenuOpenModule = require(script.Parent.IsMenuOpen)
-local isOverlayActiveModule = require(script.Parent.IsOverlayActive)
-local isOverlayFlashActiveModule = require(script.Parent.IsOverlayFlashActive)
-local isVideoCaptureActiveModule = require(script.Parent.IsVideoCaptureActive)
-local momentsEligibilityModule = require(script.Parent.MomentsEligibility)
-local momentsCreationFlowModule = require(script.Parent.MomentsCreationFlow)
-local promptsModule = require(script.Parent.Prompts)
-local toastModule = require(script.Parent.Toast)
+﻿local RoduxModule = require(script.Parent.Parent.Parent.Rodux)
+local CaptureManagerModule = require(script.Parent.CaptureManager)
+local CapturesModule = require(script.Parent.Captures)
+local CarouselModule = require(script.Parent.Carousel)
+local IsActiveModule = require(script.Parent.IsActive)
+local IsCapturesCoreGuiEnabledModule = require(script.Parent.IsCapturesCoreGuiEnabled)
+local IsMenuOpenModule = require(script.Parent.IsMenuOpen)
+local IsOverlayActiveModule = require(script.Parent.IsOverlayActive)
+local IsOverlayFlashActiveModule = require(script.Parent.IsOverlayFlashActive)
+local IsVideoCaptureActiveModule = require(script.Parent.IsVideoCaptureActive)
+local MomentsEligibilityModule = require(script.Parent.MomentsEligibility)
+local MomentsCreationFlowModule = require(script.Parent.MomentsCreationFlow)
+local PromptsModule = require(script.Parent.Prompts)
+local ToastModule = require(script.Parent.Toast)
 
-return function()
-	-- upvalues: roduxModule (ref), captureManagerModule (ref), capturesModule (ref), carouselModule (ref), isActiveModule (ref), isCapturesCoreGuiEnabledModule (ref), isMenuOpenModule (ref), isOverlayActiveModule (ref), isOverlayFlashActiveModule (ref), isVideoCaptureActiveModule (ref), momentsEligibilityModule (ref), momentsCreationFlowModule (ref), promptsModule (ref), toastModule (ref)
-	return roduxModule.combineReducers({
-		CaptureManager = captureManagerModule,
-		Captures = capturesModule,
-		Carousel = carouselModule,
-		IsActive = isActiveModule,
-		IsCapturesCoreGuiEnabled = isCapturesCoreGuiEnabledModule,
-		IsMenuOpen = isMenuOpenModule,
-		IsOverlayActive = isOverlayActiveModule,
-		IsOverlayFlashActive = isOverlayFlashActiveModule,
-		IsVideoCaptureActive = isVideoCaptureActiveModule,
-		MomentsEligibility = momentsEligibilityModule,
-		MomentsCreationFlow = momentsCreationFlowModule,
-		Prompts = promptsModule,
-		Toast = toastModule
+return function() --[[ Line: 36 ]]
+	-- upvalues: RoduxModule (copy), CaptureManagerModule (copy), CapturesModule (copy), CarouselModule (copy), IsActiveModule (copy), IsCapturesCoreGuiEnabledModule (copy), IsMenuOpenModule (copy), IsOverlayActiveModule (copy), IsOverlayFlashActiveModule (copy), IsVideoCaptureActiveModule (copy), MomentsEligibilityModule (copy), MomentsCreationFlowModule (copy), PromptsModule (copy), ToastModule (copy)
+	return RoduxModule.combineReducers({
+		CaptureManager = CaptureManagerModule,
+		Captures = CapturesModule,
+		Carousel = CarouselModule,
+		IsActive = IsActiveModule,
+		IsCapturesCoreGuiEnabled = IsCapturesCoreGuiEnabledModule,
+		IsMenuOpen = IsMenuOpenModule,
+		IsOverlayActive = IsOverlayActiveModule,
+		IsOverlayFlashActive = IsOverlayFlashActiveModule,
+		IsVideoCaptureActive = IsVideoCaptureActiveModule,
+		MomentsEligibility = MomentsEligibilityModule,
+		MomentsCreationFlow = MomentsCreationFlowModule,
+		Prompts = PromptsModule,
+		Toast = ToastModule
 	})
 end

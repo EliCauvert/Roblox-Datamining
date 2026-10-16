@@ -1,22 +1,22 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local dashModule = require(parent.Dash)
-local reactModule = require(parent.React)
-local progressBarModule = require(script.Parent.ProgressBar)
-local progressCircleModule = require(script.Parent.ProgressCircle)
-local progressShapeModule = require(foundation.Enums.ProgressShape)
-local _ = require(foundation.Enums.ProgressSize)
-local flagsModule = require(foundation.Utility.Flags)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local _ = require(foundation.Providers.Style.Tokens)
-local t = { testId = "--foundation-progress" }
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local DashModule = require(Parent.Dash)
+local ReactModule = require(Parent.React)
+local ProgressBarModule = require(script.Parent.ProgressBar)
+local ProgressCircleModule = require(script.Parent.ProgressCircle)
+local ProgressShapeModule = require(Foundation.Enums.ProgressShape)
+local _ = require(Foundation.Enums.ProgressSize)
+local FlagsModule = require(Foundation.Utility.Flags)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local _ = require(Foundation.Providers.Style.Tokens)
+local config = { testId = "--foundation-progress" }
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), flagsModule (ref), progressShapeModule (ref), reactModule (ref), progressCircleModule (ref), dashModule (ref), progressBarModule (ref)
-	local var1 = withDefaultsModule(p1, t)
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 31 | Named "Progress" ]]
+	-- upvalues: WithDefaultsModule (copy), config (copy), FlagsModule (copy), ProgressShapeModule (copy), ReactModule (copy), ProgressCircleModule (copy), DashModule (copy), ProgressBarModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
 	
-	if not flagsModule.FoundationProgressBarBetaUpdate then
-		var1.ref = p2
+	if not FlagsModule.FoundationProgressBarBetaUpdate then
+		WithDefaultsModuleResult.ref = Ref
 	end
-	return if var1.shape == progressShapeModule.Circle then reactModule.createElement(progressCircleModule, if flagsModule.FoundationProgressBarBetaUpdate then dashModule.join(var1, { ref = p2 }) else var1) else reactModule.createElement(progressBarModule, if flagsModule.FoundationProgressBarBetaUpdate then dashModule.join(var1, { ref = p2 }) else var1)
+	return if WithDefaultsModuleResult.shape == ProgressShapeModule.Circle then ReactModule.createElement(ProgressCircleModule, if FlagsModule.FoundationProgressBarBetaUpdate then DashModule.join(WithDefaultsModuleResult, { ref = Ref }) else WithDefaultsModuleResult) else ReactModule.createElement(ProgressBarModule, if FlagsModule.FoundationProgressBarBetaUpdate then DashModule.join(WithDefaultsModuleResult, { ref = Ref }) else WithDefaultsModuleResult)
 end))

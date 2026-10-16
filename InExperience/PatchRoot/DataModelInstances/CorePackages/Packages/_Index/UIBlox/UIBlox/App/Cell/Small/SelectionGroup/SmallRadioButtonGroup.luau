@@ -1,77 +1,77 @@
-﻿local parent = script.Parent.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local parent_2 = parent_1.Parent
-local roactModule = require(parent_2.Roact)
-local cryoModule = require(parent_2.Cryo)
-local roactGamepadModule = require(parent_2.RoactGamepad)
-local tModule = require(parent_2.t)
-local cursorTypeModule = require(parent.SelectionCursor.CursorType)
-local useCursorByTypeModule = require(parent.SelectionCursor.useCursorByType)
-local smallRadioButtonCellModule = require(parent_1.App.Cell.Small.SelectionGroup.SmallRadioButtonCell)
-local smallRadioButtonGroup = roactModule.PureComponent:extend("SmallRadioButtonGroup")
-smallRadioButtonGroup.validateProps = tModule.strictInterface({
-	items = tModule.optional(tModule.array(tModule.tuple(tModule.strictInterface({
-		text = tModule.string,
-		id = tModule.string,
-		isDisabled = tModule.optional(tModule.boolean)
-	})))),
-	selectedValue = tModule.optional(tModule.string),
-	cursor = tModule.optional(tModule.table),
-	onActivated = tModule.callback,
-	layoutOrder = tModule.optional(tModule.number),
-	useDefaultControlState = tModule.optional(tModule.boolean),
-	NextSelectionLeft = tModule.optional(tModule.table),
-	NextSelectionRight = tModule.optional(tModule.table),
-	NextSelectionUp = tModule.optional(tModule.table),
-	NextSelectionDown = tModule.optional(tModule.table),
-	frameRef = tModule.optional(tModule.table),
-	isRoactGamepadEnabled = tModule.optional(tModule.boolean)
+﻿local Parent = script.Parent.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local Parent2 = Parent1.Parent
+local RoactModule = require(Parent2.Roact)
+local CryoModule = require(Parent2.Cryo)
+local RoactGamepadModule = require(Parent2.RoactGamepad)
+local TModule = require(Parent2.t)
+local CursorTypeModule = require(Parent.SelectionCursor.CursorType)
+local UseCursorByTypeModule = require(Parent.SelectionCursor.useCursorByType)
+local SmallRadioButtonCellModule = require(Parent1.App.Cell.Small.SelectionGroup.SmallRadioButtonCell)
+local SmallRadioButtonGroup = RoactModule.PureComponent:extend("SmallRadioButtonGroup")
+SmallRadioButtonGroup.validateProps = TModule.strictInterface({
+	items = TModule.optional(TModule.array(TModule.tuple((TModule.strictInterface({
+		text = TModule.string,
+		id = TModule.string,
+		isDisabled = TModule.optional(TModule.boolean)
+	}))))),
+	selectedValue = TModule.optional(TModule.string),
+	cursor = TModule.optional(TModule.table),
+	onActivated = TModule.callback,
+	layoutOrder = TModule.optional(TModule.number),
+	useDefaultControlState = TModule.optional(TModule.boolean),
+	NextSelectionLeft = TModule.optional(TModule.table),
+	NextSelectionRight = TModule.optional(TModule.table),
+	NextSelectionUp = TModule.optional(TModule.table),
+	NextSelectionDown = TModule.optional(TModule.table),
+	frameRef = TModule.optional(TModule.table),
+	isRoactGamepadEnabled = TModule.optional(TModule.boolean)
 })
-smallRadioButtonGroup.defaultProps = { selectedValue = nil, isRoactGamepadEnabled = true }
+SmallRadioButtonGroup.defaultProps = { selectedValue = nil, isRoactGamepadEnabled = true }
 
-function smallRadioButtonGroup.init(p1)
-	-- upvalues: roactGamepadModule (ref)
-	p1.gamepadRefs = p1.props.isRoactGamepadEnabled and roactGamepadModule.createRefCache() or {}
+function SmallRadioButtonGroup.init(p1) --[[ Line: 65 ]]
+	-- upvalues: RoactGamepadModule (copy)
+	p1.gamepadRefs = p1.props.isRoactGamepadEnabled and RoactGamepadModule.createRefCache() or {}
 end
 
-function smallRadioButtonGroup.renderButtonCell(p1, p2, p3, p4)
-	-- upvalues: roactModule (ref), roactGamepadModule (ref), smallRadioButtonCellModule (ref)
-	return roactModule.createElement(if p4 then roactGamepadModule.Focusable[smallRadioButtonCellModule] else smallRadioButtonCellModule, {
+function SmallRadioButtonGroup.renderButtonCell(p1, p2, LayoutOrder: number, IsRoactGamepadEnabled) --[[ Line: 69 ]]
+	-- upvalues: RoactModule (copy), RoactGamepadModule (copy), SmallRadioButtonCellModule (copy)
+	return RoactModule.createElement(if IsRoactGamepadEnabled then RoactGamepadModule.Focusable[SmallRadioButtonCellModule] else SmallRadioButtonCellModule, {
 		id = p2.id,
 		text = p2.text,
 		onActivated = p1.props.onActivated,
 		isSelected = p1.props.selectedValue == p2.id,
 		isDisabled = p2.isDisabled,
-		layoutOrder = p3,
+		layoutOrder = LayoutOrder,
 		useDefaultControlState = p1.props.useDefaultControlState,
-		[roactModule.Ref] = p1.gamepadRefs[p3],
-		NextSelectionUp = if p3 > 1 then p1.gamepadRefs[p3 - 1] else nil,
-		NextSelectionDown = if p3 < #p1.props.items then p1.gamepadRefs[p3 + 1] else nil,
+		[RoactModule.Ref] = p1.gamepadRefs[LayoutOrder],
+		NextSelectionUp = LayoutOrder > 1 and p1.gamepadRefs[LayoutOrder - 1] or nil,
+		NextSelectionDown = LayoutOrder < #p1.props.items and p1.gamepadRefs[LayoutOrder + 1] or nil,
 		SelectionImageObject = p1.props.cursor
 	})
 end
 
-function smallRadioButtonGroup.render(p1)
-	-- upvalues: roactModule (ref), roactGamepadModule (ref)
+function SmallRadioButtonGroup.render(p1) --[[ Line: 89 ]]
+	-- upvalues: RoactModule (copy), RoactGamepadModule (copy)
 	assert(p1.validateProps(p1.props))
-	local t = {
-		layout = roactModule.createElement("UIListLayout", {
+	local config = {
+		layout = RoactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			Padding = UDim.new(0, 1)
 		})
 	}
-	local isRoactGamepadEnabled = p1.props.isRoactGamepadEnabled
+	local IsRoactGamepadEnabled = p1.props.isRoactGamepadEnabled
 	
-	for i, v in ipairs(p1.props.items) do
-		if not isRoactGamepadEnabled then
-			p1.gamepadRefs[i] = p1.gamepadRefs[i] or roactModule.createRef()
+	for i, item in ipairs(p1.props.items) do
+		if not IsRoactGamepadEnabled then
+			p1.gamepadRefs[i] = p1.gamepadRefs[i] or RoactModule.createRef()
 		end
-		t["smallRadioButtonCell" .. v.id] = p1:renderButtonCell(v, i, isRoactGamepadEnabled)
+		config["smallRadioButtonCell" .. item.id] = p1:renderButtonCell(item, i, IsRoactGamepadEnabled)
 	end
-	local var1 = isRoactGamepadEnabled and (p1.props.items and #p1.props.items > 0)
+	local v1: boolean = IsRoactGamepadEnabled and (p1.props.items and #p1.props.items > 0)
 	
-	return roactModule.createElement(if var1 then roactGamepadModule.Focusable.Frame else "Frame", {
-		defaultChild = if var1 then p1.gamepadRefs[1] else nil,
+	return RoactModule.createElement(if v1 then RoactGamepadModule.Focusable.Frame else "Frame", {
+		defaultChild = if v1 then p1.gamepadRefs[1] else nil,
 		Size = UDim2.new(1, 0, 1, 0),
 		BackgroundTransparency = 1,
 		LayoutOrder = p1.props.layoutOrder,
@@ -79,14 +79,14 @@ function smallRadioButtonGroup.render(p1)
 		NextSelectionRight = p1.props.NextSelectionRight,
 		NextSelectionDown = p1.props.NextSelectionDown,
 		NextSelectionUp = p1.props.NextSelectionUp,
-		[roactModule.Ref] = p1.props.frameRef
-	}, t)
+		[RoactModule.Ref] = p1.props.frameRef
+	}, config)
 end
 
-return roactModule.forwardRef(function(p2, p3)
-	-- upvalues: useCursorByTypeModule (ref), cursorTypeModule (ref), roactModule (ref), smallRadioButtonGroup (ref), cryoModule (ref)
-	return roactModule.createElement(smallRadioButtonGroup, cryoModule.Dictionary.join(p2, {
-		frameRef = p3,
-		cursor = useCursorByTypeModule(cursorTypeModule.SelectionCell)
+return RoactModule.forwardRef(function(p2, FrameRef) --[[ Line: 121 ]]
+	-- upvalues: UseCursorByTypeModule (copy), CursorTypeModule (copy), RoactModule (copy), SmallRadioButtonGroup (copy), CryoModule (copy)
+	return RoactModule.createElement(SmallRadioButtonGroup, CryoModule.Dictionary.join(p2, {
+		frameRef = FrameRef,
+		cursor = UseCursorByTypeModule(CursorTypeModule.SelectionCell)
 	}))
 end)

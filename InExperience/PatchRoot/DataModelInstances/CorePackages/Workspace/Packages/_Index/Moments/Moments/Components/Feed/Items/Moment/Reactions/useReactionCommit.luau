@@ -1,53 +1,62 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
-local _ = require(parent.MomentsCommon)
-local reactModule = require(parent.React)
-local momentContextModule = require(script.Parent.Parent.MomentContext)
-local reactionEffectsContextModule = require(script.Parent.ReactionEffectsContext)
-local reactionTruthTableModule = require(script.Parent.reactionTruthTable)
-local signalActionTypeModule = require(moments.Enums.SignalActionType)
-local useFeedOptional = require(moments.Components.Feed.FeedContext).useFeedOptional
-local useReactionEffects = reactionEffectsContextModule.useReactionEffects
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local FFlagMomentsReactFeatureGate = require(Parent.SharedFlags).FFlagMomentsReactFeatureGate
+local MomentContextModule = require(script.Parent.Parent.MomentContext)
+local ReactionTruthTableModule = require(script.Parent.reactionTruthTable)
+local SignalActionTypeModule = require(Moments.Enums.SignalActionType)
+local UseFeedOptionalFunction = require(Moments.Components.Feed.FeedContext).useFeedOptional
+local GetMomentsCapabilitiesFunction = require(Parent.MomentsCommon).Stores.GetMomentsCapabilities
+local UseReactionEffectsFunction = require(script.Parent.ReactionEffectsContext).useReactionEffects
 
-return function()
-	-- upvalues: momentContextModule (ref), useReactionEffects (ref), useFeedOptional (ref), reactModule (ref), reactionTruthTableModule (ref), signalActionTypeModule (ref)
-	local store = momentContextModule.useMoment().store
-	local var1 = useReactionEffects()
-	local var2 = useFeedOptional()
+return function() --[[ Line: 34 | Named "useReactionCommit" ]]
+	-- upvalues: MomentContextModule (copy), UseReactionEffectsFunction (copy), UseFeedOptionalFunction (copy), FFlagMomentsReactFeatureGate (copy), SignalsReactModule (copy), GetMomentsCapabilitiesFunction (copy), ReactModule (copy), ReactionTruthTableModule (copy), SignalActionTypeModule (copy)
+	local Store = MomentContextModule.useMoment().store
+	local UseReactionEffectsResult = UseReactionEffectsFunction()
+	local UseFeedOptionalResult = UseFeedOptionalFunction()
+	local NoFFlagMomentsReactFeatureGate = not FFlagMomentsReactFeatureGate or SignalsReactModule.useSignalState(GetMomentsCapabilitiesFunction(false).getCanReactToMoments)
 	
-	return reactModule.useCallback(function(p1, p2, p3)
-		-- upvalues: store (ref), reactionTruthTableModule (copy), var2 (ref), signalActionTypeModule (copy), var1 (ref)
-		local var3 = reactionTruthTableModule.decide(store.getSelectedReaction(false), p1, p3)
+	return ReactModule.useCallback(function(p1, p2, p3) --[[ Line: 47 ]]
+		-- upvalues: FFlagMomentsReactFeatureGate (upval), NoFFlagMomentsReactFeatureGate (copy), Store (copy), ReactionTruthTableModule (upval), UseFeedOptionalResult (copy), SignalActionTypeModule (upval), UseReactionEffectsResult (copy)
+		if FFlagMomentsReactFeatureGate and not NoFFlagMomentsReactFeatureGate then return end
+		local DecideResult = ReactionTruthTableModule.decide(Store.getSelectedReaction(false), p1, p3)
 		
-		if var3.action == "commit" and var3.reaction ~= nil then
-			store.commitReaction(var3.reaction)
-		elseif var3.action == "clear" then
-			store.clearReaction()
+		if DecideResult.action == "commit" and DecideResult.reaction ~= nil then
+			Store.commitReaction(DecideResult.reaction)
+		elseif DecideResult.action == "clear" then
+			Store.clearReaction()
 		end
-		if var2 ~= nil and var3.action ~= "none" then
-			local data = store.getData(false)
-			local feedItemId = data.feedItemId
+		if UseFeedOptionalResult ~= nil and DecideResult.action ~= "none" then
+			local Data = Store.getData(false)
+			local FeedItemId = Data.feedItemId
 			
-			if feedItemId ~= nil and feedItemId ~= "" then
-				local t = { itemId = feedItemId, tracingId = data.feedSessionId }
-				local ok, status = pcall(function()
-					-- upvalues: var3 (ref), var2 (copy), signalActionTypeModule (copy), t (ref)
-					if var3.action == "commit" and var3.reaction ~= nil then
-						var2.logAction(signalActionTypeModule.AddReaction, t, { reactionType = var3.reaction })
+			if FeedItemId ~= nil and FeedItemId ~= "" then
+				local config = { itemId = FeedItemId, tracingId = Data.feedSessionId }
+				local Success, Result = pcall(function() --[[ Line: 75 ]]
+					-- upvalues: DecideResult (copy), UseFeedOptionalResult (upval), SignalActionTypeModule (upval), config (copy)
+					if DecideResult.action == "commit" and DecideResult.reaction ~= nil then
+						UseFeedOptionalResult.logAction(SignalActionTypeModule.AddReaction, config, { reactionType = DecideResult.reaction })
 						
 						return
-					elseif var3.action == "clear" then
-						var2.logAction(signalActionTypeModule.RemoveReaction, t, {})
+					end
+					if DecideResult.action == "clear" then
+						UseFeedOptionalResult.logAction(SignalActionTypeModule.RemoveReaction, config, {})
 					end
 				end)
 				
-				if not ok then
-					warn("Failed to log reaction action event", status)
+				if not Success then
+					warn("Failed to log reaction action event", Result)
 				end
 			end
 		end
-		if var1 ~= nil and var3.effectReaction ~= nil then
-			var1.spawnExplosion(var3.effectReaction, p2)
+		if UseReactionEffectsResult ~= nil and DecideResult.effectReaction ~= nil then
+			UseReactionEffectsResult.spawnExplosion(DecideResult.effectReaction, p2)
 		end
-	end, { store, var1, var2 })
+	end, {
+		Store,
+		UseReactionEffectsResult,
+		UseFeedOptionalResult,
+		NoFFlagMomentsReactFeatureGate
+	})
 end

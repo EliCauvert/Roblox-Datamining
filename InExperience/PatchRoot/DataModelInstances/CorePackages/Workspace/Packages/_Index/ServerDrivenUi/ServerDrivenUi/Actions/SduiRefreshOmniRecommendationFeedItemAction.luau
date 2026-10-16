@@ -1,85 +1,85 @@
-﻿local serverDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
-local parent = serverDrivenUi.Parent
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local sduiActionType = sduiCoreSystemModule.SduiActionType
-local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
-local refreshOmniRecommendationFeedItemModule = require(serverDrivenUi.Actions.refreshOmniRecommendationFeedItem)
-local refreshHomePageFeedItemModule = require(parent.Home.refreshHomePageFeedItem)
-local fFlagLuaAppEnableSduiHomePage = require(parent.SharedFlags).FFlagLuaAppEnableSduiHomePage
+﻿local ServerDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
+local Parent = ServerDrivenUi.Parent
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local SduiActionType = SduiCoreSystemModule.SduiActionType
+local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
+local RefreshOmniRecommendationFeedItemModule = require(ServerDrivenUi.Actions.refreshOmniRecommendationFeedItem)
+local RefreshHomePageFeedItemModule = require(Parent.Home.refreshHomePageFeedItem)
+local FFlagLuaAppEnableSduiHomePage = require(Parent.SharedFlags).FFlagLuaAppEnableSduiHomePage
 
-local function _(p1, p2, p3)
-	-- upvalues: sduiErrorType (ref), sduiActionType (ref)
-	p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
-		name = sduiActionType.RefreshOmniRecommendationFeedItem,
-		message = p2,
-		propName = p3
+local function _(p1, Message, PropName) --[[ Line: 18 | Named "reportInvalidActionParams" ]]
+	-- upvalues: SduiErrorType (copy), SduiActionType (copy)
+	p1.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
+		name = SduiActionType.RefreshOmniRecommendationFeedItem,
+		message = Message,
+		propName = PropName
 	}, p1.appPage)
 end
 
-return function(p1, _, p2)
-	-- upvalues: sduiErrorType (ref), sduiActionType (ref), fFlagLuaAppEnableSduiHomePage (ref), refreshHomePageFeedItemModule (ref), refreshOmniRecommendationFeedItemModule (ref)
-	local var1 = if p1 then p1.actionParams else nil
+return function(p1, _, p2) --[[ Line: 28 ]]
+	-- upvalues: SduiErrorType (copy), SduiActionType (copy), FFlagLuaAppEnableSduiHomePage (copy), RefreshHomePageFeedItemModule (copy), RefreshOmniRecommendationFeedItemModule (copy)
+	local ActionParams = p1 and p1.actionParams or nil
 	
-	if var1 == nil then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if ActionParams == nil then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			message = "Missing actionParams",
 			propName = nil,
-			name = sduiActionType.RefreshOmniRecommendationFeedItem
+			name = SduiActionType.RefreshOmniRecommendationFeedItem
 		}, p2.appPage)
 		
 		return
 	end
-	assert(var1, "actionParams must exist")
-	local topicId = var1.topicId
+	assert(ActionParams, "actionParams must exist")
+	local TopicId = ActionParams.topicId
 	
-	if typeof(topicId) ~= "string" or topicId == "" then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if typeof(TopicId) ~= "string" or TopicId == "" then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			propName = "topicId",
-			name = sduiActionType.RefreshOmniRecommendationFeedItem,
-			message = `Invalid or missing topicId: {topicId}`
+			name = SduiActionType.RefreshOmniRecommendationFeedItem,
+			message = `Invalid or missing topicId: {TopicId}`
 		}, p2.appPage)
 		
 		return
 	end
-	local feedItemKey = var1.feedItemKey
+	local FeedItemKey = ActionParams.feedItemKey
 	
-	if typeof(feedItemKey) ~= "string" or feedItemKey == "" then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if typeof(FeedItemKey) ~= "string" or FeedItemKey == "" then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			propName = "feedItemKey",
-			name = sduiActionType.RefreshOmniRecommendationFeedItem,
-			message = `Invalid or missing feedItemKey: {feedItemKey}`
+			name = SduiActionType.RefreshOmniRecommendationFeedItem,
+			message = `Invalid or missing feedItemKey: {FeedItemKey}`
 		}, p2.appPage)
 		
 		return
 	end
-	local requestIntent = var1.requestIntent
+	local RequestIntent = ActionParams.requestIntent
 	
-	if typeof(requestIntent) ~= "string" or requestIntent == "" then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if typeof(RequestIntent) ~= "string" or RequestIntent == "" then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			propName = "requestIntent",
-			name = sduiActionType.RefreshOmniRecommendationFeedItem,
-			message = `Invalid requestIntent: {requestIntent}`
+			name = SduiActionType.RefreshOmniRecommendationFeedItem,
+			message = `Invalid requestIntent: {RequestIntent}`
 		}, p2.appPage)
 	end
-	local t = nil
-	local selectedOption = var1.selectedOption
+	local ContextFeatures = nil
+	local SelectedOption = ActionParams.selectedOption
 	
-	if selectedOption ~= nil then
-		if typeof(selectedOption) == "string" and selectedOption ~= "" then
-			t = { selected_option = selectedOption }
+	if SelectedOption ~= nil then
+		if typeof(SelectedOption) == "string" and SelectedOption ~= "" then
+			ContextFeatures = { selected_option = SelectedOption }
 		else
-			p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+			p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 				propName = "selectedOption",
-				name = sduiActionType.RefreshOmniRecommendationFeedItem,
-				message = `Invalid selectedOption: {selectedOption}`
+				name = SduiActionType.RefreshOmniRecommendationFeedItem,
+				message = `Invalid selectedOption: {SelectedOption}`
 			}, p2.appPage)
 		end
 	end
-	return if fFlagLuaAppEnableSduiHomePage then refreshHomePageFeedItemModule(topicId, feedItemKey, requestIntent, function(p3, p4)
-		-- upvalues: p2 (ref)
+	return if FFlagLuaAppEnableSduiHomePage then RefreshHomePageFeedItemModule(TopicId, FeedItemKey, RequestIntent, function(p3, p4) --[[ Line: 73 ]]
+		-- upvalues: p2 (copy)
 		p2.dependencies.logger.reportError(p3, p4, p2.appPage)
-	end, { contextFeatures = t }) else refreshOmniRecommendationFeedItemModule(p2.dependencies.networking, p2.appPage, topicId, feedItemKey, requestIntent, function(p3, p4)
-		-- upvalues: p2 (ref)
+	end, { contextFeatures = ContextFeatures }) else RefreshOmniRecommendationFeedItemModule(p2.dependencies.networking, p2.appPage, TopicId, FeedItemKey, RequestIntent, function(p3, p4) --[[ Line: 84 ]]
+		-- upvalues: p2 (copy)
 		p2.dependencies.logger.reportError(p3, p4, p2.appPage)
-	end, { contextFeatures = t })
+	end, { contextFeatures = ContextFeatures })
 end

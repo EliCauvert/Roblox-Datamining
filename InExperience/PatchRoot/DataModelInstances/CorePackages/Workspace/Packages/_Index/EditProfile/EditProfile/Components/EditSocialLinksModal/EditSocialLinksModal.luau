@@ -1,204 +1,204 @@
-﻿local editProfile = script:FindFirstAncestor("EditProfile")
-local parent = editProfile.Parent
-local reactModule = require(parent.React)
-local UIBloxModule = require(parent.UIBlox)
-local foundationModule = require(parent.Foundation)
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local useStyle = UIBloxModule.Core.Style.useStyle
-local editSocialNetworksItemModule = require(editProfile.Components.EditSocialNetworksItem)
-local dropdownMenu = UIBloxModule.App.Menu.DropdownMenu
-local verticalScrollView = UIBloxModule.App.Container.VerticalScrollView
-local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
-local buttonType = UIBloxModule.App.Button.Enum.ButtonType
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local textKeysModule = require(editProfile.Common.TextKeys)
-local useScreenSize = require(parent.RobloxAppHooks).useScreenSize
-local useNavigationProps = require(parent.RobloxAppNavigation).useNavigationProps
-local constantsModule = require(editProfile.Common.Constants)
-local _ = require(editProfile.Common.Types)
-local socialNetworksInEditProfileIXPModule = require(editProfile.Flags.SocialNetworksInEditProfileIXP)
-local fFlagEditProfileFixFocusNavigationModule = require(editProfile.Flags.FFlagEditProfileFixFocusNavigation)
-local focusNavigatorWrapperModule = require(editProfile.Utils.FocusNavigatorWrapper)
+﻿local EditProfile = script:FindFirstAncestor("EditProfile")
+local Parent = EditProfile.Parent
+local ReactModule = require(Parent.React)
+local UIBloxModule = require(Parent.UIBlox)
+local FoundationModule = require(Parent.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local EditSocialNetworksItemModule = require(EditProfile.Components.EditSocialNetworksItem)
+local DropdownMenu = UIBloxModule.App.Menu.DropdownMenu
+local VerticalScrollView = UIBloxModule.App.Container.VerticalScrollView
+local InteractiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
+local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local TextKeysModule = require(EditProfile.Common.TextKeys)
+local UseScreenSizeFunction = require(Parent.RobloxAppHooks).useScreenSize
+local UseNavigationPropsFunction = require(Parent.RobloxAppNavigation).useNavigationProps
+local ConstantsModule = require(EditProfile.Common.Constants)
+local _ = require(EditProfile.Common.Types)
+local SocialNetworksInEditProfileIXPModule = require(EditProfile.Flags.SocialNetworksInEditProfileIXP)
+local FFlagEditProfileFixFocusNavigationModule = require(EditProfile.Flags.FFlagEditProfileFixFocusNavigation)
+local FocusNavigatorWrapperModule = require(EditProfile.Utils.FocusNavigatorWrapper)
 
-return function(p1)
-	-- upvalues: reactModule (ref), constantsModule (ref), useLocalization (ref), textKeysModule (ref), useNavigationProps (ref), socialNetworksInEditProfileIXPModule (ref), useStyle (ref), useScreenSize (ref), fFlagEditProfileFixFocusNavigationModule (ref), focusNavigatorWrapperModule (ref), verticalScrollView (ref), interactiveAlert (ref), editSocialNetworksItemModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), dropdownMenu (ref), buttonType (ref)
-	local var1, var2 = reactModule.useState(p1.socialNetworks.facebook)
-	local var3, var4 = reactModule.useState(p1.socialNetworks.twitter)
-	local var5, var6 = reactModule.useState(p1.socialNetworks.youtube)
-	local var7, var8 = reactModule.useState(p1.socialNetworks.twitch)
-	local var9, var10 = reactModule.useState(p1.socialNetworks.guilded)
-	local var11, var12 = reactModule.useState(p1.socialNetworksVisbility)
-	local var13, var14 = reactModule.useState(0)
-	local var15 = var11 == constantsModule.VisibilitySettings.NoOne
-	local var16 = useLocalization({
-		cancelButtonText = textKeysModule.CancelButtonText,
-		saveButtonText = textKeysModule.SaveButtonText,
-		socialNetworks = textKeysModule.SocialNetworks,
-		Facebook = textKeysModule.Facebook,
-		X = textKeysModule.X,
-		YouTube = textKeysModule.YouTube,
-		Twitch = textKeysModule.Twitch,
-		Guilded = textKeysModule.Guilded,
-		FacebookExample = textKeysModule.FacebookExample,
-		TwitterExample = textKeysModule.TwitterExample,
-		YouTubeExample = textKeysModule.YouTubeExample,
-		TwitchExample = textKeysModule.TwitchExample,
-		GuildedExample = textKeysModule.GuildedExample,
-		AllUsers = textKeysModule.AllUsersDropDown,
-		Friends = textKeysModule.FriendsDropDown,
-		NoOne = textKeysModule.NoOneDropDown,
-		FriendsFollowingAndFollowers = textKeysModule.FriendsFollowingAndFollowersDropDown,
-		FriendsAndFollowing = textKeysModule.FriendsAndFollowingDropDown,
-		VisibleTo = textKeysModule.VisibleTo
+return function(p1) --[[ Line: 44 ]]
+	-- upvalues: ReactModule (copy), ConstantsModule (copy), UseLocalizationFunction (copy), TextKeysModule (copy), UseNavigationPropsFunction (copy), SocialNetworksInEditProfileIXPModule (copy), UseStyleFunction (copy), UseScreenSizeFunction (copy), FFlagEditProfileFixFocusNavigationModule (copy), FocusNavigatorWrapperModule (copy), VerticalScrollView (copy), InteractiveAlert (copy), EditSocialNetworksItemModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), DropdownMenu (copy), ButtonType (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(p1.socialNetworks.facebook)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(p1.socialNetworks.twitter)
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(p1.socialNetworks.youtube)
+	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(p1.socialNetworks.twitch)
+	local UseStateResult5, UseStateResult2_4 = ReactModule.useState(p1.socialNetworks.guilded)
+	local UseStateResult6, UseStateResult2_5 = ReactModule.useState(p1.socialNetworksVisbility)
+	local UseStateResult7, UseStateResult2_6 = ReactModule.useState(0)
+	local IsUseStateResultMatch = UseStateResult6 == ConstantsModule.VisibilitySettings.NoOne
+	local UseLocalizationResult = UseLocalizationFunction({
+		cancelButtonText = TextKeysModule.CancelButtonText,
+		saveButtonText = TextKeysModule.SaveButtonText,
+		socialNetworks = TextKeysModule.SocialNetworks,
+		Facebook = TextKeysModule.Facebook,
+		X = TextKeysModule.X,
+		YouTube = TextKeysModule.YouTube,
+		Twitch = TextKeysModule.Twitch,
+		Guilded = TextKeysModule.Guilded,
+		FacebookExample = TextKeysModule.FacebookExample,
+		TwitterExample = TextKeysModule.TwitterExample,
+		YouTubeExample = TextKeysModule.YouTubeExample,
+		TwitchExample = TextKeysModule.TwitchExample,
+		GuildedExample = TextKeysModule.GuildedExample,
+		AllUsers = TextKeysModule.AllUsersDropDown,
+		Friends = TextKeysModule.FriendsDropDown,
+		NoOne = TextKeysModule.NoOneDropDown,
+		FriendsFollowingAndFollowers = TextKeysModule.FriendsFollowingAndFollowersDropDown,
+		FriendsAndFollowing = TextKeysModule.FriendsAndFollowingDropDown,
+		VisibleTo = TextKeysModule.VisibleTo
 	})
-	local var17 = useNavigationProps(function(_, p2)
+	local UseNavigationPropsResult = UseNavigationPropsFunction(function(_, p2) --[[ Line: 74 ]]
 		return { focusOn = p2.focusOn }
 	end)
-	local var18 = socialNetworksInEditProfileIXPModule.useGetExperimentVariant({ isExposureEnabled = true })
-	local var19 = useStyle()
-	local font = var19.Font
-	local theme = var19.Theme
-	local var20 = font.BaseSize * font.Body.RelativeSize
-	local var21 = useScreenSize()
+	local UseGetExperimentVariantResult = SocialNetworksInEditProfileIXPModule.useGetExperimentVariant({ isExposureEnabled = true })
+	local UseStyleResult = UseStyleFunction()
+	local UseStyleResultFont = UseStyleResult.Font
+	local Theme = UseStyleResult.Theme
+	local ScaledBaseSize = UseStyleResultFont.BaseSize * UseStyleResultFont.Body.RelativeSize
+	local UseScreenSizeResult = UseScreenSizeFunction()
 	
-	local function onSave()
-		-- upvalues: p1 (ref), var11 (ref), var1 (ref), var3 (ref), var5 (ref), var7 (ref), var9 (ref)
-		p1.saveOnActivated(var11, var1, var3, var5, var7, var9)
+	local function onSave() --[[ Line: 88 ]]
+		-- upvalues: p1 (copy), UseStateResult6 (copy), UseStateResult (copy), UseStateResult1 (copy), UseStateResult3 (copy), UseStateResult4 (copy), UseStateResult5 (copy)
+		p1.saveOnActivated(UseStateResult6, UseStateResult, UseStateResult1, UseStateResult3, UseStateResult4, UseStateResult5)
 	end
 	
-	local var22 = reactModule.useCallback(function(p2)
-		-- upvalues: var12 (ref)
-		var12(p2)
+	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 92 ]]
+		-- upvalues: UseStateResult2_5 (copy)
+		UseStateResult2_5(p2)
 	end, {})
 	
-	return if fFlagEditProfileFixFocusNavigationModule then focusNavigatorWrapperModule({ onClose = p1.cancelOnActivated }, {
-		reactModule.createElement(verticalScrollView, {
+	return if FFlagEditProfileFixFocusNavigationModule then FocusNavigatorWrapperModule({ onClose = p1.cancelOnActivated }, {
+		ReactModule.createElement(VerticalScrollView, {
 			useAutomaticCanvasSize = true,
 			canvasSizeY = UDim.new(),
 			elasticBehavior = Enum.ElasticBehavior.Never
 		}, {
-			reactModule.createElement(interactiveAlert, {
-				title = var16.socialNetworks,
-				screenSize = var21,
+			ReactModule.createElement(InteractiveAlert, {
+				title = UseLocalizationResult.socialNetworks,
+				screenSize = UseScreenSizeResult,
 				anchorPoint = Vector2.new(0.5, 0),
-				position = UDim2.new(0.5, 0, 0, 30 + var13),
-				middleContent = function()
-					-- upvalues: reactModule (copy), editSocialNetworksItemModule (copy), var2 (ref), var16 (ref), var1 (ref), var18 (ref), socialNetworksInEditProfileIXPModule (copy), var17 (ref), var15 (ref), var14 (ref), var4 (ref), var3 (ref), var6 (ref), var5 (ref), var8 (ref), var7 (ref), var10 (ref), var9 (ref), foundationFontFaceMigration (copy), font (ref), normalizeFontFace (copy), var19 (ref), var20 (ref), theme (ref), dropdownMenu (copy), var11 (ref), var22 (ref), var21 (ref), constantsModule (copy)
-					return reactModule.createElement("Frame", {
+				position = UDim2.new(0.5, 0, 0, 30 + UseStateResult7),
+				middleContent = function() --[[ Line: 110 ]]
+					-- upvalues: ReactModule (upval), EditSocialNetworksItemModule (upval), UseStateResult2 (copy), UseLocalizationResult (copy), UseStateResult (copy), UseGetExperimentVariantResult (copy), SocialNetworksInEditProfileIXPModule (upval), UseNavigationPropsResult (copy), IsUseStateResultMatch (copy), UseStateResult2_6 (copy), UseStateResult2_1 (copy), UseStateResult1 (copy), UseStateResult2_2 (copy), UseStateResult3 (copy), UseStateResult2_3 (copy), UseStateResult4 (copy), UseStateResult2_4 (copy), UseStateResult5 (copy), FoundationFontFaceMigration (upval), UseStyleResultFont (copy), NormalizeFontFaceFunction (upval), UseStyleResult (copy), ScaledBaseSize (copy), Theme (copy), DropdownMenu (upval), UseStateResult6 (copy), UseResult (copy), UseScreenSizeResult (copy), ConstantsModule (upval)
+					return ReactModule.createElement("Frame", {
 						BackgroundTransparency = 1,
 						AutomaticSize = Enum.AutomaticSize.XY
 					}, {
-						UIListLayout = reactModule.createElement("UIListLayout", {
+						UIListLayout = ReactModule.createElement("UIListLayout", {
 							FillDirection = Enum.FillDirection.Vertical,
 							VerticalAlignment = Enum.VerticalAlignment.Center,
 							HorizontalAlignment = Enum.HorizontalAlignment.Left,
 							SortOrder = Enum.SortOrder.LayoutOrder
 						}),
-						Facebook = reactModule.createElement(editSocialNetworksItemModule, {
-							textChanged = var2,
-							networkTitle = var16.Facebook,
-							initialText = var1,
-							placeholderText = var16.FacebookExample,
-							layoutOrder = if var18 == socialNetworksInEditProfileIXPModule.Variants.VisibilityLast then 1 else 2,
-							focusOn = var17.focusOn == 1,
-							isVisibilityNoOne = var15,
-							setKeyboardOffset = var14
+						Facebook = ReactModule.createElement(EditSocialNetworksItemModule, {
+							textChanged = UseStateResult2,
+							networkTitle = UseLocalizationResult.Facebook,
+							initialText = UseStateResult,
+							placeholderText = UseLocalizationResult.FacebookExample,
+							layoutOrder = if UseGetExperimentVariantResult == SocialNetworksInEditProfileIXPModule.Variants.VisibilityLast then 1 else 2,
+							focusOn = UseNavigationPropsResult.focusOn == 1,
+							isVisibilityNoOne = IsUseStateResultMatch,
+							setKeyboardOffset = UseStateResult2_6
 						}),
-						Twitter = reactModule.createElement(editSocialNetworksItemModule, {
-							textChanged = var4,
-							networkTitle = var16.X,
-							initialText = var3,
-							placeholderText = var16.TwitterExample,
-							layoutOrder = if var18 == socialNetworksInEditProfileIXPModule.Variants.VisibilityLast then 2 else 3,
-							focusOn = var17.focusOn == 2,
-							isVisibilityNoOne = var15,
-							setKeyboardOffset = var14
+						Twitter = ReactModule.createElement(EditSocialNetworksItemModule, {
+							textChanged = UseStateResult2_1,
+							networkTitle = UseLocalizationResult.X,
+							initialText = UseStateResult1,
+							placeholderText = UseLocalizationResult.TwitterExample,
+							layoutOrder = if UseGetExperimentVariantResult == SocialNetworksInEditProfileIXPModule.Variants.VisibilityLast then 2 else 3,
+							focusOn = UseNavigationPropsResult.focusOn == 2,
+							isVisibilityNoOne = IsUseStateResultMatch,
+							setKeyboardOffset = UseStateResult2_6
 						}),
-						YouTube = reactModule.createElement(editSocialNetworksItemModule, {
-							textChanged = var6,
-							networkTitle = var16.YouTube,
-							initialText = var5,
-							placeholderText = var16.YouTubeExample,
-							layoutOrder = if var18 == socialNetworksInEditProfileIXPModule.Variants.VisibilityLast then 3 else 4,
-							focusOn = var17.focusOn == 3,
-							isVisibilityNoOne = var15,
-							setKeyboardOffset = var14
+						YouTube = ReactModule.createElement(EditSocialNetworksItemModule, {
+							textChanged = UseStateResult2_2,
+							networkTitle = UseLocalizationResult.YouTube,
+							initialText = UseStateResult3,
+							placeholderText = UseLocalizationResult.YouTubeExample,
+							layoutOrder = if UseGetExperimentVariantResult == SocialNetworksInEditProfileIXPModule.Variants.VisibilityLast then 3 else 4,
+							focusOn = UseNavigationPropsResult.focusOn == 3,
+							isVisibilityNoOne = IsUseStateResultMatch,
+							setKeyboardOffset = UseStateResult2_6
 						}),
-						Twitch = reactModule.createElement(editSocialNetworksItemModule, {
-							textChanged = var8,
-							networkTitle = var16.Twitch,
-							initialText = var7,
-							placeholderText = var16.TwitchExample,
-							layoutOrder = if var18 == socialNetworksInEditProfileIXPModule.Variants.VisibilityLast then 4 else 5,
-							focusOn = var17.focusOn == 4,
-							isVisibilityNoOne = var15,
-							setKeyboardOffset = var14
+						Twitch = ReactModule.createElement(EditSocialNetworksItemModule, {
+							textChanged = UseStateResult2_3,
+							networkTitle = UseLocalizationResult.Twitch,
+							initialText = UseStateResult4,
+							placeholderText = UseLocalizationResult.TwitchExample,
+							layoutOrder = if UseGetExperimentVariantResult == SocialNetworksInEditProfileIXPModule.Variants.VisibilityLast then 4 else 5,
+							focusOn = UseNavigationPropsResult.focusOn == 4,
+							isVisibilityNoOne = IsUseStateResultMatch,
+							setKeyboardOffset = UseStateResult2_6
 						}),
-						Guilded = reactModule.createElement(editSocialNetworksItemModule, {
-							textChanged = var10,
-							networkTitle = var16.Guilded,
-							initialText = var9,
-							placeholderText = var16.GuildedExample,
-							layoutOrder = if var18 == socialNetworksInEditProfileIXPModule.Variants.VisibilityLast then 5 else 6,
-							focusOn = var17.focusOn == 5,
-							isVisibilityNoOne = var15,
-							setKeyboardOffset = var14
+						Guilded = ReactModule.createElement(EditSocialNetworksItemModule, {
+							textChanged = UseStateResult2_4,
+							networkTitle = UseLocalizationResult.Guilded,
+							initialText = UseStateResult5,
+							placeholderText = UseLocalizationResult.GuildedExample,
+							layoutOrder = if UseGetExperimentVariantResult == SocialNetworksInEditProfileIXPModule.Variants.VisibilityLast then 5 else 6,
+							focusOn = UseNavigationPropsResult.focusOn == 5,
+							isVisibilityNoOne = IsUseStateResultMatch,
+							setKeyboardOffset = UseStateResult2_6
 						}),
-						Visibility = reactModule.createElement("Frame", {
+						Visibility = ReactModule.createElement("Frame", {
 							BackgroundTransparency = 1,
 							ZIndex = 2,
 							Size = UDim2.new(1, 0, 0, 0),
 							AutomaticSize = Enum.AutomaticSize.Y,
-							LayoutOrder = if var18 == socialNetworksInEditProfileIXPModule.Variants.VisibilityLast then 6 else 1
+							LayoutOrder = if UseGetExperimentVariantResult == SocialNetworksInEditProfileIXPModule.Variants.VisibilityLast then 6 else 1
 						}, {
-							UIListLayout = reactModule.createElement("UIListLayout", {
+							UIListLayout = ReactModule.createElement("UIListLayout", {
 								FillDirection = Enum.FillDirection.Vertical,
 								SortOrder = Enum.SortOrder.LayoutOrder,
 								Padding = UDim.new(0, 12)
 							}),
-							NetworkLabel = reactModule.createElement("TextLabel", {
+							NetworkLabel = ReactModule.createElement("TextLabel", {
 								LayoutOrder = -1,
 								BackgroundTransparency = 1,
 								RichText = true,
 								ZIndex = 0,
-								Font = if foundationFontFaceMigration then nil else font.Body.Font,
-								FontFace = if foundationFontFaceMigration then normalizeFontFace(var19.Tokens.Typography.BodyLarge.Font) else nil,
-								Text = var16.VisibleTo,
-								TextSize = var20,
-								TextColor3 = theme.TextDefault.Color,
+								Font = if FoundationFontFaceMigration then nil else UseStyleResultFont.Body.Font,
+								FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font) else nil,
+								Text = UseLocalizationResult.VisibleTo,
+								TextSize = ScaledBaseSize,
+								TextColor3 = Theme.TextDefault.Color,
 								AutomaticSize = Enum.AutomaticSize.XY
 							}),
-							Dropdown = reactModule.createElement(dropdownMenu, {
+							Dropdown = ReactModule.createElement(DropdownMenu, {
 								dropdownMenuListPositionFixed = true,
 								showDropShadow = true,
-								placeholder = var16[var11],
-								onChange = var22,
-								screenSize = Vector2.new(math.clamp(var21.X - 48, 272, 400) - 48, 640),
-								height = UDim.new(0, var20 + 20),
+								placeholder = UseLocalizationResult[UseStateResult6],
+								onChange = UseResult,
+								screenSize = Vector2.new(math.clamp(UseScreenSizeResult.X - 48, 272, 400) - 48, 640),
+								height = UDim.new(0, ScaledBaseSize + 20),
 								cellDatas = {
 									{
-										text = var16.AllUsers,
-										key = constantsModule.VisibilitySettings.AllUsers
+										text = UseLocalizationResult.AllUsers,
+										key = ConstantsModule.VisibilitySettings.AllUsers
 									},
 									{
-										text = var16.FriendsFollowingAndFollowers,
-										key = constantsModule.VisibilitySettings.FriendsFollowingAndFollowers
+										text = UseLocalizationResult.FriendsFollowingAndFollowers,
+										key = ConstantsModule.VisibilitySettings.FriendsFollowingAndFollowers
 									},
 									{
-										text = var16.FriendsAndFollowing,
-										key = constantsModule.VisibilitySettings.FriendsAndFollowing
+										text = UseLocalizationResult.FriendsAndFollowing,
+										key = ConstantsModule.VisibilitySettings.FriendsAndFollowing
 									},
 									{
-										text = var16.Friends,
-										key = constantsModule.VisibilitySettings.Friends
+										text = UseLocalizationResult.Friends,
+										key = ConstantsModule.VisibilitySettings.Friends
 									},
 									{
-										text = var16.NoOne,
-										key = constantsModule.VisibilitySettings.NoOne
+										text = UseLocalizationResult.NoOne,
+										key = ConstantsModule.VisibilitySettings.NoOne
 									}
 								},
-								defaultKey = var11
+								defaultKey = UseStateResult6
 							})
 						})
 					})
@@ -208,147 +208,150 @@ return function(p1)
 					marginBetween = 6,
 					buttons = {
 						{
-							buttonType = buttonType.Secondary,
+							buttonType = ButtonType.Secondary,
 							props = {
 								onActivated = p1.cancelOnActivated,
-								text = var16.cancelButtonText
+								text = UseLocalizationResult.cancelButtonText
 							}
 						},
 						{
-							buttonType = buttonType.PrimarySystem,
-							props = { onActivated = onSave, text = var16.saveButtonText }
+							buttonType = ButtonType.PrimarySystem,
+							props = {
+								onActivated = onSave,
+								text = UseLocalizationResult.saveButtonText
+							}
 						}
 					},
 					forcedFillDirection = Enum.FillDirection.Horizontal
 				}
 			})
 		})
-	}) else reactModule.createElement(verticalScrollView, {
+	}) else ReactModule.createElement(VerticalScrollView, {
 		useAutomaticCanvasSize = true,
 		canvasSizeY = UDim.new(),
 		elasticBehavior = Enum.ElasticBehavior.Never
 	}, {
-		reactModule.createElement(interactiveAlert, {
-			title = var16.socialNetworks,
-			screenSize = var21,
+		ReactModule.createElement(InteractiveAlert, {
+			title = UseLocalizationResult.socialNetworks,
+			screenSize = UseScreenSizeResult,
 			anchorPoint = Vector2.new(0.5, 0),
-			position = UDim2.new(0.5, 0, 0, 30 + var13),
-			middleContent = function()
-				-- upvalues: reactModule (copy), editSocialNetworksItemModule (copy), var2 (ref), var16 (ref), var1 (ref), var18 (ref), socialNetworksInEditProfileIXPModule (copy), var17 (ref), var15 (ref), var14 (ref), var4 (ref), var3 (ref), var6 (ref), var5 (ref), var8 (ref), var7 (ref), var10 (ref), var9 (ref), foundationFontFaceMigration (copy), font (ref), normalizeFontFace (copy), var19 (ref), var20 (ref), theme (ref), dropdownMenu (copy), var11 (ref), var22 (ref), var21 (ref), constantsModule (copy)
-				return reactModule.createElement("Frame", {
+			position = UDim2.new(0.5, 0, 0, 30 + UseStateResult7),
+			middleContent = function() --[[ Line: 296 ]]
+				-- upvalues: ReactModule (upval), EditSocialNetworksItemModule (upval), UseStateResult2 (copy), UseLocalizationResult (copy), UseStateResult (copy), UseGetExperimentVariantResult (copy), SocialNetworksInEditProfileIXPModule (upval), UseNavigationPropsResult (copy), IsUseStateResultMatch (copy), UseStateResult2_6 (copy), UseStateResult2_1 (copy), UseStateResult1 (copy), UseStateResult2_2 (copy), UseStateResult3 (copy), UseStateResult2_3 (copy), UseStateResult4 (copy), UseStateResult2_4 (copy), UseStateResult5 (copy), FoundationFontFaceMigration (upval), UseStyleResultFont (copy), NormalizeFontFaceFunction (upval), UseStyleResult (copy), ScaledBaseSize (copy), Theme (copy), DropdownMenu (upval), UseStateResult6 (copy), UseResult (copy), UseScreenSizeResult (copy), ConstantsModule (upval)
+				return ReactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					AutomaticSize = Enum.AutomaticSize.XY
 				}, {
-					UIListLayout = reactModule.createElement("UIListLayout", {
+					UIListLayout = ReactModule.createElement("UIListLayout", {
 						FillDirection = Enum.FillDirection.Vertical,
 						VerticalAlignment = Enum.VerticalAlignment.Center,
 						HorizontalAlignment = Enum.HorizontalAlignment.Left,
 						SortOrder = Enum.SortOrder.LayoutOrder
 					}),
-					Facebook = reactModule.createElement(editSocialNetworksItemModule, {
-						textChanged = var2,
-						networkTitle = var16.Facebook,
-						initialText = var1,
-						placeholderText = var16.FacebookExample,
-						layoutOrder = if var18 == socialNetworksInEditProfileIXPModule.Variants.VisibilityLast then 1 else 2,
-						focusOn = var17.focusOn == 1,
-						isVisibilityNoOne = var15,
-						setKeyboardOffset = var14
+					Facebook = ReactModule.createElement(EditSocialNetworksItemModule, {
+						textChanged = UseStateResult2,
+						networkTitle = UseLocalizationResult.Facebook,
+						initialText = UseStateResult,
+						placeholderText = UseLocalizationResult.FacebookExample,
+						layoutOrder = if UseGetExperimentVariantResult == SocialNetworksInEditProfileIXPModule.Variants.VisibilityLast then 1 else 2,
+						focusOn = UseNavigationPropsResult.focusOn == 1,
+						isVisibilityNoOne = IsUseStateResultMatch,
+						setKeyboardOffset = UseStateResult2_6
 					}),
-					Twitter = reactModule.createElement(editSocialNetworksItemModule, {
-						textChanged = var4,
-						networkTitle = var16.X,
-						initialText = var3,
-						placeholderText = var16.TwitterExample,
-						layoutOrder = if var18 == socialNetworksInEditProfileIXPModule.Variants.VisibilityLast then 2 else 3,
-						focusOn = var17.focusOn == 2,
-						isVisibilityNoOne = var15,
-						setKeyboardOffset = var14
+					Twitter = ReactModule.createElement(EditSocialNetworksItemModule, {
+						textChanged = UseStateResult2_1,
+						networkTitle = UseLocalizationResult.X,
+						initialText = UseStateResult1,
+						placeholderText = UseLocalizationResult.TwitterExample,
+						layoutOrder = if UseGetExperimentVariantResult == SocialNetworksInEditProfileIXPModule.Variants.VisibilityLast then 2 else 3,
+						focusOn = UseNavigationPropsResult.focusOn == 2,
+						isVisibilityNoOne = IsUseStateResultMatch,
+						setKeyboardOffset = UseStateResult2_6
 					}),
-					YouTube = reactModule.createElement(editSocialNetworksItemModule, {
-						textChanged = var6,
-						networkTitle = var16.YouTube,
-						initialText = var5,
-						placeholderText = var16.YouTubeExample,
-						layoutOrder = if var18 == socialNetworksInEditProfileIXPModule.Variants.VisibilityLast then 3 else 4,
-						focusOn = var17.focusOn == 3,
-						isVisibilityNoOne = var15,
-						setKeyboardOffset = var14
+					YouTube = ReactModule.createElement(EditSocialNetworksItemModule, {
+						textChanged = UseStateResult2_2,
+						networkTitle = UseLocalizationResult.YouTube,
+						initialText = UseStateResult3,
+						placeholderText = UseLocalizationResult.YouTubeExample,
+						layoutOrder = if UseGetExperimentVariantResult == SocialNetworksInEditProfileIXPModule.Variants.VisibilityLast then 3 else 4,
+						focusOn = UseNavigationPropsResult.focusOn == 3,
+						isVisibilityNoOne = IsUseStateResultMatch,
+						setKeyboardOffset = UseStateResult2_6
 					}),
-					Twitch = reactModule.createElement(editSocialNetworksItemModule, {
-						textChanged = var8,
-						networkTitle = var16.Twitch,
-						initialText = var7,
-						placeholderText = var16.TwitchExample,
-						layoutOrder = if var18 == socialNetworksInEditProfileIXPModule.Variants.VisibilityLast then 4 else 5,
-						focusOn = var17.focusOn == 4,
-						isVisibilityNoOne = var15,
-						setKeyboardOffset = var14
+					Twitch = ReactModule.createElement(EditSocialNetworksItemModule, {
+						textChanged = UseStateResult2_3,
+						networkTitle = UseLocalizationResult.Twitch,
+						initialText = UseStateResult4,
+						placeholderText = UseLocalizationResult.TwitchExample,
+						layoutOrder = if UseGetExperimentVariantResult == SocialNetworksInEditProfileIXPModule.Variants.VisibilityLast then 4 else 5,
+						focusOn = UseNavigationPropsResult.focusOn == 4,
+						isVisibilityNoOne = IsUseStateResultMatch,
+						setKeyboardOffset = UseStateResult2_6
 					}),
-					Guilded = reactModule.createElement(editSocialNetworksItemModule, {
-						textChanged = var10,
-						networkTitle = var16.Guilded,
-						initialText = var9,
-						placeholderText = var16.GuildedExample,
-						layoutOrder = if var18 == socialNetworksInEditProfileIXPModule.Variants.VisibilityLast then 5 else 6,
-						focusOn = var17.focusOn == 5,
-						isVisibilityNoOne = var15,
-						setKeyboardOffset = var14
+					Guilded = ReactModule.createElement(EditSocialNetworksItemModule, {
+						textChanged = UseStateResult2_4,
+						networkTitle = UseLocalizationResult.Guilded,
+						initialText = UseStateResult5,
+						placeholderText = UseLocalizationResult.GuildedExample,
+						layoutOrder = if UseGetExperimentVariantResult == SocialNetworksInEditProfileIXPModule.Variants.VisibilityLast then 5 else 6,
+						focusOn = UseNavigationPropsResult.focusOn == 5,
+						isVisibilityNoOne = IsUseStateResultMatch,
+						setKeyboardOffset = UseStateResult2_6
 					}),
-					Visibility = reactModule.createElement("Frame", {
+					Visibility = ReactModule.createElement("Frame", {
 						BackgroundTransparency = 1,
 						ZIndex = 2,
 						Size = UDim2.new(1, 0, 0, 0),
 						AutomaticSize = Enum.AutomaticSize.Y,
-						LayoutOrder = if var18 == socialNetworksInEditProfileIXPModule.Variants.VisibilityLast then 6 else 1
+						LayoutOrder = if UseGetExperimentVariantResult == SocialNetworksInEditProfileIXPModule.Variants.VisibilityLast then 6 else 1
 					}, {
-						UIListLayout = reactModule.createElement("UIListLayout", {
+						UIListLayout = ReactModule.createElement("UIListLayout", {
 							FillDirection = Enum.FillDirection.Vertical,
 							SortOrder = Enum.SortOrder.LayoutOrder,
 							Padding = UDim.new(0, 12)
 						}),
-						NetworkLabel = reactModule.createElement("TextLabel", {
+						NetworkLabel = ReactModule.createElement("TextLabel", {
 							LayoutOrder = -1,
 							BackgroundTransparency = 1,
 							RichText = true,
 							ZIndex = 0,
-							Font = if foundationFontFaceMigration then nil else font.Body.Font,
-							FontFace = if foundationFontFaceMigration then normalizeFontFace(var19.Tokens.Typography.BodyLarge.Font) else nil,
-							Text = var16.VisibleTo,
-							TextSize = var20,
-							TextColor3 = theme.TextDefault.Color,
+							Font = if FoundationFontFaceMigration then nil else UseStyleResultFont.Body.Font,
+							FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font) else nil,
+							Text = UseLocalizationResult.VisibleTo,
+							TextSize = ScaledBaseSize,
+							TextColor3 = Theme.TextDefault.Color,
 							AutomaticSize = Enum.AutomaticSize.XY
 						}),
-						Dropdown = reactModule.createElement(dropdownMenu, {
+						Dropdown = ReactModule.createElement(DropdownMenu, {
 							dropdownMenuListPositionFixed = true,
 							showDropShadow = true,
-							placeholder = var16[var11],
-							onChange = var22,
-							screenSize = Vector2.new(math.clamp(var21.X - 48, 272, 400) - 48, 640),
-							height = UDim.new(0, var20 + 20),
+							placeholder = UseLocalizationResult[UseStateResult6],
+							onChange = UseResult,
+							screenSize = Vector2.new(math.clamp(UseScreenSizeResult.X - 48, 272, 400) - 48, 640),
+							height = UDim.new(0, ScaledBaseSize + 20),
 							cellDatas = {
 								{
-									text = var16.AllUsers,
-									key = constantsModule.VisibilitySettings.AllUsers
+									text = UseLocalizationResult.AllUsers,
+									key = ConstantsModule.VisibilitySettings.AllUsers
 								},
 								{
-									text = var16.FriendsFollowingAndFollowers,
-									key = constantsModule.VisibilitySettings.FriendsFollowingAndFollowers
+									text = UseLocalizationResult.FriendsFollowingAndFollowers,
+									key = ConstantsModule.VisibilitySettings.FriendsFollowingAndFollowers
 								},
 								{
-									text = var16.FriendsAndFollowing,
-									key = constantsModule.VisibilitySettings.FriendsAndFollowing
+									text = UseLocalizationResult.FriendsAndFollowing,
+									key = ConstantsModule.VisibilitySettings.FriendsAndFollowing
 								},
 								{
-									text = var16.Friends,
-									key = constantsModule.VisibilitySettings.Friends
+									text = UseLocalizationResult.Friends,
+									key = ConstantsModule.VisibilitySettings.Friends
 								},
 								{
-									text = var16.NoOne,
-									key = constantsModule.VisibilitySettings.NoOne
+									text = UseLocalizationResult.NoOne,
+									key = ConstantsModule.VisibilitySettings.NoOne
 								}
 							},
-							defaultKey = var11
+							defaultKey = UseStateResult6
 						})
 					})
 				})
@@ -358,15 +361,18 @@ return function(p1)
 				marginBetween = 6,
 				buttons = {
 					{
-						buttonType = buttonType.Secondary,
+						buttonType = ButtonType.Secondary,
 						props = {
 							onActivated = p1.cancelOnActivated,
-							text = var16.cancelButtonText
+							text = UseLocalizationResult.cancelButtonText
 						}
 					},
 					{
-						buttonType = buttonType.PrimarySystem,
-						props = { onActivated = onSave, text = var16.saveButtonText }
+						buttonType = ButtonType.PrimarySystem,
+						props = {
+							onActivated = onSave,
+							text = UseLocalizationResult.saveButtonText
+						}
 					}
 				},
 				forcedFillDirection = Enum.FillDirection.Horizontal

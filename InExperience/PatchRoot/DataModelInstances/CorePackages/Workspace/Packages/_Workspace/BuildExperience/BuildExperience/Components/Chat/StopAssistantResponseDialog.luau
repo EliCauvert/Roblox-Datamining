@@ -1,87 +1,86 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-local foundationModule = require(parent.Foundation)
-local inputHandlersModule = require(parent.InputHandlers)
-local reactModule = require(parent.React)
-local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local dialog = foundationModule.Dialog
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local dialogSize = foundationModule.Enums.DialogSize
-local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
-local focusNavigationEventNameEnum = focusNavigationUtilsModule.FocusNavigationEventNameEnum
-local useFocusRoot = focusNavigationUtilsModule.useFocusRoot
-local useDefaultFocusBehavior = reactFocusNavigationModule.useDefaultFocusBehavior
-local t = {
-	[Enum.KeyCode.ButtonB] = focusNavigationEventNameEnum.NavigateBack,
-	[Enum.KeyCode.Escape] = focusNavigationEventNameEnum.NavigateBack
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
+local FoundationModule = require(Parent.Foundation)
+local InputHandlersModule = require(Parent.InputHandlers)
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
+local Dialog = FoundationModule.Dialog
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local DialogSize = FoundationModule.Enums.DialogSize
+local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
+local FocusNavigationEventNameEnum = FocusNavigationUtilsModule.FocusNavigationEventNameEnum
+local UseFocusRootFunction = FocusNavigationUtilsModule.useFocusRoot
+local UseDefaultFocusBehaviorFunction = require(Parent.ReactFocusNavigation).useDefaultFocusBehavior
+local EventMap = {
+	[Enum.KeyCode.ButtonB] = FocusNavigationEventNameEnum.NavigateBack,
+	[Enum.KeyCode.Escape] = FocusNavigationEventNameEnum.NavigateBack
 }
 
-return function(p1)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), reactModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), useFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), t (ref), useDefaultFocusBehavior (ref), buttonVariant (ref), dialog (ref), dialogSize (ref)
-	local var1 = useLocalization({
-		cancel = localizationStringsModule.CHAT_STOP_CONFIRMATION_CANCEL,
-		description = localizationStringsModule.CHAT_STOP_CONFIRMATION_DESCRIPTION,
-		stop = localizationStringsModule.CHAT_STOP_CONFIRMATION_ACTION,
-		title = localizationStringsModule.CHAT_STOP_CONFIRMATION_TITLE
+return function(p1) --[[ Line: 32 | Named "StopAssistantResponseDialog" ]]
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), EventMap (copy), UseDefaultFocusBehaviorFunction (copy), ButtonVariant (copy), Dialog (copy), DialogSize (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
+		cancel = LocalizationStringsModule.CHAT_STOP_CONFIRMATION_CANCEL,
+		description = LocalizationStringsModule.CHAT_STOP_CONFIRMATION_DESCRIPTION,
+		stop = LocalizationStringsModule.CHAT_STOP_CONFIRMATION_ACTION,
+		title = LocalizationStringsModule.CHAT_STOP_CONFIRMATION_TITLE
 	})
-	local onCancel = p1.onCancel
-	local var2, var3 = useDefaultFocusBehavior(useFocusRoot({
+	local OnCancelFunction = p1.onCancel
+	local UseDefaultFocusBehaviorResult, UseDefaultFocusBehaviorResult2 = UseDefaultFocusBehaviorFunction((UseFocusRootFunction({
 		isAutoFocusRoot = true,
 		shouldRestoreFocus = false,
-		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.PopUp,
-		eventMap = t,
-		eventHandlers = reactModule.useMemo(function()
-			-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), onCancel (ref)
+		surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.PopUp,
+		eventMap = EventMap,
+		eventHandlers = ReactModule.useMemo(function() --[[ Line: 40 ]]
+			-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), OnCancelFunction (copy)
 			return {
-				[focusNavigationEventNameEnum.NavigateBack] = {
-					handler = inputHandlersModule.onRelease(function(p2)
-						-- upvalues: onCancel (copy)
-						onCancel()
+				[FocusNavigationEventNameEnum.NavigateBack] = {
+					handler = InputHandlersModule.onRelease(function(p2) --[[ Line: 44 ]]
+						-- upvalues: OnCancelFunction (upval)
+						OnCancelFunction()
 						p2:cancel()
 					end)
 				}
 			}
-		end, { onCancel })
-	}))
+		end, { OnCancelFunction })
+	})))
 	
-	return reactModule.createElement(dialog.Root, {
+	return ReactModule.createElement(Dialog.Root, {
 		disablePortal = false,
 		hasBackdrop = true,
 		testId = "stop-assistant-response-dialog",
-		ref = var3,
-		size = dialogSize.Small
+		ref = UseDefaultFocusBehaviorResult2,
+		size = DialogSize.Small
 	}, {
-		Title = reactModule.createElement(dialog.Title, { LayoutOrder = 1, text = var1.title }),
-		Content = reactModule.createElement(dialog.Content, { LayoutOrder = 2 }, {
-			Description = reactModule.createElement(dialog.Text, { Text = var1.description })
+		Title = ReactModule.createElement(Dialog.Title, { LayoutOrder = 1, text = UseLocalizationResult.title }),
+		Content = ReactModule.createElement(Dialog.Content, { LayoutOrder = 2 }, {
+			Description = ReactModule.createElement(Dialog.Text, { Text = UseLocalizationResult.description })
 		}),
-		Actions = reactModule.createElement(dialog.Actions, reactModule.useMemo(function()
-			-- upvalues: var1 (ref), buttonVariant (copy), p1 (ref), onCancel (ref), var2 (ref)
+		Actions = ReactModule.createElement(Dialog.Actions, (ReactModule.useMemo(function() --[[ Line: 62 ]]
+			-- upvalues: UseLocalizationResult (copy), ButtonVariant (upval), p1 (copy), OnCancelFunction (copy), UseDefaultFocusBehaviorResult (copy)
 			return {
 				LayoutOrder = 3,
 				actions = {
 					{
-						text = var1.stop,
-						variant = buttonVariant.Alert,
+						text = UseLocalizationResult.stop,
+						variant = ButtonVariant.Alert,
 						onActivated = p1.onConfirm
 					},
 					{
-						text = var1.cancel,
-						variant = buttonVariant.Standard,
-						onActivated = onCancel,
-						ref = var2
+						text = UseLocalizationResult.cancel,
+						variant = ButtonVariant.Standard,
+						onActivated = OnCancelFunction,
+						ref = UseDefaultFocusBehaviorResult
 					}
 				}
 			}
 		end, {
-			var1.cancel,
-			var1.stop,
-			onCancel,
+			UseLocalizationResult.cancel,
+			UseLocalizationResult.stop,
+			OnCancelFunction,
 			p1.onConfirm,
-			var2
-		}))
+			UseDefaultFocusBehaviorResult
+		})))
 	})
 end

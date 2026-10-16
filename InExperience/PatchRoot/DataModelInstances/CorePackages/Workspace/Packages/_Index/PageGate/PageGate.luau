@@ -1,9 +1,9 @@
-﻿local pageGateModule = require(script.PageGate)
+﻿local PageGateModule = require(script.PageGate)
 
 return {
-	FFlagEnablePLTPrefetchCallbacks = pageGateModule.FFlagEnablePLTPrefetchCallbacks,
-	Page = pageGateModule.Page,
-	Milestone = pageGateModule.Milestone,
-	signal = pageGateModule.signal,
+	FFlagEnablePLTPrefetchCallbacks = PageGateModule.FFlagEnablePLTPrefetchCallbacks,
+	Page = PageGateModule.Page,
+	Milestone = PageGateModule.Milestone,
+	signal = PageGateModule.signal,
 	["jest.config"] = script["jest.config"]
 }

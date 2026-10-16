@@ -1,163 +1,110 @@
-﻿local socialCarousel = script:FindFirstAncestor("SocialCarousel")
-local parent = socialCarousel.Parent
-local socialCommonModule = require(parent.SocialCommon)
-local reactModule = require(parent.React)
-local cryoModule = require(parent.Cryo)
-local roactUtilsModule = require(parent.RoactUtils)
-local dataHydrationModule = require(parent.DataHydration)
-local signalsModule = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local getDeepValueModule = require(socialCarousel.Utils.getDeepValue)
-local constantsModule = require(socialCarousel.Common.Constants)
-local recommendationSourceEnum = socialCommonModule.Enums.RecommendationSourceEnum
-local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
-local friendsRecommendationsModule = require(parent.DataHydration.FriendsRecommendations)
-local friendsRecommendationsStore = friendsRecommendationsModule.FriendsRecommendationsStore
-local dataSource = friendsRecommendationsModule.Enums.DataSource
-local fFlagMigrateFriendshipStatusesSocialCarouselModule = require(socialCarousel.Flags.FFlagMigrateFriendshipStatusesSocialCarousel)
-local fFlagSocialCarouselMigrateRecommendations = require(parent.SharedFlags).FFlagSocialCarouselMigrateRecommendations
-local var1 = if fFlagMigrateFriendshipStatusesSocialCarouselModule then dataHydrationModule.Friends.FriendsStore.get() else nil
-local t = { skipFetch = true }
+﻿local SocialCarousel = script:FindFirstAncestor("SocialCarousel")
+local Parent = SocialCarousel.Parent
+local ReactModule = require(Parent.React)
+local CryoModule = require(Parent.Cryo)
+local DataHydrationModule = require(Parent.DataHydration)
+local SignalsModule = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
+local GetDeepValueModule = require(SocialCarousel.Utils.getDeepValue)
+local ConstantsModule = require(SocialCarousel.Common.Constants)
+local RecommendationSourceEnum = require(Parent.SocialCommon).Enums.RecommendationSourceEnum
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local FriendsRecommendationsModule = require(Parent.DataHydration.FriendsRecommendations)
+local FriendsRecommendationsStore = FriendsRecommendationsModule.FriendsRecommendationsStore
+local DataSource = FriendsRecommendationsModule.Enums.DataSource
+local FFlagMigrateFriendshipStatusesSocialCarouselModule = require(SocialCarousel.Flags.FFlagMigrateFriendshipStatusesSocialCarousel)
+local FFlagSocialCarouselMigrateRecommendations = require(Parent.SharedFlags).FFlagSocialCarouselMigrateRecommendations
+local GetResult = if FFlagMigrateFriendshipStatusesSocialCarouselModule then DataHydrationModule.Friends.FriendsStore.get() else nil
+local config = { skipFetch = true }
 
-local var2 = function(p1, p2)
+local function v17(p1, p2): boolean --[[ Line: 46 ]]
 	return p1.rank < p2.rank
 end
 
-return function(p1)
-	-- upvalues: useSelector (ref), fFlagSocialCarouselMigrateRecommendations (ref), getDeepValueModule (ref), constantsModule (ref), fFlagMigrateFriendshipStatusesSocialCarouselModule (ref), recommendationSourceEnum (ref), reactModule (ref), cryoModule (ref), signalsModule (ref), var1 (ref), t (ref), signalsReactModule (ref), friendsRecommendationsStore (ref), dataSource (ref), var2 (ref)
-	local var3 = useSelector(function(p2)
-		-- upvalues: fFlagSocialCarouselMigrateRecommendations (copy), getDeepValueModule (copy), constantsModule (copy), p1 (ref), fFlagMigrateFriendshipStatusesSocialCarouselModule (copy), recommendationSourceEnum (copy)
+return function(p1) --[[ Line: 50 ]]
+	-- upvalues: UseSelectorFunction (copy), FFlagSocialCarouselMigrateRecommendations (copy), GetDeepValueModule (copy), ConstantsModule (copy), FFlagMigrateFriendshipStatusesSocialCarouselModule (copy), RecommendationSourceEnum (copy), ReactModule (copy), CryoModule (copy), SignalsModule (copy), GetResult (copy), config (copy), SignalsReactModule (copy), FriendsRecommendationsStore (copy), DataSource (copy), v17 (copy)
+	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 51 ]]
+		-- upvalues: FFlagSocialCarouselMigrateRecommendations (upval), GetDeepValueModule (upval), ConstantsModule (upval), p1 (copy), FFlagMigrateFriendshipStatusesSocialCarouselModule (upval), RecommendationSourceEnum (upval)
 		return {
-			recommendationsDict = if fFlagSocialCarouselMigrateRecommendations then nil else getDeepValueModule(p2, string.format("%s.Friends.recommendations.byUserId.%s", constantsModule.RODUX_KEY, p1 or "")) or {},
-			friendshipStatus = if fFlagMigrateFriendshipStatusesSocialCarouselModule then nil else getDeepValueModule(p2, string.format("%s.Friends.friendshipStatus", constantsModule.RODUX_KEY)) or {},
-			friendsCarouselRecommendationIds = if fFlagSocialCarouselMigrateRecommendations then nil else getDeepValueModule(p2, string.format("%s.Friends.recommendations.bySource.%s", constantsModule.RODUX_KEY, recommendationSourceEnum.HomepageFriendsCarousel)) or {},
-			hasIncomingFriendRequest = if fFlagSocialCarouselMigrateRecommendations then nil else getDeepValueModule(p2, string.format("%s.Friends.recommendations.hasIncomingFriendRequest", constantsModule.RODUX_KEY))
+			recommendationsDict = if FFlagSocialCarouselMigrateRecommendations then nil else GetDeepValueModule(p2, string.format("%s.Friends.recommendations.byUserId.%s", ConstantsModule.RODUX_KEY, p1 or "")) or {},
+			friendshipStatus = if FFlagMigrateFriendshipStatusesSocialCarouselModule then nil else GetDeepValueModule(p2, string.format("%s.Friends.friendshipStatus", ConstantsModule.RODUX_KEY)) or {},
+			friendsCarouselRecommendationIds = if FFlagSocialCarouselMigrateRecommendations then nil else GetDeepValueModule(p2, string.format("%s.Friends.recommendations.bySource.%s", ConstantsModule.RODUX_KEY, RecommendationSourceEnum.HomepageFriendsCarousel)) or {},
+			hasIncomingFriendRequest = if FFlagSocialCarouselMigrateRecommendations then nil else GetDeepValueModule(p2, string.format("%s.Friends.recommendations.hasIncomingFriendRequest", ConstantsModule.RODUX_KEY))
 		}
 	end)
-	local var4 = if fFlagSocialCarouselMigrateRecommendations then nil else reactModule.useMemo(function()
-		-- upvalues: cryoModule (copy), var3 (ref)
-		return cryoModule.List.filter(cryoModule.Dictionary.keys(var3.recommendationsDict), function(p2)
-			-- upvalues: var3 (copy)
-			return var3.friendsCarouselRecommendationIds[p2]
+	local UseMemoResult = if FFlagSocialCarouselMigrateRecommendations then nil else ReactModule.useMemo(function() --[[ Line: 83 ]]
+		-- upvalues: CryoModule (upval), UseSelectorResult (copy)
+		return CryoModule.List.filter(CryoModule.Dictionary.keys(UseSelectorResult.recommendationsDict), function(p2) --[[ Line: 84 ]]
+			-- upvalues: UseSelectorResult (upval)
+			return UseSelectorResult.friendsCarouselRecommendationIds[p2]
 		end)
 	end, {
-		var3.recommendationsDict,
-		var3.friendsCarouselRecommendationIds
+		UseSelectorResult.recommendationsDict,
+		UseSelectorResult.friendsCarouselRecommendationIds
 	})
-	local var5 = if fFlagMigrateFriendshipStatusesSocialCarouselModule and not fFlagSocialCarouselMigrateRecommendations then signalsReactModule.useSignalState(if fFlagMigrateFriendshipStatusesSocialCarouselModule and not fFlagSocialCarouselMigrateRecommendations then reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), var4 (ref), var1 (copy), t (copy)
-		return signalsModule.createComputed(function(p2)
-			-- upvalues: var4 (copy), var1 (copy), t (copy)
-			local t_1 = {}
+	local UseMemoResult1 = if FFlagMigrateFriendshipStatusesSocialCarouselModule and not FFlagSocialCarouselMigrateRecommendations then ReactModule.useMemo(function() --[[ Line: 94 ]]
+		-- upvalues: SignalsModule (upval), UseMemoResult (copy), GetResult (upval), config (upval)
+		return SignalsModule.createComputed(function(p2) --[[ Line: 95 ]]
+			-- upvalues: UseMemoResult (upval), GetResult (upval), config (upval)
+			local DataResults = {}
 			
-			for i, v in var4 do
-				local friendshipStatus = var1.GetFriendshipStatus(v, t)
-				t_1[v] = if friendshipStatus then friendshipStatus.data(p2) else nil
+			for _, value in UseMemoResult do
+				local FriendshipStatus = GetResult.GetFriendshipStatus(value, config)
+				DataResults[value] = if FriendshipStatus then FriendshipStatus.data(p2) else nil
 			end
-			return t_1
+			return DataResults
 		end)
-	end, { table.concat(var4, ",") }) else nil) else nil
-	local var6 = if fFlagSocialCarouselMigrateRecommendations then nil else reactModule.useCallback(function(p2)
-		-- upvalues: var3 (ref), fFlagMigrateFriendshipStatusesSocialCarouselModule (copy), var5 (write), cryoModule (copy)
-		local var7
-		local var8 = var3.recommendationsDict[p2]
-		local var9 = if fFlagMigrateFriendshipStatusesSocialCarouselModule then var5 and var5[p2] else var3.friendshipStatus[p2]
-		local join = cryoModule.Dictionary.join
-		local t = {}
-		local t_1 = {}
+	end, { table.concat(UseMemoResult, ",") }) else nil
+	local UseSignalStateResult = if FFlagMigrateFriendshipStatusesSocialCarouselModule and not FFlagSocialCarouselMigrateRecommendations then SignalsReactModule.useSignalState(UseMemoResult1) else nil
+	local UseResult = if FFlagSocialCarouselMigrateRecommendations then nil else ReactModule.useCallback(function(p2) --[[ Line: 116 ]]
+		-- upvalues: UseSelectorResult (copy), FFlagMigrateFriendshipStatusesSocialCarouselModule (upval), UseSignalStateResult (ref), CryoModule (upval)
+		local UseSignalStateResultEntry = if FFlagMigrateFriendshipStatusesSocialCarouselModule then UseSignalStateResult and UseSignalStateResult[p2] else UseSelectorResult.friendshipStatus[p2]
 		
-		if var9 then
-			var7 = var9 == Enum.FriendStatus.Friend
-			var7 = nil
-		else
-			var7 = false
-		end
-		local var10
-		t_1.isFriendWithUser = var7
-		
-		if var9 then
-			var10 = var9 == Enum.FriendStatus.FriendRequestSent
-			var10 = nil
-		else
-			var10 = false
-		end
-		local var11
-		t_1.hasPendingFriendRequest = var10
-		
-		if var9 then
-			var11 = var9 == Enum.FriendStatus.NotFriend
-			var11 = nil
-		else
-			var11 = true
-		end
-		t_1.canSendFriendRequest = var11
-		t_1.hasIncomingFriendRequest = var3.hasIncomingFriendRequest[p2]
-		
-		return join(t, var8, t_1)
+		return CryoModule.Dictionary.join({}, UseSelectorResult.recommendationsDict[p2], {
+			isFriendWithUser = if UseSignalStateResultEntry then UseSignalStateResultEntry == Enum.FriendStatus.Friend else false,
+			hasPendingFriendRequest = if UseSignalStateResultEntry then UseSignalStateResultEntry == Enum.FriendStatus.FriendRequestSent else false,
+			canSendFriendRequest = not UseSignalStateResultEntry or UseSignalStateResultEntry == Enum.FriendStatus.NotFriend,
+			hasIncomingFriendRequest = UseSelectorResult.hasIncomingFriendRequest[p2]
+		})
 	end, {
-		var3.recommendationsDict,
-		if fFlagMigrateFriendshipStatusesSocialCarouselModule then var5 else var3.friendshipStatus,
-		var3.hasIncomingFriendRequest
+		UseSelectorResult.recommendationsDict,
+		if FFlagMigrateFriendshipStatusesSocialCarouselModule then UseSignalStateResult else UseSelectorResult.friendshipStatus,
+		UseSelectorResult.hasIncomingFriendRequest
 	})
-	
-	return if fFlagSocialCarouselMigrateRecommendations then if fFlagSocialCarouselMigrateRecommendations then signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), friendsRecommendationsStore (copy), dataSource (copy), t (copy), cryoModule (copy), fFlagMigrateFriendshipStatusesSocialCarouselModule (copy), var1 (copy), var3 (ref)
-		return signalsModule.createComputed(function(p2)
-			-- upvalues: friendsRecommendationsStore (copy), dataSource (copy), t (copy), cryoModule (copy), fFlagMigrateFriendshipStatusesSocialCarouselModule (copy), var1 (copy), var3 (copy)
-			local var7 = friendsRecommendationsStore.get().getFriendsRecommendations(dataSource.HomepageFriendsCarousel, t).data(p2)
+	local UseSignalStateResult1 = if FFlagSocialCarouselMigrateRecommendations then SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 145 ]]
+		-- upvalues: SignalsModule (upval), FriendsRecommendationsStore (upval), DataSource (upval), config (upval), CryoModule (upval), FFlagMigrateFriendshipStatusesSocialCarouselModule (upval), GetResult (upval), UseSelectorResult (copy)
+		return SignalsModule.createComputed(function(p2) --[[ Line: 146 ]]
+			-- upvalues: FriendsRecommendationsStore (upval), DataSource (upval), config (upval), CryoModule (upval), FFlagMigrateFriendshipStatusesSocialCarouselModule (upval), GetResult (upval), UseSelectorResult (upval)
+			local DataResult = FriendsRecommendationsStore.get().getFriendsRecommendations(DataSource.HomepageFriendsCarousel, config).data(p2)
 			
-			return cryoModule.List.map(if var7 then var7.data else {}, function(p3)
-				-- upvalues: fFlagMigrateFriendshipStatusesSocialCarouselModule (copy), var1 (copy), t (copy), p2 (ref), var3 (copy)
-				local var8
-				local id = p3.id
-				local _ = nil
+			return CryoModule.List.map(DataResult and DataResult.data or {}, function(p3) --[[ Line: 152 ]]
+				-- upvalues: FFlagMigrateFriendshipStatusesSocialCarouselModule (upval), GetResult (upval), config (upval), p2 (copy), UseSelectorResult (upval)
+				local Id = p3.id
+				local DataResult = nil
 				
-				if fFlagMigrateFriendshipStatusesSocialCarouselModule then
-					local friendshipStatus = var1.GetFriendshipStatus(id, t)
-					var8 = if friendshipStatus then friendshipStatus.data(p2) else nil
+				if FFlagMigrateFriendshipStatusesSocialCarouselModule then
+					local FriendshipStatus = GetResult.GetFriendshipStatus(Id, config)
+					DataResult = if FriendshipStatus then FriendshipStatus.data(p2) else nil
 				else
-					var8 = var3.friendshipStatus[id]
+					DataResult = UseSelectorResult.friendshipStatus[Id]
 				end
-				local var9
-				local t_1 = {
-					id = id,
+				return {
+					id = Id,
 					mutualFriendsCount = p3.contextProps.mutualFriendsCount,
 					contextType = p3.contextProps.contextType,
 					rank = p3.rank,
-					hasIncomingFriendRequest = p3.hasIncomingFriendRequest
+					hasIncomingFriendRequest = p3.hasIncomingFriendRequest,
+					isFriendWithUser = if DataResult then DataResult == Enum.FriendStatus.Friend else false,
+					hasPendingFriendRequest = if DataResult then DataResult == Enum.FriendStatus.FriendRequestSent else false,
+					canSendFriendRequest = not DataResult or DataResult == Enum.FriendStatus.NotFriend
 				}
-				
-				if var8 then
-					var9 = var8 == Enum.FriendStatus.Friend
-					var9 = nil
-				else
-					var9 = false
-				end
-				local var10
-				t_1.isFriendWithUser = var9
-				
-				if var8 then
-					var10 = var8 == Enum.FriendStatus.FriendRequestSent
-					var10 = nil
-				else
-					var10 = false
-				end
-				local var11
-				t_1.hasPendingFriendRequest = var10
-				
-				if var8 then
-					var11 = var8 == Enum.FriendStatus.NotFriend
-					var11 = nil
-				else
-					var11 = true
-				end
-				t_1.canSendFriendRequest = var11
-				
-				return t_1
 			end)
 		end)
-	end, if fFlagMigrateFriendshipStatusesSocialCarouselModule then {} else { var3.friendshipStatus })) else nil elseif fFlagSocialCarouselMigrateRecommendations then nil else reactModule.useMemo(function()
-		-- upvalues: cryoModule (copy), var4 (ref), var6 (ref), var2 (copy)
-		return cryoModule.List.sort(cryoModule.List.map(var4, var6), var2)
-	end, { var4, var6 })
+	end, if FFlagMigrateFriendshipStatusesSocialCarouselModule then {} else { UseSelectorResult.friendshipStatus }))) else nil
+	local UseMemoResult2 = if FFlagSocialCarouselMigrateRecommendations then nil else ReactModule.useMemo(function() --[[ Line: 189 ]]
+		-- upvalues: CryoModule (upval), UseMemoResult (copy), UseResult (copy), v17 (upval)
+		return CryoModule.List.sort(CryoModule.List.map(UseMemoResult, UseResult), v17)
+	end, { UseMemoResult, UseResult })
+	
+	return if FFlagSocialCarouselMigrateRecommendations then UseSignalStateResult1 else UseMemoResult2
 end

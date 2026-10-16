@@ -1,63 +1,61 @@
-﻿local t = {}
-local t_1 = {}
-t_1.__index = t_1
-local clientChatModules = game:GetService("Chat"):WaitForChild("ClientChatModules")
-local commandModules = clientChatModules:WaitForChild("CommandModules")
-local utilModule = require(commandModules:WaitForChild("Util"))
+﻿local Module = {}
+Module.__index = Module
+local ClientChatModules = game:GetService("Chat"):WaitForChild("ClientChatModules")
+local CommandModules = ClientChatModules:WaitForChild("CommandModules")
+local UtilModule = require(CommandModules:WaitForChild("Util"))
 local _ = script.Parent
-local chatSettingsModule = require(clientChatModules:WaitForChild("ChatSettings"))
+local ChatSettingsModule = require(ClientChatModules:WaitForChild("ChatSettings"))
 
-function t_1.SetupCommandProcessors(value)
-	-- upvalues: commandModules (ref), utilModule (ref)
-	local children = commandModules:GetChildren()
+function Module.SetupCommandProcessors(p1) --[[ Line: 19 ]]
+	-- upvalues: CommandModules (copy), UtilModule (copy)
+	local Children = CommandModules:GetChildren()
 	
-	for i = 1, #children do
-		if children[i]:IsA("ModuleScript") and children[i].Name ~= "Util" then
-			local unknownModule = require(children[i])
-			local KEY_COMMAND_PROCESSOR_TYPE = unknownModule[utilModule.KEY_COMMAND_PROCESSOR_TYPE]
-			local KEY_PROCESSOR_FUNCTION = unknownModule[utilModule.KEY_PROCESSOR_FUNCTION]
+	for i = 1, #Children do
+		if Children[i]:IsA("ModuleScript") and Children[i].Name ~= "Util" then
+			local Module = require(Children[i])
+			local Entry = Module[UtilModule.KEY_COMMAND_PROCESSOR_TYPE]
+			local Entry1 = Module[UtilModule.KEY_PROCESSOR_FUNCTION]
 			
-			if KEY_COMMAND_PROCESSOR_TYPE == utilModule.IN_PROGRESS_MESSAGE_PROCESSOR then
-				table.insert(value.InProgressMessageProcessors, KEY_PROCESSOR_FUNCTION)
-			elseif KEY_COMMAND_PROCESSOR_TYPE == utilModule.COMPLETED_MESSAGE_PROCESSOR then
-				table.insert(value.CompletedMessageProcessors, KEY_PROCESSOR_FUNCTION)
+			if Entry == UtilModule.IN_PROGRESS_MESSAGE_PROCESSOR then
+				table.insert(p1.InProgressMessageProcessors, Entry1)
+			elseif Entry == UtilModule.COMPLETED_MESSAGE_PROCESSOR then
+				table.insert(p1.CompletedMessageProcessors, Entry1)
 			end
 		end
 	end
 end
 
-function t_1.ProcessCompletedChatMessage(p1, p2, p3)
-	-- upvalues: chatSettingsModule (ref)
-	for i = 1, #p1.CompletedMessageProcessors do
-		if not p1.CompletedMessageProcessors[i](p2, p3, chatSettingsModule) then
-			continue
+function Module.ProcessCompletedChatMessage(p2, p3, p4): boolean --[[ Line: 37 ]]
+	-- upvalues: ChatSettingsModule (copy)
+	for i = 1, #p2.CompletedMessageProcessors do
+		if p2.CompletedMessageProcessors[i](p3, p4, ChatSettingsModule) then
+			return true
 		end
-		return true
 	end
 	return false
 end
 
-function t_1.ProcessInProgressChatMessage(p4, p5, p6, p7)
-	-- upvalues: chatSettingsModule (ref)
-	for i = 1, #p4.InProgressMessageProcessors do
-		local var1 = p4.InProgressMessageProcessors[i](p5, p6, p7, chatSettingsModule)
+function Module.ProcessInProgressChatMessage(p5, p6, p7, p8) --[[ Line: 47 ]]
+	-- upvalues: ChatSettingsModule (copy)
+	local v1 = nil
+	for i = 1, #p5.InProgressMessageProcessors do
+		v1 = p5.InProgressMessageProcessors[i](p6, p7, p8, ChatSettingsModule)
 		
-		if not var1 then
-			continue
+		if v1 then
+			return v1
 		end
-		return var1
 	end
 	return nil
 end
 
-function t.new()
-	-- upvalues: t_1 (ref)
-	local tbl = setmetatable({}, t_1)
-	tbl.CompletedMessageProcessors = {}
-	tbl.InProgressMessageProcessors = {}
-	tbl:SetupCommandProcessors()
-	
-	return tbl
-end
-
-return t
+return {
+	new = function() --[[ Line: 60 ]]
+		-- upvalues: Module (copy)
+		local self = setmetatable({}, Module)
+		self.CompletedMessageProcessors = {}
+		self.InProgressMessageProcessors = {}
+		self:SetupCommandProcessors()
+		
+		return self
+	end
+}

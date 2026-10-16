@@ -1,74 +1,72 @@
-﻿local t = {}
-t.__index = t
+﻿local TreeViewItemModule = {}
+TreeViewItemModule.__index = TreeViewItemModule
 
-function t.new(p1, p2)
-	-- upvalues: t (ref)
-	local t_1 = {}
-	setmetatable(t_1, t)
-	t_1._id = p1
-	t_1._parent = p2
-	t_1._children = {}
+function TreeViewItemModule.new(_id, _parent) --[[ Line: 19 ]]
+	-- upvalues: TreeViewItemModule (copy)
+	local t = {}
+	setmetatable(t, TreeViewItemModule)
+	t._id = _id
+	t._parent = _parent
+	t._children = {}
 	
-	return t_1
+	return t
 end
 
-function t:getValue()
+function TreeViewItemModule:getValue() --[[ Line: 29 ]]
 	return self._value
 end
 
-function t:getLabel()
+function TreeViewItemModule:getLabel() --[[ Line: 33 ]]
 	return self._label
 end
 
-function t:getChildren()
+function TreeViewItemModule:getChildren() --[[ Line: 37 ]]
 	return self._children
 end
 
-function t:getId()
+function TreeViewItemModule:getId() --[[ Line: 41 ]]
 	return self._id
 end
 
-function t:getStackDepth()
-	return if self._parent == nil then 0 else 1 + self._parent:getStackDepth()
+function TreeViewItemModule.getStackDepth(p1): number --[[ Line: 45 ]]
+	return if p1._parent == nil then 0 else 1 + p1._parent:getStackDepth()
 end
 
-function t:setLabelAndValue(p1, p2)
-	self._label = p1
-	self._value = p2
+function TreeViewItemModule:setLabelAndValue(_label, _value) --[[ Line: 53 ]]
+	self._label = _label
+	self._value = _value
 end
 
-function t:getOrMakeChildById(p1)
-	-- upvalues: t (ref)
-	for i, v in ipairs(self._children) do
-		if v:getId() == p1 then
-			return v
+function TreeViewItemModule:getOrMakeChildById(Id) --[[ Line: 58 ]]
+	-- upvalues: TreeViewItemModule (copy)
+	for _, child in ipairs(self._children) do
+		if child:getId() == Id then
+			return child
 		end
 	end
-	local var1 = t.new(p1, self)
-	table.insert(self._children, var1)
+	local NewTreeViewItem = TreeViewItemModule.new(Id, self)
+	table.insert(self._children, NewTreeViewItem)
 	
-	return var1
+	return NewTreeViewItem
 end
 
-function t:removeChildren()
+function TreeViewItemModule:removeChildren() --[[ Line: 70 ]]
 	if not self._children then return end
-	for i, v in ipairs(self._children) do
-		v:removeChildren()
-		v = nil
+	for _, child in ipairs(self._children) do
+		child:removeChildren()
 	end
 	self._id = nil
 	self._parent = nil
 	self._children = nil
 end
 
-function t:removeChild(p2)
-	for i, v in ipairs(self._children) do
-		if v:getId() == p2 then
-			v:removeChildren()
-			
-			return
+function TreeViewItemModule.removeChild(p1, Id) --[[ Line: 82 ]]
+	for _, child in ipairs(p1._children) do
+		if child:getId() == Id then
+			child:removeChildren()
+			break
 		end
 	end
 end
 
-return t
+return TreeViewItemModule

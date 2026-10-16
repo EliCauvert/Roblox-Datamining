@@ -1,37 +1,37 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local momentsCommonModule = require(parent.MomentsCommon)
-local signalsReactModule = require(parent.SignalsReact)
-local sharedFlagsModule = require(parent.SharedFlags)
-local momentContextModule = require(script.Parent.Parent.Parent.MomentContext)
-local fFlagMomentsEngagementMetricsFeature = momentsCommonModule.Flags.FFlagMomentsEngagementMetricsFeature
-local creatorAttributionModule = require(script.Parent.CreatorAttribution)
-local debugInfoModule = require(script.Parent.DebugInfo)
-local descriptionModule = require(script.Parent.Description)
-local reactionsModule = require(script.Parent.Reactions)
-local statusChipModule = require(script.Parent.StatusChip)
-local useMomentsSession = require(moments.Stores.GetMomentsStore.MomentsSessionContext).useMomentsSession
-local view = foundationModule.View
-local getMomentsCapabilities = momentsCommonModule.Stores.GetMomentsCapabilities
-local useSignalState = signalsReactModule.useSignalState
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
+local ReactModule = require(Parent.React)
+local MomentsCommonModule = require(Parent.MomentsCommon)
+local _ = require(Parent.MomentsTypes)
+local MomentContextModule = require(script.Parent.Parent.Parent.MomentContext)
+local FFlagMomentsEngagementMetricsFeature = MomentsCommonModule.Flags.FFlagMomentsEngagementMetricsFeature
+local FFlagMomentsServeEDPVideos = require(Parent.SharedFlags).FFlagMomentsServeEDPVideos
+local CreatorAttributionModule = require(script.Parent.CreatorAttribution)
+local DebugInfoModule = require(script.Parent.DebugInfo)
+local DescriptionModule = require(script.Parent.Description)
+local ReactionsModule = require(script.Parent.Reactions)
+local StatusChipModule = require(script.Parent.StatusChip)
+local UseMomentsSessionFunction = require(Moments.Stores.GetMomentsStore.MomentsSessionContext).useMomentsSession
+local View = require(Parent.Foundation).View
+local GetMomentsCapabilitiesFunction = MomentsCommonModule.Stores.GetMomentsCapabilities
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 
-return reactModule.memo(function(p1)
-	-- upvalues: momentContextModule (ref), useSignalState (ref), fFlagMomentsEngagementMetricsFeature (ref), sharedFlagsModule (ref), getMomentsCapabilities (ref), useMomentsSession (ref), reactModule (ref), debugInfoModule (ref), creatorAttributionModule (ref), descriptionModule (ref), reactionsModule (ref), statusChipModule (ref), view (ref)
-	local isExperience = useSignalState(momentContextModule.useMoment().store.getData).kind == "experience"
-	local var1 = if fFlagMomentsEngagementMetricsFeature and sharedFlagsModule.FFlagGuacMomentsFeatureList then useSignalState(getMomentsCapabilities(false).getIsEngagementMetricsEnabled) else nil
+return ReactModule.memo(function(Frame) --[[ Line: 46 | Named "VideoInfo" ]]
+	-- upvalues: MomentContextModule (copy), UseSignalStateFunction (copy), FFlagMomentsServeEDPVideos (copy), FFlagMomentsEngagementMetricsFeature (copy), GetMomentsCapabilitiesFunction (copy), UseMomentsSessionFunction (copy), ReactModule (copy), DebugInfoModule (copy), CreatorAttributionModule (copy), DescriptionModule (copy), ReactionsModule (copy), StatusChipModule (copy), View (copy)
+	local IsExperience = UseSignalStateFunction(MomentContextModule.useMoment().store.getData).kind == "experience"
+	local IsEdpVideo = if FFlagMomentsServeEDPVideos then Frame.moment ~= nil and Frame.moment.entityType == "edpVideo" else nil
+	local UseSignalStateResult = if FFlagMomentsEngagementMetricsFeature then UseSignalStateFunction(GetMomentsCapabilitiesFunction(false).getIsEngagementMetricsEnabled) else nil
 	local t = {}
 	
-	if not useSignalState(useMomentsSession().getHideDetails) then
-		t.DebugInfo = reactModule.createElement(debugInfoModule, { LayoutOrder = 0 })
-		t.CreatorAttribution = if isExperience then reactModule.createElement(creatorAttributionModule, { LayoutOrder = 1 }) else nil
-		t.Description = reactModule.createElement(descriptionModule, { LayoutOrder = 2 })
-		t.Reactions = if isExperience and (not fFlagMomentsEngagementMetricsFeature or not sharedFlagsModule.FFlagGuacMomentsFeatureList or var1) then reactModule.createElement(reactionsModule, { LayoutOrder = 3 }) else nil
-		t.StatusChip = reactModule.createElement(statusChipModule, { LayoutOrder = 4 })
+	if not UseSignalStateFunction(UseMomentsSessionFunction().getHideDetails) then
+		t.DebugInfo = ReactModule.createElement(DebugInfoModule, { LayoutOrder = 0 })
+		t.CreatorAttribution = if IsExperience and (not FFlagMomentsServeEDPVideos or not IsEdpVideo) then ReactModule.createElement(CreatorAttributionModule, { LayoutOrder = 1 }) else nil
+		t.Description = ReactModule.createElement(DescriptionModule, { LayoutOrder = 2 })
+		t.Reactions = if IsExperience and (not FFlagMomentsEngagementMetricsFeature or UseSignalStateResult) then ReactModule.createElement(ReactionsModule, { LayoutOrder = 3 }) else nil
+		t.StatusChip = ReactModule.createElement(StatusChipModule, { LayoutOrder = 4 })
 	end
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "col align-x-left align-y-bottom grow gap-small auto-y",
-		LayoutOrder = p1.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder
 	}, t)
 end)

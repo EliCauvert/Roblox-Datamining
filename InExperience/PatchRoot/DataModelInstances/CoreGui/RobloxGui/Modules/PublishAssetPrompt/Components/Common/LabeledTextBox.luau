@@ -1,53 +1,52 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local reactModule = require(corePackagesService.Packages.React)
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local foundationModule = require(corePackagesService.Packages.Foundation)
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local cryoModule = require(corePackagesService.Packages.Cryo)
-local useStyle = UIBloxModule.Core.Style.useStyle
-local nameTextBoxModule = require(script.Parent.NameTextBox)
-local t = { textBoxHeight = 30, topPadding = 0 }
+﻿local CorePackages = game:GetService("CorePackages")
+local ReactModule = require(CorePackages.Packages.React)
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local CryoModule = require(CorePackages.Packages.Cryo)
+local UseStyleFunction = require(CorePackages.Packages.UIBlox).Core.Style.useStyle
+local NameTextBoxModule = require(script.Parent.NameTextBox)
+local config = { textBoxHeight = 30, topPadding = 0 }
 
-return function(p1)
-	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), reactModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), nameTextBoxModule (ref)
-	local var1 = cryoModule.Dictionary.join(t, p1)
-	local var2 = useStyle()
-	local font = var2.Font
-	local captionHeader = font.CaptionHeader
+return function(p1) --[[ Line: 46 | Named "LabeledTextBox" ]]
+	-- upvalues: CryoModule (copy), config (copy), UseStyleFunction (copy), ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), NameTextBoxModule (copy)
+	local JoinResult = CryoModule.Dictionary.join(config, p1)
+	local UseStyleResult = UseStyleFunction()
+	local UseStyleResultFont = UseStyleResult.Font
+	local CaptionHeader = UseStyleResultFont.CaptionHeader
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		Size = UDim2.new(1, 0, 0, 19 + var1.textBoxHeight + var1.topPadding),
-		LayoutOrder = var1.LayoutOrder
+		Size = UDim2.new(1, 0, 0, 19 + JoinResult.textBoxHeight + JoinResult.topPadding),
+		LayoutOrder = JoinResult.LayoutOrder
 	}, {
-		UIListLayout = reactModule.createElement("UIListLayout", {
+		UIListLayout = ReactModule.createElement("UIListLayout", {
 			HorizontalAlignment = Enum.HorizontalAlignment.Center,
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			FillDirection = Enum.FillDirection.Vertical,
 			Padding = UDim.new(0, 4)
 		}),
-		UIPadding = reactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, var1.topPadding) }),
-		TextboxLabel = reactModule.createElement("TextLabel", {
+		UIPadding = ReactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, JoinResult.topPadding) }),
+		TextboxLabel = ReactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 1,
 			Size = UDim2.new(1, 0, 0, 15),
-			Font = if foundationFontFaceMigration then nil else captionHeader.Font,
-			FontFace = if foundationFontFaceMigration then normalizeFontFace(var2.Tokens.Typography.CaptionLarge.Font) else nil,
-			Text = var1.labelText,
-			TextSize = font.BaseSize * captionHeader.RelativeSize,
-			TextColor3 = var2.Theme.TextDefault.Color,
+			Font = if FoundationFontFaceMigration then nil else CaptionHeader.Font,
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.CaptionLarge.Font) else nil,
+			Text = JoinResult.labelText,
+			TextSize = UseStyleResultFont.BaseSize * CaptionHeader.RelativeSize,
+			TextColor3 = UseStyleResult.Theme.TextDefault.Color,
 			TextXAlignment = Enum.TextXAlignment.Left
 		}),
-		Textbox = reactModule.createElement(nameTextBoxModule, {
+		Textbox = ReactModule.createElement(NameTextBoxModule, {
 			LayoutOrder = 2,
-			Size = UDim2.new(1, 0, 0, var1.textBoxHeight),
-			maxLength = var1.maxLength,
-			onNameUpdated = var1.onTextUpdated,
-			defaultName = var1.defaultText,
-			centerText = var1.centerText,
-			nameTextBoxRef = var1.textBoxRef,
-			invalidInputText = var1.invalidInputText
+			Size = UDim2.new(1, 0, 0, JoinResult.textBoxHeight),
+			maxLength = JoinResult.maxLength,
+			onNameUpdated = JoinResult.onTextUpdated,
+			defaultName = JoinResult.defaultText,
+			centerText = JoinResult.centerText,
+			nameTextBoxRef = JoinResult.textBoxRef,
+			invalidInputText = JoinResult.invalidInputText
 		})
 	})
 end

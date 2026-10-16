@@ -1,22 +1,22 @@
-﻿local dependenciesModule = require(script:FindFirstAncestor("FriendsCarousel").dependencies)
-local networkingFriends = dependenciesModule.NetworkingFriends
-local roduxFriends = dependenciesModule.RoduxFriends
-local llama = dependenciesModule.llama
-local recommendationSourceEnum = dependenciesModule.SocialCommon.Enums.RecommendationSourceEnum
+﻿local DependenciesModule = require(script:FindFirstAncestor("FriendsCarousel").dependencies)
+local NetworkingFriends = DependenciesModule.NetworkingFriends
+local RoduxFriends = DependenciesModule.RoduxFriends
+local Llama = DependenciesModule.llama
+local RecommendationSourceEnum = DependenciesModule.SocialCommon.Enums.RecommendationSourceEnum
 
-return function()
-	-- upvalues: networkingFriends (ref), llama (ref), roduxFriends (ref), recommendationSourceEnum (ref)
+return function() --[[ Line: 10 ]]
+	-- upvalues: NetworkingFriends (copy), Llama (copy), RoduxFriends (copy), RecommendationSourceEnum (copy)
 	return {
-		[networkingFriends.GetFriendRecommendationsFromUserId.Succeeded.name] = function(p1)
-			-- upvalues: llama (copy), roduxFriends (copy), recommendationSourceEnum (copy)
+		[NetworkingFriends.GetFriendRecommendationsFromUserId.Succeeded.name] = function(p1) --[[ Line: 12 ]]
+			-- upvalues: Llama (upval), RoduxFriends (upval), RecommendationSourceEnum (upval)
 			return {
 				p1,
-				roduxFriends.Actions.RecommendationSourceCreated({
-					source = recommendationSourceEnum.HomepageFriendsCarousel,
-					recommendationIds = llama.List.map(p1.responseBody.data or {}, function(p2)
+				(RoduxFriends.Actions.RecommendationSourceCreated({
+					source = RecommendationSourceEnum.HomepageFriendsCarousel,
+					recommendationIds = Llama.List.map(p1.responseBody.data or {}, function(p2) --[[ Line: 15 ]]
 						return p2.id
 					end)
-				})
+				}))
 			}
 		end
 	}

@@ -1,77 +1,79 @@
-﻿local parent = script.Parent.Parent
-local lib = parent.lib
-local src = parent.src
-local nocasetableModule = require(lib.nocasetable)
-local htmlModule = require(lib.html)
-local jsonModule = require(src.json)
-local cookiesModule = require(src.cookies)
-local list = { "text/html", "application/xhtml+xml" }
-local t = {}
-t.__index = t
+﻿local Parent = script.Parent.Parent
+local Lib = Parent.lib
+local Src = Parent.src
+local NocasetableModule = require(Lib.nocasetable)
+local HtmlModule = require(Lib.html)
+local JsonModule = require(Src.json)
+local CookiesModule = require(Src.cookies)
+local List = { "text/html", "application/xhtml+xml" }
+local ResponseModule = {}
+ResponseModule.__index = ResponseModule
 
-function t.new(p1, p2, p3)
-	-- upvalues: t (ref), nocasetableModule (ref), cookiesModule (ref)
-	local tbl = setmetatable({}, t)
-	tbl.request = p1
-	tbl.response_time = p3
-	tbl.timestamp = tbl.request.timestamp
-	tbl.url = p1.url
-	tbl.method = p1.method
-	tbl.code = p2.StatusCode
-	tbl.status_code = p2.StatusCode
-	tbl.success = p2.Success
-	tbl.ok = tbl.status_code >= 200 and tbl.status_code < 300
-	tbl.message = p2.StatusMessage
-	tbl.headers = nocasetableModule(p2.Headers)
-	tbl.content = p2.Body
-	tbl.text = p2.Body
-	tbl.headers["content-type"] = tbl.headers["content-type"] or "text/plain"
-	tbl.from_cache = false
-	local var1 = tbl.headers["content-type"]:split(";")
-	tbl.content_type = var1[1]:lower()
-	tbl.encoding = if var1[2] then var1[2]:split("=")[2] else ""
-	tbl.content_length = #tbl.text
-	tbl.cookies = cookiesModule.new()
+function ResponseModule.new(Request, p1, Response_time) --[[ Line: 20 ]]
+	-- upvalues: ResponseModule (copy), NocasetableModule (copy), CookiesModule (copy)
+	local self = setmetatable({}, ResponseModule)
+	self.request = Request
+	self.response_time = Response_time
+	self.timestamp = self.request.timestamp
+	self.url = Request.url
+	self.method = Request.method
+	self.code = p1.StatusCode
+	self.status_code = p1.StatusCode
+	self.success = p1.Success
+	self.ok = self.status_code >= 200 and self.status_code < 300
+	self.message = p1.StatusMessage
+	self.headers = NocasetableModule(p1.Headers)
+	self.content = p1.Body
+	self.text = p1.Body
+	self.headers["content-type"] = self.headers["content-type"] or "text/plain"
+	self.from_cache = false
+	local v1 = self.headers["content-type"]:split(";")
+	self.content_type = v1[1]:lower()
+	self.encoding = v1[2] and v1[2]:split("=")[2] or ""
+	self.content_length = #self.text
+	self.cookies = CookiesModule.new()
 	
-	if tbl.headers["set-cookie"] then
-		tbl.cookies:SetCookie(tbl.headers["set-cookie"])
+	if self.headers["set-cookie"] then
+		self.cookies:SetCookie(self.headers["set-cookie"])
 	end
-	return tbl
+	return self
 end
 
-function t.expand(_) end
+function ResponseModule:expand() --[[ Line: 68 ]] end
 
-function t:__tostring()
+function ResponseModule:__tostring() --[[ Line: 70 ]]
 	return self.text
 end
 
-function t:json()
-	-- upvalues: jsonModule (ref)
-	local ok, status = pcall(function()
-		-- upvalues: jsonModule (copy), self (ref)
-		return jsonModule.dec(self.text)
+function ResponseModule:json() --[[ Line: 74 ]]
+	-- upvalues: JsonModule (copy)
+	local Success, Result = pcall(function() --[[ Line: 77 ]]
+		-- upvalues: JsonModule (upval), self (copy)
+		return JsonModule.dec(self.text)
 	end)
 	
-	if not ok then
+	if not Success then
 		error(("[http] Failed to convert response content to JSON:\n%s"):format(self.text))
 	end
-	return status
+	return Result
 end
 
-function t:html(p1)
-	-- upvalues: list (ref), htmlModule (ref)
-	if p1 or table.find(list, self.content_type) then
-		return htmlModule.parse(self.text, 100000, tostring(self.url))
+function ResponseModule:html(p1) --[[ Line: 88 ]]
+	-- upvalues: List (copy), HtmlModule (copy)
+	if p1 or table.find(List, self.content_type) then
+		return HtmlModule.parse(self.text, 100000, (tostring(self.url)))
+	else
+		error("[http] Response is not specified as HTML.")
 	end
-	error("[http] Response is not specified as HTML.")
 end
 
-function t:xml(p1)
-	-- upvalues: htmlModule (ref)
+function ResponseModule:xml(p1) --[[ Line: 96 ]]
+	-- upvalues: HtmlModule (copy)
 	if p1 or self.content_type:find("+xml") or self.content_type:find("/xml") then
-		return htmlModule.parse(self.text, 100000)
+		return HtmlModule.parse(self.text, 100000)
+	else
+		error("[http] Response is not specified as XML.")
 	end
-	error("[http] Response is not specified as XML.")
 end
 
-return t
+return ResponseModule

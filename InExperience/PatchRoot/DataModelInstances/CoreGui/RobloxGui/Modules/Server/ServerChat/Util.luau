@@ -1,98 +1,96 @@
-﻿local standardPriority = require(game:GetService("Chat"):WaitForChild("ClientChatModules"):WaitForChild("ChatConstants")).StandardPriority
+﻿local StandardPriority = require(game:GetService("Chat"):WaitForChild("ClientChatModules"):WaitForChild("ChatConstants")).StandardPriority
 
-if standardPriority == nil then
-	standardPriority = 10
+if StandardPriority == nil then
+	StandardPriority = 10
 end
-local t = {}
-t.__index = t
-local t_1 = {}
-local t_2 = {}
-t_2.__index = t_2
+local Util = {}
+Util.__index = Util
+local Module = {}
+Module.__index = Module
 
-function t_2.RebuildProcessCommandsPriorities(p1)
-	local var1
+function Module.RebuildProcessCommandsPriorities(p1) --[[ Line: 25 ]]
 	p1.RegisteredPriorites = {}
+	local Flag = nil
 	
-	for i, v in pairs(p1.FunctionMap) do
-		var1 = true
+	for i, value in pairs(p1.FunctionMap) do
+		Flag = true
 		
-		for i_1, v_1 in pairs(v) do
-			var1 = false
+		for _, _ in pairs(value) do
+			Flag = false
 			break
 		end
-		if not var1 then
+		if not Flag then
 			table.insert(p1.RegisteredPriorites, i)
 		end
 	end
-	table.sort(p1.RegisteredPriorites, function(p2, p3)
-		return p3 < p2
+	table.sort(p1.RegisteredPriorites, function(A, B): boolean --[[ Line: 37 ]]
+		return B < A
 	end)
 end
 
-function t_2.HasFunction(p2, p3)
+function Module.HasFunction(p2, p3): boolean --[[ Line: 42 ]]
 	return p2.RegisteredFunctions[p3] ~= nil
 end
 
-function t_2.RemoveFunction(p2, p3)
-	local var2 = p2.RegisteredFunctions[p3]
+function Module.RemoveFunction(p2, p3) --[[ Line: 49 ]]
 	p2.RegisteredFunctions[p3] = nil
-	p2.FunctionMap[var2][p3] = nil
+	p2.FunctionMap[p2.RegisteredFunctions[p3]][p3] = nil
 	p2:RebuildProcessCommandsPriorities()
 end
 
-function t_2.AddFunction(p2, p3, p4, p5)
-	-- upvalues: standardPriority (write)
-	if p5 == nil then
-		p5 = standardPriority
+function Module.AddFunction(p2, Text, p3, StandardPriority1) --[[ Line: 56 ]]
+	-- upvalues: StandardPriority (ref)
+	if StandardPriority1 == nil then
+		StandardPriority1 = StandardPriority
 	end
-	if p2.RegisteredFunctions[p3] then
-		error(p3 .. " is already in use!")
+	if p2.RegisteredFunctions[Text] then
+		error(Text .. " is already in use!")
 	end
-	p2.RegisteredFunctions[p3] = p5
+	p2.RegisteredFunctions[Text] = StandardPriority1
 	
-	if p2.FunctionMap[p5] == nil then
-		p2.FunctionMap[p5] = {}
+	if p2.FunctionMap[StandardPriority1] == nil then
+		p2.FunctionMap[StandardPriority1] = {}
 	end
-	p2.FunctionMap[p5][p3] = p4
+	p2.FunctionMap[StandardPriority1][Text] = p3
 	p2:RebuildProcessCommandsPriorities()
 end
 
-function t_2.GetIterator(p2)
-	local var2 = 1
-	local var3 = nil
-	local var4 = nil
+function Module.GetIterator(p2) --[[ Line: 75 ]]
+	local Count = 1
+	local v1 = nil
+	local v2 = nil
 	
-	return function()
-		-- upvalues: var2 (write), p2 (ref), var3 (write), var4 (write)
+	return function() --[[ Line: 80 ]]
+		-- upvalues: Count (ref), p2 (copy), v1 (ref), v2 (ref)
+		local RegisteredPriorite = nil
 		while true do
-			if #p2.RegisteredPriorites >= var2 then
-				local var5 = p2.RegisteredPriorites[var2]
-				local var6, var7 = next(p2.FunctionMap[var5], var3)
-				var3 = var6
-				var4 = var7
-				
-				if var3 ~= nil then
-					return var3, var4, var5
-				end
-				var2 += 1
+			if #p2.RegisteredPriorites < Count then return end
+			RegisteredPriorite = p2.RegisteredPriorites[Count]
+			v1, v6 = next(p2.FunctionMap[RegisteredPriorite], v1)
+			
+			if v1 ~= nil then
+				return v1, v2, RegisteredPriorite
 			end
+			Count += 1
 		end
 	end
 end
 
-function t_1.new()
-	-- upvalues: t_2 (ref)
-	local tbl = setmetatable({}, t_2)
-	tbl.RegisteredFunctions = {}
-	tbl.RegisteredPriorites = {}
-	tbl.FunctionMap = {}
-	
-	return tbl
+local config = {
+	new = function() --[[ Line: 96 ]]
+		-- upvalues: Module (copy)
+		local self = setmetatable({}, Module)
+		self.RegisteredFunctions = {}
+		self.RegisteredPriorites = {}
+		self.FunctionMap = {}
+		
+		return self
+	end
+}
+
+function Util:NewSortedFunctionContainer() --[[ Line: 107 ]]
+	-- upvalues: config (copy)
+	return config.new()
 end
 
-function t.NewSortedFunctionContainer(_)
-	-- upvalues: t_1 (ref)
-	return t_1.new()
-end
-
-return t
+return Util

@@ -1,10 +1,10 @@
-﻿local parent = script:FindFirstAncestor("SettingsSdui").Parent
-local var1 = require(parent.UrlBuilder).UrlBuilder.new({
+﻿local Parent = script:FindFirstAncestor("SettingsSdui").Parent
+local NewResult = require(Parent.UrlBuilder).UrlBuilder.new({
 	path = "account-management-api/v1/usersettings/menu",
-	base = require(parent.Http).Url.APIS_URL
+	base = require(Parent.Http).Url.APIS_URL
 })
 
-return function()
-	-- upvalues: var1 (ref)
-	return var1()
+return function() --[[ Line: 12 | Named "getSettingsPageUrl" ]]
+	-- upvalues: NewResult (copy)
+	return NewResult()
 end

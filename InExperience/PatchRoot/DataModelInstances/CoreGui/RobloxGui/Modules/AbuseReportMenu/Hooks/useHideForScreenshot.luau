@@ -1,72 +1,82 @@
-﻿local runService = game:GetService("RunService")
-local corePackagesService = game:GetService("CorePackages")
-local guiService = game:GetService("GuiService")
-local reactModule = require(corePackagesService.Packages.React)
-local abuseReportMenuScreenshotReduceMotionWaitFrames = game:DefineFastInt("AbuseReportMenuScreenshotReduceMotionWaitFrames", 20)
-local abuseReportMenuScreenshotWaitFrames = game:DefineFastInt("AbuseReportMenuScreenshotWaitFrames", 10)
-local fFlagIEMTabFocusNav = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagIEMTabFocusNav
-local userGameSettingsService = UserSettings():GetService("UserGameSettings")
+﻿local RunService = game:GetService("RunService")
+local CorePackages = game:GetService("CorePackages")
+local GuiService = game:GetService("GuiService")
+local ReactModule = require(CorePackages.Packages.React)
+local AbuseReportMenuScreenshotReduceMotionWaitFrames = game:DefineFastInt("AbuseReportMenuScreenshotReduceMotionWaitFrames", 20)
+local AbuseReportMenuScreenshotWaitFrames = game:DefineFastInt("AbuseReportMenuScreenshotWaitFrames", 10)
+local FFlagIEMTabFocusNav = require(CorePackages.Workspace.Packages.SharedFlags).FFlagIEMTabFocusNav
+local UserGameSettings = UserSettings():GetService("UserGameSettings")
 
-local _ = function()
-	-- upvalues: userGameSettingsService (ref), abuseReportMenuScreenshotReduceMotionWaitFrames (ref), abuseReportMenuScreenshotWaitFrames (ref)
-	return if userGameSettingsService.ReducedMotion then abuseReportMenuScreenshotReduceMotionWaitFrames else abuseReportMenuScreenshotWaitFrames
+local function _() --[[ Line: 14 ]]
+	-- upvalues: UserGameSettings (copy), AbuseReportMenuScreenshotReduceMotionWaitFrames (copy), AbuseReportMenuScreenshotWaitFrames (copy)
+	return if UserGameSettings.ReducedMotion then AbuseReportMenuScreenshotReduceMotionWaitFrames else AbuseReportMenuScreenshotWaitFrames
 end
 
-local _ = function()
-	-- upvalues: userGameSettingsService (ref), abuseReportMenuScreenshotReduceMotionWaitFrames (ref), abuseReportMenuScreenshotWaitFrames (ref)
-	return if userGameSettingsService.ReducedMotion then abuseReportMenuScreenshotReduceMotionWaitFrames / 60 else abuseReportMenuScreenshotWaitFrames / 60
+local _ = function(): number --[[ Line: 21 ]]
+	-- upvalues: UserGameSettings (copy), AbuseReportMenuScreenshotReduceMotionWaitFrames (copy), AbuseReportMenuScreenshotWaitFrames (copy)
+	return if UserGameSettings.ReducedMotion then AbuseReportMenuScreenshotReduceMotionWaitFrames / 60 else AbuseReportMenuScreenshotWaitFrames / 60
 end
 
-return function(p1, p2, p3, p4, p5, p6)
-	-- upvalues: reactModule (ref), fFlagIEMTabFocusNav (ref), guiService (ref), runService (ref), userGameSettingsService (ref), abuseReportMenuScreenshotReduceMotionWaitFrames (ref), abuseReportMenuScreenshotWaitFrames (ref)
-	local var1, var2 = reactModule.useState(false)
-	local var3 = if fFlagIEMTabFocusNav then reactModule.useRef(nil) else nil
-	reactModule.useEffect(function()
-		-- upvalues: p2 (ref), var1 (ref), fFlagIEMTabFocusNav (copy), var3 (ref), guiService (copy), var2 (ref), p1 (ref), p3 (ref), runService (copy), p5 (ref), userGameSettingsService (copy), abuseReportMenuScreenshotReduceMotionWaitFrames (copy), abuseReportMenuScreenshotWaitFrames (copy), p4 (ref), p6 (ref)
+return function(p1, p2, Callback, Callback2, Callback1, p3) --[[ Line: 28 ]]
+	-- upvalues: ReactModule (copy), FFlagIEMTabFocusNav (copy), GuiService (copy), RunService (copy), UserGameSettings (copy), AbuseReportMenuScreenshotReduceMotionWaitFrames (copy), AbuseReportMenuScreenshotWaitFrames (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseRefResult = if FFlagIEMTabFocusNav then ReactModule.useRef(nil) else nil
+	ReactModule.useEffect(function() --[[ Line: 38 ]]
+		-- upvalues: p2 (copy), UseStateResult (copy), FFlagIEMTabFocusNav (upval), UseRefResult (copy), GuiService (upval), UseStateResult2 (copy), p1 (copy), Callback (copy), RunService (upval), Callback1 (copy), UserGameSettings (upval), AbuseReportMenuScreenshotReduceMotionWaitFrames (upval), AbuseReportMenuScreenshotWaitFrames (upval), Callback2 (copy), p3 (copy)
 		if p2 then
-			if var1 then
-				if fFlagIEMTabFocusNav and var3.current and var3.current:IsDescendantOf(game) then
-					guiService.SelectedCoreObject = var3.current
-					var3.current = nil
+			if UseStateResult then
+				if FFlagIEMTabFocusNav and UseRefResult.current and UseRefResult.current:IsDescendantOf(game) then
+					GuiService.SelectedCoreObject = UseRefResult.current
+					UseRefResult.current = nil
 				end
-				var2(false)
+				UseStateResult2(false)
 				
 				return
-			elseif not p1 then return end
-			if fFlagIEMTabFocusNav then
-				var3.current = guiService.SelectedCoreObject
+			else
+				if p1 then
+					if FFlagIEMTabFocusNav then
+						UseRefResult.current = GuiService.SelectedCoreObject
+					end
+					UseStateResult2(true)
+					Callback()
+					local Connection = nil
+					local Count = 0
+					local Count1 = 0
+					local Connection1 = nil
+					local ClockTime = os.clock()
+					Connection = RunService.Heartbeat:Connect(function() --[[ Line: 60 ]]
+						-- upvalues: Count (ref), Callback1 (upval), Connection (ref)
+						if Count == 1 then
+							Callback1()
+							Connection:Disconnect()
+							
+							return
+						else
+							Count += 1
+						end
+					end)
+					Connection1 = RunService.Heartbeat:Connect(function() --[[ Line: 71 ]]
+						-- upvalues: ClockTime (copy), UserGameSettings (upval), AbuseReportMenuScreenshotReduceMotionWaitFrames (upval), AbuseReportMenuScreenshotWaitFrames (upval), Count1 (ref), Connection1 (ref), Callback2 (upval)
+						if (if UserGameSettings.ReducedMotion then AbuseReportMenuScreenshotReduceMotionWaitFrames / 60 else AbuseReportMenuScreenshotWaitFrames / 60) <= os.clock() - ClockTime and (if UserGameSettings.ReducedMotion then AbuseReportMenuScreenshotReduceMotionWaitFrames else AbuseReportMenuScreenshotWaitFrames) <= Count1 then
+							Connection1:Disconnect()
+							Callback2()
+							
+							return
+						else
+							Count1 += 1
+						end
+					end)
+					
+					return
+				end
 			end
-			var2(true)
-			p3()
-			local heartbeatConnection = nil
-			local var4 = 0
-			local var5 = 0
-			local heartbeatConnection_1 = nil
-			local processTime = os.clock()
-			heartbeatConnection = runService.Heartbeat:Connect(function()
-				-- upvalues: var4 (write), p5 (copy), heartbeatConnection (write)
-				if var4 == 1 then
-					p5()
-					heartbeatConnection:Disconnect()
-					
-					return
-				end
-				var4 += 1
-			end)
-			heartbeatConnection_1 = runService.Heartbeat:Connect(function()
-				-- upvalues: processTime (ref), userGameSettingsService (copy), abuseReportMenuScreenshotReduceMotionWaitFrames (copy), abuseReportMenuScreenshotWaitFrames (copy), var5 (write), heartbeatConnection_1 (write), p4 (copy)
-				if (if userGameSettingsService.ReducedMotion then abuseReportMenuScreenshotReduceMotionWaitFrames / 60 else abuseReportMenuScreenshotWaitFrames / 60) <= os.clock() - processTime and (if userGameSettingsService.ReducedMotion then abuseReportMenuScreenshotReduceMotionWaitFrames else abuseReportMenuScreenshotWaitFrames) <= var5 then
-					heartbeatConnection_1:Disconnect()
-					p4()
-					
-					return
-				end
-				var5 += 1
-			end)
+		else
+			local Connection = UseStateResult
 			
-			return
-		elseif not var1 then
-			p6()
+			if not Connection then
+				Connection = p3
+				Connection()
+			end
 		end
 	end, { p2 })
 end

@@ -1,41 +1,42 @@
-﻿local parent = script:FindFirstAncestor("GameDetail").Parent
-local reactModule = require(parent.React)
-local getSduiClientPageScope = require(parent.SduiSharedUtilities).getSduiClientPageScope
-local containerWidth = require(script.Parent.ExperienceDetailsPageScopeFields).ContainerWidth
+﻿local Parent = script:FindFirstAncestor("GameDetail").Parent
+local ReactModule = require(Parent.React)
+local GetSduiClientPageScopeFunction = require(Parent.SduiSharedUtilities).getSduiClientPageScope
+local ContainerWidth = require(script.Parent.ExperienceDetailsPageScopeFields).ContainerWidth
 
-return function(p1, p2)
-	-- upvalues: reactModule (ref), getSduiClientPageScope (ref), containerWidth (ref)
-	local var1 = reactModule.useRef(nil)
+return function(p1, Callback) --[[ Line: 12 | Named "usePublishContainerWidth" ]]
+	-- upvalues: ReactModule (copy), GetSduiClientPageScopeFunction (copy), ContainerWidth (copy)
+	local UseRefResult = ReactModule.useRef(nil)
 	
-	return reactModule.useCallback(function(p3)
-		-- upvalues: p2 (ref), var1 (ref), getSduiClientPageScope (copy), p1 (ref), containerWidth (copy)
-		p2(p3)
-		
-		if var1.current then
-			var1.current:Disconnect()
-			var1.current = nil
+	return ReactModule.useCallback(function(Frame: Frame) --[[ Line: 14 ]]
+		-- upvalues: Callback (copy), UseRefResult (copy), GetSduiClientPageScopeFunction (upval), p1 (copy), ContainerWidth (upval)
+		if Callback then
+			Callback(Frame)
 		end
-		if p3 then
-			local var2 = getSduiClientPageScope(p1)
-			local var3 = nil
+		if UseRefResult.current then
+			UseRefResult.current:Disconnect()
+			UseRefResult.current = nil
+		end
+		if Frame then
+			local SduiClientPageScope = GetSduiClientPageScopeFunction(p1)
+			local X = nil
 			
-			local function publishAbsoluteSize()
-				-- upvalues: p3 (ref), var3 (write), var2 (ref), containerWidth (copy)
-				local x = p3.AbsoluteSize.X
+			local function publishAbsoluteSize() --[[ Line: 27 ]]
+				-- upvalues: Frame (copy), X (ref), SduiClientPageScope (copy), ContainerWidth (upval)
+				local X1 = Frame.AbsoluteSize.X
 				
-				if x ~= var3 then
-					var3 = x
-					var2.set(containerWidth, x)
+				if X1 ~= X then
+					X = X1
+					SduiClientPageScope.set(ContainerWidth, X1)
 				end
 			end
 			
-			local x = p3.AbsoluteSize.X
+			local X1 = Frame.AbsoluteSize.X
 			
-			if x ~= var3 then
-				var3 = x
-				var2.set(containerWidth, x)
+			if X1 ~= X then
+				X = X1
+				SduiClientPageScope.set(ContainerWidth, X1)
 			end
-			var1.current = p3:GetPropertyChangedSignal("AbsoluteSize"):Connect(publishAbsoluteSize)
+			UseRefResult.current = Frame:GetPropertyChangedSignal("AbsoluteSize"):Connect(publishAbsoluteSize)
 		end
-	end, { p2, p1 })
+	end, { p1, Callback })
 end

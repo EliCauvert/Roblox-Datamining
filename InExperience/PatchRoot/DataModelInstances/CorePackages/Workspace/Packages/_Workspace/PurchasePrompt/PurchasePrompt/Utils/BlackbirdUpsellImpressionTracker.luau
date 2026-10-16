@@ -1,29 +1,29 @@
-﻿local blackbirdUpsellBannerMaxSessionImpressions = game:DefineFastInt("BlackbirdUpsellBannerMaxSessionImpressions", 50)
-local memStorageService = game:GetService("MemStorageService")
-local t = {
-	getImpressionCount = function()
-		-- upvalues: memStorageService (ref)
-		local ok, status = pcall(function()
-			-- upvalues: memStorageService (copy)
-			return memStorageService:GetItem("BlackbirdUpsellBannerImpressionCount")
+﻿local BlackbirdUpsellBannerMaxSessionImpressions = game:DefineFastInt("BlackbirdUpsellBannerMaxSessionImpressions", 50)
+local MemStorageService = game:GetService("MemStorageService")
+local BlackbirdUpsellImpressionTrackerModule = {
+	getImpressionCount = function(): number --[[ Line: 10 ]]
+		-- upvalues: MemStorageService (copy)
+		local Success, Result = pcall(function() --[[ Line: 11 ]]
+			-- upvalues: MemStorageService (upval)
+			return MemStorageService:GetItem("BlackbirdUpsellBannerImpressionCount")
 		end)
 		
-		return if ok and status and status ~= "" then tonumber(status) or 0 else 0
+		return Success and Result and Result ~= "" and tonumber(Result) or 0
 	end
 }
 
-function t.incrementImpressionCount()
-	-- upvalues: t (ref), memStorageService (ref)
-	local impressionCount = t.getImpressionCount()
-	pcall(function()
-		-- upvalues: memStorageService (copy), impressionCount (ref)
-		memStorageService:SetItem("BlackbirdUpsellBannerImpressionCount", tostring(impressionCount + 1))
+function BlackbirdUpsellImpressionTrackerModule.incrementImpressionCount() --[[ Line: 20 ]]
+	-- upvalues: BlackbirdUpsellImpressionTrackerModule (copy), MemStorageService (copy)
+	local ImpressionCount = BlackbirdUpsellImpressionTrackerModule.getImpressionCount()
+	pcall(function() --[[ Line: 22 ]]
+		-- upvalues: MemStorageService (upval), ImpressionCount (copy)
+		MemStorageService:SetItem("BlackbirdUpsellBannerImpressionCount", (tostring(ImpressionCount + 1)))
 	end)
 end
 
-function t.hasReachedMaxImpressions()
-	-- upvalues: blackbirdUpsellBannerMaxSessionImpressions (ref), t (ref)
-	return if blackbirdUpsellBannerMaxSessionImpressions == 0 then false else blackbirdUpsellBannerMaxSessionImpressions <= t.getImpressionCount()
+function BlackbirdUpsellImpressionTrackerModule.hasReachedMaxImpressions(): boolean --[[ Line: 27 ]]
+	-- upvalues: BlackbirdUpsellBannerMaxSessionImpressions (copy), BlackbirdUpsellImpressionTrackerModule (copy)
+	return BlackbirdUpsellBannerMaxSessionImpressions ~= 0 and BlackbirdUpsellBannerMaxSessionImpressions <= BlackbirdUpsellImpressionTrackerModule.getImpressionCount()
 end
 
-return t
+return BlackbirdUpsellImpressionTrackerModule

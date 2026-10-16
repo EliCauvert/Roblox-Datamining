@@ -1,70 +1,72 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local reactModule = require(parent.React)
-local builderIconsModule = require(parent.BuilderIcons)
-local font = builderIconsModule.Font
-local iconVariant = builderIconsModule.IconVariant
-local iconSizeModule = require(foundation.Enums.IconSize)
-local imageModule = require(foundation.Components.Image)
-local textModule = require(foundation.Components.Text)
-local loggerModule = require(foundation.Utility.Logger)
-local isBuilderIconModule = require(foundation.Utility.isBuilderIcon)
-local migrateFontSizeModule = require(script.Parent.migrateFontSize)
-local migrateIconNameModule = require(script.Parent.migrateIconName)
-local useIconSizeModule = require(foundation.Utility.useIconSize)
-local useTextSizeOffsetModule = require(foundation.Providers.Style.useTextSizeOffset)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local _ = require(foundation.Components.Types)
-local t = {
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local ReactModule = require(Parent.React)
+local BuilderIconsModule = require(Parent.BuilderIcons)
+local BuilderIconsModuleFont = BuilderIconsModule.Font
+local ImageModule = require(Foundation.Components.Image)
+local TextModule = require(Foundation.Components.Text)
+local LoggerModule = require(Foundation.Utility.Logger)
+local IsBuilderIconModule = require(Foundation.Utility.isBuilderIcon)
+local MigrateFontSizeModule = require(script.Parent.migrateFontSize)
+local MigrateIconNameModule = require(script.Parent.migrateIconName)
+local UseIconSizeModule = require(Foundation.Utility.useIconSize)
+local UseTextSizeOffsetModule = require(Foundation.Providers.Style.useTextSizeOffset)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local _ = require(Foundation.Components.Types)
+local config = {
 	testId = "--foundation-icon",
-	size = iconSizeModule.Medium,
-	variant = iconVariant.Regular
+	size = require(Foundation.Enums.IconSize).Medium,
+	variant = BuilderIconsModule.IconVariant.Regular
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useTextSizeOffsetModule (ref), migrateIconNameModule (ref), useIconSizeModule (ref), isBuilderIconModule (ref), migrateFontSizeModule (ref), loggerModule (ref), reactModule (ref), imageModule (ref), withCommonPropsModule (ref), textModule (ref), font (ref)
-	local var1 = withDefaultsModule(p1, t)
-	local var2 = useTokensModule()
-	local var3 = useTextSizeOffsetModule()
-	local var4 = migrateIconNameModule(var1.name)
-	local var5 = useIconSizeModule(var1.size, isBuilderIconModule(var1.name))
-	local variant = var1.variant
-	local name = var1.name
-	local var6 = if typeof(var5) == "table" then nil else var5.Y.Offset
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 46 | Named "Icon" ]]
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UseTextSizeOffsetModule (copy), MigrateIconNameModule (copy), UseIconSizeModule (copy), IsBuilderIconModule (copy), MigrateFontSizeModule (copy), LoggerModule (copy), ReactModule (copy), ImageModule (copy), WithCommonPropsModule (copy), TextModule (copy), BuilderIconsModuleFont (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
+	local UseTokensModuleResult = UseTokensModule()
+	local UseTextSizeOffsetModuleResult: number = UseTextSizeOffsetModule()
+	local MigrateIconNameModuleResult = MigrateIconNameModule(WithDefaultsModuleResult.name)
+	local UseIconSizeModuleResult = UseIconSizeModule(WithDefaultsModuleResult.size, IsBuilderIconModule(WithDefaultsModuleResult.name))
+	local Variant = WithDefaultsModuleResult.variant
+	local Name = WithDefaultsModuleResult.name
+	local Offset = if typeof(UseIconSizeModuleResult) == "table" then nil else UseIconSizeModuleResult.Y.Offset
 	
-	if not isBuilderIconModule(name) and var4 then
-		if typeof(var5) == "table" then
+	if not IsBuilderIconModule(Name) and MigrateIconNameModuleResult then
+		if typeof(UseIconSizeModuleResult) == "table" then
 			error("Binding size isn't supported when migrating a UIBlox icon, use Builder Icons directly")
 		end
-		variant = var4.variant or variant
-		name = var4.name
-		var6 = migrateFontSizeModule(var6, var2)
+		Variant = MigrateIconNameModuleResult.variant or Variant
+		Name = MigrateIconNameModuleResult.name
+		Offset = MigrateFontSizeModule(Offset, UseTokensModuleResult)
 	end
-	local style = var1.style or var2.Color.Content.Default
+	local Style = WithDefaultsModuleResult.style or UseTokensModuleResult.Color.Content.Default
 	
-	if isBuilderIconModule(name) or var4 then
-		return reactModule.createElement(textModule, withCommonPropsModule(var1, {
-			textStyle = style,
-			Text = name,
-			fontStyle = { Font = font[variant], FontSize = var6 },
-			TextScaled = typeof(var5) == "table",
-			Size = var5,
-			ref = p2,
-			Rotation = var1.Rotation
+	if IsBuilderIconModule(Name) or MigrateIconNameModuleResult then
+		return ReactModule.createElement(TextModule, WithCommonPropsModule(WithDefaultsModuleResult, {
+			textStyle = Style,
+			Text = Name,
+			fontStyle = {
+				Font = BuilderIconsModuleFont[Variant],
+				FontSize = Offset
+			},
+			TextScaled = typeof(UseIconSizeModuleResult) == "table",
+			Size = UseIconSizeModuleResult,
+			ref = Ref,
+			Rotation = WithDefaultsModuleResult.Rotation
 		}), {
-			UITextSizeConstraint = if var3 > 0 and var6 then reactModule.createElement("UITextSizeConstraint", { MaxTextSize = var6 }) else nil,
-			Children = reactModule.createElement(reactModule.Fragment, nil, var1.children)
+			UITextSizeConstraint = if UseTextSizeOffsetModuleResult > 0 and Offset then ReactModule.createElement("UITextSizeConstraint", { MaxTextSize = Offset }) else nil,
+			Children = ReactModule.createElement(ReactModule.Fragment, nil, WithDefaultsModuleResult.children)
 		})
-	elseif p1.variant ~= nil then
-		loggerModule:warning("variant is not supported when using FoundationImages, consider using BuilderIcons")
 	end
-	return reactModule.createElement(imageModule, withCommonPropsModule(var1, {
-		imageStyle = style,
-		Image = name,
-		Size = var5,
-		ref = p2,
-		Rotation = var1.Rotation
-	}), var1.children)
+	if p1.variant ~= nil then
+		LoggerModule:warning("variant is not supported when using FoundationImages, consider using BuilderIcons")
+	end
+	return (ReactModule.createElement(ImageModule, WithCommonPropsModule(WithDefaultsModuleResult, {
+		imageStyle = Style,
+		Image = Name,
+		Size = UseIconSizeModuleResult,
+		ref = Ref,
+		Rotation = WithDefaultsModuleResult.Rotation
+	}), WithDefaultsModuleResult.children))
 end))

@@ -1,111 +1,117 @@
-﻿local playersService = game:GetService("Players")
-local textChatService = game:GetService("TextChatService")
-local sharedFlagsModule = require(game:GetService("CorePackages").Workspace.Packages.SharedFlags)
-local fFlagEnableGlobalChatAbuseReporting = sharedFlagsModule.FFlagEnableGlobalChatAbuseReporting
-local fFlagAbuseReportAttributedRBXSystemMessages = sharedFlagsModule.FFlagAbuseReportAttributedRBXSystemMessages
-local t = {
+﻿local Players = game:GetService("Players")
+local TextChatService = game:GetService("TextChatService")
+local SharedFlagsModule = require(game:GetService("CorePackages").Workspace.Packages.SharedFlags)
+local FFlagEnableGlobalChatAbuseReporting = SharedFlagsModule.FFlagEnableGlobalChatAbuseReporting
+local FFlagAbuseReportAttributedRBXSystemMessages = SharedFlagsModule.FFlagAbuseReportAttributedRBXSystemMessages
+local ExpChatMessageHelpersModule = {
 	CHANNEL_GENERAL = "RBXGeneral",
 	CHANNEL_GLOBAL = "RBXGlobal",
-	areChannelTabsEnabled = function()
-		-- upvalues: textChatService (ref)
-		local channelTabsConfiguration = textChatService:FindFirstChildOfClass("ChannelTabsConfiguration")
+	areChannelTabsEnabled = function() --[[ Line: 28 ]]
+		-- upvalues: TextChatService (copy)
+		local ChannelTabsConfiguration = TextChatService:FindFirstChildOfClass("ChannelTabsConfiguration")
 		
-		return channelTabsConfiguration ~= nil and channelTabsConfiguration.Enabled
+		return ChannelTabsConfiguration ~= nil and ChannelTabsConfiguration.Enabled
 	end,
-	localizeString = function(p1, p2)
-		if not p1 then
+	localizeString = function(p1, p2) --[[ Line: 37 ]]
+		if p1 then
+			local Success, Result = pcall(p1.TranslateGameText, p1, game, p2)
+			
+			return if Success and type(Result) == "string" then Result else p2
+		else
 			return p2
 		end
-		local ok, status = pcall(p1.TranslateGameText, p1, game, p2)
-		
-		return if ok and type(status) == "string" then status else p2
 	end,
-	isSystemMessage = function(p1)
-		-- upvalues: fFlagAbuseReportAttributedRBXSystemMessages (ref)
-		return if not (not fFlagAbuseReportAttributedRBXSystemMessages and p1.textChannel and p1.textChannel.Name == "RBXSystem") then p1.userId and p1.userId ~= "0" else true
+	isSystemMessage = function(p1): boolean --[[ Line: 47 ]]
+		-- upvalues: FFlagAbuseReportAttributedRBXSystemMessages (copy)
+		return not FFlagAbuseReportAttributedRBXSystemMessages and p1.textChannel and p1.textChannel.Name == "RBXSystem" or (not p1.userId or p1.userId == "0")
 	end,
-	formatChannelLabel = function(p1, p2)
-		-- upvalues: playersService (ref), fFlagEnableGlobalChatAbuseReporting (ref)
-		if string.find(p1, "RBXGeneral") then
+	formatChannelLabel = function(Text: string, Object) --[[ Line: 62 ]]
+		-- upvalues: Players (copy), FFlagEnableGlobalChatAbuseReporting (copy)
+		if string.find(Text, "RBXGeneral") then
 			return "General"
-		elseif string.find(p1, "^RBXTeam") then
+		end
+		if string.find(Text, "^RBXTeam") then
 			return "Team"
-		elseif string.find(p1, "^RBXWhisper") then
-			if p2 and playersService.LocalPlayer then
-				for i, v in ipairs(p2:GetChildren()) do
-					if v:IsA("TextSource") then
-						local userIdPlayerByUserId = playersService:GetPlayerByUserId(v.UserId)
-						
-						if userIdPlayerByUserId and userIdPlayerByUserId ~= playersService.LocalPlayer then
-							return userIdPlayerByUserId.DisplayName
-						end
+		end
+		if not string.find(Text, "^RBXWhisper") then
+			return if FFlagEnableGlobalChatAbuseReporting and Text == "RBXGlobal" then "Global" else Text
+		end
+		if Object and Players.LocalPlayer then
+			local Player = nil
+			for _, TextSource in ipairs(Object:GetChildren()) do
+				if TextSource:IsA("TextSource") then
+					Player = Players:GetPlayerByUserId(TextSource.UserId)
+					
+					if Player and Player ~= Players.LocalPlayer then
+						return Player.DisplayName
 					end
 				end
 			end
-			return "Whisper"
-		else
-			return if fFlagEnableGlobalChatAbuseReporting and p1 == "RBXGlobal" then "Global" else p1
 		end
+		return "Whisper"
 	end,
-	formatMessageLabel = function(p3)
-		local prefixText = p3.prefixText or ""
-		local text = p3.text or ""
+	formatMessageLabel = function(p1) --[[ Line: 86 ]]
+		local PrefixText = p1.prefixText or ""
+		local Text = p1.text or ""
 		
-		return if #prefixText > 0 then prefixText .. " " .. text else text
+		return if #PrefixText > 0 then PrefixText .. " " .. Text else Text
 	end,
-	getMessageUsername = function(p3)
-		-- upvalues: playersService (ref)
-		local var1 = tonumber(p3.userId)
+	getMessageUsername = function(p1) --[[ Line: 92 ]]
+		-- upvalues: Players (copy)
+		local Number: number? = tonumber(p1.userId)
 		
-		if var1 and var1 ~= 0 then
-			local var2 = playersService:GetPlayerByUserId(var1)
+		if Number and Number ~= 0 then
+			local Player = Players:GetPlayerByUserId(Number)
 			
-			if var2 then
-				return var2.Name
+			if Player then
+				return Player.Name
 			end
 		end
-		local textChatMessageInstance = p3.textChatMessageInstance
+		local TextChatMessageInstance = p1.textChatMessageInstance
 		
-		if textChatMessageInstance then
-			local textSource = textChatMessageInstance.TextSource
+		if TextChatMessageInstance then
+			local TextSource = TextChatMessageInstance.TextSource
 			
-			return if textSource and textSource.Username and #textSource.Username > 0 then textSource.Username else nil
+			if TextSource and TextSource.Username and #TextSource.Username > 0 then
+				return TextSource.Username
+			end
 		end
+		return nil
 	end
 }
 
-function t.collectItems(p3, p4)
-	-- upvalues: t (ref)
-	local t_1 = {}
+function ExpChatMessageHelpersModule.collectItems(p1, List) --[[ Line: 120 ]]
+	-- upvalues: ExpChatMessageHelpersModule (copy)
+	local List1 = {}
 	
-	for i, v in ipairs(p4) do
-		local var1 = p3[v]
+	for _, value in ipairs(List) do
+		local v1 = p1[value]
 		
-		if var1 and not t.isSystemMessage(var1) then
-			table.insert(t_1, {
-				id = var1.messageId,
-				label = t.formatMessageLabel(var1),
+		if v1 and not ExpChatMessageHelpersModule.isSystemMessage(v1) then
+			table.insert(List1, {
+				id = v1.messageId,
+				label = ExpChatMessageHelpersModule.formatMessageLabel(v1),
 				meta = {
-					textChannel = var1.textChannel,
-					userId = tostring(var1.userId),
-					presetId = var1.presetId,
-					presetChatVersion = var1.presetChatVersion,
-					username = t.getMessageUsername(var1)
+					textChannel = v1.textChannel,
+					userId = tostring(v1.userId),
+					presetId = v1.presetId,
+					presetChatVersion = v1.presetChatVersion,
+					username = ExpChatMessageHelpersModule.getMessageUsername(v1)
 				}
 			})
 		end
 	end
-	return t_1
+	return List1
 end
 
-function t.annotateWhisperItems(p5, p6, p7)
-	for i, v in ipairs(p5) do
-		local id = p6[v.id]
+function ExpChatMessageHelpersModule.annotateWhisperItems(List, p2, p3) --[[ Line: 144 ]]
+	for _, value in ipairs(List) do
+		local v2 = p2[value.id]
 		
-		if id and id.textChannel and (typeof(id.textChannel.Name) == "string" and string.sub(id.textChannel.Name, 1, 10) == "RBXWhisper") then
-			v.label = string.format("[%s] %s", p7, v.label)
+		if v2 and v2.textChannel and typeof(v2.textChannel.Name) == "string" and string.sub(v2.textChannel.Name, 1, 10) == "RBXWhisper" then
+			value.label = string.format("[%s] %s", p3, value.label)
 		end
 	end
 end
 
-return t
+return ExpChatMessageHelpersModule

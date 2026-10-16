@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("FixPlatformRestrictedHomeClobber", false)
 
-return function()
+return function() --[[ Line: 3 ]]
 	return game:GetFastFlag("FixPlatformRestrictedHomeClobber")
 end

@@ -1,21 +1,26 @@
-﻿local userInputService = game:GetService("UserInputService")
-local expChatPresetChatVREnabled = game:DefineFastFlag("ExpChatPresetChatVREnabled", false)
+﻿local UserInputService = game:GetService("UserInputService")
+local FFlagDebugExpChatTextChannelWindowStaticExpressionsModule = require(script.Parent.FFlagDebugExpChatTextChannelWindowStaticExpressions)
+local ExpChatPresetChatVREnabled = game:DefineFastFlag("ExpChatPresetChatVREnabled", false)
 
-local function _()
-	-- upvalues: userInputService (ref), expChatPresetChatVREnabled (ref)
-	return if userInputService.VREnabled then expChatPresetChatVREnabled else true
+local function _() --[[ Line: 9 | Named "isSupportedPlatform" ]]
+	-- upvalues: UserInputService (copy), ExpChatPresetChatVREnabled (copy)
+	return not UserInputService.VREnabled or ExpChatPresetChatVREnabled
 end
 
-local expChatTextChannelWindowExpressionTray = game:DefineFastFlag("ExpChatTextChannelWindowExpressionTray", false)
+local ExpChatTextChannelWindowExpressionTray = game:DefineFastFlag("ExpChatTextChannelWindowExpressionTray", false)
 
-if expChatTextChannelWindowExpressionTray then
-	expChatTextChannelWindowExpressionTray = game:GetEngineFeature("TextChatPresetsEnabled")
+if ExpChatTextChannelWindowExpressionTray then
+	local TextChatPresetsEnabledEngineFeature = game:GetEngineFeature("TextChatPresetsEnabled")
 	
-	if expChatTextChannelWindowExpressionTray then
-		if userInputService.VREnabled then
-			return expChatPresetChatVREnabled
+	if not TextChatPresetsEnabledEngineFeature then
+		ExpChatTextChannelWindowExpressionTray = FFlagDebugExpChatTextChannelWindowStaticExpressionsModule
+		TextChatPresetsEnabledEngineFeature = ExpChatTextChannelWindowExpressionTray
+	end
+	if TextChatPresetsEnabledEngineFeature then
+		if UserInputService.VREnabled then
+			return ExpChatPresetChatVREnabled
 		end
-		expChatTextChannelWindowExpressionTray = true
+		ExpChatTextChannelWindowExpressionTray = true
 	end
 end
-return expChatTextChannelWindowExpressionTray
+return ExpChatTextChannelWindowExpressionTray

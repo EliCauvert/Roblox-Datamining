@@ -1,241 +1,235 @@
-﻿local runService = game:GetService("RunService")
-local roactModule = require(game:GetService("CorePackages").Packages.Roact)
-local parent = script.Parent.Parent
-local utilAndTabModule = require(parent.UtilAndTab)
-local dropDownModule = require(parent.DropDown)
-local orchestratorRowModule = require(script.Parent.OrchestratorRow)
-local requestOrchestratorDataModule = require(script.Parent.RequestOrchestratorData)
-local constantsModule = require(script.Parent.Parent.Parent.Constants)
-local mainRowPadding = constantsModule.GeneralFormatting.MainRowPadding
-local mono = constantsModule.Font.Mono
-local color = Color3.fromRGB(220, 220, 220)
-local t = {
+﻿local RunService = game:GetService("RunService")
+local RoactModule = require(game:GetService("CorePackages").Packages.Roact)
+local Parent = script.Parent.Parent
+local UtilAndTabModule = require(Parent.UtilAndTab)
+local DropDownModule = require(Parent.DropDown)
+local OrchestratorRowModule = require(script.Parent.OrchestratorRow)
+local RequestOrchestratorDataModule = require(script.Parent.RequestOrchestratorData)
+local ConstantsModule = require(script.Parent.Parent.Parent.Constants)
+local MainRowPadding = ConstantsModule.GeneralFormatting.MainRowPadding
+local Mono = ConstantsModule.Font.Mono
+local _Color3 = Color3.fromRGB(220, 220, 220)
+local config = {
 	BatchCreated = {
-		requestOrchestratorDataModule.registerBatch,
-		requestOrchestratorDataModule.trackQueueOnCreated
+		RequestOrchestratorDataModule.registerBatch,
+		RequestOrchestratorDataModule.trackQueueOnCreated
 	},
 	BatchSent = {
-		requestOrchestratorDataModule.openSendAttempt,
-		requestOrchestratorDataModule.drainQueueOnSent
+		RequestOrchestratorDataModule.openSendAttempt,
+		RequestOrchestratorDataModule.drainQueueOnSent
 	},
-	BatchResponseReceived = { requestOrchestratorDataModule.settleBatch },
+	BatchResponseReceived = { RequestOrchestratorDataModule.settleBatch },
 	BatchRetrying = {
-		requestOrchestratorDataModule.reclassifyOnRetry,
-		requestOrchestratorDataModule.requeueRetryOps
+		RequestOrchestratorDataModule.reclassifyOnRetry,
+		RequestOrchestratorDataModule.requeueRetryOps
 	},
 	BatchExhausted = {
-		requestOrchestratorDataModule.markExhausted,
-		requestOrchestratorDataModule.clearQueueOnExhausted
+		RequestOrchestratorDataModule.markExhausted,
+		RequestOrchestratorDataModule.clearQueueOnExhausted
 	},
-	OperationEnqueued = { requestOrchestratorDataModule.enqueueOperation },
-	CacheItemAdded = { requestOrchestratorDataModule.recordCacheItemAdded },
-	CacheHit = { requestOrchestratorDataModule.recordCacheHit }
+	OperationEnqueued = { RequestOrchestratorDataModule.enqueueOperation },
+	CacheItemAdded = { RequestOrchestratorDataModule.recordCacheItemAdded },
+	CacheHit = { RequestOrchestratorDataModule.recordCacheHit }
 }
 
-local function makeLabel(p1, p2)
-	-- upvalues: roactModule (ref), color (ref), mono (ref)
-	return roactModule.createElement("TextLabel", {
+local function makeLabel(Text, LayoutOrder) --[[ Line: 37 ]]
+	-- upvalues: RoactModule (copy), _Color3 (copy), Mono (copy)
+	return RoactModule.createElement("TextLabel", {
 		BackgroundTransparency = 1,
 		TextSize = 11,
 		AutomaticSize = Enum.AutomaticSize.X,
 		Size = UDim2.new(0, 0, 0, 22),
-		Text = p1,
-		TextColor3 = color,
-		Font = mono,
+		Text = Text,
+		TextColor3 = _Color3,
+		Font = Mono,
 		TextXAlignment = Enum.TextXAlignment.Left,
-		LayoutOrder = p2
+		LayoutOrder = LayoutOrder
 	})
 end
 
-local function _(value)
+local function _(List) --[[ Line: 51 | Named "cloneSet" ]]
 	local t = {}
 	
-	for i, v in pairs(value) do
-		t[i] = v
+	for i, value in pairs(List) do
+		t[i] = value
 	end
 	return t
 end
 
-local mainViewRequestOrchestrator = roactModule.Component:extend("MainViewRequestOrchestrator")
+local MainViewRequestOrchestrator = RoactModule.Component:extend("MainViewRequestOrchestrator")
 
-function mainViewRequestOrchestrator.init(p1)
-	-- upvalues: requestOrchestratorDataModule (ref), roactModule (ref)
-	p1.model = requestOrchestratorDataModule.new()
+function MainViewRequestOrchestrator.init(p1) --[[ Line: 61 ]]
+	-- upvalues: RequestOrchestratorDataModule (copy), RoactModule (copy)
+	p1.model = RequestOrchestratorDataModule.new()
 	p1.connections = {}
-	p1.utilRef = roactModule.createRef()
+	p1.utilRef = RoactModule.createRef()
 	
-	function p2.onUtilTabHeightChanged(p2)
-		-- upvalues: p1 (ref)
-		p1:setState({ utilTabHeight = p2 })
+	function p1.onUtilTabHeightChanged(UtilTabHeight) --[[ Line: 66 ]]
+		-- upvalues: p1 (copy)
+		p1:setState({ utilTabHeight = UtilTabHeight })
 	end
 	
-	function p2.onTypeToggle(p2)
-		-- upvalues: p1 (ref)
-		local t = {}
+	function p1.onTypeToggle(Key) --[[ Line: 70 ]]
+		-- upvalues: p1 (copy)
+		local SelectedTypes = {}
 		
-		for i, v in pairs(p1.state.selectedTypes) do
-			t[i] = v
+		for i, selectedType in pairs(p1.state.selectedTypes) do
+			SelectedTypes[i] = selectedType
 		end
-		t[p2] = not t[p2] or nil
-		p1:setState({ selectedTypes = t })
+		SelectedTypes[Key] = not SelectedTypes[Key] or nil
+		p1:setState({ selectedTypes = SelectedTypes })
 	end
 	
 	p1.state = { utilTabHeight = 0, selectedTypes = {} }
 end
 
-function mainViewRequestOrchestrator.observeType(p2, p3)
-	-- upvalues: requestOrchestratorDataModule (ref)
-	local var1 = requestOrchestratorDataModule.observeType(p2.model, p3)
+function MainViewRequestOrchestrator.observeType(Model, OrchestratorType) --[[ Line: 83 ]]
+	-- upvalues: RequestOrchestratorDataModule (copy)
+	local ObserveTypeResult = RequestOrchestratorDataModule.observeType(Model.model, OrchestratorType)
 	
-	if var1 then
-		local t = {}
+	if ObserveTypeResult then
+		local SelectedTypes = {}
 		
-		for i, v in pairs(p2.state.selectedTypes) do
-			t[i] = v
+		for i, selectedType in pairs(Model.state.selectedTypes) do
+			SelectedTypes[i] = selectedType
 		end
-		local var2 = t
-		var2[var1] = true
-		p2:setState({ selectedTypes = var2 })
+		SelectedTypes[ObserveTypeResult] = true
+		Model:setState({ selectedTypes = SelectedTypes })
 	end
 end
 
-function mainViewRequestOrchestrator.didMount(p4)
-	-- upvalues: requestOrchestratorDataModule (ref), t (ref), runService (ref)
-	p4:setState({ utilTabHeight = p4.utilRef.current.Size.Y.Offset })
-	local requestOrchestratorService = game:GetService("RequestOrchestratorService")
-	local ok, status = pcall(function()
-		-- upvalues: requestOrchestratorService (ref)
-		return requestOrchestratorService:GetRegisteredOrchestrators()
+function MainViewRequestOrchestrator.didMount(p2) --[[ Line: 92 ]]
+	-- upvalues: RequestOrchestratorDataModule (copy), config (copy), RunService (copy)
+	p2:setState({ utilTabHeight = p2.utilRef.current.Size.Y.Offset })
+	local RequestOrchestratorService = game:GetService("RequestOrchestratorService")
+	local Success, Result = pcall(function() --[[ Line: 101 ]]
+		-- upvalues: RequestOrchestratorService (copy)
+		return RequestOrchestratorService:GetRegisteredOrchestrators()
 	end)
 	
-	if ok and status then
-		local var3 = requestOrchestratorDataModule.observeTypes(p4.model, status)
+	if Success and Result then
+		local ObserveTypesResult = RequestOrchestratorDataModule.observeTypes(p2.model, Result)
 		
-		if #var3 > 0 then
-			local t_1 = {}
+		if #ObserveTypesResult > 0 then
+			local SelectedTypes = {}
 			
-			for i, v in pairs(p4.state.selectedTypes) do
-				t_1[i] = v
+			for i, selectedType in pairs(p2.state.selectedTypes) do
+				SelectedTypes[i] = selectedType
 			end
-			local var4 = t_1
-			
-			for i_1, v_1 in ipairs(var3) do
-				var4[v_1] = true
+			for _, value in ipairs(ObserveTypesResult) do
+				SelectedTypes[value] = true
 			end
-			p4:setState({ selectedTypes = var4 })
+			p2:setState({ selectedTypes = SelectedTypes })
 		end
 	end
-	for i, v in pairs(t) do
-		p4.connections[i] = requestOrchestratorService[i]:Connect(function(p5)
-			-- upvalues: p4 (ref), v (ref)
-			local orchestratorType = p5.orchestratorType or "Unknown"
-			p4:observeType(orchestratorType)
+	for i1, value1 in pairs(config) do
+		p2.connections[i1] = RequestOrchestratorService[i1]:Connect(function(p3) --[[ Line: 116 ]]
+			-- upvalues: p2 (copy), value1 (copy)
+			local OrchestratorType = p3.orchestratorType or "Unknown"
+			p2:observeType(OrchestratorType)
 			
-			for i, v_1 in ipairs(v) do
-				v_1(p4.model, orchestratorType, p5)
+			for _, value in ipairs(value1) do
+				value(p2.model, OrchestratorType, p3)
 			end
-			p4:setState({})
+			p2:setState({})
 		end)
 	end
-	p4.connections.heartbeat = runService.Heartbeat:Connect(function()
-		-- upvalues: requestOrchestratorDataModule (copy), p4 (ref)
-		requestOrchestratorDataModule.advanceTime(p4.model)
-		p4:setState({})
+	p2.connections.heartbeat = RunService.Heartbeat:Connect(function() --[[ Line: 127 ]]
+		-- upvalues: RequestOrchestratorDataModule (upval), p2 (copy)
+		RequestOrchestratorDataModule.advanceTime(p2.model)
+		p2:setState({})
 	end)
 end
 
-function mainViewRequestOrchestrator.willUnmount(p5)
-	for i, v in pairs(p5.connections) do
-		v:Disconnect()
+function MainViewRequestOrchestrator.willUnmount(p3) --[[ Line: 133 ]]
+	for _, connection in pairs(p3.connections) do
+		connection:Disconnect()
 	end
-	p5.connections = {}
+	p3.connections = {}
 end
 
-function mainViewRequestOrchestrator.didUpdate(p6)
-	local offset = p6.utilRef.current.Size.Y.Offset
+function MainViewRequestOrchestrator.didUpdate(p4) --[[ Line: 140 ]]
+	local Offset = p4.utilRef.current.Size.Y.Offset
 	
-	if offset ~= p6.state.utilTabHeight then
-		p6:setState({ utilTabHeight = offset })
+	if Offset ~= p4.state.utilTabHeight then
+		p4:setState({ utilTabHeight = Offset })
 	end
 end
 
-function mainViewRequestOrchestrator.render(p6)
-	-- upvalues: roactModule (ref), mainRowPadding (ref), utilAndTabModule (ref), makeLabel (ref), dropDownModule (ref), orchestratorRowModule (ref), constantsModule (ref)
-	local size = p6.props.size
-	local formFactor = p6.props.formFactor
-	local tabList = p6.props.tabList
-	local utilTabHeight = p6.state.utilTabHeight
-	local selectedTypes = p6.state.selectedTypes
-	local allTypes = p6.model.allTypes
-	local t = {
-		UIListLayout = roactModule.createElement("UIListLayout", {
+function MainViewRequestOrchestrator.render(p4) --[[ Line: 147 ]]
+	-- upvalues: RoactModule (copy), MainRowPadding (copy), UtilAndTabModule (copy), makeLabel (copy), DropDownModule (copy), OrchestratorRowModule (copy), ConstantsModule (copy)
+	local Size = p4.props.size
+	local SelectedTypes = p4.state.selectedTypes
+	local AllTypes = p4.model.allTypes
+	local config = {
+		UIListLayout = RoactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
-			Padding = UDim.new(0, mainRowPadding)
+			Padding = UDim.new(0, MainRowPadding)
 		}),
-		UtilAndTab = roactModule.createElement(utilAndTabModule, {
+		UtilAndTab = RoactModule.createElement(UtilAndTabModule, {
 			layoutOrder = 1,
-			windowWidth = size.X.Offset,
-			formFactor = formFactor,
-			tabList = tabList,
-			refForParent = p6.utilRef,
-			onHeightChanged = p6.onUtilTabHeightChanged
+			windowWidth = Size.X.Offset,
+			formFactor = p4.props.formFactor,
+			tabList = p4.props.tabList,
+			refForParent = p4.utilRef,
+			onHeightChanged = p4.onUtilTabHeightChanged
 		})
 	}
 	
-	if utilTabHeight > 0 then
-		local var5 = 0
-		local var6 = nil
+	if p4.state.utilTabHeight > 0 then
+		local Count = 0
+		local v1 = nil
 		
-		for i, v in ipairs(allTypes) do
-			if selectedTypes[i] then
-				var5 += 1
-				var6 = v
+		for i, allType in ipairs(AllTypes) do
+			if SelectedTypes[i] then
+				Count += 1
+				v1 = allType
 			end
 		end
-		t.Controls = roactModule.createElement("Frame", {
+		config.Controls = RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 2,
 			Size = UDim2.new(1, 0, 0, 24)
 		}, {
-			Layout = roactModule.createElement("UIListLayout", {
+			Layout = RoactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Horizontal,
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				Padding = UDim.new(0, 4),
 				VerticalAlignment = Enum.VerticalAlignment.Center
 			}),
 			ShowLabel = makeLabel("Show", 1),
-			TypeDropDown = roactModule.createElement(dropDownModule, {
+			TypeDropDown = RoactModule.createElement(DropDownModule, {
 				layoutOrder = 2,
 				buttonSize = UDim2.new(0, 220, 0, 22),
-				dropDownList = allTypes,
-				selectedSet = selectedTypes,
-				onToggle = p6.onTypeToggle,
-				summaryText = if #allTypes == 0 then "(waiting for traffic)" elseif var5 == 0 then "(none)" elseif var5 == 1 then var6 elseif var5 == #allTypes then string.format("All (%d)", var5) else string.format("%d selected", var5)
+				dropDownList = AllTypes,
+				selectedSet = SelectedTypes,
+				onToggle = p4.onTypeToggle,
+				summaryText = if #AllTypes == 0 then "(waiting for traffic)" elseif Count == 0 then "(none)" elseif Count == 1 then v1 elseif Count == #AllTypes then string.format("All (%d)", Count) else string.format("%d selected", Count)
 			})
 		})
 		
-		for i_1, v_1 in ipairs(allTypes) do
-			if selectedTypes[i_1] then
-				t["Row_" .. v_1] = roactModule.createElement(orchestratorRowModule, {
-					orchestratorType = v_1,
-					batches = p6.model.batchesByType[v_1] or {},
-					queue = p6.model.queues[v_1],
-					cache = p6.model.cacheByType[v_1],
-					observedMaxBatchSize = p6.model.observedMaxByType[v_1],
-					panelWidth = size.X.Offset,
-					now = p6.model.now,
+		for i1, allType1 in ipairs(AllTypes) do
+			if SelectedTypes[i1] then
+				config["Row_" .. allType1] = RoactModule.createElement(OrchestratorRowModule, {
+					orchestratorType = allType1,
+					batches = p4.model.batchesByType[allType1] or {},
+					queue = p4.model.queues[allType1],
+					cache = p4.model.cacheByType[allType1],
+					observedMaxBatchSize = p4.model.observedMaxByType[allType1],
+					panelWidth = Size.X.Offset,
+					now = p4.model.now,
 					size = UDim2.new(1, 0, 0, 52),
-					layoutOrder = 2 + i_1
+					layoutOrder = 2 + i1
 				})
 			end
 		end
 	end
-	return roactModule.createElement("Frame", {
+	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		LayoutOrder = 4,
-		Size = size,
-		BackgroundColor3 = constantsModule.Color.BaseGray
-	}, t)
+		Size = Size,
+		BackgroundColor3 = ConstantsModule.Color.BaseGray
+	}, config)
 end
 
-return mainViewRequestOrchestrator
+return MainViewRequestOrchestrator

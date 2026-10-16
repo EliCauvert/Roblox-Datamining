@@ -1,12 +1,12 @@
-﻿local dependenciesModule = require(script.Parent.Parent.dependencies)
-local rodux = dependenciesModule.Rodux
-local roduxNetworking = dependenciesModule.RoduxNetworking
-local roduxAliases = dependenciesModule.RoduxAliases
+﻿local DependenciesModule = require(script.Parent.Parent.dependencies)
+local Rodux = DependenciesModule.Rodux
+local RoduxNetworking = DependenciesModule.RoduxNetworking
+local RoduxAliases = DependenciesModule.RoduxAliases
 
-return function()
-	-- upvalues: rodux (ref), roduxAliases (ref), roduxNetworking (ref)
-	return rodux.combineReducers({
-		Aliases = roduxAliases.installReducer(),
-		NetworkStatus = roduxNetworking.installReducer()
+return function() --[[ Line: 8 ]]
+	-- upvalues: Rodux (copy), RoduxAliases (copy), RoduxNetworking (copy)
+	return Rodux.combineReducers({
+		Aliases = RoduxAliases.installReducer(),
+		NetworkStatus = RoduxNetworking.installReducer()
 	})
 end

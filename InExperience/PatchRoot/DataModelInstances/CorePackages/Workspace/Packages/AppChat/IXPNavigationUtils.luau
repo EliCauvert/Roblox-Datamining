@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent._Workspace.AppChat.AppChat.Utils.IXPNavigationUtils)
+﻿return (require(script.Parent.Parent._Workspace.AppChat.AppChat.Utils.IXPNavigationUtils))

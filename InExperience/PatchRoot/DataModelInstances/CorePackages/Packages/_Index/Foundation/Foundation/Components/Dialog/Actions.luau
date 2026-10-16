@@ -1,1 +1,1 @@
-﻿return require(script.DialogActions)
+﻿return (require(script.DialogActions))

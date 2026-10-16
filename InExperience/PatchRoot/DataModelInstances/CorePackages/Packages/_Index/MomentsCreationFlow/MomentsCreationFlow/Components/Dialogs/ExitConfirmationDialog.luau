@@ -1,40 +1,40 @@
-﻿local momentsCreationFlow = script:FindFirstAncestor("MomentsCreationFlow")
-local parent = momentsCreationFlow.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local dialog = foundationModule.Dialog
-local creationFlowContextModule = require(momentsCreationFlow.Context.CreationFlowContext)
-local creationFlowLocalizationModule = require(momentsCreationFlow.Enums.CreationFlowLocalization)
+﻿local MomentsCreationFlow = script:FindFirstAncestor("MomentsCreationFlow")
+local Parent = MomentsCreationFlow.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local Dialog = FoundationModule.Dialog
+local CreationFlowContextModule = require(MomentsCreationFlow.Context.CreationFlowContext)
+local CreationFlowLocalizationModule = require(MomentsCreationFlow.Enums.CreationFlowLocalization)
 
-return function(p1)
-	-- upvalues: reactModule (ref), creationFlowContextModule (ref), dialog (ref), foundationModule (ref), creationFlowLocalizationModule (ref)
-	local var1 = reactModule.useContext(creationFlowContextModule)
+return function(p1) --[[ Line: 17 ]]
+	-- upvalues: ReactModule (copy), CreationFlowContextModule (copy), Dialog (copy), FoundationModule (copy), CreationFlowLocalizationModule (copy)
+	local UseContextResult = ReactModule.useContext(CreationFlowContextModule)
 	
-	return reactModule.createElement(dialog.Root, {
+	return ReactModule.createElement(Dialog.Root, {
 		disablePortal = false,
 		hasBackdrop = true,
-		size = foundationModule.Enums.DialogSize.Medium
+		size = FoundationModule.Enums.DialogSize.Medium
 	}, {
-		DialogTitle = reactModule.createElement(dialog.Title, {
+		DialogTitle = ReactModule.createElement(Dialog.Title, {
 			LayoutOrder = 1,
-			text = var1.getLocalization(creationFlowLocalizationModule.LeaveMomentCreationTitle)
+			text = UseContextResult.getLocalization(CreationFlowLocalizationModule.LeaveMomentCreationTitle)
 		}),
-		DialogContent = reactModule.createElement(dialog.Content, { LayoutOrder = 2 }, {
-			DialogText = reactModule.createElement(dialog.Text, {
-				Text = var1.getLocalization(creationFlowLocalizationModule.LeaveMomentCreationBody)
+		DialogContent = ReactModule.createElement(Dialog.Content, { LayoutOrder = 2 }, {
+			DialogText = ReactModule.createElement(Dialog.Text, {
+				Text = UseContextResult.getLocalization(CreationFlowLocalizationModule.LeaveMomentCreationBody)
 			})
 		}),
-		DialogActions = reactModule.createElement(dialog.Actions, {
+		DialogActions = ReactModule.createElement(Dialog.Actions, {
 			LayoutOrder = 3,
 			actions = {
 				{
-					text = var1.getLocalization(creationFlowLocalizationModule.GeneralCtaLeave),
-					variant = foundationModule.Enums.ButtonVariant.Emphasis,
+					text = UseContextResult.getLocalization(CreationFlowLocalizationModule.GeneralCtaLeave),
+					variant = FoundationModule.Enums.ButtonVariant.Emphasis,
 					onActivated = p1.onConfirm
 				},
 				{
-					text = var1.getLocalization(creationFlowLocalizationModule.GeneralCtaCancel),
-					variant = foundationModule.Enums.ButtonVariant.Standard,
+					text = UseContextResult.getLocalization(CreationFlowLocalizationModule.GeneralCtaCancel),
+					variant = FoundationModule.Enums.ButtonVariant.Standard,
 					onActivated = p1.onCancel
 				}
 			}

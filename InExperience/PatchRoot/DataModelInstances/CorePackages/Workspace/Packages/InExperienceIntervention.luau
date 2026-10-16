@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.InExperienceIntervention.InExperienceIntervention)
+﻿return (require(script.Parent._Workspace.InExperienceIntervention.InExperienceIntervention))

@@ -1,6 +1,6 @@
-﻿local parent = script.Parent.Parent
+﻿local Parent = script.Parent.Parent
 
 return {
-	Analytics = require(parent.Analytics),
-	SharedFlags = require(parent.SharedFlags)
+	Analytics = require(Parent.Analytics),
+	SharedFlags = require(Parent.SharedFlags)
 }

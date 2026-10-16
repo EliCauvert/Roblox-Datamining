@@ -1,53 +1,55 @@
-﻿local reactModule = require(script.Parent.Parent.Parent.Parent.React)
+﻿local ReactModule = require(script.Parent.Parent.Parent.Parent.React)
 local _ = require(script.Parent.Parent.FlatList)
 
-return function(p1)
-	-- upvalues: reactModule (ref)
-	local var1 = if p1.cellRendererKey then p1.cellRendererKey else "CellRendererView"
-	local var2 = if p1.initialIndex then p1.initialIndex else 1
-	local listRef = p1.listRef
-	local onSelectedIndexChanged = p1.onSelectedIndexChanged
-	local viewOffset = p1.viewOffset
-	local var3 = p1.animated ~= nil or p1.animated
-	local var4 = reactModule.useRef(var2)
-	local data = p1.data
+return function(p1) --[[ Line: 40 | Named "useFocusNavigationScrolling" ]]
+	-- upvalues: ReactModule (copy)
+	local CellRendererKey = if p1.cellRendererKey then p1.cellRendererKey else "CellRendererView"
+	local ListRef = p1.listRef
+	local OnSelectedIndexChangedFunction = p1.onSelectedIndexChanged
+	local ViewOffset = p1.viewOffset
+	local NoAnimated = p1.animated == nil or p1.animated
+	local UseRefResult = ReactModule.useRef(if p1.initialIndex then p1.initialIndex else 1)
+	local Data = p1.data
 	
-	return reactModule.useCallback(function(p2, _, _, p3)
-		-- upvalues: var1 (ref), var4 (ref), data (ref), onSelectedIndexChanged (ref), listRef (ref), var3 (ref), viewOffset (ref)
-		if p3 and p3:IsDescendantOf(p2) then
-			local var5 = p3:FindFirstAncestor(var1)
+	return ReactModule.useCallback(function(Ancestor, _, _, Object) --[[ Line: 64 ]]
+		-- upvalues: CellRendererKey (copy), UseRefResult (copy), Data (copy), OnSelectedIndexChangedFunction (copy), ListRef (copy), NoAnimated (copy), ViewOffset (copy)
+		if Object and Object:IsDescendantOf(Ancestor) then
+			local CellRendererKey1 = Object:FindFirstAncestor(CellRendererKey)
 			
-			if not var5 or not var5.LayoutOrder then
-				return nil
-			elseif var5.LayoutOrder == var4.current or #data < var5.LayoutOrder or var5.LayoutOrder < 1 then
+			if not CellRendererKey1 or not CellRendererKey1.LayoutOrder then
 				return nil
 			end
-			var4.current = var5.LayoutOrder
+			if CellRendererKey1.LayoutOrder == UseRefResult.current or #Data < CellRendererKey1.LayoutOrder or CellRendererKey1.LayoutOrder < 1 then
+				return nil
+			end
+			UseRefResult.current = CellRendererKey1.LayoutOrder
 			
-			if onSelectedIndexChanged then
-				onSelectedIndexChanged(var4.current)
+			if OnSelectedIndexChangedFunction then
+				OnSelectedIndexChangedFunction(UseRefResult.current)
 			end
-			if not listRef or not listRef.current then
+			if not ListRef or not ListRef.current then
 				return nil
 			end
-			listRef.current:scrollToIndex({
-				index = var4.current,
-				animated = var3,
-				viewOffset = viewOffset
+			ListRef.current:scrollToIndex({
+				index = UseRefResult.current,
+				animated = NoAnimated,
+				viewOffset = ViewOffset
 			})
 		end
 		return nil
 	end, {
-		listRef, var4, var1, onSelectedIndexChanged, var3, viewOffset, data
-	}), reactModule.useCallback(function(p2)
-		-- upvalues: listRef (ref)
-		local var5 = p2.index * p2.averageItemLength
+		ListRef, UseRefResult, CellRendererKey, OnSelectedIndexChangedFunction,
+		NoAnimated, ViewOffset, Data
+	}), (ReactModule.useCallback(function(p2) --[[ Line: 50 ]]
+		-- upvalues: ListRef (copy)
+		local ScaledIndex = p2.index * p2.averageItemLength
 		
-		if listRef and listRef.current then
-			listRef.current:scrollToOffset({ offset = var5 })
+		if ListRef and ListRef.current then
+			ListRef.current:scrollToOffset({ offset = ScaledIndex })
 			
 			return
+		else
+			warn("Animated scrolling failed, the ref to the ScrollView is nil.This could indicate that you are selecting focus before the ScrollView has mounted.")
 		end
-		warn("Animated scrolling failed, the ref to the ScrollView is nil.This could indicate that you are selecting focus before the ScrollView has mounted.")
-	end, { listRef })
+	end, { ListRef }))
 end

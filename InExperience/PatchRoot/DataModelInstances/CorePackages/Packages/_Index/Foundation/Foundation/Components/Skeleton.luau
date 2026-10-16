@@ -1,1 +1,1 @@
-﻿return require(script.Skeleton)
+﻿return (require(script.Skeleton))

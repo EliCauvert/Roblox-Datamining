@@ -1,57 +1,56 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local coreGuiService = game:GetService("CoreGui")
-local chrome = script:FindFirstAncestor("Chrome")
-local mappedSignal = require(chrome.ChromeShared.Service.ChromeUtils).MappedSignal
-local signal = require(corePackagesService.Workspace.Packages.AppCommonLib).Signal
-local robloxGui = coreGuiService:WaitForChild("RobloxGui")
-local fFlagRespawnChromeShortcutTelemetryModule = require(chrome.Flags.FFlagRespawnChromeShortcutTelemetry)
-local var1 = false
-local var2 = signal.new()
-local var3 = mappedSignal.new(var2, function()
-	-- upvalues: var1 (write)
-	return var1
+﻿local Chrome = script:FindFirstAncestor("Chrome")
+local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
+local FFlagRespawnChromeShortcutTelemetryModule = require(Chrome.Flags.FFlagRespawnChromeShortcutTelemetry)
+local IsNameMatch = false
+local NewResult = require(game:GetService("CorePackages").Workspace.Packages.AppCommonLib).Signal.new()
+local NewResult1 = require(Chrome.ChromeShared.Service.ChromeUtils).MappedSignal.new(NewResult, function() --[[ Line: 17 ]]
+	-- upvalues: IsNameMatch (ref)
+	return IsNameMatch
 end)
-task.defer(function()
-	-- upvalues: robloxGui (ref), var1 (write), var2 (ref)
-	local settingsHubModule = require(robloxGui.Modules.Settings.SettingsHub)
-	settingsHubModule.CurrentPageSignal:connect(function(p1)
-		-- upvalues: var1 (copy), settingsHubModule (ref), var2 (copy)
-		var1 = p1 == settingsHubModule.Instance.ResetCharacterPage.Page.Name
-		var2:fire()
+task.defer(function() --[[ Line: 21 ]]
+	-- upvalues: RobloxGui (copy), IsNameMatch (ref), NewResult (copy)
+	local SettingsHubModule = require(RobloxGui.Modules.Settings.SettingsHub)
+	SettingsHubModule.CurrentPageSignal:connect(function(Name) --[[ Line: 23 ]]
+		-- upvalues: IsNameMatch (upval), SettingsHubModule (copy), NewResult (upval)
+		IsNameMatch = Name == SettingsHubModule.Instance.ResetCharacterPage.Page.Name
+		NewResult:fire()
 	end)
 end)
 
 return {
-	respawnPageOpenSignal = var3,
-	respawnPage = function(p1)
-		-- upvalues: robloxGui (ref), var1 (write), fFlagRespawnChromeShortcutTelemetryModule (ref)
-		local settingsHubModule = require(robloxGui.Modules.Settings.SettingsHub)
-		local resetCharacterPage = settingsHubModule.Instance.ResetCharacterPage
+	respawnPageOpenSignal = NewResult1,
+	respawnPage = function(p1) --[[ Line: 33 ]]
+		-- upvalues: RobloxGui (copy), IsNameMatch (ref), FFlagRespawnChromeShortcutTelemetryModule (copy)
+		local SettingsHubModule = require(RobloxGui.Modules.Settings.SettingsHub)
+		local ResetCharacterPage = SettingsHubModule.Instance.ResetCharacterPage
 		
-		local function _()
-			-- upvalues: p1 (ref), settingsHubModule (ref), resetCharacterPage (ref)
-			settingsHubModule.Instance:SwitchToPage(resetCharacterPage, true, nil, nil, nil, { used_shortcut = if p1 then p1.usedShortcut else nil })
+		local function _() --[[ Line: 36 | Named "switchToRespawnPage" ]]
+			-- upvalues: p1 (copy), SettingsHubModule (copy), ResetCharacterPage (copy)
+			SettingsHubModule.Instance:SwitchToPage(ResetCharacterPage, true, nil, nil, nil, { used_shortcut = if p1 then p1.usedShortcut else nil })
 		end
 		
-		if settingsHubModule:GetVisibility() then
-			if var1 then
-				settingsHubModule:SetVisibility(false)
-				
-				return
-			elseif fFlagRespawnChromeShortcutTelemetryModule then
-				settingsHubModule.Instance:SwitchToPage(resetCharacterPage, true, nil, nil, nil, { used_shortcut = if p1 then p1.usedShortcut else nil })
+		if SettingsHubModule:GetVisibility() then
+			if IsNameMatch then
+				SettingsHubModule:SetVisibility(false)
 				
 				return
 			end
-			settingsHubModule.Instance:SwitchToPage(resetCharacterPage, true)
+			if FFlagRespawnChromeShortcutTelemetryModule then
+				SettingsHubModule.Instance:SwitchToPage(ResetCharacterPage, true, nil, nil, nil, { used_shortcut = if p1 then p1.usedShortcut else nil })
+				
+				return
+			else
+				SettingsHubModule.Instance:SwitchToPage(ResetCharacterPage, true)
+				
+				return
+			end
+		elseif FFlagRespawnChromeShortcutTelemetryModule then
+			SettingsHubModule:SetVisibility(true)
+			SettingsHubModule.Instance:SwitchToPage(ResetCharacterPage, true, nil, nil, nil, { used_shortcut = if p1 then p1.usedShortcut else nil })
 			
 			return
-		elseif fFlagRespawnChromeShortcutTelemetryModule then
-			settingsHubModule:SetVisibility(true)
-			settingsHubModule.Instance:SwitchToPage(resetCharacterPage, true, nil, nil, nil, { used_shortcut = if p1 then p1.usedShortcut else nil })
-			
-			return
+		else
+			SettingsHubModule:SetVisibility(true, false, ResetCharacterPage)
 		end
-		settingsHubModule:SetVisibility(true, false, resetCharacterPage)
 	end
 }

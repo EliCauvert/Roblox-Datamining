@@ -1,36 +1,34 @@
-﻿local httpService = game:GetService("HttpService")
+﻿local HttpService = game:GetService("HttpService")
 local _ = require(script:FindFirstAncestor("PurchasePrompt").types)
 
-return function(p1, p2)
-	-- upvalues: httpService (ref)
+return function(p1, p2) --[[ Line: 15 | Named "mergeOfferIdsIntoPurchasePayload" ]]
+	-- upvalues: HttpService (copy)
 	if p2 == nil or p2.Offers == nil then
 		return p1
 	end
-	local t = {}
+	local Discounts = {}
 	
-	for i, v in p2.Offers do
-		if type(v) == "table" and type(v.Id) == "string" and v.Id ~= "" then
-			table.insert(t, { source = "Offer", discountId = v.Id })
+	for _, offer in p2.Offers do
+		if type(offer) == "table" and type(offer.Id) == "string" and offer.Id ~= "" then
+			table.insert(Discounts, { source = "Offer", discountId = offer.Id })
 		end
 	end
-	if #t == 0 then
+	if #Discounts == 0 then
 		return p1
 	end
-	local t_1, ok
-	local _ = nil
-	
+	local t = nil
 	if type(p1) == "string" and p1 ~= "" then
-		ok, status = pcall(httpService.JSONDecode, httpService, p1)
+		local Success, Result = pcall(HttpService.JSONDecode, HttpService, p1)
 		
-		if not ok or type(status) ~= "table" then
+		if not Success or type(Result) ~= "table" then
 			return p1
 		end
-		t_1 = status
+		t = Result
 	else
-		t_1 = {}
+		t = {}
 	end
-	t_1.discounts = t
-	ok, status = pcall(httpService.JSONEncode, httpService, t_1)
+	t.discounts = Discounts
+	local Success1, Result1 = pcall(HttpService.JSONEncode, HttpService, t)
 	
-	return if ok and type(status) == "string" then status else p1
+	return if Success1 and type(Result1) == "string" then Result1 else p1
 end

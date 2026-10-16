@@ -1,22 +1,22 @@
-﻿local purchasePrompt = script:FindFirstAncestor("PurchasePrompt")
-local _ = require(purchasePrompt.Parent.IAPExperience)
-local _ = require(purchasePrompt.types)
-local deriveSelectedOfferIdsFromCartPricingModule = require(script.Parent.deriveSelectedOfferIdsFromCartPricing)
+﻿local PurchasePrompt = script:FindFirstAncestor("PurchasePrompt")
+local _ = require(PurchasePrompt.Parent.IAPExperience)
+local _ = require(PurchasePrompt.types)
+local DeriveSelectedOfferIdsFromCartPricingModule = require(script.Parent.deriveSelectedOfferIdsFromCartPricing)
 
-return function(p1)
-	-- upvalues: deriveSelectedOfferIdsFromCartPricingModule (ref)
+return function(p1) --[[ Line: 17 | Named "derivePurchaseOptionsFromCartPricingResponse" ]]
+	-- upvalues: DeriveSelectedOfferIdsFromCartPricingModule (copy)
 	if p1 == nil then
 		return nil
 	end
-	local var1 = deriveSelectedOfferIdsFromCartPricingModule(p1)
+	local DeriveSelectedOfferIdsFromCartPricingModuleResult = DeriveSelectedOfferIdsFromCartPricingModule(p1)
 	
-	if #var1 == 0 then
+	if #DeriveSelectedOfferIdsFromCartPricingModuleResult == 0 then
 		return nil
 	end
-	local t = {}
+	local Offers = {}
 	
-	for i, v in var1 do
-		table.insert(t, { Id = v })
+	for _, Id in DeriveSelectedOfferIdsFromCartPricingModuleResult do
+		table.insert(Offers, { Id = Id })
 	end
-	return { Offers = t }
+	return { Offers = Offers }
 end

@@ -1,1 +1,1 @@
-﻿return require(script:FindFirstAncestor("ServerTriggeredModals").Parent.Signals).createComputed(require(script.Parent.createModalSignalStore))
+﻿return require(script:FindFirstAncestor("ServerTriggeredModals").Parent.Signals).createComputed((require(script.Parent.createModalSignalStore)))

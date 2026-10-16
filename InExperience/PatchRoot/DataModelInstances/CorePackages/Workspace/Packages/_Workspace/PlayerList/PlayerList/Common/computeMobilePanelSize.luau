@@ -1,23 +1,23 @@
-﻿local constantsModule = require(script.Parent.Parent.Common.Constants)
+﻿local ConstantsModule = require(script.Parent.Parent.Common.Constants)
 
-local function _(startValue, endValue, alpha, p1, p2)
-	return (startValue - endValue) * (p2 - p1) / (alpha - endValue) + p1
+local function _(p1, p2, p3, p4, p5) --[[ Line: 14 | Named "lerpRange" ]]
+	return (p1 - p2) * (p5 - p4) / (p3 - p2) + p4
 end
 
-return function(p1, p2, p3, p4)
-	-- upvalues: constantsModule (ref)
-	local minValue = math.min(p1.X, p1.Y)
-	local maxValue = math.max(p1.X, p1.Y)
-	local PANEL_BORDER = constantsModule.PANEL_BORDER
-	local var1 = (minValue - 320) * 60 / 55 + 270
-	local var2 = (maxValue - 480) * 46 / 190 + 434
-	var1 = if constantsModule.PANEL_SIZE_MIN_CAP < var1 then p2 else math.clamp(var1, math.min(270, minValue - PANEL_BORDER), constantsModule.PANEL_SIZE_MIN_CAP)
-	var2 = if constantsModule.PANEL_SIZE_MAX_CAP < var2 then p3 else math.clamp(var2, math.min(434, maxValue - PANEL_BORDER), constantsModule.PANEL_SIZE_MAX_CAP)
-	local var3 = if p1.Y < p1.X then var2 else var1
-	local var4 = if p1.X < p1.Y then var2 else var1
+return function(Vector, p1, p2, p3): Vector2 --[[ Line: 22 | Named "computeMobilePanelSize" ]]
+	-- upvalues: ConstantsModule (copy)
+	local Smallest = math.min(Vector.X, Vector.Y)
+	local Largest = math.max(Vector.X, Vector.Y)
+	local PANELBORDER: number = ConstantsModule.PANEL_BORDER
+	local Value = (Smallest - 320) * 60 / 55 + 270
+	local Value1 = (Largest - 480) * 46 / 190 + 434
+	local ClampedValue = if ConstantsModule.PANEL_SIZE_MIN_CAP < Value then p1 else math.clamp(Value, math.min(270, Smallest - PANELBORDER), ConstantsModule.PANEL_SIZE_MIN_CAP)
+	local ClampedValue1 = if ConstantsModule.PANEL_SIZE_MAX_CAP < Value1 then p2 else math.clamp(Value1, math.min(434, Largest - PANELBORDER), ConstantsModule.PANEL_SIZE_MAX_CAP)
+	local X = if Vector.Y < Vector.X then ClampedValue1 else ClampedValue
+	local Y = if Vector.Y > Vector.X then ClampedValue1 else ClampedValue
 	
-	if p4 ~= nil then
-		var4 = math.min(var4, math.max(0, p1.Y - p4))
+	if p3 ~= nil then
+		Y = math.min(Y, (math.max(0, Vector.Y - p3)))
 	end
-	return Vector2.new(var3, var4)
+	return Vector2.new(X, Y)
 end

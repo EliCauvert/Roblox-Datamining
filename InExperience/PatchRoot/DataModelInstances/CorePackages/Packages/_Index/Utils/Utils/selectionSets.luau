@@ -1,10 +1,9 @@
-﻿local t = {}
-local parse = require(script.Parent.Parent.GraphQL).parse
+﻿local ParseFunction = require(script.Parent.Parent.GraphQL).parse
 local _ = require(script.Parent.Interfaces)
 
-function t.parseSelectionSet(value, p1)
-	-- upvalues: parse (ref)
-	return parse(value, p1).definitions[1].selectionSet
-end
-
-return t
+return {
+	parseSelectionSet = function(p1, p2) --[[ Line: 17 ]]
+		-- upvalues: ParseFunction (copy)
+		return ParseFunction(p1, p2).definitions[1].selectionSet
+	end
+}

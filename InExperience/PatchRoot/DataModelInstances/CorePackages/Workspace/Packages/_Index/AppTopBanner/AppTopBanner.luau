@@ -1,10 +1,10 @@
-﻿local actionsModule = require(script.Actions)
+﻿local ActionsModule = require(script.Actions)
 
 return {
 	Reducers = require(script.Reducers),
 	Actions = {
-		DisableAppTopBanner = actionsModule.DisableAppTopBanner,
-		SetAppTopBanner = actionsModule.SetAppTopBanner
+		DisableAppTopBanner = ActionsModule.DisableAppTopBanner,
+		SetAppTopBanner = ActionsModule.SetAppTopBanner
 	},
 	Enums = require(script.Enums),
 	GetAppTopBannerStore = require(script.Stores.GetAppTopBannerStore),

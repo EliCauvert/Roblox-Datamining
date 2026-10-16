@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.SocialLuaAnalytics.SocialLuaAnalytics)
+﻿return (require(script.Parent._Workspace.SocialLuaAnalytics.SocialLuaAnalytics))

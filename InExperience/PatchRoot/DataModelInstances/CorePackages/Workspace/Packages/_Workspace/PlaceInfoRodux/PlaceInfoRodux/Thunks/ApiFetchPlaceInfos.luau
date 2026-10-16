@@ -1,24 +1,24 @@
-﻿local placeInfoRodux = script:FindFirstAncestor("PlaceInfoRodux")
-local functional = require(placeInfoRodux.Parent.AppCommonLib).Functional
-local getPlaceInfos = require(placeInfoRodux.Requests).GetPlaceInfos
-local placeInfoModel = require(placeInfoRodux.Models).PlaceInfoModel
-local receivedMultiplePlaceInfos = require(placeInfoRodux.Actions).ReceivedMultiplePlaceInfos
+﻿local PlaceInfoRodux = script:FindFirstAncestor("PlaceInfoRodux")
+local Functional = require(PlaceInfoRodux.Parent.AppCommonLib).Functional
+local GetPlaceInfosFunction = require(PlaceInfoRodux.Requests).GetPlaceInfos
+local PlaceInfoModel = require(PlaceInfoRodux.Models).PlaceInfoModel
+local ReceivedMultiplePlaceInfosFunction = require(PlaceInfoRodux.Actions).ReceivedMultiplePlaceInfos
 
-return function(p1, p2)
-	-- upvalues: getPlaceInfos (ref), functional (ref), placeInfoModel (ref), receivedMultiplePlaceInfos (ref)
-	return function(p3)
-		-- upvalues: getPlaceInfos (copy), p1 (ref), p2 (ref), functional (copy), placeInfoModel (copy), receivedMultiplePlaceInfos (copy)
-		return getPlaceInfos(p1, p2):andThen(function(p4)
-			-- upvalues: functional (copy), placeInfoModel (copy), p3 (ref), receivedMultiplePlaceInfos (copy)
-			local var1 = functional.Map(p4.responseBody, function(p5)
-				-- upvalues: placeInfoModel (copy)
-				return placeInfoModel.fromWeb(p5)
+return function(p1, p2) --[[ Line: 10 ]]
+	-- upvalues: GetPlaceInfosFunction (copy), Functional (copy), PlaceInfoModel (copy), ReceivedMultiplePlaceInfosFunction (copy)
+	return function(p3) --[[ Line: 11 ]]
+		-- upvalues: GetPlaceInfosFunction (upval), p1 (copy), p2 (copy), Functional (upval), PlaceInfoModel (upval), ReceivedMultiplePlaceInfosFunction (upval)
+		return GetPlaceInfosFunction(p1, p2):andThen(function(Result) --[[ Line: 12 ]]
+			-- upvalues: Functional (upval), PlaceInfoModel (upval), p3 (copy), ReceivedMultiplePlaceInfosFunction (upval)
+			local MapResult = Functional.Map(Result.responseBody, function(p4) --[[ Line: 15 ]]
+				-- upvalues: PlaceInfoModel (upval)
+				return PlaceInfoModel.fromWeb(p4)
 			end)
-			p3:dispatch(receivedMultiplePlaceInfos(var1))
+			p3:dispatch(ReceivedMultiplePlaceInfosFunction(MapResult))
 			
-			return var1
-		end):catch(function(p4)
-			warn("ApiFetchlaceInfos failed with error code " .. tostring(p4.HttpError))
+			return MapResult
+		end):catch(function(Err) --[[ Line: 22 ]]
+			warn("ApiFetchlaceInfos failed with error code " .. tostring(Err.HttpError))
 		end)
 	end
 end

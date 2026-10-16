@@ -1,15 +1,15 @@
-﻿local llamaModule = require(script:FindFirstAncestor("FriendsRodux").Parent.llama)
-local removeUserModule = require(script.Parent.removeUser)
+﻿local LlamaModule = require(script:FindFirstAncestor("FriendsRodux").Parent.llama)
+local RemoveUserModule = require(script.Parent.removeUser)
 
-return function(p1, p2)
-	-- upvalues: llamaModule (ref), removeUserModule (ref)
-	local var1 = tostring(p2.additionalData.currentUserId)
-	local var2 = tostring(p2.namedIds.users)
-	local var3 = llamaModule.Dictionary.join(p1, {
-		[var1] = removeUserModule(p1[var1], var2),
-		[var2] = removeUserModule(p1[var2], var1)
+return function(p1, p2) --[[ Line: 9 ]]
+	-- upvalues: LlamaModule (copy), RemoveUserModule (copy)
+	local Text = tostring(p2.additionalData.currentUserId)
+	local Text1 = tostring(p2.namedIds.users)
+	local JoinResult = LlamaModule.Dictionary.join(p1, {
+		[Text] = RemoveUserModule(p1[Text], Text1),
+		[Text1] = RemoveUserModule(p1[Text1], Text)
 	})
-	var3[var2] = nil
+	JoinResult[Text1] = nil
 	
-	return var3
+	return JoinResult
 end

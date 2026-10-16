@@ -1,17 +1,17 @@
-﻿local gameFilters = script:FindFirstAncestor("GameFilters")
-local _ = require(gameFilters.Parent.DiscoveryTypes)
-local gameFilterModelModule = require(gameFilters.DataStore.GameFilterModel)
-local setGameFiltersModule = require(gameFilters.DataStore.SetGameFilters)
+﻿local GameFilters = script:FindFirstAncestor("GameFilters")
+local _ = require(GameFilters.Parent.DiscoveryTypes)
+local GameFilterModelModule = require(GameFilters.DataStore.GameFilterModel)
+local SetGameFiltersModule = require(GameFilters.DataStore.SetGameFilters)
 
-return function(p1, p2, p3)
-	-- upvalues: gameFilterModelModule (ref), setGameFiltersModule (ref)
-	if not p3 or #p3 == 0 then
+return function(p1, p2, List) --[[ Line: 9 ]]
+	-- upvalues: GameFilterModelModule (copy), SetGameFiltersModule (copy)
+	if not List or #List == 0 then
 		warn("Found no filters in this sort")
 	end
-	local t = {}
+	local FromExploreJsonDataResults = {}
 	
-	for i, v in p3 do
-		table.insert(t, gameFilterModelModule.fromExploreJsonData(v))
+	for _, value in List do
+		table.insert(FromExploreJsonDataResults, (GameFilterModelModule.fromExploreJsonData(value)))
 	end
-	p1:dispatch(setGameFiltersModule(p2, t, tick()))
+	p1:dispatch(SetGameFiltersModule(p2, FromExploreJsonDataResults, (tick())))
 end

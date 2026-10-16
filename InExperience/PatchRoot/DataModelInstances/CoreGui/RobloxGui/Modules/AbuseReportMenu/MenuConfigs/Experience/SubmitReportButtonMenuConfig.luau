@@ -1,65 +1,65 @@
-﻿local abuseReportMenu = script:FindFirstAncestor("AbuseReportMenu")
-local marketplaceService = game:GetService("MarketplaceService")
-local playersService = game:GetService("Players")
-local _ = require(abuseReportMenu.Components.Types)
-local constantsModule = require(abuseReportMenu.Components.Constants)
-local tnSIXPWrapperModule = require(abuseReportMenu.IXP.TnSIXPWrapper)
-local abuseReportBuilderModule = require(abuseReportMenu.ReportAnything.Utility.AbuseReportBuilder)
-local reportAbuseAnalyticsModule = require(abuseReportMenu.Analytics.ReportAbuseAnalytics)
-local getToastMessageFromAbuseReasonModule = require(abuseReportMenu.MenuConfigs.getToastMessageFromAbuseReason)
+﻿local AbuseReportMenu = script:FindFirstAncestor("AbuseReportMenu")
+local MarketplaceService = game:GetService("MarketplaceService")
+local Players = game:GetService("Players")
+local _ = require(AbuseReportMenu.Components.Types)
+local ConstantsModule = require(AbuseReportMenu.Components.Constants)
+local TnSIXPWrapperModule = require(AbuseReportMenu.IXP.TnSIXPWrapper)
+local AbuseReportBuilderModule = require(AbuseReportMenu.ReportAnything.Utility.AbuseReportBuilder)
+local ReportAbuseAnalyticsModule = require(AbuseReportMenu.Analytics.ReportAbuseAnalytics)
+local GetToastMessageFromAbuseReasonModule = require(AbuseReportMenu.MenuConfigs.getToastMessageFromAbuseReason)
 
 return {
 	componentType = "button",
 	variant = "primary",
 	fieldLabel = "",
 	componentName = "SubmitButton",
-	getIsVisible = function(_)
+	getIsVisible = function(_): boolean --[[ Line: 14 ]]
 		return true
 	end,
-	getIconSrc = function(_)
+	getIconSrc = function(_): string --[[ Line: 18 ]]
 		return ""
 	end,
-	getButtonLabel = function(_)
+	getButtonLabel = function(_): string --[[ Line: 21 ]]
 		return "SubmitButton"
 	end,
-	onClick = function(p1, _, p2)
-		-- upvalues: playersService (ref), tnSIXPWrapperModule (ref), abuseReportBuilderModule (ref), reportAbuseAnalyticsModule (ref), constantsModule (ref), getToastMessageFromAbuseReasonModule (ref), marketplaceService (ref)
-		local abuseReason = p1.abuseReason
+	onClick = function(p1, _, p2) --[[ Line: 24 ]]
+		-- upvalues: Players (copy), TnSIXPWrapperModule (copy), AbuseReportBuilderModule (copy), ReportAbuseAnalyticsModule (copy), ConstantsModule (copy), GetToastMessageFromAbuseReasonModule (copy), MarketplaceService (copy)
+		local AbuseReason = p1.abuseReason
 		
-		if abuseReason ~= nil and playersService.LocalPlayer ~= nil then
-			if tnSIXPWrapperModule.getReportAnythingExperienceEnabled() then
-				playersService:ReportAbuseV3(playersService.LocalPlayer, abuseReportBuilderModule.buildExperienceReportRequest({
-					localUserId = playersService.LocalPlayer.UserId,
+		if AbuseReason ~= nil and Players.LocalPlayer ~= nil then
+			if TnSIXPWrapperModule.getReportAnythingExperienceEnabled() then
+				Players:ReportAbuseV3(Players.LocalPlayer, (AbuseReportBuilderModule.buildExperienceReportRequest({
+					localUserId = Players.LocalPlayer.UserId,
 					placeId = game.PlaceId,
 					abuseComment = p1.comment,
-					abuseReason = abuseReason,
-					menuEntryPoint = reportAbuseAnalyticsModule:getAbuseReportSessionEntryPoint(),
-					variant = abuseReportBuilderModule.Constants.Variant.NM
-				}, p2.reportAnythingState, p2.reportAnythingAnalytics.getAccumulatedParameters()))
+					abuseReason = AbuseReason,
+					menuEntryPoint = ReportAbuseAnalyticsModule:getAbuseReportSessionEntryPoint(),
+					variant = AbuseReportBuilderModule.Constants.Variant.NM
+				}, p2.reportAnythingState, p2.reportAnythingAnalytics.getAccumulatedParameters())))
 				p2.analyticsDispatch({
-					type = constantsModule.AnalyticsActions.SetSubmissionCompleted
+					type = ConstantsModule.AnalyticsActions.SetSubmissionCompleted
 				})
-				p2.onReportComplete(getToastMessageFromAbuseReasonModule(abuseReason, true))
+				p2.onReportComplete((GetToastMessageFromAbuseReasonModule(AbuseReason, true)))
 				
 				return
 			end
-			spawn(function()
-				-- upvalues: marketplaceService (copy), p1 (ref), playersService (copy), abuseReason (ref)
-				local var1 = tostring(game.PlaceId)
-				local var2 = "N/A"
-				local var3 = "N/A"
-				pcall(function()
-					-- upvalues: marketplaceService (copy), var2 (write), var3 (write)
-					local placeIdProductInfoAsync = marketplaceService:GetProductInfoAsync(game.PlaceId, Enum.InfoType.Asset)
-					var2 = placeIdProductInfoAsync.Name
-					var3 = placeIdProductInfoAsync.Description
+			spawn(function() --[[ Line: 49 ]]
+				-- upvalues: MarketplaceService (upval), p1 (copy), Players (upval), AbuseReason (copy)
+				local Text = tostring(game.PlaceId)
+				local Name = "N/A"
+				local Description = "N/A"
+				pcall(function() --[[ Line: 51 ]]
+					-- upvalues: MarketplaceService (upval), Name (ref), Description (ref)
+					local ProductInfoAsync = MarketplaceService:GetProductInfoAsync(game.PlaceId, Enum.InfoType.Asset)
+					Name = ProductInfoAsync.Name
+					Description = ProductInfoAsync.Description
 				end)
-				playersService:ReportAbuse(nil, abuseReason, string.format("User Report: \n    %s \nPlace Title: \n    %s \nPlaceId: \n    %s \nPlace Description: \n    %s \n", p1.comment, var2, var1, var3))
+				Players:ReportAbuse(nil, AbuseReason, (string.format("User Report: \n    %s \nPlace Title: \n    %s \nPlaceId: \n    %s \nPlace Description: \n    %s \n", p1.comment, Name, Text, Description)))
 			end)
 			p2.analyticsDispatch({
-				type = constantsModule.AnalyticsActions.SetSubmissionCompleted
+				type = ConstantsModule.AnalyticsActions.SetSubmissionCompleted
 			})
-			p2.onReportComplete(getToastMessageFromAbuseReasonModule(abuseReason))
+			p2.onReportComplete((GetToastMessageFromAbuseReasonModule(AbuseReason)))
 		end
 	end
 }

@@ -1,9 +1,10 @@
-﻿local parent = script.Parent.Parent.Parent.Parent.Parent
-local tModule = require(parent.t)
+﻿local Parent = script.Parent.Parent.Parent.Parent.Parent
+local TModule = require(Parent.t)
+local ValidateFontFaceModule = require(script.Parent.validateFontFace)
 
-return tModule.strictInterface({
-	Font = if require(parent.Foundation).Utility.Flags.FoundationFontFaceMigration then tModule.union(tModule.EnumItem, require(script.Parent.validateFontFace)) else tModule.EnumItem,
-	FontSize = tModule.numberMinExclusive(0),
-	LineHeight = tModule.numberMinExclusive(0),
-	LetterSpacing = tModule.number
+return TModule.strictInterface({
+	Font = if require(Parent.Foundation).Utility.Flags.FoundationFontFaceMigration then TModule.union(TModule.EnumItem, ValidateFontFaceModule) else TModule.EnumItem,
+	FontSize = TModule.numberMinExclusive(0),
+	LineHeight = TModule.numberMinExclusive(0),
+	LetterSpacing = TModule.number
 })

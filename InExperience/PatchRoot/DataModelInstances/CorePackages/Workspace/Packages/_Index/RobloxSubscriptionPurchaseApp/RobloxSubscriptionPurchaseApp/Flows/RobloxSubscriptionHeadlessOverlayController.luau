@@ -1,38 +1,38 @@
-﻿local robloxSubscriptionPurchaseApp = script:FindFirstAncestor("RobloxSubscriptionPurchaseApp")
-local parent = robloxSubscriptionPurchaseApp.Parent
-local reactModule = require(parent.React)
-local reactRobloxModule = require(parent.ReactRoblox)
-local robloxSubscriptionHeadlessListenerHostModule = require(robloxSubscriptionPurchaseApp.Components.RobloxSubscriptionHeadlessListenerHost)
-local robloxSubscriptionStoreModule = require(robloxSubscriptionPurchaseApp.Store.RobloxSubscriptionStore)
-local var1 = nil
+﻿local RobloxSubscriptionPurchaseApp = script:FindFirstAncestor("RobloxSubscriptionPurchaseApp")
+local Parent = RobloxSubscriptionPurchaseApp.Parent
+local ReactModule = require(Parent.React)
+local ReactRobloxModule = require(Parent.ReactRoblox)
+local RobloxSubscriptionHeadlessListenerHostModule = require(RobloxSubscriptionPurchaseApp.Components.RobloxSubscriptionHeadlessListenerHost)
+local RobloxSubscriptionStoreModule = require(RobloxSubscriptionPurchaseApp.Store.RobloxSubscriptionStore)
+local Callback = nil
 
 return {
-	render = function()
-		-- upvalues: robloxSubscriptionStoreModule (ref), reactRobloxModule (ref), reactModule (ref), robloxSubscriptionHeadlessListenerHostModule (ref), var1 (write)
-		local var2 = robloxSubscriptionStoreModule.get()
-		var2.triggerUnmountUI()
-		local robloxSubscriptionPurchaseHeadlessOverlay = Instance.new("Folder")
-		robloxSubscriptionPurchaseHeadlessOverlay.Name = "RobloxSubscriptionPurchaseHeadlessOverlay"
-		robloxSubscriptionPurchaseHeadlessOverlay.Parent = game:GetService("CoreGui")
-		local var3 = reactRobloxModule.createRoot(robloxSubscriptionPurchaseHeadlessOverlay)
-		var3:render(reactModule.createElement(robloxSubscriptionHeadlessListenerHostModule))
+	render = function() --[[ Line: 19 ]]
+		-- upvalues: RobloxSubscriptionStoreModule (copy), ReactRobloxModule (copy), ReactModule (copy), RobloxSubscriptionHeadlessListenerHostModule (copy), Callback (ref)
+		local GetResult = RobloxSubscriptionStoreModule.get()
+		GetResult.triggerUnmountUI()
+		local RobloxSubscriptionPurchaseHeadlessOverlay = Instance.new("Folder")
+		RobloxSubscriptionPurchaseHeadlessOverlay.Name = "RobloxSubscriptionPurchaseHeadlessOverlay"
+		RobloxSubscriptionPurchaseHeadlessOverlay.Parent = game:GetService("CoreGui")
+		local Root = ReactRobloxModule.createRoot(RobloxSubscriptionPurchaseHeadlessOverlay)
+		Root:render(ReactModule.createElement(RobloxSubscriptionHeadlessListenerHostModule))
 		
-		local function cleanup()
-			-- upvalues: var3 (ref), robloxSubscriptionPurchaseHeadlessOverlay (ref)
-			var3:unmount()
-			robloxSubscriptionPurchaseHeadlessOverlay:Destroy()
+		local function cleanup() --[[ Line: 30 ]]
+			-- upvalues: Root (copy), RobloxSubscriptionPurchaseHeadlessOverlay (copy)
+			Root:unmount()
+			RobloxSubscriptionPurchaseHeadlessOverlay:Destroy()
 		end
 		
-		var1 = cleanup
-		var2.setOnUnmountUI(cleanup)
+		Callback = cleanup
+		GetResult.setOnUnmountUI(cleanup)
 		
 		return cleanup
 	end,
-	close = function()
-		-- upvalues: var1 (write)
-		if var1 then
-			var1()
-			var1 = nil
+	close = function() --[[ Line: 12 ]]
+		-- upvalues: Callback (ref)
+		if Callback then
+			Callback()
+			Callback = nil
 		end
 	end
 }

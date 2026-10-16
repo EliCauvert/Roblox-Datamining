@@ -1,124 +1,116 @@
-﻿local inlineRichText = script:FindFirstAncestor("InlineRichText")
-local parent = inlineRichText.Parent
-local _ = require(inlineRichText.Types)
-local name = require(inlineRichText.Logger):new(script.Name)
-local cryoModule = require(parent.Cryo)
-local nodeConfigModule = require(inlineRichText.NodeConfig)
-local nodeStackModule = require(inlineRichText.Parser.NodeStack)
-local nodeTypeModule = require(inlineRichText.Enums.NodeType)
-local tokenNameModule = require(inlineRichText.Enums.TokenName)
-local t = {
-	[tokenNameModule.Text] = function(p1, p2, _)
-		-- upvalues: nodeTypeModule (ref), name (ref)
-		local var1 = p1:peek()
+﻿local InlineRichText = script:FindFirstAncestor("InlineRichText")
+local _ = require(InlineRichText.Types)
+local NewResult = require(InlineRichText.Logger):new(script.Name)
+local CryoModule = require(InlineRichText.Parent.Cryo)
+local NodeConfigModule = require(InlineRichText.NodeConfig)
+local NodeStackModule = require(InlineRichText.Parser.NodeStack)
+local NodeTypeModule = require(InlineRichText.Enums.NodeType)
+local TokenNameModule = require(InlineRichText.Enums.TokenName)
+local config = {
+	[TokenNameModule.Text] = function(p1, p2, _) --[[ Line: 16 ]]
+		-- upvalues: NodeTypeModule (copy), NewResult (copy)
+		local PeekResult = p1:peek()
 		
-		if not var1 or var1.type ~= nodeTypeModule.Plaintext then
-			local _, plaintext = p1:pushDefault(nodeTypeModule.Plaintext)
+		if not PeekResult or PeekResult.type ~= NodeTypeModule.Plaintext then
+			local _, PushDefaultResult2 = p1:pushDefault(NodeTypeModule.Plaintext)
 			
-			if plaintext then
-				local var2 = p1:peek()
-				var2.text = `{var2.text}{p2.text}`
-				
-				return
-			else
-				name:error("Failed to push default plaintext node to add text to")
+			if not PushDefaultResult2 then
+				NewResult:error("Failed to push default plaintext node to add text to")
 				
 				return nil
 			end
 		end
+		local PeekResult1 = p1:peek()
+		PeekResult1.text = `{PeekResult1.text}{p2.text}`
 	end,
-	[tokenNameModule.Break] = function(p1, _, _)
-		-- upvalues: nodeTypeModule (ref), name (ref), cryoModule (ref), nodeConfigModule (ref)
-		local var1, var2 = p1:push({
+	[TokenNameModule.Break] = function(p1, _, _) --[[ Line: 30 ]]
+		-- upvalues: NodeTypeModule (copy), NewResult (copy), CryoModule (copy), NodeConfigModule (copy)
+		local BREAK, BREAK2 = p1:push({
 			name = "BREAK",
 			text = "",
-			type = nodeTypeModule.InlineCustom,
+			type = NodeTypeModule.InlineCustom,
 			children = {},
 			attributes = {}
 		})
-		local _, _break = p1:findAndClose("BREAK")
+		local _, BREAK2_1 = p1:findAndClose("BREAK")
 		
-		if not var2 or not _break then
-			name:error("Failed to push break node")
+		if not BREAK2 or not BREAK2_1 then
+			NewResult:error("Failed to push break node")
 			
 			return nil
 		end
-		for i, v in cryoModule.List.reverse(var1) do
-			local var3 = p1:peek()
-			local var4 = var3 and nodeConfigModule.getByNode(var3)
+		for _, value in CryoModule.List.reverse(BREAK) do
+			local PeekResult = p1:peek()
+			local ByNode = PeekResult and NodeConfigModule.getByNode(PeekResult)
 			
-			if not var4 then break end
-			if var4.children[v.type] then
-				local _, var5 = p1:push(v)
+			if not ByNode then break end
+			if ByNode.children[value.type] then
+				local _, PushResult2 = p1:push(value)
 				
-				if not var5 then
-					name:error(`Failed to re-open node {v.name} after break`)
+				if not PushResult2 then
+					NewResult:error(`Failed to re-open node {value.name} after break`)
 					
 					return nil
 				end
 			end
 		end
 	end,
-	[tokenNameModule.Open] = function(p2, p3, p4)
-		-- upvalues: name (ref)
-		local text = p4.TagAliases[p3.text] or p3.text
-		local var6 = p4.TagConfigurations[text]
+	[TokenNameModule.Open] = function(p2, p3, p4) --[[ Line: 64 ]]
+		-- upvalues: NewResult (copy)
+		local TagAlias = p4.TagAliases[p3.text] or p3.text
+		local TagConfiguration = p4.TagConfigurations[TagAlias]
 		
-		if not var6 then
-			name:error(`No configuration open tag name {text}`)
+		if not TagConfiguration then
+			NewResult:error(`No configuration open tag name {TagAlias}`)
 			
 			return nil
 		end
-		text = var6.OverrideName or text
-		local _, var7 = p2:push({
+		local OverrideName = TagConfiguration.OverrideName or TagAlias
+		local _, PushResult2 = p2:push({
 			text = "",
-			type = var6.NodeType,
-			name = text,
+			type = TagConfiguration.NodeType,
+			name = OverrideName,
 			children = {},
 			attributes = p3.attributes
 		})
 		
-		if var7 then
-			return
-		end
-		name:error(`Failed to push open tag {text}`)
+		if PushResult2 then return end
+		NewResult:error(`Failed to push open tag {OverrideName}`)
 		
 		return nil
 	end,
-	[tokenNameModule.Close] = function(p2, p3, p4)
-		-- upvalues: name (ref)
-		local text = p4.TagAliases[p3.text] or p3.text
-		local var6 = p4.TagConfigurations[text]
+	[TokenNameModule.Close] = function(p2, p3, p4) --[[ Line: 87 ]]
+		-- upvalues: NewResult (copy)
+		local TagAlias = p4.TagAliases[p3.text] or p3.text
+		local TagConfiguration = p4.TagConfigurations[TagAlias]
 		
-		if not var6 then
-			name:error(`No configuration close tag name {text}`)
+		if not TagConfiguration then
+			NewResult:error(`No configuration close tag name {TagAlias}`)
 			
 			return nil
 		end
-		text = var6.OverrideName or text
-		local _, var7 = p2:findAndClose(text)
+		local OverrideName = TagConfiguration.OverrideName or TagAlias
+		local _, AndClose2 = p2:findAndClose(OverrideName)
 		
-		if var7 then
-			return
-		end
-		name:error(`Failed to find and close tag {text}`)
+		if AndClose2 then return end
+		NewResult:error(`Failed to find and close tag {OverrideName}`)
 		
 		return nil
 	end
 }
 
-return function(p2, p3)
-	-- upvalues: nodeStackModule (ref), t (ref), name (ref)
-	local var6 = nodeStackModule.new()
+return function(List, p2) --[[ Line: 106 | Named "buildTree" ]]
+	-- upvalues: NodeStackModule (copy), config (copy), NewResult (copy)
+	local NewNodeStack = NodeStackModule.new()
 	
-	for i, v in p2 do
-		local name_1 = t[v.name]
+	for _, value in List do
+		local Entry: (any, any, any) -> () = config[value.name]
 		
-		if name_1 then
-			name_1(var6, v, p3)
+		if Entry then
+			Entry(NewNodeStack, value, p2)
 		else
-			name:error(`No processor for token name {v.name}`)
+			NewResult:error(`No processor for token name {value.name}`)
 		end
 	end
-	return var6:buildRoot()
+	return NewNodeStack:buildRoot()
 end

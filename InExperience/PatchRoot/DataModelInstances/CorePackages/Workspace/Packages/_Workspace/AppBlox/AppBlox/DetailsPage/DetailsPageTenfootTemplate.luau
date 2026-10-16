@@ -1,115 +1,144 @@
-﻿local appBlox = script:FindFirstAncestor("AppBlox")
-local parent = appBlox.Parent
-local cryoModule = require(parent.Cryo)
-local animatedFlatList = require(parent.VirtualizedList).AnimatedFlatList
-local detailsPageHeaderModule = require(script.Parent.DetailsPageHeader)
-local getPlatformConfigModule = require(script.Parent.getPlatformConfig)
-local useDetailsPageRenderItemsModule = require(script.Parent.Hooks.useDetailsPageRenderItems)
-local useAnimateFullscreenModule = require(script.Parent.Hooks.useAnimateFullscreen)
-local detailsPageRenderItemModule = require(script.Parent.DetailsPageRenderItem)
-local displayModule = require(parent.Display)
-local useSignalState = require(parent.SignalsReact).useSignalState
-local fullscreenFrameModule = require(appBlox.FullscreenFrame)
-local signal = require(parent.AppCommonLib).Signal
-local UIBloxModule = require(parent.UIBlox)
-local overlay = UIBloxModule.App.Dialog.Overlay
-local loadableImage = UIBloxModule.App.Loading.LoadableImage
-local _ = require(parent.RobloxAppEnums)
-local _ = require(parent.ReactOtter)
+﻿local AppBlox = script:FindFirstAncestor("AppBlox")
+local Parent = AppBlox.Parent
+local CryoModule = require(Parent.Cryo)
+local AnimatedFlatList = require(Parent.VirtualizedList).AnimatedFlatList
+local DetailsPageHeaderModule = require(script.Parent.DetailsPageHeader)
+local GetPlatformConfigModule = require(script.Parent.getPlatformConfig)
+local UseDetailsPageRenderItemsModule = require(script.Parent.Hooks.useDetailsPageRenderItems)
+local UseAnimateFullscreenModule = require(script.Parent.Hooks.useAnimateFullscreen)
+local DetailsPageRenderItemModule = require(script.Parent.DetailsPageRenderItem)
+local DisplayModule = require(Parent.Display)
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local FullscreenFrameModule = require(AppBlox.FullscreenFrame)
+local Signal = require(Parent.AppCommonLib).Signal
+local UIBloxModule = require(Parent.UIBlox)
+local Overlay = UIBloxModule.App.Dialog.Overlay
+local LoadableImage = UIBloxModule.App.Loading.LoadableImage
+local _ = require(Parent.RobloxAppEnums)
+local _ = require(Parent.ReactOtter)
 local _ = require(script.Parent.Types)
-local reactModule = require(parent.React)
-local fFlagLuaAppEdpConsoleMediaGalleryVideo = require(parent.SharedFlags).FFlagLuaAppEdpConsoleMediaGalleryVideo
-local t = {
+local ReactModule = require(Parent.React)
+local FFlagLuaAppEdpConsoleMediaGalleryVideo = require(Parent.SharedFlags).FFlagLuaAppEdpConsoleMediaGalleryVideo
+local config = {
 	itemPadding = 36,
 	trailingWhitespace = 3000,
 	animationConfig = { dampingRatio = 1, frequency = 3 },
 	safeAreaSize = Vector2.new(96, 144)
 }
 
-return function(p1)
-	-- upvalues: t (ref), cryoModule (ref), reactModule (ref), getPlatformConfigModule (ref), signal (ref), useAnimateFullscreenModule (ref), detailsPageHeaderModule (ref), useDetailsPageRenderItemsModule (ref), detailsPageRenderItemModule (ref), useSignalState (ref), displayModule (ref), fullscreenFrameModule (ref), fFlagLuaAppEdpConsoleMediaGalleryVideo (ref), loadableImage (ref), overlay (ref), animatedFlatList (ref)
-	local var1 = t
+return function(p1) --[[ Line: 160 | Named "DetailsPageTenfootTemplate" ]]
+	-- upvalues: config (copy), CryoModule (copy), ReactModule (copy), GetPlatformConfigModule (copy), Signal (copy), UseAnimateFullscreenModule (copy), DetailsPageHeaderModule (copy), UseDetailsPageRenderItemsModule (copy), DetailsPageRenderItemModule (copy), UseSignalStateFunction (copy), DisplayModule (copy), FullscreenFrameModule (copy), FFlagLuaAppEdpConsoleMediaGalleryVideo (copy), LoadableImage (copy), Overlay (copy), AnimatedFlatList (copy)
+	local JoinResult = config
 	
 	if p1.tokens then
-		var1 = cryoModule.Dictionary.join(var1, p1.tokens)
+		JoinResult = CryoModule.Dictionary.join(JoinResult, p1.tokens)
 	end
-	local var2, var3 = reactModule.useState(true)
-	local var4 = reactModule.useMemo(function()
-		-- upvalues: getPlatformConfigModule (copy), p1 (ref)
-		return getPlatformConfigModule(p1.deviceType)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(true)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 171 ]]
+		-- upvalues: GetPlatformConfigModule (upval), p1 (copy)
+		return GetPlatformConfigModule(p1.deviceType)
 	end, { p1.deviceType })
-	local var5 = reactModule.useRef(nil)
-	local var6, var7 = reactModule.useState(Vector2.new(0, 0))
-	local var8 = reactModule.useCallback(function(p2)
-		-- upvalues: var7 (ref)
-		var7(p2.AbsoluteSize)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(Vector2.new(0, 0))
+	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 177 ]]
+		-- upvalues: UseStateResult2_1 (copy)
+		UseStateResult2_1(Frame.AbsoluteSize)
 	end, {})
-	reactModule.useEffect(function()
-		-- upvalues: var5 (ref), var7 (ref)
-		if var5.current then
-			var7(var5.current.AbsoluteSize)
+	ReactModule.useEffect(function() --[[ Line: 180 ]]
+		-- upvalues: UseRefResult (copy), UseStateResult2_1 (copy)
+		if UseRefResult.current then
+			UseStateResult2_1(UseRefResult.current.AbsoluteSize)
 		end
 	end, {})
-	local var9 = if p1.thumbnailHeight then p1.thumbnailHeight else var4.thumbnailHeight
-	local var10 = if p1.headerBarBackgroundHeight ~= nil then var4.headerBarBackgroundHeight else p1.headerBarBackgroundHeight
-	local var11 = if p1.sideMargin then p1.sideMargin else var4.sideMargin
-	local var12 = reactModule.useMemo(function()
-		-- upvalues: signal (copy)
-		return signal.new()
+	local ThumbnailHeight = if p1.thumbnailHeight then p1.thumbnailHeight else UseMemoResult.thumbnailHeight
+	local HeaderBarBackgroundHeight = if p1.headerBarBackgroundHeight == nil then UseMemoResult.headerBarBackgroundHeight else p1.headerBarBackgroundHeight
+	local SideMargin = if p1.sideMargin then p1.sideMargin else UseMemoResult.sideMargin
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 192 ]]
+		-- upvalues: Signal (upval)
+		return Signal.new()
 	end, {})
-	local renderFullscreenContent = p1.renderFullscreenContent
-	local var13, var14 = useAnimateFullscreenModule(if p1.isFullscreen == nil then false else p1.isFullscreen, renderFullscreenContent, var1.animationConfig)
-	local var15 = useDetailsPageRenderItemsModule(p1.componentList, reactModule.useMemo(function()
-		-- upvalues: reactModule (copy), detailsPageHeaderModule (copy), p1 (ref), var9 (ref), var12 (ref), var11 (ref), var10 (ref), var1 (write)
-		return reactModule.createElement(detailsPageHeaderModule, {
+	local RenderFullscreenContentFunction = p1.renderFullscreenContent
+	local UseAnimateFullscreenModuleResult, UseAnimateFullscreenModuleResult2 = UseAnimateFullscreenModule(p1.isFullscreen ~= nil and p1.isFullscreen, RenderFullscreenContentFunction, JoinResult.animationConfig)
+	local UseDetailsPageRenderItemsModuleResult = UseDetailsPageRenderItemsModule(p1.componentList, ReactModule.useMemo(function() --[[ Line: 204 ]]
+		-- upvalues: ReactModule (upval), DetailsPageHeaderModule (upval), p1 (copy), ThumbnailHeight (copy), UseMemoResult1 (copy), SideMargin (copy), HeaderBarBackgroundHeight (copy), JoinResult (ref)
+		return ReactModule.createElement(DetailsPageHeaderModule, {
 			thumbnailImageUrl = p1.thumbnailImageUrl,
 			thumbnailAspectRatio = p1.thumbnailAspectRatio,
-			thumbnailHeight = var9,
+			thumbnailHeight = ThumbnailHeight,
 			titleText = p1.titleText,
 			subTitleText = p1.subTitleText,
 			actionBarLabelText = p1.actionBarLabelText,
 			renderActionBarLabelImpressionsDetector = p1.renderActionBarLabelImpressionsDetector,
-			scrollViewPositionChangedSignal = var12,
+			scrollViewPositionChangedSignal = UseMemoResult1,
 			renderInfoContent = p1.renderInfoContent,
 			actionBarProps = p1.actionBarProps,
-			sideMargin = var11,
-			headerBarBackgroundHeight = var10,
+			sideMargin = SideMargin,
+			headerBarBackgroundHeight = HeaderBarBackgroundHeight,
 			deviceType = p1.deviceType,
-			thumbnailShadowHeight = var1.thumbnailShadowHeight,
-			gradientHeight = var1.headerGradientHeight,
-			actionBarHeight = var1.actionBarHeight,
-			actionBarWidth = p1.actionBarWidth or var1.actionBarWidth,
-			itemPadding = var1.thumbnailMargin,
-			bottomMargin = var1.headerBottomMargin
+			thumbnailShadowHeight = JoinResult.thumbnailShadowHeight,
+			gradientHeight = JoinResult.headerGradientHeight,
+			actionBarHeight = JoinResult.actionBarHeight,
+			actionBarWidth = p1.actionBarWidth or JoinResult.actionBarWidth,
+			itemPadding = JoinResult.thumbnailMargin,
+			bottomMargin = JoinResult.headerBottomMargin
 		})
 	end, {
-		p1.thumbnailImageUrl, p1.thumbnailAspectRatio, var9, p1.titleText,
+		p1.thumbnailImageUrl, p1.thumbnailAspectRatio, ThumbnailHeight, p1.titleText,
 		p1.subTitleText, p1.actionBarLabelText, p1.renderInfoContent,
-		p1.actionBarProps, var11, var10, p1.deviceType, var1.thumbnailShadowHeight,
-		var1.headerGradientHeight, var1.thumbnailMargin, var1.headerBottomMargin,
-		var1.actionBarHeight, var1.actionBarWidth, p1.actionBarWidth,
-		p1.renderActionBarLabelImpressionsDetector, var12
-	}), var6, var1.safeAreaSize)
-	local var16 = useSignalState(displayModule.GetDisplayStore().getDeviceSafePadding)
+		p1.actionBarProps, SideMargin, HeaderBarBackgroundHeight, p1.deviceType,
+		JoinResult.thumbnailShadowHeight, JoinResult.headerGradientHeight,
+		JoinResult.thumbnailMargin, JoinResult.headerBottomMargin,
+		JoinResult.actionBarHeight, JoinResult.actionBarWidth, p1.actionBarWidth,
+		p1.renderActionBarLabelImpressionsDetector, UseMemoResult1
+	}), UseStateResult1, JoinResult.safeAreaSize)
+	local UseResult1 = ReactModule.useCallback(function(p2) --[[ Line: 255 ]]
+		-- upvalues: ReactModule (upval), DetailsPageRenderItemModule (upval), JoinResult (ref)
+		return ReactModule.createElement(DetailsPageRenderItemModule, {
+			item = p2.item,
+			itemPadding = JoinResult.itemPadding,
+			safeArea = JoinResult.safeAreaSize
+		})
+	end, { JoinResult.itemPadding, JoinResult.safeAreaSize })
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 263 ]]
+		-- upvalues: ReactModule (upval), JoinResult (ref)
+		return ReactModule.createElement("Frame", {
+			BackgroundTransparency = 1,
+			BorderSizePixel = 0,
+			Size = UDim2.new(1, 0, 0, JoinResult.itemPadding)
+		})
+	end, { JoinResult.itemPadding })
+	local UseResult3 = ReactModule.useCallback(function(p2) --[[ Line: 272 ]]
+		-- upvalues: UseMemoResult1 (copy), UseDetailsPageRenderItemsModuleResult (copy), UseStateResult2 (copy)
+		UseMemoResult1:fire()
+		
+		if UseDetailsPageRenderItemsModuleResult[p2].showCornerGradient == false then
+			UseStateResult2(false)
+			
+			return
+		else
+			UseStateResult2(true)
+		end
+	end, { UseDetailsPageRenderItemsModuleResult, UseMemoResult1 })
+	local UseSignalStateResult = UseSignalStateFunction(DisplayModule.GetDisplayStore().getDeviceSafePadding)
 	
-	return reactModule.createElement(fullscreenFrameModule, {
-		[reactModule.Change.AbsoluteSize] = var8,
+	return ReactModule.createElement(FullscreenFrameModule, {
+		[ReactModule.Change.AbsoluteSize] = UseResult,
 		BackgroundTransparency = 1,
-		ref = var5
+		ref = UseRefResult
 	}, {
-		BackgroundImage = reactModule.createElement("Frame", {
+		BackgroundImage = ReactModule.createElement("Frame", {
 			ZIndex = 1,
 			BackgroundTransparency = 1,
 			Size = UDim2.fromScale(1, 1)
 		}, {
-			BackgroundImage = if fFlagLuaAppEdpConsoleMediaGalleryVideo then nil else reactModule.createElement(loadableImage, {
+			BackgroundImage = if FFlagLuaAppEdpConsoleMediaGalleryVideo then nil else ReactModule.createElement(LoadableImage, {
 				AnchorPoint = Vector2.new(0.5, 0.5),
 				Position = UDim2.fromScale(0.5, 0.5),
 				Size = UDim2.new(1, 0, 1, 0),
 				Image = p1.bannerImageUrl,
 				ScaleType = Enum.ScaleType.Crop
 			}),
-			BackgroundContent = if fFlagLuaAppEdpConsoleMediaGalleryVideo then if p1.backgroundContentOverride then p1.backgroundContentOverride else reactModule.createElement(loadableImage, {
+			BackgroundContent = if FFlagLuaAppEdpConsoleMediaGalleryVideo then if p1.backgroundContentOverride then p1.backgroundContentOverride else ReactModule.createElement(LoadableImage, {
 				AnchorPoint = Vector2.new(0.5, 0.5),
 				Position = UDim2.fromScale(0.5, 0.5),
 				Size = UDim2.new(1, 0, 1, 0),
@@ -117,56 +146,32 @@ return function(p1)
 				ScaleType = Enum.ScaleType.Crop
 			}) else nil
 		}),
-		Overlay = reactModule.createElement(overlay, {
+		Overlay = ReactModule.createElement(Overlay, {
 			ZIndex = 2,
 			gradientDirection = "topRight",
-			showGradient = var2
+			showGradient = UseStateResult
 		}),
-		Content = reactModule.createElement(animatedFlatList, {
+		Content = ReactModule.createElement(AnimatedFlatList, {
 			animated = true,
 			UNSTABLE_forceSiblingLayoutUpdate = true,
 			overrideAutomaticCanvasSize = false,
 			isSequentiallySelectable = true,
-			onSelectedIndexChanged = reactModule.useCallback(function(p2)
-				-- upvalues: var12 (ref), var15 (ref), var3 (ref)
-				var12:fire()
-				
-				if var15[p2].showCornerGradient == false then
-					var3(false)
-					
-					return
-				end
-				var3(true)
-			end, { var15, var12 }),
-			initialNumToRender = #var15,
-			data = var15,
-			renderItem = reactModule.useCallback(function(p2)
-				-- upvalues: reactModule (copy), detailsPageRenderItemModule (copy), var1 (write)
-				return reactModule.createElement(detailsPageRenderItemModule, {
-					item = p2.item,
-					itemPadding = var1.itemPadding,
-					safeArea = var1.safeAreaSize
-				})
-			end, { var1.itemPadding, var1.safeAreaSize }),
-			ItemSeparatorComponent = reactModule.useCallback(function()
-				-- upvalues: reactModule (copy), var1 (write)
-				return reactModule.createElement("Frame", {
-					BackgroundTransparency = 1,
-					BorderSizePixel = 0,
-					Size = UDim2.new(1, 0, 0, var1.itemPadding)
-				})
-			end, { var1.itemPadding }),
-			ListFooterComponent = reactModule.createElement("Frame", {
+			onSelectedIndexChanged = UseResult3,
+			initialNumToRender = #UseDetailsPageRenderItemsModuleResult,
+			data = UseDetailsPageRenderItemsModuleResult,
+			renderItem = UseResult1,
+			ItemSeparatorComponent = UseResult2,
+			ListFooterComponent = ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
-				Size = UDim2.new(1, 0, 0, var1.trailingWhitespace)
+				Size = UDim2.new(1, 0, 0, JoinResult.trailingWhitespace)
 			}),
-			ListHeaderComponent = reactModule.createElement("Frame", {
+			ListHeaderComponent = ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
-				Size = UDim2.new(1, 0, 0, var1.safeAreaSize.Y)
+				Size = UDim2.new(1, 0, 0, JoinResult.safeAreaSize.Y)
 			}),
-			viewOffset = var1.safeAreaSize.Y,
+			viewOffset = JoinResult.safeAreaSize.Y,
 			contentContainerStyle = { BackgroundTransparency = 1 },
 			style = {
 				BackgroundTransparency = 1,
@@ -174,19 +179,19 @@ return function(p1)
 				ScrollingEnabled = true,
 				Selectable = false,
 				ZIndex = 3,
-				Position = UDim2.fromOffset(0, -var16.top),
-				Size = UDim2.new(1, 0, 1, var16.top + var16.bottom),
+				Position = UDim2.fromOffset(0, -UseSignalStateResult.top),
+				Size = UDim2.new(1, 0, 1, UseSignalStateResult.top + UseSignalStateResult.bottom),
 				VerticalScrollBarInset = Enum.ScrollBarInset.None
 			},
-			animationConfig = var1.animationConfig
+			animationConfig = JoinResult.animationConfig
 		}),
-		Fullscreen = reactModule.createElement("CanvasGroup", {
+		Fullscreen = ReactModule.createElement("CanvasGroup", {
 			BorderSizePixel = 0,
 			ZIndex = 4,
 			Size = UDim2.fromScale(1, 1),
-			GroupTransparency = var14
+			GroupTransparency = UseAnimateFullscreenModuleResult2
 		}, {
-			FullscreenContent = if var13 then renderFullscreenContent() else nil
+			FullscreenContent = if UseAnimateFullscreenModuleResult then RenderFullscreenContentFunction() else nil
 		})
 	})
 end

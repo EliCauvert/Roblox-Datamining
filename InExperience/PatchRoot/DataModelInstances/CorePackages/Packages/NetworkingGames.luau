@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Index.NetworkingGames.NetworkingGames)
+﻿return (require(script.Parent._Index.NetworkingGames.NetworkingGames))

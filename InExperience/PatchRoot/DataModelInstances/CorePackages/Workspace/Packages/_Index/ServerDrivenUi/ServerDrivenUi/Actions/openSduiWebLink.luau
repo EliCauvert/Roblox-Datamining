@@ -1,65 +1,65 @@
-﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
-local urlBuilder = require(parent.UrlBuilder).UrlBuilder
-local appPage = require(parent.RobloxAppEnums).AppPage
-local getAppFeaturePolicies = require(parent.UniversalAppPolicy).getAppFeaturePolicies
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
-local sduiCounterName = sduiCoreSystemModule.SduiErrors.SduiCounterName
+﻿local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
+local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local GetAppFeaturePoliciesFunction = require(Parent.UniversalAppPolicy).getAppFeaturePolicies
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
+local SduiCounterName = SduiCoreSystemModule.SduiErrors.SduiCounterName
 
-local function _()
-	-- upvalues: getAppFeaturePolicies (ref)
-	return getAppFeaturePolicies().getWebViewSupport()
+local function _() --[[ Line: 15 | Named "isWebViewSupported" ]]
+	-- upvalues: GetAppFeaturePoliciesFunction (copy)
+	return GetAppFeaturePoliciesFunction().getWebViewSupport()
 end
 
-return function(p1, p2, p3, p4)
-	-- upvalues: urlBuilder (ref), sduiErrorType (ref), getAppFeaturePolicies (ref), appPage (ref), sduiCounterName (ref)
-	local var1
-	local ok, status = pcall(function()
-		-- upvalues: urlBuilder (copy), p2 (ref)
-		return urlBuilder.fromString(if string.find(p2, "/") == 1 then p2:gsub("/", "www:", 1) else p2)()
+return function(p1, Text, TitleKey, Callback) --[[ Line: 22 | Named "openSduiWebLink" ]]
+	-- upvalues: UrlBuilder (copy), SduiErrorType (copy), GetAppFeaturePoliciesFunction (copy), AppPage (copy), SduiCounterName (copy)
+	local Success, Result = pcall(function() --[[ Line: 25 ]]
+		-- upvalues: UrlBuilder (upval), Text (copy)
+		return UrlBuilder.fromString(if string.find(Text, "/") == 1 then Text:gsub("/", "www:", 1) else Text)()
 	end)
-	local _ = nil
+	local Detail = nil
 	
-	if ok then
-		var1 = status
+	if Success then
+		Detail = Result
 	else
-		var1 = p2
-		p1.dependencies.logger.reportError(sduiErrorType.FailedtoParseUrl, {
-			name = p2,
-			message = if typeof(status) == "string" then status else "Unknown reason"
+		Detail = Text
+		p1.dependencies.logger.reportError(SduiErrorType.FailedtoParseUrl, {
+			name = Text,
+			message = if typeof(Result) == "string" then Result else "Unknown reason"
 		}, p1.appPage)
 	end
-	local linkingProtocol = p1.dependencies.linkingProtocol
-	local ok_1, status_1 = pcall(function()
-		-- upvalues: linkingProtocol (ref), var1 (write), getAppFeaturePolicies (copy), p1 (ref), p3 (ref), p4 (ref), appPage (copy), sduiCounterName (copy)
-		linkingProtocol:isURLRegistered(var1):andThen(function(p5)
-			-- upvalues: linkingProtocol (copy), var1 (copy), getAppFeaturePolicies (copy), p1 (copy), p3 (copy), p4 (copy), appPage (copy), sduiCounterName (copy)
-			if p5 then
-				linkingProtocol:detectURL(var1)
-				
-				return
-			elseif not getAppFeaturePolicies().getWebViewSupport() then
-				p1.dependencies.logger.reportCounter(sduiCounterName.WebViewNotSupportedForLink, { name = var1 })
+	local LinkingProtocol = p1.dependencies.linkingProtocol
+	local Success1, Result1 = pcall(function() --[[ Line: 40 ]]
+		-- upvalues: LinkingProtocol (copy), Detail (ref), GetAppFeaturePoliciesFunction (upval), p1 (copy), TitleKey (copy), Callback (copy), AppPage (upval), SduiCounterName (upval)
+		LinkingProtocol:isURLRegistered(Detail):andThen(function(Result) --[[ Line: 41 ]]
+			-- upvalues: LinkingProtocol (upval), Detail (upval), GetAppFeaturePoliciesFunction (upval), p1 (upval), TitleKey (upval), Callback (upval), AppPage (upval), SduiCounterName (upval)
+			if Result then
+				LinkingProtocol:detectURL(Detail)
 				
 				return
 			end
-			local navigation = p1.dependencies.getNavigation()
-			local t = { titleKey = p3 }
+			if not GetAppFeaturePoliciesFunction().getWebViewSupport() then
+				p1.dependencies.logger.reportCounter(SduiCounterName.WebViewNotSupportedForLink, { name = Detail })
+				
+				return
+			end
+			local Navigation = p1.dependencies.getNavigation()
+			local ExtraProps = { titleKey = TitleKey }
 			
-			if p4 then
-				function t.onClose()
-					-- upvalues: p4 (copy)
-					p4()
+			if Callback then
+				function ExtraProps.onClose() --[[ Line: 48 ]]
+					-- upvalues: Callback (upval)
+					Callback()
 				end
 			end
-			navigation.navigate(appPage.GenericWebPage, { detail = var1, extraProps = t })
+			Navigation.navigate(AppPage.GenericWebPage, { detail = Detail, extraProps = ExtraProps })
 		end)
 	end)
 	
-	if not ok_1 then
-		p1.dependencies.logger.reportError(sduiErrorType.FailedToOpenLink, {
-			name = p2,
-			message = if typeof(status_1) == "string" then status_1 else "Unknown reason"
+	if not Success1 then
+		p1.dependencies.logger.reportError(SduiErrorType.FailedToOpenLink, {
+			name = Text,
+			message = if typeof(Result1) == "string" then Result1 else "Unknown reason"
 		}, p1.appPage)
 	end
 end

@@ -1,18 +1,18 @@
-﻿local chatUIPrimitives = script:FindFirstAncestor("ChatUIPrimitives")
-local parent = chatUIPrimitives.Parent
-local reactModule = require(parent.React)
-local foundationProvider = require(parent.Foundation).FoundationProvider
+﻿local ChatUIPrimitives = script:FindFirstAncestor("ChatUIPrimitives")
+local Parent = ChatUIPrimitives.Parent
+local ReactModule = require(Parent.React)
+local FoundationProvider = require(Parent.Foundation).FoundationProvider
 
 return {
-	name = chatUIPrimitives.Name,
-	roact = reactModule,
-	reactRoblox = require(parent.ReactRoblox),
-	storyRoots = { chatUIPrimitives },
-	mapStory = function(p1)
-		-- upvalues: reactModule (ref), foundationProvider (ref)
-		return function(p2)
-			-- upvalues: reactModule (copy), foundationProvider (copy), p1 (ref)
-			return reactModule.createElement(foundationProvider, { colorMode = p2 and p2.theme, device = p2 and p2.platform }, reactModule.createElement(p1, p2))
+	name = ChatUIPrimitives.Name,
+	roact = ReactModule,
+	reactRoblox = require(Parent.ReactRoblox),
+	storyRoots = { ChatUIPrimitives },
+	mapStory = function(p1) --[[ Line: 17 ]]
+		-- upvalues: ReactModule (copy), FoundationProvider (copy)
+		return function(p2) --[[ Line: 18 ]]
+			-- upvalues: ReactModule (upval), FoundationProvider (upval), p1 (copy)
+			return ReactModule.createElement(FoundationProvider, { colorMode = p2 and p2.theme, device = p2 and p2.platform }, ReactModule.createElement(p1, p2))
 		end
 	end
 }

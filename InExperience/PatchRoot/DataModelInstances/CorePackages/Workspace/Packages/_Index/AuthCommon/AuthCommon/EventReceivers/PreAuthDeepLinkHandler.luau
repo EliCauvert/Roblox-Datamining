@@ -1,74 +1,72 @@
-﻿local authCommon = script:FindFirstAncestor("AuthCommon")
-local userModule = require(authCommon.Thunks.User)
-local default = require(authCommon.Parent.LinkingProtocol).LinkingProtocol.default
-local preAuthDeepLinkMapModule = require(script.Parent.PreAuthDeepLinkMap)
-local fFlagEnablePreAuthDeepLinkHandlerModule = require(authCommon.Flags.FFlagEnablePreAuthDeepLinkHandler)
+﻿local AuthCommon = script:FindFirstAncestor("AuthCommon")
+local UserModule = require(AuthCommon.Thunks.User)
+local Default = require(AuthCommon.Parent.LinkingProtocol).LinkingProtocol.default
+local PreAuthDeepLinkMapModule = require(script.Parent.PreAuthDeepLinkMap)
 
-local function parseQueryParams(p1)
+local function parseQueryParams(Text: string) --[[ Line: 50 ]]
 	local t = {}
-	local _, matchIndex = string.find(p1, "?")
+	local _, EndIndex = string.find(Text, "?")
 	
-	if not matchIndex then
+	if not EndIndex then
 		return t
 	end
-	for i in string.gmatch(string.sub(p1, matchIndex + 1), "[^&]+") do
-		local match, match_1 = string.match(i, "([^=]+)=?(.*)")
+	for i in string.gmatch(string.sub(Text, EndIndex + 1), "[^&]+") do
+		local Match, Match2 = string.match(i, "([^=]+)=?(.*)")
 		
-		if match then
-			t[string.lower(match)] = match_1 or ""
+		if Match then
+			t[string.lower(Match)] = Match2 or ""
 		end
 	end
 	return t
 end
 
-local function _(p2, p3)
-	return string.match(p3, p2) ~= nil
+local function _(Pattern, Text: string): boolean --[[ Line: 70 | Named "matchesPattern" ]]
+	return string.match(Text, Pattern) ~= nil
 end
 
-local _ = function()
-	-- upvalues: userModule (ref)
-	return userModule.fromLocalStorage().userId ~= -1
+local _ = function(): boolean --[[ Line: 74 | Named "userIsAuthenticated" ]]
+	-- upvalues: UserModule (copy)
+	return UserModule.fromLocalStorage().userId ~= -1
 end
 
-local function isPreauthDeeplink(p2)
-	-- upvalues: preAuthDeepLinkMapModule (ref)
-	if not p2 or p2 == "" then
+local function isPreauthDeeplink(Text: string): boolean --[[ Line: 78 ]]
+	-- upvalues: PreAuthDeepLinkMapModule (copy)
+	if not Text or Text == "" then
 		return false
 	end
-	local lowerText = string.lower(p2)
+	local Lowered = string.lower(Text)
 	
-	for i, v in ipairs(preAuthDeepLinkMapModule) do
-		if string.match(lowerText, v.regexPattern) ~= nil then
+	for _, value in ipairs(PreAuthDeepLinkMapModule) do
+		if string.match(Lowered, value.regexPattern) ~= nil then
 			return true
 		end
 	end
 	return false
 end
 
-local function firePreauthDeeplink(p3, p4)
-	-- upvalues: userModule (ref), preAuthDeepLinkMapModule (ref), parseQueryParams (ref)
-	if not p3 or p3 == "" then
+local function firePreauthDeeplink(Text: string, p1) --[[ Line: 94 ]]
+	-- upvalues: UserModule (copy), PreAuthDeepLinkMapModule (copy), parseQueryParams (copy)
+	if not Text or Text == "" then
 		return nil
 	end
-	local lowerText = string.lower(p3)
-	local var1 = userModule.fromLocalStorage().userId ~= -1
-	
-	for i, v in ipairs(preAuthDeepLinkMapModule) do
-		if string.match(lowerText, v.regexPattern) ~= nil then
-			return if v.preauthOnly and var1 then nil else v.handler(parseQueryParams(p3), p4)
+	local Lowered = string.lower(Text)
+	local IsNotUserIdMatch = UserModule.fromLocalStorage().userId ~= -1
+	for _, value in ipairs(PreAuthDeepLinkMapModule) do
+		if string.match(Lowered, value.regexPattern) ~= nil then
+			return if value.preauthOnly and IsNotUserIdMatch then nil else value.handler(parseQueryParams(Text), p1)
 		end
 	end
 	return nil
 end
 
-local function registerPatterns()
-	-- upvalues: preAuthDeepLinkMapModule (ref), default (ref)
-	for i, v in ipairs(preAuthDeepLinkMapModule) do
-		default:registerURL(v.regexPattern:gsub("%%", "\\"))
+local function registerPatterns() --[[ Line: 117 ]]
+	-- upvalues: PreAuthDeepLinkMapModule (copy), Default (copy)
+	for _, value in ipairs(PreAuthDeepLinkMapModule) do
+		Default:registerURL((value.regexPattern:gsub("%%", "\\")))
 	end
 end
 
-if fFlagEnablePreAuthDeepLinkHandlerModule then
+if require(AuthCommon.Flags.FFlagEnablePreAuthDeepLinkHandler) then
 	registerPatterns()
 end
 return {

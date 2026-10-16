@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("MomentsNonInfiniteScroll", false)
 
-return function()
+return function() --[[ Line: 10 ]]
 	return game:GetFastFlag("MomentsNonInfiniteScroll")
 end

@@ -1,49 +1,49 @@
-﻿local parent = script:FindFirstAncestor("FriendsCommon").Parent
-local reactModule = require(parent.React)
-local cryoModule = require(parent.Cryo)
-local signalsReactModule = require(parent.SignalsReact)
-local fFlagConnectionManagementChips = require(parent.SharedFlags).FFlagConnectionManagementChips
-local _ = require(parent.GraphQLServer)
-local var1 = if fFlagConnectionManagementChips then require(parent.DataHydration).TrustedConnections.TrustedConnectionsStore.get() else nil
+﻿local Parent = script:FindFirstAncestor("FriendsCommon").Parent
+local ReactModule = require(Parent.React)
+local CryoModule = require(Parent.Cryo)
+local SignalsReactModule = require(Parent.SignalsReact)
+local FFlagConnectionManagementChips = require(Parent.SharedFlags).FFlagConnectionManagementChips
+local DataHydrationModule = require(Parent.DataHydration)
+local _ = require(Parent.GraphQLServer)
+local GetResult = if FFlagConnectionManagementChips then DataHydrationModule.TrustedConnections.TrustedConnectionsStore.get() else nil
 
-return function(p1)
-	-- upvalues: fFlagConnectionManagementChips (ref), var1 (ref), signalsReactModule (ref), reactModule (ref), cryoModule (ref)
-	if fFlagConnectionManagementChips then
-		local var2 = signalsReactModule.useSignalState(var1.getUserTrustedConnections().data)
-		local var3 = reactModule.useMemo(function()
-			-- upvalues: p1 (ref)
-			if not p1 then
-				return {}
-			end
-			local t = {}
-			
-			for i, v in p1 do
-				t[v.id] = true
-			end
-			return t
-		end, { p1 })
-		local var4 = reactModule.useMemo(function()
-			-- upvalues: var2 (ref)
-			if not var2 then
-				return {}
-			end
-			local t = {}
-			
-			for i, v in var2 do
-				t[v.id] = true
-			end
-			return t
-		end, { var2 })
+return function(p1) --[[ Line: 17 | Named "useDecoratedTrustedConnections" ]]
+	-- upvalues: FFlagConnectionManagementChips (copy), GetResult (copy), SignalsReactModule (copy), ReactModule (copy), CryoModule (copy)
+	if not FFlagConnectionManagementChips then return end
+	local UseSignalStateResult = SignalsReactModule.useSignalState(GetResult.getUserTrustedConnections().data)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 25 ]]
+		-- upvalues: p1 (copy)
+		if not p1 then
+			return {}
+		end
+		local t = {}
 		
-		return reactModule.useMemo(function()
-			-- upvalues: var2 (ref), cryoModule (copy), p1 (ref), var4 (ref), var3 (ref)
-			return if var2 then cryoModule.List.join(cryoModule.List.filter(p1 or {}, function(p2)
-				-- upvalues: var4 (copy)
-				return var4[p2.id] == true
-			end), cryoModule.List.filter(var2, function(p2)
-				-- upvalues: var3 (copy)
-				return var3[p2.id] ~= true
-			end)) else {}
-		end, { var4, var2, var3 })
-	end
+		for _, value in p1 do
+			t[value.id] = true
+		end
+		return t
+	end, { p1 })
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 37 ]]
+		-- upvalues: UseSignalStateResult (copy)
+		if not UseSignalStateResult then
+			return {}
+		end
+		local t = {}
+		
+		for _, value in UseSignalStateResult do
+			t[value.id] = true
+		end
+		return t
+	end, { UseSignalStateResult })
+	
+	return (ReactModule.useMemo(function() --[[ Line: 49 ]]
+		-- upvalues: UseSignalStateResult (copy), CryoModule (upval), p1 (copy), UseMemoResult1 (copy), UseMemoResult (copy)
+		return if UseSignalStateResult then CryoModule.List.join(CryoModule.List.filter(p1 or {}, function(p2): boolean --[[ Line: 54 ]]
+			-- upvalues: UseMemoResult1 (upval)
+			return UseMemoResult1[p2.id] == true
+		end), (CryoModule.List.filter(UseSignalStateResult, function(p2): boolean --[[ Line: 58 ]]
+			-- upvalues: UseMemoResult (upval)
+			return UseMemoResult[p2.id] ~= true
+		end))) else {}
+	end, { UseMemoResult1, UseSignalStateResult, UseMemoResult }))
 end

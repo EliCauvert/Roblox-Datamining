@@ -1,15 +1,15 @@
 ﻿local _ = require(script.Parent.Parent.AnalyticsTypes)
-local getDeepValueModule = require(script.Parent.Parent.Parent.Parent.Utils.getDeepValue)
+local GetDeepValueModule = require(script.Parent.Parent.Parent.Parent.Utils.getDeepValue)
 
-return function(p1)
-	-- upvalues: getDeepValueModule (ref)
-	local keyPath = p1.keyPath
+return function(p1) --[[ Line: 7 ]]
+	-- upvalues: GetDeepValueModule (copy)
+	local KeyPath = p1.keyPath
 	
-	return function(p2)
-		-- upvalues: getDeepValueModule (copy), keyPath (ref)
-		return function(p3)
-			-- upvalues: getDeepValueModule (copy), p2 (ref), keyPath (copy)
-			return getDeepValueModule(p2, string.format("%s.bySessionKey.%s", keyPath, p3))
+	return function(p2) --[[ Line: 9 ]]
+		-- upvalues: GetDeepValueModule (upval), KeyPath (copy)
+		return function(p3) --[[ Line: 10 ]]
+			-- upvalues: GetDeepValueModule (upval), p2 (copy), KeyPath (upval)
+			return GetDeepValueModule(p2, string.format("%s.bySessionKey.%s", KeyPath, p3))
 		end
 	end
 end

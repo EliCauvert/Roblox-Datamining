@@ -1,7 +1,7 @@
-﻿local useCursor = require(script.Parent.Parent.Parent.Parent.Foundation).Hooks.useCursor
-local mapCursorTypeModule = require(script.Parent.Parent.Parent.App.SelectionCursor.mapCursorType)
+﻿local UseCursorFunction = require(script.Parent.Parent.Parent.Parent.Foundation).Hooks.useCursor
+local MapCursorTypeModule = require(script.Parent.Parent.Parent.App.SelectionCursor.mapCursorType)
 
-return function(p1)
-	-- upvalues: useCursor (ref), mapCursorTypeModule (ref)
-	return useCursor(mapCursorTypeModule(p1, true))
+return function(p1) --[[ Line: 14 | Named "useSelectionCursor" ]]
+	-- upvalues: UseCursorFunction (copy), MapCursorTypeModule (copy)
+	return UseCursorFunction(MapCursorTypeModule(p1, true))
 end

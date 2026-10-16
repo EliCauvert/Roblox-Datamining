@@ -1,137 +1,161 @@
-﻿local httpService = game:GetService("HttpService")
-local playersService = game:GetService("Players")
-local userInputService = game:GetService("UserInputService")
-local parent = script:FindFirstAncestor("SduiSharedContent").Parent
-local discoveryAnalyticsModule = require(parent.DiscoveryAnalytics)
-local default = require(parent.ExternalContentSharingProtocol).ExternalContentSharingProtocol.default
-local foundationModule = require(parent.Foundation)
-local httpRequestModule = require(parent.HttpRequest)
-local promiseModule = require(parent.Promise)
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local urlBuilderModule = require(parent.UrlBuilder)
-local sduiActionType = sduiCoreSystemModule.SduiActionType
-local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
-local getActionTelemetryFieldValue = sduiCoreSystemModule.getActionTelemetryFieldValue
-local getSduiPageEntrySnackbarStore = require(parent.SduiSharedUtilities).getSduiPageEntrySnackbarStore
-local urlBase = urlBuilderModule.UrlBase
-local urlBuilder = urlBuilderModule.UrlBuilder
-local gameCopyExperienceLink = discoveryAnalyticsModule.Events.gameCopyExperienceLink
-local gameShareExperienceLink = discoveryAnalyticsModule.Events.gameShareExperienceLink
+﻿local HttpService = game:GetService("HttpService")
+local Players = game:GetService("Players")
+local UserInputService = game:GetService("UserInputService")
+local Parent = script:FindFirstAncestor("SduiSharedContent").Parent
+local DiscoveryAnalyticsModule = require(Parent.DiscoveryAnalytics)
+local Default = require(Parent.ExternalContentSharingProtocol).ExternalContentSharingProtocol.default
+local FoundationModule = require(Parent.Foundation)
+local HttpRequestModule = require(Parent.HttpRequest)
+local PromiseModule = require(Parent.Promise)
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local UrlBuilderModule = require(Parent.UrlBuilder)
+local SduiActionType = SduiCoreSystemModule.SduiActionType
+local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
+local GetActionTelemetryFieldValueFunction = SduiCoreSystemModule.getActionTelemetryFieldValue
+local GetSduiPageEntrySnackbarStoreFunction = require(Parent.SduiSharedUtilities).getSduiPageEntrySnackbarStore
+local UrlBase = UrlBuilderModule.UrlBase
+local UrlBuilder = UrlBuilderModule.UrlBuilder
+local GameCopyExperienceLinkFunction = DiscoveryAnalyticsModule.Events.gameCopyExperienceLink
+local GameShareExperienceLinkFunction = DiscoveryAnalyticsModule.Events.gameShareExperienceLink
+local FFlagLuaAppAddUniverseIdToEngagementEvents = require(Parent.SharedFlags).FFlagLuaAppAddUniverseIdToEngagementEvents
 
-local function _()
-	-- upvalues: userInputService (ref)
-	local platform = userInputService:GetPlatform()
+local function _(): boolean --[[ Line: 36 | Named "isDesktopPlatform" ]]
+	-- upvalues: UserInputService (copy)
+	local Platform = UserInputService:GetPlatform()
 	
-	return if platform ~= Enum.Platform.Windows then if platform ~= Enum.Platform.OSX then platform == Enum.Platform.UWP else true else true
+	return Platform == Enum.Platform.Windows or (Platform == Enum.Platform.OSX or Platform == Enum.Platform.UWP)
 end
 
-local function logExperienceDetailsShareAnalytics(p1, p2, p3, p4)
-	-- upvalues: playersService (ref), userInputService (ref), gameCopyExperienceLink (ref), gameShareExperienceLink (ref)
-	local localPlayer = playersService.LocalPlayer
+local function logExperienceDetailsShareAnalytics(PlaceId, Ctx, LinkId, Stamp, p1) --[[ Line: 43 ]]
+	-- upvalues: Players (copy), UserInputService (copy), GameCopyExperienceLinkFunction (copy), FFlagLuaAppAddUniverseIdToEngagementEvents (copy), GameShareExperienceLinkFunction (copy)
+	local LocalPlayer = Players.LocalPlayer
 	
-	if not localPlayer then return end
-	local var1 = tostring(localPlayer.UserId)
-	local platform = userInputService:GetPlatform()
+	if not LocalPlayer then return end
+	local Text = tostring(LocalPlayer.UserId)
+	local Platform = UserInputService:GetPlatform()
 	
-	if if platform ~= Enum.Platform.Windows then if platform ~= Enum.Platform.OSX then platform == Enum.Platform.UWP else true else true then
-		gameCopyExperienceLink({ ctx = p2, uid = var1, placeId = p1, stamp = p4 }, p2)
+	if Platform == Enum.Platform.Windows or (Platform == Enum.Platform.OSX or Platform == Enum.Platform.UWP) then
+		GameCopyExperienceLinkFunction({
+			ctx = Ctx,
+			uid = Text,
+			placeId = PlaceId,
+			stamp = Stamp,
+			universeId = if FFlagLuaAppAddUniverseIdToEngagementEvents then p1 else nil
+		}, Ctx)
 		
 		return
+	else
+		GameShareExperienceLinkFunction({
+			shareToAppsflyer = true,
+			ctx = Ctx,
+			uid = Text,
+			placeId = PlaceId,
+			shortShareLinkFailed = LinkId == nil,
+			stamp = Stamp,
+			linkId = LinkId,
+			universeId = if FFlagLuaAppAddUniverseIdToEngagementEvents then p1 else nil
+		}, Ctx)
 	end
-	gameShareExperienceLink({
-		shareToAppsflyer = true,
-		ctx = p2,
-		uid = var1,
-		placeId = p1,
-		shortShareLinkFailed = p3 == nil,
-		stamp = p4,
-		linkId = p3
-	}, p2)
 end
 
-local function fetchShareLinkId(p1, p2)
-	-- upvalues: urlBuilder (ref), urlBase (ref), httpService (ref), httpRequestModule (ref)
-	return httpRequestModule.config({
-		requestFunction = function(p3, p4, p5)
-			-- upvalues: httpRequestModule (copy)
-			return httpRequestModule.requestFunctions.RequestInternal(p3, p4, p5)
+local function fetchShareLinkId(LinkType, LinkData) --[[ Line: 78 ]]
+	-- upvalues: UrlBuilder (copy), UrlBase (copy), HttpService (copy), HttpRequestModule (copy)
+	return HttpRequestModule.config({
+		requestFunction = function(p1, p2, p3) --[[ Line: 90 ]]
+			-- upvalues: HttpRequestModule (upval)
+			return HttpRequestModule.requestFunctions.RequestInternal(p1, p2, p3)
 		end
-	})(urlBuilder.new({
+	})(UrlBuilder.new({
 		path = "sharelinks/v1/get-or-create-link",
-		base = urlBase.APIS
+		base = UrlBase.APIS
 	})(), "POST", {
-		postBody = httpService:JSONEncode({ linkType = p1, data = httpService:JSONEncode(p2) })
-	}):andThen(function(p3)
-		local responseBody = p3.responseBody or p3.result
+		postBody = HttpService:JSONEncode({
+			linkType = LinkType,
+			data = HttpService:JSONEncode(LinkData)
+		})
+	}):andThen(function(Result) --[[ Line: 95 ]]
+		local ResponseBody = Result.responseBody or Result.result
 		
-		if responseBody and responseBody.linkId then
-			return responseBody.linkId
+		if ResponseBody and ResponseBody.linkId then
+			return ResponseBody.linkId
+		else
+			error("Share link response missing linkId")
 		end
-		error("Share link response missing linkId")
 	end)
 end
 
-return function(p1, p2, p3)
-	-- upvalues: sduiErrorType (ref), sduiActionType (ref), promiseModule (ref), fetchShareLinkId (ref), urlBuilder (ref), default (ref), userInputService (ref), getSduiPageEntrySnackbarStore (ref), foundationModule (ref), getActionTelemetryFieldValue (ref), logExperienceDetailsShareAnalytics (ref)
-	local var1 = if p1 then p1.actionParams else nil
+return function(p1, p2, p3) --[[ Line: 105 ]]
+	-- upvalues: SduiErrorType (copy), SduiActionType (copy), PromiseModule (copy), fetchShareLinkId (copy), UrlBuilder (copy), Default (copy), UserInputService (copy), GetSduiPageEntrySnackbarStoreFunction (copy), FoundationModule (copy), GetActionTelemetryFieldValueFunction (copy), FFlagLuaAppAddUniverseIdToEngagementEvents (copy), logExperienceDetailsShareAnalytics (copy)
+	local ActionParams = p1 and p1.actionParams or nil
 	
-	if var1 == nil then
-		p3.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if ActionParams == nil then
+		p3.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			message = "Missing actionParams",
-			name = sduiActionType.Share
+			name = SduiActionType.Share
 		}, p3.appPage)
 		
 		return
 	end
-	local var2
-	local shareLinkData = var1.shareLinkData or {}
-	local entryPointKey = var1.entryPointKey or nil
-	local shareUrlContext = shareLinkData.shareUrlContext or ""
-	local var3 = shareLinkData.linkType ~= nil
-	local _ = nil
-	local var4 = nil
-	local var5 = nil
+	local ShareLinkData = ActionParams.shareLinkData or {}
+	local EntryPointKey = ActionParams.entryPointKey or nil
+	local ShareUrlContext = ShareLinkData.shareUrlContext or ""
+	local LinkId = nil
+	local Text = nil
+	local RejectResult = nil
 	
-	if var3 then
-		local linkType = shareLinkData.linkType
-		local linkData = shareLinkData.linkData
-		var2 = if linkData == nil then promiseModule.reject(`Missing linkData in ShareLinkFetchData (linkType={linkType})`) else fetchShareLinkId(linkType, linkData):andThen(function(p4)
-			-- upvalues: var4 (write), var5 (write), urlBuilder (copy), linkType (ref)
-			var4 = p4
-			var5 = tostring(DateTime.now().UnixTimestampMillis)
+	if ShareLinkData.linkType ~= nil then
+		local LinkType = ShareLinkData.linkType
+		local LinkData = ShareLinkData.linkData
+		RejectResult = if LinkData == nil then PromiseModule.reject(`Missing linkData in ShareLinkFetchData (linkType={LinkType})`) else fetchShareLinkId(LinkType, LinkData):andThen(function(Result) --[[ Line: 136 ]]
+			-- upvalues: LinkId (ref), Text (ref), UrlBuilder (upval), LinkType (copy)
+			LinkId = Result
+			Text = tostring(DateTime.now().UnixTimestampMillis)
 			
-			return urlBuilder.sharelinks.shortUrl({ linkId = p4, type = linkType, stamp = var5 })
+			return UrlBuilder.sharelinks.shortUrl({ linkId = Result, type = LinkType, stamp = Text })
 		end)
 	else
-		local url = shareLinkData.url
-		var2 = if url == nil then promiseModule.reject("Missing url in shareLinkData") else promiseModule.resolve(url)
+		local Url = ShareLinkData.url
+		RejectResult = if Url == nil then PromiseModule.reject("Missing url in shareLinkData") else PromiseModule.resolve(Url)
 	end
-	var2:andThen(function(p4)
-		-- upvalues: default (copy), shareUrlContext (ref), userInputService (copy), entryPointKey (ref), p3 (ref), getSduiPageEntrySnackbarStore (copy), foundationModule (copy), shareLinkData (ref), getActionTelemetryFieldValue (copy), p1 (ref), p2 (ref), logExperienceDetailsShareAnalytics (copy), var4 (write), var5 (write)
-		default:shareUrl({ context = shareUrlContext, url = p4 })
-		local platform = userInputService:GetPlatform()
+	RejectResult:andThen(function(Result) --[[ Line: 156 ]]
+		-- upvalues: Default (upval), ShareUrlContext (copy), UserInputService (upval), EntryPointKey (copy), p3 (copy), GetSduiPageEntrySnackbarStoreFunction (upval), FoundationModule (upval), ShareLinkData (copy), GetActionTelemetryFieldValueFunction (upval), p1 (copy), p2 (copy), FFlagLuaAppAddUniverseIdToEngagementEvents (upval), logExperienceDetailsShareAnalytics (upval), LinkId (ref), Text (ref)
+		Default:shareUrl({ context = ShareUrlContext, url = Result })
+		local Platform = UserInputService:GetPlatform()
 		
-		if (if platform ~= Enum.Platform.Windows then if platform ~= Enum.Platform.OSX then platform == Enum.Platform.UWP else true else true) and entryPointKey then
-			getSduiPageEntrySnackbarStore().show(entryPointKey, {
+		if (Platform == Enum.Platform.Windows or (Platform == Enum.Platform.OSX or Platform == Enum.Platform.UWP)) and EntryPointKey then
+			GetSduiPageEntrySnackbarStoreFunction().show(EntryPointKey, {
 				title = p3.dependencies.localization:Format("Feature.GameDetails.Toast.LinkCopied"),
-				icon = foundationModule.Enums.IconName.CircleCheck
+				icon = FoundationModule.Enums.IconName.CircleCheck
 			})
 		end
-		if shareLinkData.linkType == "ExperienceDetails" then
-			local var6 = getActionTelemetryFieldValue(p1, p2, "rootPlaceId") or getActionTelemetryFieldValue(p1, p2, "placeId")
+		if ShareLinkData.linkType == "ExperienceDetails" then
+			local RootPlaceId = GetActionTelemetryFieldValueFunction(p1, p2, "rootPlaceId") or GetActionTelemetryFieldValueFunction(p1, p2, "placeId")
 			
-			if var6 ~= nil then
-				logExperienceDetailsShareAnalytics(tostring(var6), getActionTelemetryFieldValue(p1, p2, "ctx") or "ExperienceDetailsShare", var4, var5)
+			if RootPlaceId ~= nil then
+				local Ctx = GetActionTelemetryFieldValueFunction(p1, p2, "ctx") or "ExperienceDetailsShare"
+				
+				if FFlagLuaAppAddUniverseIdToEngagementEvents then
+					local UniverseId = GetActionTelemetryFieldValueFunction(p1, p2, "universeId")
+					
+					if UniverseId == nil and type(ShareLinkData.linkData) == "table" then
+						UniverseId = ShareLinkData.linkData.universeId
+					end
+					logExperienceDetailsShareAnalytics(tostring(RootPlaceId), Ctx, LinkId, Text, if UniverseId == nil then nil else tostring(UniverseId))
+					
+					return
+				else
+					logExperienceDetailsShareAnalytics(tostring(RootPlaceId), Ctx, LinkId, Text)
+				end
 			end
 		end
-	end):catch(function(p4)
-		-- upvalues: p3 (ref), sduiErrorType (copy), sduiActionType (copy), entryPointKey (ref), getSduiPageEntrySnackbarStore (copy), foundationModule (copy)
-		p3.dependencies.logger.reportError(sduiErrorType.FailedToExecuteAction, { name = sduiActionType.Share, message = tostring(p4) }, p3.appPage)
+	end):catch(function(Err) --[[ Line: 199 ]]
+		-- upvalues: p3 (copy), SduiErrorType (upval), SduiActionType (upval), EntryPointKey (copy), GetSduiPageEntrySnackbarStoreFunction (upval), FoundationModule (upval)
+		p3.dependencies.logger.reportError(SduiErrorType.FailedToExecuteAction, { name = SduiActionType.Share, message = tostring(Err) }, p3.appPage)
 		
-		if entryPointKey then
-			getSduiPageEntrySnackbarStore().show(entryPointKey, {
+		if EntryPointKey then
+			GetSduiPageEntrySnackbarStoreFunction().show(EntryPointKey, {
 				title = p3.dependencies.localization:Format("Feature.Toast.NetworkingError.SomethingIsWrong"),
-				icon = foundationModule.Enums.IconName.TriangleExclamation
+				icon = FoundationModule.Enums.IconName.TriangleExclamation
 			})
 		end
 	end)

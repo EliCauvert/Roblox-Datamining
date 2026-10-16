@@ -1,10 +1,10 @@
-﻿local list = { "<system_reminder>.-</system_reminder>" }
+﻿local Patterns = { "<system_reminder>.-</system_reminder>" }
 
 return {
-	shouldOptimisticallyDisplay = function(p1)
-		-- upvalues: list (ref)
-		for i, v in list do
-			if string.find(p1, v) ~= nil then
+	shouldOptimisticallyDisplay = function(Text: string): boolean --[[ Line: 5 ]]
+		-- upvalues: Patterns (copy)
+		for _, pattern in Patterns do
+			if string.find(Text, pattern) ~= nil then
 				return false
 			end
 		end

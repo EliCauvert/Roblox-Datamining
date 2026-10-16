@@ -1,1 +1,3 @@
-﻿return game:DefineFastFlag("AXBackgroundsTryOn", false) and require(script.Parent.FFlagAXBackgroundsRoot)
+﻿local FFlagAXBackgroundsRootModule = require(script.Parent.FFlagAXBackgroundsRoot)
+
+return game:DefineFastFlag("AXBackgroundsTryOn", false) and FFlagAXBackgroundsRootModule

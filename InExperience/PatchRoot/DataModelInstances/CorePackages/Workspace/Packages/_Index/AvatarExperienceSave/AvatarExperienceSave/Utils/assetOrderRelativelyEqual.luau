@@ -1,64 +1,71 @@
 ﻿local _ = require(script:FindFirstAncestor("AvatarExperienceSave").Context.AvatarSaveContext)
 
-return function(value, p1, p2)
-	local t = {}
-	local equippedAssets = value.equipped.EquippedAssets
-	local equippedAssets_1 = p1.equipped.EquippedAssets
+return function(p1, p2, p3): boolean --[[ Line: 17 | Named "assetOrderRelativeEqual" ]]
+	local List = {}
+	local EquippedAssets = p1.equipped.EquippedAssets
+	local EquippedAssets1 = p2.equipped.EquippedAssets
 	
-	if equippedAssets == nil and equippedAssets_1 == nil then
+	if EquippedAssets == nil and EquippedAssets1 == nil then
 		return true
-	elseif equippedAssets == nil or equippedAssets_1 == nil then
+	end
+	if EquippedAssets == nil or EquippedAssets1 == nil then
 		return false
 	end
-	for i, v in equippedAssets do
-		if p2[i] ~= nil then
-			for i_1, v_1 in v do
-				if v_1.order ~= nil then
-					table.insert(t, { itemId = i_1, assetTypeId = i, order = v_1.order })
+	for AssetTypeId, equippedAsset in EquippedAssets do
+		if p3[AssetTypeId] ~= nil then
+			for ItemId, value in equippedAsset do
+				if value.order ~= nil then
+					table.insert(List, {
+						itemId = ItemId,
+						assetTypeId = AssetTypeId,
+						order = value.order
+					})
 				end
 			end
 		end
 	end
-	for i_1, v_1 in value.tryOn.OutfitTryOn.TryOnItems or {} do
-		if p2[v_1.itemSubType] ~= nil and v_1.order ~= nil then
-			table.insert(t, {
-				itemId = v_1.itemId,
-				assetTypeId = v_1.itemSubType,
-				order = v_1.order
+	local TryOnItems = p1.tryOn.OutfitTryOn.TryOnItems or {}
+	for _, tryOnItem in TryOnItems do
+		if p3[tryOnItem.itemSubType] ~= nil and tryOnItem.order ~= nil then
+			table.insert(List, {
+				itemId = tryOnItem.itemId,
+				assetTypeId = tryOnItem.itemSubType,
+				order = tryOnItem.order
 			})
 		end
 	end
-	local var1
-	table.sort(t, function(p3, p4)
-		return p3.order < p4.order
+	table.sort(List, function(A, B): boolean --[[ Line: 61 ]]
+		return A.order < B.order
 	end)
-	local order = nil
+	local Order = nil
+	local Flag = nil
 	
-	for i_2, v_2 in t do
-		if order == nil then
-			order = v_2.order
+	for _, value1 in List do
+		if Order == nil then
+			Order = value1.order
 		end
-		if equippedAssets_1[v_2.assetTypeId] == nil or equippedAssets_1[v_2.assetTypeId][v_2.itemId] == nil then
-			var1 = false
-			
-			for i_3, v_3 in p1.tryOn.OutfitTryOn.TryOnItems or {} do
-				if v_2.itemId == v_3.itemId then
-					if v_3.order ~= nil and v_3.order >= order then
-						var1 = true
-						order = v_3.order
-						break
+		if EquippedAssets1[value1.assetTypeId] == nil or EquippedAssets1[value1.assetTypeId][value1.itemId] == nil then
+			Flag = false
+			local TryOnItems1 = p2.tryOn.OutfitTryOn.TryOnItems or {}
+			for _, tryOnItem1 in TryOnItems1 do
+				if value1.itemId == tryOnItem1.itemId then
+					if tryOnItem1.order == nil or tryOnItem1.order < Order then
+						return false
 					end
-					return false
+					Flag = true
+					Order = tryOnItem1.order
+					break
 				end
 			end
-			if not var1 then
+			if not Flag then
 				return false
 			end
-		elseif equippedAssets_1[v_2.assetTypeId][v_2.itemId].order ~= nil and equippedAssets_1[v_2.assetTypeId][v_2.itemId].order >= order then
-			order = equippedAssets_1[v_2.assetTypeId][v_2.itemId].order
+		elseif EquippedAssets1[value1.assetTypeId][value1.itemId].order ~= nil and EquippedAssets1[value1.assetTypeId][value1.itemId].order >= Order then
+			Order = EquippedAssets1[value1.assetTypeId][value1.itemId].order
 			continue
+		else
+			return false
 		end
-		return false
 	end
 	return true
 end

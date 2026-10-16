@@ -1,51 +1,52 @@
-﻿local parent = script:FindFirstAncestor("AmpUpsell").Parent
-local reactModule = require(parent.React)
-local useScreenSize = require(parent.RobloxAppHooks).useScreenSize
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local UIBloxModule = require(parent.UIBlox)
-local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
-local buttonType = UIBloxModule.App.Button.Enum.ButtonType
-local authButtonClick = require(parent.AuthAnalytics).Events.authButtonClick
+﻿local Parent = script:FindFirstAncestor("AmpUpsell").Parent
+local ReactModule = require(Parent.React)
+local UseScreenSizeFunction = require(Parent.RobloxAppHooks).useScreenSize
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UIBloxModule = require(Parent.UIBlox)
+local InteractiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
+local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
+local AuthButtonClickFunction = require(Parent.AuthAnalytics).Events.authButtonClick
 
-return function(p1)
-	-- upvalues: useScreenSize (ref), useLocalization (ref), reactModule (ref), authButtonClick (ref), interactiveAlert (ref), buttonType (ref)
-	local onClose = p1.onClose
-	local onRetry = p1.onRetry
-	local sessionId = p1.sessionId
-	local entryPointEventCtx = p1.entryPointEventCtx
-	local var1 = useLocalization({
+return function(p1) --[[ Line: 24 | Named "FAEFailedModal" ]]
+	-- upvalues: UseScreenSizeFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), AuthButtonClickFunction (copy), InteractiveAlert (copy), ButtonType (copy)
+	local OnCloseFunction = p1.onClose
+	local OnRetryFunction = p1.onRetry
+	local SessionId = p1.sessionId
+	local EntryPointEventCtx = p1.entryPointEventCtx
+	local UseScreenSizeResult = UseScreenSizeFunction()
+	local AmpFAEUpsellModalFailedTitle = UseLocalizationFunction({
 		title = "Amp.FAEUpsell.Modal.Failed.Title",
 		bodyText = "Amp.FAEUpsell.Modal.Failed.Text",
 		closeBtn = "Amp.FAEUpsell.Modal.Failed.ButtonClose",
 		retryBtn = "Amp.FAEUpsell.Modal.Failed.ButtonRetry"
 	})
 	
-	return reactModule.createElement(interactiveAlert, {
-		screenSize = useScreenSize(),
-		title = var1.title,
-		bodyText = var1.bodyText,
+	return ReactModule.createElement(InteractiveAlert, {
+		screenSize = UseScreenSizeResult,
+		title = AmpFAEUpsellModalFailedTitle.title,
+		bodyText = AmpFAEUpsellModalFailedTitle.bodyText,
 		buttonStackInfo = {
 			buttons = {
 				{
 					props = {
-						buttonType = buttonType.Secondary,
-						onActivated = reactModule.useCallback(function()
-							-- upvalues: authButtonClick (copy), entryPointEventCtx (ref), sessionId (ref), onClose (ref)
-							authButtonClick(entryPointEventCtx, "faeFailedClose", sessionId)
-							onClose()
-						end, { onClose, sessionId, entryPointEventCtx }),
-						text = var1.closeBtn
+						buttonType = ButtonType.Secondary,
+						onActivated = ReactModule.useCallback(function() --[[ Line: 39 ]]
+							-- upvalues: AuthButtonClickFunction (upval), EntryPointEventCtx (copy), SessionId (copy), OnCloseFunction (copy)
+							AuthButtonClickFunction(EntryPointEventCtx, "faeFailedClose", SessionId)
+							OnCloseFunction()
+						end, { OnCloseFunction, SessionId, EntryPointEventCtx }),
+						text = AmpFAEUpsellModalFailedTitle.closeBtn
 					}
 				},
 				{
-					buttonType = buttonType.PrimaryContextual,
+					buttonType = ButtonType.PrimaryContextual,
 					props = {
-						onActivated = reactModule.useCallback(function()
-							-- upvalues: authButtonClick (copy), entryPointEventCtx (ref), sessionId (ref), onRetry (ref)
-							authButtonClick(entryPointEventCtx, "faeFailedRetry", sessionId)
-							onRetry()
-						end, { onRetry, sessionId, entryPointEventCtx }),
-						text = var1.retryBtn
+						onActivated = ReactModule.useCallback(function() --[[ Line: 44 ]]
+							-- upvalues: AuthButtonClickFunction (upval), EntryPointEventCtx (copy), SessionId (copy), OnRetryFunction (copy)
+							AuthButtonClickFunction(EntryPointEventCtx, "faeFailedRetry", SessionId)
+							OnRetryFunction()
+						end, { OnRetryFunction, SessionId, EntryPointEventCtx }),
+						text = AmpFAEUpsellModalFailedTitle.retryBtn
 					}
 				}
 			}

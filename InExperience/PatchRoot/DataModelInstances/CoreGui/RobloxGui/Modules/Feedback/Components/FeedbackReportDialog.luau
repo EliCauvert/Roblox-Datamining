@@ -1,49 +1,49 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local experienceStateCaptureService = game:GetService("ExperienceStateCaptureService")
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local tModule = require(corePackagesService.Packages.t)
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local verticalScrollView = UIBloxModule.App.Container.VerticalScrollView
-local signalsModule = require(corePackagesService.Packages.Signals)
-local displayModule = require(corePackagesService.Workspace.Packages.Display)
-local reactUtilsModule = require(corePackagesService.Packages.ReactUtils)
-local parent = script.Parent.Parent
-local constantsModule = require(parent.Resources.Constants)
-local sendFeedbackThunkModule = require(parent.Thunks.SendFeedbackThunk)
-local getSourceLanguageThunkModule = require(parent.Thunks.GetSourceLanguageThunk)
-local setFeedbackFlowStateModule = require(parent.Actions.SetFeedbackFlowState)
-local setFeedbackReasonModule = require(parent.Actions.SetFeedbackReason)
-local textEntryFieldModule = require(parent.Components.TextEntryField)
-local modalDialogModule = require(parent.Components.ModalDialog)
-local themedTextLabelModule = require(parent.Components.PortedComponents.ThemedTextLabel)
-local withLocalization = require(corePackagesService.Workspace.Packages.Localization).withLocalization
-local radioButtonList = UIBloxModule.App.InputButton.RadioButtonList
-local buttonStack = UIBloxModule.App.Button.ButtonStack
-local buttonType = UIBloxModule.App.Button.Enum.ButtonType
-local styledTextLabel = UIBloxModule.App.Text.StyledTextLabel
-local withStyle = UIBloxModule.Core.Style.withStyle
-local robloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
-local getFFlagEnableSendImageFeedbackToBackendModule = require(robloxGui.Modules.Flags.GetFFlagEnableSendImageFeedbackToBackend)
-local getFFlagEnableFeedbackShowSourceTextAndOtherUXImprovementsModule = require(robloxGui.Modules.Flags.GetFFlagEnableFeedbackShowSourceTextAndOtherUXImprovements)
-local enableFeedbackSelectionUpdate = game:DefineFastFlag("EnableFeedbackSelectionUpdate", false)
-local fFlagTopBarSignalizeScreenSize = require(corePackagesService.Workspace.Packages.CoreGuiCommon).Flags.FFlagTopBarSignalizeScreenSize
+﻿local CorePackages = game:GetService("CorePackages")
+local ExperienceStateCaptureService = game:GetService("ExperienceStateCaptureService")
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local TModule = require(CorePackages.Packages.t)
+local UIBloxModule = require(CorePackages.Packages.UIBlox)
+local VerticalScrollView = UIBloxModule.App.Container.VerticalScrollView
+local SignalsModule = require(CorePackages.Packages.Signals)
+local DisplayModule = require(CorePackages.Workspace.Packages.Display)
+local ReactUtilsModule = require(CorePackages.Packages.ReactUtils)
+local Parent = script.Parent.Parent
+local ConstantsModule = require(Parent.Resources.Constants)
+local SendFeedbackThunkModule = require(Parent.Thunks.SendFeedbackThunk)
+local GetSourceLanguageThunkModule = require(Parent.Thunks.GetSourceLanguageThunk)
+local SetFeedbackFlowStateModule = require(Parent.Actions.SetFeedbackFlowState)
+local SetFeedbackReasonModule = require(Parent.Actions.SetFeedbackReason)
+local TextEntryFieldModule = require(Parent.Components.TextEntryField)
+local ModalDialogModule = require(Parent.Components.ModalDialog)
+local ThemedTextLabelModule = require(Parent.Components.PortedComponents.ThemedTextLabel)
+local WithLocalizationFunction = require(CorePackages.Workspace.Packages.Localization).withLocalization
+local RadioButtonList = UIBloxModule.App.InputButton.RadioButtonList
+local ButtonStack = UIBloxModule.App.Button.ButtonStack
+local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
+local StyledTextLabel = UIBloxModule.App.Text.StyledTextLabel
+local WithStyleFunction = UIBloxModule.Core.Style.withStyle
+local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
+local GetFFlagEnableSendImageFeedbackToBackendModule = require(RobloxGui.Modules.Flags.GetFFlagEnableSendImageFeedbackToBackend)
+local GetFFlagEnableFeedbackShowSourceTextAndOtherUXImprovementsModule = require(RobloxGui.Modules.Flags.GetFFlagEnableFeedbackShowSourceTextAndOtherUXImprovements)
+local EnableFeedbackSelectionUpdate = game:DefineFastFlag("EnableFeedbackSelectionUpdate", false)
+local FFlagTopBarSignalizeScreenSize = require(CorePackages.Workspace.Packages.CoreGuiCommon).Flags.FFlagTopBarSignalizeScreenSize
 
-local function _(value)
-	return if value == nil or value.SourceType ~= Enum.ContentSourceType.Uri then "" else value.Uri
+local function _(p1) --[[ Line: 58 | Named "getContentAssetUri" ]]
+	return if p1 == nil or p1.SourceType ~= Enum.ContentSourceType.Uri then "" else p1.Uri
 end
 
-local feedbackReportDialog = roactModule.PureComponent:extend("FeedbackReportDialog")
-feedbackReportDialog.validateProps = tModule.strictInterface({
-	isReportDialogOpen = tModule.boolean,
-	screenSize = if fFlagTopBarSignalizeScreenSize then nil else tModule.Vector2,
-	closeDialog = tModule.optional(tModule.callback),
-	reportCategory = tModule.optional(tModule.string)
+local FeedbackReportDialog = RoactModule.PureComponent:extend("FeedbackReportDialog")
+FeedbackReportDialog.validateProps = TModule.strictInterface({
+	isReportDialogOpen = TModule.boolean,
+	screenSize = if FFlagTopBarSignalizeScreenSize then nil else TModule.Vector2,
+	closeDialog = TModule.optional(TModule.callback),
+	reportCategory = TModule.optional(TModule.string)
 })
 
-function feedbackReportDialog.init(p1)
-	-- upvalues: enableFeedbackSelectionUpdate (ref), experienceStateCaptureService (ref), getFFlagEnableSendImageFeedbackToBackendModule (ref), constantsModule (ref), fFlagTopBarSignalizeScreenSize (ref), displayModule (ref), signalsModule (ref)
-	if enableFeedbackSelectionUpdate then
+function FeedbackReportDialog.init(p1) --[[ Line: 78 ]]
+	-- upvalues: EnableFeedbackSelectionUpdate (copy), ExperienceStateCaptureService (copy), GetFFlagEnableSendImageFeedbackToBackendModule (copy), ConstantsModule (copy), FFlagTopBarSignalizeScreenSize (copy), DisplayModule (copy), SignalsModule (copy)
+	if EnableFeedbackSelectionUpdate then
 		p1.state = {
 			feedbackText = "",
 			feedbackOriginalText = "",
@@ -69,13 +69,13 @@ function feedbackReportDialog.init(p1)
 			feedbackTranslatedImageUri = ""
 		}
 	end
-	function p0.calculateFieldHeight(p2, p3, p4)
-		return if p2 < 180 and p4 then p3 * 5 else p3 * (p2 / 45 + 2)
+	function p1.calculateFieldHeight(Length: number, p2: number, p3): number --[[ Line: 107 ]]
+		return if Length < 180 and p3 then p2 * 5 else p2 * (Length / 45 + 2)
 	end
 	
-	function p0.resetLocalState()
-		-- upvalues: enableFeedbackSelectionUpdate (copy), p1 (ref), experienceStateCaptureService (copy)
-		if enableFeedbackSelectionUpdate then
+	function p1.resetLocalState() --[[ Line: 116 ]]
+		-- upvalues: EnableFeedbackSelectionUpdate (upval), p1 (copy), ExperienceStateCaptureService (upval)
+		if EnableFeedbackSelectionUpdate then
 			p1:setState({ isGenericSelection = false })
 		end
 		p1:setState({
@@ -89,205 +89,203 @@ function feedbackReportDialog.init(p1)
 			feedbackIdentifier = ""
 		})
 		p1.props.setFeedbackReason(0)
-		experienceStateCaptureService:ResetHighlight()
+		ExperienceStateCaptureService:ResetHighlight()
 	end
 	
-	function p0.setInstanceRelatedReportDialogState(p2)
-		-- upvalues: p1 (ref), enableFeedbackSelectionUpdate (copy), getFFlagEnableSendImageFeedbackToBackendModule (copy)
-		local localizedImageContent
-		if p2:IsA("TextBox") then
+	function p1.setInstanceRelatedReportDialogState(Object) --[[ Line: 138 ]]
+		-- upvalues: p1 (copy), EnableFeedbackSelectionUpdate (upval), GetFFlagEnableSendImageFeedbackToBackendModule (upval)
+		if Object:IsA("TextBox") then
 			p1:setState({
-				feedbackText = if p2.PlaceholderText == "" then p2.Text else p2.PlaceholderText,
-				feedbackOriginalText = p2.LocalizationMatchedSourceText,
-				feedbackIdentifier = p2.LocalizationMatchIdentifier
+				feedbackText = if Object.PlaceholderText == "" then Object.Text else Object.PlaceholderText,
+				feedbackOriginalText = Object.LocalizationMatchedSourceText,
+				feedbackIdentifier = Object.LocalizationMatchIdentifier
 			})
 			
-			if enableFeedbackSelectionUpdate then
+			if EnableFeedbackSelectionUpdate then
 				p1:setState({ isGenericSelection = false })
 				
 				return
 			end
-		elseif p2:IsA("TextLabel") or p2:IsA("TextButton") then
+		elseif Object:IsA("TextLabel") or Object:IsA("TextButton") then
 			p1:setState({
-				feedbackText = p2.Text,
-				feedbackOriginalText = p2.LocalizationMatchedSourceText,
-				feedbackIdentifier = p2.LocalizationMatchIdentifier
+				feedbackText = Object.Text,
+				feedbackOriginalText = Object.LocalizationMatchedSourceText,
+				feedbackIdentifier = Object.LocalizationMatchIdentifier
 			})
 			
-			if enableFeedbackSelectionUpdate then
+			if EnableFeedbackSelectionUpdate then
 				p1:setState({ isGenericSelection = false })
 				
 				return
 			end
-		elseif p2:IsA("ImageLabel") or p2:IsA("ImageButton") then
-			local var1
-			local var2 = p1
-			local t = {
+		elseif Object:IsA("ImageLabel") or Object:IsA("ImageButton") then
+			local config = {
 				shouldDisplayFeedbackImage = true,
-				feedbackImageUri = p2.Image
+				feedbackImageUri = Object.Image
 			}
+			local Uri = nil
 			
-			if getFFlagEnableSendImageFeedbackToBackendModule() then
-				localizedImageContent = p2.LocalizedImageContent
-				var1 = if localizedImageContent == nil or localizedImageContent.SourceType ~= Enum.ContentSourceType.Uri then "" else localizedImageContent.Uri
+			if GetFFlagEnableSendImageFeedbackToBackendModule() then
+				local LocalizedImageContent = Object.LocalizedImageContent
+				Uri = if LocalizedImageContent == nil or LocalizedImageContent.SourceType ~= Enum.ContentSourceType.Uri then "" else LocalizedImageContent.Uri
 			else
-				var1 = ""
+				Uri = ""
 			end
-			t.feedbackTranslatedImageUri = var1
-			var2:setState(t)
+			config.feedbackTranslatedImageUri = Uri
+			p1:setState(config)
 			
 			return
-		elseif p2:IsA("Decal") then
-			local var3
-			local var4 = p1
-			local t = {
-				shouldDisplayFeedbackImage = true,
-				feedbackImageUri = p2.Texture
-			}
-			
-			if getFFlagEnableSendImageFeedbackToBackendModule() then
-				localizedImageContent = p2.LocalizedTextureContent
-				var3 = if localizedImageContent == nil or localizedImageContent.SourceType ~= Enum.ContentSourceType.Uri then "" else localizedImageContent.Uri
-			else
-				var3 = ""
-			end
-			t.feedbackTranslatedImageUri = var3
-			var4:setState(t)
-			
-			return
-		elseif p2:IsA("MeshPart") then
-			if p2.TextureContent.SourceType == Enum.ContentSourceType.Uri then
-				p1:setState({
+		else
+			if Object:IsA("Decal") then
+				local config = {
 					shouldDisplayFeedbackImage = true,
-					feedbackImageUri = p2.TextureID
-				})
+					feedbackImageUri = Object.Texture
+				}
+				local Uri = nil
+				
+				if GetFFlagEnableSendImageFeedbackToBackendModule() then
+					local LocalizedTextureContent = Object.LocalizedTextureContent
+					Uri = if LocalizedTextureContent == nil or LocalizedTextureContent.SourceType ~= Enum.ContentSourceType.Uri then "" else LocalizedTextureContent.Uri
+				else
+					Uri = ""
+				end
+				config.feedbackTranslatedImageUri = Uri
+				p1:setState(config)
 				
 				return
-			elseif p2.MeshContent.SourceType == Enum.ContentSourceType.Uri then
-				p1:setState({
-					shouldDisplayFeedbackImage = true,
-					feedbackImageUri = p2.MeshId
-				})
+			elseif Object:IsA("MeshPart") then
+				if Object.TextureContent.SourceType == Enum.ContentSourceType.Uri then
+					p1:setState({
+						shouldDisplayFeedbackImage = true,
+						feedbackImageUri = Object.TextureID
+					})
+					
+					return
+				end
+				if Object.MeshContent.SourceType == Enum.ContentSourceType.Uri then
+					p1:setState({
+						shouldDisplayFeedbackImage = true,
+						feedbackImageUri = Object.MeshId
+					})
+					
+					return
+				end
+				local SurfaceAppearance = Object:FindFirstChildOfClass("SurfaceAppearance")
 				
-				return
-			end
-			local surfaceAppearance = p2:FindFirstChildOfClass("SurfaceAppearance")
-			
-			if surfaceAppearance and surfaceAppearance.ColorMap then
+				if SurfaceAppearance and SurfaceAppearance.ColorMap then
+					p1:setState({
+						shouldDisplayFeedbackImage = true,
+						feedbackImageUri = SurfaceAppearance.ColorMap
+					})
+					
+					return
+				end
+			elseif EnableFeedbackSelectionUpdate then
 				p1:setState({
-					shouldDisplayFeedbackImage = true,
-					feedbackImageUri = surfaceAppearance.ColorMap
+					feedbackIdentifier = "",
+					isGenericSelection = true,
+					feedbackText = Object.ClassName,
+					feedbackOriginalText = Object.ClassName
 				})
-				
-				return
 			end
-		elseif enableFeedbackSelectionUpdate then
-			p1:setState({
-				feedbackIdentifier = "",
-				isGenericSelection = true,
-				feedbackText = p2.ClassName,
-				feedbackOriginalText = p2.ClassName
-			})
 		end
 	end
 	
-	experienceStateCaptureService.ItemSelectedInCaptureMode:Connect(function(p2)
-		-- upvalues: p1 (ref), constantsModule (copy)
+	ExperienceStateCaptureService.ItemSelectedInCaptureMode:Connect(function(p2) --[[ Line: 212 ]]
+		-- upvalues: p1 (copy), ConstantsModule (upval)
 		p1.resetLocalState()
 		p1.setInstanceRelatedReportDialogState(p2)
-		p1.props.setFeedbackFlowState(constantsModule.State.CurrentlyLeavingFeedback)
+		p1.props.setFeedbackFlowState(ConstantsModule.State.CurrentlyLeavingFeedback)
 	end)
 	
-	function p0.onCorrectTranslationTextChanged(p2)
-		-- upvalues: p1 (ref)
-		p1:setState({ correctTranslationText = p2 })
+	function p1.onCorrectTranslationTextChanged(CorrectTranslationText) --[[ Line: 219 ]]
+		-- upvalues: p1 (copy)
+		p1:setState({ correctTranslationText = CorrectTranslationText })
 	end
 	
-	function p0.onAdditionalCommentsTextChanged(p2)
-		-- upvalues: p1 (ref)
-		p1:setState({ additionalCommentsText = p2 })
+	function p1.onAdditionalCommentsTextChanged(AdditionalCommentsText) --[[ Line: 225 ]]
+		-- upvalues: p1 (copy)
+		p1:setState({ additionalCommentsText = AdditionalCommentsText })
 	end
 	
-	function p0.onSubmitFeedback()
-		-- upvalues: p1 (ref), constantsModule (copy), getFFlagEnableSendImageFeedbackToBackendModule (copy)
+	function p1.onSubmitFeedback() --[[ Line: 231 ]]
+		-- upvalues: p1 (copy), ConstantsModule (upval), GetFFlagEnableSendImageFeedbackToBackendModule (upval)
 		p1:setState({
 			numFeedbackSubmissionAttempts = p1.state.numFeedbackSubmissionAttempts + 1
 		})
-		local text = constantsModule.ContentType.Text
-		local feedbackOriginalText = p1.state.feedbackOriginalText
-		local feedbackText = p1.state.feedbackText
-		local feedbackIdentifier = p1.state.feedbackIdentifier
+		local Text = ConstantsModule.ContentType.Text
+		local FeedbackOriginalText = p1.state.feedbackOriginalText
+		local FeedbackText = p1.state.feedbackText
+		local FeedbackIdentifier = p1.state.feedbackIdentifier
 		
-		if getFFlagEnableSendImageFeedbackToBackendModule() and p1.state.shouldDisplayFeedbackImage then
-			local match = string.match(p1.state.feedbackImageUri, "rbxassetid://(%d+)")
+		if GetFFlagEnableSendImageFeedbackToBackendModule() and p1.state.shouldDisplayFeedbackImage then
+			local Match: string? = string.match(p1.state.feedbackImageUri, "rbxassetid://(%d+)")
 			
-			if not match then
-				p1.props.setFeedbackFlowState(constantsModule.State.Default)
+			if not Match then
+				p1.props.setFeedbackFlowState(ConstantsModule.State.Default)
 				p1.resetLocalState()
 				
 				return
 			end
-			feedbackOriginalText = match
-			text = constantsModule.ContentType.Image
-			feedbackIdentifier = game.GameId .. ":" .. match
-			feedbackText = string.match(p1.state.feedbackTranslatedImageUri or "", "rbxassetid://(%d+)") or ""
+			FeedbackOriginalText = Match
+			Text = ConstantsModule.ContentType.Image
+			FeedbackIdentifier = game.GameId .. ":" .. Match
+			FeedbackText = string.match(p1.state.feedbackTranslatedImageUri or "", "rbxassetid://(%d+)") or ""
 		end
-		p1.props.sendFeedback(text, feedbackOriginalText, feedbackText, feedbackIdentifier, p1.state.correctTranslationText, p1.state.additionalCommentsText, p1.props.feedbackReason, p1.state.numFeedbackSubmissionAttempts)
-		p1.props.setFeedbackFlowState(constantsModule.State.Default)
+		p1.props.sendFeedback(Text, FeedbackOriginalText, FeedbackText, FeedbackIdentifier, p1.state.correctTranslationText, p1.state.additionalCommentsText, p1.props.feedbackReason, p1.state.numFeedbackSubmissionAttempts)
+		p1.props.setFeedbackFlowState(ConstantsModule.State.Default)
 		p1.resetLocalState()
 	end
 	
-	function p0.onCancel()
-		-- upvalues: p1 (ref), constantsModule (copy)
-		p1.props.setFeedbackFlowState(constantsModule.State.Default)
+	function p1.onCancel() --[[ Line: 274 ]]
+		-- upvalues: p1 (copy), ConstantsModule (upval)
+		p1.props.setFeedbackFlowState(ConstantsModule.State.Default)
 		p1.resetLocalState()
 	end
 	
-	if fFlagTopBarSignalizeScreenSize then
-		local getViewportSize = displayModule.GetDisplayStore(false).getViewportSize
-		p1.disposeScreenSize = signalsModule.createEffect(function(p2)
-			-- upvalues: p1 (ref), getViewportSize (ref)
-			p1:setState({ screenSize = getViewportSize(p2) })
+	if FFlagTopBarSignalizeScreenSize then
+		local GetViewportSizeFunction = DisplayModule.GetDisplayStore(false).getViewportSize
+		p1.disposeScreenSize = SignalsModule.createEffect(function(p2) --[[ Line: 282 ]]
+			-- upvalues: p1 (copy), GetViewportSizeFunction (copy)
+			p1:setState({ screenSize = GetViewportSizeFunction(p2) })
 		end)
 	end
 end
 
-function feedbackReportDialog.renderContents(p1, p2)
-	-- upvalues: withStyle (ref), getFFlagEnableSendImageFeedbackToBackendModule (ref), getFFlagEnableFeedbackShowSourceTextAndOtherUXImprovementsModule (ref), reactUtilsModule (ref), roactModule (ref), styledTextLabel (ref), themedTextLabelModule (ref), enableFeedbackSelectionUpdate (ref), textEntryFieldModule (ref), radioButtonList (ref)
-	return withStyle(function(p3)
-		-- upvalues: p1 (ref), p2 (ref), getFFlagEnableSendImageFeedbackToBackendModule (copy), getFFlagEnableFeedbackShowSourceTextAndOtherUXImprovementsModule (copy), reactUtilsModule (copy), roactModule (copy), styledTextLabel (copy), themedTextLabelModule (copy), enableFeedbackSelectionUpdate (copy), textEntryFieldModule (copy), radioButtonList (copy)
-		local theme = p3.Theme
-		local font = p3.Font
-		local var1 = not p1.state.shouldDisplayFeedbackImage and (not p1.state.isGenericSelection and (p1.state.feedbackOriginalText ~= nil and p1.state.feedbackOriginalText ~= ""))
-		local list = {
+function FeedbackReportDialog.renderContents(p1, p2) --[[ Line: 290 ]]
+	-- upvalues: WithStyleFunction (copy), GetFFlagEnableSendImageFeedbackToBackendModule (copy), GetFFlagEnableFeedbackShowSourceTextAndOtherUXImprovementsModule (copy), ReactUtilsModule (copy), RoactModule (copy), StyledTextLabel (copy), ThemedTextLabelModule (copy), EnableFeedbackSelectionUpdate (copy), TextEntryFieldModule (copy), RadioButtonList (copy)
+	return WithStyleFunction(function(p3) --[[ Line: 291 ]]
+		-- upvalues: p1 (copy), p2 (copy), GetFFlagEnableSendImageFeedbackToBackendModule (upval), GetFFlagEnableFeedbackShowSourceTextAndOtherUXImprovementsModule (upval), ReactUtilsModule (upval), RoactModule (upval), StyledTextLabel (upval), ThemedTextLabelModule (upval), EnableFeedbackSelectionUpdate (upval), TextEntryFieldModule (upval), RadioButtonList (upval)
+		local Theme = p3.Theme
+		local _Font = p3.Font
+		local IsNotFeedbackOriginalTextMatch: boolean = not p1.state.shouldDisplayFeedbackImage and (not p1.state.isGenericSelection and (p1.state.feedbackOriginalText ~= nil and p1.state.feedbackOriginalText ~= ""))
+		local RadioButtons = {
 			p2.untranslated,
 			p2.accuracyIssue,
 			p2.spellingOrGrammarIssue,
 			p2.inappropriateOrDerogatory
 		}
 		
-		if getFFlagEnableSendImageFeedbackToBackendModule() and p1.state.shouldDisplayFeedbackImage then
-			table.insert(list, p2.imageQuality)
+		if GetFFlagEnableSendImageFeedbackToBackendModule() and p1.state.shouldDisplayFeedbackImage then
+			table.insert(RadioButtons, p2.imageQuality)
 		end
-		local t
-		local _ = nil
-		
-		if getFFlagEnableFeedbackShowSourceTextAndOtherUXImprovementsModule() then
-			local var2 = reactUtilsModule.createNextOrder()
-			t = {
-				SelectedTextHeader = var2(),
-				SelectedTextLabel = var2(),
-				OriginalTextHeader = var2(),
-				OriginalTextLabel = var2(),
-				CorrectTranslationHeader = var2(),
-				CorrectTranslationTextEntryField = var2(),
-				TranslationProblemsHeader = var2(),
-				TranslationProblemsListFrame = var2(),
-				AdditionalCommentsHeader = var2(),
-				AdditionalCommentsTextEntryField = var2()
+		local config = nil
+		if GetFFlagEnableFeedbackShowSourceTextAndOtherUXImprovementsModule() then
+			local NextOrder = ReactUtilsModule.createNextOrder()
+			config = {
+				SelectedTextHeader = NextOrder(),
+				SelectedTextLabel = NextOrder(),
+				OriginalTextHeader = NextOrder(),
+				OriginalTextLabel = NextOrder(),
+				CorrectTranslationHeader = NextOrder(),
+				CorrectTranslationTextEntryField = NextOrder(),
+				TranslationProblemsHeader = NextOrder(),
+				TranslationProblemsListFrame = NextOrder(),
+				AdditionalCommentsHeader = NextOrder(),
+				AdditionalCommentsTextEntryField = NextOrder()
 			}
 		else
-			t = {
+			config = {
 				SelectedTextHeader = 1,
 				SelectedTextLabel = 2,
 				TranslationProblemsHeader = 3,
@@ -298,15 +296,13 @@ function feedbackReportDialog.renderContents(p1, p2)
 				AdditionalCommentsTextEntryField = 8
 			}
 		end
-		local var3
-		local createFragment = roactModule.createFragment
-		local t_1 = {
-			Layout = roactModule.createElement("UIListLayout", {
+		return RoactModule.createFragment({
+			Layout = RoactModule.createElement("UIListLayout", {
 				HorizontalAlignment = Enum.HorizontalAlignment.Right,
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				VerticalAlignment = Enum.VerticalAlignment.Top
 			}),
-			SelectedTextHeader = roactModule.createElement(styledTextLabel, {
+			SelectedTextHeader = RoactModule.createElement(StyledTextLabel, {
 				richText = true,
 				fluidSizing = true,
 				text = if p1.state.shouldDisplayFeedbackImage then p2.imageSelectionHeader else p2.textSelectionHeader,
@@ -314,139 +310,130 @@ function feedbackReportDialog.renderContents(p1, p2)
 				textTruncate = Enum.TextTruncate.AtEnd,
 				textXAlignment = Enum.TextXAlignment.Left,
 				textYAlignment = Enum.TextYAlignment.Center,
-				fontStyle = font.Header2,
-				colorStyle = theme.TextEmphasis,
-				layoutOrder = t.SelectedTextHeader,
+				fontStyle = _Font.Header2,
+				colorStyle = Theme.TextEmphasis,
+				layoutOrder = config.SelectedTextHeader,
 				automaticSize = Enum.AutomaticSize.X
-			})
-		}
-		
-		if p1.state.shouldDisplayFeedbackImage then
-			var3 = roactModule.createElement
-			var3 = var3("ImageLabel", {
+			}),
+			SelectedTextLabel = if p1.state.shouldDisplayFeedbackImage then RoactModule.createElement("ImageLabel", {
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
-				LayoutOrder = t.SelectedTextLabel,
+				LayoutOrder = config.SelectedTextLabel,
 				Size = UDim2.new(1, 0, 0, 72),
 				Image = if p1.state.feedbackTranslatedImageUri == nil or p1.state.feedbackTranslatedImageUri == "" then p1.state.feedbackImageUri else p1.state.feedbackTranslatedImageUri,
 				ScaleType = Enum.ScaleType.Fit
-			})
-		else
-			var3 = roactModule.createElement(themedTextLabelModule, {
+			}) else RoactModule.createElement(ThemedTextLabelModule, {
 				fontKey = "Body",
 				themeKey = "TextDefault",
 				TextWrapped = true,
-				LayoutOrder = t.SelectedTextLabel,
+				LayoutOrder = config.SelectedTextLabel,
 				Size = UDim2.new(1, 0, 0, p1.calculateFieldHeight(string.len(p1.state.feedbackText), 14, false)),
-				Text = if enableFeedbackSelectionUpdate then (if p1.state.isGenericSelection then p2.genericSelectionWrapper else p1.state.feedbackText) or "" else p1.state.feedbackText or "",
+				Text = (if EnableFeedbackSelectionUpdate then if p1.state.isGenericSelection then p2.genericSelectionWrapper else p1.state.feedbackText else p1.state.feedbackText) or "",
 				TextXAlignment = Enum.TextXAlignment.Left
+			}),
+			OriginalTextHeader = if GetFFlagEnableFeedbackShowSourceTextAndOtherUXImprovementsModule() and IsNotFeedbackOriginalTextMatch then RoactModule.createElement(StyledTextLabel, {
+				richText = true,
+				fluidSizing = true,
+				text = p2.originalTextHeader,
+				size = UDim2.new(1, 0, 0, 72),
+				textTruncate = Enum.TextTruncate.AtEnd,
+				textXAlignment = Enum.TextXAlignment.Left,
+				textYAlignment = Enum.TextYAlignment.Center,
+				fontStyle = _Font.Header2,
+				colorStyle = Theme.TextEmphasis,
+				layoutOrder = config.OriginalTextHeader,
+				automaticSize = Enum.AutomaticSize.X
+			}) else nil,
+			OriginalTextLabel = if GetFFlagEnableFeedbackShowSourceTextAndOtherUXImprovementsModule() and IsNotFeedbackOriginalTextMatch then RoactModule.createElement(ThemedTextLabelModule, {
+				fontKey = "Body",
+				themeKey = "TextDefault",
+				TextWrapped = true,
+				LayoutOrder = config.OriginalTextLabel,
+				Size = UDim2.new(1, 0, 0, p1.calculateFieldHeight(string.len(p1.state.feedbackOriginalText), 14, false)),
+				Text = p1.state.feedbackOriginalText or "",
+				TextXAlignment = Enum.TextXAlignment.Left
+			}) else nil,
+			CorrectTranslationHeader = RoactModule.createElement(StyledTextLabel, {
+				richText = true,
+				fluidSizing = true,
+				text = p2.correctTranslationHeader,
+				size = UDim2.new(1, 0, 0, 72),
+				textTruncate = Enum.TextTruncate.AtEnd,
+				textXAlignment = Enum.TextXAlignment.Left,
+				textYAlignment = Enum.TextYAlignment.Center,
+				fontStyle = _Font.Header2,
+				colorStyle = Theme.TextEmphasis,
+				layoutOrder = config.CorrectTranslationHeader,
+				automaticSize = Enum.AutomaticSize.X
+			}),
+			CorrectTranslationTextEntryField = RoactModule.createElement(TextEntryFieldModule, {
+				enabled = true,
+				autoFocusOnEnabled = false,
+				LayoutOrder = config.CorrectTranslationTextEntryField,
+				text = p1.state.correctTranslationText,
+				textChanged = p1.onCorrectTranslationTextChanged,
+				maxTextLength = math.max(string.len(p1.state.correctTranslationText), 180),
+				PlaceholderText = p2.correctTranslationPlaceholder,
+				Size = UDim2.new(1, 0, 0, p1.calculateFieldHeight(string.len(p1.state.correctTranslationText), 14, true))
+			}),
+			TranslationProblemsHeader = RoactModule.createElement(StyledTextLabel, {
+				richText = true,
+				fluidSizing = true,
+				text = p2.problemDropdownSelectionHeader,
+				size = UDim2.new(1, 0, 0, 72),
+				textTruncate = Enum.TextTruncate.AtEnd,
+				textXAlignment = Enum.TextXAlignment.Left,
+				textYAlignment = Enum.TextYAlignment.Center,
+				fontStyle = _Font.Header2,
+				colorStyle = Theme.TextEmphasis,
+				layoutOrder = config.TranslationProblemsHeader,
+				automaticSize = Enum.AutomaticSize.X
+			}),
+			TranslationProblemsListFrame = RoactModule.createElement("Frame", {
+				BackgroundTransparency = 1,
+				Size = UDim2.new(1, 0, 0, #RadioButtons * 40),
+				LayoutOrder = config.TranslationProblemsListFrame
+			}, {
+				RadioButtonList = RoactModule.createElement(RadioButtonList, {
+					radioButtons = RadioButtons,
+					onActivated = function(p4) --[[ Line: 487 ]]
+						-- upvalues: p1 (upval)
+						p1.props.setFeedbackReason(p4)
+					end,
+					currentValue = p1.props.feedbackReason,
+					elementSize = UDim2.new(1, 0, 0, 40)
+				})
+			}),
+			AdditionalCommentsHeader = RoactModule.createElement(StyledTextLabel, {
+				richText = true,
+				fluidSizing = true,
+				text = p2.additionalCommentsHeader,
+				size = UDim2.new(1, 0, 0, 72),
+				textTruncate = Enum.TextTruncate.AtEnd,
+				textXAlignment = Enum.TextXAlignment.Left,
+				textYAlignment = Enum.TextYAlignment.Center,
+				fontStyle = _Font.Header2,
+				colorStyle = Theme.TextEmphasis,
+				layoutOrder = config.AdditionalCommentsHeader,
+				automaticSize = Enum.AutomaticSize.X
+			}),
+			AdditionalCommentsTextEntryField = RoactModule.createElement(TextEntryFieldModule, {
+				enabled = true,
+				maxTextLength = 180,
+				autoFocusOnEnabled = false,
+				LayoutOrder = config.AdditionalCommentsTextEntryField,
+				text = p1.state.additionalCommentsText,
+				textChanged = p1.onAdditionalCommentsTextChanged,
+				PlaceholderText = p2.additionalCommentsPlaceholder,
+				Size = UDim2.new(1, 0, 0, 90)
 			})
-		end
-		t_1.SelectedTextLabel = var3
-		t_1.OriginalTextHeader = if getFFlagEnableFeedbackShowSourceTextAndOtherUXImprovementsModule() and var1 then roactModule.createElement(styledTextLabel, {
-			richText = true,
-			fluidSizing = true,
-			text = p2.originalTextHeader,
-			size = UDim2.new(1, 0, 0, 72),
-			textTruncate = Enum.TextTruncate.AtEnd,
-			textXAlignment = Enum.TextXAlignment.Left,
-			textYAlignment = Enum.TextYAlignment.Center,
-			fontStyle = font.Header2,
-			colorStyle = theme.TextEmphasis,
-			layoutOrder = t.OriginalTextHeader,
-			automaticSize = Enum.AutomaticSize.X
-		}) else nil
-		t_1.OriginalTextLabel = if getFFlagEnableFeedbackShowSourceTextAndOtherUXImprovementsModule() and var1 then roactModule.createElement(themedTextLabelModule, {
-			fontKey = "Body",
-			themeKey = "TextDefault",
-			TextWrapped = true,
-			LayoutOrder = t.OriginalTextLabel,
-			Size = UDim2.new(1, 0, 0, p1.calculateFieldHeight(string.len(p1.state.feedbackOriginalText), 14, false)),
-			Text = p1.state.feedbackOriginalText or "",
-			TextXAlignment = Enum.TextXAlignment.Left
-		}) else nil
-		t_1.CorrectTranslationHeader = roactModule.createElement(styledTextLabel, {
-			richText = true,
-			fluidSizing = true,
-			text = p2.correctTranslationHeader,
-			size = UDim2.new(1, 0, 0, 72),
-			textTruncate = Enum.TextTruncate.AtEnd,
-			textXAlignment = Enum.TextXAlignment.Left,
-			textYAlignment = Enum.TextYAlignment.Center,
-			fontStyle = font.Header2,
-			colorStyle = theme.TextEmphasis,
-			layoutOrder = t.CorrectTranslationHeader,
-			automaticSize = Enum.AutomaticSize.X
 		})
-		t_1.CorrectTranslationTextEntryField = roactModule.createElement(textEntryFieldModule, {
-			enabled = true,
-			autoFocusOnEnabled = false,
-			LayoutOrder = t.CorrectTranslationTextEntryField,
-			text = p1.state.correctTranslationText,
-			textChanged = p1.onCorrectTranslationTextChanged,
-			maxTextLength = math.max(string.len(p1.state.correctTranslationText), 180),
-			PlaceholderText = p2.correctTranslationPlaceholder,
-			Size = UDim2.new(1, 0, 0, p1.calculateFieldHeight(string.len(p1.state.correctTranslationText), 14, true))
-		})
-		t_1.TranslationProblemsHeader = roactModule.createElement(styledTextLabel, {
-			richText = true,
-			fluidSizing = true,
-			text = p2.problemDropdownSelectionHeader,
-			size = UDim2.new(1, 0, 0, 72),
-			textTruncate = Enum.TextTruncate.AtEnd,
-			textXAlignment = Enum.TextXAlignment.Left,
-			textYAlignment = Enum.TextYAlignment.Center,
-			fontStyle = font.Header2,
-			colorStyle = theme.TextEmphasis,
-			layoutOrder = t.TranslationProblemsHeader,
-			automaticSize = Enum.AutomaticSize.X
-		})
-		t_1.TranslationProblemsListFrame = roactModule.createElement("Frame", {
-			BackgroundTransparency = 1,
-			Size = UDim2.new(1, 0, 0, #list * 40),
-			LayoutOrder = t.TranslationProblemsListFrame
-		}, {
-			RadioButtonList = roactModule.createElement(radioButtonList, {
-				radioButtons = list,
-				onActivated = function(p4)
-					-- upvalues: p1 (copy)
-					p1.props.setFeedbackReason(p4)
-				end,
-				currentValue = p1.props.feedbackReason,
-				elementSize = UDim2.new(1, 0, 0, 40)
-			})
-		})
-		t_1.AdditionalCommentsHeader = roactModule.createElement(styledTextLabel, {
-			richText = true,
-			fluidSizing = true,
-			text = p2.additionalCommentsHeader,
-			size = UDim2.new(1, 0, 0, 72),
-			textTruncate = Enum.TextTruncate.AtEnd,
-			textXAlignment = Enum.TextXAlignment.Left,
-			textYAlignment = Enum.TextYAlignment.Center,
-			fontStyle = font.Header2,
-			colorStyle = theme.TextEmphasis,
-			layoutOrder = t.AdditionalCommentsHeader,
-			automaticSize = Enum.AutomaticSize.X
-		})
-		t_1.AdditionalCommentsTextEntryField = roactModule.createElement(textEntryFieldModule, {
-			enabled = true,
-			maxTextLength = 180,
-			autoFocusOnEnabled = false,
-			LayoutOrder = t.AdditionalCommentsTextEntryField,
-			text = p1.state.additionalCommentsText,
-			textChanged = p1.onAdditionalCommentsTextChanged,
-			PlaceholderText = p2.additionalCommentsPlaceholder,
-			Size = UDim2.new(1, 0, 0, 90)
-		})
-		
-		return createFragment(t_1)
 	end)
 end
 
-function feedbackReportDialog.render(p1)
-	-- upvalues: getFFlagEnableFeedbackShowSourceTextAndOtherUXImprovementsModule (ref), withLocalization (ref), roactModule (ref), modalDialogModule (ref), constantsModule (ref), fFlagTopBarSignalizeScreenSize (ref), verticalScrollView (ref), getFFlagEnableSendImageFeedbackToBackendModule (ref), buttonStack (ref), buttonType (ref)
-	local t = {
+function FeedbackReportDialog.render(p1) --[[ Line: 522 ]]
+	-- upvalues: GetFFlagEnableFeedbackShowSourceTextAndOtherUXImprovementsModule (copy), WithLocalizationFunction (copy), RoactModule (copy), ModalDialogModule (copy), ConstantsModule (copy), FFlagTopBarSignalizeScreenSize (copy), VerticalScrollView (copy), GetFFlagEnableSendImageFeedbackToBackendModule (copy), ButtonStack (copy), ButtonType (copy)
+	local config = {
 		mainHeader = "CoreScripts.Feedback.FeedbackReportDialog.MainHeader",
 		cancel = "CoreScripts.Feedback.FeedbackReportDialog.Cancel",
 		submitFeedback = "CoreScripts.Feedback.FeedbackReportDialog.SubmitFeedback",
@@ -468,119 +455,100 @@ function feedbackReportDialog.render(p1)
 		}
 	}
 	
-	if getFFlagEnableFeedbackShowSourceTextAndOtherUXImprovementsModule() then
-		t.originalTextHeader = {
+	if GetFFlagEnableFeedbackShowSourceTextAndOtherUXImprovementsModule() then
+		config.originalTextHeader = {
 			"CoreScripts.Feedback.FeedbackReportDialog.OriginalTextHeader",
 			SourceLanguage = p1.props.sourceLanguageName
 		}
 	end
-	return withLocalization(t)(function(p2)
-		-- upvalues: roactModule (copy), modalDialogModule (copy), p1 (ref), constantsModule (copy), fFlagTopBarSignalizeScreenSize (copy), verticalScrollView (copy), getFFlagEnableFeedbackShowSourceTextAndOtherUXImprovementsModule (copy), getFFlagEnableSendImageFeedbackToBackendModule (copy), buttonStack (copy), buttonType (copy)
-		local new
-		local createElement = roactModule.createElement
-		local t = {
+	return WithLocalizationFunction(config)(function(p2) --[[ Line: 552 ]]
+		-- upvalues: RoactModule (upval), ModalDialogModule (upval), p1 (copy), ConstantsModule (upval), FFlagTopBarSignalizeScreenSize (upval), VerticalScrollView (upval), GetFFlagEnableFeedbackShowSourceTextAndOtherUXImprovementsModule (upval), GetFFlagEnableSendImageFeedbackToBackendModule (upval), ButtonStack (upval), ButtonType (upval)
+		return RoactModule.createElement(ModalDialogModule, {
 			showCloseButton = true,
-			visible = p1.props.feedbackFlowState == constantsModule.State.CurrentlyLeavingFeedback,
-			screenSize = if fFlagTopBarSignalizeScreenSize then p1.state.screenSize else p1.props.screenSize,
-			titleText = p2.mainHeader
-		}
-		local createElement_1 = roactModule.createElement
-		local t_1 = { useAutomaticCanvasSize = false }
-		
-		if getFFlagEnableFeedbackShowSourceTextAndOtherUXImprovementsModule() then
-			new = UDim.new
-			new = new(0, 600 + p1.calculateFieldHeight(string.len(p1.state.feedbackText), 14, false) * 2 + 72 + p1.calculateFieldHeight(string.len(p1.state.feedbackOriginalText), 14, false) + (if getFFlagEnableSendImageFeedbackToBackendModule() and p1.state.shouldDisplayFeedbackImage then 40 else 0))
-		else
-			new = UDim.new
-			new = new(0, 600 + p1.calculateFieldHeight(string.len(p1.state.feedbackText), 14, false) * 2 + (if getFFlagEnableSendImageFeedbackToBackendModule() and p1.state.shouldDisplayFeedbackImage then 40 else 0))
-		end
-		local var1
-		t_1.canvasSizeY = new
-		t.contents = createElement_1(verticalScrollView, t_1, roactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1) }, {
-			Padding = roactModule.createElement("UIPadding", {
-				PaddingLeft = UDim.new(0, 24),
-				PaddingRight = UDim.new(0, 24)
+			visible = p1.props.feedbackFlowState == ConstantsModule.State.CurrentlyLeavingFeedback,
+			screenSize = if FFlagTopBarSignalizeScreenSize then p1.state.screenSize else p1.props.screenSize,
+			titleText = p2.mainHeader,
+			contents = RoactModule.createElement(VerticalScrollView, {
+				useAutomaticCanvasSize = false,
+				canvasSizeY = if GetFFlagEnableFeedbackShowSourceTextAndOtherUXImprovementsModule() then UDim.new(0, 600 + p1.calculateFieldHeight(string.len(p1.state.feedbackText), 14, false) * 2 + 72 + p1.calculateFieldHeight(string.len(p1.state.feedbackOriginalText), 14, false) + (if GetFFlagEnableSendImageFeedbackToBackendModule() and p1.state.shouldDisplayFeedbackImage then 40 else 0)) else UDim.new(0, 600 + p1.calculateFieldHeight(string.len(p1.state.feedbackText), 14, false) * 2 + (if GetFFlagEnableSendImageFeedbackToBackendModule() and p1.state.shouldDisplayFeedbackImage then 40 else 0))
+			}, RoactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1) }, {
+				Padding = RoactModule.createElement("UIPadding", {
+					PaddingLeft = UDim.new(0, 24),
+					PaddingRight = UDim.new(0, 24)
+				}),
+				Contents = p1:renderContents(p2)
+			})),
+			actionButtons = RoactModule.createElement(ButtonStack, {
+				buttonHeight = 36,
+				buttons = {
+					{
+						buttonType = ButtonType.Secondary,
+						props = { onActivated = p1.onCancel, text = p2.cancel }
+					},
+					{
+						buttonType = ButtonType.PrimarySystem,
+						props = {
+							isDisabled = if GetFFlagEnableFeedbackShowSourceTextAndOtherUXImprovementsModule() then p1.state.correctTranslationText:match("%S") == nil else false,
+							onActivated = p1.onSubmitFeedback,
+							text = p2.submitFeedback
+						}
+					}
+				}
 			}),
-			Contents = p1:renderContents(p2)
-		}))
-		local createElement_2 = roactModule.createElement
-		local t_2 = { buttonHeight = 36 }
-		local t_3 = {}
-		local t_4 = {
-			buttonType = buttonType.Secondary,
-			props = { onActivated = p1.onCancel, text = p2.cancel }
-		}
-		local t_5 = { buttonType = buttonType.PrimarySystem }
-		local t_6 = {}
-		
-		if getFFlagEnableFeedbackShowSourceTextAndOtherUXImprovementsModule() then
-			var1 = p1.state.correctTranslationText:match("%S") == nil
-			var1 = nil
-		else
-			var1 = false
-		end
-		t_6.isDisabled = var1
-		t_6.onActivated = p1.onSubmitFeedback
-		t_6.text = p2.submitFeedback
-		t_5.props = t_6
-		-- Unknown statement at pc 4: <SetList>
-		t_2.buttons = t_3
-		t.actionButtons = createElement_2(buttonStack, t_2)
-		t.onDismiss = p1.onCancel
-		t.onBackButtonActivated = if p1.props.canNavigateBack then p1.navigateBack else nil
-		
-		return createElement(modalDialogModule, t)
+			onDismiss = p1.onCancel,
+			onBackButtonActivated = if p1.props.canNavigateBack then p1.navigateBack else nil
+		})
 	end)
 end
 
-function feedbackReportDialog.didMount(p1)
-	-- upvalues: getFFlagEnableFeedbackShowSourceTextAndOtherUXImprovementsModule (ref)
-	if getFFlagEnableFeedbackShowSourceTextAndOtherUXImprovementsModule() and p1.props.sourceLanguageName == "" then
+function FeedbackReportDialog.didMount(p1) --[[ Line: 633 ]]
+	-- upvalues: GetFFlagEnableFeedbackShowSourceTextAndOtherUXImprovementsModule (copy)
+	if GetFFlagEnableFeedbackShowSourceTextAndOtherUXImprovementsModule() and p1.props.sourceLanguageName == "" then
 		p1.props.getSourceLanguageName()
 	end
 end
 
-function feedbackReportDialog.willUnmount(p1)
-	-- upvalues: fFlagTopBarSignalizeScreenSize (ref)
-	if fFlagTopBarSignalizeScreenSize then
+function FeedbackReportDialog.willUnmount(p1) --[[ Line: 640 ]]
+	-- upvalues: FFlagTopBarSignalizeScreenSize (copy)
+	if FFlagTopBarSignalizeScreenSize then
 		p1.disposeScreenSize()
 	end
 end
 
-return roactRoduxModule.connect(function(p1)
-	-- upvalues: fFlagTopBarSignalizeScreenSize (ref), getFFlagEnableFeedbackShowSourceTextAndOtherUXImprovementsModule (ref)
+return RoactRoduxModule.connect(function(p1) --[[ Line: 647 ]]
+	-- upvalues: FFlagTopBarSignalizeScreenSize (copy), GetFFlagEnableFeedbackShowSourceTextAndOtherUXImprovementsModule (copy)
 	return {
-		screenSize = if fFlagTopBarSignalizeScreenSize then nil else p1.displayOptions.screenSize,
+		screenSize = if FFlagTopBarSignalizeScreenSize then nil else p1.displayOptions.screenSize,
 		feedbackFlowState = p1.feedbackFlowState.feedbackFlowState,
 		feedbackReason = p1.feedbackFlowState.feedbackReason,
-		sourceLanguageName = if getFFlagEnableFeedbackShowSourceTextAndOtherUXImprovementsModule() then p1.common.sourceLanguageName else nil
+		sourceLanguageName = if GetFFlagEnableFeedbackShowSourceTextAndOtherUXImprovementsModule() then p1.common.sourceLanguageName else nil
 	}
-end, function(p1)
-	-- upvalues: sendFeedbackThunkModule (ref), setFeedbackFlowStateModule (ref), setFeedbackReasonModule (ref), getFFlagEnableFeedbackShowSourceTextAndOtherUXImprovementsModule (ref), getSourceLanguageThunkModule (ref)
+end, function(Callback) --[[ Line: 656 ]]
+	-- upvalues: SendFeedbackThunkModule (copy), SetFeedbackFlowStateModule (copy), SetFeedbackReasonModule (copy), GetFFlagEnableFeedbackShowSourceTextAndOtherUXImprovementsModule (copy), GetSourceLanguageThunkModule (copy)
 	return {
-		sendFeedback = function(p2, p3, p4, p5, p6, p7, p8, p9)
-			-- upvalues: p1 (ref), sendFeedbackThunkModule (copy)
-			p1(sendFeedbackThunkModule(p2, p3, p4, p5, p6, p7, p8, p9))
+		sendFeedback = function(p1, p2, p3, p4, p5, p6, p7, p8) --[[ Line: 658 ]]
+			-- upvalues: Callback (copy), SendFeedbackThunkModule (upval)
+			Callback(SendFeedbackThunkModule(p1, p2, p3, p4, p5, p6, p7, p8))
 		end,
-		setFeedbackFlowState = function(value)
-			-- upvalues: p1 (ref), setFeedbackFlowStateModule (copy)
-			p1(function(p2)
-				-- upvalues: setFeedbackFlowStateModule (copy), value (ref)
-				p2:dispatch(setFeedbackFlowStateModule(value))
+		setFeedbackFlowState = function(p1) --[[ Line: 681 ]]
+			-- upvalues: Callback (copy), SetFeedbackFlowStateModule (upval)
+			Callback(function(p2) --[[ Line: 682 ]]
+				-- upvalues: SetFeedbackFlowStateModule (upval), p1 (copy)
+				p2:dispatch(SetFeedbackFlowStateModule(p1))
 			end)
 		end,
-		setFeedbackReason = function(value)
-			-- upvalues: p1 (ref), setFeedbackReasonModule (copy)
-			p1(function(p2)
-				-- upvalues: setFeedbackReasonModule (copy), value (ref)
-				p2:dispatch(setFeedbackReasonModule(value))
+		setFeedbackReason = function(p1) --[[ Line: 686 ]]
+			-- upvalues: Callback (copy), SetFeedbackReasonModule (upval)
+			Callback(function(p2) --[[ Line: 687 ]]
+				-- upvalues: SetFeedbackReasonModule (upval), p1 (copy)
+				p2:dispatch(SetFeedbackReasonModule(p1))
 			end)
 		end,
-		getSourceLanguageName = function()
-			-- upvalues: getFFlagEnableFeedbackShowSourceTextAndOtherUXImprovementsModule (copy), p1 (ref), getSourceLanguageThunkModule (copy)
-			if getFFlagEnableFeedbackShowSourceTextAndOtherUXImprovementsModule() then
-				p1(getSourceLanguageThunkModule())
+		getSourceLanguageName = function() --[[ Line: 691 ]]
+			-- upvalues: GetFFlagEnableFeedbackShowSourceTextAndOtherUXImprovementsModule (upval), Callback (copy), GetSourceLanguageThunkModule (upval)
+			if GetFFlagEnableFeedbackShowSourceTextAndOtherUXImprovementsModule() then
+				Callback(GetSourceLanguageThunkModule())
 			end
 		end
 	}
-end)(feedbackReportDialog)
+end)(FeedbackReportDialog)

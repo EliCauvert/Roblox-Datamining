@@ -1,8 +1,11 @@
-﻿local createSignal = require(script:FindFirstAncestor("CoreGuiCommon").Parent.Signals).createSignal
+﻿local CreateSignalFunction = require(script:FindFirstAncestor("CoreGuiCommon").Parent.Signals).createSignal
 
-return function()
-	-- upvalues: createSignal (ref)
-	local var1, var2 = createSignal(false)
+return function() --[[ Line: 14 ]]
+	-- upvalues: CreateSignalFunction (copy)
+	local Signal, Signal2 = CreateSignalFunction(false)
 	
-	return { getInspectAndBuyOpen = var1, setInspectAndBuyOpen = var2 }
+	return {
+		getInspectAndBuyOpen = Signal,
+		setInspectAndBuyOpen = Signal2
+	}
 end

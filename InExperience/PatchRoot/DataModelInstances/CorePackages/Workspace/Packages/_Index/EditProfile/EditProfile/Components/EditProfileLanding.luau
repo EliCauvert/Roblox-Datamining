@@ -1,1 +1,1 @@
-﻿return require(script.EditProfileLandingContainer)
+﻿return (require(script.EditProfileLandingContainer))

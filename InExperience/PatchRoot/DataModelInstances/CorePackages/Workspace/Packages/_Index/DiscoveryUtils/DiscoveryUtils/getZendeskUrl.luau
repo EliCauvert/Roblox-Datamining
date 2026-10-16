@@ -1,4 +1,4 @@
-﻿local t = {
+﻿local config = {
 	["zh-cn"] = "zh-cn",
 	zh_cn = "zh-cn",
 	["zh-cjv"] = "zh-cn",
@@ -21,28 +21,31 @@
 	nb_no = "no"
 }
 
-local var1 = function(p1)
-	-- upvalues: t (ref)
-	if t[p1] then
-		return t[p1]
+local function v1(Text: string) --[[ Line: 24 ]]
+	-- upvalues: config (copy)
+	if config[Text] then
+		return config[Text]
 	end
-	local t_1 = {}
+	local List = {}
 	
-	for i in p1:gmatch("([^%-_]+)") do
-		table.insert(t_1, i)
+	for i in Text:gmatch("([^%-_]+)") do
+		table.insert(List, i)
 	end
-	return if t_1[1] then t_1[1] else "en-us"
+	return if List[1] then List[1] else "en-us"
 end
 
-local _ = function(p2)
-	return p2 and string.match(p2, "^[%w%-_]+$") ~= nil
+local function _(Text: string): boolean --[[ Line: 42 ]]
+	return Text and string.match(Text, "^[%w%-_]+$") ~= nil
 end
 
-local _ = function(p2)
-	return p2 and string.match(p2, "^[a-zA-Z0-9]+$") ~= nil
+local _ = function(Text: string): boolean --[[ Line: 47 ]]
+	return Text and string.match(Text, "^[a-zA-Z0-9]+$") ~= nil
 end
 
-return function(p2, p3, p4)
-	-- upvalues: var1 (ref)
-	return `{p2 or "https://en.help.roblox.com/hc"}/{if p3 and string.match(p3, "^[%w%-_]+$") ~= nil then var1(p3) else "en-us"}/{if p4 and string.match(p4, "^[a-zA-Z0-9]+$") ~= nil then `articles/{p4}` else ""}`
+return function(p1, Text: string, Text1: string): string --[[ Line: 52 | Named "getZendeskUrl" ]]
+	-- upvalues: v1 (copy)
+	local HasMatch: boolean = Text and string.match(Text, "^[%w%-_]+$") ~= nil
+	local HasMatch1: boolean = Text1 and string.match(Text1, "^[a-zA-Z0-9]+$") ~= nil
+	
+	return `{p1 or "https://en.help.roblox.com/hc"}/{if HasMatch then v1(Text) else "en-us"}/{if HasMatch1 then `articles/{Text1}` else ""}`
 end

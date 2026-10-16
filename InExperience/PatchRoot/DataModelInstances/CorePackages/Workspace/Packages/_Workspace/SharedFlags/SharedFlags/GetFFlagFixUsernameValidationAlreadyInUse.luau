@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("FixUsernameValidationAlreadyInUse", false)
 
-return function()
+return function() --[[ Line: 3 ]]
 	return game:GetFastFlag("FixUsernameValidationAlreadyInUse")
 end

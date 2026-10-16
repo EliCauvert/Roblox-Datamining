@@ -1,126 +1,119 @@
-﻿local authSignup = script:FindFirstAncestor("AuthSignup")
-local parent = authSignup.Parent
-local httpService = game:GetService("HttpService")
-local promiseModule = require(parent.Promise)
-local _ = require(parent.Http)
-local url = require(parent.Http).Url
-local authCommonModule = require(parent.AuthCommon)
-local getSingleSignOnUrls = authCommonModule.Utils.getSingleSignOnUrls
-local appStorageUtilities = authCommonModule.Utils.AppStorageUtilities
-local consoleAuthRequestWrapper = require(parent.Http).Utils.ConsoleAuthRequestWrapper
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagEnableLuaAccountSwitch = sharedFlagsModule.FFlagEnableLuaAccountSwitch
-local fFlagEnableKoreaKISACompliance = sharedFlagsModule.FFlagEnableKoreaKISACompliance
-local getFFlagEnableAuditForSinglePageSignUp = sharedFlagsModule.GetFFlagEnableAuditForSinglePageSignUp
-local getFFlagEnableAuditForSso = sharedFlagsModule.GetFFlagEnableAuditForSso
-local signUpV2ErrorCodesModule = require(authSignup.Enums.SignUpV2ErrorCodes)
-local tModule = require(parent.t)
-local t = {
-	signUp = function(p1, p2, p3, p4, p5, p6)
-		-- upvalues: url (ref), httpService (ref), fFlagEnableLuaAccountSwitch (ref), appStorageUtilities (ref)
-		assert(type(p2) == "string", "invalid username has been passed into SignUpRequests.signUp")
-		assert(type(p3) == "string", "invalid password has been passed into SignUpRequests.signUp")
-		assert(type(p4) == "string", "invalid birthdate has been passed into SignUpRequests.signUp")
-		assert(tonumber(p5) and type(p5) == "string", "invalid bundleId has been passed into SignUpRequests.signUp")
-		
-		return p1(string.format("%sv3/signup", url.AUTH_URL), "POST", {
-			maxRetryCount = 0,
-			postBody = httpService:JSONEncode({
-				username = p2,
-				password = p3,
-				birthdate = p4,
-				bundleId = p5,
-				captchaId = if p6 then p6.captchaId else nil,
-				captchaToken = if p6 then p6.captchaToken else nil,
-				captchaProvider = if p6 then p6.captchaProvider else nil,
-				accountBlob = fFlagEnableLuaAccountSwitch and appStorageUtilities.getAccountBlob() or nil
-			})
-		})
-	end
-}
-local var1 = tModule.union(tModule.interface({
-	username = tModule.string,
-	password = tModule.string,
-	gender = tModule.string,
-	birthday = tModule.string,
-	displayName = tModule.optional(tModule.string),
-	locale = tModule.optional(tModule.string),
-	email = tModule.optional(tModule.string)
-}), tModule.interface({
-	username = tModule.string,
-	isExpressSignup = tModule.literal(true)
-}))
-
-function t.signUpV2(p1, p2, p3)
-	-- upvalues: var1 (ref), url (ref), httpService (ref), fFlagEnableKoreaKISACompliance (ref), fFlagEnableLuaAccountSwitch (ref), appStorageUtilities (ref), getFFlagEnableAuditForSinglePageSignUp (ref)
-	assert(var1(p2))
-	
-	return p1(string.format("%sv2/signup", url.AUTH_URL), "POST", {
-		maxRetryCount = 0,
-		postBody = httpService:JSONEncode({
-			isTosAgreementBoxChecked = true,
-			username = p2.username,
-			password = p2.password,
-			gender = p2.gender,
-			birthday = p2.birthday,
-			locale = p2.locale,
-			email = p2.email,
-			otpSession = if fFlagEnableKoreaKISACompliance then p2.otpSession else nil,
-			agreementIds = p2.agreementIds,
-			displayName = p2.displayName,
-			captchaId = if p3 then p3.captchaId else nil,
-			captchaToken = if p3 then p3.captchaToken else nil,
-			captchaProvider = if p3 then p3.captchaProvider else nil,
-			accountBlob = fFlagEnableLuaAccountSwitch and appStorageUtilities.getAccountBlob() or nil,
-			passkeySessionId = p2.passkeySessionId,
-			passkeyRegistrationResponse = p2.passkeyRegistrationResponse,
-			isExpressSignup = p2.isExpressSignup,
-			auditSystemContent = if getFFlagEnableAuditForSinglePageSignUp() and p2.capturedAuditContent and next(p2.capturedAuditContent) ~= nil then {
-				capturedAuditContent = p2.capturedAuditContent,
-				additionalAuditContent = p2.additionalAuditContent
-			} else nil
-		})
-	})
-end
-
-local var2 = tModule.interface({
-	username = tModule.string,
-	password = tModule.string,
-	gender = tModule.string,
-	birthday = tModule.string,
-	verifiedSignupVoucher = tModule.string
+﻿local AuthSignup = script:FindFirstAncestor("AuthSignup")
+local Parent = AuthSignup.Parent
+local HttpService = game:GetService("HttpService")
+local PromiseModule = require(Parent.Promise)
+local _ = require(Parent.Http)
+local Url = require(Parent.Http).Url
+local AuthCommonModule = require(Parent.AuthCommon)
+local GetSingleSignOnUrlsFunction = AuthCommonModule.Utils.getSingleSignOnUrls
+local AppStorageUtilities = AuthCommonModule.Utils.AppStorageUtilities
+local ConsoleAuthRequestWrapperFunction = require(Parent.Http).Utils.ConsoleAuthRequestWrapper
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagEnableLuaAccountSwitch = SharedFlagsModule.FFlagEnableLuaAccountSwitch
+local FFlagEnableKoreaKISACompliance = SharedFlagsModule.FFlagEnableKoreaKISACompliance
+local GetFFlagEnableAuditForSinglePageSignUpFunction = SharedFlagsModule.GetFFlagEnableAuditForSinglePageSignUp
+local GetFFlagEnableAuditForSsoFunction = SharedFlagsModule.GetFFlagEnableAuditForSso
+local SignUpV2ErrorCodesModule = require(AuthSignup.Enums.SignUpV2ErrorCodes)
+local TModule = require(Parent.t)
+local UnionResult = TModule.union(TModule.interface({
+	username = TModule.string,
+	password = TModule.string,
+	gender = TModule.string,
+	birthday = TModule.string,
+	displayName = TModule.optional(TModule.string),
+	locale = TModule.optional(TModule.string),
+	email = TModule.optional(TModule.string)
+}), (TModule.interface({
+	username = TModule.string,
+	isExpressSignup = TModule.literal(true)
+})))
+local InterfaceResult = TModule.interface({
+	username = TModule.string,
+	password = TModule.string,
+	gender = TModule.string,
+	birthday = TModule.string,
+	verifiedSignupVoucher = TModule.string
 })
 
-function t.verifiedSignup(p1, p2, p3)
-	-- upvalues: var2 (ref), url (ref), httpService (ref), fFlagEnableLuaAccountSwitch (ref), appStorageUtilities (ref)
-	assert(var2(p2))
-	
-	return p1(string.format("%sv1/verified-signup", url.AUTH_URL), "POST", {
-		maxRetryCount = 0,
-		postBody = httpService:JSONEncode({
-			isTosAgreementBoxChecked = true,
-			username = p2.username,
-			password = p2.password,
-			gender = p2.gender,
-			birthday = p2.birthday,
-			voucher = p2.verifiedSignupVoucher,
-			agreementIds = p2.agreementIds,
-			captchaId = if p3 then p3.captchaId else nil,
-			captchaToken = if p3 then p3.captchaToken else nil,
-			captchaProvider = if p3 then p3.captchaProvider else nil,
-			accountBlob = fFlagEnableLuaAccountSwitch and appStorageUtilities.getAccountBlob() or nil
+return {
+	signUp = function(Callback, Username, Password, Birthdate, BundleId, p1) --[[ Line: 40 ]]
+		-- upvalues: Url (copy), HttpService (copy), FFlagEnableLuaAccountSwitch (copy), AppStorageUtilities (copy)
+		assert(type(Username) == "string", "invalid username has been passed into SignUpRequests.signUp")
+		assert(type(Password) == "string", "invalid password has been passed into SignUpRequests.signUp")
+		assert(type(Birthdate) == "string", "invalid birthdate has been passed into SignUpRequests.signUp")
+		assert(tonumber(BundleId) and type(BundleId) == "string", "invalid bundleId has been passed into SignUpRequests.signUp")
+		
+		return Callback(string.format("%sv3/signup", Url.AUTH_URL), "POST", {
+			maxRetryCount = 0,
+			postBody = HttpService:JSONEncode({
+				username = Username,
+				password = Password,
+				birthdate = Birthdate,
+				bundleId = BundleId,
+				captchaId = p1 and p1.captchaId or nil,
+				captchaToken = p1 and p1.captchaToken or nil,
+				captchaProvider = p1 and p1.captchaProvider or nil,
+				accountBlob = FFlagEnableLuaAccountSwitch and AppStorageUtilities.getAccountBlob() or nil
+			})
 		})
-	})
-end
-
-function t.singleSignOnSignup(p1, p2)
-	-- upvalues: getSingleSignOnUrls (ref), getFFlagEnableAuditForSso (ref), httpService (ref), consoleAuthRequestWrapper (ref), promiseModule (ref), signUpV2ErrorCodesModule (ref)
-	local var3 = getSingleSignOnUrls()
-	local signup = var3.signup
-	
-	return if signup then consoleAuthRequestWrapper(p1, signup(), "POST", {
-		maxRetryCount = 0,
-		postBody = httpService:JSONEncode({
+	end,
+	signUpV2 = function(Callback, p1, p2) --[[ Line: 121 ]]
+		-- upvalues: UnionResult (copy), Url (copy), HttpService (copy), FFlagEnableKoreaKISACompliance (copy), FFlagEnableLuaAccountSwitch (copy), AppStorageUtilities (copy), GetFFlagEnableAuditForSinglePageSignUpFunction (copy)
+		assert(UnionResult(p1))
+		
+		return Callback(string.format("%sv2/signup", Url.AUTH_URL), "POST", {
+			maxRetryCount = 0,
+			postBody = HttpService:JSONEncode({
+				isTosAgreementBoxChecked = true,
+				username = p1.username,
+				password = p1.password,
+				gender = p1.gender,
+				birthday = p1.birthday,
+				locale = p1.locale,
+				email = p1.email,
+				otpSession = if FFlagEnableKoreaKISACompliance then p1.otpSession else nil,
+				agreementIds = p1.agreementIds,
+				displayName = p1.displayName,
+				captchaId = p2 and p2.captchaId or nil,
+				captchaToken = p2 and p2.captchaToken or nil,
+				captchaProvider = p2 and p2.captchaProvider or nil,
+				accountBlob = FFlagEnableLuaAccountSwitch and AppStorageUtilities.getAccountBlob() or nil,
+				passkeySessionId = p1.passkeySessionId,
+				passkeyRegistrationResponse = p1.passkeyRegistrationResponse,
+				isExpressSignup = p1.isExpressSignup,
+				auditSystemContent = if GetFFlagEnableAuditForSinglePageSignUpFunction() and p1.capturedAuditContent and next(p1.capturedAuditContent) ~= nil then {
+					capturedAuditContent = p1.capturedAuditContent,
+					additionalAuditContent = p1.additionalAuditContent
+				} else nil
+			})
+		})
+	end,
+	verifiedSignup = function(Callback, p1, p2) --[[ Line: 169 ]]
+		-- upvalues: InterfaceResult (copy), Url (copy), HttpService (copy), FFlagEnableLuaAccountSwitch (copy), AppStorageUtilities (copy)
+		assert(InterfaceResult(p1))
+		
+		return Callback(string.format("%sv1/verified-signup", Url.AUTH_URL), "POST", {
+			maxRetryCount = 0,
+			postBody = HttpService:JSONEncode({
+				isTosAgreementBoxChecked = true,
+				username = p1.username,
+				password = p1.password,
+				gender = p1.gender,
+				birthday = p1.birthday,
+				voucher = p1.verifiedSignupVoucher,
+				agreementIds = p1.agreementIds,
+				captchaId = p2 and p2.captchaId or nil,
+				captchaToken = p2 and p2.captchaToken or nil,
+				captchaProvider = p2 and p2.captchaProvider or nil,
+				accountBlob = FFlagEnableLuaAccountSwitch and AppStorageUtilities.getAccountBlob() or nil
+			})
+		})
+	end,
+	singleSignOnSignup = function(p1, p2) --[[ Line: 194 ]]
+		-- upvalues: GetSingleSignOnUrlsFunction (copy), GetFFlagEnableAuditForSsoFunction (copy), HttpService (copy), ConsoleAuthRequestWrapperFunction (copy), PromiseModule (copy), SignUpV2ErrorCodesModule (copy)
+		local SingleSignOnUrls = GetSingleSignOnUrlsFunction()
+		local SignupFunction = SingleSignOnUrls.signup
+		local Json = HttpService:JSONEncode({
 			isTosAgreementBoxChecked = true,
 			username = p2.username,
 			password = p2.password,
@@ -130,30 +123,29 @@ function t.singleSignOnSignup(p1, p2)
 			email = p2.email,
 			agreementIds = p2.agreementIds,
 			isExpressSignup = p2.isExpressSignup,
-			accountLinkParameters = if var3.linkingPlatform then { LinkingPlatform = var3.linkingPlatform } else nil,
-			auditSystemContent = if getFFlagEnableAuditForSso() and p2.capturedAuditContent and next(p2.capturedAuditContent) ~= nil then {
+			accountLinkParameters = if SingleSignOnUrls.linkingPlatform then { LinkingPlatform = SingleSignOnUrls.linkingPlatform } else nil,
+			auditSystemContent = if GetFFlagEnableAuditForSsoFunction() and p2.capturedAuditContent and next(p2.capturedAuditContent) ~= nil then {
 				capturedAuditContent = p2.capturedAuditContent,
 				additionalAuditContent = p2.additionalAuditContent
 			} else nil
 		})
-	}) else promiseModule.reject(signUpV2ErrorCodesModule.TokenValidationFailed)
-end
-
-function t.expressLinkedSignup(p1, p2, p3)
-	-- upvalues: getSingleSignOnUrls (ref), promiseModule (ref), signUpV2ErrorCodesModule (ref), httpService (ref), consoleAuthRequestWrapper (ref)
-	local var3 = getSingleSignOnUrls()
-	local signup = var3.signup
-	local linkingPlatform = var3.linkingPlatform
-	
-	return if signup and linkingPlatform ~= nil and type(p2) == "string" then consoleAuthRequestWrapper(p1, signup(), "POST", {
-		maxRetryCount = 0,
-		postBody = httpService:JSONEncode({
-			signupType = "Express",
-			locale = p2,
-			agreementIds = p3,
-			accountLinkParameters = { LinkingPlatform = linkingPlatform }
-		})
-	}, true) else promiseModule.reject(signUpV2ErrorCodesModule.TokenValidationFailed)
-end
-
-return t
+		
+		return if SignupFunction then ConsoleAuthRequestWrapperFunction(p1, SignupFunction(), "POST", { maxRetryCount = 0, postBody = Json }) else PromiseModule.reject(SignUpV2ErrorCodesModule.TokenValidationFailed)
+	end,
+	expressLinkedSignup = function(p1, Locale, AgreementIds) --[[ Line: 236 ]]
+		-- upvalues: GetSingleSignOnUrlsFunction (copy), PromiseModule (copy), SignUpV2ErrorCodesModule (copy), HttpService (copy), ConsoleAuthRequestWrapperFunction (copy)
+		local SingleSignOnUrls = GetSingleSignOnUrlsFunction()
+		local SignupFunction = SingleSignOnUrls.signup
+		local LinkingPlatform = SingleSignOnUrls.linkingPlatform
+		
+		return if SignupFunction and LinkingPlatform ~= nil and type(Locale) == "string" then ConsoleAuthRequestWrapperFunction(p1, SignupFunction(), "POST", {
+			maxRetryCount = 0,
+			postBody = HttpService:JSONEncode({
+				signupType = "Express",
+				locale = Locale,
+				agreementIds = AgreementIds,
+				accountLinkParameters = { LinkingPlatform = LinkingPlatform }
+			})
+		}, true) else PromiseModule.reject(SignUpV2ErrorCodesModule.TokenValidationFailed)
+	end
+}

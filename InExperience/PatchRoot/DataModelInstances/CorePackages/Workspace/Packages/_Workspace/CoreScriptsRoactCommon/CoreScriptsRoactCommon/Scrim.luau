@@ -1,14 +1,14 @@
-﻿local parent = script.Parent.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local view = foundationModule.View
-local useTokens = foundationModule.Hooks.useTokens
+﻿local Parent = script.Parent.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return reactModule.memo(reactModule.forwardRef(function(p1, _)
-	-- upvalues: useTokens (ref), reactModule (ref), view (ref)
-	return reactModule.createElement(view, {
+return ReactModule.memo(ReactModule.forwardRef(function(p1, _) --[[ Line: 15 | Named "Scrim" ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy)
+	return ReactModule.createElement(View, {
 		tag = "size-full",
-		backgroundStyle = useTokens().Color.Common.Scrim,
+		backgroundStyle = UseTokensFunction().Color.Common.Scrim,
 		Visible = p1 and p1.Visible,
 		ZIndex = p1 and p1.ZIndex
 	})

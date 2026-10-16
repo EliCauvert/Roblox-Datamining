@@ -1,5 +1,5 @@
 ﻿local _ = require(script:FindFirstAncestor("CoreScriptsPlayerFeedback").CaptureTypes)
 
-return function(p1)
-	return if p1.CaptureTime == nil then if p1.LocalId == nil then tostring(p1) else tostring(p1.LocalId) else `{p1.LocalId}_{p1.CaptureTime.UnixTimestampMillis}`
+return function(Capture): string --[[ Line: 8 ]]
+	return if Capture.CaptureTime == nil then if Capture.LocalId == nil then tostring(Capture) else tostring(Capture.LocalId) else `{Capture.LocalId}_{Capture.CaptureTime.UnixTimestampMillis}`
 end

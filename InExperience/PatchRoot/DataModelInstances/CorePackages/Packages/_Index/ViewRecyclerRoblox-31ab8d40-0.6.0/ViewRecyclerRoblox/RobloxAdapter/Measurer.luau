@@ -1,140 +1,142 @@
-﻿local runService = game:GetService("RunService")
-local axisMapModule = require(script:FindFirstAncestor("ViewRecyclerRoblox").RobloxAdapter.axisMap)
+﻿local RunService = game:GetService("RunService")
+local AxisMapModule = require(script:FindFirstAncestor("ViewRecyclerRoblox").RobloxAdapter.axisMap)
 
 return {
-	attach = function(p1)
-		-- upvalues: axisMapModule (ref), runService (ref)
-		local instance = p1.instance
-		local axis = p1.axis
-		local getState = p1.getState
-		local getMeasurementDependencies = p1.getMeasurementDependencies
-		local onItemMeasured = p1.onItemMeasured
-		local isRendered = p1.isRendered
-		local t = {}
-		local t_1 = {}
-		local var1 = nil
-		local var2 = nil
-		local var3 = nil
-		local t_2 = {}
-		local var4 = nil
+	attach = function(p1) --[[ Line: 48 ]]
+		-- upvalues: AxisMapModule (copy), RunService (copy)
+		local _Instance = p1.instance
+		local Axis = p1.axis
+		local GetStateFunction = p1.getState
+		local GetMeasurementDependenciesFunction = p1.getMeasurementDependencies
+		local OnItemMeasuredFunction = p1.onItemMeasured
+		local IsRenderedFunction = p1.isRendered
+		local Tbl = {}
+		local Connections = {}
+		local Callback = nil
+		local v1 = nil
+		local v2 = nil
+		local HeartbeatConnections = {}
+		local Callback1 = nil
 		
-		local function refreshMeasurementDependencies()
-			-- upvalues: getMeasurementDependencies (ref), t_1 (ref), var4 (write)
-			local var5 = if getMeasurementDependencies == nil then {} else getMeasurementDependencies()
+		local function refreshMeasurementDependencies() --[[ Line: 77 ]]
+			-- upvalues: GetMeasurementDependenciesFunction (copy), Connections (copy), Callback1 (ref)
+			local T = if GetMeasurementDependenciesFunction == nil then {} else GetMeasurementDependenciesFunction()
 			local t = {}
 			
-			for i, v in var5 do
-				if t[v] == nil then
-					t[v] = true
+			for i, value in T do
+				if t[value] == nil then
+					t[value] = true
 					
-					if t_1[v] == nil then
-						t_1[v] = v:GetPropertyChangedSignal("AbsoluteSize"):Connect(var4)
+					if Connections[value] == nil then
+						Connections[value] = value:GetPropertyChangedSignal("AbsoluteSize"):Connect(Callback1)
 					end
 				end
 			end
-			for i_1, v_1 in t_1 do
-				if t[i_1] == nil then
-					v_1:Disconnect()
-					t_1[i_1] = nil
+			for i, connection in Connections do
+				if t[i] == nil then
+					connection:Disconnect()
+					Connections[i] = nil
 				end
 			end
-			return var5
+			return T
 		end
 		
-		local function publish(p2)
-			-- upvalues: isRendered (ref), instance (ref), axisMapModule (copy), axis (ref), refreshMeasurementDependencies (ref), var2 (write), var3 (write), onItemMeasured (ref)
-			if isRendered ~= nil and not isRendered() then
+		local function publish(p2): boolean --[[ Line: 99 ]]
+			-- upvalues: IsRenderedFunction (copy), _Instance (copy), AxisMapModule (upval), Axis (copy), refreshMeasurementDependencies (copy), v1 (ref), v2 (ref), OnItemMeasuredFunction (copy)
+			if IsRenderedFunction ~= nil and not IsRenderedFunction() then
 				return false
-			elseif axisMapModule.crossOf(instance.AbsoluteSize, axis) <= 0 then
+			end
+			if AxisMapModule.crossOf(_Instance.AbsoluteSize, Axis) <= 0 then
 				return true
 			end
-			for i, v in refreshMeasurementDependencies() do
-				if axisMapModule.crossOf(v.AbsoluteSize, axis) <= 0 then
+			for _, Frame in refreshMeasurementDependencies() do
+				if AxisMapModule.crossOf(Frame.AbsoluteSize, Axis) <= 0 then
 					return true
 				end
 			end
-			local var6 = axisMapModule.mainOf(instance.AbsoluteSize, axis)
+			local MainOfResult = AxisMapModule.mainOf(_Instance.AbsoluteSize, Axis)
 			
-			if not (var2 == p2 and var3 == var6) then
-				onItemMeasured(p2, var6)
-				var2 = p2
-				var3 = var6
+			if v1 ~= p2 or v2 ~= MainOfResult then
+				OnItemMeasuredFunction(p2, MainOfResult)
+				v1 = p2
+				v2 = MainOfResult
 			end
 			return true
 		end
 		
-		var4 = function()
-			-- upvalues: getState (ref), t_2 (ref), runService (copy), t (ref), publish (ref), var4 (write)
-			local var7 = getState()
+		Callback1 = function() --[[ Line: 127 ]]
+			-- upvalues: GetStateFunction (copy), HeartbeatConnections (copy), RunService (upval), Tbl (copy), publish (copy), Callback1 (ref)
+			local State = GetStateFunction()
 			
-			if var7 == nil or t_2[var7] ~= nil then
+			if State ~= nil and HeartbeatConnections[State] == nil then
+				local HeartbeatConnection = nil
+				HeartbeatConnection = RunService.Heartbeat:Once(function() --[[ Line: 134 ]]
+					-- upvalues: Tbl (upval), HeartbeatConnection (ref), HeartbeatConnections (upval), State (copy), GetStateFunction (upval), publish (upval), Callback1 (upval)
+					Tbl[HeartbeatConnection] = nil
+					
+					if HeartbeatConnections[State] == HeartbeatConnection then
+						HeartbeatConnections[State] = nil
+					end
+					local State1 = GetStateFunction()
+					
+					if State1 ~= State then return end
+					if not publish(State1) then
+						Callback1()
+					end
+				end)
+				Tbl[HeartbeatConnection] = true
+				HeartbeatConnections[State] = HeartbeatConnection
+				
 				return
 			end
-			local heartbeatConnection = nil
-			heartbeatConnection = runService.Heartbeat:Once(function()
-				-- upvalues: t (copy), heartbeatConnection (write), t_2 (copy), var7 (ref), getState (copy), publish (copy), var4 (copy)
-				t[heartbeatConnection] = nil
-				
-				if t_2[var7] == heartbeatConnection then
-					t_2[var7] = nil
-				end
-				local var8 = getState()
-				
-				if var8 ~= var7 then return end
-				if not publish(var8) then
-					var4()
-				end
-			end)
-			t[heartbeatConnection] = true
-			t_2[var7] = heartbeatConnection
 		end
 		
-		local var7 = instance:GetPropertyChangedSignal("AbsoluteSize"):Connect(var4)
+		local Connection = _Instance:GetPropertyChangedSignal("AbsoluteSize"):Connect(Callback1)
 		refreshMeasurementDependencies()
 		
 		if p1.subscribeMeasurementDependencies ~= nil then
-			var1 = p1.subscribeMeasurementDependencies(function()
-				-- upvalues: refreshMeasurementDependencies (ref), var4 (write)
+			Callback = p1.subscribeMeasurementDependencies(function() --[[ Line: 159 ]]
+				-- upvalues: refreshMeasurementDependencies (copy), Callback1 (ref)
 				refreshMeasurementDependencies()
-				var4()
+				Callback1()
 			end)
 		end
 		return {
-			scheduleSettle = var4,
-			measureNow = function()
-				-- upvalues: getState (ref), publish (ref)
-				local var8 = getState()
+			scheduleSettle = Callback1,
+			measureNow = function() --[[ Line: 184 ]]
+				-- upvalues: GetStateFunction (copy), publish (copy)
+				local State = GetStateFunction()
 				
-				if var8 ~= nil then
-					publish(var8)
+				if State ~= nil then
+					publish(State)
 				end
 			end,
-			getPendingCount = function()
-				-- upvalues: t (ref)
-				local var8 = 0
+			getPendingCount = function(): number --[[ Line: 190 ]]
+				-- upvalues: Tbl (copy)
+				local Count = 0
 				
-				for i in t do
-					var8 += 1
+				for _ in Tbl do
+					Count += 1
 				end
-				return var8
+				return Count
 			end,
-			disconnect = function()
-				-- upvalues: var7 (ref), var1 (write), t_1 (ref), t (ref), t_2 (ref)
-				var7:Disconnect()
+			disconnect = function() --[[ Line: 165 ]]
+				-- upvalues: Connection (copy), Callback (ref), Connections (copy), Tbl (copy), HeartbeatConnections (copy)
+				Connection:Disconnect()
 				
-				if var1 ~= nil then
-					var1()
-					var1 = nil
+				if Callback ~= nil then
+					Callback()
+					Callback = nil
 				end
-				for i, v in t_1 do
-					v:Disconnect()
-					t_1[i] = nil
+				for i, connection in Connections do
+					connection:Disconnect()
+					Connections[i] = nil
 				end
-				for i_1 in t do
-					i_1:Disconnect()
+				for Connection1 in Tbl do
+					Connection1:Disconnect()
 				end
-				table.clear(t)
-				table.clear(t_2)
+				table.clear(Tbl)
+				table.clear(HeartbeatConnections)
 			end
 		}
 	end

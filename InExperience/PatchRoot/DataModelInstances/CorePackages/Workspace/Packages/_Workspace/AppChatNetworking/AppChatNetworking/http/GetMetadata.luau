@@ -1,8 +1,8 @@
-﻿local appChatNetworking = script:FindFirstAncestor("AppChatNetworking")
-local CHAT_PLATFORM_BASE_URLModule = require(appChatNetworking.url.CHAT_PLATFORM_BASE_URL)
-local default = require(appChatNetworking.url.HttpRequest).default
+﻿local AppChatNetworking = script:FindFirstAncestor("AppChatNetworking")
+local CHATPLATFORMBASEURLModule = require(AppChatNetworking.url.CHAT_PLATFORM_BASE_URL)
+local Default = require(AppChatNetworking.url.HttpRequest).default
 
-return function(p1)
-	-- upvalues: default (ref), CHAT_PLATFORM_BASE_URLModule (ref)
-	return (p1 or default)(`{CHAT_PLATFORM_BASE_URLModule}/v1/metadata`, "GET")
+return function(p1) --[[ Line: 6 ]]
+	-- upvalues: Default (copy), CHATPLATFORMBASEURLModule (copy)
+	return (p1 or Default)(`{CHATPLATFORMBASEURLModule}/v1/metadata`, "GET")
 end

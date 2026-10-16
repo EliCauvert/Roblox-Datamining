@@ -1,64 +1,67 @@
-﻿local acpProtocolModule = require(script.Parent.Parent.Acp.AcpProtocol)
+﻿local AcpProtocolModule = require(script.Parent.Parent.Acp.AcpProtocol)
 local _ = require(script.Parent.Parent.createTurnHandle)
 local _ = require(script.Parent.Parent.types)
 
 return {
-	ingestFrame = function(p1, p2, p3)
-		-- upvalues: acpProtocolModule (ref)
-		local activeTurnBySession
-		assert(p2 and (if p2.kind ~= "notification" then p2.kind == "response" else true), "ingestFrame requires an IncomingFrame")
-		local _ = nil
+	ingestFrame = function(p1, p2, p3) --[[ Line: 22 ]]
+		-- upvalues: AcpProtocolModule (copy)
+		assert(p2 and (p2.kind == "notification" or p2.kind == "response"), "ingestFrame requires an IncomingFrame")
+		local ActiveTurnBySession = nil
 		
 		if p2.kind == "notification" then
-			local sessionId = p2.notification.params and p2.notification.params.sessionId
+			local SessionId = p2.notification.params and p2.notification.params.sessionId
 			
-			if typeof(sessionId) ~= "string" or sessionId == "" then
+			if typeof(SessionId) ~= "string" or SessionId == "" then
 				warn(("[CAS] dropped notification without sessionId: %s"):format(p2.notification.method))
 				
 				return
-			elseif p2.notification.method == acpProtocolModule.Notifications.SessionUpdate then
-				local update = p2.notification.params and p2.notification.params.update
-				local var1 = if p3 ~= nil then nil else p3.sequenceNumber
+			end
+			if p2.notification.method == AcpProtocolModule.Notifications.SessionUpdate then
+				local Update = p2.notification.params and p2.notification.params.update
+				local SequenceNumber = if p3 == nil then nil else p3.sequenceNumber
 				
-				if update ~= nil and typeof(var1) == "number" then
-					local sessionByCasSessionId = p1.getSessionByCasSessionId(sessionId)
+				if Update ~= nil and typeof(SequenceNumber) == "number" then
+					local SessionByCasSessionId = p1.getSessionByCasSessionId(SessionId)
 					
-					if sessionByCasSessionId == nil then
-						local universeId = p2.notification.params and p2.notification.params.universeId
+					if SessionByCasSessionId == nil then
+						local UniverseId = p2.notification.params and p2.notification.params.universeId
 						
-						if typeof(universeId) == "number" then
-							sessionByCasSessionId = p1.getSessionForProject(universeId, nil, sessionId)
+						if typeof(UniverseId) == "number" then
+							SessionByCasSessionId = p1.getSessionForProject(UniverseId, nil, SessionId)
 						end
 					end
-					if sessionByCasSessionId ~= nil then
-						sessionByCasSessionId.ingestRealtimeUpdate(update, var1)
+					if SessionByCasSessionId ~= nil then
+						SessionByCasSessionId.ingestRealtimeUpdate(Update, SequenceNumber)
 					end
 				end
 			end
-			activeTurnBySession = p1.getActiveTurnBySession(sessionId)
+			ActiveTurnBySession = p1.getActiveTurnBySession(SessionId)
 			
-			if activeTurnBySession == nil then return end
+			if ActiveTurnBySession == nil then return end
 		else
-			local id = p2.response.id
+			local Id = p2.response.id
 			
-			if id == nil then
+			if Id == nil then
 				warn("[CAS] dropped response frame with no id")
 				
 				return
 			end
-			local var2 = tostring(id)
-			activeTurnBySession = p1.getActiveTurnByRequestId(var2)
+			local Text = tostring(Id)
+			ActiveTurnBySession = p1.getActiveTurnByRequestId(Text)
 			
-			if activeTurnBySession == nil then
-				p1.logger:debug(`[CAS] no active handle for response id={var2}`)
+			if ActiveTurnBySession == nil then
+				p1.logger:debug(`[CAS] no active handle for response id={Text}`)
 				
 				return
-			elseif activeTurnBySession == nil then return end
-			activeTurnBySession.dispatchFrame(p2, p3)
-			
-			if activeTurnBySession.isDone() then
-				p1.onTurnDone(activeTurnBySession)
 			end
+		end
+		local ActiveTurnBySession1 = ActiveTurnBySession
+		
+		if ActiveTurnBySession1 == nil then return end
+		ActiveTurnBySession1.dispatchFrame(p2, p3)
+		
+		if ActiveTurnBySession1.isDone() then
+			p1.onTurnDone(ActiveTurnBySession1)
 		end
 	end
 }

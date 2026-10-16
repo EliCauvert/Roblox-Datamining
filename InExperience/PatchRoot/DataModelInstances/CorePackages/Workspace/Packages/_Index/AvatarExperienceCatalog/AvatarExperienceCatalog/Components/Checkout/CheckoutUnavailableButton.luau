@@ -1,19 +1,19 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), foundationModule (ref)
-	return reactModule.createElement(foundationModule.View, {
+return ReactModule.memo(function(Frame) --[[ Line: 15 | Named "CheckoutUnavailableButton" ]]
+	-- upvalues: ReactModule (copy), FoundationModule (copy)
+	return ReactModule.createElement(FoundationModule.View, {
 		tag = "size-full-0 auto-y fill",
-		LayoutOrder = p1.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		UnavailableButton = reactModule.createElement(foundationModule.Button, {
-			text = p1.label,
-			onActivated = p1.onActivated,
-			variant = foundationModule.Enums.ButtonVariant.Standard,
-			size = foundationModule.Enums.ButtonSize.Medium,
-			fillBehavior = foundationModule.Enums.FillBehavior.Fill
+		UnavailableButton = ReactModule.createElement(FoundationModule.Button, {
+			text = Frame.label,
+			onActivated = Frame.onActivated,
+			variant = FoundationModule.Enums.ButtonVariant.Standard,
+			size = FoundationModule.Enums.ButtonSize.Medium,
+			fillBehavior = FoundationModule.Enums.FillBehavior.Fill
 		})
 	})
-end, require(parent.tutils).deepEqual)
+end, require(Parent.tutils).deepEqual)

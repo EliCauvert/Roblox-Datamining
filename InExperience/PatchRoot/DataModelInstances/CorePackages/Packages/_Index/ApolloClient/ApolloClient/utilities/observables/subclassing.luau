@@ -1,17 +1,16 @@
-﻿local t = {}
-local _ = require(script.Parent.Parent.Parent.Parent.LuauPolyfill)
-local observable = require(script.Parent.Observable).Observable
+﻿local _ = require(script.Parent.Parent.Parent.Parent.LuauPolyfill)
+local Observable = require(script.Parent.Observable).Observable
 
-function t.fixObservableSubclass(p1)
-	-- upvalues: observable (ref)
-	local function _(value)
-		-- upvalues: p1 (ref), observable (copy)
-		p1[value] = observable
+return {
+	fixObservableSubclass = function(Observables) --[[ Line: 30 ]]
+		-- upvalues: Observable (copy)
+		local function _(Key) --[[ Line: 32 | Named "set" ]]
+			-- upvalues: Observables (copy), Observable (upval)
+			Observables[Key] = Observable
+		end
+		
+		Observables["@@species"] = Observable
+		
+		return Observables
 	end
-	
-	p1["@@species"] = observable
-	
-	return p1
-end
-
-return t
+}

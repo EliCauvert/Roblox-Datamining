@@ -1,14 +1,13 @@
 ﻿local PYMKCarousel = script:FindFirstAncestor("PYMKCarousel")
-local dependenciesModule = require(PYMKCarousel.dependencies)
-local socialCommon = dependenciesModule.SocialCommon
-local roduxUsers = dependenciesModule.RoduxUsers
-local transformOmniRecommendationsToActionsModule = require(script.Parent.transformOmniRecommendationsToActions)
+local DependenciesModule = require(PYMKCarousel.dependencies)
+local RoduxUsers = DependenciesModule.RoduxUsers
+local TransformOmniRecommendationsToActionsModule = require(script.Parent.transformOmniRecommendationsToActions)
 local _ = require(PYMKCarousel.Common.OmniTypes)
-local contextualInfoTypes = socialCommon.Enums.ContextualInfoTypes
+local ContextualInfoTypes = DependenciesModule.SocialCommon.Enums.ContextualInfoTypes
 
-local var1 = function(p1)
-	-- upvalues: contextualInfoTypes (ref), roduxUsers (ref)
-	return roduxUsers.Actions.UserUpdated(if p1.contextType == contextualInfoTypes.Contacts then {
+local function v6(p1) --[[ Line: 10 ]]
+	-- upvalues: ContextualInfoTypes (copy), RoduxUsers (copy)
+	return RoduxUsers.Actions.UserUpdated(if p1.contextType == ContextualInfoTypes.Contacts then {
 		id = p1.ContactId or tostring(p1.userId),
 		username = p1.ContactName or "",
 		displayName = p1.ContactName or ""
@@ -19,15 +18,15 @@ local var1 = function(p1)
 	})
 end
 
-return function(p1)
-	-- upvalues: transformOmniRecommendationsToActionsModule (ref), var1 (ref)
+return function(p1) --[[ Line: 25 ]]
+	-- upvalues: TransformOmniRecommendationsToActionsModule (copy), v6 (copy)
 	return {
-		AddContentMetadata = function(p2)
+		AddContentMetadata = function(p2) --[[ Line: 27 ]]
 			return { p2 }
 		end,
-		AddOmniRecommendations = function(p2)
-			-- upvalues: transformOmniRecommendationsToActionsModule (copy), p1 (ref), var1 (copy)
-			return transformOmniRecommendationsToActionsModule(p2.recommendations or {}, p1, var1)
+		AddOmniRecommendations = function(p2) --[[ Line: 32 ]]
+			-- upvalues: TransformOmniRecommendationsToActionsModule (upval), p1 (copy), v6 (upval)
+			return TransformOmniRecommendationsToActionsModule(p2.recommendations or {}, p1, v6)
 		end
 	}
 end

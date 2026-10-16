@@ -1,93 +1,93 @@
-﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
-local playersService = game:GetService("Players")
-local reactModule = require(momentsCreation.Parent.React)
-local useEffect = reactModule.useEffect
-local constantsModule = require(momentsCreation.Constants)
-local localPlayer = playersService.LocalPlayer
-local segmentSelectorWidth = constantsModule.AudioWaveform.SegmentSelectorWidth
-local waveformWidth = constantsModule.AudioWaveform.WaveformWidth
-local waveformPadding = constantsModule.AudioWaveform.WaveformPadding
+﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
+local ReactModule = require(MomentsCreation.Parent.React)
+local UseEffectFunction = ReactModule.useEffect
+local ConstantsModule = require(MomentsCreation.Constants)
+local LocalPlayer = game:GetService("Players").LocalPlayer
+local SegmentSelectorWidth = ConstantsModule.AudioWaveform.SegmentSelectorWidth
+local WaveformWidth = ConstantsModule.AudioWaveform.WaveformWidth
+local WaveformPadding = ConstantsModule.AudioWaveform.WaveformPadding
 
-local function _(value)
-	return `rbxassetid://{value}`
+local function _(p1): string --[[ Line: 28 | Named "assetIdAsContent" ]]
+	return `rbxassetid://{p1}`
 end
 
-local function normalizeWaveform(p1)
-	local var1 = 0
-	local t = {}
+local function normalizeWaveform(List) --[[ Line: 32 ]]
+	local Largest = 0
+	local List1 = {}
 	
-	for i, v in p1 do
-		local maxValue = math.max(0, v)
-		table.insert(t, maxValue)
-		var1 = math.max(var1, maxValue)
+	for _, value in List do
+		local Largest1 = math.max(0, value)
+		table.insert(List1, Largest1)
+		Largest = math.max(Largest, Largest1)
 	end
-	if var1 == 0 then
-		return t
+	if Largest == 0 then
+		return List1
 	end
-	local t_1 = {}
+	local List2 = {}
 	
-	for i_1, v_1 in t do
-		table.insert(t_1, v_1 / var1)
+	for _, value1 in List1 do
+		table.insert(List2, value1 / Largest)
 	end
-	return t_1
+	return List2
 end
 
-return function(p2, p3)
-	-- upvalues: reactModule (ref), useEffect (ref), segmentSelectorWidth (ref), waveformWidth (ref), waveformPadding (ref), localPlayer (ref), normalizeWaveform (ref)
-	local var2, var3 = reactModule.useState({})
-	useEffect(function()
-		-- upvalues: var3 (ref), p3 (ref), segmentSelectorWidth (copy), waveformWidth (copy), waveformPadding (copy), p2 (ref), localPlayer (copy), normalizeWaveform (copy)
-		var3({})
+return function(p1, p2) --[[ Line: 55 | Named "useAudioWaveform" ]]
+	-- upvalues: ReactModule (copy), UseEffectFunction (copy), SegmentSelectorWidth (copy), WaveformWidth (copy), WaveformPadding (copy), LocalPlayer (copy), normalizeWaveform (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState({})
+	UseEffectFunction(function() --[[ Line: 63 ]]
+		-- upvalues: UseStateResult2 (copy), p2 (copy), SegmentSelectorWidth (upval), WaveformWidth (upval), WaveformPadding (upval), p1 (copy), LocalPlayer (upval), normalizeWaveform (upval)
+		UseStateResult2({})
 		
-		if p3 <= 0 then
+		if p2 <= 0 then
 			return nil
 		end
-		local var4 = segmentSelectorWidth / (waveformWidth + waveformPadding) / p3
-		local audioWaveform = Instance.new("Folder")
-		audioWaveform.Name = "AudioWaveform"
-		local audioPlayer = Instance.new("AudioPlayer")
-		audioPlayer.Asset = `rbxassetid://{p2}`
-		audioPlayer.Parent = audioWaveform
-		audioWaveform.Parent = localPlayer:WaitForChild("PlayerGui")
-		local var5 = false
-		local var6 = audioPlayer:GetPropertyChangedSignal("IsReady"):Connect(function()
-			-- upvalues: var5 (write), audioPlayer (ref), var4 (ref), var3 (copy), normalizeWaveform (copy)
-			if var5 or not audioPlayer.IsReady then
+		local SegmentSelectorWidthRatio = SegmentSelectorWidth / (WaveformWidth + WaveformPadding) / p2
+		local AudioWaveform = Instance.new("Folder")
+		AudioWaveform.Name = "AudioWaveform"
+		local AudioPlayer = Instance.new("AudioPlayer")
+		AudioPlayer.Asset = `rbxassetid://{p1}`
+		AudioPlayer.Parent = AudioWaveform
+		AudioWaveform.Parent = LocalPlayer:WaitForChild("PlayerGui")
+		local Flag = false
+		local Connection = AudioPlayer:GetPropertyChangedSignal("IsReady"):Connect(function() --[[ Line: 83 | Named "generate" ]]
+			-- upvalues: Flag (ref), AudioPlayer (copy), SegmentSelectorWidthRatio (copy), UseStateResult2 (upval), normalizeWaveform (upval)
+			if not Flag and AudioPlayer.IsReady then
+				task.spawn(function() --[[ Line: 87 ]]
+					-- upvalues: AudioPlayer (upval), SegmentSelectorWidthRatio (upval), Flag (upval), UseStateResult2 (upval), normalizeWaveform (upval)
+					local Success, Result = pcall(function() --[[ Line: 88 ]]
+						-- upvalues: AudioPlayer (upval), SegmentSelectorWidthRatio (upval)
+						return AudioPlayer:GetWaveformAsync(NumberRange.new(0, AudioPlayer.TimeLength), SegmentSelectorWidthRatio * AudioPlayer.TimeLength)
+					end)
+					
+					if not Flag and Success then
+						UseStateResult2((normalizeWaveform(Result)))
+					end
+				end)
+				
 				return
 			end
-			task.spawn(function()
-				-- upvalues: audioPlayer (copy), var4 (copy), var5 (copy), var3 (copy), normalizeWaveform (copy)
-				local ok, status = pcall(function()
-					-- upvalues: audioPlayer (copy), var4 (copy)
-					return audioPlayer:GetWaveformAsync(NumberRange.new(0, audioPlayer.TimeLength), var4 * audioPlayer.TimeLength)
-				end)
-				
-				if not var5 and ok then
-					var3(normalizeWaveform(status))
-				end
-			end)
 		end)
 		
-		if audioPlayer.IsReady and audioPlayer.IsReady then
-			task.spawn(function()
-				-- upvalues: audioPlayer (ref), var4 (ref), var5 (write), var3 (copy), normalizeWaveform (copy)
-				local ok, status = pcall(function()
-					-- upvalues: audioPlayer (copy), var4 (copy)
-					return audioPlayer:GetWaveformAsync(NumberRange.new(0, audioPlayer.TimeLength), var4 * audioPlayer.TimeLength)
+		if AudioPlayer.IsReady and not Flag and AudioPlayer.IsReady then
+			task.spawn(function() --[[ Line: 87 ]]
+				-- upvalues: AudioPlayer (copy), SegmentSelectorWidthRatio (copy), Flag (ref), UseStateResult2 (upval), normalizeWaveform (upval)
+				local Success, Result = pcall(function() --[[ Line: 88 ]]
+					-- upvalues: AudioPlayer (upval), SegmentSelectorWidthRatio (upval)
+					return AudioPlayer:GetWaveformAsync(NumberRange.new(0, AudioPlayer.TimeLength), SegmentSelectorWidthRatio * AudioPlayer.TimeLength)
 				end)
 				
-				if not var5 and ok then
-					var3(normalizeWaveform(status))
+				if not Flag and Success then
+					UseStateResult2((normalizeWaveform(Result)))
 				end
 			end)
 		end
-		return function()
-			-- upvalues: var5 (write), var6 (ref), audioWaveform (ref)
-			var5 = true
-			var6:Disconnect()
-			audioWaveform:Destroy()
+		return function() --[[ Line: 106 ]]
+			-- upvalues: Flag (ref), Connection (copy), AudioWaveform (copy)
+			Flag = true
+			Connection:Disconnect()
+			AudioWaveform:Destroy()
 		end
-	end, { p2, p3 })
+	end, { p1, p2 })
 	
-	return var2
+	return UseStateResult
 end

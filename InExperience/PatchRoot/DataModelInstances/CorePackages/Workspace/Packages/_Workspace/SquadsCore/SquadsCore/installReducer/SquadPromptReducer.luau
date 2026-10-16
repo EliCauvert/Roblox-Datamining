@@ -1,13 +1,13 @@
-﻿local squadsCore = script:FindFirstAncestor("SquadsCore")
-local parent = squadsCore.Parent
-local cryoModule = require(parent.Cryo)
+﻿local SquadsCore = script:FindFirstAncestor("SquadsCore")
+local Parent = SquadsCore.Parent
+local CryoModule = require(Parent.Cryo)
 
-return require(parent.Rodux).createReducer({ arguments = {} }, {
-	[require(squadsCore.Actions.SetSquadPrompt).name] = function(p1, p2)
-		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p1, { arguments = p2.arguments or {} })
+return require(Parent.Rodux).createReducer({ arguments = {} }, {
+	[require(SquadsCore.Actions.SetSquadPrompt).name] = function(p1, p2) --[[ Line: 13 ]]
+		-- upvalues: CryoModule (copy)
+		return CryoModule.Dictionary.join(p1, { arguments = p2.arguments or {} })
 	end,
-	[require(squadsCore.Actions.CloseSquadPrompt).name] = function(_, _)
+	[require(SquadsCore.Actions.CloseSquadPrompt).name] = function(_, _) --[[ Line: 18 ]]
 		return { arguments = {} }
 	end
 })

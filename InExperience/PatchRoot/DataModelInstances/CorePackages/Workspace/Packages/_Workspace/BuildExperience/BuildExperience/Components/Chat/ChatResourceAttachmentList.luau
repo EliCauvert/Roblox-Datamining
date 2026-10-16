@@ -1,41 +1,55 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local _ = require(buildExperience.Chat.chatTypes)
-local chip = foundationModule.Chip
-local view = foundationModule.View
-local chipSize = foundationModule.Enums.ChipSize
-local chipVariant = foundationModule.Enums.ChipVariant
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local _ = require(BuildExperience.Chat.chatTypes)
+local FFlagBuildExperienceLibrary = require(Parent.SharedFlags).FFlagBuildExperienceLibrary
+local Chip = FoundationModule.Chip
+local View = FoundationModule.View
+local ChipSize = FoundationModule.Enums.ChipSize
+local ChipVariant = FoundationModule.Enums.ChipVariant
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), chip (ref), chipSize (ref), foundationModule (ref), chipVariant (ref), view (ref)
-	local t = {}
-	local testId = p1.testId or "ChatResourceAttachmentList"
-	
-	for i, v in p1.attachments do
-		local onRemove = p1.onRemove
-		t[`Attachment-{i}`] = reactModule.createElement(chip, {
-			LayoutOrder = i,
-			onActivated = function()
-				-- upvalues: onRemove (ref), i (ref)
-				if onRemove ~= nil then
-					onRemove(i)
+return ReactModule.memo(function(Frame) --[[ Line: 27 | Named "ChatResourceAttachmentList" ]]
+	-- upvalues: FFlagBuildExperienceLibrary (copy), ReactModule (copy), Chip (copy), ChipSize (copy), FoundationModule (copy), ChipVariant (copy), View (copy)
+	local Elements = {}
+	local TestId = Frame.testId or "ChatResourceAttachmentList"
+	local NoOnRemove: boolean = FFlagBuildExperienceLibrary and (Frame.onActivateAttachment == nil and Frame.onRemove == nil)
+	for LayoutOrder, attachment in Frame.attachments do
+		local OnRemoveFunction = Frame.onRemove
+		local OnActivateAttachmentFunction = Frame.onActivateAttachment
+		Elements[`Attachment-{LayoutOrder}`] = ReactModule.createElement(Chip, {
+			LayoutOrder = LayoutOrder,
+			onActivated = if NoOnRemove then nil else function() --[[ Line: 41 ]]
+				-- upvalues: OnActivateAttachmentFunction (copy), LayoutOrder (copy), OnRemoveFunction (copy)
+				if OnActivateAttachmentFunction ~= nil then
+					OnActivateAttachmentFunction(LayoutOrder)
+					
+					return
+				end
+				if OnRemoveFunction ~= nil then
+					OnRemoveFunction(LayoutOrder)
 				end
 			end,
-			size = chipSize.Small,
-			text = if v.type == "resource_link" then v.name else v.resource.uri,
-			trailing = if onRemove ~= nil then nil else foundationModule.Enums.IconName.X,
-			variant = chipVariant.Standard,
-			testId = `{testId}.Attachment.{i}`
+			Selectable = not NoOnRemove and nil,
+			size = ChipSize.Small,
+			text = if attachment.type == "resource_link" then attachment.name else attachment.resource.uri,
+			trailing = if OnRemoveFunction == nil then nil elseif OnActivateAttachmentFunction == nil then FoundationModule.Enums.IconName.X else {
+				iconName = FoundationModule.Enums.IconName.X,
+				onActivated = function() --[[ Line: 55 ]]
+					-- upvalues: OnRemoveFunction (copy), LayoutOrder (copy)
+					OnRemoveFunction(LayoutOrder)
+				end
+			},
+			variant = ChipVariant.Standard,
+			testId = `{TestId}.Attachment.{LayoutOrder}`
 		})
 	end
-	return reactModule.createElement(view, {
-		LayoutOrder = p1.LayoutOrder,
+	return ReactModule.createElement(View, {
+		LayoutOrder = Frame.LayoutOrder,
 		tag = {
 			["row wrap gap-small size-full-0 auto-y"] = true,
-			["align-x-right"] = p1.alignRight == true
+			["align-x-right"] = Frame.alignRight == true
 		},
-		testId = testId
-	}, t)
+		testId = TestId
+	}, Elements)
 end)

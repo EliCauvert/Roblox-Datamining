@@ -1,44 +1,44 @@
-﻿local t = {}
-t.__index = t
+﻿local MockGuiService = {}
+MockGuiService.__index = MockGuiService
 
-function t.new()
-	-- upvalues: t (ref)
-	local bindableEvent = Instance.new("BindableEvent")
-	local t_1 = {
+function MockGuiService.new() --[[ Line: 4 ]]
+	-- upvalues: MockGuiService (copy)
+	local BindableEvent = Instance.new("BindableEvent")
+	local config = {
 		MenuIsOpen = false,
 		broadcasts = {},
 		NativeClose = {
-			Connect = function(_, p1)
-				-- upvalues: bindableEvent (ref)
-				return bindableEvent.Event:Connect(p1)
+			Connect = function(_, Callback) --[[ Line: 10 ]]
+				-- upvalues: BindableEvent (copy)
+				return BindableEvent.Event:Connect(Callback)
 			end
 		},
 		openedMenus = {}
 	}
-	setmetatable(t_1, { __index = t })
+	setmetatable(config, { __index = MockGuiService })
 	
-	return t_1
+	return config
 end
 
-function t:SetMenuIsOpen(p1, p2)
+function MockGuiService:SetMenuIsOpen(p1, Value) --[[ Line: 23 ]]
 	if p1 then
-		table.insert(self.openedMenus, p2)
+		table.insert(self.openedMenus, Value)
 	else
-		local index = table.find(self.openedMenus, p2)
+		local FoundIndex: number? = table.find(self.openedMenus, Value)
 		
-		if index then
-			table.remove(self.openedMenus, index)
+		if FoundIndex then
+			table.remove(self.openedMenus, FoundIndex)
 		end
 	end
 	self.MenuIsOpen = #self.openedMenus > 0
 end
 
-function t:BroadcastNotification(p1, p2)
-	table.insert(self.broadcasts, { data = p1, notification = p2 })
+function MockGuiService:BroadcastNotification(Data, Notification) --[[ Line: 36 ]]
+	table.insert(self.broadcasts, { data = Data, notification = Notification })
 end
 
-function t.GetNotificationTypeList(_)
+function MockGuiService:GetNotificationTypeList() --[[ Line: 45 ]]
 	return { NATIVE_EXIT = 35, RESTART_APP = 41 }
 end
 
-return t
+return MockGuiService

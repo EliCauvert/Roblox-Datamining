@@ -1,45 +1,44 @@
-﻿local robloxSubscriptionPurchaseApp = script:FindFirstAncestor("RobloxSubscriptionPurchaseApp")
-local parent = robloxSubscriptionPurchaseApp.Parent
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local robloxSubscriptionStoreModule = require(robloxSubscriptionPurchaseApp.Store.RobloxSubscriptionStore)
-local promptStateModule = require(robloxSubscriptionPurchaseApp.Enums.PromptState)
-local finalizeRobloxSubscriptionUpsellFlowModule = require(robloxSubscriptionPurchaseApp.Actions.finalizeRobloxSubscriptionUpsellFlow)
-local transitionToErrorModule = require(robloxSubscriptionPurchaseApp.Actions.transitionToError)
-local errorReasonModule = require(robloxSubscriptionPurchaseApp.Enums.ErrorReason)
-local robloxSubscriptionPurchasePollingTimeoutSeconds = game:DefineFastInt("RobloxSubscriptionPurchasePollingTimeoutSeconds", 4)
+﻿local RobloxSubscriptionPurchaseApp = script:FindFirstAncestor("RobloxSubscriptionPurchaseApp")
+local Parent = RobloxSubscriptionPurchaseApp.Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local RobloxSubscriptionStoreModule = require(RobloxSubscriptionPurchaseApp.Store.RobloxSubscriptionStore)
+local PromptStateModule = require(RobloxSubscriptionPurchaseApp.Enums.PromptState)
+local FinalizeRobloxSubscriptionUpsellFlowModule = require(RobloxSubscriptionPurchaseApp.Actions.finalizeRobloxSubscriptionUpsellFlow)
+local TransitionToErrorModule = require(RobloxSubscriptionPurchaseApp.Actions.transitionToError)
+local ErrorReasonModule = require(RobloxSubscriptionPurchaseApp.Enums.ErrorReason)
+local RobloxSubscriptionPurchasePollingTimeoutSeconds = game:DefineFastInt("RobloxSubscriptionPurchasePollingTimeoutSeconds", 4)
 
-return function()
-	-- upvalues: robloxSubscriptionStoreModule (ref), reactModule (ref), signalsReactModule (ref), promptStateModule (ref), robloxSubscriptionPurchasePollingTimeoutSeconds (ref), transitionToErrorModule (ref), errorReasonModule (ref), finalizeRobloxSubscriptionUpsellFlowModule (ref)
-	local var1 = robloxSubscriptionStoreModule.get()
-	local var2 = reactModule.useRef(var1)
-	local var3 = signalsReactModule.useSignalState(var1.getPromptState)
-	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), promptStateModule (copy), robloxSubscriptionPurchasePollingTimeoutSeconds (copy), var2 (ref), transitionToErrorModule (copy), errorReasonModule (copy), finalizeRobloxSubscriptionUpsellFlowModule (copy)
-		if var3 == promptStateModule.SubscriptionStatusPolling then
-			local var4 = false
-			task.delay(robloxSubscriptionPurchasePollingTimeoutSeconds, function()
-				-- upvalues: var4 (write), var2 (copy), promptStateModule (copy), transitionToErrorModule (copy), errorReasonModule (copy), finalizeRobloxSubscriptionUpsellFlowModule (copy)
-				if var4 then return end
-				local current = var2.current
-				
-				if current.getPromptState() == promptStateModule.SubscriptionStatusPolling then
-					if current.getIsNativePurchase() then
-						transitionToErrorModule(errorReasonModule.GenericError, "useSubscriptionPollingTimeoutGuard")
-						
-						return
-					end
-					finalizeRobloxSubscriptionUpsellFlowModule(false)
-				end
-			end)
+return function() --[[ Line: 20 | Named "useSubscriptionPollingTimeoutGuard" ]]
+	-- upvalues: RobloxSubscriptionStoreModule (copy), ReactModule (copy), SignalsReactModule (copy), PromptStateModule (copy), RobloxSubscriptionPurchasePollingTimeoutSeconds (copy), TransitionToErrorModule (copy), ErrorReasonModule (copy), FinalizeRobloxSubscriptionUpsellFlowModule (copy)
+	local GetResult = RobloxSubscriptionStoreModule.get()
+	local UseRefResult = ReactModule.useRef(GetResult)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(GetResult.getPromptState)
+	ReactModule.useEffect(function() --[[ Line: 28 ]]
+		-- upvalues: UseSignalStateResult (copy), PromptStateModule (upval), RobloxSubscriptionPurchasePollingTimeoutSeconds (upval), UseRefResult (copy), TransitionToErrorModule (upval), ErrorReasonModule (upval), FinalizeRobloxSubscriptionUpsellFlowModule (upval)
+		if UseSignalStateResult ~= PromptStateModule.SubscriptionStatusPolling then return end
+		local Flag = false
+		task.delay(RobloxSubscriptionPurchasePollingTimeoutSeconds, function() --[[ Line: 36 ]]
+			-- upvalues: Flag (ref), UseRefResult (upval), PromptStateModule (upval), TransitionToErrorModule (upval), ErrorReasonModule (upval), FinalizeRobloxSubscriptionUpsellFlowModule (upval)
+			if Flag then return end
+			local Current = UseRefResult.current
 			
-			return function()
-				-- upvalues: var4 (write)
-				var4 = true
+			if Current.getPromptState() == PromptStateModule.SubscriptionStatusPolling then
+				if Current.getIsNativePurchase() then
+					TransitionToErrorModule(ErrorReasonModule.GenericError, "useSubscriptionPollingTimeoutGuard")
+					
+					return
+				end
+				FinalizeRobloxSubscriptionUpsellFlowModule(false)
 			end
+		end)
+		
+		return function() --[[ Line: 55 ]]
+			-- upvalues: Flag (ref)
+			Flag = true
 		end
 	end, {
-		var3,
-		signalsReactModule.useSignalState(var1.getIsNativePurchase)
+		UseSignalStateResult,
+		(SignalsReactModule.useSignalState(GetResult.getIsNativePurchase))
 	})
 end

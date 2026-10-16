@@ -1,8 +1,10 @@
-﻿local legacyFriendsRodux = script:FindFirstAncestor("LegacyFriendsRodux")
-local cryoModule = require(legacyFriendsRodux.Parent.Cryo)
-local updateFriendPresenceCounts = require(legacyFriendsRodux.Actions).UpdateFriendPresenceCounts
+﻿local LegacyFriendsRodux = script:FindFirstAncestor("LegacyFriendsRodux")
+local CryoModule = require(LegacyFriendsRodux.Parent.Cryo)
+local UpdateFriendPresenceCounts = require(LegacyFriendsRodux.Actions).UpdateFriendPresenceCounts
 
-return function(p1, p2)
-	-- upvalues: updateFriendPresenceCounts (ref), cryoModule (ref)
-	return if p2.type == updateFriendPresenceCounts.name then cryoModule.Dictionary.join({}, p2.presenceCounts) else p1 or {}
+return function(p1, p2) --[[ Line: 8 ]]
+	-- upvalues: UpdateFriendPresenceCounts (copy), CryoModule (copy)
+	local P0 = p1 or {}
+	
+	return if p2.type == UpdateFriendPresenceCounts.name then CryoModule.Dictionary.join({}, p2.presenceCounts) else P0
 end

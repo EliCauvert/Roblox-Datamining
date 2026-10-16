@@ -1,13 +1,13 @@
-﻿local httpService = game:GetService("HttpService")
-local httpRequestModule = require(script:FindFirstAncestor("DataHydration").Parent.HttpRequest)
-local communityUserMembershipUrlBuilderModule = require(script.Parent.CommunityUserMembershipUrlBuilder)
+﻿local HttpService = game:GetService("HttpService")
+local HttpRequestModule = require(script:FindFirstAncestor("DataHydration").Parent.HttpRequest)
+local CommunityUserMembershipUrlBuilderModule = require(script.Parent.CommunityUserMembershipUrlBuilder)
 
-return function(p1)
-	-- upvalues: communityUserMembershipUrlBuilderModule (ref), httpRequestModule (ref), httpService (ref)
-	return httpRequestModule.config({
-		requestFunction = function(p2, p3, p4)
-			-- upvalues: httpRequestModule (copy)
-			return httpRequestModule.requestFunctions.RequestInternal(p2, p3, p4)
+return function(p1) --[[ Line: 11 | Named "requestJoinCommunity" ]]
+	-- upvalues: CommunityUserMembershipUrlBuilderModule (copy), HttpRequestModule (copy), HttpService (copy)
+	return HttpRequestModule.config({
+		requestFunction = function(p2, p3, p4) --[[ Line: 15 ]]
+			-- upvalues: HttpRequestModule (upval)
+			return HttpRequestModule.requestFunctions.RequestInternal(p2, p3, p4)
 		end
-	})(communityUserMembershipUrlBuilderModule.buildJoinCommunityUrl(p1), "POST", { postBody = httpService:JSONEncode({}) })
+	})(CommunityUserMembershipUrlBuilderModule.buildJoinCommunityUrl(p1), "POST", { postBody = HttpService:JSONEncode({}) })
 end

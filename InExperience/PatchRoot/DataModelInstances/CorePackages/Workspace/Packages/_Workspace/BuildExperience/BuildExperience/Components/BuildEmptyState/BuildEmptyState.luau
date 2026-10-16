@@ -1,56 +1,53 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local playersService = game:GetService("Players")
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local icon = foundationModule.Icon
-local text = foundationModule.Text
-local view = foundationModule.View
-local iconName = foundationModule.Enums.IconName
-local useTokens = foundationModule.Hooks.useTokens
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local Players = game:GetService("Players")
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
+local Icon = FoundationModule.Icon
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local IconName = FoundationModule.Enums.IconName
+local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return function(p1)
-	-- upvalues: playersService (ref), useLocalization (ref), localizationStringsModule (ref), useTokens (ref), reactModule (ref), view (ref), icon (ref), iconName (ref), text (ref)
-	local localPlayer = playersService.LocalPlayer
-	local var1 = if localPlayer then localPlayer.DisplayName else ""
-	local var2 = useLocalization({
-		subline = localizationStringsModule.BUILD_SUBLINE,
-		title = if var1 ~= "" then localizationStringsModule.BUILD_GREETING else {
-			localizationStringsModule.BUILD_GREETING_WITH_NAME,
-			DISPLAY_NAME = var1
+return function(Frame) --[[ Line: 25 | Named "BuildEmptyState" ]]
+	-- upvalues: Players (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseTokensFunction (copy), ReactModule (copy), View (copy), Icon (copy), IconName (copy), Text (copy)
+	local LocalPlayer = Players.LocalPlayer
+	local DisplayName = if LocalPlayer then LocalPlayer.DisplayName else ""
+	local UseLocalizationResult = UseLocalizationFunction({
+		subline = LocalizationStringsModule.BUILD_SUBLINE,
+		title = if DisplayName == "" then LocalizationStringsModule.BUILD_GREETING else {
+			LocalizationStringsModule.BUILD_GREETING_WITH_NAME,
+			DISPLAY_NAME = DisplayName
 		}
 	})
-	local var3 = useTokens()
-	local size1400 = var3.Size.Size_1400
-	local _ = nil
-	local _ = nil
+	local UseTokensResult = UseTokensFunction()
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "col align-x-center gap-small auto-xy",
-		LayoutOrder = p1.LayoutOrder,
-		testId = p1.testId or "BuildEmptyState"
+		LayoutOrder = Frame.LayoutOrder,
+		testId = Frame.testId or "BuildEmptyState"
 	}, {
-		Nebula = reactModule.createElement(icon, {
+		Nebula = ReactModule.createElement(Icon, {
 			LayoutOrder = 1,
-			name = iconName.Nebula,
-			size = size1400,
-			style = var3.Color.Content.Emphasis
+			name = IconName.Nebula,
+			size = UseTokensResult.Size.Size_1400,
+			style = UseTokensResult.Color.Content.Emphasis
 		}),
-		Headings = reactModule.createElement(view, {
+		Headings = ReactModule.createElement(View, {
 			LayoutOrder = 2,
 			tag = "col align-x-center gap-xxsmall auto-xy"
 		}, {
-			Title = reactModule.createElement(text, {
+			Title = ReactModule.createElement(Text, {
 				LayoutOrder = 1,
 				tag = "auto-xy text-heading-small content-emphasis",
-				Text = var2.title
+				Text = UseLocalizationResult.title
 			}),
-			Subline = reactModule.createElement(text, {
+			Subline = ReactModule.createElement(Text, {
 				LayoutOrder = 2,
 				tag = "auto-xy text-body-medium content-default",
-				Text = var2.subline
+				Text = UseLocalizationResult.subline
 			})
 		})
 	})

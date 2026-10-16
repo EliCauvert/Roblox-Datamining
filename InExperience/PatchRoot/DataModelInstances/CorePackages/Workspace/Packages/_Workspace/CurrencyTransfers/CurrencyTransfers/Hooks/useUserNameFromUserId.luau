@@ -1,32 +1,33 @@
-﻿local parent = script:FindFirstAncestor("CurrencyTransfers").Parent
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local userProfilesModule = require(parent.UserProfiles)
+﻿local Parent = script:FindFirstAncestor("CurrencyTransfers").Parent
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
+local UserProfilesModule = require(Parent.UserProfiles)
 
-return function(p1)
-	-- upvalues: reactModule (ref), userProfilesModule (ref), signalsModule (ref), signalsReactModule (ref)
-	local var1 = p1 and p1 ~= 0
-	local var2 = reactModule.useMemo(function()
-		-- upvalues: var1 (ref), p1 (ref), userProfilesModule (copy)
-		return if var1 and p1 then userProfilesModule.Stores.UserProfileStore.get().fetchNamesByUserIds({ tostring(p1) }) else nil
-	end, { var1, p1 })
+return function(p1) --[[ Line: 18 | Named "useUserNameFromUserId" ]]
+	-- upvalues: ReactModule (copy), UserProfilesModule (copy), SignalsModule (copy), SignalsReactModule (copy)
+	local v1: boolean = p1 and p1 ~= 0
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 21 ]]
+		-- upvalues: v1 (copy), p1 (copy), UserProfilesModule (upval)
+		return if v1 and p1 then UserProfilesModule.Stores.UserProfileStore.get().fetchNamesByUserIds({ (tostring(p1)) }) else nil
+	end, { v1, p1 })
 	
-	return signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: var2 (ref), signalsModule (copy)
-		return if var2 then signalsModule.createComputed(function(p2)
-			-- upvalues: var2 (copy)
-			local var3 = var2(p2)
+	return SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 30 ]]
+		-- upvalues: UseMemoResult (copy), SignalsModule (upval)
+		return if UseMemoResult then SignalsModule.createComputed(function(p2) --[[ Line: 36 ]]
+			-- upvalues: UseMemoResult (upval)
+			local UseMemoResultResult = UseMemoResult(p2)
 			
-			if not var3 or var3.status ~= "success" or (not var3.data or #var3.data == 0) then
+			if UseMemoResultResult and UseMemoResultResult.status == "success" and UseMemoResultResult.data and #UseMemoResultResult.data ~= 0 then
+				local Entry = UseMemoResultResult.data[1]
+				local Names = Entry and Entry.names
+				
+				return if Names then Names.getDisplayName(false) or (Names.getUsername(false) or "") else nil
+			else
 				return nil
 			end
-			local var4 = var3.data[1]
-			local names = var4 and var4.names
-			
-			return if names then names.getDisplayName(false) or (names.getUsername(false) or "") else nil
-		end) else function(_)
+		end) else function(_) --[[ Line: 32 ]]
 			return nil
 		end
-	end, { var2 }))
+	end, { UseMemoResult })))
 end

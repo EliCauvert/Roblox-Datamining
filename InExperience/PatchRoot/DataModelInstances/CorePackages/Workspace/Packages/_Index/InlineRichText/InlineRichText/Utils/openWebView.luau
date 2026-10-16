@@ -1,32 +1,33 @@
-﻿local parent = script:FindFirstAncestor("InlineRichText").Parent
-local webViewService = game:GetService("WebViewService")
-local browserService = game:GetService("BrowserService")
-local httpService = game:GetService("HttpService")
-local getFFlagEnableUnifiedWebViews = require(parent.SharedFlags).GetFFlagEnableUnifiedWebViews
+﻿local WebViewService = game:GetService("WebViewService")
+local BrowserService = game:GetService("BrowserService")
+local HttpService = game:GetService("HttpService")
+local GetFFlagEnableUnifiedWebViewsFunction = require(script:FindFirstAncestor("InlineRichText").Parent.SharedFlags).GetFFlagEnableUnifiedWebViews
 
-return function(p1)
-	-- upvalues: getFFlagEnableUnifiedWebViews (ref), webViewService (ref), browserService (ref), httpService (ref)
-	if getFFlagEnableUnifiedWebViews() then
-		local onWindowClosedConnection = nil
-		onWindowClosedConnection = webViewService.OnWindowClosed:Connect(function()
-			-- upvalues: webViewService (copy), onWindowClosedConnection (write)
-			webViewService:CloseWindow()
+return function(Url) --[[ Line: 10 | Named "openWebView" ]]
+	-- upvalues: GetFFlagEnableUnifiedWebViewsFunction (copy), WebViewService (copy), BrowserService (copy), HttpService (copy)
+	if GetFFlagEnableUnifiedWebViewsFunction() then
+		local Connection = nil
+		Connection = WebViewService.OnWindowClosed:Connect(function() --[[ Line: 14 ]]
+			-- upvalues: WebViewService (upval), Connection (ref)
+			WebViewService:CloseWindow()
 			
-			if onWindowClosedConnection then
-				onWindowClosedConnection:Disconnect()
-				onWindowClosedConnection = nil
+			if Connection then
+				Connection:Disconnect()
+				Connection = nil
 			end
 		end)
-		webViewService:OpenWindow(p1, "", true)
+		WebViewService:OpenWindow(Url, "", true)
 		
 		return
+	else
+		local Connection = BrowserService
+		Connection:SendCommand(HttpService:JSONEncode({
+			command = "open",
+			title = "",
+			visible = true,
+			isGenericWebview = true,
+			enableOverlayReplacement = true,
+			url = Url
+		}))
 	end
-	browserService:SendCommand(httpService:JSONEncode({
-		command = "open",
-		title = "",
-		visible = true,
-		isGenericWebview = true,
-		enableOverlayReplacement = true,
-		url = p1
-	}))
 end

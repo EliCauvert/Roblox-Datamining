@@ -1,51 +1,52 @@
-﻿local serverDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
-local parent = serverDrivenUi.Parent
-local playersService = game:GetService("Players")
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local signalsReactModule = require(parent.SignalsReact)
-local dataHydrationModule = require(parent.DataHydration)
-local sduiSharedContentModule = require(parent.SduiSharedContent)
-local gameTileModule = require(parent.GameTile)
-local localizationModule = require(parent.Localization)
-local discoveryAnalyticsModule = require(parent.DiscoveryAnalytics)
-local sduiChip = sduiSharedContentModule.SduiChip
-local usePlayerCountText = gameTileModule.usePlayerCountText
-local useLocalization = localizationModule.Hooks.useLocalization
-local gameDetailsSubpage = discoveryAnalyticsModule.Events.gameDetailsSubpage
-local useNavigateToServersModule = require(serverDrivenUi.Content.ExperienceDetails.Hooks.useNavigateToServers)
+﻿local ServerDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
+local Parent = ServerDrivenUi.Parent
+local Players = game:GetService("Players")
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local SignalsReactModule = require(Parent.SignalsReact)
+local DataHydrationModule = require(Parent.DataHydration)
+local SduiChip = require(Parent.SduiSharedContent).SduiChip
+local UsePlayerCountTextFunction = require(Parent.GameTile).usePlayerCountText
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local GameDetailsSubpageFunction = require(Parent.DiscoveryAnalytics).Events.gameDetailsSubpage
+local UseNavigateToServersModule = require(ServerDrivenUi.Content.ExperienceDetails.Hooks.useNavigateToServers)
 
-return reactModule.memo(function(p1)
-	-- upvalues: signalsReactModule (ref), dataHydrationModule (ref), usePlayerCountText (ref), useLocalization (ref), useNavigateToServersModule (ref), reactModule (ref), playersService (ref), gameDetailsSubpage (ref), sduiChip (ref), foundationModule (ref)
-	local layoutOrder = p1.layoutOrder
-	local universeId = p1.universeId
-	local var1 = signalsReactModule.useSignalState(dataHydrationModule.Game.getGameInfoStore(false).getAndFetchGameInfo(universeId).data)
-	local var2 = useNavigateToServersModule(universeId)
+return ReactModule.memo(function(p1) --[[ Line: 26 | Named "ExperienceDetailsActiveCountChip" ]]
+	-- upvalues: SignalsReactModule (copy), DataHydrationModule (copy), UsePlayerCountTextFunction (copy), UseLocalizationFunction (copy), UseNavigateToServersModule (copy), ReactModule (copy), Players (copy), GameDetailsSubpageFunction (copy), SduiChip (copy), FoundationModule (copy)
+	local LayoutOrder = p1.layoutOrder
+	local UniverseId = p1.universeId
+	local UseSignalStateResult = SignalsReactModule.useSignalState(DataHydrationModule.Game.getGameInfoStore(false).getAndFetchGameInfo(UniverseId).data)
+	local UseLocalizationResult = UseLocalizationFunction({
+		numActivePlayers = {
+			"Feature.GameDetails.Label.LowercaseNumberPlaying",
+			numActivePlayers = UsePlayerCountTextFunction(UseSignalStateResult and UseSignalStateResult.playerCount or 0)
+		}
+	})
+	local UseNavigateToServersModuleResult = UseNavigateToServersModule(UniverseId)
 	
-	return reactModule.createElement(sduiChip, {
-		text = useLocalization({
-			numActivePlayers = {
-				"Feature.GameDetails.Label.LowercaseNumberPlaying",
-				numActivePlayers = usePlayerCountText(if var1 then var1.playerCount else 0)
-			}
-		}).numActivePlayers,
-		layoutOrder = layoutOrder,
-		leadingIconName = foundationModule.Enums.IconName.TwoPeople,
-		onActivated = reactModule.useCallback(function()
-			-- upvalues: var1 (ref), playersService (copy), gameDetailsSubpage (copy), universeId (ref), var2 (ref)
-			local rootPlaceId = var1 and var1.rootPlaceId
+	return ReactModule.createElement(SduiChip, {
+		text = UseLocalizationResult.numActivePlayers,
+		layoutOrder = LayoutOrder,
+		leadingIconName = FoundationModule.Enums.IconName.TwoPeople,
+		onActivated = ReactModule.useCallback(function() --[[ Line: 41 ]]
+			-- upvalues: UseSignalStateResult (copy), Players (upval), GameDetailsSubpageFunction (upval), UniverseId (copy), UseNavigateToServersModuleResult (copy)
+			local RootPlaceId = UseSignalStateResult and UseSignalStateResult.rootPlaceId
 			
-			if rootPlaceId then
-				gameDetailsSubpage({
+			if RootPlaceId then
+				GameDetailsSubpageFunction({
 					subpage = "Servers",
 					action = "open",
 					ctx = "ExperienceDetailsActiveCountChip",
-					uid = tostring(playersService.LocalPlayer and playersService.LocalPlayer.UserId),
-					universeId = universeId,
-					placeId = tostring(rootPlaceId)
+					uid = tostring(Players.LocalPlayer and Players.LocalPlayer.UserId),
+					universeId = UniverseId,
+					placeId = tostring(RootPlaceId)
 				}, "ExperienceDetailsActiveCountChip")
 			end
-			var2()
-		end, { universeId, var1, var2 })
+			UseNavigateToServersModuleResult()
+		end, {
+			UniverseId,
+			UseSignalStateResult,
+			UseNavigateToServersModuleResult
+		})
 	})
 end)

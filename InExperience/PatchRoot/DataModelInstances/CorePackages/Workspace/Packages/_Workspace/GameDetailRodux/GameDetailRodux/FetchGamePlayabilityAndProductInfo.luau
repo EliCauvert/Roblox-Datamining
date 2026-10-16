@@ -1,40 +1,41 @@
-﻿local parent = script:FindFirstAncestor("GameDetailRodux").Parent
-local promiseModule = require(parent.Promise)
-local playabilityStatusEnum = require(parent.DiscoveryTypes).PlayabilityStatusEnum
-local apiFetchPlayabilityStatus = require(parent.PlayabilityRodux).PlayabilityStatus.ApiFetchPlayabilityStatus
-local performFetch = require(parent.Http).PerformFetch
-local fetchGamesProductInfo = require(parent.GameProductInfoRodux).FetchGamesProductInfo
+﻿local Parent = script:FindFirstAncestor("GameDetailRodux").Parent
+local PromiseModule = require(Parent.Promise)
+local PlayabilityStatusEnum = require(Parent.DiscoveryTypes).PlayabilityStatusEnum
+local ApiFetchPlayabilityStatus = require(Parent.PlayabilityRodux).PlayabilityStatus.ApiFetchPlayabilityStatus
+local PerformFetch = require(Parent.Http).PerformFetch
+local FetchGamesProductInfo = require(Parent.GameProductInfoRodux).FetchGamesProductInfo
 
 return {
-	KeyMapper = function(p1)
-		return "luaapp.playability-and-productinfo." .. p0
+	KeyMapper = function(Text): string --[[ Line: 9 ]]
+		return "luaapp.playability-and-productinfo." .. Text
 	end,
-	Fetch = function(p1, p2)
-		-- upvalues: performFetch (ref), apiFetchPlayabilityStatus (ref), playabilityStatusEnum (ref), fetchGamesProductInfo (ref), promiseModule (ref)
-		assert(type(p2) == "string", "FetchPlayabilityAndProductInfo thunk expects universeId to be a string")
+	Fetch = function(p1, Text) --[[ Line: 17 ]]
+		-- upvalues: PerformFetch (copy), ApiFetchPlayabilityStatus (copy), PlayabilityStatusEnum (copy), FetchGamesProductInfo (copy), PromiseModule (copy)
+		assert(type(Text) == "string", "FetchPlayabilityAndProductInfo thunk expects universeId to be a string")
 		
-		return performFetch.Single("luaapp.playability-and-productinfo." .. p2, function(p3)
-			-- upvalues: apiFetchPlayabilityStatus (copy), p1 (ref), p2 (ref), playabilityStatusEnum (copy), fetchGamesProductInfo (copy), promiseModule (copy)
-			return p3:dispatch(apiFetchPlayabilityStatus.Fetch(p1, { p2 })):andThen(function(p4)
-				-- upvalues: apiFetchPlayabilityStatus (copy), p2 (copy), p3 (ref), playabilityStatusEnum (copy), fetchGamesProductInfo (copy), p1 (copy), promiseModule (copy)
-				local var1, _ = p4[apiFetchPlayabilityStatus.KeyMapper(p2)]:unwrap()
+		return PerformFetch.Single("luaapp.playability-and-productinfo." .. Text, function(p2) --[[ Line: 20 ]]
+			-- upvalues: ApiFetchPlayabilityStatus (upval), p1 (copy), Text (copy), PlayabilityStatusEnum (upval), FetchGamesProductInfo (upval), PromiseModule (upval)
+			return p2:dispatch(ApiFetchPlayabilityStatus.Fetch(p1, { Text })):andThen(function(Result) --[[ Line: 23 ]]
+				-- upvalues: ApiFetchPlayabilityStatus (upval), Text (upval), p2 (copy), PlayabilityStatusEnum (upval), FetchGamesProductInfo (upval), p1 (upval), PromiseModule (upval)
+				local UnwrapResult, _ = Result[ApiFetchPlayabilityStatus.KeyMapper(Text)]:unwrap()
 				
-				if not var1 then
-					return promiseModule.reject()
-				end
-				local var2 = p3:getState().PlayabilityStatus[p2]
-				
-				return if var2.isPlayable == false and (var2.playabilityStatus == playabilityStatusEnum.PurchaseRequired or var2.playabilityStatus == playabilityStatusEnum.FiatPurchaseRequired) then p3:dispatch(fetchGamesProductInfo.Fetch(p1, { p2 })):andThen(function(p5)
-					-- upvalues: fetchGamesProductInfo (copy), p2 (copy), promiseModule (copy), var2 (ref)
-					local var3, _ = p5[fetchGamesProductInfo.KeyMapper(p2)]:unwrap()
+				if UnwrapResult then
+					local PlayabilityStatusEntry = p2:getState().PlayabilityStatus[Text]
 					
-					return if var3 then promiseModule.resolve(var2.playabilityStatus) else promiseModule.reject()
-				end) else promiseModule.resolve(var2.playabilityStatus)
+					return if PlayabilityStatusEntry.isPlayable == false and (PlayabilityStatusEntry.playabilityStatus == PlayabilityStatusEnum.PurchaseRequired or PlayabilityStatusEntry.playabilityStatus == PlayabilityStatusEnum.FiatPurchaseRequired) then p2:dispatch(FetchGamesProductInfo.Fetch(p1, { Text })):andThen(function(Result) --[[ Line: 39 ]]
+						-- upvalues: FetchGamesProductInfo (upval), Text (upval), PromiseModule (upval), PlayabilityStatusEntry (copy)
+						local UnwrapResult, _ = Result[FetchGamesProductInfo.KeyMapper(Text)]:unwrap()
+						
+						return if UnwrapResult then PromiseModule.resolve(PlayabilityStatusEntry.playabilityStatus) else PromiseModule.reject()
+					end) else PromiseModule.resolve(PlayabilityStatusEntry.playabilityStatus)
+				else
+					return PromiseModule.reject()
+				end
 			end)
 		end)
 	end,
-	GetFetchingStatus = function(p1, p2)
-		-- upvalues: performFetch (ref)
-		return performFetch.GetStatus(p1, "luaapp.playability-and-productinfo." .. p7)
+	GetFetchingStatus = function(p1, Text) --[[ Line: 59 ]]
+		-- upvalues: PerformFetch (copy)
+		return PerformFetch.GetStatus(p1, "luaapp.playability-and-productinfo." .. Text)
 	end
 }

@@ -1,12 +1,12 @@
-﻿local sduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
-local sduiUsageRecorderModule = require(sduiCoreSystem.Analytics.SduiUsageRecorder)
-local recordV1ComponentUsageModule = require(sduiCoreSystem.Analytics.recordV1ComponentUsage)
+﻿local SduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
+local SduiUsageRecorderModule = require(SduiCoreSystem.Analytics.SduiUsageRecorder)
+local RecordV1ComponentUsageModule = require(SduiCoreSystem.Analytics.recordV1ComponentUsage)
 
-return function(p1, p2)
-	-- upvalues: sduiUsageRecorderModule (ref), recordV1ComponentUsageModule (ref)
-	if not p2 then return end
-	if not sduiUsageRecorderModule.isTypeSamplingEnabled() and not sduiUsageRecorderModule.isParamSamplingEnabled() then return end
-	for i, v in p2 do
-		pcall(recordV1ComponentUsageModule, p1, v)
+return function(p1, List) --[[ Line: 18 | Named "recordV1RegisteredTemplates" ]]
+	-- upvalues: SduiUsageRecorderModule (copy), RecordV1ComponentUsageModule (copy)
+	if not List then return end
+	if not SduiUsageRecorderModule.isTypeSamplingEnabled() and not SduiUsageRecorderModule.isParamSamplingEnabled() then return end
+	for _, value in List do
+		pcall(RecordV1ComponentUsageModule, p1, value)
 	end
 end

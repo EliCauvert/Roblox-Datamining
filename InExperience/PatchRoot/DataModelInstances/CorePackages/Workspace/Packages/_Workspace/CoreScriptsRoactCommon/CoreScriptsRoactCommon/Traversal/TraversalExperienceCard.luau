@@ -1,76 +1,74 @@
-﻿local parent = script:FindFirstAncestor("CoreScriptsRoactCommon").Parent
-local foundationModule = require(parent.Foundation)
-local impressionsModule = require(parent.Impressions)
-local localizationModule = require(parent.Localization)
-local reactModule = require(parent.React)
-local view = foundationModule.View
-local text = foundationModule.Text
-local image = foundationModule.Image
-local impressionsTagUtility = impressionsModule.ImpressionsTagUtility
-local useLocalization = localizationModule.Hooks.useLocalization
+﻿local Parent = script:FindFirstAncestor("CoreScriptsRoactCommon").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local Image = FoundationModule.Image
+local ImpressionsTagUtility = require(Parent.Impressions).ImpressionsTagUtility
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: foundationModule (ref), useLocalization (ref), reactModule (ref), impressionsTagUtility (ref), view (ref), image (ref), text (ref)
-	local var1 = foundationModule.Hooks.useTokens()
-	local foreground = var1.Color.ActionStandard.Foreground
-	local size2500 = var1.Size.Size_2500
-	local var2 = if typeof(p1.width) == "table" then p1.width:map(function(p3)
-		-- upvalues: size2500 (ref)
-		return UDim2.fromOffset(p3 or size2500, 0)
-	end) else UDim2.fromOffset(p1.width or size2500, 0)
-	local var3 = if p1.rating then useLocalization({
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Callback) --[[ Line: 25 | Named "TraversalExperienceCard" ]]
+	-- upvalues: FoundationModule (copy), UseLocalizationFunction (copy), ReactModule (copy), ImpressionsTagUtility (copy), View (copy), Image (copy), Text (copy)
+	local UseTokensResult = FoundationModule.Hooks.useTokens()
+	local Foreground = UseTokensResult.Color.ActionStandard.Foreground
+	local Size2500 = UseTokensResult.Size.Size_2500
+	local MapResult = if typeof(p1.width) == "table" then p1.width:map(function(p2): UDim2 --[[ Line: 31 ]]
+		-- upvalues: Size2500 (copy)
+		return UDim2.fromOffset(p2 or Size2500, 0)
+	end) else UDim2.fromOffset(p1.width or Size2500, 0)
+	local UseLocalizationResult = if p1.rating then UseLocalizationFunction({
 		ratingText = {
 			"Feature.GameDetails.RatingPercentOnly",
 			percentRating = p1.rating
 		}
 	}) else nil
-	local var4 = reactModule.useRef(nil)
-	local var5 = reactModule.useCallback(function(p3)
-		-- upvalues: var4 (ref), p2 (ref)
-		var4.current = p3
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseResult = ReactModule.useCallback(function(Current) --[[ Line: 46 ]]
+		-- upvalues: UseRefResult (copy), Callback (copy)
+		UseRefResult.current = Current
 		
-		if typeof(p2) == "function" then
-			p2(p3)
+		if typeof(Callback) == "function" then
+			Callback(Current)
 			
 			return
-		elseif typeof(p2) == "table" then
-			p2.current = p3
+		end
+		if typeof(Callback) == "table" then
+			Callback.current = Current
 		end
 	end, {})
-	reactModule.useEffect(function()
-		-- upvalues: var4 (ref), p1 (ref), impressionsTagUtility (copy)
-		if var4.current and p1.impressionTag and p1.impressionIndex then
-			impressionsTagUtility.AddTag(var4, p1.impressionTag, p1.impressionIndex)
-			
-			return function()
-				-- upvalues: impressionsTagUtility (copy), var4 (copy), p1 (copy)
-				impressionsTagUtility.RemoveTag(var4, p1.impressionTag, p1.impressionIndex)
-			end
+	ReactModule.useEffect(function() --[[ Line: 55 ]]
+		-- upvalues: UseRefResult (copy), p1 (copy), ImpressionsTagUtility (upval)
+		if not UseRefResult.current or not p1.impressionTag or not p1.impressionIndex then return end
+		ImpressionsTagUtility.AddTag(UseRefResult, p1.impressionTag, p1.impressionIndex)
+		
+		return function() --[[ Line: 61 ]]
+			-- upvalues: ImpressionsTagUtility (upval), UseRefResult (upval), p1 (upval)
+			ImpressionsTagUtility.RemoveTag(UseRefResult, p1.impressionTag, p1.impressionIndex)
 		end
 	end, { p1.impressionTag, p1.impressionIndex })
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "auto-y align-x-center align-y-top col radius-medium",
-		Size = var2,
+		Size = MapResult,
 		onActivated = p1.onActivated,
-		ref = var5
+		ref = UseResult
 	}, {
-		PlaceIcon = if p1.image then reactModule.createElement(image, {
+		PlaceIcon = if p1.image then ReactModule.createElement(Image, {
 			tag = "size-full-full radius-medium aspect-1-1",
 			Image = p1.image,
-			style = foreground
+			style = Foreground
 		}) else nil,
-		Text = reactModule.createElement(view, {
+		Text = ReactModule.createElement(View, {
 			tag = "size-full-0 auto-y col gap-xsmall padding-y-medium",
-			textStyle = foreground
+			textStyle = Foreground
 		}, {
-			Name = reactModule.createElement(text, {
+			Name = ReactModule.createElement(Text, {
 				tag = "size-full-0 auto-y text-truncate-split text-title-medium text-align-x-left",
 				Text = p1.name
 			}),
-			Rating = p1.rating and reactModule.createElement(text, {
+			Rating = p1.rating and ReactModule.createElement(Text, {
 				tag = "size-full-0 auto-y text-truncate-end text-align-x-left text-body-medium ",
-				Text = var3.ratingText
+				Text = UseLocalizationResult.ratingText
 			})
 		})
 	})

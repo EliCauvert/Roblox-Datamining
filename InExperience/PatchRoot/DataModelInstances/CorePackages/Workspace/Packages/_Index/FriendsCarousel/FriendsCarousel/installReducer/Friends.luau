@@ -1,7 +1,7 @@
-﻿local dependenciesModule = require(script:FindFirstAncestor("FriendsCarousel").dependencies)
-local roduxFriends = dependenciesModule.RoduxFriends
+﻿local DependenciesModule = require(script:FindFirstAncestor("FriendsCarousel").dependencies)
+local RoduxFriends = DependenciesModule.RoduxFriends
 
-return dependenciesModule.convertActions(roduxFriends.installReducer(), dependenciesModule.friendsActionAdaptor(roduxFriends), {
+return DependenciesModule.convertActions(RoduxFriends.installReducer(), DependenciesModule.friendsActionAdaptor(RoduxFriends), {
 	countsByUserId = {},
 	byUserId = {},
 	requests = { receivedCount = 0, newFriendRequestsCount = 0 },

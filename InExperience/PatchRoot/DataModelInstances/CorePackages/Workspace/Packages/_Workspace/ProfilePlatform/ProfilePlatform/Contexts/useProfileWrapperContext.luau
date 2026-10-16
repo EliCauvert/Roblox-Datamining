@@ -1,7 +1,7 @@
-﻿local profileWrapperContextModule = require(script.Parent.ProfileWrapperContext)
-local reactModule = require(script:FindFirstAncestor("ProfilePlatform").Parent.React)
+﻿local ProfileWrapperContextModule = require(script.Parent.ProfileWrapperContext)
+local ReactModule = require(script:FindFirstAncestor("ProfilePlatform").Parent.React)
 
-return function()
-	-- upvalues: reactModule (ref), profileWrapperContextModule (ref)
-	return reactModule.useContext(profileWrapperContextModule)
+return function() --[[ Line: 6 ]]
+	-- upvalues: ReactModule (copy), ProfileWrapperContextModule (copy)
+	return ReactModule.useContext(ProfileWrapperContextModule)
 end

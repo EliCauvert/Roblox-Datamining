@@ -1,32 +1,32 @@
-﻿local graphing = script:FindFirstAncestor("Graphing")
-local reactModule = require(graphing.Parent.React)
-local _ = require(graphing.Types)
-local inputDetectorModule = require(graphing.Components.InputDetector)
-local styleUtilModule = require(graphing.Util.StyleUtil)
+﻿local Graphing = script:FindFirstAncestor("Graphing")
+local ReactModule = require(Graphing.Parent.React)
+local _ = require(Graphing.Types)
+local InputDetectorModule = require(Graphing.Components.InputDetector)
+local StyleUtilModule = require(Graphing.Util.StyleUtil)
 
-function ScrollbarButton(p1)
-	-- upvalues: reactModule (ref), styleUtilModule (ref), inputDetectorModule (ref)
-	return reactModule.createElement("ImageButton", {
-		AnchorPoint = p1.AnchorPoint,
-		Position = p1.Position,
-		Rotation = p1.Rotation,
-		Size = p1.Size,
-		Image = p1.Image,
-		BackgroundColor3 = p1.Color3 or styleUtilModule.SCROLLBAR_BUTTON_COLOR3,
-		ZIndex = p1.ZIndex
+function ScrollbarButton(Frame: Frame) --[[ Line: 36 ]]
+	-- upvalues: ReactModule (copy), StyleUtilModule (copy), InputDetectorModule (copy)
+	return ReactModule.createElement("ImageButton", {
+		AnchorPoint = Frame.AnchorPoint,
+		Position = Frame.Position,
+		Rotation = Frame.Rotation,
+		Size = Frame.Size,
+		Image = Frame.Image,
+		BackgroundColor3 = Frame.Color3 or StyleUtilModule.SCROLLBAR_BUTTON_COLOR3,
+		ZIndex = Frame.ZIndex
 	}, {
-		MouseDetector = reactModule.createElement(inputDetectorModule, {
-			AnchorPoint = p1.AnchorPoint,
-			OnClick = function()
-				-- upvalues: p1 (ref)
-				if p1.OnClick then
-					p1.OnClick()
+		MouseDetector = ReactModule.createElement(InputDetectorModule, {
+			AnchorPoint = Frame.AnchorPoint,
+			OnClick = function() --[[ Line: 48 ]]
+				-- upvalues: Frame (copy)
+				if Frame.OnClick then
+					Frame.OnClick()
 				end
 			end,
-			OnDragMoved = function(p2)
-				-- upvalues: p1 (ref)
-				if p1.OnMoved then
-					p1.OnMoved(p2)
+			OnDragMoved = function(p1) --[[ Line: 53 ]]
+				-- upvalues: Frame (copy)
+				if Frame.OnMoved then
+					Frame.OnMoved(p1)
 				end
 			end
 		})

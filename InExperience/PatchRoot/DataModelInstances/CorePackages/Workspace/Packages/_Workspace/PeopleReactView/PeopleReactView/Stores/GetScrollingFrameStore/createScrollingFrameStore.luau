@@ -1,70 +1,68 @@
-﻿local parent = script:FindFirstAncestor("PeopleReactView").Parent
-local signalsModule = require(parent.Signals)
-local fFlagFixVirtualizedGridNumItems = require(parent.PeopleService).getService("Flags").FFlagFixVirtualizedGridNumItems
+﻿local Parent = script:FindFirstAncestor("PeopleReactView").Parent
+local SignalsModule = require(Parent.Signals)
+local FFlagFixVirtualizedGridNumItems = require(Parent.PeopleService).getService("Flags").FFlagFixVirtualizedGridNumItems
 
-return function()
-	-- upvalues: signalsModule (ref), fFlagFixVirtualizedGridNumItems (ref)
-	local var1, var2 = signalsModule.createSignal(0)
-	local var3, var4 = signalsModule.createSignal(0)
-	local var5, var6 = signalsModule.createSignal(0)
-	local var7 = nil
-	local var8 = nil
+return function() --[[ Line: 21 | Named "createScrollingFrameStore" ]]
+	-- upvalues: SignalsModule (copy), FFlagFixVirtualizedGridNumItems (copy)
+	local Signal, Signal2 = SignalsModule.createSignal(0)
+	local Signal1, Signal2_1 = SignalsModule.createSignal(0)
+	local Signal3, Signal2_2 = SignalsModule.createSignal(0)
+	local Callback = nil
+	local v1 = nil
 	
-	if fFlagFixVirtualizedGridNumItems then
-		local var9, var10 = signalsModule.createSignal(0)
-		var7 = var9
-		var8 = var10
+	if FFlagFixVirtualizedGridNumItems then
+		Callback, v9 = SignalsModule.createSignal(0)
 	end
-	local var11 = if fFlagFixVirtualizedGridNumItems then signalsModule.createComputed(function(p1)
-		-- upvalues: var5 (ref), var7 (write)
-		return var5(p1) + var7(p1)
+	local Computed = if FFlagFixVirtualizedGridNumItems then SignalsModule.createComputed(function(p1) --[[ Line: 33 ]]
+		-- upvalues: Signal3 (copy), Callback (ref)
+		return Signal3(p1) + Callback(p1)
 	end) else nil
-	local var12 = nil
-	local var13 = nil
-	local var14 = nil
+	local Connection = nil
+	local Connection1 = nil
+	local Connection2 = nil
 	
 	return {
-		getAbsolutePositionY = var1,
-		getAbsoluteSizeY = var3,
-		getCanvasPositionY = if fFlagFixVirtualizedGridNumItems then var11 else var5,
-		setScrollingFrame = function(p1)
-			-- upvalues: var12 (write), var13 (write), var14 (write), var2 (ref), var4 (ref), var6 (ref)
-			if var12 then
-				var12:Disconnect()
+		getAbsolutePositionY = Signal,
+		getAbsoluteSizeY = Signal1,
+		getCanvasPositionY = if FFlagFixVirtualizedGridNumItems then Computed else Signal3,
+		setScrollingFrame = function(Frame: Frame) --[[ Line: 42 ]]
+			-- upvalues: Connection (ref), Connection1 (ref), Connection2 (ref), Signal2 (copy), Signal2_1 (copy), Signal2_2 (copy)
+			if Connection then
+				Connection:Disconnect()
 			end
-			if var13 then
-				var13:Disconnect()
+			if Connection1 then
+				Connection1:Disconnect()
 			end
-			if var14 then
-				var14:Disconnect()
+			if Connection2 then
+				Connection2:Disconnect()
 			end
-			var2(p1.AbsolutePosition.Y)
-			var4(p1.AbsoluteSize.Y)
-			var6(p1.CanvasPosition.Y)
-			var12 = p1:GetPropertyChangedSignal("AbsolutePosition"):Connect(function()
-				-- upvalues: var2 (copy), p1 (ref)
-				var2(p1.AbsolutePosition.Y)
+			Signal2(Frame.AbsolutePosition.Y)
+			Signal2_1(Frame.AbsoluteSize.Y)
+			Signal2_2(Frame.CanvasPosition.Y)
+			Connection = Frame:GetPropertyChangedSignal("AbsolutePosition"):Connect(function() --[[ Line: 57 ]]
+				-- upvalues: Signal2 (upval), Frame (copy)
+				Signal2(Frame.AbsolutePosition.Y)
 			end)
-			var13 = p1:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
-				-- upvalues: var4 (copy), p1 (ref)
-				var4(p1.AbsoluteSize.Y)
+			Connection1 = Frame:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ Line: 61 ]]
+				-- upvalues: Signal2_1 (upval), Frame (copy)
+				Signal2_1(Frame.AbsoluteSize.Y)
 			end)
-			var14 = p1:GetPropertyChangedSignal("CanvasPosition"):Connect(function()
-				-- upvalues: var6 (copy), p1 (ref)
-				var6(p1.CanvasPosition.Y)
+			Connection2 = Frame:GetPropertyChangedSignal("CanvasPosition"):Connect(function() --[[ Line: 65 ]]
+				-- upvalues: Signal2_2 (upval), Frame (copy)
+				Signal2_2(Frame.CanvasPosition.Y)
 			end)
 		end,
-		setCanvasPositionYOffset = if fFlagFixVirtualizedGridNumItems then var8 else nil,
-		cleanUp = function()
-			-- upvalues: var12 (write), var13 (write), var14 (write)
-			if var12 then
-				var12:Disconnect()
+		setCanvasPositionYOffset = if FFlagFixVirtualizedGridNumItems then v1 else nil,
+		cleanUp = function() --[[ Line: 70 ]]
+			-- upvalues: Connection (ref), Connection1 (ref), Connection2 (ref)
+			if Connection then
+				Connection:Disconnect()
 			end
-			if var13 then
-				var13:Disconnect()
+			if Connection1 then
+				Connection1:Disconnect()
 			end
-			if var14 then
-				var14:Disconnect()
+			if Connection2 then
+				Connection2:Disconnect()
 			end
 		end
 	}

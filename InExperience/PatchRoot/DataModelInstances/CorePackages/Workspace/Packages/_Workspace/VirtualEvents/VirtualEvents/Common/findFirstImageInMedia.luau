@@ -1,9 +1,9 @@
 ﻿local _ = require(script:FindFirstAncestor("VirtualEvents").Parent.GraphQLServer)
 
-return function(p1)
-	for i, v in p1 do
-		if v.assetType == "Image" and v.imageId then
-			return ("rbxassetid://%s"):format(v.imageId)
+return function(List): string? --[[ Line: 15 | Named "findFirstImageInMedia" ]]
+	for _, value in List do
+		if value.assetType == "Image" and value.imageId then
+			return ("rbxassetid://%s"):format(value.imageId)
 		end
 	end
 	return nil

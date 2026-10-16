@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent.Parent._Index.MomentsCommon.MomentsCommon.Components.PersistentCoachmark.PersistentCoachmark)
+﻿return (require(script.Parent.Parent.Parent.Parent._Index.MomentsCommon.MomentsCommon.Components.PersistentCoachmark.PersistentCoachmark))

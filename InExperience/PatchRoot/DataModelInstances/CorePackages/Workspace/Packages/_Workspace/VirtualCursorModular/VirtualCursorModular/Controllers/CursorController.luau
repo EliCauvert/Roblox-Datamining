@@ -1,54 +1,48 @@
-﻿local virtualCursorModular = script:FindFirstAncestor("VirtualCursorModular")
-local _ = virtualCursorModular.Parent
-local tweenService = game:GetService("TweenService")
+﻿local VirtualCursorModular = script:FindFirstAncestor("VirtualCursorModular")
+local _ = VirtualCursorModular.Parent
+local TweenService = game:GetService("TweenService")
 local VRService = game:GetService("VRService")
-local coreGuiService = game:GetService("CoreGui")
-local propertiesModule = require(virtualCursorModular.Properties)
-local t = {}
-t.__index = t
-local _ = {
-	Default = "rbxasset://textures/ui/VirtualCursor/cursorDefault.png",
-	Hover = "rbxasset://textures/ui/VirtualCursor/cursorHover.png",
-	Pressed = "rbxasset://textures/ui/VirtualCursor/cursorPressed.png",
-	Arrow = "rbxasset://textures/ui/VirtualCursor/cursorArrow.png"
-}
-local t_1 = { Default = 2, Hover = 2, Pressed = 1.7, Arrow = 2 }
+local CoreGui = game:GetService("CoreGui")
+local PropertiesModule = require(VirtualCursorModular.Properties)
+local CursorController = {}
+CursorController.__index = CursorController
+local config = { Default = 2, Hover = 2, Pressed = 1.7, Arrow = 2 }
 
-function t.new()
-	-- upvalues: propertiesModule (ref), coreGuiService (ref), tweenService (ref), t (ref)
-	local cursorContainer = Instance.new("ScreenGui")
-	cursorContainer.Enabled = false
-	cursorContainer.IgnoreGuiInset = true
-	cursorContainer.DisplayOrder = 1e999
-	cursorContainer.OnTopOfCoreBlur = true
-	cursorContainer.Name = "CursorContainer"
-	local imageLabel = Instance.new("ImageLabel")
-	imageLabel.Active = false
-	imageLabel.AnchorPoint = Vector2.new(0.5, 0.5)
-	imageLabel.Size = UDim2.fromOffset(2 * propertiesModule.CursorRadius, 2 * propertiesModule.CursorRadius)
-	imageLabel.Image = "rbxasset://textures/ui/VirtualCursor/cursorDefault.png"
-	imageLabel.Visible = false
-	imageLabel.BackgroundTransparency = 1
-	imageLabel.Parent = cursorContainer
-	cursorContainer.Parent = coreGuiService
-	local tweenInfo = TweenInfo.new(0.15, Enum.EasingStyle.Sine, Enum.EasingDirection.Out, 0, false, 0)
+function CursorController.new() --[[ Line: 43 ]]
+	-- upvalues: PropertiesModule (copy), CoreGui (copy), TweenService (copy), CursorController (copy)
+	local CursorContainer = Instance.new("ScreenGui")
+	CursorContainer.Enabled = false
+	CursorContainer.IgnoreGuiInset = true
+	CursorContainer.DisplayOrder = 1e999
+	CursorContainer.OnTopOfCoreBlur = true
+	CursorContainer.Name = "CursorContainer"
+	local Image = Instance.new("ImageLabel")
+	Image.Active = false
+	Image.AnchorPoint = Vector2.new(0.5, 0.5)
+	Image.Size = UDim2.fromOffset(2 * PropertiesModule.CursorRadius, 2 * PropertiesModule.CursorRadius)
+	Image.Image = "rbxasset://textures/ui/VirtualCursor/cursorDefault.png"
+	Image.Visible = false
+	Image.BackgroundTransparency = 1
+	Image.Parent = CursorContainer
+	CursorContainer.Parent = CoreGui
+	local _TweenInfo = TweenInfo.new(0.15, Enum.EasingStyle.Sine, Enum.EasingDirection.Out, 0, false, 0)
 	
-	return setmetatable({
+	return (setmetatable({
 		_activePreviewPositionTween = nil,
 		_activeOpacityTweenCompletedConnection = nil,
 		_enabled = false,
-		_cursor = imageLabel,
-		_cursorContainer = cursorContainer,
-		_activeSelectionTweenIn = tweenService:Create(imageLabel, tweenInfo, {
-			Size = UDim2.fromOffset(1.7 * propertiesModule.CursorRadius, 1.7 * propertiesModule.CursorRadius)
+		_cursor = Image,
+		_cursorContainer = CursorContainer,
+		_activeSelectionTweenIn = TweenService:Create(Image, _TweenInfo, {
+			Size = UDim2.fromOffset(1.7 * PropertiesModule.CursorRadius, 1.7 * PropertiesModule.CursorRadius)
 		}),
-		_activeSelectionTweenOut = tweenService:Create(imageLabel, tweenInfo, {
-			Size = UDim2.fromOffset(2 * propertiesModule.CursorRadius, 2 * propertiesModule.CursorRadius)
+		_activeSelectionTweenOut = TweenService:Create(Image, _TweenInfo, {
+			Size = UDim2.fromOffset(2 * PropertiesModule.CursorRadius, 2 * PropertiesModule.CursorRadius)
 		})
-	}, t)
+	}, CursorController))
 end
 
-function t:Destroy()
+function CursorController:Destroy() --[[ Line: 92 ]]
 	self._cursorContainer:Destroy()
 	self._activeSelectionTweenIn:Destroy()
 	self._activeSelectionTweenOut:Destroy()
@@ -56,69 +50,70 @@ function t:Destroy()
 	if self._activePreviewPositionTween then
 		self._activePreviewPositionTween:Destroy()
 	end
-	local activeOpacityTweenCompletedConnection = self._activeOpacityTweenCompletedConnection
+	local ActiveOpacityTweenCompletedConnection = self._activeOpacityTweenCompletedConnection
 	
-	if activeOpacityTweenCompletedConnection then
-		activeOpacityTweenCompletedConnection:Disconnect()
+	if ActiveOpacityTweenCompletedConnection then
+		ActiveOpacityTweenCompletedConnection:Disconnect()
 		self._activeOpacityTweenCompletedConnection = nil
 	end
 end
 
-function t:SetCursorSize(p1)
-	-- upvalues: t_1 (ref), propertiesModule (ref)
-	local var1 = t_1[p1] * propertiesModule.CursorRadius
-	self._cursor.Size = UDim2.fromOffset(var1, var1)
+function CursorController:SetCursorSize(p1) --[[ Line: 109 ]]
+	-- upvalues: config (copy), PropertiesModule (copy)
+	local ScaledEntry = config[p1] * PropertiesModule.CursorRadius
+	self._cursor.Size = UDim2.fromOffset(ScaledEntry, ScaledEntry)
 end
 
-function t:PlayTweenActivate()
+function CursorController:PlayTweenActivate() --[[ Line: 114 ]]
 	self._activeSelectionTweenIn:Play()
 end
 
-function t:PlayTweenDefault()
+function CursorController:PlayTweenDefault() --[[ Line: 118 ]]
 	self._activeSelectionTweenOut:Play()
 end
 
-function t:SetHighlight(p1)
+function CursorController:SetHighlight(p1) --[[ Line: 122 ]]
 	if p1 then
 		self._cursor.Image = "rbxasset://textures/ui/VirtualCursor/cursorHover.png"
 		
 		return
+	else
+		self._cursor.Image = "rbxasset://textures/ui/VirtualCursor/cursorDefault.png"
 	end
-	self._cursor.Image = "rbxasset://textures/ui/VirtualCursor/cursorDefault.png"
 end
 
-function t:SetPosition(p1)
-	self._cursor.Position = UDim2.fromOffset(p1.X, p1.Y)
+function CursorController:SetPosition(Vector) --[[ Line: 130 ]]
+	self._cursor.Position = UDim2.fromOffset(Vector.X, Vector.Y)
 end
 
-function t:GetCursorScreenGuiOffset()
+function CursorController:GetCursorScreenGuiOffset() --[[ Line: 134 ]]
 	return self._cursorContainer.AbsolutePosition
 end
 
-function t:TweenPosition(p1)
-	-- upvalues: tweenService (ref)
-	self._activePreviewPositionTween = tweenService:Create(self._cursor, TweenInfo.new(0.15, Enum.EasingStyle.Sine, Enum.EasingDirection.Out, 0, false, 0), { Position = UDim2.fromOffset(p1.X, p1.Y) })
+function CursorController:TweenPosition(Vector) --[[ Line: 138 ]]
+	-- upvalues: TweenService (copy)
+	self._activePreviewPositionTween = TweenService:Create(self._cursor, TweenInfo.new(0.15, Enum.EasingStyle.Sine, Enum.EasingDirection.Out, 0, false, 0), { Position = UDim2.fromOffset(Vector.X, Vector.Y) })
 	self._activePreviewPositionTween:Play()
 end
 
-function t:TweenOpacity(p1)
-	-- upvalues: tweenService (ref)
-	local activeOpacityTweenCompletedConnection = self._activeOpacityTweenCompletedConnection
+function CursorController:TweenOpacity(Enabled) --[[ Line: 145 ]]
+	-- upvalues: TweenService (copy)
+	local ActiveOpacityTweenCompletedConnection = self._activeOpacityTweenCompletedConnection
 	
-	if activeOpacityTweenCompletedConnection then
-		activeOpacityTweenCompletedConnection:Disconnect()
+	if ActiveOpacityTweenCompletedConnection then
+		ActiveOpacityTweenCompletedConnection:Disconnect()
 		self._activeOpacityTweenCompletedConnection = nil
 	end
-	local cursor = tweenService:Create(self._cursor, TweenInfo.new(0.15, Enum.EasingStyle.Sine, Enum.EasingDirection.Out, 0, false, 0), { ImageTransparency = if p1 then 0 else 1 })
-	self._activeOpacityTweenCompletedConnection = cursor.Completed:Connect(function()
-		-- upvalues: self (ref), p1 (ref)
-		self._cursor.Visible = p1
-		self._cursorContainer.Enabled = p1
+	local Tween = TweenService:Create(self._cursor, TweenInfo.new(0.15, Enum.EasingStyle.Sine, Enum.EasingDirection.Out, 0, false, 0), { ImageTransparency = if Enabled then 0 else 1 })
+	self._activeOpacityTweenCompletedConnection = Tween.Completed:Connect(function() --[[ Line: 158 ]]
+		-- upvalues: self (copy), Enabled (copy)
+		self._cursor.Visible = Enabled
+		self._cursorContainer.Enabled = Enabled
 	end)
-	cursor:Play()
+	Tween:Play()
 end
 
-function t:SetArrow(p1, p2)
+function CursorController:SetArrow(p1, p2) --[[ Line: 166 ]]
 	if p1 == -1 and p2 == 0 then
 		self._cursor.Rotation = 90
 	elseif p2 == 0 then
@@ -132,28 +127,29 @@ function t:SetArrow(p1, p2)
 	self._cursor.Image = "rbxasset://textures/ui/VirtualCursor/cursorArrow.png"
 end
 
-function t:GetEnabled()
+function CursorController:GetEnabled() --[[ Line: 182 ]]
 	return self._enabled
 end
 
-function t:Enable(p1)
-	-- upvalues: VRService (ref)
-	if VRService.VREnabled then
+function CursorController:Enable(p1) --[[ Line: 186 ]]
+	-- upvalues: VRService (copy)
+	if not VRService.VREnabled then
+		local NoVREnabled = not VRService.VREnabled
+		self._cursorContainer.Enabled = NoVREnabled
+		self:SetCursorSize("Default")
+		self:SetPosition(p1)
+		self._cursor.Visible = NoVREnabled
+		self:TweenOpacity(true)
+		self._enabled = true
+		
 		return
 	end
-	local var1 = not VRService.VREnabled
-	self._cursorContainer.Enabled = var1
-	self:SetCursorSize("Default")
-	self:SetPosition(p1)
-	self._cursor.Visible = var1
-	self:TweenOpacity(true)
-	self._enabled = true
 end
 
-function t:Disable()
+function CursorController:Disable() --[[ Line: 202 ]]
 	self:SetHighlight(false)
 	self:TweenOpacity(false)
 	self._enabled = false
 end
 
-return t
+return CursorController

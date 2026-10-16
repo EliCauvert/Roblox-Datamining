@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.CoreScriptsProfiler.CoreScriptsProfiler)
+﻿return (require(script.Parent._Workspace.CoreScriptsProfiler.CoreScriptsProfiler))

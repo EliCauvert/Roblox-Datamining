@@ -1,47 +1,48 @@
-﻿local playersService = game:GetService("Players")
-local parent = script:FindFirstAncestor("FriendsCommon").Parent
-local socialLuaAnalyticsModule = require(parent.SocialLuaAnalytics)
-local var1 = socialLuaAnalyticsModule.Telemetry.createEmitter({
-	telemetryImpl = require(parent.LoggingProtocol).default,
+﻿local Players = game:GetService("Players")
+local Parent = script:FindFirstAncestor("FriendsCommon").Parent
+local SocialLuaAnalyticsModule = require(Parent.SocialLuaAnalytics)
+local Emitter = SocialLuaAnalyticsModule.Telemetry.createEmitter({
+	telemetryImpl = require(Parent.LoggingProtocol).default,
 	defaultTelemetryConfig = {
 		links = "https://docs.google.com/document/d/1uRCdl8pEuiW9wDiOTL39JPMGLhgxtpvVgiXovE8Xof4",
 		throttlingThousandths = game:DefineFastInt("FriendsCommonAnalyticsThrottlingThousandths", 10000)
 	},
-	getSharedInfo = function()
+	getSharedInfo = function() --[[ Line: 27 ]]
 		return {}
 	end
 })
-local var2 = socialLuaAnalyticsModule.Telemetry.new({
+local FriendsSortFeRtnMessage = SocialLuaAnalyticsModule.Telemetry.new({
 	name = "FriendsSortFeRtnMessage",
 	description = "User received an rtn message v2",
 	lastUpdated = { 2026, 6, 18 },
 	backendsList = {
 		{
-			type = socialLuaAnalyticsModule.Analytics.Enums.SupportedTelemetryBackends.EventIngest,
-			format = function(p1, _)
+			type = SocialLuaAnalyticsModule.Analytics.Enums.SupportedTelemetryBackends.EventIngest,
+			format = function(p1, _) --[[ Line: 39 ]]
 				return p1
 			end
 		}
 	}
 })
 
-return function(p1, p2)
-	-- upvalues: var1 (ref), var2 (ref), playersService (ref)
-	if p1 == nil or not p2 then
+return function(MessageId, p1) --[[ Line: 46 | Named "fireFriendsSortFeRtnMessageReceived" ]]
+	-- upvalues: Emitter (copy), FriendsSortFeRtnMessage (copy), Players (copy)
+	if MessageId ~= nil and p1 then
+		pcall(function() --[[ Line: 51 ]]
+			-- upvalues: p1 (copy), Emitter (upval), FriendsSortFeRtnMessage (upval), MessageId (copy), Players (upval)
+			local List = {}
+			
+			for _, value in pairs(p1) do
+				table.insert(List, (tostring(value.userId)))
+			end
+			Emitter.emit(FriendsSortFeRtnMessage, {
+				sortType = "Carousel",
+				messageId = MessageId,
+				userId = Players.LocalPlayer and Players.LocalPlayer.UserId or nil,
+				friendIds = table.concat(List, ",")
+			})
+		end)
+		
 		return
 	end
-	pcall(function()
-		-- upvalues: p2 (ref), var1 (copy), var2 (copy), p1 (ref), playersService (copy)
-		local t = {}
-		
-		for i, v in pairs(p2) do
-			table.insert(t, tostring(v.userId))
-		end
-		var1.emit(var2, {
-			sortType = "Carousel",
-			messageId = p1,
-			userId = if playersService.LocalPlayer then playersService.LocalPlayer.UserId else nil,
-			friendIds = table.concat(t, ",")
-		})
-	end)
 end

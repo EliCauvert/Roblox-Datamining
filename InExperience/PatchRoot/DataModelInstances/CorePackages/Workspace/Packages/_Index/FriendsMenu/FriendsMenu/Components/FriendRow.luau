@@ -1,155 +1,155 @@
-﻿local friendsMenu = script:FindFirstAncestor("FriendsMenu")
-local components = friendsMenu.Components
-local parent = friendsMenu.Parent
-local context = friendsMenu.Context
-local enums = friendsMenu.Enums
-local reactModule = require(parent.React)
-local UIBloxModule = require(parent.UIBlox)
-local cryoModule = require(parent.Cryo)
-local sharedFlagsModule = require(parent.SharedFlags)
-local getFFlagEnableCommonFriendsMenu = sharedFlagsModule.GetFFlagEnableCommonFriendsMenu
-local getFFlagFriendsMenuDummyLoadingFriendsFix = sharedFlagsModule.GetFFlagFriendsMenuDummyLoadingFriendsFix
-local foundationModule = require(parent.Foundation)
-local useCursor = foundationModule.Hooks.useCursor
-local friendThumbnailModule = require(components.FriendThumbnail)
-local friendsMenuButtonModule = require(components.FriendsMenuButton)
-local friendInfoModule = require(components.FriendInfo)
-local friendsMenuCheckboxModule = require(components.FriendsMenuCheckbox)
-local var1 = if getFFlagEnableCommonFriendsMenu() then require(context.InviteCallbackContext) else require(context.InviteFriendContext)
-local selectedUsersContextModule = require(context.SelectedUsersContext)
-local friendMenuTypeModule = require(enums.FriendMenuType)
-local useStyle = UIBloxModule.Core.Style.useStyle
-local _ = require(friendsMenu.friendsMenuModalType)
-local uDim2 = UDim2.new(1, 0, 0.5, 0)
-local vector2 = Vector2.new(1, 0.5)
+﻿local FriendsMenu = script:FindFirstAncestor("FriendsMenu")
+local Components = FriendsMenu.Components
+local Parent = FriendsMenu.Parent
+local Context = FriendsMenu.Context
+local ReactModule = require(Parent.React)
+local CryoModule = require(Parent.Cryo)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local GetFFlagFriendsMenuDummyLoadingFriendsFixFunction = SharedFlagsModule.GetFFlagFriendsMenuDummyLoadingFriendsFix
+local FoundationModule = require(Parent.Foundation)
+local UseCursorFunction = FoundationModule.Hooks.useCursor
+local FriendThumbnailModule = require(Components.FriendThumbnail)
+local FriendsMenuButtonModule = require(Components.FriendsMenuButton)
+local FriendInfoModule = require(Components.FriendInfo)
+local FriendsMenuCheckboxModule = require(Components.FriendsMenuCheckbox)
+local InviteCallbackContextModule = if SharedFlagsModule.GetFFlagEnableCommonFriendsMenu() then require(Context.InviteCallbackContext) else require(Context.InviteFriendContext)
+local SelectedUsersContextModule = require(Context.SelectedUsersContext)
+local FriendMenuTypeModule = require(FriendsMenu.Enums.FriendMenuType)
+local UseStyleFunction = require(Parent.UIBlox).Core.Style.useStyle
+local _ = require(FriendsMenu.friendsMenuModalType)
+local _UDim2 = UDim2.new(1, 0, 0.5, 0)
+local _Vector2 = Vector2.new(1, 0.5)
 
-local var2 = function() end
+local function v18() --[[ Line: 42 ]] end
 
-local t = {
+local config = {
 	sidePadding = 24,
 	isFullRowActivatable = false,
 	backgroundTransparency = nil
 }
 
-return function(p1)
-	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), useStyle (ref), var1 (ref), selectedUsersContextModule (ref), useCursor (ref), foundationModule (ref), getFFlagFriendsMenuDummyLoadingFriendsFix (ref), friendMenuTypeModule (ref), var2 (ref), friendThumbnailModule (ref), friendInfoModule (ref), friendsMenuCheckboxModule (ref), uDim2 (ref), vector2 (ref), friendsMenuButtonModule (ref)
-	local var3 = cryoModule.Dictionary.join(t, p1)
-	local var4, var5 = reactModule.useState(false)
-	local theme = useStyle().Theme
-	local friend = var3.friend
-	assert(friend, "friend should be non-nil. Silence type checker.")
-	local var6 = reactModule.useContext(var1)
-	local var7 = reactModule.useContext(selectedUsersContextModule)
-	local sidePadding = var3.sidePadding
-	local var8 = useCursor(foundationModule.Enums.CursorType.RoundedSlot)
-	local var9 = var3.isFullRowActivatable and not var3.isFetchingFriends
-	local var10 = reactModule.useCallback(function()
-		-- upvalues: var6 (ref), friend (ref), var3 (ref)
-		if var6 and var6.inviteSingleFriend and not friend.isLoadingPlaceholder then
-			var6.inviteSingleFriend(friend.id, var3.layoutOrder)
+return function(p1) --[[ Line: 62 ]]
+	-- upvalues: CryoModule (copy), config (copy), ReactModule (copy), UseStyleFunction (copy), InviteCallbackContextModule (copy), SelectedUsersContextModule (copy), UseCursorFunction (copy), FoundationModule (copy), GetFFlagFriendsMenuDummyLoadingFriendsFixFunction (copy), FriendMenuTypeModule (copy), v18 (copy), FriendThumbnailModule (copy), FriendInfoModule (copy), FriendsMenuCheckboxModule (copy), _UDim2 (copy), _Vector2 (copy), FriendsMenuButtonModule (copy)
+	local JoinResult = CryoModule.Dictionary.join(config, p1)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local Theme = UseStyleFunction().Theme
+	local Friend = JoinResult.friend
+	assert(Friend, "friend should be non-nil. Silence type checker.")
+	local UseContextResult = ReactModule.useContext(InviteCallbackContextModule)
+	local UseContextResult1 = ReactModule.useContext(SelectedUsersContextModule)
+	local SidePadding = JoinResult.sidePadding
+	local UseCursorResult = UseCursorFunction(FoundationModule.Enums.CursorType.RoundedSlot)
+	local NoIsFetchingFriends: boolean = JoinResult.isFullRowActivatable and not JoinResult.isFetchingFriends
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 78 ]]
+		-- upvalues: UseContextResult (copy), Friend (copy), JoinResult (copy)
+		if UseContextResult and UseContextResult.inviteSingleFriend and not Friend.isLoadingPlaceholder then
+			UseContextResult.inviteSingleFriend(Friend.id, JoinResult.layoutOrder)
 		end
 	end, {
-		var6,
-		var6.inviteSingleFriend,
-		friend.id,
-		friend.isLoadingPlaceholder,
-		var3.layoutOrder
+		UseContextResult,
+		UseContextResult.inviteSingleFriend,
+		Friend.id,
+		Friend.isLoadingPlaceholder,
+		JoinResult.layoutOrder
 	})
-	local var11 = reactModule.useCallback(function()
-		-- upvalues: var7 (ref), var3 (ref)
-		if var7.isFriendSelected(var3.friend.id) then
-			var7.removeFriend(var3.friend.id, var3.friend.displayName)
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 93 ]]
+		-- upvalues: UseContextResult1 (copy), JoinResult (copy)
+		if UseContextResult1.isFriendSelected(JoinResult.friend.id) then
+			UseContextResult1.removeFriend(JoinResult.friend.id, JoinResult.friend.displayName)
 			
 			return
+		else
+			UseContextResult1.addFriend(JoinResult.friend.id, JoinResult.friend.displayName)
 		end
-		var7.addFriend(var3.friend.id, var3.friend.displayName)
 	end, {
-		var7.isFriendSelected,
-		var7.removeFriend,
-		var7.addFriend,
-		var3.friend.id
+		UseContextResult1.isFriendSelected,
+		UseContextResult1.removeFriend,
+		UseContextResult1.addFriend,
+		JoinResult.friend.id
+	})
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 109 ]]
+		-- upvalues: NoIsFetchingFriends (copy), GetFFlagFriendsMenuDummyLoadingFriendsFixFunction (upval), Friend (copy), JoinResult (copy), FriendMenuTypeModule (upval), UseResult (copy), UseResult1 (copy)
+		if not NoIsFetchingFriends or GetFFlagFriendsMenuDummyLoadingFriendsFixFunction() and Friend.isLoadingPlaceholder then return end
+		if JoinResult.menuType == FriendMenuTypeModule.MultiSelect then
+			UseResult1()
+			
+			return
+		else
+			UseResult()
+		end
+	end, {
+		NoIsFetchingFriends,
+		JoinResult.menuType,
+		UseResult,
+		UseResult1,
+		Friend.isLoadingPlaceholder
 	})
 	
-	return reactModule.createElement("ImageButton", {
+	return ReactModule.createElement("ImageButton", {
 		Size = UDim2.new(1, 0, 0, 72),
 		AutomaticSize = Enum.AutomaticSize.Y,
-		BackgroundColor3 = if var4 then theme.BackgroundOnHover.Color else theme.BackgroundDefault.Color,
-		BackgroundTransparency = if var4 then theme.BackgroundOnHover.Transparency elseif var3.backgroundTransparency then var3.backgroundTransparency else theme.BackgroundDefault.Transparency,
+		BackgroundColor3 = UseStateResult and Theme.BackgroundOnHover.Color or Theme.BackgroundDefault.Color,
+		BackgroundTransparency = if UseStateResult then Theme.BackgroundOnHover.Transparency elseif JoinResult.backgroundTransparency then JoinResult.backgroundTransparency else Theme.BackgroundDefault.Transparency,
 		BorderSizePixel = 0,
-		LayoutOrder = var3.layoutOrder,
-		SelectionImageObject = if var3.isFullRowActivatable then var8 else nil,
-		[reactModule.Event.MouseEnter] = function()
-			-- upvalues: var3 (ref), var5 (ref)
-			if not var3.isFetchingFriends then
-				var5(true)
+		LayoutOrder = JoinResult.layoutOrder,
+		SelectionImageObject = if JoinResult.isFullRowActivatable then UseCursorResult else nil,
+		[ReactModule.Event.MouseEnter] = function() --[[ Line: 144 ]]
+			-- upvalues: JoinResult (copy), UseStateResult2 (copy)
+			if not JoinResult.isFetchingFriends then
+				UseStateResult2(true)
 			end
 		end,
-		[reactModule.Event.MouseLeave] = function()
-			-- upvalues: var5 (ref)
-			var5(false)
+		[ReactModule.Event.MouseLeave] = function() --[[ Line: 149 ]]
+			-- upvalues: UseStateResult2 (copy)
+			UseStateResult2(false)
 		end,
-		[reactModule.Event.Activated] = if getFFlagFriendsMenuDummyLoadingFriendsFix() and friend.isLoadingPlaceholder or not var9 then var2 else reactModule.useCallback(function()
-			-- upvalues: var9 (ref), getFFlagFriendsMenuDummyLoadingFriendsFix (copy), friend (ref), var3 (ref), friendMenuTypeModule (copy), var10 (ref), var11 (ref)
-			if not var9 or getFFlagFriendsMenuDummyLoadingFriendsFix() and friend.isLoadingPlaceholder then return end
-			if var3.menuType == friendMenuTypeModule.MultiSelect then
-				var11()
-				
-				return
-			end
-			var10()
-		end, {
-			var9,
-			var3.menuType,
-			var10,
-			var11,
-			friend.isLoadingPlaceholder
-		}),
-		AutoButtonColor = var9
+		[ReactModule.Event.Activated] = if GetFFlagFriendsMenuDummyLoadingFriendsFixFunction() and Friend.isLoadingPlaceholder then v18 elseif NoIsFetchingFriends then UseResult2 else v18,
+		AutoButtonColor = NoIsFetchingFriends
 	}, {
-		UIListLayout = reactModule.createElement("UIListLayout", {
+		UIListLayout = ReactModule.createElement("UIListLayout", {
 			VerticalAlignment = Enum.VerticalAlignment.Center,
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			FillDirection = Enum.FillDirection.Horizontal,
 			Padding = UDim.new(0, 12)
 		}),
-		Padding = reactModule.createElement("UIPadding", {
-			PaddingRight = UDim.new(0, sidePadding),
-			PaddingLeft = UDim.new(0, sidePadding),
+		Padding = ReactModule.createElement("UIPadding", {
+			PaddingRight = UDim.new(0, SidePadding),
+			PaddingLeft = UDim.new(0, SidePadding),
 			PaddingBottom = UDim.new(0, 8),
 			PaddingTop = UDim.new(0, 8)
 		}),
-		ThumbnailAndPresenceWrapper = reactModule.createElement(friendThumbnailModule, {
+		ThumbnailAndPresenceWrapper = ReactModule.createElement(FriendThumbnailModule, {
 			LayoutOrder = 1,
-			friend = friend,
-			isHoverRow = var4,
+			friend = Friend,
+			isHoverRow = UseStateResult,
 			size = UDim2.new(0, 56, 0, 56),
 			position = UDim2.new(0, 0, 0.5, 0),
 			anchorPoint = Vector2.new(0, 0.5),
-			isFetchingFriends = var3.isFetchingFriends
+			isFetchingFriends = JoinResult.isFetchingFriends
 		}),
-		UserInfo = reactModule.createElement(friendInfoModule, {
+		UserInfo = ReactModule.createElement(FriendInfoModule, {
 			LayoutOrder = 2,
 			position = UDim2.new(0, 56, 0, 0),
 			size = UDim2.new(1, -134, 0, 0),
-			friend = friend,
-			isFetchingFriendsNames = var3.isFetchingFriendsNames
+			friend = Friend,
+			isFetchingFriendsNames = JoinResult.isFetchingFriendsNames
 		}),
-		InviteButton = if var3.menuType == friendMenuTypeModule.MultiSelect then reactModule.createElement(friendsMenuCheckboxModule, {
+		InviteButton = if JoinResult.menuType == FriendMenuTypeModule.MultiSelect then ReactModule.createElement(FriendsMenuCheckboxModule, {
 			layoutOrder = 3,
 			size = UDim2.new(0, 66, 0, 36),
-			position = uDim2,
-			anchorPoint = vector2,
-			friend = friend,
-			isDisabled = var3.isFetchingFriends,
-			selectable = if var3.isFullRowActivatable then false else nil
-		}) else reactModule.createElement(friendsMenuButtonModule, {
+			position = _UDim2,
+			anchorPoint = _Vector2,
+			friend = Friend,
+			isDisabled = JoinResult.isFetchingFriends,
+			selectable = not JoinResult.isFullRowActivatable and nil
+		}) else ReactModule.createElement(FriendsMenuButtonModule, {
 			layoutOrder = 3,
 			size = UDim2.new(0, 66, 0, 36),
-			position = uDim2,
-			anchorPoint = vector2,
-			friend = friend,
-			onInvite = var10,
-			isFullRowActivatable = var3.isFullRowActivatable
+			position = _UDim2,
+			anchorPoint = _Vector2,
+			friend = Friend,
+			onInvite = UseResult,
+			isFullRowActivatable = JoinResult.isFullRowActivatable
 		})
 	})
 end

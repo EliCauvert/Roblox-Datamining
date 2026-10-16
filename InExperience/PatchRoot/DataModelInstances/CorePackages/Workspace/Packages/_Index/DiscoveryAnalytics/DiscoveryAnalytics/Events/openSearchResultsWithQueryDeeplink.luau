@@ -1,26 +1,26 @@
-﻿local telemetryService = game:GetService("TelemetryService")
-local parent = script:FindFirstAncestor("DiscoveryAnalytics").Parent
-local tModule = require(parent.t)
-local discoveryEventErrorLogger = require(parent.DiscoveryUtils).DiscoveryEventErrorLogger
-local t = {
+﻿local TelemetryService = game:GetService("TelemetryService")
+local Parent = script:FindFirstAncestor("DiscoveryAnalytics").Parent
+local TModule = require(Parent.t)
+local DiscoveryEventErrorLogger = require(Parent.DiscoveryUtils).DiscoveryEventErrorLogger
+local config = {
 	eventName = "openSearchResultsWithQueryDeeplink",
 	description = "User opened Search Results via SDUI OpenSearchResultsWithQuery",
 	backends = { "EventIngest" },
 	throttlingPercentage = game:DefineFastInt("OpenSearchResultsWithQueryDeeplinkEventThrottlingHundredthsPercent", 10000),
 	lastUpdated = { 26, 6, 17 }
 }
-local var1 = tModule.strictInterface({ kwd = tModule.string, searchType = tModule.string })
+local StrictInterfaceResult = TModule.strictInterface({ kwd = TModule.string, searchType = TModule.string })
 
-return function(p1, p2)
-	-- upvalues: var1 (ref), discoveryEventErrorLogger (ref), telemetryService (ref), t (ref)
-	local var2, var3 = var1(p2)
+return function(EventContext, CustomFields) --[[ Line: 24 ]]
+	-- upvalues: StrictInterfaceResult (copy), DiscoveryEventErrorLogger (copy), TelemetryService (copy), config (copy)
+	local StrictInterfaceResultResult, StrictInterfaceResultResult2 = StrictInterfaceResult(CustomFields)
 	
-	if not var2 then
-		discoveryEventErrorLogger.reportError("OpenSearchResultsWithQueryDeeplinkInvalidInterface", var3)
+	if not StrictInterfaceResultResult then
+		DiscoveryEventErrorLogger.reportError("OpenSearchResultsWithQueryDeeplinkInvalidInterface", StrictInterfaceResultResult2)
 	end
-	telemetryService:LogEvent(t, {
-		eventContext = p1,
+	TelemetryService:LogEvent(config, {
+		eventContext = EventContext,
 		standardizedFields = { "addSessionInfo", "addSessionId", "addOSInfo" },
-		customFields = p2
+		customFields = CustomFields
 	})
 end

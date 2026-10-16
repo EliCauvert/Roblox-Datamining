@@ -1,13 +1,13 @@
-﻿local expChat = script:FindFirstAncestor("ExpChat")
-local colors = require(expChat.Parent.UIBlox).App.Style.Colors
-local chatWindowBackgroundColor3 = require(expChat.Config).ChatWindowBackgroundColor3
+﻿local ExpChat = script:FindFirstAncestor("ExpChat")
+local Colors = require(ExpChat.Parent.UIBlox).App.Style.Colors
+local ChatWindowBackgroundColor3 = require(ExpChat.Config).ChatWindowBackgroundColor3
 
 return {
-	getBackgroundColor = function(value, p1)
-		-- upvalues: chatWindowBackgroundColor3 (ref), colors (ref)
-		return if value.BackgroundColor3 == chatWindowBackgroundColor3 then colors.Flint:Lerp(value.BackgroundColor3, p1.preferredTransparency) else value.BackgroundColor3
+	getBackgroundColor = function(Frame: Frame, p1) --[[ Line: 14 ]]
+		-- upvalues: ChatWindowBackgroundColor3 (copy), Colors (copy)
+		return if Frame.BackgroundColor3 == ChatWindowBackgroundColor3 then Colors.Flint:Lerp(Frame.BackgroundColor3, p1.preferredTransparency) else Frame.BackgroundColor3
 	end,
-	getBackgroundTransparency = function(value, p1)
-		return value.BackgroundTransparency * p1.preferredTransparency
+	getBackgroundTransparency = function(Frame, p1) --[[ Line: 22 ]]
+		return Frame.BackgroundTransparency * p1.preferredTransparency
 	end
 }

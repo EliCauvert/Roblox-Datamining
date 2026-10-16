@@ -1,1 +1,3 @@
-﻿return require(script.Parent.FFlagAddFriendsUserListEnabled) and (require(script.Parent.FFlagAddStatusIndicatorToBaseRow) and game:DefineFastFlag("AddFriendsPageHighlightUnseenRequests_v3", false))
+﻿local FFlagAddStatusIndicatorToBaseRowModule = require(script.Parent.FFlagAddStatusIndicatorToBaseRow)
+
+return require(script.Parent.FFlagAddFriendsUserListEnabled) and (FFlagAddStatusIndicatorToBaseRowModule and game:DefineFastFlag("AddFriendsPageHighlightUnseenRequests_v3", false))

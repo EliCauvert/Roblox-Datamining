@@ -1,126 +1,126 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local parent = dataHydration.Parent
-local httpClientModule = require(parent.HttpClient)
-local urlBase = require(parent.UrlBuilder).UrlBase
-local withCsrfRetryModule = require(dataHydration.withCsrfRetry)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local Parent = DataHydration.Parent
+local HttpClientModule = require(Parent.HttpClient)
+local UrlBase = require(Parent.UrlBuilder).UrlBase
+local WithCsrfRetryModule = require(DataHydration.withCsrfRetry)
 local _ = require(script.Parent.UniverseActivationStoreTypes)
-local fetch = httpClientModule.fetch
-local asPromise = httpClientModule.asPromise
+local FetchFunction = HttpClientModule.fetch
+local AsPromiseFunction = HttpClientModule.asPromise
 
-local function _(p1, p2)
+local function _(p1, p2): string --[[ Line: 18 | Named "eligibilityUrl" ]]
 	return ("%s/v1/universes/%d/activation-eligibility"):format(p1, p2)
 end
 
-local _ = function(p1, p2)
+local _ = function(p1, p2): string --[[ Line: 22 | Named "activateUrl" ]]
 	return ("%s/v1/universes/%d/activate"):format(p1, p2)
 end
 
-local _ = function(p1, p2)
+local _ = function(p1, p2): string --[[ Line: 26 | Named "deactivateUrl" ]]
 	return ("%s/v1/universes/%d/deactivate"):format(p1, p2)
 end
 
-local _ = function(p1, p2)
+local _ = function(p1, p2): string --[[ Line: 30 | Named "v2ConfigurationUrl" ]]
 	return ("%s/v2/universes/%d/configuration"):format(p1, p2)
 end
 
-local _ = function(p1)
-	-- upvalues: urlBase (ref)
-	p1 = p1 or {}
+local _ = function(p1) --[[ Line: 34 | Named "resolveBase" ]]
+	-- upvalues: UrlBase (copy)
+	local P8 = p1 or {}
 	
-	return p1.network, p1.baseUrl or urlBase.new("develop")
+	return P8.network, P8.baseUrl or UrlBase.new("develop")
 end
 
-local _ = function(p1)
-	-- upvalues: withCsrfRetryModule (ref), httpClientModule (ref)
-	return (p1 or {}).network or withCsrfRetryModule(httpClientModule.createRequestInternalNetwork())
+local _ = function(p1) --[[ Line: 39 | Named "resolveMutatingNetwork" ]]
+	-- upvalues: WithCsrfRetryModule (copy), HttpClientModule (copy)
+	return (p1 or {}).network or WithCsrfRetryModule(HttpClientModule.createRequestInternalNetwork())
 end
 
 return {
-	fetchEligibility = function(p1, p2)
-		-- upvalues: urlBase (ref), fetch (ref), asPromise (ref)
-		p2 = p2 or {}
+	fetchEligibility = function(p1, p2) --[[ Line: 46 ]]
+		-- upvalues: UrlBase (copy), FetchFunction (copy), AsPromiseFunction (copy)
+		local P11 = p2 or {}
 		
-		return asPromise(fetch({
+		return AsPromiseFunction((FetchFunction({
 			method = "GET",
 			analyticsKey = "universe-activation.get-eligibility",
 			legacy = true,
-			network = p2.network,
-			url = ("%s/v1/universes/%d/activation-eligibility"):format(p2.baseUrl or urlBase.new("develop"), p1),
-			decode = function(p3)
+			network = P11.network,
+			url = ("%s/v1/universes/%d/activation-eligibility"):format(P11.baseUrl or UrlBase.new("develop"), p1),
+			decode = function(p3) --[[ Line: 57 ]]
 				return p3
 			end
-		}))
+		})))
 	end,
-	activate = function(p1, p2, p3)
-		-- upvalues: urlBase (ref), fetch (ref), withCsrfRetryModule (ref), httpClientModule (ref), asPromise (ref)
-		p3 = p3 or {}
-		local _ = p3.network
-		local baseUrl = p3.baseUrl or urlBase.new("develop")
-		local t = {}
+	activate = function(p1, p2, p3) --[[ Line: 64 ]]
+		-- upvalues: UrlBase (copy), FetchFunction (copy), WithCsrfRetryModule (copy), HttpClientModule (copy), AsPromiseFunction (copy)
+		local P15 = p3 or {}
+		local _ = P15.network
+		local BaseUrl = P15.baseUrl or UrlBase.new("develop")
+		local Body = {}
 		
 		if p2 and p2.versionId ~= nil then
-			t.versionId = p2.versionId
+			Body.versionId = p2.versionId
 		end
-		return asPromise(fetch({
+		return AsPromiseFunction((FetchFunction({
 			method = "POST",
 			analyticsKey = "universe-activation.activate",
 			legacy = true,
-			network = (p3 or {}).network or withCsrfRetryModule(httpClientModule.createRequestInternalNetwork()),
-			url = ("%s/v1/universes/%d/activate"):format(baseUrl, p1),
-			body = t,
-			decode = function(_)
+			network = (p3 or {}).network or WithCsrfRetryModule(HttpClientModule.createRequestInternalNetwork()),
+			url = ("%s/v1/universes/%d/activate"):format(BaseUrl, p1),
+			body = Body,
+			decode = function(_) --[[ Line: 82 ]]
 				return { isActive = true }
 			end
-		}))
+		})))
 	end,
-	deactivate = function(p1, p2)
-		-- upvalues: urlBase (ref), fetch (ref), withCsrfRetryModule (ref), httpClientModule (ref), asPromise (ref)
-		p2 = p2 or {}
-		local _ = p2.network
+	deactivate = function(p1, p2) --[[ Line: 89 ]]
+		-- upvalues: UrlBase (copy), FetchFunction (copy), WithCsrfRetryModule (copy), HttpClientModule (copy), AsPromiseFunction (copy)
+		local P18 = p2 or {}
+		local _ = P18.network
 		
-		return asPromise(fetch({
+		return AsPromiseFunction((FetchFunction({
 			method = "POST",
 			analyticsKey = "universe-activation.deactivate",
 			legacy = true,
-			network = (p2 or {}).network or withCsrfRetryModule(httpClientModule.createRequestInternalNetwork()),
-			url = ("%s/v1/universes/%d/deactivate"):format(p2.baseUrl or urlBase.new("develop"), p1),
+			network = (p2 or {}).network or WithCsrfRetryModule(HttpClientModule.createRequestInternalNetwork()),
+			url = ("%s/v1/universes/%d/deactivate"):format(P18.baseUrl or UrlBase.new("develop"), p1),
 			body = {},
-			decode = function(_)
+			decode = function(_) --[[ Line: 98 ]]
 				return { isActive = false }
 			end
-		}))
+		})))
 	end,
-	fetchAudiences = function(p1, p2)
-		-- upvalues: urlBase (ref), fetch (ref), asPromise (ref)
-		p2 = p2 or {}
+	fetchAudiences = function(p1, p2) --[[ Line: 105 ]]
+		-- upvalues: UrlBase (copy), FetchFunction (copy), AsPromiseFunction (copy)
+		local P21 = p2 or {}
 		
-		return asPromise(fetch({
+		return AsPromiseFunction((FetchFunction({
 			method = "GET",
 			analyticsKey = "universe-activation.get-audiences",
 			legacy = true,
-			network = p2.network,
-			url = ("%s/v2/universes/%d/configuration"):format(p2.baseUrl or urlBase.new("develop"), p1),
-			decode = function(p3)
+			network = P21.network,
+			url = ("%s/v2/universes/%d/configuration"):format(P21.baseUrl or UrlBase.new("develop"), p1),
+			decode = function(p3) --[[ Line: 116 ]]
 				return p3
 			end
-		}))
+		})))
 	end,
-	setAudiences = function(value, p1, p2)
-		-- upvalues: urlBase (ref), fetch (ref), withCsrfRetryModule (ref), httpClientModule (ref), asPromise (ref)
-		p2 = p2 or {}
-		local _ = p2.network
+	setAudiences = function(Id, Audiences, p1) --[[ Line: 123 ]]
+		-- upvalues: UrlBase (copy), FetchFunction (copy), WithCsrfRetryModule (copy), HttpClientModule (copy), AsPromiseFunction (copy)
+		local P25 = p1 or {}
+		local _ = P25.network
 		
-		return asPromise(fetch({
+		return AsPromiseFunction((FetchFunction({
 			method = "PATCH",
 			analyticsKey = "universe-activation.set-audiences",
 			legacy = true,
-			network = (p2 or {}).network or withCsrfRetryModule(httpClientModule.createRequestInternalNetwork()),
-			url = ("%s/v2/universes/%d/configuration"):format(p2.baseUrl or urlBase.new("develop"), value),
-			body = { audiences = p1 },
-			decode = function(p3)
-				-- upvalues: value (ref), p1 (ref)
-				return if p3 and typeof(p3) == "table" and p3.audiences ~= nil then p3 else { id = value, audiences = p1 }
+			network = (p1 or {}).network or WithCsrfRetryModule(HttpClientModule.createRequestInternalNetwork()),
+			url = ("%s/v2/universes/%d/configuration"):format(P25.baseUrl or UrlBase.new("develop"), Id),
+			body = { audiences = Audiences },
+			decode = function(p2) --[[ Line: 136 ]]
+				-- upvalues: Id (copy), Audiences (copy)
+				return if p2 and typeof(p2) == "table" and p2.audiences ~= nil then p2 else { id = Id, audiences = Audiences }
 			end
-		}))
+		})))
 	end
 }

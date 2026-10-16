@@ -1,34 +1,34 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local statsUtilsModule = require(coreGuiService.RobloxGui.Modules.Stats.StatsUtils)
-local statsTextPanelModule = require(coreGuiService.RobloxGui.Modules.Stats.StatsTextPanel)
-local statsAnnotatedGraphModule = require(coreGuiService.RobloxGui.Modules.Stats.StatsAnnotatedGraph)
-local uDim2 = UDim2.new(0, 0, 0, 0)
-local uDim2_1 = UDim2.new(0.4, 0, 1, 0)
-local uDim2_2 = UDim2.new(0.4, 0, 0, 0)
-local uDim2_3 = UDim2.new(0.6, 0, 1, 0)
-local t = {}
-t.__index = t
+﻿local CoreGui = game:GetService("CoreGui")
+local StatsUtilsModule = require(CoreGui.RobloxGui.Modules.Stats.StatsUtils)
+local StatsTextPanelModule = require(CoreGui.RobloxGui.Modules.Stats.StatsTextPanel)
+local StatsAnnotatedGraphModule = require(CoreGui.RobloxGui.Modules.Stats.StatsAnnotatedGraph)
+local _UDim2 = UDim2.new(0, 0, 0, 0)
+local _UDim2_1 = UDim2.new(0.4, 0, 1, 0)
+local _UDim2_2 = UDim2.new(0.4, 0, 0, 0)
+local _UDim2_3 = UDim2.new(0.6, 0, 1, 0)
+local StatsViewerModule = {}
+StatsViewerModule.__index = StatsViewerModule
 
-function t.new()
-	-- upvalues: t (ref), statsUtilsModule (ref)
-	local pSViewer = {}
-	setmetatable(pSViewer, t)
-	pSViewer._frameImageLabel = Instance.new("ImageLabel")
-	pSViewer._frameImageLabel.Name = "PS_Viewer"
-	pSViewer._frameImageLabel.Image = "rbxasset://textures/ui/PerformanceStats/BackgroundRounded.png"
-	pSViewer._frameImageLabel.ScaleType = Enum.ScaleType.Slice
-	pSViewer._frameImageLabel.SliceCenter = Rect.new(10, 10, 22, 22)
-	pSViewer._frameImageLabel.BackgroundTransparency = 1
-	pSViewer._frameImageLabel.ImageColor3 = statsUtilsModule.NormalColor
-	pSViewer._frameImageLabel.ImageTransparency = statsUtilsModule.Transparency
-	pSViewer._textPanel = nil
-	pSViewer._statType = nil
-	pSViewer._graph = nil
+function StatsViewerModule.new() --[[ Line: 31 ]]
+	-- upvalues: StatsViewerModule (copy), StatsUtilsModule (copy)
+	local t = {}
+	setmetatable(t, StatsViewerModule)
+	t._frameImageLabel = Instance.new("ImageLabel")
+	t._frameImageLabel.Name = "PS_Viewer"
+	t._frameImageLabel.Image = "rbxasset://textures/ui/PerformanceStats/BackgroundRounded.png"
+	t._frameImageLabel.ScaleType = Enum.ScaleType.Slice
+	t._frameImageLabel.SliceCenter = Rect.new(10, 10, 22, 22)
+	t._frameImageLabel.BackgroundTransparency = 1
+	t._frameImageLabel.ImageColor3 = StatsUtilsModule.NormalColor
+	t._frameImageLabel.ImageTransparency = StatsUtilsModule.Transparency
+	t._textPanel = nil
+	t._statType = nil
+	t._graph = nil
 	
-	return pSViewer
+	return t
 end
 
-function t:OnPerformanceStatsShouldBeVisibleChanged()
+function StatsViewerModule:OnPerformanceStatsShouldBeVisibleChanged() --[[ Line: 51 ]]
 	if self._graph then
 		self._graph:OnPerformanceStatsShouldBeVisibleChanged()
 	end
@@ -37,55 +37,55 @@ function t:OnPerformanceStatsShouldBeVisibleChanged()
 	end
 end
 
-function t:GetIsVisible()
+function StatsViewerModule:GetIsVisible() --[[ Line: 60 ]]
 	return self._frameImageLabel.Visible
 end
 
-function t:GetStatType()
+function StatsViewerModule:GetStatType() --[[ Line: 64 ]]
 	return self._statType
 end
 
-function t:SetSizeAndPosition(p1, p2)
-	self._frameImageLabel.Size = p1
-	self._frameImageLabel.Position = p2
+function StatsViewerModule:SetSizeAndPosition(Size, Position) --[[ Line: 68 ]]
+	self._frameImageLabel.Size = Size
+	self._frameImageLabel.Position = Position
 end
 
-function t:SetParent(p1)
-	self._frameImageLabel.Parent = p1
+function StatsViewerModule:SetParent(Parent) --[[ Line: 73 ]]
+	self._frameImageLabel.Parent = Parent
 end
 
-function t:SetVisible(p1)
-	self._frameImageLabel.Visible = p1
+function StatsViewerModule:SetVisible(Visible) --[[ Line: 77 ]]
+	self._frameImageLabel.Visible = Visible
 	
 	if self._graph then
-		self._graph:SetVisible(p1)
+		self._graph:SetVisible(Visible)
 	end
 	if self._textPanel then
-		self._textPanel:SetVisible(p1)
+		self._textPanel:SetVisible(Visible)
 	end
 end
 
-function t:SetStatType(p1)
-	-- upvalues: statsTextPanelModule (ref), uDim2_1 (ref), uDim2 (ref), statsAnnotatedGraphModule (ref), uDim2_3 (ref), uDim2_2 (ref), statsUtilsModule (ref)
-	self._statType = p1
+function StatsViewerModule:SetStatType(_statType) --[[ Line: 89 ]]
+	-- upvalues: StatsTextPanelModule (copy), _UDim2_1 (copy), _UDim2 (copy), StatsAnnotatedGraphModule (copy), _UDim2_3 (copy), _UDim2_2 (copy), StatsUtilsModule (copy)
+	self._statType = _statType
 	self._frameImageLabel:ClearAllChildren()
 	
 	if self._textPanel then
 		self._textPanel:SetVisible(false)
 		self._textPanel = nil
 	end
-	self._textPanel = statsTextPanelModule.new(p1)
-	self._textPanel:PlaceInParent(self._frameImageLabel, uDim2_1, uDim2)
-	self._graph = statsAnnotatedGraphModule.new(p1, true)
-	self._graph:PlaceInParent(self._frameImageLabel, uDim2_3, uDim2_2)
-	self._textPanel:SetZIndex(statsUtilsModule.TextZIndex)
-	self._graph:SetZIndex(statsUtilsModule.GraphZIndex)
+	self._textPanel = StatsTextPanelModule.new(_statType)
+	self._textPanel:PlaceInParent(self._frameImageLabel, _UDim2_1, _UDim2)
+	self._graph = StatsAnnotatedGraphModule.new(_statType, true)
+	self._graph:PlaceInParent(self._frameImageLabel, _UDim2_3, _UDim2_2)
+	self._textPanel:SetZIndex(StatsUtilsModule.TextZIndex)
+	self._graph:SetZIndex(StatsUtilsModule.GraphZIndex)
 	self._graph:SetVisible(self._frameImageLabel.Visible)
 	self._textPanel:SetVisible(self._frameImageLabel.Visible)
 	self:_applyStatsAggregator()
 end
 
-function t:_applyStatsAggregator()
+function StatsViewerModule:_applyStatsAggregator() --[[ Line: 118 ]]
 	if self._aggregator == nil then return end
 	if self._textPanel then
 		self._textPanel:SetStatsAggregator(self._aggregator)
@@ -95,9 +95,9 @@ function t:_applyStatsAggregator()
 	end
 end
 
-function t:SetStatsAggregator(p1)
-	self._aggregator = p1
+function StatsViewerModule:SetStatsAggregator(_aggregator) --[[ Line: 132 ]]
+	self._aggregator = _aggregator
 	self:_applyStatsAggregator()
 end
 
-return t
+return StatsViewerModule

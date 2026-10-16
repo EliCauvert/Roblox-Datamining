@@ -1,51 +1,52 @@
-﻿local asFocusableModule = require(script.Parent.asFocusable)
+﻿local AsFocusableModule = require(script.Parent.asFocusable)
 
-local function checkHostProperties(p1)
+local function checkHostProperties(p1) --[[ Line: 3 ]]
 	assert(Instance.new(p1):IsA("GuiObject"))
 end
 
-local function _(p1)
-	-- upvalues: checkHostProperties (ref)
-	local var1 = typeof(p1)
+local function _(p1) --[[ Line: 9 | Named "isValidFocusable" ]]
+	-- upvalues: checkHostProperties (copy)
+	local ValueType = typeof(p1)
 	
-	if var1 == "string" then
-		local ok, _ = pcall(checkHostProperties, p1)
+	if ValueType == "string" then
+		local Success, _ = pcall(checkHostProperties, p1)
 		
-		return ok
+		return Success
+	else
+		return ValueType == "function" or ValueType == "table"
 	end
-	return var1 == "function" or var1 == "table"
 end
 
-return function()
-	-- upvalues: checkHostProperties (ref), asFocusableModule (ref)
+return function() --[[ Line: 25 | Named "createFocusableCache" ]]
+	-- upvalues: checkHostProperties (copy), AsFocusableModule (copy)
 	local t = {}
 	setmetatable(t, {
-		__index = function(_, p1)
-			-- upvalues: checkHostProperties (copy), asFocusableModule (copy), t (ref)
-			local var1
-			local var2 = typeof(p1)
+		__index = function(_, Key) --[[ Line: 29 ]]
+			-- upvalues: checkHostProperties (upval), AsFocusableModule (upval), t (copy)
+			local ValueType = typeof(Key)
+			local Success = nil
 			
-			if var2 == "string" then
-				local ok, _ = pcall(checkHostProperties, p1)
-				var1 = ok
-			elseif var2 ~= "function" then
-				var1 = var2 ~= "table"
+			if ValueType == "string" then
+				local _
+				Success, _ = pcall(checkHostProperties, Key)
+			else
+				Success = ValueType == "function" or ValueType == "table"
 			end
-			if not var1 then
-				error("Component " .. tostring(p1) .. " (" .. typeof(p1) .. ") is not a valid focusable component", 2)
+			if not Success then
+				error("Component " .. tostring(Key) .. " (" .. typeof(Key) .. ") is not a valid focusable component", 2)
 			end
-			local var3 = asFocusableModule(p1)
-			t[p1] = var3
+			local AsFocusableModuleResult = AsFocusableModule(Key)
+			t[Key] = AsFocusableModuleResult
 			
-			return var3
+			return AsFocusableModuleResult
 		end,
-		__tostring = function(p1)
-			local var1 = "{"
+		__tostring = function(List): string --[[ Line: 39 ]]
+			local Message = "{"
 			
-			for i, v in pairs(p1) do
-				var1 = ("%s\n\t%s -> %s"):format(var1, tostring(i), tostring(v))
+			for i, value in pairs(List) do
+				Message = ("%s\n\t%s -> %s"):format(Message, tostring(i), (tostring(value)))
 			end
-			return var1 .. "\n}"
+			return Message .. "\n}"
 		end
 	})
 	

@@ -1,78 +1,78 @@
-﻿local parent = script:FindFirstAncestor("AppCommonLib").Parent
-local resultModule = require(parent.Result)
-local promiseModule = require(parent.Promise)
+﻿local Parent = script:FindFirstAncestor("AppCommonLib").Parent
+local ResultModule = require(Parent.Result)
+local PromiseModule = require(Parent.Promise)
 
 return {
-	Batch = function(p1, p2)
-		-- upvalues: promiseModule (ref), resultModule (ref)
-		assert(type(p1) == "table", "PromiseUtilities expects a list of Promises!")
-		local var1 = 0
+	Batch = function(List, Callback) --[[ Line: 30 ]]
+		-- upvalues: PromiseModule (copy), ResultModule (copy)
+		assert(type(List) == "table", "PromiseUtilities expects a list of Promises!")
+		local Count = 0
 		
-		for i, v in pairs(p1) do
-			assert(promiseModule.is(v), "PromiseUtilities expects a list of Promises!")
-			var1 += 1
+		for _, value in pairs(List) do
+			assert(PromiseModule.is(value), "PromiseUtilities expects a list of Promises!")
+			Count += 1
 		end
-		return promiseModule.new(function(p3, _)
-			-- upvalues: resultModule (copy), var1 (write), p1 (ref), p2 (ref)
-			local var2 = 0
-			local t = {}
+		return PromiseModule.new(function(Callback1: (any) -> (), _) --[[ Line: 40 ]]
+			-- upvalues: ResultModule (upval), Count (ref), List (copy), Callback (copy)
+			local Count1 = 0
+			local NewResults = {}
 			
-			local function _(p4, p5, p6)
-				-- upvalues: t (ref), resultModule (copy), var2 (write), var1 (copy), p3 (ref)
-				t[p4] = resultModule.new(p5, p6)
-				var2 += 1
+			local function _(Key, p1, p2) --[[ Line: 44 | Named "promiseCompleted" ]]
+				-- upvalues: NewResults (copy), ResultModule (upval), Count1 (ref), Count (upval), Callback1 (copy)
+				NewResults[Key] = ResultModule.new(p1, p2)
+				Count1 += 1
 				
-				if var2 == var1 then
-					p3(t)
+				if Count1 == Count then
+					Callback1(NewResults)
 				end
 			end
 			
-			if next(p1) == nil then
-				p3(t)
+			if next(List) == nil then
+				Callback1(NewResults)
 			end
-			for i, v in pairs(p1) do
-				v:andThen(function(p4, ...)
-					-- upvalues: i (ref), t (ref), resultModule (copy), var2 (write), var1 (copy), p3 (ref)
+			for i, Promise in pairs(List) do
+				Promise:andThen(function(Result, ...) --[[ Line: 58 ]]
+					-- upvalues: i (copy), NewResults (copy), ResultModule (upval), Count1 (ref), Count (upval), Callback1 (copy)
 					if select("#", ...) > 0 then
 						warn("Promises in PromiseUtilities.Batch should not return tuple")
 					end
-					t[i] = resultModule.new(true, p4)
-					var2 += 1
+					NewResults[i] = ResultModule.new(true, Result)
+					Count1 += 1
 					
-					if var2 == var1 then
-						p3(t)
+					if Count1 == Count then
+						Callback1(NewResults)
 					end
-				end, function(p4)
-					-- upvalues: i (ref), t (ref), resultModule (copy), var2 (write), var1 (copy), p3 (ref), p2 (copy)
-					t[i] = resultModule.new(false, p4)
-					var2 += 1
+				end, function(p1) --[[ Line: 63 ]]
+					-- upvalues: i (copy), NewResults (copy), ResultModule (upval), Count1 (ref), Count (upval), Callback1 (copy), Callback (upval)
+					NewResults[i] = ResultModule.new(false, p1)
+					Count1 += 1
 					
-					if var2 == var1 then
-						p3(t)
+					if Count1 == Count then
+						Callback1(NewResults)
 					end
-					if p2 then
-						p2(p4)
+					if Callback then
+						Callback(p1)
 					end
 				end)
 			end
 		end)
 	end,
-	CountResults = function(p3)
-		local var2 = 0
-		local var3 = 0
+	CountResults = function(List) --[[ Line: 73 ]]
+		local TotalCount = 0
+		local FailureCount = 0
 		
-		for i, v in pairs(p3) do
-			local var4, _ = v:unwrap()
+		for _, value in pairs(List) do
+			local UnwrapResult, _ = value:unwrap()
 			
-			if not var4 then
-				var3 += 1
+			if not UnwrapResult then
+				FailureCount += 1
 			end
-			var2 += 1
+			TotalCount += 1
 		end
 		return {
-			successCount = var2 - var3,
-			failureCount = var3,
-			totalCount = var2
+			successCount = TotalCount - FailureCount,
+			failureCount = FailureCount,
+			totalCount = TotalCount
 		}
 	end
 }

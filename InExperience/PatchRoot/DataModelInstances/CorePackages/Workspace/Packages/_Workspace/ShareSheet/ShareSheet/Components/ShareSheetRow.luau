@@ -1,39 +1,40 @@
-﻿local shareSheet = script:FindFirstAncestor("ShareSheet")
-local parent = shareSheet.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local fFlagShareSheetScrollArrowsModule = require(shareSheet.Flags.FFlagShareSheetScrollArrows)
-local shareSheetRowWithScrollArrowsModule = require(script.Parent.ShareSheetRowWithScrollArrows)
-local scrollView = foundationModule.ScrollView
-local visibility = foundationModule.Enums.Visibility
-local useTokens = foundationModule.Hooks.useTokens
-local fFlagShareSheetPeoplePickerEnabledModule = require(shareSheet.Flags.FFlagShareSheetPeoplePickerEnabled)
+﻿local ShareSheet = script:FindFirstAncestor("ShareSheet")
+local Parent = ShareSheet.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local FFlagShareSheetScrollArrowsModule = require(ShareSheet.Flags.FFlagShareSheetScrollArrows)
+local ShareSheetRowWithScrollArrowsModule = require(script.Parent.ShareSheetRowWithScrollArrows)
+local ScrollView = FoundationModule.ScrollView
+local Visibility = FoundationModule.Enums.Visibility
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local FFlagShareSheetPeoplePickerEnabledModule = require(ShareSheet.Flags.FFlagShareSheetPeoplePickerEnabled)
 
-return function(p1)
-	-- upvalues: fFlagShareSheetScrollArrowsModule (ref), reactModule (ref), shareSheetRowWithScrollArrowsModule (ref), useTokens (ref), scrollView (ref), fFlagShareSheetPeoplePickerEnabledModule (ref), visibility (ref)
-	if fFlagShareSheetScrollArrowsModule then
-		return reactModule.createElement(shareSheetRowWithScrollArrowsModule, p1)
+return function(Frame) --[[ Line: 22 | Named "ShareSheetRow" ]]
+	-- upvalues: FFlagShareSheetScrollArrowsModule (copy), ReactModule (copy), ShareSheetRowWithScrollArrowsModule (copy), UseTokensFunction (copy), ScrollView (copy), FFlagShareSheetPeoplePickerEnabledModule (copy), Visibility (copy)
+	if FFlagShareSheetScrollArrowsModule then
+		return ReactModule.createElement(ShareSheetRowWithScrollArrowsModule, Frame)
+	else
+		local UseTokensResult = UseTokensFunction()
+		
+		return ReactModule.createElement(ScrollView, {
+			tag = "size-full-0 auto-y",
+			LayoutOrder = Frame.LayoutOrder,
+			padding = if FFlagShareSheetPeoplePickerEnabledModule and Frame.hasHorizontalPadding == false then nil else {
+				left = UDim.new(0, UseTokensResult.Padding.XLarge),
+				right = UDim.new(0, UseTokensResult.Padding.XLarge)
+			},
+			scroll = {
+				AutomaticSize = Enum.AutomaticSize.Y,
+				AutomaticCanvasSize = Enum.AutomaticSize.X,
+				CanvasSize = UDim2.fromScale(0, 0),
+				ScrollingDirection = Enum.ScrollingDirection.X,
+				scrollBarVisibility = Visibility.None
+			},
+			layout = {
+				FillDirection = Enum.FillDirection.Horizontal,
+				VerticalAlignment = Enum.VerticalAlignment.Top,
+				Padding = UDim.new(0, UseTokensResult.Padding.Medium)
+			}
+		}, Frame.children)
 	end
-	local var1 = useTokens()
-	
-	return reactModule.createElement(scrollView, {
-		tag = "size-full-0 auto-y",
-		LayoutOrder = p1.LayoutOrder,
-		padding = if fFlagShareSheetPeoplePickerEnabledModule and p1.hasHorizontalPadding == false then nil else {
-			left = UDim.new(0, var1.Padding.XLarge),
-			right = UDim.new(0, var1.Padding.XLarge)
-		},
-		scroll = {
-			AutomaticSize = Enum.AutomaticSize.Y,
-			AutomaticCanvasSize = Enum.AutomaticSize.X,
-			CanvasSize = UDim2.fromScale(0, 0),
-			ScrollingDirection = Enum.ScrollingDirection.X,
-			scrollBarVisibility = visibility.None
-		},
-		layout = {
-			FillDirection = Enum.FillDirection.Horizontal,
-			VerticalAlignment = Enum.VerticalAlignment.Top,
-			Padding = UDim.new(0, var1.Padding.Medium)
-		}
-	}, p1.children)
 end

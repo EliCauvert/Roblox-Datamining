@@ -1,89 +1,95 @@
-﻿local parent = script.Parent.Parent.Parent
-local dependenciesModule = require(parent.dependencies)
-local parent_1 = parent.Parent
-local reactModule = require(parent_1.React)
-local impressionsTagUtility = require(parent_1.Impressions).ImpressionsTagUtility
-local roduxFriends = dependenciesModule.RoduxFriends
-local useSelector = dependenciesModule.Hooks.useSelector
-local getDeepValue = dependenciesModule.SocialLibraries.Dictionary.getDeepValue
-local usePrimaryCtaModule = require(parent.Components.PYMKUser.usePrimaryCta)
-local useContextualInfoModule = require(parent.Components.PYMKUser.useContextualInfo)
-local useUserPresenceModule = require(parent.Components.PYMKUser.useUserPresence)
-local useOnActivatedTileModule = require(parent.Components.PYMKUser.useOnActivatedTile)
-local _ = require(parent.Common.DirectRecommendationTypes)
-local fFlagPymkCarouselPresenceStoreMigrationModule = require(parent.Flags.FFlagPymkCarouselPresenceStoreMigration)
-local fFlagLuaAppEnableSduiHomePage = require(parent_1.SharedFlags).FFlagLuaAppEnableSduiHomePage
-local _ = require(parent_1.UserList)
+﻿local Parent = script.Parent.Parent.Parent
+local DependenciesModule = require(Parent.dependencies)
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
+local ImpressionsTagUtility = require(Parent1.Impressions).ImpressionsTagUtility
+local RoduxFriends = DependenciesModule.RoduxFriends
+local UseSelectorFunction = DependenciesModule.Hooks.useSelector
+local GetDeepValueFunction = DependenciesModule.SocialLibraries.Dictionary.getDeepValue
+local UsePrimaryCtaModule = require(Parent.Components.PYMKUser.usePrimaryCta)
+local UseContextualInfoModule = require(Parent.Components.PYMKUser.useContextualInfo)
+local UseUserPresenceModule = require(Parent.Components.PYMKUser.useUserPresence)
+local UseOnActivatedTileModule = require(Parent.Components.PYMKUser.useOnActivatedTile)
+local _ = require(Parent.Common.DirectRecommendationTypes)
+local FFlagPymkCarouselPresenceStoreMigrationModule = require(Parent.Flags.FFlagPymkCarouselPresenceStoreMigration)
+local FFlagLuaAppEnableSduiHomePage = require(Parent1.SharedFlags).FFlagLuaAppEnableSduiHomePage
+local _ = require(Parent1.UserList)
 
-return function(p1)
-	-- upvalues: reactModule (ref), impressionsTagUtility (ref), fFlagLuaAppEnableSduiHomePage (ref), useSelector (ref), getDeepValue (ref), roduxFriends (ref), usePrimaryCtaModule (ref), useContextualInfoModule (ref), useUserPresenceModule (ref), fFlagPymkCarouselPresenceStoreMigrationModule (ref), useOnActivatedTileModule (ref)
-	local var1, var2
-	local var3 = tostring(p1.entity.id)
-	local var4 = reactModule.useRef(nil)
-	reactModule.useEffect(function()
-		-- upvalues: impressionsTagUtility (copy), var4 (ref), p1 (ref)
-		impressionsTagUtility.AddTag(var4, p1.impressionsTag, p1.absolutePosition)
+return function(p1) --[[ Line: 43 ]]
+	-- upvalues: ReactModule (copy), ImpressionsTagUtility (copy), FFlagLuaAppEnableSduiHomePage (copy), UseSelectorFunction (copy), GetDeepValueFunction (copy), RoduxFriends (copy), UsePrimaryCtaModule (copy), UseContextualInfoModule (copy), UseUserPresenceModule (copy), FFlagPymkCarouselPresenceStoreMigrationModule (copy), UseOnActivatedTileModule (copy)
+	local Text = tostring(p1.entity.id)
+	local UseRefResult = ReactModule.useRef(nil)
+	ReactModule.useEffect(function() --[[ Line: 47 ]]
+		-- upvalues: ImpressionsTagUtility (upval), UseRefResult (copy), p1 (copy)
+		ImpressionsTagUtility.AddTag(UseRefResult, p1.impressionsTag, p1.absolutePosition)
 		
-		return function()
-			-- upvalues: impressionsTagUtility (copy), var4 (copy), p1 (copy)
-			impressionsTagUtility.RemoveTag(var4, p1.impressionsTag, p1.absolutePosition)
+		return function() --[[ Line: 49 ]]
+			-- upvalues: ImpressionsTagUtility (upval), UseRefResult (upval), p1 (upval)
+			ImpressionsTagUtility.RemoveTag(UseRefResult, p1.impressionsTag, p1.absolutePosition)
 		end
 	end, { p1.impressionsTag, p1.absolutePosition })
-	local var5 = if not fFlagLuaAppEnableSduiHomePage then useSelector(function(p2)
-		return tostring(p2.LocalUserId)
+	local UseSelectorResult = if not FFlagLuaAppEnableSduiHomePage then UseSelectorFunction(function(p2): string --[[ Line: 56 ]]
+		return (tostring(p2.LocalUserId))
 	end) else nil
-	local _ = nil
-	local _ = nil
+	local HasIncomingFriendRequest = nil
+	local Recommendation = nil
 	
-	if fFlagLuaAppEnableSduiHomePage then
-		var1 = if p1.recommendation then p1.recommendation.hasIncomingFriendRequest else nil
-		var2 = p1.recommendation or {}
+	if FFlagLuaAppEnableSduiHomePage then
+		HasIncomingFriendRequest = if p1.recommendation then p1.recommendation.hasIncomingFriendRequest else nil
+		Recommendation = p1.recommendation or {}
 	else
-		var1 = useSelector(function(p2)
-			-- upvalues: getDeepValue (copy), var3 (ref)
-			return getDeepValue(p2, string.format("PYMKCarousel.Friends.recommendations.hasIncomingFriendRequest.%s", var3))
+		HasIncomingFriendRequest = UseSelectorFunction(function(p2) --[[ Line: 68 ]]
+			-- upvalues: GetDeepValueFunction (upval), Text (copy)
+			return GetDeepValueFunction(p2, string.format("PYMKCarousel.Friends.recommendations.hasIncomingFriendRequest.%s", Text))
 		end)
-		var2 = useSelector(function(p2)
-			-- upvalues: roduxFriends (copy), var5 (write), var3 (ref)
-			return roduxFriends.Selectors.selectRecommendationsForUserId(p2)(var5)[var3] or {}
+		Recommendation = UseSelectorFunction(function(p2) --[[ Line: 74 ]]
+			-- upvalues: RoduxFriends (upval), UseSelectorResult (ref), Text (copy)
+			return RoduxFriends.Selectors.selectRecommendationsForUserId(p2)(UseSelectorResult)[Text] or {}
 		end)
 	end
-	local var6 = useUserPresenceModule({
-		userId = var3,
-		entityType = if fFlagPymkCarouselPresenceStoreMigrationModule then p1.entity.type else nil,
-		forceFetchUserPresence = if fFlagPymkCarouselPresenceStoreMigrationModule then p1.forceFetchUserPresence else nil
+	local UseSelectorResult1 = UseSelectorFunction(function(p2) --[[ Line: 79 ]]
+		-- upvalues: RoduxFriends (upval), Text (copy)
+		return RoduxFriends.Selectors.selectFriendshipStatusesByUserIds(p2)({ userId = Text })[Text] or nil
+	end)
+	local UsePrimaryCtaModuleResult = UsePrimaryCtaModule({
+		entityId = Text,
+		showToast = p1.showToast,
+		fireAnalyticsEvent = p1.fireAnalyticsEvent,
+		absolutePosition = p1.absolutePosition,
+		entityType = p1.entity.type,
+		recommendation = if FFlagLuaAppEnableSduiHomePage then p1.recommendation else nil
 	})
-	local var7 = p1.createRow({
+	local UseContextualInfoModuleResult = UseContextualInfoModule({
+		recommendation = Recommendation,
+		hasIncomingFriendRequest = HasIncomingFriendRequest
+	})
+	local LoadingState = {
+		subtitle = false,
+		contextualInfo = Recommendation.contextType == nil
+	}
+	local UseUserPresenceModuleResult = UseUserPresenceModule({
+		userId = Text,
+		entityType = if FFlagPymkCarouselPresenceStoreMigrationModule then p1.entity.type else nil,
+		forceFetchUserPresence = if FFlagPymkCarouselPresenceStoreMigrationModule then p1.forceFetchUserPresence else nil
+	})
+	local Row = p1.createRow({
 		secondaryCta = nil,
 		trailingContent = nil,
-		primaryCta = usePrimaryCtaModule({
-			entityId = var3,
-			showToast = p1.showToast,
-			fireAnalyticsEvent = p1.fireAnalyticsEvent,
-			absolutePosition = p1.absolutePosition,
-			entityType = p1.entity.type,
-			recommendation = if fFlagLuaAppEnableSduiHomePage then p1.recommendation else nil
-		}),
-		contextualInfo = useContextualInfoModule({ recommendation = var2, hasIncomingFriendRequest = var1 }),
-		loadingState = {
-			subtitle = false,
-			contextualInfo = var2.contextType == nil
-		},
-		presence = var6,
-		onRowActivated = useOnActivatedTileModule({
-			userId = var3,
+		primaryCta = UsePrimaryCtaModuleResult,
+		contextualInfo = UseContextualInfoModuleResult,
+		loadingState = LoadingState,
+		presence = UseUserPresenceModuleResult,
+		onRowActivated = UseOnActivatedTileModule({
+			userId = Text,
 			openProfilePeekView = p1.openProfilePeekView,
 			absolutePosition = p1.absolutePosition,
-			recommendation = var2,
+			recommendation = Recommendation,
 			recommendationSessionId = p1.recommendationSessionId,
 			fireAnalyticsEvent = p1.fireAnalyticsEvent,
-			friendshipStatus = useSelector(function(p2)
-				-- upvalues: roduxFriends (copy), var3 (ref)
-				return roduxFriends.Selectors.selectFriendshipStatusesByUserIds(p2)({ userId = var3 })[var3] or nil
-			end),
-			userPresenceType = var6
+			friendshipStatus = UseSelectorResult1,
+			userPresenceType = UseUserPresenceModuleResult
 		})
 	})
 	
-	return if var7 then reactModule.cloneElement(var7, { ref = var4 }) else nil
+	return if Row then ReactModule.cloneElement(Row, { ref = UseRefResult }) else nil
 end

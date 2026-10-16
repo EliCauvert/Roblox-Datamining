@@ -1,137 +1,138 @@
-﻿local httpService = game:GetService("HttpService")
-local messageBusService = game:GetService("MessageBusService")
-local buildExperienceMessageId = messageBusService:GetMessageId("BuildExperience", "instanceSelectionRequest")
-local buildExperienceMessageId_1 = messageBusService:GetMessageId("BuildExperience", "instanceSelectionResult")
+﻿local HttpService = game:GetService("HttpService")
+local MessageBusService = game:GetService("MessageBusService")
+local BuildExperienceMessageId = MessageBusService:GetMessageId("BuildExperience", "instanceSelectionRequest")
+local BuildExperienceMessageId1 = MessageBusService:GetMessageId("BuildExperience", "instanceSelectionResult")
 
-local function getActiveRequest()
-	-- upvalues: messageBusService (ref), buildExperienceMessageId (ref)
-	local var1 = messageBusService:GetLast(buildExperienceMessageId)
+local function getActiveRequest() --[[ Line: 34 ]]
+	-- upvalues: MessageBusService (copy), BuildExperienceMessageId (copy)
+	local Last = MessageBusService:GetLast(BuildExperienceMessageId)
 	
-	return if typeof(var1) == "table" and var1.active == true and (typeof(var1.requestId) == "string" and var1.requestId ~= "") then var1 else nil
+	return if typeof(Last) == "table" and Last.active == true and typeof(Last.requestId) == "string" and Last.requestId ~= "" then Last else nil
 end
 
-local function defaultDependencies()
-	-- upvalues: httpService (ref), getActiveRequest (ref), messageBusService (ref), buildExperienceMessageId (ref), buildExperienceMessageId_1 (ref)
-	local experienceStateCaptureService = game:GetService("ExperienceStateCaptureService")
+local function defaultDependencies() --[[ Line: 47 ]]
+	-- upvalues: HttpService (copy), getActiveRequest (copy), MessageBusService (copy), BuildExperienceMessageId (copy), BuildExperienceMessageId1 (copy)
+	local ExperienceStateCaptureService = game:GetService("ExperienceStateCaptureService")
 	
 	return {
-		canEnterCaptureMode = function()
-			-- upvalues: experienceStateCaptureService (ref)
-			return not game:GetEngineFeature("ExperienceStateCaptureMinMemEnabled") or experienceStateCaptureService:CanEnterCaptureMode()
+		canEnterCaptureMode = function() --[[ Line: 50 ]]
+			-- upvalues: ExperienceStateCaptureService (copy)
+			return not game:GetEngineFeature("ExperienceStateCaptureMinMemEnabled") or ExperienceStateCaptureService:CanEnterCaptureMode()
 		end,
-		createRequestId = function()
-			-- upvalues: httpService (copy)
-			return httpService:GenerateGUID(false)
+		createRequestId = function() --[[ Line: 54 ]]
+			-- upvalues: HttpService (upval)
+			return HttpService:GenerateGUID(false)
 		end,
 		getActiveRequest = getActiveRequest,
-		publishRequest = function(p1)
-			-- upvalues: messageBusService (copy), buildExperienceMessageId (copy)
-			messageBusService:Publish(buildExperienceMessageId, p1)
+		publishRequest = function(p1) --[[ Line: 58 ]]
+			-- upvalues: MessageBusService (upval), BuildExperienceMessageId (upval)
+			MessageBusService:Publish(BuildExperienceMessageId, p1)
 		end,
-		publishResult = function(p1)
-			-- upvalues: messageBusService (copy), buildExperienceMessageId_1 (copy)
-			messageBusService:Publish(buildExperienceMessageId_1, p1)
+		publishResult = function(p1) --[[ Line: 61 ]]
+			-- upvalues: MessageBusService (upval), BuildExperienceMessageId1 (upval)
+			MessageBusService:Publish(BuildExperienceMessageId1, p1)
 		end,
-		subscribeToResult = function(p1)
-			-- upvalues: messageBusService (copy), buildExperienceMessageId_1 (copy)
-			return messageBusService:Subscribe(buildExperienceMessageId_1, p1, false, false)
+		subscribeToResult = function(Callback) --[[ Line: 64 ]]
+			-- upvalues: MessageBusService (upval), BuildExperienceMessageId1 (upval)
+			return MessageBusService:Subscribe(BuildExperienceMessageId1, Callback, false, false)
 		end,
-		subscribeToCaptureModeExit = function(p1)
-			-- upvalues: experienceStateCaptureService (ref)
-			return if game:GetEngineFeature("ExperienceStateCaptureIsInBackground") then experienceStateCaptureService:GetPropertyChangedSignal("IsInBackground"):Connect(function()
-				-- upvalues: experienceStateCaptureService (copy), p1 (ref)
-				if not experienceStateCaptureService.IsInBackground then
-					p1()
+		subscribeToCaptureModeExit = function(Callback) --[[ Line: 67 ]]
+			-- upvalues: ExperienceStateCaptureService (copy)
+			return if game:GetEngineFeature("ExperienceStateCaptureIsInBackground") then ExperienceStateCaptureService:GetPropertyChangedSignal("IsInBackground"):Connect(function() --[[ Line: 71 ]]
+				-- upvalues: ExperienceStateCaptureService (upval), Callback (copy)
+				if not ExperienceStateCaptureService.IsInBackground then
+					Callback()
 				end
 			end) else nil
 		end,
-		toggleCaptureMode = function()
-			-- upvalues: experienceStateCaptureService (ref)
-			experienceStateCaptureService:ToggleCaptureMode()
+		toggleCaptureMode = function() --[[ Line: 77 ]]
+			-- upvalues: ExperienceStateCaptureService (copy)
+			ExperienceStateCaptureService:ToggleCaptureMode()
 		end
 	}
 end
 
 return {
-	beginSelection = function(p1, p2)
-		-- upvalues: defaultDependencies (ref)
-		p2 = p2 or defaultDependencies()
+	beginSelection = function(Callback, p1) --[[ Line: 83 ]]
+		-- upvalues: defaultDependencies (copy)
+		local P3 = p1 or defaultDependencies()
 		
-		if not p2.canEnterCaptureMode() then
+		if not P3.canEnterCaptureMode() then
 			return false
 		end
-		local var1 = p2.createRequestId()
-		local var2 = nil
-		local var3 = nil
+		local RequestId = P3.createRequestId()
+		local Connection = nil
+		local Connection1 = nil
 		
-		local function _()
-			-- upvalues: var2 (write), var3 (write)
-			var2:Disconnect()
+		local function _() --[[ Line: 92 | Named "disconnect" ]]
+			-- upvalues: Connection (ref), Connection1 (ref)
+			Connection:Disconnect()
 			
-			if var3 ~= nil then
-				var3:Disconnect()
+			if Connection1 ~= nil then
+				Connection1:Disconnect()
 			end
 		end
 		
-		var2 = p2.subscribeToResult(function(p3)
-			-- upvalues: var1 (ref), var2 (write), var3 (write), p1 (ref)
-			if typeof(p3) ~= "table" or p3.requestId ~= var1 then return end
-			var2:Disconnect()
+		Connection = P3.subscribeToResult(function(p2) --[[ Line: 99 ]]
+			-- upvalues: RequestId (copy), Connection (ref), Connection1 (ref), Callback (copy)
+			if typeof(p2) ~= "table" or p2.requestId ~= RequestId then return end
+			Connection:Disconnect()
 			
-			if var3 ~= nil then
-				var3:Disconnect()
+			if Connection1 ~= nil then
+				Connection1:Disconnect()
 			end
-			p1(p3)
+			Callback(p2)
 		end)
-		var3 = p2.subscribeToCaptureModeExit(function()
-			-- upvalues: p2 (ref), var1 (ref), var3 (write), var2 (write), p1 (ref)
-			local activeRequest = p2.getActiveRequest()
+		Connection1 = P3.subscribeToCaptureModeExit(function() --[[ Line: 107 ]]
+			-- upvalues: P3 (copy), RequestId (copy), Connection1 (ref), Connection (ref), Callback (copy)
+			local ActiveRequest = P3.getActiveRequest()
 			
-			if activeRequest == nil or activeRequest.requestId ~= var1 then
-				var3:Disconnect()
+			if ActiveRequest == nil or ActiveRequest.requestId ~= RequestId then
+				Connection1:Disconnect()
 				
 				return
 			end
-			var2:Disconnect()
+			Connection:Disconnect()
 			
-			if var3 ~= nil then
-				var3:Disconnect()
+			if Connection1 ~= nil then
+				Connection1:Disconnect()
 			end
-			p2.publishRequest({ active = false, requestId = var1 })
-			p1({ status = "cancelled", requestId = var1 })
+			P3.publishRequest({ active = false, requestId = RequestId })
+			Callback({ status = "cancelled", requestId = RequestId })
 		end)
-		p2.publishRequest({ active = true, requestId = var1 })
-		local ok = pcall(p2.toggleCaptureMode)
+		P3.publishRequest({ active = true, requestId = RequestId })
+		local Success = pcall(P3.toggleCaptureMode)
 		
-		if not ok then
-			var2:Disconnect()
+		if not Success then
+			Connection:Disconnect()
 			
-			if var3 ~= nil then
-				var3:Disconnect()
+			if Connection1 ~= nil then
+				Connection1:Disconnect()
 			end
-			p2.publishRequest({ active = false, requestId = var1 })
+			P3.publishRequest({ active = false, requestId = RequestId })
 		end
-		return ok
+		return Success
 	end,
-	finishSelection = function(p1, p2)
-		-- upvalues: defaultDependencies (ref)
-		p2 = p2 or defaultDependencies()
-		local activeRequest = p2.getActiveRequest()
+	finishSelection = function(p1, p2): boolean --[[ Line: 139 ]]
+		-- upvalues: defaultDependencies (copy)
+		local P6 = p2 or defaultDependencies()
+		local ActiveRequest = P6.getActiveRequest()
 		
-		if activeRequest == nil then
+		if ActiveRequest == nil then
 			return false
+		else
+			P6.publishResult({
+				requestId = ActiveRequest.requestId,
+				status = p1.status,
+				path = p1.path,
+				displayName = p1.displayName,
+				className = p1.className
+			})
+			P6.publishRequest({ active = false, requestId = ActiveRequest.requestId })
+			P6.toggleCaptureMode()
+			
+			return true
 		end
-		p2.publishResult({
-			requestId = activeRequest.requestId,
-			status = p1.status,
-			path = p1.path,
-			displayName = p1.displayName,
-			className = p1.className
-		})
-		p2.publishRequest({ active = false, requestId = activeRequest.requestId })
-		p2.toggleCaptureMode()
-		
-		return true
 	end,
 	getActiveRequest = getActiveRequest
 }

@@ -1,39 +1,39 @@
-﻿local navigationRodux = script:FindFirstAncestor("NavigationRodux")
-local _ = require(navigationRodux.Parent.Navigation)
-local _ = require(navigationRodux.types)
+﻿local NavigationRodux = script:FindFirstAncestor("NavigationRodux")
+local _ = require(NavigationRodux.Parent.Navigation)
+local _ = require(NavigationRodux.types)
 
-local function _(p1)
+local function _(p1) --[[ Line: 13 | Named "selectNavigationState" ]]
 	return p1.Navigation
 end
 
 return {
-	selectCurrentRoactNavigationRoute = function(p1)
+	selectCurrentRoactNavigationRoute = function(p1) --[[ Line: 17 ]]
 		return p1.Navigation.currentRoute
 	end,
-	selectLegacyHistory = function(p1)
+	selectLegacyHistory = function(p1) --[[ Line: 21 ]]
 		return p1.Navigation.history
 	end,
-	selectNavigationLocked = function(p1)
+	selectNavigationLocked = function(p1) --[[ Line: 35 ]]
 		return p1.Navigation.lockNavigationActions
 	end,
-	selectBackNavigationDisableCounter = function(p1)
+	selectBackNavigationDisableCounter = function(p1) --[[ Line: 39 ]]
 		return p1.Navigation.backNavigationDisableCounter
 	end,
-	selectCurrentPageName = function(p1)
-		local history = p1.Navigation.history
-		local var1 = history[#history]
+	selectCurrentPageName = function(p1) --[[ Line: 43 ]]
+		local History = p1.Navigation.history
+		local HistoryEntry = History[#History]
 		
-		return var1[#var1].name
+		return HistoryEntry[#HistoryEntry].name
 	end,
-	selectCurrentLegacyRoute = function(p1)
-		local history = p1.Navigation.history
+	selectCurrentLegacyRoute = function(p1) --[[ Line: 25 ]]
+		local History = p1.Navigation.history
 		
-		return history[#history]
+		return History[#History]
 	end,
-	selectCurrentLegacyPage = function(p1)
-		local history = p1.Navigation.history
-		local var1 = history[#history]
+	selectCurrentLegacyPage = function(p1) --[[ Line: 30 ]]
+		local History = p1.Navigation.history
+		local HistoryEntry = History[#History]
 		
-		return var1[#var1]
+		return HistoryEntry[#HistoryEntry]
 	end
 }

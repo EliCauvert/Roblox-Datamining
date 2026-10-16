@@ -1,19 +1,19 @@
-﻿local experienceStoreServerDrivenUi = script:FindFirstAncestor("ExperienceStoreServerDrivenUi")
-local parent = experienceStoreServerDrivenUi.Parent
-local reactModule = require(parent.React)
-local fFlagSduiGameItemsComponent = require(parent.SharedFlags).FFlagSduiGameItemsComponent
-local fFlagSduiLocalFeedFilter = require(parent.SharedFlags).FFlagSduiLocalFeedFilter
-local registerExperienceStoreActionsModule = require(experienceStoreServerDrivenUi.Actions.registerExperienceStoreActions)
-local registerExperienceStoreComponentsModule = require(experienceStoreServerDrivenUi.System.registerExperienceStoreComponents)
+﻿local ExperienceStoreServerDrivenUi = script:FindFirstAncestor("ExperienceStoreServerDrivenUi")
+local Parent = ExperienceStoreServerDrivenUi.Parent
+local ReactModule = require(Parent.React)
+local FFlagSduiGameItemsComponent = require(Parent.SharedFlags).FFlagSduiGameItemsComponent
+local FFlagSduiLocalFeedFilter = require(Parent.SharedFlags).FFlagSduiLocalFeedFilter
+local RegisterExperienceStoreActionsModule = require(ExperienceStoreServerDrivenUi.Actions.registerExperienceStoreActions)
+local RegisterExperienceStoreComponentsModule = require(ExperienceStoreServerDrivenUi.System.registerExperienceStoreComponents)
 
-return reactModule.memo(function()
-	-- upvalues: reactModule (ref), registerExperienceStoreActionsModule (ref), fFlagSduiGameItemsComponent (ref), fFlagSduiLocalFeedFilter (ref), registerExperienceStoreComponentsModule (ref)
-	reactModule.useEffect(function()
-		-- upvalues: registerExperienceStoreActionsModule (copy), fFlagSduiGameItemsComponent (copy), fFlagSduiLocalFeedFilter (copy), registerExperienceStoreComponentsModule (copy)
-		registerExperienceStoreActionsModule()
+return ReactModule.memo(function() --[[ Line: 13 | Named "SduiExperienceStoreRegister" ]]
+	-- upvalues: ReactModule (copy), RegisterExperienceStoreActionsModule (copy), FFlagSduiGameItemsComponent (copy), FFlagSduiLocalFeedFilter (copy), RegisterExperienceStoreComponentsModule (copy)
+	ReactModule.useEffect(function() --[[ Line: 14 ]]
+		-- upvalues: RegisterExperienceStoreActionsModule (upval), FFlagSduiGameItemsComponent (upval), FFlagSduiLocalFeedFilter (upval), RegisterExperienceStoreComponentsModule (upval)
+		RegisterExperienceStoreActionsModule()
 		
-		if fFlagSduiGameItemsComponent or fFlagSduiLocalFeedFilter then
-			registerExperienceStoreComponentsModule()
+		if FFlagSduiGameItemsComponent or FFlagSduiLocalFeedFilter then
+			RegisterExperienceStoreComponentsModule()
 		end
 	end, {})
 	

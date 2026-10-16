@@ -1,9 +1,9 @@
-﻿local avatarExperienceSave = script:FindFirstAncestor("AvatarExperienceSave")
-local _ = require(avatarExperienceSave.Context.AvatarSaveContext)
-local fFlagAXBackgroundsPersistence = require(avatarExperienceSave.Parent.AvatarExperienceFlags).FFlagAXBackgroundsPersistence
+﻿local AvatarExperienceSave = script:FindFirstAncestor("AvatarExperienceSave")
+local _ = require(AvatarExperienceSave.Context.AvatarSaveContext)
+local FFlagAXBackgroundsPersistence = require(AvatarExperienceSave.Parent.AvatarExperienceFlags).FFlagAXBackgroundsPersistence
 
-return function(p1)
-	-- upvalues: fFlagAXBackgroundsPersistence (ref)
+return function(p1) --[[ Line: 9 | Named "selectCharacterData" ]]
+	-- upvalues: FFlagAXBackgroundsPersistence (copy)
 	return {
 		tryOn = {
 			TryOn = p1.AvatarExperience.AvatarScene.TryOn,
@@ -17,7 +17,7 @@ return function(p1)
 			BodyPartRangeIds = p1.AvatarExperience.AvatarEditor.Character.BodyPartRangeIds,
 			EquippedAssets = p1.AvatarExperience.AvatarEditor.Character.EquippedAssets,
 			EquippedEmotes = p1.AvatarExperience.AvatarEditor.EquippedEmotes,
-			BackgroundAssetId = if fFlagAXBackgroundsPersistence then p1.AvatarExperience.AvatarScene.ProfileConfiguration.BackgroundAssetId else nil
+			BackgroundAssetId = if FFlagAXBackgroundsPersistence then p1.AvatarExperience.AvatarScene.ProfileConfiguration.BackgroundAssetId else nil
 		}
 	}
 end

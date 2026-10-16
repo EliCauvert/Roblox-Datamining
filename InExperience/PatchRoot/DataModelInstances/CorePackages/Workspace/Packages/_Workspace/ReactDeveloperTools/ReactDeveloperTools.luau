@@ -1,19 +1,19 @@
-﻿local parent = script.Parent
-local debugLuaAppEnableReactDevTools = game:DefineFastFlag("DebugLuaAppEnableReactDevTools", false)
-local debugLuaAppsReactDevToolsProfileOnStart = game:DefineFastFlag("DebugLuaAppsReactDevToolsProfileOnStart", false)
-local debugLuaAppReactDevToolsHost = game:DefineFastString("DebugLuaAppReactDevToolsHost", "localhost")
-local debugLuaAppReactDevToolsPort = game:DefineFastInt("DebugLuaAppReactDevToolsPort", 8097)
+﻿local Parent = script.Parent
+local DebugLuaAppEnableReactDevTools = game:DefineFastFlag("DebugLuaAppEnableReactDevTools", false)
+local DebugLuaAppsReactDevToolsProfileOnStart = game:DefineFastFlag("DebugLuaAppsReactDevToolsProfileOnStart", false)
+local DebugLuaAppReactDevToolsHost = game:DefineFastString("DebugLuaAppReactDevToolsHost", "localhost")
+local DebugLuaAppReactDevToolsPort = game:DefineFastInt("DebugLuaAppReactDevToolsPort", 8097)
 
 return {
-	startup = function(p1)
-		-- upvalues: debugLuaAppEnableReactDevTools (ref), parent (ref), debugLuaAppReactDevToolsHost (ref), debugLuaAppReactDevToolsPort (ref), debugLuaAppsReactDevToolsProfileOnStart (ref)
-		if debugLuaAppEnableReactDevTools or p1 then
+	startup = function(p1) --[[ Line: 9 ]]
+		-- upvalues: DebugLuaAppEnableReactDevTools (copy), Parent (copy), DebugLuaAppReactDevToolsHost (copy), DebugLuaAppReactDevToolsPort (copy), DebugLuaAppsReactDevToolsProfileOnStart (copy)
+		if DebugLuaAppEnableReactDevTools or p1 then
 			_G.__PROFILE__ = true
 			_G.__DEV__ = true
-			require(parent.Dev.ReactDevtoolsCore).backend.connectToDevtools({
-				host = debugLuaAppReactDevToolsHost,
-				port = debugLuaAppReactDevToolsPort,
-				profileOnStart = debugLuaAppsReactDevToolsProfileOnStart
+			require(Parent.Dev.ReactDevtoolsCore).backend.connectToDevtools({
+				host = DebugLuaAppReactDevToolsHost,
+				port = DebugLuaAppReactDevToolsPort,
+				profileOnStart = DebugLuaAppsReactDevToolsProfileOnStart
 			})
 		end
 	end

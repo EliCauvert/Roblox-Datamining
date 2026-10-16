@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.AdLabel.AdLabel)
+﻿return (require(script.Parent.Parent.Parent._Index.AdLabel.AdLabel))

@@ -1,8 +1,8 @@
-﻿local policyProviderModule = require(game:GetService("CorePackages").Packages.PolicyProvider)
-local var1 = policyProviderModule.withGetPolicyImplementation(policyProviderModule.GetPolicyImplementations.MemStorageService("app-policy"))
+﻿local PolicyProviderModule = require(game:GetService("CorePackages").Packages.PolicyProvider)
+local WithGetPolicyImplementationResult = PolicyProviderModule.withGetPolicyImplementation((PolicyProviderModule.GetPolicyImplementations.MemStorageService("app-policy")))
 
-function var1.Mapper(_)
+function WithGetPolicyImplementationResult:Mapper() --[[ Line: 7 ]]
 	return {}
 end
 
-return var1
+return WithGetPolicyImplementationResult

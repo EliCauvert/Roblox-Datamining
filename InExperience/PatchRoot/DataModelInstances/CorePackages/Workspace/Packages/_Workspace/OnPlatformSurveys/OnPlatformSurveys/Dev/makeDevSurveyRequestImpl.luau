@@ -1,13 +1,13 @@
-﻿local onPlatformSurveys = script:FindFirstAncestor("OnPlatformSurveys")
-local promiseModule = require(onPlatformSurveys.Parent.Promise)
-local inlineQuestionTypeModule = require(onPlatformSurveys.Enums.InlineQuestionType)
-local _ = require(onPlatformSurveys.Types.InlineSurveyTypes)
+﻿local OnPlatformSurveys = script:FindFirstAncestor("OnPlatformSurveys")
+local PromiseModule = require(OnPlatformSurveys.Parent.Promise)
+local InlineQuestionTypeModule = require(OnPlatformSurveys.Enums.InlineQuestionType)
+local _ = require(OnPlatformSurveys.Types.InlineSurveyTypes)
 local list = {
 	{
 		questionId = "q1",
 		title = "How would you rate your experience today?",
 		required = true,
-		type = inlineQuestionTypeModule.MultipleChoiceSingle,
+		type = InlineQuestionTypeModule.MultipleChoiceSingle,
 		choices = {
 			{ id = "great", label = "Great" },
 			{ id = "ok", label = "Okay" },
@@ -15,12 +15,12 @@ local list = {
 		}
 	}
 }
-local list_1 = {
+local Questions = {
 	{
 		questionId = "rating",
 		title = "How would you rate your experience today?",
 		required = true,
-		type = inlineQuestionTypeModule.MultipleChoiceSingle,
+		type = InlineQuestionTypeModule.MultipleChoiceSingle,
 		choices = {
 			{ id = "great", label = "Great", next = "details" },
 			{ id = "ok", label = "Okay", next = "details" },
@@ -31,7 +31,7 @@ local list_1 = {
 		questionId = "issues",
 		title = "What went wrong?",
 		required = true,
-		type = inlineQuestionTypeModule.MultipleChoiceMulti,
+		type = InlineQuestionTypeModule.MultipleChoiceMulti,
 		choices = {
 			{ id = "performance", label = "Performance" },
 			{ id = "bugs", label = "Bugs" },
@@ -41,34 +41,39 @@ local list_1 = {
 	{
 		questionId = "details",
 		title = "Anything else you'd like to share?",
-		type = inlineQuestionTypeModule.Text
+		type = InlineQuestionTypeModule.Text
 	}
 }
 
-local function _(p1)
-	return string.sub(p1, -16) == "/survey/response"
+local function _(Text: string): boolean --[[ Line: 77 | Named "isResponseUrl" ]]
+	return string.sub(Text, -16) == "/survey/response"
 end
 
-local _ = function(p1, p2)
-	-- upvalues: promiseModule (ref)
-	return function(p3, _, _)
-		-- upvalues: promiseModule (copy), p1 (ref), p2 (ref)
-		return promiseModule.new(function(p4)
-			-- upvalues: p3 (ref), p1 (copy), p2 (copy)
-			task.delay(0.4, function()
-				-- upvalues: p3 (copy), p4 (ref), p1 (copy), p2 (copy)
-				if string.sub(p3, -16) == "/survey/response" then
-					p4({
+local _ = function(SurveyId, p1) --[[ Line: 82 | Named "makeRequestImplFor" ]]
+	-- upvalues: PromiseModule (copy)
+	return function(Text, _, _) --[[ Line: 83 ]]
+		-- upvalues: PromiseModule (upval), SurveyId (copy), p1 (copy)
+		return PromiseModule.new(function(Callback) --[[ Line: 84 ]]
+			-- upvalues: Text (copy), SurveyId (upval), p1 (upval)
+			task.delay(0.4, function() --[[ Line: 85 ]]
+				-- upvalues: Text (upval), Callback (copy), SurveyId (upval), p1 (upval)
+				if string.sub(Text, -16) == "/survey/response" then
+					Callback({
 						responseCode = 200,
 						responseBody = { responseId = "dev-response" }
 					})
 					
 					return
+				else
+					Callback({
+						responseCode = 200,
+						responseBody = {
+							shouldPromptSurvey = true,
+							surveyId = SurveyId,
+							questions = p1
+						}
+					})
 				end
-				p4({
-					responseCode = 200,
-					responseBody = { shouldPromptSurvey = true, surveyId = p1, questions = p2 }
-				})
 			end)
 		end)
 	end
@@ -78,66 +83,68 @@ return {
 	SURVEY_ID = "dev-survey",
 	BRANCHING_SURVEY_ID = "dev-branching-survey",
 	RESPONSE_DELAY_SECONDS = 0.4,
-	makeRequestImpl = function()
-		-- upvalues: list (ref), promiseModule (ref)
-		local var1 = "dev-survey"
+	makeRequestImpl = function() --[[ Line: 108 ]]
+		-- upvalues: list (copy), PromiseModule (copy)
+		local SurveyId = "dev-survey"
 		
-		return function(p1, _, _)
-			-- upvalues: promiseModule (copy), var1 (ref), list (ref)
-			return promiseModule.new(function(p2)
-				-- upvalues: p1 (ref), var1 (copy), list (copy)
-				task.delay(0.4, function()
-					-- upvalues: p1 (copy), p2 (ref), var1 (copy), list (copy)
-					if string.sub(p1, -16) == "/survey/response" then
-						p2({
+		return function(Text, _, _) --[[ Line: 83 ]]
+			-- upvalues: PromiseModule (upval), SurveyId (copy), list (copy)
+			return PromiseModule.new(function(Callback) --[[ Line: 84 ]]
+				-- upvalues: Text (copy), SurveyId (upval), list (upval)
+				task.delay(0.4, function() --[[ Line: 85 ]]
+					-- upvalues: Text (upval), Callback (copy), SurveyId (upval), list (upval)
+					if string.sub(Text, -16) == "/survey/response" then
+						Callback({
 							responseCode = 200,
 							responseBody = { responseId = "dev-response" }
 						})
 						
 						return
+					else
+						Callback({
+							responseCode = 200,
+							responseBody = {
+								shouldPromptSurvey = true,
+								surveyId = SurveyId,
+								questions = list
+							}
+						})
 					end
-					p2({
-						responseCode = 200,
-						responseBody = {
-							shouldPromptSurvey = true,
-							surveyId = var1,
-							questions = list
-						}
-					})
 				end)
 			end)
 		end
 	end,
-	makeBranchingRequestImpl = function()
-		-- upvalues: list_1 (ref), promiseModule (ref)
-		local var1 = "dev-branching-survey"
+	makeBranchingRequestImpl = function() --[[ Line: 112 ]]
+		-- upvalues: Questions (copy), PromiseModule (copy)
+		local SurveyId = "dev-branching-survey"
 		
-		return function(p1, _, _)
-			-- upvalues: promiseModule (copy), var1 (ref), list_1 (ref)
-			return promiseModule.new(function(p2)
-				-- upvalues: p1 (ref), var1 (copy), list_1 (copy)
-				task.delay(0.4, function()
-					-- upvalues: p1 (copy), p2 (ref), var1 (copy), list_1 (copy)
-					if string.sub(p1, -16) == "/survey/response" then
-						p2({
+		return function(Text, _, _) --[[ Line: 83 ]]
+			-- upvalues: PromiseModule (upval), SurveyId (copy), Questions (copy)
+			return PromiseModule.new(function(Callback) --[[ Line: 84 ]]
+				-- upvalues: Text (copy), SurveyId (upval), Questions (upval)
+				task.delay(0.4, function() --[[ Line: 85 ]]
+					-- upvalues: Text (upval), Callback (copy), SurveyId (upval), Questions (upval)
+					if string.sub(Text, -16) == "/survey/response" then
+						Callback({
 							responseCode = 200,
 							responseBody = { responseId = "dev-response" }
 						})
 						
 						return
+					else
+						Callback({
+							responseCode = 200,
+							responseBody = {
+								shouldPromptSurvey = true,
+								surveyId = SurveyId,
+								questions = Questions
+							}
+						})
 					end
-					p2({
-						responseCode = 200,
-						responseBody = {
-							shouldPromptSurvey = true,
-							surveyId = var1,
-							questions = list_1
-						}
-					})
 				end)
 			end)
 		end
 	end,
 	QUESTIONS = list,
-	BRANCHING_QUESTIONS = list_1
+	BRANCHING_QUESTIONS = Questions
 }

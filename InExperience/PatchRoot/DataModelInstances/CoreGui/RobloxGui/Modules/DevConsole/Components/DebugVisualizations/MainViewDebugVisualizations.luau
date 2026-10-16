@@ -1,110 +1,110 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local components = script.Parent.Parent.Parent.Components
-local debugVisualizationsChartModule = require(components.DebugVisualizations.DebugVisualizationsChart)
-local utilAndTabModule = require(components.UtilAndTab)
-local debugVisualizationsUpdateSearchFilterModule = require(script.Parent.Parent.Parent.Actions.DebugVisualizationsUpdateSearchFilter)
-local constantsModule = require(script.Parent.Parent.Parent.Constants)
-local mainRowPadding = constantsModule.GeneralFormatting.MainRowPadding
-local list = {
+﻿local CorePackages = game:GetService("CorePackages")
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local Components = script.Parent.Parent.Parent.Components
+local DebugVisualizationsChartModule = require(Components.DebugVisualizations.DebugVisualizationsChart)
+local UtilAndTabModule = require(Components.UtilAndTab)
+local DebugVisualizationsUpdateSearchFilterModule = require(script.Parent.Parent.Parent.Actions.DebugVisualizationsUpdateSearchFilter)
+local ConstantsModule = require(script.Parent.Parent.Parent.Constants)
+local MainRowPadding = ConstantsModule.GeneralFormatting.MainRowPadding
+local Names = {
 	"Performance", "Behavior", "Constraints", "Forces", "Networking", "Collision"
 }
-local mainViewDebugVisualizations = roactModule.Component:extend("MainViewDebugVisualizations")
+local MainViewDebugVisualizations = RoactModule.Component:extend("MainViewDebugVisualizations")
 
-function mainViewDebugVisualizations.init(p1)
-	-- upvalues: roactModule (ref)
-	function p0.onUtilTabHeightChanged(p2)
-		-- upvalues: p1 (ref)
-		p1:setState({ utilTabHeight = p2 })
+function MainViewDebugVisualizations.init(p1) --[[ Line: 26 ]]
+	-- upvalues: RoactModule (copy)
+	function p1.onUtilTabHeightChanged(UtilTabHeight) --[[ Line: 27 ]]
+		-- upvalues: p1 (copy)
+		p1:setState({ utilTabHeight = UtilTabHeight })
 	end
 	
-	function p0.onCheckboxChanged(p2, p3)
-		-- upvalues: p1 (ref)
+	function p1.onCheckboxChanged(p2, p3) --[[ Line: 33 ]]
+		-- upvalues: p1 (copy)
 		p1.props.dispatchDebugVisualizationsUpdateSearchFilter(nil, { [p2] = p3 })
 	end
 	
-	function p0.onSearchTermChanged(p2)
-		-- upvalues: p1 (ref)
+	function p1.onSearchTermChanged(p2) --[[ Line: 39 ]]
+		-- upvalues: p1 (copy)
 		p1.props.dispatchDebugVisualizationsUpdateSearchFilter(p2, {})
 	end
 	
-	p1.utilRef = roactModule.createRef()
+	p1.utilRef = RoactModule.createRef()
 	p1.state = { utilTabHeight = 0 }
 end
 
-function mainViewDebugVisualizations.didMount(p1)
+function MainViewDebugVisualizations.didMount(p1) --[[ Line: 50 ]]
 	p1:setState({ utilTabHeight = p1.utilRef.current.Size.Y.Offset })
 end
 
-function mainViewDebugVisualizations.didUpdate(p1)
-	local size = p1.utilRef.current.Size
+function MainViewDebugVisualizations.didUpdate(p1) --[[ Line: 57 ]]
+	local Size = p1.utilRef.current.Size
 	
-	if size.Y.Offset ~= p1.state.utilTabHeight then
-		p1:setState({ utilTabHeight = size.Y.Offset })
+	if Size.Y.Offset ~= p1.state.utilTabHeight then
+		p1:setState({ utilTabHeight = Size.Y.Offset })
 	end
 end
 
-function mainViewDebugVisualizations.render(p1)
-	-- upvalues: list (ref), roactModule (ref), constantsModule (ref), mainRowPadding (ref), utilAndTabModule (ref), debugVisualizationsChartModule (ref)
-	local size = p1.props.size
-	local formFactor = p1.props.formFactor
-	local tabList = p1.props.tabList
-	local debugVisualizationsSearchTerm = p1.props.debugVisualizationsSearchTerm
-	local debugVisualizationsTypeFilters = p1.props.debugVisualizationsTypeFilters
-	local utilTabHeight = p1.state.utilTabHeight
-	local t = {}
+function MainViewDebugVisualizations.render(p1) --[[ Line: 66 ]]
+	-- upvalues: Names (copy), RoactModule (copy), ConstantsModule (copy), MainRowPadding (copy), UtilAndTabModule (copy), DebugVisualizationsChartModule (copy)
+	local Size = p1.props.size
+	local FormFactor = p1.props.formFactor
+	local TabList = p1.props.tabList
+	local DebugVisualizationsSearchTerm = p1.props.debugVisualizationsSearchTerm
+	local DebugVisualizationsTypeFilters = p1.props.debugVisualizationsTypeFilters
+	local UtilTabHeight: number = p1.state.utilTabHeight
+	local OrderedCheckboxState = {}
 	
-	for i, v in ipairs(list) do
-		local var1 = debugVisualizationsTypeFilters[v]
+	for i, name in ipairs(Names) do
+		local DebugVisualizationsTypeFilter = DebugVisualizationsTypeFilters[name]
 		
-		if var1 == nil then
-			var1 = false
+		if DebugVisualizationsTypeFilter == nil then
+			DebugVisualizationsTypeFilter = false
 		end
-		t[i] = { name = v, state = var1 }
+		OrderedCheckboxState[i] = { name = name, state = DebugVisualizationsTypeFilter }
 	end
-	return roactModule.createElement("Frame", {
+	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		LayoutOrder = 3,
-		Size = size,
-		BackgroundColor3 = constantsModule.Color.BaseGray
+		Size = Size,
+		BackgroundColor3 = ConstantsModule.Color.BaseGray
 	}, {
-		UIListLayout = roactModule.createElement("UIListLayout", {
-			Padding = UDim.new(0, mainRowPadding),
+		UIListLayout = RoactModule.createElement("UIListLayout", {
+			Padding = UDim.new(0, MainRowPadding),
 			SortOrder = Enum.SortOrder.LayoutOrder
 		}),
-		UtilAndTab = roactModule.createElement(utilAndTabModule, {
+		UtilAndTab = RoactModule.createElement(UtilAndTabModule, {
 			layoutOrder = 1,
-			windowWidth = size.X.Offset,
-			formFactor = formFactor,
-			tabList = tabList,
-			orderedCheckboxState = t,
-			searchTerm = debugVisualizationsSearchTerm,
+			windowWidth = Size.X.Offset,
+			formFactor = FormFactor,
+			tabList = TabList,
+			orderedCheckboxState = OrderedCheckboxState,
+			searchTerm = DebugVisualizationsSearchTerm,
 			refForParent = p1.utilRef,
 			onHeightChanged = p1.onUtilTabHeightChanged,
 			onCheckboxChanged = p1.onCheckboxChanged,
 			onSearchTermChanged = p1.onSearchTermChanged
 		}),
-		DebugVisualizations = utilTabHeight > 0 and roactModule.createElement(debugVisualizationsChartModule, {
+		DebugVisualizations = UtilTabHeight > 0 and RoactModule.createElement(DebugVisualizationsChartModule, {
 			layoutOrder = 2,
-			size = UDim2.new(1, 0, 1, -utilTabHeight),
-			searchTerm = debugVisualizationsSearchTerm,
-			typeFilters = debugVisualizationsTypeFilters
+			size = UDim2.new(1, 0, 1, -UtilTabHeight),
+			searchTerm = DebugVisualizationsSearchTerm,
+			typeFilters = DebugVisualizationsTypeFilters
 		})
 	})
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p2, _)
+return RoactRoduxModule.UNSTABLE_connect2(function(p2, _) --[[ Line: 121 | Named "mapStateToProps" ]]
 	return {
 		debugVisualizationsSearchTerm = p2.DebugVisualizationsData.debugVisualizationsSearchTerm,
 		debugVisualizationsTypeFilters = p2.DebugVisualizationsData.debugVisualizationsTypeFilters
 	}
-end, function(p2)
-	-- upvalues: debugVisualizationsUpdateSearchFilterModule (ref)
+end, function(Callback) --[[ Line: 128 | Named "mapDispatchToProps" ]]
+	-- upvalues: DebugVisualizationsUpdateSearchFilterModule (copy)
 	return {
-		dispatchDebugVisualizationsUpdateSearchFilter = function(p3, p4)
-			-- upvalues: p2 (ref), debugVisualizationsUpdateSearchFilterModule (copy)
-			p2(debugVisualizationsUpdateSearchFilterModule(p3, p4))
+		dispatchDebugVisualizationsUpdateSearchFilter = function(p2, p3) --[[ Line: 130 ]]
+			-- upvalues: Callback (copy), DebugVisualizationsUpdateSearchFilterModule (upval)
+			Callback(DebugVisualizationsUpdateSearchFilterModule(p2, p3))
 		end
 	}
-end)(mainViewDebugVisualizations)
+end)(MainViewDebugVisualizations)

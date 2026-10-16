@@ -1,48 +1,48 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceCommon").Parent
-local signalsModule = require(parent.Signals)
-local otterModule = require(parent.Otter)
-local t = {
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceCommon").Parent
+local SignalsModule = require(Parent.Signals)
+local OtterModule = require(Parent.Otter)
+local config = {
 	dampingRatio = 1,
 	frequency = 3,
 	restingVelocityLimit = 0.1,
 	restingPositionLimit = 0.1
 }
 
-return function(p1)
-	-- upvalues: signalsModule (ref), otterModule (ref), t (ref)
-	p1 = p1 or 1
-	local var1, var2 = signalsModule.createSignal(p1)
-	local var3, var4 = signalsModule.createSignal(false)
-	local var5, var6 = signalsModule.createSignal(p1 > 0.5)
-	local var7 = otterModule.createSingleMotor(p1)
-	var7:onStep(function(p2)
-		-- upvalues: var2 (ref)
-		var2(p2)
+return function(p1) --[[ Line: 38 | Named "createAnimatedVisibilityStore" ]]
+	-- upvalues: SignalsModule (copy), OtterModule (copy), config (copy)
+	local P0 = p1 or 1
+	local Signal, Signal2 = SignalsModule.createSignal(P0)
+	local Signal1, Signal2_1 = SignalsModule.createSignal(false)
+	local Signal3, Signal2_2 = SignalsModule.createSignal(P0 > 0.5)
+	local SingleMotor = OtterModule.createSingleMotor(P0)
+	SingleMotor:onStep(function(p2) --[[ Line: 51 ]]
+		-- upvalues: Signal2 (copy)
+		Signal2(p2)
 	end)
-	var7:onComplete(function()
-		-- upvalues: var4 (ref)
-		var4(false)
+	SingleMotor:onComplete(function() --[[ Line: 55 ]]
+		-- upvalues: Signal2_1 (copy)
+		Signal2_1(false)
 	end)
 	
 	return {
-		getVisibilityRatio = var1,
-		getIsVisible = var5,
-		getIsAnimating = var3,
-		show = function()
-			-- upvalues: var6 (ref), var4 (ref), var7 (ref), otterModule (copy), t (ref)
-			var6(true)
-			var4(true)
-			var7:setGoal(otterModule.spring(1, t))
+		getVisibilityRatio = Signal,
+		getIsVisible = Signal3,
+		getIsAnimating = Signal1,
+		show = function() --[[ Line: 60 ]]
+			-- upvalues: Signal2_2 (copy), Signal2_1 (copy), SingleMotor (copy), OtterModule (upval), config (copy)
+			Signal2_2(true)
+			Signal2_1(true)
+			SingleMotor:setGoal(OtterModule.spring(1, config))
 		end,
-		hide = function()
-			-- upvalues: var6 (ref), var4 (ref), var7 (ref), otterModule (copy), t (ref)
-			var6(false)
-			var4(true)
-			var7:setGoal(otterModule.spring(0, t))
+		hide = function() --[[ Line: 67 ]]
+			-- upvalues: Signal2_2 (copy), Signal2_1 (copy), SingleMotor (copy), OtterModule (upval), config (copy)
+			Signal2_2(false)
+			Signal2_1(true)
+			SingleMotor:setGoal(OtterModule.spring(0, config))
 		end,
-		destroy = function()
-			-- upvalues: var7 (ref)
-			var7:destroy()
+		destroy = function() --[[ Line: 73 ]]
+			-- upvalues: SingleMotor (copy)
+			SingleMotor:destroy()
 		end
 	}
 end

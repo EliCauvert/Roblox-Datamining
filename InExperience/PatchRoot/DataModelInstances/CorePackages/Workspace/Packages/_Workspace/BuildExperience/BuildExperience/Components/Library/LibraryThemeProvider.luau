@@ -1,33 +1,35 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local useSelectedTheme = require(parent.RoactUtils).Hooks.useSelectedTheme
-local userGameSettingsService = UserSettings():GetService("UserGameSettings")
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local UseSelectedThemeFunction = require(Parent.RoactUtils).Hooks.useSelectedTheme
+local UserGameSettings = UserSettings():GetService("UserGameSettings")
 
-local function useReducedMotion()
-	-- upvalues: reactModule (ref), userGameSettingsService (ref)
-	local var1, var2 = reactModule.useState(userGameSettingsService.ReducedMotion)
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), userGameSettingsService (copy)
-		var2(userGameSettingsService.ReducedMotion)
-		local var3 = userGameSettingsService:GetPropertyChangedSignal("ReducedMotion"):Connect(function()
-			-- upvalues: var2 (copy), userGameSettingsService (copy)
-			var2(userGameSettingsService.ReducedMotion)
+local function useReducedMotion() --[[ Line: 15 ]]
+	-- upvalues: ReactModule (copy), UserGameSettings (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(UserGameSettings.ReducedMotion)
+	ReactModule.useEffect(function() --[[ Line: 17 ]]
+		-- upvalues: UseStateResult2 (copy), UserGameSettings (upval)
+		UseStateResult2(UserGameSettings.ReducedMotion)
+		local Connection = UserGameSettings:GetPropertyChangedSignal("ReducedMotion"):Connect(function() --[[ Line: 19 ]]
+			-- upvalues: UseStateResult2 (upval), UserGameSettings (upval)
+			UseStateResult2(UserGameSettings.ReducedMotion)
 		end)
 		
-		return function()
-			-- upvalues: var3 (ref)
-			var3:Disconnect()
+		return function() --[[ Line: 22 ]]
+			-- upvalues: Connection (copy)
+			Connection:Disconnect()
 		end
 	end, {})
 	
-	return var1
+	return UseStateResult
 end
 
-return function(p1)
-	-- upvalues: useSelectedTheme (ref), useReducedMotion (ref), reactModule (ref), foundationModule (ref)
-	return reactModule.createElement(foundationModule.FoundationProvider, {
-		colorMode = if useSelectedTheme() == "light" then foundationModule.Enums.ColorMode.Light else foundationModule.Enums.ColorMode.Dark,
+return function(p1) --[[ Line: 29 | Named "LibraryThemeProvider" ]]
+	-- upvalues: UseSelectedThemeFunction (copy), useReducedMotion (copy), ReactModule (copy), FoundationModule (copy)
+	local UseSelectedThemeResult = UseSelectedThemeFunction()
+	
+	return ReactModule.createElement(FoundationModule.FoundationProvider, {
+		colorMode = if UseSelectedThemeResult == "light" then FoundationModule.Enums.ColorMode.Light else FoundationModule.Enums.ColorMode.Dark,
 		overlayGui = { DisplayOrder = p1.displayOrder },
 		preferences = { reducedMotion = useReducedMotion() }
 	}, p1.children)

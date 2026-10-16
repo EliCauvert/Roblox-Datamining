@@ -1,68 +1,68 @@
-﻿local reactSceneUnderstanding = script:FindFirstAncestor("ReactSceneUnderstanding")
-local reactModule = require(reactSceneUnderstanding.Parent.React)
-local sceneUnderstandingModule = require(reactSceneUnderstanding.Parent.SceneUnderstanding)
-local sceneAnalysisContextModule = require(reactSceneUnderstanding.SceneAnalysisContext)
-local useCurrentCameraModule = require(reactSceneUnderstanding.useCurrentCamera)
-local useCameraStateModule = require(reactSceneUnderstanding.useCameraState)
-local enumsModule = require(reactSceneUnderstanding.enums)
-local getSourceAssetsInView = sceneUnderstandingModule.getSourceAssetsInView
-local getSourceAssetsInRange = sceneUnderstandingModule.getSourceAssetsInRange
-local useCallback = reactModule.useCallback
-local useEffect = reactModule.useEffect
+﻿local ReactSceneUnderstanding = script:FindFirstAncestor("ReactSceneUnderstanding")
+local ReactModule = require(ReactSceneUnderstanding.Parent.React)
+local SceneUnderstandingModule = require(ReactSceneUnderstanding.Parent.SceneUnderstanding)
+local SceneAnalysisContextModule = require(ReactSceneUnderstanding.SceneAnalysisContext)
+local UseCurrentCameraModule = require(ReactSceneUnderstanding.useCurrentCamera)
+local UseCameraStateModule = require(ReactSceneUnderstanding.useCameraState)
+local EnumsModule = require(ReactSceneUnderstanding.enums)
+local GetSourceAssetsInViewFunction = SceneUnderstandingModule.getSourceAssetsInView
+local GetSourceAssetsInRangeFunction = SceneUnderstandingModule.getSourceAssetsInRange
+local UseCallbackFunction = ReactModule.useCallback
+local UseEffectFunction = ReactModule.useEffect
 
-return function(value)
-	-- upvalues: useCurrentCameraModule (ref), sceneAnalysisContextModule (ref), useCameraStateModule (ref), useCallback (ref), getSourceAssetsInView (ref), getSourceAssetsInRange (ref), useEffect (ref), sceneUnderstandingModule (ref), enumsModule (ref)
-	local var1 = useCurrentCameraModule()
-	local var2 = sceneAnalysisContextModule.use()
-	local var3 = useCameraStateModule(var1)
-	local var4 = useCallback(function(p1, p2)
-		if #p2 ~= #p1 then
+return function(p1) --[[ Line: 18 | Named "useSourceAssets" ]]
+	-- upvalues: UseCurrentCameraModule (copy), SceneAnalysisContextModule (copy), UseCameraStateModule (copy), UseCallbackFunction (copy), GetSourceAssetsInViewFunction (copy), GetSourceAssetsInRangeFunction (copy), UseEffectFunction (copy), SceneUnderstandingModule (copy), EnumsModule (copy)
+	local UseCurrentCameraModuleResult = UseCurrentCameraModule()
+	local UseResult = SceneAnalysisContextModule.use()
+	local UseCameraStateModuleResult = UseCameraStateModule(UseCurrentCameraModuleResult)
+	local UseCallbackResult = UseCallbackFunction(function(List1, List): boolean --[[ Line: 27 ]]
+		if #List ~= #List1 then
 			return true
 		end
-		for i, v in p1 do
-			if not table.find(p2, v) then
+		for _, value in List1 do
+			if not table.find(List, value) then
 				return true
 			end
 		end
 		return false
 	end, {})
-	local var5 = useCallback(function()
-		-- upvalues: getSourceAssetsInView (copy), var1 (ref), value (ref), var2 (ref), var4 (ref), getSourceAssetsInRange (copy)
-		local var6 = getSourceAssetsInView(var1, if value then value.viewportQueryOptions else nil)
-		var2.setAssetsInView(function(p3)
-			-- upvalues: var4 (copy), var6 (ref)
-			return if var4(p3, var6) then var6 else p3
+	local UseCallbackResult1 = UseCallbackFunction(function() --[[ Line: 41 ]]
+		-- upvalues: GetSourceAssetsInViewFunction (upval), UseCurrentCameraModuleResult (copy), p1 (copy), UseResult (copy), UseCallbackResult (copy), GetSourceAssetsInRangeFunction (upval)
+		local SourceAssetsInView = GetSourceAssetsInViewFunction(UseCurrentCameraModuleResult, if p1 then p1.viewportQueryOptions else nil)
+		UseResult.setAssetsInView(function(p2) --[[ Line: 43 ]]
+			-- upvalues: UseCallbackResult (upval), SourceAssetsInView (copy)
+			return if UseCallbackResult(p2, SourceAssetsInView) then SourceAssetsInView else p2
 		end)
-		local var7 = getSourceAssetsInRange(var1.CFrame.Position, if value then value.rangeQueryOptions else nil)
-		var2.setAssetsInRange(function(p3)
-			-- upvalues: var4 (copy), var7 (ref)
-			return if var4(p3, var7) then var7 else p3
+		local SourceAssetsInRange = GetSourceAssetsInRangeFunction(UseCurrentCameraModuleResult.CFrame.Position, if p1 then p1.rangeQueryOptions else nil)
+		UseResult.setAssetsInRange(function(p2) --[[ Line: 49 ]]
+			-- upvalues: UseCallbackResult (upval), SourceAssetsInRange (copy)
+			return if UseCallbackResult(p2, SourceAssetsInRange) then SourceAssetsInRange else p2
 		end)
-	end, { var1, value, var2 })
-	useEffect(function()
-		-- upvalues: sceneUnderstandingModule (copy), var5 (ref)
-		local descendantAddedConnection = workspace.DescendantAdded:Connect(function(p3)
-			-- upvalues: sceneUnderstandingModule (copy), var5 (copy)
-			if sceneUnderstandingModule.isSourceAsset(p3) then
-				var5()
+	end, { UseCurrentCameraModuleResult, p1, UseResult })
+	UseEffectFunction(function() --[[ Line: 54 ]]
+		-- upvalues: SceneUnderstandingModule (upval), UseCallbackResult1 (copy)
+		local DescendantAddedConnection = workspace.DescendantAdded:Connect(function(Descendant) --[[ Line: 55 ]]
+			-- upvalues: SceneUnderstandingModule (upval), UseCallbackResult1 (upval)
+			if SceneUnderstandingModule.isSourceAsset(Descendant) then
+				UseCallbackResult1()
 			end
 		end)
-		var5()
+		UseCallbackResult1()
 		
-		return function()
-			-- upvalues: descendantAddedConnection (ref)
-			descendantAddedConnection:Disconnect()
+		return function() --[[ Line: 63 ]]
+			-- upvalues: DescendantAddedConnection (copy)
+			DescendantAddedConnection:Disconnect()
 		end
-	end, { var5 })
-	useEffect(function()
-		-- upvalues: var3 (ref), enumsModule (copy), var5 (ref)
-		if var3 == enumsModule.CameraState.Idle then
-			var5()
+	end, { UseCallbackResult1 })
+	UseEffectFunction(function() --[[ Line: 68 ]]
+		-- upvalues: UseCameraStateModuleResult (copy), EnumsModule (upval), UseCallbackResult1 (copy)
+		if UseCameraStateModuleResult == EnumsModule.CameraState.Idle then
+			UseCallbackResult1()
 		end
-	end, { var3 })
+	end, { UseCameraStateModuleResult })
 	
 	return {
-		assetsInRange = var2.assetsInRange,
-		assetsInView = var2.assetsInView
+		assetsInRange = UseResult.assetsInRange,
+		assetsInView = UseResult.assetsInView
 	}
 end

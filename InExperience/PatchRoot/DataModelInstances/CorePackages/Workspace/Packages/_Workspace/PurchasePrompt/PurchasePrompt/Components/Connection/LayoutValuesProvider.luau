@@ -1,11 +1,11 @@
-﻿local purchasePrompt = script:FindFirstAncestor("PurchasePrompt")
-local roact = require(purchasePrompt.Parent.PurchasePromptDeps).Roact
-local layoutValuesModule = require(purchasePrompt.Services.LayoutValues)
-local layoutValuesContextModule = require(script.Parent.LayoutValuesContext)
+﻿local PurchasePrompt = script:FindFirstAncestor("PurchasePrompt")
+local Roact = require(PurchasePrompt.Parent.PurchasePromptDeps).Roact
+local LayoutValuesModule = require(PurchasePrompt.Services.LayoutValues)
+local LayoutValuesContextModule = require(script.Parent.LayoutValuesContext)
 
-return function(p1)
-	-- upvalues: layoutValuesModule (ref), roact (ref), layoutValuesContextModule (ref)
-	return roact.createElement(layoutValuesContextModule.Provider, {
-		value = layoutValuesModule.new(p1.isTenFootInterface).layout
-	}, roact.oneChild(p1[roact.Children]))
+return function(p1) --[[ Line: 15 ]]
+	-- upvalues: LayoutValuesModule (copy), Roact (copy), LayoutValuesContextModule (copy)
+	return Roact.createElement(LayoutValuesContextModule.Provider, {
+		value = LayoutValuesModule.new(p1.isTenFootInterface).layout
+	}, Roact.oneChild(p1[Roact.Children]))
 end

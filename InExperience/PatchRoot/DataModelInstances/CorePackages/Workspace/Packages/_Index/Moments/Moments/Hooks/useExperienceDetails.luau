@@ -1,34 +1,32 @@
-﻿local parent = script:FindFirstAncestor("Moments").Parent
-local signalsModule = require(parent.Signals)
-local gameGetGameInfoStoreModule = require(parent.DataHydration.GameGetGameInfoStore)
-local useSignalState = require(parent.SignalsReact).useSignalState
-local t = { name = nil, creatorName = nil, isCreatorVerified = false }
-local var1 = signalsModule.createComputed(function()
+﻿local Parent = script:FindFirstAncestor("Moments").Parent
+local GameGetGameInfoStoreModule = require(Parent.DataHydration.GameGetGameInfoStore)
+local FFlagMomentsServeEDPVideos = require(Parent.SharedFlags).FFlagMomentsServeEDPVideos
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local config = {
+	name = nil,
+	creatorName = nil,
+	isCreatorVerified = false,
+	rootPlaceId = nil
+}
+local Computed = require(Parent.Signals).createComputed(function() --[[ Line: 36 ]]
 	return nil
 end)
 
-return function(p1)
-	-- upvalues: gameGetGameInfoStoreModule (ref), var1 (ref), useSignalState (ref), t (ref)
-	local var2 = if p1 and p1 ~= 0 then tostring(p1) else nil
-	local var3 = useSignalState(if var2 then gameGetGameInfoStoreModule(false).getAndFetchGameInfo(var2).data else var1)
+return function(p1) --[[ Line: 40 ]]
+	-- upvalues: GameGetGameInfoStoreModule (copy), Computed (copy), UseSignalStateFunction (copy), config (copy), FFlagMomentsServeEDPVideos (copy)
+	local Text = if p1 and p1 ~= 0 then tostring(p1) else nil
+	local UseSignalStateResult = UseSignalStateFunction(if Text then GameGetGameInfoStoreModule(false).getAndFetchGameInfo(Text).data else Computed)
 	
-	if var3 == nil then
-		return t
-	end
-	local var4
-	local creator = var3.creator
-	local t_1 = {
-		name = var3.name,
-		creatorName = if creator then creator.name else nil
-	}
-	
-	if creator then
-		var4 = creator.hasVerifiedBadge == true
-		var4 = nil
+	if UseSignalStateResult == nil then
+		return config
 	else
-		var4 = false
+		local Creator = UseSignalStateResult.creator
+		
+		return {
+			name = UseSignalStateResult.name,
+			creatorName = if Creator then Creator.name else nil,
+			isCreatorVerified = if Creator then Creator.hasVerifiedBadge == true else false,
+			rootPlaceId = if FFlagMomentsServeEDPVideos then tonumber(UseSignalStateResult.rootPlaceId) else nil
+		}
 	end
-	t_1.isCreatorVerified = var4
-	
-	return t_1
 end

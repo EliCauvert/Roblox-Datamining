@@ -1,19 +1,22 @@
-﻿local parent = script.Parent.Parent.Parent
-local dependenciesModule = require(parent.dependencies)
-local parent_1 = parent.Parent
-local contactsListContainerModule = require(script.ContactsListContainer)
-local offPlatformFriendRequestsIXPModule = require(parent.Flags.OffPlatformFriendRequestsIXP)
-local dash = dependenciesModule.Dash
-local roact = dependenciesModule.Roact
-local useNavigation = dependenciesModule.useNavigation
-local fFlagContactImporterIXPCleanup = require(parent_1.SharedFlags).FFlagContactImporterIXPCleanup
+﻿local Parent = script.Parent.Parent.Parent
+local DependenciesModule = require(Parent.dependencies)
+local ContactsListContainerModule = require(script.ContactsListContainer)
+local OffPlatformFriendRequestsIXPModule = require(Parent.Flags.OffPlatformFriendRequestsIXP)
+local Dash = DependenciesModule.Dash
+local Roact = DependenciesModule.Roact
+local UseNavigationFunction = DependenciesModule.useNavigation
+local FFlagContactImporterIXPCleanup = require(Parent.Parent.SharedFlags).FFlagContactImporterIXPCleanup
 
-function ContactsList(p1)
-	-- upvalues: useNavigation (ref), fFlagContactImporterIXPCleanup (ref), offPlatformFriendRequestsIXPModule (ref), roact (ref), contactsListContainerModule (ref), dash (ref)
-	local var1 = useNavigation()
-	local var2 = if fFlagContactImporterIXPCleanup then nil else offPlatformFriendRequestsIXPModule.useOffPlatformFriendRequestsVariant()
+function ContactsList(p1) --[[ Line: 15 ]]
+	-- upvalues: UseNavigationFunction (copy), FFlagContactImporterIXPCleanup (copy), OffPlatformFriendRequestsIXPModule (copy), Roact (copy), ContactsListContainerModule (copy), Dash (copy)
+	local UseNavigationResult = UseNavigationFunction()
+	local UseOffPlatformFriendRequestsVariantResult = if FFlagContactImporterIXPCleanup then nil else OffPlatformFriendRequestsIXPModule.useOffPlatformFriendRequestsVariant()
 	
-	return if fFlagContactImporterIXPCleanup then roact.createElement(contactsListContainerModule, dash.join({ navigation = var1 }, p1 or {})) elseif var2 == offPlatformFriendRequestsIXPModule.IXPVariants.BLENDED or var2 == offPlatformFriendRequestsIXPModule.IXPVariants.INVITES_ONLY then roact.createElement(contactsListContainerModule, dash.join({ isPVRequired = false, variant = var2, navigation = var1 }, p1 or {})) else nil
+	return if FFlagContactImporterIXPCleanup then Roact.createElement(ContactsListContainerModule, Dash.join({ navigation = UseNavigationResult }, p1 or {})) elseif UseOffPlatformFriendRequestsVariantResult == OffPlatformFriendRequestsIXPModule.IXPVariants.BLENDED or UseOffPlatformFriendRequestsVariantResult == OffPlatformFriendRequestsIXPModule.IXPVariants.INVITES_ONLY then Roact.createElement(ContactsListContainerModule, Dash.join({
+		isPVRequired = false,
+		variant = UseOffPlatformFriendRequestsVariantResult,
+		navigation = UseNavigationResult
+	}, p1 or {})) else nil
 end
 
 return ContactsList

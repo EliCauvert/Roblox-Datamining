@@ -1,10 +1,10 @@
-﻿local abuseReportMenu = script:FindFirstAncestor("AbuseReportMenu")
-local _ = require(abuseReportMenu.Components.Types)
-local menuConfigs = abuseReportMenu.MenuConfigs
+﻿local AbuseReportMenu = script:FindFirstAncestor("AbuseReportMenu")
+local _ = require(AbuseReportMenu.Components.Types)
+local MenuConfigs = AbuseReportMenu.MenuConfigs
 
 return {
-	require(menuConfigs.Experience.AbuseReasonMenuConfig),
-	require(menuConfigs.Experience.OptionalAttachScreenshotMenuConfig),
-	require(menuConfigs.Experience.FreeFormCommentMenuConfig),
-	require(menuConfigs.Experience.SubmitReportButtonMenuConfig)
+	require(MenuConfigs.Experience.AbuseReasonMenuConfig),
+	require(MenuConfigs.Experience.OptionalAttachScreenshotMenuConfig),
+	require(MenuConfigs.Experience.FreeFormCommentMenuConfig),
+	(require(MenuConfigs.Experience.SubmitReportButtonMenuConfig))
 }

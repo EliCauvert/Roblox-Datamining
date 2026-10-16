@@ -1,298 +1,311 @@
-﻿local expChat = script:FindFirstAncestor("ExpChat")
-local parent = expChat.Parent
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local foundationModule = require(parent.Foundation)
-local coachmark = foundationModule.Coachmark
-local popoverSide = foundationModule.Enums.PopoverSide
-local popoverAlign = foundationModule.Enums.PopoverAlign
-local fFlagExpChatUseUnifiedTooltipStore = require(parent.ExpChatShared).Flags.FFlagExpChatUseUnifiedTooltipStore
-local localizationModule = require(expChat.Localization)
-local configModule = require(expChat.Config)
-local isUserChatEnabledModule = require(expChat.isUserChatEnabled)
-local getTransparencyStoreModule = require(expChat.Stores.GetTransparencyStore)
-local getGlobalChatTooltipStoreModule = require(expChat.Stores.GetGlobalChatTooltipStore)
-local getChatTooltipStoreModule = require(expChat.Stores.GetChatTooltipStore)
-local useChatTooltipLifecycleModule = require(script.Parent.Parent.useChatTooltipLifecycle)
-local fFlagExpChatGlobalTabDefaultModule = require(expChat.Flags.FFlagExpChatGlobalTabDefault)
-local minTabWidth = configModule.ChannelTabsSettings.MinTabWidth
-local dropdownIconContainerWidth = configModule.ChannelTabsSettings.DropdownIconContainerWidth
+﻿local ExpChat = script:FindFirstAncestor("ExpChat")
+local Parent = ExpChat.Parent
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local FoundationModule = require(Parent.Foundation)
+local Coachmark = FoundationModule.Coachmark
+local PopoverSide = FoundationModule.Enums.PopoverSide
+local PopoverAlign = FoundationModule.Enums.PopoverAlign
+local FFlagExpChatUseUnifiedTooltipStore = require(Parent.ExpChatShared).Flags.FFlagExpChatUseUnifiedTooltipStore
+local FFlagExpChatUseChannelTabsStore = require(Parent.SharedFlags).FFlagExpChatUseChannelTabsStore
+local LocalizationModule = require(ExpChat.Localization)
+local ConfigModule = require(ExpChat.Config)
+local IsUserChatEnabledModule = require(ExpChat.isUserChatEnabled)
+local GetTransparencyStoreModule = require(ExpChat.Stores.GetTransparencyStore)
+local GetGlobalChatTooltipStoreModule = require(ExpChat.Stores.GetGlobalChatTooltipStore)
+local GetChatTooltipStoreModule = require(ExpChat.Stores.GetChatTooltipStore)
+local GetChannelTabsStoreModule = if FFlagExpChatUseChannelTabsStore then require(ExpChat.Stores.GetChannelTabsStore) else nil
+local UseChatTooltipLifecycleModule = require(script.Parent.Parent.useChatTooltipLifecycle)
+local FFlagExpChatGlobalTabDefaultModule = require(ExpChat.Flags.FFlagExpChatGlobalTabDefault)
+local MinTabWidth = ConfigModule.ChannelTabsSettings.MinTabWidth
+local DropdownIconContainerWidth = ConfigModule.ChannelTabsSettings.DropdownIconContainerWidth
 
-local function _()
-	-- upvalues: useSelector (ref)
-	return useSelector(function(p1)
-		local allChannelTabs = p1.ChannelTabs and p1.ChannelTabs.allChannelTabs
-		local RBXGlobal = allChannelTabs and allChannelTabs.RBXGlobal
+local function useGlobalTabIndex() --[[ Line: 47 ]]
+	-- upvalues: FFlagExpChatUseChannelTabsStore (copy), ReactModule (copy), SignalsModule (copy), GetChannelTabsStoreModule (copy), SignalsReactModule (copy), UseSelectorFunction (copy)
+	return if FFlagExpChatUseChannelTabsStore then SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 49 ]]
+		-- upvalues: SignalsModule (upval), GetChannelTabsStoreModule (upval)
+		return SignalsModule.createComputed(function(p1) --[[ Line: 50 ]]
+			-- upvalues: GetChannelTabsStoreModule (upval)
+			local RBXGlobal = GetChannelTabsStoreModule(false).getChannelTabsState(p1).allChannelTabs.RBXGlobal
+			
+			return if RBXGlobal then RBXGlobal.tabIndex else 2
+		end)
+	end, {}))) else UseSelectorFunction(function(p1) --[[ Line: 58 ]]
+		local AllChannelTabs = p1.ChannelTabs and p1.ChannelTabs.allChannelTabs
+		local RBXGlobal = AllChannelTabs and AllChannelTabs.RBXGlobal
 		
 		return if RBXGlobal then RBXGlobal.TabIndex else 2
 	end)
 end
 
-local function GlobalChatTooltipNew(p1)
-	-- upvalues: getChatTooltipStoreModule (ref), signalsReactModule (ref), useSelector (ref), reactModule (ref), fFlagExpChatGlobalTabDefaultModule (ref), minTabWidth (ref), dropdownIconContainerWidth (ref), useChatTooltipLifecycleModule (ref), localizationModule (ref), coachmark (ref), popoverSide (ref), popoverAlign (ref), configModule (ref)
-	local var1
-	local var2 = signalsReactModule.useSignalState(getChatTooltipStoreModule(false).getShouldShow("GlobalChatTooltip"))
-	local var3 = useSelector(function(p2)
-		local allChannelTabs = p2.ChannelTabs and p2.ChannelTabs.allChannelTabs
+local function useTabCount() --[[ Line: 65 ]]
+	-- upvalues: FFlagExpChatUseChannelTabsStore (copy), ReactModule (copy), SignalsModule (copy), GetChannelTabsStoreModule (copy), SignalsReactModule (copy), UseSelectorFunction (copy)
+	return if FFlagExpChatUseChannelTabsStore then SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 67 ]]
+		-- upvalues: SignalsModule (upval), GetChannelTabsStoreModule (upval)
+		return SignalsModule.createComputed(function(p1): number --[[ Line: 68 ]]
+			-- upvalues: GetChannelTabsStoreModule (upval)
+			local Count = 0
+			
+			for _ in GetChannelTabsStoreModule(false).getChannelTabsState(p1).allChannelTabs do
+				Count += 1
+			end
+			return Count
+		end)
+	end, {}))) else UseSelectorFunction(function(p1): number --[[ Line: 79 ]]
+		local AllChannelTabs = p1.ChannelTabs and p1.ChannelTabs.allChannelTabs
 		
-		if allChannelTabs == nil then
+		if AllChannelTabs == nil then
 			return 0
 		end
-		local var4 = 0
+		local Count = 0
 		
-		for i in allChannelTabs do
-			var4 += 1
+		for _ in AllChannelTabs do
+			Count += 1
 		end
-		return var4
+		return Count
 	end)
-	local var5, var6 = reactModule.useState(0)
-	local var7 = if fFlagExpChatGlobalTabDefaultModule then useSelector(function(p3)
-		local allChannelTabs = p3.ChannelTabs and p3.ChannelTabs.allChannelTabs
-		local RBXGlobal = allChannelTabs and allChannelTabs.RBXGlobal
-		
-		return if RBXGlobal then RBXGlobal.TabIndex else 2
-	end) else 2
-	local var8 = var5 > 0 and var5 < var3 * minTabWidth
-	local _ = nil
+end
+
+local function GlobalChatTooltipNew(p1) --[[ Line: 94 ]]
+	-- upvalues: GetChatTooltipStoreModule (copy), SignalsReactModule (copy), useTabCount (copy), ReactModule (copy), FFlagExpChatGlobalTabDefaultModule (copy), useGlobalTabIndex (copy), MinTabWidth (copy), DropdownIconContainerWidth (copy), UseSelectorFunction (copy), UseChatTooltipLifecycleModule (copy), LocalizationModule (copy), Coachmark (copy), PopoverSide (copy), PopoverAlign (copy), ConfigModule (copy)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(GetChatTooltipStoreModule(false).getShouldShow("GlobalChatTooltip"))
+	local UseTabCountResult = useTabCount()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
+	local UseGlobalTabIndexResult = if FFlagExpChatGlobalTabDefaultModule then useGlobalTabIndex() else 2
+	local IsUseStateResultBelow: boolean = UseStateResult > 0 and UseStateResult < UseTabCountResult * MinTabWidth
+	local XScale = nil
 	
-	if var3 < var7 then
-		var1 = 1
-	elseif var8 then
-		local var9 = var5 - dropdownIconContainerWidth
-		local floored = math.floor(var9 / minTabWidth)
-		var1 = if var7 <= floored then var7 * var9 / (floored * var5) else 1
+	if UseTabCountResult < UseGlobalTabIndexResult then
+		XScale = 1
+	elseif IsUseStateResultBelow then
+		local UseStateResultDelta = UseStateResult - DropdownIconContainerWidth
+		local Floored = math.floor(UseStateResultDelta / MinTabWidth)
+		XScale = if UseGlobalTabIndexResult <= Floored then UseGlobalTabIndexResult * UseStateResultDelta / (Floored * UseStateResult) else 1
 	else
-		var1 = var7 / var3
+		XScale = UseGlobalTabIndexResult / UseTabCountResult
 	end
-	local var10 = useSelector(function(p3)
-		local alignment = p3.ChatLayout and p3.ChatLayout.Alignment
+	local UseSelectorResult = UseSelectorFunction(function(p2): boolean --[[ Line: 137 ]]
+		local Alignment = p2.ChatLayout and p2.ChatLayout.Alignment
 		
-		return alignment ~= nil and (alignment.AnchorPoint.X == 0 and alignment.AnchorPoint.Y == 0)
+		return Alignment ~= nil and (Alignment.AnchorPoint.X == 0 and Alignment.AnchorPoint.Y == 0)
 	end)
-	local var11 = useChatTooltipLifecycleModule({
+	local UseChatTooltipLifecycleModuleResult = UseChatTooltipLifecycleModule({
 		tooltipKey = "GlobalChatTooltip",
 		targetTextChannel = p1.targetTextChannel
 	})
-	local var12 = localizationModule.useLocalization({
+	local UseLocalizationResult = LocalizationModule.useLocalization({
 		headerText = "CoreScripts.TextChat.Tooltip.Global.Header",
 		bodyText = "CoreScripts.TextChat.Tooltip.Global.Body"
 	})
 	
-	if p1.visible and var2 and var10 then
-		local function onAnchorChanged(p3)
-			-- upvalues: var6 (ref)
-			local parent = p3.Parent
+	if p1.visible and UseSignalStateResult and UseSelectorResult then
+		local function onAnchorChanged(p2) --[[ Line: 156 ]]
+			-- upvalues: UseStateResult2 (copy)
+			local Parent = p2.Parent
 			
-			if parent and parent:IsA("GuiObject") then
-				var6(parent.AbsoluteSize.X)
+			if Parent and Parent:IsA("GuiObject") then
+				UseStateResult2(Parent.AbsoluteSize.X)
 			end
 		end
 		
-		return reactModule.createElement(coachmark, {
-			title = var12.headerText,
-			text = var12.bodyText,
-			isOpen = var11.isActive,
-			onClose = var11.onDismiss,
-			side = popoverSide.Right,
-			align = popoverAlign.Start,
+		return ReactModule.createElement(Coachmark, {
+			title = UseLocalizationResult.headerText,
+			text = UseLocalizationResult.bodyText,
+			isOpen = UseChatTooltipLifecycleModuleResult.isActive,
+			onClose = UseChatTooltipLifecycleModuleResult.onDismiss,
+			side = PopoverSide.Right,
+			align = PopoverAlign.Start,
 			AnchorPoint = Vector2.new(1, 0),
-			Position = UDim2.new(var1, -13, 0, -48),
+			Position = UDim2.new(XScale, -13, 0, -48),
 			onAbsoluteSizeChanged = onAnchorChanged,
 			onAbsolutePositionChanged = onAnchorChanged
 		}, {
-			AnchorSizer = reactModule.createElement("Frame", {
+			AnchorSizer = ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
-				Size = UDim2.new(0, 1, 0, configModule.ChannelTabsSettings.HorizontalBarHeight)
+				Size = UDim2.new(0, 1, 0, ConfigModule.ChannelTabsSettings.HorizontalBarHeight)
 			})
 		})
-	end
-	return nil
-end
-
-local function GlobalChatTooltipLegacy(p2)
-	-- upvalues: getGlobalChatTooltipStoreModule (ref), getTransparencyStoreModule (ref), signalsReactModule (ref), useSelector (ref), reactModule (ref), fFlagExpChatGlobalTabDefaultModule (ref), minTabWidth (ref), dropdownIconContainerWidth (ref), isUserChatEnabledModule (ref), configModule (ref), localizationModule (ref), coachmark (ref), popoverSide (ref), popoverAlign (ref)
-	local var4
-	local var5 = getGlobalChatTooltipStoreModule(false)
-	local var6 = getTransparencyStoreModule(false)
-	local var7 = signalsReactModule.useSignalState(var5.getShouldShowGlobalChatTooltip)
-	local var8 = signalsReactModule.useSignalState(var5.getIsScreenWideEnough)
-	local var9 = signalsReactModule.useSignalState(var6.getLastActivity)
-	local var10 = signalsReactModule.useSignalState(var6.getIsFocused or var6.getIsTextBoxFocused)
-	local var11 = useSelector(function(p3)
-		local allChannelTabs = p3.ChannelTabs and p3.ChannelTabs.allChannelTabs
-		
-		if allChannelTabs == nil then
-			return 0
-		end
-		local var12 = 0
-		
-		for i in allChannelTabs do
-			var12 += 1
-		end
-		return var12
-	end)
-	local var13, var14 = reactModule.useState(0)
-	local var15 = if fFlagExpChatGlobalTabDefaultModule then useSelector(function(p4)
-		local allChannelTabs = p4.ChannelTabs and p4.ChannelTabs.allChannelTabs
-		local RBXGlobal = allChannelTabs and allChannelTabs.RBXGlobal
-		
-		return if RBXGlobal then RBXGlobal.TabIndex else 2
-	end) else 2
-	local var16 = var13 > 0 and var13 < var11 * minTabWidth
-	local _ = nil
-	
-	if var11 < var15 then
-		var4 = 1
-	elseif var16 then
-		local var17 = var13 - dropdownIconContainerWidth
-		local floored = math.floor(var17 / minTabWidth)
-		var4 = if var15 <= floored then var15 * var17 / (floored * var13) else 1
 	else
-		var4 = var15 / var11
+		return nil
 	end
-	local var18 = useSelector(function(p4)
-		local alignment = p4.ChatLayout and p4.ChatLayout.Alignment
+end
+
+local function GlobalChatTooltipLegacy(p1) --[[ Line: 194 ]]
+	-- upvalues: GetGlobalChatTooltipStoreModule (copy), GetTransparencyStoreModule (copy), SignalsReactModule (copy), useTabCount (copy), ReactModule (copy), FFlagExpChatGlobalTabDefaultModule (copy), useGlobalTabIndex (copy), MinTabWidth (copy), DropdownIconContainerWidth (copy), UseSelectorFunction (copy), IsUserChatEnabledModule (copy), ConfigModule (copy), LocalizationModule (copy), Coachmark (copy), PopoverSide (copy), PopoverAlign (copy)
+	local GlobalChatTooltipStoreModule = GetGlobalChatTooltipStoreModule(false)
+	local TransparencyStoreModule = GetTransparencyStoreModule(false)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(GlobalChatTooltipStoreModule.getShouldShowGlobalChatTooltip)
+	local UseSignalStateResult1 = SignalsReactModule.useSignalState(GlobalChatTooltipStoreModule.getIsScreenWideEnough)
+	local UseSignalStateResult2 = SignalsReactModule.useSignalState(TransparencyStoreModule.getLastActivity)
+	local UseSignalStateResult3 = SignalsReactModule.useSignalState(TransparencyStoreModule.getIsFocused or TransparencyStoreModule.getIsTextBoxFocused)
+	local UseTabCountResult = useTabCount()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
+	local UseGlobalTabIndexResult = if FFlagExpChatGlobalTabDefaultModule then useGlobalTabIndex() else 2
+	local IsUseStateResultBelow: boolean = UseStateResult > 0 and UseStateResult < UseTabCountResult * MinTabWidth
+	local XScale = nil
+	
+	if UseTabCountResult < UseGlobalTabIndexResult then
+		XScale = 1
+	elseif IsUseStateResultBelow then
+		local UseStateResultDelta = UseStateResult - DropdownIconContainerWidth
+		local Floored = math.floor(UseStateResultDelta / MinTabWidth)
+		XScale = if UseGlobalTabIndexResult <= Floored then UseGlobalTabIndexResult * UseStateResultDelta / (Floored * UseStateResult) else 1
+	else
+		XScale = UseGlobalTabIndexResult / UseTabCountResult
+	end
+	local UseSelectorResult = UseSelectorFunction(function(p2): boolean --[[ Line: 243 ]]
+		local Alignment = p2.ChatLayout and p2.ChatLayout.Alignment
 		
-		return alignment ~= nil and (alignment.AnchorPoint.X == 0 and alignment.AnchorPoint.Y == 0)
+		return Alignment ~= nil and (Alignment.AnchorPoint.X == 0 and Alignment.AnchorPoint.Y == 0)
 	end)
-	local var19 = if p2.chatStatus ~= nil then isUserChatEnabledModule(p2.chatStatus) else true
-	local var20, var21 = reactModule.useState(true)
-	local var22, var23 = reactModule.useState(false)
-	local var24 = reactModule.useRef(false)
-	local var25 = reactModule.useRef(0)
-	local var26 = reactModule.useRef(p2.targetTextChannel)
-	local var27 = reactModule.useCallback(function()
-		-- upvalues: var24 (ref), var5 (ref)
-		if not var24.current then
-			var24.current = true
-			var5.reportImpression()
+	local NoChatStatus = p1.chatStatus == nil or IsUserChatEnabledModule(p1.chatStatus)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(true)
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(false)
+	local UseRefResult = ReactModule.useRef(false)
+	local UseRefResult1 = ReactModule.useRef(0)
+	local UseRefResult2 = ReactModule.useRef(p1.targetTextChannel)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 257 ]]
+		-- upvalues: UseRefResult (copy), GlobalChatTooltipStoreModule (copy)
+		if not UseRefResult.current then
+			UseRefResult.current = true
+			GlobalChatTooltipStoreModule.reportImpression()
 		end
-		var5.setIsGlobalChatTooltipDismissed(true)
+		GlobalChatTooltipStoreModule.setIsGlobalChatTooltipDismissed(true)
 	end, {
-		var5.setIsGlobalChatTooltipDismissed,
-		var5.reportImpression
+		GlobalChatTooltipStoreModule.setIsGlobalChatTooltipDismissed,
+		GlobalChatTooltipStoreModule.reportImpression
 	})
-	reactModule.useEffect(function()
-		-- upvalues: var5 (ref), p2 (ref)
-		var5.setIsChatWindowOpen(p2.visible)
+	ReactModule.useEffect(function() --[[ Line: 265 ]]
+		-- upvalues: GlobalChatTooltipStoreModule (copy), p1 (copy)
+		GlobalChatTooltipStoreModule.setIsChatWindowOpen(p1.visible)
 		
-		return function()
-			-- upvalues: var5 (copy)
-			var5.setIsChatWindowOpen(false)
+		return function() --[[ Line: 267 ]]
+			-- upvalues: GlobalChatTooltipStoreModule (upval)
+			GlobalChatTooltipStoreModule.setIsChatWindowOpen(false)
 		end
-	end, { p2.visible })
-	reactModule.useEffect(function()
-		-- upvalues: var10 (ref), var21 (ref), configModule (copy), var9 (ref)
-		if var10 then
-			var21(true)
+	end, { p1.visible })
+	ReactModule.useEffect(function() --[[ Line: 272 ]]
+		-- upvalues: UseSignalStateResult3 (copy), UseStateResult2_1 (copy), ConfigModule (upval), UseSignalStateResult2 (copy)
+		if UseSignalStateResult3 then
+			UseStateResult2_1(true)
 			
 			return nil
 		end
-		local var28 = configModule.ChatWindowBackgroundFadeOutTime - (os.clock() - var9)
+		local ChatWindowBackgroundFadeOutTimeDelta = ConfigModule.ChatWindowBackgroundFadeOutTime - (os.clock() - UseSignalStateResult2)
 		
-		if var28 <= 0 then
-			var21(false)
+		if ChatWindowBackgroundFadeOutTimeDelta <= 0 then
+			UseStateResult2_1(false)
 			
 			return nil
-		end
-		var21(true)
-		local delayedThread = task.delay(var28, function()
-			-- upvalues: var21 (copy)
-			var21(false)
-		end)
-		
-		return function()
-			-- upvalues: delayedThread (ref)
-			task.cancel(delayedThread)
-		end
-	end, { var9, var10 })
-	reactModule.useEffect(function()
-		-- upvalues: var20 (ref), var8 (ref), var22 (ref), var7 (ref), var19 (ref), var25 (ref), var23 (ref)
-		if var20 and var8 and not var22 and (var7 and var19) then
-			local processTime = os.clock()
-			local delayedThread = task.delay(math.max(0, 10 - var25.current), function()
-				-- upvalues: var23 (copy)
-				var23(true)
+		else
+			UseStateResult2_1(true)
+			local DelayedThread = task.delay(ChatWindowBackgroundFadeOutTimeDelta, function() --[[ Line: 286 ]]
+				-- upvalues: UseStateResult2_1 (upval)
+				UseStateResult2_1(false)
 			end)
 			
-			return function()
-				-- upvalues: var25 (copy), processTime (ref), delayedThread (ref)
-				var25.current += os.clock() - processTime
-				task.cancel(delayedThread)
+			return function() --[[ Line: 289 ]]
+				-- upvalues: DelayedThread (copy)
+				task.cancel(DelayedThread)
 			end
 		end
-		return nil
+	end, { UseSignalStateResult2, UseSignalStateResult3 })
+	ReactModule.useEffect(function() --[[ Line: 295 ]]
+		-- upvalues: UseStateResult1 (copy), UseSignalStateResult1 (copy), UseStateResult3 (copy), UseSignalStateResult (copy), NoChatStatus (copy), UseRefResult1 (copy), UseStateResult2_2 (copy)
+		if UseStateResult1 and UseSignalStateResult1 and not UseStateResult3 and UseSignalStateResult and NoChatStatus then
+			local ClockTime = os.clock()
+			local DelayedThread = task.delay(math.max(0, 10 - UseRefResult1.current), function() --[[ Line: 302 ]]
+				-- upvalues: UseStateResult2_2 (upval)
+				UseStateResult2_2(true)
+			end)
+			
+			return function() --[[ Line: 305 ]]
+				-- upvalues: UseRefResult1 (upval), ClockTime (copy), DelayedThread (copy)
+				UseRefResult1.current += os.clock() - ClockTime
+				task.cancel(DelayedThread)
+			end
+		else
+			return nil
+		end
 	end, {
-		var20,
-		var8,
-		var22,
-		var7,
-		var19
+		UseStateResult1,
+		UseSignalStateResult1,
+		UseStateResult3,
+		UseSignalStateResult,
+		NoChatStatus
 	})
-	reactModule.useEffect(function()
-		-- upvalues: var22 (ref), var27 (ref)
-		if var22 then
-			local delayedThread = task.delay(1, function()
-				-- upvalues: var27 (copy)
-				var27()
+	ReactModule.useEffect(function() --[[ Line: 312 ]]
+		-- upvalues: UseStateResult3 (copy), UseResult (copy)
+		if UseStateResult3 then
+			local DelayedThread = task.delay(1, function() --[[ Line: 316 ]]
+				-- upvalues: UseResult (upval)
+				UseResult()
 			end)
 			
-			return function()
-				-- upvalues: delayedThread (ref)
-				task.cancel(delayedThread)
+			return function() --[[ Line: 319 ]]
+				-- upvalues: DelayedThread (copy)
+				task.cancel(DelayedThread)
 			end
+		else
+			return nil
 		end
-		return nil
-	end, { var22, var27 })
-	reactModule.useEffect(function()
-		-- upvalues: var26 (ref), p2 (ref), var7 (ref), var19 (ref), var22 (ref), var23 (ref)
-		local current = var26.current
-		var26.current = p2.targetTextChannel
+	end, { UseStateResult3, UseResult })
+	ReactModule.useEffect(function() --[[ Line: 325 ]]
+		-- upvalues: UseRefResult2 (copy), p1 (copy), UseSignalStateResult (copy), NoChatStatus (copy), UseStateResult3 (copy), UseStateResult2_2 (copy)
+		local Current = UseRefResult2.current
+		UseRefResult2.current = p1.targetTextChannel
 		
-		if current and current ~= p2.targetTextChannel and (var7 and var19) and not var22 then
-			var23(true)
+		if Current and Current ~= p1.targetTextChannel and UseSignalStateResult and NoChatStatus and not UseStateResult3 then
+			UseStateResult2_2(true)
 		end
-	end, { p2.targetTextChannel, var7, var19, var22 })
-	local var28 = localizationModule.useLocalization({
+	end, {
+		p1.targetTextChannel,
+		UseSignalStateResult,
+		NoChatStatus,
+		UseStateResult3
+	})
+	local UseLocalizationResult = LocalizationModule.useLocalization({
 		headerText = "CoreScripts.TextChat.Tooltip.Global.Header",
 		bodyText = "CoreScripts.TextChat.Tooltip.Global.Body"
 	})
 	
-	if p2.visible and var7 and var18 then
-		local function onAnchorChanged(p4)
-			-- upvalues: var14 (ref)
-			local parent = p4.Parent
+	if p1.visible and UseSignalStateResult and UseSelectorResult then
+		local function onAnchorChanged(p2) --[[ Line: 346 ]]
+			-- upvalues: UseStateResult2 (copy)
+			local Parent = p2.Parent
 			
-			if parent and parent:IsA("GuiObject") then
-				var14(parent.AbsoluteSize.X)
+			if Parent and Parent:IsA("GuiObject") then
+				UseStateResult2(Parent.AbsoluteSize.X)
 			end
 		end
 		
-		return reactModule.createElement(coachmark, {
-			title = var28.headerText,
-			text = var28.bodyText,
-			isOpen = var20 and (var8 and not var22),
-			onClose = var27,
-			side = popoverSide.Right,
-			align = popoverAlign.Start,
+		return ReactModule.createElement(Coachmark, {
+			title = UseLocalizationResult.headerText,
+			text = UseLocalizationResult.bodyText,
+			isOpen = UseStateResult1 and (UseSignalStateResult1 and not UseStateResult3),
+			onClose = UseResult,
+			side = PopoverSide.Right,
+			align = PopoverAlign.Start,
 			AnchorPoint = Vector2.new(1, 0),
-			Position = UDim2.new(var4, -13, 0, -48),
+			Position = UDim2.new(XScale, -13, 0, -48),
 			onAbsoluteSizeChanged = onAnchorChanged,
 			onAbsolutePositionChanged = onAnchorChanged
 		}, {
-			AnchorSizer = reactModule.createElement("Frame", {
+			AnchorSizer = ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
-				Size = UDim2.new(0, 1, 0, configModule.ChannelTabsSettings.HorizontalBarHeight)
+				Size = UDim2.new(0, 1, 0, ConfigModule.ChannelTabsSettings.HorizontalBarHeight)
 			})
 		})
+	else
+		return nil
 	end
-	return nil
 end
 
-return function(p3)
-	-- upvalues: fFlagExpChatUseUnifiedTooltipStore (ref), GlobalChatTooltipNew (ref), GlobalChatTooltipLegacy (ref)
-	return if fFlagExpChatUseUnifiedTooltipStore then GlobalChatTooltipNew(p3) else GlobalChatTooltipLegacy(p3)
+return function(p1) --[[ Line: 382 | Named "GlobalChatTooltip" ]]
+	-- upvalues: FFlagExpChatUseUnifiedTooltipStore (copy), GlobalChatTooltipNew (copy), GlobalChatTooltipLegacy (copy)
+	return if FFlagExpChatUseUnifiedTooltipStore then GlobalChatTooltipNew(p1) else GlobalChatTooltipLegacy(p1)
 end

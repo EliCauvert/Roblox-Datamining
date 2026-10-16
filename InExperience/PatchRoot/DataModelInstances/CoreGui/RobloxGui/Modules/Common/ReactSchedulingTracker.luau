@@ -1,204 +1,205 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local runService = game:GetService("RunService")
-local reactSchedulingTracker = game:DefineFastInt("ReactSchedulingTracker", 0)
-local reactSchedulingTrackerPeriodMs = game:DefineFastInt("ReactSchedulingTrackerPeriodMs", 30000)
-local telemetryServiceMemoryCPUInfoEnabledEngineFeature = game:GetEngineFeature("TelemetryServiceMemoryCPUInfoEnabled")
-local disableReactSchedulingTimePctStats = game:DefineFastFlag("DisableReactSchedulingTimePctStats", false)
-local disableReactSchedulingAvgMaxMsStats = game:DefineFastFlag("DisableReactSchedulingAvgMaxMsStats", false)
-local fStringReactSchedulingContext = require(corePackagesService.Workspace.Packages.SharedFlags).FStringReactSchedulingContext
-local reactSchedulingPercentiles = game:DefineFastString("ReactSchedulingPercentiles", "10,50,95,99")
-local reactSchedulingKllSketchMaxSize = game:DefineFastInt("ReactSchedulingKllSketchMaxSize", 200)
-local debugReactSchedulingEnableErrorEvents = game:DefineFastFlag("DebugReactSchedulingEnableErrorEvents", false)
-local reactSchedulingTrackerLayoutEffects = game:DefineFastFlag("ReactSchedulingTrackerLayoutEffects", false)
-local reactSchedulingTrackerDataModelUpdate = game:DefineFastFlag("ReactSchedulingTrackerDataModelUpdate", false)
-local telemetryServicePlaySessionInfoEnabledEngineFeature = game:GetEngineFeature("TelemetryServicePlaySessionInfoEnabled")
-local enableCorescriptExecutionTime = game:DefineFastFlag("EnableCorescriptExecutionTime", false)
-local scriptPlusExecutionTimeEnabledEngineFeature = game:GetEngineFeature("ScriptPlusExecutionTimeEnabled")
+﻿local CorePackages = game:GetService("CorePackages")
+local RunService = game:GetService("RunService")
+local ReactSchedulingTracker: number = game:DefineFastInt("ReactSchedulingTracker", 0)
+local ReactSchedulingTrackerPeriodMs = game:DefineFastInt("ReactSchedulingTrackerPeriodMs", 30000)
+local TelemetryServiceMemoryCPUInfoEnabledEngineFeature = game:GetEngineFeature("TelemetryServiceMemoryCPUInfoEnabled")
+local DisableReactSchedulingTimePctStats = game:DefineFastFlag("DisableReactSchedulingTimePctStats", false)
+local DisableReactSchedulingAvgMaxMsStats = game:DefineFastFlag("DisableReactSchedulingAvgMaxMsStats", false)
+local FStringReactSchedulingContext = require(CorePackages.Workspace.Packages.SharedFlags).FStringReactSchedulingContext
+local ReactSchedulingPercentiles: string = game:DefineFastString("ReactSchedulingPercentiles", "10,50,95,99")
+local ReactSchedulingKllSketchMaxSize = game:DefineFastInt("ReactSchedulingKllSketchMaxSize", 200)
+local DebugReactSchedulingEnableErrorEvents = game:DefineFastFlag("DebugReactSchedulingEnableErrorEvents", false)
+local ReactSchedulingTrackerLayoutEffects = game:DefineFastFlag("ReactSchedulingTrackerLayoutEffects", false)
+local ReactSchedulingTrackerDataModelUpdate = game:DefineFastFlag("ReactSchedulingTrackerDataModelUpdate", false)
+local TelemetryServicePlaySessionInfoEnabledEngineFeature = game:GetEngineFeature("TelemetryServicePlaySessionInfoEnabled")
+local EnableCorescriptExecutionTime = game:DefineFastFlag("EnableCorescriptExecutionTime", false)
+local ScriptPlusExecutionTimeEnabledEngineFeature = game:GetEngineFeature("ScriptPlusExecutionTimeEnabled")
 
-function applicationId()
-	local appStorageService = game:GetService("AppStorageService")
+function applicationId() --[[ Line: 22 ]]
+	local AppStorageService = game:GetService("AppStorageService")
 	
-	if not appStorageService then
+	if AppStorageService then
+		local AppInstallationIdItem: string = AppStorageService:GetItem("AppInstallationId")
+		local ValueType = typeof(AppInstallationIdItem)
+		
+		return if ValueType == "number" then tonumber(AppInstallationIdItem) or nil elseif ValueType == "string" then if string.len(AppInstallationIdItem) <= 0 then nil else tonumber((string.sub(AppInstallationIdItem, -string.len((tostring(10000)))))) else nil
+	else
 		return nil
 	end
-	local appInstallationIdItem = appStorageService:GetItem("AppInstallationId")
-	local var1 = typeof(appInstallationIdItem)
-	
-	return if var1 == "number" then tonumber(appInstallationIdItem) or nil elseif var1 == "string" then if string.len(appInstallationIdItem) <= 0 then nil else tonumber(string.sub(appInstallationIdItem, -string.len(tostring(10000)))) else nil
 end
 
-local var1 = reactSchedulingTracker > 0
-local var2 = true
-local var3 = true
+local Flag = true
+local Flag1 = true
 
-if not var1 then
-	var3 = false
-	var2 = false
+if ReactSchedulingTracker <= 0 then
+	Flag1 = false
+	Flag = false
 end
-local randomValue = math.random(0, 10000)
-local var4 = applicationId()
+local RandomValue = math.random(0, 10000)
+local ApplicationIdResult: number = applicationId()
 
-if var4 ~= nil then
-	randomValue = (var4 + 1409) % 10000
+if ApplicationIdResult ~= nil then
+	RandomValue = (ApplicationIdResult + 1409) % 10000
 end
-if randomValue < reactSchedulingTracker then
-	var3 = false
-	var2 = false
+if ReactSchedulingTracker <= RandomValue then
+	Flag1 = false
+	Flag = false
 end
-local telemetryService = game:GetService("TelemetryService")
-local mutedError = require(corePackagesService.Workspace.Packages.Loggers).mutedError
-local reactRobloxModule = require(corePackagesService.Packages.ReactRoblox)
-local _ = require(corePackagesService.Packages.ReactReconciler)
-local kllSketch = require(corePackagesService.Workspace.Packages.InExperiencePerformance).KllSketch
-local parts = string.split(reactSchedulingPercentiles)
-local deviceTier = require(game:GetService("CorePackages").Workspace.Packages.Devices).DeviceTier
-local schedulingProfiler = reactRobloxModule.schedulingProfiler
-local profilerEventTypes = schedulingProfiler.profilerEventTypes
-local _ = {
-	Idle = "Idle",
-	Render = "Render",
-	Commit = "Commit",
-	PassiveEffects = "PassiveEffects"
-}
+local TelemetryService = game:GetService("TelemetryService")
+local MutedErrorFunction = require(CorePackages.Workspace.Packages.Loggers).mutedError
+local _ = require(CorePackages.Packages.ReactReconciler)
+local KllSketch = require(CorePackages.Workspace.Packages.InExperiencePerformance).KllSketch
+local Parts = string.split(ReactSchedulingPercentiles)
+local SchedulingProfiler = require(CorePackages.Packages.ReactRoblox).schedulingProfiler
+local ProfilerEventTypes = SchedulingProfiler.profilerEventTypes
 
-local function _()
+local function _(): number --[[ Line: 98 | Named "getCurrentTimeMs" ]]
 	return os.clock() * 1000
 end
 
-local deviceMemoryTier = deviceTier.GetDeviceMemoryTier()
-local t = {}
-t.__index = t
+local DeviceMemoryTier = require(game:GetService("CorePackages").Workspace.Packages.Devices).DeviceTier.GetDeviceMemoryTier()
+local Module = {}
+Module.__index = Module
 
-function t.new(p1, p2)
-	-- upvalues: reactSchedulingTrackerLayoutEffects (ref), profilerEventTypes (ref), mutedError (ref), t (ref)
-	return setmetatable({
+function Module.new(FrameReporter, RootReporter) --[[ Line: 141 ]]
+	-- upvalues: ReactSchedulingTrackerLayoutEffects (copy), ProfilerEventTypes (copy), MutedErrorFunction (copy), Module (copy)
+	return (setmetatable({
 		currentState = "Idle",
 		timerStartMs = 0,
 		rootUpdateInProgress = false,
 		renderLevel = 0,
-		frameReporter = p1,
-		rootReporter = p2,
-		layoutTimerStartMs = if reactSchedulingTrackerLayoutEffects then 0 else nil,
+		frameReporter = FrameReporter,
+		rootReporter = RootReporter,
+		layoutTimerStartMs = if ReactSchedulingTrackerLayoutEffects then 0 else nil,
 		rootUpdateTime = {
 			tag = "RootUpdateTime",
 			RenderMs = 0,
 			CommitMs = 0,
 			StartTimeMs = 0,
-			LayoutEffectsMs = if reactSchedulingTrackerLayoutEffects then 0 else nil
+			LayoutEffectsMs = if ReactSchedulingTrackerLayoutEffects then 0 else nil
 		},
 		rootPassiveEffectsTime = { tag = "RootPassiveEffectsTime", PassiveEffectsMs = 0 },
 		states = {
-			Idle = function(p3, p4)
-				-- upvalues: profilerEventTypes (copy), reactSchedulingTrackerLayoutEffects (copy)
-				if p4 == profilerEventTypes.RenderStart then
-					p3.timerStartMs = os.clock() * 1000
+			Idle = function(p1, CommitStart): string? --[[ Line: 165 ]]
+				-- upvalues: ProfilerEventTypes (upval), ReactSchedulingTrackerLayoutEffects (upval)
+				if CommitStart == ProfilerEventTypes.RenderStart then
+					p1.timerStartMs = os.clock() * 1000
 					
-					if not p3.rootUpdateInProgress then
-						p3.rootUpdateInProgress = true
-						p3.rootUpdateTime = {
+					if not p1.rootUpdateInProgress then
+						p1.rootUpdateInProgress = true
+						p1.rootUpdateTime = {
 							tag = "RootUpdateTime",
 							RenderMs = 0,
 							CommitMs = 0,
-							LayoutEffectsMs = if reactSchedulingTrackerLayoutEffects then 0 else nil,
+							LayoutEffectsMs = if ReactSchedulingTrackerLayoutEffects then 0 else nil,
 							StartTimeMs = os.clock() * 1000
 						}
 					end
 					return "Render"
-				elseif p4 == profilerEventTypes.PassiveEffectsStart then
-					p3.timerStartMs = os.clock() * 1000
-					p3.rootPassiveEffectsTime = { tag = "RootPassiveEffectsTime", PassiveEffectsMs = 0 }
+				elseif CommitStart == ProfilerEventTypes.PassiveEffectsStart then
+					p1.timerStartMs = os.clock() * 1000
+					p1.rootPassiveEffectsTime = { tag = "RootPassiveEffectsTime", PassiveEffectsMs = 0 }
 					
 					return "PassiveEffects"
-				elseif p4 == profilerEventTypes.CommitStart then
-					p3.timerStartMs = os.clock() * 1000
+				elseif CommitStart == ProfilerEventTypes.CommitStart then
+					p1.timerStartMs = os.clock() * 1000
 					
 					return "Commit"
+				else
+					return nil
 				end
-				return nil
 			end,
-			Render = function(p3, p4)
-				-- upvalues: profilerEventTypes (copy), mutedError (copy)
-				if p4 == profilerEventTypes.RenderYield or p4 == profilerEventTypes.RenderStop then
-					local var5 = os.clock() * 1000 - p3.timerStartMs
-					p3.rootUpdateTime.RenderMs += var5
-					p3.frameReporter(var5)
+			Render = function(p1, RenderStop): string --[[ Line: 194 ]]
+				-- upvalues: ProfilerEventTypes (upval), MutedErrorFunction (upval)
+				if RenderStop == ProfilerEventTypes.RenderYield or RenderStop == ProfilerEventTypes.RenderStop then
+					local ClockTimeDelta = os.clock() * 1000 - p1.timerStartMs
+					local RootUpdateTime = p1.rootUpdateTime
+					RootUpdateTime.RenderMs += ClockTimeDelta
+					p1.frameReporter(ClockTimeDelta)
+					
+					return "Idle"
+				else
+					MutedErrorFunction("Invalid event in Render: " .. RenderStop)
 					
 					return "Idle"
 				end
-				mutedError("Invalid event in Render: " .. p5)
-				
-				return "Idle"
 			end,
-			Commit = function(p3, p4, p5)
-				-- upvalues: profilerEventTypes (copy), reactSchedulingTrackerLayoutEffects (copy), mutedError (copy)
-				if p4 == profilerEventTypes.CommitStop then
-					if p3.renderLevel > 0 then
-						if reactSchedulingTrackerLayoutEffects and p3.renderLevel == 1 then
-							p3.rootUpdateTime.LayoutEffectsMs += os.clock() * 1000 - p3.layoutTimerStartMs
+			Commit = function(p1, CommitStop, p2): string? --[[ Line: 206 ]]
+				-- upvalues: ProfilerEventTypes (upval), ReactSchedulingTrackerLayoutEffects (upval), MutedErrorFunction (upval)
+				if CommitStop == ProfilerEventTypes.CommitStop then
+					if p1.renderLevel > 0 then
+						if ReactSchedulingTrackerLayoutEffects and p1.renderLevel == 1 then
+							local RootUpdateTime = p1.rootUpdateTime
+							RootUpdateTime.LayoutEffectsMs += os.clock() * 1000 - p1.layoutTimerStartMs
 						end
-						p3.renderLevel -= 1
+						p1.renderLevel -= 1
 						
 						return nil
 					else
-						local var5 = os.clock() * 1000 - p3.timerStartMs
-						p3.rootUpdateTime.CommitMs += var5
-						p3.frameReporter(var5)
-						p3.rootReporter(p3.rootUpdateTime, p5)
-						p3.rootUpdateInProgress = false
+						local ClockTimeDelta = os.clock() * 1000 - p1.timerStartMs
+						local RootUpdateTime = p1.rootUpdateTime
+						RootUpdateTime.CommitMs += ClockTimeDelta
+						p1.frameReporter(ClockTimeDelta)
+						p1.rootReporter(p1.rootUpdateTime, p2)
+						p1.rootUpdateInProgress = false
 						
 						return "Idle"
 					end
-				elseif p4 == profilerEventTypes.RenderStart then
-					p3.renderLevel += 1
+				elseif CommitStop == ProfilerEventTypes.RenderStart then
+					p1.renderLevel += 1
 					
-					if reactSchedulingTrackerLayoutEffects and p3.renderLevel == 1 then
-						p3.layoutTimerStartMs = os.clock() * 1000
+					if ReactSchedulingTrackerLayoutEffects and p1.renderLevel == 1 then
+						p1.layoutTimerStartMs = os.clock() * 1000
 					end
 					return nil
-				elseif reactSchedulingTrackerLayoutEffects and (p4 == profilerEventTypes.LayoutEffectsStart or p4 == profilerEventTypes.PassiveEffectsStart) then
-					if p3.renderLevel == 0 then
-						p3.layoutTimerStartMs = os.clock() * 1000
+				elseif ReactSchedulingTrackerLayoutEffects and (CommitStop == ProfilerEventTypes.LayoutEffectsStart or CommitStop == ProfilerEventTypes.PassiveEffectsStart) then
+					if p1.renderLevel == 0 then
+						p1.layoutTimerStartMs = os.clock() * 1000
 					end
 					return nil
-				elseif reactSchedulingTrackerLayoutEffects and (p4 == profilerEventTypes.LayoutEffectsStop or p4 == profilerEventTypes.PassiveEffectsStop) then
-					if p3.renderLevel == 0 then
-						p3.rootUpdateTime.LayoutEffectsMs += os.clock() * 1000 - p3.layoutTimerStartMs
+				elseif ReactSchedulingTrackerLayoutEffects and (CommitStop == ProfilerEventTypes.LayoutEffectsStop or CommitStop == ProfilerEventTypes.PassiveEffectsStop) then
+					if p1.renderLevel == 0 then
+						local RootUpdateTime = p1.rootUpdateTime
+						RootUpdateTime.LayoutEffectsMs += os.clock() * 1000 - p1.layoutTimerStartMs
 					end
 					return nil
-				elseif p4 == profilerEventTypes.RenderYield then
-					mutedError("Invalid event in Commit: " .. p7)
+				elseif CommitStop == ProfilerEventTypes.RenderYield then
+					MutedErrorFunction("Invalid event in Commit: " .. CommitStop)
 					
 					return "Idle"
+				else
+					return nil
 				end
-				return nil
 			end,
-			PassiveEffects = function(p3, p4, p5)
-				-- upvalues: profilerEventTypes (copy), mutedError (copy)
-				if p4 == profilerEventTypes.PassiveEffectsStop then
-					local var5 = os.clock() * 1000 - p3.timerStartMs
-					p3.rootPassiveEffectsTime.PassiveEffectsMs += var5
-					p3.frameReporter(var5)
-					p3.rootReporter(p3.rootPassiveEffectsTime, p5)
+			PassiveEffects = function(p1, PassiveEffectsStop, p2): string --[[ Line: 253 ]]
+				-- upvalues: ProfilerEventTypes (upval), MutedErrorFunction (upval)
+				if PassiveEffectsStop == ProfilerEventTypes.PassiveEffectsStop then
+					local ClockTimeDelta = os.clock() * 1000 - p1.timerStartMs
+					local RootPassiveEffectsTime = p1.rootPassiveEffectsTime
+					RootPassiveEffectsTime.PassiveEffectsMs += ClockTimeDelta
+					p1.frameReporter(ClockTimeDelta)
+					p1.rootReporter(p1.rootPassiveEffectsTime, p2)
+					
+					return "Idle"
+				else
+					MutedErrorFunction("Invalid event in PassiveEffects: " .. PassiveEffectsStop)
 					
 					return "Idle"
 				end
-				mutedError("Invalid event in PassiveEffects: " .. p10)
-				
-				return "Idle"
 			end
 		}
-	}, t)
+	}, Module))
 end
 
-function t:transition(p1, p2)
-	local var5 = self.states[self.currentState](self, p1, p2)
+function Module:transition(p1, p2) --[[ Line: 276 ]]
+	local CurrentState = self.states[self.currentState](self, p1, p2)
 	
-	if var5 then
-		self.currentState = var5
+	if CurrentState then
+		self.currentState = CurrentState
 	end
 end
 
-local var5 = if telemetryServiceMemoryCPUInfoEnabledEngineFeature then {
+local List = if TelemetryServiceMemoryCPUInfoEnabledEngineFeature then {
 	"addPlaceId", "addUniverseId", "addSessionId", "addOSInfo", "addSessionInfo",
 	"addMemoryInfo", "addCPUInfo"
 } else {
@@ -209,10 +210,10 @@ local var5 = if telemetryServiceMemoryCPUInfoEnabledEngineFeature then {
 	"addSessionInfo"
 }
 
-if telemetryServicePlaySessionInfoEnabledEngineFeature then
-	table.insert(var5, "addPlaySessionId")
+if TelemetryServicePlaySessionInfoEnabledEngineFeature then
+	table.insert(List, "addPlaySessionId")
 end
-local t_1 = {
+local config = {
 	eventName = "ReactSessionSummary",
 	description = "Summary of React performance over a game session",
 	links = "https://roblox.atlassian.net/wiki/spaces/APEX/pages/3321660204/React+Profiler+Metric+Issues+and+Path+Forward#New-Metrics-%E2%9C%A8",
@@ -220,7 +221,7 @@ local t_1 = {
 	throttlingPercentage = game:DefineFastInt("ReactSessionSummaryEventThrottleHunderedthsPercent", 0),
 	lastUpdated = { 2025, 7, 10 }
 }
-local var6 = if debugReactSchedulingEnableErrorEvents then {
+local Config = if DebugReactSchedulingEnableErrorEvents then {
 	eventName = "ReactSessionErrorEvent",
 	description = "Summary of React performance over a game session",
 	links = "https://roblox.atlassian.net/wiki/spaces/APEX/pages/3321660204/React+Profiler+Metric+Issues+and+Path+Forward#New-Metrics-%E2%9C%A8",
@@ -228,7 +229,7 @@ local var6 = if debugReactSchedulingEnableErrorEvents then {
 	throttlingPercentage = game:DefineFastInt("DebugReactSessionErrorEventThrottleHunderedthsPercent", 0),
 	lastUpdated = { 2025, 8, 7 }
 } else nil
-local t_2 = {
+local config1 = {
 	eventName = "ReactPeriodSummary",
 	description = "Summary of React performance over a period",
 	links = "https://roblox.atlassian.net/wiki/spaces/APEX/pages/3321660204/React+Profiler+Metric+Issues+and+Path+Forward#New-Metrics-%E2%9C%A8",
@@ -236,21 +237,21 @@ local t_2 = {
 	throttlingPercentage = game:DefineFastInt("ReactPeriodSummaryEventThrottleHunderedthsPercent", 0),
 	lastUpdated = { 2025, 2, 18 }
 }
-local t_3 = {
+local config2 = {
 	eventName = "ReactPeriod",
 	description = "Stats for React performance over a period",
 	links = "https://roblox.atlassian.net/wiki/spaces/APEX/pages/3321660204/React+Profiler+Metric+Issues+and+Path+Forward#New-Metrics-%E2%9C%A8",
 	backends = { "RobloxTelemetryStat" },
 	lastUpdated = { 2025, 2, 18 }
 }
-local t_4 = {
+local config3 = {
 	eventName = "ReactFrameCounter",
 	description = "Frame counts for React performance over a period",
 	links = "https://roblox.atlassian.net/wiki/spaces/APEX/pages/3321660204/React+Profiler+Metric+Issues+and+Path+Forward#New-Metrics-%E2%9C%A8",
 	backends = { "RobloxTelemetryCounter" },
 	lastUpdated = { 2025, 2, 18 }
 }
-local t_5 = {
+local config4 = {
 	eventName = "ReactRootSummary",
 	description = "Summary of React performance for a root",
 	links = "https://roblox.atlassian.net/wiki/spaces/APEX/pages/3321660204/React+Profiler+Metric+Issues+and+Path+Forward#New-Metrics-%E2%9C%A8",
@@ -258,52 +259,52 @@ local t_5 = {
 	lastUpdated = { 2025, 2, 18 },
 	throttlingPercentage = game:DefineFastInt("ReactRootSummaryEventThrottleHunderedthsPercent2", 0)
 }
-local var7 = if not disableReactSchedulingTimePctStats then {
+local Config1 = if DisableReactSchedulingTimePctStats then nil else {
 	eventName = "ReactRootPeriod",
 	description = "Stats for React performance for a root over a period",
 	links = "https://roblox.atlassian.net/wiki/spaces/APEX/pages/3321660204/React+Profiler+Metric+Issues+and+Path+Forward#New-Metrics-%E2%9C%A8",
 	backends = { "RobloxTelemetryStat" },
 	lastUpdated = { 2025, 2, 18 }
-} else nil
-local t_6 = {
+}
+local config5 = {
 	eventName = "ReactRootTaskCount",
 	description = "Task counts for React performance for a root over a period",
 	links = "https://roblox.atlassian.net/wiki/spaces/APEX/pages/3321660204/React+Profiler+Metric+Issues+and+Path+Forward#New-Metrics-%E2%9C%A8",
 	backends = { "RobloxTelemetryCounter" },
 	lastUpdated = { 2025, 2, 18 }
 }
-local var8 = if not disableReactSchedulingAvgMaxMsStats then {
+local Config2 = if DisableReactSchedulingAvgMaxMsStats then nil else {
 	eventName = "ReactRootPeriodTask",
 	description = "Task stats for React performance for a root over a period",
 	links = "https://roblox.atlassian.net/wiki/spaces/APEX/pages/3321660204/React+Profiler+Metric+Issues+and+Path+Forward#New-Metrics-%E2%9C%A8",
 	backends = { "RobloxTelemetryStat" },
 	lastUpdated = { 2025, 2, 18 }
-} else nil
-local t_7 = {
+}
+local config6 = {
 	eventName = "ReactRootUpdate",
 	description = "Task stats for individual React root updates, all in milliseconds",
 	links = "https://roblox.atlassian.net/wiki/spaces/APEX/pages/3321660204/React+Profiler+Metric+Issues+and+Path+Forward#New-Metrics-%E2%9C%A8",
 	backends = { "RobloxTelemetryStat" },
 	lastUpdated = { 2025, 2, 18 }
 }
-local t_8 = {}
-t_8.__index = t_8
+local Module1 = {}
+Module1.__index = Module1
 
-function t_8.new(p1)
-	-- upvalues: kllSketch (ref), reactSchedulingKllSketchMaxSize (ref), debugReactSchedulingEnableErrorEvents (ref), t_8 (ref), t (ref), var3 (write)
-	local t_1 = { all = kllSketch.new(reactSchedulingKllSketchMaxSize) }
-	local t_2 = { all = kllSketch.new(reactSchedulingKllSketchMaxSize) }
-	local t_3 = { all = kllSketch.new(reactSchedulingKllSketchMaxSize) }
-	local t_4 = {}
-	local t_5 = {}
-	local t_6 = {}
+function Module1.new(Context) --[[ Line: 464 ]]
+	-- upvalues: KllSketch (copy), ReactSchedulingKllSketchMaxSize (copy), DebugReactSchedulingEnableErrorEvents (copy), Module1 (copy), Module (copy), Flag1 (ref)
+	local t = {}
+	local t1 = {}
+	local t2 = {}
+	local Sketches = { all = KllSketch.new(ReactSchedulingKllSketchMaxSize) }
+	local Sketches1 = { all = KllSketch.new(ReactSchedulingKllSketchMaxSize) }
+	local Sketches2 = { all = KllSketch.new(ReactSchedulingKllSketchMaxSize) }
 	
-	if debugReactSchedulingEnableErrorEvents then
-		t_4.all = {}
-		t_5.all = {}
-		t_6.all = {}
+	if DebugReactSchedulingEnableErrorEvents then
+		t.all = {}
+		t1.all = {}
+		t2.all = {}
 	end
-	local tbl = setmetatable({
+	local self = setmetatable({
 		started = false,
 		periodStartMs = 0,
 		reactFrameTimeMs = 0,
@@ -321,60 +322,60 @@ function t_8.new(p1)
 		sessionMetrics = {
 			updateTime = {
 				numRoots = 1,
-				sketches = t_1,
-				allData = if debugReactSchedulingEnableErrorEvents then t_4 else {}
+				sketches = Sketches,
+				allData = if DebugReactSchedulingEnableErrorEvents then t else {}
 			},
 			commitTime = {
 				numRoots = 1,
-				sketches = t_2,
-				allData = if debugReactSchedulingEnableErrorEvents then t_5 else {}
+				sketches = Sketches1,
+				allData = if DebugReactSchedulingEnableErrorEvents then t1 else {}
 			},
 			timeToUpdate = {
 				numRoots = 1,
-				sketches = t_3,
-				allData = if debugReactSchedulingEnableErrorEvents then t_6 else {}
+				sketches = Sketches2,
+				allData = if DebugReactSchedulingEnableErrorEvents then t2 else {}
 			},
 			timePerFrame = {
-				sketch = kllSketch.new(reactSchedulingKllSketchMaxSize),
+				sketch = KllSketch.new(ReactSchedulingKllSketchMaxSize),
 				allData = {}
 			},
 			timePerReactFrame = {
-				sketch = kllSketch.new(reactSchedulingKllSketchMaxSize),
+				sketch = KllSketch.new(ReactSchedulingKllSketchMaxSize),
 				allData = {}
 			}
 		},
-		context = p1
-	}, t_8)
-	tbl.schedulerStateMachine = t.new(function(p2)
-		-- upvalues: tbl (ref)
-		tbl:addToFrame(p2)
-	end, function(p2, p3)
-		-- upvalues: tbl (ref), var3 (copy)
-		tbl:trackSessionSketches(p2, p3)
+		context = Context
+	}, Module1)
+	self.schedulerStateMachine = Module.new(function(p1) --[[ Line: 519 ]]
+		-- upvalues: self (copy)
+		self:addToFrame(p1)
+	end, function(p1, p2) --[[ Line: 521 ]]
+		-- upvalues: self (copy), Flag1 (upval)
+		self:trackSessionSketches(p1, p2)
 		
-		if var3 then
-			tbl:reportRoot(p2, p3)
+		if Flag1 then
+			self:reportRoot(p1, p2)
 		end
 	end)
 	
-	return tbl
+	return self
 end
 
-function t_8:start()
-	-- upvalues: schedulingProfiler (ref), runService (ref), reactSchedulingTrackerPeriodMs (ref), var2 (write)
+function Module1:start() --[[ Line: 531 ]]
+	-- upvalues: SchedulingProfiler (copy), RunService (copy), ReactSchedulingTrackerPeriodMs (copy), Flag (ref)
 	self.started = true
 	self:resetState()
-	schedulingProfiler.registerProfilerEventCallback(function(p1, p2)
-		-- upvalues: self (ref)
+	SchedulingProfiler.registerProfilerEventCallback(function(p1, p2) --[[ Line: 535 ]]
+		-- upvalues: self (copy)
 		self.schedulerStateMachine:transition(p1, p2)
 	end)
-	runService.Heartbeat:Connect(function(p1)
-		-- upvalues: self (ref), reactSchedulingTrackerPeriodMs (copy), var2 (copy)
-		self:processFrame(p1 * 1000)
+	RunService.Heartbeat:Connect(function(DeltaTime: number) --[[ Line: 539 ]]
+		-- upvalues: self (copy), ReactSchedulingTrackerPeriodMs (upval), Flag (upval)
+		self:processFrame(DeltaTime * 1000)
 		self.reactFrameTimeMs = 0
 		
-		if reactSchedulingTrackerPeriodMs < os.clock() * 1000 - self.periodStartMs then
-			if var2 then
+		if ReactSchedulingTrackerPeriodMs < os.clock() * 1000 - self.periodStartMs then
+			if Flag then
 				self:reportPeriod()
 			end
 			self:resetState()
@@ -382,7 +383,7 @@ function t_8:start()
 	end)
 end
 
-function t_8:resetState()
+function Module1:resetState() --[[ Line: 554 ]]
 	self.periodStartMs = os.clock() * 1000
 	self.frameMetrics = {
 		totalFrameCount = 0,
@@ -397,96 +398,100 @@ function t_8:resetState()
 	self.rootsMetrics = {}
 end
 
-function t_8.getRootName(_, p1)
-	local var9 = "Unknown"
+function Module1:getRootName(p1) --[[ Line: 571 ]]
+	local Name = "Unknown"
 	
 	if p1 then
 		if p1.containerInfo.Name ~= "Folder" then
-			var9 = p1.containerInfo.Name
+			Name = p1.containerInfo.Name
 			
-			return var9
-		elseif p1.current and p1.current.child and p1.current.child.memoizedProps then
-			for i, v in p1.current.child.memoizedProps do
+			return Name
+		end
+		if p1.current and p1.current.child and p1.current.child.memoizedProps then
+			for i, _ in p1.current.child.memoizedProps do
 				if typeof(i) == "string" then
-					var9 = i
+					Name = i
 					
-					return var9
+					return Name
 				end
 			end
 		end
 	end
-	return var9
+	return Name
 end
 
-function t_8:addToFrame(p2)
+function Module1:addToFrame(p2) --[[ Line: 588 ]]
 	self.reactFrameTimeMs += p2
 end
 
-function t_8:trackSessionSketches(p2, p3)
-	-- upvalues: debugReactSchedulingEnableErrorEvents (ref), kllSketch (ref), reactSchedulingKllSketchMaxSize (ref)
+function Module1:trackSessionSketches(RootUpdateTime, p2) --[[ Line: 592 ]]
+	-- upvalues: DebugReactSchedulingEnableErrorEvents (copy), KllSketch (copy), ReactSchedulingKllSketchMaxSize (copy)
 	if not self.sessionMetrics then return end
-	local var10 = self:getRootName(p3)
+	local RootName = self:getRootName(p2)
 	
-	if p2.tag == "RootUpdateTime" then
-		local var11 = os.clock() * 1000 - p2.StartTimeMs
+	if RootUpdateTime.tag == "RootUpdateTime" then
+		local ClockTimeDelta = os.clock() * 1000 - RootUpdateTime.StartTimeMs
 		
-		if debugReactSchedulingEnableErrorEvents then
-			table.insert(self.sessionMetrics.updateTime.allData.all, p2.RenderMs + p2.CommitMs)
-			table.insert(self.sessionMetrics.commitTime.allData.all, p2.CommitMs)
-			table.insert(self.sessionMetrics.timeToUpdate.allData.all, var11)
+		if DebugReactSchedulingEnableErrorEvents then
+			table.insert(self.sessionMetrics.updateTime.allData.all, RootUpdateTime.RenderMs + RootUpdateTime.CommitMs)
+			table.insert(self.sessionMetrics.commitTime.allData.all, RootUpdateTime.CommitMs)
+			table.insert(self.sessionMetrics.timeToUpdate.allData.all, ClockTimeDelta)
 		end
-		self.sessionMetrics.updateTime.sketches.all:insert(p2.RenderMs + p2.CommitMs)
-		self.sessionMetrics.commitTime.sketches.all:insert(p2.CommitMs)
-		self.sessionMetrics.timeToUpdate.sketches.all:insert(var11)
+		self.sessionMetrics.updateTime.sketches.all:insert(RootUpdateTime.RenderMs + RootUpdateTime.CommitMs)
+		self.sessionMetrics.commitTime.sketches.all:insert(RootUpdateTime.CommitMs)
+		self.sessionMetrics.timeToUpdate.sketches.all:insert(ClockTimeDelta)
 		
-		if not self.sessionMetrics.updateTime.sketches[var10] then
-			self.sessionMetrics.updateTime.sketches[var10] = kllSketch.new(reactSchedulingKllSketchMaxSize)
+		if not self.sessionMetrics.updateTime.sketches[RootName] then
+			self.sessionMetrics.updateTime.sketches[RootName] = KllSketch.new(ReactSchedulingKllSketchMaxSize)
 			
-			if debugReactSchedulingEnableErrorEvents then
-				self.sessionMetrics.updateTime.allData[var10] = {}
+			if DebugReactSchedulingEnableErrorEvents then
+				self.sessionMetrics.updateTime.allData[RootName] = {}
 			end
-			self.sessionMetrics.updateTime.numRoots += 1
+			local UpdateTime = self.sessionMetrics.updateTime
+			UpdateTime.numRoots += 1
 		end
-		self.sessionMetrics.updateTime.sketches[var10]:insert(p2.RenderMs + p2.CommitMs)
+		self.sessionMetrics.updateTime.sketches[RootName]:insert(RootUpdateTime.RenderMs + RootUpdateTime.CommitMs)
 		
-		if debugReactSchedulingEnableErrorEvents then
-			table.insert(self.sessionMetrics.updateTime.allData[var10], p2.RenderMs + p2.CommitMs)
+		if DebugReactSchedulingEnableErrorEvents then
+			table.insert(self.sessionMetrics.updateTime.allData[RootName], RootUpdateTime.RenderMs + RootUpdateTime.CommitMs)
 		end
-		if not self.sessionMetrics.commitTime.sketches[var10] then
-			self.sessionMetrics.commitTime.sketches[var10] = kllSketch.new(reactSchedulingKllSketchMaxSize)
+		if not self.sessionMetrics.commitTime.sketches[RootName] then
+			self.sessionMetrics.commitTime.sketches[RootName] = KllSketch.new(ReactSchedulingKllSketchMaxSize)
 			
-			if debugReactSchedulingEnableErrorEvents then
-				self.sessionMetrics.commitTime.allData[var10] = {}
+			if DebugReactSchedulingEnableErrorEvents then
+				self.sessionMetrics.commitTime.allData[RootName] = {}
 			end
-			self.sessionMetrics.commitTime.numRoots += 1
+			local CommitTime = self.sessionMetrics.commitTime
+			CommitTime.numRoots += 1
 		end
-		self.sessionMetrics.commitTime.sketches[var10]:insert(p2.CommitMs)
+		self.sessionMetrics.commitTime.sketches[RootName]:insert(RootUpdateTime.CommitMs)
 		
-		if debugReactSchedulingEnableErrorEvents then
-			table.insert(self.sessionMetrics.commitTime.allData[var10], p2.CommitMs)
+		if DebugReactSchedulingEnableErrorEvents then
+			table.insert(self.sessionMetrics.commitTime.allData[RootName], RootUpdateTime.CommitMs)
 		end
-		if not self.sessionMetrics.timeToUpdate.sketches[var10] then
-			self.sessionMetrics.timeToUpdate.sketches[var10] = kllSketch.new(reactSchedulingKllSketchMaxSize)
+		if not self.sessionMetrics.timeToUpdate.sketches[RootName] then
+			self.sessionMetrics.timeToUpdate.sketches[RootName] = KllSketch.new(ReactSchedulingKllSketchMaxSize)
 			
-			if debugReactSchedulingEnableErrorEvents then
-				self.sessionMetrics.timeToUpdate.allData[var10] = {}
+			if DebugReactSchedulingEnableErrorEvents then
+				self.sessionMetrics.timeToUpdate.allData[RootName] = {}
 			end
-			self.sessionMetrics.timeToUpdate.numRoots += 1
+			local TimeToUpdate = self.sessionMetrics.timeToUpdate
+			TimeToUpdate.numRoots += 1
 		end
-		self.sessionMetrics.timeToUpdate.sketches[var10]:insert(var11)
+		self.sessionMetrics.timeToUpdate.sketches[RootName]:insert(ClockTimeDelta)
 		
-		if debugReactSchedulingEnableErrorEvents then
-			table.insert(self.sessionMetrics.timeToUpdate.allData[var10], var11)
+		if DebugReactSchedulingEnableErrorEvents then
+			table.insert(self.sessionMetrics.timeToUpdate.allData[RootName], ClockTimeDelta)
 		end
 	end
 end
 
-function t_8:reportRoot(p2, p3)
-	-- upvalues: reactSchedulingTrackerLayoutEffects (ref), reactSchedulingTrackerDataModelUpdate (ref), telemetryService (ref), t_7 (ref), deviceMemoryTier (ref)
-	local var10 = self:getRootName(p3)
+function Module1:reportRoot(RootUpdateTime, p2) --[[ Line: 652 ]]
+	-- upvalues: ReactSchedulingTrackerLayoutEffects (copy), ReactSchedulingTrackerDataModelUpdate (copy), TelemetryService (copy), config6 (copy), DeviceMemoryTier (copy)
+	local RootName = self:getRootName(p2)
 	
-	if not self.rootsMetrics[var10] then
-		self.rootsMetrics[var10] = {
+	if not self.rootsMetrics[RootName] then
+		self.rootsMetrics[RootName] = {
 			update_count = 0,
 			render_total_time_ms = 0,
 			commit_total_time_ms = 0,
@@ -498,510 +503,514 @@ function t_8:reportRoot(p2, p3)
 			max_passive_effects_time_ms = 0,
 			total_time_to_update_ms = 0,
 			max_time_to_update_ms = 0,
-			layout_effects_count = if reactSchedulingTrackerLayoutEffects then 0 else nil,
-			layout_effects_total_time_ms = if reactSchedulingTrackerLayoutEffects then 0 else nil,
-			data_model_update_total_time_ms = if reactSchedulingTrackerLayoutEffects and reactSchedulingTrackerDataModelUpdate then 0 else nil,
-			max_layout_effects_time_ms = if reactSchedulingTrackerLayoutEffects then 0 else nil,
-			max_data_model_update_time_ms = if reactSchedulingTrackerLayoutEffects and reactSchedulingTrackerDataModelUpdate then 0 else nil
+			layout_effects_count = if ReactSchedulingTrackerLayoutEffects then 0 else nil,
+			layout_effects_total_time_ms = if ReactSchedulingTrackerLayoutEffects then 0 else nil,
+			data_model_update_total_time_ms = if ReactSchedulingTrackerLayoutEffects and ReactSchedulingTrackerDataModelUpdate then 0 else nil,
+			max_layout_effects_time_ms = if ReactSchedulingTrackerLayoutEffects then 0 else nil,
+			max_data_model_update_time_ms = if ReactSchedulingTrackerLayoutEffects and ReactSchedulingTrackerDataModelUpdate then 0 else nil
 		}
 	end
-	local var11 = self.rootsMetrics[var10]
+	local RootsMetric = self.rootsMetrics[RootName]
 	
-	if p2.tag == "RootPassiveEffectsTime" then
-		telemetryService:LogStat(t_7, {
+	if RootUpdateTime.tag == "RootPassiveEffectsTime" then
+		TelemetryService:LogStat(config6, {
 			customFields = {
 				updateType = "PassiveEffects",
-				rootName = var10,
-				deviceTier = deviceMemoryTier,
+				rootName = RootName,
+				deviceTier = DeviceMemoryTier,
 				context = self.context
 			}
-		}, p2.PassiveEffectsMs)
-		var11.passive_effects_count += 1
-		var11.passive_effects_total_time_ms += p2.PassiveEffectsMs
+		}, RootUpdateTime.PassiveEffectsMs)
+		RootsMetric.passive_effects_count += 1
+		RootsMetric.passive_effects_total_time_ms += RootUpdateTime.PassiveEffectsMs
 		
-		if var11.max_passive_effects_time_ms < p2.PassiveEffectsMs then
-			var11.max_passive_effects_time_ms = p2.PassiveEffectsMs
+		if RootsMetric.max_passive_effects_time_ms < RootUpdateTime.PassiveEffectsMs then
+			RootsMetric.max_passive_effects_time_ms = RootUpdateTime.PassiveEffectsMs
 			
 			return
 		end
-	elseif p2.tag == "RootUpdateTime" then
-		local var12 = os.clock() * 1000 - p2.StartTimeMs
-		telemetryService:LogStat(t_7, {
+	elseif RootUpdateTime.tag == "RootUpdateTime" then
+		local ClockTimeDelta = os.clock() * 1000 - RootUpdateTime.StartTimeMs
+		TelemetryService:LogStat(config6, {
 			customFields = {
 				updateType = "TimeToComplete",
-				rootName = var10,
-				deviceTier = deviceMemoryTier,
+				rootName = RootName,
+				deviceTier = DeviceMemoryTier,
 				context = self.context
 			}
-		}, var12)
-		var11.total_time_to_update_ms += var12
+		}, ClockTimeDelta)
+		RootsMetric.total_time_to_update_ms += ClockTimeDelta
 		
-		if var11.max_time_to_update_ms < var12 then
-			var11.max_time_to_update_ms = var12
+		if RootsMetric.max_time_to_update_ms < ClockTimeDelta then
+			RootsMetric.max_time_to_update_ms = ClockTimeDelta
 		end
-		telemetryService:LogStat(t_7, {
+		TelemetryService:LogStat(config6, {
 			customFields = {
 				updateType = "RenderAndCommit",
-				rootName = var10,
-				deviceTier = deviceMemoryTier,
+				rootName = RootName,
+				deviceTier = DeviceMemoryTier,
 				context = self.context
 			}
-		}, p2.RenderMs + p2.CommitMs)
-		telemetryService:LogStat(t_7, {
+		}, RootUpdateTime.RenderMs + RootUpdateTime.CommitMs)
+		TelemetryService:LogStat(config6, {
 			customFields = {
 				updateType = "Commit",
-				rootName = var10,
-				deviceTier = deviceMemoryTier,
+				rootName = RootName,
+				deviceTier = DeviceMemoryTier,
 				context = self.context
 			}
-		}, p2.CommitMs)
+		}, RootUpdateTime.CommitMs)
 		
-		if reactSchedulingTrackerLayoutEffects then
-			if p2.LayoutEffectsMs > 0 then
-				telemetryService:LogStat(t_7, {
+		if ReactSchedulingTrackerLayoutEffects then
+			if RootUpdateTime.LayoutEffectsMs > 0 then
+				TelemetryService:LogStat(config6, {
 					customFields = {
 						updateType = "LayoutEffects",
-						rootName = var10,
-						deviceTier = deviceMemoryTier,
+						rootName = RootName,
+						deviceTier = DeviceMemoryTier,
 						context = self.context
 					}
-				}, p2.LayoutEffectsMs)
+				}, RootUpdateTime.LayoutEffectsMs)
 			end
-			if reactSchedulingTrackerDataModelUpdate then
-				telemetryService:LogStat(t_7, {
+			if ReactSchedulingTrackerDataModelUpdate then
+				TelemetryService:LogStat(config6, {
 					customFields = {
 						updateType = "DataModelUpdate",
-						rootName = var10,
-						deviceTier = deviceMemoryTier,
+						rootName = RootName,
+						deviceTier = DeviceMemoryTier,
 						context = self.context
 					}
-				}, p2.CommitMs - p2.LayoutEffectsMs)
+				}, RootUpdateTime.CommitMs - RootUpdateTime.LayoutEffectsMs)
 			end
 		end
-		var11.update_count += 1
+		RootsMetric.update_count += 1
 		
-		if var11.max_update_time_ms < p2.RenderMs + p2.CommitMs then
-			var11.max_update_time_ms = p2.RenderMs + p2.CommitMs
+		if RootsMetric.max_update_time_ms < RootUpdateTime.RenderMs + RootUpdateTime.CommitMs then
+			RootsMetric.max_update_time_ms = RootUpdateTime.RenderMs + RootUpdateTime.CommitMs
 		end
-		var11.render_total_time_ms += p2.RenderMs
-		var11.commit_total_time_ms += p2.CommitMs
+		RootsMetric.render_total_time_ms += RootUpdateTime.RenderMs
+		RootsMetric.commit_total_time_ms += RootUpdateTime.CommitMs
 		
-		if var11.max_render_time_ms < p2.RenderMs then
-			var11.max_render_time_ms = p2.RenderMs
+		if RootsMetric.max_render_time_ms < RootUpdateTime.RenderMs then
+			RootsMetric.max_render_time_ms = RootUpdateTime.RenderMs
 		end
-		if var11.max_commit_time_ms < p2.CommitMs then
-			var11.max_commit_time_ms = p2.CommitMs
+		if RootsMetric.max_commit_time_ms < RootUpdateTime.CommitMs then
+			RootsMetric.max_commit_time_ms = RootUpdateTime.CommitMs
 		end
-		if reactSchedulingTrackerLayoutEffects then
-			if p2.LayoutEffectsMs > 0 then
-				var11.layout_effects_count += 1
-				var11.layout_effects_total_time_ms += p2.LayoutEffectsMs
+		if ReactSchedulingTrackerLayoutEffects then
+			if RootUpdateTime.LayoutEffectsMs > 0 then
+				RootsMetric.layout_effects_count += 1
+				RootsMetric.layout_effects_total_time_ms += RootUpdateTime.LayoutEffectsMs
 				
-				if var11.max_layout_effects_time_ms < p2.LayoutEffectsMs then
-					var11.max_layout_effects_time_ms = p2.LayoutEffectsMs
+				if RootsMetric.max_layout_effects_time_ms < RootUpdateTime.LayoutEffectsMs then
+					RootsMetric.max_layout_effects_time_ms = RootUpdateTime.LayoutEffectsMs
 				end
 			end
-			if reactSchedulingTrackerDataModelUpdate then
-				var11.data_model_update_total_time_ms += p2.CommitMs - p2.LayoutEffectsMs
+			if ReactSchedulingTrackerDataModelUpdate then
+				RootsMetric.data_model_update_total_time_ms += RootUpdateTime.CommitMs - RootUpdateTime.LayoutEffectsMs
 				
-				if var11.max_data_model_update_time_ms < p2.CommitMs - p2.LayoutEffectsMs then
-					var11.max_data_model_update_time_ms = p2.CommitMs - p2.LayoutEffectsMs
+				if RootsMetric.max_data_model_update_time_ms < RootUpdateTime.CommitMs - RootUpdateTime.LayoutEffectsMs then
+					RootsMetric.max_data_model_update_time_ms = RootUpdateTime.CommitMs - RootUpdateTime.LayoutEffectsMs
 				end
 			end
 		end
 	end
 end
 
-function t_8.getFrameBucket(_, p2)
-	return math.min(4, math.floor(math.max(0, p2 - 2) / 16.666666666667) + 1)
+function Module1:getFrameBucket(p2: number): number --[[ Line: 791 ]]
+	return (math.min(4, math.floor(math.max(0, p2 - 2) / 16.666666666666668) + 1))
 end
 
-function t_8:processFrame(p2)
-	-- upvalues: scriptPlusExecutionTimeEnabledEngineFeature (ref), enableCorescriptExecutionTime (ref), runService (ref), debugReactSchedulingEnableErrorEvents (ref)
-	local frameMetrics = self.frameMetrics
-	local reactFrameTimeMs = self.reactFrameTimeMs
+function Module1:processFrame(p2: number) --[[ Line: 798 ]]
+	-- upvalues: ScriptPlusExecutionTimeEnabledEngineFeature (copy), EnableCorescriptExecutionTime (copy), RunService (copy), DebugReactSchedulingEnableErrorEvents (copy)
+	local FrameMetrics = self.frameMetrics
+	local ReactFrameTimeMs: number = self.reactFrameTimeMs
 	
-	if scriptPlusExecutionTimeEnabledEngineFeature and enableCorescriptExecutionTime then
-		local totalScriptPlusExecutionTime = runService:GetTotalScriptPlusExecutionTime()
+	if ScriptPlusExecutionTimeEnabledEngineFeature and EnableCorescriptExecutionTime then
+		local TotalScriptPlusExecutionTime: number = RunService:GetTotalScriptPlusExecutionTime()
 		
-		if totalScriptPlusExecutionTime > 0 then
-			frameMetrics.totalCorescriptTimeMs += totalScriptPlusExecutionTime
+		if TotalScriptPlusExecutionTime > 0 then
+			FrameMetrics.totalCorescriptTimeMs += TotalScriptPlusExecutionTime
 		end
 	end
-	frameMetrics.totalFrameCount += 1
-	local var10 = self:getFrameBucket(p2)
-	frameMetrics.allFrameHistogram[var10] += 1
-	self.sessionMetrics.timePerFrame.sketch:insert(reactFrameTimeMs)
+	FrameMetrics.totalFrameCount += 1
+	local FrameBucket = self:getFrameBucket(p2)
+	local AllFrameHistogram = FrameMetrics.allFrameHistogram
+	AllFrameHistogram[FrameBucket] += 1
+	self.sessionMetrics.timePerFrame.sketch:insert(ReactFrameTimeMs)
 	
-	if debugReactSchedulingEnableErrorEvents then
-		table.insert(self.sessionMetrics.timePerFrame.allData, reactFrameTimeMs)
+	if DebugReactSchedulingEnableErrorEvents then
+		table.insert(self.sessionMetrics.timePerFrame.allData, ReactFrameTimeMs)
 	end
-	if reactFrameTimeMs > 0 then
-		frameMetrics.totalReactTimeMs += reactFrameTimeMs
-		frameMetrics.reactFrameHistogram[var10] += 1
-		self.sessionMetrics.timePerReactFrame.sketch:insert(reactFrameTimeMs)
+	if ReactFrameTimeMs > 0 then
+		FrameMetrics.totalReactTimeMs += ReactFrameTimeMs
+		local ReactFrameHistogram = FrameMetrics.reactFrameHistogram
+		ReactFrameHistogram[FrameBucket] += 1
+		self.sessionMetrics.timePerReactFrame.sketch:insert(ReactFrameTimeMs)
 		
-		if debugReactSchedulingEnableErrorEvents then
-			table.insert(self.sessionMetrics.timePerReactFrame.allData, reactFrameTimeMs)
+		if DebugReactSchedulingEnableErrorEvents then
+			table.insert(self.sessionMetrics.timePerReactFrame.allData, ReactFrameTimeMs)
 		end
-		frameMetrics.reactFrameCount += 1
+		FrameMetrics.reactFrameCount += 1
 		
-		if frameMetrics.maxReactFrameTimeMs < reactFrameTimeMs then
-			frameMetrics.maxReactFrameTimeMs = reactFrameTimeMs
+		if FrameMetrics.maxReactFrameTimeMs < ReactFrameTimeMs then
+			FrameMetrics.maxReactFrameTimeMs = ReactFrameTimeMs
 		end
-		frameMetrics.reactDropChangeHistogram[var10 - self:getFrameBucket(p2 - reactFrameTimeMs) + 1] += 1
+		local ReactDropChangeHistogram = FrameMetrics.reactDropChangeHistogram
+		local NewFrameBucket = FrameBucket - self:getFrameBucket(p2 - ReactFrameTimeMs) + 1
+		ReactDropChangeHistogram[NewFrameBucket] += 1
 	end
 end
 
-function t_8:reportPeriod()
-	-- upvalues: telemetryService (ref), t_2 (ref), var5 (write), t_3 (ref), deviceMemoryTier (ref), scriptPlusExecutionTimeEnabledEngineFeature (ref), enableCorescriptExecutionTime (ref), t_4 (ref), reactSchedulingTrackerLayoutEffects (ref), reactSchedulingTrackerDataModelUpdate (ref), t_5 (ref), disableReactSchedulingTimePctStats (ref), var7 (write), t_6 (ref), disableReactSchedulingAvgMaxMsStats (ref), var8 (write)
-	local frameMetrics = self.frameMetrics
-	local var10 = os.clock() * 1000 - self.periodStartMs
-	local t = {
-		period_length_ms = var10,
-		react_total_time_ms = frameMetrics.totalReactTimeMs,
-		react_total_time_pct = frameMetrics.totalReactTimeMs / var10,
-		react_frame_count = frameMetrics.reactFrameCount,
-		total_frame_count = frameMetrics.totalFrameCount,
-		corescript_total_time_ms = frameMetrics.totalCorescriptTimeMs,
-		corescript_total_time_pct = frameMetrics.totalCorescriptTimeMs / var10,
-		average_react_all_frame_ms = frameMetrics.totalReactTimeMs / frameMetrics.totalFrameCount,
-		average_react_only_frame_ms = if frameMetrics.reactFrameCount > 0 then frameMetrics.totalReactTimeMs / frameMetrics.reactFrameCount else 0,
-		max_react_frame_ms = frameMetrics.maxReactFrameTimeMs,
-		all_frame_drop0 = frameMetrics.allFrameHistogram[1],
-		all_frame_drop1 = frameMetrics.allFrameHistogram[2],
-		all_frame_drop2 = frameMetrics.allFrameHistogram[3],
-		all_frame_drop3 = frameMetrics.allFrameHistogram[4],
-		react_frame_drop0 = frameMetrics.reactFrameHistogram[1],
-		react_frame_drop1 = frameMetrics.reactFrameHistogram[2],
-		react_frame_drop2 = frameMetrics.reactFrameHistogram[3],
-		react_frame_drop3 = frameMetrics.reactFrameHistogram[4],
-		react_drop_change0 = frameMetrics.reactDropChangeHistogram[1],
-		react_drop_change1 = frameMetrics.reactDropChangeHistogram[2],
-		react_drop_change2 = frameMetrics.reactDropChangeHistogram[3],
-		react_drop_change3 = frameMetrics.reactDropChangeHistogram[4]
+function Module1:reportPeriod() --[[ Line: 837 ]]
+	-- upvalues: TelemetryService (copy), config1 (copy), List (ref), config2 (copy), DeviceMemoryTier (copy), ScriptPlusExecutionTimeEnabledEngineFeature (copy), EnableCorescriptExecutionTime (copy), config3 (copy), ReactSchedulingTrackerLayoutEffects (copy), ReactSchedulingTrackerDataModelUpdate (copy), config4 (copy), DisableReactSchedulingTimePctStats (copy), Config1 (ref), config5 (copy), DisableReactSchedulingAvgMaxMsStats (copy), Config2 (ref)
+	local FrameMetrics = self.frameMetrics
+	local ClockTimeDelta = os.clock() * 1000 - self.periodStartMs
+	local CustomFields = {
+		period_length_ms = ClockTimeDelta,
+		react_total_time_ms = FrameMetrics.totalReactTimeMs,
+		react_total_time_pct = FrameMetrics.totalReactTimeMs / ClockTimeDelta,
+		react_frame_count = FrameMetrics.reactFrameCount,
+		total_frame_count = FrameMetrics.totalFrameCount,
+		corescript_total_time_ms = FrameMetrics.totalCorescriptTimeMs,
+		corescript_total_time_pct = FrameMetrics.totalCorescriptTimeMs / ClockTimeDelta,
+		average_react_all_frame_ms = FrameMetrics.totalReactTimeMs / FrameMetrics.totalFrameCount,
+		average_react_only_frame_ms = if FrameMetrics.reactFrameCount > 0 then FrameMetrics.totalReactTimeMs / FrameMetrics.reactFrameCount else 0,
+		max_react_frame_ms = FrameMetrics.maxReactFrameTimeMs,
+		all_frame_drop0 = FrameMetrics.allFrameHistogram[1],
+		all_frame_drop1 = FrameMetrics.allFrameHistogram[2],
+		all_frame_drop2 = FrameMetrics.allFrameHistogram[3],
+		all_frame_drop3 = FrameMetrics.allFrameHistogram[4],
+		react_frame_drop0 = FrameMetrics.reactFrameHistogram[1],
+		react_frame_drop1 = FrameMetrics.reactFrameHistogram[2],
+		react_frame_drop2 = FrameMetrics.reactFrameHistogram[3],
+		react_frame_drop3 = FrameMetrics.reactFrameHistogram[4],
+		react_drop_change0 = FrameMetrics.reactDropChangeHistogram[1],
+		react_drop_change1 = FrameMetrics.reactDropChangeHistogram[2],
+		react_drop_change2 = FrameMetrics.reactDropChangeHistogram[3],
+		react_drop_change3 = FrameMetrics.reactDropChangeHistogram[4]
 	}
-	telemetryService:LogEvent(t_2, { standardizedFields = var5, customFields = t })
-	telemetryService:LogStat(t_3, {
+	TelemetryService:LogEvent(config1, { standardizedFields = List, customFields = CustomFields })
+	TelemetryService:LogStat(config2, {
 		customFields = {
 			stat = "ReactTotalTimePct",
 			context = self.context,
-			deviceTier = deviceMemoryTier
+			deviceTier = DeviceMemoryTier
 		}
-	}, t.react_total_time_pct)
+	}, CustomFields.react_total_time_pct)
 	
-	if scriptPlusExecutionTimeEnabledEngineFeature and enableCorescriptExecutionTime then
-		telemetryService:LogStat(t_3, {
+	if ScriptPlusExecutionTimeEnabledEngineFeature and EnableCorescriptExecutionTime then
+		TelemetryService:LogStat(config2, {
 			customFields = {
 				stat = "TotalCorescriptTimePct",
 				context = self.context,
-				deviceTier = deviceMemoryTier
+				deviceTier = DeviceMemoryTier
 			}
-		}, t.corescript_total_time_pct)
+		}, CustomFields.corescript_total_time_pct)
 	end
-	telemetryService:LogStat(t_3, {
+	TelemetryService:LogStat(config2, {
 		customFields = {
 			stat = "AverageReactAllFrameMs",
 			context = self.context,
-			deviceTier = deviceMemoryTier
+			deviceTier = DeviceMemoryTier
 		}
-	}, t.average_react_all_frame_ms)
-	telemetryService:LogStat(t_3, {
+	}, CustomFields.average_react_all_frame_ms)
+	TelemetryService:LogStat(config2, {
 		customFields = {
 			stat = "AverageReactOnlyFrameMs",
 			context = self.context,
-			deviceTier = deviceMemoryTier
+			deviceTier = DeviceMemoryTier
 		}
-	}, t.average_react_only_frame_ms)
-	telemetryService:LogStat(t_3, {
+	}, CustomFields.average_react_only_frame_ms)
+	TelemetryService:LogStat(config2, {
 		customFields = {
 			stat = "MaxReactFrameMs",
 			context = self.context,
-			deviceTier = deviceMemoryTier
+			deviceTier = DeviceMemoryTier
 		}
-	}, t.max_react_frame_ms)
+	}, CustomFields.max_react_frame_ms)
 	
 	for i = 1, 4 do
-		local var11 = i - 1
-		telemetryService:LogCounter(t_4, {
+		local IDelta = i - 1
+		TelemetryService:LogCounter(config3, {
 			customFields = {
 				category = "AllFrame",
-				bucket = var11,
+				bucket = IDelta,
 				context = self.context,
-				deviceTier = deviceMemoryTier
+				deviceTier = DeviceMemoryTier
 			}
-		}, frameMetrics.allFrameHistogram[i])
-		telemetryService:LogCounter(t_4, {
+		}, FrameMetrics.allFrameHistogram[i])
+		TelemetryService:LogCounter(config3, {
 			customFields = {
 				category = "ReactFrame",
-				bucket = var11,
+				bucket = IDelta,
 				context = self.context,
-				deviceTier = deviceMemoryTier
+				deviceTier = DeviceMemoryTier
 			}
-		}, frameMetrics.reactFrameHistogram[i])
-		telemetryService:LogCounter(t_4, {
+		}, FrameMetrics.reactFrameHistogram[i])
+		TelemetryService:LogCounter(config3, {
 			customFields = {
 				category = "ReactDropChange",
-				bucket = var11,
+				bucket = IDelta,
 				context = self.context,
-				deviceTier = deviceMemoryTier
+				deviceTier = DeviceMemoryTier
 			}
-		}, frameMetrics.reactDropChangeHistogram[i])
+		}, FrameMetrics.reactDropChangeHistogram[i])
 	end
-	for i_1, v in self.rootsMetrics do
-		v.root_name = i_1
-		v.update_total_time_ms = v.render_total_time_ms + v.commit_total_time_ms
-		v.total_time_ms = v.update_total_time_ms + v.passive_effects_total_time_ms
-		v.avg_render_time_ms = v.render_total_time_ms / v.update_count
-		v.context = self.context
-		v.total_time_pct = (v.update_total_time_ms + v.passive_effects_total_time_ms) / t.react_total_time_ms
-		v.avg_update_time_ms = v.update_total_time_ms / v.update_count
-		v.avg_commit_time_ms = v.commit_total_time_ms / v.update_count
+	for Root_name, rootsMetric in self.rootsMetrics do
+		rootsMetric.root_name = Root_name
+		rootsMetric.update_total_time_ms = rootsMetric.render_total_time_ms + rootsMetric.commit_total_time_ms
+		rootsMetric.total_time_ms = rootsMetric.update_total_time_ms + rootsMetric.passive_effects_total_time_ms
+		rootsMetric.avg_render_time_ms = rootsMetric.render_total_time_ms / rootsMetric.update_count
+		rootsMetric.context = self.context
+		rootsMetric.total_time_pct = (rootsMetric.update_total_time_ms + rootsMetric.passive_effects_total_time_ms) / CustomFields.react_total_time_ms
+		rootsMetric.avg_update_time_ms = rootsMetric.update_total_time_ms / rootsMetric.update_count
+		rootsMetric.avg_commit_time_ms = rootsMetric.commit_total_time_ms / rootsMetric.update_count
 		
-		if reactSchedulingTrackerLayoutEffects then
-			v.avg_layout_effects_time_ms = v.layout_effects_total_time_ms / v.layout_effects_count
+		if ReactSchedulingTrackerLayoutEffects then
+			rootsMetric.avg_layout_effects_time_ms = rootsMetric.layout_effects_total_time_ms / rootsMetric.layout_effects_count
 			
-			if reactSchedulingTrackerDataModelUpdate then
-				v.avg_data_model_update_time_ms = v.data_model_update_total_time_ms / v.update_count
+			if ReactSchedulingTrackerDataModelUpdate then
+				rootsMetric.avg_data_model_update_time_ms = rootsMetric.data_model_update_total_time_ms / rootsMetric.update_count
 			end
 		end
-		v.avg_passive_effects_time_ms = v.passive_effects_total_time_ms / v.passive_effects_count
-		v.avg_time_to_update_ms = v.total_time_to_update_ms / v.update_count
-		telemetryService:LogEvent(t_5, { standardizedFields = var5, customFields = v })
+		rootsMetric.avg_passive_effects_time_ms = rootsMetric.passive_effects_total_time_ms / rootsMetric.passive_effects_count
+		rootsMetric.avg_time_to_update_ms = rootsMetric.total_time_to_update_ms / rootsMetric.update_count
+		TelemetryService:LogEvent(config4, { standardizedFields = List, customFields = rootsMetric })
 		
-		if not disableReactSchedulingTimePctStats then
-			telemetryService:LogStat(var7, {
+		if not DisableReactSchedulingTimePctStats then
+			TelemetryService:LogStat(Config1, {
 				customFields = {
 					stat = "TotalTimePct",
-					rootName = v.root_name,
-					deviceTier = deviceMemoryTier,
+					rootName = rootsMetric.root_name,
+					deviceTier = DeviceMemoryTier,
 					context = self.context
 				}
-			}, v.total_time_pct)
+			}, rootsMetric.total_time_pct)
 		end
-		telemetryService:LogCounter(t_6, {
+		TelemetryService:LogCounter(config5, {
 			customFields = {
 				task = "RenderAndCommit",
-				rootName = v.root_name,
-				deviceTier = deviceMemoryTier,
+				rootName = rootsMetric.root_name,
+				deviceTier = DeviceMemoryTier,
 				context = self.context
 			}
-		}, v.update_count)
+		}, rootsMetric.update_count)
 		
-		if reactSchedulingTrackerLayoutEffects then
-			telemetryService:LogCounter(t_6, {
+		if ReactSchedulingTrackerLayoutEffects then
+			TelemetryService:LogCounter(config5, {
 				customFields = {
 					task = "LayoutEffects",
-					rootName = v.root_name,
-					deviceTier = deviceMemoryTier,
+					rootName = rootsMetric.root_name,
+					deviceTier = DeviceMemoryTier,
 					context = self.context
 				}
-			}, v.layout_effects_count)
+			}, rootsMetric.layout_effects_count)
 		end
-		telemetryService:LogCounter(t_6, {
+		TelemetryService:LogCounter(config5, {
 			customFields = {
 				task = "PassiveEffects",
-				rootName = v.root_name,
-				deviceTier = deviceMemoryTier,
+				rootName = rootsMetric.root_name,
+				deviceTier = DeviceMemoryTier,
 				context = self.context
 			}
-		}, v.passive_effects_count)
+		}, rootsMetric.passive_effects_count)
 		
-		if not disableReactSchedulingAvgMaxMsStats then
-			telemetryService:LogStat(var8, {
+		if not DisableReactSchedulingAvgMaxMsStats then
+			TelemetryService:LogStat(Config2, {
 				customFields = {
 					task = "RenderAndCommit",
 					stat = "AvgMs",
-					rootName = v.root_name,
-					deviceTier = deviceMemoryTier,
+					rootName = rootsMetric.root_name,
+					deviceTier = DeviceMemoryTier,
 					context = self.context
 				}
-			}, v.avg_update_time_ms)
-			telemetryService:LogStat(var8, {
+			}, rootsMetric.avg_update_time_ms)
+			TelemetryService:LogStat(Config2, {
 				customFields = {
 					task = "Commit",
 					stat = "AvgMs",
-					rootName = v.root_name,
-					deviceTier = deviceMemoryTier,
+					rootName = rootsMetric.root_name,
+					deviceTier = DeviceMemoryTier,
 					context = self.context
 				}
-			}, v.avg_commit_time_ms)
+			}, rootsMetric.avg_commit_time_ms)
 			
-			if reactSchedulingTrackerLayoutEffects then
-				telemetryService:LogStat(var8, {
+			if ReactSchedulingTrackerLayoutEffects then
+				TelemetryService:LogStat(Config2, {
 					customFields = {
 						task = "LayoutEffects",
 						stat = "AvgMs",
-						rootName = v.root_name,
-						deviceTier = deviceMemoryTier,
+						rootName = rootsMetric.root_name,
+						deviceTier = DeviceMemoryTier,
 						context = self.context
 					}
-				}, v.avg_layout_effects_time_ms)
+				}, rootsMetric.avg_layout_effects_time_ms)
 				
-				if reactSchedulingTrackerDataModelUpdate then
-					telemetryService:LogStat(var8, {
+				if ReactSchedulingTrackerDataModelUpdate then
+					TelemetryService:LogStat(Config2, {
 						customFields = {
 							task = "DataModelUpdate",
 							stat = "AvgMs",
-							rootName = v.root_name,
-							deviceTier = deviceMemoryTier,
+							rootName = rootsMetric.root_name,
+							deviceTier = DeviceMemoryTier,
 							context = self.context
 						}
-					}, v.avg_data_model_update_time_ms)
+					}, rootsMetric.avg_data_model_update_time_ms)
 				end
 			end
-			telemetryService:LogStat(var8, {
+			TelemetryService:LogStat(Config2, {
 				customFields = {
 					task = "TimeToUpdateMs",
 					stat = "AvgMs",
-					rootName = v.root_name,
-					deviceTier = deviceMemoryTier,
+					rootName = rootsMetric.root_name,
+					deviceTier = DeviceMemoryTier,
 					context = self.context
 				}
-			}, v.avg_time_to_update_ms)
-			telemetryService:LogStat(var8, {
+			}, rootsMetric.avg_time_to_update_ms)
+			TelemetryService:LogStat(Config2, {
 				customFields = {
 					task = "PassiveEffects",
 					stat = "AvgMs",
-					rootName = v.root_name,
-					deviceTier = deviceMemoryTier,
+					rootName = rootsMetric.root_name,
+					deviceTier = DeviceMemoryTier,
 					context = self.context
 				}
-			}, v.avg_passive_effects_time_ms)
-			telemetryService:LogStat(var8, {
+			}, rootsMetric.avg_passive_effects_time_ms)
+			TelemetryService:LogStat(Config2, {
 				customFields = {
 					task = "RenderAndCommit",
 					stat = "MaxMs",
-					rootName = v.root_name,
-					deviceTier = deviceMemoryTier,
+					rootName = rootsMetric.root_name,
+					deviceTier = DeviceMemoryTier,
 					context = self.context
 				}
-			}, v.max_update_time_ms)
-			telemetryService:LogStat(var8, {
+			}, rootsMetric.max_update_time_ms)
+			TelemetryService:LogStat(Config2, {
 				customFields = {
 					task = "Commit",
 					stat = "MaxMs",
-					rootName = v.root_name,
-					deviceTier = deviceMemoryTier,
+					rootName = rootsMetric.root_name,
+					deviceTier = DeviceMemoryTier,
 					context = self.context
 				}
-			}, v.max_commit_time_ms)
+			}, rootsMetric.max_commit_time_ms)
 			
-			if reactSchedulingTrackerLayoutEffects then
-				telemetryService:LogStat(var8, {
+			if ReactSchedulingTrackerLayoutEffects then
+				TelemetryService:LogStat(Config2, {
 					customFields = {
 						task = "LayoutEffects",
 						stat = "MaxMs",
-						rootName = v.root_name,
-						deviceTier = deviceMemoryTier,
+						rootName = rootsMetric.root_name,
+						deviceTier = DeviceMemoryTier,
 						context = self.context
 					}
-				}, v.max_layout_effects_time_ms)
+				}, rootsMetric.max_layout_effects_time_ms)
 				
-				if reactSchedulingTrackerDataModelUpdate then
-					telemetryService:LogStat(var8, {
+				if ReactSchedulingTrackerDataModelUpdate then
+					TelemetryService:LogStat(Config2, {
 						customFields = {
 							task = "DataModelUpdate",
 							stat = "MaxMs",
-							rootName = v.root_name,
-							deviceTier = deviceMemoryTier,
+							rootName = rootsMetric.root_name,
+							deviceTier = DeviceMemoryTier,
 							context = self.context
 						}
-					}, v.max_data_model_update_time_ms)
+					}, rootsMetric.max_data_model_update_time_ms)
 				end
 			end
-			telemetryService:LogStat(var8, {
+			TelemetryService:LogStat(Config2, {
 				customFields = {
 					task = "TimeToUpdateMs",
 					stat = "MaxMs",
-					rootName = v.root_name,
-					deviceTier = deviceMemoryTier,
+					rootName = rootsMetric.root_name,
+					deviceTier = DeviceMemoryTier,
 					context = self.context
 				}
-			}, v.max_time_to_update_ms)
-			telemetryService:LogStat(var8, {
+			}, rootsMetric.max_time_to_update_ms)
+			TelemetryService:LogStat(Config2, {
 				customFields = {
 					task = "PassiveEffects",
 					stat = "MaxMs",
-					rootName = v.root_name,
-					deviceTier = deviceMemoryTier,
+					rootName = rootsMetric.root_name,
+					deviceTier = DeviceMemoryTier,
 					context = self.context
 				}
-			}, v.max_passive_effects_time_ms)
+			}, rootsMetric.max_passive_effects_time_ms)
 		end
 	end
 end
 
-function generatePercentilesFromSingleSketch(p2)
-	-- upvalues: parts (ref)
-	local var12 = "{"
+function generatePercentilesFromSingleSketch(p2): string --[[ Line: 1141 ]]
+	-- upvalues: Parts (copy)
+	local Text = "{"
 	
-	for i, v in parts do
-		var12 = (var12 .. "\"p" .. v .. "\":") .. p29:getPercentile(tonumber(v) or 0)
+	for i, part in Parts do
+		Text = (Text .. "\"p" .. part .. "\":") .. p2:getPercentile(tonumber(part) or 0)
 		
-		if i < #parts then
-			var12 ..= ","
+		if i < #Parts then
+			Text ..= ","
 		end
 	end
-	return var12 .. "}"
+	return Text .. "}"
 end
 
-function generatePercentilesFromSketches(p3, p4)
-	-- upvalues: parts (ref)
-	local var13 = "{"
+function generatePercentilesFromSketches(List, p3): string --[[ Line: 1155 ]]
+	-- upvalues: Parts (copy)
+	local v1 = "{"
 	
-	for i, v in parts do
-		var13 ..= "\"p" .. v .. "\":{"
-		local var14 = tonumber(v) or 0
-		local var15 = 0
+	for i, part in Parts do
+		local Text = v1 .. "\"p" .. part .. "\":{"
+		local Number: number = tonumber(part) or 0
+		local Count = 0
 		
-		for i_1, v_1 in p3 do
-			var15 += 1
-			var13 ..= "\"" .. i_1 .. "\":" .. v_1:getPercentile(var14)
+		for i1, value in List do
+			Count += 1
+			Text ..= "\"" .. i1 .. "\":" .. value:getPercentile(Number)
 			
-			if var15 < p4 then
-				var13 ..= ","
+			if Count < p3 then
+				Text ..= ","
 			end
 		end
-		var13 ..= if i < #parts then "}," else "}"
+		v1 = Text .. (if i < #Parts then "}," else "}")
 	end
-	return var13 .. "}"
+	return v1 .. "}"
 end
 
-function t_8:reportPercentError(p5, p6, p7, p8)
-	-- upvalues: parts (ref), telemetryService (ref), var6 (write), var5 (write)
-	table.sort(p5)
-	local p32Count = #p5
+function Module1:reportPercentError(List1, p4, Metric, RootName) --[[ Line: 1175 ]]
+	-- upvalues: Parts (copy), TelemetryService (copy), Config (ref), List (ref)
+	table.sort(List1)
+	local CountList1 = #List1
 	
-	if p32Count < 1 then return end
-	for i, v in parts do
-		local var16 = p5[math.ceil((tonumber(v) or 0) / 100 * p32Count)]
-		local var17 = if p6.sketches then p6.sketches[p8]:getPercentile(v) else p6.sketch:getPercentile(v)
-		local var18 = 0
+	if CountList1 < 1 then return end
+	for _, part in Parts do
+		local Entry = List1[math.ceil((tonumber(part) or 0) / 100 * CountList1)]
+		local Percentile = if p4.sketches then p4.sketches[RootName]:getPercentile(part) else p4.sketch:getPercentile(part)
+		local ApproxError = 0
 		
-		if var16 ~= 0 or var17 == 0 then
-			if var16 ~= 0 then
-				var18 = (var17 - var16) * 100 / var16
+		if Entry ~= 0 or Percentile == 0 then
+			if Entry ~= 0 then
+				ApproxError = (Percentile - Entry) * 100 / Entry
 			end
-			telemetryService:LogEvent(var6, {
-				standardizedFields = var5,
+			TelemetryService:LogEvent(Config, {
+				standardizedFields = List,
 				customFields = {
-					rootName = p8,
-					percentile = v,
-					metric = p7,
-					numDatapoints = p32Count,
+					rootName = RootName,
+					percentile = part,
+					metric = Metric,
+					numDatapoints = CountList1,
 					context = self.context,
-					approxError = var18
+					approxError = ApproxError
 				}
 			})
 		end
 	end
 end
 
-function t_8:reportSession()
-	-- upvalues: debugReactSchedulingEnableErrorEvents (ref), telemetryService (ref), t_1 (ref), var5 (write)
+function Module1:reportSession() --[[ Line: 1215 ]]
+	-- upvalues: DebugReactSchedulingEnableErrorEvents (copy), TelemetryService (copy), config (copy), List (ref)
 	if not self.started then return end
-	local t = {
+	local CustomFields = {
 		reactUpdateTime = generatePercentilesFromSketches(self.sessionMetrics.updateTime.sketches, self.sessionMetrics.updateTime.numRoots),
 		reactCommitTime = generatePercentilesFromSketches(self.sessionMetrics.commitTime.sketches, self.sessionMetrics.commitTime.numRoots),
 		reactTimeToUpdate = generatePercentilesFromSketches(self.sessionMetrics.timeToUpdate.sketches, self.sessionMetrics.timeToUpdate.numRoots),
@@ -1009,18 +1018,18 @@ function t_8:reportSession()
 		timePerReactFrame = generatePercentilesFromSingleSketch(self.sessionMetrics.timePerReactFrame.sketch)
 	}
 	
-	if debugReactSchedulingEnableErrorEvents then
-		for i, v in self.sessionMetrics do
-			if not v.sketches then
-				self:reportPercentError(v.allData, v, i, "all")
+	if DebugReactSchedulingEnableErrorEvents then
+		for Metric, sessionMetric in self.sessionMetrics do
+			if not sessionMetric.sketches then
+				self:reportPercentError(sessionMetric.allData, sessionMetric, Metric, "all")
 				continue
 			end
-			for i_1, v_1 in v.allData do
-				self:reportPercentError(v_1, v, i, i_1)
+			for i, value in sessionMetric.allData do
+				self:reportPercentError(value, sessionMetric, Metric, i)
 			end
 		end
 	end
-	telemetryService:LogEvent(t_1, { standardizedFields = var5, customFields = t })
+	TelemetryService:LogEvent(config, { standardizedFields = List, customFields = CustomFields })
 end
 
-return t_8.new(fStringReactSchedulingContext)
+return (Module1.new(FStringReactSchedulingContext))

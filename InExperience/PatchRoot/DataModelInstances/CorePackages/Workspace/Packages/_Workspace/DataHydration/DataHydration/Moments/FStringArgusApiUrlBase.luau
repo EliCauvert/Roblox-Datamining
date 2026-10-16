@@ -1,5 +1,5 @@
 ﻿game:DefineFastString("ArgusApiUrlBase", "")
 
-return function()
+return function() --[[ Line: 3 ]]
 	return game:GetFastString("ArgusApiUrlBase")
 end

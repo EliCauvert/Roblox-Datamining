@@ -1,21 +1,21 @@
-﻿local virtualEvents = script:FindFirstAncestor("VirtualEvents")
-local reactModule = require(virtualEvents.Parent.React)
-local reactRobloxModule = require(virtualEvents.Parent.ReactRoblox)
-local withMockProvidersModule = require(virtualEvents.withMockProviders)
+﻿local VirtualEvents = script:FindFirstAncestor("VirtualEvents")
+local ReactModule = require(VirtualEvents.Parent.React)
+local ReactRobloxModule = require(VirtualEvents.Parent.ReactRoblox)
+local WithMockProvidersModule = require(VirtualEvents.withMockProviders)
 
-return function(p1)
-	-- upvalues: reactRobloxModule (ref), withMockProvidersModule (ref), reactModule (ref)
-	local var1 = reactRobloxModule.createRoot(Instance.new("ScreenGui"))
-	local var2 = withMockProvidersModule({
-		HookTester = reactModule.createElement(function()
-			-- upvalues: p1 (ref)
-			p1()
+return function(Callback) --[[ Line: 7 | Named "testHook" ]]
+	-- upvalues: ReactRobloxModule (copy), WithMockProvidersModule (copy), ReactModule (copy)
+	local Root = ReactRobloxModule.createRoot((Instance.new("ScreenGui")))
+	local WithMockProvidersModuleResult = WithMockProvidersModule({
+		HookTester = ReactModule.createElement(function() --[[ Line: 11 | Named "HookTester" ]]
+			-- upvalues: Callback (copy)
+			Callback()
 			
 			return nil
 		end)
 	})
-	reactRobloxModule.act(function()
-		-- upvalues: var1 (ref), var2 (ref)
-		var1:render(var2)
+	ReactRobloxModule.act(function() --[[ Line: 20 ]]
+		-- upvalues: Root (copy), WithMockProvidersModuleResult (copy)
+		Root:render(WithMockProvidersModuleResult)
 	end)
 end

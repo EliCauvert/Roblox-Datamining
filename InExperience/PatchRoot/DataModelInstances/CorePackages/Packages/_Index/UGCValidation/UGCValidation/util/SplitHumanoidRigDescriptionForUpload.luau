@@ -1,58 +1,61 @@
-﻿local constantsModule = require(script.Parent.Parent.Constants)
+﻿local ConstantsModule = require(script.Parent.Parent.Constants)
 
 return {
-	fixUploadInstance = function(p1)
-		-- upvalues: constantsModule (ref)
-		local humanoidRigDescription = p1:FindFirstChildWhichIsA("HumanoidRigDescription")
+	fixUploadInstance = function(Object) --[[ Line: 17 ]]
+		-- upvalues: ConstantsModule (copy)
+		local HumanoidRigDescription = Object:FindFirstChildWhichIsA("HumanoidRigDescription")
 		
-		if not humanoidRigDescription then return end
-		for i, v in constantsModule.R15_BODY_PARTS do
-			local i_1 = p1:FindFirstChild(v)
+		if not HumanoidRigDescription then return end
+		for _, r15BODYPART in ConstantsModule.R15_BODY_PARTS do
+			local Child = Object:FindFirstChild(r15BODYPART)
 			
-			if i_1 then
-				local humanoidRigDescription_2
-				local _ = nil
-				local humanoidRigDescription_1 = i_1:FindFirstChildWhichIsA("HumanoidRigDescription")
+			if Child then
+				local HumanoidRigDescription1 = Child:FindFirstChildWhichIsA("HumanoidRigDescription")
+				local HumanoidRigDescription2 = nil
 				
-				if humanoidRigDescription_1 == nil then
-					humanoidRigDescription_2 = Instance.new("HumanoidRigDescription")
-					humanoidRigDescription_2.Parent = i_1
+				if HumanoidRigDescription1 == nil then
+					HumanoidRigDescription2 = Instance.new("HumanoidRigDescription")
+					HumanoidRigDescription2.Parent = Child
 				else
-					humanoidRigDescription_2 = humanoidRigDescription_1
+					HumanoidRigDescription2 = HumanoidRigDescription1
 				end
-				if i_1.Name == "LowerTorso" then
-					humanoidRigDescription_2.OriginOffset = humanoidRigDescription.OriginOffset
+				if Child.Name == "LowerTorso" then
+					HumanoidRigDescription2.OriginOffset = HumanoidRigDescription.OriginOffset
 				end
-				for i_2, v_1 in humanoidRigDescription_2:GetContainedJointLabels(v) do
-					local var1 = humanoidRigDescription:GetJoint(v_1)
+				for _, containedJointLabel in HumanoidRigDescription2:GetContainedJointLabels(r15BODYPART) do
+					local Joint = HumanoidRigDescription:GetJoint(containedJointLabel)
 					
-					if var1 then
-						if var1:IsA("AnimationConstraint") then
-							if var1.Attachment0 and var1.Attachment0:IsDescendantOf(i_1) then
-								humanoidRigDescription_2:SetJoint(v_1, var1.Attachment0)
-							elseif var1.Attachment1 and var1.Attachment1:IsDescendantOf(i_1) then
-								humanoidRigDescription_2:SetJoint(v_1, var1.Attachment1)
+					if Joint then
+						if Joint:IsA("AnimationConstraint") then
+							if not Joint.Attachment0 or not Joint.Attachment0:IsDescendantOf(Child) then
+								if Joint.Attachment1 and Joint.Attachment1:IsDescendantOf(Child) then
+									HumanoidRigDescription2:SetJoint(containedJointLabel, Joint.Attachment1)
+								else
+									continue
+								end
+							else
+								HumanoidRigDescription2:SetJoint(containedJointLabel, Joint.Attachment0)
 							end
 						else
-							humanoidRigDescription_2:SetJoint(v_1, var1)
+							HumanoidRigDescription2:SetJoint(containedJointLabel, Joint)
 						end
-						humanoidRigDescription_2:SetTposeAdjustment(v_1, humanoidRigDescription:GetTposeAdjustment(v_1))
-						humanoidRigDescription_2:SetJointSize(v_1, humanoidRigDescription:GetJointSize(v_1))
-						humanoidRigDescription_2:SetJointRangeMin(v_1, humanoidRigDescription:GetJointRangeMin(v_1))
-						humanoidRigDescription_2:SetJointRangeMax(v_1, humanoidRigDescription:GetJointRangeMax(v_1))
+						HumanoidRigDescription2:SetTposeAdjustment(containedJointLabel, HumanoidRigDescription:GetTposeAdjustment(containedJointLabel))
+						HumanoidRigDescription2:SetJointSize(containedJointLabel, HumanoidRigDescription:GetJointSize(containedJointLabel))
+						HumanoidRigDescription2:SetJointRangeMin(containedJointLabel, HumanoidRigDescription:GetJointRangeMin(containedJointLabel))
+						HumanoidRigDescription2:SetJointRangeMax(containedJointLabel, HumanoidRigDescription:GetJointRangeMax(containedJointLabel))
 					end
 				end
 			end
 		end
-		local leftHand = p1:FindFirstChild("LeftHand")
-		local rightHand = p1:FindFirstChild("RightHand")
+		local LeftHand = Object:FindFirstChild("LeftHand")
+		local RightHand = Object:FindFirstChild("RightHand")
 		
-		for i_1, v_1 in humanoidRigDescription:GetChildren() do
-			if v_1:IsA("DigitsRigDescription") then
-				if v_1.Side == Enum.DigitsRigDescriptionSide.Left and leftHand then
-					v_1:Clone().Parent = leftHand
-				elseif v_1.Side == Enum.DigitsRigDescriptionSide.Right and rightHand then
-					v_1:Clone().Parent = rightHand
+		for _, DigitsRigDescription in HumanoidRigDescription:GetChildren() do
+			if DigitsRigDescription:IsA("DigitsRigDescription") then
+				if DigitsRigDescription.Side == Enum.DigitsRigDescriptionSide.Left and LeftHand then
+					DigitsRigDescription:Clone().Parent = LeftHand
+				elseif DigitsRigDescription.Side == Enum.DigitsRigDescriptionSide.Right and RightHand then
+					DigitsRigDescription:Clone().Parent = RightHand
 				end
 			end
 		end

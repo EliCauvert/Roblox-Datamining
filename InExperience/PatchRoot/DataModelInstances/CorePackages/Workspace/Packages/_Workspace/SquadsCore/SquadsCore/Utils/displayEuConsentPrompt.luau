@@ -1,30 +1,30 @@
-﻿local httpService = game:GetService("HttpService")
-local squadsCore = script:FindFirstAncestor("SquadsCore")
-local default = require(squadsCore.Parent.CrossExperienceVoice).CrossExperienceVoiceManager.default
-local SQUAD_VOICE_EU_MODAL_CONSENT_GIVEN_KEY = require(squadsCore.Common.Constants).SQUAD_VOICE_EU_MODAL_CONSENT_GIVEN_KEY
-local SQUAD_VOICE_EU_MODAL_SEEN_KEY = require(squadsCore.Common.Constants).SQUAD_VOICE_EU_MODAL_SEEN_KEY
-local squadPromptTypeModule = require(squadsCore.Enums.SquadPromptType)
-local setTableAppStorageKey = require(squadsCore.Utils.appStorageAccess).setTableAppStorageKey
+﻿local HttpService = game:GetService("HttpService")
+local SquadsCore = script:FindFirstAncestor("SquadsCore")
+local Default = require(SquadsCore.Parent.CrossExperienceVoice).CrossExperienceVoiceManager.default
+local SQUADVOICEEUMODALCONSENTGIVENKEY = require(SquadsCore.Common.Constants).SQUAD_VOICE_EU_MODAL_CONSENT_GIVEN_KEY
+local SQUADVOICEEUMODALSEENKEY = require(SquadsCore.Common.Constants).SQUAD_VOICE_EU_MODAL_SEEN_KEY
+local SquadPromptTypeModule = require(SquadsCore.Enums.SquadPromptType)
+local SetTableAppStorageKeyFunction = require(SquadsCore.Utils.appStorageAccess).setTableAppStorageKey
 
-return function(p1, p2, p3, p4)
-	-- upvalues: squadPromptTypeModule (ref), setTableAppStorageKey (ref), SQUAD_VOICE_EU_MODAL_SEEN_KEY (ref), httpService (ref), SQUAD_VOICE_EU_MODAL_CONSENT_GIVEN_KEY (ref), default (ref)
-	return function(p5)
-		-- upvalues: p1 (ref), squadPromptTypeModule (copy), p3 (ref), p2 (ref), p4 (ref), setTableAppStorageKey (copy), SQUAD_VOICE_EU_MODAL_SEEN_KEY (copy), httpService (copy), SQUAD_VOICE_EU_MODAL_CONSENT_GIVEN_KEY (copy), default (copy)
-		p1(p5, {
-			promptType = squadPromptTypeModule.EuVoiceConsentPrompt,
-			onConfirm = function()
-				-- upvalues: p3 (copy), p2 (copy), p4 (copy), setTableAppStorageKey (copy), SQUAD_VOICE_EU_MODAL_SEEN_KEY (copy), httpService (copy), SQUAD_VOICE_EU_MODAL_CONSENT_GIVEN_KEY (copy), default (copy)
-				p3[p2] = true
-				p4[p2] = true
-				setTableAppStorageKey(SQUAD_VOICE_EU_MODAL_SEEN_KEY, httpService:JSONEncode(p3))
-				setTableAppStorageKey(SQUAD_VOICE_EU_MODAL_CONSENT_GIVEN_KEY, httpService:JSONEncode(p4))
-				default.default.VoiceEuModalConsented:Fire()
+return function(Callback, p1, Input, Input1) --[[ Line: 13 ]]
+	-- upvalues: SquadPromptTypeModule (copy), SetTableAppStorageKeyFunction (copy), SQUADVOICEEUMODALSEENKEY (copy), HttpService (copy), SQUADVOICEEUMODALCONSENTGIVENKEY (copy), Default (copy)
+	return function(p2) --[[ Line: 19 ]]
+		-- upvalues: Callback (copy), SquadPromptTypeModule (upval), Input (copy), p1 (copy), Input1 (copy), SetTableAppStorageKeyFunction (upval), SQUADVOICEEUMODALSEENKEY (upval), HttpService (upval), SQUADVOICEEUMODALCONSENTGIVENKEY (upval), Default (upval)
+		Callback(p2, {
+			promptType = SquadPromptTypeModule.EuVoiceConsentPrompt,
+			onConfirm = function() --[[ Line: 22 ]]
+				-- upvalues: Input (upval), p1 (upval), Input1 (upval), SetTableAppStorageKeyFunction (upval), SQUADVOICEEUMODALSEENKEY (upval), HttpService (upval), SQUADVOICEEUMODALCONSENTGIVENKEY (upval), Default (upval)
+				Input[p1] = true
+				Input1[p1] = true
+				SetTableAppStorageKeyFunction(SQUADVOICEEUMODALSEENKEY, HttpService:JSONEncode(Input))
+				SetTableAppStorageKeyFunction(SQUADVOICEEUMODALCONSENTGIVENKEY, HttpService:JSONEncode(Input1))
+				Default.default.VoiceEuModalConsented:Fire()
 			end,
-			onCancel = function()
-				-- upvalues: p3 (copy), p2 (copy), setTableAppStorageKey (copy), SQUAD_VOICE_EU_MODAL_SEEN_KEY (copy), httpService (copy), default (copy)
-				p3[p2] = true
-				setTableAppStorageKey(SQUAD_VOICE_EU_MODAL_SEEN_KEY, httpService:JSONEncode(p3))
-				default.default.VoiceEuModalRefused:Fire()
+			onCancel = function() --[[ Line: 32 ]]
+				-- upvalues: Input (upval), p1 (upval), SetTableAppStorageKeyFunction (upval), SQUADVOICEEUMODALSEENKEY (upval), HttpService (upval), Default (upval)
+				Input[p1] = true
+				SetTableAppStorageKeyFunction(SQUADVOICEEUMODALSEENKEY, HttpService:JSONEncode(Input))
+				Default.default.VoiceEuModalRefused:Fire()
 			end
 		})
 	end

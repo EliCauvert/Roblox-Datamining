@@ -1,10 +1,13 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local useAppPolicyModule = require(appChat.Hooks.useAppPolicy)
-local useIsChatEnabledModule = require(appChat.Hooks.useIsChatEnabled)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local UseAppPolicyModule = require(AppChat.Hooks.useAppPolicy)
+local UseIsChatEnabledModule = require(AppChat.Hooks.useIsChatEnabled)
 
-return function()
-	-- upvalues: useAppPolicyModule (ref), useIsChatEnabledModule (ref)
-	return if useAppPolicyModule(function(p1)
+return function() --[[ Line: 10 ]]
+	-- upvalues: UseAppPolicyModule (copy), UseIsChatEnabledModule (copy)
+	local UseAppPolicyModuleResult = UseAppPolicyModule(function(p1) --[[ Line: 11 ]]
 		return p1.getChatHeaderSearch()
-	end) then useIsChatEnabledModule() else false
+	end)
+	local UseIsChatEnabledModuleResult = UseIsChatEnabledModule()
+	
+	return UseAppPolicyModuleResult and UseIsChatEnabledModuleResult or false
 end

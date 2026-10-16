@@ -1,350 +1,356 @@
-﻿local avatarExperienceAnalytics = script:FindFirstAncestor("AvatarExperienceAnalytics")
-local parent = avatarExperienceAnalytics.Parent
-local collectionService = game:GetService("CollectionService")
-local reactModule = require(parent.React)
-local cryoModule = require(parent.Cryo)
-local sendUnifiedEventLogForInstanceModule = require(script.Parent.sendUnifiedEventLogForInstance)
-local unifiedEventLogConstantsModule = require(script.Parent.UnifiedEventLogConstants)
-local unifiedEventLogEnumsModule = require(script.Parent.UnifiedEventLogEnums)
-local resolveClickSurfaceModule = require(script.Parent.resolveClickSurface)
-local applyClickStampFieldOverridesModule = require(script.Parent.applyClickStampFieldOverrides)
-local unifiedEventLoggingUtilsModule = require(avatarExperienceAnalytics.Utils.UnifiedEventLoggingUtils)
-local getDeferredPurchaseSourceTileModule = require(avatarExperienceAnalytics.Utils.getDeferredPurchaseSourceTile)
-local unifiedSelectionListStoreModule = require(avatarExperienceAnalytics.Store.UnifiedSelectionListStore)
-local lastDeferredSingleItemStoreModule = require(avatarExperienceAnalytics.Store.LastDeferredSingleItemStore)
-local cartIdServiceModule = require(avatarExperienceAnalytics.Lib.CartIdService)
-local avatarExperienceCommonModule = require(parent.AvatarExperienceCommon)
-local useSelectorSignal = avatarExperienceCommonModule.Hooks.useSelectorSignal
-local selectSearchKeyword = avatarExperienceCommonModule.State.Selectors.selectSearchKeyword
-local avatarExperienceNavigationModule = require(parent.AvatarExperienceNavigation)
-local useAvatarRoute = avatarExperienceNavigationModule.AvatarRoute.Hooks.useAvatarRoute
-local avatarScreenProperties = avatarExperienceNavigationModule.AvatarRoute.AvatarScreenProperties
-local unifiedLoggingSurface = avatarExperienceNavigationModule.Enums.UnifiedLoggingSurface
-local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
-local fFlagAXMISEnableMultiShoppingUnifiedEvents = avatarExperienceFlagsModule.FFlagAXMISEnableMultiShoppingUnifiedEvents
-local fFlagAXUnifiedImpressionsOnThumbnail = avatarExperienceFlagsModule.FFlagAXUnifiedImpressionsOnThumbnail
-local fFlagAXFixSingleItemPurchaseWidgetLogging = avatarExperienceFlagsModule.FFlagAXFixSingleItemPurchaseWidgetLogging
-local fFlagAXFixSearchPurchaseSurface = avatarExperienceFlagsModule.FFlagAXFixSearchPurchaseSurface
-local fFlagAXSkipTapDetection = avatarExperienceFlagsModule.FFlagAXSkipTapDetection
+﻿local AvatarExperienceAnalytics = script:FindFirstAncestor("AvatarExperienceAnalytics")
+local Parent = AvatarExperienceAnalytics.Parent
+local CollectionService = game:GetService("CollectionService")
+local ReactModule = require(Parent.React)
+local CryoModule = require(Parent.Cryo)
+local SendUnifiedEventLogForInstanceModule = require(script.Parent.sendUnifiedEventLogForInstance)
+local UnifiedEventLogConstantsModule = require(script.Parent.UnifiedEventLogConstants)
+local UnifiedEventLogEnumsModule = require(script.Parent.UnifiedEventLogEnums)
+local ResolveClickSurfaceModule = require(script.Parent.resolveClickSurface)
+local ApplyClickStampFieldOverridesModule = require(script.Parent.applyClickStampFieldOverrides)
+local UnifiedEventLoggingUtilsModule = require(AvatarExperienceAnalytics.Utils.UnifiedEventLoggingUtils)
+local GetDeferredPurchaseSourceTileModule = require(AvatarExperienceAnalytics.Utils.getDeferredPurchaseSourceTile)
+local UnifiedSelectionListStoreModule = require(AvatarExperienceAnalytics.Store.UnifiedSelectionListStore)
+local LastDeferredSingleItemStoreModule = require(AvatarExperienceAnalytics.Store.LastDeferredSingleItemStore)
+local CartIdServiceModule = require(AvatarExperienceAnalytics.Lib.CartIdService)
+local AvatarExperienceCommonModule = require(Parent.AvatarExperienceCommon)
+local UseSelectorSignalFunction = AvatarExperienceCommonModule.Hooks.useSelectorSignal
+local SelectSearchKeyword = AvatarExperienceCommonModule.State.Selectors.selectSearchKeyword
+local AvatarExperienceNavigationModule = require(Parent.AvatarExperienceNavigation)
+local UseAvatarRouteFunction = AvatarExperienceNavigationModule.AvatarRoute.Hooks.useAvatarRoute
+local AvatarScreenProperties = AvatarExperienceNavigationModule.AvatarRoute.AvatarScreenProperties
+local UnifiedLoggingSurface = AvatarExperienceNavigationModule.Enums.UnifiedLoggingSurface
+local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
+local FFlagAXMISEnableMultiShoppingUnifiedEvents = AvatarExperienceFlagsModule.FFlagAXMISEnableMultiShoppingUnifiedEvents
+local FFlagAXUnifiedImpressionsOnThumbnail = AvatarExperienceFlagsModule.FFlagAXUnifiedImpressionsOnThumbnail
+local FFlagAXFixSingleItemPurchaseWidgetLogging = AvatarExperienceFlagsModule.FFlagAXFixSingleItemPurchaseWidgetLogging
+local FFlagAXFixSearchPurchaseSurface = AvatarExperienceFlagsModule.FFlagAXFixSearchPurchaseSurface
+local FFlagAXSkipTapDetection = AvatarExperienceFlagsModule.FFlagAXSkipTapDetection
 
-local function markLastActivated(p1)
-	-- upvalues: collectionService (ref), unifiedEventLogConstantsModule (ref)
-	for i, v in collectionService:GetTagged(unifiedEventLogConstantsModule.LAST_ACTIVATED_TAG_NAME) do
-		collectionService:RemoveTag(v, unifiedEventLogConstantsModule.LAST_ACTIVATED_TAG_NAME)
+local function markLastActivated(p1) --[[ Line: 32 ]]
+	-- upvalues: CollectionService (copy), UnifiedEventLogConstantsModule (copy)
+	for _, value in CollectionService:GetTagged(UnifiedEventLogConstantsModule.LAST_ACTIVATED_TAG_NAME) do
+		CollectionService:RemoveTag(value, UnifiedEventLogConstantsModule.LAST_ACTIVATED_TAG_NAME)
 	end
-	collectionService:AddTag(p1, unifiedEventLogConstantsModule.LAST_ACTIVATED_TAG_NAME)
+	CollectionService:AddTag(p1, UnifiedEventLogConstantsModule.LAST_ACTIVATED_TAG_NAME)
 end
 
-local function markSelectionListStatus(p2, p3, p4)
-	-- upvalues: fFlagAXMISEnableMultiShoppingUnifiedEvents (ref), unifiedEventLoggingUtilsModule (ref), unifiedEventLogConstantsModule (ref), fFlagAXFixSearchPurchaseSurface (ref), resolveClickSurfaceModule (ref), unifiedSelectionListStoreModule (ref)
-	local attributes = p2:GetAttributes()
+local function markSelectionListStatus(Object, p2, p3) --[[ Line: 43 ]]
+	-- upvalues: FFlagAXMISEnableMultiShoppingUnifiedEvents (copy), UnifiedEventLoggingUtilsModule (copy), UnifiedEventLogConstantsModule (copy), FFlagAXFixSearchPurchaseSurface (copy), ResolveClickSurfaceModule (copy), UnifiedSelectionListStoreModule (copy)
+	local Attributes = Object:GetAttributes()
 	
-	if fFlagAXMISEnableMultiShoppingUnifiedEvents then
-		for i, v in unifiedEventLoggingUtilsModule.getScreenSize(p2) do
-			attributes[unifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. i] = v
+	if FFlagAXMISEnableMultiShoppingUnifiedEvents then
+		for i, value in UnifiedEventLoggingUtilsModule.getScreenSize(Object) do
+			Attributes[UnifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. i] = value
 		end
-		for i_1, v_1 in unifiedEventLoggingUtilsModule.getElementSizeAndPosition(p2) do
-			attributes[unifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. i_1] = v_1
+		for i1, value1 in UnifiedEventLoggingUtilsModule.getElementSizeAndPosition(Object) do
+			Attributes[UnifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. i1] = value1
 		end
 	end
-	if fFlagAXFixSearchPurchaseSurface and not p3 then
-		local text = unifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. "surface"
+	if FFlagAXFixSearchPurchaseSurface and not p2 then
+		local Text = UnifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. "surface"
 		
-		if attributes[text] == nil then
-			local var1 = resolveClickSurfaceModule(p2, if p4 then p4.current else nil)
+		if Attributes[Text] == nil then
+			local ResolveClickSurfaceModuleResult = ResolveClickSurfaceModule(Object, if p3 then p3.current else nil)
 			
-			if var1 ~= nil then
-				attributes[text] = var1
+			if ResolveClickSurfaceModuleResult ~= nil then
+				Attributes[Text] = ResolveClickSurfaceModuleResult
 			end
 		end
 	end
-	if p3 then
-		unifiedSelectionListStoreModule.removeFromSelectionList(attributes)
+	if p2 then
+		UnifiedSelectionListStoreModule.removeFromSelectionList(Attributes)
 		
 		return
+	else
+		UnifiedSelectionListStoreModule.addToSelectionList(Attributes)
 	end
-	unifiedSelectionListStoreModule.addToSelectionList(attributes)
 end
 
-local function getChildButton(p5)
-	if not p5 then
+local function getChildButton(Object) --[[ Line: 84 ]]
+	if not Object then
 		return nil
-	elseif p5:IsA("TextButton") or p5:IsA("ImageButton") or p5:IsA("GuiButton") then
-		return p5
 	end
-	for i, v in p5:GetDescendants() do
-		if p5:IsA("TextButton") or p5:IsA("ImageButton") or p5:IsA("GuiButton") then
-			return p5
+	if Object:IsA("TextButton") or Object:IsA("ImageButton") or Object:IsA("GuiButton") then
+		return Object
+	end
+	for _, _ in Object:GetDescendants() do
+		if Object:IsA("TextButton") or Object:IsA("ImageButton") or Object:IsA("GuiButton") then
+			return Object
 		end
 	end
 	return nil
 end
 
-local function AnalyticsMetadataSelector(p6)
-	return p6.AvatarExperience.AnalyticsMetadata
+local function AnalyticsMetadataSelector(p4) --[[ Line: 102 ]]
+	return p4.AvatarExperience.AnalyticsMetadata
 end
 
-local _ = function(p6, p7)
-	-- upvalues: reactModule (ref), collectionService (ref), unifiedEventLogConstantsModule (ref), getChildButton (ref), fFlagAXSkipTapDetection (ref), markLastActivated (ref), fFlagAXMISEnableMultiShoppingUnifiedEvents (ref), markSelectionListStatus (ref), fFlagAXFixSearchPurchaseSurface (ref), fFlagAXFixSingleItemPurchaseWidgetLogging (ref), unifiedEventLogEnumsModule (ref), getDeferredPurchaseSourceTileModule (ref), unifiedEventLoggingUtilsModule (ref), lastDeferredSingleItemStoreModule (ref), cryoModule (ref), fFlagAXUnifiedImpressionsOnThumbnail (ref), resolveClickSurfaceModule (ref), unifiedLoggingSurface (ref), avatarScreenProperties (ref), cartIdServiceModule (ref), applyClickStampFieldOverridesModule (ref), sendUnifiedEventLogForInstanceModule (ref)
-	reactModule.useEffect(function()
-		-- upvalues: collectionService (copy), unifiedEventLogConstantsModule (copy), getChildButton (copy), fFlagAXSkipTapDetection (copy), markLastActivated (copy), fFlagAXMISEnableMultiShoppingUnifiedEvents (copy), markSelectionListStatus (copy), fFlagAXFixSearchPurchaseSurface (copy), p7 (ref), fFlagAXFixSingleItemPurchaseWidgetLogging (copy), unifiedEventLogEnumsModule (copy), getDeferredPurchaseSourceTileModule (copy), unifiedEventLoggingUtilsModule (copy), lastDeferredSingleItemStoreModule (copy), p6 (ref), cryoModule (copy), fFlagAXUnifiedImpressionsOnThumbnail (copy), resolveClickSurfaceModule (copy), unifiedLoggingSurface (copy), avatarScreenProperties (copy), cartIdServiceModule (copy), applyClickStampFieldOverridesModule (copy), sendUnifiedEventLogForInstanceModule (copy)
-		local t = {}
-		t.instanceAdded = collectionService:GetInstanceAddedSignal(unifiedEventLogConstantsModule.TAG_NAME):Connect(function(p8)
-			-- upvalues: getChildButton (copy), fFlagAXSkipTapDetection (copy), unifiedEventLogConstantsModule (copy), markLastActivated (copy), fFlagAXMISEnableMultiShoppingUnifiedEvents (copy), markSelectionListStatus (copy), fFlagAXFixSearchPurchaseSurface (copy), p7 (copy), fFlagAXFixSingleItemPurchaseWidgetLogging (copy), unifiedEventLogEnumsModule (copy), getDeferredPurchaseSourceTileModule (copy), collectionService (copy), unifiedEventLoggingUtilsModule (copy), lastDeferredSingleItemStoreModule (copy), p6 (copy), cryoModule (copy), fFlagAXUnifiedImpressionsOnThumbnail (copy), resolveClickSurfaceModule (copy), unifiedLoggingSurface (copy), avatarScreenProperties (copy), cartIdServiceModule (copy), applyClickStampFieldOverridesModule (copy), sendUnifiedEventLogForInstanceModule (copy), t (write)
-			local var2 = getChildButton(p8)
+local function _(p4, p5) --[[ Line: 106 ]]
+	-- upvalues: ReactModule (copy), CollectionService (copy), UnifiedEventLogConstantsModule (copy), getChildButton (copy), FFlagAXSkipTapDetection (copy), markLastActivated (copy), FFlagAXMISEnableMultiShoppingUnifiedEvents (copy), markSelectionListStatus (copy), FFlagAXFixSearchPurchaseSurface (copy), FFlagAXFixSingleItemPurchaseWidgetLogging (copy), UnifiedEventLogEnumsModule (copy), GetDeferredPurchaseSourceTileModule (copy), UnifiedEventLoggingUtilsModule (copy), LastDeferredSingleItemStoreModule (copy), CryoModule (copy), FFlagAXUnifiedImpressionsOnThumbnail (copy), ResolveClickSurfaceModule (copy), UnifiedLoggingSurface (copy), AvatarScreenProperties (copy), CartIdServiceModule (copy), ApplyClickStampFieldOverridesModule (copy), SendUnifiedEventLogForInstanceModule (copy)
+	ReactModule.useEffect(function() --[[ Line: 108 ]]
+		-- upvalues: CollectionService (upval), UnifiedEventLogConstantsModule (upval), getChildButton (upval), FFlagAXSkipTapDetection (upval), markLastActivated (upval), FFlagAXMISEnableMultiShoppingUnifiedEvents (upval), markSelectionListStatus (upval), FFlagAXFixSearchPurchaseSurface (upval), p5 (copy), FFlagAXFixSingleItemPurchaseWidgetLogging (upval), UnifiedEventLogEnumsModule (upval), GetDeferredPurchaseSourceTileModule (upval), UnifiedEventLoggingUtilsModule (upval), LastDeferredSingleItemStoreModule (upval), p4 (copy), CryoModule (upval), FFlagAXUnifiedImpressionsOnThumbnail (upval), ResolveClickSurfaceModule (upval), UnifiedLoggingSurface (upval), AvatarScreenProperties (upval), CartIdServiceModule (upval), ApplyClickStampFieldOverridesModule (upval), SendUnifiedEventLogForInstanceModule (upval)
+		local ActivatedConnections = {}
+		ActivatedConnections.instanceAdded = CollectionService:GetInstanceAddedSignal(UnifiedEventLogConstantsModule.TAG_NAME):Connect(function(Tagged) --[[ Line: 116 ]]
+			-- upvalues: getChildButton (upval), FFlagAXSkipTapDetection (upval), UnifiedEventLogConstantsModule (upval), markLastActivated (upval), FFlagAXMISEnableMultiShoppingUnifiedEvents (upval), markSelectionListStatus (upval), FFlagAXFixSearchPurchaseSurface (upval), p5 (upval), FFlagAXFixSingleItemPurchaseWidgetLogging (upval), UnifiedEventLogEnumsModule (upval), GetDeferredPurchaseSourceTileModule (upval), CollectionService (upval), UnifiedEventLoggingUtilsModule (upval), LastDeferredSingleItemStoreModule (upval), p4 (upval), CryoModule (upval), FFlagAXUnifiedImpressionsOnThumbnail (upval), ResolveClickSurfaceModule (upval), UnifiedLoggingSurface (upval), AvatarScreenProperties (upval), CartIdServiceModule (upval), ApplyClickStampFieldOverridesModule (upval), SendUnifiedEventLogForInstanceModule (upval), ActivatedConnections (ref)
+			local v1 = getChildButton(Tagged)
 			
-			if var2 then
-				t[p8] = var2.Activated:Connect(function()
-					-- upvalues: p8 (ref), fFlagAXSkipTapDetection (copy), unifiedEventLogConstantsModule (copy), markLastActivated (copy), fFlagAXMISEnableMultiShoppingUnifiedEvents (copy), markSelectionListStatus (copy), fFlagAXFixSearchPurchaseSurface (copy), p7 (copy), fFlagAXFixSingleItemPurchaseWidgetLogging (copy), unifiedEventLogEnumsModule (copy), getDeferredPurchaseSourceTileModule (copy), collectionService (copy), unifiedEventLoggingUtilsModule (copy), lastDeferredSingleItemStoreModule (copy), p6 (copy), cryoModule (copy), fFlagAXUnifiedImpressionsOnThumbnail (copy), resolveClickSurfaceModule (copy), unifiedLoggingSurface (copy), avatarScreenProperties (copy), cartIdServiceModule (copy), applyClickStampFieldOverridesModule (copy), sendUnifiedEventLogForInstanceModule (copy)
-					local attributes = p8:GetAttributes()
+			if v1 then
+				ActivatedConnections[Tagged] = v1.Activated:Connect(function() --[[ Line: 119 ]]
+					-- upvalues: Tagged (copy), FFlagAXSkipTapDetection (upval), UnifiedEventLogConstantsModule (upval), markLastActivated (upval), FFlagAXMISEnableMultiShoppingUnifiedEvents (upval), markSelectionListStatus (upval), FFlagAXFixSearchPurchaseSurface (upval), p5 (upval), FFlagAXFixSingleItemPurchaseWidgetLogging (upval), UnifiedEventLogEnumsModule (upval), GetDeferredPurchaseSourceTileModule (upval), CollectionService (upval), UnifiedEventLoggingUtilsModule (upval), LastDeferredSingleItemStoreModule (upval), p4 (upval), CryoModule (upval), FFlagAXUnifiedImpressionsOnThumbnail (upval), ResolveClickSurfaceModule (upval), UnifiedLoggingSurface (upval), AvatarScreenProperties (upval), CartIdServiceModule (upval), ApplyClickStampFieldOverridesModule (upval), SendUnifiedEventLogForInstanceModule (upval)
+					local Attributes = Tagged:GetAttributes()
 					
-					if fFlagAXSkipTapDetection and attributes[unifiedEventLogConstantsModule.SKIP_TAP_DETECTION] == true then return end
-					if attributes[unifiedEventLogConstantsModule.HAS_DEFERRED_ACTION] then
-						markLastActivated(p8)
+					if FFlagAXSkipTapDetection and Attributes[UnifiedEventLogConstantsModule.SKIP_TAP_DETECTION] == true then return end
+					if Attributes[UnifiedEventLogConstantsModule.HAS_DEFERRED_ACTION] then
+						markLastActivated(Tagged)
 					end
-					if fFlagAXMISEnableMultiShoppingUnifiedEvents and attributes[unifiedEventLogConstantsModule.HAS_DEFERRED_ACTION] and attributes[unifiedEventLogConstantsModule.IS_SELECTED] ~= nil then
-						markSelectionListStatus(p8, attributes[unifiedEventLogConstantsModule.IS_SELECTED], if fFlagAXFixSearchPurchaseSurface then p7 else nil)
+					if FFlagAXMISEnableMultiShoppingUnifiedEvents and Attributes[UnifiedEventLogConstantsModule.HAS_DEFERRED_ACTION] and Attributes[UnifiedEventLogConstantsModule.IS_SELECTED] ~= nil then
+						markSelectionListStatus(Tagged, Attributes[UnifiedEventLogConstantsModule.IS_SELECTED], if FFlagAXFixSearchPurchaseSurface then p5 else nil)
 					end
-					if fFlagAXFixSingleItemPurchaseWidgetLogging and fFlagAXMISEnableMultiShoppingUnifiedEvents and attributes[unifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. "action"] == unifiedEventLogEnumsModule.MarketplaceUnifiedAction.PURCHASE_ATTEMPT then
-						local TAG_NAME = getDeferredPurchaseSourceTileModule(collectionService:GetTagged(unifiedEventLogConstantsModule.TAG_NAME), p8, attributes[unifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. "itemId"], attributes[unifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. "itemType"]) or p8
-						local attributes_1 = TAG_NAME:GetAttributes()
+					if FFlagAXFixSingleItemPurchaseWidgetLogging and FFlagAXMISEnableMultiShoppingUnifiedEvents and Attributes[UnifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. "action"] == UnifiedEventLogEnumsModule.MarketplaceUnifiedAction.PURCHASE_ATTEMPT then
+						local Object = GetDeferredPurchaseSourceTileModule(CollectionService:GetTagged(UnifiedEventLogConstantsModule.TAG_NAME), Tagged, Attributes[UnifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. "itemId"], Attributes[UnifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. "itemType"]) or Tagged
+						local Attributes1 = Object:GetAttributes()
 						
-						for i, v in unifiedEventLoggingUtilsModule.getScreenSize(TAG_NAME) do
-							attributes_1[unifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. i] = v
+						for i, value in UnifiedEventLoggingUtilsModule.getScreenSize(Object) do
+							Attributes1[UnifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. i] = value
 						end
-						for i_1, v_1 in unifiedEventLoggingUtilsModule.getElementSizeAndPosition(TAG_NAME) do
-							attributes_1[unifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. i_1] = v_1
+						for i1, value1 in UnifiedEventLoggingUtilsModule.getElementSizeAndPosition(Object) do
+							Attributes1[UnifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. i1] = value1
 						end
-						lastDeferredSingleItemStoreModule.setSnapshot(attributes_1)
+						LastDeferredSingleItemStoreModule.setSnapshot(Attributes1)
 					end
-					local var3 = if p6 then cryoModule.Dictionary.join(p6.getAnalyticsMetadata(false), { keyword = p6.getSearchKeyword(false) }) else {}
+					local JoinResult = if p4 then CryoModule.Dictionary.join(p4.getAnalyticsMetadata(false), { keyword = p4.getSearchKeyword(false) }) else {}
 					
-					if fFlagAXUnifiedImpressionsOnThumbnail then
-						local var4 = p8:GetAttribute(unifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. "surface")
-						local var5 = resolveClickSurfaceModule(p8, if p7 then p7.current else nil)
+					if FFlagAXUnifiedImpressionsOnThumbnail then
+						local Attribute = Tagged:GetAttribute(UnifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. "surface")
+						local Surface = ResolveClickSurfaceModule(Tagged, if p5 then p5.current else nil)
 						
-						if var5 ~= nil then
-							var3.surface = var5
+						if Surface ~= nil then
+							JoinResult.surface = Surface
 						end
-						if (if var4 ~= nil then var5 else var4) ~= unifiedLoggingSurface.SEARCH_RESULTS then
-							var3.keyword = nil
+						if (if Attribute == nil then Surface else Attribute) ~= UnifiedLoggingSurface.SEARCH_RESULTS then
+							JoinResult.keyword = nil
 						end
-					elseif p7 and p7.current and p7.current.current then
-						local name = avatarScreenProperties[p7.current.opaque.name]
+					elseif p5 and p5.current and p5.current.current then
+						local v2 = AvatarScreenProperties[p5.current.opaque.name]
 						
-						if name and name.analyticsData then
-							var3.surface = name.analyticsData.unifiedLoggingSurface
+						if v2 and v2.analyticsData then
+							JoinResult.surface = v2.analyticsData.unifiedLoggingSurface
 						end
 					end
-					if fFlagAXMISEnableMultiShoppingUnifiedEvents and attributes[unifiedEventLogConstantsModule.HAS_DEFERRED_ACTION] then
-						var3.cartId = cartIdServiceModule.getCartId()
+					if FFlagAXMISEnableMultiShoppingUnifiedEvents and Attributes[UnifiedEventLogConstantsModule.HAS_DEFERRED_ACTION] then
+						JoinResult.cartId = CartIdServiceModule.getCartId()
 					end
-					if fFlagAXUnifiedImpressionsOnThumbnail then
-						var3 = applyClickStampFieldOverridesModule(var3, attributes)
+					if FFlagAXUnifiedImpressionsOnThumbnail then
+						JoinResult = ApplyClickStampFieldOverridesModule(JoinResult, Attributes)
 					end
-					sendUnifiedEventLogForInstanceModule(p8, var3, {
+					SendUnifiedEventLogForInstanceModule(Tagged, JoinResult, {
 						includeScreenSize = true,
 						includeElementSizeAndPosition = true
 					})
 				end)
 			end
 		end)
-		t.instanceRemoved = collectionService:GetInstanceRemovedSignal(unifiedEventLogConstantsModule.TAG_NAME):Connect(function(p9)
-			-- upvalues: t (write)
-			local var3 = t[p9]
+		ActivatedConnections.instanceRemoved = CollectionService:GetInstanceRemovedSignal(UnifiedEventLogConstantsModule.TAG_NAME):Connect(function(Tagged) --[[ Line: 243 ]]
+			-- upvalues: ActivatedConnections (ref)
+			local ActivatedConnection = ActivatedConnections[Tagged]
 			
-			if var3 then
-				var3:Disconnect()
+			if ActivatedConnection then
+				ActivatedConnection:Disconnect()
 			end
-			t[p9] = nil
+			ActivatedConnections[Tagged] = nil
 		end)
 		
-		return function()
-			-- upvalues: t (write)
-			for i, v in t do
-				v:Disconnect()
+		return function() --[[ Line: 252 ]]
+			-- upvalues: ActivatedConnections (ref)
+			for _, activatedConnection in ActivatedConnections do
+				activatedConnection:Disconnect()
 			end
-			t = {}
+			ActivatedConnections = {}
 		end
 	end, {})
 end
 
 return {
-	useUnifiedEventListener = function()
-		-- upvalues: useSelectorSignal (ref), AnalyticsMetadataSelector (ref), selectSearchKeyword (ref), useAvatarRoute (ref), reactModule (ref), collectionService (ref), unifiedEventLogConstantsModule (ref), getChildButton (ref), fFlagAXSkipTapDetection (ref), markLastActivated (ref), fFlagAXMISEnableMultiShoppingUnifiedEvents (ref), markSelectionListStatus (ref), fFlagAXFixSearchPurchaseSurface (ref), fFlagAXFixSingleItemPurchaseWidgetLogging (ref), unifiedEventLogEnumsModule (ref), getDeferredPurchaseSourceTileModule (ref), unifiedEventLoggingUtilsModule (ref), lastDeferredSingleItemStoreModule (ref), cryoModule (ref), fFlagAXUnifiedImpressionsOnThumbnail (ref), resolveClickSurfaceModule (ref), unifiedLoggingSurface (ref), avatarScreenProperties (ref), cartIdServiceModule (ref), applyClickStampFieldOverridesModule (ref), sendUnifiedEventLogForInstanceModule (ref)
-		local var3 = useSelectorSignal(AnalyticsMetadataSelector)
-		local var4 = useSelectorSignal(selectSearchKeyword)
-		local var5 = useAvatarRoute()
-		local var6 = reactModule.useRef(var5)
-		reactModule.useEffect(function()
-			-- upvalues: var6 (ref), var5 (ref)
-			var6.current = var5
-		end, { var5 })
-		local t = { getAnalyticsMetadata = var3, getSearchKeyword = var4 }
-		reactModule.useEffect(function()
-			-- upvalues: collectionService (copy), unifiedEventLogConstantsModule (copy), getChildButton (copy), fFlagAXSkipTapDetection (copy), markLastActivated (copy), fFlagAXMISEnableMultiShoppingUnifiedEvents (copy), markSelectionListStatus (copy), fFlagAXFixSearchPurchaseSurface (copy), var6 (ref), fFlagAXFixSingleItemPurchaseWidgetLogging (copy), unifiedEventLogEnumsModule (copy), getDeferredPurchaseSourceTileModule (copy), unifiedEventLoggingUtilsModule (copy), lastDeferredSingleItemStoreModule (copy), t (ref), cryoModule (copy), fFlagAXUnifiedImpressionsOnThumbnail (copy), resolveClickSurfaceModule (copy), unifiedLoggingSurface (copy), avatarScreenProperties (copy), cartIdServiceModule (copy), applyClickStampFieldOverridesModule (copy), sendUnifiedEventLogForInstanceModule (copy)
-			local t = {}
-			t.instanceAdded = collectionService:GetInstanceAddedSignal(unifiedEventLogConstantsModule.TAG_NAME):Connect(function(p9)
-				-- upvalues: getChildButton (copy), fFlagAXSkipTapDetection (copy), unifiedEventLogConstantsModule (copy), markLastActivated (copy), fFlagAXMISEnableMultiShoppingUnifiedEvents (copy), markSelectionListStatus (copy), fFlagAXFixSearchPurchaseSurface (copy), var6 (copy), fFlagAXFixSingleItemPurchaseWidgetLogging (copy), unifiedEventLogEnumsModule (copy), getDeferredPurchaseSourceTileModule (copy), collectionService (copy), unifiedEventLoggingUtilsModule (copy), lastDeferredSingleItemStoreModule (copy), t (copy), cryoModule (copy), fFlagAXUnifiedImpressionsOnThumbnail (copy), resolveClickSurfaceModule (copy), unifiedLoggingSurface (copy), avatarScreenProperties (copy), cartIdServiceModule (copy), applyClickStampFieldOverridesModule (copy), sendUnifiedEventLogForInstanceModule (copy), t (write)
-				local var7 = getChildButton(p9)
+	useUnifiedEventListener = function() --[[ Line: 262 ]]
+		-- upvalues: UseSelectorSignalFunction (copy), AnalyticsMetadataSelector (copy), SelectSearchKeyword (copy), UseAvatarRouteFunction (copy), ReactModule (copy), CollectionService (copy), UnifiedEventLogConstantsModule (copy), getChildButton (copy), FFlagAXSkipTapDetection (copy), markLastActivated (copy), FFlagAXMISEnableMultiShoppingUnifiedEvents (copy), markSelectionListStatus (copy), FFlagAXFixSearchPurchaseSurface (copy), FFlagAXFixSingleItemPurchaseWidgetLogging (copy), UnifiedEventLogEnumsModule (copy), GetDeferredPurchaseSourceTileModule (copy), UnifiedEventLoggingUtilsModule (copy), LastDeferredSingleItemStoreModule (copy), CryoModule (copy), FFlagAXUnifiedImpressionsOnThumbnail (copy), ResolveClickSurfaceModule (copy), UnifiedLoggingSurface (copy), AvatarScreenProperties (copy), CartIdServiceModule (copy), ApplyClickStampFieldOverridesModule (copy), SendUnifiedEventLogForInstanceModule (copy)
+		local UseSelectorSignalResult = UseSelectorSignalFunction(AnalyticsMetadataSelector)
+		local UseSelectorSignalResult1 = UseSelectorSignalFunction(SelectSearchKeyword)
+		local UseAvatarRouteResult = UseAvatarRouteFunction()
+		local UseRefResult = ReactModule.useRef(UseAvatarRouteResult)
+		ReactModule.useEffect(function() --[[ Line: 268 ]]
+			-- upvalues: UseRefResult (copy), UseAvatarRouteResult (copy)
+			UseRefResult.current = UseAvatarRouteResult
+		end, { UseAvatarRouteResult })
+		local config = {
+			getAnalyticsMetadata = UseSelectorSignalResult,
+			getSearchKeyword = UseSelectorSignalResult1
+		}
+		ReactModule.useEffect(function() --[[ Line: 108 ]]
+			-- upvalues: CollectionService (upval), UnifiedEventLogConstantsModule (upval), getChildButton (upval), FFlagAXSkipTapDetection (upval), markLastActivated (upval), FFlagAXMISEnableMultiShoppingUnifiedEvents (upval), markSelectionListStatus (upval), FFlagAXFixSearchPurchaseSurface (upval), UseRefResult (copy), FFlagAXFixSingleItemPurchaseWidgetLogging (upval), UnifiedEventLogEnumsModule (upval), GetDeferredPurchaseSourceTileModule (upval), UnifiedEventLoggingUtilsModule (upval), LastDeferredSingleItemStoreModule (upval), config (copy), CryoModule (upval), FFlagAXUnifiedImpressionsOnThumbnail (upval), ResolveClickSurfaceModule (upval), UnifiedLoggingSurface (upval), AvatarScreenProperties (upval), CartIdServiceModule (upval), ApplyClickStampFieldOverridesModule (upval), SendUnifiedEventLogForInstanceModule (upval)
+			local ActivatedConnections = {}
+			ActivatedConnections.instanceAdded = CollectionService:GetInstanceAddedSignal(UnifiedEventLogConstantsModule.TAG_NAME):Connect(function(Tagged) --[[ Line: 116 ]]
+				-- upvalues: getChildButton (upval), FFlagAXSkipTapDetection (upval), UnifiedEventLogConstantsModule (upval), markLastActivated (upval), FFlagAXMISEnableMultiShoppingUnifiedEvents (upval), markSelectionListStatus (upval), FFlagAXFixSearchPurchaseSurface (upval), UseRefResult (upval), FFlagAXFixSingleItemPurchaseWidgetLogging (upval), UnifiedEventLogEnumsModule (upval), GetDeferredPurchaseSourceTileModule (upval), CollectionService (upval), UnifiedEventLoggingUtilsModule (upval), LastDeferredSingleItemStoreModule (upval), config (upval), CryoModule (upval), FFlagAXUnifiedImpressionsOnThumbnail (upval), ResolveClickSurfaceModule (upval), UnifiedLoggingSurface (upval), AvatarScreenProperties (upval), CartIdServiceModule (upval), ApplyClickStampFieldOverridesModule (upval), SendUnifiedEventLogForInstanceModule (upval), ActivatedConnections (ref)
+				local v2 = getChildButton(Tagged)
 				
-				if var7 then
-					t[p9] = var7.Activated:Connect(function()
-						-- upvalues: p9 (ref), fFlagAXSkipTapDetection (copy), unifiedEventLogConstantsModule (copy), markLastActivated (copy), fFlagAXMISEnableMultiShoppingUnifiedEvents (copy), markSelectionListStatus (copy), fFlagAXFixSearchPurchaseSurface (copy), var6 (copy), fFlagAXFixSingleItemPurchaseWidgetLogging (copy), unifiedEventLogEnumsModule (copy), getDeferredPurchaseSourceTileModule (copy), collectionService (copy), unifiedEventLoggingUtilsModule (copy), lastDeferredSingleItemStoreModule (copy), t (copy), cryoModule (copy), fFlagAXUnifiedImpressionsOnThumbnail (copy), resolveClickSurfaceModule (copy), unifiedLoggingSurface (copy), avatarScreenProperties (copy), cartIdServiceModule (copy), applyClickStampFieldOverridesModule (copy), sendUnifiedEventLogForInstanceModule (copy)
-						local attributes = p9:GetAttributes()
+				if v2 then
+					ActivatedConnections[Tagged] = v2.Activated:Connect(function() --[[ Line: 119 ]]
+						-- upvalues: Tagged (copy), FFlagAXSkipTapDetection (upval), UnifiedEventLogConstantsModule (upval), markLastActivated (upval), FFlagAXMISEnableMultiShoppingUnifiedEvents (upval), markSelectionListStatus (upval), FFlagAXFixSearchPurchaseSurface (upval), UseRefResult (upval), FFlagAXFixSingleItemPurchaseWidgetLogging (upval), UnifiedEventLogEnumsModule (upval), GetDeferredPurchaseSourceTileModule (upval), CollectionService (upval), UnifiedEventLoggingUtilsModule (upval), LastDeferredSingleItemStoreModule (upval), config (upval), CryoModule (upval), FFlagAXUnifiedImpressionsOnThumbnail (upval), ResolveClickSurfaceModule (upval), UnifiedLoggingSurface (upval), AvatarScreenProperties (upval), CartIdServiceModule (upval), ApplyClickStampFieldOverridesModule (upval), SendUnifiedEventLogForInstanceModule (upval)
+						local Attributes = Tagged:GetAttributes()
 						
-						if fFlagAXSkipTapDetection and attributes[unifiedEventLogConstantsModule.SKIP_TAP_DETECTION] == true then return end
-						if attributes[unifiedEventLogConstantsModule.HAS_DEFERRED_ACTION] then
-							markLastActivated(p9)
+						if FFlagAXSkipTapDetection and Attributes[UnifiedEventLogConstantsModule.SKIP_TAP_DETECTION] == true then return end
+						if Attributes[UnifiedEventLogConstantsModule.HAS_DEFERRED_ACTION] then
+							markLastActivated(Tagged)
 						end
-						if fFlagAXMISEnableMultiShoppingUnifiedEvents and attributes[unifiedEventLogConstantsModule.HAS_DEFERRED_ACTION] and attributes[unifiedEventLogConstantsModule.IS_SELECTED] ~= nil then
-							markSelectionListStatus(p9, attributes[unifiedEventLogConstantsModule.IS_SELECTED], if fFlagAXFixSearchPurchaseSurface then var6 else nil)
+						if FFlagAXMISEnableMultiShoppingUnifiedEvents and Attributes[UnifiedEventLogConstantsModule.HAS_DEFERRED_ACTION] and Attributes[UnifiedEventLogConstantsModule.IS_SELECTED] ~= nil then
+							markSelectionListStatus(Tagged, Attributes[UnifiedEventLogConstantsModule.IS_SELECTED], if FFlagAXFixSearchPurchaseSurface then UseRefResult else nil)
 						end
-						if fFlagAXFixSingleItemPurchaseWidgetLogging and fFlagAXMISEnableMultiShoppingUnifiedEvents and attributes[unifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. "action"] == unifiedEventLogEnumsModule.MarketplaceUnifiedAction.PURCHASE_ATTEMPT then
-							local attributes_1 = (getDeferredPurchaseSourceTileModule(collectionService:GetTagged(unifiedEventLogConstantsModule.TAG_NAME), p9, attributes[unifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. "itemId"], attributes[unifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. "itemType"]) or p9):GetAttributes()
+						if FFlagAXFixSingleItemPurchaseWidgetLogging and FFlagAXMISEnableMultiShoppingUnifiedEvents and Attributes[UnifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. "action"] == UnifiedEventLogEnumsModule.MarketplaceUnifiedAction.PURCHASE_ATTEMPT then
+							local Object = GetDeferredPurchaseSourceTileModule(CollectionService:GetTagged(UnifiedEventLogConstantsModule.TAG_NAME), Tagged, Attributes[UnifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. "itemId"], Attributes[UnifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. "itemType"]) or Tagged
+							local Attributes1 = Object:GetAttributes()
 							
-							for i, v in unifiedEventLoggingUtilsModule.getScreenSize(TAG_NAME) do
-								attributes_1[unifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. i] = v
+							for i, value in UnifiedEventLoggingUtilsModule.getScreenSize(Object) do
+								Attributes1[UnifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. i] = value
 							end
-							for i_1, v_1 in unifiedEventLoggingUtilsModule.getElementSizeAndPosition(TAG_NAME) do
-								attributes_1[unifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. i_1] = v_1
+							for i1, value1 in UnifiedEventLoggingUtilsModule.getElementSizeAndPosition(Object) do
+								Attributes1[UnifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. i1] = value1
 							end
-							lastDeferredSingleItemStoreModule.setSnapshot(attributes_1)
+							LastDeferredSingleItemStoreModule.setSnapshot(Attributes1)
 						end
-						local var8 = if t then cryoModule.Dictionary.join(t.getAnalyticsMetadata(false), { keyword = t.getSearchKeyword(false) }) else {}
+						local JoinResult = if config then CryoModule.Dictionary.join(config.getAnalyticsMetadata(false), { keyword = config.getSearchKeyword(false) }) else {}
 						
-						if fFlagAXUnifiedImpressionsOnThumbnail then
-							local var9 = p9:GetAttribute(unifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. "surface")
-							local var10 = resolveClickSurfaceModule(p9, if var6 then var6.current else nil)
+						if FFlagAXUnifiedImpressionsOnThumbnail then
+							local Attribute = Tagged:GetAttribute(UnifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. "surface")
+							local Surface = ResolveClickSurfaceModule(Tagged, if UseRefResult then UseRefResult.current else nil)
 							
-							if var10 ~= nil then
-								var8.surface = var10
+							if Surface ~= nil then
+								JoinResult.surface = Surface
 							end
-							if (if var9 ~= nil then var10 else var9) ~= unifiedLoggingSurface.SEARCH_RESULTS then
-								var8.keyword = nil
+							if (if Attribute == nil then Surface else Attribute) ~= UnifiedLoggingSurface.SEARCH_RESULTS then
+								JoinResult.keyword = nil
 							end
-						elseif var6 and var6.current and var6.current.current then
-							local name = avatarScreenProperties[var6.current.opaque.name]
+						elseif UseRefResult and UseRefResult.current and UseRefResult.current.current then
+							local v3 = AvatarScreenProperties[UseRefResult.current.opaque.name]
 							
-							if name and name.analyticsData then
-								var8.surface = name.analyticsData.unifiedLoggingSurface
+							if v3 and v3.analyticsData then
+								JoinResult.surface = v3.analyticsData.unifiedLoggingSurface
 							end
 						end
-						if fFlagAXMISEnableMultiShoppingUnifiedEvents and attributes[unifiedEventLogConstantsModule.HAS_DEFERRED_ACTION] then
-							var8.cartId = cartIdServiceModule.getCartId()
+						if FFlagAXMISEnableMultiShoppingUnifiedEvents and Attributes[UnifiedEventLogConstantsModule.HAS_DEFERRED_ACTION] then
+							JoinResult.cartId = CartIdServiceModule.getCartId()
 						end
-						if fFlagAXUnifiedImpressionsOnThumbnail then
-							var8 = applyClickStampFieldOverridesModule(var8, attributes)
+						if FFlagAXUnifiedImpressionsOnThumbnail then
+							JoinResult = ApplyClickStampFieldOverridesModule(JoinResult, Attributes)
 						end
-						sendUnifiedEventLogForInstanceModule(p9, var8, {
+						SendUnifiedEventLogForInstanceModule(Tagged, JoinResult, {
 							includeScreenSize = true,
 							includeElementSizeAndPosition = true
 						})
 					end)
 				end
 			end)
-			t.instanceRemoved = collectionService:GetInstanceRemovedSignal(unifiedEventLogConstantsModule.TAG_NAME):Connect(function(p10)
-				-- upvalues: t (write)
-				local var8 = t[p10]
+			ActivatedConnections.instanceRemoved = CollectionService:GetInstanceRemovedSignal(UnifiedEventLogConstantsModule.TAG_NAME):Connect(function(Tagged) --[[ Line: 243 ]]
+				-- upvalues: ActivatedConnections (ref)
+				local ActivatedConnection = ActivatedConnections[Tagged]
 				
-				if var8 then
-					var8:Disconnect()
+				if ActivatedConnection then
+					ActivatedConnection:Disconnect()
 				end
-				t[p10] = nil
+				ActivatedConnections[Tagged] = nil
 			end)
 			
-			return function()
-				-- upvalues: t (write)
-				for i, v in t do
-					v:Disconnect()
+			return function() --[[ Line: 252 ]]
+				-- upvalues: ActivatedConnections (ref)
+				for _, activatedConnection in ActivatedConnections do
+					activatedConnection:Disconnect()
 				end
-				t = {}
+				ActivatedConnections = {}
 			end
 		end, {})
 	end,
-	useUnifiedEventListenerInExperience = function()
-		-- upvalues: reactModule (ref), collectionService (ref), unifiedEventLogConstantsModule (ref), getChildButton (ref), fFlagAXSkipTapDetection (ref), markLastActivated (ref), fFlagAXMISEnableMultiShoppingUnifiedEvents (ref), markSelectionListStatus (ref), fFlagAXFixSearchPurchaseSurface (ref), fFlagAXFixSingleItemPurchaseWidgetLogging (ref), unifiedEventLogEnumsModule (ref), getDeferredPurchaseSourceTileModule (ref), unifiedEventLoggingUtilsModule (ref), lastDeferredSingleItemStoreModule (ref), cryoModule (ref), fFlagAXUnifiedImpressionsOnThumbnail (ref), resolveClickSurfaceModule (ref), unifiedLoggingSurface (ref), avatarScreenProperties (ref), cartIdServiceModule (ref), applyClickStampFieldOverridesModule (ref), sendUnifiedEventLogForInstanceModule (ref)
-		local useEffect = reactModule.useEffect
-		local var8 = nil
-		local var9 = nil
-		useEffect(function()
-			-- upvalues: collectionService (copy), unifiedEventLogConstantsModule (copy), getChildButton (copy), fFlagAXSkipTapDetection (copy), markLastActivated (copy), fFlagAXMISEnableMultiShoppingUnifiedEvents (copy), markSelectionListStatus (copy), fFlagAXFixSearchPurchaseSurface (copy), var8 (ref), fFlagAXFixSingleItemPurchaseWidgetLogging (copy), unifiedEventLogEnumsModule (copy), getDeferredPurchaseSourceTileModule (copy), unifiedEventLoggingUtilsModule (copy), lastDeferredSingleItemStoreModule (copy), var9 (ref), cryoModule (copy), fFlagAXUnifiedImpressionsOnThumbnail (copy), resolveClickSurfaceModule (copy), unifiedLoggingSurface (copy), avatarScreenProperties (copy), cartIdServiceModule (copy), applyClickStampFieldOverridesModule (copy), sendUnifiedEventLogForInstanceModule (copy)
-			local t = {}
-			t.instanceAdded = collectionService:GetInstanceAddedSignal(unifiedEventLogConstantsModule.TAG_NAME):Connect(function(p10)
-				-- upvalues: getChildButton (copy), fFlagAXSkipTapDetection (copy), unifiedEventLogConstantsModule (copy), markLastActivated (copy), fFlagAXMISEnableMultiShoppingUnifiedEvents (copy), markSelectionListStatus (copy), fFlagAXFixSearchPurchaseSurface (copy), var8 (copy), fFlagAXFixSingleItemPurchaseWidgetLogging (copy), unifiedEventLogEnumsModule (copy), getDeferredPurchaseSourceTileModule (copy), collectionService (copy), unifiedEventLoggingUtilsModule (copy), lastDeferredSingleItemStoreModule (copy), var9 (copy), cryoModule (copy), fFlagAXUnifiedImpressionsOnThumbnail (copy), resolveClickSurfaceModule (copy), unifiedLoggingSurface (copy), avatarScreenProperties (copy), cartIdServiceModule (copy), applyClickStampFieldOverridesModule (copy), sendUnifiedEventLogForInstanceModule (copy), t (write)
-				local var10 = getChildButton(p10)
+	useUnifiedEventListenerInExperience = function() --[[ Line: 278 ]]
+		-- upvalues: ReactModule (copy), CollectionService (copy), UnifiedEventLogConstantsModule (copy), getChildButton (copy), FFlagAXSkipTapDetection (copy), markLastActivated (copy), FFlagAXMISEnableMultiShoppingUnifiedEvents (copy), markSelectionListStatus (copy), FFlagAXFixSearchPurchaseSurface (copy), FFlagAXFixSingleItemPurchaseWidgetLogging (copy), UnifiedEventLogEnumsModule (copy), GetDeferredPurchaseSourceTileModule (copy), UnifiedEventLoggingUtilsModule (copy), LastDeferredSingleItemStoreModule (copy), CryoModule (copy), FFlagAXUnifiedImpressionsOnThumbnail (copy), ResolveClickSurfaceModule (copy), UnifiedLoggingSurface (copy), AvatarScreenProperties (copy), CartIdServiceModule (copy), ApplyClickStampFieldOverridesModule (copy), SendUnifiedEventLogForInstanceModule (copy)
+		local v3 = nil
+		local v4 = nil
+		ReactModule.useEffect(function() --[[ Line: 108 ]]
+			-- upvalues: CollectionService (upval), UnifiedEventLogConstantsModule (upval), getChildButton (upval), FFlagAXSkipTapDetection (upval), markLastActivated (upval), FFlagAXMISEnableMultiShoppingUnifiedEvents (upval), markSelectionListStatus (upval), FFlagAXFixSearchPurchaseSurface (upval), v3 (copy), FFlagAXFixSingleItemPurchaseWidgetLogging (upval), UnifiedEventLogEnumsModule (upval), GetDeferredPurchaseSourceTileModule (upval), UnifiedEventLoggingUtilsModule (upval), LastDeferredSingleItemStoreModule (upval), v4 (copy), CryoModule (upval), FFlagAXUnifiedImpressionsOnThumbnail (upval), ResolveClickSurfaceModule (upval), UnifiedLoggingSurface (upval), AvatarScreenProperties (upval), CartIdServiceModule (upval), ApplyClickStampFieldOverridesModule (upval), SendUnifiedEventLogForInstanceModule (upval)
+			local ActivatedConnections = {}
+			ActivatedConnections.instanceAdded = CollectionService:GetInstanceAddedSignal(UnifiedEventLogConstantsModule.TAG_NAME):Connect(function(Tagged) --[[ Line: 116 ]]
+				-- upvalues: getChildButton (upval), FFlagAXSkipTapDetection (upval), UnifiedEventLogConstantsModule (upval), markLastActivated (upval), FFlagAXMISEnableMultiShoppingUnifiedEvents (upval), markSelectionListStatus (upval), FFlagAXFixSearchPurchaseSurface (upval), v3 (upval), FFlagAXFixSingleItemPurchaseWidgetLogging (upval), UnifiedEventLogEnumsModule (upval), GetDeferredPurchaseSourceTileModule (upval), CollectionService (upval), UnifiedEventLoggingUtilsModule (upval), LastDeferredSingleItemStoreModule (upval), v4 (upval), CryoModule (upval), FFlagAXUnifiedImpressionsOnThumbnail (upval), ResolveClickSurfaceModule (upval), UnifiedLoggingSurface (upval), AvatarScreenProperties (upval), CartIdServiceModule (upval), ApplyClickStampFieldOverridesModule (upval), SendUnifiedEventLogForInstanceModule (upval), ActivatedConnections (ref)
+				local v5 = getChildButton(Tagged)
 				
-				if var10 then
-					t[p10] = var10.Activated:Connect(function()
-						-- upvalues: p10 (ref), fFlagAXSkipTapDetection (copy), unifiedEventLogConstantsModule (copy), markLastActivated (copy), fFlagAXMISEnableMultiShoppingUnifiedEvents (copy), markSelectionListStatus (copy), fFlagAXFixSearchPurchaseSurface (copy), var8 (copy), fFlagAXFixSingleItemPurchaseWidgetLogging (copy), unifiedEventLogEnumsModule (copy), getDeferredPurchaseSourceTileModule (copy), collectionService (copy), unifiedEventLoggingUtilsModule (copy), lastDeferredSingleItemStoreModule (copy), var9 (copy), cryoModule (copy), fFlagAXUnifiedImpressionsOnThumbnail (copy), resolveClickSurfaceModule (copy), unifiedLoggingSurface (copy), avatarScreenProperties (copy), cartIdServiceModule (copy), applyClickStampFieldOverridesModule (copy), sendUnifiedEventLogForInstanceModule (copy)
-						local attributes = p10:GetAttributes()
+				if v5 then
+					ActivatedConnections[Tagged] = v5.Activated:Connect(function() --[[ Line: 119 ]]
+						-- upvalues: Tagged (copy), FFlagAXSkipTapDetection (upval), UnifiedEventLogConstantsModule (upval), markLastActivated (upval), FFlagAXMISEnableMultiShoppingUnifiedEvents (upval), markSelectionListStatus (upval), FFlagAXFixSearchPurchaseSurface (upval), v3 (upval), FFlagAXFixSingleItemPurchaseWidgetLogging (upval), UnifiedEventLogEnumsModule (upval), GetDeferredPurchaseSourceTileModule (upval), CollectionService (upval), UnifiedEventLoggingUtilsModule (upval), LastDeferredSingleItemStoreModule (upval), v4 (upval), CryoModule (upval), FFlagAXUnifiedImpressionsOnThumbnail (upval), ResolveClickSurfaceModule (upval), UnifiedLoggingSurface (upval), AvatarScreenProperties (upval), CartIdServiceModule (upval), ApplyClickStampFieldOverridesModule (upval), SendUnifiedEventLogForInstanceModule (upval)
+						local Attributes = Tagged:GetAttributes()
 						
-						if fFlagAXSkipTapDetection and attributes[unifiedEventLogConstantsModule.SKIP_TAP_DETECTION] == true then return end
-						if attributes[unifiedEventLogConstantsModule.HAS_DEFERRED_ACTION] then
-							markLastActivated(p10)
+						if FFlagAXSkipTapDetection and Attributes[UnifiedEventLogConstantsModule.SKIP_TAP_DETECTION] == true then return end
+						if Attributes[UnifiedEventLogConstantsModule.HAS_DEFERRED_ACTION] then
+							markLastActivated(Tagged)
 						end
-						if fFlagAXMISEnableMultiShoppingUnifiedEvents and attributes[unifiedEventLogConstantsModule.HAS_DEFERRED_ACTION] and attributes[unifiedEventLogConstantsModule.IS_SELECTED] ~= nil then
-							markSelectionListStatus(p10, attributes[unifiedEventLogConstantsModule.IS_SELECTED], if fFlagAXFixSearchPurchaseSurface then var8 else nil)
+						if FFlagAXMISEnableMultiShoppingUnifiedEvents and Attributes[UnifiedEventLogConstantsModule.HAS_DEFERRED_ACTION] and Attributes[UnifiedEventLogConstantsModule.IS_SELECTED] ~= nil then
+							markSelectionListStatus(Tagged, Attributes[UnifiedEventLogConstantsModule.IS_SELECTED], if FFlagAXFixSearchPurchaseSurface then v3 else nil)
 						end
-						if fFlagAXFixSingleItemPurchaseWidgetLogging and fFlagAXMISEnableMultiShoppingUnifiedEvents and attributes[unifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. "action"] == unifiedEventLogEnumsModule.MarketplaceUnifiedAction.PURCHASE_ATTEMPT then
-							local attributes_1 = (getDeferredPurchaseSourceTileModule(collectionService:GetTagged(unifiedEventLogConstantsModule.TAG_NAME), p10, attributes[unifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. "itemId"], attributes[unifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. "itemType"]) or p10):GetAttributes()
+						if FFlagAXFixSingleItemPurchaseWidgetLogging and FFlagAXMISEnableMultiShoppingUnifiedEvents and Attributes[UnifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. "action"] == UnifiedEventLogEnumsModule.MarketplaceUnifiedAction.PURCHASE_ATTEMPT then
+							local Object = GetDeferredPurchaseSourceTileModule(CollectionService:GetTagged(UnifiedEventLogConstantsModule.TAG_NAME), Tagged, Attributes[UnifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. "itemId"], Attributes[UnifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. "itemType"]) or Tagged
+							local Attributes1 = Object:GetAttributes()
 							
-							for i, v in unifiedEventLoggingUtilsModule.getScreenSize(TAG_NAME) do
-								attributes_1[unifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. i] = v
+							for i, value in UnifiedEventLoggingUtilsModule.getScreenSize(Object) do
+								Attributes1[UnifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. i] = value
 							end
-							for i_1, v_1 in unifiedEventLoggingUtilsModule.getElementSizeAndPosition(TAG_NAME) do
-								attributes_1[unifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. i_1] = v_1
+							for i1, value1 in UnifiedEventLoggingUtilsModule.getElementSizeAndPosition(Object) do
+								Attributes1[UnifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. i1] = value1
 							end
-							lastDeferredSingleItemStoreModule.setSnapshot(attributes_1)
+							LastDeferredSingleItemStoreModule.setSnapshot(Attributes1)
 						end
-						local var11 = if var9 then cryoModule.Dictionary.join(var9.getAnalyticsMetadata(false), { keyword = var9.getSearchKeyword(false) }) else {}
+						local JoinResult = if v4 then CryoModule.Dictionary.join(v4.getAnalyticsMetadata(false), { keyword = v4.getSearchKeyword(false) }) else {}
 						
-						if fFlagAXUnifiedImpressionsOnThumbnail then
-							local var12 = p10:GetAttribute(unifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. "surface")
-							local var13 = resolveClickSurfaceModule(p10, if var8 then var8.current else nil)
+						if FFlagAXUnifiedImpressionsOnThumbnail then
+							local Attribute = Tagged:GetAttribute(UnifiedEventLogConstantsModule.ATTRIBUTE_PREFIX .. "surface")
+							local Surface = ResolveClickSurfaceModule(Tagged, if v3 then v3.current else nil)
 							
-							if var13 ~= nil then
-								var11.surface = var13
+							if Surface ~= nil then
+								JoinResult.surface = Surface
 							end
-							if (if var12 ~= nil then var13 else var12) ~= unifiedLoggingSurface.SEARCH_RESULTS then
-								var11.keyword = nil
+							if (if Attribute == nil then Surface else Attribute) ~= UnifiedLoggingSurface.SEARCH_RESULTS then
+								JoinResult.keyword = nil
 							end
-						elseif var8 and var8.current and var8.current.current then
-							local name = avatarScreenProperties[var8.current.opaque.name]
+						elseif v3 and v3.current and v3.current.current then
+							local v6 = AvatarScreenProperties[v3.current.opaque.name]
 							
-							if name and name.analyticsData then
-								var11.surface = name.analyticsData.unifiedLoggingSurface
+							if v6 and v6.analyticsData then
+								JoinResult.surface = v6.analyticsData.unifiedLoggingSurface
 							end
 						end
-						if fFlagAXMISEnableMultiShoppingUnifiedEvents and attributes[unifiedEventLogConstantsModule.HAS_DEFERRED_ACTION] then
-							var11.cartId = cartIdServiceModule.getCartId()
+						if FFlagAXMISEnableMultiShoppingUnifiedEvents and Attributes[UnifiedEventLogConstantsModule.HAS_DEFERRED_ACTION] then
+							JoinResult.cartId = CartIdServiceModule.getCartId()
 						end
-						if fFlagAXUnifiedImpressionsOnThumbnail then
-							var11 = applyClickStampFieldOverridesModule(var11, attributes)
+						if FFlagAXUnifiedImpressionsOnThumbnail then
+							JoinResult = ApplyClickStampFieldOverridesModule(JoinResult, Attributes)
 						end
-						sendUnifiedEventLogForInstanceModule(p10, var11, {
+						SendUnifiedEventLogForInstanceModule(Tagged, JoinResult, {
 							includeScreenSize = true,
 							includeElementSizeAndPosition = true
 						})
 					end)
 				end
 			end)
-			t.instanceRemoved = collectionService:GetInstanceRemovedSignal(unifiedEventLogConstantsModule.TAG_NAME):Connect(function(p11)
-				-- upvalues: t (write)
-				local var11 = t[p11]
+			ActivatedConnections.instanceRemoved = CollectionService:GetInstanceRemovedSignal(UnifiedEventLogConstantsModule.TAG_NAME):Connect(function(Tagged) --[[ Line: 243 ]]
+				-- upvalues: ActivatedConnections (ref)
+				local ActivatedConnection = ActivatedConnections[Tagged]
 				
-				if var11 then
-					var11:Disconnect()
+				if ActivatedConnection then
+					ActivatedConnection:Disconnect()
 				end
-				t[p11] = nil
+				ActivatedConnections[Tagged] = nil
 			end)
 			
-			return function()
-				-- upvalues: t (write)
-				for i, v in t do
-					v:Disconnect()
+			return function() --[[ Line: 252 ]]
+				-- upvalues: ActivatedConnections (ref)
+				for _, activatedConnection in ActivatedConnections do
+					activatedConnection:Disconnect()
 				end
-				t = {}
+				ActivatedConnections = {}
 			end
 		end, {})
 	end

@@ -1,95 +1,96 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
-local builderIconsModule = require(parent.BuilderIcons)
-local foundationModule = require(parent.Foundation)
-local momentsCommonModule = require(parent.MomentsCommon)
-local reactModule = require(parent.React)
-local headerBar = require(parent.UIBlox).App.Bar.HeaderBar
-local coachmark = foundationModule.Coachmark
-local iconButton = foundationModule.IconButton
-local text = foundationModule.Text
-local view = foundationModule.View
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local inputSize = foundationModule.Enums.InputSize
-local plusLarge = builderIconsModule.Icon.PlusLarge
-local chevronLargeLeft = builderIconsModule.Icon.ChevronLargeLeft
-local gradientBackdrop = momentsCommonModule.Components.GradientBackdrop
-local flyoutLeftHeader = require(parent.FlyoutSidePanel).Components.FlyoutLeftHeader
-local flyoutSidePanelIXP = require(parent.SharedExperimentDefinition).FlyoutSidePanelIXP
-local navigationMenuModule = require(moments.Components.NavigationMenu)
-local constantsModule = require(moments.Constants)
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
+local BuilderIconsModule = require(Parent.BuilderIcons)
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local HeaderBar = require(Parent.UIBlox).App.Bar.HeaderBar
+local Coachmark = FoundationModule.Coachmark
+local IconButton = FoundationModule.IconButton
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local InputSize = FoundationModule.Enums.InputSize
+local PlusLarge = BuilderIconsModule.Icon.PlusLarge
+local ChevronLargeLeft = BuilderIconsModule.Icon.ChevronLargeLeft
+local GradientBackdrop = require(Parent.MomentsCommon).Components.GradientBackdrop
+local FlyoutLeftHeader = require(Parent.FlyoutSidePanel).Components.FlyoutLeftHeader
+local FlyoutSidePanelIXP = require(Parent.SharedExperimentDefinition).FlyoutSidePanelIXP
+local NavigationMenuModule = require(Moments.Components.NavigationMenu)
+local ConstantsModule = require(Moments.Constants)
+local FFlagMomentsFtuxTooltipCreateCopyModule = require(Moments.Flags.FFlagMomentsFtuxTooltipCreateCopy)
+local FFlagMomentsCreationFeatureGate = require(Parent.SharedFlags).FFlagMomentsCreationFeatureGate
 
-local function renderAction(p1, p2, p3, p4)
-	-- upvalues: reactModule (ref), iconButton (ref), buttonVariant (ref), inputSize (ref)
-	return reactModule.createElement(iconButton, {
+local function renderAction(p1, Icon, OnActivated, LayoutOrder) --[[ Line: 67 ]]
+	-- upvalues: ReactModule (copy), IconButton (copy), ButtonVariant (copy), InputSize (copy)
+	return ReactModule.createElement(IconButton, {
 		isCircular = true,
 		Selectable = true,
-		LayoutOrder = p4,
-		icon = p2,
-		onActivated = p3,
-		variant = buttonVariant.Utility,
-		size = inputSize.Medium,
+		LayoutOrder = LayoutOrder,
+		icon = Icon,
+		onActivated = OnActivated,
+		variant = ButtonVariant.Utility,
+		size = InputSize.Medium,
 		testId = `--moments-header--actions--{p0}`
 	})
 end
 
-return function(p1)
-	-- upvalues: renderAction (ref), chevronLargeLeft (ref), plusLarge (ref), reactModule (ref), iconButton (ref), buttonVariant (ref), inputSize (ref), navigationMenuModule (ref), view (ref), flyoutSidePanelIXP (ref), flyoutLeftHeader (ref), text (ref), foundationModule (ref), coachmark (ref), headerBar (ref), gradientBackdrop (ref), constantsModule (ref)
-	local var1 = nil
-	local var2 = nil
+return function(p1) --[[ Line: 80 | Named "MomentsHeaderView" ]]
+	-- upvalues: renderAction (copy), ChevronLargeLeft (copy), PlusLarge (copy), ReactModule (copy), IconButton (copy), ButtonVariant (copy), InputSize (copy), NavigationMenuModule (copy), View (copy), FlyoutSidePanelIXP (copy), FlyoutLeftHeader (copy), Text (copy), FFlagMomentsCreationFeatureGate (copy), FoundationModule (copy), FFlagMomentsFtuxTooltipCreateCopyModule (copy), Coachmark (copy), HeaderBar (copy), GradientBackdrop (copy), ConstantsModule (copy)
+	local RenderLeft: (() -> any)? = nil
+	local RenderRight: (() -> any)? = nil
 	
 	if p1.variant == "back" then
-		var1 = function()
-			-- upvalues: renderAction (copy), chevronLargeLeft (copy), p1 (ref)
-			return renderAction("back", chevronLargeLeft, p1.onBack, 1)
+		RenderLeft = function() --[[ Line: 85 ]]
+			-- upvalues: renderAction (upval), ChevronLargeLeft (upval), p1 (copy)
+			return renderAction("back", ChevronLargeLeft, p1.onBack, 1)
 		end
 		
 		if p1.showInteractiveButtons and p1.showNavigationMenu then
 			local t = {}
 			
 			if p1.showCreateButton then
-				t.CreateMomentButton = reactModule.createElement(iconButton, {
+				t.CreateMomentButton = ReactModule.createElement(IconButton, {
 					LayoutOrder = 1,
 					isCircular = true,
 					Selectable = true,
 					testId = "--moments-header--actions--create",
-					icon = plusLarge,
+					icon = PlusLarge,
 					onActivated = p1.onCreateMomentButtonPressed,
-					variant = buttonVariant.Utility,
-					size = inputSize.Medium
+					variant = ButtonVariant.Utility,
+					size = InputSize.Medium
 				})
 			end
-			t.NavigationMenu = reactModule.createElement(navigationMenuModule, {
+			t.NavigationMenu = ReactModule.createElement(NavigationMenuModule, {
 				layoutOrder = 2,
 				buttonTestId = "--moments-header--actions--more",
-				buttonVariant = buttonVariant.Utility,
+				buttonVariant = ButtonVariant.Utility,
 				onNavigateToTrending = p1.onNavigateToTrending,
 				onNavigateToMyMoments = p1.onNavigateToMyMoments
 			})
 			
-			var2 = function()
-				-- upvalues: reactModule (copy), view (copy), t (ref)
-				return reactModule.createElement(view, { tag = "row align-y-center gap-xsmall auto-xy" }, t)
+			RenderRight = function() --[[ Line: 104 ]]
+				-- upvalues: ReactModule (upval), View (upval), t (copy)
+				return ReactModule.createElement(View, { tag = "row align-y-center gap-xsmall auto-xy" }, t)
 			end
 		elseif p1.showInteractiveButtons and p1.showCreateButton then
-			var2 = function()
-				-- upvalues: renderAction (copy), plusLarge (copy), p1 (ref)
-				return renderAction("create", plusLarge, p1.onCreateMomentButtonPressed, 1)
+			RenderRight = function() --[[ Line: 110 ]]
+				-- upvalues: renderAction (upval), PlusLarge (upval), p1 (copy)
+				return renderAction("create", PlusLarge, p1.onCreateMomentButtonPressed, 1)
 			end
 		end
 	elseif p1.variant == "base" then
-		local var3 = flyoutSidePanelIXP.isFlyoutSidePanelEnabled()
-		local var4 = p1.showInteractiveButtons and (p1.showHamburger and var3)
+		local IsFlyoutSidePanelEnabled = FlyoutSidePanelIXP.isFlyoutSidePanelEnabled()
+		local IsFlyoutSidePanelEnabled1 = p1.showInteractiveButtons and (p1.showHamburger and IsFlyoutSidePanelEnabled)
 		
-		var1 = function()
-			-- upvalues: var4 (ref), reactModule (copy), flyoutLeftHeader (copy), p1 (ref), var3 (ref), flyoutSidePanelIXP (copy), view (copy), text (copy)
-			return if var4 then reactModule.createElement(flyoutLeftHeader, {
+		RenderLeft = function() --[[ Line: 120 ]]
+			-- upvalues: IsFlyoutSidePanelEnabled1 (copy), ReactModule (upval), FlyoutLeftHeader (upval), p1 (copy), IsFlyoutSidePanelEnabled (copy), FlyoutSidePanelIXP (upval), View (upval), Text (upval)
+			return if IsFlyoutSidePanelEnabled1 then ReactModule.createElement(FlyoutLeftHeader, {
 				isRobloxLogoEnabled = false,
 				titleText = p1.title,
-				isFlyoutEntrypointEnabled = var3,
-				isAlternateEntryPointEnabled = flyoutSidePanelIXP.isAlternateEntryPointEnabled()
-			}) else reactModule.createElement(view, { tag = "row align-x-left align-y-center auto-xy" }, {
-				Title = reactModule.createElement(text, {
+				isFlyoutEntrypointEnabled = IsFlyoutSidePanelEnabled,
+				isAlternateEntryPointEnabled = FlyoutSidePanelIXP.isAlternateEntryPointEnabled()
+			}) else ReactModule.createElement(View, { tag = "row align-x-left align-y-center auto-xy" }, {
+				Title = ReactModule.createElement(Text, {
 					tag = "auto-xy text-heading-large",
 					Text = p1.title,
 					textStyle = p1.titleTextStyle
@@ -98,34 +99,37 @@ return function(p1)
 		end
 		
 		if p1.showInteractiveButtons then
-			local var5 = reactModule.createElement(iconButton, {
-				LayoutOrder = 1,
-				isCircular = true,
-				Selectable = true,
-				testId = "--moments-header--actions--create",
-				icon = plusLarge,
-				onActivated = p1.onCreateMomentButtonPressed,
-				variant = buttonVariant.Utility,
-				size = inputSize.Medium
-			})
-			local var6 = if p1.showFtuxTooltip then reactModule.createElement(coachmark, {
-				LayoutOrder = 1,
-				title = "Share Your First Moment",
-				text = "Tap + to share a moment from your captures",
-				isOpen = p1.showFtuxTooltip,
-				onClose = p1.onFtuxTooltipClosed,
-				side = foundationModule.Enums.PopoverSide.Bottom,
-				align = foundationModule.Enums.PopoverAlign.End
-			}, var5) else reactModule.createElement(view, { LayoutOrder = 1, tag = "auto-xy" }, { Action = var5 })
+			local Element = nil
 			
-			var2 = function()
-				-- upvalues: reactModule (copy), view (copy), var6 (write), navigationMenuModule (copy), buttonVariant (copy), p1 (ref)
-				return reactModule.createElement(view, { tag = "row align-y-center gap-xsmall auto-xy" }, {
-					CreateMomentButton = var6,
-					NavigationMenu = reactModule.createElement(navigationMenuModule, {
+			if p1.showCreateButton or not FFlagMomentsCreationFeatureGate then
+				local Element1 = ReactModule.createElement(IconButton, {
+					LayoutOrder = 1,
+					isCircular = true,
+					Selectable = true,
+					testId = "--moments-header--actions--create",
+					icon = PlusLarge,
+					onActivated = p1.onCreateMomentButtonPressed,
+					variant = ButtonVariant.Utility,
+					size = InputSize.Medium
+				})
+				Element = if p1.showFtuxTooltip then ReactModule.createElement(Coachmark, {
+					LayoutOrder = 1,
+					isOpen = p1.showFtuxTooltip,
+					onClose = p1.onFtuxTooltipClosed,
+					side = FoundationModule.Enums.PopoverSide.Bottom,
+					title = if FFlagMomentsFtuxTooltipCreateCopyModule then p1.ftuxTooltipTitle else "Share Your First Moment",
+					text = if FFlagMomentsFtuxTooltipCreateCopyModule then p1.ftuxTooltipText else "Tap + to share a moment from your captures",
+					align = FoundationModule.Enums.PopoverAlign.End
+				}, Element1) else ReactModule.createElement(View, { LayoutOrder = 1, tag = "auto-xy" }, { Action = Element1 })
+			end
+			RenderRight = function() --[[ Line: 178 ]]
+				-- upvalues: ReactModule (upval), View (upval), Element (ref), NavigationMenuModule (upval), ButtonVariant (upval), p1 (copy)
+				return ReactModule.createElement(View, { tag = "row align-y-center gap-xsmall auto-xy" }, {
+					CreateMomentButton = Element,
+					NavigationMenu = ReactModule.createElement(NavigationMenuModule, {
 						layoutOrder = 2,
 						buttonTestId = "--moments-header--actions--more",
-						buttonVariant = buttonVariant.Utility,
+						buttonVariant = ButtonVariant.Utility,
 						onNavigateToTrending = p1.onNavigateToTrending,
 						onNavigateToMyMoments = p1.onNavigateToMyMoments
 					})
@@ -133,28 +137,28 @@ return function(p1)
 			end
 		end
 	elseif p1.variant == "close" then
-		var2 = function()
-			-- upvalues: renderAction (copy), p1 (ref)
+		RenderRight = function() --[[ Line: 194 ]]
+			-- upvalues: renderAction (upval), p1 (copy)
 			return renderAction("close", "icons/navigation/close_small", p1.onClose, 1)
 		end
 	end
-	local t = {
-		HeaderContent = reactModule.createElement(view, {
+	local config = {
+		HeaderContent = ReactModule.createElement(View, {
 			tag = "size-full-0 auto-y",
 			testId = "--moments-header-content",
 			ZIndex = 2
 		}, {
-			SafeAreaContent = reactModule.createElement(view, {
+			SafeAreaContent = ReactModule.createElement(View, {
 				tag = "size-full-0 auto-y",
 				testId = "--moments-header-safe-area",
 				padding = p1.headerPadding
 			}, {
-				HeaderBarContainer = reactModule.createElement(view, {
+				HeaderBarContainer = ReactModule.createElement(View, {
 					tag = "size-full-0 auto-y",
 					testId = "--moments-header",
 					Size = UDim2.new(1, 0, 0, p1.headerHeight)
 				}, {
-					HeaderBar = reactModule.createElement(headerBar, {
+					HeaderBar = ReactModule.createElement(HeaderBar, {
 						isTitleCentered = false,
 						isOnMedia = false,
 						backgroundTransparency = 1,
@@ -162,8 +166,8 @@ return function(p1)
 						barHeight = p1.headerHeight,
 						paddingLeft = UDim.new(0, 0),
 						paddingRight = UDim.new(0, 0),
-						renderLeft = var1,
-						renderRight = var2
+						renderLeft = RenderLeft,
+						renderRight = RenderRight
 					})
 				})
 			})
@@ -171,7 +175,7 @@ return function(p1)
 	}
 	
 	if p1.showTopScrim then
-		t.GradientScrim = reactModule.createElement(gradientBackdrop, {
+		config.GradientScrim = ReactModule.createElement(GradientBackdrop, {
 			startingTransparency = 0.4,
 			endingTransparency = 1,
 			rotation = 90,
@@ -181,10 +185,10 @@ return function(p1)
 			size = UDim2.new(1, 0, 0, p1.scrimHeight)
 		})
 	end
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "size-full-0",
 		testId = "--moments-header-root",
 		LayoutOrder = p1.layoutOrder,
-		ZIndex = constantsModule.DisplayOrder.FeedTopBar
-	}, t)
+		ZIndex = ConstantsModule.DisplayOrder.FeedTopBar
+	}, config)
 end

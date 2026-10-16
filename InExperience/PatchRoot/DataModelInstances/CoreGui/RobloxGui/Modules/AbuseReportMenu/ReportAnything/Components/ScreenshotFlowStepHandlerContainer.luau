@@ -1,23 +1,23 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local reactModule = require(corePackagesService.Packages.React)
-local screenshotFlowStepHandlerModule = require(script.Parent.ScreenshotFlowStepHandler)
-local screenshotFlowStepHandlerContainer = reactModule.PureComponent:extend("ScreenshotFlowStepHandlerContainer")
-local coreScriptsRootProvider = require(corePackagesService.Workspace.Packages.CoreScriptsRoactCommon).CoreScriptsRootProvider
-local focusNavigationUtilsModule = require(corePackagesService.Workspace.Packages.FocusNavigationUtils)
-local focusRoot = focusNavigationUtilsModule.FocusRoot
-local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
+﻿local CorePackages = game:GetService("CorePackages")
+local ReactModule = require(CorePackages.Packages.React)
+local ScreenshotFlowStepHandlerModule = require(script.Parent.ScreenshotFlowStepHandler)
+local ScreenshotFlowStepHandlerContainer = ReactModule.PureComponent:extend("ScreenshotFlowStepHandlerContainer")
+local CoreScriptsRootProvider = require(CorePackages.Workspace.Packages.CoreScriptsRoactCommon).CoreScriptsRootProvider
+local FocusNavigationUtilsModule = require(CorePackages.Workspace.Packages.FocusNavigationUtils)
+local FocusRoot = FocusNavigationUtilsModule.FocusRoot
+local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
 
-function screenshotFlowStepHandlerContainer.render(p1)
-	-- upvalues: reactModule (ref), coreScriptsRootProvider (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), screenshotFlowStepHandlerModule (ref)
-	return reactModule.createElement(coreScriptsRootProvider, {}, {
-		FocusNavigationCoreScriptsWrapper = reactModule.createElement(focusRoot, {
+function ScreenshotFlowStepHandlerContainer.render(p1) --[[ Line: 16 ]]
+	-- upvalues: ReactModule (copy), CoreScriptsRootProvider (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), ScreenshotFlowStepHandlerModule (copy)
+	return ReactModule.createElement(CoreScriptsRootProvider, {}, {
+		FocusNavigationCoreScriptsWrapper = ReactModule.createElement(FocusRoot, {
 			isIsolated = true,
 			isAutoFocusRoot = true,
-			surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.CentralOverlay
+			surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.CentralOverlay
 		}, {
-			ScreenshotFlowStepHandlerContainer = reactModule.createElement(screenshotFlowStepHandlerModule, p1.props)
+			ScreenshotFlowStepHandlerContainer = ReactModule.createElement(ScreenshotFlowStepHandlerModule, p1.props)
 		})
 	})
 end
 
-return screenshotFlowStepHandlerContainer
+return ScreenshotFlowStepHandlerContainer

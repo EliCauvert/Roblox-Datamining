@@ -1,1 +1,1 @@
-﻿return require(script.Virtualizer)
+﻿return (require(script.Virtualizer))

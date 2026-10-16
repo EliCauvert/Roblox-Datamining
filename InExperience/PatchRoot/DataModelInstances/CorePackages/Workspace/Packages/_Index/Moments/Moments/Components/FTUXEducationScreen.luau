@@ -1,134 +1,147 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
-local foundationModule = require(parent.Foundation)
-local localizationModule = require(parent.Localization)
-local momentsCommonModule = require(parent.MomentsCommon)
-local reactModule = require(parent.React)
-local button = foundationModule.Button
-local icon = foundationModule.Icon
-local image = foundationModule.Image
-local text = foundationModule.Text
-local view = foundationModule.View
-local useDeviceInsets = momentsCommonModule.Hooks.useDeviceInsets
-local useFormFactor = momentsCommonModule.Hooks.useFormFactor
-local useLocalization = localizationModule.Hooks.useLocalization
-local useTokens = foundationModule.Hooks.useTokens
-local formFactor = momentsCommonModule.Enums.FormFactor
-local constantsModule = require(moments.Constants)
-local howToCaptureModalModule = require(moments.Components.HowToCaptureModal)
-local analytics = momentsCommonModule.Analytics
-local eventNames = analytics.EventNames
-local fireAnalyticsEvent = analytics.fireAnalyticsEvent
-local t = {
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
+local BuilderIconsModule = require(Parent.BuilderIcons)
+local FoundationModule = require(Parent.Foundation)
+local FoundationCloudAssetsModule = require(Parent.FoundationCloudAssets)
+local MomentsCommonModule = require(Parent.MomentsCommon)
+local ReactModule = require(Parent.React)
+local Button = FoundationModule.Button
+local Icon = FoundationModule.Icon
+local IconButton = FoundationModule.IconButton
+local Image = FoundationModule.Image
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local UseDeviceInsetsFunction = MomentsCommonModule.Hooks.useDeviceInsets
+local UseFormFactorFunction = MomentsCommonModule.Hooks.useFormFactor
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local FormFactor = MomentsCommonModule.Enums.FormFactor
+local ConstantsModule = require(Moments.Constants)
+local HowToCaptureModalModule = require(Moments.Components.HowToCaptureModal)
+local Analytics = MomentsCommonModule.Analytics
+local EventNames = Analytics.EventNames
+local FireAnalyticsEventFunction = Analytics.fireAnalyticsEvent
+local FFlagMomentsFtuxEducationScreenRefreshModule = require(Moments.Flags.FFlagMomentsFtuxEducationScreenRefresh)
+local config = {
 	title = "Feature.Moments.Label.CaptureLibrary",
 	description = "Feature.Moments.Description.EmptyCapturesLibrary",
 	howToCapture = "Feature.Moments.Action.HowToCapture",
 	back = "Feature.Moments.Action.Back"
 }
 
-return function(p1)
-	-- upvalues: useLocalization (ref), t (ref), useDeviceInsets (ref), useTokens (ref), useFormFactor (ref), reactModule (ref), fireAnalyticsEvent (ref), eventNames (ref), view (ref), formFactor (ref), icon (ref), foundationModule (ref), image (ref), constantsModule (ref), text (ref), button (ref), howToCaptureModalModule (ref)
-	local var1 = useLocalization(t)
-	local var2 = useDeviceInsets()
-	local var3 = useTokens()
-	local var4 = useFormFactor()
-	local var5, var6 = reactModule.useState(false)
-	reactModule.useEffect(function()
-		-- upvalues: fireAnalyticsEvent (copy), eventNames (copy)
-		fireAnalyticsEvent(eventNames.FTUXEducationScreenImpression)
+if FFlagMomentsFtuxEducationScreenRefreshModule then
+	FoundationCloudAssetsModule.preloadAsset("pictograms/captures")
+end
+return function(p1) --[[ Line: 64 | Named "FTUXEducationScreen" ]]
+	-- upvalues: UseLocalizationFunction (copy), config (copy), UseDeviceInsetsFunction (copy), UseTokensFunction (copy), UseFormFactorFunction (copy), ReactModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), View (copy), FormFactor (copy), FFlagMomentsFtuxEducationScreenRefreshModule (copy), IconButton (copy), BuilderIconsModule (copy), FoundationModule (copy), Icon (copy), Image (copy), FoundationCloudAssetsModule (copy), ConstantsModule (copy), Text (copy), Button (copy), HowToCaptureModalModule (copy)
+	local UseLocalizationResult = UseLocalizationFunction(config)
+	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
+	local UseTokensResult = UseTokensFunction()
+	local UseFormFactorResult = UseFormFactorFunction()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	ReactModule.useEffect(function() --[[ Line: 73 ]]
+		-- upvalues: FireAnalyticsEventFunction (upval), EventNames (upval)
+		FireAnalyticsEventFunction(EventNames.FTUXEducationScreenImpression)
+	end, {})
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 77 ]]
+		-- upvalues: FireAnalyticsEventFunction (upval), EventNames (upval), UseStateResult2 (copy)
+		FireAnalyticsEventFunction(EventNames.FTUXHowToCaptureButtonPressed)
+		UseStateResult2(true)
+	end, {})
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 82 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(false)
 	end, {})
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "position-center-center anchor-center-center size-full-full",
-		backgroundStyle = var3.Color.Common.Scrim
+		backgroundStyle = UseTokensResult.Color.Common.Scrim
 	}, {
-		EducationCard = if not var5 then reactModule.createElement(view, {
+		EducationCard = if UseStateResult then nil else ReactModule.createElement(View, {
 			tag = "position-center-center anchor-center-center size-full-full radius-large bg-surface-0",
 			sizeConstraint = {
-				MaxSize = if var4 == formFactor.Wide then Vector2.new(600, 700) else nil
+				MaxSize = if UseFormFactorResult == FormFactor.Wide then Vector2.new(600, 700) else nil
 			}
 		}, {
-			CloseButtonContainer = reactModule.createElement(view, {
+			CloseButtonContainer = ReactModule.createElement(View, {
 				tag = "position-top-right anchor-top-right auto-xy",
 				padding = {
-					top = UDim.new(0, var2.top + var3.Padding.Medium),
-					right = UDim.new(0, var2.right + var3.Padding.Medium)
+					top = UDim.new(0, UseDeviceInsetsResult.top + UseTokensResult.Padding.Medium),
+					right = UDim.new(0, UseDeviceInsetsResult.right + UseTokensResult.Padding.Medium)
 				}
 			}, {
-				CloseButton = reactModule.createElement(view, {
+				CloseButton = if FFlagMomentsFtuxEducationScreenRefreshModule then ReactModule.createElement(IconButton, {
+					isCircular = true,
+					icon = BuilderIconsModule.Icon.X,
+					onActivated = p1.onClose,
+					size = FoundationModule.Enums.InputSize.Large,
+					variant = FoundationModule.Enums.ButtonVariant.Utility
+				}) else ReactModule.createElement(View, {
 					tag = "size-1100-1100 padding-medium radius-circle bg-over-media-0",
 					onActivated = p1.onClose
 				}, {
-					CloseIcon = reactModule.createElement(icon, {
+					CloseIcon = ReactModule.createElement(Icon, {
 						name = "icons/navigation/close_small",
 						ZIndex = 2,
 						AnchorPoint = Vector2.new(0.5, 0.5),
 						Position = UDim2.fromScale(0.5, 0.5),
-						size = foundationModule.Enums.IconSize.Small,
-						style = var3.Color.ActionEmphasis.Foreground
+						size = FoundationModule.Enums.IconSize.Small,
+						style = UseTokensResult.Color.ActionEmphasis.Foreground
 					})
 				})
 			}),
-			Body = reactModule.createElement(view, {
+			Body = ReactModule.createElement(View, {
 				padding = {
-					top = UDim.new(0, var2.top + var3.Padding.XLarge),
-					bottom = UDim.new(0, math.max(var2.bottom, var3.Padding.Medium)),
-					left = UDim.new(0, math.max(var2.left, var3.Padding.Large)),
-					right = UDim.new(0, math.max(var2.right, var3.Padding.Large))
+					top = UDim.new(0, UseDeviceInsetsResult.top + UseTokensResult.Padding.XLarge),
+					bottom = UDim.new(0, (math.max(UseDeviceInsetsResult.bottom, UseTokensResult.Padding.Medium))),
+					left = UDim.new(0, (math.max(UseDeviceInsetsResult.left, UseTokensResult.Padding.Large))),
+					right = UDim.new(0, (math.max(UseDeviceInsetsResult.right, UseTokensResult.Padding.Large)))
 				},
-				tag = if var4 == formFactor.Wide then "col align-x-center align-y-center gap-large size-full" else "col align-x-center align-y-center gap-medium size-full"
+				tag = if UseFormFactorResult == FormFactor.Wide then "col align-x-center align-y-center gap-large size-full" else "col align-x-center align-y-center gap-medium size-full"
 			}, {
-				Graphic = reactModule.createElement(image, {
+				Graphic = ReactModule.createElement(Image, {
 					LayoutOrder = 1,
-					Image = constantsModule.CapturesAssetId,
+					Image = if FFlagMomentsFtuxEducationScreenRefreshModule then FoundationCloudAssetsModule.Assets["pictograms/captures"].assetId else ConstantsModule.CapturesAssetId,
+					imageStyle = if FFlagMomentsFtuxEducationScreenRefreshModule then UseTokensResult.Color.Content.Emphasis else nil,
 					ScaleType = Enum.ScaleType.Fit,
-					Size = if var4 == formFactor.Wide then UDim2.fromScale(0.7, 0.39375) else UDim2.fromScale(0.6, 0.3375),
+					Size = if UseFormFactorResult == FormFactor.Wide then UDim2.fromScale(0.7, 0.39375) else UDim2.fromScale(0.6, 0.33749999999999997),
 					SizeConstraint = Enum.SizeConstraint.RelativeXX
 				}),
-				Title = reactModule.createElement(text, {
+				Title = ReactModule.createElement(Text, {
 					LayoutOrder = 2,
 					tag = "auto-xy text-heading-large text-align-x-center content-emphasis",
-					Text = var1.title
+					Text = UseLocalizationResult.title
 				}),
-				Description = reactModule.createElement(text, {
+				Description = ReactModule.createElement(Text, {
 					LayoutOrder = 3,
 					tag = "auto-xy text-body-large text-align-x-center content-muted",
-					Text = var1.description
+					Text = UseLocalizationResult.description
 				}),
-				ButtonArea = reactModule.createElement(view, {
+				ButtonArea = ReactModule.createElement(View, {
 					LayoutOrder = 4,
 					tag = "col align-x-center gap-medium size-full-0 auto-y"
 				}, {
-					HowToCaptureButton = reactModule.createElement(button, {
+					HowToCaptureButton = ReactModule.createElement(Button, {
 						LayoutOrder = 1,
-						fillBehavior = foundationModule.Enums.FillBehavior.Fill,
-						onActivated = reactModule.useCallback(function()
-							-- upvalues: fireAnalyticsEvent (copy), eventNames (copy), var6 (ref)
-							fireAnalyticsEvent(eventNames.FTUXHowToCaptureButtonPressed)
-							var6(true)
-						end, {}),
-						size = foundationModule.Enums.InputSize.Large,
-						text = var1.howToCapture,
-						variant = foundationModule.Enums.ButtonVariant.Emphasis,
-						width = UDim.new(1, 0)
+						fillBehavior = if FFlagMomentsFtuxEducationScreenRefreshModule then nil else FoundationModule.Enums.FillBehavior.Fill,
+						onActivated = UseResult,
+						size = FoundationModule.Enums.InputSize.Large,
+						text = UseLocalizationResult.howToCapture,
+						variant = FoundationModule.Enums.ButtonVariant.Emphasis,
+						width = if FFlagMomentsFtuxEducationScreenRefreshModule then nil else UDim.new(1, 0)
 					}),
-					BackButton = reactModule.createElement(button, {
+					BackButton = if FFlagMomentsFtuxEducationScreenRefreshModule then nil else ReactModule.createElement(Button, {
 						LayoutOrder = 2,
-						fillBehavior = foundationModule.Enums.FillBehavior.Fill,
+						fillBehavior = FoundationModule.Enums.FillBehavior.Fill,
 						onActivated = p1.onClose,
-						size = foundationModule.Enums.InputSize.Large,
-						text = var1.back,
-						variant = foundationModule.Enums.ButtonVariant.Standard,
+						size = FoundationModule.Enums.InputSize.Large,
+						text = UseLocalizationResult.back,
+						variant = FoundationModule.Enums.ButtonVariant.Standard,
 						width = UDim.new(1, 0)
 					})
 				})
 			})
-		}) else nil,
-		HowToCard = if var5 then reactModule.createElement(howToCaptureModalModule, {
-			onClose = reactModule.useCallback(function()
-				-- upvalues: var6 (ref)
-				var6(false)
-			end, {})
-		}) else nil
+		}),
+		HowToCard = if UseStateResult then ReactModule.createElement(HowToCaptureModalModule, { onClose = UseResult1 }) else nil
 	})
 end

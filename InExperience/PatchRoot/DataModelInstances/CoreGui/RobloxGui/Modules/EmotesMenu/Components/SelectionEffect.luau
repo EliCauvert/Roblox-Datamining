@@ -1,37 +1,37 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local constantsModule = require(script.Parent.Parent.Constants)
-local selectionEffect = roactModule.PureComponent:extend("SelectionEffect")
+﻿local CorePackages = game:GetService("CorePackages")
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local ConstantsModule = require(script.Parent.Parent.Constants)
+local SelectionEffect = RoactModule.PureComponent:extend("SelectionEffect")
 
-function selectionEffect.render(p1)
-	-- upvalues: constantsModule (ref), roactModule (ref)
-	local layout = constantsModule.Layouts[p1.props.layout]
-	local focusedSegmentIndex = p1.props.emotesWheel.focusedSegmentIndex
+function SelectionEffect.render(p1) --[[ Line: 13 ]]
+	-- upvalues: ConstantsModule (copy), RoactModule (copy)
+	local Layout = ConstantsModule.Layouts[p1.props.layout]
+	local FocusedSegmentIndex: number = p1.props.emotesWheel.focusedSegmentIndex
 	
-	return roactModule.createElement("Frame", {
+	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		AnchorPoint = Vector2.new(0.5, 0.5),
 		Position = UDim2.new(0.5, 0, 0.5, 0),
 		Size = UDim2.new(1, 0, 1, 0),
-		Rotation = 360 / constantsModule.EmotesPerPage * (focusedSegmentIndex - 1) + constantsModule.SegmentsStartRotation,
-		Visible = focusedSegmentIndex ~= 0
+		Rotation = 360 / ConstantsModule.EmotesPerPage * (FocusedSegmentIndex - 1) + ConstantsModule.SegmentsStartRotation,
+		Visible = FocusedSegmentIndex ~= 0
 	}, {
-		SelectedLine = roactModule.createElement("ImageLabel", {
+		SelectedLine = RoactModule.createElement("ImageLabel", {
 			BackgroundTransparency = 1,
 			ZIndex = 4,
 			AnchorPoint = Vector2.new(1, 0.5),
-			Position = UDim2.new(0.5 + constantsModule.InnerCircleSizeRatio / 2, -layout.SelectedLinePadding, 0.5, 0),
-			Size = UDim2.new(1, 0, constantsModule.InnerCircleSizeRatio * math.sin(math.rad(360 / constantsModule.EmotesPerPage / 2)), -layout.SelectedLinePadding),
-			Image = layout.SelectedLine
+			Position = UDim2.new(0.5 + ConstantsModule.InnerCircleSizeRatio / 2, -Layout.SelectedLinePadding, 0.5, 0),
+			Size = UDim2.new(1, 0, ConstantsModule.InnerCircleSizeRatio * math.sin((math.rad(360 / ConstantsModule.EmotesPerPage / 2))), -Layout.SelectedLinePadding),
+			Image = Layout.SelectedLine
 		}, {
-			AsspectRatioConstraint = roactModule.createElement("UIAspectRatioConstraint", {
-				AspectRatio = layout.SelectedLineImageSize.X / layout.SelectedLineImageSize.Y
+			AsspectRatioConstraint = RoactModule.createElement("UIAspectRatioConstraint", {
+				AspectRatio = Layout.SelectedLineImageSize.X / Layout.SelectedLineImageSize.Y
 			})
 		})
 	})
 end
 
-return roactRoduxModule.connect(function(p1)
+return RoactRoduxModule.connect(function(p1) --[[ Line: 46 | Named "mapStateToProps" ]]
 	return { emotesWheel = p1.emotesWheel, layout = p1.layout }
-end, nil)(selectionEffect)
+end, nil)(SelectionEffect)

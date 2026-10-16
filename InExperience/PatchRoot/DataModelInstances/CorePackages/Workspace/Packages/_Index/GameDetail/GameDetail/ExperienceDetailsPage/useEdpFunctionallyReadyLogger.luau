@@ -1,27 +1,35 @@
-﻿local parent = script:FindFirstAncestor("GameDetail").Parent
-local reactModule = require(parent.React)
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local fetchGamePlayButtonData = require(parent.GamePlayButton).FetchGamePlayButtonData
-local _ = require(parent.SduiSharedUtilities)
-local milestone = require(parent.TimeToInteractiveTracker).TimeToInteractiveTracker.Milestone
-local pageGateModule = require(parent.PageGate)
+﻿local Parent = script:FindFirstAncestor("GameDetail").Parent
+local ReactModule = require(Parent.React)
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local FetchGamePlayButtonData = require(Parent.GamePlayButton).FetchGamePlayButtonData
+local _ = require(Parent.SduiSharedUtilities)
+local Milestone = require(Parent.TimeToInteractiveTracker).TimeToInteractiveTracker.Milestone
+local PageGateModule = require(Parent.PageGate)
+local FFlagEDPTTIParityDefinitions = require(Parent.SharedFlags).FFlagEDPTTIParityDefinitions
 
-return function(p1, p2)
-	-- upvalues: useSelector (ref), fetchGamePlayButtonData (ref), pageGateModule (ref), reactModule (ref), milestone (ref)
-	local var1 = useSelector(function(p3)
-		-- upvalues: p2 (ref), fetchGamePlayButtonData (copy)
-		return if p2 then fetchGamePlayButtonData.IsLoading(p3, p2) else true
+return function(p1, p2) --[[ Line: 20 | Named "useEdpFunctionallyReadyLogger" ]]
+	-- upvalues: UseSelectorFunction (copy), FetchGamePlayButtonData (copy), PageGateModule (copy), ReactModule (copy), Milestone (copy), FFlagEDPTTIParityDefinitions (copy)
+	local UseSelectorResult = UseSelectorFunction(function(p3) --[[ Line: 21 ]]
+		-- upvalues: p2 (copy), FetchGamePlayButtonData (upval)
+		return not p2 or FetchGamePlayButtonData.IsLoading(p3, p2)
 	end)
-	local var2 = if pageGateModule.FFlagEnablePLTPrefetchCallbacks then reactModule.useRef(false) else nil
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), p2 (ref), p1 (ref), milestone (copy), pageGateModule (copy), var2 (write)
-		if not var1 and p2 and p1.trackOnce then
-			p1.trackOnce(milestone.FunctionallyReady)
+	local UseRefResult = if PageGateModule.FFlagEnablePLTPrefetchCallbacks then ReactModule.useRef(false) else nil
+	ReactModule.useEffect(function() --[[ Line: 38 ]]
+		-- upvalues: UseSelectorResult (copy), p2 (copy), p1 (copy), Milestone (upval), FFlagEDPTTIParityDefinitions (upval), PageGateModule (upval), UseRefResult (ref)
+		if not UseSelectorResult and p2 and p1.trackOnce then
+			p1.trackOnce(Milestone.FunctionallyReady)
 			
-			if pageGateModule.FFlagEnablePLTPrefetchCallbacks and var2 and not var2.current then
-				var2.current = true
-				pageGateModule.signal(pageGateModule.Page.ExperienceDetail, pageGateModule.Milestone.FunctionallyReady)
+			if FFlagEDPTTIParityDefinitions then
+				local MarkPlayButtonReadyFunction: () -> () = p1.markPlayButtonReady
+				
+				if MarkPlayButtonReadyFunction then
+					MarkPlayButtonReadyFunction()
+				end
+			end
+			if PageGateModule.FFlagEnablePLTPrefetchCallbacks and UseRefResult and not UseRefResult.current then
+				UseRefResult.current = true
+				PageGateModule.signal(PageGateModule.Page.ExperienceDetail, PageGateModule.Milestone.FunctionallyReady)
 			end
 		end
-	end, { var1, p2, p1 })
+	end, { UseSelectorResult, p2, p1 })
 end

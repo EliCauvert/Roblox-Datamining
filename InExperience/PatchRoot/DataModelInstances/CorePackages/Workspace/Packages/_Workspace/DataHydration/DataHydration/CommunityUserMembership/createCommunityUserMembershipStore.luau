@@ -1,78 +1,77 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local parent = dataHydration.Parent
-local promiseModule = require(parent.Promise)
-local signalsModule = require(parent.Signals)
-local url = require(parent.Http).Url
-local discoveryUtilsModule = require(parent.DiscoveryUtils)
-local logResponseError = discoveryUtilsModule.logResponseError
-local discoveryEventErrorLogger = discoveryUtilsModule.DiscoveryEventErrorLogger
-local createDataCacheModule = require(dataHydration.createDataCache)
-local createDataResolverModule = require(dataHydration.createDataResolver)
-local _ = require(dataHydration.DataHydrationTypes)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local Parent = DataHydration.Parent
+local PromiseModule = require(Parent.Promise)
+local SignalsModule = require(Parent.Signals)
+local DiscoveryUtilsModule = require(Parent.DiscoveryUtils)
+local LogResponseErrorFunction = DiscoveryUtilsModule.logResponseError
+local DiscoveryEventErrorLogger = DiscoveryUtilsModule.DiscoveryEventErrorLogger
+local CreateDataCacheModule = require(DataHydration.createDataCache)
+local CreateDataResolverModule = require(DataHydration.createDataResolver)
+local _ = require(DataHydration.DataHydrationTypes)
 local _ = require(script.Parent.CommunityUserMembershipStoreTypes)
-local requestJoinCommunityModule = require(script.Parent.requestJoinCommunity)
-local groups_url = `{url.GROUPS_URL}v1/groups/`
+local RequestJoinCommunityModule = require(script.Parent.requestJoinCommunity)
+local GroupsName: string = `{require(Parent.Http).Url.GROUPS_URL}v1/groups/`
 
-return function()
-	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), promiseModule (ref), signalsModule (ref), requestJoinCommunityModule (ref), logResponseError (ref), groups_url (ref), discoveryEventErrorLogger (ref)
-	local var1 = createDataCacheModule()
-	local var2 = createDataResolverModule({
+return function() --[[ Line: 23 | Named "createCommunityUserMembershipStore" ]]
+	-- upvalues: CreateDataCacheModule (copy), CreateDataResolverModule (copy), PromiseModule (copy), SignalsModule (copy), RequestJoinCommunityModule (copy), LogResponseErrorFunction (copy), GroupsName (copy), DiscoveryEventErrorLogger (copy)
+	local DataCacheModule = CreateDataCacheModule()
+	local DataResolverModule = CreateDataResolverModule({
 		supportsMutations = true,
-		cache = var1,
-		fetchFn = function(_)
-			-- upvalues: promiseModule (copy)
-			return promiseModule.resolve({})
+		cache = DataCacheModule,
+		fetchFn = function(_) --[[ Line: 27 ]]
+			-- upvalues: PromiseModule (upval)
+			return PromiseModule.resolve({})
 		end
 	})
 	
-	local function applyOptimisticMembership(p1)
-		-- upvalues: signalsModule (copy), var2 (ref)
-		local var3, var4 = signalsModule.createSignal(nil)
-		var2.setMutation(p1, { canJoin = false })
+	local function applyOptimisticMembership(CommunityId) --[[ Line: 35 ]]
+		-- upvalues: SignalsModule (upval), DataResolverModule (copy)
+		local Signal, Signal2 = SignalsModule.createSignal(nil)
+		DataResolverModule.setMutation(CommunityId, { canJoin = false })
 		
-		return var3, function(p2)
-			-- upvalues: var2 (copy), p1 (ref), var4 (ref)
-			if p2 and p2.type == "error" then
-				var2.clearMutation(p1)
+		return Signal, function(p1) --[[ Line: 44 ]]
+			-- upvalues: DataResolverModule (upval), CommunityId (copy), Signal2 (copy)
+			if p1 and p1.type == "error" then
+				DataResolverModule.clearMutation(CommunityId)
 			else
-				var2.commitMutation(p1)
+				DataResolverModule.commitMutation(CommunityId)
 			end
-			var4(p2)
+			Signal2(p1)
 		end
 	end
 	
 	return {
-		getMembership = var2.getOptimisticCachedItem,
-		getMemberships = var2.getOptimisticCachedItems,
-		updateMembership = var1.updateItem,
-		updateMemberships = var1.updateItems,
-		joinCommunity = function(p1)
-			-- upvalues: applyOptimisticMembership (ref), requestJoinCommunityModule (copy), logResponseError (copy), groups_url (copy), discoveryEventErrorLogger (copy)
-			local var3, var4 = applyOptimisticMembership(p1)
-			requestJoinCommunityModule(p1):andThen(function()
-				-- upvalues: var4 (ref)
-				var4({ type = "success" })
-			end):catch(function(p2)
-				-- upvalues: var4 (ref), logResponseError (copy), groups_url (copy), discoveryEventErrorLogger (copy), p1 (ref)
-				local var5 = if type(p2) == "table" and p2.StatusCode then p2.StatusCode else nil
-				local var6 = if type(p2) == "table" and p2.StatusMessage then p2.StatusMessage elseif type(p2) == "string" then p2 else nil
-				var4({
+		getMembership = DataResolverModule.getOptimisticCachedItem,
+		getMemberships = DataResolverModule.getOptimisticCachedItems,
+		updateMembership = DataCacheModule.updateItem,
+		updateMemberships = DataCacheModule.updateItems,
+		joinCommunity = function(CommunityId) --[[ Line: 58 ]]
+			-- upvalues: applyOptimisticMembership (copy), RequestJoinCommunityModule (upval), LogResponseErrorFunction (upval), GroupsName (upval), DiscoveryEventErrorLogger (upval)
+			local ApplyOptimisticMembershipResult, ApplyOptimisticMembershipResult2 = applyOptimisticMembership(CommunityId)
+			RequestJoinCommunityModule(CommunityId):andThen(function() --[[ Line: 62 ]]
+				-- upvalues: ApplyOptimisticMembershipResult2 (copy)
+				ApplyOptimisticMembershipResult2({ type = "success" })
+			end):catch(function(Err) --[[ Line: 65 ]]
+				-- upvalues: ApplyOptimisticMembershipResult2 (copy), LogResponseErrorFunction (upval), GroupsName (upval), DiscoveryEventErrorLogger (upval), CommunityId (copy)
+				local StatusCode = if type(Err) == "table" and Err.StatusCode then Err.StatusCode else nil
+				local StatusMessage = if type(Err) == "table" and Err.StatusMessage then Err.StatusMessage elseif type(Err) == "string" then Err else nil
+				ApplyOptimisticMembershipResult2({
 					type = "error",
-					statusCode = var5,
-					statusMessage = var6
+					statusCode = StatusCode,
+					statusMessage = StatusMessage
 				})
-				logResponseError(groups_url, { StatusCode = var5 })
-				discoveryEventErrorLogger.reportError("joinCommunity", "Error joining community", {
+				LogResponseErrorFunction(GroupsName, { StatusCode = StatusCode })
+				DiscoveryEventErrorLogger.reportError("joinCommunity", "Error joining community", {
 					method = "POST",
-					communityId = p1,
-					statusCode = var5,
-					statusMessage = var6
+					communityId = CommunityId,
+					statusCode = StatusCode,
+					statusMessage = StatusMessage
 				})
 			end)
 			
-			return var3
+			return ApplyOptimisticMembershipResult
 		end,
-		clear = var2.clear,
-		dispose = var2.dispose
+		clear = DataResolverModule.clear,
+		dispose = DataResolverModule.dispose
 	}
 end

@@ -1,20 +1,21 @@
-﻿local parent = script.Parent
-local noneModule = require(parent.None)
-local forEachArgsModule = require(parent.forEachArgs)
-local forEachModule = require(parent.forEach)
-local insert = table.insert
+﻿local Parent = script.Parent
+local NoneModule = require(Parent.None)
+local ForEachArgsModule = require(Parent.forEachArgs)
+local ForEachModule = require(Parent.forEach)
+local InsertFunction = table.insert
 
-return function(p1, ...)
-	-- upvalues: forEachArgsModule (ref), noneModule (ref), forEachModule (ref), insert (ref)
-	forEachArgsModule(function(p2)
-		-- upvalues: noneModule (copy), forEachModule (copy), p1 (ref), insert (copy)
-		if p2 == noneModule or p2 == nil then
+return function(p1, ...) --[[ Line: 16 | Named "append" ]]
+	-- upvalues: ForEachArgsModule (copy), NoneModule (copy), ForEachModule (copy), InsertFunction (copy)
+	ForEachArgsModule(function(NoneModule1) --[[ Line: 17 ]]
+		-- upvalues: NoneModule (upval), ForEachModule (upval), p1 (copy), InsertFunction (upval)
+		if NoneModule1 ~= NoneModule and NoneModule1 ~= nil then
+			ForEachModule(NoneModule1, function(p2) --[[ Line: 21 ]]
+				-- upvalues: p1 (upval), InsertFunction (upval)
+				InsertFunction(p1, p2)
+			end)
+			
 			return
 		end
-		forEachModule(p2, function(p3)
-			-- upvalues: p1 (copy), insert (copy)
-			insert(p1, p3)
-		end)
 	end, ...)
 	
 	return p1

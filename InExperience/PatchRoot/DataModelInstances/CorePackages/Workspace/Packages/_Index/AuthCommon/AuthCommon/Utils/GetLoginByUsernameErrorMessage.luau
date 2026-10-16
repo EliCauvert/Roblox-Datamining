@@ -1,38 +1,36 @@
-﻿local authCommon = script:FindFirstAncestor("AuthCommon")
-local getAppFeaturePolicies = require(authCommon.Parent.UniversalAppPolicy).getAppFeaturePolicies
-local loginErrorCodesModule = require(authCommon.Enums.LoginErrorCodes)
-local loginErrorCodeSSOModule = require(authCommon.Enums.LoginErrorCodeSSO)
-local enableIllegalChildAccountLinkingErrorMessageOnSSO = game:DefineFastFlag("EnableIllegalChildAccountLinkingErrorMessageOnSSO", false)
-local platformAccountName = getAppFeaturePolicies().getPlatformAccountName()
-local t = {
-	[loginErrorCodeSSOModule.AuthError] = "Authentication.Login.Response.SomethingWentWrong",
-	[loginErrorCodeSSOModule.ExternalIdentityAlreadyConnected] = {
+﻿local AuthCommon = script:FindFirstAncestor("AuthCommon")
+local LoginErrorCodesModule = require(AuthCommon.Enums.LoginErrorCodes)
+local LoginErrorCodeSSOModule = require(AuthCommon.Enums.LoginErrorCodeSSO)
+local PlatformAccountName = require(AuthCommon.Parent.UniversalAppPolicy).getAppFeaturePolicies().getPlatformAccountName()
+local config = {
+	[LoginErrorCodeSSOModule.AuthError] = "Authentication.Login.Response.SomethingWentWrong",
+	[LoginErrorCodeSSOModule.ExternalIdentityAlreadyConnected] = {
 		"Authentication.Login.Response.PlatformAlreadyLinked",
-		platform = platformAccountName
+		platform = PlatformAccountName
 	},
-	[loginErrorCodeSSOModule.IncorrectCValueOrPassword] = "Authentication.Login.Response.IncorrectUsernamePassword",
-	[loginErrorCodeSSOModule.FloodedPS] = "Authentication.TwoStepVerification.Response.TooManyAttempts",
-	[loginErrorCodeSSOModule.Require2FA] = "Authentication.Login.Response.Require2FAGeneric",
-	[loginErrorCodeSSOModule.RelinkingCooldown] = {
+	[LoginErrorCodeSSOModule.IncorrectCValueOrPassword] = "Authentication.Login.Response.IncorrectUsernamePassword",
+	[LoginErrorCodeSSOModule.FloodedPS] = "Authentication.TwoStepVerification.Response.TooManyAttempts",
+	[LoginErrorCodeSSOModule.Require2FA] = "Authentication.Login.Response.Require2FAGeneric",
+	[LoginErrorCodeSSOModule.RelinkingCooldown] = {
 		"Authentication.Login.Response.RelinkingFreeze",
-		platform = platformAccountName
+		platform = PlatformAccountName
 	},
-	[loginErrorCodesModule.IncorrectCValueOrPassword] = "Authentication.Login.Response.IncorrectUsernamePassword",
-	[loginErrorCodeSSOModule.FloodedXbox] = "Authentication.TwoStepVerification.Response.TooManyAttempts",
-	[loginErrorCodeSSOModule.RobloxAccountAlreadyConnectedXbox] = {
+	[LoginErrorCodesModule.IncorrectCValueOrPassword] = "Authentication.Login.Response.IncorrectUsernamePassword",
+	[LoginErrorCodeSSOModule.FloodedXbox] = "Authentication.TwoStepVerification.Response.TooManyAttempts",
+	[LoginErrorCodeSSOModule.RobloxAccountAlreadyConnectedXbox] = {
 		"Authentication.Login.Response.AlreadyLinked",
-		platform = platformAccountName
+		platform = PlatformAccountName
 	},
-	[loginErrorCodeSSOModule.ExternalIdentityAlreadyConnectedXbox] = {
+	[LoginErrorCodeSSOModule.ExternalIdentityAlreadyConnectedXbox] = {
 		"Authentication.Login.Response.PlatformAlreadyLinked",
-		platform = platformAccountName
+		platform = PlatformAccountName
 	}
 }
 
-if enableIllegalChildAccountLinkingErrorMessageOnSSO then
-	t[loginErrorCodesModule.IllegalChildAccountLinking] = "Authentication.Login.LinkIllegalChildAccountLinking"
+if require(AuthCommon.Flags.FFlagEnableIllegalChildAccountLinkingErrorMessageOnSSO) then
+	config[LoginErrorCodesModule.IllegalChildAccountLinking] = "Authentication.Login.LinkIllegalChildAccountLinking"
 end
-return function(p1)
-	-- upvalues: t (ref)
-	return if t[p1] then t[p1] else "Authentication.Login.Response.SomethingWentWrong"
+return function(p1) --[[ Line: 44 | Named "GetLoginByUsernameErrorMessage" ]]
+	-- upvalues: config (copy)
+	return if config[p1] then config[p1] else "Authentication.Login.Response.SomethingWentWrong"
 end

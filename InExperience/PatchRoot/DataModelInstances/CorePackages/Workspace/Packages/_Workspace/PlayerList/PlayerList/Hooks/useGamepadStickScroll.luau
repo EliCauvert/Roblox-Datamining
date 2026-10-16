@@ -1,58 +1,57 @@
-﻿local parent = script.Parent.Parent.Parent
-local contextActionService = game:GetService("ContextActionService")
-local runService = game:GetService("RunService")
-local reactModule = require(parent.React)
+﻿local ContextActionService = game:GetService("ContextActionService")
+local RunService = game:GetService("RunService")
+local ReactModule = require(script.Parent.Parent.Parent.React)
 
-local function _(p1)
-	local absValue = math.abs(p1)
+local function _(Value: number): number --[[ Line: 21 | Named "normalizeStickY" ]]
+	local Magnitude = math.abs(Value)
 	
-	return if absValue <= 0.2 then 0 else math.sign(p1) * (absValue - 0.2) / 0.8
+	return if Magnitude <= 0.2 then 0 else math.sign(Value) * (Magnitude - 0.2) / 0.8
 end
 
-local function scrollByStick(p1, p2, p3)
-	local maxValue = math.max(0, p1.AbsoluteCanvasSize.Y - p1.AbsoluteWindowSize.Y)
+local function scrollByStick(ScrollFrame, Value: number, p1) --[[ Line: 29 ]]
+	local Largest = math.max(0, ScrollFrame.AbsoluteCanvasSize.Y - ScrollFrame.AbsoluteWindowSize.Y)
 	
-	if maxValue == 0 then return end
-	local absValue = math.abs(p2)
-	local var1 = if absValue <= 0.2 then 0 else math.sign(p2) * (absValue - 0.2) / 0.8
+	if Largest == 0 then return end
+	local Magnitude = math.abs(Value)
+	local SignRatio: number = if Magnitude <= 0.2 then 0 else math.sign(Value) * (Magnitude - 0.2) / 0.8
 	
-	if var1 == 0 then
+	if SignRatio ~= 0 then
+		ScrollFrame.CanvasPosition = Vector2.new(ScrollFrame.CanvasPosition.X, (math.clamp(ScrollFrame.CanvasPosition.Y + p1 * -SignRatio * 1000, 0, Largest)))
+		
 		return
 	end
-	p1.CanvasPosition = Vector2.new(p1.CanvasPosition.X, math.clamp(p1.CanvasPosition.Y + p3 * -var1 * 1000, 0, maxValue))
 end
 
-return function(p1)
-	-- upvalues: reactModule (ref), contextActionService (ref), runService (ref), scrollByStick (ref)
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), contextActionService (copy), runService (copy), scrollByStick (copy)
-		if p1.enabled then
-			local contextActionServiceOverride = p1.contextActionServiceOverride or contextActionService
-			local runServiceOverride = p1.runServiceOverride or runService
-			local var1 = nil
-			contextActionServiceOverride:BindCoreAction("RbxPlayerListReskinGamepadStickScroll", function(_, p2, p3)
-				-- upvalues: var1 (write)
-				if p2 == Enum.UserInputState.Change then
-					var1 = p3
-				elseif p2 == Enum.UserInputState.End then
-					var1 = nil
-				end
-				return Enum.ContextActionResult.Sink
-			end, false, Enum.KeyCode.Thumbstick2)
-			local renderSteppedConnection = runServiceOverride.RenderStepped:Connect(function(p2)
-				-- upvalues: p1 (copy), var1 (write), scrollByStick (copy)
-				local current = p1.scrollingFrameRef.current
-				
-				if var1 ~= nil and current ~= nil then
-					scrollByStick(current, var1.Position.Y, p2)
-				end
-			end)
-			
-			return function()
-				-- upvalues: contextActionServiceOverride (ref), renderSteppedConnection (ref)
-				contextActionServiceOverride:UnbindCoreAction("RbxPlayerListReskinGamepadStickScroll")
-				renderSteppedConnection:Disconnect()
+return function(p1) --[[ Line: 44 | Named "useGamepadStickScroll" ]]
+	-- upvalues: ReactModule (copy), ContextActionService (copy), RunService (copy), scrollByStick (copy)
+	ReactModule.useEffect(function() --[[ Line: 46 ]]
+		-- upvalues: p1 (copy), ContextActionService (upval), RunService (upval), scrollByStick (upval)
+		if not p1.enabled then return end
+		local ContextActionServiceOverride = p1.contextActionServiceOverride or ContextActionService
+		local RunServiceOverride = p1.runServiceOverride or RunService
+		local v1 = nil
+		ContextActionServiceOverride:BindCoreAction("RbxPlayerListReskinGamepadStickScroll", function(_, UserInputState, p2) --[[ Line: 55 ]]
+			-- upvalues: v1 (ref)
+			if UserInputState == Enum.UserInputState.Change then
+				v1 = p2
+			elseif UserInputState == Enum.UserInputState.End then
+				v1 = nil
 			end
+			return Enum.ContextActionResult.Sink
+		end, false, Enum.KeyCode.Thumbstick2)
+		local RenderSteppedConnection = RunServiceOverride.RenderStepped:Connect(function(DeltaTime) --[[ Line: 64 ]]
+			-- upvalues: p1 (upval), v1 (ref), scrollByStick (upval)
+			local Current = p1.scrollingFrameRef.current
+			
+			if v1 ~= nil and Current ~= nil then
+				scrollByStick(Current, v1.Position.Y, DeltaTime)
+			end
+		end)
+		
+		return function() --[[ Line: 71 ]]
+			-- upvalues: ContextActionServiceOverride (copy), RenderSteppedConnection (copy)
+			ContextActionServiceOverride:UnbindCoreAction("RbxPlayerListReskinGamepadStickScroll")
+			RenderSteppedConnection:Disconnect()
 		end
 	end, {
 		p1.enabled,

@@ -1,19 +1,18 @@
-﻿local expChat = script:FindFirstAncestor("ExpChat")
-local parent = expChat.Parent
-local roduxModule = require(parent.Rodux)
-local var1 = require(parent.ExpChatShared).Logger:new("ExpChat/Reducers/" .. script.Name)
-local actions = expChat.Actions
+﻿local ExpChat = script:FindFirstAncestor("ExpChat")
+local Parent = ExpChat.Parent
+local NewResult = require(Parent.ExpChatShared).Logger:new("ExpChat/Reducers/" .. script.Name)
+local Actions = ExpChat.Actions
 
-return roduxModule.createReducer(1, {
-	[require(actions.AvatarContextMenuWhisperSelected).name] = function(p1, _)
-		-- upvalues: var1 (ref)
-		var1:trace("AvatarContextMenuWhisperSelected dispatched")
+return require(Parent.Rodux).createReducer(1, {
+	[require(Actions.AvatarContextMenuWhisperSelected).name] = function(p1: number, _): number --[[ Line: 15 ]]
+		-- upvalues: NewResult (copy)
+		NewResult:trace("AvatarContextMenuWhisperSelected dispatched")
 		
 		return p1 * -1
 	end,
-	[require(actions.PresetTrayKeyboardSelected).name] = function(p1, _)
-		-- upvalues: var1 (ref)
-		var1:trace("PresetTrayKeyboardSelected dispatched")
+	[require(Actions.PresetTrayKeyboardSelected).name] = function(p1: number, _): number --[[ Line: 20 ]]
+		-- upvalues: NewResult (copy)
+		NewResult:trace("PresetTrayKeyboardSelected dispatched")
 		
 		return p1 * -1
 	end

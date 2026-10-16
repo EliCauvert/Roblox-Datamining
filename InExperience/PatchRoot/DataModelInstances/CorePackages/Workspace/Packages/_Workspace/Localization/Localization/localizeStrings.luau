@@ -1,30 +1,30 @@
-﻿local argCheckModule = require(script:FindFirstAncestor("Localization").Parent.ArgCheck)
+﻿local ArgCheckModule = require(script:FindFirstAncestor("Localization").Parent.ArgCheck)
 
-return function(p1, p2)
-	-- upvalues: argCheckModule (ref)
+return function(p1, List) --[[ Line: 6 | Named "localizeStrings" ]]
+	-- upvalues: ArgCheckModule (copy)
 	local t = {}
 	
-	for i, v in pairs(p2) do
-		if typeof(v) == "table" then
-			if typeof(v[1]) == "string" then
-				local ok, status = pcall(function()
-					-- upvalues: p1 (ref), v (ref)
-					return p1:Format(v[1], v)
+	for i, value in pairs(List) do
+		if typeof(value) == "table" then
+			if typeof(value[1]) == "string" then
+				local Success, Result = pcall(function() --[[ Line: 12 ]]
+					-- upvalues: p1 (copy), value (copy)
+					return p1:Format(value[1], value)
 				end)
-				argCheckModule.isEqual(ok, true, string.format("LocalizationConsumer finding value for translation key[%s]: %s", i, v[1]))
-				t[i] = if ok then status else ""
+				ArgCheckModule.isEqual(Success, true, string.format("LocalizationConsumer finding value for translation key[%s]: %s", i, value[1]))
+				t[i] = Success and Result or ""
 			else
-				error(string.format("%s[1] in stringsToBeLocalized must be a string, got %s instead", i, typeof(v[1])))
+				error(string.format("%s[1] in stringsToBeLocalized must be a string, got %s instead", i, (typeof(value[1]))))
 			end
-		elseif typeof(v) == "string" then
-			local ok, status = pcall(function()
-				-- upvalues: p1 (ref), v (ref)
-				return p1:Format(v)
+		elseif typeof(value) == "string" then
+			local Success1, Result1 = pcall(function() --[[ Line: 37 ]]
+				-- upvalues: p1 (copy), value (copy)
+				return p1:Format(value)
 			end)
-			argCheckModule.isEqual(ok, true, string.format("LocalizationConsumer finding value for translation key[%s]: %s", i, v))
-			t[i] = if ok then status else ""
+			ArgCheckModule.isEqual(Success1, true, string.format("LocalizationConsumer finding value for translation key[%s]: %s", i, value))
+			t[i] = Success1 and Result1 or ""
 		else
-			error(string.format("%s in stringsToBeLocalized must be a string or table, got %s instead", i, typeof(v)))
+			error(string.format("%s in stringsToBeLocalized must be a string or table, got %s instead", i, (typeof(value))))
 		end
 	end
 	return t

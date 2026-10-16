@@ -1,6 +1,6 @@
-﻿local createCreatorEligibilityStoreModule = require(script.Parent.createCreatorEligibilityStore)
+﻿local CreateCreatorEligibilityStoreModule = require(script.Parent.createCreatorEligibilityStore)
 
-return require(script:FindFirstAncestor("DataHydration").Parent.Signals).createComputed(function()
-	-- upvalues: createCreatorEligibilityStoreModule (ref)
-	return createCreatorEligibilityStoreModule()
+return require(script:FindFirstAncestor("DataHydration").Parent.Signals).createComputed(function() --[[ Line: 8 ]]
+	-- upvalues: CreateCreatorEligibilityStoreModule (copy)
+	return CreateCreatorEligibilityStoreModule()
 end)

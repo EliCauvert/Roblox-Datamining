@@ -1,7 +1,7 @@
-﻿local getFFlagProfileFrameThumbnailEnabledModule = require(script.Parent.GetFFlagProfileFrameThumbnailEnabled)
+﻿local GetFFlagProfileFrameThumbnailEnabledModule = require(script.Parent.GetFFlagProfileFrameThumbnailEnabled)
 game:DefineFastFlag("HomePYMKUseProfileFrameThumbnail", false)
 
-return function()
-	-- upvalues: getFFlagProfileFrameThumbnailEnabledModule (ref)
-	return game:GetFastFlag("HomePYMKUseProfileFrameThumbnail") and getFFlagProfileFrameThumbnailEnabledModule()
+return function() --[[ Line: 5 ]]
+	-- upvalues: GetFFlagProfileFrameThumbnailEnabledModule (copy)
+	return game:GetFastFlag("HomePYMKUseProfileFrameThumbnail") and GetFFlagProfileFrameThumbnailEnabledModule()
 end

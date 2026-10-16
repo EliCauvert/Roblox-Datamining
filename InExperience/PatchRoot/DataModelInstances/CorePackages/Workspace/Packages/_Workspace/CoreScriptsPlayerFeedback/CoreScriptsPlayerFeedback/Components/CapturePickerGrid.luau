@@ -1,168 +1,169 @@
-﻿local coreScriptsPlayerFeedback = script:FindFirstAncestor("CoreScriptsPlayerFeedback")
-local parent = coreScriptsPlayerFeedback.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local checkbox = foundationModule.Checkbox
-local scrollView = foundationModule.ScrollView
-local text = foundationModule.Text
-local view = foundationModule.View
-local scrollBarVisibility = foundationModule.Enums.ScrollBarVisibility
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local _ = require(coreScriptsPlayerFeedback.CaptureTypes)
-local getCaptureKeyModule = require(coreScriptsPlayerFeedback.Utils.getCaptureKey)
-local var1 = reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), checkbox (ref)
-	local capture = p1.capture
-	local var2 = p1.isDisabled == true
+﻿local CoreScriptsPlayerFeedback = script:FindFirstAncestor("CoreScriptsPlayerFeedback")
+local Parent = CoreScriptsPlayerFeedback.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local Checkbox = FoundationModule.Checkbox
+local ScrollView = FoundationModule.ScrollView
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local ScrollBarVisibility = FoundationModule.Enums.ScrollBarVisibility
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local _ = require(CoreScriptsPlayerFeedback.CaptureTypes)
+local GetCaptureKeyModule = require(CoreScriptsPlayerFeedback.Utils.getCaptureKey)
+local MemoResult = ReactModule.memo(function(Frame) --[[ Line: 28 ]]
+	-- upvalues: ReactModule (copy), Checkbox (copy)
+	local Capture = Frame.capture
+	local IsCaptureTypeMatch = Capture.CaptureType == Enum.CaptureType.Video
+	local IsIsDisabled = Frame.isDisabled == true
 	
-	return reactModule.createElement("ImageButton", {
+	return ReactModule.createElement("ImageButton", {
 		BackgroundColor3 = Color3.fromRGB(30, 30, 30),
 		BackgroundTransparency = 0,
 		BorderSizePixel = 0,
 		ClipsDescendants = true,
 		Image = "",
-		LayoutOrder = p1.LayoutOrder,
+		LayoutOrder = Frame.LayoutOrder,
 		Size = UDim2.fromScale(1, 1),
-		[reactModule.Event.Activated] = reactModule.useCallback(function()
-			-- upvalues: p1 (ref)
-			p1.onPreview()
-		end, { p1.onPreview })
+		[ReactModule.Event.Activated] = ReactModule.useCallback(function() --[[ Line: 46 ]]
+			-- upvalues: Frame (copy)
+			Frame.onPreview()
+		end, { Frame.onPreview })
 	}, {
-		DisabledOverlay = if var2 then reactModule.createElement("Frame", {
+		DisabledOverlay = if IsIsDisabled then ReactModule.createElement("Frame", {
 			BackgroundTransparency = 0.5,
 			BorderSizePixel = 0,
 			ZIndex = 3,
 			BackgroundColor3 = Color3.fromRGB(0, 0, 0),
 			Size = UDim2.fromScale(1, 1)
 		}) else nil,
-		Preview = if not (capture.CaptureType == Enum.CaptureType.Video) then reactModule.createElement("ImageLabel", {
+		Preview = if IsCaptureTypeMatch then nil else ReactModule.createElement("ImageLabel", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			ZIndex = 1,
-			ImageContent = Content.fromObject(capture),
+			ImageContent = Content.fromObject(Capture),
 			ScaleType = Enum.ScaleType.Crop,
 			Size = UDim2.fromScale(1, 1)
-		}) else nil,
-		CheckboxOverlay = reactModule.createElement("Frame", {
+		}),
+		CheckboxOverlay = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			ZIndex = 2,
 			Size = UDim2.fromScale(1, 1)
 		}, {
-			Checkbox = reactModule.createElement(checkbox, {
+			Checkbox = ReactModule.createElement(Checkbox, {
 				label = "",
 				AnchorPoint = Vector2.new(1, 0),
-				isChecked = p1.isSelected,
-				onActivated = reactModule.useCallback(function()
-					-- upvalues: var2 (ref), p1 (ref)
-					if not var2 then
-						p1.onToggle()
+				isChecked = Frame.isSelected,
+				onActivated = ReactModule.useCallback(function() --[[ Line: 40 ]]
+					-- upvalues: IsIsDisabled (copy), Frame (copy)
+					if not IsIsDisabled then
+						Frame.onToggle()
 					end
-				end, { var2, p1.onToggle }),
+				end, { IsIsDisabled, Frame.onToggle }),
 				Position = UDim2.new(1, -4, 0, 4)
 			})
 		})
 	})
 end)
 
-return reactModule.memo(function(p1)
-	-- upvalues: useLocalization (ref), reactModule (ref), getCaptureKeyModule (ref), var1 (ref), view (ref), text (ref), scrollView (ref), scrollBarVisibility (ref)
-	local var2 = 0
+return (ReactModule.memo(function(p1) --[[ Line: 107 ]]
+	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), GetCaptureKeyModule (copy), MemoResult (copy), View (copy), Text (copy), ScrollView (copy), ScrollBarVisibility (copy)
+	local Count = 0
 	
-	for i, v in p1.selectedKeys do
-		if v then
-			var2 += 1
+	for _, selectedKey in p1.selectedKeys do
+		if selectedKey then
+			Count += 1
 		end
 	end
-	local var3 = p1.maxSelections <= var2
-	local var4 = useLocalization({
+	local IsMaxSelectionsBelow = p1.maxSelections <= Count
+	local UseLocalizationResult = UseLocalizationFunction({
 		loading = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Loading",
 		empty = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Empty",
 		selectionHint = {
 			"CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.NumSelected",
-			count = tostring(var2),
+			count = tostring(Count),
 			max = tostring(p1.maxSelections)
 		}
 	})
-	local t = {
-		UIPadding = reactModule.createElement("UIPadding", {
+	local config = {
+		UIPadding = ReactModule.createElement("UIPadding", {
 			PaddingTop = UDim.new(0, 2),
 			PaddingBottom = UDim.new(0, 2),
 			PaddingLeft = UDim.new(0, 2),
 			PaddingRight = UDim.new(0, 2)
 		}),
-		UIGridLayout = reactModule.createElement("UIGridLayout", {
+		UIGridLayout = ReactModule.createElement("UIGridLayout", {
 			CellPadding = UDim2.new(0, 4, 0, 4),
-			CellSize = UDim2.new(0.333333333333, -3, 0, 100),
+			CellSize = UDim2.new(0.3333333333333333, -3, 0, 100),
 			FillDirection = Enum.FillDirection.Horizontal,
 			SortOrder = Enum.SortOrder.LayoutOrder
 		})
 	}
 	
-	for i_1, v_1 in p1.captures do
-		local var5 = getCaptureKeyModule(v_1)
-		local var6 = p1.selectedKeys[var5] == true
-		t[var5] = reactModule.createElement(var1, {
-			capture = v_1,
-			isSelected = var6,
-			isDisabled = var3 and not var6,
-			onToggle = function()
-				-- upvalues: p1 (ref), v_1 (ref)
-				p1.onToggle(v_1)
+	for LayoutOrder, capture in p1.captures do
+		local CaptureKeyModule = GetCaptureKeyModule(capture)
+		local IsSelectedKey = p1.selectedKeys[CaptureKeyModule] == true
+		config[CaptureKeyModule] = ReactModule.createElement(MemoResult, {
+			capture = capture,
+			isSelected = IsSelectedKey,
+			isDisabled = IsMaxSelectionsBelow and not IsSelectedKey,
+			onToggle = function() --[[ Line: 153 ]]
+				-- upvalues: p1 (copy), capture (copy)
+				p1.onToggle(capture)
 			end,
-			onPreview = function()
-				-- upvalues: p1 (ref), v_1 (ref)
-				p1.onPreview(v_1)
+			onPreview = function() --[[ Line: 156 ]]
+				-- upvalues: p1 (copy), capture (copy)
+				p1.onPreview(capture)
 			end,
-			LayoutOrder = i_1
+			LayoutOrder = LayoutOrder
 		})
 	end
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "col gap-small size-full-0 auto-y",
 		Size = UDim2.new(1, 0, 0, 360)
 	}, {
-		Hint = reactModule.createElement(text, {
+		Hint = ReactModule.createElement(Text, {
 			tag = "size-full-0 auto-y text-caption-small text-wrap text-align-x-right content-muted",
 			LayoutOrder = 1,
-			Text = var4.selectionHint
+			Text = UseLocalizationResult.selectionHint
 		}),
-		Scroll = reactModule.createElement(scrollView, {
+		Scroll = ReactModule.createElement(ScrollView, {
 			tag = "fill size-full-0",
 			LayoutOrder = 2,
 			scroll = {
 				AutomaticCanvasSize = Enum.AutomaticSize.Y,
 				CanvasSize = UDim2.fromScale(1, 0),
 				ScrollingDirection = Enum.ScrollingDirection.Y,
-				scrollBarVisibility = scrollBarVisibility.Auto
+				scrollBarVisibility = ScrollBarVisibility.Auto
 			},
-			onCanvasPositionChanged = function(p2)
-				-- upvalues: p1 (ref)
+			onCanvasPositionChanged = function(ScrollFrame) --[[ Line: 180 ]]
+				-- upvalues: p1 (copy)
 				if not p1.hasMore or p1.isLoading then return end
-				local y = p2.AbsoluteCanvasSize.Y
-				local y_1 = p2.AbsoluteWindowSize.Y
+				local Y = ScrollFrame.AbsoluteCanvasSize.Y
+				local Y1 = ScrollFrame.AbsoluteWindowSize.Y
 				
-				if y <= y_1 then return end
-				if y - y_1 - p2.CanvasPosition.Y <= 20 then
+				if Y <= Y1 then return end
+				if Y - Y1 - ScrollFrame.CanvasPosition.Y <= 20 then
 					p1.onLoadMore()
 				end
 			end
 		}, {
-			Content = reactModule.createElement("Frame", {
+			Content = ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				AutomaticSize = Enum.AutomaticSize.Y,
 				Size = UDim2.new(1, -12, 0, 0)
 			}, {
-				Grid = if p1.isLoading and #p1.captures == 0 then reactModule.createElement(text, {
+				Grid = if p1.isLoading and #p1.captures == 0 then ReactModule.createElement(Text, {
 					tag = "size-full-0 auto-y text-body-medium text-align-x-center content-muted",
-					Text = var4.loading
-				}) elseif #p1.captures == 0 then reactModule.createElement(text, {
+					Text = UseLocalizationResult.loading
+				}) elseif #p1.captures == 0 then ReactModule.createElement(Text, {
 					tag = "size-full-0 auto-y text-body-medium text-align-x-center content-muted",
-					Text = var4.empty
-				}) else reactModule.createElement("Frame", {
+					Text = UseLocalizationResult.empty
+				}) else ReactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					AutomaticSize = Enum.AutomaticSize.Y,
 					Size = UDim2.new(1, 0, 0, 0)
-				}, t)
+				}, config)
 			})
 		})
 	})
-end)
+end))

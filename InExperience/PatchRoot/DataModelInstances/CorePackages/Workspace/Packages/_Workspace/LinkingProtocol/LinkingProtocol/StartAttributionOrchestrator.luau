@@ -1,11 +1,9 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent
-local _ = require(parent.LinkingProtocolTypes)
-local attributionTelemetryModule = require(parent.AttributionTelemetry)
-local getFFlagEnableStartAttributionTelemetryModule = require(parent.Flags.getFFlagEnableStartAttributionTelemetry)
-local fFlagAdConsentForwardCachedRegion = require(parent_1.SharedFlags).FFlagAdConsentForwardCachedRegion
-local t = {}
-local t_1 = {
+﻿local Parent = script.Parent
+local _ = require(Parent.LinkingProtocolTypes)
+local AttributionTelemetryModule = require(Parent.AttributionTelemetry)
+local GetFFlagEnableStartAttributionTelemetryModule = require(Parent.Flags.getFFlagEnableStartAttributionTelemetry)
+local FFlagAdConsentForwardCachedRegion = require(Parent.Parent.SharedFlags).FFlagAdConsentForwardCachedRegion
+local config = {
 	AT = true,
 	BE = true,
 	BG = true,
@@ -40,47 +38,49 @@ local t_1 = {
 	CH = true
 }
 
-local function _(p1)
-	-- upvalues: fFlagAdConsentForwardCachedRegion (ref), t_1 (ref)
-	return p1 == nil or (if fFlagAdConsentForwardCachedRegion and string.match(p1, "^%a%a$") == nil then true else t_1[string.upper(p1)] == true)
+local function _(Text: string): boolean --[[ Line: 90 | Named "isSubjectToGdpr" ]]
+	-- upvalues: FFlagAdConsentForwardCachedRegion (copy), config (copy)
+	return Text == nil or (FFlagAdConsentForwardCachedRegion and string.match(Text, "^%a%a$") == nil or config[string.upper(Text)] == true)
 end
 
-local _ = function(p1, p2)
-	-- upvalues: fFlagAdConsentForwardCachedRegion (ref), t_1 (ref)
+local _ = function(Consented, Text: string) --[[ Line: 103 | Named "toDmaConsent" ]]
+	-- upvalues: FFlagAdConsentForwardCachedRegion (copy), config (copy)
 	return {
-		isSubjectToGdpr = p2 == nil or (if fFlagAdConsentForwardCachedRegion and string.match(p2, "^%a%a$") == nil then true else t_1[string.upper(p2)] == true),
-		consented = p1
+		isSubjectToGdpr = Text == nil or (FFlagAdConsentForwardCachedRegion and string.match(Text, "^%a%a$") == nil or config[string.upper(Text)] == true),
+		consented = Consented
 	}
 end
 
-function t.computeDecision(p1, p2)
-	-- upvalues: fFlagAdConsentForwardCachedRegion (ref), t_1 (ref)
-	return if p1 == nil then { applySharingFilter = true, dmaConsent = nil } else {
-		applySharingFilter = not p1,
-		dmaConsent = {
-			isSubjectToGdpr = p2 == nil or (if fFlagAdConsentForwardCachedRegion and string.match(p2, "^%a%a$") == nil then true else t_1[string.upper(p2)] == true),
-			consented = p1
+local StartAttributionOrchestratorModule = {
+	computeDecision = function(Consented, Text: string) --[[ Line: 119 ]]
+		-- upvalues: FFlagAdConsentForwardCachedRegion (copy), config (copy)
+		return if Consented == nil then { applySharingFilter = true, dmaConsent = nil } else {
+			applySharingFilter = not Consented,
+			dmaConsent = {
+				isSubjectToGdpr = Text == nil or (FFlagAdConsentForwardCachedRegion and string.match(Text, "^%a%a$") == nil or config[string.upper(Text)] == true),
+				consented = Consented
+			}
 		}
-	}
-end
+	end
+}
 
-local _ = function(_, _)
+local _ = function(_, _): boolean --[[ Line: 132 | Named "shouldPublish" ]]
 	return true
 end
 
-local _ = function(p1)
+local _ = function(p1): boolean --[[ Line: 139 | Named "isAwaitingConsent" ]]
 	return p1 == nil
 end
 
-function t.resolveAndPublish(p1, p2, p3, p4)
-	-- upvalues: t (ref), getFFlagEnableStartAttributionTelemetryModule (ref), attributionTelemetryModule (ref)
-	if p3 == nil then return end
-	local var1 = t.computeDecision(p3, p4)
-	p1:adConsentResolved(var1)
+function StartAttributionOrchestratorModule.resolveAndPublish(p1, p2, Consented, p3) --[[ Line: 155 ]]
+	-- upvalues: StartAttributionOrchestratorModule (copy), GetFFlagEnableStartAttributionTelemetryModule (copy), AttributionTelemetryModule (copy)
+	if Consented == nil then return end
+	local Decision = StartAttributionOrchestratorModule.computeDecision(Consented, p3)
+	p1:adConsentResolved(Decision)
 	
-	if getFFlagEnableStartAttributionTelemetryModule() then
-		attributionTelemetryModule.logDecisionPublished(p2, var1.applySharingFilter)
+	if GetFFlagEnableStartAttributionTelemetryModule() then
+		AttributionTelemetryModule.logDecisionPublished(p2, Decision.applySharingFilter)
 	end
 end
 
-return t
+return StartAttributionOrchestratorModule

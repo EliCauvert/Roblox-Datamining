@@ -1,25 +1,25 @@
-﻿local loggingProtocolModule = require(script:FindFirstAncestor("DiscoveryUtils").Parent.LoggingProtocol)
-local default = loggingProtocolModule.default
-local t = {
+﻿local LoggingProtocolModule = require(script:FindFirstAncestor("DiscoveryUtils").Parent.LoggingProtocol)
+local Default = LoggingProtocolModule.default
+local config = {
 	eventName = "DiscoveryResponse_Error",
 	description = "Response errors for discovery network requests",
-	backends = { loggingProtocolModule.TelemetryBackends.Counter },
+	backends = { LoggingProtocolModule.TelemetryBackends.Counter },
 	throttlingPercentage = game:DefineFastInt("DiscoveryResponseErrorEventHundredthsPercent", 0),
 	lastUpdated = { 24, 12, 2 }
 }
 
-local function _(p1)
+local function _(p1) --[[ Line: 19 | Named "getStatusCode" ]]
 	return (if typeof(p1) == "table" then tostring(p1.StatusCode) else nil) or "unknown"
 end
 
-return function(p1, p2, p3)
-	-- upvalues: default (ref), t (ref)
-	if p3 == nil then
-		p3 = default
+return function(Endpoint_name, p1, Default1) --[[ Line: 28 | Named "logResponseError" ]]
+	-- upvalues: Default (copy), config (copy)
+	if Default1 == nil then
+		Default1 = Default
 	end
-	assert(p3, "LoggingProtocol must exist")
-	p3:logRobloxTelemetryCounter(t, 1, {
-		endpoint_name = p1,
-		status_code = (if typeof(p2) == "table" then tostring(p2.StatusCode) else nil) or "unknown"
+	assert(Default1, "LoggingProtocol must exist")
+	Default1:logRobloxTelemetryCounter(config, 1, {
+		endpoint_name = Endpoint_name,
+		status_code = (if typeof(p1) == "table" then tostring(p1.StatusCode) else nil) or "unknown"
 	})
 end

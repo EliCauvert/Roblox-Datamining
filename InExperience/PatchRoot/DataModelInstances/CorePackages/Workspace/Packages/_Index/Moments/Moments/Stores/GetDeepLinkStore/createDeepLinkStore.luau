@@ -1,41 +1,41 @@
-﻿local createSignal = require(script:FindFirstAncestor("Moments").Parent.Signals).createSignal
+﻿local CreateSignalFunction = require(script:FindFirstAncestor("Moments").Parent.Signals).createSignal
 
-return function()
-	-- upvalues: createSignal (ref)
-	local var1, var2 = createSignal(nil)
-	local var3, var4 = createSignal(nil)
+return function() --[[ Line: 23 | Named "createDeepLinkStore" ]]
+	-- upvalues: CreateSignalFunction (copy)
+	local Signal, Signal2 = CreateSignalFunction(nil)
+	local Signal1, Signal2_1 = CreateSignalFunction(nil)
 	
 	return {
-		getDeepLinkedMomentId = var1,
-		getDeepLinkedMomentTargetIdType = var3,
-		setDeepLinkedMomentId = function(value)
-			-- upvalues: var2 (ref), var4 (ref)
-			var2(value)
-			var4(if value ~= nil then nil else nil)
+		getDeepLinkedMomentId = Signal,
+		getDeepLinkedMomentTargetIdType = Signal1,
+		setDeepLinkedMomentId = function(p1) --[[ Line: 34 ]]
+			-- upvalues: Signal2 (copy), Signal2_1 (copy)
+			Signal2(p1)
+			Signal2_1(if p1 == nil then nil else nil)
 		end,
-		setDeepLinkedMoment = function(value, p1)
-			-- upvalues: var2 (ref), var4 (ref)
-			var2(value)
-			var4(if value ~= nil then nil else p1)
+		setDeepLinkedMoment = function(p1, p2) --[[ Line: 29 ]]
+			-- upvalues: Signal2 (copy), Signal2_1 (copy)
+			Signal2(p1)
+			Signal2_1(if p1 == nil then nil else p2)
 		end,
-		consumeDeepLinkedMoment = function()
-			-- upvalues: var1 (ref), var3 (ref), var2 (ref), var4 (ref)
-			local var5 = var1(false)
-			local var6 = var3(false)
-			var2(nil)
-			var4(nil)
+		consumeDeepLinkedMoment = function() --[[ Line: 38 ]]
+			-- upvalues: Signal (copy), Signal1 (copy), Signal2 (copy), Signal2_1 (copy)
+			local SignalResult = Signal(false)
+			local SignalResult1 = Signal1(false)
+			Signal2(nil)
+			Signal2_1(nil)
 			
-			return if var5 == nil then nil else { targetId = var5, targetIdType = var6 }
+			return if SignalResult == nil then nil else { targetId = SignalResult, targetIdType = SignalResult1 }
 		end,
-		consumeDeepLinkedMomentId = function()
-			-- upvalues: var1 (ref), var3 (ref), var2 (ref), var4 (ref)
-			local var5 = var1(false)
-			local var6 = var3(false)
-			var2(nil)
-			var4(nil)
-			local var7 = if var5 == nil then nil else { targetId = var5, targetIdType = var6 }
+		consumeDeepLinkedMomentId = function() --[[ Line: 51 ]]
+			-- upvalues: Signal (copy), Signal1 (copy), Signal2 (copy), Signal2_1 (copy)
+			local SignalResult = Signal(false)
+			local SignalResult1 = Signal1(false)
+			Signal2(nil)
+			Signal2_1(nil)
+			local Config = if SignalResult == nil then nil else { targetId = SignalResult, targetIdType = SignalResult1 }
 			
-			return if var7 == nil then nil else var7.targetId
+			return if Config == nil then nil else Config.targetId
 		end
 	}
 end

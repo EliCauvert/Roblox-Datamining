@@ -1,31 +1,32 @@
-﻿local telemetryService = game:GetService("TelemetryService")
-local parent = script:FindFirstAncestor("DiscoveryAnalytics").Parent
-local tModule = require(parent.t)
-local discoveryEventErrorLogger = require(parent.DiscoveryUtils).DiscoveryEventErrorLogger
-local gameFavoriteThrottleHundrethsPercent = game:DefineFastInt("GameFavoriteThrottleHundrethsPercent", 10000)
-local var1 = tModule.strictInterface({
-	placeId = tModule.string,
-	state = tModule.union(tModule.literal("on"), tModule.literal("off")),
-	ctx = tModule.string,
-	uid = tModule.string
+﻿local TelemetryService = game:GetService("TelemetryService")
+local Parent = script:FindFirstAncestor("DiscoveryAnalytics").Parent
+local TModule = require(Parent.t)
+local DiscoveryEventErrorLogger = require(Parent.DiscoveryUtils).DiscoveryEventErrorLogger
+local GameFavoriteThrottleHundrethsPercent = game:DefineFastInt("GameFavoriteThrottleHundrethsPercent", 10000)
+local StrictInterfaceResult = TModule.strictInterface({
+	placeId = TModule.string,
+	state = TModule.union(TModule.literal("on"), TModule.literal("off")),
+	ctx = TModule.string,
+	uid = TModule.string,
+	universeId = if require(Parent.SharedFlags).FFlagLuaAppAddUniverseIdToEngagementEvents then TModule.optional(TModule.string) else nil
 })
 
-return function(p1, p2)
-	-- upvalues: var1 (ref), discoveryEventErrorLogger (ref), gameFavoriteThrottleHundrethsPercent (ref), telemetryService (ref)
-	local var2, var3 = var1(p1)
+return function(CustomFields, EventContext) --[[ Line: 21 ]]
+	-- upvalues: StrictInterfaceResult (copy), DiscoveryEventErrorLogger (copy), GameFavoriteThrottleHundrethsPercent (copy), TelemetryService (copy)
+	local StrictInterfaceResultResult, StrictInterfaceResultResult2 = StrictInterfaceResult(CustomFields)
 	
-	if not var2 then
-		discoveryEventErrorLogger.reportError("GameFavoriteInvalidInterface", var3)
+	if not StrictInterfaceResultResult then
+		DiscoveryEventErrorLogger.reportError("GameFavoriteInvalidInterface", StrictInterfaceResultResult2)
 	end
-	telemetryService:LogEvent({
+	TelemetryService:LogEvent({
 		eventName = "favorite",
 		description = "User has favorited/unfavorited a game",
 		backends = { "EventIngest" },
-		throttlingPercentage = gameFavoriteThrottleHundrethsPercent,
+		throttlingPercentage = GameFavoriteThrottleHundrethsPercent,
 		lastUpdated = { 25, 11, 11 }
 	}, {
-		eventContext = p2,
+		eventContext = EventContext,
 		standardizedFields = { "addSessionInfo" },
-		customFields = p1
+		customFields = CustomFields
 	})
 end

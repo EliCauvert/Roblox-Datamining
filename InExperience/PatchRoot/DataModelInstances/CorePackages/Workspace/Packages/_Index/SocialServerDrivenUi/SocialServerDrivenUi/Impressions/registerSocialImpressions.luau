@@ -1,18 +1,18 @@
-﻿local socialServerDrivenUi = script:FindFirstAncestor("SocialServerDrivenUi")
-local parent = socialServerDrivenUi.Parent
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local sduiImpressionEventType = sduiCoreSystemModule.SduiImpressionEventType
-local getSduiImpressionHandlerRegistry = sduiCoreSystemModule.getSduiImpressionHandlerRegistry
-local fFlagSduiSearchPeoplePlayerTileTelemetry = require(parent.SharedFlags).FFlagSduiSearchPeoplePlayerTileTelemetry
+﻿local SocialServerDrivenUi = script:FindFirstAncestor("SocialServerDrivenUi")
+local Parent = SocialServerDrivenUi.Parent
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local SduiImpressionEventType = SduiCoreSystemModule.SduiImpressionEventType
+local GetSduiImpressionHandlerRegistryFunction = SduiCoreSystemModule.getSduiImpressionHandlerRegistry
+local FFlagSduiSearchPeoplePlayerTileTelemetry = require(Parent.SharedFlags).FFlagSduiSearchPeoplePlayerTileTelemetry
 
-return function()
-	-- upvalues: sduiImpressionEventType (ref), fFlagSduiSearchPeoplePlayerTileTelemetry (ref), socialServerDrivenUi (ref), getSduiImpressionHandlerRegistry (ref)
-	getSduiImpressionHandlerRegistry().registerImpressionHandlerConfigs({
-		[sduiImpressionEventType.playerTileImpressions] = if fFlagSduiSearchPeoplePlayerTileTelemetry then {
+return function() --[[ Line: 13 | Named "registerSocialImpressions" ]]
+	-- upvalues: SduiImpressionEventType (copy), FFlagSduiSearchPeoplePlayerTileTelemetry (copy), SocialServerDrivenUi (copy), GetSduiImpressionHandlerRegistryFunction (copy)
+	GetSduiImpressionHandlerRegistryFunction().registerImpressionHandlerConfigs({
+		[SduiImpressionEventType.playerTileImpressions] = if FFlagSduiSearchPeoplePlayerTileTelemetry then {
 			skipItemImpressionsLog = true,
-			lazyHandler = function()
-				-- upvalues: socialServerDrivenUi (copy)
-				return require(socialServerDrivenUi.Impressions.SduiPlayerTileImpressionsHandler)
+			lazyHandler = function() --[[ Line: 17 ]]
+				-- upvalues: SocialServerDrivenUi (upval)
+				return require(SocialServerDrivenUi.Impressions.SduiPlayerTileImpressionsHandler)
 			end
 		} else nil
 	})

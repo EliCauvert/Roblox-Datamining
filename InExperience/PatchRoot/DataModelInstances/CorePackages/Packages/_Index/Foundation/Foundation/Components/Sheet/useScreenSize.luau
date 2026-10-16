@@ -1,29 +1,29 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local useScreenModule = require(foundation.Providers.Overlay.useScreen)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local UseScreenModule = require(Foundation.Providers.Overlay.useScreen)
 
-return function()
-	-- upvalues: useScreenModule (ref), reactModule (ref)
-	local var1 = useScreenModule()
-	local var2, var3 = reactModule.useState(if var1 then var1.AbsoluteSize else Vector2.new(0, 0))
-	reactModule.useLayoutEffect(function()
-		-- upvalues: var1 (ref), var3 (ref)
-		local var4 = nil
+return function() --[[ Line: 7 | Named "useScreenSize" ]]
+	-- upvalues: UseScreenModule (copy), ReactModule (copy)
+	local UseScreenModuleResult = UseScreenModule()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(UseScreenModuleResult and UseScreenModuleResult.AbsoluteSize or Vector2.new(0, 0))
+	ReactModule.useLayoutEffect(function() --[[ Line: 11 ]]
+		-- upvalues: UseScreenModuleResult (copy), UseStateResult2 (copy)
+		local Connection = nil
 		
-		if var1 then
-			var3(var1.AbsoluteSize)
-			var4 = var1:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
-				-- upvalues: var3 (copy), var1 (copy)
-				var3(var1.AbsoluteSize)
+		if UseScreenModuleResult then
+			UseStateResult2(UseScreenModuleResult.AbsoluteSize)
+			Connection = UseScreenModuleResult:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ Line: 16 ]]
+				-- upvalues: UseStateResult2 (upval), UseScreenModuleResult (upval)
+				UseStateResult2(UseScreenModuleResult.AbsoluteSize)
 			end)
 		end
-		return function()
-			-- upvalues: var4 (write)
-			if var4 then
-				var4:Disconnect()
+		return function() --[[ Line: 21 ]]
+			-- upvalues: Connection (ref)
+			if Connection then
+				Connection:Disconnect()
 			end
 		end
-	end, { var1 })
+	end, { UseScreenModuleResult })
 	
-	return var2
+	return UseStateResult
 end

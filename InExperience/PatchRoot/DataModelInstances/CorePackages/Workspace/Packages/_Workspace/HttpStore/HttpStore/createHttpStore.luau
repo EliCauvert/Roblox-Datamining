@@ -1,43 +1,45 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent
-local internalHttpStoreModule = require(parent_1.InternalHttpStore)
-local _ = require(parent_1.Signals)
-local createErrorStatusHandlerModule = require(parent.Handlers.createErrorStatusHandler)
-local getHttpStore = internalHttpStoreModule.GetHttpStore
-local _ = require(parent.Types)
-local httpSessionTrackerModule = require(parent.HttpSessionTracker)
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent
+local _ = require(Parent1.Signals)
+local CreateErrorStatusHandlerModule = require(Parent.Handlers.createErrorStatusHandler)
+local GetHttpStoreFunction = require(Parent1.InternalHttpStore).GetHttpStore
+local _ = require(Parent.Types)
+local HttpSessionTrackerModule = require(Parent.HttpSessionTracker)
 
-return function(p1, p2)
-	-- upvalues: getHttpStore (ref), httpSessionTrackerModule (ref), createErrorStatusHandlerModule (ref)
-	local var1 = getHttpStore(p2)
+return function(p1, p2) --[[ Line: 25 | Named "createHttpStore" ]]
+	-- upvalues: GetHttpStoreFunction (copy), HttpSessionTrackerModule (copy), CreateErrorStatusHandlerModule (copy)
+	local HttpStore = GetHttpStoreFunction(p2)
 	local t = {}
 	
 	return {
-		fetch = function(p3, p4)
-			-- upvalues: httpSessionTrackerModule (copy), t (ref), var1 (ref), createErrorStatusHandlerModule (copy), p1 (ref)
-			local var2 = httpSessionTrackerModule.currentSession()
+		fetch = function(p3, p4) --[[ Line: 30 ]]
+			-- upvalues: HttpSessionTrackerModule (upval), t (copy), HttpStore (copy), CreateErrorStatusHandlerModule (upval), p1 (copy)
+			local CurrentSessionResult = HttpSessionTrackerModule.currentSession()
 			
-			if t[var2] == nil then
-				t[var2] = {}
+			if t[CurrentSessionResult] == nil then
+				t[CurrentSessionResult] = {}
 			end
-			local var3, var4 = var1.fetch(p3, p4)
-			local var5 = createErrorStatusHandlerModule(p1)(var3)
-			t[var2][p3] = { getFetchSignal = var5, cancelRequest = var4 }
+			local FetchResult, FetchResult2 = HttpStore.fetch(p3, p4)
+			local GetFetchSignal = CreateErrorStatusHandlerModule(p1)(FetchResult)
+			t[CurrentSessionResult][p3] = {
+				getFetchSignal = GetFetchSignal,
+				cancelRequest = FetchResult2
+			}
 			
-			return var5, var4
+			return GetFetchSignal, FetchResult2
 		end,
-		cancelAll = function()
-			-- upvalues: httpSessionTrackerModule (copy), t (ref)
-			local var2 = httpSessionTrackerModule.currentSession()
+		cancelAll = function() --[[ Line: 46 ]]
+			-- upvalues: HttpSessionTrackerModule (upval), t (copy)
+			local CurrentSessionResult = HttpSessionTrackerModule.currentSession()
 			
-			if t[var2] then
-				for i, v in t[var2] do
-					v.cancelRequest()
+			if t[CurrentSessionResult] then
+				for _, value in t[CurrentSessionResult] do
+					value.cancelRequest()
 				end
 			end
-			t[var2] = nil
-			httpSessionTrackerModule.cancelAll()
-			t[httpSessionTrackerModule.currentSession()] = {}
+			t[CurrentSessionResult] = nil
+			HttpSessionTrackerModule.cancelAll()
+			t[HttpSessionTrackerModule.currentSession()] = {}
 		end
 	}
 end

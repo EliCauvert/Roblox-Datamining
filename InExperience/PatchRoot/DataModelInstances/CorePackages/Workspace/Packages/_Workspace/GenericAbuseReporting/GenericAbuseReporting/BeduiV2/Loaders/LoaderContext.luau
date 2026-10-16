@@ -1,31 +1,31 @@
-﻿local reactModule = require(script:FindFirstAncestor("GenericAbuseReporting").Parent.React)
-local var1 = reactModule.createContext(nil)
+﻿local ReactModule = require(script:FindFirstAncestor("GenericAbuseReporting").Parent.React)
+local Context = ReactModule.createContext(nil)
 
 return {
-	LoaderContext = var1,
-	LoaderProvider = function(p1)
-		-- upvalues: reactModule (ref), var1 (ref)
-		local var2 = reactModule.useRef({})
-		local var3 = reactModule.useRef(p1.loaders)
-		var3.current = p1.loaders
-		reactModule.useEffect(function()
-			-- upvalues: p1 (ref), var2 (ref)
+	LoaderContext = Context,
+	LoaderProvider = function(p1) --[[ Line: 44 ]]
+		-- upvalues: ReactModule (copy), Context (copy)
+		local UseRefResult = ReactModule.useRef({})
+		local UseRefResult1 = ReactModule.useRef(p1.loaders)
+		UseRefResult1.current = p1.loaders
+		ReactModule.useEffect(function() --[[ Line: 49 ]]
+			-- upvalues: p1 (copy), UseRefResult (copy)
 			if not p1.open then
-				var2.current = {}
+				UseRefResult.current = {}
 			end
 		end, { p1.open })
 		
-		return reactModule.createElement(var1.Provider, {
-			value = reactModule.useRef({ registryRef = var3, cacheRef = var2 }).current
+		return ReactModule.createElement(Context.Provider, {
+			value = ReactModule.useRef({ registryRef = UseRefResult1, cacheRef = UseRefResult }).current
 		}, p1.children)
 	end,
-	useLoaderContext = function()
-		-- upvalues: reactModule (ref), var1 (ref)
-		local var2 = reactModule.useContext(var1)
+	useLoaderContext = function() --[[ Line: 64 ]]
+		-- upvalues: ReactModule (copy), Context (copy)
+		local UseContextResult = ReactModule.useContext(Context)
 		
-		if not var2 then
+		if not UseContextResult then
 			error("useLoaderContext must be used within a <LoaderProvider>")
 		end
-		return var2
+		return UseContextResult
 	end
 }

@@ -1,149 +1,148 @@
-﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
-local parent = momentsCreation.Parent
-local builderIconsModule = require(parent.BuilderIcons)
-local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-local foundationModule = require(parent.Foundation)
-local inputHandlersModule = require(parent.InputHandlers)
-local localizationModule = require(parent.Localization)
-local reactModule = require(parent.React)
-local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
-local signalsModule = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local icon = foundationModule.Icon
-local iconButton = foundationModule.IconButton
-local loading = foundationModule.Loading
-local sheet = foundationModule.Sheet
-local text = foundationModule.Text
-local view = foundationModule.View
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local dialogSize = foundationModule.Enums.DialogSize
-local iconSize = foundationModule.Enums.IconSize
-local inputSize = foundationModule.Enums.InputSize
-local useFocusRoot = focusNavigationUtilsModule.useFocusRoot
-local useLastInputMode = focusNavigationUtilsModule.useLastInputMode
-local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
-local focusNavigationEventNameEnum = focusNavigationUtilsModule.FocusNavigationEventNameEnum
-local useDefaultFocusBehavior = reactFocusNavigationModule.useDefaultFocusBehavior
-local useLocalization = localizationModule.Hooks.useLocalization
-local _ = require(momentsCreation.Components.Voice.voiceCatalog)
-local speaker = builderIconsModule.Icon.Speaker
-local playSmall = builderIconsModule.Icon.PlaySmall
-local list = { 0.9 }
-local t = {
-	[Enum.KeyCode.ButtonB] = focusNavigationEventNameEnum.NavigateBack,
-	[Enum.KeyCode.Escape] = focusNavigationEventNameEnum.NavigateBack
+﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
+local Parent = MomentsCreation.Parent
+local BuilderIconsModule = require(Parent.BuilderIcons)
+local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
+local FoundationModule = require(Parent.Foundation)
+local InputHandlersModule = require(Parent.InputHandlers)
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
+local Icon = FoundationModule.Icon
+local IconButton = FoundationModule.IconButton
+local Loading = FoundationModule.Loading
+local Sheet = FoundationModule.Sheet
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local DialogSize = FoundationModule.Enums.DialogSize
+local IconSize = FoundationModule.Enums.IconSize
+local InputSize = FoundationModule.Enums.InputSize
+local UseFocusRootFunction = FocusNavigationUtilsModule.useFocusRoot
+local UseLastInputModeFunction = FocusNavigationUtilsModule.useLastInputMode
+local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
+local FocusNavigationEventNameEnum = FocusNavigationUtilsModule.FocusNavigationEventNameEnum
+local UseDefaultFocusBehaviorFunction = require(Parent.ReactFocusNavigation).useDefaultFocusBehavior
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local _ = require(MomentsCreation.Components.Voice.voiceCatalog)
+local Speaker = BuilderIconsModule.Icon.Speaker
+local PlaySmall = BuilderIconsModule.Icon.PlaySmall
+local SnapPoints = { 0.9 }
+local EventMap = {
+	[Enum.KeyCode.ButtonB] = FocusNavigationEventNameEnum.NavigateBack,
+	[Enum.KeyCode.Escape] = FocusNavigationEventNameEnum.NavigateBack
 }
 
-local function VoiceRow(p1)
-	-- upvalues: reactModule (ref), view (ref), loading (ref), iconSize (ref), iconButton (ref), playSmall (ref), buttonVariant (ref), inputSize (ref), icon (ref), speaker (ref), text (ref)
-	local id = p1.voice.id
-	local onAudition = p1.onAudition
+local function VoiceRow(Frame) --[[ Line: 79 ]]
+	-- upvalues: ReactModule (copy), View (copy), Loading (copy), IconSize (copy), IconButton (copy), PlaySmall (copy), ButtonVariant (copy), InputSize (copy), Icon (copy), Speaker (copy), Text (copy)
+	local Id = Frame.voice.id
+	local OnAuditionFunction = Frame.onAudition
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "row align-y-center gap-medium size-full-0 auto-y padding-y-small radius-medium",
-		ref = p1.focusRef,
-		onActivated = function()
-			-- upvalues: p1 (ref), id (ref)
-			p1.onSelect(id)
+		ref = Frame.focusRef,
+		onActivated = function() --[[ Line: 114 ]]
+			-- upvalues: Frame (copy), Id (copy)
+			Frame.onSelect(Id)
 		end,
-		testId = `voice-row-{id}`,
-		LayoutOrder = p1.LayoutOrder
+		testId = `voice-row-{Id}`,
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		Info = reactModule.createElement(view, {
+		Info = ReactModule.createElement(View, {
 			tag = "row align-y-center fill gap-medium auto-y",
 			LayoutOrder = 1
 		}, {
-			IconTile = reactModule.createElement(view, {
+			IconTile = ReactModule.createElement(View, {
 				tag = "align-x-center align-y-center size-1000-1000 radius-medium bg-surface-300",
 				LayoutOrder = 1
 			}, {
-				VoiceIcon = reactModule.createElement(icon, { name = speaker, size = iconSize.Medium })
+				VoiceIcon = ReactModule.createElement(Icon, { name = Speaker, size = IconSize.Medium })
 			}),
-			Name = reactModule.createElement(text, {
+			Name = ReactModule.createElement(Text, {
 				tag = "fill auto-y text-title-medium text-align-x-left content-emphasis",
 				LayoutOrder = 2,
-				Text = p1.voice.name
+				Text = Frame.voice.name
 			})
 		}),
-		Play = if onAudition ~= nil then if p1.isAuditioning then reactModule.createElement(view, {
+		Play = if OnAuditionFunction == nil then nil elseif Frame.isAuditioning then ReactModule.createElement(View, {
 			tag = "align-x-center align-y-center size-800-800",
 			LayoutOrder = 2
 		}, {
-			Spinner = reactModule.createElement(loading, {
-				size = iconSize.Small,
-				testId = `voice-audition-loading-{id}`
+			Spinner = ReactModule.createElement(Loading, {
+				size = IconSize.Small,
+				testId = `voice-audition-loading-{Id}`
 			})
-		}) else reactModule.createElement(iconButton, {
+		}) else ReactModule.createElement(IconButton, {
 			isCircular = true,
 			LayoutOrder = 2,
-			icon = playSmall,
-			variant = buttonVariant.Standard,
-			size = inputSize.Small,
-			onActivated = function()
-				-- upvalues: onAudition (ref), id (ref)
-				onAudition(id)
+			icon = PlaySmall,
+			variant = ButtonVariant.Standard,
+			size = InputSize.Small,
+			onActivated = function() --[[ Line: 103 ]]
+				-- upvalues: OnAuditionFunction (copy), Id (copy)
+				OnAuditionFunction(Id)
 			end,
-			testId = `voice-audition-{id}`
-		}) else nil
+			testId = `voice-audition-{Id}`
+		})
 	})
 end
 
-return function(p1)
-	-- upvalues: useLocalization (ref), reactModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), useFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), t (ref), useDefaultFocusBehavior (ref), useLastInputMode (ref), signalsModule (ref), signalsReactModule (ref), VoiceRow (ref), sheet (ref), dialogSize (ref), list (ref), text (ref), view (ref)
-	local onSelect = p1.onSelect
-	local onAudition = p1.onAudition
-	local onClose = p1.onClose
-	local var1 = useLocalization({ title = "Feature.Moments.Label.ChooseVoice" })
-	local var2, var3 = useDefaultFocusBehavior(useFocusRoot({
+return function(p1) --[[ Line: 144 | Named "VoiceSelectorDialog" ]]
+	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), EventMap (copy), UseDefaultFocusBehaviorFunction (copy), UseLastInputModeFunction (copy), SignalsModule (copy), SignalsReactModule (copy), VoiceRow (copy), Sheet (copy), DialogSize (copy), SnapPoints (copy), Text (copy), View (copy)
+	local OnSelect = p1.onSelect
+	local OnAudition = p1.onAudition
+	local OnCloseFunction = p1.onClose
+	local FeatureMomentsLabelChooseVoice = UseLocalizationFunction({ title = "Feature.Moments.Label.ChooseVoice" })
+	local UseDefaultFocusBehaviorResult, UseDefaultFocusBehaviorResult2 = UseDefaultFocusBehaviorFunction((UseFocusRootFunction({
 		isAutoFocusRoot = true,
 		shouldRestoreFocus = false,
-		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.PopUp,
-		eventMap = t,
-		eventHandlers = reactModule.useMemo(function()
-			-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), onClose (ref)
+		surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.PopUp,
+		eventMap = EventMap,
+		eventHandlers = ReactModule.useMemo(function() --[[ Line: 153 ]]
+			-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), OnCloseFunction (copy)
 			return {
-				[focusNavigationEventNameEnum.NavigateBack] = {
-					handler = inputHandlersModule.onRelease(function(p2)
-						-- upvalues: onClose (copy)
-						onClose()
+				[FocusNavigationEventNameEnum.NavigateBack] = {
+					handler = InputHandlersModule.onRelease(function(p2) --[[ Line: 156 ]]
+						-- upvalues: OnCloseFunction (upval)
+						OnCloseFunction()
 						p2:cancel()
 					end)
 				}
 			}
-		end, { onClose })
-	}))
-	local isNotFocus = useLastInputMode() ~= "Focus"
-	local var4 = signalsReactModule.useSignalState(p1.getAuditioningVoiceId or reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy)
-		return signalsModule.createSignal(nil)
-	end, {}))
-	local t_1 = {}
+		end, { OnCloseFunction })
+	})))
+	local IsNotFocus = UseLastInputModeFunction() ~= "Focus"
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 175 ]]
+		-- upvalues: SignalsModule (upval)
+		return (SignalsModule.createSignal(nil))
+	end, {})
+	local UseSignalStateResult = SignalsReactModule.useSignalState(p1.getAuditioningVoiceId or UseMemoResult)
+	local Elements = {}
 	
-	for i, v in p1.voices do
-		t_1[`Voice_{v.id}`] = reactModule.createElement(VoiceRow, {
-			voice = v,
-			onSelect = onSelect,
-			onAudition = onAudition,
-			isAuditioning = var4 == v.id,
-			focusRef = if v.id == p1.selectedVoiceId then var2 else nil,
-			LayoutOrder = i
+	for LayoutOrder, voice in p1.voices do
+		Elements[`Voice_{voice.id}`] = ReactModule.createElement(VoiceRow, {
+			voice = voice,
+			onSelect = OnSelect,
+			onAudition = OnAudition,
+			isAuditioning = UseSignalStateResult == voice.id,
+			focusRef = if voice.id == p1.selectedVoiceId then UseDefaultFocusBehaviorResult else nil,
+			LayoutOrder = LayoutOrder
 		})
 	end
-	return reactModule.createElement(sheet.Root, {
-		ref = var3,
-		size = dialogSize.Medium,
-		snapPoints = list,
-		onClose = onClose
+	return ReactModule.createElement(Sheet.Root, {
+		ref = UseDefaultFocusBehaviorResult2,
+		size = DialogSize.Medium,
+		snapPoints = SnapPoints,
+		onClose = OnCloseFunction
 	}, {
-		Header = reactModule.createElement(sheet.Header, { hasCloseAffordance = isNotFocus }, {
-			Title = reactModule.createElement(text, {
+		Header = ReactModule.createElement(Sheet.Header, { hasCloseAffordance = IsNotFocus }, {
+			Title = ReactModule.createElement(Text, {
 				tag = "fill auto-y text-heading-small text-align-x-left content-emphasis",
 				LayoutOrder = 1,
-				Text = var1.title
+				Text = FeatureMomentsLabelChooseVoice.title
 			})
 		}),
-		Content = reactModule.createElement(sheet.Content, {}, {
-			List = reactModule.createElement(view, { tag = "col gap-xsmall size-full-0 auto-y" }, t_1)
+		Content = ReactModule.createElement(Sheet.Content, {}, {
+			List = ReactModule.createElement(View, { tag = "col gap-xsmall size-full-0 auto-y" }, Elements)
 		})
 	})
 end

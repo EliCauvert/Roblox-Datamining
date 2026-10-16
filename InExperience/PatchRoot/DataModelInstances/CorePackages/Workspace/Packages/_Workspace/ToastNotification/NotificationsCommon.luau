@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Workspace.NotificationsCommon.NotificationsCommon)
+﻿return (require(script.Parent.Parent.Parent._Workspace.NotificationsCommon.NotificationsCommon))

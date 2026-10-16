@@ -1,72 +1,70 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
-local settingsPageFactoryModule = require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.Settings.SettingsPageFactory)
-local var1 = require(corePackagesService.Workspace.Packages.Chrome).Enabled()
-local builderIconsModule = require(corePackagesService.Packages.BuilderIcons)
-local uiblox = builderIconsModule.Migration.uiblox
-local foundationModule = require(corePackagesService.Packages.Foundation)
-local getFFlagFixIGMTabTransitionsModule = require(script.Parent.Parent.Flags.GetFFlagFixIGMTabTransitions)
-local fFlagIGMChangeCapturesToGalleryModule = require(script.Parent.Parent.Flags.FFlagIGMChangeCapturesToGallery)
-local fFlagIGMChangeGalleryHeaderIconModule = require(script.Parent.Parent.Flags.FFlagIGMChangeGalleryHeaderIcon)
-local isSideSheetEnabledModule = require(corePackagesService.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
-local captures = settingsPageFactoryModule:CreateNewPage()
-captures.TabHeader.Name = "CapturesTab"
-local var2 = if fFlagIGMChangeGalleryHeaderIconModule then {
+﻿local CorePackages = game:GetService("CorePackages")
+local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
+local EnabledResult = require(CorePackages.Workspace.Packages.Chrome).Enabled()
+local BuilderIconsModule = require(CorePackages.Packages.BuilderIcons)
+local Uiblox = BuilderIconsModule.Migration.uiblox
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local GetFFlagFixIGMTabTransitionsModule = require(script.Parent.Parent.Flags.GetFFlagFixIGMTabTransitions)
+local FFlagIGMChangeCapturesToGalleryModule = require(script.Parent.Parent.Flags.FFlagIGMChangeCapturesToGallery)
+local IsSideSheetEnabledModule = require(CorePackages.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
+local NewPage = require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.Settings.SettingsPageFactory):CreateNewPage()
+NewPage.TabHeader.Name = "CapturesTab"
+local Config = if require(script.Parent.Parent.Flags.FFlagIGMChangeGalleryHeaderIcon) then {
 	name = "image",
-	variant = foundationModule.Enums.IconVariant.Regular
-} elseif var1 then uiblox["icons/controls/cameraOff"] else uiblox["icons/controls/screenshot"]
-captures.TabHeader.TabLabel.Icon.Text = var2.name
-captures.TabHeader.TabLabel.Icon.FontFace = builderIconsModule.Font[var2.variant]
-captures.TabHeader.TabLabel.Title.AutoLocalize = false
+	variant = FoundationModule.Enums.IconVariant.Regular
+} elseif EnabledResult then Uiblox["icons/controls/cameraOff"] else Uiblox["icons/controls/screenshot"]
+NewPage.TabHeader.TabLabel.Icon.Text = Config.name
+NewPage.TabHeader.TabLabel.Icon.FontFace = BuilderIconsModule.Font[Config.variant]
+NewPage.TabHeader.TabLabel.Title.AutoLocalize = false
 
-if fFlagIGMChangeCapturesToGalleryModule then
-	captures.TabHeader.TabLabel.Title.Text = robloxTranslatorModule:FormatByKey("Feature.Captures.Title.Gallery")
+if FFlagIGMChangeCapturesToGalleryModule then
+	NewPage.TabHeader.TabLabel.Title.Text = RobloxTranslatorModule:FormatByKey("Feature.Captures.Title.Gallery")
 else
-	captures.TabHeader.TabLabel.Title.Text = robloxTranslatorModule:FormatByKey("Feature.SettingsHub.Label.Captures")
+	NewPage.TabHeader.TabLabel.Title.Text = RobloxTranslatorModule:FormatByKey("Feature.SettingsHub.Label.Captures")
 end
-captures.PageListLayout.Parent = nil
-captures.ShouldShowBottomBar = not isSideSheetEnabledModule
-captures.ShouldShowHubBar = true
-captures.Page.Name = "Captures"
-captures.Page.Size = UDim2.fromScale(1, 0)
-local UIPadding = captures.Page:FindFirstChildWhichIsA("UIPadding")
+NewPage.PageListLayout.Parent = nil
+NewPage.ShouldShowBottomBar = not IsSideSheetEnabledModule
+NewPage.ShouldShowHubBar = true
+NewPage.Page.Name = "Captures"
+NewPage.Page.Size = UDim2.fromScale(1, 0)
+local UIPadding = NewPage.Page:FindFirstChildWhichIsA("UIPadding")
 
 if UIPadding then
 	UIPadding:Destroy()
 end
-function captures.ConnectHubToApp(_, p1, p2, p3)
-	-- upvalues: captures (ref), getFFlagFixIGMTabTransitionsModule (ref)
-	captures:SetHub(p1)
-	local var3 = p2.AbsoluteSize.Y - 20
-	captures.Page.Size = UDim2.new(1, 0, 0, var3)
-	p2:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
-		-- upvalues: var3 (write), p2 (ref), captures (copy)
-		var3 = p2.AbsoluteSize.Y - 20
-		captures.Page.Size = UDim2.new(1, 0, 0, var3)
+function NewPage:ConnectHubToApp(p1, Frame: Frame, p2) --[[ Line: 65 ]]
+	-- upvalues: NewPage (copy), GetFFlagFixIGMTabTransitionsModule (copy)
+	NewPage:SetHub(p1)
+	local YDelta = Frame.AbsoluteSize.Y - 20
+	NewPage.Page.Size = UDim2.new(1, 0, 0, YDelta)
+	Frame:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ Line: 70 ]]
+		-- upvalues: YDelta (ref), Frame (copy), NewPage (upval)
+		YDelta = Frame.AbsoluteSize.Y - 20
+		NewPage.Page.Size = UDim2.new(1, 0, 0, YDelta)
 	end)
-	local display = captures.Display
+	local DisplayFunction = NewPage.Display
 	
-	function captures.Display(_, ...)
-		-- upvalues: p3 (ref), display (ref), captures (copy)
-		p3.openMenu()
-		display(captures, ...)
+	function NewPage:Display(...) --[[ Line: 76 ]]
+		-- upvalues: p2 (copy), DisplayFunction (copy), NewPage (upval)
+		p2.openMenu()
+		DisplayFunction(NewPage, ...)
 	end
 	
-	captures.Hidden.Event:Connect(function()
-		-- upvalues: getFFlagFixIGMTabTransitionsModule (copy), p3 (ref)
-		if not getFFlagFixIGMTabTransitionsModule() then
-			p3.closeMenu()
+	NewPage.Hidden.Event:Connect(function() --[[ Line: 81 ]]
+		-- upvalues: GetFFlagFixIGMTabTransitionsModule (upval), p2 (copy)
+		if not GetFFlagFixIGMTabTransitionsModule() then
+			p2.closeMenu()
 		end
 	end)
-	local hide = captures.Hide
+	local HideFunction = NewPage.Hide
 	
-	function captures.Hide(_, ...)
-		-- upvalues: getFFlagFixIGMTabTransitionsModule (copy), p3 (ref), hide (ref), captures (copy)
-		if getFFlagFixIGMTabTransitionsModule() then
-			p3.closeMenu()
+	function NewPage:Hide(...) --[[ Line: 90 ]]
+		-- upvalues: GetFFlagFixIGMTabTransitionsModule (upval), p2 (copy), HideFunction (copy), NewPage (upval)
+		if GetFFlagFixIGMTabTransitionsModule() then
+			p2.closeMenu()
 		end
-		hide(captures, ...)
+		HideFunction(NewPage, ...)
 	end
 end
 
-return captures
+return NewPage

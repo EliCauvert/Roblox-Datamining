@@ -1,27 +1,27 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local promiseModule = require(dataHydration.Parent.Promise)
-local createDataCacheModule = require(dataHydration.createDataCache)
-local _ = require(dataHydration.DataHydrationTypes)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local PromiseModule = require(DataHydration.Parent.Promise)
+local CreateDataCacheModule = require(DataHydration.createDataCache)
+local _ = require(DataHydration.DataHydrationTypes)
 local _ = require(script.Parent.CreatorInfoStoreTypes)
-local createDataResolverModule = require(dataHydration.createDataResolver)
+local CreateDataResolverModule = require(DataHydration.createDataResolver)
 
-return function()
-	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), promiseModule (ref)
-	local var1 = createDataCacheModule()
-	local var2 = createDataResolverModule({
-		cache = var1,
-		fetchFn = function(_)
-			-- upvalues: promiseModule (copy)
-			return promiseModule.resolve({})
+return function() --[[ Line: 10 | Named "createCreatorInfoStore" ]]
+	-- upvalues: CreateDataCacheModule (copy), CreateDataResolverModule (copy), PromiseModule (copy)
+	local DataCacheModule = CreateDataCacheModule()
+	local DataResolverModule = CreateDataResolverModule({
+		cache = DataCacheModule,
+		fetchFn = function(_) --[[ Line: 14 ]]
+			-- upvalues: PromiseModule (upval)
+			return PromiseModule.resolve({})
 		end
 	})
 	
 	return {
-		getCreatorInfo = var2.getCachedItem,
-		getCreatorInfos = var2.getCachedItems,
-		updateCreatorInfo = var1.updateItem,
-		updateCreatorInfos = var1.updateItems,
-		clear = var1.clear,
-		dispose = var1.dispose
+		getCreatorInfo = DataResolverModule.getCachedItem,
+		getCreatorInfos = DataResolverModule.getCachedItems,
+		updateCreatorInfo = DataCacheModule.updateItem,
+		updateCreatorInfos = DataCacheModule.updateItems,
+		clear = DataCacheModule.clear,
+		dispose = DataCacheModule.dispose
 	}
 end

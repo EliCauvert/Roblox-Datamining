@@ -1,120 +1,120 @@
-﻿local roduxSquads = script:FindFirstAncestor("RoduxSquads")
-local parent = roduxSquads.Parent
-local tModule = require(parent.t)
-local experienceInviteStateModule = require(roduxSquads.Enums.ExperienceInviteState)
-local experienceInviteVoteTypeModule = require(roduxSquads.Enums.ExperienceInviteVoteType)
-local experienceInviteTypeModule = require(roduxSquads.Enums.ExperienceInviteType)
-local fFlagEnablePrivatePartyAcceptInvite = require(parent.SharedFlags).FFlagEnablePrivatePartyAcceptInvite
+﻿local RoduxSquads = script:FindFirstAncestor("RoduxSquads")
+local Parent = RoduxSquads.Parent
+local TModule = require(Parent.t)
+local ExperienceInviteStateModule = require(RoduxSquads.Enums.ExperienceInviteState)
+local ExperienceInviteVoteTypeModule = require(RoduxSquads.Enums.ExperienceInviteVoteType)
+local ExperienceInviteTypeModule = require(RoduxSquads.Enums.ExperienceInviteType)
+local FFlagEnablePrivatePartyAcceptInvite = require(Parent.SharedFlags).FFlagEnablePrivatePartyAcceptInvite
 
-local function _(p1)
-	-- upvalues: experienceInviteVoteTypeModule (ref)
-	local var1 = 0
+local function _(p1): number --[[ Line: 12 | Named "getSpotsTaken" ]]
+	-- upvalues: ExperienceInviteVoteTypeModule (copy)
+	local Count = 0
 	
 	for i = 1, #p1 do
-		if p1[i].voteType == experienceInviteVoteTypeModule.Accept then
-			var1 += 1
+		if p1[i].voteType == ExperienceInviteVoteTypeModule.Accept then
+			Count += 1
 		end
 	end
-	return var1
+	return Count
 end
 
-local t = {}
+local ExperienceInviteModelModule = {}
 
-function t.new(p2)
-	-- upvalues: t (ref)
-	assert(t.isValid(p2))
-	t.__index = t
-	setmetatable(p2, t)
+function ExperienceInviteModelModule.new(p2) --[[ Line: 32 ]]
+	-- upvalues: ExperienceInviteModelModule (copy)
+	assert(ExperienceInviteModelModule.isValid(p2))
+	ExperienceInviteModelModule.__index = ExperienceInviteModelModule
+	setmetatable(p2, ExperienceInviteModelModule)
 	
 	return p2
 end
 
-function t.mock(p2)
-	-- upvalues: experienceInviteVoteTypeModule (ref), t (ref), experienceInviteStateModule (ref), fFlagEnablePrivatePartyAcceptInvite (ref), experienceInviteTypeModule (ref)
-	p2 = p2 or {}
-	p2 = p2.votes or {
+function ExperienceInviteModelModule.mock(p2) --[[ Line: 44 ]]
+	-- upvalues: ExperienceInviteVoteTypeModule (copy), ExperienceInviteModelModule (copy), ExperienceInviteStateModule (copy), FFlagEnablePrivatePartyAcceptInvite (copy), ExperienceInviteTypeModule (copy)
+	local P2 = p2 or {}
+	local Votes = P2.votes or {
 		[1] = {
 			userId = 456,
 			voteIdentifier = "voteIdentifier",
-			voteType = experienceInviteVoteTypeModule.Accept
+			voteType = ExperienceInviteVoteTypeModule.Accept
 		}
 	}
-	local var2 = 0
+	local SpotsTaken = 0
 	
-	for i = 1, #p2 do
-		if p2[i].voteType == experienceInviteVoteTypeModule.Accept then
-			var2 += 1
+	for i = 1, #Votes do
+		if Votes[i].voteType == ExperienceInviteVoteTypeModule.Accept then
+			SpotsTaken += 1
 		end
 	end
-	var2 = t.new({
-		createdAtTime = p2.createdAtTime or "2024-07-19T21:02:47.777+00:00",
-		experienceInviteId = p2.experienceInviteId or "987",
-		experienceDetail = p2.experienceDetail or { placeId = 15308759682, gameInstanceId = "instanceId" },
-		inviterId = p2.inviterId or 123456,
-		membershipEntityId = p2.membershipEntityId or "54321",
-		spotsTaken = var2,
-		state = p2.state or experienceInviteStateModule.Active,
-		totalSpots = p2.totalSpots or 6,
-		versionId = p2.version or 1,
-		votes = p2
+	local NewExperienceInviteModel = ExperienceInviteModelModule.new({
+		createdAtTime = P2.createdAtTime or "2024-07-19T21:02:47.777+00:00",
+		experienceInviteId = P2.experienceInviteId or "987",
+		experienceDetail = P2.experienceDetail or { placeId = 15308759682, gameInstanceId = "instanceId" },
+		inviterId = P2.inviterId or 123456,
+		membershipEntityId = P2.membershipEntityId or "54321",
+		spotsTaken = SpotsTaken,
+		state = P2.state or ExperienceInviteStateModule.Active,
+		totalSpots = P2.totalSpots or 6,
+		versionId = P2.version or 1,
+		votes = Votes
 	})
 	
-	if fFlagEnablePrivatePartyAcceptInvite then
-		var2.inviteType = p2.inviteType or experienceInviteTypeModule.PlayWithPartyInPublicServer
+	if FFlagEnablePrivatePartyAcceptInvite then
+		NewExperienceInviteModel.inviteType = P2.inviteType or ExperienceInviteTypeModule.PlayWithPartyInPublicServer
 	end
-	return var2
+	return NewExperienceInviteModel
 end
 
-function t.format(p3)
-	-- upvalues: t (ref), experienceInviteVoteTypeModule (ref), fFlagEnablePrivatePartyAcceptInvite (ref), experienceInviteTypeModule (ref)
-	local votes = p3.votes
-	local new = t.new
-	local t_1 = {
+function ExperienceInviteModelModule.format(p3) --[[ Line: 79 ]]
+	-- upvalues: ExperienceInviteModelModule (copy), ExperienceInviteVoteTypeModule (copy), FFlagEnablePrivatePartyAcceptInvite (copy), ExperienceInviteTypeModule (copy)
+	local Votes = p3.votes
+	local NewFunction = ExperienceInviteModelModule.new
+	local config = {
 		createdAtTime = p3.createdAtTime,
 		experienceDetail = p3.experienceDetail,
 		experienceInviteId = p3.experienceInviteId,
 		inviterId = p3.inviterId,
 		membershipEntityId = p3.membershipEntityId
 	}
-	local var3 = 0
+	local SpotsTaken = 0
 	
-	for i = 1, #votes do
-		if votes[i].voteType == experienceInviteVoteTypeModule.Accept then
-			var3 += 1
+	for i = 1, #Votes do
+		if Votes[i].voteType == ExperienceInviteVoteTypeModule.Accept then
+			SpotsTaken += 1
 		end
 	end
-	t_1.spotsTaken = var3
-	t_1.state = p3.state
-	t_1.totalSpots = p3.totalSpots
-	t_1.versionId = p3.versionId
-	t_1.votes = votes
-	new = new(t_1)
+	config.spotsTaken = SpotsTaken
+	config.state = p3.state
+	config.totalSpots = p3.totalSpots
+	config.versionId = p3.versionId
+	config.votes = Votes
+	local NewResult = NewFunction(config)
 	
-	if fFlagEnablePrivatePartyAcceptInvite then
-		new.inviteType = p3.inviteType or experienceInviteTypeModule.PlayWithPartyInPublicServer
+	if FFlagEnablePrivatePartyAcceptInvite then
+		NewResult.inviteType = p3.inviteType or ExperienceInviteTypeModule.PlayWithPartyInPublicServer
 	end
-	return new
+	return NewResult
 end
 
-t.isValid = tModule.strictInterface({
-	createdAtTime = tModule.string,
-	experienceDetail = tModule.interface({
-		placeId = tModule.number,
-		gameInstanceId = tModule.optional(tModule.string)
+ExperienceInviteModelModule.isValid = TModule.strictInterface({
+	createdAtTime = TModule.string,
+	experienceDetail = TModule.interface({
+		placeId = TModule.number,
+		gameInstanceId = TModule.optional(TModule.string)
 	}),
-	experienceInviteId = tModule.string,
-	inviterId = tModule.number,
-	membershipEntityId = tModule.string,
-	spotsTaken = tModule.number,
-	state = tModule.string,
-	totalSpots = tModule.number,
-	versionId = tModule.number,
-	votes = tModule.array(tModule.interface({
-		userId = tModule.number,
-		voteIdentifier = tModule.optional(tModule.string),
-		voteType = tModule.string
+	experienceInviteId = TModule.string,
+	inviterId = TModule.number,
+	membershipEntityId = TModule.string,
+	spotsTaken = TModule.number,
+	state = TModule.string,
+	totalSpots = TModule.number,
+	versionId = TModule.number,
+	votes = TModule.array(TModule.interface({
+		userId = TModule.number,
+		voteIdentifier = TModule.optional(TModule.string),
+		voteType = TModule.string
 	})),
-	inviteType = tModule.optional(tModule.union(tModule.literal(experienceInviteTypeModule.PlayWithPartyInPublicServer), tModule.literal(experienceInviteTypeModule.PlayWithPartyInPrivatePartyServer)))
+	inviteType = TModule.optional(TModule.union(TModule.literal(ExperienceInviteTypeModule.PlayWithPartyInPublicServer), TModule.literal(ExperienceInviteTypeModule.PlayWithPartyInPrivatePartyServer)))
 })
 
-return t
+return ExperienceInviteModelModule

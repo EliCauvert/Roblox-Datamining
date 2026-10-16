@@ -1,25 +1,24 @@
-﻿local parent = script:FindFirstAncestor("ExpChat").Parent
-local signalsModule = require(parent.Signals)
-local expChatSharedModule = require(parent.ExpChatShared)
-local createChatTooltipStoreModule = require(script.createChatTooltipStore)
-local promptsApiModule = require(script.promptsApi)
-local fFlagExpChatPresetChatEnabled = expChatSharedModule.Flags.FFlagExpChatPresetChatEnabled
-local fFlagExpChatUseUnifiedTooltipStore = expChatSharedModule.Flags.FFlagExpChatUseUnifiedTooltipStore
+﻿local Parent = script:FindFirstAncestor("ExpChat").Parent
+local ExpChatSharedModule = require(Parent.ExpChatShared)
+local CreateChatTooltipStoreModule = require(script.createChatTooltipStore)
+local PromptsApiModule = require(script.promptsApi)
+local FFlagExpChatPresetChatEnabled = ExpChatSharedModule.Flags.FFlagExpChatPresetChatEnabled
+local FFlagExpChatUseUnifiedTooltipStore = ExpChatSharedModule.Flags.FFlagExpChatUseUnifiedTooltipStore
 
-return signalsModule.createComputed(function()
-	-- upvalues: createChatTooltipStoreModule (ref), fFlagExpChatUseUnifiedTooltipStore (ref), promptsApiModule (ref), fFlagExpChatPresetChatEnabled (ref)
-	local var1 = createChatTooltipStoreModule()
+return require(Parent.Signals).createComputed(function() --[[ Line: 15 ]]
+	-- upvalues: CreateChatTooltipStoreModule (copy), FFlagExpChatUseUnifiedTooltipStore (copy), PromptsApiModule (copy), FFlagExpChatPresetChatEnabled (copy)
+	local ChatTooltipStoreModule = CreateChatTooltipStoreModule()
 	
-	if fFlagExpChatUseUnifiedTooltipStore then
-		promptsApiModule.fetchAllTooltipEligibility(function(p1)
-			-- upvalues: var1 (ref), fFlagExpChatPresetChatEnabled (copy)
-			local customPrompts = p1.customPrompts
-			var1.setIsEligible("GlobalChatTooltip", customPrompts.GlobalChatTooltip ~= nil)
+	if FFlagExpChatUseUnifiedTooltipStore then
+		PromptsApiModule.fetchAllTooltipEligibility(function(p1) --[[ Line: 19 ]]
+			-- upvalues: ChatTooltipStoreModule (copy), FFlagExpChatPresetChatEnabled (upval)
+			local CustomPrompts = p1.customPrompts
+			ChatTooltipStoreModule.setIsEligible("GlobalChatTooltip", CustomPrompts.GlobalChatTooltip ~= nil)
 			
-			if fFlagExpChatPresetChatEnabled then
-				var1.setIsEligible("PresetChatTooltip", customPrompts.PresetChatTooltip ~= nil)
+			if FFlagExpChatPresetChatEnabled then
+				ChatTooltipStoreModule.setIsEligible("PresetChatTooltip", CustomPrompts.PresetChatTooltip ~= nil)
 			end
 		end)
 	end
-	return var1
+	return ChatTooltipStoreModule
 end)

@@ -1,6 +1,6 @@
-﻿local parent = script.Parent
-local _ = require(parent.Parent.LuauPolyfill)
-local _ = require(parent.Enums.CallStatus)
-local _ = require(parent.Enums.MessageType)
+﻿local Parent = script.Parent
+local _ = require(Parent.Parent.LuauPolyfill)
+local _ = require(Parent.Enums.CallStatus)
+local _ = require(Parent.Enums.MessageType)
 
 return nil

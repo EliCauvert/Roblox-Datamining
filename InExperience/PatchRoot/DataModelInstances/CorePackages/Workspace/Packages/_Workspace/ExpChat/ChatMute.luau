@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.ChatMute.ChatMute)
+﻿return (require(script.Parent.Parent.Parent._Index.ChatMute.ChatMute))

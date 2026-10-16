@@ -1,28 +1,28 @@
-﻿local parent = script:FindFirstAncestor("GameCollections").Parent
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
+﻿local Parent = script:FindFirstAncestor("GameCollections").Parent
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
 
-return function(p1, p2, p3)
-	-- upvalues: reactModule (ref), cryoModule (ref)
-	return reactModule.useMemo(function()
-		-- upvalues: p1 (ref), cryoModule (copy), p2 (ref), p3 (ref)
-		local t = {}
-		local var1 = false
+return function(p1, p2, p3) --[[ Line: 7 ]]
+	-- upvalues: ReactModule (copy), CryoModule (copy)
+	return ReactModule.useMemo(function() --[[ Line: 8 ]]
+		-- upvalues: p1 (copy), CryoModule (upval), p2 (copy), p3 (copy)
+		local List = {}
+		local Flag = false
 		
-		for i, v in p1 do
-			local spanOverride = v.spanOverride
+		for _, value in p1 do
+			local SpanOverride = value.spanOverride
 			
-			if spanOverride then
-				var1 = true
-				local colSpan = spanOverride.colSpan or 1
-				local rowSpan = spanOverride.rowSpan or 1
-				table.insert(t, cryoModule.Dictionary.join(v, {
-					sizeOverride = UDim2.new(colSpan, (p2 or 0) * (colSpan - 1), rowSpan, (p3 or 0) * (rowSpan - 1))
+			if SpanOverride then
+				Flag = true
+				local ColSpan = SpanOverride.colSpan or 1
+				local RowSpan = SpanOverride.rowSpan or 1
+				table.insert(List, CryoModule.Dictionary.join(value, {
+					sizeOverride = UDim2.new(ColSpan, (p2 or 0) * (ColSpan - 1), RowSpan, (p3 or 0) * (RowSpan - 1))
 				}))
 			else
-				table.insert(t, v)
+				table.insert(List, value)
 			end
 		end
-		return if var1 then t else p1
+		return if Flag then List else p1
 	end, { p1, p2, p3 })
 end

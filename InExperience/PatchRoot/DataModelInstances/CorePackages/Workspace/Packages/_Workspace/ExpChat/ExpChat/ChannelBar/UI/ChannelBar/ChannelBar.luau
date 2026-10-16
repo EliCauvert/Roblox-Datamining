@@ -1,538 +1,487 @@
-﻿local textChatService = game:GetService("TextChatService")
-local userInputService = game:GetService("UserInputService")
-local runService = game:GetService("RunService")
-local expChat = script:FindFirstAncestor("ExpChat")
-local parent = expChat.Parent
-local configModule = require(expChat.Config)
-local reactModule = require(parent.React)
-local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
-local signalsReactModule = require(parent.SignalsReact)
-local createEffect = require(parent.Signals).createEffect
-local expChatSharedModule = require(parent.ExpChatShared)
-local cryoModule = require(parent.Cryo)
-local UIBloxModule = require(parent.UIBlox)
-local analytics = expChatSharedModule.Analytics
-local cursorKind = UIBloxModule.App.SelectionImage.CursorKind
-local images = UIBloxModule.App.ImageSet.Images
-local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
-local useSelectionCursor = UIBloxModule.App.SelectionImage.useSelectionCursor
-local useInterpolatedClientSettingsModule = require(expChat.ClientSettings.useInterpolatedClientSettings)
-local fFlagExpChatEnableTabsImpressionAnalyticsModule = require(expChat.Flags.FFlagExpChatEnableTabsImpressionAnalytics)
-local var1 = require(expChat.Stores.GetFocusNavigationStore)(false)
-local fFlagExpChatEnableFriendsTab = require(parent.SharedFlags).FFlagExpChatEnableFriendsTab
-local fFlagExpChatTabShortcutNav = require(parent.SharedFlags).FFlagExpChatTabShortcutNav
-local expChatPerfTracker = require(parent.ChatUIPrimitives).Telemetry.ExpChatPerfTracker
-local fFlagExpChatPerfTrackerTabName = require(parent.ChatUIPrimitives).Flags.FFlagExpChatPerfTrackerTabName
-local fFlagExpChatLogTabClickedModule = require(expChat.Flags.FFlagExpChatLogTabClicked)
-local fFlagGlobalTextChatAddPlaySessionFieldModule = require(expChat.Flags.FFlagGlobalTextChatAddPlaySessionField)
-local getChatLayoutStoreModule = require(expChat.Stores.GetChatLayoutStore)
-local channelTabModule = require(script.Parent.Parent.ChannelTab)
-local var2 = cryoModule.List.join(analytics.DefaultStandardizedFields, { "addPlaceInstanceId" }, if fFlagGlobalTextChatAddPlaySessionFieldModule then { "addPlaySessionId" } else {})
-local cycleDown = images["icons/navigation/cycleDown"]
-local color = Color3.fromRGB(255, 255, 255)
-local color_1 = Color3.fromRGB(100, 100, 100)
-local expChatTabNavFocusPollDelayFrames = game:DefineFastInt("ExpChatTabNavFocusPollDelayFrames", 3)
-local expChatTabNavFocusPollFrames = game:DefineFastInt("ExpChatTabNavFocusPollFrames", 4)
+﻿local TextChatService = game:GetService("TextChatService")
+local UserInputService = game:GetService("UserInputService")
+local RunService = game:GetService("RunService")
+local ExpChat = script:FindFirstAncestor("ExpChat")
+local Parent = ExpChat.Parent
+local ConfigModule = require(ExpChat.Config)
+local ReactModule = require(Parent.React)
+local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
+local SignalsReactModule = require(Parent.SignalsReact)
+local CreateEffectFunction = require(Parent.Signals).createEffect
+local UIBloxModule = require(Parent.UIBlox)
+local Analytics = require(Parent.ExpChatShared).Analytics
+local CursorKind = UIBloxModule.App.SelectionImage.CursorKind
+local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
+local UseSelectionCursorFunction = UIBloxModule.App.SelectionImage.useSelectionCursor
+local UseInterpolatedClientSettingsModule = require(ExpChat.ClientSettings.useInterpolatedClientSettings)
+local v1 = require(ExpChat.Stores.GetFocusNavigationStore)(false)
+local FFlagExpChatEnableFriendsTab = require(Parent.SharedFlags).FFlagExpChatEnableFriendsTab
+local FFlagExpChatUseChannelTabsStore = require(Parent.SharedFlags).FFlagExpChatUseChannelTabsStore
+local FFlagExpChatTabShortcutNav = require(Parent.SharedFlags).FFlagExpChatTabShortcutNav
+local ExpChatPerfTracker = require(Parent.ChatUIPrimitives).Telemetry.ExpChatPerfTracker
+local FFlagExpChatPerfTrackerTabName = require(Parent.ChatUIPrimitives).Flags.FFlagExpChatPerfTrackerTabName
+local GetChatLayoutStoreModule = require(ExpChat.Stores.GetChatLayoutStore)
+local ChannelTabModule = require(script.Parent.Parent.ChannelTab)
+local JoinResult = require(Parent.Cryo).List.join(Analytics.DefaultStandardizedFields, { "addPlaceInstanceId" }, if require(ExpChat.Flags.FFlagGlobalTextChatAddPlaySessionField) then { "addPlaySessionId" } else {})
+local IconsNavigationCycleDown = UIBloxModule.App.ImageSet.Images["icons/navigation/cycleDown"]
+local _Color3 = Color3.fromRGB(255, 255, 255)
+local _Color3_1 = Color3.fromRGB(100, 100, 100)
+local ExpChatTabNavFocusPollDelayFrames = game:DefineFastInt("ExpChatTabNavFocusPollDelayFrames", 3)
+local ExpChatTabNavFocusPollFrames = game:DefineFastInt("ExpChatTabNavFocusPollFrames", 4)
 
-local function _(value)
-	local var3 = 0
+local function _(List): number --[[ Line: 90 | Named "countAllChannelTabs" ]]
+	local Count = 0
 	
-	for i in pairs(value) do
-		var3 += 1
+	for _ in pairs(List) do
+		Count += 1
 	end
-	return var3
+	return Count
 end
 
-local function setTransparency(value, p1)
-	return p1:map(function(p2)
-		-- upvalues: value (ref)
-		return if value == nil then 1 else value + p2 * (1 - value)
+local function setTransparency(p1, TransparencyValue) --[[ Line: 98 ]]
+	return TransparencyValue:map(function(p2): number --[[ Line: 99 ]]
+		-- upvalues: p1 (copy)
+		return if p1 == nil then 1 else p1 + p2 * (1 - p1)
 	end)
 end
 
-return function(p1)
-	-- upvalues: configModule (ref), reactModule (ref), signalsReactModule (ref), getChatLayoutStoreModule (ref), fFlagExpChatEnableTabsImpressionAnalyticsModule (ref), var1 (ref), reactFocusNavigationModule (ref), useSelectionCursor (ref), cursorKind (ref), fFlagExpChatTabShortcutNav (ref), userInputService (ref), createEffect (ref), expChatTabNavFocusPollDelayFrames (ref), runService (ref), expChatTabNavFocusPollFrames (ref), fFlagExpChatEnableFriendsTab (ref), channelTabModule (ref), expChatPerfTracker (ref), fFlagExpChatPerfTrackerTabName (ref), fFlagExpChatLogTabClickedModule (ref), analytics (ref), var2 (ref), setTransparency (ref), textChatService (ref), useInterpolatedClientSettingsModule (ref), color_1 (ref), imageSetLabel (ref), cycleDown (ref), color (ref)
-	local var4 = 0
+return function(p1) --[[ Line: 104 | Named "ChannelBar" ]]
+	-- upvalues: ConfigModule (copy), ReactModule (copy), SignalsReactModule (copy), GetChatLayoutStoreModule (copy), v1 (copy), ReactFocusNavigationModule (copy), UseSelectionCursorFunction (copy), CursorKind (copy), FFlagExpChatTabShortcutNav (copy), UserInputService (copy), CreateEffectFunction (copy), FFlagExpChatUseChannelTabsStore (copy), ExpChatTabNavFocusPollDelayFrames (copy), RunService (copy), ExpChatTabNavFocusPollFrames (copy), FFlagExpChatEnableFriendsTab (copy), ChannelTabModule (copy), ExpChatPerfTracker (copy), FFlagExpChatPerfTrackerTabName (copy), Analytics (copy), JoinResult (copy), setTransparency (copy), TextChatService (copy), UseInterpolatedClientSettingsModule (copy), _Color3_1 (copy), ImageSetLabel (copy), IconsNavigationCycleDown (copy), _Color3 (copy)
+	local Count = 0
 	
-	for i in pairs(p1.allChannelTabs) do
-		var4 += 1
+	for _ in pairs(p1.allChannelTabs) do
+		Count += 1
 	end
-	local var5 = configModule.ChatWindowSize.Y.Scale * p1.chatWindowSettings.HeightScale * configModule.ChatWindowMaxWidth
-	local var6, var7 = reactModule.useState(false)
-	local var8, var9 = reactModule.useState(false)
-	local var10 = signalsReactModule.useSignalState(getChatLayoutStoreModule(false).getChatWindowWidth)
-	local var11, var12 = reactModule.useState(1024)
-	local var13 = nil
-	local var14 = nil
+	local Count1: number = Count
+	local ScaledScale = ConfigModule.ChatWindowSize.Y.Scale * p1.chatWindowSettings.HeightScale * ConfigModule.ChatWindowMaxWidth
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(GetChatLayoutStoreModule(false).getChatWindowWidth)
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(1024)
+	local UseStateResult2_3 = nil
+	local UseStateResult4
+	UseStateResult4, UseStateResult2_3 = ReactModule.useState(false)
+	local UseSignalStateResult1 = SignalsReactModule.useSignalState(v1.getChatInputBarFocused)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseFocusGuiObjectResult = ReactFocusNavigationModule.useFocusGuiObject()
+	local UseSelectionCursorResult = UseSelectionCursorFunction(CursorKind.Invisible)
+	local UseSelectionCursorResult1 = UseSelectionCursorFunction(CursorKind.RoundedSlot)
+	local v2 = nil
+	local v3 = nil
 	
-	if fFlagExpChatEnableTabsImpressionAnalyticsModule then
-		local var15, var16 = reactModule.useState(false)
-		var13 = var15
-		var14 = var16
+	if FFlagExpChatTabShortcutNav then
+		v2, v50 = ReactModule.useState(nil)
 	end
-	local var17 = signalsReactModule.useSignalState(var1.getChatInputBarFocused)
-	local var18 = reactModule.useRef(nil)
-	local var19 = reactFocusNavigationModule.useFocusGuiObject()
-	local var20 = useSelectionCursor(cursorKind.Invisible)
-	local var21 = useSelectionCursor(cursorKind.RoundedSlot)
-	local var22 = nil
-	local var23 = nil
+	local UseRefResult1 = if FFlagExpChatTabShortcutNav then ReactModule.useRef({}) else nil
+	local v4 = nil
+	local Callback = nil
 	
-	if fFlagExpChatTabShortcutNav then
-		local var24, var25 = reactModule.useState(nil)
-		var22 = var24
-		var23 = var25
+	if FFlagExpChatTabShortcutNav then
+		v4, Callback = ReactModule.useState(nil)
 	end
-	local var26 = if fFlagExpChatTabShortcutNav then reactModule.useRef({}) else nil
-	local var27 = nil
-	local var28 = nil
-	
-	if fFlagExpChatTabShortcutNav then
-		local var29, var30 = reactModule.useState(nil)
-		var27 = var29
-		var28 = var30
-	end
-	local var31 = var10 or var11
-	local var32 = var31 < var4 * configModule.ChannelTabsSettings.MinTabWidth
-	local var33 = if not var32 then var4 else math.floor((var31 - configModule.ChannelTabsSettings.DropdownIconContainerWidth) / configModule.ChannelTabsSettings.MinTabWidth)
-	local var34 = (var31 - (if var32 then configModule.ChannelTabsSettings.DropdownIconContainerWidth else 0)) / var33
-	local var35 = (var4 - var33) * 40
-	reactModule.useEffect(function()
-		-- upvalues: fFlagExpChatTabShortcutNav (copy), var1 (copy), p1 (ref)
-		if fFlagExpChatTabShortcutNav then
-			var1.setTabBarVisible(p1.visible)
-			
-			return function()
-				-- upvalues: var1 (copy)
-				var1.setTabBarVisible(false)
-			end
+	local UseSignalStateResult2 = UseSignalStateResult or UseStateResult3
+	local IsUseSignalStateResultBelow = UseSignalStateResult2 < Count1 * ConfigModule.ChannelTabsSettings.MinTabWidth
+	local Floored = if IsUseSignalStateResultBelow then math.floor((UseSignalStateResult2 - ConfigModule.ChannelTabsSettings.DropdownIconContainerWidth) / ConfigModule.ChannelTabsSettings.MinTabWidth) else Count1 or math.floor((UseSignalStateResult2 - ConfigModule.ChannelTabsSettings.DropdownIconContainerWidth) / ConfigModule.ChannelTabsSettings.MinTabWidth)
+	local XOffset = (UseSignalStateResult2 - (IsUseSignalStateResultBelow and ConfigModule.ChannelTabsSettings.DropdownIconContainerWidth or 0)) / Floored
+	local YOffset = (Count1 - Floored) * 40
+	ReactModule.useEffect(function() --[[ Line: 153 ]]
+		-- upvalues: FFlagExpChatTabShortcutNav (upval), v1 (upval), p1 (copy)
+		if not FFlagExpChatTabShortcutNav then return end
+		v1.setTabBarVisible(p1.visible)
+		
+		return function() --[[ Line: 158 ]]
+			-- upvalues: v1 (upval)
+			v1.setTabBarVisible(false)
 		end
 	end, { p1.visible })
-	reactModule.useEffect(function()
-		-- upvalues: fFlagExpChatTabShortcutNav (copy), var1 (copy), var22 (write)
-		if fFlagExpChatTabShortcutNav then
-			var1.setTabBarRoot(var22)
-			
-			return function()
-				-- upvalues: var1 (copy)
-				var1.setTabBarRoot(nil)
-			end
+	ReactModule.useEffect(function() --[[ Line: 163 ]]
+		-- upvalues: FFlagExpChatTabShortcutNav (upval), v1 (upval), v2 (ref)
+		if not FFlagExpChatTabShortcutNav then return end
+		v1.setTabBarRoot(v2)
+		
+		return function() --[[ Line: 168 ]]
+			-- upvalues: v1 (upval)
+			v1.setTabBarRoot(nil)
 		end
-	end, { var22 })
-	reactModule.useEffect(function()
-		-- upvalues: fFlagExpChatTabShortcutNav (copy), var1 (copy), userInputService (copy), createEffect (copy), p1 (ref), var9 (ref), var33 (ref), expChatTabNavFocusPollDelayFrames (copy), runService (copy), expChatTabNavFocusPollFrames (copy), var28 (write)
-		if fFlagExpChatTabShortcutNav then
-			local var36 = false
+	end, { v2 })
+	
+	local function _(): boolean --[[ Line: 173 | Named "somethingElseHoldsFocus" ]]
+		-- upvalues: v1 (upval), UserInputService (upval)
+		return v1.getIsChatFocused() and not v1.getIsTabBarFocused() or UserInputService:GetFocusedTextBox() ~= nil
+	end
+	
+	ReactModule.useEffect(function() --[[ Line: 182 ]]
+		-- upvalues: FFlagExpChatTabShortcutNav (upval), CreateEffectFunction (upval), v1 (upval), p1 (copy), FFlagExpChatUseChannelTabsStore (upval), UseStateResult2_1 (copy), Floored (copy), ExpChatTabNavFocusPollDelayFrames (upval), RunService (upval), ExpChatTabNavFocusPollFrames (upval), UserInputService (upval), Callback (ref)
+		if not FFlagExpChatTabShortcutNav then return end
+		local Flag = false
+		local Effect = CreateEffectFunction(function(p2) --[[ Line: 188 ]]
+			-- upvalues: v1 (upval), p1 (upval), FFlagExpChatUseChannelTabsStore (upval), UseStateResult2_1 (upval), Floored (upval), Flag (ref), ExpChatTabNavFocusPollDelayFrames (upval), RunService (upval), ExpChatTabNavFocusPollFrames (upval), UserInputService (upval), Callback (upval)
+			local TabNavFocusRequestTime = v1.getTabNavFocusRequestTime(p2)
+			local TabNavFocusTabName = v1.getTabNavFocusTabName(p2)
 			
-			local function _()
-				-- upvalues: var1 (copy), userInputService (copy)
-				return var1.getIsChatFocused() and not var1.getIsTabBarFocused() or userInputService:GetFocusedTextBox() ~= nil
-			end
+			if TabNavFocusRequestTime == nil then return end
+			local AllChannelTab = if TabNavFocusTabName then p1.allChannelTabs[TabNavFocusTabName] else nil
 			
-			local var37 = createEffect(function(p2)
-				-- upvalues: var1 (copy), p1 (copy), var9 (copy), var33 (copy), var36 (write), expChatTabNavFocusPollDelayFrames (copy), runService (copy), expChatTabNavFocusPollFrames (copy), userInputService (copy), var28 (copy)
-				local tabNavFocusRequestTime = var1.getTabNavFocusRequestTime(p2)
-				local tabNavFocusTabName = var1.getTabNavFocusTabName(p2)
+			if AllChannelTab == nil then
+				v1.clearTabNavFocusRequest()
 				
-				if tabNavFocusRequestTime == nil then return end
-				local var38 = if tabNavFocusTabName then p1.allChannelTabs[tabNavFocusTabName] else nil
+				return
+			else
+				UseStateResult2_1(Floored < (if FFlagExpChatUseChannelTabsStore then AllChannelTab.tabIndex else AllChannelTab.TabIndex))
 				
-				if var38 == nil then
-					var1.clearTabNavFocusRequest()
-					
-					return
-				end
-				var9(var33 < var38.TabIndex)
-				
-				local function _()
-					-- upvalues: var36 (copy), var1 (copy), tabNavFocusRequestTime (ref)
-					return var36 or var1.getTabNavFocusRequestTime(false) ~= tabNavFocusRequestTime
+				local function _() --[[ Line: 211 | Named "superseded" ]]
+					-- upvalues: Flag (upval), v1 (upval), TabNavFocusRequestTime (copy)
+					return Flag or v1.getTabNavFocusRequestTime(false) ~= TabNavFocusRequestTime
 				end
 				
-				task.spawn(function()
-					-- upvalues: expChatTabNavFocusPollDelayFrames (copy), runService (copy), var36 (copy), var1 (copy), tabNavFocusRequestTime (ref), expChatTabNavFocusPollFrames (copy), userInputService (copy), var28 (copy), tabNavFocusTabName (ref)
-					for _ = 1, expChatTabNavFocusPollDelayFrames do
-						runService.Heartbeat:Wait()
+				task.spawn(function() --[[ Line: 219 ]]
+					-- upvalues: ExpChatTabNavFocusPollDelayFrames (upval), RunService (upval), Flag (upval), v1 (upval), TabNavFocusRequestTime (copy), ExpChatTabNavFocusPollFrames (upval), UserInputService (upval), Callback (upval), TabNavFocusTabName (copy)
+					for _ = 1, ExpChatTabNavFocusPollDelayFrames do
+						RunService.Heartbeat:Wait()
 						
-						if not var36 and var1.getTabNavFocusRequestTime(false) == tabNavFocusRequestTime then
-							continue
-						end
-						return
+						if Flag or v1.getTabNavFocusRequestTime(false) ~= TabNavFocusRequestTime then return end
 					end
-					for i = 1, expChatTabNavFocusPollFrames do
+					for i = 1, ExpChatTabNavFocusPollFrames do
 						if i > 1 then
-							runService.Heartbeat:Wait()
+							RunService.Heartbeat:Wait()
 						end
-						if not var36 and var1.getTabNavFocusRequestTime(false) == tabNavFocusRequestTime then
-							if var1.getIsChatFocused() and not var1.getIsTabBarFocused() or userInputService:GetFocusedTextBox() ~= nil then
-								continue
-							end
-							var28(tabNavFocusTabName)
-							var1.clearTabNavFocusRequest()
+						if Flag or v1.getTabNavFocusRequestTime(false) ~= TabNavFocusRequestTime then return end
+						if (not v1.getIsChatFocused() or v1.getIsTabBarFocused()) and UserInputService:GetFocusedTextBox() == nil then
+							Callback(TabNavFocusTabName)
+							v1.clearTabNavFocusRequest()
 							
 							return
 						end
-						return
 					end
-					if not var36 and var1.getTabNavFocusRequestTime(false) == tabNavFocusRequestTime then
-						var1.clearTabNavFocusRequest()
+					if not Flag and v1.getTabNavFocusRequestTime(false) == TabNavFocusRequestTime then
+						v1.clearTabNavFocusRequest()
 					end
 				end)
-			end)
-			
-			return function()
-				-- upvalues: var36 (write), var37 (ref)
-				var36 = true
-				var37()
 			end
-		end
-	end, { var33, p1.allChannelTabs })
-	reactModule.useEffect(function()
-		-- upvalues: fFlagExpChatTabShortcutNav (copy), var27 (write), var26 (ref), var19 (ref), var28 (write), p1 (ref)
-		if not fFlagExpChatTabShortcutNav or var27 == nil then return end
-		local var38 = var26.current[var27]
+		end)
 		
-		if var38 then
-			var19(var38)
-			var28(nil)
+		return function() --[[ Line: 244 ]]
+			-- upvalues: Flag (ref), Effect (copy)
+			Flag = true
+			Effect()
+		end
+	end, { Floored, p1.allChannelTabs })
+	ReactModule.useEffect(function() --[[ Line: 253 ]]
+		-- upvalues: FFlagExpChatTabShortcutNav (upval), v4 (ref), v1 (upval), UserInputService (upval), Callback (ref), UseRefResult1 (copy), UseFocusGuiObjectResult (copy), p1 (copy)
+		if not FFlagExpChatTabShortcutNav or v4 == nil then return end
+		if v1.getIsChatFocused() and not v1.getIsTabBarFocused() or UserInputService:GetFocusedTextBox() ~= nil then
+			Callback(nil)
 			
 			return
-		elseif p1.allChannelTabs[var27] == nil then
-			var28(nil)
 		end
-	end, { var27, var8, p1.allChannelTabs, var19 })
-	local var38 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref), var33 (ref)
-		for i, v in pairs(p1.allChannelTabs) do
-			if var33 < v.TabIndex and v.HasUnreadMessages then
+		local CurrentEntry = UseRefResult1.current[v4]
+		
+		if CurrentEntry then
+			UseFocusGuiObjectResult(CurrentEntry)
+			Callback(nil)
+			
+			return
+		end
+		if p1.allChannelTabs[v4] == nil then
+			Callback(nil)
+		end
+	end, {
+		v4,
+		UseStateResult1,
+		p1.allChannelTabs,
+		UseFocusGuiObjectResult
+	})
+	local UseMemoResult = ReactModule.useMemo(function(): boolean --[[ Line: 274 ]]
+		-- upvalues: p1 (copy), FFlagExpChatUseChannelTabsStore (upval), Floored (copy)
+		for _, allChannelTab in pairs(p1.allChannelTabs) do
+			if Floored < (if FFlagExpChatUseChannelTabsStore then allChannelTab.tabIndex else allChannelTab.TabIndex) and allChannelTab.HasUnreadMessages then
 				return true
 			end
 		end
 		return false
-	end, if fFlagExpChatEnableFriendsTab then { var33, p1.allChannelTabs } else nil)
-	local t = {
-		["$layout"] = reactModule.createElement("UIListLayout", {
+	end, if FFlagExpChatEnableFriendsTab then { Floored, p1.allChannelTabs } else nil)
+	local config = {
+		["$layout"] = ReactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			FillDirection = Enum.FillDirection.Horizontal
 		})
 	}
-	local t_1 = {
-		["$layout"] = reactModule.createElement("UIListLayout", {
+	local config1 = {
+		["$layout"] = ReactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			FillDirection = Enum.FillDirection.Vertical
 		})
 	}
 	
-	for i_1, v in pairs(p1.allChannelTabs) do
-		local var39
-		local var40 = v.TabIndex <= var33
-		local var41 = p1.allTextChannels[i_1]
-		local type = v.Type
-		local createElement = reactModule.createElement
-		local t_2 = {
+	for ChannelName, allChannelTab in pairs(p1.allChannelTabs) do
+		local TabIndex = if FFlagExpChatUseChannelTabsStore then allChannelTab.tabIndex else allChannelTab.TabIndex
+		local IsTabIndexBelow = TabIndex <= Floored
+		local AllTextChannel = p1.allTextChannels[ChannelName]
+		local Type = if FFlagExpChatUseChannelTabsStore then allChannelTab.type else allChannelTab.Type
+		local Element = ReactModule.createElement(ChannelTabModule, {
 			channelTabsSettings = p1.channelTabsSettings,
-			channelName = i_1,
-			textChannel = var41,
-			tabType = type,
-			hasUnreadMessages = v.HasUnreadMessages
-		}
-		
-		if v.TabIndex >= var33 then
-			var39 = var32 and v.TabIndex < var4
-		end
-		t_2.isDividerVisible = var39
-		t_2.isTabCollapsed = not var40
-		t_2.isTabSelected = p1.selectedTabName and p1.selectedTabName == i_1
-		t_2.tabIndex = if fFlagExpChatEnableTabsImpressionAnalyticsModule then v.TabIndex else nil
-		t_2.isTabVisibleToUser = if fFlagExpChatEnableTabsImpressionAnalyticsModule then var40 or var8 else nil
-		t_2.isLayoutReady = if fFlagExpChatEnableTabsImpressionAnalyticsModule then var13 else nil
-		t_2.tabRef = if fFlagExpChatTabShortcutNav then function(p2)
-			-- upvalues: var26 (ref), i_1 (ref)
-			var26.current[i_1] = p2
-		end else nil
-		
-		function t_2.onTabSelected()
-			-- upvalues: expChatPerfTracker (copy), i_1 (ref), fFlagExpChatPerfTrackerTabName (copy), var40 (ref), var17 (ref), var18 (ref), var19 (ref), fFlagExpChatLogTabClickedModule (copy), analytics (copy), type (ref), v (ref), p1 (ref), var2 (copy), var41 (ref), var9 (ref)
-			expChatPerfTracker.cancelAll()
-			expChatPerfTracker.start(expChatPerfTracker.Events.ChatWindowTabSwitchTTI, { tabId = i_1 }, if fFlagExpChatPerfTrackerTabName then { tabName = i_1 } else nil)
-			
-			if not var40 and var17 and var18.current then
-				var19(var18.current)
-			end
-			if fFlagExpChatLogTabClickedModule then
-				analytics:TelemetryLogEvent(analytics.ExpChatTabClickedConfig, {
-					name = i_1,
-					type = type or "Unknown",
-					index = v.TabIndex,
-					in_overflow = not var40,
-					badge_count = if v.HasUnreadMessages then 1 else 0,
+			channelName = ChannelName,
+			textChannel = AllTextChannel,
+			tabType = Type,
+			hasUnreadMessages = allChannelTab.HasUnreadMessages,
+			isDividerVisible = if TabIndex < Floored then TabIndex < Count1 else IsUseSignalStateResultBelow and TabIndex < Count1,
+			isTabCollapsed = not IsTabIndexBelow,
+			isTabSelected = p1.selectedTabName and p1.selectedTabName == ChannelName,
+			tabIndex = TabIndex,
+			isTabVisibleToUser = IsTabIndexBelow or UseStateResult1,
+			isLayoutReady = UseStateResult4,
+			tabRef = if FFlagExpChatTabShortcutNav then function(p3) --[[ Line: 317 ]]
+				-- upvalues: UseRefResult1 (copy), ChannelName (copy)
+				UseRefResult1.current[ChannelName] = p3
+			end else nil,
+			onTabSelected = function() --[[ Line: 321 ]]
+				-- upvalues: ExpChatPerfTracker (upval), ChannelName (copy), FFlagExpChatPerfTrackerTabName (upval), IsTabIndexBelow (copy), UseSignalStateResult1 (copy), UseRefResult (copy), UseFocusGuiObjectResult (copy), Analytics (upval), Type (copy), TabIndex (copy), allChannelTab (copy), p1 (copy), JoinResult (upval), AllTextChannel (copy), UseStateResult2_1 (copy)
+				ExpChatPerfTracker.cancelAll()
+				ExpChatPerfTracker.start(ExpChatPerfTracker.Events.ChatWindowTabSwitchTTI, { tabId = ChannelName }, if FFlagExpChatPerfTrackerTabName then { tabName = ChannelName } else nil)
+				
+				if not IsTabIndexBelow and UseSignalStateResult1 and UseRefResult.current then
+					UseFocusGuiObjectResult(UseRefResult.current)
+				end
+				Analytics:TelemetryLogEvent(Analytics.ExpChatTabClickedConfig, {
+					name = ChannelName,
+					type = Type or "Unknown",
+					index = TabIndex,
+					in_overflow = not IsTabIndexBelow,
+					badge_count = if allChannelTab.HasUnreadMessages then 1 else 0,
 					previous_tab_name = p1.selectedTabName
-				}, var2)
+				}, JoinResult)
+				p1.onTabSelected(AllTextChannel, not IsTabIndexBelow, ChannelName, Type)
+				UseStateResult2_1(false)
+			end,
+			setTransparency = function(p3) --[[ Line: 341 ]]
+				-- upvalues: setTransparency (upval), p1 (copy)
+				return setTransparency(p3, p1.transparencyValue)
 			end
-			p1.onTabSelected(var41, not var40, i_1, type)
-			var9(false)
-		end
+		})
 		
-		function t_2.setTransparency(value)
-			-- upvalues: setTransparency (copy), p1 (ref)
-			return setTransparency(value, p1.transparencyValue)
-		end
-		
-		createElement = createElement(channelTabModule, t_2)
-		
-		if var40 then
-			t[v.TabIndex] = reactModule.createElement("Frame", {
+		if IsTabIndexBelow then
+			config[TabIndex] = ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
-				Size = UDim2.new(0, var34, 1, 0),
-				LayoutOrder = v.TabIndex
-			}, { ChannelTab = createElement })
+				Size = UDim2.new(0, XOffset, 1, 0),
+				LayoutOrder = TabIndex
+			}, { ChannelTab = Element })
 		else
-			local var42 = v.TabIndex - var33
-			t_1[var42] = reactModule.createElement("Frame", {
+			local TabIndexDelta = TabIndex - Floored
+			config1[TabIndexDelta] = ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				Size = UDim2.new(1, 0, 0, 40),
-				LayoutOrder = var42
-			}, { ChannelTab = createElement })
+				LayoutOrder = TabIndexDelta
+			}, { ChannelTab = Element })
 		end
 	end
-	local channelTabsConfiguration = textChatService:FindFirstChildOfClass("ChannelTabsConfiguration")
-	local channelTabsSettings = p1.channelTabsSettings
-	local backgroundTransparency = useInterpolatedClientSettingsModule(channelTabsSettings).BackgroundTransparency
-	local backgroundColor3 = useInterpolatedClientSettingsModule(channelTabsSettings).BackgroundColor3
-	local createElement = reactModule.createElement
-	local var43 = "Frame"
-	local t_2 = {
-		Size = UDim2.new(1, 0, 0, configModule.ChannelTabsSettings.HorizontalBarHeight),
+	local ChannelTabsConfiguration = TextChatService:FindFirstChildOfClass("ChannelTabsConfiguration")
+	local ChannelTabsSettings = p1.channelTabsSettings
+	local BackgroundTransparency = UseInterpolatedClientSettingsModule(ChannelTabsSettings).BackgroundTransparency
+	local BackgroundColor3 = UseInterpolatedClientSettingsModule(ChannelTabsSettings).BackgroundColor3
+	local CreateElementFunction1 = ReactModule.createElement
+	local v5 = "Frame"
+	local config2 = {
+		Size = UDim2.new(1, 0, 0, ConfigModule.ChannelTabsSettings.HorizontalBarHeight),
 		BackgroundTransparency = 1,
 		Visible = p1.visible,
 		BorderSizePixel = 0,
 		ZIndex = 3,
-		ref = if fFlagExpChatTabShortcutNav then var23 else nil,
-		[reactModule.Event.MouseEnter] = p1.onHovered,
-		[reactModule.Event.MouseLeave] = p1.onUnhovered,
-		[reactModule.Change.AbsoluteSize] = function(p2)
-			-- upvalues: var12 (ref), fFlagExpChatEnableTabsImpressionAnalyticsModule (copy), var14 (write), channelTabsConfiguration (ref)
-			var12(p2.AbsoluteSize.X)
+		ref = if FFlagExpChatTabShortcutNav then v3 else nil,
+		[ReactModule.Event.MouseEnter] = p1.onHovered,
+		[ReactModule.Event.MouseLeave] = p1.onUnhovered,
+		[ReactModule.Change.AbsoluteSize] = function(Frame: Frame) --[[ Line: 380 ]]
+			-- upvalues: UseStateResult2_2 (copy), UseStateResult2_3 (ref), ChannelTabsConfiguration (copy)
+			UseStateResult2_2(Frame.AbsoluteSize.X)
+			UseStateResult2_3(true)
 			
-			if fFlagExpChatEnableTabsImpressionAnalyticsModule then
-				var14(true)
-			end
-			if channelTabsConfiguration then
-				channelTabsConfiguration:SetAbsoluteSize(p2.AbsoluteSize)
+			if ChannelTabsConfiguration then
+				ChannelTabsConfiguration:SetAbsoluteSize(Frame.AbsoluteSize)
 			end
 		end,
-		[reactModule.Change.AbsolutePosition] = function(p2)
-			-- upvalues: channelTabsConfiguration (ref)
-			if channelTabsConfiguration then
-				channelTabsConfiguration:SetAbsolutePosition(p2.AbsolutePosition)
+		[ReactModule.Change.AbsolutePosition] = function(Frame) --[[ Line: 387 ]]
+			-- upvalues: ChannelTabsConfiguration (copy)
+			if ChannelTabsConfiguration then
+				ChannelTabsConfiguration:SetAbsolutePosition(Frame.AbsolutePosition)
 			end
 		end
 	}
-	local t_3 = {}
-	local createElement_1 = reactModule.createElement
-	local var44 = "Frame"
-	local t_4 = {
-		BackgroundTransparency = 1,
-		BorderSizePixel = 0,
-		Size = UDim2.fromScale(1, 1)
-	}
-	local t_5 = {
-		ContentContainer = reactModule.createElement("Frame", {
+	local BorderTransparency = ConfigModule.ChannelTabsSettings.BorderTransparency
+	local config3 = {
+		HorizontalBar = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
-			ClipsDescendants = true,
 			Size = UDim2.fromScale(1, 1)
-		}, t),
-		TopCorner = reactModule.createElement("ImageLabel", {
-			BackgroundTransparency = 1,
-			Image = "rbxasset://textures/ui/TopRoundedRect8px.png",
-			BorderSizePixel = 0,
-			Selectable = true,
-			ImageColor3 = backgroundColor3,
-			ImageTransparency = p1.transparencyValue:map(function(p2)
-				-- upvalues: backgroundTransparency (ref)
-				return if backgroundTransparency == nil then 1 else backgroundTransparency + p2 * (1 - backgroundTransparency)
-			end),
-			ScaleType = Enum.ScaleType.Slice,
-			Size = UDim2.new(1, 0, 0, 8),
-			SliceCenter = Rect.new(8, 8, 24, 32),
-			SelectionImageObject = var20,
-			ref = p1.topBorderRef
+		}, {
+			ContentContainer = ReactModule.createElement("Frame", {
+				BackgroundTransparency = 1,
+				BorderSizePixel = 0,
+				ClipsDescendants = true,
+				Size = UDim2.fromScale(1, 1)
+			}, config),
+			TopCorner = ReactModule.createElement("ImageLabel", {
+				BackgroundTransparency = 1,
+				Image = "rbxasset://textures/ui/TopRoundedRect8px.png",
+				BorderSizePixel = 0,
+				Selectable = true,
+				ImageColor3 = BackgroundColor3,
+				ImageTransparency = p1.transparencyValue:map(function(p3): number --[[ Line: 99 ]]
+					-- upvalues: BackgroundTransparency (copy)
+					return if BackgroundTransparency == nil then 1 else BackgroundTransparency + p3 * (1 - BackgroundTransparency)
+				end),
+				ScaleType = Enum.ScaleType.Slice,
+				Size = UDim2.new(1, 0, 0, 8),
+				SliceCenter = Rect.new(8, 8, 24, 32),
+				SelectionImageObject = UseSelectionCursorResult,
+				ref = p1.topBorderRef
+			}),
+			BottomBorder = ReactModule.createElement("Frame", {
+				BorderSizePixel = 0,
+				Size = UDim2.new(1, 0, 0, 1),
+				Position = UDim2.new(0, 0, 1, -1),
+				BackgroundColor3 = ConfigModule.ChannelTabsSettings.BorderColor3,
+				BackgroundTransparency = p1.transparencyValue:map(function(p3): number --[[ Line: 99 ]]
+					-- upvalues: BorderTransparency (copy)
+					return if BorderTransparency == nil then 1 else BorderTransparency + p3 * (1 - BorderTransparency)
+				end)
+			}),
+			Background = ReactModule.createElement("Frame", {
+				BorderSizePixel = 0,
+				Size = UDim2.new(1, 0, 0, ConfigModule.ChannelTabsSettings.HorizontalBarHeight - 8 - 1),
+				Position = UDim2.new(0, 0, 0, 8),
+				BackgroundColor3 = BackgroundColor3,
+				BackgroundTransparency = p1.transparencyValue:map(function(p3): number --[[ Line: 99 ]]
+					-- upvalues: BackgroundTransparency (copy)
+					return if BackgroundTransparency == nil then 1 else BackgroundTransparency + p3 * (1 - BackgroundTransparency)
+				end)
+			})
 		})
 	}
-	local createElement_2 = reactModule.createElement
-	local var45 = "Frame"
-	local t_6 = {
-		BorderSizePixel = 0,
-		Size = UDim2.new(1, 0, 0, 1),
-		Position = UDim2.new(0, 0, 1, -1),
-		BackgroundColor3 = configModule.ChannelTabsSettings.BorderColor3
-	}
-	local borderTransparency = configModule.ChannelTabsSettings.BorderTransparency
-	t_6.BackgroundTransparency = p1.transparencyValue:map(function(p2)
-		-- upvalues: borderTransparency (ref)
-		return if borderTransparency == nil then 1 else borderTransparency + p2 * (1 - borderTransparency)
-	end)
-	t_5.BottomBorder = createElement_2(var45, t_6)
-	t_5.Background = reactModule.createElement("Frame", {
-		BorderSizePixel = 0,
-		Size = UDim2.new(1, 0, 0, configModule.ChannelTabsSettings.HorizontalBarHeight - 8 - 1),
-		Position = UDim2.new(0, 0, 0, 8),
-		BackgroundColor3 = backgroundColor3,
-		BackgroundTransparency = p1.transparencyValue:map(function(p2)
-			-- upvalues: backgroundTransparency (ref)
-			return if backgroundTransparency == nil then 1 else backgroundTransparency + p2 * (1 - backgroundTransparency)
-		end)
-	})
-	t_3.HorizontalBar = createElement_1(var44, t_4, t_5)
-	local var46 = var32
+	local DropdownButton = IsUseSignalStateResultBelow
 	
-	if var46 then
-		var46 = reactModule.createElement
-		local var47 = "Frame"
-		local t_7 = {
+	if DropdownButton then
+		local CreateElementFunction = ReactModule.createElement
+		local v6 = "Frame"
+		local config4 = {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			AnchorPoint = Vector2.new(1, 0),
 			Position = UDim2.new(1, 0, 0, 8),
-			Size = UDim2.new(0, configModule.ChannelTabsSettings.DropdownIconContainerWidth, 1, -9),
+			Size = UDim2.new(0, ConfigModule.ChannelTabsSettings.DropdownIconContainerWidth, 1, -9),
 			BackgroundColor3 = Color3.fromRGB(255, 0, 0)
 		}
-		local t_8 = {}
-		local createElement_3 = reactModule.createElement
-		local var48 = "TextButton"
-		local t_9 = {
-			AnchorPoint = Vector2.new(1, 0.5),
-			Position = UDim2.new(1, -configModule.ChannelTabsSettings.DropdownIconPadding / 2, 0.5, -4),
-			Size = UDim2.new(0, 27, 0, 27)
+		local v7: number = if UseStateResult then 0.3 else 1
+		local v8 = 0
+		local config41 = {
+			TextButton = ReactModule.createElement("TextButton", {
+				AnchorPoint = Vector2.new(1, 0.5),
+				Position = UDim2.new(1, -ConfigModule.ChannelTabsSettings.DropdownIconPadding / 2, 0.5, -4),
+				Size = UDim2.new(0, 27, 0, 27),
+				BackgroundTransparency = p1.transparencyValue:map(function(p3): number --[[ Line: 99 ]]
+					-- upvalues: v7 (copy)
+					return if v7 == nil then 1 else v7 + p3 * (1 - v7)
+				end),
+				BackgroundColor3 = _Color3_1,
+				Text = "",
+				BorderSizePixel = 0,
+				Selectable = true,
+				SelectionImageObject = UseSelectionCursorResult1,
+				ref = UseRefResult,
+				[ReactModule.Event.MouseEnter] = function() --[[ Line: 464 ]]
+					-- upvalues: UseStateResult2 (copy)
+					UseStateResult2(true)
+				end,
+				[ReactModule.Event.MouseLeave] = function() --[[ Line: 467 ]]
+					-- upvalues: UseStateResult2 (copy)
+					UseStateResult2(false)
+				end,
+				[ReactModule.Event.Activated] = function() --[[ Line: 470 ]]
+					-- upvalues: UseStateResult2_1 (copy), UseStateResult1 (copy)
+					UseStateResult2_1(not UseStateResult1)
+				end
+			}, {
+				UICorner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 27) }),
+				DropdownIconImage = ReactModule.createElement(ImageSetLabel, {
+					BackgroundTransparency = 1,
+					BorderSizePixel = 0,
+					AnchorPoint = Vector2.new(0.5, 0.5),
+					Position = UDim2.fromScale(0.5, 0.5),
+					Size = UDim2.fromScale(0.6, 0.6),
+					Image = IconsNavigationCycleDown,
+					ImageColor3 = _Color3,
+					ImageTransparency = p1.transparencyValue:map(function(p3): number --[[ Line: 99 ]]
+						-- upvalues: v8 (copy)
+						return if v8 == nil then 1 else v8 + p3 * (1 - v8)
+					end),
+					ScaleType = Enum.ScaleType.Stretch
+				})
+			})
 		}
-		local var49 = if var6 then 0.3 else 1
-		t_9.BackgroundTransparency = p1.transparencyValue:map(function(p2)
-			-- upvalues: var49 (ref)
-			return if var49 == nil then 1 else var49 + p2 * (1 - var49)
-		end)
-		t_9.BackgroundColor3 = color_1
-		t_9.Text = ""
-		t_9.BorderSizePixel = 0
-		t_9.Selectable = true
-		t_9.SelectionImageObject = var21
-		t_9.ref = var18
+		local Frame = UseMemoResult
 		
-		t_9[reactModule.Event.MouseEnter] = function()
-			-- upvalues: var7 (ref)
-			var7(true)
-		end
-		
-		t_9[reactModule.Event.MouseLeave] = function()
-			-- upvalues: var7 (ref)
-			var7(false)
-		end
-		
-		t_9[reactModule.Event.Activated] = function()
-			-- upvalues: var9 (ref), var8 (ref)
-			var9(not var8)
-		end
-		
-		local t_10 = {
-			UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 27) })
-		}
-		local createElement_4 = reactModule.createElement
-		local var50 = imageSetLabel
-		local t_11 = {
-			BackgroundTransparency = 1,
-			BorderSizePixel = 0,
-			AnchorPoint = Vector2.new(0.5, 0.5),
-			Position = UDim2.fromScale(0.5, 0.5),
-			Size = UDim2.fromScale(0.6, 0.6),
-			Image = cycleDown,
-			ImageColor3 = color
-		}
-		local var51 = 0
-		t_11.ImageTransparency = p1.transparencyValue:map(function(p2)
-			-- upvalues: var51 (ref)
-			return if var51 == nil then 1 else var51 + p2 * (1 - var51)
-		end)
-		t_11.ScaleType = Enum.ScaleType.Stretch
-		t_10.DropdownIconImage = createElement_4(var50, t_11)
-		t_8.TextButton = createElement_3(var48, t_9, t_10)
-		local var52 = var38
-		
-		if var52 then
-			var52 = reactModule.createElement
-			local var53 = "Frame"
-			local t_12 = {
+		if Frame then
+			local v9 = 0
+			Frame = ReactModule.createElement("Frame", {
 				BorderSizePixel = 0,
 				Size = UDim2.new(0, 8, 0, 8),
 				Position = UDim2.new(0, 18, 0.5, -4),
 				AnchorPoint = Vector2.new(1, 0.5),
-				BackgroundColor3 = configModule.ChannelTabsSettings.UnreadDotColor3
-			}
-			local var54 = 0
-			t_12.BackgroundTransparency = p1.transparencyValue:map(function(p2)
-				-- upvalues: var54 (ref)
-				return if var54 == nil then 1 else var54 + p2 * (1 - var54)
-			end)
-			var52 = var52(var53, t_12, {
-				UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) })
+				BackgroundColor3 = ConfigModule.ChannelTabsSettings.UnreadDotColor3,
+				BackgroundTransparency = p1.transparencyValue:map(function(p3): number --[[ Line: 99 ]]
+					-- upvalues: v9 (copy)
+					return if v9 == nil then 1 else v9 + p3 * (1 - v9)
+				end)
+			}, {
+				UICorner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) })
 			})
 		end
-		t_8.UnreadDot = var52
-		var46 = var46(var47, t_7, t_8)
+		config41.UnreadDot = Frame
+		DropdownButton = CreateElementFunction(v6, config4, config41)
 	end
-	t_3.DropdownButton = var46
-	local var55 = var32
+	config3.DropdownButton = DropdownButton
+	local Frame1 = IsUseSignalStateResultBelow
 	
-	if var55 then
-		var55 = reactModule.createElement
-		local var56 = "Frame"
-		local t_7 = {
+	if Frame1 then
+		local BorderTransparency1 = ConfigModule.ChannelTabsSettings.BorderTransparency
+		local v10 = 0
+		local MapResult = p1.transparencyValue:map(function(p3): number --[[ Line: 99 ]]
+			-- upvalues: v10 (copy)
+			return if v10 == nil then 1 else v10 + p3 * (1 - v10)
+		end)
+		local v11 = 0
+		Frame1 = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			AnchorPoint = Vector2.new(1, 0),
-			Position = UDim2.new(1, -1, 0, configModule.ChannelTabsSettings.HorizontalBarHeight + 1),
-			Size = UDim2.new(0, 150, 0, var35),
-			Visible = var8
-		}
-		local t_8 = {
-			UISizeConstraint = reactModule.createElement("UISizeConstraint", { MaxSize = Vector2.new(150, var5) })
-		}
-		local createElement_3 = reactModule.createElement
-		local var57 = "UIStroke"
-		local t_9 = {
-			ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
-			Color = configModule.ChannelTabsSettings.BorderColor3
-		}
-		local borderTransparency_1 = configModule.ChannelTabsSettings.BorderTransparency
-		t_9.Transparency = p1.transparencyValue:map(function(p2)
-			-- upvalues: borderTransparency_1 (ref)
-			return if borderTransparency_1 == nil then 1 else borderTransparency_1 + p2 * (1 - borderTransparency_1)
-		end)
-		t_8.Border = createElement_3(var57, t_9)
-		local createElement_4 = reactModule.createElement
-		local var58 = "ScrollingFrame"
-		local t_10 = {
-			ScrollBarThickness = 4,
-			ClipsDescendants = true,
-			Selectable = false,
-			BorderSizePixel = 0,
-			Size = UDim2.fromScale(1, 1),
-			CanvasSize = UDim2.new(0, 150, 0, var35)
-		}
-		local var59 = 0
-		t_10.BackgroundTransparency = p1.transparencyValue:map(function(p2)
-			-- upvalues: var59 (ref)
-			return if var59 == nil then 1 else var59 + p2 * (1 - var59)
-		end)
-		local var60 = 0
-		t_10.ScrollBarImageTransparency = p1.transparencyValue:map(function(p2)
-			-- upvalues: var60 (ref)
-			return if var60 == nil then 1 else var60 + p2 * (1 - var60)
-		end)
-		t_10.ScrollingDirection = Enum.ScrollingDirection.Y
-		t_10.ElasticBehavior = Enum.ElasticBehavior.Always
-		t_8.ScrollView = createElement_4(var58, t_10, t_1)
-		var55 = var55(var56, t_7, t_8)
+			Position = UDim2.new(1, -1, 0, ConfigModule.ChannelTabsSettings.HorizontalBarHeight + 1),
+			Size = UDim2.new(0, 150, 0, YOffset),
+			Visible = UseStateResult1
+		}, {
+			UISizeConstraint = ReactModule.createElement("UISizeConstraint", { MaxSize = Vector2.new(150, ScaledScale) }),
+			Border = ReactModule.createElement("UIStroke", {
+				ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
+				Color = ConfigModule.ChannelTabsSettings.BorderColor3,
+				Transparency = p1.transparencyValue:map(function(p3): number --[[ Line: 99 ]]
+					-- upvalues: BorderTransparency1 (copy)
+					return if BorderTransparency1 == nil then 1 else BorderTransparency1 + p3 * (1 - BorderTransparency1)
+				end)
+			}),
+			ScrollView = ReactModule.createElement("ScrollingFrame", {
+				ScrollBarThickness = 4,
+				ClipsDescendants = true,
+				Selectable = false,
+				BorderSizePixel = 0,
+				Size = UDim2.fromScale(1, 1),
+				CanvasSize = UDim2.new(0, 150, 0, YOffset),
+				BackgroundTransparency = MapResult,
+				ScrollBarImageTransparency = p1.transparencyValue:map(function(p3): number --[[ Line: 99 ]]
+					-- upvalues: v11 (copy)
+					return if v11 == nil then 1 else v11 + p3 * (1 - v11)
+				end),
+				ScrollingDirection = Enum.ScrollingDirection.Y,
+				ElasticBehavior = Enum.ElasticBehavior.Always
+			}, config1)
+		})
 	end
-	t_3.DropdownMenu = var55
+	config3.DropdownMenu = Frame1
 	
-	return createElement(var43, t_2, t_3)
+	return CreateElementFunction1(v5, config2, config3)
 end

@@ -1,107 +1,109 @@
 ﻿local _ = require(script:FindFirstAncestor("InExperienceShop").Types)
 local _ = require(script.Parent.multiGetProductInfo)
-local shopItemMappingModule = require(script.Parent.shopItemMapping)
-local makeRequestKey = shopItemMappingModule.makeRequestKey
-local toShopItem = shopItemMappingModule.toShopItem
-local gamePass = Enum.InfoType.GamePass
+local ShopItemMappingModule = require(script.Parent.shopItemMapping)
+local MakeRequestKeyFunction = ShopItemMappingModule.makeRequestKey
+local ToShopItemFunction = ShopItemMappingModule.toShopItem
+local GamePass = Enum.InfoType.GamePass
 
 return {
-	appendBonusItemRequests = function(p1, p2)
-		-- upvalues: makeRequestKey (ref), gamePass (ref)
+	appendBonusItemRequests = function(List, List1) --[[ Line: 20 ]]
+		-- upvalues: MakeRequestKeyFunction (copy), GamePass (copy)
 		local t = {}
 		
-		for i, v in ipairs(p1) do
-			t[makeRequestKey(v.id, v.infoType)] = true
+		for _, value in ipairs(List) do
+			t[MakeRequestKeyFunction(value.id, value.infoType)] = true
 		end
-		for i, v_1 in ipairs(p2) do
-			local robuxPackages = v_1.robuxPackages
+		for _, value1 in ipairs(List1) do
+			local RobuxPackages = value1.robuxPackages
 			
-			if robuxPackages ~= nil then
-				for i_2, v_2 in robuxPackages do
-					local bonusItem = v_2.bonusItem
+			if RobuxPackages ~= nil then
+				for _, robuxPackage in RobuxPackages do
+					local BonusItem = robuxPackage.bonusItem
+					local NoBonusItem = BonusItem == nil or BonusItem.type ~= "GamePass"
+					local RequestKey = nil
 					
-					if bonusItem ~= nil and bonusItem.type == "GamePass" then
-						local var1 = makeRequestKey(bonusItem.id, gamePass)
-						
-						if not t[var1] then
-							t[var1] = true
-							table.insert(p1, { id = bonusItem.id, infoType = gamePass })
-						end
+					if not NoBonusItem then
+						RequestKey = MakeRequestKeyFunction(BonusItem.id, GamePass)
+						NoBonusItem = t[RequestKey]
+					end
+					if not NoBonusItem then
+						t[RequestKey] = true
+						table.insert(List, { id = BonusItem.id, infoType = GamePass })
 					end
 				end
 			end
 		end
-		return p1
+		return List
 	end,
-	mergeBonusItemDetailsIntoSections = function(p3, p4)
-		-- upvalues: makeRequestKey (ref), gamePass (ref), toShopItem (ref)
+	mergeBonusItemDetailsIntoSections = function(List, List1) --[[ Line: 57 ]]
+		-- upvalues: MakeRequestKeyFunction (copy), GamePass (copy), ToShopItemFunction (copy)
 		local t = {}
 		
-		for i, v in ipairs(p4) do
-			t[makeRequestKey(v.request.id, v.request.infoType)] = v
+		for _, value in ipairs(List1) do
+			t[MakeRequestKeyFunction(value.request.id, value.request.infoType)] = value
 		end
-		local list = table.create(#p3)
+		local Buffer = table.create(#List)
 		
-		for i_1, v_1 in ipairs(p3) do
-			local robuxPackages = v_1.robuxPackages
+		for i, value1 in ipairs(List) do
+			local RobuxPackages = value1.robuxPackages
 			
-			if robuxPackages == nil or #robuxPackages == 0 then
-				list[i_1] = v_1
+			if RobuxPackages == nil or #RobuxPackages == 0 then
+				Buffer[i] = value1
 				continue
 			end
-			local list_1 = nil
+			local RobuxPackages1 = nil
 			
-			for i_2, v_2 in ipairs(robuxPackages) do
-				local bonusItem = v_2.bonusItem
+			for i1, robuxPackage in ipairs(RobuxPackages) do
+				local BonusItem = robuxPackage.bonusItem
 				
-				if bonusItem ~= nil then
-					local id = t[makeRequestKey(bonusItem.id, gamePass)]
+				if BonusItem ~= nil then
+					local Entry = t[MakeRequestKeyFunction(BonusItem.id, GamePass)]
 					
-					if id ~= nil and id.ok then
-						if list_1 == nil then
-							list_1 = table.create(#robuxPackages)
+					if Entry ~= nil and Entry.ok then
+						if RobuxPackages1 == nil then
+							RobuxPackages1 = table.create(#RobuxPackages)
 							
-							for i_4 = 1, i_2 - 1 do
-								list_1[i_4] = robuxPackages[i_4]
+							for i2 = 1, i1 - 1 do
+								RobuxPackages1[i2] = RobuxPackages[i2]
 							end
 						end
-						list_1[i_2] = {
-							id = v_2.id,
-							robuxAmount = v_2.robuxAmount,
-							currencyAmountStr = v_2.currencyAmountStr,
-							robuxImage = v_2.robuxImage,
-							productId = v_2.productId,
-							mobileProductId = v_2.mobileProductId,
-							bonusItem = v_2.bonusItem,
-							bonusItemDetails = toShopItem(id.value, "GamePass", bonusItem.id),
-							isPrimaryRobuxPackage = v_2.isPrimaryRobuxPackage
+						RobuxPackages1[i1] = {
+							id = robuxPackage.id,
+							robuxAmount = robuxPackage.robuxAmount,
+							currencyAmountStr = robuxPackage.currencyAmountStr,
+							robuxImage = robuxPackage.robuxImage,
+							productId = robuxPackage.productId,
+							mobileProductId = robuxPackage.mobileProductId,
+							bonusItem = robuxPackage.bonusItem,
+							bonusItemDetails = ToShopItemFunction(Entry.value, "GamePass", BonusItem.id),
+							isPrimaryRobuxPackage = robuxPackage.isPrimaryRobuxPackage
 						}
-					elseif list_1 ~= nil then
-						list_1[i_2] = v_2
+					elseif RobuxPackages1 ~= nil then
+						RobuxPackages1[i1] = robuxPackage
 					end
-				elseif list_1 ~= nil then
-					list_1[i_2] = v_2
+				elseif RobuxPackages1 ~= nil then
+					RobuxPackages1[i1] = robuxPackage
 				end
 			end
-			if list_1 == nil then
-				list[i_1] = v_1
+			if RobuxPackages1 == nil then
+				Buffer[i] = value1
 			else
-				for i_3 = #list_1 + 1, #robuxPackages do
-					list_1[i_3] = robuxPackages[i_3]
+				for i3 = #RobuxPackages1 + 1, #RobuxPackages do
+					RobuxPackages1[i3] = RobuxPackages[i3]
 				end
-				list[i_1] = {
-					id = v_1.id,
-					name = v_1.name,
-					items = v_1.items,
-					categoryType = v_1.categoryType,
-					stableCategoryId = v_1.stableCategoryId,
-					categoryGroup = v_1.categoryGroup,
-					paymentSessionId = v_1.paymentSessionId,
-					bonusJwt = v_1.bonusJwt,
-					robuxPackages = list_1
+				Buffer[i] = {
+					id = value1.id,
+					name = value1.name,
+					items = value1.items,
+					categoryType = value1.categoryType,
+					stableCategoryId = value1.stableCategoryId,
+					categoryGroup = value1.categoryGroup,
+					paymentSessionId = value1.paymentSessionId,
+					bonusJwt = value1.bonusJwt,
+					robuxPackages = RobuxPackages1
 				}
 			end
 		end
-		return list
+		return Buffer
 	end
 }

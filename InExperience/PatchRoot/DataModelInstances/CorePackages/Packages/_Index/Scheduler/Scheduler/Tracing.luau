@@ -1,200 +1,200 @@
-﻿local parent = script.Parent.Parent
-local set = require(parent.LuauPolyfill).Set
-local t = {}
-local enableSchedulerTracing = require(parent.Shared).ReactFeatureFlags.enableSchedulerTracing
-local var1 = 0
-local var2 = 0
-local t_1 = nil
-local t_2 = nil
+﻿local Parent = script.Parent.Parent
+local Set = require(Parent.LuauPolyfill).Set
+local TracingModule = {}
+local EnableSchedulerTracing = require(Parent.Shared).ReactFeatureFlags.enableSchedulerTracing
+local Id = 0
+local Count = 0
+local v1 = nil
+local v2 = nil
 
-if enableSchedulerTracing then
-	t_1 = { current = set.new() }
-	t_2 = { current = nil }
+if EnableSchedulerTracing then
+	v1 = { current = Set.new() }
+	v2 = { current = nil }
 end
-t.__interactionsRef = t_1
-t.__subscriberRef = t_2
+TracingModule.__interactionsRef = v1
+TracingModule.__subscriberRef = v2
 
-function t.unstable_clear(p1)
-	-- upvalues: enableSchedulerTracing (ref), t_1 (write), set (ref)
-	if not enableSchedulerTracing then
-		return p1()
+function TracingModule.unstable_clear(Callback) --[[ Line: 92 ]]
+	-- upvalues: EnableSchedulerTracing (copy), v1 (ref), Set (copy)
+	if not EnableSchedulerTracing then
+		return Callback()
 	end
-	local current = t_1.current
-	t_1.current = set.new()
-	local ok, status = pcall(p1)
-	t_1.current = current
+	local Current = v1.current
+	v1.current = Set.new()
+	local Success, Result = pcall(Callback)
+	v1.current = Current
 	
-	if not ok then
-		error(status)
+	if not Success then
+		error(Result)
 	end
-	return status
+	return Result
 end
 
-function t.unstable_getCurrent()
-	-- upvalues: enableSchedulerTracing (ref), t_1 (write)
-	return if enableSchedulerTracing then t_1.current else nil
+function TracingModule.unstable_getCurrent() --[[ Line: 112 ]]
+	-- upvalues: EnableSchedulerTracing (copy), v1 (ref)
+	return if EnableSchedulerTracing then v1.current else nil
 end
 
-function t.unstable_getThreadID()
-	-- upvalues: var2 (write)
-	var2 += 1
+function TracingModule.unstable_getThreadID(): number --[[ Line: 120 ]]
+	-- upvalues: Count (ref)
+	Count += 1
 	
-	return var2
+	return Count
 end
 
-function t.unstable_trace(p1, p2, p3, p4)
-	-- upvalues: enableSchedulerTracing (ref), var1 (write), t_1 (write), set (ref), t_2 (write)
-	local var3 = if p4 ~= nil then 0 else p4
+function TracingModule.unstable_trace(Name, Timestamp, Callback, p1) --[[ Line: 125 ]]
+	-- upvalues: EnableSchedulerTracing (copy), Id (ref), v1 (ref), Set (copy), v2 (ref)
+	local v3 = if p1 == nil then 0 else p1
 	
-	if not enableSchedulerTracing then
-		return p3()
+	if not EnableSchedulerTracing then
+		return Callback()
 	end
-	local t = { __count = 1, id = var1, name = p1, timestamp = p2 }
-	var1 += 1
-	local current = t_1.current
-	local var4 = set.new(current)
-	var4:add(t)
-	t_1.current = var4
-	local current_1 = t_2.current
-	local var5 = nil
-	local ok, status = pcall(function()
-		-- upvalues: current_1 (ref), t (ref)
-		if current_1 ~= nil then
-			current_1.onInteractionTraced(t)
+	local config = { __count = 1, id = Id, name = Name, timestamp = Timestamp }
+	Id += 1
+	local Current = v1.current
+	local NewSet = Set.new(Current)
+	NewSet:add(config)
+	v1.current = NewSet
+	local Current1 = v2.current
+	local v4 = nil
+	local Success, Result = pcall(function() --[[ Line: 159 ]]
+		-- upvalues: Current1 (copy), config (copy)
+		if Current1 ~= nil then
+			Current1.onInteractionTraced(config)
 		end
 	end)
-	local ok_1, status_1 = pcall(function()
-		-- upvalues: current_1 (ref), var4 (ref), var3 (ref)
-		if current_1 ~= nil then
-			current_1.onWorkStarted(var4, var3)
+	local Success1, Result1 = pcall(function() --[[ Line: 166 ]]
+		-- upvalues: Current1 (copy), NewSet (copy), v3 (copy)
+		if Current1 ~= nil then
+			Current1.onWorkStarted(NewSet, v3)
 		end
 	end)
-	local ok_2, status_2 = pcall(function()
-		-- upvalues: var5 (write), p3 (ref)
-		var5 = p3()
+	local Success2, Result2 = pcall(function() --[[ Line: 174 ]]
+		-- upvalues: v4 (ref), Callback (copy)
+		v4 = Callback()
 	end)
-	t_1.current = current
-	local ok_3, status_3 = pcall(function()
-		-- upvalues: current_1 (ref), var4 (ref), var3 (ref)
-		if current_1 ~= nil then
-			current_1.onWorkStopped(var4, var3)
+	v1.current = Current
+	local Success3, Result3 = pcall(function() --[[ Line: 180 ]]
+		-- upvalues: Current1 (copy), NewSet (copy), v3 (copy)
+		if Current1 ~= nil then
+			Current1.onWorkStopped(NewSet, v3)
 		end
 	end)
-	t.__count -= 1
+	config.__count -= 1
 	
-	if current_1 ~= nil and t.__count == 0 then
-		current_1.onInteractionScheduledWorkCompleted(t)
+	if Current1 ~= nil and config.__count == 0 then
+		Current1.onInteractionScheduledWorkCompleted(config)
 	end
-	if not ok_3 then
-		error(status_3)
+	if not Success3 then
+		error(Result3)
 	end
-	if not ok_2 then
-		error(status_2)
+	if not Success2 then
+		error(Result2)
 	end
-	if not ok_1 then
-		error(status_1)
+	if not Success1 then
+		error(Result1)
 	end
-	if not ok then
-		error(status)
+	if not Success then
+		error(Result)
 	end
-	return var5
+	return v4
 end
 
-function t.unstable_wrap(p1, p2)
-	-- upvalues: enableSchedulerTracing (ref), t_1 (write), t_2 (write)
-	if p2 == nil then
-		p2 = 0
+function TracingModule.unstable_wrap(Callback, p1: number) --[[ Line: 213 ]]
+	-- upvalues: EnableSchedulerTracing (copy), v1 (ref), v2 (ref)
+	if p1 == nil then
+		p1 = 0
 	end
-	if not enableSchedulerTracing then
-		return p1
+	if not EnableSchedulerTracing then
+		return Callback
 	end
-	local current = t_1.current
-	local current_1 = t_2.current
+	local Current = v1.current
+	local Current1 = v2.current
 	
-	if current_1 ~= nil then
-		current_1.onWorkScheduled(current, p2)
+	if Current1 ~= nil then
+		Current1.onWorkScheduled(Current, p1)
 	end
-	for i, v in current do
-		v.__count += 1
+	for _, value in Current do
+		value.__count += 1
 	end
-	local var3 = false
+	local Flag = false
 	
-	local function _wrapped(_, ...)
-		-- upvalues: t_1 (copy), current (ref), current_1 (write), t_2 (copy), p2 (write), p1 (ref), var3 (write)
-		local current_2 = t_1.current
-		t_1.current = current
-		current_1 = t_2.current
-		local ok, status = pcall(function(...)
-			-- upvalues: current_1 (copy), current (copy), p2 (copy), p1 (copy), t_1 (copy), current_2 (ref)
-			local var4 = nil
-			local ok, status = pcall(function()
-				-- upvalues: current_1 (copy), current (copy), p2 (copy)
-				if current_1 ~= nil then
-					current_1.onWorkStarted(current, p2)
-				end
-			end)
-			local ok_1, status_1 = pcall(function(...)
-				-- upvalues: var4 (write), p1 (copy)
-				var4 = p1(...)
-			end, ...)
-			t_1.current = current_2
-			
-			if current_1 ~= nil then
-				current_1.onWorkStopped(current, p2)
-			end
-			if not ok_1 then
-				error(status_1)
-			end
-			if not ok then
-				error(status)
-			end
-			return var4
-		end, ...)
-		
-		if not var3 then
-			var3 = true
-			
-			for i, v in current do
-				v.__count -= 1
-				
-				if current_1 ~= nil and v.__count == 0 then
-					current_1.onInteractionScheduledWorkCompleted(v)
-				end
-			end
-		end
-		if not ok then
-			error(status)
-		end
-		return status
-	end
-	
-	local var4 = function()
-		-- upvalues: current_1 (write), t_2 (copy), current (ref), p2 (write)
-		current_1 = t_2.current
-		local ok, status = pcall(function()
-			-- upvalues: current_1 (copy), current (copy), p2 (copy)
-			if current_1 ~= nil then
-				current_1.onWorkCanceled(current, p2)
+	local function Cancel() --[[ Line: 306 ]]
+		-- upvalues: Current1 (ref), v2 (upval), Current (copy), p1 (ref)
+		Current1 = v2.current
+		local Success, Result = pcall(function() --[[ Line: 309 ]]
+			-- upvalues: Current1 (upval), Current (upval), p1 (upval)
+			if Current1 ~= nil then
+				Current1.onWorkCanceled(Current, p1)
 			end
 		end)
 		
-		for i, v in current do
-			v.__count -= 1
+		for _, value in Current do
+			value.__count -= 1
 			
-			if current_1 ~= nil and v.__count == 0 then
-				current_1.onInteractionScheduledWorkCompleted(v)
+			if Current1 ~= nil and value.__count == 0 then
+				Current1.onInteractionScheduledWorkCompleted(value)
 			end
 		end
-		if not ok then
-			error(status)
+		if not Success then
+			error(Result)
 		end
 	end
 	
 	local t = {}
-	setmetatable(t, { __call = _wrapped })
-	t.cancel = var4
+	setmetatable(t, {
+		__call = function(_, ...) --[[ Line: 241 ]]
+			-- upvalues: v1 (upval), Current (copy), Current1 (ref), v2 (upval), p1 (ref), Callback (copy), Flag (ref)
+			local Current2 = v1.current
+			v1.current = Current
+			Current1 = v2.current
+			local Success, Result = pcall(function(...) --[[ Line: 248 ]]
+				-- upvalues: Current1 (upval), Current (upval), p1 (upval), Callback (upval), v1 (upval), Current2 (copy)
+				local v3 = nil
+				local Success, Result = pcall(function() --[[ Line: 252 ]]
+					-- upvalues: Current1 (upval), Current (upval), p1 (upval)
+					if Current1 ~= nil then
+						Current1.onWorkStarted(Current, p1)
+					end
+				end)
+				local Success1, Result1 = pcall(function(...) --[[ Line: 259 ]]
+					-- upvalues: v3 (ref), Callback (upval)
+					v3 = Callback(...)
+				end, ...)
+				v1.current = Current2
+				
+				if Current1 ~= nil then
+					Current1.onWorkStopped(Current, p1)
+				end
+				if not Success1 then
+					error(Result1)
+				end
+				if not Success then
+					error(Result)
+				end
+				return v3
+			end, ...)
+			
+			if not Flag then
+				Flag = true
+				
+				for _, value in Current do
+					value.__count -= 1
+					
+					if Current1 ~= nil and value.__count == 0 then
+						Current1.onInteractionScheduledWorkCompleted(value)
+					end
+				end
+			end
+			if not Success then
+				error(Result)
+			end
+			return Result
+		end
+	})
+	t.cancel = Cancel
 	
 	return t
 end
 
-return t
+return TracingModule

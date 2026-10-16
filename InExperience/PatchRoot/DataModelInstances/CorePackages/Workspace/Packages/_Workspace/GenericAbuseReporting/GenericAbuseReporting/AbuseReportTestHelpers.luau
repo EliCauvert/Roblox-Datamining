@@ -1,39 +1,39 @@
-﻿local genericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
-local parent = genericAbuseReporting.Parent
-local reactModule = require(parent.React)
-local roactNetworking = require(parent.RoactServiceTags).RoactNetworking
-local roactServices = require(parent.RoactServices).RoactServices
-local mockProvidersModule = require(genericAbuseReporting.MockProviders)
-local loaderProvider = require(genericAbuseReporting.BeduiV2.Loaders.LoaderContext).LoaderProvider
+﻿local GenericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
+local Parent = GenericAbuseReporting.Parent
+local ReactModule = require(Parent.React)
+local RoactNetworking = require(Parent.RoactServiceTags).RoactNetworking
+local RoactServices = require(Parent.RoactServices).RoactServices
+local MockProvidersModule = require(GenericAbuseReporting.MockProviders)
+local LoaderProvider = require(GenericAbuseReporting.BeduiV2.Loaders.LoaderContext).LoaderProvider
 
-local function findEventsBySubType(p1, p2, p3)
-	local t = {}
+local function findEventsBySubType(p1, SubEventType, Callback) --[[ Line: 263 ]]
+	local List = {}
 	
-	for i, v in p1.mock.calls do
-		local var1 = v[2]
+	for _, call in p1.mock.calls do
+		local v1 = call[2]
 		
-		if var1 and var1.sub_event_type == p2 and (p3 == nil or p3(var1)) then
-			table.insert(t, v)
+		if v1 and v1.sub_event_type == SubEventType and (Callback == nil or Callback(v1)) then
+			table.insert(List, call)
 		end
 	end
-	return t
+	return List
 end
 
 return {
-	wrapInAbuseReportProviders = function(p4, p5)
-		-- upvalues: reactModule (ref), roactServices (ref), roactNetworking (ref), mockProvidersModule (ref), loaderProvider (ref)
-		p5 = p5 or {}
+	wrapInAbuseReportProviders = function(Child, p2) --[[ Line: 19 ]]
+		-- upvalues: ReactModule (copy), RoactServices (copy), RoactNetworking (copy), MockProvidersModule (copy), LoaderProvider (copy)
+		local P1 = p2 or {}
 		
-		return reactModule.createElement(roactServices.ServiceProvider, { services = { [roactNetworking] = p5.networkImpl or {} } }, {
-			Providers = reactModule.createElement(mockProvidersModule, nil, {
-				LoaderCtx = reactModule.createElement(loaderProvider, {
-					loaders = p5.loaders or {},
-					open = p5.loaderOpen ~= nil or p5.loaderOpen
-				}, { Child = p4 })
+		return ReactModule.createElement(RoactServices.ServiceProvider, { services = { [RoactNetworking] = P1.networkImpl or {} } }, {
+			Providers = ReactModule.createElement(MockProvidersModule, nil, {
+				LoaderCtx = ReactModule.createElement(LoaderProvider, {
+					loaders = P1.loaders or {},
+					open = P1.loaderOpen == nil or P1.loaderOpen
+				}, { Child = Child })
 			})
 		})
 	end,
-	makeMinimalCloseConfig = function()
+	makeMinimalCloseConfig = function() --[[ Line: 39 ]]
 		return {
 			version = 1,
 			resources = {},
@@ -51,7 +51,7 @@ return {
 			translations = {}
 		}
 	end,
-	makeListParagraphConfig = function()
+	makeListParagraphConfig = function() --[[ Line: 60 ]]
 		return {
 			name = "test_list_paragraph",
 			version = 1,
@@ -81,7 +81,7 @@ return {
 			translations = {}
 		}
 	end,
-	makeMomentCommentConfig = function()
+	makeMomentCommentConfig = function() --[[ Line: 95 ]]
 		return {
 			name = "moment_comment",
 			version = 5,
@@ -233,7 +233,7 @@ return {
 			}
 		}
 	end,
-	makeMalformedConfig = function()
+	makeMalformedConfig = function() --[[ Line: 250 ]]
 		return {
 			version = 1,
 			resources = {},
@@ -244,20 +244,20 @@ return {
 		}
 	end,
 	findEventsBySubType = findEventsBySubType,
-	findRenderErrorEvents = function(p4)
-		-- upvalues: findEventsBySubType (ref)
-		return findEventsBySubType(p4, "Error", function(p5)
-			local errorMessage = p5.error_detail and p5.error_detail.error_message
+	findRenderErrorEvents = function(p2) --[[ Line: 280 ]]
+		-- upvalues: findEventsBySubType (copy)
+		return (findEventsBySubType(p2, "Error", function(p3): boolean --[[ Line: 281 ]]
+			local ErrorMessage = p3.error_detail and p3.error_detail.error_message
 			
-			return type(errorMessage) == "string" and errorMessage:sub(1, 13) == "Render error:"
-		end)
+			return type(ErrorMessage) == "string" and ErrorMessage:sub(1, 13) == "Render error:"
+		end))
 	end,
-	findFetchErrorEvents = function(p4)
-		-- upvalues: findEventsBySubType (ref)
-		return findEventsBySubType(p4, "Error", function(p5)
-			local errorMessage = p5.error_detail and p5.error_detail.error_message
+	findFetchErrorEvents = function(p2) --[[ Line: 287 ]]
+		-- upvalues: findEventsBySubType (copy)
+		return (findEventsBySubType(p2, "Error", function(p3): boolean --[[ Line: 288 ]]
+			local ErrorMessage = p3.error_detail and p3.error_detail.error_message
 			
-			return type(errorMessage) == "string" and errorMessage:sub(1, 22) == "Failed to fetch config"
-		end)
+			return type(ErrorMessage) == "string" and ErrorMessage:sub(1, 22) == "Failed to fetch config"
+		end))
 	end
 }

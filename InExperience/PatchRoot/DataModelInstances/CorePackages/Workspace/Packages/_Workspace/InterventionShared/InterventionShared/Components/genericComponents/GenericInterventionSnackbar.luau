@@ -1,34 +1,34 @@
-﻿local parent = script:FindFirstAncestor("InterventionShared").Parent
-local reactModule = require(parent.React)
-local useEffect = reactModule.useEffect
-local luauPolyfillModule = require(parent.LuauPolyfill)
-local setTimeout = luauPolyfillModule.setTimeout
-local clearTimeout = luauPolyfillModule.clearTimeout
-local snackbar = require(parent.Foundation).Snackbar
-local genericInterventionSnackbarAutoDismissDelaySeconds = game:DefineFastInt("GenericInterventionSnackbarAutoDismissDelaySeconds", 4)
+﻿local Parent = script:FindFirstAncestor("InterventionShared").Parent
+local ReactModule = require(Parent.React)
+local UseEffectFunction = ReactModule.useEffect
+local LuauPolyfillModule = require(Parent.LuauPolyfill)
+local SetTimeoutFunction = LuauPolyfillModule.setTimeout
+local ClearTimeoutFunction = LuauPolyfillModule.clearTimeout
+local Snackbar = require(Parent.Foundation).Snackbar
+local GenericInterventionSnackbarAutoDismissDelaySeconds = game:DefineFastInt("GenericInterventionSnackbarAutoDismissDelaySeconds", 4)
 
-return reactModule.memo(function(p1)
-	-- upvalues: useEffect (ref), genericInterventionSnackbarAutoDismissDelaySeconds (ref), setTimeout (ref), clearTimeout (ref), reactModule (ref), snackbar (ref)
-	useEffect(function()
-		-- upvalues: p1 (ref), genericInterventionSnackbarAutoDismissDelaySeconds (copy), setTimeout (copy), clearTimeout (copy)
-		local _ = nil
-		local var1 = setTimeout(function()
-			-- upvalues: p1 (copy)
+return ReactModule.memo(function(p1) --[[ Line: 27 | Named "GenericInterventionSnackbar" ]]
+	-- upvalues: UseEffectFunction (copy), GenericInterventionSnackbarAutoDismissDelaySeconds (copy), SetTimeoutFunction (copy), ClearTimeoutFunction (copy), ReactModule (copy), Snackbar (copy)
+	UseEffectFunction(function() --[[ Line: 28 ]]
+		-- upvalues: p1 (copy), GenericInterventionSnackbarAutoDismissDelaySeconds (upval), SetTimeoutFunction (upval), ClearTimeoutFunction (upval)
+		local SetTimeoutResult = nil
+		SetTimeoutResult = SetTimeoutFunction(function() --[[ Line: 32 ]]
+			-- upvalues: p1 (upval)
 			p1.onDismiss()
-		end, (p1.autoDismissDelaySeconds or genericInterventionSnackbarAutoDismissDelaySeconds) * 1000)
+		end, (p1.autoDismissDelaySeconds or GenericInterventionSnackbarAutoDismissDelaySeconds) * 1000)
 		
-		return function()
-			-- upvalues: var1 (write), clearTimeout (copy)
-			if var1 then
-				clearTimeout(var1)
+		return function() --[[ Line: 36 ]]
+			-- upvalues: SetTimeoutResult (ref), ClearTimeoutFunction (upval)
+			if SetTimeoutResult then
+				ClearTimeoutFunction(SetTimeoutResult)
 			end
 		end
 	end, { p1.onDismiss, p1.autoDismissDelaySeconds })
 	
-	return reactModule.createElement(snackbar, {
+	return (ReactModule.createElement(Snackbar, {
 		title = p1.titleText,
 		icon = p1.iconName,
 		Position = UDim2.new(0.5, 0, 0, 0),
 		AnchorPoint = Vector2.new(0.5, 0)
-	})
+	}))
 end)

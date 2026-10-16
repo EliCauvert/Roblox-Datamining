@@ -1,47 +1,51 @@
-﻿local avatarExperienceUIKit = script:FindFirstAncestor("AvatarExperienceUIKit")
-local parent = avatarExperienceUIKit.Parent
-local reactModule = require(parent.React)
-local badge = require(parent.Foundation).Badge
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useRemainingTimeModule = require(avatarExperienceUIKit.Utils.useRemainingTime)
+﻿local AvatarExperienceUIKit = script:FindFirstAncestor("AvatarExperienceUIKit")
+local Parent = AvatarExperienceUIKit.Parent
+local ReactModule = require(Parent.React)
+local Badge = require(Parent.Foundation).Badge
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseRemainingTimeModule = require(AvatarExperienceUIKit.Utils.useRemainingTime)
 
-local function _(p1, p2)
-	local unit = p1.unit
-	local var1 = p1.value ~= 1
+local function _(p1, p2) --[[ Line: 23 | Named "getTimerText" ]]
+	local Unit = p1.unit
+	local IsNotValueMatch = p1.value ~= 1
 	
-	return if unit == "days" then if var1 then p2.dayPlural else p2.daySingular elseif unit == "hours" then if var1 then p2.hourPlural else p2.hourSingular elseif unit == "minutes" then if var1 then p2.minutePlural else p2.minuteSingular elseif var1 then p2.secondPlural else p2.secondSingular
+	return if Unit == "days" then if IsNotValueMatch then p2.dayPlural else p2.daySingular elseif Unit == "hours" then if IsNotValueMatch then p2.hourPlural else p2.hourSingular elseif Unit == "minutes" then if IsNotValueMatch then p2.minutePlural else p2.minuteSingular elseif IsNotValueMatch then p2.secondPlural else p2.secondSingular
 end
 
-return function(p1)
-	-- upvalues: useRemainingTimeModule (ref), useLocalization (ref), reactModule (ref), badge (ref)
-	local var1 = useRemainingTimeModule(p1.endTime)
-	local var2 = if var1 then var1.value else 0
-	local var3 = useLocalization({
+return function(Frame) --[[ Line: 38 | Named "TimerBadge" ]]
+	-- upvalues: UseRemainingTimeModule (copy), UseLocalizationFunction (copy), ReactModule (copy), Badge (copy)
+	local UseRemainingTimeModuleResult = UseRemainingTimeModule(Frame.endTime)
+	local Value = if UseRemainingTimeModuleResult then UseRemainingTimeModuleResult.value else 0
+	local UseLocalizationResult = UseLocalizationFunction({
 		daySingular = "Feature.Catalog.Label.Timer.Day.Singular",
 		hourSingular = "Feature.Catalog.Label.Timer.Hour.Singular",
 		minuteSingular = "Feature.Catalog.Label.Timer.Minute.Singular",
 		secondSingular = "Feature.Catalog.Label.Timer.Second.Singular",
-		dayPlural = { "Feature.Catalog.Label.Timer.Day.Plural", number = var2 },
-		hourPlural = { "Feature.Catalog.Label.Timer.Hour.Plural", number = var2 },
+		dayPlural = { "Feature.Catalog.Label.Timer.Day.Plural", number = Value },
+		hourPlural = {
+			"Feature.Catalog.Label.Timer.Hour.Plural",
+			number = Value
+		},
 		minutePlural = {
 			"Feature.Catalog.Label.Timer.Minute.Plural",
-			number = var2
+			number = Value
 		},
 		secondPlural = {
 			"Feature.Catalog.Label.Timer.Second.Plural",
-			number = var2
+			number = Value
 		}
 	})
 	
-	if var1 and var1.value >= 0 then
-		local createElement = reactModule.createElement
-		local t = { LayoutOrder = p1.LayoutOrder }
-		local unit = var1.unit
-		local var4 = var1.value ~= 1
-		t.text = if unit == "days" then if var4 then var3.dayPlural else var3.daySingular elseif unit == "hours" then if var4 then var3.hourPlural else var3.hourSingular elseif unit == "minutes" then if var4 then var3.minutePlural else var3.minuteSingular elseif var4 then var3.secondPlural else var3.secondSingular
-		t.variant = p1.badgeVariant
+	if UseRemainingTimeModuleResult and UseRemainingTimeModuleResult.value >= 0 then
+		local Unit = UseRemainingTimeModuleResult.unit
+		local IsNotValueMatch = UseRemainingTimeModuleResult.value ~= 1
 		
-		return createElement(badge, t)
+		return ReactModule.createElement(Badge, {
+			LayoutOrder = Frame.LayoutOrder,
+			text = if Unit == "days" then if IsNotValueMatch then UseLocalizationResult.dayPlural else UseLocalizationResult.daySingular elseif Unit == "hours" then if IsNotValueMatch then UseLocalizationResult.hourPlural else UseLocalizationResult.hourSingular elseif Unit == "minutes" then if IsNotValueMatch then UseLocalizationResult.minutePlural else UseLocalizationResult.minuteSingular elseif IsNotValueMatch then UseLocalizationResult.secondPlural else UseLocalizationResult.secondSingular,
+			variant = Frame.badgeVariant
+		})
+	else
+		return nil
 	end
-	return nil
 end

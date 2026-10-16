@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.AuthSignup.AuthSignup)
+﻿return (require(script.Parent.Parent.Parent._Index.AuthSignup.AuthSignup))

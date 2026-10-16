@@ -1,1 +1,1 @@
-﻿return require(script:FindFirstAncestor("AuthCommon").Parent.Signals).createComputed(require(script.createCountryCodeListStore))
+﻿return require(script:FindFirstAncestor("AuthCommon").Parent.Signals).createComputed((require(script.createCountryCodeListStore)))

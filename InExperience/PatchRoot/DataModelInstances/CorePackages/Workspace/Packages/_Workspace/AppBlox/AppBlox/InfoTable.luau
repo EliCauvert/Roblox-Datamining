@@ -1,120 +1,117 @@
-﻿local parent = script:FindFirstAncestor("AppBlox").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local useBreakpoint = require(parent.Foundation).Hooks.useBreakpoint
-local useResponsive = require(parent.Foundation).Hooks.useResponsive
-local responsiveProvider = require(parent.Foundation).ResponsiveProvider
-local cryoModule = require(parent.Cryo)
-local luaAppInfoTableResponsiveProviderOverride = game:DefineFastFlag("LuaAppInfoTableResponsiveProviderOverride", false)
-local fFlagInfoTableStableItemKeys = require(parent.SharedFlags).FFlagInfoTableStableItemKeys
-local breakpoint = foundationModule.Enums.Breakpoint
+﻿local Parent = script:FindFirstAncestor("AppBlox").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UseBreakpointFunction = require(Parent.Foundation).Hooks.useBreakpoint
+local UseResponsiveFunction = require(Parent.Foundation).Hooks.useResponsive
+local ResponsiveProvider = require(Parent.Foundation).ResponsiveProvider
+local CryoModule = require(Parent.Cryo)
+local LuaAppInfoTableResponsiveProviderOverride = game:DefineFastFlag("LuaAppInfoTableResponsiveProviderOverride", false)
+local FFlagInfoTableStableItemKeys = require(Parent.SharedFlags).FFlagInfoTableStableItemKeys
+local Breakpoint = FoundationModule.Enums.Breakpoint
 
-local function buildColumnMajorChildren(p1, p2, p3)
-	-- upvalues: reactModule (ref), foundationModule (ref), fFlagInfoTableStableItemKeys (ref)
-	local p0Count = #p1
-	local ceiled = math.ceil(p0Count / p2)
-	local t = {}
-	local var1 = 0
+local function buildColumnMajorChildren(Items, NumColumns, Size) --[[ Line: 26 ]]
+	-- upvalues: ReactModule (copy), FoundationModule (copy), FFlagInfoTableStableItemKeys (copy)
+	local CountItems = #Items
+	local Ceiled = math.ceil(CountItems / NumColumns)
+	local Elements = {}
+	local LayoutOrder = 0
 	
-	for i_1 = 1, ceiled do
-		for i = 1, p2 do
-			var1 += 1
-			local var2 = (i - 1) * ceiled + i_1
-			t[if fFlagInfoTableStableItemKeys then if var2 <= p0Count then `Cell_{var2}` else `Placeholder_{var1}` else `Cell_{var1}`] = reactModule.createElement(foundationModule.Grid.Cell, {
+	for i = 1, Ceiled do
+		for i1 = 1, NumColumns do
+			LayoutOrder += 1
+			local NewI = (i1 - 1) * Ceiled + i
+			Elements[if FFlagInfoTableStableItemKeys then if NewI <= CountItems then `Cell_{NewI}` else `Placeholder_{LayoutOrder}` else `Cell_{LayoutOrder}`] = ReactModule.createElement(FoundationModule.Grid.Cell, {
 				tag = "size-full-0 auto-y",
-				size = p3,
-				LayoutOrder = var1
-			}, if var2 <= p0Count then p1[var2] else reactModule.createElement(foundationModule.View, { tag = "size-full-0 auto-y", BackgroundTransparency = 1 }))
+				size = Size,
+				LayoutOrder = LayoutOrder
+			}, if NewI <= CountItems then Items[NewI] else ReactModule.createElement(FoundationModule.View, { tag = "size-full-0 auto-y", BackgroundTransparency = 1 }))
 		end
 	end
-	return t
+	return Elements
 end
 
-return reactModule.memo(function(p4)
-	-- upvalues: luaAppInfoTableResponsiveProviderOverride (ref), reactModule (ref), buildColumnMajorChildren (ref), foundationModule (ref), luaAppInfoTableResponsiveProviderOverride (ref), useResponsive (ref), cryoModule (ref), breakpoint (ref), useBreakpoint (ref), responsiveProvider (ref)
-	local var3 = if p4.numColumns and p4.numColumns > 0 then p4.numColumns else 1
-	local var4 = nil
-	local var5 = nil
-	local var6 = nil
-	local var7 = nil
+return ReactModule.memo(function(Frame: Frame) --[[ Line: 77 | Named "InfoTable" ]]
+	-- upvalues: LuaAppInfoTableResponsiveProviderOverride (copy), ReactModule (copy), buildColumnMajorChildren (copy), FoundationModule (copy), LuaAppInfoTableResponsiveProviderOverride (copy), UseResponsiveFunction (copy), CryoModule (copy), Breakpoint (copy), UseBreakpointFunction (copy), ResponsiveProvider (copy)
+	local NumColumns = if Frame.numColumns and Frame.numColumns > 0 then Frame.numColumns else 1
+	local v1 = nil
+	local Callback = nil
+	local v2 = nil
+	local Ref = nil
 	
-	if luaAppInfoTableResponsiveProviderOverride then
-		local var8, var9 = reactModule.useState(false)
-		var4 = var8
-		var5 = var9
-		local var10, var11 = reactModule.useState(nil)
-		var6 = var10
-		var7 = var11
+	if LuaAppInfoTableResponsiveProviderOverride then
+		v1, Callback = ReactModule.useState(false)
+		v2, Ref = ReactModule.useState(nil)
 	end
-	local t = {}
-	local var12 = 12 / var3
+	local Elements = {}
+	local Size = 12 / NumColumns
 	
-	if not luaAppInfoTableResponsiveProviderOverride or var4 then
-		if var3 > 1 then
-			t = buildColumnMajorChildren(p4.items, var3, var12)
+	if not LuaAppInfoTableResponsiveProviderOverride or v1 then
+		if NumColumns > 1 then
+			Elements = buildColumnMajorChildren(Frame.items, NumColumns, Size)
 		else
-			for i, v in p4.items do
-				t[`Cell_{i}`] = reactModule.createElement(foundationModule.Grid.Cell, {
+			for LayoutOrder, item in Frame.items do
+				Elements[`Cell_{LayoutOrder}`] = ReactModule.createElement(FoundationModule.Grid.Cell, {
 					tag = "size-full-0 auto-y",
-					size = var12,
-					LayoutOrder = i
-				}, v)
+					size = Size,
+					LayoutOrder = LayoutOrder
+				}, item)
 			end
 		end
 	end
-	local var13 = nil
+	local Config = nil
 	
-	if luaAppInfoTableResponsiveProviderOverride then
-		local var14 = useResponsive()
-		var13 = cryoModule.Dictionary.join(var14.config, {
-			grid = cryoModule.Dictionary.join(var14.config.grid, {
+	if LuaAppInfoTableResponsiveProviderOverride then
+		local UseResponsiveResult = UseResponsiveFunction()
+		Config = CryoModule.Dictionary.join(UseResponsiveResult.config, {
+			grid = CryoModule.Dictionary.join(UseResponsiveResult.config.grid, {
 				margins = {
-					[breakpoint.XSmall] = 0,
-					[breakpoint.Small] = 0,
-					[breakpoint.Medium] = 0,
-					[breakpoint.Large] = 0,
-					[breakpoint.XLarge] = 0,
-					[breakpoint.XXLarge] = 0
+					[Breakpoint.XSmall] = 0,
+					[Breakpoint.Small] = 0,
+					[Breakpoint.Medium] = 0,
+					[Breakpoint.Large] = 0,
+					[Breakpoint.XLarge] = 0,
+					[Breakpoint.XXLarge] = 0
 				}
 			})
 		})
 	end
-	if luaAppInfoTableResponsiveProviderOverride then
-		local _, var15 = useBreakpoint(var6)
-		reactModule.useEffect(function()
-			-- upvalues: var15 (ref), var5 (write)
-			if var15.X > 0 then
-				task.defer(function()
-					-- upvalues: var5 (copy)
-					var5(true)
+	if LuaAppInfoTableResponsiveProviderOverride then
+		local _, UseBreakpointResult2 = UseBreakpointFunction(v2)
+		ReactModule.useEffect(function() --[[ Line: 122 ]]
+			-- upvalues: UseBreakpointResult2 (copy), Callback (ref)
+			if UseBreakpointResult2.X > 0 then
+				task.defer(function() --[[ Line: 124 ]]
+					-- upvalues: Callback (upval)
+					Callback(true)
 				end)
 			end
-		end, { var15.X })
+		end, { UseBreakpointResult2.X })
 		
-		return reactModule.createElement("Frame", {
+		return ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y,
-			LayoutOrder = p4.LayoutOrder,
-			ref = var7
+			LayoutOrder = Frame.LayoutOrder,
+			ref = Ref
 		}, {
-			ContentFrame = reactModule.createElement("Frame", {
+			ContentFrame = ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				Size = UDim2.new(1, 0, 0, 0),
 				AutomaticSize = Enum.AutomaticSize.Y,
-				LayoutOrder = p4.LayoutOrder
+				LayoutOrder = Frame.LayoutOrder
 			}, {
-				Grid = reactModule.createElement(responsiveProvider, { config = var13 }, reactModule.createElement(foundationModule.Grid.Root, { tag = p4.gridTag, testId = p4.testId }, t))
+				Grid = ReactModule.createElement(ResponsiveProvider, { config = Config }, ReactModule.createElement(FoundationModule.Grid.Root, { tag = Frame.gridTag, testId = Frame.testId }, Elements))
 			})
 		})
+	else
+		return if LuaAppInfoTableResponsiveProviderOverride then ReactModule.createElement(ResponsiveProvider, { config = Config }, ReactModule.createElement(FoundationModule.Grid.Root, {
+			tag = Frame.gridTag,
+			LayoutOrder = Frame.LayoutOrder,
+			testId = Frame.testId
+		}, Elements)) else ReactModule.createElement(FoundationModule.Grid.Root, {
+			tag = Frame.gridTag,
+			LayoutOrder = Frame.LayoutOrder,
+			testId = Frame.testId
+		}, Elements)
 	end
-	return if luaAppInfoTableResponsiveProviderOverride then reactModule.createElement(responsiveProvider, { config = var13 }, reactModule.createElement(foundationModule.Grid.Root, {
-		tag = p4.gridTag,
-		LayoutOrder = p4.LayoutOrder,
-		testId = p4.testId
-	}, t)) else reactModule.createElement(foundationModule.Grid.Root, {
-		tag = p4.gridTag,
-		LayoutOrder = p4.LayoutOrder,
-		testId = p4.testId
-	}, t)
 end)

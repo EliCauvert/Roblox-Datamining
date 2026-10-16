@@ -1,225 +1,225 @@
-﻿local roactModule = require(game:GetService("CorePackages").Packages.Roact)
-local dataConsumerModule = require(script.Parent.Parent.Parent.Components.DataConsumer)
-local headerButtonModule = require(script.Parent.Parent.Parent.Components.HeaderButton)
-local serverScriptsEntryModule = require(script.Parent.ServerScriptsEntry)
-local constantsModule = require(script.Parent.Parent.Parent.Constants)
-local lineWidth = constantsModule.GeneralFormatting.LineWidth
-local lineColor = constantsModule.GeneralFormatting.LineColor
-local chartCellWidths = constantsModule.ServerScriptsFormatting.ChartCellWidths
-local chartHeaderNames = constantsModule.ServerScriptsFormatting.ChartHeaderNames
-local headerFrameHeight = constantsModule.ServerScriptsFormatting.HeaderFrameHeight
-local entryFrameHeight = constantsModule.ServerScriptsFormatting.EntryFrameHeight
-local cellPadding = constantsModule.ServerScriptsFormatting.CellPadding
-local lineGraphHeight = constantsModule.GeneralFormatting.LineGraphHeight
-local noResultSearchStr = constantsModule.GeneralFormatting.NoResultSearchStr
-local t = {}
-local t_1 = {}
-local t_2 = {}
-local var1 = 0
+﻿local RoactModule = require(game:GetService("CorePackages").Packages.Roact)
+local DataConsumerModule = require(script.Parent.Parent.Parent.Components.DataConsumer)
+local HeaderButtonModule = require(script.Parent.Parent.Parent.Components.HeaderButton)
+local ServerScriptsEntryModule = require(script.Parent.ServerScriptsEntry)
+local ConstantsModule = require(script.Parent.Parent.Parent.Constants)
+local LineWidth = ConstantsModule.GeneralFormatting.LineWidth
+local LineColor = ConstantsModule.GeneralFormatting.LineColor
+local ChartHeaderNames = ConstantsModule.ServerScriptsFormatting.ChartHeaderNames
+local HeaderFrameHeight = ConstantsModule.ServerScriptsFormatting.HeaderFrameHeight
+local EntryFrameHeight = ConstantsModule.ServerScriptsFormatting.EntryFrameHeight
+local CellPadding = ConstantsModule.ServerScriptsFormatting.CellPadding
+local LineGraphHeight = ConstantsModule.GeneralFormatting.LineGraphHeight
+local NoResultSearchStr = ConstantsModule.GeneralFormatting.NoResultSearchStr
+local CellOffset = {}
+local List = {}
+local EntryCellSize = {}
+local XScale = 0
 
-for i, v in ipairs(chartCellWidths) do
-	table.insert(t, UDim2.new(var1, cellPadding, 0, 0))
-	table.insert(t_1, UDim2.new(v, -cellPadding, 0, headerFrameHeight))
-	table.insert(t_2, UDim2.new(v, -cellPadding, 0, entryFrameHeight))
-	var1 += v
+for _, chartCellWidth in ipairs(ConstantsModule.ServerScriptsFormatting.ChartCellWidths) do
+	table.insert(CellOffset, UDim2.new(XScale, CellPadding, 0, 0))
+	table.insert(List, UDim2.new(chartCellWidth, -CellPadding, 0, HeaderFrameHeight))
+	table.insert(EntryCellSize, UDim2.new(chartCellWidth, -CellPadding, 0, EntryFrameHeight))
+	XScale += chartCellWidth
 end
-local t_3 = {}
+local VerticalOffsets = {}
 
-for i_1, v_1 in ipairs(t) do
-	t_3[i_1] = UDim2.new(v_1.X.Scale, v_1.X.Offset - cellPadding, v_1.Y.Scale, v_1.Y.Offset)
+for i, Vector in ipairs(CellOffset) do
+	VerticalOffsets[i] = UDim2.new(Vector.X.Scale, Vector.X.Offset - CellPadding, Vector.Y.Scale, Vector.Y.Offset)
 end
-local serverScripts = roactModule.Component:extend("ServerScripts")
+local ServerScripts = RoactModule.Component:extend("ServerScripts")
 
-local function constructHeader(p1)
-	-- upvalues: chartHeaderNames (ref), roactModule (ref), headerButtonModule (ref), t_1 (ref), t (ref), lineWidth (ref), lineColor (ref), t_3 (ref), headerFrameHeight (ref)
-	local t_2 = {}
+local function constructHeader(Sortfunction) --[[ Line: 45 ]]
+	-- upvalues: ChartHeaderNames (copy), RoactModule (copy), HeaderButtonModule (copy), List (copy), CellOffset (copy), LineWidth (copy), LineColor (copy), VerticalOffsets (copy), HeaderFrameHeight (copy)
+	local Elements = {}
 	
-	for i = 1, #chartHeaderNames do
-		t_2[chartHeaderNames[i]] = roactModule.createElement(headerButtonModule, {
-			text = chartHeaderNames[i],
-			size = t_1[i],
-			pos = t[i],
-			sortfunction = p1
+	for i = 1, #ChartHeaderNames do
+		Elements[ChartHeaderNames[i]] = RoactModule.createElement(HeaderButtonModule, {
+			text = ChartHeaderNames[i],
+			size = List[i],
+			pos = CellOffset[i],
+			sortfunction = Sortfunction
 		})
 	end
-	t_2.upperHorizontalLine = roactModule.createElement("Frame", {
+	Elements.upperHorizontalLine = RoactModule.createElement("Frame", {
 		BorderSizePixel = 0,
-		Size = UDim2.new(1, 0, 0, lineWidth),
+		Size = UDim2.new(1, 0, 0, LineWidth),
 		Position = UDim2.new(0, 0, 0, 0),
-		BackgroundColor3 = lineColor
+		BackgroundColor3 = LineColor
 	})
-	t_2.verticalLine1 = roactModule.createElement("Frame", {
+	Elements.verticalLine1 = RoactModule.createElement("Frame", {
 		BorderSizePixel = 0,
-		Size = UDim2.new(0, lineWidth, 1, 0),
-		Position = t_3[2],
-		BackgroundColor3 = lineColor
+		Size = UDim2.new(0, LineWidth, 1, 0),
+		Position = VerticalOffsets[2],
+		BackgroundColor3 = LineColor
 	})
-	t_2.verticalLine2 = roactModule.createElement("Frame", {
+	Elements.verticalLine2 = RoactModule.createElement("Frame", {
 		BorderSizePixel = 0,
-		Size = UDim2.new(0, lineWidth, 1, 0),
-		Position = t_3[3],
-		BackgroundColor3 = lineColor
+		Size = UDim2.new(0, LineWidth, 1, 0),
+		Position = VerticalOffsets[3],
+		BackgroundColor3 = LineColor
 	})
-	t_2.lowerHorizontalLine = roactModule.createElement("Frame", {
+	Elements.lowerHorizontalLine = RoactModule.createElement("Frame", {
 		BorderSizePixel = 0,
-		Size = UDim2.new(1, 0, 0, lineWidth),
+		Size = UDim2.new(1, 0, 0, LineWidth),
 		Position = UDim2.new(0, 0, 1, 0),
-		BackgroundColor3 = lineColor
+		BackgroundColor3 = LineColor
 	})
 	
-	return roactModule.createElement("Frame", {
+	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		Size = UDim2.new(1, 0, 0, headerFrameHeight)
-	}, t_2)
+		Size = UDim2.new(1, 0, 0, HeaderFrameHeight)
+	}, Elements)
 end
 
-local function getX(p2)
-	return p2.time
+local function getX(p1) --[[ Line: 91 ]]
+	return p1.time
 end
 
-local function getActivity(p2)
-	return p2.data[1]
+local function getActivity(p1) --[[ Line: 95 ]]
+	return p1.data[1]
 end
 
-local function getRate(p2)
-	return p2.data[2]
+local function getRate(p1) --[[ Line: 99 ]]
+	return p1.data[2]
 end
 
-local function formatScriptsData(p2)
-	return string.format("%.3f", p2)
+local function formatScriptsData(p1): string --[[ Line: 103 ]]
+	return string.format("%.3f", p1)
 end
 
-function serverScripts.init(p2, p3)
-	-- upvalues: roactModule (ref)
-	local currentData = p3.ServerScriptsData:getCurrentData()
+function ServerScripts.init(p1, p2) --[[ Line: 107 ]]
+	-- upvalues: RoactModule (copy)
+	local CurrentData = p2.ServerScriptsData:getCurrentData()
 	
-	function p5.onSortChanged(p4)
-		-- upvalues: p3 (ref), p2 (ref)
-		if p4 == p3.ServerScriptsData:getSortType() then
-			p2:setState({ reverseSort = not p2.state.reverseSort })
+	function p1.onSortChanged(SortType) --[[ Line: 110 ]]
+		-- upvalues: p2 (copy), p1 (copy)
+		if SortType == p2.ServerScriptsData:getSortType() then
+			p1:setState({ reverseSort = not p1.state.reverseSort })
 			
 			return
-		end
-		p3.ServerScriptsData:setSortType(p4)
-		p2:setState({ reverseSort = false })
-	end
-	
-	function p5.getOnButtonPress(p4)
-		-- upvalues: p2 (ref)
-		return function(_, _)
-			-- upvalues: p2 (copy), p4 (ref)
-			p2:setState({ expandIndex = p2.state.expandIndex ~= p4 and p4 })
+		else
+			p2.ServerScriptsData:setSortType(SortType)
+			p1:setState({ reverseSort = false })
 		end
 	end
 	
-	function p5.onCanvasPosChanged()
-		-- upvalues: p2 (ref)
-		local canvasPosition = p2.scrollingRef.current.CanvasPosition
+	function p1.getOnButtonPress(Name) --[[ Line: 124 ]]
+		-- upvalues: p1 (copy)
+		return function(_, _) --[[ Line: 125 ]]
+			-- upvalues: p1 (upval), Name (copy)
+			p1:setState({ expandIndex = p1.state.expandIndex ~= Name and Name })
+		end
+	end
+	
+	function p1.onCanvasPosChanged() --[[ Line: 132 ]]
+		-- upvalues: p1 (copy)
+		local CanvasPosition = p1.scrollingRef.current.CanvasPosition
 		
-		if p2.state.canvasPos ~= canvasPosition then
-			p2:setState({
-				absScrollSize = p2.scrollingRef.current.AbsoluteSize,
-				canvasPos = canvasPosition
+		if p1.state.canvasPos ~= CanvasPosition then
+			p1:setState({
+				absScrollSize = p1.scrollingRef.current.AbsoluteSize,
+				canvasPos = CanvasPosition
 			})
 		end
 	end
 	
-	p2.scrollingRef = roactModule.createRef()
-	p2.state = { expandIndex = nil, serverScriptsData = currentData }
+	p1.scrollingRef = RoactModule.createRef()
+	p1.state = { expandIndex = nil, serverScriptsData = CurrentData }
 end
 
-function serverScripts.willUpdate(p2)
-	if p2.canvasPosConnector then
-		p2.canvasPosConnector:Disconnect()
+function ServerScripts.willUpdate(p1) --[[ Line: 150 ]]
+	if p1.canvasPosConnector then
+		p1.canvasPosConnector:Disconnect()
 	end
 end
 
-function serverScripts.didUpdate(p2)
-	if p2.scrollingRef.current then
-		p2.canvasPosConnector = p2.scrollingRef.current:GetPropertyChangedSignal("CanvasPosition"):Connect(p2.onCanvasPosChanged)
+function ServerScripts.didUpdate(p1) --[[ Line: 156 ]]
+	if p1.scrollingRef.current then
+		p1.canvasPosConnector = p1.scrollingRef.current:GetPropertyChangedSignal("CanvasPosition"):Connect(p1.onCanvasPosChanged)
 	end
 end
 
-function serverScripts.didMount(p2)
-	p2.statsConnector = p2.props.ServerScriptsData:Signal():Connect(function(p3)
-		-- upvalues: p2 (ref)
-		p2:setState({ serverScriptsData = p3 })
+function ServerScripts.didMount(p1) --[[ Line: 163 ]]
+	p1.statsConnector = p1.props.ServerScriptsData:Signal():Connect(function(ServerScriptsData) --[[ Line: 164 ]]
+		-- upvalues: p1 (copy)
+		p1:setState({ serverScriptsData = ServerScriptsData })
 	end)
 	
-	if p2.scrollingRef.current then
-		p2.canvasPosConnector = p2.scrollingRef.current:GetPropertyChangedSignal("CanvasPosition"):Connect(p2.onCanvasPosChanged)
-		p2:setState({
-			absScrollSize = p2.scrollingRef.current.AbsoluteSize,
-			canvasPos = p2.scrollingRef.current.CanvasPosition
+	if p1.scrollingRef.current then
+		p1.canvasPosConnector = p1.scrollingRef.current:GetPropertyChangedSignal("CanvasPosition"):Connect(p1.onCanvasPosChanged)
+		p1:setState({
+			absScrollSize = p1.scrollingRef.current.AbsoluteSize,
+			canvasPos = p1.scrollingRef.current.CanvasPosition
 		})
 	end
 end
 
-function serverScripts.willUnmount(p2)
-	p2.statsConnector:Disconnect()
-	p2.statsConnector = nil
+function ServerScripts.willUnmount(p1) --[[ Line: 181 ]]
+	p1.statsConnector:Disconnect()
+	p1.statsConnector = nil
 end
 
-function serverScripts.render(p2)
-	-- upvalues: roactModule (ref), constantsModule (ref), entryFrameHeight (ref), lineGraphHeight (ref), serverScriptsEntryModule (ref), t_2 (ref), t (ref), t_3 (ref), formatScriptsData (ref), getX (ref), getActivity (ref), getRate (ref), noResultSearchStr (ref), constructHeader (ref), headerFrameHeight (ref)
-	local searchTerm = p2.props.searchTerm
-	local scriptFilters = p2.props.scriptFilters
-	local layoutOrder = p2.props.layoutOrder
-	local size = p2.props.size
-	local serverScriptsData = p2.state.serverScriptsData
-	local reverseSort = p2.state.reverseSort
-	local absScrollSize = p2.state.absScrollSize
-	local canvasPos = p2.state.canvasPos
-	local t_1 = {}
-	local serverScriptsDataCount = #serverScriptsData
+function ServerScripts.render(p1) --[[ Line: 186 ]]
+	-- upvalues: RoactModule (copy), ConstantsModule (copy), EntryFrameHeight (copy), LineGraphHeight (copy), ServerScriptsEntryModule (copy), EntryCellSize (copy), CellOffset (copy), VerticalOffsets (copy), formatScriptsData (copy), getX (copy), getActivity (copy), getRate (copy), NoResultSearchStr (copy), constructHeader (copy), HeaderFrameHeight (copy)
+	local SearchTerm: string = p1.props.searchTerm
+	local ScriptFilters = p1.props.scriptFilters
+	local LayoutOrder = p1.props.layoutOrder
+	local Size = p1.props.size
+	local ServerScriptsData = p1.state.serverScriptsData
+	local ReverseSort = p1.state.reverseSort
+	local AbsScrollSize = p1.state.absScrollSize
+	local CanvasPos = p1.state.canvasPos
+	local Elements = {}
+	local CountServerScriptsData = #ServerScriptsData
 	
-	if serverScriptsDataCount == 0 then
-		return roactModule.createElement("TextLabel", {
+	if CountServerScriptsData == 0 then
+		return RoactModule.createElement("TextLabel", {
 			Text = "Awaiting Server Scripts Information.",
 			BackgroundTransparency = 1,
-			Size = size,
+			Size = Size,
 			Position = UDim2.new(0, 0, 0, 0),
-			TextColor3 = constantsModule.Color.Text,
-			LayoutOrder = layoutOrder
+			TextColor3 = ConstantsModule.Color.Text,
+			LayoutOrder = LayoutOrder
 		})
 	end
-	local var2 = 0
-	local var3 = -1
-	local var4 = 0
-	local var5 = 0
+	local YOffset1 = 0
+	local YOffset = -1
+	local Total = 0
+	local Count = 0
 	
-	if canvasPos and absScrollSize then
-		for i, v in pairs(serverScriptsData) do
-			if not searchTerm or string.find(v.name:lower(), searchTerm:lower()) ~= nil then
-				var5 += 1
-				local var6 = true
-				local active = scriptFilters.Active
-				local inactive = scriptFilters.Inactive
-				local var7 = v.dataStats.dataSet:back()
+	if CanvasPos and AbsScrollSize then
+		for i, ScriptData in pairs(ServerScriptsData) do
+			if not SearchTerm or string.find(ScriptData.name:lower(), SearchTerm:lower()) ~= nil then
+				Count += 1
+				local Flag = true
+				local Active = ScriptFilters.Active
+				local Inactive = ScriptFilters.Inactive
+				local BackResult = ScriptData.dataStats.dataSet:back()
 				
-				if active ~= inactive then
-					if var7.data[1] > 0 and inactive then
-						var6 = false
-					elseif var7.data[1] == 0 and active then
-						var6 = false
+				if Active ~= Inactive then
+					if BackResult.data[1] > 0 and Inactive then
+						Flag = false
+					elseif BackResult.data[1] == 0 and Active then
+						Flag = false
 					end
 				end
-				if var6 then
-					local var8 = p2.state.expandIndex == v.name
-					local var9 = if var8 then entryFrameHeight + 2 * lineGraphHeight else entryFrameHeight
+				if Flag then
+					local IsExpandIndexMatch = p1.state.expandIndex == ScriptData.name
+					local NewEntryFrameHeight = IsExpandIndexMatch and EntryFrameHeight + 2 * LineGraphHeight or EntryFrameHeight
 					
-					if canvasPos.Y <= var2 + var9 then
-						if var4 < absScrollSize.Y then
-							t_1[i] = roactModule.createElement(serverScriptsEntryModule, {
-								scriptData = v,
-								frameHeight = var9,
-								showGraph = var8,
-								layoutOrder = if reverseSort then serverScriptsDataCount - i else i,
-								activityBoxColor = if var7.data[1] > 0 then constantsModule.Color.ActiveBox else constantsModule.Color.InactiveBox,
-								entryCellSize = t_2,
-								cellOffset = t,
-								verticalOffsets = t_3,
-								onButtonPress = p2.getOnButtonPress(v.name),
+					if CanvasPos.Y <= YOffset1 + NewEntryFrameHeight then
+						if Total < AbsScrollSize.Y then
+							Elements[i] = RoactModule.createElement(ServerScriptsEntryModule, {
+								scriptData = ScriptData,
+								frameHeight = NewEntryFrameHeight,
+								showGraph = IsExpandIndexMatch,
+								layoutOrder = ReverseSort and CountServerScriptsData - i or i,
+								activityBoxColor = BackResult.data[1] > 0 and ConstantsModule.Color.ActiveBox or ConstantsModule.Color.InactiveBox,
+								entryCellSize = EntryCellSize,
+								cellOffset = CellOffset,
+								verticalOffsets = VerticalOffsets,
+								onButtonPress = p1.getOnButtonPress(ScriptData.name),
 								formatScriptsData = formatScriptsData,
 								getX = getX,
 								getActivity = getActivity,
@@ -227,53 +227,53 @@ function serverScripts.render(p2)
 								stringFormatY = formatScriptsData
 							})
 						end
-						if var3 < 0 then
-							var3 = var2
+						if YOffset < 0 then
+							YOffset = YOffset1
 						else
-							var4 += var9
+							Total += NewEntryFrameHeight
 						end
 					end
-					var2 += var9
+					YOffset1 += NewEntryFrameHeight
 				end
 			end
 		end
-		if var5 > 0 then
-			t_1.WindowingPadding = roactModule.createElement("Frame", {
+		if Count > 0 then
+			Elements.WindowingPadding = RoactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 1,
-				Size = UDim2.new(1, 0, 0, var3)
+				Size = UDim2.new(1, 0, 0, YOffset)
 			})
 		else
-			t_1.emptySearch = roactModule.createElement("TextLabel", {
+			Elements.emptySearch = RoactModule.createElement("TextLabel", {
 				BackgroundTransparency = 1,
-				Size = size,
-				Text = string.format(noResultSearchStr, searchTerm),
-				TextColor3 = constantsModule.Color.Text
+				Size = Size,
+				Text = string.format(NoResultSearchStr, SearchTerm),
+				TextColor3 = ConstantsModule.Color.Text
 			})
 		end
 	end
-	t_1.UIListLayout = roactModule.createElement("UIListLayout", {
+	Elements.UIListLayout = RoactModule.createElement("UIListLayout", {
 		HorizontalAlignment = Enum.HorizontalAlignment.Left,
 		VerticalAlignment = Enum.VerticalAlignment.Top,
 		SortOrder = Enum.SortOrder.LayoutOrder
 	})
 	
-	return roactModule.createElement("Frame", {
+	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		Size = size,
-		LayoutOrder = layoutOrder
+		Size = Size,
+		LayoutOrder = LayoutOrder
 	}, {
-		Header = constructHeader(p2.onSortChanged),
-		Entries = roactModule.createElement("ScrollingFrame", {
-			Position = UDim2.new(0, 0, 0, headerFrameHeight),
-			Size = UDim2.new(1, 0, 1, -headerFrameHeight),
+		Header = constructHeader(p1.onSortChanged),
+		Entries = RoactModule.createElement("ScrollingFrame", {
+			Position = UDim2.new(0, 0, 0, HeaderFrameHeight),
+			Size = UDim2.new(1, 0, 1, -HeaderFrameHeight),
 			BackgroundTransparency = 1,
 			VerticalScrollBarInset = 1,
 			ScrollBarThickness = 5,
-			CanvasSize = UDim2.new(1, 0, 0, var2),
-			[roactModule.Ref] = p2.scrollingRef
-		}, t_1)
+			CanvasSize = UDim2.new(1, 0, 0, YOffset1),
+			[RoactModule.Ref] = p1.scrollingRef
+		}, Elements)
 	})
 end
 
-return dataConsumerModule(serverScripts, "ServerScriptsData")
+return DataConsumerModule(ServerScripts, "ServerScriptsData")

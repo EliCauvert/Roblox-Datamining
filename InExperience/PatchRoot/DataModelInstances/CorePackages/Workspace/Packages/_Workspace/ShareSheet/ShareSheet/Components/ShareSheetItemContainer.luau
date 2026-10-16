@@ -1,25 +1,23 @@
-﻿local parent = script:FindFirstAncestor("ShareSheet").Parent
-local foundationModule = require(parent.Foundation)
-local friendsCommonModule = require(parent.FriendsCommon)
-local reactModule = require(parent.React)
-local socialCommonModule = require(parent.SocialCommon)
-local shareSheetItemViewModule = require(script.Parent.ShareSheetItemView)
-local useGetPresenceByUserId = friendsCommonModule.Hooks.useGetPresenceByUserId
-local convertToFoundationPresenceEnum = socialCommonModule.Utils.convertToFoundationPresenceEnum
+﻿local Parent = script:FindFirstAncestor("ShareSheet").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local ShareSheetItemViewModule = require(script.Parent.ShareSheetItemView)
+local UseGetPresenceByUserIdFunction = require(Parent.FriendsCommon).Hooks.useGetPresenceByUserId
+local ConvertToFoundationPresenceEnumFunction = require(Parent.SocialCommon).Utils.convertToFoundationPresenceEnum
 
-return function(p1)
-	-- upvalues: useGetPresenceByUserId (ref), convertToFoundationPresenceEnum (ref), foundationModule (ref), reactModule (ref), shareSheetItemViewModule (ref)
-	local var1 = useGetPresenceByUserId(p1.primaryUserId)
+return function(Frame) --[[ Line: 25 | Named "ShareSheetItemContainer" ]]
+	-- upvalues: UseGetPresenceByUserIdFunction (copy), ConvertToFoundationPresenceEnumFunction (copy), FoundationModule (copy), ReactModule (copy), ShareSheetItemViewModule (copy)
+	local UseGetPresenceByUserIdResult = UseGetPresenceByUserIdFunction(Frame.primaryUserId)
 	
-	return reactModule.createElement(shareSheetItemViewModule, {
-		icon = p1.icon,
-		isSelected = p1.isSelected,
-		primaryUserId = p1.primaryUserId,
-		secondUserId = p1.secondUserId,
-		label = p1.label,
-		onActivated = p1.onActivated,
-		shouldAnimate = p1.shouldAnimate,
-		userPresence = if var1 and var1.userPresenceType then convertToFoundationPresenceEnum(var1.userPresenceType) else foundationModule.Enums.UserPresence.None,
-		LayoutOrder = p1.LayoutOrder
+	return ReactModule.createElement(ShareSheetItemViewModule, {
+		icon = Frame.icon,
+		isSelected = Frame.isSelected,
+		primaryUserId = Frame.primaryUserId,
+		secondUserId = Frame.secondUserId,
+		label = Frame.label,
+		onActivated = Frame.onActivated,
+		shouldAnimate = Frame.shouldAnimate,
+		userPresence = if UseGetPresenceByUserIdResult and UseGetPresenceByUserIdResult.userPresenceType then ConvertToFoundationPresenceEnumFunction(UseGetPresenceByUserIdResult.userPresenceType) else FoundationModule.Enums.UserPresence.None,
+		LayoutOrder = Frame.LayoutOrder
 	})
 end

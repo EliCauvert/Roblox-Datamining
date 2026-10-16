@@ -1,33 +1,31 @@
-﻿local copyModule = require(script.Parent.copy)
+﻿local CopyModule = require(script.Parent.copy)
 
-local function noUpdate(p1)
+local function noUpdate(p1) --[[ Line: 4 ]]
 	return p1
 end
 
-local function call(p1, ...)
-	if type(p1) == "function" then
-		return p1(...)
-	end
+local function call(Callback, ...) --[[ Line: 8 ]]
+	if type(Callback) ~= "function" then return end
+	return Callback(...)
 end
 
-return function(p1, p2, p3, p4)
-	-- upvalues: copyModule (ref), noUpdate (ref), call (ref)
-	local var1
-	local var2 = type(p1)
-	assert(var2 == "table", "expected a table for first argument, got " .. var3)
-	local var3 = type(p2)
-	assert(var3 == "number" and p2 % 1 == 0, "expected an integer for second argument, got " .. var4)
-	local var4 = copyModule(p1)
-	local _ = nil
-	p3 = p3 or noUpdate
+return function(p1, Key: number, p2, p3) --[[ Line: 14 | Named "update" ]]
+	-- upvalues: CopyModule (copy), noUpdate (copy), call (copy)
+	local ValueType = type(p1)
+	assert(ValueType == "table", "expected a table for first argument, got " .. ValueType)
+	local ValueType1 = type(Key)
+	assert(ValueType1 == "number" and Key % 1 == 0, "expected an integer for second argument, got " .. ValueType1)
+	local CopyModuleResult = CopyModule(p1)
+	local Callback = p2 or noUpdate
+	local CallbackResult = nil
 	
-	if var4[p2] == nil then
-		var1 = call(p4, false, p2)
+	if CopyModuleResult[Key] == nil then
+		CallbackResult = call(p3, false, Key)
 	else
-		var1 = p3(var4[p2], p2)
-		call(p4, true, var1, p2)
+		CallbackResult = Callback(CopyModuleResult[Key], Key)
+		call(p3, true, CallbackResult, Key)
 	end
-	var4[p2] = var1
+	CopyModuleResult[Key] = CallbackResult
 	
-	return var4
+	return CopyModuleResult
 end

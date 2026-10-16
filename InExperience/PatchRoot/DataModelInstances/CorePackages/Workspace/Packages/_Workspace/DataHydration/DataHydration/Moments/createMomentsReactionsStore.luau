@@ -1,48 +1,48 @@
-﻿local parent = script:FindFirstAncestor("DataHydration").Parent
-local httpClientModule = require(parent.HttpClient)
-local promiseModule = require(parent.Promise)
-local _ = require(parent.MomentsTypes)
+﻿local Parent = script:FindFirstAncestor("DataHydration").Parent
+local HttpClientModule = require(Parent.HttpClient)
+local PromiseModule = require(Parent.Promise)
+local _ = require(Parent.MomentsTypes)
 local _ = require(script.Parent.MomentsStoreTypes)
-local reactToFeedItemModule = require(script.Parent.Requests.reactToFeedItem)
-local reactToFeedItemV2Module = require(script.Parent.Requests.reactToFeedItemV2)
-local createMomentsEmojiSetsStoreModule = require(script.Parent.createMomentsEmojiSetsStore)
-local fFlagMomentsEmojiSetsApiModule = require(script.Parent.FFlagMomentsEmojiSetsApi)
-local fFlagMomentsComments = require(parent.SharedFlags).FFlagMomentsComments
+local ReactToFeedItemModule = require(script.Parent.Requests.reactToFeedItem)
+local ReactToFeedItemV2Module = require(script.Parent.Requests.reactToFeedItemV2)
+local CreateMomentsEmojiSetsStoreModule = require(script.Parent.createMomentsEmojiSetsStore)
+local FFlagMomentsEmojiSetsApiModule = require(script.Parent.FFlagMomentsEmojiSetsApi)
+local FFlagMomentsComments = require(Parent.SharedFlags).FFlagMomentsComments
 
-return function(p1)
-	-- upvalues: httpClientModule (ref), reactToFeedItemModule (ref), reactToFeedItemV2Module (ref), promiseModule (ref), fFlagMomentsEmojiSetsApiModule (ref), fFlagMomentsComments (ref), createMomentsEmojiSetsStoreModule (ref)
-	p1 = p1 or {}
+return function(p1) --[[ Line: 20 | Named "createMomentsReactionsStore" ]]
+	-- upvalues: HttpClientModule (copy), ReactToFeedItemModule (copy), ReactToFeedItemV2Module (copy), PromiseModule (copy), FFlagMomentsEmojiSetsApiModule (copy), FFlagMomentsComments (copy), CreateMomentsEmojiSetsStoreModule (copy)
+	local P0 = p1 or {}
 	
-	local function reactToFeedItem(p2)
-		-- upvalues: httpClientModule (copy), reactToFeedItemModule (copy), p1 (ref)
-		return httpClientModule.asPromise(reactToFeedItemModule(p2, p1.network))
+	local function reactToFeedItem(p2) --[[ Line: 23 ]]
+		-- upvalues: HttpClientModule (upval), ReactToFeedItemModule (upval), P0 (copy)
+		return HttpClientModule.asPromise(ReactToFeedItemModule(p2, P0.network))
 	end
 	
-	local function reactToFeedItemV2(p2)
-		-- upvalues: httpClientModule (copy), reactToFeedItemV2Module (copy), p1 (ref), promiseModule (copy)
-		return httpClientModule.asPromise(reactToFeedItemV2Module(p2, p1.network)):catch(function(p3)
-			-- upvalues: promiseModule (copy)
-			warn(`[Moments] Failed to react to feed item (v2): {tostring(p3)}`)
+	local function reactToFeedItemV2(p2) --[[ Line: 27 ]]
+		-- upvalues: HttpClientModule (upval), ReactToFeedItemV2Module (upval), P0 (copy), PromiseModule (upval)
+		return HttpClientModule.asPromise(ReactToFeedItemV2Module(p2, P0.network)):catch(function(Err) --[[ Line: 28 ]]
+			-- upvalues: PromiseModule (upval)
+			warn(`[Moments] Failed to react to feed item (v2): {tostring(Err)}`)
 			
-			return promiseModule.reject(p3)
+			return PromiseModule.reject(Err)
 		end)
 	end
 	
-	if not fFlagMomentsEmojiSetsApiModule and not fFlagMomentsComments then
+	if not FFlagMomentsEmojiSetsApiModule and not FFlagMomentsComments then
 		return { reactToFeedItem = reactToFeedItem }
 	end
-	local var1 = createMomentsEmojiSetsStoreModule(p1)
-	local t = {
+	local MomentsEmojiSetsStoreModule = CreateMomentsEmojiSetsStoreModule(P0)
+	local config = {
 		reactToFeedItem = reactToFeedItem,
-		getAndFetchEmojiSets = var1.getAndFetchEmojiSets
+		getAndFetchEmojiSets = MomentsEmojiSetsStoreModule.getAndFetchEmojiSets
 	}
 	
-	if fFlagMomentsComments then
-		t.getCachedEmojiCatalog = var1.getCachedEmojiCatalog
+	if FFlagMomentsComments then
+		config.getCachedEmojiCatalog = MomentsEmojiSetsStoreModule.getCachedEmojiCatalog
 	end
-	if fFlagMomentsEmojiSetsApiModule then
-		t.reactToFeedItemV2 = reactToFeedItemV2
-		t.getEmojis = var1.getEmojis
+	if FFlagMomentsEmojiSetsApiModule then
+		config.reactToFeedItemV2 = reactToFeedItemV2
+		config.getEmojis = MomentsEmojiSetsStoreModule.getEmojis
 	end
-	return t
+	return config
 end

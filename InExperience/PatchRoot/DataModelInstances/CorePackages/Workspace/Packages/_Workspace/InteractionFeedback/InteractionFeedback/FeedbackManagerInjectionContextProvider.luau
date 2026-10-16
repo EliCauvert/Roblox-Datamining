@@ -1,9 +1,9 @@
-﻿local parent = script:FindFirstAncestor("InteractionFeedback").Parent
-local feedbackManagerInjectionContext = require(parent.UIBlox).Core.Control.FeedbackManagerInjectionContext
-local reactModule = require(parent.React)
-local useTriggerFeedbackModule = require(script.Parent.useTriggerFeedback)
+﻿local Parent = script:FindFirstAncestor("InteractionFeedback").Parent
+local FeedbackManagerInjectionContext = require(Parent.UIBlox).Core.Control.FeedbackManagerInjectionContext
+local ReactModule = require(Parent.React)
+local UseTriggerFeedbackModule = require(script.Parent.useTriggerFeedback)
 
-return function(p1)
-	-- upvalues: useTriggerFeedbackModule (ref), reactModule (ref), feedbackManagerInjectionContext (ref)
-	return reactModule.createElement(feedbackManagerInjectionContext.Provider, { value = useTriggerFeedbackModule() }, p1.children)
+return function(p1) --[[ Line: 7 | Named "FeedbackManagerInjectionContextProvider" ]]
+	-- upvalues: UseTriggerFeedbackModule (copy), ReactModule (copy), FeedbackManagerInjectionContext (copy)
+	return ReactModule.createElement(FeedbackManagerInjectionContext.Provider, { value = UseTriggerFeedbackModule() }, p1.children)
 end

@@ -1,14 +1,14 @@
-﻿local telemetryService = game:GetService("TelemetryService")
-local parent = script:FindFirstAncestor("DiscoveryAnalytics").Parent
-local tModule = require(parent.t)
-local discoveryEventErrorLogger = require(parent.DiscoveryUtils).DiscoveryEventErrorLogger
-local var1 = tModule.strictInterface({
-	assignment_id = tModule.number,
-	assignment_type = tModule.string,
-	social_link_type = tModule.string,
-	social_link_display_type = tModule.string
+﻿local TelemetryService = game:GetService("TelemetryService")
+local Parent = script:FindFirstAncestor("DiscoveryAnalytics").Parent
+local TModule = require(Parent.t)
+local DiscoveryEventErrorLogger = require(Parent.DiscoveryUtils).DiscoveryEventErrorLogger
+local StrictInterfaceResult = TModule.strictInterface({
+	assignment_id = TModule.number,
+	assignment_type = TModule.string,
+	social_link_type = TModule.string,
+	social_link_display_type = TModule.string
 })
-local t = {
+local config = {
 	eventName = "openLeavingRobloxModal",
 	description = "Event fired when a prompt is opened to confirm that the user wants to leave roblox",
 	backends = { "EventIngest" },
@@ -16,15 +16,15 @@ local t = {
 	lastUpdated = { 25, 12, 9 }
 }
 
-return function(p1)
-	-- upvalues: var1 (ref), discoveryEventErrorLogger (ref), telemetryService (ref), t (ref)
-	local var2, var3 = var1(p1)
+return function(CustomFields) --[[ Line: 27 ]]
+	-- upvalues: StrictInterfaceResult (copy), DiscoveryEventErrorLogger (copy), TelemetryService (copy), config (copy)
+	local StrictInterfaceResultResult, StrictInterfaceResultResult2 = StrictInterfaceResult(CustomFields)
 	
-	if not var2 then
-		discoveryEventErrorLogger.reportError("OpenLeavingRobloxModalInterface", var3)
+	if not StrictInterfaceResultResult then
+		DiscoveryEventErrorLogger.reportError("OpenLeavingRobloxModalInterface", StrictInterfaceResultResult2)
 	end
-	telemetryService:LogEvent(t, {
+	TelemetryService:LogEvent(config, {
 		standardizedFields = { "addSessionInfo" },
-		customFields = p1
+		customFields = CustomFields
 	})
 end

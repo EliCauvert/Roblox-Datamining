@@ -1,164 +1,168 @@
-﻿local httpService = game:GetService("HttpService")
-local avatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
-local parent = avatarExperienceCatalog.Parent
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local foundationModule = require(parent.Foundation)
-local useNetworking = require(parent.AvatarExperienceCommon).Hooks.useNetworking
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local avatarExperienceAnalyticsModule = require(parent.AvatarExperienceAnalytics)
-local avatarExperienceNavigationModule = require(parent.AvatarExperienceNavigation)
-local sendUnifiedEventLog = avatarExperienceAnalyticsModule.sendUnifiedEventLog
-local unifiedEventLogEnums = avatarExperienceAnalyticsModule.UnifiedEventLogEnums
-local unifiedLoggingElementNameEnums = avatarExperienceAnalyticsModule.Enums.UnifiedLoggingElementNameEnums
-local unifiedLoggingSurface = avatarExperienceNavigationModule.Enums.UnifiedLoggingSurface
-local _ = require(avatarExperienceCatalog.Api.GetMarketplaceOffersBanner.MarketplaceOffersBannerTypes)
-local marketplaceOffersBannerDisplayModule = require(avatarExperienceCatalog.Api.GetMarketplaceOffersBanner.marketplaceOffersBannerDisplay)
-local useAXCatalogStoreContextModule = require(avatarExperienceCatalog.Context.useAXCatalogStoreContext)
-local _ = require(avatarExperienceCatalog.Stores.createCatalogOffersBannerStore)
-local catalogOffersBannerImpressionsStoreModule = require(avatarExperienceCatalog.Stores.catalogOffersBannerImpressionsStore)
-local useCatalogOffersBannerDismissHydrationModule = require(avatarExperienceCatalog.Hooks.useCatalogOffersBannerDismissHydration)
-local useCatalogOffersBannerOffersFetchModule = require(avatarExperienceCatalog.Hooks.useCatalogOffersBannerOffersFetch)
-local catalogOffersBannerAppStorageModule = require(avatarExperienceCatalog.Utils.catalogOffersBannerAppStorage)
+﻿local HttpService = game:GetService("HttpService")
+local AvatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
+local Parent = AvatarExperienceCatalog.Parent
+local ReactModule = require(Parent.React)
+local UseNetworkingFunction = require(Parent.AvatarExperienceCommon).Hooks.useNetworking
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local AvatarExperienceAnalyticsModule = require(Parent.AvatarExperienceAnalytics)
+local SendUnifiedEventLogFunction = AvatarExperienceAnalyticsModule.sendUnifiedEventLog
+local UnifiedEventLogEnums = AvatarExperienceAnalyticsModule.UnifiedEventLogEnums
+local UnifiedLoggingElementNameEnums = AvatarExperienceAnalyticsModule.Enums.UnifiedLoggingElementNameEnums
+local UnifiedLoggingSurface = require(Parent.AvatarExperienceNavigation).Enums.UnifiedLoggingSurface
+local _ = require(AvatarExperienceCatalog.Api.GetMarketplaceOffersBanner.MarketplaceOffersBannerTypes)
+local MarketplaceOffersBannerDisplayModule = require(AvatarExperienceCatalog.Api.GetMarketplaceOffersBanner.marketplaceOffersBannerDisplay)
+local UseAXCatalogStoreContextModule = require(AvatarExperienceCatalog.Context.useAXCatalogStoreContext)
+local _ = require(AvatarExperienceCatalog.Stores.createCatalogOffersBannerStore)
+local CatalogOffersBannerImpressionsStoreModule = require(AvatarExperienceCatalog.Stores.catalogOffersBannerImpressionsStore)
+local UseCatalogOffersBannerDismissHydrationModule = require(AvatarExperienceCatalog.Hooks.useCatalogOffersBannerDismissHydration)
+local UseCatalogOffersBannerOffersFetchModule = require(AvatarExperienceCatalog.Hooks.useCatalogOffersBannerOffersFetch)
+local CatalogOffersBannerAppStorageModule = require(AvatarExperienceCatalog.Utils.catalogOffersBannerAppStorage)
 local _ = require(script.Parent.CatalogOffersBannerView)
-local catalogOffersBannerOfferModalsModule = require(script.Parent.CatalogOffersBannerOfferModals)
-local getMarketplaceOffersBannerOfferDisplayId = marketplaceOffersBannerDisplayModule.getMarketplaceOffersBannerOfferDisplayId
-local getMarketplaceOffersBannerOfferDisplayTitle = marketplaceOffersBannerDisplayModule.getMarketplaceOffersBannerOfferDisplayTitle
-local useTokens = foundationModule.Hooks.useTokens
-local useSignalState = signalsReactModule.useSignalState
-local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
-local fFlagAXCatalogOffersAutoOpenFTUXSheet = avatarExperienceFlagsModule.FFlagAXCatalogOffersAutoOpenFTUXSheet
-local AXSendImpressionsForCatalogOffersBanner = game:DefineFastFlag("AXSendImpressionsForCatalogOffersBanner", false)
-local fFlagAXOfferBannerImpressionOnlyOnStartup = avatarExperienceFlagsModule.FFlagAXOfferBannerImpressionOnlyOnStartup
-local fFlagAXUpdateOffersEndsUIWithBadge = avatarExperienceFlagsModule.FFlagAXUpdateOffersEndsUIWithBadge
+local CatalogOffersBannerOfferModalsModule = require(script.Parent.CatalogOffersBannerOfferModals)
+local GetMarketplaceOffersBannerOfferDisplayIdFunction = MarketplaceOffersBannerDisplayModule.getMarketplaceOffersBannerOfferDisplayId
+local GetMarketplaceOffersBannerOfferDisplayTitleFunction = MarketplaceOffersBannerDisplayModule.getMarketplaceOffersBannerOfferDisplayTitle
+local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
+local FFlagAXCatalogOffersAutoOpenFTUXSheet = AvatarExperienceFlagsModule.FFlagAXCatalogOffersAutoOpenFTUXSheet
+local FFlagAXOfferBannerImpressionOnlyOnStartup = AvatarExperienceFlagsModule.FFlagAXOfferBannerImpressionOnlyOnStartup
+local FFlagAXUpdateOffersEndsUIWithBadge = AvatarExperienceFlagsModule.FFlagAXUpdateOffersEndsUIWithBadge
 
-local function blendShiftFillForOpaqueGuiObject(p1, p2)
-	local var1 = 1 - math.clamp(p1.Transparency, 0, 1)
+local function blendShiftFillForOpaqueGuiObject(Shift, SurfaceColor): Color3 --[[ Line: 70 ]]
+	local v1 = 1 - math.clamp(Shift.Transparency, 0, 1)
 	
-	return Color3.new(p1.Color3.R * var1 + p2.R * (1 - var1), p1.Color3.G * var1 + p2.G * (1 - var1), p1.Color3.B * var1 + p2.B * (1 - var1))
+	return Color3.new(Shift.Color3.R * v1 + SurfaceColor.R * (1 - v1), Shift.Color3.G * v1 + SurfaceColor.G * (1 - v1), Shift.Color3.B * v1 + SurfaceColor.B * (1 - v1))
 end
 
-return function(p1)
-	-- upvalues: useAXCatalogStoreContextModule (ref), useNetworking (ref), useTokens (ref), reactModule (ref), useLocalization (ref), catalogOffersBannerAppStorageModule (ref), getMarketplaceOffersBannerOfferDisplayId (ref), useSignalState (ref), fFlagAXCatalogOffersAutoOpenFTUXSheet (ref), useCatalogOffersBannerDismissHydrationModule (ref), useCatalogOffersBannerOffersFetchModule (ref), getMarketplaceOffersBannerOfferDisplayTitle (ref), AXSendImpressionsForCatalogOffersBanner (ref), fFlagAXOfferBannerImpressionOnlyOnStartup (ref), catalogOffersBannerImpressionsStoreModule (ref), sendUnifiedEventLog (ref), unifiedEventLogEnums (ref), unifiedLoggingSurface (ref), unifiedLoggingElementNameEnums (ref), httpService (ref), catalogOffersBannerOfferModalsModule (ref), fFlagAXUpdateOffersEndsUIWithBadge (ref), blendShiftFillForOpaqueGuiObject (ref)
-	local catalogOffersBannerStore = useAXCatalogStoreContextModule().catalogOffersBannerStore
-	local var1 = useNetworking()
-	local var2 = useTokens()
-	local var3, var4 = reactModule.useState(nil)
-	local var5, var6 = reactModule.useState(nil)
-	local var7, var8 = reactModule.useState(false)
-	local var9, var10 = reactModule.useState(false)
-	local var11 = useLocalization({ okModalButton = "CommonUI.Controls.Action.OK" })
-	local var12 = reactModule.useCallback(function()
-		-- upvalues: var10 (ref), var8 (ref), var6 (ref)
-		var10(false)
-		var8(false)
-		var6(nil)
+return function(p1) --[[ Line: 96 | Named "useCatalogOffersBannerViewModel" ]]
+	-- upvalues: UseAXCatalogStoreContextModule (copy), UseNetworkingFunction (copy), UseTokensFunction (copy), ReactModule (copy), UseLocalizationFunction (copy), CatalogOffersBannerAppStorageModule (copy), GetMarketplaceOffersBannerOfferDisplayIdFunction (copy), UseSignalStateFunction (copy), FFlagAXCatalogOffersAutoOpenFTUXSheet (copy), UseCatalogOffersBannerDismissHydrationModule (copy), UseCatalogOffersBannerOffersFetchModule (copy), GetMarketplaceOffersBannerOfferDisplayTitleFunction (copy), FFlagAXOfferBannerImpressionOnlyOnStartup (copy), CatalogOffersBannerImpressionsStoreModule (copy), SendUnifiedEventLogFunction (copy), UnifiedEventLogEnums (copy), UnifiedLoggingSurface (copy), UnifiedLoggingElementNameEnums (copy), HttpService (copy), CatalogOffersBannerOfferModalsModule (copy), FFlagAXUpdateOffersEndsUIWithBadge (copy), blendShiftFillForOpaqueGuiObject (copy)
+	local CatalogOffersBannerStore = UseAXCatalogStoreContextModule().catalogOffersBannerStore
+	local UseNetworkingResult = UseNetworkingFunction()
+	local UseTokensResult = UseTokensFunction()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(false)
+	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(false)
+	local UseLocalizationResult = UseLocalizationFunction({ okModalButton = "CommonUI.Controls.Action.OK" })
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 118 ]]
+		-- upvalues: UseStateResult2_3 (copy), UseStateResult2_2 (copy), UseStateResult2_1 (copy)
+		UseStateResult2_3(false)
+		UseStateResult2_2(false)
+		UseStateResult2_1(nil)
 	end, {})
-	local var13 = reactModule.useCallback(function()
-		-- upvalues: var3 (ref), catalogOffersBannerAppStorageModule (copy), getMarketplaceOffersBannerOfferDisplayId (copy), var6 (ref), var8 (ref)
-		if var3 and var3.modal then
-			catalogOffersBannerAppStorageModule.writeSeenOfferSheetForCurrentOffer(getMarketplaceOffersBannerOfferDisplayId(var3))
-			var6(var3.modal)
-			var8(true)
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 124 ]]
+		-- upvalues: UseStateResult (copy), CatalogOffersBannerAppStorageModule (upval), GetMarketplaceOffersBannerOfferDisplayIdFunction (upval), UseStateResult2_1 (copy), UseStateResult2_2 (copy)
+		if UseStateResult and UseStateResult.modal then
+			CatalogOffersBannerAppStorageModule.writeSeenOfferSheetForCurrentOffer(GetMarketplaceOffersBannerOfferDisplayIdFunction(UseStateResult))
+			UseStateResult2_1(UseStateResult.modal)
+			UseStateResult2_2(true)
 		end
-	end, { var3 })
-	local var14 = reactModule.useCallback(function()
-		-- upvalues: var10 (ref)
-		var10(true)
+	end, { UseStateResult })
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 132 ]]
+		-- upvalues: UseStateResult2_3 (copy)
+		UseStateResult2_3(true)
 	end, {})
-	local var15 = reactModule.useCallback(function()
-		-- upvalues: var10 (ref)
-		var10(false)
+	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 136 ]]
+		-- upvalues: UseStateResult2_3 (copy)
+		UseStateResult2_3(false)
 	end, {})
-	local var16 = useSignalState(catalogOffersBannerStore.getPayload)
-	local var17 = useSignalState(catalogOffersBannerStore.getDismissed)
-	reactModule.useLayoutEffect(function()
-		-- upvalues: var16 (ref), catalogOffersBannerAppStorageModule (copy), var4 (ref)
-		var4(if var16 == nil then nil else catalogOffersBannerAppStorageModule.resolveVisibleOffer(var16))
-	end, { var16 })
-	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), var5 (ref), getMarketplaceOffersBannerOfferDisplayId (copy), fFlagAXCatalogOffersAutoOpenFTUXSheet (copy), catalogOffersBannerAppStorageModule (copy), var6 (ref), var8 (ref)
-		if var3 == nil or var3.modal == nil then return end
-		if var5 ~= nil then return end
-		local var18 = getMarketplaceOffersBannerOfferDisplayId(var3)
+	local UseSignalStateResult = UseSignalStateFunction(CatalogOffersBannerStore.getPayload)
+	local UseSignalStateResult1 = UseSignalStateFunction(CatalogOffersBannerStore.getDismissed)
+	ReactModule.useLayoutEffect(function() --[[ Line: 143 ]]
+		-- upvalues: UseSignalStateResult (copy), CatalogOffersBannerAppStorageModule (upval), UseStateResult2 (copy)
+		UseStateResult2(if UseSignalStateResult == nil then nil else CatalogOffersBannerAppStorageModule.resolveVisibleOffer(UseSignalStateResult))
+	end, { UseSignalStateResult })
+	ReactModule.useEffect(function() --[[ Line: 151 ]]
+		-- upvalues: UseStateResult (copy), UseStateResult1 (copy), GetMarketplaceOffersBannerOfferDisplayIdFunction (upval), FFlagAXCatalogOffersAutoOpenFTUXSheet (upval), CatalogOffersBannerAppStorageModule (upval), UseStateResult2_1 (copy), UseStateResult2_2 (copy)
+		if UseStateResult == nil or UseStateResult.modal == nil then return end
+		if UseStateResult1 ~= nil then return end
+		local MarketplaceOffersBannerOfferDisplayId = GetMarketplaceOffersBannerOfferDisplayIdFunction(UseStateResult)
 		
-		if fFlagAXCatalogOffersAutoOpenFTUXSheet and catalogOffersBannerAppStorageModule.shouldAutoOpenOfferSheetForCurrentOffer(var18) then
-			catalogOffersBannerAppStorageModule.writeSeenOfferSheetForCurrentOffer(var18)
-			var6(var3.modal)
-			var8(true)
+		if FFlagAXCatalogOffersAutoOpenFTUXSheet and CatalogOffersBannerAppStorageModule.shouldAutoOpenOfferSheetForCurrentOffer(MarketplaceOffersBannerOfferDisplayId) then
+			CatalogOffersBannerAppStorageModule.writeSeenOfferSheetForCurrentOffer(MarketplaceOffersBannerOfferDisplayId)
+			UseStateResult2_1(UseStateResult.modal)
+			UseStateResult2_2(true)
 		end
 	end, {
-		var5,
-		var3,
-		if var3 then getMarketplaceOffersBannerOfferDisplayId(var3) else nil
+		UseStateResult1,
+		UseStateResult,
+		if UseStateResult then GetMarketplaceOffersBannerOfferDisplayIdFunction(UseStateResult) else nil
 	})
-	useCatalogOffersBannerDismissHydrationModule(catalogOffersBannerStore, var16)
-	useCatalogOffersBannerOffersFetchModule(catalogOffersBannerStore, var1)
-	local var18 = if var3 ~= nil then nil else getMarketplaceOffersBannerOfferDisplayTitle(var3)
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var18 (ref), var17 (ref)
-		local onBannerVisibleChanged = p1.onBannerVisibleChanged
+	UseCatalogOffersBannerDismissHydrationModule(CatalogOffersBannerStore, UseSignalStateResult)
+	UseCatalogOffersBannerOffersFetchModule(CatalogOffersBannerStore, UseNetworkingResult)
+	local MarketplaceOffersBannerOfferDisplayTitle = if UseStateResult == nil then nil else GetMarketplaceOffersBannerOfferDisplayTitleFunction(UseStateResult)
+	ReactModule.useEffect(function() --[[ Line: 175 ]]
+		-- upvalues: p1 (copy), MarketplaceOffersBannerOfferDisplayTitle (copy), UseSignalStateResult1 (copy)
+		local OnBannerVisibleChangedFunction: (any) -> () = p1.onBannerVisibleChanged
 		
-		if onBannerVisibleChanged then
-			onBannerVisibleChanged(var18 ~= nil and not var17)
+		if OnBannerVisibleChangedFunction then
+			OnBannerVisibleChangedFunction(MarketplaceOffersBannerOfferDisplayTitle ~= nil and not UseSignalStateResult1)
 		end
-	end, { var17, var18, p1.onBannerVisibleChanged })
+	end, {
+		UseSignalStateResult1,
+		MarketplaceOffersBannerOfferDisplayTitle,
+		p1.onBannerVisibleChanged
+	})
+	ReactModule.useEffect(function() --[[ Line: 183 ]]
+		-- upvalues: UseSignalStateResult1 (copy), UseStateResult (copy), MarketplaceOffersBannerOfferDisplayTitle (copy), FFlagAXOfferBannerImpressionOnlyOnStartup (upval), CatalogOffersBannerImpressionsStoreModule (upval), SendUnifiedEventLogFunction (upval), UnifiedEventLogEnums (upval), UnifiedLoggingSurface (upval), UnifiedLoggingElementNameEnums (upval), HttpService (upval)
+		if not UseSignalStateResult1 and UseStateResult and MarketplaceOffersBannerOfferDisplayTitle and (not FFlagAXOfferBannerImpressionOnlyOnStartup or UseStateResult.offerId and not CatalogOffersBannerImpressionsStoreModule.hasSeenOfferId(UseStateResult.offerId)) then
+			CatalogOffersBannerImpressionsStoreModule.addOfferId(UseStateResult.offerId)
+			SendUnifiedEventLogFunction({
+				action = UnifiedEventLogEnums.MarketplaceUnifiedAction.UI_ELEMENT_IMPRESSION,
+				surface = UnifiedLoggingSurface.CATALOG,
+				elementName = UnifiedLoggingElementNameEnums.CATALOG_OFFERS_BANNER,
+				elementMetadata = HttpService:JSONEncode({ offerId = UseStateResult.offerId })
+			})
+		end
+	end, {
+		UseSignalStateResult1,
+		UseStateResult,
+		MarketplaceOffersBannerOfferDisplayTitle
+	})
 	
-	if AXSendImpressionsForCatalogOffersBanner then
-		reactModule.useEffect(function()
-			-- upvalues: var17 (ref), var3 (ref), var18 (ref), fFlagAXOfferBannerImpressionOnlyOnStartup (copy), catalogOffersBannerImpressionsStoreModule (copy), sendUnifiedEventLog (copy), unifiedEventLogEnums (copy), unifiedLoggingSurface (copy), unifiedLoggingElementNameEnums (copy), httpService (copy)
-			if not var17 and var3 and var18 and (not fFlagAXOfferBannerImpressionOnlyOnStartup or var3.offerId and not catalogOffersBannerImpressionsStoreModule.hasSeenOfferId(var3.offerId)) then
-				catalogOffersBannerImpressionsStoreModule.addOfferId(var3.offerId)
-				sendUnifiedEventLog({
-					action = unifiedEventLogEnums.MarketplaceUnifiedAction.UI_ELEMENT_IMPRESSION,
-					surface = unifiedLoggingSurface.CATALOG,
-					elementName = unifiedLoggingElementNameEnums.CATALOG_OFFERS_BANNER,
-					elementMetadata = httpService:JSONEncode({ offerId = var3.offerId })
-				})
-			end
-		end, { var17, var3, var18 })
-	end
-	if var17 or var16 == nil or (var3 == nil or var18 == nil) then
+	if UseSignalStateResult1 or UseSignalStateResult == nil or UseStateResult == nil or MarketplaceOffersBannerOfferDisplayTitle == nil then
 		return { status = "hidden" }
+	else
+		local HasModal = UseStateResult.modal ~= nil
+		local Config = if FFlagAXUpdateOffersEndsUIWithBadge then {
+			Transparency = 0,
+			Color3 = blendShiftFillForOpaqueGuiObject(UseTokensResult.Color.Shift.Shift_200, UseTokensResult.Color.Surface.Surface_0.Color3)
+		} else nil
+		
+		return {
+			status = "visible",
+			viewProps = {
+				rootTags = if FFlagAXUpdateOffersEndsUIWithBadge then "col auto-y size-full-0" else "col auto-y size-full-0 bg-shift-200",
+				backgroundStyle = if FFlagAXUpdateOffersEndsUIWithBadge then Config else nil,
+				Size = p1.Size,
+				Position = p1.Position,
+				iconName = UseStateResult.icon,
+				expirationTimeInUTC = if FFlagAXUpdateOffersEndsUIWithBadge then UseStateResult.expirationTimeInUTC else nil,
+				iconEmphasisStyle = UseTokensResult.Color.System.Emphasis,
+				titleContentEmphasisStyle = UseTokensResult.Color.Content.Emphasis,
+				titleText = MarketplaceOffersBannerOfferDisplayTitle,
+				onCloseActivated = function() --[[ Line: 225 ]]
+					-- upvalues: CatalogOffersBannerAppStorageModule (upval), GetMarketplaceOffersBannerOfferDisplayIdFunction (upval), UseStateResult (copy), UseSignalStateResult (copy), UseStateResult2 (copy), CatalogOffersBannerStore (copy)
+					CatalogOffersBannerAppStorageModule.writeDismissedForCurrentOffer(GetMarketplaceOffersBannerOfferDisplayIdFunction(UseStateResult))
+					local ResolveVisibleOfferResult = CatalogOffersBannerAppStorageModule.resolveVisibleOffer(UseSignalStateResult)
+					UseStateResult2(ResolveVisibleOfferResult)
+					
+					if ResolveVisibleOfferResult == nil then
+						CatalogOffersBannerStore.setDismissed(true)
+					end
+				end,
+				offerModalTapAreaEnabled = HasModal,
+				onOfferBannerActivated = if HasModal then UseResult1 else nil
+			},
+			modals = if UseStateResult1 then ReactModule.createElement(CatalogOffersBannerOfferModalsModule, {
+				modal = UseStateResult1,
+				offersModalOpen = UseStateResult3,
+				termsModalOpen = UseStateResult4,
+				okButtonText = UseLocalizationResult.okModalButton,
+				onCloseOffersModal = UseResult,
+				onOpenTermsModal = UseResult2,
+				onCloseTermsModal = UseResult3
+			}) else nil
+		}
 	end
-	local var19 = var3.modal ~= nil
-	
-	return {
-		status = "visible",
-		viewProps = {
-			rootTags = if fFlagAXUpdateOffersEndsUIWithBadge then "col auto-y size-full-0" else "col auto-y size-full-0 bg-shift-200",
-			backgroundStyle = if fFlagAXUpdateOffersEndsUIWithBadge then if fFlagAXUpdateOffersEndsUIWithBadge then {
-				Transparency = 0,
-				Color3 = blendShiftFillForOpaqueGuiObject(var2.Color.Shift.Shift_200, var2.Color.Surface.Surface_0.Color3)
-			} else nil else nil,
-			Size = p1.Size,
-			Position = p1.Position,
-			iconName = var3.icon,
-			expirationTimeInUTC = if fFlagAXUpdateOffersEndsUIWithBadge then var3.expirationTimeInUTC else nil,
-			iconEmphasisStyle = var2.Color.System.Emphasis,
-			titleContentEmphasisStyle = var2.Color.Content.Emphasis,
-			titleText = var18,
-			onCloseActivated = function()
-				-- upvalues: catalogOffersBannerAppStorageModule (copy), getMarketplaceOffersBannerOfferDisplayId (copy), var3 (ref), var16 (ref), var4 (ref), catalogOffersBannerStore (ref)
-				catalogOffersBannerAppStorageModule.writeDismissedForCurrentOffer(getMarketplaceOffersBannerOfferDisplayId(var3))
-				local var20 = catalogOffersBannerAppStorageModule.resolveVisibleOffer(var16)
-				var4(var20)
-				
-				if var20 == nil then
-					catalogOffersBannerStore.setDismissed(true)
-				end
-			end,
-			offerModalTapAreaEnabled = var19,
-			onOfferBannerActivated = if var19 then var13 else nil
-		},
-		modals = if var5 then reactModule.createElement(catalogOffersBannerOfferModalsModule, {
-			modal = var5,
-			offersModalOpen = var7,
-			termsModalOpen = var9,
-			okButtonText = var11.okModalButton,
-			onCloseOffersModal = var12,
-			onOpenTermsModal = var14,
-			onCloseTermsModal = var15
-		}) else nil
-	}
 end

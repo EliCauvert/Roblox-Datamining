@@ -1,10 +1,10 @@
-﻿local reactModule = require(script:FindFirstAncestor("AvatarExperienceCatalog").Parent.React)
-local catalogPageMonolithDependenciesContextModule = require(script.Parent.CatalogPageMonolithDependenciesContext)
+﻿local ReactModule = require(script:FindFirstAncestor("AvatarExperienceCatalog").Parent.React)
+local CatalogPageMonolithDependenciesContextModule = require(script.Parent.CatalogPageMonolithDependenciesContext)
 
-return function()
-	-- upvalues: reactModule (ref), catalogPageMonolithDependenciesContextModule (ref)
-	local var1 = reactModule.useContext(catalogPageMonolithDependenciesContextModule)
-	assert(var1, "useCatalogPageMonolithDependencies must be used within a CatalogPageMonolithDependenciesContext.Provider")
+return function() --[[ Line: 8 | Named "useCatalogPageMonolithDependencies" ]]
+	-- upvalues: ReactModule (copy), CatalogPageMonolithDependenciesContextModule (copy)
+	local UseContextResult = ReactModule.useContext(CatalogPageMonolithDependenciesContextModule)
+	assert(UseContextResult, "useCatalogPageMonolithDependencies must be used within a CatalogPageMonolithDependenciesContext.Provider")
 	
-	return var1
+	return UseContextResult
 end

@@ -1,37 +1,37 @@
-﻿local serverTriggeredModals = script:FindFirstAncestor("ServerTriggeredModals")
-local parent = serverTriggeredModals.Parent
-local reactModule = require(parent.React)
-local sduiFeatureEntryPoint = require(parent.SduiSharedUtilities).SduiFeatureEntryPoint
-local promptStyleModule = require(script.Parent.SduiV2.PromptStyle)
-local usePromptEntriesModule = require(script.Parent.SduiV2.usePromptEntries)
-local fFlagPromptsActionEventLoggingModule = require(serverTriggeredModals.Flags.FFlagPromptsActionEventLogging)
+﻿local ServerTriggeredModals = script:FindFirstAncestor("ServerTriggeredModals")
+local Parent = ServerTriggeredModals.Parent
+local ReactModule = require(Parent.React)
+local SduiFeatureEntryPoint = require(Parent.SduiSharedUtilities).SduiFeatureEntryPoint
+local PromptStyleModule = require(script.Parent.SduiV2.PromptStyle)
+local UsePromptEntriesModule = require(script.Parent.SduiV2.usePromptEntries)
+local FFlagPromptsActionEventLoggingModule = require(ServerTriggeredModals.Flags.FFlagPromptsActionEventLogging)
 
-return function(p1)
-	-- upvalues: usePromptEntriesModule (ref), promptStyleModule (ref), reactModule (ref), sduiFeatureEntryPoint (ref), fFlagPromptsActionEventLoggingModule (ref)
-	local var1 = usePromptEntriesModule(p1.configKey, promptStyleModule.SystemBanner)[1]
+return function(p1) --[[ Line: 18 | Named "PromptsSystemBanner" ]]
+	-- upvalues: UsePromptEntriesModule (copy), PromptStyleModule (copy), ReactModule (copy), SduiFeatureEntryPoint (copy), FFlagPromptsActionEventLoggingModule (copy)
+	local UsePromptEntriesModuleResultEntry = UsePromptEntriesModule(p1.configKey, PromptStyleModule.SystemBanner)[1]
 	
-	return if var1 then reactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
-		Layout = reactModule.createElement("UIListLayout", {
+	return if UsePromptEntriesModuleResultEntry then ReactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
+		Layout = ReactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
 			SortOrder = Enum.SortOrder.LayoutOrder
 		}),
-		SystemBanner = reactModule.createElement(sduiFeatureEntryPoint, {
+		SystemBanner = ReactModule.createElement(SduiFeatureEntryPoint, {
 			shouldDisplayLoading = false,
 			shouldDisplayError = false,
 			LayoutOrder = 1,
 			configKey = p1.configKey,
-			identifier = var1.identifier,
+			identifier = UsePromptEntriesModuleResultEntry.identifier,
 			appPage = p1.appPage,
-			additionalAnalyticsData = if fFlagPromptsActionEventLoggingModule then {
-				promptInstanceId = if var1.identifier then var1.identifier else nil
+			additionalAnalyticsData = if FFlagPromptsActionEventLoggingModule then {
+				promptInstanceId = if UsePromptEntriesModuleResultEntry.identifier then UsePromptEntriesModuleResultEntry.identifier else nil
 			} else nil
 		}),
-		ContentContainer = reactModule.createElement("Frame", {
+		ContentContainer = ReactModule.createElement("Frame", {
 			LayoutOrder = 2,
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 0, 0)
 		}, {
-			UIFlexItem = reactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.Fill }),
+			UIFlexItem = ReactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.Fill }),
 			Content = p1.contentSlot
 		})
 	}) else p1.contentSlot

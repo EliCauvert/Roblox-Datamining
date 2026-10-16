@@ -1,12 +1,12 @@
-﻿local telemetryService = game:GetService("TelemetryService")
-local switchServerTelemetryThrottleHundrethsPercent = game:DefineFastInt("SwitchServerTelemetryThrottleHundrethsPercent", 10000)
-local t = {
+﻿local TelemetryService = game:GetService("TelemetryService")
+local SwitchServerTelemetryThrottleHundrethsPercent = game:DefineFastInt("SwitchServerTelemetryThrottleHundrethsPercent", 10000)
+local config = {
 	SwitchServerButtonActions = {
 		eventName = "coreui_switch_server_button_actions",
 		description = "Event fired every time the User engages with the People tab switch server button",
 		links = "https://roblox.atlassian.net/wiki/spaces/APEX/pages/4906123766/Switch+Server+Tech+Spec",
 		backends = { "EventIngest" },
-		throttlingPercentage = switchServerTelemetryThrottleHundrethsPercent,
+		throttlingPercentage = SwitchServerTelemetryThrottleHundrethsPercent,
 		lastUpdated = { 7, 15, 26 }
 	},
 	SwitchServerConfirmationActions = {
@@ -14,43 +14,37 @@ local t = {
 		description = "Event fired every time the User engages with the switch server confirmation screen",
 		links = "https://roblox.atlassian.net/wiki/spaces/APEX/pages/4906123766/Switch+Server+Tech+Spec",
 		backends = { "EventIngest" },
-		throttlingPercentage = switchServerTelemetryThrottleHundrethsPercent,
+		throttlingPercentage = SwitchServerTelemetryThrottleHundrethsPercent,
 		lastUpdated = { 7, 15, 26 }
 	}
 }
-local _ = {
-	placeId = "addPlaceId",
-	universeId = "addUniverseId",
-	playsessionId = "addPlaySessionId",
-	sessionInfo = "addSessionInfo"
-}
-local t_1 = {}
-t_1.__index = t_1
+local SwitchServerTelemetryModule = {}
+SwitchServerTelemetryModule.__index = SwitchServerTelemetryModule
 
-function t_1.sendSwitchServerButtonActions(p1)
-	-- upvalues: telemetryService (ref), t (ref)
-	telemetryService:LogEvent(t.SwitchServerButtonActions, {
+function SwitchServerTelemetryModule.sendSwitchServerButtonActions(CustomFields) --[[ Line: 57 ]]
+	-- upvalues: TelemetryService (copy), config (copy)
+	TelemetryService:LogEvent(config.SwitchServerButtonActions, {
 		standardizedFields = {
 			"addPlaceId",
 			"addUniverseId",
 			"addPlaySessionId",
 			"addSessionInfo"
 		},
-		customFields = p1
+		customFields = CustomFields
 	})
 end
 
-function t_1.sendSwitchServerConfirmationActions(p1)
-	-- upvalues: telemetryService (ref), t (ref)
-	telemetryService:LogEvent(t.SwitchServerConfirmationActions, {
+function SwitchServerTelemetryModule.sendSwitchServerConfirmationActions(CustomFields) --[[ Line: 64 ]]
+	-- upvalues: TelemetryService (copy), config (copy)
+	TelemetryService:LogEvent(config.SwitchServerConfirmationActions, {
 		standardizedFields = {
 			"addPlaceId",
 			"addUniverseId",
 			"addPlaySessionId",
 			"addSessionInfo"
 		},
-		customFields = p1
+		customFields = CustomFields
 	})
 end
 
-return t_1
+return SwitchServerTelemetryModule

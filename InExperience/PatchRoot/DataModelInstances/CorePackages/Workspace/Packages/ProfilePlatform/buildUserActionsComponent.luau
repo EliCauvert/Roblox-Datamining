@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent._Workspace.ProfilePlatform.ProfilePlatform.Hooks.buildUserActionsComponent)
+﻿return (require(script.Parent.Parent._Workspace.ProfilePlatform.ProfilePlatform.Hooks.buildUserActionsComponent))

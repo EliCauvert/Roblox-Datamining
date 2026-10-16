@@ -1,20 +1,20 @@
 ﻿local _ = require(script:FindFirstAncestor("BulkPurchaseApp").Store.Types)
 
-local function _(p1)
+local function _(p1) --[[ Line: 8 | Named "getMarketPlaceProductTypeFromItemType" ]]
 	return if p1 == "AvatarBundle" then Enum.MarketplaceProductType.AvatarBundle else Enum.MarketplaceProductType.AvatarAsset
 end
 
-return function(p1)
-	local t = {}
+return function(p1) --[[ Line: 16 | Named "selectResultItems" ]]
+	local List = {}
 	
 	if p1.itemData then
-		for i, v in p1.itemData do
-			table.insert(t, {
-				id = v.id,
-				type = if v.type == "AvatarBundle" then Enum.MarketplaceProductType.AvatarBundle else Enum.MarketplaceProductType.AvatarAsset,
-				status = if p1.itemStatuses then p1.itemStatuses[v.id] or Enum.MarketplaceItemPurchaseStatus.SystemError else Enum.MarketplaceItemPurchaseStatus.SystemError
+		for _, value in p1.itemData do
+			table.insert(List, {
+				id = value.id,
+				type = if value.type == "AvatarBundle" then Enum.MarketplaceProductType.AvatarBundle else Enum.MarketplaceProductType.AvatarAsset,
+				status = p1.itemStatuses and p1.itemStatuses[value.id] or Enum.MarketplaceItemPurchaseStatus.SystemError
 			})
 		end
 	end
-	return t
+	return List
 end

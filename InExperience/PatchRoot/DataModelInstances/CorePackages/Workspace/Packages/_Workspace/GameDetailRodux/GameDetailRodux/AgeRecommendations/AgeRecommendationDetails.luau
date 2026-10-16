@@ -1,49 +1,49 @@
-﻿local parent = script:FindFirstAncestor("GameDetailRodux").Parent
-local dashModule = require(parent.Dash)
-local tModule = require(parent.t)
-local resultModule = require(parent.Result)
-local t = {
-	new = function()
+﻿local Parent = script:FindFirstAncestor("GameDetailRodux").Parent
+local DashModule = require(Parent.Dash)
+local TModule = require(Parent.t)
+local ResultModule = require(Parent.Result)
+local AgeRecommendationDetailsModule = {
+	new = function() --[[ Line: 47 ]]
 		return {}
 	end,
-	validateModel = tModule.interface({
-		summary = tModule.interface({
-			ageRecommendation = tModule.optional(tModule.interface({
-				displayName = tModule.optional(tModule.string),
-				displayNameWithHeaderShort = tModule.optional(tModule.string),
-				minimumAge = tModule.number,
-				minimumAgeDisplay = tModule.optional(tModule.string),
-				contentMaturity = tModule.optional(tModule.string),
-				igrsRating = tModule.optional(tModule.string),
-				igrsRatingDisplayMessage = tModule.optional(tModule.string)
+	validateModel = TModule.interface({
+		summary = TModule.interface({
+			ageRecommendation = TModule.optional(TModule.interface({
+				displayName = TModule.optional(TModule.string),
+				displayNameWithHeaderShort = TModule.optional(TModule.string),
+				minimumAge = TModule.number,
+				minimumAgeDisplay = TModule.optional(TModule.string),
+				contentMaturity = TModule.optional(TModule.string),
+				igrsRating = TModule.optional(TModule.string),
+				igrsRatingDisplayMessage = TModule.optional(TModule.string)
 			}))
 		}),
-		descriptorUsages = tModule.optional(tModule.array(tModule.interface({
-			name = tModule.optional(tModule.string),
-			followsComplianceApi = tModule.optional(tModule.boolean),
-			descriptor = tModule.interface({
-				name = tModule.string,
-				displayName = tModule.string,
-				complianceApiSupported = tModule.boolean,
-				iconUrl = tModule.optional(tModule.string),
-				localeCode = tModule.optional(tModule.string)
+		descriptorUsages = TModule.optional(TModule.array(TModule.interface({
+			name = TModule.optional(TModule.string),
+			followsComplianceApi = TModule.optional(TModule.boolean),
+			descriptor = TModule.interface({
+				name = TModule.string,
+				displayName = TModule.string,
+				complianceApiSupported = TModule.boolean,
+				iconUrl = TModule.optional(TModule.string),
+				localeCode = TModule.optional(TModule.string)
 			}),
-			descriptorDimensionUsages = tModule.optional(tModule.array(tModule.interface({
-				dimensionName = tModule.optional(tModule.string),
-				dimensionValue = tModule.optional(tModule.string)
+			descriptorDimensionUsages = TModule.optional(TModule.array(TModule.interface({
+				dimensionName = TModule.optional(TModule.string),
+				dimensionValue = TModule.optional(TModule.string)
 			})))
 		})))
 	})
 }
 
-function t.mock(p1)
-	-- upvalues: t (ref), dashModule (ref)
-	p1 = p1 or {}
-	local var1 = t.new()
-	var1.summary = {
+function AgeRecommendationDetailsModule.mock(p1) --[[ Line: 80 ]]
+	-- upvalues: AgeRecommendationDetailsModule (copy), DashModule (copy)
+	local P0 = p1 or {}
+	local NewAgeRecommendationDetails = AgeRecommendationDetailsModule.new()
+	NewAgeRecommendationDetails.summary = {
 		ageRecommendation = { displayName = "13+", minimumAge = 13 }
 	}
-	var1.descriptorUsages = {
+	NewAgeRecommendationDetails.descriptorUsages = {
 		[1] = {
 			name = "blood",
 			descriptor = {
@@ -77,14 +77,14 @@ function t.mock(p1)
 			}
 		}
 	}
-	local var2 = dashModule.joinDeep(var1, p1)
+	local JoinDeepResult = DashModule.joinDeep(NewAgeRecommendationDetails, P0)
 	
-	return if t.validateModel(var2) then var2 else error("AgeRecommendationDetails mockData is invalid")
+	return if AgeRecommendationDetailsModule.validateModel(JoinDeepResult) then JoinDeepResult else error("AgeRecommendationDetails mockData is invalid")
 end
 
-function t.fromJsonData(p1)
-	-- upvalues: t (ref), resultModule (ref), dashModule (ref)
-	return if t.validateModel(p1) then resultModule.success(dashModule.joinDeep(t.new(), p1)) else resultModule.error("AgeRecommendationDetails.fromJsonData expects a valid moderation JSON response")
+function AgeRecommendationDetailsModule.fromJsonData(p1) --[[ Line: 140 ]]
+	-- upvalues: AgeRecommendationDetailsModule (copy), ResultModule (copy), DashModule (copy)
+	return if AgeRecommendationDetailsModule.validateModel(p1) then ResultModule.success((DashModule.joinDeep(AgeRecommendationDetailsModule.new(), p1))) else ResultModule.error("AgeRecommendationDetails.fromJsonData expects a valid moderation JSON response")
 end
 
-return t
+return AgeRecommendationDetailsModule

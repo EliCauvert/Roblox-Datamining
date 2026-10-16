@@ -1,34 +1,34 @@
-﻿local eventNamesModule = require(script.Parent.EventNames)
+﻿local EventNamesModule = require(script.Parent.EventNames)
 
 return {
-	[eventNamesModule.CapturesActivatedInGameMenu] = {
+	[EventNamesModule.CapturesActivatedInGameMenu] = {
 		name = game:DefineFastString("CapturesActivatedInGameMenu", "CapturesActivatedInGameMenu")
 	},
-	[eventNamesModule.CapturesCarouselOpened] = {
+	[EventNamesModule.CapturesCarouselOpened] = {
 		name = game:DefineFastString("CapturesCarouselOpened", "CapturesCarouselOpened")
 	},
-	[eventNamesModule.CapturesDeactivatedInGameMenu] = {
+	[EventNamesModule.CapturesDeactivatedInGameMenu] = {
 		name = game:DefineFastString("CapturesDeactivatedInGameMenu", "CapturesDeactivatedInGameMenu")
 	},
-	[eventNamesModule.CapturesEntrypointActivated] = {
+	[EventNamesModule.CapturesEntrypointActivated] = {
 		name = game:DefineFastString("CapturesEntrypointActivated", "CapturesEntrypointActivated")
 	},
-	[eventNamesModule.CapturesPageOpenedInGameMenu] = {
+	[EventNamesModule.CapturesPageOpenedInGameMenu] = {
 		name = game:DefineFastString("CapturesPageOpenedInGameMenu", "CapturesPageOpenedInGameMenu")
 	},
-	[eventNamesModule.CapturesShareFromNonStandardServer] = {
+	[EventNamesModule.CapturesShareFromNonStandardServer] = {
 		name = game:DefineFastString("CapturesShareToastButtonActivated", "CapturesShareToastButtonActivated")
 	},
-	[eventNamesModule.CapturesShareToastButtonActivated] = {
+	[EventNamesModule.CapturesShareToastButtonActivated] = {
 		name = game:DefineFastString("CapturesShareToastButtonActivated", "CapturesShareToastButtonActivated")
 	},
-	[eventNamesModule.ShareCaptureGenerateLinkFailed] = {
+	[EventNamesModule.ShareCaptureGenerateLinkFailed] = {
 		name = game:DefineFastString("ShareCaptureGenerateLinkFailed", "ShareCaptureGenerateLinkFailed")
 	},
-	[eventNamesModule.ShareCapturePromptAccepted] = {
+	[EventNamesModule.ShareCapturePromptAccepted] = {
 		name = game:DefineFastString("ShareCapturePromptAccepted", "ShareCapturePromptAccepted")
 	},
-	[eventNamesModule.ShareCapturePromptRejected] = {
+	[EventNamesModule.ShareCapturePromptRejected] = {
 		name = game:DefineFastString("ShareCapturePromptRejected", "ShareCapturePromptRejected")
 	}
 }

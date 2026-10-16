@@ -1,38 +1,38 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local chatCaptureGridModule = require(script.Parent.ChatCaptureGrid)
-local button = foundationModule.Button
-local sheet = foundationModule.Sheet
-local text = foundationModule.Text
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local fillBehavior = foundationModule.Enums.FillBehavior
-local inputSize = foundationModule.Enums.InputSize
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local ChatCaptureGridModule = require(script.Parent.ChatCaptureGrid)
+local Button = FoundationModule.Button
+local Sheet = FoundationModule.Sheet
+local Text = FoundationModule.Text
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local FillBehavior = FoundationModule.Enums.FillBehavior
+local InputSize = FoundationModule.Enums.InputSize
 
-return function(p1)
-	-- upvalues: reactModule (ref), sheet (ref), text (ref), chatCaptureGridModule (ref), button (ref), fillBehavior (ref), inputSize (ref), buttonVariant (ref)
-	return reactModule.createElement(sheet.Root, {
+return function(p1) --[[ Line: 36 | Named "ChatCaptureGalleryView" ]]
+	-- upvalues: ReactModule (copy), Sheet (copy), Text (copy), ChatCaptureGridModule (copy), Button (copy), FillBehavior (copy), InputSize (copy), ButtonVariant (copy)
+	return ReactModule.createElement(Sheet.Root, {
 		defaultSnapPointIndex = 1,
 		testId = "ChatCaptureGalleryView",
 		isOpen = p1.isOpen,
 		onClose = p1.onClose,
 		snapPoints = { 0.5, 1 }
 	}, {
-		Header = reactModule.createElement(sheet.Header, { hasCloseAffordance = true }, {
-			Title = reactModule.createElement(text, {
+		Header = ReactModule.createElement(Sheet.Header, { hasCloseAffordance = true }, {
+			Title = ReactModule.createElement(Text, {
 				LayoutOrder = 1,
 				tag = "fill auto-y padding-y-small text-heading-small text-align-x-left content-emphasis",
 				Text = p1.titleText,
 				TextXAlignment = Enum.TextXAlignment.Left
 			}),
-			SelectionCount = reactModule.createElement(text, {
+			SelectionCount = ReactModule.createElement(Text, {
 				LayoutOrder = 2,
 				tag = "auto-xy text-caption-small content-muted",
 				Text = p1.selectionCountText
 			})
 		}),
-		Content = reactModule.createElement(sheet.Content, nil, {
-			Grid = reactModule.createElement(chatCaptureGridModule, {
+		Content = ReactModule.createElement(Sheet.Content, nil, {
+			Grid = ReactModule.createElement(ChatCaptureGridModule, {
 				captures = p1.captures,
 				isFinished = p1.isFinished,
 				isLoading = p1.isLoading,
@@ -44,14 +44,14 @@ return function(p1)
 				showMoreText = p1.showMoreText
 			})
 		}),
-		Actions = reactModule.createElement(sheet.Actions, nil, {
-			Confirm = reactModule.createElement(button, {
+		Actions = ReactModule.createElement(Sheet.Actions, nil, {
+			Confirm = ReactModule.createElement(Button, {
 				testId = "ChatCaptureGalleryView.Confirm",
-				fillBehavior = fillBehavior.Fill,
+				fillBehavior = FillBehavior.Fill,
 				onActivated = p1.onConfirm,
-				size = inputSize.Medium,
+				size = InputSize.Medium,
 				text = p1.addText,
-				variant = buttonVariant.Emphasis
+				variant = ButtonVariant.Emphasis
 			})
 		})
 	})

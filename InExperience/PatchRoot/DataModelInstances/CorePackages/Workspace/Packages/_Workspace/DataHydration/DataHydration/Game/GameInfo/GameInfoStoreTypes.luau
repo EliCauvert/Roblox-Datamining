@@ -1,24 +1,24 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local parent = dataHydration.Parent
-local _ = require(dataHydration.DataHydrationTypes)
-local tModule = require(parent.t)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local Parent = DataHydration.Parent
+local _ = require(DataHydration.DataHydrationTypes)
+local TModule = require(Parent.t)
 
 return {
-	gameInfoResponseValidator = tModule.interface({
-		data = tModule.array(tModule.interface({
-			id = tModule.number,
-			rootPlaceId = tModule.number,
-			name = tModule.optional(tModule.string),
-			description = tModule.optional(tModule.string),
-			creator = tModule.optional(tModule.interface({
-				id = tModule.optional(tModule.number),
-				name = tModule.optional(tModule.string),
-				hasVerifiedBadge = tModule.optional(tModule.boolean)
+	gameInfoResponseValidator = TModule.interface({
+		data = TModule.array(TModule.interface({
+			id = TModule.number,
+			rootPlaceId = TModule.number,
+			name = TModule.optional(TModule.string),
+			description = TModule.optional(TModule.string),
+			creator = TModule.optional(TModule.interface({
+				id = TModule.optional(TModule.number),
+				name = TModule.optional(TModule.string),
+				hasVerifiedBadge = TModule.optional(TModule.boolean)
 			})),
-			visits = tModule.optional(tModule.number),
-			playerCount = if require(parent.SharedFlags).FFlagLuaAppDataHydrationPlayerCountGameInfoStore then tModule.optional(tModule.number) else nil,
-			totalUpVotes = tModule.optional(tModule.string),
-			totalDownVotes = tModule.optional(tModule.string)
+			visits = TModule.optional(TModule.number),
+			playerCount = if require(Parent.SharedFlags).FFlagLuaAppDataHydrationPlayerCountGameInfoStore then TModule.optional(TModule.number) else nil,
+			totalUpVotes = TModule.optional(TModule.string),
+			totalDownVotes = TModule.optional(TModule.string)
 		}))
 	})
 }

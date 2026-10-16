@@ -1,6 +1,6 @@
-﻿local fFlagExpChatIgnoreHistoricalMessagesModule = require(script:FindFirstAncestor("ExpChat").Flags.FFlagExpChatIgnoreHistoricalMessages)
+﻿local FFlagExpChatIgnoreHistoricalMessagesModule = require(script:FindFirstAncestor("ExpChat").Flags.FFlagExpChatIgnoreHistoricalMessages)
 
-return function(p1)
-	-- upvalues: fFlagExpChatIgnoreHistoricalMessagesModule (ref)
-	return fFlagExpChatIgnoreHistoricalMessagesModule and p1.IsHistorical == true
+return function(p1): boolean --[[ Line: 4 ]]
+	-- upvalues: FFlagExpChatIgnoreHistoricalMessagesModule (copy)
+	return FFlagExpChatIgnoreHistoricalMessagesModule and p1.IsHistorical == true
 end

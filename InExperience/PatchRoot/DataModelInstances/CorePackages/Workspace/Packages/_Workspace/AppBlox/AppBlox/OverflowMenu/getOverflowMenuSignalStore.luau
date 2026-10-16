@@ -1,10 +1,10 @@
-﻿local createOverflowMenuSignalStoreModule = require(script:FindFirstAncestor("AppBlox").OverflowMenu.createOverflowMenuSignalStore)
-local var1 = nil
+﻿local CreateOverflowMenuSignalStoreModule = require(script:FindFirstAncestor("AppBlox").OverflowMenu.createOverflowMenuSignalStore)
+local v1 = nil
 
-return function()
-	-- upvalues: var1 (write), createOverflowMenuSignalStoreModule (ref)
-	if var1 == nil then
-		var1 = createOverflowMenuSignalStoreModule()
+return function() --[[ Line: 8 | Named "getOverflowMenuSignalStore" ]]
+	-- upvalues: v1 (ref), CreateOverflowMenuSignalStoreModule (copy)
+	if v1 == nil then
+		v1 = CreateOverflowMenuSignalStoreModule()
 	end
-	return var1
+	return v1
 end

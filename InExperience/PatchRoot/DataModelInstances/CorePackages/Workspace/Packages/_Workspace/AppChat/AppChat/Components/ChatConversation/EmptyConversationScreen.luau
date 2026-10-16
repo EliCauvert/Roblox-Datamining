@@ -1,16 +1,16 @@
-﻿local roactModule = require(script:FindFirstAncestor("AppChat").Parent.Roact)
-local emptyConversationPageModule = require(script.Parent.EmptyConversationPage)
-local emptyConversationScreen = roactModule.PureComponent:extend("EmptyConversationScreen")
-emptyConversationScreen.defaultProps = { navigation = nil }
+﻿local RoactModule = require(script:FindFirstAncestor("AppChat").Parent.Roact)
+local EmptyConversationPageModule = require(script.Parent.EmptyConversationPage)
+local EmptyConversationScreen = RoactModule.PureComponent:extend("EmptyConversationScreen")
+EmptyConversationScreen.defaultProps = { navigation = nil }
 
-function emptyConversationScreen.render(p1)
-	-- upvalues: roactModule (ref), emptyConversationPageModule (ref)
-	local navigation = p1.props.navigation
-	assert(type(navigation) ~= "nil", "ChatConversationScreen should be wrapped with Roact Navigation")
+function EmptyConversationScreen.render(p1) --[[ Line: 13 ]]
+	-- upvalues: RoactModule (copy), EmptyConversationPageModule (copy)
+	local Navigation = p1.props.navigation
+	assert(type(Navigation) ~= "nil", "ChatConversationScreen should be wrapped with Roact Navigation")
 	
-	return roactModule.createElement(emptyConversationPageModule, {
-		topBarHeight = navigation.getScreenProps("topBarHeight", 0)
+	return RoactModule.createElement(EmptyConversationPageModule, {
+		topBarHeight = Navigation.getScreenProps("topBarHeight", 0)
 	})
 end
 
-return emptyConversationScreen
+return EmptyConversationScreen

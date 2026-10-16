@@ -1,512 +1,524 @@
-﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
-local parent = momentsCreation.Parent
-local cryoModule = require(parent.Cryo)
-local foundationModule = require(parent.Foundation)
-local momentsCommonModule = require(parent.MomentsCommon)
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local foundationProvider = foundationModule.FoundationProvider
-local icon = foundationModule.Icon
-local view = foundationModule.View
-local colorMode = foundationModule.Enums.ColorMode
-local useCallback = reactModule.useCallback
-local useEffect = reactModule.useEffect
-local useMemo = reactModule.useMemo
-local useRef = reactModule.useRef
-local useTokens = foundationModule.Hooks.useTokens
-local useDeviceInsets = momentsCommonModule.Hooks.useDeviceInsets
-local useFormFactor = momentsCommonModule.Hooks.useFormFactor
-local useToggleState = momentsCommonModule.Hooks.useToggleState
-local formFactor = momentsCommonModule.Enums.FormFactor
-local gradientBackdrop = momentsCommonModule.Components.GradientBackdrop
-local eventNames = momentsCommonModule.Analytics.EventNames
-local sessionManager = momentsCommonModule.Analytics.SessionManager
-local funnelEventNames = momentsCommonModule.Analytics.FunnelEventNames
-local fireAnalyticsEventModule = require(momentsCreation.Analytics.fireAnalyticsEvent)
-local makeCreationEventFieldsModule = require(momentsCreation.Analytics.makeCreationEventFields)
-local getFFlagEnableMomentTextGeneration = momentsCommonModule.Flags.GetFFlagEnableMomentTextGeneration
-local getFFlagMomentsCreationSaveDraft = momentsCommonModule.Flags.GetFFlagMomentsCreationSaveDraft
-local useSignalState = signalsReactModule.useSignalState
-local creationControllerModule = require(momentsCreation.CreationController)
-local creationControllerProvider = creationControllerModule.CreationControllerProvider
-local useCreationController = creationControllerModule.useCreationController
-local useAutoDismissStateModule = require(momentsCreation.Hooks.useAutoDismissState)
-local useDraftRestoreEffectModule = require(momentsCreation.Hooks.useDraftRestoreEffect)
-local useDraftSaveEffectModule = require(momentsCreation.Hooks.useDraftSaveEffect)
-local useDescriptionKeyboardInsetModule = require(momentsCreation.Hooks.useDescriptionKeyboardInset)
-local getFFlagMomentsStickerButton = momentsCommonModule.Flags.GetFFlagMomentsStickerButton
-local getFFlagMomentsTTSAudioOverlayModule = require(momentsCreation.Flags.GetFFlagMomentsTTSAudioOverlay)
-local getFFlagMomentsTTSCoachmarkModule = require(momentsCreation.Flags.GetFFlagMomentsTTSCoachmark)
-local getFFlagMomentsCreationCloseButtonZIndexFixModule = require(momentsCreation.Flags.GetFFlagMomentsCreationCloseButtonZIndexFix)
-local fFlagMomentsCreationToolsIxpEnabledModule = require(momentsCreation.Flags.FFlagMomentsCreationToolsIxpEnabled)
-local fFlagMomentsCreationMusicChipRemoveButtonModule = require(momentsCreation.Flags.FFlagMomentsCreationMusicChipRemoveButton)
-local fStringMomentsCreationToolsIxpLayerModule = require(momentsCreation.Flags.FStringMomentsCreationToolsIxpLayer)
-local logMomentsLayerExposure = momentsCommonModule.Utils.logMomentsLayerExposure
-local stepStubModule = require(script.Parent.StepStub)
-local creationFlowStateModule = require(momentsCreation.Enums.CreationFlowState)
-local dialogTypeModule = require(momentsCreation.Enums.DialogType)
-local _ = require(momentsCreation.Types.CreationFlowTypes)
-local captureViewModule = require(momentsCreation.Components.CaptureView)
-local creationMediaProviderModule = require(momentsCreation.Components.CreationMediaProvider)
-local descriptionViewModule = require(momentsCreation.Components.DescriptionView)
-local editCTABarModule = require(momentsCreation.Components.EditCTABar)
-local galleryViewModule = require(momentsCreation.Components.GalleryView)
-local playbackControlsModule = require(momentsCreation.Components.PlaybackControls)
-local previewViewModule = require(momentsCreation.Components.PreviewView)
-local exitConfirmationDialogModule = require(momentsCreation.Components.Dialogs.ExitConfirmationDialog)
-local textFilteredDialogModule = require(momentsCreation.Components.Dialogs.TextFilteredDialog)
-local generateTextOptionsDialogModule = require(momentsCreation.Components.Dialogs.GenerateTextOptionsDialog)
-local voiceoverErrorDialogModule = require(momentsCreation.Components.Dialogs.VoiceoverErrorDialog)
-local voiceoverDeleteConfirmDialogModule = require(momentsCreation.Components.Dialogs.VoiceoverDeleteConfirmDialog)
-local voiceSelectorDialogModule = require(momentsCreation.Components.Dialogs.VoiceSelectorDialog)
-local voiceBackControlsModule = require(momentsCreation.Components.Voice.VoiceBackControls)
-local sampleCapturesModule = require(momentsCreation.Capture.sampleCaptures)
-local publishMomentModule = require(momentsCreation.Upload.publishMoment)
-local isTextFilteredModule = require(momentsCreation.Moderation.isTextFiltered)
-local musicChipModule = require(momentsCreation.Components.MusicChip)
-local var1 = require(parent.MomentsCommon.isStudio)()
-local var2 = if var1 then sampleCapturesModule else {}
+﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
+local Parent = MomentsCreation.Parent
+local CryoModule = require(Parent.Cryo)
+local FoundationModule = require(Parent.Foundation)
+local MomentsCommonModule = require(Parent.MomentsCommon)
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local FoundationProvider = FoundationModule.FoundationProvider
+local Icon = FoundationModule.Icon
+local View = FoundationModule.View
+local ColorMode = FoundationModule.Enums.ColorMode
+local UseCallbackFunction = ReactModule.useCallback
+local UseEffectFunction = ReactModule.useEffect
+local UseMemoFunction = ReactModule.useMemo
+local UseRefFunction = ReactModule.useRef
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UseDeviceInsetsFunction = MomentsCommonModule.Hooks.useDeviceInsets
+local UseFormFactorFunction = MomentsCommonModule.Hooks.useFormFactor
+local UseToggleStateFunction = MomentsCommonModule.Hooks.useToggleState
+local FormFactor = MomentsCommonModule.Enums.FormFactor
+local GradientBackdrop = MomentsCommonModule.Components.GradientBackdrop
+local EventNames = MomentsCommonModule.Analytics.EventNames
+local SessionManager = MomentsCommonModule.Analytics.SessionManager
+local FunnelEventNames = MomentsCommonModule.Analytics.FunnelEventNames
+local FireAnalyticsEventModule = require(MomentsCreation.Analytics.fireAnalyticsEvent)
+local MakeCreationEventFieldsModule = require(MomentsCreation.Analytics.makeCreationEventFields)
+local GetFFlagEnableMomentTextGenerationFunction = MomentsCommonModule.Flags.GetFFlagEnableMomentTextGeneration
+local GetFFlagMomentsCreationSaveDraftFunction = MomentsCommonModule.Flags.GetFFlagMomentsCreationSaveDraft
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local CreationControllerModule = require(MomentsCreation.CreationController)
+local CreationControllerProvider = CreationControllerModule.CreationControllerProvider
+local UseCreationControllerFunction = CreationControllerModule.useCreationController
+local UseAutoDismissStateModule = require(MomentsCreation.Hooks.useAutoDismissState)
+local UseDraftRestoreEffectModule = require(MomentsCreation.Hooks.useDraftRestoreEffect)
+local UseDraftSaveEffectModule = require(MomentsCreation.Hooks.useDraftSaveEffect)
+local UseRestoredVoiceoverCheckModule = require(MomentsCreation.Hooks.useRestoredVoiceoverCheck)
+local UseDescriptionKeyboardInsetModule = require(MomentsCreation.Hooks.useDescriptionKeyboardInset)
+local GetFFlagMomentsStickerButtonFunction = MomentsCommonModule.Flags.GetFFlagMomentsStickerButton
+local GetFFlagMomentsTTSAudioOverlayModule = require(MomentsCreation.Flags.GetFFlagMomentsTTSAudioOverlay)
+local GetFFlagMomentsTTSCoachmarkModule = require(MomentsCreation.Flags.GetFFlagMomentsTTSCoachmark)
+local FFlagMomentsTTSDraftRestoreModule = require(MomentsCreation.Flags.FFlagMomentsTTSDraftRestore)
+local GetFFlagMomentsCreationCloseButtonZIndexFixModule = require(MomentsCreation.Flags.GetFFlagMomentsCreationCloseButtonZIndexFix)
+local FFlagMomentsCreationToolsIxpEnabledModule = require(MomentsCreation.Flags.FFlagMomentsCreationToolsIxpEnabled)
+local FFlagMomentsCreationMusicChipRemoveButtonModule = require(MomentsCreation.Flags.FFlagMomentsCreationMusicChipRemoveButton)
+local FStringMomentsCreationToolsIxpLayerModule = require(MomentsCreation.Flags.FStringMomentsCreationToolsIxpLayer)
+local FFlagMomentsCreationToolsIxpEnabled2Module = require(MomentsCreation.Flags.FFlagMomentsCreationToolsIxpEnabled2)
+local FStringMomentsCreationToolsIxpLayer2Module = require(MomentsCreation.Flags.FStringMomentsCreationToolsIxpLayer2)
+local FFlagMomentsCreationToolsIxpEnabled3Module = require(MomentsCreation.Flags.FFlagMomentsCreationToolsIxpEnabled3)
+local FStringMomentsCreationToolsIxpLayer3Module = require(MomentsCreation.Flags.FStringMomentsCreationToolsIxpLayer3)
+local LogMomentsLayerExposureFunction = MomentsCommonModule.Utils.logMomentsLayerExposure
+local StepStubModule = require(script.Parent.StepStub)
+local CreationFlowStateModule = require(MomentsCreation.Enums.CreationFlowState)
+local DialogTypeModule = require(MomentsCreation.Enums.DialogType)
+local _ = require(MomentsCreation.Types.CreationFlowTypes)
+local CaptureViewModule = require(MomentsCreation.Components.CaptureView)
+local CreationMediaProviderModule = require(MomentsCreation.Components.CreationMediaProvider)
+local DescriptionViewModule = require(MomentsCreation.Components.DescriptionView)
+local EditCTABarModule = require(MomentsCreation.Components.EditCTABar)
+local GalleryViewModule = require(MomentsCreation.Components.GalleryView)
+local PlaybackControlsModule = require(MomentsCreation.Components.PlaybackControls)
+local PreviewViewModule = require(MomentsCreation.Components.PreviewView)
+local ExitConfirmationDialogModule = require(MomentsCreation.Components.Dialogs.ExitConfirmationDialog)
+local TextFilteredDialogModule = require(MomentsCreation.Components.Dialogs.TextFilteredDialog)
+local GenerateTextOptionsDialogModule = require(MomentsCreation.Components.Dialogs.GenerateTextOptionsDialog)
+local VoiceoverErrorDialogModule = require(MomentsCreation.Components.Dialogs.VoiceoverErrorDialog)
+local VoiceoverDeleteConfirmDialogModule = require(MomentsCreation.Components.Dialogs.VoiceoverDeleteConfirmDialog)
+local VoiceSelectorDialogModule = require(MomentsCreation.Components.Dialogs.VoiceSelectorDialog)
+local VoiceBackControlsModule = require(MomentsCreation.Components.Voice.VoiceBackControls)
+local SampleCapturesModule = require(MomentsCreation.Capture.sampleCaptures)
+local PublishMomentModule = require(MomentsCreation.Upload.publishMoment)
+local IsTextFilteredModule = require(MomentsCreation.Moderation.isTextFiltered)
+local MusicChipModule = require(MomentsCreation.Components.MusicChip)
+local v1 = require(Parent.MomentsCommon.isStudio)()
+local SampleCapturesModule1 = if v1 then SampleCapturesModule else {}
 
-local function noopActivated() end
+local function noopActivated() --[[ Line: 127 ]] end
 
-local t = {
-	affordance = foundationModule.Enums.StateLayerAffordance.None
+local StateLayer = {
+	affordance = FoundationModule.Enums.StateLayerAffordance.None
 }
 
-local function GallerySourceView(p1)
-	-- upvalues: useSignalState (ref), reactModule (ref), galleryViewModule (ref)
-	local captureSource = p1.captureSource
+local function GallerySourceView(p1) --[[ Line: 134 ]]
+	-- upvalues: UseSignalStateFunction (copy), ReactModule (copy), GalleryViewModule (copy)
+	local CaptureSource = p1.captureSource
 	
-	return reactModule.createElement(galleryViewModule, {
-		captures = useSignalState(captureSource.getCaptures),
+	return ReactModule.createElement(GalleryViewModule, {
+		captures = UseSignalStateFunction(CaptureSource.getCaptures),
 		layoutOrder = p1.layoutOrder,
 		onCaptureSelected = p1.onCaptureSelected,
 		onNextCallback = p1.onNextCallback,
 		selectedCapture = p1.selectedCapture,
-		hasMoreCaptures = not useSignalState(captureSource.getIsFinished),
-		onShowMore = captureSource.fetchMore
+		hasMoreCaptures = not UseSignalStateFunction(CaptureSource.getIsFinished),
+		onShowMore = CaptureSource.fetchMore
 	})
 end
 
-local function CreationFlowContent(p1)
-	-- upvalues: useCreationController (ref), getFFlagMomentsCreationSaveDraft (ref), useDraftRestoreEffectModule (ref), useDraftSaveEffectModule (ref), useDeviceInsets (ref), useTokens (ref), useFormFactor (ref), useToggleState (ref), useAutoDismissStateModule (ref), useSignalState (ref), useDescriptionKeyboardInsetModule (ref), creationFlowStateModule (ref), getFFlagMomentsTTSAudioOverlayModule (ref), useCallback (ref), sessionManager (ref), funnelEventNames (ref), cryoModule (ref), makeCreationEventFieldsModule (ref), fireAnalyticsEventModule (ref), eventNames (ref), dialogTypeModule (ref), useRef (ref), useEffect (ref), getFFlagMomentsStickerButton (ref), fFlagMomentsCreationToolsIxpEnabledModule (ref), logMomentsLayerExposure (ref), fStringMomentsCreationToolsIxpLayerModule (ref), reactModule (ref), exitConfirmationDialogModule (ref), textFilteredDialogModule (ref), generateTextOptionsDialogModule (ref), voiceoverErrorDialogModule (ref), voiceoverDeleteConfirmDialogModule (ref), voiceSelectorDialogModule (ref), stepStubModule (ref), useMemo (ref), signalsModule (ref), view (ref), t (ref), formFactor (ref), noopActivated (ref), voiceBackControlsModule (ref), getFFlagMomentsCreationCloseButtonZIndexFixModule (ref), icon (ref), foundationModule (ref), captureViewModule (ref), gradientBackdrop (ref), musicChipModule (ref), fFlagMomentsCreationMusicChipRemoveButtonModule (ref), playbackControlsModule (ref), editCTABarModule (ref), getFFlagEnableMomentTextGeneration (ref), getFFlagMomentsTTSCoachmarkModule (ref), GallerySourceView (ref), galleryViewModule (ref), var2 (ref), previewViewModule (ref), descriptionViewModule (ref), creationMediaProviderModule (ref)
-	local var3 = useCreationController()
+local function CreationFlowContent(p1) --[[ Line: 156 ]]
+	-- upvalues: UseCreationControllerFunction (copy), GetFFlagMomentsCreationSaveDraftFunction (copy), UseDraftRestoreEffectModule (copy), UseDraftSaveEffectModule (copy), FFlagMomentsTTSDraftRestoreModule (copy), UseRestoredVoiceoverCheckModule (copy), UseDeviceInsetsFunction (copy), UseTokensFunction (copy), UseFormFactorFunction (copy), UseToggleStateFunction (copy), UseAutoDismissStateModule (copy), UseSignalStateFunction (copy), UseDescriptionKeyboardInsetModule (copy), CreationFlowStateModule (copy), GetFFlagMomentsTTSAudioOverlayModule (copy), UseCallbackFunction (copy), SessionManager (copy), FunnelEventNames (copy), CryoModule (copy), MakeCreationEventFieldsModule (copy), FireAnalyticsEventModule (copy), EventNames (copy), DialogTypeModule (copy), UseRefFunction (copy), UseEffectFunction (copy), GetFFlagMomentsStickerButtonFunction (copy), FFlagMomentsCreationToolsIxpEnabledModule (copy), LogMomentsLayerExposureFunction (copy), FStringMomentsCreationToolsIxpLayerModule (copy), FFlagMomentsCreationToolsIxpEnabled2Module (copy), FStringMomentsCreationToolsIxpLayer2Module (copy), FFlagMomentsCreationToolsIxpEnabled3Module (copy), FStringMomentsCreationToolsIxpLayer3Module (copy), ReactModule (copy), ExitConfirmationDialogModule (copy), TextFilteredDialogModule (copy), GenerateTextOptionsDialogModule (copy), VoiceoverErrorDialogModule (copy), VoiceoverDeleteConfirmDialogModule (copy), VoiceSelectorDialogModule (copy), StepStubModule (copy), UseMemoFunction (copy), SignalsModule (copy), View (copy), StateLayer (copy), FormFactor (copy), noopActivated (copy), VoiceBackControlsModule (copy), GetFFlagMomentsCreationCloseButtonZIndexFixModule (copy), Icon (copy), FoundationModule (copy), CaptureViewModule (copy), GradientBackdrop (copy), MusicChipModule (copy), FFlagMomentsCreationMusicChipRemoveButtonModule (copy), PlaybackControlsModule (copy), EditCTABarModule (copy), GetFFlagEnableMomentTextGenerationFunction (copy), GetFFlagMomentsTTSCoachmarkModule (copy), GallerySourceView (copy), GalleryViewModule (copy), SampleCapturesModule1 (copy), PreviewViewModule (copy), DescriptionViewModule (copy), CreationMediaProviderModule (copy)
+	local UseCreationControllerResult = UseCreationControllerFunction()
 	
-	if getFFlagMomentsCreationSaveDraft() then
-		useDraftRestoreEffectModule(p1.captureSource)
-		useDraftSaveEffectModule()
+	if GetFFlagMomentsCreationSaveDraftFunction() then
+		UseDraftRestoreEffectModule(p1.captureSource, p1.disableDrafts)
+		UseDraftSaveEffectModule(p1.disableDrafts)
+		
+		if FFlagMomentsTTSDraftRestoreModule then
+			UseRestoredVoiceoverCheckModule(UseCreationControllerResult)
+		end
 	end
-	local var4
-	local var5 = useDeviceInsets()
-	local var6 = useTokens()
-	local var7 = useFormFactor()
-	local var8 = useToggleState(false)
-	local var9, var10 = useAutoDismissStateModule()
-	local var11 = useSignalState(var3.getStep)
-	local var12 = useSignalState(var3.getSelectedCapture)
-	local var13 = useSignalState(var3.getComposedEdits)
-	local var14 = useSignalState(var3.getAvailableTools)
-	local var15 = useSignalState(var3.getActiveTool)
-	local var16 = useSignalState(var3.getActiveModal)
-	local var17 = useSignalState(var3.getIsGenerating)
-	local music = var13.music
-	local var18 = if var11 ~= creationFlowStateModule.Description then getFFlagMomentsTTSAudioOverlayModule and var11 == creationFlowStateModule.Voice else true
-	var62, var61 = useDescriptionKeyboardInsetModule(var18)
-	local captureSource = p1.captureSource
-	local var19 = useCallback(function(p2)
-		-- upvalues: var3 (ref), var10 (ref)
-		var3.selectCapture(p2)
-		var10()
-	end, { var3, var10 })
+	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
+	local UseTokensResult = UseTokensFunction()
+	local UseFormFactorResult = UseFormFactorFunction()
+	local UseToggleStateResult = UseToggleStateFunction(false)
+	local UseAutoDismissStateModuleResult, UseAutoDismissStateModuleResult2 = UseAutoDismissStateModule()
+	local UseSignalStateResult = UseSignalStateFunction(UseCreationControllerResult.getStep)
+	local UseSignalStateResult1 = UseSignalStateFunction(UseCreationControllerResult.getSelectedCapture)
+	local UseSignalStateResult2 = UseSignalStateFunction(UseCreationControllerResult.getComposedEdits)
+	local UseSignalStateResult3 = UseSignalStateFunction(UseCreationControllerResult.getAvailableTools)
+	local UseSignalStateResult4 = UseSignalStateFunction(UseCreationControllerResult.getActiveTool)
+	local UseSignalStateResult5 = UseSignalStateFunction(UseCreationControllerResult.getActiveModal)
+	local UseSignalStateResult6 = UseSignalStateFunction(UseCreationControllerResult.getIsGenerating)
+	local Music = UseSignalStateResult2.music
+	local UseDescriptionKeyboardInsetModuleResult, UseDescriptionKeyboardInsetModuleResult2 = UseDescriptionKeyboardInsetModule(UseSignalStateResult == CreationFlowStateModule.Description or GetFFlagMomentsTTSAudioOverlayModule and UseSignalStateResult == CreationFlowStateModule.Voice)
+	local CaptureSource = p1.captureSource
+	local UseCallbackResult = UseCallbackFunction(function(p2) --[[ Line: 197 ]]
+		-- upvalues: UseCreationControllerResult (copy), UseAutoDismissStateModuleResult2 (copy)
+		UseCreationControllerResult.selectCapture(p2)
+		UseAutoDismissStateModuleResult2()
+	end, {
+		UseCreationControllerResult,
+		UseAutoDismissStateModuleResult2
+	})
 	
-	local function withCreationSession(p2)
-		-- upvalues: sessionManager (copy), funnelEventNames (copy), cryoModule (copy), makeCreationEventFieldsModule (copy)
-		return cryoModule.Dictionary.join(p2, makeCreationEventFieldsModule.makeCreationBaseFields(sessionManager.getSessionId(funnelEventNames.FunnelTypes.CreationFlow)))
+	local function withCreationSession(StepField) --[[ Line: 205 ]]
+		-- upvalues: SessionManager (upval), FunnelEventNames (upval), CryoModule (upval), MakeCreationEventFieldsModule (upval)
+		return CryoModule.Dictionary.join(StepField, MakeCreationEventFieldsModule.makeCreationBaseFields((SessionManager.getSessionId(FunnelEventNames.FunnelTypes.CreationFlow))))
 	end
 	
-	local function flowStepFields()
-		-- upvalues: withCreationSession (ref), makeCreationEventFieldsModule (copy), var3 (ref)
-		return withCreationSession(makeCreationEventFieldsModule.makeStepFieldFromState(var3.getStep(false)))
+	local function flowStepFields() --[[ Line: 214 ]]
+		-- upvalues: withCreationSession (copy), MakeCreationEventFieldsModule (upval), UseCreationControllerResult (copy)
+		return withCreationSession(MakeCreationEventFieldsModule.makeStepFieldFromState((UseCreationControllerResult.getStep(false))))
 	end
 	
-	local var20 = useCallback(function()
-		-- upvalues: fireAnalyticsEventModule (copy), eventNames (copy), flowStepFields (ref), var3 (ref), creationFlowStateModule (copy), var10 (ref), withCreationSession (ref), makeCreationEventFieldsModule (copy)
-		fireAnalyticsEventModule(eventNames.EditingFlowNextButtonPressed, flowStepFields())
-		var3.navigate(creationFlowStateModule.Preview)
-		var10()
-		fireAnalyticsEventModule(eventNames.MomentsEditingFlowContinueToEditButtonPressed, withCreationSession(makeCreationEventFieldsModule.makeStepField(eventNames.MomentsEditingFlowContinueToEditButtonPressed)))
-	end, { var3, var10 })
-	local var21 = useCallback(function()
-		-- upvalues: fireAnalyticsEventModule (copy), eventNames (copy), flowStepFields (ref), var3 (ref), creationFlowStateModule (copy), var8 (ref), withCreationSession (ref), makeCreationEventFieldsModule (copy)
-		fireAnalyticsEventModule(eventNames.EditingFlowNextButtonPressed, flowStepFields())
-		var3.navigate(creationFlowStateModule.Description)
-		var8.disable()
-		fireAnalyticsEventModule(eventNames.MomentsEditingFlowContinueToDescriptionButtonPressed, withCreationSession(makeCreationEventFieldsModule.makeStepField(eventNames.MomentsEditingFlowContinueToDescriptionButtonPressed)))
-	end, { var3, var8.disable })
-	local var22 = useCallback(function()
-		-- upvalues: fireAnalyticsEventModule (copy), eventNames (copy), flowStepFields (ref), var3 (ref), creationFlowStateModule (copy)
-		fireAnalyticsEventModule(eventNames.EditingFlowReturnButtonPressed, flowStepFields())
-		var3.navigate(creationFlowStateModule.Preview)
-	end, { var3 })
-	local var23 = useCallback(function(p2)
-		-- upvalues: var3 (ref)
-		var3.beginTool(p2)
-	end, { var3 })
-	local var24 = useCallback(function()
-		-- upvalues: var3 (ref)
-		var3.beginTool("music")
-	end, { var3 })
-	local var25 = useCallback(function()
-		-- upvalues: var3 (ref)
-		var3.updateCommittedEdit("music", nil)
-	end, { var3 })
-	local var26 = useCallback(function()
-		-- upvalues: fireAnalyticsEventModule (copy), eventNames (copy), flowStepFields (ref), var3 (ref), dialogTypeModule (copy), var8 (ref)
-		fireAnalyticsEventModule(eventNames.EditingFlowReturnButtonPressed, flowStepFields())
-		var3.showModal({
-			modalType = dialogTypeModule.ExitCreationConfirmation,
+	local UseCallbackResult1 = UseCallbackFunction(function() --[[ Line: 219 ]]
+		-- upvalues: FireAnalyticsEventModule (upval), EventNames (upval), flowStepFields (copy), UseCreationControllerResult (copy), CreationFlowStateModule (upval), UseAutoDismissStateModuleResult2 (copy), withCreationSession (copy), MakeCreationEventFieldsModule (upval)
+		FireAnalyticsEventModule(EventNames.EditingFlowNextButtonPressed, flowStepFields())
+		UseCreationControllerResult.navigate(CreationFlowStateModule.Preview)
+		UseAutoDismissStateModuleResult2()
+		FireAnalyticsEventModule(EventNames.MomentsEditingFlowContinueToEditButtonPressed, withCreationSession(MakeCreationEventFieldsModule.makeStepField(EventNames.MomentsEditingFlowContinueToEditButtonPressed)))
+	end, {
+		UseCreationControllerResult,
+		UseAutoDismissStateModuleResult2
+	})
+	local UseCallbackResult2 = UseCallbackFunction(function() --[[ Line: 232 ]]
+		-- upvalues: FireAnalyticsEventModule (upval), EventNames (upval), flowStepFields (copy), UseCreationControllerResult (copy), CreationFlowStateModule (upval), UseToggleStateResult (copy), withCreationSession (copy), MakeCreationEventFieldsModule (upval)
+		FireAnalyticsEventModule(EventNames.EditingFlowNextButtonPressed, flowStepFields())
+		UseCreationControllerResult.navigate(CreationFlowStateModule.Description)
+		UseToggleStateResult.disable()
+		FireAnalyticsEventModule(EventNames.MomentsEditingFlowContinueToDescriptionButtonPressed, withCreationSession(MakeCreationEventFieldsModule.makeStepField(EventNames.MomentsEditingFlowContinueToDescriptionButtonPressed)))
+	end, {
+		UseCreationControllerResult,
+		UseToggleStateResult.disable
+	})
+	local UseCallbackResult3 = UseCallbackFunction(function() --[[ Line: 245 ]]
+		-- upvalues: FireAnalyticsEventModule (upval), EventNames (upval), flowStepFields (copy), UseCreationControllerResult (copy), CreationFlowStateModule (upval)
+		FireAnalyticsEventModule(EventNames.EditingFlowReturnButtonPressed, flowStepFields())
+		UseCreationControllerResult.navigate(CreationFlowStateModule.Preview)
+	end, { UseCreationControllerResult })
+	local UseCallbackResult4 = UseCallbackFunction(function(p2) --[[ Line: 250 ]]
+		-- upvalues: UseCreationControllerResult (copy)
+		UseCreationControllerResult.beginTool(p2)
+	end, { UseCreationControllerResult })
+	local UseCallbackResult5 = UseCallbackFunction(function() --[[ Line: 254 ]]
+		-- upvalues: UseCreationControllerResult (copy)
+		UseCreationControllerResult.beginTool("music")
+	end, { UseCreationControllerResult })
+	local UseCallbackResult6 = UseCallbackFunction(function() --[[ Line: 258 ]]
+		-- upvalues: UseCreationControllerResult (copy)
+		UseCreationControllerResult.updateCommittedEdit("music", nil)
+	end, { UseCreationControllerResult })
+	local UseCallbackResult7 = UseCallbackFunction(function() --[[ Line: 262 ]]
+		-- upvalues: FireAnalyticsEventModule (upval), EventNames (upval), flowStepFields (copy), UseCreationControllerResult (copy), DialogTypeModule (upval), UseToggleStateResult (copy)
+		FireAnalyticsEventModule(EventNames.EditingFlowReturnButtonPressed, flowStepFields())
+		UseCreationControllerResult.showModal({
+			modalType = DialogTypeModule.ExitCreationConfirmation,
 			modalProps = {
-				onCancel = var3.dismissModal,
-				onConfirm = function()
-					-- upvalues: var3 (copy), var8 (copy)
-					var3.dismissModal()
-					var3.returnToGallery()
-					var8.disable()
+				onCancel = UseCreationControllerResult.dismissModal,
+				onConfirm = function() --[[ Line: 268 ]]
+					-- upvalues: UseCreationControllerResult (upval), UseToggleStateResult (upval)
+					UseCreationControllerResult.dismissModal()
+					UseCreationControllerResult.returnToGallery()
+					UseToggleStateResult.disable()
 				end
 			}
 		})
-	end, { var3, var8.disable })
-	local var27 = useCallback(function()
-		-- upvalues: var3 (ref)
-		var3.publish()
-	end, { var3 })
-	local var28 = useCallback(function()
-		-- upvalues: var12 (ref), var3 (ref), dialogTypeModule (copy)
-		if var12 then
-			var3.showModal({
-				modalType = dialogTypeModule.ExitCreationConfirmation,
-				modalProps = { onCancel = var3.dismissModal, onConfirm = var3.exit }
+	end, {
+		UseCreationControllerResult,
+		UseToggleStateResult.disable
+	})
+	local UseCallbackResult8 = UseCallbackFunction(function() --[[ Line: 277 ]]
+		-- upvalues: UseCreationControllerResult (copy)
+		UseCreationControllerResult.publish()
+	end, { UseCreationControllerResult })
+	local UseCallbackResult9 = UseCallbackFunction(function() --[[ Line: 281 ]]
+		-- upvalues: UseSignalStateResult1 (copy), UseCreationControllerResult (copy), DialogTypeModule (upval)
+		if UseSignalStateResult1 then
+			UseCreationControllerResult.showModal({
+				modalType = DialogTypeModule.ExitCreationConfirmation,
+				modalProps = {
+					onCancel = UseCreationControllerResult.dismissModal,
+					onConfirm = UseCreationControllerResult.exit
+				}
 			})
 			
 			return
+		else
+			UseCreationControllerResult.exit()
 		end
-		var3.exit()
-	end, { var3, var12 })
-	local var29 = useRef(nil)
-	useEffect(function()
-		-- upvalues: var29 (ref), var11 (ref), creationFlowStateModule (copy), fireAnalyticsEventModule (copy), eventNames (copy), withCreationSession (ref), makeCreationEventFieldsModule (copy), getFFlagMomentsStickerButton (copy), getFFlagMomentsTTSAudioOverlayModule (copy), fFlagMomentsCreationToolsIxpEnabledModule (copy), logMomentsLayerExposure (copy), fStringMomentsCreationToolsIxpLayerModule (copy)
-		local current = var29.current
-		var29.current = var11
+	end, { UseCreationControllerResult, UseSignalStateResult1 })
+	local UseRefResult = UseRefFunction(nil)
+	UseEffectFunction(function() --[[ Line: 296 ]]
+		-- upvalues: UseRefResult (copy), UseSignalStateResult (copy), CreationFlowStateModule (upval), FireAnalyticsEventModule (upval), EventNames (upval), withCreationSession (copy), MakeCreationEventFieldsModule (upval), GetFFlagMomentsStickerButtonFunction (upval), GetFFlagMomentsTTSAudioOverlayModule (upval), FFlagMomentsCreationToolsIxpEnabledModule (upval), p1 (copy), LogMomentsLayerExposureFunction (upval), FStringMomentsCreationToolsIxpLayerModule (upval), FFlagMomentsCreationToolsIxpEnabled2Module (upval), FStringMomentsCreationToolsIxpLayer2Module (upval), FFlagMomentsCreationToolsIxpEnabled3Module (upval), FStringMomentsCreationToolsIxpLayer3Module (upval)
+		local Current = UseRefResult.current
+		UseRefResult.current = UseSignalStateResult
 		
-		if var11 == creationFlowStateModule.Gallery then
-			fireAnalyticsEventModule(eventNames.EditingFlowGalleryPageAppear, withCreationSession(makeCreationEventFieldsModule.makeStepField(eventNames.EditingFlowGalleryPageAppear)))
+		if UseSignalStateResult == CreationFlowStateModule.Gallery then
+			FireAnalyticsEventModule(EventNames.EditingFlowGalleryPageAppear, withCreationSession(MakeCreationEventFieldsModule.makeStepField(EventNames.EditingFlowGalleryPageAppear)))
 			
 			return
-		elseif var11 == creationFlowStateModule.Preview then
-			if not (if current ~= creationFlowStateModule.Trimming then if current ~= creationFlowStateModule.Music then if current ~= creationFlowStateModule.TextOverlay then if getFFlagMomentsStickerButton() then true else getFFlagMomentsTTSAudioOverlayModule and current == creationFlowStateModule.Voice else true else true else true) then
-				fireAnalyticsEventModule(eventNames.EditingFlowEditPageAppear, withCreationSession(makeCreationEventFieldsModule.makeStepField(eventNames.EditingFlowEditPageAppear)))
+		end
+		if UseSignalStateResult == CreationFlowStateModule.Preview then
+			if Current ~= CreationFlowStateModule.Trimming and (Current ~= CreationFlowStateModule.Music and (Current ~= CreationFlowStateModule.TextOverlay and ((not GetFFlagMomentsStickerButtonFunction() or Current ~= CreationFlowStateModule.StickerOverlay) and (not GetFFlagMomentsTTSAudioOverlayModule or Current ~= CreationFlowStateModule.Voice)))) then
+				FireAnalyticsEventModule(EventNames.EditingFlowEditPageAppear, withCreationSession(MakeCreationEventFieldsModule.makeStepField(EventNames.EditingFlowEditPageAppear)))
 				
-				if fFlagMomentsCreationToolsIxpEnabledModule then
-					logMomentsLayerExposure(fStringMomentsCreationToolsIxpLayerModule)
+				if FFlagMomentsCreationToolsIxpEnabledModule and not p1.disableExperimentExposure then
+					LogMomentsLayerExposureFunction(FStringMomentsCreationToolsIxpLayerModule)
+				end
+				if FFlagMomentsCreationToolsIxpEnabled2Module and not p1.disableExperimentExposure then
+					LogMomentsLayerExposureFunction(FStringMomentsCreationToolsIxpLayer2Module)
+				end
+				if FFlagMomentsCreationToolsIxpEnabled3Module and not p1.disableExperimentExposure then
+					LogMomentsLayerExposureFunction(FStringMomentsCreationToolsIxpLayer3Module)
 					
 					return
 				end
 			end
-		elseif var11 == creationFlowStateModule.Description then
-			fireAnalyticsEventModule(eventNames.EditingFlowPreviewPageAppear, withCreationSession(makeCreationEventFieldsModule.makeStepField(eventNames.EditingFlowPreviewPageAppear)))
+		elseif UseSignalStateResult == CreationFlowStateModule.Description then
+			FireAnalyticsEventModule(EventNames.EditingFlowPreviewPageAppear, withCreationSession(MakeCreationEventFieldsModule.makeStepField(EventNames.EditingFlowPreviewPageAppear)))
 		end
-	end, { var11 })
-	useEffect(function()
-		-- upvalues: var11 (ref), creationFlowStateModule (copy), var8 (ref)
-		if var11 == creationFlowStateModule.Gallery or var11 == creationFlowStateModule.Music or var11 == creationFlowStateModule.Description then
-			var8.disable()
+	end, { UseSignalStateResult, p1.disableExperimentExposure })
+	UseEffectFunction(function() --[[ Line: 342 ]]
+		-- upvalues: UseSignalStateResult (copy), CreationFlowStateModule (upval), UseToggleStateResult (copy)
+		if UseSignalStateResult == CreationFlowStateModule.Gallery or UseSignalStateResult == CreationFlowStateModule.Music or UseSignalStateResult == CreationFlowStateModule.Description then
+			UseToggleStateResult.disable()
 		end
-	end, { var11, var8.disable })
-	local var30 = useCallback(function()
-		-- upvalues: var16 (ref), dialogTypeModule (copy), reactModule (copy), exitConfirmationDialogModule (copy), textFilteredDialogModule (copy), generateTextOptionsDialogModule (copy), voiceoverErrorDialogModule (copy), voiceoverDeleteConfirmDialogModule (copy), voiceSelectorDialogModule (copy)
-		return if not (not var16 or not var16.modalType) then if var16.modalType == dialogTypeModule.ExitCreationConfirmation then reactModule.createElement(exitConfirmationDialogModule, var16.modalProps) elseif var16.modalType == dialogTypeModule.TextFiltered then reactModule.createElement(textFilteredDialogModule, var16.modalProps) elseif var16.modalType == dialogTypeModule.GenerateTextOptions then reactModule.createElement(generateTextOptionsDialogModule, var16.modalProps) elseif var16.modalType == dialogTypeModule.VoiceoverError then reactModule.createElement(voiceoverErrorDialogModule, var16.modalProps) elseif var16.modalType == dialogTypeModule.VoiceoverDelete then reactModule.createElement(voiceoverDeleteConfirmDialogModule, var16.modalProps) elseif var16.modalType == dialogTypeModule.VoiceSelector then reactModule.createElement(voiceSelectorDialogModule, var16.modalProps) else nil else nil
-	end, { var16 })
-	local var31 = useCallback(function(p2)
-		-- upvalues: var15 (ref), var11 (ref), var3 (ref), reactModule (copy), stepStubModule (copy)
-		if var15 == nil or var15.presentation ~= p2 or var11 ~= var15.step then
+	end, { UseSignalStateResult, UseToggleStateResult.disable })
+	local UseCallbackResult10 = UseCallbackFunction(function() --[[ Line: 352 ]]
+		-- upvalues: UseSignalStateResult5 (copy), DialogTypeModule (upval), ReactModule (upval), ExitConfirmationDialogModule (upval), TextFilteredDialogModule (upval), GenerateTextOptionsDialogModule (upval), VoiceoverErrorDialogModule (upval), VoiceoverDeleteConfirmDialogModule (upval), VoiceSelectorDialogModule (upval)
+		return if UseSignalStateResult5 and UseSignalStateResult5.modalType then if UseSignalStateResult5.modalType == DialogTypeModule.ExitCreationConfirmation then ReactModule.createElement(ExitConfirmationDialogModule, UseSignalStateResult5.modalProps) elseif UseSignalStateResult5.modalType == DialogTypeModule.TextFiltered then ReactModule.createElement(TextFilteredDialogModule, UseSignalStateResult5.modalProps) elseif UseSignalStateResult5.modalType == DialogTypeModule.GenerateTextOptions then ReactModule.createElement(GenerateTextOptionsDialogModule, UseSignalStateResult5.modalProps) elseif UseSignalStateResult5.modalType == DialogTypeModule.VoiceoverError then ReactModule.createElement(VoiceoverErrorDialogModule, UseSignalStateResult5.modalProps) elseif UseSignalStateResult5.modalType == DialogTypeModule.VoiceoverDelete then ReactModule.createElement(VoiceoverDeleteConfirmDialogModule, UseSignalStateResult5.modalProps) elseif UseSignalStateResult5.modalType == DialogTypeModule.VoiceSelector then ReactModule.createElement(VoiceSelectorDialogModule, UseSignalStateResult5.modalProps) else nil else nil
+	end, { UseSignalStateResult5 })
+	local UseCallbackResult11 = UseCallbackFunction(function(Presentation) --[[ Line: 374 ]]
+		-- upvalues: UseSignalStateResult4 (copy), UseSignalStateResult (copy), UseCreationControllerResult (copy), ReactModule (upval), StepStubModule (upval)
+		if UseSignalStateResult4 == nil or UseSignalStateResult4.presentation ~= Presentation or UseSignalStateResult ~= UseSignalStateResult4.step then
 			return nil
-		elseif var15.renderEditor ~= nil then
-			local var32 = var15.renderEditor(var3)
-			
-			return if var32 == nil then reactModule.createElement(stepStubModule(var15.kind), {}) else var32
 		end
-	end, { var15, var11, var3 })
-	local var32 = useMemo(function()
-		-- upvalues: signalsModule (copy)
-		local var33, var34 = signalsModule.createSignal(Vector2.zero)
-		
-		return { getItemSize = var33, setItemSize = var34 }
-	end, {})
-	local var33 = useMemo(function()
-		-- upvalues: signalsModule (copy)
-		local var34, var35 = signalsModule.createSignal(Vector2.zero)
-		
-		return { getItemResolution = var34, setItemResolution = var35 }
-	end, {})
-	local var34 = useMemo(function()
-		-- upvalues: signalsModule (copy)
-		local var35, var36 = signalsModule.createSignal(false)
-		
-		return { get = var35, set = var36 }
-	end, {})
-	local var35 = useSignalState(var34.get)
-	local var36 = useMemo(function()
-		-- upvalues: var32 (ref), var33 (ref), var34 (ref)
-		return {
-			getItemSize = var32.getItemSize,
-			getItemResolution = var33.getItemResolution,
-			setIsOverlayDragging = var34.set
-		}
-	end, { var32, var33, var34 })
-	local var37 = useCallback(function(p2)
-		-- upvalues: var32 (ref)
-		var32.setItemSize(p2.AbsoluteSize)
-	end, { var32 })
-	local var38 = useCallback(function(p2)
-		-- upvalues: var33 (ref)
-		var33.setItemResolution(p2)
-	end, { var33 })
-	local var39 = useMemo(function()
-		-- upvalues: var14 (ref), var3 (ref), var36 (ref)
-		local t = {}
-		
-		for i, v in var14 do
-			if v.renderPreviewLayer ~= nil then
-				t[v.kind .. "PreviewLayer"] = v.renderPreviewLayer(var3, var36)
+		if UseSignalStateResult4.renderEditor ~= nil then
+			local RenderEditorResult = UseSignalStateResult4.renderEditor(UseCreationControllerResult)
+			
+			if RenderEditorResult ~= nil then
+				return RenderEditorResult
 			end
 		end
-		return t
-	end, { var14, var3, var36 })
-	local var40 = if var8.enabled then Enum.ScaleType.Fit else Enum.ScaleType.Crop
-	local createElement = reactModule.createElement
-	local t_1 = {
+		return ReactModule.createElement(StepStubModule(UseSignalStateResult4.kind), {})
+	end, {
+		UseSignalStateResult4,
+		UseSignalStateResult,
+		UseCreationControllerResult
+	})
+	local UseMemoResult = UseMemoFunction(function() --[[ Line: 392 ]]
+		-- upvalues: SignalsModule (upval)
+		local Signal, Signal2 = SignalsModule.createSignal(Vector2.zero)
+		
+		return { getItemSize = Signal, setItemSize = Signal2 }
+	end, {})
+	local UseMemoResult1 = UseMemoFunction(function() --[[ Line: 400 ]]
+		-- upvalues: SignalsModule (upval)
+		local Signal, Signal2 = SignalsModule.createSignal(Vector2.zero)
+		
+		return { getItemResolution = Signal, setItemResolution = Signal2 }
+	end, {})
+	local UseMemoResult2 = UseMemoFunction(function() --[[ Line: 405 ]]
+		-- upvalues: SignalsModule (upval)
+		local Signal, Signal2 = SignalsModule.createSignal(false)
+		
+		return { get = Signal, set = Signal2 }
+	end, {})
+	local UseSignalStateResult7 = UseSignalStateFunction(UseMemoResult2.get)
+	local UseMemoResult3 = UseMemoFunction(function() --[[ Line: 411 ]]
+		-- upvalues: UseMemoResult (copy), UseMemoResult1 (copy), UseMemoResult2 (copy)
+		return {
+			getItemSize = UseMemoResult.getItemSize,
+			getItemResolution = UseMemoResult1.getItemResolution,
+			setIsOverlayDragging = UseMemoResult2.set
+		}
+	end, { UseMemoResult, UseMemoResult1, UseMemoResult2 })
+	
+	return ReactModule.createElement(CreationMediaProviderModule, {
+		preview = UseCreationControllerResult.preview,
+		getSelectedCapture = UseCreationControllerResult.getSelectedCapture
+	}, (ReactModule.createElement(View, {
 		tag = "position-center-center anchor-center-center size-full-full",
 		testId = "moments-creation-background-scrim",
-		backgroundStyle = var6.Color.Common.Scrim,
-		onActivated = var28,
-		stateLayer = t
-	}
-	local t_2 = {}
-	local createElement_1 = reactModule.createElement
-	local t_3 = {
-		tag = "position-center-center anchor-center-center size-full-full radius-large bg-surface-0",
-		testId = "moments-creation-panel",
-		sizeConstraint = {
-			MaxSize = if var7 == formFactor.Wide then Vector2.new(600, 700) else nil
-		},
-		onActivated = noopActivated,
-		stateLayer = t
-	}
-	local t_4 = {
-		VoiceBackControls = if getFFlagMomentsTTSAudioOverlayModule and var11 == creationFlowStateModule.Voice then reactModule.createElement(voiceBackControlsModule) else nil,
-		CloseButtonContainer = if getFFlagMomentsTTSAudioOverlayModule and var11 == creationFlowStateModule.Voice then nil else reactModule.createElement(view, {
-			tag = "position-top-right anchor-top-right auto-xy",
-			padding = {
-				top = UDim.new(0, var5.top + var6.Padding.Medium),
-				right = UDim.new(0, var5.right + var6.Padding.Medium)
+		backgroundStyle = UseTokensResult.Color.Common.Scrim,
+		onActivated = UseCallbackResult9,
+		stateLayer = StateLayer
+	}, {
+		CreationFlowView = ReactModule.createElement(View, {
+			tag = "position-center-center anchor-center-center size-full-full radius-large bg-surface-0",
+			testId = "moments-creation-panel",
+			sizeConstraint = {
+				MaxSize = if UseFormFactorResult == FormFactor.Wide then Vector2.new(600, 700) else nil
 			},
-			ZIndex = if getFFlagMomentsCreationCloseButtonZIndexFixModule then 10 else nil
+			onActivated = noopActivated,
+			stateLayer = StateLayer
 		}, {
-			CloseButton = reactModule.createElement(view, {
-				LayoutOrder = 1,
-				tag = "size-1100-1100 padding-medium radius-circle bg-over-media-0",
-				onActivated = var28
+			VoiceBackControls = if GetFFlagMomentsTTSAudioOverlayModule and UseSignalStateResult == CreationFlowStateModule.Voice then ReactModule.createElement(VoiceBackControlsModule) else nil,
+			CloseButtonContainer = if GetFFlagMomentsTTSAudioOverlayModule and UseSignalStateResult == CreationFlowStateModule.Voice then nil else ReactModule.createElement(View, {
+				tag = "position-top-right anchor-top-right auto-xy",
+				padding = {
+					top = UDim.new(0, UseDeviceInsetsResult.top + UseTokensResult.Padding.Medium),
+					right = UDim.new(0, UseDeviceInsetsResult.right + UseTokensResult.Padding.Medium)
+				},
+				ZIndex = if GetFFlagMomentsCreationCloseButtonZIndexFixModule then 10 else nil
 			}, {
-				CloseIcon = reactModule.createElement(icon, {
-					name = "icons/navigation/close_small",
-					ZIndex = 2,
-					AnchorPoint = Vector2.new(0.5, 0.5),
-					Position = UDim2.fromScale(0.5, 0.5),
-					size = foundationModule.Enums.IconSize.Small,
-					style = var6.Color.ActionEmphasis.Foreground
+				CloseButton = ReactModule.createElement(View, {
+					LayoutOrder = 1,
+					tag = "size-1100-1100 padding-medium radius-circle bg-over-media-0",
+					onActivated = UseCallbackResult9
+				}, {
+					CloseIcon = ReactModule.createElement(Icon, {
+						name = "icons/navigation/close_small",
+						ZIndex = 2,
+						AnchorPoint = Vector2.new(0.5, 0.5),
+						Position = UDim2.fromScale(0.5, 0.5),
+						size = FoundationModule.Enums.IconSize.Small,
+						style = UseTokensResult.Color.ActionEmphasis.Foreground
+					})
 				})
+			}),
+			MainViewContainer = ReactModule.createElement(View, {
+				tag = "size-full",
+				ZIndex = if GetFFlagMomentsCreationCloseButtonZIndexFixModule then 1 else nil,
+				onAbsoluteSizeChanged = UseDescriptionKeyboardInsetModuleResult2
+			}, {
+				MainView = ReactModule.createElement(View, {
+					tag = "col align-x-center",
+					Size = UseDescriptionKeyboardInsetModuleResult:map(function(p2): UDim2 --[[ Line: 501 ]]
+						return UDim2.new(1, 0, 1, -p2)
+					end)
+				}, {
+					PreviewContainer = ReactModule.createElement("CanvasGroup", {
+						LayoutOrder = 1,
+						Size = UDim2.fromScale(1, 1),
+						BackgroundTransparency = UseTokensResult.Color.None.Transparency
+					}, {
+						UIFlexItem = ReactModule.createElement("UIFlexItem", {
+							FlexMode = Enum.UIFlexMode.Custom,
+							ShrinkRatio = if UseSignalStateResult1 then 1 else 2
+						}),
+						UICorner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0, UseTokensResult.Radius.Large) }),
+						ClickCapture = ReactModule.createElement(View, {
+							tag = "size-full",
+							ZIndex = 0,
+							onActivated = UseAutoDismissStateModuleResult2,
+							stateLayer = {
+								affordance = FoundationModule.Enums.StateLayerAffordance.None
+							}
+						}),
+						CaptureView = ReactModule.createElement(CaptureViewModule, {
+							preview = UseCreationControllerResult.preview,
+							scaleType = if UseToggleStateResult.enabled then Enum.ScaleType.Fit else Enum.ScaleType.Crop,
+							onAbsoluteSizeChanged = UseCallbackFunction(function(Frame) --[[ Line: 419 ]]
+								-- upvalues: UseMemoResult (copy)
+								UseMemoResult.setItemSize(Frame.AbsoluteSize)
+							end, { UseMemoResult }),
+							onResolutionChanged = UseCallbackFunction(function(p2) --[[ Line: 423 ]]
+								-- upvalues: UseMemoResult1 (copy)
+								UseMemoResult1.setItemResolution(p2)
+							end, { UseMemoResult1 }),
+							ttsAudio = UseCreationControllerResult.ttsAudio
+						}, (UseMemoFunction(function() --[[ Line: 427 ]]
+							-- upvalues: UseSignalStateResult3 (copy), UseCreationControllerResult (copy), UseMemoResult3 (copy)
+							local RenderPreviewLayerResults = {}
+							
+							for _, value in UseSignalStateResult3 do
+								if value.renderPreviewLayer ~= nil then
+									RenderPreviewLayerResults[value.kind .. "PreviewLayer"] = value.renderPreviewLayer(UseCreationControllerResult, UseMemoResult3)
+								end
+							end
+							return RenderPreviewLayerResults
+						end, {
+							UseSignalStateResult3,
+							UseCreationControllerResult,
+							UseMemoResult3
+						}))),
+						VoiceTopScrim = if GetFFlagMomentsTTSAudioOverlayModule and UseSignalStateResult == CreationFlowStateModule.Voice then ReactModule.createElement(GradientBackdrop, {
+							rotation = 90,
+							zIndex = 2,
+							color3 = UseTokensResult.Color.Common.Scrim.Color3,
+							size = UDim2.new(1, 0, 0.25, 0)
+						}) else nil,
+						PreviewMediaOverlay = ReactModule.createElement(View, {
+							tag = "col position-bottom-center anchor-bottom-center size-full-0 auto-y",
+							ZIndex = 5
+						}, {
+							OtherControls = ReactModule.createElement(View, {
+								tag = "size-full-0 auto-y",
+								LayoutOrder = 1,
+								padding = {
+									bottom = UDim.new(0, UseTokensResult.Padding.Large),
+									left = UDim.new(0, (math.max(UseDeviceInsetsResult.left, UseTokensResult.Padding.Large))),
+									right = UDim.new(0, (math.max(UseDeviceInsetsResult.right, UseTokensResult.Padding.Large)))
+								}
+							}, {
+								MusicIndicator = if Music and (UseSignalStateResult == CreationFlowStateModule.Preview or UseSignalStateResult == CreationFlowStateModule.Description) then ReactModule.createElement(View, { tag = "position-bottom-left anchor-bottom-left auto-xy" }, {
+									MusicChip = ReactModule.createElement(MusicChipModule, {
+										musicAssetId = Music.assetId,
+										onActivated = UseCallbackResult5,
+										onRemove = if FFlagMomentsCreationMusicChipRemoveButtonModule then UseCallbackResult6 else nil
+									})
+								}) else nil
+							}),
+							PlaybackControls = if UseSignalStateResult1 and UseSignalStateResult1.CaptureType == Enum.CaptureType.Video and (UseSignalStateResult == CreationFlowStateModule.Gallery or UseSignalStateResult == CreationFlowStateModule.Preview or GetFFlagMomentsTTSAudioOverlayModule and UseSignalStateResult == CreationFlowStateModule.Voice) and (UseAutoDismissStateModuleResult or GetFFlagMomentsTTSAudioOverlayModule and UseSignalStateResult == CreationFlowStateModule.Voice) then if UseSignalStateResult7 then nil else ReactModule.createElement(PlaybackControlsModule, {
+								layoutOrder = 2,
+								preview = UseCreationControllerResult.preview,
+								toggleFitMode = UseToggleStateResult.toggle,
+								isFitMode = UseToggleStateResult.enabled,
+								onSeek = if GetFFlagMomentsTTSAudioOverlayModule and UseSignalStateResult == CreationFlowStateModule.Voice then function(p2: number) --[[ Line: 590 ]]
+									-- upvalues: UseCreationControllerResult (copy)
+									local TtsAudio = UseCreationControllerResult.ttsAudio
+									
+									if TtsAudio == nil then return end
+									local TimeLength: number = TtsAudio.getTimeLength(false)
+									
+									if TimeLength > 0 and p2 >= 0 and p2 < TimeLength then
+										TtsAudio.seek(p2)
+									end
+								end else nil
+							}) else nil
+						}),
+						EditCTABar = if UseSignalStateResult == CreationFlowStateModule.Preview then ReactModule.createElement(EditCTABarModule, {
+							zIndex = 4,
+							tools = UseSignalStateResult3,
+							onToolSelected = UseCallbackResult4,
+							showText = UseAutoDismissStateModuleResult,
+							isLoadingMap = if UseSignalStateResult6 then { generateText = true } else nil,
+							isDisabledMap = if GetFFlagEnableMomentTextGenerationFunction() and UseSignalStateResult6 then { text = true } else nil,
+							onDisabledToolActivated = UseCreationControllerResult.onDisabledToolActivated,
+							coachmark = if GetFFlagMomentsTTSAudioOverlayModule and GetFFlagMomentsTTSCoachmarkModule() then require(script.Parent.makeVoiceCoachmarkConfig)(GetFFlagMomentsTTSAudioOverlayModule, GetFFlagMomentsTTSCoachmarkModule()) else nil
+						}) else nil
+					}),
+					GalleryView = if UseSignalStateResult == CreationFlowStateModule.Gallery then if CaptureSource == nil then ReactModule.createElement(GalleryViewModule, {
+						layoutOrder = 2,
+						hasMoreCaptures = false,
+						onShowMore = nil,
+						captures = SampleCapturesModule1,
+						onCaptureSelected = UseCallbackResult,
+						onNextCallback = UseCallbackResult1,
+						selectedCapture = UseSignalStateResult1
+					}) else ReactModule.createElement(GallerySourceView, {
+						layoutOrder = 2,
+						captureSource = CaptureSource,
+						onCaptureSelected = UseCallbackResult,
+						onNextCallback = UseCallbackResult1,
+						selectedCapture = UseSignalStateResult1
+					}) else nil,
+					PreviewView = if UseSignalStateResult == CreationFlowStateModule.Preview then ReactModule.createElement(PreviewViewModule, {
+						layoutOrder = 2,
+						onContinueCallback = UseCallbackResult2,
+						onReturnToGalleryCallback = if p1.excludeGallery then nil else UseCallbackResult7
+					}) else nil,
+					ActiveStepEditor = UseCallbackResult11("Step"),
+					DescriptionView = if UseSignalStateResult == CreationFlowStateModule.Description then ReactModule.createElement(DescriptionViewModule, {
+						layoutOrder = 2,
+						onPublish = UseCallbackResult8,
+						onReturnToEditing = UseCallbackResult3
+					}) else nil
+				}),
+				MusicView = UseCallbackResult11("Overlay")
 			})
-		})
-	}
-	local createElement_2 = reactModule.createElement
-	local t_5 = {
-		tag = "size-full",
-		ZIndex = if getFFlagMomentsCreationCloseButtonZIndexFixModule then 1 else nil,
-		onAbsoluteSizeChanged = var18
-	}
-	local t_6 = {}
-	local createElement_3 = reactModule.createElement
-	local t_7 = {
-		tag = "col align-x-center",
-		Size = var62:map(function(p2)
-			return UDim2.new(1, 0, 1, -p2)
-		end)
-	}
-	local t_8 = {}
-	local createElement_4 = reactModule.createElement
-	local var41 = "CanvasGroup"
-	local t_9 = {
-		LayoutOrder = 1,
-		Size = UDim2.fromScale(1, 1),
-		BackgroundTransparency = var6.Color.None.Transparency
-	}
-	local t_10 = {
-		UIFlexItem = reactModule.createElement("UIFlexItem", {
-			FlexMode = Enum.UIFlexMode.Custom,
-			ShrinkRatio = if var12 then 1 else 2
 		}),
-		UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, var6.Radius.Large) }),
-		ClickCapture = reactModule.createElement(view, {
-			tag = "size-full",
-			ZIndex = 0,
-			onActivated = var10,
-			stateLayer = {
-				affordance = foundationModule.Enums.StateLayerAffordance.None
-			}
-		}),
-		CaptureView = reactModule.createElement(captureViewModule, {
-			preview = var3.preview,
-			scaleType = var40,
-			onAbsoluteSizeChanged = var37,
-			onResolutionChanged = var38,
-			ttsAudio = var3.ttsAudio
-		}, var39),
-		VoiceTopScrim = if getFFlagMomentsTTSAudioOverlayModule and var11 == creationFlowStateModule.Voice then reactModule.createElement(gradientBackdrop, {
-			rotation = 90,
-			zIndex = 2,
-			color3 = var6.Color.Common.Scrim.Color3,
-			size = UDim2.new(1, 0, 0.25, 0)
-		}) else nil
-	}
-	local createElement_5 = reactModule.createElement
-	local t_11 = {
-		tag = "col position-bottom-center anchor-bottom-center size-full-0 auto-y",
-		ZIndex = 5
-	}
-	local t_12 = {
-		OtherControls = reactModule.createElement(view, {
-			tag = "size-full-0 auto-y",
-			LayoutOrder = 1,
-			padding = {
-				bottom = UDim.new(0, var6.Padding.Large),
-				left = UDim.new(0, math.max(var5.left, var6.Padding.Large)),
-				right = UDim.new(0, math.max(var5.right, var6.Padding.Large))
-			}
-		}, {
-			MusicIndicator = if music and (var11 == creationFlowStateModule.Preview or var11 == creationFlowStateModule.Description) then reactModule.createElement(view, { tag = "position-bottom-left anchor-bottom-left auto-xy" }, {
-				MusicChip = reactModule.createElement(musicChipModule, {
-					musicAssetId = music.assetId,
-					onActivated = var24,
-					onRemove = if fFlagMomentsCreationMusicChipRemoveButtonModule then var25 else nil
-				})
-			}) else nil
-		})
-	}
-	
-	if var12 and var12.CaptureType == Enum.CaptureType.Video and (var11 == creationFlowStateModule.Gallery or var11 == creationFlowStateModule.Preview or getFFlagMomentsTTSAudioOverlayModule and var11 == creationFlowStateModule.Voice) and ((var9 or getFFlagMomentsTTSAudioOverlayModule and var11 == creationFlowStateModule.Voice) and not var35) then
-		var4 = reactModule.createElement
-		var4 = var4(playbackControlsModule, {
-			layoutOrder = 2,
-			preview = var3.preview,
-			toggleFitMode = var8.toggle,
-			isFitMode = var8.enabled,
-			onSeek = if getFFlagMomentsTTSAudioOverlayModule and var11 == creationFlowStateModule.Voice then function(p2)
-				-- upvalues: var3 (ref)
-				local ttsAudio = var3.ttsAudio
-				
-				if ttsAudio == nil then return end
-				local timeLength = ttsAudio.getTimeLength(false)
-				
-				if timeLength > 0 and p2 >= 0 and p2 < timeLength then
-					ttsAudio.seek(p2)
-				end
-			end else nil
-		})
-	else
-		var4 = nil
-	end
-	local createElement_6
-	t_12.PlaybackControls = var4
-	t_10.PreviewMediaOverlay = createElement_5(view, t_11, t_12)
-	
-	if var11 == creationFlowStateModule.Preview then
-		createElement_6 = reactModule.createElement
-		createElement_6 = createElement_6(editCTABarModule, {
-			zIndex = 4,
-			tools = var14,
-			onToolSelected = var23,
-			showText = var9,
-			isLoadingMap = if var17 then { generateText = true } else nil,
-			isDisabledMap = if getFFlagEnableMomentTextGeneration() and var17 then { text = true } else nil,
-			onDisabledToolActivated = var3.onDisabledToolActivated,
-			coachmark = if getFFlagMomentsTTSAudioOverlayModule and getFFlagMomentsTTSCoachmarkModule() then require(script.Parent.makeVoiceCoachmarkConfig)(getFFlagMomentsTTSAudioOverlayModule, getFFlagMomentsTTSCoachmarkModule()) else nil
-		})
-	else
-		createElement_6 = nil
-	end
-	t_10.EditCTABar = createElement_6
-	t_8.PreviewContainer = createElement_4(var41, t_9, t_10)
-	t_8.GalleryView = if var11 ~= creationFlowStateModule.Gallery then if captureSource ~= nil then reactModule.createElement(galleryViewModule, {
-		layoutOrder = 2,
-		hasMoreCaptures = false,
-		onShowMore = nil,
-		captures = var2,
-		onCaptureSelected = var19,
-		onNextCallback = var20,
-		selectedCapture = var12
-	}) else reactModule.createElement(GallerySourceView, {
-		layoutOrder = 2,
-		captureSource = captureSource,
-		onCaptureSelected = var19,
-		onNextCallback = var20,
-		selectedCapture = var12
-	}) else nil
-	t_8.PreviewView = if var11 == creationFlowStateModule.Preview then reactModule.createElement(previewViewModule, {
-		layoutOrder = 2,
-		onContinueCallback = var21,
-		onReturnToGalleryCallback = if not p1.excludeGallery then var26 else nil
-	}) else nil
-	t_8.ActiveStepEditor = var31("Step")
-	t_8.DescriptionView = if var11 == creationFlowStateModule.Description then reactModule.createElement(descriptionViewModule, {
-		layoutOrder = 2,
-		onPublish = var27,
-		onReturnToEditing = var22
-	}) else nil
-	t_6.MainView = createElement_3(view, t_7, t_8)
-	t_6.MusicView = var31("Overlay")
-	t_4.MainViewContainer = createElement_2(view, t_5, t_6)
-	t_2.CreationFlowView = createElement_1(view, t_3, t_4)
-	t_2.Modal = var30()
-	
-	return reactModule.createElement(creationMediaProviderModule, {
-		preview = var3.preview,
-		getSelectedCapture = var3.getSelectedCapture
-	}, createElement(view, t_1, t_2))
+		Modal = UseCallbackResult10()
+	})))
 end
 
-return function(p2)
-	-- upvalues: reactModule (ref), isTextFilteredModule (ref), var1 (ref), publishMomentModule (ref), foundationProvider (ref), colorMode (ref), creationControllerProvider (ref), CreationFlowContent (ref)
-	local onExit = p2.onExit
-	local host = p2.host
-	local captureSource = p2.captureSource
-	local var40 = reactModule.useMemo(function()
-		-- upvalues: host (ref), onExit (ref), captureSource (ref), isTextFilteredModule (copy), var1 (copy), publishMomentModule (copy)
-		return if host == nil then {
-			exitCreationFlow = onExit,
-			captureSource = captureSource,
-			isTextFiltered = isTextFilteredModule,
-			createMoment = if var1 then function(_, _, p3)
-				print(`[moments-creation] dev publish (not uploaded): "{p11}"`)
-			end else publishMomentModule
-		} else host
-	end, { host, onExit, captureSource })
+return function(p2) --[[ Line: 696 | Named "CreationFlowScreen" ]]
+	-- upvalues: ReactModule (copy), IsTextFilteredModule (copy), v1 (copy), PublishMomentModule (copy), FoundationProvider (copy), ColorMode (copy), CreationControllerProvider (copy), CreationFlowContent (copy)
+	local OnExit = p2.onExit
+	local Host = p2.host
+	local CaptureSource = p2.captureSource
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 701 ]]
+		-- upvalues: Host (copy), OnExit (copy), CaptureSource (copy), IsTextFilteredModule (upval), v1 (upval), PublishMomentModule (upval)
+		return if Host == nil then {
+			exitCreationFlow = OnExit,
+			captureSource = CaptureSource,
+			isTextFiltered = IsTextFilteredModule,
+			createMoment = if v1 then function(_, _, p3) --[[ Line: 710 ]]
+				print(`[moments-creation] dev publish (not uploaded): "{p13}"`)
+			end else PublishMomentModule
+		} else Host
+	end, { Host, OnExit, CaptureSource })
 	
-	return reactModule.createElement(foundationProvider, { colorMode = colorMode.Dark }, {
-		Root = reactModule.createElement(creationControllerProvider, { host = var40, excludeGallery = p2.excludeGallery }, {
-			Content = reactModule.createElement(CreationFlowContent, {
+	return ReactModule.createElement(FoundationProvider, { colorMode = ColorMode.Dark }, {
+		Root = ReactModule.createElement(CreationControllerProvider, {
+			host = UseMemoResult,
+			excludeGallery = p2.excludeGallery
+		}, {
+			Content = ReactModule.createElement(CreationFlowContent, {
 				excludeGallery = p2.excludeGallery,
-				captureSource = var40.captureSource
+				captureSource = UseMemoResult.captureSource,
+				disableDrafts = UseMemoResult.disableDrafts,
+				disableExperimentExposure = UseMemoResult.disableExperimentExposure
 			})
 		})
 	})

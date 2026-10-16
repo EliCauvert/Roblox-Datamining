@@ -1,275 +1,258 @@
-﻿local httpService = game:GetService("HttpService")
-local localizationService = game:GetService("LocalizationService")
-local parent = script:FindFirstAncestor("DataHydration").Parent
-local acpProtocolModule = require(script.Parent.Acp.AcpProtocol)
-local fFlagCreatorAgentChatFilterTerminalClientToolsModule = require(script.Parent.FFlagCreatorAgentChatFilterTerminalClientTools)
-local localization = require(parent.RobloxAppLocales).Localization
-local fFlagBuildExperiencePinForBuild = require(parent.SharedFlags).FFlagBuildExperiencePinForBuild
-local parseFrameModule = require(script.Parent.Acp.parseFrame)
+﻿local HttpService = game:GetService("HttpService")
+local LocalizationService = game:GetService("LocalizationService")
+local Parent = script:FindFirstAncestor("DataHydration").Parent
+local AcpProtocolModule = require(script.Parent.Acp.AcpProtocol)
+local FFlagCreatorAgentChatFilterTerminalClientToolsModule = require(script.Parent.FFlagCreatorAgentChatFilterTerminalClientTools)
+local Localization = require(Parent.RobloxAppLocales).Localization
+local FFlagBuildExperiencePinForBuild = require(Parent.SharedFlags).FFlagBuildExperiencePinForBuild
+local ParseFrameModule = require(script.Parent.Acp.parseFrame)
 local _ = require(script.Parent.types)
-local t = {
+local config = {
 	studio_ask_user = true,
 	ask_user = true,
 	present_plan = true,
 	propose_plan = true
 }
 
-local function extractRawFrame(p1)
+local function extractRawFrame(p1) --[[ Line: 37 ]]
 	if typeof(p1) == "string" then
 		return p1
-	elseif typeof(p1) ~= "table" then
+	end
+	if typeof(p1) ~= "table" then
 		return nil
 	end
-	for i, v in {
+	local v1 = nil
+	for _, value in {
 		"frame",
 		"payload",
 		"message",
 		"data",
 		"body"
 	} do
-		local var1 = p1[v]
+		v1 = p1[value]
 		
-		if typeof(var1) == "string" and var1 ~= "" then
-			return var1
+		if typeof(v1) == "string" and v1 ~= "" then
+			return v1
 		end
 	end
 	return nil
 end
 
-local function _(p2)
+local function _(p2) --[[ Line: 53 | Named "normalizeUniverseId" ]]
 	if typeof(p2) == "number" and p2 ~= 0 then
 		return p2
-	elseif typeof(p2) ~= "string" or p2 == "" then
-		return nil
-	end
-	local var2 = tonumber(p2)
-	
-	return if var2 == nil or var2 == 0 then nil else var2
-end
-
-local _ = function(p2)
-	local var2
-	local universeId = p2.universeId
-	
-	if typeof(universeId) == "number" and universeId ~= 0 then
-		var2 = universeId
-	elseif typeof(universeId) == "string" and universeId ~= "" then
-		local var3 = tonumber(universeId)
-		var2 = if var3 == nil or var3 == 0 then nil else var3
+	elseif typeof(p2) == "string" and p2 ~= "" then
+		local Number: number? = tonumber(p2)
+		
+		return if Number == nil or Number == 0 then nil else Number
 	else
-		var2 = nil
-	end
-	if var2 ~= nil then
-		return var2
-	end
-	universeId = p2._meta and p2._meta._roblox
-	
-	if typeof(universeId) ~= "table" then
 		return nil
 	end
-	local universeId_1 = universeId.universeId
+end
+
+local _ = function(p2) --[[ Line: 64 | Named "getUniverseId" ]]
+	local UniverseId = p2.universeId
+	local UniverseId1 = nil
 	
-	if typeof(universeId_1) == "number" and universeId_1 ~= 0 then
-		return universeId_1
-	elseif typeof(universeId_1) ~= "string" or universeId_1 == "" then
+	if typeof(UniverseId) == "number" and UniverseId ~= 0 then
+		UniverseId1 = UniverseId
+	elseif typeof(UniverseId) == "string" and UniverseId ~= "" then
+		local Number: number? = tonumber(UniverseId)
+		UniverseId1 = if Number == nil or Number == 0 then nil else Number
+	else
+		UniverseId1 = nil
+	end
+	if UniverseId1 ~= nil then
+		return UniverseId1
+	end
+	local Roblox = p2._meta and p2._meta._roblox
+	
+	if typeof(Roblox) ~= "table" then
 		return nil
 	end
-	local var4 = tonumber(universeId_1)
+	local UniverseId2 = Roblox.universeId
 	
-	return if var4 == nil or var4 == 0 then nil else var4
-end
-
-local _ = function(p2)
-	-- upvalues: t (ref)
-	return typeof(p2) == "string" and t[string.lower(p2)] == true
-end
-
-local _ = function(p2)
-	-- upvalues: t (ref)
-	local kind = p2.kind
-	
-	if not (typeof(kind) == "string" and t[string.lower(kind)] == true) then
-		kind = p2.title
+	if typeof(UniverseId2) == "number" and UniverseId2 ~= 0 then
+		return UniverseId2
+	elseif typeof(UniverseId2) == "string" and UniverseId2 ~= "" then
+		local Number: number? = tonumber(UniverseId2)
 		
-		if typeof(kind) == "string" and t[string.lower(kind)] == true then
-			return true
-		end
-		local rawInput = p2.rawInput
-		
-		if typeof(rawInput) ~= "table" then
-			return false
-		end
-		local name = rawInput.name
-		kind = typeof(name) == "string" and t[string.lower(name)] == true
-		
-		if not kind then
-			local toolName = rawInput.toolName
-			kind = typeof(toolName) == "string" and t[string.lower(toolName)] == true
-		end
-		return kind
+		return if Number == nil or Number == 0 then nil else Number
+	else
+		return nil
 	end
 end
 
-local function getSessionUpdate(p2)
-	-- upvalues: acpProtocolModule (ref)
+local _ = function(Text: string): boolean --[[ Line: 77 | Named "valueLooksLikeLocalTool" ]]
+	-- upvalues: config (copy)
+	return typeof(Text) == "string" and config[string.lower(Text)] == true
+end
+
+local _ = function(p2): boolean --[[ Line: 81 | Named "updateLooksLikeLocalTool" ]]
+	-- upvalues: config (copy)
+	local Kind: string = p2.kind
+	
+	if typeof(Kind) ~= "string" or config[string.lower(Kind)] ~= true then
+		local Title: string = p2.title
+		
+		if typeof(Title) ~= "string" or config[string.lower(Title)] ~= true then
+			local RawInput = p2.rawInput
+			
+			if typeof(RawInput) ~= "table" then
+				return false
+			end
+			local Name: string = RawInput.name
+			local IsEntry: boolean = typeof(Name) == "string" and config[string.lower(Name)] == true
+			
+			if not IsEntry then
+				local ToolName: string = RawInput.toolName
+				IsEntry = typeof(ToolName) == "string" and config[string.lower(ToolName)] == true
+			end
+			return IsEntry
+		end
+	end
+	return true
+end
+
+local function getSessionUpdate(p2) --[[ Line: 94 ]]
+	-- upvalues: AcpProtocolModule (copy)
 	if p2.kind ~= "notification" then
 		return nil, nil, nil, nil
 	end
-	local notification = p2.notification
+	local Notification = p2.notification
 	
-	if notification.method ~= acpProtocolModule.Notifications.SessionUpdate then
+	if Notification.method ~= AcpProtocolModule.Notifications.SessionUpdate then
 		return nil, nil, nil, nil
 	end
-	local params = notification.params
-	local sessionId = params.sessionId
-	local update = params.update
+	local Params = Notification.params
+	local SessionId = Params.sessionId
+	local Update = Params.update
 	
-	if typeof(sessionId) ~= "string" or sessionId == "" or typeof(update) ~= "table" then
+	if typeof(SessionId) ~= "string" or SessionId == "" or typeof(Update) ~= "table" then
 		return nil, nil, nil, nil
 	end
-	local var2, var3
-	local universeId = params.universeId
+	local UniverseId = Params.universeId
+	local UniverseId1 = nil
 	
-	if typeof(universeId) == "number" and universeId ~= 0 then
-		var2 = universeId
-	elseif typeof(universeId) == "string" and universeId ~= "" then
-		var3 = tonumber(universeId)
-		var2 = if var3 == nil or var3 == 0 then nil else var3
+	if typeof(UniverseId) == "number" and UniverseId ~= 0 then
+		UniverseId1 = UniverseId
+	elseif typeof(UniverseId) == "string" and UniverseId ~= "" then
+		local Number: number? = tonumber(UniverseId)
+		UniverseId1 = if Number == nil or Number == 0 then nil else Number
 	else
-		var2 = nil
+		UniverseId1 = nil
 	end
-	local var4
-	if var2 == nil then
-		universeId = params._meta and params._meta._roblox
+	local UniverseId2 = nil
+	if UniverseId1 == nil then
+		local Roblox = Params._meta and Params._meta._roblox
 		
-		if typeof(universeId) == "table" then
-			var3 = universeId.universeId
+		if typeof(Roblox) == "table" then
+			local UniverseId3 = Roblox.universeId
 			
-			if typeof(var3) == "number" and var3 ~= 0 then
-				var4 = var3
-			elseif typeof(var3) == "string" and var3 ~= "" then
-				local var5 = tonumber(var3)
-				var4 = if var5 == nil or var5 == 0 then nil else var5
+			if typeof(UniverseId3) == "number" and UniverseId3 ~= 0 then
+				UniverseId2 = UniverseId3
+			elseif typeof(UniverseId3) == "string" and UniverseId3 ~= "" then
+				local Number: number? = tonumber(UniverseId3)
+				UniverseId2 = if Number == nil or Number == 0 then nil else Number
 			else
-				var4 = nil
+				UniverseId2 = nil
 			end
 		else
-			var4 = nil
+			UniverseId2 = nil
 		end
 	else
-		var4 = var2
+		UniverseId2 = UniverseId1
 	end
-	return update, sessionId, var4, params.pinForBuild == true
+	return Update, SessionId, UniverseId2, Params.pinForBuild == true
 end
 
-local function classifyFrame(p2)
-	-- upvalues: getSessionUpdate (ref), fFlagBuildExperiencePinForBuild (ref), fFlagCreatorAgentChatFilterTerminalClientToolsModule (ref), t (ref)
-	local var2, var3, var4, var5 = getSessionUpdate(p2)
+local function classifyFrame(p2) --[[ Line: 114 ]]
+	-- upvalues: getSessionUpdate (copy), FFlagBuildExperiencePinForBuild (copy), FFlagCreatorAgentChatFilterTerminalClientToolsModule (copy), config (copy)
+	local SessionUpdate, SessionUpdate2, SessionUpdate3, SessionUpdate4 = getSessionUpdate(p2)
 	
-	if var2 == nil or var3 == nil then
+	if SessionUpdate == nil or SessionUpdate2 == nil then
 		return nil
-	elseif fFlagBuildExperiencePinForBuild and var5 ~= true then
+	end
+	if FFlagBuildExperiencePinForBuild and SessionUpdate4 ~= true then
 		return nil
-	elseif var2.sessionUpdate == "state_change" and var2.state == "idle" then
-		return { kind = "turn_end", sessionId = var3, universeId = var4 }
-	elseif var2.sessionUpdate == "tool_call_update" then
-		local status = var2.status
+	end
+	if SessionUpdate.sessionUpdate == "state_change" and SessionUpdate.state == "idle" then
+		return {
+			kind = "turn_end",
+			sessionId = SessionUpdate2,
+			universeId = SessionUpdate3
+		}
+	end
+	repeat
+		if SessionUpdate.sessionUpdate ~= "tool_call_update" then break end
+		local Status = SessionUpdate.status
 		
-		if not (if status ~= "completed" then if status ~= "failed" then fFlagCreatorAgentChatFilterTerminalClientToolsModule and status == "cancelled" else true else true) then
-			local var6
-			local kind = var2.kind
-			
-			if not (typeof(kind) == "string" and t[string.lower(kind)] == true) then
-				kind = var2.title
+		if Status == "completed" or (Status == "failed" or FFlagCreatorAgentChatFilterTerminalClientToolsModule and Status == "cancelled") then break end
+		local Kind: string = SessionUpdate.kind
+		local Flag = nil
+		repeat
+			if typeof(Kind) ~= "string" or config[string.lower(Kind)] ~= true then
+				local Title: string = SessionUpdate.title
 				
-				if typeof(kind) == "string" and t[string.lower(kind)] == true then
-					var6 = true
-				else
-					local rawInput = var2.rawInput
+				if typeof(Title) ~= "string" or config[string.lower(Title)] ~= true then
+					local RawInput = SessionUpdate.rawInput
 					
-					if typeof(rawInput) == "table" then
-						kind = rawInput.name
-						var6 = typeof(kind) == "string" and t[string.lower(kind)] == true
+					if typeof(RawInput) == "table" then
+						local Name: string = RawInput.name
+						Flag = typeof(Name) == "string" and config[string.lower(Name)] == true
 						
-						if not var6 then
-							kind = rawInput.toolName
-							var6 = false
-							
-							if typeof(kind) == "string" then
-								var6 = t[string.lower(kind)] == true
-								var6 = nil
-							end
-						end
-					else
-						var6 = false
+						if Flag then break end
+						local ToolName: string = RawInput.toolName
+						Flag = typeof(ToolName) == "string" and config[string.lower(ToolName)] == true
+						break
 					end
+					Flag = false
 				end
-				if not var6 then
-					return nil
-				end
-				local toolCallId = var2.toolCallId
-				local t_1 = {
-					kind = "local_tool_call",
-					sessionId = var3,
-					universeId = var4
-				}
-				kind = if typeof(toolCallId) == "string" and toolCallId ~= "" then toolCallId else nil
-				t_1.toolCallId = kind
-				
-				return t_1
 			end
-		end
-	end
+			Flag = true
+			break
+		until true
+		if not Flag then break end
+		local ToolCallId = SessionUpdate.toolCallId
+		
+		return {
+			kind = "local_tool_call",
+			sessionId = SessionUpdate2,
+			universeId = SessionUpdate3,
+			toolCallId = if typeof(ToolCallId) == "string" and ToolCallId ~= "" then ToolCallId else nil
+		}
+	until true
+	return nil
 end
 
-local function classifyRtnDetail(p2)
-	-- upvalues: extractRawFrame (ref), parseFrameModule (ref), classifyFrame (ref)
-	local var2 = extractRawFrame(p2)
-	
-	if var2 == nil then
-		return nil
-	end
-	local var3 = parseFrameModule(var2)
-	
-	return if var3 == nil then nil else classifyFrame(var3)
-end
-
-local function targetMatchesNotification(p2, p3)
-	return if p2 == nil then false elseif not (p2.sessionId ~= nil and p2.sessionId ~= "" and p2.sessionId == p3.sessionId) then p2.universeId ~= nil and (p3.universeId ~= nil and p2.universeId == p3.universeId) else true
-end
-
-local function getNotificationId(p2)
-	return if p2.kind == "local_tool_call" and p2.toolCallId ~= nil then `CreatorAgentResume-{p2.sessionId}-{p2.toolCallId}` else `CreatorAgentResume-{p2.sessionId}-{p2.kind}`
-end
-
-local function getResumeDeepLink(p2)
-	-- upvalues: httpService (ref)
-	local t = {}
+local function getResumeDeepLink(p2): string --[[ Line: 186 ]]
+	-- upvalues: HttpService (copy)
+	local List = {}
 	
 	if p2.universeId ~= nil then
-		table.insert(t, `universeid={httpService:UrlEncode(tostring(p2.universeId))}`)
+		table.insert(List, `universeid={HttpService:UrlEncode((tostring(p2.universeId)))}`)
 	end
-	table.insert(t, `sessionid={httpService:UrlEncode(p2.sessionId)}`)
+	table.insert(List, `sessionid={HttpService:UrlEncode(p2.sessionId)}`)
 	
-	return `roblox://navigation/build?{table.concat(t, "&")}`
+	return `roblox://navigation/build?{table.concat(List, "&")}`
 end
 
-local function getToastCopy(p2)
-	-- upvalues: localization (ref), localizationService (ref)
-	local isLocalToolCall = p2.kind == "local_tool_call"
-	local var2 = localization.new(localizationService.RobloxLocaleId)
+local function getToastCopy(p2) --[[ Line: 203 ]]
+	-- upvalues: Localization (copy), LocalizationService (copy)
+	local IsLocalToolCall = p2.kind == "local_tool_call"
+	local NewLocalization = Localization.new(LocalizationService.RobloxLocaleId)
 	
 	return {
-		title = var2:Format(if isLocalToolCall then "Feature.Build.Notification.Title.NeedInput" else "Feature.Build.Notification.Title.Finished"),
-		label = var2:Format(if isLocalToolCall then "Feature.Build.Notification.Message.Continue" else "Feature.Build.Notification.Message.Review"),
-		dismiss = var2:Format("Feature.Build.Action.Dismiss"),
-		resume = var2:Format("Feature.Build.Action.Resume")
+		title = NewLocalization:Format(if IsLocalToolCall then "Feature.Build.Notification.Title.NeedInput" else "Feature.Build.Notification.Title.Finished"),
+		label = NewLocalization:Format(if IsLocalToolCall then "Feature.Build.Notification.Message.Continue" else "Feature.Build.Notification.Message.Review"),
+		dismiss = NewLocalization:Format("Feature.Build.Action.Dismiss"),
+		resume = NewLocalization:Format("Feature.Build.Action.Resume")
 	}
 end
 
-local _ = function(p2)
-	-- upvalues: httpService (ref), getResumeDeepLink (ref)
-	return httpService:JSONEncode({
+local _ = function(p2) --[[ Line: 222 | Named "getActionEventParams" ]]
+	-- upvalues: HttpService (copy), getResumeDeepLink (copy)
+	return HttpService:JSONEncode({
 		sessionId = p2.sessionId,
 		universeId = p2.universeId,
 		kind = p2.kind,
@@ -277,11 +260,11 @@ local _ = function(p2)
 	})
 end
 
-local function getToastVisualItems(p2, p3, p4)
-	local t = {}
+local function getToastVisualItems(p2, ToastCopy, ActionEventParams) --[[ Line: 231 ]]
+	local List = {}
 	
 	if p2.universeId ~= nil then
-		table.insert(t, {
+		table.insert(List, {
 			thumbnail = {
 				idType = "gameThumbnail",
 				visualItemType = "thumbnail",
@@ -289,56 +272,71 @@ local function getToastVisualItems(p2, p3, p4)
 			}
 		})
 	end
-	table.insert(t, {
+	table.insert(List, {
 		textBody = {
 			eventName = "CreatorAgentResume",
 			visualItemType = "textBody",
-			title = { text = p3.title },
-			label = { text = p3.label },
+			title = { text = ToastCopy.title },
+			label = { text = ToastCopy.label },
 			actions = {},
-			actionEventParams = p4
+			actionEventParams = ActionEventParams
 		}
 	})
-	table.insert(t, {
+	table.insert(List, {
 		button = {
 			buttonStyle = "Secondary",
 			eventName = "CreatorAgentResumeDismiss",
 			visualItemType = "button",
-			label = { text = p3.dismiss },
+			label = { text = ToastCopy.dismiss },
 			actions = { { actionType = "dismiss" } }
 		}
 	})
-	table.insert(t, {
+	table.insert(List, {
 		button = {
 			buttonStyle = "Primary",
 			eventName = "CreatorAgentResume",
 			visualItemType = "button",
-			label = { text = p3.resume },
+			label = { text = ToastCopy.resume },
 			actions = {},
-			actionEventParams = p4
+			actionEventParams = ActionEventParams
 		}
 	})
 	
-	return t
+	return List
 end
 
 return {
 	NotificationType = "CreatorAgentResume",
 	ResumeEventName = "CreatorAgentResume",
-	CapRtnNamespace = acpProtocolModule.CapRtnNamespace,
+	CapRtnNamespace = AcpProtocolModule.CapRtnNamespace,
 	classifyFrame = classifyFrame,
-	classifyRtnDetail = classifyRtnDetail,
-	targetMatchesNotification = targetMatchesNotification,
-	getNotificationId = getNotificationId,
+	classifyRtnDetail = function(p2) --[[ Line: 150 ]]
+		-- upvalues: extractRawFrame (copy), ParseFrameModule (copy), classifyFrame (copy)
+		local ExtractRawFrameResult = extractRawFrame(p2)
+		
+		if ExtractRawFrameResult == nil then
+			return nil
+		else
+			local ParseFrameModuleResult = ParseFrameModule(ExtractRawFrameResult)
+			
+			return if ParseFrameModuleResult == nil then nil else classifyFrame(ParseFrameModuleResult)
+		end
+	end,
+	targetMatchesNotification = function(p2, p3): boolean --[[ Line: 164 ]]
+		return p2 ~= nil and (p2.sessionId ~= nil and p2.sessionId ~= "" and p2.sessionId == p3.sessionId or p2.universeId ~= nil and (p3.universeId ~= nil and p2.universeId == p3.universeId))
+	end,
+	getNotificationId = function(p2): string --[[ Line: 179 ]]
+		return if p2.kind == "local_tool_call" and p2.toolCallId ~= nil then `CreatorAgentResume-{p2.sessionId}-{p2.toolCallId}` else `CreatorAgentResume-{p2.sessionId}-{p2.kind}`
+	end,
 	getResumeDeepLink = getResumeDeepLink,
-	buildToastNotification = function(p2)
-		-- upvalues: getToastCopy (ref), httpService (ref), getResumeDeepLink (ref), getToastVisualItems (ref)
-		local unixTimestampMillis = DateTime.now().UnixTimestampMillis
+	buildToastNotification = function(p2) --[[ Line: 279 ]]
+		-- upvalues: getToastCopy (copy), HttpService (copy), getResumeDeepLink (copy), getToastVisualItems (copy)
+		local UnixTimestampMillis = DateTime.now().UnixTimestampMillis
 		
 		return {
 			notificationType = "CreatorAgentResume",
-			deliverTimestamp = unixTimestampMillis,
-			notificationReceivedTimestampMs = unixTimestampMillis,
+			deliverTimestamp = UnixTimestampMillis,
+			notificationReceivedTimestampMs = UnixTimestampMillis,
 			content = {
 				currentState = "Default",
 				notificationType = "CreatorAgentResume",
@@ -351,12 +349,12 @@ return {
 						layoutKey = "CreatorAgentResume",
 						name = "Default",
 						timeOnScreenMs = 12000,
-						visualItems = getToastVisualItems(p2, getToastCopy(p2), httpService:JSONEncode({
+						visualItems = getToastVisualItems(p2, getToastCopy(p2), (HttpService:JSONEncode({
 							sessionId = p2.sessionId,
 							universeId = p2.universeId,
 							kind = p2.kind,
 							deepLink = getResumeDeepLink(p2)
-						}))
+						})))
 					}
 				}
 			}

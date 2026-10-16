@@ -1,10 +1,12 @@
-﻿local socialExperimentsModule = require(script:FindFirstAncestor("ExpChat").Parent.SocialExperiments)
-local enableInExpChatRewriteEngineFeature = game:GetEngineFeature("EnableInExpChatRewrite")
-local enableDeviceGateForInExpChatRewrite = game:DefineFastFlag("EnableDeviceGateForInExpChatRewrite", false)
+﻿local SocialExperimentsModule = require(script:FindFirstAncestor("ExpChat").Parent.SocialExperiments)
+local EnableInExpChatRewriteEngineFeature = game:GetEngineFeature("EnableInExpChatRewrite")
+local InExpChatRewriteDeviceNameBlackList = game:DefineFastString("InExpChatRewriteDeviceNameBlackList", "")
+local InExpChatRewriteOsVersionBlackList = game:DefineFastString("InExpChatRewriteOsVersionBlackList", "")
+local EnableDeviceGateForInExpChatRewrite = game:DefineFastFlag("EnableDeviceGateForInExpChatRewrite", false)
 
-return if enableInExpChatRewriteEngineFeature and enableDeviceGateForInExpChatRewrite then not socialExperimentsModule.GetIsDeviceGated({
-	enabled = enableDeviceGateForInExpChatRewrite,
-	featureName = socialExperimentsModule.DeviceGateFeature.InExpChatRewrite,
-	deviceNameBlackListString = game:DefineFastString("InExpChatRewriteDeviceNameBlackList", ""),
-	osVersionBlackListString = game:DefineFastString("InExpChatRewriteOsVersionBlackList", "")
-}) else enableInExpChatRewriteEngineFeature
+return if EnableInExpChatRewriteEngineFeature and EnableDeviceGateForInExpChatRewrite then not SocialExperimentsModule.GetIsDeviceGated({
+	enabled = EnableDeviceGateForInExpChatRewrite,
+	featureName = SocialExperimentsModule.DeviceGateFeature.InExpChatRewrite,
+	deviceNameBlackListString = InExpChatRewriteDeviceNameBlackList,
+	osVersionBlackListString = InExpChatRewriteOsVersionBlackList
+}) else EnableInExpChatRewriteEngineFeature

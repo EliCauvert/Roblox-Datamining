@@ -1,25 +1,25 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local userInputService = require(foundation.Utility.Wrappers.Services).UserInputService
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local UserInputService = require(Foundation.Utility.Wrappers.Services).UserInputService
 
-return function()
-	-- upvalues: reactModule (ref), userInputService (ref)
-	local var1, var2 = reactModule.useState(userInputService.PreferredInput)
-	reactModule.useEffect(function()
-		-- upvalues: userInputService (copy), var2 (ref)
-		local var3 = userInputService:GetPropertyChangedSignal("PreferredInput"):Connect(function()
-			-- upvalues: var2 (copy), userInputService (copy)
-			var2(userInputService.PreferredInput)
+return function() --[[ Line: 7 | Named "usePreferredInput" ]]
+	-- upvalues: ReactModule (copy), UserInputService (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(UserInputService.PreferredInput)
+	ReactModule.useEffect(function() --[[ Line: 10 ]]
+		-- upvalues: UserInputService (upval), UseStateResult2 (copy)
+		local Connection = UserInputService:GetPropertyChangedSignal("PreferredInput"):Connect(function() --[[ Line: 12 ]]
+			-- upvalues: UseStateResult2 (upval), UserInputService (upval)
+			UseStateResult2(UserInputService.PreferredInput)
 		end)
-		var2(userInputService.PreferredInput)
+		UseStateResult2(UserInputService.PreferredInput)
 		
-		return function()
-			-- upvalues: var3 (ref)
-			if var3 then
-				var3:Disconnect()
+		return function() --[[ Line: 18 ]]
+			-- upvalues: Connection (copy)
+			if Connection then
+				Connection:Disconnect()
 			end
 		end
 	end, {})
 	
-	return var1
+	return UseStateResult
 end

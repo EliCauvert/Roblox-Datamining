@@ -1,219 +1,225 @@
-﻿local expChat = script:FindFirstAncestor("ExpChat")
-local signalsModule = require(expChat.Parent.Signals)
-local createSignal = signalsModule.createSignal
-local fFlagExpChatWindowStatusEventFixesModule = require(expChat.Flags.FFlagExpChatWindowStatusEventFixes)
+﻿local ExpChat = script:FindFirstAncestor("ExpChat")
+local SignalsModule = require(ExpChat.Parent.Signals)
+local CreateSignalFunction = SignalsModule.createSignal
+local FFlagExpChatWindowStatusEventFixesModule = require(ExpChat.Flags.FFlagExpChatWindowStatusEventFixes)
 
-return function()
-	-- upvalues: createSignal (ref), signalsModule (ref), fFlagExpChatWindowStatusEventFixesModule (ref)
-	local var1, var2 = createSignal(0)
-	local var3, var4 = createSignal(0)
-	local var5, var6 = createSignal(0)
-	local var7, var8 = createSignal(0)
-	local var9, var10 = createSignal(0)
-	local var11, var12 = createSignal("unknown")
-	local var13, var14 = createSignal("unknown")
-	local var15 = 0
-	local var16 = 0
-	local var17 = 0
-	local var18 = 0
-	local var19, var20 = createSignal({
+return function() --[[ Line: 41 ]]
+	-- upvalues: CreateSignalFunction (copy), SignalsModule (copy), FFlagExpChatWindowStatusEventFixesModule (copy)
+	local Signal, Signal2 = CreateSignalFunction(0)
+	local Signal1, Signal2_1 = CreateSignalFunction(0)
+	local Signal3, Signal2_2 = CreateSignalFunction(0)
+	local Signal4, Signal2_3 = CreateSignalFunction(0)
+	local Signal5, Signal2_4 = CreateSignalFunction(0)
+	local Unknown, Unknown2 = CreateSignalFunction("unknown")
+	local Unknown1, Unknown2_1 = CreateSignalFunction("unknown")
+	local v1 = 0
+	local v2 = 0
+	local v3 = 0
+	local v4 = 0
+	local Signal6, Signal2_5 = CreateSignalFunction({
 		openDuration = 0,
 		closedDuration = 0,
 		textIdleDuration = 0,
 		backgroundIdleDuration = 0
 	})
-	local var21 = nil
+	local v5 = nil
 	
-	local function _(p1)
-		-- upvalues: var5 (ref), var7 (ref), var3 (ref), var1 (ref)
-		return if p1 == "open" then var5(false) elseif p1 == "closed" then var7(false) elseif p1 == "textIdle" then var3(false) elseif p1 == "backgroundIdle" then var1(false) else 0
+	local function _(p1) --[[ Line: 65 | Named "getStateStartTime" ]]
+		-- upvalues: Signal3 (copy), Signal4 (copy), Signal1 (copy), Signal (copy)
+		return if p1 == "open" then Signal3(false) elseif p1 == "closed" then Signal4(false) elseif p1 == "textIdle" then Signal1(false) elseif p1 == "backgroundIdle" then Signal(false) else 0
 	end
 	
-	local _ = function(p1, p2)
-		-- upvalues: var5 (ref), var7 (ref), var3 (ref), var1 (ref), var20 (ref)
+	local _ = function(p1, p2) --[[ Line: 78 | Named "addDurationDelta" ]]
+		-- upvalues: Signal3 (copy), Signal4 (copy), Signal1 (copy), Signal (copy), Signal2_5 (copy)
 		if p1 == "unknown" then return end
-		local var22 = p2 - (if p1 == "open" then var5(false) elseif p1 == "closed" then var7(false) elseif p1 == "textIdle" then var3(false) elseif p1 == "backgroundIdle" then var1(false) else 0)
+		local v6 = p2 - (if p1 == "open" then Signal3(false) elseif p1 == "closed" then Signal4(false) elseif p1 == "textIdle" then Signal1(false) elseif p1 == "backgroundIdle" then Signal(false) else 0)
 		
-		if var22 <= 0 then
+		if v6 > 0 then
+			Signal2_5(function(p3) --[[ Line: 88 ]]
+				-- upvalues: p1 (copy), v6 (copy)
+				return if p1 == "open" then {
+					openDuration = p3.openDuration + v6,
+					closedDuration = p3.closedDuration,
+					textIdleDuration = p3.textIdleDuration,
+					backgroundIdleDuration = p3.backgroundIdleDuration
+				} elseif p1 == "closed" then {
+					openDuration = p3.openDuration,
+					closedDuration = p3.closedDuration + v6,
+					textIdleDuration = p3.textIdleDuration,
+					backgroundIdleDuration = p3.backgroundIdleDuration
+				} elseif p1 == "textIdle" then {
+					openDuration = p3.openDuration,
+					closedDuration = p3.closedDuration,
+					textIdleDuration = p3.textIdleDuration + v6,
+					backgroundIdleDuration = p3.backgroundIdleDuration
+				} elseif p1 == "backgroundIdle" then {
+					openDuration = p3.openDuration,
+					closedDuration = p3.closedDuration,
+					textIdleDuration = p3.textIdleDuration,
+					backgroundIdleDuration = p3.backgroundIdleDuration + v6
+				} else p3
+			end)
+			
 			return
 		end
-		var20(function(p3)
-			-- upvalues: p1 (ref), var22 (ref)
-			return if p1 == "open" then {
-				openDuration = p3.openDuration + var22,
-				closedDuration = p3.closedDuration,
-				textIdleDuration = p3.textIdleDuration,
-				backgroundIdleDuration = p3.backgroundIdleDuration
-			} elseif p1 == "closed" then {
-				openDuration = p3.openDuration,
-				closedDuration = p3.closedDuration + var22,
-				textIdleDuration = p3.textIdleDuration,
-				backgroundIdleDuration = p3.backgroundIdleDuration
-			} elseif p1 == "textIdle" then {
-				openDuration = p3.openDuration,
-				closedDuration = p3.closedDuration,
-				textIdleDuration = p3.textIdleDuration + var22,
-				backgroundIdleDuration = p3.backgroundIdleDuration
-			} elseif p1 == "backgroundIdle" then {
-				openDuration = p3.openDuration,
-				closedDuration = p3.closedDuration,
-				textIdleDuration = p3.textIdleDuration,
-				backgroundIdleDuration = p3.backgroundIdleDuration + var22
-			} else p3
-		end)
 	end
 	
 	return {
-		getBackgroundTimerStarted = var1,
-		getTextTimerStarted = var3,
-		getOpenTimerStarted = var5,
-		getClosedTimerStarted = var7,
-		getPreviousChatWindowStateTimerExpired = var9,
-		getCurrentChatWindowState = var11,
-		getPreviousChatWindowState = var13,
-		getDurationUpdates = var19,
-		setBackgroundTimerStarted = var2,
-		setTextTimerStarted = var4,
-		setOpenTimerStarted = var6,
-		setClosedTimerStarted = var8,
-		setPreviousChatWindowStateTimerExpired = var10,
-		setCurrentChatWindowState = var12,
-		setPreviousChatWindowState = var14,
-		setDurationUpdates = var20,
-		flushFinalDuration = function(p1)
-			-- upvalues: var21 (write), var11 (ref), var19 (ref), var5 (ref), var7 (ref), var3 (ref), var1 (ref), var20 (ref)
-			if var21 then
-				return var21, false
+		getBackgroundTimerStarted = Signal,
+		getTextTimerStarted = Signal1,
+		getOpenTimerStarted = Signal3,
+		getClosedTimerStarted = Signal4,
+		getPreviousChatWindowStateTimerExpired = Signal5,
+		getCurrentChatWindowState = Unknown,
+		getPreviousChatWindowState = Unknown1,
+		getDurationUpdates = Signal6,
+		setBackgroundTimerStarted = Signal2,
+		setTextTimerStarted = Signal2_1,
+		setOpenTimerStarted = Signal2_2,
+		setClosedTimerStarted = Signal2_3,
+		setPreviousChatWindowStateTimerExpired = Signal2_4,
+		setCurrentChatWindowState = Unknown2,
+		setPreviousChatWindowState = Unknown2_1,
+		setDurationUpdates = Signal2_5,
+		flushFinalDuration = function(p1) --[[ Line: 181 ]]
+			-- upvalues: v5 (ref), Unknown (copy), Signal6 (copy), Signal3 (copy), Signal4 (copy), Signal1 (copy), Signal (copy), Signal2_5 (copy)
+			if v5 then
+				return v5, false
 			end
-			local var22 = var11(false)
+			local UnknownResult = Unknown(false)
 			
-			if var22 == "unknown" then
-				return var19(false), false
+			if UnknownResult == "unknown" then
+				return Signal6(false), false
 			end
-			p1 = p1 or os.clock()
+			local P7 = p1 or os.clock()
 			
-			if var22 ~= "unknown" then
-				local var23 = p1 - (if var22 == "open" then var5(false) elseif var22 == "closed" then var7(false) elseif var22 == "textIdle" then var3(false) elseif var22 == "backgroundIdle" then var1(false) else 0)
+			if UnknownResult ~= "unknown" then
+				local PDelta = P7 - (if UnknownResult == "open" then Signal3(false) elseif UnknownResult == "closed" then Signal4(false) elseif UnknownResult == "textIdle" then Signal1(false) elseif UnknownResult == "backgroundIdle" then Signal(false) else 0)
 				
-				if var23 > 0 then
-					var20(function(p2)
-						-- upvalues: var22 (ref), var23 (ref)
-						return if var22 == "open" then {
-							openDuration = p2.openDuration + var23,
+				if PDelta > 0 then
+					Signal2_5(function(p2) --[[ Line: 88 ]]
+						-- upvalues: UnknownResult (copy), PDelta (copy)
+						return if UnknownResult == "open" then {
+							openDuration = p2.openDuration + PDelta,
 							closedDuration = p2.closedDuration,
 							textIdleDuration = p2.textIdleDuration,
 							backgroundIdleDuration = p2.backgroundIdleDuration
-						} elseif var22 == "closed" then {
+						} elseif UnknownResult == "closed" then {
 							openDuration = p2.openDuration,
-							closedDuration = p2.closedDuration + var23,
+							closedDuration = p2.closedDuration + PDelta,
 							textIdleDuration = p2.textIdleDuration,
 							backgroundIdleDuration = p2.backgroundIdleDuration
-						} elseif var22 == "textIdle" then {
+						} elseif UnknownResult == "textIdle" then {
 							openDuration = p2.openDuration,
 							closedDuration = p2.closedDuration,
-							textIdleDuration = p2.textIdleDuration + var23,
+							textIdleDuration = p2.textIdleDuration + PDelta,
 							backgroundIdleDuration = p2.backgroundIdleDuration
-						} elseif var22 == "backgroundIdle" then {
+						} elseif UnknownResult == "backgroundIdle" then {
 							openDuration = p2.openDuration,
 							closedDuration = p2.closedDuration,
 							textIdleDuration = p2.textIdleDuration,
-							backgroundIdleDuration = p2.backgroundIdleDuration + var23
+							backgroundIdleDuration = p2.backgroundIdleDuration + PDelta
 						} else p2
 					end)
 				end
 			end
-			local var24 = var19(false)
-			var21 = var24
+			local SignalResult = Signal6(false)
+			v5 = SignalResult
 			
-			return var24, true
+			return SignalResult, true
 		end,
-		newStateEffect = signalsModule.createEffect(function(p1)
-			-- upvalues: var1 (ref), var3 (ref), var5 (ref), var7 (ref), var14 (ref), var11 (ref), var12 (ref), var10 (ref)
-			local var22 = var1(p1)
-			local var23 = var3(p1)
-			local var24 = var5(p1)
-			local var25 = var7(p1)
-			var14(var11(false))
+		newStateEffect = SignalsModule.createEffect(function(p1) --[[ Line: 124 ]]
+			-- upvalues: Signal (copy), Signal1 (copy), Signal3 (copy), Signal4 (copy), Unknown2_1 (copy), Unknown (copy), Unknown2 (copy), Signal2_4 (copy)
+			local SignalResult: number = Signal(p1)
+			local SignalResult1 = Signal1(p1)
+			local SignalResult2 = Signal3(p1)
+			local SignalResult3 = Signal4(p1)
+			Unknown2_1(Unknown(false))
 			
-			if var25 < var24 and var23 < var24 and var22 < var24 then
-				var12("open")
-				var10(var24)
-				
-				return
-			elseif var23 < var25 and var22 < var25 then
-				var12("closed")
-				var10(var25)
-				
-				return
-			elseif var22 < var23 then
-				var12("textIdle")
-				var10(var23)
-				
-				return
-			elseif var22 > 0 then
-				var12("backgroundIdle")
-				var10(var22)
+			if SignalResult3 < SignalResult2 and SignalResult1 < SignalResult2 and SignalResult < SignalResult2 then
+				Unknown2("open")
+				Signal2_4(SignalResult2)
 				
 				return
 			end
-			var12("unknown")
-		end),
-		changingWindowStateEffect = signalsModule.createEffect(function(p1)
-			-- upvalues: var13 (ref), var9 (ref), fFlagExpChatWindowStatusEventFixesModule (copy), var5 (ref), var7 (ref), var3 (ref), var1 (ref), var20 (ref), var15 (write), var16 (write), var17 (write), var18 (write)
-			local var22 = var13(p1)
-			local var23 = var9(p1)
-			
-			if fFlagExpChatWindowStatusEventFixesModule then
-				if var22 == "unknown" then return end
-				local var24 = var23 - (if var22 == "open" then var5(false) elseif var22 == "closed" then var7(false) elseif var22 == "textIdle" then var3(false) elseif var22 == "backgroundIdle" then var1(false) else 0)
+			if SignalResult1 < SignalResult3 and SignalResult < SignalResult3 then
+				Unknown2("closed")
+				Signal2_4(SignalResult3)
 				
-				if var24 <= 0 then
-					return
+				return
+			end
+			if SignalResult < SignalResult1 then
+				Unknown2("textIdle")
+				Signal2_4(SignalResult1)
+				
+				return
+			end
+			if SignalResult > 0 then
+				Unknown2("backgroundIdle")
+				Signal2_4(SignalResult)
+				
+				return
+			else
+				Unknown2("unknown")
+			end
+		end),
+		changingWindowStateEffect = SignalsModule.createEffect(function(p1) --[[ Line: 154 ]]
+			-- upvalues: Unknown1 (copy), Signal5 (copy), FFlagExpChatWindowStatusEventFixesModule (upval), Signal3 (copy), Signal4 (copy), Signal1 (copy), Signal (copy), Signal2_5 (copy), v1 (ref), v2 (ref), v3 (ref), v4 (ref)
+			local UnknownResult = Unknown1(p1)
+			local SignalResult = Signal5(p1)
+			
+			if not FFlagExpChatWindowStatusEventFixesModule then
+				if UnknownResult == "open" then
+					v1 = SignalResult - Signal3(p1)
+				elseif UnknownResult == "closed" then
+					v2 = SignalResult - Signal4(p1)
+				elseif UnknownResult == "textIdle" then
+					v3 = SignalResult - Signal1(p1)
+				elseif UnknownResult == "backgroundIdle" then
+					v4 = SignalResult - Signal(p1)
 				end
-				var20(function(p2)
-					-- upvalues: var22 (ref), var24 (ref)
-					return if var22 == "open" then {
-						openDuration = p2.openDuration + var24,
+				Signal2_5(function(p2) --[[ Line: 171 ]]
+					-- upvalues: v1 (upval), v2 (upval), v3 (upval), v4 (upval)
+					return {
+						openDuration = p2.openDuration + v1,
+						closedDuration = p2.closedDuration + v2,
+						textIdleDuration = p2.textIdleDuration + v3,
+						backgroundIdleDuration = p2.backgroundIdleDuration + v4
+					}
+				end)
+				
+				return
+			elseif UnknownResult == "unknown" then return end
+			local SignalResultDelta = SignalResult - (if UnknownResult == "open" then Signal3(false) elseif UnknownResult == "closed" then Signal4(false) elseif UnknownResult == "textIdle" then Signal1(false) elseif UnknownResult == "backgroundIdle" then Signal(false) else 0)
+			
+			if SignalResultDelta > 0 then
+				Signal2_5(function(p2) --[[ Line: 88 ]]
+					-- upvalues: UnknownResult (copy), SignalResultDelta (copy)
+					return if UnknownResult == "open" then {
+						openDuration = p2.openDuration + SignalResultDelta,
 						closedDuration = p2.closedDuration,
 						textIdleDuration = p2.textIdleDuration,
 						backgroundIdleDuration = p2.backgroundIdleDuration
-					} elseif var22 == "closed" then {
+					} elseif UnknownResult == "closed" then {
 						openDuration = p2.openDuration,
-						closedDuration = p2.closedDuration + var24,
+						closedDuration = p2.closedDuration + SignalResultDelta,
 						textIdleDuration = p2.textIdleDuration,
 						backgroundIdleDuration = p2.backgroundIdleDuration
-					} elseif var22 == "textIdle" then {
+					} elseif UnknownResult == "textIdle" then {
 						openDuration = p2.openDuration,
 						closedDuration = p2.closedDuration,
-						textIdleDuration = p2.textIdleDuration + var24,
+						textIdleDuration = p2.textIdleDuration + SignalResultDelta,
 						backgroundIdleDuration = p2.backgroundIdleDuration
-					} elseif var22 == "backgroundIdle" then {
+					} elseif UnknownResult == "backgroundIdle" then {
 						openDuration = p2.openDuration,
 						closedDuration = p2.closedDuration,
 						textIdleDuration = p2.textIdleDuration,
-						backgroundIdleDuration = p2.backgroundIdleDuration + var24
+						backgroundIdleDuration = p2.backgroundIdleDuration + SignalResultDelta
 					} else p2
 				end)
 				
 				return
-			elseif var22 == "open" then
-				var15 = var23 - var5(p1)
-			elseif var22 == "closed" then
-				var16 = var23 - var7(p1)
-			elseif var22 == "textIdle" then
-				var17 = var23 - var3(p1)
-			elseif var22 == "backgroundIdle" then
-				var18 = var23 - var1(p1)
 			end
-			var20(function(p2)
-				-- upvalues: var15 (copy), var16 (copy), var17 (copy), var18 (copy)
-				return {
-					openDuration = p2.openDuration + var15,
-					closedDuration = p2.closedDuration + var16,
-					textIdleDuration = p2.textIdleDuration + var17,
-					backgroundIdleDuration = p2.backgroundIdleDuration + var18
-				}
-			end)
 		end)
 	}
 end

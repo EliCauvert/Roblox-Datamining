@@ -1,53 +1,54 @@
-﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
-local sduiActionType = sduiCoreSystemModule.SduiActionType
-local sduiSharedUtilitiesModule = require(parent.SduiSharedUtilities)
-local getSduiClientPageScope = sduiSharedUtilitiesModule.getSduiClientPageScope
-local sduiSurfaceLoadTimeTracker = sduiSharedUtilitiesModule.SduiSurfaceLoadTimeTracker
-local milestone = require(parent.TimeToInteractiveTracker).TimeToInteractiveTracker.Milestone
+﻿local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
+local SduiActionType = SduiCoreSystemModule.SduiActionType
+local SduiSharedUtilitiesModule = require(Parent.SduiSharedUtilities)
+local GetSduiClientPageScopeFunction = SduiSharedUtilitiesModule.getSduiClientPageScope
+local SduiSurfaceLoadTimeTracker = SduiSharedUtilitiesModule.SduiSurfaceLoadTimeTracker
+local Milestone = require(Parent.TimeToInteractiveTracker).TimeToInteractiveTracker.Milestone
 
-return function(p1, _, p2, _)
-	-- upvalues: sduiErrorType (ref), sduiActionType (ref), getSduiClientPageScope (ref), sduiSurfaceLoadTimeTracker (ref), milestone (ref)
-	local logger = p2.dependencies and p2.dependencies.logger
-	local configKey = p2.configKey
-	local actionParams = p1 and p1.actionParams
+return function(p1, _, p2, _) --[[ Line: 23 | Named "SduiReportSurfaceLoadTimeMilestoneAction" ]]
+	-- upvalues: SduiErrorType (copy), SduiActionType (copy), GetSduiClientPageScopeFunction (copy), SduiSurfaceLoadTimeTracker (copy), Milestone (copy)
+	local Logger = p2.dependencies and p2.dependencies.logger
+	local ConfigKey = p2.configKey
+	local ActionParams = p1 and p1.actionParams
 	
-	if actionParams and configKey then
-		local var1 = getSduiClientPageScope(configKey).get(sduiSurfaceLoadTimeTracker.SURFACE_LOAD_TIME_PAGE_SCOPE_KEY)
+	if ActionParams and ConfigKey then
+		local GetResult = GetSduiClientPageScopeFunction(ConfigKey).get(SduiSurfaceLoadTimeTracker.SURFACE_LOAD_TIME_PAGE_SCOPE_KEY)
 		
-		if var1 then
-			local milestone_1 = actionParams.milestone
+		if GetResult then
+			local Milestone1 = ActionParams.milestone
 			
-			if typeof(milestone_1) == "string" then
-				local var2 = if typeof(actionParams.metadata) == "table" then actionParams.metadata else nil
+			if typeof(Milestone1) == "string" then
+				local Metadata = if typeof(ActionParams.metadata) == "table" then ActionParams.metadata else nil
 				
-				if milestone_1 == milestone.SurfaceReady then
-					var1.trackSurfaceReady(var2)
+				if Milestone1 == Milestone.SurfaceReady then
+					GetResult.trackSurfaceReady(Metadata)
+					
+					return
+				else
+					GetResult.trackOnce(Milestone1)
 					
 					return
 				end
-				var1.trackOnce(milestone_1)
-				
-				return
-			elseif logger then
-				logger.reportError(sduiErrorType.InvalidActionParams, {
-					name = sduiActionType.ReportSurfaceLoadTimeMilestone,
-					message = `Missing or invalid milestone param, got {typeof(milestone_1)}`
+			elseif Logger then
+				Logger.reportError(SduiErrorType.InvalidActionParams, {
+					name = SduiActionType.ReportSurfaceLoadTimeMilestone,
+					message = `Missing or invalid milestone param, got {typeof(Milestone1)}`
 				}, p2.appPage)
 			end
 			return
-		elseif logger then
-			logger.reportError(sduiErrorType.InvalidActionParams, {
-				name = sduiActionType.ReportSurfaceLoadTimeMilestone,
-				message = `No surface load timer in page scope for configKey={configKey}`
+		elseif Logger then
+			Logger.reportError(SduiErrorType.InvalidActionParams, {
+				name = SduiActionType.ReportSurfaceLoadTimeMilestone,
+				message = `No surface load timer in page scope for configKey={ConfigKey}`
 			}, p2.appPage)
 		end
 		return
-	elseif logger then
-		logger.reportError(sduiErrorType.InvalidActionParams, {
+	elseif Logger then
+		Logger.reportError(SduiErrorType.InvalidActionParams, {
 			message = "Missing actionParams",
-			name = sduiActionType.ReportSurfaceLoadTimeMilestone
+			name = SduiActionType.ReportSurfaceLoadTimeMilestone
 		}, p2.appPage)
 	end
 end

@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent.Parent._Workspace.SquadsCore.SquadsCore.Types)
+﻿return (require(script.Parent.Parent.Parent.Parent._Workspace.SquadsCore.SquadsCore.Types))

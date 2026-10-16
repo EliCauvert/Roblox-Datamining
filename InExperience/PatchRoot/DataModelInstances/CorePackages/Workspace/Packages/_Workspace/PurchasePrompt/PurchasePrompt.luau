@@ -1,150 +1,149 @@
-﻿local _script = script
-local parent = _script.Parent
-local purchasePromptDepsModule = require(parent.PurchasePromptDeps)
-local purchasePromptLiteModule = require(parent.PurchasePromptLite)
-local runService = game:GetService("RunService")
-local sharedFlagsModule = require(parent.SharedFlags)
-local roact = purchasePromptDepsModule.Roact
-local rodux = purchasePromptDepsModule.Rodux
-local coreGuiService = game:GetService("CoreGui")
-local purchasePromptAppModule = require(script.Components.PurchasePromptApp)
-local reducerModule = require(_script.Reducers.Reducer)
-local ABTestModule = require(_script.Services.ABTest)
-local networkModule = require(_script.Services.Network)
-local analyticsModule = require(_script.Services.Analytics)
-local platformInterfaceModule = require(_script.Services.PlatformInterface)
-local externalSettingsModule = require(_script.Services.ExternalSettings)
-local publicBindablesModule = require(_script.Services.PublicBindables)
-local thunkModule = require(_script.Thunk)
-local initiateAvatarCreationFeePurchaseModule = require(_script.Thunks.initiateAvatarCreationFeePurchase)
-local unifiedPurchasePromptModule = require(_script.Components.UnifiedPurchasePrompt)
-local dispatchPurchaseForProductPayloadModule = require(_script.Utils.dispatchPurchaseForProductPayload)
-local setProductPayloadModule = require(_script.Actions.SetProductPayload)
-local setPurchaseAnalyticsMetadataModule = require(_script.Actions.SetPurchaseAnalyticsMetadata)
-local fFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow = require(_script.Parent.SharedFlags).FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow
-local fFlagPurchasePromptCartPricingEnabledModule = require(_script.Flags.FFlagPurchasePromptCartPricingEnabled)
-local fFlagEnablePurchasePayloadInExperienceShop = sharedFlagsModule.FFlagEnablePurchasePayloadInExperienceShop
-local fFlagPassShopPurchaseSurfaceToBuyModal = sharedFlagsModule.FFlagPassShopPurchaseSurfaceToBuyModal
-local fFlagSkipBuyDelayForExperienceShopModule = require(_script.Flags.FFlagSkipBuyDelayForExperienceShop)
-local _ = require(_script.types)
-local fFlagPurchasePromptSubtitleForTimedOptions = require(_script.Parent.SharedFlags).FFlagPurchasePromptSubtitleForTimedOptions
-local fFlagAXMISWithBlackbird = sharedFlagsModule.FFlagAXMISWithBlackbird
-local fFlagEnableRobuxInExperienceShop = sharedFlagsModule.FFlagEnableRobuxInExperienceShop
-local purchasePromptElevateDisplayOrder = game:DefineFastFlag("PurchasePromptElevateDisplayOrder", false)
-local windowStateModule = require(_script.Enums.WindowState)
-local promptStateModule = require(_script.Enums.PromptState)
-local publishAssetAnalyticsModule = require(_script.Utils.PublishAssetAnalytics)
-local var1 = nil
-local var2 = nil
-local var3 = nil
-local bindableEvent = Instance.new("BindableEvent")
-local bindableEvent_1 = Instance.new("BindableEvent")
+﻿local v1 = script
+local Parent = v1.Parent
+local PurchasePromptDepsModule = require(Parent.PurchasePromptDeps)
+local PurchasePromptLiteModule = require(Parent.PurchasePromptLite)
+local RunService = game:GetService("RunService")
+local SharedFlagsModule = require(Parent.SharedFlags)
+local Roact = PurchasePromptDepsModule.Roact
+local Rodux = PurchasePromptDepsModule.Rodux
+local CoreGui = game:GetService("CoreGui")
+local PurchasePromptAppModule = require(script.Components.PurchasePromptApp)
+local ReducerModule = require(v1.Reducers.Reducer)
+local ABTestModule = require(v1.Services.ABTest)
+local NetworkModule = require(v1.Services.Network)
+local AnalyticsModule = require(v1.Services.Analytics)
+local PlatformInterfaceModule = require(v1.Services.PlatformInterface)
+local ExternalSettingsModule = require(v1.Services.ExternalSettings)
+local PublicBindablesModule = require(v1.Services.PublicBindables)
+local ThunkModule = require(v1.Thunk)
+local InitiateAvatarCreationFeePurchaseModule = require(v1.Thunks.initiateAvatarCreationFeePurchase)
+local UnifiedPurchasePromptModule = require(v1.Components.UnifiedPurchasePrompt)
+local DispatchPurchaseForProductPayloadModule = require(v1.Utils.dispatchPurchaseForProductPayload)
+local SetProductPayloadModule = require(v1.Actions.SetProductPayload)
+local SetPurchaseAnalyticsMetadataModule = require(v1.Actions.SetPurchaseAnalyticsMetadata)
+local FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow = require(v1.Parent.SharedFlags).FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow
+local FFlagPurchasePromptCartPricingEnabledModule = require(v1.Flags.FFlagPurchasePromptCartPricingEnabled)
+local FFlagEnablePurchasePayloadInExperienceShop = SharedFlagsModule.FFlagEnablePurchasePayloadInExperienceShop
+local FFlagPassShopPurchaseSurfaceToBuyModal = SharedFlagsModule.FFlagPassShopPurchaseSurfaceToBuyModal
+local FFlagSkipBuyDelayForExperienceShopModule = require(v1.Flags.FFlagSkipBuyDelayForExperienceShop)
+local _ = require(v1.types)
+local FFlagPurchasePromptSubtitleForTimedOptions = require(v1.Parent.SharedFlags).FFlagPurchasePromptSubtitleForTimedOptions
+local FFlagEnableRobuxInExperienceShop = SharedFlagsModule.FFlagEnableRobuxInExperienceShop
+local PurchasePromptElevateDisplayOrder = game:DefineFastFlag("PurchasePromptElevateDisplayOrder", false)
+local WindowStateModule = require(v1.Enums.WindowState)
+local PromptStateModule = require(v1.Enums.PromptState)
+local PurchasePromptApp = nil
+local NewResult = nil
+local v2 = nil
+local BindableEvent = Instance.new("BindableEvent")
+local BindableEvent1 = Instance.new("BindableEvent")
 
-local function createStore()
-	-- upvalues: ABTestModule (ref), networkModule (ref), fFlagPurchasePromptCartPricingEnabledModule (ref), var3 (write), analyticsModule (ref), platformInterfaceModule (ref), externalSettingsModule (ref), publicBindablesModule (ref), bindableEvent (ref), var2 (write), rodux (ref), reducerModule (ref), thunkModule (ref), windowStateModule (ref), promptStateModule (ref), bindableEvent_1 (ref), purchasePromptLiteModule (ref)
-	local var4 = ABTestModule.new()
-	local var5 = networkModule.new()
+local function createStore() --[[ Line: 59 ]]
+	-- upvalues: ABTestModule (copy), NetworkModule (copy), FFlagPurchasePromptCartPricingEnabledModule (copy), v2 (ref), AnalyticsModule (copy), PlatformInterfaceModule (copy), ExternalSettingsModule (copy), PublicBindablesModule (copy), BindableEvent (copy), NewResult (ref), Rodux (copy), ReducerModule (copy), ThunkModule (copy), WindowStateModule (copy), PromptStateModule (copy), BindableEvent1 (copy), PurchasePromptLiteModule (copy)
+	local NewABTest = ABTestModule.new()
+	local NewNetwork = NetworkModule.new()
 	
-	if fFlagPurchasePromptCartPricingEnabledModule then
-		var3 = var5
+	if FFlagPurchasePromptCartPricingEnabledModule then
+		v2 = NewNetwork
 	end
-	var2 = rodux.Store.new(reducerModule, {}, {
-		thunkModule.middleware({
-			[ABTestModule] = var4,
-			[networkModule] = if fFlagPurchasePromptCartPricingEnabledModule then var3 else var5,
-			[analyticsModule] = analyticsModule.new(),
-			[platformInterfaceModule] = platformInterfaceModule.new(),
-			[externalSettingsModule] = externalSettingsModule.new(),
-			[publicBindablesModule] = publicBindablesModule.new({ windowStateChangedBindable = bindableEvent })
+	NewResult = Rodux.Store.new(ReducerModule, {}, {
+		ThunkModule.middleware({
+			[ABTestModule] = NewABTest,
+			[NetworkModule] = if FFlagPurchasePromptCartPricingEnabledModule then v2 else NewNetwork,
+			[AnalyticsModule] = AnalyticsModule.new(),
+			[PlatformInterfaceModule] = PlatformInterfaceModule.new(),
+			[ExternalSettingsModule] = ExternalSettingsModule.new(),
+			[PublicBindablesModule] = PublicBindablesModule.new({ windowStateChangedBindable = BindableEvent })
 		})
 	})
-	var2.changed:connect(function(p1, p2)
-		-- upvalues: bindableEvent (copy), windowStateModule (copy), promptStateModule (copy), bindableEvent_1 (copy), fFlagPurchasePromptCartPricingEnabledModule (copy), purchasePromptLiteModule (copy)
-		if p2.windowState ~= p1.windowState then
-			bindableEvent:Fire({
-				isShown = p1.windowState == windowStateModule.Shown,
-				hasCompletedPurchase = p1.hasCompletedPurchase
+	NewResult.changed:connect(function(Value, p1) --[[ Line: 85 ]]
+		-- upvalues: BindableEvent (upval), WindowStateModule (upval), PromptStateModule (upval), BindableEvent1 (upval), FFlagPurchasePromptCartPricingEnabledModule (upval), PurchasePromptLiteModule (upval)
+		if p1.windowState ~= Value.windowState then
+			BindableEvent:Fire({
+				isShown = Value.windowState == WindowStateModule.Shown,
+				hasCompletedPurchase = Value.hasCompletedPurchase
 			})
 		end
-		if p2.promptState ~= p1.promptState and p1.promptState == promptStateModule.None then
-			bindableEvent_1:Fire()
+		if p1.promptState ~= Value.promptState and Value.promptState == PromptStateModule.None then
+			BindableEvent1:Fire()
 		end
-		if fFlagPurchasePromptCartPricingEnabledModule and not p2.hasCompletedPurchase and p1.hasCompletedPurchase then
-			purchasePromptLiteModule.Events.firePurchaseCompleted()
+		if FFlagPurchasePromptCartPricingEnabledModule and not p1.hasCompletedPurchase and Value.hasCompletedPurchase then
+			PurchasePromptLiteModule.Events.firePurchaseCompleted()
 		end
 	end)
 end
 
 return {
-	mountPurchasePrompt = function()
-		-- upvalues: runService (ref), var1 (write), createStore (ref), purchasePromptElevateDisplayOrder (ref), roact (ref), purchasePromptAppModule (ref), var2 (write), fFlagPurchasePromptCartPricingEnabledModule (ref), var3 (write), coreGuiService (ref)
-		if runService:IsStudio() and runService:IsEdit() or var1 then
+	mountPurchasePrompt = function() --[[ Line: 115 ]]
+		-- upvalues: RunService (copy), PurchasePromptApp (ref), createStore (copy), PurchasePromptElevateDisplayOrder (copy), Roact (copy), PurchasePromptAppModule (copy), NewResult (ref), FFlagPurchasePromptCartPricingEnabledModule (copy), v2 (ref), CoreGui (copy)
+		if RunService:IsStudio() and RunService:IsEdit() or PurchasePromptApp then
 			return nil
 		end
 		createStore()
-		local t = { AutoLocalize = false, IgnoreGuiInset = true }
+		local ScreenGui = { AutoLocalize = false, IgnoreGuiInset = true }
 		
-		if purchasePromptElevateDisplayOrder then
-			t.DisplayOrder = 10
+		if PurchasePromptElevateDisplayOrder then
+			ScreenGui.DisplayOrder = 10
 		end
-		var1 = roact.mount(roact.createElement("ScreenGui", t, {
-			roact.createElement(purchasePromptAppModule, {
-				store = var2,
-				network = if fFlagPurchasePromptCartPricingEnabledModule then var3 else nil
+		PurchasePromptApp = Roact.mount(Roact.createElement("ScreenGui", ScreenGui, {
+			Roact.createElement(PurchasePromptAppModule, {
+				store = NewResult,
+				network = if FFlagPurchasePromptCartPricingEnabledModule then v2 else nil
 			})
-		}), coreGuiService, "PurchasePromptApp")
+		}), CoreGui, "PurchasePromptApp")
 		
-		return var1
+		return PurchasePromptApp
 	end,
-	initiateAvatarCreationFeePurchase = function(p1, p2, p3, p4)
-		-- upvalues: var2 (write), initiateAvatarCreationFeePurchaseModule (ref)
-		if not var2 then
+	initiateAvatarCreationFeePurchase = function(p1, p2, p3, p4) --[[ Line: 149 ]]
+		-- upvalues: NewResult (ref), InitiateAvatarCreationFeePurchaseModule (copy)
+		if not NewResult then
 			error("initiateAvatarCreationFeePurchase cannot be called when the PurchasePrompt has not been mounted")
 		end
-		var2:dispatch(initiateAvatarCreationFeePurchaseModule(p1, p2, p3, p4))
+		NewResult:dispatch(InitiateAvatarCreationFeePurchaseModule(p1, p2, p3, p4))
 	end,
-	initiatePurchaseForProductPayload = function(p1, p2)
-		-- upvalues: var2 (write), fFlagEnablePurchasePayloadInExperienceShop (ref), fFlagSkipBuyDelayForExperienceShopModule (ref), setProductPayloadModule (ref), fFlagPassShopPurchaseSurfaceToBuyModal (ref), setPurchaseAnalyticsMetadataModule (ref), dispatchPurchaseForProductPayloadModule (ref)
-		if not var2 then
+	initiatePurchaseForProductPayload = function(p1, p2) --[[ Line: 176 ]]
+		-- upvalues: NewResult (ref), FFlagEnablePurchasePayloadInExperienceShop (copy), FFlagSkipBuyDelayForExperienceShopModule (copy), SetProductPayloadModule (copy), FFlagPassShopPurchaseSurfaceToBuyModal (copy), SetPurchaseAnalyticsMetadataModule (copy), DispatchPurchaseForProductPayloadModule (copy)
+		if not NewResult then
 			warn("initiatePurchaseForProductPayload called before mountPurchasePrompt; ignoring.")
 			
 			return
-		elseif fFlagEnablePurchasePayloadInExperienceShop or fFlagSkipBuyDelayForExperienceShopModule then
-			var2:dispatch(setProductPayloadModule(p1))
 		end
-		if fFlagPassShopPurchaseSurfaceToBuyModal and p2 then
-			var2:dispatch(setPurchaseAnalyticsMetadataModule({
+		if FFlagEnablePurchasePayloadInExperienceShop or FFlagSkipBuyDelayForExperienceShopModule then
+			NewResult:dispatch(SetProductPayloadModule(p1))
+		end
+		if FFlagPassShopPurchaseSurfaceToBuyModal and p2 then
+			NewResult:dispatch(SetPurchaseAnalyticsMetadataModule({
 				surface = p2.surface,
 				productUniverseId = p2.productUniverseId
 			}))
 		end
-		dispatchPurchaseForProductPayloadModule(function(p3)
-			-- upvalues: var2 (copy)
-			var2:dispatch(p3)
+		DispatchPurchaseForProductPayloadModule(function(p3) --[[ Line: 202 ]]
+			-- upvalues: NewResult (upval)
+			NewResult:dispatch(p3)
 		end, p1, nil, false)
 	end,
-	windowStateChangedEvent = bindableEvent.Event,
-	promptStateSetToNoneEvent = bindableEvent_1.Event,
-	Utils = if fFlagAXMISWithBlackbird then {
-		getBlackbirdUpsellBannerProductInfo = require(_script.Utils.getBlackbirdUpsellBannerProductInfo)
+	windowStateChangedEvent = BindableEvent.Event,
+	promptStateSetToNoneEvent = BindableEvent1.Event,
+	Utils = if SharedFlagsModule.FFlagAXMISWithBlackbird then {
+		getBlackbirdUpsellBannerProductInfo = require(v1.Utils.getBlackbirdUpsellBannerProductInfo)
 	} else {},
-	PublishAssetAnalytics = publishAssetAnalyticsModule,
-	UnifiedPurchasePromptContainer = function(p1)
-		-- upvalues: createStore (ref), roact (ref), unifiedPurchasePromptModule (ref), var2 (write), fFlagPurchasePromptCartPricingEnabledModule (ref), var3 (write), fFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow (ref), fFlagPurchasePromptSubtitleForTimedOptions (ref)
+	PublishAssetAnalytics = require(v1.Utils.PublishAssetAnalytics),
+	UnifiedPurchasePromptContainer = function(p1) --[[ Line: 221 ]]
+		-- upvalues: createStore (copy), Roact (copy), UnifiedPurchasePromptModule (copy), NewResult (ref), FFlagPurchasePromptCartPricingEnabledModule (copy), v2 (ref), FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow (copy), FFlagPurchasePromptSubtitleForTimedOptions (copy)
 		createStore()
 		
-		return roact.createElement(unifiedPurchasePromptModule, {
-			store = var2,
-			network = if fFlagPurchasePromptCartPricingEnabledModule then var3 else nil,
+		return Roact.createElement(UnifiedPurchasePromptModule, {
+			store = NewResult,
+			network = if FFlagPurchasePromptCartPricingEnabledModule then v2 else nil,
 			productPayload = p1.productPayload,
 			purchaseCallbacks = p1.purchaseCallbacks,
 			postPurchaseActions = p1.postPurchaseActions,
 			purchaseAnalyticsMetadata = p1.purchaseAnalyticsMetadata,
-			purchaseOptions = if fFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow then p1.purchaseOptions else nil,
-			subtitleView = if fFlagPurchasePromptSubtitleForTimedOptions then p1.subtitleView else nil
+			purchaseOptions = if FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow then p1.purchaseOptions else nil,
+			subtitleView = if FFlagPurchasePromptSubtitleForTimedOptions then p1.subtitleView else nil
 		})
 	end,
-	launchRobuxPackagePurchase = if fFlagEnableRobuxInExperienceShop then require(_script.launchRobuxPackagePurchase) else nil,
+	launchRobuxPackagePurchase = if FFlagEnableRobuxInExperienceShop then require(v1.launchRobuxPackagePurchase) else nil,
 	["jest.config"] = script["jest.config"],
 	["jest.main.config"] = script["jest.main.config"],
 	["jest.mockDataModel.config"] = script["jest.mockDataModel.config"]

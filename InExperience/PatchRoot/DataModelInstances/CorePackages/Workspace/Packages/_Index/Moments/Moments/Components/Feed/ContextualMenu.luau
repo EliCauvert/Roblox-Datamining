@@ -1,47 +1,45 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
-local playersService = game:GetService("Players")
-local builderIconsModule = require(parent.BuilderIcons)
-local foundationModule = require(parent.Foundation)
-local localizationModule = require(parent.Localization)
-local momentsCommonModule = require(parent.MomentsCommon)
-local _ = require(parent.MomentsTypes)
-local reactModule = require(parent.React)
-local sharedFlagsModule = require(parent.SharedFlags)
-local signalsReactModule = require(parent.SignalsReact)
-local speaker = builderIconsModule.Icon.Speaker
-local speakerSlash = builderIconsModule.Icon.SpeakerSlash
-local threeDotsVertical = builderIconsModule.Icon.ThreeDotsVertical
-local iconButton = foundationModule.IconButton
-local menu = foundationModule.Menu
-local view = foundationModule.View
-local useLocalization = localizationModule.Hooks.useLocalization
-local useToggleState = momentsCommonModule.Hooks.useToggleState
-local checkDebugAccessModule = require(moments.Utils.checkDebugAccess)
-local getPostFeedItemIdModule = require(moments.Utils.getPostFeedItemId)
-local fireAnalyticsEvent = momentsCommonModule.Analytics.fireAnalyticsEvent
-local reportMomentsEngagement = momentsCommonModule.Analytics.reportMomentsEngagement
-local eventNames = momentsCommonModule.Analytics.EventNames
-local reportModalCovering = momentsCommonModule.Media.reportModalCovering
-local makeFeedActionFieldsModule = require(moments.Analytics.makeFeedActionFields)
-local makeRecommendationAttributionModule = require(moments.Analytics.makeRecommendationAttribution)
-local reportMomentModule = require(moments.Moderation.reportMoment)
-local useFeed = require(moments.Components.Feed.FeedContext).useFeed
-local useMomentsSession = require(moments.Stores.GetMomentsStore.MomentsSessionContext).useMomentsSession
-local getMomentsPreferencesStoreModule = require(moments.Stores.GetMomentsPreferencesStore)
-local getModeratedItemsStoreModule = require(moments.Stores.GetModeratedItemsStore)
-local getToastStoreModule = require(moments.Stores.GetToastStore)
-local signalActionTypeModule = require(moments.Enums.SignalActionType)
-local fFlagMomentsOptimisticProfilePending = sharedFlagsModule.FFlagMomentsOptimisticProfilePending
-local fFlagMomentsPassFeedItemIdToBackendApis = sharedFlagsModule.FFlagMomentsPassFeedItemIdToBackendApis
-local fFlagEnableReportingFlowForMomentsFeed = sharedFlagsModule.FFlagEnableReportingFlowForMomentsFeed
-local momentsUseSmallOverflowMenu = game:DefineFastFlag("MomentsUseSmallOverflowMenu", false)
-local momentsReportButtonAnalytics = game:DefineFastFlag("MomentsReportButtonAnalytics", false)
-local reportMomentDialogModule = require(moments.Components.Feed.ReportMomentDialog)
-local ipReportConfirmationDialogModule = require(moments.Components.Feed.IpReportConfirmationDialog)
-local useMomentsHost = require(moments.MomentsHostContext).useMomentsHost
-local localPlayer = playersService.LocalPlayer
-local t = {
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
+local BuilderIconsModule = require(Parent.BuilderIcons)
+local FoundationModule = require(Parent.Foundation)
+local MomentsCommonModule = require(Parent.MomentsCommon)
+local _ = require(Parent.MomentsTypes)
+local ReactModule = require(Parent.React)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local SignalsReactModule = require(Parent.SignalsReact)
+local Speaker = BuilderIconsModule.Icon.Speaker
+local SpeakerSlash = BuilderIconsModule.Icon.SpeakerSlash
+local ThreeDotsVertical = BuilderIconsModule.Icon.ThreeDotsVertical
+local IconButton = FoundationModule.IconButton
+local Menu = FoundationModule.Menu
+local View = FoundationModule.View
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseToggleStateFunction = MomentsCommonModule.Hooks.useToggleState
+local CheckDebugAccessModule = require(Moments.Utils.checkDebugAccess)
+local GetPostFeedItemIdModule = require(Moments.Utils.getPostFeedItemId)
+local FireAnalyticsEventFunction = MomentsCommonModule.Analytics.fireAnalyticsEvent
+local ReportMomentsEngagementFunction = MomentsCommonModule.Analytics.reportMomentsEngagement
+local EventNames = MomentsCommonModule.Analytics.EventNames
+local ReportModalCovering = MomentsCommonModule.Media.reportModalCovering
+local MakeFeedActionFieldsModule = require(Moments.Analytics.makeFeedActionFields)
+local MakeRecommendationAttributionModule = require(Moments.Analytics.makeRecommendationAttribution)
+local ReportMomentModule = require(Moments.Moderation.reportMoment)
+local UseFeedFunction = require(Moments.Components.Feed.FeedContext).useFeed
+local UseMomentsSessionFunction = require(Moments.Stores.GetMomentsStore.MomentsSessionContext).useMomentsSession
+local GetMomentsPreferencesStoreModule = require(Moments.Stores.GetMomentsPreferencesStore)
+local GetModeratedItemsStoreModule = require(Moments.Stores.GetModeratedItemsStore)
+local GetToastStoreModule = require(Moments.Stores.GetToastStore)
+local SignalActionTypeModule = require(Moments.Enums.SignalActionType)
+local FFlagMomentsOptimisticProfilePending = SharedFlagsModule.FFlagMomentsOptimisticProfilePending
+local FFlagMomentsPassFeedItemIdToBackendApis = SharedFlagsModule.FFlagMomentsPassFeedItemIdToBackendApis
+local FFlagMomentsServeEDPVideos = SharedFlagsModule.FFlagMomentsServeEDPVideos
+local MomentsUseSmallOverflowMenu = game:DefineFastFlag("MomentsUseSmallOverflowMenu", false)
+local MomentsReportButtonAnalytics = game:DefineFastFlag("MomentsReportButtonAnalytics", false)
+local ReportMomentDialogModule = require(Moments.Components.Feed.ReportMomentDialog)
+local IpReportConfirmationDialogModule = require(Moments.Components.Feed.IpReportConfirmationDialog)
+local UseMomentsHostFunction = require(Moments.MomentsHostContext).useMomentsHost
+local LocalPlayer = game:GetService("Players").LocalPlayer
+local config = {
 	showDetails = "Feature.Moments.Action.ShowDetails",
 	hideDetails = "Feature.Moments.Action.Hide",
 	expand = "Feature.Moments.Action.Expand",
@@ -52,264 +50,289 @@ local t = {
 	reportSubmittedBody = "Feature.Moments.Label.ReportSubmittedBody"
 }
 
-return function(p1)
-	-- upvalues: useLocalization (ref), t (ref), useFeed (ref), useMomentsHost (ref), useToggleState (ref), reactModule (ref), fFlagEnableReportingFlowForMomentsFeed (ref), useMomentsSession (ref), getMomentsPreferencesStoreModule (ref), getModeratedItemsStoreModule (ref), getToastStoreModule (ref), signalsReactModule (ref), fireAnalyticsEvent (ref), eventNames (ref), checkDebugAccessModule (ref), reportMomentModule (ref), makeRecommendationAttributionModule (ref), signalActionTypeModule (ref), makeFeedActionFieldsModule (ref), momentsReportButtonAnalytics (ref), reportMomentsEngagement (ref), getPostFeedItemIdModule (ref), reportModalCovering (ref), localPlayer (ref), foundationModule (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), fFlagMomentsOptimisticProfilePending (ref), menu (ref), momentsUseSmallOverflowMenu (ref), iconButton (ref), threeDotsVertical (ref), reportMomentDialogModule (ref), ipReportConfirmationDialogModule (ref), view (ref), speakerSlash (ref), speaker (ref)
-	local var1 = useLocalization(t)
-	local var2 = useFeed()
-	local openMomentsFeedReport = useMomentsHost().openMomentsFeedReport
-	local var3 = useToggleState()
-	local var4, var5 = reactModule.useState(false)
-	local var6 = nil
-	local var7 = nil
-	local var8 = nil
-	local var9 = nil
-	
-	if fFlagEnableReportingFlowForMomentsFeed then
-		local var10, var11 = reactModule.useState(false)
-		var6 = var10
-		var7 = var11
-		local var12, var13 = reactModule.useState("------")
-		var8 = var12
-		var9 = var13
-	end
-	local var14 = reactModule.useCallback(function()
-		-- upvalues: var3 (ref)
-		if var3.enabled then
-			var3.disable()
+return function(p1) --[[ Line: 85 ]]
+	-- upvalues: UseLocalizationFunction (copy), config (copy), UseFeedFunction (copy), FFlagMomentsServeEDPVideos (copy), UseMomentsHostFunction (copy), UseToggleStateFunction (copy), ReactModule (copy), UseMomentsSessionFunction (copy), GetMomentsPreferencesStoreModule (copy), GetModeratedItemsStoreModule (copy), GetToastStoreModule (copy), SignalsReactModule (copy), FireAnalyticsEventFunction (copy), EventNames (copy), CheckDebugAccessModule (copy), ReportMomentModule (copy), MakeRecommendationAttributionModule (copy), SignalActionTypeModule (copy), MakeFeedActionFieldsModule (copy), MomentsReportButtonAnalytics (copy), ReportMomentsEngagementFunction (copy), GetPostFeedItemIdModule (copy), ReportModalCovering (copy), Moments (copy), LocalPlayer (copy), FoundationModule (copy), FFlagMomentsPassFeedItemIdToBackendApis (copy), FFlagMomentsOptimisticProfilePending (copy), Menu (copy), MomentsUseSmallOverflowMenu (copy), IconButton (copy), ThreeDotsVertical (copy), ReportMomentDialogModule (copy), IpReportConfirmationDialogModule (copy), View (copy), SpeakerSlash (copy), Speaker (copy)
+	local UseLocalizationResult = UseLocalizationFunction(config)
+	local UseFeedResult = UseFeedFunction()
+	local IsEdpVideo: boolean = FFlagMomentsServeEDPVideos and p1.moment.entityType == "edpVideo"
+	local OpenMomentsFeedReportFunction = UseMomentsHostFunction().openMomentsFeedReport
+	local UseToggleStateResult = UseToggleStateFunction()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
+	local ReportCode, v1 = ReactModule.useState("------")
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 104 ]]
+		-- upvalues: UseToggleStateResult (copy)
+		if UseToggleStateResult.enabled then
+			UseToggleStateResult.disable()
 			
 			return
+		else
+			UseToggleStateResult.enable()
 		end
-		var3.enable()
-	end, { var3.enabled, var3.enable, var3.disable })
-	local var15 = useMomentsSession()
-	local var16 = getMomentsPreferencesStoreModule(false)
-	local var17 = getModeratedItemsStoreModule(false)
-	local var18 = getToastStoreModule(false)
-	local var19 = signalsReactModule.useSignalState(var15.getHideDetails)
-	local var20 = signalsReactModule.useSignalState(var16.getMinimized)
-	local var21 = reactModule.useCallback(function()
-		-- upvalues: var3 (ref), var15 (ref), fireAnalyticsEvent (copy), eventNames (copy), p1 (ref)
-		var3.disable()
-		var15.toggleFeedDetailVisibility()
-		fireAnalyticsEvent(eventNames.FeedHideDetailsButtonPressed, { momentId = p1.moment.momentId })
+	end, {
+		UseToggleStateResult.enabled,
+		UseToggleStateResult.enable,
+		UseToggleStateResult.disable
+	})
+	local UseMomentsSessionResult = UseMomentsSessionFunction()
+	local MomentsPreferencesStoreModule = GetMomentsPreferencesStoreModule(false)
+	local ModeratedItemsStoreModule = GetModeratedItemsStoreModule(false)
+	local ToastStoreModule = GetToastStoreModule(false)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(UseMomentsSessionResult.getHideDetails)
+	local UseSignalStateResult1 = SignalsReactModule.useSignalState(MomentsPreferencesStoreModule.getMinimized)
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 120 ]]
+		-- upvalues: UseToggleStateResult (copy), UseMomentsSessionResult (copy), FireAnalyticsEventFunction (upval), EventNames (upval), p1 (copy)
+		UseToggleStateResult.disable()
+		UseMomentsSessionResult.toggleFeedDetailVisibility()
+		FireAnalyticsEventFunction(EventNames.FeedHideDetailsButtonPressed, { momentId = p1.moment.momentId })
 	end, {
 		p1.moment,
-		var3.disable,
-		var15.toggleFeedDetailVisibility
+		UseToggleStateResult.disable,
+		UseMomentsSessionResult.toggleFeedDetailVisibility
 	})
-	local var22 = reactModule.useCallback(function()
-		-- upvalues: var3 (ref), var16 (ref), fireAnalyticsEvent (copy), eventNames (copy), p1 (ref)
-		var3.disable()
-		var16.toggleFeedScaleType()
-		fireAnalyticsEvent(eventNames.FeedMinimizeButtonPressed, { momentId = p1.moment.momentId })
-	end, { p1.moment, var3.disable, var16.toggleFeedScaleType })
-	local var23 = reactModule.useCallback(function()
-		-- upvalues: checkDebugAccessModule (copy), var16 (ref), var3 (ref)
-		if checkDebugAccessModule() then
-			var16.toggleFeedDebugMode()
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 128 ]]
+		-- upvalues: UseToggleStateResult (copy), MomentsPreferencesStoreModule (copy), FireAnalyticsEventFunction (upval), EventNames (upval), p1 (copy)
+		UseToggleStateResult.disable()
+		MomentsPreferencesStoreModule.toggleFeedScaleType()
+		FireAnalyticsEventFunction(EventNames.FeedMinimizeButtonPressed, { momentId = p1.moment.momentId })
+	end, {
+		p1.moment,
+		UseToggleStateResult.disable,
+		MomentsPreferencesStoreModule.toggleFeedScaleType
+	})
+	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 136 ]]
+		-- upvalues: CheckDebugAccessModule (upval), MomentsPreferencesStoreModule (copy), UseToggleStateResult (copy)
+		if CheckDebugAccessModule() then
+			MomentsPreferencesStoreModule.toggleFeedDebugMode()
 		end
-		var3.disable()
-	end, { var3.disable, var16.toggleFeedDebugMode })
-	local var24 = reactModule.useCallback(function(p2, p3, p4)
-		-- upvalues: p1 (ref), reportMomentModule (copy), makeRecommendationAttributionModule (copy), var2 (ref), signalActionTypeModule (copy), makeFeedActionFieldsModule (copy), fireAnalyticsEvent (copy), eventNames (copy), var17 (ref), var18 (ref), var1 (ref)
+		UseToggleStateResult.disable()
+	end, {
+		UseToggleStateResult.disable,
+		MomentsPreferencesStoreModule.toggleFeedDebugMode
+	})
+	local UseResult4 = ReactModule.useCallback(function(p2, p3, p4) --[[ Line: 144 ]]
+		-- upvalues: p1 (copy), ReportMomentModule (upval), MakeRecommendationAttributionModule (upval), UseFeedResult (copy), SignalActionTypeModule (upval), MakeFeedActionFieldsModule (upval), FireAnalyticsEventFunction (upval), EventNames (upval), ModeratedItemsStoreModule (copy), ToastStoreModule (copy), UseLocalizationResult (copy)
 		if not p1.moment then
 			return nil
 		end
-		local var25 = true
-		local var26 = true
-		local var27 = nil
+		local v2 = true
+		local v3 = true
+		local v4 = nil
 		
 		if not p4 then
-			local ok, status, var28 = pcall(function()
-				-- upvalues: reportMomentModule (copy), p1 (copy), p2 (ref)
-				return reportMomentModule(p1.moment.recommendationMetadata.feedItemId, p2):await()
+			v2, v3, v67 = pcall(function() --[[ Line: 153 ]]
+				-- upvalues: ReportMomentModule (upval), p1 (upval), p2 (copy)
+				return ReportMomentModule(p1.moment.recommendationMetadata.feedItemId, p2):await()
 			end)
-			var25 = ok
-			var26 = status
-			var27 = var28
 		end
-		local recommendationMetadata = p1.moment.recommendationMetadata
-		local var29 = makeRecommendationAttributionModule(recommendationMetadata)
+		local RecommendationMetadata = p1.moment.recommendationMetadata
+		local RecommendationAttributionModule = MakeRecommendationAttributionModule(RecommendationMetadata)
 		
-		if var29 then
-			local ok, status = pcall(function()
-				-- upvalues: var2 (copy), signalActionTypeModule (copy), var29 (ref)
-				var2.logAction(signalActionTypeModule.Report, var29, {})
+		if RecommendationAttributionModule then
+			local Success, Result = pcall(function() --[[ Line: 166 ]]
+				-- upvalues: UseFeedResult (upval), SignalActionTypeModule (upval), RecommendationAttributionModule (copy)
+				UseFeedResult.logAction(SignalActionTypeModule.Report, RecommendationAttributionModule, {})
 			end)
 			
-			if not ok then
-				warn("Failed to log action event", status)
+			if not Success then
+				warn("Failed to log action event", Result)
 			end
 		end
-		local var30 = makeFeedActionFieldsModule(p1.moment.momentId, recommendationMetadata and recommendationMetadata.feedItemId, recommendationMetadata and recommendationMetadata.tracingId, "report")
+		local Report = MakeFeedActionFieldsModule(p1.moment.momentId, RecommendationMetadata and RecommendationMetadata.feedItemId, RecommendationMetadata and RecommendationMetadata.tracingId, "report")
 		
-		if var30 then
-			fireAnalyticsEvent(eventNames.FeedAbuseReported, var30)
+		if Report then
+			FireAnalyticsEventFunction(EventNames.FeedAbuseReported, Report)
 		end
 		if not p3 then
-			var17.markReported(p1.moment.momentId)
-			var2.removeCurrentItem()
-			var18.triggerToast({
-				title = var1.reportSubmittedTitle,
-				text = var1.reportSubmittedBody
+			ModeratedItemsStoreModule.markReported(p1.moment.momentId)
+			UseFeedResult.removeCurrentItem()
+			ToastStoreModule.triggerToast({
+				title = UseLocalizationResult.reportSubmittedTitle,
+				text = UseLocalizationResult.reportSubmittedBody
 			})
 		end
-		return if var25 and var26 and type(var27) == "table" then var27.reportCode else nil
+		return if v2 and v3 and type(v4) == "table" then v4.reportCode else nil
 	end, {
-		p1.moment, var2.logAction, var2.removeCurrentItem, var17.markReported,
-		var18.triggerToast, var1
+		p1.moment, UseFeedResult.logAction, UseFeedResult.removeCurrentItem,
+		ModeratedItemsStoreModule.markReported, ToastStoreModule.triggerToast,
+		UseLocalizationResult
 	})
-	local var25 = reactModule.useCallback(function()
-		-- upvalues: var3 (ref), momentsReportButtonAnalytics (copy), reportMomentsEngagement (copy), getPostFeedItemIdModule (copy), p1 (ref), fFlagEnableReportingFlowForMomentsFeed (copy), openMomentsFeedReport (ref), reportModalCovering (copy), var24 (ref), var9 (write), var7 (write), var5 (ref)
-		var3.disable()
+	local UseResult5 = ReactModule.useCallback(function() --[[ Line: 212 ]]
+		-- upvalues: UseToggleStateResult (copy), MomentsReportButtonAnalytics (upval), ReportMomentsEngagementFunction (upval), GetPostFeedItemIdModule (upval), p1 (copy), FFlagMomentsServeEDPVideos (upval), IsEdpVideo (copy), OpenMomentsFeedReportFunction (copy), ReportModalCovering (upval), UseResult4 (copy), v1 (copy), UseStateResult2_1 (copy), Moments (upval), UseStateResult2 (copy)
+		UseToggleStateResult.disable()
 		
-		if momentsReportButtonAnalytics then
-			reportMomentsEngagement("report_click")
+		if MomentsReportButtonAnalytics then
+			ReportMomentsEngagementFunction("report_click")
 		end
-		local var26 = getPostFeedItemIdModule(p1.moment)
+		local PostFeedItemIdModule = GetPostFeedItemIdModule(p1.moment)
+		local FeedItemId = if FFlagMomentsServeEDPVideos and IsEdpVideo then p1.moment.recommendationMetadata.feedItemId else PostFeedItemIdModule
 		
-		if fFlagEnableReportingFlowForMomentsFeed and var26 and openMomentsFeedReport then
-			reportModalCovering.setCovering(true)
-			openMomentsFeedReport({
-				feedItemId = var26,
+		if FeedItemId and OpenMomentsFeedReportFunction then
+			ReportModalCovering.setCovering(true)
+			OpenMomentsFeedReportFunction({
+				feedItemId = FeedItemId,
 				momentId = p1.moment.momentId,
-				onSubmit = function()
-					-- upvalues: var24 (copy)
-					var24(nil, false, true)
+				onSubmit = function() --[[ Line: 230 ]]
+					-- upvalues: UseResult4 (upval)
+					UseResult4(nil, false, true)
 				end,
-				onClose = function()
-					-- upvalues: reportModalCovering (copy)
-					reportModalCovering.setCovering(false)
+				onClose = function() --[[ Line: 233 ]]
+					-- upvalues: ReportModalCovering (upval)
+					ReportModalCovering.setCovering(false)
 				end,
-				onIpReportCode = function(p2)
-					-- upvalues: var24 (copy), var9 (copy), var7 (copy)
-					var24(nil, true, true)
-					var9(if p2 and p2 ~= "" then p2 else "------")
-					var7(true)
-				end
+				onIpReportCode = function(p2) --[[ Line: 237 ]]
+					-- upvalues: UseResult4 (upval), v1 (upval), UseStateResult2_1 (upval)
+					UseResult4(nil, true, true)
+					v1(if p2 and p2 ~= "" then p2 else "------")
+					UseStateResult2_1(true)
+				end,
+				onCustomSubmit = if FFlagMomentsServeEDPVideos and IsEdpVideo then require(Moments.Moderation.reportEdpVideo) else nil
 			})
 			
 			return
 		end
-		var5(true)
-	end, { var3.disable, var24, openMomentsFeedReport, p1.moment })
-	local var26 = reactModule.useCallback(function()
-		-- upvalues: var5 (ref)
-		var5(false)
-	end, {})
-	local var27 = reactModule.useCallback(function()
-		-- upvalues: var7 (write)
-		if var7 then
-			var7(false)
-		end
-	end, {})
-	local var28 = reactModule.useCallback(function()
-		-- upvalues: var3 (ref), var15 (ref), p1 (ref)
-		var3.disable()
-		var15.requestDeletion(p1.moment.momentId, p1.moment.recommendationMetadata and p1.moment.recommendationMetadata.feedItemId, if p1.moment.recommendationMetadata then p1.moment.recommendationMetadata.tracingId else nil)
-	end, { p1.moment, var3.disable, var15.requestDeletion })
-	local var29 = if p1.isFeedMuteButtonAnalyticsEnabled then reactModule.useCallback(function()
-		-- upvalues: p1 (ref), fireAnalyticsEvent (copy), eventNames (copy)
-		if p1.isDisabled then
+		if not FFlagMomentsServeEDPVideos or not IsEdpVideo then
+			UseStateResult2(true)
+			
 			return
 		end
-		fireAnalyticsEvent(if p1.playbackVolume.isMuted then eventNames.FeedUnmuteButtonPressed else eventNames.FeedMuteButtonPressed, { momentId = p1.moment.momentId })
-		p1.playbackVolume.toggle()
-	end, { p1.isDisabled, p1.playbackVolume, p1.moment }) else reactModule.useCallback(function()
-		-- upvalues: p1 (ref)
-		if p1.isDisabled then
+	end, {
+		UseToggleStateResult.disable,
+		UseResult4,
+		OpenMomentsFeedReportFunction,
+		p1.moment,
+		if FFlagMomentsServeEDPVideos then IsEdpVideo else false
+	})
+	local UseResult6 = ReactModule.useCallback(function() --[[ Line: 269 ]]
+		-- upvalues: UseStateResult2_1 (copy)
+		if UseStateResult2_1 then
+			UseStateResult2_1(false)
+		end
+	end, {})
+	local UseResult7 = ReactModule.useCallback(function() --[[ Line: 275 ]]
+		-- upvalues: UseToggleStateResult (copy), UseMomentsSessionResult (copy), p1 (copy)
+		UseToggleStateResult.disable()
+		UseMomentsSessionResult.requestDeletion(p1.moment.momentId, p1.moment.recommendationMetadata and p1.moment.recommendationMetadata.feedItemId, if p1.moment.recommendationMetadata then p1.moment.recommendationMetadata.tracingId else nil)
+	end, {
+		p1.moment,
+		UseToggleStateResult.disable,
+		UseMomentsSessionResult.requestDeletion
+	})
+	local UseResult8 = ReactModule.useCallback(function() --[[ Line: 287 ]]
+		-- upvalues: p1 (copy)
+		if not p1.isDisabled then
+			p1.playbackVolume.toggle()
+			
 			return
 		end
-		p1.playbackVolume.toggle()
 	end, { p1.isDisabled, p1.playbackVolume })
-	local var30 = reactModule.createElement(menu, {
-		align = foundationModule.Enums.PopoverAlign.End,
-		isOpen = var3.enabled,
-		items = reactModule.useMemo(function()
-			-- upvalues: var19 (ref), var1 (ref), var21 (ref), var20 (ref), var22 (ref), p1 (ref), localPlayer (copy), foundationModule (copy), var25 (ref), fFlagMomentsPassFeedItemIdToBackendApis (copy), fFlagMomentsOptimisticProfilePending (copy), var28 (ref), checkDebugAccessModule (copy), var23 (ref)
-			local list = {
+	local UseResult9 = ReactModule.useCallback(function() --[[ Line: 300 ]]
+		-- upvalues: p1 (copy), FireAnalyticsEventFunction (upval), EventNames (upval)
+		if not p1.isDisabled then
+			FireAnalyticsEventFunction(if p1.playbackVolume.isMuted then EventNames.FeedUnmuteButtonPressed else EventNames.FeedMuteButtonPressed, { momentId = p1.moment.momentId })
+			p1.playbackVolume.toggle()
+			
+			return
+		end
+	end, { p1.isDisabled, p1.playbackVolume, p1.moment })
+	local UseResult10 = if p1.isFeedMuteButtonAnalyticsEnabled then UseResult9 else UseResult8
+	local Element = ReactModule.createElement(Menu, {
+		align = FoundationModule.Enums.PopoverAlign.End,
+		isOpen = UseToggleStateResult.enabled,
+		items = ReactModule.useMemo(function() --[[ Line: 326 ]]
+			-- upvalues: UseSignalStateResult (copy), UseLocalizationResult (copy), UseResult1 (copy), UseSignalStateResult1 (copy), UseResult2 (copy), p1 (copy), FFlagMomentsServeEDPVideos (upval), IsEdpVideo (copy), LocalPlayer (upval), FoundationModule (upval), UseResult5 (copy), FFlagMomentsPassFeedItemIdToBackendApis (upval), FFlagMomentsOptimisticProfilePending (upval), UseResult7 (copy), CheckDebugAccessModule (upval), UseResult3 (copy)
+			local List = {
 				{
 					id = "details",
-					icon = if var19 then "icons/actions/viewOn" else "icons/actions/viewOff",
-					text = if var19 then var1.showDetails else var1.hideDetails,
-					onActivated = var21
+					icon = if UseSignalStateResult then "icons/actions/viewOn" else "icons/actions/viewOff",
+					text = if UseSignalStateResult then UseLocalizationResult.showDetails else UseLocalizationResult.hideDetails,
+					onActivated = UseResult1
 				},
 				{
 					id = "minimize",
-					icon = if var20 then "icons/actions/previewExpand" else "icons/actions/previewShrink",
-					text = if var20 then var1.expand else var1.minimize,
-					onActivated = var22
+					icon = if UseSignalStateResult1 then "icons/actions/previewExpand" else "icons/actions/previewShrink",
+					text = if UseSignalStateResult1 then UseLocalizationResult.expand else UseLocalizationResult.minimize,
+					onActivated = UseResult2
 				}
 			}
-			local var31 = p1.moment.recommendationMetadata ~= nil and (p1.moment.recommendationMetadata.feedItemId ~= nil and p1.moment.recommendationMetadata.feedItemId ~= "")
+			local IsNotFeedItemIdMatch: boolean = p1.moment.recommendationMetadata ~= nil and (p1.moment.recommendationMetadata.feedItemId ~= nil and p1.moment.recommendationMetadata.feedItemId ~= "")
 			
-			if p1.moment.creatorId ~= (if localPlayer then localPlayer.UserId else nil) and var31 then
-				table.insert(list, {
+			if FFlagMomentsServeEDPVideos and IsEdpVideo or p1.moment.creatorId ~= (if LocalPlayer then LocalPlayer.UserId else nil) and IsNotFeedItemIdMatch then
+				table.insert(List, {
 					id = "reportAbuse",
-					icon = foundationModule.Enums.IconName.Flag,
-					text = var1.report,
-					onActivated = var25
+					icon = FoundationModule.Enums.IconName.Flag,
+					text = UseLocalizationResult.report,
+					onActivated = UseResult5
 				})
-			elseif (not fFlagMomentsPassFeedItemIdToBackendApis or var31) and (not fFlagMomentsOptimisticProfilePending or p1.moment.status ~= "Pending") then
-				table.insert(list, {
+			elseif (not FFlagMomentsPassFeedItemIdToBackendApis or IsNotFeedItemIdMatch) and (not FFlagMomentsOptimisticProfilePending or p1.moment.status ~= "Pending") then
+				table.insert(List, {
 					id = "delete",
 					icon = "icons/actions/delete",
-					text = var1.delete,
-					onActivated = var28
+					text = UseLocalizationResult.delete,
+					onActivated = UseResult7
 				})
 			end
-			if checkDebugAccessModule() then
-				table.insert(list, {
+			if CheckDebugAccessModule() then
+				table.insert(List, {
 					id = "debug",
 					icon = "icons/logo/block",
 					text = "Toggle Debug Mode",
-					onActivated = var23
+					onActivated = UseResult3
 				})
 			end
-			return list
+			return List
 		end, {
-			p1.moment, var19, var20, var1, var23, var21, var22, var25, var28
+			p1.moment, UseSignalStateResult, UseSignalStateResult1, UseLocalizationResult,
+			UseResult3, UseResult1, UseResult2, UseResult5, UseResult7,
+			if FFlagMomentsServeEDPVideos then IsEdpVideo else false
 		}),
-		onPressedOutside = var3.disable,
-		side = foundationModule.Enums.PopoverSide.Left,
-		size = if momentsUseSmallOverflowMenu then foundationModule.Enums.InputSize.Small else nil
+		onPressedOutside = UseToggleStateResult.disable,
+		side = FoundationModule.Enums.PopoverSide.Left,
+		size = if MomentsUseSmallOverflowMenu then FoundationModule.Enums.InputSize.Small else nil
 	}, {
-		ContextualMenuButton = reactModule.createElement(iconButton, {
+		ContextualMenuButton = ReactModule.createElement(IconButton, {
 			testId = "FeedContextualMenuButton",
-			icon = threeDotsVertical,
+			icon = ThreeDotsVertical,
 			isDisabled = p1.isDisabled,
-			onActivated = var14,
-			size = foundationModule.Enums.InputSize.Large
+			onActivated = UseResult,
+			size = FoundationModule.Enums.InputSize.Large
 		})
 	})
-	local var31 = reactModule.createElement(reportMomentDialogModule, { isOpen = var4, onClose = var26, onSubmitReport = var24 })
-	local var32 = if fFlagEnableReportingFlowForMomentsFeed and var6 then reactModule.createElement(ipReportConfirmationDialogModule, { reportCode = var8, onClose = var27 }) else nil
+	local Element1 = ReactModule.createElement(ReportMomentDialogModule, {
+		isOpen = UseStateResult,
+		onClose = ReactModule.useCallback(function() --[[ Line: 265 ]]
+			-- upvalues: UseStateResult2 (copy)
+			UseStateResult2(false)
+		end, {}),
+		onSubmitReport = UseResult4
+	})
+	local Element2 = if UseStateResult1 then ReactModule.createElement(IpReportConfirmationDialogModule, { reportCode = ReportCode, onClose = UseResult6 }) else nil
 	
-	return if p1.isFeedMuteEnabled then reactModule.createElement(view, {
+	return if p1.isFeedMuteEnabled then ReactModule.createElement(View, {
 		tag = "col align-x-right auto-xy",
 		LayoutOrder = p1.layoutOrder
 	}, {
-		MuteAndMenuRow = reactModule.createElement(view, {
+		MuteAndMenuRow = ReactModule.createElement(View, {
 			LayoutOrder = 1,
 			tag = "row align-x-right align-y-center gap-xsmall auto-xy"
 		}, {
-			FeedMuteButton = reactModule.createElement(iconButton, {
+			FeedMuteButton = ReactModule.createElement(IconButton, {
 				testId = "FeedMuteButton",
-				icon = if p1.playbackVolume.isMuted then speakerSlash else speaker,
+				icon = if p1.playbackVolume.isMuted then SpeakerSlash else Speaker,
 				isDisabled = p1.isDisabled,
-				onActivated = var29,
-				size = foundationModule.Enums.InputSize.Medium
+				onActivated = UseResult10,
+				size = FoundationModule.Enums.InputSize.Medium
 			}),
-			ContextMenuPopover = var30
+			ContextMenuPopover = Element
 		}),
-		ReportDialog = var31,
-		IpConfirmationDialog = var32
-	}) else reactModule.createElement(view, {
+		ReportDialog = Element1,
+		IpConfirmationDialog = Element2
+	}) else ReactModule.createElement(View, {
 		tag = "col align-x-center auto-xy",
 		LayoutOrder = p1.layoutOrder
 	}, {
-		ContextMenuPopover = var30,
-		ReportDialog = var31,
-		IpConfirmationDialog = var32
+		ContextMenuPopover = Element,
+		ReportDialog = Element1,
+		IpConfirmationDialog = Element2
 	})
 end

@@ -1,12 +1,12 @@
-﻿local var1 = require(script:FindFirstAncestor("ServerDrivenUi").Parent.AppCommonLib).Signal.new()
+﻿local NewResult = require(script:FindFirstAncestor("ServerDrivenUi").Parent.AppCommonLib).Signal.new()
 
 return {
-	run = function(p1, p2)
-		-- upvalues: var1 (ref)
-		var1:fire(p1, p2)
+	run = function(p1, p2) --[[ Line: 22 ]]
+		-- upvalues: NewResult (copy)
+		NewResult:fire(p1, p2)
 	end,
-	connect = function(p1)
-		-- upvalues: var1 (ref)
-		return var1:connect(p1)
+	connect = function(p1) --[[ Line: 26 ]]
+		-- upvalues: NewResult (copy)
+		return NewResult:connect(p1)
 	end
 }

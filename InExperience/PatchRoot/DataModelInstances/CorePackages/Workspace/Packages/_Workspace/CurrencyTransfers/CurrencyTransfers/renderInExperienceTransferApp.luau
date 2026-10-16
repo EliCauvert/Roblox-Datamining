@@ -1,66 +1,66 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local localizationService = game:GetService("LocalizationService")
-local currencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
-local parent = currencyTransfers.Parent
-local reactRobloxModule = require(parent.ReactRoblox)
-local roduxModule = require(parent.Rodux)
-local roactRoduxModule = require(parent.RoactRodux)
-local reactModule = require(parent.React)
-local httpRequestModule = require(parent.HttpRequest)
-local designTokenProvider = require(parent.Style).DesignTokenProvider
-local appStyleProvider = require(parent.Style).AppStyleProvider
-local localizationProvider = require(parent.Localization).LocalizationProvider
-local localization = require(parent.InExperienceLocales).Localization
-local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
-local provider = require(parent.FocusNavigationUtils).FocusNavigableSurfaceRegistry.Provider
-local UIBloxModule = require(parent.UIBlox)
-local selectionCursorProvider = UIBloxModule.App.SelectionImage.SelectionCursorProvider
-local cursorProvider = UIBloxModule.App.SelectionCursor.CursorProvider
-local inExperienceTransferAppModule = require(currencyTransfers.Components.InExperienceTransferApp)
-local networkContext = require(parent.EconomyCommonCoreScriptHooks).NetworkContext
-local t = { themeName = "dark", fontName = "gotham" }
+﻿local CoreGui = game:GetService("CoreGui")
+local LocalizationService = game:GetService("LocalizationService")
+local CurrencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
+local Parent = CurrencyTransfers.Parent
+local ReactRobloxModule = require(Parent.ReactRoblox)
+local RoduxModule = require(Parent.Rodux)
+local RoactRoduxModule = require(Parent.RoactRodux)
+local ReactModule = require(Parent.React)
+local HttpRequestModule = require(Parent.HttpRequest)
+local DesignTokenProvider = require(Parent.Style).DesignTokenProvider
+local AppStyleProvider = require(Parent.Style).AppStyleProvider
+local LocalizationProvider = require(Parent.Localization).LocalizationProvider
+local Localization = require(Parent.InExperienceLocales).Localization
+local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
+local Provider = require(Parent.FocusNavigationUtils).FocusNavigableSurfaceRegistry.Provider
+local UIBloxModule = require(Parent.UIBlox)
+local SelectionCursorProvider = UIBloxModule.App.SelectionImage.SelectionCursorProvider
+local CursorProvider = UIBloxModule.App.SelectionCursor.CursorProvider
+local InExperienceTransferAppModule = require(CurrencyTransfers.Components.InExperienceTransferApp)
+local NetworkContext = require(Parent.EconomyCommonCoreScriptHooks).NetworkContext
+local Style = { themeName = "dark", fontName = "gotham" }
 
-local function _()
-	-- upvalues: reactFocusNavigationModule (ref)
-	return reactFocusNavigationModule.FocusNavigationService.new(reactFocusNavigationModule.EngineInterface.CoreGui)
+local function _() --[[ Line: 31 | Named "createFocusNavigationService" ]]
+	-- upvalues: ReactFocusNavigationModule (copy)
+	return ReactFocusNavigationModule.FocusNavigationService.new(ReactFocusNavigationModule.EngineInterface.CoreGui)
 end
 
-local function createNetworkImpl()
-	-- upvalues: httpRequestModule (ref)
-	return httpRequestModule.config({
-		requestFunction = function(p1, p2, p3)
-			-- upvalues: httpRequestModule (copy)
-			return httpRequestModule.requestFunctions.HttpRbxApi(p1, p2, p3)
+local function createNetworkImpl() --[[ Line: 35 ]]
+	-- upvalues: HttpRequestModule (copy)
+	return HttpRequestModule.config({
+		requestFunction = function(p1, p2, p3) --[[ Line: 37 ]]
+			-- upvalues: HttpRequestModule (upval)
+			return (HttpRequestModule.requestFunctions.HttpRbxApi(p1, p2, p3))
 		end,
 		maxRetryCount = game:DefineFastInt("InExperienceTransferMaxHttpRequestRetries", 2),
 		maxWaitTime = game:DefineFastInt("InExperienceTransferMaxHttpRequestWaitTime", 1)
 	})
 end
 
-return function()
-	-- upvalues: coreGuiService (ref), createNetworkImpl (ref), reactFocusNavigationModule (ref), roduxModule (ref), reactModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), appStyleProvider (ref), t (ref), networkContext (ref), roactRoduxModule (ref), designTokenProvider (ref), selectionCursorProvider (ref), cursorProvider (ref), provider (ref), inExperienceTransferAppModule (ref), reactRobloxModule (ref)
-	local inExperienceTransferApp = Instance.new("Folder")
-	inExperienceTransferApp.Name = "InExperienceTransferApp"
-	inExperienceTransferApp.Parent = coreGuiService
-	local var1 = reactRobloxModule.createRoot(inExperienceTransferApp)
-	var1:render(reactModule.createElement(localizationProvider, {
-		localization = localization.new(localizationService.RobloxLocaleId)
+return function() --[[ Line: 46 | Named "renderInExperienceTransferApp" ]]
+	-- upvalues: CoreGui (copy), createNetworkImpl (copy), ReactFocusNavigationModule (copy), RoduxModule (copy), ReactModule (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), AppStyleProvider (copy), Style (copy), NetworkContext (copy), RoactRoduxModule (copy), DesignTokenProvider (copy), SelectionCursorProvider (copy), CursorProvider (copy), Provider (copy), InExperienceTransferAppModule (copy), ReactRobloxModule (copy)
+	local InExperienceTransferApp = Instance.new("Folder")
+	InExperienceTransferApp.Name = "InExperienceTransferApp"
+	InExperienceTransferApp.Parent = CoreGui
+	local Root = ReactRobloxModule.createRoot(InExperienceTransferApp)
+	Root:render((ReactModule.createElement(LocalizationProvider, {
+		localization = Localization.new(LocalizationService.RobloxLocaleId)
 	}, {
-		StyleProvider = reactModule.createElement(appStyleProvider, { style = t }, {
-			NetworkProvider = reactModule.createElement(networkContext.Provider, { value = createNetworkImpl() }, {
-				StoreProvider = reactModule.createElement(roactRoduxModule.StoreProvider, {
-					store = roduxModule.Store.new(function(p1)
+		StyleProvider = ReactModule.createElement(AppStyleProvider, { style = Style }, {
+			NetworkProvider = ReactModule.createElement(NetworkContext.Provider, { value = createNetworkImpl() }, {
+				StoreProvider = ReactModule.createElement(RoactRoduxModule.StoreProvider, {
+					store = RoduxModule.Store.new(function(p1) --[[ Line: 55 ]]
 						return p1 or {}
 					end)
 				}, {
-					DesignTokenProvider = reactModule.createElement(designTokenProvider, { tokenMappers = {} }, {
-						CursorProvider = reactModule.createElement(selectionCursorProvider, {}, {
-							NewCursorProvider = reactModule.createElement(cursorProvider, {}, {
-								FocusNavigationProvider = reactModule.createElement(reactFocusNavigationModule.FocusNavigationContext.Provider, {
-									value = reactFocusNavigationModule.FocusNavigationService.new(reactFocusNavigationModule.EngineInterface.CoreGui)
+					DesignTokenProvider = ReactModule.createElement(DesignTokenProvider, { tokenMappers = {} }, {
+						CursorProvider = ReactModule.createElement(SelectionCursorProvider, {}, {
+							NewCursorProvider = ReactModule.createElement(CursorProvider, {}, {
+								FocusNavigationProvider = ReactModule.createElement(ReactFocusNavigationModule.FocusNavigationContext.Provider, {
+									value = ReactFocusNavigationModule.FocusNavigationService.new(ReactFocusNavigationModule.EngineInterface.CoreGui)
 								}, {
-									FocusNavigationRegistryProvider = reactModule.createElement(provider, nil, {
-										InExperienceTransferApp = reactModule.createElement(inExperienceTransferAppModule)
+									FocusNavigationRegistryProvider = ReactModule.createElement(Provider, nil, {
+										InExperienceTransferApp = ReactModule.createElement(InExperienceTransferAppModule)
 									})
 								})
 							})
@@ -69,7 +69,7 @@ return function()
 				})
 			})
 		})
-	}))
+	})))
 	
-	return var1
+	return Root
 end

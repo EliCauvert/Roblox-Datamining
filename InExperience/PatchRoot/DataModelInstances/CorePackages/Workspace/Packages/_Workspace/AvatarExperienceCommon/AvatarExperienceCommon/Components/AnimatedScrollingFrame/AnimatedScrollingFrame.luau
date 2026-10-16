@@ -1,25 +1,25 @@
-﻿local reactModule = require(script:FindFirstAncestor("AvatarExperienceCommon").Parent.React)
-local useAXAnimateScrollFrameModule = require(script.Parent.useAXAnimateScrollFrame)
+﻿local ReactModule = require(script:FindFirstAncestor("AvatarExperienceCommon").Parent.React)
+local UseAXAnimateScrollFrameModule = require(script.Parent.useAXAnimateScrollFrame)
 
-return reactModule.forwardRef(function(p1, p2)
-	-- upvalues: reactModule (ref), useAXAnimateScrollFrameModule (ref)
-	local var1 = reactModule.useRef(nil)
-	useAXAnimateScrollFrameModule(var1)
-	local var2 = reactModule.useCallback(function(p3)
-		-- upvalues: var1 (ref), p2 (ref)
-		var1.current = p3
+return ReactModule.forwardRef(function(Tbl, Callback) --[[ Line: 8 | Named "AnimatedScrollingFrame" ]]
+	-- upvalues: ReactModule (copy), UseAXAnimateScrollFrameModule (copy)
+	local UseRefResult = ReactModule.useRef(nil)
+	UseAXAnimateScrollFrameModule(UseRefResult)
+	local Copy = table.clone(Tbl)
+	Copy.children = nil
+	Copy.ref = ReactModule.useCallback(function(Current) --[[ Line: 11 ]]
+		-- upvalues: UseRefResult (copy), Callback (copy)
+		UseRefResult.current = Current
 		
-		if typeof(p2) == "table" then
-			p2.current = p3
+		if typeof(Callback) == "table" then
+			Callback.current = Current
 			
 			return
-		elseif typeof(p2) == "function" then
-			p2(p3)
 		end
-	end, { p2 })
-	local cloned = table.clone(p1)
-	cloned.children = nil
-	cloned.ref = var2
+		if typeof(Callback) == "function" then
+			Callback(Current)
+		end
+	end, { Callback })
 	
-	return reactModule.createElement("ScrollingFrame", cloned, p1.children)
+	return ReactModule.createElement("ScrollingFrame", Copy, Tbl.children)
 end)

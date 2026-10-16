@@ -1,35 +1,35 @@
-﻿local genericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
-local parent = genericAbuseReporting.Parent
-local guiService = game:GetService("GuiService")
-local httpService = game:GetService("HttpService")
-local appLinking = require(parent.RoactServiceTags).AppLinking
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local useAppPolicy = require(parent.UniversalAppPolicy).useAppPolicy
-local useRoactService = require(parent.RobloxAppHooks).useRoactService
-local controlState = foundationModule.Enums.ControlState
-local getIconRichText = foundationModule.Utility.getIconRichText
-local iconName = foundationModule.Enums.IconName
-local text = foundationModule.Text
-local view = foundationModule.View
-local notificationType = require(genericAbuseReporting.Bedui.Provider.AbuseReportBeduiTypes).NotificationType
+﻿local GenericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
+local Parent = GenericAbuseReporting.Parent
+local GuiService = game:GetService("GuiService")
+local HttpService = game:GetService("HttpService")
+local AppLinking = require(Parent.RoactServiceTags).AppLinking
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
+local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
+local ControlState = FoundationModule.Enums.ControlState
+local GetIconRichTextFunction = FoundationModule.Utility.getIconRichText
+local IconName = FoundationModule.Enums.IconName
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local NotificationType = require(GenericAbuseReporting.Bedui.Provider.AbuseReportBeduiTypes).NotificationType
 
-return reactModule.memo(function(p1)
-	-- upvalues: useRoactService (ref), appLinking (ref), useAppPolicy (ref), reactModule (ref), httpService (ref), guiService (ref), notificationType (ref), getIconRichText (ref), iconName (ref), controlState (ref), view (ref), text (ref)
-	local var1 = useRoactService(appLinking)
-	local var2 = useAppPolicy(function(p2)
+return ReactModule.memo(function(p1) --[[ Line: 29 ]]
+	-- upvalues: UseRoactServiceFunction (copy), AppLinking (copy), UseAppPolicyFunction (copy), ReactModule (copy), HttpService (copy), GuiService (copy), NotificationType (copy), GetIconRichTextFunction (copy), IconName (copy), ControlState (copy), View (copy), Text (copy)
+	local UseRoactServiceResult = UseRoactServiceFunction(AppLinking)
+	local UseAppPolicyResult = UseAppPolicyFunction(function(p2) --[[ Line: 31 ]]
 		return p2.getWebViewSupport()
 	end)
-	local var3 = reactModule.useCallback(function()
-		-- upvalues: var2 (ref), var1 (ref), p1 (ref), httpService (copy), guiService (copy), notificationType (copy)
-		if not var2 then
-			var1:openURL(p1.component.link.url)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 35 ]]
+		-- upvalues: UseAppPolicyResult (copy), UseRoactServiceResult (copy), p1 (copy), HttpService (upval), GuiService (upval), NotificationType (upval)
+		if not UseAppPolicyResult then
+			UseRoactServiceResult:openURL(p1.component.link.url)
 			
 			return
 		end
-		local ok, status = pcall(function()
-			-- upvalues: httpService (copy), p1 (copy)
-			return httpService:JSONEncode({
+		local Success, Result = pcall(function() --[[ Line: 39 ]]
+			-- upvalues: HttpService (upval), p1 (upval)
+			return HttpService:JSONEncode({
 				presentationStyle = nil,
 				visible = true,
 				title = p1.component.link.label,
@@ -37,35 +37,37 @@ return reactModule.memo(function(p1)
 			})
 		end)
 		
-		if ok then
-			guiService:BroadcastNotification(status, notificationType.OpenCustomWebView)
+		if Success then
+			GuiService:BroadcastNotification(Result, NotificationType.OpenCustomWebView)
 			
 			return
+		else
+			warn("Failed to encode notification data for bedui webview link")
 		end
-		warn("Failed to encode notification data for bedui webview link")
 	end, { p1.component.link.label, p1.component.link.url })
-	local var4, var5 = reactModule.useBinding(false)
-	local var6 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref), getIconRichText (copy), iconName (copy)
-		return p1.component.link.linkButtonLabel .. ` {getIconRichText(iconName.ArrowUpRightFromSquare)}`
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(false)
+	local UseMemoResult = ReactModule.useMemo(function(): string --[[ Line: 57 ]]
+		-- upvalues: p1 (copy), GetIconRichTextFunction (upval), IconName (upval)
+		return p1.component.link.linkButtonLabel .. ` {GetIconRichTextFunction(IconName.ArrowUpRightFromSquare)}`
 	end, { p1.component.link.linkButtonLabel })
 	
-	return reactModule.createElement(view, { tag = "size-full-0 auto-y", LayoutOrder = p1.layoutOrder }, reactModule.createElement(text, {
+	return ReactModule.createElement(View, { tag = "size-full-0 auto-y", LayoutOrder = p1.layoutOrder }, ReactModule.createElement(Text, {
 		RichText = true,
 		tag = "auto-xy padding-xsmall text-body-small text-wrap text-align-x-left radius-medium",
-		Text = var4:map(function(p2)
-			-- upvalues: var6 (ref)
-			return if p2 then `<u>{var6}</u>` else var6
+		Text = UseBindingResult:map(function(p2) --[[ Line: 76 ]]
+			-- upvalues: UseMemoResult (copy)
+			return if p2 then `<u>{UseMemoResult}</u>` else UseMemoResult
 		end),
-		onActivated = var3,
-		onStateChanged = reactModule.useCallback(function(p2)
-			-- upvalues: controlState (copy), var5 (ref)
-			if p2 == controlState.Hover then
-				var5(true)
+		onActivated = UseResult,
+		onStateChanged = ReactModule.useCallback(function(Hover) --[[ Line: 61 ]]
+			-- upvalues: ControlState (upval), UseBindingResult2 (copy)
+			if Hover == ControlState.Hover then
+				UseBindingResult2(true)
 				
 				return
+			else
+				UseBindingResult2(false)
 			end
-			var5(false)
 		end, {})
 	}))
 end)

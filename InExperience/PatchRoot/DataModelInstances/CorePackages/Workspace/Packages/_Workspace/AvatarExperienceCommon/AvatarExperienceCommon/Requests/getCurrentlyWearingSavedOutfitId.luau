@@ -1,19 +1,19 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceCommon").Parent
-local httpModule = require(parent.Http)
-local httpClientModule = require(parent.HttpClient)
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceCommon").Parent
+local HttpModule = require(Parent.Http)
+local HttpClientModule = require(Parent.HttpClient)
 
-return function(p1)
-	-- upvalues: httpModule (ref), httpClientModule (ref)
-	return httpClientModule.asPromise(httpClientModule.fetch({
+return function(Network) --[[ Line: 11 | Named "getCurrentlyWearingSavedOutfitId" ]]
+	-- upvalues: HttpModule (copy), HttpClientModule (copy)
+	return HttpClientModule.asPromise(HttpClientModule.fetch({
 		method = "GET",
 		analyticsKey = "avatar-experience.get-currently-wearing-saved-outfit",
 		legacy = true,
-		url = `{httpModule.Url.AVATAR_URL}v1/avatar/currently-wearing-saved-outfit`,
-		network = p1,
-		decode = function(p2)
-			local savedOutfitId = p2.savedOutfitId
+		url = `{HttpModule.Url.AVATAR_URL}v1/avatar/currently-wearing-saved-outfit`,
+		network = Network,
+		decode = function(p1) --[[ Line: 20 ]]
+			local SavedOutfitId = p1.savedOutfitId
 			
-			return if savedOutfitId == nil then nil else tostring(savedOutfitId)
+			return if SavedOutfitId == nil then nil else tostring(SavedOutfitId)
 		end
 	}))
 end

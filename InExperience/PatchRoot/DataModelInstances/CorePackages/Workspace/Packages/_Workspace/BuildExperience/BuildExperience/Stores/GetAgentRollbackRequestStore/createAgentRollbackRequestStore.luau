@@ -1,302 +1,321 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local promiseModule = require(parent.Promise)
-local signalsModule = require(parent.Signals)
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local PromiseModule = require(Parent.Promise)
+local SignalsModule = require(Parent.Signals)
 
-return function()
-	-- upvalues: signalsModule (ref), promiseModule (ref)
-	local var1 = 0
+return function() --[[ Line: 70 | Named "createAgentRollbackRequestStore" ]]
+	-- upvalues: SignalsModule (copy), PromiseModule (copy)
+	local Count = 0
 	local t = {}
-	local var2 = nil
-	local var3 = nil
+	local Config = nil
+	local v1 = nil
 	
-	local function _(value)
-		-- upvalues: t (ref), signalsModule (copy)
-		local var4 = t[value]
+	local function _(Key) --[[ Line: 76 | Named "getRequestSignal" ]]
+		-- upvalues: t (copy), SignalsModule (upval)
+		local Entry = t[Key]
 		
-		if var4 == nil then
-			local var5, var6 = signalsModule.createSignal(false)
-			var4 = { getIsPending = var5, setIsPending = var6 }
-			t[value] = var4
+		if Entry == nil then
+			local Signal, Signal2 = SignalsModule.createSignal(false)
+			Entry = { getIsPending = Signal, setIsPending = Signal2 }
+			t[Key] = Entry
 		end
-		return var4
+		return Entry
 	end
 	
-	local function getIsPendingForPlaceId(p1)
-		-- upvalues: t (ref), signalsModule (copy)
-		local var4 = t[p1]
-		
-		if var4 == nil then
-			local var5, var6 = signalsModule.createSignal(false)
-			var4 = { getIsPending = var5, setIsPending = var6 }
-			t[p1] = var4
-		end
-		return var4.getIsPending
+	local _ = function(p1): boolean --[[ Line: 93 | Named "turnStarterMatchesTarget" ]]
+		-- upvalues: Config (ref)
+		return Config ~= nil and (Config.target.placeId == p1.placeId and (p1.universeId == nil or Config.target.universeId == p1.universeId))
 	end
 	
-	local _ = function(p1)
-		-- upvalues: var2 (write)
-		return var2 ~= nil and (var2.target.placeId == p1.placeId and (if p1.universeId ~= nil then var2.target.universeId == p1.universeId else true))
-	end
-	
-	local _ = function(p1, p2)
-		-- upvalues: var3 (write), t (ref), signalsModule (copy)
-		if var3 ~= p1 then return end
-		var3 = nil
-		local placeId = p1.target.placeId
-		local var4 = t[placeId]
+	local _ = function(p1, p2) --[[ Line: 99 | Named "finishRequest" ]]
+		-- upvalues: v1 (ref), t (copy), SignalsModule (upval)
+		if v1 ~= p1 then return end
+		v1 = nil
+		local PlaceId = p1.target.placeId
+		local Entry = t[PlaceId]
 		
-		if var4 == nil then
-			local var5, var6 = signalsModule.createSignal(false)
-			var4 = { getIsPending = var5, setIsPending = var6 }
-			t[placeId] = var4
+		if Entry == nil then
+			local Signal, Signal2 = SignalsModule.createSignal(false)
+			Entry = { getIsPending = Signal, setIsPending = Signal2 }
+			t[PlaceId] = Entry
 		end
-		var4.setIsPending(false)
+		Entry.setIsPending(false)
 		
 		if p2 == nil then
 			p1.resolve()
 			
 			return
-		end
-		p1.reject(p2)
-	end
-	
-	local function registerTurnStarter(p1, p2, p3)
-		-- upvalues: var2 (write), var3 (write), t (ref), signalsModule (copy)
-		if var2 ~= nil and var2.registration ~= p2 then
-			return false
-		elseif var3 ~= nil and (var3.target.placeId ~= p1.placeId or var3.target.universeId ~= p1.universeId) and var3 == var3 then
-			var3 = nil
-			local placeId = var3.target.placeId
-			local var4 = t[placeId]
-			
-			if var4 == nil then
-				local var5, var6 = signalsModule.createSignal(false)
-				var4 = { getIsPending = var5, setIsPending = var6 }
-				t[placeId] = var4
-			end
-			var4.setIsPending(false)
-			var3.reject("agent_rollback_start_failed")
-		end
-		var2 = { target = p1, registration = p2, startTurn = p3 }
-		
-		return true
-	end
-	
-	local function unregisterTurnStarter(p1)
-		-- upvalues: var2 (write), var3 (write), t (ref), signalsModule (copy)
-		if var2 == nil or var2.registration ~= p1 then return end
-		var2 = nil
-		
-		if var3 ~= nil then
-			if var3 ~= var3 then return end
-			var3 = nil
-			local placeId = var3.target.placeId
-			local var4 = t[placeId]
-			
-			if var4 == nil then
-				local var5, var6 = signalsModule.createSignal(false)
-				var4 = { getIsPending = var5, setIsPending = var6 }
-				t[placeId] = var4
-			end
-			var4.setIsPending(false)
-			var3.reject("agent_rollback_start_failed")
+		else
+			p1.reject(p2)
 		end
 	end
 	
-	local function beginRequest(p1)
-		-- upvalues: var3 (write), promiseModule (copy), var2 (write), var1 (write), t (ref), signalsModule (copy)
-		if var3 ~= nil then
-			return nil, promiseModule.reject("agent_rollback_busy")
-		elseif var2 ~= nil and (var2.target.placeId == p1.placeId and (if p1.universeId ~= nil then var2.target.universeId == p1.universeId else true)) then
-			var1 += 1
-			local var4 = var1
+	local function beginRequest(p1) --[[ Line: 151 ]]
+		-- upvalues: v1 (ref), PromiseModule (upval), Config (ref), Count (ref), t (copy), SignalsModule (upval)
+		if v1 ~= nil then
+			return nil, PromiseModule.reject("agent_rollback_busy")
+		elseif Config ~= nil and (Config.target.placeId == p1.placeId and (p1.universeId == nil or Config.target.universeId == p1.universeId)) then
+			Count += 1
+			local Id: number = Count
+			local Config1 = Config
 			
-			return var4, promiseModule.new(function(p2, p3)
-				-- upvalues: var3 (copy), var4 (ref), p1 (ref), var2 (ref), t (copy), signalsModule (copy)
-				var3 = {
-					id = var4,
+			return Id, (PromiseModule.new(function(Resolve, Reject) --[[ Line: 162 ]]
+				-- upvalues: v1 (upval), Id (copy), p1 (copy), Config1 (copy), t (upval), SignalsModule (upval)
+				v1 = {
+					id = Id,
 					target = {
-						universeId = if p1.universeId ~= nil then var2.target.universeId else p1.universeId,
+						universeId = if p1.universeId == nil then Config1.target.universeId else p1.universeId,
 						placeId = p1.placeId
 					},
-					resolve = p2,
-					reject = p3
+					resolve = Resolve,
+					reject = Reject
 				}
-				local placeId = p1.placeId
-				local var5 = t[placeId]
+				local PlaceId = p1.placeId
+				local Entry = t[PlaceId]
 				
-				if var5 == nil then
-					local var6, var7 = signalsModule.createSignal(false)
-					var5 = { getIsPending = var6, setIsPending = var7 }
-					t[placeId] = var5
+				if Entry == nil then
+					local Signal, Signal2 = SignalsModule.createSignal(false)
+					Entry = { getIsPending = Signal, setIsPending = Signal2 }
+					t[PlaceId] = Entry
 				end
-				var5.setIsPending(true)
-			end)
+				Entry.setIsPending(true)
+			end))
+		else
+			return nil, PromiseModule.reject("agent_rollback_no_turn_starter")
 		end
-		return nil, promiseModule.reject("agent_rollback_no_turn_starter")
 	end
 	
-	local function setRequestData(value, p1)
-		-- upvalues: var3 (write), var2 (write), t (ref), signalsModule (copy)
-		if var3 == nil or var3.id ~= value then
+	local function setRequestData(Id, p1) --[[ Line: 177 ]]
+		-- upvalues: v1 (ref), Config (ref), t (copy), SignalsModule (upval)
+		local v2 = v1
+		
+		if v2 == nil or v2.id ~= Id then
 			return false
 		end
-		local target = var3.target
+		local Target = v2.target
 		
-		if var2 ~= nil and (var2.target.placeId == target.placeId and (if target.universeId ~= nil then var2.target.universeId == target.universeId else true)) then
-			if var2 == nil then
-				if var3 == var3 then
-					var3 = nil
-					local placeId = var3.target.placeId
-					local var4 = t[placeId]
+		if Config ~= nil and (Config.target.placeId == Target.placeId and (Target.universeId == nil or Config.target.universeId == Target.universeId)) then
+			local Config1 = Config
+			
+			if Config1 == nil then
+				if v1 == v2 then
+					v1 = nil
+					local PlaceId = v2.target.placeId
+					local Entry = t[PlaceId]
 					
-					if var4 == nil then
-						local var5, var6 = signalsModule.createSignal(false)
-						var4 = { getIsPending = var5, setIsPending = var6 }
-						t[placeId] = var4
+					if Entry == nil then
+						local Signal1, Signal2_1 = SignalsModule.createSignal(false)
+						Entry = { getIsPending = Signal1, setIsPending = Signal2_1 }
+						t[PlaceId] = Entry
 					end
-					var4.setIsPending(false)
-					var3.reject("agent_rollback_start_failed")
+					Entry.setIsPending(false)
+					v2.reject("agent_rollback_start_failed")
 				end
 				return false
 			else
-				local ok, status = pcall(var2.startTurn, {
-					id = value,
-					universeId = var3.target.universeId,
-					placeId = var3.target.placeId,
+				local Success, Result = pcall(Config1.startTurn, {
+					id = Id,
+					universeId = v2.target.universeId,
+					placeId = v2.target.placeId,
 					versionNumber = p1.versionNumber,
 					noteTitle = p1.noteTitle,
 					noteDescription = p1.noteDescription
-				}, function()
-					-- upvalues: var3 (ref), var3 (copy), t (copy), signalsModule (copy)
-					if var3 ~= var3 then return end
-					var3 = nil
-					local placeId = var3.target.placeId
-					local var7 = t[placeId]
+				}, function() --[[ Line: 199 ]]
+					-- upvalues: v2 (copy), v1 (upval), t (upval), SignalsModule (upval)
+					if v1 ~= v2 then return end
+					v1 = nil
+					local PlaceId = v2.target.placeId
+					local Entry = t[PlaceId]
 					
-					if var7 == nil then
-						local var8, var9 = signalsModule.createSignal(false)
-						var7 = { getIsPending = var8, setIsPending = var9 }
-						t[placeId] = var7
+					if Entry == nil then
+						local Signal, Signal2 = SignalsModule.createSignal(false)
+						Entry = { getIsPending = Signal, setIsPending = Signal2 }
+						t[PlaceId] = Entry
 					end
-					var7.setIsPending(false)
-					var3.resolve()
-				end, function()
-					-- upvalues: var3 (ref), var3 (copy), t (copy), signalsModule (copy)
-					if var3 ~= var3 then return end
-					var3 = nil
-					local placeId = var3.target.placeId
-					local var7 = t[placeId]
+					Entry.setIsPending(false)
+					v2.resolve()
+				end, function() --[[ Line: 201 ]]
+					-- upvalues: v2 (copy), v1 (upval), t (upval), SignalsModule (upval)
+					if v1 ~= v2 then return end
+					v1 = nil
+					local PlaceId = v2.target.placeId
+					local Entry = t[PlaceId]
 					
-					if var7 == nil then
-						local var8, var9 = signalsModule.createSignal(false)
-						var7 = { getIsPending = var8, setIsPending = var9 }
-						t[placeId] = var7
+					if Entry == nil then
+						local Signal, Signal2 = SignalsModule.createSignal(false)
+						Entry = { getIsPending = Signal, setIsPending = Signal2 }
+						t[PlaceId] = Entry
 					end
-					var7.setIsPending(false)
-					var3.reject("agent_rollback_start_failed")
+					Entry.setIsPending(false)
+					v2.reject("agent_rollback_start_failed")
 				end)
 				
-				if (not ok or not status) and var3 == var3 then
-					var3 = nil
-					local placeId = var3.target.placeId
-					local var7 = t[placeId]
+				if (not Success or not Result) and v1 == v2 then
+					v1 = nil
+					local PlaceId = v2.target.placeId
+					local Entry = t[PlaceId]
 					
-					if var7 == nil then
-						local var8, var9 = signalsModule.createSignal(false)
-						var7 = { getIsPending = var8, setIsPending = var9 }
-						t[placeId] = var7
+					if Entry == nil then
+						local Signal3, Signal2_2 = SignalsModule.createSignal(false)
+						Entry = { getIsPending = Signal3, setIsPending = Signal2_2 }
+						t[PlaceId] = Entry
 					end
-					var7.setIsPending(false)
-					var3.reject("agent_rollback_start_failed")
+					Entry.setIsPending(false)
+					v2.reject("agent_rollback_start_failed")
 				end
-				return ok and status
+				return Success and Result
 			end
-		elseif var3 == var3 then
-			var3 = nil
-			local placeId = var3.target.placeId
-			local var10 = t[placeId]
-			
-			if var10 == nil then
-				local var11, var12 = signalsModule.createSignal(false)
-				var10 = { getIsPending = var11, setIsPending = var12 }
-				t[placeId] = var10
+		else
+			if v1 == v2 then
+				v1 = nil
+				local PlaceId = v2.target.placeId
+				local Entry = t[PlaceId]
+				
+				if Entry == nil then
+					local Signal, Signal2 = SignalsModule.createSignal(false)
+					Entry = { getIsPending = Signal, setIsPending = Signal2 }
+					t[PlaceId] = Entry
+				end
+				Entry.setIsPending(false)
+				v2.reject("agent_rollback_start_failed")
 			end
-			var10.setIsPending(false)
-			var3.reject("agent_rollback_start_failed")
+			return false
 		end
-		return false
 	end
 	
 	return {
-		getIsPendingForPlaceId = getIsPendingForPlaceId,
-		registerTurnStarter = registerTurnStarter,
-		unregisterTurnStarter = unregisterTurnStarter,
+		getIsPendingForPlaceId = function(Key) --[[ Line: 89 ]]
+			-- upvalues: t (copy), SignalsModule (upval)
+			local Entry = t[Key]
+			
+			if Entry == nil then
+				local Signal, Signal2 = SignalsModule.createSignal(false)
+				Entry = { getIsPending = Signal, setIsPending = Signal2 }
+				t[Key] = Entry
+			end
+			return Entry.getIsPending
+		end,
+		registerTurnStarter = function(Target, Registration, StartTurn): boolean --[[ Line: 112 ]]
+			-- upvalues: Config (ref), v1 (ref), t (copy), SignalsModule (upval)
+			if Config ~= nil and Config.registration ~= Registration then
+				return false
+			end
+			local v2 = v1
+			
+			if v2 ~= nil and (v2.target.placeId ~= Target.placeId or v2.target.universeId ~= Target.universeId) and v1 == v2 then
+				v1 = nil
+				local PlaceId = v2.target.placeId
+				local Entry = t[PlaceId]
+				
+				if Entry == nil then
+					local Signal, Signal2 = SignalsModule.createSignal(false)
+					Entry = { getIsPending = Signal, setIsPending = Signal2 }
+					t[PlaceId] = Entry
+				end
+				Entry.setIsPending(false)
+				v2.reject("agent_rollback_start_failed")
+			end
+			Config = {
+				target = Target,
+				registration = Registration,
+				startTurn = StartTurn
+			}
+			
+			return true
+		end,
+		unregisterTurnStarter = function(Registration) --[[ Line: 138 ]]
+			-- upvalues: Config (ref), v1 (ref), t (copy), SignalsModule (upval)
+			if Config == nil or Config.registration ~= Registration then return end
+			Config = nil
+			local v2 = v1
+			
+			if v2 ~= nil then
+				if v1 ~= v2 then return end
+				v1 = nil
+				local PlaceId = v2.target.placeId
+				local Entry = t[PlaceId]
+				
+				if Entry == nil then
+					local Signal, Signal2 = SignalsModule.createSignal(false)
+					Entry = { getIsPending = Signal, setIsPending = Signal2 }
+					t[PlaceId] = Entry
+				end
+				Entry.setIsPending(false)
+				v2.reject("agent_rollback_start_failed")
+			end
+		end,
 		beginRequest = beginRequest,
 		setRequestData = setRequestData,
-		failRequest = function(p1)
-			-- upvalues: var3 (write), t (ref), signalsModule (copy)
-			if var3 == nil or var3.id ~= p1 then
-				return false
-			elseif var3 == var3 then
-				var3 = nil
-				local placeId = var3.target.placeId
-				local var4 = t[placeId]
-				
-				if var4 == nil then
-					local var5, var6 = signalsModule.createSignal(false)
-					var4 = { getIsPending = var5, setIsPending = var6 }
-					t[placeId] = var4
-				end
-				var4.setIsPending(false)
-				var3.reject("agent_rollback_start_failed")
-			end
-			return true
-		end,
-		cancelRequestForPlaceId = function(p1)
-			-- upvalues: var3 (write), t (ref), signalsModule (copy)
-			if var3 == nil or var3.target.placeId ~= p1 then
-				return false
-			elseif var3 == var3 then
-				var3 = nil
-				local placeId = var3.target.placeId
-				local var4 = t[placeId]
-				
-				if var4 == nil then
-					local var5, var6 = signalsModule.createSignal(false)
-					var4 = { getIsPending = var5, setIsPending = var6 }
-					t[placeId] = var4
-				end
-				var4.setIsPending(false)
-				var3.reject("agent_rollback_cancelled")
-			end
-			return true
-		end,
-		request = function(p1, p2)
-			-- upvalues: beginRequest (ref), setRequestData (ref)
-			local var4, var5 = beginRequest(p1)
+		failRequest = function(Id): boolean --[[ Line: 210 ]]
+			-- upvalues: v1 (ref), t (copy), SignalsModule (upval)
+			local v2 = v1
 			
-			if var4 ~= nil then
-				setRequestData(var4, p2)
+			if v2 == nil or v2.id ~= Id then
+				return false
 			end
-			return var5
-		end,
-		reset = function()
-			-- upvalues: var3 (write), t (ref), signalsModule (copy), var2 (write)
-			if var3 ~= nil and var3 == var3 then
-				var3 = nil
-				local placeId = var3.target.placeId
-				local var4 = t[placeId]
+			if v1 == v2 then
+				v1 = nil
+				local PlaceId = v2.target.placeId
+				local Entry = t[PlaceId]
 				
-				if var4 == nil then
-					local var5, var6 = signalsModule.createSignal(false)
-					var4 = { getIsPending = var5, setIsPending = var6 }
-					t[placeId] = var4
+				if Entry == nil then
+					local Signal, Signal2 = SignalsModule.createSignal(false)
+					Entry = { getIsPending = Signal, setIsPending = Signal2 }
+					t[PlaceId] = Entry
 				end
-				var4.setIsPending(false)
-				var3.reject("agent_rollback_start_failed")
+				Entry.setIsPending(false)
+				v2.reject("agent_rollback_start_failed")
 			end
-			var2 = nil
+			return true
+		end,
+		cancelRequestForPlaceId = function(PlaceId): boolean --[[ Line: 219 ]]
+			-- upvalues: v1 (ref), t (copy), SignalsModule (upval)
+			local v2 = v1
+			
+			if v2 == nil or v2.target.placeId ~= PlaceId then
+				return false
+			end
+			if v1 == v2 then
+				v1 = nil
+				local PlaceId1 = v2.target.placeId
+				local Entry = t[PlaceId1]
+				
+				if Entry == nil then
+					local Signal, Signal2 = SignalsModule.createSignal(false)
+					Entry = { getIsPending = Signal, setIsPending = Signal2 }
+					t[PlaceId1] = Entry
+				end
+				Entry.setIsPending(false)
+				v2.reject("agent_rollback_cancelled")
+			end
+			return true
+		end,
+		request = function(p1, p2) --[[ Line: 228 ]]
+			-- upvalues: beginRequest (copy), setRequestData (copy)
+			local BeginRequestResult, BeginRequestResult2 = beginRequest(p1)
+			
+			if BeginRequestResult ~= nil then
+				setRequestData(BeginRequestResult, p2)
+			end
+			return BeginRequestResult2
+		end,
+		reset = function() --[[ Line: 236 ]]
+			-- upvalues: v1 (ref), t (copy), SignalsModule (upval), Config (ref)
+			local v2 = v1
+			
+			if v2 ~= nil and v1 == v2 then
+				v1 = nil
+				local PlaceId = v2.target.placeId
+				local Entry = t[PlaceId]
+				
+				if Entry == nil then
+					local Signal, Signal2 = SignalsModule.createSignal(false)
+					Entry = { getIsPending = Signal, setIsPending = Signal2 }
+					t[PlaceId] = Entry
+				end
+				Entry.setIsPending(false)
+				v2.reject("agent_rollback_start_failed")
+			end
+			Config = nil
 		end
 	}
 end

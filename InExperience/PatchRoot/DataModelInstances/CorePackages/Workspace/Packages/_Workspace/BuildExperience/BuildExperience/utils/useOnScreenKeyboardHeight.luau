@@ -1,29 +1,29 @@
-﻿local userInputService = game:GetService("UserInputService")
-local reactModule = require(script:FindFirstAncestor("BuildExperience").Parent.React)
+﻿local UserInputService = game:GetService("UserInputService")
+local ReactModule = require(script:FindFirstAncestor("BuildExperience").Parent.React)
 
-return function()
-	-- upvalues: userInputService (ref), reactModule (ref)
-	local var1, var2 = reactModule.useState(function()
-		-- upvalues: userInputService (copy)
-		return if userInputService.OnScreenKeyboardVisible then userInputService.OnScreenKeyboardSize.Y else 0
+return function() --[[ Line: 8 | Named "useOnScreenKeyboardHeight" ]]
+	-- upvalues: UserInputService (copy), ReactModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(function() --[[ Line: 9 | Named "read" ]]
+		-- upvalues: UserInputService (upval)
+		return if UserInputService.OnScreenKeyboardVisible then UserInputService.OnScreenKeyboardSize.Y else 0
 	end)
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), userInputService (copy)
-		local function update()
-			-- upvalues: var2 (copy), userInputService (copy)
-			var2(if userInputService.OnScreenKeyboardVisible then userInputService.OnScreenKeyboardSize.Y else 0)
+	ReactModule.useEffect(function() --[[ Line: 18 ]]
+		-- upvalues: UseStateResult2 (copy), UserInputService (upval)
+		local function update() --[[ Line: 19 ]]
+			-- upvalues: UseStateResult2 (upval), UserInputService (upval)
+			UseStateResult2(if UserInputService.OnScreenKeyboardVisible then UserInputService.OnScreenKeyboardSize.Y else 0)
 		end
 		
-		local var3 = userInputService:GetPropertyChangedSignal("OnScreenKeyboardVisible"):Connect(update)
-		local var4 = userInputService:GetPropertyChangedSignal("OnScreenKeyboardSize"):Connect(update)
-		var2(if userInputService.OnScreenKeyboardVisible then userInputService.OnScreenKeyboardSize.Y else 0)
+		local Connection = UserInputService:GetPropertyChangedSignal("OnScreenKeyboardVisible"):Connect(update)
+		local Connection1 = UserInputService:GetPropertyChangedSignal("OnScreenKeyboardSize"):Connect(update)
+		UseStateResult2(if UserInputService.OnScreenKeyboardVisible then UserInputService.OnScreenKeyboardSize.Y else 0)
 		
-		return function()
-			-- upvalues: var3 (ref), var4 (ref)
-			var3:Disconnect()
-			var4:Disconnect()
+		return function() --[[ Line: 27 ]]
+			-- upvalues: Connection (copy), Connection1 (copy)
+			Connection:Disconnect()
+			Connection1:Disconnect()
 		end
 	end, {})
 	
-	return var1
+	return UseStateResult
 end

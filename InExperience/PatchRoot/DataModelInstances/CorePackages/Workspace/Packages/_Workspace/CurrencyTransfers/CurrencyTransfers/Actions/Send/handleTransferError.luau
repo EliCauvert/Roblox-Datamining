@@ -1,17 +1,17 @@
-﻿local currencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
-local _ = require(currencyTransfers.Stores.createTransferStore)
-local promptStateModule = require(currencyTransfers.Enums.PromptState)
-local _ = require(currencyTransfers.Models.ErrorTransferModel)
+﻿local CurrencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
+local _ = require(CurrencyTransfers.Stores.createTransferStore)
+local PromptStateModule = require(CurrencyTransfers.Enums.PromptState)
+local _ = require(CurrencyTransfers.Models.ErrorTransferModel)
 
-return function(p1, p2)
-	-- upvalues: promptStateModule (ref)
-	local setPromptState = p1.setPromptState
-	local setErrorTransferModel = p1.setErrorTransferModel
+return function(p1, p2) --[[ Line: 10 | Named "handleTransferError" ]]
+	-- upvalues: PromptStateModule (copy)
+	local SetPromptStateFunction: (any) -> () = p1.setPromptState
+	local SetErrorTransferModelFunction: (any) -> () = p1.setErrorTransferModel
 	
 	if p2 then
-		setErrorTransferModel(p2)
+		SetErrorTransferModelFunction(p2)
 	else
-		setErrorTransferModel(nil)
+		SetErrorTransferModelFunction(nil)
 	end
-	setPromptState(promptStateModule.TransferError)
+	SetPromptStateFunction(PromptStateModule.TransferError)
 end

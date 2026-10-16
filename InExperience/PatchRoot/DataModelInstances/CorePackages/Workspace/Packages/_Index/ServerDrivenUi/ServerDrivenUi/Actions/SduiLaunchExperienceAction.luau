@@ -1,55 +1,56 @@
-﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
-local cryoModule = require(parent.Cryo)
-local launchGame = require(parent.GameLaunch).LaunchGame
-local fFlagDeferInExperienceRbxmDownload = require(parent.SharedFlags).FFlagDeferInExperienceRbxmDownload
-local fFlagLuaAppFixLaunchGameSourceParam = require(parent.SharedFlags).FFlagLuaAppFixLaunchGameSourceParam
-local sduiReportGamePlayIntent = require(parent.SduiSharedContent).sduiReportGamePlayIntent
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
-local launchExperience = sduiCoreSystemModule.SduiActionType.LaunchExperience
+﻿local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
+local CryoModule = require(Parent.Cryo)
+local LaunchGameFunction = require(Parent.GameLaunch).LaunchGame
+local FFlagDeferInExperienceRbxmDownload = require(Parent.SharedFlags).FFlagDeferInExperienceRbxmDownload
+local FFlagLuaAppFixLaunchGameSourceParam = require(Parent.SharedFlags).FFlagLuaAppFixLaunchGameSourceParam
+local SduiReportGamePlayIntentFunction = require(Parent.SduiSharedContent).sduiReportGamePlayIntent
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
+local LaunchExperience = SduiCoreSystemModule.SduiActionType.LaunchExperience
 
-return function(p1, p2, p3, _)
-	-- upvalues: sduiErrorType (ref), launchExperience (ref), fFlagDeferInExperienceRbxmDownload (ref), cryoModule (ref), sduiReportGamePlayIntent (ref), fFlagLuaAppFixLaunchGameSourceParam (ref), launchGame (ref)
-	local var1 = if p1 then p1.actionParams else nil
+return function(p1, AnalyticsContext, SduiContext, _) --[[ Line: 32 ]]
+	-- upvalues: SduiErrorType (copy), LaunchExperience (copy), FFlagDeferInExperienceRbxmDownload (copy), CryoModule (copy), SduiReportGamePlayIntentFunction (copy), FFlagLuaAppFixLaunchGameSourceParam (copy), LaunchGameFunction (copy)
+	local ActionParams = p1 and p1.actionParams or nil
 	
-	if var1 == nil then
-		p3.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if ActionParams == nil then
+		SduiContext.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			message = "Missing actionParams",
-			name = launchExperience
-		}, p3.appPage)
+			name = LaunchExperience
+		}, SduiContext.appPage)
 		
 		return
 	end
-	assert(var1, "actionParams must exist")
-	local placeId = var1.placeId
+	assert(ActionParams, "actionParams must exist")
+	local PlaceId = ActionParams.placeId
 	
-	if placeId == nil then
-		p3.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if PlaceId == nil then
+		SduiContext.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			message = "Missing placeId",
 			propName = "placeId",
-			name = launchExperience
-		}, p3.appPage)
+			name = LaunchExperience
+		}, SduiContext.appPage)
 		
 		return
 	end
-	local universeId = var1.universeId
-	local launchSource = var1.launchSource
-	local experienceJoinData = var1.experienceJoinData
+	local UniverseId = ActionParams.universeId
+	local LaunchSource = ActionParams.launchSource
+	local ExperienceJoinData = ActionParams.experienceJoinData
 	
-	if fFlagDeferInExperienceRbxmDownload then
-		experienceJoinData = cryoModule.Dictionary.join(experienceJoinData or {}, { universeId = universeId })
+	if FFlagDeferInExperienceRbxmDownload then
+		ExperienceJoinData = CryoModule.Dictionary.join(ExperienceJoinData or {}, { universeId = UniverseId })
 	end
-	sduiReportGamePlayIntent({
-		sduiContext = p3,
-		analyticsContext = p2,
-		universeId = tostring(universeId or ""),
-		placeId = placeId
+	SduiReportGamePlayIntentFunction({
+		sduiContext = SduiContext,
+		analyticsContext = AnalyticsContext,
+		universeId = tostring(UniverseId or ""),
+		placeId = PlaceId
 	})
 	
-	if fFlagLuaAppFixLaunchGameSourceParam then
-		launchGame(placeId, nil, experienceJoinData, nil, launchSource)
+	if FFlagLuaAppFixLaunchGameSourceParam then
+		LaunchGameFunction(PlaceId, nil, ExperienceJoinData, nil, LaunchSource)
 		
 		return
+	else
+		LaunchGameFunction(PlaceId, LaunchSource, ExperienceJoinData, nil)
 	end
-	launchGame(placeId, launchSource, experienceJoinData, nil)
 end

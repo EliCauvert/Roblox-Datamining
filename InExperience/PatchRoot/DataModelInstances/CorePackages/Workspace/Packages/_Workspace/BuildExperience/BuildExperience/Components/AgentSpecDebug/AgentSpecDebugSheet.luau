@@ -1,32 +1,32 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local creatorAgentChatModule = require(parent.DataHydration.CreatorAgentChat)
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local var1 = if require(buildExperience.Flags.FFlagBuildExperienceUseFoundationSheet) then foundationModule.Sheet else require(buildExperience.FoundationFork.Sheet)
-local button = foundationModule.Button
-local divider = foundationModule.Divider
-local icon = foundationModule.Icon
-local loading = foundationModule.Loading
-local radioGroup = foundationModule.RadioGroup
-local text = foundationModule.Text
-local textInput = foundationModule.TextInput
-local view = foundationModule.View
-local iconName = foundationModule.Enums.IconName
-local iconSize = foundationModule.Enums.IconSize
-local inputSize = foundationModule.Enums.InputSize
-local var2 = signalsModule.createComputed(function()
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local CreatorAgentChatModule = require(Parent.DataHydration.CreatorAgentChat)
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
+local Sheet = if require(BuildExperience.Flags.FFlagBuildExperienceUseFoundationSheet) then FoundationModule.Sheet else require(BuildExperience.FoundationFork.Sheet)
+local Button = FoundationModule.Button
+local Divider = FoundationModule.Divider
+local Icon = FoundationModule.Icon
+local Loading = FoundationModule.Loading
+local RadioGroup = FoundationModule.RadioGroup
+local Text = FoundationModule.Text
+local TextInput = FoundationModule.TextInput
+local View = FoundationModule.View
+local IconName = FoundationModule.Enums.IconName
+local IconSize = FoundationModule.Enums.IconSize
+local InputSize = FoundationModule.Enums.InputSize
+local Computed = SignalsModule.createComputed(function(): string --[[ Line: 47 ]]
 	return "NotReady"
 end)
-local var3 = signalsModule.createComputed(function()
+local Computed1 = SignalsModule.createComputed(function() --[[ Line: 50 ]]
 	return nil
 end)
 
-local function getRows(p1)
-	-- upvalues: creatorAgentChatModule (ref)
-	local list = {
+local function getRows(UseSignalStateResult) --[[ Line: 54 ]]
+	-- upvalues: CreatorAgentChatModule (copy)
+	local List = {
 		{
 			value = "default",
 			title = "Default (latest)",
@@ -36,182 +36,184 @@ local function getRows(p1)
 		}
 	}
 	
-	if p1 ~= nil then
+	if UseSignalStateResult ~= nil then
 		local t = {}
-		local t_1 = {}
-		local t_2 = {}
+		local t1 = {}
+		local t2 = {}
 		
-		for i, v in p1.items do
-			local var4 = if v.pinned == creatorAgentChatModule.PreviewSpecs.PreviewSpecPinned.Hash then `pr-{v.prNumber}-hash` else `pr-{v.prNumber}`
+		for _, item in UseSignalStateResult.items do
+			local IsPinnedMatch = item.pinned == CreatorAgentChatModule.PreviewSpecs.PreviewSpecPinned.Hash
+			local HashName: string = if IsPinnedMatch then `pr-{item.prNumber}-hash` else `pr-{item.prNumber}`
 			
-			if not t_2[var4] then
-				t_2[var4] = true
-				table.insert(if v.pinned ~= nil then t_1 else t, {
-					value = var4,
-					title = if v.title ~= "" then `PR #{v.prNumber}` else v.title,
-					description = `#{v.prNumber} \194\183 {v.override}`,
-					override = v.override,
-					isPinned = v.pinned ~= nil
+			if not t2[HashName] then
+				t2[HashName] = true
+				table.insert(if item.pinned == nil then t1 else t, {
+					value = HashName,
+					title = if item.title == "" then `PR #{item.prNumber}` else item.title,
+					description = `#{item.prNumber} · {item.override}`,
+					override = item.override,
+					isPinned = item.pinned ~= nil
 				})
 			end
 		end
-		for i_1, v_1 in t do
-			table.insert(list, v_1)
+		for _, value in t do
+			table.insert(List, value)
 		end
-		for i_2, v_2 in t_1 do
-			if i_2 > 25 then break end
-			table.insert(list, v_2)
+		for i, value1 in t1 do
+			if i > 25 then break end
+			table.insert(List, value1)
 		end
 	end
-	return list
+	return List
 end
 
-local function getSelectedValue(p2, p3, p4)
-	-- upvalues: creatorAgentChatModule (ref)
-	if creatorAgentChatModule.experimentOverride.normalize(p3) == "" then
+local function getSelectedValue(UseMemoResult, Override, p1) --[[ Line: 95 ]]
+	-- upvalues: CreatorAgentChatModule (copy)
+	if CreatorAgentChatModule.experimentOverride.normalize(Override) == "" then
 		return "default"
 	end
-	local var5 = ""
+	local v1 = ""
 	
-	for i, v in p2 do
-		if v.value ~= "default" and v.override == p3 and (var5 == "" or v.value == p4) then
-			var5 = v.value
+	for _, value in UseMemoResult do
+		if value.value ~= "default" and value.override == Override and (v1 == "" or value.value == p1) then
+			v1 = value.value
 		end
 	end
-	return var5
+	return v1
 end
 
-return function(p5)
-	-- upvalues: foundationModule (ref), reactModule (ref), creatorAgentChatModule (ref), signalsReactModule (ref), var2 (ref), var3 (ref), getRows (ref), view (ref), text (ref), icon (ref), iconName (ref), iconSize (ref), radioGroup (ref), inputSize (ref), divider (ref), getSelectedValue (ref), loading (ref), var1 (ref), textInput (ref), button (ref)
-	local var6
-	local var7 = foundationModule.Hooks.useTokens()
-	local var8, var9 = reactModule.useState(p5.specVersion or "")
-	local var10, var11 = reactModule.useState(nil)
-	reactModule.useEffect(function()
-		-- upvalues: var11 (ref), creatorAgentChatModule (copy)
-		var11(creatorAgentChatModule.PreviewSpecs.getPreviewSpecsStore(false).refreshPreviewSpecs())
+return function(p2) --[[ Line: 112 | Named "AgentSpecDebugSheet" ]]
+	-- upvalues: FoundationModule (copy), ReactModule (copy), CreatorAgentChatModule (copy), SignalsReactModule (copy), Computed (copy), Computed1 (copy), getRows (copy), View (copy), Text (copy), Icon (copy), IconName (copy), IconSize (copy), RadioGroup (copy), InputSize (copy), Divider (copy), getSelectedValue (copy), Loading (copy), Sheet (copy), TextInput (copy), Button (copy)
+	local UseTokensResult = FoundationModule.Hooks.useTokens()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(p2.specVersion or "")
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
+	ReactModule.useEffect(function() --[[ Line: 119 ]]
+		-- upvalues: UseStateResult2_1 (copy), CreatorAgentChatModule (upval)
+		UseStateResult2_1(CreatorAgentChatModule.PreviewSpecs.getPreviewSpecsStore(false).refreshPreviewSpecs())
 	end, {})
-	local var12 = signalsReactModule.useSignalState(if var10 ~= nil then var2 else var10.status)
-	local var13 = signalsReactModule.useSignalState(if var10 ~= nil then var3 else var10.data)
-	local var14 = reactModule.useMemo(function()
-		-- upvalues: getRows (copy), var13 (ref)
-		return getRows(var13)
-	end, { var13 })
-	local var15, var16 = reactModule.useState(nil)
-	local var17 = reactModule.useCallback(function(p6)
-		-- upvalues: var14 (ref), var9 (ref), var16 (ref)
-		for i, v in var14 do
-			if v.value == p6 then
-				var9(v.override)
-				var16(p6)
-				
-				return
+	local UseSignalStateResult = SignalsReactModule.useSignalState(if UseStateResult1 == nil then Computed else UseStateResult1.status)
+	local UseSignalStateResult1 = SignalsReactModule.useSignalState(if UseStateResult1 == nil then Computed1 else UseStateResult1.data)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 125 ]]
+		-- upvalues: getRows (upval), UseSignalStateResult1 (copy)
+		return (getRows(UseSignalStateResult1))
+	end, { UseSignalStateResult1 })
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(nil)
+	local UseResult = ReactModule.useCallback(function(p3) --[[ Line: 130 ]]
+		-- upvalues: UseMemoResult (copy), UseStateResult2 (copy), UseStateResult2_2 (copy)
+		for _, value in UseMemoResult do
+			if value.value == p3 then
+				UseStateResult2(value.override)
+				UseStateResult2_2(p3)
+				break
 			end
 		end
-	end, { var14 })
-	local _ = nil
+	end, { UseMemoResult })
+	local Element = nil
 	
-	if var12 == "Ready" then
-		local ceiled = math.ceil(var7.Typography.TitleMedium.FontSize * var7.Typography.TitleMedium.LineHeight)
-		local t = {}
+	if UseSignalStateResult == "Ready" then
+		local Ceiled = math.ceil(UseTokensResult.Typography.TitleMedium.FontSize * UseTokensResult.Typography.TitleMedium.LineHeight)
+		local Elements = {}
 		
-		for i, v in var14 do
-			t[v.value] = reactModule.createElement(view, { tag = "col size-full-0 auto-y", LayoutOrder = i }, {
-				Row = reactModule.createElement(view, {
+		for LayoutOrder, value in UseMemoResult do
+			Elements[value.value] = ReactModule.createElement(View, {
+				tag = "col size-full-0 auto-y",
+				LayoutOrder = LayoutOrder
+			}, {
+				Row = ReactModule.createElement(View, {
 					LayoutOrder = 1,
 					tag = "row align-y-center gap-medium size-full-0 auto-y padding-y-small",
-					onActivated = function()
-						-- upvalues: var17 (ref), v (ref)
-						var17(v.value)
+					onActivated = function() --[[ Line: 155 ]]
+						-- upvalues: UseResult (copy), value (copy)
+						UseResult(value.value)
 					end
 				}, {
-					Text = reactModule.createElement(view, { LayoutOrder = 1, tag = "col fill gap-xsmall auto-y" }, {
-						TitleRow = reactModule.createElement(view, {
+					Text = ReactModule.createElement(View, { LayoutOrder = 1, tag = "col fill gap-xsmall auto-y" }, {
+						TitleRow = ReactModule.createElement(View, {
 							LayoutOrder = 1,
 							tag = "row align-y-top gap-xsmall size-full-0 auto-y"
 						}, {
-							Title = reactModule.createElement(text, {
+							Title = ReactModule.createElement(Text, {
 								LayoutOrder = 2,
 								tag = "auto-xy text-title-medium text-wrap text-align-x-left content-emphasis",
-								Text = v.title
+								Text = value.title
 							}),
-							Pin = if v.isPinned then reactModule.createElement(view, {
+							Pin = if value.isPinned then ReactModule.createElement(View, {
 								LayoutOrder = 1,
 								tag = "row align-y-center auto-x",
-								Size = UDim2.fromOffset(0, ceiled)
+								Size = UDim2.fromOffset(0, Ceiled)
 							}, {
-								Icon = reactModule.createElement(icon, { name = iconName.Pin, size = iconSize.XSmall })
+								Icon = ReactModule.createElement(Icon, { name = IconName.Pin, size = IconSize.XSmall })
 							}) else nil
 						}),
-						Description = if v.description then reactModule.createElement(text, {
+						Description = if value.description then ReactModule.createElement(Text, {
 							LayoutOrder = 2,
 							tag = "auto-xy text-body-medium text-wrap text-align-x-left",
-							Text = v.description
+							Text = value.description
 						}) else nil
 					}),
-					Radio = reactModule.createElement(radioGroup.Item, {
+					Radio = ReactModule.createElement(RadioGroup.Item, {
 						LayoutOrder = 2,
 						label = "",
-						size = inputSize.Medium,
-						value = v.value
+						size = InputSize.Medium,
+						value = value.value
 					})
 				}),
-				Divider = if i < #var14 then reactModule.createElement(divider, { LayoutOrder = 2 }) else nil
+				Divider = if LayoutOrder < #UseMemoResult then ReactModule.createElement(Divider, { LayoutOrder = 2 }) else nil
 			})
 		end
-		var6 = reactModule.createElement(radioGroup.Root, {
+		Element = ReactModule.createElement(RadioGroup.Root, {
 			Selectable = false,
 			tag = "size-full-0 auto-y",
-			onValueChanged = var17,
-			value = getSelectedValue(var14, var8, var15)
+			onValueChanged = UseResult,
+			value = getSelectedValue(UseMemoResult, UseStateResult, UseStateResult3)
 		}, {
-			Rows = reactModule.createElement(view, { tag = "col size-full-0 auto-y" }, t)
+			Rows = ReactModule.createElement(View, { tag = "col size-full-0 auto-y" }, Elements)
 		})
 	else
-		var6 = if var12 == "Failed" then reactModule.createElement(text, {
+		Element = if UseSignalStateResult == "Failed" then ReactModule.createElement(Text, {
 			Text = "Preview list unavailable",
 			tag = "size-full-0 auto-y text-body-small text-align-x-left content-muted"
-		}) else reactModule.createElement(view, { tag = "row align-y-center gap-small size-full-0 auto-y" }, {
-			Spinner = reactModule.createElement(loading, { LayoutOrder = 1, size = iconSize.Small }),
-			Label = reactModule.createElement(text, {
+		}) else ReactModule.createElement(View, { tag = "row align-y-center gap-small size-full-0 auto-y" }, {
+			Spinner = ReactModule.createElement(Loading, { LayoutOrder = 1, size = IconSize.Small }),
+			Label = ReactModule.createElement(Text, {
 				LayoutOrder = 2,
 				Text = "Loading previews",
 				tag = "auto-xy text-body-medium"
 			})
 		})
 	end
-	return reactModule.createElement(var1.Root, {
+	return ReactModule.createElement(Sheet.Root, {
 		isOpen = true,
 		preferCenterSheet = true,
-		onClose = p5.onClose
+		onClose = p2.onClose
 	}, {
-		Header = reactModule.createElement(var1.Header, { hasCloseAffordance = true }, {
-			Title = reactModule.createElement(text, {
+		Header = ReactModule.createElement(Sheet.Header, { hasCloseAffordance = true }, {
+			Title = ReactModule.createElement(Text, {
 				Text = "Agent Spec",
 				tag = "auto-xy text-heading-small content-emphasis"
 			})
 		}),
-		Content = reactModule.createElement(var1.Content, nil, { List = var6 }),
-		Actions = reactModule.createElement(var1.Actions, nil, {
-			Form = reactModule.createElement(view, { tag = "col gap-small size-full-0 auto-y" }, {
-				Input = reactModule.createElement(textInput, {
+		Content = ReactModule.createElement(Sheet.Content, nil, { List = Element }),
+		Actions = ReactModule.createElement(Sheet.Actions, nil, {
+			Form = ReactModule.createElement(View, { tag = "col gap-small size-full-0 auto-y" }, {
+				Input = ReactModule.createElement(TextInput, {
 					LayoutOrder = 1,
 					label = "specVersion",
 					placeholder = "Leave empty for latest",
-					text = var8,
+					text = UseStateResult,
 					width = UDim.new(1, 0),
-					onChanged = var9
+					onChanged = UseStateResult2
 				}),
-				Save = reactModule.createElement(button, {
+				Save = ReactModule.createElement(Button, {
 					LayoutOrder = 2,
 					text = "Save",
-					size = inputSize.Large,
-					variant = foundationModule.Enums.ButtonVariant.Emphasis,
+					size = InputSize.Large,
+					variant = FoundationModule.Enums.ButtonVariant.Emphasis,
 					width = UDim.new(1, 0),
-					onActivated = function()
-						-- upvalues: p5 (ref), var8 (ref)
-						p5.onSave(var8)
-						p5.onClose()
+					onActivated = function() --[[ Line: 269 ]]
+						-- upvalues: p2 (copy), UseStateResult (copy)
+						p2.onSave(UseStateResult)
+						p2.onClose()
 					end
 				})
 			})

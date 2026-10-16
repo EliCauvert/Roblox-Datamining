@@ -1,53 +1,54 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
-local _ = require(parent.MomentsTypes)
-local shallowEqual = require(parent.Dash).shallowEqual
-local commentCollectionTypesModule = require(moments.Components.Comments.GetCommentCollectionStore.CommentCollectionTypes)
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
+local _ = require(Parent.MomentsTypes)
+local ShallowEqualFunction = require(Parent.Dash).shallowEqual
+local CommentCollectionTypesModule = require(Moments.Components.Comments.GetCommentCollectionStore.CommentCollectionTypes)
 local _ = require(script.Parent.CommentRowTypes)
 
-local function reusePreviousRows(p1, p2)
-	-- upvalues: shallowEqual (ref)
+local function reusePreviousRows(List, List1) --[[ Line: 15 ]]
+	-- upvalues: ShallowEqualFunction (copy)
 	local t = {}
 	
-	for i, v in p1 do
-		t[v.key] = v
+	for _, value in List do
+		t[value.key] = value
 	end
-	local var1 = #p2 == #p1
-	
-	for i_1, v_1 in p2 do
-		local key = t[v_1.key]
+	local v1 = #List1 == #List
+	for i, value1 in List1 do
+		local Entry = t[value1.key]
 		
-		if key ~= nil and shallowEqual(key, v_1) then
-			p2[i_1] = key
+		if Entry ~= nil and ShallowEqualFunction(Entry, value1) then
+			List1[i] = Entry
 		end
-		var1 = var1 and p2[i_1] == p1[i_1]
+		v1 = v1 and List1[i] == List[i]
 	end
-	return if var1 then p1 else p2
+	return if v1 then List else List1
 end
 
-return function(p3, p4, p5, p6)
-	-- upvalues: commentCollectionTypesModule (ref), reusePreviousRows (ref)
-	local list = table.create(#p3.orderedCommentIds + (if p3.pendingSubmission ~= nil then 0 else 1))
-	local pendingSubmission = p3.pendingSubmission
+return function(p1, Callback, p2, p3) --[[ Line: 31 | Named "buildCommentRows" ]]
+	-- upvalues: CommentCollectionTypesModule (copy), reusePreviousRows (copy)
+	local Buffer = table.create(#p1.orderedCommentIds + (if p1.pendingSubmission == nil then 0 else 1))
+	local PendingSubmission = p1.pendingSubmission
 	
-	if pendingSubmission ~= nil then
-		table.insert(list, {
+	if PendingSubmission ~= nil then
+		table.insert(Buffer, {
 			type = "pending",
-			key = commentCollectionTypesModule.pendingSentinel(pendingSubmission.clientRequestId),
-			text = pendingSubmission.text,
-			status = pendingSubmission.status
+			key = CommentCollectionTypesModule.pendingSentinel(PendingSubmission.clientRequestId),
+			text = PendingSubmission.text,
+			status = PendingSubmission.status
 		})
 	end
-	for i, v in p3.orderedCommentIds do
-		if not commentCollectionTypesModule.isPendingSentinel(v) then
-			local var2 = p4(v)
-			local t = { type = "comment", key = `comment:{v}`, commentId = v }
-			local var3 = var2 == nil and ((if var2 == nil then var2.text else nil) or "")
-			t.text = var3
-			t.createdAt = if var2 ~= nil then "" else var2.createdAt
-			t.isExpanded = p6 ~= nil and p6[v] == true
-			table.insert(list, t)
+	for _, orderedCommentId in p1.orderedCommentIds do
+		if not CommentCollectionTypesModule.isPendingSentinel(orderedCommentId) then
+			local CallbackResult = Callback(orderedCommentId)
+			table.insert(Buffer, {
+				type = "comment",
+				key = `comment:{orderedCommentId}`,
+				commentId = orderedCommentId,
+				text = if CallbackResult == nil then "" else CallbackResult.text or "",
+				createdAt = if CallbackResult == nil then "" else CallbackResult.createdAt,
+				isExpanded = p3 ~= nil and p3[orderedCommentId] == true
+			})
 		end
 	end
-	return if p5 == nil then list else reusePreviousRows(p5, list)
+	return if p2 == nil then Buffer else reusePreviousRows(p2, Buffer)
 end

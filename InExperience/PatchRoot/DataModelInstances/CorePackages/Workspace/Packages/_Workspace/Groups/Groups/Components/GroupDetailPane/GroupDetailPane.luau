@@ -1,24 +1,23 @@
-﻿local parent = script:FindFirstAncestor("Groups").Parent
-local foundationModule = require(parent.Foundation)
-local _ = require(parent.Navigation)
-local reactModule = require(parent.React)
-local scrollBarVisibility = foundationModule.Enums.ScrollBarVisibility
-local scrollView = foundationModule.ScrollView
-local view = foundationModule.View
-local frozen = table.freeze({
+﻿local Parent = script:FindFirstAncestor("Groups").Parent
+local FoundationModule = require(Parent.Foundation)
+local _ = require(Parent.Navigation)
+local ReactModule = require(Parent.React)
+local ScrollView = FoundationModule.ScrollView
+local View = FoundationModule.View
+local Frozen = table.freeze({
 	AutomaticCanvasSize = Enum.AutomaticSize.Y,
 	CanvasSize = UDim2.fromScale(1, 0),
 	ScrollingDirection = Enum.ScrollingDirection.Y,
-	scrollBarVisibility = scrollBarVisibility.Auto
+	scrollBarVisibility = FoundationModule.Enums.ScrollBarVisibility.Auto
 })
 
-return function(_)
-	-- upvalues: reactModule (ref), scrollView (ref), frozen (ref), view (ref)
-	return reactModule.createElement(scrollView, {
+return function(_) --[[ Line: 25 | Named "GroupDetailPane" ]]
+	-- upvalues: ReactModule (copy), ScrollView (copy), Frozen (copy), View (copy)
+	return ReactModule.createElement(ScrollView, {
 		testId = "GroupDetailPane",
 		tag = "size-full clip bg-surface-0",
-		scroll = frozen
+		scroll = Frozen
 	}, {
-		Content = reactModule.createElement(view, { tag = "col size-full-0 auto-y" })
+		Content = ReactModule.createElement(View, { tag = "col size-full-0 auto-y" })
 	})
 end

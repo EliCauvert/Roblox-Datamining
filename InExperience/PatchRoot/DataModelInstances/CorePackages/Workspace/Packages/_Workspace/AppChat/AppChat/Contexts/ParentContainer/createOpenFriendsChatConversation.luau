@@ -1,87 +1,88 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local promiseModule = require(appChat.Parent.Promise)
-local chatSessionRefCountModule = require(appChat.Hooks.ChatSessionRefCount)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local PromiseModule = require(AppChat.Parent.Promise)
+local ChatSessionRefCountModule = require(AppChat.Hooks.ChatSessionRefCount)
 
-return function(p1)
-	-- upvalues: chatSessionRefCountModule (ref), promiseModule (ref)
-	local var1 = nil
-	local var2 = 0
+return function(p1) --[[ Line: 16 | Named "createOpenFriendsChatConversation" ]]
+	-- upvalues: ChatSessionRefCountModule (copy), PromiseModule (copy)
+	local v1 = nil
+	local Count = 0
 	
-	return function(p2)
-		-- upvalues: chatSessionRefCountModule (copy), var1 (write), var2 (write), promiseModule (copy), p1 (ref)
-		chatSessionRefCountModule.reserve()
+	return function(p2) --[[ Line: 23 ]]
+		-- upvalues: ChatSessionRefCountModule (upval), v1 (ref), Count (ref), PromiseModule (upval), p1 (copy)
+		ChatSessionRefCountModule.reserve()
 		
-		if var1 ~= nil then
-			var1:cancel()
+		if v1 ~= nil then
+			v1:cancel()
 		end
-		var2 += 1
-		local var3 = var2
-		local var4 = true
+		Count += 1
+		local Count1: number = Count
+		local Flag = true
 		
-		local function _()
-			-- upvalues: var4 (write), chatSessionRefCountModule (copy)
-			if var4 then
-				var4 = false
-				chatSessionRefCountModule.acquire()
-				chatSessionRefCountModule.release()
+		local function _() --[[ Line: 35 | Named "cancelReservation" ]]
+			-- upvalues: Flag (ref), ChatSessionRefCountModule (upval)
+			if Flag then
+				Flag = false
+				ChatSessionRefCountModule.acquire()
+				ChatSessionRefCountModule.release()
 				
 				return
 			end
 		end
 		
-		local var5 = promiseModule.resolve():andThen(function()
-			-- upvalues: p1 (copy), p2 (ref)
+		local Promise = PromiseModule.resolve():andThen(function() --[[ Line: 48 ]]
+			-- upvalues: p1 (upval), p2 (copy)
 			return if p1.isChatAvailable() then p1.openConversation(p2) else false
-		end):andThen(function(p3)
-			-- upvalues: p1 (copy)
-			return if p3 then p1.requestSelectFriendsTab() else false
-		end):andThen(function(p3)
-			-- upvalues: p1 (copy), var3 (ref), var2 (copy), var4 (write)
-			if p3 then
-				p1.ensureOpenChat(function()
-					-- upvalues: var3 (copy), var2 (copy)
-					return var3 == var2
+		end):andThen(function(Result) --[[ Line: 54 ]]
+			-- upvalues: p1 (upval)
+			return if Result then p1.requestSelectFriendsTab() else false
+		end):andThen(function(Result): boolean --[[ Line: 60 ]]
+			-- upvalues: p1 (upval), Count1 (copy), Count (upval), Flag (ref)
+			if Result then
+				p1.ensureOpenChat(function(): boolean --[[ Line: 64 ]]
+					-- upvalues: Count1 (upval), Count (upval)
+					return Count1 == Count
 				end)
-				var4 = false
+				Flag = false
 				
 				return true
+			else
+				return false
 			end
+		end):catch(function(): boolean --[[ Line: 70 ]]
 			return false
-		end):catch(function()
-			return false
-		end):andThen(function(p3)
-			-- upvalues: var4 (write), chatSessionRefCountModule (copy)
-			if not p3 then
-				if not var4 then
-					return p3
+		end):andThen(function(Result) --[[ Line: 73 ]]
+			-- upvalues: Flag (ref), ChatSessionRefCountModule (upval)
+			if not Result then
+				if not Flag then
+					return Result
 				end
-				var4 = false
-				chatSessionRefCountModule.acquire()
-				chatSessionRefCountModule.release()
+				Flag = false
+				ChatSessionRefCountModule.acquire()
+				ChatSessionRefCountModule.release()
 			end
-			return p3
+			return Result
 		end)
-		local var6 = promiseModule.new(function(p3, p4, p5)
-			-- upvalues: var4 (write), chatSessionRefCountModule (copy), var5 (ref)
-			p5(function()
-				-- upvalues: var4 (copy), chatSessionRefCountModule (copy), var5 (copy)
-				if var4 then
-					var4 = false
-					chatSessionRefCountModule.acquire()
-					chatSessionRefCountModule.release()
+		local NewPromise = PromiseModule.new(function(p3, p4, Callback: (any) -> ()) --[[ Line: 80 ]]
+			-- upvalues: Flag (ref), ChatSessionRefCountModule (upval), Promise (copy)
+			Callback(function() --[[ Line: 81 ]]
+				-- upvalues: Flag (upval), ChatSessionRefCountModule (upval), Promise (upval)
+				if Flag then
+					Flag = false
+					ChatSessionRefCountModule.acquire()
+					ChatSessionRefCountModule.release()
 				end
-				var5:cancel()
+				Promise:cancel()
 			end)
-			var5:andThen(p3, p4)
+			Promise:andThen(p3, p4)
 		end)
-		var5:finally(function()
-			-- upvalues: var5 (ref), promiseModule (copy), var6 (ref)
-			if var5:getStatus() == promiseModule.Status.Cancelled then
-				var6:cancel()
+		Promise:finally(function() --[[ Line: 87 ]]
+			-- upvalues: Promise (copy), PromiseModule (upval), NewPromise (copy)
+			if Promise:getStatus() == PromiseModule.Status.Cancelled then
+				NewPromise:cancel()
 			end
 		end)
-		var1 = var6
+		v1 = NewPromise
 		
-		return var6
+		return NewPromise
 	end
 end

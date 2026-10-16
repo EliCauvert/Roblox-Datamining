@@ -1,7 +1,7 @@
-﻿local robloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
+﻿local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
 
-if not robloxGui:FindFirstChild("Sounds") then
-	local sounds = Instance.new("Folder")
-	sounds.Name = "Sounds"
-	sounds.Parent = robloxGui
+if not RobloxGui:FindFirstChild("Sounds") then
+	local Sounds = Instance.new("Folder")
+	Sounds.Name = "Sounds"
+	Sounds.Parent = RobloxGui
 end

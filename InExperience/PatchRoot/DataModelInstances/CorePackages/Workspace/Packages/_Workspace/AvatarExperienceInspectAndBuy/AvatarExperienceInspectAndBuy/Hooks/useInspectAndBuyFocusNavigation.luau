@@ -1,96 +1,105 @@
-﻿local guiService = game:GetService("GuiService")
-local marketplaceService = game:GetService("MarketplaceService")
-local playersService = game:GetService("Players")
-local avatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
-local parent = avatarExperienceInspectAndBuy.Parent
-local reactModule = require(parent.React)
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-local _ = require(avatarExperienceInspectAndBuy.Types)
-local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
-local focusNavigableSurfaceRegistry = focusNavigationUtilsModule.FocusNavigableSurfaceRegistry
-local useRegisterFocusNavigableSurface = focusNavigableSurfaceRegistry.useRegisterFocusNavigableSurface
-local useDeRegisterFocusNavigableSurface = focusNavigableSurfaceRegistry.useDeRegisterFocusNavigableSurface
-local useRegistryEntry = focusNavigableSurfaceRegistry.useRegistryEntry
-local useAutoFocus = focusNavigationUtilsModule.useAutoFocus
-local useDescendantHasFocus = focusNavigationUtilsModule.useDescendantHasFocus
-local useLastInputMode = focusNavigationUtilsModule.useLastInputMode
+﻿local GuiService = game:GetService("GuiService")
+local MarketplaceService = game:GetService("MarketplaceService")
+local Players = game:GetService("Players")
+local AvatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
+local Parent = AvatarExperienceInspectAndBuy.Parent
+local ReactModule = require(Parent.React)
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
+local _ = require(AvatarExperienceInspectAndBuy.Types)
+local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
+local FocusNavigableSurfaceRegistry = FocusNavigationUtilsModule.FocusNavigableSurfaceRegistry
+local UseRegisterFocusNavigableSurfaceFunction = FocusNavigableSurfaceRegistry.useRegisterFocusNavigableSurface
+local UseDeRegisterFocusNavigableSurfaceFunction = FocusNavigableSurfaceRegistry.useDeRegisterFocusNavigableSurface
+local UseRegistryEntryFunction = FocusNavigableSurfaceRegistry.useRegistryEntry
+local UseAutoFocusFunction = FocusNavigationUtilsModule.useAutoFocus
+local UseDescendantHasFocusFunction = FocusNavigationUtilsModule.useDescendantHasFocus
+local UseLastInputModeFunction = FocusNavigationUtilsModule.useLastInputMode
 
-local function selectItemBeingPurchased(p1)
+local function selectItemBeingPurchased(p1) --[[ Line: 53 ]]
 	return p1.itemBeingPurchased
 end
 
-return function()
-	-- upvalues: reactModule (ref), useSelector (ref), selectItemBeingPurchased (ref), useRegisterFocusNavigableSurface (ref), useDeRegisterFocusNavigableSurface (ref), useAutoFocus (ref), useDescendantHasFocus (ref), useLastInputMode (ref), useRegistryEntry (ref), focusNavigableSurfaceIdentifierEnum (ref), marketplaceService (ref), playersService (ref), guiService (ref)
-	local var1, var2 = reactModule.useState(nil)
-	local var3, var4 = reactModule.useState(false)
-	local var5 = useSelector(selectItemBeingPurchased)
-	local var6 = var5 and var5.itemId ~= nil
-	local var7 = useRegisterFocusNavigableSurface()
-	local var8 = useDeRegisterFocusNavigableSurface()
-	local var9 = useAutoFocus({ var1 }, 0.1)
-	local var10 = useDescendantHasFocus(var1)
-	local isFocus = useLastInputMode() == "Focus"
-	local var11 = var6 or var3
-	local var12 = useRegistryEntry(focusNavigableSurfaceIdentifierEnum.PopUp) ~= nil or (useRegistryEntry(focusNavigableSurfaceIdentifierEnum.ContextualMenu) ~= nil or useRegistryEntry(focusNavigableSurfaceIdentifierEnum.ModerationOverlay) ~= nil)
-	reactModule.useEffect(function()
-		-- upvalues: marketplaceService (copy), playersService (copy), var4 (ref)
-		local promptBulkPurchaseRequestedConnection = marketplaceService.PromptBulkPurchaseRequested:Connect(function(p1)
-			-- upvalues: playersService (copy), var4 (copy)
-			if p1 == playersService.LocalPlayer then
-				var4(true)
+return function() --[[ Line: 57 | Named "useInspectAndBuyFocusNavigation" ]]
+	-- upvalues: ReactModule (copy), UseSelectorFunction (copy), selectItemBeingPurchased (copy), UseRegisterFocusNavigableSurfaceFunction (copy), UseDeRegisterFocusNavigableSurfaceFunction (copy), UseAutoFocusFunction (copy), UseDescendantHasFocusFunction (copy), UseLastInputModeFunction (copy), UseRegistryEntryFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), MarketplaceService (copy), Players (copy), GuiService (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
+	local UseSelectorResult = UseSelectorFunction(selectItemBeingPurchased)
+	local HasItemId: boolean = UseSelectorResult and UseSelectorResult.itemId ~= nil
+	local UseRegisterFocusNavigableSurfaceResult = UseRegisterFocusNavigableSurfaceFunction()
+	local UseDeRegisterFocusNavigableSurfaceResult = UseDeRegisterFocusNavigableSurfaceFunction()
+	local UseAutoFocusResult = UseAutoFocusFunction({ UseStateResult }, 0.1)
+	local UseDescendantHasFocusResult = UseDescendantHasFocusFunction(UseStateResult)
+	local IsFocus = UseLastInputModeFunction() == "Focus"
+	local HasItemId1 = HasItemId or UseStateResult1
+	local HasUseRegistryEntryResult = UseRegistryEntryFunction(FocusNavigableSurfaceIdentifierEnum.PopUp) ~= nil
+	local HasUseRegistryEntryResult1 = UseRegistryEntryFunction(FocusNavigableSurfaceIdentifierEnum.ContextualMenu) ~= nil
+	local HasUseRegistryEntryResult2 = UseRegistryEntryFunction(FocusNavigableSurfaceIdentifierEnum.ModerationOverlay) ~= nil
+	local HasUseRegistryEntryResult3: boolean = HasUseRegistryEntryResult or (HasUseRegistryEntryResult1 or HasUseRegistryEntryResult2)
+	ReactModule.useEffect(function() --[[ Line: 92 ]]
+		-- upvalues: MarketplaceService (upval), Players (upval), UseStateResult2_1 (copy)
+		local PromptBulkPurchaseRequestedConnection = MarketplaceService.PromptBulkPurchaseRequested:Connect(function(Player) --[[ Line: 93 ]]
+			-- upvalues: Players (upval), UseStateResult2_1 (upval)
+			if Player == Players.LocalPlayer then
+				UseStateResult2_1(true)
 			end
 		end)
-		local promptBulkPurchaseFinishedConnection = marketplaceService.PromptBulkPurchaseFinished:Connect(function(p1)
-			-- upvalues: playersService (copy), var4 (copy)
-			if p1 == playersService.LocalPlayer then
-				var4(false)
+		local PromptBulkPurchaseFinishedConnection = MarketplaceService.PromptBulkPurchaseFinished:Connect(function(Player) --[[ Line: 98 ]]
+			-- upvalues: Players (upval), UseStateResult2_1 (upval)
+			if Player == Players.LocalPlayer then
+				UseStateResult2_1(false)
 			end
 		end)
 		
-		return function()
-			-- upvalues: promptBulkPurchaseRequestedConnection (ref), promptBulkPurchaseFinishedConnection (ref)
-			promptBulkPurchaseRequestedConnection:Disconnect()
-			promptBulkPurchaseFinishedConnection:Disconnect()
+		return function() --[[ Line: 104 ]]
+			-- upvalues: PromptBulkPurchaseRequestedConnection (copy), PromptBulkPurchaseFinishedConnection (copy)
+			PromptBulkPurchaseRequestedConnection:Disconnect()
+			PromptBulkPurchaseFinishedConnection:Disconnect()
 		end
 	end, {})
-	reactModule.useEffect(function()
-		-- upvalues: var11 (ref), var8 (ref), focusNavigableSurfaceIdentifierEnum (copy), var1 (ref), guiService (copy), var7 (ref)
-		if var11 then
-			var8(focusNavigableSurfaceIdentifierEnum.CentralOverlay, var1)
-			guiService:RemoveSelectionGroup("InspectAndBuyApp")
+	ReactModule.useEffect(function() --[[ Line: 111 ]]
+		-- upvalues: HasItemId1 (copy), UseDeRegisterFocusNavigableSurfaceResult (copy), FocusNavigableSurfaceIdentifierEnum (upval), UseStateResult (copy), GuiService (upval), UseRegisterFocusNavigableSurfaceResult (copy)
+		if HasItemId1 then
+			UseDeRegisterFocusNavigableSurfaceResult(FocusNavigableSurfaceIdentifierEnum.CentralOverlay, UseStateResult)
+			GuiService:RemoveSelectionGroup("InspectAndBuyApp")
 			
-			return function() end
-		elseif var1 then
-			var7(focusNavigableSurfaceIdentifierEnum.CentralOverlay, var1)
-			guiService:AddSelectionParent("InspectAndBuyApp", var1)
+			return function() --[[ Line: 117 ]] end
+		end
+		if UseStateResult then
+			UseRegisterFocusNavigableSurfaceResult(FocusNavigableSurfaceIdentifierEnum.CentralOverlay, UseStateResult)
+			GuiService:AddSelectionParent("InspectAndBuyApp", UseStateResult)
 		else
-			var8(focusNavigableSurfaceIdentifierEnum.CentralOverlay, var1)
-			guiService:RemoveSelectionGroup("InspectAndBuyApp")
-			guiService.SelectedCoreObject = nil
+			UseDeRegisterFocusNavigableSurfaceResult(FocusNavigableSurfaceIdentifierEnum.CentralOverlay, UseStateResult)
+			GuiService:RemoveSelectionGroup("InspectAndBuyApp")
+			GuiService.SelectedCoreObject = nil
 		end
-		return function()
-			-- upvalues: var8 (copy), focusNavigableSurfaceIdentifierEnum (copy), var1 (copy), guiService (copy)
-			var8(focusNavigableSurfaceIdentifierEnum.CentralOverlay, var1)
-			guiService:RemoveSelectionGroup("InspectAndBuyApp")
-			guiService.SelectedCoreObject = nil
+		return function() --[[ Line: 129 ]]
+			-- upvalues: UseDeRegisterFocusNavigableSurfaceResult (upval), FocusNavigableSurfaceIdentifierEnum (upval), UseStateResult (upval), GuiService (upval)
+			UseDeRegisterFocusNavigableSurfaceResult(FocusNavigableSurfaceIdentifierEnum.CentralOverlay, UseStateResult)
+			GuiService:RemoveSelectionGroup("InspectAndBuyApp")
+			GuiService.SelectedCoreObject = nil
 		end
-	end, { var1, var11, var8, var7 })
-	local var13 = isFocus and (var1 and (not var10 and (not var11 and not var12)))
-	reactModule.useEffect(function()
-		-- upvalues: var13 (ref), var9 (ref)
-		local var14 = if var13 then var9() else nil
+	end, {
+		UseStateResult,
+		HasItemId1,
+		UseDeRegisterFocusNavigableSurfaceResult,
+		UseRegisterFocusNavigableSurfaceResult
+	})
+	local NoHasUseRegistryEntryResult3: boolean = IsFocus and (UseStateResult and (not UseDescendantHasFocusResult and (not HasItemId1 and not HasUseRegistryEntryResult3)))
+	ReactModule.useEffect(function() --[[ Line: 143 ]]
+		-- upvalues: NoHasUseRegistryEntryResult3 (copy), UseAutoFocusResult (copy)
+		local UseAutoFocusResultResult = if NoHasUseRegistryEntryResult3 then UseAutoFocusResult() else nil
 		
-		return function()
-			-- upvalues: var14 (write)
-			if var14 then
-				var14.cancel()
+		return function() --[[ Line: 148 ]]
+			-- upvalues: UseAutoFocusResultResult (ref)
+			if UseAutoFocusResultResult then
+				UseAutoFocusResultResult.cancel()
 			end
 		end
-	end, { var13, var9 })
+	end, { NoHasUseRegistryEntryResult3, UseAutoFocusResult })
 	
 	return {
-		setFocusRef = var2,
+		setFocusRef = UseStateResult2,
 		focusNavigationProps = {
 			SelectionGroup = true,
 			SelectionBehaviorDown = Enum.SelectionBehavior.Stop,

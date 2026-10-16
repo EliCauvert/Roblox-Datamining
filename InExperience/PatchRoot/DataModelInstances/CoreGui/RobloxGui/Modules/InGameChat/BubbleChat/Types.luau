@@ -1,75 +1,75 @@
-﻿local tModule = require(game:GetService("CorePackages").Packages.t)
-local t = {
-	IMessage = tModule.strictInterface({
-		id = tModule.string,
-		name = tModule.string,
-		text = tModule.string,
-		userId = tModule.string,
-		timestamp = tModule.number,
-		adornee = tModule.union(tModule.instanceIsA("BasePart"), tModule.instanceOf("Model"))
+﻿local TModule = require(game:GetService("CorePackages").Packages.t)
+local TypesModule = {
+	IMessage = TModule.strictInterface({
+		id = TModule.string,
+		name = TModule.string,
+		text = TModule.string,
+		userId = TModule.string,
+		timestamp = TModule.number,
+		adornee = TModule.union(TModule.instanceIsA("BasePart"), TModule.instanceOf("Model"))
 	}),
-	IMessageData = tModule.interface({
-		ID = tModule.number,
-		SpeakerUserId = tModule.number,
-		FromSpeaker = tModule.string,
-		Time = tModule.number,
-		Message = tModule.optional(tModule.string)
+	IMessageData = TModule.interface({
+		ID = TModule.number,
+		SpeakerUserId = TModule.number,
+		FromSpeaker = TModule.string,
+		Time = TModule.number,
+		Message = TModule.optional(TModule.string)
 	})
 }
-local t_1 = {
-	BubbleDuration = tModule.optional(tModule.number),
-	MaxBubbles = tModule.optional(tModule.number),
-	BackgroundColor3 = tModule.optional(tModule.Color3),
-	TextColor3 = tModule.optional(tModule.Color3),
-	TextSize = tModule.optional(tModule.number),
-	Font = tModule.optional(tModule.enum(Enum.Font)),
-	Transparency = tModule.optional(tModule.number),
-	CornerEnabled = tModule.optional(tModule.boolean),
-	CornerRadius = tModule.optional(tModule.UDim),
-	TailVisible = tModule.optional(tModule.boolean),
-	Padding = tModule.optional(tModule.number),
-	MaxWidth = tModule.optional(tModule.number),
-	BackgroundImage = tModule.optional(tModule.strictInterface({
-		Image = tModule.optional(tModule.string),
-		ImageColor3 = tModule.optional(tModule.Color3),
-		ImageRectOffset = tModule.optional(tModule.Vector2),
-		ImageRectSize = tModule.optional(tModule.Vector2),
-		ScaleType = tModule.optional(tModule.enum(Enum.ScaleType)),
-		SliceCenter = tModule.optional(tModule.Rect),
-		SliceScale = tModule.optional(tModule.number),
-		TileSize = tModule.optional(tModule.UDim2)
+local config = {
+	BubbleDuration = TModule.optional(TModule.number),
+	MaxBubbles = TModule.optional(TModule.number),
+	BackgroundColor3 = TModule.optional(TModule.Color3),
+	TextColor3 = TModule.optional(TModule.Color3),
+	TextSize = TModule.optional(TModule.number),
+	Font = TModule.optional(TModule.enum(Enum.Font)),
+	Transparency = TModule.optional(TModule.number),
+	CornerEnabled = TModule.optional(TModule.boolean),
+	CornerRadius = TModule.optional(TModule.UDim),
+	TailVisible = TModule.optional(TModule.boolean),
+	Padding = TModule.optional(TModule.number),
+	MaxWidth = TModule.optional(TModule.number),
+	BackgroundImage = TModule.optional(TModule.strictInterface({
+		Image = TModule.optional(TModule.string),
+		ImageColor3 = TModule.optional(TModule.Color3),
+		ImageRectOffset = TModule.optional(TModule.Vector2),
+		ImageRectSize = TModule.optional(TModule.Vector2),
+		ScaleType = TModule.optional(TModule.enum(Enum.ScaleType)),
+		SliceCenter = TModule.optional(TModule.Rect),
+		SliceScale = TModule.optional(TModule.number),
+		TileSize = TModule.optional(TModule.UDim2)
 	})),
-	BackgroundGradient = tModule.optional(tModule.strictInterface({
-		Enabled = tModule.optional(tModule.boolean),
-		Color = tModule.optional(tModule.ColorSequence),
-		Offset = tModule.optional(tModule.Vector2),
-		Rotation = tModule.optional(tModule.number),
-		Transparency = tModule.optional(tModule.NumberSequence)
+	BackgroundGradient = TModule.optional(TModule.strictInterface({
+		Enabled = TModule.optional(TModule.boolean),
+		Color = TModule.optional(TModule.ColorSequence),
+		Offset = TModule.optional(TModule.Vector2),
+		Rotation = TModule.optional(TModule.number),
+		Transparency = TModule.optional(TModule.NumberSequence)
 	})),
-	SizeAnimation = tModule.optional(tModule.strictInterface({
-		Enabled = tModule.optional(tModule.boolean),
-		SpringDampingRatio = tModule.optional(tModule.number),
-		SpringFrequency = tModule.optional(tModule.number)
+	SizeAnimation = TModule.optional(TModule.strictInterface({
+		Enabled = TModule.optional(TModule.boolean),
+		SpringDampingRatio = TModule.optional(TModule.number),
+		SpringFrequency = TModule.optional(TModule.number)
 	})),
-	TransparencyAnimation = tModule.optional(tModule.strictInterface({
-		Enabled = tModule.optional(tModule.boolean),
-		SpringDampingRatio = tModule.optional(tModule.number),
-		SpringFrequency = tModule.optional(tModule.number)
+	TransparencyAnimation = TModule.optional(TModule.strictInterface({
+		Enabled = TModule.optional(TModule.boolean),
+		SpringDampingRatio = TModule.optional(TModule.number),
+		SpringFrequency = TModule.optional(TModule.number)
 	})),
-	VerticalStudsOffset = tModule.optional(tModule.number),
-	LocalPlayerStudsOffset = tModule.optional(tModule.Vector3),
-	BubblesSpacing = tModule.optional(tModule.number),
-	MinimizeDistance = tModule.optional(tModule.number),
-	MaxDistance = tModule.optional(tModule.number),
-	AdorneeName = tModule.optional(tModule.string),
-	Voice = tModule.optional(tModule.strictInterface({ ShowIndicator = tModule.optional(tModule.boolean) }))
+	VerticalStudsOffset = TModule.optional(TModule.number),
+	LocalPlayerStudsOffset = TModule.optional(TModule.Vector3),
+	BubblesSpacing = TModule.optional(TModule.number),
+	MinimizeDistance = TModule.optional(TModule.number),
+	MaxDistance = TModule.optional(TModule.number),
+	AdorneeName = TModule.optional(TModule.string),
+	Voice = TModule.optional(TModule.strictInterface({ ShowIndicator = TModule.optional(TModule.boolean) }))
 }
-local t_2 = {}
+local t = {}
 
-for i, v in pairs(t_1) do
-	t_2[i] = v
+for i, value in pairs(config) do
+	t[i] = value
 end
-t_1.UserSpecificSettings = tModule.optional(tModule.map(tModule.string, tModule.strictInterface(t_2)))
-t.IChatSettings = tModule.strictInterface(t_1)
+config.UserSpecificSettings = TModule.optional(TModule.map(TModule.string, TModule.strictInterface(t)))
+TypesModule.IChatSettings = TModule.strictInterface(config)
 
-return t
+return TypesModule

@@ -1,9 +1,9 @@
-﻿local receiveUsersPresenceModule = require(script:FindFirstAncestor("UserLib").Utils.receiveUsersPresence)
+﻿local ReceiveUsersPresenceModule = require(script:FindFirstAncestor("UserLib").Utils.receiveUsersPresence)
 
-return function(p1)
-	-- upvalues: receiveUsersPresenceModule (ref)
-	return function(p2)
-		-- upvalues: receiveUsersPresenceModule (copy), p1 (ref)
-		receiveUsersPresenceModule(p1, p2)
+return function(p1) --[[ Line: 4 ]]
+	-- upvalues: ReceiveUsersPresenceModule (copy)
+	return function(p2) --[[ Line: 5 ]]
+		-- upvalues: ReceiveUsersPresenceModule (upval), p1 (copy)
+		ReceiveUsersPresenceModule(p1, p2)
 	end
 end

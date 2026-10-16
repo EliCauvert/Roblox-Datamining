@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("FixVP8143", false)
+﻿return (game:DefineFastFlag("FixVP8143", false))

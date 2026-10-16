@@ -1,23 +1,23 @@
-﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
-local reactModule = require(momentsCreation.Parent.React)
-local creationControllerContextModule = require(momentsCreation.CreationController.CreationControllerContext)
-local createCreationControllerModule = require(momentsCreation.CreationController.createCreationController)
-local getCreationFlowStoreModule = require(momentsCreation.Stores.GetCreationFlowStore)
-local _ = require(momentsCreation.Types.CreationFlowTypes)
+﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
+local ReactModule = require(MomentsCreation.Parent.React)
+local CreationControllerContextModule = require(MomentsCreation.CreationController.CreationControllerContext)
+local CreateCreationControllerModule = require(MomentsCreation.CreationController.createCreationController)
+local GetCreationFlowStoreModule = require(MomentsCreation.Stores.GetCreationFlowStore)
+local _ = require(MomentsCreation.Types.CreationFlowTypes)
 
-return function(startValue)
-	-- upvalues: reactModule (ref), createCreationControllerModule (ref), getCreationFlowStoreModule (ref), creationControllerContextModule (ref)
-	local host = startValue.host
-	local excludeGallery = startValue.excludeGallery
+return function(p1) --[[ Line: 24 | Named "CreationControllerProvider" ]]
+	-- upvalues: ReactModule (copy), CreateCreationControllerModule (copy), GetCreationFlowStoreModule (copy), CreationControllerContextModule (copy)
+	local Host = p1.host
+	local ExcludeGallery = p1.excludeGallery
 	
-	return reactModule.createElement(creationControllerContextModule.Provider, {
-		value = reactModule.useMemo(function()
-			-- upvalues: createCreationControllerModule (copy), getCreationFlowStoreModule (copy), host (ref), excludeGallery (ref)
-			return createCreationControllerModule({
-				store = getCreationFlowStoreModule(false),
-				host = host,
-				excludeGallery = excludeGallery
+	return ReactModule.createElement(CreationControllerContextModule.Provider, {
+		value = ReactModule.useMemo(function() --[[ Line: 28 ]]
+			-- upvalues: CreateCreationControllerModule (upval), GetCreationFlowStoreModule (upval), Host (copy), ExcludeGallery (copy)
+			return CreateCreationControllerModule({
+				store = GetCreationFlowStoreModule(false),
+				host = Host,
+				excludeGallery = ExcludeGallery
 			})
-		end, { host, excludeGallery })
-	}, startValue.children)
+		end, { Host, ExcludeGallery })
+	}, p1.children)
 end

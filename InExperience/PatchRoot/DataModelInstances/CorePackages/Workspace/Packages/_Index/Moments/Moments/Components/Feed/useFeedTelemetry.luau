@@ -1,116 +1,185 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
 local _ = require(script.Parent.FeedTypes)
-local fFlagMomentsFixRecommendationImpressionLifecycleModule = require(moments.Flags.FFlagMomentsFixRecommendationImpressionLifecycle)
+local NavigationDestinationTypeModule = require(Moments.Enums.NavigationDestinationType)
+local FFlagMomentsFixRecommendationImpressionLifecycleModule = require(Moments.Flags.FFlagMomentsFixRecommendationImpressionLifecycle)
+local FFlagMomentsNavigationEventModule = require(Moments.Flags.FFlagMomentsNavigationEvent)
+local HttpService = game:GetService("HttpService")
 
-return function(p1, p2)
-	-- upvalues: reactModule (ref), signalsModule (ref), fFlagMomentsFixRecommendationImpressionLifecycleModule (ref)
-	local active = p2.active
-	local var1 = reactModule.useRef(nil)
-	local var2 = reactModule.useRef(1)
-	local var3 = reactModule.useRef(0)
-	local var4 = reactModule.useRef(nil)
-	local var5 = reactModule.useRef(p2.telemetry)
-	var5.current = p2.telemetry
-	local var6 = reactModule.useRef(p2.recommendationSource)
-	var6.current = p2.recommendationSource
-	local var7 = reactModule.useRef(p2.getAttribution)
-	var7.current = p2.getAttribution
-	local var8 = reactModule.useRef(p2.onItemBecameActive)
-	var8.current = p2.onItemBecameActive
-	local var9 = reactModule.useRef(p2.onEndStateReached)
-	var9.current = p2.onEndStateReached
-	local var10 = reactModule.useRef(active)
-	var10.current = active
-	local var11 = reactModule.useCallback(function()
-		-- upvalues: var1 (ref), var3 (ref), var4 (ref), var5 (ref), var2 (ref), var6 (ref)
-		local current = var1.current
+local function _() --[[ Line: 93 | Named "mintViewId" ]]
+	-- upvalues: HttpService (copy)
+	return HttpService:GenerateGUID(false)
+end
+
+local _ = function(Current, LeftItemId, ToIndex) --[[ Line: 99 | Named "resolvePagerDestination" ]]
+	-- upvalues: NavigationDestinationTypeModule (copy)
+	return if Current == nil or LeftItemId == nil or Current.leftItemId ~= LeftItemId or Current.toIndex ~= ToIndex then NavigationDestinationTypeModule.Unknown else Current.destination
+end
+
+return function(p1, p2) --[[ Line: 113 | Named "useFeedTelemetry" ]]
+	-- upvalues: ReactModule (copy), FFlagMomentsNavigationEventModule (copy), NavigationDestinationTypeModule (copy), SignalsModule (copy), HttpService (copy), FFlagMomentsFixRecommendationImpressionLifecycleModule (copy)
+	local Active = p2.active
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(1)
+	local UseRefResult2 = ReactModule.useRef(0)
+	local UseRefResult3 = ReactModule.useRef(nil)
+	local UseRefResult4 = ReactModule.useRef(nil)
+	local UseRefResult5 = ReactModule.useRef(nil)
+	local UseRefResult6 = ReactModule.useRef(p2.telemetry)
+	UseRefResult6.current = p2.telemetry
+	local UseRefResult7 = ReactModule.useRef(p2.recommendationSource)
+	UseRefResult7.current = p2.recommendationSource
+	local UseRefResult8 = ReactModule.useRef(p2.getAttribution)
+	UseRefResult8.current = p2.getAttribution
+	local UseRefResult9 = ReactModule.useRef(p2.onItemBecameActive)
+	UseRefResult9.current = p2.onItemBecameActive
+	local UseRefResult10 = ReactModule.useRef(p2.onEndStateReached)
+	UseRefResult10.current = p2.onEndStateReached
+	local UseRefResult11 = ReactModule.useRef(p2.onViewEnded)
+	UseRefResult11.current = p2.onViewEnded
+	local UseRefResult12 = ReactModule.useRef(p2.inactiveDestination)
+	UseRefResult12.current = p2.inactiveDestination
+	local UseRefResult13 = ReactModule.useRef(Active)
+	UseRefResult13.current = Active
+	local UseResult = ReactModule.useCallback(function(p3) --[[ Line: 154 ]]
+		-- upvalues: UseRefResult (copy), UseRefResult2 (copy), UseRefResult3 (copy), UseRefResult4 (copy), UseRefResult6 (copy), UseRefResult1 (copy), UseRefResult7 (copy), UseRefResult11 (copy), FFlagMomentsNavigationEventModule (upval), NavigationDestinationTypeModule (upval)
+		local Current = UseRefResult.current
 		
-		if current == nil then return end
-		local current_1 = var3.current
-		
-		if var4.current ~= nil then
-			current_1 += os.clock() - var4.current
+		if Current == nil then
+			return nil
 		end
-		var1.current = nil
-		var4.current = nil
-		var3.current = 0
+		local Current1 = UseRefResult2.current
 		
-		if current_1 <= 0 then
-			return
+		if UseRefResult3.current ~= nil then
+			Current1 += os.clock() - UseRefResult3.current
 		end
-		var5.current.logView(current, {
-			durationSeconds = current_1,
-			itemPosition = var2.current,
-			recommendationSource = var6.current
+		local Current2 = UseRefResult4.current
+		UseRefResult.current = nil
+		UseRefResult3.current = nil
+		UseRefResult2.current = 0
+		UseRefResult4.current = nil
+		
+		if Current1 <= 0 then
+			return Current2
+		end
+		UseRefResult6.current.logView(Current, {
+			durationSeconds = Current1,
+			itemPosition = UseRefResult1.current,
+			recommendationSource = UseRefResult7.current
 		})
+		local CurrentFunction: (any, any) -> () = UseRefResult11.current
+		
+		if FFlagMomentsNavigationEventModule and Current2 ~= nil and CurrentFunction ~= nil then
+			CurrentFunction(Current, {
+				viewId = Current2,
+				durationSeconds = Current1,
+				itemPosition = UseRefResult1.current,
+				destination = p3 or NavigationDestinationTypeModule.Unknown
+			})
+		end
+		return Current2
 	end, {})
-	reactModule.useEffect(function()
-		-- upvalues: signalsModule (copy), p1 (ref), var11 (ref), var10 (ref), var9 (ref), var7 (ref), var1 (ref), var2 (ref), var3 (ref), var4 (ref), var8 (ref)
-		local var12 = signalsModule.createEffect(function(p3)
-			-- upvalues: p1 (copy), var11 (copy), var10 (copy), var9 (copy), var7 (copy), var1 (copy), var2 (copy), var3 (copy), var4 (copy), var8 (copy)
-			local currentItem = p1.getCurrentItem(p3)
-			var11()
+	ReactModule.useEffect(function() --[[ Line: 198 ]]
+		-- upvalues: SignalsModule (upval), p1 (copy), FFlagMomentsNavigationEventModule (upval), UseRefResult (copy), UseRefResult5 (copy), NavigationDestinationTypeModule (upval), UseResult (copy), UseRefResult13 (copy), UseRefResult10 (copy), UseRefResult8 (copy), UseRefResult1 (copy), UseRefResult2 (copy), UseRefResult4 (copy), HttpService (upval), UseRefResult3 (copy), UseRefResult9 (copy)
+		local Effect = SignalsModule.createEffect(function(p3) --[[ Line: 199 ]]
+			-- upvalues: p1 (upval), FFlagMomentsNavigationEventModule (upval), UseRefResult (upval), UseRefResult5 (upval), NavigationDestinationTypeModule (upval), UseResult (upval), UseRefResult13 (upval), UseRefResult10 (upval), UseRefResult8 (upval), UseRefResult1 (upval), UseRefResult2 (upval), UseRefResult4 (upval), HttpService (upval), UseRefResult3 (upval), UseRefResult9 (upval)
+			local CurrentItem = p1.getCurrentItem(p3)
+			local Unknown = nil
 			
-			if currentItem == nil then return end
-			if currentItem.kind == "endState" and var10.current and var9.current then
-				var9.current(p1.getCurrentIndex(false))
+			if FFlagMomentsNavigationEventModule then
+				local Current = UseRefResult.current
+				local Current1 = UseRefResult5.current
+				local ItemId = if Current == nil then nil else Current.itemId
+				local CurrentIndex = p1.getCurrentIndex(false)
+				Unknown = if Current1 == nil or ItemId == nil or Current1.leftItemId ~= ItemId or Current1.toIndex ~= CurrentIndex then NavigationDestinationTypeModule.Unknown else Current1.destination
+				UseRefResult5.current = nil
 			end
-			local var13 = var7.current(currentItem)
+			UseResult(Unknown)
 			
-			if var13 == nil then return end
-			var1.current = var13
-			var2.current = p1.getCurrentIndex(false)
-			var3.current = 0
-			var4.current = if var10.current then os.clock() else nil
+			if CurrentItem == nil then return end
+			if CurrentItem.kind == "endState" and UseRefResult13.current and UseRefResult10.current then
+				UseRefResult10.current(p1.getCurrentIndex(false))
+			end
+			local CurrentResult = UseRefResult8.current(CurrentItem)
 			
-			if var10.current and var8.current then
-				var8.current(currentItem)
+			if CurrentResult == nil then return end
+			UseRefResult.current = CurrentResult
+			UseRefResult1.current = p1.getCurrentIndex(false)
+			UseRefResult2.current = 0
+			UseRefResult4.current = if FFlagMomentsNavigationEventModule then HttpService:GenerateGUID(false) else nil
+			UseRefResult3.current = if UseRefResult13.current then os.clock() else nil
+			
+			if UseRefResult13.current and UseRefResult9.current then
+				UseRefResult9.current(CurrentItem)
 			end
 		end)
 		
-		return function()
-			-- upvalues: var12 (ref), var11 (copy)
-			var12()
-			var11()
+		return function() --[[ Line: 241 ]]
+			-- upvalues: Effect (copy), UseResult (upval)
+			Effect()
+			UseResult()
 		end
-	end, { p1, var11 })
-	reactModule.useEffect(function()
-		-- upvalues: active (ref), fFlagMomentsFixRecommendationImpressionLifecycleModule (copy), var1 (ref), p1 (ref), var7 (ref), var2 (ref), var3 (ref), var4 (ref), var11 (ref)
-		if active then
-			if fFlagMomentsFixRecommendationImpressionLifecycleModule and var1.current == nil then
-				local currentItem = p1.getCurrentItem(false)
+	end, { p1, UseResult })
+	ReactModule.useEffect(function() --[[ Line: 252 ]]
+		-- upvalues: Active (copy), FFlagMomentsFixRecommendationImpressionLifecycleModule (upval), UseRefResult (copy), p1 (copy), UseRefResult8 (copy), UseRefResult1 (copy), UseRefResult2 (copy), UseRefResult3 (copy), UseRefResult4 (copy), FFlagMomentsNavigationEventModule (upval), HttpService (upval), UseResult (copy), UseRefResult12 (copy)
+		if Active then
+			if FFlagMomentsFixRecommendationImpressionLifecycleModule and UseRefResult.current == nil then
+				local CurrentItem = p1.getCurrentItem(false)
 				
-				if currentItem == nil then return end
-				local var12 = var7.current(currentItem)
+				if CurrentItem == nil then return end
+				local CurrentResult = UseRefResult8.current(CurrentItem)
 				
-				if var12 == nil then
+				if CurrentResult ~= nil then
+					UseRefResult.current = CurrentResult
+					UseRefResult1.current = p1.getCurrentIndex(false)
+					UseRefResult2.current = 0
+					UseRefResult3.current = os.clock()
+					UseRefResult4.current = if FFlagMomentsNavigationEventModule then HttpService:GenerateGUID(false) else nil
+					
 					return
 				end
-				var1.current = var12
-				var2.current = p1.getCurrentIndex(false)
-				var3.current = 0
-				var4.current = os.clock()
-				
 				return
-			elseif var1.current == nil or var4.current ~= nil then
-				return
-			else
-				var4.current = os.clock()
+			elseif UseRefResult.current ~= nil and UseRefResult3.current == nil then
+				UseRefResult3.current = os.clock()
 				
 				return
 			end
-		elseif fFlagMomentsFixRecommendationImpressionLifecycleModule then
-			var11()
+		elseif FFlagMomentsFixRecommendationImpressionLifecycleModule then
+			UseResult(UseRefResult12.current)
 			
 			return
-		elseif var4.current ~= nil then
-			var3.current += os.clock() - var4.current
-			var4.current = nil
+		else
+			if UseRefResult3.current ~= nil then
+				UseRefResult2.current += os.clock() - UseRefResult3.current
+				UseRefResult3.current = nil
+			end
 		end
-	end, { active, p1, var11 })
+	end, { Active, p1, UseResult })
 	
-	return { flushView = var11 }
+	return {
+		flushView = UseResult,
+		getViewId = function() --[[ Line: 282 ]]
+			-- upvalues: UseRefResult4 (copy)
+			return UseRefResult4.current
+		end,
+		noteUserStep = function(p3, ToIndex) --[[ Line: 285 ]]
+			-- upvalues: UseRefResult5 (copy), UseRefResult (copy), NavigationDestinationTypeModule (upval)
+			local ToIndexDelta = ToIndex - p3
+			
+			if ToIndexDelta == 1 or ToIndexDelta == -1 then
+				local Current = UseRefResult.current
+				UseRefResult5.current = {
+					leftItemId = if Current == nil then nil else Current.itemId,
+					toIndex = ToIndex,
+					destination = if ToIndexDelta == 1 then NavigationDestinationTypeModule.NextMoment else NavigationDestinationTypeModule.PreviousMoment
+				}
+				
+				return
+			else
+				UseRefResult5.current = nil
+			end
+		end
+	}
 end

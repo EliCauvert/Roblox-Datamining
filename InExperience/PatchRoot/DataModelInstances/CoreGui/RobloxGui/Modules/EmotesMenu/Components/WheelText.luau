@@ -1,52 +1,53 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local starterPlayerService = game:GetService("StarterPlayer")
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local parent = script.Parent.Parent
-local constantsModule = require(parent.Constants)
-local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
-local fFlagFixEmotesMenuAvailabilityModule = require(parent.Flags.FFlagFixEmotesMenuAvailability)
-local wheelText = roactModule.PureComponent:extend("WheelText")
+﻿local CorePackages = game:GetService("CorePackages")
+local StarterPlayer = game:GetService("StarterPlayer")
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local Parent = script.Parent.Parent
+local ConstantsModule = require(Parent.Constants)
+local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
+local FFlagFixEmotesMenuAvailabilityModule = require(Parent.Flags.FFlagFixEmotesMenuAvailability)
+local WheelText = RoactModule.PureComponent:extend("WheelText")
 
-function wheelText.getWheelText(p1)
-	-- upvalues: starterPlayerService (ref), fFlagFixEmotesMenuAvailabilityModule (ref), robloxTranslatorModule (ref), constantsModule (ref)
-	local currentEmotes = p1.props.emotesPage.currentEmotes
-	local locale = p1.props.locale
-	local numberEmotesLoaded = p1.props.emotesPage.numberEmotesLoaded
+function WheelText.getWheelText(p1) --[[ Line: 16 ]]
+	-- upvalues: StarterPlayer (copy), FFlagFixEmotesMenuAvailabilityModule (copy), RobloxTranslatorModule (copy), ConstantsModule (copy)
+	local CurrentEmotes = p1.props.emotesPage.currentEmotes
+	local Locale = p1.props.locale
+	local NumberEmotesLoaded = p1.props.emotesPage.numberEmotesLoaded
 	
-	if next(currentEmotes) == nil then
-		return if starterPlayerService.UserEmotesEnabled and (fFlagFixEmotesMenuAvailabilityModule or numberEmotesLoaded == 0) then robloxTranslatorModule:FormatByKeyForLocale(constantsModule.LocalizationKeys.NoEmotesEquipped, locale) else robloxTranslatorModule:FormatByKeyForLocale(constantsModule.LocalizationKeys.EmotesDisabled, locale)
+	if next(CurrentEmotes) == nil then
+		return if StarterPlayer.UserEmotesEnabled and (FFlagFixEmotesMenuAvailabilityModule or NumberEmotesLoaded == 0) then RobloxTranslatorModule:FormatByKeyForLocale(ConstantsModule.LocalizationKeys.NoEmotesEquipped, Locale) else RobloxTranslatorModule:FormatByKeyForLocale(ConstantsModule.LocalizationKeys.EmotesDisabled, Locale)
+	else
+		local CurrentEmote = CurrentEmotes[p1.props.emotesWheel.focusedSegmentIndex]
+		
+		return if CurrentEmote then CurrentEmote else RobloxTranslatorModule:FormatByKeyForLocale(ConstantsModule.LocalizationKeys.SelectAnEmote, Locale)
 	end
-	local focusedSegmentIndex = currentEmotes[p1.props.emotesWheel.focusedSegmentIndex]
-	
-	return focusedSegmentIndex or robloxTranslatorModule:FormatByKeyForLocale(constantsModule.LocalizationKeys.SelectAnEmote, locale)
 end
 
-function wheelText.render(p1)
-	-- upvalues: constantsModule (ref), roactModule (ref)
-	local layout = constantsModule.Layouts[p1.props.layout]
+function WheelText.render(p1) --[[ Line: 39 ]]
+	-- upvalues: ConstantsModule (copy), RoactModule (copy)
+	local Layout = ConstantsModule.Layouts[p1.props.layout]
 	
-	return roactModule.createElement("TextLabel", {
+	return RoactModule.createElement("TextLabel", {
 		BackgroundTransparency = 1,
 		TextScaled = true,
 		ZIndex = 5,
 		AnchorPoint = Vector2.new(0.5, 0.5),
-		Size = UDim2.new(constantsModule.InnerCircleSizeRatio, -constantsModule.TextPadding, constantsModule.InnerCircleSizeRatio, -constantsModule.TextPadding),
+		Size = UDim2.new(ConstantsModule.InnerCircleSizeRatio, -ConstantsModule.TextPadding, ConstantsModule.InnerCircleSizeRatio, -ConstantsModule.TextPadding),
 		Position = UDim2.new(0.5, 0, 0.5, 0),
 		Text = p1:getWheelText(),
-		TextSize = layout.MiddleTextSize,
-		TextColor3 = constantsModule.Colors.White,
-		Font = layout.MiddleTextFont
+		TextSize = Layout.MiddleTextSize,
+		TextColor3 = ConstantsModule.Colors.White,
+		Font = Layout.MiddleTextFont
 	}, {
-		TextSizeConstraint = roactModule.createElement("UITextSizeConstraint", { MaxTextSize = layout.MiddleTextSize })
+		TextSizeConstraint = RoactModule.createElement("UITextSizeConstraint", { MaxTextSize = Layout.MiddleTextSize })
 	})
 end
 
-return roactRoduxModule.connect(function(p1)
+return RoactRoduxModule.connect(function(p1) --[[ Line: 66 | Named "mapStateToProps" ]]
 	return {
 		emotesWheel = p1.emotesWheel,
 		emotesPage = p1.emotesPage,
 		layout = p1.layout,
 		locale = p1.locale
 	}
-end, nil)(wheelText)
+end, nil)(WheelText)

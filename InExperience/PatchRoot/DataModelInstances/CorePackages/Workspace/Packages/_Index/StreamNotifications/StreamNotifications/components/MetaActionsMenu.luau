@@ -1,137 +1,139 @@
-﻿local streamNotifications = script:FindFirstAncestor("StreamNotifications")
-local parent = streamNotifications.Parent
-local constantsModule = require(streamNotifications.constants)
-local reactModule = require(parent.React)
-local notificationsCommonModule = require(parent.NotificationsCommon)
-local notificationCardProvider = notificationsCommonModule.NotificationCardProvider
-local notificationCard = notificationsCommonModule.NotificationCard
-local notificationHelper = notificationsCommonModule.NotificationHelper
-local constants = notificationsCommonModule.constants
-local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-local focusNavigableSurfaceWrapper = focusNavigationUtilsModule.FocusNavigableSurfaceWrapper
-local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
-local focusNavigationEventNameEnum = focusNavigationUtilsModule.FocusNavigationEventNameEnum
-local _ = require(parent.ReactFocusNavigation)
-local inputHandlersModule = require(parent.InputHandlers)
-local marshalStreamNotificationData = notificationHelper.marshalStreamNotificationData
-local enumStreamNotificationsDisplayStateModule = require(streamNotifications.EnumStreamNotificationsDisplayState)
-local UIBloxModule = require(parent.UIBlox)
-local useStyle = UIBloxModule.Core.Style.useStyle
-local iconButton = UIBloxModule.App.Button.IconButton
-local iconSize = UIBloxModule.App.ImageSet.Enum.IconSize
-local baseMenu = UIBloxModule.App.Menu.BaseMenu
-local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
+﻿local StreamNotifications = script:FindFirstAncestor("StreamNotifications")
+local Parent = StreamNotifications.Parent
+local ConstantsModule = require(StreamNotifications.constants)
+local ReactModule = require(Parent.React)
+local NotificationsCommonModule = require(Parent.NotificationsCommon)
+local NotificationCardProvider = NotificationsCommonModule.NotificationCardProvider
+local NotificationCard = NotificationsCommonModule.NotificationCard
+local Constants = NotificationsCommonModule.constants
+local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
+local FocusNavigableSurfaceWrapper = FocusNavigationUtilsModule.FocusNavigableSurfaceWrapper
+local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
+local FocusNavigationEventNameEnum = FocusNavigationUtilsModule.FocusNavigationEventNameEnum
+local _ = require(Parent.ReactFocusNavigation)
+local InputHandlersModule = require(Parent.InputHandlers)
+local MarshalStreamNotificationDataFunction = NotificationsCommonModule.NotificationHelper.marshalStreamNotificationData
+local EnumStreamNotificationsDisplayStateModule = require(StreamNotifications.EnumStreamNotificationsDisplayState)
+local UIBloxModule = require(Parent.UIBlox)
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local IconButton = UIBloxModule.App.Button.IconButton
+local IconSize = UIBloxModule.App.ImageSet.Enum.IconSize
+local BaseMenu = UIBloxModule.App.Menu.BaseMenu
+local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 
-return function(p1)
-	-- upvalues: useStyle (ref), reactModule (ref), enumStreamNotificationsDisplayStateModule (ref), marshalStreamNotificationData (ref), constantsModule (ref), notificationCardProvider (ref), notificationCard (ref), constants (ref), imageSetLabel (ref), iconButton (ref), iconSize (ref), baseMenu (ref), focusNavigableSurfaceWrapper (ref), focusNavigableSurfaceIdentifierEnum (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref)
-	local var1 = useStyle()
-	local activeNotification = p1.activeNotification
-	local displayState = p1.displayState
-	local isSmallScreen = p1.isSmallScreen
-	local handleActions = p1.handleActions
-	local closeNotificationDisplay = p1.closeNotificationDisplay
-	local var2 = reactModule.useRef(nil)
+return function(p1) --[[ Line: 35 ]]
+	-- upvalues: UseStyleFunction (copy), ReactModule (copy), EnumStreamNotificationsDisplayStateModule (copy), MarshalStreamNotificationDataFunction (copy), ConstantsModule (copy), NotificationCardProvider (copy), NotificationCard (copy), Constants (copy), ImageSetLabel (copy), IconButton (copy), IconSize (copy), BaseMenu (copy), FocusNavigableSurfaceWrapper (copy), FocusNavigableSurfaceIdentifierEnum (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy)
+	local UseStyleResult = UseStyleFunction()
+	local ActiveNotification = p1.activeNotification
+	local IsSmallScreen = p1.isSmallScreen
+	local HandleActionsFunction = p1.handleActions
+	local CloseNotificationDisplayFunction = p1.closeNotificationDisplay
+	local UseRefResult = ReactModule.useRef(nil)
 	
-	if displayState ~= enumStreamNotificationsDisplayStateModule.MetaActions then
+	if p1.displayState ~= EnumStreamNotificationsDisplayStateModule.MetaActions then
 		return nil
 	end
-	local var3 = marshalStreamNotificationData(activeNotification)
-	local t = {}
+	local MarshalStreamNotificationDataResult = MarshalStreamNotificationDataFunction(ActiveNotification)
+	local ButtonProps = {}
 	
-	if var3 then
-		for i, v in ipairs(var3.state.visualItems.metaAction) do
-			table.insert(t, {
-				icon = constantsModule.MetaActions.ActionIcons[v.actionIcon] or constantsModule.MetaActions.ActionIcons.default,
-				text = v.label.text,
-				onActivated = function()
-					-- upvalues: handleActions (ref), v (ref), activeNotification (ref)
-					if handleActions then
-						handleActions(v, activeNotification)
+	if MarshalStreamNotificationDataResult then
+		for _, value in ipairs(MarshalStreamNotificationDataResult.state.visualItems.metaAction) do
+			table.insert(ButtonProps, {
+				icon = ConstantsModule.MetaActions.ActionIcons[value.actionIcon] or ConstantsModule.MetaActions.ActionIcons.default,
+				text = value.label.text,
+				onActivated = function() --[[ Line: 57 ]]
+					-- upvalues: HandleActionsFunction (copy), value (copy), ActiveNotification (copy)
+					if HandleActionsFunction then
+						HandleActionsFunction(value, ActiveNotification)
 					end
 				end
 			})
 		end
 	end
-	return reactModule.createElement(focusNavigableSurfaceWrapper, {
+	return ReactModule.createElement(FocusNavigableSurfaceWrapper, {
 		isIsolated = true,
-		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.ContextualMenu,
-		frameProps = { ref = var2 },
+		surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.ContextualMenu,
+		frameProps = { ref = UseRefResult },
 		customEventHandlers = {
-			[focusNavigationEventNameEnum.NavigateBack] = {
-				handler = inputHandlersModule.onRelease(function(p2)
-					-- upvalues: closeNotificationDisplay (ref)
-					closeNotificationDisplay()
+			[FocusNavigationEventNameEnum.NavigateBack] = {
+				handler = InputHandlersModule.onRelease(function(p2) --[[ Line: 166 ]]
+					-- upvalues: CloseNotificationDisplayFunction (copy)
+					CloseNotificationDisplayFunction()
 					p2:cancel()
 				end)
 			}
 		}
 	}, {
-		UICorner = reactModule.createElement("UICorner", {
-			CornerRadius = if not isSmallScreen then UDim.new(0, constantsModule.Modal.CornerRadius) else UDim.new(0, 0)
+		UICorner = ReactModule.createElement("UICorner", {
+			CornerRadius = if IsSmallScreen then UDim.new(0, 0) else UDim.new(0, ConstantsModule.Modal.CornerRadius)
 		}),
-		MetaActions = reactModule.createElement("Frame", {
+		MetaActions = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
-			ref = var2,
+			ref = UseRefResult,
 			AutomaticSize = Enum.AutomaticSize.Y,
 			Size = UDim2.fromScale(1, 0),
 			Position = UDim2.new(0.5, 0, 0.5, 0),
 			AnchorPoint = Vector2.new(0.5, 0.5)
 		}, {
-			UIPadding = reactModule.createElement("UIPadding", {
-				PaddingTop = UDim.new(0, constantsModule.Modal.Padding),
-				PaddingLeft = UDim.new(0, constantsModule.Modal.Padding),
-				PaddingRight = UDim.new(0, constantsModule.Modal.Padding),
-				PaddingBottom = UDim.new(0, constantsModule.Modal.Padding)
+			UIPadding = ReactModule.createElement("UIPadding", {
+				PaddingTop = UDim.new(0, ConstantsModule.Modal.Padding),
+				PaddingLeft = UDim.new(0, ConstantsModule.Modal.Padding),
+				PaddingRight = UDim.new(0, ConstantsModule.Modal.Padding),
+				PaddingBottom = UDim.new(0, ConstantsModule.Modal.Padding)
 			}),
-			reactModule.createElement("UIListLayout", {
+			ReactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Vertical,
 				SortOrder = Enum.SortOrder.LayoutOrder,
-				Padding = UDim.new(0, constantsModule.DefaultPadding)
+				Padding = UDim.new(0, ConstantsModule.DefaultPadding)
 			}),
-			CardAndClose = reactModule.createElement("Frame", {
+			CardAndClose = ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 1,
 				AutomaticSize = Enum.AutomaticSize.Y,
 				Size = UDim2.fromScale(1, 0)
 			}, {
-				ActiveCard = reactModule.createElement(notificationCardProvider, {
+				ActiveCard = ReactModule.createElement(NotificationCardProvider, {
 					isCompact = false,
 					readOnly = false,
 					openMetaActions = nil,
-					notificationPayload = activeNotification,
-					state = var3 and var3.state,
-					handleActions = handleActions
+					notificationPayload = ActiveNotification,
+					state = MarshalStreamNotificationDataResult and MarshalStreamNotificationDataResult.state,
+					handleActions = HandleActionsFunction
 				}, {
-					NotificationCard = reactModule.createElement(notificationCard, { isHover = false, layoutOrder = 1 })
+					NotificationCard = ReactModule.createElement(NotificationCard, { isHover = false, layoutOrder = 1 })
 				}),
-				CloseButtonFrame = reactModule.createElement("Frame", {
+				CloseButtonFrame = ReactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					BorderSizePixel = 0,
-					Size = UDim2.fromOffset(constantsModule.MetaActions.CloseButtonFrameSize, constantsModule.MetaActions.CloseButtonFrameSize),
+					Size = UDim2.fromOffset(ConstantsModule.MetaActions.CloseButtonFrameSize, ConstantsModule.MetaActions.CloseButtonFrameSize),
 					AnchorPoint = Vector2.new(1, 0),
-					Position = UDim2.new(1, -constants.Padding.DefaultCardPadding, 0, constants.Padding.DefaultCardPadding)
+					Position = UDim2.new(1, -Constants.Padding.DefaultCardPadding, 0, Constants.Padding.DefaultCardPadding)
 				}, {
-					CloseIcon = reactModule.createElement(imageSetLabel, {
+					CloseIcon = ReactModule.createElement(ImageSetLabel, {
 						LayoutOrder = 2,
 						BackgroundTransparency = 1,
 						BorderSizePixel = 0,
 						AnchorPoint = Vector2.new(0.5, 0.5),
 						Position = UDim2.fromScale(0.5, 0.5),
-						Size = UDim2.fromOffset(constantsModule.MetaActions.CloseIconSize, constantsModule.MetaActions.CloseIconSize),
-						Image = constantsModule.Modal.CloseIcon,
-						ImageColor3 = var1.Theme.UIEmphasis.Color
+						Size = UDim2.fromOffset(ConstantsModule.MetaActions.CloseIconSize, ConstantsModule.MetaActions.CloseIconSize),
+						Image = ConstantsModule.Modal.CloseIcon,
+						ImageColor3 = UseStyleResult.Theme.UIEmphasis.Color
 					}),
-					CloseButton = reactModule.createElement(iconButton, {
+					CloseButton = ReactModule.createElement(IconButton, {
 						layoutOrder = 1,
-						iconSize = iconSize.Small,
-						size = UDim2.fromOffset(constantsModule.MetaActions.CloseButtonSize, constantsModule.MetaActions.CloseButtonSize),
+						iconSize = IconSize.Small,
+						size = UDim2.fromOffset(ConstantsModule.MetaActions.CloseButtonSize, ConstantsModule.MetaActions.CloseButtonSize),
 						anchorPoint = Vector2.new(0.5, 0.5),
 						position = UDim2.new(0.5, 0, 0.5, 0),
-						onActivated = closeNotificationDisplay
+						onActivated = CloseNotificationDisplayFunction
 					})
 				})
 			}),
-			Menu = reactModule.createElement(baseMenu, { layoutOrder = 2, buttonProps = t, width = UDim.new(1, 0) })
+			Menu = ReactModule.createElement(BaseMenu, {
+				layoutOrder = 2,
+				buttonProps = ButtonProps,
+				width = UDim.new(1, 0)
+			})
 		})
 	})
 end

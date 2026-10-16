@@ -1,7 +1,7 @@
-﻿local parent = script:FindFirstAncestor("SduiSharedContent").Parent
-local _ = require(parent.AppCommonLib)
+﻿local Parent = script:FindFirstAncestor("SduiSharedContent").Parent
+local _ = require(Parent.AppCommonLib)
 
-return require(parent.React).createContext({
+return require(Parent.React).createContext({
 	scrollViewPositionChangedSignal = nil,
 	verticalScrollingFrameRef = nil,
 	impressionsParentScrollingFrameRef = nil

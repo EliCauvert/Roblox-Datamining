@@ -1,73 +1,73 @@
-﻿local virtualEvents = script:FindFirstAncestor("VirtualEvents")
-local cryoModule = require(virtualEvents.Parent.Cryo)
-local reactModule = require(virtualEvents.Parent.React)
-local t = { numItemsShown = 1e999, itemPadding = UDim.new(0, 12) }
+﻿local VirtualEvents = script:FindFirstAncestor("VirtualEvents")
+local CryoModule = require(VirtualEvents.Parent.Cryo)
+local ReactModule = require(VirtualEvents.Parent.React)
+local config = { numItemsShown = 1e999, itemPadding = UDim.new(0, 12) }
 
-return function(p1)
-	-- upvalues: cryoModule (ref), t (ref), reactModule (ref)
-	local var1 = cryoModule.Dictionary.join(t, p1)
-	local var2 = reactModule.useMemo(function()
-		-- upvalues: var1 (ref), reactModule (copy)
-		local t = {}
+return function(p1) --[[ Line: 19 | Named "EventsGridLayout" ]]
+	-- upvalues: CryoModule (copy), config (copy), ReactModule (copy)
+	local JoinResult = CryoModule.Dictionary.join(config, p1)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 22 ]]
+		-- upvalues: JoinResult (copy), ReactModule (upval)
+		local Frames = {}
 		
-		for i = 1, var1.numItemsShown do
-			t[i] = reactModule.createElement("Frame", {
+		for i = 1, JoinResult.numItemsShown do
+			Frames[i] = ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = i,
 				Size = UDim2.fromScale(1, 0),
 				AutomaticSize = Enum.AutomaticSize.Y
-			}, { Content = var1.items[i] })
+			}, { Content = JoinResult.items[i] })
 		end
-		return t
-	end, { var1.items, var1.numItemsShown })
+		return Frames
+	end, { JoinResult.items, JoinResult.numItemsShown })
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.fromScale(1, 0),
 		AutomaticSize = Enum.AutomaticSize.Y
 	}, {
-		Layout = reactModule.createElement("UIListLayout", {
-			Padding = var1.itemPadding,
+		Layout = ReactModule.createElement("UIListLayout", {
+			Padding = JoinResult.itemPadding,
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			FillDirection = Enum.FillDirection.Vertical
 		}),
-		Rows = reactModule.createElement(reactModule.Fragment, nil, reactModule.useMemo(function()
-			-- upvalues: var2 (ref), reactModule (copy), var1 (ref)
-			local t = {}
+		Rows = ReactModule.createElement(ReactModule.Fragment, nil, (ReactModule.useMemo(function() --[[ Line: 39 ]]
+			-- upvalues: UseMemoResult (copy), ReactModule (upval), JoinResult (copy)
+			local Frames = {}
 			
-			for i = 1, #var2, 2 do
-				local var3 = var2[i + 1]
-				t["Row" .. math.ceil(i / 2)] = reactModule.createElement("Frame", {
+			for i = 1, #UseMemoResult, 2 do
+				local UseMemoResultEntry = UseMemoResult[i + 1]
+				Frames["Row" .. math.ceil(i / 2)] = ReactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					Size = UDim2.fromScale(1, 0),
 					AutomaticSize = Enum.AutomaticSize.Y,
 					LayoutOrder = i
 				}, {
-					Layout = reactModule.createElement("UIListLayout", {
-						Padding = var1.itemPadding,
+					Layout = ReactModule.createElement("UIListLayout", {
+						Padding = JoinResult.itemPadding,
 						SortOrder = Enum.SortOrder.LayoutOrder,
 						FillDirection = Enum.FillDirection.Horizontal,
 						HorizontalAlignment = Enum.HorizontalAlignment.Left
 					}),
-					CellFrame1 = reactModule.createElement("Frame", {
+					CellFrame1 = ReactModule.createElement("Frame", {
 						BackgroundTransparency = 1,
 						LayoutOrder = 1,
-						Size = UDim2.new(0.5, -var1.itemPadding.Offset / 2, 0, 0),
+						Size = UDim2.new(0.5, -JoinResult.itemPadding.Offset / 2, 0, 0),
 						AutomaticSize = Enum.AutomaticSize.Y
 					}, {
-						Item = reactModule.createElement(reactModule.Fragment, nil, var2[i])
+						Item = ReactModule.createElement(ReactModule.Fragment, nil, UseMemoResult[i])
 					}),
-					CellFrame2 = var3 and reactModule.createElement("Frame", {
+					CellFrame2 = UseMemoResultEntry and ReactModule.createElement("Frame", {
 						BackgroundTransparency = 1,
 						LayoutOrder = 2,
-						Size = UDim2.new(0.5, -var1.itemPadding.Offset / 2, 0, 0),
+						Size = UDim2.new(0.5, -JoinResult.itemPadding.Offset / 2, 0, 0),
 						AutomaticSize = Enum.AutomaticSize.Y
 					}, {
-						Item = reactModule.createElement(reactModule.Fragment, nil, var3)
+						Item = ReactModule.createElement(ReactModule.Fragment, nil, UseMemoResultEntry)
 					})
 				})
 			end
-			return t
-		end, { var1.items, var2 }))
+			return Frames
+		end, { JoinResult.items, UseMemoResult })))
 	})
 end

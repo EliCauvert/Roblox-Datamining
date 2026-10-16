@@ -1,99 +1,90 @@
-﻿local avatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
-local parent = avatarExperienceInspectAndBuy.Parent
-local _ = require(avatarExperienceInspectAndBuy.Types)
-local _ = require(parent.AXCommon)
-local _ = require(parent.AvatarExperienceRodux)
-local tutilsModule = require(parent.tutils)
-local itemTypeEnum = require(parent.AvatarExperienceModel).Enums.ItemTypeEnum
+﻿local AvatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
+local Parent = AvatarExperienceInspectAndBuy.Parent
+local _ = require(AvatarExperienceInspectAndBuy.Types)
+local _ = require(Parent.AXCommon)
+local _ = require(Parent.AvatarExperienceRodux)
+local TutilsModule = require(Parent.tutils)
+local ItemTypeEnum = require(Parent.AvatarExperienceModel).Enums.ItemTypeEnum
 
-local function buildCollectibleItemDetails(p1, p2)
-	-- upvalues: tutilsModule (ref)
-	local collectibles = p1.Collectibles
-	local collectibleItemId = p2.collectibleItemId
-	local var1 = if collectibles and collectibleItemId and collectibles.CollectiblesItemInfo then collectibles.CollectiblesItemInfo[collectibleItemId] else nil
-	local var2 = if collectibles and collectibleItemId and collectibles.CollectiblesResellableInstances then collectibles.CollectiblesResellableInstances[collectibleItemId] else nil
-	local var3 = if var1 then var1.lowestAvailableResaleProductId else nil
-	local t = {
-		quantityLimitPerUser = if var1 then var1.quantityLimitPerUser else nil,
-		resellableCount = if var2 then tutilsModule.fieldCount(var2) else 0,
-		collectibleProductId = if var1 then var1.collectibleProductId else nil,
-		collectibleLowestAvailableResaleProductId = var3,
-		collectibleLowestAvailableResaleItemInstanceId = if var1 then var1.lowestAvailableResaleItemInstanceId else nil,
-		unitsAvailableForConsumption = (if var1 then var1.unitsAvailableForConsumption else nil) or p2.numberRobloxHasAvailable
+local function buildCollectibleItemDetails(p1, CollectibleItemDetails) --[[ Line: 19 ]]
+	-- upvalues: TutilsModule (copy)
+	local Collectibles = p1.Collectibles
+	local CollectibleItemId = CollectibleItemDetails.collectibleItemId
+	local CollectiblesItem = if Collectibles and CollectibleItemId and Collectibles.CollectiblesItemInfo then Collectibles.CollectiblesItemInfo[CollectibleItemId] else nil
+	local CollectiblesResellableInstance = if Collectibles and CollectibleItemId and Collectibles.CollectiblesResellableInstances then Collectibles.CollectiblesResellableInstances[CollectibleItemId] else nil
+	local LowestAvailableResaleProductId = if CollectiblesItem then CollectiblesItem.lowestAvailableResaleProductId else nil
+	
+	return {
+		quantityLimitPerUser = if CollectiblesItem then CollectiblesItem.quantityLimitPerUser else nil,
+		resellableCount = if CollectiblesResellableInstance then TutilsModule.fieldCount(CollectiblesResellableInstance) else 0,
+		collectibleProductId = if CollectiblesItem then CollectiblesItem.collectibleProductId else nil,
+		collectibleLowestAvailableResaleProductId = LowestAvailableResaleProductId,
+		collectibleLowestAvailableResaleItemInstanceId = if CollectiblesItem then CollectiblesItem.lowestAvailableResaleItemInstanceId else nil,
+		unitsAvailableForConsumption = (if CollectiblesItem then CollectiblesItem.unitsAvailableForConsumption else nil) or CollectibleItemDetails.numberRobloxHasAvailable,
+		hasResellers = CollectibleItemDetails.hasResellers or ((if CollectiblesItem then CollectiblesItem.hasResellers else nil) or LowestAvailableResaleProductId ~= nil and LowestAvailableResaleProductId ~= ""),
+		lowestResalePrice = CollectibleItemDetails.lowestResalePrice,
+		totalQuantity = CollectibleItemDetails.totalQuantity,
+		experiences = CollectibleItemDetails.experiences or (if CollectiblesItem then CollectiblesItem.experiences else nil)
 	}
-	local hasResellers = p2.hasResellers
-	
-	if not hasResellers then
-		hasResellers = if var1 then var1.hasResellers else nil
-		
-		if not hasResellers and var3 ~= nil then
-			hasResellers = var3 ~= ""
-		end
-	end
-	t.hasResellers = hasResellers
-	t.lowestResalePrice = p2.lowestResalePrice
-	t.totalQuantity = p2.totalQuantity
-	t.experiences = p2.experiences or (if var1 then var1.experiences else nil)
-	
-	return t
 end
 
-local function buildAssetsInBundle(value)
-	if not value then
+local function buildAssetsInBundle(Items) --[[ Line: 69 ]]
+	if not Items then
 		return nil
 	end
-	local t = {}
+	local List = {}
 	
-	for i, v in value do
-		table.insert(t, {
-			id = tostring(v.id),
-			assetType = if v.assetType ~= nil then nil else tostring(v.assetType)
+	for _, item in Items do
+		table.insert(List, {
+			id = tostring(item.id),
+			assetType = if item.assetType == nil then nil else tostring(item.assetType)
 		})
 	end
-	return t
+	return List
 end
 
-return function(a, b, p1)
-	-- upvalues: itemTypeEnum (ref), buildCollectibleItemDetails (ref), buildAssetsInBundle (ref)
-	if not a then
+return function(p1, Id, Bundle) --[[ Line: 93 | Named "buildItemDataFromAXRodux" ]]
+	-- upvalues: ItemTypeEnum (copy), buildCollectibleItemDetails (copy), buildAssetsInBundle (copy)
+	if not p1 then
 		return nil
 	end
-	local var1 = nil
+	local AssetInfo = nil
 	
-	if p1 == itemTypeEnum.Asset then
-		var1 = if a.AssetInfos then a.AssetInfos[b] else nil
-	elseif p1 == itemTypeEnum.Bundle then
-		var1 = if a.BundleInfos then a.BundleInfos[b] else nil
+	if Bundle == ItemTypeEnum.Asset then
+		AssetInfo = if p1.AssetInfos then p1.AssetInfos[Id] else nil
+	elseif Bundle == ItemTypeEnum.Bundle then
+		AssetInfo = if p1.BundleInfos then p1.BundleInfos[Id] else nil
 	end
-	if var1 then
-		local creator = var1.creator
+	if AssetInfo then
+		local Creator = AssetInfo.creator
 		
 		return {
-			id = b,
-			name = var1.name,
-			description = var1.description,
-			itemType = p1,
-			itemSubType = if p1 == itemTypeEnum.Bundle then var1.bundleType else var1.assetType,
+			id = Id,
+			name = AssetInfo.name,
+			description = AssetInfo.description,
+			itemType = Bundle,
+			itemSubType = if Bundle == ItemTypeEnum.Bundle then AssetInfo.bundleType else AssetInfo.assetType,
 			creator = {
-				creatorId = (if creator then creator.id else nil) or "",
-				creatorName = (if creator then creator.name else nil) or (var1.creatorName or ""),
-				creatorHasVerifiedBadge = (if creator then creator.hasVerifiedBadge else nil) or false
+				creatorId = (if Creator then Creator.id else nil) or "",
+				creatorName = (if Creator then Creator.name else nil) or (AssetInfo.creatorName or ""),
+				creatorHasVerifiedBadge = (if Creator then Creator.hasVerifiedBadge else nil) or false
 			},
-			creatingUniverseId = var1.creatingUniverseId,
-			saleLocationType = var1.saleLocationType,
-			itemRestrictions = var1.itemRestrictions or {},
-			priceInRobux = var1.priceInRobux,
-			discountInformation = var1.discountInformation,
-			catalogPriceStatus = var1.priceStatus,
-			isOwned = var1.isOwned,
-			isOffSale = var1.isOffSale,
-			collectibleItemId = var1.collectibleItemId,
-			collectibleItemDetails = buildCollectibleItemDetails(a, var1),
-			assetsInBundle = if p1 == itemTypeEnum.Bundle then buildAssetsInBundle(var1.items) else nil,
-			favoritesDetails = { numFavorites = var1.favoriteCount },
-			timedOptions = var1.timedOptions,
-			expirationTime = var1.expirationTime
+			creatingUniverseId = AssetInfo.creatingUniverseId,
+			saleLocationType = AssetInfo.saleLocationType,
+			itemRestrictions = AssetInfo.itemRestrictions or {},
+			priceInRobux = AssetInfo.priceInRobux,
+			discountInformation = AssetInfo.discountInformation,
+			catalogPriceStatus = AssetInfo.priceStatus,
+			isOwned = AssetInfo.isOwned,
+			isOffSale = AssetInfo.isOffSale,
+			collectibleItemId = AssetInfo.collectibleItemId,
+			collectibleItemDetails = buildCollectibleItemDetails(p1, AssetInfo),
+			assetsInBundle = if Bundle == ItemTypeEnum.Bundle then buildAssetsInBundle(AssetInfo.items) else nil,
+			favoritesDetails = { numFavorites = AssetInfo.favoriteCount },
+			timedOptions = AssetInfo.timedOptions,
+			expirationTime = AssetInfo.expirationTime
 		}
+	else
+		return nil
 	end
-	return nil
 end

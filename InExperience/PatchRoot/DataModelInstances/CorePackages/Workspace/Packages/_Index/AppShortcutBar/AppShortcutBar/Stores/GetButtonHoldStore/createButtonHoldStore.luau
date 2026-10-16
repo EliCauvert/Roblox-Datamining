@@ -1,66 +1,69 @@
-﻿local parent = script:FindFirstAncestor("AppShortcutBar").Parent
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local _ = require(parent.FocusNavigationUtils)
+﻿local Parent = script:FindFirstAncestor("AppShortcutBar").Parent
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
+local _ = require(Parent.FocusNavigationUtils)
 
-return function()
-	-- upvalues: signalsModule (ref), reactModule (ref), signalsReactModule (ref)
-	local var1, var2 = signalsModule.createSignal({})
+return function() --[[ Line: 21 | Named "createButtonHoldStore" ]]
+	-- upvalues: SignalsModule (copy), ReactModule (copy), SignalsReactModule (copy)
+	local Signal, Signal2 = SignalsModule.createSignal({})
 	
-	local function updateButtonHoldState(p1, p2)
-		-- upvalues: var2 (ref)
-		var2(function(p3)
-			-- upvalues: p1 (ref), p2 (ref)
-			if p3[p1] == p2 then
-				return p3
+	local function updateButtonHoldState(p1, p2) --[[ Line: 24 ]]
+		-- upvalues: Signal2 (copy)
+		Signal2(function(Tbl) --[[ Line: 25 ]]
+			-- upvalues: p1 (copy), p2 (copy)
+			if Tbl[p1] == p2 then
+				return Tbl
+			else
+				local Copy = table.clone(Tbl)
+				Copy[p1] = p2
+				
+				return Copy
 			end
-			local cloned = table.clone(p3)
-			cloned[p1] = p2
-			
-			return cloned
 		end)
 	end
 	
 	return {
-		getButtonHoldState = var1,
-		setButtonHoldState = var2,
-		useDispatchButtonHoldStarted = function()
-			-- upvalues: reactModule (copy), var2 (ref), updateButtonHoldState (ref)
-			return reactModule.useCallback(function(p1, p2)
-				-- upvalues: var2 (copy)
-				var2(function(p3)
-					-- upvalues: p1 (ref), p2 (ref)
-					if p3[p1] == p2 then
-						return p3
+		getButtonHoldState = Signal,
+		setButtonHoldState = Signal2,
+		useDispatchButtonHoldStarted = function() --[[ Line: 35 ]]
+			-- upvalues: ReactModule (upval), Signal2 (copy), updateButtonHoldState (copy)
+			return (ReactModule.useCallback(function(p1, p2) --[[ Line: 37 ]]
+				-- upvalues: Signal2 (upval)
+				Signal2(function(Tbl) --[[ Line: 25 ]]
+					-- upvalues: p1 (copy), p2 (copy)
+					if Tbl[p1] == p2 then
+						return Tbl
+					else
+						local Copy = table.clone(Tbl)
+						Copy[p1] = p2
+						
+						return Copy
 					end
-					local cloned = table.clone(p3)
-					cloned[p1] = p2
-					
-					return cloned
 				end)
-			end, { updateButtonHoldState })
+			end, { updateButtonHoldState }))
 		end,
-		useDispatchButtonHoldEnded = function()
-			-- upvalues: reactModule (copy), var2 (ref), updateButtonHoldState (ref)
-			return reactModule.useCallback(function(p1)
-				-- upvalues: var2 (copy)
-				local var3 = nil
-				var2(function(p2)
-					-- upvalues: p1 (ref), var3 (ref)
-					if p2[p1] == var3 then
-						return p2
+		useDispatchButtonHoldEnded = function() --[[ Line: 45 ]]
+			-- upvalues: ReactModule (upval), Signal2 (copy), updateButtonHoldState (copy)
+			return (ReactModule.useCallback(function(p1) --[[ Line: 46 ]]
+				-- upvalues: Signal2 (upval)
+				local v1 = nil
+				Signal2(function(Tbl) --[[ Line: 25 ]]
+					-- upvalues: p1 (copy), v1 (copy)
+					if Tbl[p1] == v1 then
+						return Tbl
+					else
+						local Copy = table.clone(Tbl)
+						Copy[p1] = v1
+						
+						return Copy
 					end
-					local cloned = table.clone(p2)
-					cloned[p1] = var3
-					
-					return cloned
 				end)
-			end, { updateButtonHoldState })
+			end, { updateButtonHoldState }))
 		end,
-		useHeldProgressByEvent = function()
-			-- upvalues: signalsReactModule (copy), var1 (ref)
-			return signalsReactModule.useSignalState(var1)
+		useHeldProgressByEvent = function() --[[ Line: 52 ]]
+			-- upvalues: SignalsReactModule (upval), Signal (copy)
+			return SignalsReactModule.useSignalState(Signal)
 		end
 	}
 end

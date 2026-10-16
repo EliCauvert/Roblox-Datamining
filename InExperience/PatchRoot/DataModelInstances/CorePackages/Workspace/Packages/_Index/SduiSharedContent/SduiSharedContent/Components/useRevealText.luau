@@ -1,167 +1,164 @@
-﻿local reactModule = require(script:FindFirstAncestor("SduiSharedContent").Parent.React)
+﻿local ReactModule = require(script:FindFirstAncestor("SduiSharedContent").Parent.React)
 
-local function _(p1)
+local function _(p1) --[[ Line: 17 | Named "getDelimiter" ]]
 	return if p1 == nil or p1 == "" then " " else p1
 end
 
-local _ = function(p1)
+local _ = function(p1: number): number --[[ Line: 24 | Named "getRevealInterval" ]]
 	return if p1 == nil then 0.05 else math.max(p1, 0)
 end
 
-local _ = function(p1)
+local _ = function(p1): boolean --[[ Line: 31 | Named "shouldRenderDelimiter" ]]
 	return not p1
 end
 
-local _ = function(p1, p2)
-	return string.match(p1, if p2 then "^<%s*/%s*([%w]+)" else "^<%s*([%w]+)")
+local _ = function(Text: string, p1): string --[[ Line: 35 | Named "getTagName" ]]
+	return string.match(Text, if p1 then "^<%s*/%s*([%w]+)" else "^<%s*([%w]+)")
 end
 
-local _ = function(p1, p2)
-	return if p2 ~= "br" then string.match(p1, "/%s*>$") ~= nil else true
+local _ = function(Text: string, p1): boolean --[[ Line: 40 | Named "isSelfClosingTag" ]]
+	return p1 == "br" or string.match(Text, "/%s*>$") ~= nil
 end
 
-local function removeLastMatchingTag(p1, p2)
-	for i = #p1, 1, -1 do
-		if p1[i] ~= p2 then
-			continue
+local function removeLastMatchingTag(List, Match) --[[ Line: 44 ]]
+	for i = #List, 1, -1 do
+		if List[i] == Match then
+			table.remove(List, i)
+			break
 		end
-		table.remove(p1, i)
-		
-		return
 	end
 end
 
-local _ = function(p3, p4)
-	local joined = table.concat(p3)
+local _ = function(List, p1): string --[[ Line: 53 | Named "buildBalancedText" ]]
+	local Joined = table.concat(List)
 	
-	for i = #p4, 1, -1 do
-		joined ..= `</{p4[i]}>`
+	for i = #p1, 1, -1 do
+		Joined ..= `</{p1[i]}>`
 	end
-	return joined
+	return Joined
 end
 
-local _ = function(p5, p6, p7)
-	local joined = table.concat(p6)
+local _ = function(List1, List, p2) --[[ Line: 61 | Named "appendFrame" ]]
+	local Joined = table.concat(List)
 	
-	for i = #p7, 1, -1 do
-		joined ..= `</{p7[i]}>`
+	for i = #p2, 1, -1 do
+		Joined ..= `</{p2[i]}>`
 	end
-	if joined ~= p5[#p5] then
-		table.insert(p5, joined)
+	local Joined1: string = Joined
+	
+	if Joined1 ~= List1[#List1] then
+		table.insert(List1, Joined1)
 	end
 end
 
-local function buildRevealTextFrames(p8, p9, p10, p11)
-	-- upvalues: removeLastMatchingTag (ref)
-	if p8 == nil or p8 == "" then
-		return { p8 or "" }
+local function buildRevealTextFrames(Text: string, Delimiter, RichText, RemoveDelimiter) --[[ Line: 68 ]]
+	-- upvalues: removeLastMatchingTag (copy)
+	if Text == nil or Text == "" then
+		return { Text or "" }
 	end
-	local var1 = if p9 == nil or p9 == "" then " " else p9
-	local t = {}
-	local t_1 = {}
-	local t_2 = {}
-	local var2 = false
-	local var3 = 1
-	local p14Count = #p8
-	local var5Count = #var1
-	while var3 <= p14Count do
-		local var4
-		local var5 = false
+	local Delimiter1 = if Delimiter == nil or Delimiter == "" then " " else Delimiter
+	local List = {}
+	local List1 = {}
+	local List2 = {}
+	local Flag = false
+	local StartIndex = 1
+	local CountText = #Text
+	local CountDelimiter1 = #Delimiter1
+	while StartIndex <= CountText do
+		local Flag1 = false
 		
-		if var5Count > 0 and string.sub(p8, var3, var3 + var5Count - 1) == var1 then
-			if var2 then
-				local joined = table.concat(t_1)
+		if CountDelimiter1 > 0 and string.sub(Text, StartIndex, StartIndex + CountDelimiter1 - 1) == Delimiter1 then
+			if Flag then
+				local Joined1 = table.concat(List1)
 				
-				for var4 = #t_2, 1, -1 do
-					joined ..= `</{t_2[var4]}>`
+				for i1 = #List2, 1, -1 do
+					Joined1 ..= `</{List2[i1]}>`
 				end
-				local var6 = joined
+				local Joined2: string = Joined1
 				
-				if var6 ~= t[#t] then
-					table.insert(t, var6)
+				if Joined2 ~= List[#List] then
+					table.insert(List, Joined2)
 				end
-				var2 = false
+				Flag = false
 			end
-			if p11 then
-				table.insert(t_1, var1)
+			if not RemoveDelimiter then
+				table.insert(List1, Delimiter1)
 			end
-			var3 += var5Count
-			var5 = true
-		elseif p10 and string.sub(p8, var3, var3) == "<" then
-			local matchIndex = string.find(p8, ">", var3, true)
+			StartIndex += CountDelimiter1
+			Flag1 = true
+		elseif RichText and string.sub(Text, StartIndex, StartIndex) == "<" then
+			local FoundAt: number? = string.find(Text, ">", StartIndex, true)
 			
-			if matchIndex then
-				local substring = string.sub(p8, var3, matchIndex)
-				table.insert(t_1, substring)
-				local var7 = string.sub(substring, 1, 2) == "</"
-				local match = string.match(substring, if var7 then "^<%s*/%s*([%w]+)" else "^<%s*([%w]+)")
+			if FoundAt then
+				local Segment = string.sub(Text, StartIndex, FoundAt)
+				table.insert(List1, Segment)
+				local IsSegmentMatch = string.sub(Segment, 1, 2) == "</"
+				local Match: string? = string.match(Segment, if IsSegmentMatch then "^<%s*/%s*([%w]+)" else "^<%s*([%w]+)")
 				
-				if match then
-					if var7 then
-						removeLastMatchingTag(t_2, match)
-					else
-						var4 = if match ~= "br" then string.match(substring, "/%s*>$") ~= nil else true
-						
-						if not var4 then
-							table.insert(t_2, match)
-						end
+				if Match then
+					if IsSegmentMatch then
+						removeLastMatchingTag(List2, Match)
+					elseif Match ~= "br" and string.match(Segment, "/%s*>$") == nil then
+						table.insert(List2, Match)
 					end
 				end
-				var3 = matchIndex + 1
-				var5 = true
+				StartIndex = FoundAt + 1
+				Flag1 = true
 			end
 		end
-		if var5 then continue end
-		table.insert(t_1, string.sub(p8, var3, var3))
-		var2 = true
-		var3 += 1
+		if Flag1 then continue end
+		table.insert(List1, (string.sub(Text, StartIndex, StartIndex)))
+		Flag = true
+		StartIndex += 1
 	end
-	local joined = table.concat(t_1)
+	local Joined = table.concat(List1)
 	
-	for i = #t_2, 1, -1 do
-		joined ..= `</{t_2[i]}>`
+	for i = #List2, 1, -1 do
+		Joined ..= `</{List2[i]}>`
 	end
-	if joined ~= t[#t] then
-		table.insert(t, joined)
+	local Joined3: string = Joined
+	
+	if Joined3 ~= List[#List] then
+		table.insert(List, Joined3)
 	end
-	return t
+	return List
 end
 
-return function(p12)
-	-- upvalues: reactModule (ref), buildRevealTextFrames (ref)
-	local text = p12.text
-	local delimiter = p12.delimiter
-	local removeDelimiter = p12.removeDelimiter
-	local richText = p12.richText
-	local revealInterval = p12.revealInterval
-	local var8 = reactModule.useMemo(function()
-		-- upvalues: buildRevealTextFrames (copy), text (ref), delimiter (ref), richText (ref), removeDelimiter (ref)
-		return buildRevealTextFrames(text, delimiter, richText, removeDelimiter)
-	end, { text, delimiter, richText, removeDelimiter })
-	local var9 = if revealInterval == nil then 0.05 else math.max(revealInterval, 0)
-	local var10, var11 = reactModule.useState(if var9 == 0 then var8[#var8] else var8[1])
-	reactModule.useEffect(function()
-		-- upvalues: var9 (ref), var11 (ref), var8 (ref)
-		local thread = task.spawn(function()
-			-- upvalues: var9 (copy), var11 (copy), var8 (copy)
-			if var9 == 0 then
-				var11(var8[#var8])
+return function(p3) --[[ Line: 133 | Named "useRevealText" ]]
+	-- upvalues: ReactModule (copy), buildRevealTextFrames (copy)
+	local Text = p3.text
+	local Delimiter = p3.delimiter
+	local RemoveDelimiter = p3.removeDelimiter
+	local RichText = p3.richText
+	local RevealInterval: number = p3.revealInterval
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 140 ]]
+		-- upvalues: buildRevealTextFrames (upval), Text (copy), Delimiter (copy), RichText (copy), RemoveDelimiter (copy)
+		return (buildRevealTextFrames(Text, Delimiter, RichText, RemoveDelimiter))
+	end, { Text, Delimiter, RichText, RemoveDelimiter })
+	local Largest: number = if RevealInterval == nil then 0.05 else math.max(RevealInterval, 0)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(if Largest == 0 then UseMemoResult[#UseMemoResult] else UseMemoResult[1])
+	ReactModule.useEffect(function() --[[ Line: 147 ]]
+		-- upvalues: Largest (copy), UseStateResult2 (copy), UseMemoResult (copy)
+		local SpawnedThread = task.spawn(function() --[[ Line: 148 ]]
+			-- upvalues: Largest (upval), UseStateResult2 (upval), UseMemoResult (upval)
+			if Largest == 0 then
+				UseStateResult2(UseMemoResult[#UseMemoResult])
 				
 				return
 			end
-			var11(var8[1])
+			UseStateResult2(UseMemoResult[1])
 			
-			for i = 2, #var8 do
-				task.wait(var9)
-				var11(var8[i])
+			for i = 2, #UseMemoResult do
+				task.wait(Largest)
+				UseStateResult2(UseMemoResult[i])
 			end
 		end)
 		
-		return function()
-			-- upvalues: thread (ref)
-			task.cancel(thread)
+		return function() --[[ Line: 162 ]]
+			-- upvalues: SpawnedThread (copy)
+			task.cancel(SpawnedThread)
 		end
-	end, { var8, var9 })
+	end, { UseMemoResult, Largest })
 	
-	return var10
+	return UseStateResult
 end

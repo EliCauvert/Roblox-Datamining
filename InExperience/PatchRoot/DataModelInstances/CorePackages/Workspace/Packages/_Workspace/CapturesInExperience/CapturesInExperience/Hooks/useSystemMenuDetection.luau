@@ -1,19 +1,19 @@
-﻿local guiService = game:GetService("GuiService")
-local parent = script.Parent.Parent.Parent
-local useEventConnection = require(parent.ReactUtils).useEventConnection
-local useState = require(parent.React).useState
+﻿local GuiService = game:GetService("GuiService")
+local Parent = script.Parent.Parent.Parent
+local UseEventConnectionFunction = require(Parent.ReactUtils).useEventConnection
+local UseStateFunction = require(Parent.React).useState
 
-return function()
-	-- upvalues: useState (ref), useEventConnection (ref), guiService (ref)
-	local var1, var2 = useState(false)
-	useEventConnection(guiService.MenuOpened, function()
-		-- upvalues: var2 (ref)
-		var2(true)
+return function() --[[ Line: 12 | Named "useSystemMenuDetection" ]]
+	-- upvalues: UseStateFunction (copy), UseEventConnectionFunction (copy), GuiService (copy)
+	local UseStateResult, UseStateResult2 = UseStateFunction(false)
+	UseEventConnectionFunction(GuiService.MenuOpened, function() --[[ Line: 15 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(true)
 	end)
-	useEventConnection(guiService.MenuClosed, function()
-		-- upvalues: var2 (ref)
-		var2(false)
+	UseEventConnectionFunction(GuiService.MenuClosed, function() --[[ Line: 19 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(false)
 	end)
 	
-	return var1
+	return UseStateResult
 end

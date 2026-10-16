@@ -1,60 +1,58 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local useStyle = require(parent.UIBlox).Core.Style.useStyle
-local useStatusBarHeight = require(parent.RobloxAppHooks).useStatusBarHeight
-local fFlagProfileModalViewStatusBarOffsetModule = require(profilePlatform.Flags.FFlagProfileModalViewStatusBarOffset)
-local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-local focusNavigableSurfaceWrapper = focusNavigationUtilsModule.FocusNavigableSurfaceWrapper
-local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
-local enumsModule = require(profilePlatform.Common.Enums)
-local focusNavigationEventNameEnum = focusNavigationUtilsModule.FocusNavigationEventNameEnum
-local inputHandlersModule = require(parent.InputHandlers)
-local displayModule = require(parent.Display)
-local useSignalState = require(parent.SignalsReact).useSignalState
-local useProfileJsonComponentModule = require(profilePlatform.Hooks.useProfileJsonComponent)
-local useProfileWrapperContextModule = require(profilePlatform.Contexts.useProfileWrapperContext)
-local fFlagFixCommunityProfileWideCoverLayoutModule = require(profilePlatform.Flags.FFlagFixCommunityProfileWideCoverLayout)
-local view = require(parent.Foundation).View
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local UseStyleFunction = require(Parent.UIBlox).Core.Style.useStyle
+local UseStatusBarHeightFunction = require(Parent.RobloxAppHooks).useStatusBarHeight
+local FFlagProfileModalViewStatusBarOffsetModule = require(ProfilePlatform.Flags.FFlagProfileModalViewStatusBarOffset)
+local FFlagProfileModalViewBottomSafeAreaModule = require(ProfilePlatform.Flags.FFlagProfileModalViewBottomSafeArea)
+local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
+local FocusNavigableSurfaceWrapper = FocusNavigationUtilsModule.FocusNavigableSurfaceWrapper
+local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local FocusNavigationEventNameEnum = FocusNavigationUtilsModule.FocusNavigationEventNameEnum
+local InputHandlersModule = require(Parent.InputHandlers)
+local DisplayModule = require(Parent.Display)
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local UseProfileJsonComponentModule = require(ProfilePlatform.Hooks.useProfileJsonComponent)
+local UseProfileWrapperContextModule = require(ProfilePlatform.Contexts.useProfileWrapperContext)
+local FFlagFixCommunityProfileWideCoverLayoutModule = require(ProfilePlatform.Flags.FFlagFixCommunityProfileWideCoverLayout)
+local View = require(Parent.Foundation).View
 
-return function(p1)
-	-- upvalues: useStyle (ref), useSignalState (ref), displayModule (ref), fFlagProfileModalViewStatusBarOffsetModule (ref), useStatusBarHeight (ref), fFlagFixCommunityProfileWideCoverLayoutModule (ref), useProfileWrapperContextModule (ref), useProfileJsonComponentModule (ref), enumsModule (ref), reactModule (ref), inputHandlersModule (ref), focusNavigableSurfaceWrapper (ref), focusNavigableSurfaceIdentifierEnum (ref), focusNavigationEventNameEnum (ref), view (ref)
-	local var1 = useStyle()
-	local var2 = useSignalState(displayModule.GetDisplayStore().getDeviceSafePadding)
-	local t = {
-		BorderSizePixel = 0,
-		AnchorPoint = Vector2.new(1, 0),
-		Position = UDim2.fromScale(1, 0),
-		Size = if p1.fillPane then UDim2.fromScale(1, 1) else UDim2.new(0, p1.viewWidth, 1, 0),
-		BackgroundTransparency = var1.Theme.BackgroundDefault.Transparency,
-		BackgroundColor3 = var1.Theme.BackgroundDefault.Color
-	}
-	local var3 = if fFlagProfileModalViewStatusBarOffsetModule then useStatusBarHeight() else nil
-	local var4 = if fFlagProfileModalViewStatusBarOffsetModule then var3 else 0
-	local var5 = if fFlagProfileModalViewStatusBarOffsetModule then -var3 else 0
-	local var6 = if fFlagFixCommunityProfileWideCoverLayoutModule then useProfileWrapperContextModule() else nil
-	local var7 = if fFlagFixCommunityProfileWideCoverLayoutModule then useProfileJsonComponentModule(enumsModule.Components.CoverPhoto) else nil
-	local var8 = if fFlagFixCommunityProfileWideCoverLayoutModule and var6 ~= nil and (var6.profileType == enumsModule.ProfileTypes.Community and var7 ~= nil) and var7.coverPhotoId == nil then 56 else 0
+return function(p1) --[[ Line: 37 ]]
+	-- upvalues: UseStyleFunction (copy), UseSignalStateFunction (copy), DisplayModule (copy), FFlagProfileModalViewStatusBarOffsetModule (copy), UseStatusBarHeightFunction (copy), FFlagProfileModalViewBottomSafeAreaModule (copy), FFlagFixCommunityProfileWideCoverLayoutModule (copy), UseProfileWrapperContextModule (copy), UseProfileJsonComponentModule (copy), EnumsModule (copy), ReactModule (copy), InputHandlersModule (copy), FocusNavigableSurfaceWrapper (copy), FocusNavigableSurfaceIdentifierEnum (copy), FocusNavigationEventNameEnum (copy), View (copy)
+	local UseStyleResult = UseStyleFunction()
+	local UseSignalStateResult = UseSignalStateFunction(DisplayModule.GetDisplayStore().getDeviceSafePadding)
+	local UseStatusBarHeightResult = if FFlagProfileModalViewStatusBarOffsetModule then UseStatusBarHeightFunction() else nil
+	local UseProfileWrapperContextModuleResult = if FFlagFixCommunityProfileWideCoverLayoutModule then UseProfileWrapperContextModule() else nil
+	local UseProfileJsonComponentModuleResult = if FFlagFixCommunityProfileWideCoverLayoutModule then UseProfileJsonComponentModule(EnumsModule.Components.CoverPhoto) else nil
+	local Offset: number = if FFlagFixCommunityProfileWideCoverLayoutModule and UseProfileWrapperContextModuleResult ~= nil and UseProfileWrapperContextModuleResult.profileType == EnumsModule.ProfileTypes.Community and UseProfileJsonComponentModuleResult ~= nil and UseProfileJsonComponentModuleResult.coverPhotoId == nil then 56 else 0
 	
-	return reactModule.createElement("ImageButton", {
-		Position = UDim2.fromOffset(0, -var2.top),
-		Size = UDim2.new(1, var2.right, 1, var2.top + var2.bottom),
-		BackgroundTransparency = var1.Theme.Overlay.Transparency,
-		BackgroundColor3 = var1.Theme.Overlay.Color,
+	return ReactModule.createElement("ImageButton", {
+		Position = UDim2.fromOffset(0, -UseSignalStateResult.top),
+		Size = UDim2.new(1, UseSignalStateResult.right, 1, UseSignalStateResult.top + UseSignalStateResult.bottom),
+		BackgroundTransparency = UseStyleResult.Theme.Overlay.Transparency,
+		BackgroundColor3 = UseStyleResult.Theme.Overlay.Color,
 		Active = true,
 		AutoButtonColor = false,
-		[reactModule.Event.Activated] = p1.navigateBack
+		[ReactModule.Event.Activated] = p1.navigateBack
 	}, {
-		ProfileWindow = reactModule.createElement(focusNavigableSurfaceWrapper, {
+		ProfileWindow = ReactModule.createElement(FocusNavigableSurfaceWrapper, {
 			isIsolated = true,
-			surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.PopUp,
-			frameProps = t,
+			surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.PopUp,
+			frameProps = {
+				BorderSizePixel = 0,
+				AnchorPoint = Vector2.new(1, 0),
+				Position = UDim2.fromScale(1, 0),
+				Size = if p1.fillPane then UDim2.fromScale(1, 1) else UDim2.new(0, p1.viewWidth, 1, 0),
+				BackgroundTransparency = UseStyleResult.Theme.BackgroundDefault.Transparency,
+				BackgroundColor3 = UseStyleResult.Theme.BackgroundDefault.Color
+			},
 			customEventHandlers = {
-				[focusNavigationEventNameEnum.NavigateBack] = {
-					handler = reactModule.useMemo(function()
-						-- upvalues: inputHandlersModule (copy), p1 (ref)
-						return inputHandlersModule.onRelease(function(p2)
-							-- upvalues: p1 (copy)
+				[FocusNavigationEventNameEnum.NavigateBack] = {
+					handler = ReactModule.useMemo(function() --[[ Line: 82 ]]
+						-- upvalues: InputHandlersModule (upval), p1 (copy)
+						return InputHandlersModule.onRelease(function(p2) --[[ Line: 83 ]]
+							-- upvalues: p1 (upval)
 							p2:cancel()
 							p1.navigateBack()
 						end)
@@ -62,9 +60,9 @@ return function(p1)
 				}
 			}
 		}, {
-			reactModule.useCallback(function(p2)
-				-- upvalues: reactModule (copy)
-				return reactModule.createElement("TextButton", {
+			ReactModule.useCallback(function(p2) --[[ Line: 72 ]]
+				-- upvalues: ReactModule (upval)
+				return ReactModule.createElement("TextButton", {
 					BackgroundTransparency = 1,
 					Text = "",
 					Selectable = false,
@@ -72,26 +70,26 @@ return function(p1)
 					Position = UDim2.fromScale(0, 0)
 				}, { p2 })
 			end)({
-				ProfileTopBarContainer = reactModule.createElement(view, {
+				ProfileTopBarContainer = ReactModule.createElement(View, {
 					ZIndex = 100,
 					tag = {
-						["anchor-top-left"] = fFlagProfileModalViewStatusBarOffsetModule,
-						["position-top-left"] = not fFlagProfileModalViewStatusBarOffsetModule
+						["anchor-top-left"] = FFlagProfileModalViewStatusBarOffsetModule,
+						["position-top-left"] = not FFlagProfileModalViewStatusBarOffsetModule
 					},
-					Position = if fFlagProfileModalViewStatusBarOffsetModule then UDim2.new(0, 0, 0, var3) else nil,
+					Position = if FFlagProfileModalViewStatusBarOffsetModule then UDim2.new(0, 0, 0, UseStatusBarHeightResult) else nil,
 					Size = UDim2.new(1, 0, 0, 56)
 				}, { ProfileTopBar = p1.renderTopBar() }),
-				PeekViewContainer = reactModule.createElement("ScrollingFrame", {
+				PeekViewContainer = ReactModule.createElement("ScrollingFrame", {
 					BackgroundTransparency = 1,
 					ScrollBarThickness = 0,
 					Selectable = false,
 					ScrollingDirection = Enum.ScrollingDirection.Y,
-					Size = UDim2.new(1, 1, 1, var5),
-					Position = UDim2.new(0, 0, 0, var4),
+					Size = UDim2.new(1, 1, 1, if FFlagProfileModalViewStatusBarOffsetModule then -(UseStatusBarHeightResult + (if FFlagProfileModalViewBottomSafeAreaModule then UseSignalStateResult.bottom else 0)) else 0),
+					Position = UDim2.new(0, 0, 0, if FFlagProfileModalViewStatusBarOffsetModule then UseStatusBarHeightResult else 0),
 					CanvasSize = UDim2.new(1, 0, 0, 0),
 					AutomaticCanvasSize = Enum.AutomaticSize.Y
 				}, {
-					TopInset = if fFlagFixCommunityProfileWideCoverLayoutModule and var8 > 0 then reactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, var8) }) else nil,
+					TopInset = if FFlagFixCommunityProfileWideCoverLayoutModule and Offset > 0 then ReactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, Offset) }) else nil,
 					Content = p1.renderContent()
 				})
 			})

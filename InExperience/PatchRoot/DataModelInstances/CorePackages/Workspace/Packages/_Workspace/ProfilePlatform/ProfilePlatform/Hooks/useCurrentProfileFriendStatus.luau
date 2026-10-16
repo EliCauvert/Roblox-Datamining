@@ -1,11 +1,11 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local enumsModule = require(profilePlatform.Common.Enums)
-local viewerRelationshipUtilsModule = require(profilePlatform.Components.ProfilePlatformPage.viewerRelationshipUtils)
-local useProfileJsonComponentModule = require(profilePlatform.Hooks.useProfileJsonComponent)
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local ViewerRelationshipUtilsModule = require(ProfilePlatform.Components.ProfilePlatformPage.viewerRelationshipUtils)
+local UseProfileJsonComponentModule = require(ProfilePlatform.Hooks.useProfileJsonComponent)
 
-return function()
-	-- upvalues: useProfileJsonComponentModule (ref), enumsModule (ref), viewerRelationshipUtilsModule (ref)
-	local userProfileHeader = useProfileJsonComponentModule(enumsModule.Components.UserProfileHeader) or {}
+return function() --[[ Line: 8 ]]
+	-- upvalues: UseProfileJsonComponentModule (copy), EnumsModule (copy), ViewerRelationshipUtilsModule (copy)
+	local UseProfileJsonComponentModuleResult = UseProfileJsonComponentModule(EnumsModule.Components.UserProfileHeader) or {}
 	
-	return viewerRelationshipUtilsModule.mapViewerRelationshipAndContextToAnalyticsFriendStatus(userProfileHeader.viewerRelationship, userProfileHeader.contextualInformation)
+	return ViewerRelationshipUtilsModule.mapViewerRelationshipAndContextToAnalyticsFriendStatus(UseProfileJsonComponentModuleResult.viewerRelationship, UseProfileJsonComponentModuleResult.contextualInformation)
 end

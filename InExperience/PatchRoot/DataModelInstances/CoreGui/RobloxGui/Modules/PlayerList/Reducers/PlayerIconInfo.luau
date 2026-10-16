@@ -1,12 +1,11 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local roduxModule = require(corePackagesService.Packages.Rodux)
-local cryoModule = require(corePackagesService.Packages.Cryo)
-local actions = script.Parent.Parent.Actions
+﻿local CorePackages = game:GetService("CorePackages")
+local CryoModule = require(CorePackages.Packages.Cryo)
+local Actions = script.Parent.Parent.Actions
 
-return roduxModule.createReducer({}, {
-	[require(actions.AddPlayer).name] = function(p1, p2)
-		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p1, {
+return (require(CorePackages.Packages.Rodux).createReducer({}, {
+	[require(Actions.AddPlayer).name] = function(p1, p2) --[[ Line: 15 ]]
+		-- upvalues: CryoModule (copy)
+		return CryoModule.Dictionary.join(p1, {
 			[p2.userId] = {
 				avatarIcon = nil,
 				specialGroupIcon = nil,
@@ -14,13 +13,13 @@ return roduxModule.createReducer({}, {
 			}
 		})
 	end,
-	[require(actions.RemovePlayer).name] = function(p1, p2)
-		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p1, { [p2.userId] = cryoModule.None })
+	[require(Actions.RemovePlayer).name] = function(p1, p2) --[[ Line: 25 ]]
+		-- upvalues: CryoModule (copy)
+		return CryoModule.Dictionary.join(p1, { [p2.userId] = CryoModule.None })
 	end,
-	[require(actions.SetPlayerAvatarIcon).name] = function(p1, p2)
-		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p1, {
+	[require(Actions.SetPlayerAvatarIcon).name] = function(p1, p2) --[[ Line: 31 ]]
+		-- upvalues: CryoModule (copy)
+		return CryoModule.Dictionary.join(p1, {
 			[p2.userId] = {
 				isPlaceOwner = p1[p2.userId].isPlaceOwner,
 				avatarIcon = p2.avatarIcon,
@@ -28,9 +27,9 @@ return roduxModule.createReducer({}, {
 			}
 		})
 	end,
-	[require(actions.SetPlayerIsCreator).name] = function(p1, p2)
-		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p1, {
+	[require(Actions.SetPlayerIsCreator).name] = function(p1, p2) --[[ Line: 41 ]]
+		-- upvalues: CryoModule (copy)
+		return CryoModule.Dictionary.join(p1, {
 			[p2.userId] = {
 				isPlaceOwner = p2.isCreator,
 				avatarIcon = p1[p2.userId].avatarIcon,
@@ -38,9 +37,9 @@ return roduxModule.createReducer({}, {
 			}
 		})
 	end,
-	[require(actions.SetPlayerSpecialGroupIcon).name] = function(p1, p2)
-		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p1, {
+	[require(Actions.SetPlayerSpecialGroupIcon).name] = function(p1, p2) --[[ Line: 51 ]]
+		-- upvalues: CryoModule (copy)
+		return CryoModule.Dictionary.join(p1, {
 			[p2.userId] = {
 				isPlaceOwner = p1[p2.userId].isPlaceOwner,
 				avatarIcon = p1[p2.userId].avatarIcon,
@@ -48,4 +47,4 @@ return roduxModule.createReducer({}, {
 			}
 		})
 	end
-})
+}))

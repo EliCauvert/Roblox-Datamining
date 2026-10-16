@@ -1,8 +1,8 @@
-﻿local agentCardModule = require(script.AgentCard)
+﻿local AgentCardModule = require(script.AgentCard)
 
 return {
-	AgentCard = agentCardModule,
-	Root = agentCardModule,
+	AgentCard = AgentCardModule,
+	Root = AgentCardModule,
 	Actions = require(script.AgentCardActions),
 	AgentPlanCard = require(script.AgentPlanCard),
 	AgentDevProductCard = require(script.AgentDevProductCard)

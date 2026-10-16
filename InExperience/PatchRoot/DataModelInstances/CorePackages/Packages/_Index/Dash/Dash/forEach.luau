@@ -1,5 +1,5 @@
-﻿return function(p1, p2)
-	for i, v in p1 do
-		p2(v, i)
+﻿return function(List, Callback: (any, any) -> ()) --[[ Line: 12 | Named "forEach" ]]
+	for i, value in List do
+		Callback(value, i)
 	end
 end

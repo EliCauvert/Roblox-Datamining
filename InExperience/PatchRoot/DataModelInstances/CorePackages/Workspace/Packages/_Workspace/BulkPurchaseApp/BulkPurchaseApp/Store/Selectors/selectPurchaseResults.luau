@@ -1,12 +1,12 @@
-﻿local bulkPurchaseApp = script:FindFirstAncestor("BulkPurchaseApp")
-local selectRobuxSpentModule = require(bulkPurchaseApp.Store.Selectors.selectRobuxSpent)
-local selectResultItemsModule = require(bulkPurchaseApp.Store.Selectors.selectResultItems)
-local _ = require(bulkPurchaseApp.Store.Types)
+﻿local BulkPurchaseApp = script:FindFirstAncestor("BulkPurchaseApp")
+local SelectRobuxSpentModule = require(BulkPurchaseApp.Store.Selectors.selectRobuxSpent)
+local SelectResultItemsModule = require(BulkPurchaseApp.Store.Selectors.selectResultItems)
+local _ = require(BulkPurchaseApp.Store.Types)
 
-return function(p1)
-	-- upvalues: selectRobuxSpentModule (ref), selectResultItemsModule (ref)
+return function(p1) --[[ Line: 14 | Named "selectPurchaseResults" ]]
+	-- upvalues: SelectRobuxSpentModule (copy), SelectResultItemsModule (copy)
 	return {
-		RobuxSpent = selectRobuxSpentModule(p1),
-		Items = selectResultItemsModule(p1)
+		RobuxSpent = SelectRobuxSpentModule(p1),
+		Items = SelectResultItemsModule(p1)
 	}
 end

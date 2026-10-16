@@ -1,1 +1,1 @@
-﻿return require(script:FindFirstAncestor("ShareSheet").Parent.Signals).createComputed(require(script.Parent.createUniversalShareSheetStore))
+﻿return require(script:FindFirstAncestor("ShareSheet").Parent.Signals).createComputed((require(script.Parent.createUniversalShareSheetStore)))

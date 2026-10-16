@@ -1,21 +1,21 @@
-﻿local parent = script.Parent.Parent.Parent.Parent
-local dependenciesModule = require(parent.dependencies)
-local roact = dependenciesModule.Roact
-local withLocalization = dependenciesModule.withLocalization
-local images = dependenciesModule.UIBlox.App.ImageSet.Images
-local textKeysModule = require(parent.Common.TextKeys)
-local contactsInformationModalModule = require(parent.ContactsList.Components.ContactsInformationModal)
-local contactsUploadErrorModal = roact.PureComponent:extend("ContactsUploadErrorModal")
+﻿local Parent = script.Parent.Parent.Parent.Parent
+local DependenciesModule = require(Parent.dependencies)
+local Roact = DependenciesModule.Roact
+local WithLocalizationFunction = DependenciesModule.withLocalization
+local Images = DependenciesModule.UIBlox.App.ImageSet.Images
+local TextKeysModule = require(Parent.Common.TextKeys)
+local ContactsInformationModalModule = require(Parent.ContactsList.Components.ContactsInformationModal)
+local ContactsUploadErrorModal = Roact.PureComponent:extend("ContactsUploadErrorModal")
 
-function contactsUploadErrorModal.render(_)
-	-- upvalues: withLocalization (ref), textKeysModule (ref), roact (ref), contactsInformationModalModule (ref), images (ref)
-	return withLocalization({ hasUploadError = textKeysModule.UPLOAD_CONTACTS_FAILURE })(function(p1)
-		-- upvalues: roact (copy), contactsInformationModalModule (copy), images (copy)
-		return roact.createElement(contactsInformationModalModule, {
-			image = images["icons/status/error_large"],
+function ContactsUploadErrorModal:render() --[[ Line: 14 ]]
+	-- upvalues: WithLocalizationFunction (copy), TextKeysModule (copy), Roact (copy), ContactsInformationModalModule (copy), Images (copy)
+	return WithLocalizationFunction({ hasUploadError = TextKeysModule.UPLOAD_CONTACTS_FAILURE })(function(p1) --[[ Line: 17 ]]
+		-- upvalues: Roact (upval), ContactsInformationModalModule (upval), Images (upval)
+		return Roact.createElement(ContactsInformationModalModule, {
+			image = Images["icons/status/error_large"],
 			text = p1.hasUploadError
 		})
 	end)
 end
 
-return contactsUploadErrorModal
+return ContactsUploadErrorModal

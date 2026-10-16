@@ -1,21 +1,21 @@
-﻿return function(p1, p2)
-	local var1 = nil
-	local var2 = p2 / 1000
+﻿return function(Callback, p1: number) --[[ Line: 1 ]]
+	local DelayedThread = nil
+	local Delay = p1 / 1000
 	
 	return {
-		cancel = function()
-			-- upvalues: var1 (write)
-			if var1 then
-				task.cancel(var1)
-				var1 = nil
+		cancel = function() --[[ Line: 5 ]]
+			-- upvalues: DelayedThread (ref)
+			if DelayedThread then
+				task.cancel(DelayedThread)
+				DelayedThread = nil
 			end
 		end,
-		call = function(...)
-			-- upvalues: var1 (write), var2 (ref), p1 (ref)
+		call = function(...) --[[ Line: 11 ]]
+			-- upvalues: DelayedThread (ref), Delay (copy), Callback (copy)
 			local list = { ... }
-			var1 = task.delay(var2, function()
-				-- upvalues: p1 (copy), list (ref)
-				p1(unpack(list))
+			DelayedThread = task.delay(Delay, function() --[[ Line: 13 ]]
+				-- upvalues: Callback (upval), list (copy)
+				Callback(unpack(list))
 			end)
 		end
 	}

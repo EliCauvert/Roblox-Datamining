@@ -1,3 +1,6 @@
-﻿return require(script:FindFirstAncestor("ExpChatShared").Parent.Rodux).makeActionCreator(script.Name, function(p1, p2)
-	return { channelName = p1, isUserInitiated = p2 }
+﻿return require(script:FindFirstAncestor("ExpChatShared").Parent.Rodux).makeActionCreator(script.Name, function(ChannelName, IsUserInitiated) --[[ Line: 13 ]]
+	return {
+		channelName = ChannelName,
+		isUserInitiated = IsUserInitiated
+	}
 end)

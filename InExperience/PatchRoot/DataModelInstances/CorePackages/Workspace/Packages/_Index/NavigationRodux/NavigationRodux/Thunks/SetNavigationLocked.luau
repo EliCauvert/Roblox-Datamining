@@ -1,13 +1,13 @@
-﻿local navigationRodux = script:FindFirstAncestor("NavigationRodux")
-local applySetNavigationLockedModule = require(navigationRodux.Actions.ApplySetNavigationLocked)
-local argCheckModule = require(navigationRodux.Parent.ArgCheck)
+﻿local NavigationRodux = script:FindFirstAncestor("NavigationRodux")
+local ApplySetNavigationLockedModule = require(NavigationRodux.Actions.ApplySetNavigationLocked)
+local ArgCheckModule = require(NavigationRodux.Parent.ArgCheck)
 
-return function(p1)
-	-- upvalues: argCheckModule (ref), applySetNavigationLockedModule (ref)
-	argCheckModule.isType(p1, "boolean", "locked")
+return function(p1) --[[ Line: 7 ]]
+	-- upvalues: ArgCheckModule (copy), ApplySetNavigationLockedModule (copy)
+	ArgCheckModule.isType(p1, "boolean", "locked")
 	
-	return function(p2)
-		-- upvalues: applySetNavigationLockedModule (copy), p1 (ref)
-		p2:dispatch(applySetNavigationLockedModule(p1))
+	return function(p2) --[[ Line: 10 ]]
+		-- upvalues: ApplySetNavigationLockedModule (upval), p1 (copy)
+		p2:dispatch(ApplySetNavigationLockedModule(p1))
 	end
 end

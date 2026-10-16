@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.PageLoadTracker.PageLoadTracker)
+﻿return (require(script.Parent.Parent.Parent._Index.PageLoadTracker.PageLoadTracker))

@@ -1,12 +1,12 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local enumsModule = require(profilePlatform.Common.Enums)
-local useProfileJsonComponentModule = require(profilePlatform.Hooks.useProfileJsonComponent)
-local fFlagProfilePlatformAddCurrentlyPlayingModule = require(profilePlatform.Flags.FFlagProfilePlatformAddCurrentlyPlaying)
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local UseProfileJsonComponentModule = require(ProfilePlatform.Hooks.useProfileJsonComponent)
+local FFlagProfilePlatformAddCurrentlyPlayingModule = require(ProfilePlatform.Flags.FFlagProfilePlatformAddCurrentlyPlaying)
 
-return function(p1)
-	-- upvalues: useProfileJsonComponentModule (ref), enumsModule (ref), fFlagProfilePlatformAddCurrentlyPlayingModule (ref)
-	local contextualInformation = (useProfileJsonComponentModule(enumsModule.Components.UserProfileHeader) or {}).contextualInformation
-	local context = contextualInformation and contextualInformation.context
+return function(InGame): boolean --[[ Line: 8 ]]
+	-- upvalues: UseProfileJsonComponentModule (copy), EnumsModule (copy), FFlagProfilePlatformAddCurrentlyPlayingModule (copy)
+	local ContextualInformation = (UseProfileJsonComponentModule(EnumsModule.Components.UserProfileHeader) or {}).contextualInformation
+	local Context = ContextualInformation and ContextualInformation.context
 	
-	return not (not context or context == "None") and (if context == enumsModule.ContextualTypes.Presence and (p1 == enumsModule.PresenceTypes.Online or p1 == enumsModule.PresenceTypes.Offline) then false else fFlagProfilePlatformAddCurrentlyPlayingModule and p1 == enumsModule.PresenceTypes.InGame and context == enumsModule.ContextualTypes.Presence)
+	return if Context and Context ~= "None" then (Context ~= EnumsModule.ContextualTypes.Presence or InGame ~= EnumsModule.PresenceTypes.Online and InGame ~= EnumsModule.PresenceTypes.Offline) and (not FFlagProfilePlatformAddCurrentlyPlayingModule or InGame ~= EnumsModule.PresenceTypes.InGame or Context ~= EnumsModule.ContextualTypes.Presence) else false
 end

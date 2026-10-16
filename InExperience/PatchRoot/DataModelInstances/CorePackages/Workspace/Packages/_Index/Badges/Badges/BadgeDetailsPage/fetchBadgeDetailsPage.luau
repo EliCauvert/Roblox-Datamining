@@ -1,67 +1,69 @@
-﻿local playersService = game:GetService("Players")
-local badges = script:FindFirstAncestor("Badges")
-local parent = badges.Parent
-local appPage = require(parent.RobloxAppEnums).AppPage
-local sduiSharedUtilitiesModule = require(parent.SduiSharedUtilities)
-local sduiResponseType = sduiSharedUtilitiesModule.SduiResponseType
-local getSduiApiStore = sduiSharedUtilitiesModule.getSduiApiStore
-local getBadgeDetailsUrlModule = require(badges.BadgesSeeAllPage.getBadgeDetailsUrl)
-local getBadgeDetailsPageKeyModule = require(script.Parent.getBadgeDetailsPageKey)
-local fFlagSduiExtendedCapabilitiesDiscovery = require(parent.SharedFlags).FFlagSduiExtendedCapabilitiesDiscovery
+﻿local Players = game:GetService("Players")
+local Badges = script:FindFirstAncestor("Badges")
+local Parent = Badges.Parent
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local SduiSharedUtilitiesModule = require(Parent.SduiSharedUtilities)
+local SduiResponseType = SduiSharedUtilitiesModule.SduiResponseType
+local GetSduiApiStoreFunction = SduiSharedUtilitiesModule.getSduiApiStore
+local GetBadgeDetailsUrlModule = require(Badges.BadgesSeeAllPage.getBadgeDetailsUrl)
+local GetBadgeDetailsPageKeyModule = require(script.Parent.getBadgeDetailsPageKey)
+local FFlagSduiExtendedCapabilitiesDiscovery = require(Parent.SharedFlags).FFlagSduiExtendedCapabilitiesDiscovery
 
-local function _()
-	-- upvalues: playersService (ref)
-	local localPlayer = playersService.LocalPlayer
+local function _() --[[ Line: 15 | Named "getLocalPlayerUserId" ]]
+	-- upvalues: Players (copy)
+	local LocalPlayer = Players.LocalPlayer
 	
-	if not localPlayer then
+	if LocalPlayer then
+		local UserId: number = LocalPlayer.UserId
+		
+		return if UserId <= 0 then nil else tostring(UserId)
+	else
 		return nil
 	end
-	local userId = localPlayer.UserId
-	
-	return if userId <= 0 then nil else tostring(userId)
 end
 
-return function(p1, p2)
-	-- upvalues: playersService (ref), fFlagSduiExtendedCapabilitiesDiscovery (ref), parent (ref), badges (ref), sduiSharedUtilitiesModule (ref), getSduiApiStore (ref), sduiResponseType (ref), appPage (ref), getBadgeDetailsPageKeyModule (ref), getBadgeDetailsUrlModule (ref)
-	local var1
-	local localPlayer = playersService.LocalPlayer
+return function(p1, LoadTimer) --[[ Line: 27 | Named "fetchBadgeDetailsPage" ]]
+	-- upvalues: Players (copy), FFlagSduiExtendedCapabilitiesDiscovery (copy), Parent (copy), Badges (copy), SduiSharedUtilitiesModule (copy), GetSduiApiStoreFunction (copy), SduiResponseType (copy), AppPage (copy), GetBadgeDetailsPageKeyModule (copy), GetBadgeDetailsUrlModule (copy)
+	local LocalPlayer = Players.LocalPlayer
+	local v1 = nil
 	
-	if localPlayer then
-		local userId = localPlayer.UserId
-		var1 = if userId <= 0 then nil else tostring(userId)
+	if LocalPlayer then
+		local UserId: number = LocalPlayer.UserId
+		v1 = if UserId <= 0 then nil else tostring(UserId)
 	else
-		var1 = nil
+		v1 = nil
 	end
-	if fFlagSduiExtendedCapabilitiesDiscovery then
-		local serviceContractsProtoModule = require(parent.ServiceContractsProto)
-		local badgeDetailsPage = serviceContractsProtoModule.apppageplatform.badges.badge_details_page
-		getSduiApiStore().fetchIfNeeded({
-			responseType = sduiResponseType.Protobuf,
-			url = require(badges.BadgesSeeAllPage.getBadgeDetailsPostUrl)(),
-			surfaceKey = appPage.BadgeDetails,
-			configKey = getBadgeDetailsPageKeyModule(p1),
-			loadTimer = p2,
-			apiProto = badgeDetailsPage.BadgeDetailsPageV2Response,
+	if FFlagSduiExtendedCapabilitiesDiscovery then
+		local ServiceContractsProtoModule = require(Parent.ServiceContractsProto)
+		local BadgeDetailsPage = ServiceContractsProtoModule.apppageplatform.badges.badge_details_page
+		GetSduiApiStoreFunction().fetchIfNeeded({
+			responseType = SduiResponseType.Protobuf,
+			url = require(Badges.BadgesSeeAllPage.getBadgeDetailsPostUrl)(),
+			surfaceKey = AppPage.BadgeDetails,
+			configKey = GetBadgeDetailsPageKeyModule(p1),
+			loadTimer = LoadTimer,
+			apiProto = BadgeDetailsPage.BadgeDetailsPageV2Response,
 			postConfig = {
-				contentType = sduiSharedUtilitiesModule.SduiApiStorePostConfigContentType.Proto,
-				protoMessage = badgeDetailsPage.BadgeDetailsPageRequest,
-				body = badgeDetailsPage.BadgeDetailsPageRequest.new({
+				contentType = SduiSharedUtilitiesModule.SduiApiStorePostConfigContentType.Proto,
+				protoMessage = BadgeDetailsPage.BadgeDetailsPageRequest,
+				body = BadgeDetailsPage.BadgeDetailsPageRequest.new({
 					badge_id = tonumber(p1),
-					user_id = if var1 then tonumber(var1) else nil,
-					page_entry_format = serviceContractsProtoModule.apppageplatform.shared.page_entry_content.PageEntryFormat.toNumber("PAGE_ENTRY_FORMAT_UNIVERSAL"),
-					client_capabilities = sduiSharedUtilitiesModule.SduiCapabilities.buildClientCapabilities()
+					user_id = if v1 then tonumber(v1) else nil,
+					page_entry_format = ServiceContractsProtoModule.apppageplatform.shared.page_entry_content.PageEntryFormat.toNumber("PAGE_ENTRY_FORMAT_UNIVERSAL"),
+					client_capabilities = SduiSharedUtilitiesModule.SduiCapabilities.buildClientCapabilities()
 				})
 			}
 		})
 		
 		return
+	else
+		GetSduiApiStoreFunction().fetchIfNeeded({
+			responseType = SduiResponseType.Protobuf,
+			url = GetBadgeDetailsUrlModule(p1, v1),
+			surfaceKey = AppPage.BadgeDetails,
+			configKey = GetBadgeDetailsPageKeyModule(p1),
+			loadTimer = LoadTimer,
+			apiProto = require(Parent.ServiceContractsProto).apppageplatform.badges.badge_details_page.BadgeDetailsPageV2Response
+		})
 	end
-	getSduiApiStore().fetchIfNeeded({
-		responseType = sduiResponseType.Protobuf,
-		url = getBadgeDetailsUrlModule(p1, var1),
-		surfaceKey = appPage.BadgeDetails,
-		configKey = getBadgeDetailsPageKeyModule(p1),
-		loadTimer = p2,
-		apiProto = require(parent.ServiceContractsProto).apppageplatform.badges.badge_details_page.BadgeDetailsPageV2Response
-	})
 end

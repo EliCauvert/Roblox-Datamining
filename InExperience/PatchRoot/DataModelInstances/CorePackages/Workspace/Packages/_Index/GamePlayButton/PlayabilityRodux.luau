@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.PlayabilityRodux.PlayabilityRodux)
+﻿return (require(script.Parent.Parent.Parent._Index.PlayabilityRodux.PlayabilityRodux))

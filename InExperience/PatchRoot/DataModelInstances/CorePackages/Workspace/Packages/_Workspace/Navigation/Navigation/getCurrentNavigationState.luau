@@ -1,8 +1,8 @@
 ﻿local _ = require(script.Parent.types)
 
-local function getCurrentNavigationState(p1)
-	-- upvalues: getCurrentNavigationState (ref)
-	return if p1.routes and p1.index then getCurrentNavigationState(p1.routes[p1.index]) else p1
+local function getCurrentNavigationState(Route) --[[ Line: 7 ]]
+	-- upvalues: getCurrentNavigationState (copy)
+	return if Route.routes and Route.index then getCurrentNavigationState(Route.routes[Route.index]) else Route
 end
 
 return getCurrentNavigationState

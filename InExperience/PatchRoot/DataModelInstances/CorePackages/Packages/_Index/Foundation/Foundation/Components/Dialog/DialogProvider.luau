@@ -1,43 +1,43 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local _ = require(foundation.Enums.DialogSize)
-local getResponsiveSizeModule = require(script.Parent.getResponsiveSize)
-local useOverlayModule = require(foundation.Providers.Overlay.useOverlay)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local dialogContextModule = require(script.Parent.DialogContext)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local _ = require(Foundation.Enums.DialogSize)
+local GetResponsiveSizeModule = require(script.Parent.getResponsiveSize)
+local UseOverlayModule = require(Foundation.Providers.Overlay.useOverlay)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local DialogContextModule = require(script.Parent.DialogContext)
 
-return function(p1)
-	-- upvalues: useOverlayModule (ref), useTokensModule (ref), reactModule (ref), getResponsiveSizeModule (ref), dialogContextModule (ref)
-	local var1 = useOverlayModule()
-	local var2 = useTokensModule()
-	local var3, var4 = reactModule.useState(function()
-		-- upvalues: var1 (ref), getResponsiveSizeModule (copy), p1 (ref), var2 (ref)
-		return if var1 then getResponsiveSizeModule(var1.AbsoluteSize.X, p1.size, var2) else p1.responsiveSize or p1.size
+return function(p1) --[[ Line: 23 | Named "DialogProvider" ]]
+	-- upvalues: UseOverlayModule (copy), UseTokensModule (copy), ReactModule (copy), GetResponsiveSizeModule (copy), DialogContextModule (copy)
+	local UseOverlayModuleResult = UseOverlayModule()
+	local UseTokensModuleResult = UseTokensModule()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(function() --[[ Line: 27 ]]
+		-- upvalues: UseOverlayModuleResult (copy), GetResponsiveSizeModule (upval), p1 (copy), UseTokensModuleResult (copy)
+		return if UseOverlayModuleResult then GetResponsiveSizeModule(UseOverlayModuleResult.AbsoluteSize.X, p1.size, UseTokensModuleResult) else p1.responsiveSize or p1.size
 	end)
-	local var5, var6 = reactModule.useState(p1.hasHeroMedia)
-	local var7 = reactModule.useRef(nil)
-	local var8, var9 = reactModule.useState(nil)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(p1.hasHeroMedia)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(nil)
 	
-	return reactModule.createElement(dialogContextModule.Provider, {
-		value = reactModule.useMemo(function()
-			-- upvalues: p1 (ref), var3 (ref), var4 (ref), var5 (ref), var6 (ref), var7 (ref), var8 (ref), var9 (ref)
+	return ReactModule.createElement(DialogContextModule.Provider, {
+		value = ReactModule.useMemo(function() --[[ Line: 41 ]]
+			-- upvalues: p1 (copy), UseStateResult (copy), UseStateResult2 (copy), UseStateResult1 (copy), UseStateResult2_1 (copy), UseRefResult (copy), UseStateResult3 (copy), UseStateResult2_2 (copy)
 			return {
 				size = p1.size,
-				responsiveSize = var3,
-				setResponsiveSize = var4,
-				hasHeroMedia = var5,
-				setHasHeroMedia = var6,
+				responsiveSize = UseStateResult,
+				setResponsiveSize = UseStateResult2,
+				hasHeroMedia = UseStateResult1,
+				setHasHeroMedia = UseStateResult2_1,
 				testId = p1.testId,
-				closeAffordanceRef = var7,
-				contentStartRef = var8,
-				setContentStartRef = var9
+				closeAffordanceRef = UseRefResult,
+				contentStartRef = UseStateResult3,
+				setContentStartRef = UseStateResult2_2
 			}
 		end, {
 			p1.size,
-			var3,
-			var5,
+			UseStateResult,
+			UseStateResult1,
 			p1.testId,
-			var8
+			UseStateResult3
 		})
 	}, p1.children)
 end

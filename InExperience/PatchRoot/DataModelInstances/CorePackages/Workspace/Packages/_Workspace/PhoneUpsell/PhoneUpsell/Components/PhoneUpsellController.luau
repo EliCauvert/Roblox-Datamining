@@ -1,36 +1,36 @@
-﻿local phoneUpsell = script:FindFirstAncestor("PhoneUpsell")
-local parent = phoneUpsell.Parent
-local localizationService = game:GetService("LocalizationService")
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local reactRobloxModule = require(parent.ReactRoblox)
-local styleProviderWithDefaultTheme = require(parent.Style).StyleProviderWithDefaultTheme
-local localization = require(parent.RobloxAppLocales).Localization
-local localizationProvider = require(parent.Localization).LocalizationProvider
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local UIBloxModule = require(parent.UIBlox)
-local useStyle = UIBloxModule.Core.Style.useStyle
-local images = UIBloxModule.App.ImageSet.Images
-local toast = UIBloxModule.App.Dialog.Toast
-local getFFlagNotificationModalSetMenuIsOpen = require(parent.SharedFlags).GetFFlagNotificationModalSetMenuIsOpen
-local openModal = require(parent.NotificationModalsManager).OpenModal
-local closeModal = require(parent.NotificationModalsManager).CloseModal
-local inExperienceProviderContainer = require(parent.InExperienceContainer).InExperienceProviderContainer
-local inGameUpsellContainerModule = require(phoneUpsell.Components.InGame.InGameUpsellContainer)
-local var1 = nil
+﻿local PhoneUpsell = script:FindFirstAncestor("PhoneUpsell")
+local Parent = PhoneUpsell.Parent
+local LocalizationService = game:GetService("LocalizationService")
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local ReactRobloxModule = require(Parent.ReactRoblox)
+local StyleProviderWithDefaultTheme = require(Parent.Style).StyleProviderWithDefaultTheme
+local Localization = require(Parent.RobloxAppLocales).Localization
+local LocalizationProvider = require(Parent.Localization).LocalizationProvider
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UIBloxModule = require(Parent.UIBlox)
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local Images = UIBloxModule.App.ImageSet.Images
+local Toast = UIBloxModule.App.Dialog.Toast
+local GetFFlagNotificationModalSetMenuIsOpenFunction = require(Parent.SharedFlags).GetFFlagNotificationModalSetMenuIsOpen
+local OpenModalFunction = require(Parent.NotificationModalsManager).OpenModal
+local CloseModalFunction = require(Parent.NotificationModalsManager).CloseModal
+local InExperienceProviderContainer = require(Parent.InExperienceContainer).InExperienceProviderContainer
+local InGameUpsellContainerModule = require(PhoneUpsell.Components.InGame.InGameUpsellContainer)
+local Root = nil
 
-local var2 = function(p1)
-	-- upvalues: useLocalization (ref), useStyle (ref), reactModule (ref), toast (ref), images (ref)
-	return reactModule.createElement(reactModule.Fragment, {}, {
-		PhoneToast = reactModule.createElement(toast, {
+local function v15(p1) --[[ Line: 29 ]]
+	-- upvalues: UseLocalizationFunction (copy), UseStyleFunction (copy), ReactModule (copy), Toast (copy), Images (copy)
+	return ReactModule.createElement(ReactModule.Fragment, {}, {
+		PhoneToast = ReactModule.createElement(Toast, {
 			duration = 3,
 			toastContent = {
 				iconColorStyle = {
 					Transparency = 0,
-					Color = useStyle().Tokens.Color.System.Success.Color3
+					Color = UseStyleFunction().Tokens.Color.System.Success.Color3
 				},
-				iconImage = images["icons/status/success_large"],
-				toastTitle = useLocalization({
+				iconImage = Images["icons/status/success_large"],
+				toastTitle = UseLocalizationFunction({
 					titleKey = "Feature.VerificationUpsell.Heading.PhoneNumberVerified"
 				}).titleKey,
 				onDismissed = p1.onDismissed
@@ -40,53 +40,53 @@ local var2 = function(p1)
 end
 
 return {
-	openPhoneUpsell = function(p1)
-		-- upvalues: var1 (write), reactRobloxModule (ref), openModal (ref), inExperienceProviderContainer (ref), reactModule (ref), inGameUpsellContainerModule (ref), cryoModule (ref), closeModal (ref), localizationProvider (ref), localization (ref), localizationService (ref), styleProviderWithDefaultTheme (ref), var2 (ref), getFFlagNotificationModalSetMenuIsOpen (ref)
-		if var1 == nil then
-			local phoneUpsellToasts = Instance.new("Folder")
-			phoneUpsellToasts.Name = "PhoneUpsellToasts"
-			phoneUpsellToasts.Parent = game:GetService("CoreGui")
-			var1 = reactRobloxModule.createRoot(phoneUpsellToasts)
+	openPhoneUpsell = function(p1) --[[ Line: 54 ]]
+		-- upvalues: Root (ref), ReactRobloxModule (copy), OpenModalFunction (copy), InExperienceProviderContainer (copy), ReactModule (copy), InGameUpsellContainerModule (copy), CryoModule (copy), CloseModalFunction (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), StyleProviderWithDefaultTheme (copy), v15 (copy), GetFFlagNotificationModalSetMenuIsOpenFunction (copy)
+		if Root == nil then
+			local PhoneUpsellToasts = Instance.new("Folder")
+			PhoneUpsellToasts.Name = "PhoneUpsellToasts"
+			PhoneUpsellToasts.Parent = game:GetService("CoreGui")
+			Root = ReactRobloxModule.createRoot(PhoneUpsellToasts)
 		end
-		openModal("PHONE_UPSELL_KEY", inExperienceProviderContainer, {
+		OpenModalFunction("PHONE_UPSELL_KEY", InExperienceProviderContainer, {
 			DisableBackgroundDismiss = true,
 			Props = {
-				children = reactModule.createElement(inGameUpsellContainerModule, cryoModule.Dictionary.join(p1, {
-					closeUpsell = function()
-						-- upvalues: closeModal (copy), p1 (ref)
-						closeModal("PHONE_UPSELL_KEY")
+				children = ReactModule.createElement(InGameUpsellContainerModule, CryoModule.Dictionary.join(p1, {
+					closeUpsell = function() --[[ Line: 66 ]]
+						-- upvalues: CloseModalFunction (upval), p1 (copy)
+						CloseModalFunction("PHONE_UPSELL_KEY")
 						
 						if p1.closeUpsell then
 							p1.closeUpsell()
 						end
 					end,
-					onSuccess = function()
-						-- upvalues: closeModal (copy), p1 (ref), var1 (copy), reactModule (copy), localizationProvider (copy), localization (copy), localizationService (copy), styleProviderWithDefaultTheme (copy), var2 (copy)
-						closeModal("PHONE_UPSELL_KEY")
+					onSuccess = function() --[[ Line: 72 ]]
+						-- upvalues: CloseModalFunction (upval), p1 (copy), Root (upval), ReactModule (upval), LocalizationProvider (upval), Localization (upval), LocalizationService (upval), StyleProviderWithDefaultTheme (upval), v15 (upval)
+						CloseModalFunction("PHONE_UPSELL_KEY")
 						
 						if p1.onSuccessBeforeToast then
 							p1.onSuccessBeforeToast()
 						end
-						var1:render(reactModule.createElement("ScreenGui", {
+						Root:render(ReactModule.createElement("ScreenGui", {
 							IgnoreGuiInset = true,
 							ResetOnSpawn = false,
 							DisplayOrder = 0,
 							Enabled = true,
 							ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 						}, {
-							ContainerFrame = reactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
-								LocalizationProvider = reactModule.createElement(localizationProvider, {
-									localization = localization.new(localizationService.RobloxLocaleId)
+							ContainerFrame = ReactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
+								LocalizationProvider = ReactModule.createElement(LocalizationProvider, {
+									localization = Localization.new(LocalizationService.RobloxLocaleId)
 								}, {
-									StyleProvider = reactModule.createElement(styleProviderWithDefaultTheme, {}, {
-										Frame = reactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
-											Toast = reactModule.createElement(var2, {
-												onDismissed = function()
-													-- upvalues: p1 (copy), var1 (copy)
+									StyleProvider = ReactModule.createElement(StyleProviderWithDefaultTheme, {}, {
+										Frame = ReactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
+											Toast = ReactModule.createElement(v15, {
+												onDismissed = function() --[[ Line: 97 ]]
+													-- upvalues: p1 (upval), Root (upval)
 													if p1.onSuccess then
 														p1.onSuccess()
 													end
-													var1:unmount()
+													Root:unmount()
 												end
 											}, {})
 										})
@@ -97,7 +97,7 @@ return {
 					end
 				}))
 			},
-			BlockNonCoreUserInput = getFFlagNotificationModalSetMenuIsOpen()
+			BlockNonCoreUserInput = GetFFlagNotificationModalSetMenuIsOpenFunction()
 		})
 	end
 }

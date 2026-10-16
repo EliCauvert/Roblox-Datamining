@@ -1,47 +1,45 @@
-﻿local reactModule = require(script:FindFirstAncestor("MomentsCommon").Parent.React)
-local videoService = game:GetService("VideoService")
-local full = Enum.VideoSampleSize.Full
+﻿local ReactModule = require(script:FindFirstAncestor("MomentsCommon").Parent.React)
+local VideoService = game:GetService("VideoService")
+local Full = Enum.VideoSampleSize.Full
 
-return function(p1)
-	-- upvalues: reactModule (ref), videoService (ref), full (ref)
-	local var1, var2 = reactModule.useState(nil)
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), p1 (ref), videoService (copy), full (copy)
-		var2(nil)
+return function(Content) --[[ Line: 18 | Named "useVideoPosterFrame" ]]
+	-- upvalues: ReactModule (copy), VideoService (copy), Full (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	ReactModule.useEffect(function() --[[ Line: 21 ]]
+		-- upvalues: UseStateResult2 (copy), Content (copy), VideoService (upval), Full (upval)
+		UseStateResult2(nil)
 		
-		if p1 == nil then
-			return
-		end
-		local var3 = false
-		task.spawn(function()
-			-- upvalues: videoService (copy), p1 (copy), full (copy), var3 (write), var2 (copy)
-			local var4 = nil
-			local ok, status = pcall(function()
-				-- upvalues: var4 (write), videoService (copy), p1 (copy), full (copy)
-				var4 = videoService:CreateVideoSamplerAsync(p1, { Size = full })
+		if Content == nil then return end
+		local Flag = false
+		task.spawn(function() --[[ Line: 28 ]]
+			-- upvalues: VideoService (upval), Content (upval), Full (upval), Flag (ref), UseStateResult2 (upval)
+			local VideoSamplerAsync = nil
+			local Success, Result = pcall(function() --[[ Line: 30 ]]
+				-- upvalues: VideoSamplerAsync (ref), VideoService (upval), Content (upval), Full (upval)
+				VideoSamplerAsync = VideoService:CreateVideoSamplerAsync(Content, { Size = Full })
 				
-				return var4:GetSamplesAtTimesAsync({ 0 })
+				return VideoSamplerAsync:GetSamplesAtTimesAsync({ 0 })
 			end)
 			
-			if var4 ~= nil then
-				pcall(function()
-					-- upvalues: var4 (write)
-					var4:Destroy()
+			if VideoSamplerAsync ~= nil then
+				pcall(function() --[[ Line: 37 ]]
+					-- upvalues: VideoSamplerAsync (ref)
+					VideoSamplerAsync:Destroy()
 				end)
 			end
-			if var3 then return end
-			local var5 = if ok then status[1] else nil
+			if Flag then return end
+			local Entry = if Success then Result[1] else nil
 			
-			if var5 ~= nil and var5.Image ~= nil then
-				var2(var5.Image)
+			if Entry ~= nil and Entry.Image ~= nil then
+				UseStateResult2(Entry.Image)
 			end
 		end)
 		
-		return function()
-			-- upvalues: var3 (write)
-			var3 = true
+		return function() --[[ Line: 50 ]]
+			-- upvalues: Flag (ref)
+			Flag = true
 		end
-	end, { p1 })
+	end, { Content })
 	
-	return var1
+	return UseStateResult
 end

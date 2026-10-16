@@ -1,104 +1,106 @@
-﻿local authSignup = script:FindFirstAncestor("AuthSignup")
-local parent = authSignup.Parent
-local httpService = game:GetService("HttpService")
-local memStorageService = game:GetService("MemStorageService")
-local promiseModule = require(parent.Promise)
-local signUpRequestsModule = require(authSignup.Requests.SignUpRequests)
-local signUpV2ErrorCodesModule = require(authSignup.Enums.SignUpV2ErrorCodes)
-local appSignupCounterNamesModule = require(authSignup.Enums.AppSignupCounterNames)
-local notificationType = require(parent.RobloxAppEnums).NotificationType
-local authCommonModule = require(parent.AuthCommon)
-local authMemStorageKeys = authCommonModule.Enums.AuthMemStorageKeys
-local reportEphemeralCounter = authCommonModule.Analytics.reportEphemeralCounter
-local shouldSkipLegacyPasswordSaveEvent = authCommonModule.Utils.shouldSkipLegacyPasswordSaveEvent
-local statusCodes = require(parent.Http).StatusCodes
-local logger = require(parent.Loggers).Logger
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagDisableMemStorageServicePasswordEvent = sharedFlagsModule.FFlagDisableMemStorageServicePasswordEvent
-local fFlagLuaAppSkipDuplicateIosPasswordSavePrompt = sharedFlagsModule.FFlagLuaAppSkipDuplicateIosPasswordSavePrompt
-local credentialsProtocolModule = require(parent.CredentialsProtocol)
-local constants = credentialsProtocolModule.Constants
-local default = credentialsProtocolModule.CredentialsProtocol.default
+﻿local AuthSignup = script:FindFirstAncestor("AuthSignup")
+local Parent = AuthSignup.Parent
+local HttpService = game:GetService("HttpService")
+local MemStorageService = game:GetService("MemStorageService")
+local PromiseModule = require(Parent.Promise)
+local SignUpRequestsModule = require(AuthSignup.Requests.SignUpRequests)
+local SignUpV2ErrorCodesModule = require(AuthSignup.Enums.SignUpV2ErrorCodes)
+local AppSignupCounterNamesModule = require(AuthSignup.Enums.AppSignupCounterNames)
+local NotificationType = require(Parent.RobloxAppEnums).NotificationType
+local AuthCommonModule = require(Parent.AuthCommon)
+local AuthMemStorageKeys = AuthCommonModule.Enums.AuthMemStorageKeys
+local ReportEphemeralCounterFunction = AuthCommonModule.Analytics.reportEphemeralCounter
+local ShouldSkipLegacyPasswordSaveEventFunction = AuthCommonModule.Utils.shouldSkipLegacyPasswordSaveEvent
+local StatusCodes = require(Parent.Http).StatusCodes
+local Logger = require(Parent.Loggers).Logger
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagDisableMemStorageServicePasswordEvent = SharedFlagsModule.FFlagDisableMemStorageServicePasswordEvent
+local FFlagLuaAppSkipDuplicateIosPasswordSavePrompt = SharedFlagsModule.FFlagLuaAppSkipDuplicateIosPasswordSavePrompt
+local CredentialsProtocolModule = require(Parent.CredentialsProtocol)
+local Constants = CredentialsProtocolModule.Constants
+local Default = CredentialsProtocolModule.CredentialsProtocol.default
 
-local function _(value, p1)
-	-- upvalues: signUpRequestsModule (ref)
-	return signUpRequestsModule.signUpV2(value, p1, {})
+local function _(p1, p2) --[[ Line: 32 | Named "signUpRequest" ]]
+	-- upvalues: SignUpRequestsModule (copy)
+	return SignUpRequestsModule.signUpV2(p1, p2, {})
 end
 
-return function(p1, _, p2, _, _, p3, p4, _, _)
-	-- upvalues: signUpRequestsModule (ref), notificationType (ref), reportEphemeralCounter (ref), appSignupCounterNamesModule (ref), fFlagLuaAppSkipDuplicateIosPasswordSavePrompt (ref), shouldSkipLegacyPasswordSaveEvent (ref), fFlagDisableMemStorageServicePasswordEvent (ref), memStorageService (ref), authMemStorageKeys (ref), httpService (ref), default (ref), constants (ref), logger (ref), promiseModule (ref), signUpV2ErrorCodesModule (ref), statusCodes (ref)
-	return signUpRequestsModule.signUpV2(p1, p3, {}):andThen(function(p5)
-		-- upvalues: p2 (ref), notificationType (copy), reportEphemeralCounter (copy), appSignupCounterNamesModule (copy), p3 (ref), fFlagLuaAppSkipDuplicateIosPasswordSavePrompt (copy), shouldSkipLegacyPasswordSaveEvent (copy), p4 (ref), fFlagDisableMemStorageServicePasswordEvent (copy), memStorageService (copy), authMemStorageKeys (copy), httpService (copy), default (copy), constants (copy), logger (copy), promiseModule (copy)
-		p2:BroadcastNotification("", notificationType.DID_SIGN_UP)
-		reportEphemeralCounter(appSignupCounterNamesModule.Success, 1)
-		local var1 = p3.username and (p3.password and string.len(p3.password) > 0)
+return function(p1, _, GuiService, _, _, p2, Enabled, _, _) --[[ Line: 37 ]]
+	-- upvalues: SignUpRequestsModule (copy), NotificationType (copy), ReportEphemeralCounterFunction (copy), AppSignupCounterNamesModule (copy), FFlagLuaAppSkipDuplicateIosPasswordSavePrompt (copy), ShouldSkipLegacyPasswordSaveEventFunction (copy), FFlagDisableMemStorageServicePasswordEvent (copy), MemStorageService (copy), AuthMemStorageKeys (copy), HttpService (copy), Default (copy), Constants (copy), Logger (copy), PromiseModule (copy), SignUpV2ErrorCodesModule (copy), StatusCodes (copy)
+	return SignUpRequestsModule.signUpV2(p1, p2, {}):andThen(function(Result) --[[ Line: 48 ]]
+		-- upvalues: GuiService (copy), NotificationType (upval), ReportEphemeralCounterFunction (upval), AppSignupCounterNamesModule (upval), p2 (copy), FFlagLuaAppSkipDuplicateIosPasswordSavePrompt (upval), ShouldSkipLegacyPasswordSaveEventFunction (upval), Enabled (copy), FFlagDisableMemStorageServicePasswordEvent (upval), MemStorageService (upval), AuthMemStorageKeys (upval), HttpService (upval), Default (upval), Constants (upval), Logger (upval), PromiseModule (upval)
+		GuiService:BroadcastNotification("", NotificationType.DID_SIGN_UP)
+		ReportEphemeralCounterFunction(AppSignupCounterNamesModule.Success, 1)
+		local IsLengthAbove: boolean = p2.username and (p2.password and string.len(p2.password) > 0)
+		local ShouldSkipLegacyPasswordSaveEvent = FFlagLuaAppSkipDuplicateIosPasswordSavePrompt and ShouldSkipLegacyPasswordSaveEventFunction(Enabled == true and IsLengthAbove == true)
 		
-		if not fFlagDisableMemStorageServicePasswordEvent and var1 and not (fFlagLuaAppSkipDuplicateIosPasswordSavePrompt and shouldSkipLegacyPasswordSaveEvent(p4 == true and var1 == true)) then
-			memStorageService:Fire(authMemStorageKeys.AuthenticatedCredentials, httpService:JSONEncode({
+		if not FFlagDisableMemStorageServicePasswordEvent and IsLengthAbove and not ShouldSkipLegacyPasswordSaveEvent then
+			MemStorageService:Fire(AuthMemStorageKeys.AuthenticatedCredentials, HttpService:JSONEncode({
 				authType = "signup",
-				cvalue = p3.username,
-				password = p3.password
+				cvalue = p2.username,
+				password = p2.password
 			}))
 		end
-		if p4 and p3.password and #p3.password > 0 then
-			default:registerCredentials(default.CredentialsTypes.password, httpService:JSONEncode({ username = p3.username, password = p3.password }), constants.Defaults.PASSWORD_REGISTRATION_CREDENTIALSPROTOCOL_TIMEOUT):andThen(function(p6)
-				-- upvalues: httpService (copy), logger (copy)
-				local var2 = if p6 then httpService:JSONDecode(p6) else {}
+		if Enabled and p2.password and #p2.password > 0 then
+			Default:registerCredentials(Default.CredentialsTypes.password, HttpService:JSONEncode({ username = p2.username, password = p2.password }), Constants.Defaults.PASSWORD_REGISTRATION_CREDENTIALSPROTOCOL_TIMEOUT):andThen(function(Result) --[[ Line: 90 ]]
+				-- upvalues: HttpService (upval), Logger (upval)
+				local Data = if Result then HttpService:JSONDecode(Result) else {}
 				
-				if var2 and var2.errorCode == nil then
-					logger:info("Successfully registered password.")
+				if Data and Data.errorCode == nil then
+					Logger:info("Successfully registered password.")
 					
 					return
+				else
+					Logger:warning("Error registering password: " .. tostring(Data.errorMsg))
 				end
-				logger:warning("Error registering password: " .. tostring(var2.errorMsg))
-			end, function(p6)
-				-- upvalues: logger (copy)
-				logger:warning("Error registering password: " .. tostring(p6))
+			end, function(p3) --[[ Line: 98 ]]
+				-- upvalues: Logger (upval)
+				Logger:warning("Error registering password: " .. tostring(p3))
 			end):await()
 		end
-		return promiseModule.resolve(p5)
-	end, function(p5)
-		-- upvalues: httpService (copy), reportEphemeralCounter (copy), appSignupCounterNamesModule (copy), signUpV2ErrorCodesModule (copy), statusCodes (copy), promiseModule (copy)
-		local ok, status = pcall(function()
-			-- upvalues: httpService (copy), p5 (ref)
-			return httpService:JSONDecode(p5.Body)
+		return PromiseModule.resolve(Result)
+	end, function(p3) --[[ Line: 105 ]]
+		-- upvalues: HttpService (upval), ReportEphemeralCounterFunction (upval), AppSignupCounterNamesModule (upval), SignUpV2ErrorCodesModule (upval), StatusCodes (upval), PromiseModule (upval)
+		local Success, Result = pcall(function() --[[ Line: 106 ]]
+			-- upvalues: HttpService (upval), p3 (copy)
+			return HttpService:JSONDecode(p3.Body)
 		end)
 		
-		if not ok then
-			return promiseModule.reject()
+		if not Success then
+			return PromiseModule.reject()
 		end
-		local code = status.errors and (status.errors[1] and status.errors[1].code)
-		reportEphemeralCounter(appSignupCounterNamesModule.Failure, 1)
+		local Code = Result.errors and (Result.errors[1] and Result.errors[1].code)
+		ReportEphemeralCounterFunction(AppSignupCounterNamesModule.Failure, 1)
 		
-		if code == signUpV2ErrorCodesModule.Captcha then
-			reportEphemeralCounter(appSignupCounterNamesModule.FailureCaptcha, 1)
-		elseif code == signUpV2ErrorCodesModule.TooManyAttempts then
-			reportEphemeralCounter(appSignupCounterNamesModule.FailureThrottled, 1)
-		elseif code == signUpV2ErrorCodesModule.InvalidBirthdate then
-			reportEphemeralCounter(appSignupCounterNamesModule.FailureBirthdayInvalid, 1)
-		elseif code == signUpV2ErrorCodesModule.InvalidUsername then
-			reportEphemeralCounter(appSignupCounterNamesModule.FailureUsernameInvalid, 1)
-		elseif code == signUpV2ErrorCodesModule.UsernameAlreadyTaken then
-			reportEphemeralCounter(appSignupCounterNamesModule.FailureUsernameTaken, 1)
-		elseif code == signUpV2ErrorCodesModule.InvalidPassword then
-			reportEphemeralCounter(appSignupCounterNamesModule.FailurePasswordInvalid, 1)
-		elseif code == signUpV2ErrorCodesModule.UsernameAndPasswordTheSame then
-			reportEphemeralCounter(appSignupCounterNamesModule.FailurePasswordMatchesUsername, 1)
-		elseif code == signUpV2ErrorCodesModule.UnavailableInRegion then
-			reportEphemeralCounter(appSignupCounterNamesModule.FailureUnavailableInRegion, 1)
-		elseif code == signUpV2ErrorCodesModule.PasswordTooSimple then
-			reportEphemeralCounter(appSignupCounterNamesModule.FailurePasswordTooSimple, 1)
-		elseif p5.HttpError == Enum.HttpError.OK and p5.StatusCode == statusCodes.TOO_MANY_REQUESTS then
-			reportEphemeralCounter(appSignupCounterNamesModule.FailureThrottled, 1)
-		elseif p5.HttpError == Enum.HttpError.OK and p5.StatusCode == statusCodes.INTERNAL_SERVER_ERROR then
-			reportEphemeralCounter(appSignupCounterNamesModule.FailureInternalServerError, 1)
-		elseif p5.HttpError == Enum.HttpError.OK and p5.StatusCode == statusCodes.BAD_REQUEST then
-			reportEphemeralCounter(appSignupCounterNamesModule.FailureBadRequest, 1)
-		elseif p5.HttpError == Enum.HttpError.OK and p5.StatusCode == statusCodes.NOT_FOUND then
-			reportEphemeralCounter(appSignupCounterNamesModule.FailureNotFound, 1)
+		if Code == SignUpV2ErrorCodesModule.Captcha then
+			ReportEphemeralCounterFunction(AppSignupCounterNamesModule.FailureCaptcha, 1)
+		elseif Code == SignUpV2ErrorCodesModule.TooManyAttempts then
+			ReportEphemeralCounterFunction(AppSignupCounterNamesModule.FailureThrottled, 1)
+		elseif Code == SignUpV2ErrorCodesModule.InvalidBirthdate then
+			ReportEphemeralCounterFunction(AppSignupCounterNamesModule.FailureBirthdayInvalid, 1)
+		elseif Code == SignUpV2ErrorCodesModule.InvalidUsername then
+			ReportEphemeralCounterFunction(AppSignupCounterNamesModule.FailureUsernameInvalid, 1)
+		elseif Code == SignUpV2ErrorCodesModule.UsernameAlreadyTaken then
+			ReportEphemeralCounterFunction(AppSignupCounterNamesModule.FailureUsernameTaken, 1)
+		elseif Code == SignUpV2ErrorCodesModule.InvalidPassword then
+			ReportEphemeralCounterFunction(AppSignupCounterNamesModule.FailurePasswordInvalid, 1)
+		elseif Code == SignUpV2ErrorCodesModule.UsernameAndPasswordTheSame then
+			ReportEphemeralCounterFunction(AppSignupCounterNamesModule.FailurePasswordMatchesUsername, 1)
+		elseif Code == SignUpV2ErrorCodesModule.UnavailableInRegion then
+			ReportEphemeralCounterFunction(AppSignupCounterNamesModule.FailureUnavailableInRegion, 1)
+		elseif Code == SignUpV2ErrorCodesModule.PasswordTooSimple then
+			ReportEphemeralCounterFunction(AppSignupCounterNamesModule.FailurePasswordTooSimple, 1)
+		elseif p3.HttpError == Enum.HttpError.OK and p3.StatusCode == StatusCodes.TOO_MANY_REQUESTS then
+			ReportEphemeralCounterFunction(AppSignupCounterNamesModule.FailureThrottled, 1)
+		elseif p3.HttpError == Enum.HttpError.OK and p3.StatusCode == StatusCodes.INTERNAL_SERVER_ERROR then
+			ReportEphemeralCounterFunction(AppSignupCounterNamesModule.FailureInternalServerError, 1)
+		elseif p3.HttpError == Enum.HttpError.OK and p3.StatusCode == StatusCodes.BAD_REQUEST then
+			ReportEphemeralCounterFunction(AppSignupCounterNamesModule.FailureBadRequest, 1)
+		elseif p3.HttpError == Enum.HttpError.OK and p3.StatusCode == StatusCodes.NOT_FOUND then
+			ReportEphemeralCounterFunction(AppSignupCounterNamesModule.FailureNotFound, 1)
 		else
-			reportEphemeralCounter(appSignupCounterNamesModule.FailureUnknownError, 1)
+			ReportEphemeralCounterFunction(AppSignupCounterNamesModule.FailureUnknownError, 1)
 		end
-		return promiseModule.reject(code)
+		return PromiseModule.reject(Code)
 	end)
 end

@@ -1,1 +1,1 @@
-﻿return require(script.EditComponentRow)
+﻿return (require(script.EditComponentRow))

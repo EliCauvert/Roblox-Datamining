@@ -1,26 +1,31 @@
-﻿local thumbsUp = require(script:FindFirstAncestor("Moments").Parent.MomentsCommon).Enums.ReactionType.ThumbsUp
+﻿local ThumbsUp = require(script:FindFirstAncestor("Moments").Parent.MomentsCommon).Enums.ReactionType.ThumbsUp
 
 return {
-	DEFAULT_REACTION = thumbsUp,
-	decide = function(p1, p2, p3)
-		-- upvalues: thumbsUp (ref)
-		local var1 = p1 ~= nil
+	DEFAULT_REACTION = ThumbsUp,
+	decide = function(EffectReaction, p1, p2) --[[ Line: 40 ]]
+		-- upvalues: ThumbsUp (copy)
+		local HasEffectReaction = EffectReaction ~= nil
 		
-		if p2 == "tapButton" then
-			return if var1 then { action = "clear", reaction = nil, effectReaction = nil } else {
+		if p1 == "tapButton" then
+			return if HasEffectReaction then { action = "clear", reaction = nil, effectReaction = nil } else {
 				action = "commit",
-				reaction = thumbsUp,
-				effectReaction = thumbsUp
+				reaction = ThumbsUp,
+				effectReaction = ThumbsUp
 			}
-		elseif p2 == "doubleTap" then
-			return if var1 then { action = "none", reaction = nil, effectReaction = p1 } else {
+		elseif p1 == "doubleTap" then
+			return if HasEffectReaction then {
+				action = "none",
+				reaction = nil,
+				effectReaction = EffectReaction
+			} else {
 				action = "commit",
-				reaction = thumbsUp,
-				effectReaction = thumbsUp
+				reaction = ThumbsUp,
+				effectReaction = ThumbsUp
 			}
+		else
+			local P2 = p2 or ThumbsUp
+			
+			return if HasEffectReaction and P2 == EffectReaction then { action = "clear", reaction = nil, effectReaction = nil } else { action = "commit", reaction = P2, effectReaction = P2 }
 		end
-		p3 = p3 or thumbsUp
-		
-		return if var1 and p3 == p1 then { action = "clear", reaction = nil, effectReaction = nil } else { action = "commit", reaction = p3, effectReaction = p3 }
 	end
 }

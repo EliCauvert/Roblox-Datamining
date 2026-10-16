@@ -1,24 +1,25 @@
-﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
-local virtualEventsModule = require(parent.VirtualEvents)
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
-local getActionTelemetryFieldValue = sduiCoreSystemModule.getActionTelemetryFieldValue
+﻿local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
+local VirtualEventsModule = require(Parent.VirtualEvents)
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
+local GetActionTelemetryFieldValueFunction = SduiCoreSystemModule.getActionTelemetryFieldValue
 
-return function(p1, p2, p3)
-	-- upvalues: getActionTelemetryFieldValue (ref), sduiErrorType (ref), virtualEventsModule (ref)
-	local var1 = getActionTelemetryFieldValue(p1, p2, "eventId")
+return function(p1, p2, p3) --[[ Line: 16 ]]
+	-- upvalues: GetActionTelemetryFieldValueFunction (copy), SduiErrorType (copy), VirtualEventsModule (copy)
+	local EventId = GetActionTelemetryFieldValueFunction(p1, p2, "eventId")
 	
-	if var1 == nil then
-		p3.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if EventId == nil then
+		p3.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			name = "ShareEventIconClicked",
 			message = "Missing eventId for ShareEventIconClicked telemetry"
 		}, p3.appPage)
 		
 		return
+	else
+		VirtualEventsModule.fireShareVirtualEventIconClicked({
+			virtualEventId = tostring(EventId),
+			universeId = tostring((GetActionTelemetryFieldValueFunction(p1, p2, "universeId", ""))),
+			channel = tostring((GetActionTelemetryFieldValueFunction(p1, p2, "channel", "eventDetailsPage")))
+		})
 	end
-	virtualEventsModule.fireShareVirtualEventIconClicked({
-		virtualEventId = tostring(var1),
-		universeId = tostring(getActionTelemetryFieldValue(p1, p2, "universeId", "")),
-		channel = tostring(getActionTelemetryFieldValue(p1, p2, "channel", "eventDetailsPage"))
-	})
 end

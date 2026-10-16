@@ -1,200 +1,203 @@
 ﻿local _ = require(script:FindFirstAncestor("InExperienceShop").Types)
 local _ = require(script.Parent.multiGetProductInfo)
-local shopItemMappingModule = require(script.Parent.shopItemMapping)
-local makeRequestKey = shopItemMappingModule.makeRequestKey
-local toShopItem = shopItemMappingModule.toShopItem
+local ShopItemMappingModule = require(script.Parent.shopItemMapping)
+local MakeRequestKeyFunction = ShopItemMappingModule.makeRequestKey
+local ToShopItemFunction = ShopItemMappingModule.toShopItem
 
-local function refreshShopItemFromProductInfo(p1, p2)
-	-- upvalues: toShopItem (ref)
-	local var1 = toShopItem(p2, p1.itemType, tonumber(p1.id))
+local function refreshShopItemFromProductInfo(p1, p2) --[[ Line: 204 ]]
+	-- upvalues: ToShopItemFunction (copy)
+	local ShopItem = ToShopItemFunction(p2, p1.itemType, (tonumber(p1.id)))
 	
 	return {
 		id = p1.id,
 		itemType = p1.itemType,
 		isOwned = p1.isOwned,
-		creator = var1.creator or p1.creator,
+		creator = ShopItem.creator or p1.creator,
 		universeId = p1.universeId,
 		originalIndex = p1.originalIndex,
-		name = var1.name,
-		thumbnail = var1.thumbnail,
-		price = var1.price,
-		userBasePriceInRobux = var1.userBasePriceInRobux,
-		description = var1.description,
-		updated = var1.updated
+		name = ShopItem.name,
+		thumbnail = ShopItem.thumbnail,
+		price = ShopItem.price,
+		userBasePriceInRobux = ShopItem.userBasePriceInRobux,
+		description = ShopItem.description,
+		updated = ShopItem.updated
 	}
 end
 
 return {
-	infoTypeForShopItemType = function(p1)
+	infoTypeForShopItemType = function(p1) --[[ Line: 26 ]]
 		return if p1 == "Product" then Enum.InfoType.Product elseif p1 == "GamePass" then Enum.InfoType.GamePass else nil
 	end,
-	buildRequestsFromSections = function(p1)
-		-- upvalues: makeRequestKey (ref)
+	buildRequestsFromSections = function(List) --[[ Line: 39 ]]
+		-- upvalues: MakeRequestKeyFunction (copy)
+		local List1 = {}
 		local t = {}
-		local t_1 = {}
 		
-		for i, v in ipairs(p1) do
-			for i_1, v_1 in ipairs(v.items) do
-				local itemType = v_1.itemType
-				local var1 = if itemType == "Product" then Enum.InfoType.Product elseif itemType == "GamePass" then Enum.InfoType.GamePass else nil
+		for _, value in ipairs(List) do
+			for _, item in ipairs(value.items) do
+				local ItemType = item.itemType
+				local Product = if ItemType == "Product" then Enum.InfoType.Product elseif ItemType == "GamePass" then Enum.InfoType.GamePass else nil
+				local NoProduct = Product == nil
+				local Number = nil
 				
-				if var1 ~= nil then
-					local var2 = tonumber(v_1.id)
-					
-					if var2 ~= nil then
-						local var3 = makeRequestKey(var2, var1)
-						
-						if not t_1[var3] then
-							t_1[var3] = true
-							table.insert(t, { id = var2, infoType = var1 })
-						end
-					end
+				if not NoProduct then
+					Number = tonumber(item.id)
+					NoProduct = Number == nil
+				end
+				local Entry = NoProduct
+				local RequestKey = nil
+				
+				if not Entry then
+					RequestKey = MakeRequestKeyFunction(Number, Product)
+					Entry = t[RequestKey]
+				end
+				if not Entry then
+					t[RequestKey] = true
+					table.insert(List1, { id = Number, infoType = Product })
 				end
 			end
 		end
-		return t
+		return List1
 	end,
-	appendFailedItemRequests = function(p2, p3)
-		-- upvalues: makeRequestKey (ref)
+	appendFailedItemRequests = function(List, List1) --[[ Line: 66 ]]
+		-- upvalues: MakeRequestKeyFunction (copy)
 		local t = {}
 		
-		for i, v in ipairs(p2) do
-			t[makeRequestKey(v.id, v.infoType)] = true
+		for _, value in ipairs(List) do
+			t[MakeRequestKeyFunction(value.id, value.infoType)] = true
 		end
-		for i, v_1 in ipairs(p3) do
-			local var4 = makeRequestKey(v_1.id, v_1.infoType)
+		for _, value1 in ipairs(List1) do
+			local RequestKey = MakeRequestKeyFunction(value1.id, value1.infoType)
 			
-			if not t[var4] then
-				t[var4] = true
-				table.insert(p2, { id = v_1.id, infoType = v_1.infoType })
+			if not t[RequestKey] then
+				t[RequestKey] = true
+				table.insert(List, { id = value1.id, infoType = value1.infoType })
 			end
 		end
-		return p2
+		return List
 	end,
 	refreshShopItemFromProductInfo = refreshShopItemFromProductInfo,
-	mergeProductInfoIntoSections = function(p4, p5)
-		-- upvalues: makeRequestKey (ref), refreshShopItemFromProductInfo (ref)
+	mergeProductInfoIntoSections = function(List, List1) --[[ Line: 235 ]]
+		-- upvalues: MakeRequestKeyFunction (copy), refreshShopItemFromProductInfo (copy)
 		local t = {}
 		
-		for i, v in ipairs(p5) do
-			t[makeRequestKey(v.request.id, v.request.infoType)] = v
+		for _, value in ipairs(List1) do
+			t[MakeRequestKeyFunction(value.request.id, value.request.infoType)] = value
 		end
-		local list = table.create(#p4)
+		local Buffer = table.create(#List)
 		
-		for i_1, v_1 in ipairs(p4) do
-			local list_1 = nil
+		for i, value1 in ipairs(List) do
+			local Items = nil
 			
-			for i_2, v_2 in ipairs(v_1.items) do
-				local itemType = v_2.itemType
-				local var5 = if itemType == "Product" then Enum.InfoType.Product elseif itemType == "GamePass" then Enum.InfoType.GamePass else nil
-				local var6 = tonumber(v_2.id)
-				local var7 = if not (var5 == nil or var6 == nil) then t[makeRequestKey(var6, var5)] else nil
+			for i1, item in ipairs(value1.items) do
+				local ItemType = item.itemType
+				local Product = if ItemType == "Product" then Enum.InfoType.Product elseif ItemType == "GamePass" then Enum.InfoType.GamePass else nil
+				local Number: number? = tonumber(item.id)
+				local Entry = if Product ~= nil and Number ~= nil then t[MakeRequestKeyFunction(Number, Product)] else nil
 				
-				if var7 ~= nil and var7.ok then
-					if list_1 == nil then
-						list_1 = table.create(#v_1.items)
+				if Entry ~= nil and Entry.ok then
+					if Items == nil then
+						Items = table.create(#value1.items)
 						
-						for i_3 = 1, i_2 - 1 do
-							list_1[i_3] = v_1.items[i_3]
+						for i2 = 1, i1 - 1 do
+							Items[i2] = value1.items[i2]
 						end
 					end
-					list_1[i_2] = refreshShopItemFromProductInfo(v_2, var7.value)
-				elseif list_1 ~= nil then
-					list_1[i_2] = v_2
+					Items[i1] = refreshShopItemFromProductInfo(item, Entry.value)
+				elseif Items ~= nil then
+					Items[i1] = item
 				end
 			end
-			if list_1 == nil then
-				list[i_1] = v_1
+			if Items == nil then
+				Buffer[i] = value1
 			else
-				list[i_1] = {
-					id = v_1.id,
-					name = v_1.name,
-					items = list_1,
-					categoryType = v_1.categoryType,
-					stableCategoryId = v_1.stableCategoryId,
-					categoryGroup = v_1.categoryGroup,
-					paymentSessionId = v_1.paymentSessionId,
-					bonusJwt = v_1.bonusJwt,
-					robuxPackages = v_1.robuxPackages
+				Buffer[i] = {
+					id = value1.id,
+					name = value1.name,
+					items = Items,
+					categoryType = value1.categoryType,
+					stableCategoryId = value1.stableCategoryId,
+					categoryGroup = value1.categoryGroup,
+					paymentSessionId = value1.paymentSessionId,
+					bonusJwt = value1.bonusJwt,
+					robuxPackages = value1.robuxPackages
 				}
 			end
 		end
-		return list
+		return Buffer
 	end,
-	insertRecoveredItemsIntoSections = function(p6, p7, p8)
-		-- upvalues: makeRequestKey (ref), toShopItem (ref)
+	insertRecoveredItemsIntoSections = function(List2, List3, List4) --[[ Line: 108 ]]
+		-- upvalues: MakeRequestKeyFunction (copy), ToShopItemFunction (copy)
 		local t = {}
 		
-		for i, v in ipairs(p7) do
-			t[makeRequestKey(v.request.id, v.request.infoType)] = v
+		for _, value in ipairs(List3) do
+			t[MakeRequestKeyFunction(value.request.id, value.request.infoType)] = value
 		end
-		local v_2
-		local t_1 = {}
-		local t_2 = {}
+		local t1 = {}
+		local List5 = {}
 		
-		for i_1, v_1 in ipairs(p8) do
-			v_2 = t[makeRequestKey(v_1.id, v_1.infoType)]
+		for _, value1 in ipairs(List4) do
+			local Entry = t[MakeRequestKeyFunction(value1.id, value1.infoType)]
 			
-			if v_2 == nil or not v_2.ok then
-				table.insert(t_2, v_1)
+			if Entry == nil or not Entry.ok then
+				table.insert(List5, value1)
 			else
-				local sectionId = t_1[v_1.sectionId]
+				local List = t1[value1.sectionId]
 				
-				if sectionId == nil then
-					sectionId = {}
-					t_1[v_1.sectionId] = sectionId
+				if List == nil then
+					List = {}
+					t1[value1.sectionId] = List
 				end
-				local var8 = toShopItem(v_2.value, v_1.itemType, v_1.id)
-				var8.originalIndex = v_1.originalIndex
-				table.insert(sectionId, var8)
+				local ShopItem = ToShopItemFunction(Entry.value, value1.itemType, value1.id)
+				ShopItem.originalIndex = value1.originalIndex
+				table.insert(List, ShopItem)
 			end
 		end
-		local list = table.create(#p6)
+		local Buffer = table.create(#List2)
 		
-		for i_2, v_2 in ipairs(p6) do
-			local id = t_1[v_2.id]
+		for i, value2 in ipairs(List2) do
+			local List1 = t1[value2.id]
 			
-			if id == nil then
-				list[i_2] = v_2
+			if List1 == nil then
+				Buffer[i] = value2
 				continue
 			end
-			table.sort(id, function(p9, p10)
-				return (p9.originalIndex or 0) < (p10.originalIndex or 0)
+			table.sort(List1, function(A, B): boolean --[[ Line: 159 ]]
+				return (A.originalIndex or 0) < (B.originalIndex or 0)
 			end)
-			local list_1 = table.create(#v_2.items + #id)
-			local var9 = 1
-			local var10 = 1
-			while var9 <= #v_2.items or var10 <= #id do
-				local var11 = v_2.items[var9]
-				local var12 = id[var10]
+			local Buffer1 = table.create(#value2.items + #List1)
+			local Count = 1
+			local Count1 = 1
+			while Count <= #value2.items or Count1 <= #List1 do
+				local Item = value2.items[Count]
+				local Entry = List1[Count1]
 				
-				if var12 == nil then
-					table.insert(list_1, var11)
-					var9 += 1
-				elseif var11 == nil then
-					table.insert(list_1, var12)
-					var10 += 1
-				elseif (var11.originalIndex or 0) <= (var12.originalIndex or 0) then
-					table.insert(list_1, var11)
-					var9 += 1
+				if Entry == nil then
+					table.insert(Buffer1, Item)
+					Count += 1
+				elseif Item == nil then
+					table.insert(Buffer1, Entry)
+					Count1 += 1
+				elseif (Item.originalIndex or 0) <= (Entry.originalIndex or 0) then
+					table.insert(Buffer1, Item)
+					Count += 1
 				else
-					table.insert(list_1, var12)
-					var10 += 1
+					table.insert(Buffer1, Entry)
+					Count1 += 1
 				end
 			end
-			list[i_2] = {
-				id = v_2.id,
-				name = v_2.name,
-				items = list_1,
-				categoryType = v_2.categoryType,
-				stableCategoryId = v_2.stableCategoryId,
-				categoryGroup = v_2.categoryGroup,
-				paymentSessionId = v_2.paymentSessionId,
-				bonusJwt = v_2.bonusJwt,
-				robuxPackages = v_2.robuxPackages
+			Buffer[i] = {
+				id = value2.id,
+				name = value2.name,
+				items = Buffer1,
+				categoryType = value2.categoryType,
+				stableCategoryId = value2.stableCategoryId,
+				categoryGroup = value2.categoryGroup,
+				paymentSessionId = value2.paymentSessionId,
+				bonusJwt = value2.bonusJwt,
+				robuxPackages = value2.robuxPackages
 			}
-			continue
 		end
-		return list, t_2
+		return Buffer, List5
 	end
 }

@@ -1,13 +1,14 @@
-﻿local getCanSendAndCanCustomizeInvites = require(game:GetService("CorePackages").Workspace.Packages.GameInvite).GetCanSendAndCanCustomizeInvites
-local httpRbxApiService = game:GetService("HttpRbxApiService")
-local httpRequestModule = require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.Common.httpRequest)
+﻿local GetCanSendAndCanCustomizeInvitesFunction = require(game:GetService("CorePackages").Workspace.Packages.GameInvite).GetCanSendAndCanCustomizeInvites
+local HttpRbxApiService = game:GetService("HttpRbxApiService")
+local HttpRequestModule = require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.Common.httpRequest)
 
-return function(p1, p2)
-	-- upvalues: httpRequestModule (ref), httpRbxApiService (ref), getCanSendAndCanCustomizeInvites (ref)
-	local var1, var2 = getCanSendAndCanCustomizeInvites(httpRequestModule(httpRbxApiService), p1, p2):await()
+return function(p1, p2) --[[ Line: 12 ]]
+	-- upvalues: HttpRequestModule (copy), HttpRbxApiService (copy), GetCanSendAndCanCustomizeInvitesFunction (copy)
+	local v1, v2 = GetCanSendAndCanCustomizeInvitesFunction(HttpRequestModule(HttpRbxApiService), p1, p2):await()
 	
-	if var1 and var2 and var2.responseBody then
-		return var2.responseBody.canPrompt, var2.responseBody.canCustomize
+	if v1 and v2 and v2.responseBody then
+		return v2.responseBody.canPrompt, v2.responseBody.canCustomize
+	else
+		return false, false
 	end
-	return false, false
 end

@@ -1,50 +1,41 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local _ = require(foundation.Components.Types)
-local iconSizeModule = require(foundation.Enums.IconSize)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local _ = require(Foundation.Components.Types)
+local IconSizeModule = require(Foundation.Enums.IconSize)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 
-local function _(p1)
-	return if typeof(p1) ~= "number" then typeof(p1) == "table" and typeof(p1:getValue()) == "number" else true
+local function _(p1): boolean --[[ Line: 11 | Named "isNumber" ]]
+	return typeof(p1) == "number" or typeof(p1) == "table" and typeof(p1:getValue()) == "number"
 end
 
-return function(p1, p2, p3)
-	-- upvalues: useTokensModule (ref), iconSizeModule (ref)
-	local var1
-	local var2 = useTokensModule()
-	local var3 = if p2 then {
-		[iconSizeModule.XSmall] = if p3 then var2.Size.Size_400 else var2.Size.Size_300,
-		[iconSizeModule.Small] = if p3 then var2.Size.Size_500 else var2.Size.Size_400,
-		[iconSizeModule.Medium] = if p3 then var2.Size.Size_600 else var2.Size.Size_500,
-		[iconSizeModule.Large] = if p3 then var2.Size.Size_700 else var2.Size.Size_600,
-		[iconSizeModule.XLarge] = if p3 then var2.Size.Size_800 else var2.Size.Size_700,
-		[iconSizeModule.XXLarge] = if p3 then var2.Size.Size_900 else var2.Size.Size_800
+return function(p1, p2, p3) --[[ Line: 15 | Named "useIconSize" ]]
+	-- upvalues: UseTokensModule (copy), IconSizeModule (copy)
+	local UseTokensModuleResult = UseTokensModule()
+	local Config = if p2 then {
+		[IconSizeModule.XSmall] = if p3 then UseTokensModuleResult.Size.Size_400 else UseTokensModuleResult.Size.Size_300,
+		[IconSizeModule.Small] = if p3 then UseTokensModuleResult.Size.Size_500 else UseTokensModuleResult.Size.Size_400,
+		[IconSizeModule.Medium] = if p3 then UseTokensModuleResult.Size.Size_600 else UseTokensModuleResult.Size.Size_500,
+		[IconSizeModule.Large] = if p3 then UseTokensModuleResult.Size.Size_700 else UseTokensModuleResult.Size.Size_600,
+		[IconSizeModule.XLarge] = if p3 then UseTokensModuleResult.Size.Size_800 else UseTokensModuleResult.Size.Size_700,
+		[IconSizeModule.XXLarge] = if p3 then UseTokensModuleResult.Size.Size_900 else UseTokensModuleResult.Size.Size_800
 	} else {
-		[iconSizeModule.XSmall] = var2.Size.Size_200,
-		[iconSizeModule.Small] = var2.Size.Size_400,
-		[iconSizeModule.Medium] = var2.Size.Size_900,
-		[iconSizeModule.Large] = var2.Size.Size_1200,
-		[iconSizeModule.XLarge] = var2.Size.Size_2400,
-		[iconSizeModule.XXLarge] = 24 * var2.Size.Size_200
+		[IconSizeModule.XSmall] = UseTokensModuleResult.Size.Size_200,
+		[IconSizeModule.Small] = UseTokensModuleResult.Size.Size_400,
+		[IconSizeModule.Medium] = UseTokensModuleResult.Size.Size_900,
+		[IconSizeModule.Large] = UseTokensModuleResult.Size.Size_1200,
+		[IconSizeModule.XLarge] = UseTokensModuleResult.Size.Size_2400,
+		[IconSizeModule.XXLarge] = 24 * UseTokensModuleResult.Size.Size_200
 	}
-	local var4 = nil
+	local XOffset = nil
 	
-	if p2 then
-		var1 = if typeof(p1) ~= "number" then typeof(p1) == "table" and typeof(p1:getValue()) == "number" else true
-		
-		if var1 then
-			var4 = p1
-		else
-			var1 = if typeof(p1) ~= "number" then typeof(p1) == "table" and typeof(p1:getValue()) == "number" else true
-			
-			if not var1 then
-				var4 = var3[p1]
-			end
-		end
-		if var4 == nil then
-			error("Invalid icon size: " .. tostring(p1))
-		end
-		return if typeof(var4) == "table" then var4:map(function(p4)
-			return UDim2.fromOffset(p4, p4)
-		end) else UDim2.fromOffset(var4, var4)
+	if p2 and (typeof(p1) == "number" or typeof(p1) == "table" and typeof(p1:getValue()) == "number") then
+		XOffset = p1
+	elseif typeof(p1) ~= "number" and (typeof(p1) ~= "table" or typeof(p1:getValue()) ~= "number") then
+		XOffset = Config[p1]
 	end
+	if XOffset == nil then
+		error("Invalid icon size: " .. tostring(p1))
+	end
+	return if typeof(XOffset) == "table" then XOffset:map(function(XOffset): UDim2 --[[ Line: 52 ]]
+		return UDim2.fromOffset(XOffset, XOffset)
+	end) else UDim2.fromOffset(XOffset, XOffset)
 end

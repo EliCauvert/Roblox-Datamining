@@ -1,15 +1,15 @@
-﻿local t = { instanceProcessingLimit = 1000 }
+﻿local config = { instanceProcessingLimit = 1000 }
 
 return {
-	new = function(p1)
-		-- upvalues: t (ref)
-		local cloned = table.clone(t)
+	new = function(List) --[[ Line: 24 ]]
+		-- upvalues: config (copy)
+		local Copy = table.clone(config)
 		
-		if p1 then
-			for i, v in p1 do
-				cloned[i] = v
+		if List then
+			for i, value in List do
+				Copy[i] = value
 			end
 		end
-		return cloned
+		return Copy
 	end
 }

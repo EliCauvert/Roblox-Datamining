@@ -1,32 +1,32 @@
-﻿local parent = script:FindFirstAncestor("BulkPurchaseApp").Parent
-local reactModule = require(parent.React)
-local useDesignTokens = require(parent.Style).useDesignTokens
-local itemModule = require(script.Parent.Item)
+﻿local Parent = script:FindFirstAncestor("BulkPurchaseApp").Parent
+local ReactModule = require(Parent.React)
+local UseDesignTokensFunction = require(Parent.Style).useDesignTokens
+local ItemModule = require(script.Parent.Item)
 
-return function(p1)
-	-- upvalues: useDesignTokens (ref), reactModule (ref), itemModule (ref)
-	local t = {
-		Layout = reactModule.createElement("UIListLayout", {
+return function(Frame) --[[ Line: 21 | Named "ItemList_DEPRECATED" ]]
+	-- upvalues: UseDesignTokensFunction (copy), ReactModule (copy), ItemModule (copy)
+	local config = {
+		Layout = ReactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			HorizontalAlignment = Enum.HorizontalAlignment.Center,
 			VerticalAlignment = Enum.VerticalAlignment.Bottom,
-			Padding = UDim.new(0, useDesignTokens().Size.Size_300)
+			Padding = UDim.new(0, UseDesignTokensFunction().Size.Size_300)
 		})
 	}
 	
-	for i, v in p1.items do
-		t[v.id] = reactModule.createElement(itemModule, {
-			name = v.name,
-			image = v.image,
-			endSlot = v.endSlot,
-			LayoutOrder = i
+	for LayoutOrder, item in Frame.items do
+		config[item.id] = ReactModule.createElement(ItemModule, {
+			name = item.name,
+			image = item.image,
+			endSlot = item.endSlot,
+			LayoutOrder = LayoutOrder
 		})
 	end
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
-		LayoutOrder = p1.LayoutOrder,
+		LayoutOrder = Frame.LayoutOrder,
 		Size = UDim2.fromScale(1, 0),
 		AutomaticSize = Enum.AutomaticSize.Y
-	}, t)
+	}, config)
 end

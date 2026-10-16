@@ -1,6 +1,6 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local _ = require(foundation.Utility.Plugin.StudioUri)
-local _ = require(foundation.Enums.PopoverAlign)
-local _ = require(foundation.Enums.PopoverSide)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local _ = require(Foundation.Utility.Plugin.StudioUri)
+local _ = require(Foundation.Enums.PopoverAlign)
+local _ = require(Foundation.Enums.PopoverSide)
 
 return nil

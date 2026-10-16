@@ -1,287 +1,346 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local localizationRoactContext = require(parent.Localization).LocalizationRoactContext
-local chatScrollAnchorContextModule = require(buildExperience.Chat.ChatScrollAnchorContext)
-local _ = require(buildExperience.Chat.chatTypes)
-local chatConstantsModule = require(buildExperience.Chat.chatConstants)
-local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local fFlagBuildExperienceChatAccordionScrollAnchorModule = require(buildExperience.Flags.FFlagBuildExperienceChatAccordionScrollAnchor)
-local icon = foundationModule.Icon
-local scrollView = foundationModule.ScrollView
-local text = foundationModule.Text
-local view = foundationModule.View
-local iconName = foundationModule.Enums.IconName
-local iconSize = foundationModule.Enums.IconSize
-local stateLayerAffordance = foundationModule.Enums.StateLayerAffordance
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local LocalizationRoactContext = require(Parent.Localization).LocalizationRoactContext
+local ChatScrollAnchorContextModule = require(BuildExperience.Chat.ChatScrollAnchorContext)
+local _ = require(BuildExperience.Chat.chatTypes)
+local ChatConstantsModule = require(BuildExperience.Chat.chatConstants)
+local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
+local FFlagBuildExperienceChatAccordionScrollAnchorModule = require(BuildExperience.Flags.FFlagBuildExperienceChatAccordionScrollAnchor)
+local FFlagBuildExperiencePromptStallMessageModule = require(BuildExperience.Flags.FFlagBuildExperiencePromptStallMessage)
+local Icon = FoundationModule.Icon
+local ScrollView = FoundationModule.ScrollView
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local IconName = FoundationModule.Enums.IconName
+local IconSize = FoundationModule.Enums.IconSize
+local StateLayerAffordance = FoundationModule.Enums.StateLayerAffordance
 local t = {}
 
-local function constantSource()
+local function constantSource(): number --[[ Line: 54 ]]
 	return 0
 end
 
-local function useReactiveValue(p1)
-	-- upvalues: reactModule (ref), constantSource (ref), signalsReactModule (ref)
-	return signalsReactModule.useSignalState(reactModule.useCallback(function(p2)
-		-- upvalues: p1 (ref), constantSource (copy)
-		if typeof(p1) == "function" then
-			return p1(p2)
-		elseif typeof(p2) == "function" then
-			p2(constantSource)
+local function useReactiveValue(Callback) --[[ Line: 58 ]]
+	-- upvalues: ReactModule (copy), constantSource (copy), SignalsReactModule (copy)
+	return (SignalsReactModule.useSignalState((ReactModule.useCallback(function(Callback1: (any) -> ()) --[[ Line: 59 ]]
+		-- upvalues: Callback (copy), constantSource (upval)
+		if typeof(Callback) == "function" then
+			return (Callback(Callback1))
 		end
-		return p1
-	end, { p1 }))
+		if typeof(Callback1) == "function" then
+			Callback1(constantSource)
+		end
+		return Callback
+	end, { Callback }))))
 end
 
-local function createThinkingGradient(p1, p2)
-	-- upvalues: reactModule (ref), chatConstantsModule (ref)
-	return reactModule.createElement("UIGradient", {
-		Enabled = p2,
+local function createThinkingGradient(p1, Enabled) --[[ Line: 72 ]]
+	-- upvalues: ReactModule (copy), ChatConstantsModule (copy)
+	return ReactModule.createElement("UIGradient", {
+		Enabled = Enabled,
 		Transparency = NumberSequence.new({
 			NumberSequenceKeypoint.new(0, 0.55),
 			NumberSequenceKeypoint.new(0.5, 0),
 			NumberSequenceKeypoint.new(1, 0.55)
 		}),
-		Offset = p1:map(function(p3)
-			-- upvalues: chatConstantsModule (copy)
-			return Vector2.new(p3 * chatConstantsModule.THINKING_GRADIENT_ANIMATION_SPEED % chatConstantsModule.THINKING_GRADIENT_OFFSET - chatConstantsModule.THINKING_GRADIENT_OFFSET / 2, 0)
+		Offset = p1:map(function(p2): Vector2 --[[ Line: 80 ]]
+			-- upvalues: ChatConstantsModule (upval)
+			return Vector2.new(p2 * ChatConstantsModule.THINKING_GRADIENT_ANIMATION_SPEED % ChatConstantsModule.THINKING_GRADIENT_OFFSET - ChatConstantsModule.THINKING_GRADIENT_OFFSET / 2, 0)
 		end)
 	})
 end
 
-local function createActivityText(p1, p2)
-	-- upvalues: reactModule (ref), text (ref)
-	return reactModule.createElement(text, {
+local function createActivityText(Text1, LayoutOrder) --[[ Line: 90 ]]
+	-- upvalues: ReactModule (copy), Text (copy)
+	return ReactModule.createElement(Text, {
 		tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-muted",
-		LayoutOrder = p2,
-		Text = p1
+		LayoutOrder = LayoutOrder,
+		Text = Text1
 	})
 end
 
-local function createActivitySummaryActionText(p1, p2, p3, p4)
-	-- upvalues: reactModule (ref), text (ref), createThinkingGradient (ref)
-	return reactModule.createElement(text, {
+local function createActivitySummaryActionText(Text1, LayoutOrder, ClockBinding, Enabled) --[[ Line: 98 ]]
+	-- upvalues: ReactModule (copy), Text (copy), createThinkingGradient (copy)
+	return ReactModule.createElement(Text, {
 		tag = "size-full-0 auto-y text-body-medium text-no-wrap text-align-x-left text-truncate-end content-muted",
-		LayoutOrder = p2,
-		Text = p1,
+		LayoutOrder = LayoutOrder,
+		Text = Text1,
 		Size = UDim2.new(1, 0, 0, 0)
-	}, { ThinkingGradient = createThinkingGradient(p3, p4) })
+	}, {
+		ThinkingGradient = createThinkingGradient(ClockBinding, Enabled)
+	})
 end
 
-local function _(p1, p2, p3, p4, p5, p6, p7)
-	-- upvalues: chatConstantsModule (ref), localizationStringsModule (ref)
-	return if p2 then p5:map(function(p8)
-		-- upvalues: p6 (ref), p3 (ref), chatConstantsModule (copy), p7 (ref), localizationStringsModule (copy), p4 (ref)
+local function _(p1, p2, p3, p4, p5, p6, p7, p8, p9) --[[ Line: 114 | Named "getActivitySummaryActionText" ]]
+	-- upvalues: FFlagBuildExperiencePromptStallMessageModule (copy), ChatConstantsModule (copy), LocalizationStringsModule (copy)
+	return if p2 then p5:map(function(StartedAt) --[[ Line: 129 ]]
+		-- upvalues: p6 (copy), p3 (copy), FFlagBuildExperiencePromptStallMessageModule (upval), p8 (copy), p9 (copy), ChatConstantsModule (upval), p7 (copy), LocalizationStringsModule (upval), p4 (copy)
 		if not p6.isThinking then
 			return p3
-		elseif p6.startedAt == nil then
-			p6.startedAt = p8
 		end
-		local maxValue = math.max(0, p8 - p6.startedAt)
+		if p6.startedAt == nil then
+			p6.startedAt = StartedAt
+		end
+		local Largest = math.max(0, StartedAt - p6.startedAt)
 		
-		return if math.floor(maxValue / chatConstantsModule.ASSISTANT_STATUS_SWAP_INTERVAL_SECONDS) % 2 == 0 then if chatConstantsModule.ASSISTANT_THINKING_DURATION_SUFFIX_DELAY_SECONDS <= maxValue then p7:Format(localizationStringsModule.CHAT_THINKING_SECONDS, { SECONDS = math.max(0, math.floor(maxValue)) }) else p3 else p4
+		if FFlagBuildExperiencePromptStallMessageModule and p8 ~= nil and p9 ~= nil then
+			local LastProgressAt = p8.lastProgressAt or StartedAt
+			p8.lastProgressAt = LastProgressAt
+			
+			if ChatConstantsModule.PROMPT_STALL_SECONDS <= StartedAt - LastProgressAt then
+				return p9
+			end
+		end
+		local ASSISTANTSTATUSSWAPINTERVALSECONDS = ChatConstantsModule.ASSISTANT_STATUS_SWAP_INTERVAL_SECONDS
+		local FormatResult = if ChatConstantsModule.ASSISTANT_THINKING_DURATION_SUFFIX_DELAY_SECONDS <= Largest then p7:Format(LocalizationStringsModule.CHAT_THINKING_SECONDS, { SECONDS = math.max(0, (math.floor(Largest))) }) else p3
+		
+		return if math.floor(Largest / ASSISTANTSTATUSSWAPINTERVALSECONDS) % 2 == 0 then FormatResult else p4
 	end) else p1
 end
 
-local function localizeActivityLabel(p1, p2, p3, p4, p5)
-	-- upvalues: localizationStringsModule (ref)
-	local var1 = p3[p1]
+local function localizeActivityLabel(CHATTOOL, SummaryToolActivity, p1, Tool, UseContextResult) --[[ Line: 157 ]]
+	-- upvalues: LocalizationStringsModule (copy)
+	local v1 = p1[CHATTOOL]
 	
-	if var1 ~= nil then
-		return var1
-	elseif p2 == nil or p2.kind ~= "tool_call" then
-		return p1
+	if v1 ~= nil then
+		return v1
+	elseif SummaryToolActivity == nil or SummaryToolActivity.kind ~= "tool_call" then
+		return CHATTOOL
+	else
+		local Title = if typeof(SummaryToolActivity.title) == "string" and SummaryToolActivity.title ~= "" then SummaryToolActivity.title else LocalizationStringsModule.CHAT_TOOL
+		local ChatToolActivityLocalizationKey = LocalizationStringsModule.getChatToolActivityLocalizationKey(SummaryToolActivity.title, SummaryToolActivity.status)
+		
+		if ChatToolActivityLocalizationKey == nil then
+			local Tool1 = if Title == LocalizationStringsModule.CHAT_TOOL then Tool else Title
+			
+			return if SummaryToolActivity.status == "completed" then UseContextResult:Format(LocalizationStringsModule.CHAT_TOOL_FINISHED, { TITLE = Tool1 }) elseif SummaryToolActivity.status == "failed" then UseContextResult:Format(LocalizationStringsModule.CHAT_TOOL_FAILED, { TITLE = Tool1 }) else UseContextResult:Format(LocalizationStringsModule.CHAT_TOOL_RUNNING, { title = Tool1 })
+		else
+			return UseContextResult:Format(ChatToolActivityLocalizationKey)
+		end
 	end
-	local var2 = if typeof(p2.title) == "string" and p2.title ~= "" then p2.title else localizationStringsModule.CHAT_TOOL
-	local chatToolActivityLocalizationKey = localizationStringsModule.getChatToolActivityLocalizationKey(p2.title, p2.status)
-	
-	if chatToolActivityLocalizationKey ~= nil then
-		return p5:Format(chatToolActivityLocalizationKey)
-	end
-	local var3 = if var2 == localizationStringsModule.CHAT_TOOL then p4 else var2
-	
-	return if p2.status == "completed" then p5:Format(localizationStringsModule.CHAT_TOOL_FINISHED, { TITLE = var3 }) elseif p2.status == "failed" then p5:Format(localizationStringsModule.CHAT_TOOL_FAILED, { TITLE = var3 }) else p5:Format(localizationStringsModule.CHAT_TOOL_RUNNING, { title = var3 })
 end
 
-return function(p1)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), reactModule (ref), localizationRoactContext (ref), useReactiveValue (ref), t (ref), localizeActivityLabel (ref), createActivityText (ref), fFlagBuildExperienceChatAccordionScrollAnchorModule (ref), chatScrollAnchorContextModule (ref), foundationModule (ref), chatConstantsModule (ref), view (ref), createActivitySummaryActionText (ref), text (ref), stateLayerAffordance (ref), icon (ref), iconName (ref), iconSize (ref), scrollView (ref)
-	local segment = p1.segment
-	local actionCount = segment.actionCount
-	local var1 = useLocalization({
-		assigningTasks = localizationStringsModule.CHAT_ASSIGNING_TASKS,
-		assistantLoading = localizationStringsModule.CHAT_ASSISTANT_LOADING,
-		assistantStillWorking = localizationStringsModule.CHAT_ASSISTANT_STILL_WORKING,
-		questionComposerAnswer = localizationStringsModule.CHAT_QUESTION_COMPOSER_ANSWER,
-		questionMultiple = localizationStringsModule.CHAT_QUESTION_MULTIPLE,
-		questionSingle = localizationStringsModule.CHAT_QUESTION_SINGLE,
-		taskCount = if actionCount == nil or actionCount <= 1 then nil else {
-			localizationStringsModule.CHAT_TASKS_COMPLETED,
-			NUM_COMPLETED_TASKS = actionCount
+return function(Frame) --[[ Line: 196 | Named "TurnActivitySummary" ]]
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagBuildExperiencePromptStallMessageModule (copy), ReactModule (copy), LocalizationRoactContext (copy), useReactiveValue (copy), t (copy), localizeActivityLabel (copy), createActivityText (copy), FFlagBuildExperienceChatAccordionScrollAnchorModule (copy), ChatScrollAnchorContextModule (copy), FoundationModule (copy), ChatConstantsModule (copy), View (copy), createActivitySummaryActionText (copy), Text (copy), StateLayerAffordance (copy), Icon (copy), IconName (copy), IconSize (copy), ScrollView (copy)
+	local Segment = Frame.segment
+	local ActionCount: number = Segment.actionCount
+	local UseLocalizationResult = UseLocalizationFunction({
+		assigningTasks = LocalizationStringsModule.CHAT_ASSIGNING_TASKS,
+		assistantLoading = LocalizationStringsModule.CHAT_ASSISTANT_LOADING,
+		assistantStillWorking = LocalizationStringsModule.CHAT_ASSISTANT_STILL_WORKING,
+		assistantTakingLonger = if FFlagBuildExperiencePromptStallMessageModule then LocalizationStringsModule.CHAT_ASSISTANT_TAKING_LONGER else nil,
+		questionComposerAnswer = LocalizationStringsModule.CHAT_QUESTION_COMPOSER_ANSWER,
+		questionMultiple = LocalizationStringsModule.CHAT_QUESTION_MULTIPLE,
+		questionSingle = LocalizationStringsModule.CHAT_QUESTION_SINGLE,
+		taskCount = if ActionCount == nil or ActionCount <= 1 then nil else {
+			LocalizationStringsModule.CHAT_TASKS_COMPLETED,
+			NUM_COMPLETED_TASKS = ActionCount
 		},
-		tool = localizationStringsModule.CHAT_TOOL
+		tool = LocalizationStringsModule.CHAT_TOOL
 	})
-	local var2 = reactModule.useContext(localizationRoactContext)
-	local var3 = useReactiveValue(segment.label or "")
-	local var4 = useReactiveValue(segment.activityItems or t)
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local assistantLoading = var1.assistantLoading
-	local assistantStillWorking = var1.assistantStillWorking
-	local t_1 = {
-		[localizationStringsModule.CHAT_ASSIGNING_TASKS] = var1.assigningTasks,
-		[localizationStringsModule.CHAT_ASSISTANT_LOADING] = assistantLoading,
-		[localizationStringsModule.CHAT_QUESTION_COMPOSER_ANSWER] = var1.questionComposerAnswer,
-		[localizationStringsModule.CHAT_QUESTION_MULTIPLE] = var1.questionMultiple,
-		[localizationStringsModule.CHAT_QUESTION_SINGLE] = var1.questionSingle
+	local UseContextResult = ReactModule.useContext(LocalizationRoactContext)
+	local UseReactiveValueResult = useReactiveValue(Segment.label or "")
+	local UseReactiveValueResult1 = useReactiveValue(Segment.activityItems or t)
+	local AssistantLoading = UseLocalizationResult.assistantLoading
+	local AssistantStillWorking = UseLocalizationResult.assistantStillWorking
+	local config = {
+		[LocalizationStringsModule.CHAT_ASSIGNING_TASKS] = UseLocalizationResult.assigningTasks,
+		[LocalizationStringsModule.CHAT_ASSISTANT_LOADING] = AssistantLoading,
+		[LocalizationStringsModule.CHAT_QUESTION_COMPOSER_ANSWER] = UseLocalizationResult.questionComposerAnswer,
+		[LocalizationStringsModule.CHAT_QUESTION_MULTIPLE] = UseLocalizationResult.questionMultiple,
+		[LocalizationStringsModule.CHAT_QUESTION_SINGLE] = UseLocalizationResult.questionSingle
 	}
-	local var5 = if actionCount == nil or actionCount <= 1 or segment.summaryToolActivity ~= nil then localizeActivityLabel(var3, segment.summaryToolActivity, t_1, var1.tool, var2) else var1.taskCount
+	local LocalizeActivityLabelResult = if ActionCount == nil or ActionCount <= 1 or Segment.summaryToolActivity ~= nil then localizeActivityLabel(UseReactiveValueResult, Segment.summaryToolActivity, config, UseLocalizationResult.tool, UseContextResult) else UseLocalizationResult.taskCount
 	
-	local var6 = function(p2, p3)
-		-- upvalues: localizeActivityLabel (copy), localizationStringsModule (copy), t_1 (ref), var1 (ref), var2 (ref), createActivityText (copy)
-		return if p2.kind == "tool_call" then createActivityText(localizeActivityLabel(localizationStringsModule.CHAT_TOOL, p2, t_1, var1.tool, var2), p3) else nil
+	local function v45(p1, LayoutOrder) --[[ Line: 245 ]]
+		-- upvalues: localizeActivityLabel (upval), LocalizationStringsModule (upval), config (copy), UseLocalizationResult (copy), UseContextResult (copy), createActivityText (upval)
+		return if p1.kind == "tool_call" then createActivityText(localizeActivityLabel(LocalizationStringsModule.CHAT_TOOL, p1, config, UseLocalizationResult.tool, UseContextResult), LayoutOrder) else nil
 	end
 	
-	local var7 = useReactiveValue(segment.isLoading or false)
-	local var8, var9 = reactModule.useState(false)
-	local var10, var11 = reactModule.useBinding(0)
-	local var12 = reactModule.useRef(nil)
-	local var13 = nil
-	local var14 = nil
+	local UseReactiveValueResult2 = useReactiveValue(Segment.isLoading or false)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = nil
+	local Callback = nil
 	
-	if fFlagBuildExperienceChatAccordionScrollAnchorModule then
-		var13 = reactModule.useRef(nil)
-		var14 = reactModule.useContext(chatScrollAnchorContextModule)
+	if FFlagBuildExperienceChatAccordionScrollAnchorModule then
+		UseRefResult1 = ReactModule.useRef(nil)
+		Callback = ReactModule.useContext(ChatScrollAnchorContextModule)
 	end
-	local var15 = reactModule.useRef({ isThinking = false, startedAt = nil })
-	local var16 = foundationModule.Hooks.useTokens()
-	local var17 = var3 == chatConstantsModule.ASSISTANT_LOADING_TEXT
-	local current = var15.current
+	local UseTokensResult = FoundationModule.Hooks.useTokens()
+	local IsUseReactiveValueResultMatch = UseReactiveValueResult == ChatConstantsModule.ASSISTANT_LOADING_TEXT
+	local Current = ReactModule.useRef({ isThinking = false, startedAt = nil }).current
 	
-	if current.isThinking ~= var17 then
-		current.isThinking = var17
-		current.startedAt = nil
+	if Current.isThinking ~= IsUseReactiveValueResultMatch then
+		Current.isThinking = IsUseReactiveValueResultMatch
+		Current.startedAt = nil
 	end
-	local var18 = reactModule.useCallback(function()
-		-- upvalues: fFlagBuildExperienceChatAccordionScrollAnchorModule (copy), var14 (write), var13 (write), var9 (ref)
-		if fFlagBuildExperienceChatAccordionScrollAnchorModule and var14 ~= nil and var13 ~= nil then
-			var14(var13.current)
+	local v1 = nil
+	
+	if FFlagBuildExperiencePromptStallMessageModule then
+		local Current1 = ReactModule.useRef({
+			segment = nil,
+			label = "",
+			activityCount = 0,
+			lastProgressAt = nil
+		}).current
+		local CountUseReactiveValueResult1 = #UseReactiveValueResult1
+		
+		if Current1.segment ~= Segment or Current1.label ~= UseReactiveValueResult or Current1.activityCount ~= CountUseReactiveValueResult1 then
+			Current1.segment = Segment
+			Current1.label = UseReactiveValueResult
+			Current1.activityCount = CountUseReactiveValueResult1
+			Current1.lastProgressAt = nil
 		end
-		var9(function(p2)
-			return not p2
+		v1 = Current1
+	end
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 304 ]]
+		-- upvalues: FFlagBuildExperienceChatAccordionScrollAnchorModule (upval), Callback (ref), UseRefResult1 (ref), UseStateResult2 (copy)
+		if FFlagBuildExperienceChatAccordionScrollAnchorModule and Callback ~= nil and UseRefResult1 ~= nil then
+			Callback(UseRefResult1.current)
+		end
+		UseStateResult2(function(p1): boolean --[[ Line: 308 ]]
+			return not p1
 		end)
-	end, { var14 })
-	local var19 = reactModule.useCallback(function(p2)
-		-- upvalues: var12 (ref)
-		if p2 == nil then
+	end, { Callback })
+	local UseResult1 = ReactModule.useCallback(function(ScrollFrame) --[[ Line: 313 ]]
+		-- upvalues: UseRefResult (copy)
+		if ScrollFrame ~= nil then
+			task.defer(function() --[[ Line: 318 ]]
+				-- upvalues: UseRefResult (upval), ScrollFrame (copy)
+				if UseRefResult.current == ScrollFrame then
+					ScrollFrame.CanvasPosition = Vector2.new(0, (math.max(0, ScrollFrame.AbsoluteCanvasSize.Y - ScrollFrame.AbsoluteWindowSize.Y)))
+					
+					return
+				end
+			end)
+			
 			return
 		end
-		task.defer(function()
-			-- upvalues: var12 (copy), p2 (ref)
-			if var12.current == p2 then
-				p2.CanvasPosition = Vector2.new(0, math.max(0, p2.AbsoluteCanvasSize.Y - p2.AbsoluteWindowSize.Y))
-				
-				return
-			end
-		end)
 	end, {})
-	local var20 = reactModule.useCallback(function(p2)
-		-- upvalues: var12 (ref), var19 (ref)
-		var12.current = p2
+	local UseResult2 = ReactModule.useCallback(function(Current) --[[ Line: 329 ]]
+		-- upvalues: UseRefResult (copy), UseResult1 (copy)
+		UseRefResult.current = Current
 		
-		if p2 then
-			var19(p2)
+		if Current then
+			UseResult1(Current)
 		end
-	end, { var19 })
-	local var21 = reactModule.useCallback(function(p2)
-		-- upvalues: var11 (ref), var19 (ref)
-		var11(p2.AbsoluteCanvasSize.Y)
-		var19(p2)
-	end, { var11, var19 })
-	local var22 = reactModule.useCallback(function(p2)
-		-- upvalues: var19 (ref)
-		var19(p2)
-	end, { var19 })
-	reactModule.useEffect(function()
-		-- upvalues: var19 (ref), var12 (ref)
-		var19(var12.current)
+	end, { UseResult1 })
+	local UseResult3 = ReactModule.useCallback(function(ScrollFrame) --[[ Line: 336 ]]
+		-- upvalues: UseBindingResult2 (copy), UseResult1 (copy)
+		UseBindingResult2(ScrollFrame.AbsoluteCanvasSize.Y)
+		UseResult1(ScrollFrame)
+	end, { UseBindingResult2, UseResult1 })
+	local UseResult4 = ReactModule.useCallback(function(p1) --[[ Line: 341 ]]
+		-- upvalues: UseResult1 (copy)
+		UseResult1(p1)
+	end, { UseResult1 })
+	ReactModule.useEffect(function() --[[ Line: 345 ]]
+		-- upvalues: UseResult1 (copy), UseRefResult (copy)
+		UseResult1(UseRefResult.current)
 		
-		return function() end
-	end, { var19, var4 })
-	local t_2 = {}
-	local var23 = 0
+		return function() --[[ Line: 347 ]] end
+	end, { UseResult1, UseReactiveValueResult1 })
+	local t1 = {}
+	local Count = 0
 	
-	for i, v in var4 do
-		local var24 = var6(v, i)
+	for i, value in UseReactiveValueResult1 do
+		local v2 = v45(value, i)
 		
-		if var24 ~= nil then
-			t_2[`Tool{i}`] = var24
-			var23 += 1
+		if v2 ~= nil then
+			t1[`Tool{i}`] = v2
+			Count += 1
 		end
 	end
-	local var25 = var23 > 1
+	local HasNextEntry = next(t1) ~= nil
+	local IsCountAbove = Count > 1
+	local Element = nil
 	
-	return reactModule.createElement(view, {
+	if UseReactiveValueResult2 then
+		local CreateElementFunction = ReactModule.createElement
+		local config1 = {
+			CurrentAction = createActivitySummaryActionText(if IsUseReactiveValueResultMatch then ClockBinding:map(function(StartedAt) --[[ Line: 129 ]]
+				-- upvalues: Current (copy), AssistantLoading (copy), FFlagBuildExperiencePromptStallMessageModule (upval), v72 (copy), AssistantTakingLonger (copy), ChatConstantsModule (upval), UseContextResult (copy), LocalizationStringsModule (upval), AssistantStillWorking (copy)
+				if not Current.isThinking then
+					return AssistantLoading
+				end
+				if Current.startedAt == nil then
+					Current.startedAt = StartedAt
+				end
+				local Largest = math.max(0, StartedAt - Current.startedAt)
+				
+				if FFlagBuildExperiencePromptStallMessageModule and v72 ~= nil and AssistantTakingLonger ~= nil then
+					local LastProgressAt = v72.lastProgressAt or StartedAt
+					v72.lastProgressAt = LastProgressAt
+					
+					if ChatConstantsModule.PROMPT_STALL_SECONDS <= StartedAt - LastProgressAt then
+						return AssistantTakingLonger
+					end
+				end
+				local ASSISTANTSTATUSSWAPINTERVALSECONDS = ChatConstantsModule.ASSISTANT_STATUS_SWAP_INTERVAL_SECONDS
+				local FormatResult = if ChatConstantsModule.ASSISTANT_THINKING_DURATION_SUFFIX_DELAY_SECONDS <= Largest then UseContextResult:Format(LocalizationStringsModule.CHAT_THINKING_SECONDS, { SECONDS = math.max(0, (math.floor(Largest))) }) else AssistantLoading
+				
+				return if math.floor(Largest / ASSISTANTSTATUSSWAPINTERVALSECONDS) % 2 == 0 then FormatResult else AssistantStillWorking
+			end) else TaskCount, 1, Frame.clockBinding, Segment.isWaitingForLocalTool ~= true)
+		}
+		local TaskCount = LocalizeActivityLabelResult
+		local ClockBinding = Frame.clockBinding
+		local v3 = v1
+		local AssistantTakingLonger = if FFlagBuildExperiencePromptStallMessageModule and Segment.isWaitingForLocalTool ~= true then UseLocalizationResult.assistantTakingLonger else nil
+		Element = CreateElementFunction(View, { LayoutOrder = 2, tag = "col fill gap-xxsmall auto-y" }, config1)
+	else
+		Element = ReactModule.createElement(Text, {
+			LayoutOrder = 2,
+			tag = "fill text-body-medium text-wrap text-align-x-left content-muted",
+			Text = LocalizeActivityLabelResult
+		})
+	end
+	return ReactModule.createElement(View, {
 		tag = "col gap-xsmall size-full-0 auto-y",
 		testId = "TurnActivitySummary",
-		LayoutOrder = p1.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		ActivitySummary = reactModule.createElement(view, {
+		ActivitySummary = ReactModule.createElement(View, {
 			LayoutOrder = 1,
 			tag = "row align-y-center gap-xsmall size-full-0 auto-y padding-y-xxsmall",
 			testId = "TurnActivitySummary.Summary",
-			ref = var13,
-			onActivated = if var25 then var18 else nil,
-			stateLayer = { affordance = stateLayerAffordance.None }
+			ref = UseRefResult1,
+			onActivated = if IsCountAbove then UseResult else nil,
+			stateLayer = { affordance = StateLayerAffordance.None }
 		}, {
-			Chevron = if var25 then reactModule.createElement(icon, {
+			Chevron = if IsCountAbove then ReactModule.createElement(Icon, {
 				LayoutOrder = 1,
 				testId = "TurnActivitySummary.Chevron",
-				name = if var8 then iconName.ChevronLargeDown else iconName.ChevronLargeRight,
-				size = iconSize.XSmall,
-				style = var16.Color.Content.Muted
+				name = if UseStateResult then IconName.ChevronLargeDown else IconName.ChevronLargeRight,
+				size = IconSize.XSmall,
+				style = UseTokensResult.Color.Content.Muted
 			}) else nil,
-			Label = if var7 then reactModule.createElement(view, { LayoutOrder = 2, tag = "col fill gap-xxsmall auto-y" }, {
-				CurrentAction = createActivitySummaryActionText(if not var17 then var5 else p1.clockBinding:map(function(p2)
-					-- upvalues: current (ref), assistantLoading (ref), chatConstantsModule (copy), var2 (ref), localizationStringsModule (copy), assistantStillWorking (ref)
-					if not current.isThinking then
-						return assistantLoading
-					elseif current.startedAt == nil then
-						current.startedAt = p2
-					end
-					local maxValue = math.max(0, p2 - current.startedAt)
-					
-					return if math.floor(maxValue / chatConstantsModule.ASSISTANT_STATUS_SWAP_INTERVAL_SECONDS) % 2 == 0 then if chatConstantsModule.ASSISTANT_THINKING_DURATION_SUFFIX_DELAY_SECONDS <= maxValue then var2:Format(localizationStringsModule.CHAT_THINKING_SECONDS, { SECONDS = math.max(0, math.floor(maxValue)) }) else assistantLoading else assistantStillWorking
-				end), 1, p1.clockBinding, segment.isWaitingForLocalTool ~= true)
-			}) else reactModule.createElement(text, {
-				LayoutOrder = 2,
-				tag = "fill text-body-medium text-wrap text-align-x-left content-muted",
-				Text = var5
-			})
+			Label = Element
 		}),
-		ActivityHistory = if var8 and next(t_2) ~= nil and var25 then reactModule.createElement(scrollView, {
+		ActivityHistory = if UseStateResult and HasNextEntry and IsCountAbove then ReactModule.createElement(ScrollView, {
 			LayoutOrder = 2,
 			tag = "size-full-0 clip",
 			testId = "TurnActivitySummary.ActivityHistory",
-			Size = var10:map(function(p2)
-				return UDim2.new(1, 0, 0, math.clamp(p2, 24, 220))
+			Size = UseBindingResult:map(function(Value: number): UDim2 --[[ Line: 421 ]]
+				return UDim2.new(1, 0, 0, (math.clamp(Value, 24, 220)))
 			end),
-			scrollingFrameRef = var20,
-			onAbsoluteCanvasSizeChanged = var21,
-			onAbsoluteWindowSizeChanged = var22,
+			scrollingFrameRef = UseResult2,
+			onAbsoluteCanvasSizeChanged = UseResult3,
+			onAbsoluteWindowSizeChanged = UseResult4,
 			scroll = {
 				AutomaticCanvasSize = Enum.AutomaticSize.Y,
 				CanvasSize = UDim2.new(1, 0, 0, 0),
 				ScrollingDirection = Enum.ScrollingDirection.Y
 			}
 		}, {
-			ActivityColumn = reactModule.createElement(view, {
+			ActivityColumn = ReactModule.createElement(View, {
 				tag = "col gap-xsmall size-full-0 auto-y padding-left-large"
-			}, t_2)
+			}, t1)
 		}) else nil
 	})
 end

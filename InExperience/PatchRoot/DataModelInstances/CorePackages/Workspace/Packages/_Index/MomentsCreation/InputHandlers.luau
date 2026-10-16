@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.InputHandlers.InputHandlers)
+﻿return (require(script.Parent.Parent.Parent._Index.InputHandlers.InputHandlers))

@@ -1,22 +1,22 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local motionModule = require(parent.Motion)
-local iconButton = foundationModule.IconButton
-local segmentedControl = foundationModule.SegmentedControl
-local text = foundationModule.Text
-local view = foundationModule.View
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local iconName = foundationModule.Enums.IconName
-local inputSize = foundationModule.Enums.InputSize
-local searchBarContainerModule = require(buildExperience.Components.SearchBar.SearchBarContainer)
-local libraryWorldBackdropViewModule = require(script.Parent.LibraryWorldCutout.LibraryWorldBackdropView)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local MotionModule = require(Parent.Motion)
+local IconButton = FoundationModule.IconButton
+local SegmentedControl = FoundationModule.SegmentedControl
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local IconName = FoundationModule.Enums.IconName
+local InputSize = FoundationModule.Enums.InputSize
+local SearchBarContainerModule = require(BuildExperience.Components.SearchBar.SearchBarContainer)
+local LibraryWorldBackdropViewModule = require(script.Parent.LibraryWorldCutout.LibraryWorldBackdropView)
 local _ = require(script.Parent.LibraryWorldCutout.useLibraryWorldCutoutViewModel)
-local releaseFocusWithinModule = require(buildExperience.utils.releaseFocusWithin)
-local useTypedQueryBindingModule = require(script.Parent.useTypedQueryBinding)
-local useHardwareInsetsModule = require(buildExperience.Components.ChatSheet.useHardwareInsets)
-local t = {
+local ReleaseFocusWithinModule = require(BuildExperience.utils.releaseFocusWithin)
+local UseTypedQueryBindingModule = require(script.Parent.useTypedQueryBinding)
+local UseHardwareInsetsModule = require(BuildExperience.Components.ChatSheet.useHardwareInsets)
+local config = {
 	Top = {
 		UDim2.fromOffset(-10000, -10000),
 		UDim2.new(1, 20000, 0, 10000)
@@ -29,305 +29,321 @@ local t = {
 	Right = { UDim2.fromScale(1, 0), UDim2.new(0, 10000, 1, 0) }
 }
 
-return function(p1)
-	-- upvalues: foundationModule (ref), useHardwareInsetsModule (ref), reactModule (ref), motionModule (ref), releaseFocusWithinModule (ref), useTypedQueryBindingModule (ref), t (ref), view (ref), iconButton (ref), iconName (ref), inputSize (ref), buttonVariant (ref), text (ref), searchBarContainerModule (ref), segmentedControl (ref), libraryWorldBackdropViewModule (ref)
-	local var1 = foundationModule.Hooks.useTokens()
-	local reducedMotion = foundationModule.Hooks.usePreferences().reducedMotion
-	local bottom = useHardwareInsetsModule().bottom
-	local var2, var3 = reactModule.useState(p1.isOpen)
-	local var4, var5 = motionModule.useMotion({ transparency = if p1.isOpen then 0 else 1 })
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var3 (ref), var5 (ref), motionModule (copy), reducedMotion (ref)
-		local var6 = false
+return function(p1) --[[ Line: 61 | Named "LibraryExperienceView" ]]
+	-- upvalues: FoundationModule (copy), UseHardwareInsetsModule (copy), ReactModule (copy), MotionModule (copy), ReleaseFocusWithinModule (copy), UseTypedQueryBindingModule (copy), config (copy), View (copy), IconButton (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), Text (copy), SearchBarContainerModule (copy), SegmentedControl (copy), LibraryWorldBackdropViewModule (copy)
+	local UseTokensResult = FoundationModule.Hooks.useTokens()
+	local ReducedMotion = FoundationModule.Hooks.usePreferences().reducedMotion
+	local Bottom = UseHardwareInsetsModule().bottom
+	local UseStateResult, UseStateResult2 = ReactModule.useState(p1.isOpen)
+	local UseMotionResult, UseMotionResult2 = MotionModule.useMotion({ transparency = if p1.isOpen then 0 else 1 })
+	ReactModule.useEffect(function() --[[ Line: 67 ]]
+		-- upvalues: p1 (copy), UseStateResult2 (copy), UseMotionResult2 (copy), MotionModule (upval), ReducedMotion (copy)
+		local Flag = false
 		
 		if p1.isOpen then
-			var3(true)
+			UseStateResult2(true)
 		end
-		var5(motionModule.createState({ transparency = if p1.isOpen then 0 else 1 }, {
-			default = motionModule.transition({
-				duration = if reducedMotion or not p1.showModeControl then 0 else 0.15,
+		UseMotionResult2(MotionModule.createState({ transparency = if p1.isOpen then 0 else 1 }, {
+			default = MotionModule.transition({
+				duration = if ReducedMotion or not p1.showModeControl then 0 else 0.15,
 				easingStyle = Enum.EasingStyle.Quad
 			})
 		}), {
-			onAnimationComplete = function(p2)
-				-- upvalues: var6 (write), p1 (copy), var3 (copy)
-				if p2 and not var6 and not p1.isOpen then
-					var3(false)
+			onAnimationComplete = function(p2) --[[ Line: 80 ]]
+				-- upvalues: Flag (ref), p1 (upval), UseStateResult2 (upval)
+				if p2 and not Flag and not p1.isOpen then
+					UseStateResult2(false)
 				end
 			end
 		})
 		
-		return function()
-			-- upvalues: var6 (write)
-			var6 = true
+		return function() --[[ Line: 87 ]]
+			-- upvalues: Flag (ref)
+			Flag = true
 		end
-	end, { p1.isOpen, p1.showModeControl, reducedMotion, var5 })
-	local var6 = reactModule.useRef(nil)
-	reactModule.useEffect(function()
-		-- upvalues: var6 (ref), p1 (ref)
-		local current = var6.current
+	end, {
+		p1.isOpen,
+		p1.showModeControl,
+		ReducedMotion,
+		UseMotionResult2
+	})
+	local UseRefResult = ReactModule.useRef(nil)
+	ReactModule.useEffect(function() --[[ Line: 92 ]]
+		-- upvalues: UseRefResult (copy), p1 (copy)
+		local Current = UseRefResult.current
 		
-		if current == nil or p1.isWorldAvailable ~= false then
+		if Current == nil or p1.isWorldAvailable ~= false then
 			return nil
 		end
-		local t = { [current] = current.Selectable }
-		local t_1 = {}
+		local Selectables = { [Current] = Current.Selectable }
+		local TextTransparencies = {}
 		
-		for i, v in current:GetDescendants() do
-			if v:IsA("GuiButton") then
-				t[v] = v.Selectable
-			elseif v:IsA("TextLabel") then
-				t_1[v] = v.TextTransparency
+		for _, descendant in Current:GetDescendants() do
+			if descendant:IsA("GuiButton") then
+				Selectables[descendant] = descendant.Selectable
+			elseif descendant:IsA("TextLabel") then
+				TextTransparencies[descendant] = descendant.TextTransparency
 			end
 		end
-		for i_1 in t do
-			i_1.Selectable = false
+		for selectable in Selectables do
+			selectable.Selectable = false
 		end
-		for i_2, v_1 in t_1 do
-			i_2.TextTransparency = 1 - (1 - v_1) * 0.5
+		for Label, textTransparency in TextTransparencies do
+			Label.TextTransparency = 1 - (1 - textTransparency) * 0.5
 		end
-		return function()
-			-- upvalues: t (ref), t_1 (ref)
-			for i, v in t do
-				i.Selectable = v
+		return function() --[[ Line: 112 ]]
+			-- upvalues: Selectables (copy), TextTransparencies (copy)
+			for i, selectable in Selectables do
+				i.Selectable = selectable
 			end
-			for i_1, v_1 in t_1 do
-				i_1.TextTransparency = v_1
+			for Label, textTransparency in TextTransparencies do
+				Label.TextTransparency = textTransparency
 			end
 		end
 	end, { p1.isWorldAvailable, p1.showModeControl })
-	local worldCutout = p1.worldCutout
-	local var7 = worldCutout ~= nil and worldCutout.isTransitioning
-	local var8 = if worldCutout == nil or not var7 then var4.transparency else worldCutout.progress
-	local isOpen = p1.isOpen or (var2 or var7)
-	local var9 = var8:map(function(p2)
-		-- upvalues: var1 (ref)
+	local WorldCutout = p1.worldCutout
+	local IsTransitioning = WorldCutout ~= nil and WorldCutout.isTransitioning
+	local Transparency = if WorldCutout == nil or not IsTransitioning then UseMotionResult.transparency else WorldCutout.progress
+	local IsOpen = p1.isOpen or (UseStateResult or IsTransitioning)
+	local MapResult = Transparency:map(function(Transparency) --[[ Line: 127 ]]
+		-- upvalues: UseTokensResult (copy)
 		return {
-			Color3 = var1.Color.Surface.Surface_0.Color3,
-			Transparency = p2
+			Color3 = UseTokensResult.Color.Surface.Surface_0.Color3,
+			Transparency = Transparency
 		}
 	end)
-	local var10, var11 = reactModule.useState(nil)
-	local var12 = p1.isOpen and (p1.onQueryChanged ~= nil and p1.query ~= nil)
-	local onBack = p1.onBack
-	local title = p1.title or p1.assetLabel
-	local var13 = var10 == title
-	local var14 = var12 and (var13 or p1.query ~= "")
-	reactModule.useEffect(function()
-		-- upvalues: var11 (ref)
-		var11(nil)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
+	local HasQuery: boolean = p1.isOpen and (p1.onQueryChanged ~= nil and p1.query ~= nil)
+	local OnBack = p1.onBack
+	local Title = p1.title or p1.assetLabel
+	local IsUseStateResultMatch = UseStateResult1 == Title
+	local IsUseStateResultMatch1: boolean = HasQuery and (IsUseStateResultMatch or p1.query ~= "")
+	ReactModule.useEffect(function() --[[ Line: 137 ]]
+		-- upvalues: UseStateResult2_1 (copy)
+		UseStateResult2_1(nil)
 	end, { p1.title, p1.isOpen })
-	local var15 = reactModule.useRef(nil)
-	local var16 = reactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseRefResult2 = ReactModule.useRef(nil)
 	
-	local var17 = function(p2)
-		-- upvalues: var16 (ref)
-		local current = var16.current
+	local function v41(p2): boolean --[[ Line: 144 ]]
+		-- upvalues: UseRefResult2 (copy)
+		local Current = UseRefResult2.current
 		
-		if p2 == nil or current == nil then
+		if p2 == nil or Current == nil then
 			return false
+		else
+			local VectorDelta = Vector2.new(p2.Position.X, p2.Position.Y) - Current.AbsolutePosition
+			
+			return VectorDelta.X >= 0 and (VectorDelta.Y >= 0 and VectorDelta.X <= Current.AbsoluteSize.X) and VectorDelta.Y <= Current.AbsoluteSize.Y
 		end
-		local var18 = Vector2.new(p2.Position.X, p2.Position.Y) - current.AbsolutePosition
-		
-		return var18.X >= 0 and (var18.Y >= 0 and (var18.X <= current.AbsoluteSize.X and var18.Y <= current.AbsoluteSize.Y))
 	end
 	
-	local _ = function()
-		-- upvalues: releaseFocusWithinModule (copy), var15 (ref)
-		releaseFocusWithinModule(var15.current)
+	local function _() --[[ Line: 155 ]]
+		-- upvalues: ReleaseFocusWithinModule (upval), UseRefResult1 (copy)
+		ReleaseFocusWithinModule(UseRefResult1.current)
 	end
 	
-	local var18, var19 = useTypedQueryBindingModule(p1.query)
+	local UseTypedQueryBindingModuleResult, UseTypedQueryBindingModuleResult2 = UseTypedQueryBindingModule(p1.query)
 	
-	local _ = function()
-		-- upvalues: var19 (ref), p1 (ref)
-		var19("")
+	local _ = function() --[[ Line: 159 ]]
+		-- upvalues: UseTypedQueryBindingModuleResult2 (copy), p1 (copy)
+		UseTypedQueryBindingModuleResult2("")
 		
 		if p1.onSearchReset == nil then
 			p1.onQueryChanged("")
 			
 			return
+		else
+			p1.onSearchReset()
 		end
-		p1.onSearchReset()
 	end
 	
-	local t_1 = {}
+	local Elements = {}
 	
-	for i, v in t do
-		t_1[i] = reactModule.createElement(view, {
-			Position = v[1],
-			Size = v[2],
-			backgroundStyle = var9,
+	for i, value in config do
+		Elements[i] = ReactModule.createElement(View, {
+			Position = value[1],
+			Size = value[2],
+			backgroundStyle = MapResult,
 			testId = `Library.Experience.SafeAreaFill.{i}`
 		})
 	end
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "col",
 		testId = "Library.Experience",
-		Size = UDim2.new(1, 0, 1, bottom),
+		Size = UDim2.new(1, 0, 1, Bottom),
 		backgroundStyle = { Transparency = 1 }
 	}, {
-		SafeAreaFill = reactModule.createElement("Folder", nil, t_1),
-		Header = reactModule.createElement(view, {
+		SafeAreaFill = ReactModule.createElement("Folder", nil, Elements),
+		Header = ReactModule.createElement(View, {
 			LayoutOrder = 1,
 			testId = "Library.Experience.Header",
-			backgroundStyle = var9,
-			onActivated = function() end,
+			backgroundStyle = MapResult,
+			onActivated = function() --[[ Line: 190 ]] end,
 			selection = { Selectable = false },
 			stateLayer = {
-				affordance = foundationModule.Enums.StateLayerAffordance.None
+				affordance = FoundationModule.Enums.StateLayerAffordance.None
 			},
 			tag = {
 				["row align-y-center gap-small size-full-0 auto-y padding-x-medium padding-top-xxlarge"] = true,
 				["padding-bottom-small"] = p1.showModeControl == true,
 				["padding-bottom-medium"] = p1.showModeControl ~= true
 			},
-			ref = var15
+			ref = UseRefResult1
 		}, {
-			Leading = reactModule.createElement(iconButton, {
+			Leading = ReactModule.createElement(View, {
 				LayoutOrder = 1,
-				isCircular = true,
-				icon = if onBack ~= nil then iconName.X else iconName.ChevronLargeLeft,
-				ref = var16,
-				onActivated = function()
-					-- upvalues: onBack (ref), p1 (ref), releaseFocusWithinModule (copy), var15 (ref), var11 (ref), var14 (ref), var19 (ref)
-					local onBack_1 = onBack or p1.onLeave
-					releaseFocusWithinModule(var15.current)
-					var11(nil)
-					
-					if not var14 or onBack ~= nil then
-						onBack_1()
-						
-						return
-					end
-					var19("")
-					
-					if p1.onSearchReset == nil then
-						p1.onQueryChanged("")
-						
-						return
-					end
-					p1.onSearchReset()
-				end,
-				size = inputSize.Large,
-				variant = buttonVariant.Utility,
-				testId = if onBack ~= nil then "Library.Experience.Leave" else "Library.Experience.Back"
-			}),
-			Title = if not var14 then reactModule.createElement(text, {
-				LayoutOrder = 2,
-				tag = "fill text-heading-small text-align-x-left text-truncate-end content-emphasis",
-				testId = "Library.Experience.Title",
-				Text = title
-			}) else reactModule.createElement(view, {
-				LayoutOrder = 2,
-				tag = "grow auto-y",
-				testId = "Library.Experience.Search"
+				tag = "auto-xy radius-circle",
+				testId = "Library.Experience.LeadingChip",
+				backgroundStyle = if p1.isOpen then nil else UseTokensResult.Color.OverMedia.OverMedia_0
 			}, {
-				Input = reactModule.createElement(searchBarContainerModule, {
-					key = title,
-					query = var18,
-					placeholder = p1.searchPlaceholder,
-					setQuery = function(value)
-						-- upvalues: var19 (ref), p1 (ref)
-						var19(value)
-						p1.onQueryChanged(value)
-					end,
-					clear = function()
-						-- upvalues: releaseFocusWithinModule (copy), var15 (ref), var19 (ref), p1 (ref)
-						releaseFocusWithinModule(var15.current)
-						var19("")
+				Button = ReactModule.createElement(IconButton, {
+					isCircular = true,
+					icon = if OnBack == nil then IconName.X else IconName.ChevronLargeLeft,
+					ref = UseRefResult2,
+					onActivated = function() --[[ Line: 213 ]]
+						-- upvalues: OnBack (copy), p1 (copy), ReleaseFocusWithinModule (upval), UseRefResult1 (copy), UseStateResult2_1 (copy), IsUseStateResultMatch1 (copy), UseTypedQueryBindingModuleResult2 (copy)
+						local OnBack1: () -> () = OnBack or p1.onLeave
+						ReleaseFocusWithinModule(UseRefResult1.current)
+						UseStateResult2_1(nil)
+						
+						if not IsUseStateResultMatch1 or OnBack ~= nil then
+							OnBack1()
+							
+							return
+						end
+						UseTypedQueryBindingModuleResult2("")
 						
 						if p1.onSearchReset == nil then
 							p1.onQueryChanged("")
 							
 							return
-						end
-						p1.onSearchReset()
-					end,
-					onDismiss = function()
-						-- upvalues: releaseFocusWithinModule (copy), var15 (ref), var11 (ref)
-						releaseFocusWithinModule(var15.current)
-						var11(nil)
-					end,
-					onFocusLost = function(p2)
-						-- upvalues: var18 (ref), var17 (ref), var11 (ref)
-						if var18:getValue() == "" and not var17(p2) then
-							var11(nil)
+						else
+							p1.onSearchReset()
 						end
 					end,
-					shouldFocus = var13
+					size = InputSize.Large,
+					variant = ButtonVariant.Utility,
+					testId = if OnBack == nil then "Library.Experience.Leave" else "Library.Experience.Back"
 				})
 			}),
-			Search = if var12 and not var14 then reactModule.createElement(iconButton, {
+			Title = if IsUseStateResultMatch1 then ReactModule.createElement(View, {
+				LayoutOrder = 2,
+				tag = "grow auto-y",
+				testId = "Library.Experience.Search"
+			}, {
+				Input = ReactModule.createElement(SearchBarContainerModule, {
+					key = Title,
+					query = UseTypedQueryBindingModuleResult,
+					placeholder = p1.searchPlaceholder,
+					setQuery = function(p2) --[[ Line: 244 ]]
+						-- upvalues: UseTypedQueryBindingModuleResult2 (copy), p1 (copy)
+						UseTypedQueryBindingModuleResult2(p2)
+						p1.onQueryChanged(p2)
+					end,
+					clear = function() --[[ Line: 248 ]]
+						-- upvalues: ReleaseFocusWithinModule (upval), UseRefResult1 (copy), UseTypedQueryBindingModuleResult2 (copy), p1 (copy)
+						ReleaseFocusWithinModule(UseRefResult1.current)
+						UseTypedQueryBindingModuleResult2("")
+						
+						if p1.onSearchReset == nil then
+							p1.onQueryChanged("")
+							
+							return
+						else
+							p1.onSearchReset()
+						end
+					end,
+					onDismiss = function() --[[ Line: 252 ]]
+						-- upvalues: ReleaseFocusWithinModule (upval), UseRefResult1 (copy), UseStateResult2_1 (copy)
+						ReleaseFocusWithinModule(UseRefResult1.current)
+						UseStateResult2_1(nil)
+					end,
+					onFocusLost = function(p2) --[[ Line: 256 ]]
+						-- upvalues: UseTypedQueryBindingModuleResult (copy), v41 (copy), UseStateResult2_1 (copy)
+						if UseTypedQueryBindingModuleResult:getValue() == "" and not v41(p2) then
+							UseStateResult2_1(nil)
+						end
+					end,
+					shouldFocus = IsUseStateResultMatch
+				})
+			}) else ReactModule.createElement(Text, {
+				LayoutOrder = 2,
+				tag = "fill text-heading-small text-align-x-left text-truncate-end content-emphasis",
+				testId = "Library.Experience.Title",
+				Text = Title
+			}),
+			Search = if HasQuery and not IsUseStateResultMatch1 then ReactModule.createElement(IconButton, {
 				LayoutOrder = 3,
 				testId = "Library.Experience.Search.Action",
-				icon = iconName.MagnifyingGlass,
-				onActivated = function()
-					-- upvalues: var11 (ref), title (ref)
-					var11(title)
+				icon = IconName.MagnifyingGlass,
+				onActivated = function() --[[ Line: 268 ]]
+					-- upvalues: UseStateResult2_1 (copy), Title (copy)
+					UseStateResult2_1(Title)
 				end,
-				size = inputSize.Large,
-				variant = buttonVariant.Utility
+				size = InputSize.Large,
+				variant = ButtonVariant.Utility
 			}) else nil
 		}),
-		ModeRow = if p1.showModeControl then reactModule.createElement(view, {
+		ModeRow = if p1.showModeControl then ReactModule.createElement(View, {
 			LayoutOrder = 2,
 			tag = "row align-x-center size-full-0 auto-y padding-x-medium padding-bottom-medium",
 			testId = "Library.Experience.ModeRow",
-			backgroundStyle = var9
+			backgroundStyle = MapResult
 		}, {
-			Control = reactModule.createElement(segmentedControl, {
+			Control = ReactModule.createElement(SegmentedControl, {
 				isCircular = true,
 				testId = "Library.Experience.Mode",
 				segments = {
 					{ id = "Library", text = p1.assetLabel },
-					{ id = "World", text = p1.worldLabel, ref = var6 }
+					{ id = "World", text = p1.worldLabel, ref = UseRefResult }
 				},
 				value = if p1.isOpen then "Library" else "World",
-				onActivated = function(p2)
-					-- upvalues: p1 (ref)
+				onActivated = function(p2) --[[ Line: 291 ]]
+					-- upvalues: p1 (copy)
 					if p2 == "Library" then
 						p1.onShowLibrary()
 						
 						return
-					elseif p2 == "World" then
+					end
+					if p2 == "World" then
 						p1.onShowWorld()
 					end
 				end,
-				size = inputSize.Medium
+				size = InputSize.Medium
 			})
 		}) else nil,
-		Content = reactModule.createElement(view, {
+		Content = ReactModule.createElement(View, {
 			LayoutOrder = 3,
 			tag = "fill size-full-0 clip",
 			testId = "Library.Experience.Content",
-			ref = if worldCutout ~= nil then nil else worldCutout.onContentRectChanged,
-			onAbsolutePositionChanged = if worldCutout ~= nil then nil else worldCutout.onContentRectChanged,
-			onAbsoluteSizeChanged = if worldCutout ~= nil then nil else worldCutout.onContentRectChanged
+			ref = if WorldCutout == nil then nil else WorldCutout.onContentRectChanged,
+			onAbsolutePositionChanged = if WorldCutout == nil then nil else WorldCutout.onContentRectChanged,
+			onAbsoluteSizeChanged = if WorldCutout == nil then nil else WorldCutout.onContentRectChanged
 		}, {
-			Backdrop = if worldCutout ~= nil then nil else reactModule.createElement(libraryWorldBackdropViewModule, {
+			Backdrop = if WorldCutout == nil then nil else ReactModule.createElement(LibraryWorldBackdropViewModule, {
 				ZIndex = 1,
-				hole = if worldCutout.showHole then worldCutout.hole else nil,
-				progress = worldCutout.progress,
-				cornerRadius = var1.Radius.Medium,
-				color = var1.Color.Surface.Surface_0.Color3,
-				transparency = if var7 then worldCutout.progress:map(function()
+				hole = if WorldCutout.showHole then WorldCutout.hole else nil,
+				progress = WorldCutout.progress,
+				cornerRadius = UseTokensResult.Radius.Medium,
+				color = UseTokensResult.Color.Surface.Surface_0.Color3,
+				transparency = if IsTransitioning then WorldCutout.progress:map(function(): number --[[ Line: 318 ]]
 					return 0
-				end) else var4.transparency,
-				Visible = isOpen
+				end) else UseMotionResult.transparency,
+				Visible = IsOpen
 			}),
-			Body = reactModule.createElement(view, {
+			Body = ReactModule.createElement(View, {
 				ZIndex = 2,
 				testId = "Library.Experience.Body",
-				Visible = isOpen,
-				GroupTransparency = var8,
-				backgroundStyle = if worldCutout ~= nil then nil else { Transparency = 1 },
+				Visible = IsOpen,
+				GroupTransparency = Transparency,
+				backgroundStyle = if WorldCutout == nil then nil else { Transparency = 1 },
 				tag = {
 					["size-full clip"] = true,
-					["bg-surface-0"] = worldCutout == nil
+					["bg-surface-0"] = WorldCutout == nil
 				}
 			}, p1.children),
-			WorldViewport = if p1.isOpen or var7 or p1.onWorldViewportChanged == nil then nil else reactModule.createElement(view, {
+			WorldViewport = if p1.isOpen or IsTransitioning or p1.onWorldViewportChanged == nil then nil else ReactModule.createElement(View, {
 				ZIndex = 3,
 				tag = "size-full",
 				testId = "Library.Experience.WorldViewport",

@@ -1,191 +1,202 @@
-﻿local avatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
-local parent = avatarExperienceCommon.Parent
-local itemPurchaseActionTypeEnumModule = require(avatarExperienceCommon.Enums.ItemPurchaseActionTypeEnum)
-local salesLocationTypeModule = require(avatarExperienceCommon.Enums.SalesLocationType)
-local itemRestrictionsModule = require(avatarExperienceCommon.Enums.ItemRestrictions)
-local fFlagAXDurablesForMIS = require(parent.AvatarExperienceFlags).FFlagAXDurablesForMIS
+﻿local AvatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
+local ItemPurchaseActionTypeEnumModule = require(AvatarExperienceCommon.Enums.ItemPurchaseActionTypeEnum)
+local SalesLocationTypeModule = require(AvatarExperienceCommon.Enums.SalesLocationType)
+local ItemRestrictionsModule = require(AvatarExperienceCommon.Enums.ItemRestrictions)
+local FFlagAXDurablesForMIS = require(AvatarExperienceCommon.Parent.AvatarExperienceFlags).FFlagAXDurablesForMIS
 
-local function _(p1)
+local function _(p1): number --[[ Line: 30 | Named "getExperienceCount" ]]
 	return #(if p1 then p1.experiences or {} else {})
 end
 
-local _ = function(p1)
-	-- upvalues: salesLocationTypeModule (ref)
-	return p1.saleLocationType == salesLocationTypeModule.ExperiencesDevApiOnly
+local _ = function(p1): boolean --[[ Line: 35 | Named "getAvailableInExperienceOnly" ]]
+	-- upvalues: SalesLocationTypeModule (copy)
+	return p1.saleLocationType == SalesLocationTypeModule.ExperiencesDevApiOnly
 end
 
-local _ = function(p1)
-	-- upvalues: itemRestrictionsModule (ref)
-	local itemRestrictions = p1.itemRestrictions
+local _ = function(p1) --[[ Line: 39 | Named "getHasLimitedAmount" ]]
+	-- upvalues: ItemRestrictionsModule (copy)
+	local ItemRestrictions = p1.itemRestrictions
+	local ItemRestriction = ItemRestrictions and ItemRestrictions[ItemRestrictionsModule.LimitedUnique]
+	local ItemRestriction1 = ItemRestrictions and ItemRestrictions[ItemRestrictionsModule.Collectible]
 	
-	return itemRestrictions and itemRestrictions[itemRestrictionsModule.Limited] or (itemRestrictions and itemRestrictions[itemRestrictionsModule.LimitedUnique] or itemRestrictions and itemRestrictions[itemRestrictionsModule.Collectible])
+	return ItemRestrictions and ItemRestrictions[ItemRestrictionsModule.Limited] or (ItemRestriction or ItemRestriction1)
 end
 
-local _ = function(p1, p2, p3)
-	-- upvalues: itemRestrictionsModule (ref)
-	local var1
-	local itemRestrictions = p1.itemRestrictions
+local _ = function(p1, p2, p3): boolean --[[ Line: 47 | Named "getUserHasReachedQuantityLimit" ]]
+	-- upvalues: ItemRestrictionsModule (copy)
+	local ItemRestrictions = p1.itemRestrictions
+	local ItemRestriction = ItemRestrictions and ItemRestrictions[ItemRestrictionsModule.LimitedUnique]
+	local ItemRestriction1 = ItemRestrictions and ItemRestrictions[ItemRestrictionsModule.Collectible]
 	
-	if (not itemRestrictions or not itemRestrictions[itemRestrictionsModule.Limited]) and ((not itemRestrictions or not itemRestrictions[itemRestrictionsModule.LimitedUnique]) and (not itemRestrictions or not itemRestrictions[itemRestrictionsModule.Collectible])) and p1.isOwned then
+	if (not ItemRestrictions or not ItemRestrictions[ItemRestrictionsModule.Limited]) and (not ItemRestriction and not ItemRestriction1) and p1.isOwned then
 		return true
-	elseif not p2 or not p2.quantityLimitPerUser then
+	end
+	if not p2 or not p2.quantityLimitPerUser then
 		return false
-	elseif p2 then
-		var1 = false
+	end
+	local Flag = nil
+	if p2 then
+		Flag = false
 		
-		return if p2.quantityLimitPerUser > 0 then p2.quantityLimitPerUser <= p3 else var1
-	end
-	var1 = false
-end
-
-local _ = function(p1)
-	-- upvalues: itemRestrictionsModule (ref)
-	local itemRestrictions = p1.itemRestrictions
-	local limited = itemRestrictions and itemRestrictions[itemRestrictionsModule.Limited] or (itemRestrictions and itemRestrictions[itemRestrictionsModule.LimitedUnique] or itemRestrictions and itemRestrictions[itemRestrictionsModule.Collectible])
-	
-	return limited and (p1.numberRobloxHasAvailable and p1.numberRobloxHasAvailable > 0) or not limited
-end
-
-local _ = function(p1, p2)
-	-- upvalues: salesLocationTypeModule (ref), itemRestrictionsModule (ref)
-	local var1
-	if not p2 or not p1.hasResellers then
-		return false
-	elseif p1.priceInRobux and p1.lowestResalePrice then
-		var1 = p1.lowestResalePrice < p1.priceInRobux
-		var1 = nil
+		if p2.quantityLimitPerUser > 0 then
+			return p2.quantityLimitPerUser <= p3
+		end
 	else
-		var1 = p1.lowestResalePrice ~= nil
+		Flag = false
 	end
-	local var2 = p1.saleLocationType == salesLocationTypeModule.ExperiencesDevApiOnly
-	local itemRestrictions = p1.itemRestrictions
-	local limited = itemRestrictions and itemRestrictions[itemRestrictionsModule.Limited] or (itemRestrictions and itemRestrictions[itemRestrictionsModule.LimitedUnique] or itemRestrictions and itemRestrictions[itemRestrictionsModule.Collectible])
+	return Flag
+end
+
+local _ = function(p1): boolean --[[ Line: 65 | Named "getOriginalStockAvailable" ]]
+	-- upvalues: ItemRestrictionsModule (copy)
+	local ItemRestrictions = p1.itemRestrictions
+	local ItemRestriction = ItemRestrictions and ItemRestrictions[ItemRestrictionsModule.LimitedUnique]
+	local ItemRestriction1 = ItemRestrictions and ItemRestrictions[ItemRestrictionsModule.Collectible]
+	local ItemRestriction2 = ItemRestrictions and ItemRestrictions[ItemRestrictionsModule.Limited] or (ItemRestriction or ItemRestriction1)
 	
-	return var1 or (if limited and (p1.numberRobloxHasAvailable and p1.numberRobloxHasAvailable > 0) or not limited then if p1.isOffSale ~= true then var2 else true else not (limited and (p1.numberRobloxHasAvailable and p1.numberRobloxHasAvailable > 0) or not limited))
+	return ItemRestriction2 and (p1.numberRobloxHasAvailable and p1.numberRobloxHasAvailable > 0) or not ItemRestriction2
 end
 
-local _ = function(p1)
-	-- upvalues: salesLocationTypeModule (ref)
-	return if p1.isOffSale then false else not (p1.saleLocationType == salesLocationTypeModule.ExperiencesDevApiOnly) and p1.priceInRobux == 0
+local _ = function(p1, p2): boolean --[[ Line: 73 | Named "getButtonTypeIsPurchaseFromResale" ]]
+	-- upvalues: SalesLocationTypeModule (copy), ItemRestrictionsModule (copy)
+	if p2 and p1.hasResellers then
+		local IsSaleLocationTypeMatch = p1.saleLocationType == SalesLocationTypeModule.ExperiencesDevApiOnly
+		local ItemRestrictions = p1.itemRestrictions
+		local ItemRestriction = ItemRestrictions and ItemRestrictions[ItemRestrictionsModule.LimitedUnique]
+		local ItemRestriction1 = ItemRestrictions and ItemRestrictions[ItemRestrictionsModule.Collectible]
+		local ItemRestriction2 = ItemRestrictions and ItemRestrictions[ItemRestrictionsModule.Limited] or (ItemRestriction or ItemRestriction1)
+		local Inverted: boolean = not (ItemRestriction2 and (p1.numberRobloxHasAvailable and p1.numberRobloxHasAvailable > 0) or not ItemRestriction2) or (p1.isOffSale == true or IsSaleLocationTypeMatch)
+		
+		return (if p1.priceInRobux and p1.lowestResalePrice then p1.lowestResalePrice < p1.priceInRobux else p1.lowestResalePrice ~= nil) or Inverted
+	else
+		return false
+	end
 end
 
-local _ = function(p1, p2)
-	-- upvalues: salesLocationTypeModule (ref), itemRestrictionsModule (ref)
+local _ = function(p1): boolean --[[ Line: 87 | Named "getButtonTypeIsFree" ]]
+	-- upvalues: SalesLocationTypeModule (copy)
+	return not p1.isOffSale and (not (p1.saleLocationType == SalesLocationTypeModule.ExperiencesDevApiOnly) and p1.priceInRobux == 0)
+end
+
+local _ = function(p1, p2): boolean --[[ Line: 95 | Named "getButtonTypeIsExperienceLink" ]]
+	-- upvalues: SalesLocationTypeModule (copy), ItemRestrictionsModule (copy)
 	if p1.isOffSale then
 		return false
-	end
-	local var1 = p1.saleLocationType == salesLocationTypeModule.ExperiencesDevApiOnly
-	local itemRestrictions = p1.itemRestrictions
-	local limited = itemRestrictions and itemRestrictions[itemRestrictionsModule.Limited] or (itemRestrictions and itemRestrictions[itemRestrictionsModule.LimitedUnique] or itemRestrictions and itemRestrictions[itemRestrictionsModule.Collectible])
-	
-	return var1 and (#(if p2 then p2.experiences or {} else {}) > 0 and (limited and (p1.numberRobloxHasAvailable and p1.numberRobloxHasAvailable > 0) or not limited))
-end
-
-local _ = function(p1, p2)
-	-- upvalues: itemRestrictionsModule (ref)
-	local itemRestrictions = p1.itemRestrictions
-	local limited = itemRestrictions and itemRestrictions[itemRestrictionsModule.Limited] or (itemRestrictions and itemRestrictions[itemRestrictionsModule.LimitedUnique] or itemRestrictions and itemRestrictions[itemRestrictionsModule.Collectible])
-	
-	return not (limited and (p1.numberRobloxHasAvailable and p1.numberRobloxHasAvailable > 0) or not limited) and not (p2 and p1.hasResellers)
-end
-
-local _ = function(p1, p2, p3, p4)
-	-- upvalues: fFlagAXDurablesForMIS (ref), itemRestrictionsModule (ref)
-	local var1
-	local var2 = if fFlagAXDurablesForMIS then p1.isOwned and not p1.expirationTime else p1.isOwned
-	local itemRestrictions = p1.itemRestrictions
-	
-	if (not itemRestrictions or not itemRestrictions[itemRestrictionsModule.Limited]) and ((not itemRestrictions or not itemRestrictions[itemRestrictionsModule.LimitedUnique]) and (not itemRestrictions or not itemRestrictions[itemRestrictionsModule.Collectible])) and p1.isOwned then
-		var1 = true
-	elseif not p2 or not p2.quantityLimitPerUser then
-		var1 = false
-	elseif p2 then
-		var1 = false
-		
-		if p2.quantityLimitPerUser > 0 then
-			local _ = p2.quantityLimitPerUser <= p3
-		end
 	else
-		var1 = false
+		local ItemRestrictions = p1.itemRestrictions
+		local ItemRestriction = ItemRestrictions and ItemRestrictions[ItemRestrictionsModule.LimitedUnique]
+		local ItemRestriction1 = ItemRestrictions and ItemRestrictions[ItemRestrictionsModule.Collectible]
+		local ItemRestriction2 = ItemRestrictions and ItemRestrictions[ItemRestrictionsModule.Limited] or (ItemRestriction or ItemRestriction1)
+		local IsNumberRobloxHasAvailableAbove: boolean = ItemRestriction2 and (p1.numberRobloxHasAvailable and p1.numberRobloxHasAvailable > 0) or not ItemRestriction2
+		local v1 = #(if p2 then p2.experiences or {} else {}) > 0
+		
+		return p1.saleLocationType == SalesLocationTypeModule.ExperiencesDevApiOnly and (v1 and IsNumberRobloxHasAvailableAbove)
 	end
-	local hasResellers = p4 and p1.hasResellers
-	local itemRestrictions_1 = p1.itemRestrictions
-	local limited = itemRestrictions_1 and itemRestrictions_1[itemRestrictionsModule.Limited] or (itemRestrictions_1 and itemRestrictions_1[itemRestrictionsModule.LimitedUnique] or itemRestrictions_1 and itemRestrictions_1[itemRestrictionsModule.Collectible])
+end
+
+local _ = function(p1, p2): boolean --[[ Line: 105 | Named "getButtonTypeIsSoldOut" ]]
+	-- upvalues: ItemRestrictionsModule (copy)
+	local ItemRestrictions = p1.itemRestrictions
+	local ItemRestriction = ItemRestrictions and ItemRestrictions[ItemRestrictionsModule.LimitedUnique]
+	local ItemRestriction1 = ItemRestrictions and ItemRestrictions[ItemRestrictionsModule.Collectible]
+	local ItemRestriction2 = ItemRestrictions and ItemRestrictions[ItemRestrictionsModule.Limited] or (ItemRestriction or ItemRestriction1)
+	local IsNumberRobloxHasAvailableAbove: boolean = ItemRestriction2 and (p1.numberRobloxHasAvailable and p1.numberRobloxHasAvailable > 0) or not ItemRestriction2
+	local HasResellers = p2 and p1.hasResellers
 	
-	return var2 and ((not (limited and (p1.numberRobloxHasAvailable and p1.numberRobloxHasAvailable > 0) or not limited) or (var1 or p1.isOffSale)) and not hasResellers)
+	return not IsNumberRobloxHasAvailableAbove and not HasResellers
 end
 
-local _ = function(p1)
-	-- upvalues: salesLocationTypeModule (ref)
-	return if p1.isOffSale then false else not (p1.saleLocationType == salesLocationTypeModule.ExperiencesDevApiOnly)
+local _ = function(p1, p2, p3, p4): boolean --[[ Line: 111 | Named "getButtonTypeIsCustomizeLink" ]]
+	-- upvalues: FFlagAXDurablesForMIS (copy), ItemRestrictionsModule (copy)
+	local ItemRestrictions = p1.itemRestrictions
+	local ItemRestriction = ItemRestrictions and ItemRestrictions[ItemRestrictionsModule.LimitedUnique]
+	local ItemRestriction1 = ItemRestrictions and ItemRestrictions[ItemRestrictionsModule.Collectible]
+	local IsOwned = not (ItemRestrictions and ItemRestrictions[ItemRestrictionsModule.Limited] or (ItemRestriction or ItemRestriction1)) and p1.isOwned or (if p2 and p2.quantityLimitPerUser and (p2 and p2.quantityLimitPerUser > 0) then p2.quantityLimitPerUser <= p3 else false)
+	local HasResellers = p4 and p1.hasResellers
+	local ItemRestrictions1 = p1.itemRestrictions
+	local ItemRestriction2 = ItemRestrictions1 and ItemRestrictions1[ItemRestrictionsModule.LimitedUnique]
+	local ItemRestriction21 = ItemRestrictions1 and ItemRestrictions1[ItemRestrictionsModule.Collectible]
+	local ItemRestriction3 = ItemRestrictions1 and ItemRestrictions1[ItemRestrictionsModule.Limited] or (ItemRestriction2 or ItemRestriction21)
+	local Inverted = not (ItemRestriction3 and (p1.numberRobloxHasAvailable and p1.numberRobloxHasAvailable > 0) or not ItemRestriction3) or (IsOwned or p1.isOffSale)
+	
+	return (if FFlagAXDurablesForMIS then p1.isOwned and not p1.expirationTime else p1.isOwned) and (Inverted and not HasResellers)
 end
 
-local _ = function(_, p1, p2)
-	return if p1 == nil or p1.quantityLimitPerUser == nil then false else p1.quantityLimitPerUser > 0 and p1.quantityLimitPerUser <= p2
+local _ = function(p1): boolean --[[ Line: 127 | Named "getButtonTypeIsPurchasableFromRoblox" ]]
+	-- upvalues: SalesLocationTypeModule (copy)
+	return not p1.isOffSale and not (p1.saleLocationType == SalesLocationTypeModule.ExperiencesDevApiOnly)
 end
 
-return function(p1, p2, p3, p4)
-	-- upvalues: itemPurchaseActionTypeEnumModule (ref), fFlagAXDurablesForMIS (ref), itemRestrictionsModule (ref), salesLocationTypeModule (ref)
+local _ = function(_, p1, p2): boolean --[[ Line: 134 | Named "getButtonTypeIsQuantityLimitExceeded" ]]
+	return p1 ~= nil and p1.quantityLimitPerUser ~= nil and (p1.quantityLimitPerUser > 0 and p1.quantityLimitPerUser <= p2)
+end
+
+return function(p1, p2, p3, p4) --[[ Line: 145 | Named "getItemPurchaseActionType" ]]
+	-- upvalues: ItemPurchaseActionTypeEnumModule (copy), FFlagAXDurablesForMIS (copy), ItemRestrictionsModule (copy), SalesLocationTypeModule (copy)
 	if not p1 then
-		return itemPurchaseActionTypeEnumModule.Disabled
-	elseif if p2 == nil or p2.quantityLimitPerUser == nil then false else p2.quantityLimitPerUser > 0 and p2.quantityLimitPerUser <= p3 then
-		return itemPurchaseActionTypeEnumModule.QuantityLimitExceeded
+		return ItemPurchaseActionTypeEnumModule.Disabled
 	end
-	local var1
-	local var2 = if fFlagAXDurablesForMIS then p1.isOwned and not p1.expirationTime else p1.isOwned
-	local itemRestrictions = p1.itemRestrictions
+	if p2 ~= nil and p2.quantityLimitPerUser ~= nil and (p2.quantityLimitPerUser > 0 and p3 >= p2.quantityLimitPerUser) then
+		return ItemPurchaseActionTypeEnumModule.QuantityLimitExceeded
+	end
+	local ItemRestrictions = p1.itemRestrictions
+	local ItemRestriction = ItemRestrictions and ItemRestrictions[ItemRestrictionsModule.LimitedUnique]
+	local ItemRestriction1 = ItemRestrictions and ItemRestrictions[ItemRestrictionsModule.Collectible]
+	local IsOwned = not (ItemRestrictions and ItemRestrictions[ItemRestrictionsModule.Limited] or (ItemRestriction or ItemRestriction1)) and p1.isOwned or (if p2 and p2.quantityLimitPerUser and (p2 and p2.quantityLimitPerUser > 0) then p2.quantityLimitPerUser <= p3 else false)
+	local HasResellers = p4 and p1.hasResellers
+	local ItemRestrictions1 = p1.itemRestrictions
+	local ItemRestriction2 = ItemRestrictions1 and ItemRestrictions1[ItemRestrictionsModule.LimitedUnique]
+	local ItemRestriction21 = ItemRestrictions1 and ItemRestrictions1[ItemRestrictionsModule.Collectible]
+	local ItemRestriction3 = ItemRestrictions1 and ItemRestrictions1[ItemRestrictionsModule.Limited] or (ItemRestriction2 or ItemRestriction21)
+	local Inverted = not (ItemRestriction3 and (p1.numberRobloxHasAvailable and p1.numberRobloxHasAvailable > 0) or not ItemRestriction3) or (IsOwned or p1.isOffSale)
 	
-	if (not itemRestrictions or not itemRestrictions[itemRestrictionsModule.Limited]) and ((not itemRestrictions or not itemRestrictions[itemRestrictionsModule.LimitedUnique]) and (not itemRestrictions or not itemRestrictions[itemRestrictionsModule.Collectible])) and p1.isOwned then
-		var1 = true
-	elseif not p2 or not p2.quantityLimitPerUser then
-		var1 = false
-	elseif p2 then
-		var1 = false
+	if (if FFlagAXDurablesForMIS then p1.isOwned and not p1.expirationTime else p1.isOwned) and (Inverted and not HasResellers) then
+		return ItemPurchaseActionTypeEnumModule.CustomizeLink
+	end
+	local ItemRestrictions2 = p1.itemRestrictions
+	local ItemRestriction4 = ItemRestrictions2 and ItemRestrictions2[ItemRestrictionsModule.LimitedUnique]
+	local ItemRestriction41 = ItemRestrictions2 and ItemRestrictions2[ItemRestrictionsModule.Collectible]
+	local ItemRestriction5 = ItemRestrictions2 and ItemRestrictions2[ItemRestrictionsModule.Limited] or (ItemRestriction4 or ItemRestriction41)
+	local IsNumberRobloxHasAvailableAbove: boolean = ItemRestriction5 and (p1.numberRobloxHasAvailable and p1.numberRobloxHasAvailable > 0) or not ItemRestriction5
+	local HasResellers1 = p4 and p1.hasResellers
+	
+	if not IsNumberRobloxHasAvailableAbove and not HasResellers1 then
+		return ItemPurchaseActionTypeEnumModule.SoldOut
+	end
+	local IsLowestResalePriceBelow = nil
+	if p4 and p1.hasResellers then
+		local IsSaleLocationTypeMatch = p1.saleLocationType == SalesLocationTypeModule.ExperiencesDevApiOnly
+		local ItemRestrictions3 = p1.itemRestrictions
+		local ItemRestriction6 = ItemRestrictions3 and ItemRestrictions3[ItemRestrictionsModule.LimitedUnique]
+		local ItemRestriction61 = ItemRestrictions3 and ItemRestrictions3[ItemRestrictionsModule.Collectible]
+		local ItemRestriction7 = ItemRestrictions3 and ItemRestrictions3[ItemRestrictionsModule.Limited] or (ItemRestriction6 or ItemRestriction61)
+		local Inverted1: boolean = not (ItemRestriction7 and (p1.numberRobloxHasAvailable and p1.numberRobloxHasAvailable > 0) or not ItemRestriction7) or (p1.isOffSale == true or IsSaleLocationTypeMatch)
+		IsLowestResalePriceBelow = (if p1.priceInRobux and p1.lowestResalePrice then p1.lowestResalePrice < p1.priceInRobux else p1.lowestResalePrice ~= nil) or Inverted1
+	else
+		IsLowestResalePriceBelow = false
+	end
+	if IsLowestResalePriceBelow then
+		return ItemPurchaseActionTypeEnumModule.PurchaseFromResale
+	end
+	local v1 = nil
+	if p1.isOffSale then
+		v1 = false
+	else
+		local ItemRestrictions4 = p1.itemRestrictions
+		local ItemRestriction8 = ItemRestrictions4 and ItemRestrictions4[ItemRestrictionsModule.LimitedUnique]
+		local ItemRestriction81 = ItemRestrictions4 and ItemRestrictions4[ItemRestrictionsModule.Collectible]
+		local ItemRestriction9 = ItemRestrictions4 and ItemRestrictions4[ItemRestrictionsModule.Limited] or (ItemRestriction8 or ItemRestriction81)
+		local IsNumberRobloxHasAvailableAbove1: boolean = ItemRestriction9 and (p1.numberRobloxHasAvailable and p1.numberRobloxHasAvailable > 0) or not ItemRestriction9
+		local v2 = #(if p2 then p2.experiences or {} else {}) > 0
+		v1 = p1.saleLocationType == SalesLocationTypeModule.ExperiencesDevApiOnly and (v2 and IsNumberRobloxHasAvailableAbove1)
+	end
+	if v1 then
+		return ItemPurchaseActionTypeEnumModule.ExperienceLink
+	elseif not p1.isOffSale and (not (p1.saleLocationType == SalesLocationTypeModule.ExperiencesDevApiOnly) and p1.priceInRobux == 0) then
+		return ItemPurchaseActionTypeEnumModule.Free
+	else
+		local Inverted2: boolean = not p1.isOffSale and not (p1.saleLocationType == SalesLocationTypeModule.ExperiencesDevApiOnly)
 		
-		if p2.quantityLimitPerUser > 0 then
-			local _ = p2.quantityLimitPerUser <= p3
-		end
-	else
-		var1 = false
+		return if Inverted2 then ItemPurchaseActionTypeEnumModule.PurchaseFromRoblox else ItemPurchaseActionTypeEnumModule.Disabled
 	end
-	local hasResellers = p4 and p1.hasResellers
-	local itemRestrictions_1 = p1.itemRestrictions
-	local limited = itemRestrictions_1 and itemRestrictions_1[itemRestrictionsModule.Limited] or (itemRestrictions_1 and itemRestrictions_1[itemRestrictionsModule.LimitedUnique] or itemRestrictions_1 and itemRestrictions_1[itemRestrictionsModule.Collectible])
-	
-	if var2 and ((not (limited and (p1.numberRobloxHasAvailable and p1.numberRobloxHasAvailable > 0) or not limited) or (var1 or p1.isOffSale)) and not hasResellers) then
-		return itemPurchaseActionTypeEnumModule.CustomizeLink
-	end
-	local var3
-	local itemRestrictions_2 = p1.itemRestrictions
-	local limited_1 = itemRestrictions_2 and itemRestrictions_2[itemRestrictionsModule.Limited] or (itemRestrictions_2 and itemRestrictions_2[itemRestrictionsModule.LimitedUnique] or itemRestrictions_2 and itemRestrictions_2[itemRestrictionsModule.Collectible])
-	
-	if not (limited_1 and (p1.numberRobloxHasAvailable and p1.numberRobloxHasAvailable > 0) or not limited_1) and not (p4 and p1.hasResellers) then
-		return itemPurchaseActionTypeEnumModule.SoldOut
-	elseif p4 and p1.hasResellers then
-		local var4
-		if p1.priceInRobux and p1.lowestResalePrice then
-			var4 = p1.lowestResalePrice < p1.priceInRobux
-			var4 = nil
-		else
-			var4 = p1.lowestResalePrice ~= nil
-		end
-		local var5 = p1.saleLocationType == salesLocationTypeModule.ExperiencesDevApiOnly
-		local itemRestrictions_3 = p1.itemRestrictions
-		local limited_2 = itemRestrictions_3 and itemRestrictions_3[itemRestrictionsModule.Limited] or (itemRestrictions_3 and itemRestrictions_3[itemRestrictionsModule.LimitedUnique] or itemRestrictions_3 and itemRestrictions_3[itemRestrictionsModule.Collectible])
-		var3 = var4 or (if limited_2 and (p1.numberRobloxHasAvailable and p1.numberRobloxHasAvailable > 0) or not limited_2 then if p1.isOffSale ~= true then var5 else true else not (limited_2 and (p1.numberRobloxHasAvailable and p1.numberRobloxHasAvailable > 0) or not limited_2))
-	else
-		var3 = false
-	end
-	local var6
-	if var3 then
-		return itemPurchaseActionTypeEnumModule.PurchaseFromResale
-	elseif p1.isOffSale then
-		var6 = false
-	else
-		local var7 = p1.saleLocationType == salesLocationTypeModule.ExperiencesDevApiOnly
-		itemRestrictions = p1.itemRestrictions
-		local limited_2 = itemRestrictions and itemRestrictions[itemRestrictionsModule.Limited] or (itemRestrictions and itemRestrictions[itemRestrictionsModule.LimitedUnique] or itemRestrictions and itemRestrictions[itemRestrictionsModule.Collectible])
-		var6 = var7 and (#(if p2 then p2.experiences or {} else {}) > 0 and (limited_2 and (p1.numberRobloxHasAvailable and p1.numberRobloxHasAvailable > 0) or not limited_2))
-	end
-	return if var6 then itemPurchaseActionTypeEnumModule.ExperienceLink elseif if p1.isOffSale then false else not (p1.saleLocationType == salesLocationTypeModule.ExperiencesDevApiOnly) and p1.priceInRobux == 0 then itemPurchaseActionTypeEnumModule.Free elseif if p1.isOffSale then false else not (p1.saleLocationType == salesLocationTypeModule.ExperiencesDevApiOnly) then itemPurchaseActionTypeEnumModule.PurchaseFromRoblox else itemPurchaseActionTypeEnumModule.Disabled
 end

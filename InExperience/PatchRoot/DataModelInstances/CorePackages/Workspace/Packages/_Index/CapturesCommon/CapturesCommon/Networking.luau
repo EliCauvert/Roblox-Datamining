@@ -1,20 +1,19 @@
-﻿local parent = script.Parent.Parent
-local luaSocialLibrariesDepsModule = require(parent.LuaSocialLibrariesDeps)
-local contentSharingNetworkingModule = require(parent.ContentSharingNetworking)
-local httpRequest = luaSocialLibrariesDepsModule.httpRequest
-local var1 = httpRequest.config({
-	requestFunction = function(p1, p2, p3)
-		-- upvalues: httpRequest (ref)
-		return httpRequest.requestFunctions.HttpRbxApi(p1, p2, p3)
+﻿local Parent = script.Parent.Parent
+local LuaSocialLibrariesDepsModule = require(Parent.LuaSocialLibrariesDeps)
+local HttpRequest = LuaSocialLibrariesDepsModule.httpRequest
+local ConfigResult = HttpRequest.config({
+	requestFunction = function(p1, p2, p3) --[[ Line: 11 ]]
+		-- upvalues: HttpRequest (copy)
+		return HttpRequest.requestFunctions.HttpRbxApi(p1, p2, p3)
 	end,
-	postRequestFunction = function(_, _) end,
+	postRequestFunction = function(_, _) --[[ Line: 15 ]] end,
 	maxRetryCount = game:DefineFastInt("CapturesCommonMaxHttpRequestRetries", 2),
 	maxWaitTime = game:DefineFastInt("CapturesCommonMaxHttpRequestWaitTime", 8)
 })
 
 return {
-	CapturesCommonNetworkImpl = var1,
-	CapturesCommonNetworking = contentSharingNetworkingModule.config({
-		roduxNetworking = luaSocialLibrariesDepsModule.RoduxNetworking.config({ keyPath = "NetworkStatus", networkImpl = var1 })
+	CapturesCommonNetworkImpl = ConfigResult,
+	CapturesCommonNetworking = require(Parent.ContentSharingNetworking).config({
+		roduxNetworking = LuaSocialLibrariesDepsModule.RoduxNetworking.config({ keyPath = "NetworkStatus", networkImpl = ConfigResult })
 	})
 }

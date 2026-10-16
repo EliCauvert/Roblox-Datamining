@@ -1,1 +1,4 @@
-﻿return game:DefineFastFlag("AXBackgroundsCycloramaVR", false) and (require(script.Parent.FFlagAXBackgroundsRoot) and require(script.Parent.FFlagAXBackgroundCycloramaRendering))
+﻿local FFlagAXBackgroundsRootModule = require(script.Parent.FFlagAXBackgroundsRoot)
+local FFlagAXBackgroundCycloramaRenderingModule = require(script.Parent.FFlagAXBackgroundCycloramaRendering)
+
+return game:DefineFastFlag("AXBackgroundsCycloramaVR", false) and (FFlagAXBackgroundsRootModule and FFlagAXBackgroundCycloramaRenderingModule)

@@ -1,58 +1,62 @@
-﻿local avatarSwitcher = script:FindFirstAncestor("AvatarSwitcher")
-local parent = avatarSwitcher.Parent
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local useEventConnection = require(parent.ReactUtils).useEventConnection
-local sendAXCounterV2 = require(parent.AvatarExperienceAnalytics).sendAXCounterV2
-local respawnChoiceDialogModule = require(avatarSwitcher.Components.Modals.RespawnChoiceDialog)
-local respawnLaterDialogModule = require(avatarSwitcher.Components.Modals.RespawnLaterDialog)
-local getAvatarSwitcherStoreModule = require(avatarSwitcher.Stores.getAvatarSwitcherStore)
-local respawnAvatarModule = require(avatarSwitcher.Utils.respawnAvatar)
-local constantsModule = require(avatarSwitcher.Constants)
-local fFlagAvatarSwitcherCounters = require(parent.AvatarExperienceFlags).FFlagAvatarSwitcherCounters
+﻿local AvatarSwitcher = script:FindFirstAncestor("AvatarSwitcher")
+local Parent = AvatarSwitcher.Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local UseEventConnectionFunction = require(Parent.ReactUtils).useEventConnection
+local SendAXCounterV2Function = require(Parent.AvatarExperienceAnalytics).sendAXCounterV2
+local RespawnChoiceDialogModule = require(AvatarSwitcher.Components.Modals.RespawnChoiceDialog)
+local RespawnLaterDialogModule = require(AvatarSwitcher.Components.Modals.RespawnLaterDialog)
+local GetAvatarSwitcherStoreModule = require(AvatarSwitcher.Stores.getAvatarSwitcherStore)
+local RespawnAvatarModule = require(AvatarSwitcher.Utils.respawnAvatar)
+local ConstantsModule = require(AvatarSwitcher.Constants)
+local FFlagAvatarSwitcherCounters = require(Parent.AvatarExperienceFlags).FFlagAvatarSwitcherCounters
 
-return function(p1)
-	-- upvalues: signalsReactModule (ref), getAvatarSwitcherStoreModule (ref), reactModule (ref), useEventConnection (ref), fFlagAvatarSwitcherCounters (ref), sendAXCounterV2 (ref), constantsModule (ref), respawnAvatarModule (ref), respawnChoiceDialogModule (ref), respawnLaterDialogModule (ref)
-	local var1 = signalsReactModule.useSignalState(getAvatarSwitcherStoreModule)
-	local var2 = signalsReactModule.useSignalState(var1.getRespawnPromptShown)
-	local var3, var4 = reactModule.useState(function()
-		-- upvalues: p1 (ref)
-		local respawnBehaviour, _ = p1.getRespawnBehaviour()
+return function(p1) --[[ Line: 31 | Named "RespawnDialogContainer" ]]
+	-- upvalues: SignalsReactModule (copy), GetAvatarSwitcherStoreModule (copy), ReactModule (copy), UseEventConnectionFunction (copy), FFlagAvatarSwitcherCounters (copy), SendAXCounterV2Function (copy), ConstantsModule (copy), RespawnAvatarModule (copy), RespawnChoiceDialogModule (copy), RespawnLaterDialogModule (copy)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(GetAvatarSwitcherStoreModule)
+	local UseSignalStateResult1 = SignalsReactModule.useSignalState(UseSignalStateResult.getRespawnPromptShown)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(function() --[[ Line: 35 ]]
+		-- upvalues: p1 (copy)
+		local RespawnBehaviour, _ = p1.getRespawnBehaviour()
 		
-		return respawnBehaviour
+		return RespawnBehaviour
 	end)
-	useEventConnection(p1.respawnBehaviorChangedEvent.Event, var4, {})
-	local var5 = reactModule.useCallback(function()
-		-- upvalues: var1 (ref), p1 (ref), fFlagAvatarSwitcherCounters (copy), sendAXCounterV2 (copy), constantsModule (copy), respawnAvatarModule (copy)
-		var1.toggleRespawnPrompt(false)
+	UseEventConnectionFunction(p1.respawnBehaviorChangedEvent.Event, UseStateResult2, {})
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 42 ]]
+		-- upvalues: UseSignalStateResult (copy), p1 (copy), FFlagAvatarSwitcherCounters (upval), SendAXCounterV2Function (upval), ConstantsModule (upval), RespawnAvatarModule (upval)
+		UseSignalStateResult.toggleRespawnPrompt(false)
 		p1.toggleWindow()
 		
-		if fFlagAvatarSwitcherCounters then
-			sendAXCounterV2(constantsModule.Counters.ConfirmRespawn)
+		if FFlagAvatarSwitcherCounters then
+			SendAXCounterV2Function(ConstantsModule.Counters.ConfirmRespawn)
 		end
-		var1.switchAvatar()
-		respawnAvatarModule(p1.getRespawnBehaviour)
+		UseSignalStateResult.switchAvatar()
+		RespawnAvatarModule(p1.getRespawnBehaviour)
 	end, { p1.getRespawnBehaviour, p1.toggleWindow })
-	local var6 = reactModule.useCallback(function()
-		-- upvalues: var1 (ref), p1 (ref), fFlagAvatarSwitcherCounters (copy), sendAXCounterV2 (copy), constantsModule (copy), var3 (ref)
-		var1.toggleRespawnPrompt(false)
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 53 ]]
+		-- upvalues: UseSignalStateResult (copy), p1 (copy), FFlagAvatarSwitcherCounters (upval), SendAXCounterV2Function (upval), ConstantsModule (upval), UseStateResult (copy)
+		UseSignalStateResult.toggleRespawnPrompt(false)
 		p1.toggleWindow()
 		
-		if fFlagAvatarSwitcherCounters then
-			sendAXCounterV2(constantsModule.Counters.DeferRespawn, { respawnEnabled = tostring(var3) })
+		if FFlagAvatarSwitcherCounters then
+			SendAXCounterV2Function(ConstantsModule.Counters.DeferRespawn, { respawnEnabled = tostring(UseStateResult) })
 		end
-		var1.switchAvatar()
+		UseSignalStateResult.switchAvatar()
 	end, { p1.toggleWindow })
-	local var7 = reactModule.useCallback(function()
-		-- upvalues: fFlagAvatarSwitcherCounters (copy), sendAXCounterV2 (copy), constantsModule (copy), var1 (ref)
-		if fFlagAvatarSwitcherCounters then
-			sendAXCounterV2(constantsModule.Counters.CancelSwitchAvatar)
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 63 ]]
+		-- upvalues: FFlagAvatarSwitcherCounters (upval), SendAXCounterV2Function (upval), ConstantsModule (upval), UseSignalStateResult (copy)
+		if FFlagAvatarSwitcherCounters then
+			SendAXCounterV2Function(ConstantsModule.Counters.CancelSwitchAvatar)
 		end
-		var1.toggleRespawnPrompt(false)
+		UseSignalStateResult.toggleRespawnPrompt(false)
 	end, {})
 	
-	return reactModule.createElement(reactModule.Fragment, nil, {
-		RespawnChoiceDialog = var2 and (var3 and reactModule.createElement(respawnChoiceDialogModule, { onConfirm = var5, onDefer = var6, onClose = var7 })),
-		RespawnLaterDialog = var2 and (not var3 and reactModule.createElement(respawnLaterDialogModule, { onDefer = var6, onClose = var7 }))
+	return ReactModule.createElement(ReactModule.Fragment, nil, {
+		RespawnChoiceDialog = UseSignalStateResult1 and (UseStateResult and ReactModule.createElement(RespawnChoiceDialogModule, {
+			onConfirm = UseResult,
+			onDefer = UseResult1,
+			onClose = UseResult2
+		})),
+		RespawnLaterDialog = UseSignalStateResult1 and (not UseStateResult and ReactModule.createElement(RespawnLaterDialogModule, { onDefer = UseResult1, onClose = UseResult2 }))
 	})
 end

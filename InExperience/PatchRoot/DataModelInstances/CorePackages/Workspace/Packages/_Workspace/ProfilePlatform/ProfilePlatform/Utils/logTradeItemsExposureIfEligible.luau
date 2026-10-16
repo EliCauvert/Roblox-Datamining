@@ -1,22 +1,22 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local fFlagProfileTradeItemsExposureLoggingModule = require(profilePlatform.Flags.FFlagProfileTradeItemsExposureLogging)
-local fStringProfileTradeItemsIxpLayerModule = require(profilePlatform.Flags.FStringProfileTradeItemsIxpLayer)
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local FFlagProfileTradeItemsExposureLoggingModule = require(ProfilePlatform.Flags.FFlagProfileTradeItemsExposureLogging)
+local FStringProfileTradeItemsIxpLayerModule = require(ProfilePlatform.Flags.FStringProfileTradeItemsIxpLayer)
 
-return function(p1)
-	-- upvalues: fFlagProfileTradeItemsExposureLoggingModule (ref), fStringProfileTradeItemsIxpLayerModule (ref)
-	if not fFlagProfileTradeItemsExposureLoggingModule then return end
+return function(p1) --[[ Line: 15 | Named "logTradeItemsExposureIfEligible" ]]
+	-- upvalues: FFlagProfileTradeItemsExposureLoggingModule (copy), FStringProfileTradeItemsIxpLayerModule (copy)
+	if not FFlagProfileTradeItemsExposureLoggingModule then return end
 	if tostring(p1.profileId) == tostring(p1.localUserId) then return end
 	if not p1.localHasPaidTradingAccess or not p1.otherHasPaidTradingAccess then return end
-	if fStringProfileTradeItemsIxpLayerModule == "" then return end
-	local ixpService = p1.ixpService
+	if FStringProfileTradeItemsIxpLayerModule == "" then return end
+	local IxpService = p1.ixpService
 	
-	if ixpService == nil then
+	if IxpService == nil then
 		if not game:GetEngineFeature("EnableLogFlagLinkedUserLayerExposure") then return end
-		ixpService = game:GetService("IXPService")
+		IxpService = game:GetService("IXPService")
 	end
-	assert(ixpService ~= nil, "IXPService is required to log layer exposure")
-	pcall(function()
-		-- upvalues: ixpService (ref), fStringProfileTradeItemsIxpLayerModule (ref)
-		ixpService:LogFlagLinkedUserLayerExposure(fStringProfileTradeItemsIxpLayerModule)
+	assert(IxpService ~= nil, "IXPService is required to log layer exposure")
+	pcall(function() --[[ Line: 43 ]]
+		-- upvalues: IxpService (copy), FStringProfileTradeItemsIxpLayerModule (copy)
+		IxpService:LogFlagLinkedUserLayerExposure(FStringProfileTradeItemsIxpLayerModule)
 	end)
 end

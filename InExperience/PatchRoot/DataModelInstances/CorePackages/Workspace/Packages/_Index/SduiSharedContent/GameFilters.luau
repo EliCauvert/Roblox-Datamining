@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.GameFilters.GameFilters)
+﻿return (require(script.Parent.Parent.Parent._Index.GameFilters.GameFilters))

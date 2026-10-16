@@ -1,4 +1,4 @@
-﻿local t = {
+﻿local config = {
 	["en-us"] = ",",
 	["en-gb"] = ",",
 	["es-mx"] = ",",
@@ -19,17 +19,16 @@
 	["tr-tr"] = "."
 }
 
-local function addGroupDelimiters(p1, p2)
-	local formattedText = string.format("%%1%s%%2", p2)
-	local _ = nil
+local function addGroupDelimiters(Text: string, p1): string --[[ Line: 35 ]]
+	local Formatted = string.format("%%1%s%%2", p1)
 	repeat
-		local replaced, replaced_1 = string.gsub(p1, "^(-?%d+)(%d%d%d)", formattedText)
-		p1 = replaced
-	until replaced_1 == 0
-	return p1
+		local Replaced2
+		Text, Replaced2 = string.gsub(Text, "^(-?%d+)(%d%d%d)", Formatted)
+	until Replaced2 == 0
+	return Text
 end
 
-return function(p1, p2)
-	-- upvalues: t (ref), addGroupDelimiters (ref)
-	return addGroupDelimiters(p2, t[p1] or ",")
+return function(p1, p2) --[[ Line: 47 ]]
+	-- upvalues: config (copy), addGroupDelimiters (copy)
+	return (addGroupDelimiters(p2, config[p1] or ","))
 end

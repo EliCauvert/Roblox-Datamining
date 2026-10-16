@@ -1,100 +1,100 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceTimedOptions").Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local localizationModule = require(parent.Localization)
-local popover = foundationModule.Popover
-local view = foundationModule.View
-local text = foundationModule.Text
-local enums = foundationModule.Enums
-local popoverSide = foundationModule.Enums.PopoverSide
-local popoverAlign = foundationModule.Enums.PopoverAlign
-local numberLocalization = localizationModule.NumberLocalization
-local wearTimeListModule = require(script.Parent.WearTimeList)
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceTimedOptions").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local Popover = FoundationModule.Popover
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local Enums = FoundationModule.Enums
+local PopoverSide = FoundationModule.Enums.PopoverSide
+local PopoverAlign = FoundationModule.Enums.PopoverAlign
+local NumberLocalization = require(Parent.Localization).NumberLocalization
+local WearTimeListModule = require(script.Parent.WearTimeList)
 local _ = require(script.Parent.useWearTimeSelectedOptionViewModel)
-local useWearTimePopoverFocusNavigationBindingsModule = require(script.Parent.useWearTimePopoverFocusNavigationBindings)
+local UseWearTimePopoverFocusNavigationBindingsModule = require(script.Parent.useWearTimePopoverFocusNavigationBindings)
 
-return function(p1)
-	-- upvalues: reactModule (ref), useWearTimePopoverFocusNavigationBindingsModule (ref), view (ref), foundationModule (ref), enums (ref), text (ref), numberLocalization (ref), popover (ref), popoverAlign (ref), popoverSide (ref), wearTimeListModule (ref)
-	local tokens = p1.tokens
-	local textButton = reactModule.createElement("TextButton", {
+return function(p1) --[[ Line: 21 | Named "WearTimeSelectedOptionView" ]]
+	-- upvalues: ReactModule (copy), UseWearTimePopoverFocusNavigationBindingsModule (copy), View (copy), FoundationModule (copy), Enums (copy), Text (copy), NumberLocalization (copy), Popover (copy), PopoverAlign (copy), PopoverSide (copy), WearTimeListModule (copy)
+	local Tokens = p1.tokens
+	local UseWearTimePopoverFocusNavigationBindingsModuleResult = UseWearTimePopoverFocusNavigationBindingsModule(ReactModule.useCallback(function() --[[ Line: 24 ]]
+		-- upvalues: p1 (copy)
+		p1.setIsOpen(false)
+	end, { p1.setIsOpen }), p1.isOpen, p1.anchorRef)
+	local TextButton = ReactModule.createElement("TextButton", {
 		Text = "",
 		Size = UDim2.fromScale(0, 0),
 		AutomaticSize = Enum.AutomaticSize.XY,
 		BorderSizePixel = 0,
 		BackgroundTransparency = 1,
 		ref = p1.anchorRef,
-		[reactModule.Event.Activated] = function()
-			-- upvalues: p1 (ref)
+		[ReactModule.Event.Activated] = function() --[[ Line: 39 ]]
+			-- upvalues: p1 (copy)
 			p1.setIsOpen(not p1.isOpen)
 		end
 	}, {
-		Layout = reactModule.createElement("UIListLayout", {
+		Layout = ReactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
 			SortOrder = Enum.SortOrder.LayoutOrder
 		}),
-		TopRow = reactModule.createElement(view, {
+		TopRow = ReactModule.createElement(View, {
 			tag = "row align-y-center gap-xsmall auto-xy padding-top-xxsmall",
 			LayoutOrder = 1
 		}, {
-			RobuxIcon = reactModule.createElement(foundationModule.Icon, {
+			RobuxIcon = ReactModule.createElement(FoundationModule.Icon, {
 				LayoutOrder = 1,
-				name = enums.IconName.Robux,
-				variant = enums.IconVariant.Filled,
-				size = enums.IconSize.Small,
-				style = tokens.Color.Content.Emphasis
+				name = Enums.IconName.Robux,
+				variant = Enums.IconVariant.Filled,
+				size = Enums.IconSize.Small,
+				style = Tokens.Color.Content.Emphasis
 			}),
-			PriceLabel = reactModule.createElement(text, {
+			PriceLabel = ReactModule.createElement(Text, {
 				tag = "auto-xy",
 				LayoutOrder = 2,
-				Text = numberLocalization.localize(p1.price, p1.localization:GetLocale()),
-				textStyle = tokens.Color.Content.Emphasis,
+				Text = NumberLocalization.localize(p1.price, p1.localization:GetLocale()),
+				textStyle = Tokens.Color.Content.Emphasis,
 				fontStyle = {
-					Font = tokens.Typography.TitleSmall.Font,
-					FontSize = tokens.FontSize.FontSize_400
+					Font = Tokens.Typography.TitleSmall.Font,
+					FontSize = Tokens.FontSize.FontSize_400
 				}
 			}),
-			ChevronIcon = if not p1.disableOptionSelection then reactModule.createElement(foundationModule.Icon, {
+			ChevronIcon = if p1.disableOptionSelection then nil else ReactModule.createElement(FoundationModule.Icon, {
 				LayoutOrder = 3,
-				name = enums.IconName.ChevronLargeDown,
-				variant = enums.IconVariant.Regular,
-				size = enums.IconSize.Small,
-				style = tokens.Color.Content.Emphasis
-			}) else nil
+				name = Enums.IconName.ChevronLargeDown,
+				variant = Enums.IconVariant.Regular,
+				size = Enums.IconSize.Small,
+				style = Tokens.Color.Content.Emphasis
+			})
 		}),
-		SubLabel = p1.subLabelText and reactModule.createElement(text, {
+		SubLabel = p1.subLabelText and ReactModule.createElement(Text, {
 			tag = "auto-xy padding-top-xxsmall",
 			LayoutOrder = 2,
 			Text = p1.subLabelText,
-			textStyle = tokens.Color.Content.Muted,
+			textStyle = Tokens.Color.Content.Muted,
 			fontStyle = {
-				Font = tokens.Typography.CaptionMedium.Font,
-				FontSize = tokens.FontSize.FontSize_300
+				Font = Tokens.Typography.CaptionMedium.Font,
+				FontSize = Tokens.FontSize.FontSize_300
 			}
 		})
 	})
 	
-	return if p1.disableOptionSelection then textButton else reactModule.createElement(view, { tag = "auto-xy" }, {
-		TriggerButton = textButton,
-		Popover = reactModule.createElement(popover.Root, { isOpen = p1.isOpen }, {
-			Anchor = reactModule.createElement(popover.Anchor, { anchorRef = p1.anchorRef }),
-			Content = reactModule.createElement(popover.Content, {
+	return if p1.disableOptionSelection then TextButton else ReactModule.createElement(View, { tag = "auto-xy" }, {
+		TriggerButton = TextButton,
+		Popover = ReactModule.createElement(Popover.Root, { isOpen = p1.isOpen }, {
+			Anchor = ReactModule.createElement(Popover.Anchor, { anchorRef = p1.anchorRef }),
+			Content = ReactModule.createElement(Popover.Content, {
 				hasArrow = false,
-				align = popoverAlign.Start,
-				side = popoverSide.Top,
-				onPressedOutside = function()
-					-- upvalues: p1 (ref)
+				align = PopoverAlign.Start,
+				side = PopoverSide.Top,
+				onPressedOutside = function() --[[ Line: 107 ]]
+					-- upvalues: p1 (copy)
 					p1.setIsOpen(false)
 				end
 			}, {
-				ContentWrapper = reactModule.createElement(view, {
+				ContentWrapper = ReactModule.createElement(View, {
 					tag = "auto-y",
-					Size = UDim2.new(0, tokens.Size.Size_2900 * 2, 0, 0),
-					ref = useWearTimePopoverFocusNavigationBindingsModule(reactModule.useCallback(function()
-						-- upvalues: p1 (ref)
-						p1.setIsOpen(false)
-					end, { p1.setIsOpen }), p1.isOpen, p1.anchorRef)
+					Size = UDim2.new(0, Tokens.Size.Size_2900 * 2, 0, 0),
+					ref = UseWearTimePopoverFocusNavigationBindingsModuleResult
 				}, {
-					WearTimeList = reactModule.createElement(wearTimeListModule, {
+					WearTimeList = ReactModule.createElement(WearTimeListModule, {
 						options = p1.updatedOptions,
 						selectedIndex = p1.selectedIndex,
 						onOptionActivated = p1.handleOptionActivated

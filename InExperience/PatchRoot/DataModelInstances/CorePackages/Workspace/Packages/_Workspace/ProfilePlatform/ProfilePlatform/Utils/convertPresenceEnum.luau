@@ -1,20 +1,20 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local presenceType = require(profilePlatform.Rodux.Presence).Enums.PresenceType
-local enumsModule = require(profilePlatform.Common.Enums)
-local t = {
-	[presenceType.Offline] = enumsModule.PresenceTypes.Offline,
-	[presenceType.Online] = enumsModule.PresenceTypes.Online,
-	[presenceType.InGame] = enumsModule.PresenceTypes.InGame,
-	[presenceType.InStudio] = enumsModule.PresenceTypes.InStudio,
-	Offline = enumsModule.PresenceTypes.Offline,
-	Online = enumsModule.PresenceTypes.Online,
-	InGame = enumsModule.PresenceTypes.InGame,
-	InStudio = enumsModule.PresenceTypes.InStudio
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local PresenceType = require(ProfilePlatform.Rodux.Presence).Enums.PresenceType
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local config = {
+	[PresenceType.Offline] = EnumsModule.PresenceTypes.Offline,
+	[PresenceType.Online] = EnumsModule.PresenceTypes.Online,
+	[PresenceType.InGame] = EnumsModule.PresenceTypes.InGame,
+	[PresenceType.InStudio] = EnumsModule.PresenceTypes.InStudio,
+	Offline = EnumsModule.PresenceTypes.Offline,
+	Online = EnumsModule.PresenceTypes.Online,
+	InGame = EnumsModule.PresenceTypes.InGame,
+	InStudio = EnumsModule.PresenceTypes.InStudio
 }
 
-return function(p1, p2)
-	-- upvalues: t (ref), enumsModule (ref)
-	local var1 = t[p1] or enumsModule.PresenceTypes.Offline
+return function(p1, p2) --[[ Line: 18 ]]
+	-- upvalues: config (copy), EnumsModule (copy)
+	local Entry = config[p1] or EnumsModule.PresenceTypes.Offline
 	
-	return if var1 == enumsModule.PresenceTypes.InGame and p2 == nil then enumsModule.PresenceTypes.Online else var1
+	return if Entry == EnumsModule.PresenceTypes.InGame and p2 == nil then EnumsModule.PresenceTypes.Online else Entry
 end

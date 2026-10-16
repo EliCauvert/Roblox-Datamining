@@ -1,367 +1,381 @@
-﻿local parent = script:FindFirstAncestor("CollectionViews").Parent
-local discoveryTypesModule = require(parent.DiscoveryTypes)
-local discoveryUtilsModule = require(parent.DiscoveryUtils)
-local sharedFlagsModule = require(parent.SharedFlags)
-local apportioningDiagnosticTelemetry = discoveryUtilsModule.ApportioningDiagnosticTelemetry
-local discoveryEventErrorLogger = discoveryUtilsModule.DiscoveryEventErrorLogger
-local gameCollectionItemTypes = discoveryTypesModule.GameCollectionItemTypes
-local gameCollectionItemType = gameCollectionItemTypes.GameCollectionItemType
-local spanForItemType = gameCollectionItemTypes.SpanForItemType
-local fFlagLuaAppEnableNxMRoduxApportioning = sharedFlagsModule.FFlagLuaAppEnableNxMRoduxApportioning
-local fFlagLuaAppEnableNxMApportioningExtraLogging = sharedFlagsModule.FFlagLuaAppEnableNxMApportioningExtraLogging
-local luaAppFixApportioningTileTailConflict = game:DefineFastFlag("LuaAppFixApportioningTileTailConflict", false)
-local t = {
-	[gameCollectionItemType.TwoByOneTile] = { colSpan = 2, rowSpan = 1 }
+﻿local Parent = script:FindFirstAncestor("CollectionViews").Parent
+local DiscoveryUtilsModule = require(Parent.DiscoveryUtils)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local ApportioningDiagnosticTelemetry = DiscoveryUtilsModule.ApportioningDiagnosticTelemetry
+local DiscoveryEventErrorLogger = DiscoveryUtilsModule.DiscoveryEventErrorLogger
+local GameCollectionItemTypes = require(Parent.DiscoveryTypes).GameCollectionItemTypes
+local SpanForItemType = GameCollectionItemTypes.SpanForItemType
+local FFlagLuaAppEnableNxMRoduxApportioning = SharedFlagsModule.FFlagLuaAppEnableNxMRoduxApportioning
+local FFlagLuaAppEnableNxMApportioningExtraLogging = SharedFlagsModule.FFlagLuaAppEnableNxMApportioningExtraLogging
+local LuaAppFixApportioningTileTailConflict = game:DefineFastFlag("LuaAppFixApportioningTileTailConflict", false)
+local config = {
+	[GameCollectionItemTypes.GameCollectionItemType.TwoByOneTile] = { colSpan = 2, rowSpan = 1 }
 }
 
-local function defaultGetSpanConfig(p1)
-	-- upvalues: fFlagLuaAppEnableNxMRoduxApportioning (ref), spanForItemType (ref), t (ref)
-	local var1 = p1 and (if fFlagLuaAppEnableNxMRoduxApportioning then spanForItemType[p1.componentType] else t[p1.componentType])
+local function defaultGetSpanConfig(p1) --[[ Line: 76 ]]
+	-- upvalues: FFlagLuaAppEnableNxMRoduxApportioning (copy), SpanForItemType (copy), config (copy)
+	local SpanForItemTypeEntry = p1 and (if FFlagLuaAppEnableNxMRoduxApportioning then SpanForItemType[p1.componentType] else config[p1.componentType])
 	
-	return if var1 then {
-		colSpan = var1.colSpan,
-		rowSpan = if fFlagLuaAppEnableNxMRoduxApportioning then var1.rowSpan else 1,
+	return if SpanForItemTypeEntry then {
+		colSpan = SpanForItemTypeEntry.colSpan,
+		rowSpan = if FFlagLuaAppEnableNxMRoduxApportioning then SpanForItemTypeEntry.rowSpan else 1,
 		minRowPadding = tonumber(p1.minRowPadding) or 0,
 		alignmentType = p1.alignmentType
 	} else nil
 end
 
-local function processOneGrid(p1, p2, p3, p4, p5, p6, p7)
-	-- upvalues: discoveryEventErrorLogger (ref), fFlagLuaAppEnableNxMRoduxApportioning (ref), fFlagLuaAppEnableNxMApportioningExtraLogging (ref), apportioningDiagnosticTelemetry (ref), luaAppFixApportioningTileTailConflict (ref), defaultGetSpanConfig (ref)
-	local var1 = p5 * p4
+local function processOneGrid(p1, NextStartIndex, PendingSpanTiles, ItemsPerRow: number, MaxRows, Callback, p2) --[[ Line: 95 ]]
+	-- upvalues: DiscoveryEventErrorLogger (copy), FFlagLuaAppEnableNxMRoduxApportioning (copy), FFlagLuaAppEnableNxMApportioningExtraLogging (copy), ApportioningDiagnosticTelemetry (copy), LuaAppFixApportioningTileTailConflict (copy), defaultGetSpanConfig (copy)
+	local ScaledMaxRows = MaxRows * ItemsPerRow
+	local List = {}
+	local List1 = {}
+	local NextScanPosition = 0
+	local NextAllowedRow = 1
 	local t = {}
-	local t_1 = {}
-	local var2 = 0
-	local var3 = 1
-	local t_2 = {}
 	
-	local function nextFreePosition(p8)
-		-- upvalues: p4 (ref), t_2 (ref)
+	local function nextFreePosition(NextScanPosition: number): number --[[ Line: 120 ]]
+		-- upvalues: ItemsPerRow (copy), t (copy)
 		repeat
-			local var4 = math.floor(p8 / p4) + 1
-			local var5 = not t_2[var4] or t_2[var4][p8 % p4 + 1] ~= -1
-			if not var5 then
-				p8 += 1
+			local NewFloored = math.floor(NextScanPosition / ItemsPerRow) + 1
+			local Inverted: boolean = not t[NewFloored] or t[NewFloored][NextScanPosition % ItemsPerRow + 1] ~= -1
+			if not Inverted then
+				NextScanPosition += 1
 			end
-		until var5
-		return p8
+		until Inverted
+		return NextScanPosition
 	end
 	
-	local function writeLayoutCell(p8, p9, p10)
-		-- upvalues: p5 (ref), discoveryEventErrorLogger (copy), p4 (ref), t_2 (ref)
-		if p5 < p8 then
-			discoveryEventErrorLogger.reportError("CalculateSpanAwareGrids_LayoutWritePastMaxRows", "writeLayoutCell attempted to write past maxRows", { row = p8, col = p9, maxRows = p5, itemsPerRow = p4 })
+	local function writeLayoutCell(NewFloored, Col, Index) --[[ Line: 134 ]]
+		-- upvalues: MaxRows (copy), DiscoveryEventErrorLogger (upval), ItemsPerRow (copy), t (copy)
+		if MaxRows < NewFloored then
+			DiscoveryEventErrorLogger.reportError("CalculateSpanAwareGrids_LayoutWritePastMaxRows", "writeLayoutCell attempted to write past maxRows", {
+				row = NewFloored,
+				col = Col,
+				maxRows = MaxRows,
+				itemsPerRow = ItemsPerRow
+			})
 			
 			return
-		elseif not t_2[p8] then
-			t_2[p8] = {}
 		end
-		t_2[p8][p9] = p10
+		if not t[NewFloored] then
+			t[NewFloored] = {}
+		end
+		t[NewFloored][Col] = Index
 	end
 	
-	local function tryPlaceSpanTile(p8, p9)
-		-- upvalues: fFlagLuaAppEnableNxMRoduxApportioning (copy), p7 (ref), nextFreePosition (ref), var2 (write), p4 (ref), var3 (write), fFlagLuaAppEnableNxMApportioningExtraLogging (copy), apportioningDiagnosticTelemetry (copy), p5 (ref), var1 (ref), p1 (ref), luaAppFixApportioningTileTailConflict (copy), t_2 (ref), writeLayoutCell (ref), t (ref)
-		local colSpan = p9.colSpan
-		local var4 = if fFlagLuaAppEnableNxMRoduxApportioning or p7 then p9.rowSpan else nil
-		local minRowPadding = p9.minRowPadding
-		local alignmentType = p9.alignmentType
-		local var5 = if fFlagLuaAppEnableNxMRoduxApportioning or p7 then nextFreePosition(var2) else var2
-		local var6 = if fFlagLuaAppEnableNxMRoduxApportioning or p7 then math.floor(var5 / p4) + 1 else math.ceil((var2 + 1) / p4)
-		local var7 = var5 % p4 + 1
+	local function tryPlaceSpanTile(OriginalIndex, SpanConfig): boolean --[[ Line: 154 ]]
+		-- upvalues: FFlagLuaAppEnableNxMRoduxApportioning (upval), p2 (copy), nextFreePosition (copy), NextScanPosition (ref), ItemsPerRow (copy), NextAllowedRow (ref), FFlagLuaAppEnableNxMApportioningExtraLogging (upval), ApportioningDiagnosticTelemetry (upval), MaxRows (copy), ScaledMaxRows (copy), p1 (copy), LuaAppFixApportioningTileTailConflict (upval), t (copy), writeLayoutCell (copy), List (copy)
+		local ColSpan: number = SpanConfig.colSpan
+		local RowSpan = if FFlagLuaAppEnableNxMRoduxApportioning or p2 then SpanConfig.rowSpan else nil
+		local MinRowPadding: number = SpanConfig.minRowPadding
+		local AlignmentType = SpanConfig.alignmentType
+		local NextFreePositionResult = if FFlagLuaAppEnableNxMRoduxApportioning or p2 then nextFreePosition(NextScanPosition) else NextScanPosition
+		local NewFloored: number = if FFlagLuaAppEnableNxMRoduxApportioning or p2 then math.floor(NextFreePositionResult / ItemsPerRow) + 1 else math.ceil((NextScanPosition + 1) / ItemsPerRow)
+		local NewNextFreePositionResult = NextFreePositionResult % ItemsPerRow + 1
 		
-		if var6 < var3 then
-			if fFlagLuaAppEnableNxMApportioningExtraLogging then
-				apportioningDiagnosticTelemetry.log("SpanDeferred", {
+		if NewFloored < NextAllowedRow then
+			if FFlagLuaAppEnableNxMApportioningExtraLogging then
+				ApportioningDiagnosticTelemetry.log("SpanDeferred", {
 					reason = "padding_constraint",
-					originalIndex = p8,
-					colSpan = colSpan,
-					rowSpan = var4,
-					alignmentType = alignmentType,
-					minRowPadding = minRowPadding,
-					currentRow = var6,
-					currentColumn = var7,
-					nextAllowedRow = var3,
-					nextScanPosition = var2,
-					itemsPerRow = p4,
-					maxRows = p5,
-					nxmApportioningFlagValue = fFlagLuaAppEnableNxMRoduxApportioning
+					originalIndex = OriginalIndex,
+					colSpan = ColSpan,
+					rowSpan = RowSpan,
+					alignmentType = AlignmentType,
+					minRowPadding = MinRowPadding,
+					currentRow = NewFloored,
+					currentColumn = NewNextFreePositionResult,
+					nextAllowedRow = NextAllowedRow,
+					nextScanPosition = NextScanPosition,
+					itemsPerRow = ItemsPerRow,
+					maxRows = MaxRows,
+					nxmApportioningFlagValue = FFlagLuaAppEnableNxMRoduxApportioning
 				})
 			end
 			return false
-		elseif fFlagLuaAppEnableNxMRoduxApportioning or p7 or var1 >= var2 + colSpan then
-			if alignmentType == "LeftPin" and var7 ~= 1 then
-				if fFlagLuaAppEnableNxMApportioningExtraLogging then
-					apportioningDiagnosticTelemetry.log("SpanDeferred", {
+		elseif FFlagLuaAppEnableNxMRoduxApportioning or p2 or ScaledMaxRows >= NextScanPosition + ColSpan then
+			if AlignmentType == "LeftPin" and NewNextFreePositionResult ~= 1 then
+				if FFlagLuaAppEnableNxMApportioningExtraLogging then
+					ApportioningDiagnosticTelemetry.log("SpanDeferred", {
 						reason = "left_pin_misaligned",
-						originalIndex = p8,
-						colSpan = colSpan,
-						rowSpan = var4,
-						alignmentType = alignmentType,
-						currentRow = var6,
-						currentColumn = var7,
-						nextScanPosition = var2,
-						itemsPerRow = p4,
-						maxRows = p5,
-						nxmApportioningFlagValue = fFlagLuaAppEnableNxMRoduxApportioning
+						originalIndex = OriginalIndex,
+						colSpan = ColSpan,
+						rowSpan = RowSpan,
+						alignmentType = AlignmentType,
+						currentRow = NewFloored,
+						currentColumn = NewNextFreePositionResult,
+						nextScanPosition = NextScanPosition,
+						itemsPerRow = ItemsPerRow,
+						maxRows = MaxRows,
+						nxmApportioningFlagValue = FFlagLuaAppEnableNxMRoduxApportioning
 					})
 				end
 				return false
-			elseif alignmentType == "RightPin" and var7 + colSpan - 1 ~= p4 then
-				if fFlagLuaAppEnableNxMApportioningExtraLogging then
-					apportioningDiagnosticTelemetry.log("SpanDeferred", {
+			elseif AlignmentType == "RightPin" and NewNextFreePositionResult + ColSpan - 1 ~= ItemsPerRow then
+				if FFlagLuaAppEnableNxMApportioningExtraLogging then
+					ApportioningDiagnosticTelemetry.log("SpanDeferred", {
 						reason = "right_pin_misaligned",
-						originalIndex = p8,
-						colSpan = colSpan,
-						rowSpan = var4,
-						alignmentType = alignmentType,
-						currentRow = var6,
-						currentColumn = var7,
-						nextScanPosition = var2,
-						itemsPerRow = p4,
-						maxRows = p5,
-						nxmApportioningFlagValue = fFlagLuaAppEnableNxMRoduxApportioning
+						originalIndex = OriginalIndex,
+						colSpan = ColSpan,
+						rowSpan = RowSpan,
+						alignmentType = AlignmentType,
+						currentRow = NewFloored,
+						currentColumn = NewNextFreePositionResult,
+						nextScanPosition = NextScanPosition,
+						itemsPerRow = ItemsPerRow,
+						maxRows = MaxRows,
+						nxmApportioningFlagValue = FFlagLuaAppEnableNxMRoduxApportioning
 					})
 				end
 				return false
-			elseif p4 < var7 + colSpan - 1 then
-				if fFlagLuaAppEnableNxMApportioningExtraLogging then
-					apportioningDiagnosticTelemetry.log("SpanDeferred", {
+			elseif ItemsPerRow < NewNextFreePositionResult + ColSpan - 1 then
+				if FFlagLuaAppEnableNxMApportioningExtraLogging then
+					ApportioningDiagnosticTelemetry.log("SpanDeferred", {
 						reason = "horizontal_wrap",
-						originalIndex = p8,
-						colSpan = colSpan,
-						rowSpan = var4,
-						alignmentType = alignmentType,
-						currentRow = var6,
-						currentColumn = var7,
-						nextScanPosition = var2,
-						itemsPerRow = p4,
-						maxRows = p5,
-						nxmApportioningFlagValue = fFlagLuaAppEnableNxMRoduxApportioning
+						originalIndex = OriginalIndex,
+						colSpan = ColSpan,
+						rowSpan = RowSpan,
+						alignmentType = AlignmentType,
+						currentRow = NewFloored,
+						currentColumn = NewNextFreePositionResult,
+						nextScanPosition = NextScanPosition,
+						itemsPerRow = ItemsPerRow,
+						maxRows = MaxRows,
+						nxmApportioningFlagValue = FFlagLuaAppEnableNxMRoduxApportioning
 					})
 				end
 				return false
-			elseif (fFlagLuaAppEnableNxMRoduxApportioning or p7) and p5 < var6 + var4 - 1 then
-				if fFlagLuaAppEnableNxMApportioningExtraLogging then
-					apportioningDiagnosticTelemetry.log("SpanDeferred", {
+			elseif (FFlagLuaAppEnableNxMRoduxApportioning or p2) and MaxRows < NewFloored + RowSpan - 1 then
+				if FFlagLuaAppEnableNxMApportioningExtraLogging then
+					ApportioningDiagnosticTelemetry.log("SpanDeferred", {
 						reason = "vertical_overflow",
-						originalIndex = p8,
-						colSpan = colSpan,
-						rowSpan = var4,
-						alignmentType = alignmentType,
-						currentRow = var6,
-						currentColumn = var7,
-						nextScanPosition = var2,
-						itemsPerRow = p4,
-						maxRows = p5,
-						nxmApportioningFlagValue = fFlagLuaAppEnableNxMRoduxApportioning
+						originalIndex = OriginalIndex,
+						colSpan = ColSpan,
+						rowSpan = RowSpan,
+						alignmentType = AlignmentType,
+						currentRow = NewFloored,
+						currentColumn = NewNextFreePositionResult,
+						nextScanPosition = NextScanPosition,
+						itemsPerRow = ItemsPerRow,
+						maxRows = MaxRows,
+						nxmApportioningFlagValue = FFlagLuaAppEnableNxMRoduxApportioning
 					})
 				end
 				return false
-			elseif (fFlagLuaAppEnableNxMRoduxApportioning or p7) and (var4 > 1 and #p1 - p8 < var7 - 1) then
-				if fFlagLuaAppEnableNxMApportioningExtraLogging then
-					apportioningDiagnosticTelemetry.log("SpanDeferred", {
+			elseif (FFlagLuaAppEnableNxMRoduxApportioning or p2) and (RowSpan > 1 and #p1 - OriginalIndex < NewNextFreePositionResult - 1) then
+				if FFlagLuaAppEnableNxMApportioningExtraLogging then
+					ApportioningDiagnosticTelemetry.log("SpanDeferred", {
 						reason = "insufficient_trailing_entries",
-						originalIndex = p8,
-						colSpan = colSpan,
-						rowSpan = var4,
-						alignmentType = alignmentType,
-						currentRow = var6,
-						currentColumn = var7,
+						originalIndex = OriginalIndex,
+						colSpan = ColSpan,
+						rowSpan = RowSpan,
+						alignmentType = AlignmentType,
+						currentRow = NewFloored,
+						currentColumn = NewNextFreePositionResult,
 						allEntriesCount = #p1,
-						nextScanPosition = var2,
-						itemsPerRow = p4,
-						maxRows = p5,
-						nxmApportioningFlagValue = fFlagLuaAppEnableNxMRoduxApportioning
+						nextScanPosition = NextScanPosition,
+						itemsPerRow = ItemsPerRow,
+						maxRows = MaxRows,
+						nxmApportioningFlagValue = FFlagLuaAppEnableNxMRoduxApportioning
 					})
 				end
 				return false
-			elseif luaAppFixApportioningTileTailConflict and (fFlagLuaAppEnableNxMRoduxApportioning or p7) then
-				for i_1 = 0, var4 - 1 do
-					for i = 0, colSpan - 1 do
-						local var8 = var6 + i_1
-						local var9 = var7 + i
-						
-						if not t_2[var8] or t_2[var8][var9] == nil then
-							continue
-						end
-						if fFlagLuaAppEnableNxMApportioningExtraLogging then
-							apportioningDiagnosticTelemetry.log("SpanDeferred", {
-								reason = "span_cell_collision",
-								originalIndex = p8,
-								colSpan = colSpan,
-								rowSpan = var4,
-								alignmentType = alignmentType,
-								currentRow = var6,
-								currentColumn = var7,
-								collidingRow = var8,
-								collidingCol = var9,
-								collidingValue = t_2[var8][var9],
-								itemsPerRow = p4,
-								maxRows = p5,
-								nxmApportioningFlagValue = fFlagLuaAppEnableNxMRoduxApportioning
-							})
-						end
-						return false
-					end
-				end
-			end
-			if fFlagLuaAppEnableNxMRoduxApportioning or p7 then
-				for i_3 = 0, var4 - 1 do
-					for i_2 = 0, colSpan - 1 do
-						writeLayoutCell(var6 + i_3, var7 + i_2, -1)
-					end
-				end
-				writeLayoutCell(var6, var7, p8)
-				var2 = var5 + colSpan
-				var3 = var6 + var4 - 1 + minRowPadding
 			else
-				table.insert(t, p8)
-				var2 += colSpan
-				var3 = var6 + minRowPadding
+				if LuaAppFixApportioningTileTailConflict and (FFlagLuaAppEnableNxMRoduxApportioning or p2) then
+					local NewNewFloored = nil
+					local NewNewNextFreePositionResult = nil
+					for i2 = 0, RowSpan - 1 do
+						for i = 0, ColSpan - 1 do
+							NewNewFloored = NewFloored + i2
+							NewNewNextFreePositionResult = NewNextFreePositionResult + i
+							
+							if not t[NewNewFloored] or t[NewNewFloored][NewNewNextFreePositionResult] == nil then
+								continue
+							elseif FFlagLuaAppEnableNxMApportioningExtraLogging then
+								ApportioningDiagnosticTelemetry.log("SpanDeferred", {
+									reason = "span_cell_collision",
+									originalIndex = OriginalIndex,
+									colSpan = ColSpan,
+									rowSpan = RowSpan,
+									alignmentType = AlignmentType,
+									currentRow = NewFloored,
+									currentColumn = NewNextFreePositionResult,
+									collidingRow = NewNewFloored,
+									collidingCol = NewNewNextFreePositionResult,
+									collidingValue = t[NewNewFloored][NewNewNextFreePositionResult],
+									itemsPerRow = ItemsPerRow,
+									maxRows = MaxRows,
+									nxmApportioningFlagValue = FFlagLuaAppEnableNxMRoduxApportioning
+								})
+							end
+							return false
+						end
+					end
+				end
+				if FFlagLuaAppEnableNxMRoduxApportioning or p2 then
+					for i1 = 0, RowSpan - 1 do
+						for i3 = 0, ColSpan - 1 do
+							writeLayoutCell(NewFloored + i1, NewNextFreePositionResult + i3, -1)
+						end
+					end
+					writeLayoutCell(NewFloored, NewNextFreePositionResult, OriginalIndex)
+					NextScanPosition = NextFreePositionResult + ColSpan
+					NextAllowedRow = NewFloored + RowSpan - 1 + MinRowPadding
+				else
+					table.insert(List, OriginalIndex)
+					NextScanPosition += ColSpan
+					NextAllowedRow = NewFloored + MinRowPadding
+				end
+				return true
 			end
-			return true
-		elseif fFlagLuaAppEnableNxMApportioningExtraLogging then
-			apportioningDiagnosticTelemetry.log("SpanDeferred", {
-				reason = "totalcells_exceeded_legacy",
-				originalIndex = p8,
-				colSpan = colSpan,
-				rowSpan = var4,
-				alignmentType = alignmentType,
-				minRowPadding = minRowPadding,
-				nextScanPosition = var2,
-				totalCells = var1,
-				itemsPerRow = p4,
-				maxRows = p5,
-				nxmApportioningFlagValue = fFlagLuaAppEnableNxMRoduxApportioning
-			})
+		else
+			if FFlagLuaAppEnableNxMApportioningExtraLogging then
+				ApportioningDiagnosticTelemetry.log("SpanDeferred", {
+					reason = "totalcells_exceeded_legacy",
+					originalIndex = OriginalIndex,
+					colSpan = ColSpan,
+					rowSpan = RowSpan,
+					alignmentType = AlignmentType,
+					minRowPadding = MinRowPadding,
+					nextScanPosition = NextScanPosition,
+					totalCells = ScaledMaxRows,
+					itemsPerRow = ItemsPerRow,
+					maxRows = MaxRows,
+					nxmApportioningFlagValue = FFlagLuaAppEnableNxMRoduxApportioning
+				})
+			end
+			return false
 		end
-		return false
 	end
 	
-	local function tryPlaceDeferredSpanTiles()
-		-- upvalues: t_1 (ref), tryPlaceSpanTile (ref)
-		while #t_1 > 0 do
-			local var10 = t_1[1]
+	local function tryPlaceDeferredSpanTiles() --[[ Line: 359 ]]
+		-- upvalues: List1 (copy), tryPlaceSpanTile (copy)
+		while #List1 > 0 do
+			local Entry = List1[1]
 			
-			if not tryPlaceSpanTile(var10.index, var10.spanConfig) then break end
-			table.remove(t_1, 1)
+			if not tryPlaceSpanTile(Entry.index, Entry.spanConfig) then break end
+			table.remove(List1, 1)
 		end
 	end
 	
-	for i, v in p3 do
-		if #t_1 > 0 then
-			table.insert(t_1, v)
-		elseif not tryPlaceSpanTile(v.index, v.spanConfig) then
-			table.insert(t_1, v)
+	for _, pendingSpanTile in PendingSpanTiles do
+		if #List1 > 0 then
+			table.insert(List1, pendingSpanTile)
+		elseif not tryPlaceSpanTile(pendingSpanTile.index, pendingSpanTile.spanConfig) then
+			table.insert(List1, pendingSpanTile)
 		end
 	end
-	local var11 = p2
+	local NextStartIndex1: number = NextStartIndex
 	
-	for i_1 = p2, #p1 do
-		local var12 = p1[i_1]
+	for i = NextStartIndex, #p1 do
+		local v1 = p1[i]
 		
-		if not var12 then
-			discoveryEventErrorLogger.reportError("CalculateSpanAwareGrids_InvalidEntry", "calculateSpanAwareGrids called with an invalid entry", {
+		if not v1 then
+			DiscoveryEventErrorLogger.reportError("CalculateSpanAwareGrids_InvalidEntry", "calculateSpanAwareGrids called with an invalid entry", {
 				allEntriesCount = #p1,
-				indexInAllEntries = i_1,
-				itemsPerRow = p4
+				indexInAllEntries = i,
+				itemsPerRow = ItemsPerRow
 			})
-			var11 = i_1 + 1
+			NextStartIndex1 = i + 1
 			continue
 		end
-		if var1 > var2 then
-			local var13 = if p6 ~= nil then defaultGetSpanConfig(var12) else p6(var12, i_1)
-			
-			if var13 then
-				if #t_1 > 0 then
-					table.insert(t_1, { index = i_1, spanConfig = var13 })
-				elseif not tryPlaceSpanTile(i_1, var13) then
-					table.insert(t_1, { index = i_1, spanConfig = var13 })
-				end
-				var11 = i_1 + 1
-			elseif fFlagLuaAppEnableNxMRoduxApportioning or p7 then
-				local var14 = nextFreePosition(var2)
-				
-				if var1 <= var14 then break end
-				writeLayoutCell(math.floor(var14 / p4) + 1, var14 % p4 + 1, i_1)
-				var2 = var14 + 1
-			else
-				table.insert(t, i_1)
-				var2 += 1
-			end
-			tryPlaceDeferredSpanTiles()
-			var11 = i_1 + 1
-		elseif not fFlagLuaAppEnableNxMApportioningExtraLogging then
+		if ScaledMaxRows <= NextScanPosition then
+			if not FFlagLuaAppEnableNxMApportioningExtraLogging then break end
+			ApportioningDiagnosticTelemetry.log("GridFull", {
+				nextScanPosition = NextScanPosition,
+				totalCells = ScaledMaxRows,
+				itemsPerRow = ItemsPerRow,
+				maxRows = MaxRows,
+				remainingEntries = #p1 - i + 1,
+				deferredCount = #List1,
+				stoppedAtIndex = i,
+				allEntriesCount = #p1,
+				nxmApportioningFlagValue = FFlagLuaAppEnableNxMRoduxApportioning
+			})
 			break
 		end
-		apportioningDiagnosticTelemetry.log("GridFull", {
-			nextScanPosition = var2,
-			totalCells = var1,
-			itemsPerRow = p4,
-			maxRows = p5,
-			remainingEntries = #p1 - i_1 + 1,
-			deferredCount = #t_1,
-			stoppedAtIndex = i_1,
-			allEntriesCount = #p1,
-			nxmApportioningFlagValue = fFlagLuaAppEnableNxMRoduxApportioning
-		})
-		break
+		local DefaultGetSpanConfigResult = if Callback == nil then defaultGetSpanConfig(v1) else Callback(v1, i)
+		
+		if DefaultGetSpanConfigResult then
+			if #List1 > 0 then
+				table.insert(List1, { index = i, spanConfig = DefaultGetSpanConfigResult })
+			elseif not tryPlaceSpanTile(i, DefaultGetSpanConfigResult) then
+				table.insert(List1, { index = i, spanConfig = DefaultGetSpanConfigResult })
+			end
+			NextStartIndex1 = i + 1
+		else
+			if FFlagLuaAppEnableNxMRoduxApportioning or p2 then
+				local NextFreePositionResult: number = nextFreePosition(NextScanPosition)
+				
+				if ScaledMaxRows <= NextFreePositionResult then break end
+				writeLayoutCell(math.floor(NextFreePositionResult / ItemsPerRow) + 1, NextFreePositionResult % ItemsPerRow + 1, i)
+				NextScanPosition = NextFreePositionResult + 1
+			else
+				table.insert(List, i)
+				NextScanPosition += 1
+			end
+			tryPlaceDeferredSpanTiles()
+			NextStartIndex1 = i + 1
+		end
 	end
 	return {
-		placedIndices = t,
-		pendingSpanTiles = t_1,
-		nextStartIndex = var11,
-		layout = if fFlagLuaAppEnableNxMRoduxApportioning or p7 then t_2 else nil
+		placedIndices = List,
+		pendingSpanTiles = List1,
+		nextStartIndex = NextStartIndex1,
+		layout = if FFlagLuaAppEnableNxMRoduxApportioning or p2 then t else nil
 	}
 end
 
 return {
-	calculateSpanAwareGrids = function(p10, p11, p12, p13, p14)
-		-- upvalues: discoveryEventErrorLogger (ref), processOneGrid (ref), fFlagLuaAppEnableNxMRoduxApportioning (ref)
-		if not p10 then
-			discoveryEventErrorLogger.reportError("CalculateSpanAwareGrids_MissingEntries", "calculateSpanAwareGrids called without entries", { gridConfigsCount = #p11, itemsPerRow = p12 })
+	calculateSpanAwareGrids = function(p3, List, ItemsPerRow: number, p4, p5) --[[ Line: 461 ]]
+		-- upvalues: DiscoveryEventErrorLogger (copy), processOneGrid (copy), FFlagLuaAppEnableNxMRoduxApportioning (copy)
+		if not p3 then
+			DiscoveryEventErrorLogger.reportError("CalculateSpanAwareGrids_MissingEntries", "calculateSpanAwareGrids called without entries", { gridConfigsCount = #List, itemsPerRow = ItemsPerRow })
 			
 			return {}
-		elseif #p10 == 0 then
-			discoveryEventErrorLogger.reportError("CalculateSpanAwareGrids_EmptyEntries", "calculateSpanAwareGrids called with empty entries", {
-				allEntriesCount = #p10,
-				gridConfigsCount = #p11,
-				itemsPerRow = p12
+		end
+		if #p3 == 0 then
+			DiscoveryEventErrorLogger.reportError("CalculateSpanAwareGrids_EmptyEntries", "calculateSpanAwareGrids called with empty entries", {
+				allEntriesCount = #p3,
+				gridConfigsCount = #List,
+				itemsPerRow = ItemsPerRow
 			})
 			
 			return {}
-		elseif #p11 == 0 then
+		end
+		if #List == 0 then
 			return {}
-		elseif not p12 then
-			discoveryEventErrorLogger.reportError("CalculateSpanAwareGrids_MissingItemsPerRow", "calculateSpanAwareGrids called without itemsPerRow", { allEntriesCount = #p10, gridConfigsCount = #p11 })
+		end
+		if not ItemsPerRow then
+			DiscoveryEventErrorLogger.reportError("CalculateSpanAwareGrids_MissingItemsPerRow", "calculateSpanAwareGrids called without itemsPerRow", { allEntriesCount = #p3, gridConfigsCount = #List })
 			
 			return {}
-		elseif p12 <= 0 then
-			discoveryEventErrorLogger.reportError("CalculateSpanAwareGrids_InvalidItemsPerRow", "calculateSpanAwareGrids called with invalid itemsPerRow", {
-				allEntriesCount = #p10,
-				gridConfigsCount = #p11,
-				itemsPerRow = p12
+		end
+		if ItemsPerRow <= 0 then
+			DiscoveryEventErrorLogger.reportError("CalculateSpanAwareGrids_InvalidItemsPerRow", "calculateSpanAwareGrids called with invalid itemsPerRow", {
+				allEntriesCount = #p3,
+				gridConfigsCount = #List,
+				itemsPerRow = ItemsPerRow
 			})
 			
 			return {}
 		end
 		local t = {}
-		local var15 = 1
-		local t_1 = {}
+		local NextStartIndex = 1
+		local PendingSpanTiles = {}
 		
-		for i, v in p11 do
-			local maxRows = v.maxRows
+		for _, value in List do
+			local MaxRows = value.maxRows
 			
-			if not maxRows or maxRows <= 0 then
-				maxRows = 1e999
+			if not MaxRows or MaxRows <= 0 then
+				MaxRows = 1e999
 			end
-			local var16 = processOneGrid(p10, var15, t_1, p12, maxRows, p13, p14)
-			t[v.sortKey] = {
-				entryIndices = if fFlagLuaAppEnableNxMRoduxApportioning or p14 then nil else var16.placedIndices,
-				layout = if fFlagLuaAppEnableNxMRoduxApportioning or p14 then var16.layout else nil
+			local ProcessOneGridResult = processOneGrid(p3, NextStartIndex, PendingSpanTiles, ItemsPerRow, MaxRows, p4, p5)
+			t[value.sortKey] = {
+				entryIndices = if FFlagLuaAppEnableNxMRoduxApportioning or p5 then nil else ProcessOneGridResult.placedIndices,
+				layout = if FFlagLuaAppEnableNxMRoduxApportioning or p5 then ProcessOneGridResult.layout else nil
 			}
-			var15 = var16.nextStartIndex
-			t_1 = var16.pendingSpanTiles
+			NextStartIndex = ProcessOneGridResult.nextStartIndex
+			PendingSpanTiles = ProcessOneGridResult.pendingSpanTiles
 		end
 		return t
 	end,

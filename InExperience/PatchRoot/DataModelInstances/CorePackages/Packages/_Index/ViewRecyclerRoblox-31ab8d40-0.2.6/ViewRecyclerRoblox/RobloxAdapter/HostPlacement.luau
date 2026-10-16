@@ -1,311 +1,314 @@
-﻿local viewRecyclerRoblox = script:FindFirstAncestor("ViewRecyclerRoblox")
-local viewRecyclerModule = require(viewRecyclerRoblox.Parent.ViewRecycler)
-local canvasItemPlacerModule = require(viewRecyclerRoblox.RobloxAdapter.CanvasItemPlacer)
-local hostPresentationPhaseModule = require(viewRecyclerRoblox.RobloxAdapter.HostPresentationPhase)
-local measurementBatcherModule = require(viewRecyclerRoblox.RobloxAdapter.MeasurementBatcher)
-local measurerModule = require(viewRecyclerRoblox.RobloxAdapter.Measurer)
-local reparentableHostModule = require(viewRecyclerRoblox.RobloxAdapter.ReparentableHost)
-local shallowTable = viewRecyclerModule.Adapter._Private.ShallowTable
-local frozen = table.freeze({ "key", "generation" })
+﻿local ViewRecyclerRoblox = script:FindFirstAncestor("ViewRecyclerRoblox")
+local CanvasItemPlacerModule = require(ViewRecyclerRoblox.RobloxAdapter.CanvasItemPlacer)
+local HostPresentationPhaseModule = require(ViewRecyclerRoblox.RobloxAdapter.HostPresentationPhase)
+local MeasurementBatcherModule = require(ViewRecyclerRoblox.RobloxAdapter.MeasurementBatcher)
+local MeasurerModule = require(ViewRecyclerRoblox.RobloxAdapter.Measurer)
+local ReparentableHostModule = require(ViewRecyclerRoblox.RobloxAdapter.ReparentableHost)
+local ShallowTable = require(ViewRecyclerRoblox.Parent.ViewRecycler).Adapter._Private.ShallowTable
+local Frozen = table.freeze({ "key", "generation" })
 
 return {
-	new = function(p1)
-		-- upvalues: measurementBatcherModule (ref), reparentableHostModule (ref), canvasItemPlacerModule (ref), measurerModule (ref), shallowTable (ref), frozen (ref), hostPresentationPhaseModule (ref)
-		local t = {
-			container = p1.container,
-			viewportContainer = p1.viewportContainer,
-			axis = p1.axis,
-			selfSizing = p1.selfSizing
+	new = function(Configuration) --[[ Line: 56 ]]
+		-- upvalues: MeasurementBatcherModule (copy), ReparentableHostModule (copy), CanvasItemPlacerModule (copy), MeasurerModule (copy), ShallowTable (copy), Frozen (copy), HostPresentationPhaseModule (copy)
+		local Configuration1 = {
+			container = Configuration.container,
+			viewportContainer = Configuration.viewportContainer,
+			axis = Configuration.axis,
+			selfSizing = Configuration.selfSizing
 		}
-		local t_1 = {}
-		local var1 = measurementBatcherModule.new(p1.onItemMeasurements)
-		local var2 = false
+		local Tbl = {}
+		local NewMeasurementBatcher = MeasurementBatcherModule.new(Configuration.onItemMeasurements)
+		local Flag = false
 		
-		local function _(p2)
-			if p2.measurer ~= nil then
-				p2.measurer.disconnect()
-				p2.measurer = nil
+		local function _(p1) --[[ Line: 67 | Named "disconnectMeasurer" ]]
+			if p1.measurer ~= nil then
+				p1.measurer.disconnect()
+				p1.measurer = nil
 			end
 		end
 		
-		local _ = function(p2)
-			-- upvalues: reparentableHostModule (copy), canvasItemPlacerModule (copy)
-			if p2.host ~= nil then
-				reparentableHostModule.clearSelection(p2.host)
-				canvasItemPlacerModule.detachForTransfer(p2.host, p2.placerState)
-				p2.host = nil
+		local _ = function(p1) --[[ Line: 74 | Named "detachHost" ]]
+			-- upvalues: ReparentableHostModule (upval), CanvasItemPlacerModule (upval)
+			if p1.host ~= nil then
+				ReparentableHostModule.clearSelection(p1.host)
+				CanvasItemPlacerModule.detachForTransfer(p1.host, p1.placerState)
+				p1.host = nil
 			end
-			if p2.measurer ~= nil then
-				p2.measurer.disconnect()
-				p2.measurer = nil
+			if p1.measurer ~= nil then
+				p1.measurer.disconnect()
+				p1.measurer = nil
 			end
-			p2.measurementIdentity = nil
+			p1.measurementIdentity = nil
 		end
 		
-		local function updateMeasurement(p2, p3)
-			-- upvalues: t (write), measurerModule (copy), var1 (ref)
-			p2.measurementIdentity = p3
+		local function updateMeasurement(p1, MeasurementIdentity) --[[ Line: 84 ]]
+			-- upvalues: Configuration1 (ref), MeasurerModule (upval), NewMeasurementBatcher (copy)
+			p1.measurementIdentity = MeasurementIdentity
 			
-			if p3 ~= nil and (t.selfSizing or p3.pinnedPosition ~= nil) then
-				if p2.measurer == nil then
-					p2.measurer = measurerModule.attach({
-						instance = p2.host,
-						axis = t.axis,
-						getIdentity = function()
-							-- upvalues: p2 (ref)
-							return p2.measurementIdentity
+			if MeasurementIdentity ~= nil and (Configuration1.selfSizing or MeasurementIdentity.pinnedPosition ~= nil) then
+				if p1.measurer == nil then
+					p1.measurer = MeasurerModule.attach({
+						instance = p1.host,
+						axis = Configuration1.axis,
+						getIdentity = function() --[[ Line: 96 ]]
+							-- upvalues: p1 (copy)
+							return p1.measurementIdentity
 						end,
-						onItemMeasured = function(p4, p5)
-							-- upvalues: var1 (copy)
-							local cloned = table.clone(p4)
-							cloned.length = p5
-							var1.add(cloned)
+						onItemMeasured = function(Tbl, Length) --[[ Line: 99 ]]
+							-- upvalues: NewMeasurementBatcher (upval)
+							local Copy = table.clone(Tbl)
+							Copy.length = Length
+							NewMeasurementBatcher.add(Copy)
 						end
 					})
 				end
-				p2.measurer.scheduleSettle()
+				p1.measurer.scheduleSettle()
 				
 				return
-			elseif p2.measurer ~= nil then
-				p2.measurer.disconnect()
-				p2.measurer = nil
+			elseif p1.measurer ~= nil then
+				p1.measurer.disconnect()
+				p1.measurer = nil
 			end
 		end
 		
-		local function getEntry(p2)
-			-- upvalues: t_1 (ref), canvasItemPlacerModule (copy)
-			local var3 = t_1[p2]
+		local function getEntry(Key) --[[ Line: 109 ]]
+			-- upvalues: Tbl (copy), CanvasItemPlacerModule (upval)
+			local Entry = Tbl[Key]
 			
-			if var3 == nil then
-				var3 = {
+			if Entry == nil then
+				Entry = {
 					host = nil,
 					hostState = nil,
 					placementIntent = nil,
 					presentedGeneration = nil,
 					measurer = nil,
 					measurementIdentity = nil,
-					placerState = canvasItemPlacerModule.createState(),
+					placerState = CanvasItemPlacerModule.createState(),
 					geometry = {}
 				}
-				t_1[p2] = var3
+				Tbl[Key] = Entry
 			end
-			return var3
+			return Entry
 		end
 		
-		local function reportPresentation(p2, p3, p4)
-			-- upvalues: p1 (ref)
-			local var3 = if p4 == nil then nil else p4.generation
+		local function reportPresentation(p1, p2, p3) --[[ Line: 127 ]]
+			-- upvalues: Configuration (copy)
+			local Generation = if p3 == nil then nil else p3.generation
 			
-			if p3.presentedGeneration == var3 then return end
-			local presentedGeneration = p3.presentedGeneration
-			p3.presentedGeneration = var3
-			local ok, status = pcall(p1.onItemViewPresentationChanged, p2, p4)
+			if p2.presentedGeneration == Generation then return end
+			local PresentedGeneration = p2.presentedGeneration
+			p2.presentedGeneration = Generation
+			local Success, Result = pcall(Configuration.onItemViewPresentationChanged, p1, p3)
 			
-			if not ok then
-				if p3.presentedGeneration == var3 then
-					p3.presentedGeneration = presentedGeneration
+			if not Success then
+				if p2.presentedGeneration == Generation then
+					p2.presentedGeneration = PresentedGeneration
 				end
-				error(status, 0)
+				error(Result, 0)
 			end
 		end
 		
-		local function applyPhysical(p2, p3)
-			-- upvalues: reparentableHostModule (copy), canvasItemPlacerModule (copy), p1 (ref), shallowTable (copy), frozen (copy), t (write), hostPresentationPhaseModule (copy), updateMeasurement (ref), reportPresentation (ref)
-			local hostState = p3.hostState
-			local placementIntent = p3.placementIntent
+		local function applyPhysical(p1, p2) --[[ Line: 143 ]]
+			-- upvalues: ReparentableHostModule (upval), CanvasItemPlacerModule (upval), Configuration (copy), ShallowTable (upval), Frozen (upval), Configuration1 (ref), HostPresentationPhaseModule (upval), updateMeasurement (copy), reportPresentation (copy)
+			local HostState = p2.hostState
+			local PlacementIntent = p2.placementIntent
 			
-			if hostState == nil then
-				if p3.host ~= nil then
-					reparentableHostModule.clearSelection(p3.host)
-					canvasItemPlacerModule.detachForTransfer(p3.host, p3.placerState)
-					p3.host = nil
+			if HostState == nil then
+				if p2.host ~= nil then
+					ReparentableHostModule.clearSelection(p2.host)
+					CanvasItemPlacerModule.detachForTransfer(p2.host, p2.placerState)
+					p2.host = nil
 				end
-				if p3.measurer ~= nil then
-					p3.measurer.disconnect()
-					p3.measurer = nil
+				if p2.measurer ~= nil then
+					p2.measurer.disconnect()
+					p2.measurer = nil
 				end
-				p3.measurementIdentity = nil
+				p2.measurementIdentity = nil
 				
-				if p3.presentedGeneration == nil then return end
-				local presentedGeneration = p3.presentedGeneration
-				p3.presentedGeneration = nil
-				local ok, status = pcall(p1.onItemViewPresentationChanged, p2, nil)
+				if p2.presentedGeneration == nil then return end
+				local PresentedGeneration = p2.presentedGeneration
+				p2.presentedGeneration = nil
+				local Success, Result = pcall(Configuration.onItemViewPresentationChanged, p1, nil)
 				
-				if not ok then
-					if p3.presentedGeneration == nil then
-						p3.presentedGeneration = presentedGeneration
+				if not Success then
+					if p2.presentedGeneration == nil then
+						p2.presentedGeneration = PresentedGeneration
 					end
-					error(status, 0)
+					error(Result, 0)
 				end
 				return
 			else
-				local assignment = hostState.assignment
-				local host = hostState.host
+				local Assignment = HostState.assignment
+				local Host = HostState.host
 				
-				if assignment == nil or host == nil then
-					if p3.host ~= nil then
-						reparentableHostModule.clearSelection(p3.host)
-						canvasItemPlacerModule.detachForTransfer(p3.host, p3.placerState)
-						p3.host = nil
+				if Assignment == nil or Host == nil then
+					if p2.host ~= nil then
+						ReparentableHostModule.clearSelection(p2.host)
+						CanvasItemPlacerModule.detachForTransfer(p2.host, p2.placerState)
+						p2.host = nil
 					end
-					if p3.measurer ~= nil then
-						p3.measurer.disconnect()
-						p3.measurer = nil
+					if p2.measurer ~= nil then
+						p2.measurer.disconnect()
+						p2.measurer = nil
 					end
-					p3.measurementIdentity = nil
+					p2.measurementIdentity = nil
 					
-					if p3.presentedGeneration == nil then return end
-					local presentedGeneration = p3.presentedGeneration
-					p3.presentedGeneration = nil
-					local ok, status = pcall(p1.onItemViewPresentationChanged, p2, nil)
+					if p2.presentedGeneration == nil then return end
+					local PresentedGeneration = p2.presentedGeneration
+					p2.presentedGeneration = nil
+					local Success1, Result1 = pcall(Configuration.onItemViewPresentationChanged, p1, nil)
 					
-					if not ok then
-						if p3.presentedGeneration == nil then
-							p3.presentedGeneration = presentedGeneration
+					if not Success1 then
+						if p2.presentedGeneration == nil then
+							p2.presentedGeneration = PresentedGeneration
 						end
-						error(status, 0)
+						error(Result1, 0)
 					end
 					return
-				elseif placementIntent == nil then return end
-				if shallowTable.containsEqual(placementIntent.assignment, assignment, frozen) then
-					if p3.host ~= nil and p3.host ~= host then
-						if p3.host ~= nil then
-							reparentableHostModule.clearSelection(p3.host)
-							canvasItemPlacerModule.detachForTransfer(p3.host, p3.placerState)
-							p3.host = nil
-						end
-						if p3.measurer ~= nil then
-							p3.measurer.disconnect()
-							p3.measurer = nil
-						end
-						p3.measurementIdentity = nil
-					end
-					local container = t.container
-					local canvasPlacement = placementIntent.canvasPlacement
-					local viewportPlacement = placementIntent.viewportPlacement
-					local var3 = viewportPlacement ~= nil and t.viewportContainer ~= nil
-					local var4 = if var3 then viewportPlacement else canvasPlacement
-					
-					if var3 then
-						container = t.viewportContainer
-					end
-					if container == nil then
-						if p3.host ~= nil then
-							reparentableHostModule.clearSelection(p3.host)
-							canvasItemPlacerModule.detachForTransfer(p3.host, p3.placerState)
-							p3.host = nil
-						end
-						if p3.measurer ~= nil then
-							p3.measurer.disconnect()
-							p3.measurer = nil
-						end
-						p3.measurementIdentity = nil
-						
-						if p3.presentedGeneration == nil then return end
-						local presentedGeneration = p3.presentedGeneration
-						p3.presentedGeneration = nil
-						local ok, status = pcall(p1.onItemViewPresentationChanged, p2, nil)
-						
-						if not ok then
-							if p3.presentedGeneration == nil then
-								p3.presentedGeneration = presentedGeneration
+				else
+					if PlacementIntent == nil then return end
+					if ShallowTable.containsEqual(PlacementIntent.assignment, Assignment, Frozen) then
+						if p2.host ~= nil and p2.host ~= Host then
+							if p2.host ~= nil then
+								ReparentableHostModule.clearSelection(p2.host)
+								CanvasItemPlacerModule.detachForTransfer(p2.host, p2.placerState)
+								p2.host = nil
 							end
-							error(status, 0)
+							if p2.measurer ~= nil then
+								p2.measurer.disconnect()
+								p2.measurer = nil
+							end
+							p2.measurementIdentity = nil
 						end
-						return
+						local Container = Configuration1.container
+						local CanvasPlacement = PlacementIntent.canvasPlacement
+						local ViewportPlacement = PlacementIntent.viewportPlacement
+						local HasViewportContainer: boolean = ViewportPlacement ~= nil and Configuration1.viewportContainer ~= nil
+						local ViewportPlacement1 = if HasViewportContainer then ViewportPlacement else CanvasPlacement
+						
+						if HasViewportContainer then
+							Container = Configuration1.viewportContainer
+						end
+						if Container == nil then
+							if p2.host ~= nil then
+								ReparentableHostModule.clearSelection(p2.host)
+								CanvasItemPlacerModule.detachForTransfer(p2.host, p2.placerState)
+								p2.host = nil
+							end
+							if p2.measurer ~= nil then
+								p2.measurer.disconnect()
+								p2.measurer = nil
+							end
+							p2.measurementIdentity = nil
+							
+							if p2.presentedGeneration == nil then return end
+							local PresentedGeneration = p2.presentedGeneration
+							p2.presentedGeneration = nil
+							local Success3, Result3 = pcall(Configuration.onItemViewPresentationChanged, p1, nil)
+							
+							if not Success3 then
+								if p2.presentedGeneration == nil then
+									p2.presentedGeneration = PresentedGeneration
+								end
+								error(Result3, 0)
+							end
+							return
+						else
+							local Geometry = CanvasItemPlacerModule.getGeometry(PlacementIntent.itemLayout, ViewportPlacement1, Configuration1.axis, Configuration1.selfSizing or Assignment.index == nil, if HasViewportContainer then 0 else PlacementIntent.contentStartOffset, p2.geometry)
+							
+							if not HostState.visible then
+								ReparentableHostModule.clearSelection(Host)
+							end
+							CanvasItemPlacerModule.place(Host, Container, Geometry, p2.placerState, HostState.visible)
+							p2.host = Host
+							local IsPhaseMatch: boolean = HostState.visible and HostState.phase == HostPresentationPhaseModule.Presented
+							local MeasurementIdentity = PlacementIntent.measurementIdentity
+							updateMeasurement(p2, if IsPhaseMatch and MeasurementIdentity ~= nil then table.clone(MeasurementIdentity) else nil)
+							reportPresentation(p1, p2, if IsPhaseMatch then Assignment else nil)
+							
+							return
+						end
 					else
-						local geometry = canvasItemPlacerModule.getGeometry(placementIntent.itemLayout, var4, t.axis, t.selfSizing or assignment.index == nil, if var3 then 0 else placementIntent.contentStartOffset, p3.geometry)
-						
-						if not hostState.visible then
-							reparentableHostModule.clearSelection(host)
+						if not HostState.visible and p2.host ~= nil then
+							ReparentableHostModule.clearSelection(p2.host)
+							CanvasItemPlacerModule.hide(p2.host, p2.placerState)
+							
+							if p2.measurer ~= nil then
+								p2.measurer.disconnect()
+								p2.measurer = nil
+							end
+							p2.measurementIdentity = nil
+							
+							if p2.presentedGeneration == nil then return end
+							local PresentedGeneration = p2.presentedGeneration
+							p2.presentedGeneration = nil
+							local Success2, Result2 = pcall(Configuration.onItemViewPresentationChanged, p1, nil)
+							
+							if not Success2 then
+								if p2.presentedGeneration == nil then
+									p2.presentedGeneration = PresentedGeneration
+								end
+								error(Result2, 0)
+							end
 						end
-						canvasItemPlacerModule.place(host, container, geometry, p3.placerState, hostState.visible)
-						p3.host = host
-						local var5 = hostState.visible and hostState.phase == hostPresentationPhaseModule.Presented
-						local measurementIdentity = placementIntent.measurementIdentity
-						updateMeasurement(p3, if var5 and measurementIdentity ~= nil then table.clone(measurementIdentity) else nil)
-						reportPresentation(p2, p3, if var5 then assignment else nil)
-						
-						return
-					end
-				elseif not hostState.visible and p3.host ~= nil then
-					reparentableHostModule.clearSelection(p3.host)
-					canvasItemPlacerModule.hide(p3.host, p3.placerState)
-					
-					if p3.measurer ~= nil then
-						p3.measurer.disconnect()
-						p3.measurer = nil
-					end
-					p3.measurementIdentity = nil
-					
-					if p3.presentedGeneration == nil then return end
-					local presentedGeneration = p3.presentedGeneration
-					p3.presentedGeneration = nil
-					local ok, status = pcall(p1.onItemViewPresentationChanged, p2, nil)
-					
-					if not ok then
-						if p3.presentedGeneration == nil then
-							p3.presentedGeneration = presentedGeneration
-						end
-						error(status, 0)
 					end
 				end
 			end
 		end
 		
 		return {
-			applyHostState = function(p2, p3)
-				-- upvalues: var2 (write), getEntry (ref), applyPhysical (ref)
-				assert(not var2, "HostPlacement: cannot apply Host state after destroy")
-				local var3 = getEntry(p2)
-				var3.hostState = p3
-				applyPhysical(p2, var3)
+			applyHostState = function(p1, HostState) --[[ Line: 213 ]]
+				-- upvalues: Flag (ref), getEntry (copy), applyPhysical (copy)
+				assert(not Flag, "HostPlacement: cannot apply Host state after destroy")
+				local Entry = getEntry(p1)
+				Entry.hostState = HostState
+				applyPhysical(p1, Entry)
 			end,
-			applyPlacementIntent = function(p2, p3)
-				-- upvalues: var2 (write), getEntry (ref), applyPhysical (ref)
-				assert(not var2, "HostPlacement: cannot apply Placement intent after destroy")
-				local var3 = getEntry(p2)
-				var3.placementIntent = p3
-				applyPhysical(p2, var3)
+			applyPlacementIntent = function(p1, PlacementIntent) --[[ Line: 219 ]]
+				-- upvalues: Flag (ref), getEntry (copy), applyPhysical (copy)
+				assert(not Flag, "HostPlacement: cannot apply Placement intent after destroy")
+				local Entry = getEntry(p1)
+				Entry.placementIntent = PlacementIntent
+				applyPhysical(p1, Entry)
 			end,
-			setConfiguration = function(value)
-				-- upvalues: var2 (write), t (write), t_1 (ref), applyPhysical (ref)
-				if not var2 then
-					local var3 = t.axis ~= value.axis
-					t = value
+			setConfiguration = function(Value) --[[ Line: 225 ]]
+				-- upvalues: Flag (ref), Configuration1 (ref), Tbl (copy), applyPhysical (copy)
+				if not Flag then
+					local IsNotAxisMatch = Configuration1.axis ~= Value.axis
+					Configuration1 = Value
 					
-					for i, v in t_1 do
-						if var3 and v.measurer ~= nil then
-							v.measurer.disconnect()
-							v.measurer = nil
+					for i, value in Tbl do
+						if IsNotAxisMatch and value.measurer ~= nil then
+							value.measurer.disconnect()
+							value.measurer = nil
 						end
-						applyPhysical(i, v)
+						applyPhysical(i, value)
 					end
 				end
 			end,
-			cancelPendingMeasurements = function()
-				-- upvalues: var1 (ref)
-				var1.cancelPending()
+			cancelPendingMeasurements = function() --[[ Line: 237 ]]
+				-- upvalues: NewMeasurementBatcher (copy)
+				NewMeasurementBatcher.cancelPending()
 			end,
-			destroy = function()
-				-- upvalues: var2 (write), var1 (ref), t_1 (ref), reparentableHostModule (copy), canvasItemPlacerModule (copy)
-				if var2 then return end
-				var2 = true
-				var1.destroy()
+			destroy = function() --[[ Line: 240 ]]
+				-- upvalues: Flag (ref), NewMeasurementBatcher (copy), Tbl (copy), ReparentableHostModule (upval), CanvasItemPlacerModule (upval)
+				if Flag then return end
+				Flag = true
+				NewMeasurementBatcher.destroy()
 				
-				for i, v in t_1 do
-					if v.host ~= nil then
-						reparentableHostModule.clearSelection(v.host)
-						canvasItemPlacerModule.detachForTransfer(v.host, v.placerState)
-						v.host = nil
+				for _, value in Tbl do
+					if value.host ~= nil then
+						ReparentableHostModule.clearSelection(value.host)
+						CanvasItemPlacerModule.detachForTransfer(value.host, value.placerState)
+						value.host = nil
 					end
-					if v.measurer ~= nil then
-						v.measurer.disconnect()
-						v.measurer = nil
+					if value.measurer ~= nil then
+						value.measurer.disconnect()
+						value.measurer = nil
 					end
-					v.measurementIdentity = nil
+					value.measurementIdentity = nil
 				end
-				table.clear(t_1)
+				table.clear(Tbl)
 			end
 		}
 	end

@@ -1,20 +1,20 @@
 ﻿return {
-	findFirstDescendant = function(p1, p2, p3)
-		for i, v in p1:GetDescendants() do
-			if v:IsA(p2) and (p3 == nil or p3(v)) then
-				return v
+	findFirstDescendant = function(Object, ClassName, Callback) --[[ Line: 1 ]]
+		for _, descendant in Object:GetDescendants() do
+			if descendant:IsA(ClassName) and (Callback == nil or Callback(descendant)) then
+				return descendant
 			end
 		end
 		return nil
 	end,
-	findAllDescendants = function(p4, p5)
-		local t = {}
+	findAllDescendants = function(Object, ClassName) --[[ Line: 14 ]]
+		local List = {}
 		
-		for i, v in p4:GetDescendants() do
-			if v:IsA(p5) then
-				table.insert(t, v)
+		for _, descendant in Object:GetDescendants() do
+			if descendant:IsA(ClassName) then
+				table.insert(List, descendant)
 			end
 		end
-		return t
+		return List
 	end
 }

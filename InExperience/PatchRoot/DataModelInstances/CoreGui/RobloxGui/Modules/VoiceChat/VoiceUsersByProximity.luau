@@ -1,73 +1,76 @@
 ﻿local _ = require(script.Parent.VoiceChatServiceManager)
 
-local function _(p1)
-	return p1 and (p1.Character and p1.Character.PrimaryPart)
+local function _(Player: Player) --[[ Line: 4 | Named "getPlayerPrimaryPart" ]]
+	return Player and (Player.Character and Player.Character.PrimaryPart)
 end
 
-local _ = function(p1, p2)
-	local primaryPart = p1 and (p1.Character and p1.Character.PrimaryPart)
+local _ = function(Player: Player, p1) --[[ Line: 8 | Named "getPlayerDistanceFrom" ]]
+	local PrimaryPart = Player and (Player.Character and Player.Character.PrimaryPart)
 	
-	return if primaryPart then (primaryPart.Position - p2).Magnitude else nil
+	return if PrimaryPart then (PrimaryPart.Position - p1).Magnitude else nil
 end
 
 return {
-	getComparator = function(p1)
-		return function(p2, p3)
-			-- upvalues: p1 (ref)
-			local primaryPart = p2 and (p2.Character and p2.Character.PrimaryPart)
-			local primaryPart_1 = p3 and (p3.Character and p3.Character.PrimaryPart)
+	getComparator = function(p1) --[[ Line: 19 ]]
+		return function(Player: Player, Player1: Player): boolean --[[ Line: 20 ]]
+			-- upvalues: p1 (copy)
+			local PrimaryPart = Player and (Player.Character and Player.Character.PrimaryPart)
+			local PrimaryPart1 = Player1 and (Player1.Character and Player1.Character.PrimaryPart)
 			
-			if not primaryPart and not primaryPart_1 then
-				return p2.Name:lower() < p3.Name:lower()
-			elseif primaryPart and not primaryPart_1 then
+			if not PrimaryPart and not PrimaryPart1 then
+				return Player.Name:lower() < Player1.Name:lower()
+			elseif PrimaryPart and not PrimaryPart1 then
 				return true
-			elseif primaryPart or not primaryPart_1 then
-				local primaryPart_2 = p2 and (p2.Character and p2.Character.PrimaryPart)
-				local primaryPart_3 = p3 and (p3.Character and p3.Character.PrimaryPart)
+			elseif PrimaryPart or not PrimaryPart1 then
+				local PrimaryPart2 = Player and (Player.Character and Player.Character.PrimaryPart)
+				local PrimaryPart21 = Player1 and (Player1.Character and Player1.Character.PrimaryPart)
 				
-				return (if primaryPart_2 then (primaryPart_2.Position - p1).Magnitude else nil) < (if primaryPart_3 then (primaryPart_3.Position - p1).Magnitude else nil)
+				return (if PrimaryPart2 then (PrimaryPart2.Position - p1).Magnitude else nil) < (if PrimaryPart21 then (PrimaryPart21.Position - p1).Magnitude else nil)
+			else
+				return false
 			end
-			return false
 		end
 	end,
-	getSortedPlayers = function(p1, p2, p3, p4, p5, p6, p7)
-		local t = {}
+	getSortedPlayers = function(Players, p1, p2, p3, p4, Player, p5) --[[ Line: 41 ]]
+		local List = {}
 		
-		local var1 = function(p8, p9)
-			-- upvalues: p3 (ref)
-			local primaryPart = p8 and (p8.Character and p8.Character.PrimaryPart)
-			local primaryPart_1 = p9 and (p9.Character and p9.Character.PrimaryPart)
+		local function v9(Player: Player, Player1: Player): boolean --[[ Line: 20 ]]
+			-- upvalues: p2 (copy)
+			local PrimaryPart = Player and (Player.Character and Player.Character.PrimaryPart)
+			local PrimaryPart1 = Player1 and (Player1.Character and Player1.Character.PrimaryPart)
 			
-			if not primaryPart and not primaryPart_1 then
-				return p8.Name:lower() < p9.Name:lower()
-			elseif primaryPart and not primaryPart_1 then
+			if not PrimaryPart and not PrimaryPart1 then
+				return Player.Name:lower() < Player1.Name:lower()
+			elseif PrimaryPart and not PrimaryPart1 then
 				return true
-			elseif primaryPart or not primaryPart_1 then
-				local primaryPart_2 = p8 and (p8.Character and p8.Character.PrimaryPart)
-				local primaryPart_3 = p9 and (p9.Character and p9.Character.PrimaryPart)
+			elseif PrimaryPart or not PrimaryPart1 then
+				local PrimaryPart2 = Player and (Player.Character and Player.Character.PrimaryPart)
+				local PrimaryPart21 = Player1 and (Player1.Character and Player1.Character.PrimaryPart)
 				
-				return (if primaryPart_2 then (primaryPart_2.Position - p3).Magnitude else nil) < (if primaryPart_3 then (primaryPart_3.Position - p3).Magnitude else nil)
+				return (if PrimaryPart2 then (PrimaryPart2.Position - p2).Magnitude else nil) < (if PrimaryPart21 then (PrimaryPart21.Position - p2).Magnitude else nil)
+			else
+				return false
 			end
-			return false
 		end
 		
-		for i, v in pairs(p2.participants) do
-			local var2 = p1:GetPlayerByUserId(i)
+		for UserId, _ in pairs(p1.participants) do
+			local Player1 = Players:GetPlayerByUserId(UserId)
 			
-			if var2 and p6 ~= var2 and (p7 or var2 and (var2.Character and var2.Character.PrimaryPart)) then
-				if p4 and var2 then
-					local primaryPart = var2 and (var2.Character and var2.Character.PrimaryPart)
+			if Player1 and Player ~= Player1 and (p5 or Player1 and (Player1.Character and Player1.Character.PrimaryPart)) then
+				if p3 and Player1 then
+					local PrimaryPart = Player1 and (Player1.Character and Player1.Character.PrimaryPart)
 					
-					if p4 >= (if primaryPart then (primaryPart.Position - p3).Magnitude else nil) then
-						if not p5 or p2:getRecentUsersInteractionData()[tostring(var2.UserId)] then
-							table.insert(t, var2)
-						end
+					if p3 < (if PrimaryPart then (PrimaryPart.Position - p2).Magnitude else nil) then
+						continue
 					end
+				end
+				if not p4 or p1:getRecentUsersInteractionData()[tostring(Player1.UserId)] then
+					table.insert(List, Player1)
 				end
 			end
 		end
-		table.sort(t, var1)
+		table.sort(List, v9)
 		
-		return t
+		return List
 	end
 }

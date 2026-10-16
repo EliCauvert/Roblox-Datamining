@@ -1,37 +1,36 @@
-﻿local parent = script:FindFirstAncestor("ShareSheet").Parent
-local foundationModule = require(parent.Foundation)
-local inExperienceLocalesModule = require(parent.InExperienceLocales)
-local localizationModule = require(parent.Localization)
-local reactModule = require(parent.React)
-local reactRobloxModule = require(parent.ReactRoblox)
-local signalsReactModule = require(parent.SignalsReact)
-local universalShareSheetHostModule = require(script.Parent.Components.UniversalShareSheet.UniversalShareSheetHost)
-local getLocalizationServiceStore = localizationModule.GetLocalizationServiceStore
-local localization = inExperienceLocalesModule.Localization
-local localizationProvider = localizationModule.LocalizationProvider
+﻿local Parent = script:FindFirstAncestor("ShareSheet").Parent
+local FoundationModule = require(Parent.Foundation)
+local LocalizationModule = require(Parent.Localization)
+local ReactModule = require(Parent.React)
+local ReactRobloxModule = require(Parent.ReactRoblox)
+local SignalsReactModule = require(Parent.SignalsReact)
+local UniversalShareSheetHostModule = require(script.Parent.Components.UniversalShareSheet.UniversalShareSheetHost)
+local GetLocalizationServiceStoreFunction = LocalizationModule.GetLocalizationServiceStore
+local Localization = require(Parent.InExperienceLocales).Localization
+local LocalizationProvider = LocalizationModule.LocalizationProvider
 
-local function UniversalShareSheetScreenGui()
-	-- upvalues: reactModule (ref), getLocalizationServiceStore (ref), signalsReactModule (ref), localization (ref), foundationModule (ref), localizationProvider (ref), universalShareSheetHostModule (ref)
-	local var1, var2 = reactModule.useState(nil)
-	local var3 = signalsReactModule.useSignalState(getLocalizationServiceStore().getRobloxLocaleId)
+local function UniversalShareSheetScreenGui() --[[ Line: 22 ]]
+	-- upvalues: ReactModule (copy), GetLocalizationServiceStoreFunction (copy), SignalsReactModule (copy), Localization (copy), FoundationModule (copy), LocalizationProvider (copy), UniversalShareSheetHostModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(GetLocalizationServiceStoreFunction().getRobloxLocaleId)
 	
-	return reactModule.createElement("ScreenGui", {
+	return ReactModule.createElement("ScreenGui", {
 		DisplayOrder = 15,
 		IgnoreGuiInset = true,
 		Name = "UniversalShareSheetScreenGui",
 		ResetOnSpawn = false,
 		ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
-		ref = var2
+		ref = UseStateResult2
 	}, {
-		FoundationProvider = reactModule.createElement(foundationModule.FoundationProvider, { colorMode = foundationModule.Enums.ColorMode.Dark }, {
-			LocalizationProvider = reactModule.createElement(localizationProvider, {
-				localization = reactModule.useMemo(function()
-					-- upvalues: localization (copy), var3 (ref)
-					return localization.new(var3)
-				end, { var3 })
+		FoundationProvider = ReactModule.createElement(FoundationModule.FoundationProvider, { colorMode = FoundationModule.Enums.ColorMode.Dark }, {
+			LocalizationProvider = ReactModule.createElement(LocalizationProvider, {
+				localization = ReactModule.useMemo(function() --[[ Line: 26 ]]
+					-- upvalues: Localization (upval), UseSignalStateResult (copy)
+					return Localization.new(UseSignalStateResult)
+				end, { UseSignalStateResult })
 			}, {
-				OverlayProvider = if var1 ~= nil then nil else reactModule.createElement(foundationModule.OverlayProvider, { gui = var1 }, {
-					Host = reactModule.createElement(universalShareSheetHostModule)
+				OverlayProvider = if UseStateResult == nil then nil else ReactModule.createElement(FoundationModule.OverlayProvider, { gui = UseStateResult }, {
+					Host = ReactModule.createElement(UniversalShareSheetHostModule)
 				})
 			})
 		})
@@ -39,14 +38,14 @@ local function UniversalShareSheetScreenGui()
 end
 
 return {
-	mount = function(p1)
-		-- upvalues: reactRobloxModule (ref), reactModule (ref), UniversalShareSheetScreenGui (ref)
-		local universalShareSheetScreenGuiRoot = Instance.new("Folder")
-		universalShareSheetScreenGuiRoot.Name = "UniversalShareSheetScreenGuiRoot"
-		universalShareSheetScreenGuiRoot.Parent = p1
-		local var1 = reactRobloxModule.createRoot(universalShareSheetScreenGuiRoot)
-		var1:render(reactModule.createElement(UniversalShareSheetScreenGui))
+	mount = function(Parent) --[[ Line: 56 ]]
+		-- upvalues: ReactRobloxModule (copy), ReactModule (copy), UniversalShareSheetScreenGui (copy)
+		local UniversalShareSheetScreenGuiRoot = Instance.new("Folder")
+		UniversalShareSheetScreenGuiRoot.Name = "UniversalShareSheetScreenGuiRoot"
+		UniversalShareSheetScreenGuiRoot.Parent = Parent
+		local Root = ReactRobloxModule.createRoot(UniversalShareSheetScreenGuiRoot)
+		Root:render(ReactModule.createElement(UniversalShareSheetScreenGui))
 		
-		return var1
+		return Root
 	end
 }

@@ -1,48 +1,48 @@
-﻿local fireEventStreamModule = require(script.Parent.fireEventStream)
-local fireDiagModule = require(script.Parent.fireDiag)
-local fireTelemetryModule = require(script.Parent.fireTelemetry)
+﻿local FireEventStreamModule = require(script.Parent.fireEventStream)
+local FireDiagModule = require(script.Parent.fireDiag)
+local FireTelemetryModule = require(script.Parent.fireTelemetry)
 local _ = require(script.Parent.Parent.Types)
 
-local function setupFireEvent(value, p1)
-	-- upvalues: fireEventStreamModule (ref), fireDiagModule (ref), fireTelemetryModule (ref)
-	local var1 = if value.analytics.EventStream and p1.EventStream then fireEventStreamModule({
-		eventStreamImpl = value.analytics.EventStream,
-		eventList = p1.EventStream,
-		infoForAllEvents = value.infoForAllEvents,
-		getInfoForAllEvents = value.getInfoForAllEvents,
-		loggerImpl = value.loggerImpl
+local function setupFireEvent(p1, p2) --[[ Line: 23 ]]
+	-- upvalues: FireEventStreamModule (copy), FireDiagModule (copy), FireTelemetryModule (copy)
+	local FireEventStreamModuleResult = if p1.analytics.EventStream and p2.EventStream then FireEventStreamModule({
+		eventStreamImpl = p1.analytics.EventStream,
+		eventList = p2.EventStream,
+		infoForAllEvents = p1.infoForAllEvents,
+		getInfoForAllEvents = p1.getInfoForAllEvents,
+		loggerImpl = p1.loggerImpl
 	}) else nil
-	local var2 = if value.analytics.Diag and p1.Diag then fireDiagModule({
-		diagImpl = value.analytics.Diag,
-		eventList = p1.Diag,
-		loggerImpl = value.loggerImpl
+	local FireDiagModuleResult = if p1.analytics.Diag and p2.Diag then FireDiagModule({
+		diagImpl = p1.analytics.Diag,
+		eventList = p2.Diag,
+		loggerImpl = p1.loggerImpl
 	}) else nil
-	local var3 = if value.analytics.Telemetry and p1.Telemetry then fireTelemetryModule({
-		telemetryImpl = value.analytics.Telemetry,
-		eventList = p1.Telemetry,
-		getInfoForAllEvents = value.getInfoForAllEvents,
-		loggerImpl = value.loggerImpl
+	local FireTelemetryModuleResult = if p1.analytics.Telemetry and p2.Telemetry then FireTelemetryModule({
+		telemetryImpl = p1.analytics.Telemetry,
+		eventList = p2.Telemetry,
+		getInfoForAllEvents = p1.getInfoForAllEvents,
+		loggerImpl = p1.loggerImpl
 	}) else nil
 	
-	return function(p2, p3)
-		-- upvalues: var2 (ref), p1 (ref), var1 (ref), var3 (ref)
-		if var2 and p1.Diag and p1.Diag[p2] then
-			var2(p2, p3)
+	return function(p3, p4) --[[ Line: 51 ]]
+		-- upvalues: FireDiagModuleResult (copy), p2 (copy), FireEventStreamModuleResult (copy), FireTelemetryModuleResult (copy)
+		if FireDiagModuleResult and p2.Diag and p2.Diag[p3] then
+			FireDiagModuleResult(p3, p4)
 		end
-		if var1 and p1.EventStream and p1.EventStream[p2] then
-			var1(p2, p3)
+		if FireEventStreamModuleResult and p2.EventStream and p2.EventStream[p3] then
+			FireEventStreamModuleResult(p3, p4)
 		end
-		if var3 and p1.Telemetry and p1.Telemetry[p2] then
-			var3(p2, p3)
+		if FireTelemetryModuleResult and p2.Telemetry and p2.Telemetry[p3] then
+			FireTelemetryModuleResult(p3, p4)
 		end
-		return p2, p3
+		return p3, p4
 	end
 end
 
-return function(p1)
-	-- upvalues: setupFireEvent (ref)
-	return function(p2)
-		-- upvalues: setupFireEvent (copy), p1 (ref)
-		return setupFireEvent(p2, p1)
+return function(p1) --[[ Line: 72 | Named "createFireEvent" ]]
+	-- upvalues: setupFireEvent (copy)
+	return function(p2) --[[ Line: 73 ]]
+		-- upvalues: setupFireEvent (upval), p1 (copy)
+		return (setupFireEvent(p2, p1))
 	end
 end

@@ -1,12 +1,12 @@
-﻿local captureService = game:GetService("CaptureService")
-local enableVideoCaptureApiLuaEngineFeature = game:GetEngineFeature("EnableVideoCaptureApiLua")
+﻿local CaptureService = game:GetService("CaptureService")
+local EnableVideoCaptureApiLuaEngineFeature = game:GetEngineFeature("EnableVideoCaptureApiLua")
 
-return function()
-	-- upvalues: enableVideoCaptureApiLuaEngineFeature (ref), captureService (ref)
-	return function(_)
-		-- upvalues: enableVideoCaptureApiLuaEngineFeature (copy), captureService (copy)
-		if enableVideoCaptureApiLuaEngineFeature then
-			captureService:StopVideoCaptureInternal()
+return function() --[[ Line: 5 ]]
+	-- upvalues: EnableVideoCaptureApiLuaEngineFeature (copy), CaptureService (copy)
+	return function(_) --[[ Line: 6 ]]
+		-- upvalues: EnableVideoCaptureApiLuaEngineFeature (upval), CaptureService (upval)
+		if EnableVideoCaptureApiLuaEngineFeature then
+			CaptureService:StopVideoCaptureInternal()
 		end
 	end
 end

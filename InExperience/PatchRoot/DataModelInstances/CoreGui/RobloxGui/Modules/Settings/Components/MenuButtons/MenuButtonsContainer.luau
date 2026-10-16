@@ -1,20 +1,20 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local localizationService = game:GetService("LocalizationService")
-local reactModule = require(corePackagesService.Packages.React)
-local _ = require(corePackagesService.Packages.Signals)
-local localization = require(corePackagesService.Workspace.Packages.InExperienceLocales).Localization
-local localizationProvider = require(corePackagesService.Workspace.Packages.Localization).LocalizationProvider
-local foundationModule = require(corePackagesService.Packages.Foundation)
-local foundationProvider = foundationModule.FoundationProvider
-local menuButtonsModule = require(script.Parent.MenuButtons)
+﻿local CorePackages = game:GetService("CorePackages")
+local LocalizationService = game:GetService("LocalizationService")
+local ReactModule = require(CorePackages.Packages.React)
+local _ = require(CorePackages.Packages.Signals)
+local Localization = require(CorePackages.Workspace.Packages.InExperienceLocales).Localization
+local LocalizationProvider = require(CorePackages.Workspace.Packages.Localization).LocalizationProvider
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local FoundationProvider = FoundationModule.FoundationProvider
+local MenuButtonsModule = require(script.Parent.MenuButtons)
 
-return function(p1)
-	-- upvalues: localization (ref), localizationService (ref), reactModule (ref), localizationProvider (ref), foundationProvider (ref), foundationModule (ref), menuButtonsModule (ref)
-	return reactModule.createElement(localizationProvider, {
-		localization = localization.new(localizationService.RobloxLocaleId)
+return function(p1) --[[ Line: 27 | Named "Container" ]]
+	-- upvalues: Localization (copy), LocalizationService (copy), ReactModule (copy), LocalizationProvider (copy), FoundationProvider (copy), FoundationModule (copy), MenuButtonsModule (copy)
+	return ReactModule.createElement(LocalizationProvider, {
+		localization = Localization.new(LocalizationService.RobloxLocaleId)
 	}, {
-		FoundationProvider = reactModule.createElement(foundationProvider, { colorMode = foundationModule.Enums.ColorMode.Dark }, {
-			MenuButtons = reactModule.createElement(menuButtonsModule, p1)
+		FoundationProvider = ReactModule.createElement(FoundationProvider, { colorMode = FoundationModule.Enums.ColorMode.Dark }, {
+			MenuButtons = ReactModule.createElement(MenuButtonsModule, p1)
 		})
 	})
 end

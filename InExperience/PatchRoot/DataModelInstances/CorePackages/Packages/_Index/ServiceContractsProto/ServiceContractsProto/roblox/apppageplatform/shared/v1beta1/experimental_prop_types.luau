@@ -1,605 +1,477 @@
-﻿local protoModule = require(script.Parent.Parent.Parent.Parent.Parent.proto)
-local typeRegistryModule = require(script.Parent.Parent.Parent.Parent.Parent.proto.typeRegistry)
-local t = {}
-local propTypesModule = require(script.Parent.prop_types)
-local propTypesEngineModule = require(script.Parent.prop_types_engine)
-local t_1 = {}
-t_1.__index = t_1
+﻿local ProtoModule = require(script.Parent.Parent.Parent.Parent.Parent.proto)
+local TypeRegistryModule = require(script.Parent.Parent.Parent.Parent.Parent.proto.typeRegistry)
+local PropTypesModule = require(script.Parent.prop_types)
+local PropTypesEngineModule = require(script.Parent.prop_types_engine)
+local Module = {}
+Module.__index = Module
 
-function t_1.new(p1)
-	-- upvalues: t_1 (ref)
-	return setmetatable({
+function Module.new(p1) --[[ Line: 162 ]]
+	-- upvalues: Module (copy)
+	return (setmetatable({
 		prop_builder = if p1 == nil or p1.prop_builder == nil then nil else p1.prop_builder,
 		oneof_prop = if p1 == nil or p1.oneof_prop == nil then nil else p1.oneof_prop
-	}, t_1)
+	}, Module))
 end
 
-function t_1:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var1 = 0
+function Module:encode() --[[ Line: 169 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.prop_builder ~= nil then
-		local var2, var3 = protoModule.writeTag(buff, var1, 1000, protoModule.wireTypes.lengthDelimited)
-		var2, var9 = protoModule.writeString(var2, var3, self.prop_builder)
-		buff = var2
-		var1 = var3
+		local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1000, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult, WriteTagResult2, self.prop_builder)
 	end
 	if self.oneof_prop ~= nil then
 		if self.oneof_prop.type == "string_prop" then
-			local var4 = self.oneof_prop.value:encode()
-			local var5, var6 = protoModule.writeTag(buff, var1, 1, protoModule.wireTypes.lengthDelimited)
-			var5, var12 = protoModule.writeBuffer(var5, var6, var4, buffer.len(var4))
-			buff = var5
-			var1 = var6
+			local EncodeResult = self.oneof_prop.value:encode()
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "int32_prop" then
-			local var7 = self.oneof_prop.value:encode()
-			local var8, var9 = protoModule.writeTag(buff, var1, 2, protoModule.wireTypes.lengthDelimited)
-			var8, var15 = protoModule.writeBuffer(var8, var9, var7, buffer.len(var7))
-			buff = var8
-			var1 = var9
+			local EncodeResult = self.oneof_prop.value:encode()
+			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult3, WriteTagResult2_2, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "int64_prop" then
-			local var10 = self.oneof_prop.value:encode()
-			local var11, var12 = protoModule.writeTag(buff, var1, 3, protoModule.wireTypes.lengthDelimited)
-			var11, var18 = protoModule.writeBuffer(var11, var12, var10, buffer.len(var10))
-			buff = var11
-			var1 = var12
+			local EncodeResult = self.oneof_prop.value:encode()
+			local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult4, WriteTagResult2_3, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "float_prop" then
-			local var13 = self.oneof_prop.value:encode()
-			local var14, var15 = protoModule.writeTag(buff, var1, 4, protoModule.wireTypes.lengthDelimited)
-			var14, var21 = protoModule.writeBuffer(var14, var15, var13, buffer.len(var13))
-			buff = var14
-			var1 = var15
+			local EncodeResult = self.oneof_prop.value:encode()
+			local WriteTagResult5, WriteTagResult2_4 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult5, WriteTagResult2_4, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "double_prop" then
-			local var16 = self.oneof_prop.value:encode()
-			local var17, var18 = protoModule.writeTag(buff, var1, 5, protoModule.wireTypes.lengthDelimited)
-			var17, var24 = protoModule.writeBuffer(var17, var18, var16, buffer.len(var16))
-			buff = var17
-			var1 = var18
+			local EncodeResult = self.oneof_prop.value:encode()
+			local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 5, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult6, WriteTagResult2_5, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "bool_prop" then
-			local var19 = self.oneof_prop.value:encode()
-			local var20, var21 = protoModule.writeTag(buff, var1, 6, protoModule.wireTypes.lengthDelimited)
-			var20, var27 = protoModule.writeBuffer(var20, var21, var19, buffer.len(var19))
-			buff = var20
-			var1 = var21
+			local EncodeResult = self.oneof_prop.value:encode()
+			local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 6, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult7, WriteTagResult2_6, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "struct_prop" then
-			local var22 = self.oneof_prop.value:encode()
-			local var23, var24 = protoModule.writeTag(buff, var1, 7, protoModule.wireTypes.lengthDelimited)
-			var23, var30 = protoModule.writeBuffer(var23, var24, var22, buffer.len(var22))
-			buff = var23
-			var1 = var24
+			local EncodeResult = self.oneof_prop.value:encode()
+			local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult8, WriteTagResult2_7, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "array_of_struct_prop" then
-			local var25 = self.oneof_prop.value:encode()
-			local var26, var27 = protoModule.writeTag(buff, var1, 8, protoModule.wireTypes.lengthDelimited)
-			var26, var33 = protoModule.writeBuffer(var26, var27, var25, buffer.len(var25))
-			buff = var26
-			var1 = var27
+			local EncodeResult = self.oneof_prop.value:encode()
+			local WriteTagResult10, WriteTagResult2_9 = ProtoModule.writeTag(Buf, Count, 8, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult10, WriteTagResult2_9, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "string_array_prop" then
-			local var28 = self.oneof_prop.value:encode()
-			local var29, var30 = protoModule.writeTag(buff, var1, 9, protoModule.wireTypes.lengthDelimited)
-			var29, var36 = protoModule.writeBuffer(var29, var30, var28, buffer.len(var28))
-			buff = var29
-			var1 = var30
+			local EncodeResult = self.oneof_prop.value:encode()
+			local WriteTagResult11, WriteTagResult2_10 = ProtoModule.writeTag(Buf, Count, 9, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult11, WriteTagResult2_10, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "image_string_prop" then
-			local var31 = self.oneof_prop.value:encode()
-			local var32, var33 = protoModule.writeTag(buff, var1, 10, protoModule.wireTypes.lengthDelimited)
-			var32, var39 = protoModule.writeBuffer(var32, var33, var31, buffer.len(var31))
-			buff = var32
-			var1 = var33
+			local EncodeResult = self.oneof_prop.value:encode()
+			local WriteTagResult12, WriteTagResult2_11 = ProtoModule.writeTag(Buf, Count, 10, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult12, WriteTagResult2_11, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "image_set_prop" then
-			local var34 = self.oneof_prop.value:encode()
-			local var35, var36 = protoModule.writeTag(buff, var1, 11, protoModule.wireTypes.lengthDelimited)
-			var35, var42 = protoModule.writeBuffer(var35, var36, var34, buffer.len(var34))
-			buff = var35
-			var1 = var36
+			local EncodeResult = self.oneof_prop.value:encode()
+			local WriteTagResult13, WriteTagResult2_12 = ProtoModule.writeTag(Buf, Count, 11, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult13, WriteTagResult2_12, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "icon_prop" then
-			local var37 = self.oneof_prop.value:encode()
-			local var38, var39 = protoModule.writeTag(buff, var1, 12, protoModule.wireTypes.lengthDelimited)
-			var38, var45 = protoModule.writeBuffer(var38, var39, var37, buffer.len(var37))
-			buff = var38
-			var1 = var39
+			local EncodeResult = self.oneof_prop.value:encode()
+			local WriteTagResult14, WriteTagResult2_13 = ProtoModule.writeTag(Buf, Count, 12, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult14, WriteTagResult2_13, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "icon_size_prop" then
-			local var40 = self.oneof_prop.value:encode()
-			local var41, var42 = protoModule.writeTag(buff, var1, 13, protoModule.wireTypes.lengthDelimited)
-			var41, var48 = protoModule.writeBuffer(var41, var42, var40, buffer.len(var40))
-			buff = var41
-			var1 = var42
+			local EncodeResult = self.oneof_prop.value:encode()
+			local WriteTagResult15, WriteTagResult2_14 = ProtoModule.writeTag(Buf, Count, 13, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult15, WriteTagResult2_14, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "foundation_icon_config_prop" then
-			local var43 = self.oneof_prop.value:encode()
-			local var44, var45 = protoModule.writeTag(buff, var1, 14, protoModule.wireTypes.lengthDelimited)
-			var44, var51 = protoModule.writeBuffer(var44, var45, var43, buffer.len(var43))
-			buff = var44
-			var1 = var45
+			local EncodeResult = self.oneof_prop.value:encode()
+			local WriteTagResult16, WriteTagResult2_15 = ProtoModule.writeTag(Buf, Count, 14, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult16, WriteTagResult2_15, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "color_prop" then
-			local var46 = self.oneof_prop.value:encode()
-			local var47, var48 = protoModule.writeTag(buff, var1, 15, protoModule.wireTypes.lengthDelimited)
-			var47, var54 = protoModule.writeBuffer(var47, var48, var46, buffer.len(var46))
-			buff = var47
-			var1 = var48
+			local EncodeResult = self.oneof_prop.value:encode()
+			local WriteTagResult17, WriteTagResult2_16 = ProtoModule.writeTag(Buf, Count, 15, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult17, WriteTagResult2_16, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "color_style_prop" then
-			local var49 = self.oneof_prop.value:encode()
-			local var50, var51 = protoModule.writeTag(buff, var1, 16, protoModule.wireTypes.lengthDelimited)
-			var50, var57 = protoModule.writeBuffer(var50, var51, var49, buffer.len(var49))
-			buff = var50
-			var1 = var51
+			local EncodeResult = self.oneof_prop.value:encode()
+			local WriteTagResult18, WriteTagResult2_17 = ProtoModule.writeTag(Buf, Count, 16, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult18, WriteTagResult2_17, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "gradient_prop" then
-			local var52 = self.oneof_prop.value:encode()
-			local var53, var54 = protoModule.writeTag(buff, var1, 17, protoModule.wireTypes.lengthDelimited)
-			var53, var60 = protoModule.writeBuffer(var53, var54, var52, buffer.len(var52))
-			buff = var53
-			var1 = var54
+			local EncodeResult = self.oneof_prop.value:encode()
+			local WriteTagResult19, WriteTagResult2_18 = ProtoModule.writeTag(Buf, Count, 17, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult19, WriteTagResult2_18, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "typography_prop" then
-			local var55 = self.oneof_prop.value:encode()
-			local var56, var57 = protoModule.writeTag(buff, var1, 18, protoModule.wireTypes.lengthDelimited)
-			var56, var63 = protoModule.writeBuffer(var56, var57, var55, buffer.len(var55))
-			buff = var56
-			var1 = var57
+			local EncodeResult = self.oneof_prop.value:encode()
+			local WriteTagResult20, WriteTagResult2_19 = ProtoModule.writeTag(Buf, Count, 18, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult20, WriteTagResult2_19, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "typography_font_prop" then
-			local var58 = self.oneof_prop.value:encode()
-			local var59, var60 = protoModule.writeTag(buff, var1, 19, protoModule.wireTypes.lengthDelimited)
-			var59, var66 = protoModule.writeBuffer(var59, var60, var58, buffer.len(var58))
-			buff = var59
-			var1 = var60
+			local EncodeResult = self.oneof_prop.value:encode()
+			local WriteTagResult21, WriteTagResult2_20 = ProtoModule.writeTag(Buf, Count, 19, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult21, WriteTagResult2_20, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "udim_prop" then
-			local var61 = self.oneof_prop.value:encode()
-			local var62, var63 = protoModule.writeTag(buff, var1, 20, protoModule.wireTypes.lengthDelimited)
-			var62, var69 = protoModule.writeBuffer(var62, var63, var61, buffer.len(var61))
-			buff = var62
-			var1 = var63
+			local EncodeResult = self.oneof_prop.value:encode()
+			local WriteTagResult22, WriteTagResult2_21 = ProtoModule.writeTag(Buf, Count, 20, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult22, WriteTagResult2_21, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "udim2_prop" then
-			local var64 = self.oneof_prop.value:encode()
-			local var65, var66 = protoModule.writeTag(buff, var1, 21, protoModule.wireTypes.lengthDelimited)
-			var65, var72 = protoModule.writeBuffer(var65, var66, var64, buffer.len(var64))
-			buff = var65
-			var1 = var66
+			local EncodeResult = self.oneof_prop.value:encode()
+			local WriteTagResult23, WriteTagResult2_22 = ProtoModule.writeTag(Buf, Count, 21, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult23, WriteTagResult2_22, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "vector2_prop" then
-			local var67 = self.oneof_prop.value:encode()
-			local var68, var69 = protoModule.writeTag(buff, var1, 22, protoModule.wireTypes.lengthDelimited)
-			var68, var75 = protoModule.writeBuffer(var68, var69, var67, buffer.len(var67))
-			buff = var68
-			var1 = var69
+			local EncodeResult = self.oneof_prop.value:encode()
+			local WriteTagResult24, WriteTagResult2_23 = ProtoModule.writeTag(Buf, Count, 22, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult24, WriteTagResult2_23, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "ui_scaled_float_prop" then
-			local var70 = self.oneof_prop.value:encode()
-			local var71, var72 = protoModule.writeTag(buff, var1, 23, protoModule.wireTypes.lengthDelimited)
-			var71, var78 = protoModule.writeBuffer(var71, var72, var70, buffer.len(var70))
-			buff = var71
-			var1 = var72
+			local EncodeResult = self.oneof_prop.value:encode()
+			local WriteTagResult25, WriteTagResult2_24 = ProtoModule.writeTag(Buf, Count, 23, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult25, WriteTagResult2_24, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "ui_scaled_udim_prop" then
-			local var73 = self.oneof_prop.value:encode()
-			local var74, var75 = protoModule.writeTag(buff, var1, 24, protoModule.wireTypes.lengthDelimited)
-			var74, var81 = protoModule.writeBuffer(var74, var75, var73, buffer.len(var73))
-			buff = var74
-			var1 = var75
+			local EncodeResult = self.oneof_prop.value:encode()
+			local WriteTagResult26, WriteTagResult2_25 = ProtoModule.writeTag(Buf, Count, 24, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult26, WriteTagResult2_25, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "ui_scaled_udim2_prop" then
-			local var76 = self.oneof_prop.value:encode()
-			local var77, var78 = protoModule.writeTag(buff, var1, 25, protoModule.wireTypes.lengthDelimited)
-			var77, var84 = protoModule.writeBuffer(var77, var78, var76, buffer.len(var76))
-			buff = var77
-			var1 = var78
+			local EncodeResult = self.oneof_prop.value:encode()
+			local WriteTagResult27, WriteTagResult2_26 = ProtoModule.writeTag(Buf, Count, 25, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult27, WriteTagResult2_26, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "fill_behavior_prop" then
-			local var79 = self.oneof_prop.value:encode()
-			local var80, var81 = protoModule.writeTag(buff, var1, 26, protoModule.wireTypes.lengthDelimited)
-			var80, var87 = protoModule.writeBuffer(var80, var81, var79, buffer.len(var79))
-			buff = var80
-			var1 = var81
+			local EncodeResult = self.oneof_prop.value:encode()
+			local WriteTagResult28, WriteTagResult2_27 = ProtoModule.writeTag(Buf, Count, 26, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult28, WriteTagResult2_27, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "input_size_prop" then
-			local var82 = self.oneof_prop.value:encode()
-			local var83, var84 = protoModule.writeTag(buff, var1, 27, protoModule.wireTypes.lengthDelimited)
-			var83, var90 = protoModule.writeBuffer(var83, var84, var82, buffer.len(var82))
-			buff = var83
-			var1 = var84
+			local EncodeResult = self.oneof_prop.value:encode()
+			local WriteTagResult29, WriteTagResult2_28 = ProtoModule.writeTag(Buf, Count, 27, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult29, WriteTagResult2_28, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "automatic_size_prop" then
-			local var85 = self.oneof_prop.value:encode()
-			local var86, var87 = protoModule.writeTag(buff, var1, 28, protoModule.wireTypes.lengthDelimited)
-			var86, var93 = protoModule.writeBuffer(var86, var87, var85, buffer.len(var85))
-			buff = var86
-			var1 = var87
+			local EncodeResult = self.oneof_prop.value:encode()
+			local WriteTagResult30, WriteTagResult2_29 = ProtoModule.writeTag(Buf, Count, 28, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult30, WriteTagResult2_29, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "text_truncate_prop" then
-			local var88 = self.oneof_prop.value:encode()
-			local var89, var90 = protoModule.writeTag(buff, var1, 29, protoModule.wireTypes.lengthDelimited)
-			var89, var96 = protoModule.writeBuffer(var89, var90, var88, buffer.len(var88))
-			buff = var89
-			var1 = var90
+			local EncodeResult = self.oneof_prop.value:encode()
+			local WriteTagResult31, WriteTagResult2_30 = ProtoModule.writeTag(Buf, Count, 29, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult31, WriteTagResult2_30, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "text_x_alignment_prop" then
-			local var91 = self.oneof_prop.value:encode()
-			local var92, var93 = protoModule.writeTag(buff, var1, 30, protoModule.wireTypes.lengthDelimited)
-			var92, var99 = protoModule.writeBuffer(var92, var93, var91, buffer.len(var91))
-			buff = var92
-			var1 = var93
+			local EncodeResult = self.oneof_prop.value:encode()
+			local WriteTagResult32, WriteTagResult2_31 = ProtoModule.writeTag(Buf, Count, 30, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult32, WriteTagResult2_31, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "text_y_alignment_prop" then
-			local var94 = self.oneof_prop.value:encode()
-			local var95, var96 = protoModule.writeTag(buff, var1, 31, protoModule.wireTypes.lengthDelimited)
-			var95, var102 = protoModule.writeBuffer(var95, var96, var94, buffer.len(var94))
-			buff = var95
-			var1 = var96
+			local EncodeResult = self.oneof_prop.value:encode()
+			local WriteTagResult9, WriteTagResult2_8 = ProtoModule.writeTag(Buf, Count, 31, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult9, WriteTagResult2_8, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "ui_flex_mode_prop" then
-			local var97 = self.oneof_prop.value:encode()
-			local var98, var99 = protoModule.writeTag(buff, var1, 32, protoModule.wireTypes.lengthDelimited)
-			var98, var105 = protoModule.writeBuffer(var98, var99, var97, buffer.len(var97))
-			buff = var98
-			var1 = var99
+			local EncodeResult = self.oneof_prop.value:encode()
+			local WriteTagResult33, WriteTagResult2_32 = ProtoModule.writeTag(Buf, Count, 32, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult33, WriteTagResult2_32, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "scale_type_prop" then
-			local var100 = self.oneof_prop.value:encode()
-			local var101, var102 = protoModule.writeTag(buff, var1, 33, protoModule.wireTypes.lengthDelimited)
-			var101, var108 = protoModule.writeBuffer(var101, var102, var100, buffer.len(var100))
-			buff = var101
-			var1 = var102
+			local EncodeResult = self.oneof_prop.value:encode()
+			local WriteTagResult34, WriteTagResult2_33 = ProtoModule.writeTag(Buf, Count, 33, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult34, WriteTagResult2_33, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "resampler_mode_prop" then
-			local var103 = self.oneof_prop.value:encode()
-			local var104, var105 = protoModule.writeTag(buff, var1, 34, protoModule.wireTypes.lengthDelimited)
-			var104, var111 = protoModule.writeBuffer(var104, var105, var103, buffer.len(var103))
-			buff = var104
-			var1 = var105
+			local EncodeResult = self.oneof_prop.value:encode()
+			local WriteTagResult35, WriteTagResult2_34 = ProtoModule.writeTag(Buf, Count, 34, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult35, WriteTagResult2_34, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "size_constraint_prop" then
-			local var106 = self.oneof_prop.value:encode()
-			local var107, var108 = protoModule.writeTag(buff, var1, 35, protoModule.wireTypes.lengthDelimited)
-			var107, var114 = protoModule.writeBuffer(var107, var108, var106, buffer.len(var106))
-			buff = var107
-			var1 = var108
+			local EncodeResult = self.oneof_prop.value:encode()
+			local WriteTagResult36, WriteTagResult2_35 = ProtoModule.writeTag(Buf, Count, 35, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult36, WriteTagResult2_35, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "selection_behavior_prop" then
-			local var109 = self.oneof_prop.value:encode()
-			local var110, var111 = protoModule.writeTag(buff, var1, 36, protoModule.wireTypes.lengthDelimited)
-			var110, var117 = protoModule.writeBuffer(var110, var111, var109, buffer.len(var109))
-			buff = var110
-			var1 = var111
+			local EncodeResult = self.oneof_prop.value:encode()
+			local WriteTagResult37, WriteTagResult2_36 = ProtoModule.writeTag(Buf, Count, 36, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult37, WriteTagResult2_36, EncodeResult, buffer.len(EncodeResult))
 		elseif self.oneof_prop.type == "key_code_prop" then
-			local var112 = self.oneof_prop.value:encode()
-			local var113, var114 = protoModule.writeTag(buff, var1, 37, protoModule.wireTypes.lengthDelimited)
-			var113, var120 = protoModule.writeBuffer(var113, var114, var112, buffer.len(var112))
-			buff = var113
-			var1 = var114
+			local EncodeResult = self.oneof_prop.value:encode()
+			local WriteTagResult38, WriteTagResult2_37 = ProtoModule.writeTag(Buf, Count, 37, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult38, WriteTagResult2_37, EncodeResult, buffer.len(EncodeResult))
 		end
 	end
-	local buff_1 = buffer.create(var1)
-	buffer.copy(buff_1, 0, buff, 0, var1)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_1.decode(p1)
-	-- upvalues: t_1 (ref), protoModule (ref), propTypesModule (ref), propTypesEngineModule (ref)
-	local var1 = t_1.new()
-	local var2 = 0
-	while var2 < buffer.len(p1) do
-		local _ = nil
-		local var3 = nil
-		local var4, var5, var6 = protoModule.readTag(p1, var2)
-		local var7 = var4
-		var3 = var5
-		var2 = var6
+function Module.decode(Buf) --[[ Line: 335 ]]
+	-- upvalues: Module (copy), ProtoModule (copy), PropTypesModule (copy), PropTypesEngineModule (copy)
+	local NewModule = Module.new()
+	local v1 = 0
+	while v1 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v122 = ProtoModule.readTag(Buf, v1)
 		
-		if var3 == protoModule.wireTypes.varint then
-			local _ = nil
-			local var8, var9 = protoModule.readVarInt(p1, var2)
-			local _ = var8
-			var2 = var9
-			continue
-		end
-		if var3 == protoModule.wireTypes.lengthDelimited then
-			if var7 == 1 then
-				local _ = nil
-				local var10, var11 = protoModule.readBuffer(p1, var2)
-				var2 = var11
-				var1.oneof_prop = {
+		if Tag2 == ProtoModule.wireTypes.varint then
+			local _
+			_, v122 = ProtoModule.readVarInt(Buf, v1)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v122 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.oneof_prop = {
 					type = "string_prop",
-					value = propTypesModule.StringProp.decode(var10)
+					value = PropTypesModule.StringProp.decode(Buffer1)
 				}
-			elseif var7 == 2 then
-				local _ = nil
-				local var12, var13 = protoModule.readBuffer(p1, var2)
-				var2 = var13
-				var1.oneof_prop = {
+			elseif Tag == 2 then
+				local Buffer2
+				Buffer2, v122 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.oneof_prop = {
 					type = "int32_prop",
-					value = propTypesModule.Int32Prop.decode(var12)
+					value = PropTypesModule.Int32Prop.decode(Buffer2)
 				}
-			elseif var7 == 3 then
-				local _ = nil
-				local var14, var15 = protoModule.readBuffer(p1, var2)
-				var2 = var15
-				var1.oneof_prop = {
+			elseif Tag == 3 then
+				local Buffer3
+				Buffer3, v122 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.oneof_prop = {
 					type = "int64_prop",
-					value = propTypesModule.Int64Prop.decode(var14)
+					value = PropTypesModule.Int64Prop.decode(Buffer3)
 				}
-			elseif var7 == 4 then
-				local _ = nil
-				local var16, var17 = protoModule.readBuffer(p1, var2)
-				var2 = var17
-				var1.oneof_prop = {
+			elseif Tag == 4 then
+				local Buffer4
+				Buffer4, v122 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.oneof_prop = {
 					type = "float_prop",
-					value = propTypesModule.FloatProp.decode(var16)
+					value = PropTypesModule.FloatProp.decode(Buffer4)
 				}
-			elseif var7 == 5 then
-				local _ = nil
-				local var18, var19 = protoModule.readBuffer(p1, var2)
-				var2 = var19
-				var1.oneof_prop = {
+			elseif Tag == 5 then
+				local Buffer5
+				Buffer5, v122 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.oneof_prop = {
 					type = "double_prop",
-					value = propTypesModule.DoubleProp.decode(var18)
+					value = PropTypesModule.DoubleProp.decode(Buffer5)
 				}
-			elseif var7 == 6 then
-				local _ = nil
-				local var20, var21 = protoModule.readBuffer(p1, var2)
-				var2 = var21
-				var1.oneof_prop = {
+			elseif Tag == 6 then
+				local Buffer6
+				Buffer6, v122 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.oneof_prop = {
 					type = "bool_prop",
-					value = propTypesModule.BoolProp.decode(var20)
+					value = PropTypesModule.BoolProp.decode(Buffer6)
 				}
-			elseif var7 == 7 then
-				local _ = nil
-				local var22, var23 = protoModule.readBuffer(p1, var2)
-				var2 = var23
-				var1.oneof_prop = {
+			elseif Tag == 7 then
+				local Buffer7
+				Buffer7, v122 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.oneof_prop = {
 					type = "struct_prop",
-					value = propTypesModule.StructProp.decode(var22)
+					value = PropTypesModule.StructProp.decode(Buffer7)
 				}
-			elseif var7 == 8 then
-				local _ = nil
-				local var24, var25 = protoModule.readBuffer(p1, var2)
-				var2 = var25
-				var1.oneof_prop = {
+			elseif Tag == 8 then
+				local Buffer8
+				Buffer8, v122 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.oneof_prop = {
 					type = "array_of_struct_prop",
-					value = propTypesModule.ArrayOfStructProp.decode(var24)
+					value = PropTypesModule.ArrayOfStructProp.decode(Buffer8)
 				}
-			elseif var7 == 9 then
-				local _ = nil
-				local var26, var27 = protoModule.readBuffer(p1, var2)
-				var2 = var27
-				var1.oneof_prop = {
+			elseif Tag == 9 then
+				local Buffer9
+				Buffer9, v122 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.oneof_prop = {
 					type = "string_array_prop",
-					value = propTypesModule.StringArrayProp.decode(var26)
+					value = PropTypesModule.StringArrayProp.decode(Buffer9)
 				}
-			elseif var7 == 10 then
-				local _ = nil
-				local var28, var29 = protoModule.readBuffer(p1, var2)
-				var2 = var29
-				var1.oneof_prop = {
+			elseif Tag == 10 then
+				local Buffer10
+				Buffer10, v122 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.oneof_prop = {
 					type = "image_string_prop",
-					value = propTypesModule.ImageStringProp.decode(var28)
+					value = PropTypesModule.ImageStringProp.decode(Buffer10)
 				}
-			elseif var7 == 11 then
-				local _ = nil
-				local var30, var31 = protoModule.readBuffer(p1, var2)
-				var2 = var31
-				var1.oneof_prop = {
+			elseif Tag == 11 then
+				local Buffer11
+				Buffer11, v122 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.oneof_prop = {
 					type = "image_set_prop",
-					value = propTypesModule.ImageSetProp.decode(var30)
+					value = PropTypesModule.ImageSetProp.decode(Buffer11)
 				}
-			elseif var7 == 12 then
-				local _ = nil
-				local var32, var33 = protoModule.readBuffer(p1, var2)
-				var2 = var33
-				var1.oneof_prop = {
+			elseif Tag == 12 then
+				local Buffer12
+				Buffer12, v122 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.oneof_prop = {
 					type = "icon_prop",
-					value = propTypesModule.IconProp.decode(var32)
+					value = PropTypesModule.IconProp.decode(Buffer12)
 				}
-			elseif var7 == 13 then
-				local _ = nil
-				local var34, var35 = protoModule.readBuffer(p1, var2)
-				var2 = var35
-				var1.oneof_prop = {
+			elseif Tag == 13 then
+				local Buffer13
+				Buffer13, v122 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.oneof_prop = {
 					type = "icon_size_prop",
-					value = propTypesModule.IconSizeProp.decode(var34)
+					value = PropTypesModule.IconSizeProp.decode(Buffer13)
 				}
-			elseif var7 == 14 then
-				local _ = nil
-				local var36, var37 = protoModule.readBuffer(p1, var2)
-				var2 = var37
-				var1.oneof_prop = {
+			elseif Tag == 14 then
+				local Buffer14
+				Buffer14, v122 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.oneof_prop = {
 					type = "foundation_icon_config_prop",
-					value = propTypesModule.FoundationIconConfigProp.decode(var36)
+					value = PropTypesModule.FoundationIconConfigProp.decode(Buffer14)
 				}
-			elseif var7 == 15 then
-				local _ = nil
-				local var38, var39 = protoModule.readBuffer(p1, var2)
-				var2 = var39
-				var1.oneof_prop = {
+			elseif Tag == 15 then
+				local Buffer15
+				Buffer15, v122 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.oneof_prop = {
 					type = "color_prop",
-					value = propTypesModule.ColorProp.decode(var38)
+					value = PropTypesModule.ColorProp.decode(Buffer15)
 				}
-			elseif var7 == 16 then
-				local _ = nil
-				local var40, var41 = protoModule.readBuffer(p1, var2)
-				var2 = var41
-				var1.oneof_prop = {
+			elseif Tag == 16 then
+				local Buffer16
+				Buffer16, v122 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.oneof_prop = {
 					type = "color_style_prop",
-					value = propTypesModule.ColorStyleProp.decode(var40)
+					value = PropTypesModule.ColorStyleProp.decode(Buffer16)
 				}
-			elseif var7 == 17 then
-				local _ = nil
-				local var42, var43 = protoModule.readBuffer(p1, var2)
-				var2 = var43
-				var1.oneof_prop = {
+			elseif Tag == 17 then
+				local Buffer17
+				Buffer17, v122 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.oneof_prop = {
 					type = "gradient_prop",
-					value = propTypesModule.GradientProp.decode(var42)
+					value = PropTypesModule.GradientProp.decode(Buffer17)
 				}
-			elseif var7 == 18 then
-				local _ = nil
-				local var44, var45 = protoModule.readBuffer(p1, var2)
-				var2 = var45
-				var1.oneof_prop = {
+			elseif Tag == 18 then
+				local Buffer18
+				Buffer18, v122 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.oneof_prop = {
 					type = "typography_prop",
-					value = propTypesModule.TypographyProp.decode(var44)
+					value = PropTypesModule.TypographyProp.decode(Buffer18)
 				}
-			elseif var7 == 19 then
-				local _ = nil
-				local var46, var47 = protoModule.readBuffer(p1, var2)
-				var2 = var47
-				var1.oneof_prop = {
+			elseif Tag == 19 then
+				local Buffer19
+				Buffer19, v122 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.oneof_prop = {
 					type = "typography_font_prop",
-					value = propTypesModule.TypographyFontProp.decode(var46)
+					value = PropTypesModule.TypographyFontProp.decode(Buffer19)
 				}
-			elseif var7 == 20 then
-				local _ = nil
-				local var48, var49 = protoModule.readBuffer(p1, var2)
-				var2 = var49
-				var1.oneof_prop = {
+			elseif Tag == 20 then
+				local Buffer20
+				Buffer20, v122 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.oneof_prop = {
 					type = "udim_prop",
-					value = propTypesModule.UDimProp.decode(var48)
+					value = PropTypesModule.UDimProp.decode(Buffer20)
 				}
-			elseif var7 == 21 then
-				local _ = nil
-				local var50, var51 = protoModule.readBuffer(p1, var2)
-				var2 = var51
-				var1.oneof_prop = {
+			elseif Tag == 21 then
+				local Buffer21
+				Buffer21, v122 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.oneof_prop = {
 					type = "udim2_prop",
-					value = propTypesModule.UDim2Prop.decode(var50)
+					value = PropTypesModule.UDim2Prop.decode(Buffer21)
 				}
-			elseif var7 == 22 then
-				local _ = nil
-				local var52, var53 = protoModule.readBuffer(p1, var2)
-				var2 = var53
-				var1.oneof_prop = {
+			elseif Tag == 22 then
+				local Buffer22
+				Buffer22, v122 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.oneof_prop = {
 					type = "vector2_prop",
-					value = propTypesModule.Vector2Prop.decode(var52)
+					value = PropTypesModule.Vector2Prop.decode(Buffer22)
 				}
-			elseif var7 == 23 then
-				local _ = nil
-				local var54, var55 = protoModule.readBuffer(p1, var2)
-				var2 = var55
-				var1.oneof_prop = {
+			elseif Tag == 23 then
+				local Buffer23
+				Buffer23, v122 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.oneof_prop = {
 					type = "ui_scaled_float_prop",
-					value = propTypesModule.UiScaledFloatProp.decode(var54)
+					value = PropTypesModule.UiScaledFloatProp.decode(Buffer23)
 				}
-			elseif var7 == 24 then
-				local _ = nil
-				local var56, var57 = protoModule.readBuffer(p1, var2)
-				var2 = var57
-				var1.oneof_prop = {
+			elseif Tag == 24 then
+				local Buffer24
+				Buffer24, v122 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.oneof_prop = {
 					type = "ui_scaled_udim_prop",
-					value = propTypesModule.UiScaledUDimProp.decode(var56)
+					value = PropTypesModule.UiScaledUDimProp.decode(Buffer24)
 				}
-			elseif var7 == 25 then
-				local _ = nil
-				local var58, var59 = protoModule.readBuffer(p1, var2)
-				var2 = var59
-				var1.oneof_prop = {
+			elseif Tag == 25 then
+				local Buffer25
+				Buffer25, v122 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.oneof_prop = {
 					type = "ui_scaled_udim2_prop",
-					value = propTypesModule.UiScaledUDim2Prop.decode(var58)
+					value = PropTypesModule.UiScaledUDim2Prop.decode(Buffer25)
 				}
-			elseif var7 == 26 then
-				local _ = nil
-				local var60, var61 = protoModule.readBuffer(p1, var2)
-				var2 = var61
-				var1.oneof_prop = {
+			elseif Tag == 26 then
+				local Buffer26
+				Buffer26, v122 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.oneof_prop = {
 					type = "fill_behavior_prop",
-					value = propTypesModule.FillBehaviorProp.decode(var60)
+					value = PropTypesModule.FillBehaviorProp.decode(Buffer26)
 				}
-			elseif var7 == 27 then
-				local _ = nil
-				local var62, var63 = protoModule.readBuffer(p1, var2)
-				var2 = var63
-				var1.oneof_prop = {
+			elseif Tag == 27 then
+				local Buffer27
+				Buffer27, v122 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.oneof_prop = {
 					type = "input_size_prop",
-					value = propTypesModule.InputSizeProp.decode(var62)
+					value = PropTypesModule.InputSizeProp.decode(Buffer27)
 				}
-			elseif var7 == 28 then
-				local _ = nil
-				local var64, var65 = protoModule.readBuffer(p1, var2)
-				var2 = var65
-				var1.oneof_prop = {
+			elseif Tag == 28 then
+				local Buffer28
+				Buffer28, v122 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.oneof_prop = {
 					type = "automatic_size_prop",
-					value = propTypesEngineModule.AutomaticSizeProp.decode(var64)
+					value = PropTypesEngineModule.AutomaticSizeProp.decode(Buffer28)
 				}
-			elseif var7 == 29 then
-				local _ = nil
-				local var66, var67 = protoModule.readBuffer(p1, var2)
-				var2 = var67
-				var1.oneof_prop = {
+			elseif Tag == 29 then
+				local Buffer29
+				Buffer29, v122 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.oneof_prop = {
 					type = "text_truncate_prop",
-					value = propTypesEngineModule.TextTruncateProp.decode(var66)
+					value = PropTypesEngineModule.TextTruncateProp.decode(Buffer29)
 				}
-			elseif var7 == 30 then
-				local _ = nil
-				local var68, var69 = protoModule.readBuffer(p1, var2)
-				var2 = var69
-				var1.oneof_prop = {
+			elseif Tag == 30 then
+				local Buffer30
+				Buffer30, v122 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.oneof_prop = {
 					type = "text_x_alignment_prop",
-					value = propTypesEngineModule.TextXAlignmentProp.decode(var68)
+					value = PropTypesEngineModule.TextXAlignmentProp.decode(Buffer30)
 				}
-			elseif var7 == 31 then
-				local _ = nil
-				local var70, var71 = protoModule.readBuffer(p1, var2)
-				var2 = var71
-				var1.oneof_prop = {
+			elseif Tag == 31 then
+				local Buffer31
+				Buffer31, v122 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.oneof_prop = {
 					type = "text_y_alignment_prop",
-					value = propTypesEngineModule.TextYAlignmentProp.decode(var70)
+					value = PropTypesEngineModule.TextYAlignmentProp.decode(Buffer31)
 				}
-			elseif var7 == 32 then
-				local _ = nil
-				local var72, var73 = protoModule.readBuffer(p1, var2)
-				var2 = var73
-				var1.oneof_prop = {
+			elseif Tag == 32 then
+				local Buffer32
+				Buffer32, v122 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.oneof_prop = {
 					type = "ui_flex_mode_prop",
-					value = propTypesEngineModule.UIFlexModeProp.decode(var72)
+					value = PropTypesEngineModule.UIFlexModeProp.decode(Buffer32)
 				}
-			elseif var7 == 33 then
-				local _ = nil
-				local var74, var75 = protoModule.readBuffer(p1, var2)
-				var2 = var75
-				var1.oneof_prop = {
+			elseif Tag == 33 then
+				local Buffer33
+				Buffer33, v122 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.oneof_prop = {
 					type = "scale_type_prop",
-					value = propTypesEngineModule.ScaleTypeProp.decode(var74)
+					value = PropTypesEngineModule.ScaleTypeProp.decode(Buffer33)
 				}
-			elseif var7 == 34 then
-				local _ = nil
-				local var76, var77 = protoModule.readBuffer(p1, var2)
-				var2 = var77
-				var1.oneof_prop = {
+			elseif Tag == 34 then
+				local Buffer34
+				Buffer34, v122 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.oneof_prop = {
 					type = "resampler_mode_prop",
-					value = propTypesEngineModule.ResamplerModeProp.decode(var76)
+					value = PropTypesEngineModule.ResamplerModeProp.decode(Buffer34)
 				}
-			elseif var7 == 35 then
-				local _ = nil
-				local var78, var79 = protoModule.readBuffer(p1, var2)
-				var2 = var79
-				var1.oneof_prop = {
+			elseif Tag == 35 then
+				local Buffer35
+				Buffer35, v122 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.oneof_prop = {
 					type = "size_constraint_prop",
-					value = propTypesEngineModule.SizeConstraintProp.decode(var78)
+					value = PropTypesEngineModule.SizeConstraintProp.decode(Buffer35)
 				}
-			elseif var7 == 36 then
-				local _ = nil
-				local var80, var81 = protoModule.readBuffer(p1, var2)
-				var2 = var81
-				var1.oneof_prop = {
+			elseif Tag == 36 then
+				local Buffer36
+				Buffer36, v122 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.oneof_prop = {
 					type = "selection_behavior_prop",
-					value = propTypesEngineModule.SelectionBehaviorProp.decode(var80)
+					value = PropTypesEngineModule.SelectionBehaviorProp.decode(Buffer36)
 				}
-			elseif var7 == 37 then
-				local _ = nil
-				local var82, var83 = protoModule.readBuffer(p1, var2)
-				var2 = var83
-				var1.oneof_prop = {
+			elseif Tag == 37 then
+				local Buffer37
+				Buffer37, v122 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.oneof_prop = {
 					type = "key_code_prop",
-					value = propTypesEngineModule.KeyCodeProp.decode(var82)
+					value = PropTypesEngineModule.KeyCodeProp.decode(Buffer37)
 				}
-			elseif var7 == 1000 then
-				local _ = nil
-				local var84, var85 = protoModule.readBuffer(p1, var2)
-				var2 = var85
-				var1.prop_builder = buffer.tostring(var84)
+			elseif Tag == 1000 then
+				local Buffer38
+				Buffer38, v122 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.prop_builder = buffer.tostring(Buffer38)
 			else
-				local _ = nil
-				local var86, var87 = protoModule.readVarInt(p1, var2)
-				var2 = var87 + var86
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v1)
+				v1 = VarInt2 + VarInt
 			end
-		elseif var3 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var88, var89 = protoModule.readFixed32(p1, var2)
-			local _ = var88
-			var2 = var89
-		elseif var3 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var90, var91 = protoModule.readFixed64(p1, var2)
-			local _ = var90
-			var2 = var91
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v122 = ProtoModule.readFixed32(Buf, v1)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v122 = ProtoModule.readFixed64(Buf, v1)
 		else
-			error("Unsupported wire type: " .. var124)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var1
+	return NewModule
 end
 
-function t_1:jsonEncode()
+function Module:jsonEncode() --[[ Line: 688 ]]
 	local t = {}
 	
 	if self.prop_builder ~= nil then
@@ -610,615 +482,651 @@ function t_1:jsonEncode()
 			t.stringProp = self.oneof_prop.value:jsonEncode()
 			
 			return t
-		elseif self.oneof_prop.type == "int32_prop" then
+		end
+		if self.oneof_prop.type == "int32_prop" then
 			t.int32Prop = self.oneof_prop.value:jsonEncode()
 			
 			return t
-		elseif self.oneof_prop.type == "int64_prop" then
+		end
+		if self.oneof_prop.type == "int64_prop" then
 			t.int64Prop = self.oneof_prop.value:jsonEncode()
 			
 			return t
-		elseif self.oneof_prop.type == "float_prop" then
+		end
+		if self.oneof_prop.type == "float_prop" then
 			t.floatProp = self.oneof_prop.value:jsonEncode()
 			
 			return t
-		elseif self.oneof_prop.type == "double_prop" then
+		end
+		if self.oneof_prop.type == "double_prop" then
 			t.doubleProp = self.oneof_prop.value:jsonEncode()
 			
 			return t
-		elseif self.oneof_prop.type == "bool_prop" then
+		end
+		if self.oneof_prop.type == "bool_prop" then
 			t.boolProp = self.oneof_prop.value:jsonEncode()
 			
 			return t
-		elseif self.oneof_prop.type == "struct_prop" then
+		end
+		if self.oneof_prop.type == "struct_prop" then
 			t.structProp = self.oneof_prop.value:jsonEncode()
 			
 			return t
-		elseif self.oneof_prop.type == "array_of_struct_prop" then
+		end
+		if self.oneof_prop.type == "array_of_struct_prop" then
 			t.arrayOfStructProp = self.oneof_prop.value:jsonEncode()
 			
 			return t
-		elseif self.oneof_prop.type == "string_array_prop" then
+		end
+		if self.oneof_prop.type == "string_array_prop" then
 			t.stringArrayProp = self.oneof_prop.value:jsonEncode()
 			
 			return t
-		elseif self.oneof_prop.type == "image_string_prop" then
+		end
+		if self.oneof_prop.type == "image_string_prop" then
 			t.imageStringProp = self.oneof_prop.value:jsonEncode()
 			
 			return t
-		elseif self.oneof_prop.type == "image_set_prop" then
+		end
+		if self.oneof_prop.type == "image_set_prop" then
 			t.imageSetProp = self.oneof_prop.value:jsonEncode()
 			
 			return t
-		elseif self.oneof_prop.type == "icon_prop" then
+		end
+		if self.oneof_prop.type == "icon_prop" then
 			t.iconProp = self.oneof_prop.value:jsonEncode()
 			
 			return t
-		elseif self.oneof_prop.type == "icon_size_prop" then
+		end
+		if self.oneof_prop.type == "icon_size_prop" then
 			t.iconSizeProp = self.oneof_prop.value:jsonEncode()
 			
 			return t
-		elseif self.oneof_prop.type == "foundation_icon_config_prop" then
+		end
+		if self.oneof_prop.type == "foundation_icon_config_prop" then
 			t.foundationIconConfigProp = self.oneof_prop.value:jsonEncode()
 			
 			return t
-		elseif self.oneof_prop.type == "color_prop" then
+		end
+		if self.oneof_prop.type == "color_prop" then
 			t.colorProp = self.oneof_prop.value:jsonEncode()
 			
 			return t
-		elseif self.oneof_prop.type == "color_style_prop" then
+		end
+		if self.oneof_prop.type == "color_style_prop" then
 			t.colorStyleProp = self.oneof_prop.value:jsonEncode()
 			
 			return t
-		elseif self.oneof_prop.type == "gradient_prop" then
+		end
+		if self.oneof_prop.type == "gradient_prop" then
 			t.gradientProp = self.oneof_prop.value:jsonEncode()
 			
 			return t
-		elseif self.oneof_prop.type == "typography_prop" then
+		end
+		if self.oneof_prop.type == "typography_prop" then
 			t.typographyProp = self.oneof_prop.value:jsonEncode()
 			
 			return t
-		elseif self.oneof_prop.type == "typography_font_prop" then
+		end
+		if self.oneof_prop.type == "typography_font_prop" then
 			t.typographyFontProp = self.oneof_prop.value:jsonEncode()
 			
 			return t
-		elseif self.oneof_prop.type == "udim_prop" then
+		end
+		if self.oneof_prop.type == "udim_prop" then
 			t.udimProp = self.oneof_prop.value:jsonEncode()
 			
 			return t
-		elseif self.oneof_prop.type == "udim2_prop" then
+		end
+		if self.oneof_prop.type == "udim2_prop" then
 			t.udim2Prop = self.oneof_prop.value:jsonEncode()
 			
 			return t
-		elseif self.oneof_prop.type == "vector2_prop" then
+		end
+		if self.oneof_prop.type == "vector2_prop" then
 			t.vector2Prop = self.oneof_prop.value:jsonEncode()
 			
 			return t
-		elseif self.oneof_prop.type == "ui_scaled_float_prop" then
+		end
+		if self.oneof_prop.type == "ui_scaled_float_prop" then
 			t.uiScaledFloatProp = self.oneof_prop.value:jsonEncode()
 			
 			return t
-		elseif self.oneof_prop.type == "ui_scaled_udim_prop" then
+		end
+		if self.oneof_prop.type == "ui_scaled_udim_prop" then
 			t.uiScaledUdimProp = self.oneof_prop.value:jsonEncode()
 			
 			return t
-		elseif self.oneof_prop.type == "ui_scaled_udim2_prop" then
+		end
+		if self.oneof_prop.type == "ui_scaled_udim2_prop" then
 			t.uiScaledUdim2Prop = self.oneof_prop.value:jsonEncode()
 			
 			return t
-		elseif self.oneof_prop.type == "fill_behavior_prop" then
+		end
+		if self.oneof_prop.type == "fill_behavior_prop" then
 			t.fillBehaviorProp = self.oneof_prop.value:jsonEncode()
 			
 			return t
-		elseif self.oneof_prop.type == "input_size_prop" then
+		end
+		if self.oneof_prop.type == "input_size_prop" then
 			t.inputSizeProp = self.oneof_prop.value:jsonEncode()
 			
 			return t
-		elseif self.oneof_prop.type == "automatic_size_prop" then
+		end
+		if self.oneof_prop.type == "automatic_size_prop" then
 			t.automaticSizeProp = self.oneof_prop.value:jsonEncode()
 			
 			return t
-		elseif self.oneof_prop.type == "text_truncate_prop" then
+		end
+		if self.oneof_prop.type == "text_truncate_prop" then
 			t.textTruncateProp = self.oneof_prop.value:jsonEncode()
 			
 			return t
-		elseif self.oneof_prop.type == "text_x_alignment_prop" then
+		end
+		if self.oneof_prop.type == "text_x_alignment_prop" then
 			t.textXAlignmentProp = self.oneof_prop.value:jsonEncode()
 			
 			return t
-		elseif self.oneof_prop.type == "text_y_alignment_prop" then
+		end
+		if self.oneof_prop.type == "text_y_alignment_prop" then
 			t.textYAlignmentProp = self.oneof_prop.value:jsonEncode()
 			
 			return t
-		elseif self.oneof_prop.type == "ui_flex_mode_prop" then
+		end
+		if self.oneof_prop.type == "ui_flex_mode_prop" then
 			t.uiFlexModeProp = self.oneof_prop.value:jsonEncode()
 			
 			return t
-		elseif self.oneof_prop.type == "scale_type_prop" then
+		end
+		if self.oneof_prop.type == "scale_type_prop" then
 			t.scaleTypeProp = self.oneof_prop.value:jsonEncode()
 			
 			return t
-		elseif self.oneof_prop.type == "resampler_mode_prop" then
+		end
+		if self.oneof_prop.type == "resampler_mode_prop" then
 			t.resamplerModeProp = self.oneof_prop.value:jsonEncode()
 			
 			return t
-		elseif self.oneof_prop.type == "size_constraint_prop" then
+		end
+		if self.oneof_prop.type == "size_constraint_prop" then
 			t.sizeConstraintProp = self.oneof_prop.value:jsonEncode()
 			
 			return t
-		elseif self.oneof_prop.type == "selection_behavior_prop" then
+		end
+		if self.oneof_prop.type == "selection_behavior_prop" then
 			t.selectionBehaviorProp = self.oneof_prop.value:jsonEncode()
 			
 			return t
-		elseif self.oneof_prop.type == "key_code_prop" then
+		end
+		if self.oneof_prop.type == "key_code_prop" then
 			t.keyCodeProp = self.oneof_prop.value:jsonEncode()
 		end
 	end
 	return t
 end
 
-function t_1:jsonDecode()
-	-- upvalues: t_1 (ref), propTypesModule (ref), propTypesEngineModule (ref)
-	local var92 = t_1.new()
+function Module:jsonDecode() --[[ Line: 776 ]]
+	-- upvalues: Module (copy), PropTypesModule (copy), PropTypesEngineModule (copy)
+	local NewModule = Module.new()
 	
 	if self.prop_builder ~= nil then
-		var92.prop_builder = self.prop_builder
+		NewModule.prop_builder = self.prop_builder
 	end
 	if self.propBuilder ~= nil then
-		var92.prop_builder = self.propBuilder
+		NewModule.prop_builder = self.propBuilder
 	end
 	if self.string_prop ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "string_prop",
-			value = propTypesModule.StringProp.jsonDecode(self.string_prop)
+			value = PropTypesModule.StringProp.jsonDecode(self.string_prop)
 		}
 	end
 	if self.stringProp ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "string_prop",
-			value = propTypesModule.StringProp.jsonDecode(self.stringProp)
+			value = PropTypesModule.StringProp.jsonDecode(self.stringProp)
 		}
 	end
 	if self.int32_prop ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "int32_prop",
-			value = propTypesModule.Int32Prop.jsonDecode(self.int32_prop)
+			value = PropTypesModule.Int32Prop.jsonDecode(self.int32_prop)
 		}
 	end
 	if self.int32Prop ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "int32_prop",
-			value = propTypesModule.Int32Prop.jsonDecode(self.int32Prop)
+			value = PropTypesModule.Int32Prop.jsonDecode(self.int32Prop)
 		}
 	end
 	if self.int64_prop ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "int64_prop",
-			value = propTypesModule.Int64Prop.jsonDecode(self.int64_prop)
+			value = PropTypesModule.Int64Prop.jsonDecode(self.int64_prop)
 		}
 	end
 	if self.int64Prop ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "int64_prop",
-			value = propTypesModule.Int64Prop.jsonDecode(self.int64Prop)
+			value = PropTypesModule.Int64Prop.jsonDecode(self.int64Prop)
 		}
 	end
 	if self.float_prop ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "float_prop",
-			value = propTypesModule.FloatProp.jsonDecode(self.float_prop)
+			value = PropTypesModule.FloatProp.jsonDecode(self.float_prop)
 		}
 	end
 	if self.floatProp ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "float_prop",
-			value = propTypesModule.FloatProp.jsonDecode(self.floatProp)
+			value = PropTypesModule.FloatProp.jsonDecode(self.floatProp)
 		}
 	end
 	if self.double_prop ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "double_prop",
-			value = propTypesModule.DoubleProp.jsonDecode(self.double_prop)
+			value = PropTypesModule.DoubleProp.jsonDecode(self.double_prop)
 		}
 	end
 	if self.doubleProp ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "double_prop",
-			value = propTypesModule.DoubleProp.jsonDecode(self.doubleProp)
+			value = PropTypesModule.DoubleProp.jsonDecode(self.doubleProp)
 		}
 	end
 	if self.bool_prop ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "bool_prop",
-			value = propTypesModule.BoolProp.jsonDecode(self.bool_prop)
+			value = PropTypesModule.BoolProp.jsonDecode(self.bool_prop)
 		}
 	end
 	if self.boolProp ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "bool_prop",
-			value = propTypesModule.BoolProp.jsonDecode(self.boolProp)
+			value = PropTypesModule.BoolProp.jsonDecode(self.boolProp)
 		}
 	end
 	if self.struct_prop ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "struct_prop",
-			value = propTypesModule.StructProp.jsonDecode(self.struct_prop)
+			value = PropTypesModule.StructProp.jsonDecode(self.struct_prop)
 		}
 	end
 	if self.structProp ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "struct_prop",
-			value = propTypesModule.StructProp.jsonDecode(self.structProp)
+			value = PropTypesModule.StructProp.jsonDecode(self.structProp)
 		}
 	end
 	if self.array_of_struct_prop ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "array_of_struct_prop",
-			value = propTypesModule.ArrayOfStructProp.jsonDecode(self.array_of_struct_prop)
+			value = PropTypesModule.ArrayOfStructProp.jsonDecode(self.array_of_struct_prop)
 		}
 	end
 	if self.arrayOfStructProp ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "array_of_struct_prop",
-			value = propTypesModule.ArrayOfStructProp.jsonDecode(self.arrayOfStructProp)
+			value = PropTypesModule.ArrayOfStructProp.jsonDecode(self.arrayOfStructProp)
 		}
 	end
 	if self.string_array_prop ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "string_array_prop",
-			value = propTypesModule.StringArrayProp.jsonDecode(self.string_array_prop)
+			value = PropTypesModule.StringArrayProp.jsonDecode(self.string_array_prop)
 		}
 	end
 	if self.stringArrayProp ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "string_array_prop",
-			value = propTypesModule.StringArrayProp.jsonDecode(self.stringArrayProp)
+			value = PropTypesModule.StringArrayProp.jsonDecode(self.stringArrayProp)
 		}
 	end
 	if self.image_string_prop ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "image_string_prop",
-			value = propTypesModule.ImageStringProp.jsonDecode(self.image_string_prop)
+			value = PropTypesModule.ImageStringProp.jsonDecode(self.image_string_prop)
 		}
 	end
 	if self.imageStringProp ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "image_string_prop",
-			value = propTypesModule.ImageStringProp.jsonDecode(self.imageStringProp)
+			value = PropTypesModule.ImageStringProp.jsonDecode(self.imageStringProp)
 		}
 	end
 	if self.image_set_prop ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "image_set_prop",
-			value = propTypesModule.ImageSetProp.jsonDecode(self.image_set_prop)
+			value = PropTypesModule.ImageSetProp.jsonDecode(self.image_set_prop)
 		}
 	end
 	if self.imageSetProp ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "image_set_prop",
-			value = propTypesModule.ImageSetProp.jsonDecode(self.imageSetProp)
+			value = PropTypesModule.ImageSetProp.jsonDecode(self.imageSetProp)
 		}
 	end
 	if self.icon_prop ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "icon_prop",
-			value = propTypesModule.IconProp.jsonDecode(self.icon_prop)
+			value = PropTypesModule.IconProp.jsonDecode(self.icon_prop)
 		}
 	end
 	if self.iconProp ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "icon_prop",
-			value = propTypesModule.IconProp.jsonDecode(self.iconProp)
+			value = PropTypesModule.IconProp.jsonDecode(self.iconProp)
 		}
 	end
 	if self.icon_size_prop ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "icon_size_prop",
-			value = propTypesModule.IconSizeProp.jsonDecode(self.icon_size_prop)
+			value = PropTypesModule.IconSizeProp.jsonDecode(self.icon_size_prop)
 		}
 	end
 	if self.iconSizeProp ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "icon_size_prop",
-			value = propTypesModule.IconSizeProp.jsonDecode(self.iconSizeProp)
+			value = PropTypesModule.IconSizeProp.jsonDecode(self.iconSizeProp)
 		}
 	end
 	if self.foundation_icon_config_prop ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "foundation_icon_config_prop",
-			value = propTypesModule.FoundationIconConfigProp.jsonDecode(self.foundation_icon_config_prop)
+			value = PropTypesModule.FoundationIconConfigProp.jsonDecode(self.foundation_icon_config_prop)
 		}
 	end
 	if self.foundationIconConfigProp ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "foundation_icon_config_prop",
-			value = propTypesModule.FoundationIconConfigProp.jsonDecode(self.foundationIconConfigProp)
+			value = PropTypesModule.FoundationIconConfigProp.jsonDecode(self.foundationIconConfigProp)
 		}
 	end
 	if self.color_prop ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "color_prop",
-			value = propTypesModule.ColorProp.jsonDecode(self.color_prop)
+			value = PropTypesModule.ColorProp.jsonDecode(self.color_prop)
 		}
 	end
 	if self.colorProp ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "color_prop",
-			value = propTypesModule.ColorProp.jsonDecode(self.colorProp)
+			value = PropTypesModule.ColorProp.jsonDecode(self.colorProp)
 		}
 	end
 	if self.color_style_prop ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "color_style_prop",
-			value = propTypesModule.ColorStyleProp.jsonDecode(self.color_style_prop)
+			value = PropTypesModule.ColorStyleProp.jsonDecode(self.color_style_prop)
 		}
 	end
 	if self.colorStyleProp ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "color_style_prop",
-			value = propTypesModule.ColorStyleProp.jsonDecode(self.colorStyleProp)
+			value = PropTypesModule.ColorStyleProp.jsonDecode(self.colorStyleProp)
 		}
 	end
 	if self.gradient_prop ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "gradient_prop",
-			value = propTypesModule.GradientProp.jsonDecode(self.gradient_prop)
+			value = PropTypesModule.GradientProp.jsonDecode(self.gradient_prop)
 		}
 	end
 	if self.gradientProp ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "gradient_prop",
-			value = propTypesModule.GradientProp.jsonDecode(self.gradientProp)
+			value = PropTypesModule.GradientProp.jsonDecode(self.gradientProp)
 		}
 	end
 	if self.typography_prop ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "typography_prop",
-			value = propTypesModule.TypographyProp.jsonDecode(self.typography_prop)
+			value = PropTypesModule.TypographyProp.jsonDecode(self.typography_prop)
 		}
 	end
 	if self.typographyProp ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "typography_prop",
-			value = propTypesModule.TypographyProp.jsonDecode(self.typographyProp)
+			value = PropTypesModule.TypographyProp.jsonDecode(self.typographyProp)
 		}
 	end
 	if self.typography_font_prop ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "typography_font_prop",
-			value = propTypesModule.TypographyFontProp.jsonDecode(self.typography_font_prop)
+			value = PropTypesModule.TypographyFontProp.jsonDecode(self.typography_font_prop)
 		}
 	end
 	if self.typographyFontProp ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "typography_font_prop",
-			value = propTypesModule.TypographyFontProp.jsonDecode(self.typographyFontProp)
+			value = PropTypesModule.TypographyFontProp.jsonDecode(self.typographyFontProp)
 		}
 	end
 	if self.udim_prop ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "udim_prop",
-			value = propTypesModule.UDimProp.jsonDecode(self.udim_prop)
+			value = PropTypesModule.UDimProp.jsonDecode(self.udim_prop)
 		}
 	end
 	if self.udimProp ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "udim_prop",
-			value = propTypesModule.UDimProp.jsonDecode(self.udimProp)
+			value = PropTypesModule.UDimProp.jsonDecode(self.udimProp)
 		}
 	end
 	if self.udim2_prop ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "udim2_prop",
-			value = propTypesModule.UDim2Prop.jsonDecode(self.udim2_prop)
+			value = PropTypesModule.UDim2Prop.jsonDecode(self.udim2_prop)
 		}
 	end
 	if self.udim2Prop ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "udim2_prop",
-			value = propTypesModule.UDim2Prop.jsonDecode(self.udim2Prop)
+			value = PropTypesModule.UDim2Prop.jsonDecode(self.udim2Prop)
 		}
 	end
 	if self.vector2_prop ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "vector2_prop",
-			value = propTypesModule.Vector2Prop.jsonDecode(self.vector2_prop)
+			value = PropTypesModule.Vector2Prop.jsonDecode(self.vector2_prop)
 		}
 	end
 	if self.vector2Prop ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "vector2_prop",
-			value = propTypesModule.Vector2Prop.jsonDecode(self.vector2Prop)
+			value = PropTypesModule.Vector2Prop.jsonDecode(self.vector2Prop)
 		}
 	end
 	if self.ui_scaled_float_prop ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "ui_scaled_float_prop",
-			value = propTypesModule.UiScaledFloatProp.jsonDecode(self.ui_scaled_float_prop)
+			value = PropTypesModule.UiScaledFloatProp.jsonDecode(self.ui_scaled_float_prop)
 		}
 	end
 	if self.uiScaledFloatProp ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "ui_scaled_float_prop",
-			value = propTypesModule.UiScaledFloatProp.jsonDecode(self.uiScaledFloatProp)
+			value = PropTypesModule.UiScaledFloatProp.jsonDecode(self.uiScaledFloatProp)
 		}
 	end
 	if self.ui_scaled_udim_prop ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "ui_scaled_udim_prop",
-			value = propTypesModule.UiScaledUDimProp.jsonDecode(self.ui_scaled_udim_prop)
+			value = PropTypesModule.UiScaledUDimProp.jsonDecode(self.ui_scaled_udim_prop)
 		}
 	end
 	if self.uiScaledUdimProp ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "ui_scaled_udim_prop",
-			value = propTypesModule.UiScaledUDimProp.jsonDecode(self.uiScaledUdimProp)
+			value = PropTypesModule.UiScaledUDimProp.jsonDecode(self.uiScaledUdimProp)
 		}
 	end
 	if self.ui_scaled_udim2_prop ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "ui_scaled_udim2_prop",
-			value = propTypesModule.UiScaledUDim2Prop.jsonDecode(self.ui_scaled_udim2_prop)
+			value = PropTypesModule.UiScaledUDim2Prop.jsonDecode(self.ui_scaled_udim2_prop)
 		}
 	end
 	if self.uiScaledUdim2Prop ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "ui_scaled_udim2_prop",
-			value = propTypesModule.UiScaledUDim2Prop.jsonDecode(self.uiScaledUdim2Prop)
+			value = PropTypesModule.UiScaledUDim2Prop.jsonDecode(self.uiScaledUdim2Prop)
 		}
 	end
 	if self.fill_behavior_prop ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "fill_behavior_prop",
-			value = propTypesModule.FillBehaviorProp.jsonDecode(self.fill_behavior_prop)
+			value = PropTypesModule.FillBehaviorProp.jsonDecode(self.fill_behavior_prop)
 		}
 	end
 	if self.fillBehaviorProp ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "fill_behavior_prop",
-			value = propTypesModule.FillBehaviorProp.jsonDecode(self.fillBehaviorProp)
+			value = PropTypesModule.FillBehaviorProp.jsonDecode(self.fillBehaviorProp)
 		}
 	end
 	if self.input_size_prop ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "input_size_prop",
-			value = propTypesModule.InputSizeProp.jsonDecode(self.input_size_prop)
+			value = PropTypesModule.InputSizeProp.jsonDecode(self.input_size_prop)
 		}
 	end
 	if self.inputSizeProp ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "input_size_prop",
-			value = propTypesModule.InputSizeProp.jsonDecode(self.inputSizeProp)
+			value = PropTypesModule.InputSizeProp.jsonDecode(self.inputSizeProp)
 		}
 	end
 	if self.automatic_size_prop ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "automatic_size_prop",
-			value = propTypesEngineModule.AutomaticSizeProp.jsonDecode(self.automatic_size_prop)
+			value = PropTypesEngineModule.AutomaticSizeProp.jsonDecode(self.automatic_size_prop)
 		}
 	end
 	if self.automaticSizeProp ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "automatic_size_prop",
-			value = propTypesEngineModule.AutomaticSizeProp.jsonDecode(self.automaticSizeProp)
+			value = PropTypesEngineModule.AutomaticSizeProp.jsonDecode(self.automaticSizeProp)
 		}
 	end
 	if self.text_truncate_prop ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "text_truncate_prop",
-			value = propTypesEngineModule.TextTruncateProp.jsonDecode(self.text_truncate_prop)
+			value = PropTypesEngineModule.TextTruncateProp.jsonDecode(self.text_truncate_prop)
 		}
 	end
 	if self.textTruncateProp ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "text_truncate_prop",
-			value = propTypesEngineModule.TextTruncateProp.jsonDecode(self.textTruncateProp)
+			value = PropTypesEngineModule.TextTruncateProp.jsonDecode(self.textTruncateProp)
 		}
 	end
 	if self.text_x_alignment_prop ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "text_x_alignment_prop",
-			value = propTypesEngineModule.TextXAlignmentProp.jsonDecode(self.text_x_alignment_prop)
+			value = PropTypesEngineModule.TextXAlignmentProp.jsonDecode(self.text_x_alignment_prop)
 		}
 	end
 	if self.textXAlignmentProp ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "text_x_alignment_prop",
-			value = propTypesEngineModule.TextXAlignmentProp.jsonDecode(self.textXAlignmentProp)
+			value = PropTypesEngineModule.TextXAlignmentProp.jsonDecode(self.textXAlignmentProp)
 		}
 	end
 	if self.text_y_alignment_prop ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "text_y_alignment_prop",
-			value = propTypesEngineModule.TextYAlignmentProp.jsonDecode(self.text_y_alignment_prop)
+			value = PropTypesEngineModule.TextYAlignmentProp.jsonDecode(self.text_y_alignment_prop)
 		}
 	end
 	if self.textYAlignmentProp ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "text_y_alignment_prop",
-			value = propTypesEngineModule.TextYAlignmentProp.jsonDecode(self.textYAlignmentProp)
+			value = PropTypesEngineModule.TextYAlignmentProp.jsonDecode(self.textYAlignmentProp)
 		}
 	end
 	if self.ui_flex_mode_prop ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "ui_flex_mode_prop",
-			value = propTypesEngineModule.UIFlexModeProp.jsonDecode(self.ui_flex_mode_prop)
+			value = PropTypesEngineModule.UIFlexModeProp.jsonDecode(self.ui_flex_mode_prop)
 		}
 	end
 	if self.uiFlexModeProp ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "ui_flex_mode_prop",
-			value = propTypesEngineModule.UIFlexModeProp.jsonDecode(self.uiFlexModeProp)
+			value = PropTypesEngineModule.UIFlexModeProp.jsonDecode(self.uiFlexModeProp)
 		}
 	end
 	if self.scale_type_prop ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "scale_type_prop",
-			value = propTypesEngineModule.ScaleTypeProp.jsonDecode(self.scale_type_prop)
+			value = PropTypesEngineModule.ScaleTypeProp.jsonDecode(self.scale_type_prop)
 		}
 	end
 	if self.scaleTypeProp ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "scale_type_prop",
-			value = propTypesEngineModule.ScaleTypeProp.jsonDecode(self.scaleTypeProp)
+			value = PropTypesEngineModule.ScaleTypeProp.jsonDecode(self.scaleTypeProp)
 		}
 	end
 	if self.resampler_mode_prop ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "resampler_mode_prop",
-			value = propTypesEngineModule.ResamplerModeProp.jsonDecode(self.resampler_mode_prop)
+			value = PropTypesEngineModule.ResamplerModeProp.jsonDecode(self.resampler_mode_prop)
 		}
 	end
 	if self.resamplerModeProp ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "resampler_mode_prop",
-			value = propTypesEngineModule.ResamplerModeProp.jsonDecode(self.resamplerModeProp)
+			value = PropTypesEngineModule.ResamplerModeProp.jsonDecode(self.resamplerModeProp)
 		}
 	end
 	if self.size_constraint_prop ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "size_constraint_prop",
-			value = propTypesEngineModule.SizeConstraintProp.jsonDecode(self.size_constraint_prop)
+			value = PropTypesEngineModule.SizeConstraintProp.jsonDecode(self.size_constraint_prop)
 		}
 	end
 	if self.sizeConstraintProp ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "size_constraint_prop",
-			value = propTypesEngineModule.SizeConstraintProp.jsonDecode(self.sizeConstraintProp)
+			value = PropTypesEngineModule.SizeConstraintProp.jsonDecode(self.sizeConstraintProp)
 		}
 	end
 	if self.selection_behavior_prop ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "selection_behavior_prop",
-			value = propTypesEngineModule.SelectionBehaviorProp.jsonDecode(self.selection_behavior_prop)
+			value = PropTypesEngineModule.SelectionBehaviorProp.jsonDecode(self.selection_behavior_prop)
 		}
 	end
 	if self.selectionBehaviorProp ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "selection_behavior_prop",
-			value = propTypesEngineModule.SelectionBehaviorProp.jsonDecode(self.selectionBehaviorProp)
+			value = PropTypesEngineModule.SelectionBehaviorProp.jsonDecode(self.selectionBehaviorProp)
 		}
 	end
 	if self.key_code_prop ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "key_code_prop",
-			value = propTypesEngineModule.KeyCodeProp.jsonDecode(self.key_code_prop)
+			value = PropTypesEngineModule.KeyCodeProp.jsonDecode(self.key_code_prop)
 		}
 	end
 	if self.keyCodeProp ~= nil then
-		var92.oneof_prop = {
+		NewModule.oneof_prop = {
 			type = "key_code_prop",
-			value = propTypesEngineModule.KeyCodeProp.jsonDecode(self.keyCodeProp)
+			value = PropTypesEngineModule.KeyCodeProp.jsonDecode(self.keyCodeProp)
 		}
 	end
-	return var92
+	return NewModule
 end
 
-t_1.descriptor = {
+Module.descriptor = {
 	name = "ExperimentalProp",
 	fullName = "roblox.apppageplatform.shared.v1beta1.ExperimentalProp"
 }
-t.ExperimentalProp = t_1
-typeRegistryModule.default:register(t.ExperimentalProp)
+local config = { ExperimentalProp = Module }
+TypeRegistryModule.default:register(config.ExperimentalProp)
 
-return { ExperimentalProp = t.ExperimentalProp }
+return { ExperimentalProp = config.ExperimentalProp }

@@ -1,32 +1,33 @@
-﻿local avatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
-local parent = avatarExperienceInspectAndBuy.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local itemDetailsViewModule = require(avatarExperienceInspectAndBuy.Components.ItemDetails.ItemDetailsView)
-local buyActionBarLayoutModule = require(avatarExperienceInspectAndBuy.Components.ItemsView.BuyActionBarLayout)
-local _ = require(avatarExperienceInspectAndBuy.Components.Common.BuyActionBar)
-local useTokens = foundationModule.Hooks.useTokens
-local viewTypeModule = require(avatarExperienceInspectAndBuy.Enums.ViewType)
-local cryoModule = require(parent.Cryo)
+﻿local AvatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
+local Parent = AvatarExperienceInspectAndBuy.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local ItemDetailsViewModule = require(AvatarExperienceInspectAndBuy.Components.ItemDetails.ItemDetailsView)
+local BuyActionBarLayoutModule = require(AvatarExperienceInspectAndBuy.Components.ItemsView.BuyActionBarLayout)
+local _ = require(AvatarExperienceInspectAndBuy.Components.Common.BuyActionBar)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local ViewTypeModule = require(AvatarExperienceInspectAndBuy.Enums.ViewType)
+local CryoModule = require(Parent.Cryo)
 
-return function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), cryoModule (ref), viewTypeModule (ref), foundationModule (ref), itemDetailsViewModule (ref), buyActionBarLayoutModule (ref)
-	local var1 = useTokens()
-	local size2700 = var1.Size.Size_2700
+return function(p1) --[[ Line: 21 | Named "ItemDetailsLayout" ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), CryoModule (copy), ViewTypeModule (copy), FoundationModule (copy), ItemDetailsViewModule (copy), BuyActionBarLayoutModule (copy)
+	local UseTokensResult = UseTokensFunction()
+	local Size2700 = UseTokensResult.Size.Size_2700
+	local IsViewMatch = p1.view == ViewTypeModule.Compact
 	
-	return reactModule.createElement(foundationModule.View, { tag = "size-full" }, {
-		ItemDetailsView = reactModule.createElement(itemDetailsViewModule, reactModule.useMemo(function()
-			-- upvalues: cryoModule (copy), p1 (ref), size2700 (ref)
-			return cryoModule.Dictionary.join(p1.itemDetailsViewProps, { buyActionBarOffset = size2700 })
-		end, { p1.itemDetailsViewProps, size2700 })),
-		BuyActionBarLayout = if p1.view == viewTypeModule.Compact then reactModule.createElement(buyActionBarLayoutModule, {
+	return ReactModule.createElement(FoundationModule.View, { tag = "size-full" }, {
+		ItemDetailsView = ReactModule.createElement(ItemDetailsViewModule, (ReactModule.useMemo(function() --[[ Line: 27 ]]
+			-- upvalues: CryoModule (upval), p1 (copy), Size2700 (copy)
+			return CryoModule.Dictionary.join(p1.itemDetailsViewProps, { buyActionBarOffset = Size2700 })
+		end, { p1.itemDetailsViewProps, Size2700 }))),
+		BuyActionBarLayout = if IsViewMatch then ReactModule.createElement(BuyActionBarLayoutModule, {
 			enableTopBorder = true,
 			ZIndex = 2,
 			buyActionBarProps = p1.buyActionBarProps,
 			Position = UDim2.new(0, 0, 1, 0),
 			AnchorPoint = Vector2.new(0, 1),
-			padding = UDim.new(0, var1.Padding.Medium),
-			Size = UDim2.new(1, 0, 0, size2700)
+			padding = UDim.new(0, UseTokensResult.Padding.Medium),
+			Size = UDim2.new(1, 0, 0, Size2700)
 		}) else nil
 	})
 end

@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.MediaGallery.MediaGallery)
+﻿return (require(script.Parent.Parent.Parent._Index.MediaGallery.MediaGallery))

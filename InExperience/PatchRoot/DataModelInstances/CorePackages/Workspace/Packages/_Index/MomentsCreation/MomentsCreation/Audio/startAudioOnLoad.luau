@@ -1,29 +1,29 @@
-﻿return function(p1, p2)
-	local var1 = p1:GetPropertyChangedSignal("IsReady"):Connect(function()
-		-- upvalues: p1 (ref), p2 (ref)
-		if not p1.IsReady then return end
-		p1.TimePosition = p1.PlaybackRegion.Min
+﻿return function(Sound: Sound, Callback) --[[ Line: 5 | Named "startAudioOnLoad" ]]
+	local Connection = Sound:GetPropertyChangedSignal("IsReady"):Connect(function() --[[ Line: 6 | Named "startIfLoaded" ]]
+		-- upvalues: Sound (copy), Callback (copy)
+		if not Sound.IsReady then return end
+		Sound.TimePosition = Sound.PlaybackRegion.Min
 		
-		if p2() then
-			p1.PlaybackSpeed = 1
+		if Callback() then
+			Sound.PlaybackSpeed = 1
 			
-			if not p1.IsPlaying then
-				p1:Play()
+			if not Sound.IsPlaying then
+				Sound:Play()
 			end
 		end
 	end)
 	
-	if not p1.IsReady then
-		return var1
+	if not Sound.IsReady then
+		return Connection
 	end
-	p1.TimePosition = p1.PlaybackRegion.Min
+	Sound.TimePosition = Sound.PlaybackRegion.Min
 	
-	if p2() then
-		p1.PlaybackSpeed = 1
+	if Callback() then
+		Sound.PlaybackSpeed = 1
 		
-		if not p1.IsPlaying then
-			p1:Play()
+		if not Sound.IsPlaying then
+			Sound:Play()
 		end
 	end
-	return var1
+	return Connection
 end

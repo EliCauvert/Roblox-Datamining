@@ -1,7 +1,5 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local addRawValueMethodToEnumModule = require(parent.Utility.addRawValueMethodToEnum)
-local t = {
+﻿local Parent = script.Parent.Parent.Parent
+local config = {
 	None = "None",
 	Loading = "Loading",
 	PurchaseModal = "PurchaseModal",
@@ -17,7 +15,7 @@ local t = {
 	Error = "Error",
 	PurchaseVPCModal = "PurchaseVPCModal"
 }
-local var1 = require(parent_1.enumerate)(script.Name, t)
-addRawValueMethodToEnumModule(var1, t)
+local v1 = require(Parent.Parent.enumerate)(script.Name, config)
+require(Parent.Utility.addRawValueMethodToEnum)(v1, config)
 
-return var1
+return v1

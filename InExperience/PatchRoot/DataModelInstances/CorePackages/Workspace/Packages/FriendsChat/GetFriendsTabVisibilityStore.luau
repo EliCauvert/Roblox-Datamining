@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent._Workspace.FriendsChat.FriendsChat.Stores.GetFriendsTabVisibilityStore)
+﻿return (require(script.Parent.Parent._Workspace.FriendsChat.FriendsChat.Stores.GetFriendsTabVisibilityStore))

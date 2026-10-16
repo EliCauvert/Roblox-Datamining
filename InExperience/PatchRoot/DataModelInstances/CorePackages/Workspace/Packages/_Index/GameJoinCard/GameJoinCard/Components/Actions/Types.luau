@@ -1,8 +1,8 @@
-﻿local gameJoinCard = script:FindFirstAncestor("GameJoinCard")
-local parent = gameJoinCard.Parent
-local _ = require(parent.Foundation)
-local _ = require(parent.React)
-local _ = require(parent.UserCtaCommon)
-local _ = require(gameJoinCard.Analytics.AnalyticsConstants).viewProfileSourceValues
+﻿local GameJoinCard = script:FindFirstAncestor("GameJoinCard")
+local Parent = GameJoinCard.Parent
+local _ = require(Parent.Foundation)
+local _ = require(Parent.React)
+local _ = require(Parent.UserCtaCommon)
+local _ = require(GameJoinCard.Analytics.AnalyticsConstants).viewProfileSourceValues
 
 return {}

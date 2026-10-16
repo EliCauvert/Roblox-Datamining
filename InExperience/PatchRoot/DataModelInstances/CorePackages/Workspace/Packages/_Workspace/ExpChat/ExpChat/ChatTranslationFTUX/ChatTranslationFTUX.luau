@@ -1,80 +1,78 @@
-﻿local expChat = script:FindFirstAncestor("ExpChat")
-local parent = expChat.Parent
-local roactModule = require(parent.Roact)
-local otterModule = require(parent.Otter)
-local timerModule = require(expChat.Timer)
-local UIBloxModule = require(parent.UIBlox)
-local images = UIBloxModule.App.ImageSet.Images
-local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
-local localizationModule = require(expChat.Localization)
-local gameSettings = UserSettings().GameSettings
-local chatTranslationFTUX = roactModule.Component:extend("ChatTranslationFTUX")
-chatTranslationFTUX.defaultProps = { timer = timerModule.new(10) }
-local font = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
-local font_1 = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Medium, Enum.FontStyle.Normal)
-local t = { dampingRatio = 1, frequency = 2 }
+﻿local ExpChat = script:FindFirstAncestor("ExpChat")
+local Parent = ExpChat.Parent
+local RoactModule = require(Parent.Roact)
+local OtterModule = require(Parent.Otter)
+local UIBloxModule = require(Parent.UIBlox)
+local Images = UIBloxModule.App.ImageSet.Images
+local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
+local LocalizationModule = require(ExpChat.Localization)
+local FFlagExpChatUnmountTranslationFTUXModule = require(ExpChat.Flags.FFlagExpChatUnmountTranslationFTUX)
+local GameSettings = UserSettings().GameSettings
+local ChatTranslationFTUX = RoactModule.Component:extend("ChatTranslationFTUX")
+ChatTranslationFTUX.defaultProps = { timer = require(ExpChat.Timer).new(10) }
+local _Font = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+local _Font1 = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Medium, Enum.FontStyle.Normal)
+local config = { dampingRatio = 1, frequency = 2 }
 
 if game:GetEngineFeature("TextChatServiceSettingsSaved") then
-	gameSettings.ChatTranslationFTUXShown = true
+	GameSettings.ChatTranslationFTUXShown = true
 end
-function chatTranslationFTUX.init(p1)
-	-- upvalues: roactModule (ref), otterModule (ref)
-	local var1, var2 = roactModule.createBinding(1)
-	p1.transparency = var1
-	p1.updateTransparency = var2
-	p1.transparencyMotor = otterModule.createSingleMotor(1)
+function ChatTranslationFTUX.init(p1) --[[ Line: 37 ]]
+	-- upvalues: RoactModule (copy), OtterModule (copy)
+	p1.transparency, p1.updateTransparency = RoactModule.createBinding(1)
+	p1.transparencyMotor = OtterModule.createSingleMotor(1)
 	p1.transparencyMotor:onStep(p1.updateTransparency)
 end
 
-function chatTranslationFTUX.render(p1)
-	-- upvalues: roactModule (ref), imageSetLabel (ref), images (ref), font (ref), font_1 (ref)
-	return roactModule.createElement("Frame", {
+function ChatTranslationFTUX.render(p1) --[[ Line: 43 ]]
+	-- upvalues: FFlagExpChatUnmountTranslationFTUXModule (copy), RoactModule (copy), ImageSetLabel (copy), Images (copy), _Font (copy), _Font1 (copy)
+	return if FFlagExpChatUnmountTranslationFTUXModule and p1.state.isDismissed then nil else RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		AutomaticSize = Enum.AutomaticSize.XY,
 		Position = UDim2.new(0, 10, 0, 20),
 		Size = UDim2.new(0.25, 0, 0, 0)
 	}, {
-		BubbleTail = roactModule.createElement(imageSetLabel, {
+		BubbleTail = RoactModule.createElement(ImageSetLabel, {
 			BackgroundTransparency = 1,
 			ZIndex = 100,
 			Size = UDim2.new(0, 15, 0, 10),
 			ImageTransparency = p1.transparency,
 			ImageColor3 = Color3.new(0.5, 0.5, 0.5),
-			Image = images["component_assets/triangleUp_16"],
+			Image = Images["component_assets/triangleUp_16"],
 			Position = UDim2.new(0, 15, 0, -10)
 		}),
-		BubbleBody = roactModule.createElement("Frame", {
+		BubbleBody = RoactModule.createElement("Frame", {
 			Active = true,
 			BackgroundTransparency = p1.transparency,
 			BackgroundColor3 = Color3.new(0.5, 0.5, 0.5),
 			AutomaticSize = Enum.AutomaticSize.XY,
 			ZIndex = 100,
 			Style = Enum.FrameStyle.Custom,
-			[roactModule.Event.TouchTap] = function()
-				-- upvalues: p1 (ref)
+			[RoactModule.Event.TouchTap] = function() --[[ Line: 69 ]]
+				-- upvalues: p1 (copy)
 				p1:fadeOut()
 			end,
-			[roactModule.Event.InputEnded] = function(_, p2)
-				-- upvalues: p1 (ref)
-				if p2.UserInputType == Enum.UserInputType.MouseButton1 then
+			[RoactModule.Event.InputEnded] = function(_, Input) --[[ Line: 72 ]]
+				-- upvalues: p1 (copy)
+				if Input.UserInputType == Enum.UserInputType.MouseButton1 then
 					p1:fadeOut()
 				end
 			end
 		}, {
-			RoundCorners = roactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 5) }),
-			SizeConstraint = roactModule.createElement("UISizeConstraint", { MaxSize = Vector2.new(300, 400) }),
-			Padding = roactModule.createElement("UIPadding", {
+			RoundCorners = RoactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 5) }),
+			SizeConstraint = RoactModule.createElement("UISizeConstraint", { MaxSize = Vector2.new(300, 400) }),
+			Padding = RoactModule.createElement("UIPadding", {
 				PaddingRight = UDim.new(0, 10),
 				PaddingTop = UDim.new(0, 10),
 				PaddingBottom = UDim.new(0, 10),
 				PaddingLeft = UDim.new(0, 10)
 			}),
-			Layout = roactModule.createElement("UIListLayout", {
+			Layout = RoactModule.createElement("UIListLayout", {
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				FillDirection = Enum.FillDirection.Vertical,
 				Padding = UDim.new(0, 10)
 			}),
-			Title = roactModule.createElement("TextLabel", {
+			Title = RoactModule.createElement("TextLabel", {
 				TextSize = 16,
 				TextWrapped = true,
 				BackgroundTransparency = 1,
@@ -82,14 +80,14 @@ function chatTranslationFTUX.render(p1)
 				LayoutOrder = 1,
 				AutomaticSize = Enum.AutomaticSize.Y,
 				Size = UDim2.new(1, 0, 0, 0),
-				Text = if p1.props.FTUXTitle ~= "" then "Chat translation is on for supported languages" else p1.props.FTUXTitle,
+				Text = if p1.props.FTUXTitle == "" then "Chat translation is on for supported languages" else p1.props.FTUXTitle,
 				TextXAlignment = Enum.TextXAlignment.Left,
 				TextYAlignment = Enum.TextYAlignment.Top,
 				TextTransparency = p1.transparency,
-				FontFace = font,
+				FontFace = _Font,
 				TextColor3 = Color3.new(1, 1, 1)
 			}),
-			Body = roactModule.createElement("TextLabel", {
+			Body = RoactModule.createElement("TextLabel", {
 				TextSize = 16,
 				TextWrapped = true,
 				BackgroundTransparency = 1,
@@ -97,47 +95,54 @@ function chatTranslationFTUX.render(p1)
 				LayoutOrder = 2,
 				AutomaticSize = Enum.AutomaticSize.Y,
 				Size = UDim2.new(1, 0, 0, 0),
-				Text = if p1.props.FTUXBody ~= "" then "Messages you send and receive will be translated automatically" else p1.props.FTUXBody,
+				Text = if p1.props.FTUXBody == "" then "Messages you send and receive will be translated automatically" else p1.props.FTUXBody,
 				TextXAlignment = Enum.TextXAlignment.Left,
 				TextYAlignment = Enum.TextYAlignment.Top,
 				TextTransparency = p1.transparency,
-				FontFace = font_1,
+				FontFace = _Font1,
 				TextColor3 = Color3.new(1, 1, 1)
 			})
 		})
 	})
 end
 
-function chatTranslationFTUX.fadeOut(p1)
-	-- upvalues: otterModule (ref), t (ref)
+function ChatTranslationFTUX.fadeOut(p1) --[[ Line: 133 ]]
+	-- upvalues: FFlagExpChatUnmountTranslationFTUXModule (copy), OtterModule (copy), config (copy)
 	if not p1.isFadingOut then
 		p1.isFadingOut = true
-		p1.transparencyMotor:setGoal((function(p2)
-			-- upvalues: otterModule (copy), t (copy)
-			return otterModule.spring(p2, t)
+		
+		if FFlagExpChatUnmountTranslationFTUXModule then
+			p1.transparencyMotor:onComplete(function() --[[ Line: 138 ]]
+				-- upvalues: p1 (copy)
+				p1:setState({ isDismissed = true })
+			end)
+		end
+		p1.transparencyMotor:setGoal((function(p2) --[[ Line: 143 ]]
+			-- upvalues: OtterModule (upval), config (upval)
+			return OtterModule.spring(p2, config)
 		end)(1))
 	end
 end
 
-function chatTranslationFTUX.didMount(p1)
-	-- upvalues: otterModule (ref), t (ref)
-	p1.transparencyMotor:setGoal((function(p2)
-		-- upvalues: otterModule (copy), t (copy)
-		return otterModule.spring(p2, t)
+function ChatTranslationFTUX.didMount(p1) --[[ Line: 150 ]]
+	-- upvalues: OtterModule (copy), config (copy)
+	p1.transparencyMotor:setGoal((function(p2) --[[ Line: 151 ]]
+		-- upvalues: OtterModule (upval), config (upval)
+		return OtterModule.spring(p2, config)
 	end)(0))
-	p1.props.timer:start():andThen(function()
-		-- upvalues: p1 (ref)
+	p1.props.timer:start():andThen(function() --[[ Line: 157 ]]
+		-- upvalues: p1 (copy)
 		p1:fadeOut()
 	end)
 end
 
-function chatTranslationFTUX.willUnmount(p1)
+function ChatTranslationFTUX.willUnmount(p1) --[[ Line: 162 ]]
 	p1.transparencyMotor:destroy()
 end
 
-return localizationModule.connect(function()
+return LocalizationModule.connect(function() --[[ Line: 166 ]]
 	return {
 		FTUXTitle = "CoreScripts.TextChat.ChatTranslation.FTUX.TitleNew",
 		FTUXBody = "CoreScripts.TextChat.ChatTranslation.FTUX.BodyNew"
 	}
-end)(chatTranslationFTUX)
+end)(ChatTranslationFTUX)

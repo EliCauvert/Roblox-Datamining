@@ -1,16 +1,16 @@
-﻿local flyoutSidePanel = script:FindFirstAncestor("FlyoutSidePanel")
-local parent = flyoutSidePanel.Parent
-local reactModule = require(parent.React)
-local useDrawerVisible = require(parent.Drawer).Hooks.useDrawerVisible
-local logCTAChangeMorePageFlyoutButtonTextExposureModule = require(flyoutSidePanel.Utils.logCTAChangeMorePageFlyoutButtonTextExposure)
+﻿local FlyoutSidePanel = script:FindFirstAncestor("FlyoutSidePanel")
+local Parent = FlyoutSidePanel.Parent
+local ReactModule = require(Parent.React)
+local UseDrawerVisibleFunction = require(Parent.Drawer).Hooks.useDrawerVisible
+local LogCTAChangeMorePageFlyoutButtonTextExposureModule = require(FlyoutSidePanel.Utils.logCTAChangeMorePageFlyoutButtonTextExposure)
 
-return function()
-	-- upvalues: useDrawerVisible (ref), reactModule (ref), logCTAChangeMorePageFlyoutButtonTextExposureModule (ref)
-	local var1 = useDrawerVisible()
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), logCTAChangeMorePageFlyoutButtonTextExposureModule (copy)
-		if var1 then
-			logCTAChangeMorePageFlyoutButtonTextExposureModule()
+return function() --[[ Line: 8 | Named "useCTAChangeMorePageFlyoutButtonTextExposureLogging" ]]
+	-- upvalues: UseDrawerVisibleFunction (copy), ReactModule (copy), LogCTAChangeMorePageFlyoutButtonTextExposureModule (copy)
+	local UseDrawerVisibleResult = UseDrawerVisibleFunction()
+	ReactModule.useEffect(function() --[[ Line: 10 ]]
+		-- upvalues: UseDrawerVisibleResult (copy), LogCTAChangeMorePageFlyoutButtonTextExposureModule (upval)
+		if UseDrawerVisibleResult then
+			LogCTAChangeMorePageFlyoutButtonTextExposureModule()
 		end
-	end, { var1 })
+	end, { UseDrawerVisibleResult })
 end

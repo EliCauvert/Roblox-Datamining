@@ -1,47 +1,47 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local chatConstantsModule = require(buildExperience.Chat.chatConstants)
-local _ = require(buildExperience.Chat.chatTypes)
-local fFlagBuildAgentAdCampaignCardModule = require(buildExperience.Flags.FFlagBuildAgentAdCampaignCard)
-local fFlagBuildExperienceChatHistoryLoadingSkeletonModule = require(buildExperience.Flags.FFlagBuildExperienceChatHistoryLoadingSkeleton)
-local view = foundationModule.View
-local chatHistoryLoadingStateModule = require(script.Parent.ChatHistoryLoadingState)
-local chatMessageItemModule = require(script.Parent.ChatMessageItem)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local ReactModule = require(Parent.React)
+local ChatConstantsModule = require(BuildExperience.Chat.chatConstants)
+local _ = require(BuildExperience.Chat.chatTypes)
+local FFlagBuildAgentAdCampaignCardModule = require(BuildExperience.Flags.FFlagBuildAgentAdCampaignCard)
+local FFlagBuildExperienceChatHistoryLoadingSkeletonModule = require(BuildExperience.Flags.FFlagBuildExperienceChatHistoryLoadingSkeleton)
+local View = require(Parent.Foundation).View
+local ChatHistoryLoadingStateModule = require(script.Parent.ChatHistoryLoadingState)
+local ChatMessageItemModule = require(script.Parent.ChatMessageItem)
 
-return function(p1)
-	-- upvalues: fFlagBuildExperienceChatHistoryLoadingSkeletonModule (ref), reactModule (ref), chatHistoryLoadingStateModule (ref), view (ref), chatMessageItemModule (ref), chatConstantsModule (ref), fFlagBuildAgentAdCampaignCardModule (ref)
-	local t = {}
+return function(p1) --[[ Line: 35 | Named "ChatMessageList" ]]
+	-- upvalues: FFlagBuildExperienceChatHistoryLoadingSkeletonModule (copy), ReactModule (copy), ChatHistoryLoadingStateModule (copy), View (copy), ChatMessageItemModule (copy), ChatConstantsModule (copy), FFlagBuildAgentAdCampaignCardModule (copy)
+	local Elements = {}
 	
 	if #p1.messages == 0 then
-		local var1 = if fFlagBuildExperienceChatHistoryLoadingSkeletonModule and p1.isHistoryLoading then reactModule.createElement(chatHistoryLoadingStateModule) else p1.emptyState
+		local Element = if FFlagBuildExperienceChatHistoryLoadingSkeletonModule and p1.isHistoryLoading then ReactModule.createElement(ChatHistoryLoadingStateModule) else p1.emptyState
 		
-		if var1 ~= nil then
-			t.EmptyState = reactModule.createElement(view, {
+		if Element ~= nil then
+			Elements.EmptyState = ReactModule.createElement(View, {
 				LayoutOrder = 0,
 				tag = "col align-x-center align-y-center padding-large",
 				Size = UDim2.fromScale(1, 1)
-			}, var1)
+			}, Element)
 		end
-		return t
+		return Elements
 	else
-		for i, v in p1.messages do
-			t[v.id or `Message{i}`] = reactModule.createElement(chatMessageItemModule, {
-				message = v,
-				LayoutOrder = i * chatConstantsModule.MESSAGE_LAYOUT_ORDER_STRIDE,
+		for i, message in p1.messages do
+			Elements[message.id or `Message{i}`] = ReactModule.createElement(ChatMessageItemModule, {
+				message = message,
+				LayoutOrder = i * ChatConstantsModule.MESSAGE_LAYOUT_ORDER_STRIDE,
 				clockBinding = p1.clockBinding,
 				localToolActions = p1.localToolActions,
 				onPlaytest = p1.onPlaytest,
+				onPublish = p1.onPublish,
 				isPlaytestLoading = p1.isPlaytestLoading,
-				onAgentAdCampaignOfferSelected = if fFlagBuildAgentAdCampaignCardModule then p1.onAgentAdCampaignOfferSelected else nil,
+				onAgentAdCampaignOfferSelected = if FFlagBuildAgentAdCampaignCardModule then p1.onAgentAdCampaignOfferSelected else nil,
 				isPageVisible = p1.isPageVisible,
 				scrollingFrameRef = p1.scrollingFrameRef,
 				isAgentAdCampaignCreateDisabled = p1.isAgentAdCampaignCreateDisabled,
-				getAgentAdCampaignCardState = if fFlagBuildAgentAdCampaignCardModule then p1.getAgentAdCampaignCardState else nil,
-				onAgentAdCampaignActive = if fFlagBuildAgentAdCampaignCardModule then p1.onAgentAdCampaignActive else nil
+				getAgentAdCampaignCardState = if FFlagBuildAgentAdCampaignCardModule then p1.getAgentAdCampaignCardState else nil,
+				onAgentAdCampaignActive = if FFlagBuildAgentAdCampaignCardModule then p1.onAgentAdCampaignActive else nil
 			})
 		end
-		return t
+		return Elements
 	end
 end

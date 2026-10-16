@@ -1,46 +1,48 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local constantsModule = require(foundation.Constants)
-local flagsModule = require(foundation.Utility.Flags)
-local imageModule = require(foundation.Components.Image)
-local _ = require(foundation.Components.Types)
-local viewModule = require(foundation.Components.View)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local SHADOW_IMAGE = constantsModule.SHADOW_IMAGE
-local var1 = if flagsModule.FoundationPopoverPluginOverlayMeasurement and flagsModule.FoundationPluginShadowSize then constantsModule.PLUGIN_SHADOW_SIZE else constantsModule.SHADOW_SIZE
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local ConstantsModule = require(Foundation.Constants)
+local FlagsModule = require(Foundation.Utility.Flags)
+local ImageModule = require(Foundation.Components.Image)
+local _ = require(Foundation.Components.Types)
+local ViewModule = require(Foundation.Components.View)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local SHADOWIMAGE = ConstantsModule.SHADOW_IMAGE
+local PLUGINSHADOWSIZE = if FlagsModule.FoundationPopoverPluginOverlayMeasurement and FlagsModule.FoundationPluginShadowSize then ConstantsModule.PLUGIN_SHADOW_SIZE else ConstantsModule.SHADOW_SIZE
 
-return function(p1)
-	-- upvalues: useTokensModule (ref), flagsModule (ref), reactModule (ref), viewModule (ref), var1 (ref), imageModule (ref), SHADOW_IMAGE (ref)
-	local var2 = useTokensModule()
+return function(Frame) --[[ Line: 27 | Named "PopoverShadow" ]]
+	-- upvalues: UseTokensModule (copy), FlagsModule (copy), ReactModule (copy), ViewModule (copy), PLUGINSHADOWSIZE (copy), ImageModule (copy), SHADOWIMAGE (copy)
+	local UseTokensModuleResult = UseTokensModule()
 	
-	return if flagsModule.FoundationPopoverPluginOverlayMeasurement and flagsModule.FoundationPluginShadowSize then reactModule.createElement(viewModule, {
+	return if FlagsModule.FoundationPopoverPluginOverlayMeasurement and FlagsModule.FoundationPluginShadowSize then ReactModule.createElement(ViewModule, {
 		Transparency = 1,
-		Size = p1.contentSize:map(function(p2)
-			-- upvalues: var1 (copy)
-			return p2 + UDim2.fromOffset(var1, var1)
+		Size = Frame.contentSize:map(function(p1): UDim2 --[[ Line: 34 ]]
+			-- upvalues: PLUGINSHADOWSIZE (upval)
+			return p1 + UDim2.fromOffset(PLUGINSHADOWSIZE, PLUGINSHADOWSIZE)
 		end),
-		Position = p1.position,
-		ZIndex = p1.ZIndex,
-		tag = { [p1.radiusTag] = true },
-		testId = p1.testId
-	}, reactModule.createElement("UIShadow", {
+		Position = Frame.position,
+		ZIndex = Frame.ZIndex,
+		tag = { [Frame.radiusTag] = true },
+		testId = Frame.testId
+	}, ReactModule.createElement("UIShadow", {
 		Transparency = 0.92,
 		ZIndex = -1,
 		Offset = UDim2.fromOffset(0, 2),
 		BlurRadius = UDim.new(0, 4),
-		Color = var2.Color.Extended.Black.Black_100.Color3,
+		Color = UseTokensModuleResult.Color.Extended.Black.Black_100.Color3,
 		Spread = UDim2.fromOffset(-1, -1)
-	})) else reactModule.createElement(imageModule, {
-		AnchorPoint = p1.AnchorPoint,
-		Image = SHADOW_IMAGE,
-		Size = p1.contentSize:map(function(p2)
-			-- upvalues: var1 (copy)
-			return p2 + UDim2.fromOffset(var1, var1)
+	})) else ReactModule.createElement(ImageModule, {
+		AnchorPoint = Frame.AnchorPoint,
+		Image = SHADOWIMAGE,
+		Size = Frame.contentSize:map(function(p1): UDim2 --[[ Line: 59 ]]
+			-- upvalues: PLUGINSHADOWSIZE (upval)
+			return p1 + UDim2.fromOffset(PLUGINSHADOWSIZE, PLUGINSHADOWSIZE)
 		end),
-		Position = p1.position,
-		ZIndex = p1.ZIndex,
-		slice = { center = Rect.new(var1, var1, var1 + 1, var1 + 1) },
-		imageStyle = var2.Color.Extended.Black.Black_20,
-		testId = p1.testId
+		Position = Frame.position,
+		ZIndex = Frame.ZIndex,
+		slice = {
+			center = Rect.new(PLUGINSHADOWSIZE, PLUGINSHADOWSIZE, PLUGINSHADOWSIZE + 1, PLUGINSHADOWSIZE + 1)
+		},
+		imageStyle = UseTokensModuleResult.Color.Extended.Black.Black_20,
+		testId = Frame.testId
 	})
 end

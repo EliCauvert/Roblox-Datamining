@@ -2,17 +2,18 @@
 
 return {
 	GameSortLoadSourceType = { API = "API", ClientFallbackCache = "ClientFallbackCache" },
-	setSortLoadSource = function(value, p1)
-		-- upvalues: t (ref)
+	setSortLoadSource = function(Key, p1) --[[ Line: 10 ]]
+		-- upvalues: t (copy)
 		if p1 then
-			t[value] = p1
+			t[Key] = p1
 			
 			return
+		else
+			t[Key] = nil
 		end
-		t[value] = nil
 	end,
-	getSortLoadSource = function(p1)
-		-- upvalues: t (ref)
+	getSortLoadSource = function(p1) --[[ Line: 18 ]]
+		-- upvalues: t (copy)
 		return t[p1]
 	end
 }

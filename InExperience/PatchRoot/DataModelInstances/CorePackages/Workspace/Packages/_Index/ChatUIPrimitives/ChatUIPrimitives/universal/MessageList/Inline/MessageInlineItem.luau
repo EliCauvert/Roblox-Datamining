@@ -1,35 +1,45 @@
-﻿local parent = script:FindFirstAncestor("ChatUIPrimitives").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local _ = require(parent.Signals)
-local createNextOrder = require(parent.ReactUtils).createNextOrder
-local _ = require(script.Parent.Parent.Parent.Types)
+﻿local Parent = script:FindFirstAncestor("ChatUIPrimitives").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local _ = require(Parent.Signals)
+local CreateNextOrderFunction = require(Parent.ReactUtils).createNextOrder
 local _ = require(script.Parent.Parent.groupMessages)
-local identityInlineModule = require(script.Parent.Parent.Parent.Identity.IdentityInline)
-local useMessageInlineViewModelModule = require(script.Parent.useMessageInlineViewModel)
-local t = {
-	plainText = require(script.Parent.Parent.Parent.ContentKinds.PlainText.PlainTextInline)
+local IdentityInlineModule = require(script.Parent.Parent.Parent.Identity.IdentityInline)
+local UseMessageInlineViewModelModule = require(script.Parent.useMessageInlineViewModel)
+local WithMessageContentModule = require(script.Parent.Parent.Parent.ContentKinds.withMessageContent)
+local config = {
+	plainText = WithMessageContentModule(require(script.Parent.Parent.Parent.ContentKinds.PlainText.PlainTextInline), require(script.Parent.Parent.Parent.ContentKinds.PlainText.PlainTextContentModel).getDetail),
+	preset = WithMessageContentModule(require(script.Parent.Parent.Parent.ContentKinds.Preset.PresetInline), require(script.Parent.Parent.Parent.ContentKinds.Preset.PresetContentModel).getDetail)
 }
 
-return function(p1)
-	-- upvalues: useMessageInlineViewModelModule (ref), createNextOrder (ref), t (ref), reactModule (ref), identityInlineModule (ref), foundationModule (ref)
-	local var1 = useMessageInlineViewModelModule(p1.itemSignal)
-	local var2 = createNextOrder()
-	local t_1 = {}
+return function(p1) --[[ Line: 30 | Named "MessageInlineItem" ]]
+	-- upvalues: UseMessageInlineViewModelModule (copy), CreateNextOrderFunction (copy), config (copy), ReactModule (copy), IdentityInlineModule (copy), FoundationModule (copy)
+	local UseMessageInlineViewModelModuleResult = UseMessageInlineViewModelModule(p1.itemSignal)
+	local NextOrder = CreateNextOrderFunction()
+	local Elements = {}
 	
-	for i, v in var1.contents do
-		local kind = t[v.kind]
+	for LayoutOrder, content in UseMessageInlineViewModelModuleResult.contents do
+		local Entry = config[content.kind]
 		
-		if kind then
-			t_1["content" .. i] = reactModule.createElement(kind, { getContent = v.getContent, LayoutOrder = i })
+		if Entry then
+			Elements["content" .. LayoutOrder] = ReactModule.createElement(Entry, {
+				getContent = content.getContent,
+				LayoutOrder = LayoutOrder
+			})
 		end
 	end
-	local t_2 = {}
+	local t = {}
 	
-	if var1.hasIdentity then
-		t_2.Identity = reactModule.createElement(identityInlineModule, { getIdentity = var1.getIdentity, LayoutOrder = var2() })
+	if UseMessageInlineViewModelModuleResult.hasIdentity then
+		t.Identity = ReactModule.createElement(IdentityInlineModule, {
+			getIdentity = UseMessageInlineViewModelModuleResult.getIdentity,
+			LayoutOrder = NextOrder()
+		})
 	end
-	t_2.Message = reactModule.createElement(foundationModule.View, { tag = "col grow size-0 auto-y", LayoutOrder = var2() }, t_1)
+	t.Message = ReactModule.createElement(FoundationModule.View, {
+		tag = "col grow size-0 auto-y",
+		LayoutOrder = NextOrder()
+	}, Elements)
 	
-	return reactModule.createElement(foundationModule.View, { tag = "row align-x-left gap-xsmall size-full-0 auto-y" }, t_2)
+	return ReactModule.createElement(FoundationModule.View, { tag = "row align-x-left gap-xsmall size-full-0 auto-y" }, t)
 end

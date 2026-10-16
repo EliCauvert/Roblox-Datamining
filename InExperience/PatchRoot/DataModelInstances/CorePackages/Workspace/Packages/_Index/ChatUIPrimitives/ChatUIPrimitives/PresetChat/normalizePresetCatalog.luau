@@ -1,44 +1,44 @@
-﻿local parent = script:FindFirstAncestor("ChatUIPrimitives").Parent
-local tModule = require(parent.t)
-local engineFeaturePresetChatUseExpressionTrayOptionsEndpoint = require(parent.SharedFlags).EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint
+﻿local Parent = script:FindFirstAncestor("ChatUIPrimitives").Parent
+local TModule = require(Parent.t)
+local EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint = require(Parent.SharedFlags).EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint
 local _ = require(script.Parent.Types)
-local var1 = tModule.union(tModule.literal("Enabled"), tModule.literal("ReadOnly"), tModule.literal("Disabled"))
-local var2 = tModule.interface({
-	categories = tModule.array(tModule.interface({
-		[if engineFeaturePresetChatUseExpressionTrayOptionsEndpoint then "contents" else "messages"] = tModule.array(tModule.interface({
-			[if engineFeaturePresetChatUseExpressionTrayOptionsEndpoint then "text" else "value"] = tModule.string,
-			presetId = tModule.string
+local UnionResult = TModule.union(TModule.literal("Enabled"), TModule.literal("ReadOnly"), TModule.literal("Disabled"))
+local InterfaceResult = TModule.interface({
+	categories = TModule.array(TModule.interface({
+		[if EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint then "contents" else "messages"] = TModule.array(TModule.interface({
+			[if EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint then "text" else "value"] = TModule.string,
+			presetId = TModule.string
 		}))
 	}))
 })
 
-return function(value)
-	-- upvalues: engineFeaturePresetChatUseExpressionTrayOptionsEndpoint (ref), var1 (ref), var2 (ref)
-	if type(value) ~= "table" then
+return function(p1) --[[ Line: 26 | Named "normalizePresetCatalog" ]]
+	-- upvalues: EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint (copy), UnionResult (copy), InterfaceResult (copy)
+	if type(p1) ~= "table" then
 		return nil
 	end
-	local var3 = if engineFeaturePresetChatUseExpressionTrayOptionsEndpoint then value.status else value.accessLevel
+	local Status = if EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint then p1.status else p1.accessLevel
 	
-	if not var1(var3) then
+	if not UnionResult(Status) then
 		return nil
 	end
-	local version = value.version
+	local Version = p1.version
 	
-	if not engineFeaturePresetChatUseExpressionTrayOptionsEndpoint and var3 ~= "Disabled" and (type(version) ~= "string" or version == "") then
+	if not EngineFeaturePresetChatUseExpressionTrayOptionsEndpoint and Status ~= "Disabled" and (type(Version) ~= "string" or Version == "") then
 		return nil
 	end
-	local t = {}
+	local CategoryGroups = {}
 	
-	if type(value.categoryGroups) == "table" then
-		for i, v in value.categoryGroups do
-			if var2(v) then
-				table.insert(t, v)
+	if type(p1.categoryGroups) == "table" then
+		for _, categoryGroup in p1.categoryGroups do
+			if InterfaceResult(categoryGroup) then
+				table.insert(CategoryGroups, categoryGroup)
 			end
 		end
 	end
 	return {
-		accessLevel = var3,
-		categoryGroups = t,
-		version = if type(version) == "string" then version else ""
+		accessLevel = Status,
+		categoryGroups = CategoryGroups,
+		version = if type(Version) == "string" then Version else ""
 	}
 end

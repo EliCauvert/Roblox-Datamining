@@ -1,53 +1,49 @@
-﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
-local reactModule = require(parent.React)
-local robloxAppEnumsModule = require(parent.RobloxAppEnums)
-local urlBuilderModule = require(parent.UrlBuilder)
-local universalAppPolicyModule = require(parent.UniversalAppPolicy)
-local navigationModule = require(parent.Navigation)
-local linkingProtocolModule = require(parent.LinkingProtocol)
-local appPage = robloxAppEnumsModule.AppPage
-local urlBuilder = urlBuilderModule.UrlBuilder
-local useAppPolicy = universalAppPolicyModule.useAppPolicy
-local useNavigation = navigationModule.useNavigation
-local default = linkingProtocolModule.LinkingProtocol.default
-local fFlagEnableBlackbirdPageCloseCallback = require(parent.SharedFlags).FFlagEnableBlackbirdPageCloseCallback
-local getSubscriptionPurchaseCloseCallback = require(parent.RobloxSubscriptionPurchaseApp).Utils.getSubscriptionPurchaseCloseCallback
+﻿local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
+local ReactModule = require(Parent.React)
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
+local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local Default = require(Parent.LinkingProtocol).LinkingProtocol.default
+local FFlagEnableBlackbirdPageCloseCallback = require(Parent.SharedFlags).FFlagEnableBlackbirdPageCloseCallback
+local GetSubscriptionPurchaseCloseCallbackFunction = require(Parent.RobloxSubscriptionPurchaseApp).Utils.getSubscriptionPurchaseCloseCallback
 
-return function(p1)
-	-- upvalues: useAppPolicy (ref), useNavigation (ref), fFlagEnableBlackbirdPageCloseCallback (ref), reactModule (ref), getSubscriptionPurchaseCloseCallback (ref), urlBuilder (ref), default (ref), appPage (ref)
-	local var1 = useAppPolicy(function(p2)
-		return p2.getWebViewSupport()
+return function(UniverseId) --[[ Line: 24 | Named "useNavigateToServers" ]]
+	-- upvalues: UseAppPolicyFunction (copy), UseNavigationFunction (copy), FFlagEnableBlackbirdPageCloseCallback (copy), ReactModule (copy), GetSubscriptionPurchaseCloseCallbackFunction (copy), UrlBuilder (copy), Default (copy), AppPage (copy)
+	local UseAppPolicyResult = UseAppPolicyFunction(function(p1) --[[ Line: 25 ]]
+		return p1.getWebViewSupport()
 	end)
-	local var2 = useNavigation()
-	local var3 = if fFlagEnableBlackbirdPageCloseCallback then reactModule.useMemo(function()
-		-- upvalues: getSubscriptionPurchaseCloseCallback (copy)
-		return if getSubscriptionPurchaseCloseCallback then getSubscriptionPurchaseCloseCallback() else nil
+	local UseNavigationResult = UseNavigationFunction()
+	local UseMemoResult = if FFlagEnableBlackbirdPageCloseCallback then ReactModule.useMemo(function() --[[ Line: 32 ]]
+		-- upvalues: GetSubscriptionPurchaseCloseCallbackFunction (upval)
+		return if GetSubscriptionPurchaseCloseCallbackFunction then GetSubscriptionPurchaseCloseCallbackFunction() else nil
 	end, {}) else nil
 	
-	return reactModule.useCallback(function()
-		-- upvalues: urlBuilder (copy), p1 (ref), default (copy), var1 (ref), var2 (ref), appPage (copy), fFlagEnableBlackbirdPageCloseCallback (copy), var3 (write)
-		local var4 = urlBuilder.game.info.servers({ universeId = p1 })
-		pcall(function()
-			-- upvalues: default (copy), var4 (ref), var1 (copy), var2 (copy), appPage (copy), fFlagEnableBlackbirdPageCloseCallback (copy), var3 (copy)
-			default:isURLRegistered(var4):andThen(function(p2)
-				-- upvalues: default (copy), var4 (copy), var1 (copy), var2 (copy), appPage (copy), fFlagEnableBlackbirdPageCloseCallback (copy), var3 (copy)
-				if p2 then
-					default:detectURL(var4)
+	return ReactModule.useCallback(function() --[[ Line: 37 ]]
+		-- upvalues: UrlBuilder (upval), UniverseId (copy), Default (upval), UseAppPolicyResult (copy), UseNavigationResult (copy), AppPage (upval), FFlagEnableBlackbirdPageCloseCallback (upval), UseMemoResult (ref)
+		local ServersResult = UrlBuilder.game.info.servers({ universeId = UniverseId })
+		pcall(function() --[[ Line: 42 ]]
+			-- upvalues: Default (upval), ServersResult (copy), UseAppPolicyResult (upval), UseNavigationResult (upval), AppPage (upval), FFlagEnableBlackbirdPageCloseCallback (upval), UseMemoResult (upval)
+			Default:isURLRegistered(ServersResult):andThen(function(Result) --[[ Line: 43 ]]
+				-- upvalues: Default (upval), ServersResult (upval), UseAppPolicyResult (upval), UseNavigationResult (upval), AppPage (upval), FFlagEnableBlackbirdPageCloseCallback (upval), UseMemoResult (upval)
+				if Result then
+					Default:detectURL(ServersResult)
 					
 					return
-				elseif var1 then
-					var2.navigate(appPage.GenericWebPage, {
-						detail = var4,
-						extraProps = if fFlagEnableBlackbirdPageCloseCallback then { onClose = var3 } else nil
+				end
+				if UseAppPolicyResult then
+					UseNavigationResult.navigate(AppPage.GenericWebPage, {
+						detail = ServersResult,
+						extraProps = if FFlagEnableBlackbirdPageCloseCallback then { onClose = UseMemoResult } else nil
 					})
 				end
 			end)
 		end)
 	end, {
-		p1,
-		var1,
-		var2,
-		default,
-		var3
+		UniverseId,
+		UseAppPolicyResult,
+		UseNavigationResult,
+		Default,
+		UseMemoResult
 	})
 end

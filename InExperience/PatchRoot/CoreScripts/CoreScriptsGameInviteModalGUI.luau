@@ -1,32 +1,31 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local coreGuiService = game:GetService("CoreGui")
-local userInputService = game:GetService("UserInputService")
+﻿local CorePackages = game:GetService("CorePackages")
+local CoreGui = game:GetService("CoreGui")
+local UserInputService = game:GetService("UserInputService")
 local VRService = game:GetService("VRService")
-local playerListManagerModule = require(coreGuiService:WaitForChild("RobloxGui").Modules.PlayerList.PlayerListManager)
-local mouseIconOverrideService = require(corePackagesService.Workspace.Packages.CoreScriptsCommon).MouseIconOverrideService
-local fFlagGameInviteModalUnlockMouse = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagGameInviteModalUnlockMouse
-local gameInviteModule = require(corePackagesService.Workspace.Packages.GameInvite)
-local renderCoreScriptGameInviteModalContainer = gameInviteModule.renderCoreScriptGameInviteModalContainer
-local gameInviteModalManager = gameInviteModule.GameInviteModalManager
+local PlayerListManagerModule = require(CoreGui:WaitForChild("RobloxGui").Modules.PlayerList.PlayerListManager)
+local MouseIconOverrideService = require(CorePackages.Workspace.Packages.CoreScriptsCommon).MouseIconOverrideService
+local FFlagGameInviteModalUnlockMouse = require(CorePackages.Workspace.Packages.SharedFlags).FFlagGameInviteModalUnlockMouse
+local GameInviteModule = require(CorePackages.Workspace.Packages.GameInvite)
+local GameInviteModalManager = GameInviteModule.GameInviteModalManager
 
-local var1 = function(p1)
-	-- upvalues: playerListManagerModule (ref), fFlagGameInviteModalUnlockMouse (ref), userInputService (ref), VRService (ref), mouseIconOverrideService (ref)
+local function Callback(p1) --[[ Line: 19 ]]
+	-- upvalues: PlayerListManagerModule (copy), FFlagGameInviteModalUnlockMouse (copy), UserInputService (copy), VRService (copy), MouseIconOverrideService (copy)
 	if p1 then
-		playerListManagerModule:HideTemp("GameInviteMenu", true)
+		PlayerListManagerModule:HideTemp("GameInviteMenu", true)
 		
-		if fFlagGameInviteModalUnlockMouse and userInputService.MouseEnabled and not VRService.VREnabled then
-			mouseIconOverrideService.push("GameInviteModal", Enum.OverrideMouseIconBehavior.ForceShow)
+		if FFlagGameInviteModalUnlockMouse and UserInputService.MouseEnabled and not VRService.VREnabled then
+			MouseIconOverrideService.push("GameInviteModal", Enum.OverrideMouseIconBehavior.ForceShow)
 			
 			return
 		end
 	else
-		playerListManagerModule:HideTemp("GameInviteMenu", false)
+		PlayerListManagerModule:HideTemp("GameInviteMenu", false)
 		
-		if fFlagGameInviteModalUnlockMouse then
-			mouseIconOverrideService.pop("GameInviteModal")
+		if FFlagGameInviteModalUnlockMouse then
+			MouseIconOverrideService.pop("GameInviteModal")
 		end
 	end
 end
 
-renderCoreScriptGameInviteModalContainer(require(coreGuiService.RobloxGui.Modules.ApolloClient))
-gameInviteModalManager.ToggleGameInviteModalEvent.Event:Connect(var1)
+GameInviteModule.renderCoreScriptGameInviteModalContainer((require(CoreGui.RobloxGui.Modules.ApolloClient)))
+GameInviteModalManager.ToggleGameInviteModalEvent.Event:Connect(Callback)

@@ -1,30 +1,30 @@
-﻿local avatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
-local parent = avatarExperienceInspectAndBuy.Parent
-local reactModule = require(parent.React)
-local _ = require(avatarExperienceInspectAndBuy.Types)
-local itemTypeEnum = require(parent.AvatarExperienceModel).Enums.ItemTypeEnum
-local constantsModule = require(avatarExperienceInspectAndBuy.Constants)
-local assetLocalizationKeys = constantsModule.AssetLocalizationKeys
-local bundleLocalizationKeys = constantsModule.BundleLocalizationKeys
-local priceStatusLocalizationKeys = constantsModule.PriceStatusLocalizationKeys
-local itemDetailsLocalizationKeys = constantsModule.ItemDetailsLocalizationKeys
-local cryoModule = require(parent.Cryo)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
+﻿local AvatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
+local Parent = AvatarExperienceInspectAndBuy.Parent
+local ReactModule = require(Parent.React)
+local _ = require(AvatarExperienceInspectAndBuy.Types)
+local ItemTypeEnum = require(Parent.AvatarExperienceModel).Enums.ItemTypeEnum
+local ConstantsModule = require(AvatarExperienceInspectAndBuy.Constants)
+local AssetLocalizationKeys = ConstantsModule.AssetLocalizationKeys
+local BundleLocalizationKeys = ConstantsModule.BundleLocalizationKeys
+local PriceStatusLocalizationKeys = ConstantsModule.PriceStatusLocalizationKeys
+local ItemDetailsLocalizationKeys = ConstantsModule.ItemDetailsLocalizationKeys
+local CryoModule = require(Parent.Cryo)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 
-return function(p1)
-	-- upvalues: reactModule (ref), itemTypeEnum (ref), bundleLocalizationKeys (ref), assetLocalizationKeys (ref), cryoModule (ref), priceStatusLocalizationKeys (ref), itemDetailsLocalizationKeys (ref), useLocalization (ref)
-	local var1 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref), itemTypeEnum (copy), bundleLocalizationKeys (copy), assetLocalizationKeys (copy)
-		return if p1 and p1.itemType == itemTypeEnum.Bundle then bundleLocalizationKeys else assetLocalizationKeys
+return function(p1) --[[ Line: 17 ]]
+	-- upvalues: ReactModule (copy), ItemTypeEnum (copy), BundleLocalizationKeys (copy), AssetLocalizationKeys (copy), CryoModule (copy), PriceStatusLocalizationKeys (copy), ItemDetailsLocalizationKeys (copy), UseLocalizationFunction (copy)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 18 ]]
+		-- upvalues: p1 (copy), ItemTypeEnum (upval), BundleLocalizationKeys (upval), AssetLocalizationKeys (upval)
+		return if p1 and p1.itemType == ItemTypeEnum.Bundle then BundleLocalizationKeys else AssetLocalizationKeys
 	end, { p1 })
 	
-	return useLocalization(reactModule.useMemo(function()
-		-- upvalues: cryoModule (copy), var1 (ref), priceStatusLocalizationKeys (copy), itemDetailsLocalizationKeys (copy), p1 (ref)
-		return cryoModule.Dictionary.join(var1, priceStatusLocalizationKeys, itemDetailsLocalizationKeys, {
+	return (UseLocalizationFunction((ReactModule.useMemo(function() --[[ Line: 22 ]]
+		-- upvalues: CryoModule (upval), UseMemoResult (copy), PriceStatusLocalizationKeys (upval), ItemDetailsLocalizationKeys (upval), p1 (copy)
+		return CryoModule.Dictionary.join(UseMemoResult, PriceStatusLocalizationKeys, ItemDetailsLocalizationKeys, {
 			ownedItems = {
-				itemDetailsLocalizationKeys.ownedItems,
+				ItemDetailsLocalizationKeys.ownedItems,
 				QUANTITY = if p1 and p1.collectibleItemDetails then p1.collectibleItemDetails.resellableCount else 0
 			}
 		})
-	end, { var1, p1 }))
+	end, { UseMemoResult, p1 }))))
 end

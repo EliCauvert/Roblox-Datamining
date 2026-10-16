@@ -1,12 +1,13 @@
-﻿local expChat = script:FindFirstAncestor("ExpChat")
-local signalsReactModule = require(expChat.Parent.SignalsReact)
-local getPresetChatStoreModule = require(expChat.Stores.GetPresetChatStore)
-local fFlagExpChatUniverseChatPresetEnabledModule = require(expChat.Flags.FFlagExpChatUniverseChatPresetEnabled)
-local constantsModule = require(expChat.PresetChat.Constants)
+﻿local ExpChat = script:FindFirstAncestor("ExpChat")
+local SignalsReactModule = require(ExpChat.Parent.SignalsReact)
+local GetPresetChatStoreModule = require(ExpChat.Stores.GetPresetChatStore)
+local FFlagExpChatUniverseChatPresetEnabledModule = require(ExpChat.Flags.FFlagExpChatUniverseChatPresetEnabled)
+local ConstantsModule = require(ExpChat.PresetChat.Constants)
 
-return function(value)
-	-- upvalues: getPresetChatStoreModule (ref), signalsReactModule (ref), constantsModule (ref), fFlagExpChatUniverseChatPresetEnabledModule (ref)
-	local var1 = getPresetChatStoreModule(false)
+return function(p1) --[[ Line: 26 | Named "usePresetSurfaceAvailable" ]]
+	-- upvalues: GetPresetChatStoreModule (copy), SignalsReactModule (copy), ConstantsModule (copy), FFlagExpChatUniverseChatPresetEnabledModule (copy)
+	local PresetChatStoreModule = GetPresetChatStoreModule(false)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(PresetChatStoreModule.getAccessLevel)
 	
-	return not (not signalsReactModule.useSignalState(var1.getIsEnabled) or signalsReactModule.useSignalState(var1.getAccessLevel) ~= constantsModule.AccessLevel.Enabled) and (value == nil and not fFlagExpChatUniverseChatPresetEnabledModule)
+	return if SignalsReactModule.useSignalState(PresetChatStoreModule.getIsEnabled) and UseSignalStateResult == ConstantsModule.AccessLevel.Enabled then p1 ~= nil or FFlagExpChatUniverseChatPresetEnabledModule else false
 end

@@ -1,4 +1,4 @@
-﻿local purchaseErrorModule = require(script.Parent.Parent.Enums.PurchaseError)
+﻿local PurchaseErrorModule = require(script.Parent.Parent.Enums.PurchaseError)
 
 return {
 	AssetTypeById = {
@@ -45,24 +45,24 @@ return {
 		["61"] = "Common.AssetTypes.Label.Emote"
 	},
 	PurchaseErrorKey = {
-		[purchaseErrorModule.CannotGetBalance] = "CoreScripts.PurchasePrompt.PurchaseFailed.CannotGetBalance",
-		[purchaseErrorModule.CannotGetItemPrice] = "CoreScripts.PurchasePrompt.PurchaseFailed.CannotGetItemPrice",
-		[purchaseErrorModule.NotForSale] = "CoreScripts.PurchasePrompt.PurchaseFailed.NotForSale",
-		[purchaseErrorModule.NotForSaleHere] = "CoreScripts.PurchasePrompt.PurchaseFailed.NotForSaleHere",
-		[purchaseErrorModule.AlreadyOwn] = "CoreScripts.PurchasePrompt.PurchaseFailed.AlreadyOwn",
-		[purchaseErrorModule.Under13] = "CoreScripts.PurchasePrompt.PurchaseFailed.Under13",
-		[purchaseErrorModule.Limited] = "CoreScripts.PurchasePrompt.PurchaseFailed.Limited",
-		[purchaseErrorModule.ThirdPartyDisabled] = "CoreScripts.PurchasePrompt.PurchaseFailed.ThirdPartyDisabled",
-		[purchaseErrorModule.NotEnoughRobux] = "CoreScripts.PurchasePrompt.PurchaseFailed.NotEnoughRobux",
-		[purchaseErrorModule.NotEnoughRobuxXbox] = "CoreScripts.PurchasePrompt.PurchaseFailed.NotEnoughRobuxXbox",
-		[purchaseErrorModule.NotEnoughRobuxNoUpsell] = "CoreScripts.PurchasePrompt.PurchaseFailed.NotEnoughRobuxNoUpsell",
-		[purchaseErrorModule.TwoFactorNeeded] = "CoreScripts.PurchasePrompt.PurchaseFailed.Enable2SV",
-		[purchaseErrorModule.TwoFactorNeededSettings] = "CoreScripts.PurchasePrompt.PurchaseFailed.Enable2SV",
-		[purchaseErrorModule.UnknownFailure] = "CoreScripts.PurchasePrompt.PurchaseFailed.UnknownFailure",
-		[purchaseErrorModule.UnknownFailureNoItemName] = "CoreScripts.PurchasePrompt.PurchaseFailed.UnknownFailureNoItemName",
-		[purchaseErrorModule.PurchaseDisabled] = "CoreScripts.PurchasePrompt.PurchaseFailed.PurchaseDisabled",
-		[purchaseErrorModule.InvalidFunds] = "CoreScripts.PurchasePrompt.PurchaseFailed.InvalidFunds",
-		[purchaseErrorModule.InvalidFundsUnknown] = "CoreScripts.PurchasePrompt.PurchaseFailed.InvalidFunds",
-		[purchaseErrorModule.PremiumOnly] = "CoreScripts.PurchasePrompt.PurchaseFailed.PremiumOnly"
+		[PurchaseErrorModule.CannotGetBalance] = "CoreScripts.PurchasePrompt.PurchaseFailed.CannotGetBalance",
+		[PurchaseErrorModule.CannotGetItemPrice] = "CoreScripts.PurchasePrompt.PurchaseFailed.CannotGetItemPrice",
+		[PurchaseErrorModule.NotForSale] = "CoreScripts.PurchasePrompt.PurchaseFailed.NotForSale",
+		[PurchaseErrorModule.NotForSaleHere] = "CoreScripts.PurchasePrompt.PurchaseFailed.NotForSaleHere",
+		[PurchaseErrorModule.AlreadyOwn] = "CoreScripts.PurchasePrompt.PurchaseFailed.AlreadyOwn",
+		[PurchaseErrorModule.Under13] = "CoreScripts.PurchasePrompt.PurchaseFailed.Under13",
+		[PurchaseErrorModule.Limited] = "CoreScripts.PurchasePrompt.PurchaseFailed.Limited",
+		[PurchaseErrorModule.ThirdPartyDisabled] = "CoreScripts.PurchasePrompt.PurchaseFailed.ThirdPartyDisabled",
+		[PurchaseErrorModule.NotEnoughRobux] = "CoreScripts.PurchasePrompt.PurchaseFailed.NotEnoughRobux",
+		[PurchaseErrorModule.NotEnoughRobuxXbox] = "CoreScripts.PurchasePrompt.PurchaseFailed.NotEnoughRobuxXbox",
+		[PurchaseErrorModule.NotEnoughRobuxNoUpsell] = "CoreScripts.PurchasePrompt.PurchaseFailed.NotEnoughRobuxNoUpsell",
+		[PurchaseErrorModule.TwoFactorNeeded] = "CoreScripts.PurchasePrompt.PurchaseFailed.Enable2SV",
+		[PurchaseErrorModule.TwoFactorNeededSettings] = "CoreScripts.PurchasePrompt.PurchaseFailed.Enable2SV",
+		[PurchaseErrorModule.UnknownFailure] = "CoreScripts.PurchasePrompt.PurchaseFailed.UnknownFailure",
+		[PurchaseErrorModule.UnknownFailureNoItemName] = "CoreScripts.PurchasePrompt.PurchaseFailed.UnknownFailureNoItemName",
+		[PurchaseErrorModule.PurchaseDisabled] = "CoreScripts.PurchasePrompt.PurchaseFailed.PurchaseDisabled",
+		[PurchaseErrorModule.InvalidFunds] = "CoreScripts.PurchasePrompt.PurchaseFailed.InvalidFunds",
+		[PurchaseErrorModule.InvalidFundsUnknown] = "CoreScripts.PurchasePrompt.PurchaseFailed.InvalidFunds",
+		[PurchaseErrorModule.PremiumOnly] = "CoreScripts.PurchasePrompt.PurchaseFailed.PremiumOnly"
 	}
 }

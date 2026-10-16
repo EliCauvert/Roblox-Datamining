@@ -1,11 +1,17 @@
-﻿local useSequentialAnimationModule = require(script:FindFirstAncestor("CrossExperienceVoice").Hooks.useSequentialAnimation)
+﻿local UseSequentialAnimationModule = require(script:FindFirstAncestor("CrossExperienceVoice").Hooks.useSequentialAnimation)
 
-return function(p1, p2, p3)
-	-- upvalues: useSequentialAnimationModule (ref)
-	local var1, var2 = useSequentialAnimationModule(p1)
+return function(p1, DurationInMs, EasingStyle) --[[ Line: 5 ]]
+	-- upvalues: UseSequentialAnimationModule (copy)
+	local UseSequentialAnimationModuleResult, UseSequentialAnimationModuleResult2 = UseSequentialAnimationModule(p1)
 	
-	return var1, function(p4)
-		-- upvalues: var2 (ref), p2 (ref), p3 (ref)
-		var2({ { value = p4, durationInMs = p2, easingStyle = p3 } }, nil)
+	return UseSequentialAnimationModuleResult, function(Value) --[[ Line: 8 | Named "animate" ]]
+		-- upvalues: UseSequentialAnimationModuleResult2 (copy), DurationInMs (copy), EasingStyle (copy)
+		UseSequentialAnimationModuleResult2({
+			{
+				value = Value,
+				durationInMs = DurationInMs,
+				easingStyle = EasingStyle
+			}
+		}, nil)
 	end
 end

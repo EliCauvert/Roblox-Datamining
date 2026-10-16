@@ -1,47 +1,52 @@
-﻿local telemetryService = game:GetService("TelemetryService")
-local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
+﻿local TelemetryService = game:GetService("TelemetryService")
+local RbxAnalyticsService = game:GetService("RbxAnalyticsService")
 local _ = require(script.Parent.Parent.Components.Presentation.GamepadMenu.EnumGamepadMenuOptions)
-local telemetryServicePlaySessionInfoEnabledEngineFeature = game:GetEngineFeature("TelemetryServicePlaySessionInfoEnabled")
-local gamepadMenuActionThrottleHundrethsPercent = game:DefineFastInt("GamepadMenuActionThrottleHundrethsPercent", 0)
+local TelemetryServicePlaySessionInfoEnabledEngineFeature = game:GetEngineFeature("TelemetryServicePlaySessionInfoEnabled")
+local GamepadMenuActionThrottleHundrethsPercent = game:DefineFastInt("GamepadMenuActionThrottleHundrethsPercent", 0)
 
-local function _(p1, p2)
-	return if p1 == nil then nil else p2(p1)
+local function _(p1, Callback) --[[ Line: 26 | Named "mapProp" ]]
+	return if p1 == nil then nil else Callback(p1)
 end
 
-local t = {}
-t.__index = t
+local GamepadMenuTelemetryModule = {}
+GamepadMenuTelemetryModule.__index = GamepadMenuTelemetryModule
 
-function t.new()
-	-- upvalues: t (ref)
-	return setmetatable({}, t)
+function GamepadMenuTelemetryModule.new() --[[ Line: 34 ]]
+	-- upvalues: GamepadMenuTelemetryModule (copy)
+	return (setmetatable({}, GamepadMenuTelemetryModule))
 end
 
-function t:onOptionSelected()
-	-- upvalues: gamepadMenuActionThrottleHundrethsPercent (ref), telemetryServicePlaySessionInfoEnabledEngineFeature (ref), rbxAnalyticsService (ref), telemetryService (ref)
-	local t = {
+function GamepadMenuTelemetryModule:onOptionSelected() --[[ Line: 39 ]]
+	-- upvalues: GamepadMenuActionThrottleHundrethsPercent (copy), TelemetryServicePlaySessionInfoEnabledEngineFeature (copy), RbxAnalyticsService (copy), TelemetryService (copy)
+	local config = {
 		eventName = "coreui_gamepad_menu_action",
 		description = "Event fired from the client every time GamepadMenu Options are Selected",
 		links = "https://github.rbx.com/Roblox/proto-schemas/pull/5803",
 		backends = { "EventIngest" },
-		throttlingPercentage = gamepadMenuActionThrottleHundrethsPercent,
+		throttlingPercentage = GamepadMenuActionThrottleHundrethsPercent,
 		lastUpdated = { 25, 4, 30 }
 	}
-	local list = { "addPlaceId", "addUniverseId", "addSessionInfo" }
-	local t_1 = { menu_option_name = self.menuOptionName }
-	local usedShortcut = self.usedShortcut
-	t_1.used_shortcut = if usedShortcut ~= nil then nil else tostring(usedShortcut)
-	local isToggleOpen = self.isToggleOpen
-	t_1.is_toggle_open = if isToggleOpen ~= nil then nil else tostring(isToggleOpen)
+	local List = { "addPlaceId", "addUniverseId", "addSessionInfo" }
+	local UsedShortcut = self.usedShortcut
+	local Callback = tostring
+	local CallbackResult = if UsedShortcut == nil then nil else Callback(UsedShortcut)
+	local IsToggleOpen = self.isToggleOpen
+	local Callback1 = tostring
+	local CustomFields = {
+		menu_option_name = self.menuOptionName,
+		used_shortcut = CallbackResult,
+		is_toggle_open = if IsToggleOpen == nil then nil else Callback1(IsToggleOpen)
+	}
 	
-	if telemetryServicePlaySessionInfoEnabledEngineFeature then
-		table.insert(list, "addPlaySessionId")
+	if TelemetryServicePlaySessionInfoEnabledEngineFeature then
+		table.insert(List, "addPlaySessionId")
 	else
-		list = { "addPlaceId", "addUniverseId", "addSessionInfo" }
-		t_1.playsessionid = rbxAnalyticsService:GetPlaySessionId()
+		List = { "addPlaceId", "addUniverseId", "addSessionInfo" }
+		CustomFields.playsessionid = RbxAnalyticsService:GetPlaySessionId()
 	end
-	telemetryService:LogEvent(t, { standardizedFields = list, customFields = t_1 })
+	TelemetryService:LogEvent(config, { standardizedFields = List, customFields = CustomFields })
 end
 
-t.default = t.new()
+GamepadMenuTelemetryModule.default = GamepadMenuTelemetryModule.new()
 
-return t
+return GamepadMenuTelemetryModule

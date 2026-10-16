@@ -1,101 +1,106 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local fFlagLuaAppDefaultHttpRetry = require(parent.SharedFlags).FFlagLuaAppDefaultHttpRetry
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local memo = reactModule.memo
-local useCallback = reactModule.useCallback
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local useEffect = reactModule.useEffect
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local placeIdContainer = require(parent.Loggers).Logger:new("PlaceIdContainer")
-local apiFetchPlaceInfos = require(parent.PlaceInfoRodux).Thunks.ApiFetchPlaceInfos
-local gameCardGroupableModule = require(script.Parent.GameCardGroupable)
-local gameCardContainerModule = require(script.Parent.GameCardContainer)
-local gameCardErrorModule = require(script.Parent.GameCardError)
-local fFlagAppChatInvalidGameLinkCardModule = require(appChat.Flags.FFlagAppChatInvalidGameLinkCard)
-local httpRequestModule = require(parent.HttpRequest)
-local t = {
-	networkImpl = httpRequestModule.config({
-		requestFunction = function(p1, p2, p3)
-			-- upvalues: placeIdContainer (ref), httpRequestModule (ref)
-			placeIdContainer:info("Fetching: {}", string.format("[ requestMethod = %q, url = %q ]", p2, p1))
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local MemoFunction = ReactModule.memo
+local UseCallbackFunction = ReactModule.useCallback
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseEffectFunction = ReactModule.useEffect
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local Logger = require(Parent.Loggers).Logger
+local PlaceIdContainer1 = Logger.new(Logger, "PlaceIdContainer")
+local ApiFetchPlaceInfosFunction = require(Parent.PlaceInfoRodux).Thunks.ApiFetchPlaceInfos
+local GameCardGroupableModule = require(script.Parent.GameCardGroupable)
+local GameCardContainerModule = require(script.Parent.GameCardContainer)
+local GameCardErrorModule = require(script.Parent.GameCardError)
+local GameAssetCardModule = require(script.Parent.GameAssetCard)
+local _ = require(AppChat.Components.ChatConversation.Grouping.MessageGroupShape)
+local FFlagAppChatInvalidGameLinkCardModule = require(AppChat.Flags.FFlagAppChatInvalidGameLinkCard)
+local HttpRequestModule = require(Parent.HttpRequest)
+local config = {
+	networkImpl = HttpRequestModule.config({
+		requestFunction = function(p1, p2, p3) --[[ Line: 34 ]]
+			-- upvalues: PlaceIdContainer1 (copy), HttpRequestModule (copy)
+			PlaceIdContainer1:info("Fetching: {}", string.format("[ requestMethod = %q, url = %q ]", p2, p1))
 			
-			return httpRequestModule.requestFunctions.HttpRbxApi(p1, p2, p3)
+			return HttpRequestModule.requestFunctions.HttpRbxApi(p1, p2, p3)
 		end,
-		maxRetryCount = if fFlagLuaAppDefaultHttpRetry then game:DefineFastInt("PlaceIdContainerHttpRetryCount", 4) else nil
+		maxRetryCount = if require(Parent.SharedFlags).FFlagLuaAppDefaultHttpRetry then game:DefineFastInt("PlaceIdContainerHttpRetryCount", 4) else nil
 	})
 }
 
-local function _(p1, p2)
+local function _(p1, p2) --[[ Line: 57 | Named "getPlaceInfo" ]]
 	return p1.ChatAppReducer.PlaceInfos[p2] or {}
 end
 
-function PlaceIdContainer(p1)
-	-- upvalues: cryoModule (ref), t (ref), useDispatch (ref), useCallback (ref), apiFetchPlaceInfos (ref), useSelector (ref), fFlagAppChatInvalidGameLinkCardModule (ref), reactModule (ref), useEffect (ref), gameCardErrorModule (ref), gameCardGroupableModule (ref), gameCardContainerModule (ref)
-	local var1 = cryoModule.Dictionary.join(t, p1)
-	local var2 = useDispatch()
-	local var3 = useCallback(function(p2, p3)
-		-- upvalues: var2 (ref), apiFetchPlaceInfos (copy)
-		return var2(apiFetchPlaceInfos(p2, { p3 }))
-	end, { var2 })
-	local var4 = useSelector(function(p2)
-		-- upvalues: var1 (ref)
-		local universeId = (p2.ChatAppReducer.PlaceInfos[var1.placeId] or {}).universeId
+function PlaceIdContainer(p1) --[[ Line: 61 ]]
+	-- upvalues: CryoModule (copy), config (copy), UseDispatchFunction (copy), UseCallbackFunction (copy), ApiFetchPlaceInfosFunction (copy), UseSelectorFunction (copy), FFlagAppChatInvalidGameLinkCardModule (copy), ReactModule (copy), UseEffectFunction (copy), GameAssetCardModule (copy), GameCardErrorModule (copy), GameCardGroupableModule (copy), GameCardContainerModule (copy)
+	local JoinResult = CryoModule.Dictionary.join(config, p1)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseCallbackResult = UseCallbackFunction(function(p2, p3) --[[ Line: 65 ]]
+		-- upvalues: UseDispatchResult (copy), ApiFetchPlaceInfosFunction (upval)
+		return UseDispatchResult(ApiFetchPlaceInfosFunction(p2, { p3 }))
+	end, { UseDispatchResult })
+	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 69 ]]
+		-- upvalues: JoinResult (copy)
+		local UniverseId = (p2.ChatAppReducer.PlaceInfos[JoinResult.placeId] or {}).universeId
 		
-		return universeId and tostring(universeId) or nil
+		return UniverseId and tostring(UniverseId) or nil
 	end)
-	local var5 = if fFlagAppChatInvalidGameLinkCardModule then reactModule.useRef(nil) else { current = nil }
-	local var6 = nil
-	local var7 = nil
+	local UseRefResult = if FFlagAppChatInvalidGameLinkCardModule then ReactModule.useRef(nil) else { current = nil }
+	local v1 = nil
+	local Callback = nil
 	
-	if fFlagAppChatInvalidGameLinkCardModule then
-		local var8, var9 = reactModule.useState(false)
-		var6 = var8
-		var7 = var9
+	if FFlagAppChatInvalidGameLinkCardModule then
+		v1, Callback = ReactModule.useState(false)
 	end
-	useEffect(function()
-		-- upvalues: var1 (ref), var3 (ref), fFlagAppChatInvalidGameLinkCardModule (copy), cryoModule (copy), var4 (ref), var5 (ref), var7 (write)
-		local var10 = false
-		var3(var1.networkImpl, var1.placeId):andThen(function(p2)
-			-- upvalues: fFlagAppChatInvalidGameLinkCardModule (copy), var10 (write), cryoModule (copy)
-			if fFlagAppChatInvalidGameLinkCardModule then
-				var10 = not cryoModule.isEmpty(p2)
+	UseEffectFunction(function() --[[ Line: 83 ]]
+		-- upvalues: JoinResult (copy), UseCallbackResult (copy), FFlagAppChatInvalidGameLinkCardModule (upval), CryoModule (upval), UseSelectorResult (copy), UseRefResult (copy), Callback (ref)
+		local Inverted = false
+		UseCallbackResult(JoinResult.networkImpl, JoinResult.placeId):andThen(function(Result) --[[ Line: 87 ]]
+			-- upvalues: FFlagAppChatInvalidGameLinkCardModule (upval), Inverted (ref), CryoModule (upval)
+			if FFlagAppChatInvalidGameLinkCardModule then
+				Inverted = not CryoModule.isEmpty(Result)
 			end
 		end)
 		
-		if not fFlagAppChatInvalidGameLinkCardModule then return end
-		if not var4 then
-			if var5.current then
-				task.cancel(var5.current)
+		if not FFlagAppChatInvalidGameLinkCardModule then return end
+		if not UseSelectorResult then
+			if UseRefResult.current then
+				task.cancel(UseRefResult.current)
 			end
-			var5.current = task.delay(1, function()
-				-- upvalues: var10 (write), var7 (copy), var5 (copy)
-				if not var10 then
-					var7(true)
+			UseRefResult.current = task.delay(1, function() --[[ Line: 99 ]]
+				-- upvalues: Inverted (ref), Callback (upval), UseRefResult (upval)
+				if not Inverted then
+					Callback(true)
 				end
-				var5.current = nil
+				UseRefResult.current = nil
 			end)
 		end
-		return function()
-			-- upvalues: var5 (copy)
-			if var5.current then
-				task.cancel(var5.current)
-				var5.current = nil
+		return function() --[[ Line: 107 ]]
+			-- upvalues: UseRefResult (upval)
+			if UseRefResult.current then
+				task.cancel(UseRefResult.current)
+				UseRefResult.current = nil
 			end
 		end
 	end, {})
 	
-	if fFlagAppChatInvalidGameLinkCardModule then
-		useEffect(function()
-			-- upvalues: var4 (ref), var5 (ref)
-			if var4 and var5.current then
-				task.cancel(var5.current)
-				var5.current = nil
+	if FFlagAppChatInvalidGameLinkCardModule then
+		UseEffectFunction(function() --[[ Line: 119 ]]
+			-- upvalues: UseSelectorResult (copy), UseRefResult (copy)
+			if UseSelectorResult and UseRefResult.current then
+				task.cancel(UseRefResult.current)
+				UseRefResult.current = nil
 			end
-		end, { var4 })
+		end, { UseSelectorResult })
 	end
-	return if var4 then reactModule.createElement(gameCardContainerModule, cryoModule.Dictionary.join(var1, { universeId = var4 })) elseif fFlagAppChatInvalidGameLinkCardModule and var6 then reactModule.createElement(gameCardErrorModule, {}) else reactModule.createElement(gameCardGroupableModule, { isLoading = true, gameName = "", gameThumbnail = "" })
+	return if UseSelectorResult or not JoinResult.groupShape then if UseSelectorResult then ReactModule.createElement(GameCardContainerModule, CryoModule.Dictionary.join(JoinResult, { universeId = UseSelectorResult })) elseif FFlagAppChatInvalidGameLinkCardModule and v1 then ReactModule.createElement(GameCardErrorModule, {}) else ReactModule.createElement(GameCardGroupableModule, { isLoading = true, gameName = "", gameThumbnail = "" }) else ReactModule.createElement(GameAssetCardModule, {
+		isLoading = true,
+		isError = FFlagAppChatInvalidGameLinkCardModule and v1,
+		groupShape = JoinResult.groupShape,
+		mediaRef = JoinResult.mediaRef
+	})
 end
 
-return memo(PlaceIdContainer)
+return MemoFunction(PlaceIdContainer)

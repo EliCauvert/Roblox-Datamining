@@ -1,15 +1,15 @@
-﻿local t = {}
-t.__index = t
+﻿local TrieNodeModule = {}
+TrieNodeModule.__index = TrieNodeModule
 
-function t.new(p1)
-	-- upvalues: t (ref)
-	local t_1 = {}
-	setmetatable(t_1, t)
-	t_1.children = {}
-	t_1.isEndOfWord = false
-	t_1.data = p1
+function TrieNodeModule.new(Data) --[[ Line: 4 ]]
+	-- upvalues: TrieNodeModule (copy)
+	local t = {}
+	setmetatable(t, TrieNodeModule)
+	t.children = {}
+	t.isEndOfWord = false
+	t.data = Data
 	
-	return t_1
+	return t
 end
 
-return t
+return TrieNodeModule

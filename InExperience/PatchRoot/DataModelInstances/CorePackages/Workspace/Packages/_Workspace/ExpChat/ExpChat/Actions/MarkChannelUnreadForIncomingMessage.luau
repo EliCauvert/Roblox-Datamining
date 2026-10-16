@@ -1,8 +1,8 @@
-﻿return require(script:FindFirstAncestor("ExpChat").Parent.Rodux).makeActionCreator(script.Name, function(p1, p2, p3, p4)
+﻿return require(script:FindFirstAncestor("ExpChat").Parent.Rodux).makeActionCreator(script.Name, function(TextChatMessage, IsSenderLocalPlayer, ChannelNameOverride, IsUniverseChat) --[[ Line: 14 ]]
 	return {
-		textChatMessage = p1,
-		isSenderLocalPlayer = p2,
-		channelNameOverride = p3,
-		isUniverseChat = p4
+		textChatMessage = TextChatMessage,
+		isSenderLocalPlayer = IsSenderLocalPlayer,
+		channelNameOverride = ChannelNameOverride,
+		isUniverseChat = IsUniverseChat
 	}
 end)

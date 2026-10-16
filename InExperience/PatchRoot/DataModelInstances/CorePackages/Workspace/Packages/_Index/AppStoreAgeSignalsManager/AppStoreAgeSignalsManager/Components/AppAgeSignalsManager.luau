@@ -1,23 +1,26 @@
-﻿local appStoreAgeSignalsManager = script:FindFirstAncestor("AppStoreAgeSignalsManager")
-local promiseModule = require(appStoreAgeSignalsManager.Parent.Promise)
-local appAgeSignalsServiceWrapperModule = require(script.Parent.AppAgeSignalsServiceWrapper)
-local appStoreAgeSignalsProviderModule = require(appStoreAgeSignalsManager.Utils.AppStoreAgeSignalsProvider)
-local appAgeSignalsTelemetryConfigsModule = require(appStoreAgeSignalsManager.Telemetry.AppAgeSignalsTelemetryConfigs)
+﻿local AppStoreAgeSignalsManager = script:FindFirstAncestor("AppStoreAgeSignalsManager")
+local PromiseModule = require(AppStoreAgeSignalsManager.Parent.Promise)
+local AppAgeSignalsServiceWrapperModule = require(script.Parent.AppAgeSignalsServiceWrapper)
+local AppStoreAgeSignalsProviderModule = require(AppStoreAgeSignalsManager.Utils.AppStoreAgeSignalsProvider)
+local AppAgeSignalsTelemetryConfigsModule = require(AppStoreAgeSignalsManager.Telemetry.AppAgeSignalsTelemetryConfigs)
 
 return {
-	requestAppAgeSignals = function()
-		-- upvalues: appAgeSignalsServiceWrapperModule (ref), promiseModule (ref), appStoreAgeSignalsProviderModule (ref), appAgeSignalsTelemetryConfigsModule (ref)
-		return if appAgeSignalsServiceWrapperModule.isAvailable() then appStoreAgeSignalsProviderModule.checkEligibility():andThen(function(p1)
-			-- upvalues: promiseModule (copy), appAgeSignalsServiceWrapperModule (copy), appStoreAgeSignalsProviderModule (copy), appAgeSignalsTelemetryConfigsModule (copy)
-			return if p1.eligible then appAgeSignalsServiceWrapperModule.getAppAgeSignalsAsync():andThen(function(p2)
-				-- upvalues: appStoreAgeSignalsProviderModule (copy), p1 (ref)
-				return appStoreAgeSignalsProviderModule.publishResult(p1.signalSource, p2, "Complete")
-			end):catch(function(p2)
-				-- upvalues: appAgeSignalsTelemetryConfigsModule (copy), p1 (ref), promiseModule (copy)
-				appAgeSignalsTelemetryConfigsModule.reportError({ error = tostring(p2), signalSource = p1.signalSource })
+	requestAppAgeSignals = function() --[[ Line: 10 ]]
+		-- upvalues: AppAgeSignalsServiceWrapperModule (copy), PromiseModule (copy), AppStoreAgeSignalsProviderModule (copy), AppAgeSignalsTelemetryConfigsModule (copy)
+		return if AppAgeSignalsServiceWrapperModule.isAvailable() then AppStoreAgeSignalsProviderModule.checkEligibility():andThen(function(Result) --[[ Line: 15 ]]
+			-- upvalues: PromiseModule (upval), AppAgeSignalsServiceWrapperModule (upval), AppStoreAgeSignalsProviderModule (upval), AppAgeSignalsTelemetryConfigsModule (upval)
+			return if Result.eligible then AppAgeSignalsServiceWrapperModule.getAppAgeSignalsAsync():andThen(function(Result1) --[[ Line: 21 ]]
+				-- upvalues: AppStoreAgeSignalsProviderModule (upval), Result (copy)
+				return AppStoreAgeSignalsProviderModule.publishResult(Result.signalSource, Result1, "Complete")
+			end):catch(function(Err) --[[ Line: 24 ]]
+				-- upvalues: AppAgeSignalsTelemetryConfigsModule (upval), Result (copy), PromiseModule (upval)
+				AppAgeSignalsTelemetryConfigsModule.reportError({
+					error = tostring(Err),
+					signalSource = Result.signalSource
+				})
 				
-				return promiseModule.reject(p2)
-			end) else promiseModule.reject("User is not eligible for app age signals")
-		end) else promiseModule.reject("AppAgeSignalsService is not available")
+				return PromiseModule.reject(Err)
+			end) else PromiseModule.reject("User is not eligible for app age signals")
+		end) else PromiseModule.reject("AppAgeSignalsService is not available")
 	end
 }

@@ -1,99 +1,99 @@
-﻿local playersService = game:GetService("Players")
-local getFFlagInviteListRerank = require(script:FindFirstAncestor("UserLib").Parent.SharedFlags).GetFFlagInviteListRerank
-local t = {
+﻿local Players = game:GetService("Players")
+local GetFFlagInviteListRerankFunction = require(script:FindFirstAncestor("UserLib").Parent.SharedFlags).GetFFlagInviteListRerank
+local UserModule = {
 	PresenceType = {
 		OFFLINE = "OFFLINE",
 		ONLINE = "ONLINE",
 		IN_GAME = "IN_GAME",
 		IN_STUDIO = "IN_STUDIO"
 	},
-	new = function()
+	new = function() --[[ Line: 17 ]]
 		return {}
 	end
 }
 
-function t.fromData(p1, p2, p3, p4)
-	-- upvalues: t (ref), playersService (ref)
-	local var1 = t.new()
-	var1.id = tostring(p1)
-	var1.isFetching = false
-	var1.isFriend = p3
-	var1.friendRank = p4 or 0
-	var1.lastLocation = nil
-	var1.name = p2
-	var1.displayName = p2
-	var1.externalAppDisplayName = p2
-	var1.universeId = nil
-	var1.placeId = nil
-	var1.rootPlaceId = nil
-	var1.gameInstanceId = nil
-	var1.presence = playersService.LocalPlayer and (var1.id ~= tostring(playersService.LocalPlayer.UserId) and (t.PresenceType.ONLINE or nil))
-	var1.DEPRECATED_thumbnails = nil
-	var1.lastOnline = nil
+function UserModule.fromData(p1, DisplayName, IsFriend, p2) --[[ Line: 25 ]]
+	-- upvalues: UserModule (copy), Players (copy)
+	local NewUser = UserModule.new()
+	NewUser.id = tostring(p1)
+	NewUser.isFetching = false
+	NewUser.isFriend = IsFriend
+	NewUser.friendRank = p2 or 0
+	NewUser.lastLocation = nil
+	NewUser.name = DisplayName
+	NewUser.displayName = DisplayName
+	NewUser.externalAppDisplayName = DisplayName
+	NewUser.universeId = nil
+	NewUser.placeId = nil
+	NewUser.rootPlaceId = nil
+	NewUser.gameInstanceId = nil
+	NewUser.presence = Players.LocalPlayer and NewUser.id == tostring(Players.LocalPlayer.UserId) and UserModule.PresenceType.ONLINE or nil
+	NewUser.DEPRECATED_thumbnails = nil
+	NewUser.lastOnline = nil
 	
-	return var1
+	return NewUser
 end
 
-function t.fromDataTable(p1)
-	-- upvalues: t (ref), playersService (ref), getFFlagInviteListRerank (ref)
-	local var1 = t.new()
-	var1.id = tostring(p1.id)
-	var1.isFriend = p1.isFriend
-	var1.friendRank = p1.friendRank
-	var1.presence = playersService.LocalPlayer and (var1.id ~= tostring(playersService.LocalPlayer.UserId) and (t.PresenceType.ONLINE or nil))
-	var1.isFetching = false
-	var1.lastLocation = nil
-	var1.name = p1.name
-	var1.displayName = p1.displayName or p1.name
-	var1.externalAppDisplayName = p1.externalAppDisplayName
-	var1.universeId = nil
-	var1.placeId = nil
-	var1.rootPlaceId = nil
-	var1.gameInstanceId = nil
-	var1.DEPRECATED_thumbnails = nil
-	var1.lastOnline = nil
-	var1.hasVerifiedBadge = p1.hasVerifiedBadge
+function UserModule.fromDataTable(p1) --[[ Line: 51 ]]
+	-- upvalues: UserModule (copy), Players (copy), GetFFlagInviteListRerankFunction (copy)
+	local NewUser = UserModule.new()
+	NewUser.id = tostring(p1.id)
+	NewUser.isFriend = p1.isFriend
+	NewUser.friendRank = p1.friendRank
+	NewUser.presence = Players.LocalPlayer and NewUser.id == tostring(Players.LocalPlayer.UserId) and UserModule.PresenceType.ONLINE or nil
+	NewUser.isFetching = false
+	NewUser.lastLocation = nil
+	NewUser.name = p1.name
+	NewUser.displayName = p1.displayName or p1.name
+	NewUser.externalAppDisplayName = p1.externalAppDisplayName
+	NewUser.universeId = nil
+	NewUser.placeId = nil
+	NewUser.rootPlaceId = nil
+	NewUser.gameInstanceId = nil
+	NewUser.DEPRECATED_thumbnails = nil
+	NewUser.lastOnline = nil
+	NewUser.hasVerifiedBadge = p1.hasVerifiedBadge
 	
-	if getFFlagInviteListRerank() then
-		var1.friendFrequentRank = p1.friendFrequentRank
+	if GetFFlagInviteListRerankFunction() then
+		NewUser.friendFrequentRank = p1.friendFrequentRank
 	end
-	return var1
+	return NewUser
 end
 
-function t.compare(p1, p2)
-	assert(not (p1 == nil and p2 == nil), "user1 and user2 cannot both be nil")
-	assert(if p1 ~= nil then typeof(p1) == "table" else true, "user1 must be a table or nil")
-	assert(if p2 ~= nil then typeof(p2) == "table" else true, "user2 must be a table or nil")
+function UserModule.compare(List, List1): boolean --[[ Line: 80 ]]
+	assert(not (List == nil and List1 == nil), "user1 and user2 cannot both be nil")
+	assert(List == nil or typeof(List) == "table", "user1 must be a table or nil")
+	assert(List1 == nil or typeof(List1) == "table", "user2 must be a table or nil")
 	
-	if not p1 or not p2 then
+	if not List or not List1 then
 		return false
 	end
-	for i, v in pairs(p2) do
-		if p1[i] ~= v then
+	for i, value in pairs(List1) do
+		if List[i] ~= value then
 			return false
 		end
 	end
-	for i, v in pairs(p1) do
-		if p2[i] ~= v then
+	for i1, value1 in pairs(List) do
+		if List1[i1] ~= value1 then
 			return false
 		end
 	end
 	return true
 end
 
-function t.userPresenceToText(p3, p4)
-	-- upvalues: t (ref)
-	local presence = p4.presence
-	local lastLocation = p4.lastLocation
+function UserModule.userPresenceToText(p1, p2) --[[ Line: 105 ]]
+	-- upvalues: UserModule (copy)
+	local Presence = p2.presence
+	local LastLocation = p2.lastLocation
 	
-	if not presence then
+	if not Presence then
 		return ""
-	elseif presence == t.PresenceType.OFFLINE then
-		return p3:Format("Common.Presence.Label.Offline")
-	elseif presence == t.PresenceType.ONLINE then
-		return p3:Format("Common.Presence.Label.Online")
-	elseif presence ~= t.PresenceType.IN_GAME and presence ~= t.PresenceType.IN_STUDIO then return end
-	return if lastLocation == nil then p3:Format("Common.Presence.Label.Online") else lastLocation
+	elseif Presence == UserModule.PresenceType.OFFLINE then
+		return p1:Format("Common.Presence.Label.Offline")
+	elseif Presence == UserModule.PresenceType.ONLINE then
+		return p1:Format("Common.Presence.Label.Online")
+	elseif Presence ~= UserModule.PresenceType.IN_GAME and Presence ~= UserModule.PresenceType.IN_STUDIO then return end
+	return if LastLocation == nil then p1:Format("Common.Presence.Label.Online") else LastLocation
 end
 
-return t
+return UserModule

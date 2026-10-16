@@ -1,24 +1,24 @@
-﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
-local dataHydrationModule = require(parent.DataHydration)
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
-local sduiActionType = sduiCoreSystemModule.SduiActionType
+﻿local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
+local DataHydrationModule = require(Parent.DataHydration)
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
+local SduiActionType = SduiCoreSystemModule.SduiActionType
 
-return function(p1, _, p2)
-	-- upvalues: sduiErrorType (ref), sduiActionType (ref), dataHydrationModule (ref)
-	local var1 = if p1 then p1.actionParams else nil
+return function(p1, _, p2) --[[ Line: 14 | Named "SduiRefreshGamePassesAction" ]]
+	-- upvalues: SduiErrorType (copy), SduiActionType (copy), DataHydrationModule (copy)
+	local ActionParams = p1 and p1.actionParams or nil
 	
-	if var1 == nil then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if ActionParams == nil then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			message = "Missing actionParams",
-			name = sduiActionType.RefreshGamePasses
+			name = SduiActionType.RefreshGamePasses
 		}, p2.appPage)
 		
 		return
 	end
-	local universeId = var1.universeId
+	local UniverseId = ActionParams.universeId
 	
-	if universeId then
-		dataHydrationModule.Game.getGamePassStore(false).fetchPassesForUniverse(universeId)
+	if UniverseId then
+		DataHydrationModule.Game.getGamePassStore(false).fetchPassesForUniverse(UniverseId)
 	end
 end

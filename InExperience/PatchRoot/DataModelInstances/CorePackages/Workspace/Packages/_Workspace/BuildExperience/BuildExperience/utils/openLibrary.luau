@@ -1,23 +1,22 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local reactModule = require(parent.React)
-local fFlagBuildExperienceLibrary = require(parent.SharedFlags).FFlagBuildExperienceLibrary
-local progressLoadingModule = require(parent.ProgressLoading)
-local launchExperienceModule = require(parent.BuildExperiencePlaytestLaunch.launchExperience)
-local sendBuildExperienceEventModule = require(buildExperience.Telemetry.sendBuildExperienceEvent)
-local pregameOverride = progressLoadingModule.PregameOverride
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local ReactModule = require(Parent.React)
+local FFlagBuildExperienceLibrary = require(Parent.SharedFlags).FFlagBuildExperienceLibrary
+local LaunchExperienceModule = require(Parent.BuildExperiencePlaytestLaunch.launchExperience)
+local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
+local PregameOverride = require(Parent.ProgressLoading).PregameOverride
 
-local function renderPregameSkeleton(p1)
-	-- upvalues: buildExperience (ref), reactModule (ref)
-	return reactModule.createElement(require(buildExperience.Components.Library.LibraryPregameSkeleton), p1)
+local function renderPregameSkeleton(p1) --[[ Line: 19 ]]
+	-- upvalues: BuildExperience (copy), ReactModule (copy)
+	return ReactModule.createElement(require(BuildExperience.Components.Library.LibraryPregameSkeleton), p1)
 end
 
-return function(p1, p2)
-	-- upvalues: sendBuildExperienceEventModule (ref), fFlagBuildExperienceLibrary (ref), pregameOverride (ref), renderPregameSkeleton (ref), launchExperienceModule (ref)
-	sendBuildExperienceEventModule("LIBRARY_IMPRESSION", { placeId = p1, conversationId = p2 }, { phase = "requested", surface = "App" })
+return function(PlaceId, ConversationId) --[[ Line: 24 | Named "openLibrary" ]]
+	-- upvalues: SendBuildExperienceEventModule (copy), FFlagBuildExperienceLibrary (copy), PregameOverride (copy), renderPregameSkeleton (copy), LaunchExperienceModule (copy)
+	SendBuildExperienceEventModule("LIBRARY_IMPRESSION", { placeId = PlaceId, conversationId = ConversationId }, { phase = "requested", surface = "App" })
 	
-	if fFlagBuildExperienceLibrary then
-		pregameOverride.setPregameOverride({ placeId = p1, render = renderPregameSkeleton })
+	if FFlagBuildExperienceLibrary then
+		PregameOverride.setPregameOverride({ placeId = PlaceId, render = renderPregameSkeleton })
 	end
-	launchExperienceModule(p1, "BuildLibrary", false, { sessionId = p2 })
+	LaunchExperienceModule(PlaceId, "BuildLibrary", false, { sessionId = ConversationId })
 end

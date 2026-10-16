@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.ExpChatDebug.ExpChatDebug)
+﻿return (require(script.Parent._Workspace.ExpChatDebug.ExpChatDebug))

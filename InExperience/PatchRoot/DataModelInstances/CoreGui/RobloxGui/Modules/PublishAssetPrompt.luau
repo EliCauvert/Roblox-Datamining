@@ -1,34 +1,34 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local coreGuiService = game:GetService("CoreGui")
-local localizationService = game:GetService("LocalizationService")
-local renderWithCoreScriptsStyleProviderModule = require(script.Parent.Common.renderWithCoreScriptsStyleProvider)
-local localization = require(corePackagesService.Workspace.Packages.InExperienceLocales).Localization
-local localizationProvider = require(corePackagesService.Workspace.Packages.Localization).LocalizationProvider
-local roactModule = require(corePackagesService.Packages.Roact)
-local roduxModule = require(corePackagesService.Packages.Rodux)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local publishAssetPromptAppModule = require(script.Components.PublishAssetPromptApp)
-local reducerModule = require(script.Reducer)
-local connectAssetServiceEventsModule = require(script.ConnectAssetServiceEvents)
-local t = {}
-t.__index = t
+﻿local CorePackages = game:GetService("CorePackages")
+local CoreGui = game:GetService("CoreGui")
+local LocalizationService = game:GetService("LocalizationService")
+local RenderWithCoreScriptsStyleProviderModule = require(script.Parent.Common.renderWithCoreScriptsStyleProvider)
+local Localization = require(CorePackages.Workspace.Packages.InExperienceLocales).Localization
+local LocalizationProvider = require(CorePackages.Workspace.Packages.Localization).LocalizationProvider
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoduxModule = require(CorePackages.Packages.Rodux)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local PublishAssetPromptAppModule = require(script.Components.PublishAssetPromptApp)
+local ReducerModule = require(script.Reducer)
+local ConnectAssetServiceEventsModule = require(script.ConnectAssetServiceEvents)
+local Module = {}
+Module.__index = Module
 
-function t.new()
-	-- upvalues: t (ref), roactModule (ref), publishAssetPromptAppModule (ref), roduxModule (ref), reducerModule (ref), roactRoduxModule (ref), renderWithCoreScriptsStyleProviderModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), coreGuiService (ref), connectAssetServiceEventsModule (ref)
-	local tbl = setmetatable({}, t)
-	local var1 = roactModule.createElement(publishAssetPromptAppModule)
-	tbl.store = roduxModule.Store.new(reducerModule, nil, { roduxModule.thunkMiddleware })
-	tbl.root = roactModule.createElement("Folder", { Name = "PublishAssetPrompt" }, roactModule.createElement(roactRoduxModule.StoreProvider, { store = tbl.store }, {
-		ThemeProvider = renderWithCoreScriptsStyleProviderModule({
-			LocalizationProvider = roactModule.createElement(localizationProvider, {
-				localization = localization.new(localizationService.RobloxLocaleId)
-			}, { PublishAssetPromptApp = var1 })
+function Module.new() --[[ Line: 24 ]]
+	-- upvalues: Module (copy), RoactModule (copy), PublishAssetPromptAppModule (copy), RoduxModule (copy), ReducerModule (copy), RoactRoduxModule (copy), RenderWithCoreScriptsStyleProviderModule (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), CoreGui (copy), ConnectAssetServiceEventsModule (copy)
+	local self = setmetatable({}, Module)
+	local Element = RoactModule.createElement(PublishAssetPromptAppModule)
+	self.store = RoduxModule.Store.new(ReducerModule, nil, { RoduxModule.thunkMiddleware })
+	self.root = RoactModule.createElement("Folder", { Name = "PublishAssetPrompt" }, (RoactModule.createElement(RoactRoduxModule.StoreProvider, { store = self.store }, {
+		ThemeProvider = RenderWithCoreScriptsStyleProviderModule({
+			LocalizationProvider = RoactModule.createElement(LocalizationProvider, {
+				localization = Localization.new(LocalizationService.RobloxLocaleId)
+			}, { PublishAssetPromptApp = Element })
 		})
-	}))
-	tbl.element = roactModule.mount(tbl.root, coreGuiService, "PublishAssetPrompt")
-	tbl.serviceConnections = connectAssetServiceEventsModule(tbl.store)
+	})))
+	self.element = RoactModule.mount(self.root, CoreGui, "PublishAssetPrompt")
+	self.serviceConnections = ConnectAssetServiceEventsModule(self.store)
 	
-	return tbl
+	return self
 end
 
-return t.new()
+return Module.new()

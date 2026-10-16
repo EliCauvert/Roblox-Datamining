@@ -1,21 +1,21 @@
-﻿local dependenciesModule = require(script:FindFirstAncestor("Squads").dependencies)
-local cryo = dependenciesModule.Cryo
-local react = dependenciesModule.React
+﻿local DependenciesModule = require(script:FindFirstAncestor("Squads").dependencies)
+local Cryo = DependenciesModule.Cryo
+local React = DependenciesModule.React
 
-return function(p1, p2, p3)
-	-- upvalues: react (ref), cryo (ref)
-	return react.useMemo(function()
-		-- upvalues: p3 (ref), p1 (ref), cryo (copy), p2 (ref)
+return function(p1, p2, p3) --[[ Line: 15 ]]
+	-- upvalues: React (copy), Cryo (copy)
+	return React.useMemo(function(): boolean --[[ Line: 16 ]]
+		-- upvalues: p3 (copy), p1 (copy), Cryo (upval), p2 (copy)
 		if p3 == nil then
 			return p1 == 0
 		end
-		local var1 = cryo.List.toSet(p3)
+		local Set = Cryo.List.toSet(p3)
 		
 		if p1 < #p3 then
 			return false
 		end
-		for i, v in p2 do
-			if not var1[tostring(i)] then
+		for i, _ in p2 do
+			if not Set[tostring(i)] then
 				return false
 			end
 		end

@@ -1,73 +1,71 @@
-﻿local httpRbxApiService = game:GetService("HttpRbxApiService")
-local runService = game:GetService("RunService")
-local corePackagesService = game:GetService("CorePackages")
-local parent = script.Parent.Parent
-local network = parent.Network
-local appChatNetworkingModule = require(corePackagesService.Workspace.Packages.AppChatNetworking)
-local httpRequestModule = require(network.httpRequest)
-local getPlaceInfosModule = require(network.Requests.GetPlaceInfos)
-local constructGameLinkUrlModule = require(parent.Utility.constructGameLinkUrl)
-local var1 = httpRequestModule(httpRbxApiService)
-local inviteStatus = require(parent.Resources.Constants).InviteStatus
-local receivedUserInviteStatusModule = require(parent.Actions.ReceivedUserInviteStatus)
+﻿local RunService = game:GetService("RunService")
+local Parent = script.Parent.Parent
+local Network = Parent.Network
+local AppChatNetworkingModule = require(game:GetService("CorePackages").Workspace.Packages.AppChatNetworking)
+local GetPlaceInfosModule = require(Network.Requests.GetPlaceInfos)
+local ConstructGameLinkUrlModule = require(Parent.Utility.constructGameLinkUrl)
+local v1 = require(Network.httpRequest)((game:GetService("HttpRbxApiService")))
+local InviteStatus = require(Parent.Resources.Constants).InviteStatus
+local ReceivedUserInviteStatusModule = require(Parent.Actions.ReceivedUserInviteStatus)
 
-return function(p1, p2)
-	-- upvalues: inviteStatus (ref), receivedUserInviteStatusModule (ref), runService (ref), getPlaceInfosModule (ref), var1 (ref), constructGameLinkUrlModule (ref), appChatNetworkingModule (ref)
-	return function(p3)
-		-- upvalues: p1 (ref), inviteStatus (copy), receivedUserInviteStatusModule (copy), runService (copy), getPlaceInfosModule (copy), var1 (copy), p2 (ref), constructGameLinkUrlModule (copy), appChatNetworkingModule (copy)
-		if p3:getState().invites[tostring(p1)] == inviteStatus.Pending then return end
-		p3:dispatch(receivedUserInviteStatusModule(p1, inviteStatus.Pending))
+return function(p1, p2) --[[ Line: 25 ]]
+	-- upvalues: InviteStatus (copy), ReceivedUserInviteStatusModule (copy), RunService (copy), GetPlaceInfosModule (copy), v1 (copy), ConstructGameLinkUrlModule (copy), AppChatNetworkingModule (copy)
+	return function(p3) --[[ Line: 26 ]]
+		-- upvalues: p1 (copy), InviteStatus (upval), ReceivedUserInviteStatusModule (upval), RunService (upval), GetPlaceInfosModule (upval), v1 (upval), p2 (copy), ConstructGameLinkUrlModule (upval), AppChatNetworkingModule (upval)
+		if p3:getState().invites[tostring(p1)] == InviteStatus.Pending then return end
+		p3:dispatch(ReceivedUserInviteStatusModule(p1, InviteStatus.Pending))
 		
-		if runService:IsStudio() then
-			spawn(function()
-				-- upvalues: p3 (ref), receivedUserInviteStatusModule (copy), p1 (copy), inviteStatus (copy)
-				p3:dispatch(receivedUserInviteStatusModule(p1, inviteStatus.Failed))
+		if RunService:IsStudio() then
+			spawn(function() --[[ Line: 36 ]]
+				-- upvalues: p3 (copy), ReceivedUserInviteStatusModule (upval), p1 (upval), InviteStatus (upval)
+				p3:dispatch(ReceivedUserInviteStatusModule(p1, InviteStatus.Failed))
 			end)
 			
 			return
-		end
-		return getPlaceInfosModule(var1, { p2 }):andThen(function(p4)
-			local var2 = p4.responseBody[1]
-			assert(var2, "Error fetching placeInfos")
-			var2.placeId = tostring(var2.placeId)
-			var2.universeId = tostring(var2.universeId)
-			
-			return var2
-		end):andThen(function(p4)
-			-- upvalues: constructGameLinkUrlModule (copy), appChatNetworkingModule (copy), p1 (copy)
-			local formattedText = string.format("Come join me in %s", p4.name)
-			assert(p4.universeRootPlaceId, "Failed to get universe root place id")
-			formattedText ..= "\n" .. constructGameLinkUrlModule(p4.universeRootPlaceId)
-			
-			return appChatNetworkingModule.http.CreateConversation(nil, "one_to_one", { p1 }):andThen(function(p5)
-				-- upvalues: appChatNetworkingModule (copy), formattedText (write), p4 (ref)
-				local var2 = p5.responseBody.conversations[1]
-				assert(var2, "Failed to create conversation")
+		else
+			return GetPlaceInfosModule(v1, { p2 }):andThen(function(Result) --[[ Line: 42 ]]
+				local ResponseBodyEntry = Result.responseBody[1]
+				assert(ResponseBodyEntry, "Error fetching placeInfos")
+				ResponseBodyEntry.placeId = tostring(ResponseBodyEntry.placeId)
+				ResponseBodyEntry.universeId = tostring(ResponseBodyEntry.universeId)
 				
-				return appChatNetworkingModule.http.SendChatTextMessage(nil, var2.id, formattedText):andThen(function(p6)
-					-- upvalues: var2 (ref), p4 (copy)
-					local var3 = p6.responseBody.messages[1]
-					assert(var3, "Failed to send message")
+				return ResponseBodyEntry
+			end):andThen(function(Result) --[[ Line: 52 ]]
+				-- upvalues: ConstructGameLinkUrlModule (upval), AppChatNetworkingModule (upval), p1 (upval)
+				local Formatted = string.format("Come join me in %s", Result.name)
+				assert(Result.universeRootPlaceId, "Failed to get universe root place id")
+				local Text = Formatted .. "\n" .. ConstructGameLinkUrlModule(Result.universeRootPlaceId)
+				
+				return AppChatNetworkingModule.http.CreateConversation(nil, "one_to_one", { p1 }):andThen(function(Result1) --[[ Line: 56 ]]
+					-- upvalues: AppChatNetworkingModule (upval), Text (ref), Result (copy)
+					local Conversation = Result1.responseBody.conversations[1]
+					assert(Conversation, "Failed to create conversation")
 					
-					return {
-						resultType = if var3.status == "success" then "Success" else "Failed",
-						conversationId = var2.id,
-						placeId = p4.universeRootPlaceId
-					}
+					return AppChatNetworkingModule.http.SendChatTextMessage(nil, Conversation.id, Text):andThen(function(Result1) --[[ Line: 59 ]]
+						-- upvalues: Conversation (copy), Result (upval)
+						local Message = Result1.responseBody.messages[1]
+						assert(Message, "Failed to send message")
+						
+						return {
+							resultType = if Message.status == "success" then "Success" else "Failed",
+							conversationId = Conversation.id,
+							placeId = Result.universeRootPlaceId
+						}
+					end)
+				end):catch(function(Err) --[[ Line: 72 ]]
+					warn("Failed to send invite: " .. tostring(Err))
 				end)
-			end):catch(function(p5)
-				warn("Failed to send invite: " .. tostring(p5))
+			end):andThen(function(Result) --[[ Line: 75 ]]
+				-- upvalues: InviteStatus (upval), p3 (copy), ReceivedUserInviteStatusModule (upval), p1 (upval)
+				local v2, v3 = Result:await()
+				assert(v2, "Failed to unroll promise after friend invitation: " .. tostring(v3))
+				p3:dispatch(ReceivedUserInviteStatusModule(p1, InviteStatus[v3.resultType] or InviteStatus.Failed))
+				
+				return v3
+			end, function(_) --[[ Line: 88 ]]
+				-- upvalues: p3 (copy), ReceivedUserInviteStatusModule (upval), p1 (upval), InviteStatus (upval)
+				p3:dispatch(ReceivedUserInviteStatusModule(p1, InviteStatus.Failed))
 			end)
-		end):andThen(function(p4)
-			-- upvalues: inviteStatus (copy), p3 (ref), receivedUserInviteStatusModule (copy), p1 (copy)
-			local var2, var3 = p4:await()
-			assert(var2, "Failed to unroll promise after friend invitation: " .. tostring(var3))
-			p3:dispatch(receivedUserInviteStatusModule(p1, inviteStatus[var3.resultType] or inviteStatus.Failed))
-			
-			return var3
-		end, function(_)
-			-- upvalues: p3 (ref), receivedUserInviteStatusModule (copy), p1 (copy), inviteStatus (copy)
-			p3:dispatch(receivedUserInviteStatusModule(p1, inviteStatus.Failed))
-		end)
+		end
 	end
 end

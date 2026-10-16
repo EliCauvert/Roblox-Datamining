@@ -1,16 +1,16 @@
-﻿local parent = script:FindFirstAncestor("AppChat").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
+﻿local Parent = script:FindFirstAncestor("AppChat").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
 
-return function(p1)
-	-- upvalues: reactModule (ref), foundationModule (ref)
-	return reactModule.createElement(foundationModule.View, { tag = "row auto-xy align-y-center gap-xsmall" }, {
-		timestamp = reactModule.createElement(foundationModule.Text, {
+return function(p1) --[[ Line: 12 | Named "ConversationRelativeTimestamp" ]]
+	-- upvalues: ReactModule (copy), FoundationModule (copy)
+	return ReactModule.createElement(FoundationModule.View, { tag = "row auto-xy align-y-center gap-xsmall" }, {
+		timestamp = ReactModule.createElement(FoundationModule.Text, {
 			tag = "auto-xy text-body-small content-default",
 			LayoutOrder = 1,
 			Text = p1.timestampText
 		}),
-		unreadDot = if p1.hasUnreadMessages then reactModule.createElement(foundationModule.View, {
+		unreadDot = if p1.hasUnreadMessages then ReactModule.createElement(FoundationModule.View, {
 			tag = "size-200-200 radius-circle bg-action-emphasis",
 			LayoutOrder = 2
 		}) else nil

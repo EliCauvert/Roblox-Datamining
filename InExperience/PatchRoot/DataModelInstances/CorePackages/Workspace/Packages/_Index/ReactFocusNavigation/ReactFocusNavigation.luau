@@ -1,1 +1,1 @@
-﻿return require(game:GetService("CorePackages").Packages.ReactFocusNavigation)
+﻿return (require(game:GetService("CorePackages").Packages.ReactFocusNavigation))

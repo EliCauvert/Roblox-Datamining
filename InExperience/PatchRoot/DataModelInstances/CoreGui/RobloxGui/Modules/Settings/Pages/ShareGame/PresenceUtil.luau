@@ -1,38 +1,37 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local reactModule = require(corePackagesService.Packages.React)
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
-local iconSize = UIBloxModule.App.Constant.IconSize
-local images = UIBloxModule.App.ImageSet.Images
-local t = {
+﻿local CorePackages = game:GetService("CorePackages")
+local ReactModule = require(CorePackages.Packages.React)
+local UIBloxModule = require(CorePackages.Packages.UIBlox)
+local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
+local IconSize = UIBloxModule.App.Constant.IconSize
+local Images = UIBloxModule.App.ImageSet.Images
+local PresenceType = {
 	Offline = "OFFLINE",
 	Online = "ONLINE",
 	InGame = "IN_GAME",
 	InStudio = "IN_STUDIO"
 }
-local t_1 = {
-	[t.Online] = {
+local config = {
+	[PresenceType.Online] = {
 		Image = "component_assets/circle_16",
 		Color = Color3.fromRGB(0, 180, 109),
 		Size = UDim2.new(0, 12, 0, 12)
 	},
-	[t.InGame] = { Image = "icons/menu/games_small" },
-	[t.InStudio] = { Image = "icons/logo/studiologo_small" }
+	[PresenceType.InGame] = { Image = "icons/menu/games_small" },
+	[PresenceType.InStudio] = { Image = "icons/logo/studiologo_small" }
 }
 
 return {
-	PresenceType = t,
-	GetIcon = function(p1)
-		-- upvalues: t_1 (ref), reactModule (ref), imageSetLabel (ref), images (ref), iconSize (ref)
-		local var1 = t_1[p1]
+	PresenceType = PresenceType,
+	GetIcon = function(p1) --[[ Line: 36 ]]
+		-- upvalues: config (copy), ReactModule (copy), ImageSetLabel (copy), Images (copy), IconSize (copy)
+		local Entry = config[p1]
 		
-		if var1 then
-			return reactModule.createElement(imageSetLabel, {
-				BackgroundTransparency = 1,
-				Image = images[var1.Image],
-				ImageColor3 = var1.Color,
-				Size = var1.Size or UDim2.new(0, iconSize.Small, 0, iconSize.Small)
-			})
-		end
+		if not Entry then return end
+		return ReactModule.createElement(ImageSetLabel, {
+			BackgroundTransparency = 1,
+			Image = Images[Entry.Image],
+			ImageColor3 = Entry.Color,
+			Size = Entry.Size or UDim2.new(0, IconSize.Small, 0, IconSize.Small)
+		})
 	end
 }

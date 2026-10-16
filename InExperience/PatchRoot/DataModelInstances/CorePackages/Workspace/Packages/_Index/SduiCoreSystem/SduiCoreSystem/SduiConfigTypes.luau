@@ -1,28 +1,27 @@
-﻿local sduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
-local parent = sduiCoreSystem.Parent
-local tModule = require(parent.t)
-local cryoModule = require(parent.Cryo)
-local _ = require(sduiCoreSystem.SduiComponentType)
-local t = {
-	componentType = tModule.string,
-	props = tModule.optional(tModule.table),
-	templateKey = tModule.optional(tModule.string),
-	analyticsData = tModule.optional(tModule.table),
-	children = tModule.optional(tModule.table),
-	conditionalProps = tModule.optional(tModule.array(tModule.interface(require(sduiCoreSystem.ConditionalProps.SduiConditionalPropTypes).ConditionalPropsInterface))),
-	feedItemKey = tModule.optional(tModule.string),
-	__processed = tModule.optional(tModule.boolean),
-	__isClientBinding = tModule.optional(tModule.boolean),
-	__usageRecorded = tModule.optional(tModule.boolean)
+﻿local SduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
+local Parent = SduiCoreSystem.Parent
+local TModule = require(Parent.t)
+local _ = require(SduiCoreSystem.SduiComponentType)
+local UiComponentInterface = {
+	componentType = TModule.string,
+	props = TModule.optional(TModule.table),
+	templateKey = TModule.optional(TModule.string),
+	analyticsData = TModule.optional(TModule.table),
+	children = TModule.optional(TModule.table),
+	conditionalProps = TModule.optional(TModule.array(TModule.interface(require(SduiCoreSystem.ConditionalProps.SduiConditionalPropTypes).ConditionalPropsInterface))),
+	feedItemKey = TModule.optional(TModule.string),
+	__processed = TModule.optional(TModule.boolean),
+	__isClientBinding = TModule.optional(TModule.boolean),
+	__usageRecorded = TModule.optional(TModule.boolean)
 }
 
 return {
 	ActionInterface = {
-		actionType = tModule.string,
-		actionParams = tModule.optional(tModule.table),
-		telemetryHandler = tModule.optional(tModule.string),
-		skipUnifiedLogging = if require(parent.SharedFlags).FFlagSduiActionSkipUnifiedLogging then tModule.optional(tModule.boolean) else nil
+		actionType = TModule.string,
+		actionParams = TModule.optional(TModule.table),
+		telemetryHandler = TModule.optional(TModule.string),
+		skipUnifiedLogging = TModule.optional(TModule.boolean)
 	},
-	UiComponentInterface = t,
-	SduiTemplateInterface = cryoModule.Dictionary.join(t, { componentType = tModule.optional(tModule.string) })
+	UiComponentInterface = UiComponentInterface,
+	SduiTemplateInterface = require(Parent.Cryo).Dictionary.join(UiComponentInterface, { componentType = TModule.optional(TModule.string) })
 }

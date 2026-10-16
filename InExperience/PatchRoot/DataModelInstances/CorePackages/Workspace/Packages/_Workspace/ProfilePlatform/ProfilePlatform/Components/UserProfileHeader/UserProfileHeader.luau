@@ -1,240 +1,229 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local sharedFlagsModule = require(parent.SharedFlags)
-local view = require(parent.Foundation).View
-local constantsModule = require(profilePlatform.Common.Constants)
-local enumsModule = require(profilePlatform.Common.Enums)
-local socialIdentityContainerModule = require(profilePlatform.Components.UserProfileHeader.SocialIdentityContainer)
-local contextualInformationModule = require(profilePlatform.Components.UserProfileHeader.ContextualInformation)
-local socialChipCountsRowContainer = require(profilePlatform.Components.UserProfileHeader.SocialChipCountsRow).SocialChipCountsRowContainer
-local userProfileAvatarModule = require(profilePlatform.Components.UserProfileHeader.UserProfileAvatar)
-local userProfileSettingsToggleModule = require(profilePlatform.Components.UserProfileHeader.UserProfileSettingsToggle)
-local avatarHeadshotComponentModule = require(profilePlatform.Components.UserProfileHeader.AvatarHeadshotComponent)
-local inspectAvatarTooltipModule = require(profilePlatform.Components.InspectAvatar.InspectAvatarTooltip)
-local fFlagMoveInExperienceModeToEditProfile = require(parent.SharedFlags).FFlagMoveInExperienceModeToEditProfile
-local disableStreamerModeToggle = game:DefineFastFlag("DisableStreamerModeToggle", false)
-local fFlagProfilePlatformNewProfileHeader = sharedFlagsModule.FFlagProfilePlatformNewProfileHeader
-local fFlagSwitchProfileWidthHookToSocialCommon = sharedFlagsModule.FFlagSwitchProfileWidthHookToSocialCommon
-local fFlagAddPlatformNameToProfileHeader = sharedFlagsModule.FFlagAddPlatformNameToProfileHeader
-local useProfileFormFactorModule = require(profilePlatform.Hooks.useProfileFormFactor)
-local useProfileCardWidthModule = require(profilePlatform.Hooks.useProfileCardWidth)
-local useProfileCardWidth = require(parent.ProfilePlatformCommon).Hooks.useProfileCardWidth
-local useShouldShowContextualInformationModule = require(profilePlatform.Hooks.useShouldShowContextualInformation)
-local useProfileWrapperContextModule = require(profilePlatform.Contexts.useProfileWrapperContext)
-local useShouldResizeAvatarModule = require(profilePlatform.Hooks.useShouldResizeAvatar)
-local fFlagProfilePlatformMeTabMobileProfileHero = sharedFlagsModule.FFlagProfilePlatformMeTabMobileProfileHero
-local presenceModule = require(profilePlatform.Rodux.Presence)
-local convertPresenceEnumModule = require(profilePlatform.Utils.convertPresenceEnum)
-local roactUtilsModule = require(parent.RoactUtils)
-local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
-local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
-local useEffectOnMount = roactUtilsModule.Hooks.useEffectOnMount
-local networkingPresenceModule = require(profilePlatform.Networking.NetworkingPresence)
-local fFlagSocialEnableProfileInspectAndBuy = require(parent.SharedFlags).FFlagSocialEnableProfileInspectAndBuy
-local fFlagProfileInspectAvatarCWEntryModule = require(profilePlatform.Flags.FFlagProfileInspectAvatarCWEntry)
-local fFlagSocialEnableProfileInspectAndBuyAnalytics = require(parent.SharedFlags).FFlagSocialEnableProfileInspectAndBuyAnalytics
-local fFlagEnableSocialTabsPage = require(parent.SharedFlags).FFlagEnableSocialTabsPage
-local fFlagProfilePlatformPresenceStoreMigrationModule = require(profilePlatform.Flags.FFlagProfilePlatformPresenceStoreMigration)
-local var1 = if fFlagProfilePlatformPresenceStoreMigrationModule then require(parent.FriendsCommon).Hooks.useGetPresenceByUserId else nil
-local var2 = if fFlagProfilePlatformPresenceStoreMigrationModule then require(parent.DataHydration).Presence.PresenceStore.get() else nil
-local useNavigation = require(parent.Navigation).useNavigation
-local useLocalUserId = require(parent.RobloxAppHooks).useLocalUserId
-local useProfileAnalyticsContextModule = require(profilePlatform.Contexts.useProfileAnalyticsContext)
-local eventNamesModule = require(profilePlatform.Analytics.EventNames)
-local t = { skipFetch = true }
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local View = require(Parent.Foundation).View
+local ConstantsModule = require(ProfilePlatform.Common.Constants)
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local SocialIdentityContainerModule = require(ProfilePlatform.Components.UserProfileHeader.SocialIdentityContainer)
+local ContextualInformationModule = require(ProfilePlatform.Components.UserProfileHeader.ContextualInformation)
+local SocialChipCountsRowContainer = require(ProfilePlatform.Components.UserProfileHeader.SocialChipCountsRow).SocialChipCountsRowContainer
+local UserProfileAvatarModule = require(ProfilePlatform.Components.UserProfileHeader.UserProfileAvatar)
+local UserProfileSettingsToggleModule = require(ProfilePlatform.Components.UserProfileHeader.UserProfileSettingsToggle)
+local AvatarHeadshotComponentModule = require(ProfilePlatform.Components.UserProfileHeader.AvatarHeadshotComponent)
+local InspectAvatarTooltipModule = require(ProfilePlatform.Components.InspectAvatar.InspectAvatarTooltip)
+local FFlagMoveInExperienceModeToEditProfile = require(Parent.SharedFlags).FFlagMoveInExperienceModeToEditProfile
+local DisableStreamerModeToggle = game:DefineFastFlag("DisableStreamerModeToggle", false)
+local FFlagProfilePlatformNewProfileHeader = SharedFlagsModule.FFlagProfilePlatformNewProfileHeader
+local FFlagSwitchProfileWidthHookToSocialCommon = SharedFlagsModule.FFlagSwitchProfileWidthHookToSocialCommon
+local FFlagAddPlatformNameToProfileHeader = SharedFlagsModule.FFlagAddPlatformNameToProfileHeader
+local UseProfileFormFactorModule = require(ProfilePlatform.Hooks.useProfileFormFactor)
+local UseProfileCardWidthModule = require(ProfilePlatform.Hooks.useProfileCardWidth)
+local UseProfileCardWidthFunction = require(Parent.ProfilePlatformCommon).Hooks.useProfileCardWidth
+local UseShouldShowContextualInformationModule = require(ProfilePlatform.Hooks.useShouldShowContextualInformation)
+local UseProfileWrapperContextModule = require(ProfilePlatform.Contexts.useProfileWrapperContext)
+local UseShouldResizeAvatarModule = require(ProfilePlatform.Hooks.useShouldResizeAvatar)
+local FFlagProfilePlatformMeTabMobileProfileHero = SharedFlagsModule.FFlagProfilePlatformMeTabMobileProfileHero
+local PresenceModule = require(ProfilePlatform.Rodux.Presence)
+local ConvertPresenceEnumModule = require(ProfilePlatform.Utils.convertPresenceEnum)
+local RoactUtilsModule = require(Parent.RoactUtils)
+local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
+local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
+local UseEffectOnMountFunction = RoactUtilsModule.Hooks.useEffectOnMount
+local NetworkingPresenceModule = require(ProfilePlatform.Networking.NetworkingPresence)
+local FFlagSocialEnableProfileInspectAndBuy = require(Parent.SharedFlags).FFlagSocialEnableProfileInspectAndBuy
+local FFlagProfileInspectAvatarCWEntryModule = require(ProfilePlatform.Flags.FFlagProfileInspectAvatarCWEntry)
+local FFlagSocialEnableProfileInspectAndBuyAnalytics = require(Parent.SharedFlags).FFlagSocialEnableProfileInspectAndBuyAnalytics
+local FFlagEnableSocialTabsPage = require(Parent.SharedFlags).FFlagEnableSocialTabsPage
+local FFlagProfilePlatformPresenceStoreMigrationModule = require(ProfilePlatform.Flags.FFlagProfilePlatformPresenceStoreMigration)
+local UseGetPresenceByUserId = if FFlagProfilePlatformPresenceStoreMigrationModule then require(Parent.FriendsCommon).Hooks.useGetPresenceByUserId else nil
+local GetResult = if FFlagProfilePlatformPresenceStoreMigrationModule then require(Parent.DataHydration).Presence.PresenceStore.get() else nil
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local UseLocalUserIdFunction = require(Parent.RobloxAppHooks).useLocalUserId
+local UseProfileAnalyticsContextModule = require(ProfilePlatform.Contexts.useProfileAnalyticsContext)
+local EventNamesModule = require(ProfilePlatform.Analytics.EventNames)
+local config = { skipFetch = true }
 
-return function(p1)
-	-- upvalues: fFlagSocialEnableProfileInspectAndBuy (ref), useLocalUserId (ref), useNavigation (ref), reactModule (ref), fFlagSocialEnableProfileInspectAndBuyAnalytics (ref), useProfileAnalyticsContextModule (ref), useProfileWrapperContextModule (ref), eventNamesModule (ref), enumsModule (ref), fFlagProfilePlatformNewProfileHeader (ref), useProfileFormFactorModule (ref), fFlagSwitchProfileWidthHookToSocialCommon (ref), useProfileCardWidth (ref), useProfileCardWidthModule (ref), fFlagProfilePlatformPresenceStoreMigrationModule (ref), useEffectOnMount (ref), var2 (ref), var1 (ref), t (ref), convertPresenceEnumModule (ref), presenceModule (ref), useDispatch (ref), networkingPresenceModule (ref), useSelector (ref), useShouldShowContextualInformationModule (ref), fFlagProfilePlatformMeTabMobileProfileHero (ref), useShouldResizeAvatarModule (ref), constantsModule (ref), view (ref), userProfileAvatarModule (ref), fFlagProfileInspectAvatarCWEntryModule (ref), inspectAvatarTooltipModule (ref), avatarHeadshotComponentModule (ref), fFlagAddPlatformNameToProfileHeader (ref), contextualInformationModule (ref), socialChipCountsRowContainer (ref), fFlagEnableSocialTabsPage (ref), socialIdentityContainerModule (ref), fFlagMoveInExperienceModeToEditProfile (ref), disableStreamerModeToggle (ref), userProfileSettingsToggleModule (ref)
-	local var3
-	local userThumbnail = p1.userThumbnail
-	local var4 = nil
-	local var5 = nil
-	local var6 = nil
-	local var7 = false
-	local var8 = nil
-	local var9 = if fFlagSocialEnableProfileInspectAndBuy then useLocalUserId() else nil
-	
-	if fFlagSocialEnableProfileInspectAndBuy then
-		var3 = tostring(p1.userId) == tostring(var9)
-		var3 = nil
-	else
-		var3 = nil
-	end
-	local var10
-	local var11 = if fFlagSocialEnableProfileInspectAndBuy then useNavigation() else nil
-	local var12 = if fFlagSocialEnableProfileInspectAndBuy then reactModule.useRef(nil) else nil
-	local var13 = if fFlagSocialEnableProfileInspectAndBuy then reactModule.useRef(nil) else nil
-	local var14 = if fFlagSocialEnableProfileInspectAndBuyAnalytics then useProfileAnalyticsContextModule() else nil
-	local var15 = if fFlagSocialEnableProfileInspectAndBuyAnalytics then useProfileWrapperContextModule().profileSessionId else nil
-	local var16 = if fFlagSocialEnableProfileInspectAndBuy then reactModule.useCallback(function()
-		-- upvalues: fFlagSocialEnableProfileInspectAndBuyAnalytics (copy), var14 (ref), eventNamesModule (copy), var15 (ref), var13 (ref), var11 (ref), enumsModule (copy)
-		if fFlagSocialEnableProfileInspectAndBuyAnalytics then
-			var14.fireAnalyticsEvent(eventNamesModule.InspectAvatarOpened, { profileSessionId = var15 })
+return function(p1) --[[ Line: 81 | Named "UserProfileHeader" ]]
+	-- upvalues: FFlagSocialEnableProfileInspectAndBuy (copy), UseLocalUserIdFunction (copy), UseNavigationFunction (copy), ReactModule (copy), FFlagSocialEnableProfileInspectAndBuyAnalytics (copy), UseProfileAnalyticsContextModule (copy), UseProfileWrapperContextModule (copy), EventNamesModule (copy), EnumsModule (copy), FFlagProfilePlatformNewProfileHeader (copy), UseProfileFormFactorModule (copy), FFlagSwitchProfileWidthHookToSocialCommon (copy), UseProfileCardWidthFunction (copy), UseProfileCardWidthModule (copy), FFlagProfilePlatformPresenceStoreMigrationModule (copy), UseEffectOnMountFunction (copy), GetResult (copy), UseGetPresenceByUserId (copy), config (copy), ConvertPresenceEnumModule (copy), PresenceModule (copy), UseDispatchFunction (copy), NetworkingPresenceModule (copy), UseSelectorFunction (copy), UseShouldShowContextualInformationModule (copy), FFlagProfilePlatformMeTabMobileProfileHero (copy), UseShouldResizeAvatarModule (copy), ConstantsModule (copy), View (copy), UserProfileAvatarModule (copy), FFlagProfileInspectAvatarCWEntryModule (copy), InspectAvatarTooltipModule (copy), AvatarHeadshotComponentModule (copy), FFlagAddPlatformNameToProfileHeader (copy), ContextualInformationModule (copy), SocialChipCountsRowContainer (copy), FFlagEnableSocialTabsPage (copy), SocialIdentityContainerModule (copy), FFlagMoveInExperienceModeToEditProfile (copy), DisableStreamerModeToggle (copy), UserProfileSettingsToggleModule (copy)
+	local UserThumbnail = p1.userThumbnail
+	local IsPeekView: boolean? = nil
+	local Height = nil
+	local LayoutVariant = nil
+	local v1 = false
+	local UserPresenceType = nil
+	local UseLocalUserIdResult = if FFlagSocialEnableProfileInspectAndBuy then UseLocalUserIdFunction() else nil
+	local IsTextMatch = if FFlagSocialEnableProfileInspectAndBuy then tostring(p1.userId) == tostring(UseLocalUserIdResult) else nil
+	local UseNavigationResult = if FFlagSocialEnableProfileInspectAndBuy then UseNavigationFunction() else nil
+	local UseRefResult = if FFlagSocialEnableProfileInspectAndBuy then ReactModule.useRef(nil) else nil
+	local UseRefResult1 = if FFlagSocialEnableProfileInspectAndBuy then ReactModule.useRef(nil) else nil
+	local UseProfileAnalyticsContextModuleResult = if FFlagSocialEnableProfileInspectAndBuyAnalytics then UseProfileAnalyticsContextModule() else nil
+	local ProfileSessionId = if FFlagSocialEnableProfileInspectAndBuyAnalytics then UseProfileWrapperContextModule().profileSessionId else nil
+	local UseResult = if FFlagSocialEnableProfileInspectAndBuy then ReactModule.useCallback(function() --[[ Line: 112 ]]
+		-- upvalues: FFlagSocialEnableProfileInspectAndBuyAnalytics (upval), UseProfileAnalyticsContextModuleResult (copy), EventNamesModule (upval), ProfileSessionId (copy), UseRefResult1 (copy), UseNavigationResult (copy), EnumsModule (upval)
+		if FFlagSocialEnableProfileInspectAndBuyAnalytics then
+			UseProfileAnalyticsContextModuleResult.fireAnalyticsEvent(EventNamesModule.InspectAvatarOpened, { profileSessionId = ProfileSessionId })
 		end
-		if var13.current then
-			var13.current.onDismiss()
+		if UseRefResult1.current then
+			UseRefResult1.current.onDismiss()
 		end
-		var11.navigate(enumsModule.Screens.InspectAvatarSheet)
-	end, { var14, var15, var11, var13 }) else nil
+		UseNavigationResult.navigate(EnumsModule.Screens.InspectAvatarSheet)
+	end, {
+		UseProfileAnalyticsContextModuleResult,
+		ProfileSessionId,
+		UseNavigationResult,
+		UseRefResult1
+	}) else nil
 	
-	if fFlagProfilePlatformNewProfileHeader then
-		local var17 = useProfileFormFactorModule()
-		var4 = var17.formFactor == enumsModule.ProfileFormFactor.PeekView
-		local var18 = if fFlagSwitchProfileWidthHookToSocialCommon then useProfileCardWidth() else useProfileCardWidthModule(var17.formFactor == enumsModule.ProfileFormFactor.Wide)
-		local profileId = useProfileWrapperContextModule().profileId
+	if FFlagProfilePlatformNewProfileHeader then
+		local UseProfileFormFactorModuleResult = UseProfileFormFactorModule()
+		IsPeekView = UseProfileFormFactorModuleResult.formFactor == EnumsModule.ProfileFormFactor.PeekView
+		local IsFormFactorMatch = UseProfileFormFactorModuleResult.formFactor == EnumsModule.ProfileFormFactor.Wide
+		local UseProfileCardWidthResult = if FFlagSwitchProfileWidthHookToSocialCommon then UseProfileCardWidthFunction() else UseProfileCardWidthModule(IsFormFactorMatch)
+		local ProfileId = UseProfileWrapperContextModule().profileId
 		
-		if fFlagProfilePlatformPresenceStoreMigrationModule then
-			useEffectOnMount(function()
-				-- upvalues: var2 (copy), profileId (ref)
-				var2.RefreshPresenceByUserId(tostring(profileId))
+		if FFlagProfilePlatformPresenceStoreMigrationModule then
+			UseEffectOnMountFunction(function() --[[ Line: 139 ]]
+				-- upvalues: GetResult (upval), ProfileId (copy)
+				GetResult.RefreshPresenceByUserId((tostring(ProfileId)))
 			end)
-			var10 = var1(profileId, t)
-			var8 = convertPresenceEnumModule(if var10 then var10.userPresenceType else presenceModule.Enums.PresenceType.Offline, if var10 and var10.universeId ~= "" then tonumber(var10.universeId) else nil)
+			local UseGetPresenceByUserIdResult = UseGetPresenceByUserId(ProfileId, config)
+			UserPresenceType = ConvertPresenceEnumModule(if UseGetPresenceByUserIdResult then UseGetPresenceByUserIdResult.userPresenceType else PresenceModule.Enums.PresenceType.Offline, if UseGetPresenceByUserIdResult and UseGetPresenceByUserIdResult.universeId ~= "" then tonumber(UseGetPresenceByUserIdResult.universeId) else nil)
 		else
-			local var19 = useDispatch()
-			useEffectOnMount(function()
-				-- upvalues: var19 (ref), networkingPresenceModule (copy), profileId (ref)
-				var19(networkingPresenceModule.GetPresencesFromUserIds.API({ profileId })):catch(function(_) end)
+			local UseDispatchResult = UseDispatchFunction()
+			UseEffectOnMountFunction(function() --[[ Line: 150 ]]
+				-- upvalues: UseDispatchResult (copy), NetworkingPresenceModule (upval), ProfileId (copy)
+				UseDispatchResult(NetworkingPresenceModule.GetPresencesFromUserIds.API({ ProfileId })):catch(function(_) --[[ Line: 151 ]] end)
 			end)
-			local var20 = useSelector(function(p2)
-				-- upvalues: presenceModule (copy), profileId (ref)
-				return presenceModule.Selectors.getUserPresenceByUserId(p2, profileId) or {
+			local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 154 ]]
+				-- upvalues: PresenceModule (upval), ProfileId (copy)
+				return PresenceModule.Selectors.getUserPresenceByUserId(p2, ProfileId) or {
 					lastLocation = "",
-					userPresenceType = presenceModule.Enums.PresenceType.Offline
+					userPresenceType = PresenceModule.Enums.PresenceType.Offline
 				}
 			end)
-			var8 = convertPresenceEnumModule(var20.userPresenceType, var20.universeId)
+			UserPresenceType = ConvertPresenceEnumModule(UseSelectorResult.userPresenceType, UseSelectorResult.universeId)
 		end
-		var7 = useShouldShowContextualInformationModule(var8)
-		var10 = if fFlagProfilePlatformMeTabMobileProfileHero then useShouldResizeAvatarModule() else false
-		var5 = if fFlagProfilePlatformMeTabMobileProfileHero and var10 then var18 * (constantsModule.ME_TAB_MOBILE_AVATAR_HEIGHT_ASPECT + constantsModule.ME_TAB_MOBILE_TOP_BACKGROUND_INSET_RATIO) else var18 * 0.75
-		var6 = if fFlagProfilePlatformMeTabMobileProfileHero and var10 then enumsModule.ProfileAvatarLayoutVariant.MeTabMobile else nil
+		v1 = UseShouldShowContextualInformationModule(UserPresenceType)
+		local UseShouldResizeAvatarModuleResult = if FFlagProfilePlatformMeTabMobileProfileHero then UseShouldResizeAvatarModule() else false
+		Height = if FFlagProfilePlatformMeTabMobileProfileHero and UseShouldResizeAvatarModuleResult then UseProfileCardWidthResult * (ConstantsModule.ME_TAB_MOBILE_AVATAR_HEIGHT_ASPECT + ConstantsModule.ME_TAB_MOBILE_TOP_BACKGROUND_INSET_RATIO) else UseProfileCardWidthResult * 0.75
+		LayoutVariant = if FFlagProfilePlatformMeTabMobileProfileHero and UseShouldResizeAvatarModuleResult then EnumsModule.ProfileAvatarLayoutVariant.MeTabMobile else nil
 	end
-	if fFlagProfilePlatformNewProfileHeader then
-		return reactModule.createElement(view, {
-			tag = "col gap-large size-full-0 auto-y",
-			BackgroundTransparency = 1,
-			LayoutOrder = p1.layoutOrder
-		}, {
-			UserProfileAvatar = if fFlagSocialEnableProfileInspectAndBuy and not var3 then reactModule.createElement("TextButton", {
-				Size = UDim2.new(1, 0, 0, var5 or 0),
-				BackgroundTransparency = 1,
-				Text = "",
-				LayoutOrder = 1,
-				[reactModule.Event.Activated] = var16
-			}, {
-				Avatar = reactModule.createElement(userProfileAvatarModule, {
-					layoutOrder = 1,
-					userThumbnail = userThumbnail,
-					userId = p1.userId,
-					isPeekView = var4,
-					height = var5,
-					layoutVariant = var6
-				}),
-				TooltipAnchor = if fFlagProfileInspectAvatarCWEntryModule then nil else reactModule.createElement(view, {
-					tag = "position-center-center anchor-center-center size-50",
-					BackgroundTransparency = 1,
-					ref = var12
-				}),
-				Tooltip = if fFlagProfileInspectAvatarCWEntryModule then nil else reactModule.createElement(inspectAvatarTooltipModule, { anchorRef = var12, ref = var13 })
-			}) else reactModule.createElement(userProfileAvatarModule, {
-				layoutOrder = 1,
-				userThumbnail = userThumbnail,
-				userId = p1.userId,
-				isPeekView = var4,
-				height = var5,
-				layoutVariant = var6
-			}),
-			AvatarHeadshotContainer = reactModule.createElement(view, {
-				BackgroundTransparency = 1,
-				LayoutOrder = 2,
-				tag = { ["size-full-0 auto-y"] = true }
-			}, {
-				AvatarHeadshotComponent = reactModule.createElement(avatarHeadshotComponentModule, {
-					layoutOrder = 1,
-					userId = tostring(p1.userId),
-					primaryName = p1.primaryName,
-					username = p1.username,
-					userPresenceType = var8,
-					isPremium = p1.isPremium,
-					isVerified = p1.isVerified,
-					isRobloxAdmin = p1.isRobloxAdmin,
-					platformName = if fFlagAddPlatformNameToProfileHeader then p1.platformName else nil
-				})
-			}),
-			ContextualInformation = if var7 then reactModule.createElement(contextualInformationModule, { layoutOrder = 3, size = UDim2.fromScale(1, 0) }) else nil,
-			SocialCountsRow = if p1.shouldDisplayCounts then reactModule.createElement(socialChipCountsRowContainer, {
-				layoutOrder = 4,
-				size = UDim2.fromScale(1, 0),
-				title = if fFlagEnableSocialTabsPage then `@{p1.username}` else nil
-			}) else nil
-		})
-	end
-	local createElement = reactModule.createElement
-	local var21 = "Frame"
-	local t_1 = {
+	return if FFlagProfilePlatformNewProfileHeader then ReactModule.createElement(View, {
+		tag = "col gap-large size-full-0 auto-y",
 		BackgroundTransparency = 1,
-		Size = UDim2.new(1, 0, 0, constantsModule.USER_PROFILE_HEADER_HEIGHT),
 		LayoutOrder = p1.layoutOrder
-	}
-	local t_2 = {
-		UserProfileAvatar = if fFlagSocialEnableProfileInspectAndBuy and not var3 then reactModule.createElement("TextButton", {
+	}, {
+		UserProfileAvatar = if FFlagSocialEnableProfileInspectAndBuy and not IsTextMatch then ReactModule.createElement("TextButton", {
+			Size = UDim2.new(1, 0, 0, Height or 0),
+			BackgroundTransparency = 1,
+			Text = "",
+			LayoutOrder = 1,
+			[ReactModule.Event.Activated] = UseResult
+		}, {
+			Avatar = ReactModule.createElement(UserProfileAvatarModule, {
+				layoutOrder = 1,
+				userThumbnail = UserThumbnail,
+				userId = p1.userId,
+				isPeekView = IsPeekView,
+				height = Height,
+				layoutVariant = LayoutVariant
+			}),
+			TooltipAnchor = if FFlagProfileInspectAvatarCWEntryModule then nil else ReactModule.createElement(View, {
+				tag = "position-center-center anchor-center-center size-50",
+				BackgroundTransparency = 1,
+				ref = UseRefResult
+			}),
+			Tooltip = if FFlagProfileInspectAvatarCWEntryModule then nil else ReactModule.createElement(InspectAvatarTooltipModule, { anchorRef = UseRefResult, ref = UseRefResult1 })
+		}) else ReactModule.createElement(UserProfileAvatarModule, {
+			layoutOrder = 1,
+			userThumbnail = UserThumbnail,
+			userId = p1.userId,
+			isPeekView = IsPeekView,
+			height = Height,
+			layoutVariant = LayoutVariant
+		}),
+		AvatarHeadshotContainer = ReactModule.createElement(View, {
+			BackgroundTransparency = 1,
+			LayoutOrder = 2,
+			tag = { ["size-full-0 auto-y"] = true }
+		}, {
+			AvatarHeadshotComponent = ReactModule.createElement(AvatarHeadshotComponentModule, {
+				layoutOrder = 1,
+				userId = tostring(p1.userId),
+				primaryName = p1.primaryName,
+				username = p1.username,
+				userPresenceType = UserPresenceType,
+				isPremium = p1.isPremium,
+				isVerified = p1.isVerified,
+				isRobloxAdmin = p1.isRobloxAdmin,
+				platformName = if FFlagAddPlatformNameToProfileHeader then p1.platformName else nil
+			})
+		}),
+		ContextualInformation = if v1 then ReactModule.createElement(ContextualInformationModule, { layoutOrder = 3, size = UDim2.fromScale(1, 0) }) else nil,
+		SocialCountsRow = if p1.shouldDisplayCounts then ReactModule.createElement(SocialChipCountsRowContainer, {
+			layoutOrder = 4,
+			size = UDim2.fromScale(1, 0),
+			title = if FFlagEnableSocialTabsPage then `@{p1.username}` else nil
+		}) else nil
+	}) else ReactModule.createElement("Frame", {
+		BackgroundTransparency = 1,
+		Size = UDim2.new(1, 0, 0, ConstantsModule.USER_PROFILE_HEADER_HEIGHT),
+		LayoutOrder = p1.layoutOrder
+	}, {
+		UserProfileAvatar = if FFlagSocialEnableProfileInspectAndBuy and not IsTextMatch then ReactModule.createElement("TextButton", {
 			Size = UDim2.fromScale(1, 1),
 			BackgroundTransparency = 1,
 			Text = "",
-			[reactModule.Event.Activated] = var16
+			[ReactModule.Event.Activated] = UseResult
 		}, {
-			Avatar = reactModule.createElement(userProfileAvatarModule, { userThumbnail = userThumbnail, userId = p1.userId }),
-			TooltipAnchor = if fFlagProfileInspectAvatarCWEntryModule then nil else reactModule.createElement(view, {
+			Avatar = ReactModule.createElement(UserProfileAvatarModule, { userThumbnail = UserThumbnail, userId = p1.userId }),
+			TooltipAnchor = if FFlagProfileInspectAvatarCWEntryModule then nil else ReactModule.createElement(View, {
 				tag = "position-center-center anchor-center-center size-50",
 				BackgroundTransparency = 1,
-				ref = var12
+				ref = UseRefResult
 			}),
-			Tooltip = if fFlagProfileInspectAvatarCWEntryModule then nil else reactModule.createElement(inspectAvatarTooltipModule, { anchorRef = var12, ref = var13 })
-		}) else reactModule.createElement(userProfileAvatarModule, { userThumbnail = userThumbnail, userId = p1.userId })
-	}
-	var10 = "Frame"
-	t_2.ProfileTextFrame = reactModule.createElement(var10, {
-		BackgroundTransparency = 1,
-		ZIndex = 10,
-		Size = UDim2.new(1, 0, 0, 0),
-		AutomaticSize = Enum.AutomaticSize.Y,
-		Position = UDim2.new(0, 0, 1, 0),
-		AnchorPoint = Vector2.new(0, 1)
-	}, {
-		UIListLayoutOrder = reactModule.createElement("UIListLayout", {
-			SortOrder = Enum.SortOrder.LayoutOrder,
-			FillDirection = Enum.FillDirection.Vertical,
-			Padding = UDim.new(0, 8)
-		}),
-		SocialIdentity = reactModule.createElement(socialIdentityContainerModule, {
-			layoutOrder = 1,
-			size = UDim2.fromScale(1, 0),
-			primaryName = p1.primaryName,
-			username = p1.username,
-			isPremium = p1.isPremium,
-			isVerified = p1.isVerified,
-			isRobloxAdmin = p1.isRobloxAdmin,
-			isEdited = p1.isEdited,
-			openEditName = p1.openEditName,
-			platformName = if fFlagAddPlatformNameToProfileHeader then p1.platformName else nil
-		}),
-		UserProfileSettingsToggle = if fFlagMoveInExperienceModeToEditProfile or disableStreamerModeToggle or not p1.shouldDisplayUserProfileSettings then nil else reactModule.createElement(userProfileSettingsToggleModule, {
-			layoutOrder = 2,
-			size = UDim2.new(1, 0, 0, 30),
-			isInExperienceNameEnabled = p1.isInExperienceNameEnabled
-		}),
-		ContextualInformation = reactModule.createElement(contextualInformationModule, {
-			size = UDim2.fromScale(1, 0),
-			layoutOrder = if fFlagMoveInExperienceModeToEditProfile then 2 else 3
-		}),
-		SocialCountsRow = if p1.shouldDisplayCounts then reactModule.createElement(socialChipCountsRowContainer, {
-			size = UDim2.fromScale(1, 0),
-			layoutOrder = if fFlagMoveInExperienceModeToEditProfile then 3 else 4,
-			title = if fFlagEnableSocialTabsPage then `@{p1.username}` else nil
-		}) else nil
+			Tooltip = if FFlagProfileInspectAvatarCWEntryModule then nil else ReactModule.createElement(InspectAvatarTooltipModule, { anchorRef = UseRefResult, ref = UseRefResult1 })
+		}) else ReactModule.createElement(UserProfileAvatarModule, { userThumbnail = UserThumbnail, userId = p1.userId }),
+		ProfileTextFrame = ReactModule.createElement("Frame", {
+			BackgroundTransparency = 1,
+			ZIndex = 10,
+			Size = UDim2.new(1, 0, 0, 0),
+			AutomaticSize = Enum.AutomaticSize.Y,
+			Position = UDim2.new(0, 0, 1, 0),
+			AnchorPoint = Vector2.new(0, 1)
+		}, {
+			UIListLayoutOrder = ReactModule.createElement("UIListLayout", {
+				SortOrder = Enum.SortOrder.LayoutOrder,
+				FillDirection = Enum.FillDirection.Vertical,
+				Padding = UDim.new(0, 8)
+			}),
+			SocialIdentity = ReactModule.createElement(SocialIdentityContainerModule, {
+				layoutOrder = 1,
+				size = UDim2.fromScale(1, 0),
+				primaryName = p1.primaryName,
+				username = p1.username,
+				isPremium = p1.isPremium,
+				isVerified = p1.isVerified,
+				isRobloxAdmin = p1.isRobloxAdmin,
+				isEdited = p1.isEdited,
+				openEditName = p1.openEditName,
+				platformName = if FFlagAddPlatformNameToProfileHeader then p1.platformName else nil
+			}),
+			UserProfileSettingsToggle = if FFlagMoveInExperienceModeToEditProfile or (DisableStreamerModeToggle or not p1.shouldDisplayUserProfileSettings) then nil else ReactModule.createElement(UserProfileSettingsToggleModule, {
+				layoutOrder = 2,
+				size = UDim2.new(1, 0, 0, 30),
+				isInExperienceNameEnabled = p1.isInExperienceNameEnabled
+			}),
+			ContextualInformation = ReactModule.createElement(ContextualInformationModule, {
+				size = UDim2.fromScale(1, 0),
+				layoutOrder = if FFlagMoveInExperienceModeToEditProfile then 2 else 3
+			}),
+			SocialCountsRow = if p1.shouldDisplayCounts then ReactModule.createElement(SocialChipCountsRowContainer, {
+				size = UDim2.fromScale(1, 0),
+				layoutOrder = if FFlagMoveInExperienceModeToEditProfile then 3 else 4,
+				title = if FFlagEnableSocialTabsPage then `@{p1.username}` else nil
+			}) else nil
+		})
 	})
-	
-	return createElement(var21, t_1, t_2)
 end

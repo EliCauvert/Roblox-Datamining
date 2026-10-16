@@ -1,19 +1,18 @@
-﻿local parent = script:FindFirstAncestor("RoactUtils").Parent
-local reactModule = require(parent.React)
-local _ = require(parent.AppCommonLib)
+﻿local Parent = script:FindFirstAncestor("RoactUtils").Parent
+local ReactModule = require(Parent.React)
+local _ = require(Parent.AppCommonLib)
 
-return function(value, p1)
-	-- upvalues: reactModule (ref)
-	reactModule.useEffect(function()
-		-- upvalues: value (ref), p1 (ref)
-		if value then
-			assert(value ~= nil, "signal is not nil")
-			local var1 = value:connect(p1)
-			
-			return function()
-				-- upvalues: var1 (ref)
-				var1:disconnect()
-			end
+return function(p1, p2) --[[ Line: 15 | Named "useSignal" ]]
+	-- upvalues: ReactModule (copy)
+	ReactModule.useEffect(function() --[[ Line: 16 ]]
+		-- upvalues: p1 (copy), p2 (copy)
+		if not p1 then return end
+		assert(p1 ~= nil, "signal is not nil")
+		local Connection = p1:connect(p2)
+		
+		return function() --[[ Line: 23 ]]
+			-- upvalues: Connection (copy)
+			Connection:disconnect()
 		end
-	end, { value, p1 })
+	end, { p1, p2 })
 end

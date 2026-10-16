@@ -1,15 +1,15 @@
-﻿local FRIENDS_URLModule = require(script.Parent.Parent.FRIENDS_URL)
+﻿local FRIENDSURLModule = require(script.Parent.Parent.FRIENDS_URL)
 local _ = require(script.Parent.Parent.networkingFriendsTypes)
 
-return function(p1)
-	-- upvalues: FRIENDS_URLModule (ref)
-	return p1.roduxNetworking.GET({ Name = "SearchFriendsByQuery" }, function(p2, p3, p4)
-		-- upvalues: FRIENDS_URLModule (copy)
-		return p2(FRIENDS_URLModule):path("v1"):path("users"):id(p3):path("friends"):path("search"):queryArgs({
-			query = if p4 then p4.query else nil,
-			userSort = if p4 then p4.userSort else nil,
-			cursor = if p4 then p4.cursor else nil,
-			limit = if p4 then p4.limit else nil
+return function(p1) --[[ Line: 12 ]]
+	-- upvalues: FRIENDSURLModule (copy)
+	return p1.roduxNetworking.GET({ Name = "SearchFriendsByQuery" }, function(Callback, p2, p3) --[[ Line: 15 ]]
+		-- upvalues: FRIENDSURLModule (upval)
+		return Callback(FRIENDSURLModule):path("v1"):path("users"):id(p2):path("friends"):path("search"):queryArgs({
+			query = if p3 then p3.query else nil,
+			userSort = if p3 then p3.userSort else nil,
+			cursor = if p3 then p3.cursor else nil,
+			limit = if p3 then p3.limit else nil
 		})
 	end)
 end

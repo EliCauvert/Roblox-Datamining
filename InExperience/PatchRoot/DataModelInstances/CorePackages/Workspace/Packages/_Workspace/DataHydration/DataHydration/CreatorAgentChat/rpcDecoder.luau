@@ -1,43 +1,46 @@
-﻿local httpService = game:GetService("HttpService")
+﻿local HttpService = game:GetService("HttpService")
 local _ = require(script:FindFirstAncestor("DataHydration").Parent.HttpClient)
 
-local function _(p1)
-	-- upvalues: httpService (ref)
-	if p1 == nil or p1 == "" then
+local function _(Buf) --[[ Line: 10 | Named "tryJsonDecode" ]]
+	-- upvalues: HttpService (copy)
+	if Buf == nil or Buf == "" then
 		return nil
+	else
+		local Success, Result = pcall(HttpService.JSONDecode, HttpService, if typeof(Buf) == "buffer" then buffer.tostring(Buf) else Buf)
+		
+		return if Success then Result else nil
 	end
-	local ok, status = pcall(httpService.JSONDecode, httpService, if typeof(p1) == "buffer" then buffer.tostring(p1) else p1)
-	
-	return if ok then status else nil
 end
 
-return function(p1)
-	-- upvalues: httpService (ref)
-	return function(p2)
-		-- upvalues: httpService (copy), p1 (ref)
-		local var1
-		local responseBody = p2.responseBody
+return function(Callback) --[[ Line: 21 | Named "rpcDecoder" ]]
+	-- upvalues: HttpService (copy)
+	return function(p1) --[[ Line: 22 ]]
+		-- upvalues: HttpService (upval), Callback (copy)
+		local ResponseBody = p1.responseBody
+		local v1 = nil
 		
-		if responseBody == nil or responseBody == "" then
-			var1 = nil
+		if ResponseBody == nil or ResponseBody == "" then
+			v1 = nil
 		else
-			local ok, status = pcall(httpService.JSONDecode, httpService, if typeof(responseBody) == "buffer" then buffer.tostring(responseBody) else responseBody)
-			var1 = if ok then status else nil
+			local Success, Result = pcall(HttpService.JSONDecode, HttpService, if typeof(ResponseBody) == "buffer" then buffer.tostring(ResponseBody) else ResponseBody)
+			v1 = if Success then Result else nil
 		end
-		if typeof(var1) == "table" and var1.error then
-			responseBody = var1.error
+		if typeof(v1) == "table" and v1.error then
+			local Error = v1.error
 			
-			return nil, tostring(responseBody.message or "JSON-RPC error"), responseBody.code
-		elseif p2.statusCode < 200 or p2.statusCode >= 300 then
-			return nil, ("CAS HTTP %d: %s"):format(p2.statusCode, if typeof(p2.responseBody) == "buffer" then buffer.tostring(p2.responseBody) else p2.responseBody or ""), nil
+			return nil, tostring(Error.message or "JSON-RPC error"), Error.code
+		elseif p1.statusCode < 200 or p1.statusCode >= 300 then
+			return nil, ("CAS HTTP %d: %s"):format(p1.statusCode, if typeof(p1.responseBody) == "buffer" then buffer.tostring(p1.responseBody) else p1.responseBody or ""), nil
+		else
+			local Result1 = if typeof(v1) == "table" then v1.result else nil
+			
+			if Callback == nil then
+				return Result1, nil, nil
+			else
+				local CallbackResult, CallbackResult2 = Callback(Result1)
+				
+				return CallbackResult, CallbackResult2, nil
+			end
 		end
-		responseBody = if typeof(var1) == "table" then var1.result else nil
-		
-		if p1 == nil then
-			return responseBody, nil, nil
-		end
-		local var2, var3 = p1(responseBody)
-		
-		return var2, var3, nil
 	end
 end

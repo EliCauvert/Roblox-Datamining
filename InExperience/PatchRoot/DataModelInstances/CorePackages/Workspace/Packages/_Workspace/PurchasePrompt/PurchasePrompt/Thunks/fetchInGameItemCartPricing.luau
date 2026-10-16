@@ -1,88 +1,89 @@
-﻿local purchasePrompt = script:FindFirstAncestor("PurchasePrompt")
-local parent = purchasePrompt.Parent
-local httpService = game:GetService("HttpService")
-local playersService = game:GetService("Players")
-local inExperienceOffersModule = require(parent.InExperienceOffers)
-local promiseModule = require(purchasePrompt.Promise)
-local networkModule = require(purchasePrompt.Services.Network)
-local externalSettingsModule = require(purchasePrompt.Services.ExternalSettings)
-local thunkModule = require(purchasePrompt.Thunk)
-local _ = require(purchasePrompt.types)
-local postInGameItemCartPricingModule = require(purchasePrompt.Network.postInGameItemCartPricing)
-local mockPostInGameItemCartPricingModule = require(purchasePrompt.Mocks.MockPostInGameItemCartPricing)
-local fFlagMockCartPricingResponseInStudioModule = require(purchasePrompt.Flags.FFlagMockCartPricingResponseInStudio)
-local getInGameItemCartPricingRequestedItemsModule = require(purchasePrompt.Utils.getInGameItemCartPricingRequestedItems)
-local getInGameItemProductIdentifierModule = require(purchasePrompt.Utils.getInGameItemProductIdentifier)
-local getFeatureKeyForSurfaceModule = require(purchasePrompt.Utils.getFeatureKeyForSurface)
-local getProductTypeFromRequestTypeModule = require(purchasePrompt.Utils.getProductTypeFromRequestType)
-local logUnifiedPurchaseTelemetryCounterModule = require(purchasePrompt.Utils.logUnifiedPurchaseTelemetryCounter)
-local unifiedPurchaseTelemetryModule = require(purchasePrompt.Events.UnifiedPurchaseTelemetry)
-local setCartPricingFetchingModule = require(purchasePrompt.Actions.SetCartPricingFetching)
-local setCartPricingResponseModule = require(purchasePrompt.Actions.SetCartPricingResponse)
-local setCartPricingFetchFailedModule = require(purchasePrompt.Actions.SetCartPricingFetchFailed)
-local var1 = if fFlagMockCartPricingResponseInStudioModule then { networkModule, externalSettingsModule } else { networkModule }
+﻿local PurchasePrompt = script:FindFirstAncestor("PurchasePrompt")
+local HttpService = game:GetService("HttpService")
+local Players = game:GetService("Players")
+local InExperienceOffersModule = require(PurchasePrompt.Parent.InExperienceOffers)
+local PromiseModule = require(PurchasePrompt.Promise)
+local NetworkModule = require(PurchasePrompt.Services.Network)
+local ExternalSettingsModule = require(PurchasePrompt.Services.ExternalSettings)
+local ThunkModule = require(PurchasePrompt.Thunk)
+local _ = require(PurchasePrompt.types)
+local PostInGameItemCartPricingModule = require(PurchasePrompt.Network.postInGameItemCartPricing)
+local MockPostInGameItemCartPricingModule = require(PurchasePrompt.Mocks.MockPostInGameItemCartPricing)
+local FFlagMockCartPricingResponseInStudioModule = require(PurchasePrompt.Flags.FFlagMockCartPricingResponseInStudio)
+local GetInGameItemCartPricingRequestedItemsModule = require(PurchasePrompt.Utils.getInGameItemCartPricingRequestedItems)
+local GetInGameItemProductIdentifierModule = require(PurchasePrompt.Utils.getInGameItemProductIdentifier)
+local GetFeatureKeyForSurfaceModule = require(PurchasePrompt.Utils.getFeatureKeyForSurface)
+local GetProductTypeFromRequestTypeModule = require(PurchasePrompt.Utils.getProductTypeFromRequestType)
+local LogUnifiedPurchaseTelemetryCounterModule = require(PurchasePrompt.Utils.logUnifiedPurchaseTelemetryCounter)
+local UnifiedPurchaseTelemetryModule = require(PurchasePrompt.Events.UnifiedPurchaseTelemetry)
+local SetCartPricingFetchingModule = require(PurchasePrompt.Actions.SetCartPricingFetching)
+local SetCartPricingResponseModule = require(PurchasePrompt.Actions.SetCartPricingResponse)
+local SetCartPricingFetchFailedModule = require(PurchasePrompt.Actions.SetCartPricingFetchFailed)
+local List = if FFlagMockCartPricingResponseInStudioModule then { NetworkModule, ExternalSettingsModule } else { NetworkModule }
 
-local function resolveProductIdentifier(p1)
-	-- upvalues: getInGameItemProductIdentifierModule (ref)
-	local promptRequest = p1.promptRequest
+local function resolveProductIdentifier(State) --[[ Line: 39 ]]
+	-- upvalues: GetInGameItemProductIdentifierModule (copy)
+	local PromptRequest = State.promptRequest
 	
-	return if promptRequest == nil then nil else getInGameItemProductIdentifierModule(promptRequest.infoType, promptRequest.id)
+	return if PromptRequest == nil then nil else GetInGameItemProductIdentifierModule(PromptRequest.infoType, PromptRequest.id)
 end
 
-return function(p1)
-	-- upvalues: thunkModule (ref), var1 (ref), networkModule (ref), fFlagMockCartPricingResponseInStudioModule (ref), externalSettingsModule (ref), mockPostInGameItemCartPricingModule (ref), postInGameItemCartPricingModule (ref), getInGameItemCartPricingRequestedItemsModule (ref), resolveProductIdentifier (ref), promiseModule (ref), playersService (ref), getFeatureKeyForSurfaceModule (ref), inExperienceOffersModule (ref), getProductTypeFromRequestTypeModule (ref), httpService (ref), setCartPricingFetchingModule (ref), setCartPricingFetchFailedModule (ref), setCartPricingResponseModule (ref), logUnifiedPurchaseTelemetryCounterModule (ref), unifiedPurchaseTelemetryModule (ref)
-	return thunkModule.new(script.Name, var1, function(p2, p3)
-		-- upvalues: networkModule (copy), fFlagMockCartPricingResponseInStudioModule (copy), externalSettingsModule (copy), mockPostInGameItemCartPricingModule (copy), postInGameItemCartPricingModule (copy), getInGameItemCartPricingRequestedItemsModule (copy), resolveProductIdentifier (copy), promiseModule (copy), playersService (copy), getFeatureKeyForSurfaceModule (copy), inExperienceOffersModule (copy), getProductTypeFromRequestTypeModule (copy), httpService (copy), setCartPricingFetchingModule (copy), p1 (ref), setCartPricingFetchFailedModule (copy), setCartPricingResponseModule (copy), logUnifiedPurchaseTelemetryCounterModule (copy), unifiedPurchaseTelemetryModule (copy)
-		local var2 = p3[networkModule]
-		local state = p2:getState()
-		local var3 = fFlagMockCartPricingResponseInStudioModule and p3[externalSettingsModule].isStudio()
-		local var4 = if var3 then mockPostInGameItemCartPricingModule else postInGameItemCartPricingModule
-		local var5 = getInGameItemCartPricingRequestedItemsModule(resolveProductIdentifier(state))
+return function(p1) --[[ Line: 47 | Named "fetchInGameItemCartPricing" ]]
+	-- upvalues: ThunkModule (copy), List (copy), NetworkModule (copy), FFlagMockCartPricingResponseInStudioModule (copy), ExternalSettingsModule (copy), MockPostInGameItemCartPricingModule (copy), PostInGameItemCartPricingModule (copy), GetInGameItemCartPricingRequestedItemsModule (copy), resolveProductIdentifier (copy), PromiseModule (copy), Players (copy), GetFeatureKeyForSurfaceModule (copy), InExperienceOffersModule (copy), GetProductTypeFromRequestTypeModule (copy), HttpService (copy), SetCartPricingFetchingModule (copy), SetCartPricingFetchFailedModule (copy), SetCartPricingResponseModule (copy), LogUnifiedPurchaseTelemetryCounterModule (copy), UnifiedPurchaseTelemetryModule (copy)
+	return ThunkModule.new(script.Name, List, function(p2, p3) --[[ Line: 48 ]]
+		-- upvalues: NetworkModule (upval), FFlagMockCartPricingResponseInStudioModule (upval), ExternalSettingsModule (upval), MockPostInGameItemCartPricingModule (upval), PostInGameItemCartPricingModule (upval), GetInGameItemCartPricingRequestedItemsModule (upval), resolveProductIdentifier (upval), PromiseModule (upval), Players (upval), GetFeatureKeyForSurfaceModule (upval), InExperienceOffersModule (upval), GetProductTypeFromRequestTypeModule (upval), HttpService (upval), SetCartPricingFetchingModule (upval), p1 (copy), SetCartPricingFetchFailedModule (upval), SetCartPricingResponseModule (upval), LogUnifiedPurchaseTelemetryCounterModule (upval), UnifiedPurchaseTelemetryModule (upval)
+		local v1 = p3[NetworkModule]
+		local State = p2:getState()
+		local IsStudio = FFlagMockCartPricingResponseInStudioModule and p3[ExternalSettingsModule].isStudio()
+		local MockPostInGameItemCartPricingModule1 = if IsStudio then MockPostInGameItemCartPricingModule else PostInGameItemCartPricingModule
+		local InGameItemCartPricingRequestedItemsModule = GetInGameItemCartPricingRequestedItemsModule(resolveProductIdentifier(State))
 		
-		if var5 == nil or #var5 == 0 then
-			return promiseModule.resolve(nil)
+		if InGameItemCartPricingRequestedItemsModule == nil or #InGameItemCartPricingRequestedItemsModule == 0 then
+			return PromiseModule.resolve(nil)
 		end
-		local userId = playersService.LocalPlayer.UserId
-		local purchaseAnalyticsMetadata = state.purchaseAnalyticsMetadata
-		local surface = purchaseAnalyticsMetadata and purchaseAnalyticsMetadata.surface
-		local var6 = getFeatureKeyForSurfaceModule(surface)
+		local UserId = Players.LocalPlayer.UserId
+		local PurchaseAnalyticsMetadata = State.purchaseAnalyticsMetadata
+		local Surface = PurchaseAnalyticsMetadata and PurchaseAnalyticsMetadata.surface
+		local FeatureKeyForSurfaceModule = GetFeatureKeyForSurfaceModule(Surface)
 		
-		if var3 or inExperienceOffersModule.Utils.getOffersForKey(inExperienceOffersModule.getOffersStore(false).getOffers(false), var6, inExperienceOffersModule.OfferStatuses.Available) ~= nil then
-			local var7 = getProductTypeFromRequestTypeModule(state.promptRequest.requestType)
-			local var8 = httpService:GenerateGUID(false)
-			p2:dispatch(setCartPricingFetchingModule(var8))
+		if IsStudio or InExperienceOffersModule.Utils.getOffersForKey(InExperienceOffersModule.getOffersStore(false).getOffers(false), FeatureKeyForSurfaceModule, InExperienceOffersModule.OfferStatuses.Available) ~= nil then
+			local ProductTypeFromRequestTypeModule = GetProductTypeFromRequestTypeModule(State.promptRequest.requestType)
+			local Guid = HttpService:GenerateGUID(false)
+			p2:dispatch(SetCartPricingFetchingModule(Guid))
 			
-			local function _()
-				-- upvalues: p2 (ref), var8 (ref)
-				local cartPricing = p2:getState().cartPricing
+			local function _(): boolean --[[ Line: 93 | Named "isCurrentRequest" ]]
+				-- upvalues: p2 (copy), Guid (copy)
+				local CartPricing = p2:getState().cartPricing
 				
-				return cartPricing ~= nil and cartPricing.requestId == var8
+				return CartPricing ~= nil and CartPricing.requestId == Guid
 			end
 			
-			return var4(var2, userId, var6, var5, p1, surface, var7):andThen(function(p4)
-				-- upvalues: p2 (ref), var8 (ref), setCartPricingFetchFailedModule (copy), setCartPricingResponseModule (copy)
-				local cartPricing = p2:getState().cartPricing
+			return MockPostInGameItemCartPricingModule1(v1, UserId, FeatureKeyForSurfaceModule, InGameItemCartPricingRequestedItemsModule, p1, Surface, ProductTypeFromRequestTypeModule):andThen(function(Result) --[[ Line: 99 ]]
+				-- upvalues: p2 (copy), Guid (copy), SetCartPricingFetchFailedModule (upval), SetCartPricingResponseModule (upval)
+				local CartPricing = p2:getState().cartPricing
 				
-				if not (cartPricing ~= nil and cartPricing.requestId == var8) then
+				if CartPricing == nil or CartPricing.requestId ~= Guid then
 					return nil
-				elseif p4 == nil then
-					p2:dispatch(setCartPricingFetchFailedModule())
+				elseif Result == nil then
+					p2:dispatch(SetCartPricingFetchFailedModule())
 					
 					return nil
+				else
+					p2:dispatch(SetCartPricingResponseModule(Result))
+					
+					return Result
 				end
-				p2:dispatch(setCartPricingResponseModule(p4))
+			end):catch(function() --[[ Line: 114 ]]
+				-- upvalues: LogUnifiedPurchaseTelemetryCounterModule (upval), UnifiedPurchaseTelemetryModule (upval), Surface (copy), ProductTypeFromRequestTypeModule (copy), p2 (copy), Guid (copy), SetCartPricingFetchFailedModule (upval)
+				LogUnifiedPurchaseTelemetryCounterModule(UnifiedPurchaseTelemetryModule.UnifiedCartPricingHandlerErrorCounter, Surface, ProductTypeFromRequestTypeModule)
+				local CartPricing = p2:getState().cartPricing
 				
-				return p4
-			end):catch(function()
-				-- upvalues: logUnifiedPurchaseTelemetryCounterModule (copy), unifiedPurchaseTelemetryModule (copy), surface (ref), var7 (ref), p2 (ref), var8 (ref), setCartPricingFetchFailedModule (copy)
-				logUnifiedPurchaseTelemetryCounterModule(unifiedPurchaseTelemetryModule.UnifiedCartPricingHandlerErrorCounter, surface, var7)
-				local cartPricing = p2:getState().cartPricing
-				
-				if cartPricing ~= nil and cartPricing.requestId == var8 then
-					p2:dispatch(setCartPricingFetchFailedModule())
+				if CartPricing ~= nil and CartPricing.requestId == Guid then
+					p2:dispatch(SetCartPricingFetchFailedModule())
 				end
 			end)
+		else
+			return PromiseModule.resolve(nil)
 		end
-		return promiseModule.resolve(nil)
 	end)
 end

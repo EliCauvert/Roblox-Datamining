@@ -1,67 +1,68 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local coreGuiService = game:GetService("CoreGui")
-local reactModule = require(corePackagesService.Packages.React)
-local roactModule = require(corePackagesService.Packages.Roact)
-local constantsModule = require(script.Parent.Parent.Constants)
-local mainWindowHeader = constantsModule.Font.MainWindowHeader
-local mainWindowHeader_1 = constantsModule.DefaultFontSize.MainWindowHeader
-local text = constantsModule.Color.Text
-local unselectedGray = constantsModule.Color.UnselectedGray
-local padding = constantsModule.Tooltip.Padding
-local offset = constantsModule.Tooltip.Offset
-local maxWidth = constantsModule.Tooltip.MaxWidth
-local delay = constantsModule.Tooltip.Delay
+﻿local CorePackages = game:GetService("CorePackages")
+local CoreGui = game:GetService("CoreGui")
+local ReactModule = require(CorePackages.Packages.React)
+local RoactModule = require(CorePackages.Packages.Roact)
+local ConstantsModule = require(script.Parent.Parent.Constants)
+local MainWindowHeader = ConstantsModule.Font.MainWindowHeader
+local MainWindowHeader1 = ConstantsModule.DefaultFontSize.MainWindowHeader
+local Text = ConstantsModule.Color.Text
+local UnselectedGray = ConstantsModule.Color.UnselectedGray
+local Padding = ConstantsModule.Tooltip.Padding
+local Offset = ConstantsModule.Tooltip.Offset
+local MaxWidth = ConstantsModule.Tooltip.MaxWidth
+local Delay = ConstantsModule.Tooltip.Delay
 
-return function(p1)
-	-- upvalues: reactModule (ref), delay (ref), roactModule (ref), coreGuiService (ref), mainWindowHeader_1 (ref), text (ref), mainWindowHeader (ref), offset (ref), unselectedGray (ref), padding (ref), maxWidth (ref)
-	local var1, var2 = reactModule.useState(false)
-	local text_1 = p1.text
-	local pos = p1.pos
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), delay (copy)
-		var2(false)
-		local var3 = false
-		task.delay(delay, function()
-			-- upvalues: var3 (write), var2 (copy)
-			if var3 then
+return function(p1) --[[ Line: 21 | Named "Tooltip" ]]
+	-- upvalues: ReactModule (copy), Delay (copy), RoactModule (copy), CoreGui (copy), MainWindowHeader1 (copy), Text (copy), MainWindowHeader (copy), Offset (copy), UnselectedGray (copy), Padding (copy), MaxWidth (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local Text1 = p1.text
+	local Pos = p1.pos
+	ReactModule.useEffect(function() --[[ Line: 26 ]]
+		-- upvalues: UseStateResult2 (copy), Delay (upval)
+		UseStateResult2(false)
+		local Flag = false
+		task.delay(Delay, function() --[[ Line: 29 ]]
+			-- upvalues: Flag (ref), UseStateResult2 (upval)
+			if not Flag then
+				UseStateResult2(true)
+				
 				return
 			end
-			var2(true)
 		end)
 		
-		return function()
-			-- upvalues: var3 (write)
-			var3 = true
+		return function() --[[ Line: 35 ]]
+			-- upvalues: Flag (ref)
+			Flag = true
 		end
-	end, { text_1, pos })
+	end, { Text1, Pos })
 	
-	return roactModule.createElement(roactModule.Portal, { target = coreGuiService }, {
-		TooltipContainer = roactModule.createElement("ScreenGui", {
+	return RoactModule.createElement(RoactModule.Portal, { target = CoreGui }, {
+		TooltipContainer = RoactModule.createElement("ScreenGui", {
 			DisplayOrder = 20,
 			IgnoreGuiInset = true,
 			OnTopOfCoreBlur = true,
-			Enabled = var1
+			Enabled = UseStateResult
 		}, {
-			Tooltip = roactModule.createElement("TextLabel", {
+			Tooltip = RoactModule.createElement("TextLabel", {
 				TextWrapped = true,
 				BackgroundTransparency = 0,
 				BorderSizePixel = 0,
-				Text = text_1,
-				TextSize = mainWindowHeader_1,
-				TextColor3 = text,
+				Text = Text1,
+				TextSize = MainWindowHeader1,
+				TextColor3 = Text,
 				TextXAlignment = Enum.TextXAlignment.Left,
-				Font = mainWindowHeader,
+				Font = MainWindowHeader,
 				AutomaticSize = Enum.AutomaticSize.XY,
-				Position = pos + offset,
-				BackgroundColor3 = unselectedGray
+				Position = Pos + Offset,
+				BackgroundColor3 = UnselectedGray
 			}, {
-				Padding = roactModule.createElement("UIPadding", {
-					PaddingTop = padding,
-					PaddingBottom = padding,
-					PaddingLeft = padding,
-					PaddingRight = padding
+				Padding = RoactModule.createElement("UIPadding", {
+					PaddingTop = Padding,
+					PaddingBottom = Padding,
+					PaddingLeft = Padding,
+					PaddingRight = Padding
 				}),
-				SizeConstraint = roactModule.createElement("UISizeConstraint", { MaxSize = Vector2.new(maxWidth, 1e999) })
+				SizeConstraint = RoactModule.createElement("UISizeConstraint", { MaxSize = Vector2.new(MaxWidth, 1e999) })
 			})
 		})
 	})

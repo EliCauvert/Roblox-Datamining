@@ -1,341 +1,273 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local _ = require(buildExperience.Parent.HttpClient)
-local fFlagBuildExperienceManageDevProduct = require(buildExperience.Flags.FFlagBuildExperienceManageDevProduct) or require(buildExperience.Flags.FFlagBuildExperienceMonetizationNativeUI)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local _ = require(Parent.HttpClient)
+local CreatorApiHttpModule = require(Parent.DataHydration.CreatorApiHttp)
+local FFlagBuildExperienceMonetizationNativeUIModule = require(BuildExperience.Flags.FFlagBuildExperienceMonetizationNativeUI)
+local FFlagBuildExperienceManageDevProductModule = require(BuildExperience.Flags.FFlagBuildExperienceManageDevProduct) or FFlagBuildExperienceMonetizationNativeUIModule
 
-local function getHeader(p1, p2)
-	if p1 == nil then
+local function getHeader(Headers, Text: string) --[[ Line: 21 ]]
+	if Headers == nil then
 		return nil
 	end
-	for i, v in p1 do
-		if string.lower(i) == string.lower(p2) then
-			return v
+	for i, header in Headers do
+		if string.lower(i) == string.lower(Text) then
+			return header
 		end
 	end
 	return nil
 end
 
-local function _(p3)
-	-- upvalues: getHeader (ref)
-	return getHeader(p3.headers, "x-csrf-token")
+local function _(p1) --[[ Line: 33 | Named "getCsrfToken" ]]
+	-- upvalues: getHeader (copy)
+	return (getHeader(p1.headers, "x-csrf-token"))
 end
 
-local _ = function(p3)
-	return string.match(p3, "^[^?]+") or p3
+local _ = function(Text: string): string --[[ Line: 37 | Named "withoutQuery" ]]
+	return string.match(Text, "^[^?]+") or Text
 end
 
-local _ = function(p3)
-	-- upvalues: getHeader (ref)
-	return getHeader(p3.headers, "x-request-id") or getHeader(p3.headers, "x-correlation-id")
+local _ = function(p1) --[[ Line: 41 | Named "getRequestId" ]]
+	-- upvalues: getHeader (copy)
+	return getHeader(p1.headers, "x-request-id") or getHeader(p1.headers, "x-correlation-id")
 end
 
-local _ = function(p3)
-	return if typeof(p3) == "table" then p3.statusCode else tonumber(string.match(p3, "status:%s*(%d%d%d)")) or tonumber(string.match(p3, "HTTP%s+(%d%d%d)"))
+local _ = function(Text: string) --[[ Line: 45 | Named "getResponseCode" ]]
+	return if typeof(Text) == "table" then Text.statusCode else tonumber(string.match(Text, "status:%s*(%d%d%d)")) or tonumber(string.match(Text, "HTTP%s+(%d%d%d)"))
 end
 
-local function classifyStartFailure(p3)
-	local lowerText = string.lower(tostring(p3))
+local function classifyStartFailure(p1): string --[[ Line: 52 ]]
+	local Lowered = string.lower((tostring(p1)))
 	
-	return if string.find(lowerText, "x-api-key", 1, true) then "missing-open-cloud-api-key" elseif string.find(lowerText, "accept", 1, true) and string.find(lowerText, "header", 1, true) then "restricted-accept-header" else "request-start-failure"
+	return if string.find(Lowered, "x-api-key", 1, true) then "missing-open-cloud-api-key" elseif string.find(Lowered, "accept", 1, true) and string.find(Lowered, "header", 1, true) then "restricted-accept-header" else "request-start-failure"
 end
 
-local _ = function(p3, p4, p5)
-	-- upvalues: fFlagBuildExperienceManageDevProduct (ref)
-	local var1 = if p3 ~= nil then nil else p3.log
+local _ = function(p1, p2, p3) --[[ Line: 63 | Named "emit" ]]
+	-- upvalues: FFlagBuildExperienceManageDevProductModule (copy)
+	local Log = if p1 == nil then nil else p1.log
 	
-	if var1 ~= nil then
-		pcall(var1, p4)
+	if Log ~= nil then
+		pcall(Log, p2)
 		
 		return
-	elseif fFlagBuildExperienceManageDevProduct and p5 then
-		warn(p4)
+	end
+	if FFlagBuildExperienceManageDevProductModule and p3 then
+		warn(p2)
 	end
 end
 
-local _ = function(p3, p4, p5)
-	-- upvalues: getHeader (ref)
-	local url = p4.url
-	local var1 = `[{if p3 == nil or p3.label == nil then "DeveloperProduct" else p3.label}] request transport=RequestInternal method={p4.method} url={string.match(url, "^[^?]+") or url} contentType={getHeader(p4.headers, "content-type") or "<none>"} retryCount={p5}`
-	local var2 = if p3 ~= nil then nil else p3.log
+local _ = function(p1, p2, p3) --[[ Line: 72 | Named "reportRequestStart" ]]
+	-- upvalues: getHeader (copy)
+	local Url: string = p2.url
+	local Message: string = `[{if p1 == nil or p1.label == nil then "DeveloperProduct" else p1.label}] request transport=RequestInternal method={p2.method} url={string.match(Url, "^[^?]+") or Url} contentType={getHeader(p2.headers, "content-type") or "<none>"} retryCount={p3}`
+	local Log = if p1 == nil then nil else p1.log
 	
-	if var2 == nil then
-		return
-	end
-	pcall(var2, var1)
-end
-
-local function reportResponse(p6, p7, p8, p9, p10, p11)
-	-- upvalues: getHeader (ref), fFlagBuildExperienceManageDevProduct (ref)
-	local var3
-	local var4 = if p6 == nil or p6.label == nil then "DeveloperProduct" else p6.label
-	local var5 = if typeof(p10) == "table" then p10.statusCode else tonumber(string.match(p10, "status:%s*(%d%d%d)")) or tonumber(string.match(p10, "HTTP%s+(%d%d%d)"))
-	local var6 = if typeof(p10) == "table" then getHeader(p10.headers, "x-request-id") or getHeader(p10.headers, "x-correlation-id") else nil
-	
-	if typeof(p10) == "table" then
-		var3 = getHeader(p10.headers, "x-csrf-token") ~= nil
-		var3 = nil
-	else
-		var3 = false
-	end
-	local url = p7.url
-	local var7 = `[{var4}] response transport=RequestInternal method={p7.method} url={string.match(url, "^[^?]+") or url} responseCode={tostring(var5)} requestId={var6 or "none"} csrfTokenPresent={tostring(var3)} retryCount={p8} willRetry={tostring(p11)} transportSuccess={tostring(p9)}`
-	local var8 = if p9 then if var5 ~= nil then var5 >= 400 else true else not p9
-	local var9 = if p6 ~= nil then nil else p6.log
-	
-	if var9 ~= nil then
-		pcall(var9, var7)
+	if Log ~= nil then
+		pcall(Log, Message)
 		
 		return
-	elseif fFlagBuildExperienceManageDevProduct and var8 then
-		warn(var7)
 	end
 end
 
-local _ = function(p6, p7, p8, p9)
-	-- upvalues: classifyStartFailure (ref), fFlagBuildExperienceManageDevProduct (ref)
-	local url = p7.url
-	local var3 = `[{if p6 == nil or p6.label == nil then "DeveloperProduct" else p6.label}] request transport=RequestInternal method={p7.method} url={string.match(url, "^[^?]+") or url} retryCount={p8} startFailure={classifyStartFailure(p9)}`
-	local var4 = if p6 ~= nil then nil else p6.log
+local function reportResponse(p4, p5, p6, p7, Text: string, p8) --[[ Line: 81 ]]
+	-- upvalues: getHeader (copy), FFlagBuildExperienceManageDevProductModule (copy)
+	local StatusCode = if typeof(Text) == "table" then Text.statusCode else tonumber(string.match(Text, "status:%s*(%d%d%d)")) or tonumber(string.match(Text, "HTTP%s+(%d%d%d)"))
+	local Url: string = p5.url
+	local Message: string = `[{if p4 == nil or p4.label == nil then "DeveloperProduct" else p4.label}] response transport=RequestInternal method={p5.method} url={string.match(Url, "^[^?]+") or Url} responseCode={tostring(StatusCode)} requestId={(if typeof(Text) == "table" then getHeader(Text.headers, "x-request-id") or getHeader(Text.headers, "x-correlation-id") else nil) or "none"} csrfTokenPresent={tostring(typeof(Text) == "table" and getHeader(Text.headers, "x-csrf-token") ~= nil)} retryCount={p6} willRetry={tostring(p8)} transportSuccess={tostring(p7)}`
+	local NoP13: boolean = not p7 or (StatusCode == nil or StatusCode >= 400)
+	local Log = if p4 == nil then nil else p4.log
 	
-	if var4 ~= nil then
-		pcall(var4, var3)
+	if Log ~= nil then
+		pcall(Log, Message)
 		
 		return
-	elseif fFlagBuildExperienceManageDevProduct then
-		warn(var3)
+	end
+	if FFlagBuildExperienceManageDevProductModule and NoP13 then
+		warn(Message)
 	end
 end
 
-local _ = function(p10, p11)
-	-- upvalues: getHeader (ref), reportResponse (ref), classifyStartFailure (ref), fFlagBuildExperienceManageDevProduct (ref)
+local _ = function(p9, p10, p11, p12) --[[ Line: 106 | Named "reportStartFailure" ]]
+	-- upvalues: classifyStartFailure (copy), FFlagBuildExperienceManageDevProductModule (copy)
+	local Url: string = p10.url
+	local Message: string = `[{if p9 == nil or p9.label == nil then "DeveloperProduct" else p9.label}] request transport=RequestInternal method={p10.method} url={string.match(Url, "^[^?]+") or Url} retryCount={p11} startFailure={classifyStartFailure(p12)}`
+	local Log = if p9 == nil then nil else p9.log
+	
+	if Log ~= nil then
+		pcall(Log, Message)
+		
+		return
+	end
+	if FFlagBuildExperienceManageDevProductModule then
+		warn(Message)
+	end
+end
+
+local _ = function(p13, p14) --[[ Line: 122 | Named "withCsrfRetry" ]]
+	-- upvalues: getHeader (copy), reportResponse (copy), classifyStartFailure (copy), FFlagBuildExperienceManageDevProductModule (copy)
 	return {
-		request = function(p12, p13)
-			-- upvalues: p11 (ref), getHeader (copy), p10 (ref), reportResponse (copy), classifyStartFailure (copy), fFlagBuildExperienceManageDevProduct (copy)
-			local var5 = false
-			local t = {}
+		request = function(p15, Callback) --[[ Line: 124 ]]
+			-- upvalues: p14 (copy), getHeader (upval), p13 (copy), reportResponse (upval), classifyStartFailure (upval), FFlagBuildExperienceManageDevProductModule (upval)
+			local Flag = false
+			local List = {}
 			
-			local function startAttempt(p14, p15)
-				-- upvalues: p11 (copy), getHeader (copy), p10 (copy), var5 (write), reportResponse (copy), startAttempt (ref), p13 (ref), classifyStartFailure (copy), fFlagBuildExperienceManageDevProduct (copy), t (ref)
-				local var6 = p11
-				local url = p14.url
-				local var7 = `[{if var6 == nil or var6.label == nil then "DeveloperProduct" else var6.label}] request transport=RequestInternal method={p14.method} url={string.match(url, "^[^?]+") or url} contentType={getHeader(p14.headers, "content-type") or "<none>"} retryCount={p15}`
-				local var8 = if var6 ~= nil then nil else var6.log
+			local function startAttempt(p16, p17) --[[ Line: 131 ]]
+				-- upvalues: p14 (upval), getHeader (upval), p13 (upval), Flag (ref), reportResponse (upval), startAttempt (copy), Callback (copy), classifyStartFailure (upval), FFlagBuildExperienceManageDevProductModule (upval), List (copy)
+				local v1 = p14
+				local Url: string = p16.url
+				local Message: string = `[{if v1 == nil or v1.label == nil then "DeveloperProduct" else v1.label}] request transport=RequestInternal method={p16.method} url={string.match(Url, "^[^?]+") or Url} contentType={getHeader(p16.headers, "content-type") or "<none>"} retryCount={p17}`
+				local Log = if v1 == nil then nil else v1.log
 				
-				if var8 ~= nil then
-					pcall(var8, var7)
+				if Log ~= nil then
+					pcall(Log, Message)
 				end
-				var6 = false
-				local ok, status = pcall(p10.request, p14, function(p16, p17)
-					-- upvalues: var6 (write), var5 (copy), p15 (ref), getHeader (copy), reportResponse (copy), p11 (copy), p14 (ref), startAttempt (copy), p13 (copy)
-					var6 = true
+				local Flag1 = false
+				local Success, Result = pcall(p13.request, p16, function(p18, p19) --[[ Line: 134 ]]
+					-- upvalues: Flag1 (ref), Flag (upval), p17 (copy), getHeader (upval), reportResponse (upval), p14 (upval), p16 (copy), startAttempt (upval), Callback (upval)
+					Flag1 = true
 					
-					if var5 then return end
-					local var9
-					local var10 = if p16 and typeof(p17) == "table" and p15 == 0 then getHeader(p17.headers, "x-csrf-token") else nil
+					if Flag then return end
+					local XCsrfToken = if p18 and typeof(p19) == "table" and p17 == 0 then getHeader(p19.headers, "x-csrf-token") else nil
+					local HasXCsrfToken: boolean = if p18 and typeof(p19) == "table" and p19.statusCode == 403 then XCsrfToken ~= nil else false
+					reportResponse(p14, p16, p17, p18, p19, HasXCsrfToken)
 					
-					if p16 and typeof(p17) == "table" then
-						var9 = false
-						
-						if p17.statusCode == 403 then
-							local _ = var10 ~= nil
-						end
-					else
-						var9 = false
-					end
-					reportResponse(p11, p14, p15, p16, p17, var9)
-					
-					if not var9 then
-						p13(p16, p17)
+					if not HasXCsrfToken then
+						Callback(p18, p19)
 						
 						return
 					end
-					local t = {}
+					local Headers = {}
 					
-					if p14.headers ~= nil then
-						for i, v in p14.headers do
-							t[i] = v
+					if p16.headers ~= nil then
+						for i, header in p16.headers do
+							Headers[i] = header
 						end
 					end
-					t["x-csrf-token"] = var10
+					Headers["x-csrf-token"] = XCsrfToken
 					startAttempt({
-						url = p14.url,
-						method = p14.method,
-						headers = t,
-						body = p14.body,
-						onMessage = p14.onMessage,
-						priority = p14.priority
-					}, p15 + 1)
+						url = p16.url,
+						method = p16.method,
+						headers = Headers,
+						body = p16.body,
+						onMessage = p16.onMessage,
+						priority = p16.priority
+					}, p17 + 1)
 				end)
 				
-				if not ok then
-					local var11 = p11
-					local url_1 = p14.url
-					local var12 = `[{if var11 == nil or var11.label == nil then "DeveloperProduct" else var11.label}] request transport=RequestInternal method={p14.method} url={string.match(url_1, "^[^?]+") or url_1} retryCount={p15} startFailure={classifyStartFailure(status)}`
-					local var13 = if var11 ~= nil then nil else var11.log
-					
-					if var13 ~= nil then
-						pcall(var13, var12)
-					elseif fFlagBuildExperienceManageDevProduct then
-						warn(var12)
+				if not Success then
+					if not Flag1 then
+						local Url1: string = p16.url
+						local Message1: string = `[{if p14 == nil or p14.label == nil then "DeveloperProduct" else p14.label}] request transport=RequestInternal method={p16.method} url={string.match(Url1, "^[^?]+") or Url1} retryCount={p17} startFailure={classifyStartFailure(Result)}`
+						local Log1 = if p14 == nil then nil else p14.log
+						
+						if Log1 == nil then
+							if FFlagBuildExperienceManageDevProductModule then
+								warn(Message1)
+							end
+						else
+							pcall(Log1, Message1)
+						end
 					end
-					error(status, 0)
+					error(Result, 0)
 				end
-				table.insert(t, status)
+				table.insert(List, Result)
 			end
 			
-			startAttempt(p12, 0)
+			startAttempt(p15, 0)
 			
-			return function()
-				-- upvalues: var5 (write), t (ref)
-				if var5 then return end
-				var5 = true
+			return function() --[[ Line: 184 ]]
+				-- upvalues: Flag (ref), List (copy)
+				if Flag then return end
+				Flag = true
 				
-				for i, v in t do
-					v()
+				for _, value in List do
+					value()
 				end
 			end
 		end
 	}
 end
 
-local _ = function(p16)
-	return {
-		request = function(p17, p18)
-			-- upvalues: p16 (ref)
-			local var9 = nil
-			
-			if p17.headers ~= nil then
-				local t = {}
-				
-				for i, v in p17.headers do
-					if string.lower(i) ~= "accept" then
-						t[i] = v
-					end
-				end
-				var9 = t
-			end
-			return p16.request({
-				url = p17.url,
-				method = p17.method,
-				headers = var9,
-				body = p17.body,
-				onMessage = p17.onMessage,
-				priority = p17.priority
-			}, p18)
-		end
-	}
-end
-
-return function(p17, p18)
-	-- upvalues: getHeader (ref), reportResponse (ref), classifyStartFailure (ref), fFlagBuildExperienceManageDevProduct (ref)
-	local t = {
-		request = function(p19, p20)
-			-- upvalues: p17 (ref)
-			local var9 = nil
-			
-			if p19.headers ~= nil then
-				local t = {}
-				
-				for i, v in p19.headers do
-					if string.lower(i) ~= "accept" then
-						t[i] = v
-					end
-				end
-				var9 = t
-			end
-			return p17.request({
-				url = p19.url,
-				method = p19.method,
-				headers = var9,
-				body = p19.body,
-				onMessage = p19.onMessage,
-				priority = p19.priority
-			}, p20)
-		end
-	}
+return function(p18, p19) --[[ Line: 197 | Named "createManageDevProductNetwork" ]]
+	-- upvalues: CreatorApiHttpModule (copy), getHeader (copy), reportResponse (copy), classifyStartFailure (copy), FFlagBuildExperienceManageDevProductModule (copy)
+	local WithoutRestrictedAcceptHeaderResult = CreatorApiHttpModule.withoutRestrictedAcceptHeader(p18)
 	
 	return {
-		request = function(p21, p22)
-			-- upvalues: p18 (ref), getHeader (copy), t (ref), reportResponse (copy), classifyStartFailure (copy), fFlagBuildExperienceManageDevProduct (copy)
-			local var10 = false
-			local t = {}
+		request = function(p20, Callback) --[[ Line: 124 ]]
+			-- upvalues: p19 (copy), getHeader (upval), WithoutRestrictedAcceptHeaderResult (copy), reportResponse (upval), classifyStartFailure (upval), FFlagBuildExperienceManageDevProductModule (upval)
+			local Flag = false
+			local List = {}
 			
-			local function startAttempt(p23, p24)
-				-- upvalues: p18 (copy), getHeader (copy), t (copy), var10 (write), reportResponse (copy), startAttempt (ref), p22 (ref), classifyStartFailure (copy), fFlagBuildExperienceManageDevProduct (copy), t (ref)
-				local url = p23.url
-				local var11 = `[{if p18 == nil or p18.label == nil then "DeveloperProduct" else p18.label}] request transport=RequestInternal method={p23.method} url={string.match(url, "^[^?]+") or url} contentType={getHeader(p23.headers, "content-type") or "<none>"} retryCount={p24}`
-				local var12 = if p18 ~= nil then nil else p18.log
+			local function startAttempt(p21, p22) --[[ Line: 131 ]]
+				-- upvalues: p19 (upval), getHeader (upval), WithoutRestrictedAcceptHeaderResult (upval), Flag (ref), reportResponse (upval), startAttempt (copy), Callback (copy), classifyStartFailure (upval), FFlagBuildExperienceManageDevProductModule (upval), List (copy)
+				local v2 = p19
+				local Url: string = p21.url
+				local Message: string = `[{if v2 == nil or v2.label == nil then "DeveloperProduct" else v2.label}] request transport=RequestInternal method={p21.method} url={string.match(Url, "^[^?]+") or Url} contentType={getHeader(p21.headers, "content-type") or "<none>"} retryCount={p22}`
+				local Log = if v2 == nil then nil else v2.log
 				
-				if var12 ~= nil then
-					pcall(var12, var11)
+				if Log ~= nil then
+					pcall(Log, Message)
 				end
-				local var13 = false
-				local ok, status = pcall(t.request, p23, function(p25, p26)
-					-- upvalues: var13 (write), var10 (copy), p24 (ref), getHeader (copy), reportResponse (copy), p18 (copy), p23 (ref), startAttempt (copy), p22 (copy)
-					var13 = true
+				local Flag1 = false
+				local Success, Result = pcall(WithoutRestrictedAcceptHeaderResult.request, p21, function(p23, p24) --[[ Line: 134 ]]
+					-- upvalues: Flag1 (ref), Flag (upval), p22 (copy), getHeader (upval), reportResponse (upval), p19 (upval), p21 (copy), startAttempt (upval), Callback (upval)
+					Flag1 = true
 					
-					if var10 then return end
-					local var14
-					local var15 = if p25 and typeof(p26) == "table" and p24 == 0 then getHeader(p26.headers, "x-csrf-token") else nil
+					if Flag then return end
+					local XCsrfToken = if p23 and typeof(p24) == "table" and p22 == 0 then getHeader(p24.headers, "x-csrf-token") else nil
+					local HasXCsrfToken: boolean = if p23 and typeof(p24) == "table" and p24.statusCode == 403 then XCsrfToken ~= nil else false
+					reportResponse(p19, p21, p22, p23, p24, HasXCsrfToken)
 					
-					if p25 and typeof(p26) == "table" then
-						var14 = false
-						
-						if p26.statusCode == 403 then
-							local _ = var15 ~= nil
-						end
-					else
-						var14 = false
-					end
-					reportResponse(p18, p23, p24, p25, p26, var14)
-					
-					if not var14 then
-						p22(p25, p26)
+					if not HasXCsrfToken then
+						Callback(p23, p24)
 						
 						return
 					end
-					local t = {}
+					local Headers = {}
 					
-					if p23.headers ~= nil then
-						for i, v in p23.headers do
-							t[i] = v
+					if p21.headers ~= nil then
+						for i, header in p21.headers do
+							Headers[i] = header
 						end
 					end
-					t["x-csrf-token"] = var15
+					Headers["x-csrf-token"] = XCsrfToken
 					startAttempt({
-						url = p23.url,
-						method = p23.method,
-						headers = t,
-						body = p23.body,
-						onMessage = p23.onMessage,
-						priority = p23.priority
-					}, p24 + 1)
+						url = p21.url,
+						method = p21.method,
+						headers = Headers,
+						body = p21.body,
+						onMessage = p21.onMessage,
+						priority = p21.priority
+					}, p22 + 1)
 				end)
 				
-				if not ok then
-					local var16 = p18
-					local url_1 = p23.url
-					local var17 = `[{if var16 == nil or var16.label == nil then "DeveloperProduct" else var16.label}] request transport=RequestInternal method={p23.method} url={string.match(url_1, "^[^?]+") or url_1} retryCount={p24} startFailure={classifyStartFailure(status)}`
-					local var18 = if var16 ~= nil then nil else var16.log
-					
-					if var18 ~= nil then
-						pcall(var18, var17)
-					elseif fFlagBuildExperienceManageDevProduct then
-						warn(var17)
+				if not Success then
+					if not Flag1 then
+						local Url1: string = p21.url
+						local Message1: string = `[{if p19 == nil or p19.label == nil then "DeveloperProduct" else p19.label}] request transport=RequestInternal method={p21.method} url={string.match(Url1, "^[^?]+") or Url1} retryCount={p22} startFailure={classifyStartFailure(Result)}`
+						local Log1 = if p19 == nil then nil else p19.log
+						
+						if Log1 == nil then
+							if FFlagBuildExperienceManageDevProductModule then
+								warn(Message1)
+							end
+						else
+							pcall(Log1, Message1)
+						end
 					end
-					error(status, 0)
+					error(Result, 0)
 				end
-				table.insert(t, status)
+				table.insert(List, Result)
 			end
 			
-			startAttempt(p21, 0)
+			startAttempt(p20, 0)
 			
-			return function()
-				-- upvalues: var10 (write), t (ref)
-				if var10 then return end
-				var10 = true
+			return function() --[[ Line: 184 ]]
+				-- upvalues: Flag (ref), List (copy)
+				if Flag then return end
+				Flag = true
 				
-				for i, v in t do
-					v()
+				for _, value in List do
+					value()
 				end
 			end
 		end

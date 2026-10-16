@@ -1,6 +1,6 @@
-﻿local signal = require(script.Parent.AppCommonLib).Signal
+﻿local Signal = require(script.Parent.AppCommonLib).Signal
 
 return {
-	ReloadPage = signal.new(),
-	ReportMutedError = signal.new()
+	ReloadPage = Signal.new(),
+	ReportMutedError = Signal.new()
 }

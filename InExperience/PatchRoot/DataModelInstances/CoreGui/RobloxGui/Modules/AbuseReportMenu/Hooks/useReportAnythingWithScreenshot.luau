@@ -1,43 +1,38 @@
-﻿local abuseReportMenu = script:FindFirstAncestor("AbuseReportMenu")
-local reactModule = require(game:GetService("CorePackages").Packages.React)
-local constantsModule = require(abuseReportMenu.Components.Constants)
-local useHideForScreenshotModule = require(abuseReportMenu.Hooks.useHideForScreenshot)
-local useCaptureScreenshotModule = require(abuseReportMenu.Hooks.useCaptureScreenshot)
-local reportAnythingReducerModule = require(abuseReportMenu.Reducers.reportAnythingReducer)
-local tnSIXPWrapperModule = require(abuseReportMenu.IXP.TnSIXPWrapper)
+﻿local AbuseReportMenu = script:FindFirstAncestor("AbuseReportMenu")
+local ReactModule = require(game:GetService("CorePackages").Packages.React)
+local ConstantsModule = require(AbuseReportMenu.Components.Constants)
+local UseHideForScreenshotModule = require(AbuseReportMenu.Hooks.useHideForScreenshot)
+local UseCaptureScreenshotModule = require(AbuseReportMenu.Hooks.useCaptureScreenshot)
+local ReportAnythingReducerModule = require(AbuseReportMenu.Reducers.reportAnythingReducer)
+local TnSIXPWrapperModule = require(AbuseReportMenu.IXP.TnSIXPWrapper)
 
-return function(p1, p2, p3, p4)
-	-- upvalues: tnSIXPWrapperModule (ref), reactModule (ref), reportAnythingReducerModule (ref), constantsModule (ref), useCaptureScreenshotModule (ref), useHideForScreenshotModule (ref)
-	local var1
-	local reportAnythingAvatarEnabled = tnSIXPWrapperModule.getReportAnythingAvatarEnabled()
-	local reportAnythingExperienceEnabled = tnSIXPWrapperModule.getReportAnythingExperienceEnabled()
-	local var2, var3 = reactModule.useReducer(reportAnythingReducerModule, constantsModule.ReportAnythingInitialState)
-	
-	if not reportAnythingAvatarEnabled then
-		var1 = reportAnythingExperienceEnabled and var2.screenshotContentId == ""
-	end
-	useHideForScreenshotModule(var1, p1, p2, p3, useCaptureScreenshotModule(reactModule.useCallback(function(p5)
-		-- upvalues: var3 (ref), constantsModule (copy)
-		var3({
-			type = constantsModule.ReportAnythingActions.SetScreenshotContentId,
-			screenshotContentId = p5
+return function(p1, p2, p3, Callback) --[[ Line: 12 ]]
+	-- upvalues: TnSIXPWrapperModule (copy), ReactModule (copy), ReportAnythingReducerModule (copy), ConstantsModule (copy), UseCaptureScreenshotModule (copy), UseHideForScreenshotModule (copy)
+	local ReportAnythingAvatarEnabled = TnSIXPWrapperModule.getReportAnythingAvatarEnabled()
+	local ReportAnythingExperienceEnabled = TnSIXPWrapperModule.getReportAnythingExperienceEnabled()
+	local UseReducerResult, UseReducerResult2 = ReactModule.useReducer(ReportAnythingReducerModule, ConstantsModule.ReportAnythingInitialState)
+	UseHideForScreenshotModule(if ReportAnythingAvatarEnabled then UseReducerResult.screenshotContentId == "" else ReportAnythingExperienceEnabled and UseReducerResult.screenshotContentId == "", p1, p2, p3, UseCaptureScreenshotModule(ReactModule.useCallback(function(ScreenshotContentId) --[[ Line: 25 ]]
+		-- upvalues: UseReducerResult2 (copy), ConstantsModule (upval)
+		UseReducerResult2({
+			type = ConstantsModule.ReportAnythingActions.SetScreenshotContentId,
+			screenshotContentId = ScreenshotContentId
 		})
-	end), reactModule.useCallback(function(p5)
-		-- upvalues: var3 (ref), constantsModule (copy)
-		var3({
-			type = constantsModule.ReportAnythingActions.SetScreenshotId,
-			screenshotId = p5
+	end), ReactModule.useCallback(function(ScreenshotId) --[[ Line: 31 ]]
+		-- upvalues: UseReducerResult2 (copy), ConstantsModule (upval)
+		UseReducerResult2({
+			type = ConstantsModule.ReportAnythingActions.SetScreenshotId,
+			screenshotId = ScreenshotId
 		})
-	end), reactModule.useCallback(function(p5)
-		-- upvalues: var3 (ref), constantsModule (copy)
-		var3({
-			type = constantsModule.ReportAnythingActions.SetIdentificationResults,
-			identificationResults = p5
+	end), ReactModule.useCallback(function(IdentificationResults) --[[ Line: 37 ]]
+		-- upvalues: UseReducerResult2 (copy), ConstantsModule (upval)
+		UseReducerResult2({
+			type = ConstantsModule.ReportAnythingActions.SetIdentificationResults,
+			identificationResults = IdentificationResults
 		})
-	end)), function()
-		-- upvalues: p4 (ref), var2 (ref), var3 (ref)
-		p4(var2, var3)
+	end)), function() --[[ Line: 44 ]]
+		-- upvalues: Callback (copy), UseReducerResult (copy), UseReducerResult2 (copy)
+		Callback(UseReducerResult, UseReducerResult2)
 	end)
 	
-	return var2, var3
+	return UseReducerResult, UseReducerResult2
 end

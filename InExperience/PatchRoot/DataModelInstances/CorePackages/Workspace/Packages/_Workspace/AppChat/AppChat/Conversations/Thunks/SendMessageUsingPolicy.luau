@@ -1,55 +1,56 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local requestTimeDiag = require(parent.Analytics).RequestTimeDiag
-local constantsModule = require(appChat.Constants)
-local promiseModule = require(parent.Promise)
-local statusCodes = require(parent.Http).StatusCodes
-local responseStatus = require(parent.AppChatNetworking).Constants.ResponseStatus
-local fFlagAppChatPerfTrackingModule = require(appChat.Flags.FFlagAppChatPerfTracking)
-local fFlagAppChatMessageTTIMilestonesModule = require(appChat.Flags.FFlagAppChatMessageTTIMilestones)
-local appChatPerfTrackerModule = require(appChat.Telemetry.AppChatPerfTracker)
-local name = require(appChat.Logger):new(script.Name)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local RequestTimeDiag = require(Parent.Analytics).RequestTimeDiag
+local ConstantsModule = require(AppChat.Constants)
+local PromiseModule = require(Parent.Promise)
+local StatusCodes = require(Parent.Http).StatusCodes
+local ResponseStatus = require(Parent.AppChatNetworking).Constants.ResponseStatus
+local FFlagAppChatPerfTrackingModule = require(AppChat.Flags.FFlagAppChatPerfTracking)
+local FFlagAppChatMessageTTIMilestonesModule = require(AppChat.Flags.FFlagAppChatMessageTTIMilestones)
+local AppChatPerfTrackerModule = require(AppChat.Telemetry.AppChatPerfTracker)
+local NewResult = require(AppChat.Logger):new(script.Name)
 
-local function invokeSendMessage(p1, p2)
-	-- upvalues: name (ref), promiseModule (ref)
-	local ok, status = pcall(function()
-		-- upvalues: p1 (ref), p2 (ref)
+local function invokeSendMessage(p1, p2) --[[ Line: 19 ]]
+	-- upvalues: NewResult (copy), PromiseModule (copy)
+	local Success, Result = pcall(function() --[[ Line: 20 ]]
+		-- upvalues: p1 (copy), p2 (copy)
 		return p1:sendMessage(p2)
 	end)
 	
-	if ok then
-		return status
+	if Success then
+		return Result
+	else
+		NewResult:error("sendPolicy:sendMessage threw synchronously: {}", (tostring(Result)))
+		
+		return PromiseModule.reject({ sendMessageSyncError = tostring(Result) })
 	end
-	name:error("sendPolicy:sendMessage threw synchronously: {}", tostring(status))
-	
-	return promiseModule.reject({ sendMessageSyncError = tostring(status) })
 end
 
-return function(p1, _)
-	-- upvalues: requestTimeDiag (ref), constantsModule (ref), fFlagAppChatPerfTrackingModule (ref), fFlagAppChatMessageTTIMilestonesModule (ref), appChatPerfTrackerModule (ref), invokeSendMessage (ref), statusCodes (ref), responseStatus (ref), promiseModule (ref)
-	local lua_chat_send_message = requestTimeDiag:new(constantsModule.PerformanceMeasurement.LUA_CHAT_SEND_MESSAGE)
+return function(p1, _) --[[ Line: 32 ]]
+	-- upvalues: RequestTimeDiag (copy), ConstantsModule (copy), FFlagAppChatPerfTrackingModule (copy), FFlagAppChatMessageTTIMilestonesModule (copy), AppChatPerfTrackerModule (copy), invokeSendMessage (copy), StatusCodes (copy), ResponseStatus (copy), PromiseModule (copy)
+	local NewResult = RequestTimeDiag:new(ConstantsModule.PerformanceMeasurement.LUA_CHAT_SEND_MESSAGE)
 	
-	return function(p2)
-		-- upvalues: p1 (ref), fFlagAppChatPerfTrackingModule (copy), fFlagAppChatMessageTTIMilestonesModule (copy), appChatPerfTrackerModule (copy), invokeSendMessage (copy), lua_chat_send_message (ref), statusCodes (copy), responseStatus (copy), promiseModule (copy)
+	return function(p2) --[[ Line: 35 ]]
+		-- upvalues: p1 (copy), FFlagAppChatPerfTrackingModule (upval), FFlagAppChatMessageTTIMilestonesModule (upval), AppChatPerfTrackerModule (upval), invokeSendMessage (upval), NewResult (copy), StatusCodes (upval), ResponseStatus (upval), PromiseModule (upval)
 		p1:onBeforeSendingMessage(p2)
 		
-		if fFlagAppChatPerfTrackingModule and fFlagAppChatMessageTTIMilestonesModule then
-			local t = { conversationId = p1.conversationId }
-			appChatPerfTrackerModule.trackMilestone(appChatPerfTrackerModule.Events.MessageSendTTI, appChatPerfTrackerModule.Milestone.PrimaryDataStarted.Name, t)
-			appChatPerfTrackerModule.trackSubphase(appChatPerfTrackerModule.Events.MessageSendTTI, appChatPerfTrackerModule.Milestone.PrimaryDataStarted.Name, appChatPerfTrackerModule.Milestone.PrimaryDataStarted.Subphase.NetworkFetch, t)
-			appChatPerfTrackerModule.trackRequest(appChatPerfTrackerModule.Events.MessageSendTTI, appChatPerfTrackerModule.Milestone.PrimaryDataStarted.Name, "SendChatTextMessage", t)
+		if FFlagAppChatPerfTrackingModule and FFlagAppChatMessageTTIMilestonesModule then
+			local config = { conversationId = p1.conversationId }
+			AppChatPerfTrackerModule.trackMilestone(AppChatPerfTrackerModule.Events.MessageSendTTI, AppChatPerfTrackerModule.Milestone.PrimaryDataStarted.Name, config)
+			AppChatPerfTrackerModule.trackSubphase(AppChatPerfTrackerModule.Events.MessageSendTTI, AppChatPerfTrackerModule.Milestone.PrimaryDataStarted.Name, AppChatPerfTrackerModule.Milestone.PrimaryDataStarted.Subphase.NetworkFetch, config)
+			AppChatPerfTrackerModule.trackRequest(AppChatPerfTrackerModule.Events.MessageSendTTI, AppChatPerfTrackerModule.Milestone.PrimaryDataStarted.Name, "SendChatTextMessage", config)
 		end
-		return invokeSendMessage(p1, p2):andThen(function(p3)
-			-- upvalues: lua_chat_send_message (copy), statusCodes (copy), responseStatus (copy), promiseModule (copy)
-			lua_chat_send_message:report()
+		return invokeSendMessage(p1, p2):andThen(function(Result) --[[ Line: 60 ]]
+			-- upvalues: NewResult (upval), StatusCodes (upval), ResponseStatus (upval), PromiseModule (upval)
+			NewResult:report()
 			
-			return if p3 and p3.responseBody and (p3.responseCode == statusCodes.OK and p3.responseBody.messages) and #p3.responseBody.messages ~= 0 and (not p3.responseBody.messages[1].status or p3.responseBody.messages[1].status == "" or p3.responseBody.messages[1].status == responseStatus.SUCCESS) then p3 else promiseModule.reject(p3)
-		end):andThen(function(p3)
-			-- upvalues: p1 (copy), p2 (ref)
-			return p1:onSuccess(p2, p3)
-		end):catch(function(p3)
-			-- upvalues: p1 (copy), p2 (ref)
-			return p1:onFailure(p2, p3)
+			return if Result and Result.responseBody and Result.responseCode == StatusCodes.OK and Result.responseBody.messages and #Result.responseBody.messages ~= 0 and (not Result.responseBody.messages[1].status or Result.responseBody.messages[1].status == "" or Result.responseBody.messages[1].status == ResponseStatus.SUCCESS) then Result else PromiseModule.reject(Result)
+		end):andThen(function(Result) --[[ Line: 81 ]]
+			-- upvalues: p1 (upval), p2 (copy)
+			return p1:onSuccess(p2, Result)
+		end):catch(function(Err) --[[ Line: 84 ]]
+			-- upvalues: p1 (upval), p2 (copy)
+			return p1:onFailure(p2, Err)
 		end)
 	end
 end

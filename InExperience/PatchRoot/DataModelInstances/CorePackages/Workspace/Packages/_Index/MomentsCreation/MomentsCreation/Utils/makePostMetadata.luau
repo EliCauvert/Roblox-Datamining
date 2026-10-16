@@ -1,44 +1,48 @@
-﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
-local parent = momentsCreation.Parent
-local _ = require(parent.MomentsTypes)
-local getFFlagMomentsTTSAudioOverlayModule = require(momentsCreation.Flags.GetFFlagMomentsTTSAudioOverlay)
-local fFlagMomentsTextOverlayV2Redesign = require(parent.MomentsCommon).Flags.FFlagMomentsTextOverlayV2Redesign
-local fFlagMomentsCommentsCreatorControlModule = require(momentsCreation.Flags.FFlagMomentsCommentsCreatorControl)
-local momentsPostCtaUseCaptureUniverse = game:DefineFastFlag("MomentsPostCtaUseCaptureUniverse", false)
+﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
+local Parent = MomentsCreation.Parent
+local _ = require(Parent.MomentsTypes)
+local GetFFlagMomentsTTSAudioOverlayModule = require(MomentsCreation.Flags.GetFFlagMomentsTTSAudioOverlay)
+local FFlagMomentsTextOverlayV2Redesign = require(Parent.MomentsCommon).Flags.FFlagMomentsTextOverlayV2Redesign
+local FFlagMomentsCommentsCreatorControlModule = require(MomentsCreation.Flags.FFlagMomentsCommentsCreatorControl)
+local MomentsPostCtaUseCaptureUniverse = game:DefineFastFlag("MomentsPostCtaUseCaptureUniverse", false)
 
-local function _(p1)
+local function _(p1) --[[ Line: 20 | Named "enumName" ]]
 	return if typeof(p1) == "EnumItem" then p1.Name else p1
 end
 
-local function convertTextOverlayStyle(p1)
-	-- upvalues: fFlagMomentsTextOverlayV2Redesign (ref)
-	local var1
+local function convertTextOverlayStyle(TextOverlayStyle) --[[ Line: 24 ]]
+	-- upvalues: FFlagMomentsTextOverlayV2Redesign (copy)
 	local t = {}
+	local Name = nil
 	
-	if fFlagMomentsTextOverlayV2Redesign then
-		local font = p1.font
-		var1 = if typeof(font) == "EnumItem" then font.Name else font
+	if FFlagMomentsTextOverlayV2Redesign then
+		local TextOverlayStyleFont = TextOverlayStyle.font
+		Name = if typeof(TextOverlayStyleFont) == "EnumItem" then TextOverlayStyleFont.Name else TextOverlayStyleFont
 	else
-		var1 = p1.font.Name
+		Name = TextOverlayStyle.font.Name
 	end
-	local var2
-	t.font = var1
-	t.fontColor = { p1.fontColor.R, p1.fontColor.G, p1.fontColor.B }
-	t.fontSize = p1.fontSize
+	t.font = Name
+	t.fontColor = {
+		TextOverlayStyle.fontColor.R,
+		TextOverlayStyle.fontColor.G,
+		TextOverlayStyle.fontColor.B
+	}
+	t.fontSize = TextOverlayStyle.fontSize
+	local Name1 = nil
 	
-	if fFlagMomentsTextOverlayV2Redesign then
-		local textXAlignment = p1.textXAlignment
-		var2 = if typeof(textXAlignment) == "EnumItem" then textXAlignment.Name else textXAlignment
+	if FFlagMomentsTextOverlayV2Redesign then
+		local TextXAlignment = TextOverlayStyle.textXAlignment
+		Name1 = if typeof(TextXAlignment) == "EnumItem" then TextXAlignment.Name else TextXAlignment
 	else
-		var2 = p1.textXAlignment.Name
+		Name1 = TextOverlayStyle.textXAlignment.Name
 	end
-	t.textXAlignment = var2
+	t.textXAlignment = Name1
 	
 	return t
 end
 
-local function convertTextOverlay(p1)
-	-- upvalues: convertTextOverlayStyle (ref)
+local function convertTextOverlay(p1) --[[ Line: 35 ]]
+	-- upvalues: convertTextOverlayStyle (copy)
 	return {
 		text = p1.text,
 		rotation = p1.rotation,
@@ -49,87 +53,86 @@ local function convertTextOverlay(p1)
 	}
 end
 
-return function(p1, p2)
-	-- upvalues: fFlagMomentsCommentsCreatorControlModule (ref), convertTextOverlay (ref), getFFlagMomentsTTSAudioOverlayModule (ref), momentsPostCtaUseCaptureUniverse (ref), fFlagMomentsTextOverlayV2Redesign (ref)
-	local t = { caption = p1.description }
+return function(p1, Capture) --[[ Line: 46 | Named "makePostMetadata" ]]
+	-- upvalues: FFlagMomentsCommentsCreatorControlModule (copy), convertTextOverlay (copy), GetFFlagMomentsTTSAudioOverlayModule (copy), MomentsPostCtaUseCaptureUniverse (copy), FFlagMomentsTextOverlayV2Redesign (copy)
+	local config = { caption = p1.description }
 	
-	if fFlagMomentsCommentsCreatorControlModule and p1.commentsEnabled == false then
-		t.commentsEnabled = false
+	if FFlagMomentsCommentsCreatorControlModule and p1.commentsEnabled == false then
+		config.commentsEnabled = false
 	end
-	local captureType = p1.captureType
+	local CaptureType = p1.captureType
 	
-	if (if typeof(captureType) == "EnumItem" then captureType.Name else captureType) == Enum.CaptureType.Screenshot.Name then
-		t.widthPixels = p1.widthPixels
-		t.heightPixels = p1.heightPixels
+	if (if typeof(CaptureType) == "EnumItem" then CaptureType.Name else CaptureType) == Enum.CaptureType.Screenshot.Name then
+		config.widthPixels = p1.widthPixels
+		config.heightPixels = p1.heightPixels
 	end
 	if p1.edits then
 		if p1.edits.music then
-			t.music = {
+			config.music = {
 				assetId = p1.edits.music.assetId,
 				startTime = p1.edits.music.startTime
 			}
 		end
 		if p1.edits.trim then
-			t.trim = {
+			config.trim = {
 				startTime = p1.edits.trim.startTime,
 				endTime = p1.edits.trim.endTime
 			}
 		end
 		if p1.edits.textOverlays then
-			local t_1 = {}
+			local TextOverlays = {}
 			
-			for i, v in p1.edits.textOverlays do
-				table.insert(t_1, convertTextOverlay(v))
+			for _, textOverlay in p1.edits.textOverlays do
+				table.insert(TextOverlays, (convertTextOverlay(textOverlay)))
 			end
-			t.textOverlays = t_1
+			config.textOverlays = TextOverlays
 		end
-		if getFFlagMomentsTTSAudioOverlayModule and p1.edits.tts and (p1.edits.tts.text ~= nil and p1.edits.tts.text ~= "") then
-			local tts = p1.edits.tts
-			t.textToSpeech = {
+		if GetFFlagMomentsTTSAudioOverlayModule and p1.edits.tts and p1.edits.tts.text ~= nil and p1.edits.tts.text ~= "" then
+			local Tts = p1.edits.tts
+			config.textToSpeech = {
 				{
 					pitch = 0,
 					speed = 1,
-					text = tts.text,
-					voiceId = tts.voiceId,
-					startTime = tts.startTime
+					text = Tts.text,
+					voiceId = Tts.voiceId,
+					startTime = Tts.startTime
 				}
 			}
 		end
 	end
-	local universeId
-	local var1 = p1.universeIdOverride or p1.universeId
+	local UniverseIdOverride = p1.universeIdOverride or p1.universeId
 	
-	if momentsPostCtaUseCaptureUniverse then
-		universeId = p1.universeId
-		var1 = if universeId == nil or universeId <= 0 then p1.universeIdOverride else universeId
+	if MomentsPostCtaUseCaptureUniverse then
+		local UniverseId: number = p1.universeId
+		UniverseIdOverride = if UniverseId == nil or UniverseId <= 0 then p1.universeIdOverride else UniverseId
 	end
-	if var1 and p1.placeId then
-		t.primaryCta = { experienceId = var1, placeId = p1.placeId }
+	if UniverseIdOverride and p1.placeId then
+		config.primaryCta = { experienceId = UniverseIdOverride, placeId = p1.placeId }
 	end
-	if fFlagMomentsTextOverlayV2Redesign then
-		local captureType_1 = p1.captureType
-		universeId = (if typeof(captureType_1) == "EnumItem" then captureType_1.Name else captureType_1) == Enum.CaptureType.Video.Name
-		universeId = nil
+	local IsNameMatch = nil
+	if FFlagMomentsTextOverlayV2Redesign then
+		local CaptureType1 = p1.captureType
+		IsNameMatch = (if typeof(CaptureType1) == "EnumItem" then CaptureType1.Name else CaptureType1) == Enum.CaptureType.Video.Name
 	else
-		universeId = p1.captureType == Enum.CaptureType.Video
+		IsNameMatch = p1.captureType == Enum.CaptureType.Video
 	end
-	if universeId then
-		t.durationSeconds = p1.assetTotalDuration
+	if IsNameMatch then
+		config.durationSeconds = p1.assetTotalDuration
 	end
-	if p2 ~= nil then
-		t.media = {
+	if Capture ~= nil then
+		config.media = {
 			{
-				capture = p2,
-				widthPixels = t.widthPixels,
-				heightPixels = t.heightPixels,
-				durationSeconds = t.durationSeconds,
-				trim = t.trim
+				capture = Capture,
+				widthPixels = config.widthPixels,
+				heightPixels = config.heightPixels,
+				durationSeconds = config.durationSeconds,
+				trim = config.trim
 			}
 		}
-		t.widthPixels = nil
-		t.heightPixels = nil
-		t.durationSeconds = nil
-		t.trim = nil
+		config.widthPixels = nil
+		config.heightPixels = nil
+		config.durationSeconds = nil
+		config.trim = nil
 	end
-	return t
+	return config
 end

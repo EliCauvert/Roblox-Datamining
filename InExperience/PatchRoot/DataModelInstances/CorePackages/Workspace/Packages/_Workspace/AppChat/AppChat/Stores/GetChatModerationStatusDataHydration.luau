@@ -1,254 +1,260 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local playersService = game:GetService("Players")
-local appChatNetworkingModule = require(parent.AppChatNetworking)
-local dataHydrationModule = require(parent.DataHydration)
-local _ = require(parent.LuauPolyfill)
-local promiseModule = require(parent.Promise)
-local name = require(appChat.Logger):new(script.Name)
-local getResponseBodyModule = require(appChat.Stores.Ingestion.getResponseBody)
-local serializeChatTimeoutRangeModule = require(appChat.Utils.serializeChatTimeoutRange)
-local fFlagAppChatReactiveFeatureRestrictions = require(parent.SharedFlags).FFlagAppChatReactiveFeatureRestrictions
-local t = { status = "none" }
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local Players = game:GetService("Players")
+local AppChatNetworkingModule = require(Parent.AppChatNetworking)
+local DataHydrationModule = require(Parent.DataHydration)
+local _ = require(Parent.LuauPolyfill)
+local PromiseModule = require(Parent.Promise)
+local NewResult = require(AppChat.Logger):new(script.Name)
+local GetResponseBodyModule = require(AppChat.Stores.Ingestion.getResponseBody)
+local SerializeChatTimeoutRangeModule = require(AppChat.Utils.serializeChatTimeoutRange)
+local FFlagAppChatReactiveFeatureRestrictions = require(Parent.SharedFlags).FFlagAppChatReactiveFeatureRestrictions
+local config = { status = "none" }
 
-local function _()
-	-- upvalues: playersService (ref)
-	local var1 = if playersService.LocalPlayer then playersService.LocalPlayer.UserId else nil
+local function _() --[[ Line: 50 | Named "getLocalPlayerUserId" ]]
+	-- upvalues: Players (copy)
+	local UserId = if Players.LocalPlayer then Players.LocalPlayer.UserId else nil
 	
-	return if var1 == nil or var1 <= 0 then nil else var1
+	return if UserId == nil or UserId <= 0 then nil else UserId
 end
 
-local _ = function(p1)
-	-- upvalues: serializeChatTimeoutRangeModule (ref)
-	local var1 = serializeChatTimeoutRangeModule(p1)
+local _ = function(p1) --[[ Line: 55 | Named "toTimeoutStatus" ]]
+	-- upvalues: SerializeChatTimeoutRangeModule (copy)
+	local SerializeChatTimeoutRangeModuleResult = SerializeChatTimeoutRangeModule(p1)
 	
 	return {
 		status = "active",
-		endTimestamp = var1.endTimestamp,
+		endTimestamp = SerializeChatTimeoutRangeModuleResult.endTimestamp,
 		decisionEventId = p1.decision_event_id,
-		duration = var1.duration or 0,
-		requiresAcknowledgement = var1.requiresAcknowledgement
+		duration = SerializeChatTimeoutRangeModuleResult.duration or 0,
+		requiresAcknowledgement = SerializeChatTimeoutRangeModuleResult.requiresAcknowledgement
 	}
 end
 
-local function mapResponseToStatuses(value, p1)
-	-- upvalues: getResponseBodyModule (ref), serializeChatTimeoutRangeModule (ref), t (ref)
-	local var1
-	local var2 = getResponseBodyModule(value)
+local function mapResponseToStatuses(p1, p2) --[[ Line: 66 ]]
+	-- upvalues: GetResponseBodyModule (copy), SerializeChatTimeoutRangeModule (copy), config (copy)
+	local ResponseBodyModule = GetResponseBodyModule(p1)
+	local v1 = nil
 	
-	if not p1.includeUser then
-		var1 = nil
-	elseif var2 and var2.user_timeout_range then
-		local userTimeoutRange = var2.user_timeout_range
-		local var3 = serializeChatTimeoutRangeModule(userTimeoutRange)
-		var1 = {
-			status = "active",
-			endTimestamp = var3.endTimestamp,
-			decisionEventId = userTimeoutRange.decision_event_id,
-			duration = var3.duration or 0,
-			requiresAcknowledgement = var3.requiresAcknowledgement
-		}
+	if p2.includeUser then
+		if ResponseBodyModule and ResponseBodyModule.user_timeout_range then
+			local UserTimeoutRange = ResponseBodyModule.user_timeout_range
+			local SerializeChatTimeoutRangeModuleResult = SerializeChatTimeoutRangeModule(UserTimeoutRange)
+			v1 = {
+				status = "active",
+				endTimestamp = SerializeChatTimeoutRangeModuleResult.endTimestamp,
+				decisionEventId = UserTimeoutRange.decision_event_id,
+				duration = SerializeChatTimeoutRangeModuleResult.duration or 0,
+				requiresAcknowledgement = SerializeChatTimeoutRangeModuleResult.requiresAcknowledgement
+			}
+		else
+			v1 = config
+		end
 	else
-		var1 = t
+		v1 = nil
 	end
-	local t_1 = {}
-	local t_2 = {}
+	local t = {}
+	local t1 = {}
 	
-	for i, v in p1.conversationIds do
-		t_2[v] = true
-		t_1[v] = t
+	for _, conversationId in p2.conversationIds do
+		t1[conversationId] = true
+		t[conversationId] = config
 	end
-	if var2 and var2.conversation_timeout_ranges then
-		for i, v_1 in var2.conversation_timeout_ranges do
-			if t_2[v_1.id] then
-				local id = v_1.id
-				local timeoutRange = v_1.timeout_range
-				local var4 = serializeChatTimeoutRangeModule(timeoutRange)
-				t_1[id] = {
+	if ResponseBodyModule and ResponseBodyModule.conversation_timeout_ranges then
+		for _, conversationTimeoutRange in ResponseBodyModule.conversation_timeout_ranges do
+			if t1[conversationTimeoutRange.id] then
+				local Id = conversationTimeoutRange.id
+				local TimeoutRange = conversationTimeoutRange.timeout_range
+				local SerializeChatTimeoutRangeModuleResult = SerializeChatTimeoutRangeModule(TimeoutRange)
+				t[Id] = {
 					status = "active",
-					endTimestamp = var4.endTimestamp,
-					decisionEventId = timeoutRange.decision_event_id,
-					duration = var4.duration or 0,
-					requiresAcknowledgement = var4.requiresAcknowledgement
+					endTimestamp = SerializeChatTimeoutRangeModuleResult.endTimestamp,
+					decisionEventId = TimeoutRange.decision_event_id,
+					duration = SerializeChatTimeoutRangeModuleResult.duration or 0,
+					requiresAcknowledgement = SerializeChatTimeoutRangeModuleResult.requiresAcknowledgement
 				}
 			end
 		end
 	end
-	return var1, t_1
+	return v1, t
 end
 
-local function createChatModerationStatusDataHydrationStore()
-	-- upvalues: dataHydrationModule (ref), name (ref), appChatNetworkingModule (ref), mapResponseToStatuses (ref), playersService (ref), promiseModule (ref), t (ref), fFlagAppChatReactiveFeatureRestrictions (ref)
-	local var5 = dataHydrationModule.createDataCache()
-	local var6 = dataHydrationModule.createDataCache()
-	local var7 = 0
-	local var8 = nil
-	local t_1 = {}
-	local var9 = dataHydrationModule.createDataResolver({
+local function createChatModerationStatusDataHydrationStore() --[[ Line: 96 ]]
+	-- upvalues: DataHydrationModule (copy), NewResult (copy), AppChatNetworkingModule (copy), mapResponseToStatuses (copy), Players (copy), PromiseModule (copy), config (copy), FFlagAppChatReactiveFeatureRestrictions (copy)
+	local DataCache = DataHydrationModule.createDataCache()
+	local DataCache1 = DataHydrationModule.createDataCache()
+	local Count = 0
+	local Count1 = nil
+	local Tbl = {}
+	local DataResolver = DataHydrationModule.createDataResolver({
 		supportsMultiGet = false,
 		queueProcessDelaySec = 0,
 		replaceItems = true,
-		cache = var5,
-		logError = function(p2)
-			-- upvalues: name (copy)
-			name:warning(`Failed to fetch local-user chat moderation status: {tostring(p2)}`)
+		cache = DataCache,
+		logError = function(p3) --[[ Line: 109 ]]
+			-- upvalues: NewResult (upval)
+			NewResult:warning(`Failed to fetch local-user chat moderation status: {tostring(p3)}`)
 		end,
-		fetchFn = function()
-			-- upvalues: appChatNetworkingModule (copy), mapResponseToStatuses (copy)
-			return appChatNetworkingModule.http.GetChatModerationStatuses(nil, nil):andThen(function(p2)
-				-- upvalues: mapResponseToStatuses (copy)
-				return mapResponseToStatuses(p2, { includeUser = true, conversationIds = {} })
+		fetchFn = function() --[[ Line: 112 ]]
+			-- upvalues: AppChatNetworkingModule (upval), mapResponseToStatuses (upval)
+			return AppChatNetworkingModule.http.GetChatModerationStatuses(nil, nil):andThen(function(Result) --[[ Line: 113 ]]
+				-- upvalues: mapResponseToStatuses (upval)
+				return (mapResponseToStatuses(Result, { includeUser = true, conversationIds = {} }))
 			end)
 		end
 	})
-	local var10 = dataHydrationModule.createDataResolver({
+	local DataResolver1 = DataHydrationModule.createDataResolver({
 		queueProcessDelaySec = 0,
 		replaceItems = true,
-		cache = var6,
-		logError = function(p2)
-			-- upvalues: name (copy)
-			name:warning(`Failed to fetch conversation chat moderation status: {tostring(p2)}`)
+		cache = DataCache1,
+		logError = function(p3) --[[ Line: 127 ]]
+			-- upvalues: NewResult (upval)
+			NewResult:warning(`Failed to fetch conversation chat moderation status: {tostring(p3)}`)
 		end,
-		fetchFn = function(p2)
-			-- upvalues: appChatNetworkingModule (copy), mapResponseToStatuses (copy)
-			local t = {}
+		fetchFn = function(List) --[[ Line: 130 ]]
+			-- upvalues: AppChatNetworkingModule (upval), mapResponseToStatuses (upval)
+			local ConversationIds = {}
 			
-			for i in p2 do
-				table.insert(t, i)
+			for i in List do
+				table.insert(ConversationIds, i)
 			end
-			return appChatNetworkingModule.http.GetChatModerationStatuses(nil, t):andThen(function(p3)
-				-- upvalues: mapResponseToStatuses (copy), t (ref)
-				local _, var11 = mapResponseToStatuses(p3, { includeUser = false, conversationIds = t })
+			return AppChatNetworkingModule.http.GetChatModerationStatuses(nil, ConversationIds):andThen(function(Result) --[[ Line: 136 ]]
+				-- upvalues: mapResponseToStatuses (upval), ConversationIds (copy)
+				local _, MapResponseToStatusesResult2 = mapResponseToStatuses(Result, { includeUser = false, conversationIds = ConversationIds })
 				
-				return var11
+				return MapResponseToStatusesResult2
 			end)
 		end
 	})
 	
-	local function _(p3, p4)
-		-- upvalues: var8 (write), t_1 (ref)
-		if var8 == p3 then
-			var8 = nil
+	local function _(p3, List) --[[ Line: 156 | Named "releaseRefreshOwnership" ]]
+		-- upvalues: Count1 (ref), Tbl (copy)
+		if Count1 == p3 then
+			Count1 = nil
 		end
-		for i, v in p4 do
-			if t_1[v] == p3 then
-				t_1[v] = nil
+		for _, value in List do
+			if Tbl[value] == p3 then
+				Tbl[value] = nil
 			end
 		end
 	end
 	
 	return {
-		getUserStatus = function()
-			-- upvalues: var9 (ref)
-			return var9.getAndFetchItem("__local_user__")
+		getUserStatus = function() --[[ Line: 214 ]]
+			-- upvalues: DataResolver (copy)
+			return DataResolver.getAndFetchItem("__local_user__")
 		end,
-		getCachedUserStatus = function()
-			-- upvalues: var5 (ref)
-			return var5.getItem("__local_user__")
+		getCachedUserStatus = function() --[[ Line: 217 ]]
+			-- upvalues: DataCache (copy)
+			return DataCache.getItem("__local_user__")
 		end,
-		getConversationStatus = function(p5)
-			-- upvalues: var10 (ref)
-			return var10.getAndFetchItem(p5)
+		getConversationStatus = function(p4) --[[ Line: 220 ]]
+			-- upvalues: DataResolver1 (copy)
+			return DataResolver1.getAndFetchItem(p4)
 		end,
-		getCachedConversationStatus = function(p5)
-			-- upvalues: var6 (ref)
-			return var6.getItem(p5)
+		getCachedConversationStatus = function(p4) --[[ Line: 223 ]]
+			-- upvalues: DataCache1 (copy)
+			return DataCache1.getItem(p4)
 		end,
-		ingestResponse = function(p5, p6)
-			-- upvalues: mapResponseToStatuses (copy), var5 (ref), var6 (ref)
-			local var11, var12 = mapResponseToStatuses(p5, p6)
+		ingestResponse = function(p4, p5) --[[ Line: 146 ]]
+			-- upvalues: mapResponseToStatuses (upval), DataCache (copy), DataCache1 (copy)
+			local MapResponseToStatusesResult, MapResponseToStatusesResult2 = mapResponseToStatuses(p4, p5)
 			
-			if var11 then
-				var5.replaceItem("__local_user__", var11)
+			if MapResponseToStatusesResult then
+				DataCache.replaceItem("__local_user__", MapResponseToStatusesResult)
 			end
-			if next(var12) then
-				var6.replaceItems(var12)
+			if next(MapResponseToStatusesResult2) then
+				DataCache1.replaceItems(MapResponseToStatusesResult2)
 			end
 		end,
-		refreshStatuses = function(p5)
-			-- upvalues: var7 (write), var8 (write), playersService (copy), t_1 (ref), appChatNetworkingModule (copy), mapResponseToStatuses (copy), var5 (ref), var6 (ref), promiseModule (copy)
-			var7 += 1
-			var8 = var7
-			local var11 = var7
-			local var12 = if playersService.LocalPlayer then playersService.LocalPlayer.UserId else nil
-			local var13 = if var12 == nil or var12 <= 0 then nil else var12
-			var12 = if p5 then table.clone(p5) else {}
-			
-			for i, v in var12 do
-				t_1[v] = var11
+		refreshStatuses = function(Tbl1) --[[ Line: 168 ]]
+			-- upvalues: Count (ref), Count1 (ref), Players (upval), Tbl (copy), AppChatNetworkingModule (upval), mapResponseToStatuses (upval), DataCache (copy), DataCache1 (copy), PromiseModule (upval)
+			Count += 1
+			Count1 = Count
+			local Count2: number = Count
+			local UserId = if Players.LocalPlayer then Players.LocalPlayer.UserId else nil
+			local UserId1 = if UserId == nil or UserId <= 0 then nil else UserId
+			local Copy = if Tbl1 then table.clone(Tbl1) else {}
+			for _, value in Copy do
+				Tbl[value] = Count2
 			end
-			return appChatNetworkingModule.http.GetChatModerationStatuses(nil, p5):andThen(function(p6)
-				-- upvalues: var13 (ref), playersService (copy), var12 (ref), t_1 (copy), var11 (ref), var8 (copy), mapResponseToStatuses (copy), var5 (copy), var6 (copy)
-				local var14 = var13
-				local var15 = if playersService.LocalPlayer then playersService.LocalPlayer.UserId else nil
+			return AppChatNetworkingModule.http.GetChatModerationStatuses(nil, Tbl1):andThen(function(Result) --[[ Line: 182 ]]
+				-- upvalues: UserId1 (copy), Players (upval), Copy (copy), Tbl (upval), Count2 (copy), Count1 (upval), mapResponseToStatuses (upval), DataCache (upval), DataCache1 (upval)
+				local UserId = if Players.LocalPlayer then Players.LocalPlayer.UserId else nil
 				
-				if var14 == (if var15 == nil or var15 <= 0 then nil else var15) then
-					var14 = {}
+				if UserId1 == (if UserId == nil or UserId <= 0 then nil else UserId) then
+					local ConversationIds = {}
 					
-					for i, v in var12 do
-						if t_1[v] == var11 then
-							table.insert(var14, v)
+					for _, value in Copy do
+						if Tbl[value] == Count2 then
+							table.insert(ConversationIds, value)
 						end
 					end
-					var15, var36 = mapResponseToStatuses(p6, { includeUser = var8 == var11, conversationIds = var14 })
+					local MapResponseToStatusesResult, MapResponseToStatusesResult2 = mapResponseToStatuses(Result, {
+						includeUser = Count1 == Count2,
+						conversationIds = ConversationIds
+					})
 					
-					if var15 then
-						var5.replaceItem("__local_user__", var15)
+					if MapResponseToStatusesResult then
+						DataCache.replaceItem("__local_user__", MapResponseToStatusesResult)
 					end
-					if next(var36) then
-						var6.replaceItems(var36)
-					end
-				end
-				return p6
-			end):andThen(function(p7)
-				-- upvalues: var11 (ref), var12 (ref), var8 (copy), t_1 (copy)
-				if var8 == var11 then
-					var8 = nil
-				end
-				for i, v in var12 do
-					if t_1[v] == var11 then
-						t_1[v] = nil
+					if next(MapResponseToStatusesResult2) then
+						DataCache1.replaceItems(MapResponseToStatusesResult2)
 					end
 				end
-				return p7
-			end, function(p8)
-				-- upvalues: var11 (ref), var12 (ref), var8 (copy), t_1 (copy), promiseModule (copy)
-				if var8 == var11 then
-					var8 = nil
+				return Result
+			end):andThen(function(Result) --[[ Line: 200 | Named "onSuccess" ]]
+				-- upvalues: Count2 (copy), Copy (copy), Count1 (upval), Tbl (upval)
+				if Count1 == Count2 then
+					Count1 = nil
 				end
-				for i, v in var12 do
-					if t_1[v] == var11 then
-						t_1[v] = nil
+				for _, value in Copy do
+					if Tbl[value] == Count2 then
+						Tbl[value] = nil
 					end
 				end
-				return promiseModule.reject(p8)
+				return Result
+			end, function(p4) --[[ Line: 205 | Named "onFailure" ]]
+				-- upvalues: Count2 (copy), Copy (copy), Count1 (upval), Tbl (upval), PromiseModule (upval)
+				if Count1 == Count2 then
+					Count1 = nil
+				end
+				for _, value in Copy do
+					if Tbl[value] == Count2 then
+						Tbl[value] = nil
+					end
+				end
+				return PromiseModule.reject(p4)
 			end)
 		end,
-		setConversationStatusNone = function(value)
-			-- upvalues: var6 (ref), t (copy)
-			var6.replaceItem(value, t)
+		setConversationStatusNone = function(p4) --[[ Line: 228 ]]
+			-- upvalues: DataCache1 (copy), config (upval)
+			DataCache1.replaceItem(p4, config)
 		end,
-		clear = function()
-			-- upvalues: fFlagAppChatReactiveFeatureRestrictions (copy), var8 (write), t_1 (ref), var9 (ref), var10 (ref)
-			if fFlagAppChatReactiveFeatureRestrictions then
-				var8 = nil
-				table.clear(t_1)
+		clear = function() --[[ Line: 231 ]]
+			-- upvalues: FFlagAppChatReactiveFeatureRestrictions (upval), Count1 (ref), Tbl (copy), DataResolver (copy), DataResolver1 (copy)
+			if FFlagAppChatReactiveFeatureRestrictions then
+				Count1 = nil
+				table.clear(Tbl)
 			end
-			var9.clear()
-			var10.clear()
+			DataResolver.clear()
+			DataResolver1.clear()
 		end
 	}
 end
 
-local var16 = nil
+local v2 = nil
 
-return function(_)
-	-- upvalues: var16 (write), createChatModerationStatusDataHydrationStore (ref)
-	if var16 == nil then
-		local var17 = createChatModerationStatusDataHydrationStore()
-		var16 = var17
+return function(_) --[[ Line: 244 | Named "GetChatModerationStatusDataHydration" ]]
+	-- upvalues: v2 (ref), createChatModerationStatusDataHydrationStore (copy)
+	local v3 = v2
+	
+	if v3 == nil then
+		local ChatModerationStatusDataHydrationStore = createChatModerationStatusDataHydrationStore()
+		v2 = ChatModerationStatusDataHydrationStore
 		
-		return var17
+		return ChatModerationStatusDataHydrationStore
+	else
+		return v3
 	end
-	return var16
 end

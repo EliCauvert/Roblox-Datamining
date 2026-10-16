@@ -1,1 +1,1 @@
-﻿return require(game:GetService("CorePackages").Packages.ReactOtter)
+﻿return (require(game:GetService("CorePackages").Packages.ReactOtter))

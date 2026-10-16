@@ -1,24 +1,25 @@
-﻿local currencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
-local _ = require(currencyTransfers.Stores.createTransferStore)
-local promptStateModule = require(currencyTransfers.Enums.PromptState)
-local transferDirectionModule = require(currencyTransfers.Enums.TransferDirection)
-local _ = require(currencyTransfers.Models.ErrorTransferModel)
+﻿local CurrencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
+local _ = require(CurrencyTransfers.Stores.createTransferStore)
+local PromptStateModule = require(CurrencyTransfers.Enums.PromptState)
+local TransferDirectionModule = require(CurrencyTransfers.Enums.TransferDirection)
+local _ = require(CurrencyTransfers.Models.ErrorTransferModel)
 
-return function(p1, p2)
-	-- upvalues: transferDirectionModule (ref), promptStateModule (ref)
-	local setPromptState = p1.setPromptState
-	local setErrorTransferModel = p1.setErrorTransferModel
-	local getDirection = p1.getDirection
+return function(p1, p2) --[[ Line: 11 | Named "handleGetError" ]]
+	-- upvalues: TransferDirectionModule (copy), PromptStateModule (copy)
+	local SetPromptStateFunction: (any) -> () = p1.setPromptState
+	local SetErrorTransferModelFunction: (any) -> () = p1.setErrorTransferModel
+	local GetDirectionFunction = p1.getDirection
 	
 	if p2 then
-		setErrorTransferModel(p2)
+		SetErrorTransferModelFunction(p2)
 	else
-		setErrorTransferModel(nil)
+		SetErrorTransferModelFunction(nil)
 	end
-	if getDirection(false) == transferDirectionModule.Receive then
-		setPromptState(promptStateModule.ReceiveError)
+	if GetDirectionFunction(false) == TransferDirectionModule.Receive then
+		SetPromptStateFunction(PromptStateModule.ReceiveError)
 		
 		return
+	else
+		SetPromptStateFunction(PromptStateModule.TransferError)
 	end
-	setPromptState(promptStateModule.TransferError)
 end

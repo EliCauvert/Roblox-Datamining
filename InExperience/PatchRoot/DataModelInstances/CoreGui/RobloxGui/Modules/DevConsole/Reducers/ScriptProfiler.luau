@@ -1,37 +1,37 @@
-﻿local immutableModule = require(script.Parent.Parent.Immutable)
-local setScriptProfilerStateModule = require(script.Parent.Parent.Actions.SetScriptProfilerState)
-local setScriptProfilerRootModule = require(script.Parent.Parent.Actions.SetScriptProfilerRoot)
-local setIsProfilingModule = require(script.Parent.Parent.Components.ScriptProfiler.Actions.SetIsProfiling)
-local setDataModule = require(script.Parent.Parent.Components.ScriptProfiler.Actions.SetData)
-local setThreadsModule = require(script.Parent.Parent.Components.ScriptProfiler.Actions.SetThreads)
-local setTimerStateModule = require(script.Parent.Parent.Components.ScriptProfiler.Actions.SetTimerState)
-local clearStateForNewProfilingSessionModule = require(script.Parent.Parent.Components.ScriptProfiler.Actions.ClearStateForNewProfilingSession)
-local setAverageModule = require(script.Parent.Parent.Components.ScriptProfiler.Actions.SetAverage)
-local setFrequencyModule = require(script.Parent.Parent.Components.ScriptProfiler.Actions.SetFrequency)
-local setDataViewModule = require(script.Parent.Parent.Components.ScriptProfiler.Actions.SetDataView)
-local setLiveUpdateModule = require(script.Parent.Parent.Components.ScriptProfiler.Actions.SetLiveUpdate)
-local setShowPluginsModule = require(script.Parent.Parent.Components.ScriptProfiler.Actions.SetShowPlugins)
-local setShowGCModule = require(script.Parent.Parent.Components.ScriptProfiler.Actions.SetShowGC)
-local setSearchDataModule = require(script.Parent.Parent.Components.ScriptProfiler.Actions.SetSearchData)
+﻿local ImmutableModule = require(script.Parent.Parent.Immutable)
+local SetScriptProfilerStateModule = require(script.Parent.Parent.Actions.SetScriptProfilerState)
+local SetScriptProfilerRootModule = require(script.Parent.Parent.Actions.SetScriptProfilerRoot)
+local SetIsProfilingModule = require(script.Parent.Parent.Components.ScriptProfiler.Actions.SetIsProfiling)
+local SetDataModule = require(script.Parent.Parent.Components.ScriptProfiler.Actions.SetData)
+local SetThreadsModule = require(script.Parent.Parent.Components.ScriptProfiler.Actions.SetThreads)
+local SetTimerStateModule = require(script.Parent.Parent.Components.ScriptProfiler.Actions.SetTimerState)
+local ClearStateForNewProfilingSessionModule = require(script.Parent.Parent.Components.ScriptProfiler.Actions.ClearStateForNewProfilingSession)
+local SetAverageModule = require(script.Parent.Parent.Components.ScriptProfiler.Actions.SetAverage)
+local SetFrequencyModule = require(script.Parent.Parent.Components.ScriptProfiler.Actions.SetFrequency)
+local SetDataViewModule = require(script.Parent.Parent.Components.ScriptProfiler.Actions.SetDataView)
+local SetLiveUpdateModule = require(script.Parent.Parent.Components.ScriptProfiler.Actions.SetLiveUpdate)
+local SetShowPluginsModule = require(script.Parent.Parent.Components.ScriptProfiler.Actions.SetShowPlugins)
+local SetShowGCModule = require(script.Parent.Parent.Components.ScriptProfiler.Actions.SetShowGC)
+local SetSearchDataModule = require(script.Parent.Parent.Components.ScriptProfiler.Actions.SetSearchData)
 local _ = require(script.Parent.Parent.Components.ScriptProfiler.ProfilerDataFormatV2)
 
-local function _(p1, p2)
+local function _(p1, p2) --[[ Line: 68 | Named "GetSessionState" ]]
 	return if p1 then p2.client else p2.server
 end
 
-local function Update(p1, p2, p3)
-	-- upvalues: immutableModule (ref)
-	local var1 = immutableModule.JoinDictionaries(if p1 then p2.client else p2.server, p3)
+local function Update(IsClient, p1, p2) --[[ Line: 72 ]]
+	-- upvalues: ImmutableModule (copy)
+	local JoinDictionariesResult = ImmutableModule.JoinDictionaries(if IsClient then p1.client else p1.server, p2)
 	
-	return immutableModule.JoinDictionaries(p2, {
-		client = if p1 then var1 else nil,
-		server = if p1 then nil else var1
+	return ImmutableModule.JoinDictionaries(p1, {
+		client = if IsClient then JoinDictionariesResult else nil,
+		server = if IsClient then nil else JoinDictionariesResult
 	})
 end
 
-return function(p1, p2)
-	-- upvalues: setScriptProfilerStateModule (ref), immutableModule (ref), setIsProfilingModule (ref), Update (ref), setAverageModule (ref), setFrequencyModule (ref), setDataViewModule (ref), setLiveUpdateModule (ref), setShowPluginsModule (ref), setShowGCModule (ref), setSearchDataModule (ref), setTimerStateModule (ref), setDataModule (ref), setThreadsModule (ref), clearStateForNewProfilingSessionModule (ref), setScriptProfilerRootModule (ref)
-	p1 = p1 or {
+return function(p1, p2) --[[ Line: 85 ]]
+	-- upvalues: SetScriptProfilerStateModule (copy), ImmutableModule (copy), SetIsProfilingModule (copy), Update (copy), SetAverageModule (copy), SetFrequencyModule (copy), SetDataViewModule (copy), SetLiveUpdateModule (copy), SetShowPluginsModule (copy), SetShowGCModule (copy), SetSearchDataModule (copy), SetTimerStateModule (copy), SetDataModule (copy), SetThreadsModule (copy), ClearStateForNewProfilingSessionModule (copy), SetScriptProfilerRootModule (copy)
+	local Tbl = p1 or {
 		isClientView = true,
 		usePercentages = false,
 		isExporting = false,
@@ -92,105 +92,117 @@ return function(p1, p2)
 		}
 	}
 	
-	if p2.type == setScriptProfilerStateModule.name then
-		return immutableModule.JoinDictionaries(p1, {
+	if p2.type == SetScriptProfilerStateModule.name then
+		return (ImmutableModule.JoinDictionaries(Tbl, {
 			isClientView = p2.isClientView,
 			usePercentages = p2.usePercentages,
 			isExporting = p2.isExporting,
 			isShowingMobileSettings = p2.isShowingMobileSettings,
 			client = p2.clientSessionState,
 			server = p2.serverSessionState
-		})
-	elseif p2.type == setIsProfilingModule.name then
-		return Update(p2.isClient, p1, { isProfiling = p2.isProfiling })
-	elseif p2.type == setAverageModule.name then
-		return Update(p2.isClient, p1, { average = p2.average })
-	elseif p2.type == setFrequencyModule.name then
-		return Update(p2.isClient, p1, { frequency = p2.frequency })
-	elseif p2.type == setDataViewModule.name then
-		return Update(p2.isClient, p1, { isFunctionsView = p2.isFunctionsView })
-	elseif p2.type == setLiveUpdateModule.name then
-		return Update(p2.isClient, p1, { liveUpdate = p2.liveUpdate })
-	elseif p2.type == setShowPluginsModule.name then
-		return Update(p2.isClient, p1, { showPlugins = p2.showPlugins })
-	elseif p2.type == setShowGCModule.name then
-		return Update(p2.isClient, p1, { showGC = p2.showGC })
-	elseif p2.type == setSearchDataModule.name then
-		return Update(p2.isClient, p1, {
+		}))
+	end
+	if p2.type == SetIsProfilingModule.name then
+		return Update(p2.isClient, Tbl, { isProfiling = p2.isProfiling })
+	end
+	if p2.type == SetAverageModule.name then
+		return Update(p2.isClient, Tbl, { average = p2.average })
+	end
+	if p2.type == SetFrequencyModule.name then
+		return Update(p2.isClient, Tbl, { frequency = p2.frequency })
+	end
+	if p2.type == SetDataViewModule.name then
+		return Update(p2.isClient, Tbl, { isFunctionsView = p2.isFunctionsView })
+	end
+	if p2.type == SetLiveUpdateModule.name then
+		return Update(p2.isClient, Tbl, { liveUpdate = p2.liveUpdate })
+	end
+	if p2.type == SetShowPluginsModule.name then
+		return Update(p2.isClient, Tbl, { showPlugins = p2.showPlugins })
+	end
+	if p2.type == SetShowGCModule.name then
+		return Update(p2.isClient, Tbl, { showGC = p2.showGC })
+	end
+	if p2.type == SetSearchDataModule.name then
+		return Update(p2.isClient, Tbl, {
 			searchTerm = p2.state.searchTerm,
 			searchFilterFlat = p2.state.searchFilterFlat,
 			searchFilterGraph = p2.state.searchFilterGraph
 		})
-	elseif p2.type == setTimerStateModule.name then
-		return Update(p2.isClient, p1, {
+	end
+	if p2.type == SetTimerStateModule.name then
+		return Update(p2.isClient, Tbl, {
 			timedProfilingDuration = p2.state.timedProfilingDuration,
 			timedProfilingCountdown = p2.state.timedProfilingCountdown
 		})
-	elseif p2.type == setDataModule.name then
-		local cloned = table.clone(if p2.isClient then p1.client else p1.server)
-		cloned.data = p2.state.data
-		cloned.serializedData = p2.state.serializedData
-		cloned.pluginOffsets = p2.state.pluginOffsets or {}
-		cloned.pluginGCOffsets = p2.state.pluginGCOffsets or {}
-		cloned.gcFunctionOffsets = p2.state.gcFunctionOffsets or {}
-		cloned.gcNodeOffsets = p2.state.gcNodeOffsets or {}
-		cloned.expandedNodes = p2.state.expandedNodes or {}
-		local cloned_1 = table.clone(p1)
-		
-		if p2.isClient then
-			cloned_1.client = cloned
-		else
-			cloned_1.server = cloned
-		end
-		return immutableModule.JoinDictionaries(p1, cloned_1)
-	elseif p2.type == setThreadsModule.name then
-		local cloned = table.clone(if p2.isClient then p1.client else p1.server)
-		cloned.timedProfilingThread = p2.state.timedProfilingThread
-		cloned.timedProfilingTimerThread = p2.state.timedProfilingTimerThread
-		cloned.liveUpdateThread = p2.state.liveUpdateThread
-		local cloned_1 = table.clone(p1)
-		
-		if p2.isClient then
-			cloned_1.client = cloned
-		else
-			cloned_1.server = cloned
-		end
-		return immutableModule.JoinDictionaries(p1, cloned_1)
-	elseif p2.type == clearStateForNewProfilingSessionModule.name then
-		local cloned = table.clone(if p2.isClient then p1.client else p1.server)
-		cloned.rootNode = 0
-		cloned.rootFunc = 0
-		cloned.rootNodeName = nil
-		cloned.searchFilterFlat = {}
-		cloned.searchFilterGraph = {}
-		cloned.expandedNodes = {}
-		local cloned_1 = table.clone(p1)
-		
-		if p2.isClient then
-			cloned_1.client = cloned
-		else
-			cloned_1.server = cloned
-		end
-		return immutableModule.JoinDictionaries(p1, cloned_1)
-	elseif p2.type ~= setScriptProfilerRootModule.name then
-		return p1
 	end
-	local t = {}
-	local cloned = table.clone(if p1.isClientView then p1.client else p1.server)
-	
-	if cloned.rootNode == p2.rootNode then
-		cloned.rootNode = 0
-		cloned.rootFunc = 0
-		cloned.rootNodeName = nil
+	if p2.type == SetDataModule.name then
+		local Copy = table.clone(if p2.isClient then Tbl.client else Tbl.server)
+		Copy.data = p2.state.data
+		Copy.serializedData = p2.state.serializedData
+		Copy.pluginOffsets = p2.state.pluginOffsets or {}
+		Copy.pluginGCOffsets = p2.state.pluginGCOffsets or {}
+		Copy.gcFunctionOffsets = p2.state.gcFunctionOffsets or {}
+		Copy.gcNodeOffsets = p2.state.gcNodeOffsets or {}
+		Copy.expandedNodes = p2.state.expandedNodes or {}
+		local Copy1 = table.clone(Tbl)
+		
+		if p2.isClient then
+			Copy1.client = Copy
+		else
+			Copy1.server = Copy
+		end
+		return ImmutableModule.JoinDictionaries(Tbl, Copy1)
+	elseif p2.type == SetThreadsModule.name then
+		local Copy = table.clone(if p2.isClient then Tbl.client else Tbl.server)
+		Copy.timedProfilingThread = p2.state.timedProfilingThread
+		Copy.timedProfilingTimerThread = p2.state.timedProfilingTimerThread
+		Copy.liveUpdateThread = p2.state.liveUpdateThread
+		local Copy2 = table.clone(Tbl)
+		
+		if p2.isClient then
+			Copy2.client = Copy
+		else
+			Copy2.server = Copy
+		end
+		return ImmutableModule.JoinDictionaries(Tbl, Copy2)
+	elseif p2.type == ClearStateForNewProfilingSessionModule.name then
+		local Copy = table.clone(if p2.isClient then Tbl.client else Tbl.server)
+		Copy.rootNode = 0
+		Copy.rootFunc = 0
+		Copy.rootNodeName = nil
+		Copy.searchFilterFlat = {}
+		Copy.searchFilterGraph = {}
+		Copy.expandedNodes = {}
+		local Copy3 = table.clone(Tbl)
+		
+		if p2.isClient then
+			Copy3.client = Copy
+		else
+			Copy3.server = Copy
+		end
+		return ImmutableModule.JoinDictionaries(Tbl, Copy3)
 	else
-		cloned.rootNode = p2.rootNode
-		cloned.rootFunc = p2.rootFunc
-		cloned.rootNodeName = p2.rootNodeName
+		if p2.type ~= SetScriptProfilerRootModule.name then
+			return Tbl
+		end
+		local t = {}
+		local Copy = table.clone(if Tbl.isClientView then Tbl.client else Tbl.server)
+		
+		if Copy.rootNode == p2.rootNode then
+			Copy.rootNode = 0
+			Copy.rootFunc = 0
+			Copy.rootNodeName = nil
+		else
+			Copy.rootNode = p2.rootNode
+			Copy.rootFunc = p2.rootFunc
+			Copy.rootNodeName = p2.rootNodeName
+		end
+		if Tbl.isClientView then
+			t.client = Copy
+		else
+			t.server = Copy
+		end
+		return ImmutableModule.JoinDictionaries(Tbl, t)
 	end
-	if p1.isClientView then
-		t.client = cloned
-	else
-		t.server = cloned
-	end
-	return immutableModule.JoinDictionaries(p1, t)
 end

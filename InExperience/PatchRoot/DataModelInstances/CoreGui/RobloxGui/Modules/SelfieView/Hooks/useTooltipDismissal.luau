@@ -1,59 +1,59 @@
-﻿local userInputService = game:GetService("UserInputService")
-local packages = game:GetService("CorePackages").Packages
-local reactModule = require(packages.React)
-local luauPolyfillModule = require(packages.LuauPolyfill)
-local setTimeout = luauPolyfillModule.setTimeout
-local clearTimeout = luauPolyfillModule.clearTimeout
+﻿local UserInputService = game:GetService("UserInputService")
+local Packages = game:GetService("CorePackages").Packages
+local ReactModule = require(Packages.React)
+local LuauPolyfillModule = require(Packages.LuauPolyfill)
+local SetTimeoutFunction = LuauPolyfillModule.setTimeout
+local ClearTimeoutFunction = LuauPolyfillModule.clearTimeout
 
-local function _(p1)
-	return if p1.UserInputType ~= Enum.UserInputType.MouseButton1 then p1.UserInputType == Enum.UserInputType.Touch else true
+local function _(Input): boolean --[[ Line: 12 | Named "isClickOrTap" ]]
+	return Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch
 end
 
-return function(p1)
-	-- upvalues: reactModule (ref), clearTimeout (ref), setTimeout (ref), userInputService (ref)
-	local var1, var2 = reactModule.useState("")
-	local var3, var4 = reactModule.useState("")
-	local var5, var6 = reactModule.useState(false)
-	local var7 = reactModule.useRef(nil)
-	local var8 = reactModule.useRef(nil)
-	local var9 = reactModule.useCallback(function()
-		-- upvalues: var8 (ref), clearTimeout (copy), var7 (ref)
-		if var8.current then
-			clearTimeout(var8.current)
+return function(p1) --[[ Line: 17 ]]
+	-- upvalues: ReactModule (copy), ClearTimeoutFunction (copy), SetTimeoutFunction (copy), UserInputService (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState("")
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState("")
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(false)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 23 ]]
+		-- upvalues: UseRefResult1 (copy), ClearTimeoutFunction (upval), UseRefResult (copy)
+		if UseRefResult1.current then
+			ClearTimeoutFunction(UseRefResult1.current)
 		end
-		if var7.current then
-			var7.current:Disconnect()
-			var7.current = nil
+		if UseRefResult.current then
+			UseRefResult.current:Disconnect()
+			UseRefResult.current = nil
 		end
-	end, { var8, var7 })
-	local var10 = reactModule.useCallback(function()
-		-- upvalues: var9 (ref), var6 (ref), var8 (ref), setTimeout (copy), p1 (ref), var7 (ref), userInputService (copy)
-		var9()
-		var6(true)
-		var8.current = setTimeout(function()
-			-- upvalues: var9 (copy), var6 (copy)
-			var9()
-			var6(false)
+	end, { UseRefResult1, UseRefResult })
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 32 ]]
+		-- upvalues: UseResult (copy), UseStateResult2_2 (copy), UseRefResult1 (copy), SetTimeoutFunction (upval), p1 (copy), UseRefResult (copy), UserInputService (upval)
+		UseResult()
+		UseStateResult2_2(true)
+		UseRefResult1.current = SetTimeoutFunction(function() --[[ Line: 39 ]]
+			-- upvalues: UseResult (upval), UseStateResult2_2 (upval)
+			UseResult()
+			UseStateResult2_2(false)
 		end, p1)
-		var7.current = userInputService.InputBegan:Connect(function(p2, _)
-			-- upvalues: var9 (copy), var6 (copy)
-			if if p2.UserInputType ~= Enum.UserInputType.MouseButton1 then p2.UserInputType == Enum.UserInputType.Touch else true then
-				var9()
-				var6(false)
+		UseRefResult.current = UserInputService.InputBegan:Connect(function(Input, _) --[[ Line: 44 ]]
+			-- upvalues: UseResult (upval), UseStateResult2_2 (upval)
+			if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
+				UseResult()
+				UseStateResult2_2(false)
 				
 				return
 			end
 		end)
-	end, { var8, var7 })
-	reactModule.useEffect(function()
-		-- upvalues: var9 (ref)
-		return var9
+	end, { UseRefResult1, UseRefResult })
+	ReactModule.useEffect(function() --[[ Line: 54 ]]
+		-- upvalues: UseResult (copy)
+		return UseResult
 	end, {})
 	
-	return var1, var3, var5, reactModule.useCallback(function(p2, p3)
-		-- upvalues: var2 (ref), var4 (ref), var10 (ref)
-		var2(p2)
-		var4(p3)
-		var10()
-	end, {})
+	return UseStateResult, UseStateResult1, UseStateResult3, (ReactModule.useCallback(function(p2, p3) --[[ Line: 58 ]]
+		-- upvalues: UseStateResult2 (copy), UseStateResult2_1 (copy), UseResult1 (copy)
+		UseStateResult2(p2)
+		UseStateResult2_1(p3)
+		UseResult1()
+	end, {}))
 end

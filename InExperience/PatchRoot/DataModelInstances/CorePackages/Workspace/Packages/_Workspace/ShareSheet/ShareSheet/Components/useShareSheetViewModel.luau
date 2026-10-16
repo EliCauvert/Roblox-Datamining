@@ -1,139 +1,138 @@
-﻿local shareSheet = script:FindFirstAncestor("ShareSheet")
-local parent = shareSheet.Parent
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local fFlagShareSheetHoldRecipientsWhileSendingModule = require(shareSheet.Flags.FFlagShareSheetHoldRecipientsWhileSending)
-local fFlagShareSheetLocalizeStringsModule = require(shareSheet.Flags.FFlagShareSheetLocalizeStrings)
-local fFlagShareSheetPeoplePickerEnabledModule = require(shareSheet.Flags.FFlagShareSheetPeoplePickerEnabled)
-local var1 = if fFlagShareSheetPeoplePickerEnabledModule then require(shareSheet.Stores.GetUniversalShareSheetStore) else nil
-local getExternalChatMessageSenderStoreModule = require(parent.AppChat.GetExternalChatMessageSenderStore)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local getAppFeaturePolicies = require(parent.UniversalAppPolicy).getAppFeaturePolicies
-local shareSheetTelemetryModule = require(shareSheet.telemetry.ShareSheetTelemetry)
+﻿local ShareSheet = script:FindFirstAncestor("ShareSheet")
+local Parent = ShareSheet.Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local FFlagShareSheetPeoplePickerEnabledModule = require(ShareSheet.Flags.FFlagShareSheetPeoplePickerEnabled)
+local FFlagShareSheetFriendsSort = require(Parent.SharedFlags).FFlagShareSheetFriendsSort
+local GetUniversalShareSheetStoreModule = if FFlagShareSheetPeoplePickerEnabledModule then require(ShareSheet.Stores.GetUniversalShareSheetStore) else nil
+local GetExternalChatMessageSenderStoreModule = require(Parent.AppChat.GetExternalChatMessageSenderStore)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local GetAppFeaturePoliciesFunction = require(Parent.UniversalAppPolicy).getAppFeaturePolicies
+local RecipientSourceModule = require(ShareSheet.Recipients.RecipientSource)
+local UseRecipientListModule = require(ShareSheet.Recipients.useRecipientList)
+local ShareSheetTelemetryModule = require(ShareSheet.telemetry.ShareSheetTelemetry)
 local _ = require(script.Parent.ShareSheetView)
-local var2 = if fFlagShareSheetPeoplePickerEnabledModule then require(script.Parent.PeoplePicker.usePeoplePickerViewModel) else nil
-local useShareSheetConversationModelModule = require(script.Parent.useShareSheetConversationModel)
-local useShareSheetSelectionModule = require(script.Parent.useShareSheetSelection)
-local useShareSheetSendModule = require(script.Parent.useShareSheetSend)
+local UsePeoplePickerViewModelModule = if FFlagShareSheetPeoplePickerEnabledModule then require(script.Parent.PeoplePicker.usePeoplePickerViewModel) else nil
+local UseShareSheetConversationModelModule = require(script.Parent.useShareSheetConversationModel)
+local UseShareSheetSelectionModule = require(script.Parent.useShareSheetSelection)
+local UseShareSheetSendModule = require(script.Parent.useShareSheetSend)
 
-return function(p1)
-	-- upvalues: fFlagShareSheetPeoplePickerEnabledModule (ref), var1 (ref), signalsReactModule (ref), getExternalChatMessageSenderStoreModule (ref), useShareSheetSelectionModule (ref), fFlagShareSheetHoldRecipientsWhileSendingModule (ref), useShareSheetSendModule (ref), useShareSheetConversationModelModule (ref), useLocalization (ref), fFlagShareSheetLocalizeStringsModule (ref), reactModule (ref), shareSheetTelemetryModule (ref), var2 (ref), getAppFeaturePolicies (ref)
-	local var3 = nil
-	local var4 = nil
+return function(p1) --[[ Line: 46 | Named "useShareSheetViewModel" ]]
+	-- upvalues: FFlagShareSheetFriendsSort (copy), FFlagShareSheetPeoplePickerEnabledModule (copy), GetUniversalShareSheetStoreModule (copy), SignalsReactModule (copy), GetExternalChatMessageSenderStoreModule (copy), UseRecipientListModule (copy), RecipientSourceModule (copy), UseShareSheetSelectionModule (copy), UseShareSheetSendModule (copy), UseShareSheetConversationModelModule (copy), UseLocalizationFunction (copy), ReactModule (copy), ShareSheetTelemetryModule (copy), UsePeoplePickerViewModelModule (copy), GetAppFeaturePoliciesFunction (copy)
+	local RecipientSource = if FFlagShareSheetFriendsSort then p1.recipientSource else nil
+	local v1 = nil
+	local Enabled = nil
 	
-	if fFlagShareSheetPeoplePickerEnabledModule then
-		var3 = var1()
-		var4 = signalsReactModule.useSignalState(var3.getIsPeoplePickerDisplayed)
+	if FFlagShareSheetPeoplePickerEnabledModule then
+		v1 = GetUniversalShareSheetStoreModule()
+		Enabled = SignalsReactModule.useSignalState(v1.getIsPeoplePickerDisplayed)
 	end
-	local var5 = signalsReactModule.useSignalState(getExternalChatMessageSenderStoreModule().getSender)
-	local var6 = useShareSheetSelectionModule()
-	local selectedConversationIds = var6.selectedConversationIds
-	local var7 = if fFlagShareSheetHoldRecipientsWhileSendingModule then useShareSheetSendModule({
-		chatShare = var5,
+	local UseSignalStateResult = SignalsReactModule.useSignalState(GetExternalChatMessageSenderStoreModule().getSender)
+	local v2 = nil
+	local v3 = nil
+	
+	if FFlagShareSheetFriendsSort then
+		v2, v20 = UseRecipientListModule(RecipientSource or RecipientSourceModule.DefaultRecipientSource, UseSignalStateResult ~= nil)
+	end
+	local UseShareSheetSelectionModuleResult = UseShareSheetSelectionModule()
+	local SelectedConversationIds = UseShareSheetSelectionModuleResult.selectedConversationIds
+	local UseShareSheetSendModuleResult = UseShareSheetSendModule({
+		chatShare = UseSignalStateResult,
 		context = p1.context,
+		recipientSource = RecipientSource,
 		formatSuccessSnackbarText = p1.formatSuccessSnackbarText,
 		onCloseWithReason = p1.onCloseWithReason,
-		onSendActivated = var6.onSendActivated,
+		onSendActivated = UseShareSheetSelectionModuleResult.onSendActivated,
 		onShareSendResultSnackbar = p1.onShareSendResultSnackbar,
-		selectedConversationIds = selectedConversationIds,
+		selectedConversationIds = SelectedConversationIds,
 		telemetryId = p1.telemetryId,
 		url = p1.url
-	}) else nil
-	local var8 = useShareSheetConversationModelModule({
-		chatShare = var5,
+	})
+	local UseShareSheetConversationModelModuleResult = UseShareSheetConversationModelModule({
+		chatShare = UseSignalStateResult,
 		isOpen = p1.isOpen == true,
-		isPeoplePickerDisplayed = var4,
-		isSending = if fFlagShareSheetHoldRecipientsWhileSendingModule then var7.isSending else nil,
-		selectedConversationIds = selectedConversationIds
+		isPeoplePickerDisplayed = Enabled,
+		isSending = UseShareSheetSendModuleResult.isSending,
+		selectedConversationIds = SelectedConversationIds
 	})
-	local var9 = useLocalization({
+	local UseLocalizationResult = UseLocalizationFunction({
+		messagePlaceholder = "Feature.UniversalShareSheet.InputPlaceholder.ShareMessage",
 		send = "CommonUI.Features.Action.Send",
-		share = "Feature.SocialShare.Action.Share",
-		messagePlaceholder = if fFlagShareSheetLocalizeStringsModule then "Feature.UniversalShareSheet.InputPlaceholder.ShareMessage" else nil
+		share = "Feature.SocialShare.Action.Share"
 	})
-	local var10 = reactModule.useCallback(function()
-		-- upvalues: shareSheetTelemetryModule (copy), p1 (ref)
-		shareSheetTelemetryModule.logInteraction({
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 89 ]]
+		-- upvalues: ShareSheetTelemetryModule (upval), p1 (copy), RecipientSource (copy)
+		ShareSheetTelemetryModule.logInteraction({
 			context = p1.context,
+			recipientSource = RecipientSource,
 			telemetryId = p1.telemetryId or "",
-			interactionType = shareSheetTelemetryModule.InteractionType.CustomMessageComposerFocused
+			interactionType = ShareSheetTelemetryModule.InteractionType.CustomMessageComposerFocused
 		})
-	end, { p1.context, p1.telemetryId })
-	local var11 = reactModule.useCallback(function(p2)
-		-- upvalues: fFlagShareSheetHoldRecipientsWhileSendingModule (copy), var7 (write), selectedConversationIds (ref), shareSheetTelemetryModule (copy), p1 (ref), var6 (ref)
-		if fFlagShareSheetHoldRecipientsWhileSendingModule and var7.isSending then
+	end, { p1.context, RecipientSource, p1.telemetryId })
+	local UseResult1 = ReactModule.useCallback(function(RequestedConversationId) --[[ Line: 98 ]]
+		-- upvalues: UseShareSheetSendModuleResult (copy), SelectedConversationIds (copy), ShareSheetTelemetryModule (upval), p1 (copy), RecipientSource (copy), UseShareSheetSelectionModuleResult (copy)
+		if not UseShareSheetSendModuleResult.isSending then
+			ShareSheetTelemetryModule.logInteraction({
+				context = p1.context,
+				telemetryId = p1.telemetryId or "",
+				interactionType = if SelectedConversationIds[RequestedConversationId] then "conversationDeselected" else "conversationSelected",
+				recipientSource = RecipientSource,
+				requestedConversationId = RequestedConversationId
+			})
+			UseShareSheetSelectionModuleResult.onConversationActivated(RequestedConversationId)
+			
 			return
 		end
-		shareSheetTelemetryModule.logInteraction({
-			context = p1.context,
-			telemetryId = p1.telemetryId or "",
-			interactionType = if selectedConversationIds[p2] then "conversationDeselected" else "conversationSelected",
-			requestedConversationId = p2
-		})
-		var6.onConversationActivated(p2)
 	end, {
-		p1.context,
-		p1.telemetryId,
-		selectedConversationIds,
-		var6.onConversationActivated,
-		if fFlagShareSheetHoldRecipientsWhileSendingModule then var7.isSending else false
+		p1.context, RecipientSource, p1.telemetryId, SelectedConversationIds,
+		UseShareSheetSelectionModuleResult.onConversationActivated,
+		UseShareSheetSendModuleResult.isSending
 	})
-	local var12 = nil
-	local var13 = nil
+	local UseResult2 = nil
+	local v4 = nil
 	
-	if fFlagShareSheetPeoplePickerEnabledModule then
-		var12 = reactModule.useCallback(function()
-			-- upvalues: var3 (write)
-			var3.setIsPeoplePickerDisplayed(true)
-		end, { var3 })
-		local peoplePickerEligibility = var8.peoplePickerEligibility
-		var13 = var2({
-			conversations = peoplePickerEligibility.eligibleConversations,
-			isEligibilityLoading = peoplePickerEligibility.isLoading,
-			isPeoplePickerDisplayed = var4 == true,
-			listStatus = var8.listStatus,
-			onBack = reactModule.useCallback(function()
-				-- upvalues: var3 (write)
-				var3.setIsPeoplePickerDisplayed(false)
-			end, { var3 }),
-			onConversationActivated = var11,
-			selectedConversationIds = selectedConversationIds
-		})
-	end
-	if not fFlagShareSheetHoldRecipientsWhileSendingModule then
-		var7 = useShareSheetSendModule({
-			chatShare = var5,
-			context = p1.context,
-			conversations = var8.conversations,
-			formatSuccessSnackbarText = p1.formatSuccessSnackbarText,
-			onCloseWithReason = p1.onCloseWithReason,
-			onSendActivated = var6.onSendActivated,
-			onShareSendResultSnackbar = p1.onShareSendResultSnackbar,
-			selectedConversationIds = selectedConversationIds,
-			telemetryId = p1.telemetryId,
-			url = p1.url
+	if FFlagShareSheetPeoplePickerEnabledModule then
+		UseResult2 = ReactModule.useCallback(function() --[[ Line: 126 ]]
+			-- upvalues: v1 (ref)
+			v1.setIsPeoplePickerDisplayed(true)
+		end, { v1 })
+		local PeoplePickerEligibility = UseShareSheetConversationModelModuleResult.peoplePickerEligibility
+		v4 = UsePeoplePickerViewModelModule({
+			conversations = PeoplePickerEligibility.eligibleConversations,
+			isEligibilityLoading = PeoplePickerEligibility.isLoading,
+			isPeoplePickerDisplayed = Enabled == true,
+			listStatus = UseShareSheetConversationModelModuleResult.listStatus,
+			loadMore = if FFlagShareSheetFriendsSort then v3.loadMore else nil,
+			listResult = if FFlagShareSheetFriendsSort then v2 else nil,
+			onBack = ReactModule.useCallback(function() --[[ Line: 129 ]]
+				-- upvalues: v1 (ref)
+				v1.setIsPeoplePickerDisplayed(false)
+			end, { v1 }),
+			onConversationActivated = UseResult1,
+			selectedConversationIds = SelectedConversationIds
 		})
 	end
 	return {
-		canShareLink = getAppFeaturePolicies().getEligibleForExternalContentSharing(),
-		conversationEligibility = var8.conversationEligibility,
+		canShareLink = GetAppFeaturePoliciesFunction().getEligibleForExternalContentSharing(),
+		conversationEligibility = UseShareSheetConversationModelModuleResult.conversationEligibility,
 		context = p1.context,
 		isOpen = p1.isOpen == true,
-		isPeoplePickerDisplayed = if fFlagShareSheetPeoplePickerEnabledModule then var4 else nil,
-		isSending = var7.isSending,
-		isSocialRowLoading = var8.isSocialRowLoading,
-		messagePlaceholder = p1.messagePlaceholder or (if fFlagShareSheetLocalizeStringsModule then var9.messagePlaceholder else "Share a message"),
-		onComposerFocused = var10,
+		isPeoplePickerDisplayed = if FFlagShareSheetPeoplePickerEnabledModule then Enabled else nil,
+		isSending = UseShareSheetSendModuleResult.isSending,
+		isSocialRowLoading = UseShareSheetConversationModelModuleResult.isSocialRowLoading,
+		messagePlaceholder = p1.messagePlaceholder or UseLocalizationResult.messagePlaceholder,
+		onComposerFocused = UseResult,
 		onCloseWithReason = p1.onCloseWithReason,
-		onConversationActivated = var11,
-		onMoreActivated = if fFlagShareSheetPeoplePickerEnabledModule then var12 else nil,
-		onSendActivated = var7.onSendActivated,
-		peoplePicker = if fFlagShareSheetPeoplePickerEnabledModule then var13.viewModel else nil,
-		selectedConversationIds = selectedConversationIds,
-		sendLabel = var9.send,
-		shareLabel = var9.share,
+		onConversationActivated = UseResult1,
+		onMoreActivated = if FFlagShareSheetPeoplePickerEnabledModule then UseResult2 else nil,
+		onSendActivated = UseShareSheetSendModuleResult.onSendActivated,
+		peoplePicker = if FFlagShareSheetPeoplePickerEnabledModule then v4.viewModel else nil,
+		recipientSource = RecipientSource,
+		selectedConversationIds = SelectedConversationIds,
+		sendLabel = UseLocalizationResult.send,
+		shareLabel = UseLocalizationResult.share,
 		telemetryId = p1.telemetryId,
-		shouldShowSocialRow = var8.shouldShowSocialRow,
+		shouldShowSocialRow = UseShareSheetConversationModelModuleResult.shouldShowSocialRow,
 		url = p1.url
 	}
 end

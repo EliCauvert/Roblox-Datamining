@@ -1,3 +1,3 @@
-﻿return function(p1)
-	return type(p1) == "number" and (p1 ~= 1e999 and p1 == math.floor(p1))
+﻿return function(Value: number): boolean --[[ Line: 17 ]]
+	return type(Value) == "number" and (Value ~= 1e999 and Value == math.floor(Value))
 end

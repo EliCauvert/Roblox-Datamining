@@ -1,31 +1,32 @@
-﻿local roactModule = require(game:GetService("CorePackages").Packages.Roact)
-local profilerUtilModule = require(script.Parent.ProfilerUtil)
-local getDurations = profilerUtilModule.getDurations
-local formatSessionLength = profilerUtilModule.formatSessionLength
+﻿local RoactModule = require(game:GetService("CorePackages").Packages.Roact)
+local ProfilerUtilModule = require(script.Parent.ProfilerUtil)
+local GetDurationsFunction = ProfilerUtilModule.getDurations
+local FormatSessionLengthFunction = ProfilerUtilModule.formatSessionLength
 local _ = require(script.Parent.ProfilerDataFormatV2)
-local headerButtonModule = require(script.Parent.Parent.Parent.Components.HeaderButton)
-local profilerViewEntryModule = require(script.Parent.ProfilerViewEntry)
-local constantsModule = require(script.Parent.Parent.Parent.Constants)
-local lineWidth = constantsModule.GeneralFormatting.LineWidth
-local lineColor = constantsModule.GeneralFormatting.LineColor
-local headerFrameHeight = constantsModule.GeneralFormatting.HeaderFrameHeight
-local _ = constantsModule.GeneralFormatting.EntryFrameHeight
-local _ = constantsModule.GeneralFormatting.NoResultSearchStr
-local headerNames = constantsModule.ScriptProfilerFormatting.HeaderNames
-local valueCellWidth = constantsModule.ScriptProfilerFormatting.ValueCellWidth
-local cellPadding = constantsModule.ScriptProfilerFormatting.CellPadding
-local valuePadding = constantsModule.ScriptProfilerFormatting.ValuePadding
-local profilerView = roactModule.PureComponent:extend("ProfilerView")
+local HeaderButtonModule = require(script.Parent.Parent.Parent.Components.HeaderButton)
+local ProfilerViewEntryModule = require(script.Parent.ProfilerViewEntry)
+local ConstantsModule = require(script.Parent.Parent.Parent.Constants)
+local LineWidth = ConstantsModule.GeneralFormatting.LineWidth
+local LineColor = ConstantsModule.GeneralFormatting.LineColor
+local HeaderFrameHeight = ConstantsModule.GeneralFormatting.HeaderFrameHeight
+local _ = ConstantsModule.GeneralFormatting.EntryFrameHeight
+local _ = ConstantsModule.GeneralFormatting.NoResultSearchStr
+local HeaderNames = ConstantsModule.ScriptProfilerFormatting.HeaderNames
+local ValueCellWidth = ConstantsModule.ScriptProfilerFormatting.ValueCellWidth
+local CellPadding = ConstantsModule.ScriptProfilerFormatting.CellPadding
+local ValuePadding = ConstantsModule.ScriptProfilerFormatting.ValuePadding
+local ProfilerView = RoactModule.PureComponent:extend("ProfilerView")
 
-function profilerView.renderChildren(p1)
-	-- upvalues: getDurations (ref), roactModule (ref), profilerViewEntryModule (ref)
-	local data = p1.props.data
-	assert(data.Version == 2)
+function ProfilerView.renderChildren(p1) --[[ Line: 29 ]]
+	-- upvalues: GetDurationsFunction (copy), RoactModule (copy), ProfilerViewEntryModule (copy)
+	local Data = p1.props.data
+	assert(Data.Version == 2)
+	local Durations: number = GetDurationsFunction(Data, 0)
 	
-	return roactModule.createElement(profilerViewEntryModule, {
+	return RoactModule.createElement(ProfilerViewEntryModule, {
 		layoutOrder = 0,
 		depth = 0,
-		data = data,
+		data = Data,
 		nodeId = p1.props.rootNode,
 		functionId = p1.props.rootFunc,
 		nodeName = p1.props.rootNodeName,
@@ -38,117 +39,114 @@ function profilerView.renderChildren(p1)
 		gcNodeOffsets = p1.props.gcNodeOffsets,
 		pluginGCOffsets = p1.props.pluginGCOffsets,
 		expandedNodes = p1.props.expandedNodes,
-		percentageRatio = if p1.props.showAsPercentages then getDurations(data, 0) / 100 else nil
+		percentageRatio = if p1.props.showAsPercentages then Durations / 100 else nil
 	})
 end
 
-function profilerView.render(p1)
-	-- upvalues: roactModule (ref), constantsModule (ref), formatSessionLength (ref), headerFrameHeight (ref), headerButtonModule (ref), valueCellWidth (ref), valuePadding (ref), cellPadding (ref), lineColor (ref), headerNames (ref), lineWidth (ref)
-	local layoutOrder = p1.props.layoutOrder
-	local size = p1.props.size
-	local textLabel = nil
-	
-	if p1.props.profiling and not p1.props.data then
-		textLabel = roactModule.createElement("TextLabel", {
-			Text = "Press Stop to Finish Profiling",
-			BackgroundTransparency = 1,
-			Size = UDim2.new(1, 0, 1, 0),
-			Position = UDim2.new(0, 0, 0, 0),
-			TextColor3 = constantsModule.Color.Text,
-			LayoutOrder = layoutOrder
-		})
-	elseif not p1.props.data then
-		textLabel = roactModule.createElement("TextLabel", {
-			Text = "Start Profiling to View Data",
-			BackgroundTransparency = 1,
-			Size = UDim2.new(1, 0, 1, 0),
-			Position = UDim2.new(0, 0, 0, 0),
-			TextColor3 = constantsModule.Color.Text,
-			LayoutOrder = layoutOrder
-		})
-	end
-	local var1 = formatSessionLength(p1.props.sessionLength)
-	
-	return roactModule.createElement("Frame", {
+function ProfilerView.render(p1) --[[ Line: 62 ]]
+	-- upvalues: RoactModule (copy), ConstantsModule (copy), FormatSessionLengthFunction (copy), HeaderFrameHeight (copy), HeaderButtonModule (copy), ValueCellWidth (copy), ValuePadding (copy), CellPadding (copy), LineColor (copy), HeaderNames (copy), LineWidth (copy)
+	local LayoutOrder = p1.props.layoutOrder
+	local Size = p1.props.size
+	local TextLabel = if p1.props.profiling and not p1.props.data then RoactModule.createElement("TextLabel", {
+		Text = "Press Stop to Finish Profiling",
 		BackgroundTransparency = 1,
-		Size = size,
-		LayoutOrder = layoutOrder
+		Size = UDim2.new(1, 0, 1, 0),
+		Position = UDim2.new(0, 0, 0, 0),
+		TextColor3 = ConstantsModule.Color.Text,
+		LayoutOrder = LayoutOrder
+	}) elseif p1.props.data then nil else RoactModule.createElement("TextLabel", {
+		Text = "Start Profiling to View Data",
+		BackgroundTransparency = 1,
+		Size = UDim2.new(1, 0, 1, 0),
+		Position = UDim2.new(0, 0, 0, 0),
+		TextColor3 = ConstantsModule.Color.Text,
+		LayoutOrder = LayoutOrder
+	})
+	local FormatSessionLengthResult = FormatSessionLengthFunction(p1.props.sessionLength)
+	
+	if FormatSessionLengthResult then
+		FormatSessionLengthResult = "Session Duration: " .. FormatSessionLengthResult
+	end
+	return RoactModule.createElement("Frame", {
+		BackgroundTransparency = 1,
+		Size = Size,
+		LayoutOrder = LayoutOrder
 	}, {
-		SessionInfo = roactModule.createElement("Frame", {
+		SessionInfo = RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
-			Size = UDim2.new(1, 0, 0, headerFrameHeight)
+			Size = UDim2.new(1, 0, 0, HeaderFrameHeight)
 		}, {
-			Name = roactModule.createElement(headerButtonModule, {
-				text = var1 and "Session Duration: " .. var7 or "Session Info",
-				size = UDim2.new(1 - valueCellWidth * 2, (-valuePadding) - cellPadding, 0, headerFrameHeight),
-				pos = UDim2.new(0, cellPadding, 0, 0)
+			Name = RoactModule.createElement(HeaderButtonModule, {
+				text = FormatSessionLengthResult or "Session Info",
+				size = UDim2.new(1 - ValueCellWidth * 2, -ValuePadding - CellPadding, 0, HeaderFrameHeight),
+				pos = UDim2.new(0, CellPadding, 0, 0)
 			}),
-			TopHorizontal = roactModule.createElement("Frame", {
+			TopHorizontal = RoactModule.createElement("Frame", {
 				BorderSizePixel = 0,
 				Size = UDim2.new(1, 0, 0, 1),
-				BackgroundColor3 = lineColor
+				BackgroundColor3 = LineColor
 			})
 		}),
-		Header = roactModule.createElement("Frame", {
+		Header = RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
-			Size = UDim2.new(1, 0, 0, headerFrameHeight),
-			Position = UDim2.new(0, 0, 0, headerFrameHeight)
+			Size = UDim2.new(1, 0, 0, HeaderFrameHeight),
+			Position = UDim2.new(0, 0, 0, HeaderFrameHeight)
 		}, {
-			Name = roactModule.createElement(headerButtonModule, {
-				text = headerNames[1],
-				size = UDim2.new(1 - valueCellWidth * 2, (-valuePadding) - cellPadding, 0, headerFrameHeight),
-				pos = UDim2.new(0, cellPadding, 0, 0),
+			Name = RoactModule.createElement(HeaderButtonModule, {
+				text = HeaderNames[1],
+				size = UDim2.new(1 - ValueCellWidth * 2, -ValuePadding - CellPadding, 0, HeaderFrameHeight),
+				pos = UDim2.new(0, CellPadding, 0, 0),
 				sortfunction = p1.onSortChanged
 			}),
-			Inclusive = roactModule.createElement(headerButtonModule, {
-				text = headerNames[2],
-				size = UDim2.new(valueCellWidth, -cellPadding, 0, headerFrameHeight),
-				pos = UDim2.new(1 - valueCellWidth * 2, valuePadding, 0, 0),
+			Inclusive = RoactModule.createElement(HeaderButtonModule, {
+				text = HeaderNames[2],
+				size = UDim2.new(ValueCellWidth, -CellPadding, 0, HeaderFrameHeight),
+				pos = UDim2.new(1 - ValueCellWidth * 2, ValuePadding, 0, 0),
 				sortfunction = p1.onSortChanged
 			}),
-			Self = roactModule.createElement(headerButtonModule, {
-				text = headerNames[3],
-				size = UDim2.new(valueCellWidth, -cellPadding, 0, headerFrameHeight),
-				pos = UDim2.new(1 - valueCellWidth, valuePadding, 0, 0),
+			Self = RoactModule.createElement(HeaderButtonModule, {
+				text = HeaderNames[3],
+				size = UDim2.new(ValueCellWidth, -CellPadding, 0, HeaderFrameHeight),
+				pos = UDim2.new(1 - ValueCellWidth, ValuePadding, 0, 0),
 				sortfunction = p1.onSortChanged
 			}),
-			TopHorizontal = roactModule.createElement("Frame", {
+			TopHorizontal = RoactModule.createElement("Frame", {
 				BorderSizePixel = 0,
 				Size = UDim2.new(1, 0, 0, 1),
-				BackgroundColor3 = lineColor
+				BackgroundColor3 = LineColor
 			}),
-			LowerHorizontal = roactModule.createElement("Frame", {
+			LowerHorizontal = RoactModule.createElement("Frame", {
 				BorderSizePixel = 0,
-				Size = UDim2.new(1, 0, 0, lineWidth),
+				Size = UDim2.new(1, 0, 0, LineWidth),
 				Position = UDim2.new(0, 0, 1, 0),
-				BackgroundColor3 = lineColor
+				BackgroundColor3 = LineColor
 			}),
-			Vertical1 = roactModule.createElement("Frame", {
+			Vertical1 = RoactModule.createElement("Frame", {
 				BorderSizePixel = 0,
-				Size = UDim2.new(0, lineWidth, 1, 0),
-				Position = UDim2.new(1 - valueCellWidth, 0, 0, 0),
-				BackgroundColor3 = lineColor
+				Size = UDim2.new(0, LineWidth, 1, 0),
+				Position = UDim2.new(1 - ValueCellWidth, 0, 0, 0),
+				BackgroundColor3 = LineColor
 			}),
-			Vertical2 = roactModule.createElement("Frame", {
+			Vertical2 = RoactModule.createElement("Frame", {
 				BorderSizePixel = 0,
-				Size = UDim2.new(0, lineWidth, 1, 0),
-				Position = UDim2.new(1 - valueCellWidth * 2, 0, 0, 0),
-				BackgroundColor3 = lineColor
+				Size = UDim2.new(0, LineWidth, 1, 0),
+				Position = UDim2.new(1 - ValueCellWidth * 2, 0, 0, 0),
+				BackgroundColor3 = LineColor
 			})
 		}),
-		Entries = roactModule.createElement("ScrollingFrame", {
+		Entries = RoactModule.createElement("ScrollingFrame", {
 			BackgroundTransparency = 1,
 			ScrollBarThickness = 5,
-			Size = UDim2.new(1, 0, 1, -headerFrameHeight * 2),
-			Position = UDim2.new(0, 0, 0, headerFrameHeight * 2),
+			Size = UDim2.new(1, 0, 1, -HeaderFrameHeight * 2),
+			Position = UDim2.new(0, 0, 0, HeaderFrameHeight * 2),
 			VerticalScrollBarInset = Enum.ScrollBarInset.None,
 			CanvasSize = UDim2.fromScale(0, 0),
 			AutomaticCanvasSize = Enum.AutomaticSize.Y
 		}, {
-			Layout = roactModule.createElement("UIListLayout", { FillDirection = Enum.FillDirection.Vertical }),
-			Children = textLabel or roactModule.createFragment(p1:renderChildren())
+			Layout = RoactModule.createElement("UIListLayout", { FillDirection = Enum.FillDirection.Vertical }),
+			Children = if TextLabel then TextLabel else RoactModule.createFragment(p1:renderChildren())
 		})
 	})
 end
 
-return profilerView
+return ProfilerView

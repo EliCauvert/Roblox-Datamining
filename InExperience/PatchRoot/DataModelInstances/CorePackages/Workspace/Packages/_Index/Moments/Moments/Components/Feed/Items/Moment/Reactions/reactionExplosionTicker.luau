@@ -1,30 +1,21 @@
-﻿local runService = game:GetService("RunService")
+﻿local RunService = game:GetService("RunService")
 
-local function createTicker(p1)
-	-- upvalues: runService (ref)
-	local var1 = if p1 ~= nil then nil else p1.stepSignal
-	local var2 = (if p1 ~= nil then nil else p1.clock) or os.clock
-	local t = {}
-	local var3 = nil
+local function createTicker(p1) --[[ Line: 32 ]]
+	-- upvalues: RunService (copy)
+	local StepSignal = if p1 == nil then nil else p1.stepSignal
+	local Clock = (if p1 == nil then nil else p1.clock) or os.clock
+	local List = {}
+	local Connection = nil
 	
-	local function step(p2)
-		-- upvalues: var2 (ref), t (ref)
-		p2 = p2 or var2()
-		
-		for i, v in table.clone(t) do
-			v(p2)
-		end
-	end
-	
-	local function _()
-		-- upvalues: var3 (write), t (ref), var1 (ref), runService (copy), var2 (ref)
-		if var3 == nil and #t ~= 0 then
-			var3 = (var1 or runService.PreRender):Connect(function()
-				-- upvalues: var2 (copy), t (copy)
-				local var4 = var2()
+	local function _() --[[ Line: 48 | Named "connectIfNeeded" ]]
+		-- upvalues: Connection (ref), List (copy), StepSignal (copy), RunService (upval), Clock (copy)
+		if Connection == nil and #List ~= 0 then
+			Connection = (StepSignal or RunService.PreRender):Connect(function() --[[ Line: 53 ]]
+				-- upvalues: Clock (upval), List (upval)
+				local v1 = Clock()
 				
-				for i, v in table.clone(t) do
-					v(var4)
+				for _, value in table.clone(List) do
+					value(v1)
 				end
 			end)
 			
@@ -32,54 +23,60 @@ local function createTicker(p1)
 		end
 	end
 	
-	local _ = function()
-		-- upvalues: var3 (write), t (ref)
-		if var3 ~= nil and #t == 0 then
-			var3:Disconnect()
-			var3 = nil
+	local _ = function() --[[ Line: 58 | Named "disconnectIfEmpty" ]]
+		-- upvalues: Connection (ref), List (copy)
+		if Connection ~= nil and #List == 0 then
+			Connection:Disconnect()
+			Connection = nil
 		end
 	end
 	
 	return {
-		add = function(p3)
-			-- upvalues: t (ref), var3 (write), var1 (ref), runService (copy), var2 (ref)
-			table.insert(t, p3)
+		add = function(Value) --[[ Line: 65 ]]
+			-- upvalues: List (copy), Connection (ref), StepSignal (copy), RunService (upval), Clock (copy)
+			table.insert(List, Value)
 			
-			if var3 == nil and #t ~= 0 then
-				var3 = (var1 or runService.PreRender):Connect(function()
-					-- upvalues: var2 (copy), t (copy)
-					local var4 = var2()
+			if Connection == nil and #List ~= 0 then
+				Connection = (StepSignal or RunService.PreRender):Connect(function() --[[ Line: 53 ]]
+					-- upvalues: Clock (upval), List (upval)
+					local v1 = Clock()
 					
-					for i, v in table.clone(t) do
-						v(var4)
+					for _, value in table.clone(List) do
+						value(v1)
 					end
 				end)
 			end
-			local var4 = false
+			local Flag = false
 			
-			return function()
-				-- upvalues: var4 (write), t (copy), p3 (ref), var3 (copy)
-				if var4 then return end
-				var4 = true
-				local index = table.find(t, p3)
+			return function() --[[ Line: 70 ]]
+				-- upvalues: Flag (ref), List (upval), Value (copy), Connection (upval)
+				if Flag then return end
+				Flag = true
+				local FoundIndex: number? = table.find(List, Value)
 				
-				if index ~= nil then
-					table.remove(t, index)
+				if FoundIndex ~= nil then
+					table.remove(List, FoundIndex)
 				end
-				if var3 ~= nil and #t == 0 then
-					var3:Disconnect()
-					var3 = nil
+				if Connection ~= nil and #List == 0 then
+					Connection:Disconnect()
+					Connection = nil
 				end
 			end
 		end,
-		step = step,
-		getActiveCount = function()
-			-- upvalues: t (ref)
-			return #t
+		step = function(p2) --[[ Line: 39 ]]
+			-- upvalues: Clock (copy), List (copy)
+			local P1 = p2 or Clock()
+			for _, value in table.clone(List) do
+				value(P1)
+			end
 		end,
-		isConnected = function()
-			-- upvalues: var3 (write)
-			return var3 ~= nil
+		getActiveCount = function(): number --[[ Line: 86 ]]
+			-- upvalues: List (copy)
+			return #List
+		end,
+		isConnected = function(): boolean --[[ Line: 89 ]]
+			-- upvalues: Connection (ref)
+			return Connection ~= nil
 		end
 	}
 end

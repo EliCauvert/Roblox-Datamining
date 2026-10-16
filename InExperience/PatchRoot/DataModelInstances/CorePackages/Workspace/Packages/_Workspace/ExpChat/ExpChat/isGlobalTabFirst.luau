@@ -1,12 +1,12 @@
-﻿local parent = script:FindFirstAncestor("ExpChat").Parent
-local expChatGlobalTabDefaultExperimentation = require(parent.SocialExperiments).ExpChatGlobalTabDefaultExperimentation
-local getFFlagTextChatEnableUniverseChatTabs = require(parent.ExpChatShared).Flags.GetFFlagTextChatEnableUniverseChatTabs
-local var1 = nil
+﻿local Parent = script:FindFirstAncestor("ExpChat").Parent
+local ExpChatGlobalTabDefaultExperimentation = require(Parent.SocialExperiments).ExpChatGlobalTabDefaultExperimentation
+local GetFFlagTextChatEnableUniverseChatTabsFunction = require(Parent.ExpChatShared).Flags.GetFFlagTextChatEnableUniverseChatTabs
+local IsGlobalTabDefault = nil
 
-return function()
-	-- upvalues: var1 (write), getFFlagTextChatEnableUniverseChatTabs (ref), expChatGlobalTabDefaultExperimentation (ref)
-	if var1 == nil then
-		var1 = getFFlagTextChatEnableUniverseChatTabs() and expChatGlobalTabDefaultExperimentation.getIsGlobalTabDefault()
+return function() --[[ Line: 24 | Named "isGlobalTabFirst" ]]
+	-- upvalues: IsGlobalTabDefault (ref), GetFFlagTextChatEnableUniverseChatTabsFunction (copy), ExpChatGlobalTabDefaultExperimentation (copy)
+	if IsGlobalTabDefault == nil then
+		IsGlobalTabDefault = GetFFlagTextChatEnableUniverseChatTabsFunction() and ExpChatGlobalTabDefaultExperimentation.getIsGlobalTabDefault()
 	end
-	return var1
+	return IsGlobalTabDefault
 end

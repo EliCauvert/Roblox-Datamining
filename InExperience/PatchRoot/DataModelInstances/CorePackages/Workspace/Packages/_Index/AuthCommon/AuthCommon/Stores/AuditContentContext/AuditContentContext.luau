@@ -1,128 +1,128 @@
-﻿local authCommon = script:FindFirstAncestor("AuthCommon")
-local parent = authCommon.Parent
-local reactModule = require(parent.React)
-local cryoModule = require(parent.Cryo)
-local getFFlagEnableAuditSystemModule = require(authCommon.Flags.GetFFlagEnableAuditSystem)
-local useState = reactModule.useState
-local useMemo = reactModule.useMemo
-local useContext = reactModule.useContext
-local useCallback = reactModule.useCallback
-local useEffect = reactModule.useEffect
-local var1 = reactModule.createContext({
+﻿local AuthCommon = script:FindFirstAncestor("AuthCommon")
+local Parent = AuthCommon.Parent
+local ReactModule = require(Parent.React)
+local CryoModule = require(Parent.Cryo)
+local GetFFlagEnableAuditSystemModule = require(AuthCommon.Flags.GetFFlagEnableAuditSystem)
+local UseStateFunction = ReactModule.useState
+local UseMemoFunction = ReactModule.useMemo
+local UseContextFunction = ReactModule.useContext
+local UseCallbackFunction = ReactModule.useCallback
+local UseEffectFunction = ReactModule.useEffect
+local Context = ReactModule.createContext({
 	capturedAuditContent = {},
 	additionalAuditContent = {},
-	setCapturedAuditContentItem = function() end,
-	removeCapturedAuditContentItem = function() end,
-	setAdditionalAuditContentItem = function() end,
-	removeAdditionalAuditContentItem = function() end
+	setCapturedAuditContentItem = function() --[[ Line: 49 ]] end,
+	removeCapturedAuditContentItem = function() --[[ Line: 50 ]] end,
+	setAdditionalAuditContentItem = function() --[[ Line: 51 ]] end,
+	removeAdditionalAuditContentItem = function() --[[ Line: 52 ]] end
 })
 
 return {
-	Context = var1,
-	Provider = function(p1)
-		-- upvalues: useState (ref), useCallback (ref), cryoModule (ref), useMemo (ref), reactModule (ref), var1 (ref)
-		local var2, var3 = useState({})
-		local var4, var5 = useState({})
-		local var6 = useCallback(function(p2, p3)
-			-- upvalues: var3 (ref), cryoModule (copy)
-			var3(function(p4)
-				-- upvalues: cryoModule (copy), p2 (ref), p3 (ref)
-				return cryoModule.Dictionary.join(p4, { [p2] = p3 })
+	Context = Context,
+	Provider = function(p1) --[[ Line: 58 ]]
+		-- upvalues: UseStateFunction (copy), UseCallbackFunction (copy), CryoModule (copy), UseMemoFunction (copy), ReactModule (copy), Context (copy)
+		local UseStateResult, UseStateResult2 = UseStateFunction({})
+		local UseStateResult1, UseStateResult2_1 = UseStateFunction({})
+		local UseCallbackResult = UseCallbackFunction(function(p2, p3) --[[ Line: 62 ]]
+			-- upvalues: UseStateResult2 (copy), CryoModule (upval)
+			UseStateResult2(function(p4) --[[ Line: 63 ]]
+				-- upvalues: CryoModule (upval), p2 (copy), p3 (copy)
+				return (CryoModule.Dictionary.join(p4, { [p2] = p3 }))
 			end)
-		end, { var3 })
-		local var7 = useCallback(function(p2)
-			-- upvalues: var3 (ref), cryoModule (copy)
-			var3(function(p3)
-				-- upvalues: cryoModule (copy), p2 (ref)
-				return cryoModule.Dictionary.join(p3, { [p2] = cryoModule.None })
+		end, { UseStateResult2 })
+		local UseCallbackResult1 = UseCallbackFunction(function(p2) --[[ Line: 71 ]]
+			-- upvalues: UseStateResult2 (copy), CryoModule (upval)
+			UseStateResult2(function(p3) --[[ Line: 72 ]]
+				-- upvalues: CryoModule (upval), p2 (copy)
+				return (CryoModule.Dictionary.join(p3, { [p2] = CryoModule.None }))
 			end)
-		end, { var3 })
-		local var8 = useCallback(function(p2, p3)
-			-- upvalues: var5 (ref), cryoModule (copy)
-			var5(function(p4)
-				-- upvalues: cryoModule (copy), p2 (ref), p3 (ref)
-				return cryoModule.Dictionary.join(p4, { [p2] = p3 })
+		end, { UseStateResult2 })
+		local UseCallbackResult2 = UseCallbackFunction(function(p2, p3) --[[ Line: 80 ]]
+			-- upvalues: UseStateResult2_1 (copy), CryoModule (upval)
+			UseStateResult2_1(function(p4) --[[ Line: 81 ]]
+				-- upvalues: CryoModule (upval), p2 (copy), p3 (copy)
+				return CryoModule.Dictionary.join(p4, { [p2] = p3 })
 			end)
-		end, { var5 })
-		local var9 = useCallback(function(p2)
-			-- upvalues: var5 (ref), cryoModule (copy)
-			var5(function(p3)
-				-- upvalues: cryoModule (copy), p2 (ref)
-				return cryoModule.Dictionary.join(p3, { [p2] = cryoModule.None })
+		end, { UseStateResult2_1 })
+		local UseCallbackResult3 = UseCallbackFunction(function(p2) --[[ Line: 88 ]]
+			-- upvalues: UseStateResult2_1 (copy), CryoModule (upval)
+			UseStateResult2_1(function(p3) --[[ Line: 89 ]]
+				-- upvalues: CryoModule (upval), p2 (copy)
+				return CryoModule.Dictionary.join(p3, { [p2] = CryoModule.None })
 			end)
-		end, { var5 })
+		end, { UseStateResult2_1 })
 		
-		return reactModule.createElement(var1.Provider, {
-			value = useMemo(function()
-				-- upvalues: var2 (ref), var4 (ref), var6 (ref), var7 (ref), var8 (ref), var9 (ref)
+		return ReactModule.createElement(Context.Provider, {
+			value = UseMemoFunction(function() --[[ Line: 96 ]]
+				-- upvalues: UseStateResult (copy), UseStateResult1 (copy), UseCallbackResult (copy), UseCallbackResult1 (copy), UseCallbackResult2 (copy), UseCallbackResult3 (copy)
 				return {
-					capturedAuditContent = var2,
-					additionalAuditContent = var4,
-					setCapturedAuditContentItem = var6,
-					removeCapturedAuditContentItem = var7,
-					setAdditionalAuditContentItem = var8,
-					removeAdditionalAuditContentItem = var9
+					capturedAuditContent = UseStateResult,
+					additionalAuditContent = UseStateResult1,
+					setCapturedAuditContentItem = UseCallbackResult,
+					removeCapturedAuditContentItem = UseCallbackResult1,
+					setAdditionalAuditContentItem = UseCallbackResult2,
+					removeAdditionalAuditContentItem = UseCallbackResult3
 				}
-			end, { var2, var4 })
+			end, { UseStateResult, UseStateResult1 })
 		}, p1.children)
 	end,
-	useCapturedAuditContent = function(p1, p2)
-		-- upvalues: useContext (ref), var1 (ref), useEffect (ref), getFFlagEnableAuditSystemModule (ref)
-		local var2 = useContext(var1)
-		useEffect(function()
-			-- upvalues: getFFlagEnableAuditSystemModule (copy), p1 (ref), p2 (ref), var2 (ref)
-			if not getFFlagEnableAuditSystemModule() then return end
+	useCapturedAuditContent = function(p1, p2) --[[ Line: 119 ]]
+		-- upvalues: UseContextFunction (copy), Context (copy), UseEffectFunction (copy), GetFFlagEnableAuditSystemModule (copy)
+		local UseContextResult = UseContextFunction(Context)
+		UseEffectFunction(function() --[[ Line: 123 ]]
+			-- upvalues: GetFFlagEnableAuditSystemModule (upval), p1 (copy), p2 (copy), UseContextResult (copy)
+			if not GetFFlagEnableAuditSystemModule() then return end
 			if p1 and p2 then
-				var2.setCapturedAuditContentItem(p1, p2)
+				UseContextResult.setCapturedAuditContentItem(p1, p2)
 				
 				return
 			end
 		end, { p1, p2 })
-		useEffect(function()
-			-- upvalues: getFFlagEnableAuditSystemModule (copy), p1 (ref), var2 (ref)
-			return function()
-				-- upvalues: getFFlagEnableAuditSystemModule (copy), p1 (copy), var2 (copy)
-				if not getFFlagEnableAuditSystemModule() then return end
+		UseEffectFunction(function() --[[ Line: 136 ]]
+			-- upvalues: GetFFlagEnableAuditSystemModule (upval), p1 (copy), UseContextResult (copy)
+			return function() --[[ Line: 137 ]]
+				-- upvalues: GetFFlagEnableAuditSystemModule (upval), p1 (upval), UseContextResult (upval)
+				if not GetFFlagEnableAuditSystemModule() then return end
 				if p1 then
-					var2.removeCapturedAuditContentItem(p1)
+					UseContextResult.removeCapturedAuditContentItem(p1)
 				end
 			end
 		end, { p1 })
 	end,
-	useAdditionalAuditContent = function(p1, p2)
-		-- upvalues: useContext (ref), var1 (ref), useEffect (ref), getFFlagEnableAuditSystemModule (ref)
-		local var2 = useContext(var1)
-		useEffect(function()
-			-- upvalues: getFFlagEnableAuditSystemModule (copy), p1 (ref), p2 (ref), var2 (ref)
-			if not getFFlagEnableAuditSystemModule() then return end
+	useAdditionalAuditContent = function(p1, p2) --[[ Line: 156 ]]
+		-- upvalues: UseContextFunction (copy), Context (copy), UseEffectFunction (copy), GetFFlagEnableAuditSystemModule (copy)
+		local UseContextResult = UseContextFunction(Context)
+		UseEffectFunction(function() --[[ Line: 160 ]]
+			-- upvalues: GetFFlagEnableAuditSystemModule (upval), p1 (copy), p2 (copy), UseContextResult (copy)
+			if not GetFFlagEnableAuditSystemModule() then return end
 			if p1 and p2 then
-				var2.setAdditionalAuditContentItem(p1, p2)
+				UseContextResult.setAdditionalAuditContentItem(p1, p2)
 				
 				return
 			end
 		end, { p1, p2 })
-		useEffect(function()
-			-- upvalues: getFFlagEnableAuditSystemModule (copy), p1 (ref), var2 (ref)
-			return function()
-				-- upvalues: getFFlagEnableAuditSystemModule (copy), p1 (copy), var2 (copy)
-				if not getFFlagEnableAuditSystemModule() then return end
+		UseEffectFunction(function() --[[ Line: 173 ]]
+			-- upvalues: GetFFlagEnableAuditSystemModule (upval), p1 (copy), UseContextResult (copy)
+			return function() --[[ Line: 174 ]]
+				-- upvalues: GetFFlagEnableAuditSystemModule (upval), p1 (upval), UseContextResult (upval)
+				if not GetFFlagEnableAuditSystemModule() then return end
 				if p1 then
-					var2.removeAdditionalAuditContentItem(p1)
+					UseContextResult.removeAdditionalAuditContentItem(p1)
 				end
 			end
 		end, { p1 })
 	end,
-	useAuditContentContext = function()
-		-- upvalues: useContext (ref), var1 (ref)
-		local var2 = useContext(var1)
+	useAuditContentContext = function() --[[ Line: 189 ]]
+		-- upvalues: UseContextFunction (copy), Context (copy)
+		local UseContextResult = UseContextFunction(Context)
 		
 		return {
-			capturedAuditContent = var2.capturedAuditContent,
-			additionalAuditContent = var2.additionalAuditContent,
-			setCapturedAuditContentItem = var2.setCapturedAuditContentItem,
-			removeCapturedAuditContentItem = var2.removeCapturedAuditContentItem,
-			setAdditionalAuditContentItem = var2.setAdditionalAuditContentItem,
-			removeAdditionalAuditContentItem = var2.removeAdditionalAuditContentItem
+			capturedAuditContent = UseContextResult.capturedAuditContent,
+			additionalAuditContent = UseContextResult.additionalAuditContent,
+			setCapturedAuditContentItem = UseContextResult.setCapturedAuditContentItem,
+			removeCapturedAuditContentItem = UseContextResult.removeCapturedAuditContentItem,
+			setAdditionalAuditContentItem = UseContextResult.setAdditionalAuditContentItem,
+			removeAdditionalAuditContentItem = UseContextResult.removeAdditionalAuditContentItem
 		}
 	end
 }

@@ -1,78 +1,81 @@
-﻿local replicatedStorageService = game:GetService("ReplicatedStorage")
-local webViewService = game:GetService("WebViewService")
-local browserService = game:GetService("BrowserService")
-local httpService = game:GetService("HttpService")
-local parent = script.Parent
-local parent_1 = parent.Parent
-local clickoutTelemetryModule = require(parent.ClickoutTelemetry)
-local flaggedMutedError = require(parent_1.Loggers).flaggedMutedError
-local luaAppIsClickoutEnabledUniverse = game:DefineFastFlag("LuaAppIsClickoutEnabledUniverse", false)
-local getFFlagEnableUnifiedWebViews = require(parent_1.SharedFlags).GetFFlagEnableUnifiedWebViews
+﻿local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local WebViewService = game:GetService("WebViewService")
+local BrowserService = game:GetService("BrowserService")
+local HttpService = game:GetService("HttpService")
+local Parent = script.Parent
+local Parent1 = Parent.Parent
+local ClickoutTelemetryModule = require(Parent.ClickoutTelemetry)
+local FlaggedMutedErrorFunction = require(Parent1.Loggers).flaggedMutedError
+local LuaAppIsClickoutEnabledUniverse = game:DefineFastFlag("LuaAppIsClickoutEnabledUniverse", false)
+local GetFFlagEnableUnifiedWebViewsFunction = require(Parent1.SharedFlags).GetFFlagEnableUnifiedWebViews
 
-return function()
-	-- upvalues: luaAppIsClickoutEnabledUniverse (ref), replicatedStorageService (ref), flaggedMutedError (ref), httpService (ref), getFFlagEnableUnifiedWebViews (ref), webViewService (ref), clickoutTelemetryModule (ref), browserService (ref)
-	if luaAppIsClickoutEnabledUniverse then
-		replicatedStorageService:WaitForChild("AdClickoutEvent").Event:Connect(function(p1)
-			-- upvalues: flaggedMutedError (copy), httpService (copy), getFFlagEnableUnifiedWebViews (copy), webViewService (copy), clickoutTelemetryModule (copy), browserService (copy)
-			if string.find(p1, "[<>]") then
-				flaggedMutedError("InExperienceClickout_InvalidURL", `AdClickoutEvent received invalid URL: {p1}`)
-				
-				return
-			elseif not string.match(p1, "^https://") then
-				flaggedMutedError("InExperienceClickout_InvalidURL", `AdClickoutEvent received URL with invalid scheme: {p1}`)
-				
-				return
-			elseif #p1 == 0 then
-				flaggedMutedError("InExperienceClickout_InvalidURL", "AdClickoutEvent received empty URL.")
-				
-				return
-			elseif #p1 > 512 then
-				flaggedMutedError("InExperienceClickout_InvalidURL", `AdClickoutEvent received URL exceeding max length: {p1}`)
+return function() --[[ Line: 19 | Named "starterScript" ]]
+	-- upvalues: LuaAppIsClickoutEnabledUniverse (copy), ReplicatedStorage (copy), FlaggedMutedErrorFunction (copy), HttpService (copy), GetFFlagEnableUnifiedWebViewsFunction (copy), WebViewService (copy), ClickoutTelemetryModule (copy), BrowserService (copy)
+	if LuaAppIsClickoutEnabledUniverse then
+		ReplicatedStorage:WaitForChild("AdClickoutEvent").Event:Connect(function(Text: string) --[[ Line: 26 ]]
+			-- upvalues: FlaggedMutedErrorFunction (upval), HttpService (upval), GetFFlagEnableUnifiedWebViewsFunction (upval), WebViewService (upval), ClickoutTelemetryModule (upval), BrowserService (upval)
+			if string.find(Text, "[<>]") then
+				FlaggedMutedErrorFunction("InExperienceClickout_InvalidURL", `AdClickoutEvent received invalid URL: {Text}`)
 				
 				return
 			end
-			local var1 = httpService:GenerateGUID(false)
-			local var2 = nil
-			var2 = if getFFlagEnableUnifiedWebViews() then webViewService.OnWindowClosed:Connect(function()
-				-- upvalues: clickoutTelemetryModule (copy), var1 (ref), p1 (ref), webViewService (copy), var2 (write)
-				clickoutTelemetryModule.logWebviewToggled(false, var1, p1)
-				webViewService:CloseWindow()
+			if not string.match(Text, "^https://") then
+				FlaggedMutedErrorFunction("InExperienceClickout_InvalidURL", `AdClickoutEvent received URL with invalid scheme: {Text}`)
 				
-				if var2 then
-					var2:Disconnect()
-					var2 = nil
+				return
+			end
+			if #Text == 0 then
+				FlaggedMutedErrorFunction("InExperienceClickout_InvalidURL", "AdClickoutEvent received empty URL.")
+				
+				return
+			end
+			if #Text > 512 then
+				FlaggedMutedErrorFunction("InExperienceClickout_InvalidURL", `AdClickoutEvent received URL exceeding max length: {Text}`)
+				
+				return
+			end
+			local Guid = HttpService:GenerateGUID(false)
+			local Connection = nil
+			Connection = if GetFFlagEnableUnifiedWebViewsFunction() then WebViewService.OnWindowClosed:Connect(function() --[[ Line: 59 ]]
+				-- upvalues: ClickoutTelemetryModule (upval), Guid (copy), Text (copy), WebViewService (upval), Connection (ref)
+				ClickoutTelemetryModule.logWebviewToggled(false, Guid, Text)
+				WebViewService:CloseWindow()
+				
+				if Connection then
+					Connection:Disconnect()
+					Connection = nil
 				end
-			end) else browserService.BrowserWindowClosed:Connect(function()
-				-- upvalues: clickoutTelemetryModule (copy), var1 (ref), p1 (ref), var2 (write)
-				clickoutTelemetryModule.logWebviewToggled(false, var1, p1)
+			end) else BrowserService.BrowserWindowClosed:Connect(function() --[[ Line: 68 ]]
+				-- upvalues: ClickoutTelemetryModule (upval), Guid (copy), Text (copy), Connection (ref)
+				ClickoutTelemetryModule.logWebviewToggled(false, Guid, Text)
 				
-				if var2 then
-					var2:Disconnect()
-					var2 = nil
+				if Connection then
+					Connection:Disconnect()
+					Connection = nil
 				end
 			end)
-			clickoutTelemetryModule.logWebviewToggled(true, var1, p1)
+			ClickoutTelemetryModule.logWebviewToggled(true, Guid, Text)
 			
-			if getFFlagEnableUnifiedWebViews() then
-				webViewService:OpenWindow(p1, nil, true, nil, nil, true)
+			if GetFFlagEnableUnifiedWebViewsFunction() then
+				WebViewService:OpenWindow(Text, nil, true, nil, nil, true)
 			else
-				local ok, status = pcall(function()
-					-- upvalues: httpService (copy), p1 (ref)
-					return httpService:JSONEncode({
+				local Success, Result = pcall(function() --[[ Line: 89 ]]
+					-- upvalues: HttpService (upval), Text (copy)
+					return HttpService:JSONEncode({
 						command = "open",
 						visible = true,
 						isGenericWebview = true,
 						showDomainAsTitle = true,
-						url = p1
+						url = Text
 					})
 				end)
 				
-				if not ok then
-					flaggedMutedError("InExperienceClickout_JSONEncodeFailed", `AdClickoutEvent failed to JSON encode command for URL: {p1}`)
+				if not Success then
+					FlaggedMutedErrorFunction("InExperienceClickout_JSONEncodeFailed", `AdClickoutEvent failed to JSON encode command for URL: {Text}`)
 					
 					return
 				end
-				browserService:SendCommand(status)
+				BrowserService:SendCommand(Result)
 			end
 		end)
 		

@@ -1,51 +1,50 @@
-﻿local reactSceneUnderstanding = script:FindFirstAncestor("ReactSceneUnderstanding")
-local userInputService = game:GetService("UserInputService")
-local reactUtilsModule = require(reactSceneUnderstanding.Parent.ReactUtils)
-local reactModule = require(reactSceneUnderstanding.Parent.React)
-local enumsModule = require(reactSceneUnderstanding.enums)
-local useCurrentCameraModule = require(reactSceneUnderstanding.useCurrentCamera)
-local useCallback = reactModule.useCallback
-local useEffect = reactModule.useEffect
-local useRef = reactModule.useRef
-local useState = reactModule.useState
-local useEventConnection = reactUtilsModule.useEventConnection
+﻿local ReactSceneUnderstanding = script:FindFirstAncestor("ReactSceneUnderstanding")
+local UserInputService = game:GetService("UserInputService")
+local ReactModule = require(ReactSceneUnderstanding.Parent.React)
+local EnumsModule = require(ReactSceneUnderstanding.enums)
+local UseCurrentCameraModule = require(ReactSceneUnderstanding.useCurrentCamera)
+local UseCallbackFunction = ReactModule.useCallback
+local UseEffectFunction = ReactModule.useEffect
+local UseRefFunction = ReactModule.useRef
+local UseStateFunction = ReactModule.useState
+local UseEventConnectionFunction = require(ReactSceneUnderstanding.Parent.ReactUtils).useEventConnection
 
-return function(p1)
-	-- upvalues: useCurrentCameraModule (ref), useState (ref), enumsModule (ref), useRef (ref), useCallback (ref), useEventConnection (ref), userInputService (ref), useEffect (ref)
-	local var1 = useCurrentCameraModule()
-	local var2, var3 = useState(enumsModule.CameraState.Idle)
-	local var4 = useRef(nil)
-	p1 = p1 or var1
-	local var5 = useCallback(function()
-		-- upvalues: var3 (ref), enumsModule (copy), var4 (ref)
-		var3(function(p2)
-			-- upvalues: enumsModule (copy)
-			return if p2 == enumsModule.CameraState.Moving then p2 else enumsModule.CameraState.Moving
+return function(p1) --[[ Line: 20 | Named "useCameraState" ]]
+	-- upvalues: UseCurrentCameraModule (copy), UseStateFunction (copy), EnumsModule (copy), UseRefFunction (copy), UseCallbackFunction (copy), UseEventConnectionFunction (copy), UserInputService (copy), UseEffectFunction (copy)
+	local UseCurrentCameraModuleResult = UseCurrentCameraModule()
+	local UseStateResult, UseStateResult2 = UseStateFunction(EnumsModule.CameraState.Idle)
+	local UseRefResult = UseRefFunction(nil)
+	local P0 = p1 or UseCurrentCameraModuleResult
+	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 27 ]]
+		-- upvalues: UseStateResult2 (copy), EnumsModule (upval), UseRefResult (copy)
+		UseStateResult2(function(Moving) --[[ Line: 28 ]]
+			-- upvalues: EnumsModule (upval)
+			return if Moving == EnumsModule.CameraState.Moving then Moving else EnumsModule.CameraState.Moving
 		end)
 		
-		if var4.current then
-			task.cancel(var4.current)
+		if UseRefResult.current then
+			task.cancel(UseRefResult.current)
 		end
-		var4.current = task.delay(0.2, function()
-			-- upvalues: var3 (copy), enumsModule (copy)
-			var3(enumsModule.CameraState.Idle)
+		UseRefResult.current = task.delay(0.2, function() --[[ Line: 36 ]]
+			-- upvalues: UseStateResult2 (upval), EnumsModule (upval)
+			UseStateResult2(EnumsModule.CameraState.Idle)
 		end)
 	end, {})
-	useEventConnection(userInputService.InputChanged, function(p2)
-		-- upvalues: var5 (ref)
-		if p2.UserInputType == Enum.UserInputType.MouseWheel then
-			var5()
+	UseEventConnectionFunction(UserInputService.InputChanged, function(Input) --[[ Line: 41 ]]
+		-- upvalues: UseCallbackResult (copy)
+		if Input.UserInputType == Enum.UserInputType.MouseWheel then
+			UseCallbackResult()
 		end
-	end, { var5 })
-	useEffect(function()
-		-- upvalues: p1 (ref), var5 (ref)
-		local var6 = p1:GetPropertyChangedSignal("CFrame"):Connect(var5)
+	end, { UseCallbackResult })
+	UseEffectFunction(function() --[[ Line: 47 ]]
+		-- upvalues: P0 (copy), UseCallbackResult (copy)
+		local Connection = P0:GetPropertyChangedSignal("CFrame"):Connect(UseCallbackResult)
 		
-		return function()
-			-- upvalues: var6 (ref)
-			var6:Disconnect()
+		return function() --[[ Line: 50 ]]
+			-- upvalues: Connection (copy)
+			Connection:Disconnect()
 		end
-	end, { p1, var5 })
+	end, { P0, UseCallbackResult })
 	
-	return var2
+	return UseStateResult
 end

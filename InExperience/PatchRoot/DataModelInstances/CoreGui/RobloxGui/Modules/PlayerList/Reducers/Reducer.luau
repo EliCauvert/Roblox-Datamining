@@ -1,5 +1,5 @@
-﻿local playerKeysModule = require(script.Parent.PlayerKeys)
-local var1 = require(game:GetService("CorePackages").Packages.Rodux).combineReducers({
+﻿local PlayerKeysModule = require(script.Parent.PlayerKeys)
+local CombineReducersResult = require(game:GetService("CorePackages").Packages.Rodux).combineReducers({
 	displayOptions = require(script.Parent.DisplayOptions),
 	screenSize = require(script.Parent.ScreenSize),
 	settings = require(script.Parent.Settings),
@@ -15,10 +15,10 @@ local var1 = require(game:GetService("CorePackages").Packages.Rodux).combineRedu
 	playerDropDown = require(script.Parent.PlayerDropDown)
 })
 
-return function(p1, p2)
-	-- upvalues: var1 (ref), playerKeysModule (ref)
-	local var2 = var1(p1, p2)
-	var2.playerKeys = playerKeysModule(if p1 then p1.playerKeys else nil, p2, var2)
+return function(p1, p2) --[[ Line: 42 ]]
+	-- upvalues: CombineReducersResult (copy), PlayerKeysModule (copy)
+	local CombineReducersResultResult = CombineReducersResult(p1, p2)
+	CombineReducersResultResult.playerKeys = PlayerKeysModule(p1 and p1.playerKeys or nil, p2, CombineReducersResultResult)
 	
-	return var2
+	return CombineReducersResultResult
 end

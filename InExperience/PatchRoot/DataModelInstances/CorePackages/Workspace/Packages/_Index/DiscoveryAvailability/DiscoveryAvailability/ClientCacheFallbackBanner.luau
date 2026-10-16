@@ -1,71 +1,72 @@
-﻿local parent = script:FindFirstAncestor("DiscoveryAvailability").Parent
-local appBloxModule = require(parent.AppBlox)
-local reactModule = require(parent.React)
-local responsiveModule = require(parent.Responsive)
-local foundationModule = require(parent.Foundation)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local collectionViewsModule = require(parent.CollectionViews)
-local UIBloxModule = require(parent.UIBlox)
-local _ = require(parent.LuauPolyfill)
-local notificationModalsManagerModule = require(parent.NotificationModalsManager)
-local usePageSideMargin = collectionViewsModule.usePageSideMargin
-local banner = appBloxModule.Banner
-local view = foundationModule.View
-local enums = foundationModule.Enums
-local useTokens = foundationModule.Hooks.useTokens
+﻿local Parent = script:FindFirstAncestor("DiscoveryAvailability").Parent
+local ReactModule = require(Parent.React)
+local ResponsiveModule = require(Parent.Responsive)
+local FoundationModule = require(Parent.Foundation)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UIBloxModule = require(Parent.UIBlox)
+local _ = require(Parent.LuauPolyfill)
+local NotificationModalsManagerModule = require(Parent.NotificationModalsManager)
+local UsePageSideMarginFunction = require(Parent.CollectionViews).usePageSideMargin
+local Banner = require(Parent.AppBlox).Banner
+local View = FoundationModule.View
+local Enums = FoundationModule.Enums
+local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return function(p1)
-	-- upvalues: useTokens (ref), useLocalization (ref), reactModule (ref), usePageSideMargin (ref), responsiveModule (ref), notificationModalsManagerModule (ref), UIBloxModule (ref), view (ref), banner (ref), enums (ref)
-	local var1 = useTokens()
-	local var2 = useLocalization({
+return function(p1) --[[ Line: 28 ]]
+	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), UsePageSideMarginFunction (copy), ResponsiveModule (copy), NotificationModalsManagerModule (copy), UIBloxModule (copy), View (copy), Banner (copy), Enums (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseLocalizationResult = UseLocalizationFunction({
 		errorTitle = "Feature.Home.ClientCacheFallbackBanner.Label.Error",
 		errorMessage = "Feature.Home.ClientCacheFallbackBanner.Label.RefreshPageToLoadContents",
 		refreshButton = "Feature.Home.ClientCacheFallbackBanner.Action.Refresh",
 		errorRefreshingToastTitle = "Feature.Home.ClientCacheFallbackBanner.Label.ErrorRefreshingToastTitle"
 	})
-	local var3 = reactModule.useRef(nil)
-	local var4 = usePageSideMargin(var3.current)
-	local var5 = responsiveModule.useBreakpointXOrSmaller(responsiveModule.Keys.Small)
-	local var6, var7 = reactModule.useState(false)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UsePageSideMarginResult = UsePageSideMarginFunction(UseRefResult.current)
+	local UseBreakpointXOrSmallerResult = ResponsiveModule.useBreakpointXOrSmaller(ResponsiveModule.Keys.Small)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		position = p1.Position,
-		[reactModule.Change.AbsoluteSize] = p1[reactModule.Change.AbsoluteSize],
-		ref = var3,
+		[ReactModule.Change.AbsoluteSize] = p1[ReactModule.Change.AbsoluteSize],
+		ref = UseRefResult,
 		tag = "size-full-0 auto-y"
 	}, {
-		Padding = reactModule.createElement("UIPadding", {
-			PaddingLeft = UDim.new(0, var4),
-			PaddingRight = UDim.new(0, var4),
-			PaddingTop = UDim.new(0, var1.Padding.Large),
-			PaddingBottom = UDim.new(0, if var5 then 0 else var1.Padding.Large)
+		Padding = ReactModule.createElement("UIPadding", {
+			PaddingLeft = UDim.new(0, UsePageSideMarginResult),
+			PaddingRight = UDim.new(0, UsePageSideMarginResult),
+			PaddingTop = UDim.new(0, UseTokensResult.Padding.Large),
+			PaddingBottom = UDim.new(0, if UseBreakpointXOrSmallerResult then 0 else UseTokensResult.Padding.Large)
 		}),
-		BannerContent = reactModule.createElement(banner, {
-			icon = enums.IconName.CircleX,
-			iconVariant = enums.IconVariant.Filled,
-			iconStyle = var1.Color.System.Alert,
-			title = var2.errorTitle,
-			body = var2.errorMessage,
+		BannerContent = ReactModule.createElement(Banner, {
+			icon = Enums.IconName.CircleX,
+			iconVariant = Enums.IconVariant.Filled,
+			iconStyle = UseTokensResult.Color.System.Alert,
+			title = UseLocalizationResult.errorTitle,
+			body = UseLocalizationResult.errorMessage,
 			buttons = {
 				{
-					text = var2.refreshButton,
-					isLoading = var6,
-					onActivated = reactModule.useCallback(function()
-						-- upvalues: var7 (ref), p1 (ref), notificationModalsManagerModule (copy), UIBloxModule (copy), var2 (ref)
-						var7(true)
-						p1.onRefreshButtonClick():andThen(function(_)
-							-- upvalues: var7 (copy)
-							var7(false)
-						end):catch(function(_)
-							-- upvalues: var7 (copy), notificationModalsManagerModule (copy), UIBloxModule (copy), var2 (copy)
-							var7(false)
-							notificationModalsManagerModule.SetUIBloxToast({
+					text = UseLocalizationResult.refreshButton,
+					isLoading = UseStateResult,
+					onActivated = ReactModule.useCallback(function() --[[ Line: 45 ]]
+						-- upvalues: UseStateResult2 (copy), p1 (copy), NotificationModalsManagerModule (upval), UIBloxModule (upval), UseLocalizationResult (copy)
+						UseStateResult2(true)
+						p1.onRefreshButtonClick():andThen(function(_) --[[ Line: 49 ]]
+							-- upvalues: UseStateResult2 (upval)
+							UseStateResult2(false)
+						end):catch(function(_) --[[ Line: 52 ]]
+							-- upvalues: UseStateResult2 (upval), NotificationModalsManagerModule (upval), UIBloxModule (upval), UseLocalizationResult (upval)
+							UseStateResult2(false)
+							NotificationModalsManagerModule.SetUIBloxToast({
 								iconImage = UIBloxModule.App.ImageSet.Images["icons/status/alert"],
-								toastTitle = var2.errorRefreshingToastTitle,
+								toastTitle = UseLocalizationResult.errorRefreshingToastTitle,
 								sequenceNumber = DateTime.now().UnixTimestamp
 							})
 						end)
-					end, { p1.onRefreshButtonClick, var2.errorRefreshingToastTitle })
+					end, {
+						p1.onRefreshButtonClick,
+						UseLocalizationResult.errorRefreshingToastTitle
+					})
 				}
 			}
 		})

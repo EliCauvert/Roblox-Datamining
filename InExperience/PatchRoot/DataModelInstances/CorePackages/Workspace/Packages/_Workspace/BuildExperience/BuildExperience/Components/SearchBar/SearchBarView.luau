@@ -1,24 +1,24 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local searchInput = foundationModule.SearchInput
-local view = foundationModule.View
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local SearchInput = FoundationModule.SearchInput
+local View = FoundationModule.View
 
-return function(p1)
-	-- upvalues: reactModule (ref), view (ref), searchInput (ref)
-	return reactModule.createElement(view, {
+return function(Frame) --[[ Line: 22 | Named "SearchBarView" ]]
+	-- upvalues: ReactModule (copy), View (copy), SearchInput (copy)
+	return ReactModule.createElement(View, {
 		tag = "size-full-0 auto-y",
 		testId = "SearchBar",
-		LayoutOrder = p1.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		Input = reactModule.createElement(searchInput, {
+		Input = ReactModule.createElement(SearchInput, {
 			testId = "SearchBar.Input",
-			onChanged = p1.onChanged,
-			onFocusGained = p1.onFocusGained,
-			onFocusLost = p1.onFocusLost,
-			placeholder = p1.placeholder,
-			text = p1.query,
-			ref = p1.textInputRef,
+			onChanged = Frame.onChanged,
+			onFocusGained = Frame.onFocusGained,
+			onFocusLost = Frame.onFocusLost,
+			placeholder = Frame.placeholder,
+			text = Frame.query,
+			ref = Frame.textInputRef,
 			width = UDim.new(1, 0)
 		})
 	})

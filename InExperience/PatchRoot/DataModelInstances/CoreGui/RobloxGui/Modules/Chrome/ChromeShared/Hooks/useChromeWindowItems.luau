@@ -1,9 +1,9 @@
-﻿local chromeShared = script:FindFirstAncestor("ChromeShared")
-local serviceModule = require(chromeShared.Service)
+﻿local ChromeShared = script:FindFirstAncestor("ChromeShared")
+local ServiceModule = require(ChromeShared.Service)
 local _ = require(game:GetService("CorePackages").Workspace.Packages.Chrome)
-local useObservableValueModule = require(chromeShared.Hooks.useObservableValue)
+local UseObservableValueModule = require(ChromeShared.Hooks.useObservableValue)
 
-return function()
-	-- upvalues: useObservableValueModule (ref), serviceModule (ref)
-	return useObservableValueModule(serviceModule:windowList()) or {}
+return function() --[[ Line: 10 ]]
+	-- upvalues: UseObservableValueModule (copy), ServiceModule (copy)
+	return UseObservableValueModule(ServiceModule:windowList()) or {}
 end

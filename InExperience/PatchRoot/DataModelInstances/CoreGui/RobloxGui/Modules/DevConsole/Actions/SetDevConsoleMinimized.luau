@@ -1,3 +1,3 @@
-﻿return require(script.Parent.Parent.Action)("SetDevConsoleMinimized", function(p1)
-	return { isMinimized = p1 }
+﻿return require(script.Parent.Parent.Action)("SetDevConsoleMinimized", function(IsMinimized) --[[ Line: 4 ]]
+	return { isMinimized = IsMinimized }
 end)

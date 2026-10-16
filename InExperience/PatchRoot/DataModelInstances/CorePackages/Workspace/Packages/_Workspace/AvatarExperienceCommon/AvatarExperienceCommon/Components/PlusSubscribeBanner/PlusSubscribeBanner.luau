@@ -1,56 +1,57 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceCommon").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local fFlagAXPlusSubscribeBannerRestyleModule = require(script.Parent.FFlagAXPlusSubscribeBannerRestyle)
-local view = foundationModule.View
-local text = foundationModule.Text
-local icon = foundationModule.Icon
-local iconName = foundationModule.Enums.IconName
-local iconSize = foundationModule.Enums.IconSize
-local useTokens = foundationModule.Hooks.useTokens
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceCommon").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local FFlagAXPlusSubscribeBannerRestyleModule = require(script.Parent.FFlagAXPlusSubscribeBannerRestyle)
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local Icon = FoundationModule.Icon
+local IconName = FoundationModule.Enums.IconName
+local IconSize = FoundationModule.Enums.IconSize
+local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), view (ref), fFlagAXPlusSubscribeBannerRestyleModule (ref), icon (ref), iconName (ref), iconSize (ref), text (ref)
-	local testId = p1.testId or "PlusSubscribeBanner"
+return ReactModule.memo(function(Frame) --[[ Line: 29 | Named "PlusSubscribeBanner" ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), FFlagAXPlusSubscribeBannerRestyleModule (copy), Icon (copy), IconName (copy), IconSize (copy), Text (copy)
+	local UseTokensResult = UseTokensFunction()
+	local TestId = Frame.testId or "PlusSubscribeBanner"
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = {
-			["size-full-0 auto-y padding-medium radius-medium bg-action-standard"] = fFlagAXPlusSubscribeBannerRestyleModule,
-			["size-full-0 auto-y padding-medium stroke-standard stroke-position-inner stroke-default radius-medium"] = not fFlagAXPlusSubscribeBannerRestyleModule
+			["size-full-0 auto-y padding-medium radius-medium bg-action-standard"] = FFlagAXPlusSubscribeBannerRestyleModule,
+			["size-full-0 auto-y padding-medium stroke-standard stroke-position-inner stroke-default radius-medium"] = not FFlagAXPlusSubscribeBannerRestyleModule
 		},
-		LayoutOrder = p1.LayoutOrder,
-		testId = testId
+		LayoutOrder = Frame.LayoutOrder,
+		testId = TestId
 	}, {
-		Content = reactModule.createElement(view, {
+		Content = ReactModule.createElement(View, {
 			tag = "row flex-between align-y-center gap-small size-full-0 auto-y"
 		}, {
-			Leading = reactModule.createElement(view, {
+			Leading = ReactModule.createElement(View, {
 				tag = "row align-y-center fill gap-small auto-xy",
 				LayoutOrder = 1
 			}, {
-				PlusIcon = if p1.showPlusIcon then reactModule.createElement(icon, {
+				PlusIcon = if Frame.showPlusIcon then ReactModule.createElement(Icon, {
 					LayoutOrder = 1,
-					name = iconName.RobloxPlus,
-					size = iconSize.Medium,
-					style = useTokens().Color.Content.Emphasis,
-					testId = `{testId}PlusIcon`
+					name = IconName.RobloxPlus,
+					size = IconSize.Medium,
+					style = UseTokensResult.Color.Content.Emphasis,
+					testId = `{TestId}PlusIcon`
 				}) else nil,
-				Message = reactModule.createElement(text, {
+				Message = ReactModule.createElement(Text, {
 					tag = "fill text-body-small text-align-x-left content-emphasis",
 					LayoutOrder = 2,
-					Text = p1.message
+					Text = Frame.message
 				})
 			}),
-			Subscribe = reactModule.createElement(view, {
+			Subscribe = ReactModule.createElement(View, {
 				tag = "auto-xy",
 				LayoutOrder = 2,
-				onActivated = p1.onActivated,
-				testId = `{testId}Action`
+				onActivated = Frame.onActivated,
+				testId = `{TestId}Action`
 			}, {
-				Label = reactModule.createElement(text, {
+				Label = ReactModule.createElement(Text, {
 					tag = "auto-xy text-body-small content-default",
 					RichText = true,
-					Text = `<u>{p1.actionText}</u>`
+					Text = `<u>{Frame.actionText}</u>`
 				})
 			})
 		})

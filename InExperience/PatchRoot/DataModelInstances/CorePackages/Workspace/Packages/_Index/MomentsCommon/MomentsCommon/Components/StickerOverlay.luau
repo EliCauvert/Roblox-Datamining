@@ -1,24 +1,24 @@
-﻿local parent = script:FindFirstAncestor("MomentsCommon").Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local view = foundationModule.View
-local image = foundationModule.Image
-local useCallback = reactModule.useCallback
-local _ = require(parent.MomentsTypes)
+﻿local Parent = script:FindFirstAncestor("MomentsCommon").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local View = FoundationModule.View
+local Image = FoundationModule.Image
+local UseCallbackFunction = ReactModule.useCallback
+local _ = require(Parent.MomentsTypes)
 
-return function(p1)
-	-- upvalues: reactModule (ref), useCallback (ref), view (ref), foundationModule (ref), image (ref)
-	local var1 = reactModule.useRef(nil)
-	local var2 = reactModule.useRef(nil)
-	local var3 = useCallback(function(_, p2)
-		-- upvalues: p1 (ref), var2 (ref)
+return function(p1) --[[ Line: 30 | Named "StickerOverlay" ]]
+	-- upvalues: ReactModule (copy), UseCallbackFunction (copy), View (copy), FoundationModule (copy), Image (copy)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseCallbackResult = UseCallbackFunction(function(_, Current) --[[ Line: 34 ]]
+		-- upvalues: p1 (copy), UseRefResult1 (copy)
 		if p1.containerRef and p1.containerRef.current then
-			var2.current = p2
+			UseRefResult1.current = Current
 		end
 	end, { p1.containerRef })
-	local var4 = useCallback(function(_, p2)
-		-- upvalues: var2 (ref), p1 (ref)
-		if var2.current == p2 and p1.onActivated then
+	local UseCallbackResult1 = UseCallbackFunction(function(_, Current) --[[ Line: 40 ]]
+		-- upvalues: UseRefResult1 (copy), p1 (copy)
+		if UseRefResult1.current == Current and p1.onActivated then
 			p1.onActivated()
 		end
 		if p1.onDragEnd then
@@ -26,7 +26,7 @@ return function(p1)
 		end
 	end, { p1.onActivated, p1.onDragEnd })
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "position-center-center anchor-center-center auto-xy",
 		ref = p1.containerRef,
 		onActivated = p1.onActivated,
@@ -35,30 +35,30 @@ return function(p1)
 		Rotation = p1.overlayEdit.rotation,
 		scale = p1.overlayEdit.scale * (p1.additionalScale or 1),
 		stateLayer = {
-			affordance = foundationModule.Enums.StateLayerAffordance.None
+			affordance = FoundationModule.Enums.StateLayerAffordance.None
 		},
 		ZIndex = p1.overlayEdit.zIndex
 	}, {
-		UIDragDetector = reactModule.useMemo(function()
-			-- upvalues: p1 (ref), reactModule (copy), var1 (ref), var3 (ref), var4 (ref)
-			return if p1.draggable then reactModule.createElement("UIDragDetector", {
+		UIDragDetector = ReactModule.useMemo(function() --[[ Line: 50 ]]
+			-- upvalues: p1 (copy), ReactModule (upval), UseRefResult (copy), UseCallbackResult (copy), UseCallbackResult1 (copy)
+			return if p1.draggable then ReactModule.createElement("UIDragDetector", {
 				BoundingBehavior = Enum.UIDragDetectorBoundingBehavior.EntireObject,
 				BoundingUI = p1.boundingUI,
 				DragStyle = Enum.UIDragDetectorDragStyle.TranslatePlane,
-				ref = var1,
+				ref = UseRefResult,
 				ReferenceUIInstance = p1.referenceUI or p1.boundingUI,
 				ResponseStyle = Enum.UIDragDetectorResponseStyle.Scale,
-				[reactModule.Event.DragStart] = var3,
-				[reactModule.Event.DragEnd] = var4
+				[ReactModule.Event.DragStart] = UseCallbackResult,
+				[ReactModule.Event.DragEnd] = UseCallbackResult1
 			}) else nil
 		end, {
 			p1.boundingUI,
 			p1.draggable,
 			p1.referenceUI,
-			var3,
-			var4
+			UseCallbackResult,
+			UseCallbackResult1
 		}),
-		StickerImage = reactModule.createElement(image, {
+		StickerImage = ReactModule.createElement(Image, {
 			Image = p1.overlayEdit.stickerURI,
 			Size = UDim2.fromOffset(p1.overlayEdit.stickerSize, p1.overlayEdit.stickerSize),
 			ZIndex = p1.overlayEdit.zIndex or 1

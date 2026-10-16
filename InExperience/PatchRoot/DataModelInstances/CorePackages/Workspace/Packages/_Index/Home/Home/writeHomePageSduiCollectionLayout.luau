@@ -1,23 +1,24 @@
-﻿local httpService = game:GetService("HttpService")
-local appStorageService = game:GetService("AppStorageService")
+﻿local HttpService = game:GetService("HttpService")
+local AppStorageService = game:GetService("AppStorageService")
 
-return function(p1)
-	-- upvalues: httpService (ref), appStorageService (ref)
-	local var1 = httpService:JSONEncode({
+return function(p1) --[[ Line: 10 | Named "writeHomePageSduiCollectionLayout" ]]
+	-- upvalues: HttpService (copy), AppStorageService (copy)
+	local Json = HttpService:JSONEncode({
 		itemsPerRow = p1.items_per_row,
 		rowsAboveFold = p1.rows_above_fold
 	})
-	local ok, status = pcall(function()
-		-- upvalues: appStorageService (copy)
-		return appStorageService:GetItem("HomePageSduiCollectionLayout")
+	local Success, Result = pcall(function() --[[ Line: 19 ]]
+		-- upvalues: AppStorageService (upval)
+		return AppStorageService:GetItem("HomePageSduiCollectionLayout")
 	end)
 	
-	if ok and status == var1 then
+	if not Success or Result ~= Json then
+		pcall(function() --[[ Line: 27 ]]
+			-- upvalues: AppStorageService (upval), Json (copy)
+			AppStorageService:SetItem("HomePageSduiCollectionLayout", Json)
+			AppStorageService:Flush()
+		end)
+		
 		return
 	end
-	pcall(function()
-		-- upvalues: appStorageService (copy), var1 (ref)
-		appStorageService:SetItem("HomePageSduiCollectionLayout", var1)
-		appStorageService:Flush()
-	end)
 end

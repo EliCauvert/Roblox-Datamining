@@ -1,24 +1,24 @@
-﻿local parent = script:FindFirstAncestor("FlyoutSidePanel").Parent
-local reactModule = require(parent.React)
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local useSetDrawerVisible = require(parent.Drawer).Hooks.useSetDrawerVisible
-local getDrawerVisibleStore = require(parent.Drawer).Stores.GetDrawerVisibleStore
-local fFlagUseSignalsForAppTopBanner = require(parent.SharedFlags).FFlagUseSignalsForAppTopBanner
-local var1 = if fFlagUseSignalsForAppTopBanner then require(parent.SignalsReact).useSignalState else nil
-local var2 = if fFlagUseSignalsForAppTopBanner then require(parent.AppTopBanner).GetAppTopBannerStore else nil
+﻿local Parent = script:FindFirstAncestor("FlyoutSidePanel").Parent
+local ReactModule = require(Parent.React)
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local UseSetDrawerVisibleFunction = require(Parent.Drawer).Hooks.useSetDrawerVisible
+local GetDrawerVisibleStoreFunction = require(Parent.Drawer).Stores.GetDrawerVisibleStore
+local FFlagUseSignalsForAppTopBanner = require(Parent.SharedFlags).FFlagUseSignalsForAppTopBanner
+local UseSignalState = if FFlagUseSignalsForAppTopBanner then require(Parent.SignalsReact).useSignalState else nil
+local GetAppTopBannerStore = if FFlagUseSignalsForAppTopBanner then require(Parent.AppTopBanner).GetAppTopBannerStore else nil
 
-return function()
-	-- upvalues: useSetDrawerVisible (ref), fFlagUseSignalsForAppTopBanner (ref), var1 (ref), var2 (ref), useSelector (ref), reactModule (ref), getDrawerVisibleStore (ref)
-	local var3 = useSetDrawerVisible()
-	local var4 = if fFlagUseSignalsForAppTopBanner then var1(var2(false).getExpanded) else useSelector(function(p1)
+return function() --[[ Line: 18 | Named "useDismissFlyoutOnPartyTopBanner" ]]
+	-- upvalues: UseSetDrawerVisibleFunction (copy), FFlagUseSignalsForAppTopBanner (copy), UseSignalState (copy), GetAppTopBannerStore (copy), UseSelectorFunction (copy), ReactModule (copy), GetDrawerVisibleStoreFunction (copy)
+	local UseSetDrawerVisibleResult = UseSetDrawerVisibleFunction()
+	local UseSignalStateResult = if FFlagUseSignalsForAppTopBanner then UseSignalState(GetAppTopBannerStore(false).getExpanded) else UseSelectorFunction(function(p1) --[[ Line: 23 ]]
 		return if p1.AppTopBanner then p1.AppTopBanner.expanded else false
 	end)
-	local var5 = reactModule.useRef(var4)
-	reactModule.useEffect(function()
-		-- upvalues: getDrawerVisibleStore (copy), var5 (ref), var4 (ref), var3 (ref)
-		if getDrawerVisibleStore(false).getDrawerVisible() and var5.current and not var4 then
-			var3(false)
+	local UseRefResult = ReactModule.useRef(UseSignalStateResult)
+	ReactModule.useEffect(function() --[[ Line: 29 ]]
+		-- upvalues: GetDrawerVisibleStoreFunction (upval), UseRefResult (copy), UseSignalStateResult (copy), UseSetDrawerVisibleResult (copy)
+		if GetDrawerVisibleStoreFunction(false).getDrawerVisible() and UseRefResult.current and not UseSignalStateResult then
+			UseSetDrawerVisibleResult(false)
 		end
-		var5.current = var4
-	end, { var4, var3 })
+		UseRefResult.current = UseSignalStateResult
+	end, { UseSignalStateResult, UseSetDrawerVisibleResult })
 end

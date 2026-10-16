@@ -1,54 +1,52 @@
-﻿local parent = script:FindFirstAncestor("Drawer").Parent
-local signalsModule = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local fFlagEnableDrawerAnimatingHook = require(parent.SharedFlags).FFlagEnableDrawerAnimatingHook
+﻿local Parent = script:FindFirstAncestor("Drawer").Parent
+local SignalsModule = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
+local FFlagEnableDrawerAnimatingHook = require(Parent.SharedFlags).FFlagEnableDrawerAnimatingHook
 
-return function()
-	-- upvalues: signalsModule (ref), signalsReactModule (ref), fFlagEnableDrawerAnimatingHook (ref)
-	local var1, var2 = signalsModule.createSignal(false)
-	local var3, var4 = signalsModule.createSignal(false)
+return function() --[[ Line: 20 | Named "createDrawerVisibleStore" ]]
+	-- upvalues: SignalsModule (copy), SignalsReactModule (copy), FFlagEnableDrawerAnimatingHook (copy)
+	local Signal, Signal2 = SignalsModule.createSignal(false)
+	local Signal1, Signal2_1 = SignalsModule.createSignal(false)
 	
-	local function useDrawerVisible()
-		-- upvalues: signalsReactModule (copy), var1 (ref)
-		return signalsReactModule.useSignalState(var1)
+	local function useDrawerVisible() --[[ Line: 24 ]]
+		-- upvalues: SignalsReactModule (upval), Signal (copy)
+		return SignalsReactModule.useSignalState(Signal)
 	end
 	
-	local function useDrawerShouldMount()
-		-- upvalues: signalsReactModule (copy), var3 (ref)
-		return signalsReactModule.useSignalState(var3)
+	local function useDrawerShouldMount() --[[ Line: 28 ]]
+		-- upvalues: SignalsReactModule (upval), Signal1 (copy)
+		return SignalsReactModule.useSignalState(Signal1)
 	end
 	
-	local var5 = function(p1)
-		-- upvalues: var2 (ref), var4 (ref)
-		var2(p1)
+	local function SetDrawerVisible(p1) --[[ Line: 32 ]]
+		-- upvalues: Signal2 (copy), Signal2_1 (copy)
+		Signal2(p1)
 		
 		if p1 then
-			var4(true)
+			Signal2_1(true)
 		end
 	end
 	
-	local var6 = nil
-	local var7 = nil
-	local var8 = nil
+	local GetDrawerAnimating = nil
+	local SetDrawerAnimating = nil
+	local UseDrawerAnimating: (() -> any)? = nil
 	
-	if fFlagEnableDrawerAnimatingHook then
-		local var9, var10 = signalsModule.createSignal(false)
-		var6 = var9
-		var7 = var10
+	if FFlagEnableDrawerAnimatingHook then
+		GetDrawerAnimating, SetDrawerAnimating = SignalsModule.createSignal(false)
 		
-		var8 = function()
-			-- upvalues: signalsReactModule (copy), var6 (write)
-			return signalsReactModule.useSignalState(var6)
+		UseDrawerAnimating = function() --[[ Line: 42 ]]
+			-- upvalues: SignalsReactModule (upval), GetDrawerAnimating (ref)
+			return SignalsReactModule.useSignalState(GetDrawerAnimating)
 		end
 	end
 	return {
-		getDrawerVisible = var1,
-		getDrawerAnimating = var6,
-		setDrawerVisible = var5,
-		setDrawerShouldMount = var4,
-		setDrawerAnimating = var7,
+		getDrawerVisible = Signal,
+		getDrawerAnimating = GetDrawerAnimating,
+		setDrawerVisible = SetDrawerVisible,
+		setDrawerShouldMount = Signal2_1,
+		setDrawerAnimating = SetDrawerAnimating,
 		useDrawerVisible = useDrawerVisible,
 		useDrawerShouldMount = useDrawerShouldMount,
-		useDrawerAnimating = var8
+		useDrawerAnimating = UseDrawerAnimating
 	}
 end

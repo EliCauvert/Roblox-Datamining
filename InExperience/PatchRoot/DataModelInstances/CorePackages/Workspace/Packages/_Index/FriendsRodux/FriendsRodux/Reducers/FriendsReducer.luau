@@ -1,12 +1,12 @@
-﻿local byUserIdModule = require(script.Parent.Friends.byUserId)
-local countsByUserIdModule = require(script.Parent.Friends.countsByUserId)
-local requestsModule = require(script.Parent.Friends.requests)
-local recommendationsModule = require(script.Parent.Friends.recommendations)
-local followingsModule = require(script.Parent.Friends.followings)
-local friendshipStatusModule = require(script.Parent.Friends.friendshipStatus)
-local friendsRankByUserIdModule = require(script.Parent.Friends.friendsRankByUserId)
-local contactNamesByUserIdModule = require(script.Parent.Friends.contactNamesByUserId)
-local t = {
+﻿local ByUserIdModule = require(script.Parent.Friends.byUserId)
+local CountsByUserIdModule = require(script.Parent.Friends.countsByUserId)
+local RequestsModule = require(script.Parent.Friends.requests)
+local RecommendationsModule = require(script.Parent.Friends.recommendations)
+local FollowingsModule = require(script.Parent.Friends.followings)
+local FriendshipStatusModule = require(script.Parent.Friends.friendshipStatus)
+local FriendsRankByUserIdModule = require(script.Parent.Friends.friendsRankByUserId)
+local ContactNamesByUserIdModule = require(script.Parent.Friends.contactNamesByUserId)
+local config = {
 	countsByUserId = {},
 	byUserId = {},
 	requests = { receivedCount = 0, newFriendRequestsCount = 0 },
@@ -17,30 +17,30 @@ local t = {
 	contactNamesByUserId = {}
 }
 
-return function(p1)
-	-- upvalues: byUserIdModule (ref), countsByUserIdModule (ref), requestsModule (ref), recommendationsModule (ref), followingsModule (ref), friendshipStatusModule (ref), friendsRankByUserIdModule (ref), contactNamesByUserIdModule (ref), t (ref)
-	local var1 = byUserIdModule(p1)
-	local var2 = countsByUserIdModule(p1)
-	local var3 = requestsModule(p1)
-	local var4 = recommendationsModule(p1)
-	local var5 = followingsModule(p1)
-	local var6 = friendshipStatusModule(p1)
-	local var7 = friendsRankByUserIdModule(p1)
-	local var8 = contactNamesByUserIdModule(p1)
+return function(p1) --[[ Line: 24 ]]
+	-- upvalues: ByUserIdModule (copy), CountsByUserIdModule (copy), RequestsModule (copy), RecommendationsModule (copy), FollowingsModule (copy), FriendshipStatusModule (copy), FriendsRankByUserIdModule (copy), ContactNamesByUserIdModule (copy), config (copy)
+	local ByUserIdModuleResult = ByUserIdModule(p1)
+	local CountsByUserIdModuleResult = CountsByUserIdModule(p1)
+	local RequestsModuleResult = RequestsModule(p1)
+	local RecommendationsModuleResult = RecommendationsModule(p1)
+	local FollowingsModuleResult = FollowingsModule(p1)
+	local FriendshipStatusModuleResult = FriendshipStatusModule(p1)
+	local FriendsRankByUserIdModuleResult = FriendsRankByUserIdModule(p1)
+	local ContactNamesByUserIdModuleResult = ContactNamesByUserIdModule(p1)
 	
-	return function(p2, p3)
-		-- upvalues: t (copy), var1 (ref), var2 (ref), var3 (ref), var4 (ref), var5 (ref), var6 (ref), var7 (ref), var8 (ref)
-		p2 = p2 or t
+	return function(p2, p3) --[[ Line: 34 ]]
+		-- upvalues: config (upval), ByUserIdModuleResult (copy), CountsByUserIdModuleResult (copy), RequestsModuleResult (copy), RecommendationsModuleResult (copy), FollowingsModuleResult (copy), FriendshipStatusModuleResult (copy), FriendsRankByUserIdModuleResult (copy), ContactNamesByUserIdModuleResult (copy)
+		local P1 = p2 or config
 		
 		return {
-			byUserId = var1(p2.byUserId, p3),
-			countsByUserId = var2(p2.countsByUserId, p3),
-			requests = var3(p2.requests, p3),
-			recommendations = var4(p2.recommendations, p3),
-			followings = var5(p2.followings, p3),
-			friendshipStatus = var6(p2.friendshipStatus, p3),
-			friendsRankByUserId = var7(p2.friendsRankByUserId, p3),
-			contactNamesByUserId = var8(p2.contactNamesByUserId, p3)
+			byUserId = ByUserIdModuleResult(P1.byUserId, p3),
+			countsByUserId = CountsByUserIdModuleResult(P1.countsByUserId, p3),
+			requests = RequestsModuleResult(P1.requests, p3),
+			recommendations = RecommendationsModuleResult(P1.recommendations, p3),
+			followings = FollowingsModuleResult(P1.followings, p3),
+			friendshipStatus = FriendshipStatusModuleResult(P1.friendshipStatus, p3),
+			friendsRankByUserId = FriendsRankByUserIdModuleResult(P1.friendsRankByUserId, p3),
+			contactNamesByUserId = ContactNamesByUserIdModuleResult(P1.contactNamesByUserId, p3)
 		}
 	end
 end

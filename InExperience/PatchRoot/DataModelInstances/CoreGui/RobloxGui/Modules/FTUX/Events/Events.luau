@@ -1,24 +1,27 @@
-﻿local parent = script.Parent.Parent
-local platformEnumModule = require(parent.Enums.PlatformEnum)
-local questVR = require(parent.Resources.FTUXEventTypes)[platformEnumModule.QuestVR]
+﻿local Parent = script.Parent.Parent
+local PlatformEnumModule = require(Parent.Enums.PlatformEnum)
+local FTUXEventTypesModuleEntry = require(Parent.Resources.FTUXEventTypes)[PlatformEnumModule.QuestVR]
 
 return {
-	[platformEnumModule.QuestVR] = {
+	[PlatformEnumModule.QuestVR] = {
 		{
-			questVR.PerspectiveTooltipEvent,
-			questVR.FirstPersonToggleEvent,
-			questVR.HapticFeedbackEvent
+			FTUXEventTypesModuleEntry.PerspectiveTooltipEvent,
+			FTUXEventTypesModuleEntry.FirstPersonToggleEvent,
+			FTUXEventTypesModuleEntry.HapticFeedbackEvent
 		},
 		{
-			questVR.MovementTooltipEvent,
-			questVR.MoveToGoalEvent,
-			questVR.SoundFeedbackEvent,
-			questVR.HapticFeedbackTwiceEvent
+			FTUXEventTypesModuleEntry.MovementTooltipEvent,
+			FTUXEventTypesModuleEntry.MoveToGoalEvent,
+			FTUXEventTypesModuleEntry.SoundFeedbackEvent,
+			FTUXEventTypesModuleEntry.HapticFeedbackTwiceEvent
 		},
-		{ questVR.HapticFeedbackEvent, questVR.SoundFeedbackEvent },
 		{
-			questVR.SoundFeedbackEvent,
-			questVR.LeaveGameIconHighlightEvent
+			FTUXEventTypesModuleEntry.HapticFeedbackEvent,
+			FTUXEventTypesModuleEntry.SoundFeedbackEvent
+		},
+		{
+			FTUXEventTypesModuleEntry.SoundFeedbackEvent,
+			FTUXEventTypesModuleEntry.LeaveGameIconHighlightEvent
 		}
 	}
 }

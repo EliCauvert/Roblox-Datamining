@@ -1,18 +1,18 @@
-﻿local gameProductInfoRodux = script:FindFirstAncestor("GameProductInfoRodux")
-local immutable = require(gameProductInfoRodux.Parent.AppCommonLib).Immutable
-local setGamesProductInfoModule = require(gameProductInfoRodux.SetGamesProductInfo)
-local _ = require(gameProductInfoRodux.GameProductInfo)
+﻿local GameProductInfoRodux = script:FindFirstAncestor("GameProductInfoRodux")
+local Immutable = require(GameProductInfoRodux.Parent.AppCommonLib).Immutable
+local SetGamesProductInfoModule = require(GameProductInfoRodux.SetGamesProductInfo)
+local _ = require(GameProductInfoRodux.GameProductInfo)
 
 return {
 	key = "GamesProductInfoKey",
-	reducer = function(p1, p2)
-		-- upvalues: setGamesProductInfoModule (ref), immutable (ref)
-		p1 = p1 or {}
-		assert(p1, "")
+	reducer = function(p1, p2) --[[ Line: 13 ]]
+		-- upvalues: SetGamesProductInfoModule (copy), Immutable (copy)
+		local P0 = p1 or {}
+		assert(P0, "")
 		
-		if p2.type == setGamesProductInfoModule.name then
-			p1 = immutable.JoinDictionaries(p1, p2.gamesProductInfo)
+		if p2.type == SetGamesProductInfoModule.name then
+			P0 = Immutable.JoinDictionaries(P0, p2.gamesProductInfo)
 		end
-		return p1
+		return P0
 	end
 }

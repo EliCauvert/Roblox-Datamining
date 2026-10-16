@@ -1,11 +1,12 @@
 ﻿local _ = require(script.Parent.types)
 
-return function(p1)
-	if typeof(p1) ~= "table" then
+return function(p1) --[[ Line: 6 | Named "parseApiError" ]]
+	if typeof(p1) == "table" then
+		local Code = p1.code
+		local Message = p1.message
+		
+		return if typeof(Code) == "number" and typeof(Message) == "string" then { code = Code, message = Message, details = p1.details } else nil
+	else
 		return nil
 	end
-	local code = p1.code
-	local message = p1.message
-	
-	return if typeof(code) == "number" and typeof(message) == "string" then { code = code, message = message, details = p1.details } else nil
 end

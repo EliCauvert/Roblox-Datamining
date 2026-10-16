@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("EnableSquadRegroupExperimentationSmallScreenFix", false)
+﻿return (game:DefineFastFlag("EnableSquadRegroupExperimentationSmallScreenFix", false))

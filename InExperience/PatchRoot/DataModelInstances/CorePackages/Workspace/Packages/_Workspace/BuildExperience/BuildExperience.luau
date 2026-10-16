@@ -6,6 +6,8 @@
 	BuildEventReceiver = require(script.BuildEventReceiver),
 	GetBuildPillMenuPortalStore = require(script.Stores.GetBuildPillMenuPortalStore),
 	GetAssistantBuildStore = require(script.Stores.GetAssistantBuildStore),
+	GetAdsCampaignDeepLinkStore = require(script.Stores.GetAdsCampaignDeepLinkStore),
+	requestAdsCampaign = require(script.utils.requestAdsCampaign),
 	GetCreatorAgentResumeStore = require(script.Stores.GetCreatorAgentResumeStore),
 	GetPlayButtonStore = require(script.Stores.GetPlayButtonStore),
 	mountChatSheet = require(script.mountChatSheet),

@@ -1,48 +1,49 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local createDataCacheModule = require(dataHydration.createDataCache)
-local createDataResolverModule = require(dataHydration.createDataResolver)
-local _ = require(dataHydration.DataHydrationTypes)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local CreateDataCacheModule = require(DataHydration.createDataCache)
+local CreateDataResolverModule = require(DataHydration.createDataResolver)
+local _ = require(DataHydration.DataHydrationTypes)
 local t = {}
-local t_1 = {}
+local t1 = {}
 
-return function(p1, p2)
-	-- upvalues: t (ref), t_1 (ref), createDataCacheModule (ref), createDataResolverModule (ref)
-	local var1 = if p2 then p2.cache else t
-	local var2 = if p2 then p2.resolver else t_1
-	local var3 = createDataCacheModule(var1.ttlSeconds, var1.failedTtlSeconds)
-	local var4 = createDataResolverModule({
+return function(Callback, p1) --[[ Line: 49 | Named "createSingleEntityResolver" ]]
+	-- upvalues: t (copy), t1 (copy), CreateDataCacheModule (copy), CreateDataResolverModule (copy)
+	local Cache = p1 and p1.cache or t
+	local Resolver = p1 and p1.resolver or t1
+	local DataCacheModule = CreateDataCacheModule(Cache.ttlSeconds, Cache.failedTtlSeconds, { ttlSecondsForItem = Cache.ttlSecondsForItem })
+	local DataResolverModule = CreateDataResolverModule({
 		supportsMultiGet = false,
-		cache = var3,
-		fetchFn = function(p3, _)
-			-- upvalues: p1 (ref)
-			return p1(tonumber(p3))
+		cache = DataCacheModule,
+		fetchFn = function(p2, _) --[[ Line: 61 ]]
+			-- upvalues: Callback (copy)
+			return Callback((tonumber(p2)))
 		end,
-		queueProcessDelaySec = var2.queueProcessDelaySec,
-		requestTimeoutSec = var2.requestTimeoutSec,
-		replaceItems = var2.replaceItems,
-		logError = var2.logError,
-		onClear = var2.onClear
+		queueProcessDelaySec = Resolver.queueProcessDelaySec,
+		requestTimeoutSec = Resolver.requestTimeoutSec,
+		replaceItems = Resolver.replaceItems,
+		logError = Resolver.logError,
+		onClear = Resolver.onClear
 	})
 	
 	return {
-		cache = var3,
-		get = function(p3)
-			-- upvalues: var4 (ref)
-			return var4.getCachedItem(tostring(p3))
+		cache = DataCacheModule,
+		get = function(p2) --[[ Line: 73 ]]
+			-- upvalues: DataResolverModule (copy)
+			return DataResolverModule.getCachedItem((tostring(p2)))
 		end,
-		fetch = function(p3)
-			-- upvalues: var4 (ref)
-			return var4.fetchItem(tostring(p3))
+		fetch = function(p2) --[[ Line: 76 ]]
+			-- upvalues: DataResolverModule (copy)
+			return DataResolverModule.fetchItem((tostring(p2)))
 		end,
-		getAndFetch = function(p3)
-			-- upvalues: var4 (ref)
-			return var4.getAndFetchItem(tostring(p3))
+		getAndFetch = function(p2) --[[ Line: 79 ]]
+			-- upvalues: DataResolverModule (copy)
+			return DataResolverModule.getAndFetchItem((tostring(p2)))
 		end,
-		update = function(p3, p4)
-			-- upvalues: var3 (ref)
-			var3.updateItem(tostring(p3), p4)
+		update = function(p2, p3) --[[ Line: 82 ]]
+			-- upvalues: DataCacheModule (copy)
+			DataCacheModule.updateItem(tostring(p2), p3)
 		end,
-		clear = var4.clear,
-		dispose = var4.dispose
+		getAccountResetGeneration = DataResolverModule.getAccountResetGeneration,
+		clear = DataResolverModule.clear,
+		dispose = DataResolverModule.dispose
 	}
 end

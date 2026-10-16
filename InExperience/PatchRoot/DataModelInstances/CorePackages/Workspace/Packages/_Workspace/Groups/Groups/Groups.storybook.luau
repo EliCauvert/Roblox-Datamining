@@ -1,53 +1,53 @@
-﻿local groups = script:FindFirstAncestor("Groups")
-local parent = groups.Parent
-local reactModule = require(parent.React)
-local reactRobloxModule = require(parent.Dev.ReactRoblox)
-local UIBloxModule = require(parent.UIBlox)
-local roduxModule = require(parent.Dev.Rodux)
-local roactRoduxModule = require(parent.Dev.RoactRodux)
-local designTokenProvider = require(parent.Style).DesignTokenProvider
-local localizationProvider = require(parent.Localization).LocalizationProvider
-local foundationProvider = require(parent.Foundation).FoundationProvider
-local signal = require(parent.AppCommonLib).Signal
-UIBloxModule.init(require(parent.Dev.RobloxAppUIBloxConfig))
-local appStyleProvider = UIBloxModule.App.Style.AppStyleProvider
+﻿local Groups = script:FindFirstAncestor("Groups")
+local Parent = Groups.Parent
+local ReactModule = require(Parent.React)
+local ReactRobloxModule = require(Parent.Dev.ReactRoblox)
+local UIBloxModule = require(Parent.UIBlox)
+local RoduxModule = require(Parent.Dev.Rodux)
+local RoactRoduxModule = require(Parent.Dev.RoactRodux)
+local DesignTokenProvider = require(Parent.Style).DesignTokenProvider
+local LocalizationProvider = require(Parent.Localization).LocalizationProvider
+local FoundationProvider = require(Parent.Foundation).FoundationProvider
+local Signal = require(Parent.AppCommonLib).Signal
+UIBloxModule.init(require(Parent.Dev.RobloxAppUIBloxConfig))
+local AppStyleProvider = UIBloxModule.App.Style.AppStyleProvider
 
-local function createStore()
-	-- upvalues: roduxModule (ref)
-	return roduxModule.Store.new(roduxModule.createReducer({}, {}), nil, { roduxModule.thunkMiddleware })
+local function createStore() --[[ Line: 27 ]]
+	-- upvalues: RoduxModule (copy)
+	return RoduxModule.Store.new(RoduxModule.createReducer({}, {}), nil, { RoduxModule.thunkMiddleware })
 end
 
-local t = {
+local config = {
 	Default = { themeName = "Dark", fontName = "Gotham" },
 	Light = { themeName = "Light", fontName = "Gotham" },
 	Dark = { themeName = "Dark", fontName = "Gotham" }
 }
-local t_1 = {
-	Format = function(_, p1)
+local Localization = {
+	Format = function(_, p1) --[[ Line: 48 ]]
 		return p1
 	end,
-	GetLocale = function()
+	GetLocale = function(): string --[[ Line: 51 ]]
 		return "en-us"
 	end,
-	changed = signal.new()
+	changed = Signal.new()
 }
 
 return {
-	name = if groups then groups.Name else "Groups",
-	storyRoot = groups,
-	roact = reactModule,
-	reactRoblox = reactRobloxModule,
-	mapStory = function(p1)
-		-- upvalues: t (ref), reactModule (ref), localizationProvider (ref), t_1 (ref), foundationProvider (ref), appStyleProvider (ref), roactRoduxModule (ref), createStore (ref), designTokenProvider (ref)
-		return function(p2)
-			-- upvalues: t (copy), reactModule (copy), localizationProvider (copy), t_1 (copy), foundationProvider (copy), appStyleProvider (copy), roactRoduxModule (copy), createStore (copy), designTokenProvider (copy), p1 (ref)
-			local var1 = if p2 then t[p2.theme] else t.Default
+	name = Groups and Groups.Name or "Groups",
+	storyRoot = Groups,
+	roact = ReactModule,
+	reactRoblox = ReactRobloxModule,
+	mapStory = function(p1) --[[ Line: 62 ]]
+		-- upvalues: config (copy), ReactModule (copy), LocalizationProvider (copy), Localization (copy), FoundationProvider (copy), AppStyleProvider (copy), RoactRoduxModule (copy), createStore (copy), DesignTokenProvider (copy)
+		return function(p2) --[[ Line: 63 ]]
+			-- upvalues: config (upval), ReactModule (upval), LocalizationProvider (upval), Localization (upval), FoundationProvider (upval), AppStyleProvider (upval), RoactRoduxModule (upval), createStore (upval), DesignTokenProvider (upval), p1 (copy)
+			local Entry = p2 and config[p2.theme] or config.Default
 			
-			return reactModule.createElement(localizationProvider, { localization = t_1 }, {
-				FoundationProvider = reactModule.createElement(foundationProvider, { device = "Desktop", colorMode = var1.themeName }, {
-					AppStyleProvider = reactModule.createElement(appStyleProvider, { style = var1 }, {
-						StoreProvider = reactModule.createElement(roactRoduxModule.StoreProvider, { store = createStore() }, {
-							DesignTokenProvider = reactModule.createElement(designTokenProvider, { tokenMappers = {} }, { Child = reactModule.createElement(p1, p2) })
+			return ReactModule.createElement(LocalizationProvider, { localization = Localization }, {
+				FoundationProvider = ReactModule.createElement(FoundationProvider, { device = "Desktop", colorMode = Entry.themeName }, {
+					AppStyleProvider = ReactModule.createElement(AppStyleProvider, { style = Entry }, {
+						StoreProvider = ReactModule.createElement(RoactRoduxModule.StoreProvider, { store = createStore() }, {
+							DesignTokenProvider = ReactModule.createElement(DesignTokenProvider, { tokenMappers = {} }, { Child = ReactModule.createElement(p1, p2) })
 						})
 					})
 				})

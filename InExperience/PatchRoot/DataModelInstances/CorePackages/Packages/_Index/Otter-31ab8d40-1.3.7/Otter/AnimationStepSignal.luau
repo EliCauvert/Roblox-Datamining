@@ -1,37 +1,38 @@
-﻿local runService = game:GetService("RunService")
+﻿local RunService = game:GetService("RunService")
 local t = {}
-local t_1 = {
-	Connect = function(_, p1)
-		-- upvalues: t (ref)
-		t[p1] = true
+local Signal = {
+	Connect = function(_, Key) --[[ Line: 8 ]]
+		-- upvalues: t (copy)
+		t[Key] = true
 		
 		return {
-			Disconnect = function()
-				-- upvalues: t (copy), p1 (ref)
-				t[p1] = nil
+			Disconnect = function() --[[ Line: 11 ]]
+				-- upvalues: t (upval), Key (copy)
+				t[Key] = nil
 			end
 		}
 	end,
-	Fire = function(_, p1)
-		-- upvalues: t (ref)
-		for i, v in t do
+	Fire = function(_, p1) --[[ Line: 16 ]]
+		-- upvalues: t (copy)
+		for i, _ in t do
 			i(p1)
 		end
 	end
 }
 
 return {
-	Connect = function(_, p2)
-		-- upvalues: t_1 (ref), runService (ref)
-		return if _G.__OTTER_MOCK_ANIMATION_STEP_SIGNAL__ then t_1:Connect(p2) else runService.RenderStepped:Connect(p2)
+	Connect = function(_, Callback) --[[ Line: 24 ]]
+		-- upvalues: Signal (copy), RunService (copy)
+		return if _G.__OTTER_MOCK_ANIMATION_STEP_SIGNAL__ then Signal:Connect(Callback) else RunService.RenderStepped:Connect(Callback)
 	end,
-	Fire = function(_, p2)
-		-- upvalues: t_1 (ref)
+	Fire = function(_, p2) --[[ Line: 31 ]]
+		-- upvalues: Signal (copy)
 		if _G.__OTTER_MOCK_ANIMATION_STEP_SIGNAL__ then
-			t_1:Fire(p2 or 0.016666666667)
+			Signal:Fire(p2 or 0.016666666666666666)
 			
 			return
+		else
+			error("Cannot manually fire real animation step signal")
 		end
-		error("Cannot manually fire real animation step signal")
 	end
 }

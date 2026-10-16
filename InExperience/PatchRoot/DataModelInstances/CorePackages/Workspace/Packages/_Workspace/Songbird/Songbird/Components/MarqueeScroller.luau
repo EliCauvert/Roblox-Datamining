@@ -1,87 +1,89 @@
-﻿local songbird = script:FindFirstAncestor("Songbird")
-local runService = game:GetService("RunService")
-local cryoModule = require(songbird.Parent.Cryo)
-local foundationModule = require(songbird.Parent.Foundation)
-local reactModule = require(songbird.Parent.React)
-local reactUtilsModule = require(songbird.Parent.ReactUtils)
-local useCallback = reactModule.useCallback
-local useBinding = reactModule.useBinding
-local useState = reactModule.useState
-local useTokens = foundationModule.Hooks.useTokens
-local useEventConnection = reactUtilsModule.useEventConnection
-local t = { speed = 20, direction = Enum.TextDirection.LeftToRight }
+﻿local Songbird = script:FindFirstAncestor("Songbird")
+local RunService = game:GetService("RunService")
+local CryoModule = require(Songbird.Parent.Cryo)
+local FoundationModule = require(Songbird.Parent.Foundation)
+local ReactModule = require(Songbird.Parent.React)
+local UseCallbackFunction = ReactModule.useCallback
+local UseBindingFunction = ReactModule.useBinding
+local UseStateFunction = ReactModule.useState
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UseEventConnectionFunction = require(Songbird.Parent.ReactUtils).useEventConnection
+local config = { speed = 20, direction = Enum.TextDirection.LeftToRight }
 
-local function _(p1, p2)
+local function _(p1, p2): number --[[ Line: 31 | Named "calculateInstances" ]]
 	if p1 == 0 then
 		return 2
+	else
+		local Largest = math.max(math.ceil(p2 / p1) + 1, 2)
+		
+		return if Largest == Largest then Largest else 2
 	end
-	local maxValue = math.max(math.ceil(p2 / p1) + 1, 2)
-	
-	return if maxValue == maxValue then maxValue else 2
 end
 
-return function(p1)
-	-- upvalues: cryoModule (ref), t (ref), useTokens (ref), useBinding (ref), useState (ref), useCallback (ref), reactModule (ref), foundationModule (ref), useEventConnection (ref), runService (ref)
-	local var1
-	local var2 = cryoModule.Dictionary.join(t, p1)
-	local var3 = if var2.padding then var2.padding else useTokens().Margin.Large
-	local var4 = var2.direction == Enum.TextDirection.LeftToRight
-	local var5, var6 = useBinding(0)
-	local var7, var8 = useState(Vector2.new(1e999, 1e999))
-	local var9, var10 = useState(Vector2.new(1e999, 1e999))
-	local var11 = var7.X + var3
-	local var12 = useCallback(function(p2)
-		-- upvalues: var8 (ref)
-		var8(p2.AbsoluteSize)
+return function(p1) --[[ Line: 45 | Named "MarqueeScroller" ]]
+	-- upvalues: CryoModule (copy), config (copy), UseTokensFunction (copy), UseBindingFunction (copy), UseStateFunction (copy), UseCallbackFunction (copy), ReactModule (copy), FoundationModule (copy), UseEventConnectionFunction (copy), RunService (copy)
+	local JoinResult = CryoModule.Dictionary.join(config, p1)
+	local UseTokensResult = UseTokensFunction()
+	local Padding = if JoinResult.padding then JoinResult.padding else UseTokensResult.Margin.Large
+	local IsDirectionMatch = JoinResult.direction == Enum.TextDirection.LeftToRight
+	local UseBindingResult, UseBindingResult2 = UseBindingFunction(0)
+	local UseStateResult, UseStateResult2 = UseStateFunction(Vector2.new(1e999, 1e999))
+	local UseStateResult1, UseStateResult2_1 = UseStateFunction(Vector2.new(1e999, 1e999))
+	local NewX = UseStateResult.X + Padding
+	local UseCallbackResult = UseCallbackFunction(function(Frame) --[[ Line: 57 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(Frame.AbsoluteSize)
 	end, {})
-	local var13 = useCallback(function(p2)
-		-- upvalues: var10 (ref)
-		var10(p2.AbsoluteSize)
+	local UseCallbackResult1 = UseCallbackFunction(function(Frame) --[[ Line: 61 ]]
+		-- upvalues: UseStateResult2_1 (copy)
+		UseStateResult2_1(Frame.AbsoluteSize)
 	end, {})
-	local t_1 = {}
-	local x = var7.X
-	local x_1 = var9.X
+	local Elements = {}
+	local X = UseStateResult.X
+	local X1 = UseStateResult1.X
+	local v1 = nil
 	
-	if x == 0 then
-		var1 = 2
+	if X == 0 then
+		v1 = 2
 	else
-		local maxValue = math.max(math.ceil(x_1 / x) + 1, 2)
-		var1 = if maxValue ~= maxValue then maxValue else 2
+		local Largest = math.max(math.ceil(X1 / X) + 1, 2)
+		v1 = if Largest == Largest then Largest else 2
 	end
-	for i = 1, var1 do
-		t_1[`Content{i}`] = reactModule.createElement(foundationModule.View, {
+	for i = 1, v1 do
+		local config1 = {
 			tag = "auto-xy",
-			onAbsoluteSizeChanged = if i == 1 then var12 else nil,
-			LayoutOrder = i
-		}, var2.children)
+			onAbsoluteSizeChanged = if i == 1 then UseCallbackResult else nil
+		}
+		config1.LayoutOrder = i
+		Elements[`Content{i}`] = ReactModule.createElement(FoundationModule.View, config1, JoinResult.children)
 	end
-	useEventConnection(runService.Heartbeat, function(p2)
-		-- upvalues: var2 (ref), var5 (ref), var11 (ref), var6 (ref)
-		if var2.speed > 0 then
-			local var14 = var5:getValue() + var2.speed * p2
+	UseEventConnectionFunction(RunService.Heartbeat, function(p2) --[[ Line: 76 ]]
+		-- upvalues: JoinResult (copy), UseBindingResult (copy), NewX (copy), UseBindingResult2 (copy)
+		if JoinResult.speed > 0 then
+			local NewValue = UseBindingResult:getValue() + JoinResult.speed * p2
 			
-			if var11 <= var14 then
-				var14 -= var11
+			if NewX <= NewValue then
+				NewValue -= NewX
 			end
-			var6(var14)
+			UseBindingResult2(NewValue)
 		end
-	end, { var2.speed, var11 })
+	end, { JoinResult.speed, NewX })
 	
-	return reactModule.createElement(foundationModule.View, {
+	return ReactModule.createElement(FoundationModule.View, {
 		tag = "size-full auto-y clip",
-		onAbsoluteSizeChanged = var13,
-		LayoutOrder = var2.LayoutOrder
+		onAbsoluteSizeChanged = UseCallbackResult1,
+		LayoutOrder = JoinResult.LayoutOrder
 	}, {
-		Scroller = reactModule.createElement(foundationModule.View, {
+		Scroller = ReactModule.createElement(FoundationModule.View, {
 			tag = "auto-xy row data-testid=scroller",
 			layout = {
 				FillDirection = Enum.FillDirection.Horizontal,
-				Padding = UDim.new(0, var3)
+				Padding = UDim.new(0, Padding)
 			},
-			Position = var5:map(function(p2)
-				-- upvalues: var4 (ref)
-				return if var4 then UDim2.new(0, p2 * -1, 0, 0) else UDim2.new(-1, p2, 0, 0)
+			Position = UseBindingResult:map(function(XOffset: number): UDim2 --[[ Line: 97 ]]
+				-- upvalues: IsDirectionMatch (copy)
+				return if IsDirectionMatch then UDim2.new(0, XOffset * -1, 0, 0) else UDim2.new(-1, XOffset, 0, 0)
 			end)
-		}, t_1)
+		}, Elements)
 	})
 end

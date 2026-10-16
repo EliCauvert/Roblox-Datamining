@@ -1,35 +1,35 @@
-﻿local inExperienceSideSheet = script:FindFirstAncestor("InExperienceSideSheet")
-local parent = inExperienceSideSheet.Parent
-local _ = require(parent.Chrome)
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local useTokens = foundationModule.Hooks.useTokens
-local statusIndicatorVariant = foundationModule.Enums.StatusIndicatorVariant
-local statusIndicator = foundationModule.StatusIndicator
-local view = foundationModule.View
-local useNotificationCountModule = require(inExperienceSideSheet.Hooks.useNotificationCount)
+﻿local InExperienceSideSheet = script:FindFirstAncestor("InExperienceSideSheet")
+local Parent = InExperienceSideSheet.Parent
+local _ = require(Parent.Chrome)
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local StatusIndicatorVariant = FoundationModule.Enums.StatusIndicatorVariant
+local StatusIndicator = FoundationModule.StatusIndicator
+local View = FoundationModule.View
+local UseNotificationCountModule = require(InExperienceSideSheet.Hooks.useNotificationCount)
 
-return function(p1)
-	-- upvalues: useTokens (ref), useNotificationCountModule (ref), reactModule (ref), view (ref), statusIndicator (ref), statusIndicatorVariant (ref)
-	local var1 = useTokens()
-	local var2, var3 = useNotificationCountModule(p1.notification)
+return function(p1) --[[ Line: 24 | Named "IconHost" ]]
+	-- upvalues: UseTokensFunction (copy), UseNotificationCountModule (copy), ReactModule (copy), View (copy), StatusIndicator (copy), StatusIndicatorVariant (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseNotificationCountModuleResult, UseNotificationCountModuleResult2 = UseNotificationCountModule(p1.notification)
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = {
 			["size-1000"] = true,
 			["position-center-center anchor-center-center"] = p1.centerPosition
 		}
 	}, {
-		IconContainer = reactModule.createElement(view, {
+		IconContainer = ReactModule.createElement(View, {
 			tag = "size-full align-x-center align-y-center",
 			ZIndex = 1
-		}, { Icon = reactModule.createElement(p1.icon) }),
-		NotificationBadge = if var2 then reactModule.createElement(statusIndicator, {
+		}, { Icon = ReactModule.createElement(p1.icon) }),
+		NotificationBadge = if UseNotificationCountModuleResult then ReactModule.createElement(StatusIndicator, {
 			ZIndex = 2,
-			value = var3,
-			variant = statusIndicatorVariant.Emphasis,
+			value = UseNotificationCountModuleResult2,
+			variant = StatusIndicatorVariant.Emphasis,
 			AnchorPoint = Vector2.new(0, 0),
-			Position = UDim2.new(0, var1.Gap.XXLarge, 0, var1.Gap.Small)
+			Position = UDim2.new(0, UseTokensResult.Gap.XXLarge, 0, UseTokensResult.Gap.Small)
 		}) else nil
 	})
 end

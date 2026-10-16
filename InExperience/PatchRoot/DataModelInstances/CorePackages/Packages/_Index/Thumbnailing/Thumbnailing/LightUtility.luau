@@ -1,66 +1,66 @@
-﻿local t = {
-	AddLight = function(p1, p2)
-		local part = Instance.new("Part")
-		part.Anchored = true
-		part.Transparency = 1
-		part.Shape = Enum.PartType.Ball
-		part.Color = p1.color
-		part.Name = "ThumbnailLightAnchor_" .. tostring(p2)
-		part.Parent = workspace
-		local pointLight = Instance.new("PointLight")
-		pointLight.Color = p1.color
-		pointLight.Brightness = 3
-		pointLight.Range = 10
-		pointLight.Shadows = true
-		pointLight.Name = "PointLight_" .. tostring(p2)
-		pointLight.Parent = part
-		part.Position = p1.worldPos
+﻿local Lighting = game:GetService("Lighting")
+local ColorUtilityModule = require(script.Parent.ColorUtility)
+local VectorUtilityModule = require(script.Parent.VectorUtility)
+local LightUtilityModule = {
+	AddLight = function(p1, p2) --[[ Line: 80 ]]
+		local Part = Instance.new("Part")
+		Part.Anchored = true
+		Part.Transparency = 1
+		Part.Shape = Enum.PartType.Ball
+		Part.Color = p1.color
+		Part.Name = "ThumbnailLightAnchor_" .. tostring(p2)
+		Part.Parent = workspace
+		local PointLight = Instance.new("PointLight")
+		PointLight.Color = p1.color
+		PointLight.Brightness = 3
+		PointLight.Range = 10
+		PointLight.Shadows = true
+		PointLight.Name = "PointLight_" .. tostring(p2)
+		PointLight.Parent = Part
+		Part.Position = p1.worldPos
 	end
 }
-local lightingService = game:GetService("Lighting")
-local colorUtilityModule = require(script.Parent.ColorUtility)
-local vectorUtilityModule = require(script.Parent.VectorUtility)
 
-function t.AddLightsFromExtraParams(p1, p2)
-	-- upvalues: colorUtilityModule (ref), vectorUtilityModule (ref), t (ref), lightingService (ref)
-	local var1 = false
-	local pointLights = p1 and p1.pointLights
+function LightUtilityModule.AddLightsFromExtraParams(p1, p2): boolean --[[ Line: 100 ]]
+	-- upvalues: ColorUtilityModule (copy), VectorUtilityModule (copy), LightUtilityModule (copy), Lighting (copy)
+	local Flag = false
+	local PointLights = p1 and p1.pointLights
 	
-	if pointLights then
-		for i, v in ipairs(pointLights) do
-			t.AddLight({
-				color = colorUtilityModule.Color3FromString(v.color),
-				worldPos = p2 * vectorUtilityModule.Vector3FromJson(v.pos)
+	if PointLights then
+		for i, pointLight in ipairs(PointLights) do
+			LightUtilityModule.AddLight({
+				color = ColorUtilityModule.Color3FromString(pointLight.color),
+				worldPos = p2 * VectorUtilityModule.Vector3FromJson(pointLight.pos)
 			}, i)
-			var1 = true
+			Flag = true
 		end
 	end
-	local clockTime = p1 and p1.clockTime
+	local ClockTime = p1 and p1.clockTime
 	
-	if clockTime then
-		lightingService.ClockTime = clockTime
-		var1 = true
+	if ClockTime then
+		Lighting.ClockTime = ClockTime
+		Flag = true
 	end
-	local brightness = p1 and p1.brightness
+	local Brightness = p1 and p1.brightness
 	
-	if brightness then
-		lightingService.Brightness = brightness
-		var1 = true
+	if Brightness then
+		Lighting.Brightness = Brightness
+		Flag = true
 	end
-	return var1
+	return Flag
 end
 
-function t.AddDefaultPointLightRelativeTo(p3)
-	-- upvalues: t (ref)
-	t.AddLight({
+function LightUtilityModule.AddDefaultPointLightRelativeTo(p3) --[[ Line: 134 ]]
+	-- upvalues: LightUtilityModule (copy)
+	LightUtilityModule.AddLight({
 		color = Color3.new(1, 1, 1),
-		worldPos = p3 * Vector3.new(-5, 7, -5)
+		worldPos = p3 * vector.create(-5, 7, -5)
 	}, 0)
 end
 
-function t.SetupSunlightWithJsonConfig(p3)
-	-- upvalues: lightingService (ref)
-	p3 = p3 or {
+function LightUtilityModule.SetupSunlightWithJsonConfig(p3) --[[ Line: 143 ]]
+	-- upvalues: Lighting (copy)
+	local P5 = p3 or {
 		brightness = "1",
 		ambient = "124,124,124",
 		colorShiftBottom = "108,94,66",
@@ -75,58 +75,58 @@ function t.SetupSunlightWithJsonConfig(p3)
 		exposureCompensation = "0",
 		timeOfDay = "09:30:00"
 	}
-	lightingService.Brightness = p3.brightness and tonumber(p3.brightness) or 1
-	p3 = p3.ambient and p3.ambient:split(",") or { "124", "124", "124" }
-	lightingService.Ambient = Color3.fromRGB(tonumber(p3[1]), tonumber(p3[2]), tonumber(p3[3]))
-	local var2 = p3.colorShiftBottom and p3.colorShiftBottom:split(",") or { "108", "94", "66" }
-	local var3 = p3.colorShiftTop and p3.colorShiftTop:split(",") or { "94", "100", "172" }
-	lightingService.ColorShift_Bottom = Color3.fromRGB(tonumber(var2[1]), tonumber(var2[2]), tonumber(var2[3]))
-	lightingService.ColorShift_Top = Color3.fromRGB(tonumber(var3[1]), tonumber(var3[2]), tonumber(var3[3]))
-	lightingService.EnvironmentDiffuseScale = p3.environmentDiffuseScale and tonumber(p3.environmentDiffuseScale) or 0
-	lightingService.EnvironmentSpecularScale = p3.environmentSpecularScale and tonumber(p3.environmentSpecularScale) or 1
-	lightingService.GlobalShadows = if p3.globalShadows then true else false
-	lightingService.ShadowSoftness = p3.shadowSoftness and tonumber(p3.shadowSoftness) or 0
-	local var4 = p3.outdoorAmbient and p3.outdoorAmbient:split(",") or { "0", "0", "0" }
-	lightingService.OutdoorAmbient = Color3.fromRGB(tonumber(var4[1]), tonumber(var4[2]), tonumber(var4[3]))
-	lightingService.ClockTime = p3.clockTime and tonumber(p3.clockTime) or 9.5
-	lightingService.GeographicLatitude = p3.geographicLatitude and tonumber(p3.geographicLatitude) or 330
-	lightingService.ExposureCompensation = p3.exposureCompensation and tonumber(p3.exposureCompensation) or 0
-	lightingService.TimeOfDay = p3.timeOfDay or "09:30:00"
+	Lighting.Brightness = P5.brightness and tonumber(P5.brightness) or 1
+	local v1 = P5.ambient and P5.ambient:split(",") or { "124", "124", "124" }
+	Lighting.Ambient = Color3.fromRGB(tonumber(v1[1]), tonumber(v1[2]), (tonumber(v1[3])))
+	local v2 = P5.colorShiftBottom and P5.colorShiftBottom:split(",") or { "108", "94", "66" }
+	local v3 = P5.colorShiftTop and P5.colorShiftTop:split(",") or { "94", "100", "172" }
+	Lighting.ColorShift_Bottom = Color3.fromRGB(tonumber(v2[1]), tonumber(v2[2]), (tonumber(v2[3])))
+	Lighting.ColorShift_Top = Color3.fromRGB(tonumber(v3[1]), tonumber(v3[2]), (tonumber(v3[3])))
+	Lighting.EnvironmentDiffuseScale = P5.environmentDiffuseScale and tonumber(P5.environmentDiffuseScale) or 0
+	Lighting.EnvironmentSpecularScale = P5.environmentSpecularScale and tonumber(P5.environmentSpecularScale) or 1
+	Lighting.GlobalShadows = if P5.globalShadows then P5.globalShadows == "true" else false
+	Lighting.ShadowSoftness = P5.shadowSoftness and tonumber(P5.shadowSoftness) or 0
+	local v4 = P5.outdoorAmbient and P5.outdoorAmbient:split(",") or { "0", "0", "0" }
+	Lighting.OutdoorAmbient = Color3.fromRGB(tonumber(v4[1]), tonumber(v4[2]), (tonumber(v4[3])))
+	Lighting.ClockTime = P5.clockTime and tonumber(P5.clockTime) or 9.5
+	Lighting.GeographicLatitude = P5.geographicLatitude and tonumber(P5.geographicLatitude) or 330
+	Lighting.ExposureCompensation = P5.exposureCompensation and tonumber(P5.exposureCompensation) or 0
+	Lighting.TimeOfDay = P5.timeOfDay or "09:30:00"
 end
 
-function t.SetupSceneLight(p3, p4)
-	p3 = p3 or {}
-	p3 = p3.lightType or "SpotLight"
-	p4 = p4 or p3
-	local part = Instance.new("Part")
-	part.Anchored = true
-	part.Transparency = 1
-	part.Size = p3.partSize or Vector3.new(4, 1, 2)
-	part.Shape = p3.partType or Enum.PartType.Block
-	part.Name = "ThumbnailLightAnchor_" .. tostring(p4)
-	part.Parent = workspace
-	local var2 = Instance.new(p3)
-	var2.Enabled = p3.enabled ~= nil or p3.enabled
-	var2.Color = p3.color or Color3.fromRGB(255, 255, 255)
-	var2.Brightness = p3.brightness or 10
-	var2.Range = p3.range or 12
-	var2.Angle = p3.angle or 30
-	var2.Shadows = p3.shadows ~= nil or p3.shadows
-	var2.Name = tostring(p4)
-	var2.Parent = part
-	part.CFrame = p3.partCFrame
+function LightUtilityModule.SetupSceneLight(p3, p4) --[[ Line: 190 ]]
+	local P6 = p3 or {}
+	local LightType = P6.lightType or "SpotLight"
+	local P7 = p4 or LightType
+	local Part = Instance.new("Part")
+	Part.Anchored = true
+	Part.Transparency = 1
+	Part.Size = P6.partSize or vector.create(4, 1, 2)
+	Part.Shape = P6.partType or Enum.PartType.Block
+	Part.Name = "ThumbnailLightAnchor_" .. tostring(P7)
+	Part.Parent = workspace
+	local NewInstance = Instance.new(LightType)
+	NewInstance.Enabled = P6.enabled == nil or P6.enabled
+	NewInstance.Color = P6.color or Color3.fromRGB(255, 255, 255)
+	NewInstance.Brightness = P6.brightness or 10
+	NewInstance.Range = P6.range or 12
+	NewInstance.Angle = P6.angle or 30
+	NewInstance.Shadows = P6.shadows == nil or P6.shadows
+	NewInstance.Name = tostring(P7)
+	NewInstance.Parent = Part
+	Part.CFrame = P6.partCFrame
 end
 
-function t.SetupSpotLight(p3, p4)
-	-- upvalues: t (ref)
-	p3 = p3 or {}
-	p3.lightType = "SpotLight"
-	t.SetupSceneLight(p3, p4)
+function LightUtilityModule.SetupSpotLight(FillLight, p3) --[[ Line: 215 ]]
+	-- upvalues: LightUtilityModule (copy)
+	local FillLight1 = FillLight or {}
+	FillLight1.lightType = "SpotLight"
+	LightUtilityModule.SetupSceneLight(FillLight1, p3)
 end
 
-function t.SetupSpotLightsIn3PointLighting(p3)
-	-- upvalues: t (ref)
-	p3 = p3 or {
+function LightUtilityModule.SetupSpotLightsIn3PointLighting(p3) --[[ Line: 225 ]]
+	-- upvalues: LightUtilityModule (copy)
+	local P10 = p3 or {
 		keyLight = {
 			brightness = 11.2,
 			range = 12,
@@ -143,17 +143,17 @@ function t.SetupSpotLightsIn3PointLighting(p3)
 		}
 	}
 	
-	if p3.keyLight then
-		t.SetupSpotLight(p3.keyLight, "KeyLight")
+	if P10.keyLight then
+		LightUtilityModule.SetupSpotLight(P10.keyLight, "KeyLight")
 	end
-	if p3.fillLight then
-		t.SetupSpotLight(p3.fillLight, "FillLight")
+	if P10.fillLight then
+		LightUtilityModule.SetupSpotLight(P10.fillLight, "FillLight")
 	end
 end
 
-function t.SetupSpotLightsIn3PointLightingWithJsonConfig(p3)
-	-- upvalues: t (ref)
-	p3 = p3 or {
+function LightUtilityModule.SetupSpotLightsIn3PointLightingWithJsonConfig(p3) --[[ Line: 251 ]]
+	-- upvalues: LightUtilityModule (copy)
+	local P11 = p3 or {
 		rotation = "105",
 		keyCFrame = "2.219,103.178,4.675,30,60,-90",
 		keyBrightness = "11.2",
@@ -166,36 +166,31 @@ function t.SetupSpotLightsIn3PointLightingWithJsonConfig(p3)
 		fillAngle = "36",
 		fillColor = "255,255,255"
 	}
-	local cframe = CFrame.Angles(0, math.rad(p3.rotation and tonumber(p3.rotation) or 105), 0)
-	local var2 = p3.keyCFrame and p3.keyCFrame:split(",") or {
+	local _CFrame = CFrame.Angles(0, math.rad(P11.rotation and tonumber(P11.rotation) or 105), 0)
+	local v1 = P11.keyCFrame and P11.keyCFrame:split(",") or {
 		"2.219", "103.178", "4.675", "30", "60", "-90"
 	}
-	local var3 = cframe:ToWorldSpace(CFrame.new(tonumber(var2[1]) or 0, tonumber(var2[2]) or 0, tonumber(var2[3]) or 0) * CFrame.Angles(math.rad(tonumber(var2[4]) or 0), math.rad(tonumber(var2[5]) or 0), math.rad(tonumber(var2[6]) or 0)))
-	local var4 = p3.fillCFrame and p3.fillCFrame:split(",") or {
+	local v2 = P11.fillCFrame and P11.fillCFrame:split(",") or {
 		"3.554", "107.01", "-1.036", "-15", "90", "-90"
 	}
-	local var5 = cframe:ToWorldSpace(CFrame.new(tonumber(var4[1]) or 0, tonumber(var4[2]) or 0, tonumber(var4[3]) or 0) * CFrame.Angles(math.rad(tonumber(var4[4]) or 0), math.rad(tonumber(var4[5]) or 0), math.rad(tonumber(var4[6]) or 0)))
-	local keyBrightness = p3.keyBrightness and tonumber(p3.keyBrightness) or 11.2
-	local keyRange = p3.keyRange and tonumber(p3.keyRange) or 12
-	local keyAngle = p3.keyAngle and tonumber(p3.keyAngle) or 54
-	local var6 = p3.keyColor and p3.keyColor:split(",") or { "218", "196", "144" }
-	local var7 = p3.fillColor and p3.fillColor:split(",") or { "255", "255", "255" }
-	t.SetupSpotLightsIn3PointLighting({
+	local v3 = P11.keyColor and P11.keyColor:split(",") or { "218", "196", "144" }
+	local v4 = P11.fillColor and P11.fillColor:split(",") or { "255", "255", "255" }
+	LightUtilityModule.SetupSpotLightsIn3PointLighting({
 		keyLight = {
-			partCFrame = var3,
-			color = Color3.fromRGB(tonumber(var6[1]), tonumber(var6[2]), tonumber(var6[3])),
-			brightness = keyBrightness,
-			range = keyRange,
-			angle = keyAngle
+			partCFrame = _CFrame:ToWorldSpace(CFrame.new(tonumber(v1[1]) or 0, tonumber(v1[2]) or 0, tonumber(v1[3]) or 0) * CFrame.Angles(math.rad(tonumber(v1[4]) or 0), math.rad(tonumber(v1[5]) or 0), (math.rad(tonumber(v1[6]) or 0)))),
+			color = Color3.fromRGB(tonumber(v3[1]), tonumber(v3[2]), (tonumber(v3[3]))),
+			brightness = P11.keyBrightness and tonumber(P11.keyBrightness) or 11.2,
+			range = P11.keyRange and tonumber(P11.keyRange) or 12,
+			angle = P11.keyAngle and tonumber(P11.keyAngle) or 54
 		},
 		fillLight = {
-			partCFrame = var5,
-			color = Color3.fromRGB(tonumber(var7[1]), tonumber(var7[2]), tonumber(var7[3])),
-			brightness = p3.fillBrightness and tonumber(p3.fillBrightness) or 1.6,
-			range = p3.fillRange and tonumber(p3.fillRange) or 12,
-			angle = p3.fillAngle and tonumber(p3.fillAngle) or 36
+			partCFrame = _CFrame:ToWorldSpace(CFrame.new(tonumber(v2[1]) or 0, tonumber(v2[2]) or 0, tonumber(v2[3]) or 0) * CFrame.Angles(math.rad(tonumber(v2[4]) or 0), math.rad(tonumber(v2[5]) or 0), (math.rad(tonumber(v2[6]) or 0)))),
+			color = Color3.fromRGB(tonumber(v4[1]), tonumber(v4[2]), (tonumber(v4[3]))),
+			brightness = P11.fillBrightness and tonumber(P11.fillBrightness) or 1.6,
+			range = P11.fillRange and tonumber(P11.fillRange) or 12,
+			angle = P11.fillAngle and tonumber(P11.fillAngle) or 36
 		}
 	})
 end
 
-return t
+return LightUtilityModule

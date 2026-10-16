@@ -1,18 +1,18 @@
-﻿local avatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
-local parent = avatarExperienceCatalog.Parent
-local url = require(parent.Http).Url
-local _ = require(parent.LuauPolyfill)
-local normalizeWidgetListInfoResponseToWidgetListInfoModule = require(script.Parent.normalizeWidgetListInfoResponseToWidgetListInfo)
-local constantsModule = require(script.Parent.constants)
-local _ = require(avatarExperienceCatalog.Models.WidgetListInfo)
-local makeAXResponseHandlerModule = require(avatarExperienceCatalog.Utils.makeAXResponseHandler)
+﻿local AvatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
+local Parent = AvatarExperienceCatalog.Parent
+local Url = require(Parent.Http).Url
+local _ = require(Parent.LuauPolyfill)
+local NormalizeWidgetListInfoResponseToWidgetListInfoModule = require(script.Parent.normalizeWidgetListInfoResponseToWidgetListInfo)
+local ConstantsModule = require(script.Parent.constants)
+local _ = require(AvatarExperienceCatalog.Models.WidgetListInfo)
+local MakeAXResponseHandlerModule = require(AvatarExperienceCatalog.Utils.makeAXResponseHandler)
 
-return function(p1, p2, p3)
-	-- upvalues: url (ref), makeAXResponseHandlerModule (ref), normalizeWidgetListInfoResponseToWidgetListInfoModule (ref), constantsModule (ref)
-	local var1, var2 = p1(`{url.APIS_URL}marketplace-widgets/v1/widgets/search?{url:makeQueryString({ requestId = p2, query = p3 })}`, "GET")
+return function(Callback, RequestId, Query) --[[ Line: 16 | Named "getWidgetListInfoSearch" ]]
+	-- upvalues: Url (copy), MakeAXResponseHandlerModule (copy), NormalizeWidgetListInfoResponseToWidgetListInfoModule (copy), ConstantsModule (copy)
+	local GET, GET2 = Callback(`{Url.APIS_URL}marketplace-widgets/v1/widgets/search?{Url:makeQueryString({ requestId = RequestId, query = Query })}`, "GET")
 	
-	return makeAXResponseHandlerModule(var1, normalizeWidgetListInfoResponseToWidgetListInfoModule, {
-		modelMismatchCounter = constantsModule.FETCH_WIDGET_INFO_MODEL_MISMATCH_COUNTER_NAME,
-		latencyCounter = constantsModule.FETCH_WIDGET_INFO_LATENCY_COUNTER_NAME
-	}), var2
+	return MakeAXResponseHandlerModule(GET, NormalizeWidgetListInfoResponseToWidgetListInfoModule, {
+		modelMismatchCounter = ConstantsModule.FETCH_WIDGET_INFO_MODEL_MISMATCH_COUNTER_NAME,
+		latencyCounter = ConstantsModule.FETCH_WIDGET_INFO_LATENCY_COUNTER_NAME
+	}), GET2
 end

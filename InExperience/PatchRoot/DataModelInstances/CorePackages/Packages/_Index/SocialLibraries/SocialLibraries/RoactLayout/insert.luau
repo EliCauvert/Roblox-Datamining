@@ -1,3 +1,3 @@
-﻿return function(p1, p2)
-	return { size = p1, element = p2 }
+﻿return function(Size, Element) --[[ Line: 1 | Named "insert" ]]
+	return { size = Size, element = Element }
 end

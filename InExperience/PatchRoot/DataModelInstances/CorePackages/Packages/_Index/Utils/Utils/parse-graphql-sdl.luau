@@ -1,88 +1,93 @@
-﻿local parent = script.Parent.Parent
-local luauPolyfillModule = require(parent.LuauPolyfill)
-local boolean = luauPolyfillModule.Boolean
-local object = luauPolyfillModule.Object
-local t = {}
-local graphQLModule = require(parent.GraphQL)
-local kind = graphQLModule.Kind
-local parse = graphQLModule.parse
-local source = graphQLModule.Source
-local visit = graphQLModule.visit
-local isTypeSystemDefinitionNode = graphQLModule.isTypeSystemDefinitionNode
-local print = graphQLModule.print
-local commentsModule = require(script.Parent.comments)
-local dedentBlockStringValue = commentsModule.dedentBlockStringValue
-local getLeadingCommentBlock = commentsModule.getLeadingCommentBlock
+﻿local Parent = script.Parent.Parent
+local LuauPolyfillModule = require(Parent.LuauPolyfill)
+local Boolean = LuauPolyfillModule.Boolean
+local Object = LuauPolyfillModule.Object
+local GraphQLModule = require(Parent.GraphQL)
+local Kind = GraphQLModule.Kind
+local ParseFunction = GraphQLModule.parse
+local Source = GraphQLModule.Source
+local VisitFunction = GraphQLModule.visit
+local IsTypeSystemDefinitionNodeFunction = GraphQLModule.isTypeSystemDefinitionNode
+local PrintFunction = GraphQLModule.print
+local CommentsModule = require(script.Parent.comments)
+local DedentBlockStringValueFunction = CommentsModule.dedentBlockStringValue
+local GetLeadingCommentBlockFunction = CommentsModule.getLeadingCommentBlock
 local _ = require(script.Parent.Interfaces)
-local string = luauPolyfillModule.String
-local var1 = nil
-local var2 = nil
+local String1 = LuauPolyfillModule.String
+local Callback = nil
+local Callback1 = nil
 
-local function _(p1)
-	-- upvalues: string (ref)
-	return string.trim(string.gsub(p1, "(#[^*]*)", ""))
+local function _(Text: string) --[[ Line: 51 | Named "removeCommentsAndTrim" ]]
+	-- upvalues: String1 (copy)
+	return String1.trim((string.gsub(Text, "(#[^*]*)", "")))
 end
 
-function t.parseGraphQLSDL(p1, p2, p3)
-	-- upvalues: boolean (ref), string (ref), var1 (write), parse (ref), print (ref), source (ref), kind (ref)
-	local var3 = if p3 ~= nil then {} else p3
-	local t = nil
-	local ok, status = pcall(function()
-		-- upvalues: boolean (copy), var3 (ref), string (copy), p2 (ref), t (write), var1 (copy), parse (copy), print (copy), source (copy), p1 (ref)
-		if boolean.toJSBoolean(var3.commentDescriptions) and string.includes(p2, "#") then
-			t = var1(p2, var3)
+local function parseGraphQLSDL(Location, Text: string, p1) --[[ Line: 56 ]]
+	-- upvalues: Boolean (copy), String1 (copy), Callback (ref), ParseFunction (copy), PrintFunction (copy), Source (copy), Kind (copy)
+	local T = if p1 == nil then {} else p1
+	local Document = nil
+	local Success, Result = pcall(function() --[[ Line: 62 ]]
+		-- upvalues: Boolean (upval), T (copy), String1 (upval), Text (copy), Document (ref), Callback (upval), ParseFunction (upval), PrintFunction (upval), Source (upval), Location (copy)
+		if Boolean.toJSBoolean(T.commentDescriptions) and String1.includes(Text, "#") then
+			Document = Callback(Text, T)
 			
-			if boolean.toJSBoolean(var3.noLocation) then
-				t = parse(print(t), var3)
+			if Boolean.toJSBoolean(T.noLocation) then
+				Document = ParseFunction(PrintFunction(Document), T)
 				
 				return
 			end
 		else
-			t = parse(source.new(p2, p1), var3)
+			Document = ParseFunction(Source.new(Text, Location), T)
 		end
 	end)
 	
-	if not ok then
-		if string.includes(status.message, "EOF") and string.trim(string.gsub(p2, "(#[^*]*)", "")) == "" then
-			t = { kind = kind.DOCUMENT, definitions = {} }
+	if not Success then
+		if String1.includes(Result.message, "EOF") and String1.trim((string.gsub(Text, "(#[^*]*)", ""))) == "" then
+			Document = { kind = Kind.DOCUMENT, definitions = {} }
 		else
-			error(status)
+			error(Result)
 		end
 	end
-	return { location = p1, document = t }
+	return { location = Location, document = Document }
 end
 
-function t.transformCommentsToDescriptions(p1, p2)
-	-- upvalues: parse (ref), object (ref), visit (ref), boolean (ref), var2 (write), getLeadingCommentBlock (ref), dedentBlockStringValue (ref), string (ref), kind (ref)
-	return visit(parse(p1, object.assign({}, if p2 ~= nil then {} else p2, { noLocation = false })), {
-		leave = function(_, p3)
-			-- upvalues: boolean (copy), var2 (copy), getLeadingCommentBlock (copy), dedentBlockStringValue (copy), string (copy), object (copy), kind (copy)
-			if boolean.toJSBoolean(var2(p3)) then
-				local var3 = getLeadingCommentBlock(p3)
+Callback = function(p1, p2) --[[ Line: 122 | Named "transformCommentsToDescriptions" ]]
+	-- upvalues: ParseFunction (copy), Object (copy), VisitFunction (copy), Boolean (copy), Callback1 (ref), GetLeadingCommentBlockFunction (copy), DedentBlockStringValueFunction (copy), String1 (copy), Kind (copy)
+	return (VisitFunction(ParseFunction(p1, Object.assign({}, if p2 == nil then {} else p2, { noLocation = false })), {
+		leave = function(_, p3) --[[ Line: 129 ]]
+			-- upvalues: Boolean (upval), Callback1 (upval), GetLeadingCommentBlockFunction (upval), DedentBlockStringValueFunction (upval), String1 (upval), Object (upval), Kind (upval)
+			if Boolean.toJSBoolean(Callback1(p3)) then
+				local LeadingCommentBlock = GetLeadingCommentBlockFunction(p3)
 				
-				if var3 == nil then return end
-				local var4 = dedentBlockStringValue("\n" .. tostring(var3))
-				
-				return if boolean.toJSBoolean(p3.description) then object.assign({}, p3, {
-					description = object.assign({}, p3.description, {
-						block = true,
-						value = p3.description.value .. "\n" .. var9
+				if LeadingCommentBlock ~= nil then
+					local DedentBlockStringValueResult = DedentBlockStringValueFunction("\n" .. tostring(LeadingCommentBlock))
+					local Block = String1.includes(DedentBlockStringValueResult, "\n")
+					
+					return if Boolean.toJSBoolean(p3.description) then Object.assign({}, p3, {
+						description = Object.assign({}, p3.description, {
+							block = true,
+							value = p3.description.value .. "\n" .. DedentBlockStringValueResult
+						})
+					}) else Object.assign({}, p3, {
+						description = {
+							kind = Kind.STRING,
+							value = DedentBlockStringValueResult,
+							block = Block
+						}
 					})
-				}) else object.assign({}, p3, {
-					description = {
-						kind = kind.STRING,
-						value = var4,
-						block = string.includes(var4, "\n")
-					}
-				})
+				end
 			end
 		end
-	})
+	}))
 end
 
-function t.isDescribable(p1)
-	-- upvalues: isTypeSystemDefinitionNode (ref), kind (ref)
-	return isTypeSystemDefinitionNode(p1) or (if p1.kind ~= kind.FIELD_DEFINITION then if p1.kind ~= kind.INPUT_VALUE_DEFINITION then p1.kind == kind.ENUM_VALUE_DEFINITION else true else true)
+Callback1 = function(p1) --[[ Line: 176 | Named "isDescribable" ]]
+	-- upvalues: IsTypeSystemDefinitionNodeFunction (copy), Kind (copy)
+	return IsTypeSystemDefinitionNodeFunction(p1) or (p1.kind == Kind.FIELD_DEFINITION or (p1.kind == Kind.INPUT_VALUE_DEFINITION or p1.kind == Kind.ENUM_VALUE_DEFINITION))
 end
 
-return t
+return {
+	parseGraphQLSDL = parseGraphQLSDL,
+	transformCommentsToDescriptions = Callback,
+	isDescribable = Callback1
+}

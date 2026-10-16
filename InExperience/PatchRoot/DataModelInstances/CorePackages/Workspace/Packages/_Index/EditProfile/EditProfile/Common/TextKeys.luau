@@ -14,7 +14,7 @@
 	EditDisplayName = "Feature.Profile.Heading.EditDisplayName",
 	AgedUpDisplayName = "Feature.Profile.Heading.AgedUpDisplayName",
 	AgedUpDisplayNameCaption = "Feature.Profile.Label.AgedUpDisplayNameCaption",
-	AgedUpDisplayNameConnectionsCaption = if require(script:FindFirstAncestor("EditProfile").Parent.SharedFlags).FFlagConnectionsToFriendsRename then "Feature.Profile.Label.AgedUpDisplayNameFriendsCaption" else "Feature.Profile.Label.AgedUpDisplayNameConnectionsCaption",
+	AgedUpDisplayNameConnectionsCaption = "Feature.Profile.Label.AgedUpDisplayNameFriendsCaption",
 	AgedUpDisplayNameError = "Feature.Profile.Label.AgedUpDisplayNameFailed",
 	AgedUpDisplayNameMixedCharactersError = "Feature.DisplayName.ErrorMessage.NameMoreThanOneCharacterKind",
 	AgedUpDisplayNameModalCaption = "Feature.Profile.Label.AgedUpDisplayNameModalCaption",

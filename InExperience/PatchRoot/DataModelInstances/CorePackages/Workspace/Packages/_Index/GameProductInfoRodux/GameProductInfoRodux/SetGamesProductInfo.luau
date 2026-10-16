@@ -1,3 +1,3 @@
-﻿return require(script:FindFirstAncestor("GameProductInfoRodux").Parent.Rodux).makeActionCreator(script.Name, function(p1)
-	return { gamesProductInfo = p1 }
+﻿return require(script:FindFirstAncestor("GameProductInfoRodux").Parent.Rodux).makeActionCreator(script.Name, function(GamesProductInfo) --[[ Line: 11 ]]
+	return { gamesProductInfo = GamesProductInfo }
 end)

@@ -1,57 +1,52 @@
-﻿local momentsCommon = script:FindFirstAncestor("MomentsCommon")
-local parent = momentsCommon.Parent
-local reactModule = require(parent.React)
-local useSignalState = require(parent.SignalsReact).useSignalState
-local useAppPolicy = require(parent.UniversalAppPolicy).useAppPolicy
-local sharedFlagsModule = require(parent.SharedFlags)
-local var1 = require(parent.Loggers).Logger:new("Moments.Gating")
-local fFlagEnableArgus = sharedFlagsModule.FFlagEnableArgus
-local fFlagEnableArgusTab = sharedFlagsModule.FFlagEnableArgusTab
-local fFlagArgoEnableMoments = sharedFlagsModule.FFlagArgoEnableMoments
-local debugMomentsGating = game:DefineFastFlag("DebugMomentsGating", false)
-local fFlagGuacMomentsFeatureList = sharedFlagsModule.FFlagGuacMomentsFeatureList
-local fFlagFlyoutRemoveMomentsForArgoEnabled = sharedFlagsModule.FFlagFlyoutRemoveMomentsForArgoEnabled
-local getMomentsCapabilitiesModule = require(momentsCommon.Stores.GetMomentsCapabilities)
-local var2 = if fFlagFlyoutRemoveMomentsForArgoEnabled then require(momentsCommon.Utils.getIsSupportedOnPlatform) else nil
+﻿local MomentsCommon = script:FindFirstAncestor("MomentsCommon")
+local Parent = MomentsCommon.Parent
+local ReactModule = require(Parent.React)
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local SharedFlagsModule = require(Parent.SharedFlags)
+local MomentsGating = require(Parent.Loggers).Logger:new("Moments.Gating")
+local FFlagEnableArgus = SharedFlagsModule.FFlagEnableArgus
+local FFlagEnableArgusTab = SharedFlagsModule.FFlagEnableArgusTab
+local FFlagArgoEnableMoments = SharedFlagsModule.FFlagArgoEnableMoments
+local FFlagMomentsCreationFeatureGate = SharedFlagsModule.FFlagMomentsCreationFeatureGate
+local DebugMomentsGating = game:DefineFastFlag("DebugMomentsGating", false)
+local FFlagFlyoutRemoveMomentsForArgoEnabled = SharedFlagsModule.FFlagFlyoutRemoveMomentsForArgoEnabled
+local GetMomentsCapabilitiesModule = require(MomentsCommon.Stores.GetMomentsCapabilities)
+local GetIsSupportedOnPlatformModule = if FFlagFlyoutRemoveMomentsForArgoEnabled then require(MomentsCommon.Utils.getIsSupportedOnPlatform) else nil
 
-return function()
-	-- upvalues: fFlagEnableArgus (ref), fFlagGuacMomentsFeatureList (ref), getMomentsCapabilitiesModule (ref), useSignalState (ref), useAppPolicy (ref), fFlagFlyoutRemoveMomentsForArgoEnabled (ref), var2 (ref), reactModule (ref), fFlagArgoEnableMoments (ref), fFlagEnableArgusTab (ref), debugMomentsGating (ref), var1 (ref)
-	local var3 = nil
-	local var4 = nil
-	
-	if fFlagGuacMomentsFeatureList then
-		local var5 = getMomentsCapabilitiesModule(false)
-		var3 = useSignalState(var5.getHasMomentsAccess)
-		var4 = useSignalState(var5.getIsInfluencerContentEnabled)
-	end
-	local var6 = if fFlagGuacMomentsFeatureList then var3 else useAppPolicy(function(p1)
-		return p1.getDisplayMomentsMoreTabTile()
-	end)
-	local var7 = if fFlagFlyoutRemoveMomentsForArgoEnabled then var2() else false
-	local var8 = fFlagEnableArgus and var6
-	local var9 = reactModule.useMemo(function()
-		-- upvalues: fFlagArgoEnableMoments (copy), var8 (ref), fFlagEnableArgus (ref), var6 (ref), var7 (ref), fFlagEnableArgusTab (copy), fFlagGuacMomentsFeatureList (copy), var4 (write)
+return function() --[[ Line: 50 | Named "useMomentsGating" ]]
+	-- upvalues: FFlagEnableArgus (copy), GetMomentsCapabilitiesModule (copy), UseSignalStateFunction (copy), FFlagMomentsCreationFeatureGate (copy), FFlagFlyoutRemoveMomentsForArgoEnabled (copy), GetIsSupportedOnPlatformModule (copy), ReactModule (copy), FFlagArgoEnableMoments (copy), FFlagEnableArgusTab (copy), DebugMomentsGating (copy), MomentsGating (copy)
+	local MomentsCapabilitiesModule = GetMomentsCapabilitiesModule(false)
+	local UseSignalStateResult = UseSignalStateFunction(MomentsCapabilitiesModule.getHasMomentsAccess)
+	local UseSignalStateResult1 = UseSignalStateFunction(MomentsCapabilitiesModule.getIsInfluencerContentEnabled)
+	local UseSignalStateResult2 = if FFlagMomentsCreationFeatureGate then UseSignalStateFunction(MomentsCapabilitiesModule.getCanCreateMoments) else nil
+	local IsSupportedOnPlatformModule = if FFlagFlyoutRemoveMomentsForArgoEnabled then GetIsSupportedOnPlatformModule() else false
+	local UseSignalStateResult3 = FFlagEnableArgus and UseSignalStateResult
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 66 ]]
+		-- upvalues: FFlagArgoEnableMoments (upval), UseSignalStateResult3 (copy), FFlagEnableArgus (copy), UseSignalStateResult (copy), IsSupportedOnPlatformModule (copy), FFlagEnableArgusTab (upval), FFlagMomentsCreationFeatureGate (upval), UseSignalStateResult2 (copy), UseSignalStateResult1 (copy)
 		return {
-			isMasterEnabled = fFlagEnableArgus,
-			isAmpPolicyEnabled = var6,
-			isMomentsEnabled = var8,
-			isSupportedOnPlatform = var7,
-			isFlyoutEntryEnabled = var8,
-			isTabEnabled = fFlagArgoEnableMoments and var8 or var8 and fFlagEnableArgusTab,
-			platformIntegrationEnabled = var8,
-			influencerUploadsEnabled = var8 and (if fFlagGuacMomentsFeatureList then var4 else true)
+			isMasterEnabled = FFlagEnableArgus,
+			isAmpPolicyEnabled = UseSignalStateResult,
+			isMomentsEnabled = UseSignalStateResult3,
+			isSupportedOnPlatform = IsSupportedOnPlatformModule,
+			isFlyoutEntryEnabled = UseSignalStateResult3,
+			isTabEnabled = FFlagArgoEnableMoments and UseSignalStateResult3 or UseSignalStateResult3 and FFlagEnableArgusTab,
+			isCreationEnabled = UseSignalStateResult3 and (not FFlagMomentsCreationFeatureGate or UseSignalStateResult2),
+			platformIntegrationEnabled = UseSignalStateResult3,
+			influencerUploadsEnabled = UseSignalStateResult3 and UseSignalStateResult1
 		}
 	end, {
-		fFlagEnableArgus, var6, var8, var7, var3, var4
+		FFlagEnableArgus, UseSignalStateResult, UseSignalStateResult3,
+		IsSupportedOnPlatformModule, UseSignalStateResult, UseSignalStateResult1,
+		if FFlagMomentsCreationFeatureGate then UseSignalStateResult2 else false
 	})
-	reactModule.useEffect(function()
-		-- upvalues: debugMomentsGating (copy), var1 (copy), var9 (ref), fFlagEnableArgusTab (copy), fFlagArgoEnableMoments (copy)
-		if debugMomentsGating then
-			var1:debug("Moments.Gating master={} ampPolicy={} moments={} supportedOnPlatform={} platformIntegration={} influencerUploads={} flyout={} tab={} forceTab={} forceAll={}", tostring(var9.isMasterEnabled), tostring(var9.isAmpPolicyEnabled), tostring(var9.isMomentsEnabled), tostring(var9.isSupportedOnPlatform), tostring(var9.platformIntegrationEnabled), tostring(var9.influencerUploadsEnabled), tostring(var9.isFlyoutEntryEnabled), tostring(var9.isTabEnabled), tostring(fFlagEnableArgusTab), tostring(fFlagArgoEnableMoments))
+	ReactModule.useEffect(function() --[[ Line: 95 ]]
+		-- upvalues: DebugMomentsGating (upval), MomentsGating (upval), UseMemoResult (copy), FFlagEnableArgusTab (upval), FFlagArgoEnableMoments (upval)
+		if DebugMomentsGating then
+			MomentsGating:debug("Moments.Gating master={} ampPolicy={} moments={} supportedOnPlatform={} platformIntegration={} influencerUploads={} creation={} flyout={} tab={} forceTab={} forceAll={}", tostring(UseMemoResult.isMasterEnabled), tostring(UseMemoResult.isAmpPolicyEnabled), tostring(UseMemoResult.isMomentsEnabled), tostring(UseMemoResult.isSupportedOnPlatform), tostring(UseMemoResult.platformIntegrationEnabled), tostring(UseMemoResult.influencerUploadsEnabled), tostring(UseMemoResult.isCreationEnabled), tostring(UseMemoResult.isFlyoutEntryEnabled), tostring(UseMemoResult.isTabEnabled), tostring(FFlagEnableArgusTab), (tostring(FFlagArgoEnableMoments)))
 			
 			return
 		end
-	end, { debugMomentsGating, fFlagEnableArgusTab, var9 })
+	end, { DebugMomentsGating, FFlagEnableArgusTab, UseMemoResult })
 	
-	return var9
+	return UseMemoResult
 end

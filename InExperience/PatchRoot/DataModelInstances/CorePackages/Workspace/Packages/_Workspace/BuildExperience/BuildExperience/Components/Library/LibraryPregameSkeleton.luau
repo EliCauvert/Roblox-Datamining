@@ -1,37 +1,37 @@
-﻿local localizationService = game:GetService("LocalizationService")
-local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local localizationModule = require(parent.Localization)
-local reactModule = require(parent.React)
-local robloxAppLocalesModule = require(parent.RobloxAppLocales)
-local buildExperienceCompositionStyleSheetModule = require(buildExperience.Components.BuildExperienceCompositionStyleSheet)
-local libraryBrowserViewModule = require(script.Parent.LibraryBrowser.LibraryBrowserView)
-local libraryExperienceViewModule = require(script.Parent.LibraryExperienceView)
-local libraryThemeProviderModule = require(script.Parent.LibraryThemeProvider)
-local useLibraryStringsModule = require(script.Parent.useLibraryStrings)
+﻿local LocalizationService = game:GetService("LocalizationService")
+local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local LocalizationModule = require(Parent.Localization)
+local ReactModule = require(Parent.React)
+local RobloxAppLocalesModule = require(Parent.RobloxAppLocales)
+local BuildExperienceCompositionStyleSheetModule = require(BuildExperience.Components.BuildExperienceCompositionStyleSheet)
+local LibraryBrowserViewModule = require(script.Parent.LibraryBrowser.LibraryBrowserView)
+local LibraryExperienceViewModule = require(script.Parent.LibraryExperienceView)
+local LibraryThemeProviderModule = require(script.Parent.LibraryThemeProvider)
+local UseLibraryStringsModule = require(script.Parent.useLibraryStrings)
 
-local function noop() end
+local function noop() --[[ Line: 21 ]] end
 
-local function LibraryPregameContent(p1)
-	-- upvalues: useLibraryStringsModule (ref), noop (ref), reactModule (ref), libraryExperienceViewModule (ref), libraryBrowserViewModule (ref)
-	local var1 = useLibraryStringsModule()
+local function LibraryPregameContent(p1) --[[ Line: 23 ]]
+	-- upvalues: UseLibraryStringsModule (copy), noop (copy), ReactModule (copy), LibraryExperienceViewModule (copy), LibraryBrowserViewModule (copy)
+	local UseLibraryStringsModuleResult = UseLibraryStringsModule()
 	
-	return reactModule.createElement(libraryExperienceViewModule, {
+	return ReactModule.createElement(LibraryExperienceViewModule, {
 		isOpen = true,
-		assetLabel = var1.title,
-		worldLabel = var1.world,
-		title = var1.title,
-		searchPlaceholder = var1.searchPlaceholder,
+		assetLabel = UseLibraryStringsModuleResult.title,
+		worldLabel = UseLibraryStringsModuleResult.world,
+		title = UseLibraryStringsModuleResult.title,
+		searchPlaceholder = UseLibraryStringsModuleResult.searchPlaceholder,
 		onShowLibrary = noop,
 		onShowWorld = noop,
 		onLeave = p1.onCancel
 	}, {
-		Browser = reactModule.createElement(libraryBrowserViewModule, {
+		Browser = ReactModule.createElement(LibraryBrowserViewModule, {
 			status = "Loading",
 			categories = {},
-			strings = var1,
+			strings = UseLibraryStringsModuleResult,
 			worldCutout = {
-				title = var1.world,
+				title = UseLibraryStringsModuleResult.world,
 				onActivated = noop,
 				onRectChanged = noop
 			}
@@ -39,24 +39,24 @@ local function LibraryPregameContent(p1)
 	})
 end
 
-return function(p1)
-	-- upvalues: reactModule (ref), robloxAppLocalesModule (ref), localizationService (ref), localizationModule (ref), libraryThemeProviderModule (ref), buildExperienceCompositionStyleSheetModule (ref), LibraryPregameContent (ref)
-	return reactModule.createElement("ScreenGui", {
+return function(p1) --[[ Line: 51 | Named "LibraryPregameSkeleton" ]]
+	-- upvalues: ReactModule (copy), RobloxAppLocalesModule (copy), LocalizationService (copy), LocalizationModule (copy), LibraryThemeProviderModule (copy), BuildExperienceCompositionStyleSheetModule (copy), LibraryPregameContent (copy)
+	return ReactModule.createElement("ScreenGui", {
 		ResetOnSpawn = false,
 		ClipToDeviceSafeArea = false,
 		DisplayOrder = p1.displayOrder,
 		ScreenInsets = Enum.ScreenInsets.DeviceSafeInsets,
 		ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 	}, {
-		Localization = reactModule.createElement(localizationModule.LocalizationProvider, {
-			localization = reactModule.useMemo(function()
-				-- upvalues: robloxAppLocalesModule (copy), localizationService (copy)
-				return robloxAppLocalesModule.Localization.new(localizationService.RobloxLocaleId)
+		Localization = ReactModule.createElement(LocalizationModule.LocalizationProvider, {
+			localization = ReactModule.useMemo(function() --[[ Line: 52 ]]
+				-- upvalues: RobloxAppLocalesModule (upval), LocalizationService (upval)
+				return RobloxAppLocalesModule.Localization.new(LocalizationService.RobloxLocaleId)
 			end, {})
 		}, {
-			Theme = reactModule.createElement(libraryThemeProviderModule, { displayOrder = p1.displayOrder }, {
-				CompositionStyleSheet = reactModule.createElement(buildExperienceCompositionStyleSheetModule),
-				Content = reactModule.createElement(LibraryPregameContent, p1)
+			Theme = ReactModule.createElement(LibraryThemeProviderModule, { displayOrder = p1.displayOrder }, {
+				CompositionStyleSheet = ReactModule.createElement(BuildExperienceCompositionStyleSheetModule),
+				Content = ReactModule.createElement(LibraryPregameContent, p1)
 			})
 		})
 	})

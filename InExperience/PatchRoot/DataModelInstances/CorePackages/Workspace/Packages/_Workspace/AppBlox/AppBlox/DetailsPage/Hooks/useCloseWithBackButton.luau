@@ -1,23 +1,23 @@
-﻿local parent = script:FindFirstAncestor("AppBlox").Parent
-local inputHandlersModule = require(parent.InputHandlers)
-local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
-local focusNavigationEventNameEnum = require(parent.FocusNavigationUtils).FocusNavigationEventNameEnum
-local reactModule = require(parent.React)
-local t = {
-	[Enum.KeyCode.ButtonB] = focusNavigationEventNameEnum.NavigateBack,
-	[Enum.KeyCode.Escape] = focusNavigationEventNameEnum.NavigateBack
+﻿local Parent = script:FindFirstAncestor("AppBlox").Parent
+local InputHandlersModule = require(Parent.InputHandlers)
+local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
+local FocusNavigationEventNameEnum = require(Parent.FocusNavigationUtils).FocusNavigationEventNameEnum
+local ReactModule = require(Parent.React)
+local config = {
+	[Enum.KeyCode.ButtonB] = FocusNavigationEventNameEnum.NavigateBack,
+	[Enum.KeyCode.Escape] = FocusNavigationEventNameEnum.NavigateBack
 }
 
-return function(p1, p2)
-	-- upvalues: reactModule (ref), inputHandlersModule (ref), reactFocusNavigationModule (ref), t (ref), focusNavigationEventNameEnum (ref)
-	return reactFocusNavigationModule.useEventHandler(focusNavigationEventNameEnum.NavigateBack, reactModule.useMemo(function()
-		-- upvalues: inputHandlersModule (copy), p2 (ref)
-		return inputHandlersModule.onRelease(function(p3)
-			-- upvalues: p2 (copy)
-			if p2 then
-				p2()
-				p3:cancel()
+return function(p1, Callback) --[[ Line: 15 | Named "useCloseWithBackButton" ]]
+	-- upvalues: ReactModule (copy), InputHandlersModule (copy), ReactFocusNavigationModule (copy), config (copy), FocusNavigationEventNameEnum (copy)
+	return (ReactFocusNavigationModule.useEventHandler(FocusNavigationEventNameEnum.NavigateBack, ReactModule.useMemo(function() --[[ Line: 16 ]]
+		-- upvalues: InputHandlersModule (upval), Callback (copy)
+		return InputHandlersModule.onRelease(function(p2) --[[ Line: 17 ]]
+			-- upvalues: Callback (upval)
+			if Callback then
+				Callback()
+				p2:cancel()
 			end
 		end)
-	end, { p2 }), nil, reactFocusNavigationModule.useEventMap(t, p1))
+	end, { Callback }), nil, (ReactFocusNavigationModule.useEventMap(config, p1))))
 end

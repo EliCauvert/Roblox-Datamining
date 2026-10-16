@@ -1,68 +1,66 @@
-﻿local genericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
-local parent = genericAbuseReporting.Parent
-local reactModule = require(parent.React)
-local analyticsProviderModule = require(genericAbuseReporting.Analytics.AnalyticsProvider)
-local layerCollectorProvider = require(parent.UIBlox).Core.Layout.LayerCollector.LayerCollectorProvider
-local localizationKeysProviderModule = require(genericAbuseReporting.LocalizationKeys.LocalizationKeysProvider)
-local foundationProvider = require(parent.Foundation).FoundationProvider
-local dualDropdownReportModule = require(script.Parent.DualDropdownReport)
-local reportCompleteDialogModule = require(genericAbuseReporting.Dialogs.ReportCompleteDialog)
-local reportFailedDialogModule = require(genericAbuseReporting.Dialogs.ReportFailedDialog)
-local _ = require(genericAbuseReporting.Analytics.submitAnalytics)
-local useActiveDialogModule = require(script.Parent.useActiveDialog)
-local _ = { Form = "Form", Complete = "Complete", Error = "Error" }
+﻿local GenericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
+local Parent = GenericAbuseReporting.Parent
+local ReactModule = require(Parent.React)
+local AnalyticsProviderModule = require(GenericAbuseReporting.Analytics.AnalyticsProvider)
+local LayerCollectorProvider = require(Parent.UIBlox).Core.Layout.LayerCollector.LayerCollectorProvider
+local LocalizationKeysProviderModule = require(GenericAbuseReporting.LocalizationKeys.LocalizationKeysProvider)
+local FoundationProvider = require(Parent.Foundation).FoundationProvider
+local DualDropdownReportModule = require(script.Parent.DualDropdownReport)
+local ReportCompleteDialogModule = require(GenericAbuseReporting.Dialogs.ReportCompleteDialog)
+local ReportFailedDialogModule = require(GenericAbuseReporting.Dialogs.ReportFailedDialog)
+local _ = require(GenericAbuseReporting.Analytics.submitAnalytics)
+local UseActiveDialogModule = require(script.Parent.useActiveDialog)
 
-return function(p1)
-	-- upvalues: useActiveDialogModule (ref), reactModule (ref), layerCollectorProvider (ref), foundationProvider (ref), analyticsProviderModule (ref), localizationKeysProviderModule (ref), dualDropdownReportModule (ref), reportCompleteDialogModule (ref), reportFailedDialogModule (ref)
-	local var1, var2 = useActiveDialogModule()
-	local var3 = reactModule.useCallback(function(p2, p3, p4)
-		-- upvalues: p1 (ref), var2 (ref)
-		local var4 = if p1.onSubmitProps.hasNextSteps then p1.onSubmitProps.onProceedToNextStep(p2, p3, p4) else p1.onSubmitProps.onSubmit(p2, p3, p4)
+return function(p1) --[[ Line: 52 | Named "AREntrypoint" ]]
+	-- upvalues: UseActiveDialogModule (copy), ReactModule (copy), LayerCollectorProvider (copy), FoundationProvider (copy), AnalyticsProviderModule (copy), LocalizationKeysProviderModule (copy), DualDropdownReportModule (copy), ReportCompleteDialogModule (copy), ReportFailedDialogModule (copy)
+	local UseActiveDialogModuleResult, UseActiveDialogModuleResult2 = UseActiveDialogModule()
+	local UseResult = ReactModule.useCallback(function(p2, p3, p4) --[[ Line: 55 ]]
+		-- upvalues: p1 (copy), UseActiveDialogModuleResult2 (copy)
+		local OnProceedToNextStepResult = if p1.onSubmitProps.hasNextSteps then p1.onSubmitProps.onProceedToNextStep(p2, p3, p4) else p1.onSubmitProps.onSubmit(p2, p3, p4)
 		
-		if var4 then
-			var2("Complete")
+		if OnProceedToNextStepResult then
+			UseActiveDialogModuleResult2("Complete")
 			
-			return var4
+			return OnProceedToNextStepResult
+		else
+			UseActiveDialogModuleResult2("Error")
+			
+			return OnProceedToNextStepResult
 		end
-		var2("Error")
-		
-		return var4
 	end, { p1.onSubmitProps })
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 67 ]]
+		-- upvalues: UseActiveDialogModuleResult2 (copy)
+		UseActiveDialogModuleResult2("Form")
+	end, {})
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 71 ]]
+		-- upvalues: p1 (copy)
+		if p1.onComplete then
+			p1.onComplete()
+		end
+	end, { p1.onComplete })
 	
-	return reactModule.createElement(layerCollectorProvider, {}, {
-		FoundationProvider = reactModule.createElement(foundationProvider, { colorMode = "Dark" }, {
-			analytics = reactModule.createElement(analyticsProviderModule, {
+	return ReactModule.createElement(LayerCollectorProvider, {}, {
+		FoundationProvider = ReactModule.createElement(FoundationProvider, { colorMode = "Dark" }, {
+			analytics = ReactModule.createElement(AnalyticsProviderModule, {
 				onBeforeSubmitAnalytics = p1.onBeforeSubmitAnalytics,
 				onSubmitAnalytics = p1.onSubmitAnalytics
 			}, {
-				localizationKeys = reactModule.createElement(localizationKeysProviderModule, { localizationKeys = p1.localizationKeys }, {
-					submitDialog = var1 == "Form" and reactModule.createElement(dualDropdownReportModule, {
+				localizationKeys = ReactModule.createElement(LocalizationKeysProviderModule, { localizationKeys = p1.localizationKeys }, {
+					submitDialog = UseActiveDialogModuleResult == "Form" and ReactModule.createElement(DualDropdownReportModule, {
 						analyticsContext = p1.analyticsContext,
 						reportProblems = p1.reportProblems,
 						reportSurfaces = p1.reportSurfaces,
 						onSubmitProps = if p1.onSubmitProps.hasNextSteps then {
 							hasNextSteps = p1.onSubmitProps.hasNextSteps,
-							onProceedToNextStep = var3
+							onProceedToNextStep = UseResult
 						} else {
 							hasNextSteps = p1.onSubmitProps.hasNextSteps,
-							onSubmit = var3
+							onSubmit = UseResult
 						},
 						onCloseProps = p1.onCloseProps
 					}),
-					completeDialog = var1 == "Complete" and reactModule.createElement(reportCompleteDialogModule, {
-						onDismiss = reactModule.useCallback(function()
-							-- upvalues: p1 (ref)
-							if p1.onComplete then
-								p1.onComplete()
-							end
-						end, { p1.onComplete })
-					}),
-					errorDialog = var1 == "Error" and reactModule.createElement(reportFailedDialogModule, {
-						onDismiss = reactModule.useCallback(function()
-							-- upvalues: var2 (ref)
-							var2("Form")
-						end, {})
-					})
+					completeDialog = UseActiveDialogModuleResult == "Complete" and ReactModule.createElement(ReportCompleteDialogModule, { onDismiss = UseResult2 }),
+					errorDialog = UseActiveDialogModuleResult == "Error" and ReactModule.createElement(ReportFailedDialogModule, { onDismiss = UseResult1 })
 				})
 			})
 		})

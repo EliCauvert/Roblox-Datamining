@@ -1,52 +1,61 @@
-﻿local squads = script:FindFirstAncestor("Squads")
-local parent = squads.Parent
-local experienceService = require(parent.ExperienceService).ExperienceService
-local appSquadTopBannerEventReceiverModule = require(script.Parent.AppSquadTopBannerEventReceiver)
-local dependenciesModule = require(squads.dependencies)
-local react = dependenciesModule.React
-local roduxSquads = dependenciesModule.RoduxSquads
-local squadEventReceiverModule = require(parent.SquadsCore.SquadEventReceiver)
-local useDispatch = dependenciesModule.Hooks.useDispatch
-local useSelector = dependenciesModule.Hooks.useSelector
-local useCanAccessPartyModule = require(squads.Hooks.useCanAccessParty)
-local currentSquadUpdated = roduxSquads.Actions.CurrentSquadUpdated
+﻿local Squads = script:FindFirstAncestor("Squads")
+local Parent = Squads.Parent
+local ExperienceService = require(Parent.ExperienceService).ExperienceService
+local AppSquadTopBannerEventReceiverModule = require(script.Parent.AppSquadTopBannerEventReceiver)
+local DependenciesModule = require(Squads.dependencies)
+local React = DependenciesModule.React
+local RoduxSquads = DependenciesModule.RoduxSquads
+local SquadEventReceiverModule = require(Parent.SquadsCore.SquadEventReceiver)
+local GetSquadExperienceInviteStoreFunction = require(Parent.SquadsCore.Stores).GetSquadExperienceInviteStore
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local UseDispatchFunction = DependenciesModule.Hooks.useDispatch
+local UseSelectorFunction = DependenciesModule.Hooks.useSelector
+local UseCanAccessPartyModule = require(Squads.Hooks.useCanAccessParty)
+local CurrentSquadUpdatedFunction = RoduxSquads.Actions.CurrentSquadUpdated
+local FFlagUseSignalsForSquadExperienceInvite = DependenciesModule.SharedFlags.FFlagUseSignalsForSquadExperienceInvite
 
-return function(_)
-	-- upvalues: useDispatch (ref), react (ref), useSelector (ref), experienceService (ref), roduxSquads (ref), useCanAccessPartyModule (ref), currentSquadUpdated (ref), appSquadTopBannerEventReceiverModule (ref), squadEventReceiverModule (ref)
-	local var1 = useDispatch()
-	local var2 = useSelector(react.useCallback(function(p1)
+return function(_) --[[ Line: 22 ]]
+	-- upvalues: UseDispatchFunction (copy), React (copy), FFlagUseSignalsForSquadExperienceInvite (copy), UseSignalStateFunction (copy), GetSquadExperienceInviteStoreFunction (copy), UseSelectorFunction (copy), ExperienceService (copy), RoduxSquads (copy), UseCanAccessPartyModule (copy), CurrentSquadUpdatedFunction (copy), AppSquadTopBannerEventReceiverModule (copy), SquadEventReceiverModule (copy)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseResult = React.useCallback(function(p1) --[[ Line: 25 ]]
 		return if p1.Squad and p1.Squad.Squad then p1.Squad.Squad.currentExperienceInvite else nil
-	end, {}))
-	local var3 = useSelector(react.useCallback(function(p1)
+	end, {})
+	local UseSignalStateResult = if FFlagUseSignalsForSquadExperienceInvite then UseSignalStateFunction(GetSquadExperienceInviteStoreFunction(false).getCurrentExperienceInvite) else UseSelectorFunction(UseResult)
+	local UseSelectorResult = UseSelectorFunction((React.useCallback(function(p1) --[[ Line: 32 ]]
 		return if p1.Squad and p1.Squad.Squad and p1.Squad.Squad.currentSquadPersist then p1.Squad.Squad.currentSquadPersist.isPaused else false
-	end, {}))
-	react.useEffect(function()
-		-- upvalues: experienceService (copy), roduxSquads (copy), var1 (ref)
-		experienceService:RegisterForExperienceJoin(function()
-			-- upvalues: roduxSquads (copy), var1 (copy)
-			roduxSquads.PersistManagers.currentSquadPersistManager.pause(var1)
+	end, {})))
+	React.useEffect(function() --[[ Line: 42 ]]
+		-- upvalues: ExperienceService (upval), RoduxSquads (upval), UseDispatchResult (copy)
+		ExperienceService:RegisterForExperienceJoin(function() --[[ Line: 43 ]]
+			-- upvalues: RoduxSquads (upval), UseDispatchResult (upval)
+			RoduxSquads.PersistManagers.currentSquadPersistManager.pause(UseDispatchResult)
 		end)
-		experienceService:RegisterForExperienceLeave(function()
-			-- upvalues: roduxSquads (copy), var1 (copy)
-			roduxSquads.PersistManagers.currentSquadPersistManager.persistAndUpdateState(var1)
+		ExperienceService:RegisterForExperienceLeave(function() --[[ Line: 48 ]]
+			-- upvalues: RoduxSquads (upval), UseDispatchResult (upval)
+			RoduxSquads.PersistManagers.currentSquadPersistManager.persistAndUpdateState(UseDispatchResult)
 		end)
-	end, { var1 })
-	react.useEffect(function()
-		-- upvalues: var2 (ref), var3 (ref), var1 (ref), roduxSquads (copy)
-		if var2 and var3 then
-			var1(roduxSquads.Actions.CurrentExperienceInviteDismissed(var2.notification.notificationId))
+	end, { UseDispatchResult })
+	React.useEffect(function() --[[ Line: 54 ]]
+		-- upvalues: UseSignalStateResult (copy), UseSelectorResult (copy), FFlagUseSignalsForSquadExperienceInvite (upval), GetSquadExperienceInviteStoreFunction (upval), UseDispatchResult (copy), RoduxSquads (upval)
+		if UseSignalStateResult and UseSelectorResult then
+			if FFlagUseSignalsForSquadExperienceInvite then
+				GetSquadExperienceInviteStoreFunction(false).currentExperienceInviteDismissed(UseSignalStateResult.notification.notificationId)
+				
+				return
+			end
+			UseDispatchResult(RoduxSquads.Actions.CurrentExperienceInviteDismissed(UseSignalStateResult.notification.notificationId))
 		end
-	end, { var2, var3 })
-	local var4 = useCanAccessPartyModule()
-	react.useEffect(function()
-		-- upvalues: var4 (ref), var1 (ref), currentSquadUpdated (copy)
-		if not var4 then
-			var1(currentSquadUpdated(nil))
+	end, { UseSignalStateResult, UseSelectorResult })
+	local UseCanAccessPartyModuleResult = UseCanAccessPartyModule()
+	React.useEffect(function() --[[ Line: 76 ]]
+		-- upvalues: UseCanAccessPartyModuleResult (copy), UseDispatchResult (copy), CurrentSquadUpdatedFunction (upval)
+		if not UseCanAccessPartyModuleResult then
+			UseDispatchResult(CurrentSquadUpdatedFunction(nil))
 		end
-	end, { var4 })
+	end, { UseCanAccessPartyModuleResult })
 	
-	return react.createElement(react.Fragment, nil, {
-		appSquadTopBannerEventReceiver = react.createElement(appSquadTopBannerEventReceiverModule),
-		squadEventReceiver = if var4 and not var3 then react.createElement(squadEventReceiverModule) else nil
+	return React.createElement(React.Fragment, nil, {
+		appSquadTopBannerEventReceiver = React.createElement(AppSquadTopBannerEventReceiverModule),
+		squadEventReceiver = if UseCanAccessPartyModuleResult and not UseSelectorResult then React.createElement(SquadEventReceiverModule) else nil
 	})
 end

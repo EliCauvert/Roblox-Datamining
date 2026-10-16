@@ -1,11 +1,11 @@
-﻿local roact = require(script:FindFirstAncestor("FriendsLanding").dependencies).Roact
+﻿local Roact = require(script:FindFirstAncestor("FriendsLanding").dependencies).Roact
 
-return function(p1, p2)
-	-- upvalues: roact (ref)
-	local var1 = p1
+return function(Element, List) --[[ Line: 6 ]]
+	-- upvalues: Roact (copy)
+	local Element1 = Element
 	
-	for i, v in p2 do
-		var1 = roact.createElement(v[1], v[2], { var1 })
+	for _, value in List do
+		Element1 = Roact.createElement(value[1], value[2], { Element1 })
 	end
-	return var1
+	return Element1
 end

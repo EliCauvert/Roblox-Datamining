@@ -1,123 +1,152 @@
-﻿local shareSheet = script:FindFirstAncestor("ShareSheet")
-local parent = shareSheet.Parent
-local reactModule = require(parent.React)
-local _ = require(parent.AppChat.GetConversationListStore)
-local fetchConversationListPageToSignalsModule = require(parent.AppChat.fetchConversationListPageToSignals)
-local shareSheetConstantsModule = require(shareSheet.ShareSheetConstants)
-local var1 = shareSheetConstantsModule.FIntShareSheetPeoplePickerLoadMoreThresholdWindowHundredthsPercent / 10000
+﻿local ShareSheet = script:FindFirstAncestor("ShareSheet")
+local Parent = ShareSheet.Parent
+local ReactModule = require(Parent.React)
+local _ = require(Parent.AppChat.GetConversationListStore)
+local FetchConversationListPageToSignalsModule = require(Parent.AppChat.fetchConversationListPageToSignals)
+local FFlagShareSheetFriendsSort = require(Parent.SharedFlags).FFlagShareSheetFriendsSort
+local _ = require(ShareSheet.Types)
+local ShareSheetConstantsModule = require(ShareSheet.ShareSheetConstants)
+local FIntShareSheetPeoplePickerLoadMoreThresholdWindowHundredthsPercentRatio = ShareSheetConstantsModule.FIntShareSheetPeoplePickerLoadMoreThresholdWindowHundredthsPercent / 10000
 
-local function _(p1, p2, p3)
-	-- upvalues: var1 (ref)
-	return if p2 <= 0 then false else p3 - p2 * var1 <= p1 + p2
+local function _(p1: number, p2: number, p3): boolean --[[ Line: 42 | Named "isViewportNearEnd" ]]
+	-- upvalues: FIntShareSheetPeoplePickerLoadMoreThresholdWindowHundredthsPercentRatio (copy)
+	return p2 > 0 and p3 - p2 * FIntShareSheetPeoplePickerLoadMoreThresholdWindowHundredthsPercentRatio <= p1 + p2
 end
 
-local _ = function(p1, p2)
+local _ = function(p1: number, p2): boolean --[[ Line: 52 | Named "isViewportUnderfilled" ]]
 	return p1 > 0 and p2 <= p1
 end
 
-return function(p1)
-	-- upvalues: shareSheetConstantsModule (ref), reactModule (ref), fetchConversationListPageToSignalsModule (ref), var1 (ref)
-	local isPeoplePickerDisplayed = p1.isPeoplePickerDisplayed
-	local isEligibilityLoading = p1.isEligibilityLoading or p1.listStatus.isFetchingConversations == true
-	local var2 = if not isEligibilityLoading and (p1.listStatus.oldestConversationIsFetched ~= true and p1.conversationCount < shareSheetConstantsModule.FIntShareSheetPeoplePickerMaxConversations) then p1.listStatus.nextCursor or "" else ""
-	local var3 = reactModule.useRef(nil)
-	local var4 = reactModule.useRef(nil)
-	local var5 = reactModule.useCallback(function()
-		-- upvalues: var2 (ref), var3 (ref), fetchConversationListPageToSignalsModule (copy)
-		if var2 == "" or var3.current == var2 then
+return function(p1) --[[ Line: 56 | Named "usePeoplePickerPagination" ]]
+	-- upvalues: FFlagShareSheetFriendsSort (copy), ShareSheetConstantsModule (copy), ReactModule (copy), FetchConversationListPageToSignalsModule (copy), FIntShareSheetPeoplePickerLoadMoreThresholdWindowHundredthsPercentRatio (copy)
+	local IsPeoplePickerDisplayed = p1.isPeoplePickerDisplayed
+	local HasNextPageToken = nil
+	local NextPageToken = nil
+	local IsFetchingNextPage = nil
+	
+	if FFlagShareSheetFriendsSort then
+		local ListResult = p1.listResult
+		IsFetchingNextPage = ListResult.isFetchingNextPage
+		HasNextPageToken = ListResult.nextPageToken ~= nil
+		NextPageToken = ListResult.nextPageToken
+	else
+		IsFetchingNextPage = p1.listStatus.isFetchingConversations == true
+		HasNextPageToken = p1.listStatus.oldestConversationIsFetched ~= true
+		NextPageToken = p1.listStatus.nextCursor
+	end
+	local IsEligibilityLoading = p1.isEligibilityLoading or IsFetchingNextPage
+	local NextPageToken1 = not IsEligibilityLoading and (HasNextPageToken and p1.conversationCount < ShareSheetConstantsModule.FIntShareSheetPeoplePickerMaxConversations) and NextPageToken or ""
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 77 ]]
+		-- upvalues: NextPageToken1 (copy), UseRefResult (copy), FFlagShareSheetFriendsSort (upval), p1 (copy), FetchConversationListPageToSignalsModule (upval)
+		if NextPageToken1 == "" or UseRefResult.current == NextPageToken1 then return end
+		UseRefResult.current = NextPageToken1
+		
+		if FFlagShareSheetFriendsSort then
+			p1.loadMore(NextPageToken1)
+			
 			return
+		else
+			FetchConversationListPageToSignalsModule({ cursor = NextPageToken1 })
 		end
-		var3.current = var2
-		fetchConversationListPageToSignalsModule({ cursor = var2 })
-	end, { var2 })
-	local var6 = reactModule.useRef({
+	end, { NextPageToken1, p1.loadMore })
+	local UseRefResult2 = ReactModule.useRef({
 		contentLength = nil,
 		scrollOffset = 0,
 		viewportLength = nil
 	})
-	local var7, var8 = reactModule.useState(nil)
-	local var9 = reactModule.useCallback(function()
-		-- upvalues: var4 (ref), var1 (copy), var6 (ref)
-		local current = var4.current
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	local UseResult1 = ReactModule.useCallback(function(): boolean --[[ Line: 95 ]]
+		-- upvalues: UseRefResult1 (copy), FIntShareSheetPeoplePickerLoadMoreThresholdWindowHundredthsPercentRatio (upval), UseRefResult2 (copy)
+		local Current = UseRefResult1.current
 		
-		if current then
-			local y = current.AbsoluteWindowSize.Y
+		if Current then
+			local Y: number = Current.CanvasPosition.Y
+			local Y1: number = Current.AbsoluteWindowSize.Y
+			local Y2 = Current.AbsoluteCanvasSize.Y
 			
-			return if y <= 0 then false else current.AbsoluteCanvasSize.Y - y * var1 <= current.CanvasPosition.Y + y
+			return Y1 > 0 and Y2 - Y1 * FIntShareSheetPeoplePickerLoadMoreThresholdWindowHundredthsPercentRatio <= Y + Y1
 		end
-		local current_1 = var6.current
+		local Current1 = UseRefResult2.current
 		
-		if current_1.viewportLength == nil or current_1.contentLength == nil then
+		if Current1.viewportLength == nil or Current1.contentLength == nil then
 			return false
-		end
-		local viewportLength = current_1.viewportLength
-		
-		return if viewportLength <= 0 then false else current_1.contentLength - viewportLength * var1 <= current_1.scrollOffset + viewportLength
-	end, {})
-	local var10 = reactModule.useCallback(function()
-		-- upvalues: var6 (ref), isPeoplePickerDisplayed (ref), var5 (ref)
-		local current = var6.current
-		
-		if isPeoplePickerDisplayed and current.viewportLength ~= nil and current.contentLength ~= nil then
-			local viewportLength = current.viewportLength
+		else
+			local ScrollOffset: number = Current1.scrollOffset
+			local ViewportLength: number = Current1.viewportLength
+			local ContentLength = Current1.contentLength
 			
-			if viewportLength > 0 and current.contentLength <= viewportLength then
-				var5()
+			return ViewportLength > 0 and ContentLength - ViewportLength * FIntShareSheetPeoplePickerLoadMoreThresholdWindowHundredthsPercentRatio <= ScrollOffset + ViewportLength
+		end
+	end, {})
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 112 ]]
+		-- upvalues: UseRefResult2 (copy), IsPeoplePickerDisplayed (copy), UseResult (copy)
+		local Current = UseRefResult2.current
+		
+		if IsPeoplePickerDisplayed and Current.viewportLength ~= nil and Current.contentLength ~= nil then
+			local ViewportLength: number = Current.viewportLength
+			local ContentLength = Current.contentLength
+			
+			if ViewportLength > 0 and ViewportLength >= ContentLength then
+				UseResult()
 			end
 		end
-	end, { isPeoplePickerDisplayed, var5 })
-	local var11 = reactModule.useCallback(function(p2)
-		-- upvalues: var6 (ref), var10 (ref)
-		var6.current.contentLength = p2
-		var10()
-	end, { var10 })
-	local var12 = reactModule.useCallback(function(p2)
-		-- upvalues: var6 (ref), isPeoplePickerDisplayed (ref), var9 (ref), var3 (ref)
-		var6.current.scrollOffset = p2
+	end, { IsPeoplePickerDisplayed, UseResult })
+	local UseResult3 = ReactModule.useCallback(function(ContentLength) --[[ Line: 123 ]]
+		-- upvalues: UseRefResult2 (copy), UseResult2 (copy)
+		UseRefResult2.current.contentLength = ContentLength
+		UseResult2()
+	end, { UseResult2 })
+	local UseResult4 = ReactModule.useCallback(function(ScrollOffset) --[[ Line: 127 ]]
+		-- upvalues: UseRefResult2 (copy), IsPeoplePickerDisplayed (copy), UseResult1 (copy), UseRefResult (copy)
+		UseRefResult2.current.scrollOffset = ScrollOffset
 		
-		if not isPeoplePickerDisplayed then return end
-		if not var9() then
-			var3.current = nil
+		if not IsPeoplePickerDisplayed then return end
+		if not UseResult1() then
+			UseRefResult.current = nil
 		end
-	end, { isPeoplePickerDisplayed, var9 })
-	local var13 = reactModule.useCallback(function(p2)
-		-- upvalues: var6 (ref), var8 (ref), var1 (copy), var10 (ref)
-		var6.current.viewportLength = p2.Y
-		var8(p2.Y * var1)
-		var10()
-	end, { var10 })
-	local var14 = reactModule.useCallback(function(p2)
-		-- upvalues: var4 (ref)
-		var4.current = p2
+	end, { IsPeoplePickerDisplayed, UseResult1 })
+	local UseResult5 = ReactModule.useCallback(function(Vector) --[[ Line: 136 ]]
+		-- upvalues: UseRefResult2 (copy), UseStateResult2 (copy), FIntShareSheetPeoplePickerLoadMoreThresholdWindowHundredthsPercentRatio (upval), UseResult2 (copy)
+		UseRefResult2.current.viewportLength = Vector.Y
+		UseStateResult2(Vector.Y * FIntShareSheetPeoplePickerLoadMoreThresholdWindowHundredthsPercentRatio)
+		UseResult2()
+	end, { UseResult2 })
+	local UseResult6 = ReactModule.useCallback(function(Current) --[[ Line: 141 ]]
+		-- upvalues: UseRefResult1 (copy)
+		UseRefResult1.current = Current
 	end, {})
-	reactModule.useEffect(function()
-		-- upvalues: isPeoplePickerDisplayed (ref), var3 (ref), var10 (ref)
-		if isPeoplePickerDisplayed then
-			local var15 = false
-			task.defer(function()
-				-- upvalues: var15 (write), var10 (copy)
-				if not var15 then
-					var10()
-				end
-			end)
+	ReactModule.useEffect(function() --[[ Line: 146 ]]
+		-- upvalues: IsPeoplePickerDisplayed (copy), UseRefResult (copy), UseResult2 (copy)
+		if not IsPeoplePickerDisplayed then
+			UseRefResult.current = nil
 			
-			return function()
-				-- upvalues: var15 (write)
-				var15 = true
-			end
+			return
 		end
-		var3.current = nil
-	end, { isPeoplePickerDisplayed, var10 })
+		local Flag = false
+		task.defer(function() --[[ Line: 152 ]]
+			-- upvalues: Flag (ref), UseResult2 (upval)
+			if not Flag then
+				UseResult2()
+			end
+		end)
+		
+		return function() --[[ Line: 157 ]]
+			-- upvalues: Flag (ref)
+			Flag = true
+		end
+	end, { IsPeoplePickerDisplayed, UseResult2 })
 	
 	return {
-		isLoading = isEligibilityLoading,
+		isLoading = IsEligibilityLoading,
 		paginationProps = {
-			endReachedThreshold = var7,
-			scrollingFrameRef = var14,
-			onContentLengthChanged = var11,
-			onEndReached = if isPeoplePickerDisplayed and var2 ~= "" then var5 else nil,
-			onScrollOffsetChanged = var12,
-			onViewportChanged = var13
+			endReachedThreshold = UseStateResult,
+			scrollingFrameRef = UseResult6,
+			onContentLengthChanged = UseResult3,
+			onEndReached = if IsPeoplePickerDisplayed and NextPageToken1 ~= "" then UseResult else nil,
+			onScrollOffsetChanged = UseResult4,
+			onViewportChanged = UseResult5
 		}
 	}
 end

@@ -1,25 +1,22 @@
-﻿local avatarExperienceNavigation = script:FindFirstAncestor("AvatarExperienceNavigation")
-local parent = avatarExperienceNavigation.Parent
-local avatarScreenModule = require(avatarExperienceNavigation.Enums.AvatarScreen)
-local unifiedLoggingSurfaceModule = require(avatarExperienceNavigation.Enums.UnifiedLoggingSurface)
-local cryoModule = require(parent.Cryo)
-local _ = require(parent.Dash)
-local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
-local fFlagAXEditorSubcategoryFilters = avatarExperienceFlagsModule.FFlagAXEditorSubcategoryFilters
-local fFlagAXEnableExpiredUserLookCheckout = avatarExperienceFlagsModule.FFlagAXEnableExpiredUserLookCheckout
-local fFlagAXFixGamepadNavigationOnOutfitManagement = avatarExperienceFlagsModule.FFlagAXFixGamepadNavigationOnOutfitManagement
-local fFlagAXOutfitPageRevamp = avatarExperienceFlagsModule.FFlagAXOutfitPageRevamp
-local fFlagAXAvatarFoldersEnabled = avatarExperienceFlagsModule.FFlagAXAvatarFoldersEnabled
-local fFlagAXBackgroundGenerationAnalytics = avatarExperienceFlagsModule.FFlagAXBackgroundGenerationAnalytics
-local fFlagAXPhotoboothMomentsPage = avatarExperienceFlagsModule.FFlagAXPhotoboothMomentsPage
-local fFlagAXPhotoboothMomentsLogging = avatarExperienceFlagsModule.FFlagAXPhotoboothMomentsLogging
-local AXKeepTryOnsInAvatarEditor = game:DefineFastFlag("AXKeepTryOnsInAvatarEditor", false)
-local fFlagAXFixAvatarScreenVR = avatarExperienceFlagsModule.FFlagAXFixAvatarScreenVR
-local fFlagAXMakeupReleaseFTUX = avatarExperienceFlagsModule.FFlagAXMakeupReleaseFTUX
-local fFlagAXCatalogMakeupSupport = avatarExperienceFlagsModule.FFlagAXCatalogMakeupSupport
-local fFlagAXEnableProfileTab = require(parent.SharedFlags).FFlagAXEnableProfileTab
-local fFlagEditProfileImageV2Enabled = require(parent.SharedFlags).FFlagEditProfileImageV2Enabled
-local t = {
+﻿local AvatarExperienceNavigation = script:FindFirstAncestor("AvatarExperienceNavigation")
+local Parent = AvatarExperienceNavigation.Parent
+local AvatarScreenModule = require(AvatarExperienceNavigation.Enums.AvatarScreen)
+local UnifiedLoggingSurfaceModule = require(AvatarExperienceNavigation.Enums.UnifiedLoggingSurface)
+local CryoModule = require(Parent.Cryo)
+local _ = require(Parent.Dash)
+local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
+local FFlagAXEditorSubcategoryFilters = AvatarExperienceFlagsModule.FFlagAXEditorSubcategoryFilters
+local FFlagAXEnableExpiredUserLookCheckout = AvatarExperienceFlagsModule.FFlagAXEnableExpiredUserLookCheckout
+local FFlagAXAvatarFoldersEnabled = AvatarExperienceFlagsModule.FFlagAXAvatarFoldersEnabled
+local FFlagAXPhotoboothMomentsPage = AvatarExperienceFlagsModule.FFlagAXPhotoboothMomentsPage
+local FFlagAXPhotoboothMomentsLogging = AvatarExperienceFlagsModule.FFlagAXPhotoboothMomentsLogging
+local FFlagAXFixAvatarScreenVR = AvatarExperienceFlagsModule.FFlagAXFixAvatarScreenVR
+local FFlagAXGifting = AvatarExperienceFlagsModule.FFlagAXGifting
+local FFlagAXMakeupReleaseFTUX = AvatarExperienceFlagsModule.FFlagAXMakeupReleaseFTUX
+local FFlagAXCatalogMakeupSupport = AvatarExperienceFlagsModule.FFlagAXCatalogMakeupSupport
+local FFlagAXEnableProfileTab = require(Parent.SharedFlags).FFlagAXEnableProfileTab
+local FFlagEditProfileImageV2Enabled = require(Parent.SharedFlags).FFlagEditProfileImageV2Enabled
+local config = {
 	isTransparent = false,
 	coversSceneWhenExpanded = false,
 	isTryOnOutfitResetPage = false,
@@ -28,375 +25,379 @@ local t = {
 	VRPanelRoundedCorners = false,
 	VRPanelPlacement = "Center"
 }
-local t_1 = {
-	[avatarScreenModule.AccessoryAdjustment] = {
+local config1 = {
+	[AvatarScreenModule.AccessoryAdjustment] = {
 		isRefinementPage = true,
 		analyticsData = {
-			unifiedLoggingSurface = unifiedLoggingSurfaceModule.CUSTOMIZE
+			unifiedLoggingSurface = UnifiedLoggingSurfaceModule.CUSTOMIZE
 		}
 	},
-	[avatarScreenModule.AvatarExperienceLandingPage] = { isTryOnOutfitResetPage = true },
-	[avatarScreenModule.AvatarExperienceRoot] = {},
-	[avatarScreenModule.AvatarBackground] = { isTransparent = false },
-	[avatarScreenModule.BackgroundGeneration] = {
-		analyticsData = if fFlagAXBackgroundGenerationAnalytics then {
-			unifiedLoggingSurface = unifiedLoggingSurfaceModule.BACKGROUND_GENERATION
+	[AvatarScreenModule.AvatarExperienceLandingPage] = { isTryOnOutfitResetPage = true },
+	[AvatarScreenModule.AvatarExperienceRoot] = {},
+	[AvatarScreenModule.AvatarBackground] = { isTransparent = false },
+	[AvatarScreenModule.BackgroundGeneration] = {
+		analyticsData = if AvatarExperienceFlagsModule.FFlagAXBackgroundGenerationAnalytics then {
+			unifiedLoggingSurface = UnifiedLoggingSurfaceModule.BACKGROUND_GENERATION
 		} else nil
 	},
-	[avatarScreenModule.Catalog] = {
+	[AvatarScreenModule.Catalog] = {
 		refinementButtonVisible = true,
 		VRPanelPlacement = "None",
 		VRPanelRoundedCorners = true,
 		analyticsData = {
-			unifiedLoggingSurface = unifiedLoggingSurfaceModule.CATALOG
+			unifiedLoggingSurface = UnifiedLoggingSurfaceModule.CATALOG
 		}
 	},
-	[avatarScreenModule.CatalogContextMenu] = { VRPanelPlacement = "Right" },
-	[avatarScreenModule.CatalogSearch] = {
+	[AvatarScreenModule.CatalogContextMenu] = { VRPanelPlacement = "Right" },
+	[AvatarScreenModule.CatalogSearch] = {
 		refinementButtonVisible = true,
 		VRPanelPlacement = "None",
 		VRPanelRoundedCorners = true,
 		analyticsData = {
-			unifiedLoggingSurface = unifiedLoggingSurfaceModule.SEARCH_RESULTS
+			unifiedLoggingSurface = UnifiedLoggingSurfaceModule.SEARCH_RESULTS
 		}
 	},
-	[avatarScreenModule.CatalogSearchLanding] = {
+	[AvatarScreenModule.CatalogSearchLanding] = {
 		refinementButtonVisible = true,
 		VRPanelPlacement = "None",
 		VRPanelRoundedCorners = true,
 		analyticsData = {
-			unifiedLoggingSurface = unifiedLoggingSurfaceModule.SEARCH_LANDING_PAGE
+			unifiedLoggingSurface = UnifiedLoggingSurfaceModule.SEARCH_LANDING_PAGE
 		}
 	},
-	[avatarScreenModule.ItemDetails] = {
+	[AvatarScreenModule.ItemDetails] = {
 		isTransparent = true,
 		coversSceneWhenExpanded = true,
 		VRPanelPlacement = "Right",
 		VRPanelRoundedCorners = true,
 		analyticsData = {
-			unifiedLoggingSurface = unifiedLoggingSurfaceModule.ITEM_DETAILS
+			unifiedLoggingSurface = UnifiedLoggingSurfaceModule.ITEM_DETAILS
 		}
 	},
-	[avatarScreenModule.OutfitDetails] = {
+	[AvatarScreenModule.OutfitDetails] = {
 		isTransparent = true,
 		coversSceneWhenExpanded = true,
 		VRPanelPlacement = "Right",
 		VRPanelRoundedCorners = true,
 		analyticsData = {
-			unifiedLoggingSurface = unifiedLoggingSurfaceModule.ITEM_DETAILS
+			unifiedLoggingSurface = UnifiedLoggingSurfaceModule.ITEM_DETAILS
 		}
 	},
-	[avatarScreenModule.ItemOwnershipPage] = {
+	[AvatarScreenModule.ItemOwnershipPage] = {
 		isTransparent = true,
 		analyticsData = {
-			unifiedLoggingSurface = unifiedLoggingSurfaceModule.ITEM_DETAILS
+			unifiedLoggingSurface = UnifiedLoggingSurfaceModule.ITEM_DETAILS
 		}
 	},
-	[avatarScreenModule.CreateOrUpdateOutfitMenu] = { VRPanelPlacement = "Left" },
-	[avatarScreenModule.LayeredClothingSort] = {
+	[AvatarScreenModule.CreateOrUpdateOutfitMenu] = { VRPanelPlacement = "Left" },
+	[AvatarScreenModule.LayeredClothingSort] = {
 		isRefinementPage = true,
 		VRPanelPlacement = "Center",
 		analyticsData = {
-			unifiedLoggingSurface = unifiedLoggingSurfaceModule.CUSTOMIZE
+			unifiedLoggingSurface = UnifiedLoggingSurfaceModule.CUSTOMIZE
 		}
 	},
-	[avatarScreenModule.LCSortContextMenu] = { VRPanelPlacement = "Right" },
-	[avatarScreenModule.AvatarEditor] = {
+	[AvatarScreenModule.LCSortContextMenu] = { VRPanelPlacement = "Right" },
+	[AvatarScreenModule.AvatarEditor] = {
 		refinementButtonVisible = true,
 		VRPanelPlacement = "None",
 		VRPanelRoundedCorners = true,
-		isTryOnOutfitResetPage = if AXKeepTryOnsInAvatarEditor then false else true,
+		isTryOnOutfitResetPage = not game:DefineFastFlag("AXKeepTryOnsInAvatarEditor", false),
 		analyticsData = {
-			unifiedLoggingSurface = unifiedLoggingSurfaceModule.CUSTOMIZE
+			unifiedLoggingSurface = UnifiedLoggingSurfaceModule.CUSTOMIZE
 		}
 	},
-	[avatarScreenModule.AvatarRefinement] = {
+	[AvatarScreenModule.AvatarRefinement] = {
 		VRPanelPlacement = "Right",
 		VRPanelRoundedCorners = true,
 		analyticsData = {
-			unifiedLoggingSurface = unifiedLoggingSurfaceModule.CUSTOMIZE
+			unifiedLoggingSurface = UnifiedLoggingSurfaceModule.CUSTOMIZE
 		}
 	},
-	[avatarScreenModule.ManageOutfitPage] = {
-		isTransparent = if fFlagAXFixGamepadNavigationOnOutfitManagement then false else true,
+	[AvatarScreenModule.ManageOutfitPage] = {
+		isTransparent = not AvatarExperienceFlagsModule.FFlagAXFixGamepadNavigationOnOutfitManagement,
 		analyticsData = {
-			unifiedLoggingSurface = unifiedLoggingSurfaceModule.CUSTOMIZE
+			unifiedLoggingSurface = UnifiedLoggingSurfaceModule.CUSTOMIZE
 		}
 	},
-	[avatarScreenModule.ProfilePictureEditorEmotes] = { isTryOnOutfitResetPage = true },
-	[avatarScreenModule.ResellersPage] = {
+	[AvatarScreenModule.ProfilePictureEditorEmotes] = { isTryOnOutfitResetPage = true },
+	[AvatarScreenModule.ResellersPage] = {
 		isTransparent = true,
 		analyticsData = {
-			unifiedLoggingSurface = unifiedLoggingSurfaceModule.ITEM_DETAILS
+			unifiedLoggingSurface = UnifiedLoggingSurfaceModule.ITEM_DETAILS
 		}
 	},
-	[avatarScreenModule.SellItemPage] = {
+	[AvatarScreenModule.SellItemPage] = {
 		isTransparent = true,
 		analyticsData = {
-			unifiedLoggingSurface = unifiedLoggingSurfaceModule.ITEM_DETAILS
+			unifiedLoggingSurface = UnifiedLoggingSurfaceModule.ITEM_DETAILS
 		}
 	},
-	[avatarScreenModule.SellItemPeekView] = {
+	[AvatarScreenModule.SellItemPeekView] = {
 		isTransparent = true,
 		analyticsData = {
-			unifiedLoggingSurface = unifiedLoggingSurfaceModule.ITEM_DETAILS
+			unifiedLoggingSurface = UnifiedLoggingSurfaceModule.ITEM_DETAILS
 		}
 	},
-	[avatarScreenModule.SortAndFilters] = { isTransparent = true, VRPanelPlacement = "Left" },
-	[avatarScreenModule.TryOnItem] = {
+	[AvatarScreenModule.SortAndFilters] = { isTransparent = true, VRPanelPlacement = "Left" },
+	[AvatarScreenModule.TryOnItem] = {
 		isTransparent = false,
 		VRPanelPlacement = "Right",
 		VRPanelRoundedCorners = true,
 		analyticsData = {
-			unifiedLoggingSurface = unifiedLoggingSurfaceModule.ITEM_DETAILS
+			unifiedLoggingSurface = UnifiedLoggingSurfaceModule.ITEM_DETAILS
 		}
 	},
-	[avatarScreenModule.UpdateOutfitPage] = {
+	[AvatarScreenModule.UpdateOutfitPage] = {
 		isTransparent = true,
 		VRPanelPlacement = "Left",
 		VRPanelRoundedCorners = true
 	},
-	[avatarScreenModule.AdjustAccessoryView] = {
+	[AvatarScreenModule.AdjustAccessoryView] = {
 		isTransparent = false,
 		analyticsData = {
-			unifiedLoggingSurface = unifiedLoggingSurfaceModule.CUSTOMIZE
+			unifiedLoggingSurface = UnifiedLoggingSurfaceModule.CUSTOMIZE
 		}
 	},
-	[avatarScreenModule.HeadRefinement] = {
+	[AvatarScreenModule.HeadRefinement] = {
 		isRefinementPage = true,
 		analyticsData = {
-			unifiedLoggingSurface = unifiedLoggingSurfaceModule.CUSTOMIZE
+			unifiedLoggingSurface = UnifiedLoggingSurfaceModule.CUSTOMIZE
 		}
 	},
-	[avatarScreenModule.LookDetails] = {
+	[AvatarScreenModule.LookDetails] = {
 		isTransparent = true,
 		coversSceneWhenExpanded = true,
 		VRPanelPlacement = "Right",
 		VRPanelRoundedCorners = true,
 		analyticsData = {
-			unifiedLoggingSurface = unifiedLoggingSurfaceModule.ITEM_DETAILS
+			unifiedLoggingSurface = UnifiedLoggingSurfaceModule.ITEM_DETAILS
 		}
 	},
-	[avatarScreenModule.ContextMenu] = { VRPanelPlacement = "Right" },
-	[avatarScreenModule.MySharedAvatars] = {
+	[AvatarScreenModule.ContextMenu] = { VRPanelPlacement = "Right" },
+	[AvatarScreenModule.MySharedAvatars] = {
 		isTryOnOutfitResetPage = true,
 		refinementButtonVisible = true,
 		VRPanelPlacement = "None",
 		VRPanelRoundedCorners = true,
 		analyticsData = {
-			unifiedLoggingSurface = unifiedLoggingSurfaceModule.CUSTOMIZE
+			unifiedLoggingSurface = UnifiedLoggingSurfaceModule.CUSTOMIZE
 		}
 	},
-	[avatarScreenModule.FavoritesSaved] = {
+	[AvatarScreenModule.FavoritesSaved] = {
 		refinementButtonVisible = true,
 		VRPanelPlacement = "None",
 		VRPanelRoundedCorners = true
 	},
-	[avatarScreenModule.CommunityAvatarEntryMenu] = { VRPanelPlacement = "Left" },
-	[avatarScreenModule.SearchLandingFocusedWidgetPage] = {
+	[AvatarScreenModule.CommunityAvatarEntryMenu] = { VRPanelPlacement = "Left" },
+	[AvatarScreenModule.SearchLandingFocusedWidgetPage] = {
 		refinementButtonVisible = true,
 		VRPanelPlacement = "None",
 		VRPanelRoundedCorners = true,
 		analyticsData = {
-			unifiedLoggingSurface = unifiedLoggingSurfaceModule.SEARCH_LANDING_PAGE
+			unifiedLoggingSurface = UnifiedLoggingSurfaceModule.SEARCH_LANDING_PAGE
 		}
 	},
-	[avatarScreenModule.BodyShape] = {
+	[AvatarScreenModule.BodyShape] = {
 		isRefinementPage = true,
 		analyticsData = {
-			unifiedLoggingSurface = unifiedLoggingSurfaceModule.CUSTOMIZE
+			unifiedLoggingSurface = UnifiedLoggingSurfaceModule.CUSTOMIZE
 		}
 	},
-	[avatarScreenModule.AvatarSwitcher] = {
+	[AvatarScreenModule.AvatarSwitcher] = {
 		isTransparent = false,
 		analyticsData = {
-			unifiedLoggingSurface = unifiedLoggingSurfaceModule.CUSTOMIZE
+			unifiedLoggingSurface = UnifiedLoggingSurfaceModule.CUSTOMIZE
 		}
 	},
-	[avatarScreenModule.EditEmotes] = {
+	[AvatarScreenModule.EditEmotes] = {
 		isTransparent = false,
 		isTryOnOutfitResetPage = true,
 		VRPanelPlacement = "None",
 		VRPanelRoundedCorners = true,
 		analyticsData = {
-			unifiedLoggingSurface = unifiedLoggingSurfaceModule.CUSTOMIZE
+			unifiedLoggingSurface = UnifiedLoggingSurfaceModule.CUSTOMIZE
 		}
 	}
 }
 
-if fFlagAXOutfitPageRevamp then
-	t_1[avatarScreenModule.AddOutfitDialog] = {
+if AvatarExperienceFlagsModule.FFlagAXOutfitPageRevamp then
+	config1[AvatarScreenModule.AddOutfitDialog] = {
 		isTransparent = false,
 		VRPanelPlacement = "Left",
 		VRPanelRoundedCorners = true,
 		analyticsData = {
-			unifiedLoggingSurface = unifiedLoggingSurfaceModule.CUSTOMIZE
+			unifiedLoggingSurface = UnifiedLoggingSurfaceModule.CUSTOMIZE
 		}
 	}
-	t_1[avatarScreenModule.DuplicateOutfitDialog] = { isTransparent = false, VRPanelPlacement = "Left" }
-	t_1[avatarScreenModule.DuplicateOutfitNameDialog] = { isTransparent = false, VRPanelPlacement = "Left" }
-	t_1[avatarScreenModule.RenameOutfitDialog] = { isTransparent = false, VRPanelPlacement = "Right" }
-	t_1[avatarScreenModule.DeleteOutfitDialog] = { isTransparent = false, VRPanelPlacement = "Right" }
-	t_1[avatarScreenModule.BulkDeleteOutfitDialog] = { isTransparent = false, VRPanelPlacement = "Left" }
-	t_1[avatarScreenModule.ManageOutfitsPage] = {
+	config1[AvatarScreenModule.DuplicateOutfitDialog] = { isTransparent = false, VRPanelPlacement = "Left" }
+	config1[AvatarScreenModule.DuplicateOutfitNameDialog] = { isTransparent = false, VRPanelPlacement = "Left" }
+	config1[AvatarScreenModule.RenameOutfitDialog] = { isTransparent = false, VRPanelPlacement = "Right" }
+	config1[AvatarScreenModule.DeleteOutfitDialog] = { isTransparent = false, VRPanelPlacement = "Right" }
+	config1[AvatarScreenModule.BulkDeleteOutfitDialog] = { isTransparent = false, VRPanelPlacement = "Left" }
+	config1[AvatarScreenModule.ManageOutfitsPage] = {
 		isTransparent = false,
 		VRPanelPlacement = "Left",
 		VRPanelRoundedCorners = true,
 		analyticsData = {
-			unifiedLoggingSurface = unifiedLoggingSurfaceModule.CUSTOMIZE
-		}
-	}
-end
-if fFlagAXAvatarFoldersEnabled then
-	t_1[avatarScreenModule.CreateFolderDialog] = {
-		isTransparent = false,
-		VRPanelPlacement = "Left",
-		VRPanelRoundedCorners = true,
-		analyticsData = {
-			unifiedLoggingSurface = unifiedLoggingSurfaceModule.CUSTOMIZE
-		}
-	}
-	t_1[avatarScreenModule.RenameFolderDialog] = {
-		isTransparent = false,
-		VRPanelPlacement = "Left",
-		VRPanelRoundedCorners = true,
-		analyticsData = {
-			unifiedLoggingSurface = unifiedLoggingSurfaceModule.CUSTOMIZE
-		}
-	}
-	t_1[avatarScreenModule.DuplicateFolderNameDialog] = {
-		isTransparent = false,
-		VRPanelPlacement = "Left",
-		VRPanelRoundedCorners = true,
-		analyticsData = {
-			unifiedLoggingSurface = unifiedLoggingSurfaceModule.CUSTOMIZE
-		}
-	}
-	t_1[avatarScreenModule.FolderNameNotAllowedDialog] = {
-		isTransparent = false,
-		VRPanelPlacement = "Left",
-		VRPanelRoundedCorners = true,
-		analyticsData = {
-			unifiedLoggingSurface = unifiedLoggingSurfaceModule.CUSTOMIZE
-		}
-	}
-	t_1[avatarScreenModule.FolderLimitReachedDialog] = {
-		isTransparent = false,
-		VRPanelPlacement = "Left",
-		VRPanelRoundedCorners = true,
-		analyticsData = {
-			unifiedLoggingSurface = unifiedLoggingSurfaceModule.CUSTOMIZE
-		}
-	}
-	t_1[avatarScreenModule.FolderErrorDialog] = {
-		isTransparent = false,
-		VRPanelPlacement = "Left",
-		VRPanelRoundedCorners = true,
-		analyticsData = {
-			unifiedLoggingSurface = unifiedLoggingSurfaceModule.CUSTOMIZE
-		}
-	}
-	t_1[avatarScreenModule.DeleteFolderPrompt] = {
-		isTransparent = false,
-		VRPanelPlacement = "Left",
-		VRPanelRoundedCorners = true,
-		analyticsData = {
-			unifiedLoggingSurface = unifiedLoggingSurfaceModule.CUSTOMIZE
-		}
-	}
-	t_1[avatarScreenModule.SelectFolderMenu] = {
-		isTransparent = false,
-		VRPanelPlacement = "Left",
-		VRPanelRoundedCorners = true,
-		analyticsData = {
-			unifiedLoggingSurface = unifiedLoggingSurfaceModule.CUSTOMIZE
-		}
-	}
-	t_1[avatarScreenModule.RemoveFromFolderDialog] = {
-		isTransparent = false,
-		VRPanelPlacement = "Left",
-		VRPanelRoundedCorners = true,
-		analyticsData = {
-			unifiedLoggingSurface = unifiedLoggingSurfaceModule.CUSTOMIZE
-		}
-	}
-	t_1[avatarScreenModule.FolderItemsErrorDialog] = {
-		isTransparent = false,
-		VRPanelPlacement = "Left",
-		VRPanelRoundedCorners = true,
-		analyticsData = {
-			unifiedLoggingSurface = unifiedLoggingSurfaceModule.CUSTOMIZE
+			unifiedLoggingSurface = UnifiedLoggingSurfaceModule.CUSTOMIZE
 		}
 	}
 end
-if fFlagAXFixAvatarScreenVR then
-	if fFlagAXCatalogMakeupSupport then
-		t_1[avatarScreenModule.MakeupMax6LayersPrompt] = {
+if FFlagAXAvatarFoldersEnabled then
+	config1[AvatarScreenModule.CreateFolderDialog] = {
+		isTransparent = false,
+		VRPanelPlacement = "Left",
+		VRPanelRoundedCorners = true,
+		analyticsData = {
+			unifiedLoggingSurface = UnifiedLoggingSurfaceModule.CUSTOMIZE
+		}
+	}
+	config1[AvatarScreenModule.RenameFolderDialog] = {
+		isTransparent = false,
+		VRPanelPlacement = "Left",
+		VRPanelRoundedCorners = true,
+		analyticsData = {
+			unifiedLoggingSurface = UnifiedLoggingSurfaceModule.CUSTOMIZE
+		}
+	}
+	config1[AvatarScreenModule.DuplicateFolderNameDialog] = {
+		isTransparent = false,
+		VRPanelPlacement = "Left",
+		VRPanelRoundedCorners = true,
+		analyticsData = {
+			unifiedLoggingSurface = UnifiedLoggingSurfaceModule.CUSTOMIZE
+		}
+	}
+	config1[AvatarScreenModule.FolderNameNotAllowedDialog] = {
+		isTransparent = false,
+		VRPanelPlacement = "Left",
+		VRPanelRoundedCorners = true,
+		analyticsData = {
+			unifiedLoggingSurface = UnifiedLoggingSurfaceModule.CUSTOMIZE
+		}
+	}
+	config1[AvatarScreenModule.FolderLimitReachedDialog] = {
+		isTransparent = false,
+		VRPanelPlacement = "Left",
+		VRPanelRoundedCorners = true,
+		analyticsData = {
+			unifiedLoggingSurface = UnifiedLoggingSurfaceModule.CUSTOMIZE
+		}
+	}
+	config1[AvatarScreenModule.FolderErrorDialog] = {
+		isTransparent = false,
+		VRPanelPlacement = "Left",
+		VRPanelRoundedCorners = true,
+		analyticsData = {
+			unifiedLoggingSurface = UnifiedLoggingSurfaceModule.CUSTOMIZE
+		}
+	}
+	config1[AvatarScreenModule.DeleteFolderPrompt] = {
+		isTransparent = false,
+		VRPanelPlacement = "Left",
+		VRPanelRoundedCorners = true,
+		analyticsData = {
+			unifiedLoggingSurface = UnifiedLoggingSurfaceModule.CUSTOMIZE
+		}
+	}
+	config1[AvatarScreenModule.SelectFolderMenu] = {
+		isTransparent = false,
+		VRPanelPlacement = "Left",
+		VRPanelRoundedCorners = true,
+		analyticsData = {
+			unifiedLoggingSurface = UnifiedLoggingSurfaceModule.CUSTOMIZE
+		}
+	}
+	config1[AvatarScreenModule.RemoveFromFolderDialog] = {
+		isTransparent = false,
+		VRPanelPlacement = "Left",
+		VRPanelRoundedCorners = true,
+		analyticsData = {
+			unifiedLoggingSurface = UnifiedLoggingSurfaceModule.CUSTOMIZE
+		}
+	}
+	config1[AvatarScreenModule.FolderItemsErrorDialog] = {
+		isTransparent = false,
+		VRPanelPlacement = "Left",
+		VRPanelRoundedCorners = true,
+		analyticsData = {
+			unifiedLoggingSurface = UnifiedLoggingSurfaceModule.CUSTOMIZE
+		}
+	}
+end
+if FFlagAXFixAvatarScreenVR then
+	if FFlagAXCatalogMakeupSupport then
+		config1[AvatarScreenModule.MakeupMax6LayersPrompt] = {
 			isTransparent = false,
 			VRPanelPlacement = "Left",
 			VRPanelRoundedCorners = true
 		}
 	end
-	if fFlagAXMakeupReleaseFTUX then
-		t_1[avatarScreenModule.MakeupReleaseFtuxPrompt] = {
+	if FFlagAXMakeupReleaseFTUX then
+		config1[AvatarScreenModule.MakeupReleaseFtuxPrompt] = {
 			isTransparent = false,
 			VRPanelPlacement = "Left",
 			VRPanelRoundedCorners = true
 		}
 	end
 end
-if fFlagAXEditorSubcategoryFilters then
-	t_1[avatarScreenModule.SubcategoryFiltersDropdown] = { isTransparent = true, VRPanelPlacement = "Left" }
+if FFlagAXEditorSubcategoryFilters then
+	config1[AvatarScreenModule.SubcategoryFiltersDropdown] = { isTransparent = true, VRPanelPlacement = "Left" }
 end
-t_1[avatarScreenModule.Checkout] = {
+config1[AvatarScreenModule.Checkout] = {
 	isTransparent = true,
 	coversSceneWhenExpanded = true,
 	VRPanelPlacement = "Right",
 	VRPanelRoundedCorners = true,
 	analyticsData = {
-		unifiedLoggingSurface = unifiedLoggingSurfaceModule.CATALOG
+		unifiedLoggingSurface = UnifiedLoggingSurfaceModule.CATALOG
 	}
 }
 
-if fFlagAXEnableProfileTab then
-	t_1[avatarScreenModule.Profile] = {
+if FFlagAXEnableProfileTab then
+	config1[AvatarScreenModule.Profile] = {
 		refinementButtonVisible = true,
 		isTryOnOutfitResetPage = true,
 		VRPanelPlacement = "None",
 		VRPanelRoundedCorners = true
 	}
 end
-if fFlagAXEnableExpiredUserLookCheckout then
-	t_1[avatarScreenModule.ExpiredUserLookActionBar] = {
+if FFlagAXEnableExpiredUserLookCheckout then
+	config1[AvatarScreenModule.ExpiredUserLookActionBar] = {
 		isTransparent = true,
 		VRPanelPlacement = "Right",
 		VRPanelRoundedCorners = true
 	}
-	t_1[avatarScreenModule.ExpiredUserLookCheckout] = {
+	config1[AvatarScreenModule.ExpiredUserLookCheckout] = {
 		isTransparent = true,
 		coversSceneWhenExpanded = true,
 		VRPanelPlacement = "Right",
 		VRPanelRoundedCorners = true,
 		analyticsData = {
-			unifiedLoggingSurface = unifiedLoggingSurfaceModule.CUSTOMIZE
+			unifiedLoggingSurface = UnifiedLoggingSurfaceModule.CUSTOMIZE
 		}
 	}
 end
-if fFlagEditProfileImageV2Enabled then
-	t_1[avatarScreenModule.EditProfileImage] = { isTryOnOutfitResetPage = true }
-	t_1[avatarScreenModule.AppCatalogContextMenuHost] = { isTransparent = true }
+if FFlagAXGifting then
+	config1[AvatarScreenModule.SendGiftRecipientPicker] = { isTransparent = true, VRPanelPlacement = "Left" }
+	config1[AvatarScreenModule.SendGiftReview] = { isTransparent = true, VRPanelPlacement = "Left" }
 end
-if fFlagAXPhotoboothMomentsPage then
-	t_1[avatarScreenModule.PhotoboothMomentsPage] = {
+if FFlagEditProfileImageV2Enabled then
+	config1[AvatarScreenModule.EditProfileImage] = { isTryOnOutfitResetPage = true }
+	config1[AvatarScreenModule.AppCatalogContextMenuHost] = { isTransparent = true }
+end
+if FFlagAXPhotoboothMomentsPage then
+	config1[AvatarScreenModule.PhotoboothMomentsPage] = {
 		isTryOnOutfitResetPage = true,
-		analyticsData = if fFlagAXPhotoboothMomentsLogging then {
-			unifiedLoggingSurface = unifiedLoggingSurfaceModule.PHOTOBOOTH_MOMENTS
+		analyticsData = if FFlagAXPhotoboothMomentsLogging then {
+			unifiedLoggingSurface = UnifiedLoggingSurfaceModule.PHOTOBOOTH_MOMENTS
 		} else nil
 	}
 end
-local t_2 = {}
+local AvatarScreenPropertiesModule = {}
 
-for i, v in avatarScreenModule do
-	t_2[v] = cryoModule.Dictionary.join(t, t_1[v] or {})
+for _, value in AvatarScreenModule do
+	AvatarScreenPropertiesModule[value] = CryoModule.Dictionary.join(config, config1[value] or {})
 end
-return t_2
+return AvatarScreenPropertiesModule

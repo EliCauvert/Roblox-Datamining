@@ -1,39 +1,39 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local constantsModule = require(script.Parent.Parent.Constants)
-local selectionGradient = roactModule.PureComponent:extend("SelectionGradient")
+﻿local CorePackages = game:GetService("CorePackages")
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local ConstantsModule = require(script.Parent.Parent.Constants)
+local SelectionGradient = RoactModule.PureComponent:extend("SelectionGradient")
 
-function selectionGradient.render(p1)
-	-- upvalues: constantsModule (ref), roactModule (ref)
-	local layout = constantsModule.Layouts[p1.props.layout]
-	local focusedSegmentIndex = p1.props.emotesWheel.focusedSegmentIndex
+function SelectionGradient.render(p1) --[[ Line: 13 ]]
+	-- upvalues: ConstantsModule (copy), RoactModule (copy)
+	local Layout = ConstantsModule.Layouts[p1.props.layout]
+	local FocusedSegmentIndex: number = p1.props.emotesWheel.focusedSegmentIndex
 	
-	return roactModule.createElement("Frame", {
+	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		AnchorPoint = Vector2.new(0.5, 0.5),
 		Position = UDim2.new(0.5, 0, 0.5, 0),
 		Size = UDim2.new(1, 0, 1, 0),
-		Rotation = 360 / constantsModule.EmotesPerPage * (focusedSegmentIndex - 1) + constantsModule.SegmentsStartRotation,
-		Visible = focusedSegmentIndex ~= 0
+		Rotation = 360 / ConstantsModule.EmotesPerPage * (FocusedSegmentIndex - 1) + ConstantsModule.SegmentsStartRotation,
+		Visible = FocusedSegmentIndex ~= 0
 	}, {
-		SelectedGradient = roactModule.createElement("ImageLabel", {
+		SelectedGradient = RoactModule.createElement("ImageLabel", {
 			BackgroundTransparency = 1,
 			ZIndex = 2,
 			AnchorPoint = Vector2.new(0, 0.5),
 			Position = UDim2.new(0.5, 0, 0.5, 0),
 			Size = UDim2.new(0.5, 0, 1, 0),
-			ImageTransparency = constantsModule.GradientTransparency,
-			Image = layout.SelectedGradient
+			ImageTransparency = ConstantsModule.GradientTransparency,
+			Image = Layout.SelectedGradient
 		}, {
-			AsspectRatioConstraint = roactModule.createElement("UIAspectRatioConstraint", {
-				AspectRatio = layout.SelectedGradientImageSize.X / layout.SelectedGradientImageSize.Y
+			AsspectRatioConstraint = RoactModule.createElement("UIAspectRatioConstraint", {
+				AspectRatio = Layout.SelectedGradientImageSize.X / Layout.SelectedGradientImageSize.Y
 			}),
-			SizeConstraint = roactModule.createElement("UISizeConstraint", { MaxSize = layout.SelectedGradientImageSize })
+			SizeConstraint = RoactModule.createElement("UISizeConstraint", { MaxSize = Layout.SelectedGradientImageSize })
 		})
 	})
 end
 
-return roactRoduxModule.connect(function(p1)
+return RoactRoduxModule.connect(function(p1) --[[ Line: 47 | Named "mapStateToProps" ]]
 	return { emotesWheel = p1.emotesWheel, layout = p1.layout }
-end, nil)(selectionGradient)
+end, nil)(SelectionGradient)

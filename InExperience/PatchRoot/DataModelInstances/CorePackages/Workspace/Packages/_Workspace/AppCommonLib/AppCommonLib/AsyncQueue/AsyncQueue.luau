@@ -1,46 +1,47 @@
-﻿local promiseModule = require(script:FindFirstAncestor("AppCommonLib").Parent.Promise)
+﻿local PromiseModule = require(script:FindFirstAncestor("AppCommonLib").Parent.Promise)
 local _ = require(script.Parent.AsyncQueueTypes)
-local t = {}
-t.__index = t
+local AsyncQueueModule = {}
+AsyncQueueModule.__index = AsyncQueueModule
 
-function t.new()
-	-- upvalues: promiseModule (ref), t (ref)
-	local t_1 = { head = promiseModule.resolve() }
-	setmetatable(t_1, t)
+function AsyncQueueModule.new() --[[ Line: 26 ]]
+	-- upvalues: PromiseModule (copy), AsyncQueueModule (copy)
+	local config = { head = PromiseModule.resolve() }
+	setmetatable(config, AsyncQueueModule)
 	
-	return t_1
+	return config
 end
 
-function t:request(p1)
-	-- upvalues: promiseModule (ref)
-	local bindableEvent = Instance.new("BindableEvent")
-	local var1 = false
-	local var2 = false
-	self.head = self.head:andThen(function()
-		-- upvalues: promiseModule (copy), var1 (write), p1 (ref), var2 (write), bindableEvent (ref)
-		return promiseModule.new(function(p2)
-			-- upvalues: var1 (copy), p1 (copy), var2 (copy), bindableEvent (copy)
-			if not var1 then
+function AsyncQueueModule:request(p1) --[[ Line: 34 ]]
+	-- upvalues: PromiseModule (copy)
+	local BindableEvent = Instance.new("BindableEvent")
+	local Flag = false
+	local Flag1 = false
+	self.head = self.head:andThen(function() --[[ Line: 39 ]]
+		-- upvalues: PromiseModule (upval), Flag (ref), p1 (copy), Flag1 (ref), BindableEvent (copy)
+		return PromiseModule.new(function(Callback: () -> ()) --[[ Line: 40 ]]
+			-- upvalues: Flag (upval), p1 (upval), Flag1 (upval), BindableEvent (upval)
+			if not Flag then
 				pcall(p1)
 			end
-			if not var1 then
-				var2 = true
-				bindableEvent.Event:Wait()
+			if not Flag then
+				Flag1 = true
+				BindableEvent.Event:Wait()
 			end
-			bindableEvent:Destroy()
-			p2()
+			BindableEvent:Destroy()
+			Callback()
 		end)
 	end)
 	
-	return function()
-		-- upvalues: var2 (write), bindableEvent (ref), var1 (write)
-		if var2 then
-			bindableEvent:Fire()
+	return function() --[[ Line: 53 | Named "release" ]]
+		-- upvalues: Flag1 (ref), BindableEvent (copy), Flag (ref)
+		if Flag1 then
+			BindableEvent:Fire()
 			
 			return
+		else
+			Flag = true
 		end
-		var1 = true
 	end
 end
 
-return t
+return AsyncQueueModule

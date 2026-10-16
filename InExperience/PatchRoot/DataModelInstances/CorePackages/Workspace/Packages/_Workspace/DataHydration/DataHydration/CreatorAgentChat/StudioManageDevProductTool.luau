@@ -1,91 +1,68 @@
-﻿local httpService = game:GetService("HttpService")
-local fFlagBuildExperienceRemoveDevProductPriceCap = require(script:FindFirstAncestor("DataHydration").Parent.SharedFlags).FFlagBuildExperienceRemoveDevProductPriceCap
+﻿local HttpService = game:GetService("HttpService")
+local FFlagBuildExperienceRemoveDevProductPriceCap = require(script:FindFirstAncestor("DataHydration").Parent.SharedFlags).FFlagBuildExperienceRemoveDevProductPriceCap
 local _ = require(script.Parent.types)
-local t = {
+local FFlagCreatorAgentChatMonetizationToolHelpersModule = require(script.Parent.FFlagCreatorAgentChatMonetizationToolHelpers)
+local MonetizationClientToolModule = if FFlagCreatorAgentChatMonetizationToolHelpersModule then require(script.Parent.monetizationClientTool) else nil
+local config = {
 	create = true,
 	list = true,
 	update = true,
 	activate = true,
 	deactivate = true
 }
-local t_1 = {
-	name = "manage_developer_product",
-	inputSchema = {
-		type = "object",
-		additionalProperties = false,
-		required = { "action" },
-		properties = {
-			action = {
-				type = "string",
-				enum = {
-					"create",
-					"list",
-					"update",
-					"activate",
-					"deactivate"
-				}
-			},
-			name = { type = "string" },
-			description = { type = "string" },
-			priceInRobux = {
-				type = "integer",
-				minimum = 1,
-				maximum = if fFlagBuildExperienceRemoveDevProductPriceCap then nil else 100
-			},
-			productId = { type = "integer" },
-			imageAssetId = { type = "integer", minimum = 1 }
-		}
-	}
-}
 
-local function _(p1)
-	return typeof(p1) == "string" and string.lower(p1) == "manage_developer_product"
+local function _(Text: string): boolean --[[ Line: 63 | Named "valueLooksLikeToolName" ]]
+	return typeof(Text) == "string" and string.lower(Text) == "manage_developer_product"
 end
 
-local function toolCallLooksLikeRequest(p1)
-	local kind = p1.kind
-	
-	if not (typeof(kind) == "string" and string.lower(kind) == "manage_developer_product") then
-		kind = p1.title
-		
-		if typeof(kind) == "string" and string.lower(kind) == "manage_developer_product" then
-			return true
-		end
-		local rawInput = p1.rawInput
-		
-		if typeof(rawInput) ~= "table" then
-			return false
-		end
-		local name = rawInput.name
-		kind = typeof(name) == "string" and string.lower(name) == "manage_developer_product"
-		
-		if not kind then
-			local toolName = rawInput.toolName
-			kind = typeof(toolName) == "string" and string.lower(toolName) == "manage_developer_product"
-		end
-		return kind
+local function toolCallLooksLikeRequest(ToolCall) --[[ Line: 67 ]]
+	-- upvalues: FFlagCreatorAgentChatMonetizationToolHelpersModule (copy), MonetizationClientToolModule (copy)
+	if FFlagCreatorAgentChatMonetizationToolHelpersModule then
+		return MonetizationClientToolModule.toolCallLooksLikeRequest(ToolCall, "manage_developer_product")
 	end
-end
-
-local _ = function(p1)
-	local var1 = tonumber(p1)
+	local Kind: string = ToolCall.kind
 	
-	return if var1 == nil or var1 % 1 ~= 0 then nil else var1
+	if typeof(Kind) ~= "string" or string.lower(Kind) ~= "manage_developer_product" then
+		local Title: string = ToolCall.title
+		
+		if typeof(Title) ~= "string" or string.lower(Title) ~= "manage_developer_product" then
+			local RawInput = ToolCall.rawInput
+			
+			if typeof(RawInput) ~= "table" then
+				return false
+			end
+			local Name: string = RawInput.name
+			local IsManageDeveloperProduct: boolean = typeof(Name) == "string" and string.lower(Name) == "manage_developer_product"
+			
+			if not IsManageDeveloperProduct then
+				local ToolName: string = RawInput.toolName
+				IsManageDeveloperProduct = typeof(ToolName) == "string" and string.lower(ToolName) == "manage_developer_product"
+			end
+			return IsManageDeveloperProduct
+		end
+	end
+	return true
 end
 
-local function hasPersistedToolResult(p1)
-	-- upvalues: httpService (ref)
-	if p1.content == nil then
+local _ = function(p1) --[[ Line: 84 | Named "parseInteger" ]]
+	local Number: number? = tonumber(p1)
+	
+	return if Number == nil or Number % 1 ~= 0 then nil else Number
+end
+
+local function hasPersistedToolResult(ToolCall): boolean --[[ Line: 96 ]]
+	-- upvalues: HttpService (copy)
+	if ToolCall.content == nil then
 		return false
 	end
-	for i, v in p1.content do
-		if v.type == "content" and v.content ~= nil then
-			local content = v.content
+	for _, value in ToolCall.content do
+		if value.type == "content" and value.content ~= nil then
+			local Content = value.content
 			
-			if content.type == "text" and typeof(content.text) == "string" then
-				local ok, status = pcall(httpService.JSONDecode, httpService, content.text)
+			if Content.type == "text" and typeof(Content.text) == "string" then
+				local Success, Result = pcall(HttpService.JSONDecode, HttpService, Content.text)
 				
-				if ok and typeof(status) == "table" and (typeof(status.text) == "string" and status.text ~= "") then
+				if Success and typeof(Result) == "table" and typeof(Result.text) == "string" and Result.text ~= "" then
 					return true
 				end
 			end
@@ -96,157 +73,163 @@ end
 
 return {
 	TOOL_NAME = "manage_developer_product",
-	LOCAL_TOOL_DEFINITION = t_1,
+	LOCAL_TOOL_DEFINITION = {
+		name = "manage_developer_product",
+		inputSchema = {
+			type = "object",
+			additionalProperties = false,
+			required = { "action" },
+			properties = {
+				action = {
+					type = "string",
+					enum = {
+						"create",
+						"list",
+						"update",
+						"activate",
+						"deactivate"
+					}
+				},
+				name = { type = "string" },
+				description = { type = "string" },
+				priceInRobux = {
+					type = "integer",
+					minimum = 1,
+					maximum = if FFlagBuildExperienceRemoveDevProductPriceCap then nil else 100
+				},
+				productId = { type = "integer" },
+				imageAssetId = { type = "integer", minimum = 1 }
+			}
+		}
+	},
 	toolCallLooksLikeRequest = toolCallLooksLikeRequest,
-	findManageDevProductRequestInTurnState = function(p2, p3)
-		-- upvalues: hasPersistedToolResult (ref)
-		local t = {}
-		
-		for i in p2.toolCalls do
-			table.insert(t, i)
+	findManageDevProductRequestInTurnState = function(p1, p2) --[[ Line: 122 ]]
+		-- upvalues: FFlagCreatorAgentChatMonetizationToolHelpersModule (copy), MonetizationClientToolModule (copy), hasPersistedToolResult (copy), toolCallLooksLikeRequest (copy)
+		if FFlagCreatorAgentChatMonetizationToolHelpersModule then
+			return MonetizationClientToolModule.findRequestInTurnState(p1, "manage_developer_product", p2)
 		end
-		table.sort(t)
+		local List = {}
 		
-		for i_1, v in t do
-			if not p3 or not p3[v] then
-				local var1 = p2.toolCalls[v]
+		for toolCall in p1.toolCalls do
+			table.insert(List, toolCall)
+		end
+		table.sort(List)
+		local ToolCall = nil
+		
+		for _, value in List do
+			if not p2 or not p2[value] then
+				ToolCall = p1.toolCalls[value]
 				
-				if (var1.status == nil or var1.status == "pending" or var1.status == "in_progress") and not hasPersistedToolResult(var1) then
-					local var2
-					local kind = var1.kind
-					
-					if not (typeof(kind) == "string" and string.lower(kind) == "manage_developer_product") then
-						kind = var1.title
-						
-						if typeof(kind) == "string" and string.lower(kind) == "manage_developer_product" then
-							var2 = true
-						else
-							local rawInput = var1.rawInput
-							
-							if typeof(rawInput) == "table" then
-								kind = rawInput.name
-								var2 = typeof(kind) == "string" and string.lower(kind) == "manage_developer_product"
-								
-								if not var2 then
-									kind = rawInput.toolName
-									var2 = false
-									
-									if typeof(kind) == "string" then
-										var2 = string.lower(kind) == "manage_developer_product"
-										var2 = nil
-									end
-								end
-							else
-								var2 = false
-							end
-						end
-						if var2 then
-							return v, var1.rawInput, var1.turnId, var1.referenceId
-						end
-					end
+				if (ToolCall.status == nil or ToolCall.status == "pending" or ToolCall.status == "in_progress") and not hasPersistedToolResult(ToolCall) and toolCallLooksLikeRequest(ToolCall) then
+					return value, ToolCall.rawInput, ToolCall.turnId, ToolCall.referenceId
 				end
 			end
 		end
 		return nil, nil, nil, nil
 	end,
-	parseManageDevProductInput = function(p4)
-		-- upvalues: t (ref), fFlagBuildExperienceRemoveDevProductPriceCap (ref)
-		if typeof(p4) ~= "table" then
+	parseManageDevProductInput = function(p3) --[[ Line: 155 ]]
+		-- upvalues: config (copy), FFlagBuildExperienceRemoveDevProductPriceCap (copy)
+		if typeof(p3) ~= "table" then
 			return nil
 		end
-		local action = p4.action
+		local Action: string = p3.action
 		
-		if typeof(action) ~= "string" then
+		if typeof(Action) ~= "string" then
 			return nil
 		end
-		local lowerText = string.lower(action)
+		local Lowered = string.lower(Action)
 		
-		if not t[lowerText] then
+		if not config[Lowered] then
 			return nil
 		end
-		local var3, var4
-		local t_1 = { action = lowerText }
+		local config1 = { action = Lowered }
 		
-		if typeof(p4.name) == "string" then
-			t_1.name = p4.name
+		if typeof(p3.name) == "string" then
+			config1.name = p3.name
 		end
-		if typeof(p4.description) == "string" then
-			t_1.description = p4.description
+		if typeof(p3.description) == "string" then
+			config1.description = p3.description
 		end
-		if p4.priceInRobux ~= nil then
-			var3 = tonumber(p4.priceInRobux)
-			var4 = if var3 == nil or var3 % 1 ~= 0 then nil else var3
+		if p3.priceInRobux ~= nil then
+			local Number: number? = tonumber(p3.priceInRobux)
+			local Number1 = if Number == nil or Number % 1 ~= 0 then nil else Number
 			
-			if var4 == nil or var4 < 1 or not fFlagBuildExperienceRemoveDevProductPriceCap and var4 > 100 then
+			if Number1 == nil or Number1 < 1 or not FFlagBuildExperienceRemoveDevProductPriceCap and Number1 > 100 then
 				return nil
 			end
-			t_1.priceInRobux = var4
+			config1.priceInRobux = Number1
 		end
-		var3 = tonumber(p4.productId)
-		var4 = if var3 == nil or var3 % 1 ~= 0 then nil else var3
+		local Number: number? = tonumber(p3.productId)
+		local Number2 = if Number == nil or Number % 1 ~= 0 then nil else Number
 		
-		if var4 ~= nil then
-			t_1.productId = var4
+		if Number2 ~= nil then
+			config1.productId = Number2
 		end
-		if p4.imageAssetId ~= nil then
-			local var5 = tonumber(p4.imageAssetId)
-			local var6 = if var5 == nil or var5 % 1 ~= 0 then nil else var5
+		if p3.imageAssetId ~= nil then
+			local Number3: number? = tonumber(p3.imageAssetId)
+			local Number31 = if Number3 == nil or Number3 % 1 ~= 0 then nil else Number3
 			
-			if var6 == nil or var6 < 1 or lowerText ~= "create" then
+			if Number31 == nil or Number31 < 1 or Lowered ~= "create" then
 				return nil
 			end
-			t_1.imageAssetId = var6
+			config1.imageAssetId = Number31
 		end
-		if lowerText == "create" then
-			if t_1.name == nil or t_1.name == "" or t_1.priceInRobux == nil then
+		if Lowered == "create" then
+			if config1.name == nil or config1.name == "" or config1.priceInRobux == nil then
 				return nil
 			end
-		elseif lowerText == "update" then
-			if t_1.productId == nil or t_1.name == nil and t_1.description == nil and t_1.priceInRobux == nil then
+		elseif Lowered == "update" then
+			if config1.productId == nil or config1.name == nil and config1.description == nil and config1.priceInRobux == nil then
 				return nil
 			end
-		else
-			return if (lowerText == "activate" or lowerText == "deactivate") and t_1.productId == nil then nil else t_1
+		elseif (Lowered == "activate" or Lowered == "deactivate") and config1.productId == nil then
+			return nil
 		end
+		return config1
 	end,
-	getActionKind = function(p4)
-		return if p4 == "list" then "read" else "mutation"
+	getActionKind = function(p3) --[[ Line: 221 ]]
+		-- upvalues: FFlagCreatorAgentChatMonetizationToolHelpersModule (copy), MonetizationClientToolModule (copy)
+		return if FFlagCreatorAgentChatMonetizationToolHelpersModule then MonetizationClientToolModule.getActionKind(p3) elseif p3 == "list" then "read" else "mutation"
 	end,
-	formatResultContent = function(p4)
-		-- upvalues: httpService (ref)
-		local var3 = if typeof(p4) == "table" and typeof(p4.action) == "string" then p4.action else "unknown"
-		local ok, status = pcall(httpService.JSONEncode, httpService, p4)
+	formatResultContent = function(p3) --[[ Line: 229 ]]
+		-- upvalues: FFlagCreatorAgentChatMonetizationToolHelpersModule (copy), MonetizationClientToolModule (copy), HttpService (copy)
+		if FFlagCreatorAgentChatMonetizationToolHelpersModule then
+			return MonetizationClientToolModule.formatResultContent(p3)
+		end
+		local Action = if typeof(p3) == "table" and typeof(p3.action) == "string" then p3.action else "unknown"
+		local Success, Result = pcall(HttpService.JSONEncode, HttpService, p3)
 		
-		if not ok then
+		if not Success then
 			return {
-				text = httpService:JSONEncode({
+				text = HttpService:JSONEncode({
 					status = "error",
 					detailCode = "result_serialization_failed",
 					message = "The client tool result could not be serialized.",
-					action = var3
+					action = Action
 				})
 			}, true
-		elseif #status > 524288 then
+		elseif #Result > 524288 then
 			return {
-				text = httpService:JSONEncode({
+				text = HttpService:JSONEncode({
 					status = "error",
 					detailCode = "result_too_large",
 					message = "The client tool result exceeded the response size limit.",
-					action = var3
+					action = Action
 				})
 			}, true
+		else
+			return { text = Result }, false
 		end
-		return { text = status }, false
 	end,
-	formatRejectionContent = function(p4, p5)
-		-- upvalues: httpService (ref)
-		return {
-			text = httpService:JSONEncode({
+	formatRejectionContent = function(Action, FeedbackText) --[[ Line: 265 ]]
+		-- upvalues: FFlagCreatorAgentChatMonetizationToolHelpersModule (copy), MonetizationClientToolModule (copy), HttpService (copy)
+		return if FFlagCreatorAgentChatMonetizationToolHelpersModule then MonetizationClientToolModule.formatRejectionContent(Action, FeedbackText) else {
+			text = HttpService:JSONEncode({
 				status = "cancelled",
 				accepted = false,
 				message = "The creator declined the change.",
-				action = p4,
-				feedbackText = p5
+				action = Action,
+				feedbackText = FeedbackText
 			})
 		}
 	end

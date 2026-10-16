@@ -1,8 +1,8 @@
-﻿local pioneerUtils = script:FindFirstAncestor("PioneerUtils")
-local experienceService = require(pioneerUtils.Parent.ExperienceService).ExperienceService
-local _ = require(pioneerUtils.PioneerLeaveReason)
+﻿local PioneerUtils = script:FindFirstAncestor("PioneerUtils")
+local ExperienceService = require(PioneerUtils.Parent.ExperienceService).ExperienceService
+local _ = require(PioneerUtils.PioneerLeaveReason)
 
-return function(p1)
-	-- upvalues: experienceService (ref)
-	experienceService:LeaveExperienceWithReason(p1)
+return function(Reason) --[[ Line: 10 | Named "leaveExperience" ]]
+	-- upvalues: ExperienceService (copy)
+	ExperienceService:LeaveExperienceWithReason(Reason)
 end

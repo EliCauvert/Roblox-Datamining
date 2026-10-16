@@ -1,61 +1,60 @@
-﻿local playersService = game:GetService("Players")
-local runService = game:GetService("RunService")
-local robloxReplicatedStorageService = game:GetService("RobloxReplicatedStorage")
-local switchServer = script:FindFirstAncestor("SwitchServer")
-local parent = switchServer.Parent
-local coreScriptsCommonModule = require(parent.CoreScriptsCommon)
-local signalsModule = require(parent.Signals)
-local switchServerTelemetryModule = require(switchServer.Telemetry.SwitchServerTelemetry)
-local STANDARD_SERVER = coreScriptsCommonModule.Constants.STANDARD_SERVER
+﻿local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local RobloxReplicatedStorage = game:GetService("RobloxReplicatedStorage")
+local SwitchServer = script:FindFirstAncestor("SwitchServer")
+local Parent = SwitchServer.Parent
+local SignalsModule = require(Parent.Signals)
+local SwitchServerTelemetryModule = require(SwitchServer.Telemetry.SwitchServerTelemetry)
+local STANDARDSERVER = require(Parent.CoreScriptsCommon).Constants.STANDARD_SERVER
 
-local function _(p1)
-	-- upvalues: runService (ref), playersService (ref), robloxReplicatedStorageService (ref), STANDARD_SERVER (ref)
-	task.spawn(function()
-		-- upvalues: runService (copy), playersService (copy), robloxReplicatedStorageService (copy), STANDARD_SERVER (copy), p1 (ref)
-		if runService:IsStudio() or not game:GetEngineFeature("GameIdToExcludeAvailable") or playersService.MaxPlayers == 1 then return end
-		local getServerType = robloxReplicatedStorageService:WaitForChild("GetServerType", 2)
+local function _(p1) --[[ Line: 21 | Named "fetchAndUpdateShouldSwitchServer" ]]
+	-- upvalues: RunService (copy), Players (copy), RobloxReplicatedStorage (copy), STANDARDSERVER (copy)
+	task.spawn(function() --[[ Line: 22 ]]
+		-- upvalues: RunService (upval), Players (upval), RobloxReplicatedStorage (upval), STANDARDSERVER (upval), p1 (copy)
+		if RunService:IsStudio() or not game:GetEngineFeature("GameIdToExcludeAvailable") or Players.MaxPlayers == 1 then return end
+		local GetServerType = RobloxReplicatedStorage:WaitForChild("GetServerType", 2)
 		
-		if not getServerType then return end
-		local ok, status = pcall(function()
-			-- upvalues: getServerType (ref)
-			return getServerType:InvokeServer()
+		if not GetServerType then return end
+		local Success, Result = pcall(function() --[[ Line: 36 ]]
+			-- upvalues: GetServerType (copy)
+			return GetServerType:InvokeServer()
 		end)
 		
-		if ok then
-			p1(status == STANDARD_SERVER)
+		if Success then
+			p1(Result == STANDARDSERVER)
 		end
 	end)
 end
 
-return function()
-	-- upvalues: signalsModule (ref), runService (ref), playersService (ref), robloxReplicatedStorageService (ref), STANDARD_SERVER (ref), switchServerTelemetryModule (ref)
-	local var1, var2 = signalsModule.createSignal(false)
-	task.spawn(function()
-		-- upvalues: runService (copy), playersService (copy), robloxReplicatedStorageService (copy), STANDARD_SERVER (copy), var2 (ref)
-		if runService:IsStudio() or not game:GetEngineFeature("GameIdToExcludeAvailable") or playersService.MaxPlayers == 1 then return end
-		local getServerType = robloxReplicatedStorageService:WaitForChild("GetServerType", 2)
+return function() --[[ Line: 46 | Named "createSwitchServerStore" ]]
+	-- upvalues: SignalsModule (copy), RunService (copy), Players (copy), RobloxReplicatedStorage (copy), STANDARDSERVER (copy), SwitchServerTelemetryModule (copy)
+	local Signal, Signal2 = SignalsModule.createSignal(false)
+	task.spawn(function() --[[ Line: 22 ]]
+		-- upvalues: RunService (upval), Players (upval), RobloxReplicatedStorage (upval), STANDARDSERVER (upval), Signal2 (copy)
+		if RunService:IsStudio() or not game:GetEngineFeature("GameIdToExcludeAvailable") or Players.MaxPlayers == 1 then return end
+		local GetServerType = RobloxReplicatedStorage:WaitForChild("GetServerType", 2)
 		
-		if not getServerType then return end
-		local ok, status = pcall(function()
-			-- upvalues: getServerType (ref)
-			return getServerType:InvokeServer()
+		if not GetServerType then return end
+		local Success, Result = pcall(function() --[[ Line: 36 ]]
+			-- upvalues: GetServerType (copy)
+			return GetServerType:InvokeServer()
 		end)
 		
-		if ok then
-			var2(status == STANDARD_SERVER)
+		if Success then
+			Signal2(Result == STANDARDSERVER)
 		end
 	end)
-	local var3, var4 = signalsModule.createSignal(false)
+	local Signal1, Signal2_1 = SignalsModule.createSignal(false)
 	
 	return {
-		shouldEnableSwitchServer = var1,
-		isConfirmationOpen = var3,
-		setConfirmationOpen = function(p1)
-			-- upvalues: switchServerTelemetryModule (copy), var4 (ref)
+		shouldEnableSwitchServer = Signal,
+		isConfirmationOpen = Signal1,
+		setConfirmationOpen = function(p1) --[[ Line: 50 ]]
+			-- upvalues: SwitchServerTelemetryModule (upval), Signal2_1 (copy)
 			if p1 then
-				switchServerTelemetryModule.sendSwitchServerButtonActions({ event_type = "click" })
+				SwitchServerTelemetryModule.sendSwitchServerButtonActions({ event_type = "click" })
 			end
-			var4(p1)
+			Signal2_1(p1)
 		end
 	}
 end

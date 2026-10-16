@@ -1,201 +1,200 @@
-﻿local runService = game:GetService("RunService")
-local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local foundationModule = require(parent_1.Foundation)
-local reactModule = require(parent_1.React)
-local buttonSize = foundationModule.Enums.ButtonSize
-local iconButton = foundationModule.IconButton
-local stateLayerAffordance = foundationModule.Enums.StateLayerAffordance
-local image = foundationModule.Image
-local text = foundationModule.Text
-local view = foundationModule.View
-local loadableVideoModule = require(parent.Components.LoadableVideo)
-local progressBarModule = require(parent.Components.ProgressBar)
+﻿local RunService = game:GetService("RunService")
+local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local FoundationModule = require(Parent1.Foundation)
+local ReactModule = require(Parent1.React)
+local ButtonSize = FoundationModule.Enums.ButtonSize
+local IconButton = FoundationModule.IconButton
+local StateLayerAffordance = FoundationModule.Enums.StateLayerAffordance
+local Image = FoundationModule.Image
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local LoadableVideoModule = require(Parent.Components.LoadableVideo)
+local ProgressBarModule = require(Parent.Components.ProgressBar)
 
-local function _(p1)
+local function _(p1) --[[ Line: 49 | Named "getCurrent" ]]
 	return if typeof(p1) == "table" and p1.current ~= nil then p1.current else nil
 end
 
-return function(p1)
-	-- upvalues: reactModule (ref), runService (ref), view (ref), stateLayerAffordance (ref), iconButton (ref), buttonSize (ref), loadableVideoModule (ref), text (ref), progressBarModule (ref), foundationModule (ref), image (ref)
-	local var1
-	local var2, var3 = reactModule.useState(0)
-	local var4, var5 = reactModule.useState(0)
-	local var6, var7 = reactModule.useState(false)
-	local var8, var9 = reactModule.useState(false)
-	local var10, var11 = reactModule.useState(false)
-	local var12, var13 = reactModule.useState(true)
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var7 (ref), runService (copy), var3 (ref)
-		local videoRef = p1.videoRef
-		local var14 = if typeof(videoRef) == "table" and videoRef.current ~= nil then videoRef.current else nil
+return function(Frame: Frame) --[[ Line: 56 | Named "MediaPlayer" ]]
+	-- upvalues: ReactModule (copy), RunService (copy), View (copy), StateLayerAffordance (copy), IconButton (copy), ButtonSize (copy), LoadableVideoModule (copy), Text (copy), ProgressBarModule (copy), FoundationModule (copy), Image (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(0)
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(false)
+	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(false)
+	local UseStateResult5, UseStateResult2_4 = ReactModule.useState(false)
+	local UseStateResult6, UseStateResult2_5 = ReactModule.useState(true)
+	ReactModule.useEffect(function() --[[ Line: 64 ]]
+		-- upvalues: Frame (copy), UseStateResult2_2 (copy), RunService (upval), UseStateResult2 (copy)
+		local VideoRef = Frame.videoRef
+		local Current = if typeof(VideoRef) == "table" and VideoRef.current ~= nil then VideoRef.current else nil
 		
-		if var14 then
-			videoRef = var14.Played:Connect(function()
-				-- upvalues: var7 (copy)
-				var7(false)
-			end)
-			local endedConnection = var14.Ended:Connect(function()
-				-- upvalues: var7 (copy)
-				var7(true)
-			end)
-			local renderSteppedConnection = runService.RenderStepped:Connect(function()
-				-- upvalues: var3 (copy), var14 (ref)
-				var3(var14.TimePosition)
-			end)
-			
-			return function()
-				-- upvalues: renderSteppedConnection (ref), videoRef (ref), endedConnection (ref)
-				renderSteppedConnection:Disconnect()
-				videoRef:Disconnect()
-				endedConnection:Disconnect()
-			end
+		if not Current then return end
+		local PlayedConnection = Current.Played:Connect(function() --[[ Line: 70 ]]
+			-- upvalues: UseStateResult2_2 (upval)
+			UseStateResult2_2(false)
+		end)
+		local EndedConnection = Current.Ended:Connect(function() --[[ Line: 74 ]]
+			-- upvalues: UseStateResult2_2 (upval)
+			UseStateResult2_2(true)
+		end)
+		local RenderSteppedConnection = RunService.RenderStepped:Connect(function() --[[ Line: 78 ]]
+			-- upvalues: UseStateResult2 (upval), Current (copy)
+			UseStateResult2(Current.TimePosition)
+		end)
+		
+		return function() --[[ Line: 82 ]]
+			-- upvalues: RenderSteppedConnection (copy), PlayedConnection (copy), EndedConnection (copy)
+			RenderSteppedConnection:Disconnect()
+			PlayedConnection:Disconnect()
+			EndedConnection:Disconnect()
 		end
-	end, { p1.videoRef, var12, var6 })
-	local var14 = reactModule.useCallback(function(p2)
-		-- upvalues: p1 (ref), var5 (ref)
-		local videoRef = p1.videoRef
-		local var15 = if typeof(videoRef) == "table" and videoRef.current ~= nil then videoRef.current else nil
+	end, { Frame.videoRef, UseStateResult6, UseStateResult3 })
+	local UseResult = ReactModule.useCallback(function(p1) --[[ Line: 89 ]]
+		-- upvalues: Frame (copy), UseStateResult2_1 (copy)
+		local VideoRef = Frame.videoRef
+		local Current = if typeof(VideoRef) == "table" and VideoRef.current ~= nil then VideoRef.current else nil
 		
-		if var15 then
-			var5(var15.TimeLength)
-			p1.onLoaded(p2)
+		if Current then
+			UseStateResult2_1(Current.TimeLength)
+			Frame.onLoaded(p1)
 			
 			return
 		end
-	end, { p1.onLoaded, p1.videoRef })
-	local var15 = reactModule.useCallback(function()
-		-- upvalues: var13 (ref), var12 (ref)
-		var13(not var12)
-	end, { var12 })
-	local var16 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref), var6 (ref), var7 (ref), var2 (ref), var4 (ref)
-		local videoRef = p1.videoRef
-		local var17 = if typeof(videoRef) == "table" and videoRef.current ~= nil then videoRef.current else nil
+	end, { Frame.onLoaded, Frame.videoRef })
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 103 ]]
+		-- upvalues: Frame (copy), UseStateResult3 (copy), UseStateResult2_2 (copy), UseStateResult (copy), UseStateResult1 (copy)
+		local VideoRef = Frame.videoRef
+		local Current = if typeof(VideoRef) == "table" and VideoRef.current ~= nil then VideoRef.current else nil
 		
-		if not var17 then return end
-		if not var6 then
-			var17:Pause()
-			var7(true)
-			
-			return
-		elseif math.abs(var2 - var4) <= 0.1 then
-			var17.TimePosition = 0
-		end
-		var17:Play()
-		var7(false)
-	end, { var6, p1.videoRef, var2, var4 })
-	local var17 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref), var11 (ref), var10 (ref)
-		if p1.onExpandCallback then
-			p1.onExpandCallback()
-		end
-		var11(not var10)
-	end, { var10, p1.onExpandCallback })
-	local var18 = reactModule.useCallback(function(p2)
-		-- upvalues: p1 (ref)
-		local videoRef = p1.videoRef
-		local var19 = if typeof(videoRef) == "table" and videoRef.current ~= nil then videoRef.current else nil
-		
-		if var19 then
-			var19.TimePosition = var19.TimeLength * p2
+		if not Current then return end
+		if not UseStateResult3 then
+			Current:Pause()
+			UseStateResult2_2(true)
 			
 			return
 		end
-	end, { p1.videoRef })
-	local var19 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref), var8 (ref), var9 (ref)
-		if p1.onMuteCallback then
-			p1.onMuteCallback()
+		if math.abs(UseStateResult - UseStateResult1) <= 0.1 then
+			Current.TimePosition = 0
 		end
-		local videoRef = p1.videoRef
-		local var20 = if typeof(videoRef) == "table" and videoRef.current ~= nil then videoRef.current else nil
+		Current:Play()
+		UseStateResult2_2(false)
+	end, {
+		UseStateResult3,
+		Frame.videoRef,
+		UseStateResult,
+		UseStateResult1
+	})
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 121 ]]
+		-- upvalues: Frame (copy), UseStateResult2_4 (copy), UseStateResult5 (copy)
+		if Frame.onExpandCallback then
+			Frame.onExpandCallback()
+		end
+		UseStateResult2_4(not UseStateResult5)
+	end, { UseStateResult5, Frame.onExpandCallback })
+	local UseResult3 = ReactModule.useCallback(function(p1) --[[ Line: 129 ]]
+		-- upvalues: Frame (copy)
+		local VideoRef = Frame.videoRef
+		local Current = if typeof(VideoRef) == "table" and VideoRef.current ~= nil then VideoRef.current else nil
 		
-		if var20 then
-			var20.Volume = if var8 then 1 else 0
-			var9(not var8)
+		if Current then
+			Current.TimePosition = Current.TimeLength * p1
 			
 			return
 		end
-	end, { var8, p1.onMuteCallback, p1.videoRef })
-	local var20 = not p1.Playing and (p1.thumbnailImage ~= nil and p1.thumbnailImage ~= "")
-	
-	if not p1.Video then
-		var1 = p1.VideoContent and (if p1.Playing ~= nil then p1.Playing else not p1.thumbnailImage)
-	end
-	local createElement = reactModule.createElement
-	local t = {
-		tag = "shrink size-full",
-		onActivated = var15,
-		stateLayer = { affordance = stateLayerAffordance.None },
-		ZIndex = p1.ZIndex
-	}
-	local t_1 = {}
-	local videoRef = p1.videoRef
-	local var21 = if typeof(videoRef) == "table" and videoRef.current ~= nil then videoRef.current else nil
-	t_1.HeaderBarContainer = if var21 == nil or not p1.onExpandCallback or (p1.isZooming or var12) or p1.isOverlayDisabled then nil else reactModule.createElement(view, {
+	end, { Frame.videoRef })
+	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 138 ]]
+		-- upvalues: Frame (copy), UseStateResult4 (copy), UseStateResult2_3 (copy)
+		if Frame.onMuteCallback then
+			Frame.onMuteCallback()
+		end
+		local VideoRef = Frame.videoRef
+		local Current = if typeof(VideoRef) == "table" and VideoRef.current ~= nil then VideoRef.current else nil
+		
+		if Current then
+			Current.Volume = if UseStateResult4 then 1 else 0
+			UseStateResult2_3(not UseStateResult4)
+			
+			return
+		end
+	end, { UseStateResult4, Frame.onMuteCallback, Frame.videoRef })
+	local IsNotThumbnailImageMatch: boolean = not Frame.Playing and (Frame.thumbnailImage ~= nil and Frame.thumbnailImage ~= "")
+	local NoThumbnailImage = if Frame.Video then if Frame.Playing == nil then not Frame.thumbnailImage else Frame.Playing or not Frame.thumbnailImage else Frame.VideoContent and (if Frame.Playing == nil then not Frame.thumbnailImage else Frame.Playing or not Frame.thumbnailImage)
+	local VideoRef = Frame.videoRef
+	local Current = if typeof(VideoRef) == "table" and VideoRef.current ~= nil then VideoRef.current else nil
+	local Element = if Current == nil or not Frame.onExpandCallback or Frame.isZooming or UseStateResult6 or Frame.isOverlayDisabled then nil else ReactModule.createElement(View, {
 		tag = "anchor-top-center position-top-center size-full-0 auto-y padding-medium row align-x-right",
 		ZIndex = 3
 	}, {
-		ExpandButton = reactModule.createElement(iconButton, {
+		ExpandButton = ReactModule.createElement(IconButton, {
 			isDisabled = false,
 			LayoutOrder = 1,
-			icon = if var10 then "icons/actions/previewShrink" else "icons/actions/previewExpand",
-			onActivated = var17,
-			size = buttonSize.Medium
+			icon = if UseStateResult5 then "icons/actions/previewShrink" else "icons/actions/previewExpand",
+			onActivated = UseResult2,
+			size = ButtonSize.Medium
 		})
 	})
-	t_1.VideoPreview = if var1 then reactModule.createElement(loadableVideoModule, {
-		AnchorPoint = p1.AnchorPoint,
-		BackgroundTransparency = p1.BackgroundTransparency,
-		cornerRadius = p1.cornerRadius,
-		Looped = p1.Looped,
-		onLoaded = var14,
-		Playing = p1.Playing,
-		Position = p1.Position,
-		renderOnFailed = p1.renderOnFailed,
-		scaleType = p1.scaleType,
-		Size = p1.Size,
-		Video = p1.Video,
-		VideoContent = p1.VideoContent,
-		videoRef = p1.videoRef
-	}) else reactModule.createElement(view, {
-		tag = "align-x-center align-y-center auto-xy items-center gap-medium"
-	}, {
-		Text = reactModule.createElement(text, { Text = "No video to display", tag = "auto-xy" })
-	})
-	videoRef = p1.videoRef
-	var21 = if typeof(videoRef) == "table" and videoRef.current ~= nil then videoRef.current else nil
-	t_1.ProgressBarContainer = if var21 == nil or p1.isZooming or (var12 or p1.isOverlayDisabled) then nil else reactModule.createElement(view, {
-		tag = "anchor-bottom-center position-bottom-center size-full-0 auto-y",
-		ZIndex = 3
-	}, {
-		ProgressBar = reactModule.createElement(progressBarModule, {
-			isMuted = var8,
-			isPlaying = not var6,
-			isTimeHidden = p1.isTimeHidden,
-			onMuteButtonActivated = var19,
-			onPlayButtonActivated = var16,
-			onProgressBarActivated = var18,
-			timePosition = var2,
-			timeLength = var4
-		})
-	})
-	t_1.ShadowBlock = if var12 or p1.isOverlayDisabled then nil else reactModule.createElement(view, {
-		tag = "size-full-full",
-		ZIndex = 2,
-		backgroundStyle = { Transparency = 0.4, Color3 = Color3.fromRGB(0, 0, 0) },
-		stateLayer = {
-			affordance = foundationModule.Enums.StateLayerAffordance.None
-		}
-	})
-	t_1.ThumbnailImage = if var20 then reactModule.createElement(image, {
-		ZIndex = 2,
-		Image = p1.thumbnailImage,
-		Size = UDim2.fromScale(1, 1)
-	}, {
-		UICorner = if p1.cornerRadius then reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, p1.cornerRadius) }) else nil
-	}) else nil
+	local VideoRef1 = Frame.videoRef
+	local Current1 = if typeof(VideoRef1) == "table" and VideoRef1.current ~= nil then VideoRef1.current else nil
 	
-	return createElement(view, t, t_1)
+	return ReactModule.createElement(View, {
+		tag = "shrink size-full",
+		onActivated = ReactModule.useCallback(function() --[[ Line: 99 ]]
+			-- upvalues: UseStateResult2_5 (copy), UseStateResult6 (copy)
+			UseStateResult2_5(not UseStateResult6)
+		end, { UseStateResult6 }),
+		stateLayer = { affordance = StateLayerAffordance.None },
+		ZIndex = Frame.ZIndex
+	}, {
+		HeaderBarContainer = Element,
+		VideoPreview = if NoThumbnailImage then ReactModule.createElement(LoadableVideoModule, {
+			AnchorPoint = Frame.AnchorPoint,
+			BackgroundTransparency = Frame.BackgroundTransparency,
+			cornerRadius = Frame.cornerRadius,
+			Looped = Frame.Looped,
+			onLoaded = UseResult,
+			Playing = Frame.Playing,
+			Position = Frame.Position,
+			renderOnFailed = Frame.renderOnFailed,
+			scaleType = Frame.scaleType,
+			Size = Frame.Size,
+			Video = Frame.Video,
+			VideoContent = Frame.VideoContent,
+			videoRef = Frame.videoRef
+		}) else ReactModule.createElement(View, {
+			tag = "align-x-center align-y-center auto-xy items-center gap-medium"
+		}, {
+			Text = ReactModule.createElement(Text, { Text = "No video to display", tag = "auto-xy" })
+		}),
+		ProgressBarContainer = if Current1 == nil or Frame.isZooming or UseStateResult6 or Frame.isOverlayDisabled then nil else ReactModule.createElement(View, {
+			tag = "anchor-bottom-center position-bottom-center size-full-0 auto-y",
+			ZIndex = 3
+		}, {
+			ProgressBar = ReactModule.createElement(ProgressBarModule, {
+				isMuted = UseStateResult4,
+				isPlaying = not UseStateResult3,
+				isTimeHidden = Frame.isTimeHidden,
+				onMuteButtonActivated = UseResult4,
+				onPlayButtonActivated = UseResult1,
+				onProgressBarActivated = UseResult3,
+				timePosition = UseStateResult,
+				timeLength = UseStateResult1
+			})
+		}),
+		ShadowBlock = if UseStateResult6 or Frame.isOverlayDisabled then nil else ReactModule.createElement(View, {
+			tag = "size-full-full",
+			ZIndex = 2,
+			backgroundStyle = { Transparency = 0.4, Color3 = Color3.fromRGB(0, 0, 0) },
+			stateLayer = {
+				affordance = FoundationModule.Enums.StateLayerAffordance.None
+			}
+		}),
+		ThumbnailImage = if IsNotThumbnailImageMatch then ReactModule.createElement(Image, {
+			ZIndex = 2,
+			Image = Frame.thumbnailImage,
+			Size = UDim2.fromScale(1, 1)
+		}, {
+			UICorner = if Frame.cornerRadius then ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0, Frame.cornerRadius) }) else nil
+		}) else nil
+	})
 end

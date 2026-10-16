@@ -1,49 +1,50 @@
-﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
-local parent = momentsCreation.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local text = foundationModule.Text
-local view = foundationModule.View
-local useTokens = foundationModule.Hooks.useTokens
-local getFormatTimeModule = require(momentsCreation.Utils.getFormatTime)
-local dragHandleModule = require(momentsCreation.Enums.DragHandle)
+﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
+local Parent = MomentsCreation.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local GetFormatTimeModule = require(MomentsCreation.Utils.getFormatTime)
+local DragHandleModule = require(MomentsCreation.Enums.DragHandle)
 
-return function(p1)
-	-- upvalues: useTokens (ref), dragHandleModule (ref), reactModule (ref), view (ref), text (ref), getFormatTimeModule (ref)
-	local var1 = useTokens()
+return function(p1) --[[ Line: 30 ]]
+	-- upvalues: UseTokensFunction (copy), DragHandleModule (copy), ReactModule (copy), View (copy), Text (copy), GetFormatTimeModule (copy)
+	local UseTokensResult = UseTokensFunction()
 	
-	if not (if p1.activeHandle ~= dragHandleModule.LeftHandle then p1.activeHandle == dragHandleModule.RightHandle else true) or not p1.timeLength then
+	if p1.activeHandle ~= DragHandleModule.LeftHandle and p1.activeHandle ~= DragHandleModule.RightHandle or not p1.timeLength then
 		return nil
 	end
-	local var2 = if p1.activeHandle == dragHandleModule.LeftHandle then p1.leftHandlePosition elseif p1.activeHandle == dragHandleModule.RightHandle then p1.rightHandlePosition else nil
+	local LeftHandlePosition = if p1.activeHandle == DragHandleModule.LeftHandle then p1.leftHandlePosition elseif p1.activeHandle == DragHandleModule.RightHandle then p1.rightHandlePosition else nil
 	
-	if var2 == nil then
+	if LeftHandlePosition == nil then
 		return nil
-	end
-	local timeLength = p1.timeLength
-	
-	return reactModule.createElement(view, {
-		tag = "col align-x-center align-y-bottom gap-xsmall anchor-bottom-center",
-		Position = var2:map(function(p2)
-			-- upvalues: var1 (ref)
-			return UDim2.new(p2, 0, 0, -var1.Padding.Small)
-		end)
-	}, {
-		TextContainer = reactModule.createElement(view, {
-			tag = "anchor-center-center size-1600-800 radius-small bg-system-contrast",
-			LayoutOrder = 1
+	else
+		local TimeLength = p1.timeLength
+		
+		return ReactModule.createElement(View, {
+			tag = "col align-x-center align-y-bottom gap-xsmall anchor-bottom-center",
+			Position = LeftHandlePosition:map(function(XScale): UDim2 --[[ Line: 52 ]]
+				-- upvalues: UseTokensResult (copy)
+				return UDim2.new(XScale, 0, 0, -UseTokensResult.Padding.Small)
+			end)
 		}, {
-			TimeText = reactModule.createElement(text, {
-				tag = "position-center-center anchor-center-center auto-xy text-caption-medium content-inverse-default",
-				Text = var2:map(function(p2)
-					-- upvalues: getFormatTimeModule (copy), timeLength (ref)
-					return getFormatTimeModule(p2 * timeLength)
-				end)
+			TextContainer = ReactModule.createElement(View, {
+				tag = "anchor-center-center size-1600-800 radius-small bg-system-contrast",
+				LayoutOrder = 1
+			}, {
+				TimeText = ReactModule.createElement(Text, {
+					tag = "position-center-center anchor-center-center auto-xy text-caption-medium content-inverse-default",
+					Text = LeftHandlePosition:map(function(p2) --[[ Line: 62 ]]
+						-- upvalues: GetFormatTimeModule (upval), TimeLength (copy)
+						return GetFormatTimeModule(p2 * TimeLength)
+					end)
+				})
+			}),
+			VerticalBar = ReactModule.createElement(View, {
+				tag = "anchor-center-center size-50-300 bg-system-contrast",
+				LayoutOrder = 2
 			})
-		}),
-		VerticalBar = reactModule.createElement(view, {
-			tag = "anchor-center-center size-50-300 bg-system-contrast",
-			LayoutOrder = 2
 		})
-	})
+	end
 end

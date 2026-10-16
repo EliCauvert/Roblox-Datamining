@@ -1,6 +1,6 @@
-﻿local constantsModule = require(script:FindFirstAncestor("VerifiedBadges").constants)
+﻿local ConstantsModule = require(script:FindFirstAncestor("VerifiedBadges").constants)
 
-return function(p1)
-	-- upvalues: constantsModule (ref)
-	return p1 .. constantsModule.PREMIUM_EMOJI
+return function(Text): string --[[ Line: 9 | Named "appendPremiumBadge" ]]
+	-- upvalues: ConstantsModule (copy)
+	return Text .. ConstantsModule.PREMIUM_EMOJI
 end

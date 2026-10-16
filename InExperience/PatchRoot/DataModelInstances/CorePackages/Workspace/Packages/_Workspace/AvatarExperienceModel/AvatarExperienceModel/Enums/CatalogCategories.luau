@@ -1,7 +1,9 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceModel").Parent
-local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceModel").Parent
+local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
+local FFlagAXCatalogM41Props = AvatarExperienceFlagsModule.FFlagAXCatalogM41Props
+local FFlagAXAddHDCatalogTab = AvatarExperienceFlagsModule.FFlagAXAddHDCatalogTab
 
-return require(parent.enumerate)(script.Name, {
+return require(Parent.enumerate)(script.Name, {
 	Featured = "Featured",
 	Recommended = "Recommended",
 	Characters = "Characters",
@@ -13,7 +15,7 @@ return require(parent.enumerate)(script.Name, {
 	Makeup = "Makeup",
 	AllAnimations = "AllAnimations",
 	Emotes = "Emotes",
-	Backgrounds = if avatarExperienceFlagsModule.FFlagAXCatalogBackgroundsSupport then "Backgrounds" else nil,
-	Props = if avatarExperienceFlagsModule.FFlagAXCatalogM41Props then "Props" else nil,
-	HighDefinition = if avatarExperienceFlagsModule.FFlagAXAddHDCatalogTab then "HighDefinition" else nil
+	Backgrounds = if AvatarExperienceFlagsModule.FFlagAXCatalogBackgroundsSupport then "Backgrounds" else nil,
+	Props = if FFlagAXCatalogM41Props then "Props" else nil,
+	HighDefinition = if FFlagAXAddHDCatalogTab then "HighDefinition" else nil
 })

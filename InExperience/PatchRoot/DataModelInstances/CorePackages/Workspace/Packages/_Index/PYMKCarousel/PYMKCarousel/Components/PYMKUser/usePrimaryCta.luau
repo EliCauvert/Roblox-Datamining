@@ -1,34 +1,34 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local react = require(parent.dependencies).React
-local usePYMKCarouselUserButtonsModule = require(parent.Components.PYMKUser.usePYMKCarouselUserButtons)
-local _ = require(parent.Common.DirectRecommendationTypes)
-local fFlagLuaAppEnableSduiHomePage = require(parent_1.SharedFlags).FFlagLuaAppEnableSduiHomePage
-local entityType = require(parent_1.UserList).Enums.EntityType
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local React = require(Parent.dependencies).React
+local UsePYMKCarouselUserButtonsModule = require(Parent.Components.PYMKUser.usePYMKCarouselUserButtons)
+local _ = require(Parent.Common.DirectRecommendationTypes)
+local FFlagLuaAppEnableSduiHomePage = require(Parent1.SharedFlags).FFlagLuaAppEnableSduiHomePage
+local EntityType = require(Parent1.UserList).Enums.EntityType
 
-return function(p1)
-	-- upvalues: usePYMKCarouselUserButtonsModule (ref), entityType (ref), fFlagLuaAppEnableSduiHomePage (ref), react (ref)
-	local var1 = usePYMKCarouselUserButtonsModule({
+return function(p1) --[[ Line: 27 | Named "usePrimaryCta" ]]
+	-- upvalues: UsePYMKCarouselUserButtonsModule (copy), EntityType (copy), FFlagLuaAppEnableSduiHomePage (copy), React (copy)
+	local UsePYMKCarouselUserButtonsModuleResult = UsePYMKCarouselUserButtonsModule({
 		userId = p1.entityId,
 		showToast = p1.showToast,
 		fireAnalyticsEvent = p1.fireAnalyticsEvent,
 		absolutePosition = p1.absolutePosition,
-		contactId = if p1.entityType == entityType.Contact then p1.entityId else nil,
-		recommendation = if fFlagLuaAppEnableSduiHomePage then p1.recommendation else nil
+		contactId = if p1.entityType == EntityType.Contact then p1.entityId else nil,
+		recommendation = if FFlagLuaAppEnableSduiHomePage then p1.recommendation else nil
 	})
 	
-	return react.useMemo(function()
-		-- upvalues: var1 (ref)
-		local var2 = var1()[1]
+	return React.useMemo(function() --[[ Line: 37 ]]
+		-- upvalues: UsePYMKCarouselUserButtonsModuleResult (copy)
+		local UsePYMKCarouselUserButtonsModuleResultResultEntry = UsePYMKCarouselUserButtonsModuleResult()[1]
 		
-		return if var2 then {
+		return if UsePYMKCarouselUserButtonsModuleResultResultEntry then {
 			icon = nil,
 			disabledReason = nil,
-			type = var2.buttonType,
-			onActivated = var2.onActivated,
-			isDisabled = var2.isDisabled,
-			isLoading = var2.isLoading,
-			focusEventName = var2.focusEvent
+			type = UsePYMKCarouselUserButtonsModuleResultResultEntry.buttonType,
+			onActivated = UsePYMKCarouselUserButtonsModuleResultResultEntry.onActivated,
+			isDisabled = UsePYMKCarouselUserButtonsModuleResultResultEntry.isDisabled,
+			isLoading = UsePYMKCarouselUserButtonsModuleResultResultEntry.isLoading,
+			focusEventName = UsePYMKCarouselUserButtonsModuleResultResultEntry.focusEvent
 		} else nil
-	end, { var1 })
+	end, { UsePYMKCarouselUserButtonsModuleResult })
 end

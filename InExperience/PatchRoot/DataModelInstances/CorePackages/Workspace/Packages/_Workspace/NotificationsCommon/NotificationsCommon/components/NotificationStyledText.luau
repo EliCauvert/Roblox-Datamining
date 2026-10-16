@@ -1,32 +1,32 @@
-﻿local parent = script:FindFirstAncestor("NotificationsCommon").Parent
-local parent_1 = script.Parent.Parent
-local dependenciesModule = require(parent_1.dependencies)
-local useStyle = dependenciesModule.UIBlox.Core.Style.useStyle
-local _ = require(parent_1.type)
-local text = require(parent.AppCommonLib).Text
-local react = dependenciesModule.React
-local foundationFontFaceMigration = require(parent.Foundation).Utility.Flags.FoundationFontFaceMigration
-local t = {
-	highlight = function(p1)
-		return "<b>" .. p0 .. "</b>"
+﻿local Parent = script:FindFirstAncestor("NotificationsCommon").Parent
+local Parent1 = script.Parent.Parent
+local DependenciesModule = require(Parent1.dependencies)
+local UseStyleFunction = DependenciesModule.UIBlox.Core.Style.useStyle
+local _ = require(Parent1.type)
+local Text = require(Parent.AppCommonLib).Text
+local React = DependenciesModule.React
+local FoundationFontFaceMigration = require(Parent.Foundation).Utility.Flags.FoundationFontFaceMigration
+local config = {
+	highlight = function(Text): string --[[ Line: 52 ]]
+		return "<b>" .. Text .. "</b>"
 	end,
-	warning = function(p1)
-		return "<b>" .. p1 .. "</b>"
+	warning = function(Text): string --[[ Line: 55 ]]
+		return "<b>" .. Text .. "</b>"
 	end
 }
 
-function utf8Sub(p1, p2, p3)
-	local byteOffset = utf8.offset(p1, p2)
-	local byteOffset_1 = utf8.offset(p1, p3 + 1)
+function utf8Sub(Text: string, StartIndex: number, EndIndex: number): string --[[ Line: 60 ]]
+	local OffsetResult = utf8.offset(Text, StartIndex)
+	local OffsetResult1 = utf8.offset(Text, EndIndex + 1)
 	
-	return if byteOffset == nil or byteOffset_1 == nil then string.sub(p1, p2, p3) else string.sub(p1, byteOffset, byteOffset_1 - 1)
+	return if OffsetResult == nil or OffsetResult1 == nil then string.sub(Text, StartIndex, EndIndex) else string.sub(Text, OffsetResult, OffsetResult1 - 1)
 end
 
-local function formatString(p1)
-	-- upvalues: t (ref), text (ref)
-	local text_1 = p1.text .. " "
-	local styledElements = p1.styledElements
-	local list = {
+local function formatString(p1) --[[ Line: 69 ]]
+	-- upvalues: config (copy), Text (copy)
+	local Text1 = p1.text .. " "
+	local StyledElements = p1.styledElements
+	local List = {
 		{ Position = 0, ReferenceCount = 0, Format = "highlight" },
 		{
 			ReferenceCount = 0,
@@ -35,71 +35,71 @@ local function formatString(p1)
 		}
 	}
 	
-	if styledElements then
-		for i, v in pairs(styledElements) do
-			table.insert(list, {
+	if StyledElements then
+		for _, styledElement in pairs(StyledElements) do
+			table.insert(List, {
 				ReferenceCount = 1,
-				Position = v.offset,
-				Format = v.styledElementType
+				Position = styledElement.offset,
+				Format = styledElement.styledElementType
 			})
-			table.insert(list, {
+			table.insert(List, {
 				ReferenceCount = -1,
-				Position = v.offset + v.length,
-				Format = v.styledElementType
+				Position = styledElement.offset + styledElement.length,
+				Format = styledElement.styledElementType
 			})
 		end
 	end
-	table.sort(list, function(p2, p3)
-		return p2.Position < p3.Position
+	table.sort(List, function(A, B): boolean --[[ Line: 104 ]]
+		return A.Position < B.Position
 	end)
-	local t_1 = {}
+	local NewReferenceCounts = {}
 	
-	for i in pairs(t) do
-		t_1[i] = 0
+	for i in pairs(config) do
+		NewReferenceCounts[i] = 0
 	end
-	local var1 = ""
+	local Text2 = ""
 	
-	for i_1 = 1, #list - 1 do
-		local var2 = list[i_1]
-		local var3 = list[i_1 + 1]
+	for i1 = 1, #List - 1 do
+		local Entry = List[i1]
+		local Entry1 = List[i1 + 1]
 		
-		if var2.Format then
-			t_1[var2.Format] += var2.ReferenceCount
+		if Entry.Format then
+			local Format = Entry.Format
+			NewReferenceCounts[Format] += Entry.ReferenceCount
 		end
-		if var2.Position == var3.Position then
-			continue
-		end
-		local var4 = utf8Sub(text_1, var2.Position + 1, var3.Position)
-		
-		for i_1, v in pairs(t) do
-			if t_1[i_1] > 0 then
-				var4 = v(var4)
+		if Entry.Position ~= Entry1.Position then
+			local Utf8SubResult = utf8Sub(Text1, Entry.Position + 1, Entry1.Position)
+			
+			for i2, value in pairs(config) do
+				if NewReferenceCounts[i2] > 0 then
+					Utf8SubResult = value(Utf8SubResult)
+				end
 			end
+			Text2 ..= Utf8SubResult
 		end
-		var1 ..= var4
 	end
-	return text.Trim(var1)
+	return Text.Trim(Text2)
 end
 
-return function(p2)
-	-- upvalues: useStyle (ref), formatString (ref), react (ref), foundationFontFaceMigration (ref)
-	local var5 = useStyle()
+return function(Label) --[[ Line: 135 ]]
+	-- upvalues: UseStyleFunction (copy), formatString (copy), React (copy), FoundationFontFaceMigration (copy)
+	local UseStyleResult = UseStyleFunction()
 	
-	return react.createElement("TextLabel", {
+	return React.createElement("TextLabel", {
 		RichText = true,
 		BackgroundTransparency = 1,
 		TextWrapped = true,
-		Text = if p2.Text then formatString(p2.Text) else "",
-		TextColor3 = p2.TextColor3 or var5.Theme.TextDefault.Color,
-		TextTransparency = p2.TextTransparency or var5.Theme.TextDefault.Transparency,
-		Font = if foundationFontFaceMigration and p2.FontFace then nil else p2.Font or var5.Font.Body.Font,
-		FontFace = if foundationFontFaceMigration then p2.FontFace else nil,
-		AutomaticSize = p2.AutomaticSize,
-		Size = p2.Size,
-		TextSize = p2.TextSize,
-		Position = p2.Position,
-		AnchorPoint = p2.AnchorPoint,
-		TextXAlignment = p2.TextXAlignment,
-		LayoutOrder = p2.LayoutOrder
+		Text = if Label.Text then formatString(Label.Text) else "",
+		TextColor3 = Label.TextColor3 or UseStyleResult.Theme.TextDefault.Color,
+		TextTransparency = Label.TextTransparency or UseStyleResult.Theme.TextDefault.Transparency,
+		Font = if FoundationFontFaceMigration and Label.FontFace then nil else Label.Font or UseStyleResult.Font.Body.Font,
+		FontFace = if FoundationFontFaceMigration then Label.FontFace else nil,
+		AutomaticSize = Label.AutomaticSize,
+		Size = Label.Size,
+		TextSize = Label.TextSize,
+		Position = Label.Position,
+		AnchorPoint = Label.AnchorPoint,
+		TextXAlignment = Label.TextXAlignment,
+		LayoutOrder = Label.LayoutOrder
 	})
 end

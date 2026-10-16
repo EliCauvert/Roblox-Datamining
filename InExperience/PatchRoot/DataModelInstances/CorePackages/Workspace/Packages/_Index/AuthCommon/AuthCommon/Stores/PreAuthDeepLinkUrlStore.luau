@@ -1,12 +1,12 @@
-﻿local var1 = nil
+﻿local Url = nil
 
 return {
-	getUrl = function()
-		-- upvalues: var1 (write)
-		return var1
+	getUrl = function() --[[ Line: 4 ]]
+		-- upvalues: Url (ref)
+		return Url
 	end,
-	setUrl = function(value)
-		-- upvalues: var1 (write)
-		var1 = value
+	setUrl = function(Value) --[[ Line: 8 ]]
+		-- upvalues: Url (ref)
+		Url = Value
 	end
 }

@@ -1,44 +1,44 @@
-﻿local sduiSharedContent = script:FindFirstAncestor("SduiSharedContent")
-local parent = sduiSharedContent.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local gamePlayButtonModule = require(parent.GamePlayButton)
-local roactServiceTagsModule = require(parent.RoactServiceTags)
-local sduiFeedContextModule = require(sduiSharedContent.Components.SduiFeedContext)
-local useTokens = foundationModule.Hooks.useTokens
-local useRoactService = require(parent.RobloxAppHooks).useRoactService
-local usePlayButtonContextualMessage = gamePlayButtonModule.usePlayButtonContextualMessage
-local usePlayButtonState = gamePlayButtonModule.usePlayButtonState
-local _ = require(parent.SduiCoreSystem)
-local text = foundationModule.Text
-local view = foundationModule.View
+﻿local SduiSharedContent = script:FindFirstAncestor("SduiSharedContent")
+local Parent = SduiSharedContent.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local GamePlayButtonModule = require(Parent.GamePlayButton)
+local RoactServiceTagsModule = require(Parent.RoactServiceTags)
+local SduiFeedContextModule = require(SduiSharedContent.Components.SduiFeedContext)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
+local UsePlayButtonContextualMessageFunction = GamePlayButtonModule.usePlayButtonContextualMessage
+local UsePlayButtonStateFunction = GamePlayButtonModule.usePlayButtonState
+local _ = require(Parent.SduiCoreSystem)
+local Text = FoundationModule.Text
+local View = FoundationModule.View
 
-return reactModule.memo(function(p1)
-	-- upvalues: useRoactService (ref), roactServiceTagsModule (ref), useTokens (ref), reactModule (ref), sduiFeedContextModule (ref), usePlayButtonState (ref), usePlayButtonContextualMessage (ref), view (ref), text (ref), gamePlayButtonModule (ref)
-	local var1 = useRoactService(roactServiceTagsModule.RoactNetworking)
-	local var2 = useTokens()
-	local var3 = reactModule.useContext(sduiFeedContextModule)
-	local var4 = reactModule.useRef(nil)
-	local var5 = usePlayButtonState(var1, p1.universeId, p1.fetchDelayInSeconds)
-	local var6 = usePlayButtonContextualMessage(p1.universeId, var5.playButtonState, var5.playabilityStatus)
+return ReactModule.memo(function(p1) --[[ Line: 30 | Named "SduiPlayButtonContextualMessage" ]]
+	-- upvalues: UseRoactServiceFunction (copy), RoactServiceTagsModule (copy), UseTokensFunction (copy), ReactModule (copy), SduiFeedContextModule (copy), UsePlayButtonStateFunction (copy), UsePlayButtonContextualMessageFunction (copy), View (copy), Text (copy), GamePlayButtonModule (copy)
+	local UseRoactServiceResult = UseRoactServiceFunction(RoactServiceTagsModule.RoactNetworking)
+	local UseTokensResult = UseTokensFunction()
+	local UseContextResult = ReactModule.useContext(SduiFeedContextModule)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UsePlayButtonStateResult = UsePlayButtonStateFunction(UseRoactServiceResult, p1.universeId, p1.fetchDelayInSeconds)
+	local UsePlayButtonContextualMessageResult = UsePlayButtonContextualMessageFunction(p1.universeId, UsePlayButtonStateResult.playButtonState, UsePlayButtonStateResult.playabilityStatus)
 	
-	return if var6 == nil or var6 == "" then nil else reactModule.createElement(view, {
+	return if UsePlayButtonContextualMessageResult == nil or UsePlayButtonContextualMessageResult == "" then nil else ReactModule.createElement(View, {
 		tag = "size-full-0 auto-xy",
 		LayoutOrder = p1.layoutOrder
 	}, {
-		Text = reactModule.createElement(text, {
+		Text = ReactModule.createElement(Text, {
 			tag = "auto-xy text-body-medium text-wrap text-align-x-left",
-			textStyle = var2.Color.Content.Emphasis,
-			Text = var6,
-			ref = var4
+			textStyle = UseTokensResult.Color.Content.Emphasis,
+			Text = UsePlayButtonContextualMessageResult,
+			ref = UseRefResult
 		}),
-		ImpressionsDetector = reactModule.createElement(gamePlayButtonModule.PlayButtonContextualMessageImpressionsDetector, {
-			containerRef = var4,
+		ImpressionsDetector = ReactModule.createElement(GamePlayButtonModule.PlayButtonContextualMessageImpressionsDetector, {
+			containerRef = UseRefResult,
 			universeId = p1.universeId,
-			playabilityStatus = var5.playabilityStatus,
-			contextualMessage = var6,
-			pageContext = if p1.sduiContext then p1.sduiContext.appPage else "",
-			scrollViewPositionChangedSignal = var3 and var3.scrollViewPositionChangedSignal
+			playabilityStatus = UsePlayButtonStateResult.playabilityStatus,
+			contextualMessage = UsePlayButtonContextualMessageResult,
+			pageContext = p1.sduiContext and p1.sduiContext.appPage or "",
+			scrollViewPositionChangedSignal = UseContextResult and UseContextResult.scrollViewPositionChangedSignal
 		})
 	})
 end)

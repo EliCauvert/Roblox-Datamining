@@ -1,1 +1,1 @@
-﻿return require(script:FindFirstAncestor("RoactServiceTags").Parent.RoactServices).RoactServices.createService(script.Name)
+﻿return (require(script:FindFirstAncestor("RoactServiceTags").Parent.RoactServices).RoactServices.createService(script.Name))

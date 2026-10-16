@@ -1,37 +1,38 @@
-﻿local parent = script.Parent.Parent.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local image = foundationModule.Image
-local icon = foundationModule.Icon
+﻿local Parent = script.Parent.Parent.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local Image = FoundationModule.Image
+local Icon = FoundationModule.Icon
 
-return function(p1)
-	-- upvalues: reactModule (ref), icon (ref), image (ref)
-	local icon_1 = p1.icon
+return function(p1) --[[ Line: 14 | Named "PlayerListIcon" ]]
+	-- upvalues: ReactModule (copy), Icon (copy), Image (copy)
+	local Icon1 = p1.icon
 	
-	if icon_1 == nil or icon_1 == "" then
+	if Icon1 == nil or Icon1 == "" then
 		return nil
+	else
+		local Size = p1.size
+		
+		return if typeof(Icon1) == "table" and Icon1.isFoundationIcon then ReactModule.createElement(Icon, {
+			name = Icon1.name,
+			variant = Icon1.variant,
+			size = Size,
+			LayoutOrder = p1.layoutOrder,
+			testId = p1.testId
+		}) elseif typeof(Icon1) == "string" then ReactModule.createElement(Image, {
+			Image = Icon1,
+			Size = UDim2.fromOffset(Size, Size),
+			LayoutOrder = p1.layoutOrder,
+			testId = p1.testId
+		}) elseif typeof(Icon1) == "table" and Icon1.Image ~= nil then ReactModule.createElement(Image, {
+			Image = Icon1.Image,
+			imageRect = {
+				offset = Icon1.ImageRectOffset,
+				size = Icon1.ImageRectSize
+			},
+			Size = UDim2.fromOffset(Size, Size),
+			LayoutOrder = p1.layoutOrder,
+			testId = p1.testId
+		}) else nil
 	end
-	local size = p1.size
-	
-	return if typeof(icon_1) == "table" and icon_1.isFoundationIcon then reactModule.createElement(icon, {
-		name = icon_1.name,
-		variant = icon_1.variant,
-		size = size,
-		LayoutOrder = p1.layoutOrder,
-		testId = p1.testId
-	}) elseif typeof(icon_1) == "string" then reactModule.createElement(image, {
-		Image = icon_1,
-		Size = UDim2.fromOffset(size, size),
-		LayoutOrder = p1.layoutOrder,
-		testId = p1.testId
-	}) elseif typeof(icon_1) == "table" and icon_1.Image ~= nil then reactModule.createElement(image, {
-		Image = icon_1.Image,
-		imageRect = {
-			offset = icon_1.ImageRectOffset,
-			size = icon_1.ImageRectSize
-		},
-		Size = UDim2.fromOffset(size, size),
-		LayoutOrder = p1.layoutOrder,
-		testId = p1.testId
-	}) else nil
 end

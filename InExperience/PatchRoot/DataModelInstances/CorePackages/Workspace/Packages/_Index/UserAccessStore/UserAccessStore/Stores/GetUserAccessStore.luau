@@ -1,1 +1,1 @@
-﻿return require(script:FindFirstAncestor("UserAccessStore").Parent.Signals).createComputed(require(script.createUserAccessStore))
+﻿return require(script:FindFirstAncestor("UserAccessStore").Parent.Signals).createComputed((require(script.createUserAccessStore)))

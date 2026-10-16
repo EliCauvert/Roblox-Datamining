@@ -1,69 +1,69 @@
-﻿local parent = script.Parent.Parent.Parent
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local bodyAssetMasksRendererModule = require(parent.util.bodyAssetMasksRenderer)
-local accurateBoundingBoxRasterUtilModule = require(parent.util.AccurateBoundingBoxRasterUtil)
-local t = {
-	categories = {
-		validationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
-		validationEnumsModule.UploadCategory.DYNAMIC_HEAD
-	},
-	requiredData = {
-		validationEnumsModule.SharedDataMember.rootInstance,
-		validationEnumsModule.SharedDataMember.renderMeshesData
-	},
-	expectedFailures = {}
-}
+﻿local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
+local BodyAssetMasksRendererModule = require(Parent.util.bodyAssetMasksRenderer)
+local AccurateBoundingBoxRasterUtilModule = require(Parent.util.AccurateBoundingBoxRasterUtil)
 
-local function _(value)
-	return if value.uploadEnum and value.uploadEnum.assetType then value.uploadEnum.assetType else nil
+local function _(p1) --[[ Line: 33 | Named "getAssetTypeFromUploadEnum" ]]
+	return if p1.uploadEnum and p1.uploadEnum.assetType then p1.uploadEnum.assetType else nil
 end
 
-local function buildEditableMeshesFromSharedData(p1)
+local function buildEditableMeshesFromSharedData(p1) --[[ Line: 40 ]]
 	local t = {}
 	
-	for i, v in p1.renderMeshesData do
-		local var1 = p1.rootInstance:FindFirstChild(i, true)
+	for ChildName, value in p1.renderMeshesData do
+		local Child = p1.rootInstance:FindFirstChild(ChildName, true)
 		
-		if not var1 and p1.rootInstance.Name == i then
-			var1 = p1.rootInstance
+		if not Child and p1.rootInstance.Name == ChildName then
+			Child = p1.rootInstance
 		end
-		if var1 and v.editable then
-			t[var1] = { MeshId = { created = false, instance = v.editable } }
+		if Child and value.editable then
+			t[Child] = { MeshId = { created = false, instance = value.editable } }
 		end
 	end
 	return t
 end
 
-function t.run(p2, p3)
-	-- upvalues: buildEditableMeshesFromSharedData (ref), validationEnumsModule (ref), accurateBoundingBoxRasterUtilModule (ref), bodyAssetMasksRendererModule (ref), errorSourceStringsModule (ref)
-	local var2 = if p3.uploadEnum and p3.uploadEnum.assetType then p3.uploadEnum.assetType else nil
-	
-	if not var2 then return end
-	local rootInstance = p3.rootInstance
-	local t = {
-		shouldYield = false,
-		assetTypeEnum = var2,
-		isServer = p3.consumerConfig.validationEnv == validationEnumsModule.ValidationEnv.Backend,
-		editableMeshes = buildEditableMeshesFromSharedData(p3)
-	}
-	local var3, var4 = bodyAssetMasksRendererModule.new(rootInstance, accurateBoundingBoxRasterUtilModule.getBoundsViewsForAssetType(var2), t)
-	
-	if var3 then
-		local var5, var6 = accurateBoundingBoxRasterUtilModule.validate(rootInstance, var4, t)
+return {
+	categories = {
+		ValidationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
+		ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD
+	},
+	requiredData = {
+		ValidationEnumsModule.SharedDataMember.rootInstance,
+		ValidationEnumsModule.SharedDataMember.renderMeshesData
+	},
+	expectedFailures = {},
+	run = function(p2, p3) --[[ Line: 57 ]]
+		-- upvalues: buildEditableMeshesFromSharedData (copy), ValidationEnumsModule (copy), AccurateBoundingBoxRasterUtilModule (copy), BodyAssetMasksRendererModule (copy), ErrorSourceStringsModule (copy)
+		local AssetType = if p3.uploadEnum and p3.uploadEnum.assetType then p3.uploadEnum.assetType else nil
 		
-		if not var5 and var6 then
-			for i, v in var6 do
-				p2:fail(errorSourceStringsModule.Keys.BoundingBox_ValidationFailed, { reason = v })
+		if not AssetType then return end
+		local RootInstance = p3.rootInstance
+		local config = {
+			shouldYield = false,
+			assetTypeEnum = AssetType,
+			isServer = p3.consumerConfig.validationEnv == ValidationEnumsModule.ValidationEnv.Backend,
+			editableMeshes = buildEditableMeshesFromSharedData(p3)
+		}
+		local NewBodyAssetMasksRenderer, NewBodyAssetMasksRenderer2 = BodyAssetMasksRendererModule.new(RootInstance, AccurateBoundingBoxRasterUtilModule.getBoundsViewsForAssetType(AssetType), config)
+		
+		if NewBodyAssetMasksRenderer then
+			local ValidateResult, ValidateResult2 = AccurateBoundingBoxRasterUtilModule.validate(RootInstance, NewBodyAssetMasksRenderer2, config)
+			
+			if not ValidateResult and ValidateResult2 then
+				for _, Reason1 in ValidateResult2 do
+					p2:fail(ErrorSourceStringsModule.Keys.BoundingBox_ValidationFailed, { reason = Reason1 })
+				end
+			end
+			return
+		else
+			if NewBodyAssetMasksRenderer2 then
+				for _, Reason in NewBodyAssetMasksRenderer2 do
+					p2:fail(ErrorSourceStringsModule.Keys.BoundingBox_ValidationFailed, { reason = Reason })
+				end
 			end
 		end
-		return
-	elseif var4 then
-		for i, v in var4 do
-			p2:fail(errorSourceStringsModule.Keys.BoundingBox_ValidationFailed, { reason = v })
-		end
 	end
-end
-
-return t
+}

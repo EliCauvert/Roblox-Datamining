@@ -1,1 +1,1 @@
-﻿return require(script.Parent.event)(require(script:FindFirstAncestor("ExpChat").Actions.VoiceParticipantToggleMuted))
+﻿return require(script.Parent.event)((require(script:FindFirstAncestor("ExpChat").Actions.VoiceParticipantToggleMuted)))

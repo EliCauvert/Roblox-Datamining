@@ -1,269 +1,271 @@
-﻿local roactModule = require(game:GetService("CorePackages").Packages.Roact)
-local components = script.Parent.Parent.Parent.Components
-local dataConsumerModule = require(components.DataConsumer)
-local headerButtonModule = require(components.HeaderButton)
-local cellLabelModule = require(components.CellLabel)
-local constantsModule = require(script.Parent.Parent.Parent.Constants)
-local generalFormatting = constantsModule.GeneralFormatting
-local lineWidth = generalFormatting.LineWidth
-local lineColor = generalFormatting.LineColor
-local actionBindingsFormatting = constantsModule.ActionBindingsFormatting
-local chartHeaderNames = actionBindingsFormatting.ChartHeaderNames
-local chartCellWidths = actionBindingsFormatting.ChartCellWidths
-local headerFrameHeight = actionBindingsFormatting.HeaderFrameHeight
-local entryFrameHeight = actionBindingsFormatting.EntryFrameHeight
-local cellPadding = actionBindingsFormatting.CellPadding
-local minFrameWidth = actionBindingsFormatting.MinFrameWidth
-local var1 = 0
+﻿local RoactModule = require(game:GetService("CorePackages").Packages.Roact)
+local Components = script.Parent.Parent.Parent.Components
+local DataConsumerModule = require(Components.DataConsumer)
+local HeaderButtonModule = require(Components.HeaderButton)
+local CellLabelModule = require(Components.CellLabel)
+local ConstantsModule = require(script.Parent.Parent.Parent.Constants)
+local GeneralFormatting = ConstantsModule.GeneralFormatting
+local LineWidth = GeneralFormatting.LineWidth
+local LineColor = GeneralFormatting.LineColor
+local ActionBindingsFormatting = ConstantsModule.ActionBindingsFormatting
+local ChartHeaderNames = ActionBindingsFormatting.ChartHeaderNames
+local ChartCellWidths = ActionBindingsFormatting.ChartCellWidths
+local HeaderFrameHeight = ActionBindingsFormatting.HeaderFrameHeight
+local EntryFrameHeight = ActionBindingsFormatting.EntryFrameHeight
+local CellPadding = ActionBindingsFormatting.CellPadding
+local MinFrameWidth = ActionBindingsFormatting.MinFrameWidth
+local Total = 0
 
-for i, v in ipairs(chartCellWidths) do
-	var1 += v
+for _, chartCellWidth in ipairs(ChartCellWidths) do
+	Total += chartCellWidth
 end
-local var2 = -var1
+local List = {}
+local List1 = {}
+local List2 = {}
+local Total1 = -Total / 2
+table.insert(List, UDim2.new(0, CellPadding, 0, 0))
+table.insert(List1, UDim2.new(0.5, Total1 - CellPadding, 0, HeaderFrameHeight))
+table.insert(List2, UDim2.new(0.5, Total1 - CellPadding, 0, EntryFrameHeight))
+
+for _, chartCellWidth1 in ipairs(ChartCellWidths) do
+	table.insert(List, UDim2.new(0.5, Total1 + CellPadding, 0, 0))
+	table.insert(List1, UDim2.new(0, chartCellWidth1 - CellPadding, 0, HeaderFrameHeight))
+	table.insert(List2, UDim2.new(0, chartCellWidth1 - CellPadding, 0, EntryFrameHeight))
+	Total1 += chartCellWidth1
+end
+table.insert(List, UDim2.new(0.5, Total1 + CellPadding, 0, 0))
+table.insert(List1, UDim2.new(0.5, -Total / 2 - CellPadding, 0, HeaderFrameHeight))
+table.insert(List2, UDim2.new(0.5, -Total / 2 - CellPadding, 0, EntryFrameHeight))
 local t = {}
-local t_1 = {}
-local t_2 = {}
-var2 /= 2
-table.insert(t, UDim2.new(0, cellPadding, 0, 0))
-table.insert(t_1, UDim2.new(0.5, var2 - cellPadding, 0, headerFrameHeight))
-table.insert(t_2, UDim2.new(0.5, var2 - cellPadding, 0, entryFrameHeight))
 
-for i_1, v_1 in ipairs(chartCellWidths) do
-	table.insert(t, UDim2.new(0.5, var2 + cellPadding, 0, 0))
-	table.insert(t_1, UDim2.new(0, v_1 - cellPadding, 0, headerFrameHeight))
-	table.insert(t_2, UDim2.new(0, v_1 - cellPadding, 0, entryFrameHeight))
-	var2 += v_1
+for i, Vector in ipairs(List) do
+	t[i] = UDim2.new(Vector.X.Scale, Vector.X.Offset - CellPadding, Vector.Y.Scale, Vector.Y.Offset)
 end
-table.insert(t, UDim2.new(0.5, var2 + cellPadding, 0, 0))
-table.insert(t_1, UDim2.new(0.5, -var1 / 2 - cellPadding, 0, headerFrameHeight))
-table.insert(t_2, UDim2.new(0.5, -var1 / 2 - cellPadding, 0, entryFrameHeight))
-local t_3 = {}
+local ActionBindingsChart = RoactModule.Component:extend("ActionBindingsChart")
 
-for i_2, v_2 in ipairs(t) do
-	t_3[i_2] = UDim2.new(v_2.X.Scale, v_2.X.Offset - cellPadding, v_2.Y.Scale, v_2.Y.Offset)
-end
-local actionBindingsChart = roactModule.Component:extend("ActionBindingsChart")
-
-local function constructHeader(p1, p2)
-	-- upvalues: chartHeaderNames (ref), roactModule (ref), headerButtonModule (ref), t_1 (ref), t (ref), lineWidth (ref), lineColor (ref), t_3 (ref), headerFrameHeight (ref)
-	local t_2 = {}
+local function constructHeader(Sortfunction, XOffset) --[[ Line: 61 ]]
+	-- upvalues: ChartHeaderNames (copy), RoactModule (copy), HeaderButtonModule (copy), List1 (copy), List (copy), LineWidth (copy), LineColor (copy), t (copy), HeaderFrameHeight (copy)
+	local Elements = {}
 	
-	for i, v in ipairs(chartHeaderNames) do
-		t_2[v] = roactModule.createElement(headerButtonModule, { text = v, size = t_1[i], pos = t[i], sortfunction = p1 })
+	for i, chartHeaderName in ipairs(ChartHeaderNames) do
+		Elements[chartHeaderName] = RoactModule.createElement(HeaderButtonModule, {
+			text = chartHeaderName,
+			size = List1[i],
+			pos = List[i],
+			sortfunction = Sortfunction
+		})
 	end
-	t_2.upperHorizontalLine = roactModule.createElement("Frame", {
+	Elements.upperHorizontalLine = RoactModule.createElement("Frame", {
 		BorderSizePixel = 0,
-		Size = UDim2.new(1, 0, 0, lineWidth),
+		Size = UDim2.new(1, 0, 0, LineWidth),
 		Position = UDim2.new(0, 0, 0, 0),
-		BackgroundColor3 = lineColor
+		BackgroundColor3 = LineColor
 	})
-	t_2.lowerHorizontalLine = roactModule.createElement("Frame", {
+	Elements.lowerHorizontalLine = RoactModule.createElement("Frame", {
 		BorderSizePixel = 0,
-		Size = UDim2.new(1, 0, 0, lineWidth),
-		Position = UDim2.new(0, 0, 1, -lineWidth),
-		BackgroundColor3 = lineColor
+		Size = UDim2.new(1, 0, 0, LineWidth),
+		Position = UDim2.new(0, 0, 1, -LineWidth),
+		BackgroundColor3 = LineColor
 	})
 	
-	for i_1 = 2, #t_3 do
-		t_2[string.format("VerticalLine_%d", i_1)] = roactModule.createElement("Frame", {
+	for i1 = 2, #t do
+		Elements[string.format("VerticalLine_%d", i1)] = RoactModule.createElement("Frame", {
 			BorderSizePixel = 0,
-			Size = UDim2.new(0, lineWidth, 1, 0),
-			Position = t_3[i_1],
-			BackgroundColor3 = lineColor
+			Size = UDim2.new(0, LineWidth, 1, 0),
+			Position = t[i1],
+			BackgroundColor3 = LineColor
 		})
 	end
-	return roactModule.createElement("Frame", {
+	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		Size = UDim2.new(0, p2, 0, headerFrameHeight)
-	}, t_2)
+		Size = UDim2.new(0, XOffset, 0, HeaderFrameHeight)
+	}, Elements)
 end
 
-local function constructEntry(p3, p4, p5)
-	-- upvalues: t_3 (ref), roactModule (ref), lineWidth (ref), lineColor (ref), cellLabelModule (ref), t_2 (ref), t (ref), entryFrameHeight (ref)
-	local name = p3.name
-	local actionInfo = p3.actionInfo
-	local var3 = tostring(actionInfo.inputTypes[1])
-	local var4 = if actionInfo.isCore then "Core" else "Developer"
-	local t_1 = {}
+local function constructEntry(p1, XOffset, LayoutOrder) --[[ Line: 103 ]]
+	-- upvalues: t (copy), RoactModule (copy), LineWidth (copy), LineColor (copy), CellLabelModule (copy), List2 (copy), List (copy), EntryFrameHeight (copy)
+	local Name = p1.name
+	local ActionInfo = p1.actionInfo
+	local Text = tostring(ActionInfo.inputTypes[1])
+	local Core: string = if ActionInfo.isCore then "Core" else "Developer"
+	local Elements = {}
 	
-	for i = 2, #t_3 do
-		t_1[string.format("line_%d", i)] = roactModule.createElement("Frame", {
+	for i = 2, #t do
+		Elements[string.format("line_%d", i)] = RoactModule.createElement("Frame", {
 			BorderSizePixel = 0,
-			Size = UDim2.new(0, lineWidth, 1, 0),
-			Position = t_3[i],
-			BackgroundColor3 = lineColor
+			Size = UDim2.new(0, LineWidth, 1, 0),
+			Position = t[i],
+			BackgroundColor3 = LineColor
 		})
 	end
-	t_1[name] = roactModule.createElement(cellLabelModule, { text = var3, size = t_2[1], pos = t[1] })
-	t_1.priorityLevel = roactModule.createElement(cellLabelModule, {
-		text = actionInfo.priorityLevel,
-		size = t_2[2],
-		pos = t[2]
+	Elements[Name] = RoactModule.createElement(CellLabelModule, { text = Text, size = List2[1], pos = List[1] })
+	Elements.priorityLevel = RoactModule.createElement(CellLabelModule, {
+		text = ActionInfo.priorityLevel,
+		size = List2[2],
+		pos = List[2]
 	})
-	t_1.isCore = roactModule.createElement(cellLabelModule, { text = var4, size = t_2[3], pos = t[3] })
-	t_1.actionName = roactModule.createElement(cellLabelModule, { text = name, size = t_2[4], pos = t[4] })
-	t_1.inputTypes = roactModule.createElement(cellLabelModule, { text = var3, size = t_2[5], pos = t[5] })
-	t_1.lowerHorizontalLine = roactModule.createElement("Frame", {
+	Elements.isCore = RoactModule.createElement(CellLabelModule, { text = Core, size = List2[3], pos = List[3] })
+	Elements.actionName = RoactModule.createElement(CellLabelModule, { text = Name, size = List2[4], pos = List[4] })
+	Elements.inputTypes = RoactModule.createElement(CellLabelModule, { text = Text, size = List2[5], pos = List[5] })
+	Elements.lowerHorizontalLine = RoactModule.createElement("Frame", {
 		BorderSizePixel = 0,
-		Size = UDim2.new(1, 0, 0, lineWidth),
+		Size = UDim2.new(1, 0, 0, LineWidth),
 		Position = UDim2.new(0, 0, 1, 0),
-		BackgroundColor3 = lineColor
+		BackgroundColor3 = LineColor
 	})
 	
-	return roactModule.createElement("Frame", {
+	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		Size = UDim2.new(0, p4, 0, entryFrameHeight),
-		LayoutOrder = p5
-	}, t_1)
+		Size = UDim2.new(0, XOffset, 0, EntryFrameHeight),
+		LayoutOrder = LayoutOrder
+	}, Elements)
 end
 
-function actionBindingsChart.init(p6, p7)
-	-- upvalues: roactModule (ref)
-	local currentData = p7.ActionBindingsData:getCurrentData()
+function ActionBindingsChart.init(p2, p3) --[[ Line: 172 ]]
+	-- upvalues: RoactModule (copy)
+	local CurrentData = p3.ActionBindingsData:getCurrentData()
 	
-	function p5.onSortChanged(p8)
-		-- upvalues: p7 (ref), p6 (ref)
-		if p8 == p7.ActionBindingsData:getSortType() then
-			p6:setState({ reverseSort = not p6.state.reverseSort })
+	function p2.onSortChanged(SortType) --[[ Line: 175 ]]
+		-- upvalues: p3 (copy), p2 (copy)
+		if SortType == p3.ActionBindingsData:getSortType() then
+			p2:setState({ reverseSort = not p2.state.reverseSort })
 			
 			return
-		end
-		p7.ActionBindingsData:setSortType(p8)
-		p6:setState({ reverseSort = false })
-	end
-	
-	function p5.onCanvasPosChanged()
-		-- upvalues: p6 (ref)
-		local canvasPosition = p6.scrollingRef.current.CanvasPosition
-		
-		if p6.state.canvasPos ~= canvasPosition then
-			p6:setState({ canvasPos = canvasPosition })
+		else
+			p3.ActionBindingsData:setSortType(SortType)
+			p2:setState({ reverseSort = false })
 		end
 	end
 	
-	p6.scrollingRef = roactModule.createRef()
-	p6.state = { reverseSort = false, actionBindingEntries = currentData }
+	function p2.onCanvasPosChanged() --[[ Line: 189 ]]
+		-- upvalues: p2 (copy)
+		local CanvasPosition = p2.scrollingRef.current.CanvasPosition
+		
+		if p2.state.canvasPos ~= CanvasPosition then
+			p2:setState({ canvasPos = CanvasPosition })
+		end
+	end
+	
+	p2.scrollingRef = RoactModule.createRef()
+	p2.state = { reverseSort = false, actionBindingEntries = CurrentData }
 end
 
-function actionBindingsChart.willUpdate(p6)
-	if p6.canvasPosConnector then
-		p6.canvasPosConnector:Disconnect()
+function ActionBindingsChart.willUpdate(p2) --[[ Line: 206 ]]
+	if p2.canvasPosConnector then
+		p2.canvasPosConnector:Disconnect()
 	end
 end
 
-function actionBindingsChart.didUpdate(p6)
-	if p6.scrollingRef.current then
-		p6.canvasPosConnector = p6.scrollingRef.current:GetPropertyChangedSignal("CanvasPosition"):Connect(p6.onCanvasPosChanged)
-		local absoluteSize = p6.scrollingRef.current.AbsoluteSize
-		local absScrollSize = p6.state.absScrollSize
+function ActionBindingsChart.didUpdate(p2) --[[ Line: 212 ]]
+	if p2.scrollingRef.current then
+		p2.canvasPosConnector = p2.scrollingRef.current:GetPropertyChangedSignal("CanvasPosition"):Connect(p2.onCanvasPosChanged)
+		local AbsoluteSize = p2.scrollingRef.current.AbsoluteSize
+		local AbsScrollSize = p2.state.absScrollSize
 		
-		if absoluteSize.X ~= absScrollSize.X or absoluteSize.Y ~= absScrollSize.Y then
-			p6:setState({ absScrollSize = absoluteSize })
+		if AbsoluteSize.X ~= AbsScrollSize.X or AbsoluteSize.Y ~= AbsScrollSize.Y then
+			p2:setState({ absScrollSize = AbsoluteSize })
 		end
 	end
 end
 
-function actionBindingsChart.didMount(p6)
-	p6.bindingsUpdated = p6.props.ActionBindingsData:Signal():Connect(function(p7)
-		-- upvalues: p6 (ref)
-		p6:setState({ actionBindingEntries = p7 })
+function ActionBindingsChart.didMount(p2) --[[ Line: 227 ]]
+	p2.bindingsUpdated = p2.props.ActionBindingsData:Signal():Connect(function(ActionBindingEntries) --[[ Line: 228 ]]
+		-- upvalues: p2 (copy)
+		p2:setState({ actionBindingEntries = ActionBindingEntries })
 	end)
 	
-	if p6.scrollingRef.current then
-		p6.canvasPosConnector = p6.scrollingRef.current:GetPropertyChangedSignal("CanvasPosition"):Connect(p6.onCanvasPosChanged)
-		p6:setState({
-			absScrollSize = p6.scrollingRef.current.AbsoluteSize,
-			canvasPos = p6.scrollingRef.current.CanvasPosition
+	if p2.scrollingRef.current then
+		p2.canvasPosConnector = p2.scrollingRef.current:GetPropertyChangedSignal("CanvasPosition"):Connect(p2.onCanvasPosChanged)
+		p2:setState({
+			absScrollSize = p2.scrollingRef.current.AbsoluteSize,
+			canvasPos = p2.scrollingRef.current.CanvasPosition
 		})
 	end
 end
 
-function actionBindingsChart.willUnmount(p6)
-	p6.bindingsUpdated:Disconnect()
-	p6.bindingsUpdated = nil
-	p6.canvasPosConnector:Disconnect()
-	p6.canvasPosConnector = nil
+function ActionBindingsChart.willUnmount(p2) --[[ Line: 245 ]]
+	p2.bindingsUpdated:Disconnect()
+	p2.bindingsUpdated = nil
+	p2.canvasPosConnector:Disconnect()
+	p2.canvasPosConnector = nil
 end
 
-function actionBindingsChart.render(p6)
-	-- upvalues: minFrameWidth (ref), roactModule (ref), entryFrameHeight (ref), constructEntry (ref), lineColor (ref), constructHeader (ref), headerFrameHeight (ref), constantsModule (ref)
-	local t = {
-		UIListLayout = roactModule.createElement("UIListLayout", {
+function ActionBindingsChart.render(p2) --[[ Line: 252 ]]
+	-- upvalues: MinFrameWidth (copy), RoactModule (copy), EntryFrameHeight (copy), constructEntry (copy), LineColor (copy), constructHeader (copy), HeaderFrameHeight (copy), ConstantsModule (copy)
+	local config = {
+		UIListLayout = RoactModule.createElement("UIListLayout", {
 			HorizontalAlignment = Enum.HorizontalAlignment.Left,
 			VerticalAlignment = Enum.VerticalAlignment.Top,
 			SortOrder = Enum.SortOrder.LayoutOrder
 		})
 	}
-	local searchTerm = p6.props.searchTerm
-	local size = p6.props.size
-	local layoutOrder = p6.props.layoutOrder
-	local actionBindingEntries = p6.state.actionBindingEntries
-	local reverseSort = p6.state.reverseSort
-	local canvasPos = p6.state.canvasPos
-	local absScrollSize = p6.state.absScrollSize
-	local x = absScrollSize and math.max(absScrollSize.X, minFrameWidth) or minFrameWidth
-	local actionBindingEntriesCount = #actionBindingEntries
-	local var5 = 0
+	local SearchTerm: string = p2.props.searchTerm
+	local Size = p2.props.size
+	local LayoutOrder = p2.props.layoutOrder
+	local ActionBindingEntries = p2.state.actionBindingEntries
+	local ReverseSort = p2.state.reverseSort
+	local CanvasPos = p2.state.canvasPos
+	local AbsScrollSize = p2.state.absScrollSize
+	local Largest = AbsScrollSize and math.max(AbsScrollSize.X, MinFrameWidth) or MinFrameWidth
+	local CountActionBindingEntries = #ActionBindingEntries
+	local YOffset = 0
 	
-	if absScrollSize and canvasPos then
-		local var6 = -1
-		local var7 = 0
-		local var8 = 0
+	if AbsScrollSize and CanvasPos then
+		local YOffset1 = -1
+		local Total = 0
+		local Count = 0
 		
-		for i, v in ipairs(actionBindingEntries) do
-			local var9 = false
+		for i, actionBindingEntry in ipairs(ActionBindingEntries) do
+			local HasFoundAt: boolean = if SearchTerm then string.find(tostring(actionBindingEntry.actionInfo.inputTypes[1]):lower(), SearchTerm:lower()) ~= nil or string.find(actionBindingEntry.name:lower(), SearchTerm:lower()) ~= nil else false
 			
-			if searchTerm then
-				var9 = if string.find(tostring(v.actionInfo.inputTypes[1]):lower(), searchTerm:lower()) == nil then string.find(v.name:lower(), searchTerm:lower()) ~= nil else string.find(tostring(v.actionInfo.inputTypes[1]):lower(), searchTerm:lower()) ~= nil
-			end
-			if not searchTerm or var9 then
-				if canvasPos.Y <= var5 + entryFrameHeight then
-					if var7 < absScrollSize.Y then
-						t[i] = constructEntry(v, x, (if reverseSort then actionBindingEntriesCount - i else i) + 1)
+			if not SearchTerm or HasFoundAt then
+				if CanvasPos.Y <= YOffset + EntryFrameHeight then
+					if Total < AbsScrollSize.Y then
+						config[i] = constructEntry(actionBindingEntry, Largest, (ReverseSort and CountActionBindingEntries - i or i) + 1)
 					end
-					if var6 < 0 then
-						var6 = var5
+					if YOffset1 < 0 then
+						YOffset1 = YOffset
 					else
-						var7 += entryFrameHeight
+						Total += EntryFrameHeight
 					end
-					var8 += 1
+					Count += 1
 				end
-				var5 += entryFrameHeight
+				YOffset += EntryFrameHeight
 			end
 		end
-		if var8 == 0 then
-			t.NoneFound = roactModule.createElement("TextLabel", {
+		if Count == 0 then
+			config.NoneFound = RoactModule.createElement("TextLabel", {
 				Text = "No ActionBindings Found",
 				BackgroundTransparency = 1,
 				LayoutOrder = 1,
 				Size = UDim2.new(1, 0, 1, 0),
-				TextColor3 = lineColor
+				TextColor3 = LineColor
 			})
 		else
-			t.WindowingPadding = roactModule.createElement("Frame", {
+			config.WindowingPadding = RoactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 1,
-				Size = UDim2.new(1, 0, 0, var6)
+				Size = UDim2.new(1, 0, 0, YOffset1)
 			})
 		end
 	end
-	return roactModule.createElement("Frame", {
+	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		ClipsDescendants = true,
-		Size = size,
-		LayoutOrder = layoutOrder
+		Size = Size,
+		LayoutOrder = LayoutOrder
 	}, {
-		Header = constructHeader(p6.onSortChanged, x),
-		MainChart = roactModule.createElement("ScrollingFrame", {
-			Position = UDim2.new(0, 0, 0, headerFrameHeight),
-			Size = UDim2.new(1, 0, 1, -headerFrameHeight),
-			CanvasSize = UDim2.new(0, x, 0, var5),
+		Header = constructHeader(p2.onSortChanged, Largest),
+		MainChart = RoactModule.createElement("ScrollingFrame", {
+			Position = UDim2.new(0, 0, 0, HeaderFrameHeight),
+			Size = UDim2.new(1, 0, 1, -HeaderFrameHeight),
+			CanvasSize = UDim2.new(0, Largest, 0, YOffset),
 			ScrollBarThickness = 6,
-			BackgroundColor3 = constantsModule.Color.BaseGray,
+			BackgroundColor3 = ConstantsModule.Color.BaseGray,
 			BackgroundTransparency = 1,
-			[roactModule.Ref] = p6.scrollingRef
-		}, t)
+			[RoactModule.Ref] = p2.scrollingRef
+		}, config)
 	})
 end
 
-return dataConsumerModule(actionBindingsChart, "ActionBindingsData")
+return DataConsumerModule(ActionBindingsChart, "ActionBindingsData")

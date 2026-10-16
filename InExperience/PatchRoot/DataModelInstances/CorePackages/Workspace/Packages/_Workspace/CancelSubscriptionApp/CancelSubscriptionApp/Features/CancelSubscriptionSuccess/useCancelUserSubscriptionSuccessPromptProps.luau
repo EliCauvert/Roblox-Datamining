@@ -1,24 +1,24 @@
-﻿local cancelSubscriptionApp = script:FindFirstAncestor("CancelSubscriptionApp")
-local parent = cancelSubscriptionApp.Parent
-local reactModule = require(parent.React)
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local marketplaceService = game:GetService("MarketplaceService")
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local selectSubscriptionIdModule = require(cancelSubscriptionApp.Store.Selectors.selectSubscriptionId)
-local cancelSubscriptionEndedModule = require(cancelSubscriptionApp.Store.Actions.CancelSubscriptionEnded)
-local _ = require(cancelSubscriptionApp.Store.Types)
+﻿local CancelSubscriptionApp = script:FindFirstAncestor("CancelSubscriptionApp")
+local Parent = CancelSubscriptionApp.Parent
+local ReactModule = require(Parent.React)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local MarketplaceService = game:GetService("MarketplaceService")
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local SelectSubscriptionIdModule = require(CancelSubscriptionApp.Store.Selectors.selectSubscriptionId)
+local CancelSubscriptionEndedModule = require(CancelSubscriptionApp.Store.Actions.CancelSubscriptionEnded)
+local _ = require(CancelSubscriptionApp.Store.Types)
 local _ = require(script.Parent.CancelUserSubscriptionSuccessPrompt)
 
-return function()
-	-- upvalues: useDispatch (ref), useSelector (ref), selectSubscriptionIdModule (ref), reactModule (ref), marketplaceService (ref), cancelSubscriptionEndedModule (ref)
-	local var1 = useDispatch()
-	local var2 = useSelector(selectSubscriptionIdModule) or ""
+return function() --[[ Line: 19 | Named "useCancelUserSubscriptionSuccessPromptProps" ]]
+	-- upvalues: UseDispatchFunction (copy), UseSelectorFunction (copy), SelectSubscriptionIdModule (copy), ReactModule (copy), MarketplaceService (copy), CancelSubscriptionEndedModule (copy)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseSelectorResult = UseSelectorFunction(SelectSubscriptionIdModule) or ""
 	
 	return {
-		onDismissed = reactModule.useCallback(function()
-			-- upvalues: marketplaceService (copy), var2 (ref), var1 (ref), cancelSubscriptionEndedModule (copy)
-			marketplaceService:SignalUserSubscriptionStatusChanged(var2)
-			var1(cancelSubscriptionEndedModule())
-		end, { var1 })
+		onDismissed = ReactModule.useCallback(function() --[[ Line: 23 ]]
+			-- upvalues: MarketplaceService (upval), UseSelectorResult (copy), UseDispatchResult (copy), CancelSubscriptionEndedModule (upval)
+			MarketplaceService:SignalUserSubscriptionStatusChanged(UseSelectorResult)
+			UseDispatchResult(CancelSubscriptionEndedModule())
+		end, { UseDispatchResult })
 	}
 end

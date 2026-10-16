@@ -1,12 +1,12 @@
-﻿local expChat = script:FindFirstAncestor("ExpChat")
-local parent = expChat.Parent
-local tutilsModule = require(parent.tutils)
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local _ = require(expChat.installReducer.Messages)
+﻿local ExpChat = script:FindFirstAncestor("ExpChat")
+local Parent = ExpChat.Parent
+local TutilsModule = require(Parent.tutils)
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local _ = require(ExpChat.installReducer.Messages)
 
-return function()
-	-- upvalues: useSelector (ref), tutilsModule (ref)
-	return useSelector(function(p1)
+return function() --[[ Line: 14 ]]
+	-- upvalues: UseSelectorFunction (copy), TutilsModule (copy)
+	return (UseSelectorFunction(function(p1) --[[ Line: 15 ]]
 		return p1.Messages
-	end, tutilsModule.shallowEqual)
+	end, TutilsModule.shallowEqual))
 end

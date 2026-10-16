@@ -1,168 +1,170 @@
-﻿local parent = script.Parent.Parent.Parent
-local constantsModule = require(parent.Constants)
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local getMeshMinMaxModule = require(parent.util.getMeshMinMax)
-local getMeshSizeModule = require(parent.util.getMeshSize)
-local getEditableMeshFromContextModule = require(parent.util.getEditableMeshFromContext)
-local getExpectedPartSizeModule = require(parent.util.getExpectedPartSize)
-local getMeshInfoModule = require(parent.util.getMeshInfo)
-local t = {
+﻿local Parent = script.Parent.Parent.Parent
+local ConstantsModule = require(Parent.Constants)
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
+local GetMeshMinMaxModule = require(Parent.util.getMeshMinMax)
+local GetMeshSizeModule = require(Parent.util.getMeshSize)
+local GetEditableMeshFromContextModule = require(Parent.util.getEditableMeshFromContext)
+local GetExpectedPartSizeModule = require(Parent.util.getExpectedPartSize)
+local GetMeshInfoModule = require(Parent.util.getMeshInfo)
+
+local function calculateMeshSizeForPart(Object, p1) --[[ Line: 30 ]]
+	-- upvalues: GetEditableMeshFromContextModule (copy), GetMeshSizeModule (copy)
+	local config = {
+		fieldName = "MeshId",
+		fullName = Object:GetFullName(),
+		contentId = Object.MeshId,
+		context = Object.Name
+	}
+	local MeshId, MeshId2 = GetEditableMeshFromContextModule(Object, "MeshId", p1)
+	
+	if MeshId then
+		config.editableMesh = MeshId2
+		
+		return true, (GetMeshSizeModule(config))
+	else
+		return false, nil
+	end
+end
+
+local function validateWrapTargetComparison(Scale, Object, p1, p2) --[[ Line: 49 ]]
+	-- upvalues: GetMeshInfoModule (copy), ConstantsModule (copy), ErrorSourceStringsModule (copy), GetMeshMinMaxModule (copy)
+	local MeshInfoModule, _, MeshInfoModule3 = GetMeshInfoModule(Object, ConstantsModule.MESH_CONTENT_TYPE.RENDER_MESH, p1)
+	
+	if not MeshInfoModule then
+		p2:fail(ErrorSourceStringsModule.Keys.BodyMesh_LoadFailed, { meshName = Object:GetFullName() }, Object)
+		
+		return
+	end
+	local WrapTarget = Object:FindFirstChildWhichIsA("WrapTarget")
+	
+	if not WrapTarget then return end
+	local MeshInfoModule1, _, MeshInfoModule3_1 = GetMeshInfoModule(WrapTarget, ConstantsModule.MESH_CONTENT_TYPE.OUTER_CAGE, p1)
+	
+	if not MeshInfoModule1 then
+		p2:fail(ErrorSourceStringsModule.Keys.BodyMesh_LoadFailed, { meshName = WrapTarget:GetFullName() }, Object)
+		
+		return
+	end
+	MeshInfoModule3.scale = Scale
+	MeshInfoModule3_1.scale = Scale
+	local RenderVsWrapMeshMaxDiff = ConstantsModule.RenderVsWrapMeshMaxDiff
+	local MeshMinMaxModule, _, MeshMinMaxModule3, MeshMinMaxModule4 = GetMeshMinMaxModule(MeshInfoModule3, p1)
+	
+	if not MeshMinMaxModule then
+		p2:fetchError("Failed to read mesh: " .. MeshInfoModule3.fullName)
+		
+		return
+	end
+	local MeshMinMaxModule1, _, MeshMinMaxModule3_1, MeshMinMaxModule4_1 = GetMeshMinMaxModule(MeshInfoModule3_1, p1)
+	
+	if not MeshMinMaxModule1 then
+		p2:fetchError("Failed to read mesh: " .. MeshInfoModule3_1.fullName)
+		
+		return
+	end
+	if RenderVsWrapMeshMaxDiff < (MeshMinMaxModule3 - MeshMinMaxModule3_1).Magnitude or RenderVsWrapMeshMaxDiff < (MeshMinMaxModule4 - MeshMinMaxModule4_1).Magnitude then
+		p2:fail(ErrorSourceStringsModule.Keys.BodyMesh_SizeMismatch, {
+			meshContext = MeshInfoModule3.fullName .. "." .. MeshInfoModule3.fieldName,
+			maxDiff = string.format("%.2f", RenderVsWrapMeshMaxDiff),
+			otherMeshContext = MeshInfoModule3_1.fullName .. "." .. MeshInfoModule3_1.fieldName
+		}, Object)
+	end
+end
+
+return {
 	categories = {
-		validationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
-		validationEnumsModule.UploadCategory.DYNAMIC_HEAD
+		ValidationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
+		ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD
 	},
 	requiredData = {
-		validationEnumsModule.SharedDataMember.rootInstance,
-		validationEnumsModule.SharedDataMember.uploadEnum,
-		validationEnumsModule.SharedDataMember.consumerConfig
+		ValidationEnumsModule.SharedDataMember.rootInstance,
+		ValidationEnumsModule.SharedDataMember.uploadEnum,
+		ValidationEnumsModule.SharedDataMember.consumerConfig
 	},
 	conditionalData = {
-		validationEnumsModule.SharedDataMember.renderMeshesData,
-		validationEnumsModule.SharedDataMember.outerCagesData
+		ValidationEnumsModule.SharedDataMember.renderMeshesData,
+		ValidationEnumsModule.SharedDataMember.outerCagesData
 	},
-	expectedFailures = {}
-}
-
-local function calculateMeshSizeForPart(p1, p2)
-	-- upvalues: getEditableMeshFromContextModule (ref), getMeshSizeModule (ref)
-	local t = {
-		fieldName = "MeshId",
-		fullName = p1:GetFullName(),
-		contentId = p1.MeshId,
-		context = p1.Name
-	}
-	local var1, var2 = getEditableMeshFromContextModule(p1, "MeshId", p2)
-	
-	if var1 then
-		t.editableMesh = var2
+	expectedFailures = {},
+	run = function(p1, p2) --[[ Line: 109 ]]
+		-- upvalues: ValidationEnumsModule (copy), calculateMeshSizeForPart (copy), ErrorSourceStringsModule (copy), GetExpectedPartSizeModule (copy), validateWrapTargetComparison (copy), ConstantsModule (copy)
+		local RootInstance = p2.rootInstance
+		local AssetType = p2.uploadEnum.assetType
+		local IsValidationEnvMatch = p2.consumerConfig.validationEnv == ValidationEnumsModule.ValidationEnv.Backend
+		local EditableMeshes = {}
 		
-		return true, getMeshSizeModule(t)
-	end
-	return false, nil
-end
-
-local function validateWrapTargetComparison(p1, p2, p3, p4)
-	-- upvalues: getMeshInfoModule (ref), constantsModule (ref), errorSourceStringsModule (ref), getMeshMinMaxModule (ref)
-	local var1, _, var2 = getMeshInfoModule(p2, constantsModule.MESH_CONTENT_TYPE.RENDER_MESH, p3)
-	
-	if not var1 then
-		p4:fail(errorSourceStringsModule.Keys.BodyMesh_LoadFailed, { meshName = p2:GetFullName() }, p2)
-		
-		return
-	end
-	local wrapTarget = p2:FindFirstChildWhichIsA("WrapTarget")
-	
-	if not wrapTarget then return end
-	local var3, _, var4 = getMeshInfoModule(wrapTarget, constantsModule.MESH_CONTENT_TYPE.OUTER_CAGE, p3)
-	
-	if not var3 then
-		p4:fail(errorSourceStringsModule.Keys.BodyMesh_LoadFailed, { meshName = wrapTarget:GetFullName() }, p2)
-		
-		return
-	end
-	var2.scale = p1
-	var4.scale = p1
-	local renderVsWrapMeshMaxDiff = constantsModule.RenderVsWrapMeshMaxDiff
-	local var5, _, var6, var7 = getMeshMinMaxModule(var2, p3)
-	
-	if not var5 then
-		p4:fetchError("Failed to read mesh: " .. var15.fullName)
-		
-		return
-	end
-	local var8, _, var9, var10 = getMeshMinMaxModule(var4, p3)
-	
-	if not var8 then
-		p4:fetchError("Failed to read mesh: " .. var18.fullName)
-		
-		return
-	elseif renderVsWrapMeshMaxDiff < (var6 - var9).Magnitude or renderVsWrapMeshMaxDiff < (var7 - var10).Magnitude then
-		p4:fail(errorSourceStringsModule.Keys.BodyMesh_SizeMismatch, {
-			meshContext = var2.fullName .. "." .. var15.fieldName,
-			maxDiff = string.format("%.2f", renderVsWrapMeshMaxDiff),
-			otherMeshContext = var4.fullName .. "." .. var18.fieldName
-		}, p2)
-	end
-end
-
-function t.run(p1, p2)
-	-- upvalues: validationEnumsModule (ref), calculateMeshSizeForPart (ref), errorSourceStringsModule (ref), getExpectedPartSizeModule (ref), validateWrapTargetComparison (ref), constantsModule (ref)
-	local rootInstance = p2.rootInstance
-	local assetType = p2.uploadEnum.assetType
-	local var1 = p2.consumerConfig.validationEnv == validationEnumsModule.ValidationEnv.Backend
-	local t = {}
-	
-	if p2.renderMeshesData then
-		local descendants = rootInstance:GetDescendants()
-		table.insert(descendants, rootInstance)
-		
-		for i, v in descendants do
-			local name = p2.renderMeshesData[v.Name]
+		if p2.renderMeshesData then
+			local Descendants = RootInstance:GetDescendants()
+			table.insert(Descendants, RootInstance)
 			
-			if name and name.editable then
-				t[v] = {
-					MeshId = {
-						instance = name.editable,
-						created = name.createdInValidation
-					}
-				}
-			end
-		end
-	end
-	if p2.outerCagesData then
-		local descendants = rootInstance:GetDescendants()
-		table.insert(descendants, rootInstance)
-		
-		for i, v in descendants do
-			if v:IsA("BaseWrap") and v.Parent then
-				local name = p2.outerCagesData[v.Parent.Name]
+			for _, descendant in Descendants do
+				local RenderMeshes = p2.renderMeshesData[descendant.Name]
 				
-				if name and name.editable then
-					t[v] = {
-						CageMeshId = {
-							instance = name.editable,
-							created = name.createdInValidation
+				if RenderMeshes and RenderMeshes.editable then
+					EditableMeshes[descendant] = {
+						MeshId = {
+							instance = RenderMeshes.editable,
+							created = RenderMeshes.createdInValidation
 						}
 					}
 				end
 			end
 		end
-	end
-	local t_1 = {
-		assetTypeEnum = assetType,
-		isServer = var1,
-		editableMeshes = t,
-		bypassFlags = { skipPhysicsDataReset = true }
-	}
-	
-	local function validateSingleMeshPart(p3)
-		-- upvalues: calculateMeshSizeForPart (copy), t_1 (ref), p1 (ref), errorSourceStringsModule (copy), getExpectedPartSizeModule (copy), validateWrapTargetComparison (copy)
-		local var2, var3 = calculateMeshSizeForPart(p3, t_1)
+		if p2.outerCagesData then
+			local Descendants = RootInstance:GetDescendants()
+			table.insert(Descendants, RootInstance)
+			
+			for _, BaseWrap in Descendants do
+				if BaseWrap:IsA("BaseWrap") and BaseWrap.Parent then
+					local OuterCages = p2.outerCagesData[BaseWrap.Parent.Name]
+					
+					if OuterCages and OuterCages.editable then
+						EditableMeshes[BaseWrap] = {
+							CageMeshId = {
+								instance = OuterCages.editable,
+								created = OuterCages.createdInValidation
+							}
+						}
+					end
+				end
+			end
+		end
+		local config = {
+			assetTypeEnum = AssetType,
+			isServer = IsValidationEnvMatch,
+			editableMeshes = EditableMeshes,
+			bypassFlags = { skipPhysicsDataReset = true }
+		}
 		
-		if var2 and var3 then
-			validateWrapTargetComparison(getExpectedPartSizeModule(p3, t_1) / var3, p3, t_1, p1)
+		local function validateSingleMeshPart(RootInstance) --[[ Line: 153 ]]
+			-- upvalues: calculateMeshSizeForPart (upval), config (copy), p1 (copy), ErrorSourceStringsModule (upval), GetExpectedPartSizeModule (upval), validateWrapTargetComparison (upval)
+			local MeshSizeForPart, MeshSizeForPart2 = calculateMeshSizeForPart(RootInstance, config)
+			
+			if MeshSizeForPart and MeshSizeForPart2 then
+				validateWrapTargetComparison(GetExpectedPartSizeModule(RootInstance, config) / MeshSizeForPart2, RootInstance, config, p1)
+				
+				return
+			else
+				p1:fail(ErrorSourceStringsModule.Keys.BodyMesh_LoadFailed, { meshName = RootInstance:GetFullName() }, RootInstance)
+			end
+		end
+		
+		local ASSETTYPE = ConstantsModule.ASSET_TYPE_INFO[AssetType]
+		
+		if Enum.AssetType.DynamicHead == AssetType then
+			validateSingleMeshPart(RootInstance)
 			
 			return
 		end
-		p1:fail(errorSourceStringsModule.Keys.BodyMesh_LoadFailed, { meshName = p3:GetFullName() }, p3)
-	end
-	
-	local var2 = constantsModule.ASSET_TYPE_INFO[assetType]
-	
-	if Enum.AssetType.DynamicHead == assetType then
-		validateSingleMeshPart(rootInstance)
-		
-		return
-	elseif not var2 then return end
-	for i_1 in pairs(var2.subParts) do
-		local var3 = rootInstance:FindFirstChild(i_1)
-		
-		if var3 then
-			validateSingleMeshPart(var3)
+		if not ASSETTYPE then return end
+		for subPart in pairs(ASSETTYPE.subParts) do
+			local Child = RootInstance:FindFirstChild(subPart)
+			
+			if Child then
+				validateSingleMeshPart(Child)
+			end
 		end
 	end
-end
-
-return t
+}

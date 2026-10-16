@@ -1,6 +1,6 @@
-﻿local t = {}
+﻿local SocialTabsPageRouter = {}
 
-for i, v in require(script:FindFirstAncestor("SocialTabsPage").Common.TabConfig).routeOrder do
-	table.insert(t, { [v.id] = { getScreen = v.getScreen } })
+for _, value in require(script:FindFirstAncestor("SocialTabsPage").Common.TabConfig).routeOrder do
+	table.insert(SocialTabsPageRouter, { [value.id] = { getScreen = value.getScreen } })
 end
-return t
+return SocialTabsPageRouter

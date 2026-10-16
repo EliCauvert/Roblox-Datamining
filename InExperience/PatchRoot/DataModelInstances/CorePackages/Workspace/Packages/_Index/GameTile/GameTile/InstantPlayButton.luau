@@ -1,21 +1,23 @@
-﻿local parent = script:FindFirstAncestor("GameTile").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local button = foundationModule.Button
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local fillBehavior = foundationModule.Enums.FillBehavior
-local iconName = foundationModule.Enums.IconName
-local inputSize = foundationModule.Enums.InputSize
-local useLocalization = require(parent.Localization).Hooks.useLocalization
+﻿local Parent = script:FindFirstAncestor("GameTile").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local Button = FoundationModule.Button
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local FillBehavior = FoundationModule.Enums.FillBehavior
+local IconName = FoundationModule.Enums.IconName
+local InputSize = FoundationModule.Enums.InputSize
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 
-return reactModule.memo(function(p1)
-	-- upvalues: useLocalization (ref), reactModule (ref), button (ref), iconName (ref), buttonVariant (ref), inputSize (ref), fillBehavior (ref)
-	return reactModule.createElement(button, {
-		icon = if p1.showIcon then iconName.PlayXlarge else nil,
-		text = if p1.showText then useLocalization({ play = "Feature.ExperienceDetails.PlayButtonText.Play" }).play else nil,
-		variant = buttonVariant.SoftEmphasis,
-		size = inputSize.Small,
-		fillBehavior = fillBehavior.Fill,
+return ReactModule.memo(function(p1) --[[ Line: 20 | Named "InstantPlayButton" ]]
+	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), Button (copy), IconName (copy), ButtonVariant (copy), InputSize (copy), FillBehavior (copy)
+	local UseLocalizationResult = UseLocalizationFunction({ play = "Feature.ExperienceDetails.PlayButtonText.Play" })
+	
+	return ReactModule.createElement(Button, {
+		icon = if p1.showIcon then IconName.PlayXlarge else nil,
+		text = if p1.showText then UseLocalizationResult.play else nil,
+		variant = ButtonVariant.SoftEmphasis,
+		size = InputSize.Small,
+		fillBehavior = FillBehavior.Fill,
 		onActivated = p1.onActivated
 	})
 end)

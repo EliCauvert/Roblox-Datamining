@@ -1,123 +1,125 @@
-﻿local statsUtilsModule = require(game:GetService("CoreGui").RobloxGui.Modules.Stats.StatsUtils)
-local t = {}
-t.__index = t
+﻿local StatsUtilsModule = require(game:GetService("CoreGui").RobloxGui.Modules.Stats.StatsUtils)
+local StatsAggregatorModule = {}
+StatsAggregatorModule.__index = StatsAggregatorModule
 
-function t.new(p1, p2, p3)
-	-- upvalues: t (ref), statsUtilsModule (ref)
-	local t_1 = {}
-	setmetatable(t_1, t)
-	t_1._statType = p1
-	t_1._numSamples = p2
-	t_1._pauseBetweenSamples = p3
-	t_1._statName = statsUtilsModule.StatNames[t_1._statType]
-	t_1._statMaxName = statsUtilsModule.StatMaxNames[t_1._statType]
-	t_1._samples = {}
-	
-	for i = 0, p2 - 1 do
-		t_1._samples[i] = 0
-	end
-	t_1._oldestIndex = 0
-	t_1._listeners = {}
-	t_1._nextListenerId = 1001
-	
-	return t_1
-end
-
-function t:AddListener(p4)
-	local nextListenerId = self._nextListenerId
-	self._nextListenerId += 1
-	self._listeners[nextListenerId] = p4
-	
-	return nextListenerId
-end
-
-function t:RemoveListener(p4)
-	self._listeners[p4] = nil
-end
-
-function t:_notifyAllListeners()
-	for i, v in pairs(self._listeners) do
-		v()
-	end
-end
-
-function t:StartListening()
-	if self._listening == true then
-		return
-	end
-	spawn(function()
-		-- upvalues: self (ref)
-		self._listening = true
-		while self._listening do
-			self:_storeStatValue(self:_getStatValue())
-			self:_notifyAllListeners()
-			wait(self._pauseBetweenSamples)
-		end
-	end)
-end
-
-function t:StopListening()
-	self._listening = false
-end
-
-function t:GetValues()
+function StatsAggregatorModule.new(_statType, _numSamples: number, _pauseBetweenSamples) --[[ Line: 18 ]]
+	-- upvalues: StatsAggregatorModule (copy), StatsUtilsModule (copy)
 	local t = {}
-	local _ = nil
+	setmetatable(t, StatsAggregatorModule)
+	t._statType = _statType
+	t._numSamples = _numSamples
+	t._pauseBetweenSamples = _pauseBetweenSamples
+	t._statName = StatsUtilsModule.StatNames[t._statType]
+	t._statMaxName = StatsUtilsModule.StatMaxNames[t._statType]
+	t._samples = {}
 	
-	for i = 0, self._numSamples - 1 do
-		t[i + 1] = self._samples[(self._oldestIndex + i) % self._numSamples]
+	for i = 0, _numSamples - 1 do
+		t._samples[i] = 0
 	end
+	t._oldestIndex = 0
+	t._listeners = {}
+	t._nextListenerId = 1001
+	
 	return t
 end
 
-function t:GetAverage()
-	local var1 = 0
+function StatsAggregatorModule:AddListener(p1) --[[ Line: 45 ]]
+	local NextListenerId = self._nextListenerId
+	self._nextListenerId += 1
+	self._listeners[NextListenerId] = p1
 	
-	for i = 0, self._numSamples - 1 do
-		var1 += self._samples[i]
-	end
-	return var1 / self._numSamples
+	return NextListenerId
 end
 
-function t:GetLatestValue()
+function StatsAggregatorModule:RemoveListener(p1) --[[ Line: 52 ]]
+	self._listeners[p1] = nil
+end
+
+function StatsAggregatorModule._notifyAllListeners(p1) --[[ Line: 56 ]]
+	for _, listener in pairs(p1._listeners) do
+		listener()
+	end
+end
+
+function StatsAggregatorModule:StartListening() --[[ Line: 62 ]]
+	if self._listening ~= true then
+		spawn(function() --[[ Line: 70 ]]
+			-- upvalues: self (copy)
+			self._listening = true
+			while self._listening do
+				self:_storeStatValue((self:_getStatValue()))
+				self:_notifyAllListeners()
+				wait(self._pauseBetweenSamples)
+			end
+		end)
+		
+		return
+	end
+end
+
+function StatsAggregatorModule:StopListening() --[[ Line: 81 ]]
+	self._listening = false
+end
+
+function StatsAggregatorModule:GetValues() --[[ Line: 85 ]]
+	local Samples = {}
+	
+	for i = 0, self._numSamples - 1 do
+		Samples[i + 1] = self._samples[(self._oldestIndex + i) % self._numSamples]
+	end
+	return Samples
+end
+
+function StatsAggregatorModule:GetAverage() --[[ Line: 96 ]]
+	local NewSample = 0
+	
+	for i = 0, self._numSamples - 1 do
+		NewSample += self._samples[i]
+	end
+	return NewSample / self._numSamples
+end
+
+function StatsAggregatorModule:GetLatestValue() --[[ Line: 105 ]]
 	return self._samples[(self._oldestIndex + self._numSamples - 1) % self._numSamples]
 end
 
-function t:_storeStatValue(p4)
-	self._samples[self._oldestIndex] = p4
+function StatsAggregatorModule:_storeStatValue(StatValue) --[[ Line: 111 ]]
+	self._samples[self._oldestIndex] = StatValue
 	self._oldestIndex = (self._oldestIndex + 1) % self._numSamples
 end
 
-function t:_getStatValue()
-	local statsService = game:GetService("Stats")
+function StatsAggregatorModule:_getStatValue() --[[ Line: 117 ]]
+	local StatsService = game:GetService("Stats")
 	
-	if statsService == nil then
+	if StatsService == nil then
 		return 0
 	end
-	local performanceStats = statsService:FindFirstChild("PerformanceStats")
+	local PerformanceStats = StatsService:FindFirstChild("PerformanceStats")
 	
-	if performanceStats == nil then
+	if PerformanceStats == nil then
 		return 0
+	else
+		local StatName = PerformanceStats:FindFirstChild(self._statName)
+		
+		return if StatName == nil then 0 else StatName:GetValue()
 	end
-	local statName = performanceStats:FindFirstChild(self._statName)
-	
-	return if statName == nil then 0 else statName:GetValue()
 end
 
-function t:GetTarget()
-	local statsService = game:GetService("Stats")
+function StatsAggregatorModule:GetTarget() --[[ Line: 137 ]]
+	local StatsService = game:GetService("Stats")
 	
-	if statsService == nil then
+	if StatsService == nil then
 		return 0
 	end
-	local performanceStats = statsService:FindFirstChild("PerformanceStats")
+	local PerformanceStats = StatsService:FindFirstChild("PerformanceStats")
 	
-	if performanceStats == nil then
+	if PerformanceStats == nil then
 		return 0
+	else
+		local StatMaxName = PerformanceStats:FindFirstChild(self._statMaxName)
+		
+		return if StatMaxName == nil then 0 else StatMaxName:GetValue()
 	end
-	local statMaxName = performanceStats:FindFirstChild(self._statMaxName)
-	
-	return if statMaxName == nil then 0 else statMaxName:GetValue()
 end
 
-return t
+return StatsAggregatorModule

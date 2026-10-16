@@ -1,46 +1,46 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local constantsModule = require(profilePlatform.Common.Constants)
-local textKeysModule = require(profilePlatform.Common.TextKeys)
-local UIBloxModule = require(parent.UIBlox)
-local useStyle = UIBloxModule.Core.Style.useStyle
-local useStyleMetadata = UIBloxModule.Core.Style.useStyleMetadata
-local loadableImage = UIBloxModule.App.Loading.LoadableImage
-local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
-local images = UIBloxModule.App.ImageSet.Images
-local styledTextLabel = UIBloxModule.App.Text.StyledTextLabel
-local horizontalPageMargin = UIBloxModule.App.Container.HorizontalPageMargin
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local ConstantsModule = require(ProfilePlatform.Common.Constants)
+local TextKeysModule = require(ProfilePlatform.Common.TextKeys)
+local UIBloxModule = require(Parent.UIBlox)
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local UseStyleMetadataFunction = UIBloxModule.Core.Style.useStyleMetadata
+local LoadableImage = UIBloxModule.App.Loading.LoadableImage
+local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
+local Images = UIBloxModule.App.ImageSet.Images
+local StyledTextLabel = UIBloxModule.App.Text.StyledTextLabel
+local HorizontalPageMargin = UIBloxModule.App.Container.HorizontalPageMargin
 
-return function(p1)
-	-- upvalues: useLocalization (ref), textKeysModule (ref), useStyle (ref), useStyleMetadata (ref), reactModule (ref), imageSetLabel (ref), images (ref), loadableImage (ref), constantsModule (ref), horizontalPageMargin (ref), styledTextLabel (ref)
-	local var1 = useLocalization({
+return function(p1) --[[ Line: 32 | Named "ContactProfileHeader" ]]
+	-- upvalues: UseLocalizationFunction (copy), TextKeysModule (copy), UseStyleFunction (copy), UseStyleMetadataFunction (copy), ReactModule (copy), ImageSetLabel (copy), Images (copy), LoadableImage (copy), ConstantsModule (copy), HorizontalPageMargin (copy), StyledTextLabel (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
 		contactsProfileBody = {
-			textKeysModule.ContactsProfileBody,
+			TextKeysModule.ContactsProfileBody,
 			contactName = p1.contactName
 		},
-		failedMessage = textKeysModule.NoInternet,
-		fromContacts = textKeysModule.FromContacts
+		failedMessage = TextKeysModule.NoInternet,
+		fromContacts = TextKeysModule.FromContacts
 	})
-	local var2 = useStyle()
-	local var3 = useStyleMetadata()
-	local theme = var2.Theme
-	local font = var2.Font
+	local UseStyleResult = UseStyleFunction()
+	local UseStyleMetadataResult = UseStyleMetadataFunction()
+	local Theme = UseStyleResult.Theme
+	local UseStyleResultFont = UseStyleResult.Font
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.new(1, 0, 0, 400),
 		LayoutOrder = p1.layoutOrder
 	}, {
-		Background = reactModule.createElement(imageSetLabel, {
+		Background = ReactModule.createElement(ImageSetLabel, {
 			BorderSizePixel = 0,
 			ZIndex = 1,
 			Size = UDim2.fromScale(1, 1),
-			Image = images[var2.Theme.PlayerBackgroundDefault.Image],
-			ImageColor3 = if var3 and var3.HasSurfaceOverrides then var2.Theme.BackgroundUIDefault.Color:Lerp(var2.Theme.PlayerBackgroundDefault.Color, var2.Theme.Overlay.Transparency) else nil
+			Image = Images[UseStyleResult.Theme.PlayerBackgroundDefault.Image],
+			ImageColor3 = if UseStyleMetadataResult and UseStyleMetadataResult.HasSurfaceOverrides then UseStyleResult.Theme.BackgroundUIDefault.Color:Lerp(UseStyleResult.Theme.PlayerBackgroundDefault.Color, UseStyleResult.Theme.Overlay.Transparency) else nil
 		}),
-		AvatarThumbnail = reactModule.createElement(loadableImage, {
+		AvatarThumbnail = ReactModule.createElement(LoadableImage, {
 			BackgroundTransparency = 1,
 			useShimmerAnimationWhileLoading = true,
 			ZIndex = 2,
@@ -50,13 +50,13 @@ return function(p1)
 			ScaleType = Enum.ScaleType.Fit,
 			Image = p1.avatarThumbnailUrl
 		}),
-		TopGradient = reactModule.createElement("Frame", {
+		TopGradient = ReactModule.createElement("Frame", {
 			BorderSizePixel = 0,
 			ZIndex = 3,
-			Size = UDim2.new(1, 0, 0, constantsModule.CONTACT_CARD_GRADIENT_HEIGHT),
-			BackgroundColor3 = theme.BackgroundDefault.Color
+			Size = UDim2.new(1, 0, 0, ConstantsModule.CONTACT_CARD_GRADIENT_HEIGHT),
+			BackgroundColor3 = Theme.BackgroundDefault.Color
 		}, {
-			UIGradient = reactModule.createElement("UIGradient", {
+			UIGradient = ReactModule.createElement("UIGradient", {
 				Rotation = 90,
 				Transparency = NumberSequence.new({
 					NumberSequenceKeypoint.new(0, 0),
@@ -64,15 +64,15 @@ return function(p1)
 				})
 			})
 		}),
-		BottomGradient = reactModule.createElement("Frame", {
+		BottomGradient = ReactModule.createElement("Frame", {
 			BorderSizePixel = 0,
 			ZIndex = 3,
-			Size = UDim2.new(1, 0, 0, constantsModule.CONTACT_CARD_GRADIENT_HEIGHT),
+			Size = UDim2.new(1, 0, 0, ConstantsModule.CONTACT_CARD_GRADIENT_HEIGHT),
 			Position = UDim2.new(0, 0, 1, 0),
 			AnchorPoint = Vector2.new(0, 1),
-			BackgroundColor3 = theme.BackgroundDefault.Color
+			BackgroundColor3 = Theme.BackgroundDefault.Color
 		}, {
-			UIGradient = reactModule.createElement("UIGradient", {
+			UIGradient = ReactModule.createElement("UIGradient", {
 				Rotation = 90,
 				Transparency = NumberSequence.new({
 					NumberSequenceKeypoint.new(0, 1),
@@ -80,46 +80,46 @@ return function(p1)
 				})
 			})
 		}),
-		UserDetails = reactModule.createElement(horizontalPageMargin, {
+		UserDetails = ReactModule.createElement(HorizontalPageMargin, {
 			zIndex = 4,
 			backgroundTransparency = 1,
 			size = UDim2.new(1, 0, 0, 56),
 			position = UDim2.fromScale(0, 0.9),
 			anchorPoint = Vector2.new(0, 1)
 		}, {
-			UserDetailsLayout = reactModule.createElement("UIListLayout", {
+			UserDetailsLayout = ReactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Vertical,
 				SortOrder = Enum.SortOrder.LayoutOrder
 			}),
-			Padding1 = reactModule.createElement("Frame", {
+			Padding1 = ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 1,
 				Size = UDim2.fromOffset(0, 40)
 			}),
-			ContactName = reactModule.createElement(styledTextLabel, {
+			ContactName = ReactModule.createElement(StyledTextLabel, {
 				layoutOrder = 2,
 				text = p1.contactName,
 				size = UDim2.new(1, 0, 0, 24),
 				textTruncate = Enum.TextTruncate.AtEnd,
 				textXAlignment = Enum.TextXAlignment.Left,
 				textYAlignment = Enum.TextYAlignment.Center,
-				fontStyle = font.Header1,
-				colorStyle = theme.TextEmphasis
+				fontStyle = UseStyleResultFont.Header1,
+				colorStyle = Theme.TextEmphasis
 			}),
-			Padding2 = reactModule.createElement("Frame", {
+			Padding2 = ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 3,
 				Size = UDim2.fromOffset(0, 15)
 			}),
-			FromContacts = reactModule.createElement(styledTextLabel, {
+			FromContacts = ReactModule.createElement(StyledTextLabel, {
 				layoutOrder = 4,
 				size = UDim2.new(1, 0, 0, 16),
-				text = var1.fromContacts,
+				text = UseLocalizationResult.fromContacts,
 				textTruncate = Enum.TextTruncate.AtEnd,
 				textXAlignment = Enum.TextXAlignment.Left,
 				textYAlignment = Enum.TextYAlignment.Center,
-				fontStyle = font.CaptionHeader,
-				colorStyle = theme.TextMuted
+				fontStyle = UseStyleResultFont.CaptionHeader,
+				colorStyle = Theme.TextMuted
 			})
 		})
 	})

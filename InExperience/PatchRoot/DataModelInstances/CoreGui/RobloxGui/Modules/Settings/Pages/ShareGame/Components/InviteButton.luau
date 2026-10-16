@@ -1,58 +1,58 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local robloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
-local roactModule = require(corePackagesService.Packages.Roact)
-local shareGame = robloxGui.Modules.Settings.Pages.ShareGame
-local immutable = require(corePackagesService.Workspace.Packages.AppCommonLib).Immutable
-local constantsModule = require(shareGame.Constants)
-local rectangleButtonModule = require(shareGame.Components.RectangleButton)
-local themeModule = require(robloxGui.Modules.Settings.Theme)
-local semibold = themeModule.font(Enum.Font.SourceSansSemibold, "Semibold")
-local var1 = themeModule.textSize(19)
-local inviteStatus = constantsModule.InviteStatus
-local t = {
-	[inviteStatus.Success] = "Feature.SettingsHub.Label.Invited",
-	[inviteStatus.Moderated] = "Feature.SettingsHub.Label.Moderated",
-	[inviteStatus.Pending] = "Feature.SettingsHub.Label.Sending"
+﻿local CorePackages = game:GetService("CorePackages")
+local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
+local RoactModule = require(CorePackages.Packages.Roact)
+local ShareGame = RobloxGui.Modules.Settings.Pages.ShareGame
+local Immutable = require(CorePackages.Workspace.Packages.AppCommonLib).Immutable
+local ConstantsModule = require(ShareGame.Constants)
+local RectangleButtonModule = require(ShareGame.Components.RectangleButton)
+local ThemeModule = require(RobloxGui.Modules.Settings.Theme)
+local Semibold = ThemeModule.font(Enum.Font.SourceSansSemibold, "Semibold")
+local TextSizeResult = ThemeModule.textSize(19)
+local InviteStatus = ConstantsModule.InviteStatus
+local config = {
+	[InviteStatus.Success] = "Feature.SettingsHub.Label.Invited",
+	[InviteStatus.Moderated] = "Feature.SettingsHub.Label.Moderated",
+	[InviteStatus.Pending] = "Feature.SettingsHub.Label.Sending"
 }
-local var2 = require(shareGame.getTranslator)()
-local inviteButton = roactModule.PureComponent:extend("InviteButton")
+local Translator = require(ShareGame.getTranslator)()
+local InviteButton = RoactModule.PureComponent:extend("InviteButton")
 
-function inviteButton.render(p1)
-	-- upvalues: inviteStatus (ref), immutable (ref), roactModule (ref), rectangleButtonModule (ref), semibold (ref), var2 (ref), var1 (ref), constantsModule (ref), t (ref)
-	local anchorPoint = p1.props.anchorPoint
-	local position = p1.props.position
-	local size = p1.props.size
-	local layoutOrder = p1.props.layoutOrder
-	local zIndex = p1.props.zIndex
-	local onInvite = p1.props.onInvite
-	local inviteStatus_1 = p1.props.inviteStatus
+function InviteButton.render(p1) --[[ Line: 30 ]]
+	-- upvalues: InviteStatus (copy), Immutable (copy), RoactModule (copy), RectangleButtonModule (copy), Semibold (copy), Translator (copy), TextSizeResult (copy), ConstantsModule (copy), config (copy)
+	local AnchorPoint = p1.props.anchorPoint
+	local Position = p1.props.position
+	local Size = p1.props.size
+	local LayoutOrder = p1.props.layoutOrder
+	local ZIndex = p1.props.zIndex
+	local OnInviteFunction = p1.props.onInvite
+	local InviteStatus1 = p1.props.inviteStatus
 	
-	return if inviteStatus_1 and inviteStatus_1 ~= inviteStatus.Failed then roactModule.createElement("TextLabel", {
+	return if InviteStatus1 and InviteStatus1 ~= InviteStatus.Failed then RoactModule.createElement("TextLabel", {
 		BackgroundTransparency = 1,
-		AnchorPoint = anchorPoint,
-		Position = position,
-		Size = size,
-		Font = semibold,
-		Text = var2:FormatByKey(t[inviteStatus_1] or "Feature.SettingsHub.Label.Moderated"),
-		TextSize = var1,
-		TextColor3 = constantsModule.Color.WHITE,
+		AnchorPoint = AnchorPoint,
+		Position = Position,
+		Size = Size,
+		Font = Semibold,
+		Text = Translator:FormatByKey(config[InviteStatus1] or "Feature.SettingsHub.Label.Moderated"),
+		TextSize = TextSizeResult,
+		TextColor3 = ConstantsModule.Color.WHITE,
 		TextXAlignment = Enum.TextXAlignment.Center,
-		LayoutOrder = layoutOrder,
-		ZIndex = zIndex
-	}) else roactModule.createElement(rectangleButtonModule, immutable.Set(p1.props, "onClick", function()
-		-- upvalues: onInvite (ref)
-		onInvite()
+		LayoutOrder = LayoutOrder,
+		ZIndex = ZIndex
+	}) else RoactModule.createElement(RectangleButtonModule, Immutable.Set(p1.props, "onClick", function() --[[ Line: 41 ]]
+		-- upvalues: OnInviteFunction (copy)
+		OnInviteFunction()
 	end), {
-		InviteText = roactModule.createElement("TextLabel", {
+		InviteText = RoactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
 			Position = UDim2.new(0.5, 0, 0.5, 0),
-			Font = semibold,
-			Text = var2:FormatByKey("Feature.SettingsHub.Action.InviteFriend"),
-			TextSize = var1,
-			TextColor3 = constantsModule.Color.WHITE,
-			ZIndex = zIndex
+			Font = Semibold,
+			Text = Translator:FormatByKey("Feature.SettingsHub.Action.InviteFriend"),
+			TextSize = TextSizeResult,
+			TextColor3 = ConstantsModule.Color.WHITE,
+			ZIndex = ZIndex
 		})
 	})
 end
 
-return inviteButton
+return InviteButton

@@ -1,34 +1,33 @@
-﻿local performFetch = require(game:GetService("CorePackages").Workspace.Packages.Http).PerformFetch
-local parent = script.Parent.Parent
-local thunkModule = require(parent.Thunk)
-local networkModule = require(parent.Services.Network)
-local assetInfoModule = require(parent.Models.AssetInfo)
-local setAssetsModule = require(parent.Actions.SetAssets)
-local createInspectAndBuyKeyMapperModule = require(parent.createInspectAndBuyKeyMapper)
-local sendCounterModule = require(parent.Thunks.SendCounter)
-local constantsModule = require(parent.Constants)
-local list = { networkModule }
-local var1 = createInspectAndBuyKeyMapperModule("getProductInfo")
+﻿local PerformFetch = require(game:GetService("CorePackages").Workspace.Packages.Http).PerformFetch
+local Parent = script.Parent.Parent
+local ThunkModule = require(Parent.Thunk)
+local NetworkModule = require(Parent.Services.Network)
+local AssetInfoModule = require(Parent.Models.AssetInfo)
+local SetAssetsModule = require(Parent.Actions.SetAssets)
+local SendCounterModule = require(Parent.Thunks.SendCounter)
+local ConstantsModule = require(Parent.Constants)
+local list = { NetworkModule }
+local GetProductInfo = require(Parent.createInspectAndBuyKeyMapper)("getProductInfo")
 
-return function(p1)
-	-- upvalues: thunkModule (ref), list (ref), networkModule (ref), var1 (ref), performFetch (ref), assetInfoModule (ref), setAssetsModule (ref), sendCounterModule (ref), constantsModule (ref)
-	return thunkModule.new(script.Name, list, function(p2, p3)
-		-- upvalues: networkModule (copy), var1 (copy), p1 (ref), performFetch (copy), assetInfoModule (copy), setAssetsModule (copy), sendCounterModule (copy), constantsModule (copy)
-		local var2 = p3[networkModule]
+return function(p1) --[[ Line: 21 | Named "GetProductInfo" ]]
+	-- upvalues: ThunkModule (copy), list (copy), NetworkModule (copy), GetProductInfo (copy), PerformFetch (copy), AssetInfoModule (copy), SetAssetsModule (copy), SendCounterModule (copy), ConstantsModule (copy)
+	return ThunkModule.new(script.Name, list, function(p2, p3) --[[ Line: 22 ]]
+		-- upvalues: NetworkModule (upval), GetProductInfo (upval), p1 (copy), PerformFetch (upval), AssetInfoModule (upval), SetAssetsModule (upval), SendCounterModule (upval), ConstantsModule (upval)
+		local v1 = p3[NetworkModule]
 		
-		return performFetch.Single(var1(p2:getState().storeId, p1), function()
-			-- upvalues: var2 (ref), p1 (copy), assetInfoModule (copy), p2 (ref), setAssetsModule (copy), sendCounterModule (copy), constantsModule (copy)
-			return var2.getProductInfo(p1):andThen(function(p4)
-				-- upvalues: assetInfoModule (copy), p2 (copy), setAssetsModule (copy), sendCounterModule (copy), constantsModule (copy)
-				p2:dispatch(setAssetsModule({ assetInfoModule.fromGetProductInfo(p4) }))
-				p2:dispatch(sendCounterModule(constantsModule.Counters.GetProductInfo .. constantsModule.CounterSuffix.RequestSucceeded))
-			end, function(_)
-				-- upvalues: p2 (copy), sendCounterModule (copy), constantsModule (copy)
-				p2:dispatch(sendCounterModule(constantsModule.Counters.GetProductInfo .. constantsModule.CounterSuffix.RequestRejected))
+		return PerformFetch.Single(GetProductInfo(p2:getState().storeId, p1), function() --[[ Line: 27 ]]
+			-- upvalues: v1 (copy), p1 (upval), AssetInfoModule (upval), p2 (copy), SetAssetsModule (upval), SendCounterModule (upval), ConstantsModule (upval)
+			return v1.getProductInfo(p1):andThen(function(Result) --[[ Line: 28 ]]
+				-- upvalues: AssetInfoModule (upval), p2 (upval), SetAssetsModule (upval), SendCounterModule (upval), ConstantsModule (upval)
+				p2:dispatch(SetAssetsModule({ (AssetInfoModule.fromGetProductInfo(Result)) }))
+				p2:dispatch(SendCounterModule(ConstantsModule.Counters.GetProductInfo .. ConstantsModule.CounterSuffix.RequestSucceeded))
+			end, function(_) --[[ Line: 34 ]]
+				-- upvalues: p2 (upval), SendCounterModule (upval), ConstantsModule (upval)
+				p2:dispatch(SendCounterModule(ConstantsModule.Counters.GetProductInfo .. ConstantsModule.CounterSuffix.RequestRejected))
 			end)
-		end)(p2):catch(function(_)
-			-- upvalues: p2 (ref), sendCounterModule (copy), constantsModule (copy)
-			p2:dispatch(sendCounterModule(constantsModule.Counters.GetProductInfo .. constantsModule.CounterSuffix.RequestFailed))
+		end)(p2):catch(function(_) --[[ Line: 39 ]]
+			-- upvalues: p2 (copy), SendCounterModule (upval), ConstantsModule (upval)
+			p2:dispatch(SendCounterModule(ConstantsModule.Counters.GetProductInfo .. ConstantsModule.CounterSuffix.RequestFailed))
 		end)
 	end)
 end

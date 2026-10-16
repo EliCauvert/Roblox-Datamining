@@ -1,17 +1,18 @@
-﻿local reactModule = require(script:FindFirstAncestor("GenericAbuseReporting").Parent.React)
+﻿local ReactModule = require(script:FindFirstAncestor("GenericAbuseReporting").Parent.React)
 
-return function(value, p1)
-	-- upvalues: reactModule (ref)
-	local var1, var2 = reactModule.useState(false)
-	reactModule.useEffect(function()
-		-- upvalues: value (ref), p1 (ref), var2 (ref)
-		if p1.Y < value.Y then
-			var2(true)
+return function(p1, p2): number --[[ Line: 8 | Named "useScrollbarOffset" ]]
+	-- upvalues: ReactModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	ReactModule.useEffect(function() --[[ Line: 11 ]]
+		-- upvalues: p1 (copy), p2 (copy), UseStateResult2 (copy)
+		if p2.Y < p1.Y then
+			UseStateResult2(true)
 			
 			return
+		else
+			UseStateResult2(false)
 		end
-		var2(false)
-	end, { value, p1 })
+	end, { p1, p2 })
 	
-	return if var1 then 16 else 0
+	return if UseStateResult then 16 else 0
 end

@@ -1,17 +1,17 @@
-﻿return function(p1, p2)
+﻿return function(p1, List) --[[ Line: 7 ]]
 	local t = {}
 	
-	for i, v in pairs(p2) do
-		t[p1[i]] = v
+	for i, value in pairs(List) do
+		t[p1[i]] = value
 	end
-	local var1 = getmetatable(p1)
-	local index = var1.__index
+	local Meta = getmetatable(p1)
+	local Index = Meta.__index
 	
-	function var1:__index(p3)
-		-- upvalues: t (ref), index (ref)
-		return if p3 == "toRawValue" then function(p4)
-			-- upvalues: t (copy)
-			return t[p4]
-		end else index[p3]
+	function Meta:__index(p2) --[[ Line: 15 ]]
+		-- upvalues: t (copy), Index (copy)
+		return if p2 == "toRawValue" then function(p3) --[[ Line: 17 ]]
+			-- upvalues: t (upval)
+			return t[p3]
+		end else Index[p2]
 	end
 end

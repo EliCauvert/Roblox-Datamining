@@ -1,231 +1,233 @@
-﻿local squadsCore = script:FindFirstAncestor("SquadsCore")
-local parent = squadsCore.Parent
-local httpService = game:GetService("HttpService")
-local guiService = game:GetService("GuiService")
-local constantsModule = require(squadsCore.Common.Constants)
-local eventNamesModule = require(squadsCore.Analytics.EventNames)
-local squadToastActionsAndStatesModule = require(squadsCore.Enums.SquadToastActionsAndStates)
-local squadExternalContractContextModule = require(squadsCore.Components.SquadExternalContractProvider.SquadExternalContractContext)
-local actOnPartyNudgeModule = require(squadsCore.Thunks.actOnPartyNudge)
-local createConversationModule = require(squadsCore.Thunks.createConversation)
-local reactModule = require(parent.React)
-local toastNotificationModule = require(parent.ToastNotification)
-local toastNotificationsProtocolModule = require(parent.ToastNotificationsProtocol)
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local realtimeDeliveryModule = require(parent.RealtimeDelivery)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useLocalUserId = require(parent.RobloxAppHooks).useLocalUserId
-local userProfilesModule = require(parent.UserProfiles)
-local getStandardSizeAvatarHeadShotRbxthumb = require(parent.UserLib).Utils.getStandardSizeAvatarHeadShotRbxthumb
-local lifecycleEvents = toastNotificationModule.LifecycleEvents
-local notificationTypeEnum = toastNotificationModule.ToastNotificationTypeModule.NotificationTypeEnum
-local showNotificationSnoozeMenuSignal = toastNotificationModule.Signals.ShowNotificationSnoozeMenuSignal
-local notificationGroups = toastNotificationModule.NotificationGroups
-local default = toastNotificationsProtocolModule.ToastNotificationProtocol.default
-local userProfileStore = userProfilesModule.Stores.UserProfileStore
+﻿local SquadsCore = script:FindFirstAncestor("SquadsCore")
+local Parent = SquadsCore.Parent
+local HttpService = game:GetService("HttpService")
+local GuiService = game:GetService("GuiService")
+local ConstantsModule = require(SquadsCore.Common.Constants)
+local EventNamesModule = require(SquadsCore.Analytics.EventNames)
+local SquadToastActionsAndStatesModule = require(SquadsCore.Enums.SquadToastActionsAndStates)
+local SquadExternalContractContextModule = require(SquadsCore.Components.SquadExternalContractProvider.SquadExternalContractContext)
+local ActOnPartyNudgeModule = require(SquadsCore.Thunks.actOnPartyNudge)
+local CreateConversationModule = require(SquadsCore.Thunks.createConversation)
+local ReactModule = require(Parent.React)
+local ToastNotificationModule = require(Parent.ToastNotification)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local RealtimeDeliveryModule = require(Parent.RealtimeDelivery)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseLocalUserIdFunction = require(Parent.RobloxAppHooks).useLocalUserId
+local GetStandardSizeAvatarHeadShotRbxthumbFunction = require(Parent.UserLib).Utils.getStandardSizeAvatarHeadShotRbxthumb
+local LifecycleEvents = ToastNotificationModule.LifecycleEvents
+local NotificationTypeEnum = ToastNotificationModule.ToastNotificationTypeModule.NotificationTypeEnum
+local ShowNotificationSnoozeMenuSignal = ToastNotificationModule.Signals.ShowNotificationSnoozeMenuSignal
+local NotificationGroups = ToastNotificationModule.NotificationGroups
+local Default = require(Parent.ToastNotificationsProtocol).ToastNotificationProtocol.default
+local UserProfileStore = require(Parent.UserProfiles).Stores.UserProfileStore
 
-return function(p1)
-	-- upvalues: useDispatch (ref), reactModule (ref), squadExternalContractContextModule (ref), useLocalUserId (ref), useLocalization (ref), getStandardSizeAvatarHeadShotRbxthumb (ref), userProfileStore (ref), guiService (ref), realtimeDeliveryModule (ref), constantsModule (ref), eventNamesModule (ref), default (ref), squadToastActionsAndStatesModule (ref), notificationTypeEnum (ref), actOnPartyNudgeModule (ref), lifecycleEvents (ref), showNotificationSnoozeMenuSignal (ref), notificationGroups (ref), httpService (ref), createConversationModule (ref)
-	local var1 = useDispatch()
-	local var2 = reactModule.useContext(squadExternalContractContextModule)
-	local var3 = tonumber(useLocalUserId()) or 0
-	local var4 = var2.useIsChatEnabled()
-	local var5 = var2.useIsLoadingChatSettings()
-	local var6 = useLocalization({
+return function(p1) --[[ Line: 39 ]]
+	-- upvalues: UseDispatchFunction (copy), ReactModule (copy), SquadExternalContractContextModule (copy), UseLocalUserIdFunction (copy), UseLocalizationFunction (copy), GetStandardSizeAvatarHeadShotRbxthumbFunction (copy), UserProfileStore (copy), GuiService (copy), RealtimeDeliveryModule (copy), ConstantsModule (copy), EventNamesModule (copy), Default (copy), SquadToastActionsAndStatesModule (copy), NotificationTypeEnum (copy), ActOnPartyNudgeModule (copy), LifecycleEvents (copy), ShowNotificationSnoozeMenuSignal (copy), NotificationGroups (copy), HttpService (copy), CreateConversationModule (copy)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseContextResult = ReactModule.useContext(SquadExternalContractContextModule)
+	local Number: number = tonumber(UseLocalUserIdFunction()) or 0
+	local UseIsChatEnabledResult = UseContextResult.useIsChatEnabled()
+	local UseIsLoadingChatSettingsResult = UseContextResult.useIsLoadingChatSettings()
+	local UseLocalizationResult = UseLocalizationFunction({
 		YouJoinedFriendParty = "Feature.Squads.Label.YouJoinedFriendParty",
 		FriendJoinedYourParty = "Feature.Squads.Label.FriendJoinedYourParty",
 		snoozeTitle = "Feature.Chat.Label.SnoozePartyNotifications",
 		snoozeDescription = "Feature.Chat.Description.SnoozeDescription"
 	})
-	local var7 = reactModule.useRef({})
-	local var8 = reactModule.useCallback(function(p2, p3)
-		-- upvalues: var3 (ref), getStandardSizeAvatarHeadShotRbxthumb (copy), userProfileStore (copy), guiService (copy), var6 (ref)
-		if p2 == 0 or p3 == 0 then return end
-		local var9 = nil
+	local UseRefResult = ReactModule.useRef({})
+	local UseResult = ReactModule.useCallback(function(Number1, Number2) --[[ Line: 56 ]]
+		-- upvalues: Number (copy), GetStandardSizeAvatarHeadShotRbxthumbFunction (upval), UserProfileStore (upval), GuiService (upval), UseLocalizationResult (copy)
+		if Number1 == 0 or Number2 == 0 then return end
+		local v1 = nil
 		
-		if p2 == var3 then
-			var9 = p3
-		elseif p3 == var3 then
-			var9 = p2
+		if Number1 == Number then
+			v1 = Number2
+		elseif Number2 == Number then
+			v1 = Number1
 		end
-		if var9 then
-			local var10 = getStandardSizeAvatarHeadShotRbxthumb(tostring(var9))
-			userProfileStore.get().fetchNamesByUserIds({ tostring(var9) }, function(p4)
-				-- upvalues: p2 (ref), var3 (copy), guiService (copy), var6 (copy), var10 (ref)
-				if #p4.data > 0 and p4.data[1] and p4.data[1].names then
-					local combinedName = p4.data[1].names.getCombinedName(false)
+		if v1 then
+			local StandardSizeAvatarHeadShotRbxthumb = GetStandardSizeAvatarHeadShotRbxthumbFunction((tostring(v1)))
+			UserProfileStore.get().fetchNamesByUserIds({ (tostring(v1)) }, function(p2) --[[ Line: 70 ]]
+				-- upvalues: Number1 (copy), Number (upval), GuiService (upval), UseLocalizationResult (upval), StandardSizeAvatarHeadShotRbxthumb (copy)
+				if #p2.data > 0 and p2.data[1] and p2.data[1].names then
+					local CombinedName = p2.data[1].names.getCombinedName(false)
 					
-					if p2 == var3 then
-						guiService:SendNotification({
-							Title = var6.FriendJoinedYourParty:gsub("{(.-)}", { combinedName = combinedName }),
-							Icon = var10
+					if Number1 == Number then
+						GuiService:SendNotification({
+							Title = UseLocalizationResult.FriendJoinedYourParty:gsub("{(.-)}", { combinedName = CombinedName }),
+							Icon = StandardSizeAvatarHeadShotRbxthumb
 						})
 						
 						return
 					end
-					guiService:SendNotification({
-						Title = var6.YouJoinedFriendParty:gsub("{(.-)}", { combinedName = combinedName }),
-						Icon = var10
+					GuiService:SendNotification({
+						Title = UseLocalizationResult.YouJoinedFriendParty:gsub("{(.-)}", { combinedName = CombinedName }),
+						Icon = StandardSizeAvatarHeadShotRbxthumb
 					})
 				end
 			end)
 		end
 	end, {
-		var3,
-		var6.FriendJoinedYourParty,
-		var6.YouJoinedFriendParty
+		Number,
+		UseLocalizationResult.FriendJoinedYourParty,
+		UseLocalizationResult.YouJoinedFriendParty
 	})
-	realtimeDeliveryModule.useRealtimeNamespace(constantsModule.PARTY_NUDGE_RTN_NAMESPACE, function(p2)
-		-- upvalues: constantsModule (copy), var3 (ref), p1 (ref), var8 (ref)
-		if p2.nudgeType == constantsModule.ONE_TO_ONE_NUDGE_IN_EXPERIENCE_TYPE and p2.status == constantsModule.PARTY_INVITE_ACCEPTED_STATUS and (p2.inviterId == var3 and p1.currentSquadId ~= "") and p2.groupUpId == p1.currentSquadId then
-			var8(p2.inviterId, p2.inviteeId)
+	RealtimeDeliveryModule.useRealtimeNamespace(ConstantsModule.PARTY_NUDGE_RTN_NAMESPACE, function(p2) --[[ Line: 90 ]]
+		-- upvalues: ConstantsModule (upval), Number (copy), p1 (copy), UseResult (copy)
+		if p2.nudgeType == ConstantsModule.ONE_TO_ONE_NUDGE_IN_EXPERIENCE_TYPE and p2.status == ConstantsModule.PARTY_INVITE_ACCEPTED_STATUS and p2.inviterId == Number and p1.currentSquadId ~= "" and p2.groupUpId == p1.currentSquadId then
+			UseResult(p2.inviterId, p2.inviteeId)
 		end
-	end, { var3, p1.currentSquadId, var8 })
-	local var9 = reactModule.useCallback(function(p2, p3)
-		-- upvalues: var2 (ref), eventNamesModule (copy), var7 (ref)
-		var2.fireSquadAnalytics(eventNamesModule.SquadToastActions, {
-			toastAction = p3,
-			toastType = if var7.current[p2] then var7.current[p2].toastType else nil,
-			nudgeId = if var7.current[p2] then var7.current[p2].nudgeId else nil,
-			nudgeType = if var7.current[p2] then var7.current[p2].nudgeType else nil,
-			partyAttemptId = if var7.current[p2] then var7.current[p2].partyAttemptId else nil,
-			squadLocation = var2.squadLocation
+	end, { Number, p1.currentSquadId, UseResult })
+	local UseResult1 = ReactModule.useCallback(function(p2, ToastAction) --[[ Line: 103 ]]
+		-- upvalues: UseContextResult (copy), EventNamesModule (upval), UseRefResult (copy)
+		UseContextResult.fireSquadAnalytics(EventNamesModule.SquadToastActions, {
+			toastAction = ToastAction,
+			toastType = if UseRefResult.current[p2] then UseRefResult.current[p2].toastType else nil,
+			nudgeId = if UseRefResult.current[p2] then UseRefResult.current[p2].nudgeId else nil,
+			nudgeType = if UseRefResult.current[p2] then UseRefResult.current[p2].nudgeType else nil,
+			partyAttemptId = if UseRefResult.current[p2] then UseRefResult.current[p2].partyAttemptId else nil,
+			squadLocation = UseContextResult.squadLocation
 		})
-	end, { var2.fireSquadAnalytics, var2.squadLocation })
-	reactModule.useEffect(function()
-		-- upvalues: default (copy), var7 (ref), var9 (ref), squadToastActionsAndStatesModule (copy), constantsModule (copy), notificationTypeEnum (copy), var1 (ref), actOnPartyNudgeModule (copy), var2 (ref), var4 (ref)
-		local var10 = default:listenToDismissNotification(function(p2)
-			-- upvalues: var7 (copy), var9 (copy), squadToastActionsAndStatesModule (copy), constantsModule (copy), notificationTypeEnum (copy), var1 (copy), actOnPartyNudgeModule (copy), var2 (copy), var4 (copy)
-			if p2.notificationId and var7.current[p2.notificationId] then
-				var9(p2.notificationId, squadToastActionsAndStatesModule.PartyNudgeGeneralDismiss)
+	end, {
+		UseContextResult.fireSquadAnalytics,
+		UseContextResult.squadLocation
+	})
+	ReactModule.useEffect(function() --[[ Line: 122 ]]
+		-- upvalues: Default (upval), UseRefResult (copy), UseResult1 (copy), SquadToastActionsAndStatesModule (upval), ConstantsModule (upval), NotificationTypeEnum (upval), UseDispatchResult (copy), ActOnPartyNudgeModule (upval), UseContextResult (copy), UseIsChatEnabledResult (copy)
+		local ListenToDismissNotificationResult = Default:listenToDismissNotification(function(p2) --[[ Line: 124 ]]
+			-- upvalues: UseRefResult (upval), UseResult1 (upval), SquadToastActionsAndStatesModule (upval), ConstantsModule (upval), NotificationTypeEnum (upval), UseDispatchResult (upval), ActOnPartyNudgeModule (upval), UseContextResult (upval), UseIsChatEnabledResult (upval)
+			if p2.notificationId and UseRefResult.current[p2.notificationId] then
+				UseResult1(p2.notificationId, SquadToastActionsAndStatesModule.PartyNudgeGeneralDismiss)
 				
-				if var7.current[p2.notificationId].shouldActWhenDismiss then
-					local notificationId = var7.current[p2.notificationId]
-					local toastType = notificationId.toastType
+				if UseRefResult.current[p2.notificationId].shouldActWhenDismiss then
+					local CurrentEntry = UseRefResult.current[p2.notificationId]
+					local ToastType = CurrentEntry.toastType
 					
-					if notificationId.nudgeType == constantsModule.ONE_TO_ONE_NUDGE_IN_EXPERIENCE_TYPE then
-						local REJECT_START_PARTY_REQUEST_ACTION = nil
+					if CurrentEntry.nudgeType == ConstantsModule.ONE_TO_ONE_NUDGE_IN_EXPERIENCE_TYPE then
+						local REJECTPARTYINVITEACTION = nil
 						
-						if toastType == notificationTypeEnum.SquadNudgeInvite then
-							REJECT_START_PARTY_REQUEST_ACTION = constantsModule.REJECT_PARTY_INVITE_ACTION
-						elseif toastType == notificationTypeEnum.SquadStartPartyPrompt then
-							REJECT_START_PARTY_REQUEST_ACTION = constantsModule.REJECT_START_PARTY_REQUEST_ACTION
+						if ToastType == NotificationTypeEnum.SquadNudgeInvite then
+							REJECTPARTYINVITEACTION = ConstantsModule.REJECT_PARTY_INVITE_ACTION
+						elseif ToastType == NotificationTypeEnum.SquadStartPartyPrompt then
+							REJECTPARTYINVITEACTION = ConstantsModule.REJECT_START_PARTY_REQUEST_ACTION
 						end
-						if REJECT_START_PARTY_REQUEST_ACTION then
-							var1(actOnPartyNudgeModule(REJECT_START_PARTY_REQUEST_ACTION, notificationId.nudgeId, false, var2.setSquadPrompt, var2.fireSquadAnalytics, var2.squadLocation, var4))
+						if REJECTPARTYINVITEACTION then
+							UseDispatchResult(ActOnPartyNudgeModule(REJECTPARTYINVITEACTION, CurrentEntry.nudgeId, false, UseContextResult.setSquadPrompt, UseContextResult.fireSquadAnalytics, UseContextResult.squadLocation, UseIsChatEnabledResult))
 						end
 					end
 				end
 			end
-			var7.current[p2.notificationId] = nil
+			UseRefResult.current[p2.notificationId] = nil
 		end)
 		
-		return function()
-			-- upvalues: var10 (ref)
-			if var10 then
-				var10:Disconnect()
+		return function() --[[ Line: 162 ]]
+			-- upvalues: ListenToDismissNotificationResult (copy)
+			if ListenToDismissNotificationResult then
+				ListenToDismissNotificationResult:Disconnect()
 			end
 		end
 	end, {
-		var9,
-		var4,
-		var2.setSquadPrompt,
-		var2.fireSquadAnalytics,
-		var2.squadLocation
+		UseResult1,
+		UseIsChatEnabledResult,
+		UseContextResult.setSquadPrompt,
+		UseContextResult.fireSquadAnalytics,
+		UseContextResult.squadLocation
 	})
-	reactModule.useEffect(function()
-		-- upvalues: lifecycleEvents (copy), notificationTypeEnum (copy), showNotificationSnoozeMenuSignal (copy), var6 (ref), notificationGroups (copy), constantsModule (copy), var7 (ref), var5 (ref), var4 (ref), default (copy), httpService (copy), var9 (ref), squadToastActionsAndStatesModule (copy), var1 (ref), createConversationModule (copy), var2 (ref), actOnPartyNudgeModule (copy), p1 (ref), var8 (ref)
-		local userAction = lifecycleEvents:RegisterCallback(lifecycleEvents.ToastEvents.UserAction, notificationTypeEnum.SquadStartPartyPrompt, function(p2)
-			-- upvalues: showNotificationSnoozeMenuSignal (copy), var6 (copy), notificationGroups (copy), constantsModule (copy), var7 (copy), var5 (copy), var4 (copy), default (copy), httpService (copy), var9 (copy), squadToastActionsAndStatesModule (copy), var1 (copy), createConversationModule (copy), var2 (copy), actOnPartyNudgeModule (copy), p1 (copy)
-			if p2 and p2.userActionType == "click" and (p2.notificationData and p2.visualItem) and p2.visualItem.visualItemName == "SnoozeSingleMetaAction" then
-				showNotificationSnoozeMenuSignal:fire({
+	ReactModule.useEffect(function() --[[ Line: 175 ]]
+		-- upvalues: LifecycleEvents (upval), NotificationTypeEnum (upval), ShowNotificationSnoozeMenuSignal (upval), UseLocalizationResult (copy), NotificationGroups (upval), ConstantsModule (upval), UseRefResult (copy), UseIsLoadingChatSettingsResult (copy), UseIsChatEnabledResult (copy), Default (upval), HttpService (upval), UseResult1 (copy), SquadToastActionsAndStatesModule (upval), UseDispatchResult (copy), CreateConversationModule (upval), UseContextResult (copy), ActOnPartyNudgeModule (upval), p1 (copy), UseResult (copy)
+		local RegisterResult = LifecycleEvents:RegisterCallback(LifecycleEvents.ToastEvents.UserAction, NotificationTypeEnum.SquadStartPartyPrompt, function(p2) --[[ Line: 179 ]]
+			-- upvalues: ShowNotificationSnoozeMenuSignal (upval), UseLocalizationResult (upval), NotificationGroups (upval), ConstantsModule (upval), UseRefResult (upval), UseIsLoadingChatSettingsResult (upval), UseIsChatEnabledResult (upval), Default (upval), HttpService (upval), UseResult1 (upval), SquadToastActionsAndStatesModule (upval), UseDispatchResult (upval), CreateConversationModule (upval), UseContextResult (upval), ActOnPartyNudgeModule (upval), p1 (upval)
+			if p2 and p2.userActionType == "click" and p2.notificationData and p2.visualItem and p2.visualItem.visualItemName == "SnoozeSingleMetaAction" then
+				ShowNotificationSnoozeMenuSignal:fire({
 					context = "Toast",
-					description = var6.snoozeDescription,
-					notificationType = notificationGroups.SquadStartPartyPromptGroup,
-					title = var6.snoozeTitle
+					description = UseLocalizationResult.snoozeDescription,
+					notificationType = NotificationGroups.SquadStartPartyPromptGroup,
+					title = UseLocalizationResult.snoozeTitle
 				})
 			end
-			if p2 and p2.userActionType == "click" and (p2.notificationData and p2.visualItem) and (p2.visualItem.actionEventParams and p2.visualItem.visualItemName and (p2.visualItem.visualItemName == constantsModule.START_PARTY_FROM_PROMPT_BUTTON_TYPE or p2.visualItem.visualItemName == constantsModule.DISMISS_START_PARTY_PROMPT_BUTTON_TYPE)) then
-				local id = p2.notificationData.id
+			if p2 and p2.userActionType == "click" and p2.notificationData and p2.visualItem and p2.visualItem.actionEventParams and p2.visualItem.visualItemName and (p2.visualItem.visualItemName == ConstantsModule.START_PARTY_FROM_PROMPT_BUTTON_TYPE or p2.visualItem.visualItemName == ConstantsModule.DISMISS_START_PARTY_PROMPT_BUTTON_TYPE) then
+				local Id = p2.notificationData.id
 				
-				if var7.current[id] then
-					var7.current[id].shouldActWhenDismiss = false
+				if UseRefResult.current[Id] then
+					UseRefResult.current[Id].shouldActWhenDismiss = false
 				end
-				if not var5 and not var4 then
-					default:dismissNotification(id)
+				if not UseIsLoadingChatSettingsResult and not UseIsChatEnabledResult then
+					Default:dismissNotification(Id)
 					
 					return
 				end
-				local actionEventParams = httpService:JSONDecode(p2.visualItem.actionEventParams)
+				local Data = HttpService:JSONDecode(p2.visualItem.actionEventParams)
 				
-				if actionEventParams.nudgeType == constantsModule.ONE_TO_ONE_NUDGE_IN_EXPERIENCE_TYPE and game.JobId ~= "" and actionEventParams.gameInstanceId == game.JobId then
-					if p2.visualItem.visualItemName == constantsModule.START_PARTY_FROM_PROMPT_BUTTON_TYPE then
-						default:dismissNotification(id)
-						var9(id, squadToastActionsAndStatesModule.PartyNudgeAccept)
-						var1(createConversationModule({
+				if Data.nudgeType == ConstantsModule.ONE_TO_ONE_NUDGE_IN_EXPERIENCE_TYPE and game.JobId ~= "" and Data.gameInstanceId == game.JobId then
+					if p2.visualItem.visualItemName == ConstantsModule.START_PARTY_FROM_PROMPT_BUTTON_TYPE then
+						Default:dismissNotification(Id)
+						UseResult1(Id, SquadToastActionsAndStatesModule.PartyNudgeAccept)
+						UseDispatchResult(CreateConversationModule({
 							conversationType = "one_to_one",
-							userIds = { tostring(actionEventParams.inviteeUserId) },
-							source = constantsModule.START_PARTY_FROM_PROMPT_BUTTON_TYPE,
-							squadContext = var2,
-							onSuccessCallback = function(p3)
-								-- upvalues: var1 (copy), actOnPartyNudgeModule (copy), constantsModule (copy), actionEventParams (ref), p1 (copy), var2 (copy), var4 (copy), var7 (copy), id (ref)
-								var1(actOnPartyNudgeModule(constantsModule.ACCEPT_START_PARTY_REQUEST_ACTION, actionEventParams.nudgeId, p1.currentParentChannelId ~= "" and p1.currentParentChannelId ~= p3, var2.setSquadPrompt, var2.fireSquadAnalytics, var2.squadLocation, var4, if var7.current[id] then var7.current[id].partyAttemptId else nil, p3))
+							userIds = { (tostring(Data.inviteeUserId)) },
+							source = ConstantsModule.START_PARTY_FROM_PROMPT_BUTTON_TYPE,
+							squadContext = UseContextResult,
+							onSuccessCallback = function(CurrentParentChannelId) --[[ Line: 229 ]]
+								-- upvalues: UseDispatchResult (upval), ActOnPartyNudgeModule (upval), ConstantsModule (upval), Data (copy), p1 (upval), UseContextResult (upval), UseIsChatEnabledResult (upval), UseRefResult (upval), Id (copy)
+								UseDispatchResult(ActOnPartyNudgeModule(ConstantsModule.ACCEPT_START_PARTY_REQUEST_ACTION, Data.nudgeId, p1.currentParentChannelId ~= "" and p1.currentParentChannelId ~= CurrentParentChannelId, UseContextResult.setSquadPrompt, UseContextResult.fireSquadAnalytics, UseContextResult.squadLocation, UseIsChatEnabledResult, if UseRefResult.current[Id] then UseRefResult.current[Id].partyAttemptId else nil, CurrentParentChannelId))
 							end,
-							onErrorCallback = function()
-								-- upvalues: var1 (copy), actOnPartyNudgeModule (copy), constantsModule (copy), actionEventParams (ref), var2 (copy), var4 (copy)
-								var1(actOnPartyNudgeModule(constantsModule.REJECT_START_PARTY_REQUEST_ACTION, actionEventParams.nudgeId, false, var2.setSquadPrompt, var2.fireSquadAnalytics, var2.squadLocation, var4))
+							onErrorCallback = function() --[[ Line: 247 ]]
+								-- upvalues: UseDispatchResult (upval), ActOnPartyNudgeModule (upval), ConstantsModule (upval), Data (copy), UseContextResult (upval), UseIsChatEnabledResult (upval)
+								UseDispatchResult(ActOnPartyNudgeModule(ConstantsModule.REJECT_START_PARTY_REQUEST_ACTION, Data.nudgeId, false, UseContextResult.setSquadPrompt, UseContextResult.fireSquadAnalytics, UseContextResult.squadLocation, UseIsChatEnabledResult))
 							end
 						}))
 						
 						return
-					elseif p2.visualItem.visualItemName == constantsModule.DISMISS_START_PARTY_PROMPT_BUTTON_TYPE then
-						var9(id, squadToastActionsAndStatesModule.PartyNudgeButtonDismiss)
-						var1(actOnPartyNudgeModule(constantsModule.REJECT_START_PARTY_REQUEST_ACTION, actionEventParams.nudgeId, false, var2.setSquadPrompt, var2.fireSquadAnalytics, var2.squadLocation, var4))
+					end
+					if p2.visualItem.visualItemName == ConstantsModule.DISMISS_START_PARTY_PROMPT_BUTTON_TYPE then
+						UseResult1(Id, SquadToastActionsAndStatesModule.PartyNudgeButtonDismiss)
+						UseDispatchResult(ActOnPartyNudgeModule(ConstantsModule.REJECT_START_PARTY_REQUEST_ACTION, Data.nudgeId, false, UseContextResult.setSquadPrompt, UseContextResult.fireSquadAnalytics, UseContextResult.squadLocation, UseIsChatEnabledResult))
 					end
 				end
 			end
 		end)
-		local userAction_1 = lifecycleEvents:RegisterCallback(lifecycleEvents.ToastEvents.UserAction, notificationTypeEnum.SquadNudgeInvite, function(p2)
-			-- upvalues: showNotificationSnoozeMenuSignal (copy), var6 (copy), notificationGroups (copy), constantsModule (copy), var7 (copy), var5 (copy), var4 (copy), default (copy), httpService (copy), var9 (copy), squadToastActionsAndStatesModule (copy), p1 (copy), var1 (copy), actOnPartyNudgeModule (copy), var2 (copy), var8 (copy)
-			if p2 and p2.userActionType == "click" and (p2.notificationData and p2.visualItem) and p2.visualItem.visualItemName == "SnoozeSingleMetaAction" then
-				showNotificationSnoozeMenuSignal:fire({
+		local RegisterResult1 = LifecycleEvents:RegisterCallback(LifecycleEvents.ToastEvents.UserAction, NotificationTypeEnum.SquadNudgeInvite, function(p2) --[[ Line: 286 ]]
+			-- upvalues: ShowNotificationSnoozeMenuSignal (upval), UseLocalizationResult (upval), NotificationGroups (upval), ConstantsModule (upval), UseRefResult (upval), UseIsLoadingChatSettingsResult (upval), UseIsChatEnabledResult (upval), Default (upval), HttpService (upval), UseResult1 (upval), SquadToastActionsAndStatesModule (upval), p1 (upval), UseDispatchResult (upval), ActOnPartyNudgeModule (upval), UseContextResult (upval), UseResult (upval)
+			if p2 and p2.userActionType == "click" and p2.notificationData and p2.visualItem and p2.visualItem.visualItemName == "SnoozeSingleMetaAction" then
+				ShowNotificationSnoozeMenuSignal:fire({
 					context = "Toast",
-					description = var6.snoozeDescription,
-					notificationType = notificationGroups.SquadNudgeInviteGroup,
-					title = var6.snoozeTitle
+					description = UseLocalizationResult.snoozeDescription,
+					notificationType = NotificationGroups.SquadNudgeInviteGroup,
+					title = UseLocalizationResult.snoozeTitle
 				})
 			end
-			if p2 and p2.userActionType == "click" and (p2.notificationData and p2.visualItem) and (p2.visualItem.actionEventParams and p2.visualItem.visualItemName and (p2.visualItem.visualItemName == constantsModule.JOIN_SQUAD_FROM_NUDGE_BUTTON_TYPE or p2.visualItem.visualItemName == constantsModule.DISMISS_SQUAD_NUDGE_BUTTON_TYPE)) then
-				local id = p2.notificationData.id
+			if p2 and p2.userActionType == "click" and p2.notificationData and p2.visualItem and p2.visualItem.actionEventParams and p2.visualItem.visualItemName and (p2.visualItem.visualItemName == ConstantsModule.JOIN_SQUAD_FROM_NUDGE_BUTTON_TYPE or p2.visualItem.visualItemName == ConstantsModule.DISMISS_SQUAD_NUDGE_BUTTON_TYPE) then
+				local Id = p2.notificationData.id
 				
-				if var7.current[id] then
-					var7.current[id].shouldActWhenDismiss = false
+				if UseRefResult.current[Id] then
+					UseRefResult.current[Id].shouldActWhenDismiss = false
 				end
-				if not var5 and not var4 then
-					default:dismissNotification(id)
+				if not UseIsLoadingChatSettingsResult and not UseIsChatEnabledResult then
+					Default:dismissNotification(Id)
 					
 					return
 				end
-				local actionEventParams = httpService:JSONDecode(p2.visualItem.actionEventParams)
+				local Data = HttpService:JSONDecode(p2.visualItem.actionEventParams)
 				
-				if actionEventParams.nudgeType == constantsModule.ONE_TO_ONE_NUDGE_IN_EXPERIENCE_TYPE then
-					local REJECT_PARTY_INVITE_ACTION = nil
-					local var10 = false
+				if Data.nudgeType == ConstantsModule.ONE_TO_ONE_NUDGE_IN_EXPERIENCE_TYPE then
+					local ACCEPTPARTYINVITEACTION = nil
+					local IsNotSquadIdMatch = false
 					
-					if p2.visualItem.visualItemName == constantsModule.JOIN_SQUAD_FROM_NUDGE_BUTTON_TYPE then
-						REJECT_PARTY_INVITE_ACTION = constantsModule.ACCEPT_PARTY_INVITE_ACTION
-						default:dismissNotification(id)
-						var9(id, squadToastActionsAndStatesModule.PartyNudgeAccept)
-						var10 = p1.currentSquadId ~= "" and actionEventParams.squadId ~= p1.currentSquadId
-					elseif p2.visualItem.visualItemName == constantsModule.DISMISS_SQUAD_NUDGE_BUTTON_TYPE then
-						REJECT_PARTY_INVITE_ACTION = constantsModule.REJECT_PARTY_INVITE_ACTION
-						var9(id, squadToastActionsAndStatesModule.PartyNudgeButtonDismiss)
+					if p2.visualItem.visualItemName == ConstantsModule.JOIN_SQUAD_FROM_NUDGE_BUTTON_TYPE then
+						ACCEPTPARTYINVITEACTION = ConstantsModule.ACCEPT_PARTY_INVITE_ACTION
+						Default:dismissNotification(Id)
+						UseResult1(Id, SquadToastActionsAndStatesModule.PartyNudgeAccept)
+						IsNotSquadIdMatch = p1.currentSquadId ~= "" and Data.squadId ~= p1.currentSquadId
+					elseif p2.visualItem.visualItemName == ConstantsModule.DISMISS_SQUAD_NUDGE_BUTTON_TYPE then
+						ACCEPTPARTYINVITEACTION = ConstantsModule.REJECT_PARTY_INVITE_ACTION
+						UseResult1(Id, SquadToastActionsAndStatesModule.PartyNudgeButtonDismiss)
 					end
-					if REJECT_PARTY_INVITE_ACTION then
-						var1(actOnPartyNudgeModule(REJECT_PARTY_INVITE_ACTION, actionEventParams.nudgeId, var10, var2.setSquadPrompt, var2.fireSquadAnalytics, var2.squadLocation, var4, if var7.current[id] then var7.current[id].partyAttemptId else nil)):andThen(function()
-							-- upvalues: REJECT_PARTY_INVITE_ACTION (write), constantsModule (copy), var8 (copy), actionEventParams (ref)
-							if REJECT_PARTY_INVITE_ACTION == constantsModule.ACCEPT_PARTY_INVITE_ACTION then
-								var8(tonumber(actionEventParams.inviterUserId) or 0, tonumber(actionEventParams.inviteeUserId) or 0)
+					if ACCEPTPARTYINVITEACTION then
+						UseDispatchResult(ActOnPartyNudgeModule(ACCEPTPARTYINVITEACTION, Data.nudgeId, IsNotSquadIdMatch, UseContextResult.setSquadPrompt, UseContextResult.fireSquadAnalytics, UseContextResult.squadLocation, UseIsChatEnabledResult, if UseRefResult.current[Id] then UseRefResult.current[Id].partyAttemptId else nil)):andThen(function() --[[ Line: 354 ]]
+							-- upvalues: ACCEPTPARTYINVITEACTION (ref), ConstantsModule (upval), UseResult (upval), Data (copy)
+							if ACCEPTPARTYINVITEACTION == ConstantsModule.ACCEPT_PARTY_INVITE_ACTION then
+								UseResult(tonumber(Data.inviterUserId) or 0, tonumber(Data.inviteeUserId) or 0)
 							end
 						end)
 					end
@@ -233,103 +235,113 @@ return function(p1)
 			end
 		end)
 		
-		return function()
-			-- upvalues: userAction (ref), userAction_1 (ref)
-			if userAction then
-				userAction()
+		return function() --[[ Line: 368 ]]
+			-- upvalues: RegisterResult (copy), RegisterResult1 (copy)
+			if RegisterResult then
+				RegisterResult()
 			end
-			if userAction_1 then
-				userAction_1()
+			if RegisterResult1 then
+				RegisterResult1()
 			end
 		end
 	end, {
-		var9, var4, var2, var5, var2.setSquadPrompt, var2.fireSquadAnalytics,
-		var2.squadLocation, p1.currentSquadId, p1.currentParentChannelId, var8,
-		var6.snoozeTitle, var6.snoozeDescription
+		UseResult1, UseIsChatEnabledResult, UseContextResult,
+		UseIsLoadingChatSettingsResult, UseContextResult.setSquadPrompt,
+		UseContextResult.fireSquadAnalytics, UseContextResult.squadLocation,
+		p1.currentSquadId, p1.currentParentChannelId, UseResult,
+		UseLocalizationResult.snoozeTitle, UseLocalizationResult.snoozeDescription
 	})
-	reactModule.useEffect(function()
-		-- upvalues: lifecycleEvents (copy), notificationTypeEnum (copy), var5 (ref), var4 (ref), default (copy), httpService (copy), constantsModule (copy), p1 (ref), var7 (ref), var9 (ref), squadToastActionsAndStatesModule (copy)
-		local display = lifecycleEvents:RegisterCallback(lifecycleEvents.ToastEvents.Display, notificationTypeEnum.SquadStartPartyPrompt, function(p2)
-			-- upvalues: var5 (copy), var4 (copy), default (copy), httpService (copy), constantsModule (copy), p1 (copy), var7 (copy), var9 (copy), squadToastActionsAndStatesModule (copy)
-			local actionEventParams = p2.state.visualItems.button[1].actionEventParams
-			local id = p2.id
+	ReactModule.useEffect(function() --[[ Line: 392 ]]
+		-- upvalues: LifecycleEvents (upval), NotificationTypeEnum (upval), UseIsLoadingChatSettingsResult (copy), UseIsChatEnabledResult (copy), Default (upval), HttpService (upval), ConstantsModule (upval), p1 (copy), UseRefResult (copy), UseResult1 (copy), SquadToastActionsAndStatesModule (upval)
+		local RegisterResult = LifecycleEvents:RegisterCallback(LifecycleEvents.ToastEvents.Display, NotificationTypeEnum.SquadStartPartyPrompt, function(p2) --[[ Line: 396 ]]
+			-- upvalues: UseIsLoadingChatSettingsResult (upval), UseIsChatEnabledResult (upval), Default (upval), HttpService (upval), ConstantsModule (upval), p1 (upval), UseRefResult (upval), UseResult1 (upval), SquadToastActionsAndStatesModule (upval)
+			local ActionEventParams = p2.state.visualItems.button[1].actionEventParams
+			local Id = p2.id
 			
-			if not var5 and not var4 then
-				default:dismissNotification(id)
+			if not UseIsLoadingChatSettingsResult and not UseIsChatEnabledResult then
+				Default:dismissNotification(Id)
 				
 				return
 			end
-			local var10 = false
-			local var11 = true
-			local var12 = true
-			local var13 = httpService:JSONDecode(actionEventParams)
+			local Flag = false
+			local Flag1 = true
+			local ShouldActWhenDismiss = true
+			local Data = HttpService:JSONDecode(ActionEventParams)
 			
-			if var13.nudgeType == constantsModule.ONE_TO_ONE_NUDGE_IN_EXPERIENCE_TYPE then
-				if p1.currentSquadId ~= "" then
-					var10 = true
-				elseif game.JobId == "" or var13.gameInstanceId ~= game.JobId then
-					var10 = true
-					var11 = false
-					var12 = false
+			if Data.nudgeType == ConstantsModule.ONE_TO_ONE_NUDGE_IN_EXPERIENCE_TYPE then
+				if p1.currentSquadId == "" then
+					if game.JobId == "" or Data.gameInstanceId ~= game.JobId then
+						Flag = true
+						Flag1 = false
+						ShouldActWhenDismiss = false
+					end
+				else
+					Flag = true
 				end
 			end
-			if var11 then
-				var7.current[id] = {
+			if Flag1 then
+				UseRefResult.current[Id] = {
 					toastType = p2.notificationType,
-					partyAttemptId = httpService:GenerateGUID(false),
-					shouldActWhenDismiss = var12,
-					nudgeId = var13.nudgeId,
-					nudgeType = var13.nudgeType
+					partyAttemptId = HttpService:GenerateGUID(false),
+					shouldActWhenDismiss = ShouldActWhenDismiss,
+					nudgeId = Data.nudgeId,
+					nudgeType = Data.nudgeType
 				}
-				var9(id, squadToastActionsAndStatesModule.PartyNudgeDisplay)
+				UseResult1(Id, SquadToastActionsAndStatesModule.PartyNudgeDisplay)
 			end
-			if var10 then
-				default:dismissNotification(id)
+			if Flag then
+				Default:dismissNotification(Id)
 			end
 		end)
-		local display_1 = lifecycleEvents:RegisterCallback(lifecycleEvents.ToastEvents.Display, notificationTypeEnum.SquadNudgeInvite, function(p2)
-			-- upvalues: var5 (copy), var4 (copy), default (copy), httpService (copy), constantsModule (copy), p1 (copy), var7 (copy), var9 (copy), squadToastActionsAndStatesModule (copy)
-			local actionEventParams = p2.state.visualItems.button[1].actionEventParams
-			local id = p2.id
+		local RegisterResult1 = LifecycleEvents:RegisterCallback(LifecycleEvents.ToastEvents.Display, NotificationTypeEnum.SquadNudgeInvite, function(p2) --[[ Line: 445 ]]
+			-- upvalues: UseIsLoadingChatSettingsResult (upval), UseIsChatEnabledResult (upval), Default (upval), HttpService (upval), ConstantsModule (upval), p1 (upval), UseRefResult (upval), UseResult1 (upval), SquadToastActionsAndStatesModule (upval)
+			local ActionEventParams = p2.state.visualItems.button[1].actionEventParams
+			local Id = p2.id
 			
-			if not var5 and not var4 then
-				default:dismissNotification(id)
+			if not UseIsLoadingChatSettingsResult and not UseIsChatEnabledResult then
+				Default:dismissNotification(Id)
 				
 				return
 			end
-			local var10 = httpService:JSONDecode(actionEventParams)
+			local Data = HttpService:JSONDecode(ActionEventParams)
 			
-			if var10.nudgeType == constantsModule.ONE_TO_ONE_NUDGE_IN_EXPERIENCE_TYPE and p1.currentSquadId ~= "" and p1.currentSquadId == var10.squadId then
-				default:dismissNotification(id)
+			if Data.nudgeType == ConstantsModule.ONE_TO_ONE_NUDGE_IN_EXPERIENCE_TYPE and p1.currentSquadId ~= "" and p1.currentSquadId == Data.squadId then
+				Default:dismissNotification(Id)
 				
 				return
+			else
+				UseRefResult.current[Id] = {
+					shouldActWhenDismiss = true,
+					toastType = p2.notificationType,
+					partyAttemptId = HttpService:GenerateGUID(false),
+					nudgeId = Data.nudgeId,
+					nudgeType = Data.nudgeType
+				}
+				UseResult1(Id, SquadToastActionsAndStatesModule.PartyNudgeDisplay)
 			end
-			var7.current[id] = {
-				shouldActWhenDismiss = true,
-				toastType = p2.notificationType,
-				partyAttemptId = httpService:GenerateGUID(false),
-				nudgeId = var10.nudgeId,
-				nudgeType = var10.nudgeType
-			}
-			var9(id, squadToastActionsAndStatesModule.PartyNudgeDisplay)
 		end)
 		
-		return function()
-			-- upvalues: display (ref), display_1 (ref)
-			if display then
-				display()
+		return function() --[[ Line: 473 ]]
+			-- upvalues: RegisterResult (copy), RegisterResult1 (copy)
+			if RegisterResult then
+				RegisterResult()
 			end
-			if display_1 then
-				display_1()
+			if RegisterResult1 then
+				RegisterResult1()
 			end
 		end
-	end, { var4, var9, var5, p1.currentSquadId })
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var7 (ref), constantsModule (copy), notificationTypeEnum (copy), default (copy)
+	end, {
+		UseIsChatEnabledResult,
+		UseResult1,
+		UseIsLoadingChatSettingsResult,
+		p1.currentSquadId
+	})
+	ReactModule.useEffect(function() --[[ Line: 484 ]]
+		-- upvalues: p1 (copy), UseRefResult (copy), ConstantsModule (upval), NotificationTypeEnum (upval), Default (upval)
 		if p1.currentSquadId ~= "" then
-			for i, v in var7.current do
-				if v and v.nudgeType == constantsModule.ONE_TO_ONE_NUDGE_IN_EXPERIENCE_TYPE and v.toastType == notificationTypeEnum.SquadStartPartyPrompt then
-					default:dismissNotification(i)
+			for i, value in UseRefResult.current do
+				if value and value.nudgeType == ConstantsModule.ONE_TO_ONE_NUDGE_IN_EXPERIENCE_TYPE and value.toastType == NotificationTypeEnum.SquadStartPartyPrompt then
+					Default:dismissNotification(i)
 				end
 			end
 		end

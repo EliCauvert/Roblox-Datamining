@@ -1,136 +1,139 @@
-﻿local genericChallenges = script:FindFirstAncestor("GenericChallenges")
-local challengeHeadersModule = require(script.Parent.ChallengeHeaders)
-local buildChallengeWebViewUrlModule = require(script.Parent.BuildChallengeWebViewUrl)
+﻿local GenericChallenges = script:FindFirstAncestor("GenericChallenges")
+local ChallengeHeadersModule = require(script.Parent.ChallengeHeaders)
+local BuildChallengeWebViewUrlModule = require(script.Parent.BuildChallengeWebViewUrl)
 local _ = require(script.Parent.BuildHybridCallback)
-local _ = require(genericChallenges.Types.ChallengeParameters)
-local genericTypeModule = require(genericChallenges.Types.GenericType)
-local getFFlagEnableUnifiedWebViews = require(genericChallenges.Parent.SharedFlags).GetFFlagEnableUnifiedWebViews
-local fFlagHideChallengeWebViewsUntilDisplayedModule = require(script.Parent.Flags.FFlagHideChallengeWebViewsUntilDisplayed)
-local fFlagReleaseTextBoxFocusOnChallengeOpenModule = require(script.Parent.Flags.FFlagReleaseTextBoxFocusOnChallengeOpen)
-local browserService = game:GetService("BrowserService")
-local httpService = game:GetService("HttpService")
-local userInputService = game:GetService("UserInputService")
-local var1 = if getFFlagEnableUnifiedWebViews() then game:GetService("WebViewService") else nil
-local webViewHasHideHeaderEngineFeature = game:GetEngineFeature("WebViewHasHideHeader")
-local hiddenChallengeWebViewTimeoutSeconds = game:DefineFastInt("HiddenChallengeWebViewTimeoutSeconds", 3)
-local t = {}
-t.__index = t
+local _ = require(GenericChallenges.Types.ChallengeParameters)
+local GenericTypeModule = require(GenericChallenges.Types.GenericType)
+local GetFFlagEnableUnifiedWebViewsFunction = require(GenericChallenges.Parent.SharedFlags).GetFFlagEnableUnifiedWebViews
+local FFlagHideChallengeWebViewsUntilDisplayedModule = require(script.Parent.Flags.FFlagHideChallengeWebViewsUntilDisplayed)
+local FFlagReleaseTextBoxFocusOnChallengeOpenModule = require(script.Parent.Flags.FFlagReleaseTextBoxFocusOnChallengeOpen)
+local BrowserService = game:GetService("BrowserService")
+local HttpService = game:GetService("HttpService")
+local UserInputService = game:GetService("UserInputService")
+local WebViewService = if GetFFlagEnableUnifiedWebViewsFunction() then game:GetService("WebViewService") else nil
+local WebViewHasHideHeaderEngineFeature = game:GetEngineFeature("WebViewHasHideHeader")
+local HiddenChallengeWebViewTimeoutSeconds = game:DefineFastInt("HiddenChallengeWebViewTimeoutSeconds", 3)
+local ChallengeWebViewModule = {}
+ChallengeWebViewModule.__index = ChallengeWebViewModule
 
-function t.new(p1)
-	-- upvalues: getFFlagEnableUnifiedWebViews (ref), var1 (ref), browserService (ref), challengeHeadersModule (ref), fFlagHideChallengeWebViewsUntilDisplayedModule (ref), genericTypeModule (ref), buildChallengeWebViewUrlModule (ref), t (ref)
-	local t_1 = {}
+function ChallengeWebViewModule.new(RawResponseHeaders) --[[ Line: 76 ]]
+	-- upvalues: GetFFlagEnableUnifiedWebViewsFunction (copy), WebViewService (copy), BrowserService (copy), ChallengeHeadersModule (copy), FFlagHideChallengeWebViewsUntilDisplayedModule (copy), GenericTypeModule (copy), BuildChallengeWebViewUrlModule (copy), ChallengeWebViewModule (copy)
+	local t = {}
 	
-	if getFFlagEnableUnifiedWebViews() then
-		t_1.webViewService = p1.webViewService or var1
+	if GetFFlagEnableUnifiedWebViewsFunction() then
+		t.webViewService = RawResponseHeaders.webViewService or WebViewService
 	else
-		t_1.browserService = p1.browserService or browserService
+		t.browserService = RawResponseHeaders.browserService or BrowserService
 	end
-	local var2 = if p1.rawResponseHeaders ~= nil then challengeHeadersModule.new(p1.rawResponseHeaders) else nil
-	local var3 = if var2 ~= nil then nil else var2.challengeType.typed
-	t_1.opensVisible = not (fFlagHideChallengeWebViewsUntilDisplayedModule and (if var3 ~= genericTypeModule.Captcha then if var3 ~= genericTypeModule.CaptchaV2 then if var3 ~= genericTypeModule.ProofOfWork then var3 == genericTypeModule.Turnstile else true else true else true))
-	t_1.visible = t_1.opensVisible
-	t_1.isOpen = false
-	t_1.openGeneration = 0
-	t_1.challengeUrl = buildChallengeWebViewUrlModule(var2, p1.challengeType, p1.challengeParameters)
-	t_1.title = p1.title
+	local NewChallengeHeaders = if RawResponseHeaders.rawResponseHeaders == nil then nil else ChallengeHeadersModule.new(RawResponseHeaders.rawResponseHeaders)
+	local Typed = if NewChallengeHeaders == nil then nil else NewChallengeHeaders.challengeType.typed
+	t.opensVisible = not (FFlagHideChallengeWebViewsUntilDisplayedModule and (Typed == GenericTypeModule.Captcha or (Typed == GenericTypeModule.CaptchaV2 or (Typed == GenericTypeModule.ProofOfWork or Typed == GenericTypeModule.Turnstile))))
+	t.visible = t.opensVisible
+	t.isOpen = false
+	t.openGeneration = 0
+	t.challengeUrl = BuildChallengeWebViewUrlModule(NewChallengeHeaders, RawResponseHeaders.challengeType, RawResponseHeaders.challengeParameters)
+	t.title = RawResponseHeaders.title
 	
-	if p1.hybridCallback ~= nil then
-		t_1.hybridCallback = p1.hybridCallback
+	if RawResponseHeaders.hybridCallback ~= nil then
+		t.hybridCallback = RawResponseHeaders.hybridCallback
 	end
-	if p1.closeCallback ~= nil then
-		t_1.closeCallback = p1.closeCallback
+	if RawResponseHeaders.closeCallback ~= nil then
+		t.closeCallback = RawResponseHeaders.closeCallback
 	end
-	if p1.openCallback ~= nil then
-		t_1.openCallback = p1.openCallback
+	if RawResponseHeaders.openCallback ~= nil then
+		t.openCallback = RawResponseHeaders.openCallback
 	end
-	t_1.hybridCallbackConnection = nil
-	t_1.modal = false
+	t.hybridCallbackConnection = nil
+	t.modal = false
 	
-	if p1.modal ~= nil then
-		t_1.modal = p1.modal
+	if RawResponseHeaders.modal ~= nil then
+		t.modal = RawResponseHeaders.modal
 	end
-	return setmetatable(t_1, t)
+	return (setmetatable(t, ChallengeWebViewModule))
 end
 
-function t:setCloseCallback(p1)
-	-- upvalues: getFFlagEnableUnifiedWebViews (ref)
-	if getFFlagEnableUnifiedWebViews() then
-		function self.closeCallback()
-			-- upvalues: self (ref), p1 (ref)
+function ChallengeWebViewModule:setCloseCallback(Callback) --[[ Line: 134 ]]
+	-- upvalues: GetFFlagEnableUnifiedWebViewsFunction (copy)
+	if GetFFlagEnableUnifiedWebViewsFunction() then
+		function self.closeCallback() --[[ Line: 137 ]]
+			-- upvalues: self (copy), Callback (copy)
 			self.webViewService:CloseWindow()
-			p1()
+			Callback()
 		end
 		
 		return
+	else
+		self.closeCallback = Callback
 	end
-	self.closeCallback = p1
 end
 
-function t:setOpenCallback(p1)
-	self.openCallback = p1
+function ChallengeWebViewModule:setOpenCallback(OpenCallback) --[[ Line: 146 ]]
+	self.openCallback = OpenCallback
 end
 
-function t:setHybridCallback(p1)
-	self.hybridCallback = p1
+function ChallengeWebViewModule:setHybridCallback(HybridCallback) --[[ Line: 151 ]]
+	self.hybridCallback = HybridCallback
 end
 
-local function openUnifiedWebView(p1, p2, p3, p4)
-	-- upvalues: fFlagHideChallengeWebViewsUntilDisplayedModule (ref), webViewHasHideHeaderEngineFeature (ref)
-	if fFlagHideChallengeWebViewsUntilDisplayedModule and webViewHasHideHeaderEngineFeature and not p4 then
-		p1:OpenWindowV2(p2, { Title = p3, IsVisible = p4 })
+local function openUnifiedWebView(WebViewService, ChallengeUrl, Title, IsVisible) --[[ Line: 156 ]]
+	-- upvalues: FFlagHideChallengeWebViewsUntilDisplayedModule (copy), WebViewHasHideHeaderEngineFeature (copy)
+	if FFlagHideChallengeWebViewsUntilDisplayedModule and WebViewHasHideHeaderEngineFeature and not IsVisible then
+		WebViewService:OpenWindowV2(ChallengeUrl, { Title = Title, IsVisible = IsVisible })
 		
 		return
-	end
-	p1:OpenWindow(p2, p3, p4)
-end
-
-local function _()
-	-- upvalues: userInputService (ref)
-	local focusedTextBox = userInputService:GetFocusedTextBox()
-	
-	if focusedTextBox then
-		focusedTextBox:ReleaseFocus()
+	else
+		WebViewService:OpenWindow(ChallengeUrl, Title, IsVisible)
 	end
 end
 
-local _ = function(p1, p2, p3, p4)
-	p1:MutateWindow(p2, p3, p4, "")
+local function _() --[[ Line: 167 | Named "releaseFocusedTextBox" ]]
+	-- upvalues: UserInputService (copy)
+	local FocusedTextBox = UserInputService:GetFocusedTextBox()
+	
+	if FocusedTextBox then
+		FocusedTextBox:ReleaseFocus()
+	end
 end
 
-function t:setVisible(p1)
-	-- upvalues: fFlagReleaseTextBoxFocusOnChallengeOpenModule (ref), userInputService (ref), getFFlagEnableUnifiedWebViews (ref), httpService (ref)
-	if self.visible == p1 or not self.isOpen then return end
-	self.visible = p1
+local _ = function(WebViewService, Url, Title, IsVisible) --[[ Line: 174 | Named "mutateUnifiedWebViewVisibility" ]]
+	WebViewService:MutateWindow(Url, Title, IsVisible, "")
+end
+
+function ChallengeWebViewModule:setVisible(Visible) --[[ Line: 183 ]]
+	-- upvalues: FFlagReleaseTextBoxFocusOnChallengeOpenModule (copy), UserInputService (copy), GetFFlagEnableUnifiedWebViewsFunction (copy), HttpService (copy)
+	if self.visible == Visible or not self.isOpen then return end
+	self.visible = Visible
 	
-	if fFlagReleaseTextBoxFocusOnChallengeOpenModule and p1 then
-		local focusedTextBox = userInputService:GetFocusedTextBox()
+	if FFlagReleaseTextBoxFocusOnChallengeOpenModule and Visible then
+		local FocusedTextBox = UserInputService:GetFocusedTextBox()
 		
-		if focusedTextBox then
-			focusedTextBox:ReleaseFocus()
+		if FocusedTextBox then
+			FocusedTextBox:ReleaseFocus()
 		end
 	end
-	if getFFlagEnableUnifiedWebViews() then
-		self.webViewService:MutateWindow(self.challengeUrl, self.title, p1, "")
+	if GetFFlagEnableUnifiedWebViewsFunction() then
+		self.webViewService:MutateWindow(self.challengeUrl, self.title, Visible, "")
 		
 		return
+	else
+		self.browserService:SendCommand(HttpService:JSONEncode({ command = "config", visible = Visible }))
 	end
-	self.browserService:SendCommand(httpService:JSONEncode({ command = "config", visible = p1 }))
 end
 
-function t:open()
-	-- upvalues: getFFlagEnableUnifiedWebViews (ref), fFlagReleaseTextBoxFocusOnChallengeOpenModule (ref), userInputService (ref), openUnifiedWebView (ref), httpService (ref), hiddenChallengeWebViewTimeoutSeconds (ref)
+function ChallengeWebViewModule:open() --[[ Line: 204 ]]
+	-- upvalues: GetFFlagEnableUnifiedWebViewsFunction (copy), FFlagReleaseTextBoxFocusOnChallengeOpenModule (copy), UserInputService (copy), openUnifiedWebView (copy), HttpService (copy), HiddenChallengeWebViewTimeoutSeconds (copy)
 	assert(self.hybridCallback ~= nil, "hybrid callback has not been initialized")
 	
 	if self.openCallback ~= nil then
 		self.openCallback()
 	end
-	if getFFlagEnableUnifiedWebViews() then
+	if GetFFlagEnableUnifiedWebViewsFunction() then
 		self.hybridCallbackConnection = self.webViewService.OnJavaScriptCall:Connect(self.hybridCallback)
 	else
 		self.hybridCallbackConnection = self.browserService.JavaScriptCallback:Connect(self.hybridCallback)
 	end
-	local var2 = if not self.opensVisible then function()
-		-- upvalues: self (ref)
+	local CloseCallback = if not self.opensVisible then function() --[[ Line: 217 ]]
+		-- upvalues: self (copy)
 		self.isOpen = false
 		self.visible = self.opensVisible
 		
@@ -139,30 +142,30 @@ function t:open()
 		end
 	end else self.closeCallback
 	
-	if var2 ~= nil then
-		if getFFlagEnableUnifiedWebViews() then
-			self.closeCallbackConnection = self.webViewService.OnWindowClosed:Connect(var2)
+	if CloseCallback ~= nil then
+		if GetFFlagEnableUnifiedWebViewsFunction() then
+			self.closeCallbackConnection = self.webViewService.OnWindowClosed:Connect(CloseCallback)
 		else
-			self.closeCallbackConnection = self.browserService.BrowserWindowClosed:Connect(var2)
+			self.closeCallbackConnection = self.browserService.BrowserWindowClosed:Connect(CloseCallback)
 		end
 	end
 	assert(string.len(self.challengeUrl) > 0, "challenge url must have been constructed")
 	assert(self.hybridCallbackConnection ~= nil, "hybrid callback connection should be initialized")
 	
-	if fFlagReleaseTextBoxFocusOnChallengeOpenModule and self.visible then
-		local focusedTextBox = userInputService:GetFocusedTextBox()
+	if FFlagReleaseTextBoxFocusOnChallengeOpenModule and self.visible then
+		local FocusedTextBox = UserInputService:GetFocusedTextBox()
 		
-		if focusedTextBox then
-			focusedTextBox:ReleaseFocus()
+		if FocusedTextBox then
+			FocusedTextBox:ReleaseFocus()
 		end
 	end
 	self.isOpen = true
 	self.openGeneration += 1
 	
-	if getFFlagEnableUnifiedWebViews() then
+	if GetFFlagEnableUnifiedWebViewsFunction() then
 		openUnifiedWebView(self.webViewService, self.challengeUrl, self.title, self.visible)
 	else
-		self.browserService:SendCommand(httpService:JSONEncode({
+		self.browserService:SendCommand((HttpService:JSONEncode({
 			command = "open",
 			isGenericWebview = true,
 			enableOverlayReplacement = true,
@@ -170,33 +173,33 @@ function t:open()
 			title = self.title,
 			visible = self.visible,
 			modal = self.modal
-		}))
+		})))
 	end
 	if not self.visible then
-		local var3 = hiddenChallengeWebViewTimeoutSeconds
+		local Delay: number = HiddenChallengeWebViewTimeoutSeconds
 		
-		if var3 <= 0 then
-			var3 = 3
+		if Delay <= 0 then
+			Delay = 3
 		end
-		local openGeneration = self.openGeneration
-		task.delay(var3, function()
-			-- upvalues: self (ref), openGeneration (ref)
-			if self.isOpen and self.openGeneration == openGeneration and not self.visible then
+		local OpenGeneration = self.openGeneration
+		task.delay(Delay, function() --[[ Line: 262 ]]
+			-- upvalues: self (copy), OpenGeneration (copy)
+			if self.isOpen and self.openGeneration == OpenGeneration and not self.visible then
 				self:setVisible(true)
 			end
 		end)
 	end
 end
 
-function t:close()
-	-- upvalues: getFFlagEnableUnifiedWebViews (ref)
+function ChallengeWebViewModule:close() --[[ Line: 270 ]]
+	-- upvalues: GetFFlagEnableUnifiedWebViewsFunction (copy)
 	self.isOpen = false
 	self.visible = self.opensVisible
 	
 	if self.hybridCallbackConnection ~= nil then
 		self.hybridCallbackConnection:Disconnect()
 	end
-	if getFFlagEnableUnifiedWebViews() then
+	if GetFFlagEnableUnifiedWebViewsFunction() then
 		self.webViewService:CloseWindow()
 	else
 		self.browserService:CloseBrowserWindow()
@@ -206,4 +209,4 @@ function t:close()
 	end
 end
 
-return t
+return ChallengeWebViewModule

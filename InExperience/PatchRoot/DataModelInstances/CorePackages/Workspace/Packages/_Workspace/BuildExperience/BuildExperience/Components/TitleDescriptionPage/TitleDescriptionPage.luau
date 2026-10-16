@@ -1,118 +1,118 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local fFlagBuildDesktopReadinessModule = require(buildExperience.Flags.FFlagBuildDesktopReadiness)
-local gameConfigurationActionsModule = require(buildExperience.utils.GameConfigurationActions)
-local iconButton = foundationModule.IconButton
-local text = foundationModule.Text
-local textArea = foundationModule.TextArea
-local textInput = foundationModule.TextInput
-local view = foundationModule.View
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local iconName = foundationModule.Enums.IconName
-local inputSize = foundationModule.Enums.InputSize
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
+local GameConfigurationActionsModule = require(BuildExperience.utils.GameConfigurationActions)
+local IconButton = FoundationModule.IconButton
+local Text = FoundationModule.Text
+local TextArea = FoundationModule.TextArea
+local TextInput = FoundationModule.TextInput
+local View = FoundationModule.View
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local IconName = FoundationModule.Enums.IconName
+local InputSize = FoundationModule.Enums.InputSize
 
-return function(p1)
-	-- upvalues: reactModule (ref), useLocalization (ref), localizationStringsModule (ref), gameConfigurationActionsModule (ref), view (ref), fFlagBuildDesktopReadinessModule (ref), iconButton (ref), iconName (ref), inputSize (ref), buttonVariant (ref), text (ref), textInput (ref), textArea (ref)
-	local testId = p1.testId or "title-description-page"
-	local titleText = p1.titleText or ""
-	local descriptionText = p1.descriptionText or ""
-	local var1, var2 = reactModule.useBinding(titleText)
-	local var3, var4 = reactModule.useBinding(descriptionText)
-	local var5 = useLocalization({
-		descriptionLabel = localizationStringsModule.TITLE_DESCRIPTION_DESCRIPTION_LABEL,
-		title = localizationStringsModule.TITLE_DESCRIPTION_TITLE,
-		titleLabel = localizationStringsModule.TITLE_DESCRIPTION_TITLE_LABEL
+return function(p1) --[[ Line: 31 | Named "TitleDescriptionPage" ]]
+	-- upvalues: ReactModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), GameConfigurationActionsModule (copy), View (copy), IconButton (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), Text (copy), TextInput (copy), TextArea (copy)
+	local TestId = p1.testId or "title-description-page"
+	local TitleText = p1.titleText or ""
+	local DescriptionText = p1.descriptionText or ""
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(TitleText)
+	local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(DescriptionText)
+	local UseLocalizationResult = UseLocalizationFunction({
+		descriptionLabel = LocalizationStringsModule.TITLE_DESCRIPTION_DESCRIPTION_LABEL,
+		title = LocalizationStringsModule.TITLE_DESCRIPTION_TITLE,
+		titleLabel = LocalizationStringsModule.TITLE_DESCRIPTION_TITLE_LABEL
 	})
-	local descriptionLabel = var5.descriptionLabel
-	local title = var5.title
-	local titleLabel = var5.titleLabel
-	local var6 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref), var1 (ref), var3 (ref), titleText (ref), descriptionText (ref), gameConfigurationActionsModule (copy)
-		local universeId = p1.universeId
+	local DescriptionLabel = UseLocalizationResult.descriptionLabel
+	local Title = UseLocalizationResult.title
+	local TitleLabel = UseLocalizationResult.titleLabel
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 47 ]]
+		-- upvalues: p1 (copy), UseBindingResult (copy), UseBindingResult1 (copy), TitleText (copy), DescriptionText (copy), GameConfigurationActionsModule (upval)
+		local UniverseId = p1.universeId
 		
-		if universeId == nil then return end
-		local value = var1:getValue()
-		local value_1 = var3:getValue()
+		if UniverseId == nil then return end
+		local Value = UseBindingResult:getValue()
+		local Value1 = UseBindingResult1:getValue()
 		
-		if value == titleText and value_1 == descriptionText then
+		if Value ~= TitleText or Value1 ~= DescriptionText then
+			GameConfigurationActionsModule.updateTitleDescription(UniverseId, Value, Value1):catch(function(Err) --[[ Line: 60 ]]
+				warn(`[BuildExperience] Failed to save title and description: {tostring(Err)}`)
+			end)
+			
 			return
 		end
-		gameConfigurationActionsModule.updateTitleDescription(universeId, value, value_1):catch(function(p2)
-			warn(`[BuildExperience] Failed to save title and description: {tostring(p2)}`)
-		end)
 	end, {
-		var3,
-		descriptionText,
-		titleText,
+		UseBindingResult1,
+		DescriptionText,
+		TitleText,
 		p1.universeId,
-		var1
+		UseBindingResult
 	})
-	reactModule.useEffect(function()
-		-- upvalues: var6 (ref)
-		return var6
-	end, { var6 })
+	ReactModule.useEffect(function() --[[ Line: 73 ]]
+		-- upvalues: UseResult (copy)
+		return UseResult
+	end, { UseResult })
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		LayoutOrder = p1.layoutOrder,
 		tag = {
-			["composition-layout-detail"] = fFlagBuildDesktopReadinessModule,
+			["composition-layout-detail"] = true,
 			["col align-x-center size-full bg-surface-0"] = true
 		},
-		testId = testId
+		testId = TestId
 	}, {
-		Header = reactModule.createElement(view, {
+		Header = ReactModule.createElement(View, {
 			LayoutOrder = 1,
 			tag = "composition-content-header row align-y-center gap-small size-full-0 auto-y padding-y-medium",
-			testId = `{testId}-header`
+			testId = `{TestId}-header`
 		}, {
-			Back = reactModule.createElement(iconButton, {
+			Back = ReactModule.createElement(IconButton, {
 				LayoutOrder = 1,
 				isCircular = true,
-				icon = iconName.ArrowLargeLeft,
-				onActivated = reactModule.useCallback(function()
-					-- upvalues: var6 (ref), p1 (ref)
-					var6()
+				icon = IconName.ArrowLargeLeft,
+				onActivated = ReactModule.useCallback(function() --[[ Line: 77 ]]
+					-- upvalues: UseResult (copy), p1 (copy)
+					UseResult()
 					p1.onBack()
-				end, { p1.onBack, var6 }),
-				size = inputSize.Medium,
-				variant = buttonVariant.Utility,
-				testId = `{testId}-back`
+				end, { p1.onBack, UseResult }),
+				size = InputSize.Medium,
+				variant = ButtonVariant.Utility,
+				testId = `{TestId}-back`
 			}),
-			Title = reactModule.createElement(text, {
+			Title = ReactModule.createElement(Text, {
 				LayoutOrder = 2,
 				tag = "fill auto-y text-heading-medium text-align-x-left text-truncate-end content-emphasis",
-				Text = title
+				Text = Title
 			})
 		}),
-		Content = reactModule.createElement(view, {
+		Content = ReactModule.createElement(View, {
 			LayoutOrder = 2,
 			tag = "composition-content-body col gap-xlarge size-full-0 auto-y padding-y-large",
-			testId = `{testId}-content-body`
+			testId = `{TestId}-content-body`
 		}, {
-			TitleInput = reactModule.createElement(textInput, {
+			TitleInput = ReactModule.createElement(TextInput, {
 				LayoutOrder = 1,
-				label = titleLabel,
+				label = TitleLabel,
 				placeholder = p1.titlePlaceholder,
-				text = var1,
+				text = UseBindingResult,
 				width = UDim.new(1, 0),
-				onChanged = var2,
-				onFocusLost = var6,
-				testId = `{testId}-title-input`
+				onChanged = UseBindingResult2,
+				onFocusLost = UseResult,
+				testId = `{TestId}-title-input`
 			}),
-			DescriptionInput = reactModule.createElement(textArea, {
+			DescriptionInput = ReactModule.createElement(TextArea, {
 				LayoutOrder = 2,
 				numLines = 4,
-				label = descriptionLabel,
+				label = DescriptionLabel,
 				placeholder = p1.descriptionPlaceholder,
-				text = var3,
+				text = UseBindingResult1,
 				width = UDim.new(1, 0),
-				onChanged = var4,
-				onFocusLost = var6,
-				testId = `{testId}-description-input`
+				onChanged = UseBindingResult2_1,
+				onFocusLost = UseResult,
+				testId = `{TestId}-description-input`
 			})
 		})
 	})

@@ -1,12 +1,12 @@
-﻿local reactModule = require(game:GetService("CorePackages").Packages.React)
-local tooltipContextModule = require(script.Parent.TooltipContext)
+﻿local ReactModule = require(game:GetService("CorePackages").Packages.React)
+local TooltipContextModule = require(script.Parent.TooltipContext)
 local _ = require(script.Parent.TooltipProvider)
 
-function useIsTooltipTurn(p1)
-	-- upvalues: reactModule (ref), tooltipContextModule (ref)
-	local var1 = reactModule.useContext(tooltipContextModule)
+function useIsTooltipTurn(p1) --[[ Line: 9 ]]
+	-- upvalues: ReactModule (copy), TooltipContextModule (copy)
+	local UseContextResult = ReactModule.useContext(TooltipContextModule)
 	
-	return var1 and var1.isCurrentTooltip(p1)
+	return UseContextResult and UseContextResult.isCurrentTooltip(p1)
 end
 
 return useIsTooltipTurn

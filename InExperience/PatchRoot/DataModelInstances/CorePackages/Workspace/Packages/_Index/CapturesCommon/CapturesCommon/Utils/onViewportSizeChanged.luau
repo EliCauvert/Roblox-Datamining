@@ -1,76 +1,81 @@
-﻿return function(p1)
-	local var1 = nil
-	local _ = nil
-	local var2 = nil
+﻿return function(Callback: (any) -> ()) --[[ Line: 1 ]]
+	local ViewportSize = nil
+	local Connection1 = nil
+	local Connection = nil
 	
-	local function _(p2)
-		-- upvalues: var1 (write), p1 (ref)
-		if p2 ~= var1 then
-			var1 = p2
-			p1(p2)
+	local function _(ViewportSize1) --[[ Line: 6 | Named "fireCallback" ]]
+		-- upvalues: ViewportSize (ref), Callback (copy)
+		if ViewportSize1 ~= ViewportSize then
+			ViewportSize = ViewportSize1
+			Callback(ViewportSize1)
 		end
 	end
 	
-	local function onViewportSizeChanged()
-		-- upvalues: var1 (write), p1 (ref)
-		local currentCamera = workspace.CurrentCamera
+	local function onViewportSizeChanged() --[[ Line: 13 ]]
+		-- upvalues: ViewportSize (ref), Callback (copy)
+		local CurrentCamera = workspace.CurrentCamera
 		
-		if currentCamera then
-			local viewportSize = currentCamera.ViewportSize
+		if CurrentCamera then
+			local ViewportSize1 = CurrentCamera.ViewportSize
 			
-			if viewportSize ~= var1 then
-				var1 = viewportSize
-				p1(viewportSize)
+			if ViewportSize1 ~= ViewportSize then
+				ViewportSize = ViewportSize1
+				Callback(ViewportSize1)
 			end
 		end
 	end
 	
-	local var3 = workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function()
-		-- upvalues: var2 (write), onViewportSizeChanged (ref), var1 (write), p1 (ref)
-		if var2 then
-			var2:Disconnect()
-			var2 = nil
+	Connection1 = workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function() --[[ Line: 20 | Named "onCurrentCameraChanged" ]]
+		-- upvalues: Connection (ref), onViewportSizeChanged (copy), ViewportSize (ref), Callback (copy)
+		if Connection then
+			Connection:Disconnect()
+			Connection = nil
 		end
-		local currentCamera = workspace.CurrentCamera
+		local CurrentCamera = workspace.CurrentCamera
 		
-		if currentCamera then
-			var2 = currentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(onViewportSizeChanged)
-			local currentCamera_1 = workspace.CurrentCamera
+		if CurrentCamera then
+			Connection = CurrentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(onViewportSizeChanged)
+			local CurrentCamera1 = workspace.CurrentCamera
 			
-			if currentCamera_1 then
-				local viewportSize = currentCamera_1.ViewportSize
+			if CurrentCamera1 then
+				local ViewportSize1 = CurrentCamera1.ViewportSize
 				
-				if viewportSize ~= var1 then
-					var1 = viewportSize
-					p1(viewportSize)
+				if ViewportSize1 ~= ViewportSize then
+					ViewportSize = ViewportSize1
+					Callback(ViewportSize1)
 				end
 			end
 		end
 	end)
-	local currentCamera = workspace.CurrentCamera
 	
-	if currentCamera then
-		var2 = currentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(onViewportSizeChanged)
-		local currentCamera_1 = workspace.CurrentCamera
+	if Connection then
+		Connection:Disconnect()
+		Connection = nil
+	end
+	local CurrentCamera = workspace.CurrentCamera
+	
+	if CurrentCamera then
+		Connection = CurrentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(onViewportSizeChanged)
+		local CurrentCamera1 = workspace.CurrentCamera
 		
-		if currentCamera_1 then
-			local viewportSize = currentCamera_1.ViewportSize
+		if CurrentCamera1 then
+			local ViewportSize1 = CurrentCamera1.ViewportSize
 			
-			if viewportSize ~= var1 then
-				var1 = viewportSize
-				p1(viewportSize)
+			if ViewportSize1 ~= ViewportSize then
+				ViewportSize = ViewportSize1
+				Callback(ViewportSize1)
 			end
 		end
 	end
-	return function()
-		-- upvalues: var3 (write), var2 (write)
-		if var3 then
-			var3:Disconnect()
-			var3 = nil
+	return function() --[[ Line: 37 ]]
+		-- upvalues: Connection1 (ref), Connection (ref)
+		if Connection1 then
+			Connection1:Disconnect()
+			Connection1 = nil
 		end
-		if var2 then
-			var2:Disconnect()
-			var2 = nil
+		if Connection then
+			Connection:Disconnect()
+			Connection = nil
 		end
 	end
 end

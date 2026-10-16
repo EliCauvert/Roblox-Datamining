@@ -1,7 +1,10 @@
-﻿return function(p1)
+﻿return function(p1) --[[ Line: 1 | Named "extractRobuxBalance" ]]
 	if typeof(p1) == "table" then
-		local robux = p1.robux or p1.Robux
+		local Robux = p1.robux or p1.Robux
 		
-		return if typeof(robux) == "number" then robux else nil
+		if typeof(Robux) == "number" then
+			return Robux
+		end
 	end
+	return nil
 end

@@ -1,27 +1,27 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local types = parent.Types
-local roduxModule = require(parent_1.Rodux)
-local _ = require(types.ReducerTypes)
-local _ = require(types.ActionTypes)
-local deviceContactsReceived = require(parent.Actions).DeviceContactsReceived
-local dashModule = require(parent_1.Dash)
-local deviceContactModule = require(parent.Models.DeviceContact)
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local Types = Parent.Types
+local RoduxModule = require(Parent1.Rodux)
+local _ = require(Types.ReducerTypes)
+local _ = require(Types.ActionTypes)
+local DeviceContactsReceived = require(Parent.Actions).DeviceContactsReceived
+local DashModule = require(Parent1.Dash)
+local DeviceContactModule = require(Parent.Models.DeviceContact)
 local t = {}
 
-return function(_)
-	-- upvalues: roduxModule (ref), t (ref), deviceContactsReceived (ref), dashModule (ref), deviceContactModule (ref)
-	return roduxModule.createReducer(t, {
-		[deviceContactsReceived.name] = function(_, p1)
-			-- upvalues: dashModule (copy), deviceContactModule (copy)
-			local t = {}
-			dashModule.forEach(p1.payload, function(p2)
-				-- upvalues: deviceContactModule (copy), t (ref)
-				local var1 = deviceContactModule.formatFromDevice(p2)
-				t[var1.id] = var1
+return function(_) --[[ Line: 14 ]]
+	-- upvalues: RoduxModule (copy), t (copy), DeviceContactsReceived (copy), DashModule (copy), DeviceContactModule (copy)
+	return RoduxModule.createReducer(t, {
+		[DeviceContactsReceived.name] = function(_, p1) --[[ Line: 16 ]]
+			-- upvalues: DashModule (upval), DeviceContactModule (upval)
+			local FormatFromDeviceResults = {}
+			DashModule.forEach(p1.payload, function(p2) --[[ Line: 22 ]]
+				-- upvalues: DeviceContactModule (upval), FormatFromDeviceResults (copy)
+				local FormatFromDeviceResult = DeviceContactModule.formatFromDevice(p2)
+				FormatFromDeviceResults[FormatFromDeviceResult.id] = FormatFromDeviceResult
 			end)
 			
-			return t
+			return FormatFromDeviceResults
 		end
 	})
 end

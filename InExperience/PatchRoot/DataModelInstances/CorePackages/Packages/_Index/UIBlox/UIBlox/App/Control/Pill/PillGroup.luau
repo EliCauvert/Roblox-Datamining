@@ -1,165 +1,171 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent
-local parent_2 = parent_1.Parent
-local parent_3 = parent_2.Parent
-local parent_4 = parent_3.Parent
-local cryoModule = require(parent_4.Cryo)
-local reactModule = require(parent_4.React)
-local roactGamepadModule = require(parent_4.RoactGamepad)
-local focusable = roactGamepadModule.Focusable
-local fitFrameModule = require(parent_4.FitFrame)
-local fitFrameHorizontal = fitFrameModule.FitFrameHorizontal
-local iconSizeModule = require(parent_2.ImageSet.Enum.IconSize)
-local imagesModule = require(parent_2.ImageSet.Images)
-local useStyleModule = require(parent_3.Core.Style.useStyle)
-local iconButtonModule = require(parent_3.App.Button.IconButton)
-local useIsGamepadModule = require(parent_3.Utility.useIsGamepad)
-local scrollingListWithArrowsAndGradientModule = require(parent_1.HorizontalNav.ScrollingListWithArrowsAndGradient)
-local pillv2Module = require(parent.Pillv2)
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent
+local Parent2 = Parent1.Parent
+local Parent3 = Parent2.Parent
+local Parent4 = Parent3.Parent
+local CryoModule = require(Parent4.Cryo)
+local ReactModule = require(Parent4.React)
+local RoactGamepadModule = require(Parent4.RoactGamepad)
+local Focusable = RoactGamepadModule.Focusable
+local FitFrameModule = require(Parent4.FitFrame)
+local FitFrameHorizontal = FitFrameModule.FitFrameHorizontal
+local IconSizeModule = require(Parent2.ImageSet.Enum.IconSize)
+local ImagesModule = require(Parent2.ImageSet.Images)
+local UseStyleModule = require(Parent3.Core.Style.useStyle)
+local IconButtonModule = require(Parent3.App.Button.IconButton)
+local UseIsGamepadModule = require(Parent3.Utility.useIsGamepad)
+local ScrollingListWithArrowsAndGradientModule = require(Parent1.HorizontalNav.ScrollingListWithArrowsAndGradient)
+local Pillv2Module = require(Parent.Pillv2)
 
-local function PillGroup(p1)
-	-- upvalues: useIsGamepadModule (ref), reactModule (ref), useStyleModule (ref), roactGamepadModule (ref), cryoModule (ref), iconButtonModule (ref), iconSizeModule (ref), imagesModule (ref), focusable (ref), pillv2Module (ref), fitFrameHorizontal (ref), fitFrameModule (ref), scrollingListWithArrowsAndGradientModule (ref)
-	local var1 = p1.isRoactGamepadEnabled ~= nil or p1.isRoactGamepadEnabled
-	local var2 = useIsGamepadModule() and var1
-	local var3 = reactModule.useRef(nil)
+local function PillGroup(Gui) --[[ Line: 60 ]]
+	-- upvalues: UseIsGamepadModule (copy), ReactModule (copy), UseStyleModule (copy), RoactGamepadModule (copy), CryoModule (copy), IconButtonModule (copy), IconSizeModule (copy), ImagesModule (copy), Focusable (copy), Pillv2Module (copy), FitFrameHorizontal (copy), FitFrameModule (copy), ScrollingListWithArrowsAndGradientModule (copy)
+	local NoIsRoactGamepadEnabled = Gui.isRoactGamepadEnabled == nil or Gui.isRoactGamepadEnabled
+	local NoIsRoactGamepadEnabled1 = UseIsGamepadModule() and NoIsRoactGamepadEnabled
+	local UseRefResult = ReactModule.useRef(nil)
 	
-	local function _()
-		-- upvalues: var3 (ref)
-		local current = var3.current
+	local function _() --[[ Line: 66 | Named "scrollToStart" ]]
+		-- upvalues: UseRefResult (copy)
+		local Current = UseRefResult.current
 		
-		if current then
-			current:ScrollToTop()
+		if Current then
+			Current:ScrollToTop()
 		end
 	end
 	
-	local leftPadding = p1.leftPadding or 15
-	local rightPadding = p1.rightPadding or 15
-	local selectedPills = p1.selectedPills or {}
-	local theme = useStyleModule().Theme
-	local var4 = reactModule.useCallback(function(p2)
-		-- upvalues: var3 (ref)
-		if var3.current then
-			var3.current.CanvasSize = UDim2.new(0, p2.AbsoluteSize.X, 1, 0)
+	local LeftPadding = Gui.leftPadding or 15
+	local RightPadding = Gui.rightPadding or 15
+	local SelectedPills = Gui.selectedPills or {}
+	local Theme = UseStyleModule().Theme
+	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 81 ]]
+		-- upvalues: UseRefResult (copy)
+		if UseRefResult.current then
+			UseRefResult.current.CanvasSize = UDim2.new(0, Frame.AbsoluteSize.X, 1, 0)
 		end
 	end)
-	local var5 = var1 and roactGamepadModule.useRefCache() or reactModule.useRef({}).current
-	local var6 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref)
-		if p1.onSelectionChanged then
-			p1.onSelectionChanged({})
+	local UseRefResult1 = ReactModule.useRef({})
+	local UseRefCacheResult = NoIsRoactGamepadEnabled and RoactGamepadModule.useRefCache() or UseRefResult1.current
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 90 ]]
+		-- upvalues: Gui (copy)
+		if Gui.onSelectionChanged then
+			Gui.onSelectionChanged({})
 		end
 	end)
-	local var7 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref), cryoModule (copy), selectedPills (ref)
-		local t = {}
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 96 ]]
+		-- upvalues: Gui (copy), CryoModule (upval), SelectedPills (copy)
+		local List = {}
 		
-		for i, v in p1.pills do
-			if not cryoModule.List.find(selectedPills, v) then
-				table.insert(t, v)
+		for _, pill in Gui.pills do
+			if not CryoModule.List.find(SelectedPills, pill) then
+				table.insert(List, pill)
 			end
 		end
-		return cryoModule.List.join(selectedPills, t)
-	end, { p1.pills, selectedPills })
-	local var8 = #selectedPills > 1
-	local t = {
-		ClearButton = var8 and reactModule.createElement(iconButtonModule, {
+		return CryoModule.List.join(SelectedPills, List)
+	end, { Gui.pills, SelectedPills })
+	local v1 = #SelectedPills > 1
+	local Elements = {
+		ClearButton = v1 and ReactModule.createElement(IconButtonModule, {
 			layoutOrder = 1,
 			key = "0",
 			size = UDim2.fromOffset(24, 24),
-			iconSize = iconSizeModule.Medium,
-			icon = imagesModule["icons/actions/reject"],
-			onActivated = var6,
-			buttonRef = var5[0],
-			NextSelectionRight = var5[1]
+			iconSize = IconSizeModule.Medium,
+			icon = ImagesModule["icons/actions/reject"],
+			onActivated = UseResult1,
+			buttonRef = UseRefCacheResult[0],
+			NextSelectionRight = UseRefCacheResult[1]
 		}) or nil
 	}
-	local isLoading = p1.isLoading
+	local IsLoading = Gui.isLoading
 	
-	for i, v in var7 do
-		local function onActivated()
-			-- upvalues: cryoModule (copy), selectedPills (ref), v (ref), var3 (ref), p1 (ref)
-			local var9 = cryoModule.List.find(selectedPills, v) ~= nil
-			local var10 = if var9 then cryoModule.List.removeValue(selectedPills, v) else cryoModule.List.join(selectedPills, { v })
+	for i, Text in UseMemoResult do
+		local function onActivated() --[[ Line: 124 ]]
+			-- upvalues: CryoModule (upval), SelectedPills (copy), Text (copy), UseRefResult (copy), Gui (copy)
+			local HasFindResult = CryoModule.List.find(SelectedPills, Text) ~= nil
+			local RemoveValueResult = if HasFindResult then CryoModule.List.removeValue(SelectedPills, Text) else CryoModule.List.join(SelectedPills, { Text })
 			
-			if not var9 then
-				local current = var3.current
+			if not HasFindResult then
+				local Current = UseRefResult.current
 				
-				if current then
-					current:ScrollToTop()
+				if Current then
+					Current:ScrollToTop()
 				end
 			end
-			if p1.onSelectionChanged then
-				p1.onSelectionChanged(var10)
+			if Gui.onSelectionChanged then
+				Gui.onSelectionChanged(RemoveValueResult)
 			end
 		end
 		
-		local var9 = i <= #selectedPills
+		local IsSelected = i <= #SelectedPills
 		
-		if var9 then
-			isLoading = false
+		if IsSelected then
+			IsLoading = false
 		end
-		if not var1 then
-			var5[i] = var5[i] or reactModule.createRef()
+		if not NoIsRoactGamepadEnabled then
+			UseRefCacheResult[i] = UseRefCacheResult[i] or ReactModule.createRef()
 		end
-		t[i] = reactModule.createElement(if var1 then focusable[pillv2Module] else pillv2Module, {
+		Elements[i] = ReactModule.createElement(if NoIsRoactGamepadEnabled then Focusable[Pillv2Module] else Pillv2Module, {
 			layoutOrder = i + 1,
 			key = tostring(i),
-			text = v,
-			isSelected = var9,
-			isLoading = p1.isLoading and not var9,
+			text = Text,
+			isSelected = IsSelected,
+			isLoading = Gui.isLoading and not IsSelected,
 			onActivated = onActivated,
-			ref = var5[i],
-			NextSelectionLeft = if i > 1 or var8 then var5[i - 1] else nil,
-			NextSelectionRight = if i < #var7 then var5[i + 1] else nil
+			ref = UseRefCacheResult[i],
+			NextSelectionLeft = if i > 1 or v1 then UseRefCacheResult[i - 1] else nil,
+			NextSelectionRight = if i < #UseMemoResult then UseRefCacheResult[i + 1] else nil
 		})
 	end
-	if isLoading and var2 and var1 then
-		t[1] = reactModule.createElement(focusable[pillv2Module], { layoutOrder = 2, key = "1", text = "", ref = var5[1] })
+	if IsLoading and NoIsRoactGamepadEnabled1 and NoIsRoactGamepadEnabled then
+		Elements[1] = ReactModule.createElement(Focusable[Pillv2Module], {
+			layoutOrder = 2,
+			key = "1",
+			text = "",
+			ref = UseRefCacheResult[1]
+		})
 	end
-	local function getScrollingListChildren()
-		-- upvalues: reactModule (copy), fitFrameHorizontal (copy), fitFrameModule (copy), rightPadding (ref), leftPadding (ref), var4 (ref), t (ref)
+	local function getScrollingListChildren() --[[ Line: 176 ]]
+		-- upvalues: ReactModule (upval), FitFrameHorizontal (upval), FitFrameModule (upval), RightPadding (copy), LeftPadding (copy), UseResult (copy), Elements (copy)
 		return {
-			SubNavFrame = reactModule.createElement(fitFrameHorizontal, {
+			SubNavFrame = ReactModule.createElement(FitFrameHorizontal, {
 				height = UDim.new(1, 0),
 				contentPadding = UDim.new(0, 8),
-				margin = fitFrameModule.Rect.quad(0, rightPadding, 0, leftPadding),
+				margin = FitFrameModule.Rect.quad(0, RightPadding, 0, LeftPadding),
 				VerticalAlignment = Enum.VerticalAlignment.Center,
 				FillDirection = Enum.FillDirection.Horizontal,
 				BackgroundTransparency = 1,
-				[reactModule.Change.AbsoluteSize] = var4
-			}, t)
+				[ReactModule.Change.AbsoluteSize] = UseResult
+			}, Elements)
 		}
 	end
 	
-	local t_1 = {}
+	local ButtonRefs = {}
 	
-	for i_1 = 1, #var7 do
-		t_1[i_1] = var5[i_1]
+	for i1 = 1, #UseMemoResult do
+		ButtonRefs[i1] = UseRefCacheResult[i1]
 	end
-	return reactModule.createElement(if var1 then focusable.Frame else "Frame", {
+	return ReactModule.createElement(if NoIsRoactGamepadEnabled then Focusable.Frame else "Frame", {
 		BorderSizePixel = 0,
 		Size = UDim2.new(1, 0, 0, 52),
-		BackgroundColor3 = theme.BackgroundDefault.Color,
-		BackgroundTransparency = theme.BackgroundDefault.Transparency,
-		LayoutOrder = p1.layoutOrder,
-		ref = p1.forwardRef,
-		NextSelectionUp = p1.NextSelectionUp,
-		NextSelectionDown = p1.NextSelectionDown,
-		defaultChild = if var1 then var5[1] else nil
+		BackgroundColor3 = Theme.BackgroundDefault.Color,
+		BackgroundTransparency = Theme.BackgroundDefault.Transparency,
+		LayoutOrder = Gui.layoutOrder,
+		ref = Gui.forwardRef,
+		NextSelectionUp = Gui.NextSelectionUp,
+		NextSelectionDown = Gui.NextSelectionDown,
+		defaultChild = if NoIsRoactGamepadEnabled then UseRefCacheResult[1] else nil
 	}, {
-		ScrollingList = reactModule.createElement(scrollingListWithArrowsAndGradientModule, {
+		ScrollingList = ReactModule.createElement(ScrollingListWithArrowsAndGradientModule, {
 			listHeight = 52,
 			buttonPadding = 8,
 			padOutsideEdges = false,
 			hideGradient = true,
 			getScollingListContent = getScrollingListChildren,
-			scrollingFrameRef = var3,
-			buttonRefs = t_1
+			scrollingFrameRef = UseRefResult,
+			buttonRefs = ButtonRefs
 		})
 	})
 end
 
-return reactModule.forwardRef(function(p2, p3)
-	-- upvalues: reactModule (ref), PillGroup (ref), cryoModule (ref)
-	return reactModule.createElement(PillGroup, cryoModule.Dictionary.join(p2, { forwardRef = p3 }))
+return ReactModule.forwardRef(function(p1, ForwardRef) --[[ Line: 221 ]]
+	-- upvalues: ReactModule (copy), PillGroup (copy), CryoModule (copy)
+	return ReactModule.createElement(PillGroup, CryoModule.Dictionary.join(p1, { forwardRef = ForwardRef }))
 end)

@@ -1,18 +1,18 @@
-﻿local checkAndSendEventModule = require(script.Parent.Parent.Utils.checkAndSendEvent)
-local clientErrorAdditionalArgs = game:DefineFastFlag("ClientErrorAdditionalArgs", false)
+﻿local CheckAndSendEventModule = require(script.Parent.Parent.Utils.checkAndSendEvent)
+local ClientErrorAdditionalArgs = game:DefineFastFlag("ClientErrorAdditionalArgs", false)
 
-return function(p1, p2, p3, p4)
-	-- upvalues: clientErrorAdditionalArgs (ref), checkAndSendEventModule (ref)
+return function(p1, State, Url, Origin) --[[ Line: 5 ]]
+	-- upvalues: ClientErrorAdditionalArgs (copy), CheckAndSendEventModule (copy)
 	local t = {}
 	
-	if p2 then
-		t.state = p2
+	if State then
+		t.state = State
 	end
-	if clientErrorAdditionalArgs and p3 then
-		t.url = p3
+	if ClientErrorAdditionalArgs and Url then
+		t.url = Url
 	end
-	if clientErrorAdditionalArgs and p4 then
-		t.origin = p4
+	if ClientErrorAdditionalArgs and Origin then
+		t.origin = Origin
 	end
-	checkAndSendEventModule(p1, "authClientError", t)
+	CheckAndSendEventModule(p1, "authClientError", t)
 end

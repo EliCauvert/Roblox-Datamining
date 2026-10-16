@@ -1,114 +1,114 @@
-﻿local robloxReplicatedStorageService = game:GetService("RobloxReplicatedStorage")
-local textChatService = game:GetService("TextChatService")
-local parent = script:FindFirstAncestor("ExpChatServer").Parent
-local list = require(parent.llama).List
-local expChatSharedModule = require(parent.ExpChatShared)
-local markTextChannelAsDefault = expChatSharedModule.markTextChannelAsDefault
-local var1 = expChatSharedModule.Logger:new("ExpChat/" .. script.Name)
+﻿local RobloxReplicatedStorage = game:GetService("RobloxReplicatedStorage")
+local TextChatService = game:GetService("TextChatService")
+local Parent = script:FindFirstAncestor("ExpChatServer").Parent
+local List = require(Parent.llama).List
+local ExpChatSharedModule = require(Parent.ExpChatShared)
+local MarkTextChannelAsDefaultFunction = ExpChatSharedModule.markTextChannelAsDefault
+local NewResult = ExpChatSharedModule.Logger:new("ExpChat/" .. script.Name)
 
-local function _(p1, p2)
-	-- upvalues: textChatService (ref), var1 (ref)
+local function _(p1, p2) --[[ Line: 12 | Named "canUsersTalkToEachOther" ]]
+	-- upvalues: TextChatService (copy), NewResult (copy)
 	if p1 == p2 then
 		return false
+	else
+		local Success, Result = pcall(function() --[[ Line: 16 ]]
+			-- upvalues: TextChatService (upval), p1 (copy), p2 (copy)
+			return TextChatService:CanUsersWhisperAsync(p1, p2)
+		end)
+		local Result1 = Success and Result
+		NewResult:debug("CanUsersChat: {}", (tostring(Result1)))
+		
+		return Result1
 	end
-	local ok, status = pcall(function()
-		-- upvalues: textChatService (copy), p1 (ref), p2 (ref)
-		return textChatService:CanUsersWhisperAsync(p1, p2)
-	end)
-	local status_1 = ok and status
-	var1:debug("CanUsersChat: {}", tostring(status_1))
-	
-	return status_1
 end
 
-local _ = function(p1, p2)
-	-- upvalues: textChatService (ref)
-	return (textChatService:FindFirstChild("TextChannels") or textChatService):FindFirstChild(string.format("RBXWhisper:%d_%d", if p1 < p2 then p1 else p2, if p2 < p1 then p1 else p2))
+local _ = function(p1, p2) --[[ Line: 26 | Named "whisperChannelAlreadyExists" ]]
+	-- upvalues: TextChatService (copy)
+	return (TextChatService:FindFirstChild("TextChannels") or TextChatService):FindFirstChild((string.format("RBXWhisper:%d_%d", p1 < p2 and p1 or p2, p2 < p1 and p1 or p2)))
 end
 
-local function createWhisperChannel(p1, p2)
-	-- upvalues: textChatService (ref), markTextChannelAsDefault (ref), list (ref)
-	local formattedText = string.format("RBXWhisper:%d_%d", if p1 < p2 then p1 else p2, if p2 < p1 then p1 else p2)
-	local textChannels = textChatService:FindFirstChild("TextChannels") or textChatService
-	local textChannel = Instance.new("TextChannel")
-	textChannel.Name = formattedText
-	markTextChannelAsDefault(textChannel)
-	textChannel.Parent = textChannels
-	textChannel:AddUserAsync(p1)
-	textChannel:AddUserAsync(p2)
-	textChannel.ChildRemoved:Connect(function(_)
-		-- upvalues: list (copy), textChannel (ref)
-		if list.count(textChannel:GetChildren(), function(p3)
-			return p3:IsA("TextSource")
+local function createWhisperChannel(UserId, Number) --[[ Line: 33 ]]
+	-- upvalues: TextChatService (copy), MarkTextChannelAsDefaultFunction (copy), List (copy)
+	local TextChannels = TextChatService:FindFirstChild("TextChannels") or TextChatService
+	local TextChannel = Instance.new("TextChannel")
+	TextChannel.Name = string.format("RBXWhisper:%d_%d", UserId < Number and UserId or Number, Number < UserId and UserId or Number)
+	MarkTextChannelAsDefaultFunction(TextChannel)
+	TextChannel.Parent = TextChannels
+	TextChannel:AddUserAsync(UserId)
+	TextChannel:AddUserAsync(Number)
+	TextChannel.ChildRemoved:Connect(function(_) --[[ Line: 49 ]]
+		-- upvalues: List (upval), TextChannel (copy)
+		if List.count(TextChannel:GetChildren(), function(TextSource) --[[ Line: 50 ]]
+			return TextSource:IsA("TextSource")
 		end) < 2 then
-			textChannel:Destroy()
+			TextChannel:Destroy()
 		end
 	end)
 	
-	return textChannel
+	return TextChannel
 end
 
-local _ = function(p1, p2, p3)
-	local var2 = Instance.new(p1)
-	var2.Name = p2
-	var2.Parent = p3
+local _ = function(p1, Name, Parent) --[[ Line: 62 | Named "createInstance" ]]
+	local NewInstance = Instance.new(p1)
+	NewInstance.Name = Name
+	NewInstance.Parent = Parent
 	
-	return var2
+	return NewInstance
 end
 
-return function()
-	-- upvalues: robloxReplicatedStorageService (ref), var1 (ref), textChatService (ref), createWhisperChannel (ref)
-	local experienceChat = robloxReplicatedStorageService:FindFirstChild("ExperienceChat")
+return function() --[[ Line: 69 | Named "createDispatchRemoteFunction" ]]
+	-- upvalues: RobloxReplicatedStorage (copy), NewResult (copy), TextChatService (copy), createWhisperChannel (copy)
+	local ExperienceChat = RobloxReplicatedStorage:FindFirstChild("ExperienceChat")
 	
-	if not experienceChat then
-		local var2 = robloxReplicatedStorageService
-		local experienceChat_1 = Instance.new("Folder")
-		experienceChat_1.Name = "ExperienceChat"
-		experienceChat_1.Parent = var2
-		experienceChat = experienceChat_1
+	if not ExperienceChat then
+		local ExperienceChat1 = Instance.new("Folder")
+		ExperienceChat1.Name = "ExperienceChat"
+		ExperienceChat1.Parent = RobloxReplicatedStorage
+		ExperienceChat = ExperienceChat1
 	end
-	local whisperChat = experienceChat:FindFirstChild("WhisperChat")
+	local WhisperChat = ExperienceChat:FindFirstChild("WhisperChat")
 	
-	if not whisperChat then
-		local whisperChat_1 = Instance.new("RemoteFunction")
-		whisperChat_1.Name = "WhisperChat"
-		whisperChat_1.Parent = experienceChat
-		whisperChat = whisperChat_1
+	if not WhisperChat then
+		local WhisperChat1 = Instance.new("RemoteFunction")
+		WhisperChat1.Name = "WhisperChat"
+		WhisperChat1.Parent = ExperienceChat
+		WhisperChat = WhisperChat1
 	end
-	if whisperChat:IsA("RemoteFunction") then
-		function whisperChat.OnServerInvoke(p1, p2)
-			-- upvalues: var1 (copy), textChatService (copy), createWhisperChannel (copy)
-			var1:trace("WhisperChat remote invoked with: {}", tostring(p2))
-			local var3 = tonumber(p2)
-			local userId = p1.UserId
+	if WhisperChat:IsA("RemoteFunction") then
+		function WhisperChat.OnServerInvoke(Player, p1) --[[ Line: 78 ]]
+			-- upvalues: NewResult (upval), TextChatService (upval), createWhisperChannel (upval)
+			NewResult:trace("WhisperChat remote invoked with: {}", (tostring(p1)))
+			local Number: number? = tonumber(p1)
+			local UserId = Player.UserId
 			
-			if var3 then
-				local var4
-				local var5 = (textChatService:FindFirstChild("TextChannels") or textChatService):FindFirstChild(string.format("RBXWhisper:%d_%d", if userId < var3 then userId else var3, if var3 < userId then userId else var3))
+			if Number then
+				local Child = (TextChatService:FindFirstChild("TextChannels") or TextChatService):FindFirstChild((string.format("RBXWhisper:%d_%d", UserId < Number and UserId or Number, Number < UserId and UserId or Number)))
 				
-				if var5 then
-					var1:trace("Whisper TextChannel already exists")
+				if Child then
+					NewResult:trace("Whisper TextChannel already exists")
 					
-					return var5
-				elseif userId == var3 then
-					var4 = false
-				else
-					local ok, status = pcall(function()
-						-- upvalues: textChatService (copy), userId (ref), var3 (ref)
-						return textChatService:CanUsersWhisperAsync(userId, var3)
-					end)
-					local status_1 = ok and status
-					var1:debug("CanUsersChat: {}", tostring(status_1))
-					var4 = status_1
+					return Child
 				end
-				if var4 then
-					var1:trace("Creating whisper TextChannel")
+				local v1 = nil
+				if UserId == Number then
+					v1 = false
+				else
+					local Success, Result = pcall(function() --[[ Line: 16 ]]
+						-- upvalues: TextChatService (upval), UserId (copy), Number (copy)
+						return TextChatService:CanUsersWhisperAsync(UserId, Number)
+					end)
+					local Result1 = Success and Result
+					NewResult:debug("CanUsersChat: {}", (tostring(Result1)))
+					v1 = Result1
+				end
+				if v1 then
+					NewResult:trace("Creating whisper TextChannel")
 					
-					return createWhisperChannel(userId, var3)
+					return (createWhisperChannel(UserId, Number))
 				end
 			end
 			return nil
 		end
 	end
-	return whisperChat
+	return WhisperChat
 end

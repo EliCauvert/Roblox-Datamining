@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.BuilderIcons.BuilderIcons)
+﻿return (require(script.Parent.Parent.Parent._Index.BuilderIcons.BuilderIcons))

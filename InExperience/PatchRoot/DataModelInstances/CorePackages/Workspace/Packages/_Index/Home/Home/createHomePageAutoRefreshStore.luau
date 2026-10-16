@@ -1,161 +1,157 @@
-﻿local home = script:FindFirstAncestor("Home")
-local parent = home.Parent
-local signalsModule = require(parent.Signals)
-local getSduiApiStore = require(parent.SduiSharedUtilities).getSduiApiStore
-local homeConstantsModule = require(home.HomeConstants)
-local refreshHomePageModule = require(home.refreshHomePage)
-local sduiHomePageAutoRefreshIntervalSeconds = game:DefineFastInt("SduiHomePageAutoRefreshIntervalSeconds", 10800)
+﻿local Home = script:FindFirstAncestor("Home")
+local Parent = Home.Parent
+local SignalsModule = require(Parent.Signals)
+local GetSduiApiStoreFunction = require(Parent.SduiSharedUtilities).getSduiApiStore
+local HomeConstantsModule = require(Home.HomeConstants)
+local RefreshHomePageModule = require(Home.refreshHomePage)
+local SduiHomePageAutoRefreshIntervalSeconds = game:DefineFastInt("SduiHomePageAutoRefreshIntervalSeconds", 10800)
 
-local function _(p1, p2)
-	local var1 = true
-	local deferredThread = task.defer(function()
-		-- upvalues: p1 (ref), var1 (write), p2 (ref)
-		local var2 = p1
-		while var2 > 0 and var1 do
-			var2 -= task.wait(math.min(var2, 300))
+local function _(p1, p2) --[[ Line: 19 | Named "defaultSchedule" ]]
+	local v1 = true
+	local DeferredThread = task.defer(function() --[[ Line: 21 ]]
+		-- upvalues: p1 (copy), v1 (ref), p2 (copy)
+		local Largest: number = p1
+		while Largest > 0 and v1 do
+			Largest -= task.wait((math.min(Largest, 300)))
 		end
-		if var1 then
-			var1 = false
+		if v1 then
+			v1 = false
 			p2()
 		end
 	end)
 	
-	return function()
-		-- upvalues: var1 (write), deferredThread (ref)
-		if var1 then
-			var1 = false
-			task.cancel(deferredThread)
+	return function() --[[ Line: 32 ]]
+		-- upvalues: v1 (ref), DeferredThread (copy)
+		if v1 then
+			v1 = false
+			task.cancel(DeferredThread)
 		end
 	end
 end
 
-return function()
-	-- upvalues: refreshHomePageModule (ref), homeConstantsModule (ref), sduiHomePageAutoRefreshIntervalSeconds (ref), signalsModule (ref), getSduiApiStore (ref)
-	local var2 = nil
-	local var3 = nil
+return function() --[[ Line: 40 | Named "createHomePageAutoRefreshStore" ]]
+	-- upvalues: RefreshHomePageModule (copy), HomeConstantsModule (copy), SduiHomePageAutoRefreshIntervalSeconds (copy), SignalsModule (copy), GetSduiApiStoreFunction (copy)
+	local Callback: (() -> ())? = nil
+	local Effect: (() -> ())? = nil
 	
-	local function _()
-		-- upvalues: var2 (write)
-		if var2 then
-			var2()
-			var2 = nil
+	local function _() --[[ Line: 44 | Named "clearTimer" ]]
+		-- upvalues: Callback (ref)
+		if Callback then
+			Callback()
+			Callback = nil
 		end
 	end
 	
-	local function stop()
-		-- upvalues: var3 (write), var2 (write)
-		if var3 then
-			var3()
-			var3 = nil
+	local function stop() --[[ Line: 51 ]]
+		-- upvalues: Effect (ref), Callback (ref)
+		if Effect then
+			Effect()
+			Effect = nil
 		end
-		if var2 then
-			var2()
-			var2 = nil
+		if Callback then
+			Callback()
+			Callback = nil
 		end
 	end
 	
-	local function scheduleRefresh(p3)
-		-- upvalues: var2 (write), refreshHomePageModule (copy), homeConstantsModule (copy), sduiHomePageAutoRefreshIntervalSeconds (copy), scheduleRefresh (ref)
-		local var4 = function()
-			-- upvalues: var2 (copy), refreshHomePageModule (copy), homeConstantsModule (copy), sduiHomePageAutoRefreshIntervalSeconds (copy), scheduleRefresh (copy)
-			var2 = nil
-			local var5 = refreshHomePageModule(homeConstantsModule.RequestIntent.AutoRefresh, nil, false)
+	local function scheduleRefresh(SduiHomePageAutoRefreshIntervalSeconds1) --[[ Line: 59 ]]
+		-- upvalues: Callback (ref), RefreshHomePageModule (upval), HomeConstantsModule (upval), SduiHomePageAutoRefreshIntervalSeconds (upval), scheduleRefresh (copy)
+		local function v14() --[[ Line: 60 ]]
+			-- upvalues: Callback (upval), RefreshHomePageModule (upval), HomeConstantsModule (upval), SduiHomePageAutoRefreshIntervalSeconds (upval), scheduleRefresh (upval)
+			Callback = nil
+			local Promise = RefreshHomePageModule(HomeConstantsModule.RequestIntent.AutoRefresh, nil, false)
 			
-			if var5 then
-				var5:catch(function(p4)
-					-- upvalues: sduiHomePageAutoRefreshIntervalSeconds (copy), scheduleRefresh (copy)
-					warn("We failed to auto-refresh SDUI Home!", p4)
+			if Promise then
+				Promise:catch(function(Err) --[[ Line: 64 ]]
+					-- upvalues: SduiHomePageAutoRefreshIntervalSeconds (upval), scheduleRefresh (upval)
+					warn("We failed to auto-refresh SDUI Home!", Err)
 					
-					if sduiHomePageAutoRefreshIntervalSeconds > 0 then
-						scheduleRefresh(sduiHomePageAutoRefreshIntervalSeconds)
+					if SduiHomePageAutoRefreshIntervalSeconds > 0 then
+						scheduleRefresh(SduiHomePageAutoRefreshIntervalSeconds)
 					end
 				end)
 			end
 		end
 		
-		local var5 = true
-		local deferredThread = task.defer(function()
-			-- upvalues: p3 (ref), var5 (write), var4 (ref)
-			local var6 = p3
-			while true do
-				while var6 > 0 and var5 do
-					var6 -= task.wait(math.min(var6, 300))
-				end
-				if var5 then
-					var5 = false
-					var4()
-				end
+		local v2 = true
+		local DeferredThread = task.defer(function() --[[ Line: 21 ]]
+			-- upvalues: SduiHomePageAutoRefreshIntervalSeconds1 (copy), v2 (ref), v14 (copy)
+			local Largest: number = SduiHomePageAutoRefreshIntervalSeconds1
+			while Largest > 0 and v2 do
+				Largest -= task.wait((math.min(Largest, 300)))
+			end
+			if v2 then
+				v2 = false
+				v14()
 			end
 		end)
 		
-		var2 = function()
-			-- upvalues: var5 (write), deferredThread (ref)
-			if var5 then
-				var5 = false
-				task.cancel(deferredThread)
+		Callback = function() --[[ Line: 32 ]]
+			-- upvalues: v2 (ref), DeferredThread (copy)
+			if v2 then
+				v2 = false
+				task.cancel(DeferredThread)
 			end
 		end
 	end
 	
 	return {
-		start = function()
-			-- upvalues: var3 (write), var2 (write), signalsModule (copy), getSduiApiStore (copy), homeConstantsModule (copy), sduiHomePageAutoRefreshIntervalSeconds (copy), refreshHomePageModule (copy), scheduleRefresh (ref), stop (ref)
-			if var3 then
-				var3()
-				var3 = nil
+		start = function() --[[ Line: 74 ]]
+			-- upvalues: Effect (ref), Callback (ref), SignalsModule (upval), GetSduiApiStoreFunction (upval), HomeConstantsModule (upval), SduiHomePageAutoRefreshIntervalSeconds (upval), RefreshHomePageModule (upval), scheduleRefresh (copy), stop (copy)
+			if Effect then
+				Effect()
+				Effect = nil
 			end
-			if var2 then
-				var2()
-				var2 = nil
+			if Callback then
+				Callback()
+				Callback = nil
 			end
-			var3 = signalsModule.createEffect(function(p4)
-				-- upvalues: getSduiApiStore (copy), homeConstantsModule (copy), var2 (copy), sduiHomePageAutoRefreshIntervalSeconds (copy), refreshHomePageModule (copy), scheduleRefresh (copy)
-				local dataUpdatedTimestamp = getSduiApiStore().getDataUpdatedTimestamp(homeConstantsModule.ConfigKey, p4)
+			Effect = SignalsModule.createEffect(function(p3) --[[ Line: 76 ]]
+				-- upvalues: GetSduiApiStoreFunction (upval), HomeConstantsModule (upval), Callback (upval), SduiHomePageAutoRefreshIntervalSeconds (upval), RefreshHomePageModule (upval), scheduleRefresh (upval)
+				local DataUpdatedTimestamp: number = GetSduiApiStoreFunction().getDataUpdatedTimestamp(HomeConstantsModule.ConfigKey, p3)
 				
-				if var2 then
-					var2()
-					var2 = nil
+				if Callback then
+					Callback()
+					Callback = nil
 				end
-				if dataUpdatedTimestamp and sduiHomePageAutoRefreshIntervalSeconds > 0 then
-					local maxValue = math.max(0, dataUpdatedTimestamp + sduiHomePageAutoRefreshIntervalSeconds - os.clock())
+				if DataUpdatedTimestamp and SduiHomePageAutoRefreshIntervalSeconds > 0 then
+					local Largest = math.max(0, DataUpdatedTimestamp + SduiHomePageAutoRefreshIntervalSeconds - os.clock())
 					
-					local var7 = function()
-						-- upvalues: var2 (copy), refreshHomePageModule (copy), homeConstantsModule (copy), sduiHomePageAutoRefreshIntervalSeconds (copy), scheduleRefresh (copy)
-						var2 = nil
-						local var8 = refreshHomePageModule(homeConstantsModule.RequestIntent.AutoRefresh, nil, false)
+					local function v20() --[[ Line: 60 ]]
+						-- upvalues: Callback (upval), RefreshHomePageModule (upval), HomeConstantsModule (upval), SduiHomePageAutoRefreshIntervalSeconds (upval), scheduleRefresh (upval)
+						Callback = nil
+						local Promise = RefreshHomePageModule(HomeConstantsModule.RequestIntent.AutoRefresh, nil, false)
 						
-						if var8 then
-							var8:catch(function(p5)
-								-- upvalues: sduiHomePageAutoRefreshIntervalSeconds (copy), scheduleRefresh (copy)
-								warn("We failed to auto-refresh SDUI Home!", p5)
+						if Promise then
+							Promise:catch(function(Err) --[[ Line: 64 ]]
+								-- upvalues: SduiHomePageAutoRefreshIntervalSeconds (upval), scheduleRefresh (upval)
+								warn("We failed to auto-refresh SDUI Home!", Err)
 								
-								if sduiHomePageAutoRefreshIntervalSeconds > 0 then
-									scheduleRefresh(sduiHomePageAutoRefreshIntervalSeconds)
+								if SduiHomePageAutoRefreshIntervalSeconds > 0 then
+									scheduleRefresh(SduiHomePageAutoRefreshIntervalSeconds)
 								end
 							end)
 						end
 					end
 					
-					local var8 = true
-					local deferredThread = task.defer(function()
-						-- upvalues: maxValue (ref), var8 (write), var7 (ref)
-						local var9 = maxValue
-						while true do
-							while var9 > 0 and var8 do
-								var9 -= task.wait(math.min(var9, 300))
-							end
-							if var8 then
-								var8 = false
-								var7()
-							end
+					local v3 = true
+					local DeferredThread = task.defer(function() --[[ Line: 21 ]]
+						-- upvalues: Largest (copy), v3 (ref), v20 (copy)
+						local Largest: number = Largest
+						while Largest > 0 and v3 do
+							Largest -= task.wait((math.min(Largest, 300)))
+						end
+						if v3 then
+							v3 = false
+							v20()
 						end
 					end)
 					
-					var2 = function()
-						-- upvalues: var8 (write), deferredThread (ref)
-						if var8 then
-							var8 = false
-							task.cancel(deferredThread)
+					Callback = function() --[[ Line: 32 ]]
+						-- upvalues: v3 (ref), DeferredThread (copy)
+						if v3 then
+							v3 = false
+							task.cancel(DeferredThread)
 						end
 					end
 				end

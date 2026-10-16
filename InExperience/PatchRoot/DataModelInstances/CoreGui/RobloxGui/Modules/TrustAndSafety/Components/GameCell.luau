@@ -1,44 +1,44 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local roactModule = require(corePackagesService.Packages.Roact)
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local tModule = require(corePackagesService.Packages.t)
-local cell = UIBloxModule.App.Table.Cell
-local withSelectionCursorProvider = UIBloxModule.App.SelectionImage.withSelectionCursorProvider
-local dependenciesModule = require(script.Parent.Parent.Dependencies)
-local gameIconModule = require(dependenciesModule.GameIcon)
-local themedTextLabelModule = require(dependenciesModule.ThemedTextLabel)
-local withLocalizationModule = require(dependenciesModule.withLocalization)
-local gameCell = roactModule.PureComponent:extend("GameCell")
-gameCell.validateProps = tModule.strictInterface({
-	gameId = tModule.number,
-	layoutOrder = tModule.optional(tModule.union(tModule.integer, tModule.table)),
-	onActivated = tModule.optional(tModule.callback)
+﻿local CorePackages = game:GetService("CorePackages")
+local RoactModule = require(CorePackages.Packages.Roact)
+local UIBloxModule = require(CorePackages.Packages.UIBlox)
+local TModule = require(CorePackages.Packages.t)
+local Cell = UIBloxModule.App.Table.Cell
+local WithSelectionCursorProviderFunction = UIBloxModule.App.SelectionImage.withSelectionCursorProvider
+local DependenciesModule = require(script.Parent.Parent.Dependencies)
+local GameIconModule = require(DependenciesModule.GameIcon)
+local ThemedTextLabelModule = require(DependenciesModule.ThemedTextLabel)
+local WithLocalizationModule = require(DependenciesModule.withLocalization)
+local GameCell = RoactModule.PureComponent:extend("GameCell")
+GameCell.validateProps = TModule.strictInterface({
+	gameId = TModule.number,
+	layoutOrder = TModule.optional(TModule.union(TModule.integer, TModule.table)),
+	onActivated = TModule.optional(TModule.callback)
 })
 
-function gameCell.renderWithSelectionCursor(p1, _)
-	-- upvalues: withLocalizationModule (ref), roactModule (ref), cell (ref), gameIconModule (ref), themedTextLabelModule (ref)
-	local props = p1.props
+function GameCell.renderWithSelectionCursor(p1, _) --[[ Line: 27 ]]
+	-- upvalues: WithLocalizationModule (copy), RoactModule (copy), Cell (copy), GameIconModule (copy), ThemedTextLabelModule (copy)
+	local Props = p1.props
 	
-	return withLocalizationModule({
+	return WithLocalizationModule({
 		labelText = "CoreScripts.InGameMenu.Report.ReportExperience"
-	})(function(p2)
-		-- upvalues: roactModule (copy), cell (copy), props (ref), gameIconModule (copy), themedTextLabelModule (copy)
-		return roactModule.createElement(cell, {
-			onActivated = props.onActivated,
-			layoutOrder = props.layoutOrder,
+	})(function(p2) --[[ Line: 31 ]]
+		-- upvalues: RoactModule (upval), Cell (upval), Props (copy), GameIconModule (upval), ThemedTextLabelModule (upval)
+		return RoactModule.createElement(Cell, {
+			onActivated = Props.onActivated,
+			layoutOrder = Props.layoutOrder,
 			size = UDim2.new(1, 0, 0, 72),
-			head = roactModule.createElement("Frame", {
+			head = RoactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				Size = UDim2.new(1, 0, 0, 72)
 			}, {
-				GameIcon = roactModule.createElement(gameIconModule, {
+				GameIcon = RoactModule.createElement(GameIconModule, {
 					iconSize = 48,
-					gameId = props.gameId,
+					gameId = Props.gameId,
 					cornerRadius = UDim.new(0, 8),
 					Position = UDim2.new(0, 0, 0.5, 0),
 					AnchorPoint = Vector2.new(0, 0.5)
 				}),
-				Label = roactModule.createElement(themedTextLabelModule, {
+				Label = RoactModule.createElement(ThemedTextLabelModule, {
 					fontKey = "Header2",
 					themeKey = "TextEmphasis",
 					BackgroundTransparency = 1,
@@ -49,7 +49,7 @@ function gameCell.renderWithSelectionCursor(p1, _)
 					Position = UDim2.new(0, 54, 0.5, 0)
 				})
 			}),
-			tail = roactModule.createElement("Frame", {
+			tail = RoactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				AnchorPoint = Vector2.new(1, 0),
 				Position = UDim2.new(1, 0, 0, 0),
@@ -59,12 +59,12 @@ function gameCell.renderWithSelectionCursor(p1, _)
 	end)
 end
 
-function gameCell.render(p1)
-	-- upvalues: withSelectionCursorProvider (ref)
-	return withSelectionCursorProvider(function(p2)
-		-- upvalues: p1 (ref)
+function GameCell.render(p1) --[[ Line: 69 ]]
+	-- upvalues: WithSelectionCursorProviderFunction (copy)
+	return WithSelectionCursorProviderFunction(function(p2) --[[ Line: 70 ]]
+		-- upvalues: p1 (copy)
 		return p1:renderWithSelectionCursor(p2)
 	end)
 end
 
-return gameCell
+return GameCell

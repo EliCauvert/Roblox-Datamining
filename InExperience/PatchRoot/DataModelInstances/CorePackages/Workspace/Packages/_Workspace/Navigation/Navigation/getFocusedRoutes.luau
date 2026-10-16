@@ -1,19 +1,20 @@
 ﻿local _ = require(script.Parent.types)
-local array = require(script:FindFirstAncestor("Navigation").Parent.LuauPolyfill).Array
+local Array = require(script:FindFirstAncestor("Navigation").Parent.LuauPolyfill).Array
 
-local function getFocusedRoutes(p1)
-	-- upvalues: array (ref), getFocusedRoutes (ref)
-	local t = {}
+local function getFocusedRoutes(Route) --[[ Line: 10 ]]
+	-- upvalues: Array (copy), getFocusedRoutes (copy)
+	local ConcatResult = {}
 	
-	if p1 == nil then
-		return t
-	elseif p1.key or p1.routeName then
-		table.insert(t, p1)
+	if Route == nil then
+		return ConcatResult
 	end
-	if p1.routes and p1.index ~= nil then
-		t = array.concat(t, getFocusedRoutes(p1.routes[p1.index]))
+	if Route.key or Route.routeName then
+		table.insert(ConcatResult, Route)
 	end
-	return t
+	if Route.routes and Route.index ~= nil then
+		ConcatResult = Array.concat(ConcatResult, getFocusedRoutes(Route.routes[Route.index]))
+	end
+	return ConcatResult
 end
 
 return getFocusedRoutes

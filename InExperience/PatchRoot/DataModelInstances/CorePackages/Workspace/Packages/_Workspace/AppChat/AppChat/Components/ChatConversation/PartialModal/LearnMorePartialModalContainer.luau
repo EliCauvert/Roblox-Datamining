@@ -1,62 +1,66 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local _ = require(appChat.types)
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local memo = reactModule.memo
-local useAnalyticsModule = require(appChat.Analytics.useAnalytics)
-local useCallback = reactModule.useCallback
-local useEffectOnMount = require(parent.RoactUtils).Hooks.useEffectOnMount
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useScreenSize = require(parent.RobloxAppHooks).useScreenSize
-local eventNamesModule = require(appChat.Analytics.EventNames)
-local UIBloxModule = require(parent.UIBlox)
-local useStyle = UIBloxModule.Core.Style.useStyle
-local useLayerCollector = UIBloxModule.Core.Layout.LayerCollector.useLayerCollector
-local partialModalModule = require(script.Parent.PartialModal)
-local t = {
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local _ = require(AppChat.types)
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local UseAnalyticsModule = require(AppChat.Analytics.useAnalytics)
+local UseCallbackFunction = ReactModule.useCallback
+local UseEffectOnMountFunction = require(Parent.RoactUtils).Hooks.useEffectOnMount
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseScreenSizeFunction = require(Parent.RobloxAppHooks).useScreenSize
+local EventNamesModule = require(AppChat.Analytics.EventNames)
+local UIBloxModule = require(Parent.UIBlox)
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local UseLayerCollectorFunction = UIBloxModule.Core.Layout.LayerCollector.useLayerCollector
+local PartialModalModule = require(script.Parent.PartialModal)
+local config = {
 	conversationId = "",
 	titleKey = "Feature.Chat.Heading.ExpressiveChat",
 	bodyKey = "Feature.Chat.Description.ExpressiveChatLearnMore",
 	cancelAlertKey = "CommonUI.Features.Action.Close",
-	onDismissed = function() end
+	onDismissed = function() --[[ Line: 33 ]] end
 }
 
-return memo(function(p1)
-	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), useScreenSize (ref), useLayerCollector (ref), useAnalyticsModule (ref), useEffectOnMount (ref), eventNamesModule (ref), useCallback (ref), useLocalization (ref), reactModule (ref), partialModalModule (ref)
-	local var1 = cryoModule.Dictionary.union(t, p1)
-	local var2 = useStyle()
-	local var3 = useScreenSize()
-	local var4 = useLayerCollector()
+return ReactModule.memo(function(p1) --[[ Line: 40 | Named "LearnMorePartialModalContainer" ]]
+	-- upvalues: CryoModule (copy), config (copy), UseStyleFunction (copy), UseScreenSizeFunction (copy), UseLayerCollectorFunction (copy), UseAnalyticsModule (copy), UseEffectOnMountFunction (copy), EventNamesModule (copy), UseCallbackFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), PartialModalModule (copy)
+	local UnionResult = CryoModule.Dictionary.union(config, p1)
+	local UseStyleResult = UseStyleFunction()
+	local UseScreenSizeResult = UseScreenSizeFunction()
+	local UseLayerCollectorResult = UseLayerCollectorFunction()
 	
-	if var4 and var4.absoluteSize then
-		var3 = var4.absoluteSize
+	if UseLayerCollectorResult and UseLayerCollectorResult.absoluteSize then
+		UseScreenSizeResult = UseLayerCollectorResult.absoluteSize
 	end
-	local var5 = useAnalyticsModule()
-	useEffectOnMount(function()
-		-- upvalues: var5 (ref), eventNamesModule (copy), var1 (ref)
-		if var5 then
-			var5.fireAnalyticsEvent(eventNamesModule.ConversationLearnMoreDialogRendered, { conversationId = var1.conversationId })
+	local UseAnalyticsModuleResult = UseAnalyticsModule()
+	UseEffectOnMountFunction(function() --[[ Line: 50 ]]
+		-- upvalues: UseAnalyticsModuleResult (copy), EventNamesModule (upval), UnionResult (copy)
+		if UseAnalyticsModuleResult then
+			UseAnalyticsModuleResult.fireAnalyticsEvent(EventNamesModule.ConversationLearnMoreDialogRendered, { conversationId = UnionResult.conversationId })
 		end
 	end)
-	local var6 = useLocalization({
-		titleText = var1.titleKey,
-		bodyText = var1.bodyKey,
-		cancelAlertText = var1.cancelAlertKey
+	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 58 ]]
+		-- upvalues: UseAnalyticsModuleResult (copy), EventNamesModule (upval), UnionResult (copy)
+		if UseAnalyticsModuleResult then
+			UseAnalyticsModuleResult.fireAnalyticsEvent(EventNamesModule.ConversationLearnMoreDialogDismissed, { conversationId = UnionResult.conversationId })
+		end
+		UnionResult.onDismissed()
+	end, {
+		UseAnalyticsModuleResult,
+		UnionResult.conversationId,
+		UnionResult.onDismissed
+	})
+	local UseLocalizationResult = UseLocalizationFunction({
+		titleText = UnionResult.titleKey,
+		bodyText = UnionResult.bodyKey,
+		cancelAlertText = UnionResult.cancelAlertKey
 	})
 	
-	return reactModule.createElement(partialModalModule, {
-		titleText = var6.titleText,
-		bodyText = var6.bodyText,
-		cancelAlertText = var6.cancelAlertText,
-		screenSize = var3,
-		onDismissed = useCallback(function()
-			-- upvalues: var5 (ref), eventNamesModule (copy), var1 (ref)
-			if var5 then
-				var5.fireAnalyticsEvent(eventNamesModule.ConversationLearnMoreDialogDismissed, { conversationId = var1.conversationId })
-			end
-			var1.onDismissed()
-		end, { var5, var1.conversationId, var1.onDismissed }),
-		style = var2
+	return ReactModule.createElement(PartialModalModule, {
+		titleText = UseLocalizationResult.titleText,
+		bodyText = UseLocalizationResult.bodyText,
+		cancelAlertText = UseLocalizationResult.cancelAlertText,
+		screenSize = UseScreenSizeResult,
+		onDismissed = UseCallbackResult,
+		style = UseStyleResult
 	})
 end)

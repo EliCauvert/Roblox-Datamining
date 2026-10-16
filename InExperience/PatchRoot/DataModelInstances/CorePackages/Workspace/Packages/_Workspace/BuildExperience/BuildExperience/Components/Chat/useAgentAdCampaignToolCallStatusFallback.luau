@@ -1,109 +1,110 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local playersService = game:GetService("Players")
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local adCampaignToolCallStatusModule = require(parent.DataHydration.AdCampaignToolCallStatus)
-local _ = require(buildExperience.Chat.chatTypes)
-local var1 = signalsModule.createComputed(function()
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local Players = game:GetService("Players")
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
+local AdCampaignToolCallStatusModule = require(Parent.DataHydration.AdCampaignToolCallStatus)
+local _ = require(BuildExperience.Chat.chatTypes)
+local Computed = SignalsModule.createComputed(function() --[[ Line: 21 ]]
 	return { cardStates = {}, pendingToolCallIds = {} }
 end)
 
-local function _(p1)
-	return table.concat(p1, "\0")
+local function _(List): string --[[ Line: 31 | Named "toolCallIdsKey" ]]
+	return table.concat(List, "\0")
 end
 
-return function(p1, p2)
-	-- upvalues: playersService (ref), adCampaignToolCallStatusModule (ref), reactModule (ref), var1 (ref), signalsModule (ref), signalsReactModule (ref)
-	local localPlayer = playersService.LocalPlayer
-	local var2 = p2
+return function(List, p1) --[[ Line: 35 | Named "useAgentAdCampaignToolCallStatusFallback" ]]
+	-- upvalues: Players (copy), AdCampaignToolCallStatusModule (copy), ReactModule (copy), Computed (copy), SignalsModule (copy), SignalsReactModule (copy)
+	local LocalPlayer = Players.LocalPlayer
+	local P0 = p1 or (if LocalPlayer == nil or LocalPlayer.UserId <= 0 then nil else LocalPlayer.UserId)
+	local AdCampaignToolCallStatusStore = AdCampaignToolCallStatusModule.getAdCampaignToolCallStatusStore(false)
+	local Joined = table.concat(List, "\0")
+	local UseRefResult = ReactModule.useRef({ key = "", value = {} })
 	
-	if not var2 then
-		var2 = if localPlayer == nil or localPlayer.UserId <= 0 then nil else localPlayer.UserId
+	if UseRefResult.current.key ~= Joined then
+		UseRefResult.current = { key = Joined, value = table.clone(List) }
 	end
-	local adCampaignToolCallStatusStore = adCampaignToolCallStatusModule.getAdCampaignToolCallStatusStore(false)
-	local joined = table.concat(p1, "\0")
-	local var3 = reactModule.useRef({ key = "", value = {} })
-	
-	if var3.current.key ~= joined then
-		var3.current = { key = joined, value = table.clone(p1) }
-	end
-	local value = var3.current.value
-	local var4 = signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: var2 (ref), value (ref), var1 (copy), signalsModule (copy), adCampaignToolCallStatusStore (ref)
-		return if var2 == nil or #value == 0 then var1 else signalsModule.createComputed(function(p3)
-			-- upvalues: value (copy), adCampaignToolCallStatusStore (copy), var2 (copy)
-			local t = {}
-			local t_1 = {}
+	local Value = UseRefResult.current.value
+	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 48 ]]
+		-- upvalues: P0 (copy), Value (copy), Computed (upval), SignalsModule (upval), AdCampaignToolCallStatusStore (copy)
+		return if P0 == nil or #Value == 0 then Computed else SignalsModule.createComputed(function(p2) --[[ Line: 52 ]]
+			-- upvalues: Value (upval), AdCampaignToolCallStatusStore (upval), P0 (upval)
+			local CardStates = {}
+			local PendingToolCallIds = {}
 			
-			for i, v in value do
-				local andFetchToolCallStatus = adCampaignToolCallStatusStore.getAndFetchToolCallStatus(var2, v)
-				local var5 = andFetchToolCallStatus.data(p3)
-				local var6 = andFetchToolCallStatus.status(p3)
+			for _, value in Value do
+				local AndFetchToolCallStatus = AdCampaignToolCallStatusStore.getAndFetchToolCallStatus(P0, value)
+				local DataResult = AndFetchToolCallStatus.data(p2)
+				local StatusResult = AndFetchToolCallStatus.status(p2)
 				
-				if var6 == "NotReady" then
-					t_1[v] = true
-				elseif var6 == "Ready" and var5 ~= nil then
-					if var5.campaignId ~= nil then
-						t[v] = {
+				if StatusResult == "NotReady" then
+					PendingToolCallIds[value] = true
+				elseif StatusResult == "Ready" and DataResult ~= nil then
+					if DataResult.campaignId ~= nil then
+						CardStates[value] = {
 							variant = nil,
 							campaignStartDate = nil,
 							campaignEndDate = nil,
-							campaignId = var5.campaignId
+							campaignId = DataResult.campaignId
 						}
-					elseif var5.status == "processing" or var5.status == "created" then
-						t_1[v] = true
+					elseif DataResult.status == "processing" or DataResult.status == "created" then
+						PendingToolCallIds[value] = true
 					end
 				end
 			end
-			return { cardStates = t, pendingToolCallIds = t_1 }
+			return {
+				cardStates = CardStates,
+				pendingToolCallIds = PendingToolCallIds
+			}
 		end)
-	end, { adCampaignToolCallStatusStore, var2, value }))
-	local var5 = reactModule.useRef({})
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), var4 (ref), var5 (ref), adCampaignToolCallStatusStore (ref)
-		if var2 == nil or next(var4.pendingToolCallIds) == nil then return end
-		local current = var5.current
+	end, { AdCampaignToolCallStatusStore, P0, Value })))
+	local UseRefResult1 = ReactModule.useRef({})
+	ReactModule.useEffect(function() --[[ Line: 82 ]]
+		-- upvalues: P0 (copy), UseSignalStateResult (copy), UseRefResult1 (copy), AdCampaignToolCallStatusStore (copy)
+		if P0 == nil or next(UseSignalStateResult.pendingToolCallIds) == nil then return end
+		local Current = UseRefResult1.current
 		
-		for i in current do
-			if var4.pendingToolCallIds[i] == nil then
-				current[i] = nil
+		for i in Current do
+			if UseSignalStateResult.pendingToolCallIds[i] == nil then
+				Current[i] = nil
 			end
 		end
 		local t = {}
 		
-		for i_1 in var4.pendingToolCallIds do
-			local var6 = current[i_1] or 0
+		for pendingToolCallId in UseSignalStateResult.pendingToolCallIds do
+			local CurrentEntry = Current[pendingToolCallId] or 0
+			local IsCurrentEntryAbove = CurrentEntry >= 3
+			local DelayedThread = nil
 			
-			if var6 < 3 then
-				local delayedThread = nil
-				delayedThread = task.delay(5 * 2 ^ var6, function()
-					-- upvalues: delayedThread (write), t (ref), adCampaignToolCallStatusStore (copy), var2 (copy), i_1 (ref), current (ref), var6 (ref)
-					if delayedThread ~= nil then
-						t[delayedThread] = nil
+			if not IsCurrentEntryAbove then
+				DelayedThread = nil
+				DelayedThread = task.delay(5 * 2 ^ CurrentEntry, function() --[[ Line: 100 ]]
+					-- upvalues: DelayedThread (ref), t (copy), AdCampaignToolCallStatusStore (upval), P0 (upval), pendingToolCallId (copy), Current (copy), CurrentEntry (copy)
+					if DelayedThread ~= nil then
+						t[DelayedThread] = nil
 					end
-					local toolCallStatus = adCampaignToolCallStatusStore.getToolCallStatus(var2, i_1)
-					local var7 = toolCallStatus.data(false)
+					local ToolCallStatus = AdCampaignToolCallStatusStore.getToolCallStatus(P0, pendingToolCallId)
+					local DataResult = ToolCallStatus.data(false)
 					
-					if toolCallStatus.status(false) == "Ready" and var7 ~= nil and var7.campaignId == nil and (var7.status == "processing" or var7.status == "created") then
-						current[i_1] = var6 + 1
-						adCampaignToolCallStatusStore.fetchToolCallStatus(var2, i_1)
+					if ToolCallStatus.status(false) == "Ready" and DataResult ~= nil and DataResult.campaignId == nil and (DataResult.status == "processing" or DataResult.status == "created") then
+						Current[pendingToolCallId] = CurrentEntry + 1
+						AdCampaignToolCallStatusStore.fetchToolCallStatus(P0, pendingToolCallId)
 					end
 				end)
-				
-				if delayedThread ~= nil then
-					t[delayedThread] = true
-				end
+				IsCurrentEntryAbove = DelayedThread == nil
+			end
+			if not IsCurrentEntryAbove then
+				t[DelayedThread] = true
 			end
 		end
-		return function()
-			-- upvalues: t (ref)
+		return function() --[[ Line: 120 ]]
+			-- upvalues: t (copy)
 			for i in t do
 				task.cancel(i)
 			end
 		end
-	end, { var4, var2, adCampaignToolCallStatusStore })
+	end, { UseSignalStateResult, P0, AdCampaignToolCallStatusStore })
 	
-	return var4
+	return UseSignalStateResult
 end

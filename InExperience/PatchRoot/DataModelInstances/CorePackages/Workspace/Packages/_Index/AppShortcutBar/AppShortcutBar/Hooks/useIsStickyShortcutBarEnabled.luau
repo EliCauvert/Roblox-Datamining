@@ -1,52 +1,32 @@
-﻿local userInputService = game:GetService("UserInputService")
-local parent = script:FindFirstAncestor("AppShortcutBar").Parent
-local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
-local responsiveModule = require(parent.Responsive)
-local roactUtilsModule = require(parent.RoactUtils)
-local useProperty = require(parent.GuiObjectUtils).useProperty
-local useSignalState = require(parent.SignalsReact).useSignalState
-local robloxAppEnumsModule = require(parent.RobloxAppEnums)
-local loginStatus = robloxAppEnumsModule.LoginStatus
-local appPage = robloxAppEnumsModule.AppPage
-local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
-local useIsTvRemoteDevice = roactUtilsModule.Hooks.useIsTvRemoteDevice
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagUseSignalsForAuthenticationStatus = sharedFlagsModule.FFlagUseSignalsForAuthenticationStatus
-local fFlagLuaSupportMicroGamepadPreferredInput = sharedFlagsModule.FFlagLuaSupportMicroGamepadPreferredInput
-local var1 = if fFlagUseSignalsForAuthenticationStatus then require(parent.AuthenticationStatus).GetAuthenticationStatusStore else nil
+﻿local UserInputService = game:GetService("UserInputService")
+local Parent = script:FindFirstAncestor("AppShortcutBar").Parent
+local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
+local ResponsiveModule = require(Parent.Responsive)
+local RoactUtilsModule = require(Parent.RoactUtils)
+local UsePropertyFunction = require(Parent.GuiObjectUtils).useProperty
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local RobloxAppEnumsModule = require(Parent.RobloxAppEnums)
+local LoginStatus = RobloxAppEnumsModule.LoginStatus
+local AppPage = RobloxAppEnumsModule.AppPage
+local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
+local UseIsTvRemoteDeviceFunction = RoactUtilsModule.Hooks.useIsTvRemoteDevice
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagUseSignalsForAuthenticationStatus = SharedFlagsModule.FFlagUseSignalsForAuthenticationStatus
+local FFlagLuaSupportMicroGamepadPreferredInput = SharedFlagsModule.FFlagLuaSupportMicroGamepadPreferredInput
+local GetAuthenticationStatusStore = if FFlagUseSignalsForAuthenticationStatus then require(Parent.AuthenticationStatus).GetAuthenticationStatusStore else nil
 
-local function selectUserLoggedIn(p1)
-	-- upvalues: loginStatus (ref)
-	return p1.AuthenticationStatus and p1.AuthenticationStatus.status == loginStatus.LOGGED_IN
+local function selectUserLoggedIn(p1): boolean --[[ Line: 25 ]]
+	-- upvalues: LoginStatus (copy)
+	return p1.AuthenticationStatus and p1.AuthenticationStatus.status == LoginStatus.LOGGED_IN
 end
 
-return function(p1)
-	-- upvalues: reactFocusNavigationModule (ref), responsiveModule (ref), fFlagLuaSupportMicroGamepadPreferredInput (ref), useProperty (ref), userInputService (ref), useIsTvRemoteDevice (ref), fFlagUseSignalsForAuthenticationStatus (ref), useSignalState (ref), var1 (ref), loginStatus (ref), useSelector (ref), selectUserLoggedIn (ref), appPage (ref)
-	local var2
-	local var3 = reactFocusNavigationModule.useFocusedGuiObject() ~= nil
-	local var4 = responsiveModule.usePreferredInput() == responsiveModule.Input.Directional
-	local var5 = responsiveModule.useOrientation() == responsiveModule.Keys.Portrait
+return function(AdjustScreen): boolean --[[ Line: 29 | Named "useIsStickyShortcutBarEnabled" ]]
+	-- upvalues: ReactFocusNavigationModule (copy), ResponsiveModule (copy), FFlagLuaSupportMicroGamepadPreferredInput (copy), UsePropertyFunction (copy), UserInputService (copy), UseIsTvRemoteDeviceFunction (copy), FFlagUseSignalsForAuthenticationStatus (copy), UseSignalStateFunction (copy), GetAuthenticationStatusStore (copy), LoginStatus (copy), UseSelectorFunction (copy), selectUserLoggedIn (copy), AppPage (copy)
+	local HasUseFocusedGuiObjectResult = ReactFocusNavigationModule.useFocusedGuiObject() ~= nil
+	local IsUsePreferredInputResultMatch = ResponsiveModule.usePreferredInput() == ResponsiveModule.Input.Directional
+	local IsUseOrientationResultMatch = ResponsiveModule.useOrientation() == ResponsiveModule.Keys.Portrait
+	local IsPreferredInputMatch = if FFlagLuaSupportMicroGamepadPreferredInput then UsePropertyFunction(UserInputService, "PreferredInput") == Enum.PreferredInput.MicroGamepad else UseIsTvRemoteDeviceFunction()
+	local IsUseSignalStateResultMatch = if FFlagUseSignalsForAuthenticationStatus then UseSignalStateFunction(GetAuthenticationStatusStore(false).getStatus) == LoginStatus.LOGGED_IN else UseSelectorFunction(selectUserLoggedIn)
 	
-	if fFlagLuaSupportMicroGamepadPreferredInput then
-		var2 = useProperty(userInputService, "PreferredInput") == Enum.PreferredInput.MicroGamepad
-		var2 = nil
-	else
-		var2 = useIsTvRemoteDevice()
-	end
-	local var6
-	if fFlagUseSignalsForAuthenticationStatus then
-		var6 = useSignalState(var1(false).getStatus) == loginStatus.LOGGED_IN
-		var6 = nil
-	else
-		var6 = useSelector(selectUserLoggedIn)
-	end
-	local var7
-	if not var3 then
-		var7 = var4
-		
-		if var7 then
-			var7 = var6 and (p1 ~= appPage.AdjustScreen and (not var5 and not var2))
-		end
-		return var7
-	end
+	return if HasUseFocusedGuiObjectResult then IsUseSignalStateResultMatch and (AdjustScreen ~= AppPage.AdjustScreen and (not IsUseOrientationResultMatch and not IsPreferredInputMatch)) else IsUsePreferredInputResultMatch and (IsUseSignalStateResultMatch and (AdjustScreen ~= AppPage.AdjustScreen and (not IsUseOrientationResultMatch and not IsPreferredInputMatch)))
 end

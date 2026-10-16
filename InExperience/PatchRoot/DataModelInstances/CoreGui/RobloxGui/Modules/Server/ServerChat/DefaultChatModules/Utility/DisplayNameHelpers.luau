@@ -1,56 +1,60 @@
-﻿local playersService = game:GetService("Players")
-local chatSettingsModule = require(game:GetService("Chat"):WaitForChild("ClientChatModules"):WaitForChild("ChatSettings"))
-local t = { ChattingToSelf = 1, NoMatches = 2, MultipleMatches = 3 }
+﻿local Players = game:GetService("Players")
+local ChatSettingsModule = require(game:GetService("Chat"):WaitForChild("ClientChatModules"):WaitForChild("ChatSettings"))
+local CommandErrorCodes = { ChattingToSelf = 1, NoMatches = 2, MultipleMatches = 3 }
 
 return {
-	CommandErrorCodes = t,
-	getUserNameFromChattedName = function(p1, p2, p3)
-		-- upvalues: t (ref), playersService (ref), chatSettingsModule (ref)
-		if p2 == p1 then
-			return p2, t.ChattingToSelf
+	CommandErrorCodes = CommandErrorCodes,
+	getUserNameFromChattedName = function(Text: string, Name, p1) --[[ Line: 14 ]]
+		-- upvalues: CommandErrorCodes (copy), Players (copy), ChatSettingsModule (copy)
+		if Name == Text then
+			return Name, CommandErrorCodes.ChattingToSelf
 		end
-		local players = playersService:GetPlayers()
+		local Players1 = Players:GetPlayers()
 		
-		for i, v in pairs(players) do
-			if string.lower(v.Name) == string.lower(p1) then
-				return v.Name, nil
+		for _, value in pairs(Players1) do
+			if string.lower(value.Name) == string.lower(Text) then
+				return value.Name, nil
 			end
 		end
-		local var1 = 0
-		local name = nil
+		local Count = 0
+		local Name1 = nil
 		
-		if chatSettingsModule.PlayerDisplayNamesEnabled then
-			for i_1, v_1 in pairs(players) do
-				if v_1.Name ~= p2 and string.lower(v_1.DisplayName) == string.lower(p1) then
-					var1 += 1
-					name = v_1.Name
+		if ChatSettingsModule.PlayerDisplayNamesEnabled then
+			for _, Player in pairs(Players1) do
+				if Player.Name ~= Name and string.lower(Player.DisplayName) == string.lower(Text) then
+					Count += 1
+					Name1 = Player.Name
 				end
 			end
 		end
-		if var1 == 1 then
-			return name, nil
-		elseif var1 == 0 then
-			if p3 == p1 then
-				return p3, t.ChattingToSelf
+		if Count == 1 then
+			return Name1, nil
+		elseif Count == 0 then
+			if p1 == Text then
+				return p1, CommandErrorCodes.ChattingToSelf
+			else
+				return Text, CommandErrorCodes.NoMatches
 			end
-			return p1, t.NoMatches
-		elseif var1 >= 2 then
-			return p1, t.MultipleMatches
-		end
+		elseif Count < 2 then return end
+		return Text, CommandErrorCodes.MultipleMatches
 	end,
-	getUsersWithDisplayNameString = function(p4, p5)
-		-- upvalues: playersService (ref)
-		local t = {}
-		local var2 = ""
+	getUsersWithDisplayNameString = function(Text: string, Name): string --[[ Line: 56 ]]
+		-- upvalues: Players (copy)
+		local List = {}
+		local Text1 = ""
 		
-		for i, v in pairs(playersService:GetPlayers()) do
-			if v.Name ~= p5 and string.lower(v.DisplayName) == string.lower(p4) then
-				table.insert(t, v.Name)
+		for _, player in pairs((Players:GetPlayers())) do
+			if player.Name ~= Name and string.lower(player.DisplayName) == string.lower(Text) then
+				table.insert(List, player.Name)
 			end
 		end
-		for i_1, v_1 in pairs(t) do
-			var2 = if i_1 ~= #t then var2 .. "@" .. v_1 else var2 .. "@" .. v_1 .. ", "
+		for i, value in pairs(List) do
+			if i == #List then
+				Text1 ..= "@" .. value
+			else
+				Text1 ..= "@" .. value .. ", "
+			end
 		end
-		return var2
+		return Text1
 	end
 }

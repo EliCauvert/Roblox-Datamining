@@ -1,64 +1,65 @@
-﻿local parent = script:FindFirstAncestor("SocialTabsPage").Parent
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local dataHydrationModule = require(parent.DataHydration)
-local var1 = dataHydrationModule.Presence.PresenceStore.get()
-local presenceType = dataHydrationModule.Presence.PresenceEnums.PresenceType
-local t = {
-	[presenceType.InGame] = 3,
-	[presenceType.Online] = 2,
-	[presenceType.InStudio] = 1,
-	[presenceType.Offline] = 0
+﻿local Parent = script:FindFirstAncestor("SocialTabsPage").Parent
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
+local DataHydrationModule = require(Parent.DataHydration)
+local GetResult = DataHydrationModule.Presence.PresenceStore.get()
+local PresenceType = DataHydrationModule.Presence.PresenceEnums.PresenceType
+local config = {
+	[PresenceType.InGame] = 3,
+	[PresenceType.Online] = 2,
+	[PresenceType.InStudio] = 1,
+	[PresenceType.Offline] = 0
 }
 
-local function _(p1)
-	-- upvalues: t (ref)
-	return t[p1] or 0
+local function _(p1) --[[ Line: 23 | Named "getStorePresenceWeight" ]]
+	-- upvalues: config (copy)
+	return config[p1] or 0
 end
 
-local function usersOrderEqual(p1, p2)
-	if p1 == p2 then
+local function usersOrderEqual(List, p1): boolean --[[ Line: 29 ]]
+	if List == p1 then
 		return true
-	elseif not p1 or not p2 or #p1 ~= #p2 then
+	end
+	if not List or not p1 or #List ~= #p1 then
 		return false
 	end
-	for i, v in p1 do
-		if v.id ~= p2[i].id then
+	for i, value in List do
+		if value.id ~= p1[i].id then
 			return false
 		end
 	end
 	return true
 end
 
-return function(p3)
-	-- upvalues: reactModule (ref), signalsModule (ref), var1 (ref), presenceType (ref), t (ref), usersOrderEqual (ref), signalsReactModule (ref)
-	return signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), p3 (ref), var1 (copy), presenceType (copy), t (copy), usersOrderEqual (copy)
-		return signalsModule.createComputed(function(p4)
-			-- upvalues: p3 (copy), var1 (copy), presenceType (copy), t (copy)
-			if #p3 == 0 then
-				return p3
+return function(Users) --[[ Line: 55 | Named "useSortedUsersByPresence" ]]
+	-- upvalues: ReactModule (copy), SignalsModule (copy), GetResult (copy), PresenceType (copy), config (copy), usersOrderEqual (copy), SignalsReactModule (copy)
+	return SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 56 ]]
+		-- upvalues: SignalsModule (upval), Users (copy), GetResult (upval), PresenceType (upval), config (upval), usersOrderEqual (upval)
+		return SignalsModule.createComputed(function(p2) --[[ Line: 57 ]]
+			-- upvalues: Users (upval), GetResult (upval), PresenceType (upval), config (upval)
+			if #Users == 0 then
+				return Users
 			end
-			local t_1 = {}
+			local List = {}
 			
-			for i, v in p3 do
-				local var2 = var1.GetPresenceByUserId(tostring(v.id)).data(p4)
-				table.insert(t_1, {
-					user = v,
-					weight = t[if var2 then var2.userPresenceType else presenceType.Offline] or 0,
-					originalIndex = i
+			for OriginalIndex, user in Users do
+				local DataResult = GetResult.GetPresenceByUserId((tostring(user.id))).data(p2)
+				table.insert(List, {
+					user = user,
+					weight = config[if DataResult then DataResult.userPresenceType else PresenceType.Offline] or 0,
+					originalIndex = OriginalIndex
 				})
 			end
-			table.sort(t_1, function(p5, p6)
-				return if p5.weight == p6.weight then p5.originalIndex < p6.originalIndex else p6.weight < p5.weight
+			table.sort(List, function(A, B): boolean --[[ Line: 74 ]]
+				return if A.weight == B.weight then A.originalIndex < B.originalIndex else B.weight < A.weight
 			end)
-			local t_2 = {}
+			local List1 = {}
 			
-			for i_1, v_1 in t_1 do
-				table.insert(t_2, v_1.user)
+			for _, value in List do
+				table.insert(List1, value.user)
 			end
-			return t_2
+			return List1
 		end, usersOrderEqual)
-	end, { p3 }))
+	end, { Users })))
 end

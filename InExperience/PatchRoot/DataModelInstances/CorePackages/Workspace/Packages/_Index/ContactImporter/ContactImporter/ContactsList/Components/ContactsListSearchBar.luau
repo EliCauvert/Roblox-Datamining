@@ -1,1 +1,1 @@
-﻿return require(script.ContactsListSearchBar)
+﻿return (require(script.ContactsListSearchBar))

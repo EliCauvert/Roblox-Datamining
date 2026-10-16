@@ -1,10 +1,10 @@
-﻿local httpService = game:GetService("HttpService")
-local urlBuilder = require(script:FindFirstAncestor("AuthCommon").Parent.UrlBuilder).UrlBuilder
+﻿local HttpService = game:GetService("HttpService")
+local UrlBuilder = require(script:FindFirstAncestor("AuthCommon").Parent.UrlBuilder).UrlBuilder
 
-return function(p1)
-	-- upvalues: urlBuilder (ref), httpService (ref)
-	return p1(urlBuilder.fromString("auth:/v1/logoutfromallsessionsandreauthenticate")(), "POST", {
-		postBody = httpService:JSONEncode({
+return function(Callback) --[[ Line: 8 ]]
+	-- upvalues: UrlBuilder (copy), HttpService (copy)
+	return Callback(UrlBuilder.fromString("auth:/v1/logoutfromallsessionsandreauthenticate")(), "POST", {
+		postBody = HttpService:JSONEncode({
 			SecureAuthenticationIntent = {
 				clientPublicKey = "",
 				clientEpochTimestamp = "",

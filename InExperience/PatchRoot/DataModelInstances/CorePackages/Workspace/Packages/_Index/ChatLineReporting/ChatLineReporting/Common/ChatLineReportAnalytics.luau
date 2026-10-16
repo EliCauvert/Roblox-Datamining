@@ -1,30 +1,29 @@
-﻿local chatLineReporting = script:FindFirstAncestor("ChatLineReporting")
-local eventIngestService = game:GetService("EventIngestService")
-local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
-local parent = chatLineReporting.Parent
-local eventIngest = require(parent.Analytics).AnalyticsReporters.EventIngest
-local var1 = require(parent.Analytics).Analytics.new(rbxAnalyticsService)
-local cryoModule = require(parent.Cryo)
-local _ = require(chatLineReporting.Common.Types)
-local t = {
+﻿local ChatLineReporting = script:FindFirstAncestor("ChatLineReporting")
+local EventIngestService = game:GetService("EventIngestService")
+local Parent = ChatLineReporting.Parent
+local EventIngest = require(Parent.Analytics).AnalyticsReporters.EventIngest
+local NewResult = require(Parent.Analytics).Analytics.new((game:GetService("RbxAnalyticsService")))
+local CryoModule = require(Parent.Cryo)
+local _ = require(ChatLineReporting.Common.Types)
+local config = {
 	ReportTimeSpent = game:DefineFastString("ChatLineReportingTimeSpentStat", "TimeSpent"),
 	SubmittedAbuseType = game:DefineFastString("ChatLineReportingSubmittedAbuseTypeStat", "SubmittedAbuseType")
 }
 
-function submitAnalytics(p1, p2, p3)
-	-- upvalues: eventIngest (ref), eventIngestService (ref), var1 (ref), cryoModule (ref), t (ref)
-	local var2 = eventIngest.new(eventIngestService)
-	local diag = var1.Diag
-	local floored = math.floor(workspace:GetServerTimeNow() * 1000 - p1.accumulated_time_ms)
-	local var3 = cryoModule.Dictionary.join(p1, {
-		accumulated_time_ms = floored,
-		interaction_type = p2,
-		mute_button_clicked = p3
+function submitAnalytics(p1, Interaction_type, Mute_button_clicked) --[[ Line: 17 ]]
+	-- upvalues: EventIngest (copy), EventIngestService (copy), NewResult (copy), CryoModule (copy), config (copy)
+	local NewEventIngest = EventIngest.new(EventIngestService)
+	local Diag = NewResult.Diag
+	local Floored = math.floor(workspace:GetServerTimeNow() * 1000 - p1.accumulated_time_ms)
+	local JoinResult = CryoModule.Dictionary.join(p1, {
+		accumulated_time_ms = Floored,
+		interaction_type = Interaction_type,
+		mute_button_clicked = Mute_button_clicked
 	})
-	local text = p1.context .. "_" .. t.SubmittedAbuseType .. "_" .. p0.reason_selection
-	diag:reportStats(p1.context .. "_" .. t.ReportTimeSpent, floored)
-	diag:reportCounter(text, 1)
-	var2:sendEventDeferred(p1.context, p1.event_type, var3)
+	local Text = p1.context .. "_" .. config.SubmittedAbuseType .. "_" .. p1.reason_selection
+	Diag:reportStats(p1.context .. "_" .. config.ReportTimeSpent, Floored)
+	Diag:reportCounter(Text, 1)
+	NewEventIngest:sendEventDeferred(p1.context, p1.event_type, JoinResult)
 end
 
 return submitAnalytics

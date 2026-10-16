@@ -1,88 +1,105 @@
-﻿local tiltLoadingScreen = script:FindFirstAncestor("TiltLoadingScreen")
-local parent = tiltLoadingScreen.Parent.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local view = foundationModule.View
-local image = foundationModule.Image
-local skeleton = foundationModule.Skeleton
-local useTokens = foundationModule.Hooks.useTokens
-local TILT_DEGREES = require(tiltLoadingScreen.Constants).KEYART.TILT_DEGREES
-local _ = require(tiltLoadingScreen.Types)
-local t = {
-	rotation = reactModule.createBinding(TILT_DEGREES),
-	sizeScale = reactModule.createBinding(1),
-	coverTransparency = reactModule.createBinding(1)
+﻿local TiltLoadingScreen = script:FindFirstAncestor("TiltLoadingScreen")
+local Parent = TiltLoadingScreen.Parent.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local Image = FoundationModule.Image
+local Skeleton = FoundationModule.Skeleton
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local FFlagLoadingScreenMilestones = require(Parent.SharedFlags).FFlagLoadingScreenMilestones
+local TILTDEGREES = require(TiltLoadingScreen.Constants).KEYART.TILT_DEGREES
+local _ = require(TiltLoadingScreen.Types)
+local config = {
+	rotation = ReactModule.createBinding(TILTDEGREES),
+	sizeScale = ReactModule.createBinding(1),
+	coverTransparency = ReactModule.createBinding(1)
 }
-local t_1 = {
-	rotation = reactModule.createBinding(-TILT_DEGREES),
-	sizeScale = reactModule.createBinding(1),
-	groupTransparency = reactModule.createBinding(0)
+local config1 = {
+	rotation = ReactModule.createBinding(-TILTDEGREES),
+	sizeScale = ReactModule.createBinding(1),
+	groupTransparency = ReactModule.createBinding(0)
 }
 
-return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), t (ref), t_1 (ref), TILT_DEGREES (ref), view (ref), skeleton (ref), image (ref)
-	local var1 = useTokens()
-	local var2, var3 = reactModule.useState(false)
-	local keyart = p1.keyart or t
-	local frame = p1.frame or t_1
-	local var4 = var1.Size.Size_2400 * 2
-	local var5 = var4 / (math.cos(math.rad(TILT_DEGREES)) + math.sin(math.rad(TILT_DEGREES)))
+return ReactModule.memo(function(p1) --[[ Line: 30 | Named "TiltKeyart" ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), config (copy), config1 (copy), TILTDEGREES (copy), FFlagLoadingScreenMilestones (copy), View (copy), Skeleton (copy), Image (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local Keyart = p1.keyart or config
+	local Frame = p1.frame or config1
+	local ScaledSize = UseTokensResult.Size.Size_2400 * 2
+	local ScaledSizeRatio = ScaledSize / (math.cos((math.rad(TILTDEGREES))) + math.sin((math.rad(TILTDEGREES))))
+	local UseResult = ReactModule.useCallback(function(AssetFetchStatus) --[[ Line: 39 ]]
+		-- upvalues: UseStateResult2 (copy)
+		if AssetFetchStatus == Enum.AssetFetchStatus.Success then
+			UseStateResult2(true)
+		end
+	end, {})
 	
-	return reactModule.createElement(view, {
+	if FFlagLoadingScreenMilestones then
+		ReactModule.useEffect(function() --[[ Line: 46 ]]
+			-- upvalues: p1 (copy), UseStateResult (copy)
+			local OnThumbnailLoadedFunction: (any) -> () = p1.onThumbnailLoaded
+			
+			if not OnThumbnailLoadedFunction then return end
+			if UseStateResult and p1.thumbnailUrl ~= "" then
+				OnThumbnailLoadedFunction(p1.thumbnailUrl)
+			end
+			return function() --[[ Line: 54 ]]
+				-- upvalues: OnThumbnailLoadedFunction (copy)
+				OnThumbnailLoadedFunction(nil)
+			end
+		end, { UseStateResult, p1.thumbnailUrl, p1.onThumbnailLoaded })
+	end
+	return ReactModule.createElement(View, {
 		testId = "tilt-keyart",
-		Size = UDim2.fromOffset(var4, var4)
+		Size = UDim2.fromOffset(ScaledSize, ScaledSize)
 	}, {
-		Square = reactModule.createElement(view, {
+		Square = ReactModule.createElement(View, {
 			tag = "position-center-center anchor-center-center stroke-standard stroke-system-neutral",
 			testId = "tilt-keyart-frame",
 			ZIndex = 1,
-			Size = frame.sizeScale:map(function(p2)
-				-- upvalues: var5 (ref)
-				return UDim2.fromOffset(var5 * p2, var5 * p2)
+			Size = Frame.sizeScale:map(function(p2): UDim2 --[[ Line: 67 ]]
+				-- upvalues: ScaledSizeRatio (copy)
+				return UDim2.fromOffset(ScaledSizeRatio * p2, ScaledSizeRatio * p2)
 			end),
-			Rotation = frame.rotation,
-			GroupTransparency = frame.groupTransparency,
-			Visible = frame.groupTransparency:map(function(p2)
+			Rotation = Frame.rotation,
+			GroupTransparency = Frame.groupTransparency,
+			Visible = Frame.groupTransparency:map(function(p2: number): boolean --[[ Line: 72 ]]
 				return p2 < 1
 			end)
 		}),
-		Keyart = reactModule.createElement(view, {
+		Keyart = ReactModule.createElement(View, {
 			tag = "position-center-center anchor-center-center",
 			testId = "tilt-keyart-card",
 			ZIndex = 2,
-			Size = keyart.sizeScale:map(function(p2)
-				-- upvalues: var5 (ref)
-				return UDim2.fromOffset(var5 * p2, var5 * p2)
+			Size = Keyart.sizeScale:map(function(p2): UDim2 --[[ Line: 80 ]]
+				-- upvalues: ScaledSizeRatio (copy)
+				return UDim2.fromOffset(ScaledSizeRatio * p2, ScaledSizeRatio * p2)
 			end),
-			Rotation = keyart.rotation
+			Rotation = Keyart.rotation
 		}, {
-			ThumbnailSkeleton = if not var2 then reactModule.createElement(skeleton, {
+			ThumbnailSkeleton = if UseStateResult then nil else ReactModule.createElement(Skeleton, {
 				tag = "size-full",
 				ZIndex = 1,
 				testId = "tilt-keyart-skeleton"
-			}) else nil,
-			Thumbnail = if p1.thumbnailUrl ~= "" then nil else reactModule.createElement(image, {
+			}),
+			Thumbnail = if p1.thumbnailUrl == "" then nil else ReactModule.createElement(Image, {
 				tag = "size-full radius-small",
 				ZIndex = 2,
 				testId = "tilt-keyart-thumbnail",
 				Image = p1.thumbnailUrl,
 				ScaleType = Enum.ScaleType.Crop,
-				ImageTransparency = if var2 then 0 else 1,
-				onLoaded = reactModule.useCallback(function(p2)
-					-- upvalues: var3 (ref)
-					if p2 == Enum.AssetFetchStatus.Success then
-						var3(true)
-					end
-				end, {})
+				ImageTransparency = if UseStateResult then 0 else 1,
+				onLoaded = UseResult
 			}),
-			RevealCover = reactModule.createElement(view, {
+			RevealCover = ReactModule.createElement(View, {
 				tag = "size-full",
 				ZIndex = 3,
-				backgroundStyle = keyart.coverTransparency:map(function(p2)
-					-- upvalues: var1 (ref)
+				backgroundStyle = Keyart.coverTransparency:map(function(Transparency) --[[ Line: 106 ]]
+					-- upvalues: UseTokensResult (copy)
 					return {
-						Color3 = var1.Color.Extended.Black.Black_100.Color3,
-						Transparency = p2
+						Color3 = UseTokensResult.Color.Extended.Black.Black_100.Color3,
+						Transparency = Transparency
 					}
 				end)
 			})

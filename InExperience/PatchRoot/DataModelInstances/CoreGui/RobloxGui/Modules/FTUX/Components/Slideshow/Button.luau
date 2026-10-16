@@ -1,40 +1,40 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local reactModule = require(corePackagesService.Packages.React)
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local button = UIBloxModule.App.Button.Button
-local buttonType = UIBloxModule.App.Button.Enum.ButtonType
-local useStyle = UIBloxModule.Core.Style.useStyle
-local parent = script.Parent.Parent.Parent
-local FTUXSlideshowDataModule = require(parent.Resources.FTUXSlideshowData)
-local withLocalization = require(corePackagesService.Workspace.Packages.Localization).withLocalization
-local _ = require(parent.Enums.PlatformEnum)
-local buttonEnumModule = require(parent.Enums.ButtonEnum)
+﻿local CorePackages = game:GetService("CorePackages")
+local ReactModule = require(CorePackages.Packages.React)
+local UIBloxModule = require(CorePackages.Packages.UIBlox)
+local Button = UIBloxModule.App.Button.Button
+local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local Parent = script.Parent.Parent.Parent
+local FTUXSlideshowDataModule = require(Parent.Resources.FTUXSlideshowData)
+local WithLocalizationFunction = require(CorePackages.Workspace.Packages.Localization).withLocalization
+local _ = require(Parent.Enums.PlatformEnum)
+local ButtonEnumModule = require(Parent.Enums.ButtonEnum)
 
-return function(p1)
-	-- upvalues: useStyle (ref), FTUXSlideshowDataModule (ref), withLocalization (ref), buttonType (ref), buttonEnumModule (ref), reactModule (ref), button (ref)
-	local font = useStyle().Font
-	local increaseCurrentIndex = p1.increaseCurrentIndex
-	local button_1 = FTUXSlideshowDataModule[p1.platform][p1.currentIndex].button
+return function(p1) --[[ Line: 23 | Named "SlideshowButton" ]]
+	-- upvalues: UseStyleFunction (copy), FTUXSlideshowDataModule (copy), WithLocalizationFunction (copy), ButtonType (copy), ButtonEnumModule (copy), ReactModule (copy), Button (copy)
+	local _Font = UseStyleFunction().Font
+	local IncreaseCurrentIndex = p1.increaseCurrentIndex
+	local Button1 = FTUXSlideshowDataModule[p1.platform][p1.currentIndex].button
 	
-	return withLocalization({
+	return WithLocalizationFunction({
 		skip = "CoreScripts.VRFTUX.Action.Skip",
 		next = "CoreScripts.VRFTUX.Action.Next"
-	})(function(p2)
-		-- upvalues: buttonType (copy), button_1 (ref), buttonEnumModule (copy), reactModule (copy), button (copy), font (ref), increaseCurrentIndex (ref)
-		local secondary = buttonType.Secondary
-		local skip = p2.skip
+	})(function(p2) --[[ Line: 36 ]]
+		-- upvalues: ButtonType (upval), Button1 (copy), ButtonEnumModule (upval), ReactModule (upval), Button (upval), _Font (copy), IncreaseCurrentIndex (copy)
+		local Secondary = ButtonType.Secondary
+		local Skip = p2.skip
 		
-		if button_1 == buttonEnumModule.NextButton then
-			secondary = buttonType.PrimaryContextual
-			skip = p2.next
+		if Button1 == ButtonEnumModule.NextButton then
+			Secondary = ButtonType.PrimaryContextual
+			Skip = p2.next
 		end
-		return reactModule.createElement(button, {
+		return ReactModule.createElement(Button, {
 			layoutOrder = 4,
-			buttonType = secondary,
-			text = skip,
-			fontStyle = font.Body,
+			buttonType = Secondary,
+			text = Skip,
+			fontStyle = _Font.Body,
 			size = UDim2.new(1, 0, 0.6, 0),
-			onActivated = increaseCurrentIndex
+			onActivated = IncreaseCurrentIndex
 		})
 	end)
 end

@@ -1,80 +1,144 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local reactModule = require(parent.React)
-local useOpenWebView = require(parent.WebViewUtils).useOpenWebView
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local fFlagBuildAnalyticsCreatorHubWindowFixModule = require(buildExperience.Flags.FFlagBuildAnalyticsCreatorHubWindowFix)
-local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local analyticsKeysModule = require(buildExperience.Analytics.AnalyticsKeys)
-local analyticsMetricModule = require(buildExperience.Analytics.AnalyticsMetric)
-local _ = require(buildExperience.Analytics.AnalyticsWindow)
-local _ = require(parent.DataHydration.ExperienceAnalytics)
-local gameConfigurationActionsModule = require(buildExperience.utils.GameConfigurationActions)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local ReactModule = require(Parent.React)
+local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
+local ResponsiveModule = require(Parent.Responsive)
+local UseOpenWebViewFunction = require(Parent.WebViewUtils).useOpenWebView
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local FFlagBuildAnalyticsCreatorHubWindowFixModule = require(BuildExperience.Flags.FFlagBuildAnalyticsCreatorHubWindowFix)
+local FFlagBuildAnalyticsGoalsModule = require(BuildExperience.Flags.FFlagBuildAnalyticsGoals)
+local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
+local AnalyticsKeysModule = require(BuildExperience.Analytics.AnalyticsKeys)
+local AnalyticsMetricModule = require(BuildExperience.Analytics.AnalyticsMetric)
+local _ = require(BuildExperience.Analytics.AnalyticsWindow)
+local _ = require(Parent.DataHydration.ExperienceAnalytics)
+local GameConfigurationActionsModule = require(BuildExperience.utils.GameConfigurationActions)
 local _ = require(script.Parent.MetricDetailSheetView)
+local UseClosableFocusRootModule = require(BuildExperience.utils.useClosableFocusRoot)
 
-return function(p1)
-	-- upvalues: analyticsMetricModule (ref), useOpenWebView (ref), analyticsKeysModule (ref), useLocalization (ref), reactModule (ref), localizationStringsModule (ref), fFlagBuildAnalyticsCreatorHubWindowFixModule (ref), gameConfigurationActionsModule (ref)
-	local metricId = analyticsMetricModule.MetricById[p1.metricId] or analyticsMetricModule.DailyActiveUsers
-	local var1 = useOpenWebView()
-	local t = {
-		analyze = analyticsKeysModule.ANALYTICS_SHEET_ANALYZE,
-		viewInOverview = analyticsKeysModule.ANALYTICS_SHEET_VIEW_IN_OVERVIEW,
-		title = metricId.titleKey,
-		summary = metricId.summaryKey,
-		description = metricId.descriptionKey,
-		analyzeName = metricId.analyzeNameKey
-	}
-	local var2 = useLocalization(t)
+return function(p1) --[[ Line: 44 | Named "useMetricDetailSheetViewModel" ]]
+	-- upvalues: FFlagBuildAnalyticsGoalsModule (copy), UseClosableFocusRootModule (copy), FocusNavigationUtilsModule (copy), ResponsiveModule (copy), AnalyticsMetricModule (copy), ReactModule (copy), UseOpenWebViewFunction (copy), AnalyticsKeysModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagBuildAnalyticsCreatorHubWindowFixModule (copy), GameConfigurationActionsModule (copy)
+	local FocusRootRef = nil
+	local IsNotUsePreferredInputResultMatch = true
 	
-	local function _(p2)
-		-- upvalues: t (ref), var2 (ref)
-		return if t[p2] == nil then "" else var2[p2]
+	if FFlagBuildAnalyticsGoalsModule then
+		FocusRootRef = UseClosableFocusRootModule({
+			isOpen = true,
+			surfaceIdentifier = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum.PopUp,
+			onClose = p1.onClose
+		})
+		IsNotUsePreferredInputResultMatch = ResponsiveModule.usePreferredInput() ~= ResponsiveModule.Input.Directional
+	end
+	local DailyActiveUsers = if p1.metricId == nil then AnalyticsMetricModule.DailyActiveUsers else AnalyticsMetricModule.MetricById[p1.metricId] or AnalyticsMetricModule.DailyActiveUsers
+	local LatestAvailableTime = p1.latestAvailableTime
+	local Navigation = nil
+	
+	if FFlagBuildAnalyticsGoalsModule then
+		local UseStateResult, UseStateResult2 = ReactModule.useState(1)
+		local Metrics = p1.metrics
+		local CountMetrics: number = if Metrics == nil then 0 else #Metrics
+		local ClampedValue = math.clamp(UseStateResult, 1, (math.max(1, CountMetrics)))
+		ReactModule.useEffect(function() --[[ Line: 65 ]]
+			-- upvalues: UseStateResult2 (copy)
+			UseStateResult2(1)
+		end, { Metrics })
+		
+		if Metrics ~= nil and CountMetrics > 0 then
+			DailyActiveUsers = Metrics[ClampedValue]
+			LatestAvailableTime = if p1.latestByMetric == nil then nil else p1.latestByMetric[DailyActiveUsers.id]
+		end
+		if CountMetrics > 1 then
+			Navigation = {
+				index = ClampedValue,
+				count = CountMetrics,
+				onPrevious = function() --[[ Line: 76 ]]
+					-- upvalues: UseStateResult2 (copy), ClampedValue (copy)
+					UseStateResult2((math.max(1, ClampedValue - 1)))
+				end,
+				onNext = function() --[[ Line: 79 ]]
+					-- upvalues: UseStateResult2 (copy), CountMetrics (copy), ClampedValue (copy)
+					UseStateResult2((math.min(CountMetrics, ClampedValue + 1)))
+				end
+			}
+		end
+	end
+	local UseOpenWebViewResult = UseOpenWebViewFunction()
+	local config = {
+		analyze = if FFlagBuildAnalyticsGoalsModule then AnalyticsKeysModule.ANALYTICS_SHEET_ASK_ABOUT_THIS else AnalyticsKeysModule.ANALYTICS_SHEET_ANALYZE,
+		viewInOverview = if FFlagBuildAnalyticsGoalsModule then AnalyticsKeysModule.ANALYTICS_SHEET_VIEW_MORE_STATS else AnalyticsKeysModule.ANALYTICS_SHEET_VIEW_IN_OVERVIEW,
+		title = FFlagBuildAnalyticsGoalsModule and p1.titleKey or DailyActiveUsers.titleKey,
+		summary = DailyActiveUsers.summaryKey,
+		description = DailyActiveUsers.descriptionKey,
+		analyzeName = DailyActiveUsers.analyzeNameKey
+	}
+	local ImprovementKey = if FFlagBuildAnalyticsGoalsModule then DailyActiveUsers.improvementKey else nil
+	
+	if ImprovementKey ~= nil then
+		config.howToImprove = AnalyticsKeysModule.ANALYTICS_HOW_TO_IMPROVE
+		config.improvement = ImprovementKey
+	end
+	local UseLocalizationResult = UseLocalizationFunction(config)
+	
+	local function _(p2) --[[ Line: 108 | Named "copy" ]]
+		-- upvalues: config (copy), UseLocalizationResult (copy)
+		return if config[p2] == nil then "" else UseLocalizationResult[p2]
 	end
 	
-	local onClose = p1.onClose
-	local var3 = if t.analyzeName == nil then "" else var2.analyzeName
-	local analyzePrompt = useLocalization({
+	local OnCloseFunction = p1.onClose
+	local AnalyzeName = if config.analyzeName == nil then "" else UseLocalizationResult.analyzeName
+	local AnalyzePrompt = UseLocalizationFunction({
 		analyzePrompt = {
-			analyticsKeysModule.ANALYTICS_ANALYZE_CHAT_PROMPT,
-			analyzeName = var3,
+			AnalyticsKeysModule.ANALYTICS_ANALYZE_CHAT_PROMPT,
+			analyzeName = AnalyzeName,
 			days = tostring(p1.window.days)
 		}
 	}).analyzePrompt
-	local onOpenChat = p1.onOpenChat
-	local var4 = reactModule.useCallback(function()
-		-- upvalues: onOpenChat (ref), var3 (ref), analyzePrompt (ref), onClose (ref)
-		if onOpenChat ~= nil and var3 ~= "" then
-			onOpenChat(analyzePrompt)
+	local OnOpenChatFunction = p1.onOpenChat
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 131 ]]
+		-- upvalues: OnOpenChatFunction (copy), AnalyzeName (copy), AnalyzePrompt (copy), OnCloseFunction (copy)
+		if OnOpenChatFunction ~= nil and AnalyzeName ~= "" then
+			OnOpenChatFunction(AnalyzePrompt)
 		end
-		onClose()
-	end, { onOpenChat, analyzePrompt, var3, onClose })
-	local creatorHub = useLocalization({
-		creatorHub = localizationStringsModule.GAME_CONFIGURATION_CREATOR_HUB
+		OnCloseFunction()
+	end, {
+		OnOpenChatFunction,
+		AnalyzePrompt,
+		AnalyzeName,
+		OnCloseFunction
+	})
+	local CreatorHub = UseLocalizationFunction({
+		creatorHub = LocalizationStringsModule.GAME_CONFIGURATION_CREATOR_HUB
 	}).creatorHub
-	local overviewPath = metricId.overviewPath
-	local universeId = p1.universeId
-	local var5 = if fFlagBuildAnalyticsCreatorHubWindowFixModule then p1.window.creatorHubRangeType else nil
+	local OverviewPath = DailyActiveUsers.overviewPath
+	local UniverseId = p1.universeId
+	local CreatorHubRangeType = if FFlagBuildAnalyticsCreatorHubWindowFixModule then p1.window.creatorHubRangeType else nil
 	
 	return {
-		metric = metricId,
+		focusRootRef = FocusRootRef,
+		showCloseButton = IsNotUsePreferredInputResultMatch,
+		metric = DailyActiveUsers,
 		universeId = p1.universeId,
 		window = p1.window,
-		latestAvailableTime = p1.latestAvailableTime,
+		latestAvailableTime = LatestAvailableTime,
+		navigation = Navigation,
 		metadataStatus = p1.metadataStatus,
-		titleText = if t.title == nil then "" else var2.title,
-		summaryText = if t.summary == nil then "" else var2.summary,
-		descriptionText = if t.description == nil then "" else var2.description,
-		analyzeText = if t.analyze == nil then "" else var2.analyze,
-		viewInOverviewText = if t.viewInOverview == nil then "" else var2.viewInOverview,
-		onAnalyze = var4,
-		onViewInOverview = reactModule.useCallback(function()
-			-- upvalues: overviewPath (ref), var1 (ref), gameConfigurationActionsModule (copy), universeId (ref), var5 (ref), creatorHub (ref), onClose (ref)
-			if overviewPath ~= nil then
-				var1(gameConfigurationActionsModule.getCreatorHubAnalyticsUrl(universeId, overviewPath, var5), creatorHub)
+		titleText = if config.title == nil then "" else UseLocalizationResult.title,
+		summaryText = if config.summary == nil then "" else UseLocalizationResult.summary,
+		descriptionText = if config.description == nil then "" else UseLocalizationResult.description,
+		improvementTitleText = if config.howToImprove == nil then "" else UseLocalizationResult.howToImprove,
+		improvementText = if config.improvement == nil then "" else UseLocalizationResult.improvement,
+		analyzeText = if config.analyze == nil then "" else UseLocalizationResult.analyze,
+		viewInOverviewText = if config.viewInOverview == nil then "" else UseLocalizationResult.viewInOverview,
+		onAnalyze = UseResult,
+		onViewInOverview = ReactModule.useCallback(function() --[[ Line: 147 ]]
+			-- upvalues: OverviewPath (copy), UseOpenWebViewResult (copy), GameConfigurationActionsModule (upval), UniverseId (copy), CreatorHubRangeType (copy), CreatorHub (copy), OnCloseFunction (copy)
+			if OverviewPath ~= nil then
+				UseOpenWebViewResult(GameConfigurationActionsModule.getCreatorHubAnalyticsUrl(UniverseId, OverviewPath, CreatorHubRangeType), CreatorHub)
 			end
-			onClose()
+			OnCloseFunction()
 		end, {
-			var1, overviewPath, universeId, var5, creatorHub, onClose
+			UseOpenWebViewResult, OverviewPath, UniverseId, CreatorHubRangeType,
+			CreatorHub, OnCloseFunction
 		}),
 		onClose = p1.onClose,
 		testId = p1.testId

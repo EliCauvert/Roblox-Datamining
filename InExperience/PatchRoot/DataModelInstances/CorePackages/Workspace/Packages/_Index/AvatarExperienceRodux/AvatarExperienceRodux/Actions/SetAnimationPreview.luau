@@ -1,10 +1,10 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceRodux").Parent
-local argCheckModule = require(parent.ArgCheck)
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceRodux").Parent
+local ArgCheckModule = require(Parent.ArgCheck)
 
-return require(parent.Rodux).makeActionCreator(script.Name, function(p1, p2)
-	-- upvalues: argCheckModule (ref)
-	argCheckModule.isType(p1, "string", "SetAnimationPreview: assetId")
-	argCheckModule.isType(p2, "string", "SetAnimationPreview: assetTypeIdString")
+return require(Parent.Rodux).makeActionCreator(script.Name, function(AssetId, AssetTypeIdString) --[[ Line: 12 ]]
+	-- upvalues: ArgCheckModule (copy)
+	ArgCheckModule.isType(AssetId, "string", "SetAnimationPreview: assetId")
+	ArgCheckModule.isType(AssetTypeIdString, "string", "SetAnimationPreview: assetTypeIdString")
 	
-	return { assetId = p1, assetTypeIdString = p2 }
+	return { assetId = AssetId, assetTypeIdString = AssetTypeIdString }
 end)

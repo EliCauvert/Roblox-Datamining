@@ -1,23 +1,20 @@
-﻿local avatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
-local parent = avatarExperienceProfilePictureEditor.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local localizationModule = require(parent.Localization)
-local UIBloxModule = require(parent.UIBlox)
-local view = foundationModule.View
-local useLocalization = localizationModule.Hooks.useLocalization
-local emptyState = UIBloxModule.App.Indicator.EmptyState
-local textKeysModule = require(avatarExperienceProfilePictureEditor.Common.TextKeys)
+﻿local AvatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
+local Parent = AvatarExperienceProfilePictureEditor.Parent
+local ReactModule = require(Parent.React)
+local View = require(Parent.Foundation).View
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local EmptyState = require(Parent.UIBlox).App.Indicator.EmptyState
+local TextKeysModule = require(AvatarExperienceProfilePictureEditor.Common.TextKeys)
 
-return function(value)
-	-- upvalues: useLocalization (ref), textKeysModule (ref), reactModule (ref), view (ref), emptyState (ref)
-	return reactModule.createElement(view, {
+return function(p1) --[[ Line: 24 | Named "AssetPickerErrorBody" ]]
+	-- upvalues: UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), View (copy), EmptyState (copy)
+	return ReactModule.createElement(View, {
 		tag = "size-full-0 auto-y padding-bottom-xxlarge",
-		LayoutOrder = value.layoutOrder
+		LayoutOrder = p1.layoutOrder
 	}, {
-		EmptyState = reactModule.createElement(emptyState, {
-			text = useLocalization({ failedMessage = textKeysModule.SomethingWentWrong }).failedMessage,
-			onActivated = value.onRetry,
+		EmptyState = ReactModule.createElement(EmptyState, {
+			text = UseLocalizationFunction({ failedMessage = TextKeysModule.SomethingWentWrong }).failedMessage,
+			onActivated = p1.onRetry,
 			size = UDim2.new(1, 0, 0, 187),
 			position = UDim2.fromOffset(0, 0),
 			anchorPoint = Vector2.new(0, 0)

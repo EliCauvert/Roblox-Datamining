@@ -1,217 +1,214 @@
-﻿local runService = game:GetService("RunService")
-local playersService = game:GetService("Players")
+﻿local RunService = game:GetService("RunService")
+local Players = game:GetService("Players")
 local _ = game:GetService("CorePackages")
-while not playersService.LocalPlayer do
+while not Players.LocalPlayer do
 	wait()
 end
-local localPlayer = playersService.LocalPlayer
-local var1 = nil
-local var2 = nil
-local var3 = nil
-local robloxGui = game:GetService("CoreGui").RobloxGui
-local var4 = require(robloxGui.Modules.TenFootInterface):IsEnabled()
-local var5 = if var4 then 100 else 70
+local LocalPlayer = Players.LocalPlayer
+local v1 = nil
+local HeartbeatConnection = nil
+local ChangedConnection = nil
+local RobloxGui = game:GetService("CoreGui").RobloxGui
+local IsEnabled = require(RobloxGui.Modules.TenFootInterface):IsEnabled()
+local v2: number = if IsEnabled then 100 else 70
 
-local function _(p1, p2, p3, p4, p5)
-	local imageLabel = Instance.new("ImageLabel")
-	imageLabel.Name = p1
-	imageLabel.Size = p2
-	imageLabel.Position = p3
-	imageLabel.BackgroundTransparency = 1
-	imageLabel.Image = p4
-	imageLabel.Parent = p5
+local function _(Name, Size, Position, Image, Parent) --[[ Line: 34 | Named "createImageLabel" ]]
+	local Image1 = Instance.new("ImageLabel")
+	Image1.Name = Name
+	Image1.Size = Size
+	Image1.Position = Position
+	Image1.BackgroundTransparency = 1
+	Image1.Image = Image
+	Image1.Parent = Parent
 	
-	return imageLabel
+	return Image1
 end
 
-local function createTextLabel(p1, p2, p3, p4)
-	-- upvalues: var4 (ref)
-	local textLabel = Instance.new("TextLabel")
-	textLabel.Name = p1
-	textLabel.Size = UDim2.new(1, -4, 0, if var4 then 50 else 20)
-	textLabel.Position = UDim2.new(0, 2, 0, if var4 then -50 else -20)
-	textLabel.BackgroundTransparency = 1
-	textLabel.TextXAlignment = p2
-	textLabel.Font = Enum.Font.SourceSans
-	textLabel.FontSize = if var4 then Enum.FontSize.Size48 else Enum.FontSize.Size18
-	textLabel.TextColor3 = Color3.new(1, 1, 1)
-	textLabel.TextStrokeTransparency = 0.5
-	textLabel.TextStrokeColor3 = Color3.new(0.192156862745, 0.192156862745, 0.192156862745)
-	textLabel.Text = p3
-	textLabel.Parent = p4
+local function createTextLabel(Name, TextXAlignment, Text, Frame) --[[ Line: 46 ]]
+	-- upvalues: IsEnabled (copy)
+	local Label = Instance.new("TextLabel")
+	Label.Name = Name
+	Label.Size = UDim2.new(1, -4, 0, if IsEnabled then 50 else 20)
+	Label.Position = UDim2.new(0, 2, 0, if IsEnabled then -50 else -20)
+	Label.BackgroundTransparency = 1
+	Label.TextXAlignment = TextXAlignment
+	Label.Font = Enum.Font.SourceSans
+	Label.FontSize = IsEnabled and Enum.FontSize.Size48 or Enum.FontSize.Size18
+	Label.TextColor3 = Color3.new(1, 1, 1)
+	Label.TextStrokeTransparency = 0.5
+	Label.TextStrokeColor3 = Color3.new(0.19215686274509805, 0.19215686274509805, 0.19215686274509805)
+	Label.Text = Text
+	Label.Parent = Frame
 	
-	return textLabel
+	return Label
 end
 
-local vehicleHudFrame = Instance.new("Frame")
-vehicleHudFrame.Name = "VehicleHudFrame"
-vehicleHudFrame.Size = UDim2.new(0, if var4 then 316 else 158, 0, if var4 then 50 else 14)
-vehicleHudFrame.Position = UDim2.new(0.5, -(vehicleHudFrame.Size.X.Offset / 2), 1, (-var5) - vehicleHudFrame.Size.Y.Offset)
-vehicleHudFrame.BackgroundTransparency = 1
-vehicleHudFrame.Visible = false
-vehicleHudFrame.Parent = robloxGui
-local speedBarClippingFrame = Instance.new("Frame")
-speedBarClippingFrame.Name = "SpeedBarClippingFrame"
-speedBarClippingFrame.Size = UDim2.new(0, 0, 0, if var4 then 24 else 4)
-speedBarClippingFrame.Position = UDim2.new(0.5, if var4 then -142 else -71, 0.5, if var4 then -13 else -2)
-speedBarClippingFrame.BackgroundTransparency = 1
-speedBarClippingFrame.ClipsDescendants = true
-speedBarClippingFrame.ZIndex = 2
-speedBarClippingFrame.Parent = vehicleHudFrame
-local uDim2 = UDim2.new(1, 0, 1, 0)
-local uDim2_1 = UDim2.new(0, 0, 0, 1)
-local hudBG = Instance.new("ImageLabel")
-hudBG.Name = "HudBG"
-hudBG.Size = uDim2
-hudBG.Position = uDim2_1
-hudBG.BackgroundTransparency = 1
-hudBG.Image = "rbxasset://textures/ui/Vehicle/SpeedBarBKG.png"
-hudBG.Parent = vehicleHudFrame
-local uDim2_2 = UDim2.new(0, if var4 then 284 else 142, 0, if var4 then 24 else 4)
-local uDim2_3 = UDim2.new(0.5, if var4 then -142 else -71, 0.5, if var4 then -13 else -2)
-local speedBG = Instance.new("ImageLabel")
-speedBG.Name = "SpeedBG"
-speedBG.Size = uDim2_2
-speedBG.Position = uDim2_3
-speedBG.BackgroundTransparency = 1
-speedBG.Image = "rbxasset://textures/ui/Vehicle/SpeedBarEmpty.png"
-speedBG.Parent = vehicleHudFrame
-local uDim2_4 = UDim2.new(0, if var4 then 284 else 142, 1, 0)
-local uDim2_5 = UDim2.new(0, 0, 0, 0)
-local speedBarImage = Instance.new("ImageLabel")
-speedBarImage.Name = "SpeedBarImage"
-speedBarImage.Size = uDim2_4
-speedBarImage.Position = uDim2_5
-speedBarImage.BackgroundTransparency = 1
-speedBarImage.Image = "rbxasset://textures/ui/Vehicle/SpeedBar.png"
-speedBarImage.Parent = speedBarClippingFrame
-createTextLabel("SpeedLabel", Enum.TextXAlignment.Left, "Speed", vehicleHudFrame)
-local var6 = createTextLabel("SpeedText", Enum.TextXAlignment.Right, "0", vehicleHudFrame)
+local VehicleHudFrame = Instance.new("Frame")
+VehicleHudFrame.Name = "VehicleHudFrame"
+VehicleHudFrame.Size = UDim2.new(0, if IsEnabled then 316 else 158, 0, if IsEnabled then 50 else 14)
+VehicleHudFrame.Position = UDim2.new(0.5, -(VehicleHudFrame.Size.X.Offset / 2), 1, -v2 - VehicleHudFrame.Size.Y.Offset)
+VehicleHudFrame.BackgroundTransparency = 1
+VehicleHudFrame.Visible = false
+VehicleHudFrame.Parent = RobloxGui
+local SpeedBarClippingFrame = Instance.new("Frame")
+SpeedBarClippingFrame.Name = "SpeedBarClippingFrame"
+SpeedBarClippingFrame.Size = UDim2.new(0, 0, 0, if IsEnabled then 24 else 4)
+SpeedBarClippingFrame.Position = UDim2.new(0.5, if IsEnabled then -142 else -71, 0.5, if IsEnabled then -13 else -2)
+SpeedBarClippingFrame.BackgroundTransparency = 1
+SpeedBarClippingFrame.ClipsDescendants = true
+SpeedBarClippingFrame.ZIndex = 2
+SpeedBarClippingFrame.Parent = VehicleHudFrame
+local _UDim2 = UDim2.new(0, 0, 0, 1)
+local HudBG = Instance.new("ImageLabel")
+HudBG.Name = "HudBG"
+HudBG.Size = UDim2.new(1, 0, 1, 0)
+HudBG.Position = _UDim2
+HudBG.BackgroundTransparency = 1
+HudBG.Image = "rbxasset://textures/ui/Vehicle/SpeedBarBKG.png"
+HudBG.Parent = VehicleHudFrame
+local _UDim21 = UDim2.new(0.5, if IsEnabled then -142 else -71, 0.5, if IsEnabled then -13 else -2)
+local SpeedBG = Instance.new("ImageLabel")
+SpeedBG.Name = "SpeedBG"
+SpeedBG.Size = UDim2.new(0, if IsEnabled then 284 else 142, 0, if IsEnabled then 24 else 4)
+SpeedBG.Position = _UDim21
+SpeedBG.BackgroundTransparency = 1
+SpeedBG.Image = "rbxasset://textures/ui/Vehicle/SpeedBarEmpty.png"
+SpeedBG.Parent = VehicleHudFrame
+local SpeedBarImage = Instance.new("ImageLabel")
+SpeedBarImage.Name = "SpeedBarImage"
+SpeedBarImage.Size = UDim2.new(0, if IsEnabled then 284 else 142, 1, 0)
+SpeedBarImage.Position = UDim2.new(0, 0, 0, 0)
+SpeedBarImage.BackgroundTransparency = 1
+SpeedBarImage.Image = "rbxasset://textures/ui/Vehicle/SpeedBar.png"
+SpeedBarImage.Parent = SpeedBarClippingFrame
+createTextLabel("SpeedLabel", Enum.TextXAlignment.Left, "Speed", VehicleHudFrame)
+local SpeedText = createTextLabel("SpeedText", Enum.TextXAlignment.Right, "0", VehicleHudFrame)
 
-local _ = function()
-	-- upvalues: localPlayer (ref)
-	local character = localPlayer and localPlayer.Character
+local _ = function() --[[ Line: 89 | Named "getHumanoid" ]]
+	-- upvalues: LocalPlayer (copy)
+	local Character = LocalPlayer and LocalPlayer.Character
 	
-	if character then
-		for i, v in pairs(character:GetChildren()) do
-			if v:IsA("Humanoid") then
-				return v
+	if Character then
+		for _, Humanoid in pairs(Character:GetChildren()) do
+			if Humanoid:IsA("Humanoid") then
+				return Humanoid
 			end
 		end
 	end
 end
 
-speedBG = function()
-	-- upvalues: var1 (write), var6 (ref), speedBG (ref), speedBarClippingFrame (ref), var4 (ref)
-	if var1 then
-		local magnitude = var1.Velocity.magnitude
-		var6.Text = tostring(math.min(math.floor(magnitude), 9999))
-		speedBarClippingFrame.Size = UDim2.new(0, math.min(math.floor(magnitude / var1.MaxSpeed * speedBG.Size.X.Offset), speedBG.Size.X.Offset), 0, if var4 then 24 else 4)
+local function onHeartbeat() --[[ Line: 100 ]]
+	-- upvalues: v1 (ref), SpeedText (copy), SpeedBG (copy), SpeedBarClippingFrame (copy), IsEnabled (copy)
+	if v1 then
+		local Magnitude: number = v1.Velocity.magnitude
+		SpeedText.Text = tostring((math.min(math.floor(Magnitude), 9999)))
+		SpeedBarClippingFrame.Size = UDim2.new(0, math.min(math.floor(Magnitude / v1.MaxSpeed * SpeedBG.Size.X.Offset), SpeedBG.Size.X.Offset), 0, if IsEnabled then 24 else 4)
 	end
 end
 
-local function onVehicleSeatChanged(p1)
-	-- upvalues: vehicleHudFrame (ref)
+local function onVehicleSeatChanged(p1) --[[ Line: 110 ]]
+	-- upvalues: VehicleHudFrame (copy)
 	if p1 == "HeadsUpDisplay" then
-		vehicleHudFrame.Visible = not vehicleHudFrame.Visible
+		VehicleHudFrame.Visible = not VehicleHudFrame.Visible
 	end
 end
 
-local function onSeated(p1, p2)
-	-- upvalues: var1 (write), vehicleHudFrame (ref), var2 (write), runService (ref), speedBG (ref), var3 (write), onVehicleSeatChanged (ref)
-	if p1 then
-		if p2 and p2:IsA("VehicleSeat") then
-			var1 = p2
-			vehicleHudFrame.Visible = var1.HeadsUpDisplay
-			var2 = runService.Heartbeat:connect(speedBG)
-			var3 = var1.Changed:connect(onVehicleSeatChanged)
+local function onSeated(Active, SeatPart) --[[ Line: 116 ]]
+	-- upvalues: v1 (ref), VehicleHudFrame (copy), HeartbeatConnection (ref), RunService (copy), onHeartbeat (copy), ChangedConnection (ref), onVehicleSeatChanged (copy)
+	if not Active then
+		if v1 then
+			VehicleHudFrame.Visible = false
+			v1 = nil
 			
-			return
+			if HeartbeatConnection then
+				HeartbeatConnection:disconnect()
+				HeartbeatConnection = nil
+			end
+			if ChangedConnection then
+				ChangedConnection:disconnect()
+				ChangedConnection = nil
+			end
 		end
-	elseif var1 then
-		vehicleHudFrame.Visible = false
-		var1 = nil
-		
-		if var2 then
-			var2:disconnect()
-			var2 = nil
-		end
-		if var3 then
-			var3:disconnect()
-			var3 = nil
-		end
-	end
-end
-
-local var7 = nil
-local var8 = nil
-
-local _ = function()
-	-- upvalues: var7 (write)
-	if var7 then
-		var7:Disconnect()
-		var7 = nil
-	end
-end
-
-local _ = function()
-	-- upvalues: var8 (write)
-	if var8 then
-		var8:Disconnect()
-		var8 = nil
-	end
-end
-
-local function characterAdded(p1)
-	-- upvalues: var7 (write), var8 (write), onSeated (ref)
-	if var7 then
-		var7:Disconnect()
-		var7 = nil
-	end
-	if var8 then
-		var8:Disconnect()
-		var8 = nil
-	end
-	local humanoid = p1:FindFirstChildWhichIsA("Humanoid")
-	
-	if humanoid then
-		var7 = humanoid.Seated:connect(onSeated)
+	elseif SeatPart and SeatPart:IsA("VehicleSeat") then
+		v1 = SeatPart
+		VehicleHudFrame.Visible = v1.HeadsUpDisplay
+		HeartbeatConnection = RunService.Heartbeat:connect(onHeartbeat)
+		ChangedConnection = v1.Changed:connect(onVehicleSeatChanged)
 		
 		return
 	end
-	var8 = p1.ChildAdded:Connect(function(p2)
-		-- upvalues: var7 (copy), var8 (copy), onSeated (copy)
-		if p2:IsA("Humanoid") then
-			if var7 then
-				var7:Disconnect()
-				var7 = nil
-			end
-			if var8 then
-				var8:Disconnect()
-				var8 = nil
-			end
-			var7 = p2.Seated:connect(onSeated)
-		end
-	end)
 end
 
-if localPlayer.Character then
-	characterAdded(localPlayer.Character)
+local SeatedConnection = nil
+local ChildAddedConnection = nil
+
+local _ = function() --[[ Line: 143 | Named "disconnectSeatedConnection" ]]
+	-- upvalues: SeatedConnection (ref)
+	if SeatedConnection then
+		SeatedConnection:Disconnect()
+		SeatedConnection = nil
+	end
 end
-localPlayer.CharacterAdded:connect(function(p1)
-	-- upvalues: var1 (write), vehicleHudFrame (ref), var2 (write), var3 (write), characterAdded (ref)
-	if var1 then
-		vehicleHudFrame.Visible = false
-		var1 = nil
+
+local _ = function() --[[ Line: 150 | Named "disconnectChildAddedConnection" ]]
+	-- upvalues: ChildAddedConnection (ref)
+	if ChildAddedConnection then
+		ChildAddedConnection:Disconnect()
+		ChildAddedConnection = nil
+	end
+end
+
+local function characterAdded(Character) --[[ Line: 157 ]]
+	-- upvalues: SeatedConnection (ref), ChildAddedConnection (ref), onSeated (copy)
+	if SeatedConnection then
+		SeatedConnection:Disconnect()
+		SeatedConnection = nil
+	end
+	if ChildAddedConnection then
+		ChildAddedConnection:Disconnect()
+		ChildAddedConnection = nil
+	end
+	local Humanoid = Character:FindFirstChildWhichIsA("Humanoid")
+	
+	if Humanoid then
+		SeatedConnection = Humanoid.Seated:connect(onSeated)
 		
-		if var2 then
-			var2:disconnect()
-			var2 = nil
+		return
+	else
+		ChildAddedConnection = Character.ChildAdded:Connect(function(Child: Humanoid) --[[ Line: 167 ]]
+			-- upvalues: SeatedConnection (upval), ChildAddedConnection (upval), onSeated (upval)
+			if Child:IsA("Humanoid") then
+				if SeatedConnection then
+					SeatedConnection:Disconnect()
+					SeatedConnection = nil
+				end
+				if ChildAddedConnection then
+					ChildAddedConnection:Disconnect()
+					ChildAddedConnection = nil
+				end
+				SeatedConnection = Child.Seated:connect(onSeated)
+			end
+		end)
+	end
+end
+
+if LocalPlayer.Character then
+	characterAdded(LocalPlayer.Character)
+end
+LocalPlayer.CharacterAdded:connect(function(Character) --[[ Line: 178 ]]
+	-- upvalues: v1 (ref), VehicleHudFrame (copy), HeartbeatConnection (ref), ChangedConnection (ref), characterAdded (copy)
+	if v1 then
+		VehicleHudFrame.Visible = false
+		v1 = nil
+		
+		if HeartbeatConnection then
+			HeartbeatConnection:disconnect()
+			HeartbeatConnection = nil
 		end
-		if var3 then
-			var3:disconnect()
-			var3 = nil
+		if ChangedConnection then
+			ChangedConnection:disconnect()
+			ChangedConnection = nil
 		end
 	end
-	characterAdded(p1)
+	characterAdded(Character)
 end)

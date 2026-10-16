@@ -1,24 +1,24 @@
-﻿local parent = script:FindFirstAncestor("FriendsHydrationReact").Parent
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local signalsModule = require(parent.Signals)
-local var1 = require(parent.DataHydration).Friends.FriendsStore.get()
+﻿local Parent = script:FindFirstAncestor("FriendsHydrationReact").Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local SignalsModule = require(Parent.Signals)
+local GetResult = require(Parent.DataHydration).Friends.FriendsStore.get()
 
-return function(p1)
-	-- upvalues: reactModule (ref), var1 (ref), signalsModule (ref), signalsReactModule (ref)
-	local var2 = reactModule.useMemo(function()
-		-- upvalues: var1 (copy), p1 (ref)
-		return var1.GetOnlineFriendsByUniverseId(p1)
+return function(p1) --[[ Line: 15 | Named "useGetOnlineFriendsByUniverseId" ]]
+	-- upvalues: ReactModule (copy), GetResult (copy), SignalsModule (copy), SignalsReactModule (copy)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 16 ]]
+		-- upvalues: GetResult (upval), p1 (copy)
+		return GetResult.GetOnlineFriendsByUniverseId(p1)
 	end, { p1 })
 	
-	return signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), var2 (ref)
-		return signalsModule.createComputed(function(p2)
-			-- upvalues: var2 (copy)
-			return var2(p2)
+	return SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 20 ]]
+		-- upvalues: SignalsModule (upval), UseMemoResult (copy)
+		return SignalsModule.createComputed(function(p2) --[[ Line: 21 ]]
+			-- upvalues: UseMemoResult (upval)
+			return UseMemoResult(p2)
 		end)
-	end, { var2 })), signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: var1 (copy)
-		return var1.GetOnlineFriendsStatus()
-	end, {}))
+	end, { UseMemoResult }))), (SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 26 ]]
+		-- upvalues: GetResult (upval)
+		return GetResult.GetOnlineFriendsStatus()
+	end, {}))))
 end

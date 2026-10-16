@@ -1,264 +1,269 @@
-﻿local contextActionService = game:GetService("ContextActionService")
-local coreGuiService = game:GetService("CoreGui")
-local corePackagesService = game:GetService("CorePackages")
-local playersService = game:GetService("Players")
-local httpRbxApiService = game:GetService("HttpRbxApiService")
-local reactModule = require(corePackagesService.Packages.React)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local modules = coreGuiService.RobloxGui.Modules
-local renderWithCoreScriptsStyleProviderModule = require(modules.Common.renderWithCoreScriptsStyleProvider)
-local shareGame = modules.Settings.Pages.ShareGame
-local COLORS = require(corePackagesService.Workspace.Packages.CoreScriptsCommon).Constants.COLORS
-local constantsModule = require(shareGame.Constants)
-local gameInviteEvents = require(corePackagesService.Workspace.Packages.GameInvite).GameInviteEvents
-local inviteStatus = constantsModule.InviteStatus
-local var1 = require(shareGame.getTranslator)()
-local httpRequestModule = require(modules.Common.httpRequest)
-local inviteUserIdToPlaceIdModule = require(shareGame.Thunks.InviteUserIdToPlaceId)
-local retrievalStatus = require(corePackagesService.Workspace.Packages.Http).Enum.RetrievalStatus
-local inviteUserIdToPlaceIdCustomizedModule = require(shareGame.Thunks.InviteUserIdToPlaceIdCustomized)
-local throttleFunctionCallModule = require(shareGame.ThrottleFunctionCall)
-local singleUserThumbnailModule = require(shareGame.Components.SingleUserThumbnail)
-local signalsModule = require(corePackagesService.Packages.Signals)
-local signalsReactModule = require(corePackagesService.Packages.SignalsReact)
-local userProfileStore = require(corePackagesService.Workspace.Packages.UserProfiles).Stores.UserProfileStore
-local loadingModalModule = require(shareGame.Components.LoadingModal)
-local getFFlagAbuseReportAnalyticsHasLaunchDataModule = require(modules.Settings.Flags.GetFFlagAbuseReportAnalyticsHasLaunchData)
-local getFFlagEnableNewInviteSendEndpointModule = require(modules.Flags.GetFFlagEnableNewInviteSendEndpoint)
-local fFlagFixPromptGameInviteUIMissingDisplayName = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagFixPromptGameInviteUIMissingDisplayName
-local getFFlagThrottleInviteSendEndpointModule = require(modules.Flags.GetFFlagThrottleInviteSendEndpoint)
-local getFIntThrottleInviteSendEndpointDelayModule = require(modules.Flags.GetFIntThrottleInviteSendEndpointDelay)
-local getFFlagSingleUserInvitePageKeybindModule = require(modules.Settings.Flags.GetFFlagSingleUserInvitePageKeybind)
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local button = UIBloxModule.App.Button.Button
-local buttonType = UIBloxModule.App.Button.Enum.ButtonType
-local styledTextLabel = UIBloxModule.App.Text.StyledTextLabel
-local useStyle = UIBloxModule.Core.Style.useStyle
-local color = Color3.fromRGB(41, 41, 41)
+﻿local ContextActionService = game:GetService("ContextActionService")
+local CorePackages = game:GetService("CorePackages")
+local Players = game:GetService("Players")
+local HttpRbxApiService = game:GetService("HttpRbxApiService")
+local ReactModule = require(CorePackages.Packages.React)
+local Modules = game:GetService("CoreGui").RobloxGui.Modules
+local RenderWithCoreScriptsStyleProviderModule = require(Modules.Common.renderWithCoreScriptsStyleProvider)
+local ShareGame = Modules.Settings.Pages.ShareGame
+local COLORS = require(CorePackages.Workspace.Packages.CoreScriptsCommon).Constants.COLORS
+local ConstantsModule = require(ShareGame.Constants)
+local GameInviteEvents = require(CorePackages.Workspace.Packages.GameInvite).GameInviteEvents
+local InviteStatus = ConstantsModule.InviteStatus
+local Translator = require(ShareGame.getTranslator)()
+local HttpRequestModule = require(Modules.Common.httpRequest)
+local InviteUserIdToPlaceIdModule = require(ShareGame.Thunks.InviteUserIdToPlaceId)
+local RetrievalStatus = require(CorePackages.Workspace.Packages.Http).Enum.RetrievalStatus
+local InviteUserIdToPlaceIdCustomizedModule = require(ShareGame.Thunks.InviteUserIdToPlaceIdCustomized)
+local ThrottleFunctionCallModule = require(ShareGame.ThrottleFunctionCall)
+local SingleUserThumbnailModule = require(ShareGame.Components.SingleUserThumbnail)
+local SignalsModule = require(CorePackages.Packages.Signals)
+local SignalsReactModule = require(CorePackages.Packages.SignalsReact)
+local UserProfileStore = require(CorePackages.Workspace.Packages.UserProfiles).Stores.UserProfileStore
+local LoadingModalModule = require(ShareGame.Components.LoadingModal)
+local GetFFlagAbuseReportAnalyticsHasLaunchDataModule = require(Modules.Settings.Flags.GetFFlagAbuseReportAnalyticsHasLaunchData)
+local GetFFlagEnableNewInviteSendEndpointModule = require(Modules.Flags.GetFFlagEnableNewInviteSendEndpoint)
+local FFlagFixPromptGameInviteUIMissingDisplayName = require(CorePackages.Workspace.Packages.SharedFlags).FFlagFixPromptGameInviteUIMissingDisplayName
+local GetFFlagThrottleInviteSendEndpointModule = require(Modules.Flags.GetFFlagThrottleInviteSendEndpoint)
+local GetFIntThrottleInviteSendEndpointDelayModule = require(Modules.Flags.GetFIntThrottleInviteSendEndpointDelay)
+local GetFFlagSingleUserInvitePageKeybindModule = require(Modules.Settings.Flags.GetFFlagSingleUserInvitePageKeybind)
+local UIBloxModule = require(CorePackages.Packages.UIBlox)
+local Button = UIBloxModule.App.Button.Button
+local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
+local StyledTextLabel = UIBloxModule.App.Text.StyledTextLabel
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local _Color3 = Color3.fromRGB(41, 41, 41)
 
-local var2 = function(p1)
-	-- upvalues: useStyle (ref), reactModule (ref), fFlagFixPromptGameInviteUIMissingDisplayName (ref), userProfileStore (ref), signalsModule (ref), signalsReactModule (ref), constantsModule (ref), gameInviteEvents (ref), inviteStatus (ref), getFFlagAbuseReportAnalyticsHasLaunchDataModule (ref), playersService (ref), getFFlagSingleUserInvitePageKeybindModule (ref), contextActionService (ref), getFFlagThrottleInviteSendEndpointModule (ref), throttleFunctionCallModule (ref), getFIntThrottleInviteSendEndpointDelayModule (ref), retrievalStatus (ref), loadingModalModule (ref), color (ref), styledTextLabel (ref), var1 (ref), COLORS (ref), singleUserThumbnailModule (ref), button (ref), buttonType (ref)
-	local inviteUserId = p1.friends[tostring(p1.inviteUserId)]
-	local id = inviteUserId and p1.invites[inviteUserId.id]
-	local var3 = useStyle()
-	local var4, var5 = reactModule.useState(false)
-	local var6 = if fFlagFixPromptGameInviteUIMissingDisplayName then reactModule.useMemo(function()
-		-- upvalues: userProfileStore (copy), p1 (ref)
-		return userProfileStore.get().fetchNamesByUserIds({ tostring(p1.inviteUserId) })
+local function v34(p1) --[[ Line: 61 ]]
+	-- upvalues: UseStyleFunction (copy), ReactModule (copy), FFlagFixPromptGameInviteUIMissingDisplayName (copy), UserProfileStore (copy), SignalsModule (copy), SignalsReactModule (copy), ConstantsModule (copy), GameInviteEvents (copy), InviteStatus (copy), GetFFlagAbuseReportAnalyticsHasLaunchDataModule (copy), Players (copy), GetFFlagSingleUserInvitePageKeybindModule (copy), ContextActionService (copy), GetFFlagThrottleInviteSendEndpointModule (copy), ThrottleFunctionCallModule (copy), GetFIntThrottleInviteSendEndpointDelayModule (copy), RetrievalStatus (copy), LoadingModalModule (copy), _Color3 (copy), StyledTextLabel (copy), Translator (copy), COLORS (copy), SingleUserThumbnailModule (copy), Button (copy), ButtonType (copy)
+	local Friend = p1.friends[tostring(p1.inviteUserId)]
+	local Invite = Friend and p1.invites[Friend.id]
+	local UseStyleResult = UseStyleFunction()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseMemoResult = if FFlagFixPromptGameInviteUIMissingDisplayName then ReactModule.useMemo(function() --[[ Line: 71 ]]
+		-- upvalues: UserProfileStore (upval), p1 (copy)
+		return UserProfileStore.get().fetchNamesByUserIds({ (tostring(p1.inviteUserId)) })
 	end, { p1.inviteUserId }) else nil
-	local var7 = if fFlagFixPromptGameInviteUIMissingDisplayName then signalsReactModule.useSignalState(if fFlagFixPromptGameInviteUIMissingDisplayName then reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), var6 (ref)
-		return signalsModule.createComputed(function(p2)
-			-- upvalues: var6 (copy)
-			local var8 = var6(p2)
-			local var9 = var8 and (var8.data and var8.data[1])
-			local names = var9 and var9.names
-			local var10 = ""
+	local UseMemoResult1 = if FFlagFixPromptGameInviteUIMissingDisplayName then ReactModule.useMemo(function() --[[ Line: 77 ]]
+		-- upvalues: SignalsModule (upval), UseMemoResult (copy)
+		return SignalsModule.createComputed(function(p2) --[[ Line: 78 ]]
+			-- upvalues: UseMemoResult (upval)
+			local UseMemoResultResult = UseMemoResult(p2)
+			local Entry = UseMemoResultResult and (UseMemoResultResult.data and UseMemoResultResult.data[1])
+			local Names = Entry and Entry.names
+			local CombinedName = ""
 			
-			if names then
-				var10 = names.getCombinedName(p2)
+			if Names then
+				CombinedName = Names.getCombinedName(p2)
 				
-				if var10 == "" then
-					var10 = names.getUsername(p2)
+				if CombinedName == "" then
+					CombinedName = Names.getUsername(p2)
 				end
 			end
 			return {
-				name = var10,
-				isFetching = if var8 ~= nil then var8.status == "fetching" else true
+				name = CombinedName,
+				isFetching = UseMemoResultResult == nil or UseMemoResultResult.status == "fetching"
 			}
 		end)
-	end, { var6 }) else nil) else nil
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), constantsModule (copy), gameInviteEvents (copy)
+	end, { UseMemoResult }) else nil
+	local UseSignalStateResult = if FFlagFixPromptGameInviteUIMissingDisplayName then SignalsReactModule.useSignalState(UseMemoResult1) else nil
+	ReactModule.useEffect(function() --[[ Line: 102 ]]
+		-- upvalues: p1 (copy), ConstantsModule (upval), GameInviteEvents (upval)
 		if p1.promptMessage and p1.analytics then
-			p1.analytics:sendEvent(constantsModule.Triggers.DeveloperSingle, gameInviteEvents.CustomTextShown)
+			p1.analytics:sendEvent(ConstantsModule.Triggers.DeveloperSingle, GameInviteEvents.CustomTextShown)
 		end
 	end, {})
-	local var8 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref)
+	local UseResult: () -> () = ReactModule.useCallback(function() --[[ Line: 109 ]]
+		-- upvalues: p1 (copy)
 		p1.closePage()
 		
 		if p1.onAfterClosePage then
 			p1.onAfterClosePage()
 		end
 	end, { p1.closePage, p1.onAfterClosePage })
-	local var9 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref), constantsModule (copy), gameInviteEvents (copy), var8 (ref)
-		p1.analytics:sendEvent(constantsModule.Triggers.DeveloperSingle, gameInviteEvents.CancelInvite)
-		var8()
-	end, { var8 })
-	local var10 = reactModule.useCallback(function()
-		-- upvalues: var5 (ref), p1 (ref), id (ref), inviteStatus (copy), constantsModule (copy), gameInviteEvents (copy), inviteUserId (ref), getFFlagAbuseReportAnalyticsHasLaunchDataModule (copy), playersService (copy), var8 (ref)
-		var5(true)
-		local inviteUser = p1.inviteUser
-		local analytics = p1.analytics
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 121 ]]
+		-- upvalues: p1 (copy), ConstantsModule (upval), GameInviteEvents (upval), UseResult (copy)
+		p1.analytics:sendEvent(ConstantsModule.Triggers.DeveloperSingle, GameInviteEvents.CancelInvite)
+		UseResult()
+	end, { UseResult })
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 129 ]]
+		-- upvalues: UseStateResult2 (copy), p1 (copy), Invite (copy), InviteStatus (upval), ConstantsModule (upval), GameInviteEvents (upval), Friend (copy), GetFFlagAbuseReportAnalyticsHasLaunchDataModule (upval), Players (upval), UseResult (copy)
+		UseStateResult2(true)
+		local InviteUserFunction = p1.inviteUser
+		local Analytics = p1.analytics
 		
-		if id and id ~= inviteStatus.Failed then return end
-		analytics:sendEvent(constantsModule.Triggers.DeveloperSingle, gameInviteEvents.SendInvite, {
-			recipient = inviteUserId.id,
-			isLaunchDataProvided = if getFFlagAbuseReportAnalyticsHasLaunchDataModule() then p1.launchData ~= nil and p1.launchData ~= "" else nil
-		})
-		inviteUser(tostring(inviteUserId.id), analytics, p1.inviteMessageId, p1.launchData):andThen(function(p2)
-			-- upvalues: var5 (copy), inviteUserId (copy), playersService (copy), analytics (ref), var8 (copy)
-			var5(false)
+		if not Invite or Invite == InviteStatus.Failed then
+			local IsNotLaunchDataMatch: boolean = p1.launchData ~= nil and p1.launchData ~= ""
+			Analytics:sendEvent(ConstantsModule.Triggers.DeveloperSingle, GameInviteEvents.SendInvite, {
+				recipient = Friend.id,
+				isLaunchDataProvided = if GetFFlagAbuseReportAnalyticsHasLaunchDataModule() then IsNotLaunchDataMatch else nil
+			})
+			InviteUserFunction(tostring(Friend.id), Analytics, p1.inviteMessageId, p1.launchData):andThen(function(Result) --[[ Line: 145 ]]
+				-- upvalues: UseStateResult2 (upval), Friend (upval), Players (upval), Analytics (copy), UseResult (upval)
+				UseStateResult2(false)
+				
+				if not Result then return end
+				local list = { Friend.id }
+				
+				if Players.LocalPlayer and Result.conversationId then
+					Analytics:onActivatedInviteSent(Players.LocalPlayer.UserId, Result.conversationId, list)
+				end
+				UseResult()
+			end, UseResult)
 			
-			if not p2 then return end
-			local list = { inviteUserId.id }
-			
-			if playersService.LocalPlayer and p2.conversationId then
-				analytics:onActivatedInviteSent(playersService.LocalPlayer.UserId, p2.conversationId, list)
-			end
-			var8()
-		end, var8)
+			return
+		end
 	end, {
-		p1.inviteUser, p1.inviteMessageId, p1.launchData, p1.analytics, var5, id,
-		inviteUserId, var8
+		p1.inviteUser, p1.inviteMessageId, p1.launchData, p1.analytics,
+		UseStateResult2, Invite, Friend, UseResult
 	})
 	
-	if getFFlagSingleUserInvitePageKeybindModule() then
-		reactModule.useEffect(function()
-			-- upvalues: p1 (ref), contextActionService (copy), var10 (write), var9 (ref)
+	if GetFFlagSingleUserInvitePageKeybindModule() then
+		ReactModule.useEffect(function() --[[ Line: 179 ]]
+			-- upvalues: p1 (copy), ContextActionService (upval), UseResult2 (ref), UseResult1 (copy)
 			if p1.isVisible then
-				contextActionService:BindCoreAction("ProductPurchaseConfirmButtonBind", function(_, p2, _)
-					-- upvalues: var10 (copy)
-					if p2 == Enum.UserInputState.Begin then
-						var10()
+				ContextActionService:BindCoreAction("ProductPurchaseConfirmButtonBind", function(_, UserInputState, _) --[[ Line: 181 ]]
+					-- upvalues: UseResult2 (upval)
+					if UserInputState == Enum.UserInputState.Begin then
+						UseResult2()
 					end
 				end, false, Enum.KeyCode.ButtonA)
-				contextActionService:BindCoreAction("ProductPurchaseCancelButtonBind", function(_, p2, _)
-					-- upvalues: var9 (copy)
-					if p2 == Enum.UserInputState.Begin then
-						var9()
+				ContextActionService:BindCoreAction("ProductPurchaseCancelButtonBind", function(_, UserInputState, _) --[[ Line: 186 ]]
+					-- upvalues: UseResult1 (upval)
+					if UserInputState == Enum.UserInputState.Begin then
+						UseResult1()
 					end
 				end, false, Enum.KeyCode.ButtonB)
 				
-				return function()
-					-- upvalues: contextActionService (copy)
-					contextActionService:UnbindCoreAction("ProductPurchaseConfirmButtonBind")
-					contextActionService:UnbindCoreAction("ProductPurchaseCancelButtonBind")
+				return function() --[[ Line: 191 ]]
+					-- upvalues: ContextActionService (upval)
+					ContextActionService:UnbindCoreAction("ProductPurchaseConfirmButtonBind")
+					ContextActionService:UnbindCoreAction("ProductPurchaseCancelButtonBind")
 				end
+			else
+				return nil
 			end
-			return nil
-		end, { p1.isVisible, var10, var9 })
+		end, { p1.isVisible, UseResult2, UseResult1 })
 	end
-	if getFFlagThrottleInviteSendEndpointModule() then
-		var10 = reactModule.useCallback(throttleFunctionCallModule(getFIntThrottleInviteSendEndpointDelayModule(), var10), { var10 })
+	if GetFFlagThrottleInviteSendEndpointModule() then
+		UseResult2 = ReactModule.useCallback(ThrottleFunctionCallModule(GetFIntThrottleInviteSendEndpointDelayModule(), UseResult2), { UseResult2 })
 	end
-	if inviteUserId then
-		if fFlagFixPromptGameInviteUIMissingDisplayName and var7.name == "" and var7.isFetching then
-			return reactModule.createElement(loadingModalModule)
-		end
-		local var11 = if fFlagFixPromptGameInviteUIMissingDisplayName then if var7.name ~= "" then inviteUserId.displayName or "" else var7.name else inviteUserId.displayName
-		local var12 = id and id ~= inviteStatus.Failed
-		
-		return reactModule.createElement("Frame", {
-			BorderSizePixel = 0,
-			BackgroundTransparency = 0.1,
-			Size = UDim2.new(1, 0, 0, 0),
-			AutomaticSize = Enum.AutomaticSize.Y,
-			Position = UDim2.new(0.5, 0, 0.5, 0),
-			AnchorPoint = Vector2.new(0.5, 0.5),
-			BackgroundColor3 = color
-		}, {
-			SizeConstraint = reactModule.createElement("UISizeConstraint", {
-				MaxSize = Vector2.new(442, 1e999),
-				MinSize = Vector2.new(0, 0)
-			}),
-			Corner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) }),
-			Padding = reactModule.createElement("UIPadding", {
-				PaddingLeft = UDim.new(0, 24),
-				PaddingRight = UDim.new(0, 24),
-				PaddingBottom = UDim.new(0, 24)
-			}),
-			Header = reactModule.createElement(styledTextLabel, {
-				fontStyle = var3.Font.Header1,
-				colorStyle = var3.Theme.TextEmphasis,
-				text = var1:FormatByKey("Feature.SettingsHub.Heading.InviteUser", { DisplayName = var11 }),
-				size = UDim2.new(1, 0, 0, 48),
-				textXAlignment = Enum.TextXAlignment.Center
-			}),
-			Divider = reactModule.createElement("Frame", {
+	if Friend then
+		if FFlagFixPromptGameInviteUIMissingDisplayName and UseSignalStateResult.name == "" and UseSignalStateResult.isFetching then
+			return ReactModule.createElement(LoadingModalModule)
+		else
+			local DisplayName = if FFlagFixPromptGameInviteUIMissingDisplayName then if UseSignalStateResult.name == "" then Friend.displayName or "" else UseSignalStateResult.name else Friend.displayName
+			local IsNotInviteMatch: boolean = Invite and Invite ~= InviteStatus.Failed
+			
+			return ReactModule.createElement("Frame", {
 				BorderSizePixel = 0,
-				Position = UDim2.new(0, 0, 0, 48),
-				Size = UDim2.new(1, 0, 0, 1),
-				BackgroundColor3 = COLORS.GRAPHITE
-			}),
-			Wrapper = reactModule.createElement("Frame", {
-				BackgroundTransparency = 1,
+				BackgroundTransparency = 0.1,
 				Size = UDim2.new(1, 0, 0, 0),
 				AutomaticSize = Enum.AutomaticSize.Y,
-				Position = UDim2.new(0, 0, 0, 56)
+				Position = UDim2.new(0.5, 0, 0.5, 0),
+				AnchorPoint = Vector2.new(0.5, 0.5),
+				BackgroundColor3 = _Color3
 			}, {
-				ListLayout = reactModule.createElement("UIListLayout", {
-					SortOrder = Enum.SortOrder.LayoutOrder,
-					FillDirection = Enum.FillDirection.Vertical,
-					HorizontalAlignment = Enum.HorizontalAlignment.Center,
-					Padding = UDim.new(0, 24)
+				SizeConstraint = ReactModule.createElement("UISizeConstraint", {
+					MaxSize = Vector2.new(442, 1e999),
+					MinSize = Vector2.new(0, 0)
 				}),
-				Thumbnail = reactModule.createElement(singleUserThumbnailModule, {
-					layoutOrder = 1,
-					square = true,
-					backgroundTransparency = 1,
-					user = inviteUserId,
-					size = UDim2.new(0, 95, 0, 95)
+				Corner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) }),
+				Padding = ReactModule.createElement("UIPadding", {
+					PaddingLeft = UDim.new(0, 24),
+					PaddingRight = UDim.new(0, 24),
+					PaddingBottom = UDim.new(0, 24)
 				}),
-				TextBody = reactModule.createElement(styledTextLabel, {
-					layoutOrder = 2,
-					fontStyle = var3.Font.Header2,
-					colorStyle = var3.Theme.TextEmphasis,
-					text = p1.promptMessage or var1:FormatByKey("Feature.SettingsHub.Label.DefaultInviteMessage", { DisplayName = var11 }),
-					textXAlignment = Enum.TextXAlignment.Center,
-					automaticSize = Enum.AutomaticSize.Y,
-					size = UDim2.new(1, 0, 0, 0)
+				Header = ReactModule.createElement(StyledTextLabel, {
+					fontStyle = UseStyleResult.Font.Header1,
+					colorStyle = UseStyleResult.Theme.TextEmphasis,
+					text = Translator:FormatByKey("Feature.SettingsHub.Heading.InviteUser", { DisplayName = DisplayName }),
+					size = UDim2.new(1, 0, 0, 48),
+					textXAlignment = Enum.TextXAlignment.Center
 				}),
-				ButtonWrapper = reactModule.createElement("Frame", {
-					LayoutOrder = 3,
+				Divider = ReactModule.createElement("Frame", {
+					BorderSizePixel = 0,
+					Position = UDim2.new(0, 0, 0, 48),
+					Size = UDim2.new(1, 0, 0, 1),
+					BackgroundColor3 = COLORS.GRAPHITE
+				}),
+				Wrapper = ReactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
-					Size = UDim2.new(1, 0, 0, 48)
+					Size = UDim2.new(1, 0, 0, 0),
+					AutomaticSize = Enum.AutomaticSize.Y,
+					Position = UDim2.new(0, 0, 0, 56)
 				}, {
-					CancelButton = reactModule.createElement(button, {
-						buttonType = buttonType.Secondary,
-						size = UDim2.new(0.5, -12, 1, 0),
-						text = var1:FormatByKey("Feature.SettingsHub.Action.Cancel"),
-						onActivated = var9,
-						isDisabled = var4
+					ListLayout = ReactModule.createElement("UIListLayout", {
+						SortOrder = Enum.SortOrder.LayoutOrder,
+						FillDirection = Enum.FillDirection.Vertical,
+						HorizontalAlignment = Enum.HorizontalAlignment.Center,
+						Padding = UDim.new(0, 24)
 					}),
-					InviteButton = reactModule.createElement(button, {
-						buttonType = buttonType.PrimarySystem,
-						size = UDim2.new(0.5, -12, 1, 0),
-						position = UDim2.new(0.5, 12, 0, 0),
-						text = var1:FormatByKey(if var12 then "Feature.SettingsHub.Label.Invited" else "Feature.SettingsHub.Action.InviteFriend"),
-						onActivated = var10,
-						isLoading = var4,
-						isDisabled = var12
+					Thumbnail = ReactModule.createElement(SingleUserThumbnailModule, {
+						layoutOrder = 1,
+						square = true,
+						backgroundTransparency = 1,
+						user = Friend,
+						size = UDim2.new(0, 95, 0, 95)
+					}),
+					TextBody = ReactModule.createElement(StyledTextLabel, {
+						layoutOrder = 2,
+						fontStyle = UseStyleResult.Font.Header2,
+						colorStyle = UseStyleResult.Theme.TextEmphasis,
+						text = p1.promptMessage or Translator:FormatByKey("Feature.SettingsHub.Label.DefaultInviteMessage", { DisplayName = DisplayName }),
+						textXAlignment = Enum.TextXAlignment.Center,
+						automaticSize = Enum.AutomaticSize.Y,
+						size = UDim2.new(1, 0, 0, 0)
+					}),
+					ButtonWrapper = ReactModule.createElement("Frame", {
+						LayoutOrder = 3,
+						BackgroundTransparency = 1,
+						Size = UDim2.new(1, 0, 0, 48)
+					}, {
+						CancelButton = ReactModule.createElement(Button, {
+							buttonType = ButtonType.Secondary,
+							size = UDim2.new(0.5, -12, 1, 0),
+							text = Translator:FormatByKey("Feature.SettingsHub.Action.Cancel"),
+							onActivated = UseResult1,
+							isDisabled = UseStateResult
+						}),
+						InviteButton = ReactModule.createElement(Button, {
+							buttonType = ButtonType.PrimarySystem,
+							size = UDim2.new(0.5, -12, 1, 0),
+							position = UDim2.new(0.5, 12, 0, 0),
+							text = Translator:FormatByKey(if IsNotInviteMatch then "Feature.SettingsHub.Label.Invited" else "Feature.SettingsHub.Action.InviteFriend"),
+							onActivated = UseResult2,
+							isLoading = UseStateResult,
+							isDisabled = IsNotInviteMatch
+						})
 					})
 				})
 			})
-		})
-	elseif p1.friendsRetrievalStatus == retrievalStatus.Done or p1.friendsRetrievalStatus == retrievalStatus.Failed then
-		var8()
+		end
+	elseif p1.friendsRetrievalStatus == RetrievalStatus.Done or p1.friendsRetrievalStatus == RetrievalStatus.Failed then
+		UseResult()
 	end
 end
 
-return roactRoduxModule.connect(function(p1)
-	-- upvalues: playersService (ref)
+return require(CorePackages.Packages.RoactRodux).connect(function(p1) --[[ Line: 330 ]]
+	-- upvalues: Players (copy)
 	return {
 		friends = p1.Users,
-		friendsRetrievalStatus = playersService.LocalPlayer and p1.Friends.retrievalStatus[tostring(playersService.LocalPlayer.UserId)],
+		friendsRetrievalStatus = Players.LocalPlayer and p1.Friends.retrievalStatus[tostring(Players.LocalPlayer.UserId)],
 		invites = p1.Invites
 	}
-end, function(p1)
-	-- upvalues: httpRequestModule (ref), httpRbxApiService (ref), getFFlagEnableNewInviteSendEndpointModule (ref), inviteUserIdToPlaceIdCustomizedModule (ref), constantsModule (ref), inviteUserIdToPlaceIdModule (ref)
+end, function(Callback) --[[ Line: 337 ]]
+	-- upvalues: HttpRequestModule (copy), HttpRbxApiService (copy), GetFFlagEnableNewInviteSendEndpointModule (copy), InviteUserIdToPlaceIdCustomizedModule (copy), ConstantsModule (copy), InviteUserIdToPlaceIdModule (copy)
 	return {
-		inviteUser = function(p2, p3, p4, p5)
-			-- upvalues: httpRequestModule (copy), httpRbxApiService (copy), getFFlagEnableNewInviteSendEndpointModule (copy), p1 (ref), inviteUserIdToPlaceIdCustomizedModule (copy), constantsModule (copy), inviteUserIdToPlaceIdModule (copy)
-			local var3 = httpRequestModule(httpRbxApiService)
-			local var4 = tostring(game.PlaceId)
+		inviteUser = function(p1, p2, p3, p4) --[[ Line: 339 ]]
+			-- upvalues: HttpRequestModule (upval), HttpRbxApiService (upval), GetFFlagEnableNewInviteSendEndpointModule (upval), Callback (copy), InviteUserIdToPlaceIdCustomizedModule (upval), ConstantsModule (upval), InviteUserIdToPlaceIdModule (upval)
+			local HttpRequestModuleResult = HttpRequestModule(HttpRbxApiService)
+			local Text = tostring(game.PlaceId)
 			
-			return if getFFlagEnableNewInviteSendEndpointModule() then p1(inviteUserIdToPlaceIdCustomizedModule(var3, p2, var4, p3, constantsModule.Triggers.DeveloperSingle, p4, p5)) else p1(inviteUserIdToPlaceIdModule(var3, p2, var4))
+			return if GetFFlagEnableNewInviteSendEndpointModule() then Callback(InviteUserIdToPlaceIdCustomizedModule(HttpRequestModuleResult, p1, Text, p2, ConstantsModule.Triggers.DeveloperSingle, p3, p4)) else Callback(InviteUserIdToPlaceIdModule(HttpRequestModuleResult, p1, Text))
 		end
 	}
-end)(function(p1)
-	-- upvalues: renderWithCoreScriptsStyleProviderModule (ref), reactModule (ref), var2 (ref)
-	return renderWithCoreScriptsStyleProviderModule({ SingleUserInvite = reactModule.createElement(var2, p1) })
+end)(function(p1) --[[ Line: 360 ]]
+	-- upvalues: RenderWithCoreScriptsStyleProviderModule (copy), ReactModule (copy), v34 (copy)
+	return RenderWithCoreScriptsStyleProviderModule({ SingleUserInvite = ReactModule.createElement(v34, p1) })
 end)

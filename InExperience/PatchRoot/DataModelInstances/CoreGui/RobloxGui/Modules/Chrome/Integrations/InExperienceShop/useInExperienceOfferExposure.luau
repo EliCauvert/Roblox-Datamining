@@ -1,105 +1,98 @@
-﻿local chrome = script:FindFirstAncestor("Chrome")
-local corePackagesService = game:GetService("CorePackages")
-local reactModule = require(corePackagesService.Packages.React)
-local signalsModule = require(corePackagesService.Packages.Signals)
-local inExperienceOffersModule = require(corePackagesService.Workspace.Packages.InExperienceOffers)
-local localStoreModule = require(chrome.ChromeShared.Service.LocalStore)
-local fFlagOfferNotifyOnGlobalIcon = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagOfferNotifyOnGlobalIcon
-local getOffersStore = inExperienceOffersModule.getOffersStore
-local isNotificationEligible = inExperienceOffersModule.Utils.isNotificationEligible
-local notificationLocation = inExperienceOffersModule.NotificationLocation
-local inExperienceOfferExposureStorageKey = game:DefineFastString("InExperienceOfferExposureStorageKey", "InExperienceOfferExposure")
-local inExperienceOfferExposureMaxStoredOffers = game:DefineFastInt("InExperienceOfferExposureMaxStoredOffers", 50)
+﻿local CorePackages = game:GetService("CorePackages")
+local ReactModule = require(CorePackages.Packages.React)
+local SignalsModule = require(CorePackages.Packages.Signals)
+local InExperienceOffersModule = require(CorePackages.Workspace.Packages.InExperienceOffers)
+local LocalStoreModule = require(script:FindFirstAncestor("Chrome").ChromeShared.Service.LocalStore)
+local FFlagOfferNotifyOnGlobalIcon = require(CorePackages.Workspace.Packages.SharedFlags).FFlagOfferNotifyOnGlobalIcon
+local GetOffersStoreFunction = InExperienceOffersModule.getOffersStore
+local IsNotificationEligibleFunction = InExperienceOffersModule.Utils.isNotificationEligible
+local NotificationLocation = InExperienceOffersModule.NotificationLocation
+local InExperienceOfferExposureStorageKey = game:DefineFastString("InExperienceOfferExposureStorageKey", "InExperienceOfferExposure")
+local InExperienceOfferExposureMaxStoredOffers = game:DefineFastInt("InExperienceOfferExposureMaxStoredOffers", 50)
 local t = {}
 
-local function loadPersistedTally()
-	-- upvalues: localStoreModule (ref), inExperienceOfferExposureStorageKey (ref)
-	local var1 = localStoreModule.loadForLocalPlayer(inExperienceOfferExposureStorageKey)
+local function loadPersistedTally() --[[ Line: 36 ]]
+	-- upvalues: LocalStoreModule (copy), InExperienceOfferExposureStorageKey (copy)
+	local ForLocalPlayer = LocalStoreModule.loadForLocalPlayer(InExperienceOfferExposureStorageKey)
 	local t = {}
 	
-	if type(var1) ~= "table" then
+	if type(ForLocalPlayer) ~= "table" then
 		return t
 	end
-	for i, v in var1 do
-		if type(i) == "string" and type(v) == "table" and (type(v.exposureCount) == "number" and type(v.lastExposureUTCTime) == "string") then
+	for i, value in ForLocalPlayer do
+		if type(i) == "string" and type(value) == "table" and type(value.exposureCount) == "number" and type(value.lastExposureUTCTime) == "string" then
 			t[i] = {
-				exposureCount = v.exposureCount,
-				lastExposureUTCTime = v.lastExposureUTCTime
+				exposureCount = value.exposureCount,
+				lastExposureUTCTime = value.lastExposureUTCTime
 			}
 		end
 	end
 	return t
 end
 
-local function withOldestEvicted(p1)
-	-- upvalues: inExperienceOfferExposureMaxStoredOffers (ref)
+local function withOldestEvicted(List) --[[ Line: 61 ]]
+	-- upvalues: InExperienceOfferExposureMaxStoredOffers (copy)
+	local List1 = {}
+	
+	for i in List do
+		table.insert(List1, i)
+	end
+	if #List1 <= InExperienceOfferExposureMaxStoredOffers then
+		return List
+	end
+	table.sort(List1, function(A, B): boolean --[[ Line: 70 ]]
+		-- upvalues: List (copy)
+		return List[B].lastExposureUTCTime < List[A].lastExposureUTCTime
+	end)
 	local t = {}
 	
-	for i in p1 do
-		table.insert(t, i)
+	for i1 = 1, InExperienceOfferExposureMaxStoredOffers do
+		local Entry = List1[i1]
+		t[Entry] = List[Entry]
 	end
-	if #t <= inExperienceOfferExposureMaxStoredOffers then
-		return p1
-	end
-	table.sort(t, function(p2, p3)
-		-- upvalues: p1 (ref)
-		return p1[p3].lastExposureUTCTime < p1[p2].lastExposureUTCTime
-	end)
-	local t_1 = {}
-	
-	for i_1 = 1, inExperienceOfferExposureMaxStoredOffers do
-		local var2 = t[i_1]
-		t_1[var2] = p1[var2]
-	end
-	return t_1
+	return t
 end
 
-local function tallyExposures(p2, p3)
-	-- upvalues: t (ref), isNotificationEligible (ref), loadPersistedTally (ref), withOldestEvicted (ref), localStoreModule (ref), inExperienceOfferExposureStorageKey (ref)
-	if p2 == nil or p3 == nil then return end
-	local t_1 = {}
+local function tallyExposures(Offers, OfferExposureSnapshot) --[[ Line: 84 ]]
+	-- upvalues: t (copy), IsNotificationEligibleFunction (copy), loadPersistedTally (copy), withOldestEvicted (copy), LocalStoreModule (copy), InExperienceOfferExposureStorageKey (copy)
+	if Offers == nil or OfferExposureSnapshot == nil then return end
+	local List = {}
 	
-	for i, v in p2 do
-		for i_1, v_1 in v do
-			if not t[v_1.offerId] and isNotificationEligible(v_1, p3) then
-				t[v_1.offerId] = true
-				table.insert(t_1, v_1.offerId)
+	for _, offer in Offers do
+		for _, value in offer do
+			if not t[value.offerId] and IsNotificationEligibleFunction(value, OfferExposureSnapshot) then
+				t[value.offerId] = true
+				table.insert(List, value.offerId)
 			end
 		end
 	end
-	if #t_1 == 0 then return end
-	local var3 = loadPersistedTally()
-	local var4 = DateTime.now():ToIsoDate()
+	if #List == 0 then return end
+	local PersistedTally = loadPersistedTally()
+	local IsoDate = DateTime.now():ToIsoDate()
 	
-	for i_1, v_1 in t_1 do
-		local var5 = var3[v_1]
-		var3[v_1] = {
-			exposureCount = if var5 ~= nil then 1 else var5.exposureCount + 1,
-			lastExposureUTCTime = var4
+	for _, value1 in List do
+		local PersistedTallyEntry = PersistedTally[value1]
+		PersistedTally[value1] = {
+			exposureCount = if PersistedTallyEntry == nil then 1 else PersistedTallyEntry.exposureCount + 1,
+			lastExposureUTCTime = IsoDate
 		}
 	end
-	localStoreModule.storeForLocalPlayer(inExperienceOfferExposureStorageKey, withOldestEvicted(var3))
+	LocalStoreModule.storeForLocalPlayer(InExperienceOfferExposureStorageKey, (withOldestEvicted(PersistedTally)))
 end
 
-return function()
-	-- upvalues: reactModule (ref), getOffersStore (ref), loadPersistedTally (ref), signalsModule (ref), fFlagOfferNotifyOnGlobalIcon (ref), notificationLocation (ref), tallyExposures (ref)
-	reactModule.useEffect(function()
-		-- upvalues: getOffersStore (copy), loadPersistedTally (copy), signalsModule (copy), fFlagOfferNotifyOnGlobalIcon (copy), notificationLocation (copy), tallyExposures (copy)
-		local var6 = getOffersStore(false)
-		var6.hydrateOfferExposureSnapshot(loadPersistedTally())
+return function() --[[ Line: 118 | Named "useInExperienceOfferExposure" ]]
+	-- upvalues: ReactModule (copy), GetOffersStoreFunction (copy), loadPersistedTally (copy), SignalsModule (copy), FFlagOfferNotifyOnGlobalIcon (copy), NotificationLocation (copy), tallyExposures (copy)
+	ReactModule.useEffect(function() --[[ Line: 119 ]]
+		-- upvalues: GetOffersStoreFunction (upval), loadPersistedTally (upval), SignalsModule (upval), FFlagOfferNotifyOnGlobalIcon (upval), NotificationLocation (upval), tallyExposures (upval)
+		local OffersStore = GetOffersStoreFunction(false)
+		OffersStore.hydrateOfferExposureSnapshot((loadPersistedTally()))
 		
-		return signalsModule.createEffect(function(p4)
-			-- upvalues: fFlagOfferNotifyOnGlobalIcon (copy), var6 (ref), notificationLocation (copy), tallyExposures (copy)
-			if fFlagOfferNotifyOnGlobalIcon then
-				if var6.getOfferNotificationShownWithEnum(p4) == notificationLocation.None then
-					return
-				end
-			elseif var6.getIsShopAvailable(p4) then
-				tallyExposures(var6.getOffers(p4), var6.getOfferExposureSnapshot(p4))
-				
-				return
-			else
-			end
+		return SignalsModule.createEffect(function(p1) --[[ Line: 128 ]]
+			-- upvalues: FFlagOfferNotifyOnGlobalIcon (upval), OffersStore (copy), NotificationLocation (upval), tallyExposures (upval)
+			if FFlagOfferNotifyOnGlobalIcon then
+				if OffersStore.getOfferNotificationShownWithEnum(p1) == NotificationLocation.None then return end
+			elseif not OffersStore.getIsShopAvailable(p1) then return end
+			tallyExposures(OffersStore.getOffers(p1), OffersStore.getOfferExposureSnapshot(p1))
 		end)
 	end, {})
 end

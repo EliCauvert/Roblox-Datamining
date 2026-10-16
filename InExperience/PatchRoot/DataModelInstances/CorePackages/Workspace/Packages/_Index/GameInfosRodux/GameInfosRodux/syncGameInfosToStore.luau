@@ -1,11 +1,11 @@
-﻿local parent = script:FindFirstAncestor("GameInfosRodux").Parent
-local cryoModule = require(parent.Cryo)
-local dataHydrationModule = require(parent.DataHydration)
-local _ = require(parent.DiscoveryTypes)
-local tutilsModule = require(parent.tutils)
-local t = { creator = true }
+﻿local Parent = script:FindFirstAncestor("GameInfosRodux").Parent
+local CryoModule = require(Parent.Cryo)
+local DataHydrationModule = require(Parent.DataHydration)
+local _ = require(Parent.DiscoveryTypes)
+local TutilsModule = require(Parent.tutils)
+local config = { creator = true }
 
-local function toStoreItem(p1)
+local function toStoreItem(p1) --[[ Line: 19 ]]
 	return {
 		universeId = p1.universeId,
 		rootPlaceId = p1.placeId,
@@ -18,74 +18,78 @@ local function toStoreItem(p1)
 	}
 end
 
-local function _(p1, p2)
-	-- upvalues: tutilsModule (ref), cryoModule (ref), t (ref)
+local function _(p1, p2) --[[ Line: 43 | Named "isUnchanged" ]]
+	-- upvalues: TutilsModule (copy), CryoModule (copy), config (copy)
 	if not p1 then
 		return false
-	elseif not tutilsModule.shallowEqual(p1, cryoModule.Dictionary.join(p1, p2), t) then
+	elseif TutilsModule.shallowEqual(p1, CryoModule.Dictionary.join(p1, p2), config) then
+		local Creator = p2.creator
+		
+		return Creator == nil or TutilsModule.shallowEqual(p1.creator, Creator)
+	else
 		return false
 	end
-	local creator = p2.creator
-	
-	return creator == nil or tutilsModule.shallowEqual(p1.creator, creator)
 end
 
-local function syncVotesToStore(p1)
-	-- upvalues: dataHydrationModule (ref)
-	local votesStore = dataHydrationModule.Game.getVotesStore(false)
+local function syncVotesToStore(List) --[[ Line: 63 ]]
+	-- upvalues: DataHydrationModule (copy)
+	local VotesStore = DataHydrationModule.Game.getVotesStore(false)
 	local t = {}
-	local var1 = false
+	local Flag = false
 	
-	for i, v in p1 do
-		local totalUpVotes = v.totalUpVotes
-		local totalDownVotes = v.totalDownVotes
+	for i, value in List do
+		local TotalUpVotes = value.totalUpVotes
+		local TotalDownVotes = value.totalDownVotes
+		local NoTotalUpVotes: boolean = TotalUpVotes == nil or TotalDownVotes == nil
 		
-		if totalUpVotes ~= nil and totalDownVotes ~= nil then
-			local vote = votesStore.getVote(i)
-			local var2 = vote and vote.data(false)
-			
-			if not var2 or var2.upVotes ~= totalUpVotes or var2.downVotes ~= totalDownVotes then
-				t[i] = { upVotes = totalUpVotes, downVotes = totalDownVotes }
-				var1 = true
-			end
+		if not NoTotalUpVotes then
+			local Vote = VotesStore.getVote(i)
+			local DataResult = Vote and Vote.data(false)
+			NoTotalUpVotes = DataResult and DataResult.upVotes == TotalUpVotes and DataResult.downVotes == TotalDownVotes
+		end
+		if not NoTotalUpVotes then
+			t[i] = { upVotes = TotalUpVotes, downVotes = TotalDownVotes }
+			Flag = true
 		end
 	end
-	if var1 then
-		votesStore.updateVoteItems(t)
+	if Flag then
+		VotesStore.updateVoteItems(t)
 	end
 end
 
-return function(p2)
-	-- upvalues: dataHydrationModule (ref), toStoreItem (ref), cryoModule (ref), tutilsModule (ref), t (ref), syncVotesToStore (ref)
-	local gameInfoStore = dataHydrationModule.Game.getGameInfoStore(false)
-	local t_1 = {}
-	local var3 = false
+return function(List) --[[ Line: 91 | Named "syncGameInfosToStore" ]]
+	-- upvalues: DataHydrationModule (copy), toStoreItem (copy), CryoModule (copy), TutilsModule (copy), config (copy), syncVotesToStore (copy)
+	local GameInfoStore = DataHydrationModule.Game.getGameInfoStore(false)
+	local t = {}
+	local Flag = false
 	
-	for i, v in p2 do
-		local var4
-		local var5 = toStoreItem(v)
-		local gameInfo = gameInfoStore.getGameInfo(i)
-		local var6 = if gameInfo then gameInfo.data(false) else nil
-		local var7 = if var6 then var6.creator else nil
+	for i, value in List do
+		local StoreItem = toStoreItem(value)
+		local GameInfo = GameInfoStore.getGameInfo(i)
+		local DataResult = if GameInfo then GameInfo.data(false) else nil
+		local Creator = if DataResult then DataResult.creator else nil
 		
-		if var7 and var5.creator then
-			var5.creator = cryoModule.Dictionary.join(var7, var5.creator)
+		if Creator and StoreItem.creator then
+			StoreItem.creator = CryoModule.Dictionary.join(Creator, StoreItem.creator)
 		end
-		if not var6 then
-			var4 = false
-		elseif tutilsModule.shallowEqual(var6, cryoModule.Dictionary.join(var6, var5), t) then
-			local creator = var5.creator
-			var4 = creator == nil or tutilsModule.shallowEqual(var6.creator, creator)
+		local Flag1 = nil
+		if DataResult then
+			if TutilsModule.shallowEqual(DataResult, CryoModule.Dictionary.join(DataResult, StoreItem), config) then
+				local Creator1 = StoreItem.creator
+				Flag1 = Creator1 == nil or TutilsModule.shallowEqual(DataResult.creator, Creator1)
+			else
+				Flag1 = false
+			end
 		else
-			var4 = false
+			Flag1 = false
 		end
-		if not var4 then
-			t_1[i] = var5
-			var3 = true
+		if not Flag1 then
+			t[i] = StoreItem
+			Flag = true
 		end
 	end
-	if var3 then
-		gameInfoStore.updateGameInfos(t_1, false)
+	if Flag then
+		GameInfoStore.updateGameInfos(t, false)
 	end
-	syncVotesToStore(p2)
+	syncVotesToStore(List)
 end

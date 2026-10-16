@@ -1,300 +1,253 @@
-﻿local t = {}
-
-local function _(p1)
+﻿local function _(p1) --[[ Line: 25 | Named "nodeHeight" ]]
 	return if p1 == nil then 0 else p1.height
 end
 
-local function nodeItemCount(p1)
-	return if p1 == nil then 0 else p1.subtreeItemCount
-end
-
-local function nodeMeasuredCount(p1)
-	return if p1 == nil then 0 else p1.subtreeMeasuredCount
-end
-
-local _ = function(p1)
+local _ = function(p1) --[[ Line: 37 | Named "nodeMeasuredSum" ]]
 	return if p1 == nil then 0 else p1.subtreeMeasuredSum
 end
 
-local function nodeCount(p1)
-	return if p1 == nil then 0 else p1.subtreeNodeCount
+local _ = function(Left, p1) --[[ Line: 52 | Named "ownEffectiveSum" ]]
+	return if Left.measuredSize == nil then Left.itemCount * p1 else Left.measuredSize
 end
 
-local function nodeEffectiveSum(p1, p2)
-	return if p1 == nil then 0 else p1.subtreeMeasuredSum + (p1.subtreeItemCount - p1.subtreeMeasuredCount) * p2
+local function refresh(Left) --[[ Line: 56 ]]
+	assert(Left.itemCount >= 1, "WeightedOrderStatisticTree: node itemCount must be positive")
+	assert(Left.measuredSize == nil or Left.itemCount == 1, "WeightedOrderStatisticTree: measured nodes must represent exactly one item")
+	local Left1 = Left.left
+	local NewItemCount = (if Left1 == nil then 0 else Left1.subtreeItemCount) + Left.itemCount
+	local Right = Left.right
+	Left.subtreeItemCount = NewItemCount + (if Right == nil then 0 else Right.subtreeItemCount)
+	local Left2 = Left.left
+	local v1 = (if Left2 == nil then 0 else Left2.subtreeMeasuredCount) + (if Left.measuredSize == nil then 0 else 1)
+	local Right1 = Left.right
+	Left.subtreeMeasuredCount = v1 + (if Right1 == nil then 0 else Right1.subtreeMeasuredCount)
+	local Left3 = Left.left
+	local v2 = (if Left3 == nil then 0 else Left3.subtreeMeasuredSum) + (Left.measuredSize or 0)
+	local Right2 = Left.right
+	Left.subtreeMeasuredSum = v2 + (if Right2 == nil then 0 else Right2.subtreeMeasuredSum)
+	local Left4 = Left.left
+	local v3 = (if Left4 == nil then 0 else Left4.subtreeNodeCount) + 1
+	local Right3 = Left.right
+	Left.subtreeNodeCount = v3 + (if Right3 == nil then 0 else Right3.subtreeNodeCount)
+	local Left5 = Left.left
+	local Right4 = Left.right
+	Left.height = math.max(if Left5 == nil then 0 else Left5.height, if Right4 == nil then 0 else Right4.height) + 1
 end
 
-local _ = function(p1, p2)
-	return if p1.measuredSize == nil then p1.itemCount * p2 else p1.measuredSize
-end
-
-local function refresh(p1)
-	assert(p1.itemCount >= 1, "WeightedOrderStatisticTree: node itemCount must be positive")
-	assert(if p1.measuredSize ~= nil then p1.itemCount == 1 else true, "WeightedOrderStatisticTree: measured nodes must represent exactly one item")
-	local left = p1.left
-	local var1 = (if left == nil then 0 else left.subtreeItemCount) + p1.itemCount
-	local right = p1.right
-	p1.subtreeItemCount = var1 + (if right == nil then 0 else right.subtreeItemCount)
-	local left_1 = p1.left
-	local var2 = (if left_1 == nil then 0 else left_1.subtreeMeasuredCount) + (if p1.measuredSize == nil then 0 else 1)
-	local right_1 = p1.right
-	p1.subtreeMeasuredCount = var2 + (if right_1 == nil then 0 else right_1.subtreeMeasuredCount)
-	local left_2 = p1.left
-	local var3 = (if left_2 == nil then 0 else left_2.subtreeMeasuredSum) + (p1.measuredSize or 0)
-	local right_2 = p1.right
-	p1.subtreeMeasuredSum = var3 + (if right_2 == nil then 0 else right_2.subtreeMeasuredSum)
-	local left_3 = p1.left
-	local var4 = (if left_3 == nil then 0 else left_3.subtreeNodeCount) + 1
-	local right_3 = p1.right
-	p1.subtreeNodeCount = var4 + (if right_3 == nil then 0 else right_3.subtreeNodeCount)
-	local left_4 = p1.left
-	local right_4 = p1.right
-	p1.height = math.max(if left_4 == nil then 0 else left_4.height, if right_4 == nil then 0 else right_4.height) + 1
-end
-
-local function newNode(p1, p2)
-	-- upvalues: refresh (ref)
-	local t = {
-		subtreeNodeCount = 1,
-		height = 1,
-		left = nil,
-		right = nil,
-		itemCount = p1,
-		measuredSize = p2,
-		subtreeItemCount = p1,
-		subtreeMeasuredCount = if p2 == nil then 0 else 1,
-		subtreeMeasuredSum = p2 or 0
-	}
-	refresh(t)
+local _ = function(Right) --[[ Line: 87 | Named "rotateRight" ]]
+	-- upvalues: refresh (copy)
+	local Left = Right.left
+	Right.left = Left.right
+	Left.right = Right
+	refresh(Right)
+	refresh(Left)
 	
-	return t
+	return Left
 end
 
-local _ = function(p1)
-	-- upvalues: refresh (ref)
-	local left = p1.left
-	p1.left = left.right
-	left.right = p1
-	refresh(p1)
-	refresh(left)
+local _ = function(Left) --[[ Line: 96 | Named "rotateLeft" ]]
+	-- upvalues: refresh (copy)
+	local Right = Left.right
+	Left.right = Right.left
+	Right.left = Left
+	refresh(Left)
+	refresh(Right)
 	
-	return left
+	return Right
 end
 
-local _ = function(p1)
-	-- upvalues: refresh (ref)
-	local right = p1.right
-	p1.right = right.left
-	right.left = p1
-	refresh(p1)
-	refresh(right)
+local function balance(Left) --[[ Line: 105 ]]
+	-- upvalues: refresh (copy)
+	refresh(Left)
+	local Left1 = Left.left
+	local Right = Left.right
+	local v1 = (if Left1 == nil then 0 else Left1.height) - (if Right == nil then 0 else Right.height)
 	
-	return right
-end
-
-local function balance(p1)
-	-- upvalues: refresh (ref)
-	refresh(p1)
-	local left = p1.left
-	local right = p1.right
-	local var1 = (if left == nil then 0 else left.height) - (if right == nil then 0 else right.height)
-	
-	if var1 > 1 then
-		local left_1 = p1.left
-		local left_2 = left_1.left
-		local right_1 = left_1.right
+	if v1 > 1 then
+		local Left2 = Left.left
+		local Left3 = Left2.left
+		local Right1 = Left2.right
 		
-		if (if left_2 == nil then 0 else left_2.height) < (if right_1 == nil then 0 else right_1.height) then
-			left_2 = left_1.right
-			left_1.right = left_2.left
-			left_2.left = left_1
-			refresh(left_1)
-			refresh(left_2)
-			p1.left = left_2
+		if (if Left3 == nil then 0 else Left3.height) < (if Right1 == nil then 0 else Right1.height) then
+			local Right2 = Left2.right
+			Left2.right = Right2.left
+			Right2.left = Left2
+			refresh(Left2)
+			refresh(Right2)
+			Left.left = Right2
 		end
-		local left_3 = p1.left
-		p1.left = left_3.right
-		left_3.right = p1
-		refresh(p1)
-		refresh(left_3)
+		local Left4 = Left.left
+		Left.left = Left4.right
+		Left4.right = Left
+		refresh(Left)
+		refresh(Left4)
 		
-		return left_3
-	elseif var1 >= -1 then
-		return p1
-	end
-	local right_1 = p1.right
-	local right_2 = right_1.right
-	local left_1 = right_1.left
-	
-	if (if right_2 == nil then 0 else right_2.height) < (if left_1 == nil then 0 else left_1.height) then
-		right_2 = right_1.left
-		right_1.left = right_2.right
-		right_2.right = right_1
-		refresh(right_1)
-		refresh(right_2)
-		p1.right = right_2
-	end
-	local right_3 = p1.right
-	p1.right = right_3.left
-	right_3.left = p1
-	refresh(p1)
-	refresh(right_3)
-	
-	return right_3
-end
-
-local function join(p1, p2, p3)
-	-- upvalues: join (ref), balance (ref)
-	if (if p3 == nil then 0 else p3.height) + 1 < (if p1 == nil then 0 else p1.height) then
-		p1.right = join(p1.right, p2, p3)
-		
-		return balance(p1)
-	elseif (if p1 == nil then 0 else p1.height) + 1 < (if p3 == nil then 0 else p3.height) then
-		p3.left = join(p1, p2, p3.left)
-		
-		return balance(p3)
-	end
-	p2.left = p1
-	p2.right = p3
-	
-	return balance(p2)
-end
-
-local function popMinimum(a)
-	-- upvalues: refresh (ref), popMinimum (ref), balance (ref)
-	if a.left == nil then
-		local right = a.right
-		a.left = nil
-		a.right = nil
-		refresh(a)
-		
-		return right, a
-	end
-	local var1, var2 = popMinimum(a.left)
-	a.left = var1
-	
-	return balance(a), var2
-end
-
-local function popMaximum(a)
-	-- upvalues: refresh (ref), popMaximum (ref), balance (ref)
-	if a.right == nil then
-		local left = a.left
-		a.left = nil
-		a.right = nil
-		refresh(a)
-		
-		return left, a
-	end
-	local var1, var2 = popMaximum(a.right)
-	a.right = var1
-	
-	return balance(a), var2
-end
-
-local function concatenate(p1, p2)
-	-- upvalues: refresh (ref), popMinimum (ref), balance (ref), join (ref)
-	local var1, var2
-	if p1 == nil then
-		return p2
-	elseif p2 == nil then
-		return p1
-	elseif p2.left == nil then
-		local right = p2.right
-		p2.left = nil
-		p2.right = nil
-		refresh(p2)
-		var1 = right
-		var2 = p2
+		return Left4
 	else
-		local var3, var4 = popMinimum(p2.left)
-		p2.left = var3
-		var1 = balance(p2)
-		var2 = var4
+		if v1 >= -1 then
+			return Left
+		end
+		local Right3 = Left.right
+		local Right1 = Right3.right
+		local Left5 = Right3.left
+		
+		if (if Right1 == nil then 0 else Right1.height) < (if Left5 == nil then 0 else Left5.height) then
+			local Left6 = Right3.left
+			Right3.left = Left6.right
+			Left6.right = Right3
+			refresh(Right3)
+			refresh(Left6)
+			Left.right = Left6
+		end
+		local Right4 = Left.right
+		Left.right = Right4.left
+		Right4.left = Left
+		refresh(Left)
+		refresh(Right4)
+		
+		return Right4
 	end
-	return join(p1, var2, var1)
 end
 
-local function splitByItems(p1, p2)
-	-- upvalues: splitByItems (ref), balance (ref), refresh (ref), popMinimum (ref), join (ref)
-	if p1 == nil then
+local function join(Left, Left1, Right) --[[ Line: 124 ]]
+	-- upvalues: join (copy), balance (copy)
+	if (if Right == nil then 0 else Right.height) + 1 < (if Left == nil then 0 else Left.height) then
+		Left.right = join(Left.right, Left1, Right)
+		
+		return (balance(Left))
+	elseif (if Left == nil then 0 else Left.height) + 1 < (if Right == nil then 0 else Right.height) then
+		Right.left = join(Left, Left1, Right.left)
+		
+		return (balance(Right))
+	else
+		Left1.left = Left
+		Left1.right = Right
+		
+		return (balance(Left1))
+	end
+end
+
+local function popMinimum(Left) --[[ Line: 139 ]]
+	-- upvalues: refresh (copy), popMinimum (copy), balance (copy)
+	if Left.left == nil then
+		local Right = Left.right
+		Left.left = nil
+		Left.right = nil
+		refresh(Left)
+		
+		return Right, Left
+	else
+		local PopMinimumResult2
+		Left.left, PopMinimumResult2 = popMinimum(Left.left)
+		
+		return balance(Left), PopMinimumResult2
+	end
+end
+
+local function popMaximum(Left) --[[ Line: 152 ]]
+	-- upvalues: refresh (copy), popMaximum (copy), balance (copy)
+	if Left.right == nil then
+		local Left1 = Left.left
+		Left.left = nil
+		Left.right = nil
+		refresh(Left)
+		
+		return Left1, Left
+	else
+		local PopMaximumResult2
+		Left.right, PopMaximumResult2 = popMaximum(Left.right)
+		
+		return balance(Left), PopMaximumResult2
+	end
+end
+
+local function splitByItems(Left, NewItemCount) --[[ Line: 177 ]]
+	-- upvalues: splitByItems (copy), balance (copy), refresh (copy), popMinimum (copy), join (copy)
+	if Left == nil then
 		return nil, nil
 	end
-	local left = p1.left
-	local var1 = if left == nil then 0 else left.subtreeItemCount
-	local var2 = var1 + p1.itemCount
+	local Left1 = Left.left
+	local SubtreeItemCount = if Left1 == nil then 0 else Left1.subtreeItemCount
+	local NewSubtreeItemCount = SubtreeItemCount + Left.itemCount
 	
-	if p2 < var1 then
-		local var3, var4 = splitByItems(p1.left, p2)
-		p1.left = var4
+	if NewItemCount < SubtreeItemCount then
+		local SplitByItemsResult, SplitByItemsResult2 = splitByItems(Left.left, NewItemCount)
+		Left.left = SplitByItemsResult2
 		
-		return var3, balance(p1)
-	elseif var2 < p2 then
-		local var5, var6 = splitByItems(p1.right, p2 - var2)
-		p1.right = var5
+		return SplitByItemsResult, (balance(Left))
+	end
+	if NewSubtreeItemCount < NewItemCount then
+		local SplitByItemsResult2_1
+		Left.right, SplitByItemsResult2_1 = splitByItems(Left.right, NewItemCount - NewSubtreeItemCount)
 		
-		return balance(p1), var6
-	elseif p2 == var1 then
-		local var7, var8
-		local left_1 = p1.left
-		local right = p1.right
-		p1.left = nil
-		p1.right = nil
-		refresh(p1)
-		local var9 = left_1
+		return balance(Left), SplitByItemsResult2_1
+	end
+	if NewItemCount == SubtreeItemCount then
+		local Left2 = Left.left
+		local Right = Left.right
+		Left.left = nil
+		Left.right = nil
+		refresh(Left)
 		
-		if p1 == nil then
-			return var9, right
-		elseif right == nil then
-			return var9, p1
-		elseif right.left == nil then
-			local right_1 = right.right
-			right.left = nil
-			right.right = nil
-			refresh(right)
-			var7 = right_1
-			var8 = right
-		else
-			local var10, var11 = popMinimum(right.left)
-			right.left = var10
-			var7 = balance(right)
-			var8 = var11
+		if Left == nil then
+			return Left2, Right
 		end
-		return var9, join(p1, var8, var7)
-	elseif p2 == var2 then
-		local var12, var13, var14
-		local left_1 = p1.left
-		local right = p1.right
-		p1.left = nil
-		p1.right = nil
-		refresh(p1)
-		
-		if left_1 == nil then
-			var12 = p1
-		elseif p1 == nil then
-			var12 = left_1
-		elseif p1.left == nil then
-			local right_1 = p1.right
-			p1.left = nil
-			p1.right = nil
-			refresh(p1)
-			var13 = right_1
-			var14 = p1
-		else
-			local var15, var16 = popMinimum(p1.left)
-			p1.left = var15
-			var13 = balance(p1)
-			var14 = var16
+		if Right == nil then
+			return Left2, Left
 		end
-		var12 = join(left_1, var14, var13)
-		return var12, right
+		local Right2 = nil
+		local Right3 = nil
+		if Right.left == nil then
+			local Right1 = Right.right
+			Right.left = nil
+			Right.right = nil
+			refresh(Right)
+			Right2 = Right1
+			Right3 = Right
+		else
+			local PopMinimumResult2
+			Right.left, PopMinimumResult2 = popMinimum(Right.left)
+			Right2 = balance(Right)
+			Right3 = PopMinimumResult2
+		end
+		return Left2, (join(Left, Right3, Right2))
+	elseif NewItemCount == NewSubtreeItemCount then
+		local Left3 = Left.left
+		local Right = Left.right
+		Left.left = nil
+		Left.right = nil
+		refresh(Left)
+		local Left5 = nil
+		
+		if Left3 == nil then
+			Left5 = Left
+		elseif Left == nil then
+			Left5 = Left3
+		else
+			local Right4 = nil
+			local Left6 = nil
+			if Left.left == nil then
+				local Right5 = Left.right
+				Left.left = nil
+				Left.right = nil
+				refresh(Left)
+				Right4 = Right5
+				Left6 = Left
+			else
+				local PopMinimumResult2_1
+				Left.left, PopMinimumResult2_1 = popMinimum(Left.left)
+				Right4 = balance(Left)
+				Left6 = PopMinimumResult2_1
+			end
+			Left5 = join(Left3, Left6, Right4)
+		end
+		return Left5, Right
 	else
-		local var17, var18
-		assert(p1.measuredSize == nil, "WeightedOrderStatisticTree: cannot split a measured node")
-		local var19 = p2 - var1
-		local var20 = p1.itemCount - var19
-		local left_1 = p1.left
-		local t = {
+		assert(Left.measuredSize == nil, "WeightedOrderStatisticTree: cannot split a measured node")
+		local NewItemCountDelta = NewItemCount - SubtreeItemCount
+		local ItemCountDelta = Left.itemCount - NewItemCountDelta
+		local Left4 = Left.left
+		local config = {
 			measuredSize = nil,
 			subtreeMeasuredCount = 0,
 			subtreeMeasuredSum = 0,
@@ -302,31 +255,35 @@ local function splitByItems(p1, p2)
 			height = 1,
 			left = nil,
 			right = nil,
-			itemCount = var19,
-			subtreeItemCount = var19
+			itemCount = NewItemCountDelta,
+			subtreeItemCount = NewItemCountDelta
 		}
-		refresh(t)
+		refresh(config)
+		local config1 = nil
 		
-		if left_1 == nil then
-			var17 = t
-		elseif t == nil then
-			var17 = left_1
-		elseif t.left == nil then
-			local right = t.right
-			t.left = nil
-			t.right = nil
-			refresh(t)
-			t = right
-			var18 = t
+		if Left4 == nil then
+			config1 = config
+		elseif config == nil then
+			config1 = Left4
 		else
-			local var21, var22 = popMinimum(t.left)
-			t.left = var21
-			t = balance(t)
-			var18 = var22
+			local config3 = nil
+			local Right6 = nil
+			if config.left == nil then
+				local Right5 = config.right
+				config.left = nil
+				config.right = nil
+				refresh(config)
+				Right6 = Right5
+				config3 = config
+			else
+				local PopMinimumResult2_3
+				config.left, PopMinimumResult2_3 = popMinimum(config.left)
+				Right6 = balance(config)
+				config3 = PopMinimumResult2_3
+			end
+			config1 = join(Left4, config3, Right6)
 		end
-		var17 = join(left_1, var18, t)
-		local var23, var24
-		local t_1 = {
+		local config2 = {
 			measuredSize = nil,
 			subtreeMeasuredCount = 0,
 			subtreeMeasuredSum = 0,
@@ -334,285 +291,344 @@ local function splitByItems(p1, p2)
 			height = 1,
 			left = nil,
 			right = nil,
-			itemCount = var20,
-			subtreeItemCount = var20
+			itemCount = ItemCountDelta,
+			subtreeItemCount = ItemCountDelta
 		}
-		refresh(t_1)
-		local right = p1.right
+		refresh(config2)
+		local Right = Left.right
 		
-		if t_1 == nil then
-			return var17, right
-		elseif right == nil then
-			return var17, t_1
-		elseif right.left == nil then
-			local right_1 = right.right
-			right.left = nil
-			right.right = nil
-			refresh(right)
-			var23 = right_1
-			var24 = right
-		else
-			local var25, var26 = popMinimum(right.left)
-			right.left = var25
-			var23 = balance(right)
-			var24 = var26
+		if config2 == nil then
+			return config1, Right
 		end
-		return var17, join(t_1, var24, var23)
+		if Right == nil then
+			return config1, config2
+		end
+		local PopMinimumResult = nil
+		local BalanceResult = nil
+		if Right.left == nil then
+			local Right7 = Right.right
+			Right.left = nil
+			Right.right = nil
+			refresh(Right)
+			BalanceResult = Right7
+			PopMinimumResult = Right
+		else
+			local PopMinimumResult2_2
+			Right.left, PopMinimumResult2_2 = popMinimum(Right.left)
+			BalanceResult = balance(Right)
+			PopMinimumResult = PopMinimumResult2_2
+		end
+		return config1, (join(config2, PopMinimumResult, BalanceResult))
 	end
 end
 
-local function insertUnitAt(p1, p2, p3)
-	-- upvalues: refresh (ref), insertUnitAt (ref), balance (ref)
-	if p1 == nil then
-		local t = {
+local function insertUnitAt(Left, p1: number, MeasuredSize) --[[ Line: 214 ]]
+	-- upvalues: refresh (copy), insertUnitAt (copy), balance (copy)
+	if Left == nil then
+		local config = {
 			itemCount = 1,
 			subtreeItemCount = 1,
 			subtreeNodeCount = 1,
 			height = 1,
 			left = nil,
 			right = nil,
-			measuredSize = p3,
-			subtreeMeasuredCount = if p3 == nil then 0 else 1,
-			subtreeMeasuredSum = p3 or 0
+			measuredSize = MeasuredSize,
+			subtreeMeasuredCount = if MeasuredSize == nil then 0 else 1,
+			subtreeMeasuredSum = MeasuredSize or 0
 		}
-		refresh(t)
+		refresh(config)
 		
-		return t
+		return config
 	end
-	local left = p1.left
-	local var1 = (if left == nil then 0 else left.subtreeItemCount) + 1
+	local Left1 = Left.left
+	local v1 = (if Left1 == nil then 0 else Left1.subtreeItemCount) + 1
 	
-	if p2 <= var1 then
-		p1.left = insertUnitAt(p1.left, p2, p3)
+	if p1 <= v1 then
+		Left.left = insertUnitAt(Left.left, p1, MeasuredSize)
 	else
-		p1.right = insertUnitAt(p1.right, p2 - var1, p3)
+		Left.right = insertUnitAt(Left.right, p1 - v1, MeasuredSize)
 	end
-	return balance(p1)
+	return (balance(Left))
 end
 
-local function findMin(a)
-	-- upvalues: findMin (ref)
-	return if a.left == nil then a else findMin(a.left)
+local function findMin(Left) --[[ Line: 228 ]]
+	-- upvalues: findMin (copy)
+	return if Left.left == nil then Left else findMin(Left.left)
 end
 
-local function removeUnitAt(p1, p2)
-	-- upvalues: removeUnitAt (ref), findMin (ref), balance (ref)
-	if p1 == nil then
+local function removeUnitAt(Left, p1: number) --[[ Line: 232 ]]
+	-- upvalues: removeUnitAt (copy), findMin (copy), balance (copy)
+	if Left == nil then
 		return nil
 	end
-	local left = p1.left
-	local var1 = (if left == nil then 0 else left.subtreeItemCount) + 1
+	local Left1 = Left.left
+	local v1 = (if Left1 == nil then 0 else Left1.subtreeItemCount) + 1
 	
-	if p2 < var1 then
-		p1.left = removeUnitAt(p1.left, p2)
-	elseif var1 < p2 then
-		p1.right = removeUnitAt(p1.right, p2 - var1)
-	elseif p1.left == nil then
-		return p1.right
-	elseif p1.right == nil then
-		return p1.left
-	end
-	local right = p1.right
-	local var2 = if right.left ~= nil then right else findMin(right.left)
-	p1.measuredSize = var2.measuredSize
-	p1.itemCount = var2.itemCount
-	p1.right = removeUnitAt(p1.right, 1)
-	return balance(p1)
-end
-
-local function updateUnitAt(p1, p2, p3)
-	-- upvalues: updateUnitAt (ref), refresh (ref)
-	if p1 == nil then return end
-	local left = p1.left
-	local var1 = (if left == nil then 0 else left.subtreeItemCount) + 1
-	
-	if p2 < var1 then
-		updateUnitAt(p1.left, p2, p3)
-	elseif var1 < p2 then
-		updateUnitAt(p1.right, p2 - var1, p3)
+	if p1 < v1 then
+		Left.left = removeUnitAt(Left.left, p1)
+	elseif v1 < p1 then
+		Left.right = removeUnitAt(Left.right, p1 - v1)
 	else
-		p1.measuredSize = p3
+		if Left.left == nil then
+			return Left.right
+		end
+		if Left.right == nil then
+			return Left.left
+		end
+		local Right = Left.right
+		local Right1 = if Right.left == nil then Right else findMin(Right.left)
+		Left.measuredSize = Right1.measuredSize
+		Left.itemCount = Right1.itemCount
+		Left.right = removeUnitAt(Left.right, 1)
 	end
-	refresh(p1)
+	return (balance(Left))
 end
 
-local function updateAt(p1, p2, p3)
-	-- upvalues: updateAt (ref), refresh (ref)
-	if p1 == nil then
+local function updateUnitAt(Left, p1: number, MeasuredSize) --[[ Line: 255 ]]
+	-- upvalues: updateUnitAt (copy), refresh (copy)
+	if Left == nil then return end
+	local Left1 = Left.left
+	local v1 = (if Left1 == nil then 0 else Left1.subtreeItemCount) + 1
+	
+	if p1 < v1 then
+		updateUnitAt(Left.left, p1, MeasuredSize)
+	elseif v1 < p1 then
+		updateUnitAt(Left.right, p1 - v1, MeasuredSize)
+	else
+		Left.measuredSize = MeasuredSize
+	end
+	refresh(Left)
+end
+
+local function updateAt(Left, p1, MeasuredSize) --[[ Line: 271 ]]
+	-- upvalues: updateAt (copy), refresh (copy)
+	if Left == nil then
 		return nil
 	end
-	local left = p1.left
-	local var1 = if left == nil then 0 else left.subtreeItemCount
+	local Left1 = Left.left
+	local SubtreeItemCount = if Left1 == nil then 0 else Left1.subtreeItemCount
 	
-	if p2 <= var1 then
-		p1.left = updateAt(p1.left, p2, p3)
-	elseif var1 + p1.itemCount < p2 then
-		p1.right = updateAt(p1.right, p2 - var1 - p1.itemCount, p3)
+	if p1 <= SubtreeItemCount then
+		Left.left = updateAt(Left.left, p1, MeasuredSize)
+	elseif SubtreeItemCount + Left.itemCount < p1 then
+		Left.right = updateAt(Left.right, p1 - SubtreeItemCount - Left.itemCount, MeasuredSize)
 	else
-		assert(p1.itemCount == 1, "WeightedOrderStatisticTree: in-place update requires a unit node")
-		p1.measuredSize = p3
+		assert(Left.itemCount == 1, "WeightedOrderStatisticTree: in-place update requires a unit node")
+		Left.measuredSize = MeasuredSize
 	end
-	refresh(p1)
+	refresh(Left)
 	
-	return p1
+	return Left
 end
 
-local function measuredAt(p1, p2)
-	-- upvalues: measuredAt (ref)
-	if p1 == nil then
+local function measuredAt(Left, p1) --[[ Line: 288 ]]
+	-- upvalues: measuredAt (copy)
+	if Left == nil then
 		return nil
+	else
+		local Left1 = Left.left
+		local SubtreeItemCount = if Left1 == nil then 0 else Left1.subtreeItemCount
+		
+		return if p1 <= SubtreeItemCount then measuredAt(Left.left, p1) elseif SubtreeItemCount + Left.itemCount < p1 then measuredAt(Left.right, p1 - SubtreeItemCount - Left.itemCount) else Left.measuredSize
 	end
-	local left = p1.left
-	local var1 = if left == nil then 0 else left.subtreeItemCount
-	
-	return if p2 <= var1 then measuredAt(p1.left, p2) elseif var1 + p1.itemCount < p2 then measuredAt(p1.right, p2 - var1 - p1.itemCount) else p1.measuredSize
 end
 
-local function prefixSumUpTo(p1, p2, p3)
-	-- upvalues: prefixSumUpTo (ref)
-	if p1 == nil or p2 <= 0 then
+local function prefixSumUpTo(Left, p1: number, p2) --[[ Line: 301 ]]
+	-- upvalues: prefixSumUpTo (copy)
+	if Left == nil or p1 <= 0 then
 		return 0
 	end
-	local left = p1.left
-	local var1 = if left == nil then 0 else left.subtreeItemCount
+	local Left1 = Left.left
+	local SubtreeItemCount = if Left1 == nil then 0 else Left1.subtreeItemCount
 	
-	if p2 <= var1 then
-		return prefixSumUpTo(p1.left, p2, p3)
+	if p1 <= SubtreeItemCount then
+		return prefixSumUpTo(Left.left, p1, p2)
+	else
+		local Smallest = math.min(Left.itemCount, p1 - SubtreeItemCount)
+		local Left2 = Left.left
+		local v1 = (if Left2 == nil then 0 else Left2.subtreeMeasuredSum + (Left2.subtreeItemCount - Left2.subtreeMeasuredCount) * p2) + (if Left.measuredSize == nil then Smallest * p2 else Left.measuredSize)
+		
+		return if p1 <= SubtreeItemCount + Left.itemCount then v1 else v1 + prefixSumUpTo(Left.right, p1 - SubtreeItemCount - Left.itemCount, p2)
 	end
-	local left_1 = p1.left
-	local var2 = (if left_1 == nil then 0 else left_1.subtreeMeasuredSum + (left_1.subtreeItemCount - left_1.subtreeMeasuredCount) * p3) + (if p1.measuredSize == nil then math.min(p1.itemCount, p2 - var1) * p3 else p1.measuredSize)
-	
-	return if p2 <= var1 + p1.itemCount then var2 else var2 + prefixSumUpTo(p1.right, p2 - var1 - p1.itemCount, p3)
 end
 
-local function entryAtPrefixSum(p1, p2, p3)
-	-- upvalues: entryAtPrefixSum (ref)
-	if p1 == nil then
+local function entryAtPrefixSum(Left, p1, p2) --[[ Line: 319 ]]
+	-- upvalues: entryAtPrefixSum (copy)
+	if Left == nil then
 		return 0, 0, 0
 	end
-	local left = p1.left
-	local var1 = if left == nil then 0 else left.subtreeMeasuredSum + (left.subtreeItemCount - left.subtreeMeasuredCount) * p3
+	local Left1 = Left.left
+	local NewSubtreeMeasuredSum = if Left1 == nil then 0 else Left1.subtreeMeasuredSum + (Left1.subtreeItemCount - Left1.subtreeMeasuredCount) * p2
 	
-	if p2 < var1 then
-		return entryAtPrefixSum(p1.left, p2, p3)
+	if p1 < NewSubtreeMeasuredSum then
+		return entryAtPrefixSum(Left.left, p1, p2)
 	end
-	local left_1 = p1.left
-	local var2 = if left_1 == nil then 0 else left_1.subtreeItemCount
-	local var3 = if p1.measuredSize == nil then p1.itemCount * p3 else p1.measuredSize
+	local Left2 = Left.left
+	local SubtreeItemCount = if Left2 == nil then 0 else Left2.subtreeItemCount
+	local ScaledItemCount = if Left.measuredSize == nil then Left.itemCount * p2 else Left.measuredSize
 	
-	if p2 < var1 + var3 then
-		if p1.measuredSize == nil then
-			local floored = math.floor((p2 - var1) / p3)
-			
-			return var2 + floored + 1, var1 + floored * p3, p3
-		end
-		return var2 + 1, var1, p1.measuredSize
-	else
-		local var4, var5, var6 = entryAtPrefixSum(p1.right, p2 - var1 - var3, p3)
+	if p1 >= NewSubtreeMeasuredSum + ScaledItemCount then
+		local EntryAtPrefixSumResult, EntryAtPrefixSumResult2, EntryAtPrefixSumResult3 = entryAtPrefixSum(Left.right, p1 - NewSubtreeMeasuredSum - ScaledItemCount, p2)
 		
-		if var4 == 0 then
+		if EntryAtPrefixSumResult == 0 then
 			return 0, 0, 0
+		else
+			return SubtreeItemCount + Left.itemCount + EntryAtPrefixSumResult, NewSubtreeMeasuredSum + ScaledItemCount + EntryAtPrefixSumResult2, EntryAtPrefixSumResult3
 		end
-		return var2 + p1.itemCount + var4, var1 + var3 + var5, var6
-	end
-end
-
-local function fillRangeFromNode(p1, p2, p3, p4, p5, p6, p7)
-	-- upvalues: fillRangeFromNode (ref)
-	if p1 == nil then return end
-	local left = p1.left
-	left = p2 + (if left == nil then 0 else left.subtreeItemCount) + 1
-	local var1 = left + p1.itemCount - 1
-	local left_1 = p1.left
-	local var2 = p3 + (if left_1 == nil then 0 else left_1.subtreeMeasuredSum + (left_1.subtreeItemCount - left_1.subtreeMeasuredCount) * p6)
-	
-	if p4 < left then
-		fillRangeFromNode(p1.left, p2, p3, p4, p5, p6, p7)
-	end
-	local maxValue = math.max(p4, left)
-	local minValue = math.min(p5, var1)
-	
-	if maxValue <= minValue then
-		local measuredSize = p1.measuredSize or p6
+	elseif Left.measuredSize == nil then
+		local Floored = math.floor((p1 - NewSubtreeMeasuredSum) / p2)
 		
-		for i = maxValue, minValue do
-			local var3 = i - p4 + 1
-			local var4 = p7[var3]
+		return SubtreeItemCount + Floored + 1, NewSubtreeMeasuredSum + Floored * p2, p2
+	else
+		return SubtreeItemCount + 1, NewSubtreeMeasuredSum, Left.measuredSize
+	end
+end
+
+local function fillRangeFromNode(Left, ItemCountDelta, p1, p2: number, p3: number, p4, p5) --[[ Line: 346 ]]
+	-- upvalues: fillRangeFromNode (copy)
+	if Left == nil then return end
+	local Left1 = Left.left
+	local NewItemCountDelta = ItemCountDelta + (if Left1 == nil then 0 else Left1.subtreeItemCount) + 1
+	local NewItemCountDeltaDelta = NewItemCountDelta + Left.itemCount - 1
+	local Left2 = Left.left
+	local v1 = p1 + (if Left2 == nil then 0 else Left2.subtreeMeasuredSum + (Left2.subtreeItemCount - Left2.subtreeMeasuredCount) * p4)
+	
+	if p2 < NewItemCountDelta then
+		fillRangeFromNode(Left.left, ItemCountDelta, p1, p2, p3, p4, p5)
+	end
+	local Largest = math.max(p2, NewItemCountDelta)
+	local Smallest = math.min(p3, NewItemCountDeltaDelta)
+	
+	if Largest <= Smallest then
+		local MeasuredSize = Left.measuredSize or p4
+		
+		for i = Largest, Smallest do
+			local NewI = i - p2 + 1
+			local v2 = p5[NewI]
 			
-			if var4 == nil then
-				var4 = { startOffset = 0, length = 0 }
-				p7[var3] = var4
+			if v2 == nil then
+				v2 = { startOffset = 0, length = 0 }
+				p5[NewI] = v2
 			end
-			var4.startOffset = var2 + (i - left) * measuredSize
-			var4.length = measuredSize
+			v2.startOffset = v1 + (i - NewItemCountDelta) * MeasuredSize
+			v2.length = MeasuredSize
 		end
 	end
-	if var1 < p5 then
-		fillRangeFromNode(p1.right, var1, var2 + (if p1.measuredSize == nil then p1.itemCount * p6 else p1.measuredSize), p4, p5, p6, p7)
+	if NewItemCountDeltaDelta < p3 then
+		fillRangeFromNode(Left.right, NewItemCountDeltaDelta, v1 + (if Left.measuredSize == nil then Left.itemCount * p4 else Left.measuredSize), p2, p3, p4, p5)
 	end
 end
 
-local function buildBalanced(p8, p9, p10)
-	-- upvalues: refresh (ref), buildBalanced (ref)
-	if p10 < p9 then
+local function buildBalanced(p6, p7, p8) --[[ Line: 396 ]]
+	-- upvalues: refresh (copy), buildBalanced (copy)
+	if p8 < p7 then
 		return nil
+	else
+		local v3 = (p7 + p8) // 2
+		local Left = p6[v3]
+		local ItemCount = Left.itemCount
+		local MeasuredSize = Left.measuredSize
+		local config = {
+			subtreeNodeCount = 1,
+			height = 1,
+			left = nil,
+			right = nil,
+			itemCount = ItemCount,
+			measuredSize = MeasuredSize,
+			subtreeItemCount = ItemCount,
+			subtreeMeasuredCount = if MeasuredSize == nil then 0 else 1,
+			subtreeMeasuredSum = MeasuredSize or 0
+		}
+		refresh(config)
+		config.left = buildBalanced(p6, p7, v3 - 1)
+		config.right = buildBalanced(p6, v3 + 1, p8)
+		refresh(config)
+		
+		return config
 	end
-	local var5 = (p9 + p10) // 2
-	local var6 = p8[var5]
-	local itemCount = var6.itemCount
-	local measuredSize = var6.measuredSize
-	local t = {
-		subtreeNodeCount = 1,
-		height = 1,
-		left = nil,
-		right = nil,
-		itemCount = itemCount,
-		measuredSize = measuredSize,
-		subtreeItemCount = itemCount,
-		subtreeMeasuredCount = if measuredSize == nil then 0 else 1,
-		subtreeMeasuredSum = measuredSize or 0
-	}
-	refresh(t)
-	t.left = buildBalanced(p8, p9, var5 - 1)
-	t.right = buildBalanced(p8, var5 + 1, p10)
-	refresh(t)
-	
-	return t
 end
 
-local function appendToArray(p8, p9, p10)
-	-- upvalues: appendToArray (ref)
-	if p8 == nil then return end
-	appendToArray(p8.left, p9, p10)
-	local measuredSize = p8.measuredSize or p10
+local function appendToArray(Left, List, p6) --[[ Line: 409 ]]
+	-- upvalues: appendToArray (copy)
+	if Left == nil then return end
+	appendToArray(Left.left, List, p6)
+	local MeasuredSize = Left.measuredSize or p6
 	
-	for _ = 1, p8.itemCount do
-		table.insert(p9, measuredSize)
+	for _ = 1, Left.itemCount do
+		table.insert(List, MeasuredSize)
 	end
-	appendToArray(p8.right, p9, p10)
+	appendToArray(Left.right, List, p6)
 end
 
-t.newNode = newNode
-t.refresh = refresh
-t.balance = balance
-t.join = join
-t.popMinimum = popMinimum
-t.popMaximum = popMaximum
-t.concatenate = concatenate
-t.splitByItems = splitByItems
-t.insertUnitAt = insertUnitAt
-t.removeUnitAt = removeUnitAt
-t.updateUnitAt = updateUnitAt
-t.updateAt = updateAt
-t.measuredAt = measuredAt
-t.prefixSumUpTo = prefixSumUpTo
-t.entryAtPrefixSum = entryAtPrefixSum
-t.fillRangeFromNode = fillRangeFromNode
-t.buildBalanced = buildBalanced
-t.appendToArray = appendToArray
-t.nodeItemCount = nodeItemCount
-t.nodeMeasuredCount = nodeMeasuredCount
-t.nodeCount = nodeCount
-t.nodeEffectiveSum = nodeEffectiveSum
-
-return t
+return {
+	newNode = function(ItemCount, MeasuredSize) --[[ Line: 71 ]]
+		-- upvalues: refresh (copy)
+		local config = {
+			subtreeNodeCount = 1,
+			height = 1,
+			left = nil,
+			right = nil,
+			itemCount = ItemCount,
+			measuredSize = MeasuredSize,
+			subtreeItemCount = ItemCount,
+			subtreeMeasuredCount = if MeasuredSize == nil then 0 else 1,
+			subtreeMeasuredSum = MeasuredSize or 0
+		}
+		refresh(config)
+		
+		return config
+	end,
+	refresh = refresh,
+	balance = balance,
+	join = join,
+	popMinimum = popMinimum,
+	popMaximum = popMaximum,
+	concatenate = function(Left, Left1) --[[ Line: 165 ]]
+		-- upvalues: refresh (copy), popMinimum (copy), balance (copy), join (copy)
+		if Left == nil then
+			return Left1
+		end
+		if Left1 == nil then
+			return Left
+		end
+		local Right1 = nil
+		local Left2 = nil
+		if Left1.left == nil then
+			local Right = Left1.right
+			Left1.left = nil
+			Left1.right = nil
+			refresh(Left1)
+			Right1 = Right
+			Left2 = Left1
+		else
+			local PopMinimumResult2
+			Left1.left, PopMinimumResult2 = popMinimum(Left1.left)
+			Right1 = balance(Left1)
+			Left2 = PopMinimumResult2
+		end
+		return (join(Left, Left2, Right1))
+	end,
+	splitByItems = splitByItems,
+	insertUnitAt = insertUnitAt,
+	removeUnitAt = removeUnitAt,
+	updateUnitAt = updateUnitAt,
+	updateAt = updateAt,
+	measuredAt = measuredAt,
+	prefixSumUpTo = prefixSumUpTo,
+	entryAtPrefixSum = entryAtPrefixSum,
+	fillRangeFromNode = fillRangeFromNode,
+	buildBalanced = buildBalanced,
+	appendToArray = appendToArray,
+	nodeItemCount = function(p7) --[[ Line: 29 ]]
+		return if p7 == nil then 0 else p7.subtreeItemCount
+	end,
+	nodeMeasuredCount = function(p7) --[[ Line: 33 ]]
+		return if p7 == nil then 0 else p7.subtreeMeasuredCount
+	end,
+	nodeCount = function(p7) --[[ Line: 41 ]]
+		return if p7 == nil then 0 else p7.subtreeNodeCount
+	end,
+	nodeEffectiveSum = function(Left, p7) --[[ Line: 45 ]]
+		return if Left == nil then 0 else Left.subtreeMeasuredSum + (Left.subtreeItemCount - Left.subtreeMeasuredCount) * p7
+	end
+}

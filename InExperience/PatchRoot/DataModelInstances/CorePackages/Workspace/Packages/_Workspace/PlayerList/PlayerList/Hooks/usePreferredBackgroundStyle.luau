@@ -1,18 +1,22 @@
-﻿local parent = script.Parent.Parent
-local reactModule = require(parent.Parent.React)
-local usePreferredTransparencyBindingModule = require(parent.Hooks.usePreferredTransparencyBinding)
+﻿local Parent = script.Parent.Parent
+local ReactModule = require(Parent.Parent.React)
+local UsePreferredTransparencyBindingModule = require(Parent.Hooks.usePreferredTransparencyBinding)
 
-return function(value)
-	-- upvalues: usePreferredTransparencyBindingModule (ref), reactModule (ref)
-	local var1 = usePreferredTransparencyBindingModule()
-	local color3 = value.Color3
-	local transparency = value.Transparency
+return function(p1) --[[ Line: 21 | Named "usePreferredBackgroundStyle" ]]
+	-- upvalues: UsePreferredTransparencyBindingModule (copy), ReactModule (copy)
+	local UsePreferredTransparencyBindingModuleResult = UsePreferredTransparencyBindingModule()
+	local _Color3 = p1.Color3
+	local Transparency = p1.Transparency
 	
-	return reactModule.useMemo(function()
-		-- upvalues: var1 (ref), color3 (ref), transparency (ref)
-		return var1:map(function(p1)
-			-- upvalues: color3 (copy), transparency (copy)
-			return { Color3 = color3, Transparency = transparency * p1 }
+	return ReactModule.useMemo(function() --[[ Line: 26 ]]
+		-- upvalues: UsePreferredTransparencyBindingModuleResult (copy), _Color3 (copy), Transparency (copy)
+		return UsePreferredTransparencyBindingModuleResult:map(function(p2) --[[ Line: 27 ]]
+			-- upvalues: _Color3 (upval), Transparency (upval)
+			return { Color3 = _Color3, Transparency = Transparency * p2 }
 		end)
-	end, { var1, color3, transparency })
+	end, {
+		UsePreferredTransparencyBindingModuleResult,
+		_Color3,
+		Transparency
+	})
 end

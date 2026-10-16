@@ -1,70 +1,72 @@
-﻿local insertService = game:GetService("InsertService")
-local promiseModule = require(script:FindFirstAncestor("AvatarExperienceCommon").Parent.Promise)
+﻿local InsertService = game:GetService("InsertService")
+local PromiseModule = require(script:FindFirstAncestor("AvatarExperienceCommon").Parent.Promise)
 local _ = require(script.Parent.types)
 
 return {
-	create = function(value)
-		-- upvalues: promiseModule (ref)
-		return function(p1)
-			-- upvalues: promiseModule (copy), value (ref)
-			return promiseModule.new(function(p2, p3)
-				-- upvalues: value (copy), p1 (ref)
-				task.spawn(function()
-					-- upvalues: value (copy), p1 (copy), p3 (ref), p2 (ref)
-					local ok, status = pcall(function()
-						-- upvalues: value (copy), p1 (copy)
-						return value:LoadAsset(p1)
+	create = function(InsertService) --[[ Line: 19 ]]
+		-- upvalues: PromiseModule (copy)
+		return function(AssetId) --[[ Line: 20 ]]
+			-- upvalues: PromiseModule (upval), InsertService (copy)
+			return PromiseModule.new(function(Callback1, Callback) --[[ Line: 21 ]]
+				-- upvalues: InsertService (upval), AssetId (copy)
+				task.spawn(function() --[[ Line: 22 ]]
+					-- upvalues: InsertService (upval), AssetId (upval), Callback (copy), Callback1 (copy)
+					local Success, Result = pcall(function() --[[ Line: 23 ]]
+						-- upvalues: InsertService (upval), AssetId (upval)
+						return InsertService:LoadAsset(AssetId)
 					end)
 					
-					if not ok or not status then
-						return p3(`loadAsset failed for asset {p1}: {tostring(status)}`)
+					if not Success or not Result then
+						return Callback(`loadAsset failed for asset {AssetId}: {tostring(Result)}`)
 					end
-					local avatarBackground = status:FindFirstChild("AvatarBackground")
-					local imageId = avatarBackground and avatarBackground:FindFirstChild("ImageId")
-					local color = avatarBackground and avatarBackground:FindFirstChild("Color")
+					local AvatarBackground = Result:FindFirstChild("AvatarBackground")
+					local ImageId = AvatarBackground and AvatarBackground:FindFirstChild("ImageId")
+					local Color = AvatarBackground and AvatarBackground:FindFirstChild("Color")
 					
-					if avatarBackground and imageId and color then
-						local value_1 = imageId.Value
-						local value_2 = color.Value
-						status:Destroy()
+					if AvatarBackground and ImageId and Color then
+						local Value = ImageId.Value
+						local Value1 = Color.Value
+						Result:Destroy()
 						
-						return p2({ imageId = value_1, backgroundColor = value_2 })
+						return Callback1({ imageId = Value, backgroundColor = Value1 })
+					else
+						Result:Destroy()
+						
+						return Callback(`asset {AssetId} missing AvatarBackground/ImageId/Color`)
 					end
-					status:Destroy()
-					
-					return p3(`asset {p1} missing AvatarBackground/ImageId/Color`)
 				end)
 			end)
 		end
 	end,
-	default = function(p1)
-		-- upvalues: promiseModule (ref), insertService (ref)
-		return promiseModule.new(function(p2, p3)
-			-- upvalues: insertService (copy), p1 (ref)
-			task.spawn(function()
-				-- upvalues: insertService (copy), p1 (copy), p3 (ref), p2 (ref)
-				local ok, status = pcall(function()
-					-- upvalues: insertService (copy), p1 (copy)
-					return insertService:LoadAsset(p1)
+	default = function(AssetId) --[[ Line: 20 ]]
+		-- upvalues: PromiseModule (copy), InsertService (copy)
+		return PromiseModule.new(function(Callback1, Callback) --[[ Line: 21 ]]
+			-- upvalues: InsertService (upval), AssetId (copy)
+			task.spawn(function() --[[ Line: 22 ]]
+				-- upvalues: InsertService (upval), AssetId (upval), Callback (copy), Callback1 (copy)
+				local Success, Result = pcall(function() --[[ Line: 23 ]]
+					-- upvalues: InsertService (upval), AssetId (upval)
+					return InsertService:LoadAsset(AssetId)
 				end)
 				
-				if not ok or not status then
-					return p3(`loadAsset failed for asset {p1}: {tostring(status)}`)
+				if not Success or not Result then
+					return Callback(`loadAsset failed for asset {AssetId}: {tostring(Result)}`)
 				end
-				local avatarBackground = status:FindFirstChild("AvatarBackground")
-				local imageId = avatarBackground and avatarBackground:FindFirstChild("ImageId")
-				local color = avatarBackground and avatarBackground:FindFirstChild("Color")
+				local AvatarBackground = Result:FindFirstChild("AvatarBackground")
+				local ImageId = AvatarBackground and AvatarBackground:FindFirstChild("ImageId")
+				local Color = AvatarBackground and AvatarBackground:FindFirstChild("Color")
 				
-				if avatarBackground and imageId and color then
-					local value_1 = imageId.Value
-					local value_2 = color.Value
-					status:Destroy()
+				if AvatarBackground and ImageId and Color then
+					local Value = ImageId.Value
+					local Value1 = Color.Value
+					Result:Destroy()
 					
-					return p2({ imageId = value_1, backgroundColor = value_2 })
+					return Callback1({ imageId = Value, backgroundColor = Value1 })
+				else
+					Result:Destroy()
+					
+					return Callback(`asset {AssetId} missing AvatarBackground/ImageId/Color`)
 				end
-				status:Destroy()
-				
-				return p3(`asset {p1} missing AvatarBackground/ImageId/Color`)
 			end)
 		end)
 	end

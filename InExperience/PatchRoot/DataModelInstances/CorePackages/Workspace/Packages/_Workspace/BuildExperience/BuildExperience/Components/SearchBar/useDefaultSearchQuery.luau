@@ -1,29 +1,29 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local reactModule = require(buildExperience.Parent.React)
-local createSearchQueryStoreModule = require(buildExperience.Stores.GetSearchQueryStore.createSearchQueryStore)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local ReactModule = require(BuildExperience.Parent.React)
+local CreateSearchQueryStoreModule = require(BuildExperience.Stores.GetSearchQueryStore.createSearchQueryStore)
 
-return function(p1)
-	-- upvalues: reactModule (ref), createSearchQueryStoreModule (ref)
-	local var1 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref), createSearchQueryStoreModule (copy)
-		return p1 or createSearchQueryStoreModule()
+return function(p1) --[[ Line: 17 | Named "useDefaultSearchQuery" ]]
+	-- upvalues: ReactModule (copy), CreateSearchQueryStoreModule (copy)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 18 ]]
+		-- upvalues: p1 (copy), CreateSearchQueryStoreModule (upval)
+		return p1 or CreateSearchQueryStoreModule()
 	end, { p1 })
-	local var2 = var1.useDraftQuery()
-	local var3 = var1.useDebouncedQuery()
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var1 (ref)
-		return function()
-			-- upvalues: p1 (copy), var1 (copy)
+	local UseDraftQueryResult = UseMemoResult.useDraftQuery()
+	local UseDebouncedQueryResult = UseMemoResult.useDebouncedQuery()
+	ReactModule.useEffect(function() --[[ Line: 24 ]]
+		-- upvalues: p1 (copy), UseMemoResult (copy)
+		return function() --[[ Line: 25 ]]
+			-- upvalues: p1 (upval), UseMemoResult (upval)
 			if p1 == nil then
-				var1.destroy()
+				UseMemoResult.destroy()
 			end
 		end
-	end, { var1, p1 })
+	end, { UseMemoResult, p1 })
 	
 	return {
-		clear = var1.clear,
-		debouncedQuery = var3,
-		query = var2,
-		setQuery = var1.setQuery
+		clear = UseMemoResult.clear,
+		debouncedQuery = UseDebouncedQueryResult,
+		query = UseDraftQueryResult,
+		setQuery = UseMemoResult.setQuery
 	}
 end

@@ -1,61 +1,68 @@
-﻿local parent = script:FindFirstAncestor("VirtualEvents").Parent
-local reactModule = require(parent.React)
-local styleModule = require(parent.Style)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local foundationModule = require(parent.Foundation)
-local useDesignTokens = styleModule.useDesignTokens
-local useTokens = foundationModule.Hooks.useTokens
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local footerCornerButtonStyle = require(parent.GameTile).FooterCornerButtonStyle
+﻿local Parent = script:FindFirstAncestor("VirtualEvents").Parent
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local FoundationModule = require(Parent.Foundation)
+local UseDesignTokensFunction = require(Parent.Style).useDesignTokens
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local FooterCornerButtonStyle = require(Parent.GameTile).FooterCornerButtonStyle
 
-return function(p1)
-	-- upvalues: useDesignTokens (ref), useTokens (ref), useLocalization (ref), footerCornerButtonStyle (ref), reactModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
-	local var1 = useDesignTokens()
-	local var2 = useTokens()
-	local var3 = useLocalization({
+return function(p1) --[[ Line: 21 ]]
+	-- upvalues: UseDesignTokensFunction (copy), UseTokensFunction (copy), UseLocalizationFunction (copy), FooterCornerButtonStyle (copy), ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	local UseDesignTokensResult = UseDesignTokensFunction()
+	local UseTokensResult = UseTokensFunction()
+	local UseLocalizationResult = UseLocalizationFunction({
 		notifyMe = "Feature.VirtualEvents.NotifyMe",
 		unfollowEvent = "Feature.VirtualEvents.UnfollowEvent",
 		joinEvent = "Feature.VirtualEvents.JoinEvent"
 	})
-	local color3 = var1.Color.ActionEmphasis.Background.Color3
-	local color3_1 = var1.Color.ActionEmphasis.Foreground.Color3
-	local joinEvent = var3.joinEvent
+	local BackgroundColor3 = UseDesignTokensResult.Color.ActionEmphasis.Background.Color3
+	local ForegroundColor3 = UseDesignTokensResult.Color.ActionEmphasis.Foreground.Color3
+	local JoinEvent = UseLocalizationResult.joinEvent
 	
-	if p1.buttonStyle == footerCornerButtonStyle.Follow then
-		color3 = var2.Color.ActionSubEmphasis.Background.Color3
-		color3_1 = var2.Color.ActionSubEmphasis.Foreground.Color3
-		joinEvent = var3.notifyMe
-	elseif p1.buttonStyle == footerCornerButtonStyle.Following then
-		color3_1 = var2.Color.ActionStandard.Foreground.Color3
-		joinEvent = var3.unfollowEvent
+	if p1.buttonStyle == FooterCornerButtonStyle.Follow then
+		BackgroundColor3 = UseTokensResult.Color.ActionSubEmphasis.Background.Color3
+		ForegroundColor3 = UseTokensResult.Color.ActionSubEmphasis.Foreground.Color3
+		JoinEvent = UseLocalizationResult.notifyMe
+	elseif p1.buttonStyle == FooterCornerButtonStyle.Following then
+		ForegroundColor3 = UseTokensResult.Color.ActionStandard.Foreground.Color3
+		JoinEvent = UseLocalizationResult.unfollowEvent
 	end
-	local var4 = p1.buttonStyle == footerCornerButtonStyle.Following
-	local var5 = if p1.disabled then 0.5 else 0
+	local IsButtonStyleMatch = p1.buttonStyle == FooterCornerButtonStyle.Following
+	local TextTransparency: number = if p1.disabled then 0.5 else 0
 	
-	return reactModule.createElement("TextButton", {
-		Size = UDim2.new(1, 0, 0, var1.Size.Size_700),
+	return ReactModule.createElement("TextButton", {
+		Size = UDim2.new(1, 0, 0, UseDesignTokensResult.Size.Size_700),
 		Position = UDim2.new(0, 0, 1, 0),
 		AnchorPoint = Vector2.new(0, 1),
-		TextSize = var1.Size.Size_350,
-		Font = if foundationFontFaceMigration then nil else var1.Typography.HeadingSmall.Font,
-		FontFace = if foundationFontFaceMigration then normalizeFontFace(var2.Typography.HeadingSmall.Font) else nil,
-		BackgroundColor3 = color3,
-		TextColor3 = color3_1,
+		TextSize = UseDesignTokensResult.Size.Size_350,
+		Font = if FoundationFontFaceMigration then nil else UseDesignTokensResult.Typography.HeadingSmall.Font,
+		FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.HeadingSmall.Font) else nil,
+		BackgroundColor3 = BackgroundColor3,
+		TextColor3 = ForegroundColor3,
 		AutoButtonColor = false,
-		Text = joinEvent,
-		BackgroundTransparency = if var4 then 1 else var5,
-		TextTransparency = var5,
-		[reactModule.Event.Activated] = p1.onActivated
+		Text = JoinEvent,
+		BackgroundTransparency = if IsButtonStyleMatch then 1 else TextTransparency,
+		TextTransparency = TextTransparency,
+		[ReactModule.Event.Activated] = p1.onActivated
 	}, {
-		EventButtonCorners = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, var1.Size.Size_200) }),
-		OutlineFrame = if var4 then reactModule.createElement("Frame", {
+		EventButtonCorners = ReactModule.createElement("UICorner", {
+			CornerRadius = UDim.new(0, UseDesignTokensResult.Size.Size_200)
+		}),
+		OutlineFrame = if IsButtonStyleMatch then ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, -2, 1, -2),
 			Position = UDim2.new(0, 1, 0, 1)
 		}, {
-			OutlineCorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, var1.Size.Size_200 - 2) }),
-			OutlineStroke = reactModule.createElement("UIStroke", { Thickness = 1, Color = color3_1, Transparency = var5 })
+			OutlineCorner = ReactModule.createElement("UICorner", {
+				CornerRadius = UDim.new(0, UseDesignTokensResult.Size.Size_200 - 2)
+			}),
+			OutlineStroke = ReactModule.createElement("UIStroke", {
+				Thickness = 1,
+				Color = ForegroundColor3,
+				Transparency = TextTransparency
+			})
 		}) else nil
 	})
 end

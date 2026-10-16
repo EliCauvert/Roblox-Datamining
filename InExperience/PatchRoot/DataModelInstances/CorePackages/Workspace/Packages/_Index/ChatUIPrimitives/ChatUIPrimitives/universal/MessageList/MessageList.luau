@@ -1,8 +1,8 @@
-﻿local reactModule = require(script:FindFirstAncestor("ChatUIPrimitives").Parent.React)
-local messageListViewModule = require(script.Parent.MessageListView)
-local useMessageListViewModelModule = require(script.Parent.useMessageListViewModel)
+﻿local ReactModule = require(script:FindFirstAncestor("ChatUIPrimitives").Parent.React)
+local MessageListViewModule = require(script.Parent.MessageListView)
+local UseMessageListViewModelModule = require(script.Parent.useMessageListViewModel)
 
-return reactModule.memo(function(p1)
-	-- upvalues: useMessageListViewModelModule (ref), reactModule (ref), messageListViewModule (ref)
-	return reactModule.createElement(messageListViewModule, useMessageListViewModelModule(p1))
+return ReactModule.memo(function(p1) --[[ Line: 12 | Named "MessageList" ]]
+	-- upvalues: UseMessageListViewModelModule (copy), ReactModule (copy), MessageListViewModule (copy)
+	return ReactModule.createElement(MessageListViewModule, (UseMessageListViewModelModule(p1)))
 end)

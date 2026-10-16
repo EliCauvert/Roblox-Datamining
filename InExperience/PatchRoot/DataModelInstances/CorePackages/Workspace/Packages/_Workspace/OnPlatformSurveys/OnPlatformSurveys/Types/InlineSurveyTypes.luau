@@ -1,5 +1,5 @@
-﻿local onPlatformSurveys = script:FindFirstAncestor("OnPlatformSurveys")
-local _ = require(onPlatformSurveys.Enums.InlineEventType)
-local _ = require(onPlatformSurveys.Enums.InlineQuestionType)
+﻿local OnPlatformSurveys = script:FindFirstAncestor("OnPlatformSurveys")
+local _ = require(OnPlatformSurveys.Enums.InlineEventType)
+local _ = require(OnPlatformSurveys.Enums.InlineQuestionType)
 
 return { NEXT_END = "$end" }

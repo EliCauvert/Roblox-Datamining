@@ -1,27 +1,27 @@
-﻿local editProfile = script:FindFirstAncestor("EditProfile")
-local reactModule = require(editProfile.Parent.React)
-local getAppStorageServiceModule = require(editProfile.Common.getAppStorageService)
+﻿local EditProfile = script:FindFirstAncestor("EditProfile")
+local ReactModule = require(EditProfile.Parent.React)
+local GetAppStorageServiceModule = require(EditProfile.Common.getAppStorageService)
 
-return function()
-	-- upvalues: getAppStorageServiceModule (ref), reactModule (ref)
-	local var1 = getAppStorageServiceModule()
-	local var2, var3 = reactModule.useState(function()
-		-- upvalues: var1 (ref)
-		local ok, status = pcall(function()
-			-- upvalues: var1 (copy)
-			return var1:GetItem("ProfileFramesNewLabelSeen")
+return function() --[[ Line: 11 | Named "useProfileFramesNewLabel" ]]
+	-- upvalues: GetAppStorageServiceModule (copy), ReactModule (copy)
+	local AppStorageServiceModule = GetAppStorageServiceModule()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(function(): boolean --[[ Line: 13 ]]
+		-- upvalues: AppStorageServiceModule (copy)
+		local Success, Result = pcall(function() --[[ Line: 14 ]]
+			-- upvalues: AppStorageServiceModule (upval)
+			return AppStorageServiceModule:GetItem("ProfileFramesNewLabelSeen")
 		end)
 		
-		return ok and status ~= "true"
+		return Success and Result ~= "true"
 	end)
 	
-	return var2, reactModule.useCallback(function()
-		-- upvalues: var3 (ref), var1 (ref)
-		var3(false)
-		pcall(function()
-			-- upvalues: var1 (copy)
-			var1:SetItem("ProfileFramesNewLabelSeen", "true")
-			var1:Flush()
+	return UseStateResult, (ReactModule.useCallback(function() --[[ Line: 21 ]]
+		-- upvalues: UseStateResult2 (copy), AppStorageServiceModule (copy)
+		UseStateResult2(false)
+		pcall(function() --[[ Line: 23 ]]
+			-- upvalues: AppStorageServiceModule (upval)
+			AppStorageServiceModule:SetItem("ProfileFramesNewLabelSeen", "true")
+			AppStorageServiceModule:Flush()
 		end)
-	end, { var1 })
+	end, { AppStorageServiceModule }))
 end

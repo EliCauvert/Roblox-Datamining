@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.Backpack.Backpack)
+﻿return (require(script.Parent._Workspace.Backpack.Backpack))

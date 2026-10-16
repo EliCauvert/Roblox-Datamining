@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("BulkPurchaseUsesPurchaseOptionDiscount", false)
+﻿return (game:DefineFastFlag("BulkPurchaseUsesPurchaseOptionDiscount", false))

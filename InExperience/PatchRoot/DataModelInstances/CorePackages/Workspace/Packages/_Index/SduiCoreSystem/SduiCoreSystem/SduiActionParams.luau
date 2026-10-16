@@ -1,20 +1,20 @@
 ﻿return {
-	getStringParam = function(p1, p2, p3)
-		local var1 = p1[p2]
+	getStringParam = function(p1, p2, p3) --[[ Line: 7 ]]
+		local v1 = p1[p2]
 		
-		return if typeof(var1) == "string" then var1 else p3
+		return if typeof(v1) == "string" then v1 else p3
 	end,
-	getBooleanParam = function(p1, p2, p3)
-		local var1 = p1[p2]
+	getBooleanParam = function(p1, p2, p3) --[[ Line: 12 ]]
+		local v1 = p1[p2]
 		
-		return if typeof(var1) == "boolean" then var1 else p3
+		return if typeof(v1) == "boolean" then v1 else p3
 	end,
-	getCallbackParam = function(p1, p2, p3)
-		local var1 = p1[p2]
+	getCallbackParam = function(p1, p2, p3) --[[ Line: 17 ]]
+		local Callback = p1[p2]
 		
-		return if typeof(var1) == "function" then function()
-			-- upvalues: var1 (ref)
-			var1()
+		return if typeof(Callback) == "function" then function() --[[ Line: 23 ]]
+			-- upvalues: Callback (copy)
+			Callback()
 		end else p3
 	end
 }

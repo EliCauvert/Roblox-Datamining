@@ -1,122 +1,112 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local parent = dataHydration.Parent
-local cryoModule = require(parent.Cryo)
-local signalsModule = require(parent.Signals)
-local _ = require(dataHydration.DataHydrationTypes)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local Parent = DataHydration.Parent
+local CryoModule = require(Parent.Cryo)
+local SignalsModule = require(Parent.Signals)
+local _ = require(DataHydration.DataHydrationTypes)
 
-return function()
-	-- upvalues: signalsModule (ref), cryoModule (ref)
+return function() --[[ Line: 10 | Named "createMutationLayer" ]]
+	-- upvalues: SignalsModule (copy), CryoModule (copy)
 	local t = {}
-	local t_1 = {}
-	local t_2 = {}
-	local t_3 = {}
+	local t1 = {}
+	local t2 = {}
+	local t3 = {}
 	
-	local function _(value)
-		-- upvalues: t (ref), t_1 (ref), signalsModule (copy)
-		if not t[value] then
-			local var1 = t
-			local var2 = t_1
-			local var3, var4 = signalsModule.createSignal(nil)
-			var1[value] = var3
-			var2[value] = var4
+	local function _(p1) --[[ Line: 18 | Named "getOrCreateMutationSignal" ]]
+		-- upvalues: t (copy), t1 (copy), SignalsModule (upval)
+		if not t[p1] then
+			t[p1], t1[p1] = SignalsModule.createSignal(nil)
 		end
-		return t[value], t_1[value]
+		return t[p1], t1[p1]
 	end
 	
 	return {
-		set = function(value, p1)
-			-- upvalues: t (ref), t_1 (ref), signalsModule (copy), cryoModule (copy)
-			if not t[value] then
-				local var1 = t
-				local var2 = t_1
-				local var3, var4 = signalsModule.createSignal(nil)
-				var1[value] = var3
-				var2[value] = var4
+		set = function(p1, p2) --[[ Line: 30 ]]
+			-- upvalues: t (copy), t1 (copy), SignalsModule (upval), CryoModule (upval)
+			if not t[p1] then
+				t[p1], t1[p1] = SignalsModule.createSignal(nil)
 			end
-			local var5 = t_1[value]
-			local var6 = t[value](false)
+			local Entry: (any) -> () = t1[p1]
+			local v1 = t[p1](false)
 			
-			if type(var6) == "table" and type(p1) == "table" then
-				var5(cryoModule.Dictionary.union(var6, p1))
+			if type(v1) == "table" and type(p2) == "table" then
+				Entry((CryoModule.Dictionary.union(v1, p2)))
 				
 				return
+			else
+				Entry(p2)
 			end
-			var5(p1)
 		end,
-		clear = function(p1)
-			-- upvalues: t_1 (ref), t_3 (write)
-			if t_1[p1] then
-				t_1[p1](nil)
+		clear = function(Key) --[[ Line: 40 ]]
+			-- upvalues: t1 (copy), t3 (ref)
+			if t1[Key] then
+				t1[Key](nil)
 			end
-			t_3[p1] = nil
+			t3[Key] = nil
 		end,
-		has = function(p1)
-			-- upvalues: t (ref)
+		has = function(p1): boolean --[[ Line: 47 ]]
+			-- upvalues: t (copy)
 			return if t[p1] then t[p1](false) ~= nil else false
 		end,
-		get = function(p1)
-			-- upvalues: t (ref)
+		get = function(p1) --[[ Line: 57 ]]
+			-- upvalues: t (copy)
 			return if t[p1] then t[p1](false) else nil
 		end,
-		markCommitted = function(p1)
-			-- upvalues: t (ref), t_3 (write)
-			if if not t[p1] then false else t[p1](false) ~= nil then
-				t_3[p1] = true
+		markCommitted = function(Key) --[[ Line: 65 ]]
+			-- upvalues: t (copy), t3 (ref)
+			if if t[Key] then t[Key](false) ~= nil else false then
+				t3[Key] = true
 			end
 		end,
-		isCommitted = function(p1)
-			-- upvalues: t_3 (write)
-			return t_3[p1] == true
+		isCommitted = function(p1): boolean --[[ Line: 71 ]]
+			-- upvalues: t3 (ref)
+			return t3[p1] == true
 		end,
-		drainCommitted = function(p1, p2)
-			-- upvalues: t_3 (write), t (ref), t_1 (ref)
-			for i, v in p1 do
-				if t_3[v] then
-					local var1 = t[v] and t[v](false) or nil
+		drainCommitted = function(List, Callback: (any, any) -> ()) --[[ Line: 77 ]]
+			-- upvalues: t3 (ref), t (copy), t1 (copy)
+			for _, value in List do
+				if t3[value] then
+					local v1 = t[value] and t[value](false) or nil
 					
-					if var1 ~= nil then
-						p2(v, var1)
+					if v1 ~= nil then
+						Callback(value, v1)
 					end
-					if t_1[v] then
-						t_1[v](nil)
+					if t1[value] then
+						t1[value](nil)
 					end
-					t_3[v] = nil
+					t3[value] = nil
 				end
 			end
 		end,
-		getMergedResult = function(p3, p4)
-			-- upvalues: t_2 (write), t (ref), t_1 (ref), signalsModule (copy), cryoModule (copy)
-			if t_2[p3] then
-				return t_2[p3]
-			elseif not t[p3] then
-				local var2 = t
-				local var3 = t_1
-				local var4, var5 = signalsModule.createSignal(nil)
-				var2[p3] = var4
-				var3[p3] = var5
+		getMergedResult = function(Key, p1) --[[ Line: 97 ]]
+			-- upvalues: t2 (ref), t (copy), t1 (copy), SignalsModule (upval), CryoModule (upval)
+			if t2[Key] then
+				return t2[Key]
 			end
-			local var6 = t[p3]
-			local _ = t_1[p3]
-			t_2[p3] = {
-				data = signalsModule.createComputed(function(p5)
-					-- upvalues: var6 (ref), p4 (ref), cryoModule (copy)
-					local var7 = var6(p5)
-					local var8 = p4.data(p5)
+			if not t[Key] then
+				t[Key], t1[Key] = SignalsModule.createSignal(nil)
+			end
+			local Entry = t[Key]
+			local _ = t1[Key]
+			t2[Key] = {
+				data = SignalsModule.createComputed(function(p2) --[[ Line: 104 ]]
+					-- upvalues: Entry (copy), p1 (copy), CryoModule (upval)
+					local EntryResult = Entry(p2)
+					local DataResult = p1.data(p2)
 					
-					return if var7 == nil then var8 elseif type(var7) == "table" then cryoModule.Dictionary.join(if type(var8) == "table" then var8 else {}, var7) else var7
+					return if EntryResult == nil then DataResult elseif type(EntryResult) == "table" then CryoModule.Dictionary.join(if type(DataResult) == "table" then DataResult else {}, EntryResult) else EntryResult
 				end),
-				status = p4.status
+				status = p1.status
 			}
 			
-			return t_2[p3]
+			return t2[Key]
 		end,
-		clearAll = function()
-			-- upvalues: t_1 (ref), t_3 (write), t_2 (write)
-			for i, v in t_1 do
-				v(nil)
+		clearAll = function() --[[ Line: 127 ]]
+			-- upvalues: t1 (copy), t3 (ref), t2 (ref)
+			for _, value in t1 do
+				value(nil)
 			end
-			t_3 = {}
-			t_2 = {}
+			t3 = {}
+			t2 = {}
 		end
 	}
 end

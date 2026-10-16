@@ -1,38 +1,38 @@
-﻿local parent = script.Parent
-local errorModule = require(parent.Error)
-local formatModule = require(parent.format)
-local readonlyKey = errorModule.new("ReadonlyKey", "Attempted to write to readonly key {key:?} of frozen object {objectName:?}")
-local missingKey = errorModule.new("MissingKey", "Attempted to read missing key {key:?} of frozen object {objectName:?}")
+﻿local Parent = script.Parent
+local ErrorModule = require(Parent.Error)
+local FormatModule = require(Parent.format)
+local ReadonlyKey = ErrorModule.new("ReadonlyKey", "Attempted to write to readonly key {key:?} of frozen object {objectName:?}")
+local MissingKey = ErrorModule.new("MissingKey", "Attempted to read missing key {key:?} of frozen object {objectName:?}")
 
-return function(p1, p2, p3)
-	-- upvalues: missingKey (ref), readonlyKey (ref), formatModule (ref)
+return function(ObjectName, Callback, p1) --[[ Line: 35 | Named "freeze" ]]
+	-- upvalues: MissingKey (copy), ReadonlyKey (copy), FormatModule (copy)
 	local t = {}
-	assert(type(p2) == "table", `Attempted to call Dash.freeze with argument #2 of type {type(p2)}, but it should be table `)
+	assert(type(Callback) == "table", `Attempted to call Dash.freeze with argument #2 of type {type(Callback)}, but it should be table `)
 	setmetatable(t, {
-		__index = function(_, p4)
-			-- upvalues: p2 (ref), p3 (ref), missingKey (copy), p1 (ref)
-			local var1 = p2[p4]
+		__index = function(_, Key) --[[ Line: 44 ]]
+			-- upvalues: Callback (copy), p1 (copy), MissingKey (upval), ObjectName (copy)
+			local CallbackEntry = Callback[Key]
 			
-			if var1 == nil and p3 then
-				missingKey:throw({ key = p4, objectName = p1 })
+			if CallbackEntry == nil and p1 then
+				MissingKey:throw({ key = Key, objectName = ObjectName })
 			end
-			return var1
+			return CallbackEntry
 		end,
-		__newindex = function(_, p4)
-			-- upvalues: readonlyKey (copy), p1 (ref)
-			readonlyKey:throw({ key = p4, objectName = p1 })
+		__newindex = function(_, Key) --[[ Line: 55 ]]
+			-- upvalues: ReadonlyKey (upval), ObjectName (copy)
+			ReadonlyKey:throw({ key = Key, objectName = ObjectName })
 		end,
-		__len = function()
-			-- upvalues: p2 (ref)
-			return #p2
+		__len = function(): number --[[ Line: 62 ]]
+			-- upvalues: Callback (copy)
+			return #Callback
 		end,
-		__tostring = function()
-			-- upvalues: formatModule (copy), p1 (ref)
-			return formatModule("Frozen({})", p1)
+		__tostring = function() --[[ Line: 65 ]]
+			-- upvalues: FormatModule (upval), ObjectName (copy)
+			return FormatModule("Frozen({})", ObjectName)
 		end,
-		__call = function(_, ...)
-			-- upvalues: p2 (ref)
-			return p2(...)
+		__call = function(_, ...) --[[ Line: 68 ]]
+			-- upvalues: Callback (copy)
+			return Callback(...)
 		end
 	})
 	

@@ -1,63 +1,62 @@
-﻿local guiService = game:GetService("GuiService")
-local reactModule = require(script:FindFirstAncestor("ChatUIPrimitives").Parent.React)
-local restoreSelectionIfStrandedModule = require(script.Parent.restoreSelectionIfStranded)
+﻿local GuiService = game:GetService("GuiService")
+local ReactModule = require(script:FindFirstAncestor("ChatUIPrimitives").Parent.React)
+local RestoreSelectionIfStrandedModule = require(script.Parent.restoreSelectionIfStranded)
 
-local function _(p1)
-	return if type(p1) == "function" then p1() else p1.current
+local function _(Callback) --[[ Line: 33 | Named "resolveTarget" ]]
+	return if type(Callback) == "function" then Callback() else Callback.current
 end
 
-return function(p1)
-	-- upvalues: guiService (ref), reactModule (ref), restoreSelectionIfStrandedModule (ref)
-	local guiService_1 = p1.guiService or guiService
-	local enabled = p1.enabled
-	local active = p1.active
-	local rearmKey = p1.rearmKey
-	local restoreHome = p1.restoreHome
-	local var1 = reactModule.useRef(p1.edges)
-	var1.current = p1.edges
-	reactModule.useEffect(function()
-		-- upvalues: enabled (ref), active (ref), var1 (ref)
-		if enabled and active then
-			local var2 = false
-			local t = {}
-			task.delay(0, function()
-				-- upvalues: var2 (write), var1 (copy), t (ref)
-				if var2 then return end
-				for i, v in var1.current do
-					local from = v.from
-					local var3 = if type(from) == "function" then from() else from.current
-					local to = v.to
-					local var4 = if type(to) == "function" then to() else to.current
-					
-					if var3 and var4 then
-						local text = "NextSelection" .. v.direction
-						var3[text] = var4
-						table.insert(t, { from = var3, prop = text })
-					end
-				end
-			end)
-			
-			return function()
-				-- upvalues: var2 (write), t (ref)
-				var2 = true
+return function(p1) --[[ Line: 49 | Named "usePortalSelectionLinks" ]]
+	-- upvalues: GuiService (copy), ReactModule (copy), RestoreSelectionIfStrandedModule (copy)
+	local GuiService1 = p1.guiService or GuiService
+	local Enabled = p1.enabled
+	local Active = p1.active
+	local RearmKey = p1.rearmKey
+	local RestoreHome = p1.restoreHome
+	local UseRefResult = ReactModule.useRef(p1.edges)
+	UseRefResult.current = p1.edges
+	ReactModule.useEffect(function() --[[ Line: 60 ]]
+		-- upvalues: Enabled (copy), Active (copy), UseRefResult (copy)
+		if not Enabled or not Active then return end
+		local Flag = false
+		local List = {}
+		task.delay(0, function() --[[ Line: 69 ]]
+			-- upvalues: Flag (ref), UseRefResult (upval), List (copy)
+			if Flag then return end
+			for _, value in UseRefResult.current do
+				local FromFunction = value.from
+				local FromResult = if type(FromFunction) == "function" then FromFunction() else FromFunction.current
+				local ToFunction = value.to
+				local ToResult = if type(ToFunction) == "function" then ToFunction() else ToFunction.current
 				
-				for i, v in t do
-					pcall(function()
-						-- upvalues: v (ref)
-						v.from[v.prop] = nil
-					end)
+				if FromResult and ToResult then
+					local Text = "NextSelection" .. value.direction
+					FromResult[Text] = ToResult
+					table.insert(List, { from = FromResult, prop = Text })
 				end
 			end
+		end)
+		
+		return function() --[[ Line: 85 ]]
+			-- upvalues: Flag (ref), List (copy)
+			Flag = true
+			
+			for _, value in List do
+				pcall(function() --[[ Line: 89 ]]
+					-- upvalues: value (copy)
+					value.from[value.prop] = nil
+				end)
+			end
 		end
-	end, { enabled, active, rearmKey or "", guiService_1 })
-	local var3 = reactModule.useRef(false)
-	reactModule.useEffect(function()
-		-- upvalues: enabled (ref), var3 (ref), active (ref), restoreSelectionIfStrandedModule (copy), guiService_1 (ref), restoreHome (ref)
-		if enabled and var3.current and not active then
-			restoreSelectionIfStrandedModule(guiService_1, if restoreHome then restoreHome.current else nil)
+	end, { Enabled, Active, RearmKey or "", GuiService1 })
+	local UseRefResult1 = ReactModule.useRef(false)
+	ReactModule.useEffect(function() --[[ Line: 99 ]]
+		-- upvalues: Enabled (copy), UseRefResult1 (copy), Active (copy), RestoreSelectionIfStrandedModule (upval), GuiService1 (copy), RestoreHome (copy)
+		if Enabled and UseRefResult1.current and not Active then
+			RestoreSelectionIfStrandedModule(GuiService1, if RestoreHome then RestoreHome.current else nil)
 		end
-		var3.current = active
+		UseRefResult1.current = Active
 		
 		return nil
-	end, { enabled, active, restoreHome, guiService_1 })
+	end, { Enabled, Active, RestoreHome, GuiService1 })
 end

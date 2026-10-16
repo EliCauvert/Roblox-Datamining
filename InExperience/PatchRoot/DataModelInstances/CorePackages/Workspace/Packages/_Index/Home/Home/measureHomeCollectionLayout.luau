@@ -1,10 +1,10 @@
-﻿local parent = script:FindFirstAncestor("Home").Parent
-local collectionViewsModule = require(parent.CollectionViews)
-local buildSduiCollectionInfo = require(parent.SduiSharedUtilities).buildSduiCollectionInfo
-local fFlagSduiPreferredTextSizeLineBudgets = require(parent.SharedFlags).FFlagSduiPreferredTextSizeLineBudgets
-local uDim = UDim.new(1, 72)
+﻿local Parent = script:FindFirstAncestor("Home").Parent
+local CollectionViewsModule = require(Parent.CollectionViews)
+local BuildSduiCollectionInfoFunction = require(Parent.SduiSharedUtilities).buildSduiCollectionInfo
+local FFlagSduiPreferredTextSizeLineBudgets = require(Parent.SharedFlags).FFlagSduiPreferredTextSizeLineBudgets
+local _UDim = UDim.new(1, 72)
 
-return function()
-	-- upvalues: collectionViewsModule (ref), buildSduiCollectionInfo (ref), uDim (ref), fFlagSduiPreferredTextSizeLineBudgets (ref)
-	return if collectionViewsModule.getMainCollectionLayoutStore(false).getIsContainerMeasured(false) then buildSduiCollectionInfo("Small", uDim, if fFlagSduiPreferredTextSizeLineBudgets then 3 else nil) else nil
+return function() --[[ Line: 19 | Named "measureHomeCollectionLayout" ]]
+	-- upvalues: CollectionViewsModule (copy), BuildSduiCollectionInfoFunction (copy), _UDim (copy), FFlagSduiPreferredTextSizeLineBudgets (copy)
+	return if CollectionViewsModule.getMainCollectionLayoutStore(false).getIsContainerMeasured(false) then BuildSduiCollectionInfoFunction("Small", _UDim, if FFlagSduiPreferredTextSizeLineBudgets then 3 else nil) else nil
 end

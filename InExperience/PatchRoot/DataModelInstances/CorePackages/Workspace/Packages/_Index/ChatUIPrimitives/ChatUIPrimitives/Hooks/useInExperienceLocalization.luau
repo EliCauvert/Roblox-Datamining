@@ -1,19 +1,19 @@
-﻿local parent = script:FindFirstAncestor("ChatUIPrimitives").Parent
-local reactModule = require(parent.React)
-local localization = require(parent.InExperienceLocales).Localization
-local useRobloxLocaleModule = require(script.Parent.useRobloxLocale)
+﻿local Parent = script:FindFirstAncestor("ChatUIPrimitives").Parent
+local ReactModule = require(Parent.React)
+local Localization = require(Parent.InExperienceLocales).Localization
+local UseRobloxLocaleModule = require(script.Parent.useRobloxLocale)
 
-return function()
-	-- upvalues: useRobloxLocaleModule (ref), reactModule (ref), localization (ref)
-	local var1 = useRobloxLocaleModule()
+return function() --[[ Line: 20 | Named "useInExperienceLocalization" ]]
+	-- upvalues: UseRobloxLocaleModule (copy), ReactModule (copy), Localization (copy)
+	local UseRobloxLocaleModuleResult = UseRobloxLocaleModule()
 	
-	return reactModule.useMemo(function()
-		-- upvalues: localization (copy), var1 (ref)
-		local var2 = localization.new(var1)
+	return ReactModule.useMemo(function() --[[ Line: 22 ]]
+		-- upvalues: Localization (upval), UseRobloxLocaleModuleResult (copy)
+		local NewLocalization = Localization.new(UseRobloxLocaleModuleResult)
 		
-		return function(p1, p2)
-			-- upvalues: var2 (ref)
-			return var2:Format(p1, p2)
+		return function(p1, p2) --[[ Line: 24 ]]
+			-- upvalues: NewLocalization (copy)
+			return NewLocalization:Format(p1, p2)
 		end
-	end, { var1 })
+	end, { UseRobloxLocaleModuleResult })
 end

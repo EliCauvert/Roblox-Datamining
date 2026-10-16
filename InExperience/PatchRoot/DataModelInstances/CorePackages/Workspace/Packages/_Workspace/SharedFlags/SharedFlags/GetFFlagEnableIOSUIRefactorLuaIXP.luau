@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("EnableIOSUIRefactorLuaIXP2", false)
 
-return function()
+return function() --[[ Line: 3 ]]
 	return game:GetFastFlag("EnableIOSUIRefactorLuaIXP2")
 end

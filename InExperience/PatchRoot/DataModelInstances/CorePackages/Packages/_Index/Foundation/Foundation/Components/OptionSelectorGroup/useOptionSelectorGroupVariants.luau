@@ -1,34 +1,34 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local inputLabelSizeModule = require(foundation.Enums.InputLabelSize)
-local optionSelectorGroupSizeModule = require(foundation.Enums.OptionSelectorGroupSize)
-local orientationModule = require(foundation.Enums.Orientation)
-local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant)
-local _ = require(foundation.Providers.Style.Tokens)
-local _ = require(foundation.Components.Types)
-local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local InputLabelSizeModule = require(Foundation.Enums.InputLabelSize)
+local OptionSelectorGroupSizeModule = require(Foundation.Enums.OptionSelectorGroupSize)
+local OrientationModule = require(Foundation.Enums.Orientation)
+local ComposeStyleVariantModule = require(Foundation.Utility.composeStyleVariant)
+local _ = require(Foundation.Providers.Style.Tokens)
+local _ = require(Foundation.Components.Types)
+local VariantsContextModule = require(Foundation.Providers.Style.VariantsContext)
 
-local function variantsFactory(_)
-	-- upvalues: optionSelectorGroupSizeModule (ref), inputLabelSizeModule (ref), orientationModule (ref)
+local function variantsFactory(_) --[[ Line: 29 ]]
+	-- upvalues: OptionSelectorGroupSizeModule (copy), InputLabelSizeModule (copy), OrientationModule (copy)
 	return {
 		common = {
 			container = { tag = "col gap-small size-full-0 auto-y" },
 			list = { tag = "gap-medium size-full-0 auto-y" }
 		},
 		sizes = {
-			[optionSelectorGroupSizeModule.XSmall] = { legend = { size = inputLabelSizeModule.Small } },
-			[optionSelectorGroupSizeModule.Small] = { legend = { size = inputLabelSizeModule.Small } },
-			[optionSelectorGroupSizeModule.Medium] = { legend = { size = inputLabelSizeModule.Medium } }
+			[OptionSelectorGroupSizeModule.XSmall] = { legend = { size = InputLabelSizeModule.Small } },
+			[OptionSelectorGroupSizeModule.Small] = { legend = { size = InputLabelSizeModule.Small } },
+			[OptionSelectorGroupSizeModule.Medium] = { legend = { size = InputLabelSizeModule.Medium } }
 		},
 		orientations = {
-			[orientationModule.Vertical] = { list = { tag = { col = true } } },
-			[orientationModule.Horizontal] = { list = { tag = { row = true } } }
+			[OrientationModule.Vertical] = { list = { tag = { col = true } } },
+			[OrientationModule.Horizontal] = { list = { tag = { row = true } } }
 		}
 	}
 end
 
-return function(p1, p2, p3)
-	-- upvalues: variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref)
-	local optionSelectorGroup = variantsContextModule.useVariants("OptionSelectorGroup", variantsFactory, p1)
+return function(p1, p2, p3) --[[ Line: 75 ]]
+	-- upvalues: VariantsContextModule (copy), variantsFactory (copy), ComposeStyleVariantModule (copy)
+	local OptionSelectorGroup = VariantsContextModule.useVariants("OptionSelectorGroup", variantsFactory, p1)
 	
-	return composeStyleVariantModule(optionSelectorGroup.common, optionSelectorGroup.sizes[p2], optionSelectorGroup.orientations[p3])
+	return (ComposeStyleVariantModule(OptionSelectorGroup.common, OptionSelectorGroup.sizes[p2], OptionSelectorGroup.orientations[p3]))
 end

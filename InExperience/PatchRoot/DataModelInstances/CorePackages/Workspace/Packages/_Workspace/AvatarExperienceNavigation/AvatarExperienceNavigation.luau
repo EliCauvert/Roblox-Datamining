@@ -1,6 +1,4 @@
-﻿local registerCustomGetStateForActionModule = require(script.NavigationActions.RegisterCustomGetStateForAction)
-local customGetStateForActionModule = require(script.Enums.CustomGetStateForAction)
-local _ = require(script.AvatarRoute.Types)
+﻿local _ = require(script.AvatarRoute.Types)
 local _ = require(script.Types.NavigationType)
 
 return {
@@ -21,11 +19,11 @@ return {
 		AvatarEditorNavigation = require(script.Enums.AvatarEditorNavigation),
 		AvatarRootNavigationAction = require(script.Enums.AvatarRootNavigationAction),
 		UnifiedLoggingSurface = require(script.Enums.UnifiedLoggingSurface),
-		CustomGetStateForAction = customGetStateForActionModule
+		CustomGetStateForAction = require(script.Enums.CustomGetStateForAction)
 	},
 	Actions = {
 		DeregisterCustomGetStateForAction = require(script.NavigationActions.DeregisterCustomGetStateForAction),
-		RegisterCustomGetStateForAction = registerCustomGetStateForActionModule,
+		RegisterCustomGetStateForAction = require(script.NavigationActions.RegisterCustomGetStateForAction),
 		ClearScreens = require(script.NavigationActions.ClearScreens),
 		AvatarExperienceActions = require(script.NavigationActions.AvatarExperienceActions)
 	},
@@ -37,6 +35,9 @@ return {
 	Thunks = {
 		NavigateWithLock = require(script.Thunks.NavigateWithLock),
 		NavigateDownToAvatarScreen = require(script.Thunks.NavigateDownToAvatarScreen)
+	},
+	Utils = {
+		closeGiftSendFlow = require(script.Utils.closeGiftSendFlow)
 	},
 	["jest.config"] = script["jest.config"]
 }

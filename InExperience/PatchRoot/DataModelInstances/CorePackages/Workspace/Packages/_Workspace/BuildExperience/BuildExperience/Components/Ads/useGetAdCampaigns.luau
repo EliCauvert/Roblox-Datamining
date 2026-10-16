@@ -1,10 +1,10 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local adCampaignsModule = require(parent.DataHydration.AdCampaigns)
-local useSignalState = require(parent.SignalsReact).useSignalState
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local AdCampaignsModule = require(Parent.DataHydration.AdCampaigns)
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 
-return function(p1)
-	-- upvalues: adCampaignsModule (ref), useSignalState (ref)
-	local andFetchAdCampaigns = (p1 or adCampaignsModule.getAdCampaignsStore(false)).getAndFetchAdCampaigns()
+return function(p1) --[[ Line: 18 | Named "useGetAdCampaigns" ]]
+	-- upvalues: AdCampaignsModule (copy), UseSignalStateFunction (copy)
+	local AndFetchAdCampaigns = (p1 or AdCampaignsModule.getAdCampaignsStore(false)).getAndFetchAdCampaigns()
 	
-	return useSignalState(andFetchAdCampaigns.data), useSignalState(andFetchAdCampaigns.status)
+	return UseSignalStateFunction(AndFetchAdCampaigns.data), (UseSignalStateFunction(AndFetchAdCampaigns.status))
 end

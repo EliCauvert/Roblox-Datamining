@@ -1,89 +1,93 @@
-﻿local avatarExperienceControlBar = script:FindFirstAncestor("AvatarExperienceControlBar")
-local parent = avatarExperienceControlBar.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local reactOtterModule = require(parent.ReactOtter)
-local useSemanticTokensModule = require(avatarExperienceControlBar.Hooks.useSemanticTokens)
-local _ = require(avatarExperienceControlBar.ControlBarTypes)
-local iconTextButtonModule = require(avatarExperienceControlBar.Components.Buttons.IconTextButton)
-local colorTextButtonModule = require(avatarExperienceControlBar.Components.Buttons.ColorTextButton)
+﻿local AvatarExperienceControlBar = script:FindFirstAncestor("AvatarExperienceControlBar")
+local Parent = AvatarExperienceControlBar.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local ReactOtterModule = require(Parent.ReactOtter)
+local UseSemanticTokensModule = require(AvatarExperienceControlBar.Hooks.useSemanticTokens)
+local _ = require(AvatarExperienceControlBar.ControlBarTypes)
+local IconTextButtonModule = require(AvatarExperienceControlBar.Components.Buttons.IconTextButton)
+local ColorTextButtonModule = require(AvatarExperienceControlBar.Components.Buttons.ColorTextButton)
 local AXDisableControlBarMenuAnimation = game:DefineFastFlag("AXDisableControlBarMenuAnimation", false)
-local t = { dampingRatio = 1, frequency = 5 }
+local config = { dampingRatio = 1, frequency = 5 }
 
-return function(p1)
-	-- upvalues: useSemanticTokensModule (ref), reactModule (ref), reactOtterModule (ref), t (ref), iconTextButtonModule (ref), colorTextButtonModule (ref), foundationModule (ref), AXDisableControlBarMenuAnimation (ref)
-	local var1 = useSemanticTokensModule()
-	local var2, var3 = reactModule.useBinding(0)
-	local var4, var5 = reactOtterModule.useAnimatedBinding(0)
-	local var6 = #p1.items > 0
+return function(Frame: Frame) --[[ Line: 30 | Named "IconTextMenu" ]]
+	-- upvalues: UseSemanticTokensModule (copy), ReactModule (copy), ReactOtterModule (copy), config (copy), IconTextButtonModule (copy), ColorTextButtonModule (copy), FoundationModule (copy), AXDisableControlBarMenuAnimation (copy)
+	local UseSemanticTokensModuleResult = UseSemanticTokensModule()
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(0)
+	local v1 = #Frame.items > 0
+	local UseRefResult = ReactModule.useRef(nil)
+	local Radius = Frame.radius or UseSemanticTokensModuleResult.defaultIconTextMenuRadius
+	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 41 ]]
+		-- upvalues: UseBindingResult2 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), v1 (copy), config (upval)
+		local AbsoluteSize = Frame.AbsoluteSize
+		UseBindingResult2(AbsoluteSize.X)
+		UseAnimatedBindingResult2(ReactOtterModule.spring(if v1 then AbsoluteSize.Y else 0, config))
+	end, { v1 })
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 47 ]]
+		-- upvalues: Frame (copy), ReactModule (upval), IconTextButtonModule (upval), ColorTextButtonModule (upval)
+		local Elements = {}
+		
+		for LayoutOrder, item in Frame.items do
+			if item.type == "icon" then
+				Elements[`IconTextMenuItem-{item.id}`] = ReactModule.createElement(IconTextButtonModule, {
+					icon = item.icon,
+					text = item.text,
+					iconSize = item.iconSize,
+					disabled = item.disabled,
+					onActivated = function() --[[ Line: 56 ]]
+						-- upvalues: Frame (upval), item (copy)
+						if Frame.onItemActivated then
+							Frame.onItemActivated(item.id)
+						end
+						if item.onActivated then
+							item.onActivated()
+						end
+					end,
+					Visible = item.visible,
+					LayoutOrder = LayoutOrder
+				})
+			elseif item.type == "color" then
+				Elements[`IconTextMenuItem-{item.id}`] = ReactModule.createElement(ColorTextButtonModule, {
+					colors = item.colors,
+					colorSize = item.colorSize,
+					size = item.size,
+					text = item.text,
+					disabled = item.disabled,
+					onActivated = function() --[[ Line: 74 ]]
+						-- upvalues: Frame (upval), item (copy)
+						if Frame.onItemActivated then
+							Frame.onItemActivated(item.id)
+						end
+						if item.onActivated then
+							item.onActivated()
+						end
+					end,
+					Visible = item.visible,
+					LayoutOrder = LayoutOrder
+				})
+			end
+		end
+		return Elements
+	end, { Frame.items, Frame.onItemActivated })
 	
-	return reactModule.createElement(foundationModule.View, {
+	return ReactModule.createElement(FoundationModule.View, {
 		tag = "clip",
 		Name = "IconTextMenu-Animation-Container",
-		Size = if AXDisableControlBarMenuAnimation then nil else reactModule.joinBindings({ X = var2, Y = var4 }):map(function(p2)
-			return UDim2.fromOffset(p2.X, math.round(p2.Y))
+		Size = if AXDisableControlBarMenuAnimation then nil else ReactModule.joinBindings({ X = UseBindingResult, Y = UseAnimatedBindingResult }):map(function(Vector): UDim2 --[[ Line: 95 ]]
+			return UDim2.fromOffset(Vector.X, (math.round(Vector.Y)))
 		end),
 		AutomaticSize = if AXDisableControlBarMenuAnimation then Enum.AutomaticSize.XY else nil,
-		Position = p1.Position,
-		AnchorPoint = p1.AnchorPoint,
-		LayoutOrder = p1.LayoutOrder
+		Position = Frame.Position,
+		AnchorPoint = Frame.AnchorPoint,
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		MenuContent = if #p1.items > 0 then reactModule.createElement(foundationModule.View, {
+		MenuContent = if #Frame.items > 0 then ReactModule.createElement(FoundationModule.View, {
 			tag = "auto-xy clip col clip padding-xsmall gap-xsmall",
-			backgroundStyle = var1.menuBackgroundStyle,
-			cornerRadius = UDim.new(0, p1.radius or var1.defaultIconTextMenuRadius),
-			ref = reactModule.useRef(nil),
-			onAbsoluteSizeChanged = reactModule.useCallback(function(p2)
-				-- upvalues: var3 (ref), var5 (ref), reactOtterModule (copy), var6 (ref), t (copy)
-				local absoluteSize = p2.AbsoluteSize
-				var3(absoluteSize.X)
-				var5(reactOtterModule.spring(if var6 then absoluteSize.Y else 0, t))
-			end, { var6 })
-		}, reactModule.useMemo(function()
-			-- upvalues: p1 (ref), reactModule (copy), iconTextButtonModule (copy), colorTextButtonModule (copy)
-			local t = {}
-			
-			for i, v in p1.items do
-				if v.type == "icon" then
-					t[`IconTextMenuItem-{v.id}`] = reactModule.createElement(iconTextButtonModule, {
-						icon = v.icon,
-						text = v.text,
-						iconSize = v.iconSize,
-						disabled = v.disabled,
-						onActivated = function()
-							-- upvalues: p1 (copy), v (ref)
-							if p1.onItemActivated then
-								p1.onItemActivated(v.id)
-							end
-							if v.onActivated then
-								v.onActivated()
-							end
-						end,
-						Visible = v.visible,
-						LayoutOrder = i
-					})
-				elseif v.type == "color" then
-					t[`IconTextMenuItem-{v.id}`] = reactModule.createElement(colorTextButtonModule, {
-						colors = v.colors,
-						colorSize = v.colorSize,
-						size = v.size,
-						text = v.text,
-						disabled = v.disabled,
-						onActivated = function()
-							-- upvalues: p1 (copy), v (ref)
-							if p1.onItemActivated then
-								p1.onItemActivated(v.id)
-							end
-							if v.onActivated then
-								v.onActivated()
-							end
-						end,
-						Visible = v.visible,
-						LayoutOrder = i
-					})
-				end
-			end
-			return t
-		end, { p1.items, p1.onItemActivated })) else nil
+			backgroundStyle = UseSemanticTokensModuleResult.menuBackgroundStyle,
+			cornerRadius = UDim.new(0, Radius),
+			ref = UseRefResult,
+			onAbsoluteSizeChanged = UseResult
+		}, UseMemoResult) else nil
 	})
 end

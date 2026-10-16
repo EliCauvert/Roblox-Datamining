@@ -1,25 +1,26 @@
-﻿local navigationRodux = script:FindFirstAncestor("NavigationRodux")
-local parent = navigationRodux.Parent
-local fFlagSignalsNavP2NavigationPrimitives = require(parent.SharedFlags).FFlagSignalsNavP2NavigationPrimitives
-local var1 = if fFlagSignalsNavP2NavigationPrimitives then require(parent.RobloxAppNavigation).NavigationCommands else nil
-local setNavigationLockedModule = require(navigationRodux.Thunks.SetNavigationLocked)
-local argCheckModule = require(parent.ArgCheck)
-local roactNavigationModule = require(parent.RoactNavigation)
-local RNAdapterThunkModule = require(navigationRodux.Thunks.RNAdapterThunk)
+﻿local NavigationRodux = script:FindFirstAncestor("NavigationRodux")
+local Parent = NavigationRodux.Parent
+local FFlagSignalsNavP2NavigationPrimitives = require(Parent.SharedFlags).FFlagSignalsNavP2NavigationPrimitives
+local NavigationCommands = if FFlagSignalsNavP2NavigationPrimitives then require(Parent.RobloxAppNavigation).NavigationCommands else nil
+local SetNavigationLockedModule = require(NavigationRodux.Thunks.SetNavigationLocked)
+local ArgCheckModule = require(Parent.ArgCheck)
+local RoactNavigationModule = require(Parent.RoactNavigation)
+local RNAdapterThunkModule = require(NavigationRodux.Thunks.RNAdapterThunk)
 
-return function(p1)
-	-- upvalues: argCheckModule (ref), fFlagSignalsNavP2NavigationPrimitives (ref), var1 (ref), RNAdapterThunkModule (ref), setNavigationLockedModule (ref), roactNavigationModule (ref)
-	argCheckModule.isTypeOrNil(p1, "boolean", "bypassNavigationLock")
+return function(p1) --[[ Line: 17 ]]
+	-- upvalues: ArgCheckModule (copy), FFlagSignalsNavP2NavigationPrimitives (copy), NavigationCommands (copy), RNAdapterThunkModule (copy), SetNavigationLockedModule (copy), RoactNavigationModule (copy)
+	ArgCheckModule.isTypeOrNil(p1, "boolean", "bypassNavigationLock")
 	
-	return if fFlagSignalsNavP2NavigationPrimitives then function(_)
-		-- upvalues: var1 (copy), p1 (ref)
-		var1.back(p1)
-	end else RNAdapterThunkModule.new("NavigateBack", function(p2, p3)
-		-- upvalues: p1 (ref), setNavigationLockedModule (copy), roactNavigationModule (copy)
-		if p2:getState().Navigation.lockNavigationActions and not p1 then
+	return if FFlagSignalsNavP2NavigationPrimitives then function(_) --[[ Line: 21 ]]
+		-- upvalues: NavigationCommands (upval), p1 (copy)
+		NavigationCommands.back(p1)
+	end else RNAdapterThunkModule.new("NavigateBack", function(p2, Callback: (any) -> ()) --[[ Line: 26 ]]
+		-- upvalues: p1 (copy), SetNavigationLockedModule (upval), RoactNavigationModule (upval)
+		if not p2:getState().Navigation.lockNavigationActions or p1 then
+			p2:dispatch(SetNavigationLockedModule(true))
+			Callback(RoactNavigationModule.Actions.back())
+			
 			return
 		end
-		p2:dispatch(setNavigationLockedModule(true))
-		p3(roactNavigationModule.Actions.back())
 	end)
 end

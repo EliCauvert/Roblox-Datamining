@@ -1,7 +1,7 @@
-﻿local getCurrentRouteKeyModule = require(script.Parent.getCurrentRouteKey)
-local useNavigationModule = require(script.Parent.useNavigation)
+﻿local GetCurrentRouteKeyModule = require(script.Parent.getCurrentRouteKey)
+local UseNavigationModule = require(script.Parent.useNavigation)
 
-return function()
-	-- upvalues: useNavigationModule (ref), getCurrentRouteKeyModule (ref)
-	return getCurrentRouteKeyModule(useNavigationModule())
+return function() --[[ Line: 4 | Named "useCurrentRouteKey" ]]
+	-- upvalues: UseNavigationModule (copy), GetCurrentRouteKeyModule (copy)
+	return GetCurrentRouteKeyModule((UseNavigationModule()))
 end

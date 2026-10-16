@@ -1,10 +1,10 @@
-﻿local parent = script:FindFirstAncestor("Charts").Parent
-local var1 = require(parent.UrlBuilder).UrlBuilder.new({
+﻿local Parent = script:FindFirstAncestor("Charts").Parent
+local NewResult = require(Parent.UrlBuilder).UrlBuilder.new({
 	path = "charts-api/v1/charts-page",
-	base = require(parent.Http).Url.APIS_URL
+	base = require(Parent.Http).Url.APIS_URL
 })
 
-return function()
-	-- upvalues: var1 (ref)
-	return var1()
+return function() --[[ Line: 15 | Named "getChartsPagePostUrl" ]]
+	-- upvalues: NewResult (copy)
+	return NewResult()
 end

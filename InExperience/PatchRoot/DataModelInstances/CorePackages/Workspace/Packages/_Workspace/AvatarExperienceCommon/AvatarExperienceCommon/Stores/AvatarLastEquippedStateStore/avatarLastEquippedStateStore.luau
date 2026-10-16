@@ -1,30 +1,30 @@
-﻿local var1 = nil
-local var2 = false
-local var3 = true
+﻿local AvatarLastEquippedState = nil
+local ChangedLayeredMakeupSorting = false
+local ShouldRevertLastEquippedState = true
 
 return {
-	getAvatarLastEquippedState = function()
-		-- upvalues: var1 (write)
-		return var1
+	getAvatarLastEquippedState = function() --[[ Line: 25 ]]
+		-- upvalues: AvatarLastEquippedState (ref)
+		return AvatarLastEquippedState
 	end,
-	setAvatarLastEquippedState = function(p1)
-		-- upvalues: var1 (write)
-		var1 = p1
+	setAvatarLastEquippedState = function(Value) --[[ Line: 29 ]]
+		-- upvalues: AvatarLastEquippedState (ref)
+		AvatarLastEquippedState = Value
 	end,
-	getChangedLayeredMakeupSorting = function()
-		-- upvalues: var2 (write)
-		return var2
+	getChangedLayeredMakeupSorting = function() --[[ Line: 33 ]]
+		-- upvalues: ChangedLayeredMakeupSorting (ref)
+		return ChangedLayeredMakeupSorting
 	end,
-	setChangedLayeredMakeupSorting = function(p1)
-		-- upvalues: var2 (write)
-		var2 = p1
+	setChangedLayeredMakeupSorting = function(Value) --[[ Line: 37 ]]
+		-- upvalues: ChangedLayeredMakeupSorting (ref)
+		ChangedLayeredMakeupSorting = Value
 	end,
-	getShouldRevertLastEquippedState = function()
-		-- upvalues: var3 (write)
-		return var3
+	getShouldRevertLastEquippedState = function() --[[ Line: 41 ]]
+		-- upvalues: ShouldRevertLastEquippedState (ref)
+		return ShouldRevertLastEquippedState
 	end,
-	setShouldRevertLastEquippedState = function(p1)
-		-- upvalues: var3 (write)
-		var3 = p1
+	setShouldRevertLastEquippedState = function(Value) --[[ Line: 45 ]]
+		-- upvalues: ShouldRevertLastEquippedState (ref)
+		ShouldRevertLastEquippedState = Value
 	end
 }

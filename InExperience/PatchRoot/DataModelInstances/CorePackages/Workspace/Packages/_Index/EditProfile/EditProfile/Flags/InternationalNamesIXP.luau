@@ -1,26 +1,26 @@
 ﻿game:DefineFastFlag("InternationalNamesEnabledForAll", false)
-local internationalNamesIXPLayer = game:DefineFastString("InternationalNamesIXPLayer", "Social.InternationalDisplayName")
-local internationalNamesIXPExperimentDefinition = game:DefineFastString("InternationalNamesIXPExperimentDefinition", "enableInternationalNames")
+local InternationalNamesIXPLayer = game:DefineFastString("InternationalNamesIXPLayer", "Social.InternationalDisplayName")
+local InternationalNamesIXPExperimentDefinition = game:DefineFastString("InternationalNamesIXPExperimentDefinition", "enableInternationalNames")
 local IXPService = game:GetService("IXPService")
-local useUserExperiment = require(script:FindFirstAncestor("EditProfile").Parent.RoactAppExperiment).useUserExperiment
+local UseUserExperimentFunction = require(script:FindFirstAncestor("EditProfile").Parent.RoactAppExperiment).useUserExperiment
 
-local function _()
+local function _() --[[ Line: 14 | Named "internationalNamesEnabledForAll" ]]
 	return game:GetFastFlag("InternationalNamesEnabledForAll")
 end
 
-local function isExperimentEnabled(p1)
-	-- upvalues: internationalNamesIXPLayer (ref), internationalNamesIXPExperimentDefinition (ref)
-	return if ((p1 or {})[internationalNamesIXPLayer] or {})[internationalNamesIXPExperimentDefinition] ~= true then game:GetFastFlag("InternationalNamesEnabledForAll") else true
+local function isExperimentEnabled(p1) --[[ Line: 18 ]]
+	-- upvalues: InternationalNamesIXPLayer (copy), InternationalNamesIXPExperimentDefinition (copy)
+	return ((p1 or {})[InternationalNamesIXPLayer] or {})[InternationalNamesIXPExperimentDefinition] == true or game:GetFastFlag("InternationalNamesEnabledForAll")
 end
 
 return {
 	FFlagIsExperimentEnabled = isExperimentEnabled,
-	useIsExperimentEnabled = function(p1)
-		-- upvalues: useUserExperiment (ref), internationalNamesIXPLayer (ref), isExperimentEnabled (ref)
-		return useUserExperiment({ internationalNamesIXPLayer }, isExperimentEnabled, (p1 or { isExposureEnabled = false }).isExposureEnabled)
+	useIsExperimentEnabled = function(p1) --[[ Line: 28 ]]
+		-- upvalues: UseUserExperimentFunction (copy), InternationalNamesIXPLayer (copy), isExperimentEnabled (copy)
+		return UseUserExperimentFunction({ InternationalNamesIXPLayer }, isExperimentEnabled, (p1 or { isExposureEnabled = false }).isExposureEnabled)
 	end,
-	logExposure = function()
-		-- upvalues: IXPService (ref), internationalNamesIXPLayer (ref)
-		IXPService:LogUserLayerExposure(internationalNamesIXPLayer)
+	logExposure = function() --[[ Line: 32 ]]
+		-- upvalues: IXPService (copy), InternationalNamesIXPLayer (copy)
+		IXPService:LogUserLayerExposure(InternationalNamesIXPLayer)
 	end
 }

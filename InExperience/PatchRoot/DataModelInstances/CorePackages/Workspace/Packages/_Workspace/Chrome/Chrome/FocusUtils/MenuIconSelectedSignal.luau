@@ -1,30 +1,30 @@
-﻿local signal = require(script.Parent.Parent.Parent.AppCommonLib).Signal
-local t = {}
-t.__index = t
+﻿local Signal = require(script.Parent.Parent.Parent.AppCommonLib).Signal
+local Module = {}
+Module.__index = Module
 
-function t.new()
-	-- upvalues: signal (ref), t (ref)
-	return setmetatable({ _value = false, _changeSignal = signal.new() }, t)
+function Module.new() --[[ Line: 17 ]]
+	-- upvalues: Signal (copy), Module (copy)
+	return (setmetatable({ _value = false, _changeSignal = Signal.new() }, Module))
 end
 
-function t:get()
+function Module:get() --[[ Line: 24 ]]
 	return self._value
 end
 
-function t:set(p1)
-	if self._value ~= p1 then
-		self._value = p1
-		self._changeSignal:fire(p1)
+function Module:set(_value) --[[ Line: 28 ]]
+	if self._value ~= _value then
+		self._value = _value
+		self._changeSignal:fire(_value)
 	end
 end
 
-function t:connect(p1, p2)
-	local changeSignalConnection = self._changeSignal:connect(p1)
+function Module:connect(Callback: (any) -> (), Enabled) --[[ Line: 35 ]]
+	local ChangeSignalConnection = self._changeSignal:connect(Callback)
 	
-	if p2 == true then
-		p1(self._value)
+	if Enabled == true then
+		Callback(self._value)
 	end
-	return changeSignalConnection
+	return ChangeSignalConnection
 end
 
-return t.new()
+return Module.new()

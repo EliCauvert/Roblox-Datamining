@@ -1,12 +1,11 @@
-﻿return function(p1, p2, p3)
-	local var1 = type(p1)
-	assert(var1 == "table", "expected a table for first argument, got " .. var0)
-	
-	for i = p3 or #p1, 1, -1 do
-		if p1[i] ~= p2 then
-			continue
+﻿return function(p1, p2, p3): number? --[[ Line: 2 | Named "find" ]]
+	local ValueType = type(p1)
+	assert(ValueType == "table", "expected a table for first argument, got " .. ValueType)
+	local P2 = p3 or #p1
+	for i = P2, 1, -1 do
+		if p1[i] == p2 then
+			return i
 		end
-		return i
 	end
 	return nil
 end

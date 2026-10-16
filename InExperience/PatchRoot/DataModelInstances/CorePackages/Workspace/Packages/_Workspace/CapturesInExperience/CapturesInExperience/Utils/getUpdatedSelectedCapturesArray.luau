@@ -1,18 +1,18 @@
-﻿function getUpdatedSelectedCapturesArray(p1, p2)
-	local t = {}
-	local var1 = false
+﻿function getUpdatedSelectedCapturesArray(List, p1) --[[ Line: 1 ]]
+	local List1 = {}
+	local Flag = false
 	
-	for i, v in ipairs(p1) do
-		if v == p2 then
-			var1 = true
+	for _, value in ipairs(List) do
+		if value == p1 then
+			Flag = true
 		else
-			table.insert(t, v)
+			table.insert(List1, value)
 		end
 	end
-	if not var1 then
-		table.insert(t, p2)
+	if not Flag then
+		table.insert(List1, p1)
 	end
-	return t
+	return List1
 end
 
 return getUpdatedSelectedCapturesArray

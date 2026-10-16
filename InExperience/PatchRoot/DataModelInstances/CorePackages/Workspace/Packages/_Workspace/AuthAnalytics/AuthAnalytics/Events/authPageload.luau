@@ -1,46 +1,46 @@
-﻿local parent = script.Parent.Parent
-local logging = require(parent.Parent.AppCommonLib).Logging
-local checkAndSendEventModule = require(parent.Utils.checkAndSendEvent)
+﻿local Parent = script.Parent.Parent
+local Logging = require(Parent.Parent.AppCommonLib).Logging
+local CheckAndSendEventModule = require(Parent.Utils.checkAndSendEvent)
 
-return function(p1, p2, p3, p4, p5, p6)
-	-- upvalues: logging (ref), checkAndSendEventModule (ref)
+return function(p1, State, Is_alt_attempt, Origin, p2, p3) --[[ Line: 6 ]]
+	-- upvalues: Logging (copy), CheckAndSendEventModule (copy)
 	local t = {}
 	
-	if p2 then
-		if type(p2) ~= "string" then
-			logging.warn("Failure logging authPageLoad: Expected state to be a string but got " .. type(p2))
+	if State then
+		if type(State) ~= "string" then
+			Logging.warn("Failure logging authPageLoad: Expected state to be a string but got " .. type(State))
 			
 			return
 		end
-		t.state = p2
+		t.state = State
+	end
+	if Is_alt_attempt ~= nil then
+		if type(Is_alt_attempt) ~= "boolean" then
+			Logging.warn("Failure logging authPageLoad: Expected isAltAttempt to be a boolean but got " .. type(Is_alt_attempt))
+			
+			return
+		end
+		t.is_alt_attempt = Is_alt_attempt
+	end
+	if Origin then
+		if type(Origin) ~= "string" then
+			Logging.warn("Failure logging authPageLoad: Expected origin to be a string but got " .. type(Origin))
+			
+			return
+		end
+		t.origin = Origin
+	end
+	if p2 ~= nil then
+		if type(p2) ~= "string" then
+			Logging.warn("Failure logging authPageLoad: Expected field to be a string but got " .. type(p2))
+		end
+		t.field = tostring(p2)
 	end
 	if p3 ~= nil then
-		if type(p3) ~= "boolean" then
-			logging.warn("Failure logging authPageLoad: Expected isAltAttempt to be a boolean but got " .. type(p3))
-			
-			return
+		if type(p3) ~= "string" then
+			Logging.warn("Failure logging authPageLoad: Expected associatedText to be a string but got " .. type(p3))
 		end
-		t.is_alt_attempt = p3
+		t.associatedText = tostring(p3)
 	end
-	if p4 then
-		if type(p4) ~= "string" then
-			logging.warn("Failure logging authPageLoad: Expected origin to be a string but got " .. type(p4))
-			
-			return
-		end
-		t.origin = p4
-	end
-	if p5 ~= nil then
-		if type(p5) ~= "string" then
-			logging.warn("Failure logging authPageLoad: Expected field to be a string but got " .. type(p5))
-		end
-		t.field = tostring(p5)
-	end
-	if p6 ~= nil then
-		if type(p6) ~= "string" then
-			logging.warn("Failure logging authPageLoad: Expected associatedText to be a string but got " .. type(p6))
-		end
-		t.associatedText = tostring(p6)
-	end
-	checkAndSendEventModule(p1, "authPageload", t)
+	CheckAndSendEventModule(p1, "authPageload", t)
 end

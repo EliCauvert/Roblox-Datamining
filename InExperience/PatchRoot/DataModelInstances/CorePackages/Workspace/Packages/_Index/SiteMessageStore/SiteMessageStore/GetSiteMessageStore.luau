@@ -1,42 +1,41 @@
-﻿local parent = script:FindFirstAncestor("SiteMessageStore").Parent
-local signalsModule = require(parent.Signals)
-local signalsExperimentalModule = require(parent.SignalsExperimental)
-local signalsUtilsModule = require(parent.SignalsUtils)
+﻿local Parent = script:FindFirstAncestor("SiteMessageStore").Parent
+local SignalsExperimentalModule = require(Parent.SignalsExperimental)
+local SignalsUtilsModule = require(Parent.SignalsUtils)
 
-return signalsModule.createComputed(function()
-	-- upvalues: signalsUtilsModule (ref), signalsExperimentalModule (ref)
-	local var1, var2 = signalsUtilsModule.createSessionScopedSignal(nil)
-	local var3, var4 = signalsUtilsModule.createSessionScopedSignal(nil)
-	local var5, var6 = signalsUtilsModule.createSessionScopedSignal(nil)
-	local var7, var8 = signalsUtilsModule.createSessionScopedSignal(false)
+return require(Parent.Signals).createComputed(function() --[[ Line: 14 ]]
+	-- upvalues: SignalsUtilsModule (copy), SignalsExperimentalModule (copy)
+	local SessionScopedSignal, SessionScopedSignal2 = SignalsUtilsModule.createSessionScopedSignal(nil)
+	local SessionScopedSignal1, SessionScopedSignal2_1 = SignalsUtilsModule.createSessionScopedSignal(nil)
+	local SessionScopedSignal3, SessionScopedSignal2_2 = SignalsUtilsModule.createSessionScopedSignal(nil)
+	local SessionScopedSignal4, SessionScopedSignal2_3 = SignalsUtilsModule.createSessionScopedSignal(false)
 	
 	return {
-		getText = var1,
-		getLink = var3,
-		getTimestamp = var5,
-		getUpdateRequested = var7,
-		processSiteAlertInfoPayload = function(p1)
-			-- upvalues: signalsExperimentalModule (copy), var2 (ref), var4 (ref), var6 (ref), var8 (ref)
-			signalsExperimentalModule.batch(function()
-				-- upvalues: var2 (copy), p1 (ref), var4 (copy), var6 (copy), var8 (copy)
-				var2(if p1.visible then p1.text else nil)
-				var4(if p1.visible then p1.link else nil)
-				var6(p1.timestamp or nil)
-				var8(false)
+		getText = SessionScopedSignal,
+		getLink = SessionScopedSignal1,
+		getTimestamp = SessionScopedSignal3,
+		getUpdateRequested = SessionScopedSignal4,
+		processSiteAlertInfoPayload = function(p1) --[[ Line: 20 ]]
+			-- upvalues: SignalsExperimentalModule (upval), SessionScopedSignal2 (copy), SessionScopedSignal2_1 (copy), SessionScopedSignal2_2 (copy), SessionScopedSignal2_3 (copy)
+			SignalsExperimentalModule.batch(function() --[[ Line: 21 ]]
+				-- upvalues: SessionScopedSignal2 (upval), p1 (copy), SessionScopedSignal2_1 (upval), SessionScopedSignal2_2 (upval), SessionScopedSignal2_3 (upval)
+				SessionScopedSignal2(p1.visible and p1.text or nil)
+				SessionScopedSignal2_1(p1.visible and p1.link or nil)
+				SessionScopedSignal2_2(p1.timestamp or nil)
+				SessionScopedSignal2_3(false)
 			end)
 		end,
-		refreshSiteAlertInfo = function(p1)
-			-- upvalues: var8 (ref)
-			var8(p1 == nil or p1)
+		refreshSiteAlertInfo = function(p1) --[[ Line: 29 ]]
+			-- upvalues: SessionScopedSignal2_3 (copy)
+			SessionScopedSignal2_3(p1 == nil or p1)
 		end,
-		reset = function()
-			-- upvalues: signalsExperimentalModule (copy), var2 (ref), var4 (ref), var6 (ref), var8 (ref)
-			signalsExperimentalModule.batch(function()
-				-- upvalues: var2 (copy), var4 (copy), var6 (copy), var8 (copy)
-				var2(nil)
-				var4(nil)
-				var6(nil)
-				var8(false)
+		reset = function() --[[ Line: 34 ]]
+			-- upvalues: SignalsExperimentalModule (upval), SessionScopedSignal2 (copy), SessionScopedSignal2_1 (copy), SessionScopedSignal2_2 (copy), SessionScopedSignal2_3 (copy)
+			SignalsExperimentalModule.batch(function() --[[ Line: 35 ]]
+				-- upvalues: SessionScopedSignal2 (upval), SessionScopedSignal2_1 (upval), SessionScopedSignal2_2 (upval), SessionScopedSignal2_3 (upval)
+				SessionScopedSignal2(nil)
+				SessionScopedSignal2_1(nil)
+				SessionScopedSignal2_2(nil)
+				SessionScopedSignal2_3(false)
 			end)
 		end
 	}

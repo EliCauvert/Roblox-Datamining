@@ -1,49 +1,49 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local reactModule = require(parent.React)
-local name = require(appChat.Logger):new(script.Name)
-local enumScreensModule = require(appChat.EnumScreens)
-local useNavigation = require(parent.Navigation).useNavigation
-local trustedFriendsUpsellContainerModule = require(script.Parent.TrustedFriendsUpsellContainer)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local ReactModule = require(Parent.React)
+local NewResult = require(AppChat.Logger):new(script.Name)
+local EnumScreensModule = require(AppChat.EnumScreens)
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local TrustedFriendsUpsellContainerModule = require(script.Parent.TrustedFriendsUpsellContainer)
 
-return function(_)
-	-- upvalues: useNavigation (ref), reactModule (ref), enumScreensModule (ref), name (ref), trustedFriendsUpsellContainerModule (ref)
-	local var1 = useNavigation()
-	local userId = var1 and var1.getParam("userId", nil)
-	local conversationId = var1 and var1.getParam("conversationId", nil)
-	local modalVariant = var1 and var1.getParam("modalVariant", nil)
-	local source = var1 and var1.getParam("source", nil)
-	local modalVariantOverride = var1 and var1.getParam("modalVariantOverride", nil)
-	local onRequestSent = var1 and var1.getParam("onRequestSent", nil)
-	local onRequestAccepted = var1 and var1.getParam("onRequestAccepted", nil)
-	local onAcknowledged = var1 and var1.getParam("onAcknowledged", nil)
-	local var2 = reactModule.useCallback(function()
-		-- upvalues: var1 (ref), enumScreensModule (copy)
-		if var1 and var1.state.routeName == enumScreensModule.TrustedConnectionsUpsell then
-			var1.goBack(var1.state.key)
+return function(_) --[[ Line: 17 ]]
+	-- upvalues: UseNavigationFunction (copy), ReactModule (copy), EnumScreensModule (copy), NewResult (copy), TrustedFriendsUpsellContainerModule (copy)
+	local UseNavigationResult = UseNavigationFunction()
+	local UserIdParam = UseNavigationResult and UseNavigationResult.getParam("userId", nil)
+	local ConversationIdParam = UseNavigationResult and UseNavigationResult.getParam("conversationId", nil)
+	local ModalVariantParam = UseNavigationResult and UseNavigationResult.getParam("modalVariant", nil)
+	local SourceParam = UseNavigationResult and UseNavigationResult.getParam("source", nil)
+	local ModalVariantOverrideParam = UseNavigationResult and UseNavigationResult.getParam("modalVariantOverride", nil)
+	local OnRequestSentParam = UseNavigationResult and UseNavigationResult.getParam("onRequestSent", nil)
+	local OnRequestAcceptedParam = UseNavigationResult and UseNavigationResult.getParam("onRequestAccepted", nil)
+	local OnAcknowledgedParam = UseNavigationResult and UseNavigationResult.getParam("onAcknowledged", nil)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 28 ]]
+		-- upvalues: UseNavigationResult (copy), EnumScreensModule (upval)
+		if UseNavigationResult and UseNavigationResult.state.routeName == EnumScreensModule.TrustedConnectionsUpsell then
+			UseNavigationResult.goBack(UseNavigationResult.state.key)
 		end
-	end, { var1 })
+	end, { UseNavigationResult })
 	
-	if userId then
-		return reactModule.createElement(trustedFriendsUpsellContainerModule, {
-			userId = userId,
-			dismissModal = var2,
-			source = source,
-			conversationId = conversationId,
-			analyticsModalVariant = modalVariant,
-			modalVariantOverride = modalVariantOverride,
-			onRequestSent = onRequestSent,
-			onRequestAccepted = onRequestAccepted,
-			onAcknowledged = onAcknowledged
+	if UserIdParam then
+		return ReactModule.createElement(TrustedFriendsUpsellContainerModule, {
+			userId = UserIdParam,
+			dismissModal = UseResult,
+			source = SourceParam,
+			conversationId = ConversationIdParam,
+			analyticsModalVariant = ModalVariantParam,
+			modalVariantOverride = ModalVariantOverrideParam,
+			onRequestSent = OnRequestSentParam,
+			onRequestAccepted = OnRequestAcceptedParam,
+			onAcknowledged = OnAcknowledgedParam
 		})
 	end
-	name:error("TrustedFriendsUpsellScreen: Missing required userId param", {
-		conversationId = conversationId,
-		modalVariant = modalVariant
+	NewResult:error("TrustedFriendsUpsellScreen: Missing required userId param", {
+		conversationId = ConversationIdParam,
+		modalVariant = ModalVariantParam
 	})
 	
-	if var1 then
-		var1.goBack()
+	if UseNavigationResult then
+		UseNavigationResult.goBack()
 	end
 	return nil
 end

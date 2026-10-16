@@ -1,183 +1,186 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local playersService = game:GetService("Players")
-local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
-local cryoModule = require(corePackagesService.Packages.Cryo)
-local userInputService = game:GetService("UserInputService")
-local runService = game:GetService("RunService")
-local httpService = game:GetService("HttpService")
-local default = require(corePackagesService.Workspace.Packages.LoggingProtocol).default
-local eventStreamReporter = require(corePackagesService.Workspace.Packages.TelemetryService).EventStreamReporter
-local fFlagAXEnableInspectAndBuyVersionAnalyticsModule = require(script.Parent.Parent.Flags.FFlagAXEnableInspectAndBuyVersionAnalytics)
-local unifiedEventLogEnums = require(corePackagesService.Workspace.Packages.AvatarExperienceAnalytics).UnifiedEventLogEnums
-local unifiedLoggingSurface = require(corePackagesService.Workspace.Packages.AvatarExperienceNavigation).Enums.UnifiedLoggingSurface
-local unifiedEventLogConstants = require(corePackagesService.Workspace.Packages.AvatarExperienceAnalytics).UnifiedEventLogConstants
-local itemTypeEnum = require(corePackagesService.Workspace.Packages.AvatarExperienceModel).Enums.ItemTypeEnum
-local TIMED_OPTION_BY_DAYS = require(corePackagesService.Workspace.Packages.AvatarExperienceAnalytics).Constants.TIMED_OPTION_BY_DAYS
-local AXUnifiedEventFilter = require(corePackagesService.Workspace.Packages.AvatarExperienceAnalytics).AXUnifiedEventFilter
-local unifiedEventCounterAggregator = require(corePackagesService.Workspace.Packages.AvatarExperienceAnalytics).UnifiedEventCounterAggregator
-local fFlagAXUnifiedEventCounters = require(corePackagesService.Workspace.Packages.AvatarExperienceFlags).FFlagAXUnifiedEventCounters
-local _ = {
-	SEND_EVENT_DEFERRED = 0,
-	SEND_EVENT_IMMEDIATELY = 1,
-	SEND_ROBLOX_TELEMETRY_EVENT = 2
-}
-local t = {}
-t.__index = t
+﻿local CorePackages = game:GetService("CorePackages")
+local Players = game:GetService("Players")
+local RbxAnalyticsService = game:GetService("RbxAnalyticsService")
+local CryoModule = require(CorePackages.Packages.Cryo)
+local UserInputService = game:GetService("UserInputService")
+local RunService = game:GetService("RunService")
+local HttpService = game:GetService("HttpService")
+local Default = require(CorePackages.Workspace.Packages.LoggingProtocol).default
+local EventStreamReporter = require(CorePackages.Workspace.Packages.TelemetryService).EventStreamReporter
+local FFlagAXEnableInspectAndBuyVersionAnalyticsModule = require(script.Parent.Parent.Flags.FFlagAXEnableInspectAndBuyVersionAnalytics)
+local UnifiedEventLogEnums = require(CorePackages.Workspace.Packages.AvatarExperienceAnalytics).UnifiedEventLogEnums
+local UnifiedLoggingSurface = require(CorePackages.Workspace.Packages.AvatarExperienceNavigation).Enums.UnifiedLoggingSurface
+local UnifiedEventLogConstants = require(CorePackages.Workspace.Packages.AvatarExperienceAnalytics).UnifiedEventLogConstants
+local ItemTypeEnum = require(CorePackages.Workspace.Packages.AvatarExperienceModel).Enums.ItemTypeEnum
+local TIMEDOPTIONBYDAYS = require(CorePackages.Workspace.Packages.AvatarExperienceAnalytics).Constants.TIMED_OPTION_BY_DAYS
+local AXUnifiedEventFilter = require(CorePackages.Workspace.Packages.AvatarExperienceAnalytics).AXUnifiedEventFilter
+local UnifiedEventCounterAggregator = require(CorePackages.Workspace.Packages.AvatarExperienceAnalytics).UnifiedEventCounterAggregator
+local FFlagAXUnifiedEventCounters = require(CorePackages.Workspace.Packages.AvatarExperienceFlags).FFlagAXUnifiedEventCounters
+local AnalyticsModule = {}
+AnalyticsModule.__index = AnalyticsModule
 
-function t.__tostring()
+function AnalyticsModule.__tostring(): string --[[ Line: 45 ]]
 	return "Service(Analytics)"
 end
 
-function t.new(p1, p2, p3)
-	-- upvalues: t (ref), eventStreamReporter (ref), default (ref), playersService (ref), fFlagAXEnableInspectAndBuyVersionAnalyticsModule (ref), unifiedEventLogEnums (ref), TIMED_OPTION_BY_DAYS (ref), itemTypeEnum (ref), userInputService (ref), httpService (ref), runService (ref), rbxAnalyticsService (ref)
-	local t_1 = {}
-	setmetatable(t_1, t)
-	t_1.eventStream = eventStreamReporter.new(default)
-	t_1.pid = tostring(game.PlaceId)
-	t_1.uid = tostring(playersService.LocalPlayer.UserId)
-	t_1.feature = "inspectAndBuy"
-	t_1.inspecteeUid = p1
-	t_1.ctx = p2
-	t_1.version = if fFlagAXEnableInspectAndBuyVersionAnalyticsModule then p3 else nil
+function AnalyticsModule.new(InspecteeUid, Ctx, p1) --[[ Line: 51 ]]
+	-- upvalues: AnalyticsModule (copy), EventStreamReporter (copy), Default (copy), Players (copy), FFlagAXEnableInspectAndBuyVersionAnalyticsModule (copy), UnifiedEventLogEnums (copy), TIMEDOPTIONBYDAYS (copy), ItemTypeEnum (copy), UserInputService (copy), HttpService (copy), RunService (copy), RbxAnalyticsService (copy)
+	local t = {}
+	setmetatable(t, AnalyticsModule)
+	t.eventStream = EventStreamReporter.new(Default)
+	t.pid = tostring(game.PlaceId)
+	t.uid = tostring(Players.LocalPlayer.UserId)
+	t.feature = "inspectAndBuy"
+	t.inspecteeUid = InspecteeUid
+	t.ctx = Ctx
+	t.version = if FFlagAXEnableInspectAndBuyVersionAnalyticsModule then p1 else nil
 	
-	function t_1.reportOpenInspectMenu()
-		-- upvalues: t_1 (ref)
-		t_1:report("inspectUser", {})
+	function t.reportOpenInspectMenu() --[[ Line: 65 ]]
+		-- upvalues: t (copy)
+		t:report("inspectUser", {})
 	end
 	
-	function t_1.reportTryOnButtonClicked(p4, p5)
-		-- upvalues: t_1 (ref)
-		t_1:report("tryItem", { itemType = p4, itemID = p5 })
+	function t.reportTryOnButtonClicked(ItemType, ItemID) --[[ Line: 72 ]]
+		-- upvalues: t (copy)
+		t:report("tryItem", { itemType = ItemType, itemID = ItemID })
 	end
 	
-	function t_1.reportFavoriteItem(p4, p5, p6, p7, p8, p9)
-		-- upvalues: t_1 (ref)
-		t_1:report("favoriteItem", {
-			itemType = p4,
-			itemID = p5,
-			favorite = p6,
-			success = p7,
-			failureReason = p8,
-			favoriteCount = p9
+	function t.reportFavoriteItem(ItemType, ItemID, Favorite, Success, FailureReason, FavoriteCount) --[[ Line: 82 ]]
+		-- upvalues: t (copy)
+		t:report("favoriteItem", {
+			itemType = ItemType,
+			itemID = ItemID,
+			favorite = Favorite,
+			success = Success,
+			failureReason = FailureReason,
+			favoriteCount = FavoriteCount
 		})
 	end
 	
-	function t_1.reportPurchaseAttempt(p4, p5)
-		-- upvalues: t_1 (ref)
-		t_1:report("purchaseAttemptItem", { itemType = p4, itemID = p5 })
+	function t.reportPurchaseAttempt(ItemType, ItemID) --[[ Line: 96 ]]
+		-- upvalues: t (copy)
+		t:report("purchaseAttemptItem", { itemType = ItemType, itemID = ItemID })
 	end
 	
-	function t_1.reportPurchaseAttemptUnifiedEvent(p4, p5, p6)
-		-- upvalues: t_1 (ref), unifiedEventLogEnums (copy), TIMED_OPTION_BY_DAYS (copy), itemTypeEnum (copy)
-		t_1:reportUnifiedEvent({
-			action = unifiedEventLogEnums.MarketplaceUnifiedAction.PURCHASE_ATTEMPT,
-			itemId = p5,
-			itemType = p4,
-			organicTimedOption = if p6.timedOptionDays ~= nil then nil else TIMED_OPTION_BY_DAYS[p6.timedOptionDays],
-			assetType = if p4 == itemTypeEnum.Asset then p6.itemSubType else nil,
-			bundleType = if p4 == itemTypeEnum.Bundle then p6.itemSubType else nil,
-			organicItemPrice = p6.price or 0
+	function t.reportPurchaseAttemptUnifiedEvent(ItemType, ItemID, p2) --[[ Line: 106 ]]
+		-- upvalues: t (copy), UnifiedEventLogEnums (upval), TIMEDOPTIONBYDAYS (upval), ItemTypeEnum (upval)
+		t:reportUnifiedEvent({
+			action = UnifiedEventLogEnums.MarketplaceUnifiedAction.PURCHASE_ATTEMPT,
+			itemId = ItemID,
+			itemType = ItemType,
+			organicTimedOption = if p2.timedOptionDays == nil then nil else TIMEDOPTIONBYDAYS[p2.timedOptionDays],
+			assetType = if ItemType == ItemTypeEnum.Asset then p2.itemSubType else nil,
+			bundleType = if ItemType == ItemTypeEnum.Bundle then p2.itemSubType else nil,
+			organicItemPrice = p2.price or 0
 		})
-		t_1:report("purchaseAttemptItem", { itemType = p4, itemID = p5 })
+		t:report("purchaseAttemptItem", { itemType = ItemType, itemID = ItemID })
 	end
 	
-	function t_1.reportPurchaseSuccessUnifiedEvent(p4, p5, p6)
-		-- upvalues: t_1 (ref), unifiedEventLogEnums (copy), TIMED_OPTION_BY_DAYS (copy), itemTypeEnum (copy)
-		t_1:reportUnifiedEvent({
-			action = unifiedEventLogEnums.MarketplaceUnifiedAction.PURCHASE_SUCCESS,
-			itemId = p5,
-			itemType = p4,
-			organicTimedOption = if p6.timedOptionDays ~= nil then nil else TIMED_OPTION_BY_DAYS[p6.timedOptionDays],
-			assetType = if p4 == itemTypeEnum.Asset then p6.itemSubType else nil,
-			bundleType = if p4 == itemTypeEnum.Bundle then p6.itemSubType else nil,
-			organicItemPrice = p6.price or 0
+	function t.reportPurchaseSuccessUnifiedEvent(ItemType, ItemID, p2) --[[ Line: 128 ]]
+		-- upvalues: t (copy), UnifiedEventLogEnums (upval), TIMEDOPTIONBYDAYS (upval), ItemTypeEnum (upval)
+		t:reportUnifiedEvent({
+			action = UnifiedEventLogEnums.MarketplaceUnifiedAction.PURCHASE_SUCCESS,
+			itemId = ItemID,
+			itemType = ItemType,
+			organicTimedOption = if p2.timedOptionDays == nil then nil else TIMEDOPTIONBYDAYS[p2.timedOptionDays],
+			assetType = if ItemType == ItemTypeEnum.Asset then p2.itemSubType else nil,
+			bundleType = if ItemType == ItemTypeEnum.Bundle then p2.itemSubType else nil,
+			organicItemPrice = p2.price or 0
 		})
-		t_1:report("purchaseSuccessItem", { itemType = p4, itemID = p5 })
+		t:report("purchaseSuccessItem", { itemType = ItemType, itemID = ItemID })
 	end
 	
-	function t_1.reportPurchaseSuccess(p4, p5)
-		-- upvalues: t_1 (ref)
-		t_1:report("purchaseSuccessItem", { itemType = p4, itemID = p5 })
+	function t.reportPurchaseSuccess(ItemType, ItemID) --[[ Line: 150 ]]
+		-- upvalues: t (copy)
+		t:report("purchaseSuccessItem", { itemType = ItemType, itemID = ItemID })
 	end
 	
-	function t_1.reportItemDetailPageOpened(p4, p5)
-		-- upvalues: t_1 (ref)
-		t_1:report("itemDetailView", { itemType = p4, itemID = p5 })
+	function t.reportItemDetailPageOpened(ItemType, ItemID) --[[ Line: 164 ]]
+		-- upvalues: t (copy)
+		t:report("itemDetailView", { itemType = ItemType, itemID = ItemID })
 	end
 	
-	t_1.platformStr = (function()
-		-- upvalues: userInputService (copy), httpService (copy)
-		local platform = userInputService:GetPlatform()
-		local var1 = "Unknown"
+	t.platformStr = (function(): string --[[ Line: 174 | Named "getPlatformString" ]]
+		-- upvalues: UserInputService (upval), HttpService (upval)
+		local Platform = UserInputService:GetPlatform()
+		local Amazon = "Unknown"
 		
-		if platform == Enum.Platform.Windows then
-			var1 = "Windows"
+		if Platform == Enum.Platform.Windows then
+			Amazon = "Windows"
 			
-			return var1
-		elseif platform == Enum.Platform.OSX then
-			var1 = "OSX"
-			
-			return var1
-		elseif platform == Enum.Platform.IOS then
-			var1 = "IOS"
-			
-			return var1
-		elseif platform == Enum.Platform.Android then
-			local userAgent = httpService:GetUserAgent()
-			var1 = if string.find(userAgent, "AmazonAppStore") then "Amazon" else "Android"
-			
-			if string.find(userAgent, "OculusQuest3Store") then
-				var1 = "Quest"
-				
-				return var1
-			end
-		elseif platform == Enum.Platform.XBoxOne or platform == Enum.Platform.XBox360 then
-			var1 = "XBox"
-			
-			return var1
-		elseif platform == Enum.Platform.UWP then
-			var1 = "UWP"
-			
-			return var1
-		elseif platform == Enum.Platform.PS4 or platform == Enum.Platform.PS3 or platform == Enum.Platform.PS5 then
-			var1 = "PlayStation"
+			return Amazon
 		end
-		return var1
+		if Platform == Enum.Platform.OSX then
+			Amazon = "OSX"
+			
+			return Amazon
+		end
+		if Platform == Enum.Platform.IOS then
+			Amazon = "IOS"
+			
+			return Amazon
+		end
+		if Platform == Enum.Platform.Android then
+			local UserAgent: string = HttpService:GetUserAgent()
+			Amazon = if string.find(UserAgent, "AmazonAppStore") then "Amazon" else "Android"
+			
+			if string.find(UserAgent, "OculusQuest3Store") then
+				Amazon = "Quest"
+				
+				return Amazon
+			end
+		else
+			if Platform == Enum.Platform.XBoxOne or Platform == Enum.Platform.XBox360 then
+				Amazon = "XBox"
+				
+				return Amazon
+			end
+			if Platform == Enum.Platform.UWP then
+				Amazon = "UWP"
+				
+				return Amazon
+			end
+			if Platform == Enum.Platform.PS4 or Platform == Enum.Platform.PS3 or Platform == Enum.Platform.PS5 then
+				Amazon = "PlayStation"
+			end
+		end
+		return Amazon
 	end)()
 	
-	function t_1.sendCounter(p4)
-		-- upvalues: runService (copy), t_1 (ref), rbxAnalyticsService (copy)
-		if runService:IsStudio() then
+	function t.sendCounter(Text) --[[ Line: 207 ]]
+		-- upvalues: RunService (upval), t (copy), RbxAnalyticsService (upval)
+		if not RunService:IsStudio() then
+			RbxAnalyticsService:ReportCounter("inspectAndBuy" .. "_" .. t.platformStr .. "_" .. Text)
+			
 			return
 		end
-		rbxAnalyticsService:ReportCounter("inspectAndBuy" .. "_" .. t_1.platformStr .. "_" .. p23)
 	end
 	
-	return t_1
+	return t
 end
 
-function t:report(p1, p2)
-	-- upvalues: fFlagAXEnableInspectAndBuyVersionAnalyticsModule (ref), cryoModule (ref)
-	self.eventStream:sendTelemetryEvent(self.ctx, p1, cryoModule.Dictionary.join({
+function AnalyticsModule:report(p1, p2) --[[ Line: 219 ]]
+	-- upvalues: FFlagAXEnableInspectAndBuyVersionAnalyticsModule (copy), CryoModule (copy)
+	self.eventStream:sendTelemetryEvent(self.ctx, p1, (CryoModule.Dictionary.join({
 		feature = "inspectAndBuy",
 		event_sender_api = 2,
 		pid = self.pid,
 		uid = self.uid,
 		inspecteeUid = self.inspecteeUid,
-		inspectAndBuyVersion = if fFlagAXEnableInspectAndBuyVersionAnalyticsModule then self.version else nil
-	}, p2))
+		inspectAndBuyVersion = if FFlagAXEnableInspectAndBuyVersionAnalyticsModule then self.version else nil
+	}, p2)))
 end
 
-function t:reportUnifiedEvent(p1)
-	-- upvalues: unifiedLoggingSurface (ref), cryoModule (ref), fFlagAXUnifiedEventCounters (ref), unifiedEventCounterAggregator (ref), AXUnifiedEventFilter (ref), unifiedEventLogConstants (ref)
-	local var1 = cryoModule.Dictionary.join({
-		surface = unifiedLoggingSurface.IN_EXPERIENCE_INSPECT_BUY
+function AnalyticsModule:reportUnifiedEvent(p1) --[[ Line: 233 ]]
+	-- upvalues: UnifiedLoggingSurface (copy), CryoModule (copy), FFlagAXUnifiedEventCounters (copy), UnifiedEventCounterAggregator (copy), AXUnifiedEventFilter (copy), UnifiedEventLogConstants (copy)
+	local JoinResult = CryoModule.Dictionary.join({
+		surface = UnifiedLoggingSurface.IN_EXPERIENCE_INSPECT_BUY
 	}, p1)
 	
-	if fFlagAXUnifiedEventCounters then
-		unifiedEventCounterAggregator.record(var1, AXUnifiedEventFilter.filter(var1, { skipReporting = true }))
+	if FFlagAXUnifiedEventCounters then
+		UnifiedEventCounterAggregator.record(JoinResult, AXUnifiedEventFilter.filter(JoinResult, { skipReporting = true }))
 	end
-	self.eventStream:sendTelemetryEvent(self.ctx, unifiedEventLogConstants.EVENT_NAME, var1)
+	self.eventStream:sendTelemetryEvent(self.ctx, UnifiedEventLogConstants.EVENT_NAME, JoinResult)
 end
 
-return t
+return AnalyticsModule

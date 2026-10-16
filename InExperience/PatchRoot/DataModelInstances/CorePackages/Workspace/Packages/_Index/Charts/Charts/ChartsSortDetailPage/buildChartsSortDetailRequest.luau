@@ -1,46 +1,46 @@
-﻿local charts = script:FindFirstAncestor("Charts")
-local addSystemInfoToArgs = require(charts.Parent.DiscoveryUtils).AddSystemInfoToArgs
-local fFlagSduiChartsAudienceFilterModule = require(charts.Flags.FFlagSduiChartsAudienceFilter)
+﻿local Charts = script:FindFirstAncestor("Charts")
+local AddSystemInfoToArgsFunction = require(Charts.Parent.DiscoveryUtils).AddSystemInfoToArgs
+local FFlagSduiChartsAudienceFilterModule = require(Charts.Flags.FFlagSduiChartsAudienceFilter)
 
-return function(p1, p2)
-	-- upvalues: addSystemInfoToArgs (ref), fFlagSduiChartsAudienceFilterModule (ref)
-	local t = { sort_id = p2.sortId }
-	local t_1 = {}
-	addSystemInfoToArgs(t_1, { "maxMemory" })
+return function(p1, p2) --[[ Line: 22 | Named "buildChartsSortDetailRequest" ]]
+	-- upvalues: AddSystemInfoToArgsFunction (copy), FFlagSduiChartsAudienceFilterModule (copy)
+	local config = { sort_id = p2.sortId }
+	local t = {}
+	AddSystemInfoToArgsFunction(t, { "maxMemory" })
 	
-	if t_1.maxMemory and t_1.maxMemory ~= "" then
-		t.max_memory = t_1.maxMemory
+	if t.maxMemory and t.maxMemory ~= "" then
+		config.max_memory = t.maxMemory
 	end
 	if p2.contentPageToken and p2.contentPageToken ~= "" then
-		t.content_page_token = p2.contentPageToken
+		config.content_page_token = p2.contentPageToken
 	end
 	if p2.sessionId and p2.sessionId ~= "" then
-		t.session_id = p2.sessionId
+		config.session_id = p2.sessionId
 	end
-	local filterSelections = p2.filterSelections
+	local FilterSelections = p2.filterSelections
 	
-	if filterSelections then
-		if filterSelections.device and filterSelections.device ~= "" then
-			t.device = filterSelections.device
+	if FilterSelections then
+		if FilterSelections.device and FilterSelections.device ~= "" then
+			config.device = FilterSelections.device
 		end
-		if filterSelections.country and filterSelections.country ~= "" then
-			t.country = filterSelections.country
+		if FilterSelections.country and FilterSelections.country ~= "" then
+			config.country = FilterSelections.country
 		end
-		if filterSelections.ageGroup and filterSelections.ageGroup ~= "" then
-			t.age_group = filterSelections.ageGroup
+		if FilterSelections.ageGroup and FilterSelections.ageGroup ~= "" then
+			config.age_group = FilterSelections.ageGroup
 		end
-		if filterSelections.selectedGenre and filterSelections.selectedGenre ~= "" then
-			t.selected_genre = filterSelections.selectedGenre
+		if FilterSelections.selectedGenre and FilterSelections.selectedGenre ~= "" then
+			config.selected_genre = FilterSelections.selectedGenre
 		end
-		if fFlagSduiChartsAudienceFilterModule and filterSelections.audience and filterSelections.audience ~= "" then
-			t.audience = filterSelections.audience
+		if FFlagSduiChartsAudienceFilterModule and FilterSelections.audience and FilterSelections.audience ~= "" then
+			config.audience = FilterSelections.audience
 		end
 	end
 	if p2.cachedRobloxComponentToTemplateId then
-		t.cached_roblox_component_to_template_id = p2.cachedRobloxComponentToTemplateId
+		config.cached_roblox_component_to_template_id = p2.cachedRobloxComponentToTemplateId
 	end
 	if p2.clientCapabilities then
-		t.client_capabilities = p2.clientCapabilities
+		config.client_capabilities = p2.clientCapabilities
 	end
-	return p1.GetChartsSortDetailRequest.new(t)
+	return p1.GetChartsSortDetailRequest.new(config)
 end

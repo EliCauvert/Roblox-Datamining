@@ -1,54 +1,51 @@
-﻿local parent = script:FindFirstAncestor("VoiceChat").Parent
-local voiceChatCoreModule = require(parent.VoiceChatCore)
-local crossExperienceVoiceModule = require(parent.CrossExperienceVoice)
-local crossExperienceModule = require(parent.CrossExperience)
-local sharedFlagsModule = require(parent.SharedFlags)
-local default = voiceChatCoreModule.CoreVoiceManager.default
-local default_1 = crossExperienceVoiceModule.CrossExperienceVoiceManager.default
-local AUDIO_FOCUS_MANAGEMENT = crossExperienceModule.Constants.AUDIO_FOCUS_MANAGEMENT
-local fFlagEnableCrossExpVoice = sharedFlagsModule.GetFFlagEnableCrossExpVoice()
-local fFlagEnableCrossExperienceVoiceCaptureMute = sharedFlagsModule.GetFFlagEnableCrossExperienceVoiceCaptureMute()
-local t = {}
-t.__index = t
+﻿local Parent = script:FindFirstAncestor("VoiceChat").Parent
+local SharedFlagsModule = require(Parent.SharedFlags)
+local Default = require(Parent.VoiceChatCore).CoreVoiceManager.default
+local Default1 = require(Parent.CrossExperienceVoice).CrossExperienceVoiceManager.default
+local AUDIOFOCUSMANAGEMENT = require(Parent.CrossExperience).Constants.AUDIO_FOCUS_MANAGEMENT
+local FFlagEnableCrossExpVoice = SharedFlagsModule.GetFFlagEnableCrossExpVoice()
+local FFlagEnableCrossExperienceVoiceCaptureMute = SharedFlagsModule.GetFFlagEnableCrossExperienceVoiceCaptureMute()
+local GlobalVoiceManager = {}
+GlobalVoiceManager.__index = GlobalVoiceManager
 
-function t.new()
-	-- upvalues: t (ref)
-	local t_1 = {}
-	setmetatable(t_1, t)
+function GlobalVoiceManager.new() --[[ Line: 38 ]]
+	-- upvalues: GlobalVoiceManager (copy)
+	local t = {}
+	setmetatable(t, GlobalVoiceManager)
 	
-	return t_1
+	return t
 end
 
-function t.isPublicVoiceFocused(_)
-	-- upvalues: fFlagEnableCrossExpVoice (ref), default_1 (ref), AUDIO_FOCUS_MANAGEMENT (ref)
-	return not fFlagEnableCrossExpVoice or default_1:getCurrentAudioContext() == AUDIO_FOCUS_MANAGEMENT.UGC.CONTEXT_ID
+function GlobalVoiceManager:isPublicVoiceFocused(): boolean --[[ Line: 44 ]]
+	-- upvalues: FFlagEnableCrossExpVoice (copy), Default1 (copy), AUDIOFOCUSMANAGEMENT (copy)
+	return not FFlagEnableCrossExpVoice or Default1:getCurrentAudioContext() == AUDIOFOCUSMANAGEMENT.UGC.CONTEXT_ID
 end
 
-function t.isPrivateVoiceFocused(_)
-	-- upvalues: fFlagEnableCrossExpVoice (ref), default_1 (ref), AUDIO_FOCUS_MANAGEMENT (ref)
-	return fFlagEnableCrossExpVoice and default_1:getCurrentAudioContext() == AUDIO_FOCUS_MANAGEMENT.CEV.CONTEXT_ID
+function GlobalVoiceManager:isPrivateVoiceFocused(): boolean --[[ Line: 49 ]]
+	-- upvalues: FFlagEnableCrossExpVoice (copy), Default1 (copy), AUDIOFOCUSMANAGEMENT (copy)
+	return FFlagEnableCrossExpVoice and Default1:getCurrentAudioContext() == AUDIOFOCUSMANAGEMENT.CEV.CONTEXT_ID
 end
 
-function t:MuteAll(p1)
-	-- upvalues: fFlagEnableCrossExperienceVoiceCaptureMute (ref), default_1 (ref), default (ref)
-	if self:isPrivateVoiceFocused() and fFlagEnableCrossExperienceVoiceCaptureMute then
-		default_1:muteAll(p1)
+function GlobalVoiceManager:MuteAll(p1) --[[ Line: 54 ]]
+	-- upvalues: FFlagEnableCrossExperienceVoiceCaptureMute (copy), Default1 (copy), Default (copy)
+	if self:isPrivateVoiceFocused() and FFlagEnableCrossExperienceVoiceCaptureMute then
+		Default1:muteAll(p1)
 	end
-	if self:isPublicVoiceFocused() and default:UserVoiceEnabled() and default:IsInitialized() then
-		default:MuteAll(true, p1)
-	end
-end
-
-function t:UnmuteAll(p1)
-	-- upvalues: fFlagEnableCrossExperienceVoiceCaptureMute (ref), default_1 (ref), default (ref)
-	if self:isPrivateVoiceFocused() and fFlagEnableCrossExperienceVoiceCaptureMute then
-		default_1:unmuteAll(p1)
-	end
-	if self:isPublicVoiceFocused() and default:UserVoiceEnabled() and default:IsInitialized() then
-		default:MuteAll(false, p1)
+	if self:isPublicVoiceFocused() and Default:UserVoiceEnabled() and Default:IsInitialized() then
+		Default:MuteAll(true, p1)
 	end
 end
 
-t.default = t.new()
+function GlobalVoiceManager:UnmuteAll(p1) --[[ Line: 64 ]]
+	-- upvalues: FFlagEnableCrossExperienceVoiceCaptureMute (copy), Default1 (copy), Default (copy)
+	if self:isPrivateVoiceFocused() and FFlagEnableCrossExperienceVoiceCaptureMute then
+		Default1:unmuteAll(p1)
+	end
+	if self:isPublicVoiceFocused() and Default:UserVoiceEnabled() and Default:IsInitialized() then
+		Default:MuteAll(false, p1)
+	end
+end
 
-return t
+GlobalVoiceManager.default = GlobalVoiceManager.new()
+
+return GlobalVoiceManager

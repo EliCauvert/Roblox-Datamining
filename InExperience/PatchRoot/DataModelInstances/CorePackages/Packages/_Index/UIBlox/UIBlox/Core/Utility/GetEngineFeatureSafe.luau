@@ -1,8 +1,8 @@
-﻿return function(p1)
-	local ok, status = pcall(function()
-		-- upvalues: p1 (ref)
-		return game:GetEngineFeature(p1)
+﻿return function(Name) --[[ Line: 8 | Named "GetEngineFeatureSafe" ]]
+	local Success, Result = pcall(function() --[[ Line: 9 ]]
+		-- upvalues: Name (copy)
+		return game:GetEngineFeature(Name)
 	end)
 	
-	return ok and status
+	return Success and Result
 end

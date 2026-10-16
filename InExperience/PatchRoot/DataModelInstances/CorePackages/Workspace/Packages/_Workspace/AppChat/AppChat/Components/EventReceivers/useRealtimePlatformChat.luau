@@ -1,12 +1,12 @@
-﻿local realtimeDeliveryModule = require(script:FindFirstAncestor("AppChat").Parent.RealtimeDelivery)
+﻿local RealtimeDeliveryModule = require(script:FindFirstAncestor("AppChat").Parent.RealtimeDelivery)
 local _ = require(script.Parent.CommunicationChannelsTypes)
 
-return function(p1, p2)
-	-- upvalues: realtimeDeliveryModule (ref)
-	realtimeDeliveryModule.useRealtimeNamespace("CommunicationChannels", function(p3)
-		-- upvalues: p1 (ref)
-		if p3.ChannelVertical == "PlatformChat" then
-			p1(p3)
+return function(Callback, p1) --[[ Line: 8 | Named "useRealtimePlatformChat" ]]
+	-- upvalues: RealtimeDeliveryModule (copy)
+	RealtimeDeliveryModule.useRealtimeNamespace("CommunicationChannels", function(p2) --[[ Line: 9 ]]
+		-- upvalues: Callback (copy)
+		if p2.ChannelVertical == "PlatformChat" then
+			Callback(p2)
 		end
-	end, p2)
+	end, p1)
 end

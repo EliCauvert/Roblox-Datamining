@@ -1,78 +1,85 @@
-﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
-local parent = momentsCreation.Parent
-local _ = require(parent.MomentsTypes)
-local reactModule = require(parent.React)
-local reactOtterModule = require(parent.ReactOtter)
-local useAnimatedBinding = reactOtterModule.useAnimatedBinding
-local useCallback = reactModule.useCallback
-local useEffect = reactModule.useEffect
-local useRef = reactModule.useRef
-local segmentSelectorWidth = require(momentsCreation.Constants).AudioWaveform.SegmentSelectorWidth
+﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
+local Parent = MomentsCreation.Parent
+local _ = require(Parent.MomentsTypes)
+local ReactModule = require(Parent.React)
+local ReactOtterModule = require(Parent.ReactOtter)
+local UseAnimatedBindingFunction = ReactOtterModule.useAnimatedBinding
+local UseCallbackFunction = ReactModule.useCallback
+local UseEffectFunction = ReactModule.useEffect
+local UseRefFunction = ReactModule.useRef
+local SegmentSelectorWidth = require(MomentsCreation.Constants).AudioWaveform.SegmentSelectorWidth
 
-return function(p1, p2, p3, p4, p5, p6)
-	-- upvalues: useRef (ref), useAnimatedBinding (ref), useCallback (ref), segmentSelectorWidth (ref), reactOtterModule (ref), useEffect (ref)
-	local var1 = useRef(nil)
-	local var2 = useRef(nil)
-	local var3, var4 = useAnimatedBinding(0)
-	local var5 = useRef(nil)
-	local var6 = useCallback(function()
-		-- upvalues: var5 (ref), var3 (ref), p3 (ref)
-		var5.current = var3:getValue()
-		p3()
-	end, { p3 })
-	local var7 = useCallback(function()
-		-- upvalues: var1 (ref), var2 (ref), var5 (ref), segmentSelectorWidth (copy), p4 (ref), p6 (ref), var4 (ref), reactOtterModule (copy)
-		local current = var1.current
-		local current_1 = var2.current
+return function(p1, Callback2, Callback1, Callback, p2, p3) --[[ Line: 27 | Named "useMusicEditorController" ]]
+	-- upvalues: UseRefFunction (copy), UseAnimatedBindingFunction (copy), UseCallbackFunction (copy), SegmentSelectorWidth (copy), ReactOtterModule (copy), UseEffectFunction (copy)
+	local UseRefResult = UseRefFunction(nil)
+	local UseRefResult1 = UseRefFunction(nil)
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = UseAnimatedBindingFunction(0)
+	local UseRefResult2 = UseRefFunction(nil)
+	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 40 ]]
+		-- upvalues: UseRefResult2 (copy), UseAnimatedBindingResult (copy), Callback1 (copy)
+		UseRefResult2.current = UseAnimatedBindingResult:getValue()
+		Callback1()
+	end, { Callback1 })
+	local UseCallbackResult1 = UseCallbackFunction(function() --[[ Line: 45 ]]
+		-- upvalues: UseRefResult (copy), UseRefResult1 (copy), UseRefResult2 (copy), SegmentSelectorWidth (upval), Callback (copy), p3 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval)
+		local Current = UseRefResult.current
+		local Current1 = UseRefResult1.current
 		
-		if current == nil or current_1 == nil then return end
-		local current_2 = var5.current or 0
-		local var8 = current.DragUDim2.X.Offset / segmentSelectorWidth
-		local var9 = current_1.AbsoluteSize.X / segmentSelectorWidth
+		if Current == nil or Current1 == nil then return end
+		local Current2 = UseRefResult2.current or 0
+		local OffsetRatio = Current.DragUDim2.X.Offset / SegmentSelectorWidth
+		local XRatio = Current1.AbsoluteSize.X / SegmentSelectorWidth
 		
-		if 1 - var9 > 0 then
+		if 1 - XRatio <= 0 then
+			local ClampedValue = math.clamp(Current2 + OffsetRatio, 1 - XRatio, 0)
+			Callback(p3 * (-ClampedValue / XRatio))
+			UseAnimatedBindingResult2(ReactOtterModule.instant(ClampedValue))
+			
 			return
 		end
-		local clampedValue = math.clamp(current_2 + var8, 1 - var9, 0)
-		p4(p6 * (-clampedValue / var9))
-		var4(reactOtterModule.instant(clampedValue))
-	end, { p6, p4 })
-	local var8 = useCallback(function()
-		-- upvalues: var5 (ref), p2 (ref)
-		var5.current = nil
-		p2()
-	end, { p2 })
-	useEffect(function()
-		-- upvalues: p1 (ref), var1 (ref), var6 (ref), var7 (ref), var8 (ref)
+	end, { p3, Callback })
+	local UseCallbackResult2 = UseCallbackFunction(function() --[[ Line: 66 ]]
+		-- upvalues: UseRefResult2 (copy), Callback2 (copy)
+		UseRefResult2.current = nil
+		Callback2()
+	end, { Callback2 })
+	UseEffectFunction(function() --[[ Line: 71 ]]
+		-- upvalues: p1 (copy), UseRefResult (copy), UseCallbackResult (copy), UseCallbackResult1 (copy), UseCallbackResult2 (copy)
 		if not p1 then return end
-		local t = {}
-		local current = var1.current
+		local List = {}
+		local Current = UseRefResult.current
 		
-		if current ~= nil then
-			table.insert(t, current.DragStart:Connect(var6))
-			table.insert(t, current.DragContinue:Connect(var7))
-			table.insert(t, current.DragEnd:Connect(var8))
+		if Current ~= nil then
+			table.insert(List, Current.DragStart:Connect(UseCallbackResult))
+			table.insert(List, Current.DragContinue:Connect(UseCallbackResult1))
+			table.insert(List, Current.DragEnd:Connect(UseCallbackResult2))
 		end
-		return function()
-			-- upvalues: t (ref)
-			for i, v in t do
-				v:Disconnect()
+		return function() --[[ Line: 84 ]]
+			-- upvalues: List (copy)
+			for _, Connection in List do
+				Connection:Disconnect()
 			end
 		end
-	end, { p1, var6, var7, var8 })
-	useEffect(function()
-		-- upvalues: var2 (ref), p6 (ref), segmentSelectorWidth (copy), var4 (ref), reactOtterModule (copy), p5 (ref)
-		local current = var2.current
+	end, {
+		p1,
+		UseCallbackResult,
+		UseCallbackResult1,
+		UseCallbackResult2
+	})
+	UseEffectFunction(function() --[[ Line: 91 ]]
+		-- upvalues: UseRefResult1 (copy), p3 (copy), SegmentSelectorWidth (upval), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), p2 (copy)
+		local Current = UseRefResult1.current
 		
-		if current == nil or p6 <= 0 then
+		if Current ~= nil and p3 > 0 then
+			UseAnimatedBindingResult2(ReactOtterModule.instant(-p2.startTime / p3 * (Current.AbsoluteSize.X / SegmentSelectorWidth)))
+			
 			return
 		end
-		var4(reactOtterModule.instant(-p5.startTime / p6 * (current.AbsoluteSize.X / segmentSelectorWidth)))
-	end, { p5.startTime, p6 })
+	end, { p2.startTime, p3 })
 	
 	return {
-		waveformRef = var1,
-		waveformPosition = var3,
-		waveformDisplayRef = var2
+		waveformRef = UseRefResult,
+		waveformPosition = UseAnimatedBindingResult,
+		waveformDisplayRef = UseRefResult1
 	}
 end

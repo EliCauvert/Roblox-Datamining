@@ -1,196 +1,214 @@
-﻿local appBlox = script:FindFirstAncestor("AppBlox")
-local parent = appBlox.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local reactUtilsModule = require(parent.ReactUtils)
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagLuaAppMediaGalleryGamepadSupport = sharedFlagsModule.FFlagLuaAppMediaGalleryGamepadSupport
-local fFlagLuaAppEdpDirectionalGradientMidTransparency = sharedFlagsModule.FFlagLuaAppEdpDirectionalGradientMidTransparency
-local scrollView = foundationModule.ScrollView
-local view = foundationModule.View
-local detailsPageLayoutContextModule = require(script.Parent.DetailsPageLayoutContext)
-local detailsPageLayoutUtilsModule = require(script.Parent.DetailsPageLayoutUtils)
-local fFlagDetailsPageLayoutUseMeasuredSizeForInitialScrollModule = require(appBlox.Flags.FFlagDetailsPageLayoutUseMeasuredSizeForInitialScroll)
-local t = { Selectable = false }
-local var1 = reactModule.createBinding(0)
-local _ = nil
+﻿local AppBlox = script:FindFirstAncestor("AppBlox")
+local Parent = AppBlox.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local ReactUtilsModule = require(Parent.ReactUtils)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagLuaAppMediaGalleryGamepadSupport = SharedFlagsModule.FFlagLuaAppMediaGalleryGamepadSupport
+local FFlagLuaAppEdpDirectionalGradientMidTransparency = SharedFlagsModule.FFlagLuaAppEdpDirectionalGradientMidTransparency
+local ScrollView = FoundationModule.ScrollView
+local View = FoundationModule.View
+local DetailsPageLayoutContextModule = require(script.Parent.DetailsPageLayoutContext)
+local DetailsPageLayoutUtilsModule = require(script.Parent.DetailsPageLayoutUtils)
+local FFlagDetailsPageLayoutUseMeasuredSizeForInitialScrollModule = require(AppBlox.Flags.FFlagDetailsPageLayoutUseMeasuredSizeForInitialScroll)
+local Selection = { Selectable = false }
+local Binding = ReactModule.createBinding(0)
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: reactModule (ref), detailsPageLayoutContextModule (ref), fFlagDetailsPageLayoutUseMeasuredSizeForInitialScrollModule (ref), reactUtilsModule (ref), var1 (ref), detailsPageLayoutUtilsModule (ref), view (ref), fFlagLuaAppEdpDirectionalGradientMidTransparency (ref), scrollView (ref), t (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref)
-	local var2 = reactModule.useContext(detailsPageLayoutContextModule)
-	local contentTopOffset = var2.contentTopOffset
-	local hasFullBleed = var2.hasFullBleed
-	local isFullscreen = var2.isFullscreen
-	local isFullscreenOverlay = var2.isFullscreenOverlay
-	local headerBarHeight = var2.headerBarHeight
-	local hasHeader = var2.hasHeader
-	local onCanvasPositionChanged = var2.onCanvasPositionChanged
-	local fullBleedOverlapOffset = var2.fullBleedOverlapOffset
-	local initialScrollY = var2.initialScrollY
-	local hasValidContainerSize = var2.hasValidContainerSize
-	local containerHeight = var2.containerHeight
-	local onCanvasSizeChanged = var2.onCanvasSizeChanged
-	local hasActions = var2.hasActions
-	local actionBarHeight = var2.actionBarHeight
-	local testId = var2.testId
-	local gradientTopBleedOffset = var2.gradientTopBleedOffset
-	local gradientMidTransparency = var2.gradientMidTransparency
-	assert(testId, "DetailsPageLayout.Content must be used within DetailsPageLayout.Root")
-	local var3 = reactUtilsModule.useComposedRef(p1.scrollingFrameRef, reactModule.useCallback(function(p3)
-		-- upvalues: fFlagDetailsPageLayoutUseMeasuredSizeForInitialScrollModule (copy), hasFullBleed (ref), initialScrollY (ref)
-		if p3 and (fFlagDetailsPageLayoutUseMeasuredSizeForInitialScrollModule and hasFullBleed or initialScrollY > 0) then
-			p3.CanvasPosition = Vector2.new(0, initialScrollY)
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 39 | Named "DetailsPageLayoutContent" ]]
+	-- upvalues: ReactModule (copy), DetailsPageLayoutContextModule (copy), FFlagDetailsPageLayoutUseMeasuredSizeForInitialScrollModule (copy), ReactUtilsModule (copy), Binding (copy), DetailsPageLayoutUtilsModule (copy), View (copy), FFlagLuaAppEdpDirectionalGradientMidTransparency (copy), ScrollView (copy), Selection (copy), FFlagLuaAppMediaGalleryGamepadSupport (copy)
+	local UseContextResult = ReactModule.useContext(DetailsPageLayoutContextModule)
+	local ContentTopOffset = UseContextResult.contentTopOffset
+	local HasFullBleed = UseContextResult.hasFullBleed
+	local IsFullscreen = UseContextResult.isFullscreen
+	local IsFullscreenOverlay = UseContextResult.isFullscreenOverlay
+	local HeaderBarHeight = UseContextResult.headerBarHeight
+	local HasHeader = UseContextResult.hasHeader
+	local OnCanvasPositionChangedFunction = UseContextResult.onCanvasPositionChanged
+	local FullBleedOverlapOffset = UseContextResult.fullBleedOverlapOffset
+	local InitialScrollY = UseContextResult.initialScrollY
+	local HasValidContainerSize = UseContextResult.hasValidContainerSize
+	local ContainerHeight = UseContextResult.containerHeight
+	local OnCanvasSizeChangedFunction = UseContextResult.onCanvasSizeChanged
+	local HasActions = UseContextResult.hasActions
+	local ActionBarHeight = UseContextResult.actionBarHeight
+	local TestId = UseContextResult.testId
+	local GradientTopBleedOffset = UseContextResult.gradientTopBleedOffset
+	local GradientMidTransparency = UseContextResult.gradientMidTransparency
+	assert(TestId, "DetailsPageLayout.Content must be used within DetailsPageLayout.Root")
+	local UseComposedRefResult = ReactUtilsModule.useComposedRef(p1.scrollingFrameRef, (ReactModule.useCallback(function(ScrollFrame) --[[ Line: 63 ]]
+		-- upvalues: FFlagDetailsPageLayoutUseMeasuredSizeForInitialScrollModule (upval), HasFullBleed (copy), InitialScrollY (copy)
+		if ScrollFrame and (FFlagDetailsPageLayoutUseMeasuredSizeForInitialScrollModule and HasFullBleed or InitialScrollY > 0) then
+			ScrollFrame.CanvasPosition = Vector2.new(0, InitialScrollY)
 		end
 	end, {
-		initialScrollY,
-		if fFlagDetailsPageLayoutUseMeasuredSizeForInitialScrollModule then hasFullBleed else nil
-	}))
-	local var4, var5 = reactModule.useBinding(initialScrollY)
-	local var6, var7 = reactModule.useBinding(0)
-	local var8 = reactModule.useCallback(function(p3)
-		-- upvalues: var5 (ref), onCanvasPositionChanged (ref)
-		var5(p3.CanvasPosition.Y)
+		InitialScrollY,
+		if FFlagDetailsPageLayoutUseMeasuredSizeForInitialScrollModule then HasFullBleed else nil
+	})))
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(InitialScrollY)
+	local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(0)
+	local UseResult = ReactModule.useCallback(function(ScrollFrame) --[[ Line: 84 ]]
+		-- upvalues: UseBindingResult2 (copy), OnCanvasPositionChangedFunction (copy)
+		UseBindingResult2(ScrollFrame.CanvasPosition.Y)
 		
-		if onCanvasPositionChanged then
-			onCanvasPositionChanged(p3)
+		if OnCanvasPositionChangedFunction then
+			OnCanvasPositionChangedFunction(ScrollFrame)
 		end
-	end, { onCanvasPositionChanged })
-	local var9 = reactModule.useMemo(function()
-		-- upvalues: hasHeader (ref), hasActions (ref), actionBarHeight (ref), reactModule (copy), headerBarHeight (ref)
-		return if hasHeader and hasActions and actionBarHeight then reactModule.joinBindings({ hasHeader, hasActions, actionBarHeight }):map(function(p3)
-			-- upvalues: headerBarHeight (copy)
-			return UDim2.new(1, 0, 1, -((if p3[1] then headerBarHeight else 0) + (if p3[2] then p3[3] else 0)))
-		end) else nil
-	end, { hasHeader, hasActions, actionBarHeight, headerBarHeight })
-	local var10 = reactModule.useMemo(function()
-		-- upvalues: hasHeader (ref), headerBarHeight (ref)
-		return if hasHeader then hasHeader:map(function(p3)
-			-- upvalues: headerBarHeight (copy)
-			return UDim2.new(0, 0, 0, if p3 then headerBarHeight else 0)
-		end) else nil
-	end, { hasHeader, headerBarHeight })
-	local var11 = reactModule.useMemo(function()
-		-- upvalues: contentTopOffset (ref), reactModule (copy), containerHeight (ref), var1 (copy), detailsPageLayoutUtilsModule (copy), hasFullBleed (ref), fullBleedOverlapOffset (ref), headerBarHeight (ref)
-		return if contentTopOffset then reactModule.joinBindings({ contentTopOffset, containerHeight or var1 }):map(function(p3)
-			-- upvalues: detailsPageLayoutUtilsModule (copy), hasFullBleed (copy), fullBleedOverlapOffset (copy), headerBarHeight (copy)
-			local var12 = p3[2]
-			local var13 = detailsPageLayoutUtilsModule.computeCanvasPaddingTop(p3[1], hasFullBleed, fullBleedOverlapOffset, headerBarHeight)
+	end, { OnCanvasPositionChangedFunction })
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 94 ]]
+		-- upvalues: HasHeader (copy), HasActions (copy), ActionBarHeight (copy), ReactModule (upval), HeaderBarHeight (copy)
+		return if HasHeader and HasActions and ActionBarHeight then ReactModule.joinBindings({ HasHeader, HasActions, ActionBarHeight }):map(function(Entry): UDim2 --[[ Line: 98 ]]
+			-- upvalues: HeaderBarHeight (upval)
+			local Entry1 = Entry[2]
+			local Entry2 = Entry[3]
 			
-			if var12 > 0 then
-				var13 = math.min(var13, var12 * 0.75)
+			return UDim2.new(1, 0, 1, -((if Entry[1] then HeaderBarHeight else 0) + (if Entry1 then Entry2 else 0)))
+		end) else nil
+	end, { HasHeader, HasActions, ActionBarHeight, HeaderBarHeight })
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 108 ]]
+		-- upvalues: HasHeader (copy), HeaderBarHeight (copy)
+		return if HasHeader then HasHeader:map(function(p2): UDim2 --[[ Line: 112 ]]
+			-- upvalues: HeaderBarHeight (upval)
+			return UDim2.new(0, 0, 0, if p2 then HeaderBarHeight else 0)
+		end) else nil
+	end, { HasHeader, HeaderBarHeight })
+	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 121 ]]
+		-- upvalues: ContentTopOffset (copy), ReactModule (upval), ContainerHeight (copy), Binding (upval), DetailsPageLayoutUtilsModule (upval), HasFullBleed (copy), FullBleedOverlapOffset (copy), HeaderBarHeight (copy)
+		return if ContentTopOffset then ReactModule.joinBindings({ ContentTopOffset, ContainerHeight or Binding }):map(function(Entry): UDim --[[ Line: 126 ]]
+			-- upvalues: DetailsPageLayoutUtilsModule (upval), HasFullBleed (upval), FullBleedOverlapOffset (upval), HeaderBarHeight (upval)
+			local Entry1: number = Entry[2]
+			local CanvasPaddingTop = DetailsPageLayoutUtilsModule.computeCanvasPaddingTop(Entry[1], HasFullBleed, FullBleedOverlapOffset, HeaderBarHeight)
+			
+			if Entry1 > 0 then
+				CanvasPaddingTop = math.min(CanvasPaddingTop, Entry1 * 0.75)
 			end
-			return UDim.new(0, var13)
+			return UDim.new(0, CanvasPaddingTop)
 		end) else nil
 	end, {
-		contentTopOffset,
-		containerHeight,
-		hasFullBleed,
-		fullBleedOverlapOffset,
-		headerBarHeight
+		ContentTopOffset,
+		ContainerHeight,
+		HasFullBleed,
+		FullBleedOverlapOffset,
+		HeaderBarHeight
 	})
-	local var12 = reactModule.useMemo(function()
-		-- upvalues: hasActions (ref), actionBarHeight (ref), reactModule (copy)
-		return if hasActions and actionBarHeight then reactModule.joinBindings({ hasActions, actionBarHeight }):map(function(p3)
-			return if p3[1] then UDim.new(0, p3[2]) else UDim.new(0, 0)
-		end) else nil
-	end, { hasActions, actionBarHeight })
-	local var13 = reactModule.useMemo(function()
-		-- upvalues: var11 (ref), reactModule (copy), var4 (ref), gradientTopBleedOffset (ref)
-		return if var11 then reactModule.joinBindings({ var11, var4 }):map(function(p3)
-			-- upvalues: gradientTopBleedOffset (copy)
-			return UDim2.new(0, 0, 0, p3[1].Offset - p3[2] - gradientTopBleedOffset)
-		end) else nil
-	end, { var11, var4, gradientTopBleedOffset })
-	local var14 = reactModule.useMemo(function()
-		-- upvalues: containerHeight (ref), reactModule (copy), var6 (ref), gradientTopBleedOffset (ref)
-		return if containerHeight then reactModule.joinBindings({ var6, containerHeight }):map(function(p3)
-			-- upvalues: gradientTopBleedOffset (copy)
-			local var15 = p3[1]
+	local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 150 ]]
+		-- upvalues: HasActions (copy), ActionBarHeight (copy), ReactModule (upval)
+		return if HasActions and ActionBarHeight then ReactModule.joinBindings({ HasActions, ActionBarHeight }):map(function(Entry): UDim --[[ Line: 154 ]]
+			local Entry1 = Entry[2]
 			
-			return UDim2.new(1, 0, 0, (if var15 > 0 then var15 else math.max(p3[2], 1)) + gradientTopBleedOffset)
+			return if Entry[1] then UDim.new(0, Entry1) else UDim.new(0, 0)
 		end) else nil
-	end, { var6, containerHeight, gradientTopBleedOffset })
+	end, { HasActions, ActionBarHeight })
+	local UseMemoResult4 = ReactModule.useMemo(function() --[[ Line: 163 ]]
+		-- upvalues: UseMemoResult2 (copy), ReactModule (upval), UseBindingResult (copy), GradientTopBleedOffset (copy)
+		return if UseMemoResult2 then ReactModule.joinBindings({ UseMemoResult2, UseBindingResult }):map(function(Entry): UDim2 --[[ Line: 167 ]]
+			-- upvalues: GradientTopBleedOffset (upval)
+			return UDim2.new(0, 0, 0, Entry[1].Offset - Entry[2] - GradientTopBleedOffset)
+		end) else nil
+	end, { UseMemoResult2, UseBindingResult, GradientTopBleedOffset })
+	local UseMemoResult5 = ReactModule.useMemo(function() --[[ Line: 174 ]]
+		-- upvalues: ContainerHeight (copy), ReactModule (upval), UseBindingResult1 (copy), GradientTopBleedOffset (copy)
+		return if ContainerHeight then ReactModule.joinBindings({ UseBindingResult1, ContainerHeight }):map(function(Entry): UDim2 --[[ Line: 178 ]]
+			-- upvalues: GradientTopBleedOffset (upval)
+			local Entry1: number = Entry[1]
+			local Entry2: number = Entry[2]
+			
+			return UDim2.new(1, 0, 0, (if Entry1 > 0 then Entry1 else math.max(Entry2, 1)) + GradientTopBleedOffset)
+		end) else nil
+	end, {
+		UseBindingResult1,
+		ContainerHeight,
+		GradientTopBleedOffset
+	})
 	
-	if isFullscreen then
-		assert(var9 and var10, "bindings required in fullscreen mode")
+	if IsFullscreen then
+		assert(UseMemoResult and UseMemoResult1, "bindings required in fullscreen mode")
 		
-		return reactModule.createElement(view, {
+		return ReactModule.createElement(View, {
 			ZIndex = 1,
 			tag = "col bg-surface-0",
-			Size = var9,
-			Position = var10,
-			testId = `{testId}--content`,
-			ref = p2
+			Size = UseMemoResult,
+			Position = UseMemoResult1,
+			testId = `{TestId}--content`,
+			ref = Ref
 		}, {
-			Children = reactModule.createElement(reactModule.Fragment, nil, p1.children)
+			Children = ReactModule.createElement(ReactModule.Fragment, nil, p1.children)
 		})
-	end
-	assert(var11 and (onCanvasPositionChanged and (containerHeight and (hasActions and actionBarHeight))), "DetailsPageLayout.Content requires bindings in scroll mode")
-	
-	return if hasFullBleed and not hasValidContainerSize then reactModule.createElement(view, {
-		tag = "size-full clip bg-surface-0",
-		ZIndex = 1,
-		testId = `{testId}--content`,
-		ref = p2
-	}) else reactModule.createElement(view, {
-		tag = "size-full clip",
-		ZIndex = 1,
-		ref = p2,
-		testId = `{testId}--content`
-	}, {
-		BackgroundLayers = reactModule.createElement(view, { tag = "col", ZIndex = 0, Position = var13, Size = var14 }, {
-			GradientBar = if hasFullBleed and contentTopOffset then reactModule.createElement(view, {
-				tag = "bg-surface-0",
-				LayoutOrder = 0,
-				Size = contentTopOffset:map(function(p3)
-					-- upvalues: fullBleedOverlapOffset (ref), gradientTopBleedOffset (ref)
-					return UDim2.new(1, 0, 0, math.min(p3, fullBleedOverlapOffset) + gradientTopBleedOffset)
-				end)
-			}, {
-				Gradient = reactModule.createElement("UIGradient", {
-					Rotation = 270,
-					Transparency = NumberSequence.new({
-						NumberSequenceKeypoint.new(0, 0),
-						NumberSequenceKeypoint.new(0.5, if fFlagLuaAppEdpDirectionalGradientMidTransparency then gradientMidTransparency or 0.25 else 0.25),
-						NumberSequenceKeypoint.new(1, 1)
-					})
-				})
-			}) else nil,
-			SolidFill = reactModule.createElement(view, { tag = "fill size-full-0 bg-surface-0", LayoutOrder = 1 })
-		}),
-		ScrollContent = reactModule.createElement(scrollView, {
+	else
+		assert(UseMemoResult2 and (OnCanvasPositionChangedFunction and (ContainerHeight and (HasActions and ActionBarHeight))), "DetailsPageLayout.Content requires bindings in scroll mode")
+		
+		return if HasFullBleed and not HasValidContainerSize then ReactModule.createElement(View, {
+			tag = "size-full clip bg-surface-0",
+			ZIndex = 1,
+			testId = `{TestId}--content`,
+			ref = Ref
+		}) else ReactModule.createElement(View, {
 			tag = "size-full clip",
 			ZIndex = 1,
-			scrollingFrameRef = var3,
-			selection = t,
-			scroll = {
-				AutomaticCanvasSize = Enum.AutomaticSize.Y,
-				CanvasSize = UDim2.new(1, 0, 0, 0),
-				ScrollingDirection = Enum.ScrollingDirection.Y,
-				ScrollingEnabled = if fFlagLuaAppMediaGalleryGamepadSupport then not isFullscreenOverlay and not (var2.disableFocusNavEngineScroll == true) else not isFullscreenOverlay
-			},
-			onAbsoluteCanvasSizeChanged = function(value)
-				-- upvalues: var7 (ref), onCanvasSizeChanged (ref)
-				var7(value.AbsoluteCanvasSize.Y)
-				
-				if onCanvasSizeChanged then
-					onCanvasSizeChanged(value.AbsoluteCanvasSize.Y - value.AbsoluteSize.Y)
-				end
-			end,
-			onCanvasPositionChanged = var8
-		}, reactModule.createElement(view, { tag = "col size-full-0 auto-y" }, {
-			CanvasPadding = reactModule.createElement("UIPadding", { PaddingTop = var11, PaddingBottom = var12 }),
-			ContentSection = reactModule.createElement(view, {
-				tag = "auto-y",
-				LayoutOrder = 1,
-				Size = containerHeight:map(function(p3)
-					return UDim2.new(1, 0, 0, p3)
-				end)
+			ref = Ref,
+			testId = `{TestId}--content`
+		}, {
+			BackgroundLayers = ReactModule.createElement(View, {
+				tag = "col",
+				ZIndex = 0,
+				Position = UseMemoResult4,
+				Size = UseMemoResult5
 			}, {
-				ContentBackground = reactModule.createElement(view, { tag = "col align-x-center size-full-0 auto-y" }, {
-					Children = reactModule.createElement(reactModule.Fragment, nil, p1.children)
+				GradientBar = if HasFullBleed and ContentTopOffset then ReactModule.createElement(View, {
+					tag = "bg-surface-0",
+					LayoutOrder = 0,
+					Size = ContentTopOffset:map(function(p2: number): UDim2 --[[ Line: 228 ]]
+						-- upvalues: FullBleedOverlapOffset (copy), GradientTopBleedOffset (copy)
+						return UDim2.new(1, 0, 0, math.min(p2, FullBleedOverlapOffset) + GradientTopBleedOffset)
+					end)
+				}, {
+					Gradient = ReactModule.createElement("UIGradient", {
+						Rotation = 270,
+						Transparency = NumberSequence.new({
+							NumberSequenceKeypoint.new(0, 0),
+							NumberSequenceKeypoint.new(0.5, FFlagLuaAppEdpDirectionalGradientMidTransparency and GradientMidTransparency or 0.25),
+							NumberSequenceKeypoint.new(1, 1)
+						})
+					})
+				}) else nil,
+				SolidFill = ReactModule.createElement(View, { tag = "fill size-full-0 bg-surface-0", LayoutOrder = 1 })
+			}),
+			ScrollContent = ReactModule.createElement(ScrollView, {
+				tag = "size-full clip",
+				ZIndex = 1,
+				scrollingFrameRef = UseComposedRefResult,
+				selection = Selection,
+				scroll = {
+					AutomaticCanvasSize = Enum.AutomaticSize.Y,
+					CanvasSize = UDim2.new(1, 0, 0, 0),
+					ScrollingDirection = Enum.ScrollingDirection.Y,
+					ScrollingEnabled = if FFlagLuaAppMediaGalleryGamepadSupport then not IsFullscreenOverlay and not (UseContextResult.disableFocusNavEngineScroll == true) else not IsFullscreenOverlay
+				},
+				onAbsoluteCanvasSizeChanged = function(ScrollFrame) --[[ Line: 277 ]]
+					-- upvalues: UseBindingResult2_1 (copy), OnCanvasSizeChangedFunction (copy)
+					UseBindingResult2_1(ScrollFrame.AbsoluteCanvasSize.Y)
+					
+					if OnCanvasSizeChangedFunction then
+						OnCanvasSizeChangedFunction(ScrollFrame.AbsoluteCanvasSize.Y - ScrollFrame.AbsoluteSize.Y)
+					end
+				end,
+				onCanvasPositionChanged = UseResult
+			}, ReactModule.createElement(View, { tag = "col size-full-0 auto-y" }, {
+				CanvasPadding = ReactModule.createElement("UIPadding", {
+					PaddingTop = UseMemoResult2,
+					PaddingBottom = UseMemoResult3
+				}),
+				ContentSection = ReactModule.createElement(View, {
+					tag = "auto-y",
+					LayoutOrder = 1,
+					Size = ContainerHeight:map(function(YOffset): UDim2 --[[ Line: 297 ]]
+						return UDim2.new(1, 0, 0, YOffset)
+					end)
+				}, {
+					ContentBackground = ReactModule.createElement(View, { tag = "col align-x-center size-full-0 auto-y" }, {
+						Children = ReactModule.createElement(ReactModule.Fragment, nil, p1.children)
+					})
 				})
-			})
-		}))
-	})
+			}))
+		})
+	end
 end))

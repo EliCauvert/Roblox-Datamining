@@ -1,137 +1,139 @@
-﻿local var1 = 0
+﻿local Count = 0
 
 return {
-	create = function(p1, p2)
-		-- upvalues: var1 (write)
-		local t = {}
-		local var2 = `{p2}: keys must be strings`
-		local var3 = `{p2}: setItem must preserve the existing key`
+	create = function(Callback, p1) --[[ Line: 23 ]]
+		-- upvalues: Count (ref)
+		local Tbl = {}
+		local Message: string = `{p1}: keys must be strings`
+		local Message1: string = `{p1}: setItem must preserve the existing key`
 		
-		local function _(p3, p4)
-			-- upvalues: p1 (ref), var1 (copy), var2 (ref)
-			local var4
-			if p1 == nil then
-				var1 += 1
-				var4 = `view-recycler:{var1}`
+		local function _(p2, p3) --[[ Line: 28 | Named "resolve" ]]
+			-- upvalues: Callback (copy), Count (upval), Message (copy)
+			local CallbackResult = nil
+			if Callback == nil then
+				Count += 1
+				CallbackResult = `view-recycler:{Count}`
 			else
-				var4 = p1(p3, p4)
+				CallbackResult = Callback(p2, p3)
 			end
-			assert(type(var4) == "string", var2)
+			assert(type(CallbackResult) == "string", Message)
 			
-			return var4
+			return CallbackResult
 		end
 		
 		return {
-			claim = function(p3, p4)
-				-- upvalues: p1 (ref), var1 (copy), var2 (ref), t (write), p2 (ref)
-				local var4
-				if p1 == nil then
-					var1 += 1
-					var4 = `view-recycler:{var1}`
+			claim = function(p2, p3): string --[[ Line: 34 ]]
+				-- upvalues: Callback (copy), Count (upval), Message (copy), Tbl (ref), p1 (copy)
+				local CallbackResult = nil
+				if Callback == nil then
+					Count += 1
+					CallbackResult = `view-recycler:{Count}`
 				else
-					var4 = p1(p3, p4)
+					CallbackResult = Callback(p2, p3)
 				end
-				assert(type(var4) == "string", var2)
+				assert(type(CallbackResult) == "string", Message)
+				local RecyclerName: string = CallbackResult
 				
-				if t[var4] ~= nil then
-					assert(false, `{p2}: duplicate key "{var5}"`)
+				if Tbl[RecyclerName] ~= nil then
+					assert(false, `{p1}: duplicate key "{RecyclerName}"`)
 				end
-				t[var4] = true
+				Tbl[RecyclerName] = true
 				
-				return var4
+				return RecyclerName
 			end,
-			assertPreserved = function(p3, p4, p5)
-				-- upvalues: p1 (ref), var1 (copy), var2 (ref), var3 (ref)
-				if p1 ~= nil then
-					local var4
-					if p1 == nil then
-						var1 += 1
-						var4 = `view-recycler:{var1}`
+			assertPreserved = function(RecyclerName, p2, p3) --[[ Line: 75 ]]
+				-- upvalues: Callback (copy), Count (upval), Message (copy), Message1 (copy)
+				if Callback ~= nil then
+					local CallbackResult = nil
+					if Callback == nil then
+						Count += 1
+						CallbackResult = `view-recycler:{Count}`
 					else
-						var4 = p1(p4, p5)
+						CallbackResult = Callback(p2, p3)
 					end
-					assert(type(var4) == "string", var2)
-					assert(var4 == p3, var3)
+					assert(type(CallbackResult) == "string", Message)
+					assert(CallbackResult == RecyclerName, Message1)
 				end
 			end,
-			release = function(p3)
-				-- upvalues: t (write), p2 (ref)
-				if t[p3] == nil then
-					assert(false, `{p2}: cannot release missing key "{p9}"`)
+			release = function(Key) --[[ Line: 80 ]]
+				-- upvalues: Tbl (ref), p1 (copy)
+				if Tbl[Key] == nil then
+					assert(false, `{p1}: cannot release missing key "{Key}"`)
 				end
-				t[p3] = nil
+				Tbl[Key] = nil
 			end,
-			adopt = function(p3)
-				-- upvalues: t (write)
-				t[p3] = true
+			adopt = function(Key) --[[ Line: 86 ]]
+				-- upvalues: Tbl (ref)
+				Tbl[Key] = true
 			end,
-			replace = function(p3, p4, p5)
-				-- upvalues: p1 (ref), var1 (copy), var2 (ref), t (write), p2 (ref)
-				local var4
-				if p1 == nil then
-					var1 += 1
-					var4 = `view-recycler:{var1}`
+			replace = function(Key, p2, p3): string --[[ Line: 43 ]]
+				-- upvalues: Callback (copy), Count (upval), Message (copy), Tbl (ref), p1 (copy)
+				local CallbackResult = nil
+				if Callback == nil then
+					Count += 1
+					CallbackResult = `view-recycler:{Count}`
 				else
-					var4 = p1(p4, p5)
+					CallbackResult = Callback(p2, p3)
 				end
-				assert(type(var4) == "string", var2)
+				assert(type(CallbackResult) == "string", Message)
+				local Key1: string = CallbackResult
 				
-				if t[p3] == nil then
-					assert(false, `{p2}: cannot replace missing key "{p11}"`)
+				if Tbl[Key] == nil then
+					assert(false, `{p1}: cannot replace missing key "{Key}"`)
 				end
-				if var4 ~= p3 and t[var4] ~= nil then
-					assert(false, `{p2}: duplicate key "{var7}"`)
+				if Key1 ~= Key and Tbl[Key1] ~= nil then
+					assert(false, `{p1}: duplicate key "{Key1}"`)
 				end
-				if var4 ~= p3 then
-					t[p3] = nil
-					t[var4] = true
+				if Key1 ~= Key then
+					Tbl[Key] = nil
+					Tbl[Key1] = true
 				end
-				return var4
+				return Key1
 			end,
-			rebuild = function(p3)
-				-- upvalues: p1 (ref), var1 (copy), var2 (ref), p2 (ref), t (write)
-				local list = table.create(#p3)
-				local t_1 = {}
+			rebuild = function(List) --[[ Line: 58 ]]
+				-- upvalues: Callback (copy), Count (upval), Message (copy), p1 (copy), Tbl (ref)
+				local Buffer = table.create(#List)
+				local t = {}
 				
-				for i, v in p3 do
-					local var4
-					if p1 == nil then
-						var1 += 1
-						var4 = `view-recycler:{var1}`
+				for i, value in List do
+					local CallbackResult = nil
+					if Callback == nil then
+						Count += 1
+						CallbackResult = `view-recycler:{Count}`
 					else
-						var4 = p1(v, i)
+						CallbackResult = Callback(value, i)
 					end
-					assert(type(var4) == "string", var2)
-					local var5 = var4
+					assert(type(CallbackResult) == "string", Message)
+					local RecyclerName: string = CallbackResult
 					
-					if t_1[var5] ~= nil then
-						assert(false, `{p2}: duplicate key "{var11}"`)
+					if t[RecyclerName] ~= nil then
+						assert(false, `{p1}: duplicate key "{RecyclerName}"`)
 					end
-					list[i] = var5
-					t_1[var5] = true
+					Buffer[i] = RecyclerName
+					t[RecyclerName] = true
 				end
-				t = t_1
+				Tbl = t
 				
-				return list
+				return Buffer
 			end,
-			clear = function()
-				-- upvalues: t (write)
-				t = {}
+			clear = function() --[[ Line: 91 ]]
+				-- upvalues: Tbl (ref)
+				Tbl = {}
 			end,
-			snapshot = function()
-				-- upvalues: t (write)
-				return table.clone(t)
+			snapshot = function() --[[ Line: 94 ]]
+				-- upvalues: Tbl (ref)
+				return table.clone(Tbl)
 			end,
-			restore = function(p4)
-				-- upvalues: t (write)
-				t = table.clone(p4)
+			restore = function(Tbl1) --[[ Line: 97 ]]
+				-- upvalues: Tbl (ref)
+				Tbl = table.clone(Tbl1)
 			end
 		}
 	end,
-	generatedKey = function()
-		-- upvalues: var1 (write)
-		var1 += 1
+	generatedKey = function(): string --[[ Line: 18 ]]
+		-- upvalues: Count (ref)
+		Count += 1
 		
-		return `view-recycler:{var1}`
+		return `view-recycler:{Count}`
 	end
 }

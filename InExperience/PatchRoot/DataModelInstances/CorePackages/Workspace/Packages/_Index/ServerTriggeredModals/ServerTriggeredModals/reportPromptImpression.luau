@@ -1,64 +1,45 @@
-﻿local httpService = game:GetService("HttpService")
-local serverTriggeredModals = script:FindFirstAncestor("ServerTriggeredModals")
-local parent = serverTriggeredModals.Parent
-local promiseModule = require(parent.Promise)
-local loggerModule = require(serverTriggeredModals.Logger)
-local logResponseStatusModule = require(serverTriggeredModals.logResponseStatus)
-local logResponseLatencyModule = require(serverTriggeredModals.logResponseLatency)
-local fFlagServerTriggeredModalsAccepts2xxImpressionResponsesModule = require(serverTriggeredModals.Flags.FFlagServerTriggeredModalsAccepts2xxImpressionResponses)
-local var1 = require(parent.UrlBuilder).UrlBuilder.new({
+﻿local HttpService = game:GetService("HttpService")
+local ServerTriggeredModals = script:FindFirstAncestor("ServerTriggeredModals")
+local Parent = ServerTriggeredModals.Parent
+local PromiseModule = require(Parent.Promise)
+local LoggerModule = require(ServerTriggeredModals.Logger)
+local LogResponseStatusModule = require(ServerTriggeredModals.logResponseStatus)
+local LogResponseLatencyModule = require(ServerTriggeredModals.logResponseLatency)
+local FFlagServerTriggeredModalsAccepts2xxImpressionResponsesModule = require(ServerTriggeredModals.Flags.FFlagServerTriggeredModalsAccepts2xxImpressionResponses)
+local NewResult = require(Parent.UrlBuilder).UrlBuilder.new({
 	path = "modals-api/v1/prompts/impression",
-	base = require(parent.UrlBuilder).UrlBase.APIS
+	base = require(Parent.UrlBuilder).UrlBase.APIS
 })
 
-return function(p1, p2)
-	-- upvalues: var1 (ref), httpService (ref), promiseModule (ref), fFlagServerTriggeredModalsAccepts2xxImpressionResponsesModule (ref), logResponseStatusModule (ref), loggerModule (ref), logResponseLatencyModule (ref)
-	local var2 = httpService:RequestInternal({
+return function(PromptType, PromptId) --[[ Line: 23 ]]
+	-- upvalues: NewResult (copy), HttpService (copy), PromiseModule (copy), FFlagServerTriggeredModalsAccepts2xxImpressionResponsesModule (copy), LogResponseStatusModule (copy), LoggerModule (copy), LogResponseLatencyModule (copy)
+	local RequestInternalResult = HttpService:RequestInternal({
 		Method = "POST",
-		Url = var1(),
+		Url = NewResult(),
 		Headers = { ["Content-Type"] = "application/json" },
-		Body = httpService:JSONEncode({ promptType = p1, promptId = p2 })
+		Body = HttpService:JSONEncode({ promptType = PromptType, promptId = PromptId })
 	})
 	
-	return promiseModule.new(function(p3, p4)
-		-- upvalues: var2 (ref), fFlagServerTriggeredModalsAccepts2xxImpressionResponsesModule (copy), logResponseStatusModule (copy), loggerModule (copy), logResponseLatencyModule (copy)
-		var2:Start(function(p5, p6)
-			-- upvalues: fFlagServerTriggeredModalsAccepts2xxImpressionResponsesModule (copy), logResponseStatusModule (copy), loggerModule (copy), p4 (ref), logResponseLatencyModule (copy), p3 (ref)
-			local var3
-			local statusCode = p6 and p6.StatusCode
+	return PromiseModule.new(function(Callback1, Callback) --[[ Line: 34 ]]
+		-- upvalues: RequestInternalResult (copy), FFlagServerTriggeredModalsAccepts2xxImpressionResponsesModule (upval), LogResponseStatusModule (upval), LoggerModule (upval), LogResponseLatencyModule (upval)
+		RequestInternalResult:Start(function(p1, p2) --[[ Line: 35 ]]
+			-- upvalues: FFlagServerTriggeredModalsAccepts2xxImpressionResponsesModule (upval), LogResponseStatusModule (upval), LoggerModule (upval), Callback (copy), LogResponseLatencyModule (upval), Callback1 (copy)
+			local StatusCode = p2 and p2.StatusCode
 			
-			if fFlagServerTriggeredModalsAccepts2xxImpressionResponsesModule then
-				var3 = p5
-				
-				if var3 then
-					var3 = false
-					
-					if statusCode ~= nil then
-						var3 = false
-						
-						if statusCode >= 200 then
-							var3 = statusCode < 300
-							var3 = nil
-						end
-					end
-				end
-			else
-				var3 = p5 and statusCode == 200
-			end
-			if not var3 then
-				logResponseStatusModule("modals-api/v1/prompts/impression", statusCode)
-				loggerModule:error(`Report Prompt Impression request error with status code: {statusCode}`)
-				p4()
+			if not (if FFlagServerTriggeredModalsAccepts2xxImpressionResponsesModule then p1 and (StatusCode ~= nil and (StatusCode >= 200 and StatusCode < 300)) else p1 and StatusCode == 200) then
+				LogResponseStatusModule("modals-api/v1/prompts/impression", StatusCode)
+				LoggerModule:error(`Report Prompt Impression request error with status code: {StatusCode}`)
+				Callback()
 				
 				return
 			end
-			local roundTripTime = p6 and (p6.Stats and p6.Stats.RoundTripTime)
-			local var4 = roundTripTime and roundTripTime * 1000
+			local RoundTripTime = p2 and (p2.Stats and p2.Stats.RoundTripTime)
+			local ScaledRoundTripTime = RoundTripTime and RoundTripTime * 1000
 			
-			if var4 then
-				logResponseLatencyModule("modals-api/v1/prompts/impression", var4, statusCode)
+			if ScaledRoundTripTime then
+				LogResponseLatencyModule("modals-api/v1/prompts/impression", ScaledRoundTripTime, StatusCode)
 			end
-			p3()
+			Callback1()
 		end)
 	end)
 end

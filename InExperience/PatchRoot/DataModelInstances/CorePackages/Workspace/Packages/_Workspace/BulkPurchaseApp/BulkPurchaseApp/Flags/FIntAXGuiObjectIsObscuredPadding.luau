@@ -1,1 +1,1 @@
-﻿return game:DefineFastInt("AXGuiObjectIsObscuredPadding", 3)
+﻿return (game:DefineFastInt("AXGuiObjectIsObscuredPadding", 3))

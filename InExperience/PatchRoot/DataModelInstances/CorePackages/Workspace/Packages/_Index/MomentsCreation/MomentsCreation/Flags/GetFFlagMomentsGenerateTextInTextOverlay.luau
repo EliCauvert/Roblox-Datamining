@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("MomentsGenerateTextInTextOverlay", false)
 
-return function()
+return function() --[[ Line: 11 ]]
 	return game:GetFastFlag("MomentsGenerateTextInTextOverlay")
 end

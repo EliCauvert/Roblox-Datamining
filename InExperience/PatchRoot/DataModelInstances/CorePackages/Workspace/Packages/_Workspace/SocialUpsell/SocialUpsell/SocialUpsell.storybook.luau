@@ -1,18 +1,18 @@
-﻿local socialUpsell = script:FindFirstAncestor("SocialUpsell")
-local parent = socialUpsell.Parent
-local reactModule = require(parent.React)
-local foundationProvider = require(parent.Foundation).FoundationProvider
+﻿local SocialUpsell = script:FindFirstAncestor("SocialUpsell")
+local Parent = SocialUpsell.Parent
+local ReactModule = require(Parent.React)
+local FoundationProvider = require(Parent.Foundation).FoundationProvider
 
 return {
-	name = socialUpsell.Name,
-	roact = reactModule,
-	reactRoblox = require(parent.ReactRoblox),
-	mapStory = function(p1)
-		-- upvalues: reactModule (ref), foundationProvider (ref)
-		return function(p2)
-			-- upvalues: reactModule (copy), foundationProvider (copy), p1 (ref)
-			return reactModule.createElement(foundationProvider, { colorMode = p2.theme, device = p2.platform }, reactModule.createElement(p1, p2))
+	name = SocialUpsell.Name,
+	roact = ReactModule,
+	reactRoblox = require(Parent.ReactRoblox),
+	mapStory = function(p1) --[[ Line: 14 ]]
+		-- upvalues: ReactModule (copy), FoundationProvider (copy)
+		return function(p2) --[[ Line: 15 ]]
+			-- upvalues: ReactModule (upval), FoundationProvider (upval), p1 (copy)
+			return ReactModule.createElement(FoundationProvider, { colorMode = p2.theme, device = p2.platform }, ReactModule.createElement(p1, p2))
 		end
 	end,
-	storyRoots = { socialUpsell }
+	storyRoots = { SocialUpsell }
 }

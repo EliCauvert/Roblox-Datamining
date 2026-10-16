@@ -1,15 +1,15 @@
-﻿return function(p1, p2, p3, p4, p5, p6)
-	local var1 = p3
+﻿return function(Purchase_flow_uuid, Text, Purchase_flow, View_name, Input_type, Event_metadata) --[[ Line: 1 ]]
+	local Purchase_flow1: string = Purchase_flow
 	
-	if p2 then
-		var1 = p2 .. var0
+	if Text then
+		Purchase_flow1 = Text .. Purchase_flow1
 	end
 	return {
 		purchase_event_type = "UserInput",
-		purchase_flow_uuid = p1,
-		purchase_flow = var1,
-		view_name = p4,
-		input_type = p5,
-		event_metadata = p6
+		purchase_flow_uuid = Purchase_flow_uuid,
+		purchase_flow = Purchase_flow1,
+		view_name = View_name,
+		input_type = Input_type,
+		event_metadata = Event_metadata
 	}
 end

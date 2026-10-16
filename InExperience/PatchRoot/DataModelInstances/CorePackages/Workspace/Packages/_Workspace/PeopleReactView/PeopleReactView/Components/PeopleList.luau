@@ -1,28 +1,26 @@
-﻿local peopleReactView = script:FindFirstAncestor("PeopleReactView")
-local parent = peopleReactView.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local peopleServiceModule = require(parent.PeopleService)
-local view = foundationModule.View
-local useSignalState = require(parent.SignalsReact).useSignalState
-local personRowModule = require(peopleReactView.Components.List.PersonRow)
-local lazyPersonRowModule = require(peopleReactView.Components.List.LazyPersonRow)
-local _ = require(peopleReactView.Stores.GetScrollingFrameStore)
-local flags = peopleServiceModule.getService("Flags")
-local getFFlagAddPeoplePageCardLayout = flags.GetFFlagAddPeoplePageCardLayout
-local fFlagEnablePeopleListLazyRender = flags.FFlagEnablePeopleListLazyRender
-local fFlagPeoplePageRemoveUseMemoElements = flags.FFlagPeoplePageRemoveUseMemoElements
+﻿local PeopleReactView = script:FindFirstAncestor("PeopleReactView")
+local Parent = PeopleReactView.Parent
+local ReactModule = require(Parent.React)
+local PeopleServiceModule = require(Parent.PeopleService)
+local View = require(Parent.Foundation).View
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local PersonRowModule = require(PeopleReactView.Components.List.PersonRow)
+local LazyPersonRowModule = require(PeopleReactView.Components.List.LazyPersonRow)
+local _ = require(PeopleReactView.Stores.GetScrollingFrameStore)
+local FlagsService = PeopleServiceModule.getService("Flags")
+local GetFFlagAddPeoplePageCardLayoutFunction = FlagsService.GetFFlagAddPeoplePageCardLayout
+local FFlagEnablePeopleListLazyRender = FlagsService.FFlagEnablePeopleListLazyRender
 
-local function MemoizedPersonRow(p1)
-	-- upvalues: reactModule (ref), fFlagEnablePeopleListLazyRender (ref), lazyPersonRowModule (ref), personRowModule (ref)
-	return reactModule.useMemo(function()
-		-- upvalues: fFlagEnablePeopleListLazyRender (copy), reactModule (copy), lazyPersonRowModule (copy), p1 (ref), personRowModule (copy)
-		return if fFlagEnablePeopleListLazyRender then reactModule.createElement(lazyPersonRowModule, {
+local function MemoizedPersonRow(p1) --[[ Line: 32 ]]
+	-- upvalues: ReactModule (copy), FFlagEnablePeopleListLazyRender (copy), LazyPersonRowModule (copy), PersonRowModule (copy)
+	return ReactModule.useMemo(function() --[[ Line: 37 ]]
+		-- upvalues: FFlagEnablePeopleListLazyRender (upval), ReactModule (upval), LazyPersonRowModule (upval), p1 (copy), PersonRowModule (upval)
+		return if FFlagEnablePeopleListLazyRender then ReactModule.createElement(LazyPersonRowModule, {
 			key = tostring(p1.person.UserId),
 			person = p1.person,
 			layoutOrder = p1.index,
 			scrollingFrameStore = p1.scrollingFrameStore
-		}) else reactModule.createElement(personRowModule, {
+		}) else ReactModule.createElement(PersonRowModule, {
 			key = tostring(p1.person.UserId),
 			person = p1.person,
 			layoutOrder = p1.index
@@ -30,72 +28,73 @@ local function MemoizedPersonRow(p1)
 	end, { p1.person.UserId, p1.index, p1.scrollingFrameStore })
 end
 
-local function buildPersonRows(p1, p2, p3, p4)
-	-- upvalues: reactModule (ref), MemoizedPersonRow (ref), fFlagEnablePeopleListLazyRender (ref)
+local function buildPersonRows(List, Current, Current1, ScrollingFrameStore) --[[ Line: 57 ]]
+	-- upvalues: ReactModule (copy), MemoizedPersonRow (copy), FFlagEnablePeopleListLazyRender (copy)
+	local Elements = {}
 	local t = {}
-	local t_1 = {}
-	local var1 = 0
+	local v1 = 0
 	
-	if not next(p3) then
-		for i, v in p1 do
-			p3[v.UserId] = (i - 1) * math.floor(100000 / #p1)
+	if not next(Current1) then
+		for i, Player in List do
+			Current1[Player.UserId] = (i - 1) * math.floor(100000 / #List)
 		end
 	end
-	local var2, userId
-	for i, v in p1 do
-		if p2[v.UserId] then
-			t[v.UserId] = p2[v.UserId]
-			t_1[v.UserId] = p3[v.UserId]
-			var1 = p3[v.UserId]
+	local UserId = nil
+	local v2 = nil
+	for i1, Player1 in List do
+		if Current[Player1.UserId] then
+			Elements[Player1.UserId] = Current[Player1.UserId]
+			t[Player1.UserId] = Current1[Player1.UserId]
+			v1 = Current1[Player1.UserId]
 		else
-			local var3 = 0
+			local Floored = 0
 			
-			if i ~= 1 then
-				local var4 = i + 1
-				var2 = 100000
-				while var4 <= #p1 do
-					userId = p1[var4].UserId
+			if i1 ~= 1 then
+				local NewI = i1 + 1
+				v2 = 100000
+				while NewI <= #List do
+					UserId = List[NewI].UserId
 					
-					if not p3[userId] then
-						var4 += 1
+					if not Current1[UserId] then
+						NewI += 1
 						continue
 					end
-					var2 = p3[userId]
+					v2 = Current1[UserId]
 					break
 				end
-				var3 = math.floor((var1 + var2) / 2)
+				Floored = math.floor((v1 + v2) / 2)
 			end
-			t[v.UserId] = reactModule.createElement(MemoizedPersonRow, {
-				person = v,
-				index = var3,
-				scrollingFrameStore = if fFlagEnablePeopleListLazyRender then p4 else nil
+			Elements[Player1.UserId] = ReactModule.createElement(MemoizedPersonRow, {
+				person = Player1,
+				index = Floored,
+				scrollingFrameStore = if FFlagEnablePeopleListLazyRender then ScrollingFrameStore else nil
 			})
-			t_1[v.UserId] = var3
-			var1 = var3
+			t[Player1.UserId] = Floored
+			v1 = Floored
 		end
 	end
-	return t, t_1
+	return Elements, t
 end
 
-local function PeopleList(p5)
-	-- upvalues: reactModule (ref), peopleServiceModule (ref), useSignalState (ref), buildPersonRows (ref), fFlagEnablePeopleListLazyRender (ref), view (ref), getFFlagAddPeoplePageCardLayout (ref)
-	local var5 = useSignalState(reactModule.useMemo(function()
-		-- upvalues: peopleServiceModule (copy)
-		return peopleServiceModule.getService("PeopleListStore")
-	end, {}).people)
-	local var6 = reactModule.useRef(nil)
-	local var7 = reactModule.useRef({})
-	local var8 = reactModule.useRef({})
-	local var9, var10 = buildPersonRows(var5, var7.current, var8.current, if fFlagEnablePeopleListLazyRender then p5.scrollingFrameStore else nil)
-	var7.current = var9
-	var8.current = var10
+local function PeopleList(Frame) --[[ Line: 122 ]]
+	-- upvalues: ReactModule (copy), PeopleServiceModule (copy), UseSignalStateFunction (copy), buildPersonRows (copy), FFlagEnablePeopleListLazyRender (copy), View (copy), GetFFlagAddPeoplePageCardLayoutFunction (copy)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef({})
+	local UseRefResult2 = ReactModule.useRef({})
+	UseRefResult1.current, UseRefResult2.current = buildPersonRows(UseSignalStateFunction(ReactModule.useMemo(function() --[[ Line: 123 ]]
+		-- upvalues: PeopleServiceModule (upval)
+		return PeopleServiceModule.getService("PeopleListStore")
+	end, {}).people), UseRefResult1.current, UseRefResult2.current, if FFlagEnablePeopleListLazyRender then Frame.scrollingFrameStore else nil)
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "size-full-0 auto-y col gap-small",
-		LayoutOrder = if getFFlagAddPeoplePageCardLayout() then p5.LayoutOrder else 2
+		LayoutOrder = if GetFFlagAddPeoplePageCardLayoutFunction() then Frame.LayoutOrder else 2
 	}, {
-		PeopleList = reactModule.createElement(view, { tag = "size-full-0 col gap-small auto-y", ref = var6 }, { var7.current })
+		PeopleList = ReactModule.createElement(View, {
+			tag = "size-full-0 col gap-small auto-y",
+			ref = UseRefResult
+		}, { UseRefResult1.current })
 	})
 end
 
-return if fFlagPeoplePageRemoveUseMemoElements then reactModule.memo(PeopleList) else PeopleList
+return if FlagsService.FFlagPeoplePageRemoveUseMemoElements then ReactModule.memo(PeopleList) else PeopleList

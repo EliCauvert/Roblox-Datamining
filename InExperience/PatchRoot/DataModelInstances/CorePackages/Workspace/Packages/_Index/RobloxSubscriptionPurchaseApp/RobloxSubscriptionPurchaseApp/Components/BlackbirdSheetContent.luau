@@ -1,206 +1,183 @@
-﻿local robloxSubscriptionPurchaseApp = script:FindFirstAncestor("RobloxSubscriptionPurchaseApp")
-local parent = robloxSubscriptionPurchaseApp.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local handleBackButtonActionModule = require(robloxSubscriptionPurchaseApp.Actions.handleBackButtonAction)
-local view = foundationModule.View
-local sheet = foundationModule.Sheet
-local text = foundationModule.Text
-local button = foundationModule.Button
-local getIconRichText = foundationModule.Utility.getIconRichText
-local enums = foundationModule.Enums
-local iconName = enums.IconName
-local fillBehavior = enums.FillBehavior
-local buttonVariant = enums.ButtonVariant
-local _ = require(robloxSubscriptionPurchaseApp.types)
-local robloxSubscriptionPriceRowModule = require(script.Parent.RobloxSubscriptionPriceRow)
-local robloxSubscriptionFeatureListModule = require(script.Parent.RobloxSubscriptionFeatureList)
-local legalDisclosureModule = require(script.Parent.LegalDisclosure)
-local robloxSubscriptionStoreModule = require(robloxSubscriptionPurchaseApp.Store.RobloxSubscriptionStore)
-local performRobloxSubscriptionPurchaseModule = require(robloxSubscriptionPurchaseApp.Actions.performRobloxSubscriptionPurchase)
-local finalizeRobloxSubscriptionUpsellFlowModule = require(robloxSubscriptionPurchaseApp.Actions.finalizeRobloxSubscriptionUpsellFlow)
-local completeRobloxSubscriptionUpsellFlowModule = require(robloxSubscriptionPurchaseApp.Actions.completeRobloxSubscriptionUpsellFlow)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local logRobloxSubscriptionUpsellCounterModule = require(robloxSubscriptionPurchaseApp.Utils.logRobloxSubscriptionUpsellCounter)
-local logSubscriptionPurchaseFlowEventModule = require(robloxSubscriptionPurchaseApp.Utils.logSubscriptionPurchaseFlowEvent)
-local fFlagEnableSubscriptionPurchaseFlowEventIngestModule = require(robloxSubscriptionPurchaseApp.Flags.FFlagEnableSubscriptionPurchaseFlowEventIngest)
-local isRobloxSubscriptionProductFreeTrialModule = require(robloxSubscriptionPurchaseApp.Utils.isRobloxSubscriptionProductFreeTrial)
-local getFreeTrialOfferModule = require(robloxSubscriptionPurchaseApp.Utils.getFreeTrialOffer)
-local robloxSubscriptionUpsellTelemetryModule = require(robloxSubscriptionPurchaseApp.Events.RobloxSubscriptionUpsellTelemetry)
-local promptStateModule = require(robloxSubscriptionPurchaseApp.Enums.PromptState)
-local signalsReactModule = require(parent.SignalsReact)
-local fFlagSupportFreeTrialModule = require(robloxSubscriptionPurchaseApp.Flags.FFlagSupportFreeTrial)
-local fFlagEnablePlusReferralLandingSheet = require(parent.SharedFlags).FFlagEnablePlusReferralLandingSheet
-local fIntPlusReferralRewardRobux = require(parent.SharedFlags).FIntPlusReferralRewardRobux
-local useReferrerNameModule = require(robloxSubscriptionPurchaseApp.Hooks.useReferrerName)
-local plusHeroContentModule = require(script.Parent.PlusHeroContent)
-local foundationCloudAssetsModule = require(parent.FoundationCloudAssets)
-local plusRobux = foundationCloudAssetsModule.Assets["pictograms/plus_robux"]
-foundationCloudAssetsModule.preloadAsset("pictograms/plus_robux")
-local fFlagRobloxPlusDynamicFreeTrialLengthModule = require(robloxSubscriptionPurchaseApp.Flags.FFlagRobloxPlusDynamicFreeTrialLength)
-local guiService = game:GetService("GuiService")
-local t = {
-	[promptStateModule.SubscriptionPurchaseInProgress] = true,
-	[promptStateModule.SubscriptionStatusPolling] = true
+﻿local RobloxSubscriptionPurchaseApp = script:FindFirstAncestor("RobloxSubscriptionPurchaseApp")
+local Parent = RobloxSubscriptionPurchaseApp.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local HandleBackButtonActionModule = require(RobloxSubscriptionPurchaseApp.Actions.handleBackButtonAction)
+local View = FoundationModule.View
+local Sheet = FoundationModule.Sheet
+local Text = FoundationModule.Text
+local Button = FoundationModule.Button
+local GetIconRichTextFunction = FoundationModule.Utility.getIconRichText
+local Enums = FoundationModule.Enums
+local IconName = Enums.IconName
+local FillBehavior = Enums.FillBehavior
+local ButtonVariant = Enums.ButtonVariant
+local _ = require(RobloxSubscriptionPurchaseApp.types)
+local RobloxSubscriptionPriceRowModule = require(script.Parent.RobloxSubscriptionPriceRow)
+local RobloxSubscriptionFeatureListModule = require(script.Parent.RobloxSubscriptionFeatureList)
+local LegalDisclosureModule = require(script.Parent.LegalDisclosure)
+local RobloxSubscriptionStoreModule = require(RobloxSubscriptionPurchaseApp.Store.RobloxSubscriptionStore)
+local PerformRobloxSubscriptionPurchaseModule = require(RobloxSubscriptionPurchaseApp.Actions.performRobloxSubscriptionPurchase)
+local FinalizeRobloxSubscriptionUpsellFlowModule = require(RobloxSubscriptionPurchaseApp.Actions.finalizeRobloxSubscriptionUpsellFlow)
+local CompleteRobloxSubscriptionUpsellFlowModule = require(RobloxSubscriptionPurchaseApp.Actions.completeRobloxSubscriptionUpsellFlow)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local LogRobloxSubscriptionUpsellCounterModule = require(RobloxSubscriptionPurchaseApp.Utils.logRobloxSubscriptionUpsellCounter)
+local LogSubscriptionPurchaseFlowEventModule = require(RobloxSubscriptionPurchaseApp.Utils.logSubscriptionPurchaseFlowEvent)
+local FFlagEnableSubscriptionPurchaseFlowEventIngestModule = require(RobloxSubscriptionPurchaseApp.Flags.FFlagEnableSubscriptionPurchaseFlowEventIngest)
+local IsRobloxSubscriptionProductFreeTrialModule = require(RobloxSubscriptionPurchaseApp.Utils.isRobloxSubscriptionProductFreeTrial)
+local GetFreeTrialOfferModule = require(RobloxSubscriptionPurchaseApp.Utils.getFreeTrialOffer)
+local RobloxSubscriptionUpsellTelemetryModule = require(RobloxSubscriptionPurchaseApp.Events.RobloxSubscriptionUpsellTelemetry)
+local PromptStateModule = require(RobloxSubscriptionPurchaseApp.Enums.PromptState)
+local SignalsReactModule = require(Parent.SignalsReact)
+local FFlagSupportFreeTrialModule = require(RobloxSubscriptionPurchaseApp.Flags.FFlagSupportFreeTrial)
+local FFlagEnablePlusReferralLandingSheet = require(Parent.SharedFlags).FFlagEnablePlusReferralLandingSheet
+local FIntPlusReferralRewardRobux = require(Parent.SharedFlags).FIntPlusReferralRewardRobux
+local UseReferrerNameModule = require(RobloxSubscriptionPurchaseApp.Hooks.useReferrerName)
+local PlusHeroContentModule = require(script.Parent.PlusHeroContent)
+local FoundationCloudAssetsModule = require(Parent.FoundationCloudAssets)
+local PictogramsPlusRobux = FoundationCloudAssetsModule.Assets["pictograms/plus_robux"]
+FoundationCloudAssetsModule.preloadAsset("pictograms/plus_robux")
+local FFlagRobloxPlusDynamicFreeTrialLengthModule = require(RobloxSubscriptionPurchaseApp.Flags.FFlagRobloxPlusDynamicFreeTrialLength)
+local FFlagEnablePlusReferralLegalDisclosureModule = require(RobloxSubscriptionPurchaseApp.Flags.FFlagEnablePlusReferralLegalDisclosure)
+local GuiService = game:GetService("GuiService")
+local config = {
+	[PromptStateModule.SubscriptionPurchaseInProgress] = true,
+	[PromptStateModule.SubscriptionStatusPolling] = true
 }
 
-return function()
-	-- upvalues: robloxSubscriptionStoreModule (ref), signalsReactModule (ref), fFlagEnablePlusReferralLandingSheet (ref), useReferrerNameModule (ref), useLocalization (ref), fIntPlusReferralRewardRobux (ref), isRobloxSubscriptionProductFreeTrialModule (ref), fFlagRobloxPlusDynamicFreeTrialLengthModule (ref), getFreeTrialOfferModule (ref), reactModule (ref), fFlagEnableSubscriptionPurchaseFlowEventIngestModule (ref), logSubscriptionPurchaseFlowEventModule (ref), logRobloxSubscriptionUpsellCounterModule (ref), robloxSubscriptionUpsellTelemetryModule (ref), promptStateModule (ref), finalizeRobloxSubscriptionUpsellFlowModule (ref), completeRobloxSubscriptionUpsellFlowModule (ref), performRobloxSubscriptionPurchaseModule (ref), t (ref), guiService (ref), sheet (ref), view (ref), text (ref), getIconRichText (ref), iconName (ref), handleBackButtonActionModule (ref), plusHeroContentModule (ref), plusRobux (ref), robloxSubscriptionPriceRowModule (ref), robloxSubscriptionFeatureListModule (ref), button (ref), fillBehavior (ref), buttonVariant (ref), legalDisclosureModule (ref), fFlagSupportFreeTrialModule (ref)
-	local var1
-	local var2 = robloxSubscriptionStoreModule.get()
-	local onCtaOverride = var2.getOnCtaOverride()
-	local var3 = signalsReactModule.useSignalState(var2.getPurchaseUIOptions)
-	local var4 = signalsReactModule.useSignalState(var2.getPromptState)
-	local var5 = if fFlagEnablePlusReferralLandingSheet then useReferrerNameModule(if fFlagEnablePlusReferralLandingSheet then signalsReactModule.useSignalState(var2.getReferrerId) else nil) else nil
-	local var6 = useLocalization({
+return function() --[[ Line: 66 | Named "useBlackbirdSheetSlots" ]]
+	-- upvalues: RobloxSubscriptionStoreModule (copy), SignalsReactModule (copy), FFlagEnablePlusReferralLandingSheet (copy), UseReferrerNameModule (copy), UseLocalizationFunction (copy), FIntPlusReferralRewardRobux (copy), IsRobloxSubscriptionProductFreeTrialModule (copy), FFlagRobloxPlusDynamicFreeTrialLengthModule (copy), GetFreeTrialOfferModule (copy), ReactModule (copy), FFlagEnableSubscriptionPurchaseFlowEventIngestModule (copy), LogSubscriptionPurchaseFlowEventModule (copy), LogRobloxSubscriptionUpsellCounterModule (copy), RobloxSubscriptionUpsellTelemetryModule (copy), PromptStateModule (copy), FinalizeRobloxSubscriptionUpsellFlowModule (copy), CompleteRobloxSubscriptionUpsellFlowModule (copy), PerformRobloxSubscriptionPurchaseModule (copy), config (copy), GuiService (copy), Sheet (copy), View (copy), Text (copy), GetIconRichTextFunction (copy), IconName (copy), HandleBackButtonActionModule (copy), PlusHeroContentModule (copy), PictogramsPlusRobux (copy), RobloxSubscriptionPriceRowModule (copy), RobloxSubscriptionFeatureListModule (copy), Button (copy), FillBehavior (copy), ButtonVariant (copy), LegalDisclosureModule (copy), FFlagSupportFreeTrialModule (copy), FFlagEnablePlusReferralLegalDisclosureModule (copy)
+	local GetResult = RobloxSubscriptionStoreModule.get()
+	local OnCtaOverride = GetResult.getOnCtaOverride()
+	local UseSignalStateResult = SignalsReactModule.useSignalState(GetResult.getPurchaseUIOptions)
+	local UseSignalStateResult1 = SignalsReactModule.useSignalState(GetResult.getPromptState)
+	local UseSignalStateResult2 = if FFlagEnablePlusReferralLandingSheet then SignalsReactModule.useSignalState(GetResult.getReferrerId) else nil
+	local UseReferrerNameModuleResult = if FFlagEnablePlusReferralLandingSheet then UseReferrerNameModule(UseSignalStateResult2) else nil
+	local UseLocalizationResult = UseLocalizationFunction({
 		title = "Feature.RobloxSubscription.Title.GetBlackbird",
 		buttonText = "Feature.RobloxSubscription.Action.Subscribe",
 		getFreeTrialText = "Feature.RobloxSubscription.Action.TryItForFree",
-		referralTitle = if fFlagEnablePlusReferralLandingSheet then "Feature.RobloxSubscription.Heading.ReferralRecipientJoin" else nil,
-		referralInvite = if fFlagEnablePlusReferralLandingSheet then {
+		referralTitle = if FFlagEnablePlusReferralLandingSheet then "Feature.RobloxSubscription.Heading.ReferralRecipientJoin" else nil,
+		referralInvite = if FFlagEnablePlusReferralLandingSheet then {
 			"Feature.RobloxSubscription.Description.ReferralRecipientInvite",
-			username = var5 or "",
-			amount = tostring(fIntPlusReferralRewardRobux)
+			username = UseReferrerNameModuleResult or "",
+			amount = tostring(FIntPlusReferralRewardRobux)
 		} else nil
 	})
-	local var7 = signalsReactModule.useSignalState(var2.getRobloxSubscriptionProduct)
-	local var8 = isRobloxSubscriptionProductFreeTrialModule(var7)
-	local var9 = if fFlagRobloxPlusDynamicFreeTrialLengthModule then getFreeTrialOfferModule(var7) else nil
-	local var10 = if fFlagEnablePlusReferralLandingSheet and var5 and var5 ~= "" then var6.referralInvite else nil
-	local var11 = if var3.description then var3.description elseif fFlagEnablePlusReferralLandingSheet and var10 then var10 else nil
-	local var12 = if var8 then var6.getFreeTrialText else var6.buttonText
-	local var13 = var3.showLegalDisclosure ~= nil or var3.showLegalDisclosure
-	local var14 = if var3.noPurchaseMethodRequired ~= nil then false else var3.noPurchaseMethodRequired
-	local var15 = reactModule.useCallback(function(p1)
-		-- upvalues: fFlagEnableSubscriptionPurchaseFlowEventIngestModule (copy), logSubscriptionPurchaseFlowEventModule (copy), logRobloxSubscriptionUpsellCounterModule (copy), robloxSubscriptionUpsellTelemetryModule (copy)
-		if p1 then
-			if fFlagEnableSubscriptionPurchaseFlowEventIngestModule then
-				logSubscriptionPurchaseFlowEventModule("SubscriptionUpsellModalShown")
-			end
-			logRobloxSubscriptionUpsellCounterModule(robloxSubscriptionUpsellTelemetryModule.RobloxSubscriptionUpsellModalShownCounter)
-		end
-	end, {})
+	local UseSignalStateResult3 = SignalsReactModule.useSignalState(GetResult.getRobloxSubscriptionProduct)
+	local IsRobloxSubscriptionProductFreeTrialModule1 = IsRobloxSubscriptionProductFreeTrialModule(UseSignalStateResult3)
+	local FreeTrialOfferModule = if FFlagRobloxPlusDynamicFreeTrialLengthModule then GetFreeTrialOfferModule(UseSignalStateResult3) else nil
+	local ReferralInvite = if FFlagEnablePlusReferralLandingSheet and UseReferrerNameModuleResult and UseReferrerNameModuleResult ~= "" then UseLocalizationResult.referralInvite else nil
+	local Description = if UseSignalStateResult.description then UseSignalStateResult.description elseif FFlagEnablePlusReferralLandingSheet and ReferralInvite then ReferralInvite else nil
+	local GetFreeTrialText = if IsRobloxSubscriptionProductFreeTrialModule1 then UseLocalizationResult.getFreeTrialText else UseLocalizationResult.buttonText
+	local NoShowLegalDisclosure = UseSignalStateResult.showLegalDisclosure == nil or UseSignalStateResult.showLegalDisclosure
+	local NoPurchaseMethodRequired = UseSignalStateResult.noPurchaseMethodRequired ~= nil and UseSignalStateResult.noPurchaseMethodRequired
+	local HasReferralInvite: boolean = FFlagEnablePlusReferralLandingSheet and ReferralInvite ~= nil
+	local IsNotViewportDisplaySizeMatch: boolean = if FFlagEnablePlusReferralLandingSheet then GuiService.ViewportDisplaySize ~= Enum.DisplaySize.Small else false
 	
-	local function onSubscribe()
-		-- upvalues: fFlagEnableSubscriptionPurchaseFlowEventIngestModule (copy), logSubscriptionPurchaseFlowEventModule (copy), logRobloxSubscriptionUpsellCounterModule (copy), robloxSubscriptionUpsellTelemetryModule (copy), onCtaOverride (ref), var2 (ref), promptStateModule (copy), finalizeRobloxSubscriptionUpsellFlowModule (copy), completeRobloxSubscriptionUpsellFlowModule (copy), performRobloxSubscriptionPurchaseModule (copy)
-		if fFlagEnableSubscriptionPurchaseFlowEventIngestModule then
-			logSubscriptionPurchaseFlowEventModule("SubscriptionUpsellSubscribeClicked")
-		end
-		logRobloxSubscriptionUpsellCounterModule(robloxSubscriptionUpsellTelemetryModule.RobloxSubscriptionUpsellModalBuyButtonClickedCounter)
-		
-		if onCtaOverride then
-			var2.setPromptState(promptStateModule.SubscriptionPurchaseRequested)
-			onCtaOverride(function()
-				-- upvalues: var2 (copy), finalizeRobloxSubscriptionUpsellFlowModule (copy)
-				var2.setDidTryPurchasing(true)
-				finalizeRobloxSubscriptionUpsellFlowModule(true)
-			end, function()
-				-- upvalues: completeRobloxSubscriptionUpsellFlowModule (copy)
-				completeRobloxSubscriptionUpsellFlowModule()
-			end)
-			
-			return
-		end
-		performRobloxSubscriptionPurchaseModule()
-	end
-	
-	local var16 = t[var4] == true
-	local var17 = fFlagEnablePlusReferralLandingSheet and var10 ~= nil
-	
-	if fFlagEnablePlusReferralLandingSheet then
-		var1 = guiService.ViewportDisplaySize ~= Enum.DisplaySize.Small
-		var1 = nil
-	else
-		var1 = false
-	end
-	local var18
-	local t_1 = {
-		Header = reactModule.createElement(sheet.Header, { hasCloseAffordance = true }, {
-			View = if not var17 then reactModule.createElement(view, { LayoutOrder = 1, tag = "row gap-small auto-xy" }, {
-				BackButton = if var3.showBackButton then reactModule.createElement(text, {
+	return {
+		Header = ReactModule.createElement(Sheet.Header, { hasCloseAffordance = true }, {
+			View = if HasReferralInvite then nil else ReactModule.createElement(View, { LayoutOrder = 1, tag = "row gap-small auto-xy" }, {
+				BackButton = if UseSignalStateResult.showBackButton then ReactModule.createElement(Text, {
 					LayoutOrder = 1,
 					tag = "gap-small auto-xy text-heading-small text-align-x-center content-emphasis",
 					RichText = true,
-					Text = `{getIconRichText(iconName.ChevronLargeLeft)}`,
-					onActivated = handleBackButtonActionModule
+					Text = `{GetIconRichTextFunction(IconName.ChevronLargeLeft)}`,
+					onActivated = HandleBackButtonActionModule
 				}) else nil,
-				Title = reactModule.createElement(text, {
+				Title = ReactModule.createElement(Text, {
 					LayoutOrder = 2,
 					tag = "auto-xy text-heading-small text-align-x-center content-emphasis",
 					RichText = true,
-					Text = `{getIconRichText(iconName.RobloxPlus)} {var3.title or var6.title}`
+					Text = `{GetIconRichTextFunction(IconName.RobloxPlus)} {UseSignalStateResult.title or UseLocalizationResult.title}`
 				})
-			}) else nil
+			})
 		}),
-		Content = reactModule.createElement(sheet.Content, { LayoutOrder = 2 }, {
-			ContentContainer = reactModule.createElement(view, {
-				tag = if var17 and not var1 then "col gap-xsmall size-full-0 auto-y padding-bottom-large" elseif var17 and var1 then "col gap-xsmall size-full-0" elseif var11 ~= nil then "col" else "col size-full-0 auto-y",
-				Size = if var17 and var1 then UDim2.new(1, 0, 0, 300) elseif var17 or var11 ~= nil then nil else UDim2.new(1, 0, 0, 140)
+		Content = ReactModule.createElement(Sheet.Content, { LayoutOrder = 2 }, {
+			ContentContainer = ReactModule.createElement(View, {
+				tag = if HasReferralInvite and not IsNotViewportDisplaySizeMatch then "col gap-xsmall size-full-0 auto-y padding-bottom-large" elseif HasReferralInvite and IsNotViewportDisplaySizeMatch then "col gap-xsmall size-full-0" elseif Description == nil then "col" else "col size-full-0 auto-y",
+				Size = if HasReferralInvite and IsNotViewportDisplaySizeMatch then UDim2.new(1, 0, 0, 300) elseif HasReferralInvite or Description ~= nil then nil else UDim2.new(1, 0, 0, 140)
 			}, {
-				HeroContent = if var17 then reactModule.createElement(plusHeroContentModule, {
+				HeroContent = if HasReferralInvite then ReactModule.createElement(PlusHeroContentModule, {
 					layoutOrder = 1,
 					titleRichText = true,
-					pictogram = plusRobux,
-					title = `{var6.referralTitle} {getIconRichText(iconName.Robux)} {tostring(fIntPlusReferralRewardRobux)}`,
-					subtitle = var10
+					pictogram = PictogramsPlusRobux,
+					title = `{UseLocalizationResult.referralTitle} {GetIconRichTextFunction(IconName.Robux)} {tostring(FIntPlusReferralRewardRobux)}`,
+					subtitle = ReferralInvite
 				}) else nil,
-				PriceRow = if var17 then reactModule.createElement(robloxSubscriptionPriceRowModule, {
-					layoutOrder = if fFlagEnablePlusReferralLandingSheet then 4 else 1,
-					isFreeTrial = var8
-				}) elseif var11 ~= nil then reactModule.createElement(robloxSubscriptionPriceRowModule, {
-					layoutOrder = if fFlagEnablePlusReferralLandingSheet then 4 else 1,
-					isFreeTrial = var8
-				}) else reactModule.createElement(text, {
+				PriceRow = if HasReferralInvite then ReactModule.createElement(RobloxSubscriptionPriceRowModule, {
+					layoutOrder = if FFlagEnablePlusReferralLandingSheet then 4 else 1,
+					isFreeTrial = IsRobloxSubscriptionProductFreeTrialModule1
+				}) elseif Description == nil then ReactModule.createElement(RobloxSubscriptionPriceRowModule, {
+					layoutOrder = if FFlagEnablePlusReferralLandingSheet then 4 else 1,
+					isFreeTrial = IsRobloxSubscriptionProductFreeTrialModule1
+				}) else ReactModule.createElement(Text, {
 					tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-default",
-					LayoutOrder = if fFlagEnablePlusReferralLandingSheet then 4 else 1,
-					Text = var11
+					LayoutOrder = if FFlagEnablePlusReferralLandingSheet then 4 else 1,
+					Text = Description
 				}),
-				FeatureList = reactModule.createElement(robloxSubscriptionFeatureListModule, {
-					layoutOrder = if fFlagEnablePlusReferralLandingSheet then 5 else 2,
-					noPurchaseMethodRequired = var14,
-					compact = var17 and var1
+				FeatureList = ReactModule.createElement(RobloxSubscriptionFeatureListModule, {
+					layoutOrder = if FFlagEnablePlusReferralLandingSheet then 5 else 2,
+					noPurchaseMethodRequired = NoPurchaseMethodRequired,
+					compact = HasReferralInvite and IsNotViewportDisplaySizeMatch
 				})
+			})
+		}),
+		Actions = ReactModule.createElement(Sheet.Actions, { LayoutOrder = 3 }, {
+			ActionsContainer = ReactModule.createElement(View, {
+				LayoutOrder = 1,
+				tag = "row wrap align-x-center gap-medium size-full-0 auto-xy"
+			}, {
+				SubscribeButton = ReactModule.createElement(Button, {
+					LayoutOrder = 1,
+					ref = ReactModule.useCallback(function(p1) --[[ Line: 120 ]]
+						-- upvalues: FFlagEnableSubscriptionPurchaseFlowEventIngestModule (upval), LogSubscriptionPurchaseFlowEventModule (upval), LogRobloxSubscriptionUpsellCounterModule (upval), RobloxSubscriptionUpsellTelemetryModule (upval)
+						if p1 then
+							if FFlagEnableSubscriptionPurchaseFlowEventIngestModule then
+								LogSubscriptionPurchaseFlowEventModule("SubscriptionUpsellModalShown")
+							end
+							LogRobloxSubscriptionUpsellCounterModule(RobloxSubscriptionUpsellTelemetryModule.RobloxSubscriptionUpsellModalShownCounter)
+						end
+					end, {}),
+					text = if UseSignalStateResult.ctaText then UseSignalStateResult.ctaText else GetFreeTrialText,
+					onActivated = function() --[[ Line: 131 ]]
+						-- upvalues: FFlagEnableSubscriptionPurchaseFlowEventIngestModule (upval), LogSubscriptionPurchaseFlowEventModule (upval), LogRobloxSubscriptionUpsellCounterModule (upval), RobloxSubscriptionUpsellTelemetryModule (upval), OnCtaOverride (copy), GetResult (copy), PromptStateModule (upval), FinalizeRobloxSubscriptionUpsellFlowModule (upval), CompleteRobloxSubscriptionUpsellFlowModule (upval), PerformRobloxSubscriptionPurchaseModule (upval)
+						if FFlagEnableSubscriptionPurchaseFlowEventIngestModule then
+							LogSubscriptionPurchaseFlowEventModule("SubscriptionUpsellSubscribeClicked")
+						end
+						LogRobloxSubscriptionUpsellCounterModule(RobloxSubscriptionUpsellTelemetryModule.RobloxSubscriptionUpsellModalBuyButtonClickedCounter)
+						
+						if OnCtaOverride then
+							GetResult.setPromptState(PromptStateModule.SubscriptionPurchaseRequested)
+							OnCtaOverride(function() --[[ Line: 143 ]]
+								-- upvalues: GetResult (upval), FinalizeRobloxSubscriptionUpsellFlowModule (upval)
+								GetResult.setDidTryPurchasing(true)
+								FinalizeRobloxSubscriptionUpsellFlowModule(true)
+							end, function() --[[ Line: 146 ]]
+								-- upvalues: CompleteRobloxSubscriptionUpsellFlowModule (upval)
+								CompleteRobloxSubscriptionUpsellFlowModule()
+							end)
+							
+							return
+						else
+							PerformRobloxSubscriptionPurchaseModule()
+						end
+					end,
+					fillBehavior = FillBehavior.Fill,
+					variant = ButtonVariant.Emphasis,
+					isLoading = config[UseSignalStateResult1] == true
+				}),
+				LegalDisclosure = if NoShowLegalDisclosure then ReactModule.createElement(LegalDisclosureModule, {
+					layoutOrder = 2,
+					ctaText = if UseSignalStateResult.ctaText then UseSignalStateResult.ctaText else GetFreeTrialText,
+					isFreeTrial = if FFlagSupportFreeTrialModule then IsRobloxSubscriptionProductFreeTrialModule1 else nil,
+					isReferral = if FFlagEnablePlusReferralLegalDisclosureModule then HasReferralInvite else nil,
+					shortenFreeTrialTerms = NoPurchaseMethodRequired,
+					trialDuration = if FreeTrialOfferModule then FreeTrialOfferModule.Duration else nil,
+					trialPeriodType = if FreeTrialOfferModule then FreeTrialOfferModule.PeriodType else nil,
+					billingPeriodType = if FreeTrialOfferModule and UseSignalStateResult3 then UseSignalStateResult3.PeriodType else nil
+				}) else nil
 			})
 		})
 	}
-	local createElement = reactModule.createElement
-	local actions = sheet.Actions
-	local t_2 = { LayoutOrder = 3 }
-	local t_3 = {}
-	local createElement_1 = reactModule.createElement
-	local t_4 = {
-		LayoutOrder = 1,
-		tag = "row wrap align-x-center gap-medium size-full-0 auto-xy"
-	}
-	local t_5 = {
-		SubscribeButton = reactModule.createElement(button, {
-			LayoutOrder = 1,
-			ref = var15,
-			text = if var3.ctaText then var3.ctaText else var12,
-			onActivated = onSubscribe,
-			fillBehavior = fillBehavior.Fill,
-			variant = buttonVariant.Emphasis,
-			isLoading = var16
-		})
-	}
-	
-	if var13 then
-		var18 = reactModule.createElement
-		var18 = var18(legalDisclosureModule, {
-			layoutOrder = 2,
-			ctaText = if var3.ctaText then var3.ctaText else var12,
-			isFreeTrial = if fFlagSupportFreeTrialModule then var8 else nil,
-			shortenFreeTrialTerms = var14,
-			trialDuration = if var9 then var9.Duration else nil,
-			trialPeriodType = if var9 then var9.PeriodType else nil,
-			billingPeriodType = if var9 and var7 then var7.PeriodType else nil
-		})
-	else
-		var18 = nil
-	end
-	t_5.LegalDisclosure = var18
-	t_3.ActionsContainer = createElement_1(view, t_4, t_5)
-	t_1.Actions = createElement(actions, t_2, t_3)
-	
-	return t_1
 end

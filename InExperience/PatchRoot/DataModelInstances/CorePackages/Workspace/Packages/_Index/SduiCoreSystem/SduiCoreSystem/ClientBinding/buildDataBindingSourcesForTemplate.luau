@@ -1,76 +1,56 @@
-﻿local sduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
-local parent = sduiCoreSystem.Parent
-local _ = require(parent.ServiceContractsProto)
-local tryGetPathFromDataModule = require(sduiCoreSystem.ClientBinding.tryGetPathFromData)
-local splitDottedPathModule = require(sduiCoreSystem.ClientBinding.splitDottedPath)
-local sduiDataBindingContentTypeModule = require(sduiCoreSystem.ClientBinding.SduiDataBindingContentType)
-local _ = require(sduiCoreSystem.ClientBinding.SduiClientBindingTypes)
-local protoVariableMapperModule = require(sduiCoreSystem.ClientBinding.ProtoVariableMapper)
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagSduiDevStoreSeeAllSupport = sharedFlagsModule.FFlagSduiDevStoreSeeAllSupport
-local t = {
-	[sduiDataBindingContentTypeModule.badge] = { "badge_id" },
-	[sduiDataBindingContentTypeModule.creator] = { "creator_key" },
-	[sduiDataBindingContentTypeModule.universe] = { "universe_id" },
-	[sduiDataBindingContentTypeModule.ageRecommendation] = { "universe_id" },
-	[sduiDataBindingContentTypeModule.socialLink] = { "social_link_id" },
-	[sduiDataBindingContentTypeModule.marketplaceCatalogCategory] = if sharedFlagsModule.FFlagSduiMarketplaceCatalogCategorySupport then { "marketplace_catalog_category_item_id" } else nil,
-	[sduiDataBindingContentTypeModule.song] = { "song_id" },
-	[sduiDataBindingContentTypeModule.marketplaceCatalogSort] = if sharedFlagsModule.FFlagSduiMarketplaceCatalogSortSupport then { "catalog_sort_id" } else nil,
-	[sduiDataBindingContentTypeModule.gamePass] = { "game_pass_id" },
-	[sduiDataBindingContentTypeModule.gameDeveloperProduct] = if fFlagSduiDevStoreSeeAllSupport then { "developer_product_id" } else nil,
-	[sduiDataBindingContentTypeModule.gameSubscription] = if fFlagSduiDevStoreSeeAllSupport then { "subscription_id" } else nil,
-	[sduiDataBindingContentTypeModule.playability] = { "universe_id" },
-	[sduiDataBindingContentTypeModule.universeUserVoteFeedbackMetadata] = { "root_place_id" },
-	[sduiDataBindingContentTypeModule.userProfile] = { "user_id" },
-	[sduiDataBindingContentTypeModule.collectibleItem] = if sharedFlagsModule.FFlagSduiAddCollectibleItemDataHydration then { "collectible_item_id" } else nil
-}
+﻿local SduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
+local _ = require(SduiCoreSystem.Parent.ServiceContractsProto)
+local TryGetPathFromDataModule = require(SduiCoreSystem.ClientBinding.tryGetPathFromData)
+local SplitDottedPathModule = require(SduiCoreSystem.ClientBinding.splitDottedPath)
+local _ = require(SduiCoreSystem.ClientBinding.SduiDataBindingContentType)
+local _ = require(SduiCoreSystem.ClientBinding.SduiClientBindingTypes)
+local ProtoVariableMapperModule = require(SduiCoreSystem.ClientBinding.ProtoVariableMapper)
+local DefaultHydrationIdPathsModule = require(SduiCoreSystem.ClientBinding.defaultHydrationIdPaths)
 
-return function(p1, p2)
-	-- upvalues: protoVariableMapperModule (ref), splitDottedPathModule (ref), tryGetPathFromDataModule (ref), t (ref)
-	local t_1 = {}
+return function(p1, List) --[[ Line: 54 | Named "buildDataBindingSourcesForTemplate" ]]
+	-- upvalues: ProtoVariableMapperModule (copy), SplitDottedPathModule (copy), TryGetPathFromDataModule (copy), DefaultHydrationIdPathsModule (copy)
+	local t = {}
 	
-	for i, v in p2 do
-		local var1 = protoVariableMapperModule.mapHydrationContentTypeToLua(v.content_type)
+	for _, value in List do
+		local MapHydrationContentTypeToLuaResult = ProtoVariableMapperModule.mapHydrationContentTypeToLua(value.content_type)
 		
-		if not var1 then
-			error(`Unsupported contentType {v.content_type}`)
+		if not MapHydrationContentTypeToLuaResult then
+			error(`Unsupported contentType {value.content_type}`)
 		end
-		local var2
-		local type = v.id_binding and (v.id_binding.kind and v.id_binding.kind.type)
-		local value = v.id_binding and (v.id_binding.kind and v.id_binding.kind.value)
-		local var3 = nil
+		local Type = value.id_binding and (value.id_binding.kind and value.id_binding.kind.type)
+		local Value = value.id_binding and (value.id_binding.kind and value.id_binding.kind.value)
+		local Id = nil
 		
-		if type == "literal" and value then
-			var3 = value
-		elseif type == "input_path" and value then
-			var2, var15 = tryGetPathFromDataModule(p1, splitDottedPathModule(value))
+		if Type == "literal" and Value then
+			Id = Value
+		elseif Type == "input_path" and Value then
+			local TryGetPathFromDataModuleResult, TryGetPathFromDataModuleResult2 = TryGetPathFromDataModule(p1, (SplitDottedPathModule(Value)))
 			
-			if var2 and var15 ~= nil then
-				var3 = var15
+			if TryGetPathFromDataModuleResult and TryGetPathFromDataModuleResult2 ~= nil then
+				Id = TryGetPathFromDataModuleResult2
 			else
-				error(`Unable to resolve path from inputPath: {value} in data`)
+				error(`Unable to resolve path from inputPath: {Value} in data`)
 			end
 		else
-			local var4 = t[var1]
+			local DefaultHydrationIdPathsModuleEntry = DefaultHydrationIdPathsModule[MapHydrationContentTypeToLuaResult]
 			
-			if var4 then
-				var2, var14 = tryGetPathFromDataModule(p1, var4)
+			if DefaultHydrationIdPathsModuleEntry then
+				local TryGetPathFromDataModuleResult1, TryGetPathFromDataModuleResult2_1 = TryGetPathFromDataModule(p1, DefaultHydrationIdPathsModuleEntry)
 				
-				if var2 and var14 ~= nil then
-					var3 = var14
+				if TryGetPathFromDataModuleResult1 and TryGetPathFromDataModuleResult2_1 ~= nil then
+					Id = TryGetPathFromDataModuleResult2_1
 				else
-					error(`Unable to resolve default path: {table.concat(var4, ",")} in data for contentType {var1}`)
+					error(`Unable to resolve default path: {table.concat(DefaultHydrationIdPathsModuleEntry, ",")} in data for contentType {MapHydrationContentTypeToLuaResult}`)
 				end
 			else
-				error(`Unable to find default for unknown contentType: {var1}`)
+				error(`Unable to find default for unknown contentType: {MapHydrationContentTypeToLuaResult}`)
 			end
 		end
-		t_1[if v.alias and v.alias ~= "" then v.alias else var1] = {
-			contentType = var1,
-			id = var3,
-			fetchIfMissing = v.client_fetch
+		t[if value.alias and value.alias ~= "" then value.alias else MapHydrationContentTypeToLuaResult] = {
+			contentType = MapHydrationContentTypeToLuaResult,
+			id = Id,
+			fetchIfMissing = value.client_fetch
 		}
 	end
-	return t_1
+	return t
 end

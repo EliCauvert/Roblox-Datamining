@@ -1,3 +1,3 @@
-﻿return require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator(script.Name, function(p1, p2)
-	return { id = p1, isFavorite = p2 }
+﻿return require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator(script.Name, function(Id, IsFavorite) --[[ Line: 4 ]]
+	return { id = Id, isFavorite = IsFavorite }
 end)

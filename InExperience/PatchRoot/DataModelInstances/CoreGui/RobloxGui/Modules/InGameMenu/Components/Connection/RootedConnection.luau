@@ -1,37 +1,37 @@
-﻿local inGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
-local roact = inGameMenuDependenciesModule.Roact
-local t = inGameMenuDependenciesModule.t
-local rootedConnection = roact.PureComponent:extend("RootedConnection")
-rootedConnection.validateProps = t.strictInterface({ render = t.callback })
+﻿local InGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
+local Roact = InGameMenuDependenciesModule.Roact
+local T = InGameMenuDependenciesModule.t
+local RootedConnection = Roact.PureComponent:extend("RootedConnection")
+RootedConnection.validateProps = T.strictInterface({ render = T.callback })
 
-function rootedConnection.init(p1)
-	-- upvalues: roact (ref)
+function RootedConnection.init(p1) --[[ Line: 17 ]]
+	-- upvalues: Roact (copy)
 	p1.state = { isRooted = false }
-	p1.rootRef = roact.createRef()
+	p1.rootRef = Roact.createRef()
 	
-	function p0.onAncestryChanged(p2)
-		-- upvalues: p1 (ref)
-		if p2:IsDescendantOf(game) then
+	function p1.onAncestryChanged(Object) --[[ Line: 24 ]]
+		-- upvalues: p1 (copy)
+		if Object:IsDescendantOf(game) then
 			p1:setState({ isRooted = true })
 		end
 	end
 end
 
-function rootedConnection.render(p1)
-	-- upvalues: roact (ref)
-	return roact.createFragment({
+function RootedConnection.render(p1) --[[ Line: 33 ]]
+	-- upvalues: Roact (copy)
+	return Roact.createFragment({
 		Content = p1.props.render(p1.state.isRooted),
-		Folder = roact.createElement("Folder", {
-			[roact.Event.AncestryChanged] = p1.onAncestryChanged,
-			[roact.Ref] = p1.rootRef
+		Folder = Roact.createElement("Folder", {
+			[Roact.Event.AncestryChanged] = p1.onAncestryChanged,
+			[Roact.Ref] = p1.rootRef
 		})
 	})
 end
 
-function rootedConnection.didMount(p1)
+function RootedConnection.didMount(p1) --[[ Line: 43 ]]
 	if p1.rootRef:getValue():IsDescendantOf(game) then
 		p1:setState({ isRooted = true })
 	end
 end
 
-return rootedConnection
+return RootedConnection

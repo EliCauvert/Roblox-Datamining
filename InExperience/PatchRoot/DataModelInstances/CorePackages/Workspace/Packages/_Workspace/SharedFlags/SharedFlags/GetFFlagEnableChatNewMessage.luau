@@ -1,7 +1,7 @@
-﻿local enableChatNewMessage = game:DefineFastFlag("EnableChatNewMessage", false)
-local getFFlagEnableAppChatInExperienceModule = require(script.Parent.GetFFlagEnableAppChatInExperience)
+﻿local EnableChatNewMessage = game:DefineFastFlag("EnableChatNewMessage", false)
+local GetFFlagEnableAppChatInExperienceModule = require(script.Parent.GetFFlagEnableAppChatInExperience)
 
-return function()
-	-- upvalues: enableChatNewMessage (ref), getFFlagEnableAppChatInExperienceModule (ref)
-	return enableChatNewMessage and getFFlagEnableAppChatInExperienceModule()
+return function() --[[ Line: 5 ]]
+	-- upvalues: EnableChatNewMessage (copy), GetFFlagEnableAppChatInExperienceModule (copy)
+	return EnableChatNewMessage and GetFFlagEnableAppChatInExperienceModule()
 end

@@ -1,81 +1,81 @@
 ﻿local IXPService = game:GetService("IXPService")
-local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local reactModule = require(parent.React)
-local useNavigation = require(parent.Navigation).useNavigation
-local useNavigationFocus = require(parent.Navigation).useNavigationFocus
-local roactNavigationModule = require(parent.RoactNavigation)
-local useUserExperiment = require(parent.RoactAppExperiment).useUserExperiment
-local appUserLayers = require(parent.ExperimentLayers).AppUserLayers
-local appPage = require(parent.RobloxAppEnums).AppPage
-local default = require(parent.LoggingProtocol).default
-local notificationsUpsellModule = require(parent.NotificationsUpsell)
-local useChatIsVisibleModule = require(appChat.Hooks.useChatIsVisible)
-local useIsInExperienceModule = require(appChat.Hooks.useIsInExperience)
-local pushUpsellEventConfig = notificationsUpsellModule.PushUpsellEventConfig
-local modalEventConstants = notificationsUpsellModule.ModalEventConstants
-local setupPushNotificationsUpsell = notificationsUpsellModule.setupPushNotificationsUpsell
-local notificationsUpsellConstants = notificationsUpsellModule.NotificationsUpsellConstants
-local getFStringPushUpsellChatVariantName = require(parent.SharedFlags).GetFStringPushUpsellChatVariantName
+local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local ReactModule = require(Parent.React)
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local UseNavigationFocusFunction = require(Parent.Navigation).useNavigationFocus
+local RoactNavigationModule = require(Parent.RoactNavigation)
+local UseUserExperimentFunction = require(Parent.RoactAppExperiment).useUserExperiment
+local AppUserLayers = require(Parent.ExperimentLayers).AppUserLayers
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local Default = require(Parent.LoggingProtocol).default
+local NotificationsUpsellModule = require(Parent.NotificationsUpsell)
+local UseChatIsVisibleModule = require(AppChat.Hooks.useChatIsVisible)
+local UseIsInExperienceModule = require(AppChat.Hooks.useIsInExperience)
+local PushUpsellEventConfig = NotificationsUpsellModule.PushUpsellEventConfig
+local ModalEventConstants = NotificationsUpsellModule.ModalEventConstants
+local SetupPushNotificationsUpsell = NotificationsUpsellModule.setupPushNotificationsUpsell
+local NotificationsUpsellConstants = NotificationsUpsellModule.NotificationsUpsellConstants
+local GetFStringPushUpsellChatVariantNameFunction = require(Parent.SharedFlags).GetFStringPushUpsellChatVariantName
 
-return function()
-	-- upvalues: useNavigationFocus (ref), useNavigation (ref), useChatIsVisibleModule (ref), useIsInExperienceModule (ref), reactModule (ref), useUserExperiment (ref), appUserLayers (ref), getFStringPushUpsellChatVariantName (ref), roactNavigationModule (ref), setupPushNotificationsUpsell (ref), notificationsUpsellConstants (ref), IXPService (ref), default (ref), pushUpsellEventConfig (ref), modalEventConstants (ref), appPage (ref)
-	local var1 = useNavigationFocus()
-	local var2 = useNavigation()
-	local var3 = useChatIsVisibleModule()
-	local var4 = useIsInExperienceModule()
-	local var5, var6 = reactModule.useState(false)
-	local var7 = useUserExperiment({ appUserLayers.SocialAppChat }, function(p1)
-		-- upvalues: appUserLayers (copy), getFStringPushUpsellChatVariantName (copy)
+return function() --[[ Line: 27 | Named "CheckAndOpenChatPushUpsell" ]]
+	-- upvalues: UseNavigationFocusFunction (copy), UseNavigationFunction (copy), UseChatIsVisibleModule (copy), UseIsInExperienceModule (copy), ReactModule (copy), UseUserExperimentFunction (copy), AppUserLayers (copy), GetFStringPushUpsellChatVariantNameFunction (copy), RoactNavigationModule (copy), SetupPushNotificationsUpsell (copy), NotificationsUpsellConstants (copy), IXPService (copy), Default (copy), PushUpsellEventConfig (copy), ModalEventConstants (copy), AppPage (copy)
+	local UseNavigationFocusResult = UseNavigationFocusFunction()
+	local UseNavigationResult = UseNavigationFunction()
+	local UseChatIsVisibleModuleResult = UseChatIsVisibleModule()
+	local UseIsInExperienceModuleResult = UseIsInExperienceModule()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseUserExperimentResult = UseUserExperimentFunction({ AppUserLayers.SocialAppChat }, function(p1) --[[ Line: 36 ]]
+		-- upvalues: AppUserLayers (upval), GetFStringPushUpsellChatVariantNameFunction (upval)
 		return {
-			pushUpsellChatVariant = (p1[appUserLayers.SocialAppChat] or {})[getFStringPushUpsellChatVariantName()] or -1
+			pushUpsellChatVariant = (p1[AppUserLayers.SocialAppChat] or {})[GetFStringPushUpsellChatVariantNameFunction()] or -1
 		}
 	end)
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), roactNavigationModule (copy), var6 (ref)
-		local var8 = var2.addListener(roactNavigationModule.Events.WillBlur, function(p1)
-			-- upvalues: var6 (copy)
+	ReactModule.useEffect(function() --[[ Line: 45 ]]
+		-- upvalues: UseNavigationResult (copy), RoactNavigationModule (upval), UseStateResult2 (copy)
+		local AddListenerResult = UseNavigationResult.addListener(RoactNavigationModule.Events.WillBlur, function(p1) --[[ Line: 46 ]]
+			-- upvalues: UseStateResult2 (upval)
 			if p1.action.routeName == "ChatConversation" then
-				var6(true)
+				UseStateResult2(true)
 			end
 		end)
 		
-		return function()
-			-- upvalues: var8 (ref)
-			var8.remove()
+		return function() --[[ Line: 53 ]]
+			-- upvalues: AddListenerResult (copy)
+			AddListenerResult.remove()
 		end
 	end, {})
 	
-	local function _()
-		-- upvalues: setupPushNotificationsUpsell (copy), notificationsUpsellConstants (copy), IXPService (copy), appUserLayers (copy), default (copy), pushUpsellEventConfig (copy), modalEventConstants (copy), appPage (copy)
-		setupPushNotificationsUpsell.ShouldShowUpsell(notificationsUpsellConstants.ModalKey.PushUpsellChat):andThen(function(p1)
-			-- upvalues: IXPService (copy), appUserLayers (copy), default (copy), pushUpsellEventConfig (copy), modalEventConstants (copy), appPage (copy), setupPushNotificationsUpsell (copy), notificationsUpsellConstants (copy)
-			if p1 then
-				IXPService:LogUserLayerExposure(appUserLayers.SocialAppChat)
-				default:logRobloxTelemetryEvent(pushUpsellEventConfig, {}, {
-					[modalEventConstants.ActionType] = modalEventConstants.ShouldRequest,
-					[modalEventConstants.EntryPoint] = appPage.Chat
-				}, modalEventConstants.ModalContextPushEduUpsell)
-				setupPushNotificationsUpsell.OpenModal(notificationsUpsellConstants.ModalKey.PushUpsellChat, true, appPage.Chat)
+	local function _() --[[ Line: 58 | Named "showUpsellOnChatLanding" ]]
+		-- upvalues: SetupPushNotificationsUpsell (upval), NotificationsUpsellConstants (upval), IXPService (upval), AppUserLayers (upval), Default (upval), PushUpsellEventConfig (upval), ModalEventConstants (upval), AppPage (upval)
+		SetupPushNotificationsUpsell.ShouldShowUpsell(NotificationsUpsellConstants.ModalKey.PushUpsellChat):andThen(function(Result) --[[ Line: 59 ]]
+			-- upvalues: IXPService (upval), AppUserLayers (upval), Default (upval), PushUpsellEventConfig (upval), ModalEventConstants (upval), AppPage (upval), SetupPushNotificationsUpsell (upval), NotificationsUpsellConstants (upval)
+			if Result then
+				IXPService:LogUserLayerExposure(AppUserLayers.SocialAppChat)
+				Default:logRobloxTelemetryEvent(PushUpsellEventConfig, {}, {
+					[ModalEventConstants.ActionType] = ModalEventConstants.ShouldRequest,
+					[ModalEventConstants.EntryPoint] = AppPage.Chat
+				}, ModalEventConstants.ModalContextPushEduUpsell)
+				SetupPushNotificationsUpsell.OpenModal(NotificationsUpsellConstants.ModalKey.PushUpsellChat, true, AppPage.Chat)
 				
 				return
 			end
 		end)
 	end
 	
-	local _ = function()
-		-- upvalues: var5 (ref), var6 (ref), setupPushNotificationsUpsell (copy), notificationsUpsellConstants (copy), IXPService (copy), appUserLayers (copy), default (copy), pushUpsellEventConfig (copy), modalEventConstants (copy)
-		if var5 then
-			var6(false)
-			setupPushNotificationsUpsell.ShouldShowUpsell(notificationsUpsellConstants.ModalKey.PushUpsellChat):andThen(function(p1)
-				-- upvalues: IXPService (copy), appUserLayers (copy), default (copy), pushUpsellEventConfig (copy), modalEventConstants (copy), setupPushNotificationsUpsell (copy), notificationsUpsellConstants (copy)
-				if p1 then
-					IXPService:LogUserLayerExposure(appUserLayers.SocialAppChat)
-					default:logRobloxTelemetryEvent(pushUpsellEventConfig, {}, {
-						[modalEventConstants.ActionType] = modalEventConstants.ShouldRequest,
-						[modalEventConstants.EntryPoint] = "ChatConversation"
-					}, modalEventConstants.ModalContextPushEduUpsell)
-					setupPushNotificationsUpsell.OpenModal(notificationsUpsellConstants.ModalKey.PushUpsellChat, true, "ChatConversation")
+	local _ = function() --[[ Line: 73 | Named "showUpsellWhenReturnFromConversation" ]]
+		-- upvalues: UseStateResult (copy), UseStateResult2 (copy), SetupPushNotificationsUpsell (upval), NotificationsUpsellConstants (upval), IXPService (upval), AppUserLayers (upval), Default (upval), PushUpsellEventConfig (upval), ModalEventConstants (upval)
+		if UseStateResult then
+			UseStateResult2(false)
+			SetupPushNotificationsUpsell.ShouldShowUpsell(NotificationsUpsellConstants.ModalKey.PushUpsellChat):andThen(function(Result) --[[ Line: 79 ]]
+				-- upvalues: IXPService (upval), AppUserLayers (upval), Default (upval), PushUpsellEventConfig (upval), ModalEventConstants (upval), SetupPushNotificationsUpsell (upval), NotificationsUpsellConstants (upval)
+				if Result then
+					IXPService:LogUserLayerExposure(AppUserLayers.SocialAppChat)
+					Default:logRobloxTelemetryEvent(PushUpsellEventConfig, {}, {
+						[ModalEventConstants.ActionType] = ModalEventConstants.ShouldRequest,
+						[ModalEventConstants.EntryPoint] = "ChatConversation"
+					}, ModalEventConstants.ModalContextPushEduUpsell)
+					SetupPushNotificationsUpsell.OpenModal(NotificationsUpsellConstants.ModalKey.PushUpsellChat, true, "ChatConversation")
 					
 					return
 				end
@@ -85,41 +85,42 @@ return function()
 		end
 	end
 	
-	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), var1 (ref), var4 (ref), var7 (ref), setupPushNotificationsUpsell (copy), notificationsUpsellConstants (copy), IXPService (copy), appUserLayers (copy), default (copy), pushUpsellEventConfig (copy), modalEventConstants (copy), appPage (copy), var5 (ref), var6 (ref)
-		if not var3 or not var1 or (var4 or var7.pushUpsellChatVariant == nil) or var7.pushUpsellChatVariant < 0 then return end
-		if var7.pushUpsellChatVariant == 1 then
-			setupPushNotificationsUpsell.ShouldShowUpsell(notificationsUpsellConstants.ModalKey.PushUpsellChat):andThen(function(p1)
-				-- upvalues: IXPService (copy), appUserLayers (copy), default (copy), pushUpsellEventConfig (copy), modalEventConstants (copy), appPage (copy), setupPushNotificationsUpsell (copy), notificationsUpsellConstants (copy)
-				if p1 then
-					IXPService:LogUserLayerExposure(appUserLayers.SocialAppChat)
-					default:logRobloxTelemetryEvent(pushUpsellEventConfig, {}, {
-						[modalEventConstants.ActionType] = modalEventConstants.ShouldRequest,
-						[modalEventConstants.EntryPoint] = appPage.Chat
-					}, modalEventConstants.ModalContextPushEduUpsell)
-					setupPushNotificationsUpsell.OpenModal(notificationsUpsellConstants.ModalKey.PushUpsellChat, true, appPage.Chat)
+	ReactModule.useEffect(function() --[[ Line: 93 ]]
+		-- upvalues: UseChatIsVisibleModuleResult (copy), UseNavigationFocusResult (copy), UseIsInExperienceModuleResult (copy), UseUserExperimentResult (copy), SetupPushNotificationsUpsell (upval), NotificationsUpsellConstants (upval), IXPService (upval), AppUserLayers (upval), Default (upval), PushUpsellEventConfig (upval), ModalEventConstants (upval), AppPage (upval), UseStateResult (copy), UseStateResult2 (copy)
+		if not UseChatIsVisibleModuleResult or not UseNavigationFocusResult or UseIsInExperienceModuleResult or UseUserExperimentResult.pushUpsellChatVariant == nil or UseUserExperimentResult.pushUpsellChatVariant < 0 then return end
+		if UseUserExperimentResult.pushUpsellChatVariant == 1 then
+			SetupPushNotificationsUpsell.ShouldShowUpsell(NotificationsUpsellConstants.ModalKey.PushUpsellChat):andThen(function(Result) --[[ Line: 59 ]]
+				-- upvalues: IXPService (upval), AppUserLayers (upval), Default (upval), PushUpsellEventConfig (upval), ModalEventConstants (upval), AppPage (upval), SetupPushNotificationsUpsell (upval), NotificationsUpsellConstants (upval)
+				if Result then
+					IXPService:LogUserLayerExposure(AppUserLayers.SocialAppChat)
+					Default:logRobloxTelemetryEvent(PushUpsellEventConfig, {}, {
+						[ModalEventConstants.ActionType] = ModalEventConstants.ShouldRequest,
+						[ModalEventConstants.EntryPoint] = AppPage.Chat
+					}, ModalEventConstants.ModalContextPushEduUpsell)
+					SetupPushNotificationsUpsell.OpenModal(NotificationsUpsellConstants.ModalKey.PushUpsellChat, true, AppPage.Chat)
 					
 					return
 				end
 			end)
 			
 			return
-		elseif var7.pushUpsellChatVariant == 2 then
-			if not var5 then return end
-			var6(false)
-			setupPushNotificationsUpsell.ShouldShowUpsell(notificationsUpsellConstants.ModalKey.PushUpsellChat):andThen(function(p1)
-				-- upvalues: IXPService (copy), appUserLayers (copy), default (copy), pushUpsellEventConfig (copy), modalEventConstants (copy), setupPushNotificationsUpsell (copy), notificationsUpsellConstants (copy)
-				if p1 then
-					IXPService:LogUserLayerExposure(appUserLayers.SocialAppChat)
-					default:logRobloxTelemetryEvent(pushUpsellEventConfig, {}, {
-						[modalEventConstants.ActionType] = modalEventConstants.ShouldRequest,
-						[modalEventConstants.EntryPoint] = "ChatConversation"
-					}, modalEventConstants.ModalContextPushEduUpsell)
-					setupPushNotificationsUpsell.OpenModal(notificationsUpsellConstants.ModalKey.PushUpsellChat, true, "ChatConversation")
+		end
+		if UseUserExperimentResult.pushUpsellChatVariant == 2 then
+			if not UseStateResult then return end
+			UseStateResult2(false)
+			SetupPushNotificationsUpsell.ShouldShowUpsell(NotificationsUpsellConstants.ModalKey.PushUpsellChat):andThen(function(Result) --[[ Line: 79 ]]
+				-- upvalues: IXPService (upval), AppUserLayers (upval), Default (upval), PushUpsellEventConfig (upval), ModalEventConstants (upval), SetupPushNotificationsUpsell (upval), NotificationsUpsellConstants (upval)
+				if Result then
+					IXPService:LogUserLayerExposure(AppUserLayers.SocialAppChat)
+					Default:logRobloxTelemetryEvent(PushUpsellEventConfig, {}, {
+						[ModalEventConstants.ActionType] = ModalEventConstants.ShouldRequest,
+						[ModalEventConstants.EntryPoint] = "ChatConversation"
+					}, ModalEventConstants.ModalContextPushEduUpsell)
+					SetupPushNotificationsUpsell.OpenModal(NotificationsUpsellConstants.ModalKey.PushUpsellChat, true, "ChatConversation")
 					
 					return
 				end
 			end)
 		end
-	end, { var3, var1 })
+	end, { UseChatIsVisibleModuleResult, UseNavigationFocusResult })
 end

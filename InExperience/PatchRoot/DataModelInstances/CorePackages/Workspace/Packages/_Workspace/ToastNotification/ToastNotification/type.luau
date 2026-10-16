@@ -1,5 +1,5 @@
-﻿local parent = script.Parent.Parent
-local _ = require(parent.ToastNotificationsProtocol)
+﻿local Parent = script.Parent.Parent
+local _ = require(Parent.ToastNotificationsProtocol)
 
 return {
 	ChannelListEnum = {
@@ -57,7 +57,7 @@ return {
 		MetaAction = "metaAction"
 	},
 	MetaActionIcons = {
-		snooze = require(parent.UIBlox).App.ImageSet.Images["icons/common/snoozeNotificationsOff"]
+		snooze = require(Parent.UIBlox).App.ImageSet.Images["icons/common/snoozeNotificationsOff"]
 	},
 	NotificationTypeEnum = {
 		CallReceived = "CallReceived",

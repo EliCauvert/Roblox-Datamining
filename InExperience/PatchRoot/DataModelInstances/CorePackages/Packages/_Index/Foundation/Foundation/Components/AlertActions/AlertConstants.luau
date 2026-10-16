@@ -1,14 +1,14 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local icon = require(foundation.Parent.BuilderIcons).Icon
-local alertSeverityModule = require(foundation.Enums.AlertSeverity)
-local _ = require(foundation.Enums.ButtonVariant)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Icon = require(Foundation.Parent.BuilderIcons).Icon
+local AlertSeverityModule = require(Foundation.Enums.AlertSeverity)
+local _ = require(Foundation.Enums.ButtonVariant)
 
 return {
 	MAX_ACTION_COUNT = 3,
 	SEVERITY_TO_ICON = {
-		[alertSeverityModule.Info] = icon.CircleI,
-		[alertSeverityModule.Warning] = icon.TriangleExclamation,
-		[alertSeverityModule.Success] = icon.CircleCheck,
-		[alertSeverityModule.Error] = icon.CircleX
+		[AlertSeverityModule.Info] = Icon.CircleI,
+		[AlertSeverityModule.Warning] = Icon.TriangleExclamation,
+		[AlertSeverityModule.Success] = Icon.CircleCheck,
+		[AlertSeverityModule.Error] = Icon.CircleX
 	}
 }

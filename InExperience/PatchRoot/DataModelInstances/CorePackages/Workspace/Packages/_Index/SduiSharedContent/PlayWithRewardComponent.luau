@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.PlayWithRewardComponent.PlayWithRewardComponent)
+﻿return (require(script.Parent.Parent.Parent._Index.PlayWithRewardComponent.PlayWithRewardComponent))

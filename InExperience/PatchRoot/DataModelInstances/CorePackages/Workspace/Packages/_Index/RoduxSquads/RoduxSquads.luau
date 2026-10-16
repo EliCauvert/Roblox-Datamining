@@ -1,43 +1,41 @@
-﻿local reducersModule = require(script.Reducers)
-local actionsModule = require(script.Actions)
-local modelsModule = require(script.Models)
-local enumsModule = require(script.Enums)
-local hooksModule = require(script.Hooks)
-local loggerModule = require(script.Logger)
-local roduxSquadsTypesModule = require(script.RoduxSquadsTypes)
-local parent = script.Parent
-local roduxModule = require(parent.Rodux)
-local cryoModule = require(parent.Cryo)
-local roduxNetworkingModule = require(parent.RoduxNetworking)
-local networkingSquadsModule = require(parent.NetworkingSquads)
-local fFlagUseSignalsForSquadExperienceInviteStatus = require(parent.SharedFlags).FFlagUseSignalsForSquadExperienceInviteStatus
+﻿local ReducersModule = require(script.Reducers)
+local ActionsModule = require(script.Actions)
+local ModelsModule = require(script.Models)
+local EnumsModule = require(script.Enums)
+local Parent = script.Parent
+local RoduxModule = require(Parent.Rodux)
+local CryoModule = require(Parent.Cryo)
+local RoduxNetworkingModule = require(Parent.RoduxNetworking)
+local NetworkingSquadsModule = require(Parent.NetworkingSquads)
+local FFlagUseSignalsForSquadExperienceInviteStatus = require(Parent.SharedFlags).FFlagUseSignalsForSquadExperienceInviteStatus
+local FFlagUseSignalsForSquadExperienceInvite = require(Parent.SharedFlags).FFlagUseSignalsForSquadExperienceInvite
 
 return {
 	["jest.config"] = script["jest.config"],
-	config = function(p1)
-		-- upvalues: cryoModule (ref), networkingSquadsModule (ref), roduxNetworkingModule (ref), reducersModule (ref), roduxModule (ref), fFlagUseSignalsForSquadExperienceInviteStatus (ref), actionsModule (ref), modelsModule (ref), enumsModule (ref)
-		p1 = cryoModule.Dictionary.join(p1, {
-			NetworkingSquads = networkingSquadsModule.config({ roduxNetworking = roduxNetworkingModule.mock() })
+	config = function(p1) --[[ Line: 27 ]]
+		-- upvalues: CryoModule (copy), NetworkingSquadsModule (copy), RoduxNetworkingModule (copy), ReducersModule (copy), RoduxModule (copy), FFlagUseSignalsForSquadExperienceInvite (copy), FFlagUseSignalsForSquadExperienceInviteStatus (copy), ActionsModule (copy), ModelsModule (copy), EnumsModule (copy)
+		local JoinResult = CryoModule.Dictionary.join(p1, {
+			NetworkingSquads = NetworkingSquadsModule.config({ roduxNetworking = RoduxNetworkingModule.mock() })
 		})
-		local var1, var2, var3 = reducersModule.currentSquad(p1)
+		local CurrentSquadResult, CurrentSquadResult2, CurrentSquadResult3 = ReducersModule.currentSquad(JoinResult)
 		
 		return {
-			installReducer = function()
-				-- upvalues: roduxModule (copy), var1 (ref), var2 (ref), reducersModule (copy), p1 (write), fFlagUseSignalsForSquadExperienceInviteStatus (copy)
-				return roduxModule.combineReducers({
-					currentSquad = var1,
-					currentSquadPersist = var2,
-					currentExperienceInvite = reducersModule.currentExperienceInvite(p1),
-					currentExperienceInviteStatus = if fFlagUseSignalsForSquadExperienceInviteStatus then nil else reducersModule.currentExperienceInviteStatus()
+			installReducer = function() --[[ Line: 36 ]]
+				-- upvalues: RoduxModule (upval), CurrentSquadResult (copy), CurrentSquadResult2 (copy), FFlagUseSignalsForSquadExperienceInvite (upval), ReducersModule (upval), JoinResult (ref), FFlagUseSignalsForSquadExperienceInviteStatus (upval)
+				return RoduxModule.combineReducers({
+					currentSquad = CurrentSquadResult,
+					currentSquadPersist = CurrentSquadResult2,
+					currentExperienceInvite = if FFlagUseSignalsForSquadExperienceInvite then nil else ReducersModule.currentExperienceInvite(JoinResult),
+					currentExperienceInviteStatus = if FFlagUseSignalsForSquadExperienceInviteStatus then nil else ReducersModule.currentExperienceInviteStatus()
 				})
 			end,
-			PersistManagers = { currentSquadPersistManager = var3 },
-			Actions = actionsModule,
-			Models = modelsModule,
-			Enums = enumsModule
+			PersistManagers = { currentSquadPersistManager = CurrentSquadResult3 },
+			Actions = ActionsModule,
+			Models = ModelsModule,
+			Enums = EnumsModule
 		}
 	end,
-	Hooks = hooksModule,
-	Logger = loggerModule,
-	RoduxSquadsTypes = roduxSquadsTypesModule
+	Hooks = require(script.Hooks),
+	Logger = require(script.Logger),
+	RoduxSquadsTypes = require(script.RoduxSquadsTypes)
 }

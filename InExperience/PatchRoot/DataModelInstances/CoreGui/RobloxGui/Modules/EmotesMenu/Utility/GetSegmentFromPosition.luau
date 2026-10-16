@@ -1,21 +1,22 @@
-﻿local constantsModule = require(script.Parent.Parent.Constants)
+﻿local ConstantsModule = require(script.Parent.Parent.Constants)
 
-return function(p1)
-	-- upvalues: constantsModule (ref)
-	local degrees = math.deg(math.atan2(p1.X, p1.Y))
+return function(Vector): number --[[ Line: 6 | Named "GetSegmentIndexFromPosition" ]]
+	-- upvalues: ConstantsModule (copy)
+	local Degrees = math.deg((math.atan2(Vector.X, Vector.Y)))
 	
-	if degrees < 0 then
-		degrees += 360
+	if Degrees < 0 then
+		Degrees += 360
 	end
-	local var1 = 360 / constantsModule.EmotesPerPage
-	local ceiled = math.ceil(math.ceil(math.fmod(degrees + math.ceil(var1 / 2), 360) / var1) + (constantsModule.SegmentsStartRotation + 90) / var1)
+	local v1 = 360 / ConstantsModule.EmotesPerPage
+	local Ceiled = math.ceil(math.ceil(math.fmod(Degrees + math.ceil(v1 / 2), 360) / v1) + (ConstantsModule.SegmentsStartRotation + 90) / v1)
 	
-	if constantsModule.EmotesPerPage < ceiled then
-		ceiled -= constantsModule.EmotesPerPage
+	if ConstantsModule.EmotesPerPage < Ceiled then
+		Ceiled -= ConstantsModule.EmotesPerPage
 		
-		return ceiled
-	elseif ceiled < 1 then
-		ceiled += constantsModule.EmotesPerPage
+		return Ceiled
 	end
-	return ceiled
+	if Ceiled < 1 then
+		Ceiled += ConstantsModule.EmotesPerPage
+	end
+	return Ceiled
 end

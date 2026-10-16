@@ -1,18 +1,18 @@
-﻿local httpService = game:GetService("HttpService")
+﻿local HttpService = game:GetService("HttpService")
 
 return {
-	stringify = function(p1, ...)
-		-- upvalues: httpService (ref)
+	stringify = function(Input, ...) --[[ Line: 20 ]]
+		-- upvalues: HttpService (copy)
 		if select("#", ...) > 0 then
 			warn("JSON.stringify doesn't currently support more than 1 argument. All additional arguments will be ignored.")
 		end
-		return httpService:JSONEncode(p1)
+		return HttpService:JSONEncode(Input)
 	end,
-	parse = function(p1, ...)
-		-- upvalues: httpService (ref)
+	parse = function(Input, ...) --[[ Line: 28 ]]
+		-- upvalues: HttpService (copy)
 		if select("#", ...) > 0 then
 			warn("JSON.parse doesn't currently support more than 1 argument. All additional arguments will be ignored.")
 		end
-		return httpService:JSONDecode(p1)
+		return HttpService:JSONDecode(Input)
 	end
 }

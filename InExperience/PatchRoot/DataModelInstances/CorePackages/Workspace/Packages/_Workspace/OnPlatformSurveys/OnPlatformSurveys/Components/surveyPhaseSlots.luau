@@ -1,133 +1,142 @@
-﻿local onPlatformSurveys = script:FindFirstAncestor("OnPlatformSurveys")
-local parent = onPlatformSurveys.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local radius = foundationModule.Enums.Radius
-local skeleton = foundationModule.Skeleton
-local text = foundationModule.Text
-local view = foundationModule.View
-local fFlagInlineSurveyEnhancements = require(parent.SharedFlags).FFlagInlineSurveyEnhancements
-local inlineSurveyHelpersModule = require(onPlatformSurveys.Utils.inlineSurveyHelpers)
-local phaseModule = require(onPlatformSurveys.Enums.Phase)
-local questionRenderersModule = require(onPlatformSurveys.Components.Questions.questionRenderers)
-local _ = require(onPlatformSurveys.Hooks.inlineSurveyReducer)
-local _ = require(onPlatformSurveys.Types.InlineSurveyTypes)
+﻿local OnPlatformSurveys = script:FindFirstAncestor("OnPlatformSurveys")
+local Parent = OnPlatformSurveys.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local Radius = FoundationModule.Enums.Radius
+local Skeleton = FoundationModule.Skeleton
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local FFlagInlineSurveyEnhancements = require(Parent.SharedFlags).FFlagInlineSurveyEnhancements
+local InlineSurveyHelpersModule = require(OnPlatformSurveys.Utils.inlineSurveyHelpers)
+local PhaseModule = require(OnPlatformSurveys.Enums.Phase)
+local QuestionRenderersModule = require(OnPlatformSurveys.Components.Questions.questionRenderers)
+local _ = require(OnPlatformSurveys.Hooks.inlineSurveyReducer)
+local _ = require(OnPlatformSurveys.Types.InlineSurveyTypes)
 
-local function LoadingBody(p1)
-	-- upvalues: reactModule (ref), view (ref), skeleton (ref), radius (ref)
-	local size600 = p1.tokens.Size.Size_600
+local function LoadingBody(p1) --[[ Line: 60 ]]
+	-- upvalues: ReactModule (copy), View (copy), Skeleton (copy), Radius (copy)
+	local Size600 = p1.tokens.Size.Size_600
 	
-	return reactModule.createElement(view, { tag = "col gap-medium size-full-0 auto-y" }, {
-		Line1 = reactModule.createElement(skeleton, {
+	return ReactModule.createElement(View, { tag = "col gap-medium size-full-0 auto-y" }, {
+		Line1 = ReactModule.createElement(Skeleton, {
 			LayoutOrder = 1,
-			radius = radius.Medium,
-			Size = UDim2.new(1, 0, 0, size600)
+			radius = Radius.Medium,
+			Size = UDim2.new(1, 0, 0, Size600)
 		}),
-		Line2 = reactModule.createElement(skeleton, {
+		Line2 = ReactModule.createElement(Skeleton, {
 			LayoutOrder = 2,
-			radius = radius.Medium,
-			Size = UDim2.new(1, 0, 0, size600)
+			radius = Radius.Medium,
+			Size = UDim2.new(1, 0, 0, Size600)
 		}),
-		Line3 = reactModule.createElement(skeleton, {
+		Line3 = ReactModule.createElement(Skeleton, {
 			LayoutOrder = 3,
-			radius = radius.Medium,
-			Size = UDim2.new(0.6, 0, 0, size600)
+			radius = Radius.Medium,
+			Size = UDim2.new(0.6, 0, 0, Size600)
 		})
 	})
 end
 
-local function QuestionBody(p1)
-	-- upvalues: questionRenderersModule (ref), phaseModule (ref), reactModule (ref), view (ref), text (ref)
-	local index = p1.state.questions[p1.state.index]
+local function QuestionBody(p1) --[[ Line: 83 ]]
+	-- upvalues: QuestionRenderersModule (copy), PhaseModule (copy), ReactModule (copy), View (copy), Text (copy)
+	local Question = p1.state.questions[p1.state.index]
 	
-	return reactModule.createElement(view, { tag = "col gap-xlarge size-full-0 auto-y" }, {
-		Title = reactModule.createElement(text, {
+	return ReactModule.createElement(View, { tag = "col gap-xlarge size-full-0 auto-y" }, {
+		Title = ReactModule.createElement(Text, {
 			tag = "size-full-0 auto-y text-body-large text-wrap text-align-x-left content-emphasis",
 			LayoutOrder = 1,
-			Text = index.title
+			Text = Question.title
 		}),
-		Input = questionRenderersModule.renderQuestion({
+		Input = QuestionRenderersModule.renderQuestion({
 			layoutOrder = 2,
-			question = index,
+			question = Question,
 			answer = p1.state.answer,
 			onAnswerChanged = p1.onAnswerChanged,
-			isDisabled = p1.state.phase == phaseModule.Submitting
+			isDisabled = p1.state.phase == PhaseModule.Submitting
 		})
 	})
 end
 
 return {
-	getSlots = function(p1, p2, p3, p4)
-		-- upvalues: phaseModule (ref), reactModule (ref), text (ref), buttonVariant (ref), LoadingBody (ref), QuestionBody (ref), fFlagInlineSurveyEnhancements (ref), inlineSurveyHelpersModule (ref)
-		if p1.phase == phaseModule.Invite then
+	getSlots = function(State, p1, Tokens, p2) --[[ Line: 105 ]]
+		-- upvalues: PhaseModule (copy), ReactModule (copy), Text (copy), ButtonVariant (copy), LoadingBody (copy), QuestionBody (copy), FFlagInlineSurveyEnhancements (copy), InlineSurveyHelpersModule (copy)
+		if State.phase == PhaseModule.Invite then
 			return {
-				headerTitle = p2.surveyTitle,
-				body = reactModule.createElement(text, {
+				headerTitle = p1.surveyTitle,
+				body = ReactModule.createElement(Text, {
 					tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-default",
-					Text = p2.inviteBody
+					Text = p1.inviteBody
 				}),
 				primaryAction = {
-					text = p2.inviteAccept,
-					variant = buttonVariant.Emphasis,
-					onActivated = p4.onAccept
+					text = p1.inviteAccept,
+					variant = ButtonVariant.Emphasis,
+					onActivated = p2.onAccept
 				}
 			}
-		elseif p1.phase == phaseModule.Loading then
+		elseif State.phase == PhaseModule.Loading then
 			return {
 				headerTitle = nil,
 				primaryAction = nil,
-				body = reactModule.createElement(LoadingBody, { tokens = p3 })
+				body = ReactModule.createElement(LoadingBody, { tokens = Tokens })
 			}
-		elseif p1.phase == phaseModule.Error then
+		elseif State.phase == PhaseModule.Error then
 			return {
 				headerTitle = nil,
-				body = reactModule.createElement(text, {
+				body = ReactModule.createElement(Text, {
 					tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-center content-default",
-					Text = p2.errorText
+					Text = p1.errorText
 				}),
 				primaryAction = {
-					text = p2.retry,
-					variant = buttonVariant.Standard,
-					onActivated = p4.onRetry
+					text = p1.retry,
+					variant = ButtonVariant.Standard,
+					onActivated = p2.onRetry
 				}
 			}
-		elseif p1.phase == phaseModule.Completed then
+		elseif State.phase == PhaseModule.Completed then
 			return {
 				body = nil,
-				headerTitle = p2.completedTitle,
+				headerTitle = p1.completedTitle,
 				primaryAction = {
-					text = p2.done,
-					variant = buttonVariant.Emphasis,
-					onActivated = p4.onDismiss
+					text = p1.done,
+					variant = ButtonVariant.Emphasis,
+					onActivated = p2.onDismiss
 				}
 			}
-		elseif p1.phase ~= phaseModule.Started and p1.phase ~= phaseModule.Submitting or p1.questions[p1.index] == nil then
+		elseif State.phase ~= PhaseModule.Started and State.phase ~= PhaseModule.Submitting or State.questions[State.index] == nil then
 			return { headerTitle = nil, body = nil, primaryAction = nil }
+		else
+			local IsPhaseMatch = State.phase == PhaseModule.Submitting
+			local Element = ReactModule.createElement(QuestionBody, { state = State, onAnswerChanged = p2.onAnswerChanged })
+			
+			if FFlagInlineSurveyEnhancements then
+				local IsLastQuestion = InlineSurveyHelpersModule.isLastQuestion(State.questions, State.index, State.answer)
+				
+				return {
+					headerTitle = p1.surveyTitle,
+					body = Element,
+					primaryAction = {
+						text = if IsLastQuestion then p1.send else p1.next,
+						variant = ButtonVariant.Emphasis,
+						onActivated = p2.onSubmit,
+						isLoading = IsPhaseMatch,
+						isDisabled = IsPhaseMatch or not InlineSurveyHelpersModule.canAdvance(State.questions, State.index, State.answersByQuestionId, State.answer)
+					}
+				}
+			else
+				local MergeCurrentAnswerIntoBatchResult = InlineSurveyHelpersModule.mergeCurrentAnswerIntoBatch(State.answersByQuestionId, State.questions[State.index], State.answer)
+				
+				return {
+					headerTitle = p1.surveyTitle,
+					body = Element,
+					primaryAction = {
+						text = p1.send,
+						variant = ButtonVariant.Emphasis,
+						onActivated = p2.onSubmit,
+						isLoading = IsPhaseMatch,
+						isDisabled = IsPhaseMatch or not InlineSurveyHelpersModule.canSubmitAll(State.questions, MergeCurrentAnswerIntoBatchResult)
+					}
+				}
+			end
 		end
-		local var1 = p1.phase == phaseModule.Submitting
-		local var2 = reactModule.createElement(QuestionBody, { state = p1, onAnswerChanged = p4.onAnswerChanged })
-		
-		return if fFlagInlineSurveyEnhancements then {
-			headerTitle = p2.surveyTitle,
-			body = var2,
-			primaryAction = {
-				text = if inlineSurveyHelpersModule.isLastQuestion(p1.questions, p1.index, p1.answer) then p2.send else p2.next,
-				variant = buttonVariant.Emphasis,
-				onActivated = p4.onSubmit,
-				isLoading = var1,
-				isDisabled = var1 or not inlineSurveyHelpersModule.canAdvance(p1.questions, p1.index, p1.answersByQuestionId, p1.answer)
-			}
-		} else {
-			headerTitle = p2.surveyTitle,
-			body = var2,
-			primaryAction = {
-				text = p2.send,
-				variant = buttonVariant.Emphasis,
-				onActivated = p4.onSubmit,
-				isLoading = var1,
-				isDisabled = var1 or not inlineSurveyHelpersModule.canSubmitAll(p1.questions, inlineSurveyHelpersModule.mergeCurrentAnswerIntoBatch(p1.answersByQuestionId, p1.questions[p1.index], p1.answer))
-			}
-		}
 	end
 }

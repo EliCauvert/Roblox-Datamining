@@ -1,10 +1,11 @@
-﻿return function(p1)
-	local assetId = p1.detailsInformation.assetId
+﻿return function(p1): boolean? --[[ Line: 4 ]]
+	local AssetId = p1.detailsInformation.assetId
 	
-	if assetId == nil then
+	if AssetId == nil then
 		return nil
+	else
+		local Asset = p1.assets[AssetId]
+		
+		return Asset and Asset.parentBundleId ~= nil
 	end
-	local var1 = p1.assets[assetId]
-	
-	return var1 and var1.parentBundleId ~= nil
 end

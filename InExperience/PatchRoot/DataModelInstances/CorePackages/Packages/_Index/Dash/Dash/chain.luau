@@ -1,18 +1,18 @@
-﻿return function(...)
+﻿return function(...) --[[ Line: 14 | Named "chain" ]]
 	local list = { ... }
-	local listCount = #list
-	local var1 = 1
+	local CountList = #list
+	local Count = 1
 	
-	return function()
-		-- upvalues: var1 (write), listCount (ref), list (ref)
-		while var1 <= listCount do
-			local list_1 = { list[var1]() }
+	return function() --[[ Line: 18 ]]
+		-- upvalues: Count (ref), CountList (copy), list (copy)
+		local list1 = nil
+		while Count <= CountList do
+			list1 = { list[Count]() }
 			
-			if list_1[1] == nil then
-				var1 += 1
-				continue
+			if list1[1] ~= nil then
+				return table.unpack(list1)
 			end
-			return table.unpack(list_1)
+			Count += 1
 		end
 		return nil
 	end

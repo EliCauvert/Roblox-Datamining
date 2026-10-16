@@ -1,1 +1,1 @@
-﻿return require(script:FindFirstAncestor("BuildExperience").Parent.Signals).createComputed(require(script.createPlayButtonStore))
+﻿return require(script:FindFirstAncestor("BuildExperience").Parent.Signals).createComputed((require(script.createPlayButtonStore)))

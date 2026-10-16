@@ -1,44 +1,59 @@
-﻿local home = script:FindFirstAncestor("Home")
-local parent = home.Parent
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local sduiSharedUtilitiesModule = require(parent.SduiSharedUtilities)
-local sduiRequestConcurrencyPolicy = sduiSharedUtilitiesModule.SduiRequestConcurrencyPolicy
-local getSduiApiStore = sduiSharedUtilitiesModule.getSduiApiStore
-local homeConstantsModule = require(home.HomeConstants)
-local t = {}
-local var1 = 0
-local t_1 = {
-	isCurrent = function(p1)
-		-- upvalues: getSduiApiStore (ref), t (ref), homeConstantsModule (ref)
-		local var2 = getSduiApiStore()
-		local var3 = false
+﻿local Home = script:FindFirstAncestor("Home")
+local Parent = Home.Parent
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local SduiSharedUtilitiesModule = require(Parent.SduiSharedUtilities)
+local SduiRequestConcurrencyPolicy = SduiSharedUtilitiesModule.SduiRequestConcurrencyPolicy
+local GetSduiApiStoreFunction = SduiSharedUtilitiesModule.getSduiApiStore
+local HomeConstantsModule = require(Home.HomeConstants)
+local RequestIds = {}
+local RequestId = 0
+
+local function _() --[[ Line: 30 | Named "getMountedInputData" ]]
+	-- upvalues: GetSduiApiStoreFunction (copy), HomeConstantsModule (copy)
+	return GetSduiApiStoreFunction().getInputData(HomeConstantsModule.ConfigKey, HomeConstantsModule.ContentIdentifier)
+end
+
+local _ = function(p1): boolean --[[ Line: 34 | Named "isTargetMounted" ]]
+	-- upvalues: GetSduiApiStoreFunction (copy), HomeConstantsModule (copy)
+	local InputData = GetSduiApiStoreFunction().getInputData(HomeConstantsModule.ConfigKey, HomeConstantsModule.ContentIdentifier)
+	
+	return typeof(InputData) == "table" and typeof(InputData.entry_map) == "table" and InputData.entry_map[p1] ~= nil
+end
+
+local HomePageFocusedFetchUtils = {
+	isCurrent = function(p1): boolean --[[ Line: 41 ]]
+		-- upvalues: GetSduiApiStoreFunction (copy), RequestIds (copy), HomeConstantsModule (copy)
+		local SduiApiStore = GetSduiApiStoreFunction()
+		local HasEntry = false
 		
-		if t[p1.options.feedItemKey] == p1.requestId then
-			var3 = false
+		if RequestIds[p1.options.feedItemKey] == p1.requestId then
+			HasEntry = false
 			
-			if var2.getDataUpdatedTimestamp(homeConstantsModule.ConfigKey, false, homeConstantsModule.FeedEntryCacheKey) == p1.capturedTimestamp then
-				local inputData = getSduiApiStore().getInputData(homeConstantsModule.ConfigKey, homeConstantsModule.ContentIdentifier)
-				var3 = typeof(inputData) == "table" and (typeof(inputData.entry_map) == "table" and inputData.entry_map[p1.options.feedItemKey] ~= nil)
+			if SduiApiStore.getDataUpdatedTimestamp(HomeConstantsModule.ConfigKey, false, HomeConstantsModule.FeedEntryCacheKey) == p1.capturedTimestamp then
+				local FeedItemKey = p1.options.feedItemKey
+				local InputData = GetSduiApiStoreFunction().getInputData(HomeConstantsModule.ConfigKey, HomeConstantsModule.ContentIdentifier)
+				HasEntry = typeof(InputData) == "table" and typeof(InputData.entry_map) == "table" and InputData.entry_map[FeedItemKey] ~= nil
 			end
 		end
-		return var3
+		return HasEntry
 	end,
-	register = function(p1)
-		-- upvalues: getSduiApiStore (ref), homeConstantsModule (ref), var1 (write), t (ref)
-		local dataUpdatedTimestamp = getSduiApiStore().getDataUpdatedTimestamp(homeConstantsModule.ConfigKey, false, homeConstantsModule.FeedEntryCacheKey)
+	register = function(Options) --[[ Line: 48 ]]
+		-- upvalues: GetSduiApiStoreFunction (copy), HomeConstantsModule (copy), RequestId (ref), RequestIds (copy)
+		local DataUpdatedTimestamp = GetSduiApiStoreFunction().getDataUpdatedTimestamp(HomeConstantsModule.ConfigKey, false, HomeConstantsModule.FeedEntryCacheKey)
 		
-		if dataUpdatedTimestamp ~= nil then
-			local inputData = getSduiApiStore().getInputData(homeConstantsModule.ConfigKey, homeConstantsModule.ContentIdentifier)
+		if DataUpdatedTimestamp ~= nil then
+			local FeedItemKey = Options.feedItemKey
+			local InputData = GetSduiApiStoreFunction().getInputData(HomeConstantsModule.ConfigKey, HomeConstantsModule.ContentIdentifier)
 			
-			if typeof(inputData) == "table" and (typeof(inputData.entry_map) == "table" and inputData.entry_map[p1.feedItemKey] ~= nil) then
-				var1 += 1
-				t[p1.feedItemKey] = var1
+			if typeof(InputData) == "table" and (typeof(InputData.entry_map) == "table" and InputData.entry_map[FeedItemKey] ~= nil) then
+				RequestId += 1
+				RequestIds[Options.feedItemKey] = RequestId
 				
 				return {
 					foundTarget = false,
-					options = p1,
-					requestId = var1,
-					capturedTimestamp = dataUpdatedTimestamp
+					options = Options,
+					requestId = RequestId,
+					capturedTimestamp = DataUpdatedTimestamp
 				}
 			end
 		end
@@ -46,80 +61,69 @@ local t_1 = {
 	end
 }
 
-local function _()
-	-- upvalues: getSduiApiStore (ref), homeConstantsModule (ref)
-	return getSduiApiStore().getInputData(homeConstantsModule.ConfigKey, homeConstantsModule.ContentIdentifier)
-end
-
-local _ = function(p1)
-	-- upvalues: getSduiApiStore (ref), homeConstantsModule (ref)
-	local inputData = getSduiApiStore().getInputData(homeConstantsModule.ConfigKey, homeConstantsModule.ContentIdentifier)
+function HomePageFocusedFetchUtils.applyToRequestConfig(p1, p2) --[[ Line: 65 ]]
+	-- upvalues: HomeConstantsModule (copy), SduiRequestConcurrencyPolicy (copy), HomePageFocusedFetchUtils (copy)
+	p1.concurrencyKey = `{HomeConstantsModule.ConfigKey}_{p2.options.feedItemKey}`
+	p1.concurrencyPolicy = SduiRequestConcurrencyPolicy.LatestWins
 	
-	return typeof(inputData) == "table" and (typeof(inputData.entry_map) == "table" and inputData.entry_map[p1] ~= nil)
-end
-
-function t_1.applyToRequestConfig(p1, p2)
-	-- upvalues: homeConstantsModule (ref), sduiRequestConcurrencyPolicy (ref), t_1 (ref)
-	p1.concurrencyKey = `{homeConstantsModule.ConfigKey}_{p2.options.feedItemKey}`
-	p1.concurrencyPolicy = sduiRequestConcurrencyPolicy.LatestWins
-	
-	function p3.isResponseCurrent()
-		-- upvalues: t_1 (copy), p2 (ref)
-		return t_1.isCurrent(p2)
+	function p1.isResponseCurrent() --[[ Line: 68 ]]
+		-- upvalues: HomePageFocusedFetchUtils (upval), p2 (copy)
+		return HomePageFocusedFetchUtils.isCurrent(p2)
 	end
 	
 	p1.enableInputDataMerge = true
 	p1.cacheSingleEntryWithIdentifier = true
 	
-	function p3.mergeStrategy(p3)
-		-- upvalues: p2 (ref)
-		if #p3 == 1 then
-			return if p3[1] == "entry_map" then nil elseif p3[1] == "content_pools" then "merge" else "preserve"
-		elseif #p3 ~= 2 or p3[1] ~= "entry_map" then
+	function p1.mergeStrategy(Entry) --[[ Line: 73 ]]
+		-- upvalues: p2 (copy)
+		if #Entry == 1 then
+			return if Entry[1] == "entry_map" then nil elseif Entry[1] == "content_pools" then "merge" else "preserve"
+		elseif #Entry ~= 2 or Entry[1] ~= "entry_map" then
 			return nil
-		elseif p3[2] == p2.options.feedItemKey then
+		elseif Entry[2] == p2.options.feedItemKey then
 			p2.foundTarget = true
 			
 			return "replace"
+		else
+			return "preserve"
 		end
-		return "preserve"
 	end
 end
 
-local _ = function(p1, p2, p3)
-	-- upvalues: homeConstantsModule (ref)
+local _ = function(p1, p2, p3) --[[ Line: 91 | Named "reportError" ]]
+	-- upvalues: HomeConstantsModule (copy)
 	p1.options.reportError(p2, {
-		name = homeConstantsModule.ApiName,
+		name = HomeConstantsModule.ApiName,
 		message = `{p3}, topicIds: {p1.options.topicId}`
 	})
 end
 
-function t_1.resolve(p1, p2)
-	-- upvalues: t_1 (ref), sduiCoreSystemModule (ref), homeConstantsModule (ref)
-	return p1:andThen(function()
-		-- upvalues: t_1 (copy), p2 (ref), sduiCoreSystemModule (copy), homeConstantsModule (copy)
-		if not t_1.isCurrent(p2) then
+function HomePageFocusedFetchUtils.resolve(Promise, p1) --[[ Line: 98 ]]
+	-- upvalues: HomePageFocusedFetchUtils (copy), SduiCoreSystemModule (copy), HomeConstantsModule (copy)
+	return Promise:andThen(function(): boolean --[[ Line: 99 ]]
+		-- upvalues: HomePageFocusedFetchUtils (upval), p1 (copy), SduiCoreSystemModule (upval), HomeConstantsModule (upval)
+		if not HomePageFocusedFetchUtils.isCurrent(p1) then
 			return false
-		elseif p2.foundTarget then
+		elseif p1.foundTarget then
 			return true
+		else
+			p1.options.reportError(SduiCoreSystemModule.SduiErrors.SduiErrorType.InvalidFeedInResponse, {
+				name = HomeConstantsModule.ApiName,
+				message = `Focused response omitted target, topicIds: {p1.options.topicId}`
+			})
+			
+			return false
 		end
-		p2.options.reportError(sduiCoreSystemModule.SduiErrors.SduiErrorType.InvalidFeedInResponse, {
-			name = homeConstantsModule.ApiName,
-			message = `Focused response omitted target, topicIds: {p2.options.topicId}`
-		})
-		
-		return false
-	end, function(p3)
-		-- upvalues: t_1 (copy), p2 (ref), sduiCoreSystemModule (copy), homeConstantsModule (copy)
-		if t_1.isCurrent(p2) then
-			local var2 = p2
-			var2.options.reportError(sduiCoreSystemModule.SduiErrors.SduiErrorType.FailedToFetchPage, {
-				name = homeConstantsModule.ApiName,
-				message = `{sduiCoreSystemModule.SduiParseHelpers.stringifyValue(p3)}, topicIds: {var2.options.topicId}`
+	end, function(p2): boolean --[[ Line: 112 ]]
+		-- upvalues: HomePageFocusedFetchUtils (upval), p1 (copy), SduiCoreSystemModule (upval), HomeConstantsModule (upval)
+		if HomePageFocusedFetchUtils.isCurrent(p1) then
+			p1.options.reportError(SduiCoreSystemModule.SduiErrors.SduiErrorType.FailedToFetchPage, {
+				name = HomeConstantsModule.ApiName,
+				message = `{SduiCoreSystemModule.SduiParseHelpers.stringifyValue(p2)}, topicIds: {p1.options.topicId}`
 			})
 		end
 		return false
 	end)
 end
 
-return t_1
+return HomePageFocusedFetchUtils

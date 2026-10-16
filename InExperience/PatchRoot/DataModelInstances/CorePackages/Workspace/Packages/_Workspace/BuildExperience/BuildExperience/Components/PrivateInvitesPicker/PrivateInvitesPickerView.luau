@@ -1,54 +1,53 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local userPickerListModule = require(buildExperience.Components.UserPicker.UserPickerList)
-local privateInviteSendFailureDialogModule = require(script.Parent.PrivateInviteSendFailureDialog)
-local privateInviteAddErrorDialogModule = require(script.Parent.PrivateInviteAddErrorDialog)
-local privateInviteAddRejectedDialogModule = require(script.Parent.PrivateInviteAddRejectedDialog)
-local var1 = if require(buildExperience.Flags.FFlagBuildExperienceUseFoundationSheet) then foundationModule.Sheet else require(buildExperience.FoundationFork.Sheet)
-local button = foundationModule.Button
-local iconButton = foundationModule.IconButton
-local searchInput = foundationModule.SearchInput
-local view = foundationModule.View
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local iconName = foundationModule.Enums.IconName
-local inputSize = foundationModule.Enums.InputSize
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local UserPickerListModule = require(BuildExperience.Components.UserPicker.UserPickerList)
+local PrivateInviteAddErrorDialogModule = require(script.Parent.PrivateInviteAddErrorDialog)
+local PrivateInviteAddRejectedDialogModule = require(script.Parent.PrivateInviteAddRejectedDialog)
+local Sheet = if require(BuildExperience.Flags.FFlagBuildExperienceUseFoundationSheet) then FoundationModule.Sheet else require(BuildExperience.FoundationFork.Sheet)
+local Button = FoundationModule.Button
+local IconButton = FoundationModule.IconButton
+local SearchInput = FoundationModule.SearchInput
+local View = FoundationModule.View
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local IconName = FoundationModule.Enums.IconName
+local InputSize = FoundationModule.Enums.InputSize
 
-return function(p1)
-	-- upvalues: reactModule (ref), view (ref), button (ref), buttonVariant (ref), inputSize (ref), var1 (ref), iconButton (ref), iconName (ref), searchInput (ref), userPickerListModule (ref), privateInviteSendFailureDialogModule (ref), privateInviteAddErrorDialogModule (ref), privateInviteAddRejectedDialogModule (ref)
-	local testId = p1.testId or "private-invites-picker"
+return function(p1) --[[ Line: 64 | Named "PrivateInvitesPickerView" ]]
+	-- upvalues: ReactModule (copy), View (copy), Button (copy), ButtonVariant (copy), InputSize (copy), Sheet (copy), IconButton (copy), IconName (copy), SearchInput (copy), UserPickerListModule (copy), PrivateInviteAddErrorDialogModule (copy), PrivateInviteAddRejectedDialogModule (copy)
+	local TestId = p1.testId or "private-invites-picker"
 	
-	return reactModule.createElement(reactModule.Fragment, nil, {
-		Sheet = reactModule.createElement(var1.Root, {
+	return ReactModule.createElement(ReactModule.Fragment, nil, {
+		Sheet = ReactModule.createElement(Sheet.Root, {
 			defaultSnapPointIndex = 1,
 			isOpen = p1.isOpen,
 			snapPoints = { 1 },
 			onClose = p1.onClose,
-			testId = testId
+			testId = TestId
 		}, {
-			Header = reactModule.createElement(var1.Header, { hasCloseAffordance = false }, {
-				Back = reactModule.createElement(iconButton, {
+			Header = ReactModule.createElement(Sheet.Header, { hasCloseAffordance = false }, {
+				Back = ReactModule.createElement(IconButton, {
 					LayoutOrder = 1,
 					isCircular = true,
-					icon = iconName.ChevronLargeLeft,
+					icon = IconName.ChevronLargeLeft,
 					onActivated = p1.onRequestClose,
-					size = inputSize.Medium,
-					testId = `{testId}-back`,
-					variant = buttonVariant.Utility
+					size = InputSize.Medium,
+					testId = `{TestId}-back`,
+					variant = ButtonVariant.Utility
 				}),
-				Search = reactModule.createElement(view, { LayoutOrder = 2, tag = "fill auto-y" }, {
-					Input = reactModule.createElement(searchInput, {
+				Search = ReactModule.createElement(View, { LayoutOrder = 2, tag = "fill auto-y" }, {
+					Input = ReactModule.createElement(SearchInput, {
 						text = p1.searchText,
 						onChanged = p1.setSearchText,
 						placeholder = p1.searchPlaceholder,
 						width = UDim.new(1, 0),
-						testId = `{testId}-search`
+						testId = `{TestId}-search`
 					})
 				})
 			}),
-			Content = reactModule.createElement(var1.Content, { scrollingFrameRef = p1.scrollingFrameRef }, {
-				List = reactModule.createElement(userPickerListModule, {
+			Content = ReactModule.createElement(Sheet.Content, { scrollingFrameRef = p1.scrollingFrameRef }, {
+				List = ReactModule.createElement(UserPickerListModule, {
 					userIds = p1.userIds,
 					isLoading = p1.isLoading,
 					searchText = p1.searchText,
@@ -56,35 +55,30 @@ return function(p1)
 					isSelected = p1.isSelected,
 					canSelect = p1.canSelect,
 					toggleSelected = p1.toggleSelected,
-					testId = testId
+					testId = TestId
 				})
 			}),
-			Actions = reactModule.createElement(var1.Actions, nil, {
-				Footer = reactModule.createElement(view, {
+			Actions = ReactModule.createElement(Sheet.Actions, nil, {
+				Footer = ReactModule.createElement(View, {
 					tag = "col gap-small size-full-0 auto-y",
-					testId = `{testId}-submit`
+					testId = `{TestId}-submit`
 				}, {
-					Send = reactModule.createElement(button, {
+					Send = ReactModule.createElement(Button, {
 						LayoutOrder = 1,
 						text = p1.sendButtonText,
 						onActivated = p1.submit,
 						isLoading = p1.isSubmitting,
 						isDisabled = not p1.hasSelection,
-						variant = buttonVariant.Emphasis,
-						size = inputSize.Medium,
+						variant = ButtonVariant.Emphasis,
+						size = InputSize.Medium,
 						width = UDim.new(1, 0),
-						testId = `{testId}-send`
+						testId = `{TestId}-send`
 					})
 				})
 			})
 		}),
-		FailureDialog = if #p1.failedInviteUserIds > 0 then reactModule.createElement(privateInviteSendFailureDialogModule, {
-			failedUserIds = p1.failedInviteUserIds,
-			onShare = p1.onShareFailedInvites,
-			onCancel = p1.onDismissFailedInvites
-		}) else nil,
-		AddErrorDialog = if p1.hasAddError then reactModule.createElement(privateInviteAddErrorDialogModule, { onDismiss = p1.onDismissAddError }) else nil,
-		AddRejectedDialog = if #p1.rejectedInviteUserIds > 0 then reactModule.createElement(privateInviteAddRejectedDialogModule, {
+		AddErrorDialog = if p1.hasAddError then ReactModule.createElement(PrivateInviteAddErrorDialogModule, { onDismiss = p1.onDismissAddError }) else nil,
+		AddRejectedDialog = if #p1.rejectedInviteUserIds > 0 then ReactModule.createElement(PrivateInviteAddRejectedDialogModule, {
 			rejectedUserIds = p1.rejectedInviteUserIds,
 			onDismiss = p1.onDismissRejectedInvite
 		}) else nil

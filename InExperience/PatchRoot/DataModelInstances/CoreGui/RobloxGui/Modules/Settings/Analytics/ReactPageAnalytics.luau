@@ -1,56 +1,54 @@
-﻿local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
-local telemetryService = game:GetService("TelemetryService")
-local loggingProtocolModule = require(game:GetService("CorePackages").Workspace.Packages.LoggingProtocol)
-local telemetryServicePlaySessionInfoEnabledEngineFeature = game:GetEngineFeature("TelemetryServicePlaySessionInfoEnabled")
-local openReactPageThrottleHundredthsPercent = game:DefineFastInt("OpenReactPageThrottleHundredthsPercent", 0)
-local closeReactPageThrottleHundredthsPercent = game:DefineFastInt("CloseReactPageThrottleHundredthsPercent", 0)
-local t = {}
-t.__index = t
-t.configs = {
+﻿local RbxAnalyticsService = game:GetService("RbxAnalyticsService")
+local TelemetryService = game:GetService("TelemetryService")
+local LoggingProtocolModule = require(game:GetService("CorePackages").Workspace.Packages.LoggingProtocol)
+local TelemetryServicePlaySessionInfoEnabledEngineFeature = game:GetEngineFeature("TelemetryServicePlaySessionInfoEnabled")
+local ReactPageAnalyticsModule = {}
+ReactPageAnalyticsModule.__index = ReactPageAnalyticsModule
+ReactPageAnalyticsModule.configs = {
 	openPage = {
 		eventName = "ingame_menu_action",
 		description = "Fires when a React menu page is opened",
-		backends = { loggingProtocolModule.TelemetryBackends.EventIngest },
-		throttlingPercentage = openReactPageThrottleHundredthsPercent,
+		backends = { LoggingProtocolModule.TelemetryBackends.EventIngest },
+		throttlingPercentage = game:DefineFastInt("OpenReactPageThrottleHundredthsPercent", 0),
 		lastUpdated = { 2025, 9, 23 }
 	},
 	closePage = {
 		eventName = "ingame_menu_action",
 		description = "Fires when a React menu page is closed",
-		backends = { loggingProtocolModule.TelemetryBackends.EventIngest },
-		throttlingPercentage = closeReactPageThrottleHundredthsPercent,
+		backends = { LoggingProtocolModule.TelemetryBackends.EventIngest },
+		throttlingPercentage = game:DefineFastInt("CloseReactPageThrottleHundredthsPercent", 0),
 		lastUpdated = { 2025, 9, 23 }
 	}
 }
 
-function t.new()
-	-- upvalues: t (ref)
-	return setmetatable({}, t)
+function ReactPageAnalyticsModule.new() --[[ Line: 52 ]]
+	-- upvalues: ReactPageAnalyticsModule (copy)
+	return (setmetatable({}, ReactPageAnalyticsModule))
 end
 
-function t._logEventWithStandardizedFields(_, p1, p2, p3)
-	-- upvalues: telemetryServicePlaySessionInfoEnabledEngineFeature (ref), rbxAnalyticsService (ref), telemetryService (ref)
-	local list = { "addPlaceId", "addUniverseId", "addSessionInfo" }
-	p3 = p3 or {}
+function ReactPageAnalyticsModule:_logEventWithStandardizedFields(ClosePage, EventContext, p1) --[[ Line: 57 ]]
+	-- upvalues: TelemetryServicePlaySessionInfoEnabledEngineFeature (copy), RbxAnalyticsService (copy), TelemetryService (copy)
+	local StandardizedFields = { "addPlaceId", "addUniverseId", "addSessionInfo" }
+	local P3 = p1 or {}
 	
-	if telemetryServicePlaySessionInfoEnabledEngineFeature then
-		table.insert(list, "addPlaySessionId")
+	if TelemetryServicePlaySessionInfoEnabledEngineFeature then
+		table.insert(StandardizedFields, "addPlaySessionId")
 	else
-		p3.playsessionid = rbxAnalyticsService:GetPlaySessionId()
+		P3.playsessionid = RbxAnalyticsService:GetPlaySessionId()
 	end
-	telemetryService:LogEvent(p1, {
-		eventContext = p2,
-		standardizedFields = list,
-		customFields = p3
+	TelemetryService:LogEvent(ClosePage, {
+		eventContext = EventContext,
+		standardizedFields = StandardizedFields,
+		customFields = P3
 	})
 end
 
-function t:openPage(p1)
+function ReactPageAnalyticsModule:openPage(p1) --[[ Line: 74 ]]
 	self:_logEventWithStandardizedFields(self.configs.openPage, `open_{p1}_page`)
 end
 
-function t:closePage(p1)
+function ReactPageAnalyticsModule:closePage(p1) --[[ Line: 79 ]]
 	self:_logEventWithStandardizedFields(self.configs.closePage, `close_{p1}_page`)
 end
 
-return t
+return ReactPageAnalyticsModule

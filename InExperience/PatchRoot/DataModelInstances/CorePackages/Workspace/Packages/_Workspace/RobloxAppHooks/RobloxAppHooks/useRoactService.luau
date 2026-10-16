@@ -1,8 +1,8 @@
-﻿local parent = script:FindFirstAncestor("RobloxAppHooks").Parent
-local reactModule = require(parent.React)
-local roactServicesContext = require(parent.RoactServices).RoactServicesContext
+﻿local Parent = script:FindFirstAncestor("RobloxAppHooks").Parent
+local ReactModule = require(Parent.React)
+local RoactServicesContext = require(Parent.RoactServices).RoactServicesContext
 
-return function(p1)
-	-- upvalues: reactModule (ref), roactServicesContext (ref)
-	return p1.get(reactModule.useContext(roactServicesContext))
+return function(p1) --[[ Line: 23 | Named "useRoactService" ]]
+	-- upvalues: ReactModule (copy), RoactServicesContext (copy)
+	return (p1.get((ReactModule.useContext(RoactServicesContext))))
 end

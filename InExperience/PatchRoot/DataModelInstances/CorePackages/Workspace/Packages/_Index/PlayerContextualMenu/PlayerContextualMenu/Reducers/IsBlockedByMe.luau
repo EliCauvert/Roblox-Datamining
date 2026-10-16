@@ -1,24 +1,23 @@
-﻿local playerContextualMenu = script:FindFirstAncestor("PlayerContextualMenu")
-local parent = playerContextualMenu.Parent
-local roduxModule = require(parent.Rodux)
-local dashModule = require(parent.Dash)
-local blockingModule = require(playerContextualMenu.Http.Blocking)
+﻿local PlayerContextualMenu = script:FindFirstAncestor("PlayerContextualMenu")
+local Parent = PlayerContextualMenu.Parent
+local DashModule = require(Parent.Dash)
+local BlockingModule = require(PlayerContextualMenu.Http.Blocking)
 
-return roduxModule.createReducer({}, {
-	[blockingModule.GetBlockedUsers.Succeeded.name] = function(_, p1)
+return require(Parent.Rodux).createReducer({}, {
+	[BlockingModule.GetBlockedUsers.Succeeded.name] = function(_, p1) --[[ Line: 12 ]]
 		local t = {}
 		
-		for i, v in ipairs(if p1.responseBody then p1.responseBody.blockedUsers else {}) do
-			t[tostring(v.userId)] = true
+		for _, value in ipairs(p1.responseBody and p1.responseBody.blockedUsers or {}) do
+			t[tostring(value.userId)] = true
 		end
 		return t
 	end,
-	[blockingModule.BlockUserById.Succeeded.name] = function(p2, p3)
-		-- upvalues: dashModule (ref)
-		return dashModule.join(p2, { [tostring(p3.namedIds.users)] = true })
+	[BlockingModule.BlockUserById.Succeeded.name] = function(p2, p3) --[[ Line: 21 ]]
+		-- upvalues: DashModule (copy)
+		return DashModule.join(p2, { [tostring(p3.namedIds.users)] = true })
 	end,
-	[blockingModule.UnblockUserById.Succeeded.name] = function(p2, p3)
-		-- upvalues: dashModule (ref)
-		return dashModule.join(p2, { [tostring(p3.namedIds.users)] = false })
+	[BlockingModule.UnblockUserById.Succeeded.name] = function(p2, p3) --[[ Line: 27 ]]
+		-- upvalues: DashModule (copy)
+		return DashModule.join(p2, { [tostring(p3.namedIds.users)] = false })
 	end
 })

@@ -1,83 +1,80 @@
-﻿local roactModule = require(game:GetService("CorePackages").Packages.Roact)
-local components = script.Parent.Parent.Parent.Components
-local cellLabelModule = require(components.CellLabel)
-local bannerButtonModule = require(components.BannerButton)
+﻿local RoactModule = require(game:GetService("CorePackages").Packages.Roact)
+local Components = script.Parent.Parent.Parent.Components
+local CellLabelModule = require(Components.CellLabel)
+local BannerButtonModule = require(Components.BannerButton)
 local _ = require(script.Parent.LuauHeapTypes)
-local constantsModule = require(script.Parent.Parent.Parent.Constants)
-local _ = constantsModule.GeneralFormatting.LineWidth
-local _ = constantsModule.GeneralFormatting.LineColor
-local pathEntryFrameHeight = constantsModule.LuauHeapFormatting.PathEntryFrameHeight
-local depthIndent = constantsModule.LuauHeapFormatting.DepthIndent
-local _ = constantsModule.LuauHeapFormatting.ValueCellWidth
-local cellPadding = constantsModule.LuauHeapFormatting.CellPadding
-local _ = constantsModule.LuauHeapFormatting.ValuePadding
-local luauHeapViewPathEntry = roactModule.PureComponent:extend("LuauHeapViewPathEntry")
+local ConstantsModule = require(script.Parent.Parent.Parent.Constants)
+local _ = ConstantsModule.GeneralFormatting.LineWidth
+local _ = ConstantsModule.GeneralFormatting.LineColor
+local PathEntryFrameHeight = ConstantsModule.LuauHeapFormatting.PathEntryFrameHeight
+local DepthIndent = ConstantsModule.LuauHeapFormatting.DepthIndent
+local _ = ConstantsModule.LuauHeapFormatting.ValueCellWidth
+local CellPadding = ConstantsModule.LuauHeapFormatting.CellPadding
+local _ = ConstantsModule.LuauHeapFormatting.ValuePadding
+local LuauHeapViewPathEntry = RoactModule.PureComponent:extend("LuauHeapViewPathEntry")
 
-function luauHeapViewPathEntry.init(p1)
+function LuauHeapViewPathEntry.init(p1) --[[ Line: 25 ]]
 	p1.state = { expanded = false }
 	
-	function p0.onButtonPress()
-		-- upvalues: p1 (ref)
-		p1:setState(function(p2)
+	function p1.onButtonPress() --[[ Line: 30 ]]
+		-- upvalues: p1 (copy)
+		p1:setState(function(p2) --[[ Line: 31 ]]
 			return { expanded = not p2.expanded }
 		end)
 	end
 end
 
-function luauHeapViewPathEntry.renderChildren(p1, p2)
-	-- upvalues: depthIndent (ref), cellPadding (ref), roactModule (ref), cellLabelModule (ref), pathEntryFrameHeight (ref)
-	local t = {}
-	local var1 = 2 * depthIndent + cellPadding
+function LuauHeapViewPathEntry.renderChildren(p1, List) --[[ Line: 39 ]]
+	-- upvalues: DepthIndent (copy), CellPadding (copy), RoactModule (copy), CellLabelModule (copy), PathEntryFrameHeight (copy)
+	local Elements = {}
+	local NewDepthIndent = 2 * DepthIndent + CellPadding
 	
-	if p1.state.expanded and p2 and #p2 then
-		for i, v in ipairs(p2) do
-			t[i] = roactModule.createElement(cellLabelModule, {
-				text = v,
-				layoutOrder = i,
-				size = UDim2.new(UDim.new(1, -var1), UDim.new(0, pathEntryFrameHeight)),
-				pos = UDim2.new(0, var1, 0, 0)
+	if p1.state.expanded and List and #List then
+		for LayoutOrder, Text in ipairs(List) do
+			Elements[LayoutOrder] = RoactModule.createElement(CellLabelModule, {
+				text = Text,
+				layoutOrder = LayoutOrder,
+				size = UDim2.new(UDim.new(1, -NewDepthIndent), UDim.new(0, PathEntryFrameHeight)),
+				pos = UDim2.new(0, NewDepthIndent, 0, 0)
 			})
 		end
 	end
-	return t
+	return Elements
 end
 
-function luauHeapViewPathEntry.render(p3)
-	-- upvalues: pathEntryFrameHeight (ref), depthIndent (ref), roactModule (ref), bannerButtonModule (ref), cellLabelModule (ref), cellPadding (ref)
-	local props = p3.props
-	local size = props.size or UDim2.new(1, 0, 0, pathEntryFrameHeight)
-	local layoutOrder = props.layoutOrder or 0
-	local name = props.name
-	local data = props.data
-	local var2 = props.depth * depthIndent
+function LuauHeapViewPathEntry.render(p2) --[[ Line: 58 ]]
+	-- upvalues: PathEntryFrameHeight (copy), DepthIndent (copy), RoactModule (copy), BannerButtonModule (copy), CellLabelModule (copy), CellPadding (copy)
+	local Props = p2.props
+	local Data = Props.data
+	local ScaledDepth = Props.depth * DepthIndent
 	
-	return roactModule.createElement("Frame", {
+	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		Size = size,
-		LayoutOrder = layoutOrder,
+		Size = Props.size or UDim2.new(1, 0, 0, PathEntryFrameHeight),
+		LayoutOrder = Props.layoutOrder or 0,
 		AutomaticSize = Enum.AutomaticSize.Y
 	}, {
-		layout = roactModule.createElement("UIListLayout", {
+		layout = RoactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
 			HorizontalAlignment = Enum.HorizontalAlignment.Right,
 			SortOrder = Enum.SortOrder.LayoutOrder
 		}),
-		button = roactModule.createElement(bannerButtonModule, {
+		button = RoactModule.createElement(BannerButtonModule, {
 			layoutOrder = -1,
-			size = UDim2.new(1, 0, 0, pathEntryFrameHeight),
-			inset = var2,
-			isExpanded = p3.state.expanded,
-			isExpandable = #data ~= 0,
-			onButtonPress = p3.onButtonPress
+			size = UDim2.new(1, 0, 0, PathEntryFrameHeight),
+			inset = ScaledDepth,
+			isExpanded = p2.state.expanded,
+			isExpandable = #Data ~= 0,
+			onButtonPress = p2.onButtonPress
 		}, {
-			name = roactModule.createElement(cellLabelModule, {
-				text = name,
-				size = UDim2.new(UDim.new(1, -var2), UDim.new(1, 0)),
-				pos = UDim2.new(0, cellPadding + var2, 0, 0)
+			name = RoactModule.createElement(CellLabelModule, {
+				text = Props.name,
+				size = UDim2.new(UDim.new(1, -ScaledDepth), UDim.new(1, 0)),
+				pos = UDim2.new(0, CellPadding + ScaledDepth, 0, 0)
 			})
 		}),
-		children = roactModule.createFragment(p3:renderChildren(data))
+		children = RoactModule.createFragment(p2:renderChildren(Data))
 	})
 end
 
-return luauHeapViewPathEntry
+return LuauHeapViewPathEntry

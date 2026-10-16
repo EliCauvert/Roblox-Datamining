@@ -1,12 +1,12 @@
-﻿local gamepadService = game:GetService("GamepadService")
-local focusOffChromeSignalModule = require(script.Parent.Parent.FocusUtils.FocusOffChromeSignal)
+﻿local GamepadService = game:GetService("GamepadService")
+local FocusOffChromeSignalModule = require(script.Parent.Parent.FocusUtils.FocusOffChromeSignal)
 
-return function(p1)
-	-- upvalues: gamepadService (ref), focusOffChromeSignalModule (ref)
-	if gamepadService.GamepadCursorEnabled then return end
-	focusOffChromeSignalModule:fire()
+return function(Callback: () -> ()) --[[ Line: 8 | Named "focusOffChrome" ]]
+	-- upvalues: GamepadService (copy), FocusOffChromeSignalModule (copy)
+	if GamepadService.GamepadCursorEnabled then return end
+	FocusOffChromeSignalModule:fire()
 	
-	if p1 then
-		p1()
+	if Callback then
+		Callback()
 	end
 end

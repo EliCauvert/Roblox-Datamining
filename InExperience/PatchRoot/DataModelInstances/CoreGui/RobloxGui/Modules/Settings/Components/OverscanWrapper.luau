@@ -1,20 +1,20 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local coreScriptsRootProvider = require(corePackagesService.Workspace.Packages.CoreScriptsRoactCommon).CoreScriptsRootProvider
-local focusRoot = require(corePackagesService.Workspace.Packages.FocusNavigationUtils).FocusRoot
-local reactModule = require(corePackagesService.Packages.React)
-local focusNavigableSurfaceIdentifierEnum = require(corePackagesService.Workspace.Packages.FocusNavigationUtils).FocusNavigableSurfaceIdentifierEnum
-local deviceType = require(corePackagesService.Workspace.Packages.RobloxAppEnums).DeviceType
+﻿local CorePackages = game:GetService("CorePackages")
+local CoreScriptsRootProvider = require(CorePackages.Workspace.Packages.CoreScriptsRoactCommon).CoreScriptsRootProvider
+local FocusRoot = require(CorePackages.Workspace.Packages.FocusNavigationUtils).FocusRoot
+local ReactModule = require(CorePackages.Packages.React)
+local FocusNavigableSurfaceIdentifierEnum = require(CorePackages.Workspace.Packages.FocusNavigationUtils).FocusNavigableSurfaceIdentifierEnum
+local DeviceType = require(CorePackages.Workspace.Packages.RobloxAppEnums).DeviceType
 
-function OverscanWrapper(p1)
-	-- upvalues: deviceType (ref), reactModule (ref), coreScriptsRootProvider (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref)
-	return function(p2)
-		-- upvalues: deviceType (copy), reactModule (copy), coreScriptsRootProvider (copy), focusRoot (copy), focusNavigableSurfaceIdentifierEnum (copy), p1 (ref)
-		return reactModule.createElement(coreScriptsRootProvider, { styleOverride = { deviceType = deviceType.Console } }, {
-			FocusNavigationCoreScriptsWrapper = reactModule.createElement(focusRoot, {
+function OverscanWrapper(p1) --[[ Line: 15 ]]
+	-- upvalues: DeviceType (copy), ReactModule (copy), CoreScriptsRootProvider (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy)
+	return function(p2) --[[ Line: 16 ]]
+		-- upvalues: DeviceType (upval), ReactModule (upval), CoreScriptsRootProvider (upval), FocusRoot (upval), FocusNavigableSurfaceIdentifierEnum (upval), p1 (copy)
+		return ReactModule.createElement(CoreScriptsRootProvider, { styleOverride = { deviceType = DeviceType.Console } }, {
+			FocusNavigationCoreScriptsWrapper = ReactModule.createElement(FocusRoot, {
 				isIsolated = true,
 				isAutoFocusRoot = true,
-				surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.CentralOverlay
-			}, { Overscan = reactModule.createElement(p1, p2) })
+				surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.CentralOverlay
+			}, { Overscan = ReactModule.createElement(p1, p2) })
 		})
 	end
 end

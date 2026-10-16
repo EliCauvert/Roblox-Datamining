@@ -1,8 +1,8 @@
-﻿local reactModule = require(script:FindFirstAncestor("GenericAbuseReporting").Parent.React)
+﻿local ReactModule = require(script:FindFirstAncestor("GenericAbuseReporting").Parent.React)
 
-return function()
-	-- upvalues: reactModule (ref)
-	local form, form_1 = reactModule.useState("Form")
+return function() --[[ Line: 8 | Named "useActiveDialog" ]]
+	-- upvalues: ReactModule (copy)
+	local Form, Form2 = ReactModule.useState("Form")
 	
-	return form, form_1
+	return Form, Form2
 end

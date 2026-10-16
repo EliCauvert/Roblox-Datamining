@@ -1,26 +1,33 @@
-﻿local audioFocusManagementEngineFeature = game:GetEngineFeature("AudioFocusManagement")
-local crossExperienceVoice = script:FindFirstAncestor("CrossExperienceVoice")
-local dependenciesModule = require(crossExperienceVoice.dependencies)
-local useSelector = dependenciesModule.RoactUtils.Hooks.RoactRodux.useSelector
-local useIsVoiceFocusedModule = require(crossExperienceVoice.Hooks.useIsVoiceFocused)
-local getFFlagEnableCrossExpVoice = dependenciesModule.SharedFlags.GetFFlagEnableCrossExpVoice
+﻿local AudioFocusManagementEngineFeature = game:GetEngineFeature("AudioFocusManagement")
+local CrossExperienceVoice = script:FindFirstAncestor("CrossExperienceVoice")
+local DependenciesModule = require(CrossExperienceVoice.dependencies)
+local UseSelectorFunction = DependenciesModule.RoactUtils.Hooks.RoactRodux.useSelector
+local UseIsVoiceFocusedModule = require(CrossExperienceVoice.Hooks.useIsVoiceFocused)
+local GetFFlagEnableCrossExpVoiceFunction = DependenciesModule.SharedFlags.GetFFlagEnableCrossExpVoice
 
-return function()
-	-- upvalues: getFFlagEnableCrossExpVoice (ref), useIsVoiceFocusedModule (ref), useSelector (ref), audioFocusManagementEngineFeature (ref)
-	return if getFFlagEnableCrossExpVoice() then if audioFocusManagementEngineFeature and not useIsVoiceFocusedModule() then nil else useSelector(function(p1)
-		if not p1 or not p1.Squad or not p1.Squad.CrossExperienceVoice then
-			return nil
-		end
-		local activeUserIds = p1.Squad.CrossExperienceVoice.Participants.activeUserIds
-		
-		for i = #activeUserIds, 1, -1 do
-			local var1 = p1.Squad.CrossExperienceVoice.Participants.participants[activeUserIds[i]]
-			
-			if not var1 or var1.isMuted then
-				continue
+return function() --[[ Line: 13 ]]
+	-- upvalues: GetFFlagEnableCrossExpVoiceFunction (copy), UseIsVoiceFocusedModule (copy), UseSelectorFunction (copy), AudioFocusManagementEngineFeature (copy)
+	if GetFFlagEnableCrossExpVoiceFunction() then
+		local UseIsVoiceFocusedModuleResult = UseIsVoiceFocusedModule()
+		local UseSelectorResult = UseSelectorFunction(function(p1) --[[ Line: 19 ]]
+			if not p1 or not p1.Squad or not p1.Squad.CrossExperienceVoice then
+				return nil
 			end
-			return var1
-		end
+			local ActiveUserIds = p1.Squad.CrossExperienceVoice.Participants.activeUserIds
+			local Participant = nil
+			
+			for i = #ActiveUserIds, 1, -1 do
+				Participant = p1.Squad.CrossExperienceVoice.Participants.participants[ActiveUserIds[i]]
+				
+				if Participant and not Participant.isMuted then
+					return Participant
+				end
+			end
+			return nil
+		end)
+		
+		return if AudioFocusManagementEngineFeature and not UseIsVoiceFocusedModuleResult then nil else UseSelectorResult
+	else
 		return nil
-	end) else nil
+	end
 end

@@ -1,54 +1,55 @@
-﻿local avatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
-local parent = avatarExperienceInspectAndBuy.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local useTokens = foundationModule.Hooks.useTokens
-local shouldShowPriceLabel = require(avatarExperienceInspectAndBuy.Utils.itemDetailsUtils).shouldShowPriceLabel
-local _ = foundationModule.Enums.ButtonVariant
-local _ = require(avatarExperienceInspectAndBuy.Enums.PriceStatus)
+﻿local AvatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
+local Parent = AvatarExperienceInspectAndBuy.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local ShouldShowPriceLabelFunction = require(AvatarExperienceInspectAndBuy.Utils.itemDetailsUtils).shouldShowPriceLabel
+local _ = FoundationModule.Enums.ButtonVariant
+local _ = require(AvatarExperienceInspectAndBuy.Enums.PriceStatus)
 
-return function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), shouldShowPriceLabel (ref), foundationModule (ref)
-	local var1 = reactModule.useMemo(function()
-		-- upvalues: shouldShowPriceLabel (copy), p1 (ref)
-		return shouldShowPriceLabel(p1.priceStatus)
+return function(p1) --[[ Line: 55 | Named "BuyActionBar" ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), ShouldShowPriceLabelFunction (copy), FoundationModule (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 58 ]]
+		-- upvalues: ShouldShowPriceLabelFunction (upval), p1 (copy)
+		return ShouldShowPriceLabelFunction(p1.priceStatus)
 	end, { p1.priceStatus })
 	
-	return reactModule.createElement(foundationModule.View, {
+	return ReactModule.createElement(FoundationModule.View, {
 		tag = "size-full col gap-xsmall align-x-center padding-x-large padding-bottom-medium",
 		LayoutOrder = 1
 	}, {
-		InfoFrame = if p1.priceLabel then reactModule.createElement(foundationModule.View, {
+		InfoFrame = if p1.priceLabel then ReactModule.createElement(FoundationModule.View, {
 			tag = "size-full-800 row flex-x-between align-y-center gap-small",
 			BackgroundTransparency = 1,
 			LayoutOrder = 1
 		}, {
-			PriceDescriptionLabel = reactModule.createElement(foundationModule.Text, {
+			PriceDescriptionLabel = ReactModule.createElement(FoundationModule.Text, {
 				tag = "auto-xy text-title-medium content-emphasis text-truncate-end",
 				LayoutOrder = 1,
-				Text = if var1 then p1.priceLabel.leftLabel else ""
+				Text = if UseMemoResult then p1.priceLabel.leftLabel else ""
 			}),
-			RobuxLabel = if var1 then reactModule.createElement(foundationModule.View, {
+			RobuxLabel = if UseMemoResult then ReactModule.createElement(FoundationModule.View, {
 				tag = "auto-xy row align-x-left align-y-center gap-xsmall",
 				LayoutOrder = 2
 			}, {
-				PriceText = reactModule.createElement(foundationModule.Text, {
+				PriceText = ReactModule.createElement(FoundationModule.Text, {
 					tag = "auto-xy text-body-large content-emphasis text-truncate-end",
 					LayoutOrder = 2,
 					Text = p1.priceLabel.priceInRobux
 				}),
-				Robux = reactModule.createElement(foundationModule.Icon, {
+				Robux = ReactModule.createElement(FoundationModule.Icon, {
 					name = "robux",
 					LayoutOrder = 1,
-					style = useTokens().Color.ActionStandard.Foreground,
-					size = foundationModule.Enums.IconSize.Small
+					style = UseTokensResult.Color.ActionStandard.Foreground,
+					size = FoundationModule.Enums.IconSize.Small
 				})
 			}) else nil
 		}) else nil,
-		PurchaseButton = reactModule.createElement(foundationModule.Button, {
+		PurchaseButton = ReactModule.createElement(FoundationModule.Button, {
 			LayoutOrder = 2,
-			size = foundationModule.Enums.InputSize.Medium,
-			fillBehavior = foundationModule.Enums.FillBehavior.Fill,
+			size = FoundationModule.Enums.InputSize.Medium,
+			fillBehavior = FoundationModule.Enums.FillBehavior.Fill,
 			width = UDim.new(1, 0),
 			text = p1.purchaseButtonProps.purchaseButtonText,
 			variant = p1.purchaseButtonProps.variant,

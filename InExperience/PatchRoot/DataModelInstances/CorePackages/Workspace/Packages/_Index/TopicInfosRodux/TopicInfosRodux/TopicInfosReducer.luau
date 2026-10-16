@@ -1,24 +1,24 @@
-﻿local topicInfosRodux = script:FindFirstAncestor("TopicInfosRodux")
-local addTopicInfosModule = require(topicInfosRodux.AddTopicInfos)
-local parent = topicInfosRodux.Parent
-local cryoModule = require(parent.Cryo)
-local _ = require(parent.DiscoveryTypes)
+﻿local TopicInfosRodux = script:FindFirstAncestor("TopicInfosRodux")
+local AddTopicInfosModule = require(TopicInfosRodux.AddTopicInfos)
+local Parent = TopicInfosRodux.Parent
+local CryoModule = require(Parent.Cryo)
+local _ = require(Parent.DiscoveryTypes)
 
 return {
 	key = "TopicInfosKey",
-	reducer = function(p1, p2)
-		-- upvalues: addTopicInfosModule (ref), cryoModule (ref)
-		p1 = p1 or {}
-		assert(p1, "")
+	reducer = function(p1, p2) --[[ Line: 14 ]]
+		-- upvalues: AddTopicInfosModule (copy), CryoModule (copy)
+		local P0 = p1 or {}
+		assert(P0, "")
 		
-		if p2.type == addTopicInfosModule.name then
+		if p2.type == AddTopicInfosModule.name then
 			local t = {}
 			
-			for i, v in p2.topicInfos do
-				t[v.uniqueKey] = v
+			for _, topicInfo in p2.topicInfos do
+				t[topicInfo.uniqueKey] = topicInfo
 			end
-			p1 = cryoModule.Dictionary.join(p1, t)
+			P0 = CryoModule.Dictionary.join(P0, t)
 		end
-		return p1
+		return P0
 	end
 }

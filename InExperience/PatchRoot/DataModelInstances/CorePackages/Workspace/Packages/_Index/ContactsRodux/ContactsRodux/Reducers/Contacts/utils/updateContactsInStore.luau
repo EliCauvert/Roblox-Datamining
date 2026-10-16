@@ -1,15 +1,14 @@
-﻿local parent = script.Parent.Parent.Parent.Parent
-local types = parent.Types
-local parent_1 = parent.Parent
-local _ = require(types.ActionTypes)
-local _ = require(types.ReducerTypes)
-local dashModule = require(parent_1.Dash)
+﻿local Parent = script.Parent.Parent.Parent.Parent
+local Types = Parent.Types
+local _ = require(Types.ActionTypes)
+local _ = require(Types.ReducerTypes)
+local DashModule = require(Parent.Parent.Dash)
 
-return function(p1, p2)
-	-- upvalues: dashModule (ref)
+return function(p1, p2) --[[ Line: 8 ]]
+	-- upvalues: DashModule (copy)
 	local t = {}
-	dashModule.forEach(p2.responseBody.userContactsEntities, function(p3)
-		-- upvalues: t (ref)
+	DashModule.forEach(p2.responseBody.userContactsEntities, function(p3) --[[ Line: 12 ]]
+		-- upvalues: t (copy)
 		t[p3.id] = {
 			contactName = p3.name,
 			mutualContacts = p3.mutualContacts,
@@ -19,5 +18,5 @@ return function(p1, p2)
 		}
 	end)
 	
-	return dashModule.join(p1, t)
+	return DashModule.join(p1, t)
 end

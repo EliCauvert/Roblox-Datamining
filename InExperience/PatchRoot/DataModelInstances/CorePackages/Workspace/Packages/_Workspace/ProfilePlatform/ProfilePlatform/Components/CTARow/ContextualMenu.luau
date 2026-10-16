@@ -1,74 +1,75 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local _ = require(profilePlatform.Components.CTARow.Types)
-local coreGuiService = game:GetService("CoreGui")
-local reactModule = require(parent.React)
-local dashModule = require(parent.Dash)
-local foundationModule = require(parent.Foundation)
-local useIsSpatial = require(parent.Responsive).useIsSpatial
-local menu = foundationModule.Menu
-local overlayProvider = foundationModule.OverlayProvider
-local popoverAlign = foundationModule.Enums.PopoverAlign
-local inputSize = foundationModule.Enums.InputSize
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local _ = require(ProfilePlatform.Components.CTARow.Types)
+local CoreGui = game:GetService("CoreGui")
+local ReactModule = require(Parent.React)
+local DashModule = require(Parent.Dash)
+local FoundationModule = require(Parent.Foundation)
+local UseIsSpatialFunction = require(Parent.Responsive).useIsSpatial
+local Menu = FoundationModule.Menu
+local OverlayProvider = FoundationModule.OverlayProvider
+local PopoverAlign = FoundationModule.Enums.PopoverAlign
+local InputSize = FoundationModule.Enums.InputSize
 
-local function _()
-	-- upvalues: coreGuiService (ref)
-	local luaAppScreenGui = coreGuiService:FindFirstChild("LuaAppScreenGui")
+local function _() --[[ Line: 30 | Named "getVROverlaySurfaceGui" ]]
+	-- upvalues: CoreGui (copy)
+	local LuaAppScreenGui = CoreGui:FindFirstChild("LuaAppScreenGui")
 	
-	return if luaAppScreenGui then luaAppScreenGui:FindFirstChild("MainAppScreen_SurfaceGui") else nil
+	return if LuaAppScreenGui then LuaAppScreenGui:FindFirstChild("MainAppScreen_SurfaceGui") else nil
 end
 
-local function convertToMenuItems(p1, p2)
-	-- upvalues: dashModule (ref)
-	return dashModule.map(p1, function(p3)
-		-- upvalues: dashModule (copy), p2 (ref)
+local function convertToMenuItems(MenuItems, Callback) --[[ Line: 38 ]]
+	-- upvalues: DashModule (copy)
+	return DashModule.map(MenuItems, function(p1) --[[ Line: 42 ]]
+		-- upvalues: DashModule (upval), Callback (copy)
 		return {
-			items = dashModule.map(p3.items, function(p4)
-				-- upvalues: p2 (copy)
-				local displayValue = p4.displayValue
+			items = DashModule.map(p1.items, function(p2) --[[ Line: 44 ]]
+				-- upvalues: Callback (upval)
+				local DisplayValue = p2.displayValue
 				
 				return {
-					id = p4.id,
-					onActivated = function()
-						-- upvalues: p2 (copy), p4 (ref)
-						p2()
-						p4.onActivated()
+					id = p2.id,
+					onActivated = function() --[[ Line: 46 ]]
+						-- upvalues: Callback (upval), p2 (copy)
+						Callback()
+						p2.onActivated()
 					end,
-					isDisabled = p4.isDisabled,
-					text = displayValue.text or "",
-					icon = displayValue.icon
+					isDisabled = p2.isDisabled,
+					text = DisplayValue.text or "",
+					icon = DisplayValue.icon
 				}
 			end)
 		}
 	end)
 end
 
-return function(p1)
-	-- upvalues: useIsSpatial (ref), reactModule (ref), coreGuiService (ref), convertToMenuItems (ref), overlayProvider (ref), menu (ref), popoverAlign (ref), inputSize (ref)
-	local var1 = useIsSpatial()
+return function(p1) --[[ Line: 63 | Named "ContextualMenu" ]]
+	-- upvalues: UseIsSpatialFunction (copy), ReactModule (copy), CoreGui (copy), convertToMenuItems (copy), OverlayProvider (copy), Menu (copy), PopoverAlign (copy), InputSize (copy)
+	local UseIsSpatialResult = UseIsSpatialFunction()
 	
-	return reactModule.createElement(overlayProvider, {
-		gui = reactModule.useMemo(function()
-			-- upvalues: var1 (ref), coreGuiService (copy)
-			if not var1 then
+	return (ReactModule.createElement(OverlayProvider, {
+		gui = ReactModule.useMemo(function() --[[ Line: 65 ]]
+			-- upvalues: UseIsSpatialResult (copy), CoreGui (upval)
+			if UseIsSpatialResult then
+				local LuaAppScreenGui = CoreGui:FindFirstChild("LuaAppScreenGui")
+				
+				return if LuaAppScreenGui then LuaAppScreenGui:FindFirstChild("MainAppScreen_SurfaceGui") else nil
+			else
 				return nil
 			end
-			local luaAppScreenGui = coreGuiService:FindFirstChild("LuaAppScreenGui")
-			
-			return if luaAppScreenGui then luaAppScreenGui:FindFirstChild("MainAppScreen_SurfaceGui") else nil
-		end, { var1 })
+		end, { UseIsSpatialResult })
 	}, {
-		Menu = reactModule.createElement(menu, {
+		Menu = ReactModule.createElement(Menu, {
 			isOpen = p1.isOpen,
-			align = p1.align or popoverAlign.End,
+			align = p1.align or PopoverAlign.End,
 			anchorRef = p1.anchorRef,
-			items = reactModule.useMemo(function()
-				-- upvalues: convertToMenuItems (copy), p1 (ref)
+			items = ReactModule.useMemo(function() --[[ Line: 69 ]]
+				-- upvalues: convertToMenuItems (upval), p1 (copy)
 				return convertToMenuItems(p1.menuItems, p1.closeMenu)
 			end, { p1.menuItems, p1.closeMenu }),
 			onPressedOutside = p1.closeMenu,
 			ref = p1.menuRef,
-			size = inputSize.Medium
+			size = InputSize.Medium
 		})
-	})
+	}))
 end

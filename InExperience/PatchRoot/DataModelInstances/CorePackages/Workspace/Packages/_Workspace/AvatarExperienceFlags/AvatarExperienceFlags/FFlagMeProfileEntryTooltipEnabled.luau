@@ -1,1 +1,3 @@
-﻿return game:DefineFastFlag("MeProfileEntryTooltipEnabled", false) and require(script.Parent.FFlagAXUseProfileIconEntryPoint)
+﻿local FFlagAXUseProfileIconEntryPointModule = require(script.Parent.FFlagAXUseProfileIconEntryPoint)
+
+return game:DefineFastFlag("MeProfileEntryTooltipEnabled", false) and FFlagAXUseProfileIconEntryPointModule

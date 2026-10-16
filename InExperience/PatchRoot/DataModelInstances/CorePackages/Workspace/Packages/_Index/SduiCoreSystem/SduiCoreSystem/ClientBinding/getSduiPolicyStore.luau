@@ -1,21 +1,21 @@
-﻿local parent = script:FindFirstAncestor("SduiCoreSystem").Parent
-local signalsModule = require(parent.Signals)
-local _ = require(parent.UniversalAppPolicy)
+﻿local Parent = script:FindFirstAncestor("SduiCoreSystem").Parent
+local SignalsModule = require(Parent.Signals)
+local _ = require(Parent.UniversalAppPolicy)
 
-local function _()
-	-- upvalues: signalsModule (ref)
-	local var1, var2 = signalsModule.createSignal(nil)
+local function _() --[[ Line: 13 | Named "createSduiPolicyStore" ]]
+	-- upvalues: SignalsModule (copy)
+	local Signal, Signal2 = SignalsModule.createSignal(nil)
 	
-	return { getAppPolicy = var1, setAppPolicy = var2 }
+	return { getAppPolicy = Signal, setAppPolicy = Signal2 }
 end
 
-local var1 = nil
+local Config = nil
 
-return function()
-	-- upvalues: var1 (write), signalsModule (ref)
-	if var1 == nil then
-		local var2, var3 = signalsModule.createSignal(nil)
-		var1 = { getAppPolicy = var2, setAppPolicy = var3 }
+return function() --[[ Line: 24 | Named "getSduiPolicyStore" ]]
+	-- upvalues: Config (ref), SignalsModule (copy)
+	if Config == nil then
+		local Signal, Signal2 = SignalsModule.createSignal(nil)
+		Config = { getAppPolicy = Signal, setAppPolicy = Signal2 }
 	end
-	return var1
+	return Config
 end

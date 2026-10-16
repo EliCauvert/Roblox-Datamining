@@ -1,5 +1,4 @@
-﻿local getUpsellSuggestionsTypesModule = require(script.Api.PaymentsGateway.GetUpsellSuggestionsTypes)
-local _ = require(script.Enums.CheckUserPurchaseSettingsFailureReason)
+﻿local _ = require(script.Enums.CheckUserPurchaseSettingsFailureReason)
 local _ = require(script.Enums.EconomicRestrictionsViolationType)
 local _ = require(script.ProductPurchase.v3.UnifiedProductPurchaseModalTypes)
 local _ = require(script.ProductPurchase.v4.cartPricingResponseLineItem)
@@ -27,7 +26,7 @@ return {
 	Api = {
 		PaymentsGateway = {
 			GetUpsellSuggestions = require(script.Api.PaymentsGateway.GetUpsellSuggestions),
-			GetUpsellSuggestionsTypes = getUpsellSuggestionsTypesModule
+			GetUpsellSuggestionsTypes = require(script.Api.PaymentsGateway.GetUpsellSuggestionsTypes)
 		}
 	},
 	Flags = {
@@ -48,8 +47,7 @@ return {
 		PurchaseErrorType = require(script.Enums.PurchaseErrorType),
 		U13ConfirmType = require(script.Generic.U13ConfirmType),
 		SubscriptionPurchaseFlow = require(script.PurchaseFlow.Subscription.SubscriptionPurchaseFlow),
-		SubscriptionPurchaseFlowState = require(script.PurchaseFlow.Subscription.SubscriptionPurchaseFlowState),
-		PurchaseVIPServerFlow = require(script.PurchaseFlow.VIPServer.PurchaseVIPServerFlow)
+		SubscriptionPurchaseFlowState = require(script.PurchaseFlow.Subscription.SubscriptionPurchaseFlowState)
 	},
 	Enums = {
 		EconomicRestrictionsViolationType = require(script.Enums.EconomicRestrictionsViolationType),

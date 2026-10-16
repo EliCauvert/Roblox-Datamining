@@ -1,8 +1,8 @@
-﻿local reactModule = require(script:FindFirstAncestor("BuildExperience").Parent.React)
-local libraryCategoryViewModule = require(script.Parent.LibraryCategoryView)
-local useLibraryCategoryViewModelModule = require(script.Parent.useLibraryCategoryViewModel)
+﻿local ReactModule = require(script:FindFirstAncestor("BuildExperience").Parent.React)
+local LibraryCategoryViewModule = require(script.Parent.LibraryCategoryView)
+local UseLibraryCategoryViewModelModule = require(script.Parent.useLibraryCategoryViewModel)
 
-return function(p1)
-	-- upvalues: useLibraryCategoryViewModelModule (ref), reactModule (ref), libraryCategoryViewModule (ref)
-	return reactModule.createElement(libraryCategoryViewModule, useLibraryCategoryViewModelModule(p1))
+return function(p1) --[[ Line: 11 | Named "LibraryCategoryContainer" ]]
+	-- upvalues: UseLibraryCategoryViewModelModule (copy), ReactModule (copy), LibraryCategoryViewModule (copy)
+	return ReactModule.createElement(LibraryCategoryViewModule, (UseLibraryCategoryViewModelModule(p1)))
 end

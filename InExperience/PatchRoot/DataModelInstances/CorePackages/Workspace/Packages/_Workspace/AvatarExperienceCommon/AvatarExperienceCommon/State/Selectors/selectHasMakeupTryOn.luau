@@ -1,10 +1,10 @@
-﻿local isMakeupAssetTypeModule = require(script:FindFirstAncestor("AvatarExperienceCommon").Utils.isMakeupAssetType)
-local selectTryOnItemsModule = require(script.Parent.selectTryOnItems)
+﻿local IsMakeupAssetTypeModule = require(script:FindFirstAncestor("AvatarExperienceCommon").Utils.isMakeupAssetType)
+local SelectTryOnItemsModule = require(script.Parent.selectTryOnItems)
 
-return function(p1)
-	-- upvalues: selectTryOnItemsModule (ref), isMakeupAssetTypeModule (ref)
-	for i, v in selectTryOnItemsModule(p1) do
-		if v.selectedInTryOnManager and v.itemType and isMakeupAssetTypeModule(v.itemSubType) then
+return function(p1): boolean --[[ Line: 9 | Named "selectHasMakeupTryOn" ]]
+	-- upvalues: SelectTryOnItemsModule (copy), IsMakeupAssetTypeModule (copy)
+	for _, value in SelectTryOnItemsModule(p1) do
+		if value.selectedInTryOnManager and value.itemType and IsMakeupAssetTypeModule(value.itemSubType) then
 			return true
 		end
 	end

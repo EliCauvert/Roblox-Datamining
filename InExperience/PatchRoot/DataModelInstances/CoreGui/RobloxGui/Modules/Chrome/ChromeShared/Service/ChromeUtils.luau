@@ -1,269 +1,271 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local starterGuiService = game:GetService("StarterGui")
-local sharedFlagsModule = require(corePackagesService.Workspace.Packages.SharedFlags)
-local signal = require(corePackagesService.Workspace.Packages.AppCommonLib).Signal
-local _ = require(corePackagesService.Workspace.Packages.Chrome)
-local fFlagEnableConsoleExpControls = sharedFlagsModule.FFlagEnableConsoleExpControls
-local t = { Unavailable = 0, Loading = 1, Available = 2, Pinned = 3 }
-local t_1 = {}
-t_1.__index = t_1
+﻿local CorePackages = game:GetService("CorePackages")
+local StarterGui = game:GetService("StarterGui")
+local Signal = require(CorePackages.Workspace.Packages.AppCommonLib).Signal
+local _ = require(CorePackages.Workspace.Packages.Chrome)
+local FFlagEnableConsoleExpControls = require(CorePackages.Workspace.Packages.SharedFlags).FFlagEnableConsoleExpControls
+local AvailabilitySignalState = { Unavailable = 0, Loading = 1, Available = 2, Pinned = 3 }
+local Module = {}
+Module.__index = Module
 
-function t_1.new(p1)
-	-- upvalues: t (ref), fFlagEnableConsoleExpControls (ref), signal (ref), t_1 (ref)
-	return setmetatable({
-		_state = p1 or t.Unavailable,
-		_forceUnavailable = if fFlagEnableConsoleExpControls then false else nil,
-		_changeSignal = signal.new()
-	}, t_1)
+function Module.new(p1) --[[ Line: 28 ]]
+	-- upvalues: AvailabilitySignalState (copy), FFlagEnableConsoleExpControls (copy), Signal (copy), Module (copy)
+	return (setmetatable({
+		_state = p1 or AvailabilitySignalState.Unavailable,
+		_forceUnavailable = not FFlagEnableConsoleExpControls and nil,
+		_changeSignal = Signal.new()
+	}, Module))
 end
 
-function t_1:connect(p1)
+function Module:connect(p1) --[[ Line: 37 ]]
 	return self._changeSignal:connect(p1)
 end
 
-function t_1:set(p1)
-	-- upvalues: fFlagEnableConsoleExpControls (ref)
-	if self._state ~= p1 then
-		self._state = p1
+function Module:set(_state) --[[ Line: 41 ]]
+	-- upvalues: FFlagEnableConsoleExpControls (copy)
+	if self._state ~= _state then
+		self._state = _state
 		
-		if not fFlagEnableConsoleExpControls or not self._forceUnavailable then
-			self._changeSignal:fire(p1)
+		if not FFlagEnableConsoleExpControls or not self._forceUnavailable then
+			self._changeSignal:fire(_state)
 		end
 	end
 end
 
-function t_1:get()
-	-- upvalues: fFlagEnableConsoleExpControls (ref), t (ref)
-	return if fFlagEnableConsoleExpControls and self._forceUnavailable then t.Unavailable else self._state
+function Module.get(p1) --[[ Line: 50 ]]
+	-- upvalues: FFlagEnableConsoleExpControls (copy), AvailabilitySignalState (copy)
+	return if FFlagEnableConsoleExpControls and p1._forceUnavailable then AvailabilitySignalState.Unavailable else p1._state
 end
 
-function t_1:available()
-	-- upvalues: t (ref)
-	self:set(t.Available)
+function Module:available() --[[ Line: 58 ]]
+	-- upvalues: AvailabilitySignalState (copy)
+	self:set(AvailabilitySignalState.Available)
 end
 
-function t_1:loading()
-	-- upvalues: t (ref)
-	self:set(t.Loading)
+function Module:loading() --[[ Line: 62 ]]
+	-- upvalues: AvailabilitySignalState (copy)
+	self:set(AvailabilitySignalState.Loading)
 end
 
-function t_1:unavailable()
-	-- upvalues: t (ref)
-	self:set(t.Unavailable)
+function Module:unavailable() --[[ Line: 66 ]]
+	-- upvalues: AvailabilitySignalState (copy)
+	self:set(AvailabilitySignalState.Unavailable)
 end
 
-function t_1:pinned()
-	-- upvalues: t (ref)
-	self:set(t.Pinned)
+function Module:pinned() --[[ Line: 70 ]]
+	-- upvalues: AvailabilitySignalState (copy)
+	self:set(AvailabilitySignalState.Pinned)
 end
 
-function t_1:forceUnavailable()
-	-- upvalues: fFlagEnableConsoleExpControls (ref), t (ref)
-	if fFlagEnableConsoleExpControls and not self._forceUnavailable then
+function Module:forceUnavailable() --[[ Line: 74 ]]
+	-- upvalues: FFlagEnableConsoleExpControls (copy), AvailabilitySignalState (copy)
+	if FFlagEnableConsoleExpControls and not self._forceUnavailable then
 		self._forceUnavailable = true
 		
-		if self._state ~= t.Unavailable then
-			self._changeSignal:fire(t.Unavailable)
+		if self._state ~= AvailabilitySignalState.Unavailable then
+			self._changeSignal:fire(AvailabilitySignalState.Unavailable)
 		end
 	end
 end
 
-function t_1:unforceUnavailable()
-	-- upvalues: fFlagEnableConsoleExpControls (ref), t (ref)
-	if fFlagEnableConsoleExpControls and self._forceUnavailable then
+function Module:unforceUnavailable() --[[ Line: 84 ]]
+	-- upvalues: FFlagEnableConsoleExpControls (copy), AvailabilitySignalState (copy)
+	if FFlagEnableConsoleExpControls and self._forceUnavailable then
 		self._forceUnavailable = false
 		
-		if self._state ~= t.Unavailable then
+		if self._state ~= AvailabilitySignalState.Unavailable then
 			self._changeSignal:fire(self._state)
 		end
 	end
 end
 
-local t_2 = {}
-t_2.__index = t_2
+local Module1 = {}
+Module1.__index = Module1
 
-function t_2.new(p1)
-	-- upvalues: signal (ref), t_2 (ref)
-	return setmetatable({
+function Module1.new(p1) --[[ Line: 97 ]]
+	-- upvalues: Signal (copy), Module1 (copy)
+	return (setmetatable({
 		_value = { type = "empty", value = nil },
-		_changeSignal = signal.new(),
+		_changeSignal = Signal.new(),
 		_excludeFromTotalCounts = p1 or false
-	}, t_2)
+	}, Module1))
 end
 
-function t_2:setExcludeFromTotalCounts(p1)
-	self._excludeFromTotalCounts = p1
+function Module1:setExcludeFromTotalCounts(_excludeFromTotalCounts) --[[ Line: 106 ]]
+	self._excludeFromTotalCounts = _excludeFromTotalCounts
 end
 
-function t_2:excludeFromTotalCounts()
+function Module1:excludeFromTotalCounts() --[[ Line: 110 ]]
 	return self._excludeFromTotalCounts
 end
 
-function t_2:connect(p1)
+function Module1:connect(p1) --[[ Line: 114 ]]
 	return self._changeSignal:connect(p1)
 end
 
-function t_2:get()
+function Module1:get() --[[ Line: 118 ]]
 	return self._value
 end
 
-function t_2:clear()
+function Module1:clear() --[[ Line: 122 ]]
 	if self._value and self._value.type ~= "empty" then
 		self._value = { type = "empty", value = nil }
 		self._changeSignal:fire(self._value)
 	end
 end
 
-function t_2:fireCount(p1)
-	local t = { type = "count", value = p1 }
+function Module1:fireCount(Value) --[[ Line: 129 ]]
+	local config = { type = "count", value = Value }
 	
-	if self._value ~= t then
-		self._value = t
+	if self._value ~= config then
+		self._value = config
 		self._changeSignal:fire(self._value)
 	end
 end
 
-function t_2:isEmpty()
+function Module1:isEmpty(): boolean --[[ Line: 137 ]]
 	return self._value and self._value.type == "empty"
 end
 
-local t_3 = {}
-t_3.__index = t_3
+local Module2 = {}
+Module2.__index = Module2
 
-function t_3.new(p1)
-	-- upvalues: signal (ref), t_3 (ref)
-	return setmetatable({ _value = p1, _changeSignal = signal.new() }, t_3)
+function Module2.new(_value) --[[ Line: 146 ]]
+	-- upvalues: Signal (copy), Module2 (copy)
+	return (setmetatable({ _value = _value, _changeSignal = Signal.new() }, Module2))
 end
 
-function t_3:get()
+function Module2:get() --[[ Line: 153 ]]
 	return self._value
 end
 
-function t_3:setMomentary(p1, p2, p3)
-	if self._value ~= p1 then
-		self._value = p1
-		self._changeSignal:fire(p1)
+function Module2:setMomentary(_value, Delay, p1) --[[ Line: 157 ]]
+	if self._value ~= _value then
+		self._value = _value
+		self._changeSignal:fire(_value)
 	end
-	local momentaryClearThread = self._momentaryClearThread
+	local MomentaryClearThread = self._momentaryClearThread
 	
-	if momentaryClearThread then
-		task.cancel(momentaryClearThread)
+	if MomentaryClearThread then
+		task.cancel(MomentaryClearThread)
 	end
-	self._momentaryClearThread = task.delay(p2, function()
-		-- upvalues: self (ref), p3 (ref)
+	self._momentaryClearThread = task.delay(Delay, function() --[[ Line: 169 ]]
+		-- upvalues: self (copy), p1 (copy)
 		self._momentaryClearThread = nil
-		self:set(p3)
+		self.set(self, p1)
 	end)
 end
 
-function t_3:set(p1)
-	local momentaryClearThread = self._momentaryClearThread
+function Module2:set(_value) --[[ Line: 176 ]]
+	local MomentaryClearThread = self._momentaryClearThread
 	
-	if momentaryClearThread then
-		task.cancel(momentaryClearThread)
+	if MomentaryClearThread then
+		task.cancel(MomentaryClearThread)
 		self._momentaryClearThread = nil
 	end
-	if self._value ~= p1 then
-		self._value = p1
-		self._changeSignal:fire(p1)
+	if self._value ~= _value then
+		self._value = _value
+		self._changeSignal:fire(_value)
 	end
 end
 
-function t_3:signal()
+function Module2:signal() --[[ Line: 189 ]]
 	return self._changeSignal
 end
 
-function t_3:connect(p1, p2)
-	local changeSignalConnection = self._changeSignal:connect(p1)
+function Module2:connect(Callback: (any) -> (), Enabled) --[[ Line: 193 ]]
+	local ChangeSignalConnection = self._changeSignal:connect(Callback)
 	
-	if p2 == true then
-		p1(self._value)
+	if Enabled == true then
+		Callback(self._value)
 	end
-	return changeSignalConnection
+	return ChangeSignalConnection
 end
 
-local t_4 = {}
-t_4.__index = t_4
+local Module3 = {}
+Module3.__index = Module3
 
-function t_4.new(p1, p2, p3)
-	-- upvalues: t_4 (ref)
-	if not p1 then
+function Module3.new(_signal, _fetchMapFunction, _eventReceiver) --[[ Line: 219 ]]
+	-- upvalues: Module3 (copy)
+	if not _signal then
 		error("No signal provided to MappedSignal")
 	end
-	if not p2 then
+	if not _fetchMapFunction then
 		error("No fetchMapFunction provided to MappedSignal")
 	end
-	return setmetatable({
-		_signal = p1,
-		_fetchMapFunction = p2,
-		_eventReceiver = p3
-	}, t_4)
+	return (setmetatable({
+		_signal = _signal,
+		_fetchMapFunction = _fetchMapFunction,
+		_eventReceiver = _eventReceiver
+	}, Module3))
 end
 
-function t_4:connect(p1)
+function Module3:connect(Callback: (any) -> ()) --[[ Line: 233 ]]
 	if not self._signal then
 		warn("MappedSignal: Missing signal")
 		
-		return function() end
+		return function() --[[ Line: 236 ]] end
 	end
-	local signalConnection = self._signal:connect(function()
-		-- upvalues: self (ref), p1 (ref)
+	local SignalConnection = self._signal:connect(function() --[[ Line: 239 ]]
+		-- upvalues: self (copy), Callback (copy)
 		if self._eventReceiver then
 			self._eventReceiver()
 		end
-		p1(self._fetchMapFunction())
+		Callback(self._fetchMapFunction())
 	end)
 	
 	if self._eventReceiver then
 		self._eventReceiver()
 	end
-	p1(self._fetchMapFunction())
+	Callback(self._fetchMapFunction())
 	
-	return signalConnection
+	return SignalConnection
 end
 
-function t_4:get()
+function Module3:get() --[[ Line: 253 ]]
 	return self._fetchMapFunction()
 end
 
-function setCoreGuiAvailability(value, p1, p2)
-	-- upvalues: starterGuiService (ref)
-	local coreGuiChangedSignalConnection = starterGuiService.CoreGuiChangedSignal:Connect(function()
-		-- upvalues: starterGuiService (copy), p1 (ref), p2 (ref), value (ref)
-		local var1 = starterGuiService:GetCoreGuiEnabled(p1)
+function setCoreGuiAvailability(p1, CoreGuiType, Callback: (any) -> ()) --[[ Line: 257 ]]
+	-- upvalues: StarterGui (copy)
+	local CoreGuiChangedSignalConnection = StarterGui.CoreGuiChangedSignal:Connect(function() --[[ Line: 262 | Named "updateAvailable" ]]
+		-- upvalues: StarterGui (upval), CoreGuiType (copy), Callback (copy), p1 (copy)
+		local CoreGuiEnabled = StarterGui:GetCoreGuiEnabled(CoreGuiType)
 		
-		if p2 then
-			p2(var1)
-			
-			return
-		elseif var1 then
-			value.availability:available()
+		if Callback then
+			Callback(CoreGuiEnabled)
 			
 			return
 		end
-		value.availability:unavailable()
+		if CoreGuiEnabled then
+			p1.availability:available()
+			
+			return
+		else
+			p1.availability:unavailable()
+		end
 	end)
-	local var1 = starterGuiService:GetCoreGuiEnabled(p1)
+	local CoreGuiEnabled = StarterGui:GetCoreGuiEnabled(CoreGuiType)
 	
-	if p2 then
-		p2(var1)
+	if Callback then
+		Callback(CoreGuiEnabled)
 		
-		return coreGuiChangedSignalConnection
-	elseif var1 then
-		value.availability:available()
+		return CoreGuiChangedSignalConnection
+	elseif CoreGuiEnabled then
+		p1.availability:available()
 		
-		return coreGuiChangedSignalConnection
+		return CoreGuiChangedSignalConnection
+	else
+		p1.availability:unavailable()
+		
+		return CoreGuiChangedSignalConnection
 	end
-	value.availability:unavailable()
-	
-	return coreGuiChangedSignalConnection
 end
 
 return {
-	MappedSignal = t_4,
-	AvailabilitySignal = t_1,
-	AvailabilitySignalState = t,
-	NotifySignal = t_2,
-	ObservableValue = t_3,
+	MappedSignal = Module3,
+	AvailabilitySignal = Module,
+	AvailabilitySignalState = AvailabilitySignalState,
+	NotifySignal = Module1,
+	ObservableValue = Module2,
 	setCoreGuiAvailability = setCoreGuiAvailability
 }

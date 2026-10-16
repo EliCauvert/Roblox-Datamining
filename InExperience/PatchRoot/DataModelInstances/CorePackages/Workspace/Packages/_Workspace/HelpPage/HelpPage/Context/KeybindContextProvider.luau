@@ -1,12 +1,14 @@
-﻿local parent = script.Parent.Parent
-local reactModule = require(parent.Parent.React)
-local keybindContextModule = require(script.Parent.KeybindContext)
-local bindingConfigsModule = require(parent.Configs.BindingConfigs)
+﻿local Parent = script.Parent.Parent
+local ReactModule = require(Parent.Parent.React)
+local KeybindContextModule = require(script.Parent.KeybindContext)
+local BindingConfigsModule = require(Parent.Configs.BindingConfigs)
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), bindingConfigsModule (ref), keybindContextModule (ref)
-	local var1, _ = reactModule.useState(bindingConfigsModule.ControlGroups)
-	local var2, _ = reactModule.useState(bindingConfigsModule.Controls)
+return ReactModule.memo(function(p1) --[[ Line: 14 ]]
+	-- upvalues: ReactModule (copy), BindingConfigsModule (copy), KeybindContextModule (copy)
+	local UseStateResult, _ = ReactModule.useState(BindingConfigsModule.ControlGroups)
+	local UseStateResult1, _ = ReactModule.useState(BindingConfigsModule.Controls)
 	
-	return reactModule.createElement(keybindContextModule.Provider, { value = { groups = var1, controls = var2 } }, p1.children)
+	return ReactModule.createElement(KeybindContextModule.Provider, {
+		value = { groups = UseStateResult, controls = UseStateResult1 }
+	}, p1.children)
 end)

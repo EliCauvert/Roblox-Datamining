@@ -1,42 +1,25 @@
-﻿local purchasePrompt = script:FindFirstAncestor("PurchasePrompt")
-local parent = purchasePrompt.Parent
-local httpService = game:GetService("HttpService")
-local sharedFlagsModule = require(parent.SharedFlags)
-local rodux = require(parent.PurchasePromptDeps).Rodux
-local requestAssetPurchaseModule = require(purchasePrompt.Actions.RequestAssetPurchase)
-local requestBundlePurchaseModule = require(purchasePrompt.Actions.RequestBundlePurchase)
-local requestGamepassPurchaseModule = require(purchasePrompt.Actions.RequestGamepassPurchase)
-local requestProductPurchaseModule = require(purchasePrompt.Actions.RequestProductPurchase)
-local requestPremiumPurchaseModule = require(purchasePrompt.Actions.RequestPremiumPurchase)
-local requestSubscriptionPurchaseModule = require(purchasePrompt.Actions.RequestSubscriptionPurchase)
-local requestAvatarCreationFeePurchaseModule = require(purchasePrompt.Actions.RequestAvatarCreationFeePurchase)
-local requestExperiencePurchaseModule = require(purchasePrompt.Actions.RequestExperiencePurchase)
-local requestLookPurchaseModule = require(purchasePrompt.Actions.RequestLookPurchase)
-local requestRobuxUpsellPurchaseModule = require(purchasePrompt.Actions.RequestRobuxUpsellPurchase)
-local requestDeveloperSubscriptionPurchaseModule = require(purchasePrompt.Actions.RequestDeveloperSubscriptionPurchase)
-local requestVIPServerPurchaseModule = require(purchasePrompt.Actions.RequestVIPServerPurchase)
-local completeRequestModule = require(purchasePrompt.Actions.CompleteRequest)
-local refreshExpectedPriceModule = require(purchasePrompt.Actions.RefreshExpectedPrice)
-local requestTypeModule = require(purchasePrompt.Enums.RequestType)
-local fFlagAXMISWithBlackbird = sharedFlagsModule.FFlagAXMISWithBlackbird
-local fFlagStableIdempotencyKeyForProductAndGamePassModule = require(purchasePrompt.Flags.FFlagStableIdempotencyKeyForProductAndGamePass)
-local t = { requestType = requestTypeModule.None }
+﻿local PurchasePrompt = script:FindFirstAncestor("PurchasePrompt")
+local Parent = PurchasePrompt.Parent
+local HttpService = game:GetService("HttpService")
+local RequestTypeModule = require(PurchasePrompt.Enums.RequestType)
+local FFlagStableIdempotencyKeyForProductAndGamePassModule = require(PurchasePrompt.Flags.FFlagStableIdempotencyKeyForProductAndGamePass)
+local config = { requestType = RequestTypeModule.None }
 
-return rodux.createReducer(t, {
-	[requestAssetPurchaseModule.name] = function(_, p1)
-		-- upvalues: httpService (ref), requestTypeModule (ref)
-		local idempotencyKey = p1.idempotencyKey
+return (require(Parent.PurchasePromptDeps).Rodux.createReducer(config, {
+	[require(PurchasePrompt.Actions.RequestAssetPurchase).name] = function(_, p1) --[[ Line: 33 ]]
+		-- upvalues: HttpService (copy), RequestTypeModule (copy)
+		local IdempotencyKey = p1.idempotencyKey
 		
-		if idempotencyKey == nil or idempotencyKey == "" then
-			idempotencyKey = httpService:GenerateGUID(false)
+		if IdempotencyKey == nil or IdempotencyKey == "" then
+			IdempotencyKey = HttpService:GenerateGUID(false)
 		end
 		return {
 			id = p1.id,
 			infoType = Enum.InfoType.Asset,
-			requestType = requestTypeModule.Asset,
+			requestType = RequestTypeModule.Asset,
 			equipIfPurchased = p1.equipIfPurchased,
 			isRobloxPurchase = p1.isRobloxPurchase,
-			idempotencyKey = idempotencyKey,
+			idempotencyKey = IdempotencyKey,
 			purchaseAuthToken = p1.purchaseAuthToken or "",
 			collectibleItemId = p1.collectibleItemId or "",
 			collectibleItemInstanceId = p1.collectibleItemInstanceId or "",
@@ -44,57 +27,57 @@ return rodux.createReducer(t, {
 			expectedPrice = p1.expectedPrice or 0
 		}
 	end,
-	[requestGamepassPurchaseModule.name] = function(_, p1)
-		-- upvalues: requestTypeModule (ref), fFlagStableIdempotencyKeyForProductAndGamePassModule (ref), httpService (ref)
-		local t = {
+	[require(PurchasePrompt.Actions.RequestGamepassPurchase).name] = function(_, p1) --[[ Line: 52 ]]
+		-- upvalues: RequestTypeModule (copy), FFlagStableIdempotencyKeyForProductAndGamePassModule (copy), HttpService (copy)
+		local config = {
 			isRobloxPurchase = false,
 			id = p1.id,
 			infoType = Enum.InfoType.GamePass,
-			requestType = requestTypeModule.GamePass
+			requestType = RequestTypeModule.GamePass
 		}
 		
-		if fFlagStableIdempotencyKeyForProductAndGamePassModule then
-			local idempotencyKey = p1.idempotencyKey
+		if FFlagStableIdempotencyKeyForProductAndGamePassModule then
+			local IdempotencyKey = p1.idempotencyKey
 			
-			if idempotencyKey == nil or idempotencyKey == "" then
-				idempotencyKey = httpService:GenerateGUID(false)
+			if IdempotencyKey == nil or IdempotencyKey == "" then
+				IdempotencyKey = HttpService:GenerateGUID(false)
 			end
-			t.idempotencyKey = idempotencyKey
+			config.idempotencyKey = IdempotencyKey
 		end
-		return t
+		return config
 	end,
-	[requestProductPurchaseModule.name] = function(_, p1)
-		-- upvalues: requestTypeModule (ref), fFlagStableIdempotencyKeyForProductAndGamePassModule (ref), httpService (ref)
-		local t = {
+	[require(PurchasePrompt.Actions.RequestProductPurchase).name] = function(_, p1) --[[ Line: 68 ]]
+		-- upvalues: RequestTypeModule (copy), FFlagStableIdempotencyKeyForProductAndGamePassModule (copy), HttpService (copy)
+		local config = {
 			isRobloxPurchase = false,
 			id = p1.id,
 			infoType = Enum.InfoType.Product,
-			requestType = requestTypeModule.Product
+			requestType = RequestTypeModule.Product
 		}
 		
-		if fFlagStableIdempotencyKeyForProductAndGamePassModule then
-			local idempotencyKey = p1.idempotencyKey
+		if FFlagStableIdempotencyKeyForProductAndGamePassModule then
+			local IdempotencyKey = p1.idempotencyKey
 			
-			if idempotencyKey == nil or idempotencyKey == "" then
-				idempotencyKey = httpService:GenerateGUID(false)
+			if IdempotencyKey == nil or IdempotencyKey == "" then
+				IdempotencyKey = HttpService:GenerateGUID(false)
 			end
-			t.idempotencyKey = idempotencyKey
+			config.idempotencyKey = IdempotencyKey
 		end
-		return t
+		return config
 	end,
-	[requestBundlePurchaseModule.name] = function(_, p1)
-		-- upvalues: httpService (ref), requestTypeModule (ref)
-		local idempotencyKey = p1.idempotencyKey
+	[require(PurchasePrompt.Actions.RequestBundlePurchase).name] = function(_, p1) --[[ Line: 84 ]]
+		-- upvalues: HttpService (copy), RequestTypeModule (copy)
+		local IdempotencyKey = p1.idempotencyKey
 		
-		if idempotencyKey == nil or idempotencyKey == "" then
-			idempotencyKey = httpService:GenerateGUID(false)
+		if IdempotencyKey == nil or IdempotencyKey == "" then
+			IdempotencyKey = HttpService:GenerateGUID(false)
 		end
 		return {
 			isRobloxPurchase = true,
 			id = p1.id,
 			infoType = Enum.InfoType.Bundle,
-			requestType = requestTypeModule.Bundle,
-			idempotencyKey = idempotencyKey,
+			requestType = RequestTypeModule.Bundle,
+			idempotencyKey = IdempotencyKey,
 			purchaseAuthToken = p1.purchaseAuthToken or "",
 			collectibleItemId = p1.collectibleItemId or "",
 			collectibleItemInstanceId = p1.collectibleItemInstanceId or "",
@@ -102,57 +85,63 @@ return rodux.createReducer(t, {
 			expectedPrice = p1.expectedPrice or 0
 		}
 	end,
-	[requestPremiumPurchaseModule.name] = function(_, _)
-		-- upvalues: requestTypeModule (ref)
-		return { requestType = requestTypeModule.Premium }
+	[require(PurchasePrompt.Actions.RequestPremiumPurchase).name] = function(_, _) --[[ Line: 102 ]]
+		-- upvalues: RequestTypeModule (copy)
+		return { requestType = RequestTypeModule.Premium }
 	end,
-	[requestSubscriptionPurchaseModule.name] = function(_, p1)
-		-- upvalues: requestTypeModule (ref)
-		return { id = p1.id, requestType = requestTypeModule.Subscription }
-	end,
-	[requestAvatarCreationFeePurchaseModule.name] = function(_, p1)
-		-- upvalues: requestTypeModule (ref)
+	[require(PurchasePrompt.Actions.RequestSubscriptionPurchase).name] = function(_, p1) --[[ Line: 107 ]]
+		-- upvalues: RequestTypeModule (copy)
 		return {
-			requestType = requestTypeModule.AvatarCreationFee,
+			id = p1.id,
+			requestType = RequestTypeModule.Subscription
+		}
+	end,
+	[require(PurchasePrompt.Actions.RequestAvatarCreationFeePurchase).name] = function(_, p1) --[[ Line: 113 ]]
+		-- upvalues: RequestTypeModule (copy)
+		return {
+			requestType = RequestTypeModule.AvatarCreationFee,
 			humanoidModel = p1.humanoidModel,
 			id = p1.guid
 		}
 	end,
-	[requestExperiencePurchaseModule.name] = function(_, p1)
-		-- upvalues: requestTypeModule (ref)
+	[require(PurchasePrompt.Actions.RequestExperiencePurchase).name] = function(_, p1) --[[ Line: 120 ]]
+		-- upvalues: RequestTypeModule (copy)
 		return {
-			requestType = requestTypeModule.Experience,
+			requestType = RequestTypeModule.Experience,
 			universeId = p1.universeId
 		}
 	end,
-	[requestLookPurchaseModule.name] = function(_, p1)
-		-- upvalues: requestTypeModule (ref)
-		return { requestType = requestTypeModule.Look, lookId = p1.lookId }
-	end,
-	[requestRobuxUpsellPurchaseModule.name] = if fFlagAXMISWithBlackbird then function(_, _)
-		-- upvalues: requestTypeModule (ref)
-		return { requestType = requestTypeModule.RobuxUpsell }
-	end else nil,
-	[requestDeveloperSubscriptionPurchaseModule.name] = function(_, p1)
-		-- upvalues: requestTypeModule (ref)
+	[require(PurchasePrompt.Actions.RequestLookPurchase).name] = function(_, p1) --[[ Line: 126 ]]
+		-- upvalues: RequestTypeModule (copy)
 		return {
-			requestType = requestTypeModule.DeveloperSubscription,
+			requestType = RequestTypeModule.Look,
+			lookId = p1.lookId
+		}
+	end,
+	[require(PurchasePrompt.Actions.RequestRobuxUpsellPurchase).name] = if require(Parent.SharedFlags).FFlagAXMISWithBlackbird then function(_, _) --[[ Line: 133 ]]
+		-- upvalues: RequestTypeModule (copy)
+		return { requestType = RequestTypeModule.RobuxUpsell }
+	end else nil,
+	[require(PurchasePrompt.Actions.RequestDeveloperSubscriptionPurchase).name] = function(_, p1) --[[ Line: 139 ]]
+		-- upvalues: RequestTypeModule (copy)
+		return {
+			requestType = RequestTypeModule.DeveloperSubscription,
 			subscriptionId = p1.subscriptionId,
 			expectedPrice = p1.expectedPrice
 		}
 	end,
-	[requestVIPServerPurchaseModule.name] = function(_, _)
-		-- upvalues: requestTypeModule (ref)
-		return { requestType = requestTypeModule.VIPServer }
+	[require(PurchasePrompt.Actions.RequestVIPServerPurchase).name] = function(_, _) --[[ Line: 146 ]]
+		-- upvalues: RequestTypeModule (copy)
+		return { requestType = RequestTypeModule.VIPServer }
 	end,
-	[refreshExpectedPriceModule.name] = function(p1, p2)
-		local cloned = table.clone(p1)
-		cloned.expectedPrice = p2.expectedPrice
+	[require(PurchasePrompt.Actions.RefreshExpectedPrice).name] = function(Tbl, p1) --[[ Line: 151 ]]
+		local Copy = table.clone(Tbl)
+		Copy.expectedPrice = p1.expectedPrice
 		
-		return cloned
+		return Copy
 	end,
-	[completeRequestModule.name] = function(_, _)
-		-- upvalues: t (ref)
-		return t
+	[require(PurchasePrompt.Actions.CompleteRequest).name] = function(_, _) --[[ Line: 156 ]]
+		-- upvalues: config (copy)
+		return config
 	end
-})
+}))

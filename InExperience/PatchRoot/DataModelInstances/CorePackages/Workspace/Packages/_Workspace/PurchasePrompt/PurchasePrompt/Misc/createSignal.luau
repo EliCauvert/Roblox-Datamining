@@ -1,53 +1,51 @@
-﻿local function _(p1, p2, p3)
-	local _ = {}
-	local cloned = table.clone(p1)
-	cloned[p2] = p3
+﻿local function _(Tbl, Key, p1) --[[ Line: 16 | Named "addToMap" ]]
+	local Copy = table.clone(Tbl)
+	Copy[Key] = p1
 	
-	return cloned
+	return Copy
 end
 
-local _ = function(p1, p2)
+local _ = function(List, p1) --[[ Line: 26 | Named "removeFromMap" ]]
 	local t = {}
 	
-	for i, v in pairs(p1) do
-		if i ~= p2 then
-			t[i] = v
+	for i, value in pairs(List) do
+		if i ~= p1 then
+			t[i] = value
 		end
 	end
 	return t
 end
 
-return function()
-	local t = {}
+return function() --[[ Line: 38 | Named "createSignal" ]]
+	local Tbl = {}
 	
 	return {
-		subscribe = function(_, p3)
-			-- upvalues: t (write)
-			assert(typeof(p3) == "function", "Can only subscribe to signals with a function.")
-			local t_1 = { disconnected = false, callback = p3 }
-			local _ = {}
-			local cloned = table.clone(t)
-			cloned[p3] = t_1
-			t = cloned
+		subscribe = function(_, Callback) --[[ Line: 41 ]]
+			-- upvalues: Tbl (ref)
+			assert(typeof(Callback) == "function", "Can only subscribe to signals with a function.")
+			local config = { disconnected = false, callback = Callback }
+			local Copy = table.clone(Tbl)
+			Copy[Callback] = config
+			Tbl = Copy
 			
-			return function()
-				-- upvalues: t_1 (ref), t (copy), p3 (ref)
-				assert(not t_1.disconnected, "Listeners can only be disconnected once.")
-				t_1.disconnected = true
-				local t_2 = {}
+			return function() --[[ Line: 51 | Named "disconnect" ]]
+				-- upvalues: config (copy), Tbl (upval), Callback (copy)
+				assert(not config.disconnected, "Listeners can only be disconnected once.")
+				config.disconnected = true
+				local t = {}
 				
-				for i, v in pairs(t) do
-					if i ~= p3 then
-						t_2[i] = v
+				for i, value in pairs(Tbl) do
+					if i ~= Callback then
+						t[i] = value
 					end
 				end
-				t = t_2
+				Tbl = t
 			end
 		end,
-		fire = function(_, ...)
-			-- upvalues: t (write)
-			for i, v in pairs(t) do
-				if not v.disconnected then
+		fire = function(_, ...) --[[ Line: 61 ]]
+			-- upvalues: Tbl (ref)
+			for i, value in pairs(Tbl) do
+				if not value.disconnected then
 					i(...)
 				end
 			end

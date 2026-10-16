@@ -1,41 +1,41 @@
-﻿local gameJoinCard = script:FindFirstAncestor("GameJoinCard")
-local reactModule = require(gameJoinCard.Parent.React)
-local prefetchGameJoinCardMediaModule = require(gameJoinCard.prefetchGameJoinCardMedia)
+﻿local GameJoinCard = script:FindFirstAncestor("GameJoinCard")
+local ReactModule = require(GameJoinCard.Parent.React)
+local PrefetchGameJoinCardMediaModule = require(GameJoinCard.prefetchGameJoinCardMedia)
 
-return function(p1)
-	-- upvalues: reactModule (ref), prefetchGameJoinCardMediaModule (ref)
-	local var1 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref)
+return function(p1) --[[ Line: 21 | Named "usePrefetchInGameFriendsMedia" ]]
+	-- upvalues: ReactModule (copy), PrefetchGameJoinCardMediaModule (copy)
+	local UseMemoResult = ReactModule.useMemo(function(): string --[[ Line: 24 ]]
+		-- upvalues: p1 (copy)
 		if not p1 then
 			return ""
 		end
 		local t = {}
-		local t_1 = {}
+		local List = {}
 		
-		for i, v in p1 do
-			local presence = v.presence
+		for _, value in p1 do
+			local Presence = value.presence
 			
-			if presence and presence.userPresenceType == "InGame" then
-				local var2 = tostring(presence.universeId or "")
+			if Presence and Presence.userPresenceType == "InGame" then
+				local Text = tostring(Presence.universeId or "")
 				
-				if var2 ~= "" and not t[var2] then
-					t[var2] = true
-					table.insert(t_1, var2)
+				if Text ~= "" and not t[Text] then
+					t[Text] = true
+					table.insert(List, Text)
 				end
 			end
 		end
-		table.sort(t_1)
+		table.sort(List)
 		
-		return table.concat(t_1, ",")
+		return table.concat(List, ",")
 	end, { p1 })
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), prefetchGameJoinCardMediaModule (copy)
-		if var1 == "" then return end
-		local t = {}
+	ReactModule.useEffect(function() --[[ Line: 45 ]]
+		-- upvalues: UseMemoResult (copy), PrefetchGameJoinCardMediaModule (upval)
+		if UseMemoResult == "" then return end
+		local List = {}
 		
-		for i, v in string.split(var1, ",") do
-			table.insert(t, { universeId = v })
+		for _, UniverseId in string.split(UseMemoResult, ",") do
+			table.insert(List, { universeId = UniverseId })
 		end
-		prefetchGameJoinCardMediaModule(t)
-	end, { var1 })
+		PrefetchGameJoinCardMediaModule(List)
+	end, { UseMemoResult })
 end

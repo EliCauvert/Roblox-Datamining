@@ -1,104 +1,102 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local httpService = game:GetService("HttpService")
-local runService = game:GetService("RunService")
-local robloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local withSelectionCursorProvider = UIBloxModule.App.SelectionImage.withSelectionCursorProvider
-local cursorKind = UIBloxModule.App.SelectionImage.CursorKind
-local var1 = require(robloxGui.Modules.VoiceChat.Logger)(script.Name)
-local roactModule = require(corePackagesService.Packages.Roact)
-local reactIsModule = require(corePackagesService.Packages.ReactIs)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local tModule = require(corePackagesService.Packages.t)
-local constantsModule = require(robloxGui.Modules.VoiceChat.Constants)
-local default = require(robloxGui.Modules.VoiceChat.VoiceChatServiceManager).default
-local voiceIndicator = roactModule.PureComponent:extend("VoiceIndicator")
-voiceIndicator.validateProps = tModule.strictInterface({
-	onClicked = tModule.optional(tModule.callback),
-	userId = tModule.string,
-	hideOnError = tModule.optional(tModule.boolean),
-	size = tModule.optional(tModule.UDim2),
-	iconStyle = tModule.optional(tModule.union(tModule.literal("MicDark"), tModule.literal("MicLight"), tModule.literal("SpeakerDark"), tModule.literal("SpeakerLight"))),
-	iconTransparency = tModule.optional(tModule.union(tModule.number, tModule.table)),
-	voiceState = tModule.string
+﻿local CorePackages = game:GetService("CorePackages")
+local HttpService = game:GetService("HttpService")
+local RunService = game:GetService("RunService")
+local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
+local UIBloxModule = require(CorePackages.Packages.UIBlox)
+local WithSelectionCursorProviderFunction = UIBloxModule.App.SelectionImage.withSelectionCursorProvider
+local CursorKind = UIBloxModule.App.SelectionImage.CursorKind
+local v1 = require(RobloxGui.Modules.VoiceChat.Logger)(script.Name)
+local RoactModule = require(CorePackages.Packages.Roact)
+local ReactIsModule = require(CorePackages.Packages.ReactIs)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local TModule = require(CorePackages.Packages.t)
+local ConstantsModule = require(RobloxGui.Modules.VoiceChat.Constants)
+local Default = require(RobloxGui.Modules.VoiceChat.VoiceChatServiceManager).default
+local VoiceIndicator = RoactModule.PureComponent:extend("VoiceIndicator")
+VoiceIndicator.validateProps = TModule.strictInterface({
+	onClicked = TModule.optional(TModule.callback),
+	userId = TModule.string,
+	hideOnError = TModule.optional(TModule.boolean),
+	size = TModule.optional(TModule.UDim2),
+	iconStyle = TModule.optional(TModule.union(TModule.literal("MicDark"), TModule.literal("MicLight"), TModule.literal("SpeakerDark"), TModule.literal("SpeakerLight"))),
+	iconTransparency = TModule.optional(TModule.union(TModule.number, TModule.table)),
+	voiceState = TModule.string
 })
-voiceIndicator.defaultProps = {}
+VoiceIndicator.defaultProps = {}
 
-function voiceIndicator.getIcon(_, p1)
-	return "rbxasset://textures/ui/VoiceChat/" .. p0 .. ".png"
+function VoiceIndicator:getIcon(Text): string --[[ Line: 47 ]]
+	return "rbxasset://textures/ui/VoiceChat/" .. Text .. ".png"
 end
 
-function voiceIndicator.init(p1)
-	-- upvalues: roactModule (ref), httpService (ref), runService (ref), constantsModule (ref), default (ref)
-	local var2, var3 = roactModule.createBinding(0)
-	p1.level = var2
-	p1.updateLevel = var3
-	local var4, var5 = roactModule.createBinding(p1.props.voiceState)
-	p1.voiceState = var4
-	p1.updateVoiceState = var5
-	p1.renderStepName = httpService:GenerateGUID()
-	runService:BindToRenderStep(p1.renderStepName, 1, function()
-		-- upvalues: p1 (ref)
+function VoiceIndicator.init(p1) --[[ Line: 51 ]]
+	-- upvalues: RoactModule (copy), HttpService (copy), RunService (copy), ConstantsModule (copy), Default (copy)
+	p1.level, p1.updateLevel = RoactModule.createBinding(0)
+	p1.voiceState, p1.updateVoiceState = RoactModule.createBinding(p1.props.voiceState)
+	p1.renderStepName = HttpService:GenerateGUID()
+	RunService:BindToRenderStep(p1.renderStepName, 1, function() --[[ Line: 58 ]]
+		-- upvalues: p1 (copy)
 		p1.updateLevel(math.random())
 	end)
-	p1.levelIcon = roactModule.joinBindings({ p1.voiceState, p1.level }):map(function(p2)
-		-- upvalues: constantsModule (copy), default (copy), p1 (ref)
-		local var6 = p2[1]
+	p1.levelIcon = RoactModule.joinBindings({ p1.voiceState, p1.level }):map(function(Entry) --[[ Line: 62 ]]
+		-- upvalues: ConstantsModule (upval), Default (upval), p1 (copy)
+		local Entry1 = Entry[1]
+		local Entry2: number = Entry[2]
 		
-		return if var6 == constantsModule.VOICE_STATE.MUTED or var6 == constantsModule.VOICE_STATE.LOCAL_MUTED then default:GetIcon("Muted", p1.props.iconStyle) elseif var6 == constantsModule.VOICE_STATE.CONNECTING then default:GetIcon("Connecting", p1.props.iconStyle) elseif var6 == constantsModule.VOICE_STATE.INACTIVE then default:GetIcon("Unmuted0", p1.props.iconStyle) elseif var6 == constantsModule.VOICE_STATE.TALKING then default:GetIcon("Unmuted" .. tostring(math.floor(p2[2] * 5 + 0.5) * 20), p1.props.iconStyle) else default:GetIcon("Error", p1.props.iconStyle)
+		return if Entry1 == ConstantsModule.VOICE_STATE.MUTED or Entry1 == ConstantsModule.VOICE_STATE.LOCAL_MUTED then Default:GetIcon("Muted", p1.props.iconStyle) elseif Entry1 == ConstantsModule.VOICE_STATE.CONNECTING then Default:GetIcon("Connecting", p1.props.iconStyle) elseif Entry1 == ConstantsModule.VOICE_STATE.INACTIVE then Default:GetIcon("Unmuted0", p1.props.iconStyle) elseif Entry1 == ConstantsModule.VOICE_STATE.TALKING then Default:GetIcon("Unmuted" .. tostring(math.floor(Entry2 * 5 + 0.5) * 20), p1.props.iconStyle) else Default:GetIcon("Error", p1.props.iconStyle)
 	end)
 end
 
-function voiceIndicator.renderWithSelectionCursor(p1, p2)
-	-- upvalues: constantsModule (ref), reactIsModule (ref), roactModule (ref), cursorKind (ref)
-	if p1.props.hideOnError and (not p1.props.voiceState or (if p1.props.voiceState ~= constantsModule.VOICE_STATE.ERROR then p1.props.voiceState == constantsModule.VOICE_STATE.HIDDEN else true)) then
+function VoiceIndicator.renderWithSelectionCursor(p1, Callback) --[[ Line: 82 ]]
+	-- upvalues: ConstantsModule (copy), ReactIsModule (copy), RoactModule (copy), CursorKind (copy)
+	local IsVoiceStateMatch: boolean = p1.props.voiceState == ConstantsModule.VOICE_STATE.ERROR or p1.props.voiceState == ConstantsModule.VOICE_STATE.HIDDEN
+	
+	if p1.props.hideOnError and (not p1.props.voiceState or IsVoiceStateMatch) then
 		return nil
 	end
-	local var2 = if p1.props.voiceState == constantsModule.VOICE_STATE.LOCAL_MUTED then 0.5 else 0
+	local MapResult = if p1.props.voiceState == ConstantsModule.VOICE_STATE.LOCAL_MUTED then 0.5 else 0
 	
 	if p1.props.iconTransparency then
-		local var3 = var2
-		var2 = if reactIsModule.isBinding(p1.props.iconTransparency) then p1.props.iconTransparency:map(function(p3)
-			-- upvalues: var3 (ref)
-			return 1 - (1 - p3) * (1 - var3)
-		end) else 1 - (1 - p1.props.iconTransparency) * (1 - var3)
+		MapResult = if ReactIsModule.isBinding(p1.props.iconTransparency) then p1.props.iconTransparency:map(function(p2: number): number --[[ Line: 94 ]]
+			-- upvalues: MapResult (copy)
+			return 1 - (1 - p2) * (1 - MapResult)
+		end) else 1 - (1 - p1.props.iconTransparency) * (1 - MapResult)
 	end
-	return roactModule.createElement("ImageButton", {
+	return RoactModule.createElement("ImageButton", {
 		Size = p1.props.size or UDim2.fromOffset(28, 28),
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
 		Image = p1.levelIcon,
-		ImageTransparency = var2,
-		SelectionImageObject = p2(cursorKind.RoundedRectNoInset),
-		[roactModule.Event.Activated] = p1.props.onClicked
+		ImageTransparency = MapResult,
+		SelectionImageObject = Callback(CursorKind.RoundedRectNoInset),
+		[RoactModule.Event.Activated] = p1.props.onClicked
 	})
 end
 
-function voiceIndicator.render(p1)
-	-- upvalues: withSelectionCursorProvider (ref)
-	return withSelectionCursorProvider(function(p2)
-		-- upvalues: p1 (ref)
+function VoiceIndicator.render(p1) --[[ Line: 113 ]]
+	-- upvalues: WithSelectionCursorProviderFunction (copy)
+	return WithSelectionCursorProviderFunction(function(p2) --[[ Line: 114 ]]
+		-- upvalues: p1 (copy)
 		return p1:renderWithSelectionCursor(p2)
 	end)
 end
 
-function voiceIndicator.didUpdate(p1, p2, _)
-	-- upvalues: var1 (ref)
-	var1:trace("Voice state updated to {} for ...{}", p1.props.voiceState, string.sub(tostring(p1.props.userId), -4))
+function VoiceIndicator.didUpdate(p1, p2, _) --[[ Line: 119 ]]
+	-- upvalues: v1 (copy)
+	v1:trace("Voice state updated to {} for ...{}", p1.props.voiceState, (string.sub(tostring(p1.props.userId), -4)))
 	
 	if p2.voiceState ~= p1.props.voiceState then
 		p1.updateVoiceState(p1.props.voiceState)
 	end
 end
 
-function voiceIndicator.willUnmount(p1)
-	-- upvalues: runService (ref)
-	pcall(function()
-		-- upvalues: runService (copy), p1 (ref)
-		runService:UnbindFromRenderStep(p1.renderStepName)
+function VoiceIndicator.willUnmount(p1) --[[ Line: 126 ]]
+	-- upvalues: RunService (copy)
+	pcall(function() --[[ Line: 127 ]]
+		-- upvalues: RunService (upval), p1 (copy)
+		RunService:UnbindFromRenderStep(p1.renderStepName)
 	end)
 end
 
-return roactRoduxModule.connect(function(p1, p2)
+return RoactRoduxModule.connect(function(p1, p2) --[[ Line: 132 | Named "mapStateToProps" ]]
 	return { voiceState = p1.voiceState[p2.userId] }
-end)(voiceIndicator)
+end)(VoiceIndicator)

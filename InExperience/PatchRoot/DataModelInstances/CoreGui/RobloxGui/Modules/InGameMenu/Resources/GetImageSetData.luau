@@ -1,8 +1,8 @@
-﻿local var1 = nil
+﻿local Config = nil
 
-function make_assets_1x()
-	-- upvalues: var1 (write)
-	var1 = {
+function make_assets_1x() --[[ Line: 11 ]]
+	-- upvalues: Config (ref)
+	Config = {
 		["LuaApp/9-slice/gr-badge"] = {
 			ImageSet = "LuaApp/img_set_1x_1",
 			ImageRectOffset = Vector2.new(24, 496),
@@ -1406,11 +1406,11 @@ function make_assets_1x()
 	}
 end
 
-local var2 = nil
+local Config1 = nil
 
-function make_assets_3x()
-	-- upvalues: var2 (write)
-	var2 = {
+function make_assets_3x() --[[ Line: 295 ]]
+	-- upvalues: Config1 (ref)
+	Config1 = {
 		["LuaApp/9-slice/gr-badge"] = {
 			ImageSet = "LuaApp/img_set_3x_1",
 			ImageRectOffset = Vector2.new(3, 976),
@@ -2759,11 +2759,11 @@ function make_assets_3x()
 	}
 end
 
-local var3 = nil
+local Config2 = nil
 
-function make_assets_2x()
-	-- upvalues: var3 (write)
-	var3 = {
+function make_assets_2x() --[[ Line: 568 ]]
+	-- upvalues: Config2 (ref)
+	Config2 = {
 		["LuaApp/9-slice/gr-badge"] = {
 			ImageSet = "LuaApp/img_set_2x_2",
 			ImageRectOffset = Vector2.new(470, 227),
@@ -4122,20 +4122,22 @@ function make_assets_2x()
 	}
 end
 
-return function(p1)
-	-- upvalues: var2 (write), var3 (write), var1 (write)
+return function(p1: number) --[[ Line: 842 ]]
+	-- upvalues: Config1 (ref), Config2 (ref), Config (ref)
 	if p1 > 2.5 then
-		if not var2 then
+		if not Config1 then
 			make_assets_3x()
 		end
-		return var2, 3
+		return Config1, 3
 	elseif p1 > 1.5 then
-		if not var3 then
+		if not Config2 then
 			make_assets_2x()
 		end
-		return var3, 2
-	elseif not var1 then
-		make_assets_1x()
+		return Config2, 2
+	else
+		if not Config then
+			make_assets_1x()
+		end
+		return Config, 1
 	end
-	return var1, 1
 end

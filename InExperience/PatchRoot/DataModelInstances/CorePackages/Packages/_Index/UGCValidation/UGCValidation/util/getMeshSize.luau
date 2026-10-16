@@ -1,24 +1,24 @@
 ﻿local UGCValidationService = game:GetService("UGCValidationService")
 local _ = require(script.Parent.Parent.util.Types)
 
-return function(p1)
-	-- upvalues: UGCValidationService (ref)
-	local editableMeshEditableMeshVerts = UGCValidationService:GetEditableMeshVerts(p1.editableMesh)
-	local var1 = 1e999
-	local var2 = -1e999
-	local var3 = 1e999
-	local var4 = -1e999
-	local var5 = 1e999
-	local var6 = -1e999
+return function(p1): Vector3 --[[ Line: 7 | Named "getMeshSize" ]]
+	-- upvalues: UGCValidationService (copy)
+	local EditableMeshVerts = UGCValidationService:GetEditableMeshVerts(p1.editableMesh)
+	local Smallest = 1e999
+	local Largest = -1e999
+	local Smallest1 = 1e999
+	local Largest1 = -1e999
+	local Smallest2 = 1e999
+	local Largest2 = -1e999
 	
-	for i = 1, #editableMeshEditableMeshVerts do
-		local var7 = editableMeshEditableMeshVerts[i]
-		var1 = math.min(var1, var7.X)
-		var3 = math.min(var3, var7.Y)
-		var5 = math.min(var5, var7.Z)
-		var2 = math.max(var2, var7.X)
-		var4 = math.max(var4, var7.Y)
-		var6 = math.max(var6, var7.Z)
+	for i = 1, #EditableMeshVerts do
+		local EditableMeshVert = EditableMeshVerts[i]
+		Smallest = math.min(Smallest, EditableMeshVert.X)
+		Smallest1 = math.min(Smallest1, EditableMeshVert.Y)
+		Smallest2 = math.min(Smallest2, EditableMeshVert.Z)
+		Largest = math.max(Largest, EditableMeshVert.X)
+		Largest1 = math.max(Largest1, EditableMeshVert.Y)
+		Largest2 = math.max(Largest2, EditableMeshVert.Z)
 	end
-	return Vector3.new(var2 - var1, var4 - var3, var6 - var5)
+	return (Vector3.new(Largest - Smallest, Largest1 - Smallest1, Largest2 - Smallest2))
 end

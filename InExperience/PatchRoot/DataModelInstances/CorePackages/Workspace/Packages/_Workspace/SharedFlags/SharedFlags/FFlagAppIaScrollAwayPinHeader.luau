@@ -1,1 +1,3 @@
-﻿return require(script.Parent.FFlagAppIaScrollAway) and game:DefineFastFlag("AppIaScrollAwayPinHeader", false)
+﻿local AppIaScrollAwayPinHeader = game:DefineFastFlag("AppIaScrollAwayPinHeader", false)
+
+return require(script.Parent.FFlagAppIaScrollAway) and AppIaScrollAwayPinHeader

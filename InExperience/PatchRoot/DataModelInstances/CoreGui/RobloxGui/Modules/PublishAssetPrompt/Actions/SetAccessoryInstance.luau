@@ -1,3 +1,3 @@
-﻿return require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator(script.Name, function(p1)
-	return { accessoryInstance = p1 }
+﻿return require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator(script.Name, function(AccessoryInstance) --[[ Line: 4 ]]
+	return { accessoryInstance = AccessoryInstance }
 end)

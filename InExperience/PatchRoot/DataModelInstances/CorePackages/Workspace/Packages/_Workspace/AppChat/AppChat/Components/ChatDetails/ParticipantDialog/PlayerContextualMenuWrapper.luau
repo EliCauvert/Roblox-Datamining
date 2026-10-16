@@ -1,106 +1,101 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local component = require(parent.PlayerContextualMenu).Component
-local reactModule = require(parent.React)
-local sharedFlagsModule = require(parent.SharedFlags)
-local socialCommonModule = require(parent.SocialCommon)
-local UIBloxModule = require(parent.UIBlox)
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local responsiveModule = require(parent.Responsive)
-local memo = reactModule.memo
-local convertUserPresenceTypeToString = socialCommonModule.Utils.convertUserPresenceTypeToString
-local images = UIBloxModule.App.ImageSet.Images
-local interactable = UIBloxModule.Core.Control.Interactable
-local useEffect = reactModule.useEffect
-local useIsInExperienceModule = require(appChat.Hooks.useIsInExperience)
-local name = require(appChat.Logger):new(script.Name)
-local networkingFriendsModule = require(appChat.Http.NetworkingFriends)
-local _ = require(appChat.types)
-local useGetFriendshipStatus = require(parent.FriendsHydrationReact).useGetFriendshipStatus
-local fFlagAppChatPresenceStoreMigrationModule = require(appChat.Flags.FFlagAppChatPresenceStoreMigration)
-local fFlagAppChatMigrateFriendshipStatusesModule = require(appChat.Flags.FFlagAppChatMigrateFriendshipStatuses)
-local fFlagSkipBlockModal = sharedFlagsModule.FFlagSkipBlockModal
-local var1 = if fFlagAppChatPresenceStoreMigrationModule then require(parent.FriendsCommon).Hooks.useGetPresenceByUserId else nil
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local Component = require(Parent.PlayerContextualMenu).Component
+local ReactModule = require(Parent.React)
+local UIBloxModule = require(Parent.UIBlox)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local ResponsiveModule = require(Parent.Responsive)
+local MemoFunction = ReactModule.memo
+local ConvertUserPresenceTypeToStringFunction = require(Parent.SocialCommon).Utils.convertUserPresenceTypeToString
+local Images = UIBloxModule.App.ImageSet.Images
+local Interactable = UIBloxModule.Core.Control.Interactable
+local UseEffectFunction = ReactModule.useEffect
+local UseIsInExperienceModule = require(AppChat.Hooks.useIsInExperience)
+local NewResult = require(AppChat.Logger):new(script.Name)
+local NetworkingFriendsModule = require(AppChat.Http.NetworkingFriends)
+local _ = require(AppChat.types)
+local UseGetFriendshipStatusFunction = require(Parent.FriendsHydrationReact).useGetFriendshipStatus
+local FFlagAppChatPresenceStoreMigrationModule = require(AppChat.Flags.FFlagAppChatPresenceStoreMigration)
+local FFlagAppChatMigrateFriendshipStatusesModule = require(AppChat.Flags.FFlagAppChatMigrateFriendshipStatuses)
+local FFlagSkipBlockModal = require(Parent.SharedFlags).FFlagSkipBlockModal
+local UseGetPresenceByUserId = if FFlagAppChatPresenceStoreMigrationModule then require(Parent.FriendsCommon).Hooks.useGetPresenceByUserId else nil
 
-function PlayerContextualMenuWrapper(p1)
-	-- upvalues: useDispatch (ref), responsiveModule (ref), fFlagAppChatPresenceStoreMigrationModule (ref), var1 (ref), useSelector (ref), convertUserPresenceTypeToString (ref), fFlagAppChatMigrateFriendshipStatusesModule (ref), useGetFriendshipStatus (ref), useEffect (ref), networkingFriendsModule (ref), useIsInExperienceModule (ref), reactModule (ref), interactable (ref), component (ref), name (ref), fFlagSkipBlockModal (ref), images (ref)
-	local var2
-	local var3 = useDispatch()
-	local var4 = responsiveModule.useBreakpointXOrSmaller(responsiveModule.Keys.Small)
-	local _ = nil
+function PlayerContextualMenuWrapper(p1) --[[ Line: 47 ]]
+	-- upvalues: UseDispatchFunction (copy), ResponsiveModule (copy), FFlagAppChatPresenceStoreMigrationModule (copy), UseGetPresenceByUserId (copy), UseSelectorFunction (copy), ConvertUserPresenceTypeToStringFunction (copy), FFlagAppChatMigrateFriendshipStatusesModule (copy), UseGetFriendshipStatusFunction (copy), UseEffectFunction (copy), NetworkingFriendsModule (copy), UseIsInExperienceModule (copy), ReactModule (copy), Interactable (copy), Component (copy), NewResult (copy), FFlagSkipBlockModal (copy), Images (copy)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseBreakpointXOrSmallerResult = ResponsiveModule.useBreakpointXOrSmaller(ResponsiveModule.Keys.Small)
+	local Config = nil
 	
-	if fFlagAppChatPresenceStoreMigrationModule then
-		local var5 = var1(p1.participantId)
-		var2 = if var5 then {
-			locationString = var5.lastLocation,
-			locationPlaceId = if var5.placeId ~= "" then nil else var5.placeId,
-			locationRootPlaceId = if var5.rootPlaceId ~= "" then nil else var5.rootPlaceId,
-			locationUniverseId = if var5.universeId ~= "" then nil else var5.universeId,
-			status = var5.userPresenceType
+	if FFlagAppChatPresenceStoreMigrationModule then
+		local UseGetPresenceByUserIdResult = UseGetPresenceByUserId(p1.participantId)
+		Config = if UseGetPresenceByUserIdResult then {
+			locationString = UseGetPresenceByUserIdResult.lastLocation,
+			locationPlaceId = if UseGetPresenceByUserIdResult.placeId == "" then nil else UseGetPresenceByUserIdResult.placeId,
+			locationRootPlaceId = if UseGetPresenceByUserIdResult.rootPlaceId == "" then nil else UseGetPresenceByUserIdResult.rootPlaceId,
+			locationUniverseId = if UseGetPresenceByUserIdResult.universeId == "" then nil else UseGetPresenceByUserIdResult.universeId,
+			status = UseGetPresenceByUserIdResult.userPresenceType
 		} else nil
 	else
-		local participantId = useSelector(function(p2)
+		local UseSelectorResultEntry = UseSelectorFunction(function(p2) --[[ Line: 67 ]]
 			return p2.ChatAppReducer.Presence.byUserId
 		end)[p1.participantId]
-		var2 = if participantId then {
-			locationString = participantId.lastLocation,
-			locationPlaceId = participantId.placeId,
-			locationRootPlaceId = participantId.rootPlaceId,
-			locationUniverseId = participantId.universeId,
-			status = convertUserPresenceTypeToString(participantId.userPresenceType)
+		Config = if UseSelectorResultEntry then {
+			locationString = UseSelectorResultEntry.lastLocation,
+			locationPlaceId = UseSelectorResultEntry.placeId,
+			locationRootPlaceId = UseSelectorResultEntry.rootPlaceId,
+			locationUniverseId = UseSelectorResultEntry.universeId,
+			status = ConvertUserPresenceTypeToStringFunction(UseSelectorResultEntry.userPresenceType)
 		} else nil
 	end
-	local var6
-	local _ = nil
-	
-	if fFlagAppChatMigrateFriendshipStatusesModule then
-		var6 = useGetFriendshipStatus(p1.participantId)
+	local UseGetFriendshipStatusResult = nil
+	if FFlagAppChatMigrateFriendshipStatusesModule then
+		UseGetFriendshipStatusResult = UseGetFriendshipStatusFunction(p1.participantId)
 	else
-		var6 = useSelector(function(p2)
+		UseGetFriendshipStatusResult = UseSelectorFunction(function(p2) --[[ Line: 87 ]]
 			return p2.ChatAppReducer.Friends.friendshipStatus
 		end)[p1.participantId]
-		useEffect(function()
-			-- upvalues: var3 (ref), networkingFriendsModule (copy), p1 (ref)
-			var3(networkingFriendsModule.GetExtendedFriendshipStatus.API({ targetUserId = p1.participantId }))
+		UseEffectFunction(function() --[[ Line: 92 ]]
+			-- upvalues: UseDispatchResult (copy), NetworkingFriendsModule (upval), p1 (copy)
+			UseDispatchResult(NetworkingFriendsModule.GetExtendedFriendshipStatus.API({ targetUserId = p1.participantId }))
 		end, { p1.participantId })
 	end
-	return reactModule.createElement(interactable, {
+	return ReactModule.createElement(Interactable, {
 		Size = UDim2.new(1, 0, 1, 0),
 		BackgroundTransparency = 1,
-		onStateChanged = function() end,
+		onStateChanged = function() --[[ Line: 105 ]] end,
 		Selectable = false,
-		[reactModule.Event.Activated] = p1.onDismiss
+		[ReactModule.Event.Activated] = p1.onDismiss
 	}, {
-		PCM = reactModule.createElement(component, {
-			enableExperienceCTAs = if useIsInExperienceModule() then false else true,
-			subjectPresence = var2,
+		PCM = ReactModule.createElement(Component, {
+			enableExperienceCTAs = not UseIsInExperienceModule(),
+			subjectPresence = Config,
 			subjectUserId = p1.participantId,
-			robloxFriendshipStatus = var6,
-			closeCentralOverlayThunk = function() end,
-			onReportActivated = p1.openReportUser and function()
-				-- upvalues: name (copy), p1 (ref)
-				name:info("User activated reportUser | userId: {}, conversationId: {}", p1.participantId, p1.conversationId)
+			robloxFriendshipStatus = UseGetFriendshipStatusResult,
+			closeCentralOverlayThunk = function() --[[ Line: 117 ]] end,
+			onReportActivated = p1.openReportUser and function() --[[ Line: 118 ]]
+				-- upvalues: NewResult (upval), p1 (copy)
+				NewResult:info("User activated reportUser | userId: {}, conversationId: {}", p1.participantId, p1.conversationId)
 				p1.openReportUser(p1.participantId, p1.conversationId)
 			end,
-			onBlockActivated = p1.openBlockingModal and function()
-				-- upvalues: p1 (ref)
+			onBlockActivated = p1.openBlockingModal and function() --[[ Line: 127 ]]
+				-- upvalues: p1 (copy)
 				p1.openBlockingModal(p1.participantId, p1.conversationId)
 			end,
-			skipBlockModal = fFlagSkipBlockModal,
+			skipBlockModal = FFlagSkipBlockModal,
 			additionalButtons = if p1.showRemoveUserButton then {
 				{
-					icon = images["icons/actions/leave"],
+					icon = Images["icons/actions/leave"],
 					text = p1.removeFromGroupText,
-					onActivated = function()
-						-- upvalues: p1 (ref)
+					onActivated = function() --[[ Line: 138 ]]
+						-- upvalues: p1 (copy)
 						p1.openRemoveUserDialog(p1.participantId, p1.conversationId)
 					end
 				}
 			} else nil,
-			width = UDim.new(0, if var4 then 300 else 400)
+			width = UDim.new(0, if UseBreakpointXOrSmallerResult then 300 else 400)
 		})
 	})
 end
 
-return memo(PlayerContextualMenuWrapper)
+return MemoFunction(PlayerContextualMenuWrapper)

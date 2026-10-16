@@ -1,52 +1,51 @@
-﻿local interventionShared = script:FindFirstAncestor("InterventionShared")
-local parent = interventionShared.Parent
-local reactModule = require(parent.React)
-local constantsModule = require(interventionShared.Utils.Constants)
-local foundationModule = require(parent.Foundation)
-local view = foundationModule.View
-local useTokens = foundationModule.Hooks.useTokens
-local inlineLayoutModule = require(parent.InlineLayout)
-local inlineLayout = inlineLayoutModule.Components.InlineLayout
-local linkElement = inlineLayoutModule.Components.InlineLayoutElements.LinkElement
-local textElement = inlineLayoutModule.Components.InlineLayoutElements.TextElement
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local t = { name = "u", attributes = {} }
+﻿local InterventionShared = script:FindFirstAncestor("InterventionShared")
+local Parent = InterventionShared.Parent
+local ReactModule = require(Parent.React)
+local ConstantsModule = require(InterventionShared.Utils.Constants)
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local InlineLayoutModule = require(Parent.InlineLayout)
+local InlineLayout = InlineLayoutModule.Components.InlineLayout
+local LinkElement = InlineLayoutModule.Components.InlineLayoutElements.LinkElement
+local TextElement = InlineLayoutModule.Components.InlineLayoutElements.TextElement
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local config = { name = "u", attributes = {} }
 
-return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), useLocalization (ref), constantsModule (ref), textElement (ref), linkElement (ref), t (ref), reactModule (ref), view (ref), inlineLayout (ref)
-	local var1 = useTokens()
-	local disclaimer = useLocalization({
+return ReactModule.memo(function(Frame) --[[ Line: 31 | Named "InlineAppealLink" ]]
+	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), ConstantsModule (copy), TextElement (copy), LinkElement (copy), config (copy), ReactModule (copy), View (copy), InlineLayout (copy)
+	local UseTokensResult = UseTokensFunction()
+	local BodyMedium = UseTokensResult.Typography.BodyMedium
+	local Default = UseTokensResult.Color.Content.Default
+	local A, A2, A3 = UseLocalizationFunction({
 		disclaimer = {
-			constantsModule.localizationKeys.DisclaimerText,
+			ConstantsModule.localizationKeys.DisclaimerText,
 			startLink = "<a>",
 			endLink = "</a>"
 		}
-	}).disclaimer
-	local bodyMedium = var1.Typography.BodyMedium
-	local default = var1.Color.Content.Default
-	local var2, var3, var4 = disclaimer:match("^(.*)<a>(.*)</a>(.*)$")
+	}).disclaimer:match("^(.*)<a>(.*)</a>(.*)$")
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "size-full-0 auto-y",
 		testId = "inline-appeal-link",
-		LayoutOrder = p1.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		Layout = reactModule.createElement(inlineLayout, {
+		Layout = ReactModule.createElement(InlineLayout, {
 			Elements = {
-				textElement.new({ Text = var2, fontStyle = bodyMedium, textStyle = default }),
-				linkElement.new({
-					textElement.new({
+				TextElement.new({ Text = A, fontStyle = BodyMedium, textStyle = Default }),
+				LinkElement.new({
+					TextElement.new({
 						testId = "inline-appeal-link-action-text",
-						Text = var3,
-						EngineTags = { t },
-						fontStyle = bodyMedium,
-						textStyle = default
+						Text = A2,
+						EngineTags = { config },
+						fontStyle = BodyMedium,
+						textStyle = Default
 					})
 				}, {
 					key = "inline-appeal-link-action",
-					onActivated = p1.onActivated
+					onActivated = Frame.onActivated
 				}),
-				textElement.new({ Text = var4, fontStyle = bodyMedium, textStyle = default })
+				TextElement.new({ Text = A3, fontStyle = BodyMedium, textStyle = Default })
 			}
 		})
 	})

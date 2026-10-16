@@ -1,5 +1,5 @@
-﻿local reactModule = require(script:FindFirstAncestor("IAPExperience").Parent.React)
-local t = {
+﻿local ReactModule = require(script:FindFirstAncestor("IAPExperience").Parent.React)
+local config = {
 	["IAPExperience.PurchasePrompt.Label.BlackbirdDiscount"] = "Sit amet ({discountPercentage}% elit)",
 	["IAPExperience.PurchasePrompt.Label.BlackbirdDiscountNoPercent"] = "Sit amet",
 	["IAPExperience.PurchasePrompt.Label.GenericDiscount"] = "... ({discountPercentage}% elit)",
@@ -10,28 +10,28 @@ local t = {
 	["IAPExperience.PurchasePrompt.Label.Total"] = "Total"
 }
 
-return function(p1)
-	-- upvalues: reactModule (ref), t (ref)
-	return reactModule.useMemo(function()
-		-- upvalues: p1 (ref), t (copy)
-		local t_1 = {}
+return function(p1) --[[ Line: 24 | Named "usePlaceholderLocalization" ]]
+	-- upvalues: ReactModule (copy), config (copy)
+	return ReactModule.useMemo(function() --[[ Line: 25 ]]
+		-- upvalues: p1 (copy), config (upval)
+		local t = {}
 		
-		for i, v in pairs(p1) do
-			local var1 = if typeof(v) == "table" then v[1] else v
-			local var2 = t[var1] or var1
+		for i, value in pairs(p1) do
+			local v1 = if typeof(value) == "table" then value[1] else value
+			local Entry = config[v1] or v1
 			
-			if typeof(v) == "table" then
-				for i_1, v_1 in pairs(v) do
-					if typeof(i_1) == "string" then
-						var2 = string.gsub(var2, "{" .. i_1 .. "}", function()
-							-- upvalues: v_1 (ref)
-							return tostring(v_1)
+			if typeof(value) == "table" then
+				for i1, value1 in pairs(value) do
+					if typeof(i1) == "string" then
+						Entry = string.gsub(Entry, "{" .. i1 .. "}", function(): string --[[ Line: 33 ]]
+							-- upvalues: value1 (copy)
+							return (tostring(value1))
 						end)
 					end
 				end
 			end
-			t_1[i] = var2
+			t[i] = Entry
 		end
-		return t_1
+		return t
 	end, { p1 })
 end

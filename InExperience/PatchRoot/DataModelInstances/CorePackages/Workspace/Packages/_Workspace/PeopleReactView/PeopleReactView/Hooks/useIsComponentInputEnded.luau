@@ -1,33 +1,33 @@
-﻿local reactModule = require(script:FindFirstAncestor("PeopleReactView").Parent.React)
+﻿local ReactModule = require(script:FindFirstAncestor("PeopleReactView").Parent.React)
 
-return function(p1)
-	-- upvalues: reactModule (ref)
-	local var1, var2 = reactModule.useState(false)
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var2 (ref)
-		local inputBeganConnection = nil
-		local inputEndedConnection = nil
+return function(p1) --[[ Line: 10 ]]
+	-- upvalues: ReactModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	ReactModule.useEffect(function() --[[ Line: 13 ]]
+		-- upvalues: p1 (copy), UseStateResult2 (copy)
+		local Connection = nil
+		local Connection1 = nil
 		
 		if p1.current then
-			inputBeganConnection = p1.current.InputBegan:Connect(function()
-				-- upvalues: var2 (copy)
-				var2(false)
+			Connection = p1.current.InputBegan:Connect(function() --[[ Line: 18 ]]
+				-- upvalues: UseStateResult2 (upval)
+				UseStateResult2(false)
 			end)
-			inputEndedConnection = p1.current.InputEnded:Connect(function()
-				-- upvalues: var2 (copy)
-				var2(true)
+			Connection1 = p1.current.InputEnded:Connect(function() --[[ Line: 21 ]]
+				-- upvalues: UseStateResult2 (upval)
+				UseStateResult2(true)
 			end)
 		end
-		return function()
-			-- upvalues: inputBeganConnection (write), inputEndedConnection (write)
-			if inputBeganConnection then
-				inputBeganConnection:Disconnect()
+		return function() --[[ Line: 26 ]]
+			-- upvalues: Connection (ref), Connection1 (ref)
+			if Connection then
+				Connection:Disconnect()
 			end
-			if inputEndedConnection then
-				inputEndedConnection:Disconnect()
+			if Connection1 then
+				Connection1:Disconnect()
 			end
 		end
 	end, {})
 	
-	return var1
+	return UseStateResult
 end

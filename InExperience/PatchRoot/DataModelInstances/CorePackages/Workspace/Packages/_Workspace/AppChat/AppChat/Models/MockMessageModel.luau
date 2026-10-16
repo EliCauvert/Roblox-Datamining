@@ -1,30 +1,30 @@
-﻿local parent = script:FindFirstAncestor("AppChat").Parent
-local dateTime = require(parent.Time).DateTime
-local generateStringId = require(parent.AppCommonLib).GenerateStringId
-local messageModelModule = require(script.Parent.MessageModel)
-local t = {
-	mock = function(p1)
-		-- upvalues: messageModelModule (ref), generateStringId (ref), dateTime (ref)
-		local var1 = messageModelModule.new()
-		var1.id = generateStringId()
-		var1.senderTargetId = generateStringId()
-		var1.conversationId = generateStringId()
-		var1.senderType = messageModelModule.SenderTypes.User
-		var1.content = "MESSAGE CONTENT"
-		var1.messageType = messageModelModule.MessageTypes.PlainText
-		var1.read = false
-		var1.sent = dateTime.now()
-		var1.previousMessageId = nil
-		var1.filteredForReceivers = false
+﻿local Parent = script:FindFirstAncestor("AppChat").Parent
+local _DateTime = require(Parent.Time).DateTime
+local GenerateStringIdFunction = require(Parent.AppCommonLib).GenerateStringId
+local MessageModelModule = require(script.Parent.MessageModel)
+local MockMessageModelModule = {
+	mock = function(List) --[[ Line: 11 ]]
+		-- upvalues: MessageModelModule (copy), GenerateStringIdFunction (copy), _DateTime (copy)
+		local NewMessageModel = MessageModelModule.new()
+		NewMessageModel.id = GenerateStringIdFunction()
+		NewMessageModel.senderTargetId = GenerateStringIdFunction()
+		NewMessageModel.conversationId = GenerateStringIdFunction()
+		NewMessageModel.senderType = MessageModelModule.SenderTypes.User
+		NewMessageModel.content = "MESSAGE CONTENT"
+		NewMessageModel.messageType = MessageModelModule.MessageTypes.PlainText
+		NewMessageModel.read = false
+		NewMessageModel.sent = _DateTime.now()
+		NewMessageModel.previousMessageId = nil
+		NewMessageModel.filteredForReceivers = false
 		
-		if p1 ~= nil then
-			for i, v in pairs(p1) do
-				var1[i] = v
+		if List ~= nil then
+			for i, value in pairs(List) do
+				NewMessageModel[i] = value
 			end
 		end
-		return var1
+		return NewMessageModel
 	end
 }
-setmetatable(t, { __index = messageModelModule })
+setmetatable(MockMessageModelModule, { __index = MessageModelModule })
 
-return t
+return MockMessageModelModule

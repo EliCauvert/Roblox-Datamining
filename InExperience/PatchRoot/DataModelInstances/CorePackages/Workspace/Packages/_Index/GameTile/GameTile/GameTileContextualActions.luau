@@ -1,40 +1,39 @@
-﻿local gameTile = script:FindFirstAncestor("GameTile")
-local parent = gameTile.Parent
-local cryoModule = require(parent.Cryo)
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local responsiveModule = require(parent.Responsive)
-local gameTileDirectActionModule = require(gameTile.GameTileDirectAction)
-local gameTileOverflowMenuModule = require(gameTile.GameTileOverflowMenu)
-local tileOverflowMenuItems = require(gameTile.GameTileConstants).TileOverflowMenuItems
-local iconName = foundationModule.Enums.IconName
-local useLastInput = responsiveModule.useLastInput
+﻿local GameTile = script:FindFirstAncestor("GameTile")
+local Parent = GameTile.Parent
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local ResponsiveModule = require(Parent.Responsive)
+local GameTileDirectActionModule = require(GameTile.GameTileDirectAction)
+local GameTileOverflowMenuModule = require(GameTile.GameTileOverflowMenu)
+local TileOverflowMenuItems = require(GameTile.GameTileConstants).TileOverflowMenuItems
+local IconName = require(Parent.Foundation).Enums.IconName
+local UseLastInputFunction = ResponsiveModule.useLastInput
 
-local function _(p1)
-	-- upvalues: tileOverflowMenuItems (ref)
-	local var1 = 0
+local function _(p1): number --[[ Line: 18 | Named "countAvailableActions" ]]
+	-- upvalues: TileOverflowMenuItems (copy)
+	local Count = 0
 	
-	for i, v in tileOverflowMenuItems do
-		if p1[v] then
-			var1 += 1
+	for _, tileOverflowMenuItem in TileOverflowMenuItems do
+		if p1[tileOverflowMenuItem] then
+			Count += 1
 		end
 	end
-	return var1
+	return Count
 end
 
-return function(p2)
-	-- upvalues: useLastInput (ref), tileOverflowMenuItems (ref), responsiveModule (ref), reactModule (ref), gameTileDirectActionModule (ref), cryoModule (ref), iconName (ref), gameTileOverflowMenuModule (ref)
-	local var2 = useLastInput()
-	local availableMenuItems = p2.availableMenuItems
-	local var3 = 0
+return function(p2) --[[ Line: 30 | Named "GameTileContextualActions" ]]
+	-- upvalues: UseLastInputFunction (copy), TileOverflowMenuItems (copy), ResponsiveModule (copy), ReactModule (copy), GameTileDirectActionModule (copy), CryoModule (copy), IconName (copy), GameTileOverflowMenuModule (copy)
+	local UseLastInputResult = UseLastInputFunction()
+	local AvailableMenuItems = p2.availableMenuItems
+	local Count = 0
 	
-	for i, v in tileOverflowMenuItems do
-		if availableMenuItems[v] then
-			var3 += 1
+	for _, tileOverflowMenuItem in TileOverflowMenuItems do
+		if AvailableMenuItems[tileOverflowMenuItem] then
+			Count += 1
 		end
 	end
-	return if var2 == responsiveModule.Input.Pointer and not p2.menuOpen and (var3 == 1 and p2.availableMenuItems[tileOverflowMenuItems.NotInterested]) then reactModule.createElement(gameTileDirectActionModule, cryoModule.Dictionary.join(p2, {
-		actionId = tileOverflowMenuItems.NotInterested,
-		iconOverride = { name = iconName.X }
-	})) else reactModule.createElement(gameTileOverflowMenuModule, p2)
+	return if UseLastInputResult == ResponsiveModule.Input.Pointer and not p2.menuOpen and Count == 1 and p2.availableMenuItems[TileOverflowMenuItems.NotInterested] then ReactModule.createElement(GameTileDirectActionModule, CryoModule.Dictionary.join(p2, {
+		actionId = TileOverflowMenuItems.NotInterested,
+		iconOverride = { name = IconName.X }
+	})) else ReactModule.createElement(GameTileOverflowMenuModule, p2)
 end

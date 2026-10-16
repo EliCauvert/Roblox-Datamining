@@ -1,20 +1,20 @@
-﻿local fStringAXBackendDrivenCatalogLayersNames = require(script:FindFirstAncestor("AvatarExperienceCommon").Parent.AvatarExperienceFlags).FStringAXBackendDrivenCatalogLayersNames
+﻿local FStringAXBackendDrivenCatalogLayersNamesFunction = require(script:FindFirstAncestor("AvatarExperienceCommon").Parent.AvatarExperienceFlags).FStringAXBackendDrivenCatalogLayersNames
 
-return function()
-	-- upvalues: fStringAXBackendDrivenCatalogLayersNames (ref)
-	local var1 = fStringAXBackendDrivenCatalogLayersNames()
+return function() --[[ Line: 6 ]]
+	-- upvalues: FStringAXBackendDrivenCatalogLayersNamesFunction (copy)
+	local FStringAXBackendDrivenCatalogLayersNamesResult: string = FStringAXBackendDrivenCatalogLayersNamesFunction()
 	
-	if not var1 or var1 == "" then
+	if not FStringAXBackendDrivenCatalogLayersNamesResult or FStringAXBackendDrivenCatalogLayersNamesResult == "" then
 		return nil
 	end
-	local t = {}
+	local List = {}
 	
-	for i, v in string.split(var1, ",") do
-		local replaced = string.gsub(v, "^%s*(.-)%s*$", "%1")
+	for _, value in string.split(FStringAXBackendDrivenCatalogLayersNamesResult, ",") do
+		local Replaced = string.gsub(value, "^%s*(.-)%s*$", "%1")
 		
-		if replaced ~= "" and string.len(replaced) <= 200 then
-			table.insert(t, replaced)
+		if Replaced ~= "" and string.len(Replaced) <= 200 then
+			table.insert(List, Replaced)
 		end
 	end
-	return if #t > 0 then t else nil
+	return #List > 0 and List or nil
 end

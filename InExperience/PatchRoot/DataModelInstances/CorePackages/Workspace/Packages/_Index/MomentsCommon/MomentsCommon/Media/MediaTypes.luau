@@ -1,6 +1,6 @@
-﻿local parent = script:FindFirstAncestor("MomentsCommon").Parent
-local _ = require(parent.React)
-local _ = require(parent.Signals)
-local _ = require(parent.MomentsTypes)
+﻿local Parent = script:FindFirstAncestor("MomentsCommon").Parent
+local _ = require(Parent.React)
+local _ = require(Parent.Signals)
+local _ = require(Parent.MomentsTypes)
 
 return {}

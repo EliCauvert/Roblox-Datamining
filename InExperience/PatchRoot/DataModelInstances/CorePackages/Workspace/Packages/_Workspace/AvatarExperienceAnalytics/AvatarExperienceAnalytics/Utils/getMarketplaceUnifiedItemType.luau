@@ -1,8 +1,8 @@
-﻿local avatarExperienceAnalytics = script:FindFirstAncestor("AvatarExperienceAnalytics")
-local _ = require(avatarExperienceAnalytics.Parent.AvatarExperienceModel)
-local unifiedEventLogEnumsModule = require(avatarExperienceAnalytics.UnifiedEventLogEnums)
+﻿local AvatarExperienceAnalytics = script:FindFirstAncestor("AvatarExperienceAnalytics")
+local _ = require(AvatarExperienceAnalytics.Parent.AvatarExperienceModel)
+local UnifiedEventLogEnumsModule = require(AvatarExperienceAnalytics.UnifiedEventLogEnums)
 
-return function(p1)
-	-- upvalues: unifiedEventLogEnumsModule (ref)
-	return if p1 == "Look" then unifiedEventLogEnumsModule.MarketplaceUnifiedItemType.LOOK elseif p1 == "Asset" then unifiedEventLogEnumsModule.MarketplaceUnifiedItemType.ASSET elseif p1 == "Bundle" then unifiedEventLogEnumsModule.MarketplaceUnifiedItemType.BUNDLE else nil
+return function(p1) --[[ Line: 13 | Named "getMarketplaceUnifiedItemType" ]]
+	-- upvalues: UnifiedEventLogEnumsModule (copy)
+	return if p1 == "Look" then UnifiedEventLogEnumsModule.MarketplaceUnifiedItemType.LOOK elseif p1 == "Asset" then UnifiedEventLogEnumsModule.MarketplaceUnifiedItemType.ASSET elseif p1 == "Bundle" then UnifiedEventLogEnumsModule.MarketplaceUnifiedItemType.BUNDLE else nil
 end

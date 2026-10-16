@@ -1,3 +1,3 @@
-﻿return require(script:FindFirstAncestor("ExpChat").Parent.Rodux).makeActionCreator(script.Name, function(p1)
-	return { userMessageIntent = p1 }
+﻿return require(script:FindFirstAncestor("ExpChat").Parent.Rodux).makeActionCreator(script.Name, function(UserMessageIntent) --[[ Line: 12 ]]
+	return { userMessageIntent = UserMessageIntent }
 end)

@@ -1,21 +1,22 @@
-﻿local parent = script:FindFirstAncestor("SocialCommon").Parent
-local promiseModule = require(parent.Promise)
-local cryoModule = require(parent.Cryo)
-local _ = require(parent.LuauPolyfill)
+﻿local Parent = script:FindFirstAncestor("SocialCommon").Parent
+local PromiseModule = require(Parent.Promise)
+local CryoModule = require(Parent.Cryo)
+local _ = require(Parent.LuauPolyfill)
 
-return function(p1)
-	-- upvalues: promiseModule (ref), cryoModule (ref)
-	local ids = p1.ids
-	local selector = p1.selector
-	local hydrate = p1.hydrate
+return function(p1) --[[ Line: 18 | Named "hydrateEmptyIdsHelper" ]]
+	-- upvalues: PromiseModule (copy), CryoModule (copy)
+	local Ids = p1.ids
+	local SelectorFunction = p1.selector
+	local HydrateFunction = p1.hydrate
 	
-	if not ids then
-		return promiseModule.resolve()
+	if Ids then
+		local FilterResult = CryoModule.List.filter(Ids, function(p2): boolean --[[ Line: 27 ]]
+			-- upvalues: SelectorFunction (copy)
+			return SelectorFunction(p2) == nil
+		end)
+		
+		return if #FilterResult > 0 then HydrateFunction(FilterResult) else PromiseModule.resolve()
+	else
+		return PromiseModule.resolve()
 	end
-	local var1 = cryoModule.List.filter(ids, function(p2)
-		-- upvalues: selector (ref)
-		return selector(p2) == nil
-	end)
-	
-	return if #var1 > 0 then hydrate(var1) else promiseModule.resolve()
 end

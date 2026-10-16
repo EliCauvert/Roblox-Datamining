@@ -1,216 +1,231 @@
-﻿local httpService = game:GetService("HttpService")
-local parent = script.Parent.Parent
-local httpRequestModule = require(parent.HttpRequest)
-local sharedFlagsModule = require(parent.SharedFlags)
-local var1 = `{require(parent.CoreScriptsCommon).Url.APIS_URL .. "platform-leaderboards-api"}/v1/rcc/universes/{game.GameId}/leaderboard`
-local leaderboardType = require(script.Parent.PlatformLeaderboardTypes).LeaderboardType
-local platformLeaderboardFetcherHttpRetryCount = game:DefineFastInt("PlatformLeaderboardFetcherHttpRetryCount", 0)
-local platformLeaderboardFetcherDefaultCount = game:DefineFastInt("PlatformLeaderboardFetcherDefaultCount", 100)
-local platformLeaderboardDisplayNameEnabled = game:DefineFastFlag("PlatformLeaderboardDisplayNameEnabled", false)
-local platformLeaderboardBadgeMetadataEnabled = game:DefineFastFlag("PlatformLeaderboardBadgeMetadataEnabled", false)
-local fFlagPlatformLeaderboardDebugLogging = sharedFlagsModule.FFlagPlatformLeaderboardDebugLogging
-local var2 = httpRequestModule.config({
-	requestFunction = httpRequestModule.requestFunctions.HttpRbxApi,
-	maxRetryCount = platformLeaderboardFetcherHttpRetryCount
+﻿local HttpService = game:GetService("HttpService")
+local Parent = script.Parent.Parent
+local HttpRequestModule = require(Parent.HttpRequest)
+local LeaderboardName: string = `{require(Parent.CoreScriptsCommon).Url.APIS_URL .. "platform-leaderboards-api"}/v1/rcc/universes/{game.GameId}/leaderboard`
+local LeaderboardType = require(script.Parent.PlatformLeaderboardTypes).LeaderboardType
+local PlatformLeaderboardFetcherDefaultCount = game:DefineFastInt("PlatformLeaderboardFetcherDefaultCount", 100)
+local PlatformLeaderboardDisplayNameEnabled = game:DefineFastFlag("PlatformLeaderboardDisplayNameEnabled", false)
+local PlatformLeaderboardBadgeMetadataEnabled = game:DefineFastFlag("PlatformLeaderboardBadgeMetadataEnabled", false)
+local FFlagPlatformLeaderboardDebugLogging = require(Parent.SharedFlags).FFlagPlatformLeaderboardDebugLogging
+local ConfigResult = HttpRequestModule.config({
+	requestFunction = HttpRequestModule.requestFunctions.HttpRbxApi,
+	maxRetryCount = game:DefineFastInt("PlatformLeaderboardFetcherHttpRetryCount", 0)
 })
 
-local function get(p1)
-	-- upvalues: var2 (ref), fFlagPlatformLeaderboardDebugLogging (ref), httpService (ref)
-	local ok, status, var3 = pcall(function()
-		-- upvalues: var2 (copy), p1 (ref)
-		return var2(p1, "GET"):await()
+local function get(ConfigName) --[[ Line: 32 ]]
+	-- upvalues: ConfigResult (copy), FFlagPlatformLeaderboardDebugLogging (copy), HttpService (copy)
+	local Success, Result, Result3 = pcall(function() --[[ Line: 33 ]]
+		-- upvalues: ConfigResult (upval), ConfigName (copy)
+		return ConfigResult(ConfigName, "GET"):await()
 	end)
 	
-	if ok and status then
-		if typeof(var3) == "table" then
-			local body = var3.Body or var3.responseBody
+	if Success and Result then
+		if typeof(Result3) == "table" then
+			local Body = Result3.Body or Result3.responseBody
 			
-			if typeof(body) ~= "string" then
-				return true, body
+			if typeof(Body) ~= "string" then
+				return true, Body
 			end
-			local ok_1, status_1 = pcall(httpService.JSONDecode, httpService, body)
+			local Success1, Result1 = pcall(HttpService.JSONDecode, HttpService, Body)
 			
-			if ok_1 then
-				return true, status_1
-			elseif fFlagPlatformLeaderboardDebugLogging then
-				warn("[PlatformLeaderboard] Fetcher: JSON decode failed:", tostring(status_1))
+			if Success1 then
+				return true, Result1
+			end
+			if FFlagPlatformLeaderboardDebugLogging then
+				warn("[PlatformLeaderboard] Fetcher: JSON decode failed:", (tostring(Result1)))
 			end
 			return false, nil
-		elseif fFlagPlatformLeaderboardDebugLogging then
-			warn("[PlatformLeaderboard] Fetcher received malformed response")
+		else
+			if FFlagPlatformLeaderboardDebugLogging then
+				warn("[PlatformLeaderboard] Fetcher received malformed response")
+			end
+			return false, nil
+		end
+	else
+		if FFlagPlatformLeaderboardDebugLogging then
+			warn("[PlatformLeaderboard] Fetcher request failed")
 		end
 		return false, nil
-	elseif fFlagPlatformLeaderboardDebugLogging then
-		warn("[PlatformLeaderboard] Fetcher request failed")
 	end
-	return false, nil
 end
 
-local function formatEntry(p1)
-	-- upvalues: platformLeaderboardDisplayNameEnabled (ref), platformLeaderboardBadgeMetadataEnabled (ref)
-	if typeof(p1) ~= "table" then
+local function formatEntry(UserScore) --[[ Line: 63 ]]
+	-- upvalues: PlatformLeaderboardDisplayNameEnabled (copy), PlatformLeaderboardBadgeMetadataEnabled (copy)
+	if typeof(UserScore) ~= "table" then
 		return nil
 	end
-	local userId = p1.userId
-	local score = p1.score
+	local UserId = UserScore.userId
+	local Score = UserScore.score
 	
-	if userId == nil or score == nil then
+	if UserId == nil or Score == nil then
 		return nil
 	end
-	local var3 = tonumber(userId)
-	local var4 = tonumber(score)
+	local Number: number? = tonumber(UserId)
+	local Number1: number? = tonumber(Score)
 	
-	if var3 == nil or var4 == nil then
+	if Number == nil or Number1 == nil then
 		return nil
 	end
-	local rank = p1.rank
-	local var5 = if rank == nil then nil else tonumber(rank)
-	local var6 = if platformLeaderboardDisplayNameEnabled then if typeof(p1.displayName) == "string" then p1.displayName else nil else nil
-	local var7 = nil
-	local var8 = nil
+	local Rank = UserScore.rank
+	local Number2 = if Rank == nil then nil else tonumber(Rank)
+	local DisplayName = if PlatformLeaderboardDisplayNameEnabled and typeof(UserScore.displayName) == "string" then UserScore.displayName else nil
+	local IsVerified = nil
+	local HasRobloxSubscription = nil
 	
-	if platformLeaderboardBadgeMetadataEnabled then
-		var7 = if typeof(p1.isVerified) == "boolean" then p1.isVerified else nil
-		var8 = if typeof(p1.hasRobloxSubscription) == "boolean" then p1.hasRobloxSubscription else nil
+	if PlatformLeaderboardBadgeMetadataEnabled then
+		IsVerified = if typeof(UserScore.isVerified) == "boolean" then UserScore.isVerified else nil
+		HasRobloxSubscription = if typeof(UserScore.hasRobloxSubscription) == "boolean" then UserScore.hasRobloxSubscription else nil
 	end
 	return {
-		userId = var3,
-		score = var4,
-		rank = var5,
-		displayName = var6,
-		isVerified = var7,
-		hasRobloxSubscription = var8
+		userId = Number,
+		score = Number1,
+		rank = Number2,
+		displayName = DisplayName,
+		isVerified = IsVerified,
+		hasRobloxSubscription = HasRobloxSubscription
 	}
 end
 
-local function formatEntries(p1)
-	-- upvalues: formatEntry (ref)
-	local t = {}
+local function formatEntries(List) --[[ Line: 104 ]]
+	-- upvalues: formatEntry (copy)
+	local List1 = {}
 	
-	for i, v in p1 do
-		local var3 = formatEntry(v)
+	for _, value in List do
+		local FormatEntryResult = formatEntry(value)
 		
-		if var3 ~= nil then
-			table.insert(t, var3)
+		if FormatEntryResult ~= nil then
+			table.insert(List1, FormatEntryResult)
 		end
 	end
-	return t
+	return List1
 end
 
-local function formatConfig(p2)
-	if p2 == nil or p2.leaderboardId == nil then
+local function formatConfig(p1) --[[ Line: 115 ]]
+	if p1 == nil or p1.leaderboardId == nil then
 		return nil
 	end
-	local leaderboardId = p2.leaderboardId
+	local LeaderboardId = p1.leaderboardId
 	
-	if typeof(leaderboardId) == "string" then
-		local unit = p2.unit
+	if typeof(LeaderboardId) == "string" then
+		local Unit = p1.unit
 		
 		return {
-			leaderboardId = leaderboardId,
-			unit = if typeof(unit) == "string" then unit else ""
+			leaderboardId = LeaderboardId,
+			unit = if typeof(Unit) == "string" then Unit else ""
 		}
+	else
+		return nil
 	end
-	return nil
 end
 
-local t = {
-	fetchConfig = function()
-		-- upvalues: var1 (ref), get (ref), fFlagPlatformLeaderboardDebugLogging (ref), formatConfig (ref)
-		local var4, var5 = get(`{var1}/config`)
-		
-		if not var4 then
-			return false, nil
-		elseif typeof(var5) == "table" then
-			local config = var5.config
-			
-			if config == nil or typeof(config) == "table" then
-				return true, formatConfig(config)
-			elseif fFlagPlatformLeaderboardDebugLogging then
-				warn("[PlatformLeaderboard] Fetcher received malformed config payload")
-			end
-			return false, nil
-		elseif fFlagPlatformLeaderboardDebugLogging then
-			warn("[PlatformLeaderboard] Fetcher received malformed config response body")
+local function fetchLeaderboard(_, Friends, p1, p2) --[[ Line: 155 ]]
+	-- upvalues: PlatformLeaderboardFetcherDefaultCount (copy), LeaderboardType (copy), LeaderboardName (copy), FFlagPlatformLeaderboardDebugLogging (copy), get (copy), formatConfig (copy), formatEntries (copy)
+	local P7 = p2 or PlatformLeaderboardFetcherDefaultCount
+	local FriendsName: string? = nil
+	
+	if Friends == LeaderboardType.Global then
+		FriendsName = `{LeaderboardName}/global?count={P7}`
+	elseif Friends == LeaderboardType.Friends and p1 ~= nil then
+		FriendsName = `{LeaderboardName}/friends?userid={p1}&count={P7}`
+	else
+		if FFlagPlatformLeaderboardDebugLogging then
+			warn("[PlatformLeaderboard] Fetcher missing userId for friends leaderboard")
 		end
 		return false, nil
 	end
-}
-
-local function fetchLeaderboard(_, p2, p3, p4)
-	-- upvalues: platformLeaderboardFetcherDefaultCount (ref), leaderboardType (ref), var1 (ref), fFlagPlatformLeaderboardDebugLogging (ref), get (ref), formatConfig (ref), formatEntries (ref)
-	p4 = p4 or platformLeaderboardFetcherDefaultCount
-	local var4 = nil
+	local GetResult, GetResult2 = get(FriendsName)
 	
-	if p2 == leaderboardType.Global then
-		var4 = `{var1}/global?count={p4}`
-	elseif p2 == leaderboardType.Friends and p3 ~= nil then
-		var4 = `{var1}/friends?userid={p3}&count={p4}`
-	elseif fFlagPlatformLeaderboardDebugLogging then
-		warn("[PlatformLeaderboard] Fetcher missing userId for friends leaderboard")
-	end
-	return false, nil
-	local var5, var6 = get(var4)
-	
-	if not var5 then
+	if not GetResult then
 		return false, nil
-	elseif typeof(var6) == "table" then
-		local config = var6.config
+	end
+	if typeof(GetResult2) == "table" then
+		local Config = GetResult2.config
 		
-		if config == nil or typeof(config) == "table" then
-			local scores = var6.scores
+		if Config == nil or typeof(Config) == "table" then
+			local Scores = GetResult2.scores
 			
-			if scores == nil or typeof(scores) == "table" then
+			if Scores == nil or typeof(Scores) == "table" then
 				return true, {
-					config = formatConfig(config),
-					entries = formatEntries(scores or {})
+					config = formatConfig(Config),
+					entries = formatEntries(Scores or {})
 				}
-			elseif fFlagPlatformLeaderboardDebugLogging then
+			end
+			if FFlagPlatformLeaderboardDebugLogging then
 				warn("[PlatformLeaderboard] Fetcher received malformed leaderboard scores payload")
 			end
 			return false, nil
-		elseif fFlagPlatformLeaderboardDebugLogging then
-			warn("[PlatformLeaderboard] Fetcher received malformed leaderboard config payload")
-		end
-		return false, nil
-	elseif fFlagPlatformLeaderboardDebugLogging then
-		warn("[PlatformLeaderboard] Fetcher received malformed leaderboard response body")
-	end
-	return false, nil
-end
-
-function t.fetchGlobalLeaderboard(p2, p3)
-	-- upvalues: fetchLeaderboard (ref), leaderboardType (ref)
-	return fetchLeaderboard(p2, leaderboardType.Global, nil, p3)
-end
-
-function t.fetchFriendsLeaderboard(p2, p3, p4)
-	-- upvalues: fetchLeaderboard (ref), leaderboardType (ref)
-	return fetchLeaderboard(p2, leaderboardType.Friends, p3, p4)
-end
-
-function t.fetchUserScore(_, p2)
-	-- upvalues: var1 (ref), get (ref), fFlagPlatformLeaderboardDebugLogging (ref), formatEntry (ref)
-	local var4, var5 = get(`{var1}/{p2}/score`)
-	
-	if not var4 then
-		return false, nil
-	elseif typeof(var5) == "table" then
-		local userScore = var5.userScore
-		
-		if userScore == nil or typeof(userScore) == "table" then
-			if userScore then
-				return true, formatEntry(userScore)
+		else
+			if FFlagPlatformLeaderboardDebugLogging then
+				warn("[PlatformLeaderboard] Fetcher received malformed leaderboard config payload")
 			end
-			return true, nil
-		elseif fFlagPlatformLeaderboardDebugLogging then
-			warn("[PlatformLeaderboard] Fetcher received malformed user score payload")
+			return false, nil
+		end
+	else
+		if FFlagPlatformLeaderboardDebugLogging then
+			warn("[PlatformLeaderboard] Fetcher received malformed leaderboard response body")
 		end
 		return false, nil
-	elseif fFlagPlatformLeaderboardDebugLogging then
-		warn("[PlatformLeaderboard] Fetcher received malformed user score response body")
 	end
-	return false, nil
 end
 
-return t
+return {
+	fetchConfig = function() --[[ Line: 132 ]]
+		-- upvalues: LeaderboardName (copy), get (copy), FFlagPlatformLeaderboardDebugLogging (copy), formatConfig (copy)
+		local GetResult, GetResult2 = get(`{LeaderboardName}/config`)
+		
+		if not GetResult then
+			return false, nil
+		end
+		if typeof(GetResult2) == "table" then
+			local Config = GetResult2.config
+			
+			if Config == nil or typeof(Config) == "table" then
+				return true, (formatConfig(Config))
+			end
+			if FFlagPlatformLeaderboardDebugLogging then
+				warn("[PlatformLeaderboard] Fetcher received malformed config payload")
+			end
+			return false, nil
+		else
+			if FFlagPlatformLeaderboardDebugLogging then
+				warn("[PlatformLeaderboard] Fetcher received malformed config response body")
+			end
+			return false, nil
+		end
+	end,
+	fetchGlobalLeaderboard = function(p1, p2) --[[ Line: 204 ]]
+		-- upvalues: fetchLeaderboard (copy), LeaderboardType (copy)
+		return fetchLeaderboard(p1, LeaderboardType.Global, nil, p2)
+	end,
+	fetchFriendsLeaderboard = function(p1, p2, p3) --[[ Line: 211 ]]
+		-- upvalues: fetchLeaderboard (copy), LeaderboardType (copy)
+		return fetchLeaderboard(p1, LeaderboardType.Friends, p2, p3)
+	end,
+	fetchUserScore = function(_, p1) --[[ Line: 219 ]]
+		-- upvalues: LeaderboardName (copy), get (copy), FFlagPlatformLeaderboardDebugLogging (copy), formatEntry (copy)
+		local GetResult, GetResult2 = get(`{LeaderboardName}/{p1}/score`)
+		
+		if not GetResult then
+			return false, nil
+		end
+		if typeof(GetResult2) == "table" then
+			local UserScore = GetResult2.userScore
+			
+			if UserScore ~= nil and typeof(UserScore) ~= "table" then
+				if FFlagPlatformLeaderboardDebugLogging then
+					warn("[PlatformLeaderboard] Fetcher received malformed user score payload")
+				end
+				return false, nil
+			elseif UserScore then
+				return true, (formatEntry(UserScore))
+			else
+				return true, nil
+			end
+		else
+			if FFlagPlatformLeaderboardDebugLogging then
+				warn("[PlatformLeaderboard] Fetcher received malformed user score response body")
+			end
+			return false, nil
+		end
+	end
+}

@@ -1,44 +1,44 @@
-﻿local signalModule = require(script.Parent.Parent.Parent.Signal)
-local voiceChatService = game:GetService("VoiceChatService")
-local t = {}
-t.__index = t
+﻿local SignalModule = require(script.Parent.Parent.Parent.Signal)
+local VoiceChatService = game:GetService("VoiceChatService")
+local VoiceChatDataModule = {}
+VoiceChatDataModule.__index = VoiceChatDataModule
 
-function t.new()
-	-- upvalues: t (ref), signalModule (ref)
-	local t_1 = {}
-	setmetatable(t_1, t)
-	t_1._statsUpdated = signalModule.new()
-	t_1._statsData = {}
-	t_1._isRunning = false
+function VoiceChatDataModule.new() --[[ Line: 9 ]]
+	-- upvalues: VoiceChatDataModule (copy), SignalModule (copy)
+	local t = {}
+	setmetatable(t, VoiceChatDataModule)
+	t._statsUpdated = SignalModule.new()
+	t._statsData = {}
+	t._isRunning = false
 	
-	return t_1
+	return t
 end
 
-function t:Signal()
+function VoiceChatDataModule:Signal() --[[ Line: 19 ]]
 	return self._statsUpdated
 end
 
-function t:getCurrentData()
+function VoiceChatDataModule:getCurrentData() --[[ Line: 23 ]]
 	return self._statsData
 end
 
-function t:isRunning()
+function VoiceChatDataModule:isRunning() --[[ Line: 27 ]]
 	return self._isRunning
 end
 
-function t:start()
-	-- upvalues: voiceChatService (ref)
-	if voiceChatService and not self._statsListenerConnection then
-		self._statsListenerConnection = voiceChatService.VoiceChatStatsCollected:Connect(function()
-			-- upvalues: self (ref), voiceChatService (copy)
-			self._statsData = voiceChatService:lastVoiceChatStats()
+function VoiceChatDataModule:start() --[[ Line: 31 ]]
+	-- upvalues: VoiceChatService (copy)
+	if VoiceChatService and not self._statsListenerConnection then
+		self._statsListenerConnection = VoiceChatService.VoiceChatStatsCollected:Connect(function() --[[ Line: 33 ]]
+			-- upvalues: self (copy), VoiceChatService (upval)
+			self._statsData = VoiceChatService:lastVoiceChatStats()
 			self._statsUpdated:Fire(self._statsData)
 		end)
 		self._isRunning = true
 	end
 end
 
-function t:stop()
+function VoiceChatDataModule:stop() --[[ Line: 41 ]]
 	self._isRunning = false
 	
 	if self._statsListenerConnection then
@@ -46,4 +46,4 @@ function t:stop()
 	end
 end
 
-return t
+return VoiceChatDataModule

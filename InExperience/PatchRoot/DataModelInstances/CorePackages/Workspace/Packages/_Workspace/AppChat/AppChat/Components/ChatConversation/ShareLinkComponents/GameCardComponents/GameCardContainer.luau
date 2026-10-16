@@ -1,238 +1,265 @@
-﻿local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
-local eventIngestService = game:GetService("EventIngestService")
-local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local fFlagLuaAppDefaultHttpRetry = require(parent.SharedFlags).FFlagLuaAppDefaultHttpRetry
-local _ = require(appChat.types)
-local constantsModule = require(appChat.Constants)
-local constructGameThumbnailUrlModule = require(appChat.Utils.constructGameThumbnailUrl)
-local reactModule = require(parent.React)
-local cryoModule = require(parent.Cryo)
-local signalsModule = require(parent.Signals)
-local eventStream = require(parent.Analytics).AnalyticsReporters.EventStream
-local memo = reactModule.memo
-local useCallback = reactModule.useCallback
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local useEffect = reactModule.useEffect
-local useIsExternalNavigationAvailableModule = require(appChat.Hooks.useIsExternalNavigationAvailable)
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local useMemo = reactModule.useMemo
-local useSignalState = require(parent.SignalsReact).useSignalState
-local gameCardContainer = require(parent.Loggers).Logger:new("GameCardContainer")
-local withLocalization = require(parent.Localization).withLocalization
-local gameParams = require(parent.ExperienceService).GameParams
-local eventIngest = require(parent.Analytics).AnalyticsReporters.EventIngest
-local apiFetchGameDetails = require(parent.GameDetailRodux).GameDetails.ApiFetchGameDetails
-local apiFetchPlayabilityStatus = require(parent.PlayabilityRodux).PlayabilityStatus.ApiFetchPlayabilityStatus
-local reportAnEventModule = require(script.Parent.ReportAnEvent)
-local appSessionService = require(parent.RoactServiceTags).AppSessionService
-local sessionType = require(parent.RobloxAppSessionization).SessionType
-local roactServices = require(parent.RoactServices).RoactServices
-local roactAnalyticsCommonGameEvents = require(parent.RoactServiceTags).RoactAnalyticsCommonGameEvents
-local gameCardGroupableModule = require(script.Parent.GameCardGroupable)
-local dataHydrationModule = require(parent.DataHydration)
-local roundedVariantModule = require(appChat.Enums.RoundedVariant)
-local useTelemetryModule = require(appChat.Telemetry.useTelemetry)
-local chatConversationTelemetryLayerModule = require(appChat.Telemetry.Layers.ChatConversationTelemetryLayer)
-local chatConversationTelemetryEventsModule = require(script.Parent.Parent.Parent.ChatConversationTelemetryEvents)
-local appGame = roactServices.AppGame
-local experienceService = require(parent.ExperienceService).ExperienceService
-local setGamePlaySession = require(parent.RobloxAppSessionization).SetGamePlaySession
-local httpRequestModule = require(parent.HttpRequest)
-local var1 = httpRequestModule.config({
-	requestFunction = function(p1, p2, p3)
-		-- upvalues: gameCardContainer (ref), httpRequestModule (ref)
-		gameCardContainer:info("Fetching: {}", string.format("[ requestMethod = %q, url = %q ]", p2, p1))
-		
-		return httpRequestModule.requestFunctions.HttpRbxApi(p1, p2, p3)
-	end,
-	maxRetryCount = if fFlagLuaAppDefaultHttpRetry then game:DefineFastInt("GameCardContainerHttpRetryCount", 4) else nil
-})
-local enumScreensModule = require(appChat.EnumScreens)
-local appChatShutdownBeforeLaunch = game:DefineFastFlag("AppChatShutdownBeforeLaunch", false)
-local t = {
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local _ = require(AppChat.types)
+local ConstantsModule = require(AppChat.Constants)
+local ConstructGameThumbnailUrlModule = require(AppChat.Utils.constructGameThumbnailUrl)
+local ReactModule = require(Parent.React)
+local CryoModule = require(Parent.Cryo)
+local SignalsModule = require(Parent.Signals)
+local MemoFunction = ReactModule.memo
+local UseCallbackFunction = ReactModule.useCallback
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseEffectFunction = ReactModule.useEffect
+local UseIsExternalNavigationAvailableModule = require(AppChat.Hooks.useIsExternalNavigationAvailable)
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local UseMemoFunction = ReactModule.useMemo
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local Logger = require(Parent.Loggers).Logger
+local GameCardContainer1 = Logger.new(Logger, "GameCardContainer")
+local WithLocalizationFunction = require(Parent.Localization).withLocalization
+local GameParams = require(Parent.ExperienceService).GameParams
+local ApiFetchGameDetails = require(Parent.GameDetailRodux).GameDetails.ApiFetchGameDetails
+local ApiFetchPlayabilityStatus = require(Parent.PlayabilityRodux).PlayabilityStatus.ApiFetchPlayabilityStatus
+local ReportAnEventModule = require(script.Parent.ReportAnEvent)
+local AppSessionService = require(Parent.RoactServiceTags).AppSessionService
+local SessionType = require(Parent.RobloxAppSessionization).SessionType
+local RoactServices = require(Parent.RoactServices).RoactServices
+local RoactAnalyticsCommonGameEvents = require(Parent.RoactServiceTags).RoactAnalyticsCommonGameEvents
+local GameCardGroupableModule = require(script.Parent.GameCardGroupable)
+local GameAssetCardModule = require(script.Parent.GameAssetCard)
+local _ = require(AppChat.Components.ChatConversation.Grouping.MessageGroupShape)
+local DataHydrationModule = require(Parent.DataHydration)
+local RoundedVariantModule = require(AppChat.Enums.RoundedVariant)
+local UseTelemetryModule = require(AppChat.Telemetry.useTelemetry)
+local ChatConversationTelemetryLayerModule = require(AppChat.Telemetry.Layers.ChatConversationTelemetryLayer)
+local ChatConversationTelemetryEventsModule = require(script.Parent.Parent.Parent.ChatConversationTelemetryEvents)
+local AppGame = RoactServices.AppGame
+local ExperienceService = require(Parent.ExperienceService).ExperienceService
+local SetGamePlaySessionFunction = require(Parent.RobloxAppSessionization).SetGamePlaySession
+local HttpRequestModule = require(Parent.HttpRequest)
+local EnumScreensModule = require(AppChat.EnumScreens)
+local AppChatShutdownBeforeLaunch = game:DefineFastFlag("AppChatShutdownBeforeLaunch", false)
+local config = {
 	placeId = nil,
 	universeId = nil,
 	conversationId = nil,
 	luaChatPlayTogetherEnabled = nil,
-	networkImpl = var1,
-	eventStream = eventStream.new(rbxAnalyticsService),
-	eventIngest = eventIngest.new(eventIngestService),
-	onDetailsOpened = function() end,
-	onPlayButtonActivated = function(p1)
-		-- upvalues: setGamePlaySession (ref), sessionType (ref), reportAnEventModule (ref), cryoModule (ref), gameParams (ref), appChatShutdownBeforeLaunch (ref), experienceService (ref)
-		local placeId = p1.placeId
-		local senderUserId = p1.senderUserId
-		setGamePlaySession(p1.sessionService, sessionType.StructuralIdentifier.GamePlayFromChat, true)
-		reportAnEventModule(p1, "clickBtnFromLinkCardInChat", "touch")
+	networkImpl = HttpRequestModule.config({
+		requestFunction = function(p1, p2, p3) --[[ Line: 66 ]]
+			-- upvalues: GameCardContainer1 (copy), HttpRequestModule (copy)
+			GameCardContainer1:info("Fetching: {}", string.format("[ requestMethod = %q, url = %q ]", p2, p1))
+			
+			return HttpRequestModule.requestFunctions.HttpRbxApi(p1, p2, p3)
+		end,
+		maxRetryCount = if require(Parent.SharedFlags).FFlagLuaAppDefaultHttpRetry then game:DefineFastInt("GameCardContainerHttpRetryCount", 4) else nil
+	}),
+	eventStream = require(Parent.Analytics).AnalyticsReporters.EventStream.new((game:GetService("RbxAnalyticsService"))),
+	eventIngest = require(Parent.Analytics).AnalyticsReporters.EventIngest.new((game:GetService("EventIngestService"))),
+	onDetailsOpened = function() --[[ Line: 113 ]] end,
+	onPlayButtonActivated = function(JoinResult) --[[ Line: 115 ]]
+		-- upvalues: SetGamePlaySessionFunction (copy), SessionType (copy), ReportAnEventModule (copy), CryoModule (copy), GameParams (copy), AppChatShutdownBeforeLaunch (copy), ExperienceService (copy)
+		local PlaceId = JoinResult.placeId
+		local SenderUserId = JoinResult.senderUserId
+		SetGamePlaySessionFunction(JoinResult.sessionService, SessionType.StructuralIdentifier.GamePlayFromChat, true)
+		ReportAnEventModule(JoinResult, "clickBtnFromLinkCardInChat", "touch")
 		
-		if placeId then
-			local var2 = function(p2)
-				-- upvalues: p1 (write), cryoModule (copy), reportAnEventModule (copy)
-				p1 = cryoModule.Dictionary.join(p1, { joinAttemptId = p2 })
-				reportAnEventModule(p1, "gamePlayIntent", "PlayGameFromLinkCard")
+		if PlaceId then
+			local function v37(JoinAttemptId) --[[ Line: 124 ]]
+				-- upvalues: JoinResult (ref), CryoModule (upval), ReportAnEventModule (upval)
+				JoinResult = CryoModule.Dictionary.join(JoinResult, { joinAttemptId = JoinAttemptId })
+				ReportAnEventModule(JoinResult, "gamePlayIntent", "PlayGameFromLinkCard")
 			end
 			
-			local var3 = gameParams.fromParams({ userId = senderUserId, placeId = placeId })
+			local FromParamsResult = GameParams.fromParams({ userId = SenderUserId, placeId = PlaceId })
 			
-			if appChatShutdownBeforeLaunch then
+			if AppChatShutdownBeforeLaunch then
 				game:Shutdown()
 			end
-			experienceService:LaunchExperience(var3, "PlayGameFromLinkCard", var2)
+			ExperienceService:LaunchExperience(FromParamsResult, "PlayGameFromLinkCard", v37)
 		end
 	end,
-	openDetails = function(p1)
-		-- upvalues: reportAnEventModule (ref)
-		local universeId = p1.universeId
-		local placeId = p1.placeId
-		reportAnEventModule(p1, "clickLinkCardInChat", "touch")
-		p1.onDetailsOpened()
-		p1.openGameDetailsPage(universeId, "LuaChatAssetCard")
-		local reportOpenGameDetailFromChat = p1.analytics and p1.analytics.reportOpenGameDetailFromChat
+	openDetails = function(JoinResult) --[[ Line: 142 ]]
+		-- upvalues: ReportAnEventModule (copy)
+		local UniverseId = JoinResult.universeId
+		local PlaceId = JoinResult.placeId
+		ReportAnEventModule(JoinResult, "clickLinkCardInChat", "touch")
+		JoinResult.onDetailsOpened()
+		JoinResult.openGameDetailsPage(UniverseId, "LuaChatAssetCard")
+		local ReportOpenGameDetailFromChat: (any, any, any, any) -> () = JoinResult.analytics and JoinResult.analytics.reportOpenGameDetailFromChat
 		
-		if reportOpenGameDetailFromChat then
-			reportOpenGameDetailFromChat(placeId, p1.conversationId, universeId, "GameDetailFromLinkCard")
+		if ReportOpenGameDetailFromChat then
+			ReportOpenGameDetailFromChat(PlaceId, JoinResult.conversationId, UniverseId, "GameDetailFromLinkCard")
 		end
 	end
 }
 
-local function _(p1, p2)
+local function _(p1, p2) --[[ Line: 159 | Named "getGameDetails" ]]
 	return p1.GameDetails[p2] or {}
 end
 
-local _ = function(p1, p2)
+local _ = function(p1, p2) --[[ Line: 163 | Named "getGamePlayabilityStatus" ]]
 	return p1.PlayabilityStatus[p2] or {}
 end
 
-function GameCardContainer(p1)
-	-- upvalues: cryoModule (ref), t (ref), useSelector (ref), useCallback (ref), constructGameThumbnailUrlModule (ref), constantsModule (ref), useIsExternalNavigationAvailableModule (ref), enumScreensModule (ref), useDispatch (ref), apiFetchGameDetails (ref), apiFetchPlayabilityStatus (ref), dataHydrationModule (ref), signalsModule (ref), useMemo (ref), useSignalState (ref), useTelemetryModule (ref), chatConversationTelemetryLayerModule (ref), useEffect (ref), chatConversationTelemetryEventsModule (ref), roundedVariantModule (ref), reactModule (ref), gameCardGroupableModule (ref), withLocalization (ref)
-	local var2 = cryoModule.Dictionary.join(t, p1)
+function GameCardContainer(p1) --[[ Line: 167 ]]
+	-- upvalues: CryoModule (copy), config (copy), UseSelectorFunction (copy), UseCallbackFunction (copy), ConstructGameThumbnailUrlModule (copy), ConstantsModule (copy), UseIsExternalNavigationAvailableModule (copy), EnumScreensModule (copy), UseDispatchFunction (copy), ApiFetchGameDetails (copy), ApiFetchPlayabilityStatus (copy), DataHydrationModule (copy), SignalsModule (copy), UseMemoFunction (copy), UseSignalStateFunction (copy), UseTelemetryModule (copy), ChatConversationTelemetryLayerModule (copy), UseEffectFunction (copy), ChatConversationTelemetryEventsModule (copy), ReactModule (copy), GameAssetCardModule (copy), RoundedVariantModule (copy), GameCardGroupableModule (copy), WithLocalizationFunction (copy)
+	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	
-	if not var2.universeId then
+	if not JoinResult.universeId then
 		assert("universeId does not exist", "universeId does not exist")
 	end
-	local var3 = useSelector(useCallback(function(p2)
-		-- upvalues: var2 (ref)
-		return p2.GameDetails[var2.universeId] or {}
-	end, { var2.universeId }))
-	local var4 = useSelector(useCallback(function(p2)
-		-- upvalues: var2 (ref)
-		return p2.PlayabilityStatus[var2.universeId] or {}
-	end, { var2.universeId }))
-	local var5 = constructGameThumbnailUrlModule(var2.placeId, constantsModule.GameCard.THUMBNAIL_WIDTH, constantsModule.GameCard.THUMBNAIL_HEIGHT)
-	local universeId = `rbxthumb://type=GameIcon&id={var2.universeId}&w={150}&h={150}`
-	local var6 = useIsExternalNavigationAvailableModule({ enumScreensModule.GameDetail })
-	local placeId = var2.placeId or var3.rootPlaceId
-	local name = var3.name
-	local description = var3.description or ""
-	local price = var3.price or 0
-	local var7 = useDispatch()
+	local UseSelectorResult = UseSelectorFunction(UseCallbackFunction(function(p2) --[[ Line: 173 ]]
+		-- upvalues: JoinResult (copy)
+		return p2.GameDetails[JoinResult.universeId] or {}
+	end, { JoinResult.universeId }))
+	local UseSelectorResult1 = UseSelectorFunction(UseCallbackFunction(function(p2) --[[ Line: 177 ]]
+		-- upvalues: JoinResult (copy)
+		return p2.PlayabilityStatus[JoinResult.universeId] or {}
+	end, { JoinResult.universeId }))
+	local ConstructGameThumbnailUrlModuleResult = ConstructGameThumbnailUrlModule(JoinResult.placeId, ConstantsModule.GameCard.THUMBNAIL_WIDTH, ConstantsModule.GameCard.THUMBNAIL_HEIGHT)
+	local RbxthumbName: string = `rbxthumb://type=GameIcon&id={JoinResult.universeId}&w={150}&h={150}`
+	local UseIsExternalNavigationAvailableModuleResult = UseIsExternalNavigationAvailableModule({ EnumScreensModule.GameDetail })
+	local PlaceId = JoinResult.placeId or UseSelectorResult.rootPlaceId
+	local Name = UseSelectorResult.name
+	local Description = UseSelectorResult.description or ""
+	local Price = UseSelectorResult.price or 0
+	local UseDispatchResult = UseDispatchFunction()
 	
-	local var8 = function(p2, p3)
-		-- upvalues: var7 (ref), apiFetchGameDetails (copy), apiFetchPlayabilityStatus (copy)
-		var7(apiFetchGameDetails.Fetch(p2, { p3 }))
-		var7(apiFetchPlayabilityStatus.Fetch(p2, { p3 }))
+	local function FetchGameData(NetworkImpl, UniverseId) --[[ Line: 199 ]]
+		-- upvalues: UseDispatchResult (copy), ApiFetchGameDetails (upval), ApiFetchPlayabilityStatus (upval)
+		UseDispatchResult(ApiFetchGameDetails.Fetch(NetworkImpl, { UniverseId }))
+		UseDispatchResult(ApiFetchPlayabilityStatus.Fetch(NetworkImpl, { UniverseId }))
 	end
 	
-	local votesStore = dataHydrationModule.Game.getVotesStore(false)
-	local var9 = signalsModule.createSignal(nil)
-	local notReady = signalsModule.createSignal("NotReady")
-	local var10 = useMemo(function()
-		-- upvalues: var2 (ref), var9 (ref), notReady (ref), votesStore (ref)
-		return if var2.universeId then votesStore.getAndFetchVotes({ var2.universeId })[var2.universeId] or { data = var9, status = notReady } else { data = var9, status = notReady }
-	end, { votesStore, var2.universeId })
-	local var11 = useSignalState(var10.data)
-	local var12 = useSignalState(var10.status)
-	local var13 = useMemo(function()
-		-- upvalues: var11 (ref)
-		if var11 and var11.upVotes and var11.downVotes then
-			local var14 = var11.upVotes + var11.downVotes
+	local VotesStore = DataHydrationModule.Game.getVotesStore(false)
+	local Signal = SignalsModule.createSignal(nil)
+	local NotReady = SignalsModule.createSignal("NotReady")
+	local UseMemoResult = UseMemoFunction(function() --[[ Line: 209 ]]
+		-- upvalues: JoinResult (copy), Signal (copy), NotReady (copy), VotesStore (copy)
+		return if JoinResult.universeId then VotesStore.getAndFetchVotes({ JoinResult.universeId })[JoinResult.universeId] or { data = Signal, status = NotReady } else { data = Signal, status = NotReady }
+	end, { VotesStore, JoinResult.universeId })
+	local UseSignalStateResult = UseSignalStateFunction(UseMemoResult.data)
+	local UseSignalStateResult1 = UseSignalStateFunction(UseMemoResult.status)
+	local UseMemoResult1 = UseMemoFunction(function(): string --[[ Line: 229 ]]
+		-- upvalues: UseSignalStateResult (copy)
+		if UseSignalStateResult and UseSignalStateResult.upVotes and UseSignalStateResult.downVotes then
+			local NewUpVotes = UseSignalStateResult.upVotes + UseSignalStateResult.downVotes
 			
-			return if var14 > 0 then tostring(math.floor(var11.upVotes / var14 * 100)) .. "%" else "--"
+			if NewUpVotes > 0 then
+				return tostring((math.floor(UseSignalStateResult.upVotes / NewUpVotes * 100))) .. "%"
+			end
 		end
-	end, { var11 })
-	local var14 = useTelemetryModule(chatConversationTelemetryLayerModule.Context)
-	useEffect(function()
-		-- upvalues: var2 (ref), var8 (ref)
-		local universeId = var2.universeId
+		return "--"
+	end, { UseSignalStateResult })
+	local UseTelemetryModuleResult = UseTelemetryModule(ChatConversationTelemetryLayerModule.Context)
+	UseEffectFunction(function() --[[ Line: 241 ]]
+		-- upvalues: JoinResult (copy), FetchGameData (copy)
+		local UniverseId = JoinResult.universeId
 		
-		if universeId then
-			var8(var2.networkImpl, universeId)
+		if UniverseId then
+			FetchGameData(JoinResult.networkImpl, UniverseId)
 			
 			return
 		end
-	end, { var2.universeId, var2.networkImpl })
-	local var15 = useCallback(function()
-		-- upvalues: var14 (ref), chatConversationTelemetryEventsModule (copy), var2 (ref), placeId (ref)
-		var14.emit(chatConversationTelemetryEventsModule.GameCardThumbnailClicked, { universeId = var2.universeId, placeId = placeId })
-		var2:openDetails()
-	end, { var14, var2.openDetails, var2.universeId, placeId })
-	local var16 = useCallback(function()
-		-- upvalues: var14 (ref), chatConversationTelemetryEventsModule (copy), var2 (ref), placeId (ref)
-		var14.emit(chatConversationTelemetryEventsModule.GameCardPlayButtonClicked, { universeId = var2.universeId, placeId = placeId })
-		var2:onPlayButtonActivated()
+	end, { JoinResult.universeId, JoinResult.networkImpl })
+	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 251 ]]
+		-- upvalues: UseTelemetryModuleResult (copy), ChatConversationTelemetryEventsModule (upval), JoinResult (copy), PlaceId (copy)
+		UseTelemetryModuleResult.emit(ChatConversationTelemetryEventsModule.GameCardThumbnailClicked, { universeId = JoinResult.universeId, placeId = PlaceId })
+		JoinResult.openDetails(JoinResult)
 	end, {
-		var14,
-		var2.onPlayButtonActivated,
-		var2.universeId,
-		placeId
+		UseTelemetryModuleResult,
+		JoinResult.openDetails,
+		JoinResult.universeId,
+		PlaceId
 	})
-	local var17 = useCallback(function()
-		-- upvalues: var14 (ref), chatConversationTelemetryEventsModule (copy), var2 (ref), placeId (ref)
-		var14.emit(chatConversationTelemetryEventsModule.GameCardMetadataClicked, { universeId = var2.universeId, placeId = placeId })
-		var2:openDetails()
-	end, { var14, var2.openDetails, var2.universeId, placeId })
+	local UseCallbackResult1 = UseCallbackFunction(function() --[[ Line: 259 ]]
+		-- upvalues: UseTelemetryModuleResult (copy), ChatConversationTelemetryEventsModule (upval), JoinResult (copy), PlaceId (copy)
+		UseTelemetryModuleResult.emit(ChatConversationTelemetryEventsModule.GameCardPlayButtonClicked, { universeId = JoinResult.universeId, placeId = PlaceId })
+		JoinResult.onPlayButtonActivated(JoinResult)
+	end, {
+		UseTelemetryModuleResult,
+		JoinResult.onPlayButtonActivated,
+		JoinResult.universeId,
+		PlaceId
+	})
+	local UseCallbackResult2 = UseCallbackFunction(function() --[[ Line: 267 ]]
+		-- upvalues: UseTelemetryModuleResult (copy), ChatConversationTelemetryEventsModule (upval), JoinResult (copy), PlaceId (copy)
+		UseTelemetryModuleResult.emit(ChatConversationTelemetryEventsModule.GameCardMetadataClicked, { universeId = JoinResult.universeId, placeId = PlaceId })
+		JoinResult.openDetails(JoinResult)
+	end, {
+		UseTelemetryModuleResult,
+		JoinResult.openDetails,
+		JoinResult.universeId,
+		PlaceId
+	})
 	
-	local function renderCard(p2)
-		-- upvalues: roundedVariantModule (copy), var15 (ref), var16 (ref), var17 (ref), reactModule (copy), gameCardGroupableModule (copy)
-		return reactModule.createElement(gameCardGroupableModule, {
-			thumbnailAspectRatio = 1.777777777778,
-			gameName = p2.gameName,
-			gameDescription = p2.gameDescription,
-			gameThumbnail = p2.gameThumbnail,
-			gameRating = p2.gameRating,
-			gamePlayerCount = p2.gamePlayerCount,
-			thumbnailRoundedVariant = if p2.isStartOfGroup then roundedVariantModule.Top elseif p2.isIncoming then roundedVariantModule.TopRight else roundedVariantModule.TopLeft,
-			shouldShowPlayButton = if p2.isPlayButtonEnabled and p2.playabilityStatus then p2.playabilityStatus.isPlayable == true else false,
-			onPlayButtonActivated = if p2.onPlayButtonActivated then var16 else nil,
-			onThumbnailActivated = if p2.openDetails then var15 else nil,
-			onMetadataActivated = if p2.openDetails then var17 else nil,
-			isRepliedTo = p2.isRepliedTo,
-			isIncoming = p2.isIncoming,
-			isPending = p2.isPending,
-			isLoading = if p2.universeId then if p2.gameName then if p2.gameThumbnail then if p2.votesStatus ~= "NotReady" then not p2.gamePlayerCount else true else not p2.gameThumbnail else not p2.gameName else not p2.universeId,
-			LayoutOrder = p2.layoutOrder
+	local function renderCard(JoinResult) --[[ Line: 276 ]]
+		-- upvalues: UseCallbackResult (copy), UseCallbackResult1 (copy), UseCallbackResult2 (copy), ReactModule (upval), GameAssetCardModule (upval), RoundedVariantModule (upval), GameCardGroupableModule (upval)
+		local NoUniverseId: boolean = not JoinResult.universeId or (not JoinResult.gameName or (not JoinResult.gameThumbnail or (JoinResult.votesStatus == "NotReady" or not JoinResult.gamePlayerCount)))
+		local UseCallbackResult3 = if JoinResult.openDetails then UseCallbackResult else nil
+		local UseCallbackResult4 = if JoinResult.onPlayButtonActivated then UseCallbackResult1 else nil
+		local UseCallbackResult5 = if JoinResult.openDetails then UseCallbackResult2 else nil
+		
+		return if JoinResult.groupShape then ReactModule.createElement(GameAssetCardModule, {
+			gameName = JoinResult.gameName,
+			gameThumbnail = JoinResult.gameThumbnail,
+			gameRating = JoinResult.gameRating,
+			gamePlayerCount = JoinResult.gamePlayerCount,
+			isLoading = NoUniverseId,
+			onPlayButtonActivated = UseCallbackResult4,
+			onThumbnailActivated = UseCallbackResult3,
+			onMetadataActivated = UseCallbackResult5,
+			groupShape = JoinResult.groupShape,
+			mediaRef = JoinResult.mediaRef,
+			LayoutOrder = JoinResult.layoutOrder
+		}) else ReactModule.createElement(GameCardGroupableModule, {
+			thumbnailAspectRatio = 1.7777777777777777,
+			gameName = JoinResult.gameName,
+			gameDescription = JoinResult.gameDescription,
+			gameThumbnail = JoinResult.gameThumbnail,
+			gameRating = JoinResult.gameRating,
+			gamePlayerCount = JoinResult.gamePlayerCount,
+			thumbnailRoundedVariant = if JoinResult.isStartOfGroup then RoundedVariantModule.Top elseif JoinResult.isIncoming then RoundedVariantModule.TopRight else RoundedVariantModule.TopLeft,
+			shouldShowPlayButton = if JoinResult.isPlayButtonEnabled and JoinResult.playabilityStatus then JoinResult.playabilityStatus.isPlayable == true else false,
+			onPlayButtonActivated = UseCallbackResult4,
+			onThumbnailActivated = UseCallbackResult3,
+			onMetadataActivated = UseCallbackResult5,
+			isRepliedTo = JoinResult.isRepliedTo,
+			isIncoming = JoinResult.isIncoming,
+			isPending = JoinResult.isPending,
+			isLoading = NoUniverseId,
+			LayoutOrder = JoinResult.layoutOrder
 		})
 	end
 	
-	return withLocalization({
+	return WithLocalizationFunction({
 		purchaseGameText = "Feature.GameDetails.Heading.PurchaseGame",
 		viewDetailsText = "Feature.Chat.Action.ViewAssetDetails",
 		playText = "Common.VisitGame.Label.Play",
 		noDescriptionText = "Feature.Chat.Label.NoDescriptionYet"
-	})(function(_)
-		-- upvalues: cryoModule (copy), var2 (ref), var3 (ref), var4 (ref), universeId (ref), placeId (ref), name (ref), description (ref), price (ref), var6 (ref), enumScreensModule (copy), var8 (ref), var5 (ref), var13 (ref), var12 (ref), renderCard (ref)
-		return renderCard(cryoModule.Dictionary.join(var2, {
+	})(function(_) --[[ Line: 338 ]]
+		-- upvalues: CryoModule (upval), JoinResult (copy), UseSelectorResult (copy), UseSelectorResult1 (copy), RbxthumbName (copy), PlaceId (copy), Name (copy), Description (copy), Price (copy), UseIsExternalNavigationAvailableModuleResult (copy), EnumScreensModule (upval), FetchGameData (copy), ConstructGameThumbnailUrlModuleResult (copy), UseMemoResult1 (copy), UseSignalStateResult1 (copy), renderCard (copy)
+		return renderCard((CryoModule.Dictionary.join(JoinResult, {
 			isPlayButtonEnabled = true,
-			details = var3,
-			playabilityStatus = var4,
-			gameIcon = universeId,
-			placeId = placeId,
-			gameName = name,
-			gameDescription = description,
-			gamePrice = price,
-			viewDetailsEnabled = var6[enumScreensModule.GameDetail],
-			fetchGameData = var8,
-			gameThumbnail = var5,
-			gameRating = var13,
-			gamePlayerCount = var3.playing or 0,
-			votesStatus = var12
-		}))
+			details = UseSelectorResult,
+			playabilityStatus = UseSelectorResult1,
+			gameIcon = RbxthumbName,
+			placeId = PlaceId,
+			gameName = Name,
+			gameDescription = Description,
+			gamePrice = Price,
+			viewDetailsEnabled = UseIsExternalNavigationAvailableModuleResult[EnumScreensModule.GameDetail],
+			fetchGameData = FetchGameData,
+			gameThumbnail = ConstructGameThumbnailUrlModuleResult,
+			gameRating = UseMemoResult1,
+			gamePlayerCount = UseSelectorResult.playing or 0,
+			votesStatus = UseSignalStateResult1
+		})))
 	end)
 end
 
-return roactServices.connect({
-	game = appGame,
-	sessionService = appSessionService,
-	analytics = roactAnalyticsCommonGameEvents
-})(memo(GameCardContainer))
+return RoactServices.connect({
+	game = AppGame,
+	sessionService = AppSessionService,
+	analytics = RoactAnalyticsCommonGameEvents
+})(MemoFunction(GameCardContainer))

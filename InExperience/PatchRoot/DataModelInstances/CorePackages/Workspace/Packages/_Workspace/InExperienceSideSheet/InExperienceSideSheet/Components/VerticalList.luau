@@ -1,43 +1,41 @@
-﻿local inExperienceSideSheet = script:FindFirstAncestor("InExperienceSideSheet")
-local parent = inExperienceSideSheet.Parent
-local _ = require(parent.Chrome)
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local _ = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local view = foundationModule.View
-local verticalItemModule = require(inExperienceSideSheet.Components.VerticalItem)
-local getDidSideSheetOpenWithPeoplePageModule = require(inExperienceSideSheet.Utils.getDidSideSheetOpenWithPeoplePage)
-local shouldShowInviteFriendsInSideSheetModule = require(inExperienceSideSheet.Utils.shouldShowInviteFriendsInSideSheet)
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagAddInviteFriendsIntegration = sharedFlagsModule.FFlagAddInviteFriendsIntegration
-local fFlagHidePeoplePageInviteFriends = sharedFlagsModule.FFlagHidePeoplePageInviteFriends
-local fFlagSideSheetFocusNav = sharedFlagsModule.FFlagSideSheetFocusNav
-local fFlagSideSheetOpenPeoplePage = require(inExperienceSideSheet.Flags).FFlagSideSheetOpenPeoplePage
+﻿local InExperienceSideSheet = script:FindFirstAncestor("InExperienceSideSheet")
+local Parent = InExperienceSideSheet.Parent
+local _ = require(Parent.Chrome)
+local ReactModule = require(Parent.React)
+local _ = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
+local View = require(Parent.Foundation).View
+local VerticalItemModule = require(InExperienceSideSheet.Components.VerticalItem)
+local GetDidSideSheetOpenWithPeoplePageModule = require(InExperienceSideSheet.Utils.getDidSideSheetOpenWithPeoplePage)
+local ShouldShowInviteFriendsInSideSheetModule = require(InExperienceSideSheet.Utils.shouldShowInviteFriendsInSideSheet)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagAddInviteFriendsIntegration = SharedFlagsModule.FFlagAddInviteFriendsIntegration
+local FFlagHidePeoplePageInviteFriends = SharedFlagsModule.FFlagHidePeoplePageInviteFriends
+local FFlagSideSheetFocusNav = SharedFlagsModule.FFlagSideSheetFocusNav
+local FFlagSideSheetOpenPeoplePage = require(InExperienceSideSheet.Flags).FFlagSideSheetOpenPeoplePage
 
-return reactModule.memo(function(p1)
-	-- upvalues: signalsReactModule (ref), fFlagSideSheetOpenPeoplePage (ref), getDidSideSheetOpenWithPeoplePageModule (ref), fFlagHidePeoplePageInviteFriends (ref), fFlagAddInviteFriendsIntegration (ref), shouldShowInviteFriendsInSideSheetModule (ref), reactModule (ref), verticalItemModule (ref), fFlagSideSheetFocusNav (ref), view (ref)
-	local var1 = signalsReactModule.useSignalState(p1.integrationsGetter)
-	local var2 = if fFlagSideSheetOpenPeoplePage then signalsReactModule.useSignalState(getDidSideSheetOpenWithPeoplePageModule) else false
-	local var3 = not (fFlagHidePeoplePageInviteFriends and fFlagAddInviteFriendsIntegration)
-	local t = {}
-	local var4 = 0
+return ReactModule.memo(function(p1) --[[ Line: 31 | Named "VerticalList" ]]
+	-- upvalues: SignalsReactModule (copy), FFlagSideSheetOpenPeoplePage (copy), GetDidSideSheetOpenWithPeoplePageModule (copy), FFlagHidePeoplePageInviteFriends (copy), FFlagAddInviteFriendsIntegration (copy), ShouldShowInviteFriendsInSideSheetModule (copy), ReactModule (copy), VerticalItemModule (copy), FFlagSideSheetFocusNav (copy), View (copy)
+	local UseSignalStateResult = if FFlagSideSheetOpenPeoplePage then SignalsReactModule.useSignalState(GetDidSideSheetOpenWithPeoplePageModule) else false
+	local Inverted = not (FFlagHidePeoplePageInviteFriends and FFlagAddInviteFriendsIntegration)
+	local Elements = {}
+	local LayoutOrder = 0
 	
-	for i, v in var1 do
-		if shouldShowInviteFriendsInSideSheetModule(v.id, var2, var3) then
-			var4 += 1
-			t[v.id] = reactModule.createElement(verticalItemModule, {
-				label = v.integration.label,
-				layoutOrder = var4,
-				onActivated = v.activated,
-				icon = v.component,
-				disableGamepadDirections = if fFlagSideSheetFocusNav then { left = true, right = not p1.allowRightFocusEscape } else nil,
-				firstIntegrationToFocusCallback = if fFlagSideSheetFocusNav and var4 == 1 then p1.firstIntegrationToFocusCallback else nil
+	for _, value in SignalsReactModule.useSignalState(p1.integrationsGetter) do
+		if ShouldShowInviteFriendsInSideSheetModule(value.id, UseSignalStateResult, Inverted) then
+			LayoutOrder += 1
+			Elements[value.id] = ReactModule.createElement(VerticalItemModule, {
+				label = value.integration.label,
+				layoutOrder = LayoutOrder,
+				onActivated = value.activated,
+				icon = value.component,
+				disableGamepadDirections = if FFlagSideSheetFocusNav then { left = true, right = not p1.allowRightFocusEscape } else nil,
+				firstIntegrationToFocusCallback = if FFlagSideSheetFocusNav and LayoutOrder == 1 then p1.firstIntegrationToFocusCallback else nil
 			})
 		end
 	end
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "col gap-small size-full-0 auto-y",
 		LayoutOrder = p1.layoutOrder
-	}, t)
+	}, Elements)
 end)

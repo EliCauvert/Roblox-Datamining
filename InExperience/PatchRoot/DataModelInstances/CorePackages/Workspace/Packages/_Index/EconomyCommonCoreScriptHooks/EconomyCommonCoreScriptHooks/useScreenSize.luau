@@ -1,7 +1,7 @@
-﻿local reactModule = require(script:FindFirstAncestor("EconomyCommonCoreScriptHooks").Parent.React)
-local screenSizeContextModule = require(script.Parent.ScreenSizeContext)
+﻿local ReactModule = require(script:FindFirstAncestor("EconomyCommonCoreScriptHooks").Parent.React)
+local ScreenSizeContextModule = require(script.Parent.ScreenSizeContext)
 
-return function()
-	-- upvalues: reactModule (ref), screenSizeContextModule (ref)
-	return reactModule.useContext(screenSizeContextModule)
+return function() --[[ Line: 7 | Named "useScreenSize" ]]
+	-- upvalues: ReactModule (copy), ScreenSizeContextModule (copy)
+	return ReactModule.useContext(ScreenSizeContextModule)
 end

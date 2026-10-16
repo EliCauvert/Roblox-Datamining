@@ -1,33 +1,33 @@
-﻿local parent = script:FindFirstAncestor("ChatUIPrimitives").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local _ = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local createNextOrder = require(parent.ReactUtils).createNextOrder
+﻿local Parent = script:FindFirstAncestor("ChatUIPrimitives").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local _ = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
+local CreateNextOrderFunction = require(Parent.ReactUtils).createNextOrder
 local _ = require(script.Parent.Parent.Types)
 
-return function(p1)
-	-- upvalues: createNextOrder (ref), signalsReactModule (ref), reactModule (ref), foundationModule (ref)
-	local var1 = createNextOrder()
-	local var2 = signalsReactModule.useSignalBinding(p1.getIdentity)
+return function(Frame) --[[ Line: 17 | Named "IdentityInline" ]]
+	-- upvalues: CreateNextOrderFunction (copy), SignalsReactModule (copy), ReactModule (copy), FoundationModule (copy)
+	local NextOrder = CreateNextOrderFunction()
+	local UseSignalBindingResult = SignalsReactModule.useSignalBinding(Frame.getIdentity)
 	
-	return reactModule.createElement(foundationModule.View, {
+	return ReactModule.createElement(FoundationModule.View, {
 		tag = "row align-x-left align-y-center gap-xsmall auto-xy",
-		LayoutOrder = p1.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		avatar = reactModule.createElement(foundationModule.Image, {
-			tag = "size-400-400",
-			Image = var2:map(function(p2)
-				return if p2 and p2.avatarContent then p2.avatarContent else ""
+		avatar = ReactModule.createElement(FoundationModule.Image, {
+			tag = "size-400-400 stroke-standard stroke-default radius-circle",
+			Image = UseSignalBindingResult:map(function(p1) --[[ Line: 27 ]]
+				return if p1 and p1.avatarContent then p1.avatarContent else ""
 			end),
-			LayoutOrder = var1()
+			LayoutOrder = NextOrder()
 		}),
-		displayName = reactModule.createElement(foundationModule.Text, {
+		displayName = ReactModule.createElement(FoundationModule.Text, {
 			tag = "auto-xy",
-			Text = var2:map(function(p2)
-				return if p2 then `{p2.displayName}:` else ""
+			Text = UseSignalBindingResult:map(function(p1): string --[[ Line: 36 ]]
+				return if p1 then `{p1.displayName}:` else ""
 			end),
-			LayoutOrder = var1()
+			LayoutOrder = NextOrder()
 		})
 	})
 end

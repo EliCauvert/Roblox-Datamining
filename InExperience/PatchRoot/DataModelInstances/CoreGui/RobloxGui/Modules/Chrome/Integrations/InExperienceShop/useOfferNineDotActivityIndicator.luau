@@ -1,12 +1,11 @@
-﻿local chrome = script:FindFirstAncestor("Chrome")
-local corePackagesService = game:GetService("CorePackages")
-local signalsReactModule = require(corePackagesService.Packages.SignalsReact)
-local inExperienceOffersModule = require(corePackagesService.Workspace.Packages.InExperienceOffers)
-local useNineDotActivityIndicatorModule = require(chrome.ChromeShared.Hooks.useNineDotActivityIndicator)
-local getOffersStore = inExperienceOffersModule.getOffersStore
-local notificationLocation = inExperienceOffersModule.NotificationLocation
+﻿local CorePackages = game:GetService("CorePackages")
+local SignalsReactModule = require(CorePackages.Packages.SignalsReact)
+local InExperienceOffersModule = require(CorePackages.Workspace.Packages.InExperienceOffers)
+local UseNineDotActivityIndicatorModule = require(script:FindFirstAncestor("Chrome").ChromeShared.Hooks.useNineDotActivityIndicator)
+local GetOffersStoreFunction = InExperienceOffersModule.getOffersStore
+local NotificationLocation = InExperienceOffersModule.NotificationLocation
 
-return function()
-	-- upvalues: signalsReactModule (ref), getOffersStore (ref), useNineDotActivityIndicatorModule (ref), notificationLocation (ref)
-	useNineDotActivityIndicatorModule("in_experience_offers", signalsReactModule.useSignalState(getOffersStore(false).getOfferNotificationShownWithEnum) == notificationLocation.Hamburger)
+return function() --[[ Line: 22 | Named "useOfferNineDotActivityIndicator" ]]
+	-- upvalues: SignalsReactModule (copy), GetOffersStoreFunction (copy), UseNineDotActivityIndicatorModule (copy), NotificationLocation (copy)
+	UseNineDotActivityIndicatorModule("in_experience_offers", SignalsReactModule.useSignalState(GetOffersStoreFunction(false).getOfferNotificationShownWithEnum) == NotificationLocation.Hamburger)
 end

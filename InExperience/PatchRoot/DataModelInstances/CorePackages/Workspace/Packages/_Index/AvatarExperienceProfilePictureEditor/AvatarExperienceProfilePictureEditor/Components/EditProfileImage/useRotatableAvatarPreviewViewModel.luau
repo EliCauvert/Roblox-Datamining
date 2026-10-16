@@ -1,28 +1,30 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor").Parent
-local reactModule = require(parent.React)
-local responsiveModule = require(parent.Responsive)
-local cameraMath = require(parent.AvatarViewport).CameraMath
-local yRotDegFromSliderValue = cameraMath.getYRotDegFromSliderValue(1)
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor").Parent
+local ReactModule = require(Parent.React)
+local ResponsiveModule = require(Parent.Responsive)
+local CameraMath = require(Parent.AvatarViewport).CameraMath
+local YRotDegFromSliderValue = CameraMath.getYRotDegFromSliderValue(1)
 
-return function(p1)
-	-- upvalues: responsiveModule (ref), reactModule (ref), cameraMath (ref), yRotDegFromSliderValue (ref)
+return function(p1) --[[ Line: 30 | Named "useRotatableAvatarPreviewViewModel" ]]
+	-- upvalues: ResponsiveModule (copy), ReactModule (copy), CameraMath (copy), YRotDegFromSliderValue (copy)
+	local UseLastInputResult = ResponsiveModule.useLastInput()
+	
 	return {
-		showCameraControlBar = not p1.isDisabled and responsiveModule.useLastInput() ~= responsiveModule.Input.Touch,
-		onZoomIn = reactModule.useCallback(function()
-			-- upvalues: p1 (ref), cameraMath (copy)
-			p1.onDistanceScaleChanged(cameraMath.adjustDistanceScaleBySliderStep(p1.distanceScale, 1))
+		showCameraControlBar = not p1.isDisabled and UseLastInputResult ~= ResponsiveModule.Input.Touch,
+		onZoomIn = ReactModule.useCallback(function() --[[ Line: 36 ]]
+			-- upvalues: p1 (copy), CameraMath (upval)
+			p1.onDistanceScaleChanged(CameraMath.adjustDistanceScaleBySliderStep(p1.distanceScale, 1))
 		end, { p1.distanceScale, p1.onDistanceScaleChanged }),
-		onZoomOut = reactModule.useCallback(function()
-			-- upvalues: p1 (ref), cameraMath (copy)
-			p1.onDistanceScaleChanged(cameraMath.adjustDistanceScaleBySliderStep(p1.distanceScale, -1))
+		onZoomOut = ReactModule.useCallback(function() --[[ Line: 42 ]]
+			-- upvalues: p1 (copy), CameraMath (upval)
+			p1.onDistanceScaleChanged(CameraMath.adjustDistanceScaleBySliderStep(p1.distanceScale, -1))
 		end, { p1.distanceScale, p1.onDistanceScaleChanged }),
-		onRotateLeft = reactModule.useCallback(function()
-			-- upvalues: p1 (ref), cameraMath (copy), yRotDegFromSliderValue (copy)
-			p1.onYRotDegChanged(cameraMath.clampYRotDeg(p1.committedYRotDeg + yRotDegFromSliderValue))
+		onRotateLeft = ReactModule.useCallback(function() --[[ Line: 48 ]]
+			-- upvalues: p1 (copy), CameraMath (upval), YRotDegFromSliderValue (upval)
+			p1.onYRotDegChanged(CameraMath.clampYRotDeg(p1.committedYRotDeg + YRotDegFromSliderValue))
 		end, { p1.committedYRotDeg, p1.onYRotDegChanged }),
-		onRotateRight = reactModule.useCallback(function()
-			-- upvalues: p1 (ref), cameraMath (copy), yRotDegFromSliderValue (copy)
-			p1.onYRotDegChanged(cameraMath.clampYRotDeg(p1.committedYRotDeg - yRotDegFromSliderValue))
+		onRotateRight = ReactModule.useCallback(function() --[[ Line: 52 ]]
+			-- upvalues: p1 (copy), CameraMath (upval), YRotDegFromSliderValue (upval)
+			p1.onYRotDegChanged(CameraMath.clampYRotDeg(p1.committedYRotDeg - YRotDegFromSliderValue))
 		end, { p1.committedYRotDeg, p1.onYRotDegChanged })
 	}
 end

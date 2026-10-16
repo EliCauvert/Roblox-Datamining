@@ -1,21 +1,21 @@
-﻿local socialLuaAnalyticsModule = require(script:FindFirstAncestor("SquadsCore").Parent.SocialLuaAnalytics)
-local playSessionId = game:GetService("RbxAnalyticsService"):GetPlaySessionId()
+﻿local SocialLuaAnalyticsModule = require(script:FindFirstAncestor("SquadsCore").Parent.SocialLuaAnalytics)
+local PlaySessionId = game:GetService("RbxAnalyticsService"):GetPlaySessionId()
 
 return {
-	Analytics = socialLuaAnalyticsModule.Analytics.AnalyticsFactory.setUpAnalyticsFactory({
+	Analytics = SocialLuaAnalyticsModule.Analytics.AnalyticsFactory.setUpAnalyticsFactory({
 		eventLists = {
 			Diag = nil,
 			EventStream = require(script.EventStreamActionList)
 		},
 		analyticsImpl = {
 			Diag = nil,
-			EventStream = socialLuaAnalyticsModule.Analytics.DefaultAnalyticsService.EventStream
+			EventStream = SocialLuaAnalyticsModule.Analytics.DefaultAnalyticsService.EventStream
 		},
 		staticInfoForAllEvents = {
-			playSessionId = if playSessionId ~= "" then nil else playSessionId,
+			playSessionId = if PlaySessionId == "" then nil else PlaySessionId,
 			placeId = if game.PlaceId > 0 then tostring(game.PlaceId) else nil,
 			universeId = if game.GameId > 0 then tostring(game.GameId) else nil,
-			placeInstanceId = if game.JobId ~= "" then nil else tostring(game.JobId)
+			placeInstanceId = if game.JobId == "" then nil else tostring(game.JobId)
 		}
 	}),
 	EventNames = require(script.EventNames),

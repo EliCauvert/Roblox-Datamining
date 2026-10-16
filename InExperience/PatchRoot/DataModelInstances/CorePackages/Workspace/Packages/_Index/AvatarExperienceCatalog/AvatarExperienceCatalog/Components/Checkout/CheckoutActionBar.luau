@@ -1,32 +1,32 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local avatarExperienceCommonModule = require(parent.AvatarExperienceCommon)
-local responsiveModule = require(parent.Responsive)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local constants = avatarExperienceCommonModule.Constants
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagStackedBottomNavMarketplaceCTA = sharedFlagsModule.FFlagStackedBottomNavMarketplaceCTA
-local fFlagAXFixBottomNavCTAHeight = sharedFlagsModule.FFlagAXFixBottomNavCTAHeight
-local fFlagEnableSplitPane = sharedFlagsModule.FFlagEnableSplitPane
-local constants_1 = require(parent.AppSystemBar).Constants
-local useNavBarSize = require(parent.AppNavBar).useNavBarSize
-local var1 = if fFlagEnableSplitPane then require(parent.SplitPane).SplitPaneStore else nil
-local var2 = if fFlagEnableSplitPane then require(parent.SignalsReact).useSignalState else nil
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local ResponsiveModule = require(Parent.Responsive)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local Constants = require(Parent.AvatarExperienceCommon).Constants
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagStackedBottomNavMarketplaceCTA = SharedFlagsModule.FFlagStackedBottomNavMarketplaceCTA
+local FFlagAXFixBottomNavCTAHeight = SharedFlagsModule.FFlagAXFixBottomNavCTAHeight
+local FFlagEnableSplitPane = SharedFlagsModule.FFlagEnableSplitPane
+local Constants1 = require(Parent.AppSystemBar).Constants
+local UseNavBarSizeFunction = require(Parent.AppNavBar).useNavBarSize
+local SplitPaneStore = if FFlagEnableSplitPane then require(Parent.SplitPane).SplitPaneStore else nil
+local UseSignalState = if FFlagEnableSplitPane then require(Parent.SignalsReact).useSignalState else nil
 
-local function selectDeviceOrientation(p1)
+local function selectDeviceOrientation(p1) --[[ Line: 26 ]]
 	return p1.DeviceOrientation
 end
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: foundationModule (ref), fFlagStackedBottomNavMarketplaceCTA (ref), fFlagAXFixBottomNavCTAHeight (ref), useNavBarSize (ref), fFlagEnableSplitPane (ref), var2 (ref), var1 (ref), useSelector (ref), selectDeviceOrientation (ref), responsiveModule (ref), useLocalization (ref), reactModule (ref), constants (ref), constants_1 (ref)
-	local var3 = foundationModule.Hooks.useTokens()
-	local var4 = if fFlagStackedBottomNavMarketplaceCTA and not fFlagAXFixBottomNavCTAHeight then useNavBarSize() else nil
-	local var5 = if fFlagEnableSplitPane then var2(var1.getStore().getIsBreakpointEnabled) else false
-	local var6 = if fFlagEnableSplitPane then var2(var1.getStore().getSupportWidthFraction) else nil
-	local var7 = (if fFlagEnableSplitPane and var5 then responsiveModule.Keys.Landscape else useSelector(selectDeviceOrientation)) == responsiveModule.Keys.Portrait
-	local var8 = useLocalization({
+return ReactModule.memo((ReactModule.forwardRef(function(p1, Ref) --[[ Line: 41 ]]
+	-- upvalues: FoundationModule (copy), FFlagStackedBottomNavMarketplaceCTA (copy), FFlagAXFixBottomNavCTAHeight (copy), UseNavBarSizeFunction (copy), FFlagEnableSplitPane (copy), UseSignalState (copy), SplitPaneStore (copy), UseSelectorFunction (copy), selectDeviceOrientation (copy), ResponsiveModule (copy), UseLocalizationFunction (copy), ReactModule (copy), Constants (copy), Constants1 (copy)
+	local UseTokensResult = FoundationModule.Hooks.useTokens()
+	local UseNavBarSizeResult = if FFlagStackedBottomNavMarketplaceCTA and not FFlagAXFixBottomNavCTAHeight then UseNavBarSizeFunction() else nil
+	local UseSignalStateResult = if FFlagEnableSplitPane then UseSignalState(SplitPaneStore.getStore().getIsBreakpointEnabled) else false
+	local UseSignalStateResult1 = if FFlagEnableSplitPane then UseSignalState(SplitPaneStore.getStore().getSupportWidthFraction) else nil
+	local UseSelectorResult = UseSelectorFunction(selectDeviceOrientation)
+	local IsPortraitMatch = (if FFlagEnableSplitPane and UseSignalStateResult then ResponsiveModule.Keys.Landscape else UseSelectorResult) == ResponsiveModule.Keys.Portrait
+	local UseLocalizationResult = UseLocalizationFunction({
 		checkoutItemSingular = "Feature.Catalog.Action.CheckoutSingular",
 		checkoutButtonFtuxTooltip = "Feature.Catalog.Label.Checkout.CheckoutButtonFtuxTooltip",
 		checkoutItemPlural = {
@@ -34,70 +34,82 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			count = p1.itemCount
 		}
 	})
-	local var9 = reactModule.useRef(nil)
-	local var10 = reactModule.useMemo(function()
-		-- upvalues: var7 (ref), fFlagEnableSplitPane (copy), var5 (ref), var6 (ref), constants (copy)
-		return if var7 then UDim2.fromScale(0, 1) elseif fFlagEnableSplitPane then UDim2.fromScale(if var5 then 1 - var6 else constants.LANDSCAPE_UI_WIDTH_PERCENTAGE, 1) else UDim2.fromScale(constants.LANDSCAPE_UI_WIDTH_PERCENTAGE, 1)
-	end, { var7, var5, var6 })
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseMemoResult = ReactModule.useMemo(function(): UDim2 --[[ Line: 83 ]]
+		-- upvalues: IsPortraitMatch (copy), FFlagEnableSplitPane (upval), UseSignalStateResult (copy), UseSignalStateResult1 (copy), Constants (upval)
+		return if IsPortraitMatch then UDim2.fromScale(0, 1) elseif FFlagEnableSplitPane then UDim2.fromScale(if UseSignalStateResult then 1 - UseSignalStateResult1 else Constants.LANDSCAPE_UI_WIDTH_PERCENTAGE, 1) else UDim2.fromScale(Constants.LANDSCAPE_UI_WIDTH_PERCENTAGE, 1)
+	end, {
+		IsPortraitMatch,
+		UseSignalStateResult,
+		UseSignalStateResult1
+	})
 	
-	return reactModule.createElement(foundationModule.View, {
+	return ReactModule.createElement(FoundationModule.View, {
 		tag = "row items-center gap-medium auto-y padding-y-large padding-x-xlarge bg-surface-0 anchor-bottom-left",
 		ZIndex = 3,
-		testId = if fFlagEnableSplitPane then "CheckoutActionBar" else nil,
-		ref = p2,
+		testId = if FFlagEnableSplitPane then "CheckoutActionBar" else nil,
+		ref = Ref,
 		Visible = p1.Visible,
-		Size = reactModule.useMemo(function()
-			-- upvalues: var7 (ref), fFlagEnableSplitPane (copy), var5 (ref), var6 (ref), constants (copy)
-			return if var7 then UDim2.fromScale(1, 0) elseif fFlagEnableSplitPane then UDim2.fromScale(if var5 then var6 else constants.LANDSCAPE_SCENE_WIDTH_PERCENTAGE, 0) else UDim2.fromScale(constants.LANDSCAPE_SCENE_WIDTH_PERCENTAGE, 0)
-		end, { var7, var5, var6 }),
-		Position = if fFlagStackedBottomNavMarketplaceCTA then reactModule.useMemo(function()
-			-- upvalues: p1 (ref), fFlagAXFixBottomNavCTAHeight (copy), constants_1 (copy), var10 (ref), var4 (ref)
-			return if p1.footerVisibilityBinding then p1.footerVisibilityBinding:map(function(p3)
-				-- upvalues: fFlagAXFixBottomNavCTAHeight (copy), constants_1 (copy), var10 (copy), var4 (copy)
-				return if fFlagAXFixBottomNavCTAHeight then var10 + UDim2.new(0, 0, 0, -math.max(0, constants_1.BOTTOM_BAR_SIZE * p3 - 8)) else var10 + UDim2.new(0, 0, 0, -(var4 - 8) * p3)
-			end) else var10
-		end, { var10, p1.footerVisibilityBinding, var4 }) else var10,
+		Size = ReactModule.useMemo(function(): UDim2 --[[ Line: 70 ]]
+			-- upvalues: IsPortraitMatch (copy), FFlagEnableSplitPane (upval), UseSignalStateResult (copy), UseSignalStateResult1 (copy), Constants (upval)
+			return if IsPortraitMatch then UDim2.fromScale(1, 0) elseif FFlagEnableSplitPane then UDim2.fromScale(if UseSignalStateResult then UseSignalStateResult1 else Constants.LANDSCAPE_SCENE_WIDTH_PERCENTAGE, 0) else UDim2.fromScale(Constants.LANDSCAPE_SCENE_WIDTH_PERCENTAGE, 0)
+		end, {
+			IsPortraitMatch,
+			UseSignalStateResult,
+			UseSignalStateResult1
+		}),
+		Position = if FFlagStackedBottomNavMarketplaceCTA then ReactModule.useMemo(function() --[[ Line: 97 ]]
+			-- upvalues: p1 (copy), FFlagAXFixBottomNavCTAHeight (upval), Constants1 (upval), UseMemoResult (copy), UseNavBarSizeResult (copy)
+			return if p1.footerVisibilityBinding then p1.footerVisibilityBinding:map(function(p2): UDim2 --[[ Line: 99 ]]
+				-- upvalues: FFlagAXFixBottomNavCTAHeight (upval), Constants1 (upval), UseMemoResult (upval), UseNavBarSizeResult (upval)
+				return if FFlagAXFixBottomNavCTAHeight then UseMemoResult + UDim2.new(0, 0, 0, -math.max(0, Constants1.BOTTOM_BAR_SIZE * p2 - 8)) else UseMemoResult + UDim2.new(0, 0, 0, -(UseNavBarSizeResult - 8) * p2)
+			end) else UseMemoResult
+		end, {
+			UseMemoResult,
+			p1.footerVisibilityBinding,
+			UseNavBarSizeResult
+		}) else UseMemoResult,
 		onAbsoluteSizeChanged = p1.onAbsoluteSizeChanged
 	}, {
-		ActionButton = reactModule.createElement(foundationModule.Button, {
+		ActionButton = ReactModule.createElement(FoundationModule.Button, {
 			LayoutOrder = 1,
-			text = if p1.itemCount <= 1 then var8.checkoutItemSingular else var8.checkoutItemPlural,
+			text = if p1.itemCount <= 1 then UseLocalizationResult.checkoutItemSingular else UseLocalizationResult.checkoutItemPlural,
 			onActivated = p1.onCheckoutButtonActivated,
-			variant = foundationModule.Enums.ButtonVariant.Emphasis,
-			size = foundationModule.Enums.ButtonSize.Medium,
-			fillBehavior = foundationModule.Enums.FillBehavior.Fill,
-			ref = var9
+			variant = FoundationModule.Enums.ButtonVariant.Emphasis,
+			size = FoundationModule.Enums.ButtonSize.Medium,
+			fillBehavior = FoundationModule.Enums.FillBehavior.Fill,
+			ref = UseRefResult
 		}),
-		ActionButtonPopover = reactModule.createElement(foundationModule.Popover.Root, { isOpen = p1.showCheckoutButtonTooltip }, {
-			Anchor = reactModule.createElement(foundationModule.Popover.Anchor, { anchorRef = var9 }),
-			Content = reactModule.createElement(foundationModule.Popover.Content, {
-				align = foundationModule.Enums.PopoverAlign.Center,
-				side = foundationModule.Enums.PopoverSide.Top,
-				radius = foundationModule.Enums.Radius.Medium,
-				backgroundStyle = var3.Color.System.Contrast
+		ActionButtonPopover = ReactModule.createElement(FoundationModule.Popover.Root, { isOpen = p1.showCheckoutButtonTooltip }, {
+			Anchor = ReactModule.createElement(FoundationModule.Popover.Anchor, { anchorRef = UseRefResult }),
+			Content = ReactModule.createElement(FoundationModule.Popover.Content, {
+				align = FoundationModule.Enums.PopoverAlign.Center,
+				side = FoundationModule.Enums.PopoverSide.Top,
+				radius = FoundationModule.Enums.Radius.Medium,
+				backgroundStyle = UseTokensResult.Color.System.Contrast
 			}, {
-				PopCoverContent = reactModule.createElement(foundationModule.View, {
+				PopCoverContent = ReactModule.createElement(FoundationModule.View, {
 					tag = "col gap-xsmall padding-y-small padding-x-medium auto-xy"
 				}, {
-					CategoryButtonTooltipTitle = reactModule.createElement(foundationModule.Text, {
+					CategoryButtonTooltipTitle = ReactModule.createElement(FoundationModule.Text, {
 						tag = "auto-xy text-title-medium text-truncate-end content-inverse-emphasis",
-						Text = var8.checkoutButtonFtuxTooltip
+						Text = UseLocalizationResult.checkoutButtonFtuxTooltip
 					}, {
-						TooltipOverlayButton = reactModule.createElement("TextButton", {
+						TooltipOverlayButton = ReactModule.createElement("TextButton", {
 							Transparency = 1,
-							[reactModule.Event.Activated] = p1.onTooltipButtonActivated,
+							[ReactModule.Event.Activated] = p1.onTooltipButtonActivated,
 							Size = UDim2.fromScale(1, 1)
 						})
 					})
 				})
 			})
 		}),
-		ClearButton = reactModule.createElement(foundationModule.Button, {
+		ClearButton = ReactModule.createElement(FoundationModule.Button, {
 			icon = "trash-can",
 			LayoutOrder = 2,
 			onActivated = p1.onClearButtonActivated,
-			variant = foundationModule.Enums.ButtonVariant.Standard,
-			size = foundationModule.Enums.ButtonSize.Medium
+			variant = FoundationModule.Enums.ButtonVariant.Standard,
+			size = FoundationModule.Enums.ButtonSize.Medium
 		})
 	})
-end))
+end)))

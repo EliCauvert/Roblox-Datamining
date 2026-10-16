@@ -1,1 +1,1 @@
-﻿return require(script.HeaderBarLeading)
+﻿return (require(script.HeaderBarLeading))

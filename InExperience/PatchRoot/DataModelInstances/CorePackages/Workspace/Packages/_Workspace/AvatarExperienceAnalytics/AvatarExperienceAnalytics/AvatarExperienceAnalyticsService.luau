@@ -1,38 +1,38 @@
-﻿local avatarExperienceAnalytics = script:FindFirstAncestor("AvatarExperienceAnalytics")
-local open3DFullViewModule = require(avatarExperienceAnalytics.open3DFullView)
-local close3DFullViewModule = require(avatarExperienceAnalytics.close3DFullView)
-local analyticsServiceModule = require(avatarExperienceAnalytics.AnalyticsService)
-local reportAvatarEventCounterV1Module = require(avatarExperienceAnalytics.reportAvatarEventCounterV1)
-local constantsModule = require(avatarExperienceAnalytics.Constants)
-local t = {}
-local var1 = nil
+﻿local AvatarExperienceAnalytics = script:FindFirstAncestor("AvatarExperienceAnalytics")
+local Open3DFullViewModule = require(AvatarExperienceAnalytics.open3DFullView)
+local Close3DFullViewModule = require(AvatarExperienceAnalytics.close3DFullView)
+local AnalyticsServiceModule = require(AvatarExperienceAnalytics.AnalyticsService)
+local ReportAvatarEventCounterV1Module = require(AvatarExperienceAnalytics.reportAvatarEventCounterV1)
+local ConstantsModule = require(AvatarExperienceAnalytics.Constants)
+local v1 = nil
 
-function t.get(_)
-	-- upvalues: var1 (write), analyticsServiceModule (ref), open3DFullViewModule (ref), close3DFullViewModule (ref), reportAvatarEventCounterV1Module (ref), constantsModule (ref)
-	if var1 then
-		return var1
-	end
-	local t = {
-		open3DFullView = function(p1)
-			-- upvalues: open3DFullViewModule (copy), analyticsServiceModule (ref)
-			open3DFullViewModule(analyticsServiceModule.EventStream, p1)
-		end,
-		close3DFullView = function(p1)
-			-- upvalues: close3DFullViewModule (copy), analyticsServiceModule (ref)
-			close3DFullViewModule(analyticsServiceModule.EventStream, p1)
-		end,
-		toggleCameraInEditorAndShop = function(p1, p2)
-			-- upvalues: analyticsServiceModule (ref), reportAvatarEventCounterV1Module (copy), constantsModule (copy)
-			analyticsServiceModule.EventStream:sendTelemetryEvent("CameraInEditorAndCatalogButton", "CameraInEditorAndCatalogButton_Toggle", {
-				actionName = if p1 then "Button Enabled" else "Button Disabled",
-				pageName = p2
-			})
-			reportAvatarEventCounterV1Module(if p1 then constantsModule.AVATAR_EVENT_COUNTER_NAME.AXCameraEnabled else constantsModule.AVATAR_EVENT_COUNTER_NAME.AXCameraDisabled)
+return {
+	get = function(_) --[[ Line: 17 ]]
+		-- upvalues: v1 (ref), AnalyticsServiceModule (copy), Open3DFullViewModule (copy), Close3DFullViewModule (copy), ReportAvatarEventCounterV1Module (copy), ConstantsModule (copy)
+		if v1 then
+			return v1
+		else
+			local config = {
+				open3DFullView = function(p1) --[[ Line: 26 ]]
+					-- upvalues: Open3DFullViewModule (upval), AnalyticsServiceModule (copy)
+					Open3DFullViewModule(AnalyticsServiceModule.EventStream, p1)
+				end,
+				close3DFullView = function(p1) --[[ Line: 30 ]]
+					-- upvalues: Close3DFullViewModule (upval), AnalyticsServiceModule (copy)
+					Close3DFullViewModule(AnalyticsServiceModule.EventStream, p1)
+				end,
+				toggleCameraInEditorAndShop = function(p1, PageName) --[[ Line: 35 ]]
+					-- upvalues: AnalyticsServiceModule (copy), ReportAvatarEventCounterV1Module (upval), ConstantsModule (upval)
+					AnalyticsServiceModule.EventStream:sendTelemetryEvent("CameraInEditorAndCatalogButton", "CameraInEditorAndCatalogButton_Toggle", {
+						actionName = if p1 then "Button Enabled" else "Button Disabled",
+						pageName = PageName
+					})
+					ReportAvatarEventCounterV1Module(if p1 then ConstantsModule.AVATAR_EVENT_COUNTER_NAME.AXCameraEnabled else ConstantsModule.AVATAR_EVENT_COUNTER_NAME.AXCameraDisabled)
+				end
+			}
+			v1 = config
+			
+			return config
 		end
-	}
-	var1 = t
-	
-	return t
-end
-
-return t
+	end
+}

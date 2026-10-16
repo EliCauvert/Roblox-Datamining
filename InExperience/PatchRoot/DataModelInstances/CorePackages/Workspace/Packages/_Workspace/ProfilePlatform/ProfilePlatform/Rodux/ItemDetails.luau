@@ -1,18 +1,17 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local roduxModule = require(parent.Rodux)
-local cryoModule = require(parent.Cryo)
-local assetInfoModule = require(profilePlatform.Common.AssetInfo)
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local CryoModule = require(Parent.Cryo)
+local AssetInfoModule = require(ProfilePlatform.Common.AssetInfo)
 
-return roduxModule.createReducer({}, {
-	[require(profilePlatform.Networking.NetworkingCurrentlyWearing).GetItemDetails.Succeeded.name] = function(p1, p2)
-		-- upvalues: assetInfoModule (ref), cryoModule (ref)
-		local t = {}
+return require(Parent.Rodux).createReducer({}, {
+	[require(ProfilePlatform.Networking.NetworkingCurrentlyWearing).GetItemDetails.Succeeded.name] = function(p1, p2) --[[ Line: 23 ]]
+		-- upvalues: AssetInfoModule (copy), CryoModule (copy)
+		local FromAssetResults = {}
 		
-		for i, v in p2.responseBody.data do
-			local var1 = assetInfoModule.fromAsset(v)
-			t[var1.id] = var1
+		for _, entry in p2.responseBody.data do
+			local FromAssetResult = AssetInfoModule.fromAsset(entry)
+			FromAssetResults[FromAssetResult.id] = FromAssetResult
 		end
-		return cryoModule.Dictionary.join(p1, t)
+		return CryoModule.Dictionary.join(p1, FromAssetResults)
 	end
 })

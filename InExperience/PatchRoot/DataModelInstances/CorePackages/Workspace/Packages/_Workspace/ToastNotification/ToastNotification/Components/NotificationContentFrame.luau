@@ -1,166 +1,168 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent
-local context = parent_1.context
-local dependenciesModule = require(parent_1.dependencies)
-local notificationStyledTextModule = require(parent.NotificationStyledText)
-local notificationThumbnailModule = require(parent.NotificationThumbnail)
-local toastHoldButtonModule = require(parent.ToastHoldButton)
-local typeModule = require(parent_1.type)
-local UIBlox = dependenciesModule.UIBlox
-local useStyle = UIBlox.Core.Style.useStyle
-local imageSetLabel = UIBlox.Core.ImageSet.ImageSetLabel
-local interactable = UIBlox.Core.Control.Interactable
-local constantsModule = require(parent_1.constants)
-local useNotificationCardStateModule = require(context.useNotificationCardState)
-local useNotificationCardDataModule = require(context.useNotificationCardData)
-local parent_2 = parent_1.Parent
-local reactModule = require(parent_2.React)
-local foundationModule = require(parent_2.Foundation)
-local useTokens = foundationModule.Hooks.useTokens
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local defaultContentPadding = constantsModule.DefaultContentPadding
-local defaultTextContentPadding = constantsModule.DefaultTextContentPadding
-local vector2 = Vector2.new(36, 36)
-local isUserThumbnail = require(parent_1.utils.toastNotificationHelper).isUserThumbnail
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent
+local Context = Parent1.context
+local NotificationStyledTextModule = require(Parent.NotificationStyledText)
+local NotificationThumbnailModule = require(Parent.NotificationThumbnail)
+local ToastHoldButtonModule = require(Parent.ToastHoldButton)
+local TypeModule = require(Parent1.type)
+local UIBlox = require(Parent1.dependencies).UIBlox
+local UseStyleFunction = UIBlox.Core.Style.useStyle
+local ImageSetLabel = UIBlox.Core.ImageSet.ImageSetLabel
+local Interactable = UIBlox.Core.Control.Interactable
+local ConstantsModule = require(Parent1.constants)
+local UseNotificationCardStateModule = require(Context.useNotificationCardState)
+local UseNotificationCardDataModule = require(Context.useNotificationCardData)
+local Parent2 = Parent1.Parent
+local ReactModule = require(Parent2.React)
+local FoundationModule = require(Parent2.Foundation)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local DefaultContentPadding = ConstantsModule.DefaultContentPadding
+local DefaultTextContentPadding = ConstantsModule.DefaultTextContentPadding
+local _Vector2 = Vector2.new(36, 36)
+local IsUserThumbnailFunction = require(Parent1.utils.toastNotificationHelper).isUserThumbnail
 
-return function(p1)
-	-- upvalues: useStyle (ref), foundationFontFaceMigration (ref), useTokens (ref), useNotificationCardDataModule (ref), isUserThumbnail (ref), useNotificationCardStateModule (ref), reactModule (ref), constantsModule (ref), normalizeFontFace (ref), defaultContentPadding (ref), vector2 (ref), notificationThumbnailModule (ref), defaultTextContentPadding (ref), notificationStyledTextModule (ref), toastHoldButtonModule (ref), interactable (ref), imageSetLabel (ref), typeModule (ref)
-	local var1
-	local var2 = useStyle()
-	local var3 = if foundationFontFaceMigration then useTokens() else nil
-	local var4 = if foundationFontFaceMigration then var3.Typography.CaptionLarge.FontSize else var2.Font.BaseSize * var2.Font.CaptionHeader.RelativeSize
-	local var5 = if foundationFontFaceMigration then var3.Typography.BodySmall.FontSize else var2.Font.BaseSize * var2.Font.CaptionBody.RelativeSize
-	local cardSize = useNotificationCardDataModule().cardSize
-	local _ = nil
+return function(p1) --[[ Line: 39 ]]
+	-- upvalues: UseStyleFunction (copy), FoundationFontFaceMigration (copy), UseTokensFunction (copy), UseNotificationCardDataModule (copy), IsUserThumbnailFunction (copy), UseNotificationCardStateModule (copy), ReactModule (copy), ConstantsModule (copy), NormalizeFontFaceFunction (copy), DefaultContentPadding (copy), _Vector2 (copy), NotificationThumbnailModule (copy), DefaultTextContentPadding (copy), NotificationStyledTextModule (copy), ToastHoldButtonModule (copy), Interactable (copy), ImageSetLabel (copy), TypeModule (copy)
+	local UseStyleResult = UseStyleFunction()
+	local UseTokensResult = if FoundationFontFaceMigration then UseTokensFunction() else nil
+	local FontSize = if FoundationFontFaceMigration then UseTokensResult.Typography.CaptionLarge.FontSize else UseStyleResult.Font.BaseSize * UseStyleResult.Font.CaptionHeader.RelativeSize
+	local FontSize1 = if FoundationFontFaceMigration then UseTokensResult.Typography.BodySmall.FontSize else UseStyleResult.Font.BaseSize * UseStyleResult.Font.CaptionBody.RelativeSize
+	local CardSize = UseNotificationCardDataModule().cardSize
+	local UseMemoResult = nil
 	
-	if isUserThumbnail then
-		local var6 = useNotificationCardStateModule("thumbnail")
-		var1 = reactModule.useMemo(function()
-			-- upvalues: var6 (ref), isUserThumbnail (copy), var2 (ref), cardSize (write), constantsModule (copy)
-			local var7 = false
+	if IsUserThumbnailFunction then
+		local Thumbnail = UseNotificationCardStateModule("thumbnail")
+		UseMemoResult = ReactModule.useMemo(function() --[[ Line: 55 ]]
+			-- upvalues: Thumbnail (copy), IsUserThumbnailFunction (upval), UseStyleResult (copy), CardSize (ref), ConstantsModule (upval)
+			local Flag = false
 			
-			if var6 then
-				for i, v in var6 do
-					if not isUserThumbnail(v) then
-						var7 = true
+			if Thumbnail then
+				for _, value in Thumbnail do
+					if not IsUserThumbnailFunction(value) then
+						Flag = true
 						break
 					end
 				end
 			end
-			return if var7 then if cardSize then cardSize.thumbnail else constantsModule.CardSizeDefault.thumbnail else var2.Tokens.Size.Size_1000
-		end, { var6, var2.Tokens.Size.Size_1000, cardSize })
+			return if Flag then CardSize and CardSize.thumbnail or ConstantsModule.CardSizeDefault.thumbnail else UseStyleResult.Tokens.Size.Size_1000
+		end, {
+			Thumbnail,
+			UseStyleResult.Tokens.Size.Size_1000,
+			CardSize
+		})
 	else
-		var1 = if cardSize then cardSize.thumbnail else constantsModule.CardSizeDefault.thumbnail
+		UseMemoResult = CardSize and CardSize.thumbnail or ConstantsModule.CardSizeDefault.thumbnail
 	end
-	local size700 = var2.Tokens.Size.Size_700
-	local var7 = useNotificationCardStateModule("textBody")
-	local var8 = var7 and var7[1]
-	local var9 = var8 and (var8.title and {
+	local Size700 = UseStyleResult.Tokens.Size.Size_700
+	local TextBody = UseNotificationCardStateModule("textBody")
+	local TextBodyEntry = TextBody and TextBody[1]
+	local Config = TextBodyEntry and (TextBodyEntry.title and {
 		LayoutOrder = 1,
-		Text = var8.title,
-		MaxSize = Vector2.new(1e999, var4 * 2),
+		Text = TextBodyEntry.title,
+		MaxSize = Vector2.new(1e999, FontSize * 2),
 		Size = UDim2.new(1, 0, 0, 0),
-		TextSize = var4,
+		TextSize = FontSize,
 		AutomaticSize = Enum.AutomaticSize.Y,
 		TextXAlignment = Enum.TextXAlignment.Left,
-		Font = if foundationFontFaceMigration then nil else var2.Font.CaptionHeader.Font,
-		FontFace = if foundationFontFaceMigration then normalizeFontFace(var3.Typography.CaptionLarge.Font) else nil,
-		TextColor3 = var2.Theme.TextEmphasis.Color
+		Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.CaptionHeader.Font,
+		FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.CaptionLarge.Font) else nil,
+		TextColor3 = UseStyleResult.Theme.TextEmphasis.Color
 	})
-	local var10 = var8 and (var8.label and {
+	local Config1 = TextBodyEntry and (TextBodyEntry.label and {
 		LayoutOrder = 2,
-		Text = var8.label,
-		MaxSize = Vector2.new(1e999, var5 * 2),
+		Text = TextBodyEntry.label,
+		MaxSize = Vector2.new(1e999, FontSize1 * 2),
 		Size = UDim2.new(1, 0, 0, 0),
-		TextSize = var5,
+		TextSize = FontSize1,
 		AutomaticSize = Enum.AutomaticSize.Y,
 		TextXAlignment = Enum.TextXAlignment.Left,
-		Font = if foundationFontFaceMigration then nil else var2.Font.CaptionBody.Font,
-		FontFace = if foundationFontFaceMigration then normalizeFontFace(var3.Typography.BodySmall.Font) else nil
+		Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.CaptionBody.Font,
+		FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.BodySmall.Font) else nil
 	})
-	local var11 = useNotificationCardDataModule()
-	cardSize = var11.cardSize
-	local handleActions = var11.handleActions
-	local var12 = useNotificationCardStateModule("singleMetaAction")
-	local var13 = var12 and var12[1]
+	local UseNotificationCardDataModuleResult = UseNotificationCardDataModule()
+	CardSize = UseNotificationCardDataModuleResult.cardSize
+	local HandleActionsFunction = UseNotificationCardDataModuleResult.handleActions
+	local SingleMetaAction = UseNotificationCardStateModule("singleMetaAction")
+	local SingleMetaActionEntry = SingleMetaAction and SingleMetaAction[1]
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		LayoutOrder = 1,
 		BackgroundTransparency = 1,
 		AutomaticSize = Enum.AutomaticSize.Y,
 		Size = UDim2.new(1, 0, 0, 0)
 	}, {
-		UIListLayout = reactModule.createElement("UIListLayout", {
+		UIListLayout = ReactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Horizontal,
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			VerticalAlignment = Enum.VerticalAlignment.Center,
-			Padding = UDim.new(0, defaultContentPadding)
+			Padding = UDim.new(0, DefaultContentPadding)
 		}),
-		ThumbnailTextContainer = reactModule.createElement("Frame", {
+		ThumbnailTextContainer = ReactModule.createElement("Frame", {
 			LayoutOrder = 1,
 			BackgroundTransparency = 1,
 			AutomaticSize = Enum.AutomaticSize.Y,
-			Size = if var13 then UDim2.new(1, -(defaultContentPadding + vector2.X), 0, 0) else UDim2.new(1, 0, 0, 0)
+			Size = if SingleMetaActionEntry then UDim2.new(1, -(DefaultContentPadding + _Vector2.X), 0, 0) else UDim2.new(1, 0, 0, 0)
 		}, {
-			UIListLayout = reactModule.createElement("UIListLayout", {
+			UIListLayout = ReactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Horizontal,
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				VerticalAlignment = Enum.VerticalAlignment.Top,
-				Padding = UDim.new(0, defaultContentPadding)
+				Padding = UDim.new(0, DefaultContentPadding)
 			}),
-			NotificationThumbnailFrame = reactModule.createElement("Frame", {
+			NotificationThumbnailFrame = ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 1,
 				AutomaticSize = Enum.AutomaticSize.Y,
-				Size = UDim2.new(0, var1, 0, var1)
+				Size = UDim2.new(0, UseMemoResult, 0, UseMemoResult)
 			}, {
-				NotificationThumbnail = reactModule.createElement(notificationThumbnailModule)
+				NotificationThumbnail = ReactModule.createElement(NotificationThumbnailModule)
 			}),
-			ToastTextFrame = reactModule.createElement("Frame", {
+			ToastTextFrame = ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 2,
 				AutomaticSize = Enum.AutomaticSize.Y,
-				Size = if p1.showHoldButton then UDim2.new(1, -(var1 + defaultContentPadding * 2 + size700), 0, 0) else UDim2.new(1, -(var1 + defaultContentPadding), 0, 0)
+				Size = if p1.showHoldButton then UDim2.new(1, -(UseMemoResult + DefaultContentPadding * 2 + Size700), 0, 0) else UDim2.new(1, -(UseMemoResult + DefaultContentPadding), 0, 0)
 			}, {
-				UIPadding = reactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, 2) }),
-				UIListLayout = reactModule.createElement("UIListLayout", {
+				UIPadding = ReactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, 2) }),
+				UIListLayout = ReactModule.createElement("UIListLayout", {
 					FillDirection = Enum.FillDirection.Vertical,
 					SortOrder = Enum.SortOrder.LayoutOrder,
 					VerticalAlignment = Enum.VerticalAlignment.Top,
-					Padding = UDim.new(0, defaultTextContentPadding)
+					Padding = UDim.new(0, DefaultTextContentPadding)
 				}),
-				ToastTitle = var9 and reactModule.createElement(notificationStyledTextModule, var9),
-				ToastSubtitle = var10 and reactModule.createElement(notificationStyledTextModule, var10)
+				ToastTitle = Config and ReactModule.createElement(NotificationStyledTextModule, Config),
+				ToastSubtitle = Config1 and ReactModule.createElement(NotificationStyledTextModule, Config1)
 			}),
-			ToastHoldButton = reactModule.createElement(toastHoldButtonModule, {
+			ToastHoldButton = ReactModule.createElement(ToastHoldButtonModule, {
 				layoutOrder = 3,
-				iconSize = size700,
+				iconSize = Size700,
 				visible = p1.showHoldButton,
 				iconTransparency = if p1.shouldAutoFocus then 0.5 else 0,
 				progress = p1.holdProgress
 			})
 		}),
-		SingleMetaAction = if var13 then reactModule.createElement(interactable, {
+		SingleMetaAction = if SingleMetaActionEntry then ReactModule.createElement(Interactable, {
 			AutoButtonColor = false,
-			BackgroundColor3 = var2.Theme.UIMuted.Color,
+			BackgroundColor3 = UseStyleResult.Theme.UIMuted.Color,
 			BackgroundTransparency = 0.9,
 			LayoutOrder = 2,
-			onStateChanged = function() end,
-			[reactModule.Event.Activated] = function()
-				-- upvalues: handleActions (ref), var13 (ref)
-				if handleActions then
-					handleActions(var13)
+			onStateChanged = function() --[[ Line: 186 ]] end,
+			[ReactModule.Event.Activated] = function() --[[ Line: 187 ]]
+				-- upvalues: HandleActionsFunction (copy), SingleMetaActionEntry (copy)
+				if HandleActionsFunction then
+					HandleActionsFunction(SingleMetaActionEntry)
 				end
 			end,
-			Size = UDim2.fromOffset(vector2.X, vector2.Y)
+			Size = UDim2.fromOffset(_Vector2.X, _Vector2.Y)
 		}, {
-			UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) }),
-			Icon = reactModule.createElement(imageSetLabel, {
+			UICorner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) }),
+			Icon = ReactModule.createElement(ImageSetLabel, {
 				BackgroundTransparency = 1,
 				AnchorPoint = Vector2.new(0.5, 0.5),
-				Image = typeModule.MetaActionIcons[var13.actionIcon],
-				ImageColor3 = var2.Theme.IconEmphasis.Color,
+				Image = TypeModule.MetaActionIcons[SingleMetaActionEntry.actionIcon],
+				ImageColor3 = UseStyleResult.Theme.IconEmphasis.Color,
 				Position = UDim2.fromScale(0.5, 0.5),
 				Size = UDim2.fromOffset(28, 28)
 			})

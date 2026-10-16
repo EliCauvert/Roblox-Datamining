@@ -1,9 +1,9 @@
 ﻿local _ = require(script:FindFirstAncestor("InExperienceShop").Types)
 
-return function(p1, p2)
-	for i, v in p1 do
-		if v.id == p2 then
-			return v
+return function(List, Id) --[[ Line: 13 | Named "findSection" ]]
+	for _, value in List do
+		if value.id == Id then
+			return value
 		end
 	end
 	return nil

@@ -1,13 +1,13 @@
-﻿local gameDetailRodux = script:FindFirstAncestor("GameDetailRodux")
-local cryoModule = require(gameDetailRodux.Parent.Cryo)
-local setAgeRecommendationModule = require(gameDetailRodux.AgeRecommendations.SetAgeRecommendation)
+﻿local GameDetailRodux = script:FindFirstAncestor("GameDetailRodux")
+local CryoModule = require(GameDetailRodux.Parent.Cryo)
+local SetAgeRecommendationModule = require(GameDetailRodux.AgeRecommendations.SetAgeRecommendation)
 
-return function(p1, p2)
-	-- upvalues: setAgeRecommendationModule (ref), cryoModule (ref)
-	p1 = p1 or {}
+return function(p1, p2) --[[ Line: 7 ]]
+	-- upvalues: SetAgeRecommendationModule (copy), CryoModule (copy)
+	local P0 = p1 or {}
 	
-	if p2.type == setAgeRecommendationModule.name then
-		p1 = cryoModule.Dictionary.join(p1, { [p2.universeId] = p2.ageRecommendationDetails })
+	if p2.type == SetAgeRecommendationModule.name then
+		P0 = CryoModule.Dictionary.join(P0, { [p2.universeId] = p2.ageRecommendationDetails })
 	end
-	return p1
+	return P0
 end

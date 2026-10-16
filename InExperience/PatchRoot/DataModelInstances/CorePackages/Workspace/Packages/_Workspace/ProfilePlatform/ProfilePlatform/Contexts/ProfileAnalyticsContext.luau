@@ -1,8 +1,8 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local _ = require(profilePlatform.Analytics.EventNames)
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local _ = require(ProfilePlatform.Analytics.EventNames)
 
-return require(parent.React).createContext({
-	fireAnalyticsEvent = function() end,
-	scrollViewPositionChangedSignal = require(parent.AppCommonLib).Signal.new()
+return require(Parent.React).createContext({
+	fireAnalyticsEvent = function() --[[ Line: 29 ]] end,
+	scrollViewPositionChangedSignal = require(Parent.AppCommonLib).Signal.new()
 })

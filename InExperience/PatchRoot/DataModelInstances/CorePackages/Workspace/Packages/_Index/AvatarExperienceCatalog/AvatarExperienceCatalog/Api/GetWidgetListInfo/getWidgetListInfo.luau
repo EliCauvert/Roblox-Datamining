@@ -1,26 +1,25 @@
-﻿local avatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
-local parent = avatarExperienceCatalog.Parent
-local url = require(parent.Http).Url
-local _ = require(parent.LuauPolyfill)
-local normalizeWidgetListInfoResponseToWidgetListInfoModule = require(script.Parent.normalizeWidgetListInfoResponseToWidgetListInfo)
-local constantsModule = require(script.Parent.constants)
-local _ = require(avatarExperienceCatalog.Models.WidgetListInfo)
-local makeAXResponseHandlerModule = require(avatarExperienceCatalog.Utils.makeAXResponseHandler)
-local _ = require(avatarExperienceCatalog.Components.ResultsList.WidgetListBreakPointEnum)
-local widgetListBreakPointSizeMapModule = require(avatarExperienceCatalog.Components.ResultsList.WidgetListBreakPointSizeMap)
-local fFlagAXPassScreenSizeToWidgetApi = require(parent.AvatarExperienceFlags).FFlagAXPassScreenSizeToWidgetApi
+﻿local AvatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
+local Parent = AvatarExperienceCatalog.Parent
+local Url = require(Parent.Http).Url
+local _ = require(Parent.LuauPolyfill)
+local NormalizeWidgetListInfoResponseToWidgetListInfoModule = require(script.Parent.normalizeWidgetListInfoResponseToWidgetListInfo)
+local ConstantsModule = require(script.Parent.constants)
+local _ = require(AvatarExperienceCatalog.Models.WidgetListInfo)
+local MakeAXResponseHandlerModule = require(AvatarExperienceCatalog.Utils.makeAXResponseHandler)
+local _ = require(AvatarExperienceCatalog.Components.ResultsList.WidgetListBreakPointEnum)
+local WidgetListBreakPointSizeMapModule = require(AvatarExperienceCatalog.Components.ResultsList.WidgetListBreakPointSizeMap)
+local FFlagAXPassScreenSizeToWidgetApi = require(Parent.AvatarExperienceFlags).FFlagAXPassScreenSizeToWidgetApi
 
-return function(p1, p2, p3, p4)
-	-- upvalues: url (ref), fFlagAXPassScreenSizeToWidgetApi (ref), widgetListBreakPointSizeMapModule (ref), makeAXResponseHandlerModule (ref), normalizeWidgetListInfoResponseToWidgetListInfoModule (ref), constantsModule (ref)
-	local t = {
-		requestId = p2,
-		context = p3,
-		screenSize = if fFlagAXPassScreenSizeToWidgetApi and p4 then widgetListBreakPointSizeMapModule[p4] else nil
-	}
-	var6, t = p1(`{url.APIS_URL}marketplace-widgets/v1/widgets?{url:makeQueryString(t)}`, "GET")
+return function(Callback, RequestId, Context, p1) --[[ Line: 22 | Named "getWidgetListInfo" ]]
+	-- upvalues: Url (copy), FFlagAXPassScreenSizeToWidgetApi (copy), WidgetListBreakPointSizeMapModule (copy), MakeAXResponseHandlerModule (copy), NormalizeWidgetListInfoResponseToWidgetListInfoModule (copy), ConstantsModule (copy)
+	local GET, GET2 = Callback(`{Url.APIS_URL}marketplace-widgets/v1/widgets?{Url:makeQueryString({
+		requestId = RequestId,
+		context = Context,
+		screenSize = if FFlagAXPassScreenSizeToWidgetApi and p1 then WidgetListBreakPointSizeMapModule[p1] else nil
+	})}`, "GET")
 	
-	return makeAXResponseHandlerModule(var6, normalizeWidgetListInfoResponseToWidgetListInfoModule, {
-		modelMismatchCounter = constantsModule.FETCH_WIDGET_INFO_MODEL_MISMATCH_COUNTER_NAME,
-		latencyCounter = constantsModule.FETCH_WIDGET_INFO_LATENCY_COUNTER_NAME
-	}), t
+	return MakeAXResponseHandlerModule(GET, NormalizeWidgetListInfoResponseToWidgetListInfoModule, {
+		modelMismatchCounter = ConstantsModule.FETCH_WIDGET_INFO_MODEL_MISMATCH_COUNTER_NAME,
+		latencyCounter = ConstantsModule.FETCH_WIDGET_INFO_LATENCY_COUNTER_NAME
+	}), GET2
 end

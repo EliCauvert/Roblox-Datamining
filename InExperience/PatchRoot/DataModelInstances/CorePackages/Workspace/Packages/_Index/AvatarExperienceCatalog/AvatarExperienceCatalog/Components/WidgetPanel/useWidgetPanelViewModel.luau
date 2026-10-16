@@ -1,165 +1,168 @@
-﻿local collectionService = game:GetService("CollectionService")
-local avatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
-local parent = avatarExperienceCatalog.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local view = foundationModule.View
-local useTokens = foundationModule.Hooks.useTokens
-local gridMetrics = require(parent.UIBlox).App.Grid.GridMetrics
-local useNetworking = require(parent.AvatarExperienceCommon).Hooks.useNetworking
-local constants = require(parent.Impressions).Constants
-local useAvatarRoute = require(parent.AvatarExperienceNavigation).AvatarRoute.Hooks.useAvatarRoute
-local _ = require(avatarExperienceCatalog.Components.ResultsList.WidgetListInfoViewModel)
-local useWidgetListInfoViewModelModule = require(avatarExperienceCatalog.Components.ResultsList.useWidgetListInfoViewModel)
-local getOrderedWidgetsModule = require(avatarExperienceCatalog.Components.ResultsList.getOrderedWidgets)
-local _ = require(avatarExperienceCatalog.Components.ResultsList.WidgetListBreakPointEnum)
-local getWidgetItemIdsFromWidgetInfoModule = require(avatarExperienceCatalog.Utils.getWidgetItemIdsFromWidgetInfo)
-local getBreakpointFromRowWidthModule = require(avatarExperienceCatalog.Utils.getBreakpointFromRowWidth)
-local getUIScaleFromTokensModule = require(avatarExperienceCatalog.Utils.getUIScaleFromTokens)
-local constantsModule = require(avatarExperienceCatalog.Constants)
-local widgetConstantsModule = require(avatarExperienceCatalog.WidgetConstants)
-local useOnRequestImpressionsSignalModule = require(avatarExperienceCatalog.Components.Hooks.useOnRequestImpressionsSignal)
-local useCatalogPageMonolithDependenciesModule = require(avatarExperienceCatalog.Providers.useCatalogPageMonolithDependencies)
+﻿local CollectionService = game:GetService("CollectionService")
+local AvatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
+local Parent = AvatarExperienceCatalog.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local GridMetrics = require(Parent.UIBlox).App.Grid.GridMetrics
+local UseNetworkingFunction = require(Parent.AvatarExperienceCommon).Hooks.useNetworking
+local Constants = require(Parent.Impressions).Constants
+local UseAvatarRouteFunction = require(Parent.AvatarExperienceNavigation).AvatarRoute.Hooks.useAvatarRoute
+local _ = require(AvatarExperienceCatalog.Components.ResultsList.WidgetListInfoViewModel)
+local UseWidgetListInfoViewModelModule = require(AvatarExperienceCatalog.Components.ResultsList.useWidgetListInfoViewModel)
+local GetOrderedWidgetsModule = require(AvatarExperienceCatalog.Components.ResultsList.getOrderedWidgets)
+local _ = require(AvatarExperienceCatalog.Components.ResultsList.WidgetListBreakPointEnum)
+local GetWidgetItemIdsFromWidgetInfoModule = require(AvatarExperienceCatalog.Utils.getWidgetItemIdsFromWidgetInfo)
+local GetBreakpointFromRowWidthModule = require(AvatarExperienceCatalog.Utils.getBreakpointFromRowWidth)
+local GetUIScaleFromTokensModule = require(AvatarExperienceCatalog.Utils.getUIScaleFromTokens)
+local ConstantsModule = require(AvatarExperienceCatalog.Constants)
+local WidgetConstantsModule = require(AvatarExperienceCatalog.WidgetConstants)
+local UseOnRequestImpressionsSignalModule = require(AvatarExperienceCatalog.Components.Hooks.useOnRequestImpressionsSignal)
+local UseCatalogPageMonolithDependenciesModule = require(AvatarExperienceCatalog.Providers.useCatalogPageMonolithDependencies)
 local _ = require(script.Parent.WidgetPanelView)
 
-return function(p1)
-	-- upvalues: useTokens (ref), getUIScaleFromTokensModule (ref), reactModule (ref), getBreakpointFromRowWidthModule (ref), useCatalogPageMonolithDependenciesModule (ref), useNetworking (ref), useOnRequestImpressionsSignalModule (ref), useAvatarRoute (ref), constants (ref), widgetConstantsModule (ref), collectionService (ref), useWidgetListInfoViewModelModule (ref), getOrderedWidgetsModule (ref), gridMetrics (ref), constantsModule (ref), getWidgetItemIdsFromWidgetInfoModule (ref), view (ref)
-	local context = p1.context
-	local var1 = getUIScaleFromTokensModule(useTokens())
-	local var2, var3 = reactModule.useState(0)
-	local var4 = reactModule.useRef(nil)
-	reactModule.useEffect(function()
-		-- upvalues: var4 (ref)
-		return function()
-			-- upvalues: var4 (copy)
-			if var4.current then
-				task.cancel(var4.current)
-				var4.current = nil
+return function(Frame) --[[ Line: 61 | Named "useWidgetPanelViewModel" ]]
+	-- upvalues: UseTokensFunction (copy), GetUIScaleFromTokensModule (copy), ReactModule (copy), GetBreakpointFromRowWidthModule (copy), UseCatalogPageMonolithDependenciesModule (copy), UseNetworkingFunction (copy), UseOnRequestImpressionsSignalModule (copy), UseAvatarRouteFunction (copy), Constants (copy), WidgetConstantsModule (copy), CollectionService (copy), UseWidgetListInfoViewModelModule (copy), GetOrderedWidgetsModule (copy), GridMetrics (copy), ConstantsModule (copy), GetWidgetItemIdsFromWidgetInfoModule (copy), View (copy)
+	local Context = Frame.context
+	local UIScaleFromTokensModule = GetUIScaleFromTokensModule((UseTokensFunction()))
+	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
+	local UseRefResult = ReactModule.useRef(nil)
+	ReactModule.useEffect(function() --[[ Line: 72 ]]
+		-- upvalues: UseRefResult (copy)
+		return function() --[[ Line: 73 ]]
+			-- upvalues: UseRefResult (upval)
+			if UseRefResult.current then
+				task.cancel(UseRefResult.current)
+				UseRefResult.current = nil
 			end
 		end
 	end, {})
-	local var5 = reactModule.useCallback(function(p2)
-		-- upvalues: var4 (ref), var3 (ref)
-		if not p2 then return end
-		local x = p2.AbsoluteSize.X
+	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 81 ]]
+		-- upvalues: UseRefResult (copy), UseStateResult2 (copy)
+		if not Frame then return end
+		local X = Frame.AbsoluteSize.X
 		
-		if var4.current then
-			task.cancel(var4.current)
+		if UseRefResult.current then
+			task.cancel(UseRefResult.current)
 		end
-		var4.current = task.delay(0.2, function()
-			-- upvalues: var4 (copy), var3 (copy), x (ref)
-			var4.current = nil
-			var3(x)
+		UseRefResult.current = task.delay(0.2, function() --[[ Line: 89 ]]
+			-- upvalues: UseRefResult (upval), UseStateResult2 (upval), X (copy)
+			UseRefResult.current = nil
+			UseStateResult2(X)
 		end)
 	end, {})
-	local var6 = if p1.rowWidth ~= nil then var2 else p1.rowWidth
-	local var7 = if p1.breakpoint ~= nil then getBreakpointFromRowWidthModule(if var6 > 0 then var6 else 0, var1) else p1.breakpoint
-	local var8 = useCatalogPageMonolithDependenciesModule()
-	local catalogGridWidget = var8.CatalogGridWidget
-	local fetchWidgetInfo = var8.fetchWidgetInfo
-	local catalogAnalytics = var8.catalogAnalytics
-	local var9 = useNetworking()
-	reactModule.useEffect(function()
-		-- upvalues: fetchWidgetInfo (ref), var9 (ref), context (ref)
-		fetchWidgetInfo(var9, nil, context)
-	end, { context, var9, fetchWidgetInfo })
-	local var10 = reactModule.useRef(nil)
-	local var11 = useOnRequestImpressionsSignalModule()
-	local var12 = useAvatarRoute()
-	local var13 = reactModule.useRef(nil)
+	local UseStateResult1 = if Frame.rowWidth == nil then UseStateResult else Frame.rowWidth
+	local BreakpointFromRowWidthModule = if Frame.breakpoint == nil then GetBreakpointFromRowWidthModule(if UseStateResult1 > 0 then UseStateResult1 else 0, UIScaleFromTokensModule) else Frame.breakpoint
+	local UseCatalogPageMonolithDependenciesModuleResult = UseCatalogPageMonolithDependenciesModule()
+	local CatalogGridWidget = UseCatalogPageMonolithDependenciesModuleResult.CatalogGridWidget
+	local FetchWidgetInfoFunction = UseCatalogPageMonolithDependenciesModuleResult.fetchWidgetInfo
+	local CatalogAnalytics = UseCatalogPageMonolithDependenciesModuleResult.catalogAnalytics
+	local UseNetworkingResult = UseNetworkingFunction()
+	ReactModule.useEffect(function() --[[ Line: 109 ]]
+		-- upvalues: FetchWidgetInfoFunction (copy), UseNetworkingResult (copy), Context (copy)
+		FetchWidgetInfoFunction(UseNetworkingResult, nil, Context)
+	end, { Context, UseNetworkingResult, FetchWidgetInfoFunction })
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseOnRequestImpressionsSignalModuleResult = UseOnRequestImpressionsSignalModule()
+	local UseAvatarRouteResult = UseAvatarRouteFunction()
+	local UseRefResult2 = ReactModule.useRef(nil)
 	
-	if var13.current == nil then
-		var13.current = var12.current.key
+	if UseRefResult2.current == nil then
+		UseRefResult2.current = UseAvatarRouteResult.current.key
 	end
-	local var14 = reactModule.useCallback(function()
-		-- upvalues: var12 (ref), var13 (ref)
-		return var12.current.key == var13.current
-	end, { var12 })
-	local var15 = reactModule.useRef({})
-	local var16 = reactModule.useRef({})
-	local var17 = reactModule.useCallback(function(p2)
-		-- upvalues: var15 (ref), var16 (ref), constants (copy), catalogAnalytics (ref), widgetConstantsModule (copy)
-		local current = var15.current
-		local current_1 = var16.current
+	local UseResult1 = ReactModule.useCallback(function(): boolean --[[ Line: 121 ]]
+		-- upvalues: UseAvatarRouteResult (copy), UseRefResult2 (copy)
+		return UseAvatarRouteResult.current.key == UseRefResult2.current
+	end, { UseAvatarRouteResult })
+	local UseRefResult3 = ReactModule.useRef({})
+	local UseRefResult4 = ReactModule.useRef({})
+	local UseResult2 = ReactModule.useCallback(function(List) --[[ Line: 131 ]]
+		-- upvalues: UseRefResult3 (copy), UseRefResult4 (copy), Constants (upval), CatalogAnalytics (copy), WidgetConstantsModule (upval)
+		local Current = UseRefResult3.current
+		local Current1 = UseRefResult4.current
 		
-		for i, v in p2 do
-			if not current[v.Name] then
-				local itemIndexAttribute = v:GetAttribute(constants.ItemIndex)
-				local var18 = if typeof(itemIndexAttribute) == "number" then current_1[itemIndexAttribute] else nil
-				
-				if var18 ~= nil then
-					catalogAnalytics.widgetInteractionV2(var18, widgetConstantsModule.ActionType.IMPRESSION)
-					current[v.Name] = true
-				end
+		for _, value in List do
+			local CurrentEntry = Current[value.Name]
+			local CurrentEntry1 = nil
+			
+			if not CurrentEntry then
+				local Attribute = value:GetAttribute(Constants.ItemIndex)
+				CurrentEntry1 = if typeof(Attribute) == "number" then Current1[Attribute] else nil
+				CurrentEntry = CurrentEntry1 == nil
+			end
+			if not CurrentEntry then
+				CatalogAnalytics.widgetInteractionV2(CurrentEntry1, WidgetConstantsModule.ActionType.IMPRESSION)
+				Current[value.Name] = true
 			end
 		end
-	end, { catalogAnalytics })
-	local var19 = reactModule.useCallback(function(p3)
-		-- upvalues: collectionService (copy), widgetConstantsModule (copy)
-		local tagNameTagged = collectionService:GetTagged(widgetConstantsModule.WidgetExposureMetadata.TagName)
+	end, { CatalogAnalytics })
+	local UseResult3 = ReactModule.useCallback(function(Ancestor) --[[ Line: 152 ]]
+		-- upvalues: CollectionService (upval), WidgetConstantsModule (upval)
+		local Tagged = CollectionService:GetTagged(WidgetConstantsModule.WidgetExposureMetadata.TagName)
 		
-		if p3 == nil then
+		if Ancestor == nil then
 			return {}
 		end
-		local t = {}
+		local List = {}
 		
-		for i, v in tagNameTagged do
-			if v:IsDescendantOf(p3) then
-				table.insert(t, v)
+		for _, value in Tagged do
+			if value:IsDescendantOf(Ancestor) then
+				table.insert(List, value)
 			end
 		end
-		return t
+		return List
 	end, {})
-	local var20 = useWidgetListInfoViewModelModule(nil, context, var7)
-	local var21 = if var20 and var20.widgets then getOrderedWidgetsModule(var20.widgets) else {}
+	local UseWidgetListInfoViewModelModuleResult = UseWidgetListInfoViewModelModule(nil, Context, BreakpointFromRowWidthModule)
+	local OrderedWidgetsModule = if UseWidgetListInfoViewModelModuleResult and UseWidgetListInfoViewModelModuleResult.widgets then GetOrderedWidgetsModule(UseWidgetListInfoViewModelModuleResult.widgets) else {}
 	
-	if #var21 == 0 then
+	if #OrderedWidgetsModule == 0 then
 		return { status = "hidden" }
 	end
-	local smallMetrics = gridMetrics.getSmallMetrics(var6, constantsModule.WIDGET_COLUMN_PADDING)
-	local t = {}
-	local t_1 = {}
+	local SmallMetrics = GridMetrics.getSmallMetrics(UseStateResult1, ConstantsModule.WIDGET_COLUMN_PADDING)
+	local Children = {}
+	local Current = {}
 	
-	for i, v in var21 do
-		local widget = v.widget
-		local position = v.position
-		local maxValue = math.max(widget.template.previewColumns or 1, 1)
-		local t_2 = {
-			requestId = widget.requestId,
-			widgetPosition = position,
-			widgetId = widget.id,
-			widgetType = widget.type,
-			widgetAbsPosition = (position - 1) * maxValue,
-			widgetItemIds = getWidgetItemIdsFromWidgetInfoModule(widget, maxValue)
+	for LayoutOrder, value in OrderedWidgetsModule do
+		local Widget = value.widget
+		local Position: number = value.position
+		local Largest = math.max(Widget.template.previewColumns or 1, 1)
+		local WidgetAnalyticsInfo = {
+			requestId = Widget.requestId,
+			widgetPosition = Position,
+			widgetId = Widget.id,
+			widgetType = Widget.type,
+			widgetAbsPosition = (Position - 1) * Largest,
+			widgetItemIds = GetWidgetItemIdsFromWidgetInfoModule(Widget, Largest)
 		}
-		t_1[position] = t_2
-		t[widget.id] = reactModule.createElement(view, { tag = "size-full-0 auto-y", LayoutOrder = i }, {
-			Widget = reactModule.createElement(catalogGridWidget, {
-				widgetRow = position,
-				widgetInfo = widget,
-				itemsPerRow = maxValue,
-				rowCount = widget.template.previewRows,
-				rowHeight = smallMetrics.itemWidth,
-				itemSize = Vector2.new(smallMetrics.itemWidth, smallMetrics.itemWidth),
-				widgetAnalyticsInfo = t_2,
-				itemDetailsPeekViewRefs = p1.itemDetailsPeekViewRefs,
-				rowWidth = if var6 > 0 then var6 else nil
+		Current[Position] = WidgetAnalyticsInfo
+		Children[Widget.id] = ReactModule.createElement(View, { tag = "size-full-0 auto-y", LayoutOrder = LayoutOrder }, {
+			Widget = ReactModule.createElement(CatalogGridWidget, {
+				widgetRow = Position,
+				widgetInfo = Widget,
+				itemsPerRow = Largest,
+				rowCount = Widget.template.previewRows,
+				rowHeight = SmallMetrics.itemWidth,
+				itemSize = Vector2.new(SmallMetrics.itemWidth, SmallMetrics.itemWidth),
+				widgetAnalyticsInfo = WidgetAnalyticsInfo,
+				itemDetailsPeekViewRefs = Frame.itemDetailsPeekViewRefs,
+				rowWidth = if UseStateResult1 > 0 then UseStateResult1 else nil
 			})
 		})
 	end
-	var16.current = t_1
+	UseRefResult4.current = Current
 	
 	return {
 		status = "visible",
 		viewProps = {
-			LayoutOrder = p1.LayoutOrder,
-			panelRef = var10,
-			onAbsoluteSizeChanged = var5,
-			onRequestImpressionsSignal = var11,
-			pageFilter = var14,
-			onImpressionsDetected = var17,
-			collectObjectsFunc = var19,
-			children = t
+			LayoutOrder = Frame.LayoutOrder,
+			panelRef = UseRefResult1,
+			onAbsoluteSizeChanged = UseResult,
+			onRequestImpressionsSignal = UseOnRequestImpressionsSignalModuleResult,
+			pageFilter = UseResult1,
+			onImpressionsDetected = UseResult2,
+			collectObjectsFunc = UseResult3,
+			children = Children
 		}
 	}
 end

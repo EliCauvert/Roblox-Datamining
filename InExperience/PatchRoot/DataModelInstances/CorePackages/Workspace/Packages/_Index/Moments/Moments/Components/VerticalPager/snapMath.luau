@@ -1,87 +1,89 @@
-﻿local t = {
-	advanceCriticalDampedSpring = function(p1, p2, p3, p4, p5)
-		local var1 = 6.28318530718 * p5
-		local var2 = p1 - p3
-		local var3 = var1 * p4
-		local expValue = math.exp(-var3)
-		local var4 = p2 + var1 * var2
+﻿local SnapMathModule = {
+	advanceCriticalDampedSpring = function(p1, p2, p3, p4, p5: number) --[[ Line: 25 ]]
+		local v1 = 6.283185307179586 * p5
+		local v2 = p1 - p3
+		local v3 = v1 * p4
+		local Exponential = math.exp(-v3)
+		local v4 = p2 + v1 * v2
 		
-		return p3 + (var2 + var4 * p4) * expValue, (p2 - var4 * var3) * expValue
+		return p3 + (v2 + v4 * p4) * Exponential, (p2 - v4 * v3) * Exponential
 	end,
-	offsetForIndex = function(value, p1)
-		return (value - 1) * p1
+	offsetForIndex = function(p1: number, p2) --[[ Line: 45 ]]
+		return (p1 - 1) * p2
 	end,
-	clampIndex = function(value, minValue)
-		return if minValue <= 0 then 1 else math.clamp(value, 1, minValue)
+	clampIndex = function(Value: number, MaxValue: number): number --[[ Line: 50 ]]
+		return if MaxValue <= 0 then 1 else math.clamp(Value, 1, MaxValue)
 	end,
-	projectSnapOffset = function(value, p1, p2)
-		return value - p1 * p2
+	projectSnapOffset = function(p1, p2, p3) --[[ Line: 62 ]]
+		return p1 - p2 * p3
 	end
 }
 
-function t.resolveSnapIndex(p1, p2, p3, p4, p5)
-	-- upvalues: t (ref)
+function SnapMathModule.resolveSnapIndex(p1, p2, p3: number, p4: number, p5) --[[ Line: 77 ]]
+	-- upvalues: SnapMathModule (copy)
 	if p4 <= 0 or p3 <= 0 then
 		return 1
+	else
+		local Value = p1 / p3
+		local ProjectSnapOffsetResultDelta = SnapMathModule.projectSnapOffset(p1, p2, p5) - p1
+		local v1 = p3 * 0.5
+		
+		return SnapMathModule.clampIndex(if v1 < ProjectSnapOffsetResultDelta then math.floor(Value) + 2 elseif ProjectSnapOffsetResultDelta < -v1 then math.ceil(Value) else math.round(Value) + 1, p4)
 	end
-	local var1 = p1 / p3
-	local var2 = t.projectSnapOffset(p1, p2, p5) - p1
-	local var3 = p3 * 0.5
-	
-	return t.clampIndex(if var3 < var2 then math.floor(var1) + 2 elseif var2 < -var3 then math.ceil(var1) else math.round(var1) + 1, p4)
 end
 
-function t.getVisibleWindow(p1, p2, p3)
-	-- upvalues: t (ref)
+function SnapMathModule.getVisibleWindow(p1, p2, p3: number) --[[ Line: 109 ]]
+	-- upvalues: SnapMathModule (copy)
 	if p3 <= 0 then
 		return { startIndex = 1, endIndex = 0 }
+	else
+		local ClampIndexResult = SnapMathModule.clampIndex(p1, p3)
+		
+		return {
+			startIndex = math.max(1, ClampIndexResult - p2),
+			endIndex = math.min(p3, ClampIndexResult + p2)
+		}
 	end
-	local var1 = t.clampIndex(p1, p3)
-	
-	return {
-		startIndex = math.max(1, var1 - p2),
-		endIndex = math.min(p3, var1 + p2)
-	}
 end
 
-function t.reindexAfterRemoval(p1, p2, p3)
-	-- upvalues: t (ref)
-	return if p3 <= 0 then 1 elseif p2 < p1 then t.clampIndex(p1 - 1, p3) else t.clampIndex(p1, p3)
+function SnapMathModule.reindexAfterRemoval(p1: number, p2, p3: number) --[[ Line: 130 ]]
+	-- upvalues: SnapMathModule (copy)
+	return if p3 <= 0 then 1 elseif p2 < p1 then SnapMathModule.clampIndex(p1 - 1, p3) else SnapMathModule.clampIndex(p1, p3)
 end
 
-function t.neighborForRemoval(p1, p2)
+function SnapMathModule.neighborForRemoval(p1: number, p2): number --[[ Line: 145 ]]
 	return if p1 < p2 then p1 + 1 else p1 - 1
 end
 
-function t.nearestIndexForOffset(value, p1, p2)
-	-- upvalues: t (ref)
-	return if p2 <= 0 then 1 elseif p1 <= 0 then 1 else t.clampIndex(math.round(value / p1) + 1, p2)
+function SnapMathModule.nearestIndexForOffset(p1, p2: number, p3: number) --[[ Line: 155 ]]
+	-- upvalues: SnapMathModule (copy)
+	return if p3 <= 0 then 1 elseif p2 <= 0 then 1 else SnapMathModule.clampIndex(math.round(p1 / p2) + 1, p3)
 end
 
-function t.resolveSettleIndex(value, p1, p2, p3, p4, p5)
-	-- upvalues: t (ref)
-	if p3 <= 0 or p2 <= 0 then
-		return t.clampIndex(value, p3)
+function SnapMathModule.resolveSettleIndex(p1: number, p2, p3: number, p4: number, p5, p6: number) --[[ Line: 178 ]]
+	-- upvalues: SnapMathModule (copy)
+	if p4 <= 0 or p3 <= 0 then
+		return SnapMathModule.clampIndex(p1, p4)
 	end
-	local var1 = (p1 - t.offsetForIndex(value, p2)) / p2
-	local var2 = value
+	local OffsetForIndexResultRatio = (p2 - SnapMathModule.offsetForIndex(p1, p3)) / p3
+	local v1: number = p1
 	
-	if p4 < var1 then
-		local maxValue = math.max(1, math.round(var1))
+	if p5 < OffsetForIndexResultRatio then
+		local Largest = math.max(1, (math.round(OffsetForIndexResultRatio)))
 		
-		if p5 ~= nil then
-			maxValue = math.min(maxValue, p5)
+		if p6 ~= nil then
+			Largest = math.min(Largest, p6)
 		end
-		var2 = value + maxValue
-	elseif var1 < -p4 then
-		local minValue = math.min(-1, math.round(var1))
+		v1 = p1 + Largest
+	elseif OffsetForIndexResultRatio < -p5 then
+		local Smallest = math.min(-1, (math.round(OffsetForIndexResultRatio)))
 		
-		if p5 ~= nil then
-			minValue = math.max(minValue, -p5)
+		if p6 ~= nil then
+			Smallest = math.max(Smallest, -p6)
 		end
-		var2 = value + minValue
+		v1 = p1 + Smallest
 	end
-	return t.clampIndex(var2, p3)
+	return SnapMathModule.clampIndex(v1, p4)
 end
 
-return t
+return SnapMathModule

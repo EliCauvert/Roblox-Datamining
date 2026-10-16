@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.AdPlayer.AdPlayer)
+﻿return (require(script.Parent._Workspace.AdPlayer.AdPlayer))

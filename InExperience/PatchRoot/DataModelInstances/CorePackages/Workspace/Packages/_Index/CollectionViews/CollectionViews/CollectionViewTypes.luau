@@ -1,7 +1,7 @@
-﻿local parent = script:FindFirstAncestor("CollectionViews").Parent
-local _ = require(parent.Style)
-local _ = require(parent.Foundation)
-local _ = require(parent.Signals)
+﻿local Parent = script:FindFirstAncestor("CollectionViews").Parent
+local _ = require(Parent.Style)
+local _ = require(Parent.Foundation)
+local _ = require(Parent.Signals)
 
 return {
 	CollectionItemSize = {

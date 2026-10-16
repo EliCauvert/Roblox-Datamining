@@ -1,11 +1,11 @@
-﻿local parent = script.Parent.Parent
-local platformEnumModule = require(parent.Enums.PlatformEnum)
-local enableSafetyBubbleDummyModule = require(parent.Features.EnableSafetyBubbleDummy)
+﻿local Parent = script.Parent.Parent
+local PlatformEnumModule = require(Parent.Enums.PlatformEnum)
+local EnableSafetyBubbleDummyModule = require(Parent.Features.EnableSafetyBubbleDummy)
 
-function GetFeatures(p1)
-	-- upvalues: platformEnumModule (ref), enableSafetyBubbleDummyModule (ref)
-	if p1 == platformEnumModule.QuestVR then
-		enableSafetyBubbleDummyModule()
+function GetFeatures(QuestVR) --[[ Line: 8 ]]
+	-- upvalues: PlatformEnumModule (copy), EnableSafetyBubbleDummyModule (copy)
+	if QuestVR == PlatformEnumModule.QuestVR then
+		EnableSafetyBubbleDummyModule()
 	end
 end
 

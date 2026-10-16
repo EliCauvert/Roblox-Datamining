@@ -1,87 +1,70 @@
-﻿local protoModule = require(script.Parent.Parent.Parent.Parent.Parent.proto)
-local typeRegistryModule = require(script.Parent.Parent.Parent.Parent.Parent.proto.typeRegistry)
-local t = {}
-local backgroundLayerModule = require(script.Parent.background_layer)
-local catalogSortDataModule = require(script.Parent.catalog_sort_data)
-local hydrationDataSpecModule = require(script.Parent.hydration_data_spec)
-local propConditionModule = require(script.Parent.prop_condition)
-local propTypesModule = require(script.Parent.prop_types)
-local t_1 = {}
-t_1.__index = t_1
+﻿local ProtoModule = require(script.Parent.Parent.Parent.Parent.Parent.proto)
+local TypeRegistryModule = require(script.Parent.Parent.Parent.Parent.Parent.proto.typeRegistry)
+local BackgroundLayerModule = require(script.Parent.background_layer)
+local CatalogSortDataModule = require(script.Parent.catalog_sort_data)
+local HydrationDataSpecModule = require(script.Parent.hydration_data_spec)
+local PropConditionModule = require(script.Parent.prop_condition)
+local PropTypesModule = require(script.Parent.prop_types)
+local Module = {}
+Module.__index = Module
 
-function t_1.new(p1)
-	-- upvalues: t_1 (ref)
-	return setmetatable({
+function Module.new(p1) --[[ Line: 689 ]]
+	-- upvalues: Module (copy)
+	return (setmetatable({
 		content_type = if p1 == nil or p1.content_type == nil then nil else p1.content_type
-	}, t_1)
+	}, Module))
 end
 
-function t_1:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var1 = 0
+function Module:encode() --[[ Line: 695 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.content_type ~= nil then
-		local var2 = self.content_type:encode()
-		local var3, var4 = protoModule.writeTag(buff, var1, 1, protoModule.wireTypes.lengthDelimited)
-		var3, var34 = protoModule.writeBuffer(var3, var4, var2, buffer.len(var2))
-		buff = var3
-		var1 = var4
+		local EncodeResult = self.content_type:encode()
+		local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
 	end
-	local buff_1 = buffer.create(var1)
-	buffer.copy(buff_1, 0, buff, 0, var1)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_1.decode(p1)
-	-- upvalues: t_1 (ref), protoModule (ref), propTypesModule (ref)
-	local var1 = t_1.new()
-	local var2 = 0
-	while var2 < buffer.len(p1) do
-		local _ = nil
-		local var3 = nil
-		local var4, var5, var6 = protoModule.readTag(p1, var2)
-		local var7 = var4
-		var3 = var5
-		var2 = var6
+function Module.decode(Buf) --[[ Line: 710 ]]
+	-- upvalues: Module (copy), ProtoModule (copy), PropTypesModule (copy)
+	local NewModule = Module.new()
+	local v1 = 0
+	while v1 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v36 = ProtoModule.readTag(Buf, v1)
 		
-		if var3 == protoModule.wireTypes.varint then
-			local _ = nil
-			local var8, var9 = protoModule.readVarInt(p1, var2)
-			local _ = var8
-			var2 = var9
-			continue
-		end
-		if var3 == protoModule.wireTypes.lengthDelimited then
-			if var7 == 1 then
-				local _ = nil
-				local var10, var11 = protoModule.readBuffer(p1, var2)
-				var2 = var11
-				var1.content_type = propTypesModule.StringProp.decode(var10)
+		if Tag2 == ProtoModule.wireTypes.varint then
+			local _
+			_, v36 = ProtoModule.readVarInt(Buf, v1)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v36 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.content_type = PropTypesModule.StringProp.decode(Buffer1)
 			else
-				local _ = nil
-				local var12, var13 = protoModule.readVarInt(p1, var2)
-				var2 = var13 + var12
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v1)
+				v1 = VarInt2 + VarInt
 			end
-		elseif var3 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var14, var15 = protoModule.readFixed32(p1, var2)
-			local _ = var14
-			var2 = var15
-		elseif var3 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var16, var17 = protoModule.readFixed64(p1, var2)
-			local _ = var16
-			var2 = var17
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v36 = ProtoModule.readFixed32(Buf, v1)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v36 = ProtoModule.readFixed64(Buf, v1)
 		else
-			error("Unsupported wire type: " .. var38)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var1
+	return NewModule
 end
 
-function t_1:jsonEncode()
+function Module:jsonEncode() --[[ Line: 753 ]]
 	local t = {}
 	
 	if self.content_type ~= nil then
@@ -90,144 +73,119 @@ function t_1:jsonEncode()
 	return t
 end
 
-function t_1:jsonDecode()
-	-- upvalues: t_1 (ref), propTypesModule (ref)
-	local var18 = t_1.new()
+function Module:jsonDecode() --[[ Line: 763 ]]
+	-- upvalues: Module (copy), PropTypesModule (copy)
+	local NewModule = Module.new()
 	
 	if self.content_type ~= nil then
-		var18.content_type = propTypesModule.StringProp.jsonDecode(self.content_type)
+		NewModule.content_type = PropTypesModule.StringProp.jsonDecode(self.content_type)
 	end
 	if self.contentType ~= nil then
-		var18.content_type = propTypesModule.StringProp.jsonDecode(self.contentType)
+		NewModule.content_type = PropTypesModule.StringProp.jsonDecode(self.contentType)
 	end
-	return var18
+	return NewModule
 end
 
-t_1.descriptor = {
+Module.descriptor = {
 	name = "ItemFooter",
 	fullName = "roblox.apppageplatform.shared.v1beta1.ItemFooter"
 }
-t.ItemFooter = t_1
-typeRegistryModule.default:register(t.ItemFooter)
-local t_2 = {}
-t_2.__index = t_2
+local config = { ItemFooter = Module }
+TypeRegistryModule.default:register(config.ItemFooter)
+local Module1 = {}
+Module1.__index = Module1
 
-function t_2.new(p2)
-	-- upvalues: t_2 (ref)
-	return setmetatable({
-		kind = if p2 == nil or p2.kind == nil then nil else p2.kind
-	}, t_2)
+function Module1.new(p1) --[[ Line: 793 ]]
+	-- upvalues: Module1 (copy)
+	return (setmetatable({
+		kind = if p1 == nil or p1.kind == nil then nil else p1.kind
+	}, Module1))
 end
 
-function t_2:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var18 = 0
+function Module1:encode() --[[ Line: 799 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.kind ~= nil then
 		if self.kind.type == "literal" then
-			local var19 = self.kind.value:encode()
-			local var20, var21 = protoModule.writeTag(buff, var18, 1, protoModule.wireTypes.lengthDelimited)
-			var20, var59 = protoModule.writeBuffer(var20, var21, var19, buffer.len(var19))
-			buff = var20
-			var18 = var21
+			local EncodeResult = self.kind.value:encode()
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
 		elseif self.kind.type == "binding_path" then
-			local var22, var23 = protoModule.writeTag(buff, var18, 2, protoModule.wireTypes.lengthDelimited)
-			var22, var61 = protoModule.writeString(var22, var23, self.kind.value)
-			buff = var22
-			var18 = var23
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult1, WriteTagResult2_1, self.kind.value)
 		elseif self.kind.type == "conditional" then
-			local var24 = self.kind.value:encode()
-			local var25, var26 = protoModule.writeTag(buff, var18, 3, protoModule.wireTypes.lengthDelimited)
-			var25, var64 = protoModule.writeBuffer(var25, var26, var24, buffer.len(var24))
-			buff = var25
-			var18 = var26
+			local EncodeResult = self.kind.value:encode()
+			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult3, WriteTagResult2_2, EncodeResult, buffer.len(EncodeResult))
 		elseif self.kind.type == "array_map" then
-			local var27 = self.kind.value:encode()
-			local var28, var29 = protoModule.writeTag(buff, var18, 4, protoModule.wireTypes.lengthDelimited)
-			var28, var67 = protoModule.writeBuffer(var28, var29, var27, buffer.len(var27))
-			buff = var28
-			var18 = var29
+			local EncodeResult = self.kind.value:encode()
+			local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult4, WriteTagResult2_3, EncodeResult, buffer.len(EncodeResult))
 		end
 	end
-	local buff_1 = buffer.create(var18)
-	buffer.copy(buff_1, 0, buff, 0, var18)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_2.decode(p2)
-	-- upvalues: t_2 (ref), protoModule (ref), t (ref)
-	local var18 = t_2.new()
-	local var19 = 0
-	while var19 < buffer.len(p2) do
-		local _ = nil
-		local var20 = nil
-		local var21, var22, var23 = protoModule.readTag(p2, var19)
-		local var24 = var21
-		var20 = var22
-		var19 = var23
+function Module1.decode(Buf) --[[ Line: 827 ]]
+	-- upvalues: Module1 (copy), ProtoModule (copy), config (copy)
+	local NewModule = Module1.new()
+	local v2 = 0
+	while v2 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v61 = ProtoModule.readTag(Buf, v2)
 		
-		if var20 == protoModule.wireTypes.varint then
-			local _ = nil
-			local var25, var26 = protoModule.readVarInt(p2, var19)
-			local _ = var25
-			var19 = var26
-			continue
-		end
-		if var20 == protoModule.wireTypes.lengthDelimited then
-			if var24 == 1 then
-				local _ = nil
-				local var27, var28 = protoModule.readBuffer(p2, var19)
-				var19 = var28
-				var18.kind = {
+		if Tag2 == ProtoModule.wireTypes.varint then
+			local _
+			_, v61 = ProtoModule.readVarInt(Buf, v2)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v61 = ProtoModule.readBuffer(Buf, v2)
+				NewModule.kind = {
 					type = "literal",
-					value = t.ArrayOfItemFooterProp_ArrayOfItemFooter.decode(var27)
+					value = config.ArrayOfItemFooterProp_ArrayOfItemFooter.decode(Buffer1)
 				}
-			elseif var24 == 2 then
-				local _ = nil
-				local var29, var30 = protoModule.readBuffer(p2, var19)
-				var19 = var30
-				var18.kind = { type = "binding_path", value = buffer.tostring(var29) }
-			elseif var24 == 3 then
-				local _ = nil
-				local var31, var32 = protoModule.readBuffer(p2, var19)
-				var19 = var32
-				var18.kind = {
+			elseif Tag == 2 then
+				local Buffer2
+				Buffer2, v61 = ProtoModule.readBuffer(Buf, v2)
+				NewModule.kind = { type = "binding_path", value = buffer.tostring(Buffer2) }
+			elseif Tag == 3 then
+				local Buffer3
+				Buffer3, v61 = ProtoModule.readBuffer(Buf, v2)
+				NewModule.kind = {
 					type = "conditional",
-					value = t.ArrayOfItemFooterProp_ConditionalOptions.decode(var31)
+					value = config.ArrayOfItemFooterProp_ConditionalOptions.decode(Buffer3)
 				}
-			elseif var24 == 4 then
-				local _ = nil
-				local var33, var34 = protoModule.readBuffer(p2, var19)
-				var19 = var34
-				var18.kind = {
+			elseif Tag == 4 then
+				local Buffer4
+				Buffer4, v61 = ProtoModule.readBuffer(Buf, v2)
+				NewModule.kind = {
 					type = "array_map",
-					value = t.ArrayOfItemFooterProp_ArrayMap.decode(var33)
+					value = config.ArrayOfItemFooterProp_ArrayMap.decode(Buffer4)
 				}
 			else
-				local _ = nil
-				local var35, var36 = protoModule.readVarInt(p2, var19)
-				var19 = var36 + var35
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v2)
+				v2 = VarInt2 + VarInt
 			end
-		elseif var20 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var37, var38 = protoModule.readFixed32(p2, var19)
-			local _ = var37
-			var19 = var38
-		elseif var20 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var39, var40 = protoModule.readFixed64(p2, var19)
-			local _ = var39
-			var19 = var40
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v61 = ProtoModule.readFixed32(Buf, v2)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v61 = ProtoModule.readFixed64(Buf, v2)
 		else
-			error("Unsupported wire type: " .. var71)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var18
+	return NewModule
 end
 
-function t_2:jsonEncode()
+function Module1:jsonEncode() --[[ Line: 889 ]]
 	local t = {}
 	
 	if self.kind ~= nil then
@@ -235,168 +193,149 @@ function t_2:jsonEncode()
 			t.literal = self.kind.value:jsonEncode()
 			
 			return t
-		elseif self.kind.type == "binding_path" then
+		end
+		if self.kind.type == "binding_path" then
 			t.bindingPath = self.kind.value
 			
 			return t
-		elseif self.kind.type == "conditional" then
+		end
+		if self.kind.type == "conditional" then
 			t.conditional = self.kind.value:jsonEncode()
 			
 			return t
-		elseif self.kind.type == "array_map" then
+		end
+		if self.kind.type == "array_map" then
 			t.arrayMap = self.kind.value:jsonEncode()
 		end
 	end
 	return t
 end
 
-function t_2:jsonDecode()
-	-- upvalues: t_2 (ref), t (ref)
-	local var41 = t_2.new()
+function Module1:jsonDecode() --[[ Line: 907 ]]
+	-- upvalues: Module1 (copy), config (copy)
+	local NewModule = Module1.new()
 	
 	if self.literal ~= nil then
-		var41.kind = {
+		NewModule.kind = {
 			type = "literal",
-			value = t.ArrayOfItemFooterProp_ArrayOfItemFooter.jsonDecode(self.literal)
+			value = config.ArrayOfItemFooterProp_ArrayOfItemFooter.jsonDecode(self.literal)
 		}
 	end
 	if self.binding_path ~= nil then
-		var41.kind = { type = "binding_path", value = self.binding_path }
+		NewModule.kind = { type = "binding_path", value = self.binding_path }
 	end
 	if self.bindingPath ~= nil then
-		var41.kind = { type = "binding_path", value = self.bindingPath }
+		NewModule.kind = { type = "binding_path", value = self.bindingPath }
 	end
 	if self.conditional ~= nil then
-		var41.kind = {
+		NewModule.kind = {
 			type = "conditional",
-			value = t.ArrayOfItemFooterProp_ConditionalOptions.jsonDecode(self.conditional)
+			value = config.ArrayOfItemFooterProp_ConditionalOptions.jsonDecode(self.conditional)
 		}
 	end
 	if self.array_map ~= nil then
-		var41.kind = {
+		NewModule.kind = {
 			type = "array_map",
-			value = t.ArrayOfItemFooterProp_ArrayMap.jsonDecode(self.array_map)
+			value = config.ArrayOfItemFooterProp_ArrayMap.jsonDecode(self.array_map)
 		}
 	end
 	if self.arrayMap ~= nil then
-		var41.kind = {
+		NewModule.kind = {
 			type = "array_map",
-			value = t.ArrayOfItemFooterProp_ArrayMap.jsonDecode(self.arrayMap)
+			value = config.ArrayOfItemFooterProp_ArrayMap.jsonDecode(self.arrayMap)
 		}
 	end
-	return var41
+	return NewModule
 end
 
-t_2.descriptor = {
+Module1.descriptor = {
 	name = "ArrayOfItemFooterProp",
 	fullName = "roblox.apppageplatform.shared.v1beta1.ArrayOfItemFooterProp"
 }
-t.ArrayOfItemFooterProp = t_2
-typeRegistryModule.default:register(t.ArrayOfItemFooterProp)
-local t_3 = {}
-t_3.__index = t_3
+config.ArrayOfItemFooterProp = Module1
+TypeRegistryModule.default:register(config.ArrayOfItemFooterProp)
+local Module2 = {}
+Module2.__index = Module2
 
-function t_3.new(p3)
-	-- upvalues: t_3 (ref)
-	return setmetatable({
-		condition = if p3 == nil or p3.condition == nil then nil else p3.condition,
-		kind = if p3 == nil or p3.kind == nil then nil else p3.kind
-	}, t_3)
+function Module2.new(p1) --[[ Line: 957 ]]
+	-- upvalues: Module2 (copy)
+	return (setmetatable({
+		condition = if p1 == nil or p1.condition == nil then nil else p1.condition,
+		kind = if p1 == nil or p1.kind == nil then nil else p1.kind
+	}, Module2))
 end
 
-function t_3:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var41 = 0
+function Module2:encode() --[[ Line: 966 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.condition ~= nil then
-		local var42 = self.condition:encode()
-		local var43, var44 = protoModule.writeTag(buff, var41, 1, protoModule.wireTypes.lengthDelimited)
-		var43, var98 = protoModule.writeBuffer(var43, var44, var42, buffer.len(var42))
-		buff = var43
-		var41 = var44
+		local EncodeResult = self.condition:encode()
+		local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
 	end
 	if self.kind ~= nil then
 		if self.kind.type == "literal" then
-			local var45 = self.kind.value:encode()
-			local var46, var47 = protoModule.writeTag(buff, var41, 2, protoModule.wireTypes.lengthDelimited)
-			var46, var101 = protoModule.writeBuffer(var46, var47, var45, buffer.len(var45))
-			buff = var46
-			var41 = var47
+			local EncodeResult = self.kind.value:encode()
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
 		elseif self.kind.type == "binding_path" then
-			local var48, var49 = protoModule.writeTag(buff, var41, 3, protoModule.wireTypes.lengthDelimited)
-			var48, var103 = protoModule.writeString(var48, var49, self.kind.value)
-			buff = var48
-			var41 = var49
+			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult3, WriteTagResult2_2, self.kind.value)
 		end
 	end
-	local buff_1 = buffer.create(var41)
-	buffer.copy(buff_1, 0, buff, 0, var41)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_3.decode(p3)
-	-- upvalues: t_3 (ref), protoModule (ref), propConditionModule (ref), t (ref)
-	local var41 = t_3.new()
-	local var42 = 0
-	while var42 < buffer.len(p3) do
-		local _ = nil
-		local var43 = nil
-		local var44, var45, var46 = protoModule.readTag(p3, var42)
-		local var47 = var44
-		var43 = var45
-		var42 = var46
+function Module2.decode(Buf) --[[ Line: 992 ]]
+	-- upvalues: Module2 (copy), ProtoModule (copy), PropConditionModule (copy), config (copy)
+	local NewModule = Module2.new()
+	local v3 = 0
+	while v3 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v86 = ProtoModule.readTag(Buf, v3)
 		
-		if var43 == protoModule.wireTypes.varint then
-			local _ = nil
-			local var48, var49 = protoModule.readVarInt(p3, var42)
-			local _ = var48
-			var42 = var49
-			continue
-		end
-		if var43 == protoModule.wireTypes.lengthDelimited then
-			if var47 == 1 then
-				local _ = nil
-				local var50, var51 = protoModule.readBuffer(p3, var42)
-				var42 = var51
-				var41.condition = propConditionModule.PropCondition.decode(var50)
-			elseif var47 == 2 then
-				local _ = nil
-				local var52, var53 = protoModule.readBuffer(p3, var42)
-				var42 = var53
-				var41.kind = {
+		if Tag2 == ProtoModule.wireTypes.varint then
+			local _
+			_, v86 = ProtoModule.readVarInt(Buf, v3)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v86 = ProtoModule.readBuffer(Buf, v3)
+				NewModule.condition = PropConditionModule.PropCondition.decode(Buffer1)
+			elseif Tag == 2 then
+				local Buffer2
+				Buffer2, v86 = ProtoModule.readBuffer(Buf, v3)
+				NewModule.kind = {
 					type = "literal",
-					value = t.ArrayOfItemFooterProp_ArrayOfItemFooter.decode(var52)
+					value = config.ArrayOfItemFooterProp_ArrayOfItemFooter.decode(Buffer2)
 				}
-			elseif var47 == 3 then
-				local _ = nil
-				local var54, var55 = protoModule.readBuffer(p3, var42)
-				var42 = var55
-				var41.kind = { type = "binding_path", value = buffer.tostring(var54) }
+			elseif Tag == 3 then
+				local Buffer3
+				Buffer3, v86 = ProtoModule.readBuffer(Buf, v3)
+				NewModule.kind = { type = "binding_path", value = buffer.tostring(Buffer3) }
 			else
-				local _ = nil
-				local var56, var57 = protoModule.readVarInt(p3, var42)
-				var42 = var57 + var56
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v3)
+				v3 = VarInt2 + VarInt
 			end
-		elseif var43 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var58, var59 = protoModule.readFixed32(p3, var42)
-			local _ = var58
-			var42 = var59
-		elseif var43 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var60, var61 = protoModule.readFixed64(p3, var42)
-			local _ = var60
-			var42 = var61
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v86 = ProtoModule.readFixed32(Buf, v3)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v86 = ProtoModule.readFixed64(Buf, v3)
 		else
-			error("Unsupported wire type: " .. var107)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var41
+	return NewModule
 end
 
-function t_3:jsonEncode()
+function Module2:jsonEncode() --[[ Line: 1046 ]]
 	local t = {}
 	
 	if self.condition ~= nil then
@@ -407,384 +346,328 @@ function t_3:jsonEncode()
 			t.literal = self.kind.value:jsonEncode()
 			
 			return t
-		elseif self.kind.type == "binding_path" then
+		end
+		if self.kind.type == "binding_path" then
 			t.bindingPath = self.kind.value
 		end
 	end
 	return t
 end
 
-function t_3:jsonDecode()
-	-- upvalues: t_3 (ref), propConditionModule (ref), t (ref)
-	local var62 = t_3.new()
+function Module2:jsonDecode() --[[ Line: 1064 ]]
+	-- upvalues: Module2 (copy), PropConditionModule (copy), config (copy)
+	local NewModule = Module2.new()
 	
 	if self.condition ~= nil then
-		var62.condition = propConditionModule.PropCondition.jsonDecode(self.condition)
+		NewModule.condition = PropConditionModule.PropCondition.jsonDecode(self.condition)
 	end
 	if self.literal ~= nil then
-		var62.kind = {
+		NewModule.kind = {
 			type = "literal",
-			value = t.ArrayOfItemFooterProp_ArrayOfItemFooter.jsonDecode(self.literal)
+			value = config.ArrayOfItemFooterProp_ArrayOfItemFooter.jsonDecode(self.literal)
 		}
 	end
 	if self.binding_path ~= nil then
-		var62.kind = { type = "binding_path", value = self.binding_path }
+		NewModule.kind = { type = "binding_path", value = self.binding_path }
 	end
 	if self.bindingPath ~= nil then
-		var62.kind = { type = "binding_path", value = self.bindingPath }
+		NewModule.kind = { type = "binding_path", value = self.bindingPath }
 	end
-	return var62
+	return NewModule
 end
 
-t_3.descriptor = {
+Module2.descriptor = {
 	name = "ArrayOfItemFooterProp_ConditionalOption",
 	fullName = "roblox.apppageplatform.shared.v1beta1.ConditionalOption"
 }
-t.ArrayOfItemFooterProp_ConditionalOption = t_3
-typeRegistryModule.default:register(t.ArrayOfItemFooterProp_ConditionalOption)
-local t_4 = {}
-t_4.__index = t_4
+config.ArrayOfItemFooterProp_ConditionalOption = Module2
+TypeRegistryModule.default:register(config.ArrayOfItemFooterProp_ConditionalOption)
+local Module3 = {}
+Module3.__index = Module3
 
-function t_4.new(p4)
-	-- upvalues: t_4 (ref)
-	return setmetatable({
-		options = if p4 == nil or p4.options == nil then {} else p4.options
-	}, t_4)
+function Module3.new(p1) --[[ Line: 1104 ]]
+	-- upvalues: Module3 (copy)
+	return (setmetatable({
+		options = if p1 == nil or p1.options == nil then {} else p1.options
+	}, Module3))
 end
 
-function t_4:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var62 = 0
+function Module3:encode() --[[ Line: 1112 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.options ~= nil and #self.options > 0 then
-		for i, v in self.options do
-			local var63 = v:encode()
-			local var64, var65 = protoModule.writeTag(buff, var62, 1, protoModule.wireTypes.lengthDelimited)
-			var64, var132 = protoModule.writeBuffer(var64, var65, var63, buffer.len(var63))
-			buff = var64
-			var62 = var65
+		for _, option in self.options do
+			local EncodeResult = option:encode()
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
 		end
 	end
-	local buff_1 = buffer.create(var62)
-	buffer.copy(buff_1, 0, buff, 0, var62)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_4.decode(p4)
-	-- upvalues: t_4 (ref), protoModule (ref), t (ref)
-	local var66 = t_4.new()
-	local var67 = 0
-	while var67 < buffer.len(p4) do
-		local _ = nil
-		local var68 = nil
-		local var69, var70, var71 = protoModule.readTag(p4, var67)
-		local var72 = var69
-		var68 = var70
-		var67 = var71
+function Module3.decode(Buf) --[[ Line: 1131 ]]
+	-- upvalues: Module3 (copy), ProtoModule (copy), config (copy)
+	local NewModule = Module3.new()
+	local v4 = 0
+	while v4 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v105 = ProtoModule.readTag(Buf, v4)
 		
-		if var68 == protoModule.wireTypes.varint then
-			local _ = nil
-			local var73, var74 = protoModule.readVarInt(p4, var67)
-			local _ = var73
-			var67 = var74
-			continue
-		end
-		if var68 == protoModule.wireTypes.lengthDelimited then
-			if var72 == 1 then
-				local _ = nil
-				local var75, var76 = protoModule.readBuffer(p4, var67)
-				var67 = var76
-				table.insert(var66.options, t.ArrayOfItemFooterProp_ConditionalOption.decode(var75))
+		if Tag2 == ProtoModule.wireTypes.varint then
+			local _
+			_, v105 = ProtoModule.readVarInt(Buf, v4)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v105 = ProtoModule.readBuffer(Buf, v4)
+				table.insert(NewModule.options, config.ArrayOfItemFooterProp_ConditionalOption.decode(Buffer1))
 			else
-				local _ = nil
-				local var77, var78 = protoModule.readVarInt(p4, var67)
-				var67 = var78 + var77
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v4)
+				v4 = VarInt2 + VarInt
 			end
-		elseif var68 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var79, var80 = protoModule.readFixed32(p4, var67)
-			local _ = var79
-			var67 = var80
-		elseif var68 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var81, var82 = protoModule.readFixed64(p4, var67)
-			local _ = var81
-			var67 = var82
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v105 = ProtoModule.readFixed32(Buf, v4)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v105 = ProtoModule.readFixed64(Buf, v4)
 		else
-			error("Unsupported wire type: " .. var136)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var66
+	return NewModule
 end
 
-function t_4:jsonEncode()
+function Module3:jsonEncode() --[[ Line: 1176 ]]
 	local t = {}
 	
 	if self.options ~= nil and #self.options > 0 then
-		local t_1 = {}
+		local Options = {}
 		
-		for i, v in self.options do
-			table.insert(t_1, v:jsonEncode())
+		for _, option in self.options do
+			table.insert(Options, option:jsonEncode())
 		end
-		t.options = t_1
+		t.options = Options
 	end
 	return t
 end
 
-function t_4:jsonDecode()
-	-- upvalues: t_4 (ref), t (ref)
-	local var83 = t_4.new()
+function Module3:jsonDecode() --[[ Line: 1192 ]]
+	-- upvalues: Module3 (copy), config (copy)
+	local NewModule = Module3.new()
 	
 	if self.options ~= nil then
-		local t_1 = {}
+		local Options = {}
 		
-		for i, v in self.options do
-			table.insert(t_1, t.ArrayOfItemFooterProp_ConditionalOption.jsonDecode(v))
+		for _, option in self.options do
+			table.insert(Options, config.ArrayOfItemFooterProp_ConditionalOption.jsonDecode(option))
 		end
-		var83.options = t_1
+		NewModule.options = Options
 	end
-	return var83
+	return NewModule
 end
 
-t_4.descriptor = {
+Module3.descriptor = {
 	name = "ArrayOfItemFooterProp_ConditionalOptions",
 	fullName = "roblox.apppageplatform.shared.v1beta1.ConditionalOptions"
 }
-t.ArrayOfItemFooterProp_ConditionalOptions = t_4
-typeRegistryModule.default:register(t.ArrayOfItemFooterProp_ConditionalOptions)
-local t_5 = {}
-t_5.__index = t_5
+config.ArrayOfItemFooterProp_ConditionalOptions = Module3
+TypeRegistryModule.default:register(config.ArrayOfItemFooterProp_ConditionalOptions)
+local Module4 = {}
+Module4.__index = Module4
 
-function t_5.new(p5)
-	-- upvalues: t_5 (ref)
-	return setmetatable({
-		array = if p5 == nil or p5.array == nil then {} else p5.array
-	}, t_5)
+function Module4.new(p1) --[[ Line: 1223 ]]
+	-- upvalues: Module4 (copy)
+	return (setmetatable({
+		array = if p1 == nil or p1.array == nil then {} else p1.array
+	}, Module4))
 end
 
-function t_5:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var84 = 0
+function Module4:encode() --[[ Line: 1231 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.array ~= nil and #self.array > 0 then
-		for i, v in self.array do
-			local var85 = v:encode()
-			local var86, var87 = protoModule.writeTag(buff, var84, 1, protoModule.wireTypes.lengthDelimited)
-			var86, var159 = protoModule.writeBuffer(var86, var87, var85, buffer.len(var85))
-			buff = var86
-			var84 = var87
+		for _, value in self.array do
+			local EncodeResult = value:encode()
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
 		end
 	end
-	local buff_1 = buffer.create(var84)
-	buffer.copy(buff_1, 0, buff, 0, var84)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_5.decode(p5)
-	-- upvalues: t_5 (ref), protoModule (ref), t (ref)
-	local var88 = t_5.new()
-	local var89 = 0
-	while var89 < buffer.len(p5) do
-		local _ = nil
-		local var90 = nil
-		local var91, var92, var93 = protoModule.readTag(p5, var89)
-		local var94 = var91
-		var90 = var92
-		var89 = var93
+function Module4.decode(Buf) --[[ Line: 1248 ]]
+	-- upvalues: Module4 (copy), ProtoModule (copy), config (copy)
+	local NewModule = Module4.new()
+	local v5 = 0
+	while v5 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v124 = ProtoModule.readTag(Buf, v5)
 		
-		if var90 == protoModule.wireTypes.varint then
-			local _ = nil
-			local var95, var96 = protoModule.readVarInt(p5, var89)
-			local _ = var95
-			var89 = var96
-			continue
-		end
-		if var90 == protoModule.wireTypes.lengthDelimited then
-			if var94 == 1 then
-				local _ = nil
-				local var97, var98 = protoModule.readBuffer(p5, var89)
-				var89 = var98
-				table.insert(var88.array, t.ItemFooter.decode(var97))
+		if Tag2 == ProtoModule.wireTypes.varint then
+			local _
+			_, v124 = ProtoModule.readVarInt(Buf, v5)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v124 = ProtoModule.readBuffer(Buf, v5)
+				table.insert(NewModule.array, config.ItemFooter.decode(Buffer1))
 			else
-				local _ = nil
-				local var99, var100 = protoModule.readVarInt(p5, var89)
-				var89 = var100 + var99
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v5)
+				v5 = VarInt2 + VarInt
 			end
-		elseif var90 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var101, var102 = protoModule.readFixed32(p5, var89)
-			local _ = var101
-			var89 = var102
-		elseif var90 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var103, var104 = protoModule.readFixed64(p5, var89)
-			local _ = var103
-			var89 = var104
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v124 = ProtoModule.readFixed32(Buf, v5)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v124 = ProtoModule.readFixed64(Buf, v5)
 		else
-			error("Unsupported wire type: " .. var163)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var88
+	return NewModule
 end
 
-function t_5:jsonEncode()
+function Module4:jsonEncode() --[[ Line: 1291 ]]
 	local t = {}
 	
 	if self.array ~= nil and #self.array > 0 then
-		local t_1 = {}
+		local Array = {}
 		
-		for i, v in self.array do
-			table.insert(t_1, v:jsonEncode())
+		for _, value in self.array do
+			table.insert(Array, value:jsonEncode())
 		end
-		t.array = t_1
+		t.array = Array
 	end
 	return t
 end
 
-function t_5:jsonDecode()
-	-- upvalues: t_5 (ref), t (ref)
-	local var105 = t_5.new()
+function Module4:jsonDecode() --[[ Line: 1305 ]]
+	-- upvalues: Module4 (copy), config (copy)
+	local NewModule = Module4.new()
 	
 	if self.array ~= nil then
-		local t_1 = {}
+		local Array = {}
 		
-		for i, v in self.array do
-			table.insert(t_1, t.ItemFooter.jsonDecode(v))
+		for _, value in self.array do
+			table.insert(Array, config.ItemFooter.jsonDecode(value))
 		end
-		var105.array = t_1
+		NewModule.array = Array
 	end
-	return var105
+	return NewModule
 end
 
-t_5.descriptor = {
+Module4.descriptor = {
 	name = "ArrayOfItemFooterProp_ArrayOfItemFooter",
 	fullName = "roblox.apppageplatform.shared.v1beta1.ArrayOfItemFooter"
 }
-t.ArrayOfItemFooterProp_ArrayOfItemFooter = t_5
-typeRegistryModule.default:register(t.ArrayOfItemFooterProp_ArrayOfItemFooter)
-local t_6 = {}
-t_6.__index = t_6
+config.ArrayOfItemFooterProp_ArrayOfItemFooter = Module4
+TypeRegistryModule.default:register(config.ArrayOfItemFooterProp_ArrayOfItemFooter)
+local Module5 = {}
+Module5.__index = Module5
 
-function t_6.new(p6)
-	-- upvalues: t_6 (ref)
-	return setmetatable({
-		kind = if p6 == nil or p6.kind == nil then nil else p6.kind,
-		item_hydration_specs = if p6 == nil or p6.item_hydration_specs == nil then {} else p6.item_hydration_specs,
-		field_map = if p6 == nil or p6.field_map == nil then nil else p6.field_map
-	}, t_6)
+function Module5.new(p1) --[[ Line: 1336 ]]
+	-- upvalues: Module5 (copy)
+	return (setmetatable({
+		kind = if p1 == nil or p1.kind == nil then nil else p1.kind,
+		item_hydration_specs = if p1 == nil or p1.item_hydration_specs == nil then {} else p1.item_hydration_specs,
+		field_map = if p1 == nil or p1.field_map == nil then nil else p1.field_map
+	}, Module5))
 end
 
-function t_6:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var106 = 0
+function Module5:encode() --[[ Line: 1348 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.kind ~= nil then
 		if self.kind.type == "binding_path" then
-			local var107, var108 = protoModule.writeTag(buff, var106, 1, protoModule.wireTypes.lengthDelimited)
-			var107, var185 = protoModule.writeString(var107, var108, self.kind.value)
-			buff = var107
-			var106 = var108
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult, WriteTagResult2, self.kind.value)
 		elseif self.kind.type == "literal" then
-			local var109 = self.kind.value:encode()
-			local var110, var111 = protoModule.writeTag(buff, var106, 2, protoModule.wireTypes.lengthDelimited)
-			var110, var188 = protoModule.writeBuffer(var110, var111, var109, buffer.len(var109))
-			buff = var110
-			var106 = var111
+			local EncodeResult = self.kind.value:encode()
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
 		end
 	end
 	if self.item_hydration_specs ~= nil and #self.item_hydration_specs > 0 then
-		for i, v in self.item_hydration_specs do
-			local var112 = v:encode()
-			local var113, var114 = protoModule.writeTag(buff, var106, 3, protoModule.wireTypes.lengthDelimited)
-			var113, var191 = protoModule.writeBuffer(var113, var114, var112, buffer.len(var112))
-			buff = var113
-			var106 = var114
+		for _, itemHydrationSpec in self.item_hydration_specs do
+			local EncodeResult = itemHydrationSpec:encode()
+			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult3, WriteTagResult2_2, EncodeResult, buffer.len(EncodeResult))
 		end
 	end
 	if self.field_map ~= nil then
-		local var115 = self.field_map:encode()
-		local var116, var117 = protoModule.writeTag(buff, var106, 4, protoModule.wireTypes.lengthDelimited)
-		var116, var194 = protoModule.writeBuffer(var116, var117, var115, buffer.len(var115))
-		buff = var116
-		var106 = var117
+		local EncodeResult = self.field_map:encode()
+		local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeBuffer(WriteTagResult4, WriteTagResult2_3, EncodeResult, buffer.len(EncodeResult))
 	end
-	local buff_1 = buffer.create(var106)
-	buffer.copy(buff_1, 0, buff, 0, var106)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_6.decode(p6)
-	-- upvalues: t_6 (ref), protoModule (ref), t (ref), hydrationDataSpecModule (ref)
-	local var118 = t_6.new()
-	local var119 = 0
-	while var119 < buffer.len(p6) do
-		local _ = nil
-		local var120 = nil
-		local var121, var122, var123 = protoModule.readTag(p6, var119)
-		local var124 = var121
-		var120 = var122
-		var119 = var123
+function Module5.decode(Buf) --[[ Line: 1382 ]]
+	-- upvalues: Module5 (copy), ProtoModule (copy), config (copy), HydrationDataSpecModule (copy)
+	local NewModule = Module5.new()
+	local v6 = 0
+	while v6 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v151 = ProtoModule.readTag(Buf, v6)
 		
-		if var120 == protoModule.wireTypes.varint then
-			local _ = nil
-			local var125, var126 = protoModule.readVarInt(p6, var119)
-			local _ = var125
-			var119 = var126
-			continue
-		end
-		if var120 == protoModule.wireTypes.lengthDelimited then
-			if var124 == 1 then
-				local _ = nil
-				local var127, var128 = protoModule.readBuffer(p6, var119)
-				var119 = var128
-				var118.kind = { type = "binding_path", value = buffer.tostring(var127) }
-			elseif var124 == 2 then
-				local _ = nil
-				local var129, var130 = protoModule.readBuffer(p6, var119)
-				var119 = var130
-				var118.kind = {
+		if Tag2 == ProtoModule.wireTypes.varint then
+			local _
+			_, v151 = ProtoModule.readVarInt(Buf, v6)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v151 = ProtoModule.readBuffer(Buf, v6)
+				NewModule.kind = { type = "binding_path", value = buffer.tostring(Buffer1) }
+			elseif Tag == 2 then
+				local Buffer2
+				Buffer2, v151 = ProtoModule.readBuffer(Buf, v6)
+				NewModule.kind = {
 					type = "literal",
-					value = t.ArrayOfItemFooterProp_ArrayMap_LiteralItems.decode(var129)
+					value = config.ArrayOfItemFooterProp_ArrayMap_LiteralItems.decode(Buffer2)
 				}
-			elseif var124 == 3 then
-				local _ = nil
-				local var131, var132 = protoModule.readBuffer(p6, var119)
-				var119 = var132
-				table.insert(var118.item_hydration_specs, hydrationDataSpecModule.HydrationDataSpec.decode(var131))
-			elseif var124 == 4 then
-				local _ = nil
-				local var133, var134 = protoModule.readBuffer(p6, var119)
-				var119 = var134
-				var118.field_map = t.ItemFooter.decode(var133)
+			elseif Tag == 3 then
+				local Buffer3
+				Buffer3, v151 = ProtoModule.readBuffer(Buf, v6)
+				table.insert(NewModule.item_hydration_specs, HydrationDataSpecModule.HydrationDataSpec.decode(Buffer3))
+			elseif Tag == 4 then
+				local Buffer4
+				Buffer4, v151 = ProtoModule.readBuffer(Buf, v6)
+				NewModule.field_map = config.ItemFooter.decode(Buffer4)
 			else
-				local _ = nil
-				local var135, var136 = protoModule.readVarInt(p6, var119)
-				var119 = var136 + var135
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v6)
+				v6 = VarInt2 + VarInt
 			end
-		elseif var120 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var137, var138 = protoModule.readFixed32(p6, var119)
-			local _ = var137
-			var119 = var138
-		elseif var120 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var139, var140 = protoModule.readFixed64(p6, var119)
-			local _ = var139
-			var119 = var140
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v151 = ProtoModule.readFixed32(Buf, v6)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v151 = ProtoModule.readFixed64(Buf, v6)
 		else
-			error("Unsupported wire type: " .. var198)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var118
+	return NewModule
 end
 
-function t_6:jsonEncode()
+function Module5:jsonEncode() --[[ Line: 1444 ]]
 	local t = {}
 	
 	if self.kind ~= nil then
@@ -795,12 +678,12 @@ function t_6:jsonEncode()
 		end
 	end
 	if self.item_hydration_specs ~= nil and #self.item_hydration_specs > 0 then
-		local t_1 = {}
+		local ItemHydrationSpecs = {}
 		
-		for i, v in self.item_hydration_specs do
-			table.insert(t_1, v:jsonEncode())
+		for _, itemHydrationSpec in self.item_hydration_specs do
+			table.insert(ItemHydrationSpecs, itemHydrationSpec:jsonEncode())
 		end
-		t.itemHydrationSpecs = t_1
+		t.itemHydrationSpecs = ItemHydrationSpecs
 	end
 	if self.field_map ~= nil then
 		t.fieldMap = self.field_map:jsonEncode()
@@ -808,254 +691,219 @@ function t_6:jsonEncode()
 	return t
 end
 
-function t_6:jsonDecode()
-	-- upvalues: t_6 (ref), t (ref), hydrationDataSpecModule (ref)
-	local var141 = t_6.new()
+function Module5:jsonDecode() --[[ Line: 1470 ]]
+	-- upvalues: Module5 (copy), config (copy), HydrationDataSpecModule (copy)
+	local NewModule = Module5.new()
 	
 	if self.binding_path ~= nil then
-		var141.kind = { type = "binding_path", value = self.binding_path }
+		NewModule.kind = { type = "binding_path", value = self.binding_path }
 	end
 	if self.bindingPath ~= nil then
-		var141.kind = { type = "binding_path", value = self.bindingPath }
+		NewModule.kind = { type = "binding_path", value = self.bindingPath }
 	end
 	if self.literal ~= nil then
-		var141.kind = {
+		NewModule.kind = {
 			type = "literal",
-			value = t.ArrayOfItemFooterProp_ArrayMap_LiteralItems.jsonDecode(self.literal)
+			value = config.ArrayOfItemFooterProp_ArrayMap_LiteralItems.jsonDecode(self.literal)
 		}
 	end
 	if self.item_hydration_specs ~= nil then
-		local t_1 = {}
+		local Item_hydration_specs = {}
 		
-		for i, v in self.item_hydration_specs do
-			table.insert(t_1, hydrationDataSpecModule.HydrationDataSpec.jsonDecode(v))
+		for _, itemHydrationSpec in self.item_hydration_specs do
+			table.insert(Item_hydration_specs, HydrationDataSpecModule.HydrationDataSpec.jsonDecode(itemHydrationSpec))
 		end
-		var141.item_hydration_specs = t_1
+		NewModule.item_hydration_specs = Item_hydration_specs
 	end
 	if self.itemHydrationSpecs ~= nil then
-		local t_1 = {}
+		local Item_hydration_specs = {}
 		
-		for i, v in self.itemHydrationSpecs do
-			table.insert(t_1, hydrationDataSpecModule.HydrationDataSpec.jsonDecode(v))
+		for _, itemHydrationSpec1 in self.itemHydrationSpecs do
+			table.insert(Item_hydration_specs, HydrationDataSpecModule.HydrationDataSpec.jsonDecode(itemHydrationSpec1))
 		end
-		var141.item_hydration_specs = t_1
+		NewModule.item_hydration_specs = Item_hydration_specs
 	end
 	if self.field_map ~= nil then
-		var141.field_map = t.ItemFooter.jsonDecode(self.field_map)
+		NewModule.field_map = config.ItemFooter.jsonDecode(self.field_map)
 	end
 	if self.fieldMap ~= nil then
-		var141.field_map = t.ItemFooter.jsonDecode(self.fieldMap)
+		NewModule.field_map = config.ItemFooter.jsonDecode(self.fieldMap)
 	end
-	return var141
+	return NewModule
 end
 
-t_6.descriptor = {
+Module5.descriptor = {
 	name = "ArrayOfItemFooterProp_ArrayMap",
 	fullName = "roblox.apppageplatform.shared.v1beta1.ArrayMap"
 }
-t.ArrayOfItemFooterProp_ArrayMap = t_6
-typeRegistryModule.default:register(t.ArrayOfItemFooterProp_ArrayMap)
-local t_7 = {}
-t_7.__index = t_7
+config.ArrayOfItemFooterProp_ArrayMap = Module5
+TypeRegistryModule.default:register(config.ArrayOfItemFooterProp_ArrayMap)
+local Module6 = {}
+Module6.__index = Module6
 
-function t_7.new(p7)
-	-- upvalues: t_7 (ref)
-	return setmetatable({
-		items = if p7 == nil or p7.items == nil then {} else p7.items
-	}, t_7)
+function Module6.new(p1) --[[ Line: 1537 ]]
+	-- upvalues: Module6 (copy)
+	return (setmetatable({
+		items = if p1 == nil or p1.items == nil then {} else p1.items
+	}, Module6))
 end
 
-function t_7:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var142 = 0
+function Module6:encode() --[[ Line: 1545 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.items ~= nil and #self.items > 0 then
-		for i, v in self.items do
-			local var143 = v:encode()
-			local var144, var145 = protoModule.writeTag(buff, var142, 1, protoModule.wireTypes.lengthDelimited)
-			var144, var228 = protoModule.writeBuffer(var144, var145, var143, buffer.len(var143))
-			buff = var144
-			var142 = var145
+		for _, item in self.items do
+			local EncodeResult = item:encode()
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
 		end
 	end
-	local buff_1 = buffer.create(var142)
-	buffer.copy(buff_1, 0, buff, 0, var142)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_7.decode(p7)
-	-- upvalues: t_7 (ref), protoModule (ref), catalogSortDataModule (ref)
-	local var146 = t_7.new()
-	local var147 = 0
-	while var147 < buffer.len(p7) do
-		local _ = nil
-		local var148 = nil
-		local var149, var150, var151 = protoModule.readTag(p7, var147)
-		local var152 = var149
-		var148 = var150
-		var147 = var151
+function Module6.decode(Buf) --[[ Line: 1564 ]]
+	-- upvalues: Module6 (copy), ProtoModule (copy), CatalogSortDataModule (copy)
+	local NewModule = Module6.new()
+	local v7 = 0
+	while v7 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v174 = ProtoModule.readTag(Buf, v7)
 		
-		if var148 == protoModule.wireTypes.varint then
-			local _ = nil
-			local var153, var154 = protoModule.readVarInt(p7, var147)
-			local _ = var153
-			var147 = var154
-			continue
-		end
-		if var148 == protoModule.wireTypes.lengthDelimited then
-			if var152 == 1 then
-				local _ = nil
-				local var155, var156 = protoModule.readBuffer(p7, var147)
-				var147 = var156
-				table.insert(var146.items, catalogSortDataModule.CatalogSortCardItemFooter.decode(var155))
+		if Tag2 == ProtoModule.wireTypes.varint then
+			local _
+			_, v174 = ProtoModule.readVarInt(Buf, v7)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v174 = ProtoModule.readBuffer(Buf, v7)
+				table.insert(NewModule.items, CatalogSortDataModule.CatalogSortCardItemFooter.decode(Buffer1))
 			else
-				local _ = nil
-				local var157, var158 = protoModule.readVarInt(p7, var147)
-				var147 = var158 + var157
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v7)
+				v7 = VarInt2 + VarInt
 			end
-		elseif var148 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var159, var160 = protoModule.readFixed32(p7, var147)
-			local _ = var159
-			var147 = var160
-		elseif var148 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var161, var162 = protoModule.readFixed64(p7, var147)
-			local _ = var161
-			var147 = var162
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v174 = ProtoModule.readFixed32(Buf, v7)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v174 = ProtoModule.readFixed64(Buf, v7)
 		else
-			error("Unsupported wire type: " .. var232)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var146
+	return NewModule
 end
 
-function t_7:jsonEncode()
+function Module6:jsonEncode() --[[ Line: 1612 ]]
 	local t = {}
 	
 	if self.items ~= nil and #self.items > 0 then
-		local t_1 = {}
+		local Items = {}
 		
-		for i, v in self.items do
-			table.insert(t_1, v:jsonEncode())
+		for _, item in self.items do
+			table.insert(Items, item:jsonEncode())
 		end
-		t.items = t_1
+		t.items = Items
 	end
 	return t
 end
 
-function t_7:jsonDecode()
-	-- upvalues: t_7 (ref), catalogSortDataModule (ref)
-	local var163 = t_7.new()
+function Module6:jsonDecode() --[[ Line: 1628 ]]
+	-- upvalues: Module6 (copy), CatalogSortDataModule (copy)
+	local NewModule = Module6.new()
 	
 	if self.items ~= nil then
-		local t = {}
+		local Items = {}
 		
-		for i, v in self.items do
-			table.insert(t, catalogSortDataModule.CatalogSortCardItemFooter.jsonDecode(v))
+		for _, item in self.items do
+			table.insert(Items, CatalogSortDataModule.CatalogSortCardItemFooter.jsonDecode(item))
 		end
-		var163.items = t
+		NewModule.items = Items
 	end
-	return var163
+	return NewModule
 end
 
-t_7.descriptor = {
+Module6.descriptor = {
 	name = "ArrayOfItemFooterProp_ArrayMap_LiteralItems",
 	fullName = "roblox.apppageplatform.shared.v1beta1.LiteralItems"
 }
-t.ArrayOfItemFooterProp_ArrayMap_LiteralItems = t_7
-typeRegistryModule.default:register(t.ArrayOfItemFooterProp_ArrayMap_LiteralItems)
-local t_8 = {}
-t_8.__index = t_8
+config.ArrayOfItemFooterProp_ArrayMap_LiteralItems = Module6
+TypeRegistryModule.default:register(config.ArrayOfItemFooterProp_ArrayMap_LiteralItems)
+local Module7 = {}
+Module7.__index = Module7
 
-function t_8.new(p8)
-	-- upvalues: t_8 (ref)
-	return setmetatable({
-		thumbnail_aspect_ratio = if p8 == nil or p8.thumbnail_aspect_ratio == nil then nil else p8.thumbnail_aspect_ratio,
-		background_layers = if p8 == nil or p8.background_layers == nil then nil else p8.background_layers
-	}, t_8)
+function Module7.new(p1) --[[ Line: 1662 ]]
+	-- upvalues: Module7 (copy)
+	return (setmetatable({
+		thumbnail_aspect_ratio = if p1 == nil or p1.thumbnail_aspect_ratio == nil then nil else p1.thumbnail_aspect_ratio,
+		background_layers = if p1 == nil or p1.background_layers == nil then nil else p1.background_layers
+	}, Module7))
 end
 
-function t_8:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var164 = 0
+function Module7:encode() --[[ Line: 1671 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.thumbnail_aspect_ratio ~= nil then
-		local var165 = self.thumbnail_aspect_ratio:encode()
-		local var166, var167 = protoModule.writeTag(buff, var164, 1, protoModule.wireTypes.lengthDelimited)
-		var166, var255 = protoModule.writeBuffer(var166, var167, var165, buffer.len(var165))
-		buff = var166
-		var164 = var167
+		local EncodeResult = self.thumbnail_aspect_ratio:encode()
+		local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
 	end
 	if self.background_layers ~= nil then
-		local var168 = self.background_layers:encode()
-		local var169, var170 = protoModule.writeTag(buff, var164, 2, protoModule.wireTypes.lengthDelimited)
-		var169, var258 = protoModule.writeBuffer(var169, var170, var168, buffer.len(var168))
-		buff = var169
-		var164 = var170
+		local EncodeResult = self.background_layers:encode()
+		local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
 	end
-	local buff_1 = buffer.create(var164)
-	buffer.copy(buff_1, 0, buff, 0, var164)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_8.decode(p8)
-	-- upvalues: t_8 (ref), protoModule (ref), propTypesModule (ref), backgroundLayerModule (ref)
-	local var164 = t_8.new()
-	local var165 = 0
-	while var165 < buffer.len(p8) do
-		local _ = nil
-		local var166 = nil
-		local var167, var168, var169 = protoModule.readTag(p8, var165)
-		local var170 = var167
-		var166 = var168
-		var165 = var169
+function Module7.decode(Buf) --[[ Line: 1692 ]]
+	-- upvalues: Module7 (copy), ProtoModule (copy), PropTypesModule (copy), BackgroundLayerModule (copy)
+	local NewModule = Module7.new()
+	local v8 = 0
+	while v8 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v196 = ProtoModule.readTag(Buf, v8)
 		
-		if var166 == protoModule.wireTypes.varint then
-			local _ = nil
-			local var171, var172 = protoModule.readVarInt(p8, var165)
-			local _ = var171
-			var165 = var172
-			continue
-		end
-		if var166 == protoModule.wireTypes.lengthDelimited then
-			if var170 == 1 then
-				local _ = nil
-				local var173, var174 = protoModule.readBuffer(p8, var165)
-				var165 = var174
-				var164.thumbnail_aspect_ratio = propTypesModule.StringProp.decode(var173)
-			elseif var170 == 2 then
-				local _ = nil
-				local var175, var176 = protoModule.readBuffer(p8, var165)
-				var165 = var176
-				var164.background_layers = backgroundLayerModule.ArrayOfBackgroundLayerProp.decode(var175)
+		if Tag2 == ProtoModule.wireTypes.varint then
+			local _
+			_, v196 = ProtoModule.readVarInt(Buf, v8)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v196 = ProtoModule.readBuffer(Buf, v8)
+				NewModule.thumbnail_aspect_ratio = PropTypesModule.StringProp.decode(Buffer1)
+			elseif Tag == 2 then
+				local Buffer2
+				Buffer2, v196 = ProtoModule.readBuffer(Buf, v8)
+				NewModule.background_layers = BackgroundLayerModule.ArrayOfBackgroundLayerProp.decode(Buffer2)
 			else
-				local _ = nil
-				local var177, var178 = protoModule.readVarInt(p8, var165)
-				var165 = var178 + var177
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v8)
+				v8 = VarInt2 + VarInt
 			end
-		elseif var166 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var179, var180 = protoModule.readFixed32(p8, var165)
-			local _ = var179
-			var165 = var180
-		elseif var166 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var181, var182 = protoModule.readFixed64(p8, var165)
-			local _ = var181
-			var165 = var182
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v196 = ProtoModule.readFixed32(Buf, v8)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v196 = ProtoModule.readFixed64(Buf, v8)
 		else
-			error("Unsupported wire type: " .. var262)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var164
+	return NewModule
 end
 
-function t_8:jsonEncode()
+function Module7:jsonEncode() --[[ Line: 1742 ]]
 	local t = {}
 	
 	if self.thumbnail_aspect_ratio ~= nil then
@@ -1067,133 +915,114 @@ function t_8:jsonEncode()
 	return t
 end
 
-function t_8:jsonDecode()
-	-- upvalues: t_8 (ref), propTypesModule (ref), backgroundLayerModule (ref)
-	local var183 = t_8.new()
+function Module7:jsonDecode() --[[ Line: 1756 ]]
+	-- upvalues: Module7 (copy), PropTypesModule (copy), BackgroundLayerModule (copy)
+	local NewModule = Module7.new()
 	
 	if self.thumbnail_aspect_ratio ~= nil then
-		var183.thumbnail_aspect_ratio = propTypesModule.StringProp.jsonDecode(self.thumbnail_aspect_ratio)
+		NewModule.thumbnail_aspect_ratio = PropTypesModule.StringProp.jsonDecode(self.thumbnail_aspect_ratio)
 	end
 	if self.thumbnailAspectRatio ~= nil then
-		var183.thumbnail_aspect_ratio = propTypesModule.StringProp.jsonDecode(self.thumbnailAspectRatio)
+		NewModule.thumbnail_aspect_ratio = PropTypesModule.StringProp.jsonDecode(self.thumbnailAspectRatio)
 	end
 	if self.background_layers ~= nil then
-		var183.background_layers = backgroundLayerModule.ArrayOfBackgroundLayerProp.jsonDecode(self.background_layers)
+		NewModule.background_layers = BackgroundLayerModule.ArrayOfBackgroundLayerProp.jsonDecode(self.background_layers)
 	end
 	if self.backgroundLayers ~= nil then
-		var183.background_layers = backgroundLayerModule.ArrayOfBackgroundLayerProp.jsonDecode(self.backgroundLayers)
+		NewModule.background_layers = BackgroundLayerModule.ArrayOfBackgroundLayerProp.jsonDecode(self.backgroundLayers)
 	end
-	return var183
+	return NewModule
 end
 
-t_8.descriptor = {
+Module7.descriptor = {
 	name = "CardStyle",
 	fullName = "roblox.apppageplatform.shared.v1beta1.CardStyle"
 }
-t.CardStyle = t_8
-typeRegistryModule.default:register(t.CardStyle)
-local t_9 = {}
-t_9.__index = t_9
+config.CardStyle = Module7
+TypeRegistryModule.default:register(config.CardStyle)
+local Module8 = {}
+Module8.__index = Module8
 
-function t_9.new(p9)
-	-- upvalues: t_9 (ref)
-	return setmetatable({
-		kind = if p9 == nil or p9.kind == nil then nil else p9.kind
-	}, t_9)
+function Module8.new(p1) --[[ Line: 1800 ]]
+	-- upvalues: Module8 (copy)
+	return (setmetatable({
+		kind = if p1 == nil or p1.kind == nil then nil else p1.kind
+	}, Module8))
 end
 
-function t_9:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var183 = 0
+function Module8:encode() --[[ Line: 1806 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.kind ~= nil then
 		if self.kind.type == "literal" then
-			local var184 = self.kind.value:encode()
-			local var185, var186 = protoModule.writeTag(buff, var183, 1, protoModule.wireTypes.lengthDelimited)
-			var185, var285 = protoModule.writeBuffer(var185, var186, var184, buffer.len(var184))
-			buff = var185
-			var183 = var186
+			local EncodeResult = self.kind.value:encode()
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
 		elseif self.kind.type == "binding_path" then
-			local var187, var188 = protoModule.writeTag(buff, var183, 2, protoModule.wireTypes.lengthDelimited)
-			var187, var287 = protoModule.writeString(var187, var188, self.kind.value)
-			buff = var187
-			var183 = var188
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult1, WriteTagResult2_1, self.kind.value)
 		elseif self.kind.type == "conditional" then
-			local var189 = self.kind.value:encode()
-			local var190, var191 = protoModule.writeTag(buff, var183, 3, protoModule.wireTypes.lengthDelimited)
-			var190, var290 = protoModule.writeBuffer(var190, var191, var189, buffer.len(var189))
-			buff = var190
-			var183 = var191
+			local EncodeResult = self.kind.value:encode()
+			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult3, WriteTagResult2_2, EncodeResult, buffer.len(EncodeResult))
 		end
 	end
-	local buff_1 = buffer.create(var183)
-	buffer.copy(buff_1, 0, buff, 0, var183)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_9.decode(p9)
-	-- upvalues: t_9 (ref), protoModule (ref), t (ref)
-	local var183 = t_9.new()
-	local var184 = 0
-	while var184 < buffer.len(p9) do
-		local _ = nil
-		local var185 = nil
-		local var186, var187, var188 = protoModule.readTag(p9, var184)
-		local var189 = var186
-		var185 = var187
-		var184 = var188
+function Module8.decode(Buf) --[[ Line: 1830 ]]
+	-- upvalues: Module8 (copy), ProtoModule (copy), config (copy)
+	local NewModule = Module8.new()
+	local v9 = 0
+	while v9 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v219 = ProtoModule.readTag(Buf, v9)
 		
-		if var185 == protoModule.wireTypes.varint then
-			local _ = nil
-			local var190, var191 = protoModule.readVarInt(p9, var184)
-			local _ = var190
-			var184 = var191
-			continue
-		end
-		if var185 == protoModule.wireTypes.lengthDelimited then
-			if var189 == 1 then
-				local _ = nil
-				local var192, var193 = protoModule.readBuffer(p9, var184)
-				var184 = var193
-				var183.kind = { type = "literal", value = t.CardStyle.decode(var192) }
-			elseif var189 == 2 then
-				local _ = nil
-				local var194, var195 = protoModule.readBuffer(p9, var184)
-				var184 = var195
-				var183.kind = { type = "binding_path", value = buffer.tostring(var194) }
-			elseif var189 == 3 then
-				local _ = nil
-				local var196, var197 = protoModule.readBuffer(p9, var184)
-				var184 = var197
-				var183.kind = {
+		if Tag2 == ProtoModule.wireTypes.varint then
+			local _
+			_, v219 = ProtoModule.readVarInt(Buf, v9)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v219 = ProtoModule.readBuffer(Buf, v9)
+				NewModule.kind = {
+					type = "literal",
+					value = config.CardStyle.decode(Buffer1)
+				}
+			elseif Tag == 2 then
+				local Buffer2
+				Buffer2, v219 = ProtoModule.readBuffer(Buf, v9)
+				NewModule.kind = { type = "binding_path", value = buffer.tostring(Buffer2) }
+			elseif Tag == 3 then
+				local Buffer3
+				Buffer3, v219 = ProtoModule.readBuffer(Buf, v9)
+				NewModule.kind = {
 					type = "conditional",
-					value = t.CardStyleProp_ConditionalOptions.decode(var196)
+					value = config.CardStyleProp_ConditionalOptions.decode(Buffer3)
 				}
 			else
-				local _ = nil
-				local var198, var199 = protoModule.readVarInt(p9, var184)
-				var184 = var199 + var198
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v9)
+				v9 = VarInt2 + VarInt
 			end
-		elseif var185 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var200, var201 = protoModule.readFixed32(p9, var184)
-			local _ = var200
-			var184 = var201
-		elseif var185 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var202, var203 = protoModule.readFixed64(p9, var184)
-			local _ = var202
-			var184 = var203
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v219 = ProtoModule.readFixed32(Buf, v9)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v219 = ProtoModule.readFixed64(Buf, v9)
 		else
-			error("Unsupported wire type: " .. var294)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var183
+	return NewModule
 end
 
-function t_9:jsonEncode()
+function Module8:jsonEncode() --[[ Line: 1884 ]]
 	local t = {}
 	
 	if self.kind ~= nil then
@@ -1201,149 +1030,132 @@ function t_9:jsonEncode()
 			t.literal = self.kind.value:jsonEncode()
 			
 			return t
-		elseif self.kind.type == "binding_path" then
+		end
+		if self.kind.type == "binding_path" then
 			t.bindingPath = self.kind.value
 			
 			return t
-		elseif self.kind.type == "conditional" then
+		end
+		if self.kind.type == "conditional" then
 			t.conditional = self.kind.value:jsonEncode()
 		end
 	end
 	return t
 end
 
-function t_9:jsonDecode()
-	-- upvalues: t_9 (ref), t (ref)
-	local var204 = t_9.new()
+function Module8:jsonDecode() --[[ Line: 1900 ]]
+	-- upvalues: Module8 (copy), config (copy)
+	local NewModule = Module8.new()
 	
 	if self.literal ~= nil then
-		var204.kind = {
+		NewModule.kind = {
 			type = "literal",
-			value = t.CardStyle.jsonDecode(self.literal)
+			value = config.CardStyle.jsonDecode(self.literal)
 		}
 	end
 	if self.binding_path ~= nil then
-		var204.kind = { type = "binding_path", value = self.binding_path }
+		NewModule.kind = { type = "binding_path", value = self.binding_path }
 	end
 	if self.bindingPath ~= nil then
-		var204.kind = { type = "binding_path", value = self.bindingPath }
+		NewModule.kind = { type = "binding_path", value = self.bindingPath }
 	end
 	if self.conditional ~= nil then
-		var204.kind = {
+		NewModule.kind = {
 			type = "conditional",
-			value = t.CardStyleProp_ConditionalOptions.jsonDecode(self.conditional)
+			value = config.CardStyleProp_ConditionalOptions.jsonDecode(self.conditional)
 		}
 	end
-	return var204
+	return NewModule
 end
 
-t_9.descriptor = {
+Module8.descriptor = {
 	name = "CardStyleProp",
 	fullName = "roblox.apppageplatform.shared.v1beta1.CardStyleProp"
 }
-t.CardStyleProp = t_9
-typeRegistryModule.default:register(t.CardStyleProp)
-local t_10 = {}
-t_10.__index = t_10
+config.CardStyleProp = Module8
+TypeRegistryModule.default:register(config.CardStyleProp)
+local Module9 = {}
+Module9.__index = Module9
 
-function t_10.new(p10)
-	-- upvalues: t_10 (ref)
-	return setmetatable({
-		condition = if p10 == nil or p10.condition == nil then nil else p10.condition,
-		kind = if p10 == nil or p10.kind == nil then nil else p10.kind
-	}, t_10)
+function Module9.new(p1) --[[ Line: 1939 ]]
+	-- upvalues: Module9 (copy)
+	return (setmetatable({
+		condition = if p1 == nil or p1.condition == nil then nil else p1.condition,
+		kind = if p1 == nil or p1.kind == nil then nil else p1.kind
+	}, Module9))
 end
 
-function t_10:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var204 = 0
+function Module9:encode() --[[ Line: 1948 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.condition ~= nil then
-		local var205 = self.condition:encode()
-		local var206, var207 = protoModule.writeTag(buff, var204, 1, protoModule.wireTypes.lengthDelimited)
-		var206, var319 = protoModule.writeBuffer(var206, var207, var205, buffer.len(var205))
-		buff = var206
-		var204 = var207
+		local EncodeResult = self.condition:encode()
+		local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
 	end
 	if self.kind ~= nil then
 		if self.kind.type == "literal" then
-			local var208 = self.kind.value:encode()
-			local var209, var210 = protoModule.writeTag(buff, var204, 2, protoModule.wireTypes.lengthDelimited)
-			var209, var322 = protoModule.writeBuffer(var209, var210, var208, buffer.len(var208))
-			buff = var209
-			var204 = var210
+			local EncodeResult = self.kind.value:encode()
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
 		elseif self.kind.type == "binding_path" then
-			local var211, var212 = protoModule.writeTag(buff, var204, 3, protoModule.wireTypes.lengthDelimited)
-			var211, var324 = protoModule.writeString(var211, var212, self.kind.value)
-			buff = var211
-			var204 = var212
+			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult3, WriteTagResult2_2, self.kind.value)
 		end
 	end
-	local buff_1 = buffer.create(var204)
-	buffer.copy(buff_1, 0, buff, 0, var204)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_10.decode(p10)
-	-- upvalues: t_10 (ref), protoModule (ref), propConditionModule (ref), t (ref)
-	local var204 = t_10.new()
-	local var205 = 0
-	while var205 < buffer.len(p10) do
-		local _ = nil
-		local var206 = nil
-		local var207, var208, var209 = protoModule.readTag(p10, var205)
-		local var210 = var207
-		var206 = var208
-		var205 = var209
+function Module9.decode(Buf) --[[ Line: 1974 ]]
+	-- upvalues: Module9 (copy), ProtoModule (copy), PropConditionModule (copy), config (copy)
+	local NewModule = Module9.new()
+	local v10 = 0
+	while v10 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v243 = ProtoModule.readTag(Buf, v10)
 		
-		if var206 == protoModule.wireTypes.varint then
-			local _ = nil
-			local var211, var212 = protoModule.readVarInt(p10, var205)
-			local _ = var211
-			var205 = var212
-			continue
-		end
-		if var206 == protoModule.wireTypes.lengthDelimited then
-			if var210 == 1 then
-				local _ = nil
-				local var213, var214 = protoModule.readBuffer(p10, var205)
-				var205 = var214
-				var204.condition = propConditionModule.PropCondition.decode(var213)
-			elseif var210 == 2 then
-				local _ = nil
-				local var215, var216 = protoModule.readBuffer(p10, var205)
-				var205 = var216
-				var204.kind = { type = "literal", value = t.CardStyle.decode(var215) }
-			elseif var210 == 3 then
-				local _ = nil
-				local var217, var218 = protoModule.readBuffer(p10, var205)
-				var205 = var218
-				var204.kind = { type = "binding_path", value = buffer.tostring(var217) }
+		if Tag2 == ProtoModule.wireTypes.varint then
+			local _
+			_, v243 = ProtoModule.readVarInt(Buf, v10)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v243 = ProtoModule.readBuffer(Buf, v10)
+				NewModule.condition = PropConditionModule.PropCondition.decode(Buffer1)
+			elseif Tag == 2 then
+				local Buffer2
+				Buffer2, v243 = ProtoModule.readBuffer(Buf, v10)
+				NewModule.kind = {
+					type = "literal",
+					value = config.CardStyle.decode(Buffer2)
+				}
+			elseif Tag == 3 then
+				local Buffer3
+				Buffer3, v243 = ProtoModule.readBuffer(Buf, v10)
+				NewModule.kind = { type = "binding_path", value = buffer.tostring(Buffer3) }
 			else
-				local _ = nil
-				local var219, var220 = protoModule.readVarInt(p10, var205)
-				var205 = var220 + var219
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v10)
+				v10 = VarInt2 + VarInt
 			end
-		elseif var206 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var221, var222 = protoModule.readFixed32(p10, var205)
-			local _ = var221
-			var205 = var222
-		elseif var206 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var223, var224 = protoModule.readFixed64(p10, var205)
-			local _ = var223
-			var205 = var224
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v243 = ProtoModule.readFixed32(Buf, v10)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v243 = ProtoModule.readFixed64(Buf, v10)
 		else
-			error("Unsupported wire type: " .. var328)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var204
+	return NewModule
 end
 
-function t_10:jsonEncode()
+function Module9:jsonEncode() --[[ Line: 2027 ]]
 	local t = {}
 	
 	if self.condition ~= nil then
@@ -1354,242 +1166,208 @@ function t_10:jsonEncode()
 			t.literal = self.kind.value:jsonEncode()
 			
 			return t
-		elseif self.kind.type == "binding_path" then
+		end
+		if self.kind.type == "binding_path" then
 			t.bindingPath = self.kind.value
 		end
 	end
 	return t
 end
 
-function t_10:jsonDecode()
-	-- upvalues: t_10 (ref), propConditionModule (ref), t (ref)
-	local var225 = t_10.new()
+function Module9:jsonDecode() --[[ Line: 2045 ]]
+	-- upvalues: Module9 (copy), PropConditionModule (copy), config (copy)
+	local NewModule = Module9.new()
 	
 	if self.condition ~= nil then
-		var225.condition = propConditionModule.PropCondition.jsonDecode(self.condition)
+		NewModule.condition = PropConditionModule.PropCondition.jsonDecode(self.condition)
 	end
 	if self.literal ~= nil then
-		var225.kind = {
+		NewModule.kind = {
 			type = "literal",
-			value = t.CardStyle.jsonDecode(self.literal)
+			value = config.CardStyle.jsonDecode(self.literal)
 		}
 	end
 	if self.binding_path ~= nil then
-		var225.kind = { type = "binding_path", value = self.binding_path }
+		NewModule.kind = { type = "binding_path", value = self.binding_path }
 	end
 	if self.bindingPath ~= nil then
-		var225.kind = { type = "binding_path", value = self.bindingPath }
+		NewModule.kind = { type = "binding_path", value = self.bindingPath }
 	end
-	return var225
+	return NewModule
 end
 
-t_10.descriptor = {
+Module9.descriptor = {
 	name = "CardStyleProp_ConditionalOption",
 	fullName = "roblox.apppageplatform.shared.v1beta1.ConditionalOption"
 }
-t.CardStyleProp_ConditionalOption = t_10
-typeRegistryModule.default:register(t.CardStyleProp_ConditionalOption)
-local t_11 = {}
-t_11.__index = t_11
+config.CardStyleProp_ConditionalOption = Module9
+TypeRegistryModule.default:register(config.CardStyleProp_ConditionalOption)
+local Module10 = {}
+Module10.__index = Module10
 
-function t_11.new(p11)
-	-- upvalues: t_11 (ref)
-	return setmetatable({
-		options = if p11 == nil or p11.options == nil then {} else p11.options
-	}, t_11)
+function Module10.new(p1) --[[ Line: 2082 ]]
+	-- upvalues: Module10 (copy)
+	return (setmetatable({
+		options = if p1 == nil or p1.options == nil then {} else p1.options
+	}, Module10))
 end
 
-function t_11:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var225 = 0
+function Module10:encode() --[[ Line: 2090 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.options ~= nil and #self.options > 0 then
-		for i, v in self.options do
-			local var226 = v:encode()
-			local var227, var228 = protoModule.writeTag(buff, var225, 1, protoModule.wireTypes.lengthDelimited)
-			var227, var353 = protoModule.writeBuffer(var227, var228, var226, buffer.len(var226))
-			buff = var227
-			var225 = var228
+		for _, option in self.options do
+			local EncodeResult = option:encode()
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
 		end
 	end
-	local buff_1 = buffer.create(var225)
-	buffer.copy(buff_1, 0, buff, 0, var225)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_11.decode(p11)
-	-- upvalues: t_11 (ref), protoModule (ref), t (ref)
-	local var229 = t_11.new()
-	local var230 = 0
-	while var230 < buffer.len(p11) do
-		local _ = nil
-		local var231 = nil
-		local var232, var233, var234 = protoModule.readTag(p11, var230)
-		local var235 = var232
-		var231 = var233
-		var230 = var234
+function Module10.decode(Buf) --[[ Line: 2107 ]]
+	-- upvalues: Module10 (copy), ProtoModule (copy), config (copy)
+	local NewModule = Module10.new()
+	local v11 = 0
+	while v11 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v262 = ProtoModule.readTag(Buf, v11)
 		
-		if var231 == protoModule.wireTypes.varint then
-			local _ = nil
-			local var236, var237 = protoModule.readVarInt(p11, var230)
-			local _ = var236
-			var230 = var237
-			continue
-		end
-		if var231 == protoModule.wireTypes.lengthDelimited then
-			if var235 == 1 then
-				local _ = nil
-				local var238, var239 = protoModule.readBuffer(p11, var230)
-				var230 = var239
-				table.insert(var229.options, t.CardStyleProp_ConditionalOption.decode(var238))
+		if Tag2 == ProtoModule.wireTypes.varint then
+			local _
+			_, v262 = ProtoModule.readVarInt(Buf, v11)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v262 = ProtoModule.readBuffer(Buf, v11)
+				table.insert(NewModule.options, config.CardStyleProp_ConditionalOption.decode(Buffer1))
 			else
-				local _ = nil
-				local var240, var241 = protoModule.readVarInt(p11, var230)
-				var230 = var241 + var240
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v11)
+				v11 = VarInt2 + VarInt
 			end
-		elseif var231 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var242, var243 = protoModule.readFixed32(p11, var230)
-			local _ = var242
-			var230 = var243
-		elseif var231 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var244, var245 = protoModule.readFixed64(p11, var230)
-			local _ = var244
-			var230 = var245
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v262 = ProtoModule.readFixed32(Buf, v11)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v262 = ProtoModule.readFixed64(Buf, v11)
 		else
-			error("Unsupported wire type: " .. var357)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var229
+	return NewModule
 end
 
-function t_11:jsonEncode()
+function Module10:jsonEncode() --[[ Line: 2150 ]]
 	local t = {}
 	
 	if self.options ~= nil and #self.options > 0 then
-		local t_1 = {}
+		local Options = {}
 		
-		for i, v in self.options do
-			table.insert(t_1, v:jsonEncode())
+		for _, option in self.options do
+			table.insert(Options, option:jsonEncode())
 		end
-		t.options = t_1
+		t.options = Options
 	end
 	return t
 end
 
-function t_11:jsonDecode()
-	-- upvalues: t_11 (ref), t (ref)
-	local var246 = t_11.new()
+function Module10:jsonDecode() --[[ Line: 2164 ]]
+	-- upvalues: Module10 (copy), config (copy)
+	local NewModule = Module10.new()
 	
 	if self.options ~= nil then
-		local t_1 = {}
+		local Options = {}
 		
-		for i, v in self.options do
-			table.insert(t_1, t.CardStyleProp_ConditionalOption.jsonDecode(v))
+		for _, option in self.options do
+			table.insert(Options, config.CardStyleProp_ConditionalOption.jsonDecode(option))
 		end
-		var246.options = t_1
+		NewModule.options = Options
 	end
-	return var246
+	return NewModule
 end
 
-t_11.descriptor = {
+Module10.descriptor = {
 	name = "CardStyleProp_ConditionalOptions",
 	fullName = "roblox.apppageplatform.shared.v1beta1.ConditionalOptions"
 }
-t.CardStyleProp_ConditionalOptions = t_11
-typeRegistryModule.default:register(t.CardStyleProp_ConditionalOptions)
-local t_12 = {}
-t_12.__index = t_12
+config.CardStyleProp_ConditionalOptions = Module10
+TypeRegistryModule.default:register(config.CardStyleProp_ConditionalOptions)
+local Module11 = {}
+Module11.__index = Module11
 
-function t_12.new(p12)
-	-- upvalues: t_12 (ref)
-	return setmetatable({
-		id = if p12 == nil or p12.id == nil then nil else p12.id,
-		type = if p12 == nil or p12.type == nil then nil else p12.type
-	}, t_12)
+function Module11.new(p1) --[[ Line: 2195 ]]
+	-- upvalues: Module11 (copy)
+	return (setmetatable({
+		id = if p1 == nil or p1.id == nil then nil else p1.id,
+		type = if p1 == nil or p1.type == nil then nil else p1.type
+	}, Module11))
 end
 
-function t_12:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var247 = 0
+function Module11:encode() --[[ Line: 2202 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.id ~= nil then
-		local var248 = self.id:encode()
-		local var249, var250 = protoModule.writeTag(buff, var247, 1, protoModule.wireTypes.lengthDelimited)
-		var249, var380 = protoModule.writeBuffer(var249, var250, var248, buffer.len(var248))
-		buff = var249
-		var247 = var250
+		local EncodeResult = self.id:encode()
+		local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
 	end
 	if self.type ~= nil then
-		local var251 = self.type:encode()
-		local var252, var253 = protoModule.writeTag(buff, var247, 2, protoModule.wireTypes.lengthDelimited)
-		var252, var383 = protoModule.writeBuffer(var252, var253, var251, buffer.len(var251))
-		buff = var252
-		var247 = var253
+		local EncodeResult = self.type:encode()
+		local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
 	end
-	local buff_1 = buffer.create(var247)
-	buffer.copy(buff_1, 0, buff, 0, var247)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_12.decode(p12)
-	-- upvalues: t_12 (ref), protoModule (ref), propTypesModule (ref)
-	local var247 = t_12.new()
-	local var248 = 0
-	while var248 < buffer.len(p12) do
-		local _ = nil
-		local var249 = nil
-		local var250, var251, var252 = protoModule.readTag(p12, var248)
-		local var253 = var250
-		var249 = var251
-		var248 = var252
+function Module11.decode(Buf) --[[ Line: 2223 ]]
+	-- upvalues: Module11 (copy), ProtoModule (copy), PropTypesModule (copy)
+	local NewModule = Module11.new()
+	local v12 = 0
+	while v12 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v284 = ProtoModule.readTag(Buf, v12)
 		
-		if var249 == protoModule.wireTypes.varint then
-			local _ = nil
-			local var254, var255 = protoModule.readVarInt(p12, var248)
-			local _ = var254
-			var248 = var255
-			continue
-		end
-		if var249 == protoModule.wireTypes.lengthDelimited then
-			if var253 == 1 then
-				local _ = nil
-				local var256, var257 = protoModule.readBuffer(p12, var248)
-				var248 = var257
-				var247.id = propTypesModule.StringProp.decode(var256)
-			elseif var253 == 2 then
-				local _ = nil
-				local var258, var259 = protoModule.readBuffer(p12, var248)
-				var248 = var259
-				var247.type = propTypesModule.StringProp.decode(var258)
+		if Tag2 == ProtoModule.wireTypes.varint then
+			local _
+			_, v284 = ProtoModule.readVarInt(Buf, v12)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v284 = ProtoModule.readBuffer(Buf, v12)
+				NewModule.id = PropTypesModule.StringProp.decode(Buffer1)
+			elseif Tag == 2 then
+				local Buffer2
+				Buffer2, v284 = ProtoModule.readBuffer(Buf, v12)
+				NewModule.type = PropTypesModule.StringProp.decode(Buffer2)
 			else
-				local _ = nil
-				local var260, var261 = protoModule.readVarInt(p12, var248)
-				var248 = var261 + var260
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v12)
+				v12 = VarInt2 + VarInt
 			end
-		elseif var249 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var262, var263 = protoModule.readFixed32(p12, var248)
-			local _ = var262
-			var248 = var263
-		elseif var249 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var264, var265 = protoModule.readFixed64(p12, var248)
-			local _ = var264
-			var248 = var265
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v284 = ProtoModule.readFixed32(Buf, v12)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v284 = ProtoModule.readFixed64(Buf, v12)
 		else
-			error("Unsupported wire type: " .. var387)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var247
+	return NewModule
 end
 
-function t_12:jsonEncode()
+function Module11:jsonEncode() --[[ Line: 2271 ]]
 	local t = {}
 	
 	if self.id ~= nil then
@@ -1601,144 +1379,119 @@ function t_12:jsonEncode()
 	return t
 end
 
-function t_12:jsonDecode()
-	-- upvalues: t_12 (ref), propTypesModule (ref)
-	local var266 = t_12.new()
+function Module11:jsonDecode() --[[ Line: 2285 ]]
+	-- upvalues: Module11 (copy), PropTypesModule (copy)
+	local NewModule = Module11.new()
 	
 	if self.id ~= nil then
-		var266.id = propTypesModule.StringProp.jsonDecode(self.id)
+		NewModule.id = PropTypesModule.StringProp.jsonDecode(self.id)
 	end
 	if self.type ~= nil then
-		var266.type = propTypesModule.StringProp.jsonDecode(self.type)
+		NewModule.type = PropTypesModule.StringProp.jsonDecode(self.type)
 	end
-	return var266
+	return NewModule
 end
 
-t_12.descriptor = {
+Module11.descriptor = {
 	name = "CatalogSortContent",
 	fullName = "roblox.apppageplatform.shared.v1beta1.CatalogSortContent"
 }
-t.CatalogSortContent = t_12
-typeRegistryModule.default:register(t.CatalogSortContent)
-local t_13 = {}
-t_13.__index = t_13
+config.CatalogSortContent = Module11
+TypeRegistryModule.default:register(config.CatalogSortContent)
+local Module12 = {}
+Module12.__index = Module12
 
-function t_13.new(p13)
-	-- upvalues: t_13 (ref)
-	return setmetatable({
-		kind = if p13 == nil or p13.kind == nil then nil else p13.kind
-	}, t_13)
+function Module12.new(p1) --[[ Line: 2313 ]]
+	-- upvalues: Module12 (copy)
+	return (setmetatable({
+		kind = if p1 == nil or p1.kind == nil then nil else p1.kind
+	}, Module12))
 end
 
-function t_13:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var266 = 0
+function Module12:encode() --[[ Line: 2321 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.kind ~= nil then
 		if self.kind.type == "literal" then
-			local var267 = self.kind.value:encode()
-			local var268, var269 = protoModule.writeTag(buff, var266, 1, protoModule.wireTypes.lengthDelimited)
-			var268, var410 = protoModule.writeBuffer(var268, var269, var267, buffer.len(var267))
-			buff = var268
-			var266 = var269
+			local EncodeResult = self.kind.value:encode()
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
 		elseif self.kind.type == "binding_path" then
-			local var270, var271 = protoModule.writeTag(buff, var266, 2, protoModule.wireTypes.lengthDelimited)
-			var270, var412 = protoModule.writeString(var270, var271, self.kind.value)
-			buff = var270
-			var266 = var271
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult1, WriteTagResult2_1, self.kind.value)
 		elseif self.kind.type == "conditional" then
-			local var272 = self.kind.value:encode()
-			local var273, var274 = protoModule.writeTag(buff, var266, 3, protoModule.wireTypes.lengthDelimited)
-			var273, var415 = protoModule.writeBuffer(var273, var274, var272, buffer.len(var272))
-			buff = var273
-			var266 = var274
+			local EncodeResult = self.kind.value:encode()
+			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult3, WriteTagResult2_2, EncodeResult, buffer.len(EncodeResult))
 		elseif self.kind.type == "array_map" then
-			local var275 = self.kind.value:encode()
-			local var276, var277 = protoModule.writeTag(buff, var266, 4, protoModule.wireTypes.lengthDelimited)
-			var276, var418 = protoModule.writeBuffer(var276, var277, var275, buffer.len(var275))
-			buff = var276
-			var266 = var277
+			local EncodeResult = self.kind.value:encode()
+			local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult4, WriteTagResult2_3, EncodeResult, buffer.len(EncodeResult))
 		end
 	end
-	local buff_1 = buffer.create(var266)
-	buffer.copy(buff_1, 0, buff, 0, var266)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_13.decode(p13)
-	-- upvalues: t_13 (ref), protoModule (ref), t (ref)
-	local var266 = t_13.new()
-	local var267 = 0
-	while var267 < buffer.len(p13) do
-		local _ = nil
-		local var268 = nil
-		local var269, var270, var271 = protoModule.readTag(p13, var267)
-		local var272 = var269
-		var268 = var270
-		var267 = var271
+function Module12.decode(Buf) --[[ Line: 2349 ]]
+	-- upvalues: Module12 (copy), ProtoModule (copy), config (copy)
+	local NewModule = Module12.new()
+	local v13 = 0
+	while v13 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v310 = ProtoModule.readTag(Buf, v13)
 		
-		if var268 == protoModule.wireTypes.varint then
-			local _ = nil
-			local var273, var274 = protoModule.readVarInt(p13, var267)
-			local _ = var273
-			var267 = var274
-			continue
-		end
-		if var268 == protoModule.wireTypes.lengthDelimited then
-			if var272 == 1 then
-				local _ = nil
-				local var275, var276 = protoModule.readBuffer(p13, var267)
-				var267 = var276
-				var266.kind = {
+		if Tag2 == ProtoModule.wireTypes.varint then
+			local _
+			_, v310 = ProtoModule.readVarInt(Buf, v13)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v310 = ProtoModule.readBuffer(Buf, v13)
+				NewModule.kind = {
 					type = "literal",
-					value = t.ArrayOfCatalogSortContentProp_ArrayOfCatalogSortContent.decode(var275)
+					value = config.ArrayOfCatalogSortContentProp_ArrayOfCatalogSortContent.decode(Buffer1)
 				}
-			elseif var272 == 2 then
-				local _ = nil
-				local var277, var278 = protoModule.readBuffer(p13, var267)
-				var267 = var278
-				var266.kind = { type = "binding_path", value = buffer.tostring(var277) }
-			elseif var272 == 3 then
-				local _ = nil
-				local var279, var280 = protoModule.readBuffer(p13, var267)
-				var267 = var280
-				var266.kind = {
+			elseif Tag == 2 then
+				local Buffer2
+				Buffer2, v310 = ProtoModule.readBuffer(Buf, v13)
+				NewModule.kind = { type = "binding_path", value = buffer.tostring(Buffer2) }
+			elseif Tag == 3 then
+				local Buffer3
+				Buffer3, v310 = ProtoModule.readBuffer(Buf, v13)
+				NewModule.kind = {
 					type = "conditional",
-					value = t.ArrayOfCatalogSortContentProp_ConditionalOptions.decode(var279)
+					value = config.ArrayOfCatalogSortContentProp_ConditionalOptions.decode(Buffer3)
 				}
-			elseif var272 == 4 then
-				local _ = nil
-				local var281, var282 = protoModule.readBuffer(p13, var267)
-				var267 = var282
-				var266.kind = {
+			elseif Tag == 4 then
+				local Buffer4
+				Buffer4, v310 = ProtoModule.readBuffer(Buf, v13)
+				NewModule.kind = {
 					type = "array_map",
-					value = t.ArrayOfCatalogSortContentProp_ArrayMap.decode(var281)
+					value = config.ArrayOfCatalogSortContentProp_ArrayMap.decode(Buffer4)
 				}
 			else
-				local _ = nil
-				local var283, var284 = protoModule.readVarInt(p13, var267)
-				var267 = var284 + var283
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v13)
+				v13 = VarInt2 + VarInt
 			end
-		elseif var268 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var285, var286 = protoModule.readFixed32(p13, var267)
-			local _ = var285
-			var267 = var286
-		elseif var268 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var287, var288 = protoModule.readFixed64(p13, var267)
-			local _ = var287
-			var267 = var288
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v310 = ProtoModule.readFixed32(Buf, v13)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v310 = ProtoModule.readFixed64(Buf, v13)
 		else
-			error("Unsupported wire type: " .. var422)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var266
+	return NewModule
 end
 
-function t_13:jsonEncode()
+function Module12:jsonEncode() --[[ Line: 2414 ]]
 	local t = {}
 	
 	if self.kind ~= nil then
@@ -1746,168 +1499,149 @@ function t_13:jsonEncode()
 			t.literal = self.kind.value:jsonEncode()
 			
 			return t
-		elseif self.kind.type == "binding_path" then
+		end
+		if self.kind.type == "binding_path" then
 			t.bindingPath = self.kind.value
 			
 			return t
-		elseif self.kind.type == "conditional" then
+		end
+		if self.kind.type == "conditional" then
 			t.conditional = self.kind.value:jsonEncode()
 			
 			return t
-		elseif self.kind.type == "array_map" then
+		end
+		if self.kind.type == "array_map" then
 			t.arrayMap = self.kind.value:jsonEncode()
 		end
 	end
 	return t
 end
 
-function t_13:jsonDecode()
-	-- upvalues: t_13 (ref), t (ref)
-	local var289 = t_13.new()
+function Module12:jsonDecode() --[[ Line: 2432 ]]
+	-- upvalues: Module12 (copy), config (copy)
+	local NewModule = Module12.new()
 	
 	if self.literal ~= nil then
-		var289.kind = {
+		NewModule.kind = {
 			type = "literal",
-			value = t.ArrayOfCatalogSortContentProp_ArrayOfCatalogSortContent.jsonDecode(self.literal)
+			value = config.ArrayOfCatalogSortContentProp_ArrayOfCatalogSortContent.jsonDecode(self.literal)
 		}
 	end
 	if self.binding_path ~= nil then
-		var289.kind = { type = "binding_path", value = self.binding_path }
+		NewModule.kind = { type = "binding_path", value = self.binding_path }
 	end
 	if self.bindingPath ~= nil then
-		var289.kind = { type = "binding_path", value = self.bindingPath }
+		NewModule.kind = { type = "binding_path", value = self.bindingPath }
 	end
 	if self.conditional ~= nil then
-		var289.kind = {
+		NewModule.kind = {
 			type = "conditional",
-			value = t.ArrayOfCatalogSortContentProp_ConditionalOptions.jsonDecode(self.conditional)
+			value = config.ArrayOfCatalogSortContentProp_ConditionalOptions.jsonDecode(self.conditional)
 		}
 	end
 	if self.array_map ~= nil then
-		var289.kind = {
+		NewModule.kind = {
 			type = "array_map",
-			value = t.ArrayOfCatalogSortContentProp_ArrayMap.jsonDecode(self.array_map)
+			value = config.ArrayOfCatalogSortContentProp_ArrayMap.jsonDecode(self.array_map)
 		}
 	end
 	if self.arrayMap ~= nil then
-		var289.kind = {
+		NewModule.kind = {
 			type = "array_map",
-			value = t.ArrayOfCatalogSortContentProp_ArrayMap.jsonDecode(self.arrayMap)
+			value = config.ArrayOfCatalogSortContentProp_ArrayMap.jsonDecode(self.arrayMap)
 		}
 	end
-	return var289
+	return NewModule
 end
 
-t_13.descriptor = {
+Module12.descriptor = {
 	name = "ArrayOfCatalogSortContentProp",
 	fullName = "roblox.apppageplatform.shared.v1beta1.ArrayOfCatalogSortContentProp"
 }
-t.ArrayOfCatalogSortContentProp = t_13
-typeRegistryModule.default:register(t.ArrayOfCatalogSortContentProp)
-local t_14 = {}
-t_14.__index = t_14
+config.ArrayOfCatalogSortContentProp = Module12
+TypeRegistryModule.default:register(config.ArrayOfCatalogSortContentProp)
+local Module13 = {}
+Module13.__index = Module13
 
-function t_14.new(p14)
-	-- upvalues: t_14 (ref)
-	return setmetatable({
-		condition = if p14 == nil or p14.condition == nil then nil else p14.condition,
-		kind = if p14 == nil or p14.kind == nil then nil else p14.kind
-	}, t_14)
+function Module13.new(p1) --[[ Line: 2488 ]]
+	-- upvalues: Module13 (copy)
+	return (setmetatable({
+		condition = if p1 == nil or p1.condition == nil then nil else p1.condition,
+		kind = if p1 == nil or p1.kind == nil then nil else p1.kind
+	}, Module13))
 end
 
-function t_14:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var289 = 0
+function Module13:encode() --[[ Line: 2497 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.condition ~= nil then
-		local var290 = self.condition:encode()
-		local var291, var292 = protoModule.writeTag(buff, var289, 1, protoModule.wireTypes.lengthDelimited)
-		var291, var449 = protoModule.writeBuffer(var291, var292, var290, buffer.len(var290))
-		buff = var291
-		var289 = var292
+		local EncodeResult = self.condition:encode()
+		local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
 	end
 	if self.kind ~= nil then
 		if self.kind.type == "literal" then
-			local var293 = self.kind.value:encode()
-			local var294, var295 = protoModule.writeTag(buff, var289, 2, protoModule.wireTypes.lengthDelimited)
-			var294, var452 = protoModule.writeBuffer(var294, var295, var293, buffer.len(var293))
-			buff = var294
-			var289 = var295
+			local EncodeResult = self.kind.value:encode()
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
 		elseif self.kind.type == "binding_path" then
-			local var296, var297 = protoModule.writeTag(buff, var289, 3, protoModule.wireTypes.lengthDelimited)
-			var296, var454 = protoModule.writeString(var296, var297, self.kind.value)
-			buff = var296
-			var289 = var297
+			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult3, WriteTagResult2_2, self.kind.value)
 		end
 	end
-	local buff_1 = buffer.create(var289)
-	buffer.copy(buff_1, 0, buff, 0, var289)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_14.decode(p14)
-	-- upvalues: t_14 (ref), protoModule (ref), propConditionModule (ref), t (ref)
-	local var289 = t_14.new()
-	local var290 = 0
-	while var290 < buffer.len(p14) do
-		local _ = nil
-		local var291 = nil
-		local var292, var293, var294 = protoModule.readTag(p14, var290)
-		local var295 = var292
-		var291 = var293
-		var290 = var294
+function Module13.decode(Buf) --[[ Line: 2525 ]]
+	-- upvalues: Module13 (copy), ProtoModule (copy), PropConditionModule (copy), config (copy)
+	local NewModule = Module13.new()
+	local v14 = 0
+	while v14 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v335 = ProtoModule.readTag(Buf, v14)
 		
-		if var291 == protoModule.wireTypes.varint then
-			local _ = nil
-			local var296, var297 = protoModule.readVarInt(p14, var290)
-			local _ = var296
-			var290 = var297
-			continue
-		end
-		if var291 == protoModule.wireTypes.lengthDelimited then
-			if var295 == 1 then
-				local _ = nil
-				local var298, var299 = protoModule.readBuffer(p14, var290)
-				var290 = var299
-				var289.condition = propConditionModule.PropCondition.decode(var298)
-			elseif var295 == 2 then
-				local _ = nil
-				local var300, var301 = protoModule.readBuffer(p14, var290)
-				var290 = var301
-				var289.kind = {
+		if Tag2 == ProtoModule.wireTypes.varint then
+			local _
+			_, v335 = ProtoModule.readVarInt(Buf, v14)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v335 = ProtoModule.readBuffer(Buf, v14)
+				NewModule.condition = PropConditionModule.PropCondition.decode(Buffer1)
+			elseif Tag == 2 then
+				local Buffer2
+				Buffer2, v335 = ProtoModule.readBuffer(Buf, v14)
+				NewModule.kind = {
 					type = "literal",
-					value = t.ArrayOfCatalogSortContentProp_ArrayOfCatalogSortContent.decode(var300)
+					value = config.ArrayOfCatalogSortContentProp_ArrayOfCatalogSortContent.decode(Buffer2)
 				}
-			elseif var295 == 3 then
-				local _ = nil
-				local var302, var303 = protoModule.readBuffer(p14, var290)
-				var290 = var303
-				var289.kind = { type = "binding_path", value = buffer.tostring(var302) }
+			elseif Tag == 3 then
+				local Buffer3
+				Buffer3, v335 = ProtoModule.readBuffer(Buf, v14)
+				NewModule.kind = { type = "binding_path", value = buffer.tostring(Buffer3) }
 			else
-				local _ = nil
-				local var304, var305 = protoModule.readVarInt(p14, var290)
-				var290 = var305 + var304
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v14)
+				v14 = VarInt2 + VarInt
 			end
-		elseif var291 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var306, var307 = protoModule.readFixed32(p14, var290)
-			local _ = var306
-			var290 = var307
-		elseif var291 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var308, var309 = protoModule.readFixed64(p14, var290)
-			local _ = var308
-			var290 = var309
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v335 = ProtoModule.readFixed32(Buf, v14)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v335 = ProtoModule.readFixed64(Buf, v14)
 		else
-			error("Unsupported wire type: " .. var458)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var289
+	return NewModule
 end
 
-function t_14:jsonEncode()
+function Module13:jsonEncode() --[[ Line: 2583 ]]
 	local t = {}
 	
 	if self.condition ~= nil then
@@ -1918,384 +1652,328 @@ function t_14:jsonEncode()
 			t.literal = self.kind.value:jsonEncode()
 			
 			return t
-		elseif self.kind.type == "binding_path" then
+		end
+		if self.kind.type == "binding_path" then
 			t.bindingPath = self.kind.value
 		end
 	end
 	return t
 end
 
-function t_14:jsonDecode()
-	-- upvalues: t_14 (ref), propConditionModule (ref), t (ref)
-	local var310 = t_14.new()
+function Module13:jsonDecode() --[[ Line: 2603 ]]
+	-- upvalues: Module13 (copy), PropConditionModule (copy), config (copy)
+	local NewModule = Module13.new()
 	
 	if self.condition ~= nil then
-		var310.condition = propConditionModule.PropCondition.jsonDecode(self.condition)
+		NewModule.condition = PropConditionModule.PropCondition.jsonDecode(self.condition)
 	end
 	if self.literal ~= nil then
-		var310.kind = {
+		NewModule.kind = {
 			type = "literal",
-			value = t.ArrayOfCatalogSortContentProp_ArrayOfCatalogSortContent.jsonDecode(self.literal)
+			value = config.ArrayOfCatalogSortContentProp_ArrayOfCatalogSortContent.jsonDecode(self.literal)
 		}
 	end
 	if self.binding_path ~= nil then
-		var310.kind = { type = "binding_path", value = self.binding_path }
+		NewModule.kind = { type = "binding_path", value = self.binding_path }
 	end
 	if self.bindingPath ~= nil then
-		var310.kind = { type = "binding_path", value = self.bindingPath }
+		NewModule.kind = { type = "binding_path", value = self.bindingPath }
 	end
-	return var310
+	return NewModule
 end
 
-t_14.descriptor = {
+Module13.descriptor = {
 	name = "ArrayOfCatalogSortContentProp_ConditionalOption",
 	fullName = "roblox.apppageplatform.shared.v1beta1.ConditionalOption"
 }
-t.ArrayOfCatalogSortContentProp_ConditionalOption = t_14
-typeRegistryModule.default:register(t.ArrayOfCatalogSortContentProp_ConditionalOption)
-local t_15 = {}
-t_15.__index = t_15
+config.ArrayOfCatalogSortContentProp_ConditionalOption = Module13
+TypeRegistryModule.default:register(config.ArrayOfCatalogSortContentProp_ConditionalOption)
+local Module14 = {}
+Module14.__index = Module14
 
-function t_15.new(p15)
-	-- upvalues: t_15 (ref)
-	return setmetatable({
-		options = if p15 == nil or p15.options == nil then {} else p15.options
-	}, t_15)
+function Module14.new(p1) --[[ Line: 2647 ]]
+	-- upvalues: Module14 (copy)
+	return (setmetatable({
+		options = if p1 == nil or p1.options == nil then {} else p1.options
+	}, Module14))
 end
 
-function t_15:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var310 = 0
+function Module14:encode() --[[ Line: 2658 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.options ~= nil and #self.options > 0 then
-		for i, v in self.options do
-			local var311 = v:encode()
-			local var312, var313 = protoModule.writeTag(buff, var310, 1, protoModule.wireTypes.lengthDelimited)
-			var312, var483 = protoModule.writeBuffer(var312, var313, var311, buffer.len(var311))
-			buff = var312
-			var310 = var313
+		for _, option in self.options do
+			local EncodeResult = option:encode()
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
 		end
 	end
-	local buff_1 = buffer.create(var310)
-	buffer.copy(buff_1, 0, buff, 0, var310)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_15.decode(p15)
-	-- upvalues: t_15 (ref), protoModule (ref), t (ref)
-	local var314 = t_15.new()
-	local var315 = 0
-	while var315 < buffer.len(p15) do
-		local _ = nil
-		local var316 = nil
-		local var317, var318, var319 = protoModule.readTag(p15, var315)
-		local var320 = var317
-		var316 = var318
-		var315 = var319
+function Module14.decode(Buf) --[[ Line: 2677 ]]
+	-- upvalues: Module14 (copy), ProtoModule (copy), config (copy)
+	local NewModule = Module14.new()
+	local v15 = 0
+	while v15 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v354 = ProtoModule.readTag(Buf, v15)
 		
-		if var316 == protoModule.wireTypes.varint then
-			local _ = nil
-			local var321, var322 = protoModule.readVarInt(p15, var315)
-			local _ = var321
-			var315 = var322
-			continue
-		end
-		if var316 == protoModule.wireTypes.lengthDelimited then
-			if var320 == 1 then
-				local _ = nil
-				local var323, var324 = protoModule.readBuffer(p15, var315)
-				var315 = var324
-				table.insert(var314.options, t.ArrayOfCatalogSortContentProp_ConditionalOption.decode(var323))
+		if Tag2 == ProtoModule.wireTypes.varint then
+			local _
+			_, v354 = ProtoModule.readVarInt(Buf, v15)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v354 = ProtoModule.readBuffer(Buf, v15)
+				table.insert(NewModule.options, config.ArrayOfCatalogSortContentProp_ConditionalOption.decode(Buffer1))
 			else
-				local _ = nil
-				local var325, var326 = protoModule.readVarInt(p15, var315)
-				var315 = var326 + var325
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v15)
+				v15 = VarInt2 + VarInt
 			end
-		elseif var316 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var327, var328 = protoModule.readFixed32(p15, var315)
-			local _ = var327
-			var315 = var328
-		elseif var316 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var329, var330 = protoModule.readFixed64(p15, var315)
-			local _ = var329
-			var315 = var330
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v354 = ProtoModule.readFixed32(Buf, v15)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v354 = ProtoModule.readFixed64(Buf, v15)
 		else
-			error("Unsupported wire type: " .. var487)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var314
+	return NewModule
 end
 
-function t_15:jsonEncode()
+function Module14:jsonEncode() --[[ Line: 2722 ]]
 	local t = {}
 	
 	if self.options ~= nil and #self.options > 0 then
-		local t_1 = {}
+		local Options = {}
 		
-		for i, v in self.options do
-			table.insert(t_1, v:jsonEncode())
+		for _, option in self.options do
+			table.insert(Options, option:jsonEncode())
 		end
-		t.options = t_1
+		t.options = Options
 	end
 	return t
 end
 
-function t_15:jsonDecode()
-	-- upvalues: t_15 (ref), t (ref)
-	local var331 = t_15.new()
+function Module14:jsonDecode() --[[ Line: 2738 ]]
+	-- upvalues: Module14 (copy), config (copy)
+	local NewModule = Module14.new()
 	
 	if self.options ~= nil then
-		local t_1 = {}
+		local Options = {}
 		
-		for i, v in self.options do
-			table.insert(t_1, t.ArrayOfCatalogSortContentProp_ConditionalOption.jsonDecode(v))
+		for _, option in self.options do
+			table.insert(Options, config.ArrayOfCatalogSortContentProp_ConditionalOption.jsonDecode(option))
 		end
-		var331.options = t_1
+		NewModule.options = Options
 	end
-	return var331
+	return NewModule
 end
 
-t_15.descriptor = {
+Module14.descriptor = {
 	name = "ArrayOfCatalogSortContentProp_ConditionalOptions",
 	fullName = "roblox.apppageplatform.shared.v1beta1.ConditionalOptions"
 }
-t.ArrayOfCatalogSortContentProp_ConditionalOptions = t_15
-typeRegistryModule.default:register(t.ArrayOfCatalogSortContentProp_ConditionalOptions)
-local t_16 = {}
-t_16.__index = t_16
+config.ArrayOfCatalogSortContentProp_ConditionalOptions = Module14
+TypeRegistryModule.default:register(config.ArrayOfCatalogSortContentProp_ConditionalOptions)
+local Module15 = {}
+Module15.__index = Module15
 
-function t_16.new(p16)
-	-- upvalues: t_16 (ref)
-	return setmetatable({
-		array = if p16 == nil or p16.array == nil then {} else p16.array
-	}, t_16)
+function Module15.new(p1) --[[ Line: 2771 ]]
+	-- upvalues: Module15 (copy)
+	return (setmetatable({
+		array = if p1 == nil or p1.array == nil then {} else p1.array
+	}, Module15))
 end
 
-function t_16:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var332 = 0
+function Module15:encode() --[[ Line: 2782 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.array ~= nil and #self.array > 0 then
-		for i, v in self.array do
-			local var333 = v:encode()
-			local var334, var335 = protoModule.writeTag(buff, var332, 1, protoModule.wireTypes.lengthDelimited)
-			var334, var510 = protoModule.writeBuffer(var334, var335, var333, buffer.len(var333))
-			buff = var334
-			var332 = var335
+		for _, value in self.array do
+			local EncodeResult = value:encode()
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
 		end
 	end
-	local buff_1 = buffer.create(var332)
-	buffer.copy(buff_1, 0, buff, 0, var332)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_16.decode(p16)
-	-- upvalues: t_16 (ref), protoModule (ref), t (ref)
-	local var336 = t_16.new()
-	local var337 = 0
-	while var337 < buffer.len(p16) do
-		local _ = nil
-		local var338 = nil
-		local var339, var340, var341 = protoModule.readTag(p16, var337)
-		local var342 = var339
-		var338 = var340
-		var337 = var341
+function Module15.decode(Buf) --[[ Line: 2801 ]]
+	-- upvalues: Module15 (copy), ProtoModule (copy), config (copy)
+	local NewModule = Module15.new()
+	local v16 = 0
+	while v16 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v373 = ProtoModule.readTag(Buf, v16)
 		
-		if var338 == protoModule.wireTypes.varint then
-			local _ = nil
-			local var343, var344 = protoModule.readVarInt(p16, var337)
-			local _ = var343
-			var337 = var344
-			continue
-		end
-		if var338 == protoModule.wireTypes.lengthDelimited then
-			if var342 == 1 then
-				local _ = nil
-				local var345, var346 = protoModule.readBuffer(p16, var337)
-				var337 = var346
-				table.insert(var336.array, t.CatalogSortContent.decode(var345))
+		if Tag2 == ProtoModule.wireTypes.varint then
+			local _
+			_, v373 = ProtoModule.readVarInt(Buf, v16)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v373 = ProtoModule.readBuffer(Buf, v16)
+				table.insert(NewModule.array, config.CatalogSortContent.decode(Buffer1))
 			else
-				local _ = nil
-				local var347, var348 = protoModule.readVarInt(p16, var337)
-				var337 = var348 + var347
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v16)
+				v16 = VarInt2 + VarInt
 			end
-		elseif var338 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var349, var350 = protoModule.readFixed32(p16, var337)
-			local _ = var349
-			var337 = var350
-		elseif var338 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var351, var352 = protoModule.readFixed64(p16, var337)
-			local _ = var351
-			var337 = var352
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v373 = ProtoModule.readFixed32(Buf, v16)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v373 = ProtoModule.readFixed64(Buf, v16)
 		else
-			error("Unsupported wire type: " .. var514)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var336
+	return NewModule
 end
 
-function t_16:jsonEncode()
+function Module15:jsonEncode() --[[ Line: 2846 ]]
 	local t = {}
 	
 	if self.array ~= nil and #self.array > 0 then
-		local t_1 = {}
+		local Array = {}
 		
-		for i, v in self.array do
-			table.insert(t_1, v:jsonEncode())
+		for _, value in self.array do
+			table.insert(Array, value:jsonEncode())
 		end
-		t.array = t_1
+		t.array = Array
 	end
 	return t
 end
 
-function t_16:jsonDecode()
-	-- upvalues: t_16 (ref), t (ref)
-	local var353 = t_16.new()
+function Module15:jsonDecode() --[[ Line: 2862 ]]
+	-- upvalues: Module15 (copy), config (copy)
+	local NewModule = Module15.new()
 	
 	if self.array ~= nil then
-		local t_1 = {}
+		local Array = {}
 		
-		for i, v in self.array do
-			table.insert(t_1, t.CatalogSortContent.jsonDecode(v))
+		for _, value in self.array do
+			table.insert(Array, config.CatalogSortContent.jsonDecode(value))
 		end
-		var353.array = t_1
+		NewModule.array = Array
 	end
-	return var353
+	return NewModule
 end
 
-t_16.descriptor = {
+Module15.descriptor = {
 	name = "ArrayOfCatalogSortContentProp_ArrayOfCatalogSortContent",
 	fullName = "roblox.apppageplatform.shared.v1beta1.ArrayOfCatalogSortContent"
 }
-t.ArrayOfCatalogSortContentProp_ArrayOfCatalogSortContent = t_16
-typeRegistryModule.default:register(t.ArrayOfCatalogSortContentProp_ArrayOfCatalogSortContent)
-local t_17 = {}
-t_17.__index = t_17
+config.ArrayOfCatalogSortContentProp_ArrayOfCatalogSortContent = Module15
+TypeRegistryModule.default:register(config.ArrayOfCatalogSortContentProp_ArrayOfCatalogSortContent)
+local Module16 = {}
+Module16.__index = Module16
 
-function t_17.new(p17)
-	-- upvalues: t_17 (ref)
-	return setmetatable({
-		kind = if p17 == nil or p17.kind == nil then nil else p17.kind,
-		item_hydration_specs = if p17 == nil or p17.item_hydration_specs == nil then {} else p17.item_hydration_specs,
-		field_map = if p17 == nil or p17.field_map == nil then nil else p17.field_map
-	}, t_17)
+function Module16.new(p1) --[[ Line: 2894 ]]
+	-- upvalues: Module16 (copy)
+	return (setmetatable({
+		kind = if p1 == nil or p1.kind == nil then nil else p1.kind,
+		item_hydration_specs = if p1 == nil or p1.item_hydration_specs == nil then {} else p1.item_hydration_specs,
+		field_map = if p1 == nil or p1.field_map == nil then nil else p1.field_map
+	}, Module16))
 end
 
-function t_17:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var354 = 0
+function Module16:encode() --[[ Line: 2906 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.kind ~= nil then
 		if self.kind.type == "binding_path" then
-			local var355, var356 = protoModule.writeTag(buff, var354, 1, protoModule.wireTypes.lengthDelimited)
-			var355, var536 = protoModule.writeString(var355, var356, self.kind.value)
-			buff = var355
-			var354 = var356
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult, WriteTagResult2, self.kind.value)
 		elseif self.kind.type == "literal" then
-			local var357 = self.kind.value:encode()
-			local var358, var359 = protoModule.writeTag(buff, var354, 2, protoModule.wireTypes.lengthDelimited)
-			var358, var539 = protoModule.writeBuffer(var358, var359, var357, buffer.len(var357))
-			buff = var358
-			var354 = var359
+			local EncodeResult = self.kind.value:encode()
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
 		end
 	end
 	if self.item_hydration_specs ~= nil and #self.item_hydration_specs > 0 then
-		for i, v in self.item_hydration_specs do
-			local var360 = v:encode()
-			local var361, var362 = protoModule.writeTag(buff, var354, 3, protoModule.wireTypes.lengthDelimited)
-			var361, var542 = protoModule.writeBuffer(var361, var362, var360, buffer.len(var360))
-			buff = var361
-			var354 = var362
+		for _, itemHydrationSpec in self.item_hydration_specs do
+			local EncodeResult = itemHydrationSpec:encode()
+			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult3, WriteTagResult2_2, EncodeResult, buffer.len(EncodeResult))
 		end
 	end
 	if self.field_map ~= nil then
-		local var363 = self.field_map:encode()
-		local var364, var365 = protoModule.writeTag(buff, var354, 4, protoModule.wireTypes.lengthDelimited)
-		var364, var545 = protoModule.writeBuffer(var364, var365, var363, buffer.len(var363))
-		buff = var364
-		var354 = var365
+		local EncodeResult = self.field_map:encode()
+		local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeBuffer(WriteTagResult4, WriteTagResult2_3, EncodeResult, buffer.len(EncodeResult))
 	end
-	local buff_1 = buffer.create(var354)
-	buffer.copy(buff_1, 0, buff, 0, var354)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_17.decode(p17)
-	-- upvalues: t_17 (ref), protoModule (ref), t (ref), hydrationDataSpecModule (ref)
-	local var366 = t_17.new()
-	local var367 = 0
-	while var367 < buffer.len(p17) do
-		local _ = nil
-		local var368 = nil
-		local var369, var370, var371 = protoModule.readTag(p17, var367)
-		local var372 = var369
-		var368 = var370
-		var367 = var371
+function Module16.decode(Buf) --[[ Line: 2940 ]]
+	-- upvalues: Module16 (copy), ProtoModule (copy), config (copy), HydrationDataSpecModule (copy)
+	local NewModule = Module16.new()
+	local v17 = 0
+	while v17 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v400 = ProtoModule.readTag(Buf, v17)
 		
-		if var368 == protoModule.wireTypes.varint then
-			local _ = nil
-			local var373, var374 = protoModule.readVarInt(p17, var367)
-			local _ = var373
-			var367 = var374
-			continue
-		end
-		if var368 == protoModule.wireTypes.lengthDelimited then
-			if var372 == 1 then
-				local _ = nil
-				local var375, var376 = protoModule.readBuffer(p17, var367)
-				var367 = var376
-				var366.kind = { type = "binding_path", value = buffer.tostring(var375) }
-			elseif var372 == 2 then
-				local _ = nil
-				local var377, var378 = protoModule.readBuffer(p17, var367)
-				var367 = var378
-				var366.kind = {
+		if Tag2 == ProtoModule.wireTypes.varint then
+			local _
+			_, v400 = ProtoModule.readVarInt(Buf, v17)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v400 = ProtoModule.readBuffer(Buf, v17)
+				NewModule.kind = { type = "binding_path", value = buffer.tostring(Buffer1) }
+			elseif Tag == 2 then
+				local Buffer2
+				Buffer2, v400 = ProtoModule.readBuffer(Buf, v17)
+				NewModule.kind = {
 					type = "literal",
-					value = t.ArrayOfCatalogSortContentProp_ArrayMap_LiteralItems.decode(var377)
+					value = config.ArrayOfCatalogSortContentProp_ArrayMap_LiteralItems.decode(Buffer2)
 				}
-			elseif var372 == 3 then
-				local _ = nil
-				local var379, var380 = protoModule.readBuffer(p17, var367)
-				var367 = var380
-				table.insert(var366.item_hydration_specs, hydrationDataSpecModule.HydrationDataSpec.decode(var379))
-			elseif var372 == 4 then
-				local _ = nil
-				local var381, var382 = protoModule.readBuffer(p17, var367)
-				var367 = var382
-				var366.field_map = t.CatalogSortContent.decode(var381)
+			elseif Tag == 3 then
+				local Buffer3
+				Buffer3, v400 = ProtoModule.readBuffer(Buf, v17)
+				table.insert(NewModule.item_hydration_specs, HydrationDataSpecModule.HydrationDataSpec.decode(Buffer3))
+			elseif Tag == 4 then
+				local Buffer4
+				Buffer4, v400 = ProtoModule.readBuffer(Buf, v17)
+				NewModule.field_map = config.CatalogSortContent.decode(Buffer4)
 			else
-				local _ = nil
-				local var383, var384 = protoModule.readVarInt(p17, var367)
-				var367 = var384 + var383
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v17)
+				v17 = VarInt2 + VarInt
 			end
-		elseif var368 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var385, var386 = protoModule.readFixed32(p17, var367)
-			local _ = var385
-			var367 = var386
-		elseif var368 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var387, var388 = protoModule.readFixed64(p17, var367)
-			local _ = var387
-			var367 = var388
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v400 = ProtoModule.readFixed32(Buf, v17)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v400 = ProtoModule.readFixed64(Buf, v17)
 		else
-			error("Unsupported wire type: " .. var549)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var366
+	return NewModule
 end
 
-function t_17:jsonEncode()
+function Module16:jsonEncode() --[[ Line: 3004 ]]
 	local t = {}
 	
 	if self.kind ~= nil then
@@ -2306,12 +1984,12 @@ function t_17:jsonEncode()
 		end
 	end
 	if self.item_hydration_specs ~= nil and #self.item_hydration_specs > 0 then
-		local t_1 = {}
+		local ItemHydrationSpecs = {}
 		
-		for i, v in self.item_hydration_specs do
-			table.insert(t_1, v:jsonEncode())
+		for _, itemHydrationSpec in self.item_hydration_specs do
+			table.insert(ItemHydrationSpecs, itemHydrationSpec:jsonEncode())
 		end
-		t.itemHydrationSpecs = t_1
+		t.itemHydrationSpecs = ItemHydrationSpecs
 	end
 	if self.field_map ~= nil then
 		t.fieldMap = self.field_map:jsonEncode()
@@ -2319,241 +1997,209 @@ function t_17:jsonEncode()
 	return t
 end
 
-function t_17:jsonDecode()
-	-- upvalues: t_17 (ref), t (ref), hydrationDataSpecModule (ref)
-	local var389 = t_17.new()
+function Module16:jsonDecode() --[[ Line: 3030 ]]
+	-- upvalues: Module16 (copy), config (copy), HydrationDataSpecModule (copy)
+	local NewModule = Module16.new()
 	
 	if self.binding_path ~= nil then
-		var389.kind = { type = "binding_path", value = self.binding_path }
+		NewModule.kind = { type = "binding_path", value = self.binding_path }
 	end
 	if self.bindingPath ~= nil then
-		var389.kind = { type = "binding_path", value = self.bindingPath }
+		NewModule.kind = { type = "binding_path", value = self.bindingPath }
 	end
 	if self.literal ~= nil then
-		var389.kind = {
+		NewModule.kind = {
 			type = "literal",
-			value = t.ArrayOfCatalogSortContentProp_ArrayMap_LiteralItems.jsonDecode(self.literal)
+			value = config.ArrayOfCatalogSortContentProp_ArrayMap_LiteralItems.jsonDecode(self.literal)
 		}
 	end
 	if self.item_hydration_specs ~= nil then
-		local t_1 = {}
+		local Item_hydration_specs = {}
 		
-		for i, v in self.item_hydration_specs do
-			table.insert(t_1, hydrationDataSpecModule.HydrationDataSpec.jsonDecode(v))
+		for _, itemHydrationSpec in self.item_hydration_specs do
+			table.insert(Item_hydration_specs, HydrationDataSpecModule.HydrationDataSpec.jsonDecode(itemHydrationSpec))
 		end
-		var389.item_hydration_specs = t_1
+		NewModule.item_hydration_specs = Item_hydration_specs
 	end
 	if self.itemHydrationSpecs ~= nil then
-		local t_1 = {}
+		local Item_hydration_specs = {}
 		
-		for i, v in self.itemHydrationSpecs do
-			table.insert(t_1, hydrationDataSpecModule.HydrationDataSpec.jsonDecode(v))
+		for _, itemHydrationSpec1 in self.itemHydrationSpecs do
+			table.insert(Item_hydration_specs, HydrationDataSpecModule.HydrationDataSpec.jsonDecode(itemHydrationSpec1))
 		end
-		var389.item_hydration_specs = t_1
+		NewModule.item_hydration_specs = Item_hydration_specs
 	end
 	if self.field_map ~= nil then
-		var389.field_map = t.CatalogSortContent.jsonDecode(self.field_map)
+		NewModule.field_map = config.CatalogSortContent.jsonDecode(self.field_map)
 	end
 	if self.fieldMap ~= nil then
-		var389.field_map = t.CatalogSortContent.jsonDecode(self.fieldMap)
+		NewModule.field_map = config.CatalogSortContent.jsonDecode(self.fieldMap)
 	end
-	return var389
+	return NewModule
 end
 
-t_17.descriptor = {
+Module16.descriptor = {
 	name = "ArrayOfCatalogSortContentProp_ArrayMap",
 	fullName = "roblox.apppageplatform.shared.v1beta1.ArrayMap"
 }
-t.ArrayOfCatalogSortContentProp_ArrayMap = t_17
-typeRegistryModule.default:register(t.ArrayOfCatalogSortContentProp_ArrayMap)
-local t_18 = {}
-t_18.__index = t_18
+config.ArrayOfCatalogSortContentProp_ArrayMap = Module16
+TypeRegistryModule.default:register(config.ArrayOfCatalogSortContentProp_ArrayMap)
+local Module17 = {}
+Module17.__index = Module17
 
-function t_18.new(p18)
-	-- upvalues: t_18 (ref)
-	return setmetatable({
-		items = if p18 == nil or p18.items == nil then {} else p18.items
-	}, t_18)
+function Module17.new(p1) --[[ Line: 3100 ]]
+	-- upvalues: Module17 (copy)
+	return (setmetatable({
+		items = if p1 == nil or p1.items == nil then {} else p1.items
+	}, Module17))
 end
 
-function t_18:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var390 = 0
+function Module17:encode() --[[ Line: 3111 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.items ~= nil and #self.items > 0 then
-		for i, v in self.items do
-			local var391 = v:encode()
-			local var392, var393 = protoModule.writeTag(buff, var390, 1, protoModule.wireTypes.lengthDelimited)
-			var392, var579 = protoModule.writeBuffer(var392, var393, var391, buffer.len(var391))
-			buff = var392
-			var390 = var393
+		for _, item in self.items do
+			local EncodeResult = item:encode()
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
 		end
 	end
-	local buff_1 = buffer.create(var390)
-	buffer.copy(buff_1, 0, buff, 0, var390)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_18.decode(p18)
-	-- upvalues: t_18 (ref), protoModule (ref), catalogSortDataModule (ref)
-	local var394 = t_18.new()
-	local var395 = 0
-	while var395 < buffer.len(p18) do
-		local _ = nil
-		local var396 = nil
-		local var397, var398, var399 = protoModule.readTag(p18, var395)
-		local var400 = var397
-		var396 = var398
-		var395 = var399
+function Module17.decode(Buf) --[[ Line: 3130 ]]
+	-- upvalues: Module17 (copy), ProtoModule (copy), CatalogSortDataModule (copy)
+	local NewModule = Module17.new()
+	local v18 = 0
+	while v18 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v423 = ProtoModule.readTag(Buf, v18)
 		
-		if var396 == protoModule.wireTypes.varint then
-			local _ = nil
-			local var401, var402 = protoModule.readVarInt(p18, var395)
-			local _ = var401
-			var395 = var402
-			continue
-		end
-		if var396 == protoModule.wireTypes.lengthDelimited then
-			if var400 == 1 then
-				local _ = nil
-				local var403, var404 = protoModule.readBuffer(p18, var395)
-				var395 = var404
-				table.insert(var394.items, catalogSortDataModule.CatalogSortContentData.decode(var403))
+		if Tag2 == ProtoModule.wireTypes.varint then
+			local _
+			_, v423 = ProtoModule.readVarInt(Buf, v18)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v423 = ProtoModule.readBuffer(Buf, v18)
+				table.insert(NewModule.items, CatalogSortDataModule.CatalogSortContentData.decode(Buffer1))
 			else
-				local _ = nil
-				local var405, var406 = protoModule.readVarInt(p18, var395)
-				var395 = var406 + var405
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v18)
+				v18 = VarInt2 + VarInt
 			end
-		elseif var396 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var407, var408 = protoModule.readFixed32(p18, var395)
-			local _ = var407
-			var395 = var408
-		elseif var396 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var409, var410 = protoModule.readFixed64(p18, var395)
-			local _ = var409
-			var395 = var410
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v423 = ProtoModule.readFixed32(Buf, v18)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v423 = ProtoModule.readFixed64(Buf, v18)
 		else
-			error("Unsupported wire type: " .. var583)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var394
+	return NewModule
 end
 
-function t_18:jsonEncode()
+function Module17:jsonEncode() --[[ Line: 3178 ]]
 	local t = {}
 	
 	if self.items ~= nil and #self.items > 0 then
-		local t_1 = {}
+		local Items = {}
 		
-		for i, v in self.items do
-			table.insert(t_1, v:jsonEncode())
+		for _, item in self.items do
+			table.insert(Items, item:jsonEncode())
 		end
-		t.items = t_1
+		t.items = Items
 	end
 	return t
 end
 
-function t_18:jsonDecode()
-	-- upvalues: t_18 (ref), catalogSortDataModule (ref)
-	local var411 = t_18.new()
+function Module17:jsonDecode() --[[ Line: 3194 ]]
+	-- upvalues: Module17 (copy), CatalogSortDataModule (copy)
+	local NewModule = Module17.new()
 	
 	if self.items ~= nil then
-		local t = {}
+		local Items = {}
 		
-		for i, v in self.items do
-			table.insert(t, catalogSortDataModule.CatalogSortContentData.jsonDecode(v))
+		for _, item in self.items do
+			table.insert(Items, CatalogSortDataModule.CatalogSortContentData.jsonDecode(item))
 		end
-		var411.items = t
+		NewModule.items = Items
 	end
-	return var411
+	return NewModule
 end
 
-t_18.descriptor = {
+Module17.descriptor = {
 	name = "ArrayOfCatalogSortContentProp_ArrayMap_LiteralItems",
 	fullName = "roblox.apppageplatform.shared.v1beta1.LiteralItems"
 }
-t.ArrayOfCatalogSortContentProp_ArrayMap_LiteralItems = t_18
-typeRegistryModule.default:register(t.ArrayOfCatalogSortContentProp_ArrayMap_LiteralItems)
-local t_19 = {}
-t_19.__index = t_19
+config.ArrayOfCatalogSortContentProp_ArrayMap_LiteralItems = Module17
+TypeRegistryModule.default:register(config.ArrayOfCatalogSortContentProp_ArrayMap_LiteralItems)
+local Module18 = {}
+Module18.__index = Module18
 
-function t_19.new(p19)
-	-- upvalues: t_19 (ref)
-	return setmetatable({
-		background_layers = if p19 == nil or p19.background_layers == nil then nil else p19.background_layers
-	}, t_19)
+function Module18.new(p1) --[[ Line: 3229 ]]
+	-- upvalues: Module18 (copy)
+	return (setmetatable({
+		background_layers = if p1 == nil or p1.background_layers == nil then nil else p1.background_layers
+	}, Module18))
 end
 
-function t_19:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var412 = 0
+function Module18:encode() --[[ Line: 3235 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.background_layers ~= nil then
-		local var413 = self.background_layers:encode()
-		local var414, var415 = protoModule.writeTag(buff, var412, 1, protoModule.wireTypes.lengthDelimited)
-		var414, var606 = protoModule.writeBuffer(var414, var415, var413, buffer.len(var413))
-		buff = var414
-		var412 = var415
+		local EncodeResult = self.background_layers:encode()
+		local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
 	end
-	local buff_1 = buffer.create(var412)
-	buffer.copy(buff_1, 0, buff, 0, var412)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_19.decode(p19)
-	-- upvalues: t_19 (ref), protoModule (ref), backgroundLayerModule (ref)
-	local var412 = t_19.new()
-	local var413 = 0
-	while var413 < buffer.len(p19) do
-		local _ = nil
-		local var414 = nil
-		local var415, var416, var417 = protoModule.readTag(p19, var413)
-		local var418 = var415
-		var414 = var416
-		var413 = var417
+function Module18.decode(Buf) --[[ Line: 3250 ]]
+	-- upvalues: Module18 (copy), ProtoModule (copy), BackgroundLayerModule (copy)
+	local NewModule = Module18.new()
+	local v19 = 0
+	while v19 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v442 = ProtoModule.readTag(Buf, v19)
 		
-		if var414 == protoModule.wireTypes.varint then
-			local _ = nil
-			local var419, var420 = protoModule.readVarInt(p19, var413)
-			local _ = var419
-			var413 = var420
-			continue
-		end
-		if var414 == protoModule.wireTypes.lengthDelimited then
-			if var418 == 1 then
-				local _ = nil
-				local var421, var422 = protoModule.readBuffer(p19, var413)
-				var413 = var422
-				var412.background_layers = backgroundLayerModule.ArrayOfBackgroundLayerProp.decode(var421)
+		if Tag2 == ProtoModule.wireTypes.varint then
+			local _
+			_, v442 = ProtoModule.readVarInt(Buf, v19)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v442 = ProtoModule.readBuffer(Buf, v19)
+				NewModule.background_layers = BackgroundLayerModule.ArrayOfBackgroundLayerProp.decode(Buffer1)
 			else
-				local _ = nil
-				local var423, var424 = protoModule.readVarInt(p19, var413)
-				var413 = var424 + var423
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v19)
+				v19 = VarInt2 + VarInt
 			end
-		elseif var414 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var425, var426 = protoModule.readFixed32(p19, var413)
-			local _ = var425
-			var413 = var426
-		elseif var414 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var427, var428 = protoModule.readFixed64(p19, var413)
-			local _ = var427
-			var413 = var428
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v442 = ProtoModule.readFixed32(Buf, v19)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v442 = ProtoModule.readFixed64(Buf, v19)
 		else
-			error("Unsupported wire type: " .. var610)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var412
+	return NewModule
 end
 
-function t_19:jsonEncode()
+function Module18:jsonEncode() --[[ Line: 3294 ]]
 	local t = {}
 	
 	if self.background_layers ~= nil then
@@ -2562,127 +2208,108 @@ function t_19:jsonEncode()
 	return t
 end
 
-function t_19:jsonDecode()
-	-- upvalues: t_19 (ref), backgroundLayerModule (ref)
-	local var429 = t_19.new()
+function Module18:jsonDecode() --[[ Line: 3304 ]]
+	-- upvalues: Module18 (copy), BackgroundLayerModule (copy)
+	local NewModule = Module18.new()
 	
 	if self.background_layers ~= nil then
-		var429.background_layers = backgroundLayerModule.ArrayOfBackgroundLayerProp.jsonDecode(self.background_layers)
+		NewModule.background_layers = BackgroundLayerModule.ArrayOfBackgroundLayerProp.jsonDecode(self.background_layers)
 	end
 	if self.backgroundLayers ~= nil then
-		var429.background_layers = backgroundLayerModule.ArrayOfBackgroundLayerProp.jsonDecode(self.backgroundLayers)
+		NewModule.background_layers = BackgroundLayerModule.ArrayOfBackgroundLayerProp.jsonDecode(self.backgroundLayers)
 	end
-	return var429
+	return NewModule
 end
 
-t_19.descriptor = {
+Module18.descriptor = {
 	name = "WidgetStyle",
 	fullName = "roblox.apppageplatform.shared.v1beta1.WidgetStyle"
 }
-t.WidgetStyle = t_19
-typeRegistryModule.default:register(t.WidgetStyle)
-local t_20 = {}
-t_20.__index = t_20
+config.WidgetStyle = Module18
+TypeRegistryModule.default:register(config.WidgetStyle)
+local Module19 = {}
+Module19.__index = Module19
 
-function t_20.new(p20)
-	-- upvalues: t_20 (ref)
-	return setmetatable({
-		kind = if p20 == nil or p20.kind == nil then nil else p20.kind
-	}, t_20)
+function Module19.new(p1) --[[ Line: 3338 ]]
+	-- upvalues: Module19 (copy)
+	return (setmetatable({
+		kind = if p1 == nil or p1.kind == nil then nil else p1.kind
+	}, Module19))
 end
 
-function t_20:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var429 = 0
+function Module19:encode() --[[ Line: 3344 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.kind ~= nil then
 		if self.kind.type == "literal" then
-			local var430 = self.kind.value:encode()
-			local var431, var432 = protoModule.writeTag(buff, var429, 1, protoModule.wireTypes.lengthDelimited)
-			var431, var631 = protoModule.writeBuffer(var431, var432, var430, buffer.len(var430))
-			buff = var431
-			var429 = var432
+			local EncodeResult = self.kind.value:encode()
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
 		elseif self.kind.type == "binding_path" then
-			local var433, var434 = protoModule.writeTag(buff, var429, 2, protoModule.wireTypes.lengthDelimited)
-			var433, var633 = protoModule.writeString(var433, var434, self.kind.value)
-			buff = var433
-			var429 = var434
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult1, WriteTagResult2_1, self.kind.value)
 		elseif self.kind.type == "conditional" then
-			local var435 = self.kind.value:encode()
-			local var436, var437 = protoModule.writeTag(buff, var429, 3, protoModule.wireTypes.lengthDelimited)
-			var436, var636 = protoModule.writeBuffer(var436, var437, var435, buffer.len(var435))
-			buff = var436
-			var429 = var437
+			local EncodeResult = self.kind.value:encode()
+			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult3, WriteTagResult2_2, EncodeResult, buffer.len(EncodeResult))
 		end
 	end
-	local buff_1 = buffer.create(var429)
-	buffer.copy(buff_1, 0, buff, 0, var429)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_20.decode(p20)
-	-- upvalues: t_20 (ref), protoModule (ref), t (ref)
-	local var429 = t_20.new()
-	local var430 = 0
-	while var430 < buffer.len(p20) do
-		local _ = nil
-		local var431 = nil
-		local var432, var433, var434 = protoModule.readTag(p20, var430)
-		local var435 = var432
-		var431 = var433
-		var430 = var434
+function Module19.decode(Buf) --[[ Line: 3368 ]]
+	-- upvalues: Module19 (copy), ProtoModule (copy), config (copy)
+	local NewModule = Module19.new()
+	local v20 = 0
+	while v20 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v464 = ProtoModule.readTag(Buf, v20)
 		
-		if var431 == protoModule.wireTypes.varint then
-			local _ = nil
-			local var436, var437 = protoModule.readVarInt(p20, var430)
-			local _ = var436
-			var430 = var437
-			continue
-		end
-		if var431 == protoModule.wireTypes.lengthDelimited then
-			if var435 == 1 then
-				local _ = nil
-				local var438, var439 = protoModule.readBuffer(p20, var430)
-				var430 = var439
-				var429.kind = { type = "literal", value = t.WidgetStyle.decode(var438) }
-			elseif var435 == 2 then
-				local _ = nil
-				local var440, var441 = protoModule.readBuffer(p20, var430)
-				var430 = var441
-				var429.kind = { type = "binding_path", value = buffer.tostring(var440) }
-			elseif var435 == 3 then
-				local _ = nil
-				local var442, var443 = protoModule.readBuffer(p20, var430)
-				var430 = var443
-				var429.kind = {
+		if Tag2 == ProtoModule.wireTypes.varint then
+			local _
+			_, v464 = ProtoModule.readVarInt(Buf, v20)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v464 = ProtoModule.readBuffer(Buf, v20)
+				NewModule.kind = {
+					type = "literal",
+					value = config.WidgetStyle.decode(Buffer1)
+				}
+			elseif Tag == 2 then
+				local Buffer2
+				Buffer2, v464 = ProtoModule.readBuffer(Buf, v20)
+				NewModule.kind = { type = "binding_path", value = buffer.tostring(Buffer2) }
+			elseif Tag == 3 then
+				local Buffer3
+				Buffer3, v464 = ProtoModule.readBuffer(Buf, v20)
+				NewModule.kind = {
 					type = "conditional",
-					value = t.WidgetStyleProp_ConditionalOptions.decode(var442)
+					value = config.WidgetStyleProp_ConditionalOptions.decode(Buffer3)
 				}
 			else
-				local _ = nil
-				local var444, var445 = protoModule.readVarInt(p20, var430)
-				var430 = var445 + var444
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v20)
+				v20 = VarInt2 + VarInt
 			end
-		elseif var431 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var446, var447 = protoModule.readFixed32(p20, var430)
-			local _ = var446
-			var430 = var447
-		elseif var431 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var448, var449 = protoModule.readFixed64(p20, var430)
-			local _ = var448
-			var430 = var449
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v464 = ProtoModule.readFixed32(Buf, v20)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v464 = ProtoModule.readFixed64(Buf, v20)
 		else
-			error("Unsupported wire type: " .. var640)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var429
+	return NewModule
 end
 
-function t_20:jsonEncode()
+function Module19:jsonEncode() --[[ Line: 3422 ]]
 	local t = {}
 	
 	if self.kind ~= nil then
@@ -2690,149 +2317,132 @@ function t_20:jsonEncode()
 			t.literal = self.kind.value:jsonEncode()
 			
 			return t
-		elseif self.kind.type == "binding_path" then
+		end
+		if self.kind.type == "binding_path" then
 			t.bindingPath = self.kind.value
 			
 			return t
-		elseif self.kind.type == "conditional" then
+		end
+		if self.kind.type == "conditional" then
 			t.conditional = self.kind.value:jsonEncode()
 		end
 	end
 	return t
 end
 
-function t_20:jsonDecode()
-	-- upvalues: t_20 (ref), t (ref)
-	local var450 = t_20.new()
+function Module19:jsonDecode() --[[ Line: 3438 ]]
+	-- upvalues: Module19 (copy), config (copy)
+	local NewModule = Module19.new()
 	
 	if self.literal ~= nil then
-		var450.kind = {
+		NewModule.kind = {
 			type = "literal",
-			value = t.WidgetStyle.jsonDecode(self.literal)
+			value = config.WidgetStyle.jsonDecode(self.literal)
 		}
 	end
 	if self.binding_path ~= nil then
-		var450.kind = { type = "binding_path", value = self.binding_path }
+		NewModule.kind = { type = "binding_path", value = self.binding_path }
 	end
 	if self.bindingPath ~= nil then
-		var450.kind = { type = "binding_path", value = self.bindingPath }
+		NewModule.kind = { type = "binding_path", value = self.bindingPath }
 	end
 	if self.conditional ~= nil then
-		var450.kind = {
+		NewModule.kind = {
 			type = "conditional",
-			value = t.WidgetStyleProp_ConditionalOptions.jsonDecode(self.conditional)
+			value = config.WidgetStyleProp_ConditionalOptions.jsonDecode(self.conditional)
 		}
 	end
-	return var450
+	return NewModule
 end
 
-t_20.descriptor = {
+Module19.descriptor = {
 	name = "WidgetStyleProp",
 	fullName = "roblox.apppageplatform.shared.v1beta1.WidgetStyleProp"
 }
-t.WidgetStyleProp = t_20
-typeRegistryModule.default:register(t.WidgetStyleProp)
-local t_21 = {}
-t_21.__index = t_21
+config.WidgetStyleProp = Module19
+TypeRegistryModule.default:register(config.WidgetStyleProp)
+local Module20 = {}
+Module20.__index = Module20
 
-function t_21.new(p21)
-	-- upvalues: t_21 (ref)
-	return setmetatable({
-		condition = if p21 == nil or p21.condition == nil then nil else p21.condition,
-		kind = if p21 == nil or p21.kind == nil then nil else p21.kind
-	}, t_21)
+function Module20.new(p1) --[[ Line: 3477 ]]
+	-- upvalues: Module20 (copy)
+	return (setmetatable({
+		condition = if p1 == nil or p1.condition == nil then nil else p1.condition,
+		kind = if p1 == nil or p1.kind == nil then nil else p1.kind
+	}, Module20))
 end
 
-function t_21:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var450 = 0
+function Module20:encode() --[[ Line: 3486 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.condition ~= nil then
-		local var451 = self.condition:encode()
-		local var452, var453 = protoModule.writeTag(buff, var450, 1, protoModule.wireTypes.lengthDelimited)
-		var452, var665 = protoModule.writeBuffer(var452, var453, var451, buffer.len(var451))
-		buff = var452
-		var450 = var453
+		local EncodeResult = self.condition:encode()
+		local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
 	end
 	if self.kind ~= nil then
 		if self.kind.type == "literal" then
-			local var454 = self.kind.value:encode()
-			local var455, var456 = protoModule.writeTag(buff, var450, 2, protoModule.wireTypes.lengthDelimited)
-			var455, var668 = protoModule.writeBuffer(var455, var456, var454, buffer.len(var454))
-			buff = var455
-			var450 = var456
+			local EncodeResult = self.kind.value:encode()
+			local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
 		elseif self.kind.type == "binding_path" then
-			local var457, var458 = protoModule.writeTag(buff, var450, 3, protoModule.wireTypes.lengthDelimited)
-			var457, var670 = protoModule.writeString(var457, var458, self.kind.value)
-			buff = var457
-			var450 = var458
+			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeString(WriteTagResult3, WriteTagResult2_2, self.kind.value)
 		end
 	end
-	local buff_1 = buffer.create(var450)
-	buffer.copy(buff_1, 0, buff, 0, var450)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_21.decode(p21)
-	-- upvalues: t_21 (ref), protoModule (ref), propConditionModule (ref), t (ref)
-	local var450 = t_21.new()
-	local var451 = 0
-	while var451 < buffer.len(p21) do
-		local _ = nil
-		local var452 = nil
-		local var453, var454, var455 = protoModule.readTag(p21, var451)
-		local var456 = var453
-		var452 = var454
-		var451 = var455
+function Module20.decode(Buf) --[[ Line: 3512 ]]
+	-- upvalues: Module20 (copy), ProtoModule (copy), PropConditionModule (copy), config (copy)
+	local NewModule = Module20.new()
+	local v21 = 0
+	while v21 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v488 = ProtoModule.readTag(Buf, v21)
 		
-		if var452 == protoModule.wireTypes.varint then
-			local _ = nil
-			local var457, var458 = protoModule.readVarInt(p21, var451)
-			local _ = var457
-			var451 = var458
-			continue
-		end
-		if var452 == protoModule.wireTypes.lengthDelimited then
-			if var456 == 1 then
-				local _ = nil
-				local var459, var460 = protoModule.readBuffer(p21, var451)
-				var451 = var460
-				var450.condition = propConditionModule.PropCondition.decode(var459)
-			elseif var456 == 2 then
-				local _ = nil
-				local var461, var462 = protoModule.readBuffer(p21, var451)
-				var451 = var462
-				var450.kind = { type = "literal", value = t.WidgetStyle.decode(var461) }
-			elseif var456 == 3 then
-				local _ = nil
-				local var463, var464 = protoModule.readBuffer(p21, var451)
-				var451 = var464
-				var450.kind = { type = "binding_path", value = buffer.tostring(var463) }
+		if Tag2 == ProtoModule.wireTypes.varint then
+			local _
+			_, v488 = ProtoModule.readVarInt(Buf, v21)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v488 = ProtoModule.readBuffer(Buf, v21)
+				NewModule.condition = PropConditionModule.PropCondition.decode(Buffer1)
+			elseif Tag == 2 then
+				local Buffer2
+				Buffer2, v488 = ProtoModule.readBuffer(Buf, v21)
+				NewModule.kind = {
+					type = "literal",
+					value = config.WidgetStyle.decode(Buffer2)
+				}
+			elseif Tag == 3 then
+				local Buffer3
+				Buffer3, v488 = ProtoModule.readBuffer(Buf, v21)
+				NewModule.kind = { type = "binding_path", value = buffer.tostring(Buffer3) }
 			else
-				local _ = nil
-				local var465, var466 = protoModule.readVarInt(p21, var451)
-				var451 = var466 + var465
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v21)
+				v21 = VarInt2 + VarInt
 			end
-		elseif var452 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var467, var468 = protoModule.readFixed32(p21, var451)
-			local _ = var467
-			var451 = var468
-		elseif var452 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var469, var470 = protoModule.readFixed64(p21, var451)
-			local _ = var469
-			var451 = var470
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v488 = ProtoModule.readFixed32(Buf, v21)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v488 = ProtoModule.readFixed64(Buf, v21)
 		else
-			error("Unsupported wire type: " .. var674)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var450
+	return NewModule
 end
 
-function t_21:jsonEncode()
+function Module20:jsonEncode() --[[ Line: 3565 ]]
 	local t = {}
 	
 	if self.condition ~= nil then
@@ -2843,175 +2453,160 @@ function t_21:jsonEncode()
 			t.literal = self.kind.value:jsonEncode()
 			
 			return t
-		elseif self.kind.type == "binding_path" then
+		end
+		if self.kind.type == "binding_path" then
 			t.bindingPath = self.kind.value
 		end
 	end
 	return t
 end
 
-function t_21:jsonDecode()
-	-- upvalues: t_21 (ref), propConditionModule (ref), t (ref)
-	local var471 = t_21.new()
+function Module20:jsonDecode() --[[ Line: 3583 ]]
+	-- upvalues: Module20 (copy), PropConditionModule (copy), config (copy)
+	local NewModule = Module20.new()
 	
 	if self.condition ~= nil then
-		var471.condition = propConditionModule.PropCondition.jsonDecode(self.condition)
+		NewModule.condition = PropConditionModule.PropCondition.jsonDecode(self.condition)
 	end
 	if self.literal ~= nil then
-		var471.kind = {
+		NewModule.kind = {
 			type = "literal",
-			value = t.WidgetStyle.jsonDecode(self.literal)
+			value = config.WidgetStyle.jsonDecode(self.literal)
 		}
 	end
 	if self.binding_path ~= nil then
-		var471.kind = { type = "binding_path", value = self.binding_path }
+		NewModule.kind = { type = "binding_path", value = self.binding_path }
 	end
 	if self.bindingPath ~= nil then
-		var471.kind = { type = "binding_path", value = self.bindingPath }
+		NewModule.kind = { type = "binding_path", value = self.bindingPath }
 	end
-	return var471
+	return NewModule
 end
 
-t_21.descriptor = {
+Module20.descriptor = {
 	name = "WidgetStyleProp_ConditionalOption",
 	fullName = "roblox.apppageplatform.shared.v1beta1.ConditionalOption"
 }
-t.WidgetStyleProp_ConditionalOption = t_21
-typeRegistryModule.default:register(t.WidgetStyleProp_ConditionalOption)
-local t_22 = {}
-t_22.__index = t_22
+config.WidgetStyleProp_ConditionalOption = Module20
+TypeRegistryModule.default:register(config.WidgetStyleProp_ConditionalOption)
+local Module21 = {}
+Module21.__index = Module21
 
-function t_22.new(p22)
-	-- upvalues: t_22 (ref)
-	return setmetatable({
-		options = if p22 == nil or p22.options == nil then {} else p22.options
-	}, t_22)
+function Module21.new(p1) --[[ Line: 3622 ]]
+	-- upvalues: Module21 (copy)
+	return (setmetatable({
+		options = if p1 == nil or p1.options == nil then {} else p1.options
+	}, Module21))
 end
 
-function t_22:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var471 = 0
+function Module21:encode() --[[ Line: 3630 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.options ~= nil and #self.options > 0 then
-		for i, v in self.options do
-			local var472 = v:encode()
-			local var473, var474 = protoModule.writeTag(buff, var471, 1, protoModule.wireTypes.lengthDelimited)
-			var473, var699 = protoModule.writeBuffer(var473, var474, var472, buffer.len(var472))
-			buff = var473
-			var471 = var474
+		for _, option in self.options do
+			local EncodeResult = option:encode()
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
 		end
 	end
-	local buff_1 = buffer.create(var471)
-	buffer.copy(buff_1, 0, buff, 0, var471)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_22.decode(p22)
-	-- upvalues: t_22 (ref), protoModule (ref), t (ref)
-	local var475 = t_22.new()
-	local var476 = 0
-	while var476 < buffer.len(p22) do
-		local _ = nil
-		local var477 = nil
-		local var478, var479, var480 = protoModule.readTag(p22, var476)
-		local var481 = var478
-		var477 = var479
-		var476 = var480
+function Module21.decode(Buf) --[[ Line: 3647 ]]
+	-- upvalues: Module21 (copy), ProtoModule (copy), config (copy)
+	local NewModule = Module21.new()
+	local v22 = 0
+	while v22 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v507 = ProtoModule.readTag(Buf, v22)
 		
-		if var477 == protoModule.wireTypes.varint then
-			local _ = nil
-			local var482, var483 = protoModule.readVarInt(p22, var476)
-			local _ = var482
-			var476 = var483
-			continue
-		end
-		if var477 == protoModule.wireTypes.lengthDelimited then
-			if var481 == 1 then
-				local _ = nil
-				local var484, var485 = protoModule.readBuffer(p22, var476)
-				var476 = var485
-				table.insert(var475.options, t.WidgetStyleProp_ConditionalOption.decode(var484))
+		if Tag2 == ProtoModule.wireTypes.varint then
+			local _
+			_, v507 = ProtoModule.readVarInt(Buf, v22)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v507 = ProtoModule.readBuffer(Buf, v22)
+				table.insert(NewModule.options, config.WidgetStyleProp_ConditionalOption.decode(Buffer1))
 			else
-				local _ = nil
-				local var486, var487 = protoModule.readVarInt(p22, var476)
-				var476 = var487 + var486
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v22)
+				v22 = VarInt2 + VarInt
 			end
-		elseif var477 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var488, var489 = protoModule.readFixed32(p22, var476)
-			local _ = var488
-			var476 = var489
-		elseif var477 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var490, var491 = protoModule.readFixed64(p22, var476)
-			local _ = var490
-			var476 = var491
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v507 = ProtoModule.readFixed32(Buf, v22)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v507 = ProtoModule.readFixed64(Buf, v22)
 		else
-			error("Unsupported wire type: " .. var703)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var475
+	return NewModule
 end
 
-function t_22:jsonEncode()
+function Module21:jsonEncode() --[[ Line: 3690 ]]
 	local t = {}
 	
 	if self.options ~= nil and #self.options > 0 then
-		local t_1 = {}
+		local Options = {}
 		
-		for i, v in self.options do
-			table.insert(t_1, v:jsonEncode())
+		for _, option in self.options do
+			table.insert(Options, option:jsonEncode())
 		end
-		t.options = t_1
+		t.options = Options
 	end
 	return t
 end
 
-function t_22:jsonDecode()
-	-- upvalues: t_22 (ref), t (ref)
-	local var492 = t_22.new()
+function Module21:jsonDecode() --[[ Line: 3704 ]]
+	-- upvalues: Module21 (copy), config (copy)
+	local NewModule = Module21.new()
 	
 	if self.options ~= nil then
-		local t_1 = {}
+		local Options = {}
 		
-		for i, v in self.options do
-			table.insert(t_1, t.WidgetStyleProp_ConditionalOption.jsonDecode(v))
+		for _, option in self.options do
+			table.insert(Options, config.WidgetStyleProp_ConditionalOption.jsonDecode(option))
 		end
-		var492.options = t_1
+		NewModule.options = Options
 	end
-	return var492
+	return NewModule
 end
 
-t_22.descriptor = {
+Module21.descriptor = {
 	name = "WidgetStyleProp_ConditionalOptions",
 	fullName = "roblox.apppageplatform.shared.v1beta1.ConditionalOptions"
 }
-t.WidgetStyleProp_ConditionalOptions = t_22
-typeRegistryModule.default:register(t.WidgetStyleProp_ConditionalOptions)
+config.WidgetStyleProp_ConditionalOptions = Module21
+TypeRegistryModule.default:register(config.WidgetStyleProp_ConditionalOptions)
 
 return {
-	ItemFooter = t.ItemFooter,
-	ArrayOfItemFooterProp = t.ArrayOfItemFooterProp,
-	ArrayOfItemFooterProp_ConditionalOption = t.ArrayOfItemFooterProp_ConditionalOption,
-	ArrayOfItemFooterProp_ConditionalOptions = t.ArrayOfItemFooterProp_ConditionalOptions,
-	ArrayOfItemFooterProp_ArrayOfItemFooter = t.ArrayOfItemFooterProp_ArrayOfItemFooter,
-	ArrayOfItemFooterProp_ArrayMap = t.ArrayOfItemFooterProp_ArrayMap,
-	ArrayOfItemFooterProp_ArrayMap_LiteralItems = t.ArrayOfItemFooterProp_ArrayMap_LiteralItems,
-	CardStyle = t.CardStyle,
-	CardStyleProp = t.CardStyleProp,
-	CardStyleProp_ConditionalOption = t.CardStyleProp_ConditionalOption,
-	CardStyleProp_ConditionalOptions = t.CardStyleProp_ConditionalOptions,
-	CatalogSortContent = t.CatalogSortContent,
-	ArrayOfCatalogSortContentProp = t.ArrayOfCatalogSortContentProp,
-	ArrayOfCatalogSortContentProp_ConditionalOption = t.ArrayOfCatalogSortContentProp_ConditionalOption,
-	ArrayOfCatalogSortContentProp_ConditionalOptions = t.ArrayOfCatalogSortContentProp_ConditionalOptions,
-	ArrayOfCatalogSortContentProp_ArrayOfCatalogSortContent = t.ArrayOfCatalogSortContentProp_ArrayOfCatalogSortContent,
-	ArrayOfCatalogSortContentProp_ArrayMap = t.ArrayOfCatalogSortContentProp_ArrayMap,
-	ArrayOfCatalogSortContentProp_ArrayMap_LiteralItems = t.ArrayOfCatalogSortContentProp_ArrayMap_LiteralItems,
-	WidgetStyle = t.WidgetStyle,
-	WidgetStyleProp = t.WidgetStyleProp,
-	WidgetStyleProp_ConditionalOption = t.WidgetStyleProp_ConditionalOption,
-	WidgetStyleProp_ConditionalOptions = t.WidgetStyleProp_ConditionalOptions
+	ItemFooter = config.ItemFooter,
+	ArrayOfItemFooterProp = config.ArrayOfItemFooterProp,
+	ArrayOfItemFooterProp_ConditionalOption = config.ArrayOfItemFooterProp_ConditionalOption,
+	ArrayOfItemFooterProp_ConditionalOptions = config.ArrayOfItemFooterProp_ConditionalOptions,
+	ArrayOfItemFooterProp_ArrayOfItemFooter = config.ArrayOfItemFooterProp_ArrayOfItemFooter,
+	ArrayOfItemFooterProp_ArrayMap = config.ArrayOfItemFooterProp_ArrayMap,
+	ArrayOfItemFooterProp_ArrayMap_LiteralItems = config.ArrayOfItemFooterProp_ArrayMap_LiteralItems,
+	CardStyle = config.CardStyle,
+	CardStyleProp = config.CardStyleProp,
+	CardStyleProp_ConditionalOption = config.CardStyleProp_ConditionalOption,
+	CardStyleProp_ConditionalOptions = config.CardStyleProp_ConditionalOptions,
+	CatalogSortContent = config.CatalogSortContent,
+	ArrayOfCatalogSortContentProp = config.ArrayOfCatalogSortContentProp,
+	ArrayOfCatalogSortContentProp_ConditionalOption = config.ArrayOfCatalogSortContentProp_ConditionalOption,
+	ArrayOfCatalogSortContentProp_ConditionalOptions = config.ArrayOfCatalogSortContentProp_ConditionalOptions,
+	ArrayOfCatalogSortContentProp_ArrayOfCatalogSortContent = config.ArrayOfCatalogSortContentProp_ArrayOfCatalogSortContent,
+	ArrayOfCatalogSortContentProp_ArrayMap = config.ArrayOfCatalogSortContentProp_ArrayMap,
+	ArrayOfCatalogSortContentProp_ArrayMap_LiteralItems = config.ArrayOfCatalogSortContentProp_ArrayMap_LiteralItems,
+	WidgetStyle = config.WidgetStyle,
+	WidgetStyleProp = config.WidgetStyleProp,
+	WidgetStyleProp_ConditionalOption = config.WidgetStyleProp_ConditionalOption,
+	WidgetStyleProp_ConditionalOptions = config.WidgetStyleProp_ConditionalOptions
 }

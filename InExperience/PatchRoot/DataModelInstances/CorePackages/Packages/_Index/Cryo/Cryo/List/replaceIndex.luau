@@ -1,9 +1,9 @@
-﻿return function(p1, p2, p3)
+﻿return function(p1, p2, p3) --[[ Line: 5 | Named "replaceIndex" ]]
 	local t = {}
-	local p0Count = #p1
-	assert(p2 <= p0Count, "index must be less or equal than the list length")
+	local CountP0 = #p1
+	assert(p2 <= CountP0, "index must be less or equal than the list length")
 	
-	for i = 1, p0Count do
+	for i = 1, CountP0 do
 		if i == p2 then
 			t[i] = p3
 		else

@@ -1,43 +1,43 @@
-﻿local parent = script.Parent.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local reactModule = require(parent_1.React)
-local cryoModule = require(parent_1.Cryo)
-local foundationFontFaceMigration = require(parent_1.Foundation).Utility.Flags.FoundationFontFaceMigration
-local _ = require(parent.App.Style.StyleTypes)
-local _ = require(parent.Core.Style.Validator.validateFontInfo)
-local _ = require(parent.Core.Style.Validator.validateColorInfo)
-local useStyleModule = require(parent.Core.Style.useStyle)
-local getTextSizeModule = require(parent.Core.Text.GetTextSize)
-local getFontFromFontStyleModule = require(parent.Core.Text.GetFontFromFontStyle)
-local emoji = parent.Core.Emoji
-local emojiModule = require(emoji.Emoji)
-local emojiModule_1 = require(emoji.Enum.Emoji)
-local genericTextLabelModule = require(parent.Core.Text.GenericTextLabel.GenericTextLabel)
-local t = { fluidSizing = false, maxSize = Vector2.new(10000, 10000) }
+﻿local Parent = script.Parent.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
+local CryoModule = require(Parent1.Cryo)
+local FoundationFontFaceMigration = require(Parent1.Foundation).Utility.Flags.FoundationFontFaceMigration
+local _ = require(Parent.App.Style.StyleTypes)
+local _ = require(Parent.Core.Style.Validator.validateFontInfo)
+local _ = require(Parent.Core.Style.Validator.validateColorInfo)
+local UseStyleModule = require(Parent.Core.Style.useStyle)
+local GetTextSizeModule = require(Parent.Core.Text.GetTextSize)
+local GetFontFromFontStyleModule = require(Parent.Core.Text.GetFontFromFontStyle)
+local Emoji = Parent.Core.Emoji
+local EmojiModule = require(Emoji.Emoji)
+local EmojiModule1 = require(Emoji.Enum.Emoji)
+local GenericTextLabelModule = require(Parent.Core.Text.GenericTextLabel.GenericTextLabel)
+local config = { fluidSizing = false, maxSize = Vector2.new(10000, 10000) }
 
-return function(p1)
-	-- upvalues: cryoModule (ref), t (ref), useStyleModule (ref), emojiModule_1 (ref), foundationFontFaceMigration (ref), getFontFromFontStyleModule (ref), getTextSizeModule (ref), reactModule (ref), genericTextLabelModule (ref), emojiModule (ref)
-	local var1 = cryoModule.Dictionary.join(t, p1)
-	local var2 = emojiModule_1.isEnumValue(var1.emoji)
-	local baseSize = useStyleModule().Font.BaseSize
-	local colorStyle = var1.colorStyle
-	local fontStyle = var1.fontStyle
-	local var3 = if foundationFontFaceMigration then getFontFromFontStyleModule(fontStyle) else fontStyle.Font
-	local var4 = if fontStyle.RelativeSize then baseSize * fontStyle.RelativeSize else fontStyle.FontSize
-	local maxSize = var1.maxSize
-	local var5 = getTextSizeModule(var1.Text, var4, var3, maxSize)
+return function(p1) --[[ Line: 50 | Named "EmojiTextLabel" ]]
+	-- upvalues: CryoModule (copy), config (copy), UseStyleModule (copy), EmojiModule1 (copy), FoundationFontFaceMigration (copy), GetFontFromFontStyleModule (copy), GetTextSizeModule (copy), ReactModule (copy), GenericTextLabelModule (copy), EmojiModule (copy)
+	local JoinResult = CryoModule.Dictionary.join(config, p1)
+	local IsEnumValue = EmojiModule1.isEnumValue(JoinResult.emoji)
+	local BaseSize = UseStyleModule().Font.BaseSize
+	local ColorStyle = JoinResult.colorStyle
+	local FontStyle = JoinResult.fontStyle
+	local FontFromFontStyleModule = if FoundationFontFaceMigration then GetFontFromFontStyleModule(FontStyle) else FontStyle.Font
+	local ScaledBaseSize = if FontStyle.RelativeSize then BaseSize * FontStyle.RelativeSize else FontStyle.FontSize
+	local MaxSize = JoinResult.maxSize
+	local TextSizeModule = GetTextSizeModule(JoinResult.Text, ScaledBaseSize, FontFromFontStyleModule, MaxSize)
 	
-	return reactModule.createElement(genericTextLabelModule, cryoModule.Dictionary.join(var1, {
-		emoji = cryoModule.None,
-		emojiOnActivated = cryoModule.None,
-		colorStyle = colorStyle,
-		Size = UDim2.fromOffset(math.min(var5.X, maxSize.X - var4), var5.Y)
+	return ReactModule.createElement(GenericTextLabelModule, CryoModule.Dictionary.join(JoinResult, {
+		emoji = CryoModule.None,
+		emojiOnActivated = CryoModule.None,
+		colorStyle = ColorStyle,
+		Size = UDim2.fromOffset(math.min(TextSizeModule.X, MaxSize.X - ScaledBaseSize), TextSizeModule.Y)
 	}), {
-		Emoji = var2 and reactModule.createElement(emojiModule, {
-			emoji = var1.emoji,
-			onActivated = var1.emojiOnActivated,
-			textFont = var3,
-			textSize = var4,
+		Emoji = IsEnumValue and ReactModule.createElement(EmojiModule, {
+			emoji = JoinResult.emoji,
+			onActivated = JoinResult.emojiOnActivated,
+			textFont = FontFromFontStyleModule,
+			textSize = ScaledBaseSize,
 			Position = UDim2.fromScale(1, 0)
 		})
 	})

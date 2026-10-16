@@ -1,8 +1,8 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local signalsReactModule = require(corePackagesService.Packages.SignalsReact)
-local getPlaytestModeStoreModule = require(corePackagesService.Workspace.Packages.CoreScriptsRoactCommon.GetPlaytestModeStore)
+﻿local CorePackages = game:GetService("CorePackages")
+local SignalsReactModule = require(CorePackages.Packages.SignalsReact)
+local GetPlaytestModeStoreModule = require(CorePackages.Workspace.Packages.CoreScriptsRoactCommon.GetPlaytestModeStore)
 
-return function()
-	-- upvalues: getPlaytestModeStoreModule (ref), signalsReactModule (ref)
-	return signalsReactModule.useSignalState(getPlaytestModeStoreModule(false).getIsPlaytestMode)
+return function() --[[ Line: 7 | Named "useIsPlaytestMode" ]]
+	-- upvalues: GetPlaytestModeStoreModule (copy), SignalsReactModule (copy)
+	return SignalsReactModule.useSignalState(GetPlaytestModeStoreModule(false).getIsPlaytestMode)
 end

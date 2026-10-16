@@ -1,1 +1,1 @@
-﻿return require(script:FindFirstAncestor("AppChat").Parent.RoactRodux).connect(require(script.Parent.mapStateToProps), require(script.Parent.mapDispatchToProps))(require(script.Parent.ExternalNavigationHandler))
+﻿return require(script:FindFirstAncestor("AppChat").Parent.RoactRodux).connect(require(script.Parent.mapStateToProps), (require(script.Parent.mapDispatchToProps)))((require(script.Parent.ExternalNavigationHandler)))

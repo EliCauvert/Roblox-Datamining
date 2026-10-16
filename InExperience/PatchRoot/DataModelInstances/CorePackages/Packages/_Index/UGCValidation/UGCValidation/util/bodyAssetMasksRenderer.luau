@@ -1,14 +1,14 @@
-﻿local parent = script.Parent.Parent
-local _ = require(parent.util.Types)
-local tryYieldModule = require(parent.util.tryYield)
-local getEditableMeshFromContextModule = require(parent.util.getEditableMeshFromContext)
-local getAssetMeshesValidationSpaceTransforms = require(parent.util.AssetCalculator).getAssetMeshesValidationSpaceTransforms
-local assetService = game:GetService("AssetService")
-local getFIntUGCValidationBodyAssetMaskHeightPixelsModule = require(parent.flags.getFIntUGCValidationBodyAssetMaskHeightPixels)
-local getFFlagUGCValidateTinyTrianglesIntersectFixModule = require(parent.flags.getFFlagUGCValidateTinyTrianglesIntersectFix)
-local t = {}
-t.__index = t
-t.viewIds = {
+﻿local Parent = script.Parent.Parent
+local _ = require(Parent.util.Types)
+local TryYieldModule = require(Parent.util.tryYield)
+local GetEditableMeshFromContextModule = require(Parent.util.getEditableMeshFromContext)
+local GetAssetMeshesValidationSpaceTransformsFunction = require(Parent.util.AssetCalculator).getAssetMeshesValidationSpaceTransforms
+local AssetService = game:GetService("AssetService")
+local GetFIntUGCValidationBodyAssetMaskHeightPixelsModule = require(Parent.flags.getFIntUGCValidationBodyAssetMaskHeightPixels)
+local GetFFlagUGCValidateTinyTrianglesIntersectFixModule = require(Parent.flags.getFFlagUGCValidateTinyTrianglesIntersectFix)
+local BodyAssetMasksRendererModule = {}
+BodyAssetMasksRendererModule.__index = BodyAssetMasksRendererModule
+BodyAssetMasksRendererModule.viewIds = {
 	Front = "Front",
 	Back = "Back",
 	Left = "Left",
@@ -17,224 +17,224 @@ t.viewIds = {
 	Bottom = "Bottom"
 }
 
-if getFFlagUGCValidateTinyTrianglesIntersectFixModule() then
-	t.opposingViewIds = {
-		Front = t.viewIds.Back,
-		Back = t.viewIds.Front,
-		Left = t.viewIds.Right,
-		Right = t.viewIds.Left,
-		Top = t.viewIds.Bottom,
-		Bottom = t.viewIds.Top
+if GetFFlagUGCValidateTinyTrianglesIntersectFixModule() then
+	BodyAssetMasksRendererModule.opposingViewIds = {
+		Front = BodyAssetMasksRendererModule.viewIds.Back,
+		Back = BodyAssetMasksRendererModule.viewIds.Front,
+		Left = BodyAssetMasksRendererModule.viewIds.Right,
+		Right = BodyAssetMasksRendererModule.viewIds.Left,
+		Top = BodyAssetMasksRendererModule.viewIds.Bottom,
+		Bottom = BodyAssetMasksRendererModule.viewIds.Top
 	}
 end
-t.viewDirections = {
-	[t.viewIds.Front] = Vector3.new(0, 0, 1),
-	[t.viewIds.Back] = Vector3.new(0, 0, -1),
-	[t.viewIds.Left] = Vector3.new(-1, 0, 0),
-	[t.viewIds.Right] = Vector3.new(1, 0, 0),
-	[t.viewIds.Top] = Vector3.new(0, -1, 0),
-	[t.viewIds.Bottom] = Vector3.new(0, 1, 0)
+BodyAssetMasksRendererModule.viewDirections = {
+	[BodyAssetMasksRendererModule.viewIds.Front] = vector.create(0, 0, 1),
+	[BodyAssetMasksRendererModule.viewIds.Back] = vector.create(0, 0, -1),
+	[BodyAssetMasksRendererModule.viewIds.Left] = vector.create(-1, 0, 0),
+	[BodyAssetMasksRendererModule.viewIds.Right] = vector.create(1, 0, 0),
+	[BodyAssetMasksRendererModule.viewIds.Top] = vector.create(0, -1, 0),
+	[BodyAssetMasksRendererModule.viewIds.Bottom] = vector.create(0, 1, 0)
 }
-t.views = nil
+BodyAssetMasksRendererModule.views = nil
 
-function t.getViewToWorldTransforms()
-	-- upvalues: t (ref)
-	if not t.views then
-		t.views = {}
+function BodyAssetMasksRendererModule.getViewToWorldTransforms() --[[ Line: 73 ]]
+	-- upvalues: BodyAssetMasksRendererModule (copy)
+	if not BodyAssetMasksRendererModule.views then
+		BodyAssetMasksRendererModule.views = {}
 		
-		for i, v in t.viewIds do
-			local var1 = t.viewDirections[v]
-			local var2 = Vector3.new(0, 1, 0)
+		for _, viewId in BodyAssetMasksRendererModule.viewIds do
+			local ViewDirection = BodyAssetMasksRendererModule.viewDirections[viewId]
+			local ViewDirection1 = vector.create(0, 1, 0)
 			
-			if math.abs(var1:Dot(var2)) > 0.99 then
-				var2 = t.viewDirections[t.viewIds.Front]
+			if math.abs((ViewDirection:Dot(ViewDirection1))) > 0.99 then
+				ViewDirection1 = BodyAssetMasksRendererModule.viewDirections[BodyAssetMasksRendererModule.viewIds.Front]
 			end
-			t.views[v] = CFrame.lookAlong(Vector3.new(0, 0, 0), var1, var2)
+			BodyAssetMasksRendererModule.views[viewId] = CFrame.lookAlong(vector.create(0, 0, 0), ViewDirection, ViewDirection1)
 		end
 	end
-	return t.views
+	return BodyAssetMasksRendererModule.views
 end
 
-function t.getViewSpacePositionFromNormalized(p1, p2)
-	local var3 = (p1 - Vector2.new(0.5, 0.5)) * Vector2.new(2, -2)
-	local var4 = (p2.max - p2.min) / 2
+function BodyAssetMasksRendererModule.getViewSpacePositionFromNormalized(p1, p2): Vector3 --[[ Line: 92 ]]
+	local ScaledVector = (p1 - Vector2.new(0.5, 0.5)) * Vector2.new(2, -2)
+	local MaxRatio = (p2.max - p2.min) / 2
 	
-	return p2.min + var4 + var4 * Vector3.new(var3.X, var3.Y, 0)
+	return p2.min + MaxRatio + MaxRatio * Vector3.new(ScaledVector.X, ScaledVector.Y, 0)
 end
 
-local function populateViewsToRender(p1)
-	-- upvalues: t (ref)
-	local viewToWorldTransforms = t.getViewToWorldTransforms()
-	local t_1 = {}
-	
-	if not p1 then
-		return viewToWorldTransforms
-	end
-	for i, v in p1 do
-		if v and viewToWorldTransforms[i] then
-			t_1[i] = viewToWorldTransforms[i]
-		end
-	end
-	return t_1
-end
-
-local function addTransformedTriangle(vectorA, vectorB, p2, p3)
-	local var3 = vectorA:GetFaceVertices(vectorB)
+local function populateViewsToRender(List) --[[ Line: 104 ]]
+	-- upvalues: BodyAssetMasksRendererModule (copy)
+	local ViewToWorldTransforms = BodyAssetMasksRendererModule.getViewToWorldTransforms()
 	local t = {}
 	
-	for i = 1, 3 do
-		table.insert(t, p2.CFrame * (vectorA:GetPosition(var3[i]) * p2.scale))
+	if not List then
+		return ViewToWorldTransforms
 	end
-	table.insert(p3, t)
-end
-
-local function pushTransformedMesh(p4, p5, p6, p7)
-	-- upvalues: addTransformedTriangle (ref), tryYieldModule (ref)
-	for i, v in p4:GetFaces() do
-		addTransformedTriangle(p4, v, p5, p7)
-		tryYieldModule(p6)
-	end
-end
-
-local function getViewSpaceMesh(p8, p9)
-	local var4 = p9:Inverse()
-	local t = {
-		min = Vector3.new(1e999, 1e999, 1e999),
-		max = Vector3.new(-1e999, -1e999, -1e999)
-	}
-	local t_1 = {}
-	
-	for i, v in p8 do
-		local t_2 = {}
-		
-		for i_1, v_1 in v do
-			local var5 = var4 * v_1
-			table.insert(t_2, var4 * v_1)
-			t.min = t.min:Min(var5)
-			t.max = t.max:Max(var5)
+	for i, value in List do
+		if value and ViewToWorldTransforms[i] then
+			t[i] = ViewToWorldTransforms[i]
 		end
-		table.insert(t_1, t_2)
-	end
-	return t_1, t
-end
-
-local function _(p10, p11, p12)
-	local t = {}
-	
-	for i, v in p10 do
-		table.insert(t, (v - p11) / p12)
 	end
 	return t
 end
 
-local _ = function(vectorA)
-	return (vectorA[2] - vectorA[1]):Cross(vectorA[3] - vectorA[1]).Z > 0.001
-end
-
-local function normalizedSpaceToScreenSpace(p13, p14)
-	return (Vector2.new(p13.X, p13.Y) * Vector2.new(0.5, -0.5) + Vector2.new(0.5, 0.5)) * (p14 - Vector2.new(1, 1))
-end
-
-local function rasterMesh(p13, p14, p15, p16)
-	-- upvalues: assetService (ref), normalizedSpaceToScreenSpace (ref), tryYieldModule (ref)
-	local var6 = p14.max - p14.min
-	local var7 = var6 / 2
-	local var8 = p14.min + var7
-	local vector2 = Vector2.new(var6.X / var6.Y * p15, p15)
-	local var9 = (vector2 * math.min(1024 / math.max(vector2.X, vector2.Y), 1) + Vector2.new(0.5)):Floor()
-	var9 = assetService:CreateEditableImage({ Size = var9 })
+local function addTransformedTriangle(EditableMesh, FaceId, p1, List) --[[ Line: 120 ]]
+	local FaceVertices = EditableMesh:GetFaceVertices(FaceId)
+	local List1 = {}
 	
-	for i, v in p13 do
-		local t = {}
+	for i = 1, 3 do
+		table.insert(List1, p1.CFrame * (EditableMesh:GetPosition(FaceVertices[i]) * p1.scale))
+	end
+	table.insert(List, List1)
+end
+
+local function pushTransformedMesh(EditableMesh, p2, p3, p4) --[[ Line: 139 ]]
+	-- upvalues: addTransformedTriangle (copy), TryYieldModule (copy)
+	for _, face in EditableMesh:GetFaces() do
+		addTransformedTriangle(EditableMesh, face, p2, p4)
+		TryYieldModule(p3)
+	end
+end
+
+local function getViewSpaceMesh(List, View) --[[ Line: 152 ]]
+	local Inverted = View:Inverse()
+	local config = {
+		min = vector.create(1e999, 1e999, 1e999),
+		max = vector.create(-1e999, -1e999, -1e999)
+	}
+	local List1 = {}
+	
+	for _, value in List do
+		local List2 = {}
 		
-		for i_1, v_1 in v do
-			table.insert(t, (v_1 - var8) / var7)
+		for _, value1 in value do
+			local ScaledInverted = Inverted * value1
+			table.insert(List2, Inverted * value1)
+			config.min = config.min:Min(ScaledInverted)
+			config.max = config.max:Max(ScaledInverted)
 		end
-		local var10 = t
+		table.insert(List1, List2)
+	end
+	return List1, config
+end
+
+local function _(List, p5, p6) --[[ Line: 179 | Named "getNormalizedCoordinates" ]]
+	local List1 = {}
+	
+	for _, value in List do
+		table.insert(List1, (value - p5) / p6)
+	end
+	return List1
+end
+
+local _ = function(Entry): boolean --[[ Line: 193 | Named "getIsNormalizedTriangleVisible" ]]
+	return (Entry[2] - Entry[1]):Cross(Entry[3] - Entry[1]).Z > 0.001
+end
+
+local function normalizedSpaceToScreenSpace(Vector, FloorResult): Vector2 --[[ Line: 204 ]]
+	return (Vector2.new(Vector.X, Vector.Y) * Vector2.new(0.5, -0.5) + Vector2.new(0.5, 0.5)) * (FloorResult - Vector2.new(1, 1))
+end
+
+local function rasterMesh(List, ViewSpaceBounds, Y, p7) --[[ Line: 211 ]]
+	-- upvalues: AssetService (copy), normalizedSpaceToScreenSpace (copy), TryYieldModule (copy)
+	local MaxDelta = ViewSpaceBounds.max - ViewSpaceBounds.min
+	local MaxDeltaRatio = MaxDelta / 2
+	local NewMin = ViewSpaceBounds.min + MaxDeltaRatio
+	local _Vector2 = Vector2.new(MaxDelta.X / MaxDelta.Y * Y, Y)
+	local FloorResult = (_Vector2 * math.min(1024 / math.max(_Vector2.X, _Vector2.Y), 1) + Vector2.new(0.5)):Floor()
+	local EditableImage = AssetService:CreateEditableImage({ Size = FloorResult })
+	
+	for _, value in List do
+		local List1 = {}
 		
-		if (var10[2] - var10[1]):Cross(var10[3] - var10[1]).Z > 0.001 then
-			local t_1 = {}
+		for _, value1 in value do
+			table.insert(List1, (value1 - NewMin) / MaxDeltaRatio)
+		end
+		if (List1[2] - List1[1]):Cross(List1[3] - List1[1]).Z > 0.001 then
+			local List2 = {}
 			
-			for i_1, v_1 in var10 do
-				table.insert(t_1, normalizedSpaceToScreenSpace(v_1, var9))
+			for _, value2 in List1 do
+				table.insert(List2, (normalizedSpaceToScreenSpace(value2, FloorResult)))
 			end
-			var9:DrawTriangle(t_1[1], t_1[2], t_1[3], Color3.new(1, 1, 1), 0)
-			tryYieldModule(p16)
+			EditableImage:DrawTriangle(List2[1], List2[2], List2[3], Color3.new(1, 1, 1), 0)
+			TryYieldModule(p7)
 		end
 	end
-	return var9
+	return EditableImage
 end
 
-local function createBodyAssetMasks(value, p17, p18)
-	-- upvalues: getAssetMeshesValidationSpaceTransforms (ref), getEditableMeshFromContextModule (ref), pushTransformedMesh (ref), getViewSpaceMesh (ref), getFIntUGCValidationBodyAssetMaskHeightPixelsModule (ref), rasterMesh (ref)
-	local assetTypeEnum = p18.assetTypeEnum
-	local t = {}
+local function createBodyAssetMasks(Part: Part, List, p8) --[[ Line: 250 ]]
+	-- upvalues: GetAssetMeshesValidationSpaceTransformsFunction (copy), GetEditableMeshFromContextModule (copy), pushTransformedMesh (copy), getViewSpaceMesh (copy), GetFIntUGCValidationBodyAssetMaskHeightPixelsModule (copy), rasterMesh (copy)
+	local AssetTypeEnum = p8.assetTypeEnum
+	local List1 = {}
 	
-	if value:IsA("MeshPart") and p18.assetTypeEnum == Enum.AssetType.DynamicHead then
-		table.insert(t, value)
+	if Part:IsA("MeshPart") and p8.assetTypeEnum == Enum.AssetType.DynamicHead then
+		table.insert(List1, Part)
 	else
-		for i, v in value:GetChildren() do
-			if v:IsA("MeshPart") then
-				table.insert(t, v)
+		for _, Part1 in Part:GetChildren() do
+			if Part1:IsA("MeshPart") then
+				table.insert(List1, Part1)
 			end
 		end
 	end
-	local var11 = getAssetMeshesValidationSpaceTransforms(value, p18)
-	local t_1 = {}
+	local AssetMeshesValidationSpaceTransforms = GetAssetMeshesValidationSpaceTransformsFunction(Part, p8)
+	local t = {}
+	local Formatted = nil
 	
-	for i, v in t do
-		local var12, var13 = getEditableMeshFromContextModule(v, "MeshId", p18)
+	for _, value in List1 do
+		local MeshId, MeshId2 = GetEditableMeshFromContextModule(value, "MeshId", p8)
 		
-		if not var12 then
-			local formattedText = string.format("Failed to load mesh for MeshPart '%s'. Make sure mesh exists and try again.", v.Name)
+		if not MeshId then
+			Formatted = string.format("Failed to load mesh for MeshPart '%s'. Make sure mesh exists and try again.", value.Name)
 			
-			if p18.isServer then
-				error(formattedText)
+			if not p8.isServer then
+				return false, { Formatted }
 			end
-			return false, { formattedText }
+			error(Formatted)
 		end
-		var13:Triangulate()
-		pushTransformedMesh(var13, var11[v.Name], p18, t_1)
+		MeshId2:Triangulate()
+		pushTransformedMesh(MeshId2, AssetMeshesValidationSpaceTransforms[value.Name], p8, t)
 	end
-	if #t_1 == 0 then
+	if #t == 0 then
 		return false, {
-			string.format("Mesh for %s has no triangles.", assetTypeEnum.Name)
+			string.format("Mesh for %s has no triangles.", AssetTypeEnum.Name)
 		}
 	end
-	local t_2 = {}
+	local t1 = {}
 	
-	for i_1, v_1 in p17 do
-		local var14, var15 = getViewSpaceMesh(t_1, v_1)
-		t_2[i_1] = {
-			viewId = i_1,
-			mask = rasterMesh(var14, var15, getFIntUGCValidationBodyAssetMaskHeightPixelsModule(), p18),
-			view = v_1,
-			viewSpaceBounds = var15
+	for ViewId, View in List do
+		local ViewSpaceMesh, ViewSpaceMesh2 = getViewSpaceMesh(t, View)
+		t1[ViewId] = {
+			viewId = ViewId,
+			mask = rasterMesh(ViewSpaceMesh, ViewSpaceMesh2, GetFIntUGCValidationBodyAssetMaskHeightPixelsModule(), p8),
+			view = View,
+			viewSpaceBounds = ViewSpaceMesh2
 		}
 	end
-	return true, t_2
+	return true, t1
 end
 
-function t.new(p19, p20, p21)
-	-- upvalues: t (ref), populateViewsToRender (ref), createBodyAssetMasks (ref)
-	local tbl = setmetatable({}, t)
-	local var16, var17 = createBodyAssetMasks(p19, populateViewsToRender(p20), p21)
+function BodyAssetMasksRendererModule.new(Part, p9, p10) --[[ Line: 312 ]]
+	-- upvalues: BodyAssetMasksRendererModule (copy), populateViewsToRender (copy), createBodyAssetMasks (copy)
+	local self = setmetatable({}, BodyAssetMasksRendererModule)
+	local BodyAssetMasks, BodyAssetMasks2 = createBodyAssetMasks(Part, populateViewsToRender(p9), p10)
 	
-	if var16 then
-		tbl.bodyAssetMasks = var17
+	if BodyAssetMasks then
+		self.bodyAssetMasks = BodyAssetMasks2
 		
-		return true, tbl
+		return true, self
+	else
+		return false, BodyAssetMasks2
 	end
-	return false, var17
 end
 
-function t:destroyBodyAssetMasks()
-	for i, v in self.bodyAssetMasks do
-		if v.mask then
-			v.mask:Destroy()
-			v.mask = nil
+function BodyAssetMasksRendererModule.destroyBodyAssetMasks(p9) --[[ Line: 327 ]]
+	for _, bodyAssetMask in p9.bodyAssetMasks do
+		if bodyAssetMask.mask then
+			bodyAssetMask.mask:Destroy()
+			bodyAssetMask.mask = nil
 		end
 	end
 end
 
-return t
+return BodyAssetMasksRendererModule

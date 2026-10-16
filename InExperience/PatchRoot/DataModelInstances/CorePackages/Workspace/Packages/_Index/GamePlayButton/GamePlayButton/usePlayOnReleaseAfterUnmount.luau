@@ -1,18 +1,18 @@
-﻿local userInputService = game:GetService("UserInputService")
-local reactModule = require(script:FindFirstAncestor("GamePlayButton").Parent.React)
-local pressCaptureUtilsModule = require(script.Parent.PressCaptureUtils)
-local isPointInsideBounds = pressCaptureUtilsModule.isPointInsideBounds
-local getInputPosition = pressCaptureUtilsModule.getInputPosition
-local isPressInput = pressCaptureUtilsModule.isPressInput
+﻿local UserInputService = game:GetService("UserInputService")
+local ReactModule = require(script:FindFirstAncestor("GamePlayButton").Parent.React)
+local PressCaptureUtilsModule = require(script.Parent.PressCaptureUtils)
+local IsPointInsideBoundsFunction = PressCaptureUtilsModule.isPointInsideBounds
+local GetInputPositionFunction = PressCaptureUtilsModule.getInputPosition
+local IsPressInputFunction = PressCaptureUtilsModule.isPressInput
 
-local function _(p1)
+local function _(p1) --[[ Line: 21 | Named "disconnectGlobalInputEnded" ]]
 	if p1.inputEndedConnection then
 		p1.inputEndedConnection:Disconnect()
 		p1.inputEndedConnection = nil
 	end
 end
 
-local _ = function(p1)
+local _ = function(p1) --[[ Line: 28 | Named "disconnectInstanceListeners" ]]
 	if p1.destroyingConnection then
 		p1.destroyingConnection:Disconnect()
 		p1.destroyingConnection = nil
@@ -23,7 +23,7 @@ local _ = function(p1)
 	end
 end
 
-local _ = function(p1)
+local _ = function(p1) --[[ Line: 39 | Named "clearPressTracking" ]]
 	p1.isPressed = false
 	p1.boundsPosition = nil
 	p1.boundsSize = nil
@@ -38,7 +38,7 @@ local _ = function(p1)
 	end
 end
 
-local _ = function(p1)
+local _ = function(p1) --[[ Line: 46 | Named "disconnectAllPressCapture" ]]
 	p1.isPressed = false
 	p1.boundsPosition = nil
 	p1.boundsSize = nil
@@ -57,11 +57,11 @@ local _ = function(p1)
 	end
 end
 
-return function(p1)
-	-- upvalues: reactModule (ref), getInputPosition (ref), isPointInsideBounds (ref), userInputService (ref), isPressInput (ref)
-	local var1 = reactModule.useRef(p1)
-	var1.current = p1
-	local var2 = reactModule.useRef({
+return function(Current) --[[ Line: 51 ]]
+	-- upvalues: ReactModule (copy), GetInputPositionFunction (copy), IsPointInsideBoundsFunction (copy), UserInputService (copy), IsPressInputFunction (copy)
+	local UseRefResult = ReactModule.useRef(Current)
+	UseRefResult.current = Current
+	local UseRefResult1 = ReactModule.useRef({
 		isPressed = false,
 		boundsPosition = nil,
 		boundsSize = nil,
@@ -69,234 +69,236 @@ return function(p1)
 		inputEndedConnection = nil,
 		instanceInputEndedConnection = nil
 	})
-	local var3 = reactModule.useRef(nil)
-	local var4 = reactModule.useRef(nil)
-	local var5 = reactModule.useRef(false)
-	local var6 = reactModule.useCallback(function()
-		-- upvalues: var2 (ref), var5 (ref), var1 (ref)
-		local current = var2.current
+	local UseRefResult2 = ReactModule.useRef(nil)
+	local UseRefResult3 = ReactModule.useRef(nil)
+	local UseRefResult4 = ReactModule.useRef(false)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 72 ]]
+		-- upvalues: UseRefResult1 (copy), UseRefResult4 (copy), UseRefResult (copy)
+		local Current = UseRefResult1.current
 		
-		if current.isPressed then
-			if var5.current then return end
-		else
-			var5.current = false
-		end
-		var5.current = true
-		current.isPressed = false
-		current.boundsPosition = nil
-		current.boundsSize = nil
+		if not Current.isPressed then
+			UseRefResult4.current = false
+		elseif UseRefResult4.current then return end
+		UseRefResult4.current = true
+		Current.isPressed = false
+		Current.boundsPosition = nil
+		Current.boundsSize = nil
 		
-		if current.destroyingConnection then
-			current.destroyingConnection:Disconnect()
-			current.destroyingConnection = nil
+		if Current.destroyingConnection then
+			Current.destroyingConnection:Disconnect()
+			Current.destroyingConnection = nil
 		end
-		if current.instanceInputEndedConnection then
-			current.instanceInputEndedConnection:Disconnect()
-			current.instanceInputEndedConnection = nil
+		if Current.instanceInputEndedConnection then
+			Current.instanceInputEndedConnection:Disconnect()
+			Current.instanceInputEndedConnection = nil
 		end
-		if current.inputEndedConnection then
-			current.inputEndedConnection:Disconnect()
-			current.inputEndedConnection = nil
+		if Current.inputEndedConnection then
+			Current.inputEndedConnection:Disconnect()
+			Current.inputEndedConnection = nil
 		end
-		var1.current()
+		UseRefResult.current()
 	end, {})
-	local var7 = reactModule.useCallback(function(p2)
-		-- upvalues: var2 (ref), getInputPosition (copy), isPointInsideBounds (copy), var6 (ref)
-		local current = var2.current
+	local UseResult1 = ReactModule.useCallback(function(p1) --[[ Line: 87 ]]
+		-- upvalues: UseRefResult1 (copy), GetInputPositionFunction (upval), IsPointInsideBoundsFunction (upval), UseResult (copy)
+		local Current = UseRefResult1.current
 		
-		if current.isPressed and current.boundsPosition and current.boundsSize then
-			if isPointInsideBounds(getInputPosition(p2), current.boundsPosition, current.boundsSize) then
-				var6()
+		if Current.isPressed and Current.boundsPosition and Current.boundsSize then
+			if IsPointInsideBoundsFunction(GetInputPositionFunction(p1), Current.boundsPosition, Current.boundsSize) then
+				UseResult()
 				
 				return
 			end
-			current.isPressed = false
-			current.boundsPosition = nil
-			current.boundsSize = nil
+			Current.isPressed = false
+			Current.boundsPosition = nil
+			Current.boundsSize = nil
 			
-			if current.destroyingConnection then
-				current.destroyingConnection:Disconnect()
-				current.destroyingConnection = nil
+			if Current.destroyingConnection then
+				Current.destroyingConnection:Disconnect()
+				Current.destroyingConnection = nil
 			end
-			if current.instanceInputEndedConnection then
-				current.instanceInputEndedConnection:Disconnect()
-				current.instanceInputEndedConnection = nil
+			if Current.instanceInputEndedConnection then
+				Current.instanceInputEndedConnection:Disconnect()
+				Current.instanceInputEndedConnection = nil
 			end
-			if current.inputEndedConnection then
-				current.inputEndedConnection:Disconnect()
-				current.inputEndedConnection = nil
+			if Current.inputEndedConnection then
+				Current.inputEndedConnection:Disconnect()
+				Current.inputEndedConnection = nil
 			end
 			return
 		else
-			current.isPressed = false
-			current.boundsPosition = nil
-			current.boundsSize = nil
+			Current.isPressed = false
+			Current.boundsPosition = nil
+			Current.boundsSize = nil
 			
-			if current.destroyingConnection then
-				current.destroyingConnection:Disconnect()
-				current.destroyingConnection = nil
+			if Current.destroyingConnection then
+				Current.destroyingConnection:Disconnect()
+				Current.destroyingConnection = nil
 			end
-			if current.instanceInputEndedConnection then
-				current.instanceInputEndedConnection:Disconnect()
-				current.instanceInputEndedConnection = nil
+			if Current.instanceInputEndedConnection then
+				Current.instanceInputEndedConnection:Disconnect()
+				Current.instanceInputEndedConnection = nil
 			end
-			if current.inputEndedConnection then
-				current.inputEndedConnection:Disconnect()
-				current.inputEndedConnection = nil
+			if Current.inputEndedConnection then
+				Current.inputEndedConnection:Disconnect()
+				Current.inputEndedConnection = nil
 			end
 		end
-	end, { var6 })
-	local var8 = reactModule.useCallback(function()
-		-- upvalues: var2 (ref), userInputService (copy), isPressInput (copy), var7 (ref)
-		local current = var2.current
+	end, { UseResult })
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 103 ]]
+		-- upvalues: UseRefResult1 (copy), UserInputService (upval), IsPressInputFunction (upval), UseResult1 (copy)
+		local Current = UseRefResult1.current
 		
-		if current.inputEndedConnection then
-			return
-		end
-		current.inputEndedConnection = userInputService.InputEnded:Connect(function(p2)
-			-- upvalues: isPressInput (copy), var7 (copy)
-			if isPressInput(p2) then
-				var7(p2)
-				
-				return
-			end
-		end)
-	end, { var7 })
-	local var9 = reactModule.useCallback(function(p2)
-		-- upvalues: var2 (ref), var8 (ref), isPressInput (copy), var5 (ref)
-		if p2 == nil then
-			return function() end
-		end
-		local function onPressInstanceDestroyed()
-			-- upvalues: var2 (copy), var8 (copy)
-			if not var2.current.isPressed then return end
-			local current = var2.current
-			
-			if current.destroyingConnection then
-				current.destroyingConnection:Disconnect()
-				current.destroyingConnection = nil
-			end
-			if current.instanceInputEndedConnection then
-				current.instanceInputEndedConnection:Disconnect()
-				current.instanceInputEndedConnection = nil
-			end
-			var8()
-		end
-		
-		local inputBeganConnection = p2.InputBegan:Connect(function(p3)
-			-- upvalues: isPressInput (copy), var2 (copy), var5 (copy), p2 (ref), onPressInstanceDestroyed (ref)
-			if not isPressInput(p3) then return end
-			local current = var2.current
-			var5.current = false
-			current.isPressed = true
-			current.boundsPosition = p2.AbsolutePosition
-			current.boundsSize = p2.AbsoluteSize
-			
-			if current.destroyingConnection then
-				current.destroyingConnection:Disconnect()
-				current.destroyingConnection = nil
-			end
-			if current.instanceInputEndedConnection then
-				current.instanceInputEndedConnection:Disconnect()
-				current.instanceInputEndedConnection = nil
-			end
-			current.destroyingConnection = p2.Destroying:Connect(onPressInstanceDestroyed)
-			current.instanceInputEndedConnection = p2.InputEnded:Connect(function(p4)
-				-- upvalues: isPressInput (copy), var2 (copy)
-				if not isPressInput(p4) then return end
-				if var2.current.isPressed then
-					local current = var2.current
-					current.isPressed = false
-					current.boundsPosition = nil
-					current.boundsSize = nil
+		if not Current.inputEndedConnection then
+			Current.inputEndedConnection = UserInputService.InputEnded:Connect(function(Input) --[[ Line: 109 ]]
+				-- upvalues: IsPressInputFunction (upval), UseResult1 (upval)
+				if IsPressInputFunction(Input) then
+					UseResult1(Input)
 					
-					if current.destroyingConnection then
-						current.destroyingConnection:Disconnect()
-						current.destroyingConnection = nil
-					end
-					if current.instanceInputEndedConnection then
-						current.instanceInputEndedConnection:Disconnect()
-						current.instanceInputEndedConnection = nil
-					end
-					if current.inputEndedConnection then
-						current.inputEndedConnection:Disconnect()
-						current.inputEndedConnection = nil
-					end
+					return
 				end
 			end)
-		end)
-		
-		return function()
-			-- upvalues: inputBeganConnection (ref)
-			inputBeganConnection:Disconnect()
-		end
-	end, { var8 })
-	local var10 = reactModule.useCallback(function(p2)
-		-- upvalues: var3 (ref), var9 (ref)
-		if var3.current then
-			var3.current()
-			var3.current = nil
-		end
-		if p2 and p2:IsA("GuiObject") then
-			var3.current = var9(p2)
-		end
-	end, { var9 })
-	local var11 = reactModule.useCallback(function(p2)
-		-- upvalues: var4 (ref), var9 (ref)
-		if var4.current then
-			var4.current()
-			var4.current = nil
-		end
-		if p2 and p2:IsA("GuiObject") then
-			var4.current = var9(p2)
-		end
-	end, { var9 })
-	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), var4 (ref), var2 (ref), var8 (ref)
-		return function()
-			-- upvalues: var3 (copy), var4 (copy), var2 (copy), var8 (copy)
-			if var3.current then
-				var3.current()
-				var3.current = nil
-			end
-			if var4.current then
-				var4.current()
-				var4.current = nil
-			end
-			local current = var2.current
 			
-			if current.isPressed and not current.inputEndedConnection then
-				if current.destroyingConnection then
-					current.destroyingConnection:Disconnect()
-					current.destroyingConnection = nil
+			return
+		end
+	end, { UseResult1 })
+	local UseResult3 = ReactModule.useCallback(function(Frame: Frame) --[[ Line: 117 ]]
+		-- upvalues: UseRefResult1 (copy), UseResult2 (copy), IsPressInputFunction (upval), UseRefResult4 (copy)
+		if Frame == nil then
+			return function() --[[ Line: 119 ]] end
+		else
+			local function onPressInstanceDestroyed() --[[ Line: 122 ]]
+				-- upvalues: UseRefResult1 (upval), UseResult2 (upval)
+				if not UseRefResult1.current.isPressed then return end
+				local Current = UseRefResult1.current
+				
+				if Current.destroyingConnection then
+					Current.destroyingConnection:Disconnect()
+					Current.destroyingConnection = nil
 				end
-				if current.instanceInputEndedConnection then
-					current.instanceInputEndedConnection:Disconnect()
-					current.instanceInputEndedConnection = nil
+				if Current.instanceInputEndedConnection then
+					Current.instanceInputEndedConnection:Disconnect()
+					Current.instanceInputEndedConnection = nil
 				end
-				var8()
+				UseResult2()
+			end
+			
+			local InputBeganConnection = Frame.InputBegan:Connect(function(Input) --[[ Line: 130 ]]
+				-- upvalues: IsPressInputFunction (upval), UseRefResult1 (upval), UseRefResult4 (upval), Frame (copy), onPressInstanceDestroyed (copy)
+				if not IsPressInputFunction(Input) then return end
+				local Current = UseRefResult1.current
+				UseRefResult4.current = false
+				Current.isPressed = true
+				Current.boundsPosition = Frame.AbsolutePosition
+				Current.boundsSize = Frame.AbsoluteSize
+				
+				if Current.destroyingConnection then
+					Current.destroyingConnection:Disconnect()
+					Current.destroyingConnection = nil
+				end
+				if Current.instanceInputEndedConnection then
+					Current.instanceInputEndedConnection:Disconnect()
+					Current.instanceInputEndedConnection = nil
+				end
+				Current.destroyingConnection = Frame.Destroying:Connect(onPressInstanceDestroyed)
+				Current.instanceInputEndedConnection = Frame.InputEnded:Connect(function(Input) --[[ Line: 143 ]]
+					-- upvalues: IsPressInputFunction (upval), UseRefResult1 (upval)
+					if not IsPressInputFunction(Input) then return end
+					if UseRefResult1.current.isPressed then
+						local Current = UseRefResult1.current
+						Current.isPressed = false
+						Current.boundsPosition = nil
+						Current.boundsSize = nil
+						
+						if Current.destroyingConnection then
+							Current.destroyingConnection:Disconnect()
+							Current.destroyingConnection = nil
+						end
+						if Current.instanceInputEndedConnection then
+							Current.instanceInputEndedConnection:Disconnect()
+							Current.instanceInputEndedConnection = nil
+						end
+						if Current.inputEndedConnection then
+							Current.inputEndedConnection:Disconnect()
+							Current.inputEndedConnection = nil
+						end
+					end
+				end)
+			end)
+			
+			return function() --[[ Line: 153 ]]
+				-- upvalues: InputBeganConnection (copy)
+				InputBeganConnection:Disconnect()
+			end
+		end
+	end, { UseResult2 })
+	local UseResult4 = ReactModule.useCallback(function(Gui) --[[ Line: 158 ]]
+		-- upvalues: UseRefResult2 (copy), UseResult3 (copy)
+		if UseRefResult2.current then
+			UseRefResult2.current()
+			UseRefResult2.current = nil
+		end
+		if Gui and Gui:IsA("GuiObject") then
+			UseRefResult2.current = UseResult3(Gui)
+		end
+	end, { UseResult3 })
+	local UseResult5 = ReactModule.useCallback(function(Gui) --[[ Line: 169 ]]
+		-- upvalues: UseRefResult3 (copy), UseResult3 (copy)
+		if UseRefResult3.current then
+			UseRefResult3.current()
+			UseRefResult3.current = nil
+		end
+		if Gui and Gui:IsA("GuiObject") then
+			UseRefResult3.current = UseResult3(Gui)
+		end
+	end, { UseResult3 })
+	ReactModule.useEffect(function() --[[ Line: 180 ]]
+		-- upvalues: UseRefResult2 (copy), UseRefResult3 (copy), UseRefResult1 (copy), UseResult2 (copy)
+		return function() --[[ Line: 181 ]]
+			-- upvalues: UseRefResult2 (upval), UseRefResult3 (upval), UseRefResult1 (upval), UseResult2 (upval)
+			if UseRefResult2.current then
+				UseRefResult2.current()
+				UseRefResult2.current = nil
+			end
+			if UseRefResult3.current then
+				UseRefResult3.current()
+				UseRefResult3.current = nil
+			end
+			local Current = UseRefResult1.current
+			
+			if Current.isPressed and not Current.inputEndedConnection then
+				if Current.destroyingConnection then
+					Current.destroyingConnection:Disconnect()
+					Current.destroyingConnection = nil
+				end
+				if Current.instanceInputEndedConnection then
+					Current.instanceInputEndedConnection:Disconnect()
+					Current.instanceInputEndedConnection = nil
+				end
+				UseResult2()
 				
 				return
-			elseif not current.inputEndedConnection then
-				current.isPressed = false
-				current.boundsPosition = nil
-				current.boundsSize = nil
-				
-				if current.destroyingConnection then
-					current.destroyingConnection:Disconnect()
-					current.destroyingConnection = nil
-				end
-				if current.instanceInputEndedConnection then
-					current.instanceInputEndedConnection:Disconnect()
-					current.instanceInputEndedConnection = nil
+			else
+				if not Current.inputEndedConnection then
+					Current.isPressed = false
+					Current.boundsPosition = nil
+					Current.boundsSize = nil
+					
+					if Current.destroyingConnection then
+						Current.destroyingConnection:Disconnect()
+						Current.destroyingConnection = nil
+					end
+					if Current.instanceInputEndedConnection then
+						Current.instanceInputEndedConnection:Disconnect()
+						Current.instanceInputEndedConnection = nil
+					end
 				end
 			end
 		end
-	end, { var8 })
+	end, { UseResult2 })
 	
 	return {
-		onActivated = var6,
-		playButtonRef = var10,
-		loadingCaptureRef = var11
+		onActivated = UseResult,
+		playButtonRef = UseResult4,
+		loadingCaptureRef = UseResult5
 	}
 end

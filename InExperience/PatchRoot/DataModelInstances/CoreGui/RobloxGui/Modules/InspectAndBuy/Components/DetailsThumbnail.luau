@@ -1,103 +1,93 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local images = require(corePackagesService.Packages.UIBlox).App.ImageSet.Images
-local parent = script.Parent.Parent
-local limitedLabelModule = require(parent.Components.LimitedLabel)
-local constantsModule = require(parent.Constants)
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local utilityFunctionsModule = require(parent.UtilityFunctions)
-local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
-local inspectAndBuyContextModule = require(parent.Components.InspectAndBuyContext)
-local getFFlagDisplayCollectiblesIconModule = require(parent.Flags.GetFFlagDisplayCollectiblesIcon)
-local getFFlagIBEnableCollectiblesSystemSupportModule = require(parent.Flags.GetFFlagIBEnableCollectiblesSystemSupport)
-local fixBundleThumbnailOnDetailPage = game:DefineFastFlag("FixBundleThumbnailOnDetailPage", false)
-local detailsThumbnail = roactModule.PureComponent:extend("DetailsThumbnail")
+﻿local CorePackages = game:GetService("CorePackages")
+local Images = require(CorePackages.Packages.UIBlox).App.ImageSet.Images
+local Parent = script.Parent.Parent
+local LimitedLabelModule = require(Parent.Components.LimitedLabel)
+local ConstantsModule = require(Parent.Constants)
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local UtilityFunctionsModule = require(Parent.UtilityFunctions)
+local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
+local InspectAndBuyContextModule = require(Parent.Components.InspectAndBuyContext)
+local GetFFlagDisplayCollectiblesIconModule = require(Parent.Flags.GetFFlagDisplayCollectiblesIcon)
+local GetFFlagIBEnableCollectiblesSystemSupportModule = require(Parent.Flags.GetFFlagIBEnableCollectiblesSystemSupport)
+local FixBundleThumbnailOnDetailPage = game:DefineFastFlag("FixBundleThumbnailOnDetailPage", false)
+local DetailsThumbnail = RoactModule.PureComponent:extend("DetailsThumbnail")
 
-local function _(p1)
-	local var1
-	if p1 then
-		var1 = p1.parentBundleId ~= nil
-	end
-	return var1
+local function _(p1): boolean --[[ Line: 24 | Named "isPartOfBundleAndOffsale" ]]
+	return if p1 then p1.parentBundleId ~= nil else false
 end
 
-function detailsThumbnail.getUrl(p1)
-	-- upvalues: utilityFunctionsModule (ref), fixBundleThumbnailOnDetailPage (ref)
-	local var1
-	local assetInfo = p1.props.assetInfo
-	local detailsInformation = p1.props.detailsInformation
-	local bundles = p1.props.bundles
-	local bundleId = utilityFunctionsModule.getBundleId(assetInfo)
+function DetailsThumbnail.getUrl(p1): string --[[ Line: 28 ]]
+	-- upvalues: UtilityFunctionsModule (copy), FixBundleThumbnailOnDetailPage (copy)
+	local AssetInfo = p1.props.assetInfo
+	local DetailsInformation = p1.props.detailsInformation
+	local Bundles = p1.props.bundles
+	local BundleId = UtilityFunctionsModule.getBundleId(AssetInfo)
+	local HasParentBundleId: boolean = if AssetInfo then AssetInfo.parentBundleId ~= nil else false
 	
-	if assetInfo then
-		var1 = assetInfo.parentBundleId ~= nil
-	end
-	local _ = ""
-	
-	return if not (not var1 or not bundles[bundleId] or not bundles[bundleId].costumeId) then if fixBundleThumbnailOnDetailPage then "rbxthumb://type=BundleThumbnail&id=" .. tostring(bundleId) .. "&w=420&h=420" else "rbxthumb://type=Outfit&id=" .. bundles[bundleId].costumeId .. "&w=420&h=420" else "rbxthumb://type=Asset&id=" .. detailsInformation.assetId .. "&w=420&h=420"
+	return if HasParentBundleId and Bundles[BundleId] and Bundles[BundleId].costumeId then if FixBundleThumbnailOnDetailPage then "rbxthumb://type=BundleThumbnail&id=" .. tostring(BundleId) .. "&w=420&h=420" else "rbxthumb://type=Outfit&id=" .. Bundles[BundleId].costumeId .. "&w=420&h=420" else "rbxthumb://type=Asset&id=" .. DetailsInformation.assetId .. "&w=420&h=420"
 end
 
-function detailsThumbnail.render(p1)
-	-- upvalues: images (ref), roactModule (ref), inspectAndBuyContextModule (ref), getFFlagDisplayCollectiblesIconModule (ref), utilityFunctionsModule (ref), getFFlagIBEnableCollectiblesSystemSupportModule (ref), constantsModule (ref), robloxTranslatorModule (ref), limitedLabelModule (ref)
-	local view = p1.props.view
-	local detailsInformation = p1.props.detailsInformation
-	local tryingOnInfo = p1.props.tryingOnInfo
-	local locale = p1.props.locale
-	local assetInfo = p1.props.assetInfo
-	local limited = images["icons/status/item/limited"]
-	local var1 = if limited then limited.ImageRectSize / images.ImagesResolutionScale else Vector2.new(0, 0)
+function DetailsThumbnail.render(p1) --[[ Line: 53 ]]
+	-- upvalues: Images (copy), RoactModule (copy), InspectAndBuyContextModule (copy), GetFFlagDisplayCollectiblesIconModule (copy), UtilityFunctionsModule (copy), GetFFlagIBEnableCollectiblesSystemSupportModule (copy), ConstantsModule (copy), RobloxTranslatorModule (copy), LimitedLabelModule (copy)
+	local View = p1.props.view
+	local DetailsInformation = p1.props.detailsInformation
+	local TryingOnInfo = p1.props.tryingOnInfo
+	local Locale = p1.props.locale
+	local AssetInfo = p1.props.assetInfo
+	local IconsStatusItemLimited = Images["icons/status/item/limited"]
+	local ImageRectSizeRatio = IconsStatusItemLimited and IconsStatusItemLimited.ImageRectSize / Images.ImagesResolutionScale or Vector2.new(0, 0)
 	
-	return roactModule.createElement(inspectAndBuyContextModule.Consumer, {
-		render = function(p2)
-			-- upvalues: view (ref), getFFlagDisplayCollectiblesIconModule (copy), utilityFunctionsModule (copy), assetInfo (ref), getFFlagIBEnableCollectiblesSystemSupportModule (copy), constantsModule (copy), var1 (ref), robloxTranslatorModule (copy), locale (ref), roactModule (copy), tryingOnInfo (ref), detailsInformation (ref), p1 (ref), limitedLabelModule (copy)
-			local var2 = p2[view]
-			local var3 = getFFlagDisplayCollectiblesIconModule() and utilityFunctionsModule.isCollectibles(assetInfo)
-			local var4 = nil
-			local _ = nil
-			local uDim2 = nil
-			local var5 = nil
+	return RoactModule.createElement(InspectAndBuyContextModule.Consumer, {
+		render = function(p2) --[[ Line: 63 ]]
+			-- upvalues: View (copy), GetFFlagDisplayCollectiblesIconModule (upval), UtilityFunctionsModule (upval), AssetInfo (copy), GetFFlagIBEnableCollectiblesSystemSupportModule (upval), ConstantsModule (upval), ImageRectSizeRatio (copy), RobloxTranslatorModule (upval), Locale (copy), RoactModule (upval), TryingOnInfo (copy), DetailsInformation (copy), p1 (copy), LimitedLabelModule (upval)
+			local v1 = p2[View]
+			local IsCollectibles = GetFFlagDisplayCollectiblesIconModule() and UtilityFunctionsModule.isCollectibles(AssetInfo)
+			local HasLimitedQuantity = nil
+			local v2: UDim2? = nil
+			local v3: string? = nil
 			
-			if getFFlagIBEnableCollectiblesSystemSupportModule() and assetInfo then
-				var4 = utilityFunctionsModule.hasLimitedQuantity(assetInfo)
-				local var6 = utilityFunctionsModule.isLimited1Point0_LimitedUnique(assetInfo) or utilityFunctionsModule.isLimited2Point0_Or_LimitedCollectible(assetInfo)
-				uDim2 = UDim2.new(0, var1.X + (if var6 then constantsModule.LimitedIconFrameSizeXOffset * 2 else constantsModule.LimitedIconFrameSizeXOffset), 0, var1.Y + constantsModule.LimitedIconFrameSizeYOffset)
-				var5 = if var6 then "#" .. "    " .. robloxTranslatorModule:FormatByKeyForLocale("InGame.InspectMenu.Label.LimitedItems", locale) else "    " .. robloxTranslatorModule:FormatByKeyForLocale("InGame.InspectMenu.Label.LimitedItems", locale)
+			if GetFFlagIBEnableCollectiblesSystemSupportModule() and AssetInfo then
+				HasLimitedQuantity = UtilityFunctionsModule.hasLimitedQuantity(AssetInfo)
+				local IsLimited1Point0_LimitedUnique = UtilityFunctionsModule.isLimited1Point0_LimitedUnique(AssetInfo) or UtilityFunctionsModule.isLimited2Point0_Or_LimitedCollectible(AssetInfo)
+				v2 = UDim2.new(0, ImageRectSizeRatio.X + (if IsLimited1Point0_LimitedUnique then ConstantsModule.LimitedIconFrameSizeXOffset * 2 else ConstantsModule.LimitedIconFrameSizeXOffset), 0, ImageRectSizeRatio.Y + ConstantsModule.LimitedIconFrameSizeYOffset)
+				v3 = if IsLimited1Point0_LimitedUnique then "#" .. "    " .. RobloxTranslatorModule:FormatByKeyForLocale("InGame.InspectMenu.Label.LimitedItems", Locale) else "    " .. RobloxTranslatorModule:FormatByKeyForLocale("InGame.InspectMenu.Label.LimitedItems", Locale)
 			end
-			return roactModule.createElement("Frame", {
+			return RoactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 2,
-				Position = var2.DetailsThumbnailFramePosition,
-				Size = UDim2.new(1, 0, 0, if getFFlagDisplayCollectiblesIconModule() then constantsModule.DetailsThumbnailFrameHeight else 300),
-				Visible = not tryingOnInfo.tryingOn
+				Position = v1.DetailsThumbnailFramePosition,
+				Size = UDim2.new(1, 0, 0, GetFFlagDisplayCollectiblesIconModule() and ConstantsModule.DetailsThumbnailFrameHeight or 300),
+				Visible = not TryingOnInfo.tryingOn
 			}, {
-				Thumbnail = detailsInformation.viewingDetails and roactModule.createElement("ImageLabel", {
+				Thumbnail = DetailsInformation.viewingDetails and RoactModule.createElement("ImageLabel", {
 					BackgroundTransparency = 1,
-					Position = var2.DetailsThumbnailPosition,
-					AnchorPoint = var2.DetailsThumbnailAnchorPoint,
+					Position = v1.DetailsThumbnailPosition,
+					AnchorPoint = v1.DetailsThumbnailAnchorPoint,
 					Size = UDim2.new(1, 0, 1, 0),
 					Image = p1:getUrl()
 				}, {
-					AspectRatioConstraint = roactModule.createElement("UIAspectRatioConstraint", {
+					AspectRatioConstraint = RoactModule.createElement("UIAspectRatioConstraint", {
 						AspectRatio = 1,
 						AspectType = Enum.AspectType.FitWithinMaxSize,
-						DominantAxis = var2.DetailsThumbnailARDominantAxis
+						DominantAxis = v1.DetailsThumbnailARDominantAxis
 					})
 				}),
-				LimitedLabel = (if getFFlagIBEnableCollectiblesSystemSupportModule() then var4 else var3) and roactModule.createElement(limitedLabelModule, {
-					frameSize = if getFFlagIBEnableCollectiblesSystemSupportModule() then uDim2 else UDim2.new(0, var1.X + 18, 0, var1.Y + 6),
-					framePosition = UDim2.new(0, 0, 0, constantsModule.DetailsThumbnailFrameHeight - var1.Y - 8),
-					imageSize = UDim2.new(0, var1.X, 0, var1.Y),
+				LimitedLabel = (if GetFFlagIBEnableCollectiblesSystemSupportModule() then HasLimitedQuantity else IsCollectibles) and RoactModule.createElement(LimitedLabelModule, {
+					frameSize = if GetFFlagIBEnableCollectiblesSystemSupportModule() then v2 else UDim2.new(0, ImageRectSizeRatio.X + 18, 0, ImageRectSizeRatio.Y + 6),
+					framePosition = UDim2.new(0, 0, 0, ConstantsModule.DetailsThumbnailFrameHeight - ImageRectSizeRatio.Y - 8),
+					imageSize = UDim2.new(0, ImageRectSizeRatio.X, 0, ImageRectSizeRatio.Y),
 					imagePosition = UDim2.new(0, 4, 0, 3),
-					textSize = UDim2.new(0, 4 + var1.X, 0, var1.Y),
-					textPosition = UDim2.new(0, 5 + var1.X, 0, 3),
-					text = if getFFlagIBEnableCollectiblesSystemSupportModule() then var5 else "#" .. "    " .. robloxTranslatorModule:FormatByKeyForLocale("InGame.InspectMenu.Label.LimitedItems", locale)
+					textSize = UDim2.new(0, 4 + ImageRectSizeRatio.X, 0, ImageRectSizeRatio.Y),
+					textPosition = UDim2.new(0, 5 + ImageRectSizeRatio.X, 0, 3),
+					text = if GetFFlagIBEnableCollectiblesSystemSupportModule() then v3 else "#" .. "    " .. RobloxTranslatorModule:FormatByKeyForLocale("InGame.InspectMenu.Label.LimitedItems", Locale)
 				})
 			})
 		end
 	})
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p1, _)
+return RoactRoduxModule.UNSTABLE_connect2(function(p1, _) --[[ Line: 138 ]]
 	return {
 		view = p1.view,
 		tryingOnInfo = p1.tryingOnInfo,
@@ -106,4 +96,4 @@ return roactRoduxModule.UNSTABLE_connect2(function(p1, _)
 		locale = p1.locale,
 		bundles = p1.bundles
 	}
-end)(detailsThumbnail)
+end)(DetailsThumbnail)

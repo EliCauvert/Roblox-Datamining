@@ -1,137 +1,134 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local roactUtilsModule = require(parent.RoactUtils)
-local navigationRoduxModule = require(parent.NavigationRodux)
-local robloxAppEnumsModule = require(parent.RobloxAppEnums)
-local avatarExperienceProfilePictureEditorModule = require(parent.AvatarExperienceProfilePictureEditor)
-local editProfileImage = avatarExperienceProfilePictureEditorModule.EditProfileImage
-local enums = avatarExperienceProfilePictureEditorModule.Enums
-local closeProfilePictureEditor = avatarExperienceProfilePictureEditorModule.closeProfilePictureEditor
-local showEditProfileImageToast = avatarExperienceProfilePictureEditorModule.showEditProfileImageToast
-local enumsModule = require(profilePlatform.Common.Enums)
-local useProfileWrapperContextModule = require(profilePlatform.Contexts.useProfileWrapperContext)
-local robloxAppHooksModule = require(parent.RobloxAppHooks)
-local fFlagEditProfileImageR15UpgradePrompt = require(parent.SharedFlags).FFlagEditProfileImageR15UpgradePrompt
-local fFlagEditProfileFramesEnabled = require(parent.SharedFlags).FFlagEditProfileFramesEnabled
-local fFlagEditProfileFramesImpression = require(parent.EditProfile).Flags.FFlagEditProfileFramesImpression
-local fFlagSignalsNavP3hMisc = require(parent.SharedFlags).FFlagSignalsNavP3hMisc
-local useReportFramesImpressionModule = require(profilePlatform.Hooks.useReportFramesImpression)
-local view = foundationModule.View
-local useScreenSize = robloxAppHooksModule.useScreenSize
-local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
-local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
-local useSignalState = require(parent.SignalsReact).useSignalState
-local signalsModule = require(parent.Signals)
-local selectors = navigationRoduxModule.Selectors
-local getLegacyNavigationStore = navigationRoduxModule.GetLegacyNavigationStore
-local appPage = robloxAppEnumsModule.AppPage
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local RoactUtilsModule = require(Parent.RoactUtils)
+local NavigationRoduxModule = require(Parent.NavigationRodux)
+local AvatarExperienceProfilePictureEditorModule = require(Parent.AvatarExperienceProfilePictureEditor)
+local EditProfileImage = AvatarExperienceProfilePictureEditorModule.EditProfileImage
+local Enums = AvatarExperienceProfilePictureEditorModule.Enums
+local CloseProfilePictureEditorFunction = AvatarExperienceProfilePictureEditorModule.closeProfilePictureEditor
+local ShowEditProfileImageToast = AvatarExperienceProfilePictureEditorModule.showEditProfileImageToast
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local UseProfileWrapperContextModule = require(ProfilePlatform.Contexts.useProfileWrapperContext)
+local FFlagEditProfileImageR15UpgradePrompt = require(Parent.SharedFlags).FFlagEditProfileImageR15UpgradePrompt
+local FFlagEditProfileFramesEnabled = require(Parent.SharedFlags).FFlagEditProfileFramesEnabled
+local FFlagEditProfileFramesImpression = require(Parent.EditProfile).Flags.FFlagEditProfileFramesImpression
+local FFlagSignalsNavP3hMisc = require(Parent.SharedFlags).FFlagSignalsNavP3hMisc
+local UseReportFramesImpressionModule = require(ProfilePlatform.Hooks.useReportFramesImpression)
+local View = require(Parent.Foundation).View
+local UseScreenSizeFunction = require(Parent.RobloxAppHooks).useScreenSize
+local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
+local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local SignalsModule = require(Parent.Signals)
+local Selectors = NavigationRoduxModule.Selectors
+local GetLegacyNavigationStoreFunction = NavigationRoduxModule.GetLegacyNavigationStore
+local AppPage = require(Parent.RobloxAppEnums).AppPage
 local AXEditProfileImageFillCardHeight = game:DefineFastFlag("AXEditProfileImageFillCardHeight", false)
-local editProfileImageSignalsNavCurrentPage = game:DefineFastFlag("EditProfileImageSignalsNavCurrentPage", false)
+local EditProfileImageSignalsNavCurrentPage = game:DefineFastFlag("EditProfileImageSignalsNavCurrentPage", false)
 
-local function _(p1)
-	-- upvalues: appPage (ref)
-	return if p1 ~= appPage.AvatarExperienceWrapper then p1 == appPage.AvatarExperienceWrapperTransparent else true
+local function _(AvatarExperienceWrapper): boolean --[[ Line: 42 | Named "isAppItemDetailsPage" ]]
+	-- upvalues: AppPage (copy)
+	return AvatarExperienceWrapper == AppPage.AvatarExperienceWrapper or AvatarExperienceWrapper == AppPage.AvatarExperienceWrapperTransparent
 end
 
-return function(p1)
-	-- upvalues: useProfileWrapperContextModule (ref), useScreenSize (ref), useSelector (ref), editProfileImageSignalsNavCurrentPage (ref), fFlagSignalsNavP3hMisc (ref), reactModule (ref), signalsModule (ref), getLegacyNavigationStore (ref), appPage (ref), useSignalState (ref), selectors (ref), useDispatch (ref), closeProfilePictureEditor (ref), showEditProfileImageToast (ref), enumsModule (ref), fFlagEditProfileImageR15UpgradePrompt (ref), fFlagEditProfileFramesImpression (ref), fFlagEditProfileFramesEnabled (ref), useReportFramesImpressionModule (ref), enums (ref), view (ref), AXEditProfileImageFillCardHeight (ref), editProfileImage (ref)
-	local var1
-	local var2 = useProfileWrapperContextModule()
-	local renderRecommendedEmotePurchaseFooter = var2.renderRecommendedEmotePurchaseFooter
-	assert(renderRecommendedEmotePurchaseFooter, "Edit Profile Image requires a host purchase-footer renderer")
-	local var3 = useScreenSize()
-	local var4 = useSelector(function(p2)
+return function(p1) --[[ Line: 55 | Named "EditProfileImageContainer" ]]
+	-- upvalues: UseProfileWrapperContextModule (copy), UseScreenSizeFunction (copy), UseSelectorFunction (copy), EditProfileImageSignalsNavCurrentPage (copy), FFlagSignalsNavP3hMisc (copy), ReactModule (copy), SignalsModule (copy), GetLegacyNavigationStoreFunction (copy), AppPage (copy), UseSignalStateFunction (copy), Selectors (copy), UseDispatchFunction (copy), CloseProfilePictureEditorFunction (copy), ShowEditProfileImageToast (copy), EnumsModule (copy), FFlagEditProfileImageR15UpgradePrompt (copy), FFlagEditProfileFramesImpression (copy), FFlagEditProfileFramesEnabled (copy), UseReportFramesImpressionModule (copy), Enums (copy), View (copy), AXEditProfileImageFillCardHeight (copy), EditProfileImage (copy)
+	local UseProfileWrapperContextModuleResult = UseProfileWrapperContextModule()
+	local RenderRecommendedEmotePurchaseFooter = UseProfileWrapperContextModuleResult.renderRecommendedEmotePurchaseFooter
+	assert(RenderRecommendedEmotePurchaseFooter, "Edit Profile Image requires a host purchase-footer renderer")
+	local UseScreenSizeResult = UseScreenSizeFunction()
+	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 60 ]]
 		return p2.GlobalGuiInset
 	end)
-	local _ = nil
+	local IsUseSelectorResultMatch = nil
 	
-	if editProfileImageSignalsNavCurrentPage and fFlagSignalsNavP3hMisc then
-		var1 = useSignalState(reactModule.useMemo(function()
-			-- upvalues: signalsModule (copy), getLegacyNavigationStore (copy), appPage (copy)
-			return signalsModule.createComputed(function(p2)
-				-- upvalues: getLegacyNavigationStore (copy), appPage (copy)
-				local currentPageName = getLegacyNavigationStore(false).getCurrentPageName(p2)
+	if EditProfileImageSignalsNavCurrentPage and FFlagSignalsNavP3hMisc then
+		IsUseSelectorResultMatch = UseSignalStateFunction((ReactModule.useMemo(function() --[[ Line: 67 ]]
+			-- upvalues: SignalsModule (upval), GetLegacyNavigationStoreFunction (upval), AppPage (upval)
+			return SignalsModule.createComputed(function(p2): boolean --[[ Line: 68 ]]
+				-- upvalues: GetLegacyNavigationStoreFunction (upval), AppPage (upval)
+				local CurrentPageName = GetLegacyNavigationStoreFunction(false).getCurrentPageName(p2)
 				
-				return if currentPageName ~= appPage.AvatarExperienceWrapper then currentPageName == appPage.AvatarExperienceWrapperTransparent else true
+				return CurrentPageName == AppPage.AvatarExperienceWrapper or CurrentPageName == AppPage.AvatarExperienceWrapperTransparent
 			end)
-		end, {}))
+		end, {})))
 	else
-		local var5 = useSelector(selectors.selectCurrentPageName)
-		var1 = if var5 ~= appPage.AvatarExperienceWrapper then var5 == appPage.AvatarExperienceWrapperTransparent else true
+		local UseSelectorResult1 = UseSelectorFunction(Selectors.selectCurrentPageName)
+		IsUseSelectorResultMatch = UseSelectorResult1 == AppPage.AvatarExperienceWrapper or UseSelectorResult1 == AppPage.AvatarExperienceWrapperTransparent
 	end
-	local var6 = useDispatch()
-	local var7 = reactModule.useCallback(function()
-		-- upvalues: closeProfilePictureEditor (copy), p1 (ref)
-		closeProfilePictureEditor(p1.navigation)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 79 ]]
+		-- upvalues: CloseProfilePictureEditorFunction (upval), p1 (copy)
+		CloseProfilePictureEditorFunction(p1.navigation)
 	end, { p1.navigation })
-	local var8 = reactModule.useCallback(function()
-		-- upvalues: showEditProfileImageToast (copy), var6 (ref), closeProfilePictureEditor (copy), p1 (ref)
-		showEditProfileImageToast.showSaveSuccessToast(var6)
-		closeProfilePictureEditor(p1.navigation)
-	end, { var6, p1.navigation })
-	local var9 = reactModule.useCallback(function(p2)
-		-- upvalues: var2 (ref), enumsModule (copy)
-		local navigateTo = var2.navigateTo
-		local t = { mountAnimation = true }
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 83 ]]
+		-- upvalues: ShowEditProfileImageToast (upval), UseDispatchResult (copy), CloseProfilePictureEditorFunction (upval), p1 (copy)
+		ShowEditProfileImageToast.showSaveSuccessToast(UseDispatchResult)
+		CloseProfilePictureEditorFunction(p1.navigation)
+	end, { UseDispatchResult, p1.navigation })
+	local UseResult2 = ReactModule.useCallback(function(p2) --[[ Line: 88 ]]
+		-- upvalues: UseProfileWrapperContextModuleResult (copy), EnumsModule (upval)
+		local NavigateTo = UseProfileWrapperContextModuleResult.navigateTo
+		local config = { mountAnimation = true }
 		
-		if navigateTo.itemOrBundleDetails then
-			navigateTo.itemOrBundleDetails(p2, enumsModule.ItemTypes.Asset, t)
+		if NavigateTo.itemOrBundleDetails then
+			NavigateTo.itemOrBundleDetails(p2, EnumsModule.ItemTypes.Asset, config)
 			
 			return
+		else
+			NavigateTo.itemDetails(p2, config)
 		end
-		navigateTo.itemDetails(p2, t)
-	end, { var2.navigateTo })
-	local var10 = reactModule.useCallback(function(p2)
-		-- upvalues: var2 (ref), enumsModule (copy)
-		local preparePurchaseItem = var2.navigateTo.preparePurchaseItem
+	end, { UseProfileWrapperContextModuleResult.navigateTo })
+	local UseResult3 = ReactModule.useCallback(function(p2) --[[ Line: 99 ]]
+		-- upvalues: UseProfileWrapperContextModuleResult (copy), EnumsModule (upval)
+		local PreparePurchaseItemFunction: (any, any) -> () = UseProfileWrapperContextModuleResult.navigateTo.preparePurchaseItem
 		
-		if preparePurchaseItem then
-			preparePurchaseItem(p2, enumsModule.ItemTypes.Asset)
+		if PreparePurchaseItemFunction then
+			PreparePurchaseItemFunction(p2, EnumsModule.ItemTypes.Asset)
 		end
-	end, { var2.navigateTo })
-	local var11 = reactModule.useCallback(function()
-		-- upvalues: var2 (ref)
-		local shopForMoreEmotes = var2.navigateTo.shopForMoreEmotes
+	end, { UseProfileWrapperContextModuleResult.navigateTo })
+	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 106 ]]
+		-- upvalues: UseProfileWrapperContextModuleResult (copy)
+		local ShopForMoreEmotesFunction: () -> () = UseProfileWrapperContextModuleResult.navigateTo.shopForMoreEmotes
 		
-		if shopForMoreEmotes then
-			shopForMoreEmotes()
+		if ShopForMoreEmotesFunction then
+			ShopForMoreEmotesFunction()
 		end
-	end, { var2.navigateTo })
-	local var12 = if fFlagEditProfileImageR15UpgradePrompt then reactModule.useCallback(function(p2)
-		-- upvalues: var2 (ref)
-		local promptR15Upgrade = var2.navigateTo.promptR15Upgrade
+	end, { UseProfileWrapperContextModuleResult.navigateTo })
+	local UseResult5 = if FFlagEditProfileImageR15UpgradePrompt then ReactModule.useCallback(function(p2) --[[ Line: 115 ]]
+		-- upvalues: UseProfileWrapperContextModuleResult (copy)
+		local PromptR15UpgradeFunction: (any) -> () = UseProfileWrapperContextModuleResult.navigateTo.promptR15Upgrade
 		
-		if promptR15Upgrade then
-			promptR15Upgrade(p2)
+		if PromptR15UpgradeFunction then
+			PromptR15UpgradeFunction(p2)
 		end
-	end, { var2.navigateTo }) else nil
+	end, { UseProfileWrapperContextModuleResult.navigateTo }) else nil
 	
-	if fFlagEditProfileFramesImpression and fFlagEditProfileFramesEnabled then
-		useReportFramesImpressionModule()
+	if FFlagEditProfileFramesImpression and FFlagEditProfileFramesEnabled then
+		UseReportFramesImpressionModule()
 	end
-	local maxValue = math.max(0, var3.X - var4.left - var4.right)
+	local Largest = math.max(0, UseScreenSizeResult.X - UseSelectorResult.left - UseSelectorResult.right)
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "bg-surface-0",
-		Size = if AXEditProfileImageFillCardHeight then UDim2.new(0, maxValue, 1, 0) else UDim2.fromOffset(maxValue, var3.Y),
-		padding = { bottom = UDim.new(0, var4.bottom) }
+		Size = if AXEditProfileImageFillCardHeight then UDim2.new(0, Largest, 1, 0) else UDim2.fromOffset(Largest, UseScreenSizeResult.Y),
+		padding = { bottom = UDim.new(0, UseSelectorResult.bottom) }
 	}, {
-		Content = reactModule.createElement(view, { tag = "size-full-full" }, {
-			EditProfileImage = reactModule.createElement(editProfileImage, {
-				mode = if p1.navigation.getParam then p1.navigation.getParam("mode", enums.EditProfileImageMode.Default) else enums.EditProfileImageMode.Default,
-				onClose = var7,
-				onSaveSuccess = var8,
-				onOpenEmoteDetails = var9,
-				onPrepareRecommendedEmotePurchase = var10,
-				onShopForMoreEmotes = var11,
-				onPromptR15Upgrade = var12,
-				accountRigType = if fFlagEditProfileImageR15UpgradePrompt then var2.accountRigType else nil,
-				renderRecommendedEmotePurchaseFooter = renderRecommendedEmotePurchaseFooter
+		Content = ReactModule.createElement(View, { tag = "size-full-full" }, {
+			EditProfileImage = ReactModule.createElement(EditProfileImage, {
+				mode = if p1.navigation.getParam then p1.navigation.getParam("mode", Enums.EditProfileImageMode.Default) else Enums.EditProfileImageMode.Default,
+				onClose = UseResult,
+				onSaveSuccess = UseResult1,
+				onOpenEmoteDetails = UseResult2,
+				onPrepareRecommendedEmotePurchase = UseResult3,
+				onShopForMoreEmotes = UseResult4,
+				onPromptR15Upgrade = UseResult5,
+				accountRigType = if FFlagEditProfileImageR15UpgradePrompt then UseProfileWrapperContextModuleResult.accountRigType else nil,
+				renderRecommendedEmotePurchaseFooter = RenderRecommendedEmotePurchaseFooter
 			})
 		}),
-		DetailsInputBlocker = if var1 then reactModule.createElement(view, {
+		DetailsInputBlocker = if IsUseSelectorResultMatch then ReactModule.createElement(View, {
 			tag = "position-top-left size-full",
 			ZIndex = 10,
 			Active = true

@@ -1,33 +1,33 @@
-﻿local inExperienceShop = script:FindFirstAncestor("InExperienceShop")
-local parent = inExperienceShop.Parent
-local reactModule = require(parent.React)
-local view = require(parent.Foundation).View
-local sectionTitleModule = require(inExperienceShop.Components.SectionTitle)
-local itemGridModule = require(inExperienceShop.Components.ItemGrid)
-local shopItemTileModule = require(inExperienceShop.Components.ShopItemTile)
-local robuxPackageTileContainerModule = require(inExperienceShop.Components.RobuxPackageTileContainer)
-local _ = require(inExperienceShop.Components.ItemRow)
-local constantsModule = require(inExperienceShop.Constants)
-local computeRobuxPackageMediaHeightScale = require(inExperienceShop.Components.computeShopRowTileWidths).computeRobuxPackageMediaHeightScale
-local fFlagEnableInExperienceShopUnifiedLoggingModule = require(inExperienceShop.Flags.FFlagEnableInExperienceShopUnifiedLogging)
-local fFlagEnableCategoryLoggingInShopModule = require(inExperienceShop.Flags.FFlagEnableCategoryLoggingInShop)
-local fFlagPassShopPurchaseSurfaceToBuyModal = require(parent.SharedFlags).FFlagPassShopPurchaseSurfaceToBuyModal
-local var1 = if fFlagEnableInExperienceShopUnifiedLoggingModule then require(inExperienceShop.Analytics) else nil
-local var2 = if var1 then var1.Constants.ShopPageType else nil
-local var3 = if fFlagPassShopPurchaseSurfaceToBuyModal then require(inExperienceShop.Analytics.Constants).ShopPageType else nil
-local useShopImpressionsDetectorModule = require(inExperienceShop.Hooks.useShopImpressionsDetector)
-local _ = require(inExperienceShop.Types)
+﻿local InExperienceShop = script:FindFirstAncestor("InExperienceShop")
+local Parent = InExperienceShop.Parent
+local ReactModule = require(Parent.React)
+local View = require(Parent.Foundation).View
+local SectionTitleModule = require(InExperienceShop.Components.SectionTitle)
+local ItemGridModule = require(InExperienceShop.Components.ItemGrid)
+local ShopItemTileModule = require(InExperienceShop.Components.ShopItemTile)
+local RobuxPackageTileContainerModule = require(InExperienceShop.Components.RobuxPackageTileContainer)
+local _ = require(InExperienceShop.Components.ItemRow)
+local ConstantsModule = require(InExperienceShop.Constants)
+local ComputeRobuxPackageMediaHeightScaleFunction = require(InExperienceShop.Components.computeShopRowTileWidths).computeRobuxPackageMediaHeightScale
+local FFlagEnableInExperienceShopUnifiedLoggingModule = require(InExperienceShop.Flags.FFlagEnableInExperienceShopUnifiedLogging)
+local FFlagEnableCategoryLoggingInShopModule = require(InExperienceShop.Flags.FFlagEnableCategoryLoggingInShop)
+local FFlagPassShopPurchaseSurfaceToBuyModal = require(Parent.SharedFlags).FFlagPassShopPurchaseSurfaceToBuyModal
+local AnalyticsModule = if FFlagEnableInExperienceShopUnifiedLoggingModule then require(InExperienceShop.Analytics) else nil
+local ShopPageType = if AnalyticsModule then AnalyticsModule.Constants.ShopPageType else nil
+local ShopPageType1 = if FFlagPassShopPurchaseSurfaceToBuyModal then require(InExperienceShop.Analytics.Constants).ShopPageType else nil
+local UseShopImpressionsDetectorModule = require(InExperienceShop.Hooks.useShopImpressionsDetector)
+local _ = require(InExperienceShop.Types)
 
-local function _(p1)
+local function _(GrowRatio) --[[ Line: 58 | Named "shopItemTileFlexItem" ]]
 	return {
 		ShrinkRatio = 1,
 		FlexMode = Enum.UIFlexMode.Custom,
-		GrowRatio = p1,
+		GrowRatio = GrowRatio,
 		ItemLineAlignment = Enum.ItemLineAlignment.Stretch
 	}
 end
 
-local _ = function()
+local _ = function() --[[ Line: 67 | Named "explicitWidthFlexItem" ]]
 	return {
 		GrowRatio = 0,
 		ShrinkRatio = 0,
@@ -36,28 +36,28 @@ local _ = function()
 	}
 end
 
-local _ = function(p1, p2, p3)
+local _ = function(p1, p2, p3) --[[ Line: 76 | Named "resolveTileWidth" ]]
 	return if p3 == nil or p3.rowWidth <= 0 then nil elseif p3.isFeaturedDoubleWidthRobux(p1, p2) and p3.featuredRobuxWidth ~= nil then p3.featuredRobuxWidth else p3.shopWidth
 end
 
-local _ = function(p1)
-	-- upvalues: computeRobuxPackageMediaHeightScale (ref)
-	return if p1 == nil or p1.shopWidth <= 0 then nil else computeRobuxPackageMediaHeightScale(p1.shopWidth, p1.gap)
+local _ = function(p1) --[[ Line: 88 | Named "resolveRobuxMediaHeightScale" ]]
+	-- upvalues: ComputeRobuxPackageMediaHeightScaleFunction (copy)
+	return if p1 == nil or p1.shopWidth <= 0 then nil else ComputeRobuxPackageMediaHeightScaleFunction(p1.shopWidth, p1.gap)
 end
 
-local function tileWrapperProps(p1, p2)
-	return if p1 == nil or p1 <= 0 then {
+local function tileWrapperProps(XOffset: number, GrowRatio) --[[ Line: 96 ]]
+	return if XOffset == nil or XOffset <= 0 then {
 		tag = "size-full-0 auto-y",
 		Size = UDim2.fromOffset(0, 0),
 		flexItem = {
 			ShrinkRatio = 1,
 			FlexMode = Enum.UIFlexMode.Custom,
-			GrowRatio = p2,
+			GrowRatio = GrowRatio,
 			ItemLineAlignment = Enum.ItemLineAlignment.Stretch
 		}
 	} else {
 		tag = "size-full-0 auto-y",
-		Size = UDim2.fromOffset(p1, 0),
+		Size = UDim2.fromOffset(XOffset, 0),
 		flexItem = {
 			GrowRatio = 0,
 			ShrinkRatio = 0,
@@ -67,7 +67,7 @@ local function tileWrapperProps(p1, p2)
 	}
 end
 
-local _ = function(p1)
+local _ = function(p1) --[[ Line: 112 | Named "shopItemFromRobuxPackage" ]]
 	return {
 		id = p1.id,
 		name = tostring(p1.robuxAmount),
@@ -75,193 +75,199 @@ local _ = function(p1)
 	}
 end
 
-local _ = function(p1, p2, p3, p4, p5, p6, p7)
+local _ = function(GridPositionColumn, p1, CategoryId, CategoryType, StableCategoryId, CategoryGroup, CategoryName) --[[ Line: 120 | Named "getTileLoggingProps" ]]
 	return {
-		categoryId = p3,
-		categoryType = p4,
-		stableCategoryId = p5,
-		categoryGroup = p6,
-		categoryName = p7,
-		gridPositionRow = if p2 then p2.gridPositionRow else nil,
-		gridPositionColumn = p1
+		categoryId = CategoryId,
+		categoryType = CategoryType,
+		stableCategoryId = StableCategoryId,
+		categoryGroup = CategoryGroup,
+		categoryName = CategoryName,
+		gridPositionRow = if p1 then p1.gridPositionRow else nil,
+		gridPositionColumn = GridPositionColumn
 	}
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: useShopImpressionsDetectorModule (ref), var2 (ref), reactModule (ref), constantsModule (ref), fFlagEnableCategoryLoggingInShopModule (ref), tileWrapperProps (ref), view (ref), robuxPackageTileContainerModule (ref), computeRobuxPackageMediaHeightScale (ref), shopItemTileModule (ref), var3 (ref), sectionTitleModule (ref), itemGridModule (ref), fFlagEnableInExperienceShopUnifiedLoggingModule (ref)
-	local var4 = p1.robuxPackages ~= nil and #p1.robuxPackages > 0
-	local featuredRobuxPackage = p1.featuredRobuxPackage
-	local var5 = featuredRobuxPackage ~= nil
-	local onItemActivated = p1.onItemActivated
-	local var6 = useShopImpressionsDetectorModule({
-		pageType = if var2 then var2.Home else "",
-		isPageActive = p1.isPageVisible ~= false,
-		externalScrollSignal = p1.scrollImpressionsSignal
+return ReactModule.memo(function(Frame) --[[ Line: 150 | Named "CategorySection" ]]
+	-- upvalues: UseShopImpressionsDetectorModule (copy), ShopPageType (copy), ReactModule (copy), ConstantsModule (copy), FFlagEnableCategoryLoggingInShopModule (copy), tileWrapperProps (copy), View (copy), RobuxPackageTileContainerModule (copy), ComputeRobuxPackageMediaHeightScaleFunction (copy), ShopItemTileModule (copy), ShopPageType1 (copy), SectionTitleModule (copy), ItemGridModule (copy), FFlagEnableInExperienceShopUnifiedLoggingModule (copy)
+	local v1: boolean = Frame.robuxPackages ~= nil and #Frame.robuxPackages > 0
+	local FeaturedRobuxPackage = Frame.featuredRobuxPackage
+	local HasFeaturedRobuxPackage = FeaturedRobuxPackage ~= nil
+	local OnItemActivated = Frame.onItemActivated
+	local UseShopImpressionsDetectorModuleResult = UseShopImpressionsDetectorModule({
+		pageType = if ShopPageType then ShopPageType.Home else "",
+		isPageActive = Frame.isPageVisible ~= false,
+		externalScrollSignal = Frame.scrollImpressionsSignal
 	})
-	local var7 = reactModule.useMemo(function()
-		-- upvalues: var4 (ref), p1 (ref), constantsModule (copy)
-		if var4 then
-			local robuxPackages = p1.robuxPackages
-			local minValue = math.min(#robuxPackages, constantsModule.ITEMS_PER_SECTION, math.floor(p1.itemsPerRow / 2))
-			local list = table.create(minValue)
-			
-			for i = 1, minValue do
-				local var8 = robuxPackages[i]
-				list[i] = {
-					id = var8.id,
-					name = tostring(var8.robuxAmount),
-					thumbnail = var8.robuxImage
-				}
-			end
-			return list
-		elseif p1.featuredRobuxPackage == nil then
-			return table.move(p1.items, 1, math.min(#p1.items, constantsModule.ITEMS_PER_SECTION, p1.itemsPerRow), 1, {})
-		end
-		local minValue = math.min(#p1.items, constantsModule.ITEMS_PER_SECTION, math.max(p1.itemsPerRow - 2, 0))
-		local list = table.create(minValue + 1)
-		local featuredRobuxPackage = p1.featuredRobuxPackage
-		list[1] = {
-			id = featuredRobuxPackage.id,
-			name = tostring(featuredRobuxPackage.robuxAmount),
-			thumbnail = featuredRobuxPackage.robuxImage
-		}
-		
-		for i_1 = 1, minValue do
-			list[i_1 + 1] = p1.items[i_1]
-		end
-		return list
-	end, {
-		p1.items, p1.robuxPackages, p1.featuredRobuxPackage, p1.itemsPerRow, var4,
-		var5
-	})
-	local var9 = reactModule.useMemo(function()
-		-- upvalues: var4 (ref), p1 (ref)
-		if var4 then
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 207 ]]
+		-- upvalues: v1 (copy), Frame (copy)
+		if v1 then
 			local t = {}
 			
-			for i, v in p1.robuxPackages do
-				t[v.id] = v
+			for _, robuxPackage in Frame.robuxPackages do
+				t[robuxPackage.id] = robuxPackage
 			end
 			return t
-		elseif p1.featuredRobuxPackage == nil then
+		elseif Frame.featuredRobuxPackage == nil then
 			return nil
-		end
-		local featuredRobuxPackage = p1.featuredRobuxPackage
-		
-		return { [featuredRobuxPackage.id] = featuredRobuxPackage }
-	end, { p1.robuxPackages, p1.featuredRobuxPackage, var4 })
-	local var10 = reactModule.useCallback(function(p2, p3, p4)
-		-- upvalues: p1 (ref), fFlagEnableCategoryLoggingInShopModule (copy), var9 (ref), var4 (ref), var5 (ref), tileWrapperProps (copy), reactModule (copy), view (copy), robuxPackageTileContainerModule (copy), onItemActivated (ref), computeRobuxPackageMediaHeightScale (copy), var2 (copy), shopItemTileModule (copy), onItemActivated (ref), var3 (copy)
-		local t = {
-			categoryId = p1.sectionId,
-			categoryType = if fFlagEnableCategoryLoggingInShopModule then p1.categoryType else nil,
-			stableCategoryId = if fFlagEnableCategoryLoggingInShopModule then p1.stableCategoryId else nil,
-			categoryGroup = if fFlagEnableCategoryLoggingInShopModule then p1.categoryGroup else nil,
-			categoryName = if fFlagEnableCategoryLoggingInShopModule then p1.categoryName else nil,
-			gridPositionRow = if p4 then p4.gridPositionRow else nil,
-			gridPositionColumn = p3
-		}
-		local var11 = if var9 ~= nil then nil else var9[p2.id]
-		
-		if var11 == nil then
-			local var12 = tileWrapperProps(if p4 == nil or p4.rowWidth <= 0 then nil elseif p4.isFeaturedDoubleWidthRobux(p2, p3) and p4.featuredRobuxWidth ~= nil then p4.featuredRobuxWidth else p4.shopWidth, 1)
+		else
+			local FeaturedRobuxPackage = Frame.featuredRobuxPackage
 			
-			return reactModule.createElement(view, {
-				tag = var12.tag,
-				Size = var12.Size,
-				flexItem = var12.flexItem,
-				LayoutOrder = p3
+			return { [FeaturedRobuxPackage.id] = FeaturedRobuxPackage }
+		end
+	end, { Frame.robuxPackages, Frame.featuredRobuxPackage, v1 })
+	local UseResult = ReactModule.useCallback(function(p1, LayoutOrder, p2) --[[ Line: 225 ]]
+		-- upvalues: Frame (copy), FFlagEnableCategoryLoggingInShopModule (upval), UseMemoResult (copy), v1 (copy), HasFeaturedRobuxPackage (copy), tileWrapperProps (upval), ReactModule (upval), View (upval), RobuxPackageTileContainerModule (upval), OnItemActivated (copy), ComputeRobuxPackageMediaHeightScaleFunction (upval), ShopPageType (upval), ShopItemTileModule (upval), OnItemActivated (copy), ShopPageType1 (upval)
+		local config = {
+			categoryId = Frame.sectionId,
+			categoryType = if FFlagEnableCategoryLoggingInShopModule then Frame.categoryType else nil,
+			stableCategoryId = if FFlagEnableCategoryLoggingInShopModule then Frame.stableCategoryId else nil,
+			categoryGroup = if FFlagEnableCategoryLoggingInShopModule then Frame.categoryGroup else nil,
+			categoryName = if FFlagEnableCategoryLoggingInShopModule then Frame.categoryName else nil,
+			gridPositionRow = if p2 then p2.gridPositionRow else nil,
+			gridPositionColumn = LayoutOrder
+		}
+		local UseMemoResultEntry = if UseMemoResult == nil then nil else UseMemoResult[p1.id]
+		
+		if UseMemoResultEntry == nil then
+			local TileWrapperPropsResult = tileWrapperProps(if p2 == nil or p2.rowWidth <= 0 then nil elseif p2.isFeaturedDoubleWidthRobux(p1, LayoutOrder) and p2.featuredRobuxWidth ~= nil then p2.featuredRobuxWidth else p2.shopWidth, 1)
+			
+			return ReactModule.createElement(View, {
+				tag = TileWrapperPropsResult.tag,
+				Size = TileWrapperPropsResult.Size,
+				flexItem = TileWrapperPropsResult.flexItem,
+				LayoutOrder = LayoutOrder
 			}, {
-				Tile = reactModule.createElement(shopItemTileModule, {
-					itemId = p2.id,
-					itemType = p2.itemType,
-					name = p2.name,
-					thumbnail = p2.thumbnail,
-					price = p2.price,
-					userBasePriceInRobux = p2.userBasePriceInRobux,
-					universeId = p2.universeId,
-					categoryId = t.categoryId,
-					categoryType = t.categoryType,
-					stableCategoryId = t.stableCategoryId,
-					categoryGroup = t.categoryGroup,
-					categoryName = t.categoryName,
-					gridPositionRow = t.gridPositionRow,
-					gridPositionColumn = t.gridPositionColumn,
-					onItemActivated = onItemActivated,
-					shopPageType = if var3 then var3.Home else nil
+				Tile = ReactModule.createElement(ShopItemTileModule, {
+					itemId = p1.id,
+					itemType = p1.itemType,
+					name = p1.name,
+					thumbnail = p1.thumbnail,
+					price = p1.price,
+					userBasePriceInRobux = p1.userBasePriceInRobux,
+					universeId = p1.universeId,
+					categoryId = config.categoryId,
+					categoryType = config.categoryType,
+					stableCategoryId = config.stableCategoryId,
+					categoryGroup = config.categoryGroup,
+					categoryName = config.categoryName,
+					gridPositionRow = config.gridPositionRow,
+					gridPositionColumn = config.gridPositionColumn,
+					onItemActivated = OnItemActivated,
+					shopPageType = if ShopPageType1 then ShopPageType1.Home else nil
+				})
+			})
+		else
+			local V25 = v1 or HasFeaturedRobuxPackage and LayoutOrder == 1
+			local TileWrapperPropsResult = tileWrapperProps(if p2 == nil or p2.rowWidth <= 0 then nil elseif p2.isFeaturedDoubleWidthRobux(p1, LayoutOrder) and p2.featuredRobuxWidth ~= nil then p2.featuredRobuxWidth else p2.shopWidth, if V25 then 2 else 1)
+			
+			return ReactModule.createElement(View, {
+				tag = TileWrapperPropsResult.tag,
+				Size = TileWrapperPropsResult.Size,
+				flexItem = TileWrapperPropsResult.flexItem,
+				LayoutOrder = LayoutOrder
+			}, {
+				Tile = ReactModule.createElement(RobuxPackageTileContainerModule, {
+					pkg = UseMemoResultEntry,
+					paymentSessionId = Frame.paymentSessionId,
+					bonusJwt = Frame.bonusJwt,
+					onBonusItemActivated = OnItemActivated,
+					mediaHeightScale = if p2 == nil or p2.shopWidth <= 0 then nil else ComputeRobuxPackageMediaHeightScaleFunction(p2.shopWidth, p2.gap),
+					categoryId = config.categoryId,
+					categoryType = Frame.categoryType,
+					stableCategoryId = config.stableCategoryId,
+					categoryGroup = config.categoryGroup,
+					categoryName = config.categoryName,
+					gridPositionRow = config.gridPositionRow,
+					gridPositionColumn = config.gridPositionColumn,
+					shopPageType = if ShopPageType then ShopPageType.Home else nil
 				})
 			})
 		end
-		local var13 = tileWrapperProps(if p4 == nil or p4.rowWidth <= 0 then nil elseif p4.isFeaturedDoubleWidthRobux(p2, p3) and p4.featuredRobuxWidth ~= nil then p4.featuredRobuxWidth else p4.shopWidth, if var4 or var5 and p3 == 1 then 2 else 1)
-		
-		return reactModule.createElement(view, {
-			tag = var13.tag,
-			Size = var13.Size,
-			flexItem = var13.flexItem,
-			LayoutOrder = p3
-		}, {
-			Tile = reactModule.createElement(robuxPackageTileContainerModule, {
-				pkg = var11,
-				paymentSessionId = p1.paymentSessionId,
-				bonusJwt = p1.bonusJwt,
-				onBonusItemActivated = onItemActivated,
-				mediaHeightScale = if p4 == nil or p4.shopWidth <= 0 then nil else computeRobuxPackageMediaHeightScale(p4.shopWidth, p4.gap),
-				categoryId = t.categoryId,
-				categoryType = p1.categoryType,
-				stableCategoryId = t.stableCategoryId,
-				categoryGroup = t.categoryGroup,
-				categoryName = t.categoryName,
-				gridPositionRow = t.gridPositionRow,
-				gridPositionColumn = t.gridPositionColumn,
-				shopPageType = if var2 then var2.Home else nil
-			})
-		})
 	end, {
-		var9, onItemActivated, onItemActivated, var4, var5, p1.paymentSessionId,
-		p1.bonusJwt, p1.sectionId, p1.categoryType, p1.stableCategoryId,
-		p1.categoryGroup, p1.categoryName
+		UseMemoResult, OnItemActivated, OnItemActivated, v1, HasFeaturedRobuxPackage,
+		Frame.paymentSessionId, Frame.bonusJwt, Frame.sectionId, Frame.categoryType,
+		Frame.stableCategoryId, Frame.categoryGroup, Frame.categoryName
 	})
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 328 ]]
+		-- upvalues: Frame (copy)
+		if Frame.onCategoryActivated then
+			Frame.onCategoryActivated(Frame.sectionId)
+		end
+	end, { Frame.sectionId, Frame.onCategoryActivated })
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "col gap-medium size-full-0 auto-y padding-bottom-xlarge",
-		LayoutOrder = p1.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		Title = reactModule.createElement(sectionTitleModule, {
+		Title = ReactModule.createElement(SectionTitleModule, {
 			LayoutOrder = 1,
-			title = p1.title,
-			onActivated = if p1.onCategoryActivated then reactModule.useCallback(function()
-				-- upvalues: p1 (ref)
-				if p1.onCategoryActivated then
-					p1.onCategoryActivated(p1.sectionId)
-				end
-			end, { p1.sectionId, p1.onCategoryActivated }) else nil
+			title = Frame.title,
+			onActivated = if Frame.onCategoryActivated then UseResult1 else nil
 		}),
-		Grid = reactModule.createElement(itemGridModule, {
+		Grid = ReactModule.createElement(ItemGridModule, {
 			LayoutOrder = 2,
-			items = var7,
-			itemsPerRow = p1.itemsPerRow,
-			sectionId = p1.sectionId,
-			onItemActivated = onItemActivated,
-			renderTile = if fFlagEnableInExperienceShopUnifiedLoggingModule then var10 elseif var9 ~= nil then nil else var10,
-			isFeaturedDoubleWidthRobux = reactModule.useMemo(function()
-				-- upvalues: var4 (ref), var5 (ref), featuredRobuxPackage (ref)
-				if var4 then
-					return function(_, _)
+			items = ReactModule.useMemo(function() --[[ Line: 166 ]]
+				-- upvalues: v1 (copy), Frame (copy), ConstantsModule (upval)
+				if v1 then
+					local RobuxPackages = Frame.robuxPackages
+					local Smallest = math.min(#RobuxPackages, ConstantsModule.ITEMS_PER_SECTION, (math.floor(Frame.itemsPerRow / 2)))
+					local Buffer = table.create(Smallest)
+					
+					for i = 1, Smallest do
+						local RobuxPackage = RobuxPackages[i]
+						Buffer[i] = {
+							id = RobuxPackage.id,
+							name = tostring(RobuxPackage.robuxAmount),
+							thumbnail = RobuxPackage.robuxImage
+						}
+					end
+					return Buffer
+				else
+					if Frame.featuredRobuxPackage == nil then
+						return table.move(Frame.items, 1, math.min(#Frame.items, ConstantsModule.ITEMS_PER_SECTION, Frame.itemsPerRow), 1, {})
+					end
+					local Smallest = math.min(#Frame.items, ConstantsModule.ITEMS_PER_SECTION, (math.max(Frame.itemsPerRow - 2, 0)))
+					local Buffer = table.create(Smallest + 1)
+					local FeaturedRobuxPackage = Frame.featuredRobuxPackage
+					Buffer[1] = {
+						id = FeaturedRobuxPackage.id,
+						name = tostring(FeaturedRobuxPackage.robuxAmount),
+						thumbnail = FeaturedRobuxPackage.robuxImage
+					}
+					
+					for i1 = 1, Smallest do
+						Buffer[i1 + 1] = Frame.items[i1]
+					end
+					return Buffer
+				end
+			end, {
+				Frame.items, Frame.robuxPackages, Frame.featuredRobuxPackage,
+				Frame.itemsPerRow, v1, HasFeaturedRobuxPackage
+			}),
+			itemsPerRow = Frame.itemsPerRow,
+			sectionId = Frame.sectionId,
+			onItemActivated = OnItemActivated,
+			renderTile = if FFlagEnableInExperienceShopUnifiedLoggingModule then UseResult elseif UseMemoResult == nil then nil else UseResult,
+			isFeaturedDoubleWidthRobux = ReactModule.useMemo(function() --[[ Line: 311 ]]
+				-- upvalues: v1 (copy), HasFeaturedRobuxPackage (copy), FeaturedRobuxPackage (copy)
+				if v1 then
+					return function(_, _): boolean --[[ Line: 313 ]]
 						return true
 					end
-				elseif var5 then
-					local id = featuredRobuxPackage.id
+				elseif HasFeaturedRobuxPackage then
+					local Id = FeaturedRobuxPackage.id
 					
-					return function(p2, p3)
-						-- upvalues: id (ref)
-						return p3 == 1 and p2.id == id
+					return function(p1, p2): boolean --[[ Line: 323 ]]
+						-- upvalues: Id (copy)
+						return p2 == 1 and p1.id == Id
 					end
+				else
+					return nil
 				end
-				return nil
-			end, { var4, var5, featuredRobuxPackage }),
-			gridRef = if fFlagEnableInExperienceShopUnifiedLoggingModule then var6.gridRef else nil,
-			onGridLayoutChange = if fFlagEnableInExperienceShopUnifiedLoggingModule then var6.onLayoutChange else nil
+			end, { v1, HasFeaturedRobuxPackage, FeaturedRobuxPackage }),
+			gridRef = if FFlagEnableInExperienceShopUnifiedLoggingModule then UseShopImpressionsDetectorModuleResult.gridRef else nil,
+			onGridLayoutChange = if FFlagEnableInExperienceShopUnifiedLoggingModule then UseShopImpressionsDetectorModuleResult.onLayoutChange else nil
 		}),
-		ImpressionsDetector = if fFlagEnableInExperienceShopUnifiedLoggingModule then var6.impressionsDetector else nil
+		ImpressionsDetector = if FFlagEnableInExperienceShopUnifiedLoggingModule then UseShopImpressionsDetectorModuleResult.impressionsDetector else nil
 	})
 end)

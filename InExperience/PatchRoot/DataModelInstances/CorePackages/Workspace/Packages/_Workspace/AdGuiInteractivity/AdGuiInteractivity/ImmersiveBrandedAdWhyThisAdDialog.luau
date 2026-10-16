@@ -1,77 +1,75 @@
-﻿local adGuiInteractivity = script:FindFirstAncestor("AdGuiInteractivity")
-local parent = adGuiInteractivity.Parent
-local reactModule = require(parent.React)
-local linkingProtocolModule = require(parent.LinkingProtocol)
-local foundationModule = require(parent.Foundation)
-local localizationModule = require(parent.Localization)
-local adsInteractivityTelemetryModule = require(adGuiInteractivity.AdsInteractivityTelemetry)
-local default = linkingProtocolModule.LinkingProtocol.default
-local dialog = foundationModule.Dialog
-local view = foundationModule.View
-local button = foundationModule.Button
-local dialogSize = foundationModule.Enums.DialogSize
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local inputSize = foundationModule.Enums.InputSize
-local useLocalization = localizationModule.Hooks.useLocalization
-local immersiveBrandedAdsLearnMoreUrl = game:DefineFastString("ImmersiveBrandedAdsLearnMoreUrl", "www.roblox.com")
+﻿local AdGuiInteractivity = script:FindFirstAncestor("AdGuiInteractivity")
+local Parent = AdGuiInteractivity.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local AdsInteractivityTelemetryModule = require(AdGuiInteractivity.AdsInteractivityTelemetry)
+local Default = require(Parent.LinkingProtocol).LinkingProtocol.default
+local Dialog = FoundationModule.Dialog
+local View = FoundationModule.View
+local Button = FoundationModule.Button
+local DialogSize = FoundationModule.Enums.DialogSize
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local InputSize = FoundationModule.Enums.InputSize
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local ImmersiveBrandedAdsLearnMoreUrl = game:DefineFastString("ImmersiveBrandedAdsLearnMoreUrl", "www.roblox.com")
 
-return function(p1)
-	-- upvalues: useLocalization (ref), reactModule (ref), default (ref), immersiveBrandedAdsLearnMoreUrl (ref), adsInteractivityTelemetryModule (ref), dialog (ref), dialogSize (ref), view (ref), button (ref), buttonVariant (ref), inputSize (ref)
-	local advertiserName = p1.advertiserName or ""
-	local var1 = useLocalization({
+return function(p1) --[[ Line: 27 ]]
+	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), Default (copy), ImmersiveBrandedAdsLearnMoreUrl (copy), AdsInteractivityTelemetryModule (copy), Dialog (copy), DialogSize (copy), View (copy), Button (copy), ButtonVariant (copy), InputSize (copy)
+	local AdvertiserName = p1.advertiserName or ""
+	local UseLocalizationResult = UseLocalizationFunction({
 		WhyThisAdText = "CoreScripts.Ads.Label.WhyThisAd",
 		CloseButtonText = "CoreScripts.Ads.Action.Close",
 		StaticBodyText = "CoreScripts.Ads.Label.InExperienceDisclosureStatic",
 		LearnMoreLinkText = "InGame.CommonUI.Badge.Popup.LearnMoreLink",
 		DynamicAdvertiserBodyText = {
 			"CoreScripts.Ads.ImmersiveBrandedAds.WhyThisAd",
-			AdvertiserName = advertiserName
+			AdvertiserName = AdvertiserName
 		}
 	})
 	
-	return reactModule.createElement(reactModule.Fragment, nil, {
-		dialog = reactModule.createElement(dialog.Root, {
-			size = dialogSize.Small,
-			onClose = reactModule.useCallback(function(_)
-				-- upvalues: p1 (ref)
+	return ReactModule.createElement(ReactModule.Fragment, nil, {
+		dialog = ReactModule.createElement(Dialog.Root, {
+			size = DialogSize.Small,
+			onClose = ReactModule.useCallback(function(_) --[[ Line: 53 ]]
+				-- upvalues: p1 (copy)
 				p1.onDismiss()
 			end, { p1.onDismiss })
 		}, {
-			dialogTitle = reactModule.createElement(dialog.Title, { text = var1.WhyThisAdText }),
-			dialogContent = reactModule.createElement(dialog.Content, nil, {
-				content = reactModule.createElement(view, { tag = "col size-full-0 auto-y gap-small" }, {
-					dialogText = reactModule.createElement(dialog.Text, {
+			dialogTitle = ReactModule.createElement(Dialog.Title, { text = UseLocalizationResult.WhyThisAdText }),
+			dialogContent = ReactModule.createElement(Dialog.Content, nil, {
+				content = ReactModule.createElement(View, { tag = "col size-full-0 auto-y gap-small" }, {
+					dialogText = ReactModule.createElement(Dialog.Text, {
 						LayoutOrder = 1,
-						Text = if advertiserName ~= "" then var1.DynamicAdvertiserBodyText else var1.StaticBodyText
+						Text = if AdvertiserName == "" then UseLocalizationResult.StaticBodyText else UseLocalizationResult.DynamicAdvertiserBodyText
 					}),
-					link = reactModule.createElement(button, {
+					link = ReactModule.createElement(Button, {
 						LayoutOrder = 2,
 						icon = "icons/navigation/externallink",
-						text = var1.LearnMoreLinkText,
-						variant = buttonVariant.Link,
-						onActivated = reactModule.useCallback(function()
-							-- upvalues: default (copy), immersiveBrandedAdsLearnMoreUrl (copy), adsInteractivityTelemetryModule (copy), p1 (ref)
-							default:openURL(immersiveBrandedAdsLearnMoreUrl):catch(function(_)
-								-- upvalues: adsInteractivityTelemetryModule (copy), p1 (copy)
-								adsInteractivityTelemetryModule.logImmersiveBrandedAdLinkingFailedCounter("whyThisAd.learnMore")
+						text = UseLocalizationResult.LearnMoreLinkText,
+						variant = ButtonVariant.Link,
+						onActivated = ReactModule.useCallback(function() --[[ Line: 46 ]]
+							-- upvalues: Default (upval), ImmersiveBrandedAdsLearnMoreUrl (upval), AdsInteractivityTelemetryModule (upval), p1 (copy)
+							Default:openURL(ImmersiveBrandedAdsLearnMoreUrl):catch(function(_) --[[ Line: 47 ]]
+								-- upvalues: AdsInteractivityTelemetryModule (upval), p1 (upval)
+								AdsInteractivityTelemetryModule.logImmersiveBrandedAdLinkingFailedCounter("whyThisAd.learnMore")
 								p1.onDismiss()
 							end)
 						end, { p1.onDismiss }),
-						size = inputSize.Small
+						size = InputSize.Small
 					})
 				})
 			}),
-			dialogActions = reactModule.createElement(dialog.Actions, {
+			dialogActions = ReactModule.createElement(Dialog.Actions, {
 				actions = {
 					{
-						text = var1.CloseButtonText,
-						variant = buttonVariant.Standard,
+						text = UseLocalizationResult.CloseButtonText,
+						variant = ButtonVariant.Standard,
 						onActivated = p1.onDismiss
 					}
 				}
 			})
 		}),
-		modal = reactModule.createElement("TextButton", {
+		modal = ReactModule.createElement("TextButton", {
 			Text = "",
 			BackgroundTransparency = 1,
 			Modal = true,

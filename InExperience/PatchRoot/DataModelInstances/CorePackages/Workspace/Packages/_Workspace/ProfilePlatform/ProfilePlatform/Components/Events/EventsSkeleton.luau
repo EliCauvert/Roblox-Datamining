@@ -1,62 +1,64 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local textKeysModule = require(profilePlatform.Common.TextKeys)
-local foundationModule = require(parent.Foundation)
-local skeleton = foundationModule.Skeleton
-local radius = foundationModule.Enums.Radius
-local view = foundationModule.View
-local useTextSizeOffset = foundationModule.Hooks.useTextSizeOffset
-local collectionCarousel = require(parent.CollectionViews).CollectionCarousel
-local useGetGameTileHeight = require(parent.GameCollections).useGetGameTileHeight
-local useDesignTokens = require(parent.Style).useDesignTokens
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local TextKeysModule = require(ProfilePlatform.Common.TextKeys)
+local FoundationModule = require(Parent.Foundation)
+local Skeleton = FoundationModule.Skeleton
+local Radius = FoundationModule.Enums.Radius
+local View = FoundationModule.View
+local UseTextSizeOffsetFunction = FoundationModule.Hooks.useTextSizeOffset
+local CollectionCarousel = require(Parent.CollectionViews).CollectionCarousel
+local UseGetGameTileHeightFunction = require(Parent.GameCollections).useGetGameTileHeight
+local UseDesignTokensFunction = require(Parent.Style).useDesignTokens
 
-return function(p1)
-	-- upvalues: useLocalization (ref), textKeysModule (ref), useTextSizeOffset (ref), useDesignTokens (ref), useGetGameTileHeight (ref), reactModule (ref), view (ref), skeleton (ref), radius (ref), collectionCarousel (ref)
-	local var1 = useDesignTokens()
+return function(p1) --[[ Line: 21 | Named "EventsSkeleton" ]]
+	-- upvalues: UseLocalizationFunction (copy), TextKeysModule (copy), UseTextSizeOffsetFunction (copy), UseDesignTokensFunction (copy), UseGetGameTileHeightFunction (copy), ReactModule (copy), View (copy), Skeleton (copy), Radius (copy), CollectionCarousel (copy)
+	local UseLocalizationResult = UseLocalizationFunction({ events = TextKeysModule.EventsListTitle })
+	local UseTextSizeOffsetResult = UseTextSizeOffsetFunction()
+	local UseDesignTokensResult = UseDesignTokensFunction()
 	
-	return reactModule.createElement(collectionCarousel, {
+	return ReactModule.createElement(CollectionCarousel, {
 		scrollingFrameRef = nil,
 		hideHeaderButton = true,
 		numColumns = 1,
 		fractionalItemAmount = 0.33,
 		sideMargin = 0,
-		title = useLocalization({ events = textKeysModule.EventsListTitle }).events,
-		items = reactModule.useMemo(function()
-			-- upvalues: p1 (ref)
-			local t = {}
+		title = UseLocalizationResult.events,
+		items = ReactModule.useMemo(function() --[[ Line: 63 ]]
+			-- upvalues: p1 (copy)
+			local List = {}
 			
 			for i = 1, p1.numSkeletons do
-				table.insert(t, i)
+				table.insert(List, i)
 			end
-			return t
+			return List
 		end, { p1.numSkeletons }),
-		renderItem = reactModule.useCallback(function(_, p2, p3)
-			-- upvalues: reactModule (copy), view (copy), skeleton (copy), radius (copy)
-			return reactModule.createElement(view, {
+		renderItem = ReactModule.useCallback(function(_, LayoutOrder, Size) --[[ Line: 38 ]]
+			-- upvalues: ReactModule (upval), View (upval), Skeleton (upval), Radius (upval)
+			return ReactModule.createElement(View, {
 				tag = "col gap-medium radius-medium",
-				LayoutOrder = p2,
-				Size = p3
+				LayoutOrder = LayoutOrder,
+				Size = Size
 			}, {
-				ThumbnailSkeleton = reactModule.createElement(skeleton, {
+				ThumbnailSkeleton = ReactModule.createElement(Skeleton, {
 					LayoutOrder = 1,
 					Size = UDim2.fromScale(1, 0.6),
-					radius = radius.Medium
+					radius = Radius.Medium
 				}),
-				NameSkeleton = reactModule.createElement(skeleton, {
+				NameSkeleton = ReactModule.createElement(Skeleton, {
 					LayoutOrder = 2,
 					Size = UDim2.fromScale(0.8, 0.15),
-					radius = radius.Medium
+					radius = Radius.Medium
 				}),
-				ButtonSkeleton = reactModule.createElement(skeleton, {
+				ButtonSkeleton = ReactModule.createElement(Skeleton, {
 					LayoutOrder = 3,
 					Size = UDim2.fromScale(1, 0.1),
-					radius = radius.Medium
+					radius = Radius.Medium
 				})
-			}), "Skeleton_" .. p1
+			}), "Skeleton_" .. LayoutOrder
 		end, {}),
-		getItemHeight = useGetGameTileHeight(false, "Event", true, false, false, useTextSizeOffset(), var1.Size.Size_700 + var1.Size.Size_200),
-		columnGap = var1.Size.Size_300
+		getItemHeight = UseGetGameTileHeightFunction(false, "Event", true, false, false, UseTextSizeOffsetResult, UseDesignTokensResult.Size.Size_700 + UseDesignTokensResult.Size.Size_200),
+		columnGap = UseDesignTokensResult.Size.Size_300
 	})
 end

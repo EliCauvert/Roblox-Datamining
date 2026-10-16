@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("RemoveAvatarSwitcherIfUnsupported", false)
+﻿return (game:DefineFastFlag("RemoveAvatarSwitcherIfUnsupported", false))

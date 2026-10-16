@@ -1,50 +1,52 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local parent = dataHydration.Parent
-local httpModule = require(parent.Http)
-local _ = require(parent.HttpClient)
-local fStringArgusApiUrlBaseModule = require(dataHydration.Moments.FStringArgusApiUrlBase)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local Parent = DataHydration.Parent
+local HttpModule = require(Parent.Http)
+local _ = require(Parent.HttpClient)
+local FStringArgusApiUrlBaseModule = require(DataHydration.Moments.FStringArgusApiUrlBase)
 
-local function _(p1)
-	return if p1:sub(#p1) == "/" then p1:sub(1, #p1 - 1) else p1
+local function _(Text: string): string --[[ Line: 14 | Named "normalizeBaseUrl" ]]
+	return if Text:sub(#Text) == "/" then Text:sub(1, #Text - 1) else Text
 end
 
-local _ = function(p1)
-	return if p1:sub(1, 1) == "/" then p1 else `/{p1}`
+local _ = function(Text: string): string --[[ Line: 22 | Named "normalizePath" ]]
+	return if Text:sub(1, 1) == "/" then Text else `/{Text}`
 end
 
-local _ = function()
-	-- upvalues: fStringArgusApiUrlBaseModule (ref)
-	local var1 = fStringArgusApiUrlBaseModule()
+local _ = function() --[[ Line: 30 | Named "getFStringApiUrlBase" ]]
+	-- upvalues: FStringArgusApiUrlBaseModule (copy)
+	local FStringArgusApiUrlBaseModuleResult: string = FStringArgusApiUrlBaseModule()
 	
-	if var1 == "" then
+	if FStringArgusApiUrlBaseModuleResult == "" then
 		return nil
+	else
+		local Segment = if FStringArgusApiUrlBaseModuleResult:sub(#FStringArgusApiUrlBaseModuleResult) == "/" then FStringArgusApiUrlBaseModuleResult:sub(1, #FStringArgusApiUrlBaseModuleResult - 1) else FStringArgusApiUrlBaseModuleResult
+		
+		return if Segment:match("^https?://") == nil then nil else Segment
 	end
-	local var2 = if var1:sub(#var1) == "/" then var1:sub(1, #var1 - 1) else var1
-	
-	return if var2:match("^https?://") == nil then nil else var2
 end
 
-return function(p1)
-	-- upvalues: fStringArgusApiUrlBaseModule (ref), httpModule (ref)
-	local var1
-	assert(type(p1) == "string", "path must be a string")
-	local localPlayer = game:GetService("Players").LocalPlayer
-	local var2 = fStringArgusApiUrlBaseModule()
+return function(Text: string) --[[ Line: 44 | Named "constructApiUrl" ]]
+	-- upvalues: FStringArgusApiUrlBaseModule (copy), HttpModule (copy)
+	assert(type(Text) == "string", "path must be a string")
+	local LocalPlayer = game:GetService("Players").LocalPlayer
+	local FStringArgusApiUrlBaseModuleResult: string = FStringArgusApiUrlBaseModule()
+	local v1 = nil
 	
-	if var2 == "" then
-		var1 = nil
+	if FStringArgusApiUrlBaseModuleResult == "" then
+		v1 = nil
 	else
-		local var3 = if var2:sub(#var2) == "/" then var2:sub(1, #var2 - 1) else var2
-		var1 = if var3:match("^https?://") == nil then nil else var3
+		local Segment = if FStringArgusApiUrlBaseModuleResult:sub(#FStringArgusApiUrlBaseModuleResult) == "/" then FStringArgusApiUrlBaseModuleResult:sub(1, #FStringArgusApiUrlBaseModuleResult - 1) else FStringArgusApiUrlBaseModuleResult
+		v1 = if Segment:match("^https?://") == nil then nil else Segment
 	end
-	local var4 = if var1 ~= nil then httpModule.Url.APIS_URL else var1
-	local var5 = if var4:sub(#var4) == "/" then var4:sub(1, #var4 - 1) else var4
-	local var6 = `{var5}{if p1:sub(1, 1) == "/" then p1 else `/{p1}`}`
+	local APISURL = if v1 == nil then HttpModule.Url.APIS_URL else v1
+	local Segment = if APISURL:sub(#APISURL) == "/" then APISURL:sub(1, #APISURL - 1) else APISURL
+	local Text1: string = `{Segment}{if Text:sub(1, 1) == "/" then Text else `/{Text}`}`
 	
-	if var5 == "https://apis.roblox.com" or localPlayer == nil then
-		return var6, nil
+	if Segment == "https://apis.roblox.com" or LocalPlayer == nil then
+		return Text1, nil
+	else
+		return Text1, {
+			["robloxctx-authenticated-userid"] = tostring(LocalPlayer.UserId)
+		}
 	end
-	return var6, {
-		["robloxctx-authenticated-userid"] = tostring(localPlayer.UserId)
-	}
 end

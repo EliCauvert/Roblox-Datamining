@@ -1,44 +1,45 @@
-﻿local function _(value, minValue, maxValue, p1)
-	if maxValue <= 0 or p1 <= 0 then
-		return value
+﻿local function _(Value: number, p1: number, p2: number, p3: number): number --[[ Line: 1 | Named "clampAxis" ]]
+	if p2 <= 0 or p3 <= 0 then
+		return Value
+	else
+		local MinValue = p1 + p3 / 2
+		local MaxValue = p1 + p2 - p3 / 2
+		
+		return if MaxValue < MinValue then p1 + p2 / 2 else math.clamp(Value, MinValue, MaxValue)
 	end
-	local var1 = minValue + p1 / 2
-	local var2 = minValue + maxValue - p1 / 2
-	
-	return if var2 < var1 then minValue + maxValue / 2 else math.clamp(value, var1, var2)
 end
 
-return function(value, minValue, maxValue, p1, p2)
-	if minValue.X <= 0 or minValue.Y <= 0 then
-		return value
+return function(Vector, Vector1, Vector3, p1, p2) --[[ Line: 16 | Named "clampOverlayPosition" ]]
+	if Vector1.X <= 0 or Vector1.Y <= 0 then
+		return Vector
 	end
-	local var1
-	p1 = p1 or Vector2.zero
-	p2 = p2 or minValue
-	local var2 = value.X.Scale * minValue.X + value.X.Offset
-	local var3 = value.Y.Scale * minValue.Y + value.Y.Offset
-	local x = p1.X
-	local x_1 = p2.X
-	local x_2 = maxValue.X
+	local P6 = p1 or Vector2.zero
+	local P7 = p2 or Vector1
+	local NewScale = Vector.X.Scale * Vector1.X + Vector.X.Offset
+	local NewScale1 = Vector.Y.Scale * Vector1.Y + Vector.Y.Offset
+	local X: number = P6.X
+	local X1: number = P7.X
+	local X2: number = Vector3.X
+	local ClampedValue = nil
 	
-	if x_1 <= 0 or x_2 <= 0 then
-		var1 = var2
+	if X1 <= 0 or X2 <= 0 then
+		ClampedValue = NewScale
 	else
-		local var4 = x + x_2 / 2
-		local var5 = x + x_1 - x_2 / 2
-		var1 = if var5 < var4 then x + x_1 / 2 else math.clamp(var2, var4, var5)
+		local MinValue = X + X2 / 2
+		local MaxValue = X + X1 - X2 / 2
+		ClampedValue = if MaxValue < MinValue then X + X1 / 2 else math.clamp(NewScale, MinValue, MaxValue)
 	end
-	local var6
-	x_1 = p1.Y
-	local y = p2.Y
-	local y_1 = maxValue.Y
+	local Y: number = P6.Y
+	local Y1: number = P7.Y
+	local Y2: number = Vector3.Y
+	local ClampedValue1 = nil
 	
-	if y <= 0 or y_1 <= 0 then
-		var6 = var3
+	if Y1 <= 0 or Y2 <= 0 then
+		ClampedValue1 = NewScale1
 	else
-		local var7 = x_1 + y_1 / 2
-		local var8 = x_1 + y - y_1 / 2
-		var6 = if var8 < var7 then x_1 + y / 2 else math.clamp(var3, var7, var8)
+		local MinValue1 = Y + Y2 / 2
+		local MaxValue1 = Y + Y1 - Y2 / 2
+		ClampedValue1 = if MaxValue1 < MinValue1 then Y + Y1 / 2 else math.clamp(NewScale1, MinValue1, MaxValue1)
 	end
-	return UDim2.fromScale(var1 / minValue.X, var6 / minValue.Y)
+	return UDim2.fromScale(ClampedValue / Vector1.X, ClampedValue1 / Vector1.Y)
 end

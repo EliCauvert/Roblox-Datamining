@@ -1,18 +1,18 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local isScrollingFrameOverflowingYModule = require(foundation.Utility.isScrollingFrameOverflowingY)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local IsScrollingFrameOverflowingYModule = require(Foundation.Utility.isScrollingFrameOverflowingY)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 
-return function()
-	-- upvalues: reactModule (ref), useTokensModule (ref), isScrollingFrameOverflowingYModule (ref)
-	local var1, var2 = reactModule.useState(false)
-	local var3 = useTokensModule()
-	local var4, var5 = reactModule.useBinding(0)
+return function() --[[ Line: 9 | Named "useScrollBarPadding" ]]
+	-- upvalues: ReactModule (copy), UseTokensModule (copy), IsScrollingFrameOverflowingYModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseTokensModuleResult = UseTokensModule()
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
 	
-	return var1, var4, reactModule.useCallback(function(p1)
-		-- upvalues: isScrollingFrameOverflowingYModule (copy), var2 (ref), var5 (ref), var3 (ref)
-		local var6 = isScrollingFrameOverflowingYModule(p1, 1)
-		var2(var6)
-		var5(if var6 then var3.Size.Size_150 else 0)
-	end, { var3.Size.Size_150 })
+	return UseStateResult, UseBindingResult, (ReactModule.useCallback(function(p1) --[[ Line: 14 ]]
+		-- upvalues: IsScrollingFrameOverflowingYModule (upval), UseStateResult2 (copy), UseBindingResult2 (copy), UseTokensModuleResult (copy)
+		local IsScrollingFrameOverflowingYModule1 = IsScrollingFrameOverflowingYModule(p1, 1)
+		UseStateResult2(IsScrollingFrameOverflowingYModule1)
+		UseBindingResult2(if IsScrollingFrameOverflowingYModule1 then UseTokensModuleResult.Size.Size_150 else 0)
+	end, { UseTokensModuleResult.Size.Size_150 }))
 end

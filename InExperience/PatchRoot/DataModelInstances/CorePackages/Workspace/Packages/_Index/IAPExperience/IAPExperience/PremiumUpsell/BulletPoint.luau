@@ -1,53 +1,53 @@
-﻿local textService = game:GetService("TextService")
-local parent = script.Parent.Parent.Parent
-local UIBloxModule = require(parent.UIBlox)
-local roactModule = require(parent.Roact)
-local foundationModule = require(parent.Foundation)
-local getTextSize = require(parent.Style).GetTextSize
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local images = UIBloxModule.App.ImageSet.Images
-local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
-local withStyle = UIBloxModule.Style.withStyle
-local iconSize = UIBloxModule.App.Constant.IconSize
-local var1 = iconSize.Small + 16
+﻿local TextService = game:GetService("TextService")
+local Parent = script.Parent.Parent.Parent
+local UIBloxModule = require(Parent.UIBlox)
+local RoactModule = require(Parent.Roact)
+local FoundationModule = require(Parent.Foundation)
+local GetTextSizeFunction = require(Parent.Style).GetTextSize
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local Images = UIBloxModule.App.ImageSet.Images
+local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
+local WithStyleFunction = UIBloxModule.Style.withStyle
+local IconSize = UIBloxModule.App.Constant.IconSize
+local NewSmall = IconSize.Small + 16
 
-return function(p1)
-	-- upvalues: withStyle (ref), foundationFontFaceMigration (ref), getTextSize (ref), var1 (ref), textService (ref), roactModule (ref), imageSetLabel (ref), iconSize (ref), images (ref), normalizeFontFace (ref)
-	return withStyle(function(p2)
-		-- upvalues: p1 (ref), foundationFontFaceMigration (copy), getTextSize (copy), var1 (copy), textService (copy), roactModule (copy), imageSetLabel (copy), iconSize (copy), images (copy), normalizeFontFace (copy)
-		local theme = p2.Theme
-		local font = p2.Font
-		local text = p1.text
-		local var2 = font.Body.RelativeSize * font.BaseSize
-		local font_1 = font.Body.Font
-		local var3 = if text ~= nil then Vector2.new(0, 0) elseif foundationFontFaceMigration then getTextSize(text, var2, p2.Tokens.Typography.BodyLarge.Font, Vector2.new(p1.width - var1, 10000), { addTemporaryPadding = false }) else textService:GetTextSize(text, var2, font_1, Vector2.new(p1.width - var1, 10000))
+return function(p1) --[[ Line: 28 ]]
+	-- upvalues: WithStyleFunction (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), NewSmall (copy), TextService (copy), RoactModule (copy), ImageSetLabel (copy), IconSize (copy), Images (copy), NormalizeFontFaceFunction (copy)
+	return WithStyleFunction(function(p2) --[[ Line: 29 ]]
+		-- upvalues: p1 (copy), FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), NewSmall (upval), TextService (upval), RoactModule (upval), ImageSetLabel (upval), IconSize (upval), Images (upval), NormalizeFontFaceFunction (upval)
+		local Theme = p2.Theme
+		local _Font = p2.Font
+		local Text = p1.text
+		local ScaledRelativeSize = _Font.Body.RelativeSize * _Font.BaseSize
+		local BodyFont = _Font.Body.Font
+		local _Vector2 = if Text == nil then Vector2.new(0, 0) elseif FoundationFontFaceMigration then GetTextSizeFunction(Text, ScaledRelativeSize, p2.Tokens.Typography.BodyLarge.Font, Vector2.new(p1.width - NewSmall, 10000), { addTemporaryPadding = false }) else TextService:GetTextSize(Text, ScaledRelativeSize, BodyFont, Vector2.new(p1.width - NewSmall, 10000))
 		
-		return roactModule.createElement("Frame", {
+		return RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
-			Size = UDim2.new(1, 0, 0, var3.Y),
+			Size = UDim2.new(1, 0, 0, _Vector2.Y),
 			LayoutOrder = p1.layoutOrder
 		}, {
-			Bullet = roactModule.createElement(imageSetLabel, {
+			Bullet = RoactModule.createElement(ImageSetLabel, {
 				BackgroundTransparency = 1,
 				Position = UDim2.new(0, 2, 0, 2),
-				Size = UDim2.new(0, iconSize.Small, 0, iconSize.Small),
+				Size = UDim2.new(0, IconSize.Small, 0, IconSize.Small),
 				ScaleType = Enum.ScaleType.Stretch,
-				Image = images["icons/status/success_small"],
-				ImageColor3 = theme.IconDefault.Color,
-				ImageTransparency = theme.IconDefault.Transparency
+				Image = Images["icons/status/success_small"],
+				ImageColor3 = Theme.IconDefault.Color,
+				ImageTransparency = Theme.IconDefault.Transparency
 			}),
-			Text = roactModule.createElement("TextLabel", {
+			Text = RoactModule.createElement("TextLabel", {
 				BackgroundTransparency = 1,
 				TextWrapped = true,
-				Position = UDim2.new(0, var1, 0, 0),
-				Size = UDim2.new(1, -var1, 0, var3.Y),
-				Text = text,
-				TextSize = var2,
-				TextColor3 = theme.TextDefault.Color,
-				TextTransparency = theme.TextDefault.Transparency,
-				Font = if foundationFontFaceMigration then nil else font_1,
-				FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.BodyLarge.Font) else nil,
+				Position = UDim2.new(0, NewSmall, 0, 0),
+				Size = UDim2.new(1, -NewSmall, 0, _Vector2.Y),
+				Text = Text,
+				TextSize = ScaledRelativeSize,
+				TextColor3 = Theme.TextDefault.Color,
+				TextTransparency = Theme.TextDefault.Transparency,
+				Font = if FoundationFontFaceMigration then nil else BodyFont,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Tokens.Typography.BodyLarge.Font) else nil,
 				TextXAlignment = Enum.TextXAlignment.Left,
 				LayoutOrder = p1.layoutOrder
 			})

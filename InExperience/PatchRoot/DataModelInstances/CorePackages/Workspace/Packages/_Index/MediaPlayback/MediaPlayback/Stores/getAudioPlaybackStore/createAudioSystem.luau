@@ -1,54 +1,58 @@
-﻿local mediaPlayback = script:FindFirstAncestor("MediaPlayback")
-local coreGuiService = game:GetService("CoreGui")
-local assetIdAsContentModule = require(mediaPlayback.Common.assetIdAsContent)
-local getFFlagAudioPreviewLuaModule = require(mediaPlayback.Flags.getFFlagAudioPreviewLua)
+﻿local MediaPlayback = script:FindFirstAncestor("MediaPlayback")
+local CoreGui = game:GetService("CoreGui")
+local AssetIdAsContentModule = require(MediaPlayback.Common.assetIdAsContent)
+local GetFFlagAudioPreviewLuaModule = require(MediaPlayback.Flags.getFFlagAudioPreviewLua)
 
-local function getOrCreateInstances(p1)
-	local audioPlayback = p1:FindFirstChild("AudioPlayback")
-	local var1 = if audioPlayback then audioPlayback:FindFirstChildWhichIsA("AudioDeviceOutput") else nil
+local function getOrCreateInstances(Parent) --[[ Line: 15 ]]
+	local AudioPlayback = Parent:FindFirstChild("AudioPlayback")
+	local AudioDeviceOutput = if AudioPlayback then AudioPlayback:FindFirstChildWhichIsA("AudioDeviceOutput") else nil
 	
-	if audioPlayback and var1 then
-		return { container = audioPlayback, audioOutput = var1 }
+	if AudioPlayback and AudioDeviceOutput then
+		return {
+			container = AudioPlayback,
+			audioOutput = AudioDeviceOutput
+		}
+	else
+		local AudioPlayback1 = Instance.new("Folder")
+		AudioPlayback1.Name = "AudioPlayback"
+		local AudioDeviceOutput1 = Instance.new("AudioDeviceOutput")
+		AudioDeviceOutput1.Parent = AudioPlayback1
+		AudioPlayback1.Parent = Parent
+		
+		return {
+			container = AudioPlayback1,
+			audioOutput = AudioDeviceOutput1
+		}
 	end
-	local audioPlayback_1 = Instance.new("Folder")
-	audioPlayback_1.Name = "AudioPlayback"
-	local audioDeviceOutput = Instance.new("AudioDeviceOutput")
-	audioDeviceOutput.Parent = audioPlayback_1
-	audioPlayback_1.Parent = p1
-	
-	return {
-		container = audioPlayback_1,
-		audioOutput = audioDeviceOutput
-	}
 end
 
-return function(p1, p2)
-	-- upvalues: getOrCreateInstances (ref), coreGuiService (ref), assetIdAsContentModule (ref), getFFlagAudioPreviewLuaModule (ref)
-	local var1 = getOrCreateInstances(coreGuiService)
-	local audioPlayer = Instance.new("AudioPlayer")
-	audioPlayer.Asset = assetIdAsContentModule(p1)
-	audioPlayer.Name = `AudioPlayer_{audioPlayer.Asset}`
+return function(p1, p2) --[[ Line: 43 | Named "createAudioSystem" ]]
+	-- upvalues: getOrCreateInstances (copy), CoreGui (copy), AssetIdAsContentModule (copy), GetFFlagAudioPreviewLuaModule (copy)
+	local OrCreateInstances = getOrCreateInstances(CoreGui)
+	local AudioPlayer = Instance.new("AudioPlayer")
+	AudioPlayer.Asset = AssetIdAsContentModule(p1)
+	AudioPlayer.Name = `AudioPlayer_{AudioPlayer.Asset}`
 	
-	if getFFlagAudioPreviewLuaModule() and p2 then
-		audioPlayer.AssetRepresentation = Enum.AssetRepresentation.ShortPreview
+	if GetFFlagAudioPreviewLuaModule() and p2 then
+		AudioPlayer.AssetRepresentation = Enum.AssetRepresentation.ShortPreview
 	end
-	audioPlayer.Parent = var1.container
-	audioPlayer.PlaybackSpeed = 0
-	audioPlayer:Play()
+	AudioPlayer.Parent = OrCreateInstances.container
+	AudioPlayer.PlaybackSpeed = 0
+	AudioPlayer:Play()
 	
-	local function destroy()
-		-- upvalues: audioPlayer (ref), var1 (ref)
-		audioPlayer:Destroy()
+	local function destroy() --[[ Line: 78 ]]
+		-- upvalues: AudioPlayer (copy), OrCreateInstances (copy)
+		AudioPlayer:Destroy()
 		
-		if not var1.container:FindFirstChildWhichIsA("AudioPlayer") then
-			var1.container:Destroy()
+		if not OrCreateInstances.container:FindFirstChildWhichIsA("AudioPlayer") then
+			OrCreateInstances.container:Destroy()
 		end
 	end
 	
-	local wire = Instance.new("Wire")
-	wire.SourceInstance = audioPlayer
-	wire.TargetInstance = var1.audioOutput
-	wire.Parent = audioPlayer
+	local Wire = Instance.new("Wire")
+	Wire.SourceInstance = AudioPlayer
+	Wire.TargetInstance = OrCreateInstances.audioOutput
+	Wire.Parent = AudioPlayer
 	
-	return { audioPlayer = audioPlayer, destroy = destroy }
+	return { audioPlayer = AudioPlayer, destroy = destroy }
 end

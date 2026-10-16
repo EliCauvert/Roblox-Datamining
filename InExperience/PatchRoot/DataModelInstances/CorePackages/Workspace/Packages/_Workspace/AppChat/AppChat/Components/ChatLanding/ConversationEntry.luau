@@ -1,252 +1,268 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local httpService = game:GetService("HttpService")
-local reactModule = require(parent.React)
-local memo = reactModule.memo
-local useMemo = reactModule.useMemo
-local useIsUserPendingModule = require(appChat.Hooks.useIsUserPending)
-local useRelativeTimestampBindingModule = require(appChat.Hooks.useRelativeTimestampBinding)
-local useChatPagePaddingModule = require(appChat.Contexts.ChatPagePadding.useChatPagePadding)
-local UIBloxModule = require(parent.UIBlox)
-local useStyle = UIBloxModule.Core.Style.useStyle
-local useTextSizeOffset = UIBloxModule.Core.Style.useTextSizeOffset
-local text = require(parent.AppCommonLib).Text
-local cryoModule = require(parent.Cryo)
-local foundationModule = require(parent.Foundation)
-local useTokens = foundationModule.Hooks.useTokens
-local getTextSize = require(parent.Style).GetTextSize
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local getBoldTextThemeModule = require(script.Parent.Utils.getBoldTextTheme)
-local conversationCell = require(appChat.Components.Cells).ConversationCell
-local conversationRelativeTimestampModule = require(script.Parent.ConversationRelativeTimestamp)
-local domLocatorsModule = require(appChat.Utils.DomLocators)
-local squadJoinButtonModule = require(parent.Squads.SquadJoinButton)
-local squadButtonSourceEnum = require(parent.Squads.Enums).SquadButtonSourceEnum
-local squadComponentAccessWrapperModule = require(parent.Squads.SquadComponentAccessWrapper)
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local useNavigation = require(parent.Navigation).useNavigation
-local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
-local useActivationOnFocus = require(parent.FocusNavigationUtils).useActivationOnFocus
-local getFFlagDebugAppChatModule = require(appChat.Flags.getFFlagDebugAppChat)
-local fFlagAppChatSquadJoinButtonU13OSAModule = require(appChat.Flags.FFlagAppChatSquadJoinButtonU13OSA)
-local fFlagDebugAppChatEnableDomLocatorsModule = require(appChat.Flags.FFlagDebugAppChatEnableDomLocators)
-local fFlagAppChatTimestampInSubtitleModule = require(appChat.Flags.FFlagAppChatTimestampInSubtitle)
-local fFlagAppChatUseActivationOnFocus = require(parent.SharedFlags).FFlagAppChatUseActivationOnFocus
-local useTelemetryModule = require(appChat.Telemetry.useTelemetry)
-local chatLandingTelemetryLayerModule = require(appChat.Telemetry.Layers.ChatLandingTelemetryLayer)
-local constantsModule = require(appChat.Constants)
-local removedConversationModule = require(appChat.Conversations.Actions.RemovedConversation)
-local enumScreensModule = require(appChat.EnumScreens)
-local conversationModule = require(appChat.Models.Conversation)
-local shouldShowOSAForConversationModule = require(appChat.Utils.shouldShowOSAForConversation)
-local shouldShowU13ChatOptInForConversationModule = require(appChat.Utils.shouldShowU13ChatOptInForConversation)
-local getOverlayStoreModule = require(appChat.Stores.GetOverlayStore)
-local overlayTypesModule = require(appChat.Stores.GetOverlayStore.OverlayTypes)
-local useChatPlacementContext = require(appChat.Contexts.ChatPlacementContext).useChatPlacementContext
-local useCanAccessPartyModule = require(parent.Squads.useCanAccessParty)
-local _ = require(appChat.types)
-local t = {
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local HttpService = game:GetService("HttpService")
+local ReactModule = require(Parent.React)
+local UseMemoFunction = ReactModule.useMemo
+local UseIsUserPendingModule = require(AppChat.Hooks.useIsUserPending)
+local UseRelativeTimestampBindingModule = require(AppChat.Hooks.useRelativeTimestampBinding)
+local UseChatPagePaddingModule = require(AppChat.Contexts.ChatPagePadding.useChatPagePadding)
+local UIBloxModule = require(Parent.UIBlox)
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local UseTextSizeOffsetFunction = UIBloxModule.Core.Style.useTextSizeOffset
+local Text = require(Parent.AppCommonLib).Text
+local CryoModule = require(Parent.Cryo)
+local FoundationModule = require(Parent.Foundation)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local GetTextSizeFunction = require(Parent.Style).GetTextSize
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local GetBoldTextThemeModule = require(script.Parent.Utils.getBoldTextTheme)
+local ConversationCell = require(AppChat.Components.Cells).ConversationCell
+local ConversationRelativeTimestampModule = require(script.Parent.ConversationRelativeTimestamp)
+local DomLocatorsModule = require(AppChat.Utils.DomLocators)
+local SquadJoinButtonModule = require(Parent.Squads.SquadJoinButton)
+local SquadButtonSourceEnum = require(Parent.Squads.Enums).SquadButtonSourceEnum
+local SquadComponentAccessWrapperModule = require(Parent.Squads.SquadComponentAccessWrapper)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
+local UseActivationOnFocusFunction = require(Parent.FocusNavigationUtils).useActivationOnFocus
+local GetFFlagDebugAppChatModule = require(AppChat.Flags.getFFlagDebugAppChat)
+local FFlagAppChatSquadJoinButtonU13OSAModule = require(AppChat.Flags.FFlagAppChatSquadJoinButtonU13OSA)
+local FFlagDebugAppChatEnableDomLocatorsModule = require(AppChat.Flags.FFlagDebugAppChatEnableDomLocators)
+local FFlagAppChatTimestampInSubtitleModule = require(AppChat.Flags.FFlagAppChatTimestampInSubtitle)
+local FFlagAppChatUseActivationOnFocus = require(Parent.SharedFlags).FFlagAppChatUseActivationOnFocus
+local UseTelemetryModule = require(AppChat.Telemetry.useTelemetry)
+local ChatLandingTelemetryLayerModule = require(AppChat.Telemetry.Layers.ChatLandingTelemetryLayer)
+local ConstantsModule = require(AppChat.Constants)
+local RemovedConversationModule = require(AppChat.Conversations.Actions.RemovedConversation)
+local EnumScreensModule = require(AppChat.EnumScreens)
+local ConversationModule = require(AppChat.Models.Conversation)
+local ShouldShowOSAForConversationModule = require(AppChat.Utils.shouldShowOSAForConversation)
+local ShouldShowU13ChatOptInForConversationModule = require(AppChat.Utils.shouldShowU13ChatOptInForConversation)
+local GetOverlayStoreModule = require(AppChat.Stores.GetOverlayStore)
+local OverlayTypesModule = require(AppChat.Stores.GetOverlayStore.OverlayTypes)
+local UseChatPlacementContextFunction = require(AppChat.Contexts.ChatPlacementContext).useChatPlacementContext
+local UseCanAccessPartyModule = require(Parent.Squads.useCanAccessParty)
+local _ = require(AppChat.types)
+local config = {
 	entryHeight = 64,
 	boldTitle = true,
-	onSquadJoinButtonActivated = function() end
+	onSquadJoinButtonActivated = function() --[[ Line: 77 ]] end
 }
 
-return memo(function(p1)
-	-- upvalues: cryoModule (ref), t (ref), useStyle (ref), useTokens (ref), useTextSizeOffset (ref), useTelemetryModule (ref), chatLandingTelemetryLayerModule (ref), useIsUserPendingModule (ref), getBoldTextThemeModule (ref), useDispatch (ref), useChatPlacementContext (ref), useChatPagePaddingModule (ref), useRelativeTimestampBindingModule (ref), useMemo (ref), foundationFontFaceMigration (ref), getTextSize (ref), text (ref), fFlagAppChatTimestampInSubtitleModule (ref), reactModule (ref), useNavigation (ref), getOverlayStoreModule (ref), enumScreensModule (ref), overlayTypesModule (ref), conversationModule (ref), removedConversationModule (ref), shouldShowU13ChatOptInForConversationModule (ref), constantsModule (ref), shouldShowOSAForConversationModule (ref), httpService (ref), fFlagAppChatSquadJoinButtonU13OSAModule (ref), fFlagAppChatUseActivationOnFocus (ref), useActivationOnFocus (ref), reactFocusNavigationModule (ref), useCanAccessPartyModule (ref), squadComponentAccessWrapperModule (ref), squadJoinButtonModule (ref), squadButtonSourceEnum (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref), conversationCell (ref), getFFlagDebugAppChatModule (ref), conversationRelativeTimestampModule (ref), foundationModule (ref)
-	local var1 = cryoModule.Dictionary.join(t, p1)
-	local var2 = useStyle()
-	local var3 = useTokens()
-	local var4 = useTextSizeOffset()
-	local var5 = useTelemetryModule(chatLandingTelemetryLayerModule.Context)
-	local conversation = var1.conversation
-	local hasGroupUp = conversation.hasGroupUp
-	local var6 = conversation.hasUnreadMessages and not useIsUserPendingModule(conversation)
-	local var7 = var6 and not var6
-	local var8 = if var7 then getBoldTextThemeModule(var2) else var2
-	local var9 = useDispatch()
-	local var10 = useChatPlacementContext()
-	local var11 = useChatPagePaddingModule()
-	local captionSubHeader = var8.Font.CaptionSubHeader
-	local var12 = var8.Font.BaseSize * captionSubHeader.RelativeSize
-	local shortRelativeTime = var1.conversation.shortRelativeTime or ""
-	local var13 = useRelativeTimestampBindingModule(var1.conversation.unixTime)
-	local var14 = useMemo(function()
-		-- upvalues: foundationFontFaceMigration (copy), getTextSize (copy), shortRelativeTime (ref), var12 (ref), var3 (ref), text (copy), captionSubHeader (ref)
-		return if foundationFontFaceMigration then getTextSize(shortRelativeTime, var12, var3.Typography.CaptionLarge.Font, Vector2.new(10000, 10000)).X else text.GetTextWidth(shortRelativeTime, captionSubHeader.Font, var12)
+return ReactModule.memo(function(p1) --[[ Line: 81 | Named "ConversationEntry" ]]
+	-- upvalues: CryoModule (copy), config (copy), UseStyleFunction (copy), UseTokensFunction (copy), UseTextSizeOffsetFunction (copy), UseTelemetryModule (copy), ChatLandingTelemetryLayerModule (copy), UseIsUserPendingModule (copy), GetBoldTextThemeModule (copy), UseDispatchFunction (copy), UseChatPlacementContextFunction (copy), UseChatPagePaddingModule (copy), UseRelativeTimestampBindingModule (copy), UseMemoFunction (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), Text (copy), FFlagAppChatTimestampInSubtitleModule (copy), ReactModule (copy), UseNavigationFunction (copy), GetOverlayStoreModule (copy), EnumScreensModule (copy), OverlayTypesModule (copy), ConversationModule (copy), RemovedConversationModule (copy), ShouldShowU13ChatOptInForConversationModule (copy), ConstantsModule (copy), ShouldShowOSAForConversationModule (copy), HttpService (copy), FFlagAppChatSquadJoinButtonU13OSAModule (copy), FFlagAppChatUseActivationOnFocus (copy), UseActivationOnFocusFunction (copy), ReactFocusNavigationModule (copy), UseCanAccessPartyModule (copy), SquadComponentAccessWrapperModule (copy), SquadJoinButtonModule (copy), SquadButtonSourceEnum (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), DomLocatorsModule (copy), ConversationCell (copy), GetFFlagDebugAppChatModule (copy), ConversationRelativeTimestampModule (copy), FoundationModule (copy)
+	local JoinResult = CryoModule.Dictionary.join(config, p1)
+	local UseStyleResult = UseStyleFunction()
+	local UseTokensResult = UseTokensFunction()
+	local UseTextSizeOffsetResult = UseTextSizeOffsetFunction()
+	local UseTelemetryModuleResult = UseTelemetryModule(ChatLandingTelemetryLayerModule.Context)
+	local Conversation = JoinResult.conversation
+	local HasGroupUp = Conversation.hasGroupUp
+	local UseIsUserPendingModuleResult = UseIsUserPendingModule(Conversation)
+	local NoUseIsUserPendingModuleResult: boolean = Conversation.hasUnreadMessages and not UseIsUserPendingModuleResult
+	local NoNoUseIsUserPendingModuleResult: boolean = NoUseIsUserPendingModuleResult and not NoUseIsUserPendingModuleResult
+	local BoldTextThemeModule = if NoNoUseIsUserPendingModuleResult then GetBoldTextThemeModule(UseStyleResult) else UseStyleResult
+	local UseDispatchResult = UseDispatchFunction()
+	local UseChatPlacementContextResult = UseChatPlacementContextFunction()
+	local UseChatPagePaddingModuleResult = UseChatPagePaddingModule()
+	local CaptionSubHeader = BoldTextThemeModule.Font.CaptionSubHeader
+	local ScaledBaseSize = BoldTextThemeModule.Font.BaseSize * CaptionSubHeader.RelativeSize
+	local ShortRelativeTime = JoinResult.conversation.shortRelativeTime or ""
+	local UseRelativeTimestampBindingModuleResult = UseRelativeTimestampBindingModule(JoinResult.conversation.unixTime)
+	local UseMemoResult = UseMemoFunction(function() --[[ Line: 106 ]]
+		-- upvalues: FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), ShortRelativeTime (copy), ScaledBaseSize (copy), UseTokensResult (copy), Text (upval), CaptionSubHeader (copy)
+		return if FoundationFontFaceMigration then GetTextSizeFunction(ShortRelativeTime, ScaledBaseSize, UseTokensResult.Typography.CaptionLarge.Font, Vector2.new(10000, 10000)).X else Text.GetTextWidth(ShortRelativeTime, CaptionSubHeader.Font, ScaledBaseSize)
 	end, {
-		shortRelativeTime,
-		captionSubHeader.Font,
-		var12,
-		var4,
-		if foundationFontFaceMigration then var3.Typography.CaptionLarge.Font else nil
+		ShortRelativeTime,
+		CaptionSubHeader.Font,
+		ScaledBaseSize,
+		UseTextSizeOffsetResult,
+		if FoundationFontFaceMigration then UseTokensResult.Typography.CaptionLarge.Font else nil
 	})
-	local var15 = if fFlagAppChatTimestampInSubtitleModule then var13 else nil
-	local var16 = reactModule.useRef(nil)
-	local var17 = useNavigation()
-	local wideMode = false
+	local UseRelativeTimestampBindingModuleResult1 = if FFlagAppChatTimestampInSubtitleModule then UseRelativeTimestampBindingModuleResult else nil
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseNavigationResult = UseNavigationFunction()
+	local WideModeScreenProps = false
 	
-	if var17.getScreenProps then
-		wideMode = var17.getScreenProps("wideMode", wideMode)
+	if UseNavigationResult.getScreenProps then
+		WideModeScreenProps = UseNavigationResult.getScreenProps("wideMode", WideModeScreenProps)
 	end
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref)
-		var1.fireImpressionEvent(var1.conversation)
+	ReactModule.useEffect(function() --[[ Line: 125 ]]
+		-- upvalues: JoinResult (copy)
+		JoinResult.fireImpressionEvent(JoinResult.conversation)
 	end, {})
-	local var18 = nil
-	local _ = nil
-	local var19 = getOverlayStoreModule(false)
-	local var20 = reactModule.useCallback(function(p2)
-		-- upvalues: var17 (ref), enumScreensModule (copy)
-		var17.navigate(enumScreensModule.ChatConversation, { isNavigatedFromGroupOSAJoin = true, conversationId = p2 })
-	end, { var17 })
-	local var21 = reactModule.useCallback(function(p2, p3, p4, p5, p6)
-		-- upvalues: var19 (ref), overlayTypesModule (copy), var20 (ref), conversationModule (copy), var9 (ref), removedConversationModule (copy)
-		var19.showOverlay(overlayTypesModule.GroupOSADialog, {
-			conversationId = p2,
-			impressionId = p3,
-			modalVariant = p4,
-			onJoin = function()
-				-- upvalues: var19 (copy), p6 (ref), p2 (ref), var20 (copy)
-				var19.dismissOverlay()
+	local UseResult1 = nil
+	local OverlayStoreModule = GetOverlayStoreModule(false)
+	local UseResult = ReactModule.useCallback(function(ConversationId) --[[ Line: 133 ]]
+		-- upvalues: UseNavigationResult (copy), EnumScreensModule (upval)
+		UseNavigationResult.navigate(EnumScreensModule.ChatConversation, {
+			isNavigatedFromGroupOSAJoin = true,
+			conversationId = ConversationId
+		})
+	end, { UseNavigationResult })
+	UseResult1 = ReactModule.useCallback(function(ConversationId, ImpressionId, ModalVariant, MULTIUSERCONVERSATION, Callback) --[[ Line: 141 ]]
+		-- upvalues: OverlayStoreModule (copy), OverlayTypesModule (upval), UseResult (copy), ConversationModule (upval), UseDispatchResult (copy), RemovedConversationModule (upval)
+		OverlayStoreModule.showOverlay(OverlayTypesModule.GroupOSADialog, {
+			conversationId = ConversationId,
+			impressionId = ImpressionId,
+			modalVariant = ModalVariant,
+			onJoin = function() --[[ Line: 152 ]]
+				-- upvalues: OverlayStoreModule (upval), Callback (copy), ConversationId (copy), UseResult (upval)
+				OverlayStoreModule.dismissOverlay()
 				
-				if p6 then
-					p6(p2)
+				if Callback then
+					Callback(ConversationId)
 					
 					return
+				else
+					UseResult(ConversationId)
 				end
-				var20(p2)
 			end,
-			onDecline = function()
-				-- upvalues: p2 (ref), p5 (ref), conversationModule (copy), var9 (copy), removedConversationModule (copy), var19 (copy)
-				if p2 and p5 == conversationModule.Type.MULTI_USER_CONVERSATION then
-					var9(removedConversationModule(p2))
+			onDecline = function() --[[ Line: 160 ]]
+				-- upvalues: ConversationId (copy), MULTIUSERCONVERSATION (copy), ConversationModule (upval), UseDispatchResult (upval), RemovedConversationModule (upval), OverlayStoreModule (upval)
+				if ConversationId and MULTIUSERCONVERSATION == ConversationModule.Type.MULTI_USER_CONVERSATION then
+					UseDispatchResult(RemovedConversationModule(ConversationId))
 				end
-				var19.dismissOverlay()
+				OverlayStoreModule.dismissOverlay()
 			end
 		})
-	end, { var20, var9 })
-	local var22 = reactModule.useCallback(function(p2)
-		-- upvalues: shouldShowU13ChatOptInForConversationModule (copy), constantsModule (copy), shouldShowOSAForConversationModule (copy), httpService (copy), var21 (write), var1 (ref), var5 (ref)
-		local var23 = nil
-		local osaContextCard = nil
+	end, { UseResult, UseDispatchResult })
+	local OnSquadJoinButtonActivatedFunction = JoinResult.onSquadJoinButtonActivated
+	local UseResult2 = ReactModule.useCallback(function(p2) --[[ Line: 204 ]]
+		-- upvalues: ShouldShowOSAForConversationModule (upval), Conversation (copy), ConstantsModule (upval), FFlagAppChatSquadJoinButtonU13OSAModule (upval), ShouldShowU13ChatOptInForConversationModule (upval), ConversationModule (upval), UseResult1 (ref), HttpService (upval), OnSquadJoinButtonActivatedFunction (copy)
+		local ChatOptInInfoCard = nil
 		
-		if shouldShowU13ChatOptInForConversationModule(p2) then
-			osaContextCard = constantsModule.OptInVariant.ChatOptInInfoCard
-		elseif shouldShowOSAForConversationModule(p2) then
-			osaContextCard = constantsModule.OptInVariant.OsaContextCard
+		if ShouldShowOSAForConversationModule(Conversation) then
+			ChatOptInInfoCard = ConstantsModule.OptInVariant.OsaContextCard
+		elseif FFlagAppChatSquadJoinButtonU13OSAModule and ShouldShowU13ChatOptInForConversationModule(Conversation) and Conversation.conversationType == ConversationModule.Type.MULTI_USER_CONVERSATION then
+			ChatOptInInfoCard = ConstantsModule.OptInVariant.ChatOptInInfoCard
 		end
-		if osaContextCard then
-			var23 = httpService:GenerateGUID(false)
-			var21(p2.id, var23, osaContextCard, p2.conversationType)
-		elseif var1.onActivated then
-			var1.onActivated(p2)
-		end
-		var1.fireClickEvent(p2, var5, var23)
-	end, { var21, var1.onActivated, var1.fireClickEvent, var5 })
-	local _ = nil
-	local onSquadJoinButtonActivated = var1.onSquadJoinButtonActivated
-	local var23 = reactModule.useCallback(function(p2)
-		-- upvalues: shouldShowOSAForConversationModule (copy), conversation (ref), constantsModule (copy), fFlagAppChatSquadJoinButtonU13OSAModule (copy), shouldShowU13ChatOptInForConversationModule (copy), conversationModule (copy), var21 (write), httpService (copy), onSquadJoinButtonActivated (ref)
-		local chatOptInInfoCard = nil
-		
-		if shouldShowOSAForConversationModule(conversation) then
-			chatOptInInfoCard = constantsModule.OptInVariant.OsaContextCard
-		elseif fFlagAppChatSquadJoinButtonU13OSAModule and shouldShowU13ChatOptInForConversationModule(conversation) and conversation.conversationType == conversationModule.Type.MULTI_USER_CONVERSATION then
-			chatOptInInfoCard = constantsModule.OptInVariant.ChatOptInInfoCard
-		end
-		if chatOptInInfoCard and var21 then
-			var21(p2, httpService:GenerateGUID(false), chatOptInInfoCard, conversation.conversationType, onSquadJoinButtonActivated)
+		if ChatOptInInfoCard and UseResult1 then
+			UseResult1(p2, HttpService:GenerateGUID(false), ChatOptInInfoCard, Conversation.conversationType, OnSquadJoinButtonActivatedFunction)
 			
 			return
-		elseif onSquadJoinButtonActivated then
-			onSquadJoinButtonActivated(p2)
 		end
-	end, { var21, conversation, onSquadJoinButtonActivated })
+		if OnSquadJoinButtonActivatedFunction then
+			OnSquadJoinButtonActivatedFunction(p2)
+		end
+	end, {
+		UseResult1,
+		Conversation,
+		OnSquadJoinButtonActivatedFunction
+	})
+	local UseResult3 = ReactModule.useCallback(function(p2) --[[ Line: 175 ]]
+		-- upvalues: ShouldShowU13ChatOptInForConversationModule (upval), ConstantsModule (upval), ShouldShowOSAForConversationModule (upval), HttpService (upval), UseResult1 (ref), JoinResult (copy), UseTelemetryModuleResult (copy)
+		local Guid = nil
+		local ChatOptInInfoCard = nil
+		
+		if ShouldShowU13ChatOptInForConversationModule(p2) then
+			ChatOptInInfoCard = ConstantsModule.OptInVariant.ChatOptInInfoCard
+		elseif ShouldShowOSAForConversationModule(p2) then
+			ChatOptInInfoCard = ConstantsModule.OptInVariant.OsaContextCard
+		end
+		if ChatOptInInfoCard then
+			Guid = HttpService:GenerateGUID(false)
+			UseResult1(p2.id, Guid, ChatOptInInfoCard, p2.conversationType)
+		elseif JoinResult.onActivated then
+			JoinResult.onActivated(p2)
+		end
+		JoinResult.fireClickEvent(p2, UseTelemetryModuleResult, Guid)
+	end, {
+		UseResult1,
+		JoinResult.onActivated,
+		JoinResult.fireClickEvent,
+		UseTelemetryModuleResult
+	})
 	
-	if fFlagAppChatUseActivationOnFocus then
-		useActivationOnFocus(wideMode, var16, function()
-			-- upvalues: var22 (ref), conversation (ref)
-			var22(conversation)
-		end, function(p2)
+	if FFlagAppChatUseActivationOnFocus then
+		UseActivationOnFocusFunction(WideModeScreenProps, UseRefResult, function() --[[ Line: 238 ]]
+			-- upvalues: UseResult3 (copy), Conversation (copy)
+			UseResult3(Conversation)
+		end, function(p2) --[[ Line: 240 ]]
 			return if p2 then p2.cell else nil
-		end, function()
-			-- upvalues: conversation (ref)
-			return conversation and conversation.id
+		end, function() --[[ Line: 242 ]]
+			-- upvalues: Conversation (copy)
+			return Conversation and Conversation.id
 		end)
 	else
-		local var24 = reactModule.useContext(reactFocusNavigationModule.FocusNavigationContext)
-		reactModule.useEffect(function()
-			-- upvalues: wideMode (write), var22 (ref), var24 (ref), var16 (ref), conversation (ref)
-			if wideMode and var22 and var24 then
-				local var25 = var24.focusedGuiObject:subscribe(function(p2)
-					-- upvalues: var16 (copy), var22 (copy), conversation (copy)
-					if var16.current and p2 == var16.current.cell then
-						var22(conversation)
+		local UseContextResult = ReactModule.useContext(ReactFocusNavigationModule.FocusNavigationContext)
+		ReactModule.useEffect(function() --[[ Line: 247 ]]
+			-- upvalues: WideModeScreenProps (ref), UseResult3 (copy), UseContextResult (copy), UseRefResult (copy), Conversation (copy)
+			if WideModeScreenProps and UseResult3 and UseContextResult then
+				local SubscribeResult = UseContextResult.focusedGuiObject:subscribe(function(Cell) --[[ Line: 249 ]]
+					-- upvalues: UseRefResult (upval), UseResult3 (upval), Conversation (upval)
+					if UseRefResult.current and Cell == UseRefResult.current.cell then
+						UseResult3(Conversation)
 					end
 				end)
 				
-				return function()
-					-- upvalues: var25 (ref)
-					var25:unsubscribe()
+				return function() --[[ Line: 254 ]]
+					-- upvalues: SubscribeResult (copy)
+					SubscribeResult:unsubscribe()
 				end
+			else
+				return function() --[[ Line: 258 ]] end
 			end
-			return function() end
-		end, { var22, wideMode, var24 })
+		end, { UseResult3, WideModeScreenProps, UseContextResult })
 	end
-	local children = var1.children or {}
-	local size1900 = var3.Size.Size_1900
-	local _ = nil
-	local var25 = useCanAccessPartyModule()
-	local right = var11.right
-	local var26 = if var25 and hasGroupUp and conversation.id then reactModule.createElement(squadComponentAccessWrapperModule, { parentChannelId = conversation.id }, {
-		reactModule.createElement("Frame", {
+	local Children = JoinResult.children or {}
+	local Size1900 = UseTokensResult.Size.Size_1900
+	local UseCanAccessPartyModuleResult = UseCanAccessPartyModule()
+	local NewSize = if NoUseIsUserPendingModuleResult then UseTokensResult.Size.Size_200 + UseTokensResult.Gap.XSmall else 0
+	local Right = UseChatPagePaddingModuleResult.right
+	local Element = if UseCanAccessPartyModuleResult and HasGroupUp and Conversation.id then ReactModule.createElement(SquadComponentAccessWrapperModule, { parentChannelId = Conversation.id }, {
+		ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 2,
-			Size = UDim2.new(0, size1900, 1, 0)
+			Size = UDim2.new(0, Size1900, 1, 0)
 		}, {}, {
-			layout = reactModule.createElement("UIListLayout", {
+			layout = ReactModule.createElement("UIListLayout", {
 				HorizontalAlignment = Enum.HorizontalAlignment.Right,
 				VerticalAlignment = Enum.VerticalAlignment.Center
 			}),
-			padding = reactModule.createElement("UIPadding", { PaddingRight = UDim.new(0, 0) }),
-			button = reactModule.createElement(squadJoinButtonModule, {
+			padding = ReactModule.createElement("UIPadding", { PaddingRight = UDim.new(0, 0) }),
+			button = ReactModule.createElement(SquadJoinButtonModule, {
 				isFullWidth = false,
 				isInCard = false,
 				layoutOrder = 0,
 				Selectable = false,
 				shouldAnimate = false,
-				conversationId = conversation.id,
-				onActivated = var23,
-				squadLocation = var10.chatPlacement,
-				squadButtonSource = squadButtonSourceEnum.ConversationEntry,
-				testId = if fFlagDebugAppChatEnableDomLocatorsModule then domLocatorsModule.chatLandingConversationEntrySquadButton(conversation.title) else nil
+				conversationId = Conversation.id,
+				onActivated = UseResult2,
+				squadLocation = UseChatPlacementContextResult.chatPlacement,
+				squadButtonSource = SquadButtonSourceEnum.ConversationEntry,
+				testId = if FFlagDebugAppChatEnableDomLocatorsModule then DomLocatorsModule.chatLandingConversationEntrySquadButton(Conversation.title) else nil
 			})
 		})
 	}) else nil
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		Size = UDim2.new(1, 0, 0, var1.entryHeight),
-		ref = var16
+		Size = UDim2.new(1, 0, 0, JoinResult.entryHeight),
+		ref = UseRefResult
 	}, {
-		cell = reactModule.createElement(conversationCell, {
+		cell = ReactModule.createElement(ConversationCell, {
 			hideLeftAvatarPadding = true,
-			Size = UDim2.new(1, 0, 0, var1.entryHeight),
-			conversation = var1.conversation,
-			childWidth = if var25 and hasGroupUp then right + size1900 elseif fFlagAppChatTimestampInSubtitleModule then if var6 then var3.Gap.Medium + var3.Size.Size_200 else 0 else var14 + (if var6 then var3.Size.Size_200 + var3.Gap.XSmall else 0) + right,
-			subTitleText = if getFFlagDebugAppChatModule() then var1.conversation.id else var1.conversation.lastMessageContent,
-			subTitleTimestamp = var15,
-			onActivated = var22,
-			style = var8,
-			boldTitle = var7,
-			onSquadJoinButtonActivated = var1.onSquadJoinButtonActivated,
-			paddingLeft = var11.left,
-			paddingRight = var11.right,
-			testId = if fFlagDebugAppChatEnableDomLocatorsModule then domLocatorsModule.chatLandingConversationEntry(conversation.title) else nil
-		}, cryoModule.Dictionary.join(children, {
-			timeStamp = if var26 or fFlagAppChatTimestampInSubtitleModule then nil else reactModule.createElement(conversationRelativeTimestampModule, { timestampText = var13, hasUnreadMessages = var6 }),
-			unreadDot = if fFlagAppChatTimestampInSubtitleModule and not var26 and var6 then reactModule.createElement(foundationModule.View, { tag = "size-200-200 radius-circle bg-action-emphasis" }) else nil,
-			squadButton = var26
+			Size = UDim2.new(1, 0, 0, JoinResult.entryHeight),
+			conversation = JoinResult.conversation,
+			childWidth = if UseCanAccessPartyModuleResult and HasGroupUp then Right + Size1900 elseif FFlagAppChatTimestampInSubtitleModule then if NoUseIsUserPendingModuleResult then UseTokensResult.Gap.Medium + UseTokensResult.Size.Size_200 else 0 else UseMemoResult + NewSize + Right,
+			subTitleText = if GetFFlagDebugAppChatModule() then JoinResult.conversation.id else JoinResult.conversation.lastMessageContent,
+			subTitleTimestamp = UseRelativeTimestampBindingModuleResult1,
+			onActivated = UseResult3,
+			style = BoldTextThemeModule,
+			boldTitle = NoNoUseIsUserPendingModuleResult,
+			onSquadJoinButtonActivated = JoinResult.onSquadJoinButtonActivated,
+			paddingLeft = UseChatPagePaddingModuleResult.left,
+			paddingRight = UseChatPagePaddingModuleResult.right,
+			testId = if FFlagDebugAppChatEnableDomLocatorsModule then DomLocatorsModule.chatLandingConversationEntry(Conversation.title) else nil
+		}, CryoModule.Dictionary.join(Children, {
+			timeStamp = if Element or FFlagAppChatTimestampInSubtitleModule then nil else ReactModule.createElement(ConversationRelativeTimestampModule, {
+				timestampText = UseRelativeTimestampBindingModuleResult,
+				hasUnreadMessages = NoUseIsUserPendingModuleResult
+			}),
+			unreadDot = if FFlagAppChatTimestampInSubtitleModule and not Element and NoUseIsUserPendingModuleResult then ReactModule.createElement(FoundationModule.View, { tag = "size-200-200 radius-circle bg-action-emphasis" }) else nil,
+			squadButton = Element
 		}))
 	})
 end)

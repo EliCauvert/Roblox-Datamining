@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.UserRelationshipModals.UserRelationshipModals)
+﻿return (require(script.Parent._Workspace.UserRelationshipModals.UserRelationshipModals))

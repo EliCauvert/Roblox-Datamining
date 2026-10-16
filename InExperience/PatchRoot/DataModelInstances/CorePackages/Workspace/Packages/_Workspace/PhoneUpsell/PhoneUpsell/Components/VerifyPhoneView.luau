@@ -1,23 +1,23 @@
-﻿local phoneUpsell = script:FindFirstAncestor("PhoneUpsell")
-local parent = phoneUpsell.Parent
-local reactModule = require(parent.React)
-local UIBloxModule = require(parent.UIBlox)
-local foundationModule = require(parent.Foundation)
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local useStyle = UIBloxModule.Core.Style.useStyle
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local buttonType = UIBloxModule.App.Button.Enum.ButtonType
-local textInputBoxWithBorder = require(parent.AuthCommon).Components.TextInputBoxWithBorder
-local partialPageModal = UIBloxModule.App.Dialog.Modal.PartialPageModal
-local getPartialPageModalMiddleContentWidth = UIBloxModule.App.Dialog.Modal.getPartialPageModalMiddleContentWidth
-local linkButton = UIBloxModule.App.Button.LinkButton
-local getFFlagDisableVerifyPhoneViewOnSuccessModule = require(phoneUpsell.Flags.GetFFlagDisableVerifyPhoneViewOnSuccess)
+﻿local PhoneUpsell = script:FindFirstAncestor("PhoneUpsell")
+local Parent = PhoneUpsell.Parent
+local ReactModule = require(Parent.React)
+local UIBloxModule = require(Parent.UIBlox)
+local FoundationModule = require(Parent.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
+local TextInputBoxWithBorder = require(Parent.AuthCommon).Components.TextInputBoxWithBorder
+local PartialPageModal = UIBloxModule.App.Dialog.Modal.PartialPageModal
+local GetPartialPageModalMiddleContentWidthFunction = UIBloxModule.App.Dialog.Modal.getPartialPageModalMiddleContentWidth
+local LinkButton = UIBloxModule.App.Button.LinkButton
+local GetFFlagDisableVerifyPhoneViewOnSuccessModule = require(PhoneUpsell.Flags.GetFFlagDisableVerifyPhoneViewOnSuccess)
 
-return function(p1)
-	-- upvalues: useStyle (ref), useLocalization (ref), reactModule (ref), buttonType (ref), getFFlagDisableVerifyPhoneViewOnSuccessModule (ref), getPartialPageModalMiddleContentWidth (ref), partialPageModal (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), textInputBoxWithBorder (ref), linkButton (ref)
-	local var1 = useStyle()
-	local t = {
+return function(p1) --[[ Line: 46 | Named "VerifyPhoneView" ]]
+	-- upvalues: UseStyleFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), ButtonType (copy), GetFFlagDisableVerifyPhoneViewOnSuccessModule (copy), GetPartialPageModalMiddleContentWidthFunction (copy), PartialPageModal (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), TextInputBoxWithBorder (copy), LinkButton (copy)
+	local UseStyleResult = UseStyleFunction()
+	local config = {
 		titleKey = "Feature.VerificationUpsell.Heading.VerifyYourPhone",
 		verificationCodeKey = "Feature.VerificationUpsell.Heading.VerificationCode",
 		placeholderKey = "Feature.VerificationUpsell.Label.SixDigitCode",
@@ -28,126 +28,127 @@ return function(p1)
 	}
 	
 	if p1.extraButtonKey and p1.extraButtonKey ~= "" then
-		t.extraButtonKey = p1.extraButtonKey
+		config.extraButtonKey = p1.extraButtonKey
 	end
-	local var2 = useLocalization(t)
-	local var3, var4 = reactModule.useState(false)
-	local var5, var6 = reactModule.useState(0)
+	local UseLocalizationResult = UseLocalizationFunction(config)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(0)
 	
-	local function _(p2)
-		-- upvalues: p1 (ref)
-		return p2:gsub("{phoneNumber}", "+" .. p0.prefix .. p0.phoneNumber)
+	local function _(Text: string): string --[[ Line: 134 | Named "getBodyText" ]]
+		-- upvalues: p1 (copy)
+		return Text:gsub("{phoneNumber}", "+" .. p1.prefix .. p1.phoneNumber)
 	end
 	
-	return reactModule.createElement(partialPageModal, {
-		title = var2.titleKey,
+	return ReactModule.createElement(PartialPageModal, {
+		title = UseLocalizationResult.titleKey,
 		screenSize = p1.screenSize,
-		buttonStackProps = (function(p2, p3, p4, p5, p6, p7)
-			-- upvalues: var4 (ref), var6 (ref), var3 (ref), var5 (ref), buttonType (copy), getFFlagDisableVerifyPhoneViewOnSuccessModule (copy), p1 (ref)
-			local function _()
-				-- upvalues: var3 (copy), p3 (ref), var5 (copy), p2 (ref)
-				return if var3 then p3 .. " (" .. var10 .. ")" else p2
+		buttonStackProps = (function(p2, Text, p3, Callback, Text1, OnActivated) --[[ Line: 66 | Named "getButtonStackProps" ]]
+			-- upvalues: UseStateResult2 (copy), UseStateResult2_1 (copy), UseStateResult (copy), UseStateResult1 (copy), ButtonType (upval), GetFFlagDisableVerifyPhoneViewOnSuccessModule (upval), p1 (copy)
+			local function _() --[[ Line: 95 | Named "getButtonText" ]]
+				-- upvalues: UseStateResult (upval), Text (copy), UseStateResult1 (upval), p2 (copy)
+				return if UseStateResult then Text .. " (" .. UseStateResult1 .. ")" else p2
 			end
 			
-			local list = {
+			local Buttons = {
 				{
-					buttonType = buttonType.PrimarySystem,
+					buttonType = ButtonType.PrimarySystem,
 					props = {
-						onActivated = function()
-							-- upvalues: p5 (ref), var4 (copy), var6 (copy), p4 (ref)
-							p5()
-							var4(true)
-							var6(p4)
-							local currentTime = tick()
+						onActivated = function() --[[ Line: 74 ]]
+							-- upvalues: Callback (copy), UseStateResult2 (upval), UseStateResult2_1 (upval), p3 (copy)
+							Callback()
+							UseStateResult2(true)
+							UseStateResult2_1(p3)
+							local CurrentTime = tick()
 							
-							local function countDown()
-								-- upvalues: currentTime (ref), p4 (copy), var6 (copy), countDown (ref), var4 (copy)
-								local var7 = p4 - (tick() - currentTime)
+							local function countDown() --[[ Line: 80 ]]
+								-- upvalues: CurrentTime (copy), p3 (upval), UseStateResult2_1 (upval), countDown (copy), UseStateResult2 (upval)
+								local Value = p3 - (tick() - CurrentTime)
 								
-								if var7 > 0 then
-									var6(math.round(var7))
+								if Value > 0 then
+									UseStateResult2_1((math.round(Value)))
 									task.delay(1, countDown)
 									
 									return
+								else
+									UseStateResult2_1(0)
+									UseStateResult2(false)
 								end
-								var6(0)
-								var4(false)
 							end
 							
 							countDown()
 						end,
-						text = if var3 then p3 .. " (" .. var10 .. ")" else p2,
-						isDisabled = var3 or getFFlagDisableVerifyPhoneViewOnSuccessModule() and p1.isDisabled
+						text = if UseStateResult then Text .. " (" .. UseStateResult1 .. ")" else p2,
+						isDisabled = UseStateResult or GetFFlagDisableVerifyPhoneViewOnSuccessModule() and p1.isDisabled
 					}
 				}
 			}
 			
-			if p7 and p6 and p6 ~= "" then
-				table.insert(list, 1, {
-					buttonType = buttonType.Secondary,
+			if OnActivated and Text1 and Text1 ~= "" then
+				table.insert(Buttons, 1, {
+					buttonType = ButtonType.Secondary,
 					props = {
-						onActivated = p7,
-						text = p6,
-						isDisabled = getFFlagDisableVerifyPhoneViewOnSuccessModule() and p1.isDisabled
+						onActivated = OnActivated,
+						text = Text1,
+						isDisabled = GetFFlagDisableVerifyPhoneViewOnSuccessModule() and p1.isDisabled
 					}
 				})
 			end
 			return {
 				buttonHeight = 48,
 				forcedFillDirection = Enum.FillDirection.Vertical,
-				buttons = list
+				buttons = Buttons
 			}
-		end)(var2.buttonKey, var2.buttonDisabledKey, 10, p1.onResendPhoneCode, var2.extraButtonKey, p1.onExtraButtonClick),
+		end)(UseLocalizationResult.buttonKey, UseLocalizationResult.buttonDisabledKey, 10, p1.onResendPhoneCode, UseLocalizationResult.extraButtonKey, p1.onExtraButtonClick),
 		onCloseClicked = p1.onClose,
 		position = p1.isKeyboardShowing and UDim2.new(0.5, 0, 1, -p1.keyboardHeight) or nil,
 		anchorPoint = p1.isKeyboardShowing and Vector2.new(0.5, 1) or nil
 	}, {
-		Middle = reactModule.createElement("Frame", {
+		Middle = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			AutomaticSize = Enum.AutomaticSize.Y,
 			Size = UDim2.new(1, 0, 0, 0)
 		}, {
-			ContentPadding = reactModule.createElement("UIPadding", {
+			ContentPadding = ReactModule.createElement("UIPadding", {
 				PaddingTop = UDim.new(0, 24),
 				PaddingBottom = UDim.new(0, 24)
 			}),
-			ListLayout = reactModule.createElement("UIListLayout", {
+			ListLayout = ReactModule.createElement("UIListLayout", {
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				HorizontalAlignment = Enum.HorizontalAlignment.Left,
 				Padding = UDim.new(0, 12)
 			}),
-			BodyText = reactModule.createElement("TextLabel", {
+			BodyText = ReactModule.createElement("TextLabel", {
 				LayoutOrder = 1,
 				BackgroundTransparency = 1,
 				TextWrapped = true,
-				Text = var2.descriptionKey:gsub("{phoneNumber}", "+" .. p0.prefix .. p0.phoneNumber),
-				TextSize = var1.Font.BaseSize,
-				TextColor3 = var1.Theme.TextDefault.Color,
-				TextTransparency = var1.Theme.TextDefault.Transparency,
-				Font = if foundationFontFaceMigration then nil else var1.Font.Body.Font,
-				FontFace = if foundationFontFaceMigration then normalizeFontFace(var1.Tokens.Typography.BodyLarge.Font) else nil,
+				Text = UseLocalizationResult.descriptionKey:gsub("{phoneNumber}", "+" .. p1.prefix .. p1.phoneNumber),
+				TextSize = UseStyleResult.Font.BaseSize,
+				TextColor3 = UseStyleResult.Theme.TextDefault.Color,
+				TextTransparency = UseStyleResult.Theme.TextDefault.Transparency,
+				Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.Body.Font,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font) else nil,
 				TextXAlignment = Enum.TextXAlignment.Left,
 				AutomaticSize = Enum.AutomaticSize.Y,
-				Size = UDim2.new(0, getPartialPageModalMiddleContentWidth(p1.screenSize.X), 0, 0)
+				Size = UDim2.new(0, GetPartialPageModalMiddleContentWidthFunction(p1.screenSize.X), 0, 0)
 			}),
-			TextBox = reactModule.createElement(textInputBoxWithBorder, {
+			TextBox = ReactModule.createElement(TextInputBoxWithBorder, {
 				textInputHeight = 36,
 				layoutOrder = 2,
 				maxLength = 6,
 				text = p1.code,
-				textInputType = if p1.useOTPInputType then Enum.TextInputType.OneTimePassword else Enum.TextInputType.Number,
-				placeholderText = var2.placeholderKey,
+				textInputType = p1.useOTPInputType and Enum.TextInputType.OneTimePassword or Enum.TextInputType.Number,
+				placeholderText = UseLocalizationResult.placeholderKey,
 				errorText = p1.errorMessage,
 				onChangeTextCallback = p1.onCodeTextChange,
 				Size = UDim2.new(1, 0, 0, 0),
 				onFocused = p1.onCodeInputFocus
 			}),
-			ChangePhoneButton = reactModule.createElement(linkButton, {
+			ChangePhoneButton = ReactModule.createElement(LinkButton, {
 				layoutOrder = 3,
 				fontStyle = "CaptionBody",
 				minPaddingX = 0,
 				minPaddingY = 0,
-				text = var2.changePhoneNumberKey,
+				text = UseLocalizationResult.changePhoneNumberKey,
 				onActivated = p1.returnToAddPhone
 			})
 		})

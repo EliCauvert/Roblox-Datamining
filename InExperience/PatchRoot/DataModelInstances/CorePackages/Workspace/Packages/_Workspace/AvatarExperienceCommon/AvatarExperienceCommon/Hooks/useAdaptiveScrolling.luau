@@ -1,7 +1,7 @@
-﻿local reactModule = require(script:FindFirstAncestor("AvatarExperienceCommon").Parent.React)
-local adaptiveScrollingContextModule = require(script.Parent.AdaptiveScrollingContext)
+﻿local ReactModule = require(script:FindFirstAncestor("AvatarExperienceCommon").Parent.React)
+local AdaptiveScrollingContextModule = require(script.Parent.AdaptiveScrollingContext)
 
-return function()
-	-- upvalues: reactModule (ref), adaptiveScrollingContextModule (ref)
-	return reactModule.useContext(adaptiveScrollingContextModule)
+return function() --[[ Line: 15 | Named "useAdaptiveScrolling" ]]
+	-- upvalues: ReactModule (copy), AdaptiveScrollingContextModule (copy)
+	return ReactModule.useContext(AdaptiveScrollingContextModule)
 end

@@ -1,89 +1,95 @@
-﻿local guiService = game:GetService("GuiService")
-local parent = script.Parent.Parent.Parent.Parent
-local signalsModule = require(parent.Signals)
-local cryoModule = require(parent.Cryo)
-local displayModule = require(parent.Display)
-local createSignal = signalsModule.createSignal
-local createEffect = signalsModule.createEffect
+﻿local GuiService = game:GetService("GuiService")
+local Parent = script.Parent.Parent.Parent.Parent
+local SignalsModule = require(Parent.Signals)
+local CryoModule = require(Parent.Cryo)
+local DisplayModule = require(Parent.Display)
+local CreateSignalFunction = SignalsModule.createSignal
+local CreateEffectFunction = SignalsModule.createEffect
 
-return function()
-	-- upvalues: createSignal (ref), cryoModule (ref), guiService (ref), displayModule (ref), createEffect (ref)
-	local var1, var2 = createSignal({}, cryoModule.Dictionary.equals)
+return function() --[[ Line: 41 ]]
+	-- upvalues: CreateSignalFunction (copy), CryoModule (copy), GuiService (copy), DisplayModule (copy), CreateEffectFunction (copy)
+	local Signal, Signal2 = CreateSignalFunction({}, CryoModule.Dictionary.equals)
 	
-	local var3 = function(p1, p2, p3)
-		local t = {}
-		local x = p1.X
-		local y = p1.Y
-		local x_1 = p2.X
-		local var4 = p2.Y - y
-		local var5 = x
-		local var6 = 0
+	local function v7(Vector, Vector1, List) --[[ Line: 44 ]]
+		local List1 = {}
+		local Y = Vector.Y
+		local X: number = Vector1.X
+		local YDelta = Vector1.Y - Y
+		local X1 = Vector.X
+		local X2 = 0
 		
-		for i, v in ipairs(p3) do
-			local var7 = var5 + var6
-			table.insert(t, {
-				Position = { X = var7, Y = y },
-				Size = { X = v.position.X - var7, Y = var4 }
+		for _, value in ipairs(List) do
+			local NewX = X1 + X2
+			table.insert(List1, {
+				Position = { X = NewX, Y = Y },
+				Size = { X = value.position.X - NewX, Y = YDelta }
 			})
-			var5 = v.position.X
-			var6 = v.size.X
+			X1 = value.position.X
+			X2 = value.size.X
 		end
-		local var8 = var5 + var6
-		table.insert(t, {
-			Position = { X = var8, Y = y },
-			Size = { X = x_1 - var8, Y = var4 }
+		local NewX = X1 + X2
+		table.insert(List1, {
+			Position = { X = NewX, Y = Y },
+			Size = { X = X - NewX, Y = YDelta }
 		})
 		
-		return t
+		return List1
 	end
 	
-	local var9 = function(p4)
-		-- upvalues: guiService (copy), displayModule (copy), var3 (ref)
-		local _ = {}
-		local t = {}
+	local function v8(List): Rect --[[ Line: 96 ]]
+		-- upvalues: GuiService (upval), DisplayModule (upval), v7 (copy)
+		local List1 = {}
 		
-		for i, v in pairs(p4) do
-			table.insert(t, { id = v.id, size = v.size, position = v.position })
+		for _, value in pairs(List) do
+			table.insert(List1, {
+				id = value.id,
+				size = value.size,
+				position = value.position
+			})
 		end
-		table.sort(t, function(p5, p6)
-			return p5.position.X < p6.position.X and p5.position.X + p5.size.X < p6.size.X + p6.position.X
+		table.sort(List1, function(A, B): boolean --[[ Line: 111 ]]
+			return A.position.X < B.position.X and A.position.X + A.size.X < B.size.X + B.position.X
 		end)
-		local guiInset, _ = guiService:GetGuiInset()
-		local rect = nil
+		local GuiInset, _ = GuiService:GetGuiInset()
+		local v1: Rect? = nil
 		
-		for i_1, v_1 in ipairs(var3(Vector2.new(0, 0), Vector2.new(displayModule.GetDisplayStore(false).getViewportSize(false).X, guiInset.Y), t)) do
-			if not rect or rect.Width < v_1.Size.X then
-				rect = Rect.new(v_1.Position.X, v_1.Position.Y, v_1.Position.X + v_1.Size.X, v_1.Position.Y + v_1.Size.Y)
+		for _, value1 in ipairs((v7(Vector2.new(0, 0), Vector2.new(DisplayModule.GetDisplayStore(false).getViewportSize(false).X, GuiInset.Y), List1))) do
+			if not v1 or v1.Width < value1.Size.X then
+				v1 = Rect.new(value1.Position.X, value1.Position.Y, value1.Position.X + value1.Size.X, value1.Position.Y + value1.Size.Y)
 			end
 		end
-		return rect
+		return v1
 	end
 	
-	local var10 = createEffect(function(p5)
-		-- upvalues: displayModule (copy), var9 (ref), var1 (ref), guiService (copy)
-		local _ = displayModule.GetDisplayStore(p5).getViewportSize(p5)
-		local var11 = var9(var1(p5))
+	local function setKeepOutArea(Id, Position, Size) --[[ Line: 140 ]]
+		-- upvalues: Signal2 (copy), CryoModule (upval), Signal (copy)
+		Signal2(CryoModule.Dictionary.join(Signal(false), { [Id] = { id = Id, position = Position, size = Size } }))
+	end
+	
+	local function removeKeepOutArea(Key) --[[ Line: 151 ]]
+		-- upvalues: Signal (copy), Signal2 (copy)
+		local SignalResult = Signal(false)
+		SignalResult[Key] = nil
+		Signal2(SignalResult)
+	end
+	
+	local Effect = CreateEffectFunction(function(p1) --[[ Line: 157 ]]
+		-- upvalues: DisplayModule (upval), v8 (copy), Signal (copy), GuiService (upval)
+		local _ = DisplayModule.GetDisplayStore(p1).getViewportSize(p1)
+		local TopbarInset = v8(Signal(p1))
 		
-		if var11 then
-			guiService:SetTopbarInset(var11)
+		if TopbarInset then
+			GuiService:SetTopbarInset(TopbarInset)
 		end
 	end)
 	
 	return {
-		getKeepOutAreas = var1,
-		setKeepOutArea = function(value, p5, p6)
-			-- upvalues: var2 (ref), cryoModule (copy), var1 (ref)
-			var2(cryoModule.Dictionary.join(var1(false), { [value] = { id = value, position = p5, size = p6 } }))
-		end,
-		removeKeepOutArea = function(p5)
-			-- upvalues: var1 (ref), var2 (ref)
-			local var11 = var1(false)
-			var11[p5] = nil
-			var2(var11)
-		end,
-		cleanup = function()
-			-- upvalues: var10 (ref)
-			var10()
+		getKeepOutAreas = Signal,
+		setKeepOutArea = setKeepOutArea,
+		removeKeepOutArea = removeKeepOutArea,
+		cleanup = function() --[[ Line: 165 ]]
+			-- upvalues: Effect (copy)
+			Effect()
 		end
 	}
 end

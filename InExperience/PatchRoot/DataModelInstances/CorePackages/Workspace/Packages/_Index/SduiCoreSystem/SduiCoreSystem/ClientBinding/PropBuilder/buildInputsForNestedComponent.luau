@@ -1,33 +1,32 @@
-﻿local sduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
-local parent = sduiCoreSystem.Parent
-local _ = require(sduiCoreSystem.ClientBinding.SduiClientBindingTypes)
-local sduiPropUtilsModule = require(sduiCoreSystem.ClientBinding.PropBuilder.SduiPropUtils)
-local splitDottedPathModule = require(sduiCoreSystem.ClientBinding.splitDottedPath)
-local _ = require(parent.Signals)
+﻿local SduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
+local _ = require(SduiCoreSystem.ClientBinding.SduiClientBindingTypes)
+local SduiPropUtilsModule = require(SduiCoreSystem.ClientBinding.PropBuilder.SduiPropUtils)
+local SplitDottedPathModule = require(SduiCoreSystem.ClientBinding.splitDottedPath)
+local _ = require(SduiCoreSystem.Parent.Signals)
 
-return function(p1, p2, p3, p4, p5, p6)
-	-- upvalues: splitDottedPathModule (ref), sduiPropUtilsModule (ref)
-	if p2 then
-		for i, v in p2 do
-			if v.kind then
-				local type = v.kind.type
+return function(p1, List, p2, p3, ResolveLocalizedLiteralResults, p4) --[[ Line: 25 | Named "buildInputsForNestedComponent" ]]
+	-- upvalues: SplitDottedPathModule (copy), SduiPropUtilsModule (copy)
+	if List then
+		for i, value in List do
+			if value.kind then
+				local Type = value.kind.type
 				
-				if type == "binding_path" then
-					local var1, _ = sduiPropUtilsModule.resolveBindingPathValue(p4 or false, splitDottedPathModule(v.kind.value), p3, p1, nil, false, p6)
-					p5[i] = var1
-				elseif type == "literal" then
-					local value = v.kind.value and (v.kind.value.kind and v.kind.value.kind.value)
+				if Type == "binding_path" then
+					local _
+					ResolveLocalizedLiteralResults[i], _ = SduiPropUtilsModule.resolveBindingPathValue(p3 or false, SplitDottedPathModule(value.kind.value), p2, p1, nil, false, p4)
+				elseif Type == "literal" then
+					local Value = value.kind.value and (value.kind.value.kind and value.kind.value.kind.value)
 					
-					if value == nil then
+					if Value == nil then
 						error(`Failed to determine value for nested input arg {i}`)
 					end
-					p5[i] = value
-				elseif type == "translation" then
-					if p6 and p6.resolveLocalizedLiteral then
-						p5[i] = p6.resolveLocalizedLiteral(v.kind.value)
+					ResolveLocalizedLiteralResults[i] = Value
+				elseif Type == "translation" then
+					if p4 and p4.resolveLocalizedLiteral then
+						ResolveLocalizedLiteralResults[i] = p4.resolveLocalizedLiteral(value.kind.value)
 					end
-				elseif type == "format" then
-					p5[i] = sduiPropUtilsModule.generateFormatStringPropValue(v.kind.value, p3, p6, p1)(p4 or false).data
+				elseif Type == "format" then
+					ResolveLocalizedLiteralResults[i] = SduiPropUtilsModule.generateFormatStringPropValue(value.kind.value, p2, p4, p1)(p3 or false).data
 				else
 					error(`Unrecognized inputDataType for key {i}`)
 				end

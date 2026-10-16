@@ -1,33 +1,33 @@
-﻿local parent = script:FindFirstAncestor("CollectionViews").Parent
-local reactModule = require(parent.React)
-local signal = require(parent.AppCommonLib).Signal
+﻿local Parent = script:FindFirstAncestor("CollectionViews").Parent
+local ReactModule = require(Parent.React)
+local Signal = require(Parent.AppCommonLib).Signal
 
-return function(value)
-	-- upvalues: reactModule (ref), signal (ref)
-	local var1 = reactModule.useRef(nil)
+return function(p1) --[[ Line: 18 | Named "useCollectionImpressionsSignal" ]]
+	-- upvalues: ReactModule (copy), Signal (copy)
+	local UseRefResult = ReactModule.useRef(nil)
 	
-	if var1.current == nil then
-		var1.current = signal.new()
+	if UseRefResult.current == nil then
+		UseRefResult.current = Signal.new()
 	end
-	local current = var1.current
-	reactModule.useEffect(function()
-		-- upvalues: current (ref), value (ref)
-		current:fire()
-		local var2 = if value then value:connect(function()
-			-- upvalues: current (copy)
-			current:fire()
+	local Current = UseRefResult.current
+	ReactModule.useEffect(function() --[[ Line: 25 ]]
+		-- upvalues: Current (copy), p1 (copy)
+		Current:fire()
+		local Connection = if p1 then p1:connect(function() --[[ Line: 34 ]]
+			-- upvalues: Current (upval)
+			Current:fire()
 		end) else nil
 		
-		return function()
-			-- upvalues: var2 (write)
-			if var2 then
-				var2:disconnect()
+		return function() --[[ Line: 39 ]]
+			-- upvalues: Connection (ref)
+			if Connection then
+				Connection:disconnect()
 			end
 		end
-	end, { value, current })
+	end, { p1, Current })
 	
-	return current, reactModule.useCallback(function()
-		-- upvalues: current (ref)
-		current:fire()
-	end, { current })
+	return Current, (ReactModule.useCallback(function() --[[ Line: 46 ]]
+		-- upvalues: Current (copy)
+		Current:fire()
+	end, { Current }))
 end

@@ -1,17 +1,17 @@
-﻿local tModule = require(script:FindFirstAncestor("UnifiedLogging").Parent.t)
+﻿local TModule = require(script:FindFirstAncestor("UnifiedLogging").Parent.t)
 
 return {
 	CollectionAnalyticsDataInterface = {
-		collectionId = tModule.union(tModule.number, tModule.string),
-		contentType = tModule.string,
-		itemsPerRow = tModule.number,
-		collectionPosition = tModule.number,
-		startRowNumber = tModule.optional(tModule.number),
-		totalNumberOfItems = tModule.number,
-		refId = tModule.optional(tModule.string)
+		collectionId = TModule.union(TModule.number, TModule.string),
+		contentType = TModule.string,
+		itemsPerRow = TModule.number,
+		collectionPosition = TModule.number,
+		startRowNumber = TModule.optional(TModule.number),
+		totalNumberOfItems = TModule.number,
+		refId = TModule.optional(TModule.string)
 	},
 	ItemAnalyticsDataInterface = {
-		id = tModule.union(tModule.number, tModule.string),
-		itemPosition = tModule.optional(tModule.number)
+		id = TModule.union(TModule.number, TModule.string),
+		itemPosition = TModule.optional(TModule.number)
 	}
 }

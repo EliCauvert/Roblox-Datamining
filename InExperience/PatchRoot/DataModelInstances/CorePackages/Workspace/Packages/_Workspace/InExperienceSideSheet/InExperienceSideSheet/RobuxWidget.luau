@@ -1,39 +1,41 @@
-﻿local inExperienceSideSheet = script:FindFirstAncestor("InExperienceSideSheet")
-local parent = inExperienceSideSheet.Parent
-local reactModule = require(parent.React)
-local _ = require(parent.Chrome)
-local view = require(parent.Foundation).View
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local robuxPill = require(parent.RobuxPill).RobuxPill
-local fFlagSideSheetFocusNav = require(parent.SharedFlags).FFlagSideSheetFocusNav
-local analyticsConstantsModule = require(inExperienceSideSheet.Analytics.AnalyticsConstants)
-local sidesheetAnalyticsModule = require(inExperienceSideSheet.Analytics.SidesheetAnalytics)
-local useRobuxBalanceModule = require(inExperienceSideSheet.Hooks.useRobuxBalance)
-local toggleSideSheetModule = require(inExperienceSideSheet.Utils.toggleSideSheet)
+﻿local InExperienceSideSheet = script:FindFirstAncestor("InExperienceSideSheet")
+local Parent = InExperienceSideSheet.Parent
+local ReactModule = require(Parent.React)
+local _ = require(Parent.Chrome)
+local View = require(Parent.Foundation).View
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local RobuxPill = require(Parent.RobuxPill).RobuxPill
+local FFlagSideSheetFocusNav = require(Parent.SharedFlags).FFlagSideSheetFocusNav
+local AnalyticsConstantsModule = require(InExperienceSideSheet.Analytics.AnalyticsConstants)
+local SidesheetAnalyticsModule = require(InExperienceSideSheet.Analytics.SidesheetAnalytics)
+local UseRobuxBalanceModule = require(InExperienceSideSheet.Hooks.useRobuxBalance)
+local ToggleSideSheetModule = require(InExperienceSideSheet.Utils.toggleSideSheet)
 
-return reactModule.memo(function(p1)
-	-- upvalues: useRobuxBalanceModule (ref), useLocalization (ref), reactModule (ref), toggleSideSheetModule (ref), sidesheetAnalyticsModule (ref), analyticsConstantsModule (ref), fFlagSideSheetFocusNav (ref), view (ref), robuxPill (ref)
-	return reactModule.createElement(view, {
+return ReactModule.memo(function(p1) --[[ Line: 27 | Named "RobuxWidget" ]]
+	-- upvalues: UseRobuxBalanceModule (copy), UseLocalizationFunction (copy), ReactModule (copy), ToggleSideSheetModule (copy), SidesheetAnalyticsModule (copy), AnalyticsConstantsModule (copy), FFlagSideSheetFocusNav (copy), View (copy), RobuxPill (copy)
+	local UseResult = if FFlagSideSheetFocusNav then ReactModule.useCallback(function(p2) --[[ Line: 41 ]]
+		-- upvalues: p1 (copy)
+		if p2 and p1.firstIntegrationToFocusCallback then
+			p1.firstIntegrationToFocusCallback(p2)
+		end
+	end, { p1.firstIntegrationToFocusCallback }) else nil
+	
+	return ReactModule.createElement(View, {
 		tag = "size-full-0 auto-y padding-bottom-medium",
 		LayoutOrder = p1.layoutOrder or 1
 	}, {
-		RobuxPill = reactModule.createElement(robuxPill, {
+		RobuxPill = ReactModule.createElement(RobuxPill, {
 			layoutOrder = 1,
 			isCompact = true,
-			robuxBalance = useRobuxBalanceModule(),
-			buyButtonText = useLocalization({ buyRobux = "IAPExperience.RobuxUpsell.Action.BuyRobux" }).buyRobux,
-			onBuyActivated = reactModule.useCallback(function()
-				-- upvalues: p1 (ref), toggleSideSheetModule (copy), sidesheetAnalyticsModule (copy), analyticsConstantsModule (copy)
+			robuxBalance = UseRobuxBalanceModule(),
+			buyButtonText = UseLocalizationFunction({ buyRobux = "IAPExperience.RobuxUpsell.Action.BuyRobux" }).buyRobux,
+			onBuyActivated = ReactModule.useCallback(function() --[[ Line: 34 ]]
+				-- upvalues: p1 (copy), ToggleSideSheetModule (upval), SidesheetAnalyticsModule (upval), AnalyticsConstantsModule (upval)
 				p1.onBuyActivated()
-				toggleSideSheetModule(false)
-				sidesheetAnalyticsModule.logSidesheetClosed(analyticsConstantsModule.Source.RobuxWidget)
+				ToggleSideSheetModule(false)
+				SidesheetAnalyticsModule.logSidesheetClosed(AnalyticsConstantsModule.Source.RobuxWidget)
 			end, { p1.onBuyActivated }),
-			ref = if fFlagSideSheetFocusNav then if fFlagSideSheetFocusNav then reactModule.useCallback(function(p2)
-				-- upvalues: p1 (ref)
-				if p2 and p1.firstIntegrationToFocusCallback then
-					p1.firstIntegrationToFocusCallback(p2)
-				end
-			end, { p1.firstIntegrationToFocusCallback }) else nil else nil
+			ref = if FFlagSideSheetFocusNav then UseResult else nil
 		})
 	})
 end)

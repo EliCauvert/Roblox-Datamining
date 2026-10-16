@@ -1,55 +1,55 @@
-﻿local sduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
-local parent = sduiCoreSystem.Parent
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local _ = require(sduiCoreSystem.SduiBuilderTypes)
-local _ = require(sduiCoreSystem.ConditionalProps.SduiConditionalPropTypes)
-local checkPresenceConditionsModule = require(sduiCoreSystem.ConditionalProps.checkPresenceConditions)
+﻿local SduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
+local Parent = SduiCoreSystem.Parent
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local _ = require(SduiCoreSystem.SduiBuilderTypes)
+local _ = require(SduiCoreSystem.ConditionalProps.SduiConditionalPropTypes)
+local CheckPresenceConditionsModule = require(SduiCoreSystem.ConditionalProps.checkPresenceConditions)
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), checkPresenceConditionsModule (ref), signalsModule (ref)
-	local allConditionalProps = p1.allConditionalProps
-	local setFailedPresencePropIndexes = p1.setFailedPresencePropIndexes
-	local getInGameFriendsByGame = p1.sduiContext.dataStore.social.getInGameFriendsByGame
-	reactModule.useLayoutEffect(function()
-		-- upvalues: checkPresenceConditionsModule (copy), allConditionalProps (ref), setFailedPresencePropIndexes (ref), getInGameFriendsByGame (ref), signalsModule (copy)
+return ReactModule.memo(function(p1) --[[ Line: 17 | Named "SduiPresenceDetector" ]]
+	-- upvalues: ReactModule (copy), CheckPresenceConditionsModule (copy), SignalsModule (copy)
+	local AllConditionalProps = p1.allConditionalProps
+	local SetFailedPresencePropIndexesFunction = p1.setFailedPresencePropIndexes
+	local GetInGameFriendsByGameFunction = p1.sduiContext.dataStore.social.getInGameFriendsByGame
+	ReactModule.useLayoutEffect(function() --[[ Line: 28 ]]
+		-- upvalues: CheckPresenceConditionsModule (upval), AllConditionalProps (copy), SetFailedPresencePropIndexesFunction (copy), GetInGameFriendsByGameFunction (copy), SignalsModule (upval)
 		local t = {}
 		
-		local function checkConditions(p2)
-			-- upvalues: checkPresenceConditionsModule (copy), allConditionalProps (copy), t (write), setFailedPresencePropIndexes (copy)
-			local var1 = checkPresenceConditionsModule(allConditionalProps, p2)
-			local var2 = nil
+		local function checkConditions(p2) --[[ Line: 31 ]]
+			-- upvalues: CheckPresenceConditionsModule (upval), AllConditionalProps (upval), t (ref), SetFailedPresencePropIndexesFunction (upval)
+			local CheckPresenceConditionsModuleResult = CheckPresenceConditionsModule(AllConditionalProps, p2)
+			local Flag: boolean? = nil
 			
-			for i, v in var1 do
-				if not not t[i] ~= not not v then
-					var2 = true
+			for i, value in CheckPresenceConditionsModuleResult do
+				if not not t[i] ~= not not value then
+					Flag = true
 					break
 				end
 			end
-			if not var2 then
-				for i, v in t do
-					if not not var1[i] ~= not not v then
-						var2 = true
+			if not Flag then
+				for i1, value1 in t do
+					if not not CheckPresenceConditionsModuleResult[i1] ~= not not value1 then
+						Flag = true
 						break
 					end
 				end
 			end
-			if var2 then
-				t = var1
-				setFailedPresencePropIndexes(var1)
+			if Flag then
+				t = CheckPresenceConditionsModuleResult
+				SetFailedPresencePropIndexesFunction(CheckPresenceConditionsModuleResult)
 			end
 		end
 		
-		checkConditions(getInGameFriendsByGame(false))
+		checkConditions(GetInGameFriendsByGameFunction(false))
 		
-		return signalsModule.createEffect(function(p3)
-			-- upvalues: checkConditions (ref), getInGameFriendsByGame (copy)
-			checkConditions(getInGameFriendsByGame(p3))
+		return SignalsModule.createEffect(function(p3) --[[ Line: 58 ]]
+			-- upvalues: checkConditions (copy), GetInGameFriendsByGameFunction (upval)
+			checkConditions(GetInGameFriendsByGameFunction(p3))
 		end)
 	end, {
-		getInGameFriendsByGame,
-		allConditionalProps,
-		setFailedPresencePropIndexes
+		GetInGameFriendsByGameFunction,
+		AllConditionalProps,
+		SetFailedPresencePropIndexesFunction
 	})
 	
 	return nil

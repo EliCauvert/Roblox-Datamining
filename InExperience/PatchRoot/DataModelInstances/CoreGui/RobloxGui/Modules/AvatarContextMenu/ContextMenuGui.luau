@@ -1,306 +1,313 @@
-﻿local guiService = game:GetService("GuiService")
-local robloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
-local modules = robloxGui:WaitForChild("Modules")
-local settings = modules:WaitForChild("Settings")
-local avatarContextMenu = modules:WaitForChild("AvatarContextMenu")
-local var1 = nil
-local bindableEvent = Instance.new("BindableEvent")
-local _ = require(avatarContextMenu:WaitForChild("ContextMenuUtil"))
-local _ = require(settings:WaitForChild("Utility"))
-local t = {}
-t.__index = t
+﻿local GuiService = game:GetService("GuiService")
+local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
+local Modules = RobloxGui:WaitForChild("Modules")
+local AvatarContextMenu = Modules:WaitForChild("AvatarContextMenu")
+local NewResult = nil
+local BindableEvent = Instance.new("BindableEvent")
+local _ = require(AvatarContextMenu:WaitForChild("ContextMenuUtil"))
+local _ = require(Modules:WaitForChild("Settings"):WaitForChild("Utility"))
+local Module = {}
+Module.__index = Module
 
-function t.CreateContextMenuHolder(_, _)
-	-- upvalues: robloxGui (ref)
-	local avatarContextMenu = Instance.new("Frame")
-	avatarContextMenu.Name = "AvatarContextMenu"
-	avatarContextMenu.Position = UDim2.new(0, 0, 0, 0)
-	avatarContextMenu.Size = UDim2.new(1, 0, 1, 0)
-	avatarContextMenu.BackgroundTransparency = 1
-	avatarContextMenu.Parent = robloxGui
-	avatarContextMenu.AutoLocalize = false
+function Module:CreateContextMenuHolder(_) --[[ Line: 33 ]]
+	-- upvalues: RobloxGui (copy)
+	local AvatarContextMenu = Instance.new("Frame")
+	AvatarContextMenu.Name = "AvatarContextMenu"
+	AvatarContextMenu.Position = UDim2.new(0, 0, 0, 0)
+	AvatarContextMenu.Size = UDim2.new(1, 0, 1, 0)
+	AvatarContextMenu.BackgroundTransparency = 1
+	AvatarContextMenu.Parent = RobloxGui
+	AvatarContextMenu.AutoLocalize = false
 	
-	return avatarContextMenu
+	return AvatarContextMenu
 end
 
-function t.CreateLeaveMenuButton(p1, p2, p3)
-	local function closeMenu()
-		-- upvalues: p1 (ref)
+function Module.CreateLeaveMenuButton(p1, Parent, Frame) --[[ Line: 44 ]]
+	local function closeMenu() --[[ Line: 45 ]]
+		-- upvalues: p1 (copy)
 		p1.CloseMenuFunc()
 	end
 	
-	local closeMenuButton = Instance.new("ImageButton")
-	closeMenuButton.Name = "CloseMenuButton"
-	closeMenuButton.BackgroundTransparency = 1
-	closeMenuButton.AnchorPoint = Vector2.new(1, 0)
-	closeMenuButton.Position = UDim2.new(1, -10, 0, 10)
-	closeMenuButton.Size = UDim2.new(0.05, 0, 0.1, 0)
-	closeMenuButton.Image = p3.LeaveMenuImage
-	closeMenuButton.Selectable = false
-	closeMenuButton.Activated:Connect(closeMenu)
-	local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
-	UIAspectRatioConstraint.AspectType = Enum.AspectType.FitWithinMaxSize
-	UIAspectRatioConstraint.DominantAxis = Enum.DominantAxis.Height
-	UIAspectRatioConstraint.AspectRatio = 1
-	UIAspectRatioConstraint.Parent = closeMenuButton
-	closeMenuButton.Parent = p2
+	local CloseMenuButton = Instance.new("ImageButton")
+	CloseMenuButton.Name = "CloseMenuButton"
+	CloseMenuButton.BackgroundTransparency = 1
+	CloseMenuButton.AnchorPoint = Vector2.new(1, 0)
+	CloseMenuButton.Position = UDim2.new(1, -10, 0, 10)
+	CloseMenuButton.Size = UDim2.new(0.05, 0, 0.1, 0)
+	CloseMenuButton.Image = Frame.LeaveMenuImage
+	CloseMenuButton.Selectable = false
+	CloseMenuButton.Activated:Connect(closeMenu)
+	local AspectRatio = Instance.new("UIAspectRatioConstraint")
+	AspectRatio.AspectType = Enum.AspectType.FitWithinMaxSize
+	AspectRatio.DominantAxis = Enum.DominantAxis.Height
+	AspectRatio.AspectRatio = 1
+	AspectRatio.Parent = CloseMenuButton
+	CloseMenuButton.Parent = Parent
 	
-	return closeMenuButton
+	return CloseMenuButton
 end
 
-local function _(p1)
-	if p1 == nil then return end
-	local var2 = nil
-	workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function()
-		-- upvalues: var2 (write), p1 (ref)
-		local currentCamera = workspace.CurrentCamera
+local function _(Callback: () -> ()) --[[ Line: 71 | Named "listenToViewportChange" ]]
+	if Callback == nil then return end
+	local Connection = nil
+	workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function() --[[ Line: 76 | Named "updateCamera" ]]
+		-- upvalues: Connection (ref), Callback (copy)
+		local CurrentCamera = workspace.CurrentCamera
 		
-		if var2 then
-			var2:Disconnect()
+		if Connection then
+			Connection:Disconnect()
 		end
-		var2 = currentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(p1)
-		p1()
+		Connection = CurrentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(Callback)
+		Callback()
 	end)
-	local currentCamera = workspace.CurrentCamera
-	var2 = currentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(p1)
-	p1()
+	local CurrentCamera = workspace.CurrentCamera
+	
+	if Connection then
+		Connection:Disconnect()
+	end
+	Connection = CurrentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(Callback)
+	Callback()
 end
 
-function t:CreateMenuFrame(p1)
-	-- upvalues: guiService (ref)
-	local menuSizeConstraint
-	local var2 = self:CreateContextMenuHolder()
-	local menu = Instance.new("ImageButton")
-	menu.Name = "Menu"
-	menu.AnchorPoint = p1.AnchorPoint
-	menu.Size = p1.Size
-	menu.Position = p1.OnScreenPosition
-	menu.BackgroundTransparency = p1.BackgroundTransparency
-	menu.BackgroundColor3 = p1.BackgroundColor
-	menu.Image = p1.BackgroundImage
-	menu.ScaleType = p1.BackgroundImageScaleType
-	menu.SliceCenter = p1.BackgroundImageSliceCenter
-	menu.AutoButtonColor = false
-	menu.BorderSizePixel = 0
-	menu.Selectable = false
-	menu.Visible = false
-	menu.Active = true
-	menu.ClipsDescendants = true
-	menu.Modal = true
-	guiService:AddSelectionParent("AvatarContextMenuGroup", menu)
-	local menuAspectRatio = Instance.new("UIAspectRatioConstraint")
-	menuAspectRatio.AspectType = Enum.AspectType.ScaleWithParentSize
-	menuAspectRatio.DominantAxis = Enum.DominantAxis.Height
-	menuAspectRatio.Name = "MenuAspectRatio"
-	menuAspectRatio.AspectRatio = p1.AspectRatio
-	menuAspectRatio.Parent = menu
+function Module:CreateMenuFrame(Frame: Frame) --[[ Line: 89 ]]
+	-- upvalues: GuiService (copy)
+	local ContextMenuHolder = self:CreateContextMenuHolder()
+	local Menu = Instance.new("ImageButton")
+	Menu.Name = "Menu"
+	Menu.AnchorPoint = Frame.AnchorPoint
+	Menu.Size = Frame.Size
+	Menu.Position = Frame.OnScreenPosition
+	Menu.BackgroundTransparency = Frame.BackgroundTransparency
+	Menu.BackgroundColor3 = Frame.BackgroundColor
+	Menu.Image = Frame.BackgroundImage
+	Menu.ScaleType = Frame.BackgroundImageScaleType
+	Menu.SliceCenter = Frame.BackgroundImageSliceCenter
+	Menu.AutoButtonColor = false
+	Menu.BorderSizePixel = 0
+	Menu.Selectable = false
+	Menu.Visible = false
+	Menu.Active = true
+	Menu.ClipsDescendants = true
+	Menu.Modal = true
+	GuiService:AddSelectionParent("AvatarContextMenuGroup", Menu)
+	local MenuAspectRatio = Instance.new("UIAspectRatioConstraint")
+	MenuAspectRatio.AspectType = Enum.AspectType.ScaleWithParentSize
+	MenuAspectRatio.DominantAxis = Enum.DominantAxis.Height
+	MenuAspectRatio.Name = "MenuAspectRatio"
+	MenuAspectRatio.AspectRatio = Frame.AspectRatio
+	MenuAspectRatio.Parent = Menu
 	
-	local function updateAspectRatioForViewport()
-		-- upvalues: menuAspectRatio (ref)
-		local viewportSize = workspace.CurrentCamera.ViewportSize
+	local function updateAspectRatioForViewport() --[[ Line: 120 ]]
+		-- upvalues: MenuAspectRatio (copy)
+		local ViewportSize = workspace.CurrentCamera.ViewportSize
 		
-		if viewportSize.x < viewportSize.y then
-			menuAspectRatio.DominantAxis = Enum.DominantAxis.Width
+		if ViewportSize.x < ViewportSize.y then
+			MenuAspectRatio.DominantAxis = Enum.DominantAxis.Width
 			
 			return
+		else
+			MenuAspectRatio.DominantAxis = Enum.DominantAxis.Height
 		end
-		menuAspectRatio.DominantAxis = Enum.DominantAxis.Height
 	end
 	
 	if updateAspectRatioForViewport ~= nil then
-		menuSizeConstraint = nil
-		workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function()
-			-- upvalues: menuSizeConstraint (write), updateAspectRatioForViewport (ref)
-			local currentCamera = workspace.CurrentCamera
+		local Connection = nil
+		workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function() --[[ Line: 76 | Named "updateCamera" ]]
+			-- upvalues: Connection (ref), updateAspectRatioForViewport (copy)
+			local CurrentCamera = workspace.CurrentCamera
 			
-			if menuSizeConstraint then
-				menuSizeConstraint:Disconnect()
+			if Connection then
+				Connection:Disconnect()
 			end
-			var12 = currentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(updateAspectRatioForViewport)
+			Connection = CurrentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(updateAspectRatioForViewport)
 			updateAspectRatioForViewport()
 		end)
-		local currentCamera = workspace.CurrentCamera
-		menuSizeConstraint = currentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(updateAspectRatioForViewport)
-		local viewportSize = workspace.CurrentCamera.ViewportSize
+		local CurrentCamera = workspace.CurrentCamera
 		
-		if viewportSize.x < viewportSize.y then
-			menuAspectRatio.DominantAxis = Enum.DominantAxis.Width
+		if Connection then
+			Connection:Disconnect()
+		end
+		Connection = CurrentCamera:GetPropertyChangedSignal("ViewportSize"):Connect(updateAspectRatioForViewport)
+		local ViewportSize = workspace.CurrentCamera.ViewportSize
+		
+		if ViewportSize.x < ViewportSize.y then
+			MenuAspectRatio.DominantAxis = Enum.DominantAxis.Width
 		else
-			menuAspectRatio.DominantAxis = Enum.DominantAxis.Height
+			MenuAspectRatio.DominantAxis = Enum.DominantAxis.Height
 		end
 	end
-	menuSizeConstraint = Instance.new("UISizeConstraint")
-	menuSizeConstraint.Name = "MenuSizeConstraint"
-	menuSizeConstraint.MaxSize = p1.MaxSize
-	menuSizeConstraint.MinSize = p1.MinSize
-	menuSizeConstraint.Parent = menu
-	local content = Instance.new("Frame")
-	content.Name = "Content"
-	content.Size = UDim2.new(1, 0, 1, 0)
-	content.BackgroundTransparency = 1
-	content.Parent = menu
-	local UIListLayout = Instance.new("UIListLayout")
-	UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
-	UIListLayout.VerticalAlignment = Enum.VerticalAlignment.Top
-	UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-	UIListLayout.Parent = content
-	local contextActionList = Instance.new("ScrollingFrame")
-	contextActionList.Name = "ContextActionList"
-	contextActionList.AnchorPoint = Vector2.new(0.5, 1)
-	contextActionList.BackgroundColor3 = p1.ButtonFrameColor
-	contextActionList.BackgroundTransparency = p1.ButtonFrameTransparency
-	contextActionList.BorderSizePixel = 0
-	contextActionList.LayoutOrder = 2
-	contextActionList.Size = UDim2.new(1, -12, 0.54, 0)
-	contextActionList.CanvasSize = UDim2.new(0, 0, 0, 208)
-	contextActionList.ScrollBarThickness = 4
-	contextActionList.Selectable = false
-	contextActionList.Parent = content
-	local UIListLayout_1 = Instance.new("UIListLayout")
-	UIListLayout_1.HorizontalAlignment = Enum.HorizontalAlignment.Center
-	UIListLayout_1.SortOrder = Enum.SortOrder.LayoutOrder
-	UIListLayout_1.VerticalAlignment = Enum.VerticalAlignment.Top
-	UIListLayout_1:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
-		-- upvalues: contextActionList (ref), UIListLayout_1 (ref)
-		contextActionList.CanvasSize = UDim2.new(0, 0, 0, UIListLayout_1.AbsoluteContentSize.Y)
+	local MenuSizeConstraint = Instance.new("UISizeConstraint")
+	MenuSizeConstraint.Name = "MenuSizeConstraint"
+	MenuSizeConstraint.MaxSize = Frame.MaxSize
+	MenuSizeConstraint.MinSize = Frame.MinSize
+	MenuSizeConstraint.Parent = Menu
+	local Content = Instance.new("Frame")
+	Content.Name = "Content"
+	Content.Size = UDim2.new(1, 0, 1, 0)
+	Content.BackgroundTransparency = 1
+	Content.Parent = Menu
+	local ListLayout = Instance.new("UIListLayout")
+	ListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+	ListLayout.VerticalAlignment = Enum.VerticalAlignment.Top
+	ListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+	ListLayout.Parent = Content
+	local ContextActionList = Instance.new("ScrollingFrame")
+	ContextActionList.Name = "ContextActionList"
+	ContextActionList.AnchorPoint = Vector2.new(0.5, 1)
+	ContextActionList.BackgroundColor3 = Frame.ButtonFrameColor
+	ContextActionList.BackgroundTransparency = Frame.ButtonFrameTransparency
+	ContextActionList.BorderSizePixel = 0
+	ContextActionList.LayoutOrder = 2
+	ContextActionList.Size = UDim2.new(1, -12, 0.54, 0)
+	ContextActionList.CanvasSize = UDim2.new(0, 0, 0, 208)
+	ContextActionList.ScrollBarThickness = 4
+	ContextActionList.Selectable = false
+	ContextActionList.Parent = Content
+	local ListLayout1 = Instance.new("UIListLayout")
+	ListLayout1.HorizontalAlignment = Enum.HorizontalAlignment.Center
+	ListLayout1.SortOrder = Enum.SortOrder.LayoutOrder
+	ListLayout1.VerticalAlignment = Enum.VerticalAlignment.Top
+	ListLayout1:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function() --[[ Line: 166 ]]
+		-- upvalues: ContextActionList (copy), ListLayout1 (copy)
+		ContextActionList.CanvasSize = UDim2.new(0, 0, 0, ListLayout1.AbsoluteContentSize.Y)
 	end)
-	UIListLayout_1.Parent = contextActionList
-	local nameTag = Instance.new("TextButton")
-	nameTag.Name = "NameTag"
-	nameTag.AnchorPoint = Vector2.new(0.5, 1)
-	nameTag.BackgroundColor3 = p1.NameTagColor
-	nameTag.AutoButtonColor = false
-	nameTag.BorderSizePixel = 0
-	nameTag.LayoutOrder = 1
-	nameTag.Size = UDim2.new(1, -12, 0.16, 0)
-	nameTag.Font = p1.Font
-	nameTag.TextColor3 = p1.TextColor
-	nameTag.TextSize = 24 * p1.TextScale
-	nameTag.Text = ""
-	nameTag.TextXAlignment = Enum.TextXAlignment.Center
-	nameTag.TextYAlignment = Enum.TextYAlignment.Center
-	nameTag.Selectable = false
-	nameTag.Parent = content
-	local underline = Instance.new("Frame")
-	underline.Name = "Underline"
-	underline.BackgroundColor3 = p1.NameUnderlineColor
-	underline.AnchorPoint = Vector2.new(0, 1)
-	underline.BorderSizePixel = 0
-	underline.Position = UDim2.new(0, 0, 1, 0)
-	underline.Size = UDim2.new(1, 0, 0, 2)
-	underline.Parent = nameTag
-	self:CreateLeaveMenuButton(menu, p1)
-	menu.Parent = var2
-	self.ContextMenuFrame = menu
+	ListLayout1.Parent = ContextActionList
+	local NameTag = Instance.new("TextButton")
+	NameTag.Name = "NameTag"
+	NameTag.AnchorPoint = Vector2.new(0.5, 1)
+	NameTag.BackgroundColor3 = Frame.NameTagColor
+	NameTag.AutoButtonColor = false
+	NameTag.BorderSizePixel = 0
+	NameTag.LayoutOrder = 1
+	NameTag.Size = UDim2.new(1, -12, 0.16, 0)
+	NameTag.Font = Frame.Font
+	NameTag.TextColor3 = Frame.TextColor
+	NameTag.TextSize = 24 * Frame.TextScale
+	NameTag.Text = ""
+	NameTag.TextXAlignment = Enum.TextXAlignment.Center
+	NameTag.TextYAlignment = Enum.TextYAlignment.Center
+	NameTag.Selectable = false
+	NameTag.Parent = Content
+	local Underline = Instance.new("Frame")
+	Underline.Name = "Underline"
+	Underline.BackgroundColor3 = Frame.NameUnderlineColor
+	Underline.AnchorPoint = Vector2.new(0, 1)
+	Underline.BorderSizePixel = 0
+	Underline.Position = UDim2.new(0, 0, 1, 0)
+	Underline.Size = UDim2.new(1, 0, 0, 2)
+	Underline.Parent = NameTag
+	self:CreateLeaveMenuButton(Menu, Frame)
+	Menu.Parent = ContextMenuHolder
+	self.ContextMenuFrame = Menu
 	
-	return menu
+	return Menu
 end
 
-function t:UpdateGuiTheme(p1)
-	-- upvalues: var1 (write)
-	self.ContextMenuFrame.Size = p1.Size
-	self.ContextMenuFrame.AnchorPoint = p1.AnchorPoint
-	self.ContextMenuFrame.BackgroundTransparency = p1.BackgroundTransparency
-	self.ContextMenuFrame.BackgroundColor3 = p1.BackgroundColor
-	self.ContextMenuFrame.Image = p1.BackgroundImage
-	self.ContextMenuFrame.ScaleType = p1.BackgroundImageScaleType
-	self.ContextMenuFrame.SliceCenter = p1.BackgroundImageSliceCenter
-	self.ContextMenuFrame.CloseMenuButton.Image = p1.LeaveMenuImage
-	self.ContextMenuFrame.MenuSizeConstraint.MaxSize = p1.MaxSize
-	self.ContextMenuFrame.MenuSizeConstraint.MinSize = p1.MinSize
-	self.ContextMenuFrame.MenuAspectRatio.AspectRatio = p1.AspectRatio
-	local content = self.ContextMenuFrame.Content
-	content.ContextActionList.BackgroundColor3 = p1.ButtonFrameColor
-	content.ContextActionList.BackgroundTransparency = p1.ButtonFrameTransparency
-	content.NameTag.BackgroundColor3 = p1.NameTagColor
-	content.NameTag.Font = p1.Font
-	content.NameTag.TextColor3 = p1.TextColor
-	content.NameTag.TextSize = 24 * p1.TextScale
-	content.NameTag.Underline.BackgroundColor3 = p1.NameUnderlineColor
+function Module:UpdateGuiTheme(Frame: Frame) --[[ Line: 206 ]]
+	-- upvalues: NewResult (ref)
+	self.ContextMenuFrame.Size = Frame.Size
+	self.ContextMenuFrame.AnchorPoint = Frame.AnchorPoint
+	self.ContextMenuFrame.BackgroundTransparency = Frame.BackgroundTransparency
+	self.ContextMenuFrame.BackgroundColor3 = Frame.BackgroundColor
+	self.ContextMenuFrame.Image = Frame.BackgroundImage
+	self.ContextMenuFrame.ScaleType = Frame.BackgroundImageScaleType
+	self.ContextMenuFrame.SliceCenter = Frame.BackgroundImageSliceCenter
+	self.ContextMenuFrame.CloseMenuButton.Image = Frame.LeaveMenuImage
+	self.ContextMenuFrame.MenuSizeConstraint.MaxSize = Frame.MaxSize
+	self.ContextMenuFrame.MenuSizeConstraint.MinSize = Frame.MinSize
+	self.ContextMenuFrame.MenuAspectRatio.AspectRatio = Frame.AspectRatio
+	local Content = self.ContextMenuFrame.Content
+	Content.ContextActionList.BackgroundColor3 = Frame.ButtonFrameColor
+	Content.ContextActionList.BackgroundTransparency = Frame.ButtonFrameTransparency
+	Content.NameTag.BackgroundColor3 = Frame.NameTagColor
+	Content.NameTag.Font = Frame.Font
+	Content.NameTag.TextColor3 = Frame.TextColor
+	Content.NameTag.TextSize = 24 * Frame.TextScale
+	Content.NameTag.Underline.BackgroundColor3 = Frame.NameUnderlineColor
 	
-	if var1 then
-		var1:UpdateGuiTheme(p1)
+	if NewResult then
+		NewResult:UpdateGuiTheme(Frame)
 	end
 end
 
-function t:BuildPlayerCarousel(p1, p2)
-	-- upvalues: var1 (write), avatarContextMenu (ref), bindableEvent (ref)
-	if not var1 then
-		var1 = require(avatarContextMenu.PlayerCarousel).new(p2)
-		var1.rbxGui.Parent = self.ContextMenuFrame.Content
+function Module:BuildPlayerCarousel(p1, p2) --[[ Line: 239 ]]
+	-- upvalues: NewResult (ref), AvatarContextMenu (copy), BindableEvent (copy)
+	if not NewResult then
+		NewResult = require(AvatarContextMenu.PlayerCarousel).new(p2)
+		NewResult.rbxGui.Parent = self.ContextMenuFrame.Content
 	end
-	var1:ClearPlayerEntries()
+	NewResult:ClearPlayerEntries()
 	
 	if self.PlayerChangedConnection then
 		self.PlayerChangedConnection:Disconnect()
 	end
-	self.PlayerChangedConnection = var1.PlayerChanged:Connect(function(p3)
-		-- upvalues: self (ref), bindableEvent (copy)
+	self.PlayerChangedConnection = NewResult.PlayerChanged:Connect(function(p3) --[[ Line: 251 ]]
+		-- upvalues: self (copy), BindableEvent (upval)
 		if p3 then
 			self.ContextMenuFrame.Content.NameTag.Text = p3.Name
 		else
 			self.ContextMenuFrame.Content.NameTag.Text = ""
 		end
-		bindableEvent:Fire(p3)
+		BindableEvent:Fire(p3)
 	end)
 	
 	for i = 1, #p1 do
-		var1:CreatePlayerEntry(p1[i][1], p1[i][2])
+		NewResult:CreatePlayerEntry(p1[i][1], p1[i][2])
 	end
-	var1:FadeTowardsEdges()
-	var1:AddCarouselDivider()
+	NewResult:FadeTowardsEdges()
+	NewResult:AddCarouselDivider()
 end
 
-function t.RemovePlayerEntry(_, p3)
-	-- upvalues: var1 (write)
-	if var1 then
-		var1:RemovePlayerEntry(p3)
+function Module:RemovePlayerEntry(p3) --[[ Line: 267 ]]
+	-- upvalues: NewResult (ref)
+	if NewResult then
+		NewResult:RemovePlayerEntry(p3)
 		
 		return
 	end
 end
 
-function t.GetBottomScreenPaddingConstant(_)
+function Module:GetBottomScreenPaddingConstant(): number --[[ Line: 273 ]]
 	return 0.02
 end
 
-function t:SetCloseMenuFunc(p3)
-	self.CloseMenuFunc = p3
+function Module:SetCloseMenuFunc(CloseMenuFunc) --[[ Line: 277 ]]
+	self.CloseMenuFunc = CloseMenuFunc
 end
 
-function t.SwitchToPlayerEntry(_, p3, p4)
-	-- upvalues: var1 (write)
-	if var1 then
-		var1:SwitchToPlayerEntry(p3, p4)
+function Module:SwitchToPlayerEntry(p3, p4) --[[ Line: 281 ]]
+	-- upvalues: NewResult (ref)
+	if NewResult then
+		NewResult:SwitchToPlayerEntry(p3, p4)
 		
 		return
 	end
 end
 
-function t.OffsetPlayerEntry(_, p3)
-	-- upvalues: var1 (write)
-	if var1 then
-		var1:OffsetPlayerEntry(p3)
+function Module:OffsetPlayerEntry(p3) --[[ Line: 286 ]]
+	-- upvalues: NewResult (ref)
+	if NewResult then
+		NewResult:OffsetPlayerEntry(p3)
 		
 		return
 	end
 end
 
-function t.GetSelectedPlayer(_)
-	-- upvalues: var1 (write)
-	return if var1 then var1:GetSelectedPlayer() else nil
+function Module:GetSelectedPlayer() --[[ Line: 291 ]]
+	-- upvalues: NewResult (ref)
+	return if NewResult then NewResult:GetSelectedPlayer() else nil
 end
 
-function t.new()
-	-- upvalues: t (ref), bindableEvent (ref)
-	local tbl = setmetatable({}, t)
-	tbl.CloseMenuFunc = nil
-	tbl.ContextMenuFrame = nil
-	tbl.LastSetPlayerIcon = nil
-	tbl.PlayerChangedConnection = nil
-	tbl.SelectedPlayerChanged = bindableEvent.Event
+function Module.new() --[[ Line: 296 ]]
+	-- upvalues: Module (copy), BindableEvent (copy)
+	local self = setmetatable({}, Module)
+	self.CloseMenuFunc = nil
+	self.ContextMenuFrame = nil
+	self.LastSetPlayerIcon = nil
+	self.PlayerChangedConnection = nil
+	self.SelectedPlayerChanged = BindableEvent.Event
 	
-	return tbl
+	return self
 end
 
-return t.new()
+return Module.new()

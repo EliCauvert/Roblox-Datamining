@@ -1,115 +1,107 @@
-﻿local parent = script:FindFirstAncestor("GameCollections").Parent
-local reactModule = require(parent.React)
-local signal = require(parent.AppCommonLib).Signal
-local useRouteName = require(parent.Navigation).useRouteName
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local cryoModule = require(parent.Cryo)
-local impressionsModule = require(parent.Impressions)
-local screenSizeImpressionsDetector = impressionsModule.ScreenSizeImpressionsDetector
-local impressionsVisualizer = impressionsModule.ImpressionsVisualizer
+﻿local Parent = script:FindFirstAncestor("GameCollections").Parent
+local ReactModule = require(Parent.React)
+local Signal = require(Parent.AppCommonLib).Signal
+local UseRouteNameFunction = require(Parent.Navigation).useRouteName
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local CryoModule = require(Parent.Cryo)
+local ImpressionsModule = require(Parent.Impressions)
+local ScreenSizeImpressionsDetector = ImpressionsModule.ScreenSizeImpressionsDetector
+local ImpressionsVisualizer = ImpressionsModule.ImpressionsVisualizer
 
-return function(p1)
-	-- upvalues: reactModule (ref), signal (ref), impressionsVisualizer (ref), useRouteName (ref), useSelector (ref), cryoModule (ref), screenSizeImpressionsDetector (ref)
-	local var1 = reactModule.useRef({})
-	local var2 = reactModule.useRef(signal.new())
-	local _ = nil
-	local var3 = reactModule.useRef(nil)
+return function(p1) --[[ Line: 23 ]]
+	-- upvalues: ReactModule (copy), Signal (copy), ImpressionsVisualizer (copy), UseRouteNameFunction (copy), UseSelectorFunction (copy), CryoModule (copy), ScreenSizeImpressionsDetector (copy)
+	local UseRefResult = ReactModule.useRef({})
+	local UseRefResult1 = ReactModule.useRef(Signal.new())
+	local UseRefResult2 = nil
+	UseRefResult2 = ReactModule.useRef(nil)
 	
-	if var3.current == nil then
-		var3.current = impressionsVisualizer.new(p1.impressionsTag)
+	if UseRefResult2.current == nil then
+		UseRefResult2.current = ImpressionsVisualizer.new(p1.impressionsTag)
 	end
-	assert(var3.current, "impressionsVisualizer should always be truthy; check needed for lint")
-	local var4, var5 = reactModule.useState({})
-	local var6, var7 = reactModule.useState(p1.dataUpdatedTimestamp)
-	local var8 = useRouteName()
-	local var9 = useSelector(function(p2)
+	assert(UseRefResult2.current, "impressionsVisualizer should always be truthy; check needed for lint")
+	local UseStateResult, UseStateResult2 = ReactModule.useState({})
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(p1.dataUpdatedTimestamp)
+	local UseRouteNameResult = UseRouteNameFunction()
+	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 36 ]]
 		return p2.ScreenSize
 	end)
-	local var10 = reactModule.useRef(p1.impressionsTag)
-	reactModule.useEffect(function()
-		-- upvalues: var10 (ref), p1 (ref), var7 (ref), var1 (ref), var3 (write)
-		if var10.current ~= p1.impressionsTag then
-			var10.current = p1.impressionsTag
-			var7(p1.dataUpdatedTimestamp)
-			var1.current = {}
-			var3.current:onClearAllImpressions()
-			var3.current:setImpressionsTag(p1.impressionsTag)
+	local UseRefResult3 = ReactModule.useRef(p1.impressionsTag)
+	ReactModule.useEffect(function() --[[ Line: 42 ]]
+		-- upvalues: UseRefResult3 (copy), p1 (copy), UseStateResult2_1 (copy), UseRefResult (copy), UseRefResult2 (ref)
+		if UseRefResult3.current ~= p1.impressionsTag then
+			UseRefResult3.current = p1.impressionsTag
+			UseStateResult2_1(p1.dataUpdatedTimestamp)
+			UseRefResult.current = {}
+			UseRefResult2.current:onClearAllImpressions()
+			UseRefResult2.current:setImpressionsTag(p1.impressionsTag)
 		end
 	end, { p1.impressionsTag })
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), p1 (ref)
-		var2.current:fire()
-		local var11 = if p1.scrollViewPositionChangedSignal then p1.scrollViewPositionChangedSignal:connect(function()
-			-- upvalues: var2 (copy)
-			var2.current:fire()
+	ReactModule.useEffect(function() --[[ Line: 52 ]]
+		-- upvalues: UseRefResult1 (copy), p1 (copy)
+		UseRefResult1.current:fire()
+		local ScrollViewPositionChangedSignalConnection = if p1.scrollViewPositionChangedSignal then p1.scrollViewPositionChangedSignal:connect(function() --[[ Line: 59 ]]
+			-- upvalues: UseRefResult1 (upval)
+			UseRefResult1.current:fire()
 		end) else nil
 		
-		return function()
-			-- upvalues: var11 (write)
-			if var11 ~= nil then
-				var11:disconnect()
+		return function() --[[ Line: 64 ]]
+			-- upvalues: ScrollViewPositionChangedSignalConnection (ref)
+			if ScrollViewPositionChangedSignalConnection ~= nil then
+				ScrollViewPositionChangedSignalConnection:disconnect()
 			end
 		end
 	end, { p1.scrollViewPositionChangedSignal })
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), cryoModule (copy), var8 (ref), var2 (ref), var6 (ref), var7 (ref), var1 (ref), var3 (write)
-		local var11
-		local _ = false
-		
-		if type(p1.pageContext) == "table" then
-			var11 = cryoModule.List.find(p1.pageContext, var8) ~= nil
-			var11 = nil
-		else
-			var11 = var8 == p1.pageContext
-		end
-		if var11 then
-			var2.current:fire()
+	ReactModule.useEffect(function() --[[ Line: 71 ]]
+		-- upvalues: p1 (copy), CryoModule (upval), UseRouteNameResult (copy), UseRefResult1 (copy), UseStateResult1 (copy), UseStateResult2_1 (copy), UseRefResult (copy), UseRefResult2 (ref)
+		if if type(p1.pageContext) == "table" then CryoModule.List.find(p1.pageContext, UseRouteNameResult) ~= nil else UseRouteNameResult == p1.pageContext then
+			UseRefResult1.current:fire()
 			
-			if p1.dataUpdatedTimestamp ~= var6 then
-				var7(p1.dataUpdatedTimestamp)
-				var1.current = {}
-				var3.current:onClearAllImpressions()
+			if p1.dataUpdatedTimestamp ~= UseStateResult1 then
+				UseStateResult2_1(p1.dataUpdatedTimestamp)
+				UseRefResult.current = {}
+				UseRefResult2.current:onClearAllImpressions()
 			end
 		end
 	end, {
-		var8,
+		UseRouteNameResult,
 		p1.pageContext,
 		p1.dataUpdatedTimestamp,
-		var6,
-		var9
+		UseStateResult1,
+		UseSelectorResult
 	})
-	reactModule.useEffect(function()
-		-- upvalues: var4 (ref), p1 (ref), var3 (write), var5 (ref)
-		if var4 ~= nil and #var4 > 0 then
-			p1.sendGameImpressions(var4)
-			var3.current:onSendImpressions(var4)
-			var5({})
+	ReactModule.useEffect(function() --[[ Line: 90 ]]
+		-- upvalues: UseStateResult (copy), p1 (copy), UseRefResult2 (ref), UseStateResult2 (copy)
+		if UseStateResult ~= nil and #UseStateResult > 0 then
+			p1.sendGameImpressions(UseStateResult)
+			UseRefResult2.current:onSendImpressions(UseStateResult)
+			UseStateResult2({})
 		end
-	end, { var4 })
-	reactModule.useEffect(function()
-		-- upvalues: var3 (write)
-		return function()
-			-- upvalues: var3 (copy)
-			var3.current:destroy()
+	end, { UseStateResult })
+	ReactModule.useEffect(function() --[[ Line: 98 ]]
+		-- upvalues: UseRefResult2 (ref)
+		return function() --[[ Line: 99 ]]
+			-- upvalues: UseRefResult2 (upval)
+			UseRefResult2.current:destroy()
 		end
 	end, {})
 	
-	return reactModule.createElement(screenSizeImpressionsDetector, {
-		onRequestImpressionsSignal = var2.current,
+	return ReactModule.createElement(ScreenSizeImpressionsDetector, {
+		onRequestImpressionsSignal = UseRefResult1.current,
 		parentRef = p1.parentRef,
-		filterImpressionFunc = reactModule.useCallback(function(p2)
-			-- upvalues: var1 (ref)
-			if var1.current[p2] == nil then
-				var1.current[p2] = true
+		filterImpressionFunc = ReactModule.useCallback(function(p2): boolean --[[ Line: 104 ]]
+			-- upvalues: UseRefResult (copy)
+			if UseRefResult.current[p2] == nil then
+				UseRefResult.current[p2] = true
 				
 				return true
+			else
+				return false
 			end
-			return false
 		end, {}),
-		onImpressionsDetected = reactModule.useCallback(function(p2)
-			-- upvalues: var5 (ref)
+		onImpressionsDetected = ReactModule.useCallback(function(p2) --[[ Line: 113 ]]
+			-- upvalues: UseStateResult2 (copy)
 			if p2 and #p2 ~= 0 then
-				var5(p2)
+				UseStateResult2(p2)
 				
 				return
 			end

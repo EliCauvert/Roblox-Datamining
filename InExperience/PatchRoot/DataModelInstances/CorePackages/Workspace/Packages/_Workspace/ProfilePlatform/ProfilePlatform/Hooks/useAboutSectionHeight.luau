@@ -1,39 +1,43 @@
-﻿local textService = game:GetService("TextService")
-local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local getTextSize = require(parent.Style).GetTextSize
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local responsiveModule = require(parent.Responsive)
-local useTokens = foundationModule.Hooks.useTokens
-local useIsSpatial = responsiveModule.useIsSpatial
-local usePreferredInput = responsiveModule.usePreferredInput
-local fFlagProfilePlatformFixBioTruncationModule = require(profilePlatform.Flags.FFlagProfilePlatformFixBioTruncation)
+﻿local TextService = game:GetService("TextService")
+local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local GetTextSizeFunction = require(Parent.Style).GetTextSize
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local ResponsiveModule = require(Parent.Responsive)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UseIsSpatialFunction = ResponsiveModule.useIsSpatial
+local UsePreferredInputFunction = ResponsiveModule.usePreferredInput
+local FFlagProfilePlatformFixBioTruncationModule = require(ProfilePlatform.Flags.FFlagProfilePlatformFixBioTruncation)
 
-return function(p1, p2, p3)
-	-- upvalues: useTokens (ref), useIsSpatial (ref), usePreferredInput (ref), responsiveModule (ref), reactModule (ref), foundationFontFaceMigration (ref), getTextSize (ref), textService (ref), fFlagProfilePlatformFixBioTruncationModule (ref)
-	local var1 = useTokens()
-	local bodyMedium = var1.Typography.BodyMedium
-	local var2 = useIsSpatial() or usePreferredInput() == responsiveModule.Input.Directional
-	local var3, var4 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref), foundationFontFaceMigration (copy), getTextSize (copy), bodyMedium (ref), textService (copy), var2 (ref), fFlagProfilePlatformFixBioTruncationModule (copy), p2 (ref), var1 (ref)
-		local replaced = string.gsub(p1 or "", "[\r\n]+", " ")
-		local var5 = if foundationFontFaceMigration then getTextSize(replaced, bodyMedium.FontSize, bodyMedium.Font, Vector2.new(1e999, 1e999), { addTemporaryPadding = false }).Y else textService:GetTextSize(replaced, bodyMedium.FontSize, bodyMedium.Font, Vector2.new(1e999, 1e999)).Y
-		local var6 = (if var2 then 1.3 else 1) * bodyMedium.LineHeight
-		local var7 = if fFlagProfilePlatformFixBioTruncationModule then bodyMedium.FontSize * var6 * 2 else var5 * var6 + var5
+return function(String1, X, p1) --[[ Line: 15 ]]
+	-- upvalues: UseTokensFunction (copy), UseIsSpatialFunction (copy), UsePreferredInputFunction (copy), ResponsiveModule (copy), ReactModule (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), TextService (copy), FFlagProfilePlatformFixBioTruncationModule (copy)
+	local UseTokensResult = UseTokensFunction()
+	local BodyMedium = UseTokensResult.Typography.BodyMedium
+	local UseIsSpatialResult = UseIsSpatialFunction()
+	local IsUsePreferredInputResultMatch = UsePreferredInputFunction() == ResponsiveModule.Input.Directional
+	local UseIsSpatialResult1 = UseIsSpatialResult or IsUsePreferredInputResultMatch
+	local UseMemoResult, UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 23 ]]
+		-- upvalues: String1 (copy), FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), BodyMedium (copy), TextService (upval), UseIsSpatialResult1 (copy), FFlagProfilePlatformFixBioTruncationModule (upval), X (copy), UseTokensResult (copy)
+		local Replaced = string.gsub(String1 or "", "[\r\n]+", " ")
+		local Y = if FoundationFontFaceMigration then GetTextSizeFunction(Replaced, BodyMedium.FontSize, BodyMedium.Font, Vector2.new(1e999, 1e999), { addTemporaryPadding = false }).Y else TextService:GetTextSize(Replaced, BodyMedium.FontSize, BodyMedium.Font, Vector2.new(1e999, 1e999)).Y
+		local ScaledLineHeight = (if UseIsSpatialResult1 then 1.3 else 1) * BodyMedium.LineHeight
+		local ScaledFontSize = if FFlagProfilePlatformFixBioTruncationModule then BodyMedium.FontSize * ScaledLineHeight * 2 else Y * ScaledLineHeight + Y
 		
-		if p1 and p1 ~= "" then
-			local var8 = if foundationFontFaceMigration then getTextSize(p1, bodyMedium.FontSize, bodyMedium.Font, Vector2.new(p2, 1e999), { addTemporaryPadding = false }) else textService:GetTextSize(p1, bodyMedium.FontSize, bodyMedium.Font, Vector2.new(p2, 1e999))
+		if String1 and String1 ~= "" then
+			local TextSize = if FoundationFontFaceMigration then GetTextSizeFunction(String1, BodyMedium.FontSize, BodyMedium.Font, Vector2.new(X, 1e999), { addTemporaryPadding = false }) else TextService:GetTextSize(String1, BodyMedium.FontSize, BodyMedium.Font, Vector2.new(X, 1e999))
+			local IsScaledFontSizeBelow = ScaledFontSize < TextSize.Y
 			
-			return if var7 < var8.Y then var7 + var5 + var1.Gap.XSmall else var8.Y, var7
+			return if IsScaledFontSizeBelow then ScaledFontSize + Y + UseTokensResult.Gap.XSmall else TextSize.Y, ScaledFontSize
+		else
+			return 0, ScaledFontSize
 		end
-		return 0, var7
 	end, {
-		p1, bodyMedium.FontSize, bodyMedium.Font,
-		if fFlagProfilePlatformFixBioTruncationModule then bodyMedium.LineHeight else nil,
-		p2, p3, var2, var1.Gap.XSmall
+		String1, BodyMedium.FontSize, BodyMedium.Font,
+		if FFlagProfilePlatformFixBioTruncationModule then BodyMedium.LineHeight else nil,
+		X, p1, UseIsSpatialResult1, UseTokensResult.Gap.XSmall
 	})
 	
-	return var3, var4
+	return UseMemoResult, UseMemoResult2
 end

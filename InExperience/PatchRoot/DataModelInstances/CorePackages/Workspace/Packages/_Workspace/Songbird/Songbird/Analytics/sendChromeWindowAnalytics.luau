@@ -1,25 +1,25 @@
-﻿local songbird = script:FindFirstAncestor("Songbird")
-local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
-local cryoModule = require(songbird.Parent.Cryo)
-local loggingProtocolModule = require(songbird.Parent.LoggingProtocol)
-local _ = require(songbird.types)
-local default = loggingProtocolModule.default
-local t = {
+﻿local Songbird = script:FindFirstAncestor("Songbird")
+local RbxAnalyticsService = game:GetService("RbxAnalyticsService")
+local CryoModule = require(Songbird.Parent.Cryo)
+local LoggingProtocolModule = require(Songbird.Parent.LoggingProtocol)
+local _ = require(Songbird.types)
+local Default = LoggingProtocolModule.default
+local config = {
 	eventName = "NowPlayingChromeWindowAnalytics",
 	description = " Now Playing Chrome Window UI related analytics ",
 	links = "https://roblox.atlassian.net/wiki/x/I4Fcqw",
-	backends = { loggingProtocolModule.TelemetryBackends.EventIngest },
-	throttlingPercentage = require(songbird.Flags.getFIntSongbirdTelemetryThrottle)(),
+	backends = { LoggingProtocolModule.TelemetryBackends.EventIngest },
+	throttlingPercentage = require(Songbird.Flags.getFIntSongbirdTelemetryThrottle)(),
 	lastUpdated = { 24, 12, 10 }
 }
 
-return function(p1)
-	-- upvalues: rbxAnalyticsService (ref), cryoModule (ref), default (ref), t (ref)
-	default:logRobloxTelemetryEvent(t, nil, cryoModule.Dictionary.join(p1, {
+return function(p1) --[[ Line: 30 | Named "sendChromeWindowAnalytics" ]]
+	-- upvalues: RbxAnalyticsService (copy), CryoModule (copy), Default (copy), config (copy)
+	Default:logRobloxTelemetryEvent(config, nil, (CryoModule.Dictionary.join(p1, {
 		placeid = tostring(game.PlaceId),
-		sessionid = rbxAnalyticsService:GetSessionId(),
+		sessionid = RbxAnalyticsService:GetSessionId(),
 		universeid = tostring(game.GameId)
-	}))
+	})))
 	
 	return nil
 end

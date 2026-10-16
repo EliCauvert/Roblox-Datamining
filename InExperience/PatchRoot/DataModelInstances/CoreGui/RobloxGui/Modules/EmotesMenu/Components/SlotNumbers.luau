@@ -1,39 +1,39 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local constantsModule = require(script.Parent.Parent.Constants)
-local slotNumbers = roactModule.PureComponent:extend("SlotNumbers")
+﻿local CorePackages = game:GetService("CorePackages")
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local ConstantsModule = require(script.Parent.Parent.Constants)
+local SlotNumbers = RoactModule.PureComponent:extend("SlotNumbers")
 
-function slotNumbers.render(p1)
-	-- upvalues: constantsModule (ref), roactModule (ref)
-	local layout = constantsModule.Layouts[p1.props.layout]
-	local t = {}
+function SlotNumbers.render(p1) --[[ Line: 13 ]]
+	-- upvalues: ConstantsModule (copy), RoactModule (copy)
+	local Layout = ConstantsModule.Layouts[p1.props.layout]
+	local TextLabels = {}
 	
-	for i = 1, constantsModule.EmotesPerPage do
-		local var1 = 360 / constantsModule.EmotesPerPage * (i - 1) + constantsModule.SegmentsStartRotation
-		local var2 = constantsModule.InnerCircleSizeRatio / 2
-		local slotNumberSize = constantsModule.SlotNumberSize
-		local var3 = slotNumberSize / 2
-		local var4 = math.cos(math.rad(var1))
-		local var5 = math.sin(math.rad(var1))
-		t[i] = roactModule.createElement("TextLabel", {
+	for i = 1, ConstantsModule.EmotesPerPage do
+		local NewEmotesPerPage = 360 / ConstantsModule.EmotesPerPage * (i - 1) + ConstantsModule.SegmentsStartRotation
+		local InnerCircleSizeRatioRatio = ConstantsModule.InnerCircleSizeRatio / 2
+		local SlotNumberSize: number = ConstantsModule.SlotNumberSize
+		local SlotNumberSizeRatio = SlotNumberSize / 2
+		local Cosine = math.cos((math.rad(NewEmotesPerPage)))
+		local Sine = math.sin((math.rad(NewEmotesPerPage)))
+		TextLabels[i] = RoactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
 			TextScaled = true,
 			ZIndex = 2,
 			AnchorPoint = Vector2.new(0.5, 0.5),
-			Position = UDim2.new(0.5 + var2 * var4 + var3 * var4, 0, 0.5 + var2 * var5 + var3 * var5, 0),
-			Size = UDim2.new(slotNumberSize, 0, slotNumberSize, 0),
-			TextSize = layout.SlotNumberTextSize,
-			TextColor3 = constantsModule.Colors.White,
+			Position = UDim2.new(0.5 + InnerCircleSizeRatioRatio * Cosine + SlotNumberSizeRatio * Cosine, 0, 0.5 + InnerCircleSizeRatioRatio * Sine + SlotNumberSizeRatio * Sine, 0),
+			Size = UDim2.new(SlotNumberSize, 0, SlotNumberSize, 0),
+			TextSize = Layout.SlotNumberTextSize,
+			TextColor3 = ConstantsModule.Colors.White,
 			Text = i,
-			Font = layout.SlotNumberFont
+			Font = Layout.SlotNumberFont
 		}, {
-			TextSizeConstraint = roactModule.createElement("UITextSizeConstraint", { MaxTextSize = layout.SlotNumberTextSize })
+			TextSizeConstraint = RoactModule.createElement("UITextSizeConstraint", { MaxTextSize = Layout.SlotNumberTextSize })
 		})
 	end
-	return roactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, t)
+	return RoactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, TextLabels)
 end
 
-return roactRoduxModule.connect(function(p2)
+return RoactRoduxModule.connect(function(p2) --[[ Line: 61 | Named "mapStateToProps" ]]
 	return { layout = p2.layout }
-end, nil)(slotNumbers)
+end, nil)(SlotNumbers)

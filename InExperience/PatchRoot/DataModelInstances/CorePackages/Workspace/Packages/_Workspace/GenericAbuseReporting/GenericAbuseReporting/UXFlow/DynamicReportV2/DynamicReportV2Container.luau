@@ -1,262 +1,264 @@
-﻿local genericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
-local parent = genericAbuseReporting.Parent
-local coreGuiService = game:GetService("CoreGui")
-local dashModule = require(parent.Dash)
-local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local responsiveModule = require(parent.Responsive)
-local roactNetworking = require(parent.RoactServiceTags).RoactNetworking
-local useRoactService = require(parent.RobloxAppHooks).useRoactService
-local inlineEventTypeModule = require(parent.OnPlatformSurveys.InlineEventType)
-local inlineSurveyModule = require(parent.OnPlatformSurveys.InlineSurvey)
-local surveyEventPublisherModule = require(parent.OnPlatformSurveys.SurveyEventPublisher)
-local webViewEventTypeModule = require(parent.OnPlatformSurveys.WebViewEventType)
-local dialogSize = foundationModule.Enums.DialogSize
-local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
-local overlayProvider = foundationModule.OverlayProvider
-local sheet = foundationModule.Sheet
-local useIsSpatial = responsiveModule.useIsSpatial
-local abuseReportErrorBoundaryModule = require(genericAbuseReporting.BeduiV2.Components.AbuseReportErrorBoundary)
-local _ = require(genericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.AbuseSheetFlowTypes)
-local abuseVectorModule = require(genericAbuseReporting.Enums.AbuseVector)
-local analyticsServiceModule = require(genericAbuseReporting.BeduiV2.Analytics.analyticsService)
-local dynamicReportV2ErrorModule = require(script.Parent.DynamicReportV2Error)
-local dynamicReportV2LoadingModule = require(script.Parent.DynamicReportV2Loading)
-local fetchConfigWithAttributesModule = require(genericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.fetchConfigWithAttributes)
-local getNewRunId = require(genericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.reducer).getNewRunId
-local abuseReportContentModule = require(script.Parent.AbuseReportContent)
-local sendBoundaryErrorTelemetryModule = require(genericAbuseReporting.BeduiV2.Analytics.sendBoundaryErrorTelemetry)
-local useFocusNavigationRefsModule = require(genericAbuseReporting.BeduiV2.Hooks.FocusNavigation.useFocusNavigationRefs)
-local useVrOverlayModule = require(genericAbuseReporting.BeduiV2.Hooks.useVrOverlay)
-local formatErrorDetailForAnalytics = analyticsServiceModule.formatErrorDetailForAnalytics
-local sendAnalyticsEvent = analyticsServiceModule.sendAnalyticsEvent
-local telemetryEventType = analyticsServiceModule.TelemetryEventType
-local fixDynamicReportV2VRAsync = game:DefineFastFlag("FixDynamicReportV2VRAsync", false)
-local fFlagEnableInlineSurveyOnUserReport = require(parent.SharedFlags).FFlagEnableInlineSurveyOnUserReport
-local fFlagSurvBloxEventTypeEnabled = require(parent.SharedFlags).FFlagSurvBloxEventTypeEnabled
-local fFlagEnableReportingFlowForMomentsFeed = require(parent.SharedFlags).FFlagEnableReportingFlowForMomentsFeed
-local fFlagAbuseReportAttributes = require(parent.SharedFlags).FFlagAbuseReportAttributes
-local fFlagAbuseReportImproveErrorEventsModule = require(genericAbuseReporting.Flags.FFlagAbuseReportImproveErrorEvents)
+﻿local GenericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
+local Parent = GenericAbuseReporting.Parent
+local CoreGui = game:GetService("CoreGui")
+local DashModule = require(Parent.Dash)
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local RoactNetworking = require(Parent.RoactServiceTags).RoactNetworking
+local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
+local InlineEventTypeModule = require(Parent.OnPlatformSurveys.InlineEventType)
+local InlineSurveyModule = require(Parent.OnPlatformSurveys.InlineSurvey)
+local SurveyEventPublisherModule = require(Parent.OnPlatformSurveys.SurveyEventPublisher)
+local WebViewEventTypeModule = require(Parent.OnPlatformSurveys.WebViewEventType)
+local DialogSize = FoundationModule.Enums.DialogSize
+local FocusNavigableSurfaceIdentifierEnum = require(Parent.FocusNavigationUtils).FocusNavigableSurfaceIdentifierEnum
+local OverlayProvider = FoundationModule.OverlayProvider
+local Sheet = FoundationModule.Sheet
+local UseIsSpatialFunction = require(Parent.Responsive).useIsSpatial
+local AbuseReportErrorBoundaryModule = require(GenericAbuseReporting.BeduiV2.Components.AbuseReportErrorBoundary)
+local _ = require(GenericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.AbuseSheetFlowTypes)
+local AbuseVectorModule = require(GenericAbuseReporting.Enums.AbuseVector)
+local AnalyticsServiceModule = require(GenericAbuseReporting.BeduiV2.Analytics.analyticsService)
+local DynamicReportV2ErrorModule = require(script.Parent.DynamicReportV2Error)
+local DynamicReportV2LoadingModule = require(script.Parent.DynamicReportV2Loading)
+local FetchConfigWithAttributesModule = require(GenericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.fetchConfigWithAttributes)
+local GetNewRunIdFunction = require(GenericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.reducer).getNewRunId
+local AbuseReportContentModule = require(script.Parent.AbuseReportContent)
+local SendBoundaryErrorTelemetryModule = require(GenericAbuseReporting.BeduiV2.Analytics.sendBoundaryErrorTelemetry)
+local UseFocusNavigationRefsModule = require(GenericAbuseReporting.BeduiV2.Hooks.FocusNavigation.useFocusNavigationRefs)
+local UseVrOverlayModule = require(GenericAbuseReporting.BeduiV2.Hooks.useVrOverlay)
+local FormatErrorDetailForAnalyticsFunction = AnalyticsServiceModule.formatErrorDetailForAnalytics
+local SendAnalyticsEventFunction = AnalyticsServiceModule.sendAnalyticsEvent
+local TelemetryEventType = AnalyticsServiceModule.TelemetryEventType
+local FixDynamicReportV2VRAsync = game:DefineFastFlag("FixDynamicReportV2VRAsync", false)
+local FFlagEnableInlineSurveyOnUserReport = require(Parent.SharedFlags).FFlagEnableInlineSurveyOnUserReport
+local FFlagSurvBloxEventTypeEnabled = require(Parent.SharedFlags).FFlagSurvBloxEventTypeEnabled
+local FFlagAbuseReportAttributes = require(Parent.SharedFlags).FFlagAbuseReportAttributes
+local FFlagAbuseReportImproveErrorEventsModule = require(GenericAbuseReporting.Flags.FFlagAbuseReportImproveErrorEvents)
 
-return reactModule.memo(function(p1)
-	-- upvalues: useRoactService (ref), roactNetworking (ref), reactModule (ref), fFlagAbuseReportAttributes (ref), fFlagEnableInlineSurveyOnUserReport (ref), dashModule (ref), fetchConfigWithAttributesModule (ref), sendAnalyticsEvent (ref), telemetryEventType (ref), getNewRunId (ref), fFlagAbuseReportImproveErrorEventsModule (ref), formatErrorDetailForAnalytics (ref), fFlagEnableReportingFlowForMomentsFeed (ref), fFlagSurvBloxEventTypeEnabled (ref), surveyEventPublisherModule (ref), webViewEventTypeModule (ref), abuseVectorModule (ref), sendBoundaryErrorTelemetryModule (ref), useFocusNavigationRefsModule (ref), focusNavigableSurfaceIdentifierEnum (ref), coreGuiService (ref), useIsSpatial (ref), fixDynamicReportV2VRAsync (ref), useVrOverlayModule (ref), sheet (ref), dialogSize (ref), abuseReportErrorBoundaryModule (ref), abuseReportContentModule (ref), dynamicReportV2LoadingModule (ref), dynamicReportV2ErrorModule (ref), overlayProvider (ref), inlineSurveyModule (ref), inlineEventTypeModule (ref)
-	local var1 = useRoactService(roactNetworking)
-	local var2, var3 = reactModule.useState(nil)
-	local var4, var5 = reactModule.useState(false)
-	local var6, var7 = reactModule.useState(true)
-	local var8 = if fFlagAbuseReportAttributes then p1.analyticsTargetId else p1.targetId
-	local var9 = nil
+return ReactModule.memo(function(p1) --[[ Line: 73 | Named "DynamicReportV2Container" ]]
+	-- upvalues: UseRoactServiceFunction (copy), RoactNetworking (copy), ReactModule (copy), FFlagAbuseReportAttributes (copy), FFlagEnableInlineSurveyOnUserReport (copy), DashModule (copy), FetchConfigWithAttributesModule (copy), SendAnalyticsEventFunction (copy), TelemetryEventType (copy), GetNewRunIdFunction (copy), FFlagAbuseReportImproveErrorEventsModule (copy), FormatErrorDetailForAnalyticsFunction (copy), FFlagSurvBloxEventTypeEnabled (copy), SurveyEventPublisherModule (copy), WebViewEventTypeModule (copy), AbuseVectorModule (copy), SendBoundaryErrorTelemetryModule (copy), UseFocusNavigationRefsModule (copy), FocusNavigableSurfaceIdentifierEnum (copy), CoreGui (copy), UseIsSpatialFunction (copy), FixDynamicReportV2VRAsync (copy), UseVrOverlayModule (copy), Sheet (copy), DialogSize (copy), AbuseReportErrorBoundaryModule (copy), AbuseReportContentModule (copy), DynamicReportV2LoadingModule (copy), DynamicReportV2ErrorModule (copy), OverlayProvider (copy), InlineSurveyModule (copy), InlineEventTypeModule (copy)
+	local UseRoactServiceResult = UseRoactServiceFunction(RoactNetworking)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(true)
+	local AnalyticsTargetId = if FFlagAbuseReportAttributes then p1.analyticsTargetId else p1.targetId
+	local UseRefResult = nil
 	
-	if fFlagAbuseReportAttributes then
-		var9 = reactModule.useRef(var8)
-		var9.current = var8
+	if FFlagAbuseReportAttributes then
+		UseRefResult = ReactModule.useRef(AnalyticsTargetId)
+		UseRefResult.current = AnalyticsTargetId
 	end
-	local var10 = nil
-	local var11 = nil
-	local var12 = nil
+	local v1 = nil
+	local Callback1 = nil
+	local UseRefResult1 = nil
 	
-	if fFlagEnableInlineSurveyOnUserReport then
-		local var13, var14 = reactModule.useState(false)
-		var10 = var13
-		var11 = var14
-		var12 = reactModule.useRef(false)
+	if FFlagEnableInlineSurveyOnUserReport then
+		v1, Callback1 = ReactModule.useState(false)
+		UseRefResult1 = ReactModule.useRef(false)
 	end
-	local var15 = if fFlagAbuseReportAttributes then p1.attributes else p1.targetId
+	local Attributes = if FFlagAbuseReportAttributes then p1.attributes else p1.targetId
 	
-	if fFlagAbuseReportAttributes then
-		local var16 = reactModule.useRef(p1.attributes)
+	if FFlagAbuseReportAttributes then
+		local UseRefResult2 = ReactModule.useRef(p1.attributes)
 		
-		if not dashModule.shallowEqual(var16.current, p1.attributes) then
-			var16.current = p1.attributes
+		if not DashModule.shallowEqual(UseRefResult2.current, p1.attributes) then
+			UseRefResult2.current = p1.attributes
 		end
-		var15 = var16.current or false
+		Attributes = UseRefResult2.current or false
 	end
-	reactModule.useEffect(function()
-		-- upvalues: fetchConfigWithAttributesModule (copy), var1 (ref), p1 (ref), fFlagAbuseReportAttributes (copy), var3 (ref), sendAnalyticsEvent (copy), var9 (write), telemetryEventType (copy), var5 (ref), getNewRunId (copy), fFlagAbuseReportImproveErrorEventsModule (copy), formatErrorDetailForAnalytics (copy), dashModule (copy)
-		local var17 = false
-		local unixTimestampMillis = DateTime.now().UnixTimestampMillis
-		fetchConfigWithAttributesModule(var1, p1.abuseVector, if fFlagAbuseReportAttributes then p1.attributes else { targetId = p1.targetId }):andThen(function(p2)
-			-- upvalues: var17 (write), unixTimestampMillis (ref), var3 (copy), sendAnalyticsEvent (copy), p1 (copy), fFlagAbuseReportAttributes (copy), var9 (copy), telemetryEventType (copy)
-			if var17 then
+	ReactModule.useEffect(function() --[[ Line: 106 ]]
+		-- upvalues: FetchConfigWithAttributesModule (upval), UseRoactServiceResult (copy), p1 (copy), FFlagAbuseReportAttributes (upval), UseStateResult2 (copy), SendAnalyticsEventFunction (upval), UseRefResult (ref), TelemetryEventType (upval), UseStateResult2_1 (copy), GetNewRunIdFunction (upval), FFlagAbuseReportImproveErrorEventsModule (upval), FormatErrorDetailForAnalyticsFunction (upval), DashModule (upval)
+		local Flag = false
+		local UnixTimestampMillis = DateTime.now().UnixTimestampMillis
+		FetchConfigWithAttributesModule(UseRoactServiceResult, p1.abuseVector, if FFlagAbuseReportAttributes then p1.attributes else { targetId = p1.targetId }):andThen(function(Result) --[[ Line: 118 ]]
+			-- upvalues: Flag (ref), UnixTimestampMillis (copy), UseStateResult2 (upval), SendAnalyticsEventFunction (upval), p1 (upval), FFlagAbuseReportAttributes (upval), UseRefResult (upval), TelemetryEventType (upval)
+			if not Flag then
+				local ResponseBody = Result.responseBody
+				local UnixTimestampMillisDelta = DateTime.now().UnixTimestampMillis - UnixTimestampMillis
+				UseStateResult2(ResponseBody)
+				SendAnalyticsEventFunction({
+					run_id = "unknown",
+					total_duration = 0,
+					abuse_vector = p1.abuseVector,
+					target_id = if FFlagAbuseReportAttributes then UseRefResult.current else p1.targetId,
+					path = {},
+					config_name = ResponseBody.name
+				}, {
+					sub_event_type = TelemetryEventType.ConfigLoaded,
+					config_load_detail = {
+						cache_hit = false,
+						retry_count = 0,
+						load_duration_ms = UnixTimestampMillisDelta
+					}
+				})
+				
 				return
 			end
-			local responseBody = p2.responseBody
-			local var18 = DateTime.now().UnixTimestampMillis - unixTimestampMillis
-			var3(responseBody)
-			sendAnalyticsEvent({
-				run_id = "unknown",
-				total_duration = 0,
-				abuse_vector = p1.abuseVector,
-				target_id = if fFlagAbuseReportAttributes then var9.current else p1.targetId,
-				path = {},
-				config_name = responseBody.name
-			}, {
-				sub_event_type = telemetryEventType.ConfigLoaded,
-				config_load_detail = {
-					cache_hit = false,
-					retry_count = 0,
-					load_duration_ms = var18
-				}
-			})
-		end):catch(function(p2)
-			-- upvalues: var17 (write), var5 (copy), sendAnalyticsEvent (copy), p1 (copy), fFlagAbuseReportAttributes (copy), var9 (copy), getNewRunId (copy), telemetryEventType (copy), fFlagAbuseReportImproveErrorEventsModule (copy), formatErrorDetailForAnalytics (copy), dashModule (copy)
-			if var17 then
+		end):catch(function(Err) --[[ Line: 143 ]]
+			-- upvalues: Flag (ref), UseStateResult2_1 (upval), SendAnalyticsEventFunction (upval), p1 (upval), FFlagAbuseReportAttributes (upval), UseRefResult (upval), GetNewRunIdFunction (upval), TelemetryEventType (upval), FFlagAbuseReportImproveErrorEventsModule (upval), FormatErrorDetailForAnalyticsFunction (upval), DashModule (upval)
+			if not Flag then
+				warn("Failed to fetch Dynamic Report V2 config:", Err)
+				UseStateResult2_1(true)
+				SendAnalyticsEventFunction({
+					total_duration = 0,
+					abuse_vector = p1.abuseVector,
+					target_id = if FFlagAbuseReportAttributes then UseRefResult.current else p1.targetId,
+					run_id = GetNewRunIdFunction(),
+					path = {}
+				}, {
+					sub_event_type = TelemetryEventType.Error,
+					error_detail = if FFlagAbuseReportImproveErrorEventsModule then FormatErrorDetailForAnalyticsFunction("Failed to fetch config", Err) else {
+						error_message = "Failed to fetch config: " .. DashModule.pretty(Err, { depth = 10, multiline = true })
+					}
+				})
+				
 				return
 			end
-			warn("Failed to fetch Dynamic Report V2 config:", p2)
-			var5(true)
-			sendAnalyticsEvent({
-				total_duration = 0,
-				abuse_vector = p1.abuseVector,
-				target_id = if fFlagAbuseReportAttributes then var9.current else p1.targetId,
-				run_id = getNewRunId(),
-				path = {}
-			}, {
-				sub_event_type = telemetryEventType.Error,
-				error_detail = if fFlagAbuseReportImproveErrorEventsModule then formatErrorDetailForAnalytics("Failed to fetch config", p2) else {
-					error_message = "Failed to fetch config: " .. dashModule.pretty(p2, { depth = 10, multiline = true })
-				}
-			})
 		end)
 		
-		return function()
-			-- upvalues: var17 (write)
-			var17 = true
+		return function() --[[ Line: 165 ]]
+			-- upvalues: Flag (ref)
+			Flag = true
 		end
-	end, { var1, p1.abuseVector, var15 })
-	local var17 = reactModule.useRef(nil)
-	local var18 = reactModule.useRef(false)
-	local var19 = nil
-	local var20 = nil
-	local var21 = nil
-	local var22 = nil
-	local var23 = nil
+	end, { UseRoactServiceResult, p1.abuseVector, Attributes })
+	local UseRefResult3 = ReactModule.useRef(nil)
+	local UseRefResult4 = ReactModule.useRef(false)
+	local UseRefResult5 = nil
+	local UseResult = nil
+	local Callback = nil
+	local UseResult1 = nil
+	local UseResult2 = nil
 	
-	if fFlagEnableInlineSurveyOnUserReport then
-		var19 = reactModule.useRef(false)
-		var20 = reactModule.useCallback(function(p2)
-			-- upvalues: var19 (write), fFlagEnableReportingFlowForMomentsFeed (copy), p1 (ref)
+	if FFlagEnableInlineSurveyOnUserReport then
+		UseRefResult5 = ReactModule.useRef(false)
+		UseResult = ReactModule.useCallback(function(p2) --[[ Line: 189 ]]
+			-- upvalues: UseRefResult5 (ref), p1 (copy)
 			if p2.didSubmit then
-				var19.current = true
+				UseRefResult5.current = true
 				
-				if fFlagEnableReportingFlowForMomentsFeed and p1.onSubmit then
+				if p1.onSubmit then
 					p1.onSubmit()
 				end
 			end
 		end, { p1.onSubmit })
-		var21 = reactModule.useCallback(function()
-			-- upvalues: fFlagSurvBloxEventTypeEnabled (copy), surveyEventPublisherModule (copy), webViewEventTypeModule (copy)
-			if fFlagSurvBloxEventTypeEnabled then
-				surveyEventPublisherModule.publishSurveyEvent(webViewEventTypeModule.ReportSubmitted)
+		Callback = ReactModule.useCallback(function() --[[ Line: 198 ]]
+			-- upvalues: FFlagSurvBloxEventTypeEnabled (upval), SurveyEventPublisherModule (upval), WebViewEventTypeModule (upval)
+			if FFlagSurvBloxEventTypeEnabled then
+				SurveyEventPublisherModule.publishSurveyEvent(WebViewEventTypeModule.ReportSubmitted)
 			end
 		end, {})
-		var22 = reactModule.useCallback(function()
-			-- upvalues: var12 (write)
-			var12.current = true
+		UseResult1 = ReactModule.useCallback(function() --[[ Line: 204 ]]
+			-- upvalues: UseRefResult1 (ref)
+			UseRefResult1.current = true
 		end, {})
-		var23 = reactModule.useCallback(function()
-			-- upvalues: var12 (write), var21 (write), p1 (ref)
-			if not var12.current then
-				var21()
+		UseResult2 = ReactModule.useCallback(function() --[[ Line: 208 ]]
+			-- upvalues: UseRefResult1 (ref), Callback (ref), p1 (copy)
+			if not UseRefResult1.current then
+				Callback()
 			end
 			p1.onClose()
-		end, { var21, p1.onClose })
+		end, { Callback, p1.onClose })
 	end
-	local var24 = reactModule.useCallback(function()
-		-- upvalues: var18 (ref), var7 (ref)
-		var18.current = true
-		var7(false)
+	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 216 ]]
+		-- upvalues: UseRefResult4 (copy), UseStateResult2_2 (copy)
+		UseRefResult4.current = true
+		UseStateResult2_2(false)
 	end, {})
-	local var25 = reactModule.useCallback(function()
-		-- upvalues: var18 (ref), var17 (ref), var7 (ref), fFlagEnableInlineSurveyOnUserReport (copy), var19 (write), p1 (ref), abuseVectorModule (copy), var11 (write), var21 (write)
-		if not var18.current and var17.current then
-			var17.current.requestClose()
+	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 224 ]]
+		-- upvalues: UseRefResult4 (copy), UseRefResult3 (copy), UseStateResult2_2 (copy), FFlagEnableInlineSurveyOnUserReport (upval), UseRefResult5 (ref), p1 (copy), AbuseVectorModule (upval), Callback1 (ref), Callback (ref)
+		if not UseRefResult4.current and UseRefResult3.current then
+			UseRefResult3.current.requestClose()
 		end
-		var7(false)
+		UseStateResult2_2(false)
 		
-		if fFlagEnableInlineSurveyOnUserReport then
-			if not var19.current then
+		if FFlagEnableInlineSurveyOnUserReport then
+			if not UseRefResult5.current then
 				p1.onClose()
 				
 				return
-			elseif p1.abuseVector == abuseVectorModule.UserProfile then
-				var11(true)
+			end
+			if p1.abuseVector == AbuseVectorModule.UserProfile then
+				Callback1(true)
 				
 				return
 			end
-			var21()
+			Callback()
 		end
 		p1.onClose()
-	end, { p1.onClose, p1.abuseVector, var21 })
-	local var26 = reactModule.useCallback(function()
-		-- upvalues: var5 (ref)
-		var5(true)
+	end, { p1.onClose, p1.abuseVector, Callback })
+	local UseResult5 = ReactModule.useCallback(function() --[[ Line: 248 ]]
+		-- upvalues: UseStateResult2_1 (copy)
+		UseStateResult2_1(true)
 	end, {})
-	local var27 = reactModule.useCallback(function(p2)
-		-- upvalues: sendBoundaryErrorTelemetryModule (copy), p1 (ref), var8 (ref), var5 (ref)
+	local UseResult6 = ReactModule.useCallback(function(p2) --[[ Line: 252 ]]
+		-- upvalues: SendBoundaryErrorTelemetryModule (upval), p1 (copy), AnalyticsTargetId (copy), UseStateResult2_1 (copy)
 		warn("AbuseReportErrorBoundary caught:", p2)
-		sendBoundaryErrorTelemetryModule(p2, { abuse_vector = p1.abuseVector, target_id = var8 })
-		var5(true)
-	end, { p1.abuseVector, var8 })
-	local var28 = useFocusNavigationRefsModule(focusNavigableSurfaceIdentifierEnum.CentralOverlay, function()
-		-- upvalues: var7 (ref)
-		var7(false)
+		SendBoundaryErrorTelemetryModule(p2, {
+			abuse_vector = p1.abuseVector,
+			target_id = AnalyticsTargetId
+		})
+		UseStateResult2_1(true)
+	end, { p1.abuseVector, AnalyticsTargetId })
+	local UseFocusNavigationRefsModuleResult = UseFocusNavigationRefsModule(FocusNavigableSurfaceIdentifierEnum.CentralOverlay, function() --[[ Line: 261 ]]
+		-- upvalues: UseStateResult2_2 (copy)
+		UseStateResult2_2(false)
 	end)
-	local var29, var30 = reactModule.useState(true)
-	local var31 = reactModule.useCallback(function(p2)
-		-- upvalues: var30 (ref)
-		var30(not p2)
+	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(true)
+	local UseResult7 = ReactModule.useCallback(function(p2) --[[ Line: 265 ]]
+		-- upvalues: UseStateResult2_3 (copy)
+		UseStateResult2_3(not p2)
 	end, {})
-	local var32 = reactModule.useCallback(function(p2)
-		-- upvalues: var29 (ref), var28 (ref)
-		local var33 = if var29 then p2 else nil
+	local UseResult8 = ReactModule.useCallback(function(p2) --[[ Line: 268 ]]
+		-- upvalues: UseStateResult4 (copy), UseFocusNavigationRefsModuleResult (copy)
+		local Current = if UseStateResult4 then p2 else nil
 		
-		if typeof(var28) == "function" then
-			var28(var33)
+		if typeof(UseFocusNavigationRefsModuleResult) == "function" then
+			UseFocusNavigationRefsModuleResult(Current)
 			
 			return
-		elseif var28 and typeof(var28) == "table" then
-			var28.current = var33
 		end
-	end, { var29, var28 })
-	local VRCentralOverlay = coreGuiService:FindFirstChild("VRCentralOverlay")
-	local var33 = useIsSpatial()
-	local var34 = if fixDynamicReportV2VRAsync then useVrOverlayModule() elseif VRCentralOverlay then VRCentralOverlay:FindFirstChild("CentralOverlay_SurfaceGui") else nil
-	local createElement = reactModule.createElement
-	createElement = createElement(sheet.Root, {
+		if UseFocusNavigationRefsModuleResult and typeof(UseFocusNavigationRefsModuleResult) == "table" then
+			UseFocusNavigationRefsModuleResult.current = Current
+		end
+	end, { UseStateResult4, UseFocusNavigationRefsModuleResult })
+	local VRCentralOverlay = CoreGui:FindFirstChild("VRCentralOverlay")
+	local CentralOverlaySurfaceGui = if VRCentralOverlay then VRCentralOverlay:FindFirstChild("CentralOverlay_SurfaceGui") else nil
+	local UseIsSpatialResult = UseIsSpatialFunction()
+	local UseVrOverlayModuleResult = if FixDynamicReportV2VRAsync then UseVrOverlayModule() else CentralOverlaySurfaceGui
+	local Element = ReactModule.createElement(Sheet.Root, {
 		centerSheetHeight = 1,
 		preferCenterSheet = true,
-		isOpen = var6,
-		onClose = var25,
+		isOpen = UseStateResult3,
+		onClose = UseResult4,
 		snapPoints = { 0.9 },
-		size = dialogSize.Medium,
-		ref = var32
+		size = DialogSize.Medium,
+		ref = UseResult8
 	}, {
-		AbuseReportDialog = if var2 and not var4 then reactModule.createElement(abuseReportErrorBoundaryModule, { onError = var27 }, {
-			AbuseReportContent = reactModule.createElement(abuseReportContentModule, {
-				ref = var17,
-				rawConfig = var2,
+		AbuseReportDialog = if UseStateResult and not UseStateResult1 then ReactModule.createElement(AbuseReportErrorBoundaryModule, { onError = UseResult6 }, {
+			AbuseReportContent = ReactModule.createElement(AbuseReportContentModule, {
+				ref = UseRefResult3,
+				rawConfig = UseStateResult,
 				abuseVector = p1.abuseVector,
-				analyticsTargetId = var8,
-				onClose = var24,
-				open = var6,
-				takeoverFocus = var31,
-				onResolveError = var26,
+				analyticsTargetId = AnalyticsTargetId,
+				onClose = UseResult3,
+				open = UseStateResult3,
+				takeoverFocus = UseResult7,
+				onResolveError = UseResult5,
 				onCustomSubmit = p1.onCustomSubmit,
 				clientActionHandlers = p1.clientActionHandlers,
-				onFinish = var20
+				onFinish = UseResult
 			})
 		}) else nil,
-		LoadingDialog = if var2 or var4 then nil else reactModule.createElement(dynamicReportV2LoadingModule, nil),
-		ErrorDialog = if var4 then reactModule.createElement(dynamicReportV2ErrorModule, nil) else nil
+		LoadingDialog = if UseStateResult or UseStateResult1 then nil else ReactModule.createElement(DynamicReportV2LoadingModule, nil),
+		ErrorDialog = if UseStateResult1 then ReactModule.createElement(DynamicReportV2ErrorModule, nil) else nil
 	})
 	
-	return if fixDynamicReportV2VRAsync and var33 and not var34 then nil elseif fFlagEnableInlineSurveyOnUserReport and var10 then reactModule.createElement(overlayProvider, { gui = var34 }, {
-		Survey = reactModule.createElement(inlineSurveyModule, {
-			eventType = inlineEventTypeModule.UserReportButtonClicked,
-			onEligible = var22,
-			onClose = var23
+	return if FixDynamicReportV2VRAsync and (UseIsSpatialResult and not UseVrOverlayModuleResult) then nil elseif FFlagEnableInlineSurveyOnUserReport and v1 then ReactModule.createElement(OverlayProvider, { gui = UseVrOverlayModuleResult }, {
+		Survey = ReactModule.createElement(InlineSurveyModule, {
+			eventType = InlineEventTypeModule.UserReportButtonClicked,
+			onEligible = UseResult1,
+			onClose = UseResult2
 		})
-	}) else reactModule.createElement(overlayProvider, { gui = var34 }, { Sheet = createElement })
+	}) else ReactModule.createElement(OverlayProvider, { gui = UseVrOverlayModuleResult }, { Sheet = Element })
 end)

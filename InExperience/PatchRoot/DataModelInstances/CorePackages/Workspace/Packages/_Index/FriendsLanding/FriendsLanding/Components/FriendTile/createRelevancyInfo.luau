@@ -1,37 +1,38 @@
-﻿local friendsLanding = script:FindFirstAncestor("FriendsLanding")
-local dependenciesModule = require(friendsLanding.dependencies)
-local UIBlox = dependenciesModule.UIBlox
-local isUserInGameModule = require(friendsLanding.Friends.isUserInGame)
-local getCorrectUserPresenceModule = require(friendsLanding.Friends.getCorrectUserPresence)
-local notLocalizedStringsModule = require(friendsLanding.Enums.NotLocalizedStrings)
-local images = UIBlox.App.ImageSet.Images
-local presenceType = dependenciesModule.RoduxPresence.Enums.PresenceType
-local uDim2 = UDim2.fromOffset(12, 12)
+﻿local FriendsLanding = script:FindFirstAncestor("FriendsLanding")
+local DependenciesModule = require(FriendsLanding.dependencies)
+local IsUserInGameModule = require(FriendsLanding.Friends.isUserInGame)
+local GetCorrectUserPresenceModule = require(FriendsLanding.Friends.getCorrectUserPresence)
+local NotLocalizedStringsModule = require(FriendsLanding.Enums.NotLocalizedStrings)
+local Images = DependenciesModule.UIBlox.App.ImageSet.Images
+local PresenceType = DependenciesModule.RoduxPresence.Enums.PresenceType
+local _UDim2 = UDim2.fromOffset(12, 12)
 
-return function(p1, p2, p3, _, p4, _, p5, p6, p7, p8)
-	-- upvalues: getCorrectUserPresenceModule (ref), images (ref), presenceType (ref), uDim2 (ref), isUserInGameModule (ref), notLocalizedStringsModule (ref)
-	local t = { icon = if p3 then images[p3] else nil }
+return function(p1, Text, p2, _, p3, _, p4, p5, Text1, p6) --[[ Line: 14 ]]
+	-- upvalues: GetCorrectUserPresenceModule (copy), Images (copy), PresenceType (copy), _UDim2 (copy), IsUserInGameModule (copy), NotLocalizedStringsModule (copy)
+	local config = { icon = p2 and Images[p2] or nil }
 	
-	if getCorrectUserPresenceModule(p1) == presenceType.Online then
-		if not p8 then
-			t.iconSize = uDim2
+	if GetCorrectUserPresenceModule(p1) == PresenceType.Online then
+		if not p6 then
+			config.iconSize = _UDim2
 		end
-		t.iconColor = p4.OnlineStatus.Color
-		t.iconTransparency = p4.OnlineStatus.Transparency
+		config.iconColor = p3.OnlineStatus.Color
+		config.iconTransparency = p3.OnlineStatus.Transparency
 	end
 	if p1.isDeleted then
-		t.text = p7
-	elseif isUserInGameModule(p1) then
-		t.text = p1.lastLocation
-	elseif p1.userPresenceType ~= presenceType.InStudio then
-		t.text = p2
-	elseif p1.lastLocation and p1.lastLocation ~= "" then
-		t.text = p1.lastLocation
+		config.text = Text1
+	elseif IsUserInGameModule(p1) then
+		config.text = p1.lastLocation
+	elseif p1.userPresenceType == PresenceType.InStudio then
+		if p1.lastLocation and p1.lastLocation ~= "" then
+			config.text = p1.lastLocation
+		else
+			config.text = p4 and NotLocalizedStringsModule.StudioPresenceTextLuobu.rawValue() or NotLocalizedStringsModule.StudioPresenceTextGlobal.rawValue()
+		end
 	else
-		t.text = p5 and notLocalizedStringsModule.StudioPresenceTextLuobu.rawValue() or notLocalizedStringsModule.StudioPresenceTextGlobal.rawValue()
+		config.text = Text
 	end
-	if not p8 and p6 then
-		t.fontStyle = if isUserInGameModule(p1) then p6.CaptionHeader else p6.CaptionBody
+	if not p6 and p5 then
+		config.fontStyle = IsUserInGameModule(p1) and p5.CaptionHeader or p5.CaptionBody
 	end
-	return t
+	return config
 end

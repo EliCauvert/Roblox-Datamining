@@ -1,32 +1,32 @@
-﻿local parent = script:FindFirstAncestor("AppChat").Parent
-local reactModule = require(parent.React)
-local _ = require(parent.Signals)
-local conversationRowViewModule = require(script.Parent.ConversationRowView)
-local useConversationRowBindingPresentationModule = require(script.Parent.useConversationRowBindingPresentation)
+﻿local Parent = script:FindFirstAncestor("AppChat").Parent
+local ReactModule = require(Parent.React)
+local _ = require(Parent.Signals)
+local ConversationRowViewModule = require(script.Parent.ConversationRowView)
+local UseConversationRowBindingPresentationModule = require(script.Parent.useConversationRowBindingPresentation)
 
-return reactModule.memo(function(p1)
-	-- upvalues: useConversationRowBindingPresentationModule (ref), reactModule (ref), conversationRowViewModule (ref)
-	local var1 = useConversationRowBindingPresentationModule({ itemSignal = p1.itemSignal })
+return ReactModule.memo(function(p1) --[[ Line: 21 | Named "ConversationRowBindingHost" ]]
+	-- upvalues: UseConversationRowBindingPresentationModule (copy), ReactModule (copy), ConversationRowViewModule (copy)
+	local UseConversationRowBindingPresentationModuleResult = UseConversationRowBindingPresentationModule({ itemSignal = p1.itemSignal })
 	
-	return if var1.hasConversation then reactModule.createElement(conversationRowViewModule, {
+	return if UseConversationRowBindingPresentationModuleResult.hasConversation then ReactModule.createElement(ConversationRowViewModule, {
 		itemSignal = p1.itemSignal,
-		entryHeight = var1.entryHeight,
-		pagePaddingLeft = var1.pagePaddingLeft,
-		pagePaddingRight = var1.pagePaddingRight,
-		testId = var1.testId,
-		locatorTitle = var1.locatorTitle,
-		title = var1.title,
-		subtitleText = var1.subtitleText,
-		timestampText = var1.timestampText,
-		showSubscriptionBadge = var1.showSubscriptionBadge,
-		showUnread = var1.showUnread,
-		showSquadButton = var1.showSquadButton,
-		showTimestamp = var1.showTimestamp,
-		squadLocation = var1.squadLocation,
-		rowRef = var1.rowRef,
-		onRowActivated = var1.onRowActivated,
-		onSquadActivated = var1.onSquadActivated,
-		showBackground = var1.showBackground,
-		debugCellValue = var1.debugCellValue
+		entryHeight = UseConversationRowBindingPresentationModuleResult.entryHeight,
+		pagePaddingLeft = UseConversationRowBindingPresentationModuleResult.pagePaddingLeft,
+		pagePaddingRight = UseConversationRowBindingPresentationModuleResult.pagePaddingRight,
+		testId = UseConversationRowBindingPresentationModuleResult.testId,
+		locatorTitle = UseConversationRowBindingPresentationModuleResult.locatorTitle,
+		title = UseConversationRowBindingPresentationModuleResult.title,
+		subtitleText = UseConversationRowBindingPresentationModuleResult.subtitleText,
+		timestampText = UseConversationRowBindingPresentationModuleResult.timestampText,
+		showSubscriptionBadge = UseConversationRowBindingPresentationModuleResult.showSubscriptionBadge,
+		showUnread = UseConversationRowBindingPresentationModuleResult.showUnread,
+		showSquadButton = UseConversationRowBindingPresentationModuleResult.showSquadButton,
+		showTimestamp = UseConversationRowBindingPresentationModuleResult.showTimestamp,
+		squadLocation = UseConversationRowBindingPresentationModuleResult.squadLocation,
+		rowRef = UseConversationRowBindingPresentationModuleResult.rowRef,
+		onRowActivated = UseConversationRowBindingPresentationModuleResult.onRowActivated,
+		onSquadActivated = UseConversationRowBindingPresentationModuleResult.onSquadActivated,
+		showBackground = UseConversationRowBindingPresentationModuleResult.showBackground,
+		debugCellValue = UseConversationRowBindingPresentationModuleResult.debugCellValue
 	}) else nil
 end)

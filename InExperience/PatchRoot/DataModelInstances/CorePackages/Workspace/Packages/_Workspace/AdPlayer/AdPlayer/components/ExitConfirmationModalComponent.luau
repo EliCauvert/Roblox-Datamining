@@ -1,52 +1,52 @@
-﻿local parent = script:FindFirstAncestor("AdPlayer").Parent
-local adsDisplayOrder = require(parent.AdGuiInteractivity).AdsDisplayOrder
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local view = foundationModule.View
-local text = foundationModule.Text
-local button = foundationModule.Button
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local fillBehavior = foundationModule.Enums.FillBehavior
-local stateLayerAffordance = foundationModule.Enums.StateLayerAffordance
-local t = {
+﻿local Parent = script:FindFirstAncestor("AdPlayer").Parent
+local AdsDisplayOrder = require(Parent.AdGuiInteractivity).AdsDisplayOrder
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local Button = FoundationModule.Button
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local FillBehavior = FoundationModule.Enums.FillBehavior
+local StateLayerAffordance = FoundationModule.Enums.StateLayerAffordance
+local config = {
 	confirmationText = "CoreScripts.Ads.Label.RewardedVideoExitConfirmation"
 }
 
-return function(p1)
-	-- upvalues: useLocalization (ref), t (ref), reactModule (ref), adsDisplayOrder (ref), view (ref), stateLayerAffordance (ref), text (ref), button (ref), fillBehavior (ref), buttonVariant (ref)
-	return reactModule.createElement("ScreenGui", {
+return function(p1) --[[ Line: 24 | Named "ExitConfirmationModalComponent" ]]
+	-- upvalues: UseLocalizationFunction (copy), config (copy), ReactModule (copy), AdsDisplayOrder (copy), View (copy), StateLayerAffordance (copy), Text (copy), Button (copy), FillBehavior (copy), ButtonVariant (copy)
+	return ReactModule.createElement("ScreenGui", {
 		IgnoreGuiInset = true,
-		DisplayOrder = adsDisplayOrder.Modal,
+		DisplayOrder = AdsDisplayOrder.Modal,
 		Enabled = p1.Enabled
 	}, {
-		modal = reactModule.createElement(view, {
+		modal = ReactModule.createElement(View, {
 			tag = "anchor-center-center position-center-center bg-over-media-0 radius-medium padding-x-xxlarge padding-y-xxlarge",
 			Size = UDim2.fromOffset(440, 164),
-			onActivated = function() end,
-			stateLayer = { affordance = stateLayerAffordance.None }
+			onActivated = function() --[[ Line: 35 ]] end,
+			stateLayer = { affordance = StateLayerAffordance.None }
 		}, {
-			reactModule.createElement(text, {
+			ReactModule.createElement(Text, {
 				tag = "size-full-1100 position-top-center anchor-top-center text-align-x-left",
 				TextScaled = true,
-				Text = useLocalization(t).confirmationText
+				Text = UseLocalizationFunction(config).confirmationText
 			}),
-			buttonContainer = reactModule.createElement(view, {
+			buttonContainer = ReactModule.createElement(View, {
 				tag = "size-full-1200 anchor-bottom-center position-bottom-center row gap-medium flex-fill"
 			}, {
-				cancelExitButton = reactModule.createElement(button, {
+				cancelExitButton = ReactModule.createElement(Button, {
 					text = "Continue",
-					fillBehavior = fillBehavior.Fill,
+					fillBehavior = FillBehavior.Fill,
 					width = UDim.new(1, 0),
-					variant = buttonVariant.Emphasis,
+					variant = ButtonVariant.Emphasis,
 					onActivated = p1.onCancel
 				}),
-				confirmExitButton = reactModule.createElement(button, {
+				confirmExitButton = ReactModule.createElement(Button, {
 					text = "Exit",
 					LayoutOrder = 2,
-					fillBehavior = fillBehavior.Fill,
+					fillBehavior = FillBehavior.Fill,
 					width = UDim.new(1, 0),
-					variant = buttonVariant.Standard,
+					variant = ButtonVariant.Standard,
 					onActivated = p1.onConfirm
 				})
 			})

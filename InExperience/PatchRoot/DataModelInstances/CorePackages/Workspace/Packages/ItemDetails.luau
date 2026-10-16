@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.ItemDetails.ItemDetails)
+﻿return (require(script.Parent._Workspace.ItemDetails.ItemDetails))

@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent.Parent._Workspace.DataHydration.DataHydration.ExperienceGenre)
+﻿return (require(script.Parent.Parent.Parent.Parent._Workspace.DataHydration.DataHydration.ExperienceGenre))

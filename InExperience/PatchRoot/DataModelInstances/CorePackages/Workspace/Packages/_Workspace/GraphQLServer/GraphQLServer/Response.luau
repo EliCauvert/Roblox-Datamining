@@ -1,46 +1,47 @@
-﻿local parent = script:FindFirstAncestor("GraphQLServer").Parent
-local promiseModule = require(parent.Promise)
-local error = require(parent.LuauPolyfill).Error
-local stringify = require(parent.GraphQL).stringify
-local t = {}
-t.__index = t
+﻿local Parent = script:FindFirstAncestor("GraphQLServer").Parent
+local PromiseModule = require(Parent.Promise)
+local Error = require(Parent.LuauPolyfill).Error
+local StringifyFunction = require(Parent.GraphQL).stringify
+local ResponseModule = {}
+ResponseModule.__index = ResponseModule
 
-function t.new(p1)
-	-- upvalues: t (ref)
-	local t_1 = { body = p1 }
-	setmetatable(t_1, t)
+function ResponseModule.new(Body) --[[ Line: 19 ]]
+	-- upvalues: ResponseModule (copy)
+	local config = { body = Body }
+	setmetatable(config, ResponseModule)
 	
-	return t_1
+	return config
 end
 
-function t.text(p1)
-	-- upvalues: promiseModule (ref), stringify (ref), error (ref)
-	return promiseModule.new(function(p2, p3)
-		-- upvalues: p1 (ref), stringify (copy), error (copy)
-		local ok, status = pcall(function()
-			-- upvalues: p1 (copy), stringify (copy)
+function ResponseModule.text(p1) --[[ Line: 28 ]]
+	-- upvalues: PromiseModule (copy), StringifyFunction (copy), Error (copy)
+	return PromiseModule.new(function(Callback: (any) -> (), Callback1: (any) -> ()) --[[ Line: 29 ]]
+		-- upvalues: p1 (copy), StringifyFunction (upval), Error (upval)
+		local Success, Result = pcall(function() --[[ Line: 30 ]]
+			-- upvalues: p1 (upval), StringifyFunction (upval)
 			if p1.body.errors then
-				for i, v in p1.body.errors do
-					if type(v) == "table" and v.name == "GraphQLError" then
+				for i, _error in p1.body.errors do
+					if type(_error) == "table" and _error.name == "GraphQLError" then
 						p1.body.errors[i] = {
-							message = v.message,
-							locations = v.locations,
-							extensions = v.extensions,
-							path = v.path
+							message = _error.message,
+							locations = _error.locations,
+							extensions = _error.extensions,
+							path = _error.path
 						}
 					end
 				end
 			end
-			return stringify(p1.body)
+			return StringifyFunction(p1.body)
 		end)
 		
-		if ok then
-			p2(status)
+		if Success then
+			Callback(Result)
 			
 			return
+		else
+			Callback1(Error.new(Result))
 		end
-		p3(error.new(status))
 	end)
 end
 
-return t
+return ResponseModule

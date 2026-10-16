@@ -1,51 +1,53 @@
-﻿local playersService = game:GetService("Players")
+﻿local Players = game:GetService("Players")
 local _ = require(script.Parent.types)
 
 return {
 	name = script.Name,
 	alias = { "/unmute", "/um" },
-	clientRun = function(_, _, p1, p2)
-		-- upvalues: playersService (ref)
-		local var1 = string.split(p1, " ")[2]
-		local var2 = var1 ~= nil and string.sub(var1, 1, 1) == "@"
-		local var3 = if var2 then string.sub(var1, 2) else var1
+	clientRun = function(_, _, Text: string, p1) --[[ Line: 8 ]]
+		-- upvalues: Players (copy)
+		local Part: string = string.split(Text, " ")[2]
+		local IsSegmentMatch: boolean = Part ~= nil and string.sub(Part, 1, 1) == "@"
+		local Segment: string = if IsSegmentMatch then string.sub(Part, 2) else Part
 		
-		if not var3 or #var3 < 3 then
+		if not Segment or #Segment < 3 then
 			return {
 				key = "CoreScripts.TextChat.Mute.Error.TargetDoesNotExist",
 				metadata = "Roblox.GlobalUnmute.Error.PlayerNotFound",
-				args = { RBX_NAME = var3 or "" }
+				args = { RBX_NAME = Segment or "" }
 			}
-		elseif not p2 or not p2.globalMutedUsersStore then
+		elseif not p1 or not p1.globalMutedUsersStore then
 			return {
 				key = "CoreScripts.TextChat.MessageStatus.Warning.Unknown",
 				metadata = "Roblox.GlobalUnmute.Error.ContextNotAvailable",
 				args = {}
 			}
-		elseif not var2 then
-			p2.globalMutedUsersStore.unmuteGlobalDisplayName(var3)
+		elseif not IsSegmentMatch then
+			p1.globalMutedUsersStore.unmuteGlobalDisplayName(Segment)
 			
 			return {
 				key = "CoreScripts.TextChat.Unmute.Success",
 				metadata = "Roblox.GlobalUnmute.Info.Success",
-				args = { RBX_NAME = var3 }
+				args = { RBX_NAME = Segment }
 			}
+		else
+			local Lowered = string.lower(Segment)
+			
+			if Players.LocalPlayer and string.lower(Players.LocalPlayer.Name) == Lowered then
+				return {
+					key = "CoreScripts.TextChat.Mute.Error.CannotMuteSelf",
+					metadata = "Roblox.GlobalUnmute.Error.CannotMuteSelf",
+					args = {}
+				}
+			else
+				p1.globalMutedUsersStore.unmuteGlobalUsername(Lowered)
+				
+				return {
+					key = "CoreScripts.TextChat.Unmute.Success",
+					metadata = "Roblox.GlobalUnmute.Info.Success",
+					args = { RBX_NAME = "@" .. Lowered }
+				}
+			end
 		end
-		local lowerText = string.lower(var3)
-		
-		if playersService.LocalPlayer and string.lower(playersService.LocalPlayer.Name) == lowerText then
-			return {
-				key = "CoreScripts.TextChat.Mute.Error.CannotMuteSelf",
-				metadata = "Roblox.GlobalUnmute.Error.CannotMuteSelf",
-				args = {}
-			}
-		end
-		p2.globalMutedUsersStore.unmuteGlobalUsername(lowerText)
-		
-		return {
-			key = "CoreScripts.TextChat.Unmute.Success",
-			metadata = "Roblox.GlobalUnmute.Info.Success",
-			args = { RBX_NAME = "@" .. lowerText }
-		}
 	end
 }

@@ -1,9 +1,12 @@
-﻿local corePackagesService = game:GetService("CorePackages")
+﻿local CorePackages = game:GetService("CorePackages")
+local RoduxModule = require(CorePackages.Packages.Rodux)
+local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
+local SetGameNameModule = require(script.Parent.Parent.Actions.SetGameName)
 
-return if require(script.Parent.Parent.Flags.FFlagTopBarDeprecateGameInfoRodux) then nil else require(corePackagesService.Packages.Rodux).createReducer({
-	name = require(corePackagesService.Workspace.Packages.RobloxTranslator):FormatByKey("CoreScripts.TopBar.GameNamePlaceHolder")
+return if require(script.Parent.Parent.Flags.FFlagTopBarDeprecateGameInfoRodux) then nil else RoduxModule.createReducer({
+	name = RobloxTranslatorModule:FormatByKey("CoreScripts.TopBar.GameNamePlaceHolder")
 }, {
-	[require(script.Parent.Parent.Actions.SetGameName).name] = function(_, p1)
+	[SetGameNameModule.name] = function(_, p1) --[[ Line: 22 ]]
 		return { name = p1.gameName }
 	end
 })

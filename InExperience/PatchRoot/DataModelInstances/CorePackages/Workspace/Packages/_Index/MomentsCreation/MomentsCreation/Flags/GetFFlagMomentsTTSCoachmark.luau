@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("MomentsTTSCoachmark", false)
 
-return function()
+return function() --[[ Line: 4 ]]
 	return game:GetFastFlag("MomentsTTSCoachmark")
 end

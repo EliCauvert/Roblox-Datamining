@@ -1,75 +1,76 @@
-﻿local parent = script:FindFirstAncestor("Moments").Parent
-local builderIconsModule = require(parent.BuilderIcons)
-local foundationModule = require(parent.Foundation)
-local localizationModule = require(parent.Localization)
-local momentsCommonModule = require(parent.MomentsCommon)
-local reactModule = require(parent.React)
-local threeDotsHorizontal = builderIconsModule.Icon.ThreeDotsHorizontal
-local iconButton = foundationModule.IconButton
-local menu = foundationModule.Menu
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local inputSize = foundationModule.Enums.InputSize
-local useLocalization = localizationModule.Hooks.useLocalization
-local useToggleState = momentsCommonModule.Hooks.useToggleState
-local t = {
+﻿local Parent = script:FindFirstAncestor("Moments").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local ThreeDotsHorizontal = require(Parent.BuilderIcons).Icon.ThreeDotsHorizontal
+local IconButton = FoundationModule.IconButton
+local Menu = FoundationModule.Menu
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local InputSize = FoundationModule.Enums.InputSize
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseToggleStateFunction = require(Parent.MomentsCommon).Hooks.useToggleState
+local config = {
 	trending = "Feature.Moments.Label.FeedTrending",
 	myMoments = "Feature.Moments.Label.FeedMyMoments"
 }
 
-return function(p1)
-	-- upvalues: useLocalization (ref), t (ref), useToggleState (ref), reactModule (ref), iconButton (ref), threeDotsHorizontal (ref), buttonVariant (ref), inputSize (ref), menu (ref), foundationModule (ref)
-	local var1 = useLocalization(t)
-	local var2 = useToggleState()
-	local var3 = reactModule.useCallback(function()
-		-- upvalues: var2 (ref)
-		if var2.enabled then
-			var2.disable()
-			
-			return
-		end
-		var2.enable()
-	end, { var2.enabled, var2.enable, var2.disable })
-	local var4 = reactModule.useCallback(function()
-		-- upvalues: var2 (ref), p1 (ref)
-		var2.disable()
+return function(p1) --[[ Line: 43 | Named "NavigationMenu" ]]
+	-- upvalues: UseLocalizationFunction (copy), config (copy), UseToggleStateFunction (copy), ReactModule (copy), IconButton (copy), ThreeDotsHorizontal (copy), ButtonVariant (copy), InputSize (copy), Menu (copy), FoundationModule (copy)
+	local UseLocalizationResult = UseLocalizationFunction(config)
+	local UseToggleStateResult = UseToggleStateFunction()
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 58 ]]
+		-- upvalues: UseToggleStateResult (copy), p1 (copy)
+		UseToggleStateResult.disable()
 		p1.onNavigateToTrending()
-	end, { var2.disable, p1.onNavigateToTrending })
-	local var5 = reactModule.useCallback(function()
-		-- upvalues: var2 (ref), p1 (ref)
-		var2.disable()
+	end, { UseToggleStateResult.disable, p1.onNavigateToTrending })
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 63 ]]
+		-- upvalues: UseToggleStateResult (copy), p1 (copy)
+		UseToggleStateResult.disable()
 		p1.onNavigateToMyMoments()
-	end, { var2.disable, p1.onNavigateToMyMoments })
+	end, { UseToggleStateResult.disable, p1.onNavigateToMyMoments })
 	
-	return reactModule.createElement(menu, {
-		align = foundationModule.Enums.PopoverAlign.End,
-		isOpen = var2.enabled,
-		items = reactModule.useMemo(function()
-			-- upvalues: var1 (ref), var4 (ref), var5 (ref)
+	return ReactModule.createElement(Menu, {
+		align = FoundationModule.Enums.PopoverAlign.End,
+		isOpen = UseToggleStateResult.enabled,
+		items = ReactModule.useMemo(function() --[[ Line: 68 ]]
+			-- upvalues: UseLocalizationResult (copy), UseResult (copy), UseResult1 (copy)
 			return {
 				{
 					id = "trending",
-					text = var1.trending,
-					onActivated = var4
+					text = UseLocalizationResult.trending,
+					onActivated = UseResult
 				},
 				{
 					id = "myMoments",
-					text = var1.myMoments,
-					onActivated = var5
+					text = UseLocalizationResult.myMoments,
+					onActivated = UseResult1
 				}
 			}
-		end, { var4, var5, var1 }),
+		end, { UseResult, UseResult1, UseLocalizationResult }),
 		LayoutOrder = p1.layoutOrder,
-		onPressedOutside = var2.disable,
-		side = foundationModule.Enums.PopoverSide.Bottom
+		onPressedOutside = UseToggleStateResult.disable,
+		side = FoundationModule.Enums.PopoverSide.Bottom
 	}, {
-		MoreMenuButton = reactModule.createElement(iconButton, {
+		MoreMenuButton = ReactModule.createElement(IconButton, {
 			isCircular = true,
 			Selectable = true,
 			LayoutOrder = p1.layoutOrder,
-			icon = threeDotsHorizontal,
-			onActivated = var3,
-			variant = p1.buttonVariant or buttonVariant.OverMedia,
-			size = inputSize.Medium,
+			icon = ThreeDotsHorizontal,
+			onActivated = ReactModule.useCallback(function() --[[ Line: 50 ]]
+				-- upvalues: UseToggleStateResult (copy)
+				if UseToggleStateResult.enabled then
+					UseToggleStateResult.disable()
+					
+					return
+				else
+					UseToggleStateResult.enable()
+				end
+			end, {
+				UseToggleStateResult.enabled,
+				UseToggleStateResult.enable,
+				UseToggleStateResult.disable
+			}),
+			variant = p1.buttonVariant or ButtonVariant.OverMedia,
+			size = InputSize.Medium,
 			testId = p1.buttonTestId or "--moments-navigation-menu-button"
 		})
 	})

@@ -1,44 +1,45 @@
-﻿local appStorageService = game:GetService("AppStorageService")
-local parent = script.Parent.Parent
-local constantsModule = require(parent.Constants)
-local useSelector = require(parent.Parent.RoactUtils).Hooks.RoactRodux.useSelector
+﻿local AppStorageService = game:GetService("AppStorageService")
+local Parent = script.Parent.Parent
+local ConstantsModule = require(Parent.Constants)
+local UseSelectorFunction = require(Parent.Parent.RoactUtils).Hooks.RoactRodux.useSelector
 
-local var1 = function()
-	-- upvalues: appStorageService (ref), constantsModule (ref)
-	pcall(function()
-		-- upvalues: appStorageService (copy), constantsModule (copy)
-		appStorageService:SetItem(constantsModule.LastFlashOccurrenceTsLocalStorageKey, tostring(DateTime.now().UnixTimestampMillis))
-		appStorageService:Flush()
+local function v3() --[[ Line: 19 ]]
+	-- upvalues: AppStorageService (copy), ConstantsModule (copy)
+	pcall(function() --[[ Line: 20 ]]
+		-- upvalues: AppStorageService (upval), ConstantsModule (upval)
+		AppStorageService:SetItem(ConstantsModule.LastFlashOccurrenceTsLocalStorageKey, (tostring(DateTime.now().UnixTimestampMillis)))
+		AppStorageService:Flush()
 	end)
 end
 
-return function(p1)
-	-- upvalues: appStorageService (ref), useSelector (ref), constantsModule (ref), var1 (ref)
-	local var2 = p1 or appStorageService
+return function(p1) --[[ Line: 29 ]]
+	-- upvalues: AppStorageService (copy), UseSelectorFunction (copy), ConstantsModule (copy), v3 (copy)
+	local AppStorageService1 = if p1 then p1 else AppStorageService
 	
-	if not useSelector(function(p2)
-		-- upvalues: constantsModule (copy)
-		return p2[constantsModule.RoduxKey].IsOverlayFlashActive
+	if not UseSelectorFunction(function(p2) --[[ Line: 32 ]]
+		-- upvalues: ConstantsModule (upval)
+		return p2[ConstantsModule.RoduxKey].IsOverlayFlashActive
 	end) then
-		return false, var1
+		return false, v3
 	end
-	local ok, status = pcall(function()
-		-- upvalues: var2 (ref), constantsModule (copy)
-		return var2:GetItem(constantsModule.LastFlashOccurrenceTsLocalStorageKey)
+	local Success, Result = pcall(function() --[[ Line: 40 ]]
+		-- upvalues: AppStorageService1 (copy), ConstantsModule (upval)
+		return AppStorageService1:GetItem(ConstantsModule.LastFlashOccurrenceTsLocalStorageKey)
 	end)
 	
-	if not ok then
-		return false, var1
+	if not Success then
+		return false, v3
 	end
-	local var3 = tonumber(status)
+	local Number: number? = tonumber(Result)
 	
-	if var3 == nil then
-		return false, var1
+	if Number == nil then
+		return false, v3
 	end
-	assert(var3 ~= nil, "lastFlashOccurrenceTs cannot be nil")
+	assert(Number ~= nil, "lastFlashOccurrenceTs cannot be nil")
 	
-	if DateTime.now().UnixTimestampMillis - var3 < 500 then
-		return false, var1
+	if DateTime.now().UnixTimestampMillis - Number < 500 then
+		return false, v3
+	else
+		return true, v3
 	end
-	return true, var1
 end

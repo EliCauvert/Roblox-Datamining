@@ -1,5 +1,5 @@
-﻿local constantsModule = require(script.Parent.Parent.TopBar.Constants)
-local t = {
+﻿local ConstantsModule = require(script.Parent.Parent.TopBar.Constants)
+local CompactViewModule = {
 	ContainerBackgroundTransparency = 0,
 	UseContainerAspectRatio = false,
 	ContainerAspectRatio = nil,
@@ -12,14 +12,14 @@ local t = {
 	BorderPaddingSize = 20,
 	AssetTextMaxSize = 14,
 	ContainerBackgroundColor = require(script.Parent.Colors).Carbon,
-	ContainerSize = function(p1)
-		-- upvalues: constantsModule (ref)
-		return UDim2.new(1, 0, 1, -constantsModule.TopBarHeight * p1)
+	ContainerSize = function(p1): UDim2 --[[ Line: 10 ]]
+		-- upvalues: ConstantsModule (copy)
+		return UDim2.new(1, 0, 1, -ConstantsModule.TopBarHeight * p1)
 	end,
 	ContainerAnchorPoint = Vector2.new(0.5, 0),
-	ContainerPosition = function(p1)
-		-- upvalues: constantsModule (ref)
-		return UDim2.new(0.5, 0, 0, constantsModule.TopBarHeight * p1)
+	ContainerPosition = function(p1): UDim2 --[[ Line: 15 ]]
+		-- upvalues: ConstantsModule (copy)
+		return UDim2.new(0.5, 0, 0, ConstantsModule.TopBarHeight * p1)
 	end,
 	PlayerViewportSize = UDim2.new(1, 0, 0.41, 0),
 	AssetListSize = UDim2.new(1, 0, 0.59, -42),
@@ -37,11 +37,11 @@ local t = {
 	TryOnPosition = UDim2.new(0, 0, 0, 15),
 	TryOnSize = UDim2.new(1, 0, 0.4, 0)
 }
-setmetatable(t, {
-	__newindex = function(_, _, _) end,
-	__index = function(_, p1)
+setmetatable(CompactViewModule, {
+	__newindex = function(_, _, _) --[[ Line: 44 ]] end,
+	__index = function(_, p1) --[[ Line: 45 ]]
 		error("CompactView table has no value: " .. tostring(p1))
 	end
 })
 
-return t
+return CompactViewModule

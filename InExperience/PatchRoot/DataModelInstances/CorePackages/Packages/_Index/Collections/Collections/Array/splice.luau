@@ -1,28 +1,28 @@
 ﻿local _ = require(script.Parent.Parent.Parent.ES7Types)
 
-return function(p1, p2, p3, ...)
-	if #p1 < p2 then
+return function(List, Value: number, p1, ...) --[[ Line: 24 ]]
+	if #List < Value then
 		for i = 1, select("#", ...) do
-			table.insert(p1, select(i, ...))
+			table.insert(List, (select(i, ...)))
 		end
 		return {}
 	else
-		local p0Count = #p1
+		local CountList = #List
 		
-		if p2 < 1 then
-			p2 = math.max(p0Count - math.abs(p2), 1)
+		if Value < 1 then
+			Value = math.max(CountList - math.abs(Value), 1)
 		end
-		local t = {}
-		p3 = p3 or p0Count
+		local List1 = {}
+		local P0 = p1 or CountList
 		
-		if p3 > 0 then
-			for _ = p2, math.min(p0Count, p2 + math.max(0, p3 - 1)) do
-				table.insert(t, table.remove(p1, p2))
+		if P0 > 0 then
+			for _ = Value, math.min(CountList, Value + math.max(0, P0 - 1)) do
+				table.insert(List1, (table.remove(List, Value)))
 			end
 		end
-		for i_1 = select("#", ...), 1, -1 do
-			table.insert(p1, p2, select(i_1, ...))
+		for i1 = select("#", ...), 1, -1 do
+			table.insert(List, Value, (select(i1, ...)))
 		end
-		return t
+		return List1
 	end
 end

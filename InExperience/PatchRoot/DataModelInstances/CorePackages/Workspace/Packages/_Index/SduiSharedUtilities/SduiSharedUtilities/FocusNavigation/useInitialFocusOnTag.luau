@@ -1,46 +1,40 @@
-﻿local parent = script:FindFirstAncestor("SduiSharedUtilities").Parent
-local collectionService = game:GetService("CollectionService")
-local reactModule = require(parent.React)
-local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
-local responsiveModule = require(parent.Responsive)
-local fFlagLuaAppMediaGalleryGamepadSupport = require(parent.SharedFlags).FFlagLuaAppMediaGalleryGamepadSupport
+﻿local Parent = script:FindFirstAncestor("SduiSharedUtilities").Parent
+local CollectionService = game:GetService("CollectionService")
+local ReactModule = require(Parent.React)
+local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
+local ResponsiveModule = require(Parent.Responsive)
+local FFlagLuaAppMediaGalleryGamepadSupport = require(Parent.SharedFlags).FFlagLuaAppMediaGalleryGamepadSupport
 
-return function(p1, p2)
-	-- upvalues: fFlagLuaAppMediaGalleryGamepadSupport (ref), responsiveModule (ref), reactFocusNavigationModule (ref), reactModule (ref), collectionService (ref)
-	local var1
-	if fFlagLuaAppMediaGalleryGamepadSupport then
-		var1 = responsiveModule.useLastInput() == responsiveModule.Input.Directional
-		var1 = nil
-	else
-		var1 = responsiveModule.usePreferredInput() == responsiveModule.Input.Directional
-	end
-	local var2 = reactFocusNavigationModule.useFocusGuiObject()
-	local var3 = reactModule.useRef(false)
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), p2 (ref), collectionService (copy), p1 (ref), var3 (ref), var2 (ref)
-		if not var1 then return end
-		local current = p2.current
+return function(Tag, p1) --[[ Line: 13 | Named "useInitialFocusOnTag" ]]
+	-- upvalues: FFlagLuaAppMediaGalleryGamepadSupport (copy), ResponsiveModule (copy), ReactFocusNavigationModule (copy), ReactModule (copy), CollectionService (copy)
+	local IsUseLastInputResultMatch: boolean = if FFlagLuaAppMediaGalleryGamepadSupport then ResponsiveModule.useLastInput() == ResponsiveModule.Input.Directional else ResponsiveModule.usePreferredInput() == ResponsiveModule.Input.Directional
+	local UseFocusGuiObjectResult = ReactFocusNavigationModule.useFocusGuiObject()
+	local UseRefResult = ReactModule.useRef(false)
+	ReactModule.useEffect(function() --[[ Line: 20 ]]
+		-- upvalues: IsUseLastInputResultMatch (copy), p1 (copy), CollectionService (upval), Tag (copy), UseRefResult (copy), UseFocusGuiObjectResult (copy)
+		if not IsUseLastInputResultMatch then return end
+		local Current = p1.current
 		
-		if not current then return end
-		for i, v in collectionService:GetTagged(p1) do
-			if not var3.current and v:IsDescendantOf(current) then
-				var3.current = true
-				var2(v)
+		if not Current then return end
+		for _, value in CollectionService:GetTagged(Tag) do
+			if not UseRefResult.current and value:IsDescendantOf(Current) then
+				UseRefResult.current = true
+				UseFocusGuiObjectResult(value)
 				
 				return
 			end
 		end
-		local var4 = collectionService:GetInstanceAddedSignal(p1):Connect(function(p3)
-			-- upvalues: var3 (copy), current (ref), var2 (copy)
-			if not var3.current and current and p3:IsDescendantOf(current) then
-				var3.current = true
-				var2(p3)
+		local Connection = CollectionService:GetInstanceAddedSignal(Tag):Connect(function(Tagged) --[[ Line: 38 ]]
+			-- upvalues: UseRefResult (upval), Current (copy), UseFocusGuiObjectResult (upval)
+			if not UseRefResult.current and Current and Tagged:IsDescendantOf(Current) then
+				UseRefResult.current = true
+				UseFocusGuiObjectResult(Tagged)
 			end
 		end)
 		
-		return function()
-			-- upvalues: var4 (ref)
-			var4:Disconnect()
+		return function() --[[ Line: 45 ]]
+			-- upvalues: Connection (copy)
+			Connection:Disconnect()
 		end
-	end, { var1, p1, var2 })
+	end, { IsUseLastInputResultMatch, Tag, UseFocusGuiObjectResult })
 end

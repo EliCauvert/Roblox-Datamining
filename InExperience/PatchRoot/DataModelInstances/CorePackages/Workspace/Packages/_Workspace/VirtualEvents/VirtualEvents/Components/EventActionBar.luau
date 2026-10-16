@@ -1,92 +1,92 @@
-﻿local virtualEvents = script:FindFirstAncestor("VirtualEvents")
-local reactModule = require(virtualEvents.Parent.React)
-local foundationModule = require(virtualEvents.Parent.Foundation)
-local UIBloxModule = require(virtualEvents.Parent.UIBlox)
-local gamePlayButtonModule = require(virtualEvents.Parent.GamePlayButton)
-local roactNetworking = require(virtualEvents.Parent.RoactServiceTags).RoactNetworking
-local useRoactService = require(virtualEvents.Parent.RobloxAppHooks).useRoactService
-local _ = require(virtualEvents.Parent.VirtualEventsState)
-local useExperienceSubtitleModule = require(virtualEvents.Hooks.useExperienceSubtitle)
-local view = foundationModule.View
-local button = foundationModule.Button
-local buttonSize = foundationModule.Enums.ButtonSize
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local fillBehavior = foundationModule.Enums.FillBehavior
-local text = foundationModule.Text
-local useTokens = foundationModule.Hooks.useTokens
-local images = UIBloxModule.App.ImageSet.Images
-local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
-local usePlayButtonState = gamePlayButtonModule.usePlayButtonState
-local playButtonStates = gamePlayButtonModule.PlayButtonStates
+﻿local VirtualEvents = script:FindFirstAncestor("VirtualEvents")
+local ReactModule = require(VirtualEvents.Parent.React)
+local FoundationModule = require(VirtualEvents.Parent.Foundation)
+local UIBloxModule = require(VirtualEvents.Parent.UIBlox)
+local GamePlayButtonModule = require(VirtualEvents.Parent.GamePlayButton)
+local RoactNetworking = require(VirtualEvents.Parent.RoactServiceTags).RoactNetworking
+local UseRoactServiceFunction = require(VirtualEvents.Parent.RobloxAppHooks).useRoactService
+local _ = require(VirtualEvents.Parent.VirtualEventsState)
+local UseExperienceSubtitleModule = require(VirtualEvents.Hooks.useExperienceSubtitle)
+local View = FoundationModule.View
+local Button = FoundationModule.Button
+local ButtonSize = FoundationModule.Enums.ButtonSize
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local FillBehavior = FoundationModule.Enums.FillBehavior
+local Text = FoundationModule.Text
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local Images = UIBloxModule.App.ImageSet.Images
+local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
+local UsePlayButtonStateFunction = GamePlayButtonModule.usePlayButtonState
+local PlayButtonStates = GamePlayButtonModule.PlayButtonStates
 
-return function(p1)
-	-- upvalues: useTokens (ref), useExperienceSubtitleModule (ref), useRoactService (ref), roactNetworking (ref), usePlayButtonState (ref), playButtonStates (ref), reactModule (ref), text (ref), view (ref), button (ref), buttonVariant (ref), fillBehavior (ref), buttonSize (ref), imageSetLabel (ref), images (ref)
-	local var1 = useTokens()
-	local var2 = if p1.universeId then useExperienceSubtitleModule(p1.universeId) else nil
-	local var3 = usePlayButtonState(useRoactService(roactNetworking), p1.universeId or "")
-	local var4 = if var3.playButtonState ~= playButtonStates.Playable then var3.playButtonState == playButtonStates.PlayableWithParty else true
+return function(p1) --[[ Line: 43 | Named "EventActionBar" ]]
+	-- upvalues: UseTokensFunction (copy), UseExperienceSubtitleModule (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), UsePlayButtonStateFunction (copy), PlayButtonStates (copy), ReactModule (copy), Text (copy), View (copy), Button (copy), ButtonVariant (copy), FillBehavior (copy), ButtonSize (copy), ImageSetLabel (copy), Images (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseExperienceSubtitleModuleResult = if p1.universeId then UseExperienceSubtitleModule(p1.universeId) else nil
+	local UsePlayButtonStateResult = UsePlayButtonStateFunction(UseRoactServiceFunction(RoactNetworking), p1.universeId or "")
+	local IsPlayButtonStateMatch: boolean = UsePlayButtonStateResult.playButtonState == PlayButtonStates.Playable or UsePlayButtonStateResult.playButtonState == PlayButtonStates.PlayableWithParty
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y
 	}, {
-		Layout = reactModule.createElement("UIListLayout", {
+		Layout = ReactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			Padding = UDim.new(0, 16)
 		}),
-		UpperContainer = reactModule.createElement("Frame", {
+		UpperContainer = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 1,
 			Size = UDim2.new(1, 0, 0, 40)
 		}, {
-			Layout = reactModule.createElement("UIListLayout", {
+			Layout = ReactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Horizontal,
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				Padding = UDim.new(0, 12)
 			}),
-			ExperienceThumbnail = reactModule.createElement("ImageButton", {
+			ExperienceThumbnail = ReactModule.createElement("ImageButton", {
 				Active = true,
 				Size = UDim2.fromOffset(40, 40),
 				BorderSizePixel = 0,
 				Image = ("rbxthumb://type=GameIcon&id=%s&w=150&h=150"):format(p1.universeId),
-				[reactModule.Event.Activated] = p1.onExperienceTileActivated
+				[ReactModule.Event.Activated] = p1.onExperienceTileActivated
 			}, {
-				UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) })
+				UICorner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) })
 			}),
-			EventInfo = reactModule.createElement("Frame", {
+			EventInfo = ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 2,
 				Size = UDim2.new(1, -52, 1, 0)
 			}, {
-				Layout = reactModule.createElement("UIListLayout", {
+				Layout = ReactModule.createElement("UIListLayout", {
 					SortOrder = Enum.SortOrder.LayoutOrder,
 					FillDirection = Enum.FillDirection.Vertical
 				}),
-				ExperienceName = reactModule.createElement(text, {
+				ExperienceName = ReactModule.createElement(Text, {
 					LayoutOrder = 1,
 					TextWrapped = false,
-					Size = UDim2.fromScale(1, if var2 then 0.5 else 1),
+					Size = UDim2.fromScale(1, if UseExperienceSubtitleModuleResult then 0.5 else 1),
 					Text = p1.experienceName,
-					textStyle = var1.Color.Content.Emphasis,
-					fontStyle = var1.Typography.TitleLarge,
+					textStyle = UseTokensResult.Color.Content.Emphasis,
+					fontStyle = UseTokensResult.Typography.TitleLarge,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					TextTruncate = Enum.TextTruncate.SplitWord
 				}),
-				ExperienceSubtitle = if var2 then reactModule.createElement(text, {
+				ExperienceSubtitle = if UseExperienceSubtitleModuleResult then ReactModule.createElement(Text, {
 					LayoutOrder = 2,
 					TextWrapped = false,
 					Size = UDim2.fromScale(1, 0.5),
-					Text = var2,
-					textStyle = var1.Color.Content.Default,
-					fontStyle = var1.Typography.BodyLarge,
+					Text = UseExperienceSubtitleModuleResult,
+					textStyle = UseTokensResult.Color.Content.Default,
+					fontStyle = UseTokensResult.Typography.BodyLarge,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					TextTruncate = Enum.TextTruncate.None
 				}) else nil
 			})
 		}),
-		LowerContianer = if p1.ctaProps.button then reactModule.createElement(view, {
+		LowerContianer = if p1.ctaProps.button then ReactModule.createElement(View, {
 			LayoutOrder = 2,
 			size = UDim2.new(1, 0, 0, 40),
 			tag = {
@@ -94,30 +94,30 @@ return function(p1)
 				["fill-x"] = true
 			}
 		}, {
-			CTAButton = reactModule.createElement(button, {
+			CTAButton = ReactModule.createElement(Button, {
 				text = p1.ctaProps.button.text,
-				variant = buttonVariant[p1.ctaProps.button.variant],
-				onActivated = if var4 then p1.ctaProps.button.onActivated else function() end,
-				fillBehavior = fillBehavior.Fill,
-				size = buttonSize.Medium,
-				isDisabled = not var4
+				variant = ButtonVariant[p1.ctaProps.button.variant],
+				onActivated = if IsPlayButtonStateMatch then p1.ctaProps.button.onActivated else function() --[[ Line: 132 ]] end,
+				fillBehavior = FillBehavior.Fill,
+				size = ButtonSize.Medium,
+				isDisabled = not IsPlayButtonStateMatch
 			}),
-			ShareButtonWrapper = if p1.ctaProps.icon then reactModule.createElement("Frame", {
+			ShareButtonWrapper = if p1.ctaProps.icon then ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				Size = UDim2.fromOffset(40, 40)
 			}, {
-				ShareButton = reactModule.createElement(button, {
-					variant = buttonVariant.Standard,
-					onActivated = if var4 then p1.ctaProps.icon.onActivated else function() end,
-					fillBehavior = fillBehavior.Fill,
-					size = buttonSize.Medium,
-					isDisabled = not var4
+				ShareButton = ReactModule.createElement(Button, {
+					variant = ButtonVariant.Standard,
+					onActivated = if IsPlayButtonStateMatch then p1.ctaProps.icon.onActivated else function() --[[ Line: 144 ]] end,
+					fillBehavior = FillBehavior.Fill,
+					size = ButtonSize.Medium,
+					isDisabled = not IsPlayButtonStateMatch
 				}),
-				ShareIcon = reactModule.createElement(imageSetLabel, {
+				ShareIcon = ReactModule.createElement(ImageSetLabel, {
 					ZIndex = 2,
 					BackgroundTransparency = 1,
 					Size = UDim2.fromOffset(32, 32),
-					Image = images[p1.ctaProps.icon.icon],
+					Image = Images[p1.ctaProps.icon.icon],
 					Position = UDim2.fromOffset(4, 4)
 				})
 			}) else nil

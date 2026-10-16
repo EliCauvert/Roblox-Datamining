@@ -1,39 +1,47 @@
-﻿local expChat = script:FindFirstAncestor("ExpChat")
-local parent = expChat.Parent
-local _ = require(parent.ExpChatShared)
-local roactUtilsModule = require(parent.RoactUtils)
-local signalsReactModule = require(parent.SignalsReact)
-local sharedFlagsModule = require(parent.SharedFlags)
-local getChannelTabsStoreModule = require(expChat.Stores.GetChannelTabsStore)
-local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
-local useSignalState = signalsReactModule.useSignalState
-local fFlagExpChatUseChannelTabsStore = sharedFlagsModule.FFlagExpChatUseChannelTabsStore
+﻿local ExpChat = script:FindFirstAncestor("ExpChat")
+local Parent = ExpChat.Parent
+local _ = require(Parent.ExpChatShared)
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local GetChannelTabsStoreModule = require(ExpChat.Stores.GetChannelTabsStore)
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 
-local function selectRoduxTabType(p1)
-	local channelTabs = p1.ChannelTabs
+local function selectRoduxTabType(p1) --[[ Line: 32 ]]
+	local ChannelTabs = p1.ChannelTabs
 	
-	if channelTabs == nil or channelTabs.allChannelTabs == nil or channelTabs.selectedTabName == nil then
+	if ChannelTabs == nil or ChannelTabs.allChannelTabs == nil or ChannelTabs.selectedTabName == nil then
 		return nil
+	else
+		local AllChannelTab = ChannelTabs.allChannelTabs[ChannelTabs.selectedTabName]
+		
+		return AllChannelTab and AllChannelTab.Type or nil
 	end
-	local selectedTabName = channelTabs.allChannelTabs[channelTabs.selectedTabName]
-	
-	return if selectedTabName then selectedTabName.Type else nil
 end
 
-return function()
-	-- upvalues: useSelector (ref), selectRoduxTabType (ref), useSignalState (ref), getChannelTabsStoreModule (ref), fFlagExpChatUseChannelTabsStore (ref)
-	local var1 = useSelector(selectRoduxTabType)
-	local var2 = useSignalState(getChannelTabsStoreModule(false).getChannelTabsState)
-	
-	if not fFlagExpChatUseChannelTabsStore then
-		return var1
-	end
-	local selectedTabName = var2.selectedTabName
-	
-	if selectedTabName == nil then
-		return nil
-	end
-	local var3 = var2.allChannelTabs[selectedTabName]
-	
-	return if var3 then var3.type else nil
+local function useSelectedTabTypeFromSignals() --[[ Line: 41 ]]
+	-- upvalues: ReactModule (copy), SignalsModule (copy), GetChannelTabsStoreModule (copy), UseSignalStateFunction (copy)
+	return UseSignalStateFunction((ReactModule.useMemo(function() --[[ Line: 44 ]]
+		-- upvalues: SignalsModule (upval), GetChannelTabsStoreModule (upval)
+		return SignalsModule.createComputed(function(p1) --[[ Line: 45 ]]
+			-- upvalues: GetChannelTabsStoreModule (upval)
+			local ChannelTabsState = GetChannelTabsStoreModule(false).getChannelTabsState(p1)
+			local SelectedTabName = ChannelTabsState.selectedTabName
+			
+			if SelectedTabName == nil then
+				return nil
+			else
+				local AllChannelTab = ChannelTabsState.allChannelTabs[SelectedTabName]
+				
+				return AllChannelTab and AllChannelTab.type or nil
+			end
+		end)
+	end, {})))
 end
+
+local function useSelectedTabTypeFromRodux() --[[ Line: 59 ]]
+	-- upvalues: UseSelectorFunction (copy), selectRoduxTabType (copy)
+	return UseSelectorFunction(selectRoduxTabType)
+end
+
+return if require(Parent.SharedFlags).FFlagExpChatUseChannelTabsStore then useSelectedTabTypeFromSignals else useSelectedTabTypeFromRodux

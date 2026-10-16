@@ -1,1 +1,1 @@
-﻿return require(script["Error.global"])
+﻿return (require(script["Error.global"]))

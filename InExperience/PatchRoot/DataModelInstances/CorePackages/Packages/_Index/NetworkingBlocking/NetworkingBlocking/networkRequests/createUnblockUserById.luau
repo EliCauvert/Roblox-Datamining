@@ -1,9 +1,9 @@
-﻿local ACCOUNT_SETTINGS_URLModule = require(script.Parent.Parent.ACCOUNT_SETTINGS_URL)
+﻿local ACCOUNTSETTINGSURLModule = require(script.Parent.Parent.ACCOUNT_SETTINGS_URL)
 
-return function(p1)
-	-- upvalues: ACCOUNT_SETTINGS_URLModule (ref)
-	return p1.roduxNetworking.POST({ Name = "UnblockUserById" }, function(p2, p3)
-		-- upvalues: ACCOUNT_SETTINGS_URLModule (copy)
-		return p2(ACCOUNT_SETTINGS_URLModule, { params = p3.currentUserId }):path("v1"):path("users"):id(p3.userId):path("unblock"):body({})
+return function(p1) --[[ Line: 13 ]]
+	-- upvalues: ACCOUNTSETTINGSURLModule (copy)
+	return p1.roduxNetworking.POST({ Name = "UnblockUserById" }, function(Callback, p2) --[[ Line: 16 ]]
+		-- upvalues: ACCOUNTSETTINGSURLModule (upval)
+		return Callback(ACCOUNTSETTINGSURLModule, { params = p2.currentUserId }):path("v1"):path("users"):id(p2.userId):path("unblock"):body({})
 	end)
 end

@@ -1,52 +1,52 @@
-﻿local parent = script.Parent.Parent
-local reactGlobalsModule = require(parent.ReactGlobals)
-local _ = require(parent.LuauPolyfill)
+﻿local Parent = script.Parent.Parent
+local ReactGlobalsModule = require(Parent.ReactGlobals)
+local _ = require(Parent.LuauPolyfill)
 local _ = require(script.Parent.ReactInternalTypes)
-local reactWorkTagsModule = require(script.Parent.ReactWorkTags)
-local hostComponent = reactWorkTagsModule.HostComponent
-local lazyComponent = reactWorkTagsModule.LazyComponent
-local suspenseComponent = reactWorkTagsModule.SuspenseComponent
-local suspenseListComponent = reactWorkTagsModule.SuspenseListComponent
-local functionComponent = reactWorkTagsModule.FunctionComponent
-local indeterminateComponent = reactWorkTagsModule.IndeterminateComponent
-local forwardRef = reactWorkTagsModule.ForwardRef
-local simpleMemoComponent = reactWorkTagsModule.SimpleMemoComponent
-local classComponent = reactWorkTagsModule.ClassComponent
-local reactComponentStackFrame = require(parent.Shared).ReactComponentStackFrame
-local describeBuiltInComponentFrame = reactComponentStackFrame.describeBuiltInComponentFrame
-local describeFunctionComponentFrame = reactComponentStackFrame.describeFunctionComponentFrame
-local describeClassComponentFrame = reactComponentStackFrame.describeClassComponentFrame
+local ReactWorkTagsModule = require(script.Parent.ReactWorkTags)
+local HostComponent = ReactWorkTagsModule.HostComponent
+local LazyComponent = ReactWorkTagsModule.LazyComponent
+local SuspenseComponent = ReactWorkTagsModule.SuspenseComponent
+local SuspenseListComponent = ReactWorkTagsModule.SuspenseListComponent
+local FunctionComponent = ReactWorkTagsModule.FunctionComponent
+local IndeterminateComponent = ReactWorkTagsModule.IndeterminateComponent
+local ForwardRef = ReactWorkTagsModule.ForwardRef
+local SimpleMemoComponent = ReactWorkTagsModule.SimpleMemoComponent
+local ClassComponent = ReactWorkTagsModule.ClassComponent
+local ReactComponentStackFrame = require(Parent.Shared).ReactComponentStackFrame
+local DescribeBuiltInComponentFrameFunction = ReactComponentStackFrame.describeBuiltInComponentFrame
+local DescribeFunctionComponentFrameFunction = ReactComponentStackFrame.describeFunctionComponentFrame
+local DescribeClassComponentFrameFunction = ReactComponentStackFrame.describeClassComponentFrame
 
-local function describeFiber(p1)
-	-- upvalues: reactGlobalsModule (ref), hostComponent (ref), describeBuiltInComponentFrame (ref), lazyComponent (ref), suspenseComponent (ref), suspenseListComponent (ref), functionComponent (ref), indeterminateComponent (ref), simpleMemoComponent (ref), describeFunctionComponentFrame (ref), forwardRef (ref), classComponent (ref), describeClassComponentFrame (ref)
-	local type = nil
+local function describeFiber(Return) --[[ Line: 39 ]]
+	-- upvalues: ReactGlobalsModule (copy), HostComponent (copy), DescribeBuiltInComponentFrameFunction (copy), LazyComponent (copy), SuspenseComponent (copy), SuspenseListComponent (copy), FunctionComponent (copy), IndeterminateComponent (copy), SimpleMemoComponent (copy), DescribeFunctionComponentFrameFunction (copy), ForwardRef (copy), ClassComponent (copy), DescribeClassComponentFrameFunction (copy)
+	local Type = nil
 	
-	if reactGlobalsModule.__DEV__ then
-		local debugOwner = p1._debugOwner
+	if ReactGlobalsModule.__DEV__ then
+		local DebugOwner = Return._debugOwner
 		
-		if debugOwner then
-			type = debugOwner.type
+		if DebugOwner then
+			Type = DebugOwner.type
 		end
 	end
-	local var1 = if reactGlobalsModule.__DEV__ then p1._debugSource else nil
+	local DebugSource = if ReactGlobalsModule.__DEV__ then Return._debugSource else nil
 	
-	return if p1.tag == hostComponent then describeBuiltInComponentFrame(p1.type, var1, type) elseif p1.tag == lazyComponent then describeBuiltInComponentFrame("Lazy", var1, type) elseif p1.tag == suspenseComponent then describeBuiltInComponentFrame("Suspense", var1, type) elseif p1.tag == suspenseListComponent then describeBuiltInComponentFrame("SuspenseList", var1, type) elseif p1.tag == functionComponent or p1.tag == indeterminateComponent or p1.tag == simpleMemoComponent then describeFunctionComponentFrame(p1.type, var1, type) elseif p1.tag == forwardRef then describeFunctionComponentFrame(p1.type.render, var1, type) elseif p1.tag == classComponent then describeClassComponentFrame(p1.type, var1, type) else ""
+	return if Return.tag == HostComponent then DescribeBuiltInComponentFrameFunction(Return.type, DebugSource, Type) elseif Return.tag == LazyComponent then DescribeBuiltInComponentFrameFunction("Lazy", DebugSource, Type) elseif Return.tag == SuspenseComponent then DescribeBuiltInComponentFrameFunction("Suspense", DebugSource, Type) elseif Return.tag == SuspenseListComponent then DescribeBuiltInComponentFrameFunction("SuspenseList", DebugSource, Type) elseif Return.tag == FunctionComponent or Return.tag == IndeterminateComponent or Return.tag == SimpleMemoComponent then DescribeFunctionComponentFrameFunction(Return.type, DebugSource, Type) elseif Return.tag == ForwardRef then DescribeFunctionComponentFrameFunction(Return.type.render, DebugSource, Type) elseif Return.tag == ClassComponent then DescribeClassComponentFrameFunction(Return.type, DebugSource, Type) else ""
 end
 
 return {
-	getStackByFiberInDevAndProd = function(p1)
-		-- upvalues: describeFiber (ref)
-		local ok, status = pcall(function()
-			-- upvalues: p1 (ref), describeFiber (copy)
-			local var1 = ""
-			local var2 = p1
+	getStackByFiberInDevAndProd = function(Return) --[[ Line: 77 ]]
+		-- upvalues: describeFiber (copy)
+		local Success, Result = pcall(function(): string --[[ Line: 78 ]]
+			-- upvalues: Return (copy), describeFiber (upval)
+			local Text = ""
+			local Return1 = Return
 			repeat
-				var1 ..= describeFiber(var2)
-				var2 = var2.return_
-			until var2 == nil
-			return var1
+				Text ..= describeFiber(Return1)
+				Return1 = Return1.return_
+			until Return1 == nil
+			return Text
 		end)
 		
-		return if ok then status elseif typeof(status) == "table" and status.message and status.stack then "\nError generating stack: " .. status.message .. "\n" .. tostring(status.stack) else "\nError generating stack: " .. tostring(status)
+		return if Success then Result elseif typeof(Result) == "table" and Result.message and Result.stack then "\nError generating stack: " .. Result.message .. "\n" .. tostring(Result.stack) else "\nError generating stack: " .. tostring(Result)
 	end
 }

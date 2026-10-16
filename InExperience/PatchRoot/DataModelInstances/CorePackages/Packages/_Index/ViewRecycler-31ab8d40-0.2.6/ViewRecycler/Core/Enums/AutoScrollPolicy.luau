@@ -1,1 +1,1 @@
-﻿return table.freeze({ WhenAtEnd = "whenAtEnd" })
+﻿return (table.freeze({ WhenAtEnd = "whenAtEnd" }))

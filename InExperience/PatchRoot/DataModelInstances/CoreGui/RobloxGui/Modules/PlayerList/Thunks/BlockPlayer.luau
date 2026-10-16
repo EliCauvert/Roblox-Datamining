@@ -1,14 +1,14 @@
-﻿local blockingUtilityModule = require(game:GetService("CorePackages").Workspace.Packages.BlockingUtility)
-local setPlayerIsBlockedModule = require(script.Parent.Parent.Actions.SetPlayerIsBlocked)
+﻿local BlockingUtilityModule = require(game:GetService("CorePackages").Workspace.Packages.BlockingUtility)
+local SetPlayerIsBlockedModule = require(script.Parent.Parent.Actions.SetPlayerIsBlocked)
 
-return function(p1)
-	-- upvalues: blockingUtilityModule (ref), setPlayerIsBlockedModule (ref)
-	return function(p2)
-		-- upvalues: blockingUtilityModule (copy), p1 (ref), setPlayerIsBlockedModule (copy)
-		coroutine.wrap(function()
-			-- upvalues: blockingUtilityModule (copy), p1 (copy), p2 (ref), setPlayerIsBlockedModule (copy)
-			if blockingUtilityModule:BlockPlayerAsync(p1) then
-				p2:dispatch(setPlayerIsBlockedModule(p1, true))
+return function(p1) --[[ Line: 9 | Named "BlockPlayer" ]]
+	-- upvalues: BlockingUtilityModule (copy), SetPlayerIsBlockedModule (copy)
+	return function(p2) --[[ Line: 10 ]]
+		-- upvalues: BlockingUtilityModule (upval), p1 (copy), SetPlayerIsBlockedModule (upval)
+		coroutine.wrap(function() --[[ Line: 11 ]]
+			-- upvalues: BlockingUtilityModule (upval), p1 (upval), p2 (copy), SetPlayerIsBlockedModule (upval)
+			if BlockingUtilityModule:BlockPlayerAsync(p1) then
+				p2:dispatch(SetPlayerIsBlockedModule(p1, true))
 			end
 		end)()
 	end

@@ -1,99 +1,100 @@
-﻿local chatUIPrimitives = script:FindFirstAncestor("ChatUIPrimitives")
-local signalsModule = require(chatUIPrimitives.Parent.Signals)
-local normalizePresetCatalogModule = require(chatUIPrimitives.PresetChat.normalizePresetCatalog)
-local presetCatalogToExpressionCatalogModule = require(chatUIPrimitives.PresetChat.presetCatalogToExpressionCatalog)
-local _ = require(chatUIPrimitives.UniversalMessage.Types)
-local createSignal = signalsModule.createSignal
+﻿local ChatUIPrimitives = script:FindFirstAncestor("ChatUIPrimitives")
+local NormalizePresetCatalogModule = require(ChatUIPrimitives.PresetChat.normalizePresetCatalog)
+local PresetCatalogToExpressionCatalogModule = require(ChatUIPrimitives.PresetChat.presetCatalogToExpressionCatalog)
+local _ = require(ChatUIPrimitives.UniversalMessage.Types)
+local CreateSignalFunction = require(ChatUIPrimitives.Parent.Signals).createSignal
 
-return function(p1)
-	-- upvalues: createSignal (ref), normalizePresetCatalogModule (ref), presetCatalogToExpressionCatalogModule (ref)
-	local gameSettings = UserSettings().GameSettings
-	local var1, var2 = createSignal("disabled")
-	local var3, var4 = createSignal({})
-	local var5, var6 = createSignal(false)
-	local var7 = 0
-	local t = {}
-	local var8 = 0
+return function(Callback) --[[ Line: 38 | Named "createExpressionCatalogStore" ]]
+	-- upvalues: CreateSignalFunction (copy), NormalizePresetCatalogModule (copy), PresetCatalogToExpressionCatalogModule (copy)
+	local GameSettings = UserSettings().GameSettings
+	local Disabled, Disabled2 = CreateSignalFunction("disabled")
+	local Signal, Signal2 = CreateSignalFunction({})
+	local Signal1, Signal2_1 = CreateSignalFunction(false)
+	local Count = 0
+	local List = {}
+	local Count1 = 0
 	
-	local function refresh()
-		-- upvalues: var8 (write), var6 (ref), p1 (ref), normalizePresetCatalogModule (copy), presetCatalogToExpressionCatalogModule (copy), var2 (ref), var4 (ref)
-		var8 += 1
-		local var9 = var8
-		var6(true)
-		task.spawn(function()
-			-- upvalues: p1 (copy), var9 (ref), var8 (copy), var6 (copy), normalizePresetCatalogModule (copy), presetCatalogToExpressionCatalogModule (copy), var2 (copy), var4 (copy)
-			local var10 = p1()
+	local function refresh() --[[ Line: 53 ]]
+		-- upvalues: Count1 (ref), Signal2_1 (copy), Callback (copy), NormalizePresetCatalogModule (upval), PresetCatalogToExpressionCatalogModule (upval), Disabled2 (copy), Signal2 (copy)
+		Count1 += 1
+		local Count: number = Count1
+		Signal2_1(true)
+		task.spawn(function() --[[ Line: 57 ]]
+			-- upvalues: Callback (upval), Count (copy), Count1 (upval), Signal2_1 (upval), NormalizePresetCatalogModule (upval), PresetCatalogToExpressionCatalogModule (upval), Disabled2 (upval), Signal2 (upval)
+			local v1 = Callback()
 			
-			if var9 ~= var8 then return end
-			var6(false)
-			local var11 = if var10 ~= nil then nil else normalizePresetCatalogModule(var10)
+			if Count ~= Count1 then return end
+			Signal2_1(false)
+			local v2 = if v1 == nil then nil else NormalizePresetCatalogModule(v1)
 			
-			if var11 == nil then
+			if v2 ~= nil then
+				local v3 = PresetCatalogToExpressionCatalogModule(v2)
+				Disabled2(v3.status)
+				Signal2(v3.categoryGroups)
+				
 				return
 			end
-			local var12 = presetCatalogToExpressionCatalogModule(var11)
-			var2(var12.status)
-			var4(var12.categoryGroups)
 		end)
 	end
 	
 	return {
-		getStatus = var1,
-		getCategoryGroups = var3,
-		getIsLoading = var5,
-		acquire = function()
-			-- upvalues: var7 (write), var8 (write), var6 (ref), p1 (ref), normalizePresetCatalogModule (copy), presetCatalogToExpressionCatalogModule (copy), var2 (ref), var4 (ref), t (ref), gameSettings (ref), refresh (ref)
-			var7 += 1
+		getStatus = Disabled,
+		getCategoryGroups = Signal,
+		getIsLoading = Signal1,
+		acquire = function() --[[ Line: 75 ]]
+			-- upvalues: Count (ref), Count1 (ref), Signal2_1 (copy), Callback (copy), NormalizePresetCatalogModule (upval), PresetCatalogToExpressionCatalogModule (upval), Disabled2 (copy), Signal2 (copy), List (copy), GameSettings (copy), refresh (copy)
+			Count += 1
 			
-			if var7 == 1 then
-				var8 += 1
-				local var9 = var8
-				var6(true)
-				task.spawn(function()
-					-- upvalues: p1 (copy), var9 (ref), var8 (copy), var6 (copy), normalizePresetCatalogModule (copy), presetCatalogToExpressionCatalogModule (copy), var2 (copy), var4 (copy)
-					local var10 = p1()
+			if Count == 1 then
+				Count1 += 1
+				local Count2: number = Count1
+				Signal2_1(true)
+				task.spawn(function() --[[ Line: 57 ]]
+					-- upvalues: Callback (upval), Count2 (copy), Count1 (upval), Signal2_1 (upval), NormalizePresetCatalogModule (upval), PresetCatalogToExpressionCatalogModule (upval), Disabled2 (upval), Signal2 (upval)
+					local v1 = Callback()
 					
-					if var9 ~= var8 then return end
-					var6(false)
-					local var11 = if var10 ~= nil then nil else normalizePresetCatalogModule(var10)
+					if Count2 ~= Count1 then return end
+					Signal2_1(false)
+					local v2 = if v1 == nil then nil else NormalizePresetCatalogModule(v1)
 					
-					if var11 == nil then
+					if v2 ~= nil then
+						local v3 = PresetCatalogToExpressionCatalogModule(v2)
+						Disabled2(v3.status)
+						Signal2(v3.categoryGroups)
+						
 						return
 					end
-					local var12 = presetCatalogToExpressionCatalogModule(var11)
-					var2(var12.status)
-					var4(var12.categoryGroups)
 				end)
-				table.insert(t, gameSettings:GetPropertyChangedSignal("ChatTranslationLocale"):Connect(refresh))
-				table.insert(t, gameSettings:GetPropertyChangedSignal("ChatTranslationEnabled"):Connect(refresh))
+				table.insert(List, GameSettings:GetPropertyChangedSignal("ChatTranslationLocale"):Connect(refresh))
+				table.insert(List, GameSettings:GetPropertyChangedSignal("ChatTranslationEnabled"):Connect(refresh))
 			end
 		end,
-		release = function()
-			-- upvalues: var7 (write), t (ref), var8 (write), var6 (ref)
-			var7 -= 1
+		release = function() --[[ Line: 90 ]]
+			-- upvalues: Count (ref), List (copy), Count1 (ref), Signal2_1 (copy)
+			Count -= 1
 			
-			if var7 <= 0 then
-				var7 = 0
+			if Count <= 0 then
+				Count = 0
 				
-				for i, v in t do
-					v:Disconnect()
+				for _, Connection in List do
+					Connection:Disconnect()
 				end
-				table.clear(t)
-				var8 += 1
-				var6(false)
+				table.clear(List)
+				Count1 += 1
+				Signal2_1(false)
 			end
 		end,
-		_resetForTesting = function()
-			-- upvalues: t (ref), var7 (write), var8 (write), var2 (ref), var4 (ref), var6 (ref)
-			for i, v in t do
-				v:Disconnect()
+		_resetForTesting = function() --[[ Line: 108 ]]
+			-- upvalues: List (copy), Count (ref), Count1 (ref), Disabled2 (copy), Signal2 (copy), Signal2_1 (copy)
+			for _, Connection in List do
+				Connection:Disconnect()
 			end
-			table.clear(t)
-			var7 = 0
-			var8 += 1
-			var2("disabled")
-			var4({})
-			var6(false)
+			table.clear(List)
+			Count = 0
+			Count1 += 1
+			Disabled2("disabled")
+			Signal2({})
+			Signal2_1(false)
 		end
 	}
 end

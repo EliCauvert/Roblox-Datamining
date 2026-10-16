@@ -1,52 +1,49 @@
-﻿local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local parent_2 = parent_1.Parent
-local roactGamepadModule = require(parent_2.RoactGamepad)
-local roactModule = require(parent_2.Roact)
-local reactModule = require(parent_2.React)
-local cryoModule = require(parent_2.Cryo)
-local tModule = require(parent_2.t)
-local withStyleModule = require(parent_1.Core.Style.withStyle)
-local useStyleModule = require(parent_1.Core.Style.useStyle)
-local validateColorInfoModule = require(parent_1.Core.Style.Validator.validateColorInfo)
-local imageSetComponentModule = require(parent_1.Core.ImageSet.ImageSetComponent)
-local validateButtonPropsModule = require(script.Parent.validateButtonProps)
-local verticalScrollViewModule = require(parent.Container.VerticalScrollView)
-local imagesModule = require(parent.ImageSet.Images)
-local withSelectionCursorProviderModule = require(parent.SelectionImage.withSelectionCursorProvider)
-local cursorKindModule = require(parent.SelectionImage.CursorKind)
-local setDefaultModule = require(parent_1.Utility.setDefault)
-local cellModule = require(script.Parent.Cell)
-local roundedFrameModule = require(script.Parent.RoundedFrame)
-local styleDefaultsModule = require(script.Parent.StyleDefaults)
-local dropshadow178 = imagesModule["component_assets/dropshadow_17_8"]
-local baseMenu = roactModule.PureComponent:extend("BaseMenu")
-baseMenu.validateProps = tModule.strictInterface({
-	buttonProps = validateButtonPropsModule,
-	width = tModule.optional(tModule.UDim),
-	position = tModule.optional(tModule.union(tModule.UDim2, tModule.table)),
-	anchorPoint = tModule.optional(tModule.Vector2),
-	layoutOrder = tModule.optional(tModule.number),
-	topElementRounded = tModule.optional(tModule.boolean),
-	bottomElementRounded = tModule.optional(tModule.boolean),
-	setFirstItemRef = tModule.optional(tModule.union(tModule.callback, tModule.table)),
-	setFrameRef = tModule.optional(tModule.union(tModule.callback, tModule.table)),
-	stayOnActivated = tModule.optional(tModule.boolean),
-	maxHeight = tModule.optional(tModule.number),
-	showDropShadow = tModule.optional(tModule.boolean),
-	fixedListHeight = tModule.optional(tModule.number),
-	isElementBackgroundVisible = tModule.optional(tModule.boolean),
-	isElementDividerVisible = tModule.optional(tModule.boolean),
-	elementHeight = tModule.optional(tModule.number),
-	borderCornerRadius = tModule.optional(tModule.integer),
-	background = tModule.optional(validateColorInfoModule),
-	enableTokenOverride = tModule.optional(tModule.boolean),
-	renderHeader = tModule.optional(tModule.callback),
-	headerHeight = tModule.optional(tModule.number),
-	selectionOrder = tModule.optional(tModule.number),
-	isRoactGamepadEnabled = tModule.optional(tModule.boolean)
+﻿local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local Parent2 = Parent1.Parent
+local RoactGamepadModule = require(Parent2.RoactGamepad)
+local RoactModule = require(Parent2.Roact)
+local ReactModule = require(Parent2.React)
+local CryoModule = require(Parent2.Cryo)
+local TModule = require(Parent2.t)
+local WithStyleModule = require(Parent1.Core.Style.withStyle)
+local UseStyleModule = require(Parent1.Core.Style.useStyle)
+local ImageSetComponentModule = require(Parent1.Core.ImageSet.ImageSetComponent)
+local VerticalScrollViewModule = require(Parent.Container.VerticalScrollView)
+local WithSelectionCursorProviderModule = require(Parent.SelectionImage.withSelectionCursorProvider)
+local CursorKindModule = require(Parent.SelectionImage.CursorKind)
+local SetDefaultModule = require(Parent1.Utility.setDefault)
+local CellModule = require(script.Parent.Cell)
+local RoundedFrameModule = require(script.Parent.RoundedFrame)
+local StyleDefaultsModule = require(script.Parent.StyleDefaults)
+local ComponentAssetsDropshadow178 = require(Parent.ImageSet.Images)["component_assets/dropshadow_17_8"]
+local BaseMenu = RoactModule.PureComponent:extend("BaseMenu")
+BaseMenu.validateProps = TModule.strictInterface({
+	buttonProps = require(script.Parent.validateButtonProps),
+	width = TModule.optional(TModule.UDim),
+	position = TModule.optional(TModule.union(TModule.UDim2, TModule.table)),
+	anchorPoint = TModule.optional(TModule.Vector2),
+	layoutOrder = TModule.optional(TModule.number),
+	topElementRounded = TModule.optional(TModule.boolean),
+	bottomElementRounded = TModule.optional(TModule.boolean),
+	setFirstItemRef = TModule.optional(TModule.union(TModule.callback, TModule.table)),
+	setFrameRef = TModule.optional(TModule.union(TModule.callback, TModule.table)),
+	stayOnActivated = TModule.optional(TModule.boolean),
+	maxHeight = TModule.optional(TModule.number),
+	showDropShadow = TModule.optional(TModule.boolean),
+	fixedListHeight = TModule.optional(TModule.number),
+	isElementBackgroundVisible = TModule.optional(TModule.boolean),
+	isElementDividerVisible = TModule.optional(TModule.boolean),
+	elementHeight = TModule.optional(TModule.number),
+	borderCornerRadius = TModule.optional(TModule.integer),
+	background = TModule.optional((require(Parent1.Core.Style.Validator.validateColorInfo))),
+	enableTokenOverride = TModule.optional(TModule.boolean),
+	renderHeader = TModule.optional(TModule.callback),
+	headerHeight = TModule.optional(TModule.number),
+	selectionOrder = TModule.optional(TModule.number),
+	isRoactGamepadEnabled = TModule.optional(TModule.boolean)
 })
-baseMenu.defaultProps = {
+BaseMenu.defaultProps = {
 	topElementRounded = true,
 	bottomElementRounded = true,
 	showDropShadow = false,
@@ -62,228 +59,219 @@ baseMenu.defaultProps = {
 	position = UDim2.new(0, 0, 0, 0)
 }
 
-function baseMenu.init(p1)
-	-- upvalues: roactGamepadModule (ref)
-	p1.gamepadRefs = p1.props.isRoactGamepadEnabled and roactGamepadModule.createRefCache() or {}
+function BaseMenu.init(p1) --[[ Line: 98 ]]
+	-- upvalues: RoactGamepadModule (copy)
+	p1.gamepadRefs = p1.props.isRoactGamepadEnabled and RoactGamepadModule.createRefCache() or {}
 end
 
-function baseMenu.renderFixedHeightMenu(_, p1, p2, p3)
-	-- upvalues: setDefaultModule (ref), roactModule (ref), imageSetComponentModule (ref), dropshadow178 (ref), verticalScrollViewModule (ref)
-	local fixedListHeight = p1.fixedListHeight
-	local var1 = setDefaultModule(p1.borderCornerRadius, 8)
-	local backgroundUIDefault = p2.Theme.BackgroundUIDefault
-	local var2 = setDefaultModule(p1.background, {
-		Color = backgroundUIDefault.Color,
-		Transparency = backgroundUIDefault.Transparency
+function BaseMenu:renderFixedHeightMenu(DefaultProps, p1, p2) --[[ Line: 102 ]]
+	-- upvalues: SetDefaultModule (copy), RoactModule (copy), ImageSetComponentModule (copy), ComponentAssetsDropshadow178 (copy), VerticalScrollViewModule (copy)
+	local FixedListHeight = DefaultProps.fixedListHeight
+	local SetDefaultModuleResult = SetDefaultModule(DefaultProps.borderCornerRadius, 8)
+	local BackgroundUIDefault = p1.Theme.BackgroundUIDefault
+	local SetDefaultModuleResult1 = SetDefaultModule(DefaultProps.background, {
+		Color = BackgroundUIDefault.Color,
+		Transparency = BackgroundUIDefault.Transparency
 	})
 	
-	return roactModule.createElement("Frame", {
+	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		AnchorPoint = p1.anchorPoint,
-		LayoutOrder = p1.layoutOrder,
-		Size = UDim2.new(p1.width.Scale, p1.width.Offset, 0, fixedListHeight),
-		Position = p1.position
+		AnchorPoint = DefaultProps.anchorPoint,
+		LayoutOrder = DefaultProps.layoutOrder,
+		Size = UDim2.new(DefaultProps.width.Scale, DefaultProps.width.Offset, 0, FixedListHeight),
+		Position = DefaultProps.position
 	}, {
-		DropShadow = p1.showDropShadow and roactModule.createElement(imageSetComponentModule.Label, {
+		DropShadow = DefaultProps.showDropShadow and RoactModule.createElement(ImageSetComponentModule.Label, {
 			ZIndex = 2,
 			BackgroundTransparency = 1,
 			Position = UDim2.new(0.5, 0, 0.5, 0),
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			Size = UDim2.new(1, 16, 1, 16),
-			Image = dropshadow178,
-			ImageColor3 = p2.Theme.DropShadow.Color,
-			ImageTransparency = p2.Theme.DropShadow.Transparency,
+			Image = ComponentAssetsDropshadow178,
+			ImageColor3 = p1.Theme.DropShadow.Color,
+			ImageTransparency = p1.Theme.DropShadow.Transparency,
 			ScaleType = Enum.ScaleType.Slice,
 			SliceCenter = Rect.new(16, 16, 16, 16)
 		}) or nil,
-		ContentFrame = roactModule.createElement("Frame", {
+		ContentFrame = RoactModule.createElement("Frame", {
 			ZIndex = 3,
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			Size = UDim2.new(1, 0, 1, 0),
 			Position = UDim2.new(0.5, 0, 0.5, 0),
-			BackgroundColor3 = var2.Color,
-			BackgroundTransparency = var2.Transparency
+			BackgroundColor3 = SetDefaultModuleResult1.Color,
+			BackgroundTransparency = SetDefaultModuleResult1.Transparency
 		}, {
-			UICorner = roactModule.createElement("UICorner", { CornerRadius = UDim.new(0, var1) }),
-			ClippingFrame = roactModule.createElement("Frame", {
+			UICorner = RoactModule.createElement("UICorner", { CornerRadius = UDim.new(0, SetDefaultModuleResult) }),
+			ClippingFrame = RoactModule.createElement("Frame", {
 				ZIndex = 4,
 				BackgroundTransparency = 1,
 				ClipsDescendants = true,
-				Size = UDim2.new(1, 0, 1, -var1 * 2),
+				Size = UDim2.new(1, 0, 1, -SetDefaultModuleResult * 2),
 				Position = UDim2.new(0, 0, 0.5, 0),
 				AnchorPoint = Vector2.new(0, 0.5)
 			}, {
-				ScrollingFrame = roactModule.createElement(verticalScrollViewModule, {
+				ScrollingFrame = RoactModule.createElement(VerticalScrollViewModule, {
 					selectable = false,
-					canvasSizeY = UDim.new(0, #p1.buttonProps * p1.elementHeight)
-				}, p3)
+					canvasSizeY = UDim.new(0, #DefaultProps.buttonProps * DefaultProps.elementHeight)
+				}, p2)
 			})
 		})
 	})
 end
 
-function baseMenu.render(p1)
-	-- upvalues: cryoModule (ref), roactModule (ref), cursorKindModule (ref), withSelectionCursorProviderModule (ref), roactGamepadModule (ref), cellModule (ref), withStyleModule (ref), setDefaultModule (ref), imageSetComponentModule (ref), dropshadow178 (ref), roundedFrameModule (ref)
-	local headerHeight = p1.props.headerHeight
-	local var1 = p1.props.elementHeight * 7.5 + headerHeight
-	local var2 = #p1.props.buttonProps * p1.props.elementHeight + headerHeight
-	local var3 = false
+function BaseMenu.render(p1) --[[ Line: 157 ]]
+	-- upvalues: CryoModule (copy), RoactModule (copy), CursorKindModule (copy), WithSelectionCursorProviderModule (copy), RoactGamepadModule (copy), CellModule (copy), WithStyleModule (copy), SetDefaultModule (copy), ImageSetComponentModule (copy), ComponentAssetsDropshadow178 (copy), RoundedFrameModule (copy)
+	local HeaderHeight = p1.props.headerHeight
+	local NewElementHeight = p1.props.elementHeight * 7.5 + HeaderHeight
+	local NewElementHeight1 = #p1.props.buttonProps * p1.props.elementHeight + HeaderHeight
+	local Flag = false
 	
-	if var1 <= var2 then
-		var2 = var1
-		var3 = true
+	if NewElementHeight <= NewElementHeight1 then
+		NewElementHeight1 = NewElementHeight
+		Flag = true
 	end
-	local maxHeight = p1.props.maxHeight
+	local MaxHeight: number = p1.props.maxHeight
 	
-	if maxHeight and maxHeight > 0 and maxHeight < var2 then
-		var2 = (math.max(math.floor((maxHeight - p1.props.elementHeight * 0.5 - headerHeight) / p1.props.elementHeight), 1) + 0.5) * p1.props.elementHeight + headerHeight
-		var3 = true
+	if MaxHeight and MaxHeight > 0 and MaxHeight < NewElementHeight1 then
+		NewElementHeight1 = (math.max(math.floor((MaxHeight - p1.props.elementHeight * 0.5 - HeaderHeight) / p1.props.elementHeight), 1) + 0.5) * p1.props.elementHeight + HeaderHeight
+		Flag = true
 	end
 	local t = {}
 	
-	for i, v in ipairs(p1.props.buttonProps) do
-		local var4
-		local join = cryoModule.Dictionary.join
-		local var5 = v
-		local t_1 = {
+	for LayoutOrder, buttonProp in ipairs(p1.props.buttonProps) do
+		local JoinResult = CryoModule.Dictionary.join(buttonProp, {
 			elementHeight = p1.props.elementHeight,
-			hasRoundTop = p1.props.topElementRounded and (i == 1 and not var3),
-			hasRoundBottom = p1.props.bottomElementRounded and (i == #p1.props.buttonProps and not var3)
-		}
-		
-		if p1.props.isElementDividerVisible then
-			var4 = i < #p1.props.buttonProps
-			var4 = nil
-		else
-			var4 = false
-		end
-		t_1.hasDivider = var4
-		t_1.layoutOrder = i
-		t_1.inputBindingKey = cryoModule.None
-		t_1.setButtonRef = if i == 1 then p1.props.setFirstItemRef else nil
-		t_1.isElementBackgroundVisible = p1.props.isElementBackgroundVisible
-		t_1.borderCornerRadius = p1.props.borderCornerRadius
-		t_1.background = p1.props.background
-		join = join(var5, t_1)
+			hasRoundTop = p1.props.topElementRounded and (LayoutOrder == 1 and not Flag),
+			hasRoundBottom = p1.props.bottomElementRounded and (LayoutOrder == #p1.props.buttonProps and not Flag),
+			hasDivider = if p1.props.isElementDividerVisible then LayoutOrder < #p1.props.buttonProps else false,
+			layoutOrder = LayoutOrder,
+			inputBindingKey = CryoModule.None,
+			setButtonRef = LayoutOrder == 1 and p1.props.setFirstItemRef or nil,
+			isElementBackgroundVisible = p1.props.isElementBackgroundVisible,
+			borderCornerRadius = p1.props.borderCornerRadius,
+			background = p1.props.background
+		})
 		
 		if not p1.props.isRoactGamepadEnabled then
-			p1.gamepadRefs[i] = p1.gamepadRefs[i] or roactModule.createRef()
+			p1.gamepadRefs[LayoutOrder] = p1.gamepadRefs[LayoutOrder] or RoactModule.createRef()
 		end
-		local _ = nil
-		local var6 = if join.hasRoundBottom and join.hasRoundTop then cursorKindModule.RoundedRectNoInset elseif join.hasRoundBottom then cursorKindModule.BulletDown elseif join.hasRoundTop then cursorKindModule.BulletUp else cursorKindModule.Square
-		join = cryoModule.Dictionary.join(join, {
-			cursorKind = var6,
+		local RoundedRectNoInset = nil
+		RoundedRectNoInset = if JoinResult.hasRoundBottom and JoinResult.hasRoundTop then CursorKindModule.RoundedRectNoInset elseif JoinResult.hasRoundBottom then CursorKindModule.BulletDown elseif JoinResult.hasRoundTop then CursorKindModule.BulletUp else CursorKindModule.Square
+		local JoinResult1 = CryoModule.Dictionary.join(JoinResult, {
+			cursorKind = RoundedRectNoInset,
 			selectionOrder = p1.props.selectionOrder
 		})
-		t["cell " .. i] = withSelectionCursorProviderModule(function(p2)
-			-- upvalues: roactModule (copy), p1 (ref), roactGamepadModule (copy), i (ref), v (ref), var6 (write), cellModule (copy), join (write)
-			return roactModule.createElement(if p1.props.isRoactGamepadEnabled then roactGamepadModule.Focusable.Frame else "Frame", {
+		t["cell " .. LayoutOrder] = WithSelectionCursorProviderModule(function(Callback) --[[ Line: 212 ]]
+			-- upvalues: RoactModule (upval), p1 (copy), RoactGamepadModule (upval), LayoutOrder (copy), buttonProp (copy), RoundedRectNoInset (ref), CellModule (upval), JoinResult1 (ref)
+			return RoactModule.createElement(if p1.props.isRoactGamepadEnabled then RoactGamepadModule.Focusable.Frame else "Frame", {
 				Size = UDim2.new(p1.props.width, UDim.new(0, p1.props.elementHeight)),
 				BackgroundTransparency = 1,
-				LayoutOrder = i,
-				[roactModule.Ref] = p1.gamepadRefs[i],
-				NextSelectionUp = if i > 1 then p1.gamepadRefs[i - 1] else nil,
-				NextSelectionDown = if i < #p1.props.buttonProps then p1.gamepadRefs[i + 1] else nil,
+				LayoutOrder = LayoutOrder,
+				[RoactModule.Ref] = p1.gamepadRefs[LayoutOrder],
+				NextSelectionUp = LayoutOrder > 1 and p1.gamepadRefs[LayoutOrder - 1] or nil,
+				NextSelectionDown = LayoutOrder < #p1.props.buttonProps and p1.gamepadRefs[LayoutOrder + 1] or nil,
 				inputBindings = if p1.props.isRoactGamepadEnabled then {
-					Activated = roactGamepadModule.Input.onBegin(Enum.KeyCode.ButtonA, v.onActivated, { key = v.inputBindingKey })
+					Activated = RoactGamepadModule.Input.onBegin(Enum.KeyCode.ButtonA, buttonProp.onActivated, { key = buttonProp.inputBindingKey })
 				} else nil,
-				SelectionImageObject = p2(var6)
-			}, { Cell = roactModule.createElement(cellModule, join) })
+				SelectionImageObject = Callback(RoundedRectNoInset)
+			}, {
+				Cell = RoactModule.createElement(CellModule, JoinResult1)
+			})
 		end)
 	end
-	t.layout = roactModule.createElement("UIListLayout", {
+	t.layout = RoactModule.createElement("UIListLayout", {
 		HorizontalAlignment = Enum.HorizontalAlignment.Center,
 		FillDirection = Enum.FillDirection.Vertical,
 		SortOrder = Enum.SortOrder.LayoutOrder
 	})
 	
-	return withStyleModule(function(p2)
-		-- upvalues: setDefaultModule (copy), p1 (ref), var3 (write), t (ref), roactModule (copy), var2 (write), imageSetComponentModule (copy), dropshadow178 (copy), roundedFrameModule (copy), headerHeight (ref)
-		local theme = p2.Theme
-		local backgroundUIDefault = theme.BackgroundUIDefault
-		local var7 = setDefaultModule(p1.props.background, {
-			Color = backgroundUIDefault.Color,
-			Transparency = backgroundUIDefault.Transparency
+	return WithStyleModule(function(p2) --[[ Line: 245 ]]
+		-- upvalues: SetDefaultModule (upval), p1 (copy), Flag (ref), t (copy), RoactModule (upval), NewElementHeight1 (ref), ImageSetComponentModule (upval), ComponentAssetsDropshadow178 (upval), RoundedFrameModule (upval), HeaderHeight (copy)
+		local Theme = p2.Theme
+		local BackgroundUIDefault = Theme.BackgroundUIDefault
+		local SetDefaultModuleResult = SetDefaultModule(p1.props.background, {
+			Color = BackgroundUIDefault.Color,
+			Transparency = BackgroundUIDefault.Transparency
 		})
-		local isElementBackgroundVisible = p1.props.isElementBackgroundVisible
-		local isElementBackgroundVisible_1 = var3 and (p1.props.topElementRounded and isElementBackgroundVisible)
-		local isElementBackgroundVisible_2 = var3 and (p1.props.bottomElementRounded and isElementBackgroundVisible)
-		local var8 = (if isElementBackgroundVisible_1 then 1 else 0) + (if isElementBackgroundVisible_2 then 1 else 0)
-		local renderHeader = p1.props.renderHeader
-		local var9 = if isElementBackgroundVisible_1 or not renderHeader then false else true
+		local IsElementBackgroundVisible = p1.props.isElementBackgroundVisible
+		local IsElementBackgroundVisible1 = Flag and (p1.props.topElementRounded and IsElementBackgroundVisible)
+		local IsElementBackgroundVisible2 = Flag and (p1.props.bottomElementRounded and IsElementBackgroundVisible)
+		local v1 = (if IsElementBackgroundVisible1 then 1 else 0) + (if IsElementBackgroundVisible2 then 1 else 0)
+		local RenderHeaderFunction = p1.props.renderHeader
+		local RenderHeaderFunction1 = not IsElementBackgroundVisible1 and RenderHeaderFunction
 		
-		return if p1.props.fixedListHeight then p1:renderFixedHeightMenu(p1.props, p2, t) else roactModule.createElement("Frame", {
+		return if p1.props.fixedListHeight then p1:renderFixedHeightMenu(p1.props, p2, t) else RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			AnchorPoint = p1.props.anchorPoint,
 			LayoutOrder = p1.props.layoutOrder,
-			Size = UDim2.new(p1.props.width.Scale, p1.props.width.Offset, 0, var2),
+			Size = UDim2.new(p1.props.width.Scale, p1.props.width.Offset, 0, NewElementHeight1),
 			Position = p1.props.position
 		}, {
-			DropShadow = p1.props.showDropShadow and roactModule.createElement(imageSetComponentModule.Label, {
+			DropShadow = p1.props.showDropShadow and RoactModule.createElement(ImageSetComponentModule.Label, {
 				ZIndex = 2,
 				BackgroundTransparency = 1,
 				Position = UDim2.new(0.5, 0, 0.5, 0),
 				AnchorPoint = Vector2.new(0.5, 0.5),
 				Size = UDim2.new(1, 16, 1, 16),
-				Image = dropshadow178,
+				Image = ComponentAssetsDropshadow178,
 				ImageColor3 = p2.Theme.DropShadow.Color,
 				ImageTransparency = p2.Theme.DropShadow.Transparency,
 				ScaleType = Enum.ScaleType.Slice,
 				SliceCenter = Rect.new(16, 16, 16, 16)
 			}) or nil,
-			Background = if isElementBackgroundVisible_1 or isElementBackgroundVisible_2 then roactModule.createElement(roundedFrameModule, {
+			Background = if IsElementBackgroundVisible1 or IsElementBackgroundVisible2 then RoactModule.createElement(RoundedFrameModule, {
 				zIndex = -1,
-				background = var7,
-				topCornerRadius = if isElementBackgroundVisible_1 then UDim.new(0, p1.props.borderCornerRadius) else nil,
-				bottomCornerRadius = if isElementBackgroundVisible_2 then UDim.new(0, p1.props.borderCornerRadius) else nil
+				background = SetDefaultModuleResult,
+				topCornerRadius = if IsElementBackgroundVisible1 then UDim.new(0, p1.props.borderCornerRadius) else nil,
+				bottomCornerRadius = if IsElementBackgroundVisible2 then UDim.new(0, p1.props.borderCornerRadius) else nil
 			}) else nil,
-			ClippingFrame = roactModule.createElement("Frame", {
+			ClippingFrame = RoactModule.createElement("Frame", {
 				ZIndex = 3,
 				BackgroundTransparency = 1,
 				ClipsDescendants = true,
-				Size = UDim2.new(1, 0, 1, -(p1.props.borderCornerRadius * var8)),
-				Position = UDim2.fromScale(0, if isElementBackgroundVisible_1 then 0.5 else 0),
-				AnchorPoint = Vector2.new(0, if isElementBackgroundVisible_1 then 0.5 else 0)
+				Size = UDim2.new(1, 0, 1, -(p1.props.borderCornerRadius * v1)),
+				Position = UDim2.fromScale(0, if IsElementBackgroundVisible1 then 0.5 else 0),
+				AnchorPoint = Vector2.new(0, if IsElementBackgroundVisible1 then 0.5 else 0)
 			}, {
-				HeaderFrame = if var9 then roactModule.createElement("Frame", {
+				HeaderFrame = if RenderHeaderFunction1 then RoactModule.createElement("Frame", {
 					Selectable = false,
 					BackgroundTransparency = 1,
 					BorderSizePixel = 0,
-					Size = UDim2.new(1, 0, 0, headerHeight),
+					Size = UDim2.new(1, 0, 0, HeaderHeight),
 					Position = UDim2.fromOffset(0, 0),
 					AnchorPoint = Vector2.new(0, 0)
-				}, { Header = renderHeader() }) else nil,
-				ScrollingFrame = roactModule.createElement("ScrollingFrame", {
-					[roactModule.Ref] = p1.props.setFrameRef,
+				}, { Header = RenderHeaderFunction() }) else nil,
+				ScrollingFrame = RoactModule.createElement("ScrollingFrame", {
+					[RoactModule.Ref] = p1.props.setFrameRef,
 					Selectable = false,
 					BackgroundTransparency = 1,
-					Size = UDim2.new(1, if isElementBackgroundVisible_1 then -4 else 0, 1, if var9 then -headerHeight else 0),
-					Position = if var9 then UDim2.fromOffset(0, headerHeight) else nil,
+					Size = UDim2.new(1, if IsElementBackgroundVisible1 then -4 else 0, 1, if RenderHeaderFunction1 then -HeaderHeight else 0),
+					Position = if RenderHeaderFunction1 then UDim2.fromOffset(0, HeaderHeight) else nil,
 					BorderSizePixel = 0,
-					ScrollBarThickness = if var3 then 4 else 0,
-					ScrollBarImageColor3 = theme.UIEmphasis.Color,
-					ScrollBarImageTransparency = theme.UIEmphasis.Transparency,
+					ScrollBarThickness = if Flag then 4 else 0,
+					ScrollBarImageColor3 = Theme.UIEmphasis.Color,
+					ScrollBarImageTransparency = Theme.UIEmphasis.Transparency,
 					ScrollingDirection = Enum.ScrollingDirection.Y,
 					CanvasSize = UDim2.new(1, 0, 0, #p1.props.buttonProps * p1.props.elementHeight),
-					ClipsDescendants = var9
+					ClipsDescendants = RenderHeaderFunction1
 				}, t)
 			})
 		})
 	end)
 end
 
-return function(p2)
-	-- upvalues: useStyleModule (ref), cryoModule (ref), styleDefaultsModule (ref), reactModule (ref), baseMenu (ref)
-	local var7 = p2
+return function(JoinResult) --[[ Line: 341 | Named "BaseMenuFn" ]]
+	-- upvalues: UseStyleModule (copy), CryoModule (copy), StyleDefaultsModule (copy), ReactModule (copy), BaseMenu (copy)
+	local JoinResult1 = JoinResult
 	
-	if p2.enableTokenOverride then
-		local var8 = useStyleModule()
-		local t = {}
+	if JoinResult.enableTokenOverride then
+		local UseStyleModuleResult = UseStyleModule()
+		local ButtonProps = {}
 		
-		for i, v in ipairs(p2.buttonProps) do
-			t[i] = cryoModule.Dictionary.join(v, styleDefaultsModule.getCellDefaultTokens(var8))
+		for i, buttonProp in ipairs(JoinResult.buttonProps) do
+			ButtonProps[i] = CryoModule.Dictionary.join(buttonProp, StyleDefaultsModule.getCellDefaultTokens(UseStyleModuleResult))
 		end
-		var7 = cryoModule.Dictionary.join(var7, styleDefaultsModule.getBaseMenuDefaultTokens(var8), { buttonProps = t })
+		JoinResult1 = CryoModule.Dictionary.join(JoinResult1, StyleDefaultsModule.getBaseMenuDefaultTokens(UseStyleModuleResult), { buttonProps = ButtonProps })
 	end
-	return reactModule.createElement(baseMenu, var7)
+	return ReactModule.createElement(BaseMenu, JoinResult1)
 end

@@ -1,10 +1,10 @@
-﻿return function(p1)
+﻿return function(p1) --[[ Line: 2 | Named "ShareTargetGamePolicies" ]]
 	return {
-		shouldShowCreatorName = function()
-			-- upvalues: p1 (ref)
-			local showShareTargetGameCreator = p1.ShowShareTargetGameCreator
+		shouldShowCreatorName = function() --[[ Line: 4 ]]
+			-- upvalues: p1 (copy)
+			local ShowShareTargetGameCreator = p1.ShowShareTargetGameCreator
 			
-			return if showShareTargetGameCreator == nil then false else showShareTargetGameCreator
+			return ShowShareTargetGameCreator ~= nil and ShowShareTargetGameCreator
 		end
 	}
 end

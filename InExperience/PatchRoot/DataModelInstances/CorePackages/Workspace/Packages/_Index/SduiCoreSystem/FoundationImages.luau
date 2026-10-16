@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.FoundationImages.FoundationImages)
+﻿return (require(script.Parent.Parent.Parent._Index.FoundationImages.FoundationImages))

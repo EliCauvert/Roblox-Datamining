@@ -1,12 +1,12 @@
-﻿local cryoModule = require(script:FindFirstAncestor("SduiSharedUtilities").Parent.Cryo)
+﻿local CryoModule = require(script:FindFirstAncestor("SduiSharedUtilities").Parent.Cryo)
 
-return function(p1, p2)
-	-- upvalues: cryoModule (ref)
-	local var1 = cryoModule.Dictionary.join(p2 or {}, {})
+return function(List, p1) --[[ Line: 7 | Named "accumulateSduiCacheSubEntries" ]]
+	-- upvalues: CryoModule (copy)
+	local JoinResult = CryoModule.Dictionary.join(p1 or {}, {})
 	
-	for i, v in p1 do
-		local var2 = var1[i]
-		var1[i] = if var2 then cryoModule.Dictionary.join(var2, v) else v
+	for i, value in List do
+		local JoinResultEntry = JoinResult[i]
+		JoinResult[i] = if JoinResultEntry then CryoModule.Dictionary.join(JoinResultEntry, value) else value
 	end
-	return var1
+	return JoinResult
 end

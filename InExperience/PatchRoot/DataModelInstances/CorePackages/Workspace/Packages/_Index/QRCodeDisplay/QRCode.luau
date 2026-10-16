@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.QRCode.QRCode)
+﻿return (require(script.Parent.Parent.Parent._Index.QRCode.QRCode))

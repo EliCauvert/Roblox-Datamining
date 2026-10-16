@@ -1,34 +1,38 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local _ = require(foundation.Enums.DialogSize)
-local useOverlayModule = require(foundation.Providers.Overlay.useOverlay)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local getResponsiveSizeModule = require(script.Parent.getResponsiveSize)
-local useDialogModule = require(script.Parent.useDialog)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local _ = require(Foundation.Enums.DialogSize)
+local UseOverlayModule = require(Foundation.Providers.Overlay.useOverlay)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local GetResponsiveSizeModule = require(script.Parent.getResponsiveSize)
+local UseDialogModule = require(script.Parent.useDialog)
 
-return function(p1)
-	-- upvalues: useTokensModule (ref), useOverlayModule (ref), useDialogModule (ref), reactModule (ref), getResponsiveSizeModule (ref)
-	local var1 = useTokensModule()
-	local var2 = useOverlayModule()
-	local var3 = useDialogModule()
-	local var4 = reactModule.useCallback(function()
-		-- upvalues: var2 (ref), var3 (ref), getResponsiveSizeModule (copy), p1 (ref), var1 (ref)
-		if var2 then
-			var3.setResponsiveSize(getResponsiveSizeModule(var2.AbsoluteSize.X, p1, var1))
+return function(p1) --[[ Line: 16 | Named "useDialogResponsiveSize" ]]
+	-- upvalues: UseTokensModule (copy), UseOverlayModule (copy), UseDialogModule (copy), ReactModule (copy), GetResponsiveSizeModule (copy)
+	local UseTokensModuleResult = UseTokensModule()
+	local UseOverlayModuleResult = UseOverlayModule()
+	local UseDialogModuleResult = UseDialogModule()
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 21 ]]
+		-- upvalues: UseOverlayModuleResult (copy), UseDialogModuleResult (copy), GetResponsiveSizeModule (upval), p1 (copy), UseTokensModuleResult (copy)
+		if UseOverlayModuleResult then
+			UseDialogModuleResult.setResponsiveSize(GetResponsiveSizeModule(UseOverlayModuleResult.AbsoluteSize.X, p1, UseTokensModuleResult))
 			
 			return
 		end
-	end, { var2, p1, var1, var3.size })
-	reactModule.useLayoutEffect(function()
-		-- upvalues: var2 (ref), var4 (ref)
-		if var2 then
-			var4()
-			local var5 = var2:GetPropertyChangedSignal("AbsoluteSize"):Connect(var4)
-			
-			return function()
-				-- upvalues: var5 (ref)
-				var5:Disconnect()
-			end
+	end, {
+		UseOverlayModuleResult,
+		p1,
+		UseTokensModuleResult,
+		UseDialogModuleResult.size
+	})
+	ReactModule.useLayoutEffect(function() --[[ Line: 28 ]]
+		-- upvalues: UseOverlayModuleResult (copy), UseResult (copy)
+		if not UseOverlayModuleResult then return end
+		UseResult()
+		local Connection = UseOverlayModuleResult:GetPropertyChangedSignal("AbsoluteSize"):Connect(UseResult)
+		
+		return function() --[[ Line: 37 ]]
+			-- upvalues: Connection (copy)
+			Connection:Disconnect()
 		end
-	end, { var2, p1, var4 })
+	end, { UseOverlayModuleResult, p1, UseResult })
 end

@@ -1,5 +1,5 @@
-﻿return function(value, p1)
-	local var1 = p1.AbsolutePosition + p1.AbsoluteSize / 2
+﻿return function(p1, Frame: Frame): Vector2 --[[ Line: 3 | Named "RotatePointAroundObject" ]]
+	local NewAbsolutePosition = Frame.AbsolutePosition + Frame.AbsoluteSize / 2
 	
-	return Vector2.new(math.cos(math.rad(p1.AbsoluteRotation)) * (value - var1).Magnitude + var1.X, math.sin(math.rad(p1.AbsoluteRotation)) * (value - var1).Magnitude + var1.Y)
+	return Vector2.new(math.cos((math.rad(Frame.AbsoluteRotation))) * (p1 - NewAbsolutePosition).Magnitude + NewAbsolutePosition.X, math.sin((math.rad(Frame.AbsoluteRotation))) * (p1 - NewAbsolutePosition).Magnitude + NewAbsolutePosition.Y)
 end

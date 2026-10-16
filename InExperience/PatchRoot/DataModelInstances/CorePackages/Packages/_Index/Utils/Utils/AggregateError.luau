@@ -1,33 +1,30 @@
-﻿local luauPolyfillModule = require(script.Parent.Parent.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local object = luauPolyfillModule.Object
-local error = luauPolyfillModule.Error
-local t = {}
-local _ = nil
-local _ = nil
-local tbl = setmetatable({}, { __index = error })
-tbl.__index = tbl
+﻿local LuauPolyfillModule = require(script.Parent.Parent.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local Object = LuauPolyfillModule.Object
+local Error = LuauPolyfillModule.Error
+local self = nil
+self = setmetatable({}, { __index = Error })
+self.__index = self
 
-function tbl.new(p1, p2)
-	-- upvalues: error (ref), tbl (write)
-	local aggregateError = setmetatable(error.new(if p2 ~= nil then "" else p2), tbl)
-	aggregateError.errors = p1
-	aggregateError.name = "AggregateError"
-	error.captureStackTrace(aggregateError, tbl.new)
+function self.new(Errors, p1) --[[ Line: 47 ]]
+	-- upvalues: Error (copy), self (ref)
+	local self1 = setmetatable(Error.new(if p1 == nil then "" else p1), self)
+	self1.errors = Errors
+	self1.name = "AggregateError"
+	Error.captureStackTrace(self1, self.new)
 	
-	return aggregateError
+	return self1
 end
 
-t.AggregateError = setmetatable(tbl, {
-	__call = function(_, p1, p2)
-		-- upvalues: tbl (write)
-		return tbl.new(p1, p2)
+return {
+	AggregateError = setmetatable(self, {
+		__call = function(_, Errors, p1) --[[ Line: 68 ]]
+			-- upvalues: self (ref)
+			return self.new(Errors, p1)
+		end
+	}),
+	isAggregateError = function(p1) --[[ Line: 86 ]]
+		-- upvalues: Array (copy), Object (copy)
+		return Array.indexOf(Object.keys(p1), "errors") ~= -1 and Array.isArray(p1.errors)
 	end
-})
-
-function t.isAggregateError(p1)
-	-- upvalues: array (ref), object (ref)
-	return array.indexOf(object.keys(p1), "errors") ~= -1 and array.isArray(p1.errors)
-end
-
-return t
+}

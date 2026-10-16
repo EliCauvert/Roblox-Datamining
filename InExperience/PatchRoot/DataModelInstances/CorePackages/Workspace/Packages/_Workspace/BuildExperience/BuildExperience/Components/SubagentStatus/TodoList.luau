@@ -1,40 +1,42 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local creatorAgentChatModule = require(parent.DataHydration.CreatorAgentChat)
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local loadingIndicatorModule = require(script.Parent.LoadingIndicator)
-local list = foundationModule.List
-local view = foundationModule.View
-local inputSize = foundationModule.Enums.InputSize
-local subagentTaskStatus = creatorAgentChatModule.SubagentTaskStatus
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local LoadingIndicatorModule = require(script.Parent.LoadingIndicator)
+local List = FoundationModule.List
+local View = FoundationModule.View
+local InputSize = FoundationModule.Enums.InputSize
+local SubagentTaskStatus = require(Parent.DataHydration.CreatorAgentChat).SubagentTaskStatus
 
-local function createTrailingIndicator(p1, p2)
-	-- upvalues: subagentTaskStatus (ref), reactModule (ref), view (ref), loadingIndicatorModule (ref)
-	return if p1.status == nil or p1.status == subagentTaskStatus.Pending then nil else reactModule.createElement(view, { tag = "auto-xy" }, {
-		Indicator = reactModule.createElement(loadingIndicatorModule, { status = p1.status, testId = `{p2}-loading-indicator` })
+local function createTrailingIndicator(p1, TestId) --[[ Line: 34 ]]
+	-- upvalues: SubagentTaskStatus (copy), ReactModule (copy), View (copy), LoadingIndicatorModule (copy)
+	return if p1.status == nil or p1.status == SubagentTaskStatus.Pending then nil else ReactModule.createElement(View, { tag = "auto-xy" }, {
+		Indicator = ReactModule.createElement(LoadingIndicatorModule, {
+			status = p1.status,
+			testId = `{TestId}-loading-indicator`
+		})
 	})
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), list (ref), createTrailingIndicator (ref), inputSize (ref)
-	local testId = p1.testId or "subagent-status-list"
-	local t = {}
+return ReactModule.memo(function(p1) --[[ Line: 49 | Named "TodoList" ]]
+	-- upvalues: ReactModule (copy), List (copy), createTrailingIndicator (copy), InputSize (copy)
+	local TestId = p1.testId or "subagent-status-list"
+	local Elements = {}
 	
-	for i, v in p1.items do
-		local testId_1 = v.testId or `{testId}-item-{i}`
-		t[`Item{i}`] = reactModule.createElement(list.Item, {
-			LayoutOrder = i,
-			description = v.description,
-			testId = testId_1,
-			title = v.title,
-			trailing = createTrailingIndicator(v, testId_1)
+	for LayoutOrder, item in p1.items do
+		local TestId1 = item.testId or `{TestId}-item-{LayoutOrder}`
+		Elements[`Item{LayoutOrder}`] = ReactModule.createElement(List.Item, {
+			LayoutOrder = LayoutOrder,
+			description = item.description,
+			testId = TestId1,
+			title = item.title,
+			trailing = createTrailingIndicator(item, TestId1)
 		})
 	end
-	return reactModule.createElement(list.Root, {
+	return ReactModule.createElement(List.Root, {
 		hasDivider = false,
 		LayoutOrder = p1.layoutOrder,
 		isContained = { isContained = false, hasMargin = false },
-		size = inputSize.Medium,
-		testId = testId
-	}, t)
+		size = InputSize.Medium,
+		testId = TestId
+	}, Elements)
 end)

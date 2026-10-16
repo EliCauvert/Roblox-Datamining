@@ -1,36 +1,37 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local getDeepValueModule = require(appChat.Utils.getDeepValue)
-local populateConversationWithStateModule = require(appChat.Conversations.populateConversationWithState)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local GetDeepValueModule = require(AppChat.Utils.getDeepValue)
+local PopulateConversationWithStateModule = require(AppChat.Conversations.populateConversationWithState)
 
-local function conversationSortPredicate(p1, p2)
-	return if p1.unixTime and p2.unixTime then p2.unixTime < p1.unixTime elseif p1.unixTime or p2.unixTime then (p1.unixTime or p2.unixTime) == p1.unixTime else string.lower(p1.title) < string.lower(p2.title)
+local function conversationSortPredicate(A, B): boolean --[[ Line: 7 ]]
+	return if A.unixTime and B.unixTime then B.unixTime < A.unixTime elseif A.unixTime or B.unixTime then (A.unixTime or B.unixTime) == A.unixTime else string.lower(A.title) < string.lower(B.title)
 end
 
-local var1 = nil
-local var2 = nil
+local ChatAppReducerConversations = nil
+local v1 = nil
 
-return function(p1)
-	-- upvalues: getDeepValueModule (ref), var1 (write), var2 (write), populateConversationWithStateModule (ref), conversationSortPredicate (ref)
-	local var3 = getDeepValueModule(p1, "ChatAppReducer.Conversations")
+return function(p1) --[[ Line: 19 ]]
+	-- upvalues: GetDeepValueModule (copy), ChatAppReducerConversations (ref), v1 (ref), PopulateConversationWithStateModule (copy), conversationSortPredicate (copy)
+	local ChatAppReducerConversations1 = GetDeepValueModule(p1, "ChatAppReducer.Conversations")
 	
-	if not var3 then
+	if not ChatAppReducerConversations1 then
 		return {}
 	end
-	local var4 = getDeepValueModule(p1, "ChatAppReducer.ConversationsAsync.latestMessagesIsFetching")
+	local ChatAppReducerConversationsAsyncLatestMessagesIsFetching = GetDeepValueModule(p1, "ChatAppReducer.ConversationsAsync.latestMessagesIsFetching")
 	
-	if var3 == var1 then
-		return var2
-	elseif var4 and var2 then
-		return var2
+	if ChatAppReducerConversations1 == ChatAppReducerConversations then
+		return v1
 	end
-	local t = {}
-	
-	for i, v in pairs(var3) do
-		table.insert(t, populateConversationWithStateModule(p1, v))
+	if ChatAppReducerConversationsAsyncLatestMessagesIsFetching and v1 then
+		return v1
 	end
-	table.sort(t, conversationSortPredicate)
-	var1 = var3
-	var2 = t
+	local List = {}
 	
-	return t
+	for _, value in pairs(ChatAppReducerConversations1) do
+		table.insert(List, (PopulateConversationWithStateModule(p1, value)))
+	end
+	table.sort(List, conversationSortPredicate)
+	ChatAppReducerConversations = ChatAppReducerConversations1
+	v1 = List
+	
+	return List
 end

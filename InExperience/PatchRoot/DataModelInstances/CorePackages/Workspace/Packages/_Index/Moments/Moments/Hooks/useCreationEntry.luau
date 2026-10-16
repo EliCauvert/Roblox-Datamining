@@ -1,87 +1,91 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
-local reactModule = require(parent.React)
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local setTabBarVisible = require(parent.AppTabBarRodux).Actions.SetTabBarVisible
-local analytics = require(parent.MomentsCommon).Analytics
-local funnelEventNames = analytics.FunnelEventNames
-local createGalleryCaptureSourceModule = require(moments.Capture.createGalleryCaptureSource)
-local isStudioModule = require(parent.MomentsCommon.isStudio)
-local hasGalleryApiModule = require(moments.Capture.hasGalleryApi)
-local logCreationEntryResolvedModule = require(moments.Analytics.logCreationEntryResolved)
-local fFlagMomentsCreationEntryOutcomeModule = require(moments.Flags.FFlagMomentsCreationEntryOutcome)
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
+local ReactModule = require(Parent.React)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local SetTabBarVisibleFunction = require(Parent.AppTabBarRodux).Actions.SetTabBarVisible
+local Analytics = require(Parent.MomentsCommon).Analytics
+local FunnelEventNames = Analytics.FunnelEventNames
+local CreateGalleryCaptureSourceModule = require(Moments.Capture.createGalleryCaptureSource)
+local IsStudioModule = require(Parent.MomentsCommon.isStudio)
+local HasGalleryApiModule = require(Moments.Capture.hasGalleryApi)
+local LogCreationEntryResolvedModule = require(Moments.Analytics.logCreationEntryResolved)
+local FFlagMomentsCreationEntryOutcomeModule = require(Moments.Flags.FFlagMomentsCreationEntryOutcome)
 
-return function(p1)
-	-- upvalues: reactModule (ref), useDispatch (ref), isStudioModule (ref), hasGalleryApiModule (ref), fFlagMomentsCreationEntryOutcomeModule (ref), analytics (ref), funnelEventNames (ref), logCreationEntryResolvedModule (ref), createGalleryCaptureSourceModule (ref), setTabBarVisible (ref)
-	local var1, var2 = reactModule.useState(false)
-	local var3, var4 = reactModule.useState(false)
-	local var5 = reactModule.useRef(nil)
-	local var6 = reactModule.useRef(false)
-	local var7 = useDispatch()
-	local var8 = if p1 ~= nil then p1.manageTabBarVisibility ~= false else true
-	local var9 = isStudioModule() or not hasGalleryApiModule()
-	local var10 = reactModule.useCallback(function()
-		-- upvalues: fFlagMomentsCreationEntryOutcomeModule (copy), analytics (copy), funnelEventNames (copy), var9 (ref), var2 (ref), logCreationEntryResolvedModule (copy), var6 (ref), var5 (ref), createGalleryCaptureSourceModule (copy), var4 (ref)
-		local var11 = if fFlagMomentsCreationEntryOutcomeModule then analytics.SessionManager.getSessionId(funnelEventNames.FunnelTypes.CreationFlow) else nil
+return function(p1) --[[ Line: 55 | Named "useCreationEntry" ]]
+	-- upvalues: ReactModule (copy), UseDispatchFunction (copy), IsStudioModule (copy), HasGalleryApiModule (copy), FFlagMomentsCreationEntryOutcomeModule (copy), Analytics (copy), FunnelEventNames (copy), LogCreationEntryResolvedModule (copy), CreateGalleryCaptureSourceModule (copy), SetTabBarVisibleFunction (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(false)
+	local UseDispatchResult = UseDispatchFunction()
+	local v1: boolean = p1 == nil or p1.manageTabBarVisibility ~= false
+	local IsStudioModule1 = IsStudioModule()
+	local HasGalleryApiModule1 = HasGalleryApiModule()
+	local IsStudioModule1_1 = IsStudioModule1 or not HasGalleryApiModule1
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 72 ]]
+		-- upvalues: FFlagMomentsCreationEntryOutcomeModule (upval), Analytics (upval), FunnelEventNames (upval), IsStudioModule1_1 (copy), UseStateResult2 (copy), LogCreationEntryResolvedModule (upval), UseRefResult1 (copy), UseRefResult (copy), CreateGalleryCaptureSourceModule (upval), UseStateResult2_1 (copy)
+		local SessionId = if FFlagMomentsCreationEntryOutcomeModule then Analytics.SessionManager.getSessionId(FunnelEventNames.FunnelTypes.CreationFlow) else nil
 		
-		if var9 then
-			var2(true)
+		if IsStudioModule1_1 then
+			UseStateResult2(true)
 			
-			if fFlagMomentsCreationEntryOutcomeModule then
-				logCreationEntryResolvedModule.log(logCreationEntryResolvedModule.Outcome.GalleryUnavailable, var11)
+			if FFlagMomentsCreationEntryOutcomeModule then
+				LogCreationEntryResolvedModule.log(LogCreationEntryResolvedModule.Outcome.GalleryUnavailable, SessionId)
 			end
 			return
-		elseif not var6.current then
-			var6.current = true
-			task.spawn(function()
-				-- upvalues: var5 (copy), createGalleryCaptureSourceModule (copy), var6 (copy), var4 (copy), var2 (copy), fFlagMomentsCreationEntryOutcomeModule (copy), logCreationEntryResolvedModule (copy), var11 (ref)
-				var5.current = createGalleryCaptureSourceModule(nil, function(p2, p3, p4)
-					-- upvalues: var6 (copy), var4 (copy), var2 (copy), fFlagMomentsCreationEntryOutcomeModule (copy), logCreationEntryResolvedModule (copy), var11 (copy)
-					var6.current = false
+		elseif not UseRefResult1.current then
+			UseRefResult1.current = true
+			task.spawn(function() --[[ Line: 97 ]]
+				-- upvalues: UseRefResult (upval), CreateGalleryCaptureSourceModule (upval), UseRefResult1 (upval), UseStateResult2_1 (upval), UseStateResult2 (upval), FFlagMomentsCreationEntryOutcomeModule (upval), LogCreationEntryResolvedModule (upval), SessionId (copy)
+				UseRefResult.current = CreateGalleryCaptureSourceModule(nil, function(p2, p3, p4) --[[ Line: 98 ]]
+					-- upvalues: UseRefResult1 (upval), UseStateResult2_1 (upval), UseStateResult2 (upval), FFlagMomentsCreationEntryOutcomeModule (upval), LogCreationEntryResolvedModule (upval), SessionId (upval)
+					UseRefResult1.current = false
 					
 					if p3 and #p2 == 0 then
-						var4(true)
+						UseStateResult2_1(true)
 					else
-						var2(true)
+						UseStateResult2(true)
 					end
-					if fFlagMomentsCreationEntryOutcomeModule then
-						logCreationEntryResolvedModule.log(logCreationEntryResolvedModule.resolveGalleryOutcome(p3, #p2, p4), var11)
+					if FFlagMomentsCreationEntryOutcomeModule then
+						LogCreationEntryResolvedModule.log(LogCreationEntryResolvedModule.resolveGalleryOutcome(p3, #p2, p4), SessionId)
 					end
 				end)
 			end)
 			
 			return
-		elseif fFlagMomentsCreationEntryOutcomeModule then
-			logCreationEntryResolvedModule.log(logCreationEntryResolvedModule.Outcome.RequestInFlight, var11)
-		end
-	end, { var9 })
-	reactModule.useEffect(function()
-		-- upvalues: var8 (ref), var1 (ref), var7 (ref), setTabBarVisible (copy)
-		if var8 and var1 then
-			var7(setTabBarVisible(false))
-		end
-		return function()
-			-- upvalues: var8 (copy), var1 (copy), var7 (copy), setTabBarVisible (copy)
-			if var8 and var1 then
-				var7(setTabBarVisible(true))
+		else
+			if FFlagMomentsCreationEntryOutcomeModule then
+				LogCreationEntryResolvedModule.log(LogCreationEntryResolvedModule.Outcome.RequestInFlight, SessionId)
 			end
 		end
-	end, { var1, var7, var8 })
+	end, { IsStudioModule1_1 })
+	ReactModule.useEffect(function() --[[ Line: 115 ]]
+		-- upvalues: v1 (copy), UseStateResult (copy), UseDispatchResult (copy), SetTabBarVisibleFunction (upval)
+		if v1 and UseStateResult then
+			UseDispatchResult(SetTabBarVisibleFunction(false))
+		end
+		return function() --[[ Line: 119 ]]
+			-- upvalues: v1 (upval), UseStateResult (upval), UseDispatchResult (upval), SetTabBarVisibleFunction (upval)
+			if v1 and UseStateResult then
+				UseDispatchResult(SetTabBarVisibleFunction(true))
+			end
+		end
+	end, { UseStateResult, UseDispatchResult, v1 })
 	
 	return {
-		isCreating = var1,
-		showFtux = if var9 then false else var3,
-		captureSource = if var9 then nil else var5.current,
-		onCreatePressed = var10,
-		onExitCreation = reactModule.useCallback(function()
-			-- upvalues: var5 (ref), var2 (ref)
-			var5.current = nil
-			var2(false)
+		isCreating = UseStateResult,
+		showFtux = not IsStudioModule1_1 and UseStateResult1,
+		captureSource = if IsStudioModule1_1 then nil else UseRefResult.current,
+		onCreatePressed = UseResult,
+		onExitCreation = ReactModule.useCallback(function() --[[ Line: 126 ]]
+			-- upvalues: UseRefResult (copy), UseStateResult2 (copy)
+			UseRefResult.current = nil
+			UseStateResult2(false)
 		end, {}),
-		onExitFtux = reactModule.useCallback(function()
-			-- upvalues: var5 (ref), var4 (ref)
-			var5.current = nil
-			var4(false)
+		onExitFtux = ReactModule.useCallback(function() --[[ Line: 131 ]]
+			-- upvalues: UseRefResult (copy), UseStateResult2_1 (copy)
+			UseRefResult.current = nil
+			UseStateResult2_1(false)
 		end, {})
 	}
 end

@@ -1,379 +1,362 @@
-﻿local genericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
-local parent = genericAbuseReporting.Parent
-local playersService = game:GetService("Players")
-local localPlayer = playersService.LocalPlayer
-local blockingUtilityModule = require(parent.BlockingUtility)
-local dashModule = require(parent.Dash)
-local foundationModule = require(parent.Foundation)
-local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-local reactModule = require(parent.React)
-local roactNetworking = require(parent.RoactServiceTags).RoactNetworking
-local flaggedMutedError = require(parent.RobloxAppLoggers).flaggedMutedError
-local useRoactService = require(parent.RobloxAppHooks).useRoactService
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local dialog = foundationModule.Dialog
-local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
-local dialogSize = foundationModule.Enums.DialogSize
-local orientation = foundationModule.Enums.Orientation
-local view = foundationModule.View
-local abuseReportAnalyticsContextModule = require(genericAbuseReporting.BeduiV2.Analytics.AbuseReportAnalyticsContext)
-local _ = require(genericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.AbuseSheetFlowTypes)
-local analyticsServiceModule = require(genericAbuseReporting.BeduiV2.Analytics.analyticsService)
-local arTranslationModule = require(genericAbuseReporting.BeduiV2.Utils.Translate.arTranslation)
-local footerModule = require(genericAbuseReporting.BeduiV2.Components.Footer)
-local layoutSlotsModule = require(genericAbuseReporting.BeduiV2.Components.LayoutSlots)
-local textLinkModule = require(genericAbuseReporting.BeduiV2.Components.TextLink)
-local textWithTranslationModule = require(genericAbuseReporting.BeduiV2.Utils.Translate.TextWithTranslation)
-local _ = require(genericAbuseReporting.BeduiV2.Utils.Translate.translate)
-local useInExpFocusNavigationRefsModule = require(genericAbuseReporting.BeduiV2.Hooks.FocusNavigation.useInExpFocusNavigationRefs)
-local useInExpOpenLinkModule = require(genericAbuseReporting.BeduiV2.Hooks.useInExpOpenLink)
-local userBlockModule = require(genericAbuseReporting.BeduiV2.Api.userBlock)
-local userMuteModule = require(genericAbuseReporting.BeduiV2.Api.userMute)
-local voiceSpeakingSignalsModule = require(genericAbuseReporting.BeduiV2.Utils.Signals.voiceSpeakingSignals)
-local blockUser = userBlockModule.blockUser
-local isBlockedUser = userBlockModule.isBlockedUser
-local isUserMuted = userMuteModule.isUserMuted
-local muteUser = userMuteModule.muteUser
-local telemetryEventType = analyticsServiceModule.TelemetryEventType
-local formatErrorDetailForAnalytics = analyticsServiceModule.formatErrorDetailForAnalytics
-local useAbuseReportAnalytics = abuseReportAnalyticsContextModule.useAbuseReportAnalytics
-local useArTranslation = arTranslationModule.useArTranslation
-local useLayoutSlots = layoutSlotsModule.useLayoutSlots
-local fFlagAbuseReportImproveErrorEventsModule = require(genericAbuseReporting.Flags.FFlagAbuseReportImproveErrorEvents)
+﻿local GenericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
+local Parent = GenericAbuseReporting.Parent
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local BlockingUtilityModule = require(Parent.BlockingUtility)
+local DashModule = require(Parent.Dash)
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local RoactNetworking = require(Parent.RoactServiceTags).RoactNetworking
+local FlaggedMutedErrorFunction = require(Parent.RobloxAppLoggers).flaggedMutedError
+local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local Dialog = FoundationModule.Dialog
+local FocusNavigableSurfaceIdentifierEnum = require(Parent.FocusNavigationUtils).FocusNavigableSurfaceIdentifierEnum
+local DialogSize = FoundationModule.Enums.DialogSize
+local Orientation = FoundationModule.Enums.Orientation
+local View = FoundationModule.View
+local _ = require(GenericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.AbuseSheetFlowTypes)
+local AnalyticsServiceModule = require(GenericAbuseReporting.BeduiV2.Analytics.analyticsService)
+local FooterModule = require(GenericAbuseReporting.BeduiV2.Components.Footer)
+local TextLinkModule = require(GenericAbuseReporting.BeduiV2.Components.TextLink)
+local TextWithTranslationModule = require(GenericAbuseReporting.BeduiV2.Utils.Translate.TextWithTranslation)
+local _ = require(GenericAbuseReporting.BeduiV2.Utils.Translate.translate)
+local UseInExpFocusNavigationRefsModule = require(GenericAbuseReporting.BeduiV2.Hooks.FocusNavigation.useInExpFocusNavigationRefs)
+local UseInExpOpenLinkModule = require(GenericAbuseReporting.BeduiV2.Hooks.useInExpOpenLink)
+local UserBlockModule = require(GenericAbuseReporting.BeduiV2.Api.userBlock)
+local UserMuteModule = require(GenericAbuseReporting.BeduiV2.Api.userMute)
+local VoiceSpeakingSignalsModule = require(GenericAbuseReporting.BeduiV2.Utils.Signals.voiceSpeakingSignals)
+local BlockUserFunction = UserBlockModule.blockUser
+local IsBlockedUserFunction = UserBlockModule.isBlockedUser
+local IsUserMutedFunction = UserMuteModule.isUserMuted
+local MuteUserFunction = UserMuteModule.muteUser
+local TelemetryEventType = AnalyticsServiceModule.TelemetryEventType
+local FormatErrorDetailForAnalyticsFunction = AnalyticsServiceModule.formatErrorDetailForAnalytics
+local UseAbuseReportAnalyticsFunction = require(GenericAbuseReporting.BeduiV2.Analytics.AbuseReportAnalyticsContext).useAbuseReportAnalytics
+local UseArTranslationFunction = require(GenericAbuseReporting.BeduiV2.Utils.Translate.arTranslation).useArTranslation
+local UseLayoutSlotsFunction = require(GenericAbuseReporting.BeduiV2.Components.LayoutSlots).useLayoutSlots
+local FFlagAbuseReportImproveErrorEventsModule = require(GenericAbuseReporting.Flags.FFlagAbuseReportImproveErrorEvents)
 
-local function _(p1)
-	-- upvalues: isUserMuted (ref)
-	if not p1 or not p1.userId then
+local function _(p1): string --[[ Line: 86 | Named "computeInitialMuteState" ]]
+	-- upvalues: IsUserMutedFunction (copy)
+	if p1 and p1.userId then
+		local Number: number = tonumber(p1.userId) or 0
+		
+		return if Number == 0 or IsUserMutedFunction(Number) then "Hidden" else "Visible"
+	else
 		return "Hidden"
 	end
-	local userId = tonumber(p1.userId) or 0
-	
-	return if userId == 0 or isUserMuted(userId) then "Hidden" else "Visible"
 end
 
-local function useBlockMuteActions(p1, p2, p3)
-	-- upvalues: useArTranslation (ref), reactModule (ref), voiceSpeakingSignalsModule (ref), isUserMuted (ref), useAbuseReportAnalytics (ref), useRoactService (ref), roactNetworking (ref), isBlockedUser (ref), telemetryEventType (ref), fFlagAbuseReportImproveErrorEventsModule (ref), formatErrorDetailForAnalytics (ref), dashModule (ref), localPlayer (ref), muteUser (ref), playersService (ref), blockingUtilityModule (ref), blockUser (ref), flaggedMutedError (ref), buttonVariant (ref)
-	local translateIntoString = useArTranslation().translateIntoString
-	local var1 = reactModule.useContext(voiceSpeakingSignalsModule.VoiceChatServiceManagerContext)
-	local hidden, hidden_1 = reactModule.useState("Hidden")
-	local var2, var3 = reactModule.useState(function()
-		-- upvalues: p2 (ref), isUserMuted (copy)
-		if not p2 or not p2.userId then
+local function useBlockMuteActions(BlockToggle, MuteToggle, Callback) --[[ Line: 97 ]]
+	-- upvalues: UseArTranslationFunction (copy), ReactModule (copy), VoiceSpeakingSignalsModule (copy), IsUserMutedFunction (copy), UseAbuseReportAnalyticsFunction (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), IsBlockedUserFunction (copy), TelemetryEventType (copy), FFlagAbuseReportImproveErrorEventsModule (copy), FormatErrorDetailForAnalyticsFunction (copy), DashModule (copy), LocalPlayer (copy), MuteUserFunction (copy), Players (copy), BlockingUtilityModule (copy), BlockUserFunction (copy), FlaggedMutedErrorFunction (copy), ButtonVariant (copy)
+	local TranslateIntoStringFunction = UseArTranslationFunction().translateIntoString
+	local UseContextResult = ReactModule.useContext(VoiceSpeakingSignalsModule.VoiceChatServiceManagerContext)
+	local Hidden, Hidden2 = ReactModule.useState("Hidden")
+	local UseStateResult, UseStateResult2 = ReactModule.useState(function(): string --[[ Line: 108 ]]
+		-- upvalues: MuteToggle (copy), IsUserMutedFunction (upval)
+		if MuteToggle and MuteToggle.userId then
+			local Number: number = tonumber(MuteToggle.userId) or 0
+			
+			return if Number == 0 or IsUserMutedFunction(Number) then "Hidden" else "Visible"
+		else
 			return "Hidden"
 		end
-		local userId = tonumber(p2.userId) or 0
-		
-		return if userId == 0 or isUserMuted(userId) then "Hidden" else "Visible"
 	end)
-	local var4, var5 = reactModule.useState(false)
-	local sendEvent = useAbuseReportAnalytics().sendEvent
-	local var6 = useRoactService(roactNetworking)
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), isBlockedUser (copy), var6 (ref), hidden_1 (ref), var5 (ref), sendEvent (ref), telemetryEventType (copy), fFlagAbuseReportImproveErrorEventsModule (copy), formatErrorDetailForAnalytics (copy), dashModule (copy)
-		if p1 and p1.userId then
-			isBlockedUser(var6, p1.userId):andThen(function(p4)
-				-- upvalues: hidden_1 (copy), var5 (copy)
-				hidden_1(if p4.responseBody then "Hidden" else "Visible")
-				var5(true)
-			end):catch(function(p4)
-				-- upvalues: sendEvent (copy), telemetryEventType (copy), fFlagAbuseReportImproveErrorEventsModule (copy), formatErrorDetailForAnalytics (copy), dashModule (copy), var5 (copy)
-				sendEvent({
-					sub_event_type = telemetryEventType.Error,
-					error_detail = if fFlagAbuseReportImproveErrorEventsModule then formatErrorDetailForAnalytics("isBlockedUser failed", p4, { includeResponseBody = true }) else {
-						error_message = "isBlockedUser: " .. dashModule.pretty(p4, { depth = 10 })
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
+	local SendEventFunction = UseAbuseReportAnalyticsFunction().sendEvent
+	local UseRoactServiceResult = UseRoactServiceFunction(RoactNetworking)
+	ReactModule.useEffect(function() --[[ Line: 116 ]]
+		-- upvalues: BlockToggle (copy), IsBlockedUserFunction (upval), UseRoactServiceResult (copy), Hidden2 (copy), UseStateResult2_1 (copy), SendEventFunction (copy), TelemetryEventType (upval), FFlagAbuseReportImproveErrorEventsModule (upval), FormatErrorDetailForAnalyticsFunction (upval), DashModule (upval)
+		if BlockToggle and BlockToggle.userId then
+			IsBlockedUserFunction(UseRoactServiceResult, BlockToggle.userId):andThen(function(Result) --[[ Line: 119 ]]
+				-- upvalues: Hidden2 (upval), UseStateResult2_1 (upval)
+				Hidden2(if Result.responseBody then "Hidden" else "Visible")
+				UseStateResult2_1(true)
+			end):catch(function(Err) --[[ Line: 124 ]]
+				-- upvalues: SendEventFunction (upval), TelemetryEventType (upval), FFlagAbuseReportImproveErrorEventsModule (upval), FormatErrorDetailForAnalyticsFunction (upval), DashModule (upval), UseStateResult2_1 (upval)
+				SendEventFunction({
+					sub_event_type = TelemetryEventType.Error,
+					error_detail = if FFlagAbuseReportImproveErrorEventsModule then FormatErrorDetailForAnalyticsFunction("isBlockedUser failed", Err, { includeResponseBody = true }) else {
+						error_message = "isBlockedUser: " .. DashModule.pretty(Err, { depth = 10 })
 					}
 				})
-				var5(true)
+				UseStateResult2_1(true)
 			end)
-			sendEvent({ sub_event_type = telemetryEventType.IsUserBlockAvailable })
+			SendEventFunction({ sub_event_type = TelemetryEventType.IsUserBlockAvailable })
 		end
-	end, { if p1 then p1.userId else nil, var6, sendEvent })
-	local var7 = reactModule.useRef(false)
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), var7 (ref), sendEvent (ref), telemetryEventType (copy)
-		if var2 == "Visible" and not var7.current then
-			var7.current = true
-			sendEvent({ sub_event_type = telemetryEventType.IsUserMuteAvailable })
+	end, {
+		if BlockToggle then BlockToggle.userId else nil,
+		UseRoactServiceResult,
+		SendEventFunction
+	})
+	local UseRefResult = ReactModule.useRef(false)
+	ReactModule.useEffect(function() --[[ Line: 151 ]]
+		-- upvalues: UseStateResult (copy), UseRefResult (copy), SendEventFunction (copy), TelemetryEventType (upval)
+		if UseStateResult == "Visible" and not UseRefResult.current then
+			UseRefResult.current = true
+			SendEventFunction({ sub_event_type = TelemetryEventType.IsUserMuteAvailable })
 		end
-	end, { var2, sendEvent })
-	local var8 = reactModule.useCallback(function()
-		-- upvalues: p2 (ref), localPlayer (copy), var3 (ref), muteUser (copy), var1 (ref), sendEvent (ref), telemetryEventType (copy), p3 (ref), fFlagAbuseReportImproveErrorEventsModule (copy)
-		if not p2 or not p2.userId then return end
-		local var9 = tonumber(p2.userId)
+	end, { UseStateResult, SendEventFunction })
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 158 ]]
+		-- upvalues: MuteToggle (copy), LocalPlayer (upval), UseStateResult2 (copy), MuteUserFunction (upval), UseContextResult (copy), SendEventFunction (copy), TelemetryEventType (upval), Callback (copy), FFlagAbuseReportImproveErrorEventsModule (upval)
+		if not MuteToggle or not MuteToggle.userId then return end
+		local Number: number? = tonumber(MuteToggle.userId)
 		
-		if var9 and localPlayer then
-			var3("Loading")
+		if Number and LocalPlayer then
+			UseStateResult2("Loading")
 			
-			if muteUser(var9, localPlayer, var1) then
-				sendEvent({ sub_event_type = telemetryEventType.DidMuteUser })
-				p3({ didBlockUser = false, didMuteUser = true })
+			if MuteUserFunction(Number, LocalPlayer, UseContextResult) then
+				SendEventFunction({ sub_event_type = TelemetryEventType.DidMuteUser })
+				Callback({ didBlockUser = false, didMuteUser = true })
 				
 				return
 			end
-			sendEvent({
-				sub_event_type = telemetryEventType.Error,
-				error_detail = if fFlagAbuseReportImproveErrorEventsModule then {
+			SendEventFunction({
+				sub_event_type = TelemetryEventType.Error,
+				error_detail = if FFlagAbuseReportImproveErrorEventsModule then {
 					error_message = "muteUser failed",
-					error_metadata = { target_user_id = tostring(var9) }
-				} else { error_message = `muteUser failed for userId: {var9}` }
+					error_metadata = { target_user_id = tostring(Number) }
+				} else { error_message = `muteUser failed for userId: {Number}` }
 			})
-			p3({ didBlockUser = false, didMuteUser = false })
+			Callback({ didBlockUser = false, didMuteUser = false })
 		end
-	end, { p2, sendEvent, p3, var1 })
-	local var10 = reactModule.useCallback(function(p4)
-		-- upvalues: sendEvent (ref), telemetryEventType (copy), playersService (copy), blockingUtilityModule (copy), fFlagAbuseReportImproveErrorEventsModule (copy)
-		if not p4 or p4 == 0 then
-			sendEvent({
-				sub_event_type = telemetryEventType.Error,
+	end, {
+		MuteToggle,
+		SendEventFunction,
+		Callback,
+		UseContextResult
+	})
+	local UseResult1 = ReactModule.useCallback(function(UserId) --[[ Line: 191 ]]
+		-- upvalues: SendEventFunction (copy), TelemetryEventType (upval), Players (upval), BlockingUtilityModule (upval), FFlagAbuseReportImproveErrorEventsModule (upval)
+		if not UserId or UserId == 0 then
+			SendEventFunction({
+				sub_event_type = TelemetryEventType.Error,
 				error_detail = { error_message = "AddPlayerToBlockList invalid userId" }
 			})
 			
 			return
 		end
-		local var11 = playersService:GetPlayerByUserId(p4)
+		local Player = Players:GetPlayerByUserId(UserId)
 		
-		if var11 and not blockingUtilityModule:AddPlayerToBlockList(var11) then
-			sendEvent({
-				sub_event_type = telemetryEventType.Error,
-				error_detail = if fFlagAbuseReportImproveErrorEventsModule then {
+		if Player and not BlockingUtilityModule:AddPlayerToBlockList(Player) then
+			SendEventFunction({
+				sub_event_type = TelemetryEventType.Error,
+				error_detail = if FFlagAbuseReportImproveErrorEventsModule then {
 					error_message = "AddPlayerToBlockList failed",
-					error_metadata = { target_user_id = tostring(p4) }
+					error_metadata = { target_user_id = tostring(UserId) }
 				} else {
-					error_message = `AddPlayerToBlockList failed for userId: {p4}`
+					error_message = `AddPlayerToBlockList failed for userId: {UserId}`
 				}
 			})
 		end
-	end, { sendEvent })
-	local var12 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref), fFlagAbuseReportImproveErrorEventsModule (copy), hidden_1 (ref), blockUser (copy), var6 (ref), var10 (ref), flaggedMutedError (copy), p3 (ref), sendEvent (ref), telemetryEventType (copy), formatErrorDetailForAnalytics (copy)
-		if not p1 or not p1.userId then return end
-		if fFlagAbuseReportImproveErrorEventsModule then
-			hidden_1("Loading")
-			blockUser(var6, p1.userId):andThen(function()
-				-- upvalues: hidden_1 (copy), p1 (copy), var10 (copy), flaggedMutedError (copy), p3 (copy)
-				hidden_1("Hidden")
-				local var13 = tonumber(p1.userId)
+	end, { SendEventFunction })
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 218 ]]
+		-- upvalues: BlockToggle (copy), FFlagAbuseReportImproveErrorEventsModule (upval), Hidden2 (copy), BlockUserFunction (upval), UseRoactServiceResult (copy), UseResult1 (copy), FlaggedMutedErrorFunction (upval), Callback (copy), SendEventFunction (copy), TelemetryEventType (upval), FormatErrorDetailForAnalyticsFunction (upval)
+		if not BlockToggle or not BlockToggle.userId then return end
+		if FFlagAbuseReportImproveErrorEventsModule then
+			Hidden2("Loading")
+			BlockUserFunction(UseRoactServiceResult, BlockToggle.userId):andThen(function() --[[ Line: 225 ]]
+				-- upvalues: Hidden2 (upval), BlockToggle (upval), UseResult1 (upval), FlaggedMutedErrorFunction (upval), Callback (upval)
+				Hidden2("Hidden")
+				local Number: number? = tonumber(BlockToggle.userId)
 				
-				if var13 then
-					local ok, status = pcall(function()
-						-- upvalues: var10 (copy), var13 (ref)
-						var10(var13)
+				if Number then
+					local Success, Result = pcall(function() --[[ Line: 229 ]]
+						-- upvalues: UseResult1 (upval), Number (copy)
+						UseResult1(Number)
 						
 						return nil
 					end)
 					
-					if not ok then
-						flaggedMutedError("AbuseReportInExpLocalBlockError", tostring(status))
+					if not Success then
+						FlaggedMutedErrorFunction("AbuseReportInExpLocalBlockError", (tostring(Result)))
 					end
 				end
-				p3({ didBlockUser = true, didMuteUser = false })
-			end, function(p5)
-				-- upvalues: hidden_1 (copy), sendEvent (copy), telemetryEventType (copy), formatErrorDetailForAnalytics (copy)
-				hidden_1("Error")
-				sendEvent({
-					sub_event_type = telemetryEventType.Error,
-					error_detail = formatErrorDetailForAnalytics("blockUser failed", p5, { includeResponseBody = true })
+				Callback({ didBlockUser = true, didMuteUser = false })
+			end, function(p1) --[[ Line: 238 ]]
+				-- upvalues: Hidden2 (upval), SendEventFunction (upval), TelemetryEventType (upval), FormatErrorDetailForAnalyticsFunction (upval)
+				Hidden2("Error")
+				SendEventFunction({
+					sub_event_type = TelemetryEventType.Error,
+					error_detail = FormatErrorDetailForAnalyticsFunction("blockUser failed", p1, { includeResponseBody = true })
 				})
 			end)
-			sendEvent({ sub_event_type = telemetryEventType.DidBlockUser })
+			SendEventFunction({ sub_event_type = TelemetryEventType.DidBlockUser })
 			
 			return
+		else
+			Hidden2("Loading")
+			BlockUserFunction(UseRoactServiceResult, BlockToggle.userId):andThen(function() --[[ Line: 255 ]]
+				-- upvalues: SendEventFunction (upval), TelemetryEventType (upval), BlockToggle (upval), UseResult1 (upval), Callback (upval)
+				SendEventFunction({ sub_event_type = TelemetryEventType.DidBlockUser })
+				local Number: number? = tonumber(BlockToggle.userId)
+				
+				if Number then
+					UseResult1(Number)
+				end
+				Callback({ didBlockUser = true, didMuteUser = false })
+			end):catch(function() --[[ Line: 263 ]]
+				-- upvalues: Hidden2 (upval), SendEventFunction (upval), TelemetryEventType (upval), BlockToggle (upval)
+				Hidden2("Error")
+				SendEventFunction({
+					sub_event_type = TelemetryEventType.Error,
+					error_detail = {
+						error_message = `blockUser failed for userId: {BlockToggle.userId}`
+					}
+				})
+			end)
 		end
-		hidden_1("Loading")
-		blockUser(var6, p1.userId):andThen(function()
-			-- upvalues: sendEvent (copy), telemetryEventType (copy), p1 (copy), var10 (copy), p3 (copy)
-			sendEvent({ sub_event_type = telemetryEventType.DidBlockUser })
-			local var13 = tonumber(p1.userId)
-			
-			if var13 then
-				var10(var13)
-			end
-			p3({ didBlockUser = true, didMuteUser = false })
-		end):catch(function()
-			-- upvalues: hidden_1 (copy), sendEvent (copy), telemetryEventType (copy), p1 (copy)
-			hidden_1("Error")
-			sendEvent({
-				sub_event_type = telemetryEventType.Error,
-				error_detail = {
-					error_message = `blockUser failed for userId: {p1.userId}`
-				}
-			})
-		end)
 	end, {
-		p1,
-		p3,
-		var10,
-		var6,
-		sendEvent
+		BlockToggle,
+		Callback,
+		UseResult1,
+		UseRoactServiceResult,
+		SendEventFunction
 	})
-	local var13 = if p1 ~= nil then var4 else true
+	local NoBlockToggle = BlockToggle == nil or UseStateResult1
 	
 	return {
-		actions = reactModule.useMemo(function()
-			-- upvalues: var13 (ref), p1 (ref), hidden (ref), translateIntoString (ref), buttonVariant (copy), var12 (ref), p2 (ref), var2 (ref), var8 (ref)
-			local t = {}
+		actions = ReactModule.useMemo(function() --[[ Line: 277 ]]
+			-- upvalues: NoBlockToggle (copy), BlockToggle (copy), Hidden (copy), TranslateIntoStringFunction (copy), ButtonVariant (upval), UseResult2 (copy), MuteToggle (copy), UseStateResult (copy), UseResult (copy)
+			local List = {}
 			
-			if not var13 then
-				return t
-			elseif p1 and hidden ~= "Hidden" then
-				table.insert(t, {
-					text = translateIntoString(p1.label),
-					variant = buttonVariant.Alert,
-					onActivated = var12,
-					isLoading = hidden == "Loading"
+			if not NoBlockToggle then
+				return List
+			end
+			if BlockToggle and Hidden ~= "Hidden" then
+				table.insert(List, {
+					text = TranslateIntoStringFunction(BlockToggle.label),
+					variant = ButtonVariant.Alert,
+					onActivated = UseResult2,
+					isLoading = Hidden == "Loading"
 				})
 			end
-			if p2 and var2 ~= "Hidden" then
-				table.insert(t, {
-					text = translateIntoString(p2.label),
-					variant = buttonVariant.Alert,
-					onActivated = var8,
-					isLoading = var2 == "Loading"
+			if MuteToggle and UseStateResult ~= "Hidden" then
+				table.insert(List, {
+					text = TranslateIntoStringFunction(MuteToggle.label),
+					variant = ButtonVariant.Alert,
+					onActivated = UseResult,
+					isLoading = UseStateResult == "Loading"
 				})
 			end
-			return t
+			return List
 		end, {
-			p1, p2, var12, var8, translateIntoString, hidden, var2, var13
+			BlockToggle, MuteToggle, UseResult2, UseResult, TranslateIntoStringFunction,
+			Hidden, UseStateResult, NoBlockToggle
 		}),
-		blockState = hidden,
-		muteState = var2,
-		hasActions = if p1 == nil then p2 ~= nil else true,
-		hasLoadedActions = var13
+		blockState = Hidden,
+		muteState = UseStateResult,
+		hasActions = BlockToggle ~= nil or MuteToggle ~= nil,
+		hasLoadedActions = NoBlockToggle
 	}
 end
 
-local function useDelayedTrue(p5)
-	-- upvalues: reactModule (ref)
-	local var13, var14 = reactModule.useState(false)
-	reactModule.useEffect(function()
-		-- upvalues: p5 (ref), var14 (ref)
-		local delayedThread = task.delay(p5, function()
-			-- upvalues: var14 (copy)
-			var14(true)
+local function useDelayedTrue(Delay) --[[ Line: 322 ]]
+	-- upvalues: ReactModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	ReactModule.useEffect(function() --[[ Line: 324 ]]
+		-- upvalues: Delay (copy), UseStateResult2 (copy)
+		local DelayedThread = task.delay(Delay, function() --[[ Line: 325 ]]
+			-- upvalues: UseStateResult2 (upval)
+			UseStateResult2(true)
 		end)
 		
-		return function()
-			-- upvalues: delayedThread (ref)
-			task.cancel(delayedThread)
+		return function() --[[ Line: 328 ]]
+			-- upvalues: DelayedThread (copy)
+			task.cancel(DelayedThread)
 		end
-	end, { p5 })
+	end, { Delay })
 	
-	return var13
+	return UseStateResult
 end
 
-return reactModule.memo(function(p5)
-	-- upvalues: useArTranslation (ref), useInExpOpenLinkModule (ref), useAbuseReportAnalytics (ref), useBlockMuteActions (ref), useDelayedTrue (ref), useLayoutSlots (ref), reactModule (ref), telemetryEventType (ref), useInExpFocusNavigationRefsModule (ref), focusNavigableSurfaceIdentifierEnum (ref), dialog (ref), dialogSize (ref), view (ref), textWithTranslationModule (ref), textLinkModule (ref), footerModule (ref), orientation (ref)
-	local var13
-	local translateIntoString = useArTranslation().translateIntoString
-	local var14 = useInExpOpenLinkModule()
-	local sendEvent = useAbuseReportAnalytics().sendEvent
-	local var15 = useBlockMuteActions(p5.blockToggle, p5.muteToggle, p5.onNext)
-	local actions = var15.actions
-	local blockState = var15.blockState
-	local muteState = var15.muteState
-	local isStoryMode = p5.isStoryMode or (useDelayedTrue(0.6) or (not var15.hasActions or var15.hasLoadedActions))
-	local layout = useLayoutSlots().Layout
-	reactModule.useEffect(function()
-		-- upvalues: sendEvent (ref), isStoryMode (ref), p5 (ref), telemetryEventType (copy)
-		if sendEvent and isStoryMode and (p5.helpline and p5.helpline.href) then
-			sendEvent({ sub_event_type = telemetryEventType.HelplineShown })
+return ReactModule.memo(function(p1) --[[ Line: 340 | Named "InExpConfirmationNode" ]]
+	-- upvalues: UseArTranslationFunction (copy), UseInExpOpenLinkModule (copy), UseAbuseReportAnalyticsFunction (copy), useBlockMuteActions (copy), useDelayedTrue (copy), UseLayoutSlotsFunction (copy), ReactModule (copy), TelemetryEventType (copy), UseInExpFocusNavigationRefsModule (copy), FocusNavigableSurfaceIdentifierEnum (copy), Dialog (copy), DialogSize (copy), View (copy), TextWithTranslationModule (copy), TextLinkModule (copy), FooterModule (copy), Orientation (copy)
+	local TranslateIntoStringFunction = UseArTranslationFunction().translateIntoString
+	local UseInExpOpenLinkModuleResult = UseInExpOpenLinkModule()
+	local SendEventFunction = UseAbuseReportAnalyticsFunction().sendEvent
+	local UseBlockMuteActionsResult = useBlockMuteActions(p1.blockToggle, p1.muteToggle, p1.onNext)
+	local Actions = UseBlockMuteActionsResult.actions
+	local BlockState = UseBlockMuteActionsResult.blockState
+	local MuteState = UseBlockMuteActionsResult.muteState
+	local HasActions = UseBlockMuteActionsResult.hasActions
+	local HasLoadedActions = UseBlockMuteActionsResult.hasLoadedActions
+	local UseDelayedTrueResult = useDelayedTrue(0.6)
+	local IsStoryMode = p1.isStoryMode or (UseDelayedTrueResult or (not HasActions or HasLoadedActions))
+	local Layout = UseLayoutSlotsFunction().Layout
+	ReactModule.useEffect(function() --[[ Line: 364 ]]
+		-- upvalues: SendEventFunction (copy), IsStoryMode (copy), p1 (copy), TelemetryEventType (upval)
+		if SendEventFunction and IsStoryMode and p1.helpline and p1.helpline.href then
+			SendEventFunction({ sub_event_type = TelemetryEventType.HelplineShown })
 		end
-	end, { p5.helpline and p5.helpline.href, isStoryMode })
-	local var16 = reactModule.useCallback(function()
-		-- upvalues: p5 (ref), var14 (ref), sendEvent (ref), telemetryEventType (copy)
-		if p5.helpline and p5.helpline.href then
-			var14(p5.helpline.href)
+	end, { p1.helpline and p1.helpline.href, IsStoryMode })
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 372 ]]
+		-- upvalues: p1 (copy), UseInExpOpenLinkModuleResult (copy), SendEventFunction (copy), TelemetryEventType (upval)
+		if p1.helpline and p1.helpline.href then
+			UseInExpOpenLinkModuleResult(p1.helpline.href)
 			
-			if sendEvent then
-				sendEvent({ sub_event_type = telemetryEventType.HelplineOpened })
+			if SendEventFunction then
+				SendEventFunction({ sub_event_type = TelemetryEventType.HelplineOpened })
 			end
 		end
-	end, { p5.helpline, var14 })
-	local var17 = reactModule.useCallback(function()
-		-- upvalues: p5 (ref)
-		p5.onNext({ didBlockUser = false, didMuteUser = false })
-	end, { p5.onNext })
-	local var18 = useInExpFocusNavigationRefsModule(focusNavigableSurfaceIdentifierEnum.CentralOverlay, var17)
-	local createElement = reactModule.createElement
-	local fragment = reactModule.Fragment
-	local var19 = nil
-	local t = {
-		Content = reactModule.createElement(layout, { body = nil, actions = nil })
-	}
+	end, { p1.helpline, UseInExpOpenLinkModuleResult })
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 381 ]]
+		-- upvalues: p1 (copy)
+		p1.onNext({ didBlockUser = false, didMuteUser = false })
+	end, { p1.onNext })
+	local UseInExpFocusNavigationRefsModuleResult = UseInExpFocusNavigationRefsModule(FocusNavigableSurfaceIdentifierEnum.CentralOverlay, UseResult1)
 	
-	if isStoryMode then
-		local var20
-		var13 = reactModule.createElement
-		local root = dialog.Root
-		local t_1 = {
-			ref = var18,
-			size = dialogSize.Small,
-			hasBackdrop = if p5.isStoryMode then false else true,
-			disablePortal = if p5.isStoryMode then true else false,
-			onClose = var17
-		}
-		local t_2 = {
-			DialogTitle = reactModule.createElement(dialog.Title, { text = translateIntoString(p5.title) })
-		}
-		local createElement_1 = reactModule.createElement
-		local content = dialog.Content
-		local t_3 = { LayoutOrder = 2 }
-		local t_4 = {}
-		local createElement_2 = reactModule.createElement
-		local var21 = view
-		local t_5 = { tag = "col gap-small size-full-0 auto-y" }
-		local t_6 = {
-			Message = reactModule.createElement(textWithTranslationModule, {
-				tag = "size-full-0 auto-y text-body-medium",
-				layoutOrder = 2,
-				input = p5.message
-			}),
-			Helpline = p5.helpline and reactModule.createElement(view, {
-				tag = "col gap-small size-full-0 auto-y",
-				LayoutOrder = 3
-			}, {
-				Heading = reactModule.createElement(textWithTranslationModule, {
-					tag = "size-full-0 auto-y text-body-medium",
-					layoutOrder = 1,
-					input = p5.helpline.heading
-				}),
-				Link = reactModule.createElement(textLinkModule, {
-					tag = "auto-xy text-body-medium text-wrap text-align-x-left radius-small content-emphasis",
-					layoutOrder = 2,
-					text = translateIntoString(p5.helpline.buttonText),
-					onActivated = var16
+	return ReactModule.createElement(ReactModule.Fragment, nil, {
+		Content = ReactModule.createElement(Layout, { body = nil, actions = nil }),
+		ConfirmationDialog = if IsStoryMode then ReactModule.createElement(Dialog.Root, {
+			ref = UseInExpFocusNavigationRefsModuleResult,
+			size = DialogSize.Small,
+			hasBackdrop = not p1.isStoryMode,
+			disablePortal = if p1.isStoryMode then true else false,
+			onClose = UseResult1
+		}, {
+			DialogTitle = ReactModule.createElement(Dialog.Title, { text = TranslateIntoStringFunction(p1.title) }),
+			DialogContent = ReactModule.createElement(Dialog.Content, { LayoutOrder = 2 }, {
+				DialogContentView = ReactModule.createElement(View, { tag = "col gap-small size-full-0 auto-y" }, {
+					Message = ReactModule.createElement(TextWithTranslationModule, {
+						tag = "size-full-0 auto-y text-body-medium",
+						layoutOrder = 2,
+						input = p1.message
+					}),
+					Helpline = p1.helpline and ReactModule.createElement(View, {
+						tag = "col gap-small size-full-0 auto-y",
+						LayoutOrder = 3
+					}, {
+						Heading = ReactModule.createElement(TextWithTranslationModule, {
+							tag = "size-full-0 auto-y text-body-medium",
+							layoutOrder = 1,
+							input = p1.helpline.heading
+						}),
+						Link = ReactModule.createElement(TextLinkModule, {
+							tag = "auto-xy text-body-medium text-wrap text-align-x-left radius-small content-emphasis",
+							layoutOrder = 2,
+							text = TranslateIntoStringFunction(p1.helpline.buttonText),
+							onActivated = UseResult
+						})
+					}),
+					ErrorMessage = if BlockState == "Error" or MuteState == "Error" then ReactModule.createElement(TextWithTranslationModule, {
+						tag = "size-full-0 auto-y text-body-medium content-system-alert",
+						layoutOrder = 4,
+						input = if BlockState == "Error" and p1.blockToggle then p1.blockToggle.errorLabel elseif MuteState == "Error" and p1.muteToggle then p1.muteToggle.errorLabel else ""
+					}) else nil,
+					Footer = p1.footerItems and ReactModule.createElement(FooterModule, {
+						additionalTag = "padding-top-medium",
+						layoutOrder = 5,
+						footerItems = p1.footerItems
+					})
 				})
+			}),
+			DialogActions = ReactModule.createElement(Dialog.Actions, {
+				LayoutOrder = 4,
+				actions = Actions,
+				orientation = Orientation.Vertical
 			})
-		}
-		
-		if blockState == "Error" or muteState == "Error" then
-			var20 = reactModule.createElement
-			var20 = var20(textWithTranslationModule, {
-				tag = "size-full-0 auto-y text-body-medium content-system-alert",
-				layoutOrder = 4,
-				input = if blockState == "Error" and p5.blockToggle then p5.blockToggle.errorLabel elseif muteState == "Error" and p5.muteToggle then p5.muteToggle.errorLabel else ""
-			})
-		else
-			var20 = nil
-		end
-		t_6.ErrorMessage = var20
-		t_6.Footer = p5.footerItems and reactModule.createElement(footerModule, {
-			additionalTag = "padding-top-medium",
-			layoutOrder = 5,
-			footerItems = p5.footerItems
-		})
-		t_4.DialogContentView = createElement_2(var21, t_5, t_6)
-		t_2.DialogContent = createElement_1(content, t_3, t_4)
-		t_2.DialogActions = reactModule.createElement(dialog.Actions, {
-			LayoutOrder = 4,
-			actions = actions,
-			orientation = orientation.Vertical
-		})
-		var13 = var13(root, t_1, t_2)
-	else
-		var13 = nil
-	end
-	t.ConfirmationDialog = var13
-	
-	return createElement(fragment, var19, t)
+		}) else nil
+	})
 end)

@@ -1,25 +1,25 @@
-﻿local dynamicHead = require(script:FindFirstAncestor("AvatarExperienceCommon").Constants).ASSET_TYPE_NAME_TO_ID_STRING.DynamicHead
+﻿local DynamicHead = require(script:FindFirstAncestor("AvatarExperienceCommon").Constants).ASSET_TYPE_NAME_TO_ID_STRING.DynamicHead
 local AXDHEquippedAssetsNilCheck = game:DefineFastFlag("AXDHEquippedAssetsNilCheck", false)
 
-return function(p1)
-	-- upvalues: AXDHEquippedAssetsNilCheck (ref), dynamicHead (ref)
-	local equippedAssets = p1.AvatarExperience.AvatarEditor.Character.EquippedAssets
+return function(p1): boolean --[[ Line: 7 | Named "selectHasDynamicHead" ]]
+	-- upvalues: AXDHEquippedAssetsNilCheck (copy), DynamicHead (copy)
+	local EquippedAssets = p1.AvatarExperience.AvatarEditor.Character.EquippedAssets
 	
-	if AXDHEquippedAssetsNilCheck and not equippedAssets then
+	if AXDHEquippedAssetsNilCheck and not EquippedAssets then
 		return false
 	end
-	local var1 = equippedAssets[dynamicHead]
+	local EquippedAsset = EquippedAssets[DynamicHead]
 	
-	if var1 then
-		for i in var1 do
+	if EquippedAsset then
+		for _ in EquippedAsset do
 			return true
 		end
 	end
-	local tryOnItems = p1.AvatarExperience.AvatarScene.OutfitTryOn and p1.AvatarExperience.AvatarScene.OutfitTryOn.TryOnItems
+	local TryOnItems = p1.AvatarExperience.AvatarScene.OutfitTryOn and p1.AvatarExperience.AvatarScene.OutfitTryOn.TryOnItems
 	
-	if tryOnItems then
-		for i, v in tryOnItems do
-			if v.assetType == dynamicHead then
+	if TryOnItems then
+		for _, tryOnItem in TryOnItems do
+			if tryOnItem.assetType == DynamicHead then
 				return true
 			end
 		end

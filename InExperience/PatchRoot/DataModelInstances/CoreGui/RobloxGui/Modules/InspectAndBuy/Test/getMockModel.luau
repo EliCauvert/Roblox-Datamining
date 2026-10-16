@@ -1,14 +1,14 @@
-﻿return function()
-	local model = Instance.new("Model")
-	local humanoidRootPart = Instance.new("Part")
-	humanoidRootPart.Name = "HumanoidRootPart"
-	humanoidRootPart.Parent = model
-	local humanoid_1 = Instance.new("Humanoid")
-	humanoid_1.Name = "Humanoid"
-	humanoid_1.Parent = model
-	local humanoidDescription_1 = Instance.new("HumanoidDescription")
-	humanoidDescription_1.Name = "HumanoidDescription"
-	humanoidDescription_1.Parent = humanoid_1
+﻿return function() --[[ Line: 4 ]]
+	local Model = Instance.new("Model")
+	local HumanoidRootPart = Instance.new("Part")
+	HumanoidRootPart.Name = "HumanoidRootPart"
+	HumanoidRootPart.Parent = Model
+	local Humanoid = Instance.new("Humanoid")
+	Humanoid.Name = "Humanoid"
+	Humanoid.Parent = Model
+	local HumanoidDescription = Instance.new("HumanoidDescription")
+	HumanoidDescription.Name = "HumanoidDescription"
+	HumanoidDescription.Parent = Humanoid
 	
-	return model
+	return Model
 end

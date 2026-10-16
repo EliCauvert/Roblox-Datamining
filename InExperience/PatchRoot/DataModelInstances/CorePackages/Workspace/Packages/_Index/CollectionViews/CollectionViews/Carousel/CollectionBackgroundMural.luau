@@ -1,32 +1,32 @@
-﻿local parent = script:FindFirstAncestor("CollectionViews").Parent
-local reactModule = require(parent.React)
-local useDesignTokens = require(parent.Style).useDesignTokens
-local useStyle = require(parent.UIBlox).Core.Style.useStyle
+﻿local Parent = script:FindFirstAncestor("CollectionViews").Parent
+local ReactModule = require(Parent.React)
+local UseDesignTokensFunction = require(Parent.Style).useDesignTokens
+local UseStyleFunction = require(Parent.UIBlox).Core.Style.useStyle
 
-return reactModule.memo(function(value)
-	-- upvalues: useStyle (ref), useDesignTokens (ref), reactModule (ref)
-	return reactModule.createElement("ImageLabel", {
+return ReactModule.memo(function(Frame) --[[ Line: 23 | Named "CollectionBackgroundMural" ]]
+	-- upvalues: UseStyleFunction (copy), UseDesignTokensFunction (copy), ReactModule (copy)
+	return ReactModule.createElement("ImageLabel", {
 		ImageTransparency = 0,
 		BackgroundTransparency = 1,
-		Image = value.backgroundMuralUrl,
-		Size = value.containerSizeBinding:map(function(p1)
+		Image = Frame.backgroundMuralUrl,
+		Size = Frame.containerSizeBinding:map(function(p1): UDim2 --[[ Line: 34 ]]
 			return UDim2.new(1, 0, 0, p1.Y)
 		end),
-		ZIndex = value.ZIndex or -1,
-		LayoutOrder = value.LayoutOrder,
+		ZIndex = Frame.ZIndex or -1,
+		LayoutOrder = Frame.LayoutOrder,
 		ScaleType = Enum.ScaleType.Crop
 	}, {
-		GradientFrame = reactModule.createElement("Frame", {
+		GradientFrame = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 0,
 			BorderSizePixel = 0,
 			Size = UDim2.new(1, 0, 1, 0),
 			BackgroundColor3 = Color3.new(1, 1, 1)
 		}, {
-			Gradient = reactModule.createElement("UIGradient", {
+			Gradient = ReactModule.createElement("UIGradient", {
 				Rotation = 90,
 				Color = ColorSequence.new({
-					ColorSequenceKeypoint.new(0, useDesignTokens().Color.Extended.Black.Black_100.Color3),
-					ColorSequenceKeypoint.new(1, useStyle().Theme.BackgroundDefault.Color)
+					ColorSequenceKeypoint.new(0, UseDesignTokensFunction().Color.Extended.Black.Black_100.Color3),
+					ColorSequenceKeypoint.new(1, UseStyleFunction().Theme.BackgroundDefault.Color)
 				}),
 				Transparency = NumberSequence.new({
 					NumberSequenceKeypoint.new(0, 1),

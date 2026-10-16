@@ -1,17 +1,17 @@
-﻿local _warn = warn
+﻿local Callback = warn
 
-return setmetatable({
-	mock = function(p1)
-		-- upvalues: _warn (write)
-		_warn = p1
+return (setmetatable({
+	mock = function(p1) --[[ Line: 4 ]]
+		-- upvalues: Callback (ref)
+		Callback = p1
 	end,
-	unmock = function()
-		-- upvalues: _warn (write)
-		_warn = warn
+	unmock = function() --[[ Line: 7 ]]
+		-- upvalues: Callback (ref)
+		Callback = warn
 	end
 }, {
-	__call = function(_, ...)
-		-- upvalues: _warn (write)
-		_warn(...)
+	__call = function(_, ...) --[[ Line: 11 ]]
+		-- upvalues: Callback (ref)
+		Callback(...)
 	end
-})
+}))

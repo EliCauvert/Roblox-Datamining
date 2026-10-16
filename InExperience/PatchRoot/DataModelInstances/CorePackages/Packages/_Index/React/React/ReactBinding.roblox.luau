@@ -1,150 +1,203 @@
-﻿local parent = script.Parent.Parent
-local reactGlobalsModule = require(parent.ReactGlobals)
-local luauPolyfillModule = require(parent.LuauPolyfill)
-local reactSymbols = require(parent.Shared).ReactSymbols
-local _ = require(parent.Shared)
-local unknownModule = require(script.Parent["createSignal.roblox"])
-local bindingImpl = luauPolyfillModule.Symbol("BindingImpl")
-local t = {}
-local t_1 = {
+﻿local Parent = script.Parent.Parent
+local ReactGlobalsModule = require(Parent.ReactGlobals)
+local ReactSymbols = require(Parent.Shared).ReactSymbols
+local _ = require(Parent.Shared)
+local CreateSignalRobloxModule = require(script.Parent["createSignal.roblox"])
+local EnableAllocationTrims = require(Parent.Shared).ReactFeatureFlags.enableAllocationTrims
+local BindingImpl = require(Parent.LuauPolyfill).Symbol("BindingImpl")
+local ReactBindingModule = {}
+local config = {
 	__index = {
-		getValue = function(p1)
-			-- upvalues: t (ref)
-			return t.getValue(p1)
+		getValue = function(p1) --[[ Line: 50 ]]
+			-- upvalues: ReactBindingModule (copy)
+			return ReactBindingModule.getValue(p1)
 		end,
-		map = function(p1, p2)
-			-- upvalues: t (ref)
-			return t.map(p1, p2)
+		map = function(p1, p2) --[[ Line: 54 ]]
+			-- upvalues: ReactBindingModule (copy)
+			return ReactBindingModule.map(p1, p2)
 		end
 	},
-	__tostring = function(p1)
-		return string.format("RoactBinding(%s)", tostring(p1:getValue()))
+	__tostring = function(p1): string --[[ Line: 63 ]]
+		return string.format("RoactBinding(%s)", (tostring(p1:getValue())))
 	end
 }
-
-function t.update(p1, p2)
-	-- upvalues: bindingImpl (ref)
-	return p1[bindingImpl].update(p2)
-end
-
-function t.subscribe(p1, p2)
-	-- upvalues: bindingImpl (ref)
-	return p1[bindingImpl].subscribe(p2)
-end
-
-function t.getValue(p1)
-	-- upvalues: bindingImpl (ref)
-	return p1[bindingImpl]:getValue()
-end
-
-function t.create(p1)
-	-- upvalues: unknownModule (ref), reactGlobalsModule (ref), reactSymbols (ref), bindingImpl (ref), t_1 (ref)
-	local var1, var2 = unknownModule()
-	local t = { value = p1, subscribe = var1 }
-	
-	function t.update(p2)
-		-- upvalues: t (ref), var2 (ref)
-		t.value = p2
-		var2(p2)
+local config1 = {
+	getValue = function(p1) --[[ Line: 73 ]]
+		return p1.value
+	end,
+	update = function(p1, Value) --[[ Line: 77 ]]
+		p1.value = Value
+		local FireFunction: (any) -> () = p1.fire
+		
+		if FireFunction ~= nil then
+			FireFunction(Value)
+		end
+	end,
+	subscribe = function(p1, p2) --[[ Line: 85 ]]
+		-- upvalues: CreateSignalRobloxModule (copy)
+		local SubscribeToSignalFunction = p1.subscribeToSignal
+		
+		if SubscribeToSignalFunction == nil then
+			local SignalRobloxModule, SignalRobloxModule2 = CreateSignalRobloxModule()
+			p1.fire = SignalRobloxModule2
+			SubscribeToSignalFunction = SignalRobloxModule
+			p1.subscribeToSignal = SubscribeToSignalFunction
+		end
+		return SubscribeToSignalFunction(p2)
 	end
-	
-	function t.getValue()
-		-- upvalues: t (ref)
-		return t.value
+}
+local config2 = { __index = config1 }
+
+function ReactBindingModule.update(p1, p2) --[[ Line: 96 ]]
+	-- upvalues: EnableAllocationTrims (copy), BindingImpl (copy), config2 (copy), config1 (copy)
+	if EnableAllocationTrims then
+		local v1 = p1[BindingImpl]
+		
+		return if getmetatable(v1) == config2 then config1.update(v1, p2) else v1.update(p2)
+	else
+		return p1[BindingImpl].update(p2)
 	end
-	
-	return setmetatable({
-		["$$typeof"] = reactSymbols.REACT_BINDING_TYPE,
-		[bindingImpl] = t,
-		_source = if reactGlobalsModule.__DEV__ then debug.traceback("Binding created at:", 3) else nil
-	}, t_1), t.update
 end
 
-function t.map(p1, p2)
-	-- upvalues: reactGlobalsModule (ref), reactSymbols (ref), t (ref), bindingImpl (ref), t_1 (ref)
-	if reactGlobalsModule.__DEV__ then
-		assert(typeof(p1) == "table" and p1["$$typeof"] == reactSymbols.REACT_BINDING_TYPE, "Expected `self` to be a binding")
-		assert(typeof(p2) == "function", "Expected arg #1 to be a function")
+function ReactBindingModule.subscribe(p1, p2) --[[ Line: 108 ]]
+	-- upvalues: EnableAllocationTrims (copy), BindingImpl (copy), config2 (copy), config1 (copy)
+	if EnableAllocationTrims then
+		local v1 = p1[BindingImpl]
+		
+		return if getmetatable(v1) == config2 then config1.subscribe(v1, p2) else v1.subscribe(p2)
+	else
+		return p1[BindingImpl].subscribe(p2)
 	end
-	return setmetatable({
-		["$$typeof"] = reactSymbols.REACT_BINDING_TYPE,
-		[bindingImpl] = {
-			subscribe = function(p3)
-				-- upvalues: t (copy), p1 (ref), p2 (ref)
-				return t.subscribe(p1, function(p4)
-					-- upvalues: p3 (ref), p2 (copy)
-					p3(p2(p4))
+end
+
+function ReactBindingModule.getValue(p1) --[[ Line: 120 ]]
+	-- upvalues: BindingImpl (copy)
+	return p1[BindingImpl]:getValue()
+end
+
+function ReactBindingModule.createWithoutUpdater(Value, _source) --[[ Line: 126 ]]
+	-- upvalues: config2 (copy), ReactSymbols (copy), BindingImpl (copy), config (copy)
+	return (setmetatable({
+		["$$typeof"] = ReactSymbols.REACT_BINDING_TYPE,
+		[BindingImpl] = setmetatable({ value = Value }, config2),
+		_source = _source
+	}, config))
+end
+
+function ReactBindingModule.create(Value) --[[ Line: 141 ]]
+	-- upvalues: EnableAllocationTrims (copy), ReactGlobalsModule (copy), ReactBindingModule (copy), BindingImpl (copy), config1 (copy), CreateSignalRobloxModule (copy), ReactSymbols (copy), config (copy)
+	if EnableAllocationTrims then
+		local WithoutUpdater = ReactBindingModule.createWithoutUpdater(Value, if ReactGlobalsModule.__DEV__ then debug.traceback("Binding created at:", 3) else nil)
+		local WithoutUpdaterEntry = WithoutUpdater[BindingImpl]
+		
+		return WithoutUpdater, function(p1) --[[ Line: 151 ]]
+			-- upvalues: config1 (upval), WithoutUpdaterEntry (copy)
+			config1.update(WithoutUpdaterEntry, p1)
+		end
+	else
+		local SignalRobloxModule, SignalRobloxModule2 = CreateSignalRobloxModule()
+		local config2 = { value = Value, subscribe = SignalRobloxModule }
+		
+		function config2.update(Value) --[[ Line: 162 ]]
+			-- upvalues: config2 (copy), SignalRobloxModule2 (copy)
+			config2.value = Value
+			SignalRobloxModule2(Value)
+		end
+		
+		function config2.getValue() --[[ Line: 167 ]]
+			-- upvalues: config2 (copy)
+			return config2.value
+		end
+		
+		return setmetatable({
+			["$$typeof"] = ReactSymbols.REACT_BINDING_TYPE,
+			[BindingImpl] = config2,
+			_source = if ReactGlobalsModule.__DEV__ then debug.traceback("Binding created at:", 3) else nil
+		}, config), config2.update
+	end
+end
+
+function ReactBindingModule.map(p1, Callback) --[[ Line: 185 ]]
+	-- upvalues: ReactGlobalsModule (copy), ReactSymbols (copy), ReactBindingModule (copy), BindingImpl (copy), config (copy)
+	if ReactGlobalsModule.__DEV__ then
+		assert(typeof(p1) == "table" and p1["$$typeof"] == ReactSymbols.REACT_BINDING_TYPE, "Expected `self` to be a binding")
+		assert(typeof(Callback) == "function", "Expected arg #1 to be a function")
+	end
+	return (setmetatable({
+		["$$typeof"] = ReactSymbols.REACT_BINDING_TYPE,
+		[BindingImpl] = {
+			subscribe = function(Callback1) --[[ Line: 201 ]]
+				-- upvalues: ReactBindingModule (upval), p1 (copy), Callback (copy)
+				return ReactBindingModule.subscribe(p1, function(p2) --[[ Line: 202 ]]
+					-- upvalues: Callback1 (copy), Callback (upval)
+					Callback1(Callback(p2))
 				end)
 			end,
-			update = function(_)
+			update = function(_) --[[ Line: 207 ]]
 				error("Bindings created by Binding:map(fn) cannot be updated directly", 2)
 			end,
-			getValue = function()
-				-- upvalues: p2 (ref), p1 (ref)
-				return p2(p1:getValue())
+			getValue = function() --[[ Line: 211 ]]
+				-- upvalues: Callback (copy), p1 (copy)
+				return Callback(p1:getValue())
 			end
 		},
-		_source = if reactGlobalsModule.__DEV__ then debug.traceback("Mapped binding created at:", 3) else nil
-	}, t_1)
+		_source = if ReactGlobalsModule.__DEV__ then debug.traceback("Mapped binding created at:", 3) else nil
+	}, config))
 end
 
-function t.join(p1)
-	-- upvalues: reactGlobalsModule (ref), reactSymbols (ref), t (ref), bindingImpl (ref), t_1 (ref)
-	if reactGlobalsModule.__DEV__ then
-		assert(typeof(p1) == "table", "Expected arg #1 to be of type table")
+function ReactBindingModule.join(List) --[[ Line: 232 ]]
+	-- upvalues: ReactGlobalsModule (copy), ReactSymbols (copy), ReactBindingModule (copy), BindingImpl (copy), config (copy)
+	if ReactGlobalsModule.__DEV__ then
+		assert(typeof(List) == "table", "Expected arg #1 to be of type table")
 		
-		for i, v in p1 do
-			if typeof(v) ~= "table" or v["$$typeof"] ~= reactSymbols.REACT_BINDING_TYPE then
-				error(("Expected arg #1 to contain only bindings, but key %q had a non-binding value"):format(tostring(i)), 2)
+		for i, value in List do
+			if typeof(value) ~= "table" or value["$$typeof"] ~= ReactSymbols.REACT_BINDING_TYPE then
+				error(("Expected arg #1 to contain only bindings, but key %q had a non-binding value"):format((tostring(i))), 2)
 			end
 		end
 	end
-	local t_2 = {}
-	
-	local function getValue()
-		-- upvalues: p1 (ref)
+	local function getValue() --[[ Line: 253 ]]
+		-- upvalues: List (copy)
 		local t = {}
 		
-		for i, v in pairs(p1) do
-			t[i] = v:getValue()
+		for i, value in pairs(List) do
+			t[i] = value:getValue()
 		end
 		return t
 	end
 	
-	function t_2.subscribe(p2)
-		-- upvalues: p1 (ref), t (copy), getValue (ref)
-		local t_1 = {}
-		
-		for i, v in p1 do
-			t_1[i] = t.subscribe(v, function(_)
-				-- upvalues: p2 (ref), getValue (copy)
-				p2(getValue())
-			end)
-		end
-		return function()
-			-- upvalues: t_1 (write)
-			if t_1 == nil then return end
-			for i, v in t_1 do
-				v()
+	return (setmetatable({
+		["$$typeof"] = ReactSymbols.REACT_BINDING_TYPE,
+		[BindingImpl] = {
+			subscribe = function(Callback) --[[ Line: 264 ]]
+				-- upvalues: List (copy), ReactBindingModule (upval), getValue (copy)
+				local SubscribeResults = {}
+				
+				for i, value in List do
+					SubscribeResults[i] = ReactBindingModule.subscribe(value, function(_) --[[ Line: 269 ]]
+						-- upvalues: Callback (copy), getValue (upval)
+						Callback((getValue()))
+					end)
+				end
+				return function() --[[ Line: 274 ]]
+					-- upvalues: SubscribeResults (ref)
+					if SubscribeResults == nil then return end
+					for _, subscribeResult in SubscribeResults do
+						subscribeResult()
+					end
+					SubscribeResults = nil
+				end
+			end,
+			update = function(_) --[[ Line: 287 ]]
+				error("Bindings created by joinBindings(...) cannot be updated directly", 2)
+			end,
+			getValue = function() --[[ Line: 291 ]]
+				-- upvalues: getValue (copy)
+				return (getValue())
 			end
-			t_1 = nil
-		end
-	end
-	
-	function t_2.update(_)
-		error("Bindings created by joinBindings(...) cannot be updated directly", 2)
-	end
-	
-	function t_2.getValue()
-		-- upvalues: getValue (ref)
-		return getValue()
-	end
-	
-	return setmetatable({
-		["$$typeof"] = reactSymbols.REACT_BINDING_TYPE,
-		[bindingImpl] = t_2,
-		_source = if reactGlobalsModule.__DEV__ then debug.traceback("Joined binding created at:", 2) else nil
-	}, t_1)
+		},
+		_source = if ReactGlobalsModule.__DEV__ then debug.traceback("Joined binding created at:", 2) else nil
+	}, config))
 end
 
-return t
+return ReactBindingModule

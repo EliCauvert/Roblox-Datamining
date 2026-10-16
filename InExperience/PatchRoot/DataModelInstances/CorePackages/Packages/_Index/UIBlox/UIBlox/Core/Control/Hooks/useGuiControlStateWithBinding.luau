@@ -1,20 +1,20 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local reactModule = require(parent_1.Parent.React)
-local controlStateModule = require(parent_1.Core.Control.Enum.ControlState)
-local useGuiControlStateModule = require(parent.Control.Hooks.useGuiControlState)
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.Parent.React)
+local ControlStateModule = require(Parent1.Core.Control.Enum.ControlState)
+local UseGuiControlStateModule = require(Parent.Control.Hooks.useGuiControlState)
 
-return function(p1, p2, p3)
-	-- upvalues: reactModule (ref), controlStateModule (ref), useGuiControlStateModule (ref)
-	local var1, var2 = reactModule.useBinding(controlStateModule.Initialize)
-	local var3, _ = useGuiControlStateModule(p1, reactModule.useCallback(function(p4, p5)
-		-- upvalues: var2 (ref), p2 (ref)
-		var2(tostring(p5))
+return function(p1, Callback, p2) --[[ Line: 14 | Named "useGuiControlStateWithBinding" ]]
+	-- upvalues: ReactModule (copy), ControlStateModule (copy), UseGuiControlStateModule (copy)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(ControlStateModule.Initialize)
+	local UseGuiControlStateModuleResult, _ = UseGuiControlStateModule(p1, ReactModule.useCallback(function(p3, p4) --[[ Line: 20 ]]
+		-- upvalues: UseBindingResult2 (copy), Callback (copy)
+		UseBindingResult2((tostring(p4)))
 		
-		if p2 then
-			p2(p4, p5)
+		if Callback then
+			Callback(p3, p4)
 		end
-	end, {}), p3)
+	end, {}), p2)
 	
-	return var3, var1
+	return UseGuiControlStateModuleResult, UseBindingResult
 end

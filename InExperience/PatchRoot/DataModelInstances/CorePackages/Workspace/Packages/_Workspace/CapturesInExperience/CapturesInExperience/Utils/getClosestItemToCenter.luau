@@ -1,6 +1,6 @@
-﻿return function(p1, p2)
-	local canvasPosition = p2.CanvasPosition
-	local var1 = math.floor((canvasPosition.X + p2.AbsoluteSize.X / 2) / p1.X) + 1
+﻿return function(Vector, Frame) --[[ Line: 1 | Named "getClosestItemToCenter" ]]
+	local CanvasPosition = Frame.CanvasPosition
+	local NewFloored = math.floor((CanvasPosition.X + Frame.AbsoluteSize.X / 2) / Vector.X) + 1
 	
-	return var1, math.abs(canvasPosition.X - (var1 - 1) * p1.X)
+	return NewFloored, (math.abs(CanvasPosition.X - (NewFloored - 1) * Vector.X))
 end

@@ -1,93 +1,93 @@
-﻿local avatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
-local mutedError = require(avatarExperienceCommon.Parent.Loggers).mutedError
-local constantsModule = require(avatarExperienceCommon.Constants)
-local createHumanoidDescriptionAccessoryInfoModule = require(avatarExperienceCommon.Utils.Humanoid.createHumanoidDescriptionAccessoryInfo)
-local setMakeupDescriptionsModule = require(avatarExperienceCommon.Utils.Humanoid.setMakeupDescriptions)
-local isMakeupAssetTypeModule = require(avatarExperienceCommon.Utils.isMakeupAssetType)
+﻿local AvatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
+local MutedErrorFunction = require(AvatarExperienceCommon.Parent.Loggers).mutedError
+local ConstantsModule = require(AvatarExperienceCommon.Constants)
+local CreateHumanoidDescriptionAccessoryInfoModule = require(AvatarExperienceCommon.Utils.Humanoid.createHumanoidDescriptionAccessoryInfo)
+local SetMakeupDescriptionsModule = require(AvatarExperienceCommon.Utils.Humanoid.setMakeupDescriptions)
+local IsMakeupAssetTypeModule = require(AvatarExperienceCommon.Utils.isMakeupAssetType)
 
-local function applyCurrentAssets(value, p1)
-	-- upvalues: constantsModule (ref), createHumanoidDescriptionAccessoryInfoModule (ref), isMakeupAssetTypeModule (ref), mutedError (ref), setMakeupDescriptionsModule (ref)
-	if p1 then
-		local t = {}
+local function applyCurrentAssets(HumanoidDescription, CurrentAssets) --[[ Line: 21 ]]
+	-- upvalues: ConstantsModule (copy), CreateHumanoidDescriptionAccessoryInfoModule (copy), IsMakeupAssetTypeModule (copy), MutedErrorFunction (copy), SetMakeupDescriptionsModule (copy)
+	if CurrentAssets then
+		local List = {}
 		
-		for i, v in p1 do
-			local t_1 = {}
-			local var1 = constantsModule.ASSET_TYPE_TO_ACCESSORY_TYPE[i]
+		for i, currentAsset in CurrentAssets do
+			local List1 = {}
+			local ASSETTYPETOACCESSORYTYPEEntry = ConstantsModule.ASSET_TYPE_TO_ACCESSORY_TYPE[i]
 			
-			for i_1, v_1 in v do
-				if var1 then
-					table.insert(t, createHumanoidDescriptionAccessoryInfoModule(i, i_1, v_1))
+			for i1, value in currentAsset do
+				if ASSETTYPETOACCESSORYTYPEEntry then
+					table.insert(List, CreateHumanoidDescriptionAccessoryInfoModule(i, i1, value))
 				else
-					table.insert(t_1, i_1)
+					table.insert(List1, i1)
 				end
 			end
-			if var1 == nil and #t_1 > 0 then
-				local var2 = constantsModule.ASSET_TYPE_ID_STRING_TO_HUMANOID_DESCRIPTION_PROP[i]
-				local joined = table.concat(t_1, ",")
+			if ASSETTYPETOACCESSORYTYPEEntry == nil and #List1 > 0 then
+				local ASSETTYPEIDSTRINGTOHUMANOIDDESCRIPTIONPROPEntry = ConstantsModule.ASSET_TYPE_ID_STRING_TO_HUMANOID_DESCRIPTION_PROP[i]
+				local Joined = table.concat(List1, ",")
 				
-				if var2 then
-					value[var2] = joined
-				elseif i ~= constantsModule.ASSET_TYPE_NAME_TO_ID_STRING.Gear and not isMakeupAssetTypeModule(i) then
-					mutedError(string.format("assetTypeId: %s not recognized as member of humanoidDescription", tostring(i)))
+				if ASSETTYPEIDSTRINGTOHUMANOIDDESCRIPTIONPROPEntry then
+					HumanoidDescription[ASSETTYPEIDSTRINGTOHUMANOIDDESCRIPTIONPROPEntry] = Joined
+				elseif i ~= ConstantsModule.ASSET_TYPE_NAME_TO_ID_STRING.Gear and not IsMakeupAssetTypeModule(i) then
+					MutedErrorFunction(string.format("assetTypeId: %s not recognized as member of humanoidDescription", (tostring(i))))
 				end
 			end
 		end
-		value:SetAccessories(t, true)
-		setMakeupDescriptionsModule(value, p1)
+		HumanoidDescription:SetAccessories(List, true)
+		SetMakeupDescriptionsModule(HumanoidDescription, CurrentAssets)
 	end
 end
 
-local function _(p2, p3)
-	-- upvalues: constantsModule (ref)
-	if p3 then
-		for i, v in p3 do
-			p2[constantsModule.HUMANOID_DESCRIPTION_SCALE_TO_NAME[i]] = v
+local function _(p1, List) --[[ Line: 61 | Named "applyAvatarScales" ]]
+	-- upvalues: ConstantsModule (copy)
+	if List then
+		for i, value in List do
+			p1[ConstantsModule.HUMANOID_DESCRIPTION_SCALE_TO_NAME[i]] = value
 		end
 	end
 end
 
-local _ = function(p4, p5)
-	-- upvalues: constantsModule (ref)
-	if p5 then
-		for i, v in p5 do
-			p4[constantsModule.BODY_PART_FOR_SKIN_COLORING_ID_TO_HUMANOID_DESCRIPTION[i]] = v
+local _ = function(p2, List) --[[ Line: 71 | Named "applyBodyColor3s" ]]
+	-- upvalues: ConstantsModule (copy)
+	if List then
+		for i, value in List do
+			p2[ConstantsModule.BODY_PART_FOR_SKIN_COLORING_ID_TO_HUMANOID_DESCRIPTION[i]] = value
 		end
 	end
 end
 
-local function applyEmotes(p6, p7)
-	if p7 then
-		local t = {}
-		local t_1 = {}
+local function applyEmotes(HumanoidDescription, EmotesSlotInfo) --[[ Line: 82 ]]
+	if EmotesSlotInfo then
+		local Emotes = {}
+		local List = {}
 		
-		for i, v in p7 do
-			t[tostring(v.assetId)] = { tonumber(v.assetId) }
-			table.insert(t_1, { Slot = v.position, Name = tostring(v.assetId) })
+		for _, value in EmotesSlotInfo do
+			Emotes[tostring(value.assetId)] = { (tonumber(value.assetId)) }
+			table.insert(List, { Slot = value.position, Name = tostring(value.assetId) })
 		end
-		p6:SetEmotes(t)
-		p6:SetEquippedEmotes(t_1)
+		HumanoidDescription:SetEmotes(Emotes)
+		HumanoidDescription:SetEquippedEmotes(List)
 	end
 end
 
-return function(p8)
-	-- upvalues: applyCurrentAssets (ref), constantsModule (ref), applyEmotes (ref)
-	local humanoidDescription = Instance.new("HumanoidDescription")
-	applyCurrentAssets(humanoidDescription, p8.currentAssets)
-	local avatarScales = p8.avatarScales
+return function(p3) --[[ Line: 103 | Named "buildHumanoidDescription" ]]
+	-- upvalues: applyCurrentAssets (copy), ConstantsModule (copy), applyEmotes (copy)
+	local HumanoidDescription = Instance.new("HumanoidDescription")
+	applyCurrentAssets(HumanoidDescription, p3.currentAssets)
+	local AvatarScales = p3.avatarScales
 	
-	if avatarScales then
-		for i, v in avatarScales do
-			humanoidDescription[constantsModule.HUMANOID_DESCRIPTION_SCALE_TO_NAME[i]] = v
+	if AvatarScales then
+		for i, avatarScale in AvatarScales do
+			HumanoidDescription[ConstantsModule.HUMANOID_DESCRIPTION_SCALE_TO_NAME[i]] = avatarScale
 		end
 	end
-	local bodyColor3s = p8.bodyColor3s
+	local BodyColor3s = p3.bodyColor3s
 	
-	if bodyColor3s then
-		for i, v in bodyColor3s do
-			humanoidDescription[constantsModule.BODY_PART_FOR_SKIN_COLORING_ID_TO_HUMANOID_DESCRIPTION[i]] = v
+	if BodyColor3s then
+		for i1, bodyColor3 in BodyColor3s do
+			HumanoidDescription[ConstantsModule.BODY_PART_FOR_SKIN_COLORING_ID_TO_HUMANOID_DESCRIPTION[i1]] = bodyColor3
 		end
 	end
-	applyEmotes(humanoidDescription, p8.emotesSlotInfo)
+	applyEmotes(HumanoidDescription, p3.emotesSlotInfo)
 	
-	return humanoidDescription
+	return HumanoidDescription
 end

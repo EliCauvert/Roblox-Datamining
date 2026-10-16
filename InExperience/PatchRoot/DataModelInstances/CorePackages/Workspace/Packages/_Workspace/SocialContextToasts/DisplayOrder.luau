@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.DisplayOrder.DisplayOrder)
+﻿return (require(script.Parent.Parent.Parent._Index.DisplayOrder.DisplayOrder))

@@ -1,67 +1,65 @@
-﻿local contextActionService = game:GetService("ContextActionService")
-local coreGuiService = game:GetService("CoreGui")
-local corePackagesService = game:GetService("CorePackages")
-local guiService = game:GetService("GuiService")
-local robloxGui = coreGuiService:WaitForChild("RobloxGui")
-local roactModule = require(corePackagesService.Packages.Roact)
-local promiseModule = require(corePackagesService.Packages.Promise)
-local coreScriptsRootProvider = require(corePackagesService.Workspace.Packages.CoreScriptsRoactCommon).CoreScriptsRootProvider
-local playerListModule = require(corePackagesService.Workspace.Packages.PlayerList)
-local blockingAnalyticsModule = require(script.Parent.Analytics.BlockingAnalytics)
-local blockingModalScreenModule = require(script.Parent.Components.Blocking.BlockingModalScreen)
-local fFlagAddNewPlayerListMobileFocusNav = playerListModule.Flags.FFlagAddNewPlayerListMobileFocusNav
-local var1 = nil
+﻿local ContextActionService = game:GetService("ContextActionService")
+local CorePackages = game:GetService("CorePackages")
+local GuiService = game:GetService("GuiService")
+local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
+local RoactModule = require(CorePackages.Packages.Roact)
+local PromiseModule = require(CorePackages.Packages.Promise)
+local CoreScriptsRootProvider = require(CorePackages.Workspace.Packages.CoreScriptsRoactCommon).CoreScriptsRootProvider
+local BlockingAnalyticsModule = require(script.Parent.Analytics.BlockingAnalytics)
+local BlockingModalScreenModule = require(script.Parent.Components.Blocking.BlockingModalScreen)
+local FFlagAddNewPlayerListMobileFocusNav = require(CorePackages.Workspace.Packages.PlayerList).Flags.FFlagAddNewPlayerListMobileFocusNav
+local BlockingContainer = nil
 
-local _ = function()
-	-- upvalues: var1 (write), roactModule (ref), contextActionService (ref)
-	if var1 ~= nil then
-		roactModule.unmount(var1)
-		var1 = nil
-		contextActionService:UnbindCoreAction("BlockingModalScreen")
+local function _() --[[ Line: 23 ]]
+	-- upvalues: BlockingContainer (ref), RoactModule (copy), ContextActionService (copy)
+	if BlockingContainer ~= nil then
+		RoactModule.unmount(BlockingContainer)
+		BlockingContainer = nil
+		ContextActionService:UnbindCoreAction("BlockingModalScreen")
 	end
 end
 
-return function(p1, p2, p3, p4)
-	-- upvalues: promiseModule (ref), blockingAnalyticsModule (ref), var1 (write), roactModule (ref), contextActionService (ref), fFlagAddNewPlayerListMobileFocusNav (ref), guiService (ref), blockingModalScreenModule (ref), coreScriptsRootProvider (ref), robloxGui (ref)
-	return promiseModule.new(function(p5)
-		-- upvalues: p2 (ref), blockingAnalyticsModule (copy), p1 (ref), p3 (ref), var1 (copy), roactModule (copy), contextActionService (copy), fFlagAddNewPlayerListMobileFocusNav (copy), p4 (ref), guiService (copy), blockingModalScreenModule (copy), coreScriptsRootProvider (copy), robloxGui (copy)
-		local p6 = p2 or blockingAnalyticsModule.new()
-		p6:action("SettingsHub", "blockUserButtonClick", { blockeeUserId = p1.UserId, source = p3 })
+return function(Player: Player, p1, Source, p2) --[[ Line: 32 ]]
+	-- upvalues: PromiseModule (copy), BlockingAnalyticsModule (copy), BlockingContainer (ref), RoactModule (copy), ContextActionService (copy), FFlagAddNewPlayerListMobileFocusNav (copy), GuiService (copy), BlockingModalScreenModule (copy), CoreScriptsRootProvider (copy), RobloxGui (copy)
+	return PromiseModule.new(function(Callback) --[[ Line: 33 ]]
+		-- upvalues: p1 (copy), BlockingAnalyticsModule (upval), Player (copy), Source (copy), BlockingContainer (upval), RoactModule (upval), ContextActionService (upval), FFlagAddNewPlayerListMobileFocusNav (upval), p2 (copy), GuiService (upval), BlockingModalScreenModule (upval), CoreScriptsRootProvider (upval), RobloxGui (upval)
+		local P1 = p1 or BlockingAnalyticsModule.new()
+		P1:action("SettingsHub", "blockUserButtonClick", { blockeeUserId = Player.UserId, source = Source })
 		
-		if var1 ~= nil then
-			roactModule.unmount(var1)
-			var1 = nil
-			contextActionService:UnbindCoreAction("BlockingModalScreen")
+		if BlockingContainer ~= nil then
+			RoactModule.unmount(BlockingContainer)
+			BlockingContainer = nil
+			ContextActionService:UnbindCoreAction("BlockingModalScreen")
 		end
-		local var2 = function()
-			-- upvalues: var1 (copy), roactModule (copy), contextActionService (copy), p5 (ref), fFlagAddNewPlayerListMobileFocusNav (copy), p4 (copy), guiService (copy)
-			if var1 ~= nil then
-				roactModule.unmount(var1)
-				var1 = nil
-				contextActionService:UnbindCoreAction("BlockingModalScreen")
+		local function CloseModal() --[[ Line: 42 ]]
+			-- upvalues: BlockingContainer (upval), RoactModule (upval), ContextActionService (upval), Callback (copy), FFlagAddNewPlayerListMobileFocusNav (upval), p2 (upval), GuiService (upval)
+			if BlockingContainer ~= nil then
+				RoactModule.unmount(BlockingContainer)
+				BlockingContainer = nil
+				ContextActionService:UnbindCoreAction("BlockingModalScreen")
 			end
-			p5()
+			Callback()
 			
-			if fFlagAddNewPlayerListMobileFocusNav then
-				if p4 and p4.onBlockingModalClose then
-					p4.onBlockingModalClose()
+			if FFlagAddNewPlayerListMobileFocusNav then
+				if p2 and p2.onBlockingModalClose then
+					p2.onBlockingModalClose()
 					
 					return
 				end
-			elseif fFlagAddNewPlayerListMobileFocusNav then
-				guiService.SelectedCoreObject = nil
+			elseif FFlagAddNewPlayerListMobileFocusNav then
+				GuiService.SelectedCoreObject = nil
 			end
 		end
 		
-		var1 = roactModule.mount(roactModule.createElement(coreScriptsRootProvider, {}, {
-			BlockingModalScreen = roactModule.createElement(blockingModalScreenModule, {
-				player = p1,
-				closeModal = var2,
-				analytics = p6,
-				source = p3,
-				onBlockingSuccess = if p4 then p4.onBlockingSuccess else nil
+		BlockingContainer = RoactModule.mount(RoactModule.createElement(CoreScriptsRootProvider, {}, {
+			BlockingModalScreen = RoactModule.createElement(BlockingModalScreenModule, {
+				player = Player,
+				closeModal = CloseModal,
+				analytics = P1,
+				source = Source,
+				onBlockingSuccess = p2 and p2.onBlockingSuccess or nil
 			})
-		}), robloxGui, "BlockingContainer")
-		contextActionService:BindCoreAction("BlockingModalScreen", var2, false, Enum.KeyCode.ButtonB, Enum.KeyCode.Escape)
+		}), RobloxGui, "BlockingContainer")
+		ContextActionService:BindCoreAction("BlockingModalScreen", CloseModal, false, Enum.KeyCode.ButtonB, Enum.KeyCode.Escape)
 	end)
 end

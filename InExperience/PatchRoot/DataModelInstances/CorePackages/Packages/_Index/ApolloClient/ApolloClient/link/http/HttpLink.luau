@@ -1,21 +1,18 @@
-﻿local t = {}
-local apolloLink = require(script.Parent.Parent.core).ApolloLink
+﻿local ApolloLink = require(script.Parent.Parent.core).ApolloLink
 local _ = require(script.Parent.selectHttpOptionsAndBody)
-local createHttpLink = require(script.Parent.createHttpLink).createHttpLink
-local tbl = setmetatable({}, { __index = apolloLink })
-tbl.__index = tbl
+local CreateHttpLinkFunction = require(script.Parent.createHttpLink).createHttpLink
+local self = setmetatable({}, { __index = ApolloLink })
+self.__index = self
 
-function tbl.new(p1)
-	-- upvalues: apolloLink (ref), createHttpLink (ref), tbl (ref)
-	if p1 == nil then
-		p1 = {}
+function self.new(Options) --[[ Line: 23 ]]
+	-- upvalues: ApolloLink (copy), CreateHttpLinkFunction (copy), self (copy)
+	if Options == nil then
+		Options = {}
 	end
-	local tbl_1 = setmetatable(apolloLink.new(createHttpLink(p1).request), tbl)
-	tbl_1.options = p1
+	local self1 = setmetatable(ApolloLink.new(CreateHttpLinkFunction(Options).request), self)
+	self1.options = Options
 	
-	return tbl_1
+	return self1
 end
 
-t.HttpLink = tbl
-
-return t
+return { HttpLink = self }

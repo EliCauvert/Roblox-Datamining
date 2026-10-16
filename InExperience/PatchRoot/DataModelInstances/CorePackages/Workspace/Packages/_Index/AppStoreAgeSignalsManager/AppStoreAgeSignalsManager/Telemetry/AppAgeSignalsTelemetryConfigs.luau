@@ -1,6 +1,6 @@
-﻿local telemetryService = game:GetService("TelemetryService")
-local enableAppAgeSignalsErrorTelemetry = game:DefineFastFlag("EnableAppAgeSignalsErrorTelemetry", false)
-local t = {
+﻿local TelemetryService = game:GetService("TelemetryService")
+local EnableAppAgeSignalsErrorTelemetry = game:DefineFastFlag("EnableAppAgeSignalsErrorTelemetry", false)
+local config = {
 	ErrorCounter = {
 		eventName = "AppAgeSignalsErrorCounter",
 		description = "Error counter for app age signals collection flow",
@@ -17,13 +17,13 @@ local t = {
 }
 
 return {
-	reportError = function(p1)
-		-- upvalues: enableAppAgeSignalsErrorTelemetry (ref), telemetryService (ref), t (ref)
-		if enableAppAgeSignalsErrorTelemetry then
-			telemetryService:LogCounter(t.ErrorCounter, {
+	reportError = function(p1) --[[ Line: 28 ]]
+		-- upvalues: EnableAppAgeSignalsErrorTelemetry (copy), TelemetryService (copy), config (copy)
+		if EnableAppAgeSignalsErrorTelemetry then
+			TelemetryService:LogCounter(config.ErrorCounter, {
 				customFields = { error = p1.error, signalSource = p1.signalSource }
 			}, 1)
-			telemetryService:LogEvent(t.ErrorEvent, {
+			TelemetryService:LogEvent(config.ErrorEvent, {
 				standardizedFields = { "addSessionInfo", "addSessionId", "addOSInfo" },
 				customFields = { error = p1.error, signalSource = p1.signalSource }
 			})

@@ -1,16 +1,16 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local roactModule = require(corePackagesService.Packages.Roact)
-local tModule = require(corePackagesService.Packages.t)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local bubbleChatBillboardsModule = require(script.Parent.BubbleChatBillboards)
-local app = roactModule.Component:extend("App")
-app.validateProps = tModule.strictInterface({ store = tModule.table })
+﻿local CorePackages = game:GetService("CorePackages")
+local RoactModule = require(CorePackages.Packages.Roact)
+local TModule = require(CorePackages.Packages.t)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local BubbleChatBillboardsModule = require(script.Parent.BubbleChatBillboards)
+local App = RoactModule.Component:extend("App")
+App.validateProps = TModule.strictInterface({ store = TModule.table })
 
-function app.render(p1)
-	-- upvalues: roactModule (ref), roactRoduxModule (ref), bubbleChatBillboardsModule (ref)
-	return roactModule.createElement(roactRoduxModule.StoreProvider, { store = p1.props.store }, {
-		BubbleChatBillboards = roactModule.createElement(bubbleChatBillboardsModule)
+function App.render(p1) --[[ Line: 19 ]]
+	-- upvalues: RoactModule (copy), RoactRoduxModule (copy), BubbleChatBillboardsModule (copy)
+	return RoactModule.createElement(RoactRoduxModule.StoreProvider, { store = p1.props.store }, {
+		BubbleChatBillboards = RoactModule.createElement(BubbleChatBillboardsModule)
 	})
 end
 
-return app
+return App

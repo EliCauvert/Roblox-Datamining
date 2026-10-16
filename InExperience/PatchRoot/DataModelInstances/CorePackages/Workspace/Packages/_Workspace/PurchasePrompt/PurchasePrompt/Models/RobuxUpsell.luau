@@ -1,16 +1,16 @@
 ﻿local _ = script.Parent.Parent
 
 return {
-	new = function(p1, p2, p3, p4, p5)
+	new = function(Id, ProviderId, ProductName, RobuxAmount, Price) --[[ Line: 23 ]]
 		return {
-			id = p1,
-			providerId = p2,
-			productName = p3,
-			robuxAmount = p4,
-			price = p5
+			id = Id,
+			providerId = ProviderId,
+			productName = ProductName,
+			robuxAmount = RobuxAmount,
+			price = Price
 		}
 	end,
-	fromJson = function(p1)
+	fromJson = function(p1) --[[ Line: 39 ]]
 		return {
 			id = p1.roblox_product_id,
 			providerId = p1.provider_product_id,

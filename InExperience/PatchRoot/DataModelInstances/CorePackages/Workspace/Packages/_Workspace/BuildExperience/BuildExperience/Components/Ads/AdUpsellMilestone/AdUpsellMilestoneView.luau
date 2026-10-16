@@ -1,35 +1,39 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local adUpsellCardModule = require(buildExperience.Components.Ads.AdUpsellCard)
-local fFlagBuildAgentAdCampaignCardModule = require(buildExperience.Flags.FFlagBuildAgentAdCampaignCard)
-local fFlagBuildExperienceChatCardEmphasisModule = require(buildExperience.Flags.FFlagBuildExperienceChatCardEmphasis)
-local text = foundationModule.Text
-local view = foundationModule.View
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local AdUpsellCardModule = require(BuildExperience.Components.Ads.AdUpsellCard)
+local FFlagBuildAgentAdCampaignCardModule = require(BuildExperience.Flags.FFlagBuildAgentAdCampaignCard)
+local FFlagBuildExperienceChatCardEmphasisModule = require(BuildExperience.Flags.FFlagBuildExperienceChatCardEmphasis)
+local FFlagBuildAdUpsellPinnedModule = require(BuildExperience.Flags.FFlagBuildAdUpsellPinned)
+local Text = FoundationModule.Text
+local View = FoundationModule.View
 
-return function(p1)
-	-- upvalues: reactModule (ref), view (ref), text (ref), adUpsellCardModule (ref), fFlagBuildAgentAdCampaignCardModule (ref), fFlagBuildExperienceChatCardEmphasisModule (ref)
-	return reactModule.createElement(view, {
-		tag = "col gap-xxlarge size-full-0 auto-y",
+return function(p1) --[[ Line: 25 | Named "AdUpsellMilestoneView" ]]
+	-- upvalues: ReactModule (copy), View (copy), FFlagBuildAdUpsellPinnedModule (copy), Text (copy), AdUpsellCardModule (copy), FFlagBuildAgentAdCampaignCardModule (copy), FFlagBuildExperienceChatCardEmphasisModule (copy)
+	return ReactModule.createElement(View, {
 		LayoutOrder = p1.order,
+		tag = {
+			["size-full-0 auto-y"] = FFlagBuildAdUpsellPinnedModule,
+			["col gap-xxlarge size-full-0 auto-y"] = not FFlagBuildAdUpsellPinnedModule
+		},
 		testId = `AdUpsellMilestone.{p1.order}`
 	}, {
-		Congrats = reactModule.createElement(text, {
+		Congrats = if FFlagBuildAdUpsellPinnedModule then nil else ReactModule.createElement(Text, {
 			LayoutOrder = 1,
 			tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-emphasis",
 			Text = p1.congratsText,
 			testId = `AdUpsellCongrats.{p1.order}`
 		}),
-		Card = reactModule.createElement(adUpsellCardModule, {
-			LayoutOrder = 2,
+		Card = ReactModule.createElement(AdUpsellCardModule, {
+			LayoutOrder = if FFlagBuildAdUpsellPinnedModule then 1 else 2,
 			containerRef = p1.cardRef,
 			isCreatePending = p1.isCreatePending,
-			freePromotionsRemaining = if fFlagBuildAgentAdCampaignCardModule then p1.freePromotionsRemaining else nil,
-			isCreateDisabled = if fFlagBuildAgentAdCampaignCardModule then false else nil,
+			freePromotionsRemaining = if FFlagBuildAgentAdCampaignCardModule then p1.freePromotionsRemaining else nil,
+			isCreateDisabled = not FFlagBuildAgentAdCampaignCardModule and nil,
 			onCreate = p1.onCreate,
 			onDismiss = p1.onDismiss,
-			emphasisOrder = if fFlagBuildExperienceChatCardEmphasisModule then p1.order else nil
+			emphasisOrder = if FFlagBuildExperienceChatCardEmphasisModule then p1.order else nil
 		})
 	})
 end

@@ -1,6 +1,6 @@
-﻿local socialContextToasts = script:FindFirstAncestor("SocialContextToasts")
-local _ = require(socialContextToasts.ToastRoot)
+﻿local SocialContextToasts = script:FindFirstAncestor("SocialContextToasts")
+local _ = require(SocialContextToasts.ToastRoot)
 
-return require(socialContextToasts.Parent.Rodux).makeActionCreator(script.Name, function(p1)
-	return { toastContent = p1 }
+return require(SocialContextToasts.Parent.Rodux).makeActionCreator(script.Name, function(ToastContent) --[[ Line: 7 ]]
+	return { toastContent = ToastContent }
 end)

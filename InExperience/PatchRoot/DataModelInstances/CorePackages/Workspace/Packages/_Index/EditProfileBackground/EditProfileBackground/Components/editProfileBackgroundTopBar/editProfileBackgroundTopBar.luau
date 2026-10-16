@@ -1,25 +1,28 @@
-﻿local parent = script:FindFirstAncestor("EditProfileBackground").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local headerBar = require(parent.UIBlox).App.Bar.HeaderBar
-local makeBackButton = require(parent.AppHeaderBar).makeBackButton
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useLastInputMode = require(parent.FocusNavigationUtils).useLastInputMode
-local view = foundationModule.View
+﻿local Parent = script:FindFirstAncestor("EditProfileBackground").Parent
+local ReactModule = require(Parent.React)
+local HeaderBar = require(Parent.UIBlox).App.Bar.HeaderBar
+local MakeBackButtonFunction = require(Parent.AppHeaderBar).makeBackButton
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseLastInputModeFunction = require(Parent.FocusNavigationUtils).useLastInputMode
+local View = require(Parent.Foundation).View
 
-return function(value)
-	-- upvalues: useLastInputMode (ref), useLocalization (ref), makeBackButton (ref), reactModule (ref), view (ref), headerBar (ref)
-	return reactModule.createElement(view, {
+return function(p1) --[[ Line: 22 | Named "EditProfileBackgroundTopBar" ]]
+	-- upvalues: UseLastInputModeFunction (copy), UseLocalizationFunction (copy), MakeBackButtonFunction (copy), ReactModule (copy), View (copy), HeaderBar (copy)
+	local IsFocus = UseLastInputModeFunction() == "Focus"
+	local UseLocalizationResult = UseLocalizationFunction({ EditBackground = "Feature.Profile.Label.EditBackground" })
+	local BackButton = MakeBackButtonFunction(p1.onClose)
+	
+	return ReactModule.createElement(View, {
 		tag = "size-full-1200",
 		ZIndex = 2,
-		LayoutOrder = value.layoutOrder
+		LayoutOrder = p1.layoutOrder
 	}, {
-		headerBar = reactModule.createElement(headerBar, {
+		headerBar = ReactModule.createElement(HeaderBar, {
 			isSecondary = true,
 			backgroundTransparency = 1,
 			barHeight = 48,
-			title = useLocalization({ EditBackground = "Feature.Profile.Label.EditBackground" }).EditBackground,
-			renderLeft = if not (useLastInputMode() == "Focus") then makeBackButton(value.onClose) else nil
+			title = UseLocalizationResult.EditBackground,
+			renderLeft = if IsFocus then nil else BackButton
 		})
 	})
 end

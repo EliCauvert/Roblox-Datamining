@@ -1,45 +1,45 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local promiseModule = require(corePackagesService.Packages.Promise)
-local userProfileStore = require(corePackagesService.Workspace.Packages.UserProfiles).Stores.UserProfileStore
+﻿local CorePackages = game:GetService("CorePackages")
+local PromiseModule = require(CorePackages.Packages.Promise)
+local UserProfileStore = require(CorePackages.Workspace.Packages.UserProfiles).Stores.UserProfileStore
 
-local function collectUserIdsMissingUsername(p1)
+local function collectUserIdsMissingUsername(List) --[[ Line: 8 ]]
 	local t = {}
-	local t_1 = {}
+	local List1 = {}
 	
-	for i, v in p1 do
-		for i_1, v_1 in v.items do
-			local meta = v_1.meta
-			local userId = meta and meta.userId
-			local username = meta and meta.username
+	for _, value in List do
+		for _, item in value.items do
+			local Meta = item.meta
+			local UserId = Meta and Meta.userId
+			local Username = Meta and Meta.username
 			
-			if userId and userId ~= "0" and (not username or username == "") and not t[userId] then
-				t[userId] = true
-				table.insert(t_1, userId)
+			if UserId and UserId ~= "0" and (not Username or Username == "") and not t[UserId] then
+				t[UserId] = true
+				table.insert(List1, UserId)
 			end
 		end
 	end
-	return t_1
+	return List1
 end
 
-local function enrichGroupsWithProfileUsernames(p2, p3)
-	local t = {}
+local function enrichGroupsWithProfileUsernames(List, List1) --[[ Line: 27 ]]
+	local Usernames = {}
 	
-	for i, v in p3 do
-		local username = v.names.getUsername(false)
+	for _, value in List1 do
+		local Username = value.names.getUsername(false)
 		
-		if username and #username > 0 then
-			t[v.userId] = username
+		if Username and #Username > 0 then
+			Usernames[value.userId] = Username
 		end
 	end
-	for i, v_1 in p2 do
-		for i_2, v_2 in v_1.items do
-			local meta = v_2.meta
+	for _, value1 in List do
+		for _, item in value1.items do
+			local Meta = item.meta
 			
-			if meta and (not meta.username or meta.username == "") then
-				local userId = t[meta.userId]
+			if Meta and (not Meta.username or Meta.username == "") then
+				local Username = Usernames[Meta.userId]
 				
-				if userId then
-					meta.username = userId
+				if Username then
+					Meta.username = Username
 				end
 			end
 		end
@@ -49,21 +49,22 @@ end
 return {
 	collectUserIdsMissingUsername = collectUserIdsMissingUsername,
 	enrichGroupsWithProfileUsernames = enrichGroupsWithProfileUsernames,
-	enrichMissingUsernames = function(p4)
-		-- upvalues: collectUserIdsMissingUsername (ref), promiseModule (ref), userProfileStore (ref), enrichGroupsWithProfileUsernames (ref)
-		local var1 = collectUserIdsMissingUsername(p4)
+	enrichMissingUsernames = function(p1) --[[ Line: 50 ]]
+		-- upvalues: collectUserIdsMissingUsername (copy), PromiseModule (copy), UserProfileStore (copy), enrichGroupsWithProfileUsernames (copy)
+		local CollectUserIdsMissingUsernameResult = collectUserIdsMissingUsername(p1)
 		
-		return if #var1 == 0 then promiseModule.resolve(p4) else promiseModule.new(function(p5)
-			-- upvalues: userProfileStore (copy), var1 (ref), enrichGroupsWithProfileUsernames (copy), p4 (ref)
-			userProfileStore.get().fetchNamesByUserIds(var1, function(p6)
-				-- upvalues: enrichGroupsWithProfileUsernames (copy), p4 (copy), p5 (ref)
-				if p6.status == "success" and p6.data then
-					enrichGroupsWithProfileUsernames(p4, p6.data)
-					p5(p4)
+		return if #CollectUserIdsMissingUsernameResult == 0 then PromiseModule.resolve(p1) else PromiseModule.new(function(Callback) --[[ Line: 56 ]]
+			-- upvalues: UserProfileStore (upval), CollectUserIdsMissingUsernameResult (copy), enrichGroupsWithProfileUsernames (upval), p1 (copy)
+			UserProfileStore.get().fetchNamesByUserIds(CollectUserIdsMissingUsernameResult, function(p2) --[[ Line: 57 ]]
+				-- upvalues: enrichGroupsWithProfileUsernames (upval), p1 (upval), Callback (copy)
+				if p2.status == "success" and p2.data then
+					enrichGroupsWithProfileUsernames(p1, p2.data)
+					Callback(p1)
 					
 					return
-				elseif p6.status == "failed" then
-					p5(p4)
+				end
+				if p2.status == "failed" then
+					Callback(p1)
 				end
 			end)
 		end)

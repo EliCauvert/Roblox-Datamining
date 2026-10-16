@@ -1,55 +1,61 @@
-﻿local userInputService = game:GetService("UserInputService")
-local reactModule = require(script.Parent.Parent.Parent.React)
+﻿local UserInputService = game:GetService("UserInputService")
+local ReactModule = require(script.Parent.Parent.Parent.React)
 
-return function(p1)
-	-- upvalues: reactModule (ref), userInputService (ref)
-	local var1 = reactModule.createRef()
-	local var2, var3 = reactModule.useState(false)
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), userInputService (copy), var1 (ref), var3 (ref), var2 (ref)
-		if p1.swipeEnabled and p1.swipeCallback then
-			local touchStartedConnection = userInputService.TouchStarted:Connect(function(p2)
-				-- upvalues: var1 (copy), var3 (copy)
-				local current = var1 and var1.current
+return function(Frame) --[[ Line: 19 ]]
+	-- upvalues: ReactModule (copy), UserInputService (copy)
+	local Ref = ReactModule.createRef()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	ReactModule.useEffect(function() --[[ Line: 23 ]]
+		-- upvalues: Frame (copy), UserInputService (upval), Ref (copy), UseStateResult2 (copy), UseStateResult (copy)
+		if Frame.swipeEnabled and Frame.swipeCallback then
+			local TouchStartedConnection = UserInputService.TouchStarted:Connect(function(Touch) --[[ Line: 29 ]]
+				-- upvalues: Ref (upval), UseStateResult2 (upval)
+				local Current = Ref and Ref.current
 				
-				if not current then return end
-				local var4 = Vector2.new(p2.Position.X, p2.Position.Y) - current.AbsolutePosition
+				if not Current then return end
+				local VectorDelta = Vector2.new(Touch.Position.X, Touch.Position.Y) - Current.AbsolutePosition
 				
-				if var4.X >= 0 and var4.Y >= 0 and (var4.X <= current.AbsoluteSize.X and var4.Y <= current.AbsoluteSize.Y) then
-					var3(true)
+				if VectorDelta.X >= 0 and VectorDelta.Y >= 0 and VectorDelta.X <= Current.AbsoluteSize.X and VectorDelta.Y <= Current.AbsoluteSize.Y then
+					UseStateResult2(true)
 				end
 			end)
-			local touchEndedConnection = userInputService.TouchEnded:Connect(function()
-				-- upvalues: var3 (copy)
-				var3(false)
+			local TouchEndedConnection = UserInputService.TouchEnded:Connect(function() --[[ Line: 46 ]]
+				-- upvalues: UseStateResult2 (upval)
+				UseStateResult2(false)
 			end)
-			local var4 = if var2 then userInputService.TouchSwipe:Connect(function(p2)
-				-- upvalues: var2 (copy), p1 (copy)
-				if var2 then
-					p1.swipeCallback(p2)
+			local TouchSwipeConnection = if UseStateResult then UserInputService.TouchSwipe:Connect(function(SwipeDirection) --[[ Line: 50 ]]
+				-- upvalues: UseStateResult (upval), Frame (upval)
+				if UseStateResult then
+					Frame.swipeCallback(SwipeDirection)
 				end
 			end) else nil
 			
-			return function()
-				-- upvalues: touchStartedConnection (ref), touchEndedConnection (ref), var4 (ref)
-				touchStartedConnection:Disconnect()
-				touchEndedConnection:Disconnect()
+			return function() --[[ Line: 57 ]]
+				-- upvalues: TouchStartedConnection (copy), TouchEndedConnection (copy), TouchSwipeConnection (copy)
+				TouchStartedConnection:Disconnect()
+				TouchEndedConnection:Disconnect()
 				
-				if var4 then
-					var4:Disconnect()
+				if TouchSwipeConnection then
+					TouchSwipeConnection:Disconnect()
 				end
 			end
+		else
+			UseStateResult2(false)
+			
+			return nil
 		end
-		var3(false)
-		
-		return nil
-	end, { p1.swipeEnabled, p1.swipeCallback, var1, var2 })
+	end, {
+		Frame.swipeEnabled,
+		Frame.swipeCallback,
+		Ref,
+		UseStateResult
+	})
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Active = true,
-		Size = p1.Size,
-		AutomaticSize = p1.AutomaticSize,
-		ref = var1
-	}, p1.children)
+		Size = Frame.Size,
+		AutomaticSize = Frame.AutomaticSize,
+		ref = Ref
+	}, Frame.children)
 end

@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent.Parent._Workspace.DataHydration.DataHydration.AdCampaignToolCallStatus)
+﻿return (require(script.Parent.Parent.Parent.Parent._Workspace.DataHydration.DataHydration.AdCampaignToolCallStatus))

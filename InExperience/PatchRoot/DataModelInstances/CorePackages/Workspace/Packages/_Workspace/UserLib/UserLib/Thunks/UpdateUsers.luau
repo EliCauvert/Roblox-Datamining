@@ -1,45 +1,49 @@
-﻿local userLib = script:FindFirstAncestor("UserLib")
-local parent = userLib.Parent
-local userModule = require(userLib.Models.User)
-local addUsersModule = require(userLib.Actions.AddUsers)
-local setFriendCount = require(parent.LegacyFriendsRodux).Actions.SetFriendCount
-local fFlagRemoveUnusedFriendCountRoduxSlice = require(parent.SharedFlags).FFlagRemoveUnusedFriendCountRoduxSlice
+﻿local UserLib = script:FindFirstAncestor("UserLib")
+local Parent = UserLib.Parent
+local UserModule = require(UserLib.Models.User)
+local AddUsersModule = require(UserLib.Actions.AddUsers)
+local SetFriendCountFunction = require(Parent.LegacyFriendsRodux).Actions.SetFriendCount
+local FFlagRemoveUnusedFriendCountRoduxSlice = require(Parent.SharedFlags).FFlagRemoveUnusedFriendCountRoduxSlice
 
-return function(p1)
-	-- upvalues: userModule (ref), addUsersModule (ref), fFlagRemoveUnusedFriendCountRoduxSlice (ref), setFriendCount (ref)
-	return function(p2)
-		-- upvalues: p1 (ref), userModule (copy), addUsersModule (copy), fFlagRemoveUnusedFriendCountRoduxSlice (copy), setFriendCount (copy)
-		local var1 = 0
+return function(p1) --[[ Line: 10 ]]
+	-- upvalues: UserModule (copy), AddUsersModule (copy), FFlagRemoveUnusedFriendCountRoduxSlice (copy), SetFriendCountFunction (copy)
+	return function(p2) --[[ Line: 11 ]]
+		-- upvalues: p1 (copy), UserModule (upval), AddUsersModule (upval), FFlagRemoveUnusedFriendCountRoduxSlice (upval), SetFriendCountFunction (upval)
+		local Total = 0
 		local t = {}
 		
-		for i, v in pairs(p1) do
-			local var2 = false
-			local id = v.id
-			local isFriend = v.isFriend
-			local var3 = 0
-			assert(typeof(isFriend) == "boolean", "Expected isFriend to be a string")
-			local var4 = p2:getState().Users[id]
+		for _, value in pairs(p1) do
+			local Flag = false
+			local Id = value.id
+			local IsFriend = value.isFriend
+			local Amount = 0
+			assert(typeof(IsFriend) == "boolean", "Expected isFriend to be a string")
+			local User = p2:getState().Users[Id]
 			
-			if not var4 then
-				var2 = true
-				var3 = if isFriend then 1 else 0
-			elseif not userModule.compare(var4, v) then
-				var2 = true
+			if User then
+				local CompareResult = UserModule.compare(User, value)
 				
-				if var4.isFriend ~= isFriend then
-					var3 = if isFriend then 1 else -1
+				if not CompareResult then
+					Flag = true
+					CompareResult = User.isFriend == IsFriend
 				end
+				if not CompareResult then
+					Amount = if IsFriend then 1 else -1
+				end
+			else
+				Flag = true
+				Amount = if IsFriend then 1 else 0
 			end
-			if var2 then
-				var1 += var3
-				t[id] = v
+			if Flag then
+				Total += Amount
+				t[Id] = value
 			end
 		end
 		if next(t) then
-			p2:dispatch(addUsersModule(t))
+			p2:dispatch(AddUsersModule(t))
 		end
-		if not fFlagRemoveUnusedFriendCountRoduxSlice and var1 ~= 0 then
-			p2:dispatch(setFriendCount(p2:getState().FriendCount + var1))
+		if not FFlagRemoveUnusedFriendCountRoduxSlice and Total ~= 0 then
+			p2:dispatch(SetFriendCountFunction(p2:getState().FriendCount + Total))
 		end
 	end
 end

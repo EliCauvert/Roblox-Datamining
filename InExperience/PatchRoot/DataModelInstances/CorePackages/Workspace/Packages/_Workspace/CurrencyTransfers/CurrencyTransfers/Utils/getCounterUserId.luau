@@ -1,18 +1,21 @@
-﻿local currencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
-local transferDirectionModule = require(currencyTransfers.Enums.TransferDirection)
-local _ = require(currencyTransfers.Stores.createTransferStore)
+﻿local CurrencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
+local TransferDirectionModule = require(CurrencyTransfers.Enums.TransferDirection)
+local _ = require(CurrencyTransfers.Stores.createTransferStore)
 
-return function(p1, p2)
-	-- upvalues: transferDirectionModule (ref)
-	if p2 == transferDirectionModule.Send then
-		local recipient = p1.getRecipient(false)
+return function(p1, Send) --[[ Line: 10 | Named "getCounterUserId" ]]
+	-- upvalues: TransferDirectionModule (copy)
+	if Send == TransferDirectionModule.Send then
+		local Recipient = p1.getRecipient(false)
 		
-		if recipient then
-			return recipient.targetId
+		if Recipient then
+			return Recipient.targetId
 		end
 	else
-		local sender = p1.getSender(false)
+		local Sender = p1.getSender(false)
 		
-		return if sender then sender.targetId else nil
+		if Sender then
+			return Sender.targetId
+		end
 	end
+	return nil
 end

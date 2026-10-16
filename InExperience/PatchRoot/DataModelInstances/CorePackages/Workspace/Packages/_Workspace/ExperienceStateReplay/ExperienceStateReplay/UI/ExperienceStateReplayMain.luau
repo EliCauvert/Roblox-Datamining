@@ -1,35 +1,36 @@
-﻿local t = {}
+﻿local ExperienceStateReplayMainModule = {}
 
 if not game:GetEngineFeature("RecordingServicePlaybackApiLua") then
-	return t
-elseif not game:GetEngineFeature("DmctPlaybackClientApp") and game.PlaceId ~= 123012592984338 then
-	return t
+	return ExperienceStateReplayMainModule
 end
-local robloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
-local parent = script.Parent
-t.state = require(parent.PlaybackState).new(false, false, false)
-t.screenGui = Instance.new("ScreenGui")
-t.screenGui.Parent = robloxGui
-require(parent.CreateControlBar).createControlBar(t)
-require(parent.CreateLoadingOverlay).createLoadingOverlay(t)
-require(parent.CreateButtonsTime).createButtonsTime(t)
-require(parent.CreateScrubber).createScrubber(t)
-require(parent.CreateHelpText).createHelpText(t)
-require(parent.ControlButtonsTime).setupControl(t)
-require(parent.ControlVisibility).setupControl(t)
-local loadSlicesModule = require(parent.LoadSlices)
+if not game:GetEngineFeature("DmctPlaybackClientApp") and game.PlaceId ~= 123012592984338 then
+	return ExperienceStateReplayMainModule
+end
+local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
+local Parent = script.Parent
+ExperienceStateReplayMainModule.state = require(Parent.PlaybackState).new(false, false, false)
+ExperienceStateReplayMainModule.screenGui = Instance.new("ScreenGui")
+ExperienceStateReplayMainModule.screenGui.Parent = RobloxGui
+require(Parent.CreateControlBar).createControlBar(ExperienceStateReplayMainModule)
+require(Parent.CreateLoadingOverlay).createLoadingOverlay(ExperienceStateReplayMainModule)
+require(Parent.CreateButtonsTime).createButtonsTime(ExperienceStateReplayMainModule)
+require(Parent.CreateScrubber).createScrubber(ExperienceStateReplayMainModule)
+require(Parent.CreateHelpText).createHelpText(ExperienceStateReplayMainModule)
+require(Parent.ControlButtonsTime).setupControl(ExperienceStateReplayMainModule)
+require(Parent.ControlVisibility).setupControl(ExperienceStateReplayMainModule)
+local LoadSlicesModule = require(Parent.LoadSlices)
 
 if not game:GetEngineFeature("DmctPlaybackClientApp") then
-	loadSlicesModule.experienceCallback(t)
+	LoadSlicesModule.experienceCallback(ExperienceStateReplayMainModule)
 end
-require(parent.ControlScrubber).setupControl(t)
-require(parent.ListenPlaybackStatusUpdated).setupListener(t)
-require(parent.CreateSpectatorCamera).createSpectatorCamera(t)
+require(Parent.ControlScrubber).setupControl(ExperienceStateReplayMainModule)
+require(Parent.ListenPlaybackStatusUpdated).setupListener(ExperienceStateReplayMainModule)
+require(Parent.CreateSpectatorCamera).createSpectatorCamera(ExperienceStateReplayMainModule)
 
 if game:GetEngineFeature("DmctPlaybackClientApp") then
-	require(parent.ReplaySelector).create(t, function(p1)
-		-- upvalues: loadSlicesModule (ref), t (ref)
-		loadSlicesModule.loadGUID(t, p1)
+	require(Parent.ReplaySelector).create(ExperienceStateReplayMainModule, function(p1) --[[ Line: 59 ]]
+		-- upvalues: LoadSlicesModule (copy), ExperienceStateReplayMainModule (copy)
+		LoadSlicesModule.loadGUID(ExperienceStateReplayMainModule, p1)
 	end)
 end
-return t
+return ExperienceStateReplayMainModule

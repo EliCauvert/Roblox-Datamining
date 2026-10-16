@@ -1,18 +1,18 @@
-﻿local parent = script:FindFirstAncestor("GameCollections").Parent
-local gameTileViewConfig = require(parent.GameTile).GameTileViewConfig
-local collectionLayoutCalculators = require(parent.CollectionViews).CollectionLayoutCalculators
-local _ = require(parent.Style)
+﻿local Parent = script:FindFirstAncestor("GameCollections").Parent
+local GameTileViewConfig = require(Parent.GameTile).GameTileViewConfig
+local CollectionLayoutCalculators = require(Parent.CollectionViews).CollectionLayoutCalculators
+local _ = require(Parent.Style)
 
 return {
-	calculateNumColumns = collectionLayoutCalculators.calculateNumColumns,
-	calculateTileHeightFromWidth = function(p1, _, p2, p3, p4, p5, p6, p7, p8, p9, p10)
-		-- upvalues: gameTileViewConfig (ref)
-		return gameTileViewConfig.getTileHeight(p3, p1, p2, p4, p5, p6, p7, p8, p9, p10)
+	calculateNumColumns = CollectionLayoutCalculators.calculateNumColumns,
+	calculateTileHeightFromWidth = function(p1, _, p2, p3, p4, p5, p6, p7, p8, p9, p10) --[[ Line: 15 ]]
+		-- upvalues: GameTileViewConfig (copy)
+		return GameTileViewConfig.getTileHeight(p3, p1, p2, p4, p5, p6, p7, p8, p9, p10)
 	end,
-	calculateSideMargin = collectionLayoutCalculators.calculateSideMargin,
-	calculateColumnGap = collectionLayoutCalculators.calculateColumnGap,
-	calculateVerticalPadding = collectionLayoutCalculators.calculateVerticalPadding,
-	calculateFractionalItemAmount = collectionLayoutCalculators.calculateFractionalItemAmount,
-	calculateMaxTilesToShow = collectionLayoutCalculators.calculateMaxTilesToShow,
-	calculateLoadMoreThreshold = collectionLayoutCalculators.calculateLoadMoreThreshold
+	calculateSideMargin = CollectionLayoutCalculators.calculateSideMargin,
+	calculateColumnGap = CollectionLayoutCalculators.calculateColumnGap,
+	calculateVerticalPadding = CollectionLayoutCalculators.calculateVerticalPadding,
+	calculateFractionalItemAmount = CollectionLayoutCalculators.calculateFractionalItemAmount,
+	calculateMaxTilesToShow = CollectionLayoutCalculators.calculateMaxTilesToShow,
+	calculateLoadMoreThreshold = CollectionLayoutCalculators.calculateLoadMoreThreshold
 }

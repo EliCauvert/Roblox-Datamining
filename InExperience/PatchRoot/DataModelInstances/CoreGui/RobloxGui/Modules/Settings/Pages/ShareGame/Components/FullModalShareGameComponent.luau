@@ -1,73 +1,72 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local corePackagesService = game:GetService("CorePackages")
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local useStyleSheet = require(corePackagesService.Packages.Foundation).Hooks.useStyleSheet
-local modules = coreGuiService.RobloxGui.Modules
-local parent = script.Parent
-local getFFlagExtraInviteModalStringValidationModule = require(modules.Flags.GetFFlagExtraInviteModalStringValidation)
-local fFlagFixPromptGameInviteUIButtonScalingModule = require(modules.Flags.FFlagFixPromptGameInviteUIButtonScaling)
-local shareGameContainerModule = require(parent.ShareGameContainer)
-local modalShareGamePageFrameModule = require(parent.ModalShareGamePageFrame)
-local layoutProviderModule = require(parent.LayoutProvider)
-local inviteSingleUserContainerModule = require(parent.InviteSingleUserContainer)
-local loadingModalModule = require(parent.LoadingModal)
+﻿local CorePackages = game:GetService("CorePackages")
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local UseStyleSheetFunction = require(CorePackages.Packages.Foundation).Hooks.useStyleSheet
+local Modules = game:GetService("CoreGui").RobloxGui.Modules
+local Parent = script.Parent
+local GetFFlagExtraInviteModalStringValidationModule = require(Modules.Flags.GetFFlagExtraInviteModalStringValidation)
+local FFlagFixPromptGameInviteUIButtonScalingModule = require(Modules.Flags.FFlagFixPromptGameInviteUIButtonScaling)
+local ShareGameContainerModule = require(Parent.ShareGameContainer)
+local ModalShareGamePageFrameModule = require(Parent.ModalShareGamePageFrame)
+local LayoutProviderModule = require(Parent.LayoutProvider)
+local InviteSingleUserContainerModule = require(Parent.InviteSingleUserContainer)
+local LoadingModalModule = require(Parent.LoadingModal)
 
-local function FoundationStyleLink()
-	-- upvalues: useStyleSheet (ref), roactModule (ref)
-	return roactModule.createElement("StyleLink", { StyleSheet = useStyleSheet() })
+local function FoundationStyleLink() --[[ Line: 22 ]]
+	-- upvalues: UseStyleSheetFunction (copy), RoactModule (copy)
+	return RoactModule.createElement("StyleLink", { StyleSheet = UseStyleSheetFunction() })
 end
 
-local fullModalShareGameComponent = roactModule.PureComponent:extend("FullModalShareGameComponent")
+local FullModalShareGameComponent = RoactModule.PureComponent:extend("FullModalShareGameComponent")
 
-function fullModalShareGameComponent.render(p1)
-	-- upvalues: getFFlagExtraInviteModalStringValidationModule (ref), roactModule (ref), roactRoduxModule (ref), fFlagFixPromptGameInviteUIButtonScalingModule (ref), FoundationStyleLink (ref), loadingModalModule (ref), layoutProviderModule (ref), shareGameContainerModule (ref), inviteSingleUserContainerModule (ref), modalShareGamePageFrameModule (ref)
-	local isVisible = p1.props.isVisible
-	local analytics = p1.props.analytics
-	local onAfterClosePage = p1.props.onAfterClosePage
-	local store = p1.props.store
-	local promptMessage = p1.props.promptMessage
-	local inviteUserId = p1.props.inviteUserId
-	local inviteMessageId = p1.props.inviteMessageId
-	local launchData = p1.props.launchData
-	local isLoading = p1.props.isLoading
-	local requestImpl = p1.props.requestImpl
+function FullModalShareGameComponent.render(p1) --[[ Line: 31 ]]
+	-- upvalues: GetFFlagExtraInviteModalStringValidationModule (copy), RoactModule (copy), RoactRoduxModule (copy), FFlagFixPromptGameInviteUIButtonScalingModule (copy), FoundationStyleLink (copy), LoadingModalModule (copy), LayoutProviderModule (copy), ShareGameContainerModule (copy), InviteSingleUserContainerModule (copy), ModalShareGamePageFrameModule (copy)
+	local IsVisible = p1.props.isVisible
+	local Analytics = p1.props.analytics
+	local OnAfterClosePageFunction = p1.props.onAfterClosePage
+	local Store = p1.props.store
+	local PromptMessage = p1.props.promptMessage
+	local InviteUserId = p1.props.inviteUserId
+	local InviteMessageId = p1.props.inviteMessageId
+	local LaunchData = p1.props.launchData
+	local IsLoading = p1.props.isLoading
+	local RequestImpl = p1.props.requestImpl
 	
-	if getFFlagExtraInviteModalStringValidationModule() and promptMessage then
-		if not inviteUserId then
-			promptMessage = promptMessage:gsub("\n", " ")
+	if GetFFlagExtraInviteModalStringValidationModule() and PromptMessage then
+		if not InviteUserId then
+			PromptMessage = PromptMessage:gsub("\n", " ")
 		end
-		if promptMessage:gsub("%s", "") == "" then
-			promptMessage = nil
+		if PromptMessage:gsub("%s", "") == "" then
+			PromptMessage = nil
 		end
 	end
-	return roactModule.createElement(roactRoduxModule.StoreProvider, { store = store }, {
-		screenGui = roactModule.createElement("ScreenGui", {
+	return RoactModule.createElement(RoactRoduxModule.StoreProvider, { store = Store }, {
+		screenGui = RoactModule.createElement("ScreenGui", {
 			AutoLocalize = false,
 			DisplayOrder = -1,
-			Enabled = isVisible,
+			Enabled = IsVisible,
 			ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 		}, {
-			foundationStyleLink = if fFlagFixPromptGameInviteUIButtonScalingModule then roactModule.createElement(FoundationStyleLink) else nil,
-			loadingIndicator = isLoading and roactModule.createElement(loadingModalModule),
-			layoutProvider = not isLoading and roactModule.createElement(layoutProviderModule, nil, {
-				ShareGameContainer = roactModule.createElement(shareGameContainerModule, {
-					analytics = analytics,
-					isVisible = isVisible,
-					skeletonComponent = if inviteUserId then inviteSingleUserContainerModule else modalShareGamePageFrameModule,
-					promptMessage = promptMessage,
-					inviteUserId = inviteUserId,
-					inviteMessageId = inviteMessageId,
-					launchData = launchData,
-					requestImpl = requestImpl,
-					onAfterClosePage = function()
-						-- upvalues: store (ref), onAfterClosePage (ref)
-						local t = {}
+			foundationStyleLink = if FFlagFixPromptGameInviteUIButtonScalingModule then RoactModule.createElement(FoundationStyleLink) else nil,
+			loadingIndicator = IsLoading and RoactModule.createElement(LoadingModalModule),
+			layoutProvider = not IsLoading and RoactModule.createElement(LayoutProviderModule, nil, {
+				ShareGameContainer = RoactModule.createElement(ShareGameContainerModule, {
+					analytics = Analytics,
+					isVisible = IsVisible,
+					skeletonComponent = if InviteUserId then InviteSingleUserContainerModule else ModalShareGamePageFrameModule,
+					promptMessage = PromptMessage,
+					inviteUserId = InviteUserId,
+					inviteMessageId = InviteMessageId,
+					launchData = LaunchData,
+					requestImpl = RequestImpl,
+					onAfterClosePage = function() --[[ Line: 76 ]]
+						-- upvalues: Store (copy), OnAfterClosePageFunction (copy)
+						local List = {}
 						
-						for i, v in pairs(store:getState().Invites) do
-							table.insert(t, i)
+						for i, _ in pairs(Store:getState().Invites) do
+							table.insert(List, i)
 						end
-						onAfterClosePage(t)
+						OnAfterClosePageFunction(List)
 					end
 				})
 			})
@@ -75,4 +74,4 @@ function fullModalShareGameComponent.render(p1)
 	})
 end
 
-return fullModalShareGameComponent
+return FullModalShareGameComponent

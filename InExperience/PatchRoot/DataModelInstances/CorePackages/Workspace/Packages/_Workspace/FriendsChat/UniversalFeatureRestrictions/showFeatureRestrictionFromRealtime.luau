@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent.Parent._Workspace.UniversalFeatureRestrictions.UniversalFeatureRestrictions.Utils.showFeatureRestrictionFromRealtime)
+﻿return (require(script.Parent.Parent.Parent.Parent._Workspace.UniversalFeatureRestrictions.UniversalFeatureRestrictions.Utils.showFeatureRestrictionFromRealtime))

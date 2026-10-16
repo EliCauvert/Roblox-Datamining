@@ -1,11 +1,11 @@
-﻿local componentsModule = require(script.Components)
+﻿local ComponentsModule = require(script.Components)
 local _ = require(script.Types)
 
 return {
 	InAppSocialUpsellOverlayWrapper = require(script.Components).InAppSocialUpsellOverlayWrapper,
-	UpsellBanner = componentsModule.UpsellBanner,
-	UpsellOverlay = componentsModule.UpsellOverlay,
-	SocialUpsellEventReceiver = componentsModule.SocialUpsellEventReceiver,
+	UpsellBanner = ComponentsModule.UpsellBanner,
+	UpsellOverlay = ComponentsModule.UpsellOverlay,
+	SocialUpsellEventReceiver = ComponentsModule.SocialUpsellEventReceiver,
 	Analytics = {
 		SocialUpsellAnalytics = require(script.Analytics.SocialUpsellAnalytics),
 		Enum = require(script.Analytics.Enum)

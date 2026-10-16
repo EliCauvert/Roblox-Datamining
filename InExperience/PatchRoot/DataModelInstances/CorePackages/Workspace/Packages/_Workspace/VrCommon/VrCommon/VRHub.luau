@@ -1,193 +1,202 @@
-﻿local parent = script:FindFirstAncestor("VrCommon").Parent
-local starterGuiService = game:GetService("StarterGui")
+﻿local Parent = script:FindFirstAncestor("VrCommon").Parent
+local StarterGui = game:GetService("StarterGui")
 local VRService = game:GetService("VRService")
-local runService = game:GetService("RunService")
-local httpService = game:GetService("HttpService")
-local userInputService = game:GetService("UserInputService")
-local contextActionService = game:GetService("ContextActionService")
-local create = require(parent.AppCommonLib).Create
-local laserPointerModule = require(script.Parent.LaserPointer)
+local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
+local ContextActionService = game:GetService("ContextActionService")
+local CreateFunction = require(Parent.AppCommonLib).Create
+local LaserPointerModule = require(script.Parent.LaserPointer)
 local VRControllerModelModule = require(script.Parent.VRControllerModel)
-local splashScreenManager = require(parent.SplashScreenManager).SplashScreenManager
-local safetyBubbleModule = require(script.Parent.SafetyBubble)
-local t = {
+local SplashScreenManager = require(Parent.SplashScreenManager).SplashScreenManager
+local SafetyBubbleModule = require(script.Parent.SafetyBubble)
+local t = {}
+local t1 = {}
+local Guid = game:GetService("HttpService"):GenerateGUID(true)
+local VRHubModule = {
 	LaserPointer = nil,
 	ControllerModelsEnabled = false,
 	LeftControllerModel = nil,
 	RightControllerModel = nil,
-	isFPSAtTarget = splashScreenManager.isFPSAtTarget(),
+	isFPSAtTarget = SplashScreenManager.isFPSAtTarget(),
 	SafetyBubble = nil,
 	IsFirstPerson = false
 }
-local t_1 = {}
-local t_2 = {}
-local var1 = httpService:GenerateGUID(true)
-starterGuiService:RegisterSetCore("VRLaserPointerMode", function(p1)
-	-- upvalues: t (ref), laserPointerModule (ref)
-	if not t.LaserPointer then return end
+StarterGui:RegisterSetCore("VRLaserPointerMode", function(p1) --[[ Line: 44 ]]
+	-- upvalues: VRHubModule (copy), LaserPointerModule (copy)
+	if not VRHubModule.LaserPointer then return end
 	if p1 and tostring(p1) then
-		t.LaserPointer:setMode(laserPointerModule.Mode[tostring(p1)] or laserPointerModule.Mode.Disabled)
+		VRHubModule.LaserPointer:setMode(LaserPointerModule.Mode[tostring(p1)] or LaserPointerModule.Mode.Disabled)
 		
 		return
 	end
 end)
 
-local function enableControllerModels(p1)
-	-- upvalues: t (ref), VRControllerModelModule (ref)
-	if p1 ~= t.ControllerModelsEnabled then
-		t.ControllerModelsEnabled = p1
+local function enableControllerModels(IsControllerModelsMatch) --[[ Line: 54 ]]
+	-- upvalues: VRHubModule (copy), VRControllerModelModule (copy)
+	if IsControllerModelsMatch ~= VRHubModule.ControllerModelsEnabled then
+		VRHubModule.ControllerModelsEnabled = IsControllerModelsMatch
 		
-		if p1 then
-			if not t.LeftControllerModel then
-				t.LeftControllerModel = VRControllerModelModule.new(Enum.UserCFrame.LeftHand)
+		if IsControllerModelsMatch then
+			if not VRHubModule.LeftControllerModel then
+				VRHubModule.LeftControllerModel = VRControllerModelModule.new(Enum.UserCFrame.LeftHand)
 			end
-			t.LeftControllerModel:setEnabled(true)
+			VRHubModule.LeftControllerModel:setEnabled(true)
 			
-			if not t.RightControllerModel then
-				t.RightControllerModel = VRControllerModelModule.new(Enum.UserCFrame.RightHand)
+			if not VRHubModule.RightControllerModel then
+				VRHubModule.RightControllerModel = VRControllerModelModule.new(Enum.UserCFrame.RightHand)
 			end
-			t.RightControllerModel:setEnabled(true)
+			VRHubModule.RightControllerModel:setEnabled(true)
 			
 			return
-		elseif t.LeftControllerModel then
-			t.LeftControllerModel:setEnabled(false)
-		end
-		if t.RightControllerModel then
-			t.RightControllerModel:setEnabled(false)
+		else
+			if VRHubModule.LeftControllerModel then
+				VRHubModule.LeftControllerModel:setEnabled(false)
+			end
+			if VRHubModule.RightControllerModel then
+				VRHubModule.RightControllerModel:setEnabled(false)
+			end
 		end
 	end
 end
 
-starterGuiService:RegisterSetCore("VREnableControllerModels", function(p1)
-	-- upvalues: VRService (ref)
+StarterGui:RegisterSetCore("VREnableControllerModels", function(p1) --[[ Line: 83 ]]
+	-- upvalues: VRService (copy)
 	if p1 then
 		VRService.ControllerModels = Enum.VRControllerModelMode.Transparent
 		
 		return
+	else
+		VRService.ControllerModels = Enum.VRControllerModelMode.Disabled
 	end
-	VRService.ControllerModels = Enum.VRControllerModelMode.Disabled
 end)
-VRService:GetPropertyChangedSignal("ControllerModels"):Connect(function()
-	-- upvalues: enableControllerModels (ref), VRService (ref)
+VRService:GetPropertyChangedSignal("ControllerModels"):Connect(function() --[[ Line: 91 ]]
+	-- upvalues: enableControllerModels (copy), VRService (copy)
 	enableControllerModels(VRService.ControllerModels == Enum.VRControllerModelMode.Transparent)
 end)
-local currentTime = tick()
+local CurrentTime = tick()
 
-local function onRenderSteppedLast()
-	-- upvalues: currentTime (write), t (ref)
-	local currentTime_1 = tick()
-	local var2 = currentTime_1 - currentTime
-	currentTime = currentTime_1
+local function onRenderSteppedLast() --[[ Line: 96 ]]
+	-- upvalues: CurrentTime (ref), VRHubModule (copy)
+	local CurrentTime1 = tick()
+	local CurrentTimeDelta = CurrentTime1 - CurrentTime
+	CurrentTime = CurrentTime1
 	
-	if t.LaserPointer then
-		t.LaserPointer:update(var2)
+	if VRHubModule.LaserPointer then
+		VRHubModule.LaserPointer:update(CurrentTimeDelta)
 	end
-	if t.LeftControllerModel then
-		t.LeftControllerModel:update(var2)
+	if VRHubModule.LeftControllerModel then
+		VRHubModule.LeftControllerModel:update(CurrentTimeDelta)
 	end
-	if t.RightControllerModel then
-		t.RightControllerModel:update(var2)
+	if VRHubModule.RightControllerModel then
+		VRHubModule.RightControllerModel:update(CurrentTimeDelta)
 	end
-	if t.SafetyBubble then
-		t.SafetyBubble:update(var2)
-	end
-end
-
-local function onCameraCFrameChanged()
-	-- upvalues: t (ref)
-	if t.LaserPointer then
-		t.LaserPointer:update(0)
-	end
-	if t.LeftControllerModel then
-		t.LeftControllerModel:update(0)
-	end
-	if t.RightControllerModel then
-		t.RightControllerModel:update(0)
+	if VRHubModule.SafetyBubble then
+		VRHubModule.SafetyBubble:update(CurrentTimeDelta)
 	end
 end
 
-local var2 = nil
-workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function()
-	-- upvalues: var2 (write), onCameraCFrameChanged (ref)
-	if var2 then
-		var2:disconnect()
+local function onCameraCFrameChanged() --[[ Line: 117 ]]
+	-- upvalues: VRHubModule (copy)
+	if VRHubModule.LaserPointer then
+		VRHubModule.LaserPointer:update(0)
+	end
+	if VRHubModule.LeftControllerModel then
+		VRHubModule.LeftControllerModel:update(0)
+	end
+	if VRHubModule.RightControllerModel then
+		VRHubModule.RightControllerModel:update(0)
+	end
+end
+
+local Connection = nil
+workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function() --[[ Line: 135 | Named "onCurrentCameraChanged" ]]
+	-- upvalues: Connection (ref), onCameraCFrameChanged (copy)
+	if Connection then
+		Connection:disconnect()
 	end
 	if workspace.CurrentCamera then
-		var2 = workspace.CurrentCamera:GetPropertyChangedSignal("CFrame"):Connect(onCameraCFrameChanged)
+		Connection = workspace.CurrentCamera:GetPropertyChangedSignal("CFrame"):Connect(onCameraCFrameChanged)
 	end
 end)
-if workspace.CurrentCamera then
-	var2 = workspace.CurrentCamera:GetPropertyChangedSignal("CFrame"):Connect(onCameraCFrameChanged)
+
+if Connection then
+	Connection:disconnect()
 end
-local function onVREnabledChanged()
-	-- upvalues: VRService (ref), userInputService (ref), t (ref), laserPointerModule (ref), enableControllerModels (ref), runService (ref), var1 (ref), onRenderSteppedLast (ref), safetyBubbleModule (ref), contextActionService (ref)
+if workspace.CurrentCamera then
+	Connection = workspace.CurrentCamera:GetPropertyChangedSignal("CFrame"):Connect(onCameraCFrameChanged)
+end
+local function onVREnabledChanged() --[[ Line: 149 ]]
+	-- upvalues: VRService (copy), UserInputService (copy), VRHubModule (copy), LaserPointerModule (copy), enableControllerModels (copy), RunService (copy), Guid (copy), onRenderSteppedLast (copy), SafetyBubbleModule (copy), ContextActionService (copy)
 	if VRService.VREnabled then
-		userInputService.MouseBehavior = Enum.MouseBehavior.LockCenter
-		userInputService.OverrideMouseIconBehavior = Enum.OverrideMouseIconBehavior.ForceHide
+		UserInputService.MouseBehavior = Enum.MouseBehavior.LockCenter
+		UserInputService.OverrideMouseIconBehavior = Enum.OverrideMouseIconBehavior.ForceHide
 		
-		if not t.LaserPointer then
-			t.LaserPointer = laserPointerModule.new()
+		if not VRHubModule.LaserPointer then
+			VRHubModule.LaserPointer = LaserPointerModule.new()
 		end
-		if t.LaserPointer then
-			if t.isFPSAtTarget then
-				t.LaserPointer:setMode(laserPointerModule.Mode.Navigation)
+		if VRHubModule.LaserPointer then
+			if VRHubModule.isFPSAtTarget then
+				VRHubModule.LaserPointer:setMode(LaserPointerModule.Mode.Navigation)
 			else
-				t.LaserPointer:setMode(laserPointerModule.Mode.Disabled)
+				VRHubModule.LaserPointer:setMode(LaserPointerModule.Mode.Disabled)
 			end
 		end
 		enableControllerModels(VRService.ControllerModels == Enum.VRControllerModelMode.Transparent)
-		runService:BindToRenderStep(var1, Enum.RenderPriority.Last.Value, onRenderSteppedLast)
+		RunService:BindToRenderStep(Guid, Enum.RenderPriority.Last.Value, onRenderSteppedLast)
 		
-		if t.LaserPointer then
-			t.LaserPointer:setForcePointer(true)
+		if VRHubModule.LaserPointer then
+			VRHubModule.LaserPointer:setForcePointer(true)
 		end
-		userInputService.OverrideMouseIconBehavior = Enum.OverrideMouseIconBehavior.ForceHide
-		t.SafetyBubble = safetyBubbleModule.new()
-		contextActionService:BindCoreActivate(Enum.UserInputType.Gamepad1, Enum.KeyCode.ButtonR2)
+		UserInputService.OverrideMouseIconBehavior = Enum.OverrideMouseIconBehavior.ForceHide
+		VRHubModule.SafetyBubble = SafetyBubbleModule.new()
+		ContextActionService:BindCoreActivate(Enum.UserInputType.Gamepad1, Enum.KeyCode.ButtonR2)
 		
 		return
-	elseif t.LaserPointer then
-		t.LaserPointer:setMode(laserPointerModule.Mode.Disabled)
+	else
+		if VRHubModule.LaserPointer then
+			VRHubModule.LaserPointer:setMode(LaserPointerModule.Mode.Disabled)
+		end
+		RunService:UnbindFromRenderStep(Guid)
 	end
-	runService:UnbindFromRenderStep(var1)
 end
 
-local function onVRSessionStateChanged()
-	-- upvalues: VRService (ref), t (ref), laserPointerModule (ref), enableControllerModels (ref)
+local function onVRSessionStateChanged() --[[ Line: 188 ]]
+	-- upvalues: VRService (copy), VRHubModule (copy), LaserPointerModule (copy), enableControllerModels (copy)
 	if VRService.VRSessionState == Enum.VRSessionState.Focused then
-		if t.LaserPointer and t.LaserPointer.Mode.Disabled then
-			t.LaserPointer:setMode(laserPointerModule.Mode.Navigation)
+		if VRHubModule.LaserPointer and VRHubModule.LaserPointer.Mode.Disabled then
+			VRHubModule.LaserPointer:setMode(LaserPointerModule.Mode.Navigation)
 			enableControllerModels(VRService.ControllerModels == Enum.VRControllerModelMode.Transparent)
 		end
-		if t.ControllerModelsEnabled then
-			return
-		else
+		if not VRHubModule.ControllerModelsEnabled then
 			enableControllerModels(VRService.ControllerModels == Enum.VRControllerModelMode.Transparent)
 			
 			return
 		end
-	elseif t.LaserPointer and t.LaserPointer.Mode.Navigation then
-		t.LaserPointer:setMode(laserPointerModule.Mode.Disabled)
-	end
-	if t.ControllerModelsEnabled and t.ControllerModelsEnabled ~= false then
-		t.ControllerModelsEnabled = false
-		
-		if t.LeftControllerModel then
-			t.LeftControllerModel:setEnabled(false)
+	else
+		if VRHubModule.LaserPointer and VRHubModule.LaserPointer.Mode.Navigation then
+			VRHubModule.LaserPointer:setMode(LaserPointerModule.Mode.Disabled)
 		end
-		if t.RightControllerModel then
-			t.RightControllerModel:setEnabled(false)
+		if VRHubModule.ControllerModelsEnabled and VRHubModule.ControllerModelsEnabled ~= false then
+			VRHubModule.ControllerModelsEnabled = false
+			
+			if VRHubModule.LeftControllerModel then
+				VRHubModule.LeftControllerModel:setEnabled(false)
+			end
+			if VRHubModule.RightControllerModel then
+				VRHubModule.RightControllerModel:setEnabled(false)
+			end
 		end
 	end
 end
 
-local function onVRPropertyChanged(p1)
-	-- upvalues: onVREnabledChanged (ref), onVRSessionStateChanged (ref)
-	if p1 == "VREnabled" then
+local function onVRPropertyChanged(Property) --[[ Line: 207 ]]
+	-- upvalues: onVREnabledChanged (copy), onVRSessionStateChanged (copy)
+	if Property == "VREnabled" then
 		onVREnabledChanged()
 		
 		return
-	elseif p1 == "VRSessionState" then
+	end
+	if Property == "VRSessionState" then
 		onVRSessionStateChanged()
 	end
 end
@@ -195,120 +204,120 @@ end
 onVREnabledChanged()
 VRService.Changed:connect(onVRPropertyChanged)
 
-function t.RegisterModule(_, p1)
-	-- upvalues: t_1 (ref)
-	t_1[p1.ModuleName] = p1
+function VRHubModule:RegisterModule(p1) --[[ Line: 219 ]]
+	-- upvalues: t (copy)
+	t[p1.ModuleName] = p1
 end
 
-function t.GetModule(_, p1)
-	-- upvalues: t_1 (ref)
-	return t_1[p1]
+function VRHubModule:GetModule(p1) --[[ Line: 223 ]]
+	-- upvalues: t (copy)
+	return t[p1]
 end
 
-function t.IsModuleOpened(_, p1)
-	-- upvalues: t_2 (ref)
-	return t_2[p1] ~= nil
+function VRHubModule:IsModuleOpened(p1): boolean --[[ Line: 227 ]]
+	-- upvalues: t1 (copy)
+	return t1[p1] ~= nil
 end
 
-function t.GetOpenedModules(_)
-	-- upvalues: t_2 (ref)
-	local t = {}
+function VRHubModule:GetOpenedModules() --[[ Line: 231 ]]
+	-- upvalues: t1 (copy)
+	local List = {}
 	
-	for i, v in pairs(t_2) do
-		table.insert(t, v)
+	for _, value in pairs(t1) do
+		table.insert(List, value)
 	end
-	return t
+	return List
 end
 
-t.ModuleOpened = create("BindableEvent")({ Name = "VRModuleOpened" })
+VRHubModule.ModuleOpened = CreateFunction("BindableEvent")({ Name = "VRModuleOpened" })
 
-function t.FireModuleOpened(_, p1)
-	-- upvalues: t_1 (ref), t_2 (ref), t (ref)
-	if not t_1[p1] then
-		error("Tried to open module that is not registered: " .. p7)
+function VRHubModule:FireModuleOpened(Key) --[[ Line: 245 ]]
+	-- upvalues: t (copy), t1 (copy), VRHubModule (copy)
+	if not t[Key] then
+		error("Tried to open module that is not registered: " .. Key)
 	end
-	if t_2[p1] ~= t_1[p1] then
-		t_2[p1] = t_1[p1]
-		t.ModuleOpened:Fire(p1)
-	end
-end
-
-t.ModuleClosed = create("BindableEvent")({ Name = "VRModuleClosed" })
-
-function t.FireModuleClosed(_, p1)
-	-- upvalues: t_1 (ref), t_2 (ref), t (ref)
-	if not t_1[p1] then
-		error("Tried to close module that is not registered: " .. p8)
-	end
-	if t_2[p1] ~= nil then
-		t_2[p1] = nil
-		t.ModuleClosed:Fire(p1)
+	if t1[Key] ~= t[Key] then
+		t1[Key] = t[Key]
+		VRHubModule.ModuleOpened:Fire(Key)
 	end
 end
 
-function t.KeepVRTopbarOpen(_)
-	-- upvalues: t_2 (ref)
-	for i, v in pairs(t_2) do
-		if v.KeepVRTopbarOpen then
+VRHubModule.ModuleClosed = CreateFunction("BindableEvent")({ Name = "VRModuleClosed" })
+
+function VRHubModule:FireModuleClosed(Key) --[[ Line: 260 ]]
+	-- upvalues: t (copy), t1 (copy), VRHubModule (copy)
+	if not t[Key] then
+		error("Tried to close module that is not registered: " .. Key)
+	end
+	if t1[Key] ~= nil then
+		t1[Key] = nil
+		VRHubModule.ModuleClosed:Fire(Key)
+	end
+end
+
+function VRHubModule:KeepVRTopbarOpen(): boolean --[[ Line: 271 ]]
+	-- upvalues: t1 (copy)
+	for _, value in pairs(t1) do
+		if value.KeepVRTopbarOpen then
 			return true
 		end
 	end
 	return false
 end
 
-t.ShowHighlightedLeaveGameIcon = false
-t.ShowHighlightedLeaveGameIconToggled = create("BindableEvent")({ Name = "ShowHighlightedLeaveGameIconToggled" })
+VRHubModule.ShowHighlightedLeaveGameIcon = false
+VRHubModule.ShowHighlightedLeaveGameIconToggled = CreateFunction("BindableEvent")({ Name = "ShowHighlightedLeaveGameIconToggled" })
 
-function t.SetShowHighlightedLeaveGameIconToggled(_, p1)
-	-- upvalues: t (ref)
-	if t.ShowHighlightedLeaveGameIcon ~= p1 then
-		t.ShowHighlightedLeaveGameIcon = p1
-		t.ShowHighlightedLeaveGameIconToggled:Fire()
+function VRHubModule:SetShowHighlightedLeaveGameIconToggled(ShowHighlightedLeaveGameIcon) --[[ Line: 286 ]]
+	-- upvalues: VRHubModule (copy)
+	if VRHubModule.ShowHighlightedLeaveGameIcon ~= ShowHighlightedLeaveGameIcon then
+		VRHubModule.ShowHighlightedLeaveGameIcon = ShowHighlightedLeaveGameIcon
+		VRHubModule.ShowHighlightedLeaveGameIconToggled:Fire()
 	end
 end
 
-t.ShowTopBar = true
-t.ShowMoreMenu = false
-t.ShowTopBarChanged = create("BindableEvent")({ Name = "ShowTopBarChanged" })
-t.ShowMoreMenuChanged = create("BindableEvent")({ Name = "ShowMoreMenuChanged" })
+VRHubModule.ShowTopBar = true
+VRHubModule.ShowMoreMenu = false
+VRHubModule.ShowTopBarChanged = CreateFunction("BindableEvent")({ Name = "ShowTopBarChanged" })
+VRHubModule.ShowMoreMenuChanged = CreateFunction("BindableEvent")({ Name = "ShowMoreMenuChanged" })
 
-function t.SetShowTopBar(_, p1)
-	-- upvalues: t (ref)
-	if t.ShowTopBar ~= p1 then
-		t.ShowTopBar = p1
-		t.ShowTopBarChanged:Fire()
+function VRHubModule:SetShowTopBar(ShowTopBar) --[[ Line: 304 ]]
+	-- upvalues: VRHubModule (copy)
+	if VRHubModule.ShowTopBar ~= ShowTopBar then
+		VRHubModule.ShowTopBar = ShowTopBar
+		VRHubModule.ShowTopBarChanged:Fire()
 	end
 end
 
-function t.SetShowMoreMenu(_, p1)
-	-- upvalues: t (ref)
-	if t.ShowMoreMenu ~= p1 then
-		t.ShowMoreMenu = p1
-		t.ShowMoreMenuChanged:Fire()
+function VRHubModule:SetShowMoreMenu(ShowMoreMenu) --[[ Line: 311 ]]
+	-- upvalues: VRHubModule (copy)
+	if VRHubModule.ShowMoreMenu ~= ShowMoreMenu then
+		VRHubModule.ShowMoreMenu = ShowMoreMenu
+		VRHubModule.ShowMoreMenuChanged:Fire()
 	end
 end
 
-function t.ToggleSafetyBubble(_)
-	-- upvalues: t (ref)
-	if t.SafetyBubble then
-		t.SafetyBubble:ToggleEnabled()
+function VRHubModule:ToggleSafetyBubble() --[[ Line: 318 ]]
+	-- upvalues: VRHubModule (copy)
+	if VRHubModule.SafetyBubble then
+		VRHubModule.SafetyBubble:ToggleEnabled()
 	end
 end
 
-function t.GetControllerModel(_, p1)
-	-- upvalues: t (ref)
-	return if p1 == Enum.UserCFrame.LeftHand then t.LeftControllerModel elseif p1 == Enum.UserCFrame.RightHand then t.RightControllerModel else nil
+function VRHubModule:GetControllerModel(UserCFrame) --[[ Line: 324 ]]
+	-- upvalues: VRHubModule (copy)
+	return if UserCFrame == Enum.UserCFrame.LeftHand then VRHubModule.LeftControllerModel elseif UserCFrame == Enum.UserCFrame.RightHand then VRHubModule.RightControllerModel else nil
 end
 
-function t.GetControllerButtonPosition(_, p1)
-	-- upvalues: t (ref)
-	return t.LeftControllerModel and t.LeftControllerModel:getButtonPosition(p1), t.RightControllerModel and t.RightControllerModel:getButtonPosition(p1)
+function VRHubModule:GetControllerButtonPosition(p1) --[[ Line: 334 ]]
+	-- upvalues: VRHubModule (copy)
+	return VRHubModule.LeftControllerModel and VRHubModule.LeftControllerModel:getButtonPosition(p1), VRHubModule.RightControllerModel and VRHubModule.RightControllerModel:getButtonPosition(p1)
 end
 
-splashScreenManager.addStatusChangeListener(function(p1)
-	-- upvalues: t (ref), onVREnabledChanged (ref)
-	t.isFPSAtTarget = p1
+SplashScreenManager.addStatusChangeListener(function(IsFPSAtTarget) --[[ Line: 341 ]]
+	-- upvalues: VRHubModule (copy), onVREnabledChanged (copy)
+	VRHubModule.isFPSAtTarget = IsFPSAtTarget
 	onVREnabledChanged()
 end)
 
-return t
+return VRHubModule

@@ -1,315 +1,364 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local _ = require(parent.DataHydration.CreatorAgentChat)
-local adCampaignEligibilityUtilsModule = require(buildExperience.Components.Ads.adCampaignEligibilityUtils)
-local adCampaignScheduleUtilsModule = require(buildExperience.Components.Ads.adCampaignScheduleUtils)
-local _ = require(buildExperience.Chat.chatTypes)
-local getAdUpsellEventStoreModule = require(buildExperience.Stores.GetAdUpsellEventStore)
-local sendBuildExperienceEventModule = require(buildExperience.Telemetry.sendBuildExperienceEvent)
-local useCreateAdCampaignModule = require(buildExperience.Components.Ads.useCreateAdCampaign)
-local useGetAdCampaignEligibilityModule = require(buildExperience.Components.Ads.useGetAdCampaignEligibility)
-local useGetAdCampaignsModule = require(buildExperience.Components.Ads.useGetAdCampaigns)
-local adUpsellPublishUtilsModule = require(script.Parent.adUpsellPublishUtils)
-local fFlagEnablePaidAdsModule = require(buildExperience.Flags.FFlagEnablePaidAds)
-local fFlagBuildAdUpsellModule = require(buildExperience.Flags.FFlagBuildAdUpsell)
-local useAdsCampaignDeepLinkModule = require(buildExperience.Components.Ads.useAdsCampaignDeepLink)
-local buildAppStorageKeyEngineFeature = game:GetEngineFeature("BuildAppStorageKey")
-local var1 = if buildAppStorageKeyEngineFeature then require(buildExperience.Storage.BuildAppStorage) else nil
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local _ = require(Parent.DataHydration.CreatorAgentChat)
+local AdCampaignEligibilityUtilsModule = require(BuildExperience.Components.Ads.adCampaignEligibilityUtils)
+local AdCampaignScheduleUtilsModule = require(BuildExperience.Components.Ads.adCampaignScheduleUtils)
+local _ = require(BuildExperience.Chat.chatTypes)
+local GetAdUpsellEventStoreModule = require(BuildExperience.Stores.GetAdUpsellEventStore)
+local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
+local UseCreateAdCampaignModule = require(BuildExperience.Components.Ads.useCreateAdCampaign)
+local UseGetAdCampaignEligibilityModule = require(BuildExperience.Components.Ads.useGetAdCampaignEligibility)
+local UseGetAdCampaignsModule = require(BuildExperience.Components.Ads.useGetAdCampaigns)
+local AdUpsellPublishUtilsModule = require(script.Parent.adUpsellPublishUtils)
+local FFlagEnablePaidAdsModule = require(BuildExperience.Flags.FFlagEnablePaidAds)
+local FFlagBuildAdUpsellModule = require(BuildExperience.Flags.FFlagBuildAdUpsell)
+local FFlagBuildAdUpsellPinnedModule = require(BuildExperience.Flags.FFlagBuildAdUpsellPinned)
+local FFlagBuildAdsNotificationRouting = require(Parent.SharedFlags).FFlagBuildAdsNotificationRouting
+local UseAdsCampaignDeepLinkModule = require(BuildExperience.Components.Ads.useAdsCampaignDeepLink)
+local BuildAppStorageKeyEngineFeature = game:GetEngineFeature("BuildAppStorageKey")
+local BuildAppStorageModule = if BuildAppStorageKeyEngineFeature then require(BuildExperience.Storage.BuildAppStorage) else nil
 
-return function(p1)
-	-- upvalues: getAdUpsellEventStoreModule (ref), signalsReactModule (ref), reactModule (ref), useGetAdCampaignEligibilityModule (ref), adCampaignEligibilityUtilsModule (ref), useCreateAdCampaignModule (ref), fFlagEnablePaidAdsModule (ref), useGetAdCampaignsModule (ref), adCampaignScheduleUtilsModule (ref), fFlagBuildAdUpsellModule (ref), useAdsCampaignDeepLinkModule (ref), buildAppStorageKeyEngineFeature (ref), var1 (ref), adUpsellPublishUtilsModule (ref), sendBuildExperienceEventModule (ref)
-	local var2 = getAdUpsellEventStoreModule(false)
-	local var3 = signalsReactModule.useSignalState(var2.getRevision)
-	local var4 = reactModule.useRef(nil)
-	local var5, var6 = useGetAdCampaignEligibilityModule(p1.universeId, p1.eligibilityStore)
-	local var7 = adCampaignEligibilityUtilsModule.freeCreditsRemaining(var5)
-	local var8 = adCampaignEligibilityUtilsModule.isEligibleForFreePromotion(var5) and (adCampaignEligibilityUtilsModule.hasFreeCredit(var5) and adCampaignEligibilityUtilsModule.hasUsableOffer(var5))
-	local var9 = useCreateAdCampaignModule(p1.universeId, p1.sessionId)
-	local isCreatePending = var9.isCreatePending
-	local var10, var11 = reactModule.useState(false)
-	local var12, var13 = reactModule.useState(nil)
-	local var14, var15 = reactModule.useState(false)
-	local var16 = reactModule.useRef(nil)
-	local var17, var18 = reactModule.useState(false)
-	local var19 = reactModule.useRef(nil)
-	local var20 = if fFlagEnablePaidAdsModule then reactModule.useRef(nil) else nil
-	local var21, var22 = useGetAdCampaignsModule()
-	local var23 = var22 == "Ready" and adCampaignScheduleUtilsModule.hasActiveCampaign(var21, p1.universeId, reactModule.useMemo(function()
-		-- upvalues: p1 (ref)
+return function(p1) --[[ Line: 80 | Named "useAdUpsellChatViewModel" ]]
+	-- upvalues: GetAdUpsellEventStoreModule (copy), SignalsReactModule (copy), ReactModule (copy), UseGetAdCampaignEligibilityModule (copy), AdCampaignEligibilityUtilsModule (copy), UseCreateAdCampaignModule (copy), FFlagEnablePaidAdsModule (copy), UseGetAdCampaignsModule (copy), AdCampaignScheduleUtilsModule (copy), FFlagBuildAdUpsellModule (copy), UseAdsCampaignDeepLinkModule (copy), FFlagBuildAdsNotificationRouting (copy), AdUpsellPublishUtilsModule (copy), BuildAppStorageKeyEngineFeature (copy), BuildAppStorageModule (copy), FFlagBuildAdUpsellPinnedModule (copy), SendBuildExperienceEventModule (copy)
+	local AdUpsellEventStoreModule = GetAdUpsellEventStoreModule(false)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(AdUpsellEventStoreModule.getRevision)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseGetAdCampaignEligibilityModuleResult, UseGetAdCampaignEligibilityModuleResult2 = UseGetAdCampaignEligibilityModule(p1.universeId, p1.eligibilityStore)
+	local FreeCreditsRemainingResult = AdCampaignEligibilityUtilsModule.freeCreditsRemaining(UseGetAdCampaignEligibilityModuleResult)
+	local HasUsableOffer = AdCampaignEligibilityUtilsModule.isEligibleForFreePromotion(UseGetAdCampaignEligibilityModuleResult) and (AdCampaignEligibilityUtilsModule.hasFreeCredit(UseGetAdCampaignEligibilityModuleResult) and AdCampaignEligibilityUtilsModule.hasUsableOffer(UseGetAdCampaignEligibilityModuleResult))
+	local UseCreateAdCampaignModuleResult = UseCreateAdCampaignModule(p1.universeId, p1.sessionId)
+	local IsCreatePending = UseCreateAdCampaignModuleResult.isCreatePending
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(false)
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(false)
+	local UseRefResult2 = ReactModule.useRef(nil)
+	local UseRefResult3 = if FFlagEnablePaidAdsModule then ReactModule.useRef(nil) else nil
+	local UseGetAdCampaignsModuleResult, UseGetAdCampaignsModuleResult2 = UseGetAdCampaignsModule()
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 120 ]]
+		-- upvalues: p1 (copy)
 		return if p1.nowMs == nil then DateTime.now().UnixTimestampMillis else p1.nowMs
-	end, { p1.nowMs or 0, var21 or false }))
-	local var24 = reactModule.useCallback(function(p2)
-		-- upvalues: var15 (ref), fFlagEnablePaidAdsModule (copy), var9 (ref), var13 (ref), adCampaignEligibilityUtilsModule (copy), var11 (ref)
-		var15(false)
+	end, { p1.nowMs or 0, UseGetAdCampaignsModuleResult or false })
+	local HasActiveCampaign = UseGetAdCampaignsModuleResult2 == "Ready" and AdCampaignScheduleUtilsModule.hasActiveCampaign(UseGetAdCampaignsModuleResult, p1.universeId, UseMemoResult)
+	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 131 ]]
+		-- upvalues: UseStateResult2_2 (copy), FFlagEnablePaidAdsModule (upval), UseCreateAdCampaignModuleResult (copy), UseStateResult2_1 (copy), AdCampaignEligibilityUtilsModule (upval), UseStateResult2 (copy)
+		UseStateResult2_2(false)
 		
-		if not fFlagEnablePaidAdsModule then
-			var9.clearCreateError()
+		if not FFlagEnablePaidAdsModule then
+			UseCreateAdCampaignModuleResult.clearCreateError()
 		end
-		var13(function(p3)
-			-- upvalues: fFlagEnablePaidAdsModule (copy), var9 (copy), adCampaignEligibilityUtilsModule (copy), p2 (ref)
-			return if fFlagEnablePaidAdsModule and var9.hasCreateError and p3 ~= nil then p3 else adCampaignEligibilityUtilsModule.campaignSheetTerms(p2, DateTime.now().UnixTimestampMillis)
+		UseStateResult2_1(function(p3) --[[ Line: 138 ]]
+			-- upvalues: FFlagEnablePaidAdsModule (upval), UseCreateAdCampaignModuleResult (upval), AdCampaignEligibilityUtilsModule (upval), p2 (copy)
+			return if FFlagEnablePaidAdsModule and UseCreateAdCampaignModuleResult.hasCreateError and p3 ~= nil then p3 else AdCampaignEligibilityUtilsModule.campaignSheetTerms(p2, DateTime.now().UnixTimestampMillis)
 		end)
-		var11(true)
-	end, { var9.clearCreateError, var9.hasCreateError })
-	local var25 = if fFlagBuildAdUpsellModule then useAdsCampaignDeepLinkModule({
+		UseStateResult2(true)
+	end, {
+		UseCreateAdCampaignModuleResult.clearCreateError,
+		UseCreateAdCampaignModuleResult.hasCreateError
+	})
+	local UseAdsCampaignDeepLinkModuleResult = if FFlagBuildAdUpsellModule then UseAdsCampaignDeepLinkModule({
 		universeId = p1.universeId,
 		sessionId = p1.sessionId,
 		isPageVisible = p1.isPageVisible,
 		eligibilityStore = p1.eligibilityStore,
-		onOpen = function(p2)
-			-- upvalues: var10 (ref), isCreatePending (ref), var17 (ref), var24 (ref)
-			if var10 or isCreatePending or var17 then
+		canPresent = if FFlagBuildAdsNotificationRouting then not IsCreatePending and not UseStateResult4 else nil,
+		onOpen = function(p2): boolean --[[ Line: 165 ]]
+			-- upvalues: UseStateResult (copy), IsCreatePending (copy), UseStateResult4 (copy), UseResult (copy)
+			if UseStateResult or IsCreatePending or UseStateResult4 then
 				return false
+			else
+				UseResult(p2)
+				
+				return true
 			end
-			var24(p2)
-			
-			return true
 		end
 	}) else nil
-	local useEffect = reactModule.useEffect
-	
-	local var26 = function()
-		-- upvalues: var11 (ref), var13 (ref), var15 (ref), var19 (ref), fFlagEnablePaidAdsModule (copy), var20 (ref), var18 (ref)
-		var11(false)
-		var13(nil)
-		var15(false)
-		var19.current = nil
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 175 ]]
+		-- upvalues: AdUpsellPublishUtilsModule (upval), p1 (copy)
+		return AdUpsellPublishUtilsModule.getLastMessageKey(p1.messages)
+	end, { p1.messages })
+	ReactModule.useEffect(function() --[[ Line: 179 ]]
+		-- upvalues: UseStateResult2 (copy), UseStateResult2_1 (copy), UseStateResult2_2 (copy), UseRefResult2 (copy), FFlagEnablePaidAdsModule (upval), UseRefResult3 (copy), UseStateResult2_3 (copy)
+		UseStateResult2(false)
+		UseStateResult2_1(nil)
+		UseStateResult2_2(false)
+		UseRefResult2.current = nil
 		
-		if fFlagEnablePaidAdsModule then
-			var20.current = nil
+		if FFlagEnablePaidAdsModule then
+			UseRefResult3.current = nil
 		end
-		var18(false)
-	end
-	
-	local t = {}
-	local var27 = if var25 ~= nil then p1.universeId or 0 else var25.scopeRevision
-	local var28 = var25 ~= nil and ((if var25 ~= nil then p1.sessionId else nil) or "")
-	-- Unknown statement at pc 0: <SetList>
-	useEffect(var26, t)
-	reactModule.useEffect(function()
-		-- upvalues: fFlagEnablePaidAdsModule (copy), var6 (ref), var5 (ref), var20 (ref), var17 (ref), var19 (ref), var18 (ref), var7 (ref)
-		if fFlagEnablePaidAdsModule then
-			if var17 and ((var6 == "Ready" and (var5 ~= nil and var5 ~= var20.current)) or var6 == "Failed") then
-				var19.current = nil
-				var20.current = nil
-				var18(false)
+		UseStateResult2_3(false)
+	end, {
+		if UseAdsCampaignDeepLinkModuleResult == nil then p1.universeId or 0 else UseAdsCampaignDeepLinkModuleResult.scopeRevision,
+		UseAdsCampaignDeepLinkModuleResult == nil and p1.sessionId or ""
+	})
+	ReactModule.useEffect(function() --[[ Line: 200 ]]
+		-- upvalues: FFlagEnablePaidAdsModule (upval), UseGetAdCampaignEligibilityModuleResult2 (copy), UseGetAdCampaignEligibilityModuleResult (copy), UseRefResult3 (copy), UseStateResult4 (copy), UseRefResult2 (copy), UseStateResult2_3 (copy), FreeCreditsRemainingResult (copy)
+		if FFlagEnablePaidAdsModule then
+			local IsNotUseGetAdCampaignEligibilityModuleResultMatch: boolean = UseGetAdCampaignEligibilityModuleResult2 == "Ready" and (UseGetAdCampaignEligibilityModuleResult ~= nil and UseGetAdCampaignEligibilityModuleResult ~= UseRefResult3.current)
+			
+			if UseStateResult4 and (IsNotUseGetAdCampaignEligibilityModuleResultMatch or UseGetAdCampaignEligibilityModuleResult2 == "Failed") then
+				UseRefResult2.current = nil
+				UseRefResult3.current = nil
+				UseStateResult2_3(false)
 			end
 			return
-		elseif var17 and var6 == "Ready" and (var5 ~= nil and var7 ~= var19.current) then
-			var19.current = nil
-			var18(false)
+		elseif UseStateResult4 and UseGetAdCampaignEligibilityModuleResult2 == "Ready" and UseGetAdCampaignEligibilityModuleResult ~= nil and FreeCreditsRemainingResult ~= UseRefResult2.current then
+			UseRefResult2.current = nil
+			UseStateResult2_3(false)
 		end
-	end, { var17, var6, var5, var7 })
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var15 (ref), isCreatePending (ref), var11 (ref)
+	end, {
+		UseStateResult4,
+		UseGetAdCampaignEligibilityModuleResult2,
+		UseGetAdCampaignEligibilityModuleResult,
+		FreeCreditsRemainingResult
+	})
+	ReactModule.useEffect(function() --[[ Line: 234 ]]
+		-- upvalues: p1 (copy), UseStateResult2_2 (copy), IsCreatePending (copy), UseStateResult2 (copy)
 		if not p1.isPageVisible then
-			var15(false)
+			UseStateResult2_2(false)
 			
-			if not isCreatePending then
-				var11(false)
+			if not IsCreatePending then
+				UseStateResult2(false)
 			end
 		end
-	end, { p1.isPageVisible, isCreatePending })
-	local var29 = reactModule.useRef(false)
-	reactModule.useEffect(function()
-		-- upvalues: var29 (ref), isCreatePending (ref), var16 (ref), var25 (write), p1 (ref), var9 (ref), var2 (ref), var18 (ref), fFlagEnablePaidAdsModule (copy), var20 (ref), var19 (ref), var11 (ref), var15 (ref)
-		local current = var29.current
-		var29.current = isCreatePending
+	end, { p1.isPageVisible, IsCreatePending })
+	local UseRefResult4 = ReactModule.useRef(false)
+	ReactModule.useEffect(function() --[[ Line: 260 ]]
+		-- upvalues: UseRefResult4 (copy), IsCreatePending (copy), UseRefResult1 (copy), UseAdsCampaignDeepLinkModuleResult (ref), p1 (copy), UseCreateAdCampaignModuleResult (copy), AdUpsellEventStoreModule (copy), UseStateResult2_3 (copy), FFlagEnablePaidAdsModule (upval), UseRefResult3 (copy), UseRefResult2 (copy), UseStateResult2 (copy), UseStateResult2_2 (copy)
+		UseRefResult4.current = IsCreatePending
 		
-		if current and not isCreatePending then
-			local current_1 = var16.current
-			var16.current = nil
+		if UseRefResult4.current and not IsCreatePending then
+			local Current = UseRefResult1.current
+			UseRefResult1.current = nil
+			local IsSessionIdMatch = if UseAdsCampaignDeepLinkModuleResult == nil then Current ~= nil and (Current.universeId == p1.universeId and Current.sessionId == p1.sessionId) else UseAdsCampaignDeepLinkModuleResult.finishCreate()
 			
-			if not var9.hasCreateError and (if var25 == nil then current_1 ~= nil and (current_1.universeId == p1.universeId and current_1.sessionId == p1.sessionId) else var25.finishCreate()) then
-				local var30
+			if not UseCreateAdCampaignModuleResult.hasCreateError and IsSessionIdMatch then
 				if p1.universeId ~= nil then
-					var2.dismissPermanently(p1.universeId)
+					AdUpsellEventStoreModule.dismissPermanently(p1.universeId)
 				end
-				if fFlagEnablePaidAdsModule then
-					var30 = var20.current ~= nil
-					var30 = nil
-				else
-					var30 = var19.current ~= nil
-				end
-				var18(var30)
+				UseStateResult2_3(if FFlagEnablePaidAdsModule then UseRefResult3.current ~= nil else UseRefResult2.current ~= nil)
 				
 				if p1.isPageVisible then
-					var11(false)
-					var15(true)
+					UseStateResult2(false)
+					UseStateResult2_2(true)
 				end
 			end
 		end
 	end, {
-		var2, isCreatePending, p1.isPageVisible, var9.hasCreateError, var25,
-		p1.universeId ~= nil, p1.universeId or 0, p1.sessionId ~= nil,
-		p1.sessionId or ""
+		AdUpsellEventStoreModule, IsCreatePending, p1.isPageVisible,
+		UseCreateAdCampaignModuleResult.hasCreateError,
+		UseAdsCampaignDeepLinkModuleResult, p1.universeId ~= nil, p1.universeId or 0,
+		p1.sessionId ~= nil, p1.sessionId or ""
 	})
-	local var30 = reactModule.useMemo(function()
-		-- upvalues: buildAppStorageKeyEngineFeature (copy), p1 (ref), var1 (copy)
-		return if buildAppStorageKeyEngineFeature and p1.universeId ~= nil then var1.getAdUpsellState(p1.universeId, p1.sessionId) else nil
+	local UseMemoResult11 = ReactModule.useMemo(function() --[[ Line: 304 ]]
+		-- upvalues: BuildAppStorageKeyEngineFeature (upval), p1 (copy), BuildAppStorageModule (upval)
+		return if BuildAppStorageKeyEngineFeature and p1.universeId ~= nil then BuildAppStorageModule.getAdUpsellState(p1.universeId, p1.sessionId) else nil
 	end, {
-		var3,
+		UseSignalStateResult,
 		p1.universeId ~= nil,
 		p1.universeId or 0,
 		p1.sessionId ~= nil,
 		p1.sessionId or ""
 	})
-	local var31 = p1.isPublic and (var8 and (not (if var30 ~= nil then not var30.isAvailable or var30.dismissedPermanently else true) and (not var23 and not var17)))
-	reactModule.useEffect(function()
-		-- upvalues: var30 (ref), var2 (ref)
-		if var30 ~= nil and not var30.isAvailable then
-			var2.retryStorageRead()
+	local NoUseMemoResult = UseMemoResult11 == nil or (not UseMemoResult11.isAvailable or UseMemoResult11.dismissedPermanently)
+	local NoUseStateResult4: boolean = p1.isPublic and (HasUsableOffer and (not NoUseMemoResult and (not HasActiveCampaign and not UseStateResult4)))
+	ReactModule.useEffect(function() --[[ Line: 327 ]]
+		-- upvalues: UseMemoResult11 (copy), AdUpsellEventStoreModule (copy)
+		if UseMemoResult11 ~= nil and not UseMemoResult11.isAvailable then
+			AdUpsellEventStoreModule.retryStorageRead()
 		end
-	end, { var2, var30 ~= nil, var30 ~= nil and var30.isAvailable })
-	local var32 = reactModule.useMemo(function()
-		-- upvalues: adUpsellPublishUtilsModule (copy), p1 (ref)
-		return adUpsellPublishUtilsModule.getLastMessageKey(p1.messages)
-	end, { p1.messages })
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var32 (ref), var30 (ref), var2 (ref)
-		if p1.universeId == nil or p1.sessionId == nil or (var32 == nil or var30 == nil) or var30.pendingMilestoneCount == 0 then
+	end, {
+		AdUpsellEventStoreModule,
+		UseMemoResult11 ~= nil,
+		UseMemoResult11 ~= nil and (UseMemoResult11.isAvailable or false)
+	})
+	ReactModule.useEffect(function() --[[ Line: 340 ]]
+		-- upvalues: p1 (copy), FFlagBuildAdUpsellPinnedModule (upval), UseMemoResult1 (copy), UseMemoResult11 (copy), AdUpsellEventStoreModule (copy)
+		if p1.universeId ~= nil and p1.sessionId ~= nil and (FFlagBuildAdUpsellPinnedModule or UseMemoResult1 ~= nil) and (UseMemoResult11 ~= nil and UseMemoResult11.pendingMilestoneCount ~= 0) then
+			AdUpsellEventStoreModule.attachPendingMilestones(p1.universeId, p1.sessionId, if FFlagBuildAdUpsellPinnedModule then nil else UseMemoResult1)
+			
 			return
 		end
-		var2.attachPendingMilestones(p1.universeId, p1.sessionId, var32)
 	end, {
-		var2,
+		AdUpsellEventStoreModule,
 		p1.universeId,
 		p1.sessionId,
-		var32,
-		if var30 ~= nil then var30.pendingMilestoneCount else 0
+		UseMemoResult1,
+		if UseMemoResult11 == nil then 0 else UseMemoResult11.pendingMilestoneCount or 0
 	})
-	local var33 = reactModule.useMemo(function()
-		-- upvalues: adUpsellPublishUtilsModule (copy), p1 (ref)
-		return adUpsellPublishUtilsModule.getMessageIndexByKey(p1.messages)
+	local List = {}
+	local AdUpsellCongratsAnchorIndex = nil
+	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 367 ]]
+		-- upvalues: AdUpsellPublishUtilsModule (upval), p1 (copy)
+		return AdUpsellPublishUtilsModule.getMessageIndexByKey(p1.messages)
 	end, { p1.messages })
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var4 (ref), var33 (ref), var2 (ref)
-		local var34 = if p1.universeId == nil or p1.sessionId == nil then nil else `{p1.universeId}:{p1.sessionId}`
+	ReactModule.useEffect(function() --[[ Line: 371 ]]
+		-- upvalues: FFlagBuildAdUpsellPinnedModule (upval), p1 (copy), UseRefResult (copy), UseMemoResult2 (copy), AdUpsellEventStoreModule (copy)
+		if FFlagBuildAdUpsellPinnedModule then return end
+		local Text = if p1.universeId == nil or p1.sessionId == nil then nil else `{p1.universeId}:{p1.sessionId}`
 		
 		if not p1.isHistoryExhausted then
-			var4.current = nil
+			UseRefResult.current = nil
 		end
-		if not p1.isHistoryExhausted or var34 == nil or var4.current == var34 then return end
+		if not p1.isHistoryExhausted or Text == nil or UseRefResult.current == Text then return end
 		local t = {}
 		
-		for i in var33 do
+		for i in UseMemoResult2 do
 			t[i] = true
 		end
-		if var2.pruneAnchors(p1.universeId, p1.sessionId, t) then
-			var4.current = var34
+		if AdUpsellEventStoreModule.pruneAnchors(p1.universeId, p1.sessionId, t) then
+			UseRefResult.current = Text
 		end
 	end, {
-		var2, p1.isHistoryExhausted, p1.universeId, p1.sessionId, var33, var3
+		AdUpsellEventStoreModule, p1.isHistoryExhausted, p1.universeId, p1.sessionId,
+		UseMemoResult2, UseSignalStateResult
 	})
-	local t_1 = {}
 	
-	if var30 ~= nil and var30.isAvailable and var31 then
-		for i, v in var30.anchors do
-			local afterMessageKey = var33[v.afterMessageKey]
-			
-			if afterMessageKey ~= nil then
-				table.insert(t_1, {
-					id = v.id,
-					order = v.order,
-					anchorIndex = afterMessageKey,
-					isImpressed = v.impressed
+	if UseMemoResult11 ~= nil and UseMemoResult11.isAvailable and NoUseStateResult4 then
+		for _, anchor in UseMemoResult11.anchors do
+			if FFlagBuildAdUpsellPinnedModule then
+				table.insert(List, {
+					id = anchor.id,
+					order = anchor.order,
+					isImpressed = anchor.impressed
 				})
+				local TransientCongratsMessageKey = AdUpsellEventStoreModule.getTransientCongratsMessageKey(anchor.id)
+				
+				if TransientCongratsMessageKey ~= nil then
+					AdUpsellCongratsAnchorIndex = UseMemoResult2[TransientCongratsMessageKey]
+				end
+			else
+				local AfterMessageKey = anchor.afterMessageKey
+				local NoAfterMessageKey = AfterMessageKey == nil
+				local UseMemoResultEntry = nil
+				
+				if not NoAfterMessageKey then
+					UseMemoResultEntry = UseMemoResult2[AfterMessageKey]
+					NoAfterMessageKey = UseMemoResultEntry == nil
+				end
+				if not NoAfterMessageKey then
+					table.insert(List, {
+						id = anchor.id,
+						order = anchor.order,
+						anchorIndex = UseMemoResultEntry,
+						isImpressed = anchor.impressed
+					})
+				end
 			end
 		end
 	end
 	return {
-		adUpsellCards = t_1,
-		adUpsellFreePromotionsRemaining = var7,
-		isAdUpsellCreatePending = isCreatePending,
-		isAdCampaignSheetOpen = var10,
-		hasAdCampaignCreateError = var9.hasCreateError,
-		adCampaignCreateErrorKind = var9.createErrorKind,
-		adCampaignDurationDays = if var12 ~= nil then nil else var12.durationDays,
-		adCampaignEstimatedPriceRobux = if var12 ~= nil then nil else var12.estimatedPriceRobux,
-		adCampaignOffers = if var12 ~= nil then nil else var12.campaignOffers,
-		adCampaignRunStartTimeMs = if var12 ~= nil then nil else var12.runStartMs,
-		adCampaignRunEndTimeMs = if var12 == nil or var12.durationDays == nil then nil else adCampaignScheduleUtilsModule.campaignEndMs(var12.runStartMs, var12.durationDays),
-		isAdCampaignCreatedToastVisible = var14,
-		onAdCampaignCreatedToastDismiss = reactModule.useCallback(function()
-			-- upvalues: var15 (ref)
-			var15(false)
+		adUpsellCards = List,
+		adUpsellCongratsAnchorIndex = AdUpsellCongratsAnchorIndex,
+		adUpsellFreePromotionsRemaining = FreeCreditsRemainingResult,
+		isAdUpsellCreatePending = IsCreatePending,
+		isAdCampaignSheetOpen = UseStateResult,
+		hasAdCampaignCreateError = UseCreateAdCampaignModuleResult.hasCreateError,
+		adCampaignCreateErrorKind = UseCreateAdCampaignModuleResult.createErrorKind,
+		adCampaignDurationDays = if UseStateResult1 == nil then nil else UseStateResult1.durationDays,
+		adCampaignEstimatedPriceRobux = if UseStateResult1 == nil then nil else UseStateResult1.estimatedPriceRobux,
+		adCampaignOffers = if UseStateResult1 == nil then nil else UseStateResult1.campaignOffers,
+		adCampaignRunStartTimeMs = if UseStateResult1 == nil then nil else UseStateResult1.runStartMs,
+		adCampaignRunEndTimeMs = if UseStateResult1 == nil or UseStateResult1.durationDays == nil then nil else AdCampaignScheduleUtilsModule.campaignEndMs(UseStateResult1.runStartMs, UseStateResult1.durationDays),
+		isAdCampaignCreatedToastVisible = UseStateResult3,
+		onAdCampaignCreatedToastDismiss = ReactModule.useCallback(function() --[[ Line: 514 ]]
+			-- upvalues: UseStateResult2_2 (copy)
+			UseStateResult2_2(false)
 		end, {}),
-		onAdUpsellCreate = reactModule.useCallback(function()
-			-- upvalues: p1 (ref), fFlagBuildAdUpsellModule (copy), var9 (ref), var25 (write), sendBuildExperienceEventModule (copy), var24 (ref), var5 (ref)
+		onAdUpsellCreate = ReactModule.useCallback(function() --[[ Line: 443 ]]
+			-- upvalues: p1 (copy), FFlagBuildAdUpsellModule (upval), UseCreateAdCampaignModuleResult (copy), UseAdsCampaignDeepLinkModuleResult (ref), SendBuildExperienceEventModule (upval), UseResult (copy), UseGetAdCampaignEligibilityModuleResult (copy)
 			if not p1.isPageVisible then return end
-			if fFlagBuildAdUpsellModule and not var9.hasCreateError then
-				var25.clearPresentedRequest()
+			if FFlagBuildAdUpsellModule and not UseCreateAdCampaignModuleResult.hasCreateError then
+				UseAdsCampaignDeepLinkModuleResult.clearPresentedRequest()
 			end
-			sendBuildExperienceEventModule("AD_UPSELL_CREATE_CLICK", {
+			SendBuildExperienceEventModule("AD_UPSELL_CREATE_CLICK", {
 				universeId = p1.universeId,
 				conversationId = p1.sessionId
 			})
-			var24(var5)
+			UseResult(UseGetAdCampaignEligibilityModuleResult)
 		end, {
-			p1.isPageVisible, p1.universeId or 0, p1.sessionId or "", var5, var24,
-			var9.hasCreateError, var25
+			p1.isPageVisible, p1.universeId or 0, p1.sessionId or "",
+			UseGetAdCampaignEligibilityModuleResult, UseResult,
+			UseCreateAdCampaignModuleResult.hasCreateError,
+			UseAdsCampaignDeepLinkModuleResult
 		}),
-		onAdUpsellDismiss = reactModule.useCallback(function()
-			-- upvalues: p1 (ref), var2 (ref), sendBuildExperienceEventModule (copy)
-			if p1.universeId == nil then
+		onAdUpsellDismiss = ReactModule.useCallback(function() --[[ Line: 518 ]]
+			-- upvalues: p1 (copy), AdUpsellEventStoreModule (copy), SendBuildExperienceEventModule (upval)
+			if p1.universeId ~= nil then
+				AdUpsellEventStoreModule.dismissPermanently(p1.universeId)
+				SendBuildExperienceEventModule("AD_UPSELL_DISMISS_CLICK", {
+					universeId = p1.universeId,
+					conversationId = p1.sessionId
+				})
+				
 				return
 			end
-			var2.dismissPermanently(p1.universeId)
-			sendBuildExperienceEventModule("AD_UPSELL_DISMISS_CLICK", {
-				universeId = p1.universeId,
-				conversationId = p1.sessionId
-			})
-		end, { var2, p1.universeId or 0, p1.sessionId or "" }),
-		onAdUpsellImpression = reactModule.useCallback(function(p2)
-			-- upvalues: p1 (ref), var2 (ref), sendBuildExperienceEventModule (copy)
+		end, {
+			AdUpsellEventStoreModule,
+			p1.universeId or 0,
+			p1.sessionId or ""
+		}),
+		onAdUpsellImpression = ReactModule.useCallback(function(p2) --[[ Line: 430 ]]
+			-- upvalues: p1 (copy), AdUpsellEventStoreModule (copy), SendBuildExperienceEventModule (upval)
 			if p1.universeId == nil or p1.sessionId == nil then return end
-			if var2.markAnchorImpressed(p1.universeId, p1.sessionId, p2) then
-				sendBuildExperienceEventModule("AD_UPSELL_IMPRESSION", {
+			if AdUpsellEventStoreModule.markAnchorImpressed(p1.universeId, p1.sessionId, p2) then
+				SendBuildExperienceEventModule("AD_UPSELL_IMPRESSION", {
 					universeId = p1.universeId,
 					conversationId = p1.sessionId
 				})
 			end
-		end, { var2, p1.universeId or 0, p1.sessionId or "" }),
-		onAdCampaignSheetClose = reactModule.useCallback(function()
-			-- upvalues: var11 (ref), fFlagBuildAdUpsellModule (copy), var25 (write), fFlagEnablePaidAdsModule (copy), var9 (ref)
-			var11(false)
+		end, {
+			AdUpsellEventStoreModule,
+			p1.universeId or 0,
+			p1.sessionId or ""
+		}),
+		onAdCampaignSheetClose = ReactModule.useCallback(function() --[[ Line: 467 ]]
+			-- upvalues: UseStateResult2 (copy), FFlagBuildAdUpsellModule (upval), UseAdsCampaignDeepLinkModuleResult (ref), FFlagEnablePaidAdsModule (upval), UseCreateAdCampaignModuleResult (copy)
+			UseStateResult2(false)
 			
-			if fFlagBuildAdUpsellModule then
-				var25.clearPresentedRequest()
+			if FFlagBuildAdUpsellModule then
+				UseAdsCampaignDeepLinkModuleResult.clearPresentedRequest()
 			end
-			if fFlagEnablePaidAdsModule then
-				var9.clearCreateError()
+			if FFlagEnablePaidAdsModule then
+				UseCreateAdCampaignModuleResult.clearCreateError()
 			end
-		end, { var9.clearCreateError, var25 }),
-		onAdCampaignSheetCreate = reactModule.useCallback(function(p2)
-			-- upvalues: fFlagBuildAdUpsellModule (copy), var25 (write), p1 (ref), sendBuildExperienceEventModule (copy), var16 (ref), var19 (ref), var7 (ref), fFlagEnablePaidAdsModule (copy), var20 (ref), var5 (ref), var9 (ref)
-			local var35 = if fFlagBuildAdUpsellModule then var25.getPresentedRequestId() else nil
-			local t = {
+		end, {
+			UseCreateAdCampaignModuleResult.clearCreateError,
+			UseAdsCampaignDeepLinkModuleResult
+		}),
+		onAdCampaignSheetCreate = ReactModule.useCallback(function(p2) --[[ Line: 478 ]]
+			-- upvalues: FFlagBuildAdUpsellModule (upval), UseAdsCampaignDeepLinkModuleResult (ref), p1 (copy), SendBuildExperienceEventModule (upval), UseRefResult1 (copy), UseRefResult2 (copy), FreeCreditsRemainingResult (copy), FFlagEnablePaidAdsModule (upval), UseRefResult3 (copy), UseGetAdCampaignEligibilityModuleResult (copy), UseCreateAdCampaignModuleResult (copy)
+			local PresentedRequestId = if FFlagBuildAdUpsellModule then UseAdsCampaignDeepLinkModuleResult.getPresentedRequestId() else nil
+			local config = {
 				universeId = p1.universeId,
 				conversationId = p1.sessionId
 			}
 			
-			if var35 == nil then
-				sendBuildExperienceEventModule("AD_UPSELL_CREATE_CONFIRM_CLICK", t)
+			if PresentedRequestId == nil then
+				SendBuildExperienceEventModule("AD_UPSELL_CREATE_CONFIRM_CLICK", config)
 			else
-				sendBuildExperienceEventModule("AD_CAMPAIGN_DEEP_LINK_CONFIRM_CLICK", t, { requestId = var35 })
+				SendBuildExperienceEventModule("AD_CAMPAIGN_DEEP_LINK_CONFIRM_CLICK", config, { requestId = PresentedRequestId })
 			end
-			if var25 == nil then
-				var16.current = { universeId = p1.universeId, sessionId = p1.sessionId }
+			if UseAdsCampaignDeepLinkModuleResult == nil then
+				UseRefResult1.current = { universeId = p1.universeId, sessionId = p1.sessionId }
 			else
-				var25.startCreate()
+				UseAdsCampaignDeepLinkModuleResult.startCreate()
 			end
-			var19.current = var7
+			UseRefResult2.current = FreeCreditsRemainingResult
 			
-			if fFlagEnablePaidAdsModule then
-				var20.current = var5
+			if FFlagEnablePaidAdsModule then
+				UseRefResult3.current = UseGetAdCampaignEligibilityModuleResult
 			end
-			var9.createCampaign(if fFlagEnablePaidAdsModule then p2 else nil)
+			UseCreateAdCampaignModuleResult.createCampaign(if FFlagEnablePaidAdsModule then p2 else nil)
 		end, {
-			p1.universeId or 0, p1.sessionId or "", var7, var5, var9.createCampaign,
-			var25
+			p1.universeId or 0, p1.sessionId or "", FreeCreditsRemainingResult,
+			UseGetAdCampaignEligibilityModuleResult,
+			UseCreateAdCampaignModuleResult.createCampaign,
+			UseAdsCampaignDeepLinkModuleResult
 		})
 	}
 end

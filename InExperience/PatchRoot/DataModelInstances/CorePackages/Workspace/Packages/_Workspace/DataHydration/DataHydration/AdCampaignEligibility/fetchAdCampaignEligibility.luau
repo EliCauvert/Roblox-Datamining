@@ -1,9 +1,9 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local httpClientModule = require(dataHydration.Parent.HttpClient)
-local creatorAgentChatModule = require(dataHydration.CreatorAgentChat)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local HttpClientModule = require(DataHydration.Parent.HttpClient)
+local CreatorAgentChatModule = require(DataHydration.CreatorAgentChat)
 local _ = require(script.Parent.AdCampaignEligibilityStoreTypes)
 
-return function(p1)
-	-- upvalues: creatorAgentChatModule (ref), httpClientModule (ref)
-	return httpClientModule.asPromise(creatorAgentChatModule.getCreatorAgentChatStore(false).adCampaignEligibility({ universeId = p1 }))
+return function(UniverseId) --[[ Line: 11 | Named "fetchAdCampaignEligibility" ]]
+	-- upvalues: CreatorAgentChatModule (copy), HttpClientModule (copy)
+	return HttpClientModule.asPromise(CreatorAgentChatModule.getCreatorAgentChatStore(false).adCampaignEligibility({ universeId = UniverseId }))
 end

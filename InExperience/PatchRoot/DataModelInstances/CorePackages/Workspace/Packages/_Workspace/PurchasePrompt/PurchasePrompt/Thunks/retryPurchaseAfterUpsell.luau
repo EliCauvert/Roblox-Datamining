@@ -1,14 +1,14 @@
-﻿local purchasePrompt = script:FindFirstAncestor("PurchasePrompt")
-local thunkModule = require(purchasePrompt.Thunk)
-local dispatchPurchaseForProductPayloadModule = require(purchasePrompt.Utils.dispatchPurchaseForProductPayload)
+﻿local PurchasePrompt = script:FindFirstAncestor("PurchasePrompt")
+local ThunkModule = require(PurchasePrompt.Thunk)
+local DispatchPurchaseForProductPayloadModule = require(PurchasePrompt.Utils.dispatchPurchaseForProductPayload)
 local t = {}
 
-return function()
-	-- upvalues: thunkModule (ref), t (ref), dispatchPurchaseForProductPayloadModule (ref)
-	return thunkModule.new(script.Name, t, function(p1, _)
-		-- upvalues: dispatchPurchaseForProductPayloadModule (copy)
-		dispatchPurchaseForProductPayloadModule(function(p2)
-			-- upvalues: p1 (ref)
+return function() --[[ Line: 11 | Named "retryPurchaseAfterUpsell" ]]
+	-- upvalues: ThunkModule (copy), t (copy), DispatchPurchaseForProductPayloadModule (copy)
+	return ThunkModule.new(script.Name, t, function(p1, _) --[[ Line: 12 ]]
+		-- upvalues: DispatchPurchaseForProductPayloadModule (upval)
+		DispatchPurchaseForProductPayloadModule(function(p2) --[[ Line: 16 ]]
+			-- upvalues: p1 (copy)
 			p1:dispatch(p2)
 		end, p1:getState().productPayload, nil, true)
 	end)

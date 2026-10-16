@@ -1,112 +1,126 @@
-﻿local localizationService = game:GetService("LocalizationService")
-local userInputService = game:GetService("UserInputService")
-local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
-local foundationModule = require(parent.Foundation)
-local localizationModule = require(parent.Localization)
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local momentsGetMomentsCommentsStoreModule = require(parent.DataHydration.MomentsGetMomentsCommentsStore)
-local _ = require(moments.Components.Comments.Composer.CommentsComposerContainer)
-local _ = require(moments.Components.Comments.Panel.CommentsPanelBody.CommentsPanelBodyContainer)
-local getCommentCollectionStoreModule = require(moments.Components.Comments.GetCommentCollectionStore)
-local getCommentsPanelStateModule = require(moments.Components.Comments.Panel.getCommentsPanelState)
-local _ = require(moments.Components.SheetShim)
-local useCommentCapabilitiesModule = require(moments.Components.Comments.useCommentCapabilities)
+﻿local LocalizationService = game:GetService("LocalizationService")
+local UserInputService = game:GetService("UserInputService")
+local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
+local FoundationModule = require(Parent.Foundation)
+local LocalizationModule = require(Parent.Localization)
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local MomentsGetMomentsCommentsStoreModule = require(Parent.DataHydration.MomentsGetMomentsCommentsStore)
+local _ = require(Moments.Components.Comments.Composer.CommentsComposerContainer)
+local _ = require(Moments.Components.Comments.Panel.CommentsPanelBody.CommentsPanelBodyContainer)
+local GetCommentCollectionStoreModule = require(Moments.Components.Comments.GetCommentCollectionStore)
+local GetCommentsPanelStateModule = require(Moments.Components.Comments.Panel.getCommentsPanelState)
+local _ = require(Moments.Components.SheetShim)
+local UseCommentCapabilitiesModule = require(Moments.Components.Comments.useCommentCapabilities)
 local _ = require(script.Parent.CommentsSheetView)
-local getCommentsSheetStoreModule = require(script.Parent.getCommentsSheetStore)
-local getCommentsVideoLiftModule = require(script.Parent.getCommentsVideoLift)
-local useLocalization = localizationModule.Hooks.useLocalization
+local GetCommentsSheetStoreModule = require(script.Parent.getCommentsSheetStore)
+local GetCommentsVideoLiftModule = require(script.Parent.getCommentsVideoLift)
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 
-return function()
-	-- upvalues: getCommentsSheetStoreModule (ref), signalsReactModule (ref), momentsGetMomentsCommentsStoreModule (ref), reactModule (ref), useCommentCapabilitiesModule (ref), getCommentCollectionStoreModule (ref), localizationModule (ref), localizationService (ref), getCommentsPanelStateModule (ref), useLocalization (ref), foundationModule (ref), getCommentsVideoLiftModule (ref), userInputService (ref)
-	local var1 = getCommentsSheetStoreModule(false)
-	local var2 = signalsReactModule.useSignalState(var1.getIsOpen)
-	local var3 = signalsReactModule.useSignalState(var1.getFeedItemId)
-	local var4 = signalsReactModule.useSignalState(var1.getOpenSessionId)
-	local var5 = momentsGetMomentsCommentsStoreModule(false)
-	local var6 = signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: var5 (ref), var3 (ref)
-		return var5.getCachedMomentComments(var3 or "")
-	end, { var5, var3 }).data)
-	local var7 = useCommentCapabilitiesModule()
-	local close = var1.close
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), var7 (ref), close (ref)
-		if var2 and not var7.canRead then
-			close()
+return function() --[[ Line: 33 | Named "useCommentsSheetViewModel" ]]
+	-- upvalues: GetCommentsSheetStoreModule (copy), SignalsReactModule (copy), MomentsGetMomentsCommentsStoreModule (copy), ReactModule (copy), UseCommentCapabilitiesModule (copy), GetCommentCollectionStoreModule (copy), LocalizationModule (copy), LocalizationService (copy), GetCommentsPanelStateModule (copy), UseLocalizationFunction (copy), FoundationModule (copy), GetCommentsVideoLiftModule (copy), UserInputService (copy)
+	local CommentsSheetStoreModule = GetCommentsSheetStoreModule(false)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(CommentsSheetStoreModule.getIsOpen)
+	local UseSignalStateResult1 = SignalsReactModule.useSignalState(CommentsSheetStoreModule.getFeedItemId)
+	local UseSignalStateResult2 = SignalsReactModule.useSignalState(CommentsSheetStoreModule.getOpenSessionId)
+	local MomentsGetMomentsCommentsStoreModuleResult = MomentsGetMomentsCommentsStoreModule(false)
+	local UseSignalStateResult3 = SignalsReactModule.useSignalState(ReactModule.useMemo(function() --[[ Line: 39 ]]
+		-- upvalues: MomentsGetMomentsCommentsStoreModuleResult (copy), UseSignalStateResult1 (copy)
+		return MomentsGetMomentsCommentsStoreModuleResult.getCachedMomentComments(UseSignalStateResult1 or "")
+	end, {
+		MomentsGetMomentsCommentsStoreModuleResult,
+		UseSignalStateResult1
+	}).data)
+	local UseCommentCapabilitiesModuleResult = UseCommentCapabilitiesModule()
+	local CloseFunction = CommentsSheetStoreModule.close
+	ReactModule.useEffect(function() --[[ Line: 46 ]]
+		-- upvalues: UseSignalStateResult (copy), UseCommentCapabilitiesModuleResult (copy), CloseFunction (copy)
+		if UseSignalStateResult and not UseCommentCapabilitiesModuleResult.canRead then
+			CloseFunction()
 		end
-	end, { var2, var7.canRead, close })
-	local var8 = reactModule.useRef(nil)
-	local var9, var10 = reactModule.useState(nil)
-	local var11 = getCommentCollectionStoreModule(false)
-	local var12 = var3 or ""
-	local var13 = signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: var11 (ref), var12 (ref)
-		return var11.getState(var12)
-	end, { var11, var12 }))
-	local var14 = if var6 == nil or var6.count == nil then if var13.initialLoadStatus == "Success" and not var13.hasMore then math.max(0, #var13.orderedCommentIds - (if var13.pendingSubmission ~= nil then 0 else 1)) else nil else var6.count
-	local var15 = if var14 ~= nil then nil else localizationModule.abbreviateCount(var14, localizationService.RobloxLocaleId)
-	local var16 = getCommentsPanelStateModule(var6, var13)
-	local var17 = "Feature.Moments.Title.Comments"
-	
-	if var14 ~= nil and var14 > 0 and var15 ~= nil then
-		var17 = {
-			if var6 == nil or not var6.countIsCapped then "Feature.Moments.Title.CommentsWithCount" else "Feature.Moments.Title.CommentsWithCappedCount",
-			count = var15
+	end, {
+		UseSignalStateResult,
+		UseCommentCapabilitiesModuleResult.canRead,
+		CloseFunction
+	})
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	local CommentCollectionStoreModule = GetCommentCollectionStoreModule(false)
+	local UseSignalStateResult1_1 = UseSignalStateResult1 or ""
+	local UseSignalStateResult4 = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 55 ]]
+		-- upvalues: CommentCollectionStoreModule (copy), UseSignalStateResult1_1 (copy)
+		return CommentCollectionStoreModule.getState(UseSignalStateResult1_1)
+	end, { CommentCollectionStoreModule, UseSignalStateResult1_1 })))
+	local v1: number = if UseSignalStateResult4.pendingSubmission == nil then 0 else 1
+	local Largest = if UseSignalStateResult4.initialLoadStatus == "Success" and not UseSignalStateResult4.hasMore then math.max(0, #UseSignalStateResult4.orderedCommentIds - v1) else nil
+	local Largest1 = if UseSignalStateResult3 == nil or UseSignalStateResult3.count == nil then Largest else UseSignalStateResult3.count
+	local AbbreviateCountResult = if Largest1 == nil then nil else LocalizationModule.abbreviateCount(Largest1, LocalizationService.RobloxLocaleId)
+	local CommentsPanelStateModule = GetCommentsPanelStateModule(UseSignalStateResult3, UseSignalStateResult4)
+	local Title = UseLocalizationFunction({
+		title = if Largest1 == nil or Largest1 <= 0 or AbbreviateCountResult == nil then "Feature.Moments.Title.Comments" else {
+			if UseSignalStateResult3 == nil or not UseSignalStateResult3.countIsCapped then "Feature.Moments.Title.CommentsWithCount" else "Feature.Moments.Title.CommentsWithCappedCount",
+			count = AbbreviateCountResult
 		}
-	end
-	local title = useLocalization({ title = var17 }).title
-	local var18 = var2 and (var3 ~= nil and (var3 ~= "" and (var7.canRead and (var7.canWrite and var16.canCompose))))
-	local setSnapPointIndex = var1.setSnapPointIndex
-	local var19 = reactModule.useCallback(function(_, p1)
-		-- upvalues: setSnapPointIndex (ref)
-		setSnapPointIndex(p1)
-	end, { setSnapPointIndex })
-	local var20 = foundationModule.Hooks.useOverlay()
-	local getVideoLift = var1.getVideoLift
-	local setVideoLift = var1.setVideoLift
-	local var21 = reactModule.useCallback(function(p1)
-		-- upvalues: var20 (ref), setVideoLift (ref), getCommentsVideoLiftModule (copy), userInputService (copy), getVideoLift (ref)
-		if var20 == nil then
-			setVideoLift(nil)
+	}).title
+	local CanCompose = UseSignalStateResult and (UseSignalStateResult1 ~= nil and (UseSignalStateResult1 ~= "" and (UseCommentCapabilitiesModuleResult.canRead and (UseCommentCapabilitiesModuleResult.canWrite and CommentsPanelStateModule.canCompose))))
+	local SetSnapPointIndexFunction = CommentsSheetStoreModule.setSnapPointIndex
+	local UseResult = ReactModule.useCallback(function(_, p1) --[[ Line: 83 ]]
+		-- upvalues: SetSnapPointIndexFunction (copy)
+		SetSnapPointIndexFunction(p1)
+	end, { SetSnapPointIndexFunction })
+	local UseOverlayResult = FoundationModule.Hooks.useOverlay()
+	local GetVideoLiftFunction = CommentsSheetStoreModule.getVideoLift
+	local SetVideoLiftFunction = CommentsSheetStoreModule.setVideoLift
+	local UseResult1 = ReactModule.useCallback(function(p1) --[[ Line: 90 ]]
+		-- upvalues: UseOverlayResult (copy), SetVideoLiftFunction (copy), GetCommentsVideoLiftModule (upval), UserInputService (upval), GetVideoLiftFunction (copy)
+		if UseOverlayResult == nil then
+			SetVideoLiftFunction(nil)
 			
 			return
+		else
+			SetVideoLiftFunction(GetCommentsVideoLiftModule({
+				sheetInset = p1.bottom,
+				overlayTop = UseOverlayResult.AbsolutePosition.Y,
+				overlayHeight = UseOverlayResult.AbsoluteSize.Y,
+				isKeyboardVisible = UserInputService.OnScreenKeyboardVisible
+			}, GetVideoLiftFunction(false)))
 		end
-		setVideoLift(getCommentsVideoLiftModule({
-			sheetInset = p1.bottom,
-			overlayTop = var20.AbsolutePosition.Y,
-			overlayHeight = var20.AbsoluteSize.Y,
-			isKeyboardVisible = userInputService.OnScreenKeyboardVisible
-		}, getVideoLift(false)))
-	end, { var20, getVideoLift, setVideoLift })
-	reactModule.useEffect(function()
-		-- upvalues: setVideoLift (ref)
-		return function()
-			-- upvalues: setVideoLift (copy)
-			setVideoLift(nil)
+	end, {
+		UseOverlayResult,
+		GetVideoLiftFunction,
+		SetVideoLiftFunction
+	})
+	ReactModule.useEffect(function() --[[ Line: 103 ]]
+		-- upvalues: SetVideoLiftFunction (copy)
+		return function() --[[ Line: 104 ]]
+			-- upvalues: SetVideoLiftFunction (upval)
+			SetVideoLiftFunction(nil)
 		end
-	end, { setVideoLift })
+	end, { SetVideoLiftFunction })
 	
 	return {
-		isOpen = var2,
-		title = title,
-		onClose = var1.close,
-		onSnapPointChanged = var19,
-		onContentInsetChanged = var21,
-		isListDisplayed = var16.contentState == "list" and var3 ~= nil,
-		scrollingFrameRef = var8,
-		actionsRef = var10,
+		isOpen = UseSignalStateResult,
+		title = Title,
+		onClose = CommentsSheetStoreModule.close,
+		onSnapPointChanged = UseResult,
+		onContentInsetChanged = UseResult1,
+		isListDisplayed = CommentsPanelStateModule.contentState == "list" and UseSignalStateResult1 ~= nil,
+		scrollingFrameRef = UseRefResult,
+		actionsRef = UseStateResult2,
 		panelBodyProps = {
-			isOpen = var2,
-			feedItemId = var3,
-			comments = var6,
-			panelState = var16,
-			sessionId = var4,
-			scrollingFrameRef = var8,
-			actionsFrame = var9,
-			onClose = var1.close
+			isOpen = UseSignalStateResult,
+			feedItemId = UseSignalStateResult1,
+			comments = UseSignalStateResult3,
+			panelState = CommentsPanelStateModule,
+			sessionId = UseSignalStateResult2,
+			scrollingFrameRef = UseRefResult,
+			actionsFrame = UseStateResult,
+			onClose = CommentsSheetStoreModule.close
 		},
-		composerProps = if var18 then { feedItemId = var3, sessionId = var4 } else nil
+		composerProps = if CanCompose then {
+			feedItemId = UseSignalStateResult1,
+			sessionId = UseSignalStateResult2
+		} else nil
 	}
 end

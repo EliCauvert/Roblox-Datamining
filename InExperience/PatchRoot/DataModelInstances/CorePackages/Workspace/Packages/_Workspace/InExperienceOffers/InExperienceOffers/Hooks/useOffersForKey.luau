@@ -1,10 +1,10 @@
-﻿local inExperienceOffers = script:FindFirstAncestor("InExperienceOffers")
-local signalsReactModule = require(inExperienceOffers.Parent.SignalsReact)
-local getOffersStoreModule = require(inExperienceOffers.Stores.GetOffersStore)
-local getOffersForKeyModule = require(inExperienceOffers.Utils.getOffersForKey)
-local _ = require(inExperienceOffers.Types)
+﻿local InExperienceOffers = script:FindFirstAncestor("InExperienceOffers")
+local SignalsReactModule = require(InExperienceOffers.Parent.SignalsReact)
+local GetOffersStoreModule = require(InExperienceOffers.Stores.GetOffersStore)
+local GetOffersForKeyModule = require(InExperienceOffers.Utils.getOffersForKey)
+local _ = require(InExperienceOffers.Types)
 
-return function(p1)
-	-- upvalues: getOffersStoreModule (ref), signalsReactModule (ref), getOffersForKeyModule (ref)
-	return getOffersForKeyModule(signalsReactModule.useSignalState(getOffersStoreModule(false).getOffers), p1)
+return function(p1) --[[ Line: 17 | Named "useOffersForKey" ]]
+	-- upvalues: GetOffersStoreModule (copy), SignalsReactModule (copy), GetOffersForKeyModule (copy)
+	return GetOffersForKeyModule(SignalsReactModule.useSignalState(GetOffersStoreModule(false).getOffers), p1)
 end

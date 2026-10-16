@@ -1,86 +1,81 @@
-﻿local socialServerDrivenUi = script:FindFirstAncestor("SocialServerDrivenUi")
-local parent = socialServerDrivenUi.Parent
-local reactModule = require(parent.React)
-local sharedFlagsModule = require(parent.SharedFlags)
-local signalsModule = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local PYMKCarouselModule = require(parent.PYMKCarousel)
-local friendRecommendations = require(parent.HomeStore).FriendRecommendations
-local appPage = require(parent.RobloxAppEnums).AppPage
-local setCurrentToastMessage = require(parent.ToastRodux).Actions.SetCurrentToastMessage
-local pymkNavigationBridgeModule = require(socialServerDrivenUi.System.PymkNavigationBridge)
-local normalizeDirectRecommendationsModule = require(socialServerDrivenUi.Common.normalizeDirectRecommendations)
-local fFlagCreateConnectionsHub = sharedFlagsModule.FFlagCreateConnectionsHub
+﻿local SocialServerDrivenUi = script:FindFirstAncestor("SocialServerDrivenUi")
+local Parent = SocialServerDrivenUi.Parent
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local PYMKCarouselModule = require(Parent.PYMKCarousel)
+local FriendRecommendations = require(Parent.HomeStore).FriendRecommendations
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local SetCurrentToastMessageFunction = require(Parent.ToastRodux).Actions.SetCurrentToastMessage
+local PymkNavigationBridgeModule = require(SocialServerDrivenUi.System.PymkNavigationBridge)
+local NormalizeDirectRecommendationsModule = require(SocialServerDrivenUi.Common.normalizeDirectRecommendations)
+local FFlagCreateConnectionsHub = require(Parent.SharedFlags).FFlagCreateConnectionsHub
 local t = {}
 
-local function readRecommendationHydration(p1, p2, p3)
-	local t = {}
+local function readRecommendationHydration(Items, Store, p1) --[[ Line: 43 ]]
+	local DataResults = {}
 	
-	for i, v in p1 do
-		local var1 = p2.getFriendRecommendation(v.id).data(p3)
+	for _, item in Items do
+		local DataResult = Store.getFriendRecommendation(item.id).data(p1)
 		
-		if var1 then
-			t[v.id] = var1
+		if DataResult then
+			DataResults[item.id] = DataResult
 		end
 	end
-	return t
+	return DataResults
 end
 
-return function(p4)
-	-- upvalues: t (ref), sduiCoreSystemModule (ref), friendRecommendations (ref), reactModule (ref), signalsModule (ref), normalizeDirectRecommendationsModule (ref), readRecommendationHydration (ref), signalsReactModule (ref), pymkNavigationBridgeModule (ref), setCurrentToastMessage (ref), fFlagCreateConnectionsHub (ref), appPage (ref), PYMKCarouselModule (ref)
-	local items = p4.items or t
-	local dependencies = p4.sduiContext.dependencies
-	local collectionPosition = tonumber(sduiCoreSystemModule.findAnalyticsField("collectionPosition", p4.analyticsContext.analyticsData or {}, -1)) or -1
-	local startRow = p4.startRow or -1
-	local store = friendRecommendations.getStore()
+return function(p2) --[[ Line: 60 | Named "SduiPymkCarousel" ]]
+	-- upvalues: t (copy), SduiCoreSystemModule (copy), FriendRecommendations (copy), ReactModule (copy), SignalsModule (copy), NormalizeDirectRecommendationsModule (copy), readRecommendationHydration (copy), SignalsReactModule (copy), PymkNavigationBridgeModule (copy), SetCurrentToastMessageFunction (copy), FFlagCreateConnectionsHub (copy), AppPage (copy), PYMKCarouselModule (copy)
+	local Items = p2.items or t
+	local Dependencies = p2.sduiContext.dependencies
+	local Number: number = tonumber(SduiCoreSystemModule.findAnalyticsField("collectionPosition", p2.analyticsContext.analyticsData or {}, -1)) or -1
+	local StartRow = p2.startRow or -1
+	local Store = FriendRecommendations.getStore()
 	
-	return reactModule.createElement(PYMKCarouselModule.PYMKCarouselEntryPoint, {
-		key = p4.recommendationRequestId,
-		carouselTitle = p4.title or "",
-		recommendations = signalsReactModule.useSignalState(reactModule.useMemo(function()
-			-- upvalues: signalsModule (copy), normalizeDirectRecommendationsModule (copy), items (ref), readRecommendationHydration (copy), store (ref)
-			return signalsModule.createComputed(function(p5)
-				-- upvalues: normalizeDirectRecommendationsModule (copy), items (copy), readRecommendationHydration (copy), store (copy)
-				return normalizeDirectRecommendationsModule(items, readRecommendationHydration(items, store, p5))
+	return ReactModule.createElement(PYMKCarouselModule.PYMKCarouselEntryPoint, {
+		key = p2.recommendationRequestId,
+		carouselTitle = p2.title or "",
+		recommendations = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 68 ]]
+			-- upvalues: SignalsModule (upval), NormalizeDirectRecommendationsModule (upval), Items (copy), readRecommendationHydration (upval), Store (copy)
+			return SignalsModule.createComputed(function(p3) --[[ Line: 69 ]]
+				-- upvalues: NormalizeDirectRecommendationsModule (upval), Items (upval), readRecommendationHydration (upval), Store (upval)
+				return NormalizeDirectRecommendationsModule(Items, (readRecommendationHydration(Items, Store, p3)))
 			end)
-		end, { items, store })),
-		recommendationSessionId = p4.recommendationRequestId,
-		openProfilePeekView = reactModule.useCallback(function(p5, p6)
-			-- upvalues: pymkNavigationBridgeModule (copy)
-			pymkNavigationBridgeModule.requestOpenProfile(p5, p6)
+		end, { Items, Store }))),
+		recommendationSessionId = p2.recommendationRequestId,
+		openProfilePeekView = ReactModule.useCallback(function(p3, p4) --[[ Line: 87 ]]
+			-- upvalues: PymkNavigationBridgeModule (upval)
+			PymkNavigationBridgeModule.requestOpenProfile(p3, p4)
 		end, {}),
-		showToast = reactModule.useCallback(function(p5)
-			-- upvalues: dependencies (ref), setCurrentToastMessage (copy)
-			dependencies.dispatch(setCurrentToastMessage({ toastMessage = p5 }))
-		end, { dependencies.dispatch }),
-		goToAddFriendsPage = reactModule.useCallback(function(_)
-			-- upvalues: fFlagCreateConnectionsHub (copy), dependencies (ref), appPage (copy), pymkNavigationBridgeModule (copy)
-			if fFlagCreateConnectionsHub then
-				dependencies.getNavigation().navigate(appPage.CoHubAddConnections)
+		showToast = ReactModule.useCallback(function(ToastMessage) --[[ Line: 91 ]]
+			-- upvalues: Dependencies (copy), SetCurrentToastMessageFunction (upval)
+			Dependencies.dispatch(SetCurrentToastMessageFunction({ toastMessage = ToastMessage }))
+		end, { Dependencies.dispatch }),
+		goToAddFriendsPage = ReactModule.useCallback(function(_) --[[ Line: 97 ]]
+			-- upvalues: FFlagCreateConnectionsHub (upval), Dependencies (copy), AppPage (upval), PymkNavigationBridgeModule (upval)
+			if FFlagCreateConnectionsHub then
+				Dependencies.getNavigation().navigate(AppPage.CoHubAddConnections)
 				
 				return
+			else
+				PymkNavigationBridgeModule.requestOpenAddFriends()
 			end
-			pymkNavigationBridgeModule.requestOpenAddFriends()
-		end, { dependencies.getNavigation }),
-		pageContext = p4.sduiContext.appPage,
-		scrollViewPositionChangedSignal = p4.scrollViewPositionChangedSignal,
-		sortAnalyticsData = reactModule.useMemo(function()
-			-- upvalues: collectionPosition (ref), p4 (ref), startRow (ref)
+		end, { Dependencies.getNavigation }),
+		pageContext = p2.sduiContext.appPage,
+		scrollViewPositionChangedSignal = p2.scrollViewPositionChangedSignal,
+		sortAnalyticsData = ReactModule.useMemo(function() --[[ Line: 78 ]]
+			-- upvalues: Number (copy), p2 (copy), StartRow (copy)
 			return {
-				sortIndex = collectionPosition,
-				appPage = p4.sduiContext.appPage,
-				sortId = p4.sortId,
-				startRow = startRow
+				sortIndex = Number,
+				appPage = p2.sduiContext.appPage,
+				sortId = p2.sortId,
+				startRow = StartRow
 			}
-		end, {
-			collectionPosition,
-			p4.sduiContext.appPage,
-			p4.sortId,
-			startRow
-		}),
-		diagService = dependencies.appAnalytics.Diag,
-		eventIngestService = dependencies.eventIngest,
-		appCompositionEnabled = p4.sduiContext.appCompositionEnabled
+		end, { Number, p2.sduiContext.appPage, p2.sortId, StartRow }),
+		diagService = Dependencies.appAnalytics.Diag,
+		eventIngestService = Dependencies.eventIngest,
+		appCompositionEnabled = p2.sduiContext.appCompositionEnabled
 	})
 end

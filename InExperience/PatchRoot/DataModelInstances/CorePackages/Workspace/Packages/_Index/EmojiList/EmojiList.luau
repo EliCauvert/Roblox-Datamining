@@ -1,1 +1,1 @@
-﻿return require(game:GetService("CorePackages").Packages.EmojiList)
+﻿return (require(game:GetService("CorePackages").Packages.EmojiList))

@@ -1,11 +1,11 @@
-﻿local checkAndSendEventModule = require(script.Parent.Parent.Utils.checkAndSendEvent)
+﻿local CheckAndSendEventModule = require(script.Parent.Parent.Utils.checkAndSendEvent)
 
-return function(p1, p2, p3, p4)
-	-- upvalues: checkAndSendEventModule (ref)
-	assert(type(p3) == "table", "Expected suggestions to be a table")
-	checkAndSendEventModule(p1, "usernameSuggestionShown", {
-		state = p2,
-		suggestions = `[{table.concat(p3, ",")}]`,
-		field = p4
+return function(p1, State, List, Field) --[[ Line: 7 ]]
+	-- upvalues: CheckAndSendEventModule (copy)
+	assert(type(List) == "table", "Expected suggestions to be a table")
+	CheckAndSendEventModule(p1, "usernameSuggestionShown", {
+		state = State,
+		suggestions = `[{table.concat(List, ",")}]`,
+		field = Field
 	})
 end

@@ -1,62 +1,71 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local wrappersModule = require(foundation.Utility.Wrappers)
-local connection = wrappersModule.Connection
-local instance = wrappersModule.Instance
-local signal = wrappersModule.Signal
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local FlagsModule = require(Foundation.Utility.Flags)
+local WrappersModule = require(Foundation.Utility.Wrappers)
+local Connection = WrappersModule.Connection
+local WrappersModuleInstance = WrappersModule.Instance
+local Signal = WrappersModule.Signal
 
-return function(p1)
-	-- upvalues: reactModule (ref), signal (ref), instance (ref), connection (ref)
-	local var1, var2 = reactModule.useBinding(Rect.new(Vector2.zero, Vector2.zero))
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var2 (ref), signal (copy), instance (copy), connection (copy)
-		local current = p1.current
+return function(p1) --[[ Line: 21 | Named "useClippingRect" ]]
+	-- upvalues: ReactModule (copy), FlagsModule (copy), Signal (copy), WrappersModuleInstance (copy), Connection (copy)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(Rect.new(Vector2.zero, Vector2.zero))
+	local UseStateResult, UseStateResult2 = ReactModule.useState(true)
+	ReactModule.useEffect(function() --[[ Line: 27 ]]
+		-- upvalues: p1 (copy), FlagsModule (upval), UseStateResult2 (copy), UseBindingResult2 (copy), Signal (upval), WrappersModuleInstance (upval), Connection (upval)
+		local Current = p1.current
 		
-		if not current or not current:IsA("GuiObject") then return end
-		local var3 = nil
-		local parent = current.Parent
-		while parent do
-			if not parent:IsA("GuiObject") or not parent.ClipsDescendants then
-				parent = parent.Parent
+		if not Current or not Current:IsA("GuiObject") then return end
+		local Frame = nil
+		local Parent = Current.Parent
+		while Parent do
+			if not Parent:IsA("GuiObject") or not Parent.ClipsDescendants then
+				Parent = Parent.Parent
 				continue
 			end
-			var3 = parent
+			Frame = Parent
 			break
 		end
-		if not var3 then
-			local layerCollector = current:FindFirstAncestorWhichIsA("LayerCollector")
-			
-			if layerCollector and layerCollector:IsA("GuiBase2d") then
-				var3 = layerCollector
+		if FlagsModule.FoundationUnifiedScrimScrolling then
+			UseStateResult2(Frame ~= nil)
+		end
+		if not Frame then
+			if FlagsModule.FoundationUnifiedScrimScrolling then
+				Frame = Current
+			else
+				local LayerCollector = Current:FindFirstAncestorWhichIsA("LayerCollector")
+				
+				if LayerCollector and LayerCollector:IsA("GuiBase2d") then
+					Frame = LayerCollector
+				end
 			end
 		end
-		local function update()
-			-- upvalues: var3 (write), current (ref), var2 (copy)
-			if var3 then
-				local absolutePosition = current.AbsolutePosition
-				var2(Rect.new(var3.AbsolutePosition - absolutePosition, var3.AbsolutePosition + var3.AbsoluteSize - absolutePosition))
+		local function update() --[[ Line: 58 ]]
+			-- upvalues: Frame (ref), Current (copy), UseBindingResult2 (upval)
+			if Frame then
+				local AbsolutePosition = Current.AbsolutePosition
+				UseBindingResult2(Rect.new(Frame.AbsolutePosition - AbsolutePosition, Frame.AbsolutePosition + Frame.AbsoluteSize - AbsolutePosition))
 			end
 		end
 		
-		local list = {
-			signal.Connect(instance.GetPropertyChangedSignal(current, "AbsolutePosition"), update)
+		local ConnectResults = {
+			Signal.Connect(WrappersModuleInstance.GetPropertyChangedSignal(Current, "AbsolutePosition"), update)
 		}
 		
-		if var3 then
-			table.insert(list, signal.Connect(instance.GetPropertyChangedSignal(var3, "AbsolutePosition"), update))
-			table.insert(list, signal.Connect(instance.GetPropertyChangedSignal(var3, "AbsoluteSize"), update))
+		if Frame then
+			table.insert(ConnectResults, Signal.Connect(WrappersModuleInstance.GetPropertyChangedSignal(Frame, "AbsolutePosition"), update))
+			table.insert(ConnectResults, Signal.Connect(WrappersModuleInstance.GetPropertyChangedSignal(Frame, "AbsoluteSize"), update))
 		end
-		if var3 then
-			local absolutePosition = current.AbsolutePosition
-			var2(Rect.new(var3.AbsolutePosition - absolutePosition, var3.AbsolutePosition + var3.AbsoluteSize - absolutePosition))
+		if Frame then
+			local AbsolutePosition = Current.AbsolutePosition
+			UseBindingResult2(Rect.new(Frame.AbsolutePosition - AbsolutePosition, Frame.AbsolutePosition + Frame.AbsoluteSize - AbsolutePosition))
 		end
-		return function()
-			-- upvalues: list (ref), connection (copy)
-			for i, v in list do
-				connection.Disconnect(v)
+		return function() --[[ Line: 86 ]]
+			-- upvalues: ConnectResults (copy), Connection (upval)
+			for _, connectResult in ConnectResults do
+				Connection.Disconnect(connectResult)
 			end
 		end
 	end, {})
 	
-	return var1
+	return UseBindingResult, UseStateResult
 end

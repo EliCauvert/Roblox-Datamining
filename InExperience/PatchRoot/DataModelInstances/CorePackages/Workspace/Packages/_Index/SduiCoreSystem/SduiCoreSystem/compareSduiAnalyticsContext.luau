@@ -1,24 +1,24 @@
-﻿local sduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
-local tutilsModule = require(sduiCoreSystem.Parent.tutils)
-local _ = require(sduiCoreSystem.SduiBuilderTypes)
-local t = { analyticsData = true, ancestorAnalyticsData = true }
+﻿local SduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
+local TutilsModule = require(SduiCoreSystem.Parent.tutils)
+local _ = require(SduiCoreSystem.SduiBuilderTypes)
+local config = { analyticsData = true, ancestorAnalyticsData = true }
 
-return function(p1, p2)
-	-- upvalues: t (ref), tutilsModule (ref)
+return function(p1, p2) --[[ Line: 17 ]]
+	-- upvalues: config (copy), TutilsModule (copy)
 	if p1 == p2 then
 		return true
 	end
-	for i in t do
-		local var1 = p1[i]
-		local var2 = p2[i]
+	for i in config do
+		local v1 = p1[i]
+		local v2 = p2[i]
 		
-		if typeof(var1) == "table" and typeof(var2) == "table" then
-			if not tutilsModule.shallowEqual(var1, var2) then
+		if typeof(v1) == "table" and typeof(v2) == "table" then
+			if not TutilsModule.shallowEqual(v1, v2) then
 				return false
 			end
-		elseif var1 and not var2 or var2 and not var1 then
+		elseif v1 and not v2 or v2 and not v1 then
 			return false
 		end
 	end
-	return tutilsModule.shallowEqual(p1, p2, t)
+	return TutilsModule.shallowEqual(p1, p2, config)
 end

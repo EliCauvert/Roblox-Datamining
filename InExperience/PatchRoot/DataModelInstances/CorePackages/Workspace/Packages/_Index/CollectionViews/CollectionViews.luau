@@ -1,12 +1,12 @@
-﻿local collectionViewTypesModule = require(script.CollectionViewTypes)
-local calculateSpanAwareGridsModule = require(script.calculateSpanAwareGrids)
+﻿local CollectionViewTypesModule = require(script.CollectionViewTypes)
+local CalculateSpanAwareGridsModule = require(script.calculateSpanAwareGrids)
 
 return {
 	["jest.config"] = script["jest.config"],
 	["jest.bench.config"] = script["jest.bench.config"],
 	CollectionCarousel = require(script.Carousel.CollectionCarousel),
 	CollectionGrid = require(script.Grid.CollectionGrid),
-	CollectionViewTypes = collectionViewTypesModule,
+	CollectionViewTypes = CollectionViewTypesModule,
 	CollectionLayoutCalculators = require(script.CollectionLayoutCalculators),
 	calculateItemWidth = require(script.calculateItemWidth),
 	calculateNumColumns = require(script.calculateNumColumns),
@@ -19,12 +19,12 @@ return {
 	CarouselScrollButtons = require(script.Carousel.CarouselScrollButtons),
 	CollectionHeader = require(script.CollectionHeader),
 	checkAndFormatPossibleLink = require(script.checkAndFormatPossibleLink),
-	CollectionItemSize = collectionViewTypesModule.CollectionItemSize,
+	CollectionItemSize = CollectionViewTypesModule.CollectionItemSize,
 	useCollectionLayout = require(script.CollectionLayoutStore.useCollectionLayout),
 	CollectionLayoutStoreProvider = require(script.CollectionLayoutStore.CollectionLayoutStoreProvider),
 	CollectionLayoutStoreContext = require(script.CollectionLayoutStore.CollectionLayoutStoreContext),
 	getItemsPerRow = require(script.CollectionLayoutStore.CollectionBreakpointConfig).getItemsPerRow,
 	getMainCollectionLayoutStore = require(script.CollectionLayoutStore.getMainCollectionLayoutStore),
-	calculateSpanAwareGrids = calculateSpanAwareGridsModule.calculateSpanAwareGrids,
-	processOneGrid = calculateSpanAwareGridsModule.processOneGrid
+	calculateSpanAwareGrids = CalculateSpanAwareGridsModule.calculateSpanAwareGrids,
+	processOneGrid = CalculateSpanAwareGridsModule.processOneGrid
 }

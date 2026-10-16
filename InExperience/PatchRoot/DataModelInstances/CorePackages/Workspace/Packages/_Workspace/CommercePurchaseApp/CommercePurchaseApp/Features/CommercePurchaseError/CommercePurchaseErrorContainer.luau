@@ -1,8 +1,8 @@
-﻿local reactModule = require(script:FindFirstAncestor("CommercePurchaseApp").Parent.React)
-local commercePurchaseErrorModule = require(script.Parent.CommercePurchaseError)
-local useCommercePurchaseErrorPropsModule = require(script.Parent.useCommercePurchaseErrorProps)
+﻿local ReactModule = require(script:FindFirstAncestor("CommercePurchaseApp").Parent.React)
+local CommercePurchaseErrorModule = require(script.Parent.CommercePurchaseError)
+local UseCommercePurchaseErrorPropsModule = require(script.Parent.useCommercePurchaseErrorProps)
 
-return function()
-	-- upvalues: useCommercePurchaseErrorPropsModule (ref), reactModule (ref), commercePurchaseErrorModule (ref)
-	return reactModule.createElement(commercePurchaseErrorModule, useCommercePurchaseErrorPropsModule())
+return function() --[[ Line: 8 | Named "CommercePurchaseErrorContainer" ]]
+	-- upvalues: UseCommercePurchaseErrorPropsModule (copy), ReactModule (copy), CommercePurchaseErrorModule (copy)
+	return ReactModule.createElement(CommercePurchaseErrorModule, (UseCommercePurchaseErrorPropsModule()))
 end

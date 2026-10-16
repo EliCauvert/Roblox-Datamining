@@ -1,8 +1,8 @@
-﻿local getFFlagLuaEnableShowUpsellMethodModule = require(script.Parent.GetFFlagLuaEnableShowUpsellMethod)
-local getFFlagLuaAppPushSystemUpsellDevOverrideModule = require(script.Parent.GetFFlagLuaAppPushSystemUpsellDevOverride)
+﻿local GetFFlagLuaEnableShowUpsellMethodModule = require(script.Parent.GetFFlagLuaEnableShowUpsellMethod)
+local GetFFlagLuaAppPushSystemUpsellDevOverrideModule = require(script.Parent.GetFFlagLuaAppPushSystemUpsellDevOverride)
 game:DefineFastFlag("EnablePushNotificationsUpsellModal6", false)
 
-return function()
-	-- upvalues: getFFlagLuaEnableShowUpsellMethodModule (ref), getFFlagLuaAppPushSystemUpsellDevOverrideModule (ref)
-	return getFFlagLuaEnableShowUpsellMethodModule() and game:GetFastFlag("EnablePushNotificationsUpsellModal6") or getFFlagLuaAppPushSystemUpsellDevOverrideModule()
+return function() --[[ Line: 5 ]]
+	-- upvalues: GetFFlagLuaEnableShowUpsellMethodModule (copy), GetFFlagLuaAppPushSystemUpsellDevOverrideModule (copy)
+	return GetFFlagLuaEnableShowUpsellMethodModule() and game:GetFastFlag("EnablePushNotificationsUpsellModal6") or GetFFlagLuaAppPushSystemUpsellDevOverrideModule()
 end

@@ -1,11 +1,11 @@
-﻿local mrRouterHeaders = require(script:FindFirstAncestor("SduiSharedUtilities").Parent.Http).MrRouterHeaders
+﻿local MrRouterHeaders = require(script:FindFirstAncestor("SduiSharedUtilities").Parent.Http).MrRouterHeaders
 
-return function(p1, p2)
-	-- upvalues: mrRouterHeaders (ref)
-	local t = { Accept = p1 }
+return function(Accept, p1) --[[ Line: 9 | Named "buildSduiRequestHeaders" ]]
+	-- upvalues: MrRouterHeaders (copy)
+	local config = { Accept = Accept }
 	
-	if p2 ~= nil then
-		t["Content-Type"] = p2
+	if p1 ~= nil then
+		config["Content-Type"] = p1
 	end
-	return mrRouterHeaders.injectMrRouterHeaders(t)
+	return MrRouterHeaders.injectMrRouterHeaders(config)
 end

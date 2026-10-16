@@ -1,25 +1,25 @@
-﻿local avatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
-local reactModule = require(avatarExperienceInspectAndBuy.Parent.React)
-local createItemSelectionStoreModule = require(avatarExperienceInspectAndBuy.Stores.createItemSelectionStore)
-local var1 = reactModule.createContext(nil)
+﻿local AvatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
+local ReactModule = require(AvatarExperienceInspectAndBuy.Parent.React)
+local CreateItemSelectionStoreModule = require(AvatarExperienceInspectAndBuy.Stores.createItemSelectionStore)
+local Context = ReactModule.createContext(nil)
 
 return {
-	Provider = function(p1)
-		-- upvalues: reactModule (ref), createItemSelectionStoreModule (ref), var1 (ref)
-		return reactModule.createElement(var1.Provider, {
-			value = reactModule.useMemo(function()
-				-- upvalues: createItemSelectionStoreModule (copy)
-				return createItemSelectionStoreModule()
+	Provider = function(p1) --[[ Line: 20 ]]
+		-- upvalues: ReactModule (copy), CreateItemSelectionStoreModule (copy), Context (copy)
+		return ReactModule.createElement(Context.Provider, {
+			value = ReactModule.useMemo(function() --[[ Line: 22 ]]
+				-- upvalues: CreateItemSelectionStoreModule (upval)
+				return CreateItemSelectionStoreModule()
 			end, {})
 		}, p1.children)
 	end,
-	useItemSelectionStore = function()
-		-- upvalues: reactModule (ref), var1 (ref)
-		local var2 = reactModule.useContext(var1)
+	useItemSelectionStore = function() --[[ Line: 29 ]]
+		-- upvalues: ReactModule (copy), Context (copy)
+		local UseContextResult = ReactModule.useContext(Context)
 		
-		if not var2 then
+		if not UseContextResult then
 			error("useItemSelectionStore must be used within an ItemSelectionStoreProvider")
 		end
-		return var2
+		return UseContextResult
 	end
 }

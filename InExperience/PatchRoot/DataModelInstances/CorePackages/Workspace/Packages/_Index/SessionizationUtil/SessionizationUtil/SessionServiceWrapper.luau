@@ -1,61 +1,61 @@
-﻿local sessionService = game:GetService("SessionService")
+﻿local SessionService = game:GetService("SessionService")
 
 return {
 	SessionChangedSignal = require(script:FindFirstAncestor("SessionizationUtil").Parent.AppCommonLib).Signal.new(),
-	GetRootSID = function(_)
-		-- upvalues: sessionService (ref)
-		return sessionService:GetRootSID()
+	GetRootSID = function(_) --[[ Line: 15 ]]
+		-- upvalues: SessionService (copy)
+		return SessionService:GetRootSID()
 	end,
-	SetSession = function(value, p1, p2, p3)
-		-- upvalues: sessionService (ref)
-		local var1 = sessionService:GetSessionTag(p2)
-		sessionService:SetSession(p1, p2, p3)
-		local var2 = sessionService:GetSessionTag(p2)
+	SetSession = function(p1, ParentSid, Sid, Tag) --[[ Line: 19 ]]
+		-- upvalues: SessionService (copy)
+		local SessionTag = SessionService:GetSessionTag(Sid)
+		SessionService:SetSession(ParentSid, Sid, Tag)
+		local SessionTag1 = SessionService:GetSessionTag(Sid)
 		
-		if var2 ~= var1 then
-			value.SessionChangedSignal:fire(p2, var2)
+		if SessionTag1 ~= SessionTag then
+			p1.SessionChangedSignal:fire(Sid, SessionTag1)
 		end
 	end,
-	ReplaceSession = function(p1, p2, p3)
-		-- upvalues: sessionService (ref)
-		local var1 = sessionService:GetSessionTag(p2)
-		sessionService:ReplaceSession(p2, p3)
-		local var2 = sessionService:GetSessionTag(p2)
+	ReplaceSession = function(p1, Sid, Tag) --[[ Line: 31 ]]
+		-- upvalues: SessionService (copy)
+		local SessionTag = SessionService:GetSessionTag(Sid)
+		SessionService:ReplaceSession(Sid, Tag)
+		local SessionTag1 = SessionService:GetSessionTag(Sid)
 		
-		if var2 ~= var1 then
-			p1.SessionChangedSignal:fire(p2, var2)
+		if SessionTag1 ~= SessionTag then
+			p1.SessionChangedSignal:fire(Sid, SessionTag1)
 		end
 	end,
-	RemoveSession = function(_, p1)
-		-- upvalues: sessionService (ref)
-		sessionService:RemoveSession(p1)
+	RemoveSession = function(_, Sid) --[[ Line: 43 ]]
+		-- upvalues: SessionService (copy)
+		SessionService:RemoveSession(Sid)
 	end,
-	RemoveSessionsWithMetadataKey = function(_, p1)
-		-- upvalues: sessionService (ref)
-		sessionService:RemoveSessionsWithMetadataKey(p1)
+	RemoveSessionsWithMetadataKey = function(_, Key) --[[ Line: 47 ]]
+		-- upvalues: SessionService (copy)
+		SessionService:RemoveSessionsWithMetadataKey(Key)
 	end,
-	GetMetadata = function(_, p1, p2)
-		-- upvalues: sessionService (ref)
-		return sessionService:GetMetadata(p1, p2)
+	GetMetadata = function(_, Sid, Key) --[[ Line: 51 ]]
+		-- upvalues: SessionService (copy)
+		return SessionService:GetMetadata(Sid, Key)
 	end,
-	SetMetadata = function(_, p1, p2, p3)
-		-- upvalues: sessionService (ref)
-		sessionService:SetMetadata(p1, p2, p3)
+	SetMetadata = function(_, Sid, Key, Value) --[[ Line: 55 ]]
+		-- upvalues: SessionService (copy)
+		SessionService:SetMetadata(Sid, Key, Value)
 	end,
-	RemoveMetadata = function(_, p1, p2)
-		-- upvalues: sessionService (ref)
-		sessionService:RemoveMetadata(p1, p2)
+	RemoveMetadata = function(_, Sid, Key) --[[ Line: 59 ]]
+		-- upvalues: SessionService (copy)
+		SessionService:RemoveMetadata(Sid, Key)
 	end,
-	SessionExists = function(_, p1)
-		-- upvalues: sessionService (ref)
-		return sessionService:SessionExists(p1)
+	SessionExists = function(_, Sid) --[[ Line: 63 ]]
+		-- upvalues: SessionService (copy)
+		return SessionService:SessionExists(Sid)
 	end,
-	GetSessionTag = function(_, p1)
-		-- upvalues: sessionService (ref)
-		return sessionService:GetSessionTag(p1)
+	GetSessionTag = function(_, Sid) --[[ Line: 67 ]]
+		-- upvalues: SessionService (copy)
+		return SessionService:GetSessionTag(Sid)
 	end,
-	generateSessionInfoString = function(_, p1, p2, p3, p4)
-		-- upvalues: sessionService (ref)
-		return sessionService:GenerateSessionInfoString(p1, p2, p3, p4)
+	generateSessionInfoString = function(_, IncludeArbitrarySessions, IncludeTag, IncludeTimestamps, IncludeMetadata) --[[ Line: 71 ]]
+		-- upvalues: SessionService (copy)
+		return SessionService:GenerateSessionInfoString(IncludeArbitrarySessions, IncludeTag, IncludeTimestamps, IncludeMetadata)
 	end
 }

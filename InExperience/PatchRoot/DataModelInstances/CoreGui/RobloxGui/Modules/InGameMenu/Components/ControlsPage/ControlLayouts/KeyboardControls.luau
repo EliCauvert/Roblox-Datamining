@@ -1,60 +1,60 @@
-﻿local roact = require(game:GetService("CorePackages").Packages.InGameMenuDependencies).Roact
-local parent = script.Parent.Parent.Parent.Parent
-local controlsModule = require(parent.Resources.Controls)
-local controlLayoutContainerModule = require(script.Parent.Parent.ControlLayoutContainer)
-local paddedScrollFrameModule = require(parent.Components.PaddedScrollFrame)
-local controlEntryModule = require(script.Parent.Parent.ControlEntry)
-local controlEntryHeaderModule = require(script.Parent.Parent.ControlEntryHeader)
+﻿local Roact = require(game:GetService("CorePackages").Packages.InGameMenuDependencies).Roact
+local Parent = script.Parent.Parent.Parent.Parent
+local ControlsModule = require(Parent.Resources.Controls)
+local ControlLayoutContainerModule = require(script.Parent.Parent.ControlLayoutContainer)
+local PaddedScrollFrameModule = require(Parent.Components.PaddedScrollFrame)
+local ControlEntryModule = require(script.Parent.Parent.ControlEntry)
+local ControlEntryHeaderModule = require(script.Parent.Parent.ControlEntryHeader)
 
-return function(_)
-	-- upvalues: roact (ref), controlsModule (ref), controlEntryHeaderModule (ref), controlEntryModule (ref), controlLayoutContainerModule (ref), paddedScrollFrameModule (ref)
-	local t = {
-		ListLayout = roact.createElement("UIListLayout", { SortOrder = Enum.SortOrder.LayoutOrder }),
-		Padding = roact.createElement("UIPadding", {
+return function(_) --[[ Line: 26 | Named "KeyboardControls" ]]
+	-- upvalues: Roact (copy), ControlsModule (copy), ControlEntryHeaderModule (copy), ControlEntryModule (copy), ControlLayoutContainerModule (copy), PaddedScrollFrameModule (copy)
+	local Elements = {
+		ListLayout = Roact.createElement("UIListLayout", { SortOrder = Enum.SortOrder.LayoutOrder }),
+		Padding = Roact.createElement("UIPadding", {
 			PaddingLeft = UDim.new(0, 95),
 			PaddingRight = UDim.new(0, 95)
 		}),
-		SizeConstraint = roact.createElement("UISizeConstraint", {
+		SizeConstraint = Roact.createElement("UISizeConstraint", {
 			MaxSize = Vector2.new(1090, 1e999),
 			MinSize = Vector2.new(150, 0)
 		})
 	}
-	local var1 = 0
-	local var2 = 0
-	local var3 = 1
+	local Count = 0
+	local Count1 = 0
+	local LayoutOrder = 1
 	
-	for i, v in ipairs(controlsModule.keybinds) do
-		local title = v.title
-		var1 += 1
-		t[title .. "_header"] = roact.createElement(controlEntryHeaderModule, { title = title, LayoutOrder = var3 })
-		var3 += 1
+	for _, keybind in ipairs(ControlsModule.keybinds) do
+		local Title = keybind.title
+		Count += 1
+		Elements[Title .. "_header"] = Roact.createElement(ControlEntryHeaderModule, { title = Title, LayoutOrder = LayoutOrder })
+		LayoutOrder += 1
 		
-		for i_1, v_1 in ipairs(v.controls) do
-			var2 += 1
-			t[title .. "_" .. i_1] = roact.createElement(controlEntryModule, {
-				LayoutOrder = var3,
-				actionDescription = v_1.desc,
-				inputs = v_1.inputs,
-				isList = v_1.list,
-				hasDivider = i_1 ~= #v.controls
+		for i, control in ipairs(keybind.controls) do
+			Count1 += 1
+			Elements[Title .. "_" .. i] = Roact.createElement(ControlEntryModule, {
+				LayoutOrder = LayoutOrder,
+				actionDescription = control.desc,
+				inputs = control.inputs,
+				isList = control.list,
+				hasDivider = i ~= #keybind.controls
 			})
-			var3 += 1
+			LayoutOrder += 1
 		end
 	end
-	return roact.createElement(controlLayoutContainerModule, {
+	return Roact.createElement(ControlLayoutContainerModule, {
 		titleText = "CoreScripts.InGameMenu.Controls.KeyboardAndMouseTitle"
 	}, {
-		ScrollContent = roact.createElement(paddedScrollFrameModule, {
-			CanvasSize = UDim2.new(0, 0, 0, var1 * 45 + var2 * 50),
+		ScrollContent = Roact.createElement(PaddedScrollFrameModule, {
+			CanvasSize = UDim2.new(0, 0, 0, Count * 45 + Count1 * 50),
 			ScrollingDirection = Enum.ScrollingDirection.Y,
 			Size = UDim2.new(1, 0, 1, -130)
 		}, {
-			ListContainer = roact.createElement("Frame", {
+			ListContainer = Roact.createElement("Frame", {
 				BackgroundTransparency = 1,
 				Size = UDim2.new(1, 0, 1, 0),
 				AnchorPoint = Vector2.new(0.5, 0),
 				Position = UDim2.new(0.5, 0, 0, 0)
-			}, t)
+			}, Elements)
 		})
 	})
 end

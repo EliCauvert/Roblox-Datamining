@@ -1,29 +1,28 @@
-﻿local inExperienceSideSheet = script:FindFirstAncestor("InExperienceSideSheet")
-local parent = inExperienceSideSheet.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local getSideSheetConfigStoreModule = require(inExperienceSideSheet.Stores.GetSideSheetConfigStore)
-local useTokens = foundationModule.Hooks.useTokens
+﻿local InExperienceSideSheet = script:FindFirstAncestor("InExperienceSideSheet")
+local Parent = InExperienceSideSheet.Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local GetSideSheetConfigStoreModule = require(InExperienceSideSheet.Stores.GetSideSheetConfigStore)
+local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
 
-local function getBackgroundTransparency(value)
-	-- upvalues: getSideSheetConfigStoreModule (ref)
-	return getSideSheetConfigStoreModule(value).getBackgroundTransparency(value)
+local function getBackgroundTransparency(p1) --[[ Line: 12 ]]
+	-- upvalues: GetSideSheetConfigStoreModule (copy)
+	return GetSideSheetConfigStoreModule(p1).getBackgroundTransparency(p1)
 end
 
-return function()
-	-- upvalues: useTokens (ref), signalsReactModule (ref), getBackgroundTransparency (ref), reactModule (ref)
-	local var1 = useTokens()
-	local var2 = signalsReactModule.useSignalBinding(getBackgroundTransparency)
+return function() --[[ Line: 16 | Named "useBackgroundStyle" ]]
+	-- upvalues: UseTokensFunction (copy), SignalsReactModule (copy), getBackgroundTransparency (copy), ReactModule (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseSignalBindingResult = SignalsReactModule.useSignalBinding(getBackgroundTransparency)
 	
-	return reactModule.useMemo(function()
-		-- upvalues: var2 (ref), var1 (ref)
-		return var2:map(function(p1)
-			-- upvalues: var1 (copy)
+	return (ReactModule.useMemo(function() --[[ Line: 20 ]]
+		-- upvalues: UseSignalBindingResult (copy), UseTokensResult (copy)
+		return UseSignalBindingResult:map(function(Transparency) --[[ Line: 21 ]]
+			-- upvalues: UseTokensResult (upval)
 			return {
-				Color3 = var1.Color.OverMedia.OverMedia_0.Color3,
-				Transparency = p1
+				Color3 = UseTokensResult.Color.OverMedia.OverMedia_0.Color3,
+				Transparency = Transparency
 			}
 		end)
-	end, { var1.Color.OverMedia.OverMedia_0.Color3 })
+	end, { UseTokensResult.Color.OverMedia.OverMedia_0.Color3 }))
 end

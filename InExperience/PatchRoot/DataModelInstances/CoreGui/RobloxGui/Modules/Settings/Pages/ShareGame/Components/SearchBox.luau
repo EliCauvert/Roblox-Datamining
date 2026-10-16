@@ -1,107 +1,103 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local fFlagConnectionsToFriendsRename = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagConnectionsToFriendsRename
-local robloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
-local roactModule = require(corePackagesService.Packages.Roact)
-local constantsModule = require(robloxGui.Modules.Settings.Pages.ShareGame.Constants)
-local searchBox = roactModule.Component:extend("SearchBox")
-local shareGameIconsModule = require(robloxGui.Modules.Settings.Pages.ShareGame.Spritesheets.ShareGameIcons)
-local imagePath = shareGameIconsModule:GetImagePath()
-local searchBorderFrame = shareGameIconsModule:GetFrame("search_border")
-local rect = Rect.new(3, 3, 4, 4)
-local searchSmallFrame = shareGameIconsModule:GetFrame("search_small")
-local clearFrame = shareGameIconsModule:GetFrame("clear")
-local themeModule = require(robloxGui.Modules.Settings.Theme)
-local var1 = require(robloxGui.Modules.Settings.Pages.ShareGame.getTranslator)()
+﻿local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
+local RoactModule = require(game:GetService("CorePackages").Packages.Roact)
+local ConstantsModule = require(RobloxGui.Modules.Settings.Pages.ShareGame.Constants)
+local SearchBox = RoactModule.Component:extend("SearchBox")
+local ShareGameIconsModule = require(RobloxGui.Modules.Settings.Pages.ShareGame.Spritesheets.ShareGameIcons)
+local ImagePath = ShareGameIconsModule:GetImagePath()
+local SearchBorderFrame = ShareGameIconsModule:GetFrame("search_border")
+local _Rect = Rect.new(3, 3, 4, 4)
+local SearchSmallFrame = ShareGameIconsModule:GetFrame("search_small")
+local ClearFrame = ShareGameIconsModule:GetFrame("clear")
+local ThemeModule = require(RobloxGui.Modules.Settings.Theme)
+local Translator = require(RobloxGui.Modules.Settings.Pages.ShareGame.getTranslator)()
 
-function searchBox.init(p1)
+function SearchBox.init(p1) --[[ Line: 37 ]]
 	p1.state = { isTextWritten = false }
 	p1.searchField = nil
 end
 
-function searchBox.render(p1)
-	-- upvalues: roactModule (ref), imagePath (ref), searchBorderFrame (ref), rect (ref), imagePath (ref), searchSmallFrame (ref), constantsModule (ref), fFlagConnectionsToFriendsRename (ref), var1 (ref), themeModule (ref), imagePath (ref), clearFrame (ref)
-	local anchorPoint = p1.props.anchorPoint
-	local onTextBoxFocusLost = p1.props.onTextBoxFocusLost
-	local onTextBoxFocused = p1.props.onTextBoxFocused
-	local position = p1.props.position
-	local searchFieldRef = p1.props.searchFieldRef
-	local zIndex = p1.props.zIndex
+function SearchBox.render(p1) --[[ Line: 44 ]]
+	-- upvalues: RoactModule (copy), ImagePath (copy), SearchBorderFrame (copy), _Rect (copy), ImagePath (copy), SearchSmallFrame (copy), ConstantsModule (copy), Translator (copy), ThemeModule (copy), ImagePath (copy), ClearFrame (copy)
+	local OnTextBoxFocusLostFunction = p1.props.onTextBoxFocusLost
+	local OnTextBoxFocusedFunction = p1.props.onTextBoxFocused
+	local SearchFieldRefFunction = p1.props.searchFieldRef
+	local ZIndex = p1.props.zIndex
 	
-	return roactModule.createElement("ImageLabel", {
+	return RoactModule.createElement("ImageLabel", {
 		BackgroundTransparency = 1,
-		AnchorPoint = anchorPoint,
-		Position = position,
+		AnchorPoint = p1.props.anchorPoint,
+		Position = p1.props.position,
 		Size = p1.props.size,
 		Visible = p1.props.visible,
-		Image = imagePath,
-		ImageRectOffset = searchBorderFrame.offset,
-		ImageRectSize = searchBorderFrame.size,
+		Image = ImagePath,
+		ImageRectOffset = SearchBorderFrame.offset,
+		ImageRectSize = SearchBorderFrame.size,
 		ScaleType = Enum.ScaleType.Slice,
-		SliceCenter = rect,
-		ZIndex = zIndex
+		SliceCenter = _Rect,
+		ZIndex = ZIndex
 	}, {
-		UIPadding = roactModule.createElement("UIPadding", {
+		UIPadding = RoactModule.createElement("UIPadding", {
 			PaddingLeft = UDim.new(0, 8),
 			PaddingRight = UDim.new(0, 8),
 			PaddingTop = UDim.new(0, 6),
 			PaddingBottom = UDim.new(0, 6)
 		}),
-		SearchIcon = roactModule.createElement("ImageLabel", {
+		SearchIcon = RoactModule.createElement("ImageLabel", {
 			BackgroundTransparency = 1,
-			Image = imagePath,
-			ImageRectOffset = searchSmallFrame.offset,
-			ImageRectSize = searchSmallFrame.size,
+			Image = ImagePath,
+			ImageRectOffset = SearchSmallFrame.offset,
+			ImageRectSize = SearchSmallFrame.size,
 			Size = UDim2.new(0, 16, 0, 16),
-			ZIndex = zIndex
+			ZIndex = ZIndex
 		}),
-		SearchField = roactModule.createElement("TextBox", {
+		SearchField = RoactModule.createElement("TextBox", {
 			BackgroundTransparency = 1,
 			AnchorPoint = Vector2.new(0, 0.5),
 			Position = UDim2.new(0, 28, 0.5, 0),
 			Size = UDim2.new(1, -56, 1, 0),
 			ClearTextOnFocus = false,
-			PlaceholderColor3 = constantsModule.Color.GRAY3,
-			PlaceholderText = if fFlagConnectionsToFriendsRename then var1:FormatByKey("Feature.SettingsHub.Label.SearchForFriendsPlaceholder.FriendsRename") else var1:FormatByKey("Feature.SettingsHub.Label.SearchForFriendsPlaceholder"),
+			PlaceholderColor3 = ConstantsModule.Color.GRAY3,
+			PlaceholderText = Translator:FormatByKey("Feature.SettingsHub.Label.SearchForFriendsPlaceholder.FriendsRename"),
 			Text = "",
-			TextColor3 = constantsModule.Color.WHITE,
+			TextColor3 = ConstantsModule.Color.WHITE,
 			TextWrapped = true,
 			TextXAlignment = Enum.TextXAlignment.Left,
-			TextSize = themeModule.textSize(16),
-			Font = themeModule.font(Enum.Font.SourceSans),
-			ZIndex = zIndex,
-			[roactModule.Ref] = function(p2)
-				-- upvalues: p1 (ref), searchFieldRef (ref)
-				p1.searchField = p2
+			TextSize = ThemeModule.textSize(16),
+			Font = ThemeModule.font(Enum.Font.SourceSans),
+			ZIndex = ZIndex,
+			[RoactModule.Ref] = function(SearchField) --[[ Line: 99 ]]
+				-- upvalues: p1 (copy), SearchFieldRefFunction (copy)
+				p1.searchField = SearchField
 				
-				if searchFieldRef then
-					searchFieldRef(p2)
+				if SearchFieldRefFunction then
+					SearchFieldRefFunction(SearchField)
 				end
 			end,
-			[roactModule.Event.Focused] = function()
-				-- upvalues: onTextBoxFocused (ref)
-				if onTextBoxFocused then
-					onTextBoxFocused()
+			[RoactModule.Event.Focused] = function() --[[ Line: 108 ]]
+				-- upvalues: OnTextBoxFocusedFunction (copy)
+				if OnTextBoxFocusedFunction then
+					OnTextBoxFocusedFunction()
 				end
 			end,
-			[roactModule.Event.FocusLost] = function(p2)
-				-- upvalues: onTextBoxFocusLost (ref)
-				if onTextBoxFocusLost then
-					onTextBoxFocusLost(p2.Text)
+			[RoactModule.Event.FocusLost] = function(p2) --[[ Line: 113 ]]
+				-- upvalues: OnTextBoxFocusLostFunction (copy)
+				if OnTextBoxFocusLostFunction then
+					OnTextBoxFocusLostFunction(p2.Text)
 				end
 			end
 		}),
-		ClearButton = roactModule.createElement("ImageButton", {
+		ClearButton = RoactModule.createElement("ImageButton", {
 			BackgroundTransparency = 1,
 			AnchorPoint = Vector2.new(1, 0),
 			Position = UDim2.new(1, 0, 0, 0),
 			Size = UDim2.new(0, 16, 0, 16),
-			Image = imagePath,
-			ImageRectOffset = clearFrame.offset,
-			ImageRectSize = clearFrame.size,
-			ZIndex = zIndex,
+			Image = ImagePath,
+			ImageRectOffset = ClearFrame.offset,
+			ImageRectSize = ClearFrame.size,
+			ZIndex = ZIndex,
 			Visible = p1.state.isTextWritten,
-			[roactModule.Event.Activated] = function()
-				-- upvalues: p1 (ref)
+			[RoactModule.Event.Activated] = function() --[[ Line: 129 ]]
+				-- upvalues: p1 (copy)
 				if p1.searchField then
 					p1.searchField.Text = ""
 					p1.searchField:CaptureFocus()
@@ -111,24 +107,24 @@ function searchBox.render(p1)
 	})
 end
 
-function searchBox.didMount(p1)
-	local searchField = p1.searchField
-	local onTextChanged = p1.props.onTextChanged
+function SearchBox.didMount(p1) --[[ Line: 142 ]]
+	local SearchField = p1.searchField
+	local OnTextChangedFunction = p1.props.onTextChanged
 	
-	if searchField then
-		p1.textBoxChangedConnection = searchField:GetPropertyChangedSignal("Text"):Connect(function()
-			-- upvalues: searchField (ref), p1 (ref), onTextChanged (ref)
-			local text = searchField.Text
-			p1:setState({ isTextWritten = text:len() > 0 })
-			onTextChanged(text)
+	if SearchField then
+		p1.textBoxChangedConnection = SearchField:GetPropertyChangedSignal("Text"):Connect(function() --[[ Line: 147 ]]
+			-- upvalues: SearchField (copy), p1 (copy), OnTextChangedFunction (copy)
+			local Text = SearchField.Text
+			p1:setState({ isTextWritten = Text:len() > 0 })
+			OnTextChangedFunction(Text)
 		end)
 	end
 end
 
-function searchBox.willUnmount(p1)
+function SearchBox.willUnmount(p1) --[[ Line: 157 ]]
 	if p1.textBoxChangedConnection then
 		p1.textBoxChangedConnection:Disconnect()
 	end
 end
 
-return searchBox
+return SearchBox

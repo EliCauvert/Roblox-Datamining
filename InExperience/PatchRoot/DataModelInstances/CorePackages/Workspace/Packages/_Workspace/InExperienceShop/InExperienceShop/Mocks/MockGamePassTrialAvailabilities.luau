@@ -1,20 +1,20 @@
-﻿local inExperienceShop = script:FindFirstAncestor("InExperienceShop")
-local promiseModule = require(inExperienceShop.Parent.Promise)
-local _ = require(inExperienceShop.Types)
+﻿local InExperienceShop = script:FindFirstAncestor("InExperienceShop")
+local PromiseModule = require(InExperienceShop.Parent.Promise)
+local _ = require(InExperienceShop.Types)
 local t = {}
-local t_1 = {}
+local t1 = {}
 
 return {
-	fetchGamePassTrialAvailabilities = function(_)
-		-- upvalues: t (ref), t_1 (ref), promiseModule (ref)
-		local t_2 = { available = {}, active = {} }
+	fetchGamePassTrialAvailabilities = function(_) --[[ Line: 12 ]]
+		-- upvalues: t (copy), t1 (copy), PromiseModule (copy)
+		local config = { available = {}, active = {} }
 		
-		for i, v in t do
-			t_2.available[v] = true
+		for _, value in t do
+			config.available[value] = true
 		end
-		for i, v_1 in t_1 do
-			t_2.active[v_1] = true
+		for _, value1 in t1 do
+			config.active[value1] = true
 		end
-		return promiseModule.resolve(t_2)
+		return PromiseModule.resolve(config)
 	end
 }

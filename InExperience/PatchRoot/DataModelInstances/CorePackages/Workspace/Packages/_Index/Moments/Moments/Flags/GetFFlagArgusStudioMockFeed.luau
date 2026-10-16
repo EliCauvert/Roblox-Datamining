@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("ArgusStudioMockFeed", true)
 
-return function()
+return function() --[[ Line: 4 ]]
 	return game:GetFastFlag("ArgusStudioMockFeed")
 end

@@ -1,12 +1,12 @@
-﻿local tModule = require(script:FindFirstAncestor("AppBlox").Parent.t)
+﻿local TModule = require(script:FindFirstAncestor("AppBlox").Parent.t)
 
-return tModule.map(tModule.string, tModule.strictInterface({
-	portraitLayoutOrder = tModule.integer,
-	portraitZIndex = tModule.optional(tModule.integer),
-	landscapeLayoutOrder = tModule.integer,
+return TModule.map(TModule.string, TModule.strictInterface({
+	portraitLayoutOrder = TModule.integer,
+	portraitZIndex = TModule.optional(TModule.integer),
+	landscapeLayoutOrder = TModule.integer,
 	landscapePosition = require(script.Parent.ContentPosition).isEnumValue,
-	renderComponent = tModule.callback,
-	showCornerGradient = tModule.optional(tModule.boolean),
-	useSelectionBumper = tModule.optional(tModule.boolean),
-	visible = tModule.optional(tModule.boolean)
+	renderComponent = TModule.callback,
+	showCornerGradient = TModule.optional(TModule.boolean),
+	useSelectionBumper = TModule.optional(TModule.boolean),
+	visible = TModule.optional(TModule.boolean)
 }))

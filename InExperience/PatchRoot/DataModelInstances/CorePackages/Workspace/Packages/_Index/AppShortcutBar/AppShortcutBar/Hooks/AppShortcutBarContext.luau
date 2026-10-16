@@ -1,49 +1,52 @@
-﻿local appShortcutBar = script:FindFirstAncestor("AppShortcutBar")
-local parent = appShortcutBar.Parent
-local reactModule = require(parent.React)
-local _ = require(parent.FocusNavigationUtils)
-local var1 = require(appShortcutBar.Stores.GetButtonHoldStore)(false)
-local t = {
+﻿local AppShortcutBar = script:FindFirstAncestor("AppShortcutBar")
+local Parent = AppShortcutBar.Parent
+local ReactModule = require(Parent.React)
+local _ = require(Parent.FocusNavigationUtils)
+local v1 = require(AppShortcutBar.Stores.GetButtonHoldStore)(false)
+local AppShortcutBarStateActionEnum = {
 	ButtonHoldStarted = "ButtonHoldStarted",
 	ButtonHoldEnded = "ButtonHoldEnded"
 }
-local t_1 = {
-	[t.ButtonHoldStarted] = function(p1, p2)
-		local cloned = table.clone(p1)
-		cloned.heldProgress[p2.eventName] = p2.progress
+local config = {
+	[AppShortcutBarStateActionEnum.ButtonHoldStarted] = function(Tbl, p1) --[[ Line: 38 ]]
+		local Copy = table.clone(Tbl)
+		Copy.heldProgress[p1.eventName] = p1.progress
 		
-		return cloned
+		return Copy
 	end,
-	[t.ButtonHoldEnded] = function(p1, p2)
-		local cloned = table.clone(p1)
-		cloned.heldProgress[p2.eventName] = nil
+	[AppShortcutBarStateActionEnum.ButtonHoldEnded] = function(Tbl, p1) --[[ Line: 43 ]]
+		local Copy = table.clone(Tbl)
+		Copy.heldProgress[p1.eventName] = nil
 		
-		return cloned
+		return Copy
 	end
 }
 
-local function registryReducer(p1, p2)
-	-- upvalues: t_1 (ref)
-	local type = t_1[p2.type]
+local function registryReducer(p1, p2) --[[ Line: 50 ]]
+	-- upvalues: config (copy)
+	local Entry = config[p2.type]
 	
-	if type then
-		return type(p1, p2.payload)
+	if Entry then
+		return Entry(p1, p2.payload)
+	else
+		error("Unknown action: " .. p2.type)
 	end
-	error("Unknown action: " .. p5.type)
 end
 
-local var2 = reactModule.createContext(nil)
+local Context = ReactModule.createContext(nil)
 
 return {
-	Context = var2,
-	Provider = function(p1)
-		-- upvalues: reactModule (ref), registryReducer (ref), var2 (ref)
-		local var3, var4 = reactModule.useReducer(registryReducer, { heldProgress = {} })
+	Context = Context,
+	Provider = function(p1) --[[ Line: 60 ]]
+		-- upvalues: ReactModule (copy), registryReducer (copy), Context (copy)
+		local UseReducerResult, UseReducerResult2 = ReactModule.useReducer(registryReducer, { heldProgress = {} })
 		
-		return reactModule.createElement(var2.Provider, { value = { state = var3, dispatch = var4 } }, p1.children)
+		return ReactModule.createElement(Context.Provider, {
+			value = { state = UseReducerResult, dispatch = UseReducerResult2 }
+		}, p1.children)
 	end,
-	useDispatchButtonHoldStarted = var1.useDispatchButtonHoldStarted,
-	useDispatchButtonHoldEnded = var1.useDispatchButtonHoldEnded,
-	useHeldProgressByEvent = var1.useHeldProgressByEvent,
-	AppShortcutBarStateActionEnum = t
+	useDispatchButtonHoldStarted = v1.useDispatchButtonHoldStarted,
+	useDispatchButtonHoldEnded = v1.useDispatchButtonHoldEnded,
+	useHeldProgressByEvent = v1.useHeldProgressByEvent,
+	AppShortcutBarStateActionEnum = AppShortcutBarStateActionEnum
 }

@@ -1,1 +1,1 @@
-﻿return require(script:FindFirstAncestor("CoreScriptsRoactCommon").Parent.Signals).createComputed(require(script.createPlaytestModeStore))
+﻿return require(script:FindFirstAncestor("CoreScriptsRoactCommon").Parent.Signals).createComputed((require(script.createPlaytestModeStore)))

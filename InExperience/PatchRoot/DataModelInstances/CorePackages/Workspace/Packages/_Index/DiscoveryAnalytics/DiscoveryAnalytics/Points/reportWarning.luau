@@ -1,30 +1,30 @@
-﻿local runService = game:GetService("RunService")
-local loggingProtocolModule = require(script:FindFirstAncestor("DiscoveryAnalytics").Parent.LoggingProtocol)
-local t = {
+﻿local RunService = game:GetService("RunService")
+local LoggingProtocolModule = require(script:FindFirstAncestor("DiscoveryAnalytics").Parent.LoggingProtocol)
+local config = {
 	eventName = "DiscoveryWarning",
 	description = "Generic warning message for Discovery surfaces",
 	links = "",
-	backends = { loggingProtocolModule.default.TelemetryBackends.Points },
+	backends = { LoggingProtocolModule.default.TelemetryBackends.Points },
 	throttlingPercentage = game:DefineFastInt("DiscoveryWarningEventHundredthsPercent", 0),
 	lastUpdated = { 25, 1, 22 }
 }
-local t_1 = {
+local config1 = {
 	eventName = "DiscoveryWarningCounter",
 	throttlingPercentage = 0,
 	description = "Counter for the total number of warnings sent",
-	backends = { loggingProtocolModule.TelemetryBackends.Counter },
+	backends = { LoggingProtocolModule.TelemetryBackends.Counter },
 	lastUpdated = { 25, 1, 22 }
 }
 
-return function(p1, p2, p3, p4)
-	-- upvalues: runService (ref), t_1 (ref), t (ref)
-	local var1 = p4 and table.clone(p4) or {}
-	var1.category = p2
-	var1.extraMessage = p3
+return function(p1, Category, ExtraMessage, Tbl) --[[ Line: 31 | Named "reportWarning" ]]
+	-- upvalues: RunService (copy), config1 (copy), config (copy)
+	local Copy = Tbl and table.clone(Tbl) or {}
+	Copy.category = Category
+	Copy.extraMessage = ExtraMessage
 	
-	if runService:IsStudio() or _G.__TESTEZ_RUNNING_TEST__ or _G.__TEST_SUITE_PACKAGE__ then
-		warn(`DiscoveryWarning: [{p2}] {p3}`)
+	if RunService:IsStudio() or _G.__TESTEZ_RUNNING_TEST__ or _G.__TEST_SUITE_PACKAGE__ then
+		warn(`DiscoveryWarning: [{Category}] {ExtraMessage}`)
 	end
-	p1:logRobloxTelemetryCounter(t_1, 1, { category = p2 })
-	p1:logRobloxTelemetryEvent(t, { p1.StandardizedFields.addOsInfo }, var1)
+	p1:logRobloxTelemetryCounter(config1, 1, { category = Category })
+	p1:logRobloxTelemetryEvent(config, { p1.StandardizedFields.addOsInfo }, Copy)
 end

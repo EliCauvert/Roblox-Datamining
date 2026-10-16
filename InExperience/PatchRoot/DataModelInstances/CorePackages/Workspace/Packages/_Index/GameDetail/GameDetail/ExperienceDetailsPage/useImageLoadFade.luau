@@ -1,24 +1,24 @@
-﻿local parent = script:FindFirstAncestor("GameDetail").Parent
-local reactModule = require(parent.React)
-local reactOtterModule = require(parent.ReactOtter)
-local t = { frequency = 3, dampingRatio = 1 }
+﻿local Parent = script:FindFirstAncestor("GameDetail").Parent
+local ReactModule = require(Parent.React)
+local ReactOtterModule = require(Parent.ReactOtter)
+local config = { frequency = 3, dampingRatio = 1 }
 
-return function()
-	-- upvalues: reactModule (ref), reactOtterModule (ref), t (ref)
-	local var1, var2 = reactModule.useState(true)
-	local var3, var4 = reactOtterModule.useAnimatedBinding(0, function()
-		-- upvalues: var2 (ref)
-		var2(false)
+return function() --[[ Line: 18 | Named "useImageLoadFade" ]]
+	-- upvalues: ReactModule (copy), ReactOtterModule (copy), config (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(true)
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(0, function() --[[ Line: 21 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(false)
 	end)
 	
 	return {
-		onLoaded = reactModule.useCallback(function(p1)
-			-- upvalues: var4 (ref), reactOtterModule (copy), t (copy)
-			if p1 == Enum.AssetFetchStatus.Success then
-				var4(reactOtterModule.spring(1, t))
+		onLoaded = ReactModule.useCallback(function(AssetFetchStatus) --[[ Line: 25 ]]
+			-- upvalues: UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), config (upval)
+			if AssetFetchStatus == Enum.AssetFetchStatus.Success then
+				UseAnimatedBindingResult2((ReactOtterModule.spring(1, config)))
 			end
 		end, {}),
-		skeletonVisible = var1,
-		overlayTransparency = var3
+		skeletonVisible = UseStateResult,
+		overlayTransparency = UseAnimatedBindingResult
 	}
 end

@@ -1,1 +1,3 @@
-﻿return game:DefineFastFlag("ProfileInspectAvatarCWEntry_v2", false) and require(script:FindFirstAncestor("ProfilePlatform").Parent.SharedFlags).FFlagSocialEnableProfileInspectAndBuy
+﻿local FFlagSocialEnableProfileInspectAndBuy = require(script:FindFirstAncestor("ProfilePlatform").Parent.SharedFlags).FFlagSocialEnableProfileInspectAndBuy
+
+return game:DefineFastFlag("ProfileInspectAvatarCWEntry_v2", false) and FFlagSocialEnableProfileInspectAndBuy

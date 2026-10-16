@@ -1,34 +1,35 @@
-﻿local avatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
-local parent = avatarExperienceCommon.Parent
-local useRemainingTime = require(parent.AvatarExperienceUIKit).Hooks.useRemainingTime
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local getRemainingTimeTextModule = require(avatarExperienceCommon.Utils.getRemainingTimeText)
+﻿local AvatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
+local Parent = AvatarExperienceCommon.Parent
+local UseRemainingTimeFunction = require(Parent.AvatarExperienceUIKit).Hooks.useRemainingTime
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local GetRemainingTimeTextModule = require(AvatarExperienceCommon.Utils.getRemainingTimeText)
 
-return function(p1)
-	-- upvalues: useRemainingTime (ref), useLocalization (ref), getRemainingTimeTextModule (ref)
-	local var1 = useRemainingTime(p1)
-	local var2 = if var1 ~= nil then 0 else var1.value
-	
-	return if var1 == nil or var1.value <= 0 then nil else getRemainingTimeTextModule(var1, useLocalization({
+return function(p1) --[[ Line: 13 | Named "useRemainingTimeText" ]]
+	-- upvalues: UseRemainingTimeFunction (copy), UseLocalizationFunction (copy), GetRemainingTimeTextModule (copy)
+	local UseRemainingTimeResult = UseRemainingTimeFunction(p1)
+	local Value = if UseRemainingTimeResult == nil then 0 else UseRemainingTimeResult.value
+	local UseLocalizationResult = UseLocalizationFunction({
 		daySingular = "Feature.InExperienceShop.Label.Timer.Day.Singular",
 		hourSingular = "Feature.InExperienceShop.Label.Timer.Hour.Singular",
 		minuteSingular = "Feature.InExperienceShop.Label.Timer.Minute.Singular",
 		secondSingular = "Feature.InExperienceShop.Label.Timer.Second.Singular",
 		dayPlural = {
 			"Feature.InExperienceShop.Label.Timer.Day.Plural",
-			number = var2
+			number = Value
 		},
 		hourPlural = {
 			"Feature.InExperienceShop.Label.Timer.Hour.Plural",
-			number = var2
+			number = Value
 		},
 		minutePlural = {
 			"Feature.InExperienceShop.Label.Timer.Minute.Plural",
-			number = var2
+			number = Value
 		},
 		secondPlural = {
 			"Feature.InExperienceShop.Label.Timer.Second.Plural",
-			number = var2
+			number = Value
 		}
-	}))
+	})
+	
+	return if UseRemainingTimeResult == nil or UseRemainingTimeResult.value <= 0 then nil else GetRemainingTimeTextModule(UseRemainingTimeResult, UseLocalizationResult)
 end

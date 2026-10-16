@@ -1,13 +1,12 @@
-﻿local mediaPlayback = script:FindFirstAncestor("MediaPlayback")
-local signalsReactModule = require(mediaPlayback.Parent.SignalsReact)
-local _ = require(mediaPlayback.Stores.getAudioPlaybackStore.types)
-local getAudioPlaybackStoreModule = require(mediaPlayback.Stores.getAudioPlaybackStore)
-local useAudioStoreModule = require(mediaPlayback.Hooks.useAudioStore)
-local useSignalState = signalsReactModule.useSignalState
+﻿local MediaPlayback = script:FindFirstAncestor("MediaPlayback")
+local _ = require(MediaPlayback.Stores.getAudioPlaybackStore.types)
+local GetAudioPlaybackStoreModule = require(MediaPlayback.Stores.getAudioPlaybackStore)
+local UseAudioStoreModule = require(MediaPlayback.Hooks.useAudioStore)
+local UseSignalStateFunction = require(MediaPlayback.Parent.SignalsReact).useSignalState
 
-return function()
-	-- upvalues: useSignalState (ref), getAudioPlaybackStoreModule (ref), useAudioStoreModule (ref)
-	local var1 = useSignalState(useSignalState(getAudioPlaybackStoreModule).getLastPlayedAudioStore)
+return function() --[[ Line: 11 | Named "useLastPlayedAudioStore" ]]
+	-- upvalues: UseSignalStateFunction (copy), GetAudioPlaybackStoreModule (copy), UseAudioStoreModule (copy)
+	local UseSignalStateResult = UseSignalStateFunction(UseSignalStateFunction(GetAudioPlaybackStoreModule).getLastPlayedAudioStore)
 	
-	return useAudioStoreModule(if var1 then var1.assetId else nil, if var1 then var1.usePreview else nil)
+	return UseAudioStoreModule(if UseSignalStateResult then UseSignalStateResult.assetId else nil, if UseSignalStateResult then UseSignalStateResult.usePreview else nil)
 end

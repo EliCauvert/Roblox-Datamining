@@ -1,76 +1,78 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local builderIconsModule = require(parent.BuilderIcons)
-local reactModule = require(parent.React)
-local components = foundation.Components
-local iconModule = require(components.Icon)
-local internalTextInputModule = require(components.InternalTextInput)
-local _ = require(components.Types)
-local viewModule = require(components.View)
-local constantsModule = require(foundation.Constants)
-local translatorModule = require(foundation.Utility.Localization.Translator)
-local useScaledValueModule = require(foundation.Utility.useScaledValue)
-local useTextInputVariantsModule = require(foundation.Components.TextInput.useTextInputVariants)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local inputSizeModule = require(foundation.Enums.InputSize)
-local inputVariantModule = require(foundation.Enums.InputVariant)
-local radiusModule = require(foundation.Enums.Radius)
-local searchInputShapeModule = require(foundation.Enums.SearchInputShape)
-local t = {
-	[searchInputShapeModule.Pill] = radiusModule.Circle,
-	[searchInputShapeModule.Box] = radiusModule.None
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local BuilderIconsModule = require(Parent.BuilderIcons)
+local ReactModule = require(Parent.React)
+local Components = Foundation.Components
+local IconModule = require(Components.Icon)
+local InternalTextInputModule = require(Components.InternalTextInput)
+local _ = require(Components.Types)
+local ViewModule = require(Components.View)
+local ConstantsModule = require(Foundation.Constants)
+local TranslatorModule = require(Foundation.Utility.Localization.Translator)
+local UseScaledValueModule = require(Foundation.Utility.useScaledValue)
+local UseTextInputVariantsModule = require(Foundation.Components.TextInput.useTextInputVariants)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local RadiusModule = require(Foundation.Enums.Radius)
+local SearchInputShapeModule = require(Foundation.Enums.SearchInputShape)
+local config = {
+	[SearchInputShapeModule.Pill] = RadiusModule.Circle,
+	[SearchInputShapeModule.Box] = RadiusModule.None
 }
-local t_1 = {
+local config1 = {
 	hasClearButton = true,
 	testId = "--foundation-search-input",
-	size = inputSizeModule.Medium,
-	variant = inputVariantModule.Standard,
-	shape = searchInputShapeModule.Pill
+	size = require(Foundation.Enums.InputSize).Medium,
+	variant = require(Foundation.Enums.InputVariant).Standard,
+	shape = SearchInputShapeModule.Pill
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t_1 (ref), useTokensModule (ref), useTextInputVariantsModule (ref), useScaledValueModule (ref), constantsModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), internalTextInputModule (ref), t (ref), translatorModule (ref), iconModule (ref), builderIconsModule (ref)
-	local var1 = withDefaultsModule(p1, t_1)
-	local var2 = useTokensModule()
-	local var3 = useTextInputVariantsModule(var2, var1.size, var1.variant)
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 75 | Named "SearchInput" ]]
+	-- upvalues: WithDefaultsModule (copy), config1 (copy), UseTokensModule (copy), UseTextInputVariantsModule (copy), UseScaledValueModule (copy), ConstantsModule (copy), ReactModule (copy), ViewModule (copy), WithCommonPropsModule (copy), InternalTextInputModule (copy), config (copy), TranslatorModule (copy), IconModule (copy), BuilderIconsModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config1)
+	local UseTokensModuleResult = UseTokensModule()
+	local UseTextInputVariantsModuleResult = UseTextInputVariantsModule(UseTokensModuleResult, WithDefaultsModuleResult.size, WithDefaultsModuleResult.variant)
+	local UseScaledValueModuleResult = UseScaledValueModule(ConstantsModule.DEFAULT_INPUT_FIELD_WIDTH_PIXELS)
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var1, {
+	return ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, {
 		tag = "auto-y",
-		Size = if var1.width then UDim2.new(var1.width, UDim.new(0, 0)) else UDim2.new(UDim.new(0, useScaledValueModule(constantsModule.DEFAULT_INPUT_FIELD_WIDTH_PIXELS)), UDim.new(0, 0))
+		Size = if WithDefaultsModuleResult.width then UDim2.new(WithDefaultsModuleResult.width, UDim.new(0, 0)) else UDim2.new(UDim.new(0, UseScaledValueModuleResult), UDim.new(0, 0))
 	}), {
-		Input = reactModule.createElement(internalTextInputModule, {
-			ref = p2,
-			hasError = var1.hasError,
-			isDisabled = var1.isDisabled,
-			hasClearButton = var1.hasClearButton,
-			text = var1.text,
-			size = var1.size,
-			radius = t[var1.shape],
-			variant = var1.variant,
+		Input = ReactModule.createElement(InternalTextInputModule, {
+			ref = Ref,
+			hasError = WithDefaultsModuleResult.hasError,
+			isDisabled = WithDefaultsModuleResult.isDisabled,
+			hasClearButton = WithDefaultsModuleResult.hasClearButton,
+			text = WithDefaultsModuleResult.text,
+			size = WithDefaultsModuleResult.size,
+			radius = config[WithDefaultsModuleResult.shape],
+			variant = WithDefaultsModuleResult.variant,
 			horizontalPadding = {
-				left = var3.container.horizontalPadding,
-				right = var3.container.horizontalPadding
+				left = UseTextInputVariantsModuleResult.container.horizontalPadding,
+				right = UseTextInputVariantsModuleResult.container.horizontalPadding
 			},
-			onChanged = var1.onChanged,
-			onFocus = var1.onFocusGained,
-			onFocusLost = var1.onFocusLost,
-			placeholder = if var1.placeholder then var1.placeholder else translatorModule:FormatByKey("CommonUI.Controls.Action.Search"),
-			leadingElement = reactModule.createElement(viewModule, {
+			onChanged = WithDefaultsModuleResult.onChanged,
+			onFocus = WithDefaultsModuleResult.onFocusGained,
+			onFocusLost = WithDefaultsModuleResult.onFocusLost,
+			placeholder = if WithDefaultsModuleResult.placeholder then WithDefaultsModuleResult.placeholder else TranslatorModule:FormatByKey("CommonUI.Controls.Action.Search"),
+			leadingElement = ReactModule.createElement(ViewModule, {
 				tag = "anchor-center-left auto-xy",
-				Position = reactModule.useMemo(function()
-					-- upvalues: var3 (ref), var2 (ref)
-					return UDim2.fromOffset(0, (var3.container.minHeight - var2.Stroke.Standard) / 2)
-				end, { var3.container.minHeight, var2.Stroke.Standard })
+				Position = ReactModule.useMemo(function(): UDim2 --[[ Line: 83 ]]
+					-- upvalues: UseTextInputVariantsModuleResult (copy), UseTokensModuleResult (copy)
+					return UDim2.fromOffset(0, (UseTextInputVariantsModuleResult.container.minHeight - UseTokensModuleResult.Stroke.Standard) / 2)
+				end, {
+					UseTextInputVariantsModuleResult.container.minHeight,
+					UseTokensModuleResult.Stroke.Standard
+				})
 			}, {
-				Icon = reactModule.createElement(iconModule, {
-					name = builderIconsModule.Icon.MagnifyingGlass,
-					size = var1.size,
-					testId = `{var1.testId}--search-icon`
+				Icon = ReactModule.createElement(IconModule, {
+					name = BuilderIconsModule.Icon.MagnifyingGlass,
+					size = WithDefaultsModuleResult.size,
+					testId = `{WithDefaultsModuleResult.testId}--search-icon`
 				})
 			}),
-			testId = `{var1.testId}--input`
+			testId = `{WithDefaultsModuleResult.testId}--input`
 		})
 	})
 end))

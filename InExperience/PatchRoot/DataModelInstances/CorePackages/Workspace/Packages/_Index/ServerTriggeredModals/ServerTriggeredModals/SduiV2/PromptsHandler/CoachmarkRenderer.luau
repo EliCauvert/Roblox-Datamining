@@ -1,80 +1,97 @@
-﻿local serverTriggeredModals = script:FindFirstAncestor("ServerTriggeredModals")
-local parent = serverTriggeredModals.Parent
-local reactModule = require(parent.React)
-local sduiFeatureEntryPoint = require(parent.SduiSharedUtilities).SduiFeatureEntryPoint
-local loggerModule = require(serverTriggeredModals.Logger)
-local reportPromptImpressionModule = require(serverTriggeredModals.reportPromptImpression)
-local sendModalImpressionEvent = require(parent.ServerTriggeredModalImpressions).sendModalImpressionEvent
-local promptStyleModule = require(serverTriggeredModals.SduiV2.PromptStyle)
-local usePromptEntriesModule = require(serverTriggeredModals.SduiV2.usePromptEntries)
-local useModalSignalStoreModule = require(serverTriggeredModals.SignalStores.useModalSignalStore)
-local fFlagPromptsActionEventLoggingModule = require(serverTriggeredModals.Flags.FFlagPromptsActionEventLogging)
+﻿local ServerTriggeredModals = script:FindFirstAncestor("ServerTriggeredModals")
+local Parent = ServerTriggeredModals.Parent
+local ReactModule = require(Parent.React)
+local SduiFeatureEntryPoint = require(Parent.SduiSharedUtilities).SduiFeatureEntryPoint
+local LoggerModule = require(ServerTriggeredModals.Logger)
+local ReportPromptImpressionModule = require(ServerTriggeredModals.reportPromptImpression)
+local SendModalImpressionEventFunction = require(Parent.ServerTriggeredModalImpressions).sendModalImpressionEvent
+local PromptStyleModule = require(ServerTriggeredModals.SduiV2.PromptStyle)
+local UsePromptEntriesModule = require(ServerTriggeredModals.SduiV2.usePromptEntries)
+local UseModalSignalStoreModule = require(ServerTriggeredModals.SignalStores.useModalSignalStore)
+local FFlagPromptsActionEventLoggingModule = require(ServerTriggeredModals.Flags.FFlagPromptsActionEventLogging)
+local FFlagPromptsCoachmarkImpressionOnShow = require(Parent.SharedFlags).FFlagPromptsCoachmarkImpressionOnShow
 
-return reactModule.memo(function(p1)
-	-- upvalues: useModalSignalStoreModule (ref), reactModule (ref), usePromptEntriesModule (ref), promptStyleModule (ref), reportPromptImpressionModule (ref), loggerModule (ref), sendModalImpressionEvent (ref), sduiFeatureEntryPoint (ref), fFlagPromptsActionEventLoggingModule (ref)
-	local surfaceConfig = p1.surfaceConfig
-	local hasShownKey = p1.hasShownKey
-	local var1 = useModalSignalStoreModule()
-	local var2, var3 = reactModule.useState(false)
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), var1 (ref), hasShownKey (ref), var3 (ref)
-		if not var2 and var1.tryClaimPrimaryHandler(hasShownKey) then
-			var3(true)
+return ReactModule.memo(function(p1) --[[ Line: 41 | Named "CoachmarkRenderer" ]]
+	-- upvalues: UseModalSignalStoreModule (copy), ReactModule (copy), UsePromptEntriesModule (copy), PromptStyleModule (copy), FFlagPromptsCoachmarkImpressionOnShow (copy), ReportPromptImpressionModule (copy), LoggerModule (copy), SendModalImpressionEventFunction (copy), SduiFeatureEntryPoint (copy), FFlagPromptsActionEventLoggingModule (copy)
+	local SurfaceConfig = p1.surfaceConfig
+	local HasShownKey = p1.hasShownKey
+	local UseModalSignalStoreModuleResult = UseModalSignalStoreModule()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	ReactModule.useEffect(function() --[[ Line: 47 ]]
+		-- upvalues: UseStateResult (copy), UseModalSignalStoreModuleResult (copy), HasShownKey (copy), UseStateResult2 (copy)
+		if not UseStateResult and UseModalSignalStoreModuleResult.tryClaimPrimaryHandler(HasShownKey) then
+			UseStateResult2(true)
 		end
-		return function()
-			-- upvalues: var2 (copy), var1 (copy), hasShownKey (copy)
-			if var2 then
-				var1.releasePrimaryHandler(hasShownKey)
+		return function() --[[ Line: 51 ]]
+			-- upvalues: UseStateResult (upval), UseModalSignalStoreModuleResult (upval), HasShownKey (upval)
+			if UseStateResult then
+				UseModalSignalStoreModuleResult.releasePrimaryHandler(HasShownKey)
 			end
 		end
-	end, { var2, hasShownKey, var1 })
-	local var4 = usePromptEntriesModule(surfaceConfig.configKey, promptStyleModule.Coachmark)
-	local var5 = reactModule.useMemo(function()
-		-- upvalues: var2 (ref), var4 (ref)
-		if not var2 then
-			return ""
-		end
-		local t = {}
-		
-		for i, v in var4 do
-			if v.identifier and v.title and v.config then
-				table.insert(t, `{v.identifier}:{v.title}`)
-			end
-		end
-		return table.concat(t, "|")
-	end, { var2, var4 })
-	reactModule.useEffect(function()
-		-- upvalues: var5 (ref), var4 (ref), reportPromptImpressionModule (copy), loggerModule (copy), sendModalImpressionEvent (copy)
-		if var5 == "" then return end
-		for i, v in var4 do
-			if v.identifier and v.title and v.config then
-				reportPromptImpressionModule(v.title, v.identifier):catch(function()
-					-- upvalues: loggerModule (copy)
-					loggerModule:warning("Failed to report coachmark prompt impression")
-				end)
-				sendModalImpressionEvent(v.identifier, v.title)
-			end
-		end
-	end, { var5 })
+	end, {
+		UseStateResult,
+		HasShownKey,
+		UseModalSignalStoreModuleResult
+	})
+	local UsePromptEntriesModuleResult = UsePromptEntriesModule(SurfaceConfig.configKey, PromptStyleModule.Coachmark)
 	
-	if not var2 then
+	if not FFlagPromptsCoachmarkImpressionOnShow then
+		local UseMemoResult = ReactModule.useMemo(function(): string --[[ Line: 61 ]]
+			-- upvalues: UseStateResult (copy), UsePromptEntriesModuleResult (copy)
+			if not UseStateResult then
+				return ""
+			end
+			local List = {}
+			
+			for _, value in UsePromptEntriesModuleResult do
+				if value.identifier and value.title and value.config then
+					table.insert(List, `{value.identifier}:{value.title}`)
+				end
+			end
+			return table.concat(List, "|")
+		end, { UseStateResult, UsePromptEntriesModuleResult })
+		ReactModule.useEffect(function() --[[ Line: 76 ]]
+			-- upvalues: UseMemoResult (copy), UsePromptEntriesModuleResult (copy), ReportPromptImpressionModule (upval), LoggerModule (upval), SendModalImpressionEventFunction (upval)
+			if UseMemoResult == "" then return end
+			for _, value in UsePromptEntriesModuleResult do
+				if value.identifier and value.title and value.config then
+					ReportPromptImpressionModule(value.title, value.identifier):catch(function() --[[ Line: 82 ]]
+						-- upvalues: LoggerModule (upval)
+						LoggerModule:warning("Failed to report coachmark prompt impression")
+					end)
+					SendModalImpressionEventFunction(value.identifier, value.title)
+				end
+			end
+		end, { UseMemoResult })
+	end
+	if not UseStateResult then
 		return nil
 	end
-	local t = {}
+	local Elements = {}
 	
-	for i, v in var4 do
-		if v.config ~= nil and v.identifier ~= nil and v.title ~= nil then
-			t[v.identifier] = reactModule.createElement(sduiFeatureEntryPoint, {
+	for _, value in UsePromptEntriesModuleResult do
+		if value.config ~= nil and value.identifier ~= nil and value.title ~= nil then
+			Elements[value.identifier] = ReactModule.createElement(SduiFeatureEntryPoint, {
 				shouldDisplayLoading = false,
 				shouldDisplayError = false,
-				configKey = surfaceConfig.configKey,
-				identifier = v.identifier,
-				appPage = surfaceConfig.appPage,
-				additionalAnalyticsData = if fFlagPromptsActionEventLoggingModule then {
-					promptInstanceId = if v.identifier then v.identifier else nil
+				configKey = SurfaceConfig.configKey,
+				identifier = value.identifier,
+				appPage = SurfaceConfig.appPage,
+				additionalAnalyticsData = if FFlagPromptsActionEventLoggingModule then {
+					promptInstanceId = if value.identifier then value.identifier else nil
+				} else nil,
+				extraLocalProps = if FFlagPromptsCoachmarkImpressionOnShow then {
+					onShown = function() --[[ Line: 113 ]]
+						-- upvalues: ReportPromptImpressionModule (upval), value (copy), LoggerModule (upval), SendModalImpressionEventFunction (upval)
+						ReportPromptImpressionModule(value.title, value.identifier):catch(function() --[[ Line: 114 ]]
+							-- upvalues: LoggerModule (upval)
+							LoggerModule:warning("Failed to report coachmark prompt impression")
+						end)
+						SendModalImpressionEventFunction(value.identifier, value.title)
+					end
 				} else nil
 			})
 		end
 	end
-	return reactModule.createElement(reactModule.Fragment, nil, t)
+	return ReactModule.createElement(ReactModule.Fragment, nil, Elements)
 end)

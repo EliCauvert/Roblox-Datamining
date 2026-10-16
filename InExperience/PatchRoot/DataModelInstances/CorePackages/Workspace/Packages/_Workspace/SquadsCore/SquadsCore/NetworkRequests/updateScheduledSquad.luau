@@ -1,29 +1,29 @@
-﻿local httpService = game:GetService("HttpService")
-local squadsCore = script:FindFirstAncestor("SquadsCore")
-local parent = squadsCore.Parent
-local urlBuilderModule = require(parent.UrlBuilder)
-local tModule = require(parent.t)
-local loggerModule = require(squadsCore.Logger)
-local scheduledSquadModelModule = require(squadsCore.Models.ScheduledSquadModel)
-local serializeTableModule = require(squadsCore.Utils.serializeTable)
-local _ = require(squadsCore.Types)
-local var1 = tModule.strictInterface({
-	scheduledGroupUpId = tModule.number,
-	title = tModule.string,
-	startTime = tModule.string
+﻿local HttpService = game:GetService("HttpService")
+local SquadsCore = script:FindFirstAncestor("SquadsCore")
+local Parent = SquadsCore.Parent
+local UrlBuilderModule = require(Parent.UrlBuilder)
+local TModule = require(Parent.t)
+local LoggerModule = require(SquadsCore.Logger)
+local ScheduledSquadModelModule = require(SquadsCore.Models.ScheduledSquadModel)
+local SerializeTableModule = require(SquadsCore.Utils.serializeTable)
+local _ = require(SquadsCore.Types)
+local StrictInterfaceResult = TModule.strictInterface({
+	scheduledGroupUpId = TModule.number,
+	title = TModule.string,
+	startTime = TModule.string
 })
-local var2 = urlBuilderModule.UrlBuilder.new({
+local Url = UrlBuilderModule.UrlBuilder.new({
 	path = "group-up/v1/update-scheduled-group-up",
-	base = urlBuilderModule.UrlBase.APIS
+	base = UrlBuilderModule.UrlBase.APIS
 })()
 
-return function(p1, p2, p3)
-	-- upvalues: var1 (ref), httpService (ref), var2 (ref), scheduledSquadModelModule (ref), loggerModule (ref), serializeTableModule (ref)
-	assert(var1(p1))
+return function(p1, Callback, Callback1) --[[ Line: 36 ]]
+	-- upvalues: StrictInterfaceResult (copy), HttpService (copy), Url (copy), ScheduledSquadModelModule (copy), LoggerModule (copy), SerializeTableModule (copy)
+	assert(StrictInterfaceResult(p1))
 	
-	return httpService:RequestInternal({
+	return HttpService:RequestInternal({
 		Method = "POST",
-		Body = httpService:JSONEncode({
+		Body = HttpService:JSONEncode({
 			scheduledGroupUpId = p1.scheduledGroupUpId,
 			title = p1.title,
 			startTime = p1.startTime
@@ -32,23 +32,25 @@ return function(p1, p2, p3)
 			["Content-Type"] = "application/json",
 			Accept = "application/json"
 		},
-		Url = var2
-	}):Start(function(_, p4)
-		-- upvalues: p2 (ref), scheduledSquadModelModule (copy), httpService (copy), loggerModule (copy), serializeTableModule (copy), p3 (ref)
-		if p4.StatusCode == 200 then
-			local body = p4.Body
+		Url = Url
+	}):Start(function(_, p2) --[[ Line: 57 ]]
+		-- upvalues: Callback (copy), ScheduledSquadModelModule (upval), HttpService (upval), LoggerModule (upval), SerializeTableModule (upval), Callback1 (copy)
+		if p2.StatusCode == 200 then
+			local Body = p2.Body
 			
-			if p2 then
-				p2(scheduledSquadModelModule.format(httpService:JSONDecode(body)))
+			if Callback then
+				Callback(ScheduledSquadModelModule.format(HttpService:JSONDecode(Body)))
 			end
-			loggerModule:debug("Response: {}", serializeTableModule(body))
+			LoggerModule:debug("Response: {}", SerializeTableModule(Body))
 			
-			return p4
-		elseif p3 then
-			p3()
+			return p2
+		else
+			if Callback1 then
+				Callback1()
+			end
+			LoggerModule:error("Error updating scheduled squad: {}", p2.StatusMessage)
+			
+			return p2
 		end
-		loggerModule:error("Error updating scheduled squad: {}", p4.StatusMessage)
-		
-		return p4
 	end)
 end

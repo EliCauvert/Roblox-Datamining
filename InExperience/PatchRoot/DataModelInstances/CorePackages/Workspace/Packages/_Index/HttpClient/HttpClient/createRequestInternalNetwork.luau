@@ -1,89 +1,86 @@
-﻿local httpService = game:GetService("HttpService")
+﻿local HttpService = game:GetService("HttpService")
 local _ = require(script.Parent.types)
-local fFlagHttpClientMrRouterHeadersModule = require(script.Parent.Flags.FFlagHttpClientMrRouterHeaders)
-local fFlagHttpClientRetryExtensionsModule = require(script.Parent.Flags.FFlagHttpClientRetryExtensions)
-local var1 = if fFlagHttpClientMrRouterHeadersModule then require(script:FindFirstAncestor("HttpClient").Parent.MrRouterHeaders) else nil
+local FFlagHttpClientMrRouterHeadersModule = require(script.Parent.Flags.FFlagHttpClientMrRouterHeaders)
+local FFlagHttpClientRetryExtensionsModule = require(script.Parent.Flags.FFlagHttpClientRetryExtensions)
+local MrRouterHeadersModule = if FFlagHttpClientMrRouterHeadersModule then require(script:FindFirstAncestor("HttpClient").Parent.MrRouterHeaders) else nil
 
-local function toLowerKeyedHeaders(p1)
-	if typeof(p1) ~= "table" then
+local function toLowerKeyedHeaders(Headers) --[[ Line: 22 ]]
+	if typeof(Headers) ~= "table" then
 		return nil
 	end
 	local t = {}
 	
-	for i, v in p1 do
-		t[tostring(i):lower()] = tostring(v)
+	for i, header in Headers do
+		t[tostring(i):lower()] = tostring(header)
 	end
 	return t
 end
 
-return function(p2)
-	-- upvalues: fFlagHttpClientRetryExtensionsModule (ref), fFlagHttpClientMrRouterHeadersModule (ref), var1 (write), httpService (ref), toLowerKeyedHeaders (ref)
-	local var2 = if fFlagHttpClientRetryExtensionsModule then p2 ~= nil and p2.transportFailuresAsResponses else nil
+return function(p1) --[[ Line: 33 | Named "createRequestInternalNetwork" ]]
+	-- upvalues: FFlagHttpClientRetryExtensionsModule (copy), FFlagHttpClientMrRouterHeadersModule (copy), MrRouterHeadersModule (ref), HttpService (copy), toLowerKeyedHeaders (copy)
+	local TransportFailuresAsResponses = if FFlagHttpClientRetryExtensionsModule then p1 ~= nil and p1.transportFailuresAsResponses else nil
 	
 	return {
-		request = function(p3, p4)
-			-- upvalues: fFlagHttpClientMrRouterHeadersModule (copy), var1 (copy), httpService (copy), fFlagHttpClientRetryExtensionsModule (copy), var2 (ref), toLowerKeyedHeaders (copy)
-			local var3 = httpService:RequestInternal({
-				Url = p3.url,
-				Method = p3.method,
-				Headers = if fFlagHttpClientMrRouterHeadersModule then var1.injectMrRouterHeaders(p3.headers) else p3.headers,
-				Body = p3.body,
-				OnMessage = p3.onMessage,
-				Priority = if fFlagHttpClientRetryExtensionsModule then p3.priority else nil
+		request = function(p2, Callback) --[[ Line: 38 ]]
+			-- upvalues: FFlagHttpClientMrRouterHeadersModule (upval), MrRouterHeadersModule (upval), HttpService (upval), FFlagHttpClientRetryExtensionsModule (upval), TransportFailuresAsResponses (copy), toLowerKeyedHeaders (upval)
+			local RequestInternalResult = HttpService:RequestInternal({
+				Url = p2.url,
+				Method = p2.method,
+				Headers = if FFlagHttpClientMrRouterHeadersModule then MrRouterHeadersModule.injectMrRouterHeaders(p2.headers) else p2.headers,
+				Body = p2.body,
+				OnMessage = p2.onMessage,
+				Priority = if FFlagHttpClientRetryExtensionsModule then p2.priority else nil
 			})
-			local var4 = false
-			var3:Start(function(p5, p6)
-				-- upvalues: var4 (write), fFlagHttpClientRetryExtensionsModule (copy), var2 (copy), p4 (ref), toLowerKeyedHeaders (copy)
-				if var4 then return end
-				var4 = true
+			local Flag = false
+			RequestInternalResult:Start(function(p3, p4) --[[ Line: 61 ]]
+				-- upvalues: Flag (ref), FFlagHttpClientRetryExtensionsModule (upval), TransportFailuresAsResponses (upval), Callback (copy), toLowerKeyedHeaders (upval)
+				if Flag then return end
+				Flag = true
 				
-				if typeof(p6) == "table" and (p5 or fFlagHttpClientRetryExtensionsModule and var2) then
-					local i
-					local t = nil
+				if typeof(p4) == "table" and (p3 or FFlagHttpClientRetryExtensionsModule and TransportFailuresAsResponses) then
+					local Stats = nil
 					
-					if typeof(p6.Stats) == "table" then
-						t = {}
+					if typeof(p4.Stats) == "table" then
+						Stats = {}
 						
-						for i, v in p6.Stats do
-							if typeof(i) == "string" and typeof(v) == "number" then
-								t[i] = v
-							elseif i == "WasRequestRetried" and typeof(v) == "boolean" then
-								t[i] = if v then 1 else 0
+						for i, stat in p4.Stats do
+							if typeof(i) == "string" and typeof(stat) == "number" then
+								Stats[i] = stat
+							elseif i == "WasRequestRetried" and typeof(stat) == "boolean" then
+								Stats[i] = if stat then 1 else 0
 							end
 						end
 					end
-					local var5 = p4
-					local var6 = true
-					local t_1 = {
-						statusCode = tonumber(p6.StatusCode) or 0,
-						responseBody = p6.Body,
-						headers = toLowerKeyedHeaders(p6.Headers),
-						httpError = p6.HttpError,
-						stats = t
-					}
-					i = if fFlagHttpClientRetryExtensionsModule and var2 then not p5 else nil
-					t_1.wasTransportFailure = i
-					var5(var6, t_1)
+					Callback(true, {
+						statusCode = tonumber(p4.StatusCode) or 0,
+						responseBody = p4.Body,
+						headers = toLowerKeyedHeaders(p4.Headers),
+						httpError = p4.HttpError,
+						stats = Stats,
+						wasTransportFailure = if FFlagHttpClientRetryExtensionsModule and TransportFailuresAsResponses then not p3 else nil
+					})
 					
 					return
-				elseif fFlagHttpClientRetryExtensionsModule and var2 then
-					p4(false, tostring(p6 or "RequestInternal failed"))
+				elseif FFlagHttpClientRetryExtensionsModule and TransportFailuresAsResponses then
+					Callback(false, (tostring(p4 or "RequestInternal failed")))
 					
 					return
+				else
+					Callback(false, (tostring(p4 and p4.StatusMessage or "RequestInternal failed")))
 				end
-				p4(false, tostring(if p6 then p6.StatusMessage else "RequestInternal failed"))
 			end)
 			
-			return function()
-				-- upvalues: var4 (write), var3 (ref)
-				if var4 then
+			return function() --[[ Line: 102 ]]
+				-- upvalues: Flag (ref), RequestInternalResult (copy)
+				if not Flag then
+					Flag = true
+					pcall(function() --[[ Line: 107 ]]
+						-- upvalues: RequestInternalResult (upval)
+						RequestInternalResult:Cancel()
+					end)
+					
 					return
 				end
-				var4 = true
-				pcall(function()
-					-- upvalues: var3 (copy)
-					var3:Cancel()
-				end)
 			end
 		end
 	}

@@ -1,51 +1,51 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local playersService = game:GetService("Players")
-local httpService = game:GetService("HttpService")
-local httpClientModule = require(parent.HttpClient)
-local promiseModule = require(parent.Promise)
-local urlBase = require(parent.UrlBuilder).UrlBase
-local fetch = httpClientModule.fetch
-local asPromise = httpClientModule.asPromise
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local Players = game:GetService("Players")
+local HttpService = game:GetService("HttpService")
+local HttpClientModule = require(Parent.HttpClient)
+local PromiseModule = require(Parent.Promise)
+local UrlBase = require(Parent.UrlBuilder).UrlBase
+local FetchFunction = HttpClientModule.fetch
+local AsPromiseFunction = HttpClientModule.asPromise
 
-return function(p1, p2, p3, p4)
-	-- upvalues: playersService (ref), promiseModule (ref), urlBase (ref), httpService (ref), fetch (ref), asPromise (ref)
-	local var1 = p4
+return function(Input, Input1, p1, UserId) --[[ Line: 39 | Named "searchFriendsAsync" ]]
+	-- upvalues: Players (copy), PromiseModule (copy), UrlBase (copy), HttpService (copy), FetchFunction (copy), AsPromiseFunction (copy)
+	local UserId1 = UserId
 	
-	if var1 == nil then
-		local localPlayer = playersService.LocalPlayer
+	if UserId1 == nil then
+		local LocalPlayer = Players.LocalPlayer
 		
-		if localPlayer == nil then
-			return promiseModule.reject("searchFriendsAsync: no local player")
+		if LocalPlayer == nil then
+			return PromiseModule.reject("searchFriendsAsync: no local player")
 		end
-		var1 = localPlayer.UserId
+		UserId1 = LocalPlayer.UserId
 	end
-	local formattedText = string.format("%s/users/%d/friends/search?query=%s&limit=%d", urlBase.FRIENDS, var1, httpService:UrlEncode(p1), p3 or 20)
+	local Formatted = string.format("%s/users/%d/friends/search?query=%s&limit=%d", UrlBase.FRIENDS, UserId1, HttpService:UrlEncode(Input), p1 or 20)
 	
-	if p2 ~= nil and p2 ~= "" then
-		formattedText = string.format("%s&cursor=%s", formattedText, httpService:UrlEncode(p2))
+	if Input1 ~= nil and Input1 ~= "" then
+		Formatted = string.format("%s&cursor=%s", Formatted, HttpService:UrlEncode(Input1))
 	end
-	return asPromise(fetch({
+	return AsPromiseFunction((FetchFunction({
 		method = "GET",
 		analyticsKey = "build-experience.friends-search",
-		url = formattedText,
-		decode = function(p5)
-			return p5
+		url = Formatted,
+		decode = function(p2) --[[ Line: 64 ]]
+			return p2
 		end
-	})):andThen(function(p5)
-		local t = {}
-		
-		for i, v in if p5 then p5.PageItems else {} do
-			local var2 = if v.id ~= nil then nil else tonumber(v.id)
+	}))):andThen(function(Result) --[[ Line: 69 ]]
+		local Ids = {}
+		local PageItems = Result and Result.PageItems or {}
+		for _, pageItem in PageItems do
+			local Number = if pageItem.id == nil then nil else tonumber(pageItem.id)
 			
-			if var2 ~= nil then
-				table.insert(t, var2)
+			if Number ~= nil then
+				table.insert(Ids, Number)
 			end
 		end
-		local nextCursor = p5 and p5.NextCursor
+		local NextCursor = Result and Result.NextCursor
 		
-		if nextCursor == "" then
-			nextCursor = nil
+		if NextCursor == "" then
+			NextCursor = nil
 		end
-		return { ids = t, nextCursor = nextCursor }
+		return { ids = Ids, nextCursor = NextCursor }
 	end)
 end

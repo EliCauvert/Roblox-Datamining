@@ -1,94 +1,96 @@
-﻿local serverDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
-local parent = serverDrivenUi.Parent
-local reactModule = require(parent.React)
-local collectionItemSize = require(parent.CollectionViews).CollectionViewTypes.CollectionItemSize
-local signalsModule = require(parent.Signals)
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local sduiComponentDefinitionsModule = require(serverDrivenUi.System.SduiComponentDefinitions)
-local sduiInstrumentation = sduiCoreSystemModule.SduiInstrumentation
-local sduiLogger = sduiCoreSystemModule.SduiLogger
-local sduiTemplateRegistry = sduiCoreSystemModule.SduiTemplateRegistry
-local sduiUsageRecorder = sduiCoreSystemModule.SduiUsageRecorder
-local recordV1RegisteredTemplates = sduiCoreSystemModule.recordV1RegisteredTemplates
-local useSduiDataStoreModule = require(serverDrivenUi.DataStore.useSduiDataStore)
-local sduiErrors = sduiCoreSystemModule.SduiErrors
-local fFlagLuaAppLayoutParamsInContext = require(parent.SharedFlags).FFlagLuaAppLayoutParamsInContext
-local t = {
+﻿local ServerDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
+local Parent = ServerDrivenUi.Parent
+local ReactModule = require(Parent.React)
+local CollectionItemSize = require(Parent.CollectionViews).CollectionViewTypes.CollectionItemSize
+local SignalsModule = require(Parent.Signals)
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local SduiComponentDefinitionsModule = require(ServerDrivenUi.System.SduiComponentDefinitions)
+local SduiInstrumentation = SduiCoreSystemModule.SduiInstrumentation
+local SduiLogger = SduiCoreSystemModule.SduiLogger
+local SduiTemplateRegistry = SduiCoreSystemModule.SduiTemplateRegistry
+local SduiUsageRecorder = SduiCoreSystemModule.SduiUsageRecorder
+local RecordV1RegisteredTemplatesFunction = SduiCoreSystemModule.recordV1RegisteredTemplates
+local UseSduiDataStoreModule = require(ServerDrivenUi.DataStore.useSduiDataStore)
+local SduiErrors = SduiCoreSystemModule.SduiErrors
+local FFlagLuaAppLayoutParamsInContext = require(Parent.SharedFlags).FFlagLuaAppLayoutParamsInContext
+local config = {
 	numColumns = 3,
 	fractionalItemAmount = 0,
 	columnGap = 24,
 	sideMargin = 24,
 	verticalPadding = 16
 }
-local useSduiDependenciesModule = require(serverDrivenUi.System.useSduiDependencies)
+local UseSduiDependenciesModule = require(ServerDrivenUi.System.useSduiDependencies)
 
-return function(p1)
-	-- upvalues: reactModule (ref), sduiInstrumentation (ref), useSduiDependenciesModule (ref), sduiComponentDefinitionsModule (ref), sduiTemplateRegistry (ref), recordV1RegisteredTemplates (ref), sduiUsageRecorder (ref), useSduiDataStoreModule (ref), fFlagLuaAppLayoutParamsInContext (ref), signalsModule (ref), t (ref), collectionItemSize (ref), sduiLogger (ref), sduiErrors (ref)
-	local var1 = reactModule.useMemo(function()
-		-- upvalues: sduiInstrumentation (copy)
-		return sduiInstrumentation.new()
+return function(p1) --[[ Line: 58 | Named "useSduiContext" ]]
+	-- upvalues: ReactModule (copy), SduiInstrumentation (copy), UseSduiDependenciesModule (copy), SduiComponentDefinitionsModule (copy), SduiTemplateRegistry (copy), RecordV1RegisteredTemplatesFunction (copy), SduiUsageRecorder (copy), UseSduiDataStoreModule (copy), FFlagLuaAppLayoutParamsInContext (copy), SignalsModule (copy), config (copy), CollectionItemSize (copy), SduiLogger (copy), SduiErrors (copy)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 59 ]]
+		-- upvalues: SduiInstrumentation (upval)
+		return SduiInstrumentation.new()
 	end, {})
-	var1:startTimerFlow("useSduiContext")
-	local var2 = useSduiDependenciesModule(var1)
-	local var3 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref), sduiComponentDefinitionsModule (copy)
-		return p1.componentDefinitions or sduiComponentDefinitionsModule.new()
+	UseMemoResult:startTimerFlow("useSduiContext")
+	local UseSduiDependenciesModuleResult = UseSduiDependenciesModule(UseMemoResult)
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 68 ]]
+		-- upvalues: p1 (copy), SduiComponentDefinitionsModule (upval)
+		return p1.componentDefinitions or SduiComponentDefinitionsModule.new()
 	end, { p1.componentDefinitions })
-	local var4 = reactModule.useMemo(function()
-		-- upvalues: sduiTemplateRegistry (copy), p1 (ref)
-		return sduiTemplateRegistry.new(p1.templates)
+	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 72 ]]
+		-- upvalues: SduiTemplateRegistry (upval), p1 (copy)
+		return SduiTemplateRegistry.new(p1.templates)
 	end, { p1.templates })
-	reactModule.useEffect(function()
-		-- upvalues: recordV1RegisteredTemplates (copy), p1 (ref), sduiUsageRecorder (copy)
-		recordV1RegisteredTemplates(p1.appPage, p1.templates)
-		sduiUsageRecorder.scheduleFlush()
+	ReactModule.useEffect(function() --[[ Line: 75 ]]
+		-- upvalues: RecordV1RegisteredTemplatesFunction (upval), p1 (copy), SduiUsageRecorder (upval)
+		RecordV1RegisteredTemplatesFunction(p1.appPage, p1.templates)
+		SduiUsageRecorder.scheduleFlush()
 	end, { p1.appPage, p1.templates })
-	local var5 = useSduiDataStoreModule()
-	local var6 = nil
+	local UseSduiDataStoreModuleResult = UseSduiDataStoreModule()
+	local UseResult = nil
 	
-	if fFlagLuaAppLayoutParamsInContext then
-		local var7 = reactModule.useMemo(function()
-			-- upvalues: signalsModule (copy), t (copy)
-			return signalsModule.createSignal(t)
+	if FFlagLuaAppLayoutParamsInContext then
+		local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 84 ]]
+			-- upvalues: SignalsModule (upval), config (upval)
+			return SignalsModule.createSignal(config)
 		end, {})
-		var6 = reactModule.useCallback(function(p2)
-			-- upvalues: signalsModule (copy), p1 (ref), collectionItemSize (copy), sduiLogger (copy), sduiErrors (copy), var7 (ref)
-			return signalsModule.createComputed(function(p3)
-				-- upvalues: p1 (copy), p2 (ref), collectionItemSize (copy), sduiLogger (copy), sduiErrors (copy), var7 (copy)
+		UseResult = ReactModule.useCallback(function(p2) --[[ Line: 88 ]]
+			-- upvalues: SignalsModule (upval), p1 (copy), CollectionItemSize (upval), SduiLogger (upval), SduiErrors (upval), UseMemoResult3 (copy)
+			return SignalsModule.createComputed(function(p3) --[[ Line: 89 ]]
+				-- upvalues: p1 (upval), p2 (copy), CollectionItemSize (upval), SduiLogger (upval), SduiErrors (upval), UseMemoResult3 (upval)
 				if p1.pageLayoutConfig then
-					return (p1.pageLayoutConfig[p2] or p1.pageLayoutConfig[collectionItemSize.Small])(p3)
+					return (p1.pageLayoutConfig[p2] or p1.pageLayoutConfig[CollectionItemSize.Small])(p3)
+				else
+					SduiLogger.reportError(SduiErrors.SduiErrorType.NoPageLayoutConfig, {
+						message = `No page layout config available for {p1.appPage}, returning default config`
+					}, p1.appPage)
+					
+					return (UseMemoResult3(p3))
 				end
-				sduiLogger.reportError(sduiErrors.SduiErrorType.NoPageLayoutConfig, {
-					message = `No page layout config available for {p1.appPage}, returning default config`
-				}, p1.appPage)
-				
-				return var7(p3)
 			end)
 		end, { p1.pageLayoutConfig })
 	end
-	local var8 = reactModule.useMemo(function()
-		-- upvalues: var2 (ref), p1 (ref), var3 (ref), var4 (ref), var5 (ref), fFlagLuaAppLayoutParamsInContext (copy), var6 (write)
-		local t = {
-			dependencies = var2,
+	local UseMemoResult4 = ReactModule.useMemo(function() --[[ Line: 106 ]]
+		-- upvalues: UseSduiDependenciesModuleResult (copy), p1 (copy), UseMemoResult1 (copy), UseMemoResult2 (copy), UseSduiDataStoreModuleResult (copy), FFlagLuaAppLayoutParamsInContext (upval), UseResult (ref)
+		local config = {
+			dependencies = UseSduiDependenciesModuleResult,
 			appPage = p1.appPage,
 			dataUpdatedTimestamp = p1.dataUpdatedTimestamp,
-			componentDefinitions = var3,
-			templateRegistry = var4,
-			dataStore = var5,
-			getPageLayoutConfig = if fFlagLuaAppLayoutParamsInContext then var6 else nil
+			componentDefinitions = UseMemoResult1,
+			templateRegistry = UseMemoResult2,
+			dataStore = UseSduiDataStoreModuleResult,
+			getPageLayoutConfig = if FFlagLuaAppLayoutParamsInContext then UseResult else nil
 		}
-		setmetatable(t, {
-			__tostring = function()
+		setmetatable(config, {
+			__tostring = function(): string --[[ Line: 118 ]]
 				return "SduiContext"
 			end
 		})
 		
-		return t
+		return config
 	end, {
-		var2, p1.appPage, p1.dataUpdatedTimestamp, var3, var4, var5,
-		if fFlagLuaAppLayoutParamsInContext then var6 else nil
+		UseSduiDependenciesModuleResult, p1.appPage, p1.dataUpdatedTimestamp,
+		UseMemoResult1, UseMemoResult2, UseSduiDataStoreModuleResult,
+		if FFlagLuaAppLayoutParamsInContext then UseResult else nil
 	})
-	var1:stopTimerFlow("useSduiContext", var8)
+	UseMemoResult:stopTimerFlow("useSduiContext", UseMemoResult4)
 	
-	return var8
+	return UseMemoResult4
 end

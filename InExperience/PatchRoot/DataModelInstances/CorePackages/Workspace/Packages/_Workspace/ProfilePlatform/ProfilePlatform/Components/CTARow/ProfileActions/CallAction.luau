@@ -1,32 +1,31 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local fFlagFriendsCallingClientGateDEV = require(parent.SharedFlags).FFlagFriendsCallingClientGate_DEV
-local buttonVariant = require(parent.Foundation).Enums.ButtonVariant
-local enumsModule = require(profilePlatform.Common.Enums)
-local _ = require(profilePlatform.Components.CTARow.Types)
-local eventNamesModule = require(profilePlatform.Analytics.EventNames)
-local profileTypes = enumsModule.ProfileTypes
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ButtonVariant = require(Parent.Foundation).Enums.ButtonVariant
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local _ = require(ProfilePlatform.Components.CTARow.Types)
+local EventNamesModule = require(ProfilePlatform.Analytics.EventNames)
+local ProfileTypes = EnumsModule.ProfileTypes
 
 return {
-	[enumsModule.ProfileActions.Call] = if fFlagFriendsCallingClientGateDEV then function(p1)
-		-- upvalues: buttonVariant (ref), profileTypes (ref), enumsModule (ref), eventNamesModule (ref)
+	[EnumsModule.ProfileActions.Call] = if require(Parent.SharedFlags).FFlagFriendsCallingClientGate_DEV then function(p1) --[[ Line: 16 ]]
+		-- upvalues: ButtonVariant (copy), ProfileTypes (copy), EnumsModule (copy), EventNamesModule (copy)
 		return {
 			text = "Call",
-			variant = buttonVariant.Standard,
+			variant = ButtonVariant.Standard,
 			onActivated = {
-				[profileTypes.User] = function()
-					-- upvalues: p1 (ref), enumsModule (copy), eventNamesModule (copy)
-					if p1.buttonSurface == enumsModule.ButtonSurface.ContextualMenu then
-						p1.analytics.fireAnalyticsEvent(eventNamesModule.ContextualMenuButtonCall, { buttonSurface = p1.buttonSurface })
+				[ProfileTypes.User] = function() --[[ Line: 21 ]]
+					-- upvalues: p1 (copy), EnumsModule (upval), EventNamesModule (upval)
+					if p1.buttonSurface == EnumsModule.ButtonSurface.ContextualMenu then
+						p1.analytics.fireAnalyticsEvent(EventNamesModule.ContextualMenuButtonCall, { buttonSurface = p1.buttonSurface })
 					else
-						p1.analytics.fireAnalyticsEvent(eventNamesModule.CTAButtonCall, { buttonSurface = p1.buttonSurface })
+						p1.analytics.fireAnalyticsEvent(EventNamesModule.CTAButtonCall, { buttonSurface = p1.buttonSurface })
 					end
-					local callingService = p1.callingService or game:GetService("CallingService")
-					task.spawn(function()
-						-- upvalues: callingService (ref), p1 (copy)
-						pcall(function()
-							-- upvalues: callingService (copy), p1 (copy)
-							callingService:CreateCallAsync({ tonumber(p1.profileId) }, "")
+					local CallingService = p1.callingService or game:GetService("CallingService")
+					task.spawn(function() --[[ Line: 35 ]]
+						-- upvalues: CallingService (copy), p1 (upval)
+						pcall(function() --[[ Line: 36 ]]
+							-- upvalues: CallingService (upval), p1 (upval)
+							CallingService:CreateCallAsync({ (tonumber(p1.profileId)) }, "")
 						end)
 					end)
 				end

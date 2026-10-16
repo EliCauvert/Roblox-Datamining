@@ -1,1 +1,6 @@
-﻿return require(script.Parent.FFlagAXBackgroundsCustomizeHydration) and (require(script.Parent.FFlagAXCatalogBackgroundsSupport) and (require(script.Parent.FFlagAXBackgroundsEndTryOnOnSelect) and (require(script.Parent.FFlagAXSlotsScrollAwayOnlyWithSlots) and game:DefineFastFlag("AXBackgroundsYouMayAlsoLike", false))))
+﻿local FFlagAXCatalogBackgroundsSupportModule = require(script.Parent.FFlagAXCatalogBackgroundsSupport)
+local FFlagAXBackgroundsEndTryOnOnSelectModule = require(script.Parent.FFlagAXBackgroundsEndTryOnOnSelect)
+local FFlagAXSlotsScrollAwayOnlyWithSlotsModule = require(script.Parent.FFlagAXSlotsScrollAwayOnlyWithSlots)
+local AXBackgroundsYouMayAlsoLike = game:DefineFastFlag("AXBackgroundsYouMayAlsoLike", false)
+
+return require(script.Parent.FFlagAXBackgroundsCustomizeHydration) and (FFlagAXCatalogBackgroundsSupportModule and (FFlagAXBackgroundsEndTryOnOnSelectModule and (FFlagAXSlotsScrollAwayOnlyWithSlotsModule and AXBackgroundsYouMayAlsoLike)))

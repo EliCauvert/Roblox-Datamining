@@ -1,30 +1,29 @@
-﻿local parent = script:FindFirstAncestor("InExperienceSideSheet").Parent
-local _ = require(parent.Chrome)
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local _ = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local view = foundationModule.View
-local fFlagSideSheetFocusNav = require(parent.SharedFlags).FFlagSideSheetFocusNav
+﻿local Parent = script:FindFirstAncestor("InExperienceSideSheet").Parent
+local _ = require(Parent.Chrome)
+local ReactModule = require(Parent.React)
+local _ = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
+local View = require(Parent.Foundation).View
+local FFlagSideSheetFocusNav = require(Parent.SharedFlags).FFlagSideSheetFocusNav
 
-return reactModule.memo(function(p1)
-	-- upvalues: signalsReactModule (ref), reactModule (ref), fFlagSideSheetFocusNav (ref), view (ref)
-	local var1 = signalsReactModule.useSignalState(p1.integrationsGetter)
+return ReactModule.memo(function(p1) --[[ Line: 25 | Named "SideSheetWidgetList" ]]
+	-- upvalues: SignalsReactModule (copy), ReactModule (copy), FFlagSideSheetFocusNav (copy), View (copy)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(p1.integrationsGetter)
 	
-	if #var1 == 0 then
+	if #UseSignalStateResult == 0 then
 		return nil
 	end
-	local t = {}
+	local Elements = {}
 	
-	for i, v in var1 do
-		t[v.id] = reactModule.createElement(v.component, {
-			layoutOrder = i,
+	for LayoutOrder, value in UseSignalStateResult do
+		Elements[value.id] = ReactModule.createElement(value.component, {
+			layoutOrder = LayoutOrder,
 			placement = p1.placement,
-			firstIntegrationToFocusCallback = if fFlagSideSheetFocusNav and i == 1 then p1.firstIntegrationToFocusCallback else nil
+			firstIntegrationToFocusCallback = if FFlagSideSheetFocusNav and LayoutOrder == 1 then p1.firstIntegrationToFocusCallback else nil
 		})
 	end
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "col size-full-0 auto-y",
 		LayoutOrder = p1.layoutOrder
-	}, t)
+	}, Elements)
 end)

@@ -1,68 +1,69 @@
-﻿local sduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
-local _ = require(sduiCoreSystem.Parent.React)
-local _ = require(sduiCoreSystem.SduiComponentType)
-local _ = require(sduiCoreSystem.SduiBuilderTypes)
+﻿local SduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
+local _ = require(SduiCoreSystem.Parent.React)
+local _ = require(SduiCoreSystem.SduiComponentType)
+local _ = require(SduiCoreSystem.SduiBuilderTypes)
 
-local function createSduiComponentRegistry()
+local function createSduiComponentRegistry() --[[ Line: 28 ]]
 	local t = {}
 	
 	return {
-		getComponent = function(p1)
-			-- upvalues: t (ref)
-			local var1
-			local var2 = t[p1]
+		getComponent = function(p1) --[[ Line: 43 ]]
+			-- upvalues: t (copy)
+			local Entry = t[p1]
+			local v1 = nil
 			
-			if var2 then
-				if not var2.component and var2.getLazyComponent then
-					var2.component = var2.getLazyComponent()
+			if Entry then
+				if not Entry.component and Entry.getLazyComponent then
+					Entry.component = Entry.getLazyComponent()
 				end
-				var1 = var2
+				v1 = Entry
 			else
-				var1 = nil
+				v1 = nil
 			end
-			return if var1 then var1.component else nil
+			return if v1 then v1.component else nil
 		end,
-		getComponentDefinition = function(p1)
-			-- upvalues: t (ref)
-			local var1 = t[p1]
+		getComponentDefinition = function(p1) --[[ Line: 31 ]]
+			-- upvalues: t (copy)
+			local Entry = t[p1]
 			
-			if not var1 then
+			if not Entry then
 				return nil
-			elseif not var1.component and var1.getLazyComponent then
-				var1.component = var1.getLazyComponent()
 			end
-			return var1
+			if not Entry.component and Entry.getLazyComponent then
+				Entry.component = Entry.getLazyComponent()
+			end
+			return Entry
 		end,
-		registerComponentDefinition = function(p1, p2)
-			-- upvalues: t (ref)
-			t[p1] = p2
+		registerComponentDefinition = function(Key, p1) --[[ Line: 53 ]]
+			-- upvalues: t (copy)
+			t[Key] = p1
 		end,
-		registerComponentDefinitions = function(p1)
-			-- upvalues: t (ref)
-			for i, v in p1 do
-				t[i] = v
+		registerComponentDefinitions = function(List) --[[ Line: 60 ]]
+			-- upvalues: t (copy)
+			for i, value in List do
+				t[i] = value
 			end
 		end,
-		getRegisteredComponentTypes = function()
-			-- upvalues: t (ref)
-			local t_1 = {}
+		getRegisteredComponentTypes = function() --[[ Line: 68 ]]
+			-- upvalues: t (copy)
+			local List = {}
 			
 			for i in t do
-				table.insert(t_1, i)
+				table.insert(List, i)
 			end
-			table.sort(t_1)
+			table.sort(List)
 			
-			return t_1
+			return List
 		end
 	}
 end
 
-local var1 = nil
+local v1 = nil
 
-return function()
-	-- upvalues: var1 (write), createSduiComponentRegistry (ref)
-	if var1 == nil then
-		var1 = createSduiComponentRegistry()
+return function() --[[ Line: 87 | Named "getSduiComponentRegistry" ]]
+	-- upvalues: v1 (ref), createSduiComponentRegistry (copy)
+	if v1 == nil then
+		v1 = createSduiComponentRegistry()
 	end
-	return var1
+	return v1
 end

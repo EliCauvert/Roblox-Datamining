@@ -1,13 +1,13 @@
-﻿local parent = script:FindFirstAncestor("SduiSharedContent").Parent
-local reactModule = require(parent.React)
-local cryoModule = require(parent.Cryo)
-local _ = require(parent.SduiCompat)
-local sduiTextModule = require(script.Parent.SduiText)
-local useShimmerTextModule = require(script.Parent.useShimmerText)
+﻿local Parent = script:FindFirstAncestor("SduiSharedContent").Parent
+local ReactModule = require(Parent.React)
+local CryoModule = require(Parent.Cryo)
+local _ = require(Parent.SduiCompat)
+local SduiTextModule = require(script.Parent.SduiText)
+local UseShimmerTextModule = require(script.Parent.useShimmerText)
 
-return function(p1)
-	-- upvalues: useShimmerTextModule (ref), reactModule (ref), cryoModule (ref), sduiTextModule (ref)
-	local var1 = useShimmerTextModule({
+return function(p1) --[[ Line: 19 | Named "SduiShimmerText" ]]
+	-- upvalues: UseShimmerTextModule (copy), ReactModule (copy), CryoModule (copy), SduiTextModule (copy)
+	local UseShimmerTextModuleResult = UseShimmerTextModule({
 		animationSpeed = p1.animationSpeed,
 		children = p1.children,
 		gradientOffset = p1.gradientOffset,
@@ -15,14 +15,14 @@ return function(p1)
 		textStyle = p1.textStyle
 	})
 	
-	return reactModule.createElement(sduiTextModule, reactModule.useMemo(function()
-		-- upvalues: cryoModule (copy), p1 (ref), var1 (ref)
-		return cryoModule.Dictionary.join(p1, {
-			animationSpeed = cryoModule.None,
-			children = cryoModule.None,
-			gradientOffset = cryoModule.None,
-			isShimmerEnabled = cryoModule.None,
-			textStyle = var1.textStyle
+	return ReactModule.createElement(SduiTextModule, ReactModule.useMemo(function() --[[ Line: 28 ]]
+		-- upvalues: CryoModule (upval), p1 (copy), UseShimmerTextModuleResult (copy)
+		return CryoModule.Dictionary.join(p1, {
+			animationSpeed = CryoModule.None,
+			children = CryoModule.None,
+			gradientOffset = CryoModule.None,
+			isShimmerEnabled = CryoModule.None,
+			textStyle = UseShimmerTextModuleResult.textStyle
 		})
-	end, { p1, var1.textStyle }), var1.children)
+	end, { p1, UseShimmerTextModuleResult.textStyle }), UseShimmerTextModuleResult.children)
 end

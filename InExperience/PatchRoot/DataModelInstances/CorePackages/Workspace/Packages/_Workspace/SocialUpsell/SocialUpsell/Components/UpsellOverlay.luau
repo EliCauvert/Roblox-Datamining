@@ -1,210 +1,218 @@
-﻿local socialUpsell = script:FindFirstAncestor("SocialUpsell")
-local parent = socialUpsell.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local responsiveModule = require(parent.Responsive)
-local appBloxModule = require(parent.AppBlox)
-local displayModule = require(parent.Display)
-local signalsReactModule = require(parent.SignalsReact)
-local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
-local reactUtilsModule = require(parent.ReactUtils)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local httpService = game:GetService("HttpService")
-local fFlagEnableAEGIS2CommsFAEUpsell = require(parent.SharedFlags).FFlagEnableAEGIS2CommsFAEUpsell
-local socialUpsellAnalyticsModule = require(socialUpsell.Analytics.SocialUpsellAnalytics)
-local _ = require(socialUpsell.Analytics.Enum.UpsellEntrySurfaceType)
-local upsellComponentModule = require(socialUpsell.Analytics.Enum.UpsellComponent)
-local _ = require(socialUpsell.Enum.SocialUpsellType)
-local constantsModule = require(socialUpsell.Constants)
-local bannerBadge = appBloxModule.BannerBadge
-local eventTypes = require(parent.SocialLuaAnalytics).Analytics.Enums.EventTypes
-local fIntMaxDaysToShowCountDownLabelModule = require(socialUpsell.Flag.FIntMaxDaysToShowCountDownLabel)
-local fIntMinDaysToShowCountdownLabelModule = require(socialUpsell.Flag.FIntMinDaysToShowCountdownLabel)
-local useSocialUpsellOverlayControllerModule = require(socialUpsell.Hooks.useSocialUpsellOverlayController)
-local minHeightFor = responsiveModule.BreakpointConfig.getMinHeightFor(responsiveModule.Keys.Medium)
-local badgeVariant = foundationModule.Enums.BadgeVariant
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local dialog = foundationModule.Dialog
-local dialogSize = foundationModule.Enums.DialogSize
-local iconName = foundationModule.Enums.IconName
-local text = foundationModule.Text
-local view = foundationModule.View
-local image = foundationModule.Image
-local useScaledValue = foundationModule.Hooks.useScaledValue
-local t = { isInExperience = true }
+﻿local SocialUpsell = script:FindFirstAncestor("SocialUpsell")
+local Parent = SocialUpsell.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local ResponsiveModule = require(Parent.Responsive)
+local DisplayModule = require(Parent.Display)
+local SignalsReactModule = require(Parent.SignalsReact)
+local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
+local ReactUtilsModule = require(Parent.ReactUtils)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local HttpService = game:GetService("HttpService")
+local FFlagEnableAEGIS2CommsFAEUpsell = require(Parent.SharedFlags).FFlagEnableAEGIS2CommsFAEUpsell
+local SocialUpsellAnalyticsModule = require(SocialUpsell.Analytics.SocialUpsellAnalytics)
+local _ = require(SocialUpsell.Analytics.Enum.UpsellEntrySurfaceType)
+local UpsellComponentModule = require(SocialUpsell.Analytics.Enum.UpsellComponent)
+local _ = require(SocialUpsell.Enum.SocialUpsellType)
+local ConstantsModule = require(SocialUpsell.Constants)
+local BannerBadge = require(Parent.AppBlox).BannerBadge
+local EventTypes = require(Parent.SocialLuaAnalytics).Analytics.Enums.EventTypes
+local FIntMaxDaysToShowCountDownLabelModule = require(SocialUpsell.Flag.FIntMaxDaysToShowCountDownLabel)
+local FIntMinDaysToShowCountdownLabelModule = require(SocialUpsell.Flag.FIntMinDaysToShowCountdownLabel)
+local UseSocialUpsellOverlayControllerModule = require(SocialUpsell.Hooks.useSocialUpsellOverlayController)
+local MinHeightFor = ResponsiveModule.BreakpointConfig.getMinHeightFor(ResponsiveModule.Keys.Medium)
+local BadgeVariant = FoundationModule.Enums.BadgeVariant
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local Dialog = FoundationModule.Dialog
+local DialogSize = FoundationModule.Enums.DialogSize
+local IconName = FoundationModule.Enums.IconName
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local Image = FoundationModule.Image
+local UseScaledValueFunction = FoundationModule.Hooks.useScaledValue
+local config = { isInExperience = true }
 
-local var1 = function(p1, p2)
-	-- upvalues: fIntMinDaysToShowCountdownLabelModule (ref), fIntMaxDaysToShowCountDownLabelModule (ref)
-	if not p1 or p1 == 0 then
+local function v31(DeadlineUtcTimestamp, p1) --[[ Line: 80 ]]
+	-- upvalues: FIntMinDaysToShowCountdownLabelModule (copy), FIntMaxDaysToShowCountDownLabelModule (copy)
+	if DeadlineUtcTimestamp and DeadlineUtcTimestamp ~= 0 then
+		local Floored = math.floor((DeadlineUtcTimestamp - os.time()) / 86400)
+		
+		return if Floored < FIntMinDaysToShowCountdownLabelModule or FIntMaxDaysToShowCountDownLabelModule < Floored then nil elseif Floored < 1 then p1.dayLeft else p1.daysLeft:gsub("{(.-)}", { daysLeft = tostring(Floored) })
+	else
 		return nil
 	end
-	local floored = math.floor((p1 - os.time()) / 86400)
-	
-	return if floored < fIntMinDaysToShowCountdownLabelModule or fIntMaxDaysToShowCountDownLabelModule < floored then nil elseif floored < 1 then p2.dayLeft else p2.daysLeft:gsub("{(.-)}", { daysLeft = tostring(floored) })
 end
 
-local var2 = if fFlagEnableAEGIS2CommsFAEUpsell then displayModule.GetDisplayStore(false).getViewportSize else nil
+local GetViewportSize = if FFlagEnableAEGIS2CommsFAEUpsell then DisplayModule.GetDisplayStore(false).getViewportSize else nil
 
-return function(p1)
-	-- upvalues: t (ref), useSocialUpsellOverlayControllerModule (ref), reactModule (ref), useScaledValue (ref), reactFocusNavigationModule (ref), reactUtilsModule (ref), httpService (ref), socialUpsellAnalyticsModule (ref), upsellComponentModule (ref), useLocalization (ref), var1 (ref), fFlagEnableAEGIS2CommsFAEUpsell (ref), signalsReactModule (ref), var2 (write), useSelector (ref), minHeightFor (ref), eventTypes (ref), constantsModule (ref), buttonVariant (ref), dialog (ref), dialogSize (ref), view (ref), image (ref), bannerBadge (ref), foundationModule (ref), iconName (ref), badgeVariant (ref), text (ref)
-	p1 = p1 or t
-	local var3 = useSocialUpsellOverlayControllerModule(p1.isInExperience)
-	local var4 = reactModule.useRef(nil)
-	local vector2 = Vector2.new(useScaledValue(320), useScaledValue(180))
-	local var5, var6 = reactFocusNavigationModule.useDefaultFocusBehavior()
-	local var7 = reactModule.useRef(nil)
-	local var8 = reactUtilsModule.useComposedRef(var6, var7)
-	reactModule.useEffect(function()
-		-- upvalues: var7 (ref)
-		if var7.current then
-			local scrollingFrame = var7.current:FindFirstChildWhichIsA("ScrollingFrame", true)
+return function(p1) --[[ Line: 108 ]]
+	-- upvalues: config (copy), UseSocialUpsellOverlayControllerModule (copy), ReactModule (copy), UseScaledValueFunction (copy), ReactFocusNavigationModule (copy), ReactUtilsModule (copy), HttpService (copy), SocialUpsellAnalyticsModule (copy), UpsellComponentModule (copy), UseLocalizationFunction (copy), v31 (copy), FFlagEnableAEGIS2CommsFAEUpsell (copy), SignalsReactModule (copy), GetViewportSize (ref), UseSelectorFunction (copy), MinHeightFor (copy), EventTypes (copy), ConstantsModule (copy), ButtonVariant (copy), Dialog (copy), DialogSize (copy), View (copy), Image (copy), BannerBadge (copy), FoundationModule (copy), IconName (copy), BadgeVariant (copy), Text (copy)
+	local P2 = p1 or config
+	local UseSocialUpsellOverlayControllerModuleResult = UseSocialUpsellOverlayControllerModule(P2.isInExperience)
+	local UseRefResult = ReactModule.useRef(nil)
+	local _Vector2 = Vector2.new(UseScaledValueFunction(320), UseScaledValueFunction(180))
+	local UseDefaultFocusBehaviorResult, UseDefaultFocusBehaviorResult2 = ReactFocusNavigationModule.useDefaultFocusBehavior()
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseComposedRefResult = ReactUtilsModule.useComposedRef(UseDefaultFocusBehaviorResult2, UseRefResult1)
+	ReactModule.useEffect(function() --[[ Line: 117 ]]
+		-- upvalues: UseRefResult1 (copy)
+		if UseRefResult1.current then
+			local ScrollingFrame = UseRefResult1.current:FindFirstChildWhichIsA("ScrollingFrame", true)
 			
-			if scrollingFrame then
-				scrollingFrame.Selectable = false
+			if ScrollingFrame then
+				ScrollingFrame.Selectable = false
 			end
 		end
 	end, {})
-	local var9 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref), httpService (copy)
-		return p1.impressionId or httpService:GenerateGUID(false)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 128 ]]
+		-- upvalues: P2 (copy), HttpService (upval)
+		return P2.impressionId or HttpService:GenerateGUID(false)
 	end, {
-		p1.impressionId,
-		p1.upsellEntrySurface,
-		p1.upsellPurpose,
-		p1.upsellEntryComponent
+		P2.impressionId,
+		P2.upsellEntrySurface,
+		P2.upsellPurpose,
+		P2.upsellEntryComponent
 	})
-	local var10 = reactModule.useMemo(function()
-		-- upvalues: socialUpsellAnalyticsModule (copy), p1 (ref), upsellComponentModule (copy)
-		return socialUpsellAnalyticsModule.evaluateUpsellStage(p1.upsellEntrySurface, upsellComponentModule.Modal, p1.upsellEntryComponent)
-	end, { p1.upsellEntrySurface, p1.upsellEntryComponent })
-	local var11 = useLocalization({
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 139 ]]
+		-- upvalues: SocialUpsellAnalyticsModule (upval), P2 (copy), UpsellComponentModule (upval)
+		return SocialUpsellAnalyticsModule.evaluateUpsellStage(P2.upsellEntrySurface, UpsellComponentModule.Modal, P2.upsellEntryComponent)
+	end, { P2.upsellEntrySurface, P2.upsellEntryComponent })
+	local UseLocalizationResult = UseLocalizationFunction({
 		daysLeft = "Feature.FAE.Label.DaysLeft",
 		dayLeft = "Feature.FAE.Label.DayLeft"
 	})
-	local var12 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref), var1 (copy), var11 (ref)
-		return if p1.countDownBadge then var1(p1.countDownBadge.deadlineUtcTimestamp, var11) else nil
-	end, { p1.countDownBadge, var11 })
-	local var13 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref), var12 (ref)
-		return if p1.countDownBadge then if p1.countDownBadge.text then p1.countDownBadge.text else var12 else nil
-	end, { var12, p1.countDownBadge })
-	local var14 = minHeightFor <= (if fFlagEnableAEGIS2CommsFAEUpsell then signalsReactModule.useSignalState(var2) else useSelector(function(p2)
+	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 152 ]]
+		-- upvalues: P2 (copy), v31 (upval), UseLocalizationResult (copy)
+		return if P2.countDownBadge then v31(P2.countDownBadge.deadlineUtcTimestamp, UseLocalizationResult) else nil
+	end, { P2.countDownBadge, UseLocalizationResult })
+	local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 159 ]]
+		-- upvalues: P2 (copy), UseMemoResult2 (copy)
+		return if P2.countDownBadge then if P2.countDownBadge.text then P2.countDownBadge.text else UseMemoResult2 else nil
+	end, { UseMemoResult2, P2.countDownBadge })
+	local IsMinHeightForBelow = MinHeightFor <= (if FFlagEnableAEGIS2CommsFAEUpsell then SignalsReactModule.useSignalState(GetViewportSize) else UseSelectorFunction(function(p2) --[[ Line: 172 ]]
 		return p2.ScreenSize
 	end)).Y
-	reactModule.useEffect(function()
-		-- upvalues: var9 (ref), var4 (ref), socialUpsellAnalyticsModule (copy), eventTypes (copy), p1 (ref), var10 (ref), upsellComponentModule (copy)
-		if var9 and var4.current ~= var9 then
-			socialUpsellAnalyticsModule.logUpsellEvent(eventTypes.SocialUpsellShown, {
-				upsellPurpose = p1.upsellPurpose,
-				upsellEntrySurface = p1.upsellEntrySurface,
-				upsellStage = var10,
-				upsellImpressionId = var9,
-				upsellComponent = upsellComponentModule.Modal,
-				upsellEntryComponent = p1.upsellEntryComponent
+	ReactModule.useEffect(function() --[[ Line: 180 ]]
+		-- upvalues: UseMemoResult (copy), UseRefResult (copy), SocialUpsellAnalyticsModule (upval), EventTypes (upval), P2 (copy), UseMemoResult1 (copy), UpsellComponentModule (upval)
+		if UseMemoResult and UseRefResult.current ~= UseMemoResult then
+			SocialUpsellAnalyticsModule.logUpsellEvent(EventTypes.SocialUpsellShown, {
+				upsellPurpose = P2.upsellPurpose,
+				upsellEntrySurface = P2.upsellEntrySurface,
+				upsellStage = UseMemoResult1,
+				upsellImpressionId = UseMemoResult,
+				upsellComponent = UpsellComponentModule.Modal,
+				upsellEntryComponent = P2.upsellEntryComponent
 			})
-			var4.current = var9
+			UseRefResult.current = UseMemoResult
 		end
 	end, {
-		p1.upsellEntrySurface,
-		p1.upsellPurpose,
-		var9,
-		var10,
-		p1.upsellEntryComponent
+		P2.upsellEntrySurface,
+		P2.upsellPurpose,
+		UseMemoResult,
+		UseMemoResult1,
+		P2.upsellEntryComponent
 	})
-	local var15 = reactModule.useCallback(function(p2)
-		-- upvalues: socialUpsellAnalyticsModule (copy), eventTypes (copy), p1 (ref), var10 (ref), var9 (ref), upsellComponentModule (copy)
-		socialUpsellAnalyticsModule.logUpsellEvent(eventTypes.SocialUpsellButtonClick, {
-			upsellPurpose = p1.upsellPurpose,
-			upsellEntrySurface = p1.upsellEntrySurface,
-			upsellStage = var10,
-			upsellImpressionId = var9,
-			upsellComponent = upsellComponentModule.Modal,
-			btn = p2,
-			upsellEntryComponent = p1.upsellEntryComponent
+	local UseResult = ReactModule.useCallback(function(Btn) --[[ Line: 204 ]]
+		-- upvalues: SocialUpsellAnalyticsModule (upval), EventTypes (upval), P2 (copy), UseMemoResult1 (copy), UseMemoResult (copy), UpsellComponentModule (upval)
+		SocialUpsellAnalyticsModule.logUpsellEvent(EventTypes.SocialUpsellButtonClick, {
+			upsellPurpose = P2.upsellPurpose,
+			upsellEntrySurface = P2.upsellEntrySurface,
+			upsellStage = UseMemoResult1,
+			upsellImpressionId = UseMemoResult,
+			upsellComponent = UpsellComponentModule.Modal,
+			btn = Btn,
+			upsellEntryComponent = P2.upsellEntryComponent
 		})
 	end, {
-		p1.upsellEntrySurface,
-		p1.upsellPurpose,
-		var9,
-		var10,
-		p1.upsellEntryComponent
+		P2.upsellEntrySurface,
+		P2.upsellPurpose,
+		UseMemoResult,
+		UseMemoResult1,
+		P2.upsellEntryComponent
 	})
-	local var16 = reactModule.useCallback(function()
-		-- upvalues: var15 (ref), constantsModule (copy), p1 (ref)
-		var15(constantsModule.UPSELL_OVERLAY_BUTTON_ACTION.Primary)
-		p1.primaryAction.onActivated()
-	end, { p1.primaryAction, var15 })
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 226 ]]
+		-- upvalues: UseResult (copy), ConstantsModule (upval), P2 (copy)
+		UseResult(ConstantsModule.UPSELL_OVERLAY_BUTTON_ACTION.Primary)
+		P2.primaryAction.onActivated()
+	end, { P2.primaryAction, UseResult })
 	
-	return reactModule.createElement(dialog.Root, {
+	return ReactModule.createElement(Dialog.Root, {
 		hasBackdrop = true,
 		closeOnClickOutside = true,
-		size = dialogSize.Medium,
-		onClose = reactModule.useCallback(function()
-			-- upvalues: var15 (ref), constantsModule (copy), var3 (ref), p1 (ref)
-			var15(constantsModule.UPSELL_OVERLAY_BUTTON_ACTION.Dismiss)
-			var3.closeSocialOverlay()
+		size = DialogSize.Medium,
+		onClose = ReactModule.useCallback(function() --[[ Line: 238 ]]
+			-- upvalues: UseResult (copy), ConstantsModule (upval), UseSocialUpsellOverlayControllerModuleResult (copy), P2 (copy)
+			UseResult(ConstantsModule.UPSELL_OVERLAY_BUTTON_ACTION.Dismiss)
+			UseSocialUpsellOverlayControllerModuleResult.closeSocialOverlay()
 			
-			if p1.onClose then
-				p1.onClose()
+			if P2.onClose then
+				P2.onClose()
 			end
-		end, { var15, p1.onClose, var3.closeSocialOverlay }),
-		ref = var8
+		end, {
+			UseResult,
+			P2.onClose,
+			UseSocialUpsellOverlayControllerModuleResult.closeSocialOverlay
+		}),
+		ref = UseComposedRefResult
 	}, {
-		DialogContent = reactModule.createElement(dialog.Content, {}, {
-			Content = reactModule.createElement(view, {
+		DialogContent = ReactModule.createElement(Dialog.Content, {}, {
+			Content = ReactModule.createElement(View, {
 				tag = "col auto-y size-full-0 gap-medium padding-top-xlarge",
 				LayoutOrder = 1
 			}, {
-				Image = if p1.imageId and var14 then reactModule.createElement(image, {
+				Image = if P2.imageId and IsMinHeightForBelow then ReactModule.createElement(Image, {
 					tag = "size-full-full self-center content-emphasis",
-					aspectRatio = 1.777777777778,
-					Image = p1.imageId,
-					sizeConstraint = { MaxSize = vector2 }
+					aspectRatio = 1.7777777777777777,
+					Image = P2.imageId,
+					sizeConstraint = { MaxSize = _Vector2 }
 				}) else nil,
-				Badge = if var13 then reactModule.createElement(bannerBadge, {
+				Badge = if UseMemoResult3 then ReactModule.createElement(BannerBadge, {
 					LayoutOrder = 1,
 					icon = {
-						variant = foundationModule.Enums.IconVariant.Filled,
-						position = foundationModule.Enums.IconPosition.Left,
-						name = iconName.Clock
+						variant = FoundationModule.Enums.IconVariant.Filled,
+						position = FoundationModule.Enums.IconPosition.Left,
+						name = IconName.Clock
 					},
-					text = var13,
-					variant = badgeVariant.Neutral
+					text = UseMemoResult3,
+					variant = BadgeVariant.Neutral
 				}) else nil,
-				TextContainer = reactModule.createElement(view, {
+				TextContainer = ReactModule.createElement(View, {
 					tag = "col gap-medium size-full-0 auto-y padding-right-xxlarge padding-bottom-xsmall",
 					LayoutOrder = 2
 				}, {
-					Title = if p1.title then reactModule.createElement(view, { tag = "size-full-0 auto-y", LayoutOrder = 2 }, {
-						TitleText = reactModule.createElement(text, {
+					Title = if P2.title then ReactModule.createElement(View, { tag = "size-full-0 auto-y", LayoutOrder = 2 }, {
+						TitleText = ReactModule.createElement(Text, {
 							tag = "size-full-0 auto-y content-emphasis text-wrap text-align-x-left text-heading-medium",
-							Text = p1.title
+							Text = P2.title
 						})
 					}) else nil,
-					BodyText = if p1.bodyText then reactModule.createElement(text, {
+					BodyText = if P2.bodyText then ReactModule.createElement(Text, {
 						tag = "size-full-0 auto-y text-wrap text-align-x-left text-body-medium",
 						LayoutOrder = 3,
-						Text = p1.bodyText
+						Text = P2.bodyText
 					}) else nil
 				})
 			})
 		}),
-		DialogActions = reactModule.createElement(dialog.Actions, {
-			LayoutOrder = if var13 then 3 else 4,
-			actions = reactModule.useMemo(function()
-				-- upvalues: p1 (ref), buttonVariant (copy), var16 (ref), var5 (ref)
-				local t = {}
-				table.insert(t, {
-					text = p1.primaryAction.text,
-					variant = buttonVariant.Emphasis,
-					onActivated = var16,
-					ref = var5
+		DialogActions = ReactModule.createElement(Dialog.Actions, {
+			LayoutOrder = if UseMemoResult3 then 3 else 4,
+			actions = ReactModule.useMemo(function() --[[ Line: 252 ]]
+				-- upvalues: P2 (copy), ButtonVariant (upval), UseResult1 (copy), UseDefaultFocusBehaviorResult (copy)
+				local List = {}
+				table.insert(List, {
+					text = P2.primaryAction.text,
+					variant = ButtonVariant.Emphasis,
+					onActivated = UseResult1,
+					ref = UseDefaultFocusBehaviorResult
 				})
 				
-				return t
-			end, { var16, p1.primaryAction, var5 })
+				return List
+			end, {
+				UseResult1,
+				P2.primaryAction,
+				UseDefaultFocusBehaviorResult
+			})
 		})
 	})
 end

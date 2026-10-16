@@ -1,42 +1,43 @@
-﻿local luauPolyfillModule = require(script:FindFirstAncestor("GraphQLServer").Parent.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local boolean = luauPolyfillModule.Boolean
-local mergeDeepModule = require(script.Parent.mergeDeep)
+﻿local LuauPolyfillModule = require(script:FindFirstAncestor("GraphQLServer").Parent.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local Boolean = LuauPolyfillModule.Boolean
+local MergeDeepModule = require(script.Parent.mergeDeep)
 
-local function mergeResolvers(p1, p2)
-	-- upvalues: array (ref), mergeResolvers (ref), mergeDeepModule (ref), boolean (ref)
-	if not p1 or array.isArray(p1) and #p1 == 0 then
+local function mergeResolvers(Entry, p1) --[[ Line: 14 ]]
+	-- upvalues: Array (copy), mergeResolvers (copy), MergeDeepModule (copy), Boolean (copy)
+	if not Entry or Array.isArray(Entry) and #Entry == 0 then
 		return {}
-	elseif not array.isArray(p1) then
-		return p1
-	elseif #p1 == 1 then
-		return p1[1] or {}
 	end
-	local t = {}
+	if not Array.isArray(Entry) then
+		return Entry
+	end
+	if #Entry == 1 then
+		return Entry[1] or {}
+	end
+	local List = {}
 	
-	for i, v in p1 do
-		local v
-		if array.isArray(v) then
-			v = mergeResolvers(v)
+	for _, value in Entry do
+		if Array.isArray(value) then
+			value = mergeResolvers(value)
 		end
-		if type(v) == "table" and v then
-			table.insert(t, v)
+		if type(value) == "table" and value then
+			table.insert(List, value)
 		end
 	end
-	local var1 = mergeDeepModule(t, true)
+	local MergeDeepModuleResult = MergeDeepModule(List, true)
 	
-	if p2 and p2.exclusions then
-		for i_1, v_1 in p2.exclusions do
-			local unpacked, unpacked_1 = table.unpack(v_1:split("."), 1, 2)
+	if p1 and p1.exclusions then
+		for _, exclusion in p1.exclusions do
+			local Unpacked, Unpacked2 = table.unpack(exclusion:split("."), 1, 2)
 			
-			if not unpacked_1 or unpacked_1 == "*" then
-				var1[tostring(unpacked)] = nil
-			elseif boolean.toJSBoolean(var1[tostring(unpacked)]) then
-				var1[tostring(unpacked)][tostring(unpacked_1)] = nil
+			if not Unpacked2 or Unpacked2 == "*" then
+				MergeDeepModuleResult[tostring(Unpacked)] = nil
+			elseif Boolean.toJSBoolean(MergeDeepModuleResult[tostring(Unpacked)]) then
+				MergeDeepModuleResult[tostring(Unpacked)][tostring(Unpacked2)] = nil
 			end
 		end
 	end
-	return var1
+	return MergeDeepModuleResult
 end
 
 return mergeResolvers

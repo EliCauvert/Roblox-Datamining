@@ -1,57 +1,57 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local parent = dataHydration.Parent
-local httpService = game:GetService("HttpService")
-local httpModule = require(parent.Http)
-local httpClientModule = require(parent.HttpClient)
-local sharedFlagsModule = require(parent.SharedFlags)
-local _ = require(dataHydration.Moments.MomentsStoreTypes)
-local fFlagArgusUseMockFeedItemsModule = require(dataHydration.Moments.FFlagArgusUseMockFeedItems)
-local mockTrendingMomentsModule = require(dataHydration.Moments.MockTrendingMoments)
-local convertApiMomentsToMomentItemsModule = require(dataHydration.Moments.Util.convertApiMomentsToMomentItems)
-local extractCommentsByFeedItemIdModule = require(dataHydration.Moments.Util.extractCommentsByFeedItemId)
-local extractReactionsByMomentIdModule = require(dataHydration.Moments.Util.extractReactionsByMomentId)
-local extractShareInfoByMomentIdModule = require(dataHydration.Moments.Util.extractShareInfoByMomentId)
-local constructApiUrlModule = require(dataHydration.Moments.Util.constructApiUrl)
-local fFlagMomentsComments = sharedFlagsModule.FFlagMomentsComments
-local var1 = httpClientModule.createMockNetwork({
-	fallback = function()
-		-- upvalues: httpService (ref)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local Parent = DataHydration.Parent
+local HttpService = game:GetService("HttpService")
+local HttpModule = require(Parent.Http)
+local HttpClientModule = require(Parent.HttpClient)
+local _ = require(DataHydration.Moments.MomentsStoreTypes)
+local FFlagArgusUseMockFeedItemsModule = require(DataHydration.Moments.FFlagArgusUseMockFeedItems)
+local MockTrendingMomentsModule = require(DataHydration.Moments.MockTrendingMoments)
+local ConvertApiMomentsToMomentItemsModule = require(DataHydration.Moments.Util.convertApiMomentsToMomentItems)
+local ExtractCommentsByFeedItemIdModule = require(DataHydration.Moments.Util.extractCommentsByFeedItemId)
+local ExtractReactionsByMomentIdModule = require(DataHydration.Moments.Util.extractReactionsByMomentId)
+local ExtractShareInfoByMomentIdModule = require(DataHydration.Moments.Util.extractShareInfoByMomentId)
+local ConstructApiUrlModule = require(DataHydration.Moments.Util.constructApiUrl)
+local FFlagMomentsComments = require(Parent.SharedFlags).FFlagMomentsComments
+local MockNetwork = HttpClientModule.createMockNetwork({
+	fallback = function() --[[ Line: 28 ]]
+		-- upvalues: HttpService (copy)
 		return {
 			statusCode = 200,
-			responseBody = httpService:JSONEncode({})
+			responseBody = HttpService:JSONEncode({})
 		}
 	end
 })
 
-return function(p1, p2, p3, p4)
-	-- upvalues: constructApiUrlModule (ref), httpModule (ref), httpService (ref), fFlagArgusUseMockFeedItemsModule (ref), httpClientModule (ref), var1 (ref), mockTrendingMomentsModule (ref), fFlagMomentsComments (ref), convertApiMomentsToMomentItemsModule (ref), extractReactionsByMomentIdModule (ref), extractShareInfoByMomentIdModule (ref), extractCommentsByFeedItemIdModule (ref)
-	local var2, var3 = constructApiUrlModule("content-captures-api/v2/moments/get-moment-recommendations")
-	local var4 = fFlagArgusUseMockFeedItemsModule()
+return function(MomentsSessionId, PaginationContext, p1, Input) --[[ Line: 35 | Named "fetchTrendingMoments" ]]
+	-- upvalues: ConstructApiUrlModule (copy), HttpModule (copy), HttpService (copy), FFlagArgusUseMockFeedItemsModule (copy), HttpClientModule (copy), MockNetwork (copy), MockTrendingMomentsModule (copy), FFlagMomentsComments (copy), ConvertApiMomentsToMomentItemsModule (copy), ExtractReactionsByMomentIdModule (copy), ExtractShareInfoByMomentIdModule (copy), ExtractCommentsByFeedItemIdModule (copy)
+	local GetMomentRecommendations, GetMomentRecommendations2 = ConstructApiUrlModule("content-captures-api/v2/moments/get-moment-recommendations")
+	local Text: string = `{GetMomentRecommendations}?{HttpModule.Url:makeQueryString({
+		momentsSessionId = MomentsSessionId,
+		paginationContext = PaginationContext,
+		signals = if Input then HttpService:JSONEncode(Input) else nil
+	})}`
+	local FFlagArgusUseMockFeedItemsModuleResult = FFlagArgusUseMockFeedItemsModule()
 	
-	return httpClientModule.fetch({
+	return HttpClientModule.fetch({
 		method = "GET",
 		analyticsKey = "moments.get-moment-recommendations",
-		url = `{var2}?{httpModule.Url:makeQueryString({
-			momentsSessionId = p1,
-			paginationContext = p2,
-			signals = if p4 then httpService:JSONEncode(p4) else nil
-		})}`,
-		headers = var3,
-		network = if var4 then var1 else p3,
-		decode = function(p5)
-			-- upvalues: var4 (ref), mockTrendingMomentsModule (copy), fFlagMomentsComments (copy), convertApiMomentsToMomentItemsModule (copy), p2 (ref), extractReactionsByMomentIdModule (copy), extractShareInfoByMomentIdModule (copy), extractCommentsByFeedItemIdModule (copy)
-			return if var4 then {
+		url = Text,
+		headers = GetMomentRecommendations2,
+		network = if FFlagArgusUseMockFeedItemsModuleResult then MockNetwork else p1,
+		decode = function(p2) --[[ Line: 56 ]]
+			-- upvalues: FFlagArgusUseMockFeedItemsModuleResult (copy), MockTrendingMomentsModule (upval), FFlagMomentsComments (upval), ConvertApiMomentsToMomentItemsModule (upval), PaginationContext (copy), ExtractReactionsByMomentIdModule (upval), ExtractShareInfoByMomentIdModule (upval), ExtractCommentsByFeedItemIdModule (upval)
+			return if FFlagArgusUseMockFeedItemsModuleResult then {
 				nextCursor = nil,
-				moments = mockTrendingMomentsModule,
+				moments = MockTrendingMomentsModule,
 				reactionsByMomentId = {},
 				shareInfoByMomentId = {},
-				commentsByFeedItemId = if fFlagMomentsComments then {} else nil
+				commentsByFeedItemId = if FFlagMomentsComments then {} else nil
 			} else {
-				moments = convertApiMomentsToMomentItemsModule(p5.items),
-				nextCursor = p5.paginationContext or p2,
-				reactionsByMomentId = extractReactionsByMomentIdModule(p5.items),
-				shareInfoByMomentId = extractShareInfoByMomentIdModule(p5.items),
-				commentsByFeedItemId = if fFlagMomentsComments then extractCommentsByFeedItemIdModule(p5.items) else nil
+				moments = ConvertApiMomentsToMomentItemsModule(p2.items),
+				nextCursor = p2.paginationContext or PaginationContext,
+				reactionsByMomentId = ExtractReactionsByMomentIdModule(p2.items),
+				shareInfoByMomentId = ExtractShareInfoByMomentIdModule(p2.items),
+				commentsByFeedItemId = if FFlagMomentsComments then ExtractCommentsByFeedItemIdModule(p2.items) else nil
 			}
 		end
 	})

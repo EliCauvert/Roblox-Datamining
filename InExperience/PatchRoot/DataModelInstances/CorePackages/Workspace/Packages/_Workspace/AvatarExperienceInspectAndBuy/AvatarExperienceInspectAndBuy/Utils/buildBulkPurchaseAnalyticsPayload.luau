@@ -1,54 +1,54 @@
-﻿local avatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
-local _ = require(avatarExperienceInspectAndBuy.Types)
-local itemTypeEnum = require(avatarExperienceInspectAndBuy.Parent.AvatarExperienceModel).Enums.ItemTypeEnum
-local _ = require(avatarExperienceInspectAndBuy.Stores.createItemSelectionStore)
-local convertAssetInfoToItemDataModule = require(avatarExperienceInspectAndBuy.Utils.convertAssetInfoToItemData)
-local convertBundleInfoToItemDataModule = require(avatarExperienceInspectAndBuy.Utils.convertBundleInfoToItemData)
-local getPriceStatusModule = require(avatarExperienceInspectAndBuy.Utils.getPriceStatus)
-local _ = require(avatarExperienceInspectAndBuy.Enums.PriceStatus)
-local getPriceInRobux = require(avatarExperienceInspectAndBuy.Utils.itemDetailsUtils).getPriceInRobux
+﻿local AvatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
+local _ = require(AvatarExperienceInspectAndBuy.Types)
+local ItemTypeEnum = require(AvatarExperienceInspectAndBuy.Parent.AvatarExperienceModel).Enums.ItemTypeEnum
+local _ = require(AvatarExperienceInspectAndBuy.Stores.createItemSelectionStore)
+local ConvertAssetInfoToItemDataModule = require(AvatarExperienceInspectAndBuy.Utils.convertAssetInfoToItemData)
+local ConvertBundleInfoToItemDataModule = require(AvatarExperienceInspectAndBuy.Utils.convertBundleInfoToItemData)
+local GetPriceStatusModule = require(AvatarExperienceInspectAndBuy.Utils.getPriceStatus)
+local _ = require(AvatarExperienceInspectAndBuy.Enums.PriceStatus)
+local GetPriceInRobuxFunction = require(AvatarExperienceInspectAndBuy.Utils.itemDetailsUtils).getPriceInRobux
 
-return function(p1)
-	-- upvalues: itemTypeEnum (ref), convertAssetInfoToItemDataModule (ref), getPriceStatusModule (ref), getPriceInRobux (ref), convertBundleInfoToItemDataModule (ref)
-	local var1, assetTypeId
-	local itemId = p1.itemId
-	local collectibleResellableInstances = p1.collectibleResellableInstances
-	local storedData = p1.storedData
-	local _ = nil
-	local _ = nil
-	local days = nil
+return function(p1) --[[ Line: 47 | Named "buildBulkPurchaseAnalyticsPayload" ]]
+	-- upvalues: ItemTypeEnum (copy), ConvertAssetInfoToItemDataModule (copy), GetPriceStatusModule (copy), GetPriceInRobuxFunction (copy), ConvertBundleInfoToItemDataModule (copy)
+	local ItemId = p1.itemId
+	local CollectibleResellableInstances = p1.collectibleResellableInstances
+	local StoredData = p1.storedData
+	local Days = nil
+	local PriceInRobux = nil
+	local AssetTypeId = nil
 	
-	if p1.itemType == itemTypeEnum.Asset then
-		local var2 = p1.assetsMap and p1.assetsMap[itemId]
+	if p1.itemType == ItemTypeEnum.Asset then
+		local Assets = p1.assetsMap and p1.assetsMap[ItemId]
 		
-		if not var2 then
+		if not Assets then
 			return nil
 		end
-		local var3 = convertAssetInfoToItemDataModule(var2, if var2.collectibleItemId and collectibleResellableInstances then collectibleResellableInstances[var2.collectibleItemId] else nil)
-		var1 = getPriceInRobux(var3, getPriceStatusModule(var3, true))
-		assetTypeId = var2.assetTypeId
+		local ConvertAssetInfoToItemDataModuleResult = ConvertAssetInfoToItemDataModule(Assets, if Assets.collectibleItemId and CollectibleResellableInstances then CollectibleResellableInstances[Assets.collectibleItemId] else nil)
+		PriceInRobux = GetPriceInRobuxFunction(ConvertAssetInfoToItemDataModuleResult, (GetPriceStatusModule(ConvertAssetInfoToItemDataModuleResult, true)))
+		AssetTypeId = Assets.assetTypeId
 		
-		if storedData and storedData.timedOptions then
-			for i, v in storedData.timedOptions do
-				if v.selected then
-					days = v.days
-					var1 = v.price
+		if StoredData and StoredData.timedOptions then
+			for _, timedOption in StoredData.timedOptions do
+				if timedOption.selected then
+					Days = timedOption.days
+					PriceInRobux = timedOption.price
+					break
 				end
 			end
 		end
 	else
-		local var4 = p1.bundlesMap and p1.bundlesMap[itemId]
+		local Bundles = p1.bundlesMap and p1.bundlesMap[ItemId]
 		
-		if not var4 then
+		if not Bundles then
 			return nil
 		end
-		local var5 = convertBundleInfoToItemDataModule(var4, if var4.collectibleItemId and collectibleResellableInstances then collectibleResellableInstances[var4.collectibleItemId] else nil)
-		var1 = getPriceInRobux(var5, getPriceStatusModule(var5, true))
-		assetTypeId = if var5 then var5.itemSubType else nil
+		local ConvertBundleInfoToItemDataModuleResult = ConvertBundleInfoToItemDataModule(Bundles, if Bundles.collectibleItemId and CollectibleResellableInstances then CollectibleResellableInstances[Bundles.collectibleItemId] else nil)
+		PriceInRobux = GetPriceInRobuxFunction(ConvertBundleInfoToItemDataModuleResult, (GetPriceStatusModule(ConvertBundleInfoToItemDataModuleResult, true)))
+		AssetTypeId = if ConvertBundleInfoToItemDataModuleResult then ConvertBundleInfoToItemDataModuleResult.itemSubType else nil
 	end
 	return {
-		itemSubType = assetTypeId,
-		timedOptionDays = days,
-		price = var1
+		itemSubType = AssetTypeId,
+		timedOptionDays = Days,
+		price = PriceInRobux
 	}
 end

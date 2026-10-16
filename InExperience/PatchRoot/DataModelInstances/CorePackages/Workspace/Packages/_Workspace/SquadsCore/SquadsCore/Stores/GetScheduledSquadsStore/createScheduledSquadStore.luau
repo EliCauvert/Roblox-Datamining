@@ -1,51 +1,51 @@
-﻿local squadsCore = script:FindFirstAncestor("SquadsCore")
-local parent = squadsCore.Parent
-local cryoModule = require(parent.Cryo)
-local signalsModule = require(parent.Signals)
-local createComputed = signalsModule.createComputed
-local getSubscribedScheduledSquads = require(squadsCore.NetworkRequests).getSubscribedScheduledSquads
-local getScheduledSquadStatus = require(squadsCore.NetworkRequests).getScheduledSquadStatus
-local _ = require(squadsCore.Types)
+﻿local SquadsCore = script:FindFirstAncestor("SquadsCore")
+local Parent = SquadsCore.Parent
+local CryoModule = require(Parent.Cryo)
+local SignalsModule = require(Parent.Signals)
+local CreateComputedFunction = SignalsModule.createComputed
+local GetSubscribedScheduledSquadsFunction = require(SquadsCore.NetworkRequests).getSubscribedScheduledSquads
+local GetScheduledSquadStatusFunction = require(SquadsCore.NetworkRequests).getScheduledSquadStatus
+local _ = require(SquadsCore.Types)
 
-return function()
-	-- upvalues: signalsModule (ref), createComputed (ref), getSubscribedScheduledSquads (ref), cryoModule (ref), getScheduledSquadStatus (ref)
-	local var1, var2 = signalsModule.createSignal({})
-	local var3, var4 = signalsModule.createSignal({})
+return function() --[[ Line: 25 ]]
+	-- upvalues: SignalsModule (copy), CreateComputedFunction (copy), GetSubscribedScheduledSquadsFunction (copy), CryoModule (copy), GetScheduledSquadStatusFunction (copy)
+	local Signal, Signal2 = SignalsModule.createSignal({})
+	local Signal1, Signal2_1 = SignalsModule.createSignal({})
 	
-	local _ = function(p1)
-		-- upvalues: var3 (ref), var4 (ref), cryoModule (copy)
-		var4(cryoModule.Dictionary.join(var3(false), { [p1.scheduledGroupUpId] = p1 }))
+	local function _(p1) --[[ Line: 44 ]]
+		-- upvalues: Signal1 (copy), Signal2_1 (copy), CryoModule (upval)
+		Signal2_1(CryoModule.Dictionary.join(Signal1(false), { [p1.scheduledGroupUpId] = p1 }))
 	end
 	
 	return {
-		getSubscribedScheduledSquads = createComputed(function(p1)
-			-- upvalues: var1 (ref)
-			return var1(p1)
+		getSubscribedScheduledSquads = CreateComputedFunction(function(p1) --[[ Line: 30 ]]
+			-- upvalues: Signal (copy)
+			return Signal(p1)
 		end),
-		getScheduledSquadsStatus = createComputed(function(p1)
-			-- upvalues: var3 (ref)
-			return var3(p1)
+		getScheduledSquadsStatus = CreateComputedFunction(function(p1) --[[ Line: 34 ]]
+			-- upvalues: Signal1 (copy)
+			return Signal1(p1)
 		end),
-		fetchSubscribedScheduledSquads = function()
-			-- upvalues: getSubscribedScheduledSquads (copy), var2 (ref)
-			getSubscribedScheduledSquads(function(p1)
-				-- upvalues: var2 (copy)
-				var2(p1)
+		fetchSubscribedScheduledSquads = function() --[[ Line: 38 ]]
+			-- upvalues: GetSubscribedScheduledSquadsFunction (upval), Signal2 (copy)
+			GetSubscribedScheduledSquadsFunction(function(p1) --[[ Line: 39 ]]
+				-- upvalues: Signal2 (upval)
+				Signal2(p1)
 			end, nil)
 		end,
-		fetchAndCacheScheduledSquadStatus = function(p1, p2)
-			-- upvalues: getScheduledSquadStatus (copy), var3 (ref), var4 (ref), cryoModule (copy)
-			getScheduledSquadStatus(p1, function(p3)
-				-- upvalues: var3 (copy), var4 (copy), cryoModule (copy), p2 (ref)
-				var4(cryoModule.Dictionary.join(var3(false), { [p3.scheduledGroupUpId] = p3 }))
+		fetchAndCacheScheduledSquadStatus = function(p1, Callback) --[[ Line: 49 ]]
+			-- upvalues: GetScheduledSquadStatusFunction (upval), Signal1 (copy), Signal2_1 (copy), CryoModule (upval)
+			GetScheduledSquadStatusFunction(p1, function(p2) --[[ Line: 50 ]]
+				-- upvalues: Signal1 (upval), Signal2_1 (upval), CryoModule (upval), Callback (copy)
+				Signal2_1(CryoModule.Dictionary.join(Signal1(false), { [p2.scheduledGroupUpId] = p2 }))
 				
-				if p2 then
-					p2()
+				if Callback then
+					Callback()
 				end
-			end, function()
-				-- upvalues: p2 (ref)
-				if p2 then
-					p2()
+			end, function() --[[ Line: 55 ]]
+				-- upvalues: Callback (copy)
+				if Callback then
+					Callback()
 				end
 			end)
 		end

@@ -1,1 +1,1 @@
-﻿return require(script:FindFirstAncestor("FriendsChat").Parent.Signals).createComputed(require(script.createFriendsChatNavigationStore))
+﻿return require(script:FindFirstAncestor("FriendsChat").Parent.Signals).createComputed((require(script.createFriendsChatNavigationStore)))

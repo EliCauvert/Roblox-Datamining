@@ -1,11 +1,11 @@
-﻿local llamaModule = require(script:FindFirstAncestor("FriendsRodux").Parent.llama)
+﻿local LlamaModule = require(script:FindFirstAncestor("FriendsRodux").Parent.llama)
 
-return function(p1, p2)
-	-- upvalues: llamaModule (ref)
-	local t = {}
+return function(p1, List) --[[ Line: 5 ]]
+	-- upvalues: LlamaModule (copy)
+	local Nones = {}
 	
-	for i, v in pairs(p2) do
-		t[v] = llamaModule.None
+	for _, value in pairs(List) do
+		Nones[value] = LlamaModule.None
 	end
-	return llamaModule.Dictionary.join(p1, t)
+	return LlamaModule.Dictionary.join(p1, Nones)
 end

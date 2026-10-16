@@ -1,94 +1,82 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local robloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
-local shareGame = robloxGui.Modules.Settings.Pages.ShareGame
-local roactModule = require(corePackagesService.Packages.Roact)
-local constantsModule = require(shareGame.Constants)
-local shareGameIconsModule = require(shareGame.Spritesheets.ShareGameIcons)
-local friendsFrame = shareGameIconsModule:GetFrame("friends")
-local imagePath = shareGameIconsModule:GetImagePath()
-local themeModule = require(robloxGui.Modules.Settings.Theme)
-local var1 = require(shareGame.getTranslator)()
-local noFriendsPage = roactModule.PureComponent:extend("NoFriendsPage")
+﻿local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
+local ShareGame = RobloxGui.Modules.Settings.Pages.ShareGame
+local RoactModule = require(game:GetService("CorePackages").Packages.Roact)
+local ConstantsModule = require(ShareGame.Constants)
+local ShareGameIconsModule = require(ShareGame.Spritesheets.ShareGameIcons)
+local FriendsFrame = ShareGameIconsModule:GetFrame("friends")
+local ImagePath = ShareGameIconsModule:GetImagePath()
+local ThemeModule = require(RobloxGui.Modules.Settings.Theme)
+local Translator = require(ShareGame.getTranslator)()
+local NoFriendsPage = RoactModule.PureComponent:extend("NoFriendsPage")
 
-function noFriendsPage.render(p1)
-	-- upvalues: roactModule (ref), imagePath (ref), friendsFrame (ref), var1 (ref), constantsModule (ref), themeModule (ref)
-	local layoutOrder = p1.props.LayoutOrder
-	local zIndex = p1.props.ZIndex
-	local position = p1.props.Position
-	local var2 = 0
+function NoFriendsPage.render(p1) --[[ Line: 23 ]]
+	-- upvalues: RoactModule (copy), ImagePath (copy), FriendsFrame (copy), Translator (copy), ConstantsModule (copy), ThemeModule (copy)
+	local ZIndex = p1.props.ZIndex
+	local LayoutOrder = 0
 	
-	local function _()
-		-- upvalues: var2 (write)
-		var2 += 1
+	local function _(): number --[[ Line: 29 | Named "incrementLayoutOrder" ]]
+		-- upvalues: LayoutOrder (ref)
+		LayoutOrder += 1
 		
-		return var2
+		return LayoutOrder
 	end
 	
-	local createElement = roactModule.createElement
-	local var3 = "Frame"
-	local t = {
+	LayoutOrder += 1
+	local ImageLabel = RoactModule.createElement("ImageLabel", {
+		BackgroundTransparency = 1,
+		Image = ImagePath,
+		ImageRectOffset = FriendsFrame.offset,
+		ImageRectSize = FriendsFrame.size,
+		Size = UDim2.new(0, 72, 0, 72),
+		LayoutOrder = LayoutOrder,
+		ZIndex = ZIndex
+	})
+	LayoutOrder += 1
+	local config = {
+		BackgroundTransparency = 1,
+		Size = UDim2.new(0, 0, 0, 34),
+		LayoutOrder = LayoutOrder,
+		ZIndex = ZIndex
+	}
+	LayoutOrder += 1
+	local config1 = {
+		BackgroundTransparency = 1,
+		TextTransparency = 0.22,
+		TextWrapped = true,
+		Text = Translator:FormatByKey("Feature.SettingsHub.Label.NoFriendsScreen"),
+		TextColor3 = ConstantsModule.Color.GRAY5,
+		TextSize = ThemeModule.textSize(21),
+		Font = ThemeModule.font(Enum.Font.SourceSans),
+		LayoutOrder = LayoutOrder,
+		Size = UDim2.new(0, 280, 0, 42),
+		TextYAlignment = Enum.TextYAlignment.Top,
+		ZIndex = ZIndex
+	}
+	LayoutOrder += 1
+	
+	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.new(1, 0, 1, 0),
-		LayoutOrder = layoutOrder,
-		ZIndex = zIndex,
-		Position = position
-	}
-	local t_1 = {
-		listLayout = roactModule.createElement("UIListLayout", {
+		LayoutOrder = p1.props.LayoutOrder,
+		ZIndex = ZIndex,
+		Position = p1.props.Position
+	}, {
+		listLayout = RoactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
 			HorizontalAlignment = Enum.HorizontalAlignment.Center,
 			VerticalAlignment = Enum.VerticalAlignment.Center,
 			SortOrder = Enum.SortOrder.LayoutOrder
+		}),
+		friendsIcon = ImageLabel,
+		iconToSubtitleSpacer = RoactModule.createElement("Frame", config),
+		subtitle = RoactModule.createElement("TextLabel", config1),
+		bottomSpacer = RoactModule.createElement("Frame", {
+			BackgroundTransparency = 1,
+			Size = UDim2.new(0, 0, 0, 120),
+			LayoutOrder = LayoutOrder,
+			ZIndex = ZIndex
 		})
-	}
-	local createElement_1 = roactModule.createElement
-	local var4 = "ImageLabel"
-	local t_2 = {
-		BackgroundTransparency = 1,
-		Image = imagePath,
-		ImageRectOffset = friendsFrame.offset,
-		ImageRectSize = friendsFrame.size,
-		Size = UDim2.new(0, 72, 0, 72),
-		LayoutOrder = var2,
-		ZIndex = zIndex
-	}
-	var2 += 1
-	t_1.friendsIcon = createElement_1(var4, t_2)
-	local createElement_2 = roactModule.createElement
-	local var5 = "Frame"
-	local t_3 = {
-		BackgroundTransparency = 1,
-		Size = UDim2.new(0, 0, 0, 34),
-		LayoutOrder = var2,
-		ZIndex = zIndex
-	}
-	var2 += 1
-	t_1.iconToSubtitleSpacer = createElement_2(var5, t_3)
-	local createElement_3 = roactModule.createElement
-	local var6 = "TextLabel"
-	local t_4 = {
-		BackgroundTransparency = 1,
-		TextTransparency = 0.22,
-		TextWrapped = true,
-		Text = var1:FormatByKey("Feature.SettingsHub.Label.NoFriendsScreen"),
-		TextColor3 = constantsModule.Color.GRAY5,
-		TextSize = themeModule.textSize(21),
-		Font = themeModule.font(Enum.Font.SourceSans),
-		LayoutOrder = var2,
-		Size = UDim2.new(0, 280, 0, 42),
-		TextYAlignment = Enum.TextYAlignment.Top,
-		ZIndex = zIndex
-	}
-	var2 += 1
-	t_1.subtitle = createElement_3(var6, t_4)
-	t_1.bottomSpacer = roactModule.createElement("Frame", {
-		BackgroundTransparency = 1,
-		Size = UDim2.new(0, 0, 0, 120),
-		LayoutOrder = var2 + 1,
-		ZIndex = zIndex
 	})
-	
-	return createElement(var3, t, t_1)
 end
 
-return noFriendsPage
+return NoFriendsPage

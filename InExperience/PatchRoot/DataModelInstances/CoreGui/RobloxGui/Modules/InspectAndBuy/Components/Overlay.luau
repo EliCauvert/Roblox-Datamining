@@ -1,45 +1,46 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local reactModule = require(corePackagesService.Packages.React)
-local useSelector = require(corePackagesService.Workspace.Packages.RoactUtils).Hooks.RoactRodux.useSelector
-local useStyle = require(corePackagesService.Packages.UIBlox).Core.Style.useStyle
-local reactFocusNavigationModule = require(corePackagesService.Packages.ReactFocusNavigation)
-local var1 = reactFocusNavigationModule.FocusNavigationService.new(reactFocusNavigationModule.EngineInterface.CoreGui)
-local focusNavigationUtilsModule = require(corePackagesService.Workspace.Packages.FocusNavigationUtils)
-local provider = focusNavigationUtilsModule.FocusNavigableSurfaceRegistry.Provider
-local focusRoot = focusNavigationUtilsModule.FocusRoot
-local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
-local parent = script.Parent.Parent
-local colorsModule = require(parent.Colors)
-local overlayComponentsModule = require(parent.Components.OverlayComponents)
+﻿local CorePackages = game:GetService("CorePackages")
+local ReactModule = require(CorePackages.Packages.React)
+local UseSelectorFunction = require(CorePackages.Workspace.Packages.RoactUtils).Hooks.RoactRodux.useSelector
+local UseStyleFunction = require(CorePackages.Packages.UIBlox).Core.Style.useStyle
+local ReactFocusNavigationModule = require(CorePackages.Packages.ReactFocusNavigation)
+local NewResult = ReactFocusNavigationModule.FocusNavigationService.new(ReactFocusNavigationModule.EngineInterface.CoreGui)
+local FocusNavigationUtilsModule = require(CorePackages.Workspace.Packages.FocusNavigationUtils)
+local Provider = FocusNavigationUtilsModule.FocusNavigableSurfaceRegistry.Provider
+local FocusRoot = FocusNavigationUtilsModule.FocusRoot
+local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
+local Parent = script.Parent.Parent
+local ColorsModule = require(Parent.Colors)
+local OverlayComponentsModule = require(Parent.Components.OverlayComponents)
 
-local function selectOverlayComponent(p1)
-	-- upvalues: overlayComponentsModule (ref)
-	return overlayComponentsModule[p1.overlay.overlay]
+local function selectOverlayComponent(p1) --[[ Line: 31 ]]
+	-- upvalues: OverlayComponentsModule (copy)
+	return OverlayComponentsModule[p1.overlay.overlay]
 end
 
-local function selectOverlayProps(p1)
+local function selectOverlayProps(p1) --[[ Line: 35 ]]
 	return p1.overlay.overlayProps
 end
 
-return function(_)
-	-- upvalues: useSelector (ref), selectOverlayComponent (ref), selectOverlayProps (ref), useStyle (ref), reactModule (ref), reactFocusNavigationModule (ref), var1 (ref), provider (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), colorsModule (ref)
-	local var2 = useSelector(selectOverlayComponent)
+return function(_) --[[ Line: 39 | Named "Overlay" ]]
+	-- upvalues: UseSelectorFunction (copy), selectOverlayComponent (copy), selectOverlayProps (copy), UseStyleFunction (copy), ReactModule (copy), ReactFocusNavigationModule (copy), NewResult (copy), Provider (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), ColorsModule (copy)
+	local UseSelectorResult = UseSelectorFunction(selectOverlayComponent)
+	local UseSelectorResult1 = UseSelectorFunction(selectOverlayProps)
 	
-	return reactModule.createElement(reactFocusNavigationModule.FocusNavigationContext.Provider, { value = var1 }, {
-		FocusNavigationRegistryProvider = reactModule.createElement(provider, nil, {
-			FocusNavigationCoreScriptsWrapper = reactModule.createElement(focusRoot, {
+	return ReactModule.createElement(ReactFocusNavigationModule.FocusNavigationContext.Provider, { value = NewResult }, {
+		FocusNavigationRegistryProvider = ReactModule.createElement(Provider, nil, {
+			FocusNavigationCoreScriptsWrapper = ReactModule.createElement(FocusRoot, {
 				isIsolated = true,
 				isAutoFocusRoot = true,
-				surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.CentralOverlay
+				surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.CentralOverlay
 			}, {
-				OverlayContainer = reactModule.createElement("Frame", {
+				OverlayContainer = ReactModule.createElement("Frame", {
 					BorderSizePixel = 0,
-					BackgroundTransparency = useStyle().Tokens.Color.Common.Scrim.Transparency,
-					BackgroundColor3 = colorsModule.Black,
+					BackgroundTransparency = UseStyleFunction().Tokens.Color.Common.Scrim.Transparency,
+					BackgroundColor3 = ColorsModule.Black,
 					Size = UDim2.fromScale(1, 1),
-					Visible = var2 ~= nil
+					Visible = UseSelectorResult ~= nil
 				}, {
-					Overlay = var2 and reactModule.createElement(var2, useSelector(selectOverlayProps)) or nil
+					Overlay = UseSelectorResult and ReactModule.createElement(UseSelectorResult, UseSelectorResult1) or nil
 				})
 			})
 		})

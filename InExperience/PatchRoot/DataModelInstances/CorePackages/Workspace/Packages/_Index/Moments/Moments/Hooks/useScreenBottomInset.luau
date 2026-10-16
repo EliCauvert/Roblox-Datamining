@@ -1,9 +1,17 @@
-﻿local appNavBarModule = require(script:FindFirstAncestor("Moments").Parent.AppNavBar)
-local useNavBarSize = appNavBarModule.useNavBarSize
-local useNavBarPlacement = appNavBarModule.useNavBarPlacement
-local placement = appNavBarModule.Placement
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
+local AppNavBarModule = require(Parent.AppNavBar)
+local AppSystemBarModule = require(Parent.AppSystemBar)
+local FFlagMomentsFeedAboveNavBarModule = require(Moments.Flags.FFlagMomentsFeedAboveNavBar)
+local UseNavBarSizeFunction = AppNavBarModule.useNavBarSize
+local UseNavBarPlacementFunction = AppNavBarModule.useNavBarPlacement
+local Placement = AppNavBarModule.Placement
 
-return function()
-	-- upvalues: useNavBarPlacement (ref), useNavBarSize (ref), placement (ref)
-	return if useNavBarPlacement() == placement.Bottom then useNavBarSize() else 0
+return function() --[[ Line: 37 | Named "useScreenBottomInset" ]]
+	-- upvalues: UseNavBarPlacementFunction (copy), UseNavBarSizeFunction (copy), FFlagMomentsFeedAboveNavBarModule (copy), AppSystemBarModule (copy), Placement (copy)
+	local UseNavBarPlacementResult = UseNavBarPlacementFunction()
+	local UseNavBarSizeResult = UseNavBarSizeFunction()
+	local BOTTOMBARSIZE = if FFlagMomentsFeedAboveNavBarModule then AppSystemBarModule.Constants.BOTTOM_BAR_SIZE else UseNavBarSizeResult
+	
+	return if UseNavBarPlacementResult == Placement.Bottom then BOTTOMBARSIZE else 0
 end

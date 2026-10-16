@@ -1,8 +1,8 @@
-﻿local gameTile = script:FindFirstAncestor("GameTile")
-local getGameTileLayoutDataModule = require(gameTile.getGameTileLayoutData)
-local itemLayoutDataParsingUtilsModule = require(gameTile.ItemLayoutDataParsingUtils)
+﻿local GameTile = script:FindFirstAncestor("GameTile")
+local GetGameTileLayoutDataModule = require(GameTile.getGameTileLayoutData)
+local ItemLayoutDataParsingUtilsModule = require(GameTile.ItemLayoutDataParsingUtils)
 
-return function(value, p1, p2)
-	-- upvalues: getGameTileLayoutDataModule (ref), itemLayoutDataParsingUtilsModule (ref)
-	return value or (itemLayoutDataParsingUtilsModule.getWideImageAssetId(getGameTileLayoutDataModule(p1, p2)) or (if p1 then p1.primaryWideAssetId else nil))
+return function(p1, p2, p3) --[[ Line: 20 | Named "resolveWideAssetId" ]]
+	-- upvalues: GetGameTileLayoutDataModule (copy), ItemLayoutDataParsingUtilsModule (copy)
+	return if p1 then p1 else ItemLayoutDataParsingUtilsModule.getWideImageAssetId((GetGameTileLayoutDataModule(p2, p3))) or (p2 and p2.primaryWideAssetId or nil)
 end

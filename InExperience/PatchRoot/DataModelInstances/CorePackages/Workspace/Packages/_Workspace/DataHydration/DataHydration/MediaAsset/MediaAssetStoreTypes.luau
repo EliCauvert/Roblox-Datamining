@@ -1,13 +1,13 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local tModule = require(dataHydration.Parent.t)
-local _ = require(dataHydration.DataHydrationTypes)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local TModule = require(DataHydration.Parent.t)
+local _ = require(DataHydration.DataHydrationTypes)
 
 return {
-	mediaAssetResponseItemValidator = tModule.interface({
-		imageId = tModule.optional(tModule.union(tModule.number, tModule.string)),
-		assetTypeId = tModule.optional(tModule.number),
-		videoId = tModule.optional(tModule.union(tModule.number, tModule.string)),
-		videoHash = tModule.optional(tModule.string),
-		videoTitle = tModule.optional(tModule.string)
+	mediaAssetResponseItemValidator = TModule.interface({
+		imageId = TModule.optional(TModule.union(TModule.number, TModule.string)),
+		assetTypeId = TModule.optional(TModule.number),
+		videoId = TModule.optional(TModule.union(TModule.number, TModule.string)),
+		videoHash = TModule.optional(TModule.string),
+		videoTitle = TModule.optional(TModule.string)
 	})
 }

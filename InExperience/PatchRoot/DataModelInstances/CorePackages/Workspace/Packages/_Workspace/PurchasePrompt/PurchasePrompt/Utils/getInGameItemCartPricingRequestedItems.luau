@@ -1,18 +1,19 @@
 ﻿local _ = require(script:FindFirstAncestor("PurchasePrompt").types)
 
-return function(p1)
-	if type(p1) ~= "table" then
+return function(p1) --[[ Line: 16 | Named "getInGameItemCartPricingRequestedItems" ]]
+	if type(p1) == "table" then
+		local Namespace = p1.namespace
+		local TargetIdentifier = p1.targetIdentifier
+		
+		return if type(Namespace) == "string" and Namespace ~= "" and (type(TargetIdentifier) == "string" and TargetIdentifier ~= "") then {
+			{
+				productIdentifier = {
+					namespace = Namespace,
+					targetIdentifier = TargetIdentifier
+				}
+			}
+		} else nil
+	else
 		return nil
 	end
-	local namespace = p1.namespace
-	local targetIdentifier = p1.targetIdentifier
-	
-	return if not (type(namespace) ~= "string" or namespace == "") then if type(targetIdentifier) == "string" and targetIdentifier ~= "" then {
-		{
-			productIdentifier = {
-				namespace = namespace,
-				targetIdentifier = targetIdentifier
-			}
-		}
-	} else nil else nil
 end

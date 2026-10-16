@@ -1,8 +1,8 @@
-﻿local avatarExperienceRodux = script:FindFirstAncestor("AvatarExperienceRodux")
-local parent = avatarExperienceRodux.Parent
+﻿local AvatarExperienceRodux = script:FindFirstAncestor("AvatarExperienceRodux")
+local Parent = AvatarExperienceRodux.Parent
 
-return require(parent.Rodux).createReducer(require(parent.AvatarExperienceNavigation).AvatarRoute.AvatarRoute.new({}), {
-	[require(avatarExperienceRodux.Actions.SetAvatarSceneRoute).name] = function(_, p1)
+return require(Parent.Rodux).createReducer(require(Parent.AvatarExperienceNavigation).AvatarRoute.AvatarRoute.new({}), {
+	[require(AvatarExperienceRodux.Actions.SetAvatarSceneRoute).name] = function(_, p1) --[[ Line: 16 ]]
 		return p1.avatarRoute
 	end
 })

@@ -1,34 +1,35 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local guiService = game:GetService("GuiService")
-local robloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
-local userInputService = game:GetService("UserInputService")
-local fFlagEnableConsoleExpControls = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagEnableConsoleExpControls
+﻿local GuiService = game:GetService("GuiService")
+local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
+local UserInputService = game:GetService("UserInputService")
+local FFlagEnableConsoleExpControls = require(game:GetService("CorePackages").Workspace.Packages.SharedFlags).FFlagEnableConsoleExpControls
 
-function dismissRobloxMenuAndRun(p1)
-	-- upvalues: fFlagEnableConsoleExpControls (ref), userInputService (ref), guiService (ref), robloxGui (ref)
-	if fFlagEnableConsoleExpControls and userInputService.GamepadEnabled then
-		guiService.SelectedCoreObject = nil
+function dismissRobloxMenuAndRun(Callback: (any) -> ()) --[[ Line: 10 ]]
+	-- upvalues: FFlagEnableConsoleExpControls (copy), UserInputService (copy), GuiService (copy), RobloxGui (copy)
+	if FFlagEnableConsoleExpControls and UserInputService.GamepadEnabled then
+		GuiService.SelectedCoreObject = nil
 	end
-	local settingsHubModule = require(robloxGui.Modules.Settings.SettingsHub)
+	local SettingsHubModule = require(RobloxGui.Modules.Settings.SettingsHub)
 	
-	if guiService.MenuIsOpen then
-		local var1 = tick() + 3
-		local menuClosedConnection = nil
-		menuClosedConnection = guiService.MenuClosed:Connect(function()
-			-- upvalues: menuClosedConnection (write), var1 (ref), p1 (ref)
-			if menuClosedConnection then
-				menuClosedConnection:Disconnect()
-				menuClosedConnection = nil
+	if GuiService.MenuIsOpen then
+		local NewCurrentTime = tick() + 3
+		local Connection = nil
+		Connection = GuiService.MenuClosed:Connect(function() --[[ Line: 20 ]]
+			-- upvalues: Connection (ref), NewCurrentTime (copy), Callback (copy)
+			if Connection then
+				Connection:Disconnect()
+				Connection = nil
 			end
-			if tick() < var1 then
-				p1(true)
+			if tick() < NewCurrentTime then
+				Callback(true)
 			end
 		end)
-		settingsHubModule:SetVisibility(false)
+		SettingsHubModule:SetVisibility(false)
 		
 		return
+	else
+		local Connection = false
+		Callback(Connection)
 	end
-	p1(false)
 end
 
 return { dismissRobloxMenuAndRun = dismissRobloxMenuAndRun }

@@ -1,45 +1,47 @@
-﻿local inExperienceShop = script:FindFirstAncestor("InExperienceShop")
-local parent = inExperienceShop.Parent
-local purchasePromptModule = require(parent.PurchasePrompt)
-local sharedFlagsModule = require(parent.SharedFlags)
-local getShopPurchasePayloadModule = require(inExperienceShop.Utils.getShopPurchasePayload)
-local fFlagEnablePurchasePayloadInExperienceShop = sharedFlagsModule.FFlagEnablePurchasePayloadInExperienceShop
-local fFlagPassShopPurchaseSurfaceToBuyModal = sharedFlagsModule.FFlagPassShopPurchaseSurfaceToBuyModal
-local fFlagSkipBuyDelayForExperienceShop = sharedFlagsModule.FFlagSkipBuyDelayForExperienceShop
-local _ = require(inExperienceShop.Types)
+﻿local InExperienceShop = script:FindFirstAncestor("InExperienceShop")
+local Parent = InExperienceShop.Parent
+local PurchasePromptModule = require(Parent.PurchasePrompt)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local GetShopPurchasePayloadModule = require(InExperienceShop.Utils.getShopPurchasePayload)
+local FFlagCategoryLoggingInShopPurchaseModule = require(InExperienceShop.Flags.FFlagCategoryLoggingInShopPurchase)
+local FFlagEnablePurchasePayloadInExperienceShop = SharedFlagsModule.FFlagEnablePurchasePayloadInExperienceShop
+local FFlagPassShopPurchaseSurfaceToBuyModal = SharedFlagsModule.FFlagPassShopPurchaseSurfaceToBuyModal
+local FFlagSkipBuyDelayForExperienceShop = SharedFlagsModule.FFlagSkipBuyDelayForExperienceShop
+local _ = require(InExperienceShop.Types)
 
-return function(p1, p2, p3)
-	-- upvalues: fFlagEnablePurchasePayloadInExperienceShop (ref), getShopPurchasePayloadModule (ref), purchasePromptModule (ref), fFlagPassShopPurchaseSurfaceToBuyModal (ref), inExperienceShop (ref), fFlagSkipBuyDelayForExperienceShop (ref)
-	if tonumber(p1) == nil then return end
-	local var1 = if fFlagEnablePurchasePayloadInExperienceShop then getShopPurchasePayloadModule() else nil
-	local initiatePurchaseForProductPayload = purchasePromptModule.initiatePurchaseForProductPayload
+return function(Id, p1, p2, p3) --[[ Line: 35 | Named "initiateShopItemPurchase" ]]
+	-- upvalues: FFlagEnablePurchasePayloadInExperienceShop (copy), GetShopPurchasePayloadModule (copy), FFlagCategoryLoggingInShopPurchaseModule (copy), PurchasePromptModule (copy), FFlagPassShopPurchaseSurfaceToBuyModal (copy), InExperienceShop (copy), FFlagSkipBuyDelayForExperienceShop (copy)
+	if tonumber(Id) == nil then return end
+	local ShopPurchasePayloadModule = if FFlagEnablePurchasePayloadInExperienceShop then GetShopPurchasePayloadModule(if FFlagCategoryLoggingInShopPurchaseModule then p3 else nil) else nil
+	local InitiatePurchaseForProductPayloadFunction: (any) -> () = PurchasePromptModule.initiatePurchaseForProductPayload
 	
-	if fFlagPassShopPurchaseSurfaceToBuyModal and p3 ~= nil then
-		local t = {
-			surface = require(inExperienceShop.Analytics.getShopPurchaseAnalyticsSurface)(p3)
+	if FFlagPassShopPurchaseSurfaceToBuyModal and p2 ~= nil then
+		local config = {
+			surface = require(InExperienceShop.Analytics.getShopPurchaseAnalyticsSurface)(p2)
 		}
 		
-		initiatePurchaseForProductPayload = function(p4)
-			-- upvalues: purchasePromptModule (copy), t (ref)
-			purchasePromptModule.initiatePurchaseForProductPayload(p4, t)
+		InitiatePurchaseForProductPayloadFunction = function(p4) --[[ Line: 58 ]]
+			-- upvalues: PurchasePromptModule (upval), config (copy)
+			PurchasePromptModule.initiatePurchaseForProductPayload(p4, config)
 		end
 	end
-	if p2 == "GamePass" then
-		initiatePurchaseForProductPayload({
+	if p1 == "GamePass" then
+		InitiatePurchaseForProductPayloadFunction({
 			kind = "Gamepass",
-			id = p1,
-			purchasePayload = var1,
-			isFromInExperienceShop = if fFlagSkipBuyDelayForExperienceShop then true else nil
+			id = Id,
+			purchasePayload = ShopPurchasePayloadModule,
+			isFromInExperienceShop = if FFlagSkipBuyDelayForExperienceShop then true else nil
 		})
 		
 		return
-	elseif p2 == "Product" then
-		initiatePurchaseForProductPayload({
+	end
+	if p1 == "Product" then
+		InitiatePurchaseForProductPayloadFunction({
 			kind = "Product",
 			equipIfPurchased = false,
-			id = p1,
-			purchasePayload = var1,
-			isFromInExperienceShop = if fFlagSkipBuyDelayForExperienceShop then true else nil
+			id = Id,
+			purchasePayload = ShopPurchasePayloadModule,
+			isFromInExperienceShop = if FFlagSkipBuyDelayForExperienceShop then true else nil
 		})
 	end
 end

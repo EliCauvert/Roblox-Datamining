@@ -1,4 +1,5 @@
-﻿local sharedFlagsModule = require(script:FindFirstAncestor("FocusNavigationUtils").Parent.SharedFlags)
+﻿local SharedFlagsModule = require(script:FindFirstAncestor("FocusNavigationUtils").Parent.SharedFlags)
+local FFlagEnableDrawerFocusNav = SharedFlagsModule.FFlagEnableDrawerFocusNav
 
 return {
 	ModerationOverlay = "ModerationOverlay",
@@ -11,6 +12,6 @@ return {
 	PopUp = "PopUp",
 	PeekView = "PeekView",
 	Auxiliary = "Auxiliary",
-	HeaderView = if sharedFlagsModule.FFlagAppIaHomeSubTab then "HeaderView" else nil,
-	Drawer = if sharedFlagsModule.FFlagEnableDrawerFocusNav then "Drawer" else nil
+	HeaderView = if SharedFlagsModule.FFlagAppIaHomeSubTab then "HeaderView" else nil,
+	Drawer = if FFlagEnableDrawerFocusNav then "Drawer" else nil
 }

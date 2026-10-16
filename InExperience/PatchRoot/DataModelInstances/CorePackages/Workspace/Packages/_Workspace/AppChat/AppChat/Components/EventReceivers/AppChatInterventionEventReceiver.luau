@@ -1,78 +1,79 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local reactModule = require(parent.React)
-local realtimeDeliveryModule = require(parent.RealtimeDelivery)
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local appChatNetworkingModule = require(parent.AppChatNetworking)
-local chatModerationStatusRefreshCoordinatorModule = require(appChat.Stores.ChatModerationStatusRefreshCoordinator)
-local getContainsChatSettingModule = require(appChat.Utils.getContainsChatSetting)
-local partyChatTimeoutReceivedSignal = require(parent.InterventionShared).Signals.partyChatTimeoutReceivedSignal
-local name = require(appChat.Logger):new(script.Name)
-local fFlagAppChatReactiveFeatureRestrictions = require(parent.SharedFlags).FFlagAppChatReactiveFeatureRestrictions
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local ReactModule = require(Parent.React)
+local RealtimeDeliveryModule = require(Parent.RealtimeDelivery)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local AppChatNetworkingModule = require(Parent.AppChatNetworking)
+local ChatModerationStatusRefreshCoordinatorModule = require(AppChat.Stores.ChatModerationStatusRefreshCoordinator)
+local GetContainsChatSettingModule = require(AppChat.Utils.getContainsChatSetting)
+local PartyChatTimeoutReceivedSignal = require(Parent.InterventionShared).Signals.partyChatTimeoutReceivedSignal
+local NewResult = require(AppChat.Logger):new(script.Name)
+local FFlagAppChatReactiveFeatureRestrictions = require(Parent.SharedFlags).FFlagAppChatReactiveFeatureRestrictions
 
-return function(_)
-	-- upvalues: useDispatch (ref), fFlagAppChatReactiveFeatureRestrictions (ref), reactModule (ref), chatModerationStatusRefreshCoordinatorModule (ref), realtimeDeliveryModule (ref), getContainsChatSettingModule (ref), appChatNetworkingModule (ref), name (ref), partyChatTimeoutReceivedSignal (ref)
-	local var1 = useDispatch()
-	local var2 = if fFlagAppChatReactiveFeatureRestrictions then reactModule.useMemo(function()
-		-- upvalues: chatModerationStatusRefreshCoordinatorModule (copy)
-		return chatModerationStatusRefreshCoordinatorModule.createOwner()
-	end, { var1 }) else nil
-	realtimeDeliveryModule.useRealtimeNamespace("UserSettingsChanged", function(p1)
-		-- upvalues: getContainsChatSettingModule (copy), fFlagAppChatReactiveFeatureRestrictions (copy), chatModerationStatusRefreshCoordinatorModule (copy), var2 (ref), var1 (ref), appChatNetworkingModule (copy), name (copy)
-		if p1.SettingsChanged and getContainsChatSettingModule(p1.SettingsChanged) then
-			if fFlagAppChatReactiveFeatureRestrictions then
-				chatModerationStatusRefreshCoordinatorModule.enqueue(var2, function()
-					-- upvalues: var1 (copy), appChatNetworkingModule (copy)
-					return var1(appChatNetworkingModule.rodux.GetChatModerationStatuses.API())
-				end).promise:catch(function(p2)
-					-- upvalues: name (copy)
-					name:warning("NetworkingChat failure in UserSettingsChanged->GetChatModerationStatuses, Status: " .. tostring(p2))
+return function(_) --[[ Line: 18 | Named "AppChatInterventionEventReceiver" ]]
+	-- upvalues: UseDispatchFunction (copy), FFlagAppChatReactiveFeatureRestrictions (copy), ReactModule (copy), ChatModerationStatusRefreshCoordinatorModule (copy), RealtimeDeliveryModule (copy), GetContainsChatSettingModule (copy), AppChatNetworkingModule (copy), NewResult (copy), PartyChatTimeoutReceivedSignal (copy)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseMemoResult = if FFlagAppChatReactiveFeatureRestrictions then ReactModule.useMemo(function() --[[ Line: 22 ]]
+		-- upvalues: ChatModerationStatusRefreshCoordinatorModule (upval)
+		return ChatModerationStatusRefreshCoordinatorModule.createOwner()
+	end, { UseDispatchResult }) else nil
+	RealtimeDeliveryModule.useRealtimeNamespace("UserSettingsChanged", function(p1) --[[ Line: 29 ]]
+		-- upvalues: GetContainsChatSettingModule (upval), FFlagAppChatReactiveFeatureRestrictions (upval), ChatModerationStatusRefreshCoordinatorModule (upval), UseMemoResult (copy), UseDispatchResult (copy), AppChatNetworkingModule (upval), NewResult (upval)
+		if p1.SettingsChanged and GetContainsChatSettingModule(p1.SettingsChanged) then
+			if FFlagAppChatReactiveFeatureRestrictions then
+				ChatModerationStatusRefreshCoordinatorModule.enqueue(UseMemoResult, function() --[[ Line: 33 ]]
+					-- upvalues: UseDispatchResult (upval), AppChatNetworkingModule (upval)
+					return UseDispatchResult(AppChatNetworkingModule.rodux.GetChatModerationStatuses.API())
+				end).promise:catch(function(Err) --[[ Line: 36 ]]
+					-- upvalues: NewResult (upval)
+					NewResult:warning("NetworkingChat failure in UserSettingsChanged->GetChatModerationStatuses, Status: " .. tostring(Err))
 				end)
 				
 				return
 			end
-			var1(appChatNetworkingModule.rodux.GetChatModerationStatuses.API()):catch(function(p2)
-				-- upvalues: name (copy)
-				name:warning("NetworkingChat failure in UserSettingsChanged->GetChatModerationStatuses, Status: " .. tostring(p2))
+			UseDispatchResult(AppChatNetworkingModule.rodux.GetChatModerationStatuses.API()):catch(function(Err) --[[ Line: 43 ]]
+				-- upvalues: NewResult (upval)
+				NewResult:warning("NetworkingChat failure in UserSettingsChanged->GetChatModerationStatuses, Status: " .. tostring(Err))
 			end)
 		end
 	end, {
-		if fFlagAppChatReactiveFeatureRestrictions then var2 else var1,
-		var1
+		if FFlagAppChatReactiveFeatureRestrictions then UseMemoResult else UseDispatchResult,
+		UseDispatchResult
 	})
-	reactModule.useEffect(function()
-		-- upvalues: partyChatTimeoutReceivedSignal (copy), fFlagAppChatReactiveFeatureRestrictions (copy), chatModerationStatusRefreshCoordinatorModule (copy), var2 (ref), var1 (ref), appChatNetworkingModule (copy), name (copy)
-		local var3 = partyChatTimeoutReceivedSignal:connect(function(p1)
-			-- upvalues: fFlagAppChatReactiveFeatureRestrictions (copy), chatModerationStatusRefreshCoordinatorModule (copy), var2 (copy), var1 (copy), appChatNetworkingModule (copy), name (copy)
-			if fFlagAppChatReactiveFeatureRestrictions then
-				chatModerationStatusRefreshCoordinatorModule.enqueue(var2, function()
-					-- upvalues: var1 (copy), appChatNetworkingModule (copy), p1 (ref)
-					return var1(appChatNetworkingModule.rodux.GetChatModerationStatuses.API(if p1 then { p1 } else {}))
-				end).promise:catch(function(p2)
-					-- upvalues: name (copy)
-					name:warning("NetworkingChat failure in partyChatTimeoutReceivedSignal->GetChatModerationStatuses, Status: " .. tostring(p2))
+	ReactModule.useEffect(function() --[[ Line: 60 ]]
+		-- upvalues: PartyChatTimeoutReceivedSignal (upval), FFlagAppChatReactiveFeatureRestrictions (upval), ChatModerationStatusRefreshCoordinatorModule (upval), UseMemoResult (copy), UseDispatchResult (copy), AppChatNetworkingModule (upval), NewResult (upval)
+		local Connection = PartyChatTimeoutReceivedSignal:connect(function(p1) --[[ Line: 61 ]]
+			-- upvalues: FFlagAppChatReactiveFeatureRestrictions (upval), ChatModerationStatusRefreshCoordinatorModule (upval), UseMemoResult (upval), UseDispatchResult (upval), AppChatNetworkingModule (upval), NewResult (upval)
+			if FFlagAppChatReactiveFeatureRestrictions then
+				ChatModerationStatusRefreshCoordinatorModule.enqueue(UseMemoResult, function() --[[ Line: 63 ]]
+					-- upvalues: UseDispatchResult (upval), AppChatNetworkingModule (upval), p1 (copy)
+					return UseDispatchResult(AppChatNetworkingModule.rodux.GetChatModerationStatuses.API(if p1 then { p1 } else {}))
+				end).promise:catch(function(Err) --[[ Line: 70 ]]
+					-- upvalues: NewResult (upval)
+					NewResult:warning("NetworkingChat failure in partyChatTimeoutReceivedSignal->GetChatModerationStatuses, Status: " .. tostring(Err))
 				end)
 				
 				return
+			else
+				UseDispatchResult(AppChatNetworkingModule.rodux.GetChatModerationStatuses.API(if p1 then { p1 } else {})):catch(function(Err) --[[ Line: 81 ]]
+					-- upvalues: NewResult (upval)
+					NewResult:warning("NetworkingChat failure in partyChatTimeoutReceivedSignal->GetChatModerationStatuses, Status: " .. tostring(Err))
+				end)
 			end
-			var1(appChatNetworkingModule.rodux.GetChatModerationStatuses.API(if p1 then { p1 } else {})):catch(function(p2)
-				-- upvalues: name (copy)
-				name:warning("NetworkingChat failure in partyChatTimeoutReceivedSignal->GetChatModerationStatuses, Status: " .. tostring(p2))
-			end)
 		end)
 		
-		return function()
-			-- upvalues: var3 (ref), fFlagAppChatReactiveFeatureRestrictions (copy), chatModerationStatusRefreshCoordinatorModule (copy), var2 (copy)
-			if var3 then
-				var3:disconnect()
+		return function() --[[ Line: 90 ]]
+			-- upvalues: Connection (copy), FFlagAppChatReactiveFeatureRestrictions (upval), ChatModerationStatusRefreshCoordinatorModule (upval), UseMemoResult (upval)
+			if Connection then
+				Connection:disconnect()
 			end
-			if fFlagAppChatReactiveFeatureRestrictions then
-				chatModerationStatusRefreshCoordinatorModule.cancelOwner(var2)
+			if FFlagAppChatReactiveFeatureRestrictions then
+				ChatModerationStatusRefreshCoordinatorModule.cancelOwner(UseMemoResult)
 			end
 		end
 	end, {
-		if fFlagAppChatReactiveFeatureRestrictions then var2 else var1,
-		var1
+		if FFlagAppChatReactiveFeatureRestrictions then UseMemoResult else UseDispatchResult,
+		UseDispatchResult
 	})
 	
 	return nil

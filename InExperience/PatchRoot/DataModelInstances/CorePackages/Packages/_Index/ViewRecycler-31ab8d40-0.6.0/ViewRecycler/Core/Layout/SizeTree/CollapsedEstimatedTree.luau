@@ -1,372 +1,378 @@
 ﻿local _ = require(script.Parent.ISizeTree)
-local weightedOrderStatisticTreeModule = require(script.Parent.WeightedOrderStatisticTree)
-local t = {}
+local WeightedOrderStatisticTreeModule = require(script.Parent.WeightedOrderStatisticTree)
 
-local function concatenateMergingUnmeasured(p1, p2)
-	-- upvalues: weightedOrderStatisticTreeModule (ref)
-	if p1 == nil then
-		return p2
-	elseif p2 == nil then
-		return p1
+local function concatenateMergingUnmeasured(Left, Node) --[[ Line: 13 ]]
+	-- upvalues: WeightedOrderStatisticTreeModule (copy)
+	if Left == nil then
+		return Node
+	elseif Node == nil then
+		return Left
+	else
+		local PopMaximumResult, PopMaximumResult2 = WeightedOrderStatisticTreeModule.popMaximum(Left)
+		local PopMinimumResult, PopMinimumResult2 = WeightedOrderStatisticTreeModule.popMinimum(Node)
+		
+		return if PopMaximumResult2.measuredSize == nil and PopMinimumResult2.measuredSize == nil then WeightedOrderStatisticTreeModule.join(PopMaximumResult, WeightedOrderStatisticTreeModule.newNode(PopMaximumResult2.itemCount + PopMinimumResult2.itemCount, nil), PopMinimumResult) else WeightedOrderStatisticTreeModule.concatenate(WeightedOrderStatisticTreeModule.join(PopMaximumResult, PopMaximumResult2, nil), WeightedOrderStatisticTreeModule.join(nil, PopMinimumResult2, PopMinimumResult))
 	end
-	local var1, var2 = weightedOrderStatisticTreeModule.popMaximum(p1)
-	local var3, var4 = weightedOrderStatisticTreeModule.popMinimum(p2)
-	
-	return if var2.measuredSize == nil and var4.measuredSize == nil then weightedOrderStatisticTreeModule.join(var1, weightedOrderStatisticTreeModule.newNode(var2.itemCount + var4.itemCount, nil), var3) else weightedOrderStatisticTreeModule.concatenate(weightedOrderStatisticTreeModule.join(var1, var2, nil), weightedOrderStatisticTreeModule.join(nil, var4, var3))
 end
 
-local function concatenatePieces(p1, p2, p3, p4, p5)
-	-- upvalues: concatenateMergingUnmeasured (ref), weightedOrderStatisticTreeModule (ref)
-	local var1 = p1
+local function concatenatePieces(Left, p1: number, Node, ItemCountDelta: number, Right) --[[ Line: 35 ]]
+	-- upvalues: concatenateMergingUnmeasured (copy), WeightedOrderStatisticTreeModule (copy)
+	local Left1 = Left
 	
-	if p2 > 0 then
-		var1 = concatenateMergingUnmeasured(var1, weightedOrderStatisticTreeModule.newNode(p2, nil))
+	if p1 > 0 then
+		Left1 = concatenateMergingUnmeasured(Left1, WeightedOrderStatisticTreeModule.newNode(p1, nil))
 	end
-	var1 = concatenateMergingUnmeasured(var1, p3)
+	local ConcatenateMergingUnmeasuredResult = concatenateMergingUnmeasured(Left1, Node)
 	
-	if p4 > 0 then
-		var1 = concatenateMergingUnmeasured(var1, weightedOrderStatisticTreeModule.newNode(p4, nil))
+	if ItemCountDelta > 0 then
+		ConcatenateMergingUnmeasuredResult = concatenateMergingUnmeasured(ConcatenateMergingUnmeasuredResult, WeightedOrderStatisticTreeModule.newNode(ItemCountDelta, nil))
 	end
-	return concatenateMergingUnmeasured(var1, p5)
+	return (concatenateMergingUnmeasured(ConcatenateMergingUnmeasuredResult, Right))
 end
 
-local function growUnmeasuredRun(p1, p2)
-	-- upvalues: weightedOrderStatisticTreeModule (ref), growUnmeasuredRun (ref)
-	if p1 == nil then
+local function growUnmeasuredRun(Balanced, p1) --[[ Line: 53 ]]
+	-- upvalues: WeightedOrderStatisticTreeModule (copy), growUnmeasuredRun (copy)
+	if Balanced == nil then
 		return nil, false
 	end
-	local var1 = weightedOrderStatisticTreeModule.nodeItemCount(p1.left)
+	local NodeItemCountResult = WeightedOrderStatisticTreeModule.nodeItemCount(Balanced.left)
 	
-	if p2 <= var1 then
-		local var2, var3 = growUnmeasuredRun(p1.left, p2)
-		p1.left = var2
+	if p1 <= NodeItemCountResult then
+		local GrowUnmeasuredRunResult2
+		Balanced.left, GrowUnmeasuredRunResult2 = growUnmeasuredRun(Balanced.left, p1)
 		
-		if var3 then
-			weightedOrderStatisticTreeModule.refresh(p1)
+		if GrowUnmeasuredRunResult2 then
+			WeightedOrderStatisticTreeModule.refresh(Balanced)
 		end
-		return p1, var3
-	elseif var1 + p1.itemCount < p2 then
-		local var4, var5 = growUnmeasuredRun(p1.right, p2 - var1 - p1.itemCount)
-		p1.right = var4
+		return Balanced, GrowUnmeasuredRunResult2
+	elseif NodeItemCountResult + Balanced.itemCount < p1 then
+		local GrowUnmeasuredRunResult2_1
+		Balanced.right, GrowUnmeasuredRunResult2_1 = growUnmeasuredRun(Balanced.right, p1 - NodeItemCountResult - Balanced.itemCount)
 		
-		if var5 then
-			weightedOrderStatisticTreeModule.refresh(p1)
+		if GrowUnmeasuredRunResult2_1 then
+			WeightedOrderStatisticTreeModule.refresh(Balanced)
 		end
-		return p1, var5
-	elseif p1.measuredSize == nil then
-		p1.itemCount += 1
-		weightedOrderStatisticTreeModule.refresh(p1)
+		return Balanced, GrowUnmeasuredRunResult2_1
+	elseif Balanced.measuredSize == nil then
+		Balanced.itemCount += 1
+		WeightedOrderStatisticTreeModule.refresh(Balanced)
 		
-		return p1, true
+		return Balanced, true
+	else
+		return Balanced, false
 	end
-	return p1, false
 end
 
-local function shrinkUnmeasuredRun(p1, p2)
-	-- upvalues: weightedOrderStatisticTreeModule (ref), shrinkUnmeasuredRun (ref)
-	if p1 == nil then
+local function shrinkUnmeasuredRun(Balanced, p1) --[[ Line: 82 ]]
+	-- upvalues: WeightedOrderStatisticTreeModule (copy), shrinkUnmeasuredRun (copy)
+	if Balanced == nil then
 		return nil, false
 	end
-	local var1 = weightedOrderStatisticTreeModule.nodeItemCount(p1.left)
+	local NodeItemCountResult = WeightedOrderStatisticTreeModule.nodeItemCount(Balanced.left)
 	
-	if p2 <= var1 then
-		local var2, var3 = shrinkUnmeasuredRun(p1.left, p2)
-		p1.left = var2
+	if p1 <= NodeItemCountResult then
+		local ShrinkUnmeasuredRunResult2
+		Balanced.left, ShrinkUnmeasuredRunResult2 = shrinkUnmeasuredRun(Balanced.left, p1)
 		
-		if var3 then
-			weightedOrderStatisticTreeModule.refresh(p1)
+		if ShrinkUnmeasuredRunResult2 then
+			WeightedOrderStatisticTreeModule.refresh(Balanced)
 		end
-		return p1, var3
-	elseif var1 + p1.itemCount < p2 then
-		local var4, var5 = shrinkUnmeasuredRun(p1.right, p2 - var1 - p1.itemCount)
-		p1.right = var4
+		return Balanced, ShrinkUnmeasuredRunResult2
+	elseif NodeItemCountResult + Balanced.itemCount < p1 then
+		local ShrinkUnmeasuredRunResult2_1
+		Balanced.right, ShrinkUnmeasuredRunResult2_1 = shrinkUnmeasuredRun(Balanced.right, p1 - NodeItemCountResult - Balanced.itemCount)
 		
-		if var5 then
-			weightedOrderStatisticTreeModule.refresh(p1)
+		if ShrinkUnmeasuredRunResult2_1 then
+			WeightedOrderStatisticTreeModule.refresh(Balanced)
 		end
-		return p1, var5
-	elseif p1.measuredSize == nil and p1.itemCount > 1 then
-		p1.itemCount -= 1
-		weightedOrderStatisticTreeModule.refresh(p1)
+		return Balanced, ShrinkUnmeasuredRunResult2_1
+	elseif Balanced.measuredSize == nil and Balanced.itemCount > 1 then
+		Balanced.itemCount -= 1
+		WeightedOrderStatisticTreeModule.refresh(Balanced)
 		
-		return p1, true
+		return Balanced, true
+	else
+		return Balanced, false
 	end
-	return p1, false
 end
 
-local function mergeAdjacentUnmeasured(p1)
-	-- upvalues: weightedOrderStatisticTreeModule (ref)
+local function mergeAdjacentUnmeasured(p1) --[[ Line: 111 ]]
+	-- upvalues: WeightedOrderStatisticTreeModule (copy)
 	if p1.measuredSize == nil then
 		if p1.left ~= nil then
-			local var1, var2 = weightedOrderStatisticTreeModule.popMaximum(p1.left)
+			local PopMaximumResult, PopMaximumResult2 = WeightedOrderStatisticTreeModule.popMaximum(p1.left)
 			
-			if var2.measuredSize == nil then
-				p1.itemCount += var2.itemCount
-				p1.left = var1
+			if PopMaximumResult2.measuredSize == nil then
+				p1.itemCount += PopMaximumResult2.itemCount
+				p1.left = PopMaximumResult
 			else
-				p1.left = weightedOrderStatisticTreeModule.join(var1, var2, nil)
+				p1.left = WeightedOrderStatisticTreeModule.join(PopMaximumResult, PopMaximumResult2, nil)
 			end
 		end
 		if p1.right ~= nil then
-			local var3, var4 = weightedOrderStatisticTreeModule.popMinimum(p1.right)
+			local PopMinimumResult, PopMinimumResult2 = WeightedOrderStatisticTreeModule.popMinimum(p1.right)
 			
-			if var4.measuredSize == nil then
-				p1.itemCount += var4.itemCount
-				p1.right = var3
+			if PopMinimumResult2.measuredSize == nil then
+				p1.itemCount += PopMinimumResult2.itemCount
+				p1.right = PopMinimumResult
 			else
-				p1.right = weightedOrderStatisticTreeModule.join(nil, var4, var3)
+				p1.right = WeightedOrderStatisticTreeModule.join(nil, PopMinimumResult2, PopMinimumResult)
 			end
 		end
 	end
-	return weightedOrderStatisticTreeModule.balance(p1)
+	return WeightedOrderStatisticTreeModule.balance(p1)
 end
 
-local function measureAt(p1, p2, p3)
-	-- upvalues: weightedOrderStatisticTreeModule (ref), measureAt (ref), mergeAdjacentUnmeasured (ref), concatenatePieces (ref)
-	if p1 == nil then
+local function measureAt(Balanced, p1, MeasuredSize) --[[ Line: 135 ]]
+	-- upvalues: WeightedOrderStatisticTreeModule (copy), measureAt (copy), mergeAdjacentUnmeasured (copy), concatenatePieces (copy)
+	if Balanced == nil then
 		return nil
 	end
-	local var1 = weightedOrderStatisticTreeModule.nodeItemCount(p1.left)
+	local NodeItemCountResult = WeightedOrderStatisticTreeModule.nodeItemCount(Balanced.left)
 	
-	if p2 <= var1 then
-		p1.left = measureAt(p1.left, p2, p3)
+	if p1 <= NodeItemCountResult then
+		Balanced.left = measureAt(Balanced.left, p1, MeasuredSize)
 		
-		return mergeAdjacentUnmeasured(p1)
-	elseif var1 + p1.itemCount < p2 then
-		p1.right = measureAt(p1.right, p2 - var1 - p1.itemCount, p3)
+		return mergeAdjacentUnmeasured(Balanced)
+	elseif NodeItemCountResult + Balanced.itemCount < p1 then
+		Balanced.right = measureAt(Balanced.right, p1 - NodeItemCountResult - Balanced.itemCount, MeasuredSize)
 		
-		return mergeAdjacentUnmeasured(p1)
-	elseif p1.itemCount == 1 then
-		p1.measuredSize = p3
+		return mergeAdjacentUnmeasured(Balanced)
+	elseif Balanced.itemCount == 1 then
+		Balanced.measuredSize = MeasuredSize
 		
-		return mergeAdjacentUnmeasured(p1)
-	end
-	local var2 = p2 - var1
-	
-	return concatenatePieces(p1.left, var2 - 1, weightedOrderStatisticTreeModule.newNode(1, p3), p1.itemCount - var2, p1.right)
-end
-
-local function unmeasureAt(p1, p2)
-	-- upvalues: weightedOrderStatisticTreeModule (ref), unmeasureAt (ref), mergeAdjacentUnmeasured (ref)
-	if p1 == nil then
-		return nil
-	end
-	local var1 = weightedOrderStatisticTreeModule.nodeItemCount(p1.left)
-	
-	if p2 <= var1 then
-		p1.left = unmeasureAt(p1.left, p2)
-	elseif var1 + p1.itemCount < p2 then
-		p1.right = unmeasureAt(p1.right, p2 - var1 - p1.itemCount)
+		return mergeAdjacentUnmeasured(Balanced)
 	else
-		assert(p1.itemCount == 1, "CollapsedEstimatedTree: unmeasure requires a unit node")
-		p1.measuredSize = nil
+		local v1 = p1 - NodeItemCountResult
+		
+		return (concatenatePieces(Balanced.left, v1 - 1, WeightedOrderStatisticTreeModule.newNode(1, MeasuredSize), Balanced.itemCount - v1, Balanced.right))
 	end
-	return mergeAdjacentUnmeasured(p1)
 end
 
-local function insertMeasuredAt(p1, p2, p3)
-	-- upvalues: weightedOrderStatisticTreeModule (ref), insertMeasuredAt (ref), mergeAdjacentUnmeasured (ref), concatenateMergingUnmeasured (ref), concatenatePieces (ref)
-	if p1 == nil then
-		return weightedOrderStatisticTreeModule.newNode(1, p3)
+local function unmeasureAt(Balanced, p1) --[[ Line: 162 ]]
+	-- upvalues: WeightedOrderStatisticTreeModule (copy), unmeasureAt (copy), mergeAdjacentUnmeasured (copy)
+	if Balanced == nil then
+		return nil
 	end
-	local var1 = weightedOrderStatisticTreeModule.nodeItemCount(p1.left)
+	local NodeItemCountResult = WeightedOrderStatisticTreeModule.nodeItemCount(Balanced.left)
 	
-	if p2 <= var1 then
-		p1.left = insertMeasuredAt(p1.left, p2, p3)
-		
-		return mergeAdjacentUnmeasured(p1)
-	elseif var1 + p1.itemCount < p2 then
-		p1.right = insertMeasuredAt(p1.right, p2 - var1 - p1.itemCount, p3)
-		
-		return mergeAdjacentUnmeasured(p1)
-	elseif p1.measuredSize == nil then
-		local var2 = p2 - var1
-		
-		return concatenatePieces(p1.left, var2 - 1, weightedOrderStatisticTreeModule.newNode(1, p3), p1.itemCount - var2 + 1, p1.right)
+	if p1 <= NodeItemCountResult then
+		Balanced.left = unmeasureAt(Balanced.left, p1)
+	elseif NodeItemCountResult + Balanced.itemCount < p1 then
+		Balanced.right = unmeasureAt(Balanced.right, p1 - NodeItemCountResult - Balanced.itemCount)
+	else
+		assert(Balanced.itemCount == 1, "CollapsedEstimatedTree: unmeasure requires a unit node")
+		Balanced.measuredSize = nil
 	end
-	local left = p1.left
-	local right = p1.right
-	p1.left = nil
-	p1.right = nil
-	weightedOrderStatisticTreeModule.refresh(p1)
-	
-	return concatenateMergingUnmeasured(concatenateMergingUnmeasured(left, weightedOrderStatisticTreeModule.newNode(1, p3)), weightedOrderStatisticTreeModule.concatenate(p1, right))
+	return mergeAdjacentUnmeasured(Balanced)
 end
 
-function t.new(p1)
-	-- upvalues: weightedOrderStatisticTreeModule (ref), measureAt (ref), unmeasureAt (ref), growUnmeasuredRun (ref), concatenateMergingUnmeasured (ref), insertMeasuredAt (ref), shrinkUnmeasuredRun (ref)
-	local var1 = nil
-	p1 = p1 or 0
-	
-	local function length()
-		-- upvalues: weightedOrderStatisticTreeModule (copy), var1 (write)
-		return weightedOrderStatisticTreeModule.nodeItemCount(var1)
+local function insertMeasuredAt(Balanced, p1, p2) --[[ Line: 179 ]]
+	-- upvalues: WeightedOrderStatisticTreeModule (copy), insertMeasuredAt (copy), mergeAdjacentUnmeasured (copy), concatenateMergingUnmeasured (copy), concatenatePieces (copy)
+	if Balanced == nil then
+		return WeightedOrderStatisticTreeModule.newNode(1, p2)
 	end
+	local NodeItemCountResult = WeightedOrderStatisticTreeModule.nodeItemCount(Balanced.left)
 	
-	return {
-		prefixSum = function(p2)
-			-- upvalues: weightedOrderStatisticTreeModule (copy), var1 (write), p1 (write)
-			return if p2 <= 1 then 0 else weightedOrderStatisticTreeModule.prefixSumUpTo(var1, p2 - 1, p1)
-		end,
-		indexAtPrefixSum = function(p2)
-			-- upvalues: weightedOrderStatisticTreeModule (copy), var1 (write), p1 (write)
-			local var2 = weightedOrderStatisticTreeModule.nodeItemCount(var1)
-			
-			return if var2 == 0 or p2 <= 0 then 1 elseif weightedOrderStatisticTreeModule.nodeEffectiveSum(var1, p1) <= p2 then var2 + 1 else weightedOrderStatisticTreeModule.entryAtPrefixSum(var1, p2, p1)
-		end,
-		entryAtPrefixSum = function(p2)
-			-- upvalues: weightedOrderStatisticTreeModule (copy), var1 (write), p1 (write)
-			local var2 = weightedOrderStatisticTreeModule.nodeItemCount(var1)
-			
-			if var2 == 0 then
-				return 1, 0, 0
-			elseif p2 <= 0 then
-				return 1, 0, weightedOrderStatisticTreeModule.measuredAt(var1, 1) or p1
-			end
-			local var3 = weightedOrderStatisticTreeModule.nodeEffectiveSum(var1, p1)
-			
-			if var3 <= p2 then
-				return var2 + 1, var3, 0
-			end
-			return weightedOrderStatisticTreeModule.entryAtPrefixSum(var1, p2, p1)
-		end,
-		getSize = function(p2)
-			-- upvalues: weightedOrderStatisticTreeModule (copy), var1 (write), p1 (write)
-			return if p2 < 1 or weightedOrderStatisticTreeModule.nodeItemCount(var1) < p2 then 0 else weightedOrderStatisticTreeModule.measuredAt(var1, p2) or p1
-		end,
-		fillRange = function(p2, p3, p4)
-			-- upvalues: weightedOrderStatisticTreeModule (copy), var1 (write), p1 (write)
-			weightedOrderStatisticTreeModule.fillRangeFromNode(var1, 0, 0, p2, p3, p1, p4)
-			
-			for i = #p4, p3 - p2 + 2, -1 do
-				p4[i] = nil
-			end
-		end,
-		update = function(p5, p6)
-			-- upvalues: weightedOrderStatisticTreeModule (copy), var1 (write), measureAt (copy), unmeasureAt (copy)
-			if p5 < 1 or weightedOrderStatisticTreeModule.nodeItemCount(var1) < p5 then return end
-			local var2 = weightedOrderStatisticTreeModule.measuredAt(var1, p5)
-			
-			if var2 ~= nil and p6 ~= nil then
-				var1 = weightedOrderStatisticTreeModule.updateAt(var1, p5, p6)
+	if p1 <= NodeItemCountResult then
+		Balanced.left = insertMeasuredAt(Balanced.left, p1, p2)
+		
+		return mergeAdjacentUnmeasured(Balanced)
+	elseif NodeItemCountResult + Balanced.itemCount < p1 then
+		Balanced.right = insertMeasuredAt(Balanced.right, p1 - NodeItemCountResult - Balanced.itemCount, p2)
+		
+		return mergeAdjacentUnmeasured(Balanced)
+	elseif Balanced.measuredSize == nil then
+		local v1 = p1 - NodeItemCountResult
+		
+		return (concatenatePieces(Balanced.left, v1 - 1, WeightedOrderStatisticTreeModule.newNode(1, p2), Balanced.itemCount - v1 + 1, Balanced.right))
+	else
+		local Left = Balanced.left
+		local Right = Balanced.right
+		Balanced.left = nil
+		Balanced.right = nil
+		WeightedOrderStatisticTreeModule.refresh(Balanced)
+		
+		return (concatenateMergingUnmeasured(concatenateMergingUnmeasured(Left, (WeightedOrderStatisticTreeModule.newNode(1, p2))), (WeightedOrderStatisticTreeModule.concatenate(Balanced, Right))))
+	end
+end
+
+return {
+	new = function(p1) --[[ Line: 210 ]]
+		-- upvalues: WeightedOrderStatisticTreeModule (copy), measureAt (copy), unmeasureAt (copy), growUnmeasuredRun (copy), concatenateMergingUnmeasured (copy), insertMeasuredAt (copy), shrinkUnmeasuredRun (copy)
+		local UpdateAtResult = nil
+		local P20 = p1 or 0
+		
+		local function length() --[[ Line: 214 ]]
+			-- upvalues: WeightedOrderStatisticTreeModule (upval), UpdateAtResult (ref)
+			return WeightedOrderStatisticTreeModule.nodeItemCount(UpdateAtResult)
+		end
+		
+		return {
+			prefixSum = function(p2: number) --[[ Line: 218 ]]
+				-- upvalues: WeightedOrderStatisticTreeModule (upval), UpdateAtResult (ref), P20 (ref)
+				return if p2 <= 1 then 0 else WeightedOrderStatisticTreeModule.prefixSumUpTo(UpdateAtResult, p2 - 1, P20)
+			end,
+			indexAtPrefixSum = function(p2: number) --[[ Line: 222 ]]
+				-- upvalues: WeightedOrderStatisticTreeModule (upval), UpdateAtResult (ref), P20 (ref)
+				local NodeItemCountResult: number = WeightedOrderStatisticTreeModule.nodeItemCount(UpdateAtResult)
 				
-				return
-			elseif var2 == nil and p6 ~= nil then
-				var1 = measureAt(var1, p5, p6)
+				return if NodeItemCountResult == 0 or p2 <= 0 then 1 elseif WeightedOrderStatisticTreeModule.nodeEffectiveSum(UpdateAtResult, P20) <= p2 then NodeItemCountResult + 1 else WeightedOrderStatisticTreeModule.entryAtPrefixSum(UpdateAtResult, p2, P20)
+			end,
+			entryAtPrefixSum = function(Balanced: number) --[[ Line: 235 ]]
+				-- upvalues: WeightedOrderStatisticTreeModule (upval), UpdateAtResult (ref), P20 (ref)
+				local NodeItemCountResult: number = WeightedOrderStatisticTreeModule.nodeItemCount(UpdateAtResult)
 				
-				return
-			elseif var2 ~= nil and p6 == nil then
-				var1 = unmeasureAt(var1, p5)
-			end
-		end,
-		insert = function(p5, p6)
-			-- upvalues: weightedOrderStatisticTreeModule (copy), var1 (write), growUnmeasuredRun (copy), concatenateMergingUnmeasured (copy), insertMeasuredAt (copy)
-			local var2 = weightedOrderStatisticTreeModule.nodeItemCount(var1)
-			
-			if var2 == 0 then
-				var1 = weightedOrderStatisticTreeModule.newNode(1, p6)
+				if NodeItemCountResult == 0 then
+					return 1, 0, 0
+				elseif Balanced <= 0 then
+					return 1, 0, WeightedOrderStatisticTreeModule.measuredAt(UpdateAtResult, 1) or P20
+				else
+					local NodeEffectiveSumResult = WeightedOrderStatisticTreeModule.nodeEffectiveSum(UpdateAtResult, P20)
+					
+					if NodeEffectiveSumResult <= Balanced then
+						return NodeItemCountResult + 1, NodeEffectiveSumResult, 0
+					else
+						return WeightedOrderStatisticTreeModule.entryAtPrefixSum(UpdateAtResult, Balanced, P20)
+					end
+				end
+			end,
+			getSize = function(p2: number) --[[ Line: 249 ]]
+				-- upvalues: WeightedOrderStatisticTreeModule (upval), UpdateAtResult (ref), P20 (ref)
+				return if p2 < 1 or WeightedOrderStatisticTreeModule.nodeItemCount(UpdateAtResult) < p2 then 0 else WeightedOrderStatisticTreeModule.measuredAt(UpdateAtResult, p2) or P20
+			end,
+			fillRange = function(p2, p3, p4) --[[ Line: 256 ]]
+				-- upvalues: WeightedOrderStatisticTreeModule (upval), UpdateAtResult (ref), P20 (ref)
+				WeightedOrderStatisticTreeModule.fillRangeFromNode(UpdateAtResult, 0, 0, p2, p3, P20, p4)
 				
-				return
-			elseif p6 ~= nil then
-				var1 = insertMeasuredAt(var1, p5, p6)
+				for i = #p4, p3 - p2 + 2, -1 do
+					p4[i] = nil
+				end
+			end,
+			update = function(p5: number, MeasuredSize) --[[ Line: 263 ]]
+				-- upvalues: WeightedOrderStatisticTreeModule (upval), UpdateAtResult (ref), measureAt (upval), unmeasureAt (upval)
+				if p5 < 1 or WeightedOrderStatisticTreeModule.nodeItemCount(UpdateAtResult) < p5 then return end
+				local MeasuredAtResult = WeightedOrderStatisticTreeModule.measuredAt(UpdateAtResult, p5)
 				
-				return
-			elseif p5 <= var2 then
-				local _ = nil
-				local var3, var4 = growUnmeasuredRun(var1, p5)
-				var1 = var3
-				
-				if var4 then return end
-			end
-			if p5 > 1 then
-				local _ = nil
-				local var5, var6 = growUnmeasuredRun(var1, p5 - 1)
-				var1 = var5
-				
-				if var6 then
+				if MeasuredAtResult ~= nil and MeasuredSize ~= nil then
+					UpdateAtResult = WeightedOrderStatisticTreeModule.updateAt(UpdateAtResult, p5, MeasuredSize)
+					
 					return
 				end
-			end
-			local var7, var8 = weightedOrderStatisticTreeModule.splitByItems(var1, p5 - 1)
-			var1 = concatenateMergingUnmeasured(concatenateMergingUnmeasured(var7, weightedOrderStatisticTreeModule.newNode(1, nil)), var8)
-		end,
-		remove = function(p5)
-			-- upvalues: weightedOrderStatisticTreeModule (copy), var1 (write), shrinkUnmeasuredRun (copy), concatenateMergingUnmeasured (copy)
-			if p5 < 1 or weightedOrderStatisticTreeModule.nodeItemCount(var1) < p5 then return end
-			local _ = nil
-			local var2, var3 = shrinkUnmeasuredRun(var1, p5)
-			var1 = var2
-			
-			if var3 then
-				return
-			end
-			local var4, var5 = weightedOrderStatisticTreeModule.splitByItems(var1, p5 - 1)
-			local _, var6 = weightedOrderStatisticTreeModule.splitByItems(var5, 1)
-			var1 = concatenateMergingUnmeasured(var4, var6)
-		end,
-		buildFromArray = function(p5)
-			-- upvalues: var1 (write), weightedOrderStatisticTreeModule (copy)
-			local list = table.create(#p5)
-			
-			for i, v in p5 do
-				list[i] = { itemCount = 1, measuredSize = v }
-			end
-			var1 = weightedOrderStatisticTreeModule.buildBalanced(list, 1, #list)
-		end,
-		buildFromMeasurements = function(p6, p7)
-			-- upvalues: var1 (write), weightedOrderStatisticTreeModule (copy)
-			local t = {}
-			
-			for i = 1, p6 do
-				local var2 = p7(i)
-				local var3 = t[#t]
-				
-				if var2 == nil and var3 ~= nil and var3.measuredSize == nil then
-					var3.itemCount += 1
-				else
-					table.insert(t, { itemCount = 1, measuredSize = var2 })
+				if MeasuredAtResult == nil and MeasuredSize ~= nil then
+					UpdateAtResult = measureAt(UpdateAtResult, p5, MeasuredSize)
+					
+					return
 				end
+				if MeasuredAtResult ~= nil and MeasuredSize == nil then
+					UpdateAtResult = unmeasureAt(UpdateAtResult, p5)
+				end
+			end,
+			insert = function(p5: number, p6) --[[ Line: 277 ]]
+				-- upvalues: WeightedOrderStatisticTreeModule (upval), UpdateAtResult (ref), growUnmeasuredRun (upval), concatenateMergingUnmeasured (upval), insertMeasuredAt (upval)
+				local NodeItemCountResult = WeightedOrderStatisticTreeModule.nodeItemCount(UpdateAtResult)
+				
+				if NodeItemCountResult == 0 then
+					UpdateAtResult = WeightedOrderStatisticTreeModule.newNode(1, p6)
+					
+					return
+				end
+				if p6 ~= nil then
+					UpdateAtResult = insertMeasuredAt(UpdateAtResult, p5, p6)
+					
+					return
+				end
+				if p5 <= NodeItemCountResult then
+					local GrowUnmeasuredRunResult2
+					UpdateAtResult, GrowUnmeasuredRunResult2 = growUnmeasuredRun(UpdateAtResult, p5)
+					
+					if GrowUnmeasuredRunResult2 then return end
+				end
+				if p5 > 1 then
+					local GrowUnmeasuredRunResult2_1
+					UpdateAtResult, GrowUnmeasuredRunResult2_1 = growUnmeasuredRun(UpdateAtResult, p5 - 1)
+					
+					if GrowUnmeasuredRunResult2_1 then return end
+				end
+				local SplitByItemsResult, SplitByItemsResult2 = WeightedOrderStatisticTreeModule.splitByItems(UpdateAtResult, p5 - 1)
+				UpdateAtResult = concatenateMergingUnmeasured(concatenateMergingUnmeasured(SplitByItemsResult, WeightedOrderStatisticTreeModule.newNode(1, nil)), SplitByItemsResult2)
+			end,
+			remove = function(p5: number) --[[ Line: 305 ]]
+				-- upvalues: WeightedOrderStatisticTreeModule (upval), UpdateAtResult (ref), shrinkUnmeasuredRun (upval), concatenateMergingUnmeasured (upval)
+				if p5 < 1 or WeightedOrderStatisticTreeModule.nodeItemCount(UpdateAtResult) < p5 then return end
+				local ShrinkUnmeasuredRunResult2
+				UpdateAtResult, ShrinkUnmeasuredRunResult2 = shrinkUnmeasuredRun(UpdateAtResult, p5)
+				
+				if not ShrinkUnmeasuredRunResult2 then
+					local SplitByItemsResult, SplitByItemsResult2 = WeightedOrderStatisticTreeModule.splitByItems(UpdateAtResult, p5 - 1)
+					local _, SplitByItemsResult2_1 = WeightedOrderStatisticTreeModule.splitByItems(SplitByItemsResult2, 1)
+					UpdateAtResult = concatenateMergingUnmeasured(SplitByItemsResult, SplitByItemsResult2_1)
+					
+					return
+				end
+			end,
+			buildFromArray = function(List) --[[ Line: 342 ]]
+				-- upvalues: UpdateAtResult (ref), WeightedOrderStatisticTreeModule (upval)
+				local Buffer = table.create(#List)
+				
+				for i, MeasuredSize in List do
+					Buffer[i] = { itemCount = 1, measuredSize = MeasuredSize }
+				end
+				UpdateAtResult = WeightedOrderStatisticTreeModule.buildBalanced(Buffer, 1, #Buffer)
+			end,
+			buildFromMeasurements = function(p5, Callback) --[[ Line: 319 ]]
+				-- upvalues: UpdateAtResult (ref), WeightedOrderStatisticTreeModule (upval)
+				local List = {}
+				
+				for i = 1, p5 do
+					local CallbackResult = Callback(i)
+					local Entry = List[#List]
+					
+					if CallbackResult == nil and Entry ~= nil and Entry.measuredSize == nil then
+						Entry.itemCount += 1
+					else
+						table.insert(List, { itemCount = 1, measuredSize = CallbackResult })
+					end
+				end
+				UpdateAtResult = WeightedOrderStatisticTreeModule.buildBalanced(List, 1, #List)
+			end,
+			toArray = function() --[[ Line: 350 ]]
+				-- upvalues: length (copy), WeightedOrderStatisticTreeModule (upval), UpdateAtResult (ref), P20 (ref)
+				local Buffer = table.create(length())
+				WeightedOrderStatisticTreeModule.appendToArray(UpdateAtResult, Buffer, P20)
+				
+				return Buffer
+			end,
+			setEstimatedItemLength = function(Value): boolean --[[ Line: 355 ]]
+				-- upvalues: P20 (ref), WeightedOrderStatisticTreeModule (upval), UpdateAtResult (ref)
+				local IsNodeMeasuredCountResultBelow: boolean = P20 ~= Value and WeightedOrderStatisticTreeModule.nodeMeasuredCount(UpdateAtResult) < WeightedOrderStatisticTreeModule.nodeItemCount(UpdateAtResult)
+				P20 = Value
+				
+				return IsNodeMeasuredCountResultBelow
+			end,
+			getEstimatedItemLength = function() --[[ Line: 361 ]]
+				-- upvalues: P20 (ref)
+				return P20
+			end,
+			getMeasuredItemCount = function() --[[ Line: 364 ]]
+				-- upvalues: WeightedOrderStatisticTreeModule (upval), UpdateAtResult (ref)
+				return WeightedOrderStatisticTreeModule.nodeMeasuredCount(UpdateAtResult)
+			end,
+			prefersIncremental = function(p6): boolean --[[ Line: 367 ]]
+				-- upvalues: WeightedOrderStatisticTreeModule (upval), UpdateAtResult (ref)
+				local NodeItemCountResult = WeightedOrderStatisticTreeModule.nodeItemCount(UpdateAtResult)
+				
+				return NodeItemCountResult ~= 0 and p6 * math.log(math.max(WeightedOrderStatisticTreeModule.nodeCount(UpdateAtResult), 2), 2) < NodeItemCountResult
+			end,
+			length = length,
+			totalSum = function() --[[ Line: 375 ]]
+				-- upvalues: WeightedOrderStatisticTreeModule (upval), UpdateAtResult (ref), P20 (ref)
+				return WeightedOrderStatisticTreeModule.nodeEffectiveSum(UpdateAtResult, P20)
+			end,
+			getNodeCount = function() --[[ Line: 378 ]]
+				-- upvalues: WeightedOrderStatisticTreeModule (upval), UpdateAtResult (ref)
+				return WeightedOrderStatisticTreeModule.nodeCount(UpdateAtResult)
 			end
-			var1 = weightedOrderStatisticTreeModule.buildBalanced(t, 1, #t)
-		end,
-		toArray = function()
-			-- upvalues: length (ref), weightedOrderStatisticTreeModule (copy), var1 (write), p1 (write)
-			local list = table.create(length())
-			weightedOrderStatisticTreeModule.appendToArray(var1, list, p1)
-			
-			return list
-		end,
-		setEstimatedItemLength = function(value)
-			-- upvalues: p1 (write), weightedOrderStatisticTreeModule (copy), var1 (write)
-			local var4 = p1 ~= value and weightedOrderStatisticTreeModule.nodeMeasuredCount(var1) < weightedOrderStatisticTreeModule.nodeItemCount(var1)
-			p1 = value
-			
-			return var4
-		end,
-		getEstimatedItemLength = function()
-			-- upvalues: p1 (write)
-			return p1
-		end,
-		getMeasuredItemCount = function()
-			-- upvalues: weightedOrderStatisticTreeModule (copy), var1 (write)
-			return weightedOrderStatisticTreeModule.nodeMeasuredCount(var1)
-		end,
-		prefersIncremental = function(p8)
-			-- upvalues: weightedOrderStatisticTreeModule (copy), var1 (write)
-			local var4 = weightedOrderStatisticTreeModule.nodeItemCount(var1)
-			
-			return if var4 == 0 then false else p8 * math.log(math.max(weightedOrderStatisticTreeModule.nodeCount(var1), 2), 2) < var4
-		end,
-		length = length,
-		totalSum = function()
-			-- upvalues: weightedOrderStatisticTreeModule (copy), var1 (write), p1 (write)
-			return weightedOrderStatisticTreeModule.nodeEffectiveSum(var1, p1)
-		end,
-		getNodeCount = function()
-			-- upvalues: weightedOrderStatisticTreeModule (copy), var1 (write)
-			return weightedOrderStatisticTreeModule.nodeCount(var1)
-		end
-	}
-end
-
-return t
+		}
+	end
+}

@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("TiltLoadingScreenConsoleHints", false)
+﻿return game:DefineFastFlag("TiltLoadingScreenConsoleHints2", false)

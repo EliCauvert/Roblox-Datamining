@@ -1,14 +1,13 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local roduxModule = require(corePackagesService.Packages.Rodux)
-local cryoModule = require(corePackagesService.Packages.Cryo)
-local parent = script.Parent.Parent
+﻿local CorePackages = game:GetService("CorePackages")
+local CryoModule = require(CorePackages.Packages.Cryo)
+local Parent = script.Parent.Parent
 
-return roduxModule.createReducer({ addedAssets = nil, removedAssets = nil }, {
-	[require(parent.Actions.AddAnalyticsInfo).name] = function(p1, p2)
-		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p1, p2.info)
+return (require(CorePackages.Packages.Rodux).createReducer({ addedAssets = nil, removedAssets = nil }, {
+	[require(Parent.Actions.AddAnalyticsInfo).name] = function(p1, p2) --[[ Line: 18 ]]
+		-- upvalues: CryoModule (copy)
+		return CryoModule.Dictionary.join(p1, p2.info)
 	end,
-	[require(parent.Actions.CloseOpenPrompt).name] = function(_, _)
+	[require(Parent.Actions.CloseOpenPrompt).name] = function(_, _) --[[ Line: 22 ]]
 		return {}
 	end
-})
+}))

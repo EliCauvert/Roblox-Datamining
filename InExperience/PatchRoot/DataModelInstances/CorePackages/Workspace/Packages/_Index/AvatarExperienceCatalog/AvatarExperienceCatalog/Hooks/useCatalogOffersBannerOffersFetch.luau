@@ -1,109 +1,111 @@
-﻿local avatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
-local parent = avatarExperienceCatalog.Parent
-local playersService = game:GetService("Players")
-local reactModule = require(parent.React)
-local useAvatarRoute = require(parent.AvatarExperienceNavigation).AvatarRoute.Hooks.useAvatarRoute
-local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
-local fFlagAXCatalogOffersClearOnLogout = avatarExperienceFlagsModule.FFlagAXCatalogOffersClearOnLogout
-local AXCatalogOffersRefetchOnVisible = game:DefineFastFlag("AXCatalogOffersRefetchOnVisible", false)
-local fFlagAXOfferBannerImpressionOnlyOnStartup = avatarExperienceFlagsModule.FFlagAXOfferBannerImpressionOnlyOnStartup
-local _ = require(avatarExperienceCatalog.Stores.createCatalogOffersBannerStore)
-local catalogOffersBannerImpressionsStoreModule = require(avatarExperienceCatalog.Stores.catalogOffersBannerImpressionsStore)
-local getLocalUserIdModule = require(avatarExperienceCatalog.Utils.getLocalUserId)
+﻿local AvatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
+local Parent = AvatarExperienceCatalog.Parent
+local Players = game:GetService("Players")
+local ReactModule = require(Parent.React)
+local UseAvatarRouteFunction = require(Parent.AvatarExperienceNavigation).AvatarRoute.Hooks.useAvatarRoute
+local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
+local FFlagAXCatalogOffersClearOnLogout = AvatarExperienceFlagsModule.FFlagAXCatalogOffersClearOnLogout
+local FFlagAXOfferBannerImpressionOnlyOnStartup = AvatarExperienceFlagsModule.FFlagAXOfferBannerImpressionOnlyOnStartup
+local _ = require(AvatarExperienceCatalog.Stores.createCatalogOffersBannerStore)
+local CatalogOffersBannerImpressionsStoreModule = require(AvatarExperienceCatalog.Stores.catalogOffersBannerImpressionsStore)
+local GetLocalUserIdModule = require(AvatarExperienceCatalog.Utils.getLocalUserId)
 
-return function(p1, p2)
-	-- upvalues: fFlagAXCatalogOffersClearOnLogout (ref), reactModule (ref), getLocalUserIdModule (ref), playersService (ref), fFlagAXOfferBannerImpressionOnlyOnStartup (ref), catalogOffersBannerImpressionsStoreModule (ref), AXCatalogOffersRefetchOnVisible (ref), useAvatarRoute (ref)
-	if fFlagAXCatalogOffersClearOnLogout then
-		reactModule.useEffect(function()
-			-- upvalues: p1 (ref), p2 (ref), getLocalUserIdModule (copy), playersService (copy), fFlagAXOfferBannerImpressionOnlyOnStartup (copy), catalogOffersBannerImpressionsStoreModule (copy)
-			local var1 = if not (p1.getHasCompletedOffersFetch(false) or p1.getOffersFetchInProgress(false)) then p1.fetchOffers(p2) else nil
-			local var2 = getLocalUserIdModule(playersService)
+return function(p1, p2) --[[ Line: 56 | Named "useCatalogOffersBannerOffersFetch" ]]
+	-- upvalues: FFlagAXCatalogOffersClearOnLogout (copy), ReactModule (copy), GetLocalUserIdModule (copy), Players (copy), FFlagAXOfferBannerImpressionOnlyOnStartup (copy), CatalogOffersBannerImpressionsStoreModule (copy), UseAvatarRouteFunction (copy)
+	if FFlagAXCatalogOffersClearOnLogout then
+		ReactModule.useEffect(function() --[[ Line: 61 ]]
+			-- upvalues: p1 (copy), p2 (copy), GetLocalUserIdModule (upval), Players (upval), FFlagAXOfferBannerImpressionOnlyOnStartup (upval), CatalogOffersBannerImpressionsStoreModule (upval)
+			local Offers: (() -> ())? = if p1.getHasCompletedOffersFetch(false) or p1.getOffersFetchInProgress(false) then nil else p1.fetchOffers(p2)
+			local LocalUserIdModule = GetLocalUserIdModule(Players)
 			
-			local function handle()
-				-- upvalues: getLocalUserIdModule (copy), playersService (copy), var2 (write), var1 (write), p1 (copy), fFlagAXOfferBannerImpressionOnlyOnStartup (copy), catalogOffersBannerImpressionsStoreModule (copy), p2 (copy)
-				local var3 = getLocalUserIdModule(playersService)
+			local function handle() --[[ Line: 81 ]]
+				-- upvalues: GetLocalUserIdModule (upval), Players (upval), LocalUserIdModule (ref), Offers (ref), p1 (upval), FFlagAXOfferBannerImpressionOnlyOnStartup (upval), CatalogOffersBannerImpressionsStoreModule (upval), p2 (upval)
+				local LocalUserIdModule1 = GetLocalUserIdModule(Players)
 				
-				if var3 == var2 then return end
-				var2 = var3
+				if LocalUserIdModule1 == LocalUserIdModule then return end
+				LocalUserIdModule = LocalUserIdModule1
 				
-				if var1 then
-					var1()
-					var1 = nil
+				if Offers then
+					Offers()
+					Offers = nil
 				end
 				p1.setPayload(nil)
 				p1.setDismissed(false)
 				
-				if fFlagAXOfferBannerImpressionOnlyOnStartup then
-					catalogOffersBannerImpressionsStoreModule.clearOfferIds()
+				if FFlagAXOfferBannerImpressionOnlyOnStartup then
+					CatalogOffersBannerImpressionsStoreModule.clearOfferIds()
 				end
-				if var3 ~= nil and var3 ~= "-1" then
-					var1 = p1.fetchOffers(p2)
+				if LocalUserIdModule1 ~= nil and LocalUserIdModule1 ~= "-1" then
+					Offers = p1.fetchOffers(p2)
 				end
 			end
 			
-			local var3 = nil
+			local Connection = nil
 			
-			local function _()
-				-- upvalues: var3 (write), playersService (copy), handle (ref)
-				if var3 then
-					var3:Disconnect()
-					var3 = nil
+			local function _() --[[ Line: 107 | Named "bindUserIdSignal" ]]
+				-- upvalues: Connection (ref), Players (upval), handle (copy)
+				if Connection then
+					Connection:Disconnect()
+					Connection = nil
 				end
-				local localPlayer = playersService.LocalPlayer
+				local LocalPlayer = Players.LocalPlayer
 				
-				if localPlayer ~= nil then
-					var3 = localPlayer:GetPropertyChangedSignal("UserId"):Connect(handle)
+				if LocalPlayer ~= nil then
+					Connection = LocalPlayer:GetPropertyChangedSignal("UserId"):Connect(handle)
 				end
 			end
-			local localPlayer = playersService.LocalPlayer
 			
-			if localPlayer ~= nil then
-				var3 = localPlayer:GetPropertyChangedSignal("UserId"):Connect(handle)
+			if Connection then
+				Connection:Disconnect()
+				Connection = nil
 			end
-			local var4 = playersService:GetPropertyChangedSignal("LocalPlayer"):Connect(function()
-				-- upvalues: var3 (write), playersService (copy), handle (ref)
-				if var3 then
-					var3:Disconnect()
-					var3 = nil
+			local LocalPlayer = Players.LocalPlayer
+			
+			if LocalPlayer ~= nil then
+				Connection = LocalPlayer:GetPropertyChangedSignal("UserId"):Connect(handle)
+			end
+			local Connection1 = Players:GetPropertyChangedSignal("LocalPlayer"):Connect(function() --[[ Line: 120 ]]
+				-- upvalues: Connection (ref), Players (upval), handle (copy)
+				if Connection then
+					Connection:Disconnect()
+					Connection = nil
 				end
-				local localPlayer = playersService.LocalPlayer
+				local LocalPlayer = Players.LocalPlayer
 				
-				if localPlayer ~= nil then
-					var3 = localPlayer:GetPropertyChangedSignal("UserId"):Connect(handle)
+				if LocalPlayer ~= nil then
+					Connection = LocalPlayer:GetPropertyChangedSignal("UserId"):Connect(handle)
 				end
 				handle()
 			end)
 			
-			return function()
-				-- upvalues: var1 (write), var3 (write), var4 (ref)
-				if var1 then
-					var1()
-					var1 = nil
+			return function() --[[ Line: 125 ]]
+				-- upvalues: Offers (ref), Connection (ref), Connection1 (copy)
+				if Offers then
+					Offers()
+					Offers = nil
 				end
-				if var3 then
-					var3:Disconnect()
-					var3 = nil
+				if Connection then
+					Connection:Disconnect()
+					Connection = nil
 				end
-				var4:Disconnect()
+				Connection1:Disconnect()
 			end
 		end, { p1, p2 })
 	else
-		reactModule.useEffect(function()
-			-- upvalues: p1 (ref), p2 (ref)
-			return if p1.getHasCompletedOffersFetch(false) or p1.getOffersFetchInProgress(false) then function() end else p1.fetchOffers(p2)
+		ReactModule.useEffect(function() --[[ Line: 138 ]]
+			-- upvalues: p1 (copy), p2 (copy)
+			return if p1.getHasCompletedOffersFetch(false) or p1.getOffersFetchInProgress(false) then function() --[[ Line: 143 ]] end else p1.fetchOffers(p2)
 		end, { p2, p1 })
 	end
-	if AXCatalogOffersRefetchOnVisible then
-		local var1 = reactModule.useRef(true)
-		local var2 = useAvatarRoute()
-		reactModule.useEffect(function()
-			-- upvalues: var2 (ref), var1 (ref), p1 (ref), p2 (ref)
-			local var3 = var2 ~= nil and var2.isVisible
-			
-			if var3 and not var1.current then
-				p1.fetchOffers(p2)
-			end
-			var1.current = var3
-		end, { p2, p1, var2 })
-	end
+	local UseRefResult = ReactModule.useRef(true)
+	local UseAvatarRouteResult = UseAvatarRouteFunction()
+	ReactModule.useEffect(function() --[[ Line: 152 ]]
+		-- upvalues: UseAvatarRouteResult (copy), UseRefResult (copy), p1 (copy), p2 (copy)
+		local IsVisible = UseAvatarRouteResult ~= nil and UseAvatarRouteResult.isVisible
+		
+		if IsVisible and not UseRefResult.current then
+			p1.fetchOffers(p2)
+		end
+		UseRefResult.current = IsVisible
+	end, { p2, p1, UseAvatarRouteResult })
 end

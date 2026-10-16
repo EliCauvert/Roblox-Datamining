@@ -1,180 +1,217 @@
-﻿local momentsCommon = script:FindFirstAncestor("MomentsCommon")
-local httpService = game:GetService("HttpService")
-local _ = require(momentsCommon.Media.MediaTypes)
-local _ = require(momentsCommon.Media.mediaNodeRegistry)
-local audioDuckingFastIntsModule = require(momentsCommon.Media.audioDuckingFastInts)
-local fFlagMomentsVideoPermissionContextFixModule = require(momentsCommon.Flags.FFlagMomentsVideoPermissionContextFix)
+﻿local MomentsCommon = script:FindFirstAncestor("MomentsCommon")
+local HttpService = game:GetService("HttpService")
+local _ = require(MomentsCommon.Media.MediaTypes)
+local _ = require(MomentsCommon.Media.mediaNodeRegistry)
+local AudioDuckingFastIntsModule = require(MomentsCommon.Media.audioDuckingFastInts)
+local FFlagMomentsVideoPermissionContextFixModule = require(MomentsCommon.Flags.FFlagMomentsVideoPermissionContextFix)
 
-local function toAssetUri(value, p1, p2)
-	-- upvalues: httpService (ref)
-	if typeof(value) == "string" and string.find(value, "://") ~= nil then
-		return value
+local function toAssetUri(Text: string, AssetAccessContext, p1): string --[[ Line: 59 ]]
+	-- upvalues: HttpService (copy)
+	if typeof(Text) == "string" and string.find(Text, "://") ~= nil then
+		return Text
 	end
-	local var1 = `rbxassetid://{value}`
+	local AssetId: string = `rbxassetid://{Text}`
 	
-	if p1 == nil or p1 == "" then
-		return var1
+	if AssetAccessContext == nil or AssetAccessContext == "" then
+		return AssetId
+	else
+		local AccessContextName: string = `{AssetId}&accessContext={HttpService:UrlEncode(AssetAccessContext)}`
+		
+		return if p1 then AccessContextName else `{AccessContextName}&permissionContext=ignoreUniverse`
 	end
-	local var2 = `{var1}&accessContext={httpService:UrlEncode(p1)}`
-	
-	return if p2 then var2 else `{var2}&permissionContext=ignoreUniverse`
+end
+
+local function defaultLoadSpeech(AudioTextToSpeech) --[[ Line: 85 ]]
+	return if game:GetEngineFeature("TextToSpeechPlatformPreview") then AudioTextToSpeech:LoadPlatformAsync() else Enum.AssetFetchStatus.Failure
 end
 
 return {
 	kind = "tts",
-	create = function(p1, p2)
-		-- upvalues: audioDuckingFastIntsModule (ref), toAssetUri (ref), fFlagMomentsVideoPermissionContextFixModule (ref)
-		local parent = p1.parent
-		assert(parent ~= nil, "createTtsNode: spec.parent (the item media folder) is required")
-		local assetId = p1.assetId
-		local assetAccessContext = p1.assetAccessContext
-		local startTime = p1.startTime or 0
-		local t = { endTime = nil, startTime = startTime }
-		local volume = p1.volume or audioDuckingFastIntsModule.getTtsVolume()
-		local var1 = if assetId ~= nil then nil else Content.fromUri(toAssetUri(assetId, assetAccessContext))
-		local var2 = if fFlagMomentsVideoPermissionContextFixModule and game.GameId == 0 and assetId ~= nil then Content.fromUri(toAssetUri(assetId, assetAccessContext, true)) else var1
-		local var3 = nil
+	create = function(p1, p2) --[[ Line: 94 ]]
+		-- upvalues: AudioDuckingFastIntsModule (copy), toAssetUri (copy), FFlagMomentsVideoPermissionContextFixModule (copy), defaultLoadSpeech (copy)
+		local Parent = p1.parent
+		assert(Parent ~= nil, "createTtsNode: spec.parent (the item media folder) is required")
+		local AssetId = p1.assetId
+		local AssetAccessContext = p1.assetAccessContext
+		local StartTime = p1.startTime or 0
+		local config = { endTime = nil, startTime = StartTime }
+		local Volume = p1.volume or AudioDuckingFastIntsModule.getTtsVolume()
+		local Content = if AssetId == nil then nil else Content.fromUri((toAssetUri(AssetId, AssetAccessContext)))
+		local Content1 = if FFlagMomentsVideoPermissionContextFixModule and game.GameId == 0 and AssetId ~= nil then Content.fromUri((toAssetUri(AssetId, AssetAccessContext, true))) else Content
+		local Sound = nil
 		
-		if var2 ~= nil then
-			local audioPlayer = Instance.new("AudioPlayer")
-			audioPlayer.Name = `Tts_{p1.id}`
-			audioPlayer.AudioContent = var2
-			audioPlayer.PlaybackSpeed = 0
-			audioPlayer.TimePosition = 0
-			audioPlayer.Parent = parent
-			var3 = audioPlayer
+		if Content1 ~= nil then
+			local AudioPlayer = Instance.new("AudioPlayer")
+			AudioPlayer.Name = `Tts_{p1.id}`
+			AudioPlayer.AudioContent = Content1
+			AudioPlayer.PlaybackSpeed = 0
+			AudioPlayer.TimePosition = 0
+			AudioPlayer.Parent = Parent
+			Sound = AudioPlayer
 		end
-		local var4 = false
+		local Text = p1.text
+		local AudioTextToSpeech = nil
 		
-		local function assets()
-			-- upvalues: var1 (ref)
-			return if var1 == nil then {} else { var1 }
+		if Sound == nil and Text ~= nil and Text ~= "" then
+			local AudioTextToSpeech1 = Instance.new("AudioTextToSpeech")
+			AudioTextToSpeech1.Name = `Tts_{p1.id}`
+			AudioTextToSpeech1.Text = Text
+			AudioTextToSpeech1.VoiceId = tostring(p1.voiceId)
+			AudioTextToSpeech1.PlaybackSpeed = 0
+			AudioTextToSpeech1.TimePosition = 0
+			AudioTextToSpeech1.Parent = Parent
+			AudioTextToSpeech = AudioTextToSpeech1
+			Sound = AudioTextToSpeech1
 		end
-		
-		local function download()
-			-- upvalues: var4 (write), var1 (ref), p2 (ref)
-			if var4 or var1 == nil then
-				return
-			end
-			p2.contentProvider:PreloadAsync({ var1.Uri })
-		end
-		
-		local var5 = false
-		local var6 = false
-		local var7 = nil
-		local t_1 = {
+		local LoadSpeech = p2.loadSpeech or defaultLoadSpeech
+		local NoAudioTextToSpeech = AudioTextToSpeech == nil
+		local Flag = false
+		local Flag1 = false
+		local Flag2 = false
+		local Flag3 = false
+		local v1 = nil
+		local config1 = {
 			kind = "tts",
 			usesDecoder = false,
 			id = p1.id,
-			assets = assets,
-			download = download,
-			play = function()
-				-- upvalues: var4 (write), var3 (write), var5 (write)
-				if var4 or var3 == nil then
-					return
-				end
-				var5 = true
+			assets = function() --[[ Line: 154 ]]
+				-- upvalues: Content (copy)
+				return if Content == nil then {} else { Content }
 			end,
-			pause = function()
-				-- upvalues: var4 (write), var3 (write), var5 (write), var6 (write)
-				if var4 or var3 == nil then
-					return
-				end
-				var5 = false
-				var6 = false
-				var3.PlaybackSpeed = 0
-			end,
-			seek = function(p3)
-				-- upvalues: var4 (write), var3 (write), startTime (ref)
-				if var4 or var3 == nil then return end
-				local maxValue = math.max(0, p3 - startTime)
-				local timeLength = var3.TimeLength
-				
-				if timeLength > 0 then
-					maxValue = math.clamp(maxValue, 0, timeLength)
-				end
-				var3.TimePosition = maxValue
-			end,
-			realignToRegionStart = function()
-				-- upvalues: var4 (write), var3 (write), var6 (write)
-				if var4 or var3 == nil then
-					return
-				end
-				var3.PlaybackSpeed = 0
-				var3.TimePosition = 0
-				var6 = false
-			end,
-			syncToClock = function(p3)
-				-- upvalues: var4 (write), var3 (write), var5 (write), var7 (write), startTime (ref), var6 (write)
-				if var4 or var3 == nil or not var5 then return end
-				var7 = p3
-				local var8 = var7 ~= nil and var7 < p3
-				
-				if startTime <= p3 then
-					local maxValue = math.max(0, p3 - startTime)
-					
-					if var6 then
-						local timeLength = var3.TimeLength
-						local var9 = if timeLength > 0 then maxValue < timeLength else true
+			download = function() --[[ Line: 158 ]]
+				-- upvalues: Flag1 (ref), AudioTextToSpeech (ref), Flag (ref), LoadSpeech (copy), NoAudioTextToSpeech (ref), Content (copy), p2 (copy)
+				if Flag1 then return end
+				if AudioTextToSpeech ~= nil and not Flag then
+					Flag = true
+					task.spawn(function() --[[ Line: 166 ]]
+						-- upvalues: LoadSpeech (upval), AudioTextToSpeech (upval), Flag1 (upval), NoAudioTextToSpeech (upval)
+						local Success, Result = pcall(LoadSpeech, AudioTextToSpeech)
 						
-						if var9 then
-							var9 = maxValue - var3.TimePosition
+						if not Flag1 and Success and Result == Enum.AssetFetchStatus.Success then
+							NoAudioTextToSpeech = true
 							
-							if var9 > 0.1 or var9 < -0.5 then
-								var3.TimePosition = maxValue
+							return
+						end
+					end)
+				end
+				if Content ~= nil then
+					p2.contentProvider:PreloadAsync({ Content.Uri })
+					
+					return
+				end
+			end,
+			play = function() --[[ Line: 190 ]]
+				-- upvalues: Flag1 (ref), Sound (ref), Flag2 (ref)
+				if not Flag1 and Sound ~= nil then
+					Flag2 = true
+					
+					return
+				end
+			end,
+			pause = function() --[[ Line: 198 ]]
+				-- upvalues: Flag1 (ref), Sound (ref), Flag2 (ref), Flag3 (ref)
+				if not Flag1 and Sound ~= nil then
+					Flag2 = false
+					Flag3 = false
+					Sound.PlaybackSpeed = 0
+					
+					return
+				end
+			end,
+			seek = function(p3) --[[ Line: 209 ]]
+				-- upvalues: Flag1 (ref), Sound (ref), StartTime (copy)
+				if Flag1 or Sound == nil then return end
+				local Largest = math.max(0, p3 - StartTime)
+				local TimeLength: number = Sound.TimeLength
+				
+				if TimeLength > 0 then
+					Largest = math.clamp(Largest, 0, TimeLength)
+				end
+				Sound.TimePosition = Largest
+			end,
+			realignToRegionStart = function() --[[ Line: 222 ]]
+				-- upvalues: Flag1 (ref), Sound (ref), Flag3 (ref)
+				if not Flag1 and Sound ~= nil then
+					Sound.PlaybackSpeed = 0
+					Sound.TimePosition = 0
+					Flag3 = false
+					
+					return
+				end
+			end,
+			syncToClock = function(p3) --[[ Line: 233 ]]
+				-- upvalues: Flag1 (ref), Sound (ref), Flag2 (ref), NoAudioTextToSpeech (ref), v1 (ref), StartTime (copy), Flag3 (ref)
+				if Flag1 or Sound == nil or not Flag2 or not NoAudioTextToSpeech then return end
+				local v2 = v1
+				v1 = p3
+				local v3: boolean = v2 ~= nil and p3 > v2
+				
+				if StartTime <= p3 then
+					local Largest = math.max(0, p3 - StartTime)
+					
+					if Flag3 then
+						local TimeLength: number = Sound.TimeLength
+						
+						if TimeLength <= 0 or Largest < TimeLength then
+							local LargestDelta = Largest - Sound.TimePosition
+							
+							if LargestDelta > 0.1 or LargestDelta < -0.5 then
+								Sound.TimePosition = Largest
 								
 								return
 							end
 						end
-					elseif not var8 then return end
-					local timeLength = var3.TimeLength
-					
-					if not (if timeLength > 0 then maxValue < timeLength else true) then return end
-					var3.TimePosition = maxValue
-					var3.PlaybackSpeed = 1
-					
-					if not var3.IsPlaying then
-						var3:Play()
+					else
+						if not v3 then return end
+						local TimeLength: number = Sound.TimeLength
+						
+						if TimeLength > 0 and Largest >= TimeLength then return end
+						Sound.TimePosition = Largest
+						Sound.PlaybackSpeed = 1
+						
+						if not Sound.IsPlaying then
+							Sound:Play()
+						end
+						Flag3 = true
+						
+						return
 					end
-					var6 = true
-					
-					return
-				elseif var6 then
-					var3.PlaybackSpeed = 0
-					var3.TimePosition = 0
-					var6 = false
+				elseif Flag3 then
+					Sound.PlaybackSpeed = 0
+					Sound.TimePosition = 0
+					Flag3 = false
 				end
 			end,
-			getRegion = function()
-				-- upvalues: t (ref)
-				return t
+			getRegion = function() --[[ Line: 275 ]]
+				-- upvalues: config (copy)
+				return config
 			end,
-			dispose = function()
-				-- upvalues: var4 (write), var3 (write)
-				if var4 then return end
-				var4 = true
+			dispose = function() --[[ Line: 279 ]]
+				-- upvalues: Flag1 (ref), Sound (ref)
+				if Flag1 then return end
+				Flag1 = true
 				
-				if var3 ~= nil then
-					var3:Destroy()
+				if Sound ~= nil then
+					Sound:Destroy()
 				end
 			end
 		}
 		
-		if var3 ~= nil then
-			function t_1.getAudioSource()
-				-- upvalues: var3 (write)
-				return var3
+		if Sound ~= nil then
+			function config1.getAudioSource() --[[ Line: 307 ]]
+				-- upvalues: Sound (ref)
+				return Sound
 			end
 			
-			t_1.audioStem = {
+			config1.audioStem = {
 				role = "sidechain",
 				stemId = p1.id,
-				defaultVolume = volume
+				defaultVolume = Volume
 			}
 		end
-		return t_1
+		return config1
 	end,
-	hasAudioRemaining = function(p1, p2)
-		return if p2 > 0 then p1 < p2 else true
+	hasAudioRemaining = function(p1, p2: number): boolean --[[ Line: 73 ]]
+		return p2 <= 0 or p1 < p2
 	end
 }

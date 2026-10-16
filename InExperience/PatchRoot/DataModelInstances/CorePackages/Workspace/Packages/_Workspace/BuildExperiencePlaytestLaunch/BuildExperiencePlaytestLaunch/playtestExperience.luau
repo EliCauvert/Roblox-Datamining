@@ -1,92 +1,107 @@
-﻿local playersService = game:GetService("Players")
-local teleportService = game:GetService("TeleportService")
-local parent = script:FindFirstAncestor("BuildExperiencePlaytestLaunch").Parent
-local sharedFlagsModule = require(parent.SharedFlags)
-local teamCreateUtilsModule = require(script.Parent.teamCreateUtils)
-local creatorAgentChatModule = require(parent.DataHydration.CreatorAgentChat)
-local buildModeLaunchModule = require(script.Parent.BuildModeLaunch)
-local playtestRejoinModule = require(script.Parent.PlaytestRejoin)
-local launchExperienceModule = require(script.Parent.launchExperience)
-local leaveExperienceModule = require(script.Parent.leaveExperience)
-local teleportToPlaceModule = require(script.Parent.teleportToPlace)
-local debug = creatorAgentChatModule.debug
-local fFlagBuildExperienceLibrary = sharedFlagsModule.FFlagBuildExperienceLibrary
+﻿local Players = game:GetService("Players")
+local TeleportService = game:GetService("TeleportService")
+local Parent = script:FindFirstAncestor("BuildExperiencePlaytestLaunch").Parent
+local TeamCreateUtilsModule = require(script.Parent.teamCreateUtils)
+local BuildModeLaunchModule = require(script.Parent.BuildModeLaunch)
+local PlaytestRejoinModule = require(script.Parent.PlaytestRejoin)
+local LaunchExperienceModule = require(script.Parent.launchExperience)
+local LeaveExperienceModule = require(script.Parent.leaveExperience)
+local TeleportToPlaceModule = require(script.Parent.teleportToPlace)
+local Debug = require(Parent.DataHydration.CreatorAgentChat).debug
+local FFlagBuildExperienceLibrary = require(Parent.SharedFlags).FFlagBuildExperienceLibrary
 
-local function _(p1, p2)
+local function _(p1, p2): boolean --[[ Line: 29 | Named "isAlreadyInPlace" ]]
 	return p2 ~= 0 and p2 == p1
 end
 
-local _ = function(p1)
-	-- upvalues: playersService (ref), teleportService (ref)
-	local localPlayer = playersService.LocalPlayer
-	local teleportInitFailedConnection = teleportService.TeleportInitFailed:Connect(function(p2)
-		-- upvalues: localPlayer (ref), p1 (ref)
-		if p2 == localPlayer then
+local _ = function(p1) --[[ Line: 33 | Named "listenForTeleportFailure" ]]
+	-- upvalues: Players (copy), TeleportService (copy)
+	local LocalPlayer = Players.LocalPlayer
+	local TeleportInitFailedConnection = TeleportService.TeleportInitFailed:Connect(function(Player) --[[ Line: 37 ]]
+		-- upvalues: LocalPlayer (copy), p1 (copy)
+		if Player == LocalPlayer then
 			p1()
 		end
 	end)
 	
-	return function()
-		-- upvalues: teleportInitFailedConnection (ref)
-		teleportInitFailedConnection:Disconnect()
+	return function() --[[ Line: 43 ]]
+		-- upvalues: TeleportInitFailedConnection (copy)
+		TeleportInitFailedConnection:Disconnect()
 	end
 end
 
-return function(p1, p2, p3)
-	-- upvalues: debug (ref), teamCreateUtilsModule (ref), playersService (ref), teleportService (ref), buildModeLaunchModule (ref), teleportToPlaceModule (ref), fFlagBuildExperienceLibrary (ref), playtestRejoinModule (ref), leaveExperienceModule (ref), launchExperienceModule (ref)
-	local var1 = if p3 and p3.currentPlaceId ~= nil then p3.currentPlaceId else game.PlaceId
-	local var2 = if p3 then p3.isTeamTest else nil
-	debug.log("info", "playtestExperience", {
-		isTeamTest = var2,
-		placeId = p1,
-		currentPlaceId = var1,
-		source = p2
+return function(PlaceId, Source, p1): string --[[ Line: 48 | Named "playtestExperience" ]]
+	-- upvalues: Debug (copy), TeamCreateUtilsModule (copy), Players (copy), TeleportService (copy), BuildModeLaunchModule (copy), TeleportToPlaceModule (copy), FFlagBuildExperienceLibrary (copy), PlaytestRejoinModule (copy), LeaveExperienceModule (copy), LaunchExperienceModule (copy)
+	local CurrentPlaceId = if p1 and p1.currentPlaceId ~= nil then p1.currentPlaceId else game.PlaceId
+	local IsTeamTest = if p1 then p1.isTeamTest else nil
+	Debug.log("info", "playtestExperience", {
+		isTeamTest = IsTeamTest,
+		placeId = PlaceId,
+		currentPlaceId = CurrentPlaceId,
+		source = Source
 	})
-	local var3 = teamCreateUtilsModule.isViewer()
-	local var4 = var1 ~= 0 and var1 == p1
+	local IsViewer = TeamCreateUtilsModule.isViewer()
+	local Callback3: boolean = CurrentPlaceId ~= 0 and CurrentPlaceId == PlaceId
 	
-	if var4 and not var3 then
-		var4 = nil
+	if Callback3 and not IsViewer then
+		Callback3 = nil
 		
-		if p3 and p3.onTeleportFailed then
-			local onTeleportFailed = p3.onTeleportFailed
+		if p1 and p1.onTeleportFailed then
+			local OnTeleportFailedFunction = p1.onTeleportFailed
 			
-			local var5 = function()
-				-- upvalues: var4 (write), onTeleportFailed (ref)
-				if var4 then
-					var4()
-					var4 = nil
+			local function v18() --[[ Line: 64 ]]
+				-- upvalues: Callback3 (ref), OnTeleportFailedFunction (copy)
+				if Callback3 then
+					Callback3()
+					Callback3 = nil
 				end
-				onTeleportFailed()
+				OnTeleportFailedFunction()
 			end
 			
-			local localPlayer = playersService.LocalPlayer
-			local teleportInitFailedConnection = teleportService.TeleportInitFailed:Connect(function(p4)
-				-- upvalues: localPlayer (ref), var5 (ref)
-				if p4 == localPlayer then
-					var5()
+			local LocalPlayer = Players.LocalPlayer
+			local TeleportInitFailedConnection = TeleportService.TeleportInitFailed:Connect(function(Player) --[[ Line: 37 ]]
+				-- upvalues: LocalPlayer (copy), v18 (copy)
+				if Player == LocalPlayer then
+					v18()
 				end
 			end)
 			
-			var4 = function()
-				-- upvalues: teleportInitFailedConnection (ref)
-				teleportInitFailedConnection:Disconnect()
+			Callback3 = function() --[[ Line: 43 ]]
+				-- upvalues: TeleportInitFailedConnection (copy)
+				TeleportInitFailedConnection:Disconnect()
 			end
 		end
-		buildModeLaunchModule:set()
-		teleportToPlaceModule(p1)
+		BuildModeLaunchModule:set()
+		TeleportToPlaceModule(PlaceId)
 		
 		return "teleport_pending"
-	elseif var3 and fFlagBuildExperienceLibrary then
-		playtestRejoinModule.request(p1, p2, var2)
-		leaveExperienceModule()
-	elseif var3 then
-		leaveExperienceModule(function()
-			-- upvalues: launchExperienceModule (copy), p1 (ref), p2 (ref), var2 (ref)
-			launchExperienceModule(p1, p2, var2)
-		end)
 	else
-		launchExperienceModule(p1, p2, var2)
+		repeat
+			if IsViewer then
+				Callback3 = FFlagBuildExperienceLibrary
+				
+				if Callback3 then
+					Callback3 = PlaytestRejoinModule
+					Callback3 = Callback3.request
+					Callback3(PlaceId, Source, IsTeamTest)
+					Callback3 = LeaveExperienceModule
+					Callback3()
+					break
+				end
+			end
+			if IsViewer then
+				Callback3 = LeaveExperienceModule
+				Callback3(function() --[[ Line: 82 ]]
+					-- upvalues: LaunchExperienceModule (upval), PlaceId (copy), Source (copy), IsTeamTest (copy)
+					LaunchExperienceModule(PlaceId, Source, IsTeamTest)
+				end)
+				break
+			end
+			Callback3 = LaunchExperienceModule
+			Callback3(PlaceId, Source, IsTeamTest)
+		until true
+		Callback3 = "experience_launch"
+		
+		return Callback3
 	end
-	return "experience_launch"
 end

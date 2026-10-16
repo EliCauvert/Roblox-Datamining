@@ -1,123 +1,144 @@
-﻿local t = {}
-t.__index = t
+﻿local GetFFlagVoiceDebugConsoleV2Module = require(script.Parent.Components.VoiceDebug.GetFFlagVoiceDebugConsoleV2)
+local CircularBufferModule = {}
+CircularBufferModule.__index = CircularBufferModule
 
-function t.new(p1)
-	-- upvalues: t (ref)
-	assert(p1, "Cannot initialize CircularBuffer with nil")
-	assert(p1 > 0, "Cannot initialize CircularBuffer to size < 1")
-	local t_1 = {}
-	setmetatable(t_1, t)
-	t_1._data = {}
-	t_1._backIndex = 0
-	t_1._maxSize = p1
+function CircularBufferModule.new(_maxSize: number) --[[ Line: 7 ]]
+	-- upvalues: CircularBufferModule (copy)
+	assert(_maxSize, "Cannot initialize CircularBuffer with nil")
+	assert(_maxSize > 0, "Cannot initialize CircularBuffer to size < 1")
+	local t = {}
+	setmetatable(t, CircularBufferModule)
+	t._data = {}
+	t._backIndex = 0
+	t._maxSize = _maxSize
 	
-	return t_1
+	return t
 end
 
-function t:reset()
+function CircularBufferModule:reset() --[[ Line: 21 ]]
 	self._data = {}
 	self._backIndex = 0
 end
 
-function t:getSize()
+function CircularBufferModule:getSize(): number --[[ Line: 26 ]]
 	return #self._data
 end
 
-function t:getMaxSize()
+function CircularBufferModule:getMaxSize() --[[ Line: 30 ]]
 	return self._maxSize
 end
 
-function t:setSize(p1)
-	assert(p1, "Cannot set CircularBuffer with nil")
-	assert(p1 > 0, "Cannot set CircularBuffer to size < 1")
+function CircularBufferModule:setSize(_maxSize: number) --[[ Line: 34 ]]
+	assert(_maxSize, "Cannot set CircularBuffer with nil")
+	assert(_maxSize > 0, "Cannot set CircularBuffer to size < 1")
 	
-	if p1 == self._maxSize then return end
-	local var1 = self:iterator()
-	local var2 = var1:next()
-	local t = {}
-	local var3 = 0
-	while var2 and var3 < p1 do
-		local var4 = var3 + 1
-		t[var4] = { entry = var2 }
+	if _maxSize == self._maxSize then return end
+	local IteratorResult = self:iterator()
+	local Key = IteratorResult:next()
+	local _data = {}
+	local _backIndex = 0
+	while Key and _backIndex < _maxSize do
+		local NewBackIndex = _backIndex + 1
+		_data[NewBackIndex] = { entry = Key }
 		
-		if t[var3] then
-			t[var3]._next = t[var4]
+		if _data[_backIndex] then
+			_data[_backIndex]._next = _data[NewBackIndex]
 		end
-		var3 = var4
-		var2 = var1:next()
+		_backIndex = NewBackIndex
+		Key = IteratorResult:next()
 	end
-	self._data = t
-	self._backIndex = var3
-	self._maxSize = p1
+	self._data = _data
+	self._backIndex = _backIndex
+	self._maxSize = _maxSize
 end
 
-function t:getFrontIndex()
-	local var5 = self._backIndex + 1
+function CircularBufferModule:getFrontIndex(): number --[[ Line: 65 ]]
+	local NewBackIndex = self._backIndex + 1
 	
-	return if self._data[var5] then var5 else 1
+	return if self._data[NewBackIndex] then NewBackIndex else 1
 end
 
-function t:front()
-	local frontIndex = self:getFrontIndex()
+function CircularBufferModule:front() --[[ Line: 73 ]]
+	local FrontIndex = self:getFrontIndex()
 	
-	return if self._data[frontIndex] then self._data[frontIndex].entry else nil
+	return if self._data[FrontIndex] then self._data[FrontIndex].entry else nil
 end
 
-function t:back()
-	return if self._data[self._backIndex] then self._data[self._backIndex].entry else nil
+function CircularBufferModule.back(p1) --[[ Line: 81 ]]
+	return if p1._data[p1._backIndex] then p1._data[p1._backIndex].entry else nil
 end
 
-function t:iterator()
+function CircularBufferModule:iterator() --[[ Line: 88 ]]
 	return {
 		data = self._data[self:getFrontIndex()],
-		next = function(p2)
-			local data = p2.data
+		next = function(p1) --[[ Line: 93 ]]
+			local Data = p1.data
 			
-			if data then
-				p2.data = p2.data._next
+			if Data then
+				p1.data = p1.data._next
 			end
-			return data and data.entry
+			return Data and Data.entry
 		end
 	}
 end
 
-function t:getData()
+function CircularBufferModule:getData() --[[ Line: 105 ]]
 	return self._data
 end
 
-function t:at(p2)
-	assert(p2, "Cannot index CircularBuffer with nil")
-	local var5 = (self:getFrontIndex() + p2 - 2) % self._maxSize + 1
-	
-	return if self._data[var5] then self._data[var5].entry else nil
-end
-
-function t:reverseAt(p2)
-	local var5 = (self._backIndex - p2) % self._maxSize + 1
-	
-	return if self._data[var5] then self._data[var5].entry else nil
-end
-
-function t:push_back(p2)
-	local backIndex = self._backIndex
-	local var5 = self._backIndex + 1
-	
-	if self._maxSize < var5 then
-		var5 = 1
-	end
-	local var6 = self._data[var5]
-	self._data[var5] = { entry = p2 }
-	
-	if backIndex > 0 then
-		self._data[backIndex]._next = self._data[var5]
+if GetFFlagVoiceDebugConsoleV2Module() then
+	function CircularBufferModule:clone() --[[ Line: 114 ]]
+		-- upvalues: CircularBufferModule (copy)
+		local NewCircularBuffer = CircularBufferModule.new(self._maxSize)
+		local _data = {}
 		
-		if var6 then
-			var6._next = nil
+		for i, entry in self._data do
+			_data[i] = { entry = entry.entry }
+		end
+		for i1, entry1 in self._data do
+			if entry1._next then
+				_data[i1]._next = _data[i1 % self._maxSize + 1]
+			end
+		end
+		NewCircularBuffer._data = _data
+		NewCircularBuffer._backIndex = self._backIndex
+		
+		return NewCircularBuffer
+	end
+end
+function CircularBufferModule:at(p1) --[[ Line: 132 ]]
+	assert(p1, "Cannot index CircularBuffer with nil")
+	local NewFrontIndex = (self:getFrontIndex() + p1 - 2) % self._maxSize + 1
+	
+	return if self._data[NewFrontIndex] then self._data[NewFrontIndex].entry else nil
+end
+
+function CircularBufferModule:reverseAt(p1) --[[ Line: 143 ]]
+	local NewBackIndex = (self._backIndex - p1) % self._maxSize + 1
+	
+	return if self._data[NewBackIndex] then self._data[NewBackIndex].entry else nil
+end
+
+function CircularBufferModule:push_back(Entry) --[[ Line: 154 ]]
+	local BackIndex: number = self._backIndex
+	local NewBackIndex = self._backIndex + 1
+	
+	if self._maxSize < NewBackIndex then
+		NewBackIndex = 1
+	end
+	local Entry1 = self._data[NewBackIndex]
+	self._data[NewBackIndex] = { entry = Entry }
+	
+	if BackIndex > 0 then
+		self._data[BackIndex]._next = self._data[NewBackIndex]
+		
+		if Entry1 then
+			Entry1._next = nil
 		end
 	end
-	self._backIndex = var5
+	self._backIndex = NewBackIndex
 	
-	return var6 and var6.entry
+	return Entry1 and Entry1.entry
 end
 
-return t
+return CircularBufferModule

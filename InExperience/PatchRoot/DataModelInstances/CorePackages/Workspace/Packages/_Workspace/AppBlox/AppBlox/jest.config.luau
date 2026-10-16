@@ -1,11 +1,11 @@
-﻿local jestConfigsModule = require(script.Parent.Parent.Dev.JestConfigs)
+﻿local JestConfigsModule = require(script.Parent.Parent.Dev.JestConfigs)
 
 return {
 	displayName = "AppBlox",
 	setupFilesAfterEnv = {
-		jestConfigsModule.setupFiles.ErrorLogHandler,
-		jestConfigsModule.setupFiles.UIBloxInitializer,
-		jestConfigsModule.setupFiles.createPromiseRejectionHandler(),
-		jestConfigsModule.setupFiles.RetryTimes
+		JestConfigsModule.setupFiles.ErrorLogHandler,
+		JestConfigsModule.setupFiles.UIBloxInitializer,
+		JestConfigsModule.setupFiles.createPromiseRejectionHandler(),
+		JestConfigsModule.setupFiles.RetryTimes
 	}
 }

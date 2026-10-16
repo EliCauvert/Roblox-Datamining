@@ -1,104 +1,100 @@
-﻿local sduiSharedUtilities = script:FindFirstAncestor("SduiSharedUtilities")
-local parent = sduiSharedUtilities.Parent
-local cryoModule = require(parent.Cryo)
-local _ = require(sduiSharedUtilities.SduiIntegrationTypes)
-local fFlagSduiClientDrivenTemplates = require(parent.SharedFlags).FFlagSduiClientDrivenTemplates
+﻿local SduiSharedUtilities = script:FindFirstAncestor("SduiSharedUtilities")
+local CryoModule = require(SduiSharedUtilities.Parent.Cryo)
+local _ = require(SduiSharedUtilities.SduiIntegrationTypes)
 
-local function createSduiTemplateStore()
-	-- upvalues: fFlagSduiClientDrivenTemplates (ref), cryoModule (ref)
+local function createSduiTemplateStore() --[[ Line: 26 ]]
+	-- upvalues: CryoModule (copy)
+	local JoinResult = {}
 	local t = {}
-	local t_1 = {}
-	local var1 = if fFlagSduiClientDrivenTemplates then {} else nil
+	local t1 = {}
 	
 	return {
-		getTemplate = function(p1)
-			-- upvalues: t (write)
-			return t[p1]
+		getTemplate = function(p1) --[[ Line: 37 ]]
+			-- upvalues: JoinResult (ref)
+			return JoinResult[p1]
 		end,
-		addTemplates = function(p1)
-			-- upvalues: t (write), cryoModule (copy)
-			t = cryoModule.Dictionary.join(t, p1)
+		addTemplates = function(p1) --[[ Line: 43 ]]
+			-- upvalues: JoinResult (ref), CryoModule (upval)
+			JoinResult = CryoModule.Dictionary.join(JoinResult, p1)
 		end,
-		recordSurfaceTemplates = function(p1, p2)
-			-- upvalues: t_1 (write)
-			if p2 == nil then return end
-			local var2 = t_1[p1]
+		recordSurfaceTemplates = function(Key, List) --[[ Line: 50 ]]
+			-- upvalues: t (ref)
+			if List == nil then return end
+			local Entry = t[Key]
 			
-			if var2 == nil then
-				var2 = {}
-				t_1[p1] = var2
+			if Entry == nil then
+				Entry = {}
+				t[Key] = Entry
 			end
-			for i, v in p2 do
-				var2[i] = v
+			for i, value in List do
+				Entry[i] = value
 			end
 		end,
-		getCachedRobloxComponentToTemplateId = function(p3)
-			-- upvalues: t_1 (write)
-			local var3 = t_1[p3]
+		getCachedRobloxComponentToTemplateId = function(p1) --[[ Line: 68 ]]
+			-- upvalues: t (ref)
+			local Entry = t[p1]
 			
-			return if var3 == nil then {} else var3
+			return if Entry == nil then {} else Entry
 		end,
-		getTemplateForRobloxComponent = function(p3, p4)
-			-- upvalues: t_1 (write), t (write)
-			local var3 = t_1[p3]
+		getTemplateForRobloxComponent = function(p1, p2) --[[ Line: 78 ]]
+			-- upvalues: t (ref), JoinResult (ref)
+			local Entry = t[p1]
 			
-			if var3 == nil then
+			if Entry == nil then
 				return nil
-			end
-			local var4 = var3[p4]
-			
-			return if var4 == nil then nil else t[var4]
-		end,
-		getSurfaceTemplateMaps = if fFlagSduiClientDrivenTemplates then function(p3)
-			-- upvalues: t_1 (write), t (write)
-			local t_2 = {}
-			local t_3 = {}
-			local var3 = t_1[p3]
-			
-			if var3 == nil then
-				return t_2, t_3
-			end
-			for i, v in var3 do
-				local var4 = t[v]
+			else
+				local Entry1 = Entry[p2]
 				
-				if var4 then
-					t_3[i] = var4
-					t_2[v] = var4
+				return if Entry1 == nil then nil else JoinResult[Entry1]
+			end
+		end,
+		getSurfaceTemplateMaps = function(p1) --[[ Line: 90 ]]
+			-- upvalues: t (ref), JoinResult (ref)
+			local t2 = {}
+			local t3 = {}
+			local Entry = t[p1]
+			
+			if Entry == nil then
+				return t2, t3
+			end
+			for i, value in Entry do
+				local JoinResultEntry = JoinResult[value]
+				
+				if JoinResultEntry then
+					t3[i] = JoinResultEntry
+					t2[value] = JoinResultEntry
 				end
 			end
-			return t_2, t_3
-		end else nil,
-		addLocalizedLiterals = if fFlagSduiClientDrivenTemplates then function(p4)
-			-- upvalues: var1 (write)
-			var1 = var1 or {}
-			assert(var1, "localizedLiterals is nil")
+			return t2, t3
+		end,
+		addLocalizedLiterals = function(List) --[[ Line: 109 ]]
+			-- upvalues: t2 (ref)
+			t2 = t2 or {}
+			assert(t2, "localizedLiterals is nil")
 			
-			for i, v in p4 do
-				var1[i] = v
+			for i, value in List do
+				t2[i] = value
 			end
-		end else nil,
-		getLocalizedLiterals = if fFlagSduiClientDrivenTemplates then function()
-			-- upvalues: var1 (write)
-			return var1 or {}
-		end else nil,
-		clear = function()
-			-- upvalues: t (write), t_1 (write), fFlagSduiClientDrivenTemplates (copy), var1 (write)
+		end,
+		getLocalizedLiterals = function() --[[ Line: 117 ]]
+			-- upvalues: t2 (ref)
+			return t2 or {}
+		end,
+		clear = function() --[[ Line: 121 ]]
+			-- upvalues: JoinResult (ref), t (ref), t2 (ref)
+			JoinResult = {}
 			t = {}
-			t_1 = {}
-			
-			if fFlagSduiClientDrivenTemplates then
-				var1 = {}
-			end
+			t2 = {}
 		end
 	}
 end
 
-local var5 = nil
+local v1 = nil
 
-return function()
-	-- upvalues: var5 (write), createSduiTemplateStore (ref)
-	if var5 == nil then
-		var5 = createSduiTemplateStore()
+return function() --[[ Line: 145 | Named "getSduiTemplateStore" ]]
+	-- upvalues: v1 (ref), createSduiTemplateStore (copy)
+	if v1 == nil then
+		v1 = createSduiTemplateStore()
 	end
-	return var5
+	return v1
 end

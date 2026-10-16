@@ -1,11 +1,11 @@
-﻿return function(p1, p2, p3)
+﻿return function(p1, p2: number, p3: number) --[[ Line: 5 | Named "getRange" ]]
 	assert(p2 <= p3, "startIndex must be less than or equal to endIndex")
 	local t = {}
-	local var1 = 1
+	local Count = 1
 	
 	for i = math.max(1, p2), math.min(#p1, p3) do
-		t[var1] = p1[i]
-		var1 += 1
+		t[Count] = p1[i]
+		Count += 1
 	end
 	return t
 end

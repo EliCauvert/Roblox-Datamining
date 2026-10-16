@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("MomentsAndroidTvEnabled", false)
 
-return function()
+return function() --[[ Line: 3 ]]
 	return game:GetFastFlag("MomentsAndroidTvEnabled")
 end

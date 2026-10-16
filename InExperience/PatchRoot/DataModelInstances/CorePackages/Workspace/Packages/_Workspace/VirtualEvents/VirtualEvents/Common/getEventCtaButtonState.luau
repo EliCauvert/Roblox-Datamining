@@ -1,9 +1,9 @@
-﻿local playButtonStates = require(script:FindFirstAncestor("VirtualEvents").Parent.GamePlayButton).PlayButtonStates
+﻿local PlayButtonStates = require(script:FindFirstAncestor("VirtualEvents").Parent.GamePlayButton).PlayButtonStates
 
-return function(p1)
-	-- upvalues: playButtonStates (ref)
+return function(p1) --[[ Line: 14 | Named "getEventCtaButtonState" ]]
+	-- upvalues: PlayButtonStates (copy)
 	return {
-		isJoinEventDisabled = not (if p1.playButtonState ~= playButtonStates.Playable then p1.playButtonState == playButtonStates.PlayableWithParty else true),
+		isJoinEventDisabled = not (p1.playButtonState == PlayButtonStates.Playable or p1.playButtonState == PlayButtonStates.PlayableWithParty),
 		isRsvpDisabled = not (p1.playabilityStatus and p1.playabilityStatus.isPlayable)
 	}
 end

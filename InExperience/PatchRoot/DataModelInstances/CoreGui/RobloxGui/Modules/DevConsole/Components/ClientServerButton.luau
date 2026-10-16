@@ -1,89 +1,90 @@
-﻿local roactModule = require(game:GetService("CorePackages").Packages.Roact)
-local constantsModule = require(script.Parent.Parent.Constants)
-local frameHeight = constantsModule.UtilityBarFormatting.FrameHeight
-local smallFrameHeight = constantsModule.UtilityBarFormatting.SmallFrameHeight
-local clientServerButtonWidth = constantsModule.UtilityBarFormatting.ClientServerButtonWidth
-local clientServerDropDownWidth = constantsModule.UtilityBarFormatting.ClientServerDropDownWidth
-local utilBar = constantsModule.Font.UtilBar
-local utilBar_1 = constantsModule.DefaultFontSize.UtilBar
-local text = constantsModule.Color.Text
-local fullScreenDropDownButtonModule = require(script.Parent.FullScreenDropDownButton)
-local dropDownModule = require(script.Parent.DropDown)
-local uDim2 = UDim2.new(0, clientServerButtonWidth, 0, frameHeight)
-local list = { "Client", "Server" }
-local clientServerButton = roactModule.Component:extend("ClientServerButton")
+﻿local RoactModule = require(game:GetService("CorePackages").Packages.Roact)
+local ConstantsModule = require(script.Parent.Parent.Constants)
+local FrameHeight = ConstantsModule.UtilityBarFormatting.FrameHeight
+local SmallFrameHeight = ConstantsModule.UtilityBarFormatting.SmallFrameHeight
+local ClientServerButtonWidth = ConstantsModule.UtilityBarFormatting.ClientServerButtonWidth
+local ClientServerDropDownWidth = ConstantsModule.UtilityBarFormatting.ClientServerDropDownWidth
+local UtilBar = ConstantsModule.Font.UtilBar
+local UtilBar1 = ConstantsModule.DefaultFontSize.UtilBar
+local Text = ConstantsModule.Color.Text
+local FullScreenDropDownButtonModule = require(script.Parent.FullScreenDropDownButton)
+local DropDownModule = require(script.Parent.DropDown)
+local _UDim2 = UDim2.new(0, ClientServerButtonWidth, 0, FrameHeight)
+local DropDownList = { "Client", "Server" }
+local ClientServerButton = RoactModule.Component:extend("ClientServerButton")
 
-function clientServerButton.init(p1)
-	function p0.dropDownCallback(p2)
-		-- upvalues: p1 (ref)
+function ClientServerButton.init(p1) --[[ Line: 21 ]]
+	function p1.dropDownCallback(p2) --[[ Line: 22 ]]
+		-- upvalues: p1 (copy)
 		if p2 == 1 then
 			p1.props.onClientButton()
 			
 			return
-		elseif p2 == 2 then
+		end
+		if p2 == 2 then
 			p1.props.onServerButton()
 		end
 	end
 end
 
-function clientServerButton.render(p1)
-	-- upvalues: constantsModule (ref), roactModule (ref), fullScreenDropDownButtonModule (ref), clientServerDropDownWidth (ref), smallFrameHeight (ref), list (ref), dropDownModule (ref), clientServerButtonWidth (ref), frameHeight (ref), utilBar_1 (ref), text (ref), utilBar (ref), uDim2 (ref)
-	local formFactor = p1.props.formFactor
-	local useDropDown = p1.props.useDropDown
-	local isClientView = p1.props.isClientView
-	local layoutOrder = p1.props.layoutOrder
-	local onServerButton = p1.props.onServerButton
-	local onClientButton = p1.props.onClientButton
-	local selectedBlue = constantsModule.Color.SelectedBlue
-	local unselectedGray = constantsModule.Color.UnselectedGray
+function ClientServerButton.render(p1) --[[ Line: 31 ]]
+	-- upvalues: ConstantsModule (copy), RoactModule (copy), FullScreenDropDownButtonModule (copy), ClientServerDropDownWidth (copy), SmallFrameHeight (copy), DropDownList (copy), DropDownModule (copy), ClientServerButtonWidth (copy), FrameHeight (copy), UtilBar1 (copy), Text (copy), UtilBar (copy), _UDim2 (copy)
+	local FormFactor = p1.props.formFactor
+	local UseDropDown = p1.props.useDropDown
+	local IsClientView = p1.props.isClientView
+	local LayoutOrder = p1.props.layoutOrder
+	local OnServerButton = p1.props.onServerButton
+	local OnClientButton = p1.props.onClientButton
+	local SelectedBlue = ConstantsModule.Color.SelectedBlue
+	local UnselectedGray = ConstantsModule.Color.UnselectedGray
 	
-	if isClientView then
-		unselectedGray = constantsModule.Color.SelectedBlue
-		selectedBlue = constantsModule.Color.UnselectedGray
+	if IsClientView then
+		UnselectedGray = ConstantsModule.Color.SelectedBlue
+		SelectedBlue = ConstantsModule.Color.UnselectedGray
 	end
-	return if formFactor == constantsModule.FormFactor.Small then roactModule.createElement(fullScreenDropDownButtonModule, {
-		buttonSize = UDim2.new(0, clientServerDropDownWidth, 0, smallFrameHeight),
-		dropDownList = list,
-		selectedIndex = if isClientView then 1 else 2,
+	return if FormFactor == ConstantsModule.FormFactor.Small then RoactModule.createElement(FullScreenDropDownButtonModule, {
+		buttonSize = UDim2.new(0, ClientServerDropDownWidth, 0, SmallFrameHeight),
+		dropDownList = DropDownList,
+		selectedIndex = if IsClientView then 1 else 2,
 		onSelection = p1.dropDownCallback,
-		layoutOrder = layoutOrder
-	}) elseif useDropDown then roactModule.createElement(dropDownModule, {
-		buttonSize = UDim2.new(0, clientServerDropDownWidth, 0, smallFrameHeight),
-		dropDownList = list,
-		selectedIndex = if isClientView then 1 else 2,
+		layoutOrder = LayoutOrder
+	}) elseif UseDropDown then RoactModule.createElement(DropDownModule, {
+		buttonSize = UDim2.new(0, ClientServerDropDownWidth, 0, SmallFrameHeight),
+		dropDownList = DropDownList,
+		selectedIndex = if IsClientView then 1 else 2,
 		onSelection = p1.dropDownCallback,
-		layoutOrder = layoutOrder
-	}) else roactModule.createElement("Frame", {
+		layoutOrder = LayoutOrder
+	}) else RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		Size = UDim2.new(0, 2 * clientServerButtonWidth, 0, frameHeight),
-		LayoutOrder = layoutOrder
+		Size = UDim2.new(0, 2 * ClientServerButtonWidth, 0, FrameHeight),
+		LayoutOrder = LayoutOrder
 	}, {
-		ClientButton = roactModule.createElement("TextButton", {
-			Text = list[1],
-			TextSize = utilBar_1,
-			TextColor3 = text,
-			Font = utilBar,
-			Size = uDim2,
+		ClientButton = RoactModule.createElement("TextButton", {
+			Text = DropDownList[1],
+			TextSize = UtilBar1,
+			TextColor3 = Text,
+			Font = UtilBar,
+			Size = _UDim2,
 			AutoButtonColor = false,
-			BackgroundColor3 = unselectedGray,
+			BackgroundColor3 = UnselectedGray,
 			BackgroundTransparency = 0,
 			LayoutOrder = 1,
-			[roactModule.Event.Activated] = onClientButton
+			[RoactModule.Event.Activated] = OnClientButton
 		}),
-		ServerButton = roactModule.createElement("TextButton", {
-			Text = list[2],
-			TextSize = utilBar_1,
-			TextColor3 = text,
-			Font = utilBar,
-			Size = uDim2,
+		ServerButton = RoactModule.createElement("TextButton", {
+			Text = DropDownList[2],
+			TextSize = UtilBar1,
+			TextColor3 = Text,
+			Font = UtilBar,
+			Size = _UDim2,
 			AutoButtonColor = false,
-			Position = UDim2.new(0, clientServerButtonWidth, 0, 0),
-			BackgroundColor3 = selectedBlue,
+			Position = UDim2.new(0, ClientServerButtonWidth, 0, 0),
+			BackgroundColor3 = SelectedBlue,
 			BackgroundTransparency = 0,
 			LayoutOrder = 2,
-			[roactModule.Event.Activated] = onServerButton
+			[RoactModule.Event.Activated] = OnServerButton
 		})
 	})
 end
 
-return clientServerButton
+return ClientServerButton

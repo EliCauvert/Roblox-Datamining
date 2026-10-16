@@ -1,31 +1,31 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent
-local object = require(parent_1.Parent.LuauPolyfill).Object
-local getScreenForRouteNameModule = require(parent.getScreenForRouteName)
-local validateScreenOptionsModule = require(parent.validateScreenOptions)
-local invariantModule = require(parent_1.utils.invariant)
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent
+local Object = require(Parent1.Parent.LuauPolyfill).Object
+local GetScreenForRouteNameModule = require(Parent.getScreenForRouteName)
+local ValidateScreenOptionsModule = require(Parent.validateScreenOptions)
+local InvariantModule = require(Parent1.utils.invariant)
 
-local function applyConfig(p1, p2, p3)
-	-- upvalues: object (ref)
-	p2 = p2 or {}
-	local var1 = type(p1)
+local function applyConfig(Callback, p1, Tbl) --[[ Line: 13 ]]
+	-- upvalues: Object (copy)
+	local Tbl1 = p1 or {}
+	local ValueType = type(Callback)
 	
-	return if var1 == "function" then object.assign({}, p2, p1(object.assign(table.clone(p3), { navigationOptions = p2 }))) elseif var1 == "table" then object.assign(table.clone(p2), p1) else p2
+	return if ValueType == "function" then Object.assign({}, Tbl1, Callback(Object.assign(table.clone(Tbl), { navigationOptions = Tbl1 }))) elseif ValueType == "table" then Object.assign(table.clone(Tbl1), Callback) else Tbl1
 end
 
-return function(p1, p2)
-	-- upvalues: invariantModule (ref), getScreenForRouteNameModule (ref), applyConfig (ref), validateScreenOptionsModule (ref)
-	return function(p3, p4)
-		-- upvalues: invariantModule (copy), getScreenForRouteNameModule (copy), p1 (ref), applyConfig (copy), p2 (ref), validateScreenOptionsModule (copy)
-		p4 = p4 or {}
-		local state = p3.state
-		invariantModule(type(state.routeName) == "string", "Cannot get config because the route does not have a routeName.")
-		local var1 = getScreenForRouteNameModule(p1, state.routeName)
-		local routeName = p1[state.routeName]
-		local t = { navigation = p3, screenProps = p4 }
-		local var2 = applyConfig(if routeName ~= var1 then routeName.navigationOptions else nil, applyConfig(if type(var1) == "table" then var1.navigationOptions else {}, applyConfig(p2, {}, t), t), t)
-		validateScreenOptionsModule(var2, state)
+return function(p1, p2) --[[ Line: 32 ]]
+	-- upvalues: InvariantModule (copy), GetScreenForRouteNameModule (copy), applyConfig (copy), ValidateScreenOptionsModule (copy)
+	return function(Navigation, p3) --[[ Line: 33 ]]
+		-- upvalues: InvariantModule (upval), GetScreenForRouteNameModule (upval), p1 (copy), applyConfig (upval), p2 (copy), ValidateScreenOptionsModule (upval)
+		local P4 = p3 or {}
+		local State = Navigation.state
+		InvariantModule(type(State.routeName) == "string", "Cannot get config because the route does not have a routeName.")
+		local ScreenForRouteNameModule = GetScreenForRouteNameModule(p1, State.routeName)
+		local v1 = p1[State.routeName]
+		local config = { navigation = Navigation, screenProps = P4 }
+		local ApplyConfigResult = applyConfig(if v1 == ScreenForRouteNameModule then nil else v1.navigationOptions, applyConfig(if type(ScreenForRouteNameModule) == "table" then ScreenForRouteNameModule.navigationOptions else {}, applyConfig(p2, {}, config), config), config)
+		ValidateScreenOptionsModule(ApplyConfigResult, State)
 		
-		return var2
+		return ApplyConfigResult
 	end
 end

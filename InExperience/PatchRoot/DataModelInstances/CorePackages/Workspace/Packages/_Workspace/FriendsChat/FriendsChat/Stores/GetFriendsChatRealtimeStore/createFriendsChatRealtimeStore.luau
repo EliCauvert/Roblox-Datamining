@@ -1,39 +1,40 @@
-﻿local createSignal = require(script:FindFirstAncestor("FriendsChat").Parent.Signals).createSignal
+﻿local CreateSignalFunction = require(script:FindFirstAncestor("FriendsChat").Parent.Signals).createSignal
 
-return function()
-	-- upvalues: createSignal (ref)
-	local var1, var2 = createSignal(false)
-	local var3, var4 = createSignal(nil)
-	local var5, var6 = createSignal({})
+return function() --[[ Line: 19 ]]
+	-- upvalues: CreateSignalFunction (copy)
+	local Signal, Signal2 = CreateSignalFunction(false)
+	local Signal1, Signal2_1 = CreateSignalFunction(nil)
+	local Signal3, Signal2_2 = CreateSignalFunction({})
 	
 	return {
-		getHasEnteredFriendsTab = var1,
-		getActiveConversationId = var3,
-		getLocalUnreadConversationIds = var5,
-		markFriendsTabEntered = function()
-			-- upvalues: var2 (ref)
-			var2(true)
+		getHasEnteredFriendsTab = Signal,
+		getActiveConversationId = Signal1,
+		getLocalUnreadConversationIds = Signal3,
+		markFriendsTabEntered = function() --[[ Line: 31 ]]
+			-- upvalues: Signal2 (copy)
+			Signal2(true)
 		end,
-		setActiveConversationId = function(value)
-			-- upvalues: var4 (ref)
-			var4(value)
+		setActiveConversationId = function(p1) --[[ Line: 35 ]]
+			-- upvalues: Signal2_1 (copy)
+			Signal2_1(p1)
 		end,
-		addLocalUnread = function(p1)
-			-- upvalues: var6 (ref)
-			var6(function(p2)
-				-- upvalues: p1 (ref)
-				if p2[p1] then
-					return p2
+		addLocalUnread = function(p1) --[[ Line: 39 ]]
+			-- upvalues: Signal2_2 (copy)
+			Signal2_2(function(Tbl) --[[ Line: 40 ]]
+				-- upvalues: p1 (copy)
+				if Tbl[p1] then
+					return Tbl
+				else
+					local Copy = table.clone(Tbl)
+					Copy[p1] = true
+					
+					return Copy
 				end
-				local cloned = table.clone(p2)
-				cloned[p1] = true
-				
-				return cloned
 			end)
 		end,
-		clearLocalUnread = function()
-			-- upvalues: var6 (ref)
-			var6(function(p1)
+		clearLocalUnread = function() --[[ Line: 50 ]]
+			-- upvalues: Signal2_2 (copy)
+			Signal2_2(function(p1) --[[ Line: 51 ]]
 				return if next(p1) == nil then p1 else {}
 			end)
 		end

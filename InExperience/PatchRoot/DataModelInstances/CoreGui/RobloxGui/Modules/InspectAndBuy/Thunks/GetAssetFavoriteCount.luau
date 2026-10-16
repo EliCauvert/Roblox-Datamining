@@ -1,36 +1,35 @@
-﻿local performFetch = require(game:GetService("CorePackages").Workspace.Packages.Http).PerformFetch
-local parent = script.Parent.Parent
-local thunkModule = require(parent.Thunk)
-local networkModule = require(parent.Services.Network)
-local setAssetsModule = require(parent.Actions.SetAssets)
-local assetInfoModule = require(parent.Models.AssetInfo)
-local createInspectAndBuyKeyMapperModule = require(parent.createInspectAndBuyKeyMapper)
-local sendCounterModule = require(parent.Thunks.SendCounter)
-local constantsModule = require(parent.Constants)
-local list = { networkModule }
-local var1 = createInspectAndBuyKeyMapperModule("getAssetFavoriteCount")
+﻿local PerformFetch = require(game:GetService("CorePackages").Workspace.Packages.Http).PerformFetch
+local Parent = script.Parent.Parent
+local ThunkModule = require(Parent.Thunk)
+local NetworkModule = require(Parent.Services.Network)
+local SetAssetsModule = require(Parent.Actions.SetAssets)
+local AssetInfoModule = require(Parent.Models.AssetInfo)
+local SendCounterModule = require(Parent.Thunks.SendCounter)
+local ConstantsModule = require(Parent.Constants)
+local list = { NetworkModule }
+local GetAssetFavoriteCount = require(Parent.createInspectAndBuyKeyMapper)("getAssetFavoriteCount")
 
-return function(value)
-	-- upvalues: thunkModule (ref), list (ref), networkModule (ref), var1 (ref), performFetch (ref), assetInfoModule (ref), setAssetsModule (ref), sendCounterModule (ref), constantsModule (ref)
-	return thunkModule.new(script.Name, list, function(p1, p2)
-		-- upvalues: networkModule (copy), var1 (copy), value (ref), performFetch (copy), assetInfoModule (copy), setAssetsModule (copy), sendCounterModule (copy), constantsModule (copy)
-		local var2 = p2[networkModule]
+return function(p1) --[[ Line: 21 | Named "GetAssetFavoriteCount" ]]
+	-- upvalues: ThunkModule (copy), list (copy), NetworkModule (copy), GetAssetFavoriteCount (copy), PerformFetch (copy), AssetInfoModule (copy), SetAssetsModule (copy), SendCounterModule (copy), ConstantsModule (copy)
+	return ThunkModule.new(script.Name, list, function(p2, p3) --[[ Line: 22 ]]
+		-- upvalues: NetworkModule (upval), GetAssetFavoriteCount (upval), p1 (copy), PerformFetch (upval), AssetInfoModule (upval), SetAssetsModule (upval), SendCounterModule (upval), ConstantsModule (upval)
+		local v1 = p3[NetworkModule]
 		
-		return performFetch.Single(var1(p1:getState().storeId, value), function(_)
-			-- upvalues: var2 (ref), value (copy), assetInfoModule (copy), p1 (ref), setAssetsModule (copy), sendCounterModule (copy), constantsModule (copy)
-			return var2.getAssetFavoriteCount(value):andThen(function(p3)
-				-- upvalues: assetInfoModule (copy), value (copy), p1 (copy), setAssetsModule (copy), sendCounterModule (copy), constantsModule (copy)
-				if p3 then
-					p1:dispatch(setAssetsModule({ assetInfoModule.fromGetAssetFavoriteCount(value, p3) }))
+		return PerformFetch.Single(GetAssetFavoriteCount(p2:getState().storeId, p1), function(_) --[[ Line: 27 ]]
+			-- upvalues: v1 (copy), p1 (upval), AssetInfoModule (upval), p2 (copy), SetAssetsModule (upval), SendCounterModule (upval), ConstantsModule (upval)
+			return v1.getAssetFavoriteCount(p1):andThen(function(Result) --[[ Line: 28 ]]
+				-- upvalues: AssetInfoModule (upval), p1 (upval), p2 (upval), SetAssetsModule (upval), SendCounterModule (upval), ConstantsModule (upval)
+				if Result then
+					p2:dispatch(SetAssetsModule({ (AssetInfoModule.fromGetAssetFavoriteCount(p1, Result)) }))
 				end
-				p1:dispatch(sendCounterModule(constantsModule.Counters.GetAssetFavoriteCount .. constantsModule.CounterSuffix.RequestSucceeded))
-			end, function(_)
-				-- upvalues: p1 (copy), sendCounterModule (copy), constantsModule (copy)
-				p1:dispatch(sendCounterModule(constantsModule.Counters.GetAssetFavoriteCount .. constantsModule.CounterSuffix.RequestRejected))
+				p2:dispatch(SendCounterModule(ConstantsModule.Counters.GetAssetFavoriteCount .. ConstantsModule.CounterSuffix.RequestSucceeded))
+			end, function(_) --[[ Line: 36 ]]
+				-- upvalues: p2 (upval), SendCounterModule (upval), ConstantsModule (upval)
+				p2:dispatch(SendCounterModule(ConstantsModule.Counters.GetAssetFavoriteCount .. ConstantsModule.CounterSuffix.RequestRejected))
 			end)
-		end)(p1):catch(function(_)
-			-- upvalues: p1 (ref), sendCounterModule (copy), constantsModule (copy)
-			p1:dispatch(sendCounterModule(constantsModule.Counters.GetAssetFavoriteCount .. constantsModule.CounterSuffix.RequestFailed))
+		end)(p2):catch(function(_) --[[ Line: 41 ]]
+			-- upvalues: p2 (copy), SendCounterModule (upval), ConstantsModule (upval)
+			p2:dispatch(SendCounterModule(ConstantsModule.Counters.GetAssetFavoriteCount .. ConstantsModule.CounterSuffix.RequestFailed))
 		end)
 	end)
 end

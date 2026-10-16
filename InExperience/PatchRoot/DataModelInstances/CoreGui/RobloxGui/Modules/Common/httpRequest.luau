@@ -1,88 +1,90 @@
-﻿local httpService = game:GetService("HttpService")
-local promiseModule = require(game:GetService("CorePackages").Packages.Promise)
-local extreme = Enum.ThrottlingPriority.Extreme
-local applicationJson = Enum.HttpContentType.ApplicationJson
+﻿local HttpService = game:GetService("HttpService")
+local PromiseModule = require(game:GetService("CorePackages").Packages.Promise)
+local Extreme = Enum.ThrottlingPriority.Extreme
+local ApplicationJson = Enum.HttpContentType.ApplicationJson
 
-return function(p1)
-	-- upvalues: httpService (ref), applicationJson (ref), extreme (ref), promiseModule (ref)
-	local function doHttpPost(p2, p3)
-		-- upvalues: httpService (copy), applicationJson (copy), extreme (copy), p1 (ref)
-		local postBody = nil
-		assert(p3.postBody, "Expected a postBody to be specified with this request")
+return function(HttpRbxApiService) --[[ Line: 10 ]]
+	-- upvalues: HttpService (copy), ApplicationJson (copy), Extreme (copy), PromiseModule (copy)
+	local function doHttpPost(ApiUrl, p1) --[[ Line: 12 ]]
+		-- upvalues: HttpService (upval), ApplicationJson (upval), Extreme (upval), HttpRbxApiService (copy)
+		local Json = nil
+		assert(p1.postBody, "Expected a postBody to be specified with this request")
 		
-		if type(p3.postBody) == "table" then
-			postBody = httpService:JSONEncode(p3.postBody)
-		elseif type(p3.postBody) == "string" then
-			postBody = p3.postBody
+		if type(p1.postBody) == "table" then
+			Json = HttpService:JSONEncode(p1.postBody)
+		elseif type(p1.postBody) == "string" then
+			Json = p1.postBody
 		else
 			error("Expected postBody to be a string or table")
 		end
-		if not p3.contentType then
-			p3.contentType = applicationJson
+		if not p1.contentType then
+			p1.contentType = ApplicationJson
 		end
-		if not p3.throttlingPriority then
-			p3.throttlingPriority = extreme
+		if not p1.throttlingPriority then
+			p1.throttlingPriority = Extreme
 		end
-		return function()
-			-- upvalues: p1 (copy), p2 (ref), postBody (write), p3 (ref)
-			return p1:PostAsyncFullUrl(p2, postBody, p3.throttlingPriority, p3.contentType)
-		end
-	end
-	
-	local function _(p2)
-		-- upvalues: p1 (ref), extreme (copy)
-		return function()
-			-- upvalues: p1 (copy), p2 (ref), extreme (copy)
-			return p1:GetAsyncFullUrl(p2, extreme)
+		return function() --[[ Line: 31 ]]
+			-- upvalues: HttpRbxApiService (upval), ApiUrl (copy), Json (ref), p1 (copy)
+			return HttpRbxApiService:PostAsyncFullUrl(ApiUrl, Json, p1.throttlingPriority, p1.contentType)
 		end
 	end
 	
-	return function(p2, p3, p4)
-		-- upvalues: doHttpPost (ref), p1 (ref), extreme (copy), promiseModule (copy), httpService (copy)
-		assert(type(p2) == "string", "Expected url to be a string")
-		assert(type(p3) == "string", "Expected requestMethod to be a string")
-		assert(not p4 or type(p4) == "table", "Expected options to be a table")
-		p3 = string.upper(p3)
-		local var1 = nil
+	local function _(p1) --[[ Line: 41 | Named "doHttpGet" ]]
+		-- upvalues: HttpRbxApiService (copy), Extreme (upval)
+		return function() --[[ Line: 42 ]]
+			-- upvalues: HttpRbxApiService (upval), p1 (copy), Extreme (upval)
+			return HttpRbxApiService:GetAsyncFullUrl(p1, Extreme)
+		end
+	end
+	
+	return function(ApiUrl, Text: string, p1) --[[ Line: 55 ]]
+		-- upvalues: doHttpPost (copy), HttpRbxApiService (copy), Extreme (upval), PromiseModule (upval), HttpService (upval)
+		assert(type(ApiUrl) == "string", "Expected url to be a string")
+		assert(type(Text) == "string", "Expected requestMethod to be a string")
+		assert(not p1 or type(p1) == "table", "Expected options to be a table")
+		local Uppered = string.upper(Text)
+		local v1: (() -> any)? = nil
 		
-		if p3 == "POST" then
-			var1 = doHttpPost(p2, p4)
-		elseif p3 == "GET" then
-			var1 = function()
-				-- upvalues: p1 (copy), p2 (ref), extreme (copy)
-				return p1:GetAsyncFullUrl(p2, extreme)
+		if Uppered == "POST" then
+			v1 = doHttpPost(ApiUrl, p1)
+		elseif Uppered == "GET" then
+			v1 = function() --[[ Line: 42 ]]
+				-- upvalues: HttpRbxApiService (upval), ApiUrl (copy), Extreme (upval)
+				return HttpRbxApiService:GetAsyncFullUrl(ApiUrl, Extreme)
 			end
 		else
-			error(string.format("Unsupported requestMethod : %s", p3 or "nil"))
+			error(string.format("Unsupported requestMethod : %s", Uppered or "nil"))
 		end
-		return promiseModule.new(function(p5, p6)
-			-- upvalues: var1 (write), httpService (copy)
-			if var1 then
-				spawn(function()
-					-- upvalues: var1 (copy), httpService (copy), p5 (ref), p6 (ref)
-					local ok, status = pcall(var1)
+		return PromiseModule.new(function(Callback1, Callback: () -> ()) --[[ Line: 70 ]]
+			-- upvalues: v1 (ref), HttpService (upval)
+			if v1 then
+				spawn(function() --[[ Line: 72 ]]
+					-- upvalues: v1 (upval), HttpService (upval), Callback1 (copy), Callback (copy)
+					local Success, Result = pcall(v1)
 					
-					if not ok then
-						p6(status)
+					if not Success then
+						Callback(Result)
 						
 						return
 					end
-					local ok_1, status_1 = pcall(function()
-						-- upvalues: httpService (copy), status (ref)
-						return httpService:JSONDecode(status)
+					local Success1, Result1 = pcall(function() --[[ Line: 76 ]]
+						-- upvalues: HttpService (upval), Result (copy)
+						return HttpService:JSONDecode(Result)
 					end)
 					
-					if ok_1 then
-						p5({ responseBody = status_1 })
+					if Success1 then
+						Callback1({ responseBody = Result1 })
 						
 						return
+					else
+						Callback(Result1)
 					end
-					p6(status_1)
 				end)
 				
 				return
+			else
+				Callback()
 			end
-			p6()
 		end)
 	end
 end

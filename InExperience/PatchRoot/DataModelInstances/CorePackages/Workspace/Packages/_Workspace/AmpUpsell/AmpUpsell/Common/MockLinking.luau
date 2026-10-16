@@ -1,30 +1,30 @@
-﻿local promiseModule = require(script:FindFirstAncestor("AmpUpsell").Parent.Promise)
-local t = {}
-t.__index = t
+﻿local PromiseModule = require(script:FindFirstAncestor("AmpUpsell").Parent.Promise)
+local MockLinkingModule = {}
+MockLinkingModule.__index = MockLinkingModule
 
-function t.new()
-	-- upvalues: t (ref)
-	return setmetatable({}, t)
+function MockLinkingModule.new() --[[ Line: 12 ]]
+	-- upvalues: MockLinkingModule (copy)
+	return (setmetatable({}, MockLinkingModule))
 end
 
-function t.registerURL(_, _) end
+function MockLinkingModule:registerURL(_) --[[ Line: 16 ]] end
 
-function t.detectURL(_, _) end
+function MockLinkingModule:detectURL(_) --[[ Line: 20 ]] end
 
-function t.listenForLuaURLs(_, _) end
+function MockLinkingModule:listenForLuaURLs(_) --[[ Line: 24 ]] end
 
-function t.stopListeningForLuaURLs(_) end
+function MockLinkingModule:stopListeningForLuaURLs() --[[ Line: 28 ]] end
 
-function t:openURL(p1)
-	-- upvalues: promiseModule (ref)
-	self.lastOpenedURL = p1
+function MockLinkingModule:openURL(LastOpenedURL) --[[ Line: 32 ]]
+	-- upvalues: PromiseModule (copy)
+	self.lastOpenedURL = LastOpenedURL
 	
-	return promiseModule.resolve(true)
+	return PromiseModule.resolve(true)
 end
 
-function t.isURLRegistered(_, _)
-	-- upvalues: promiseModule (ref)
-	return promiseModule.resolve(true)
+function MockLinkingModule:isURLRegistered(_) --[[ Line: 37 ]]
+	-- upvalues: PromiseModule (copy)
+	return PromiseModule.resolve(true)
 end
 
-return t
+return MockLinkingModule

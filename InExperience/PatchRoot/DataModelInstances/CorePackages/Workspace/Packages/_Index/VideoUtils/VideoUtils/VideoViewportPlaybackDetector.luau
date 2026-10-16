@@ -1,59 +1,66 @@
-﻿local experienceService = game:GetService("ExperienceService")
-local appLifecycleObserverService = game:GetService("AppLifecycleObserverService")
-local videoUtils = script:FindFirstAncestor("VideoUtils")
-local parent = videoUtils.Parent
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local useNavigationFocus = require(parent.Navigation).useNavigationFocus
-local videoEndReason = require(videoUtils.Analytics.Enums).VideoEndReason
-local _ = require(videoUtils.VideoPlaybackCoordinator)
-local _ = require(videoUtils.ViewportVideoAutoplayController)
-local fFlagLuaAppOneByTwoHoverIdleAutoplay = require(parent.SharedFlags).FFlagLuaAppOneByTwoHoverIdleAutoplay
-local fFlagLuaAppEdpMediaGalleryFullScreen = require(parent.SharedFlags).FFlagLuaAppEdpMediaGalleryFullScreen
-local fFlagVideoPlaybackDetectorCancelPendingScanTask = require(parent.SharedFlags).FFlagVideoPlaybackDetectorCancelPendingScanTask
-local var1 = signalsModule.createSignal({
+﻿local ExperienceService = game:GetService("ExperienceService")
+local AppLifecycleObserverService = game:GetService("AppLifecycleObserverService")
+local VideoUtils = script:FindFirstAncestor("VideoUtils")
+local Parent = VideoUtils.Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local UseNavigationFocusFunction = require(Parent.Navigation).useNavigationFocus
+local VideoEndReason = require(VideoUtils.Analytics.Enums).VideoEndReason
+local _ = require(VideoUtils.VideoPlaybackCoordinator)
+local _ = require(VideoUtils.ViewportVideoAutoplayController)
+local FFlagLuaAppOneByTwoHoverIdleAutoplay = require(Parent.SharedFlags).FFlagLuaAppOneByTwoHoverIdleAutoplay
+local FFlagLuaAppEdpMediaGalleryFullScreen = require(Parent.SharedFlags).FFlagLuaAppEdpMediaGalleryFullScreen
+local FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback = require(Parent.SharedFlags).FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback
+local FFlagVideoPlaybackDetectorCancelPendingScanTask = require(Parent.SharedFlags).FFlagVideoPlaybackDetectorCancelPendingScanTask
+local FIntVideoPlaybackDetectorScanDebounceInMilliseconds: number = require(Parent.SharedFlags).FIntVideoPlaybackDetectorScanDebounceInMilliseconds
+local FFlagEnableOnScreenAPIIntegration = require(Parent.SharedFlags).FFlagEnableOnScreenAPIIntegration
+local UseIsRouteOnScreen = if FFlagEnableOnScreenAPIIntegration then require(Parent.RobloxAppNavigation).useIsRouteOnScreen else nil
+local Signal = require(Parent.Signals).createSignal({
 	instance = nil,
 	shouldUseDwell = true,
-	isUserIntentWinner = if fFlagLuaAppOneByTwoHoverIdleAutoplay then false else nil
+	isUserIntentWinner = not FFlagLuaAppOneByTwoHoverIdleAutoplay and nil
 })
-local var2 = if fFlagVideoPlaybackDetectorCancelPendingScanTask then require(parent.SharedFlags).FIntVideoPlaybackDetectorScanDebounceInMilliseconds / 1000 else 0.5
+local FIntVideoPlaybackDetectorScanDebounceInMillisecondsRatio = if FFlagVideoPlaybackDetectorCancelPendingScanTask then FIntVideoPlaybackDetectorScanDebounceInMilliseconds / 1000 else 0.5
 
-return function(p1)
-	-- upvalues: useNavigationFocus (ref), useSelector (ref), reactModule (ref), signalsReactModule (ref), var1 (ref), fFlagLuaAppOneByTwoHoverIdleAutoplay (ref), fFlagLuaAppEdpMediaGalleryFullScreen (ref), videoEndReason (ref), appLifecycleObserverService (ref), experienceService (ref), var2 (ref), fFlagVideoPlaybackDetectorCancelPendingScanTask (ref)
-	local var3 = useNavigationFocus()
-	local var4 = useSelector(function(p2)
+return function(p1) --[[ Line: 69 | Named "VideoViewportPlaybackDetector" ]]
+	-- upvalues: FFlagEnableOnScreenAPIIntegration (copy), UseIsRouteOnScreen (copy), UseNavigationFocusFunction (copy), UseSelectorFunction (copy), ReactModule (copy), FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback (copy), SignalsReactModule (copy), Signal (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), FFlagLuaAppEdpMediaGalleryFullScreen (copy), VideoEndReason (copy), AppLifecycleObserverService (copy), ExperienceService (copy), FIntVideoPlaybackDetectorScanDebounceInMillisecondsRatio (copy), FFlagVideoPlaybackDetectorCancelPendingScanTask (copy)
+	local UseIsRouteOnScreenResult = if FFlagEnableOnScreenAPIIntegration then UseIsRouteOnScreen() else UseNavigationFocusFunction()
+	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 72 ]]
 		return p2.ScreenSize
 	end)
-	local var5 = useSelector(function(p2)
+	local UseSelectorResult1 = UseSelectorFunction(function(p2) --[[ Line: 76 ]]
 		return p2.TopBar.topBarHeight
 	end)
-	local var6 = useSelector(function(p2)
+	local UseSelectorResult2 = UseSelectorFunction(function(p2) --[[ Line: 80 ]]
 		return p2.GlobalGuiInset
 	end)
-	local var7 = reactModule.useMemo(function()
-		-- upvalues: var5 (ref), var4 (ref), var6 (ref)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 84 ]]
+		-- upvalues: UseSelectorResult1 (copy), UseSelectorResult (copy), UseSelectorResult2 (copy)
 		return {
-			min = Vector2.new(0, var5),
-			max = Vector2.new(var4.X, var4.Y - var6.bottom)
+			min = Vector2.new(0, UseSelectorResult1),
+			max = Vector2.new(UseSelectorResult.X, UseSelectorResult.Y - UseSelectorResult2.bottom)
 		}
-	end, { var5, var4, var6 })
-	local var8 = signalsReactModule.useSignalState(if p1.viewportVideoAutoplayController then p1.viewportVideoAutoplayController.getWinnerState else var1)
+	end, {
+		UseSelectorResult1,
+		UseSelectorResult,
+		UseSelectorResult2
+	})
+	local IsAdsPlaybackCoordinatorMatch = if FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback then p1.viewportVideoAutoplayController ~= nil and p1.viewportVideoAutoplayController:getAdsPlaybackCoordinator() == p1.videoPlaybackCoordinator else nil
+	local UseSignalStateResult = SignalsReactModule.useSignalState(if FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback and p1.viewportVideoAutoplayController then p1.viewportVideoAutoplayController:getWinnerStateForCoordinator(p1.videoPlaybackCoordinator) elseif p1.viewportVideoAutoplayController then p1.viewportVideoAutoplayController.getWinnerState else Signal)
 	
-	if fFlagLuaAppOneByTwoHoverIdleAutoplay then
-		reactModule.useEffect(function()
-			-- upvalues: p1 (ref)
-			local viewportVideoAutoplayController = p1.viewportVideoAutoplayController
-			local current = p1.itemFrameRef.current
+	if FFlagLuaAppOneByTwoHoverIdleAutoplay then
+		ReactModule.useEffect(function() --[[ Line: 105 ]]
+			-- upvalues: p1 (copy)
+			local ViewportVideoAutoplayController = p1.viewportVideoAutoplayController
+			local Current = p1.itemFrameRef.current
 			
-			if viewportVideoAutoplayController and viewportVideoAutoplayController:isUserIntentWithSelectiveAutoplay() and current then
-				viewportVideoAutoplayController:setCandidateUserIntent(current, p1.hasVideoPlaybackUserIntent == true)
-				
-				return function()
-					-- upvalues: viewportVideoAutoplayController (ref), current (ref)
-					viewportVideoAutoplayController:setCandidateUserIntent(current, false)
-				end
+			if not ViewportVideoAutoplayController or not ViewportVideoAutoplayController:isUserIntentWithSelectiveAutoplay() or not Current then return end
+			ViewportVideoAutoplayController:setCandidateUserIntent(Current, p1.hasVideoPlaybackUserIntent == true)
+			
+			return function() --[[ Line: 114 ]]
+				-- upvalues: ViewportVideoAutoplayController (copy), Current (copy)
+				ViewportVideoAutoplayController:setCandidateUserIntent(Current, false)
 			end
 		end, {
 			p1.viewportVideoAutoplayController,
@@ -61,137 +68,145 @@ return function(p1)
 			p1.hasVideoPlaybackUserIntent
 		})
 	end
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var8 (ref), var3 (ref), fFlagLuaAppEdpMediaGalleryFullScreen (copy), fFlagLuaAppOneByTwoHoverIdleAutoplay (copy), videoEndReason (copy)
-		local viewportVideoAutoplayController = p1.viewportVideoAutoplayController
+	ReactModule.useEffect(function() --[[ Line: 127 ]]
+		-- upvalues: p1 (copy), UseSignalStateResult (copy), UseIsRouteOnScreenResult (copy), FFlagLuaAppEdpMediaGalleryFullScreen (upval), FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback (upval), IsAdsPlaybackCoordinatorMatch (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (upval), VideoEndReason (upval)
+		local ViewportVideoAutoplayController = p1.viewportVideoAutoplayController
 		
-		if not viewportVideoAutoplayController then return end
-		local current = p1.itemFrameRef.current
+		if not ViewportVideoAutoplayController then return end
+		local Current = p1.itemFrameRef.current
 		
-		if current ~= nil and var8.instance == current then
-			if not p1.videoPlaybackCoordinator:isPlaybackAllowed(var3, if fFlagLuaAppEdpMediaGalleryFullScreen then p1.isItemOccluded else nil) then
-				p1.cancelVideoPlayback(videoEndReason.ExitViewport)
-				
-				return
-			elseif fFlagLuaAppOneByTwoHoverIdleAutoplay then
-				viewportVideoAutoplayController:requestWinnerPlayback(current, p1.requestVideoPlayback)
+		if Current ~= nil and UseSignalStateResult.instance == Current then
+			if not p1.videoPlaybackCoordinator:isPlaybackAllowed(UseIsRouteOnScreenResult, if FFlagLuaAppEdpMediaGalleryFullScreen then p1.isItemOccluded else nil) then
+				p1.cancelVideoPlayback(VideoEndReason.ExitViewport)
 				
 				return
 			end
-			p1.requestVideoPlayback(var8.shouldUseDwell)
-			
-			return
-		elseif fFlagLuaAppOneByTwoHoverIdleAutoplay and viewportVideoAutoplayController:isUserIntentWithSelectiveAutoplay() and p1.videoPlaybackCoordinator.playingVideoKey == p1.videoKey then
-			p1.cancelVideoPlayback(videoEndReason.ExitViewport)
+			if FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback and IsAdsPlaybackCoordinatorMatch then
+				p1.requestVideoPlayback(UseSignalStateResult.shouldUseDwell)
+				
+				return
+			end
+			if FFlagLuaAppOneByTwoHoverIdleAutoplay then
+				ViewportVideoAutoplayController:requestWinnerPlayback(Current, p1.requestVideoPlayback)
+				
+				return
+			else
+				p1.requestVideoPlayback(UseSignalStateResult.shouldUseDwell)
+				
+				return
+			end
+		elseif FFlagLuaAppOneByTwoHoverIdleAutoplay and ViewportVideoAutoplayController:isUserIntentWithSelectiveAutoplay() and p1.videoPlaybackCoordinator.playingVideoKey == p1.videoKey then
+			p1.cancelVideoPlayback(VideoEndReason.ExitViewport)
 		end
 	end, {
 		p1.viewportVideoAutoplayController, p1.itemFrameRef, p1.requestVideoPlayback,
 		p1.cancelVideoPlayback, p1.videoPlaybackCoordinator,
-		if fFlagLuaAppOneByTwoHoverIdleAutoplay then p1.videoKey else nil, var3, var8,
-		if fFlagLuaAppEdpMediaGalleryFullScreen then p1.isItemOccluded else nil
+		if FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback then IsAdsPlaybackCoordinatorMatch else nil,
+		if FFlagLuaAppOneByTwoHoverIdleAutoplay then p1.videoKey else nil,
+		UseIsRouteOnScreenResult, UseSignalStateResult,
+		if FFlagLuaAppEdpMediaGalleryFullScreen then p1.isItemOccluded else nil
 	})
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), appLifecycleObserverService (copy), experienceService (copy)
-		local viewportVideoAutoplayController = p1.viewportVideoAutoplayController
+	ReactModule.useEffect(function() --[[ Line: 175 ]]
+		-- upvalues: p1 (copy), AppLifecycleObserverService (upval), ExperienceService (upval)
+		local ViewportVideoAutoplayController = p1.viewportVideoAutoplayController
 		
-		if viewportVideoAutoplayController then
-			local onUnhideConnection = appLifecycleObserverService.OnUnhide:Connect(function()
-				-- upvalues: viewportVideoAutoplayController (ref)
-				viewportVideoAutoplayController:scheduleUpdateWinner("Y", nil, true)
-			end)
-			local var9 = experienceService:RegisterForExperienceLeave(function()
-				-- upvalues: viewportVideoAutoplayController (ref)
-				viewportVideoAutoplayController:scheduleUpdateWinner("Y", nil, true)
-			end)
-			
-			return function()
-				-- upvalues: onUnhideConnection (ref), var9 (ref)
-				onUnhideConnection:Disconnect()
-				var9:Disconnect()
-			end
+		if not ViewportVideoAutoplayController then return end
+		local OnUnhideConnection = AppLifecycleObserverService.OnUnhide:Connect(function() --[[ Line: 181 ]]
+			-- upvalues: ViewportVideoAutoplayController (copy)
+			ViewportVideoAutoplayController:scheduleUpdateWinner("Y", nil, true)
+		end)
+		local RegisterForExperienceLeaveResult = ExperienceService:RegisterForExperienceLeave(function() --[[ Line: 186 ]]
+			-- upvalues: ViewportVideoAutoplayController (copy)
+			ViewportVideoAutoplayController:scheduleUpdateWinner("Y", nil, true)
+		end)
+		
+		return function() --[[ Line: 191 ]]
+			-- upvalues: OnUnhideConnection (copy), RegisterForExperienceLeaveResult (copy)
+			OnUnhideConnection:Disconnect()
+			RegisterForExperienceLeaveResult:Disconnect()
 		end
 	end, { p1.viewportVideoAutoplayController })
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var3 (ref), fFlagLuaAppEdpMediaGalleryFullScreen (copy), var7 (ref), videoEndReason (copy), var2 (copy), fFlagVideoPlaybackDetectorCancelPendingScanTask (copy), appLifecycleObserverService (copy), experienceService (copy)
+	ReactModule.useEffect(function() --[[ Line: 200 ]]
+		-- upvalues: p1 (copy), UseIsRouteOnScreenResult (copy), FFlagLuaAppEdpMediaGalleryFullScreen (upval), UseMemoResult (copy), VideoEndReason (upval), FIntVideoPlaybackDetectorScanDebounceInMillisecondsRatio (upval), FFlagVideoPlaybackDetectorCancelPendingScanTask (upval), AppLifecycleObserverService (upval), ExperienceService (upval)
 		if p1.viewportVideoAutoplayController ~= nil then return end
-		local t = {}
-		local var9 = nil
+		local List = {}
+		local v1 = nil
 		
 		if p1.itemFrameRef.current ~= nil then
-			local current = p1.itemFrameRef.current
-			local var10 = nil
-			local var11 = nil
+			local Current = p1.itemFrameRef.current
+			local CurrentTime = nil
+			local v2 = nil
 			
-			local function requestPlaybackIfEligible()
-				-- upvalues: var10 (write), p1 (copy), var3 (copy), fFlagLuaAppEdpMediaGalleryFullScreen (copy), var7 (copy), videoEndReason (copy)
-				var10 = tick()
+			local function requestPlaybackIfEligible() --[[ Line: 213 ]]
+				-- upvalues: CurrentTime (ref), p1 (upval), UseIsRouteOnScreenResult (upval), FFlagLuaAppEdpMediaGalleryFullScreen (upval), UseMemoResult (upval), VideoEndReason (upval)
+				CurrentTime = tick()
 				
-				if p1.videoPlaybackCoordinator:isPlaybackCandidate(var3, if fFlagLuaAppEdpMediaGalleryFullScreen then p1.isItemOccluded else nil, p1.itemFrameRef, var7, p1.videoVisiblePercent) then
+				if p1.videoPlaybackCoordinator:isPlaybackCandidate(UseIsRouteOnScreenResult, if FFlagLuaAppEdpMediaGalleryFullScreen then p1.isItemOccluded else nil, p1.itemFrameRef, UseMemoResult, p1.videoVisiblePercent) then
 					p1.requestVideoPlayback(true)
 					
 					return
+				else
+					p1.cancelVideoPlayback(VideoEndReason.ExitViewport)
 				end
-				p1.cancelVideoPlayback(videoEndReason.ExitViewport)
 			end
 			
-			local function onItemFrameLayoutChange()
-				-- upvalues: var11 (write), var10 (write), var2 (copy), requestPlaybackIfEligible (ref), fFlagVideoPlaybackDetectorCancelPendingScanTask (copy), var9 (write)
-				if var11 ~= nil then return end
-				local var12 = 0
+			local function onItemFrameLayoutChange() --[[ Line: 231 ]]
+				-- upvalues: v2 (ref), CurrentTime (ref), FIntVideoPlaybackDetectorScanDebounceInMillisecondsRatio (upval), requestPlaybackIfEligible (copy), FFlagVideoPlaybackDetectorCancelPendingScanTask (upval), v1 (ref)
+				if v2 ~= nil then return end
+				local Delay = 0
 				
-				if var10 ~= nil then
-					var11 = var10 + var2
-					var12 = var11 - tick()
+				if CurrentTime ~= nil then
+					v2 = CurrentTime + FIntVideoPlaybackDetectorScanDebounceInMillisecondsRatio
+					Delay = v2 - tick()
 				end
-				if var12 > 0 then
-					local delayedThread = task.delay(var12, function()
-						-- upvalues: var11 (copy), requestPlaybackIfEligible (copy)
-						var11 = nil
+				if Delay > 0 then
+					local DelayedThread = task.delay(Delay, function() --[[ Line: 244 ]]
+						-- upvalues: v2 (upval), requestPlaybackIfEligible (upval)
+						v2 = nil
 						requestPlaybackIfEligible()
 					end)
 					
-					if fFlagVideoPlaybackDetectorCancelPendingScanTask then
-						var9 = delayedThread
+					if FFlagVideoPlaybackDetectorCancelPendingScanTask then
+						v1 = DelayedThread
 						
 						return
 					end
 				else
-					var11 = nil
+					v2 = nil
 					requestPlaybackIfEligible()
 				end
 			end
 			
 			requestPlaybackIfEligible()
-			local onUnhideConnection = appLifecycleObserverService.OnUnhide:Connect(function()
-				-- upvalues: requestPlaybackIfEligible (ref)
+			local RegisterForExperienceLeaveResult = ExperienceService:RegisterForExperienceLeave(function() --[[ Line: 267 ]]
+				-- upvalues: requestPlaybackIfEligible (copy)
 				requestPlaybackIfEligible()
 			end)
-			local var12 = experienceService:RegisterForExperienceLeave(function()
-				-- upvalues: requestPlaybackIfEligible (ref)
-				requestPlaybackIfEligible()
-			end)
-			t = {
-				current:GetPropertyChangedSignal("AbsolutePosition"):Connect(onItemFrameLayoutChange),
-				current:GetPropertyChangedSignal("AbsoluteSize"):Connect(onItemFrameLayoutChange)
+			List = {
+				Current:GetPropertyChangedSignal("AbsolutePosition"):Connect(onItemFrameLayoutChange),
+				Current:GetPropertyChangedSignal("AbsoluteSize"):Connect(onItemFrameLayoutChange)
 			}
-			table.insert(t, onUnhideConnection)
-			table.insert(t, var12)
+			table.insert(List, (AppLifecycleObserverService.OnUnhide:Connect(function() --[[ Line: 261 ]]
+				-- upvalues: requestPlaybackIfEligible (copy)
+				requestPlaybackIfEligible()
+			end)))
+			table.insert(List, RegisterForExperienceLeaveResult)
 		end
-		return function()
-			-- upvalues: fFlagVideoPlaybackDetectorCancelPendingScanTask (copy), var9 (write), t (write)
-			if fFlagVideoPlaybackDetectorCancelPendingScanTask and var9 then
-				task.cancel(var9)
-				var9 = nil
+		return function() --[[ Line: 280 ]]
+			-- upvalues: FFlagVideoPlaybackDetectorCancelPendingScanTask (upval), v1 (ref), List (ref)
+			if FFlagVideoPlaybackDetectorCancelPendingScanTask and v1 then
+				task.cancel(v1)
+				v1 = nil
 			end
-			for i, v in t do
-				v:Disconnect()
+			for _, Connection in List do
+				Connection:Disconnect()
 			end
 		end
 	end, {
-		if fFlagLuaAppEdpMediaGalleryFullScreen then p1.isItemOccluded else nil,
-		p1.itemFrameRef, p1.videoVisiblePercent, var3, var7,
-		p1.videoPlaybackCoordinator, p1.requestVideoPlayback, p1.cancelVideoPlayback,
-		p1.viewportVideoAutoplayController
+		if FFlagLuaAppEdpMediaGalleryFullScreen then p1.isItemOccluded else nil,
+		p1.itemFrameRef, p1.videoVisiblePercent, UseIsRouteOnScreenResult,
+		UseMemoResult, p1.videoPlaybackCoordinator, p1.requestVideoPlayback,
+		p1.cancelVideoPlayback, p1.viewportVideoAutoplayController
 	})
 	
 	return nil

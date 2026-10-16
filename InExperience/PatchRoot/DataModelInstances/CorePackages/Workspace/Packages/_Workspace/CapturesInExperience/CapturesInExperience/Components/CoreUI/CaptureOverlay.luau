@@ -1,50 +1,49 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local runService = game:GetService("RunService")
-local reactModule = require(parent_1.React)
-local reactOtterModule = require(parent_1.ReactOtter)
-local roactUtilsModule = require(parent_1.RoactUtils)
-local constantsModule = require(parent.Constants)
-local useAnimatedBinding = reactOtterModule.useAnimatedBinding
-local useBindCaptureShortcutModule = require(parent.Hooks.useBindCaptureShortcut)
-local useEffect = reactModule.useEffect
-local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
-local useShowFlashOverlayModule = require(parent.Hooks.useShowFlashOverlay)
-local useTopbarInsetHeightModule = require(parent.Hooks.useTopbarInsetHeight)
-local instant = reactOtterModule.instant
-local spring = reactOtterModule.spring
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local RunService = game:GetService("RunService")
+local ReactModule = require(Parent1.React)
+local ReactOtterModule = require(Parent1.ReactOtter)
+local ConstantsModule = require(Parent.Constants)
+local UseAnimatedBindingFunction = ReactOtterModule.useAnimatedBinding
+local UseBindCaptureShortcutModule = require(Parent.Hooks.useBindCaptureShortcut)
+local UseEffectFunction = ReactModule.useEffect
+local UseSelectorFunction = require(Parent1.RoactUtils).Hooks.RoactRodux.useSelector
+local UseShowFlashOverlayModule = require(Parent.Hooks.useShowFlashOverlay)
+local UseTopbarInsetHeightModule = require(Parent.Hooks.useTopbarInsetHeight)
+local InstantFunction = ReactOtterModule.instant
+local SpringFunction = ReactOtterModule.spring
 
-return function(_)
-	-- upvalues: useBindCaptureShortcutModule (ref), useTopbarInsetHeightModule (ref), useSelector (ref), constantsModule (ref), useShowFlashOverlayModule (ref), useAnimatedBinding (ref), useEffect (ref), instant (ref), runService (ref), spring (ref), reactModule (ref)
-	useBindCaptureShortcutModule()
-	local var1 = useTopbarInsetHeightModule()
-	local var2 = useSelector(function(p1)
-		-- upvalues: constantsModule (copy)
-		return p1[constantsModule.RoduxKey].IsOverlayActive
+return function(_) --[[ Line: 26 ]]
+	-- upvalues: UseBindCaptureShortcutModule (copy), UseTopbarInsetHeightModule (copy), UseSelectorFunction (copy), ConstantsModule (copy), UseShowFlashOverlayModule (copy), UseAnimatedBindingFunction (copy), UseEffectFunction (copy), InstantFunction (copy), RunService (copy), SpringFunction (copy), ReactModule (copy)
+	UseBindCaptureShortcutModule()
+	local UseTopbarInsetHeightModuleResult = UseTopbarInsetHeightModule()
+	local UseSelectorResult = UseSelectorFunction(function(p1) --[[ Line: 31 ]]
+		-- upvalues: ConstantsModule (upval)
+		return p1[ConstantsModule.RoduxKey].IsOverlayActive
 	end)
-	local var3, var4 = useShowFlashOverlayModule()
-	local var5, var6 = useAnimatedBinding(1)
-	useEffect(function()
-		-- upvalues: var3 (ref), var4 (ref), var6 (ref), instant (copy), runService (copy), spring (copy)
-		if var3 then
-			var4()
-			var6(instant(0))
-			task.defer(function()
-				-- upvalues: runService (copy), var6 (copy), spring (copy)
-				runService.RenderStepped:Wait()
-				runService.RenderStepped:Wait()
-				var6(spring(1))
+	local UseShowFlashOverlayModuleResult, UseShowFlashOverlayModuleResult2 = UseShowFlashOverlayModule()
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = UseAnimatedBindingFunction(1)
+	UseEffectFunction(function() --[[ Line: 38 ]]
+		-- upvalues: UseShowFlashOverlayModuleResult (copy), UseShowFlashOverlayModuleResult2 (copy), UseAnimatedBindingResult2 (copy), InstantFunction (upval), RunService (upval), SpringFunction (upval)
+		if UseShowFlashOverlayModuleResult then
+			UseShowFlashOverlayModuleResult2()
+			UseAnimatedBindingResult2((InstantFunction(0)))
+			task.defer(function() --[[ Line: 48 ]]
+				-- upvalues: RunService (upval), UseAnimatedBindingResult2 (upval), SpringFunction (upval)
+				RunService.RenderStepped:Wait()
+				RunService.RenderStepped:Wait()
+				UseAnimatedBindingResult2(SpringFunction(1))
 			end)
 		end
-	end, { var3 })
+	end, { UseShowFlashOverlayModuleResult })
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		Active = false,
 		BackgroundColor3 = Color3.new(0, 0, 0),
-		BackgroundTransparency = if var3 then var5 else 1,
-		Position = UDim2.fromOffset(0, -var1),
-		Size = UDim2.new(1, 0, 1, var1),
-		Visible = var2,
-		ZIndex = constantsModule.ZIndex.Entrypoint
+		BackgroundTransparency = if UseShowFlashOverlayModuleResult then UseAnimatedBindingResult else 1,
+		Position = UDim2.fromOffset(0, -UseTopbarInsetHeightModuleResult),
+		Size = UDim2.new(1, 0, 1, UseTopbarInsetHeightModuleResult),
+		Visible = UseSelectorResult,
+		ZIndex = ConstantsModule.ZIndex.Entrypoint
 	}, {})
 end

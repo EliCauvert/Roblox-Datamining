@@ -1,62 +1,62 @@
-﻿local httpService = game:GetService("HttpService")
-local coreGuiService = game:GetService("CoreGui")
-local corePackagesService = game:GetService("CorePackages")
-local roactModule = require(corePackagesService.Packages.Roact)
-local roduxModule = require(corePackagesService.Packages.Rodux)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local appStyleProvider = UIBloxModule.App.Style.AppStyleProvider
-local constants = UIBloxModule.App.Style.Constants
-local colorMode = require(corePackagesService.Packages.Foundation).Enums.ColorMode
+﻿local HttpService = game:GetService("HttpService")
+local CoreGui = game:GetService("CoreGui")
+local CorePackages = game:GetService("CorePackages")
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoduxModule = require(CorePackages.Packages.Rodux)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local UIBloxModule = require(CorePackages.Packages.UIBlox)
+local AppStyleProvider = UIBloxModule.App.Style.AppStyleProvider
+local Constants = UIBloxModule.App.Style.Constants
+local ColorMode = require(CorePackages.Packages.Foundation).Enums.ColorMode
 
-local function dumpInstanceTree(p1, p2)
-	-- upvalues: dumpInstanceTree (ref)
-	p2 = p2 or ""
+local function dumpInstanceTree(Child, p1) --[[ Line: 17 ]]
+	-- upvalues: dumpInstanceTree (copy)
+	local P1 = p1 or ""
 	
-	if p1 == nil then
-		print(p2 .. "[nil Instance]")
+	if Child == nil then
+		print(P1 .. "[nil Instance]")
 		
 		return
 	end
-	print(p2 .. p0.Name)
-	p2 ..= "  "
+	print(P1 .. Child.Name)
+	local Text = P1 .. "  "
 	
-	for i, v in ipairs(p1:GetChildren()) do
-		dumpInstanceTree(v, p2)
+	for _, child in ipairs(Child:GetChildren()) do
+		dumpInstanceTree(child, Text)
 	end
 end
 
-return function(p3, p4, p5, p6, p7)
-	-- upvalues: roduxModule (ref), roactModule (ref), roactRoduxModule (ref), appStyleProvider (ref), colorMode (ref), constants (ref), httpService (ref), coreGuiService (ref), dumpInstanceTree (ref)
-	local text = "Test-" .. httpService:GenerateGUID(false)
-	local var1 = roactModule.mount(roactModule.createElement("ScreenGui", { ZIndexBehavior = Enum.ZIndexBehavior.Sibling }, {
-		[tostring(p4)] = roactModule.createElement(roactRoduxModule.StoreProvider, {
-			store = roduxModule.Store.new(p5, p6 or {}, { roduxModule.thunkMiddleware })
+return function(Callback, p2, p3, p4, p5) --[[ Line: 44 ]]
+	-- upvalues: RoduxModule (copy), RoactModule (copy), RoactRoduxModule (copy), AppStyleProvider (copy), ColorMode (copy), Constants (copy), HttpService (copy), CoreGui (copy), dumpInstanceTree (copy)
+	local Text = "Test-" .. HttpService:GenerateGUID(false)
+	local MountResult = RoactModule.mount(RoactModule.createElement("ScreenGui", { ZIndexBehavior = Enum.ZIndexBehavior.Sibling }, {
+		[tostring(p2)] = RoactModule.createElement(RoactRoduxModule.StoreProvider, {
+			store = RoduxModule.Store.new(p3, p4 or {}, { RoduxModule.thunkMiddleware })
 		}, {
-			AppStyleProvider = roactModule.createElement(appStyleProvider, {
+			AppStyleProvider = RoactModule.createElement(AppStyleProvider, {
 				style = {
-					themeName = colorMode.Dark,
-					fontName = constants.FontName.Gotham
+					themeName = ColorMode.Dark,
+					fontName = Constants.FontName.Gotham
 				}
 			}, {
-				Folder = roactModule.createElement("Folder", {}, { Root = roactModule.createElement(p4, p7 or {}) })
+				Folder = RoactModule.createElement("Folder", {}, { Root = RoactModule.createElement(p2, p5 or {}) })
 			})
 		})
-	}), coreGuiService, text)
-	local var2 = ("game.CoreGui.%s.*[ClassName=Folder].*"):format(text)
-	local ok, status = pcall(function()
-		-- upvalues: p3 (ref), var2 (ref)
-		p3(var2)
+	}), CoreGui, Text)
+	local ClassName: string = ("game.CoreGui.%s.*[ClassName=Folder].*"):format(Text)
+	local Success, Result = pcall(function() --[[ Line: 77 ]]
+		-- upvalues: Callback (copy), ClassName (copy)
+		Callback(ClassName)
 	end)
 	
-	if not ok then
+	if not Success then
 		print("Test instance tree:\n")
-		dumpInstanceTree(coreGuiService:FindFirstChild(text))
+		dumpInstanceTree(CoreGui:FindFirstChild(Text))
 		print()
 	end
-	roactModule.unmount(var1)
+	RoactModule.unmount(MountResult)
 	
-	if not ok then
-		error(status)
+	if not Success then
+		error(Result)
 	end
 end

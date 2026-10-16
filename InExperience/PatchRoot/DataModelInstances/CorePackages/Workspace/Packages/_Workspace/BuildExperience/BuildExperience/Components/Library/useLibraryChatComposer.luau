@@ -1,110 +1,122 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local _ = require(buildExperience.Chat.useChatSessionCore)
-local getLibraryStoreModule = require(buildExperience.Stores.GetLibraryStore)
-local _ = require(buildExperience.Stores.GetLibraryStore.createLibraryStore)
-local libraryTypesModule = require(script.Parent.LibraryTypes)
-local _ = require(buildExperience.Chat.chatTypes)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local _ = require(BuildExperience.Chat.useChatSessionCore)
+local GetLibraryStoreModule = require(BuildExperience.Stores.GetLibraryStore)
+local _ = require(BuildExperience.Stores.GetLibraryStore.createLibraryStore)
+local LibraryTypesModule = require(script.Parent.LibraryTypes)
+local _ = require(BuildExperience.Chat.chatTypes)
+local FFlagBuildExperienceAnswerFormModule = require(BuildExperience.Flags.FFlagBuildExperienceAnswerForm)
 
-return function(p1, p2)
-	-- upvalues: getLibraryStoreModule (ref), signalsReactModule (ref), reactModule (ref), libraryTypesModule (ref)
-	local var1 = getLibraryStoreModule()
-	local var2 = signalsReactModule.useSignalState(var1.getChatResourceRequest)
-	local var3 = reactModule.useRef(0)
-	local var4 = reactModule.useRef(nil)
-	local var5 = reactModule.useRef(p1)
-	var5.current = p1
-	local var6 = reactModule.useCallback(function(p3)
-		-- upvalues: var5 (ref), libraryTypesModule (copy)
-		local current = var5.current
-		local var7 = libraryTypesModule.toResourceAttachment(p3)
+return function(Current, p1) --[[ Line: 14 | Named "useLibraryChatComposer" ]]
+	-- upvalues: GetLibraryStoreModule (copy), SignalsReactModule (copy), ReactModule (copy), LibraryTypesModule (copy), FFlagBuildExperienceAnswerFormModule (copy)
+	local LibraryStoreModule = GetLibraryStoreModule()
+	local UseSignalStateResult = SignalsReactModule.useSignalState(LibraryStoreModule.getChatResourceRequest)
+	local UseRefResult = ReactModule.useRef(0)
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseRefResult2 = ReactModule.useRef(Current)
+	UseRefResult2.current = Current
+	local UseResult = ReactModule.useCallback(function(p2): boolean --[[ Line: 21 ]]
+		-- upvalues: UseRefResult2 (copy), LibraryTypesModule (upval)
+		local Current = UseRefResult2.current
+		local ResourceAttachment = LibraryTypesModule.toResourceAttachment(p2)
 		
-		if current.findComposerResourceAttachmentIndexByUri(var7.uri) == nil then
-			current.addComposerResourceAttachment(var7)
+		if Current.findComposerResourceAttachmentIndexByUri(ResourceAttachment.uri) == nil then
+			Current.addComposerResourceAttachment(ResourceAttachment)
+			
+			return true
+		else
+			return false
+		end
+	end, {})
+	local UseResult1 = ReactModule.useCallback(function(p2): boolean --[[ Line: 30 ]]
+		-- upvalues: UseRefResult2 (copy), LibraryTypesModule (upval)
+		local Current = UseRefResult2.current
+		local ComposerResourceAttachmentIndexByUri = Current.findComposerResourceAttachmentIndexByUri(LibraryTypesModule.toResourceUri(p2))
+		
+		if ComposerResourceAttachmentIndexByUri == nil then
+			return false
+		else
+			Current.removeComposerResourceAttachmentAtIndex(ComposerResourceAttachmentIndexByUri)
 			
 			return true
 		end
-		return false
 	end, {})
-	local var7 = reactModule.useCallback(function(p3)
-		-- upvalues: var5 (ref), libraryTypesModule (copy)
-		local current = var5.current
-		local var8 = current.findComposerResourceAttachmentIndexByUri(libraryTypesModule.toResourceUri(p3))
+	local IsComposerSendBlocked = Current.isComposerSendBlocked or Current.isAssistantResponding and #Current.composerResourceAttachments > 0
+	local AnswerForm = if FFlagBuildExperienceAnswerFormModule then Current.answerForm else nil
+	local LocalToolActions = if FFlagBuildExperienceAnswerFormModule then Current.localToolActions else nil
+	local SubmitAnswerText = if FFlagBuildExperienceAnswerFormModule then Current.submitAnswerText else nil
+	ReactModule.useEffect(function() --[[ Line: 45 ]]
+		-- upvalues: UseSignalStateResult (copy), UseRefResult (copy), UseResult1 (copy), UseResult (copy), LibraryStoreModule (copy), p1 (copy), AnswerForm (copy), Current (copy)
+		if UseSignalStateResult == nil or UseSignalStateResult.token <= UseRefResult.current then return end
+		UseRefResult.current = UseSignalStateResult.token
 		
-		if var8 == nil then
-			return false
-		end
-		current.removeComposerResourceAttachmentAtIndex(var8)
-		
-		return true
-	end, {})
-	local isComposerSendBlocked = p1.isComposerSendBlocked or p1.isAssistantResponding and #p1.composerResourceAttachments > 0
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), var3 (ref), var7 (ref), var6 (ref), var1 (ref), p2 (ref), p1 (ref)
-		if var2 == nil or var2.token <= var3.current then return end
-		var3.current = var2.token
-		
-		if var2.action == "Remove" then
-			var7(var2.resource.path)
+		if UseSignalStateResult.action == "Remove" then
+			UseResult1(UseSignalStateResult.resource.path)
 		else
-			local replacePath = var2.replacePath
+			local ReplacePath = UseSignalStateResult.replacePath
 			
-			if replacePath ~= nil and replacePath ~= var2.resource.path then
-				var7(replacePath)
+			if ReplacePath ~= nil and ReplacePath ~= UseSignalStateResult.resource.path then
+				UseResult1(ReplacePath)
 			end
-			var6(var2.resource)
+			UseResult(UseSignalStateResult.resource)
 		end
-		var1.consumeChatResourceRequest(var2.token)
+		LibraryStoreModule.consumeChatResourceRequest(UseSignalStateResult.token)
 		
-		if p2 and var2.action == "Add" and (var2.focusComposer ~= false and p1.textBoxRef.current ~= nil) then
-			p1.textBoxRef.current.focus()
+		if p1 and AnswerForm == nil and UseSignalStateResult.action == "Add" and UseSignalStateResult.focusComposer ~= false and Current.textBoxRef.current ~= nil then
+			Current.textBoxRef.current.focus()
 		end
 	end, {
-		var1, var2, p2, var6, var7, p1.textBoxRef
+		LibraryStoreModule, UseSignalStateResult, p1, AnswerForm, UseResult,
+		UseResult1, Current.textBoxRef
 	})
-	reactModule.useLayoutEffect(function()
-		-- upvalues: p1 (ref), var6 (ref), var7 (ref), isComposerSendBlocked (ref), var4 (ref), var1 (ref)
-		local t = {
+	ReactModule.useLayoutEffect(function() --[[ Line: 81 ]]
+		-- upvalues: AnswerForm (copy), LocalToolActions (copy), SubmitAnswerText (copy), Current (copy), UseResult (copy), UseResult1 (copy), IsComposerSendBlocked (copy), UseRefResult1 (copy), LibraryStoreModule (copy)
+		local Current1 = {
 			tracksExternalText = true,
-			composerText = p1.composerText,
-			composerErrorText = p1.composerErrorText,
-			onComposerChanged = p1.setComposerText,
-			images = p1.composerImages,
-			onImagesChanged = p1.setComposerImages,
-			onRetryImage = p1.retryComposerImage,
-			resourceAttachments = p1.composerResourceAttachments,
-			onAddResource = var6,
-			onRemoveResourceAttachment = p1.removeComposerResourceAttachmentAtIndex,
-			onRemoveResourceByPath = var7,
-			isSendBlocked = isComposerSendBlocked,
-			textBoxRef = p1.textBoxRef,
-			isAssistantResponding = p1.isAssistantResponding,
-			canStopAssistantResponse = p1.canStopAssistantResponse,
-			canSendWhileResponding = p1.canSendWhileResponding,
-			onSend = p1.sendMessage,
-			onStop = p1.stopAssistantResponse
+			answerForm = AnswerForm,
+			localToolActions = LocalToolActions,
+			onSubmitAnswerText = SubmitAnswerText,
+			composerText = Current.composerText,
+			composerErrorText = Current.composerErrorText,
+			onComposerChanged = Current.setComposerText,
+			images = Current.composerImages,
+			onImagesChanged = Current.setComposerImages,
+			onRetryImage = Current.retryComposerImage,
+			resourceAttachments = Current.composerResourceAttachments,
+			onAddResource = UseResult,
+			onRemoveResourceAttachment = Current.removeComposerResourceAttachmentAtIndex,
+			onRemoveResourceByPath = UseResult1,
+			isSendBlocked = IsComposerSendBlocked,
+			textBoxRef = Current.textBoxRef,
+			isAssistantResponding = Current.isAssistantResponding,
+			canStopAssistantResponse = Current.canStopAssistantResponse,
+			canSendWhileResponding = Current.canSendWhileResponding,
+			onSend = Current.sendMessage,
+			onStop = Current.stopAssistantResponse
 		}
-		var4.current = t
-		var1.setChatComposerState(t)
+		UseRefResult1.current = Current1
+		LibraryStoreModule.setChatComposerState(Current1)
 	end, {
-		var1, p1.composerText, p1.composerErrorText, p1.setComposerText,
-		p1.composerImages, p1.setComposerImages, p1.retryComposerImage,
-		p1.composerResourceAttachments, var6,
-		p1.removeComposerResourceAttachmentAtIndex, var7, isComposerSendBlocked,
-		p1.textBoxRef, p1.isAssistantResponding, p1.canStopAssistantResponse,
-		p1.canSendWhileResponding, p1.sendMessage, p1.stopAssistantResponse
+		LibraryStoreModule, Current.composerText, AnswerForm, LocalToolActions,
+		SubmitAnswerText, Current.composerErrorText, Current.setComposerText,
+		Current.composerImages, Current.setComposerImages, Current.retryComposerImage,
+		Current.composerResourceAttachments, UseResult,
+		Current.removeComposerResourceAttachmentAtIndex, UseResult1,
+		IsComposerSendBlocked, Current.textBoxRef, Current.isAssistantResponding,
+		Current.canStopAssistantResponse, Current.canSendWhileResponding,
+		Current.sendMessage, Current.stopAssistantResponse
 	})
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), var4 (ref)
-		return function()
-			-- upvalues: var1 (copy), var4 (copy)
-			if var1.getChatComposerState(false) == var4.current then
-				var1.setChatComposerState(nil)
+	ReactModule.useEffect(function() --[[ Line: 132 ]]
+		-- upvalues: LibraryStoreModule (copy), UseRefResult1 (copy)
+		return function() --[[ Line: 133 ]]
+			-- upvalues: LibraryStoreModule (upval), UseRefResult1 (upval)
+			if LibraryStoreModule.getChatComposerState(false) == UseRefResult1.current then
+				LibraryStoreModule.setChatComposerState(nil)
 			end
 		end
-	end, { var1 })
+	end, { LibraryStoreModule })
 	
-	return isComposerSendBlocked
+	return IsComposerSendBlocked
 end

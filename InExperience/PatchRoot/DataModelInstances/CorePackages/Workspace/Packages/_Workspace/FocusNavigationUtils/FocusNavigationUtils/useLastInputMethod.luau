@@ -1,48 +1,26 @@
-﻿local userInputService = game:GetService("UserInputService")
-local reactModule = require(script.Parent.Parent.React)
-local t = {
-	[Enum.UserInputType.MouseButton1] = "Mouse",
-	[Enum.UserInputType.MouseButton2] = "Mouse",
-	[Enum.UserInputType.MouseButton3] = "Mouse",
-	[Enum.UserInputType.MouseWheel] = "Mouse",
-	[Enum.UserInputType.MouseMovement] = "Mouse",
-	[Enum.UserInputType.Touch] = "Touch",
-	[Enum.UserInputType.Keyboard] = "Keyboard",
-	[Enum.UserInputType.Focus] = nil,
-	[Enum.UserInputType.Accelerometer] = nil,
-	[Enum.UserInputType.Gyro] = nil,
-	[Enum.UserInputType.Gamepad1] = "Gamepad",
-	[Enum.UserInputType.Gamepad2] = "Gamepad",
-	[Enum.UserInputType.Gamepad3] = "Gamepad",
-	[Enum.UserInputType.Gamepad4] = "Gamepad",
-	[Enum.UserInputType.Gamepad5] = "Gamepad",
-	[Enum.UserInputType.Gamepad6] = "Gamepad",
-	[Enum.UserInputType.Gamepad7] = "Gamepad",
-	[Enum.UserInputType.Gamepad8] = "Gamepad",
-	[Enum.UserInputType.TextInput] = nil,
-	[Enum.UserInputType.InputMethod] = nil,
-	[Enum.UserInputType.None] = nil
-}
+﻿local UserInputService = game:GetService("UserInputService")
+local ReactModule = require(script.Parent.Parent.React)
+local GetInputMethodModule = require(script.Parent.getInputMethod)
 
-return function()
-	-- upvalues: t (ref), userInputService (ref), reactModule (ref)
-	local var1, var2 = reactModule.useState(t[userInputService:GetLastInputType()] or "None")
-	reactModule.useEffect(function()
-		-- upvalues: userInputService (copy), t (copy), var2 (ref)
-		local lastInputTypeChangedConnection = userInputService.LastInputTypeChanged:Connect(function(p1)
-			-- upvalues: t (copy), var2 (copy)
-			local var3 = t[p1]
+return function() --[[ Line: 11 | Named "useLastInputMethod" ]]
+	-- upvalues: GetInputMethodModule (copy), UserInputService (copy), ReactModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(GetInputMethodModule(UserInputService:GetLastInputType()) or "None")
+	ReactModule.useEffect(function() --[[ Line: 14 ]]
+		-- upvalues: UserInputService (upval), GetInputMethodModule (upval), UseStateResult2 (copy)
+		local LastInputTypeChangedConnection = UserInputService.LastInputTypeChanged:Connect(function(LastInputType) --[[ Line: 15 ]]
+			-- upvalues: GetInputMethodModule (upval), UseStateResult2 (upval)
+			local InputMethodModule = GetInputMethodModule(LastInputType)
 			
-			if var3 then
-				var2(var3)
+			if InputMethodModule then
+				UseStateResult2(InputMethodModule)
 			end
 		end)
 		
-		return function()
-			-- upvalues: lastInputTypeChangedConnection (ref)
-			lastInputTypeChangedConnection:Disconnect()
+		return function() --[[ Line: 22 ]]
+			-- upvalues: LastInputTypeChangedConnection (copy)
+			LastInputTypeChangedConnection:Disconnect()
 		end
 	end, {})
 	
-	return var1
+	return UseStateResult
 end

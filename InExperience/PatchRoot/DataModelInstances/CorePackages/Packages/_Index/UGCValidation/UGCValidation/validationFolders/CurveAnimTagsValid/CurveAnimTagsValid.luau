@@ -1,55 +1,55 @@
-﻿local collectionService = game:GetService("CollectionService")
-local parent = script.Parent.Parent.Parent
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
+﻿local CollectionService = game:GetService("CollectionService")
+local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
 
-local function _(p1)
-	return if #p1 > 30 then false else string.match(p1, "^[0-9]+$") ~= nil
+local function _(Text: string): boolean --[[ Line: 20 | Named "isTimeStamp" ]]
+	return #Text <= 30 and string.match(Text, "^[0-9]+$") ~= nil
 end
 
 return {
 	categories = {
-		validationEnumsModule.UploadCategory.EMOTE_ANIMATION,
-		validationEnumsModule.UploadCategory.ANIMATION
+		ValidationEnumsModule.UploadCategory.EMOTE_ANIMATION,
+		ValidationEnumsModule.UploadCategory.ANIMATION
 	},
-	requiredData = { validationEnumsModule.SharedDataMember.curveAnimations },
+	requiredData = { ValidationEnumsModule.SharedDataMember.curveAnimations },
 	expectedFailures = {},
 	prereqTests = {
-		validationEnumsModule.ValidationModule.CurveAnimDataAvailable
+		ValidationEnumsModule.ValidationModule.CurveAnimDataAvailable
 	},
-	run = function(p1, p2)
-		-- upvalues: collectionService (ref), errorSourceStringsModule (ref)
-		for i, v in p2.curveAnimations do
-			for i_1, v_1 in v:GetChildren() do
-				local descendants = v_1:GetDescendants()
-				table.insert(descendants, v_1)
-				local t = {}
+	run = function(p1, p2) --[[ Line: 28 ]]
+		-- upvalues: CollectionService (copy), ErrorSourceStringsModule (copy)
+		for _, curveAnimation in p2.curveAnimations do
+			local List = nil
+			for _, child in curveAnimation:GetChildren() do
+				local Descendants = child:GetDescendants()
+				table.insert(Descendants, child)
+				List = {}
 				
-				for i_2, v_2 in descendants do
-					if #collectionService:GetTags(v_2) > 0 then
-						table.insert(t, v_2:GetFullName())
+				for _, descendant in Descendants do
+					if #CollectionService:GetTags(descendant) > 0 then
+						table.insert(List, descendant:GetFullName())
 					end
 				end
-				if #t > 0 then
-					p1:fail(errorSourceStringsModule.Keys.InstanceTagsFound, { ProblematicDescendantPaths = table.concat(t, ", ") })
-					
-					return
+				if #List > 0 then
+					p1:fail(ErrorSourceStringsModule.Keys.InstanceTagsFound, { ProblematicDescendantPaths = table.concat(List, ", ") })
+					break
 				end
 			end
-			local var1 = collectionService:GetTags(v)
-			local var3Count = #var1
+			local Tags = CollectionService:GetTags(curveAnimation)
+			local CountTags = #Tags
 			
-			if var3Count > 0 then
-				if var3Count <= 1 then
-					i_1 = var1[1]
+			if CountTags > 0 then
+				if CountTags <= 1 then
+					local Text: string = Tags[1]
 					
-					if not (if #i_1 > 30 then false else string.match(i_1, "^[0-9]+$") ~= nil) then
-						p1:fail(errorSourceStringsModule.Keys.CurveAnim_InvalidTags)
-						
-						return
+					if #Text <= 30 and string.match(Text, "^[0-9]+$") ~= nil then
+						continue
 					end
 				end
+				p1:fail(ErrorSourceStringsModule.Keys.CurveAnim_InvalidTags)
+				break
 			end
 		end
 	end

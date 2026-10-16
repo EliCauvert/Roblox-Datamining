@@ -1,4 +1,4 @@
-﻿local t = {
+﻿local InputTypesEnumModule = {
 	InputType = {
 		KEYBOARD = "KEYBOARD",
 		GAMEPAD = "GAMEPAD",
@@ -6,7 +6,7 @@
 		SPATIAL_GAMEPAD = "SPATIAL_GAMEPAD"
 	}
 }
-table.freeze(t.InputType)
-table.freeze(t)
+table.freeze(InputTypesEnumModule.InputType)
+table.freeze(InputTypesEnumModule)
 
-return t
+return InputTypesEnumModule

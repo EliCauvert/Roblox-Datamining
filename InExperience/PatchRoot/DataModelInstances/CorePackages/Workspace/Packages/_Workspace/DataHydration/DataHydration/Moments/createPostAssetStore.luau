@@ -1,42 +1,43 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local parent = dataHydration.Parent
-local promiseModule = require(parent.Promise)
-local createSingleEntityResolverModule = require(dataHydration.createSingleEntityResolver)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local Parent = DataHydration.Parent
+local PromiseModule = require(Parent.Promise)
+local CreateSingleEntityResolverModule = require(DataHydration.createSingleEntityResolver)
 local _ = require(script.Parent.MomentsStoreTypes)
 
-return function(value)
-	-- upvalues: createSingleEntityResolverModule (ref), promiseModule (ref), parent (ref)
-	local value_1 = value or {}
-	local momentsService = value_1.momentsService or game:GetService("MomentsService")
-	local postDecoder = value_1.postDecoder
-	local var1 = createSingleEntityResolverModule(function(p1)
-		-- upvalues: promiseModule (copy), postDecoder (write), parent (copy), momentsService (ref)
-		return promiseModule.new(function(p2, p3)
-			-- upvalues: postDecoder (copy), parent (copy), momentsService (copy), p1 (ref)
-			task.spawn(function()
-				-- upvalues: postDecoder (copy), parent (copy), momentsService (copy), p1 (copy), p2 (ref), p3 (ref)
-				local packed = table.pack(pcall(function()
-					-- upvalues: postDecoder (copy), parent (copy), momentsService (copy), p1 (copy)
-					if postDecoder == nil then
-						postDecoder = require(parent.ServiceContractsProto).posts.postasset.post.Post
+return function(p1) --[[ Line: 18 | Named "createPostAssetStore" ]]
+	-- upvalues: CreateSingleEntityResolverModule (copy), PromiseModule (copy), Parent (copy)
+	local P0 = p1 or {}
+	local MomentsService = P0.momentsService or game:GetService("MomentsService")
+	local PostDecoder = P0.postDecoder
+	local SingleEntityResolverModule = CreateSingleEntityResolverModule(function(AssetId) --[[ Line: 24 ]]
+		-- upvalues: PromiseModule (upval), PostDecoder (ref), Parent (upval), MomentsService (copy)
+		return PromiseModule.new(function(Callback, Callback1) --[[ Line: 25 ]]
+			-- upvalues: PostDecoder (upval), Parent (upval), MomentsService (upval), AssetId (copy)
+			task.spawn(function() --[[ Line: 26 ]]
+				-- upvalues: PostDecoder (upval), Parent (upval), MomentsService (upval), AssetId (upval), Callback (copy), Callback1 (copy)
+				local Packed = table.pack(pcall(function() --[[ Line: 27 ]]
+					-- upvalues: PostDecoder (upval), Parent (upval), MomentsService (upval), AssetId (upval)
+					if PostDecoder == nil then
+						PostDecoder = require(Parent.ServiceContractsProto).posts.postasset.post.Post
 					end
-					return postDecoder.decode(momentsService:FetchPostAsync(p1))
+					return PostDecoder.decode((MomentsService:FetchPostAsync(AssetId)))
 				end))
 				
-				if packed[1] then
-					p2(packed[2])
+				if Packed[1] then
+					Callback(Packed[2])
 					
 					return
+				else
+					Callback1(Packed[2])
 				end
-				p3(packed[2])
 			end)
 		end)
 	end, { resolver = { replaceItems = true } })
 	
 	return {
-		getCachedPostAsset = var1.get,
-		getAndFetchPostAsset = var1.getAndFetch,
-		clear = var1.clear,
-		dispose = var1.dispose
+		getCachedPostAsset = SingleEntityResolverModule.get,
+		getAndFetchPostAsset = SingleEntityResolverModule.getAndFetch,
+		clear = SingleEntityResolverModule.clear,
+		dispose = SingleEntityResolverModule.dispose
 	}
 end

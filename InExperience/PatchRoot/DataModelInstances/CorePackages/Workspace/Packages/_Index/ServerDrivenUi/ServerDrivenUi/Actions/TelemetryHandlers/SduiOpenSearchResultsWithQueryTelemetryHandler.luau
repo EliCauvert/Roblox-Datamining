@@ -1,16 +1,20 @@
-﻿local serverDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
-local parent = serverDrivenUi.Parent
-local openSearchResultsWithQueryDeeplink = require(parent.DiscoveryAnalytics).Events.openSearchResultsWithQueryDeeplink
-local _ = require(parent.SduiCoreSystem)
-local openSearchResultsWithQueryParamsModule = require(serverDrivenUi.Actions.openSearchResultsWithQueryParams)
+﻿local ServerDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
+local Parent = ServerDrivenUi.Parent
+local OpenSearchResultsWithQueryDeeplinkFunction = require(Parent.DiscoveryAnalytics).Events.openSearchResultsWithQueryDeeplink
+local _ = require(Parent.SduiCoreSystem)
+local OpenSearchResultsWithQueryParamsModule = require(ServerDrivenUi.Actions.openSearchResultsWithQueryParams)
 
-return function(p1, _, p2)
-	-- upvalues: openSearchResultsWithQueryParamsModule (ref), openSearchResultsWithQueryDeeplink (ref)
-	local var1 = openSearchResultsWithQueryParamsModule.resolveSearchQuery(p1)
-	local var2 = openSearchResultsWithQueryParamsModule.resolveSearchType(p1)
+return function(p1, _, p2) --[[ Line: 18 ]]
+	-- upvalues: OpenSearchResultsWithQueryParamsModule (copy), OpenSearchResultsWithQueryDeeplinkFunction (copy)
+	local ResolveSearchQueryResult = OpenSearchResultsWithQueryParamsModule.resolveSearchQuery(p1)
+	local ResolveSearchTypeResult = OpenSearchResultsWithQueryParamsModule.resolveSearchType(p1)
 	
-	if var1 == nil or var2 == nil then
+	if ResolveSearchQueryResult ~= nil and ResolveSearchTypeResult ~= nil then
+		OpenSearchResultsWithQueryDeeplinkFunction(p2.appPage, {
+			kwd = ResolveSearchQueryResult,
+			searchType = ResolveSearchTypeResult
+		})
+		
 		return
 	end
-	openSearchResultsWithQueryDeeplink(p2.appPage, { kwd = var1, searchType = var2 })
 end

@@ -1,1 +1,1 @@
-﻿return require(script.Parent.createTelemetryStateContext)({})
+﻿return (require(script.Parent.createTelemetryStateContext)({}))

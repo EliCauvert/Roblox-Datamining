@@ -1,0 +1,3 @@
+﻿local FFlagBuildExperienceMonetizationNativeUIModule = require(script.Parent.FFlagBuildExperienceMonetizationNativeUI)
+
+return require(script:FindFirstAncestor("BuildExperience").Parent.DataHydration.FFlagBuildExperienceMonetizationMultiKind) and FFlagBuildExperienceMonetizationNativeUIModule

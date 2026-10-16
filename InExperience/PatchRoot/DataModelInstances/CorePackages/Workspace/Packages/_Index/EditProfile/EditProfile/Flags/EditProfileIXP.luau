@@ -1,20 +1,20 @@
-﻿local parent = script:FindFirstAncestor("EditProfile").Parent
-local getFStringSelfProfileView = require(parent.SharedFlags).getFStringSelfProfileView
-local useUserExperiment = require(parent.RoactAppExperiment).useUserExperiment
-local fFlagEditProfileSetupNewExperimentFlowModule = require(script.Parent.FFlagEditProfileSetupNewExperimentFlow)
-local editProfileExperimentKey = game:DefineFastString("EditProfileExperimentKey", "can_view_edit_profile")
+﻿local Parent = script:FindFirstAncestor("EditProfile").Parent
+local GetFStringSelfProfileViewFunction = require(Parent.SharedFlags).getFStringSelfProfileView
+local UseUserExperimentFunction = require(Parent.RoactAppExperiment).useUserExperiment
+local FFlagEditProfileSetupNewExperimentFlowModule = require(script.Parent.FFlagEditProfileSetupNewExperimentFlow)
+local EditProfileExperimentKey = game:DefineFastString("EditProfileExperimentKey", "can_view_edit_profile")
 
-local var1 = function(p1)
-	-- upvalues: getFStringSelfProfileView (ref), fFlagEditProfileSetupNewExperimentFlowModule (ref), editProfileExperimentKey (ref)
-	local var2 = (p1 or {})[getFStringSelfProfileView()] or {}
+local function IsExperimentEnabled(p1): boolean --[[ Line: 11 ]]
+	-- upvalues: GetFStringSelfProfileViewFunction (copy), FFlagEditProfileSetupNewExperimentFlowModule (copy), EditProfileExperimentKey (copy)
+	local Entry = (p1 or {})[GetFStringSelfProfileViewFunction()] or {}
 	
-	return if fFlagEditProfileSetupNewExperimentFlowModule then var2[editProfileExperimentKey] == true else var2.can_view_edit_profile == true
+	return if FFlagEditProfileSetupNewExperimentFlowModule then Entry[EditProfileExperimentKey] == true else Entry.can_view_edit_profile == true
 end
 
 return {
-	isExperimentEnabled = var1,
-	useIsExperimentEnabled = function(p1)
-		-- upvalues: useUserExperiment (ref), getFStringSelfProfileView (ref), var1 (ref)
-		return useUserExperiment({ getFStringSelfProfileView() }, var1, if p1 then p1.isExposureEnabled else nil)
+	isExperimentEnabled = IsExperimentEnabled,
+	useIsExperimentEnabled = function(p1) --[[ Line: 25 ]]
+		-- upvalues: UseUserExperimentFunction (copy), GetFStringSelfProfileViewFunction (copy), IsExperimentEnabled (copy)
+		return UseUserExperimentFunction({ GetFStringSelfProfileViewFunction() }, IsExperimentEnabled, if p1 then p1.isExposureEnabled else nil)
 	end
 }

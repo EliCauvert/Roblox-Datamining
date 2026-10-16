@@ -1,103 +1,104 @@
-﻿local sduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
-local sduiPolicyFieldKeyModule = require(sduiCoreSystem.ClientBinding.SduiPolicyFieldKey)
-local _ = require(sduiCoreSystem.Parent.UniversalAppPolicy)
+﻿local SduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
+local SduiPolicyFieldKeyModule = require(SduiCoreSystem.ClientBinding.SduiPolicyFieldKey)
+local _ = require(SduiCoreSystem.Parent.UniversalAppPolicy)
 
-return function(p1, p2)
-	-- upvalues: sduiPolicyFieldKeyModule (ref)
-	if p2 == sduiPolicyFieldKeyModule.SearchBar then
+return function(p1, CatalogPremiumCategory) --[[ Line: 16 | Named "resolveSduiPolicyField" ]]
+	-- upvalues: SduiPolicyFieldKeyModule (copy)
+	if CatalogPremiumCategory == SduiPolicyFieldKeyModule.SearchBar then
 		return true, p1.getSearchBar()
-	elseif p2 == sduiPolicyFieldKeyModule.GameDetailsMorePage then
+	elseif CatalogPremiumCategory == SduiPolicyFieldKeyModule.GameDetailsMorePage then
 		return true, p1.getGameDetailsMorePage()
-	elseif p2 == sduiPolicyFieldKeyModule.GameDetailsSubtitle then
+	elseif CatalogPremiumCategory == SduiPolicyFieldKeyModule.GameDetailsSubtitle then
 		return true, p1.getGameDetailsSubtitle()
-	elseif p2 == sduiPolicyFieldKeyModule.GameDetailsPlayWithFriends then
+	elseif CatalogPremiumCategory == SduiPolicyFieldKeyModule.GameDetailsPlayWithFriends then
 		return true, p1.getGameDetailsPlayWithFriends()
-	elseif p2 == sduiPolicyFieldKeyModule.ShowGlobalCounters then
+	elseif CatalogPremiumCategory == SduiPolicyFieldKeyModule.ShowGlobalCounters then
 		return true, p1.getShowGlobalCounters()
-	elseif p2 == sduiPolicyFieldKeyModule.GameInfoList then
+	elseif CatalogPremiumCategory == SduiPolicyFieldKeyModule.GameInfoList then
 		return true, p1.getGameInfoList()
-	elseif p2 == sduiPolicyFieldKeyModule.GamePlaysAndRatings then
+	elseif CatalogPremiumCategory == SduiPolicyFieldKeyModule.GamePlaysAndRatings then
 		return true, p1.getGamePlaysAndRatings()
-	elseif p2 == sduiPolicyFieldKeyModule.GameReportingDisabled then
+	elseif CatalogPremiumCategory == SduiPolicyFieldKeyModule.GameReportingDisabled then
 		return true, p1.getGameReportingDisabled()
-	elseif p2 == sduiPolicyFieldKeyModule.RecommendedGames then
+	elseif CatalogPremiumCategory == SduiPolicyFieldKeyModule.RecommendedGames then
 		return true, p1.getRecommendedGames()
-	elseif p2 == sduiPolicyFieldKeyModule.SocialLinks then
+	elseif CatalogPremiumCategory == SduiPolicyFieldKeyModule.SocialLinks then
 		return true, p1.getSocialLinks()
-	elseif p2 == sduiPolicyFieldKeyModule.SocialGroupLinks then
+	elseif CatalogPremiumCategory == SduiPolicyFieldKeyModule.SocialGroupLinks then
 		return true, p1.getSocialGroupLinks()
-	elseif p2 == sduiPolicyFieldKeyModule.CommunityLinksEnabled then
+	elseif CatalogPremiumCategory == SduiPolicyFieldKeyModule.CommunityLinksEnabled then
 		return true, p1.getCommunityLinksEnabled()
-	elseif p2 == sduiPolicyFieldKeyModule.GameInfoShowBadges then
+	elseif CatalogPremiumCategory == SduiPolicyFieldKeyModule.GameInfoShowBadges then
 		return true, p1.getGameInfoShowBadges()
-	elseif p2 == sduiPolicyFieldKeyModule.GameInfoShowCreated then
+	elseif CatalogPremiumCategory == SduiPolicyFieldKeyModule.GameInfoShowCreated then
 		return true, p1.getGameInfoShowCreated()
-	elseif p2 == sduiPolicyFieldKeyModule.GameInfoShowGamepasses then
+	elseif CatalogPremiumCategory == SduiPolicyFieldKeyModule.GameInfoShowGamepasses then
 		return true, p1.getGameInfoShowGamepasses()
-	elseif p2 == sduiPolicyFieldKeyModule.GameInfoShowGenre then
+	elseif CatalogPremiumCategory == SduiPolicyFieldKeyModule.GameInfoShowGenre then
 		return true, p1.getGameInfoShowGenre()
-	elseif p2 == sduiPolicyFieldKeyModule.GameInfoShowSubgenre then
+	elseif CatalogPremiumCategory == SduiPolicyFieldKeyModule.GameInfoShowSubgenre then
 		return true, p1.getGameInfoShowSubgenre()
-	elseif p2 == sduiPolicyFieldKeyModule.GameInfoShowMaxPlayers then
+	elseif CatalogPremiumCategory == SduiPolicyFieldKeyModule.GameInfoShowMaxPlayers then
 		return true, p1.getGameInfoShowMaxPlayers()
-	elseif p2 == sduiPolicyFieldKeyModule.GameInfoShowServers then
+	elseif CatalogPremiumCategory == SduiPolicyFieldKeyModule.GameInfoShowServers then
 		return true, p1.getGameInfoShowServers()
-	elseif p2 == sduiPolicyFieldKeyModule.GameInfoShowUpdated then
+	elseif CatalogPremiumCategory == SduiPolicyFieldKeyModule.GameInfoShowUpdated then
 		return true, p1.getGameInfoShowUpdated()
-	elseif p2 == sduiPolicyFieldKeyModule.GameInfoShowAgeRecommendation then
+	elseif CatalogPremiumCategory == SduiPolicyFieldKeyModule.GameInfoShowAgeRecommendation then
 		return true, p1.getGameInfoShowAgeRecommendation()
-	elseif p2 == sduiPolicyFieldKeyModule.GameInfoShowVoiceAndChatFeatures then
+	elseif CatalogPremiumCategory == SduiPolicyFieldKeyModule.GameInfoShowVoiceAndChatFeatures then
 		return true, p1.getGameInfoShowVoiceAndChatFeatures()
-	elseif p2 == sduiPolicyFieldKeyModule.GameInfoShowChatFeatures then
+	elseif CatalogPremiumCategory == SduiPolicyFieldKeyModule.GameInfoShowChatFeatures then
 		return true, p1.getGameInfoShowChatFeatures()
-	elseif p2 == sduiPolicyFieldKeyModule.GameInfoListDeveloper then
+	elseif CatalogPremiumCategory == SduiPolicyFieldKeyModule.GameInfoListDeveloper then
 		return true, p1.getGameInfoListDeveloper()
-	elseif p2 == sduiPolicyFieldKeyModule.GameInfoListShowRNVDeveloper then
+	elseif CatalogPremiumCategory == SduiPolicyFieldKeyModule.GameInfoListShowRNVDeveloper then
 		return true, p1.getGameInfoListShowRNVDeveloper()
-	elseif p2 == sduiPolicyFieldKeyModule.ShowPassesOnExperienceDetails then
+	elseif CatalogPremiumCategory == SduiPolicyFieldKeyModule.ShowPassesOnExperienceDetails then
 		return true, p1.getShowPassesOnExperienceDetails()
-	elseif p2 == sduiPolicyFieldKeyModule.EnableAggregateLikesFavoritesCount then
+	elseif CatalogPremiumCategory == SduiPolicyFieldKeyModule.EnableAggregateLikesFavoritesCount then
 		return true, p1.getEnableAggregateLikesFavoritesCount()
-	elseif p2 == sduiPolicyFieldKeyModule.ExperienceDetailsNoticeType then
+	elseif CatalogPremiumCategory == SduiPolicyFieldKeyModule.ExperienceDetailsNoticeType then
 		return true, p1.getExperienceDetailsNoticeType()
-	elseif p2 == sduiPolicyFieldKeyModule.NotificationsCanReceiveExperience then
+	elseif CatalogPremiumCategory == SduiPolicyFieldKeyModule.NotificationsCanReceiveExperience then
 		return true, p1.getNotificationsCanReceiveExperience()
-	elseif p2 == sduiPolicyFieldKeyModule.InviteFriendsDisabled then
+	elseif CatalogPremiumCategory == SduiPolicyFieldKeyModule.InviteFriendsDisabled then
 		return true, p1.getInviteFriendsDisabled()
-	elseif p2 == sduiPolicyFieldKeyModule.WebViewSupport then
+	elseif CatalogPremiumCategory == SduiPolicyFieldKeyModule.WebViewSupport then
 		return true, p1.getWebViewSupport()
-	elseif p2 == sduiPolicyFieldKeyModule.UseRoundedCorners then
+	elseif CatalogPremiumCategory == SduiPolicyFieldKeyModule.UseRoundedCorners then
 		return true, p1.getUseRoundedCorners()
-	elseif p2 == sduiPolicyFieldKeyModule.RenameFriendsToConnections then
+	elseif CatalogPremiumCategory == SduiPolicyFieldKeyModule.RenameFriendsToConnections then
 		return true, p1.getRenameFriendsToConnections()
-	elseif p2 == sduiPolicyFieldKeyModule.UseLuafiedReportFlow then
+	elseif CatalogPremiumCategory == SduiPolicyFieldKeyModule.UseLuafiedReportFlow then
 		return true, p1.getUseLuafiedReportFlow()
-	elseif p2 == sduiPolicyFieldKeyModule.ExperienceInviteShareLinkEnabled then
+	elseif CatalogPremiumCategory == SduiPolicyFieldKeyModule.ExperienceInviteShareLinkEnabled then
 		return true, p1.getExperienceInviteShareLinkEnabled()
-	elseif p2 == sduiPolicyFieldKeyModule.ExperienceChatAvailability then
+	elseif CatalogPremiumCategory == SduiPolicyFieldKeyModule.ExperienceChatAvailability then
 		return true, p1.getExperienceChatAvailability()
-	elseif p2 == sduiPolicyFieldKeyModule.DisableIAPEntryPoint then
+	elseif CatalogPremiumCategory == SduiPolicyFieldKeyModule.DisableIAPEntryPoint then
 		return true, p1.getDisableIAPEntryPoint()
-	elseif p2 == sduiPolicyFieldKeyModule.PurchasePromptIncludingWarning then
+	elseif CatalogPremiumCategory == SduiPolicyFieldKeyModule.PurchasePromptIncludingWarning then
 		return true, p1.getPurchasePromptIncludingWarning()
-	elseif p2 == sduiPolicyFieldKeyModule.DisableResellingCollectiblesForCompliance then
+	elseif CatalogPremiumCategory == SduiPolicyFieldKeyModule.DisableResellingCollectiblesForCompliance then
 		return true, p1.getDisableResellingCollectiblesForCompliance()
-	elseif p2 == sduiPolicyFieldKeyModule.CatalogPremiumCategory then
+	elseif CatalogPremiumCategory == SduiPolicyFieldKeyModule.CatalogPremiumCategory then
 		return true, p1.getCatalogPremiumCategory()
-	elseif p2 == sduiPolicyFieldKeyModule.CatalogPremiumContent then
+	elseif CatalogPremiumCategory == SduiPolicyFieldKeyModule.CatalogPremiumContent then
 		return true, p1.getShowCatalogPremiumContent()
-	elseif p2 == sduiPolicyFieldKeyModule.ShowVNGTosForRobuxUpsell then
+	elseif CatalogPremiumCategory == SduiPolicyFieldKeyModule.ShowVNGTosForRobuxUpsell then
 		return true, p1.getShowVNGTosForRobuxUpsell()
-	elseif p2 == sduiPolicyFieldKeyModule.ShouldUseDMCCALegalDisclosureInApp then
+	elseif CatalogPremiumCategory == SduiPolicyFieldKeyModule.ShouldUseDMCCALegalDisclosureInApp then
 		return true, p1.getShouldUseDMCCALegalDisclosureInApp()
-	elseif p2 == sduiPolicyFieldKeyModule.RedirectBuyRobuxToVNG then
+	elseif CatalogPremiumCategory == SduiPolicyFieldKeyModule.RedirectBuyRobuxToVNG then
 		return true, p1.getRedirectBuyRobuxToVNG()
-	elseif p2 == sduiPolicyFieldKeyModule.RobuxUpsellFlowMobile then
+	elseif CatalogPremiumCategory == SduiPolicyFieldKeyModule.RobuxUpsellFlowMobile then
 		return true, p1.getRobuxUpsellFlowMobile()
-	elseif p2 == sduiPolicyFieldKeyModule.EnablePremiumUserFeatures then
+	elseif CatalogPremiumCategory == SduiPolicyFieldKeyModule.EnablePremiumUserFeatures then
 		return true, p1.getEnablePremiumUserFeatures()
-	elseif p2 == sduiPolicyFieldKeyModule.DisablePremiumEntrypoint then
+	elseif CatalogPremiumCategory == SduiPolicyFieldKeyModule.DisablePremiumEntrypoint then
 		return true, p1.getDisablePremiumEntrypoint()
+	else
+		return false, nil
 	end
-	return false, nil
 end

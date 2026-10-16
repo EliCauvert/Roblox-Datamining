@@ -1,1 +1,3 @@
-﻿return game:DefineFastFlag("UnifiedPurchaseOptimizeTTIMarketplaceIntegration", false) and require(script:FindFirstAncestor("AvatarExperienceFlags").Parent.SharedFlags).FFlagUnifiedPurchaseOptimizeTTIMarketplace
+﻿local FFlagUnifiedPurchaseOptimizeTTIMarketplace = require(script:FindFirstAncestor("AvatarExperienceFlags").Parent.SharedFlags).FFlagUnifiedPurchaseOptimizeTTIMarketplace
+
+return game:DefineFastFlag("UnifiedPurchaseOptimizeTTIMarketplaceIntegration", false) and FFlagUnifiedPurchaseOptimizeTTIMarketplace

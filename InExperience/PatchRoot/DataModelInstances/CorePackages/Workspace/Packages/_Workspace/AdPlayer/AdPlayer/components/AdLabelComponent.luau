@@ -1,33 +1,33 @@
-﻿local adPlayer = script:FindFirstAncestor("AdPlayer")
-local parent = adPlayer.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local text = foundationModule.Text
-local view = foundationModule.View
-local image = foundationModule.Image
-local stateLayerAffordance = foundationModule.Enums.StateLayerAffordance
-local flagsModule = require(adPlayer.Flags)
+﻿local AdPlayer = script:FindFirstAncestor("AdPlayer")
+local Parent = AdPlayer.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local Image = FoundationModule.Image
+local StateLayerAffordance = FoundationModule.Enums.StateLayerAffordance
+local FlagsModule = require(AdPlayer.Flags)
 
-return function(p1)
-	-- upvalues: reactModule (ref), view (ref), flagsModule (ref), text (ref), image (ref), stateLayerAffordance (ref)
-	local visible = p1.Visible
+return function(p1) --[[ Line: 17 ]]
+	-- upvalues: ReactModule (copy), View (copy), FlagsModule (copy), Text (copy), Image (copy), StateLayerAffordance (copy)
+	local Visible = p1.Visible
 	
-	return reactModule.createElement(view, {
-		tag = if flagsModule.GetEnableLuaRewardTimerUI() then "size-900-500 row align-x-center align-y-center gap-xsmall" else "position-center-left anchor-center-left size-900-500 row align-x-center align-y-center gap-xsmall"
+	return ReactModule.createElement(View, {
+		tag = if FlagsModule.GetEnableLuaRewardTimerUI() then "size-900-500 row align-x-center align-y-center gap-xsmall" else "position-center-left anchor-center-left size-900-500 row align-x-center align-y-center gap-xsmall"
 	}, {
-		adText = reactModule.createElement(text, {
+		adText = ReactModule.createElement(Text, {
 			tag = "size-400 content-emphasis text-body-small",
 			Text = "Ad",
 			TextScaled = true,
-			Visible = visible
+			Visible = Visible
 		}),
-		icon = reactModule.createElement(image, {
+		icon = ReactModule.createElement(Image, {
 			tag = "size-300",
 			LayoutOrder = 2,
 			Image = p1.Image,
 			onActivated = p1.handleToggleAdsModal,
-			Visible = visible,
-			stateLayer = { affordance = stateLayerAffordance.None }
+			Visible = Visible,
+			stateLayer = { affordance = StateLayerAffordance.None }
 		})
 	})
 end

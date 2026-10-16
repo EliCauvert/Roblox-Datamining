@@ -1,128 +1,127 @@
-﻿local inGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
-local roact = inGameMenuDependenciesModule.Roact
-local t = inGameMenuDependenciesModule.t
-local UIBlox = inGameMenuDependenciesModule.UIBlox
-local parent = script.Parent.Parent.Parent
-local globalConfigModule = require(parent.GlobalConfig)
-local themedTextLabelModule = require(parent.Components.ThemedTextLabel)
-local keyLabel = UIBlox.App.Menu.KeyLabel
-local pointerLabelModule = require(parent.Components.PointerLabel)
-local dividerModule = require(parent.Components.Divider)
-local withLocalizationModule = require(parent.Localization.withLocalization)
-local var1 = t.strictInterface({
-	actionDescription = t.string,
-	inputs = t.table,
-	isList = t.optional(t.boolean),
-	hasDivider = t.boolean,
-	LayoutOrder = t.integer
+﻿local InGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
+local Roact = InGameMenuDependenciesModule.Roact
+local T = InGameMenuDependenciesModule.t
+local Parent = script.Parent.Parent.Parent
+local GlobalConfigModule = require(Parent.GlobalConfig)
+local ThemedTextLabelModule = require(Parent.Components.ThemedTextLabel)
+local KeyLabel = InGameMenuDependenciesModule.UIBlox.App.Menu.KeyLabel
+local PointerLabelModule = require(Parent.Components.PointerLabel)
+local DividerModule = require(Parent.Components.Divider)
+local WithLocalizationModule = require(Parent.Localization.withLocalization)
+local StrictInterfaceResult = T.strictInterface({
+	actionDescription = T.string,
+	inputs = T.table,
+	isList = T.optional(T.boolean),
+	hasDivider = T.boolean,
+	LayoutOrder = T.integer
 })
 
-local function renderHorizontalSpacer(p1, p2, p3)
-	-- upvalues: roact (ref), themedTextLabelModule (ref)
-	return roact.createElement(themedTextLabelModule, {
+local function renderHorizontalSpacer(Text, LayoutOrder, p1) --[[ Line: 30 ]]
+	-- upvalues: Roact (copy), ThemedTextLabelModule (copy)
+	return Roact.createElement(ThemedTextLabelModule, {
 		themeKey = "TextEmphasis",
 		fontKey = "Header1",
-		Text = p1,
-		Size = p3 and UDim2.new(0, 19, 0, 24) or UDim2.new(0, 19, 0, 16),
-		TextYAlignment = p3 and Enum.TextYAlignment.Bottom,
-		LayoutOrder = p2
+		Text = Text,
+		Size = p1 and UDim2.new(0, 19, 0, 24) or UDim2.new(0, 19, 0, 16),
+		TextYAlignment = p1 and Enum.TextYAlignment.Bottom,
+		LayoutOrder = LayoutOrder
 	})
 end
 
-local function renderKey(p1, p2)
-	-- upvalues: roact (ref), keyLabel (ref), pointerLabelModule (ref)
-	return if p1.EnumType == Enum.KeyCode then roact.createElement(keyLabel, {
+local function renderKey(Input, LayoutOrder) --[[ Line: 44 ]]
+	-- upvalues: Roact (copy), KeyLabel (copy), PointerLabelModule (copy)
+	return if Input.EnumType == Enum.KeyCode then Roact.createElement(KeyLabel, {
 		textThemeKey = "TextEmphasis",
-		keyCode = p1,
-		LayoutOrder = p2
-	}) else roact.createElement(pointerLabelModule, { input = p1, LayoutOrder = p2 })
+		keyCode = Input,
+		LayoutOrder = LayoutOrder
+	}) else Roact.createElement(PointerLabelModule, { input = Input, LayoutOrder = LayoutOrder })
 end
 
-local function renderInputIconContainer(p1, p2)
-	-- upvalues: roact (ref), renderKey (ref), renderHorizontalSpacer (ref), themedTextLabelModule (ref)
-	local t = {
-		ListLayout = roact.createElement("UIListLayout", {
+local function renderInputIconContainer(Inputs, IsList) --[[ Line: 60 ]]
+	-- upvalues: Roact (copy), renderKey (copy), renderHorizontalSpacer (copy), ThemedTextLabelModule (copy)
+	local Elements = {
+		ListLayout = Roact.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Horizontal,
 			VerticalAlignment = Enum.VerticalAlignment.Center,
 			HorizontalAlignment = Enum.HorizontalAlignment.Right,
 			SortOrder = Enum.SortOrder.LayoutOrder,
-			Padding = UDim.new(0, if not p2 then 7 else 0)
+			Padding = UDim.new(0, if IsList then 0 else 7)
 		})
 	}
-	local var2 = 1
+	local LayoutOrder = 1
 	
-	for i, v in ipairs(p1) do
-		if typeof(v) == "table" then
-			for i_1, v_1 in ipairs(v) do
-				local formattedText = string.format("%d_%d", i, i_1)
-				t["groupedInput" .. formattedText] = renderKey(v_1, var2)
-				var2 += 1
+	for i, input in ipairs(Inputs) do
+		if typeof(input) == "table" then
+			for i1, value in ipairs(input) do
+				local Formatted = string.format("%d_%d", i, i1)
+				Elements["groupedInput" .. Formatted] = renderKey(value, LayoutOrder)
+				LayoutOrder += 1
 				
-				if i_1 < #v then
-					t["groupedDivider" .. formattedText] = roact.createElement(themedTextLabelModule, {
+				if i1 < #input then
+					Elements["groupedDivider" .. Formatted] = Roact.createElement(ThemedTextLabelModule, {
 						themeKey = "TextEmphasis",
 						fontKey = "Header1",
 						Text = "+",
 						TextYAlignment = nil,
 						Size = UDim2.new(0, 19, 0, 16),
-						LayoutOrder = var2
+						LayoutOrder = LayoutOrder
 					})
-					var2 += 1
+					LayoutOrder += 1
 				end
 			end
 		else
-			t["input" .. i] = renderKey(v, var2)
-			var2 += 1
+			Elements["input" .. i] = renderKey(input, LayoutOrder)
+			LayoutOrder += 1
 			
-			if p2 and i == #p1 then
-				t.Elipses = renderHorizontalSpacer("...", var2, true)
+			if IsList and i == #Inputs then
+				Elements.Elipses = renderHorizontalSpacer("...", LayoutOrder, true)
 			end
 		end
-		if not p2 and i < #p1 then
-			t["divider" .. i] = roact.createElement(themedTextLabelModule, {
+		if not IsList and i < #Inputs then
+			Elements["divider" .. i] = Roact.createElement(ThemedTextLabelModule, {
 				themeKey = "TextEmphasis",
 				fontKey = "Header1",
 				Text = "/",
 				TextYAlignment = nil,
 				Size = UDim2.new(0, 19, 0, 16),
-				LayoutOrder = var2
+				LayoutOrder = LayoutOrder
 			})
-			var2 += 1
+			LayoutOrder += 1
 		end
 	end
-	return roact.createElement("Frame", {
+	return Roact.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.new(0, 0, 1, 0),
 		Position = UDim2.new(1, 0, 0, 0)
-	}, t)
+	}, Elements)
 end
 
-return function(p3)
-	-- upvalues: globalConfigModule (ref), var1 (ref), withLocalizationModule (ref), roact (ref), themedTextLabelModule (ref), dividerModule (ref), renderInputIconContainer (ref)
-	if globalConfigModule.propValidation then
-		assert(var1(p3))
+return function(Frame) --[[ Line: 115 | Named "ControlEntry" ]]
+	-- upvalues: GlobalConfigModule (copy), StrictInterfaceResult (copy), WithLocalizationModule (copy), Roact (copy), ThemedTextLabelModule (copy), DividerModule (copy), renderInputIconContainer (copy)
+	if GlobalConfigModule.propValidation then
+		assert(StrictInterfaceResult(Frame))
 	end
-	return withLocalizationModule({ actionDescription = p3.actionDescription })(function(p4)
-		-- upvalues: roact (copy), p3 (ref), themedTextLabelModule (copy), dividerModule (copy), renderInputIconContainer (copy)
-		return roact.createElement("Frame", {
+	return WithLocalizationModule({ actionDescription = Frame.actionDescription })(function(p1) --[[ Line: 122 ]]
+		-- upvalues: Roact (upval), Frame (copy), ThemedTextLabelModule (upval), DividerModule (upval), renderInputIconContainer (upval)
+		return Roact.createElement("Frame", {
 			BackgroundTransparency = 1,
-			LayoutOrder = p3.LayoutOrder,
+			LayoutOrder = Frame.LayoutOrder,
 			Size = UDim2.new(1, 0, 0, 50)
 		}, {
-			ActionLabel = roact.createElement(themedTextLabelModule, {
+			ActionLabel = Roact.createElement(ThemedTextLabelModule, {
 				fontKey = "Header2",
 				themeKey = "TextEmphasis",
 				TextXAlignment = Enum.TextXAlignment.Left,
 				Size = UDim2.new(0, 200, 0, 22),
 				AnchorPoint = Vector2.new(0, 0.5),
 				Position = UDim2.new(0, 0, 0.5, 0),
-				Text = p4.actionDescription
+				Text = p1.actionDescription
 			}),
-			Divider = p3.hasDivider and roact.createElement(dividerModule, {
+			Divider = Frame.hasDivider and Roact.createElement(DividerModule, {
 				Size = UDim2.new(1, 0, 0, 1),
 				Position = UDim2.new(0, 0, 1, -1)
 			}),
-			Inputs = renderInputIconContainer(p3.inputs, p3.isList)
+			Inputs = renderInputIconContainer(Frame.inputs, Frame.isList)
 		})
 	end)
 end

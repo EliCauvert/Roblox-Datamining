@@ -1,74 +1,73 @@
-﻿local parent = script:FindFirstAncestor("AppChat").Parent
-local text = require(parent.AppCommonLib).Text
-local reactModule = require(parent.React)
-local cryoModule = require(parent.Cryo)
-local foundationModule = require(parent.Foundation)
-local getTextSize = require(parent.Style).GetTextSize
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local enums = foundationModule.Enums
-local useMessageFtuxTooltipModule = require(script.Parent.useMessageFtuxTooltip)
-local messageFtuxTooltipVariantModule = require(script.Parent.MessageFtuxTooltipVariant)
-local t = {
+﻿local Parent = script:FindFirstAncestor("AppChat").Parent
+local Text = require(Parent.AppCommonLib).Text
+local ReactModule = require(Parent.React)
+local CryoModule = require(Parent.Cryo)
+local FoundationModule = require(Parent.Foundation)
+local GetTextSizeFunction = require(Parent.Style).GetTextSize
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local Enums = FoundationModule.Enums
+local UseMessageFtuxTooltipModule = require(script.Parent.useMessageFtuxTooltip)
+local MessageFtuxTooltipVariantModule = require(script.Parent.MessageFtuxTooltipVariant)
+local config = {
 	isReversed = false,
-	variant = messageFtuxTooltipVariantModule.None
+	variant = MessageFtuxTooltipVariantModule.None
 }
 
-local var1 = function(p1)
-	-- upvalues: cryoModule (ref), t (ref), foundationModule (ref), useMessageFtuxTooltipModule (ref), reactModule (ref), foundationFontFaceMigration (ref), getTextSize (ref), text (ref), enums (ref)
-	local var2 = cryoModule.Dictionary.union(t, p1)
-	local var3 = foundationModule.Hooks.useTokens()
-	local var4 = useMessageFtuxTooltipModule(var2.variant)
-	local var5, var6 = reactModule.useState(false)
-	local var7, var8 = reactModule.useState(false)
-	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), foundationFontFaceMigration (copy), getTextSize (copy), var4 (ref), text (copy), var6 (ref), var2 (ref), var8 (ref)
-		local var9
-		local titleSmall = var3.Typography.TitleSmall
-		local var10 = if foundationFontFaceMigration then getTextSize(var4.text, titleSmall.FontSize, titleSmall.Font, Vector2.new(10000, 10000)).X + var3.Padding.Small * 2 else text.GetTextWidth(var4.text, titleSmall.Font, titleSmall.FontSize) + var3.Padding.Small * 2
+local function v10(p1) --[[ Line: 33 ]]
+	-- upvalues: CryoModule (copy), config (copy), FoundationModule (copy), UseMessageFtuxTooltipModule (copy), ReactModule (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), Text (copy), Enums (copy)
+	local UnionResult = CryoModule.Dictionary.union(config, p1)
+	local UseTokensResult = FoundationModule.Hooks.useTokens()
+	local UseMessageFtuxTooltipModuleResult = UseMessageFtuxTooltipModule(UnionResult.variant)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
+	ReactModule.useEffect(function() --[[ Line: 40 ]]
+		-- upvalues: UseTokensResult (copy), FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), UseMessageFtuxTooltipModuleResult (copy), Text (upval), UseStateResult2 (copy), UnionResult (copy), UseStateResult2_1 (copy)
+		local TitleSmall = UseTokensResult.Typography.TitleSmall
+		local NewX = if FoundationFontFaceMigration then GetTextSizeFunction(UseMessageFtuxTooltipModuleResult.text, TitleSmall.FontSize, TitleSmall.Font, Vector2.new(10000, 10000)).X + UseTokensResult.Padding.Small * 2 else Text.GetTextWidth(UseMessageFtuxTooltipModuleResult.text, TitleSmall.Font, TitleSmall.FontSize) + UseTokensResult.Padding.Small * 2
+		UseStateResult2(if UnionResult.messageRef.current then UnionResult.messageRef.current.AbsoluteSize.X < NewX else false)
+		UseStateResult2_1(true)
+	end, {
+		UseMessageFtuxTooltipModuleResult.text,
+		UseTokensResult,
+		UnionResult.messageRef
+	})
+	local UseMemoResult, UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 53 ]]
+		-- upvalues: UseStateResult (copy), UnionResult (copy), Enums (upval), UseTokensResult (copy)
+		local Start = if UseStateResult then if UnionResult.isReversed then Enums.PopoverAlign.Start else Enums.PopoverAlign.End elseif UnionResult.isReversed then Enums.PopoverAlign.End else Enums.PopoverAlign.Start
 		
-		if var2.messageRef.current then
-			var9 = var2.messageRef.current.AbsoluteSize.X < var10
-			var9 = nil
+		if UseStateResult then
+			return Start, 0
+		elseif UnionResult.isReversed then
+			return Start, UseTokensResult.Padding.Medium
 		else
-			var9 = false
+			return Start, -UseTokensResult.Padding.Medium
 		end
-		var6(var9)
-		var8(true)
-	end, { var4.text, var3, var2.messageRef })
-	local var9, var10 = reactModule.useMemo(function()
-		-- upvalues: var5 (ref), var2 (ref), enums (copy), var3 (ref)
-		local var11 = if var5 then if var2.isReversed then enums.PopoverAlign.Start else enums.PopoverAlign.End elseif var2.isReversed then enums.PopoverAlign.End else enums.PopoverAlign.Start
-		
-		if var5 then
-			return var11, 0
-		elseif var2.isReversed then
-			return var11, var3.Padding.Medium
-		end
-		return var11, -var3.Padding.Medium
-	end, { var5, var2.isReversed, var3 })
+	end, { UseStateResult, UnionResult.isReversed, UseTokensResult })
 	
-	return if var4.isDismissed then nil else reactModule.createElement(foundationModule.Popover.Root, { isOpen = var7 }, {
-		Anchor = reactModule.createElement(foundationModule.Popover.Anchor, { anchorRef = var2.messageRef }),
-		Content = reactModule.createElement(foundationModule.Popover.Content, {
+	return if UseMessageFtuxTooltipModuleResult.isDismissed then nil else ReactModule.createElement(FoundationModule.Popover.Root, { isOpen = UseStateResult1 }, {
+		Anchor = ReactModule.createElement(FoundationModule.Popover.Anchor, { anchorRef = UnionResult.messageRef }),
+		Content = ReactModule.createElement(FoundationModule.Popover.Content, {
 			hasArrow = true,
 			side = {
-				position = foundationModule.Enums.PopoverSide.Bottom,
-				offset = -var3.Padding.Small
+				position = FoundationModule.Enums.PopoverSide.Bottom,
+				offset = -UseTokensResult.Padding.Small
 			},
-			align = { position = var9, offset = var10 },
-			radius = foundationModule.Enums.Radius.Small,
-			backgroundStyle = var3.Color.Content.Emphasis,
-			onPressedOutside = var4.handleDismiss
+			align = { position = UseMemoResult, offset = UseMemoResult2 },
+			radius = FoundationModule.Enums.Radius.Small,
+			backgroundStyle = UseTokensResult.Color.Content.Emphasis,
+			onPressedOutside = UseMessageFtuxTooltipModuleResult.handleDismiss
 		}, {
-			TooltipText = reactModule.createElement(foundationModule.Text, {
+			TooltipText = ReactModule.createElement(FoundationModule.Text, {
 				tag = "auto-xy padding-x-small padding-y-xsmall text-title-small content-inverse-emphasis",
-				Text = var4.text
+				Text = UseMessageFtuxTooltipModuleResult.text
 			})
 		})
 	})
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: t (ref), messageFtuxTooltipVariantModule (ref), reactModule (ref), var1 (ref)
-	return if (p1.variant or t.variant) == messageFtuxTooltipVariantModule.None then nil else reactModule.createElement(var1, p1)
+return ReactModule.memo(function(p1) --[[ Line: 93 ]]
+	-- upvalues: config (copy), MessageFtuxTooltipVariantModule (copy), ReactModule (copy), v10 (copy)
+	local Variant = p1.variant or config.variant
+	
+	return if Variant == MessageFtuxTooltipVariantModule.None then nil else ReactModule.createElement(v10, p1)
 end)

@@ -1,23 +1,21 @@
-﻿local navigationRodux = script:FindFirstAncestor("NavigationRodux")
-local parent = navigationRodux.Parent
-local getFFlagUseCommunitiesTranslation = require(parent.SharedFlags).GetFFlagUseCommunitiesTranslation
-local navigateDownModule = require(navigationRodux.Thunks.NavigateDown)
-local robloxAppEnumsModule = require(parent.RobloxAppEnums)
-local urlBuilderModule = require(parent.UrlBuilder)
-local tModule = require(parent.t)
-local appPage = robloxAppEnumsModule.AppPage
-local urlBuilder = urlBuilderModule.UrlBuilder
+﻿local NavigationRodux = script:FindFirstAncestor("NavigationRodux")
+local Parent = NavigationRodux.Parent
+local GetFFlagUseCommunitiesTranslationFunction = require(Parent.SharedFlags).GetFFlagUseCommunitiesTranslation
+local NavigateDownModule = require(NavigationRodux.Thunks.NavigateDown)
+local TModule = require(Parent.t)
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
 
-return function(p1)
-	-- upvalues: tModule (ref), navigateDownModule (ref), appPage (ref), urlBuilder (ref), getFFlagUseCommunitiesTranslation (ref)
-	assert(tModule.callback(p1) or tModule.none(p1), "")
+return function(OnClose) --[[ Line: 14 ]]
+	-- upvalues: TModule (copy), NavigateDownModule (copy), AppPage (copy), UrlBuilder (copy), GetFFlagUseCommunitiesTranslationFunction (copy)
+	assert(TModule.callback(OnClose) or TModule.none(OnClose), "")
 	
-	return navigateDownModule({
-		name = appPage.GenericWebPage,
-		detail = urlBuilder.static.groups(),
+	return NavigateDownModule({
+		name = AppPage.GenericWebPage,
+		detail = UrlBuilder.static.groups(),
 		extraProps = {
-			titleKey = if getFFlagUseCommunitiesTranslation() then "CommonUI.Features.Label.Groups" else "CommonUI.Features.Label.sGroups",
-			onClose = p1
+			titleKey = if GetFFlagUseCommunitiesTranslationFunction() then "CommonUI.Features.Label.Groups" else "CommonUI.Features.Label.sGroups",
+			onClose = OnClose
 		}
 	})
 end

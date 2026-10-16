@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.SocialCarousel.SocialCarousel)
+﻿return (require(script.Parent.Parent.Parent._Index.SocialCarousel.SocialCarousel))

@@ -1,26 +1,26 @@
-﻿local roact = require(script:FindFirstAncestor("SocialLibraries").dependencies).Roact
-local maskedIcon = roact.PureComponent:extend("MaskedIcon")
-maskedIcon.defaultProps = {
+﻿local Roact = require(script:FindFirstAncestor("SocialLibraries").dependencies).Roact
+local MaskedIcon = Roact.PureComponent:extend("MaskedIcon")
+MaskedIcon.defaultProps = {
 	icon = "rbxasset://textures/ui/LuaChat/icons/share-game-thumbnail.png"
 }
 
-function maskedIcon.render(p1)
-	-- upvalues: roact (ref)
-	return roact.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
-		layout = roact.createElement("UIListLayout", {
+function MaskedIcon.render(p1) --[[ Line: 13 ]]
+	-- upvalues: Roact (copy)
+	return Roact.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
+		layout = Roact.createElement("UIListLayout", {
 			VerticalAlignment = Enum.VerticalAlignment.Center,
 			HorizontalAlignment = Enum.HorizontalAlignment.Center
 		}),
-		button = roact.createElement("ImageLabel", {
+		button = Roact.createElement("ImageLabel", {
 			BackgroundTransparency = 1,
 			Image = p1.props.icon,
 			Size = UDim2.new(1, 0, 1, 0)
 		}, {
-			layout = roact.createElement("UIListLayout", {
+			layout = Roact.createElement("UIListLayout", {
 				VerticalAlignment = Enum.VerticalAlignment.Center,
 				HorizontalAlignment = Enum.HorizontalAlignment.Center
 			}),
-			mask = roact.createElement("ImageLabel", {
+			mask = Roact.createElement("ImageLabel", {
 				BackgroundTransparency = 1,
 				Image = "rbxasset://textures/ui/LuaChat/graphic/gr-mask-game-icon-48x48.png",
 				Size = UDim2.new(1, 0, 1, 0)
@@ -29,4 +29,4 @@ function maskedIcon.render(p1)
 	})
 end
 
-return maskedIcon
+return MaskedIcon

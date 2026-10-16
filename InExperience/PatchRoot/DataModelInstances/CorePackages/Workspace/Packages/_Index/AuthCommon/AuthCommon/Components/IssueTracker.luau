@@ -1,189 +1,189 @@
-﻿local authCommon = script:FindFirstAncestor("AuthCommon")
-local parent = authCommon.Parent
-local roactModule = require(parent.Roact)
-local roactRoduxModule = require(parent.RoactRodux)
-local roactServices = require(parent.RoactServices).RoactServices
-local roactNetworking = require(parent.RoactServiceTags).RoactNetworking
-local tModule = require(parent.t)
-local tutilsModule = require(parent.tutils)
-local argCheckModule = require(parent.ArgCheck)
-local UIBloxModule = require(parent.UIBlox)
-local withStyle = UIBloxModule.Style.withStyle
-local withLocalization = require(parent.Localization).withLocalization
-local foundationModule = require(parent.Foundation)
-local icon = foundationModule.Icon
-local iconName = foundationModule.Enums.IconName
-local iconSize = foundationModule.Enums.IconSize
-local iconVariant = foundationModule.Enums.IconVariant
-local fitChildrenModule = require(authCommon.Components.FitChildren)
-local fitTextLabelModule = require(authCommon.Components.FitTextLabel)
-local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
-local getImageData = require(parent.RobloxAppAssets).GetImageData
-local loggerModule = require(authCommon.Components.Logger)
-local issueConditionModule = require(authCommon.Enums.IssueCondition)
-local inputValidityModule = require(authCommon.Enums.InputValidity)
-local var1 = roactModule.createBinding(0)
-local var2 = tModule.interface({
-	validateFunction = tModule.callback,
-	getIssueMessageList = tModule.callback,
-	getDefaultIssues = tModule.callback
+﻿local AuthCommon = script:FindFirstAncestor("AuthCommon")
+local Parent = AuthCommon.Parent
+local RoactModule = require(Parent.Roact)
+local RoactRoduxModule = require(Parent.RoactRodux)
+local RoactServices = require(Parent.RoactServices).RoactServices
+local RoactNetworking = require(Parent.RoactServiceTags).RoactNetworking
+local TModule = require(Parent.t)
+local TutilsModule = require(Parent.tutils)
+local ArgCheckModule = require(Parent.ArgCheck)
+local UIBloxModule = require(Parent.UIBlox)
+local WithStyleFunction = UIBloxModule.Style.withStyle
+local WithLocalizationFunction = require(Parent.Localization).withLocalization
+local FoundationModule = require(Parent.Foundation)
+local Icon = FoundationModule.Icon
+local IconName = FoundationModule.Enums.IconName
+local IconSize = FoundationModule.Enums.IconSize
+local IconVariant = FoundationModule.Enums.IconVariant
+local FitChildrenModule = require(AuthCommon.Components.FitChildren)
+local FitTextLabelModule = require(AuthCommon.Components.FitTextLabel)
+local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
+local GetImageDataFunction = require(Parent.RobloxAppAssets).GetImageData
+local LoggerModule = require(AuthCommon.Components.Logger)
+local IssueConditionModule = require(AuthCommon.Enums.IssueCondition)
+local InputValidityModule = require(AuthCommon.Enums.InputValidity)
+local Binding = RoactModule.createBinding(0)
+local InterfaceResult = TModule.interface({
+	validateFunction = TModule.callback,
+	getIssueMessageList = TModule.callback,
+	getDefaultIssues = TModule.callback
 })
-local issueTracker = roactModule.PureComponent:extend("IssueTracker")
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagSignUpTrackFailedRequest = sharedFlagsModule.FFlagSignUpTrackFailedRequest
-local fFlagAuthValidatorStyleOverrides = sharedFlagsModule.FFlagAuthValidatorStyleOverrides
-local getFFlagIssueTrackerUseFoundationIconModule = require(authCommon.Flags.GetFFlagIssueTrackerUseFoundationIcon)
+local IssueTracker = RoactModule.PureComponent:extend("IssueTracker")
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagSignUpTrackFailedRequest = SharedFlagsModule.FFlagSignUpTrackFailedRequest
+local FFlagAuthValidatorStyleOverrides = SharedFlagsModule.FFlagAuthValidatorStyleOverrides
+local GetFFlagIssueTrackerUseFoundationIconModule = require(AuthCommon.Flags.GetFFlagIssueTrackerUseFoundationIcon)
 
-function issueTracker.init(p1)
-	-- upvalues: var2 (ref), issueConditionModule (ref), inputValidityModule (ref), roactModule (ref), fFlagSignUpTrackFailedRequest (ref), loggerModule (ref), tutilsModule (ref)
-	local validator = p1.props.validator
-	assert(var2(validator))
-	local issueMessageList = validator.getIssueMessageList()
-	local defaultIssues = validator.getDefaultIssues()
-	local t = {}
+function IssueTracker.init(p1) --[[ Line: 58 ]]
+	-- upvalues: InterfaceResult (copy), IssueConditionModule (copy), InputValidityModule (copy), RoactModule (copy), FFlagSignUpTrackFailedRequest (copy), LoggerModule (copy), TutilsModule (copy)
+	local Validator = p1.props.validator
+	assert(InterfaceResult(Validator))
+	local IssueMessageList = Validator.getIssueMessageList()
+	local DefaultIssues = Validator.getDefaultIssues()
+	local ListOfIssuesOnDisplay = {}
 	
-	for i in pairs(issueMessageList) do
-		t[i] = defaultIssues[i] ~= issueConditionModule.Hidden and true
+	for i in pairs(IssueMessageList) do
+		ListOfIssuesOnDisplay[i] = DefaultIssues[i] ~= IssueConditionModule.Hidden
 	end
 	p1.state = {
-		listOfIssuesOnDisplay = t,
-		issueMessageList = issueMessageList,
-		issueCondition = defaultIssues,
-		inputValidity = inputValidityModule.Unvalidated
+		listOfIssuesOnDisplay = ListOfIssuesOnDisplay,
+		issueMessageList = IssueMessageList,
+		issueCondition = DefaultIssues,
+		inputValidity = InputValidityModule.Unvalidated
 	}
 	p1.isMounted = false
-	p1.containerRef = roactModule.createRef()
+	p1.containerRef = RoactModule.createRef()
 	
-	function p0.validateText()
-		-- upvalues: p1 (ref), var2 (copy), validator (ref), inputValidityModule (copy), fFlagSignUpTrackFailedRequest (copy), loggerModule (copy)
-		local networking = p1.props.networking
-		local textToValidate = p1.props.textToValidate
-		local validate = p1.props.validate
-		local validatorAdditionalProps = p1.props.validatorAdditionalProps
-		local issueCondition = p1.state.issueCondition
-		assert(var2(validator))
-		validate(networking, validator.validateFunction, textToValidate, issueCondition, validatorAdditionalProps):andThen(function(p2)
-			-- upvalues: p1 (copy), inputValidityModule (copy), fFlagSignUpTrackFailedRequest (copy)
-			spawn(function()
-				-- upvalues: p1 (copy), inputValidityModule (copy), p2 (ref), fFlagSignUpTrackFailedRequest (copy)
-				local onTextValidated = p1.props.onTextValidated
-				local textToValidate = p1.props.textToValidate
-				local invalid = inputValidityModule.Invalid
+	function p1.validateText() --[[ Line: 85 ]]
+		-- upvalues: p1 (copy), InterfaceResult (upval), Validator (copy), InputValidityModule (upval), FFlagSignUpTrackFailedRequest (upval), LoggerModule (upval)
+		local Networking = p1.props.networking
+		local TextToValidate = p1.props.textToValidate
+		local ValidateFunction = p1.props.validate
+		local ValidatorAdditionalProps = p1.props.validatorAdditionalProps
+		local IssueCondition = p1.state.issueCondition
+		assert(InterfaceResult(Validator))
+		ValidateFunction(Networking, Validator.validateFunction, TextToValidate, IssueCondition, ValidatorAdditionalProps):andThen(function(Result) --[[ Line: 98 ]]
+			-- upvalues: p1 (upval), InputValidityModule (upval), FFlagSignUpTrackFailedRequest (upval)
+			spawn(function() --[[ Line: 99 ]]
+				-- upvalues: p1 (upval), InputValidityModule (upval), Result (copy), FFlagSignUpTrackFailedRequest (upval)
+				local OnTextValidatedFunction: (any, any, any) -> () = p1.props.onTextValidated
+				local TextToValidate = p1.props.textToValidate
+				local Invalid = InputValidityModule.Invalid
 				
-				if p1.isMounted and p2.Input == textToValidate then
-					if textToValidate == "" then
-						invalid = inputValidityModule.Unvalidated
-					elseif p2.InputValid then
-						invalid = inputValidityModule.Valid
+				if p1.isMounted and Result.Input == TextToValidate then
+					if TextToValidate == "" then
+						Invalid = InputValidityModule.Unvalidated
+					elseif Result.InputValid then
+						Invalid = InputValidityModule.Valid
 					end
-					if onTextValidated then
-						if fFlagSignUpTrackFailedRequest then
-							onTextValidated(p2.Input, invalid, p2.hasRequestFailed)
+					if OnTextValidatedFunction then
+						if FFlagSignUpTrackFailedRequest then
+							OnTextValidatedFunction(Result.Input, Invalid, Result.hasRequestFailed)
 						else
-							onTextValidated(p2.Input, invalid)
+							OnTextValidatedFunction(Result.Input, Invalid)
 						end
 					end
 					p1:setState({
-						issueCondition = p2.IssueCondition,
-						inputValidity = invalid
+						issueCondition = Result.IssueCondition,
+						inputValidity = Invalid
 					})
 					
 					if p1.props.updateIssueCondition then
-						p1.props.updateIssueCondition(p2.IssueCondition)
+						p1.props.updateIssueCondition(Result.IssueCondition)
 					end
 				end
 			end)
-		end, function(p2)
-			-- upvalues: loggerModule (copy), p1 (copy), inputValidityModule (copy)
-			loggerModule:warning(string.format("Input issueTracker error: %s", tostring(p2)))
-			p1:setState({ inputValidity = inputValidityModule.Unvalidated })
+		end, function(p2) --[[ Line: 131 ]]
+			-- upvalues: LoggerModule (upval), p1 (upval), InputValidityModule (upval)
+			LoggerModule:warning(string.format("Input issueTracker error: %s", (tostring(p2))))
+			p1:setState({ inputValidity = InputValidityModule.Unvalidated })
 		end)
 	end
 	
-	function p0.updateListOfIssuesOnDisplay()
-		-- upvalues: p1 (ref), issueConditionModule (copy), tutilsModule (copy)
-		local height = p1.props.height
-		local issueMessageList = p1.state.issueMessageList
-		local issueCondition = p1.state.issueCondition
-		local var3 = 0
+	function p1.updateListOfIssuesOnDisplay() --[[ Line: 141 ]]
+		-- upvalues: p1 (copy), IssueConditionModule (upval), TutilsModule (upval)
+		local Height = p1.props.height
+		local IssueMessageList = p1.state.issueMessageList
+		local IssueCondition = p1.state.issueCondition
+		local Total = 0
+		local ListOfIssuesOnDisplay = {}
+		local List = {}
+		local List1 = {}
 		local t = {}
-		local t_1 = {}
-		local t_2 = {}
-		local t_3 = {}
-		
-		for i, v in pairs(p1.containerRef.current and p1.containerRef.current:GetChildren() or {}) do
-			if v:IsA("GuiObject") then
-				t_3[v.Name] = v.AbsoluteSize.Y
+		local Children = p1.containerRef.current and p1.containerRef.current:GetChildren() or {}
+		for _, Gui in pairs(Children) do
+			if Gui:IsA("GuiObject") then
+				t[Gui.Name] = Gui.AbsoluteSize.Y
 			end
 		end
-		for i_1 in pairs(issueMessageList) do
-			t[i_1] = false
-			local var4 = issueCondition[i_1] == issueConditionModule.Problematic
+		for i in pairs(IssueMessageList) do
+			ListOfIssuesOnDisplay[i] = false
+			local IsIssueConditionEntryMatch = IssueCondition[i] == IssueConditionModule.Problematic
 			
-			if issueCondition[i_1] ~= issueConditionModule.Hidden then
-				local var5 = t_3[i_1] or 0
-				table.insert(t_1, i_1)
-				var3 += var5
+			if IssueCondition[i] ~= IssueConditionModule.Hidden then
+				local Entry = t[i] or 0
+				table.insert(List, i)
+				Total += Entry
 				
-				if not var4 then
-					table.insert(t_2, #t_1)
+				if not IsIssueConditionEntryMatch then
+					table.insert(List1, #List)
 				end
 			end
 		end
-		var3 += (#t_1 - 1) * 5
+		local NewTotal = Total + (#List - 1) * 5
 		
-		if height then
-			for i_2 = #t_2, 1, -1 do
-				if height >= var3 then break end
-				local var6 = t_2[i_2]
-				var3 = var3 - (t_3[t_1[var6]] or 0) - 5
-				table.remove(t_1, var6)
+		if Height then
+			for i1 = #List1, 1, -1 do
+				if Height >= NewTotal then break end
+				local Index = List1[i1]
+				NewTotal = NewTotal - (t[List[Index]] or 0) - 5
+				table.remove(List, Index)
 			end
-			for i_3 = #t_1, 1, -1 do
-				if height >= var3 then break end
-				var3 = var3 - (t_3[t_1[i_3]] or 0) - 5
-				table.remove(t_1, i_3)
+			for i2 = #List, 1, -1 do
+				if Height >= NewTotal then break end
+				NewTotal = NewTotal - (t[List[i2]] or 0) - 5
+				table.remove(List, i2)
 			end
 		end
-		for i_4, v_1 in pairs(t_1) do
-			t[v_1] = true
+		for _, value in pairs(List) do
+			ListOfIssuesOnDisplay[value] = true
 		end
-		spawn(function()
-			-- upvalues: p1 (copy), tutilsModule (copy), t (ref)
-			if p1.isMounted and not tutilsModule.shallowEqual(t, p1.state.listOfIssuesOnDisplay) then
-				p1:setState({ listOfIssuesOnDisplay = t })
+		spawn(function() --[[ Line: 217 ]]
+			-- upvalues: p1 (upval), TutilsModule (upval), ListOfIssuesOnDisplay (copy)
+			if p1.isMounted and not TutilsModule.shallowEqual(ListOfIssuesOnDisplay, p1.state.listOfIssuesOnDisplay) then
+				p1:setState({ listOfIssuesOnDisplay = ListOfIssuesOnDisplay })
 			end
 		end)
 	end
 end
 
-function issueTracker.didMount(p2)
+function IssueTracker.didMount(p2) --[[ Line: 229 ]]
 	p2.isMounted = true
 	p2.updateListOfIssuesOnDisplay()
 end
 
-function issueTracker.willUnmount(p2)
+function IssueTracker.willUnmount(p2) --[[ Line: 234 ]]
 	p2.isMounted = false
 end
 
-function issueTracker.didUpdate(p2, p3, _)
-	-- upvalues: argCheckModule (ref), tutilsModule (ref), fFlagSignUpTrackFailedRequest (ref)
-	local validator = p2.props.validator
-	local validatorAdditionalProps = p2.props.validatorAdditionalProps
-	local textToValidate = p2.props.textToValidate
+function IssueTracker.didUpdate(p2, p3, _) --[[ Line: 238 ]]
+	-- upvalues: ArgCheckModule (copy), TutilsModule (copy), FFlagSignUpTrackFailedRequest (copy)
+	local Validator = p2.props.validator
+	local ValidatorAdditionalProps = p2.props.validatorAdditionalProps
+	local TextToValidate = p2.props.textToValidate
 	
-	if validator ~= p3.validator then
-		argCheckModule.assert(validator == p3.validator, "IssueTracker expects the validator to never change")
+	if Validator ~= p3.validator then
+		ArgCheckModule.assert(Validator == p3.validator, "IssueTracker expects the validator to never change")
 	end
-	if textToValidate ~= p3.textToValidate or not tutilsModule.shallowEqual(validatorAdditionalProps, p3.validatorAdditionalProps) then
-		spawn(function()
-			-- upvalues: fFlagSignUpTrackFailedRequest (copy), p2 (ref), textToValidate (ref)
-			if fFlagSignUpTrackFailedRequest then
+	if TextToValidate ~= p3.textToValidate or not TutilsModule.shallowEqual(ValidatorAdditionalProps, p3.validatorAdditionalProps) then
+		spawn(function() --[[ Line: 251 ]]
+			-- upvalues: FFlagSignUpTrackFailedRequest (upval), p2 (copy), TextToValidate (copy)
+			if FFlagSignUpTrackFailedRequest then
 				task.wait(if p2.props.debounceTime then p2.props.debounceTime else 0.3)
 			else
 				wait(0.3)
 			end
-			if textToValidate == p2.props.textToValidate then
+			if TextToValidate == p2.props.textToValidate then
 				p2.validateText()
 			end
 		end)
@@ -191,93 +191,93 @@ function issueTracker.didUpdate(p2, p3, _)
 	p2.updateListOfIssuesOnDisplay()
 end
 
-function issueTracker.render(p2)
-	-- upvalues: withStyle (ref), var1 (ref), fFlagAuthValidatorStyleOverrides (ref), roactModule (ref), issueConditionModule (ref), withLocalization (ref), inputValidityModule (ref), fitChildrenModule (ref), getFFlagIssueTrackerUseFoundationIconModule (ref), icon (ref), iconName (ref), iconVariant (ref), iconSize (ref), imageSetLabel (ref), getImageData (ref), fitTextLabelModule (ref)
-	local height = p2.props.height
-	local issueMessageList = p2.state.issueMessageList
-	local issueCondition = p2.state.issueCondition
-	local listOfIssuesOnDisplay = p2.state.listOfIssuesOnDisplay
+function IssueTracker.render(p2) --[[ Line: 267 ]]
+	-- upvalues: WithStyleFunction (copy), Binding (copy), FFlagAuthValidatorStyleOverrides (copy), RoactModule (copy), IssueConditionModule (copy), WithLocalizationFunction (copy), InputValidityModule (copy), FitChildrenModule (copy), GetFFlagIssueTrackerUseFoundationIconModule (copy), Icon (copy), IconName (copy), IconVariant (copy), IconSize (copy), ImageSetLabel (copy), GetImageDataFunction (copy), FitTextLabelModule (copy)
+	local Height = p2.props.height
+	local IssueMessageList = p2.state.issueMessageList
+	local IssueCondition = p2.state.issueCondition
+	local ListOfIssuesOnDisplay = p2.state.listOfIssuesOnDisplay
 	
-	return withStyle(function(p3)
-		-- upvalues: p2 (ref), var1 (copy), fFlagAuthValidatorStyleOverrides (copy), roactModule (copy), issueMessageList (ref), issueCondition (ref), issueConditionModule (copy), withLocalization (copy), inputValidityModule (copy), fitChildrenModule (copy), listOfIssuesOnDisplay (ref), getFFlagIssueTrackerUseFoundationIconModule (copy), icon (copy), iconName (copy), iconVariant (copy), iconSize (copy), imageSetLabel (copy), getImageData (copy), fitTextLabelModule (copy), height (ref)
-		local font = p3.Font.CaptionBody.Font
-		local var7 = p3.Font.BaseSize * p3.Font.CaptionBody.RelativeSize
-		local contentTransparency = p2.props.contentTransparency
-		local checkmarkTransparency = p2.props.checkmarkTransparency or var1
-		local var8 = if fFlagAuthValidatorStyleOverrides and p2.props.colorContentOverride then p2.props.colorContentOverride else p3.Theme.TextDefault.Color
+	return WithStyleFunction(function(p3) --[[ Line: 275 ]]
+		-- upvalues: p2 (copy), Binding (upval), FFlagAuthValidatorStyleOverrides (upval), RoactModule (upval), IssueMessageList (copy), IssueCondition (copy), IssueConditionModule (upval), WithLocalizationFunction (upval), InputValidityModule (upval), FitChildrenModule (upval), ListOfIssuesOnDisplay (copy), GetFFlagIssueTrackerUseFoundationIconModule (upval), Icon (upval), IconName (upval), IconVariant (upval), IconSize (upval), ImageSetLabel (upval), GetImageDataFunction (upval), FitTextLabelModule (upval), Height (copy)
+		local CaptionBodyFont = p3.Font.CaptionBody.Font
+		local ScaledBaseSize = p3.Font.BaseSize * p3.Font.CaptionBody.RelativeSize
+		local ContentTransparency = p2.props.contentTransparency
+		local CheckmarkTransparency = p2.props.checkmarkTransparency or Binding
+		local ColorContentOverride = if FFlagAuthValidatorStyleOverrides and p2.props.colorContentOverride then p2.props.colorContentOverride else p3.Theme.TextDefault.Color
 		
-		if not contentTransparency then
-			local transparency = p3.Theme.TextDefault.Transparency
+		if not ContentTransparency then
+			local Transparency = p3.Theme.TextDefault.Transparency
 			
-			if transparency ~= p2.textDefaultTransparency then
-				p2.textDefaultTransparency = transparency
-				p2.textDefaultTransparencyBinding = roactModule.createBinding(transparency)
+			if Transparency ~= p2.textDefaultTransparency then
+				p2.textDefaultTransparency = Transparency
+				p2.textDefaultTransparencyBinding = RoactModule.createBinding(Transparency)
 			end
-			contentTransparency = p2.textDefaultTransparencyBinding
+			ContentTransparency = p2.textDefaultTransparencyBinding
 		end
-		local var9 = roactModule.joinBindings({
-			content = contentTransparency,
-			checkmark = checkmarkTransparency
+		local JoinBindingsResult = RoactModule.joinBindings({
+			content = ContentTransparency,
+			checkmark = CheckmarkTransparency
 		})
-		local t = {}
+		local List = {}
 		
-		for i in pairs(issueMessageList) do
-			table.insert(t, i)
+		for i in pairs(IssueMessageList) do
+			table.insert(List, i)
 		end
 		if p2.props.sortProblematicIssues then
-			table.sort(t, function(p4, p5)
-				-- upvalues: issueCondition (copy), issueConditionModule (copy)
-				return issueCondition[p4] == issueConditionModule.Problematic and issueCondition[p5] ~= issueConditionModule.Problematic
+			table.sort(List, function(A, B): boolean --[[ Line: 305 ]]
+				-- upvalues: IssueCondition (upval), IssueConditionModule (upval)
+				return IssueCondition[A] == IssueConditionModule.Problematic and IssueCondition[B] ~= IssueConditionModule.Problematic
 			end)
 		end
-		return withLocalization(issueMessageList)(function(p4)
-			-- upvalues: roactModule (copy), p2 (copy), t (ref), issueCondition (copy), issueConditionModule (copy), inputValidityModule (copy), fitChildrenModule (copy), listOfIssuesOnDisplay (copy), getFFlagIssueTrackerUseFoundationIconModule (copy), icon (copy), iconName (copy), iconVariant (copy), iconSize (copy), var9 (ref), p3 (ref), var8 (ref), imageSetLabel (copy), getImageData (copy), fitTextLabelModule (copy), font (ref), var7 (ref), contentTransparency (write), height (copy), checkmarkTransparency (ref)
-			local list = {
-				roactModule.createElement("UIListLayout", {
+		return WithLocalizationFunction(IssueMessageList)(function(p4) --[[ Line: 316 ]]
+			-- upvalues: RoactModule (upval), p2 (upval), List (copy), IssueCondition (upval), IssueConditionModule (upval), InputValidityModule (upval), FitChildrenModule (upval), ListOfIssuesOnDisplay (upval), GetFFlagIssueTrackerUseFoundationIconModule (upval), Icon (upval), IconName (upval), IconVariant (upval), IconSize (upval), JoinBindingsResult (copy), p3 (copy), ColorContentOverride (copy), ImageSetLabel (upval), GetImageDataFunction (upval), FitTextLabelModule (upval), CaptionBodyFont (copy), ScaledBaseSize (copy), ContentTransparency (ref), Height (upval), CheckmarkTransparency (copy)
+			local Elements = {
+				RoactModule.createElement("UIListLayout", {
 					Padding = UDim.new(0, 5),
 					SortOrder = Enum.SortOrder.LayoutOrder,
-					[roactModule.Change.AbsoluteContentSize] = p2.updateListOfIssuesOnDisplay
+					[RoactModule.Change.AbsoluteContentSize] = p2.updateListOfIssuesOnDisplay
 				})
 			}
 			
-			for i, v in ipairs(t) do
-				local var10 = issueCondition[v] == issueConditionModule.Problematic
-				local var11 = var10 and p2.state.inputValidity ~= inputValidityModule.Unvalidated
-				list[v] = roactModule.createElement(fitChildrenModule.FitFrame, {
+			for LayoutOrder, value in ipairs(List) do
+				local IsIssueConditionEntryMatch = IssueCondition[value] == IssueConditionModule.Problematic
+				local IsNotInputValidityMatch: boolean = IsIssueConditionEntryMatch and p2.state.inputValidity ~= InputValidityModule.Unvalidated
+				Elements[value] = RoactModule.createElement(FitChildrenModule.FitFrame, {
 					BackgroundTransparency = 1,
 					Size = UDim2.new(1, 0, 0, 0),
-					fitAxis = fitChildrenModule.FitAxis.Height,
-					LayoutOrder = i,
-					Visible = listOfIssuesOnDisplay[v]
+					fitAxis = FitChildrenModule.FitAxis.Height,
+					LayoutOrder = LayoutOrder,
+					Visible = ListOfIssuesOnDisplay[value]
 				}, {
-					List = roactModule.createElement("UIListLayout", {
+					List = RoactModule.createElement("UIListLayout", {
 						FillDirection = Enum.FillDirection.Horizontal,
 						Padding = UDim.new(0, 7),
 						SortOrder = Enum.SortOrder.LayoutOrder
 					}),
-					CheckHolder = roactModule.createElement("Frame", {
+					CheckHolder = RoactModule.createElement("Frame", {
 						LayoutOrder = 1,
 						BackgroundTransparency = 1,
 						Size = UDim2.new(0, 12, 0, 12)
 					}, {
-						CheckMark = if getFFlagIssueTrackerUseFoundationIconModule() then roactModule.createElement(icon, {
-							name = if var10 then iconName.X else iconName.Check,
-							variant = iconVariant.Filled,
-							size = iconSize.XSmall,
-							style = var9:map(function(p5)
-								-- upvalues: var11 (ref), p3 (copy), var8 (copy)
+						CheckMark = if GetFFlagIssueTrackerUseFoundationIconModule() then RoactModule.createElement(Icon, {
+							name = if IsIssueConditionEntryMatch then IconName.X else IconName.Check,
+							variant = IconVariant.Filled,
+							size = IconSize.XSmall,
+							style = JoinBindingsResult:map(function(p5) --[[ Line: 351 ]]
+								-- upvalues: IsNotInputValidityMatch (copy), p3 (upval), ColorContentOverride (upval)
 								return {
-									Color3 = if var11 then p3.Theme.Alert.Color else var8,
+									Color3 = IsNotInputValidityMatch and p3.Theme.Alert.Color or ColorContentOverride,
 									Transparency = (p5.content - 1) * (1 - p5.checkmark) + 1
 								}
 							end),
 							Position = UDim2.new(0.5, 0, 0.65, 0),
 							AnchorPoint = Vector2.new(0.5, 0.5)
-						}) else roactModule.createElement(imageSetLabel, {
+						}) else RoactModule.createElement(ImageSetLabel, {
 							BackgroundTransparency = 1,
-							Image = if var10 then getImageData("LuaApp/icons/navigation/close") or "LuaApp/icons/navigation/close" else getImageData("LuaApp/icons/progress_small") or "LuaApp/icons/progress_small",
-							ImageColor3 = if var11 then p3.Theme.Alert.Color else var8,
-							ImageTransparency = var9:map(function(p5)
+							Image = if IsIssueConditionEntryMatch then GetImageDataFunction("LuaApp/icons/navigation/close") or "LuaApp/icons/navigation/close" else GetImageDataFunction("LuaApp/icons/progress_small") or "LuaApp/icons/progress_small",
+							ImageColor3 = IsNotInputValidityMatch and p3.Theme.Alert.Color or ColorContentOverride,
+							ImageTransparency = JoinBindingsResult:map(function(p5): number --[[ Line: 366 ]]
 								return (p5.content - 1) * (1 - p5.checkmark) + 1
 							end),
 							Size = UDim2.new(1, 0, 1, 0),
@@ -285,46 +285,46 @@ function issueTracker.render(p2)
 							AnchorPoint = Vector2.new(0.5, 0.5)
 						})
 					}),
-					IssueLabel = roactModule.createElement(fitTextLabelModule, {
+					IssueLabel = RoactModule.createElement(FitTextLabelModule, {
 						LayoutOrder = 2,
 						BackgroundTransparency = 1,
 						TextWrapped = true,
 						Size = UDim2.new(1, 0, 0, 0),
-						fitAxis = fitChildrenModule.FitAxis.Height,
-						Text = p4[v],
-						Font = font,
-						TextSize = var7,
-						TextColor3 = if var11 then p3.Theme.Alert.Color else var8,
-						TextTransparency = contentTransparency,
+						fitAxis = FitChildrenModule.FitAxis.Height,
+						Text = p4[value],
+						Font = CaptionBodyFont,
+						TextSize = ScaledBaseSize,
+						TextColor3 = IsNotInputValidityMatch and p3.Theme.Alert.Color or ColorContentOverride,
+						TextTransparency = ContentTransparency,
 						TextXAlignment = Enum.TextXAlignment.Left
 					})
 				})
 			end
-			return if height then roactModule.createElement("Frame", {
-				Size = UDim2.new(1, 0, 0, height),
+			return if Height then RoactModule.createElement("Frame", {
+				Size = UDim2.new(1, 0, 0, Height),
 				BackgroundTransparency = 1,
-				[roactModule.Ref] = p2.containerRef,
-				Position = checkmarkTransparency:map(function(p5)
+				[RoactModule.Ref] = p2.containerRef,
+				Position = CheckmarkTransparency:map(function(p5): UDim2 --[[ Line: 395 ]]
 					return UDim2.new(0, 19 * -p5, 0, 0)
 				end)
-			}, list) else roactModule.createElement(fitChildrenModule.FitFrame, {
+			}, Elements) else RoactModule.createElement(FitChildrenModule.FitFrame, {
 				Size = UDim2.new(1, 0, 0, 0),
-				fitAxis = fitChildrenModule.FitAxis.Height,
+				fitAxis = FitChildrenModule.FitAxis.Height,
 				BackgroundTransparency = 1,
-				[roactModule.Ref] = p2.containerRef,
-				Position = checkmarkTransparency:map(function(p5)
+				[RoactModule.Ref] = p2.containerRef,
+				Position = CheckmarkTransparency:map(function(p5): UDim2 --[[ Line: 405 ]]
 					return UDim2.new(0, 19 * -p5, 0, 0)
 				end)
-			}, list)
+			}, Elements)
 		end)
 	end)
 end
 
-return roactServices.connect({ networking = roactNetworking })(roactRoduxModule.connect(nil, function(p4)
+return (RoactServices.connect({ networking = RoactNetworking })((RoactRoduxModule.connect(nil, function(Callback) --[[ Line: 414 ]]
 	return {
-		validate = function(p5, p6, p7, p8, p9)
-			-- upvalues: p4 (ref)
-			return p4(p6(p5, p7, p8, p9))
+		validate = function(p4, Callback1, p5, p6, p7) --[[ Line: 416 ]]
+			-- upvalues: Callback (copy)
+			return Callback(Callback1(p4, p5, p6, p7))
 		end
 	}
-end)(issueTracker))
+end)(IssueTracker))))

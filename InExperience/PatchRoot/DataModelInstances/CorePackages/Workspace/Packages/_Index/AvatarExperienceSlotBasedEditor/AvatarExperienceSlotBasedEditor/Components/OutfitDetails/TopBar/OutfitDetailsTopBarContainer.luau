@@ -1,8 +1,8 @@
-﻿local reactModule = require(script:FindFirstAncestor("AvatarExperienceSlotBasedEditor").Parent.React)
-local outfitDetailsTopBarModule = require(script.Parent.OutfitDetailsTopBar)
-local useOutfitDetailsTopBarPropsModule = require(script.Parent.useOutfitDetailsTopBarProps)
+﻿local ReactModule = require(script:FindFirstAncestor("AvatarExperienceSlotBasedEditor").Parent.React)
+local OutfitDetailsTopBarModule = require(script.Parent.OutfitDetailsTopBar)
+local UseOutfitDetailsTopBarPropsModule = require(script.Parent.useOutfitDetailsTopBarProps)
 
-return function(p1)
-	-- upvalues: useOutfitDetailsTopBarPropsModule (ref), reactModule (ref), outfitDetailsTopBarModule (ref)
-	return reactModule.createElement(outfitDetailsTopBarModule, useOutfitDetailsTopBarPropsModule(p1))
+return function(p1) --[[ Line: 9 | Named "OutfitDetailsTopBarContainer" ]]
+	-- upvalues: UseOutfitDetailsTopBarPropsModule (copy), ReactModule (copy), OutfitDetailsTopBarModule (copy)
+	return ReactModule.createElement(OutfitDetailsTopBarModule, (UseOutfitDetailsTopBarPropsModule(p1)))
 end

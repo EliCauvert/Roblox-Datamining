@@ -1,37 +1,36 @@
-﻿local currencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
-local marketplaceService = game:GetService("MarketplaceService")
-local playersService = game:GetService("Players")
-local _ = require(currencyTransfers.Stores.createTransferStore)
-local promptStateModule = require(currencyTransfers.Enums.PromptState)
-local transferOriginationModule = require(currencyTransfers.Enums.TransferOrigination)
-local getFFlagCurrencyTransferSignalRecipientOnCompleteModule = require(currencyTransfers.Flags.GetFFlagCurrencyTransferSignalRecipientOnComplete)
+﻿local CurrencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
+local MarketplaceService = game:GetService("MarketplaceService")
+local Players = game:GetService("Players")
+local _ = require(CurrencyTransfers.Stores.createTransferStore)
+local PromptStateModule = require(CurrencyTransfers.Enums.PromptState)
+local TransferOriginationModule = require(CurrencyTransfers.Enums.TransferOrigination)
+local GetFFlagCurrencyTransferSignalRecipientOnCompleteModule = require(CurrencyTransfers.Flags.GetFFlagCurrencyTransferSignalRecipientOnComplete)
 
-return function(p1)
-	-- upvalues: transferOriginationModule (ref), playersService (ref), marketplaceService (ref), getFFlagCurrencyTransferSignalRecipientOnCompleteModule (ref), promptStateModule (ref)
-	local transferOrigination = p1.getTransferOrigination(false)
-	local setPromptState = p1.setPromptState
-	local triggerOnClose = p1.triggerOnClose
+return function(p1) --[[ Line: 13 | Named "handleTransferComplete" ]]
+	-- upvalues: TransferOriginationModule (copy), Players (copy), MarketplaceService (copy), GetFFlagCurrencyTransferSignalRecipientOnCompleteModule (copy), PromptStateModule (copy)
+	local SetPromptStateFunction: (any) -> () = p1.setPromptState
+	local TriggerOnCloseFunction: () -> () = p1.triggerOnClose
 	
-	if transferOrigination == transferOriginationModule.InExperience then
-		local localPlayer = playersService.LocalPlayer
+	if p1.getTransferOrigination(false) == TransferOriginationModule.InExperience then
+		local LocalPlayer = Players.LocalPlayer
 		
-		if localPlayer then
-			pcall(function()
-				-- upvalues: marketplaceService (copy), localPlayer (ref)
-				marketplaceService:SignalRobuxTransferCompleted(localPlayer.UserId)
+		if LocalPlayer then
+			pcall(function() --[[ Line: 21 ]]
+				-- upvalues: MarketplaceService (upval), LocalPlayer (copy)
+				MarketplaceService:SignalRobuxTransferCompleted(LocalPlayer.UserId)
 			end)
 		end
-		if getFFlagCurrencyTransferSignalRecipientOnCompleteModule() then
-			local recipient = p1.getRecipient(false)
+		if GetFFlagCurrencyTransferSignalRecipientOnCompleteModule() then
+			local Recipient = p1.getRecipient(false)
 			
-			if recipient then
-				pcall(function()
-					-- upvalues: marketplaceService (copy), recipient (ref)
-					marketplaceService:SignalRobuxTransferCompleted(recipient.targetId)
+			if Recipient then
+				pcall(function() --[[ Line: 29 ]]
+					-- upvalues: MarketplaceService (upval), Recipient (copy)
+					MarketplaceService:SignalRobuxTransferCompleted(Recipient.targetId)
 				end)
 			end
 		end
 	end
-	setPromptState(promptStateModule.TransferComplete)
-	triggerOnClose()
+	SetPromptStateFunction(PromptStateModule.TransferComplete)
+	TriggerOnCloseFunction()
 end

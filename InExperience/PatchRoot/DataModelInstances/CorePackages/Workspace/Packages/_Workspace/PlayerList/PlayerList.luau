@@ -1,5 +1,6 @@
 ﻿local _ = require(script.Common.FocusNavHelper)
-local fFlagPlayerListUseFocusNavHookModule = require(script.Flags.FFlagPlayerListUseFocusNavHook)
+local UsePlayerListFocusNavigationModule = require(script.Hooks.usePlayerListFocusNavigation)
+local FFlagPlayerListUseFocusNavHookModule = require(script.Flags.FFlagPlayerListUseFocusNavHook)
 
 return {
 	["jest.config"] = script["jest.config"],
@@ -15,7 +16,7 @@ return {
 		FFlagEnableMobilePlayerListOnGamepad = require(script.Flags.FFlagEnableMobilePlayerListOnGamepad),
 		FFlagPlayerListUseMobileOnSmallDisplay = require(script.Flags.FFlagPlayerListUseMobileOnSmallDisplay),
 		FFlagPlayerListIgnoreDevGamepadBindings = require(script.Flags.FFlagPlayerListIgnoreDevGamepadBindings),
-		FFlagPlayerListUseFocusNavHook = fFlagPlayerListUseFocusNavHookModule,
+		FFlagPlayerListUseFocusNavHook = FFlagPlayerListUseFocusNavHookModule,
 		FFlagPlayerListDropDownShowPlatformName = require(script.Flags.FFlagPlayerListDropDownShowPlatformName),
 		FFlagPlayerListFoundationSubscriptionIcon = require(script.Flags.FFlagPlayerListFoundationSubscriptionIcon),
 		FFlagPlayerListFixPlatformLeaderboardSizing = require(script.Flags.FFlagPlayerListFixPlatformLeaderboardSizing),
@@ -28,7 +29,7 @@ return {
 	Hooks = {
 		useLeaderboardStore = require(script.Hooks.useLeaderboardStore),
 		useLegacyVisibilityMirror = require(script.Hooks.useLegacyVisibilityMirror),
-		usePlayerListFocusNavigation = if fFlagPlayerListUseFocusNavHookModule then require(script.Hooks.usePlayerListFocusNavigation) else nil,
+		usePlayerListFocusNavigation = if FFlagPlayerListUseFocusNavHookModule then UsePlayerListFocusNavigationModule else nil,
 		usePlatformLeaderboard = require(script.Hooks.usePlatformLeaderboard)
 	},
 	Common = {

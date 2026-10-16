@@ -1,186 +1,186 @@
-﻿local parent = script.Parent.Parent
-local luauPolyfillModule = require(parent.Parent.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local error = luauPolyfillModule.Error
-local map = luauPolyfillModule.Map
-local object = luauPolyfillModule.Object
-local coerceToMap = luauPolyfillModule.coerceToMap
-local _ = require(parent.jsutils.ObjMap)
+﻿local Parent = script.Parent.Parent
+local LuauPolyfillModule = require(Parent.Parent.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local Error1 = LuauPolyfillModule.Error
+local Map = LuauPolyfillModule.Map
+local Object = LuauPolyfillModule.Object
+local CoerceToMapFunction = LuauPolyfillModule.coerceToMap
+local _ = require(Parent.jsutils.ObjMap)
 local _ = require(script.Parent.Parent.jsutils.ObjMap)
-local inspect = require(script.Parent.Parent.jsutils.inspect).inspect
-local toObjMap = require(script.Parent.Parent.jsutils.toObjMap).toObjMap
-local devAssert = require(script.Parent.Parent.jsutils.devAssert).devAssert
-local instanceOfModule = require(script.Parent.Parent.jsutils.instanceOf)
-local isObjectLike = require(script.Parent.Parent.jsutils.isObjectLike).isObjectLike
+local InspectFunction = require(script.Parent.Parent.jsutils.inspect).inspect
+local ToObjMapFunction = require(script.Parent.Parent.jsutils.toObjMap).toObjMap
+local DevAssertFunction = require(script.Parent.Parent.jsutils.devAssert).devAssert
+local InstanceOfModule = require(script.Parent.Parent.jsutils.instanceOf)
+local IsObjectLikeFunction = require(script.Parent.Parent.jsutils.isObjectLike).isObjectLike
 local _ = require(script.Parent.Parent.language.ast)
-local directiveLocation = require(script.Parent.Parent.language.directiveLocation).DirectiveLocation
-local definitionModule = require(script.Parent.definition)
-local scalarsModule = require(script.Parent.scalars)
-local graphQLString = scalarsModule.GraphQLString
-local graphQLBoolean = scalarsModule.GraphQLBoolean
-local argsToArgsConfig = definitionModule.argsToArgsConfig
-local graphQLNonNull = definitionModule.GraphQLNonNull
-local t = nil
+local DirectiveLocation = require(script.Parent.Parent.language.directiveLocation).DirectiveLocation
+local DefinitionModule = require(script.Parent.definition)
+local ScalarsModule = require(script.Parent.scalars)
+local GraphQLString = ScalarsModule.GraphQLString
+local GraphQLBoolean = ScalarsModule.GraphQLBoolean
+local ArgsToArgsConfigFunction = DefinitionModule.argsToArgsConfig
+local GraphQLNonNull = DefinitionModule.GraphQLNonNull
+local Module = nil
 
-function isDirective(p1)
-	-- upvalues: instanceOfModule (ref), t (write)
-	return instanceOfModule(p1, t)
+function isDirective(p1) --[[ Line: 53 ]]
+	-- upvalues: InstanceOfModule (copy), Module (ref)
+	return InstanceOfModule(p1, Module)
 end
 
-function assertDirective(p1)
-	-- upvalues: error (ref), inspect (ref)
+function assertDirective(p1) --[[ Line: 57 ]]
+	-- upvalues: Error1 (copy), InspectFunction (copy)
 	if not isDirective(p1) then
-		error(error.new(("Expected %s to be a GraphQL directive."):format(inspect(p1))))
+		error(Error1.new(("Expected %s to be a GraphQL directive."):format(InspectFunction(p1))))
 	end
 	return p1
 end
 
-t = {}
-t.__index = t
+Module = {}
+Module.__index = Module
 
-function t.new(p1)
-	-- upvalues: toObjMap (ref), devAssert (ref), array (ref), isObjectLike (ref), instanceOfModule (ref), map (ref), coerceToMap (ref), t (write)
-	local t_1 = {
-		name = p1.name,
-		description = p1.description,
-		locations = p1.locations,
-		isRepeatable = if p1.isRepeatable then true else false,
-		extensions = p1.extensions and toObjMap(p1.extensions),
-		astNode = p1.astNode
+function Module.new(GraphQLBoolean) --[[ Line: 87 ]]
+	-- upvalues: ToObjMapFunction (copy), DevAssertFunction (copy), Array (copy), IsObjectLikeFunction (copy), InstanceOfModule (copy), Map (copy), CoerceToMapFunction (copy), Module (ref)
+	local config = {
+		name = GraphQLBoolean.name,
+		description = GraphQLBoolean.description,
+		locations = GraphQLBoolean.locations,
+		isRepeatable = if GraphQLBoolean.isRepeatable then true else false,
+		extensions = GraphQLBoolean.extensions and ToObjMapFunction(GraphQLBoolean.extensions),
+		astNode = GraphQLBoolean.astNode
 	}
-	devAssert(p1.name, "Directive must be named.")
-	devAssert(array.isArray(p1.locations), ("@%s locations must be an Array."):format(p1.name))
-	local var1 = if p1.args then p1.args else {}
-	devAssert(isObjectLike(var1) and (not (array.isArray(var1) and next(var1) ~= nil) or instanceOfModule(var1, map)), ("@%s args must be an object with argument names as keys."):format(p1.name))
-	t_1.args = array.map(coerceToMap(var1):entries(), function(p2)
-		-- upvalues: toObjMap (copy)
-		local var2 = p2[2]
+	DevAssertFunction(GraphQLBoolean.name, "Directive must be named.")
+	DevAssertFunction(Array.isArray(GraphQLBoolean.locations), ("@%s locations must be an Array."):format(GraphQLBoolean.name))
+	local Args = if GraphQLBoolean.args then GraphQLBoolean.args else {}
+	DevAssertFunction(IsObjectLikeFunction(Args) and not (Array.isArray(Args) and next(Args) ~= nil) or InstanceOfModule(Args, Map), ("@%s args must be an object with argument names as keys."):format(GraphQLBoolean.name))
+	config.args = Array.map(CoerceToMapFunction(Args):entries(), function(Entry) --[[ Line: 112 ]]
+		-- upvalues: ToObjMapFunction (upval)
+		local Entry1 = Entry[2]
 		
 		return {
-			name = p2[1],
-			description = var2.description,
-			type = var2.type,
-			defaultValue = var2.defaultValue,
-			deprecationReason = var2.deprecationReason,
-			extensions = var2.extensions and toObjMap(var2.extensions),
-			astNode = var2.astNode
+			name = Entry[1],
+			description = Entry1.description,
+			type = Entry1.type,
+			defaultValue = Entry1.defaultValue,
+			deprecationReason = Entry1.deprecationReason,
+			extensions = Entry1.extensions and ToObjMapFunction(Entry1.extensions),
+			astNode = Entry1.astNode
 		}
 	end)
 	
-	return setmetatable(t_1, t)
+	return (setmetatable(config, Module))
 end
 
-function t:toConfig()
-	-- upvalues: argsToArgsConfig (ref)
+function Module:toConfig() --[[ Line: 129 ]]
+	-- upvalues: ArgsToArgsConfigFunction (copy)
 	return {
 		name = self.name,
 		description = self.description,
 		locations = self.locations,
-		args = argsToArgsConfig(self.args),
+		args = ArgsToArgsConfigFunction(self.args),
 		isRepeatable = self.isRepeatable,
 		extensions = self.extensions,
 		astNode = self.astNode
 	}
 end
 
-function t:__tostring()
+function Module:__tostring() --[[ Line: 141 ]]
 	return self:toString()
 end
 
-function t:toString()
+function Module:toString(): string --[[ Line: 145 ]]
 	return "@" .. self.name
 end
 
-function t:toJSON()
+function Module:toJSON() --[[ Line: 149 ]]
 	return self:toString()
 end
 
-local var1 = t.new({
+local Include = Module.new({
 	name = "include",
 	description = "Directs the executor to include this field or fragment only when the `if` argument is true.",
 	locations = {
-		directiveLocation.FIELD,
-		directiveLocation.FRAGMENT_SPREAD,
-		directiveLocation.INLINE_FRAGMENT
+		DirectiveLocation.FIELD,
+		DirectiveLocation.FRAGMENT_SPREAD,
+		DirectiveLocation.INLINE_FRAGMENT
 	},
-	args = map.new({
+	args = Map.new({
 		{
 			"if",
 			{
 				description = "Included when true.",
-				type = graphQLNonNull.new(graphQLBoolean)
+				type = GraphQLNonNull.new(GraphQLBoolean)
 			}
 		}
 	})
 })
-local var2 = t.new({
+local Skip = Module.new({
 	name = "skip",
 	description = "Directs the executor to skip this field or fragment when the `if` argument is true.",
 	locations = {
-		directiveLocation.FIELD,
-		directiveLocation.FRAGMENT_SPREAD,
-		directiveLocation.INLINE_FRAGMENT
+		DirectiveLocation.FIELD,
+		DirectiveLocation.FRAGMENT_SPREAD,
+		DirectiveLocation.INLINE_FRAGMENT
 	},
-	args = map.new({
+	args = Map.new({
 		{
 			"if",
 			{
 				description = "Skipped when true.",
-				type = graphQLNonNull.new(graphQLBoolean)
+				type = GraphQLNonNull.new(GraphQLBoolean)
 			}
 		}
 	})
 })
-local var3 = t.new({
+local Deprecated = Module.new({
 	name = "deprecated",
 	description = "Marks an element of a GraphQL schema as no longer supported.",
 	locations = {
-		directiveLocation.FIELD_DEFINITION,
-		directiveLocation.ARGUMENT_DEFINITION,
-		directiveLocation.INPUT_FIELD_DEFINITION,
-		directiveLocation.ENUM_VALUE
+		DirectiveLocation.FIELD_DEFINITION,
+		DirectiveLocation.ARGUMENT_DEFINITION,
+		DirectiveLocation.INPUT_FIELD_DEFINITION,
+		DirectiveLocation.ENUM_VALUE
 	},
-	args = map.new({
+	args = Map.new({
 		{
 			"reason",
 			{
 				description = "Explains why this element was deprecated, usually also including a suggestion for how to access supported similar data. Formatted using the Markdown syntax, as specified by [CommonMark](https://commonmark.org/).",
 				defaultValue = "No longer supported",
-				type = graphQLString
+				type = GraphQLString
 			}
 		}
 	})
 })
-local var4 = t.new({
+local SpecifiedBy = Module.new({
 	name = "specifiedBy",
 	description = "Exposes a URL that specifies the behaviour of this scalar.",
-	locations = { directiveLocation.SCALAR },
-	args = map.new({
+	locations = { DirectiveLocation.SCALAR },
+	args = Map.new({
 		{
 			"url",
 			{
 				description = "The URL that specifies the behaviour of this scalar.",
-				type = graphQLNonNull.new(graphQLString)
+				type = GraphQLNonNull.new(GraphQLString)
 			}
 		}
 	})
 })
-local var5 = object.freeze({ var1, var2, var3, var4 })
+local FreezeResult = Object.freeze({ Include, Skip, Deprecated, SpecifiedBy })
 
 return {
 	DEFAULT_DEPRECATION_REASON = "No longer supported",
 	isDirective = isDirective,
 	assertDirective = assertDirective,
-	GraphQLDirective = t,
-	GraphQLIncludeDirective = var1,
-	GraphQLSkipDirective = var2,
-	GraphQLDeprecatedDirective = var3,
-	GraphQLSpecifiedByDirective = var4,
-	specifiedDirectives = var5,
-	isSpecifiedDirective = function(p1)
-		-- upvalues: array (ref), var5 (ref)
-		return array.some(var5, function(p2)
-			-- upvalues: p1 (ref)
+	GraphQLDirective = Module,
+	GraphQLIncludeDirective = Include,
+	GraphQLSkipDirective = Skip,
+	GraphQLDeprecatedDirective = Deprecated,
+	GraphQLSpecifiedByDirective = SpecifiedBy,
+	specifiedDirectives = FreezeResult,
+	isSpecifiedDirective = function(p1) --[[ Line: 277 ]]
+		-- upvalues: Array (copy), FreezeResult (copy)
+		return Array.some(FreezeResult, function(p2): boolean --[[ Line: 278 ]]
+			-- upvalues: p1 (copy)
 			return p2.name == p1.name
 		end)
 	end

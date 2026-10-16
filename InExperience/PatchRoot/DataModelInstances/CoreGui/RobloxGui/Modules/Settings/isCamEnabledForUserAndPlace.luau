@@ -1,80 +1,85 @@
-﻿local avatarChatService = game:GetService("AvatarChatService")
-local appStorageService = game:GetService("AppStorageService")
-local coreGuiService = game:GetService("CoreGui")
-local corePackagesService = game:GetService("CorePackages")
-local videoCaptureService = game:GetService("VideoCaptureService")
-local cryoModule = require(corePackagesService.Packages.Cryo)
-local robloxGui = coreGuiService:WaitForChild("RobloxGui")
+﻿local AvatarChatService = game:GetService("AvatarChatService")
+local AppStorageService = game:GetService("AppStorageService")
+local CorePackages = game:GetService("CorePackages")
+local VideoCaptureService = game:GetService("VideoCaptureService")
+local CryoModule = require(CorePackages.Packages.Cryo)
+local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
 local IXPService = game:GetService("IXPService")
-local memStorageService = game:GetService("MemStorageService")
-local getFFlagAvatarChatServiceEnabled = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagAvatarChatServiceEnabled
-local getFFlagUseCameraDevicesListenerModule = require(robloxGui.Modules.Flags.getFFlagUseCameraDevicesListener)
-local cameraDevicesHelperModule = require(robloxGui.Modules.Settings.cameraDevicesHelper)
-local trackerMenuModule = require(robloxGui.Modules.Tracker.TrackerMenu)
-local trackerPromptTypeModule = require(robloxGui.Modules.Tracker.TrackerPromptType)
-local disableCameraOnLowSpecDevices2 = game:DefineFastFlag("DisableCameraOnLowSpecDevices2", false)
-local disableCameraOnLowSpecDevicesIXPLayer = game:DefineFastString("DisableCameraOnLowSpecDevicesIXPLayer", "AvatarChat.DisableOnLowSpecAndroid")
-local disableCameraOnLowSpecDevicesIXPField = game:DefineFastString("DisableCameraOnLowSpecDevicesIXPField", "DisableOnAndroid")
-local onlyShowToastOnce2 = game:DefineFastFlag("OnlyShowToastOnce2", false)
-local debugAlwaysShowDisableCameraToast = game:DefineFastFlag("DebugAlwaysShowDisableCameraToast", false)
-local onlyShowToastOnceInLifetime2 = game:DefineFastFlag("OnlyShowToastOnceInLifetime2", false)
-local disableCameraToastShownStorageKeyEngineFeature = game:GetEngineFeature("DisableCameraToastShownStorageKey")
+local MemStorageService = game:GetService("MemStorageService")
+local GetFFlagAvatarChatServiceEnabledFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagAvatarChatServiceEnabled
+local GetFFlagUseCameraDevicesListenerModule = require(RobloxGui.Modules.Flags.getFFlagUseCameraDevicesListener)
+local CameraDevicesHelperModule = require(RobloxGui.Modules.Settings.cameraDevicesHelper)
+local TrackerMenuModule = require(RobloxGui.Modules.Tracker.TrackerMenu)
+local TrackerPromptTypeModule = require(RobloxGui.Modules.Tracker.TrackerPromptType)
+local DisableCameraOnLowSpecDevices2 = game:DefineFastFlag("DisableCameraOnLowSpecDevices2", false)
+local DisableCameraOnLowSpecDevicesIXPLayer = game:DefineFastString("DisableCameraOnLowSpecDevicesIXPLayer", "AvatarChat.DisableOnLowSpecAndroid")
+local DisableCameraOnLowSpecDevicesIXPField = game:DefineFastString("DisableCameraOnLowSpecDevicesIXPField", "DisableOnAndroid")
+local OnlyShowToastOnce2 = game:DefineFastFlag("OnlyShowToastOnce2", false)
+local DebugAlwaysShowDisableCameraToast = game:DefineFastFlag("DebugAlwaysShowDisableCameraToast", false)
+local OnlyShowToastOnceInLifetime2 = game:DefineFastFlag("OnlyShowToastOnceInLifetime2", false)
+local DisableCameraToastShownStorageKeyEngineFeature = game:GetEngineFeature("DisableCameraToastShownStorageKey")
 
-local function ShouldCheckDeviceSpecs()
-	-- upvalues: disableCameraOnLowSpecDevices2 (ref), IXPService (ref), disableCameraOnLowSpecDevicesIXPLayer (ref), disableCameraOnLowSpecDevicesIXPField (ref)
-	if not disableCameraOnLowSpecDevices2 then
+local function ShouldCheckDeviceSpecs() --[[ Line: 28 ]]
+	-- upvalues: DisableCameraOnLowSpecDevices2 (copy), IXPService (copy), DisableCameraOnLowSpecDevicesIXPLayer (copy), DisableCameraOnLowSpecDevicesIXPField (copy)
+	if not DisableCameraOnLowSpecDevices2 then
 		return false
 	end
-	local ok, status = pcall(function()
-		-- upvalues: IXPService (copy), disableCameraOnLowSpecDevicesIXPLayer (copy)
-		return IXPService:GetUserLayerVariables(disableCameraOnLowSpecDevicesIXPLayer)
+	local Success, Result = pcall(function() --[[ Line: 31 ]]
+		-- upvalues: IXPService (upval), DisableCameraOnLowSpecDevicesIXPLayer (upval)
+		return IXPService:GetUserLayerVariables(DisableCameraOnLowSpecDevicesIXPLayer)
 	end)
 	
-	if ok and status and status[disableCameraOnLowSpecDevicesIXPField] ~= nil then
-		IXPService:LogUserLayerExposure(disableCameraOnLowSpecDevicesIXPLayer)
+	if Success and Result and Result[DisableCameraOnLowSpecDevicesIXPField] ~= nil then
+		IXPService:LogUserLayerExposure(DisableCameraOnLowSpecDevicesIXPLayer)
 		
-		return status[disableCameraOnLowSpecDevicesIXPField]
-	end
-	return false
-end
-
-return function()
-	-- upvalues: getFFlagAvatarChatServiceEnabled (ref), avatarChatService (ref), disableCameraOnLowSpecDevices2 (ref), ShouldCheckDeviceSpecs (ref), onlyShowToastOnceInLifetime2 (ref), disableCameraToastShownStorageKeyEngineFeature (ref), appStorageService (ref), debugAlwaysShowDisableCameraToast (ref), trackerMenuModule (ref), trackerPromptTypeModule (ref), onlyShowToastOnce2 (ref), memStorageService (ref), getFFlagUseCameraDevicesListenerModule (ref), cameraDevicesHelperModule (ref), videoCaptureService (ref), cryoModule (ref)
-	if not getFFlagAvatarChatServiceEnabled() or _G.__TESTEZ_RUNNING_TEST__ then
+		return Result[DisableCameraOnLowSpecDevicesIXPField]
+	else
 		return false
 	end
-	local ok, status = pcall(avatarChatService.GetClientFeaturesAsync, avatarChatService)
+end
+
+return function(): boolean --[[ Line: 46 ]]
+	-- upvalues: GetFFlagAvatarChatServiceEnabledFunction (copy), AvatarChatService (copy), DisableCameraOnLowSpecDevices2 (copy), ShouldCheckDeviceSpecs (copy), OnlyShowToastOnceInLifetime2 (copy), DisableCameraToastShownStorageKeyEngineFeature (copy), AppStorageService (copy), DebugAlwaysShowDisableCameraToast (copy), TrackerMenuModule (copy), TrackerPromptTypeModule (copy), OnlyShowToastOnce2 (copy), MemStorageService (copy), GetFFlagUseCameraDevicesListenerModule (copy), CameraDevicesHelperModule (copy), VideoCaptureService (copy), CryoModule (copy)
+	if not GetFFlagAvatarChatServiceEnabledFunction() or _G.__TESTEZ_RUNNING_TEST__ then
+		return false
+	end
+	local Success, Result = pcall(AvatarChatService.GetClientFeaturesAsync, AvatarChatService)
 	
-	if not ok then
+	if not Success then
 		warn("Unable to get Client Features from AvatarChatService")
 		
 		return false
 	end
-	local var1 = avatarChatService:IsEnabled(status, Enum.AvatarChatServiceFeature.PlaceVideo)
-	local var2 = avatarChatService:IsEnabled(status, Enum.AvatarChatServiceFeature.UserVideo)
-	local var3 = avatarChatService:IsEnabled(status, Enum.AvatarChatServiceFeature.UserVideoEligible)
+	local IsEnabled = AvatarChatService:IsEnabled(Result, Enum.AvatarChatServiceFeature.PlaceVideo)
+	local IsEnabled1 = AvatarChatService:IsEnabled(Result, Enum.AvatarChatServiceFeature.UserVideo)
+	local IsEnabled2 = AvatarChatService:IsEnabled(Result, Enum.AvatarChatServiceFeature.UserVideoEligible)
 	
-	if not disableCameraOnLowSpecDevices2 or not var1 or (not var2 or not var3) or (avatarChatService:deviceMeetsRequirementsForFeature(Enum.DeviceFeatureType.DeviceCapture) or not ShouldCheckDeviceSpecs()) then
-		return var1 and (var3 and (var2 and not cryoModule.isEmpty(if getFFlagUseCameraDevicesListenerModule() then cameraDevicesHelperModule.GetDevices() else videoCaptureService:GetCameraDevices())))
-	elseif onlyShowToastOnceInLifetime2 and disableCameraToastShownStorageKeyEngineFeature then
-		local ok_1, status_1 = pcall(function()
-			-- upvalues: appStorageService (copy)
-			return appStorageService:GetItem("DisableCameraToastShown")
+	if not DisableCameraOnLowSpecDevices2 or not IsEnabled or not IsEnabled1 or not IsEnabled2 or AvatarChatService:deviceMeetsRequirementsForFeature(Enum.DeviceFeatureType.DeviceCapture) or not ShouldCheckDeviceSpecs() then
+		local Inverted = not CryoModule.isEmpty(if GetFFlagUseCameraDevicesListenerModule() then CameraDevicesHelperModule.GetDevices() else VideoCaptureService:GetCameraDevices())
+		
+		return IsEnabled and (IsEnabled2 and (IsEnabled1 and Inverted))
+	end
+	if OnlyShowToastOnceInLifetime2 and DisableCameraToastShownStorageKeyEngineFeature then
+		local Success1, Result1 = pcall(function() --[[ Line: 68 ]]
+			-- upvalues: AppStorageService (upval)
+			return AppStorageService:GetItem("DisableCameraToastShown")
 		end)
 		
-		if not ok_1 or (not (status_1 == "true") or debugAlwaysShowDisableCameraToast) then
-			trackerMenuModule:showPrompt(trackerPromptTypeModule.CameraUnavailable)
-			pcall(function()
-				-- upvalues: appStorageService (copy)
-				appStorageService:SetItem("DisableCameraToastShown", "true")
-				appStorageService:Flush()
+		if not Success1 or (not (Result1 == "true") or DebugAlwaysShowDisableCameraToast) then
+			TrackerMenuModule:showPrompt(TrackerPromptTypeModule.CameraUnavailable)
+			pcall(function() --[[ Line: 77 ]]
+				-- upvalues: AppStorageService (upval)
+				AppStorageService:SetItem("DisableCameraToastShown", "true")
+				AppStorageService:Flush()
 			end)
 		end
-	elseif not onlyShowToastOnce2 then
-		trackerMenuModule:showPrompt(trackerPromptTypeModule.CameraUnavailable)
-	elseif not (memStorageService:GetItem("DisableCameraToastShown") == "true") or debugAlwaysShowDisableCameraToast then
-		trackerMenuModule:showPrompt(trackerPromptTypeModule.CameraUnavailable)
-		memStorageService:SetItem("DisableCameraToastShown", "true")
+	elseif OnlyShowToastOnce2 then
+		if not (MemStorageService:GetItem("DisableCameraToastShown") == "true") or DebugAlwaysShowDisableCameraToast then
+			TrackerMenuModule:showPrompt(TrackerPromptTypeModule.CameraUnavailable)
+			MemStorageService:SetItem("DisableCameraToastShown", "true")
+		end
+	else
+		TrackerMenuModule:showPrompt(TrackerPromptTypeModule.CameraUnavailable)
 	end
 	return false
 end

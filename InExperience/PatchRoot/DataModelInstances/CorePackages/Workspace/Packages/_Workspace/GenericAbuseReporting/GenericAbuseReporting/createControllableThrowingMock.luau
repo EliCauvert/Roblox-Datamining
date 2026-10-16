@@ -1,39 +1,39 @@
-﻿local reactModule = require(script:FindFirstAncestor("GenericAbuseReporting").Parent.React)
+﻿local ReactModule = require(script:FindFirstAncestor("GenericAbuseReporting").Parent.React)
 
-return function()
-	-- upvalues: reactModule (ref)
-	local t = { mode = nil, renderCount = 0 }
+return function() --[[ Line: 24 | Named "createControllableThrowingMock" ]]
+	-- upvalues: ReactModule (copy)
+	local config = { mode = nil, renderCount = 0 }
 	
 	return {
-		reset = function()
-			-- upvalues: t (ref)
-			t.mode = nil
-			t.renderCount = 0
+		reset = function() --[[ Line: 27 ]]
+			-- upvalues: config (copy)
+			config.mode = nil
+			config.renderCount = 0
 		end,
-		setMode = function(value)
-			-- upvalues: t (ref)
-			t.mode = value
+		setMode = function(Mode) --[[ Line: 32 ]]
+			-- upvalues: config (copy)
+			config.mode = Mode
 		end,
-		wrap = function(p1)
-			-- upvalues: t (ref), reactModule (copy)
-			return function(p2)
-				-- upvalues: t (copy), reactModule (copy), p1 (ref)
-				t.renderCount += 1
-				local renderCount = t.renderCount
-				local _, var1 = reactModule.useState(0)
-				reactModule.useEffect(function()
-					-- upvalues: t (copy), renderCount (ref), var1 (ref)
-					if t.mode == "afterFirst" and renderCount == 1 then
-						var1(1)
+		wrap = function(Callback) --[[ Line: 36 ]]
+			-- upvalues: config (copy), ReactModule (upval)
+			return function(p1) --[[ Line: 37 ]]
+				-- upvalues: config (upval), ReactModule (upval), Callback (copy)
+				config.renderCount += 1
+				local RenderCount: number = config.renderCount
+				local _, UseStateResult2 = ReactModule.useState(0)
+				ReactModule.useEffect(function() --[[ Line: 42 ]]
+					-- upvalues: config (upval), RenderCount (copy), UseStateResult2 (copy)
+					if config.mode == "afterFirst" and RenderCount == 1 then
+						UseStateResult2(1)
 					end
-				end, { renderCount })
+				end, { RenderCount })
 				
-				if t.mode == "always" then
+				if config.mode == "always" then
 					error("simulated render error (pre-handle)")
-				elseif t.mode == "afterFirst" and renderCount > 1 then
+				elseif config.mode == "afterFirst" and RenderCount > 1 then
 					error("simulated render error (post-handle)")
 				end
-				return p1(p2)
+				return Callback(p1)
 			end
 		end
 	}

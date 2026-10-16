@@ -1,7 +1,7 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent
-local _ = require(parent.AppFeaturePolicies)
-local _ = require(parent_1.AvatarPolicies)
-local _ = require(parent_1.SocialPolicies)
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent
+local _ = require(Parent.AppFeaturePolicies)
+local _ = require(Parent1.AvatarPolicies)
+local _ = require(Parent1.SocialPolicies)
 
 return {}

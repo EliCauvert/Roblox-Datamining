@@ -1,31 +1,31 @@
-﻿local parent = script:FindFirstAncestor("AppBlox").Parent
-local roactModule = require(parent.Roact)
-local UIBloxModule = require(parent.UIBlox)
-local tModule = require(parent.t)
-local withStyle = UIBloxModule.Core.Style.withStyle
-local getIconSize = UIBloxModule.App.ImageSet.getIconSize
-local iconSize = UIBloxModule.App.ImageSet.Enum.IconSize
-local interactable = UIBloxModule.Core.Control.Interactable
-local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
-local scrollButton = roactModule.PureComponent:extend("ScrollButton")
-scrollButton.validateProps = tModule.strictInterface({ icon = tModule.table, callback = tModule.callback })
+﻿local Parent = script:FindFirstAncestor("AppBlox").Parent
+local RoactModule = require(Parent.Roact)
+local UIBloxModule = require(Parent.UIBlox)
+local TModule = require(Parent.t)
+local WithStyleFunction = UIBloxModule.Core.Style.withStyle
+local GetIconSizeFunction = UIBloxModule.App.ImageSet.getIconSize
+local IconSize = UIBloxModule.App.ImageSet.Enum.IconSize
+local Interactable = UIBloxModule.Core.Control.Interactable
+local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
+local ScrollButton = RoactModule.PureComponent:extend("ScrollButton")
+ScrollButton.validateProps = TModule.strictInterface({ icon = TModule.table, callback = TModule.callback })
 
-function scrollButton.render(p1)
-	-- upvalues: withStyle (ref), roactModule (ref), interactable (ref), imageSetLabel (ref), getIconSize (ref), iconSize (ref)
-	return withStyle(function(p2)
-		-- upvalues: roactModule (copy), interactable (copy), p1 (ref), imageSetLabel (copy), getIconSize (copy), iconSize (copy)
-		return roactModule.createElement(interactable, {
+function ScrollButton.render(p1) --[[ Line: 24 ]]
+	-- upvalues: WithStyleFunction (copy), RoactModule (copy), Interactable (copy), ImageSetLabel (copy), GetIconSizeFunction (copy), IconSize (copy)
+	return WithStyleFunction(function(p2) --[[ Line: 25 ]]
+		-- upvalues: RoactModule (upval), Interactable (upval), p1 (copy), ImageSetLabel (upval), GetIconSizeFunction (upval), IconSize (upval)
+		return RoactModule.createElement(Interactable, {
 			AutoButtonColor = false,
 			Size = UDim2.fromScale(1, 1),
 			BackgroundColor3 = p2.Theme.BackgroundUIContrast.Color,
 			BackgroundTransparency = p2.Theme.BackgroundUIContrast.Transparency,
 			BorderSizePixel = 0,
-			[roactModule.Event.Activated] = p1.props.callback,
-			onStateChanged = function() end
+			[RoactModule.Event.Activated] = p1.props.callback,
+			onStateChanged = function() --[[ Line: 34 ]] end
 		}, {
-			Icon = roactModule.createElement(imageSetLabel, {
+			Icon = RoactModule.createElement(ImageSetLabel, {
 				BackgroundTransparency = 1,
-				Size = UDim2.fromOffset(getIconSize(iconSize.Medium), getIconSize(iconSize.Medium)),
+				Size = UDim2.fromOffset(GetIconSizeFunction(IconSize.Medium), GetIconSizeFunction(IconSize.Medium)),
 				Position = UDim2.fromScale(0.5, 0.5),
 				AnchorPoint = Vector2.new(0.5, 0.5),
 				Image = p1.props.icon,
@@ -36,4 +36,4 @@ function scrollButton.render(p1)
 	end)
 end
 
-return scrollButton
+return ScrollButton

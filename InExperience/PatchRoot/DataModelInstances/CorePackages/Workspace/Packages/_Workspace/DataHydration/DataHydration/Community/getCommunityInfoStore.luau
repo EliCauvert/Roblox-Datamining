@@ -1,1 +1,1 @@
-﻿return require(script:FindFirstAncestor("DataHydration").Parent.Signals).createComputed(require(script.Parent.createCommunityInfoStore))
+﻿return require(script:FindFirstAncestor("DataHydration").Parent.Signals).createComputed((require(script.Parent.createCommunityInfoStore)))

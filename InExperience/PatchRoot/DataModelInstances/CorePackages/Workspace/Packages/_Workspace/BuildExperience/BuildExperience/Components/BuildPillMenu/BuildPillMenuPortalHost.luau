@@ -1,31 +1,30 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local getBuildPillMenuPortalStoreModule = require(buildExperience.Stores.GetBuildPillMenuPortalStore)
-local view = foundationModule.View
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local ReactModule = require(Parent.React)
+local GetBuildPillMenuPortalStoreModule = require(BuildExperience.Stores.GetBuildPillMenuPortalStore)
+local View = require(Parent.Foundation).View
 
-return reactModule.memo(function(p1)
-	-- upvalues: getBuildPillMenuPortalStoreModule (ref), reactModule (ref), view (ref)
-	local var1 = getBuildPillMenuPortalStoreModule()
-	local var2 = reactModule.useCallback(function(p2)
-		-- upvalues: var1 (ref)
-		var1.setPortalTarget(p2)
-	end, { var1 })
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref)
-		return function()
-			-- upvalues: var1 (copy)
-			var1.setPortalTarget(nil)
+return ReactModule.memo(function(p1) --[[ Line: 18 | Named "BuildPillMenuPortalHost" ]]
+	-- upvalues: GetBuildPillMenuPortalStoreModule (copy), ReactModule (copy), View (copy)
+	local BuildPillMenuPortalStoreModule = GetBuildPillMenuPortalStoreModule()
+	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 21 ]]
+		-- upvalues: BuildPillMenuPortalStoreModule (copy)
+		BuildPillMenuPortalStoreModule.setPortalTarget(p2)
+	end, { BuildPillMenuPortalStoreModule })
+	ReactModule.useEffect(function() --[[ Line: 25 ]]
+		-- upvalues: BuildPillMenuPortalStoreModule (copy)
+		return function() --[[ Line: 26 ]]
+			-- upvalues: BuildPillMenuPortalStoreModule (upval)
+			BuildPillMenuPortalStoreModule.setPortalTarget(nil)
 		end
-	end, { var1 })
+	end, { BuildPillMenuPortalStoreModule })
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "auto-xy",
 		AnchorPoint = p1.anchorPoint,
 		LayoutOrder = p1.layoutOrder,
 		Position = p1.position,
-		ref = var2,
+		ref = UseResult,
 		testId = p1.testId or "build-pill-menu-portal-host"
 	})
 end)

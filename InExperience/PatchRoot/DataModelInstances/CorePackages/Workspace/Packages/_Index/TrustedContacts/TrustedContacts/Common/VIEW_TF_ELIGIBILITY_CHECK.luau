@@ -1,6 +1,6 @@
-﻿local parent = script:FindFirstAncestor("TrustedContacts").Parent
+﻿local Parent = script:FindFirstAncestor("TrustedContacts").Parent
 
 return {
-	featureName = require(parent.SharedFlags).FStringCanAccessTrustedContactsAmpFeature,
-	nameSpace = require(parent.SharedFlags).FStringCanAccessTrustedContactsAmpNameSpace
+	featureName = require(Parent.SharedFlags).FStringCanAccessTrustedContactsAmpFeature,
+	nameSpace = require(Parent.SharedFlags).FStringCanAccessTrustedContactsAmpNameSpace
 }

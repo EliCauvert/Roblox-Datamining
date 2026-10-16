@@ -1,14 +1,14 @@
-﻿local priceChangedSubscriptionMembershipCheckProductTypes = game:DefineFastString("PriceChangedSubscriptionMembershipCheckProductTypes", "")
+﻿local PriceChangedSubscriptionMembershipCheckProductTypes = game:DefineFastString("PriceChangedSubscriptionMembershipCheckProductTypes", "")
 
-return function(p1)
-	-- upvalues: priceChangedSubscriptionMembershipCheckProductTypes (ref)
-	if p1 == nil or priceChangedSubscriptionMembershipCheckProductTypes == "" then
+return function(S): boolean --[[ Line: 9 | Named "shouldCheckSubscriptionMembershipForProductType" ]]
+	-- upvalues: PriceChangedSubscriptionMembershipCheckProductTypes (copy)
+	if S == nil or PriceChangedSubscriptionMembershipCheckProductTypes == "" then
 		return false
 	end
-	for i in string.gmatch(priceChangedSubscriptionMembershipCheckProductTypes, "[^,]+") do
-		local var1 = i:gsub("^%s+", ""):gsub("%s+$", "")
+	for Text in string.gmatch(PriceChangedSubscriptionMembershipCheckProductTypes, "[^,]+") do
+		local S1 = Text:gsub("^%s+", ""):gsub("%s+$", "")
 		
-		if var1 ~= "" and var1 == p1 then
+		if S1 ~= "" and S1 == S then
 			return true
 		end
 	end

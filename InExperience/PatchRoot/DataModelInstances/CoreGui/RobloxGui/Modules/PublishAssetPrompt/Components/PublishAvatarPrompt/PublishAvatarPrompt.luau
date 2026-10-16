@@ -1,184 +1,186 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local playersService = game:GetService("Players")
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local tModule = require(corePackagesService.Packages.t)
-local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
-local avatarPartGridModule = require(script.Parent.AvatarParts.AvatarPartGrid)
-local withStyle = require(corePackagesService.Packages.UIBlox).Style.withStyle
-local mutedError = require(corePackagesService.Workspace.Packages.Loggers).mutedError
-local parent = script.Parent.Parent
-local basePublishPromptModule = require(parent.BasePublishPrompt)
-local objectViewportModule = require(parent.Common.ObjectViewport)
-local labeledTextBoxModule = require(parent.Common.LabeledTextBox)
-local publishInfoListModule = require(parent.Common.PublishInfoList)
-local purchasePromptModule = require(corePackagesService.Workspace.Packages.PurchasePrompt)
-local publishAssetAnalytics = purchasePromptModule.PublishAssetAnalytics
-local setPromptVisibilityModule = require(script.Parent.Parent.Parent.Actions.SetPromptVisibility)
-local uDim = UDim.new(0, 20)
-local publishAvatarPrompt = roactModule.PureComponent:extend("PublishAvatarPrompt")
-publishAvatarPrompt.validateProps = tModule.strictInterface({
-	screenSize = tModule.Vector2,
-	humanoidModel = tModule.optional(tModule.instanceOf("Model")),
-	guid = tModule.any,
-	scopes = tModule.any,
-	SetPromptVisibility = tModule.callback
+﻿local CorePackages = game:GetService("CorePackages")
+local Players = game:GetService("Players")
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local TModule = require(CorePackages.Packages.t)
+local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
+local AvatarPartGridModule = require(script.Parent.AvatarParts.AvatarPartGrid)
+local WithStyleFunction = require(CorePackages.Packages.UIBlox).Style.withStyle
+local MutedErrorFunction = require(CorePackages.Workspace.Packages.Loggers).mutedError
+local Parent = script.Parent.Parent
+local BasePublishPromptModule = require(Parent.BasePublishPrompt)
+local ObjectViewportModule = require(Parent.Common.ObjectViewport)
+local LabeledTextBoxModule = require(Parent.Common.LabeledTextBox)
+local PublishInfoListModule = require(Parent.Common.PublishInfoList)
+local PurchasePromptModule = require(CorePackages.Workspace.Packages.PurchasePrompt)
+local PublishAssetAnalytics = PurchasePromptModule.PublishAssetAnalytics
+local SetPromptVisibilityModule = require(script.Parent.Parent.Parent.Actions.SetPromptVisibility)
+local _UDim = UDim.new(0, 20)
+local PublishAvatarPrompt = RoactModule.PureComponent:extend("PublishAvatarPrompt")
+PublishAvatarPrompt.validateProps = TModule.strictInterface({
+	screenSize = TModule.Vector2,
+	humanoidModel = TModule.optional(TModule.instanceOf("Model")),
+	guid = TModule.any,
+	scopes = TModule.any,
+	SetPromptVisibility = TModule.callback
 })
 
-function publishAvatarPrompt.init(p1)
-	-- upvalues: playersService (ref), publishAssetAnalytics (ref), purchasePromptModule (ref), mutedError (ref)
-	local localPlayer = playersService.LocalPlayer
-	assert(localPlayer, "LocalPlayer must not be nil")
+function PublishAvatarPrompt.init(p1) --[[ Line: 50 ]]
+	-- upvalues: Players (copy), PublishAssetAnalytics (copy), PurchasePromptModule (copy), MutedErrorFunction (copy)
+	local LocalPlayer = Players.LocalPlayer
+	assert(LocalPlayer, "LocalPlayer must not be nil")
 	p1:setState({
 		showingPreviewView = false,
 		isNameValid = true,
 		isDescValid = true,
 		showTopScrim = false,
 		purchasePromptReady = true,
-		name = localPlayer.Name .. "'s Body",
-		description = localPlayer.Name .. "'s Body"
+		name = LocalPlayer.Name .. "'s Body",
+		description = LocalPlayer.Name .. "'s Body"
 	})
 	
-	function p0.openPreviewView()
-		-- upvalues: publishAssetAnalytics (copy), p1 (ref)
-		publishAssetAnalytics.sendButtonClicked(publishAssetAnalytics.Section.BuyCreationPage, publishAssetAnalytics.Element.Expand)
+	function p1.openPreviewView() --[[ Line: 65 ]]
+		-- upvalues: PublishAssetAnalytics (upval), p1 (copy)
+		PublishAssetAnalytics.sendButtonClicked(PublishAssetAnalytics.Section.BuyCreationPage, PublishAssetAnalytics.Element.Expand)
 		p1:setState({ showingPreviewView = true })
 	end
 	
-	function p0.closePreviewView()
-		-- upvalues: p1 (ref)
+	function p1.closePreviewView() --[[ Line: 71 ]]
+		-- upvalues: p1 (copy)
 		p1:setState({ showingPreviewView = false })
 	end
 	
-	function p0.canSubmit()
-		-- upvalues: p1 (ref)
+	function p1.canSubmit() --[[ Line: 78 ]]
+		-- upvalues: p1 (copy)
 		return p1.state.isNameValid and (p1.state.isDescValid and (p1.props.humanoidModel ~= nil and p1.state.purchasePromptReady))
 	end
 	
-	function p0.onSubmit()
-		-- upvalues: publishAssetAnalytics (copy), p1 (ref), purchasePromptModule (copy), mutedError (copy)
-		publishAssetAnalytics.sendButtonClicked(publishAssetAnalytics.Section.BuyCreationPage, publishAssetAnalytics.Element.Buy)
-		local t = { name = p1.state.name, description = p1.state.description }
+	function p1.onSubmit() --[[ Line: 85 ]]
+		-- upvalues: PublishAssetAnalytics (upval), p1 (copy), PurchasePromptModule (upval), MutedErrorFunction (upval)
+		PublishAssetAnalytics.sendButtonClicked(PublishAssetAnalytics.Section.BuyCreationPage, PublishAssetAnalytics.Element.Buy)
+		local config = { name = p1.state.name, description = p1.state.description }
 		
-		if purchasePromptModule.initiateAvatarCreationFeePurchase then
-			purchasePromptModule.initiateAvatarCreationFeePurchase(t, p1.props.guid, p1.props.humanoidModel, p1.props.priceInRobux)
+		if PurchasePromptModule.initiateAvatarCreationFeePurchase then
+			PurchasePromptModule.initiateAvatarCreationFeePurchase(config, p1.props.guid, p1.props.humanoidModel, p1.props.priceInRobux)
 			
 			return
+		else
+			MutedErrorFunction("PurchasePrompt.initiateAvatarCreationFeePurchase is not available")
 		end
-		mutedError("PurchasePrompt.initiateAvatarCreationFeePurchase is not available")
 	end
 	
-	function p0.onNameUpdated(p2, p3)
-		-- upvalues: p1 (ref), publishAssetAnalytics (copy)
-		p1:setState({ name = p2, isNameValid = p3 })
+	function p1.onNameUpdated(Name, IsNameValid) --[[ Line: 104 ]]
+		-- upvalues: p1 (copy), PublishAssetAnalytics (upval)
+		p1:setState({ name = Name, isNameValid = IsNameValid })
 		
 		if not p1.sentNameFieldTouched then
 			p1.sentNameFieldTouched = true
-			publishAssetAnalytics.sendFieldTouched(publishAssetAnalytics.Section.BuyCreationPage, publishAssetAnalytics.Element.Name)
+			PublishAssetAnalytics.sendFieldTouched(PublishAssetAnalytics.Section.BuyCreationPage, PublishAssetAnalytics.Element.Name)
 		end
 	end
 	
-	function p0.onDescriptionUpdated(p2, p3)
-		-- upvalues: p1 (ref), publishAssetAnalytics (copy)
-		p1:setState({ description = p2, isDescValid = p3 })
+	function p1.onDescriptionUpdated(Description, IsDescValid) --[[ Line: 116 ]]
+		-- upvalues: p1 (copy), PublishAssetAnalytics (upval)
+		p1:setState({ description = Description, isDescValid = IsDescValid })
 		
 		if not p1.sentDescriptionFieldTouched then
 			p1.sentDescriptionFieldTouched = true
-			publishAssetAnalytics.sendFieldTouched(publishAssetAnalytics.Section.BuyCreationPage, publishAssetAnalytics.Element.Description)
+			PublishAssetAnalytics.sendFieldTouched(PublishAssetAnalytics.Section.BuyCreationPage, PublishAssetAnalytics.Element.Description)
 		end
 	end
 	
-	function p0.onWindowStateChanged(p2)
-		-- upvalues: p1 (ref)
-		local isShown = p2.isShown
+	function p1.onWindowStateChanged(p2) --[[ Line: 128 ]]
+		-- upvalues: p1 (copy)
+		local IsShown = p2.isShown
 		
-		if p2.hasCompletedPurchase and not isShown then
+		if p2.hasCompletedPurchase and not IsShown then
 			p1.props.SetPromptVisibility(false)
 			
 			return
 		end
-		p1:setState({ showTopScrim = isShown })
+		p1:setState({ showTopScrim = IsShown })
 		
-		if isShown then
+		if IsShown then
 			p1:setState({ purchasePromptReady = false })
 		end
 	end
 	
-	function p0.onPromptStateSetToNone()
-		-- upvalues: p1 (ref)
+	function p1.onPromptStateSetToNone() --[[ Line: 153 ]]
+		-- upvalues: p1 (copy)
 		p1:setState({ purchasePromptReady = true })
 	end
 end
 
-function publishAvatarPrompt.didMount(p1)
-	-- upvalues: purchasePromptModule (ref), mutedError (ref), publishAssetAnalytics (ref)
+function PublishAvatarPrompt.didMount(p1) --[[ Line: 160 ]]
+	-- upvalues: PurchasePromptModule (copy), MutedErrorFunction (copy), PublishAssetAnalytics (copy)
 	p1.sentNameFieldTouched = false
 	p1.sentDescriptionFieldTouched = false
-	local windowStateChangedEvent = purchasePromptModule.windowStateChangedEvent
-	local promptStateSetToNoneEvent = purchasePromptModule.promptStateSetToNoneEvent
+	local WindowStateChangedEvent = PurchasePromptModule.windowStateChangedEvent
+	local PromptStateSetToNoneEvent = PurchasePromptModule.promptStateSetToNoneEvent
 	
-	if windowStateChangedEvent and promptStateSetToNoneEvent then
-		p1.windowStateChangedConnection = windowStateChangedEvent:Connect(p1.onWindowStateChanged)
-		p1.promptStateSetToNoneConnection = promptStateSetToNoneEvent:Connect(p1.onPromptStateSetToNone)
+	if WindowStateChangedEvent and PromptStateSetToNoneEvent then
+		p1.windowStateChangedConnection = WindowStateChangedEvent:Connect(p1.onWindowStateChanged)
+		p1.promptStateSetToNoneConnection = PromptStateSetToNoneEvent:Connect(p1.onPromptStateSetToNone)
 	else
-		mutedError("PurchasePrompt.windowStateChangedEvent or PurchasePrompt.promptStateSetToNoneEvent is not available")
+		MutedErrorFunction("PurchasePrompt.windowStateChangedEvent or PurchasePrompt.promptStateSetToNoneEvent is not available")
 	end
-	publishAssetAnalytics.sendPageLoad(publishAssetAnalytics.Section.BuyCreationPage)
+	PublishAssetAnalytics.sendPageLoad(PublishAssetAnalytics.Section.BuyCreationPage)
 end
 
-function publishAvatarPrompt.willUnmount(p1)
-	-- upvalues: mutedError (ref)
+function PublishAvatarPrompt.willUnmount(p1) --[[ Line: 179 ]]
+	-- upvalues: MutedErrorFunction (copy)
 	if p1.windowStateChangedConnection then
 		p1.windowStateChangedConnection:Disconnect()
 	else
-		mutedError("windowStateChangedConnection was not established")
+		MutedErrorFunction("windowStateChangedConnection was not established")
 	end
 	if p1.promptStateSetToNoneConnection then
 		p1.promptStateSetToNoneConnection:Disconnect()
 		
 		return
+	else
+		MutedErrorFunction("promptStateSetToNoneConnection was not established")
 	end
-	mutedError("promptStateSetToNoneConnection was not established")
 end
 
-function publishAvatarPrompt.renderPromptBody(p1)
-	-- upvalues: withStyle (ref), roactModule (ref), uDim (ref), objectViewportModule (ref), labeledTextBoxModule (ref), robloxTranslatorModule (ref), publishInfoListModule (ref), avatarPartGridModule (ref)
-	local var1 = p1.props.humanoidModel == nil
+function PublishAvatarPrompt.renderPromptBody(p1) --[[ Line: 193 ]]
+	-- upvalues: WithStyleFunction (copy), RoactModule (copy), _UDim (copy), ObjectViewportModule (copy), LabeledTextBoxModule (copy), RobloxTranslatorModule (copy), PublishInfoListModule (copy), AvatarPartGridModule (copy)
+	local NoHumanoidModel = p1.props.humanoidModel == nil
 	
-	return withStyle(function(_)
-		-- upvalues: roactModule (copy), uDim (copy), objectViewportModule (copy), p1 (ref), var1 (ref), labeledTextBoxModule (copy), robloxTranslatorModule (copy), publishInfoListModule (copy), avatarPartGridModule (copy)
-		return roactModule.createFragment({
-			UIListLayout = roactModule.createElement("UIListLayout", {
-				Padding = uDim,
+	return WithStyleFunction(function(_) --[[ Line: 195 ]]
+		-- upvalues: RoactModule (upval), _UDim (upval), ObjectViewportModule (upval), p1 (copy), NoHumanoidModel (copy), LabeledTextBoxModule (upval), RobloxTranslatorModule (upval), PublishInfoListModule (upval), AvatarPartGridModule (upval)
+		return RoactModule.createFragment({
+			UIListLayout = RoactModule.createElement("UIListLayout", {
+				Padding = _UDim,
 				HorizontalAlignment = Enum.HorizontalAlignment.Center,
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				FillDirection = Enum.FillDirection.Vertical
 			}),
-			UIPadding = roactModule.createElement("UIPadding", { PaddingBottom = uDim, PaddingTop = uDim }),
-			EmbeddedPreview = roactModule.createElement(objectViewportModule, {
+			UIPadding = RoactModule.createElement("UIPadding", { PaddingBottom = _UDim, PaddingTop = _UDim }),
+			EmbeddedPreview = RoactModule.createElement(ObjectViewportModule, {
 				useFullBodyCameraSettings = true,
 				fieldOfView = 30,
 				LayoutOrder = 1,
 				isHumanoidModel = true,
 				openPreviewView = p1.openPreviewView,
 				model = p1.props.humanoidModel,
-				isLoading = var1
+				isLoading = NoHumanoidModel
 			}),
-			DescriptionInput = roactModule.createElement(labeledTextBoxModule, {
+			DescriptionInput = RoactModule.createElement(LabeledTextBoxModule, {
 				LayoutOrder = 2,
 				centerText = false,
 				maxLength = 1000,
 				textBoxHeight = 104,
-				labelText = robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.Description"),
+				labelText = RobloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.Description"),
 				defaultText = p1.state.description,
 				onTextUpdated = p1.onDescriptionUpdated,
-				invalidInputText = robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.InvalidDescription")
+				invalidInputText = RobloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.InvalidDescription")
 			}),
-			InfoList = roactModule.createElement(publishInfoListModule, {
+			InfoList = RoactModule.createElement(PublishInfoListModule, {
 				LayoutOrder = 3,
-				typeName = robloxTranslatorModule:FormatByKey("Feature.Catalog.Label.Body")
+				typeName = RobloxTranslatorModule:FormatByKey("Feature.Catalog.Label.Body")
 			}),
-			AvatarPartGrid = roactModule.createElement(avatarPartGridModule, {
+			AvatarPartGrid = RoactModule.createElement(AvatarPartGridModule, {
 				LayoutOrder = 4,
 				humanoidModel = p1.props.humanoidModel,
 				name = p1.state.name,
@@ -188,20 +190,20 @@ function publishAvatarPrompt.renderPromptBody(p1)
 	end)
 end
 
-function publishAvatarPrompt.render(p1)
-	-- upvalues: playersService (ref), roactModule (ref), basePublishPromptModule (ref), robloxTranslatorModule (ref)
-	assert(playersService, "Players must not be nil")
+function PublishAvatarPrompt.render(p1) --[[ Line: 240 ]]
+	-- upvalues: Players (copy), RoactModule (copy), BasePublishPromptModule (copy), RobloxTranslatorModule (copy)
+	assert(Players, "Players must not be nil")
 	
-	return roactModule.createElement(basePublishPromptModule, {
+	return RoactModule.createElement(BasePublishPromptModule, {
 		delayInputSeconds = 3,
 		promptBody = p1:renderPromptBody(),
 		screenSize = p1.props.screenSize,
 		showingPreviewView = p1.state.showingPreviewView,
 		closePreviewView = p1.closePreviewView,
 		asset = p1.props.humanoidModel,
-		nameLabel = robloxTranslatorModule:FormatByKey("CoreScripts.PublishAvatarPrompt.BodyName"),
+		nameLabel = RobloxTranslatorModule:FormatByKey("CoreScripts.PublishAvatarPrompt.BodyName"),
 		defaultName = p1.state.name,
-		titleText = robloxTranslatorModule:FormatByKey("CoreScripts.PublishAvatarPrompt.BuyCreation"),
+		titleText = RobloxTranslatorModule:FormatByKey("CoreScripts.PublishAvatarPrompt.BuyCreation"),
 		onNameUpdated = p1.onNameUpdated,
 		canSubmit = p1.canSubmit,
 		onSubmit = p1.onSubmit,
@@ -210,19 +212,19 @@ function publishAvatarPrompt.render(p1)
 	})
 end
 
-return roactRoduxModule.connect(function(p1)
+return RoactRoduxModule.connect(function(p1) --[[ Line: 261 | Named "mapStateToProps" ]]
 	return {
 		humanoidModel = p1.promptRequest.promptInfo.humanoidModel,
 		guid = p1.promptRequest.promptInfo.guid,
 		scopes = p1.promptRequest.promptInfo.scopes,
 		priceInRobux = p1.promptRequest.promptInfo.priceInRobux
 	}
-end, function(p1)
-	-- upvalues: setPromptVisibilityModule (ref)
+end, function(Callback) --[[ Line: 270 | Named "mapDispatchToProps" ]]
+	-- upvalues: SetPromptVisibilityModule (copy)
 	return {
-		SetPromptVisibility = function(value)
-			-- upvalues: p1 (ref), setPromptVisibilityModule (copy)
-			p1(setPromptVisibilityModule(value))
+		SetPromptVisibility = function(p1) --[[ Line: 272 ]]
+			-- upvalues: Callback (copy), SetPromptVisibilityModule (upval)
+			Callback(SetPromptVisibilityModule(p1))
 		end
 	}
-end)(publishAvatarPrompt)
+end)(PublishAvatarPrompt)

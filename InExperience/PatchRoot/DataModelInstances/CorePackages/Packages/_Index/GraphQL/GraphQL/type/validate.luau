@@ -1,476 +1,478 @@
-﻿local parent = script.Parent.Parent
-local luauPolyfillModule = require(parent.Parent.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local boolean = luauPolyfillModule.Boolean
-local error = luauPolyfillModule.Error
-local isNotNillish = require(parent.luaUtils.isNillish).isNotNillish
-local inspect = require(script.Parent.Parent.jsutils.inspect).inspect
-local graphQLError = require(script.Parent.Parent.error.GraphQLError).GraphQLError
-local locatedError = require(script.Parent.Parent.error).locatedError
-local _ = require(parent.language.ast)
-local isValidNameError = require(parent.utilities.assertValidName).isValidNameError
-local typeComparatorsModule = require(script.Parent.Parent.utilities.typeComparators)
-local isEqualType = typeComparatorsModule.isEqualType
-local isTypeSubTypeOf = typeComparatorsModule.isTypeSubTypeOf
-local assertSchema = require(script.Parent.schema).assertSchema
-local definitionModule = require(script.Parent.definition)
-local isIntrospectionType = require(script.Parent.introspection).isIntrospectionType
-local directivesModule = require(script.Parent.directives)
-local isDirective = directivesModule.isDirective
-local graphQLDeprecatedDirective = directivesModule.GraphQLDeprecatedDirective
-local isObjectType = definitionModule.isObjectType
-local isInterfaceType = definitionModule.isInterfaceType
-local isUnionType = definitionModule.isUnionType
-local isEnumType = definitionModule.isEnumType
-local isInputObjectType = definitionModule.isInputObjectType
-local isNamedType = definitionModule.isNamedType
-local isNonNullType = definitionModule.isNonNullType
-local isInputType = definitionModule.isInputType
-local isOutputType = definitionModule.isOutputType
-local isRequiredArgument = definitionModule.isRequiredArgument
-local isRequiredInputField = definitionModule.isRequiredInputField
-local t = nil
-local validateRootTypes = nil
-local validateDirectives = nil
-local getOperationTypeNode = nil
-local getAllSubNodes = nil
-local getAllNodes = nil
-local getAllImplementsInterfaceNodes = nil
-local getDeprecatedDirectiveNode = nil
-local getUnionMemberTypeNodes = nil
-local validateEnumValues = nil
-local validateName = nil
-local validateFields = nil
-local validateTypeImplementsAncestors = nil
-local validateTypes = nil
-local validateTypeImplementsInterface = nil
-local validateInterfaces = nil
+﻿local Parent = script.Parent.Parent
+local LuauPolyfillModule = require(Parent.Parent.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local Boolean = LuauPolyfillModule.Boolean
+local Error1 = LuauPolyfillModule.Error
+local IsNotNillishFunction = require(Parent.luaUtils.isNillish).isNotNillish
+local InspectFunction = require(script.Parent.Parent.jsutils.inspect).inspect
+local GraphQLError = require(script.Parent.Parent.error.GraphQLError).GraphQLError
+local LocatedErrorFunction = require(script.Parent.Parent.error).locatedError
+local _ = require(Parent.language.ast)
+local IsValidNameErrorFunction = require(Parent.utilities.assertValidName).isValidNameError
+local TypeComparatorsModule = require(script.Parent.Parent.utilities.typeComparators)
+local IsEqualTypeFunction = TypeComparatorsModule.isEqualType
+local IsTypeSubTypeOfFunction = TypeComparatorsModule.isTypeSubTypeOf
+local AssertSchemaFunction = require(script.Parent.schema).assertSchema
+local DefinitionModule = require(script.Parent.definition)
+local IsIntrospectionTypeFunction = require(script.Parent.introspection).isIntrospectionType
+local DirectivesModule = require(script.Parent.directives)
+local IsDirectiveFunction = DirectivesModule.isDirective
+local GraphQLDeprecatedDirective = DirectivesModule.GraphQLDeprecatedDirective
+local IsObjectTypeFunction = DefinitionModule.isObjectType
+local IsInterfaceTypeFunction = DefinitionModule.isInterfaceType
+local IsUnionTypeFunction = DefinitionModule.isUnionType
+local IsEnumTypeFunction = DefinitionModule.isEnumType
+local IsInputObjectTypeFunction = DefinitionModule.isInputObjectType
+local IsNamedTypeFunction = DefinitionModule.isNamedType
+local IsNonNullTypeFunction = DefinitionModule.isNonNullType
+local IsInputTypeFunction = DefinitionModule.isInputType
+local IsOutputTypeFunction = DefinitionModule.isOutputType
+local IsRequiredArgumentFunction = DefinitionModule.isRequiredArgument
+local IsRequiredInputFieldFunction = DefinitionModule.isRequiredInputField
+local Module = nil
+local Callback1 = nil
+local Callback = nil
+local Callback3 = nil
+local Callback4 = nil
+local Callback10 = nil
+local Callback11 = nil
+local Callback6 = nil
+local Callback14 = nil
+local Callback9 = nil
+local Callback5 = nil
+local Callback7 = nil
+local Callback12 = nil
+local Callback2 = nil
+local Callback13 = nil
+local Callback8 = nil
 
-local var1 = function(p1)
-	-- upvalues: assertSchema (ref), t (write), validateRootTypes (write), validateDirectives (write), validateTypes (write)
-	assertSchema(p1)
+local function ValidateSchema(Schema) --[[ Line: 78 ]]
+	-- upvalues: AssertSchemaFunction (copy), Module (ref), Callback1 (ref), Callback (ref), Callback2 (ref)
+	AssertSchemaFunction(Schema)
 	
-	if p1.__validationErrors == nil then
-		local var2 = t.new(p1)
-		validateRootTypes(var2)
-		validateDirectives(var2)
-		validateTypes(var2)
-		local errors = var2:getErrors()
-		p1.__validationErrors = errors
+	if Schema.__validationErrors == nil then
+		local NewModule = Module.new(Schema)
+		Callback1(NewModule)
+		Callback(NewModule)
+		Callback2(NewModule)
+		local Errors = NewModule:getErrors()
+		Schema.__validationErrors = Errors
 		
-		return errors
+		return Errors
+	else
+		return Schema.__validationErrors
 	end
-	return p1.__validationErrors
 end
 
-local var2 = function(p1)
-	-- upvalues: var1 (ref), error (ref), array (ref)
-	local var3 = var1(p1)
+local function AssertValidSchema(p1) --[[ Line: 106 ]]
+	-- upvalues: ValidateSchema (copy), Error1 (copy), Array (copy)
+	local ValidateSchemaResult = ValidateSchema(p1)
 	
-	if #var3 ~= 0 then
-		error(error.new(array.join(array.map(var3, function(p2)
+	if #ValidateSchemaResult ~= 0 then
+		error(Error1.new(Array.join(Array.map(ValidateSchemaResult, function(p2) --[[ Line: 111 ]]
 			return p2.message
 		end), "\n\n")))
 	end
 end
 
-t = {}
-t.__index = t
+Module = {}
+Module.__index = Module
 
-function t.new(p1)
-	-- upvalues: t (write)
-	local tbl = setmetatable({}, t)
-	tbl._errors = {}
-	tbl.schema = p1
+function Module.new(Schema) --[[ Line: 132 ]]
+	-- upvalues: Module (ref)
+	local self = setmetatable({}, Module)
+	self._errors = {}
+	self.schema = Schema
 	
-	return tbl
+	return self
 end
 
-function t:reportError(p1, p2)
-	-- upvalues: array (ref), boolean (ref), graphQLError (ref)
-	self:addError(graphQLError.new(p1, if array.isArray(p2) then array.filter(p2, boolean.toJSBoolean) else p2))
+function Module:reportError(Message, AstNode) --[[ Line: 141 ]]
+	-- upvalues: Array (copy), Boolean (copy), GraphQLError (copy)
+	self:addError(GraphQLError.new(Message, if Array.isArray(AstNode) then Array.filter(AstNode, Boolean.toJSBoolean) else AstNode))
 end
 
-function t:addError(p1)
-	table.insert(self._errors, p1)
+function Module:addError(NewResult) --[[ Line: 150 ]]
+	table.insert(self._errors, NewResult)
 end
 
-function t:getErrors()
+function Module:getErrors() --[[ Line: 154 ]]
 	return self._errors
 end
 
-validateRootTypes = function(p1)
-	-- upvalues: isNotNillish (ref), isObjectType (ref), getOperationTypeNode (write), inspect (ref)
-	local schema = p1.schema
-	local queryType = schema:getQueryType()
+Callback1 = function(NewResult) --[[ Line: 158 | Named "validateRootTypes" ]]
+	-- upvalues: IsNotNillishFunction (copy), IsObjectTypeFunction (copy), Callback3 (ref), InspectFunction (copy)
+	local Schema = NewResult.schema
+	local QueryType = Schema:getQueryType()
 	
-	if not isNotNillish(queryType) then
-		p1:reportError("Query root type must be provided.", schema.astNode)
-	elseif not isObjectType(queryType) then
-		local var3 = getOperationTypeNode(schema, "query")
-		p1:reportError(("Query root type must be Object type, it cannot be %s."):format(inspect(queryType)), var3 or queryType.astNode)
+	if IsNotNillishFunction(QueryType) then
+		if not IsObjectTypeFunction(QueryType) then
+			local Query = Callback3(Schema, "query")
+			NewResult:reportError(("Query root type must be Object type, it cannot be %s."):format(InspectFunction(QueryType)), if Query then Query else QueryType.astNode)
+		end
+	else
+		NewResult:reportError("Query root type must be provided.", Schema.astNode)
 	end
-	local mutationType = schema:getMutationType()
+	local MutationType = Schema:getMutationType()
 	
-	if isNotNillish(mutationType) and not isObjectType(mutationType) then
-		local var4 = getOperationTypeNode(schema, "mutation")
-		p1:reportError("Mutation root type must be Object type if provided, it cannot be " .. ("%s."):format(inspect(mutationType)), var4 or mutationType.astNode)
+	if IsNotNillishFunction(MutationType) and not IsObjectTypeFunction(MutationType) then
+		local Mutation = Callback3(Schema, "mutation")
+		NewResult:reportError("Mutation root type must be Object type if provided, it cannot be " .. ("%s."):format(InspectFunction(MutationType)), if Mutation then Mutation else MutationType.astNode)
 	end
-	local subscriptionType = schema:getSubscriptionType()
+	local SubscriptionType = Schema:getSubscriptionType()
 	
-	if isNotNillish(subscriptionType) and not isObjectType(subscriptionType) then
-		local var5 = getOperationTypeNode(schema, "subscription")
-		p1:reportError("Subscription root type must be Object type if provided, it cannot be " .. ("%s."):format(inspect(subscriptionType)), var5 or subscriptionType.astNode)
+	if IsNotNillishFunction(SubscriptionType) and not IsObjectTypeFunction(SubscriptionType) then
+		local Subscription = Callback3(Schema, "subscription")
+		NewResult:reportError("Subscription root type must be Object type if provided, it cannot be " .. ("%s."):format(InspectFunction(SubscriptionType)), if Subscription then Subscription else SubscriptionType.astNode)
 	end
 end
 
-getOperationTypeNode = function(p1, p2)
-	-- upvalues: getAllSubNodes (write)
-	for i, v in ipairs(getAllSubNodes(p1, function(p3)
-		return p3.operationTypes
-	end)) do
-		if v.operation == p2 then
-			return v.type
+Callback3 = function(Schema, Operation) --[[ Line: 197 | Named "getOperationTypeNode" ]]
+	-- upvalues: Callback4 (ref)
+	for _, value in ipairs((Callback4(Schema, function(p1) --[[ Line: 198 ]]
+		return p1.operationTypes
+	end))) do
+		if value.operation == Operation then
+			return value.type
 		end
 	end
 	return nil
 end
 
-validateDirectives = function(p3)
-	-- upvalues: isDirective (ref), inspect (ref), validateName (write), isInputType (ref), isRequiredArgument (ref), isNotNillish (ref), getDeprecatedDirectiveNode (write)
-	for i, v in ipairs(p3.schema:getDirectives()) do
-		if isDirective(v) then
-			validateName(p3, v)
-			
-			for i_1, v_1 in ipairs(v.args) do
-				validateName(p3, v_1)
-				
-				if not isInputType(v_1.type) then
-					p3:reportError(("The type of @%s(%s:) must be Input Type "):format(v.name, v_1.name) .. ("but got: %s."):format(inspect(v_1.type)), v_1.astNode)
-				end
-				if isRequiredArgument(v_1) and isNotNillish(v_1.deprecationReason) then
-					p3:reportError(("Required argument @%s(%s:) cannot be deprecated."):format(v.name, v_1.name), {
-						getDeprecatedDirectiveNode(v_1.astNode),
-						if v_1.astNode ~= nil then nil else v_1.astNode.type
-					})
-				end
-			end
-		else
-			p3:reportError(("Expected directive but got: %s."):format(inspect(v)), if v then v.astNode else nil)
-		end
-	end
-end
-
-validateName = function(p4, p5)
-	-- upvalues: isValidNameError (ref), locatedError (ref)
-	local name
-	local _ = nil
-	local astNode = nil
-	
-	if typeof(p5) == "table" then
-		name = p5.name
-		astNode = p5.astNode
-	else
-		name = tostring(p5)
-	end
-	local var3 = isValidNameError(name)
-	
-	if var3 then
-		p4:addError(locatedError(var3, astNode))
-	end
-end
-
-validateTypes = function(p4)
-	-- upvalues: isNamedType (ref), inspect (ref), isIntrospectionType (ref), validateName (write), isObjectType (ref), validateFields (write), validateInterfaces (write), isInterfaceType (ref), isUnionType (ref), isEnumType (ref), validateEnumValues (write), isInputObjectType (ref)
-	local var3
-	local var4 = createInputObjectCircularRefsValidator(p4)
-	
-	for i, v in ipairs(p4.schema:getTypeMap():values()) do
-		var3 = if typeof(v) == "table" then v.astNode else nil
-		
-		if not isNamedType(v) then
-			p4:reportError(("Expected GraphQL named type but got: %s."):format(inspect(v)), var3)
+Callback = function(NewResult) --[[ Line: 211 | Named "validateDirectives" ]]
+	-- upvalues: IsDirectiveFunction (copy), InspectFunction (copy), Callback5 (ref), IsInputTypeFunction (copy), IsRequiredArgumentFunction (copy), IsNotNillishFunction (copy), Callback6 (ref)
+	for _, directive in ipairs(NewResult.schema:getDirectives()) do
+		if not IsDirectiveFunction(directive) then
+			NewResult:reportError(("Expected directive but got: %s."):format(InspectFunction(directive)), if directive then directive.astNode else nil)
 			continue
 		end
-		if not isIntrospectionType(v) then
-			validateName(p4, v)
-		end
-		if isObjectType(v) then
-			validateFields(p4, v)
-			validateInterfaces(p4, v)
-		elseif isInterfaceType(v) then
-			validateFields(p4, v)
-			validateInterfaces(p4, v)
-		elseif isUnionType(v) then
-			validateUnionMembers(p4, v)
-		elseif isEnumType(v) then
-			validateEnumValues(p4, v)
-		elseif isInputObjectType(v) then
-			validateInputFields(p4, v)
-			var4(v)
-		end
-	end
-end
-
-validateFields = function(p5, p6)
-	-- upvalues: getAllNodes (write), validateName (write), isOutputType (ref), inspect (ref), isInputType (ref), isRequiredArgument (ref), isNotNillish (ref), getDeprecatedDirectiveNode (write)
-	local var5 = p6:getFields():values()
-	
-	if #var5 == 0 then
-		p5:reportError(("Type %s must define one or more fields."):format(p6.name), getAllNodes(p6))
-	end
-	for i, v in ipairs(var5) do
-		validateName(p5, v)
+		Callback5(NewResult, directive)
 		
-		if not isOutputType(v.type) then
-			p5:reportError(("The type of %s.%s must be Output Type "):format(p6.name, v.name) .. ("but got: %s."):format(inspect(v.type)), if v.astNode ~= nil then nil else v.astNode.type)
-		end
-		for i_1, v_1 in ipairs(v.args) do
-			local name = v_1.name
-			validateName(p5, v_1)
+		for _, arg in ipairs(directive.args) do
+			Callback5(NewResult, arg)
 			
-			if not isInputType(v_1.type) then
-				p5:reportError(("The type of %s.%s(%s:) must be Input "):format(p6.name, v.name, name) .. ("Type but got: %s."):format(inspect(v_1.type)), if v_1.astNode ~= nil then nil else v_1.astNode.type)
+			if not IsInputTypeFunction(arg.type) then
+				NewResult:reportError(("The type of @%s(%s:) must be Input Type "):format(directive.name, arg.name) .. ("but got: %s."):format(InspectFunction(arg.type)), arg.astNode)
 			end
-			if isRequiredArgument(v_1) and isNotNillish(v_1.deprecationReason) then
-				p5:reportError(("Required argument %s.%s(%s:) cannot be deprecated."):format(p6.name, v.name, name), {
-					getDeprecatedDirectiveNode(v_1.astNode),
-					if v_1.astNode ~= nil then nil else v_1.astNode.type
+			if IsRequiredArgumentFunction(arg) and IsNotNillishFunction(arg.deprecationReason) then
+				NewResult:reportError(("Required argument @%s(%s:) cannot be deprecated."):format(directive.name, arg.name), {
+					Callback6(arg.astNode),
+					if arg.astNode == nil then nil else arg.astNode.type
 				})
 			end
 		end
 	end
 end
 
-validateInterfaces = function(p7, p8)
-	-- upvalues: isInterfaceType (ref), inspect (ref), getAllImplementsInterfaceNodes (write), validateTypeImplementsAncestors (write), validateTypeImplementsInterface (write)
-	local t = {}
+Callback5 = function(p1, p2) --[[ Line: 255 | Named "validateName" ]]
+	-- upvalues: IsValidNameErrorFunction (copy), LocatedErrorFunction (copy)
+	local AstNode = nil
+	local Name = nil
 	
-	for i, v in ipairs(p8:getInterfaces()) do
-		if not isInterfaceType(v) then
-			p7:reportError(("Type %s must only implement Interface types, "):format(inspect(p8)) .. ("it cannot implement %s."):format(inspect(v)), getAllImplementsInterfaceNodes(p8, v))
-		elseif p8 == v then
-			p7:reportError(("Type %s cannot implement itself because it would create a circular reference."):format(p8.name), getAllImplementsInterfaceNodes(p8, v))
-		else
-			local var6 = if typeof(nil) == "table" then tostring(v.name) else tostring(v)
+	if typeof(p2) == "table" then
+		Name = p2.name
+		AstNode = p2.astNode
+	else
+		Name = tostring(p2)
+	end
+	local IsValidNameError = IsValidNameErrorFunction(Name)
+	
+	if IsValidNameError then
+		p1:addError(LocatedErrorFunction(IsValidNameError, AstNode))
+	end
+end
+
+Callback2 = function(NewResult) --[[ Line: 276 | Named "validateTypes" ]]
+	-- upvalues: IsNamedTypeFunction (copy), InspectFunction (copy), IsIntrospectionTypeFunction (copy), Callback5 (ref), IsObjectTypeFunction (copy), Callback7 (ref), Callback8 (ref), IsInterfaceTypeFunction (copy), IsUnionTypeFunction (copy), IsEnumTypeFunction (copy), Callback9 (ref), IsInputObjectTypeFunction (copy)
+	local InputObjectCircularRefsValidator: (any) -> () = createInputObjectCircularRefsValidator(NewResult)
+	
+	for _, value in ipairs(NewResult.schema:getTypeMap():values()) do
+		local AstNode = if typeof(value) == "table" then value.astNode else nil
+		
+		if not IsNamedTypeFunction(value) then
+			NewResult:reportError(("Expected GraphQL named type but got: %s."):format(InspectFunction(value)), AstNode)
+			continue
+		end
+		if not IsIntrospectionTypeFunction(value) then
+			Callback5(NewResult, value)
+		end
+		if IsObjectTypeFunction(value) then
+			Callback7(NewResult, value)
+			Callback8(NewResult, value)
+		elseif IsInterfaceTypeFunction(value) then
+			Callback7(NewResult, value)
+			Callback8(NewResult, value)
+		elseif IsUnionTypeFunction(value) then
+			validateUnionMembers(NewResult, value)
+		elseif IsEnumTypeFunction(value) then
+			Callback9(NewResult, value)
+		elseif IsInputObjectTypeFunction(value) then
+			validateInputFields(NewResult, value)
+			InputObjectCircularRefsValidator(value)
+		end
+	end
+end
+
+Callback7 = function(p1, p2) --[[ Line: 329 | Named "validateFields" ]]
+	-- upvalues: Callback10 (ref), Callback5 (ref), IsOutputTypeFunction (copy), InspectFunction (copy), IsInputTypeFunction (copy), IsRequiredArgumentFunction (copy), IsNotNillishFunction (copy), Callback6 (ref)
+	local ValuesResult = p2:getFields():values()
+	
+	if #ValuesResult == 0 then
+		p1:reportError(("Type %s must define one or more fields."):format(p2.name), Callback10(p2))
+	end
+	for _, value in ipairs(ValuesResult) do
+		Callback5(p1, value)
+		
+		if not IsOutputTypeFunction(value.type) then
+			p1:reportError(("The type of %s.%s must be Output Type "):format(p2.name, value.name) .. ("but got: %s."):format(InspectFunction(value.type)), if value.astNode == nil then nil else value.astNode.type)
+		end
+		for _, arg in ipairs(value.args) do
+			local Name = arg.name
+			Callback5(p1, arg)
 			
-			if t[var6] then
-				p7:reportError(("Type %s can only implement %s once."):format(p8.name, v.name), getAllImplementsInterfaceNodes(p8, v))
-			else
-				t[var6] = true
-				validateTypeImplementsAncestors(p7, p8, v)
-				validateTypeImplementsInterface(p7, p8, v)
+			if not IsInputTypeFunction(arg.type) then
+				p1:reportError(("The type of %s.%s(%s:) must be Input "):format(p2.name, value.name, Name) .. ("Type but got: %s."):format(InspectFunction(arg.type)), if arg.astNode == nil then nil else arg.astNode.type)
+			end
+			if IsRequiredArgumentFunction(arg) and IsNotNillishFunction(arg.deprecationReason) then
+				p1:reportError(("Required argument %s.%s(%s:) cannot be deprecated."):format(p2.name, value.name, Name), {
+					Callback6(arg.astNode),
+					if arg.astNode == nil then nil else arg.astNode.type
+				})
 			end
 		end
 	end
 end
 
-validateTypeImplementsInterface = function(p9, p10, p11)
-	-- upvalues: array (ref), getAllNodes (write), isTypeSubTypeOf (ref), inspect (ref), isEqualType (ref), isRequiredArgument (ref)
-	local name
-	local fields = p10:getFields()
+Callback8 = function(p3, p4) --[[ Line: 394 | Named "validateInterfaces" ]]
+	-- upvalues: IsInterfaceTypeFunction (copy), InspectFunction (copy), Callback11 (ref), Callback12 (ref), Callback13 (ref)
+	local t = {}
 	
-	for i, v in ipairs(p11:getFields():values()) do
-		name = v.name
-		local var7 = fields:get(name)
-		
-		if not var7 then
-			p9:reportError(("Interface field %s.%s expected but %s does not provide it."):format(p11.name, name, p10.name), array.concat({ v.astNode }, getAllNodes(p10)))
+	for _, interface in ipairs(p4:getInterfaces()) do
+		if not IsInterfaceTypeFunction(interface) then
+			p3:reportError(("Type %s must only implement Interface types, "):format(InspectFunction(p4)) .. ("it cannot implement %s."):format(InspectFunction(interface)), Callback11(p4, interface))
 			continue
 		end
-		if not isTypeSubTypeOf(p9.schema, var7.type, v.type) then
-			p9:reportError(("Interface field %s.%s expects type "):format(p11.name, name) .. ("%s but %s.%s "):format(inspect(v.type), p10.name, name) .. ("is type %s."):format(inspect(var7.type)), {
-				if v.astNode ~= nil then nil else v.astNode.type,
-				if var7.astNode ~= nil then nil else var7.astNode.type
+		if p4 == interface then
+			p3:reportError(("Type %s cannot implement itself because it would create a circular reference."):format(p4.name), Callback11(p4, interface))
+		else
+			local Text: string = if typeof(nil) == "table" then tostring(interface.name) else tostring(interface)
+			
+			if t[Text] then
+				p3:reportError(("Type %s can only implement %s once."):format(p4.name, interface.name), Callback11(p4, interface))
+			else
+				t[Text] = true
+				Callback12(p3, p4, interface)
+				Callback13(p3, p4, interface)
+			end
+		end
+	end
+end
+
+Callback13 = function(p5, p6, p7) --[[ Line: 444 | Named "validateTypeImplementsInterface" ]]
+	-- upvalues: Array (copy), Callback10 (ref), IsTypeSubTypeOfFunction (copy), InspectFunction (copy), IsEqualTypeFunction (copy), IsRequiredArgumentFunction (copy)
+	local Fields = p6:getFields()
+	
+	for _, value in ipairs(p7:getFields():values()) do
+		local Name = value.name
+		local GetResult = Fields:get(Name)
+		
+		if not GetResult then
+			p5:reportError(("Interface field %s.%s expected but %s does not provide it."):format(p7.name, Name, p6.name), Array.concat({ value.astNode }, Callback10(p6)))
+			continue
+		end
+		if not IsTypeSubTypeOfFunction(p5.schema, GetResult.type, value.type) then
+			p5:reportError(("Interface field %s.%s expects type "):format(p7.name, Name) .. ("%s but %s.%s "):format(InspectFunction(value.type), p6.name, Name) .. ("is type %s."):format(InspectFunction(GetResult.type)), {
+				if value.astNode == nil then nil else value.astNode.type,
+				if GetResult.astNode == nil then nil else GetResult.astNode.type
 			})
 		end
-		for i_1, v_1 in ipairs(v.args) do
-			local name_1 = v_1.name
-			local var8 = array.find(var7.args, function(p12)
-				-- upvalues: name_1 (ref)
-				return p12.name == name_1
+		for _, arg in ipairs(value.args) do
+			local Name1 = arg.name
+			local FindResult = Array.find(GetResult.args, function(p8): boolean --[[ Line: 492 ]]
+				-- upvalues: Name1 (copy)
+				return p8.name == Name1
 			end)
 			
-			if not var8 then
-				p9:reportError(("Interface field argument %s.%s(%s:) expected but %s.%s does not provide it."):format(p11.name, name, name_1, p10.name, name), { v_1.astNode, var7.astNode })
-			elseif not isEqualType(v_1.type, var8.type) then
-				p9:reportError(("Interface field argument %s.%s(%s:) "):format(p11.name, name, name_1) .. ("expects type %s but "):format(inspect(v_1.type)) .. ("%s.%s(%s:) is type "):format(p10.name, name, name_1) .. ("%s."):format(inspect(var8.type)), {
-					if v_1.astNode ~= nil then nil else v_1.astNode.type,
-					if var8.astNode ~= nil then nil else var8.astNode.type
+			if not FindResult then
+				p5:reportError(("Interface field argument %s.%s(%s:) expected but %s.%s does not provide it."):format(p7.name, Name, Name1, p6.name, Name), { arg.astNode, GetResult.astNode })
+			elseif not IsEqualTypeFunction(arg.type, FindResult.type) then
+				p5:reportError(("Interface field argument %s.%s(%s:) "):format(p7.name, Name, Name1) .. ("expects type %s but "):format(InspectFunction(arg.type)) .. ("%s.%s(%s:) is type "):format(p6.name, Name, Name1) .. ("%s."):format(InspectFunction(FindResult.type)), {
+					if arg.astNode == nil then nil else arg.astNode.type,
+					if FindResult.astNode == nil then nil else FindResult.astNode.type
 				})
 			end
 		end
-		for i_1, v_1 in ipairs(var7.args) do
-			local name_1 = v_1.name
+		for _, arg1 in ipairs(GetResult.args) do
+			local Name2 = arg1.name
 			
-			if not array.find(v.args, function(p12)
-				-- upvalues: name_1 (ref)
-				return p12.name == name_1
-			end) and isRequiredArgument(v_1) then
-				p9:reportError(("Object field %s.%s includes required argument %s that is missing from the Interface field %s.%s."):format(p10.name, name, name_1, p11.name, name), { v_1.astNode, v.astNode })
+			if not Array.find(value.args, function(p8): boolean --[[ Line: 538 ]]
+				-- upvalues: Name2 (copy)
+				return p8.name == Name2
+			end) and IsRequiredArgumentFunction(arg1) then
+				p5:reportError(("Object field %s.%s includes required argument %s that is missing from the Interface field %s.%s."):format(p6.name, Name, Name2, p7.name, Name), { arg1.astNode, value.astNode })
 			end
 		end
 	end
 end
 
-validateTypeImplementsAncestors = function(p12, p13, p14)
-	-- upvalues: array (ref), getAllImplementsInterfaceNodes (write)
-	local interfaces = p13:getInterfaces()
+Callback12 = function(p8, p9, p10) --[[ Line: 557 | Named "validateTypeImplementsAncestors" ]]
+	-- upvalues: Array (copy), Callback11 (ref)
+	local Interfaces = p9:getInterfaces()
 	
-	for i, v in ipairs(p14:getInterfaces()) do
-		if array.indexOf(interfaces, v) == -1 then
-			p12:reportError(if v == p13 then ("Type %s cannot implement %s because it would create a circular reference."):format(p13.name, p14.name) else ("Type %s must implement %s because it is implemented by %s."):format(p13.name, v.name, p14.name), array.concat(getAllImplementsInterfaceNodes(p14, v), getAllImplementsInterfaceNodes(p13, p14)))
+	for _, interface in ipairs(p10:getInterfaces()) do
+		if Array.indexOf(Interfaces, interface) == -1 then
+			p8:reportError(if interface == p9 then ("Type %s cannot implement %s because it would create a circular reference."):format(p9.name, p10.name) else ("Type %s must implement %s because it is implemented by %s."):format(p9.name, interface.name, p10.name), Array.concat(Callback11(p10, interface), Callback11(p9, p10)))
 		end
 	end
 end
 
-function validateUnionMembers(p15, p16)
-	-- upvalues: getAllNodes (write), getUnionMemberTypeNodes (write), isObjectType (ref), inspect (ref)
-	local types = p16:getTypes()
+function validateUnionMembers(p11, p12) --[[ Line: 587 ]]
+	-- upvalues: Callback10 (ref), Callback14 (ref), IsObjectTypeFunction (copy), InspectFunction (copy)
+	local Types = p12:getTypes()
 	
-	if #types == 0 then
-		p15:reportError(("Union type %s must define one or more member types."):format(p16.name), getAllNodes(p16))
+	if #Types == 0 then
+		p11:reportError(("Union type %s must define one or more member types."):format(p12.name), Callback10(p12))
 	end
 	local t = {}
 	
-	for i, v in ipairs(types) do
-		if t[tostring(v.name)] then
-			p15:reportError(("Union type %s can only include type %s once."):format(p16.name, v.name), getUnionMemberTypeNodes(p16, v.name))
+	for _, _type in ipairs(Types) do
+		if t[tostring(_type.name)] then
+			p11:reportError(("Union type %s can only include type %s once."):format(p12.name, _type.name), Callback14(p12, _type.name))
 		else
-			t[tostring(v.name)] = true
+			t[tostring(_type.name)] = true
 			
-			if not isObjectType(v) then
-				p15:reportError(("Union type %s can only include Object types, "):format(p16.name) .. ("it cannot include %s."):format(inspect(v)), getUnionMemberTypeNodes(p16, tostring(v)))
+			if not IsObjectTypeFunction(_type) then
+				p11:reportError(("Union type %s can only include Object types, "):format(p12.name) .. ("it cannot include %s."):format(InspectFunction(_type)), Callback14(p12, (tostring(_type))))
 			end
 		end
 	end
 end
 
-validateEnumValues = function(p17, p18)
-	-- upvalues: getAllNodes (write), validateName (write)
-	local values = p18:getValues()
+Callback9 = function(p13, p14) --[[ Line: 621 | Named "validateEnumValues" ]]
+	-- upvalues: Callback10 (ref), Callback5 (ref)
+	local Values = p14:getValues()
 	
-	if #values == 0 then
-		p17:reportError(("Enum type %s must define one or more values."):format(p18.name), getAllNodes(p18))
+	if #Values == 0 then
+		p13:reportError(("Enum type %s must define one or more values."):format(p14.name), Callback10(p14))
 	end
-	for i, v in ipairs(values) do
-		local name = v.name
-		validateName(p17, v)
+	for _, value in ipairs(Values) do
+		local Name = value.name
+		Callback5(p13, value)
 		
-		if name == "true" or name == "false" or name == "null" then
-			p17:reportError(("Enum type %s cannot include value: %s."):format(p18.name, name), v.astNode)
+		if Name == "true" or Name == "false" or Name == "null" then
+			p13:reportError(("Enum type %s cannot include value: %s."):format(p14.name, Name), value.astNode)
 		end
 	end
 end
 
-function validateInputFields(p19, p20)
-	-- upvalues: getAllNodes (write), validateName (write), isInputType (ref), inspect (ref), isRequiredInputField (ref), isNotNillish (ref), getDeprecatedDirectiveNode (write)
-	local var9 = p20:getFields():values()
+function validateInputFields(p15, p16) --[[ Line: 646 ]]
+	-- upvalues: Callback10 (ref), Callback5 (ref), IsInputTypeFunction (copy), InspectFunction (copy), IsRequiredInputFieldFunction (copy), IsNotNillishFunction (copy), Callback6 (ref)
+	local ValuesResult = p16:getFields():values()
 	
-	if #var9 == 0 then
-		p19:reportError(("Input Object type %s must define one or more fields."):format(p20.name), getAllNodes(p20))
+	if #ValuesResult == 0 then
+		p15:reportError(("Input Object type %s must define one or more fields."):format(p16.name), Callback10(p16))
 	end
-	for i, v in ipairs(var9) do
-		validateName(p19, v)
+	for _, value in ipairs(ValuesResult) do
+		Callback5(p15, value)
 		
-		if not isInputType(v.type) then
-			p19:reportError(("The type of %s.%s must be Input Type "):format(p20.name, v.name) .. ("but got: %s."):format(inspect(v.type)), if v.astNode ~= nil then nil else v.astNode.type)
+		if not IsInputTypeFunction(value.type) then
+			p15:reportError(("The type of %s.%s must be Input Type "):format(p16.name, value.name) .. ("but got: %s."):format(InspectFunction(value.type)), if value.astNode == nil then nil else value.astNode.type)
 		end
-		if isRequiredInputField(v) and isNotNillish(v.deprecationReason) then
-			p19:reportError(("Required input field %s.%s cannot be deprecated."):format(p20.name, v.name), {
-				getDeprecatedDirectiveNode(v.astNode),
-				if v.astNode ~= nil then nil else v.astNode.type
+		if IsRequiredInputFieldFunction(value) and IsNotNillishFunction(value.deprecationReason) then
+			p15:reportError(("Required input field %s.%s cannot be deprecated."):format(p16.name, value.name), {
+				Callback6(value.astNode),
+				if value.astNode == nil then nil else value.astNode.type
 			})
 		end
 	end
 end
 
-function createInputObjectCircularRefsValidator(p21)
-	-- upvalues: isNonNullType (ref), isInputObjectType (ref), array (ref)
+function createInputObjectCircularRefsValidator(p17) --[[ Line: 688 ]]
+	-- upvalues: IsNonNullTypeFunction (copy), IsInputObjectTypeFunction (copy), Array (copy)
 	local t = {}
-	local t_1 = {}
-	local t_2 = {}
+	local List = {}
+	local t1 = {}
 	
-	local function detectCycleRecursive(p22)
-		-- upvalues: t (ref), t_2 (ref), t_1 (ref), isNonNullType (copy), isInputObjectType (copy), detectCycleRecursive (ref), array (copy), p21 (ref)
-		if t[tostring(p22.name)] then return end
-		t[tostring(p22.name)] = true
-		t_2[tostring(p22.name)] = #t_1 + 1
+	local function detectCycleRecursive(OfType) --[[ Line: 705 ]]
+		-- upvalues: t (copy), t1 (copy), List (copy), IsNonNullTypeFunction (upval), IsInputObjectTypeFunction (upval), detectCycleRecursive (copy), Array (upval), p17 (copy)
+		if t[tostring(OfType.name)] then return end
+		t[tostring(OfType.name)] = true
+		t1[tostring(OfType.name)] = #List + 1
 		
-		for i, v in ipairs(p22:getFields():values()) do
-			if isNonNullType(v.type) and isInputObjectType(v.type.ofType) then
-				local ofType = v.type.ofType
-				local name = t_2[tostring(ofType.name)]
-				table.insert(t_1, v)
+		for _, value in ipairs((OfType:getFields():values())) do
+			if IsNonNullTypeFunction(value.type) and IsInputObjectTypeFunction(value.type.ofType) then
+				local OfType1 = value.type.ofType
+				local Entry = t1[tostring(OfType1.name)]
+				table.insert(List, value)
 				
-				if name == nil then
-					detectCycleRecursive(ofType)
+				if Entry == nil then
+					detectCycleRecursive(OfType1)
 				else
-					local _ = nil
-					local var10 = array.slice(t_1, name)
-					p21:reportError(("Cannot reference Input Object \"%s\" within itself through a series of non-null fields: \"%s\"."):format(ofType.name, array.join(array.map(var10, function(p23)
-						return p23.name
-					end), ".")), array.map(var10, function(p23)
-						return p23.astNode
+					local SliceResult = Array.slice(List, Entry)
+					p17:reportError(("Cannot reference Input Object \"%s\" within itself through a series of non-null fields: \"%s\"."):format(OfType1.name, (Array.join(Array.map(SliceResult, function(p18) --[[ Line: 733 ]]
+						return p18.name
+					end), "."))), Array.map(SliceResult, function(p18) --[[ Line: 743 ]]
+						return p18.astNode
 					end))
 				end
-				table.remove(t_1)
+				table.remove(List)
 			end
 		end
-		t_2[tostring(p22.name)] = nil
+		t1[tostring(OfType.name)] = nil
 	end
 	
 	return detectCycleRecursive
 end
 
-getAllNodes = function(p22)
-	-- upvalues: array (ref)
-	local astNode = p22.astNode
-	local extensionASTNodes = p22.extensionASTNodes
+Callback10 = function(p18) --[[ Line: 767 | Named "getAllNodes" ]]
+	-- upvalues: Array (copy)
+	local AstNode = p18.astNode
+	local ExtensionASTNodes = p18.extensionASTNodes
 	
-	return if astNode then if extensionASTNodes then array.concat({ astNode }, extensionASTNodes) else { astNode } else extensionASTNodes or {}
+	return if AstNode then if ExtensionASTNodes then Array.concat({ AstNode }, ExtensionASTNodes) else { AstNode } elseif ExtensionASTNodes then ExtensionASTNodes else {}
 end
 
-getAllSubNodes = function(p22, p23)
-	-- upvalues: getAllNodes (write), array (ref)
-	local t = {}
+Callback4 = function(p18, Callback) --[[ Line: 777 | Named "getAllSubNodes" ]]
+	-- upvalues: Callback10 (ref), Array (copy)
+	local ConcatResult = {}
 	
-	for i, v in ipairs(getAllNodes(p22)) do
-		local var10 = p23(v)
-		t = array.concat(t, var10 or {})
+	for _, value in ipairs(Callback10(p18)) do
+		local CallbackResult = Callback(value)
+		ConcatResult = Array.concat(ConcatResult, if CallbackResult then CallbackResult else {})
 	end
-	return t
+	return ConcatResult
 end
 
-getAllImplementsInterfaceNodes = function(p24, p25)
-	-- upvalues: array (ref), getAllSubNodes (write)
-	return array.filter(getAllSubNodes(p24, function(p26)
-		return p26.interfaces
-	end), function(p26)
-		-- upvalues: p25 (ref)
-		return p26.name.value == p25.name
+Callback11 = function(p19, p20) --[[ Line: 793 | Named "getAllImplementsInterfaceNodes" ]]
+	-- upvalues: Array (copy), Callback4 (ref)
+	return Array.filter(Callback4(p19, function(p21) --[[ Line: 798 ]]
+		return p21.interfaces
+	end), function(p21): boolean --[[ Line: 801 ]]
+		-- upvalues: p20 (copy)
+		return p21.name.value == p20.name
 	end)
 end
 
-getUnionMemberTypeNodes = function(p24, p25)
-	-- upvalues: array (ref), getAllSubNodes (write)
-	return array.filter(getAllSubNodes(p24, function(p26)
-		return p26.types
-	end), function(p26)
-		-- upvalues: p25 (ref)
-		return p26.name.value == p25
+Callback14 = function(p19, Name) --[[ Line: 807 | Named "getUnionMemberTypeNodes" ]]
+	-- upvalues: Array (copy), Callback4 (ref)
+	return Array.filter(Callback4(p19, function(p20) --[[ Line: 809 ]]
+		return p20.types
+	end), function(p20): boolean --[[ Line: 812 ]]
+		-- upvalues: Name (copy)
+		return p20.name.value == Name
 	end)
 end
 
-getDeprecatedDirectiveNode = function(p24)
-	-- upvalues: array (ref), graphQLDeprecatedDirective (ref)
-	if p24 == nil or p24.directives == nil then
-		return
-	end
-	return array.find(p24.directives, function(p25)
-		-- upvalues: graphQLDeprecatedDirective (copy)
-		return p25.name.value == graphQLDeprecatedDirective.name
+Callback6 = function(AstNode) --[[ Line: 818 | Named "getDeprecatedDirectiveNode" ]]
+	-- upvalues: Array (copy), GraphQLDeprecatedDirective (copy)
+	if AstNode == nil or AstNode.directives == nil then return end
+	return Array.find(AstNode.directives, function(p19): boolean --[[ Line: 823 ]]
+		-- upvalues: GraphQLDeprecatedDirective (upval)
+		return p19.name.value == GraphQLDeprecatedDirective.name
 	end)
 end
 
-return { validateSchema = var1, assertValidSchema = var2 }
+return {
+	validateSchema = ValidateSchema,
+	assertValidSchema = AssertValidSchema
+}

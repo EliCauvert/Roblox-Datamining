@@ -1,25 +1,24 @@
-﻿local parent = script.Parent
-local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local preferencesContextModule = require(parent.PreferencesContext)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local t = {
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local PreferencesContextModule = require(script.Parent.PreferencesContext)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local config = {
 	preferredTransparency = 1,
 	reducedMotion = false,
 	scale = 1,
 	preferredTextSize = Enum.PreferredTextSize.Medium
 }
 
-return function(p1)
-	-- upvalues: reactModule (ref), withDefaultsModule (ref), t (ref), preferencesContextModule (ref)
-	return reactModule.createElement(preferencesContextModule.Provider, {
-		value = reactModule.useMemo(function()
-			-- upvalues: withDefaultsModule (copy), p1 (ref), t (copy)
-			return withDefaultsModule({
+return function(p1) --[[ Line: 30 | Named "PreferencesProvider" ]]
+	-- upvalues: ReactModule (copy), WithDefaultsModule (copy), config (copy), PreferencesContextModule (copy)
+	return ReactModule.createElement(PreferencesContextModule.Provider, {
+		value = ReactModule.useMemo(function() --[[ Line: 32 ]]
+			-- upvalues: WithDefaultsModule (upval), p1 (copy), config (upval)
+			return WithDefaultsModule({
 				preferredTextSize = p1.preferredTextSize,
 				preferredTransparency = p1.preferredTransparency,
 				reducedMotion = p1.reducedMotion
-			}, t)
+			}, config)
 		end, {
 			p1.preferredTextSize,
 			p1.preferredTransparency,

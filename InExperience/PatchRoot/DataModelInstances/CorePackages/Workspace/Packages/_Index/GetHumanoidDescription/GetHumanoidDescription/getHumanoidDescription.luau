@@ -1,62 +1,55 @@
-﻿local playersService = game:GetService("Players")
-local getHumanoidDescriptionUpdatesV2B = game:DefineFastFlag("GetHumanoidDescriptionUpdatesV2B", false)
-local getFFlagGetHumanoidDescriptionUpdatesV2E = require(script:FindFirstAncestor("GetHumanoidDescription").Parent.SharedFlags).GetFFlagGetHumanoidDescriptionUpdatesV2E
-local _ = {
-	ERR_RA_CHARACTER = "ERR_RA_CHARACTER",
-	ERR_RA_HUMPLAYER = "ERR_RA_HUMPLAYER",
-	ERR_RA_HUMOBJ = "ERR_RA_HUMOBJ",
-	ERR_RA_HUMDESC = "ERR_RA_HUMDESC",
-	OK = "OK"
-}
+﻿local Players = game:GetService("Players")
+local GetHumanoidDescriptionUpdatesV2B = game:DefineFastFlag("GetHumanoidDescriptionUpdatesV2B", false)
+local GetFFlagGetHumanoidDescriptionUpdatesV2EFunction = require(script:FindFirstAncestor("GetHumanoidDescription").Parent.SharedFlags).GetFFlagGetHumanoidDescriptionUpdatesV2E
 
-local var1 = function(p1)
-	local t = {}
+local function v2(List) --[[ Line: 65 ]]
+	local List1 = {}
 	
-	for i, v in ipairs(p1) do
-		table.insert(t, {
-			AccessoryType = v.AccessoryType.Value,
-			AssetId = v.AssetId,
-			IsLayered = v.IsLayered,
-			Order = v.Order,
-			Puffiness = v.Puffiness
+	for _, value in ipairs(List) do
+		table.insert(List1, {
+			AccessoryType = value.AccessoryType.Value,
+			AssetId = value.AssetId,
+			IsLayered = value.IsLayered,
+			Order = value.Order,
+			Puffiness = value.Puffiness
 		})
 	end
-	return t
+	return List1
 end
 
-local var2 = function(p2, p3)
-	local t = {}
+local function v3(p1, List) --[[ Line: 79 ]]
+	local List1 = {}
 	
-	for i, v in ipairs(p3) do
-		local name = p2[v.Name]
+	for _, value in ipairs(List) do
+		local v1 = p1[value.Name]
 		
-		if name then
-			for i_1 = 1, math.min(8, #name) do
-				table.insert(t, name[i_1])
+		if v1 then
+			for i = 1, math.min(8, #v1) do
+				table.insert(List1, v1[i])
 			end
 		end
 	end
-	return t
+	return List1
 end
 
-local var3 = function(p4)
-	local t = {}
+local function v4(p2) --[[ Line: 93 ]]
+	local List = {}
 	
-	for i, v in p4:GetPlayingAnimationTracks() do
-		local match = string.match(v.Animation.AnimationId, "(%d+)$")
+	for _, playingAnimationTrack in p2:GetPlayingAnimationTracks() do
+		local Match: string? = string.match(playingAnimationTrack.Animation.AnimationId, "(%d+)$")
 		
-		if match then
-			table.insert(t, match)
+		if Match then
+			table.insert(List, Match)
 		end
-		if #t >= 8 then break end
+		if #List >= 8 then break end
 	end
-	return t
+	return List
 end
 
-return function(p5)
-	-- upvalues: playersService (ref), var1 (ref), getHumanoidDescriptionUpdatesV2B (ref), var2 (ref), getFFlagGetHumanoidDescriptionUpdatesV2E (ref), var3 (ref)
-	local var4 = playersService:GetPlayerByUserId(p5)
-	local t = {
+return function(UserId) --[[ Line: 108 ]]
+	-- upvalues: Players (copy), v2 (copy), GetHumanoidDescriptionUpdatesV2B (copy), v3 (copy), GetFFlagGetHumanoidDescriptionUpdatesV2EFunction (copy), v4 (copy)
+	local Player = Players:GetPlayerByUserId(UserId)
+	local config = {
 		BackAccessory = "",
 		BodyTypeScale = 0,
 		ClimbAnimation = 0,
@@ -97,93 +90,94 @@ return function(p5)
 		WidthScale = 0
 	}
 	
-	if not var4 then
-		return t, "ERR_RA_HUMPLAYER"
+	if not Player then
+		return config, "ERR_RA_HUMPLAYER"
 	end
-	local character = var4.Character
+	local Character = Player.Character
 	
-	if not character then
-		return t, "ERR_RA_CHARACTER"
+	if not Character then
+		return config, "ERR_RA_CHARACTER"
 	end
-	local humanoid = character:WaitForChild("Humanoid", 1)
+	local Humanoid = Character:WaitForChild("Humanoid", 1)
 	
-	if not humanoid then
-		return t, "ERR_RA_HUMOBJ"
+	if not Humanoid then
+		return config, "ERR_RA_HUMOBJ"
 	end
-	local _ = nil
-	local _ = nil
-	local ok, status = pcall(function()
-		-- upvalues: humanoid (ref)
-		return humanoid:GetAppliedDescription()
+	local Result2 = nil
+	local Success2
+	Success2, Result2 = pcall(function() --[[ Line: 167 ]]
+		-- upvalues: Humanoid (copy)
+		return (Humanoid:GetAppliedDescription())
 	end)
-	local var5 = status
 	
-	if not ok then
-		return t, "ERR_RA_HUMOBJ"
-	elseif not var5 then
-		return t, "ERR_RA_HUMDESC"
+	if not Success2 then
+		return config, "ERR_RA_HUMOBJ"
 	end
-	local var6 = 0
+	if not Result2 then
+		return config, "ERR_RA_HUMDESC"
+	end
+	local Count = 0
 	
-	local var7 = function(p6)
-		-- upvalues: var5 (write), t (ref)
-		if typeof(var5[p6]) == "Color3" then
-			t[p6] = { var5[p6].R, var5[p6].G, var5[p6].B }
+	local function v22(Key) --[[ Line: 180 ]]
+		-- upvalues: Result2 (ref), config (copy)
+		if typeof(Result2[Key]) == "Color3" then
+			config[Key] = { Result2[Key].R, Result2[Key].G, Result2[Key].B }
 			
 			return
-		end
-		t[p6] = var5[p6]
-	end
-	
-	for i, v in pairs(t) do
-		if not pcall(var7, i) then
-			var6 += 1
-		end
-	end
-	local ok_1, status_1 = pcall(var5.GetAccessories, var5, false)
-	
-	if ok_1 then
-		local ok_2, status_2 = pcall(var1, status_1)
-		
-		if ok_2 then
-			t.AccessoryBlob = status_2
 		else
-			var6 += 1
+			config[Key] = Result2[Key]
+		end
+	end
+	
+	for i, _ in pairs(config) do
+		if not pcall(v22, i) then
+			Count += 1
+		end
+	end
+	local Success3, Result3 = pcall(Result2.GetAccessories, Result2, false)
+	
+	if Success3 then
+		local Success4, Result4 = pcall(v2, Result3)
+		
+		if Success4 then
+			config.AccessoryBlob = Result4
+		else
+			Count += 1
 		end
 	else
-		var6 += 1
+		Count += 1
 	end
-	if getHumanoidDescriptionUpdatesV2B then
-		local ok_2, status_2 = pcall(var5.GetEmotes, var5)
+	if GetHumanoidDescriptionUpdatesV2B then
+		local Success5, Result5 = pcall(Result2.GetEmotes, Result2)
 		
-		if ok_2 then
-			t.Emotes = status_2
+		if Success5 then
+			config.Emotes = Result5
 		else
-			var6 += 1
+			Count += 1
 		end
 	end
-	local ok_2, status_2 = pcall(var5.GetEquippedEmotes, var5)
-	local ok_3, status_3 = pcall(var5.GetEmotes, var5)
+	local Success6, Result6 = pcall(Result2.GetEquippedEmotes, Result2)
+	local Success7, Result7 = pcall(Result2.GetEmotes, Result2)
 	
-	if ok_2 and ok_3 then
-		local ok_4, status_4 = pcall(var2, status_3, status_2)
+	if Success6 and Success7 then
+		local Success1, Result1 = pcall(v3, Result7, Result6)
 		
-		if ok_4 then
-			t.Emotes = status_4
+		if Success1 then
+			config.Emotes = Result1
 			
-			if getFFlagGetHumanoidDescriptionUpdatesV2E() then
-				local ok_5, status_5 = pcall(var3, humanoid)
+			if GetFFlagGetHumanoidDescriptionUpdatesV2EFunction() then
+				local Success, Result = pcall(v4, Humanoid)
 				
-				if ok_5 then
-					t.CurrentlyPlayingAnimationIds = status_5
+				if Success then
+					config.CurrentlyPlayingAnimationIds = Result
 				else
-					var6 += 1
+					Count += 1
 				end
 			end
 		end
 	else
-		var6 += 1
+		Count += 1
 	end
-	t.FieldErrorCount = var6
-	return t, "OK"
+	config.FieldErrorCount = Count
+	return config, "OK"
 end

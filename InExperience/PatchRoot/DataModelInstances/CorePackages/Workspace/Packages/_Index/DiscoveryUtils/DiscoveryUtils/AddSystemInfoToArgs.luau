@@ -1,26 +1,26 @@
-﻿local parent = script:FindFirstAncestor("DiscoveryUtils").Parent
-local systemInfoProtocol = require(parent.SystemInfoProtocol).SystemInfoProtocol
-local argCheckModule = require(parent.ArgCheck)
-local t = {
-	[systemInfoProtocol.InfoNames.MANUFACTURER] = "deviceManufacturer",
-	[systemInfoProtocol.InfoNames.BASE_OS] = "operatingSystemVersion",
-	[systemInfoProtocol.InfoNames.IS_64BIT] = "if64Bit",
-	[systemInfoProtocol.InfoNames.CPU_CORE_COUNT] = "cpuCores"
+﻿local Parent = script:FindFirstAncestor("DiscoveryUtils").Parent
+local SystemInfoProtocol = require(Parent.SystemInfoProtocol).SystemInfoProtocol
+local ArgCheckModule = require(Parent.ArgCheck)
+local config = {
+	[SystemInfoProtocol.InfoNames.MANUFACTURER] = "deviceManufacturer",
+	[SystemInfoProtocol.InfoNames.BASE_OS] = "operatingSystemVersion",
+	[SystemInfoProtocol.InfoNames.IS_64BIT] = "if64Bit",
+	[SystemInfoProtocol.InfoNames.CPU_CORE_COUNT] = "cpuCores"
 }
 
-return function(p1, p2)
-	-- upvalues: systemInfoProtocol (ref), t (ref), argCheckModule (ref)
-	local var1 = p2 or systemInfoProtocol.ALL_INFO_NAMES
-	local ok, status = pcall(function()
-		-- upvalues: systemInfoProtocol (copy), var1 (ref)
-		return systemInfoProtocol.default:getSystemInfo(var1)
+return function(p1, p2) --[[ Line: 16 ]]
+	-- upvalues: SystemInfoProtocol (copy), config (copy), ArgCheckModule (copy)
+	local ALLINFONAMES = if p2 then p2 else SystemInfoProtocol.ALL_INFO_NAMES
+	local Success, Result = pcall(function() --[[ Line: 19 ]]
+		-- upvalues: SystemInfoProtocol (upval), ALLINFONAMES (copy)
+		return SystemInfoProtocol.default:getSystemInfo(ALLINFONAMES)
 	end)
 	
-	if ok and typeof(status) == "table" then
-		for i, v in pairs(status) do
-			local var2 = t[i] or i
-			argCheckModule.assert(p1[var2] == nil, "Field '" .. tostring(var2) .. "' already exists in argument table!  Will be overwritten.")
-			p1[var2] = v
+	if Success and typeof(Result) == "table" then
+		for i, value in pairs(Result) do
+			local Entry = config[i] or i
+			ArgCheckModule.assert(p1[Entry] == nil, "Field '" .. tostring(Entry) .. "' already exists in argument table!  Will be overwritten.")
+			p1[Entry] = value
 		end
 	end
 end

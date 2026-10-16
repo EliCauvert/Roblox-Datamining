@@ -1,31 +1,31 @@
-﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
-local localizeStrings = require(parent.Localization).localizeStrings
-local closeCentralOverlay = require(parent.CentralOverlay).Thunks.CloseCentralOverlay
-local responsiveModule = require(parent.Responsive)
-local getInputModeStore = responsiveModule.GetInputModeStore
-local openInfoPeekView = require(parent.DiscoveryRouting).OpenInfoPeekView
-local openCloseOnlyInteractiveAlert = require(parent.DiscoveryRouting).OpenCloseOnlyInteractiveAlert
-local sduiResponsiveHelpers = require(parent.SduiCoreSystem).SduiResponsiveHelpers
+﻿local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
+local LocalizeStringsFunction = require(Parent.Localization).localizeStrings
+local CloseCentralOverlayFunction = require(Parent.CentralOverlay).Thunks.CloseCentralOverlay
+local ResponsiveModule = require(Parent.Responsive)
+local GetInputModeStoreFunction = ResponsiveModule.GetInputModeStore
+local OpenInfoPeekViewFunction = require(Parent.DiscoveryRouting).OpenInfoPeekView
+local OpenCloseOnlyInteractiveAlertFunction = require(Parent.DiscoveryRouting).OpenCloseOnlyInteractiveAlert
+local SduiResponsiveHelpers = require(Parent.SduiCoreSystem).SduiResponsiveHelpers
 
-return function(_, _, p1)
-	-- upvalues: localizeStrings (ref), sduiResponsiveHelpers (ref), getInputModeStore (ref), responsiveModule (ref), openInfoPeekView (ref), openCloseOnlyInteractiveAlert (ref), closeCentralOverlay (ref)
-	local dispatch = p1.dependencies.dispatch
-	local var1 = localizeStrings(p1.dependencies.localization, {
+return function(_, _, p1) --[[ Line: 19 ]]
+	-- upvalues: LocalizeStringsFunction (copy), SduiResponsiveHelpers (copy), GetInputModeStoreFunction (copy), ResponsiveModule (copy), OpenInfoPeekViewFunction (copy), OpenCloseOnlyInteractiveAlertFunction (copy), CloseCentralOverlayFunction (copy)
+	local DispatchFunction: (any) -> () = p1.dependencies.dispatch
+	local LocalizeStringsResult = LocalizeStringsFunction(p1.dependencies.localization, {
 		SponsoredDisclosure = "CoreScripts.Ads.Label.SponsoredAdsDisclosureStatic",
 		SponsoredTitle = "CoreScripts.Ads.Label.SponsoredAds"
 	})
-	local var2 = sduiResponsiveHelpers.isPortraitOrientation()
-	local lastInputType = getInputModeStore(false).getLastInputType(false)
-	local sponsoredDisclosure = var1.SponsoredDisclosure
-	local sponsoredTitle = var1.SponsoredTitle
+	local IsPortraitOrientation = SduiResponsiveHelpers.isPortraitOrientation()
+	local SponsoredDisclosure = LocalizeStringsResult.SponsoredDisclosure
+	local SponsoredTitle = LocalizeStringsResult.SponsoredTitle
 	
-	if lastInputType == responsiveModule.Input.Touch and var2 then
-		dispatch(openInfoPeekView(sponsoredTitle, sponsoredDisclosure))
+	if GetInputModeStoreFunction(false).getLastInputType(false) == ResponsiveModule.Input.Touch and IsPortraitOrientation then
+		DispatchFunction(OpenInfoPeekViewFunction(SponsoredTitle, SponsoredDisclosure))
 		
 		return
+	else
+		DispatchFunction(OpenCloseOnlyInteractiveAlertFunction(SponsoredTitle, SponsoredDisclosure, function() --[[ Line: 38 ]]
+			-- upvalues: DispatchFunction (copy), CloseCentralOverlayFunction (upval)
+			return DispatchFunction(CloseCentralOverlayFunction())
+		end))
 	end
-	dispatch(openCloseOnlyInteractiveAlert(sponsoredTitle, sponsoredDisclosure, function()
-		-- upvalues: dispatch (ref), closeCentralOverlay (copy)
-		return dispatch(closeCentralOverlay())
-	end))
 end

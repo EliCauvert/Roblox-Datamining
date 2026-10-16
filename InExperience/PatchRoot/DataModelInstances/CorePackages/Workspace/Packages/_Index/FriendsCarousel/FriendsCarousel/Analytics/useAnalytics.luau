@@ -1,7 +1,7 @@
-﻿local react = require(script.Parent.Parent.dependencies).React
-local friendsCarouselAnalyticsContextModule = require(script.Parent.FriendsCarouselAnalyticsContext)
+﻿local React = require(script.Parent.Parent.dependencies).React
+local FriendsCarouselAnalyticsContextModule = require(script.Parent.FriendsCarouselAnalyticsContext)
 
-return function()
-	-- upvalues: react (ref), friendsCarouselAnalyticsContextModule (ref)
-	return react.useContext(friendsCarouselAnalyticsContextModule)
+return function() --[[ Line: 6 ]]
+	-- upvalues: React (copy), FriendsCarouselAnalyticsContextModule (copy)
+	return React.useContext(FriendsCarouselAnalyticsContextModule)
 end

@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("ReportFocusNavIEMButtons2", false)
+﻿return (game:DefineFastFlag("ReportFocusNavIEMButtons2", false))

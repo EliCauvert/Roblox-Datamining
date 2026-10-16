@@ -1,192 +1,192 @@
-﻿local parent = script.Parent.Parent
-local eventNamesModule = require(script.Parent.EventNames)
-local socialLuaAnalyticsModule = require(parent.Parent.SocialLuaAnalytics)
-local enums = socialLuaAnalyticsModule.Analytics.Enums
-local contexts = enums.Contexts
-local eventTypes = enums.EventTypes
-local btnValuesModule = require(script.Parent.BtnValues)
-local constantsModule = require(parent.Common.Constants)
-local formatFriendStatusModule = require(script.Parent.formatFriendStatus)
-local getUniverseIdFromUserModule = require(script.Parent.getUniverseIdFromUser)
-local formatRecommendationContextType = socialLuaAnalyticsModule.Analytics.Formatters.formatRecommendationContextType
-local formatPresence = socialLuaAnalyticsModule.Analytics.Formatters.formatPresence
-local getFIntShowFriendRecommendationsLimitModule = require(parent.Flags.getFIntShowFriendRecommendationsLimit)
+﻿local Parent = script.Parent.Parent
+local EventNamesModule = require(script.Parent.EventNames)
+local SocialLuaAnalyticsModule = require(Parent.Parent.SocialLuaAnalytics)
+local Enums = SocialLuaAnalyticsModule.Analytics.Enums
+local Contexts = Enums.Contexts
+local EventTypes = Enums.EventTypes
+local BtnValuesModule = require(script.Parent.BtnValues)
+local ConstantsModule = require(Parent.Common.Constants)
+local FormatFriendStatusModule = require(script.Parent.formatFriendStatus)
+local GetUniverseIdFromUserModule = require(script.Parent.getUniverseIdFromUser)
+local FormatRecommendationContextType = SocialLuaAnalyticsModule.Analytics.Formatters.formatRecommendationContextType
+local FormatPresence = SocialLuaAnalyticsModule.Analytics.Formatters.formatPresence
+local GetFIntShowFriendRecommendationsLimitModule = require(Parent.Flags.getFIntShowFriendRecommendationsLimit)
 
-local var1 = function(p1)
+local function AbsolutePosition(p1) --[[ Line: 20 ]]
 	return p1
 end
 
 return {
-	[eventNamesModule.CarouselLoadedWithUsers] = {
-		context = contexts.HomePage,
-		eventType = eventTypes.FriendsCarouselLoaded,
+	[EventNamesModule.CarouselLoadedWithUsers] = {
+		context = Contexts.HomePage,
+		eventType = EventTypes.FriendsCarouselLoaded,
 		additionalInfo = {
-			source = constantsModule.HomepageFriendsCarouselSourceName
+			source = ConstantsModule.HomepageFriendsCarouselSourceName
 		},
 		formatRulesForAdditionalInfo = {
-			friendCount = var1,
-			recommendationCount = var1,
-			recommendationLimit = getFIntShowFriendRecommendationsLimitModule,
-			refreshCount = var1,
-			experimentLayerStatus = var1,
-			fetchedRecommendations = var1,
-			recommendationSessionId = var1
+			friendCount = AbsolutePosition,
+			recommendationCount = AbsolutePosition,
+			recommendationLimit = GetFIntShowFriendRecommendationsLimitModule,
+			refreshCount = AbsolutePosition,
+			experimentLayerStatus = AbsolutePosition,
+			fetchedRecommendations = AbsolutePosition,
+			recommendationSessionId = AbsolutePosition
 		}
 	},
-	[eventNamesModule.UserSeen] = {
-		context = contexts.HomePage,
-		eventType = eventTypes.UserSeen,
+	[EventNamesModule.UserSeen] = {
+		context = Contexts.HomePage,
+		eventType = EventTypes.UserSeen,
 		additionalInfo = {
-			source = constantsModule.HomepageFriendsCarouselSourceName
+			source = ConstantsModule.HomepageFriendsCarouselSourceName
 		},
 		formatRulesForAdditionalInfo = {
-			absolutePosition = var1,
-			recommendationContextType = formatRecommendationContextType,
-			friendStatus = formatFriendStatusModule,
-			isRecommendation = var1,
-			presence = formatPresence,
-			recommendationRank = var1,
-			userId = var1,
-			universeId = getUniverseIdFromUserModule
+			absolutePosition = AbsolutePosition,
+			recommendationContextType = FormatRecommendationContextType,
+			friendStatus = FormatFriendStatusModule,
+			isRecommendation = AbsolutePosition,
+			presence = FormatPresence,
+			recommendationRank = AbsolutePosition,
+			userId = AbsolutePosition,
+			universeId = GetUniverseIdFromUserModule
 		}
 	},
-	[eventNamesModule.UserPressed] = {
-		context = contexts.HomePage,
-		eventType = eventTypes.ButtonClick,
+	[EventNamesModule.UserPressed] = {
+		context = Contexts.HomePage,
+		eventType = EventTypes.ButtonClick,
 		additionalInfo = {
-			btn = btnValuesModule.OpenPeopleList,
-			source = constantsModule.HomepageFriendsCarouselSourceName
+			btn = BtnValuesModule.OpenPeopleList,
+			source = ConstantsModule.HomepageFriendsCarouselSourceName
 		},
 		formatRulesForAdditionalInfo = {
-			absolutePosition = var1,
-			recommendationContextType = formatRecommendationContextType,
-			friendId = var1,
-			friendStatus = formatFriendStatusModule,
-			isRecommendation = var1,
-			recommendationRank = var1,
-			universeId = getUniverseIdFromUserModule,
-			presence = formatPresence
+			absolutePosition = AbsolutePosition,
+			recommendationContextType = FormatRecommendationContextType,
+			friendId = AbsolutePosition,
+			friendStatus = FormatFriendStatusModule,
+			isRecommendation = AbsolutePosition,
+			recommendationRank = AbsolutePosition,
+			universeId = GetUniverseIdFromUserModule,
+			presence = FormatPresence
 		}
 	},
-	[eventNamesModule.RequestFriendship] = {
-		context = contexts.HomePage,
-		eventType = eventTypes.ButtonClick,
+	[EventNamesModule.RequestFriendship] = {
+		context = Contexts.HomePage,
+		eventType = EventTypes.ButtonClick,
 		additionalInfo = {
-			btn = btnValuesModule.RequestFriendship,
-			source = constantsModule.HomepageFriendsCarouselSourceName
+			btn = BtnValuesModule.RequestFriendship,
+			source = ConstantsModule.HomepageFriendsCarouselSourceName
 		},
 		formatRulesForAdditionalInfo = {
-			absolutePosition = var1,
-			recommendationContextType = formatRecommendationContextType,
-			recommendationRank = var1,
-			requestedId = var1
+			absolutePosition = AbsolutePosition,
+			recommendationContextType = FormatRecommendationContextType,
+			recommendationRank = AbsolutePosition,
+			requestedId = AbsolutePosition
 		}
 	},
-	[eventNamesModule.RevokeFriendRequest] = {
-		context = contexts.HomePage,
-		eventType = eventTypes.ButtonClick,
+	[EventNamesModule.RevokeFriendRequest] = {
+		context = Contexts.HomePage,
+		eventType = EventTypes.ButtonClick,
 		additionalInfo = {
-			btn = btnValuesModule.RevokeFriendRequest,
-			source = constantsModule.HomepageFriendsCarouselSourceName
+			btn = BtnValuesModule.RevokeFriendRequest,
+			source = ConstantsModule.HomepageFriendsCarouselSourceName
 		},
 		formatRulesForAdditionalInfo = {
-			absolutePosition = var1,
-			recommendationContextType = formatRecommendationContextType,
-			recommendationRank = var1,
-			requestedId = var1
+			absolutePosition = AbsolutePosition,
+			recommendationContextType = FormatRecommendationContextType,
+			recommendationRank = AbsolutePosition,
+			requestedId = AbsolutePosition
 		}
 	},
-	[eventNamesModule.ViewAllFriends] = {
-		context = contexts.HomePage,
-		eventType = eventTypes.ButtonClick,
+	[EventNamesModule.ViewAllFriends] = {
+		context = Contexts.HomePage,
+		eventType = EventTypes.ButtonClick,
 		additionalInfo = {
-			btn = btnValuesModule.FriendsLanding,
-			source = constantsModule.HomepageFriendsCarouselSourceName
+			btn = BtnValuesModule.FriendsLanding,
+			source = ConstantsModule.HomepageFriendsCarouselSourceName
 		},
 		formatRulesForAdditionalInfo = {
-			friendCount = var1,
-			recommendationLimit = getFIntShowFriendRecommendationsLimitModule,
-			recommendationCount = var1
+			friendCount = AbsolutePosition,
+			recommendationLimit = GetFIntShowFriendRecommendationsLimitModule,
+			recommendationCount = AbsolutePosition
 		}
 	},
-	[eventNamesModule.ViewAddFriends] = {
-		context = contexts.AddFriends,
-		eventType = eventTypes.ButtonClick,
+	[EventNamesModule.ViewAddFriends] = {
+		context = Contexts.AddFriends,
+		eventType = EventTypes.ButtonClick,
 		additionalInfo = {
 			absolutePosition = 1,
-			btn = btnValuesModule.AddFriendsButton,
-			source = constantsModule.HomepageFriendsCarouselSourceName
+			btn = BtnValuesModule.AddFriendsButton,
+			source = ConstantsModule.HomepageFriendsCarouselSourceName
 		},
 		formatRulesForAdditionalInfo = {
-			friendCount = var1,
-			recommendationLimit = getFIntShowFriendRecommendationsLimitModule,
-			recommendationCount = var1,
-			requestCount = var1,
-			showContactImporterModal = var1
+			friendCount = AbsolutePosition,
+			recommendationLimit = GetFIntShowFriendRecommendationsLimitModule,
+			recommendationCount = AbsolutePosition,
+			requestCount = AbsolutePosition,
+			showContactImporterModal = AbsolutePosition
 		}
 	},
-	[eventNamesModule.CarouselLoadingTime] = {
-		context = contexts.HomePage,
-		eventType = eventTypes.CarouselLoadingTime,
+	[EventNamesModule.CarouselLoadingTime] = {
+		context = Contexts.HomePage,
+		eventType = EventTypes.CarouselLoadingTime,
 		additionalInfo = {
-			source = constantsModule.HomepageFriendsCarouselSourceName
+			source = ConstantsModule.HomepageFriendsCarouselSourceName
 		},
 		formatRulesForAdditionalInfo = {
-			carouselFetchingStatus = var1,
-			friendsFetchingStatus = var1,
-			recommendationFetchingStatus = var1,
-			loadingTime = var1,
-			reachedThreshold = var1,
-			loadingThreshold = var1,
-			experimentLayerStatus = var1,
-			isLegacyCarousel = var1
+			carouselFetchingStatus = AbsolutePosition,
+			friendsFetchingStatus = AbsolutePosition,
+			recommendationFetchingStatus = AbsolutePosition,
+			loadingTime = AbsolutePosition,
+			reachedThreshold = AbsolutePosition,
+			loadingThreshold = AbsolutePosition,
+			experimentLayerStatus = AbsolutePosition,
+			isLegacyCarousel = AbsolutePosition
 		}
 	},
-	[eventNamesModule.ContactImporterOnAddFriends] = {
-		context = contexts.HomePage,
-		eventType = eventTypes.ContactImporterOnAddFriends,
+	[EventNamesModule.ContactImporterOnAddFriends] = {
+		context = Contexts.HomePage,
+		eventType = EventTypes.ContactImporterOnAddFriends,
 		additionalInfo = { isLegacyAddFriends = false }
 	},
-	[eventNamesModule.PaginatedFriendsCarouselLoadingTime] = {
-		context = contexts.HomePage,
-		eventType = eventTypes.LoadingTime,
+	[EventNamesModule.PaginatedFriendsCarouselLoadingTime] = {
+		context = Contexts.HomePage,
+		eventType = EventTypes.LoadingTime,
 		formatRulesForAdditionalInfo = {
-			status = var1,
-			loadingTime = var1,
-			loadingThreshold = var1,
-			nextPage = var1,
-			fetch = var1
+			status = AbsolutePosition,
+			loadingTime = AbsolutePosition,
+			loadingThreshold = AbsolutePosition,
+			nextPage = AbsolutePosition,
+			fetch = AbsolutePosition
 		},
 		additionalInfo = {
-			source = constantsModule.HomepageFriendsCarouselSourceName
+			source = ConstantsModule.HomepageFriendsCarouselSourceName
 		}
 	},
-	[eventNamesModule.FriendsEndpointLoadingTime] = {
-		context = contexts.HomePage,
-		eventType = eventTypes.LoadingTime,
+	[EventNamesModule.FriendsEndpointLoadingTime] = {
+		context = Contexts.HomePage,
+		eventType = EventTypes.LoadingTime,
 		formatRulesForAdditionalInfo = {
-			status = var1,
-			loadingTime = var1,
-			loadingThreshold = var1,
-			nextPage = var1,
-			fetch = var1
+			status = AbsolutePosition,
+			loadingTime = AbsolutePosition,
+			loadingThreshold = AbsolutePosition,
+			nextPage = AbsolutePosition,
+			fetch = AbsolutePosition
 		},
 		additionalInfo = {
-			source = constantsModule.HomepageFriendsCarouselSourceName
+			source = ConstantsModule.HomepageFriendsCarouselSourceName
 		}
 	},
-	[eventNamesModule.FriendsCarouselUILoadingTime] = {
-		context = contexts.HomePage,
-		eventType = eventTypes.LoadingTime,
+	[EventNamesModule.FriendsCarouselUILoadingTime] = {
+		context = Contexts.HomePage,
+		eventType = EventTypes.LoadingTime,
 		formatRulesForAdditionalInfo = {
-			status = var1,
-			fetch = var1,
-			loadingTime = var1,
-			loadingThreshold = var1,
-			nextPage = var1
+			status = AbsolutePosition,
+			fetch = AbsolutePosition,
+			loadingTime = AbsolutePosition,
+			loadingThreshold = AbsolutePosition,
+			nextPage = AbsolutePosition
 		},
 		additionalInfo = {
-			source = constantsModule.HomepageFriendsCarouselSourceName
+			source = ConstantsModule.HomepageFriendsCarouselSourceName
 		}
 	}
 }

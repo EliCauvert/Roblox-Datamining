@@ -1,8 +1,8 @@
-﻿local reactModule = require(script:FindFirstAncestor("AppChat").Parent.React)
-local momentShareCardViewModule = require(script.Parent.MomentShareCardView)
-local useMomentShareCardViewModelModule = require(script.Parent.useMomentShareCardViewModel)
+﻿local ReactModule = require(script:FindFirstAncestor("AppChat").Parent.React)
+local MomentShareCardViewModule = require(script.Parent.MomentShareCardView)
+local UseMomentShareCardViewModelModule = require(script.Parent.useMomentShareCardViewModel)
 
-return function(p1)
-	-- upvalues: useMomentShareCardViewModelModule (ref), reactModule (ref), momentShareCardViewModule (ref)
-	return reactModule.createElement(momentShareCardViewModule, useMomentShareCardViewModelModule(p1))
+return function(p1) --[[ Line: 9 | Named "MomentShareCardContainer" ]]
+	-- upvalues: UseMomentShareCardViewModelModule (copy), ReactModule (copy), MomentShareCardViewModule (copy)
+	return ReactModule.createElement(MomentShareCardViewModule, (UseMomentShareCardViewModelModule(p1)))
 end

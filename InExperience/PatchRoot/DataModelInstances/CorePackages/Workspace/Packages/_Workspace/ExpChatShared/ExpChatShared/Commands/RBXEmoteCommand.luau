@@ -1,7 +1,7 @@
-﻿local starterPlayerService = game:GetService("StarterPlayer")
+﻿local StarterPlayer = game:GetService("StarterPlayer")
 local _ = require(script.Parent.types)
-local emote = require(script:FindFirstAncestor("ExpChatShared").Logger):new("ExpChat/Command/Emote")
-local t = {
+local Emote = require(script:FindFirstAncestor("ExpChatShared").Logger):new("ExpChat/Command/Emote")
+local config = {
 	wave = true,
 	point = true,
 	dance = true,
@@ -12,87 +12,90 @@ local t = {
 	cheer = true
 }
 
-local function _(p1)
-	local text = nil
-	local humanoid = p1:FindFirstChildOfClass("Humanoid")
+local function _(Object): string --[[ Line: 18 | Named "getDanceBasedOnRigType" ]]
+	local v1: string? = nil
+	local Humanoid = Object:FindFirstChildOfClass("Humanoid")
 	
-	if humanoid then
-		if humanoid.RigType == Enum.HumanoidRigType.R15 then
-			text = "dance"
+	if Humanoid then
+		if Humanoid.RigType == Enum.HumanoidRigType.R15 then
+			v1 = "dance"
 			
-			return text
-		elseif humanoid.RigType == Enum.HumanoidRigType.R6 then
-			text = "dance" .. math.random(1, 3)
+			return v1
+		end
+		if Humanoid.RigType == Enum.HumanoidRigType.R6 then
+			v1 = "dance" .. math.random(1, 3)
 		end
 	end
-	return text
+	return v1
 end
 
-local function handleLegacyEmote(p1, p2)
-	-- upvalues: emote (ref)
-	local ok, status = pcall(function()
-		-- upvalues: p2 (ref), p1 (write), emote (copy)
-		local animate = p2:FindFirstChild("Animate")
+local function handleLegacyEmote(Lowered, Object) --[[ Line: 33 ]]
+	-- upvalues: Emote (copy)
+	local Success, Result = pcall(function(): boolean --[[ Line: 34 ]]
+		-- upvalues: Object (copy), Lowered (ref), Emote (upval)
+		local Animate = Object:FindFirstChild("Animate")
 		
-		if animate then
-			local playEmote = animate:FindFirstChild("PlayEmote")
+		if Animate then
+			local PlayEmote = Animate:FindFirstChild("PlayEmote")
 			
-			if playEmote and playEmote:IsA("BindableFunction") then
-				if p1 == "dance" then
-					local text = nil
-					local humanoid = p2:FindFirstChildOfClass("Humanoid")
+			if PlayEmote and PlayEmote:IsA("BindableFunction") then
+				if Lowered == "dance" then
+					local v1: string? = nil
+					local Humanoid = Object:FindFirstChildOfClass("Humanoid")
 					
-					if humanoid then
-						if humanoid.RigType == Enum.HumanoidRigType.R15 then
-							text = "dance"
-						elseif humanoid.RigType == Enum.HumanoidRigType.R6 then
-							text = "dance" .. math.random(1, 3)
+					if Humanoid then
+						if Humanoid.RigType == Enum.HumanoidRigType.R15 then
+							v1 = "dance"
+						elseif Humanoid.RigType == Enum.HumanoidRigType.R6 then
+							v1 = "dance" .. math.random(1, 3)
 						end
 					end
-					p1 = text
+					Lowered = v1
 				end
-				playEmote:Invoke(p1)
+				PlayEmote:Invoke(Lowered)
 				
 				return true
 			else
-				emote:debug("PlayEmote BindableFunction does not exist.")
+				Emote:debug("PlayEmote BindableFunction does not exist.")
 			end
 		end
 		return false
 	end)
 	
-	if ok and status then
-		emote:debug("Playing legacy emote successfully")
+	if Success and Result then
+		Emote:debug("Playing legacy emote successfully")
 		
 		return
+	else
+		return {
+			key = "InGame.EmotesMenu.ErrorMessageNotSupported",
+			metadata = "Roblox.Emote.Error.NotSupported"
+		}
 	end
-	return {
-		key = "InGame.EmotesMenu.ErrorMessageNotSupported",
-		metadata = "Roblox.Emote.Error.NotSupported"
-	}
 end
 
-local function getValidEmoteOrResponse(p1, p2)
-	local var1 = tonumber(p2, 10)
+local function getValidEmoteOrResponse(HumanoidDescription, Lowered) --[[ Line: 63 ]]
+	local Number: number? = tonumber(Lowered, 10)
 	
-	if var1 then
-		local equippedEmotes = p1:GetEquippedEmotes()
+	if Number then
+		local EquippedEmotes = HumanoidDescription:GetEquippedEmotes()
 		
-		if equippedEmotes[var1] then
-			return equippedEmotes[var1].Name, nil
-		elseif var1 >= 1 and var1 <= 8 then
+		if EquippedEmotes[Number] then
+			return EquippedEmotes[Number].Name, nil
+		elseif Number >= 1 and Number <= 8 then
 			return nil, {
 				key = "CoreScripts.TextChat.Emote.Error.NotEquipped",
 				metadata = "Roblox.Emote.Error.EmoteNotEquipped"
 			}
+		else
+			return nil, {
+				key = "CoreScripts.TextChat.Emote.Error.DoesNotExist",
+				metadata = "Roblox.Emote.Error.DoesNotExist"
+			}
 		end
-		return nil, {
-			key = "CoreScripts.TextChat.Emote.Error.DoesNotExist",
-			metadata = "Roblox.Emote.Error.DoesNotExist"
-		}
 	else
-		for i, v in pairs(p1:GetEmotes()) do
-			if string.lower(i) == p2 then
+		for i, _ in pairs((HumanoidDescription:GetEmotes())) do
+			if string.lower(i) == Lowered then
 				return i, nil
 			end
 		end
@@ -106,101 +109,104 @@ end
 return {
 	name = script.Name,
 	alias = { "/emote", "/e" },
-	clientRun = function(p3, _, p4)
-		-- upvalues: emote (ref), t (ref), handleLegacyEmote (ref), starterPlayerService (ref), getValidEmoteOrResponse (ref)
-		local substring = nil
+	clientRun = function(p1, _, Text: string) --[[ Line: 105 ]]
+		-- upvalues: Emote (copy), config (copy), handleLegacyEmote (copy), StarterPlayer (copy), getValidEmoteOrResponse (copy)
+		local Text1: string? = nil
 		
-		if string.sub(p4, 1, 3):lower() == "/e " then
-			substring = string.sub(p4, 4)
-		elseif string.sub(p4, 1, 7):lower() == "/emote " then
-			substring = string.sub(p4, 8)
+		if string.sub(Text, 1, 3):lower() == "/e " then
+			Text1 = string.sub(Text, 4)
+		elseif string.sub(Text, 1, 7):lower() == "/emote " then
+			Text1 = string.sub(Text, 8)
 		end
-		if not substring then
-			emote:debug("No emote string given")
+		if not Text1 then
+			Emote:debug("No emote string given")
 			
 			return {
 				key = "CoreScripts.TextChat.Emote.Error.DoesNotExist",
 				metadata = "Roblox.Emote.Error.DoesNotExist"
 			}
 		end
-		local lowerText = string.lower(substring)
-		local localCharacter = p3:getState().LocalCharacter
+		local Lowered = string.lower(Text1)
+		local LocalCharacter = p1:getState().LocalCharacter
 		
-		if t[lowerText] then
-			emote:trace("Legacy emote found")
+		if config[Lowered] then
+			Emote:trace("Legacy emote found")
 			
-			return handleLegacyEmote(lowerText, localCharacter)
-		elseif not starterPlayerService.UserEmotesEnabled then
-			emote:debug("Experience does not have emotes enabled")
+			return handleLegacyEmote(Lowered, LocalCharacter)
+		elseif not StarterPlayer.UserEmotesEnabled then
+			Emote:debug("Experience does not have emotes enabled")
 			
 			return {
 				key = "CoreScripts.TextChat.Emote.Error.NotEnabled",
 				metadata = "Roblox.Emote.Error.UserEmotesNotEnabled"
 			}
-		elseif not localCharacter then
-			emote:debug("No character loaded")
+		elseif not LocalCharacter then
+			Emote:debug("No character loaded")
 			
 			return {
 				key = "InGame.EmotesMenu.ErrorMessageTemporarilyUnavailable",
 				metadata = "Roblox.Emote.Error.TemporarilyUnavailable"
 			}
-		elseif not localCharacter:FindFirstChild("Animate") then
-			emote:debug("Animate script missing")
+		elseif not LocalCharacter:FindFirstChild("Animate") then
+			Emote:debug("Animate script missing")
 			
 			return {
 				key = "InGame.EmotesMenu.ErrorMessageNotSupported",
 				metadata = "Roblox.Emote.Error.NotSupported"
 			}
-		end
-		local humanoid = localCharacter:FindFirstChildOfClass("Humanoid")
-		
-		if not humanoid then
-			emote:debug("Humanoid missing")
+		else
+			local Humanoid = LocalCharacter:FindFirstChildOfClass("Humanoid")
 			
-			return {
-				key = "InGame.EmotesMenu.ErrorMessageTemporarilyUnavailable",
-				metadata = "Roblox.Emote.Error.TemporarilyUnavailable"
-			}
-		elseif humanoid.RigType ~= Enum.HumanoidRigType.R15 then
-			emote:debug("Humanoid.RigType is not R15")
-			
-			return {
-				key = "InGame.EmotesMenu.ErrorMessageSwitchToR15",
-				metadata = "Roblox.Emote.Error.SwitchToR15"
-			}
+			if not Humanoid then
+				Emote:debug("Humanoid missing")
+				
+				return {
+					key = "InGame.EmotesMenu.ErrorMessageTemporarilyUnavailable",
+					metadata = "Roblox.Emote.Error.TemporarilyUnavailable"
+				}
+			elseif Humanoid.RigType ~= Enum.HumanoidRigType.R15 then
+				Emote:debug("Humanoid.RigType is not R15")
+				
+				return {
+					key = "InGame.EmotesMenu.ErrorMessageSwitchToR15",
+					metadata = "Roblox.Emote.Error.SwitchToR15"
+				}
+			else
+				local HumanoidDescription = Humanoid:FindFirstChildOfClass("HumanoidDescription")
+				
+				if not HumanoidDescription then
+					Emote:debug("HumanoidDescription missing")
+					
+					return {
+						key = "InGame.EmotesMenu.ErrorMessageNotSupported",
+						metadata = "Roblox.Emote.Error.NotSupported"
+					}
+				end
+				local ValidEmoteOrResponse, ValidEmoteOrResponse2 = getValidEmoteOrResponse(HumanoidDescription, Lowered)
+				
+				if not ValidEmoteOrResponse then
+					Emote:debug("Could not find a valid emote within HumanoidDescription")
+					
+					return ValidEmoteOrResponse2
+				end
+				local Success, Result = pcall(function() --[[ Line: 192 ]]
+					-- upvalues: Humanoid (copy), ValidEmoteOrResponse (copy)
+					return Humanoid:PlayEmoteAsync(ValidEmoteOrResponse)
+				end)
+				
+				if Success and Result then
+					Emote:debug("Playing emote: {}", (tostring(ValidEmoteOrResponse)))
+					
+					return nil
+				else
+					Emote:debug("Humanoid:PlayEmote encountered an error: {}", Result)
+					
+					return {
+						key = "InGame.EmotesMenu.ErrorMessageAnimationPlaying",
+						metadata = "Roblox.Emote.Error.AnimationPlaying"
+					}
+				end
+			end
 		end
-		local humanoidDescription = humanoid:FindFirstChildOfClass("HumanoidDescription")
-		
-		if not humanoidDescription then
-			emote:debug("HumanoidDescription missing")
-			
-			return {
-				key = "InGame.EmotesMenu.ErrorMessageNotSupported",
-				metadata = "Roblox.Emote.Error.NotSupported"
-			}
-		end
-		local var2, var3 = getValidEmoteOrResponse(humanoidDescription, lowerText)
-		
-		if not var2 then
-			emote:debug("Could not find a valid emote within HumanoidDescription")
-			
-			return var3
-		end
-		local ok, status = pcall(function()
-			-- upvalues: humanoid (ref), var2 (ref)
-			return humanoid:PlayEmoteAsync(var2)
-		end)
-		
-		if ok and status then
-			emote:debug("Playing emote: {}", tostring(var2))
-			
-			return nil
-		end
-		emote:debug("Humanoid:PlayEmote encountered an error: {}", status)
-		
-		return {
-			key = "InGame.EmotesMenu.ErrorMessageAnimationPlaying",
-			metadata = "Roblox.Emote.Error.AnimationPlaying"
-		}
 	end
 }

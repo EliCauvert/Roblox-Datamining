@@ -1,4 +1,5 @@
-﻿local parent = script:FindFirstAncestor("DiscoveryTypes").Parent
+﻿local Parent = script:FindFirstAncestor("DiscoveryTypes").Parent
+local FFlagEnableTopSongsSort = require(Parent.SharedFlags).FFlagEnableTopSongsSort
 
 return {
 	GenreExplorer = "GenreExplorerLabel",
@@ -17,6 +18,6 @@ return {
 	Prompts = "Prompts",
 	UserSearchGrid = "UserSearchGrid",
 	Pills = "Pills",
-	SearchPillCarousel = if require(parent.SharedFlags).FFlagSearchOmniAutocompletePage then "SearchPillCarousel" else nil,
-	SongCarousel = if require(parent.SharedFlags).FFlagEnableTopSongsSort then "SongCarousel" else nil
+	SearchPillCarousel = if require(Parent.SharedFlags).FFlagSearchOmniAutocompletePage then "SearchPillCarousel" else nil,
+	SongCarousel = if FFlagEnableTopSongsSort then "SongCarousel" else nil
 }

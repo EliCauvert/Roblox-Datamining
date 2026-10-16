@@ -1,7 +1,7 @@
-﻿local universalAppGetPolicyModule = require(script.Parent.UniversalAppGetPolicy)
-local appFeaturePoliciesModule = require(script.Parent.AppFeaturePolicies)
+﻿local UniversalAppGetPolicyModule = require(script.Parent.UniversalAppGetPolicy)
+local AppFeaturePoliciesModule = require(script.Parent.AppFeaturePolicies)
 
-return function()
-	-- upvalues: universalAppGetPolicyModule (ref), appFeaturePoliciesModule (ref)
-	return appFeaturePoliciesModule(universalAppGetPolicyModule.read() or {})
+return function() --[[ Line: 8 ]]
+	-- upvalues: UniversalAppGetPolicyModule (copy), AppFeaturePoliciesModule (copy)
+	return AppFeaturePoliciesModule(UniversalAppGetPolicyModule.read() or {})
 end

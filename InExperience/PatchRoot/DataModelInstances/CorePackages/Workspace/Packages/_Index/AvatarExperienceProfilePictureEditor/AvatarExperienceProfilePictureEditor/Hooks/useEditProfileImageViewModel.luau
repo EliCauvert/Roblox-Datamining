@@ -1,250 +1,262 @@
-﻿local avatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
-local parent = avatarExperienceProfilePictureEditor.Parent
-local httpService = game:GetService("HttpService")
-local reactModule = require(parent.React)
-local fFlagEditProfileFramesEnabled = require(parent.SharedFlags).FFlagEditProfileFramesEnabled
-local useLocalUserId = require(parent.RobloxAppHooks).useLocalUserId
-local localizationModule = require(parent.Localization)
-local roactUtilsModule = require(parent.RoactUtils)
-local useProfileFramesModule = require(avatarExperienceProfilePictureEditor.Hooks.useProfileFrames)
-local useUserAvatarConfigurationsModule = require(avatarExperienceProfilePictureEditor.Hooks.useUserAvatarConfigurations)
-local useProfileFramesGatingModule = require(avatarExperienceProfilePictureEditor.Hooks.useProfileFramesGating)
-local useEditProfileImageDraftModule = require(avatarExperienceProfilePictureEditor.Hooks.useEditProfileImageDraft)
-local useEditProfileImageEmotesModule = require(avatarExperienceProfilePictureEditor.Hooks.useEditProfileImageEmotes)
-local useEditProfileImageNavigationModule = require(avatarExperienceProfilePictureEditor.Hooks.useEditProfileImageNavigation)
-local useEditProfileImageSaveModule = require(avatarExperienceProfilePictureEditor.Hooks.useEditProfileImageSave)
-local useFocusOnMountEffect = require(parent.AvatarExperienceCommon).Hooks.useFocusOnMountEffect
-local openProfileFramesSubscriptionUpsellModule = require(avatarExperienceProfilePictureEditor.Utils.openProfileFramesSubscriptionUpsell)
-local editProfileImageHelpersModule = require(avatarExperienceProfilePictureEditor.Utils.editProfileImageHelpers)
-local buildEditProfileImageAssetItemsModule = require(avatarExperienceProfilePictureEditor.Utils.buildEditProfileImageAssetItems)
-local _ = require(avatarExperienceProfilePictureEditor.Components.AssetPicker.AssetPickerTile)
-local editProfileImageAnalyticsModule = require(avatarExperienceProfilePictureEditor.Analytics.EditProfileImageAnalytics)
-local _ = require(avatarExperienceProfilePictureEditor.Common.Enums)
-local constantsModule = require(avatarExperienceProfilePictureEditor.Constants)
-local textKeysModule = require(avatarExperienceProfilePictureEditor.Common.TextKeys)
-local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
-local useLocalization = localizationModule.Hooks.useLocalization
+﻿local AvatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
+local Parent = AvatarExperienceProfilePictureEditor.Parent
+local HttpService = game:GetService("HttpService")
+local ReactModule = require(Parent.React)
+local FFlagEditProfileFramesEnabled = require(Parent.SharedFlags).FFlagEditProfileFramesEnabled
+local UseLocalUserIdFunction = require(Parent.RobloxAppHooks).useLocalUserId
+local UseProfileFramesModule = require(AvatarExperienceProfilePictureEditor.Hooks.useProfileFrames)
+local UseUserAvatarConfigurationsModule = require(AvatarExperienceProfilePictureEditor.Hooks.useUserAvatarConfigurations)
+local UseProfileFramesGatingModule = require(AvatarExperienceProfilePictureEditor.Hooks.useProfileFramesGating)
+local UseEditProfileImageDraftModule = require(AvatarExperienceProfilePictureEditor.Hooks.useEditProfileImageDraft)
+local UseEditProfileImageEmotesModule = require(AvatarExperienceProfilePictureEditor.Hooks.useEditProfileImageEmotes)
+local UseEditProfileImageNavigationModule = require(AvatarExperienceProfilePictureEditor.Hooks.useEditProfileImageNavigation)
+local UseEditProfileImageSaveModule = require(AvatarExperienceProfilePictureEditor.Hooks.useEditProfileImageSave)
+local UseFocusOnMountEffectFunction = require(Parent.AvatarExperienceCommon).Hooks.useFocusOnMountEffect
+local OpenProfileFramesSubscriptionUpsellModule = require(AvatarExperienceProfilePictureEditor.Utils.openProfileFramesSubscriptionUpsell)
+local EditProfileImageHelpersModule = require(AvatarExperienceProfilePictureEditor.Utils.editProfileImageHelpers)
+local BuildEditProfileImageAssetItemsModule = require(AvatarExperienceProfilePictureEditor.Utils.buildEditProfileImageAssetItems)
+local _ = require(AvatarExperienceProfilePictureEditor.Components.AssetPicker.AssetPickerTile)
+local EditProfileImageAnalyticsModule = require(AvatarExperienceProfilePictureEditor.Analytics.EditProfileImageAnalytics)
+local _ = require(AvatarExperienceProfilePictureEditor.Common.Enums)
+local ConstantsModule = require(AvatarExperienceProfilePictureEditor.Constants)
+local TextKeysModule = require(AvatarExperienceProfilePictureEditor.Common.TextKeys)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 
-return function(p1)
-	-- upvalues: useDispatch (ref), useLocalUserId (ref), useUserAvatarConfigurationsModule (ref), useProfileFramesModule (ref), useProfileFramesGatingModule (ref), reactModule (ref), useEditProfileImageDraftModule (ref), useEditProfileImageNavigationModule (ref), useEditProfileImageEmotesModule (ref), httpService (ref), constantsModule (ref), editProfileImageAnalyticsModule (ref), openProfileFramesSubscriptionUpsellModule (ref), useLocalization (ref), textKeysModule (ref), buildEditProfileImageAssetItemsModule (ref), useEditProfileImageSaveModule (ref), fFlagEditProfileFramesEnabled (ref), editProfileImageHelpersModule (ref), useFocusOnMountEffect (ref)
-	local var1 = useDispatch()
-	local var2 = useLocalUserId()
-	local var3, var4, var5 = useUserAvatarConfigurationsModule(var2)
-	local var6 = useProfileFramesModule()
-	local var7 = useProfileFramesGatingModule()
-	local var8 = var7.shouldShowFrames == true
-	local var9 = useEditProfileImageDraftModule({
-		savedCloseupConfig = var3,
-		savedFrameAssetId = var4,
-		isSavedConfigLoading = var5,
-		showFrames = var8,
+return function(p1) --[[ Line: 111 | Named "useEditProfileImageViewModel" ]]
+	-- upvalues: UseDispatchFunction (copy), UseLocalUserIdFunction (copy), UseUserAvatarConfigurationsModule (copy), UseProfileFramesModule (copy), UseProfileFramesGatingModule (copy), ReactModule (copy), UseEditProfileImageDraftModule (copy), UseEditProfileImageNavigationModule (copy), UseEditProfileImageEmotesModule (copy), HttpService (copy), ConstantsModule (copy), EditProfileImageAnalyticsModule (copy), OpenProfileFramesSubscriptionUpsellModule (copy), UseLocalizationFunction (copy), TextKeysModule (copy), BuildEditProfileImageAssetItemsModule (copy), UseEditProfileImageSaveModule (copy), FFlagEditProfileFramesEnabled (copy), EditProfileImageHelpersModule (copy), UseFocusOnMountEffectFunction (copy)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseLocalUserIdResult = UseLocalUserIdFunction()
+	local UseUserAvatarConfigurationsModuleResult, UseUserAvatarConfigurationsModuleResult2, UseUserAvatarConfigurationsModuleResult3 = UseUserAvatarConfigurationsModule(UseLocalUserIdResult)
+	local UseProfileFramesModuleResult = UseProfileFramesModule()
+	local UseProfileFramesGatingModuleResult = UseProfileFramesGatingModule()
+	local IsShouldShowFrames = UseProfileFramesGatingModuleResult.shouldShowFrames == true
+	local UseEditProfileImageDraftModuleResult = UseEditProfileImageDraftModule({
+		savedCloseupConfig = UseUserAvatarConfigurationsModuleResult,
+		savedFrameAssetId = UseUserAvatarConfigurationsModuleResult2,
+		isSavedConfigLoading = UseUserAvatarConfigurationsModuleResult3,
+		showFrames = IsShouldShowFrames,
 		initialFrameAssetId = p1.initialFrameAssetId,
 		initialFrameSelectionRequestId = p1.initialFrameSelectionRequestId,
-		isInitialFrameSelectionLoading = p1.initialFrameAssetId ~= nil and var6.isLoading,
-		isInitialFrameAvailable = reactModule.useMemo(function()
-			-- upvalues: p1 (ref), var6 (ref)
+		isInitialFrameSelectionLoading = p1.initialFrameAssetId ~= nil and UseProfileFramesModuleResult.isLoading,
+		isInitialFrameAvailable = ReactModule.useMemo(function(): boolean --[[ Line: 118 ]]
+			-- upvalues: p1 (copy), UseProfileFramesModuleResult (copy)
 			if p1.initialFrameAssetId == nil then
 				return false
 			end
-			for i, v in var6.frameItems do
-				if v.id == p1.initialFrameAssetId then
+			for _, frameItem in UseProfileFramesModuleResult.frameItems do
+				if frameItem.id == p1.initialFrameAssetId then
 					return true
 				end
 			end
 			return false
-		end, { p1.initialFrameAssetId, var6.frameItems })
+		end, {
+			p1.initialFrameAssetId,
+			UseProfileFramesModuleResult.frameItems
+		})
 	})
-	local var10 = useEditProfileImageNavigationModule({ mode = p1.mode })
-	local var11 = useEditProfileImageEmotesModule({ selectedEmoteId = var9.selectedEmoteId })
-	local var12, var13 = reactModule.useState(false)
-	local canEquipFrame = var7.canEquipFrame or var12
-	local var14 = var7.shouldShowUpsell and not var12
-	local var15 = reactModule.useCallback(function()
-		-- upvalues: var13 (ref), var7 (ref)
-		var13(true)
-		var7.refetchAmpAccess()
-	end, { var7.refetchAmpAccess })
-	local var16 = reactModule.useCallback(function(p2)
-		-- upvalues: httpService (copy), var9 (ref), constantsModule (copy), editProfileImageAnalyticsModule (copy), p1 (ref), openProfileFramesSubscriptionUpsellModule (copy), var1 (ref), var15 (ref)
-		local var17 = httpService:GenerateGUID(false)
-		editProfileImageAnalyticsModule.logSubscribe({
+	local UseEditProfileImageNavigationModuleResult = UseEditProfileImageNavigationModule({ mode = p1.mode })
+	local UseEditProfileImageEmotesModuleResult = UseEditProfileImageEmotesModule({
+		selectedEmoteId = UseEditProfileImageDraftModuleResult.selectedEmoteId
+	})
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local CanEquipFrame = UseProfileFramesGatingModuleResult.canEquipFrame or UseStateResult
+	local NoUseStateResult: boolean = UseProfileFramesGatingModuleResult.shouldShowUpsell and not UseStateResult
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 150 ]]
+		-- upvalues: UseStateResult2 (copy), UseProfileFramesGatingModuleResult (copy)
+		UseStateResult2(true)
+		UseProfileFramesGatingModuleResult.refetchAmpAccess()
+	end, { UseProfileFramesGatingModuleResult.refetchAmpAccess })
+	local UseResult1 = ReactModule.useCallback(function(Source) --[[ Line: 154 ]]
+		-- upvalues: HttpService (upval), UseEditProfileImageDraftModuleResult (copy), ConstantsModule (upval), EditProfileImageAnalyticsModule (upval), p1 (copy), OpenProfileFramesSubscriptionUpsellModule (upval), UseDispatchResult (copy), UseResult (copy)
+		local Guid = HttpService:GenerateGUID(false)
+		EditProfileImageAnalyticsModule.logSubscribe({
 			mode = p1.mode,
-			purchaseFlowUuid = var17,
-			frameAssetId = if not (var9.selectedFrameId == nil or var9.selectedFrameId == constantsModule.ProfileFrameNoneId) then tonumber(var9.selectedFrameId) else nil,
-			source = p2
+			purchaseFlowUuid = Guid,
+			frameAssetId = if UseEditProfileImageDraftModuleResult.selectedFrameId == nil or UseEditProfileImageDraftModuleResult.selectedFrameId == ConstantsModule.ProfileFrameNoneId then nil else tonumber(UseEditProfileImageDraftModuleResult.selectedFrameId),
+			source = Source
 		})
-		openProfileFramesSubscriptionUpsellModule({
-			dispatch = var1,
-			onGranted = var15,
-			purchaseFlowUuid = var17
+		OpenProfileFramesSubscriptionUpsellModule({
+			dispatch = UseDispatchResult,
+			onGranted = UseResult,
+			purchaseFlowUuid = Guid
 		})
-	end, { var1, var9.selectedFrameId, var15, p1.mode })
-	local var17 = reactModule.useMemo(function()
-		-- upvalues: var9 (ref), constantsModule (copy), var6 (ref)
-		if not var9.selectedFrameId or var9.selectedFrameId == constantsModule.ProfileFrameNoneId then
+	end, {
+		UseDispatchResult,
+		UseEditProfileImageDraftModuleResult.selectedFrameId,
+		UseResult,
+		p1.mode
+	})
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 175 ]]
+		-- upvalues: UseEditProfileImageDraftModuleResult (copy), ConstantsModule (upval), UseProfileFramesModuleResult (copy)
+		if not UseEditProfileImageDraftModuleResult.selectedFrameId or UseEditProfileImageDraftModuleResult.selectedFrameId == ConstantsModule.ProfileFrameNoneId then
 			return nil
 		end
-		for i, v in var6.frameItems do
-			if v.id == var9.selectedFrameId then
-				return v.previewImage or v.image
+		for _, frameItem in UseProfileFramesModuleResult.frameItems do
+			if frameItem.id == UseEditProfileImageDraftModuleResult.selectedFrameId then
+				return frameItem.previewImage or frameItem.image
 			end
 		end
 		return nil
-	end, { var9.selectedFrameId, var6.frameItems })
-	local var18 = useLocalization({
-		frames = textKeysModule.Frames,
-		subscribe = textKeysModule.Subscribe,
-		save = textKeysModule.Save
+	end, {
+		UseEditProfileImageDraftModuleResult.selectedFrameId,
+		UseProfileFramesModuleResult.frameItems
 	})
-	local var19 = reactModule.useMemo(function()
-		-- upvalues: buildEditProfileImageAssetItemsModule (copy), var11 (ref), var6 (ref)
-		return buildEditProfileImageAssetItemsModule({
-			ownedEmotes = var11.ownedEmotes,
-			recommendedEmotes = var11.recommendedEmotes,
-			frameItems = var6.frameItems,
-			freeLabel = var11.freeLabel
+	local UseLocalizationResult = UseLocalizationFunction({
+		frames = TextKeysModule.Frames,
+		subscribe = TextKeysModule.Subscribe,
+		save = TextKeysModule.Save
+	})
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 193 ]]
+		-- upvalues: BuildEditProfileImageAssetItemsModule (upval), UseEditProfileImageEmotesModuleResult (copy), UseProfileFramesModuleResult (copy)
+		return BuildEditProfileImageAssetItemsModule({
+			ownedEmotes = UseEditProfileImageEmotesModuleResult.ownedEmotes,
+			recommendedEmotes = UseEditProfileImageEmotesModuleResult.recommendedEmotes,
+			frameItems = UseProfileFramesModuleResult.frameItems,
+			freeLabel = UseEditProfileImageEmotesModuleResult.freeLabel
 		})
 	end, {
-		var11.ownedEmotes,
-		var11.recommendedEmotes,
-		var6.frameItems,
-		var11.freeLabel
+		UseEditProfileImageEmotesModuleResult.ownedEmotes,
+		UseEditProfileImageEmotesModuleResult.recommendedEmotes,
+		UseProfileFramesModuleResult.frameItems,
+		UseEditProfileImageEmotesModuleResult.freeLabel
 	})
-	local var20 = useEditProfileImageSaveModule({
+	local UseEditProfileImageSaveModuleResult = UseEditProfileImageSaveModule({
 		mode = p1.mode,
-		activeView = var10.activeView,
-		titleBackAvailable = var10.titleBackAvailable,
-		selectedEmoteId = var9.selectedEmoteId,
-		savedEmoteAssetId = var3.emoteAssetId,
-		selectedFrameId = var9.selectedFrameId,
-		showFrames = var8,
-		distanceScale = var9.distanceScale,
-		yRotDeg = var9.yRotDeg,
+		activeView = UseEditProfileImageNavigationModuleResult.activeView,
+		titleBackAvailable = UseEditProfileImageNavigationModuleResult.titleBackAvailable,
+		selectedEmoteId = UseEditProfileImageDraftModuleResult.selectedEmoteId,
+		savedEmoteAssetId = UseUserAvatarConfigurationsModuleResult.emoteAssetId,
+		selectedFrameId = UseEditProfileImageDraftModuleResult.selectedFrameId,
+		showFrames = IsShouldShowFrames,
+		distanceScale = UseEditProfileImageDraftModuleResult.distanceScale,
+		yRotDeg = UseEditProfileImageDraftModuleResult.yRotDeg,
 		cutoutFieldOfViewDeg = p1.cutoutFieldOfViewDeg,
-		localUserId = var2,
-		isPlusSubscriber = if var7.ampAccess then var7.ampAccess.granted else false,
-		dispatch = var1,
-		onReturnToCombined = var10.onReturnToCombined,
+		localUserId = UseLocalUserIdResult,
+		isPlusSubscriber = if UseProfileFramesGatingModuleResult.ampAccess then UseProfileFramesGatingModuleResult.ampAccess.granted else false,
+		dispatch = UseDispatchResult,
+		onReturnToCombined = UseEditProfileImageNavigationModuleResult.onReturnToCombined,
 		onClose = p1.onClose,
 		onSaveSuccess = p1.onSaveSuccess
 	})
-	local var21 = reactModule.useCallback(function()
-		-- upvalues: var9 (ref), var20 (ref), p1 (ref)
-		var9.resetFromSavedConfig()
-		var20.resetTransientState()
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 228 ]]
+		-- upvalues: UseEditProfileImageDraftModuleResult (copy), UseEditProfileImageSaveModuleResult (copy), p1 (copy)
+		UseEditProfileImageDraftModuleResult.resetFromSavedConfig()
+		UseEditProfileImageSaveModuleResult.resetTransientState()
 		p1.onClose()
 	end, {
-		var9.resetFromSavedConfig,
-		var20.resetTransientState,
+		UseEditProfileImageDraftModuleResult.resetFromSavedConfig,
+		UseEditProfileImageSaveModuleResult.resetTransientState,
 		p1.onClose
 	})
-	local var22 = reactModule.useCallback(function()
-		-- upvalues: var10 (ref), var21 (ref), fFlagEditProfileFramesEnabled (copy), var11 (ref), var9 (ref), editProfileImageAnalyticsModule (copy), p1 (ref)
-		local var23, var24
-		local _ = nil
-		local _ = nil
-		
-		if var10.isFramesOnlyEntry then
-			var23 = "exit"
-			var24 = var21
-		elseif var10.activeView == "emotes" and not fFlagEditProfileFramesEnabled then
-			if var11.isRecommendedEmoteSelected then
-				var23 = "clear_emote"
-				var24 = var9.clearSelectedEmote
+	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 235 ]]
+		-- upvalues: UseEditProfileImageNavigationModuleResult (copy), UseResult2 (copy), FFlagEditProfileFramesEnabled (upval), UseEditProfileImageEmotesModuleResult (copy), UseEditProfileImageDraftModuleResult (copy), EditProfileImageAnalyticsModule (upval), p1 (copy)
+		local Outcome = nil
+		local ClearSelectedEmoteFunction = nil
+		if UseEditProfileImageNavigationModuleResult.isFramesOnlyEntry then
+			Outcome = "exit"
+			ClearSelectedEmoteFunction = UseResult2
+		elseif UseEditProfileImageNavigationModuleResult.activeView == "emotes" and not FFlagEditProfileFramesEnabled then
+			if UseEditProfileImageEmotesModuleResult.isRecommendedEmoteSelected then
+				Outcome = "clear_emote"
+				ClearSelectedEmoteFunction = UseEditProfileImageDraftModuleResult.clearSelectedEmote
 			else
-				var23 = "exit"
-				var24 = var21
+				Outcome = "exit"
+				ClearSelectedEmoteFunction = UseResult2
 			end
-		elseif var10.titleBackAvailable then
-			var23 = "return_to_combined"
-			var24 = var10.onReturnToCombined
-		elseif var11.isRecommendedEmoteSelected then
-			var23 = "clear_emote"
-			var24 = var9.clearSelectedEmote
+		elseif UseEditProfileImageNavigationModuleResult.titleBackAvailable then
+			Outcome = "return_to_combined"
+			ClearSelectedEmoteFunction = UseEditProfileImageNavigationModuleResult.onReturnToCombined
+		elseif UseEditProfileImageEmotesModuleResult.isRecommendedEmoteSelected then
+			Outcome = "clear_emote"
+			ClearSelectedEmoteFunction = UseEditProfileImageDraftModuleResult.clearSelectedEmote
 		else
-			var23 = "exit"
-			var24 = var21
+			Outcome = "exit"
+			ClearSelectedEmoteFunction = UseResult2
 		end
-		editProfileImageAnalyticsModule.logBack({
+		EditProfileImageAnalyticsModule.logBack({
 			mode = p1.mode,
-			activeView = var10.activeView,
-			outcome = var23
+			activeView = UseEditProfileImageNavigationModuleResult.activeView,
+			outcome = Outcome
 		})
-		var24()
+		ClearSelectedEmoteFunction()
 	end, {
-		p1.mode, var10.isFramesOnlyEntry, var10.activeView, var10.titleBackAvailable,
-		var10.onReturnToCombined, var11.isRecommendedEmoteSelected, var21,
-		var9.clearSelectedEmote
+		p1.mode, UseEditProfileImageNavigationModuleResult.isFramesOnlyEntry,
+		UseEditProfileImageNavigationModuleResult.activeView,
+		UseEditProfileImageNavigationModuleResult.titleBackAvailable,
+		UseEditProfileImageNavigationModuleResult.onReturnToCombined,
+		UseEditProfileImageEmotesModuleResult.isRecommendedEmoteSelected, UseResult2,
+		UseEditProfileImageDraftModuleResult.clearSelectedEmote
 	})
-	local var23 = reactModule.useCallback(function()
-		-- upvalues: editProfileImageAnalyticsModule (copy), p1 (ref), var11 (ref)
-		editProfileImageAnalyticsModule.logRetry({ assetType = "emotes", mode = p1.mode })
-		var11.onRetry()
-	end, { p1.mode, var11.onRetry })
-	local var24 = reactModule.useCallback(function()
-		-- upvalues: editProfileImageAnalyticsModule (copy), p1 (ref), var6 (ref)
-		editProfileImageAnalyticsModule.logRetry({ assetType = "frames", mode = p1.mode })
-		var6.refetch()
-	end, { p1.mode, var6.refetch })
-	local var25 = editProfileImageHelpersModule.resolveFooterCta({
-		isFramesOnlyEntry = var10.isFramesOnlyEntry,
-		isRecommendedEmoteSelected = var11.isRecommendedEmoteSelected,
-		isEquipRestrictedFrameSelected = fFlagEditProfileFramesEnabled and (var8 and (not canEquipFrame and (var9.selectedFrameId ~= nil and var9.selectedFrameId ~= constantsModule.ProfileFrameNoneId)))
+	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 280 ]]
+		-- upvalues: EditProfileImageAnalyticsModule (upval), p1 (copy), UseEditProfileImageEmotesModuleResult (copy)
+		EditProfileImageAnalyticsModule.logRetry({ assetType = "emotes", mode = p1.mode })
+		UseEditProfileImageEmotesModuleResult.onRetry()
+	end, { p1.mode, UseEditProfileImageEmotesModuleResult.onRetry })
+	local UseResult5 = ReactModule.useCallback(function() --[[ Line: 288 ]]
+		-- upvalues: EditProfileImageAnalyticsModule (upval), p1 (copy), UseProfileFramesModuleResult (copy)
+		EditProfileImageAnalyticsModule.logRetry({ assetType = "frames", mode = p1.mode })
+		UseProfileFramesModuleResult.refetch()
+	end, { p1.mode, UseProfileFramesModuleResult.refetch })
+	local ResolveFooterCtaResult = EditProfileImageHelpersModule.resolveFooterCta({
+		isFramesOnlyEntry = UseEditProfileImageNavigationModuleResult.isFramesOnlyEntry,
+		isRecommendedEmoteSelected = UseEditProfileImageEmotesModuleResult.isRecommendedEmoteSelected,
+		isEquipRestrictedFrameSelected = FFlagEditProfileFramesEnabled and (IsShouldShowFrames and (not CanEquipFrame and (UseEditProfileImageDraftModuleResult.selectedFrameId ~= nil and UseEditProfileImageDraftModuleResult.selectedFrameId ~= ConstantsModule.ProfileFrameNoneId)))
 	})
-	local var26 = reactModule.useRef(nil)
-	useFocusOnMountEffect(var26, 0)
+	local UseRefResult = ReactModule.useRef(nil)
+	UseFocusOnMountEffectFunction(UseRefResult, 0)
 	
 	return {
 		navigation = {
-			activeView = var10.activeView,
-			closeButtonRef = var26,
-			onExpandEmotes = var10.onExpandEmotes,
-			onExpandFrames = var10.onExpandFrames,
-			onTitleBack = var10.onTitleBack,
-			onBack = var22,
-			onLeaveScreen = var21,
-			onDidFocus = var20.resetTransientState
+			activeView = UseEditProfileImageNavigationModuleResult.activeView,
+			closeButtonRef = UseRefResult,
+			onExpandEmotes = UseEditProfileImageNavigationModuleResult.onExpandEmotes,
+			onExpandFrames = UseEditProfileImageNavigationModuleResult.onExpandFrames,
+			onTitleBack = UseEditProfileImageNavigationModuleResult.onTitleBack,
+			onBack = UseResult3,
+			onLeaveScreen = UseResult2,
+			onDidFocus = UseEditProfileImageSaveModuleResult.resetTransientState
 		},
 		emotes = {
-			selectedEmoteId = var9.selectedEmoteId,
-			ownedItems = var19.ownedEmoteItems,
-			recommendedItems = var19.recommendedEmoteItems,
-			items = var19.combinedEmoteItems,
-			isLoading = var11.isLoading,
-			hasError = var11.hasError,
-			hasMore = var11.hasMoreEmotes,
-			isLoadingMore = var11.isLoadingMoreEmotes,
-			hasLoadMoreError = var11.hasLoadMoreError,
-			onSelect = var9.onSelectEmote,
-			onRetry = var23,
-			onMore = var11.onMoreEmotes
+			selectedEmoteId = UseEditProfileImageDraftModuleResult.selectedEmoteId,
+			ownedItems = UseMemoResult1.ownedEmoteItems,
+			recommendedItems = UseMemoResult1.recommendedEmoteItems,
+			items = UseMemoResult1.combinedEmoteItems,
+			isLoading = UseEditProfileImageEmotesModuleResult.isLoading,
+			hasError = UseEditProfileImageEmotesModuleResult.hasError,
+			hasMore = UseEditProfileImageEmotesModuleResult.hasMoreEmotes,
+			isLoadingMore = UseEditProfileImageEmotesModuleResult.isLoadingMoreEmotes,
+			hasLoadMoreError = UseEditProfileImageEmotesModuleResult.hasLoadMoreError,
+			onSelect = UseEditProfileImageDraftModuleResult.onSelectEmote,
+			onRetry = UseResult4,
+			onMore = UseEditProfileImageEmotesModuleResult.onMoreEmotes
 		},
 		frames = {
-			show = var8,
-			shouldShowUpsell = var14,
-			selectedFrameId = var9.selectedFrameId,
-			items = var19.frameAssetItems,
-			isLoading = var6.isLoading,
-			hasError = var6.hasError,
-			selectedImage = var17,
-			localizedTitle = var18.frames,
-			onSelect = var9.onSelectFrame,
-			onRetry = var24,
-			onOpenSubscriptionUpsell = var16
+			show = IsShouldShowFrames,
+			shouldShowUpsell = NoUseStateResult,
+			selectedFrameId = UseEditProfileImageDraftModuleResult.selectedFrameId,
+			items = UseMemoResult1.frameAssetItems,
+			isLoading = UseProfileFramesModuleResult.isLoading,
+			hasError = UseProfileFramesModuleResult.hasError,
+			selectedImage = UseMemoResult,
+			localizedTitle = UseLocalizationResult.frames,
+			onSelect = UseEditProfileImageDraftModuleResult.onSelectFrame,
+			onRetry = UseResult5,
+			onOpenSubscriptionUpsell = UseResult1
 		},
 		preview = {
-			localUserId = var2,
-			yRotDeg = var9.yRotDeg,
-			distanceScale = var9.distanceScale,
-			onYRotDegChanged = var9.onYRotDegChanged,
-			onDistanceScaleChanged = var9.onDistanceScaleChanged
+			localUserId = UseLocalUserIdResult,
+			yRotDeg = UseEditProfileImageDraftModuleResult.yRotDeg,
+			distanceScale = UseEditProfileImageDraftModuleResult.distanceScale,
+			onYRotDegChanged = UseEditProfileImageDraftModuleResult.onYRotDegChanged,
+			onDistanceScaleChanged = UseEditProfileImageDraftModuleResult.onDistanceScaleChanged
 		},
 		footer = {
-			isSaving = var20.isSaving,
-			cta = var25,
-			subscribeLabel = var18.subscribe,
-			saveLabel = var18.save,
-			onSave = var20.onSave
+			isSaving = UseEditProfileImageSaveModuleResult.isSaving,
+			cta = ResolveFooterCtaResult,
+			subscribeLabel = UseLocalizationResult.subscribe,
+			saveLabel = UseLocalizationResult.save,
+			onSave = UseEditProfileImageSaveModuleResult.onSave
 		}
 	}
 end

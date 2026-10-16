@@ -1,62 +1,62 @@
-﻿local currencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
-local _ = require(currencyTransfers.types)
-local tModule = require(currencyTransfers.Parent.t)
-local t = {}
+﻿local CurrencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
+local _ = require(CurrencyTransfers.types)
+local TModule = require(CurrencyTransfers.Parent.t)
+local InitiateTransferModelModule = {}
 
-function t.new(p1)
-	-- upvalues: t (ref)
-	assert(t.isValid(p1))
-	t.__index = t
-	setmetatable(p1, t)
+function InitiateTransferModelModule.new(p1) --[[ Line: 24 ]]
+	-- upvalues: InitiateTransferModelModule (copy)
+	assert(InitiateTransferModelModule.isValid(p1))
+	InitiateTransferModelModule.__index = InitiateTransferModelModule
+	setmetatable(p1, InitiateTransferModelModule)
 	
 	return p1
 end
 
-function t.mock(p1)
-	-- upvalues: t (ref)
-	p1 = p1 or {}
-	p1 = p1.robuxTransfer or {}
+function InitiateTransferModelModule.mock(p1) --[[ Line: 36 ]]
+	-- upvalues: InitiateTransferModelModule (copy)
+	local P1 = p1 or {}
+	local RobuxTransfer = P1.robuxTransfer or {}
 	
-	return t.new({
-		transferRequestId = p1.transferRequestId or "RXT-1234567890",
+	return (InitiateTransferModelModule.new({
+		transferRequestId = P1.transferRequestId or "RXT-1234567890",
 		robuxTransfer = {
-			transferId = p1.transferId or 1234567890,
-			sender = p1.sender or {
+			transferId = RobuxTransfer.transferId or 1234567890,
+			sender = RobuxTransfer.sender or {
 				targetDisplayName = "MockSender",
 				targetId = 0,
 				targetName = "mock",
 				type = 1
 			},
-			recipient = p1.recipient or {
+			recipient = RobuxTransfer.recipient or {
 				targetDisplayName = "MockRecipient",
 				targetId = 0,
 				targetName = "mock",
 				type = 1
 			}
 		},
-		userRelationshipDetail = p1.userRelationshipDetail or {
+		userRelationshipDetail = P1.userRelationshipDetail or {
 			mutualFriendsCount = 0,
 			userAccountSinceYear = 0,
 			areFriends = false
 		},
-		senderRobuxBalance = p1.senderRobuxBalance or 0
-	})
+		senderRobuxBalance = P1.senderRobuxBalance or 0
+	}))
 end
 
-function t.format(p1)
-	-- upvalues: t (ref)
-	local robuxTransfer = p1.robuxTransfer
-	local sender = robuxTransfer.sender
+function InitiateTransferModelModule.format(p1) --[[ Line: 73 ]]
+	-- upvalues: InitiateTransferModelModule (copy)
+	local RobuxTransfer = p1.robuxTransfer
+	local Sender = RobuxTransfer.sender
 	
-	return t.new({
+	return (InitiateTransferModelModule.new({
 		transferRequestId = p1.transferRequestId,
 		robuxTransfer = {
-			transferId = robuxTransfer.transferId,
-			sender = if sender then {
-				targetDisplayName = sender.targetDisplayName,
-				targetId = sender.targetId,
-				targetName = sender.targetName,
-				type = sender.type
+			transferId = RobuxTransfer.transferId,
+			sender = if Sender then {
+				targetDisplayName = Sender.targetDisplayName,
+				targetId = Sender.targetId,
+				targetName = Sender.targetName,
+				type = Sender.type
 			} else {
 				targetDisplayName = "",
 				targetId = 0,
@@ -64,10 +64,10 @@ function t.format(p1)
 				type = 0
 			},
 			recipient = {
-				targetDisplayName = robuxTransfer.recipient.targetDisplayName,
-				targetId = robuxTransfer.recipient.targetId,
-				targetName = robuxTransfer.recipient.targetName,
-				type = robuxTransfer.recipient.type
+				targetDisplayName = RobuxTransfer.recipient.targetDisplayName,
+				targetId = RobuxTransfer.recipient.targetId,
+				targetName = RobuxTransfer.recipient.targetName,
+				type = RobuxTransfer.recipient.type
 			}
 		},
 		senderRobuxBalance = p1.senderRobuxBalance,
@@ -80,40 +80,40 @@ function t.format(p1)
 			userAccountSinceYear = p1.userRelationshipDetail.userAccountSinceYear,
 			areFriends = p1.userRelationshipDetail.areFriends
 		}
-	})
+	}))
 end
 
-t.isValid = tModule.strictInterface({
-	transferRequestId = tModule.string,
-	robuxTransfer = tModule.strictInterface({
-		transferId = tModule.number,
-		sender = tModule.strictInterface({
-			targetDisplayName = tModule.string,
-			targetId = tModule.number,
-			targetName = tModule.string,
-			type = tModule.number
+InitiateTransferModelModule.isValid = TModule.strictInterface({
+	transferRequestId = TModule.string,
+	robuxTransfer = TModule.strictInterface({
+		transferId = TModule.number,
+		sender = TModule.strictInterface({
+			targetDisplayName = TModule.string,
+			targetId = TModule.number,
+			targetName = TModule.string,
+			type = TModule.number
 		}),
-		recipient = tModule.strictInterface({
-			targetDisplayName = tModule.string,
-			targetId = tModule.number,
-			targetName = tModule.string,
-			type = tModule.number
+		recipient = TModule.strictInterface({
+			targetDisplayName = TModule.string,
+			targetId = TModule.number,
+			targetName = TModule.string,
+			type = TModule.number
 		})
 	}),
-	userRelationshipDetail = tModule.strictInterface({
-		friendSinceYear = tModule.optional(tModule.number),
-		friendSinceDate = tModule.optional(tModule.strictInterface({
-			year = tModule.number,
-			month = tModule.number,
-			day = tModule.number
+	userRelationshipDetail = TModule.strictInterface({
+		friendSinceYear = TModule.optional(TModule.number),
+		friendSinceDate = TModule.optional(TModule.strictInterface({
+			year = TModule.number,
+			month = TModule.number,
+			day = TModule.number
 		})),
-		mutualFriendsCount = tModule.number,
-		userAccountSinceYear = tModule.number,
-		areFriends = tModule.boolean
+		mutualFriendsCount = TModule.number,
+		userAccountSinceYear = TModule.number,
+		areFriends = TModule.boolean
 	}),
-	senderRobuxBalance = tModule.number,
-	minimumTransferAmount = tModule.optional(tModule.number),
-	maximumTransferAmount = tModule.optional(tModule.number)
+	senderRobuxBalance = TModule.number,
+	minimumTransferAmount = TModule.optional(TModule.number),
+	maximumTransferAmount = TModule.optional(TModule.number)
 })
 
-return t
+return InitiateTransferModelModule

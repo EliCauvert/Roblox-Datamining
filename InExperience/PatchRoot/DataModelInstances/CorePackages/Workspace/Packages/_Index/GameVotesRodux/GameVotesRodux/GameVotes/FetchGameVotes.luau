@@ -1,45 +1,46 @@
-﻿local gameVotesRodux = script:FindFirstAncestor("GameVotesRodux")
-local parent = gameVotesRodux.Parent
-local promiseModule = require(parent.Promise)
-local performFetch = require(parent.Http).PerformFetch
-local logging = require(parent.AppCommonLib).Logging
-local setNetworkingErrorToast = require(parent.RobloxAppToastsRodux).Thunks.SetNetworkingErrorToast
-local setGameVotesModule = require(gameVotesRodux.GameVotes.SetGameVotes)
-local getGameVotesModule = require(gameVotesRodux.GameVotes.GetGameVotes)
+﻿local GameVotesRodux = script:FindFirstAncestor("GameVotesRodux")
+local Parent = GameVotesRodux.Parent
+local PromiseModule = require(Parent.Promise)
+local PerformFetch = require(Parent.Http).PerformFetch
+local Logging = require(Parent.AppCommonLib).Logging
+local SetNetworkingErrorToastFunction = require(Parent.RobloxAppToastsRodux).Thunks.SetNetworkingErrorToast
+local SetGameVotesModule = require(GameVotesRodux.GameVotes.SetGameVotes)
+local GetGameVotesModule = require(GameVotesRodux.GameVotes.GetGameVotes)
 
-local function _(p1)
-	return "luaapp.gamesapi.game-votes" .. p0
+local function _(Text): string --[[ Line: 12 | Named "fetchKeymapper" ]]
+	return "luaapp.gamesapi.game-votes" .. Text
 end
 
 return {
-	Fetch = function(p1, p2)
-		-- upvalues: performFetch (ref), getGameVotesModule (ref), setGameVotesModule (ref), promiseModule (ref), logging (ref), setNetworkingErrorToast (ref)
-		assert(type(p2) == "string", string.format("FetchGameVotes thunk expects universeId to be a string, was %s", type(p2)))
+	Fetch = function(p1, Text) --[[ Line: 16 ]]
+		-- upvalues: PerformFetch (copy), GetGameVotesModule (copy), SetGameVotesModule (copy), PromiseModule (copy), Logging (copy), SetNetworkingErrorToastFunction (copy)
+		assert(type(Text) == "string", string.format("FetchGameVotes thunk expects universeId to be a string, was %s", (type(Text))))
 		
-		return performFetch.Single("luaapp.gamesapi.game-votes" .. p2, function(p3)
-			-- upvalues: getGameVotesModule (copy), p1 (ref), p2 (ref), setGameVotesModule (copy), promiseModule (copy), logging (copy), setNetworkingErrorToast (copy)
-			return getGameVotesModule(p1, p2):andThen(function(p4)
-				-- upvalues: p3 (ref), setGameVotesModule (copy), p2 (copy), promiseModule (copy), logging (copy)
-				local responseBody = p4.responseBody
+		return PerformFetch.Single("luaapp.gamesapi.game-votes" .. Text, function(p2) --[[ Line: 22 ]]
+			-- upvalues: GetGameVotesModule (upval), p1 (copy), Text (copy), SetGameVotesModule (upval), PromiseModule (upval), Logging (upval), SetNetworkingErrorToastFunction (upval)
+			return GetGameVotesModule(p1, Text):andThen(function(Result) --[[ Line: 23 ]]
+				-- upvalues: p2 (copy), SetGameVotesModule (upval), Text (upval), PromiseModule (upval), Logging (upval)
+				local ResponseBody = Result.responseBody
 				
-				if responseBody == nil or responseBody.upVotes == nil or responseBody.downVotes == nil then
-					logging.warn("Response from GetGameVotes is malformed!")
+				if ResponseBody == nil or ResponseBody.upVotes == nil or ResponseBody.downVotes == nil then
+					Logging.warn("Response from GetGameVotes is malformed!")
 					
-					return promiseModule.reject({ HttpError = Enum.HttpError.OK })
+					return PromiseModule.reject({ HttpError = Enum.HttpError.OK })
+				else
+					p2:dispatch(SetGameVotesModule(Text, if ResponseBody.upVotes < 0 then 0 else ResponseBody.upVotes, if ResponseBody.downVotes < 0 then 0 else ResponseBody.downVotes))
+					
+					return PromiseModule.resolve(Result)
 				end
-				p3:dispatch(setGameVotesModule(p2, if responseBody.upVotes < 0 then 0 else responseBody.upVotes, if responseBody.downVotes < 0 then 0 else responseBody.downVotes))
+			end, function(p3) --[[ Line: 39 ]]
+				-- upvalues: p2 (copy), SetNetworkingErrorToastFunction (upval), PromiseModule (upval)
+				p2:dispatch(SetNetworkingErrorToastFunction(p3))
 				
-				return promiseModule.resolve(p4)
-			end, function(p4)
-				-- upvalues: p3 (ref), setNetworkingErrorToast (copy), promiseModule (copy)
-				p3:dispatch(setNetworkingErrorToast(p4))
-				
-				return promiseModule.reject(p4)
+				return PromiseModule.reject(p3)
 			end)
 		end)
 	end,
-	GetFetchingStatus = function(p1, p2)
-		-- upvalues: performFetch (ref)
-		return performFetch.GetStatus(p1, "luaapp.gamesapi.game-votes" .. p7)
+	GetFetchingStatus = function(p1, Text) --[[ Line: 46 ]]
+		-- upvalues: PerformFetch (copy)
+		return PerformFetch.GetStatus(p1, "luaapp.gamesapi.game-votes" .. Text)
 	end
 }

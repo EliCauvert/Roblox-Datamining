@@ -1,48 +1,47 @@
-﻿local virtualEvents = script:FindFirstAncestor("VirtualEvents")
-local reactModule = require(virtualEvents.Parent.React)
-local UIBloxModule = require(virtualEvents.Parent.UIBlox)
-local useLocalization = require(virtualEvents.Parent.Localization).Hooks.useLocalization
-local formatNumberWithShortUnitsModule = require(virtualEvents.Common.formatNumberWithShortUnits)
-local _ = require(virtualEvents.Parent.VirtualEventsState)
-local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
-local images = UIBloxModule.App.ImageSet.Images
-local styledTextLabel = UIBloxModule.App.Text.StyledTextLabel
-local useStyle = UIBloxModule.Core.Style.useStyle
-local var1 = images["icons/status/games/people-playing_small"]
-local uDim = UDim.new(0, 6)
+﻿local VirtualEvents = script:FindFirstAncestor("VirtualEvents")
+local ReactModule = require(VirtualEvents.Parent.React)
+local UIBloxModule = require(VirtualEvents.Parent.UIBlox)
+local UseLocalizationFunction = require(VirtualEvents.Parent.Localization).Hooks.useLocalization
+local FormatNumberWithShortUnitsModule = require(VirtualEvents.Common.formatNumberWithShortUnits)
+local _ = require(VirtualEvents.Parent.VirtualEventsState)
+local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
+local StyledTextLabel = UIBloxModule.App.Text.StyledTextLabel
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local IconsStatusGamesPeoplePlayingSmall = UIBloxModule.App.ImageSet.Images["icons/status/games/people-playing_small"]
+local _UDim = UDim.new(0, 6)
 
-return function(p1)
-	-- upvalues: useStyle (ref), useLocalization (ref), reactModule (ref), uDim (ref), imageSetLabel (ref), var1 (ref), styledTextLabel (ref), formatNumberWithShortUnitsModule (ref)
-	local var2 = useStyle()
-	local var3 = useLocalization({
+return function(p1) --[[ Line: 25 | Named "AttendanceCount" ]]
+	-- upvalues: UseStyleFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), _UDim (copy), ImageSetLabel (copy), IconsStatusGamesPeoplePlayingSmall (copy), StyledTextLabel (copy), FormatNumberWithShortUnitsModule (copy)
+	local UseStyleResult = UseStyleFunction()
+	local UseLocalizationResult = UseLocalizationFunction({
 		interested = "Feature.VirtualEvents.AttendanceBeforeEvent",
 		attendingNow = "Feature.VirtualEvents.AttendanceDuringEvent"
 	})
-	local isOngoing = p1.eventStatus == "Ongoing"
+	local IsOngoing = p1.eventStatus == "Ongoing"
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		LayoutOrder = p1.layoutOrder,
 		AutomaticSize = Enum.AutomaticSize.XY
 	}, {
-		Layout = reactModule.createElement("UIListLayout", {
+		Layout = ReactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			FillDirection = Enum.FillDirection.Horizontal,
 			VerticalAlignment = Enum.VerticalAlignment.Center,
-			Padding = uDim
+			Padding = _UDim
 		}),
-		Icon = reactModule.createElement(imageSetLabel, {
+		Icon = ReactModule.createElement(ImageSetLabel, {
 			LayoutOrder = 1,
 			BackgroundTransparency = 1,
 			Size = UDim2.fromOffset(18, 18),
-			Image = var1,
-			ImageColor3 = var2.Theme.IconEmphasis.Color
+			Image = IconsStatusGamesPeoplePlayingSmall,
+			ImageColor3 = UseStyleResult.Theme.IconEmphasis.Color
 		}),
-		Label = reactModule.createElement(styledTextLabel, {
+		Label = ReactModule.createElement(StyledTextLabel, {
 			layoutOrder = 2,
-			fontStyle = var2.Font.Header1,
-			colorStyle = var2.Theme.TextEmphasis,
-			text = ("%s %s"):format(formatNumberWithShortUnitsModule(if isOngoing then p1.attending else p1.interested), if isOngoing then var3.attendingNow else var3.interested)
+			fontStyle = UseStyleResult.Font.Header1,
+			colorStyle = UseStyleResult.Theme.TextEmphasis,
+			text = ("%s %s"):format(FormatNumberWithShortUnitsModule(if IsOngoing then p1.attending else p1.interested), if IsOngoing then UseLocalizationResult.attendingNow else UseLocalizationResult.interested)
 		})
 	})
 end

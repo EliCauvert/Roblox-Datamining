@@ -1,4 +1,4 @@
-﻿local loggingProtocolModule = require(script:FindFirstAncestor("IAPExperience").Parent.LoggingProtocol)
+﻿local LoggingProtocolModule = require(script:FindFirstAncestor("IAPExperience").Parent.LoggingProtocol)
 
 return {
 	PurchaseModalV1ShownCounter = {
@@ -6,7 +6,7 @@ return {
 		throttlingPercentage = 100,
 		description = "Counter fired when In Experience Purchase Modal v1 is shown",
 		links = "",
-		backends = { loggingProtocolModule.TelemetryBackends.Counter },
+		backends = { LoggingProtocolModule.TelemetryBackends.Counter },
 		lastUpdated = { 2025, 8, 4 }
 	},
 	PurchaseModalV2ShownCounter = {
@@ -14,7 +14,7 @@ return {
 		throttlingPercentage = 100,
 		description = "Counter fired when In Experience Purchase Modal v2 is shown",
 		links = "",
-		backends = { loggingProtocolModule.TelemetryBackends.Counter },
+		backends = { LoggingProtocolModule.TelemetryBackends.Counter },
 		lastUpdated = { 2025, 8, 4 }
 	}
 }

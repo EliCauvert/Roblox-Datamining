@@ -1,52 +1,52 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local robloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local tModule = require(corePackagesService.Packages.t)
-local renderWithCoreScriptsStyleProviderModule = require(robloxGui.Modules.Common.renderWithCoreScriptsStyleProvider)
-local parent = script.Parent.Parent
-local setScreenSizeModule = require(parent.Actions.SetScreenSize)
-local reportMenuModule = require(parent.Components.ReportMenu)
-local reportDialogModule = require(parent.Components.ReportDialog)
-local reportCategoryDialogModule = require(parent.Components.ReportCategoryDialog)
-local reportSentDialogModule = require(parent.Components.ReportSentDialog)
-local toastModule = require(parent.Components.Toast)
-local voiceStateContextModule = require(robloxGui.Modules.VoiceChat.VoiceStateContext)
-local trustAndSafetyApp = roactModule.PureComponent:extend("TrustAndSafetyApp")
-trustAndSafetyApp.validateProps = tModule.strictInterface({ setScreenSize = tModule.callback })
+﻿local CorePackages = game:GetService("CorePackages")
+local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local TModule = require(CorePackages.Packages.t)
+local RenderWithCoreScriptsStyleProviderModule = require(RobloxGui.Modules.Common.renderWithCoreScriptsStyleProvider)
+local Parent = script.Parent.Parent
+local SetScreenSizeModule = require(Parent.Actions.SetScreenSize)
+local ReportMenuModule = require(Parent.Components.ReportMenu)
+local ReportDialogModule = require(Parent.Components.ReportDialog)
+local ReportCategoryDialogModule = require(Parent.Components.ReportCategoryDialog)
+local ReportSentDialogModule = require(Parent.Components.ReportSentDialog)
+local ToastModule = require(Parent.Components.Toast)
+local VoiceStateContextModule = require(RobloxGui.Modules.VoiceChat.VoiceStateContext)
+local TrustAndSafetyApp = RoactModule.PureComponent:extend("TrustAndSafetyApp")
+TrustAndSafetyApp.validateProps = TModule.strictInterface({ setScreenSize = TModule.callback })
 
-function trustAndSafetyApp.init(_) end
+function TrustAndSafetyApp:init() --[[ Line: 29 ]] end
 
-function trustAndSafetyApp.render(p1)
-	-- upvalues: roactModule (ref), voiceStateContextModule (ref), reportCategoryDialogModule (ref), reportMenuModule (ref), reportDialogModule (ref), reportSentDialogModule (ref), toastModule (ref), renderWithCoreScriptsStyleProviderModule (ref)
-	return renderWithCoreScriptsStyleProviderModule({
-		VoiceStateContextProvider = roactModule.createElement(voiceStateContextModule.Provider, {}, {
-			Gui = roactModule.createElement("ScreenGui", {
+function TrustAndSafetyApp.render(p1) --[[ Line: 31 ]]
+	-- upvalues: RoactModule (copy), VoiceStateContextModule (copy), ReportCategoryDialogModule (copy), ReportMenuModule (copy), ReportDialogModule (copy), ReportSentDialogModule (copy), ToastModule (copy), RenderWithCoreScriptsStyleProviderModule (copy)
+	return RenderWithCoreScriptsStyleProviderModule({
+		VoiceStateContextProvider = RoactModule.createElement(VoiceStateContextModule.Provider, {}, {
+			Gui = RoactModule.createElement("ScreenGui", {
 				AutoLocalize = false,
 				DisplayOrder = 8,
 				IgnoreGuiInset = true,
 				OnTopOfCoreBlur = true,
 				ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
-				[roactModule.Change.AbsoluteSize] = p1.props.setScreenSize
+				[RoactModule.Change.AbsoluteSize] = p1.props.setScreenSize
 			}, {
-				Content = roactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
-					ReportCategoryDialog = roactModule.createElement(reportCategoryDialogModule),
-					ReportMenu = roactModule.createElement(reportMenuModule),
-					ReportDialog = roactModule.createElement(reportDialogModule),
-					ReportSentDialog = roactModule.createElement(reportSentDialogModule),
-					Toast = roactModule.createElement(toastModule)
+				Content = RoactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
+					ReportCategoryDialog = RoactModule.createElement(ReportCategoryDialogModule),
+					ReportMenu = RoactModule.createElement(ReportMenuModule),
+					ReportDialog = RoactModule.createElement(ReportDialogModule),
+					ReportSentDialog = RoactModule.createElement(ReportSentDialogModule),
+					Toast = RoactModule.createElement(ToastModule)
 				})
 			})
 		})
 	})
 end
 
-return roactRoduxModule.UNSTABLE_connect2(nil, function(p1)
-	-- upvalues: setScreenSizeModule (ref)
+return RoactRoduxModule.UNSTABLE_connect2(nil, function(Callback) --[[ Line: 58 ]]
+	-- upvalues: SetScreenSizeModule (copy)
 	return {
-		setScreenSize = function(value)
-			-- upvalues: p1 (ref), setScreenSizeModule (copy)
-			p1(setScreenSizeModule(value.AbsoluteSize))
+		setScreenSize = function(Frame) --[[ Line: 60 ]]
+			-- upvalues: Callback (copy), SetScreenSizeModule (upval)
+			Callback(SetScreenSizeModule(Frame.AbsoluteSize))
 		end
 	}
-end)(trustAndSafetyApp)
+end)(TrustAndSafetyApp)

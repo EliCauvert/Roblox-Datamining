@@ -1,50 +1,54 @@
-﻿local parent = script:FindFirstAncestor("ServerTriggeredModals").Parent
-local appPage = require(parent.RobloxAppEnums).AppPage
-local promptsEntryPointModule = require(script.Parent.Parent.PromptsEntryPoint)
-local sharedFlagsModule = require(parent.SharedFlags)
-local luaAppPromptsHomepageConfigName = game:DefineFastFlag("LuaAppPromptsHomepageConfigName", false)
-local fFlagEdpGameLeavePromptsHandlerEnabled = sharedFlagsModule.FFlagEdpGameLeavePromptsHandlerEnabled
-local fFlagEdpOpenPromptsHandlerEnabled = sharedFlagsModule.FFlagEdpOpenPromptsHandlerEnabled
-local t = {
-	[promptsEntryPointModule.HomepageLaunch] = if luaAppPromptsHomepageConfigName or sharedFlagsModule.FFlagLuaAppEnableSduiHomePage then {
+﻿local Parent = script:FindFirstAncestor("ServerTriggeredModals").Parent
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local PromptsEntryPointModule = require(script.Parent.Parent.PromptsEntryPoint)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagEdpGameLeavePromptsHandlerEnabled = SharedFlagsModule.FFlagEdpGameLeavePromptsHandlerEnabled
+local FFlagEdpOpenPromptsHandlerEnabled = SharedFlagsModule.FFlagEdpOpenPromptsHandlerEnabled
+local FFlagLuaAppEnableSduiHomePage = SharedFlagsModule.FFlagLuaAppEnableSduiHomePage
+local config = {
+	[PromptsEntryPointModule.HomepageLaunch] = if game:DefineFastFlag("LuaAppPromptsHomepageConfigName", false) or FFlagLuaAppEnableSduiHomePage then {
 		surfaceKey = "Prompts",
-		appPage = appPage.Home,
-		configKey = "Prompts" .. promptsEntryPointModule.HomepageLaunch
+		appPage = AppPage.Home,
+		configKey = "Prompts" .. PromptsEntryPointModule.HomepageLaunch
 	} else {
-		appPage = appPage.Home,
-		surfaceKey = appPage.Home,
-		configKey = appPage.Home
+		appPage = AppPage.Home,
+		surfaceKey = AppPage.Home,
+		configKey = AppPage.Home
 	},
-	[promptsEntryPointModule.SelfUserProfileOpen] = {
+	[PromptsEntryPointModule.SelfUserProfileOpen] = {
 		configKey = "ProfileCompletion",
-		appPage = appPage.ProfilePlatform,
-		surfaceKey = appPage.ProfilePlatform
+		appPage = AppPage.ProfilePlatform,
+		surfaceKey = AppPage.ProfilePlatform
 	},
-	[promptsEntryPointModule.ChartsLaunch] = {
+	[PromptsEntryPointModule.ChartsLaunch] = {
 		surfaceKey = "ChartsPrompts",
-		appPage = appPage.Games,
-		configKey = "Prompts" .. promptsEntryPointModule.ChartsLaunch
+		appPage = AppPage.Games,
+		configKey = "Prompts" .. PromptsEntryPointModule.ChartsLaunch
 	},
-	[promptsEntryPointModule.ExperienceDetailsPageSessionEnd] = if fFlagEdpGameLeavePromptsHandlerEnabled then {
+	[PromptsEntryPointModule.ExperienceDetailsPageSessionEnd] = if FFlagEdpGameLeavePromptsHandlerEnabled then {
 		surfaceKey = "ExperienceDetailsPrompts",
-		appPage = appPage.ExperienceDetail,
-		configKey = "Prompts" .. promptsEntryPointModule.ExperienceDetailsPageSessionEnd
+		appPage = AppPage.ExperienceDetail,
+		configKey = "Prompts" .. PromptsEntryPointModule.ExperienceDetailsPageSessionEnd
 	} else nil,
-	[promptsEntryPointModule.ExperienceDetailsPageOpen] = if fFlagEdpOpenPromptsHandlerEnabled then {
+	[PromptsEntryPointModule.ExperienceDetailsPageOpen] = if FFlagEdpOpenPromptsHandlerEnabled then {
 		surfaceKey = "ExperienceDetailsOpenPrompts",
-		appPage = appPage.ExperienceDetail,
-		configKey = "Prompts" .. promptsEntryPointModule.ExperienceDetailsPageOpen
+		appPage = AppPage.ExperienceDetail,
+		configKey = "Prompts" .. PromptsEntryPointModule.ExperienceDetailsPageOpen
 	} else nil
 }
 
-return function(p1, p2)
-	-- upvalues: t (ref), fFlagEdpGameLeavePromptsHandlerEnabled (ref), fFlagEdpOpenPromptsHandlerEnabled (ref)
-	local var1 = t[p1]
-	assert(var1 ~= nil, `PromptsHandler: missing surface config for entry point "{p0}"`)
+return function(p1, p2) --[[ Line: 88 | Named "getEntryPointSurfaceConfig" ]]
+	-- upvalues: config (copy), FFlagEdpGameLeavePromptsHandlerEnabled (copy), FFlagEdpOpenPromptsHandlerEnabled (copy)
+	local Entry = config[p1]
+	assert(Entry ~= nil, `PromptsHandler: missing surface config for entry point "{p0}"`)
 	
-	return if (fFlagEdpGameLeavePromptsHandlerEnabled or fFlagEdpOpenPromptsHandlerEnabled) and p2 ~= nil then {
-		appPage = var1.appPage,
-		surfaceKey = var1.surfaceKey,
-		configKey = `{var1.configKey}-{p2}`
-	} else var1
+	if (FFlagEdpGameLeavePromptsHandlerEnabled or FFlagEdpOpenPromptsHandlerEnabled) and p2 ~= nil then
+		return {
+			appPage = Entry.appPage,
+			surfaceKey = Entry.surfaceKey,
+			configKey = `{Entry.configKey}-{p2}`
+		}
+	else
+		return Entry
+	end
 end

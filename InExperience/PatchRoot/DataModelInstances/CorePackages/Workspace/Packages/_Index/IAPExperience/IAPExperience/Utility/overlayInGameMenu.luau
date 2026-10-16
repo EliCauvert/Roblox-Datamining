@@ -1,13 +1,13 @@
-﻿local parent = script.Parent.Parent.Parent
-local reactModule = require(parent.React)
-local appCommonLibModule = require(parent.AppCommonLib)
+﻿local Parent = script.Parent.Parent.Parent
+local ReactModule = require(Parent.React)
+local AppCommonLibModule = require(Parent.AppCommonLib)
 
-return function(p1)
-	-- upvalues: appCommonLibModule (ref), reactModule (ref)
-	return if appCommonLibModule.IsVRAppBuild() or appCommonLibModule.isTenFootInterface() then p1 else reactModule.createElement("ScreenGui", {
+return function(Component) --[[ Line: 6 ]]
+	-- upvalues: AppCommonLibModule (copy), ReactModule (copy)
+	return if AppCommonLibModule.IsVRAppBuild() or AppCommonLibModule.isTenFootInterface() then Component else ReactModule.createElement("ScreenGui", {
 		Enabled = true,
 		DisplayOrder = 10,
 		IgnoreGuiInset = true,
 		ZIndexBehavior = Enum.ZIndexBehavior.Global
-	}, { Component = p1 })
+	}, { Component = Component })
 end

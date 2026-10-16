@@ -1,57 +1,57 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local squareCollectionGridViewModule = require(profilePlatform.BaseComponents.CollectionGridViews.SquareCollectionGridView)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local textKeysModule = require(profilePlatform.Common.TextKeys)
-local foundationModule = require(parent.Foundation)
-local skeleton = foundationModule.Skeleton
-local radius = foundationModule.Enums.Radius
-local view = foundationModule.View
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local SquareCollectionGridViewModule = require(ProfilePlatform.BaseComponents.CollectionGridViews.SquareCollectionGridView)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local TextKeysModule = require(ProfilePlatform.Common.TextKeys)
+local FoundationModule = require(Parent.Foundation)
+local Skeleton = FoundationModule.Skeleton
+local Radius = FoundationModule.Enums.Radius
+local View = FoundationModule.View
 
-local var1 = function(p1)
+local function GetItemHeight(p1: number): number --[[ Line: 21 ]]
 	return p1 + 49
 end
 
-return function(p1)
-	-- upvalues: useLocalization (ref), textKeysModule (ref), reactModule (ref), view (ref), skeleton (ref), radius (ref), squareCollectionGridViewModule (ref), var1 (ref)
-	return reactModule.createElement(squareCollectionGridViewModule, {
+return function(p1) --[[ Line: 25 | Named "StoreGridSkeleton" ]]
+	-- upvalues: UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), View (copy), Skeleton (copy), Radius (copy), SquareCollectionGridViewModule (copy), GetItemHeight (copy)
+	return ReactModule.createElement(SquareCollectionGridViewModule, {
 		layoutOrder = p1.layoutOrder,
-		items = reactModule.useMemo(function()
-			-- upvalues: p1 (ref)
-			local t = {}
+		items = ReactModule.useMemo(function() --[[ Line: 55 ]]
+			-- upvalues: p1 (copy)
+			local List = {}
 			
 			for i = 1, p1.numSkeletons do
-				table.insert(t, i)
+				table.insert(List, i)
 			end
-			return t
+			return List
 		end, { p1.numSkeletons }),
-		renderItem = reactModule.useCallback(function(_, p2, p3)
-			-- upvalues: reactModule (copy), view (copy), skeleton (copy), radius (copy)
-			return reactModule.createElement(view, {
+		renderItem = ReactModule.useCallback(function(_, LayoutOrder, Size) --[[ Line: 30 ]]
+			-- upvalues: ReactModule (upval), View (upval), Skeleton (upval), Radius (upval)
+			return ReactModule.createElement(View, {
 				tag = "col gap-small radius-medium",
-				LayoutOrder = p2,
-				Size = p3
+				LayoutOrder = LayoutOrder,
+				Size = Size
 			}, {
-				ThumbnailSkeleton = reactModule.createElement(skeleton, {
+				ThumbnailSkeleton = ReactModule.createElement(Skeleton, {
 					LayoutOrder = 1,
 					Size = UDim2.fromScale(1, 0.7),
-					radius = radius.Medium
+					radius = Radius.Medium
 				}),
-				NameSkeleton = reactModule.createElement(skeleton, {
+				NameSkeleton = ReactModule.createElement(Skeleton, {
 					LayoutOrder = 2,
 					Size = UDim2.fromScale(0.8, 0.09),
-					radius = radius.Medium
+					radius = Radius.Medium
 				}),
-				ButtonSkeleton = reactModule.createElement(skeleton, {
+				ButtonSkeleton = ReactModule.createElement(Skeleton, {
 					LayoutOrder = 3,
 					Size = UDim2.fromScale(0.6, 0.09),
-					radius = radius.Medium
+					radius = Radius.Medium
 				})
-			}), "Skeleton_" .. p2
+			}), "Skeleton_" .. LayoutOrder
 		end, {}),
-		getItemHeight = var1,
-		title = useLocalization({ store = textKeysModule.Store }).store,
+		getItemHeight = GetItemHeight,
+		title = UseLocalizationFunction({ store = TextKeysModule.Store }).store,
 		overrides = { numColumns = p1.numColumns or 3 }
 	})
 end

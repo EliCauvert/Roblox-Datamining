@@ -1,30 +1,33 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local _ = require(parent.React)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local motionModule = require(parent.Motion)
-local transitionPreset = motionModule.TransitionPreset
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local _ = require(Parent.React)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local MotionModule = require(Parent.Motion)
+local TransitionPreset = MotionModule.TransitionPreset
 
-return function(p1, p2)
-	-- upvalues: useTokensModule (ref), motionModule (ref), transitionPreset (ref)
-	local var1 = useTokensModule()
+return function(p1, TextTransparency) --[[ Line: 27 | Named "useOptionSelectorGroupItemMotionStates" ]]
+	-- upvalues: UseTokensModule (copy), MotionModule (copy), TransitionPreset (copy)
+	local UseTokensModuleResult = UseTokensModule()
 	
 	return {
-		Default = motionModule.createState({ transparency = p1 or 0, textTransparency = p1 or 0 }, {
-			iconTransparency = motionModule.transition(transitionPreset.Default, {
+		Default = MotionModule.createState({ transparency = p1 or 0, textTransparency = p1 or 0 }, {
+			iconTransparency = MotionModule.transition(TransitionPreset.Default, {
 				easingStyle = Enum.EasingStyle.Linear,
-				duration = var1.Time.Time_500
+				duration = UseTokensModuleResult.Time.Time_500
 			}),
-			transparency = motionModule.transition({
+			transparency = MotionModule.transition({
 				easingStyle = Enum.EasingStyle.Linear,
-				duration = var1.Time.Time_200
+				duration = UseTokensModuleResult.Time.Time_200
 			}),
-			default = motionModule.transition(transitionPreset.Default, { duration = var1.Time.Time_200 })
+			default = MotionModule.transition(TransitionPreset.Default, { duration = UseTokensModuleResult.Time.Time_200 })
 		}),
-		Disabled = motionModule.createState({ transparency = p2, textTransparency = p2 }, {
-			default = motionModule.transition({
+		Disabled = MotionModule.createState({
+			transparency = TextTransparency,
+			textTransparency = TextTransparency
+		}, {
+			default = MotionModule.transition({
 				easingStyle = Enum.EasingStyle.Linear,
-				duration = var1.Time.Time_100
+				duration = UseTokensModuleResult.Time.Time_100
 			})
 		})
 	}

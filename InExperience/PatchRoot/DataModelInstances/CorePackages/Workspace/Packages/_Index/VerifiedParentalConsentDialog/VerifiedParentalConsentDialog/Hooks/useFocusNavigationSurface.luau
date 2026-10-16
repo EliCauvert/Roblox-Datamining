@@ -1,56 +1,56 @@
-﻿local guiService = game:GetService("GuiService")
-local parent = script:FindFirstAncestor("VerifiedParentalConsentDialog").Parent
-local reactModule = require(parent.React)
-local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-local focusNavigableSurfaceRegistry = focusNavigationUtilsModule.FocusNavigableSurfaceRegistry
-local useRegisterFocusNavigableSurface = focusNavigableSurfaceRegistry.useRegisterFocusNavigableSurface
-local useDeRegisterFocusNavigableSurface = focusNavigableSurfaceRegistry.useDeRegisterFocusNavigableSurface
-local useLastInputMethod = focusNavigationUtilsModule.useLastInputMethod
-local useAutoFocus = focusNavigationUtilsModule.useAutoFocus
-local useDescendantHasFocus = focusNavigationUtilsModule.useDescendantHasFocus
+﻿local GuiService = game:GetService("GuiService")
+local Parent = script:FindFirstAncestor("VerifiedParentalConsentDialog").Parent
+local ReactModule = require(Parent.React)
+local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
+local FocusNavigableSurfaceRegistry = FocusNavigationUtilsModule.FocusNavigableSurfaceRegistry
+local UseRegisterFocusNavigableSurfaceFunction = FocusNavigableSurfaceRegistry.useRegisterFocusNavigableSurface
+local UseDeRegisterFocusNavigableSurfaceFunction = FocusNavigableSurfaceRegistry.useDeRegisterFocusNavigableSurface
+local UseLastInputMethodFunction = FocusNavigationUtilsModule.useLastInputMethod
+local UseAutoFocusFunction = FocusNavigationUtilsModule.useAutoFocus
+local UseDescendantHasFocusFunction = FocusNavigationUtilsModule.useDescendantHasFocus
 
-return function(p1)
-	-- upvalues: reactModule (ref), useRegisterFocusNavigableSurface (ref), useDeRegisterFocusNavigableSurface (ref), useAutoFocus (ref), useDescendantHasFocus (ref), useLastInputMethod (ref), guiService (ref)
-	local var1, var2 = reactModule.useState(nil)
-	local var3 = useRegisterFocusNavigableSurface()
-	local var4 = useDeRegisterFocusNavigableSurface()
-	local var5 = useAutoFocus({ var1 }, 0.1)
-	local var6 = useDescendantHasFocus(var1)
-	local var7 = useLastInputMethod()
-	local var8 = if var7 ~= "Gamepad" then var7 == "Keyboard" else true
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), var3 (ref), p1 (ref), guiService (copy), var4 (ref)
-		if var1 then
-			var3(p1.focusNavigableSurfaceIdentifier, var1)
-			guiService:AddSelectionParent(p1.selectionGroupName, var1)
+return function(p1) --[[ Line: 22 | Named "useFocusNavigationSurface" ]]
+	-- upvalues: ReactModule (copy), UseRegisterFocusNavigableSurfaceFunction (copy), UseDeRegisterFocusNavigableSurfaceFunction (copy), UseAutoFocusFunction (copy), UseDescendantHasFocusFunction (copy), UseLastInputMethodFunction (copy), GuiService (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	local UseRegisterFocusNavigableSurfaceResult = UseRegisterFocusNavigableSurfaceFunction()
+	local UseDeRegisterFocusNavigableSurfaceResult = UseDeRegisterFocusNavigableSurfaceFunction()
+	local UseAutoFocusResult = UseAutoFocusFunction({ UseStateResult }, 0.1)
+	local UseDescendantHasFocusResult = UseDescendantHasFocusFunction(UseStateResult)
+	local UseLastInputMethodResult = UseLastInputMethodFunction()
+	local IsGamepad: boolean = UseLastInputMethodResult == "Gamepad" or UseLastInputMethodResult == "Keyboard"
+	ReactModule.useEffect(function() --[[ Line: 31 ]]
+		-- upvalues: UseStateResult (copy), UseRegisterFocusNavigableSurfaceResult (copy), p1 (copy), GuiService (upval), UseDeRegisterFocusNavigableSurfaceResult (copy)
+		if UseStateResult then
+			UseRegisterFocusNavigableSurfaceResult(p1.focusNavigableSurfaceIdentifier, UseStateResult)
+			GuiService:AddSelectionParent(p1.selectionGroupName, UseStateResult)
 		else
-			var4(p1.focusNavigableSurfaceIdentifier, var1)
-			guiService:RemoveSelectionGroup(p1.selectionGroupName)
-			guiService.SelectedCoreObject = nil
+			UseDeRegisterFocusNavigableSurfaceResult(p1.focusNavigableSurfaceIdentifier, UseStateResult)
+			GuiService:RemoveSelectionGroup(p1.selectionGroupName)
+			GuiService.SelectedCoreObject = nil
 		end
-		return function()
-			-- upvalues: var4 (copy), p1 (copy), var1 (copy), guiService (copy)
-			var4(p1.focusNavigableSurfaceIdentifier, var1)
-			guiService:RemoveSelectionGroup(p1.selectionGroupName)
-			guiService.SelectedCoreObject = nil
+		return function() --[[ Line: 42 ]]
+			-- upvalues: UseDeRegisterFocusNavigableSurfaceResult (upval), p1 (upval), UseStateResult (upval), GuiService (upval)
+			UseDeRegisterFocusNavigableSurfaceResult(p1.focusNavigableSurfaceIdentifier, UseStateResult)
+			GuiService:RemoveSelectionGroup(p1.selectionGroupName)
+			GuiService.SelectedCoreObject = nil
 		end
 	end, {
-		var1,
+		UseStateResult,
 		p1.focusNavigableSurfaceIdentifier,
 		p1.selectionGroupName
 	})
-	local var9 = var8 and (var1 and not var6)
-	reactModule.useEffect(function()
-		-- upvalues: var9 (ref), var5 (ref)
-		local var10 = if var9 then var5() else nil
+	local NoUseDescendantHasFocusResult: boolean = IsGamepad and (UseStateResult and not UseDescendantHasFocusResult)
+	ReactModule.useEffect(function() --[[ Line: 52 ]]
+		-- upvalues: NoUseDescendantHasFocusResult (copy), UseAutoFocusResult (copy)
+		local UseAutoFocusResultResult = if NoUseDescendantHasFocusResult then UseAutoFocusResult() else nil
 		
-		return function()
-			-- upvalues: var10 (write)
-			if var10 then
-				var10.cancel()
+		return function() --[[ Line: 57 ]]
+			-- upvalues: UseAutoFocusResultResult (ref)
+			if UseAutoFocusResultResult then
+				UseAutoFocusResultResult.cancel()
 			end
 		end
-	end, { var9, var5 })
+	end, { NoUseDescendantHasFocusResult, UseAutoFocusResult })
 	
-	return var2
+	return UseStateResult2
 end

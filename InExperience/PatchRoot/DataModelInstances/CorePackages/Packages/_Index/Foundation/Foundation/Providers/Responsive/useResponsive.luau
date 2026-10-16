@@ -1,7 +1,7 @@
-﻿local reactModule = require(script:FindFirstAncestor("Foundation").Parent.React)
-local responsiveContextModule = require(script.Parent.ResponsiveContext)
+﻿local ReactModule = require(script:FindFirstAncestor("Foundation").Parent.React)
+local ResponsiveContextModule = require(script.Parent.ResponsiveContext)
 
-return function()
-	-- upvalues: reactModule (ref), responsiveContextModule (ref)
-	return reactModule.useContext(responsiveContextModule)
+return function() --[[ Line: 9 | Named "useResponsive" ]]
+	-- upvalues: ReactModule (copy), ResponsiveContextModule (copy)
+	return ReactModule.useContext(ResponsiveContextModule)
 end

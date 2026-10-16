@@ -1,15 +1,14 @@
-﻿local squadsCore = script:FindFirstAncestor("SquadsCore")
-local parent = squadsCore.Parent
-local squadExternalContractContextModule = require(squadsCore.Components.SquadExternalContractProvider.SquadExternalContractContext)
-local useCurrentSquadParentChannelIdModule = require(squadsCore.Hooks.useCurrentSquadParentChannelId)
-local reactModule = require(parent.React)
-local getFFlagEnablePartyVoiceOnlyForUnfilteredThreadsModule = require(squadsCore.Flags.GetFFlagEnablePartyVoiceOnlyForUnfilteredThreads)
+﻿local SquadsCore = script:FindFirstAncestor("SquadsCore")
+local SquadExternalContractContextModule = require(SquadsCore.Components.SquadExternalContractProvider.SquadExternalContractContext)
+local UseCurrentSquadParentChannelIdModule = require(SquadsCore.Hooks.useCurrentSquadParentChannelId)
+local ReactModule = require(SquadsCore.Parent.React)
+local GetFFlagEnablePartyVoiceOnlyForUnfilteredThreadsModule = require(SquadsCore.Flags.GetFFlagEnablePartyVoiceOnlyForUnfilteredThreads)
 
-function useIsCurrentSquadPartyVoiceEligible()
-	-- upvalues: reactModule (ref), squadExternalContractContextModule (ref), useCurrentSquadParentChannelIdModule (ref)
-	return reactModule.useContext(squadExternalContractContextModule).useParentChannelIsPartyVoiceEligible(useCurrentSquadParentChannelIdModule() or "")
+function useIsCurrentSquadPartyVoiceEligible() --[[ Line: 13 ]]
+	-- upvalues: ReactModule (copy), SquadExternalContractContextModule (copy), UseCurrentSquadParentChannelIdModule (copy)
+	return ReactModule.useContext(SquadExternalContractContextModule).useParentChannelIsPartyVoiceEligible(UseCurrentSquadParentChannelIdModule() or "")
 end
 
-return if getFFlagEnablePartyVoiceOnlyForUnfilteredThreadsModule() then useIsCurrentSquadPartyVoiceEligible else function()
+return if GetFFlagEnablePartyVoiceOnlyForUnfilteredThreadsModule() then useIsCurrentSquadPartyVoiceEligible else function(): boolean --[[ Line: 22 ]]
 	return true
 end

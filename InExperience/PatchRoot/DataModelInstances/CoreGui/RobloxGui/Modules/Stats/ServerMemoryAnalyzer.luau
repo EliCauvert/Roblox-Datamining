@@ -1,74 +1,74 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local baseMemoryAnalyzerModule = require(coreGuiService.RobloxGui.Modules.Stats.BaseMemoryAnalyzer)
-local treeViewItemModule = require(coreGuiService.RobloxGui.Modules.Stats.TreeViewItem)
-local _ = require(coreGuiService.RobloxGui.Modules.Common.CommonUtil)
+﻿local CoreGui = game:GetService("CoreGui")
+local BaseMemoryAnalyzerModule = require(CoreGui.RobloxGui.Modules.Stats.BaseMemoryAnalyzer)
+local TreeViewItemModule = require(CoreGui.RobloxGui.Modules.Stats.TreeViewItem)
+local _ = require(CoreGui.RobloxGui.Modules.Common.CommonUtil)
 
-local function __ReadAndSumValues(p1, p2)
-	local var1 = 0
+local function __ReadAndSumValues(CoreTreeViewItem, List): number --[[ Line: 25 ]]
+	local Total = 0
 	
-	for i, v in pairs(p2) do
-		local var2 = v / 1048576
-		var1 += var2
-		p1:getOrMakeChildById(i):setLabelAndValue(i, var2)
+	for i, value in pairs(List) do
+		local Amount = value / 1048576
+		Total += Amount
+		CoreTreeViewItem:getOrMakeChildById(i):setLabelAndValue(i, Amount)
 	end
-	return var1
+	return Total
 end
 
-local t = {}
-setmetatable(t, baseMemoryAnalyzerModule)
-t.__index = t
+local ServerMemoryAnalyzerModule = {}
+setmetatable(ServerMemoryAnalyzerModule, BaseMemoryAnalyzerModule)
+ServerMemoryAnalyzerModule.__index = ServerMemoryAnalyzerModule
 
-function t.new(p3)
-	-- upvalues: baseMemoryAnalyzerModule (ref), t (ref)
-	local var3 = baseMemoryAnalyzerModule.new(p3)
-	setmetatable(var3, t)
-	var3._cachedRootTreeViewItem = nil
-	var3._coreTreeViewItem = nil
-	var3._placeTreeViewItem = nil
-	var3._untrackedTreeViewItem = nil
-	var3._isVisible = false
+function ServerMemoryAnalyzerModule.new(p1) --[[ Line: 52 ]]
+	-- upvalues: BaseMemoryAnalyzerModule (copy), ServerMemoryAnalyzerModule (copy)
+	local NewBaseMemoryAnalyzer = BaseMemoryAnalyzerModule.new(p1)
+	setmetatable(NewBaseMemoryAnalyzer, ServerMemoryAnalyzerModule)
+	NewBaseMemoryAnalyzer._cachedRootTreeViewItem = nil
+	NewBaseMemoryAnalyzer._coreTreeViewItem = nil
+	NewBaseMemoryAnalyzer._placeTreeViewItem = nil
+	NewBaseMemoryAnalyzer._untrackedTreeViewItem = nil
+	NewBaseMemoryAnalyzer._isVisible = false
 	
-	return var3
+	return NewBaseMemoryAnalyzer
 end
 
-function t.filterServerMemoryTreeStats(_, p3)
-	return if p3.ServerMemoryTree == nil then {} else p3.ServerMemoryTree
+function ServerMemoryAnalyzerModule:filterServerMemoryTreeStats(p1) --[[ Line: 78 ]]
+	return if p1.ServerMemoryTree == nil then {} else p1.ServerMemoryTree
 end
 
-function t:updateWithTreeStats(p3)
-	-- upvalues: treeViewItemModule (ref), __ReadAndSumValues (ref)
-	local var3 = 0
+function ServerMemoryAnalyzerModule:updateWithTreeStats(List) --[[ Line: 86 ]]
+	-- upvalues: TreeViewItemModule (copy), __ReadAndSumValues (copy)
+	local v1 = 0
 	
 	if self._cachedRootTreeViewItem == nil then
-		self._cachedRootTreeViewItem = treeViewItemModule.new("root", nil)
+		self._cachedRootTreeViewItem = TreeViewItemModule.new("root", nil)
 		self._coreTreeViewItem = self._cachedRootTreeViewItem:getOrMakeChildById("CoreMemory")
 		self._placeTreeViewItem = self._cachedRootTreeViewItem:getOrMakeChildById("PlaceMemory")
 		self._untrackedTreeViewItem = self._cachedRootTreeViewItem:getOrMakeChildById("UntrackedMemory")
 	end
-	for i, v in pairs(p3) do
+	for i, value in pairs(List) do
 		if i == "totalServerMemory" then
-			var3 = v / 1048576
+			v1 = value / 1048576
 		elseif i == "developerTags" then
-			self._placeTreeViewItem:setLabelAndValue("PlaceMemory", __ReadAndSumValues(self._placeTreeViewItem, v))
+			self._placeTreeViewItem:setLabelAndValue("PlaceMemory", (__ReadAndSumValues(self._placeTreeViewItem, value)))
 		elseif i == "internalCategories" then
-			self._coreTreeViewItem:setLabelAndValue("CoreMemory", __ReadAndSumValues(self._coreTreeViewItem, v))
+			self._coreTreeViewItem:setLabelAndValue("CoreMemory", (__ReadAndSumValues(self._coreTreeViewItem, value)))
 		end
 	end
-	self._cachedRootTreeViewItem:setLabelAndValue("Memory", var3)
-	self._untrackedTreeViewItem:setLabelAndValue("UntrackedMemory", var3 - (self._coreTreeViewItem:getValue() + self._placeTreeViewItem:getValue()))
+	self._cachedRootTreeViewItem:setLabelAndValue("Memory", v1)
+	self._untrackedTreeViewItem:setLabelAndValue("UntrackedMemory", v1 - (self._coreTreeViewItem:getValue() + self._placeTreeViewItem:getValue()))
 	self:renderUpdates()
 end
 
-function t:getMemoryUsageTree()
+function ServerMemoryAnalyzerModule:getMemoryUsageTree() --[[ Line: 123 ]]
 	return self._cachedRootTreeViewItem
 end
 
-function t:setVisible(p4)
-	self._isVisible = p4
+function ServerMemoryAnalyzerModule:setVisible(_isVisible) --[[ Line: 127 ]]
+	self._isVisible = _isVisible
 	
 	if self._isVisible then
 		self:renderUpdates()
 	end
 end
 
-return t
+return ServerMemoryAnalyzerModule

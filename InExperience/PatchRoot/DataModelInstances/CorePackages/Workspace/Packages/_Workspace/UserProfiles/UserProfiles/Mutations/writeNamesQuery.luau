@@ -1,25 +1,23 @@
 ﻿local _ = require(script:FindFirstAncestor("UserProfiles").Parent.ApolloClient)
 
-return function(p1)
-	local client = p1.client
-	local query = p1.query
-	local userId = p1.userId
-	local names = p1.names
-	client:writeQuery({
-		variables = { userIds = { userId } },
-		query = query,
+return function(p1) --[[ Line: 7 ]]
+	local UserId = p1.userId
+	local Names = p1.names
+	p1.client:writeQuery({
+		variables = { userIds = { UserId } },
+		query = p1.query,
 		data = {
 			userProfiles = {
 				{
 					__typename = "UserProfile",
-					id = userId,
+					id = UserId,
 					names = {
 						__typename = "Names",
-						combinedName = if names.alias ~= "" then if names.contactName ~= "" then if names.displayName ~= "" then names.username else names.displayName else names.contactName else names.alias,
-						alias = names.alias,
-						contactName = names.contactName,
-						displayName = names.displayName,
-						username = names.username
+						combinedName = if Names.alias == "" then if Names.contactName == "" then if Names.displayName == "" then Names.username else Names.displayName else Names.contactName else Names.alias,
+						alias = Names.alias,
+						contactName = Names.contactName,
+						displayName = Names.displayName,
+						username = Names.username
 					}
 				}
 			}

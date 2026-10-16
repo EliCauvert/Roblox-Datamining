@@ -1,21 +1,34 @@
-﻿local avatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
-local parent = avatarExperienceInspectAndBuy.Parent
-local _ = require(avatarExperienceInspectAndBuy.Types)
-local avatarExperienceModelModule = require(parent.AvatarExperienceModel)
-local constants = require(parent.AXCommon).Constants
-local ASSET_TYPE_TO_ACCESSORY_TYPE = constants.ASSET_TYPE_TO_ACCESSORY_TYPE
-local ASSET_TYPE_ID_STRING_TO_HUMANOID_DESCRIPTION_PROP = constants.ASSET_TYPE_ID_STRING_TO_HUMANOID_DESCRIPTION_PROP
-local LAYERED_ASSET_TYPES = constants.LAYERED_ASSET_TYPES
-local AVATAR_ANIMATIONS_BUNDLE_TYPE_ID = constants.AVATAR_ANIMATIONS_BUNDLE_TYPE_ID
-local SHOES_BUNDLE_TYPE_ID = constants.SHOES_BUNDLE_TYPE_ID
-local avatarBackground = constants.ASSET_TYPE_NAME_TO_ID_STRING.AvatarBackground
-local itemTypeEnum = avatarExperienceModelModule.Enums.ItemTypeEnum
-local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
+﻿local AvatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
+local Parent = AvatarExperienceInspectAndBuy.Parent
+local _ = require(AvatarExperienceInspectAndBuy.Types)
+local Constants = require(Parent.AXCommon).Constants
+local ASSETTYPETOACCESSORYTYPE = Constants.ASSET_TYPE_TO_ACCESSORY_TYPE
+local ASSETTYPEIDSTRINGTOHUMANOIDDESCRIPTIONPROP = Constants.ASSET_TYPE_ID_STRING_TO_HUMANOID_DESCRIPTION_PROP
+local LAYEREDASSETTYPES = Constants.LAYERED_ASSET_TYPES
+local AVATARANIMATIONSBUNDLETYPEID = Constants.AVATAR_ANIMATIONS_BUNDLE_TYPE_ID
+local SHOESBUNDLETYPEID = Constants.SHOES_BUNDLE_TYPE_ID
+local AvatarBackground = Constants.ASSET_TYPE_NAME_TO_ID_STRING.AvatarBackground
+local ItemTypeEnum = require(Parent.AvatarExperienceModel).Enums.ItemTypeEnum
+local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
 
-return function(p1, p2)
-	-- upvalues: itemTypeEnum (ref), AVATAR_ANIMATIONS_BUNDLE_TYPE_ID (ref), SHOES_BUNDLE_TYPE_ID (ref), avatarBackground (ref), avatarExperienceFlagsModule (ref), ASSET_TYPE_TO_ACCESSORY_TYPE (ref), ASSET_TYPE_ID_STRING_TO_HUMANOID_DESCRIPTION_PROP (ref), LAYERED_ASSET_TYPES (ref)
-	local itemSubType = p2.itemSubType
-	local var1 = p1 and (p1.Humanoid and p1.Humanoid.RigType == Enum.HumanoidRigType.R6)
+return function(Character, p1) --[[ Line: 25 | Named "isItemAvailableForTryOn" ]]
+	-- upvalues: ItemTypeEnum (copy), AVATARANIMATIONSBUNDLETYPEID (copy), SHOESBUNDLETYPEID (copy), AvatarBackground (copy), AvatarExperienceFlagsModule (copy), ASSETTYPETOACCESSORYTYPE (copy), ASSETTYPEIDSTRINGTOHUMANOIDDESCRIPTIONPROP (copy), LAYEREDASSETTYPES (copy)
+	local ItemSubType = p1.itemSubType
+	local IsRigTypeMatch: boolean = Character and (Character.Humanoid and Character.Humanoid.RigType == Enum.HumanoidRigType.R6)
 	
-	return if p2.itemType == itemTypeEnum.Bundle and itemSubType == AVATAR_ANIMATIONS_BUNDLE_TYPE_ID then false elseif p2.itemType == itemTypeEnum.Bundle and itemSubType == SHOES_BUNDLE_TYPE_ID and var1 then false elseif p2.itemType == itemTypeEnum.Asset then if itemSubType then if itemSubType == avatarBackground then avatarExperienceFlagsModule.FFlagAXBackgroundsTryOn else (if ASSET_TYPE_TO_ACCESSORY_TYPE[itemSubType] == nil then ASSET_TYPE_ID_STRING_TO_HUMANOID_DESCRIPTION_PROP[itemSubType] ~= nil else true) and not (var1 and LAYERED_ASSET_TYPES[itemSubType] ~= nil) else false else true
+	if p1.itemType == ItemTypeEnum.Bundle and ItemSubType == AVATARANIMATIONSBUNDLETYPEID then
+		return false
+	elseif p1.itemType == ItemTypeEnum.Bundle and ItemSubType == SHOESBUNDLETYPEID and IsRigTypeMatch then
+		return false
+	elseif p1.itemType ~= ItemTypeEnum.Asset then
+		return true
+	elseif not ItemSubType then
+		return false
+	elseif ItemSubType == AvatarBackground then
+		return AvatarExperienceFlagsModule.FFlagAXBackgroundsTryOn
+	else
+		local HasLAYEREDASSETTYPE: boolean = IsRigTypeMatch and LAYEREDASSETTYPES[ItemSubType] ~= nil
+		
+		return (ASSETTYPETOACCESSORYTYPE[ItemSubType] ~= nil or ASSETTYPEIDSTRINGTOHUMANOIDDESCRIPTIONPROP[ItemSubType] ~= nil) and not HasLAYEREDASSETTYPE
+	end
 end

@@ -1,85 +1,85 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local components = script.Parent.Parent.Components
-local logDataModule = require(components.Log.LogData)
-local clientMemoryDataModule = require(components.Memory.ClientMemoryData)
-local serverMemoryDataModule = require(components.Memory.ServerMemoryData)
-local networkDataModule = require(components.Network.NetworkData)
-local serverScriptsDataModule = require(components.Scripts.ServerScriptsData)
-local dataStoresDataModule = require(components.DataStores.DataStoresData)
-local serverStatsDataModule = require(components.ServerStats.ServerStatsData)
-local actionBindingsDataModule = require(components.ActionBindings.ActionBindingsData)
-local serverJobsDataModule = require(components.ServerJobs.ServerJobsData)
-local debugVisualizationsDataModule = require(components.DebugVisualizations.DebugVisualizationsData)
-local luauHeapDataModule = require(components.LuauHeap.LuauHeapData)
-local voiceChatDataModule = require(components.VoiceChat.VoiceChatData)
-local voiceDebugDataModule = require(components.VoiceDebug.VoiceDebugData)
-local getFFlagVoiceDebugConsoleV2Module = require(components.VoiceDebug.GetFFlagVoiceDebugConsoleV2)
-local dataContextModule = require(components.DataContext)
-local dataProvider = roactModule.Component:extend("DataProvider")
-local voiceChatDevConsoleTabEnabledEngineFeature = game:GetEngineFeature("VoiceChatDevConsoleTabEnabled")
-local devConsoleStartDataOnMount = game:DefineFastFlag("DevConsoleStartDataOnMount", false)
+﻿local CorePackages = game:GetService("CorePackages")
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local Components = script.Parent.Parent.Components
+local LogDataModule = require(Components.Log.LogData)
+local ClientMemoryDataModule = require(Components.Memory.ClientMemoryData)
+local ServerMemoryDataModule = require(Components.Memory.ServerMemoryData)
+local NetworkDataModule = require(Components.Network.NetworkData)
+local ServerScriptsDataModule = require(Components.Scripts.ServerScriptsData)
+local DataStoresDataModule = require(Components.DataStores.DataStoresData)
+local ServerStatsDataModule = require(Components.ServerStats.ServerStatsData)
+local ActionBindingsDataModule = require(Components.ActionBindings.ActionBindingsData)
+local ServerJobsDataModule = require(Components.ServerJobs.ServerJobsData)
+local DebugVisualizationsDataModule = require(Components.DebugVisualizations.DebugVisualizationsData)
+local LuauHeapDataModule = require(Components.LuauHeap.LuauHeapData)
+local VoiceChatDataModule = require(Components.VoiceChat.VoiceChatData)
+local VoiceDebugDataModule = require(Components.VoiceDebug.VoiceDebugData)
+local GetFFlagVoiceDebugConsoleV2Module = require(Components.VoiceDebug.GetFFlagVoiceDebugConsoleV2)
+local DataContextModule = require(Components.DataContext)
+local DataProvider = RoactModule.Component:extend("DataProvider")
+local VoiceChatDevConsoleTabEnabledEngineFeature = game:GetEngineFeature("VoiceChatDevConsoleTabEnabled")
+local DevConsoleStartDataOnMount = game:DefineFastFlag("DevConsoleStartDataOnMount", false)
 
-function dataProvider.init(p1)
-	-- upvalues: logDataModule (ref), clientMemoryDataModule (ref), serverMemoryDataModule (ref), networkDataModule (ref), serverScriptsDataModule (ref), dataStoresDataModule (ref), serverStatsDataModule (ref), actionBindingsDataModule (ref), serverJobsDataModule (ref), debugVisualizationsDataModule (ref), luauHeapDataModule (ref), voiceChatDevConsoleTabEnabledEngineFeature (ref), getFFlagVoiceDebugConsoleV2Module (ref), voiceChatDataModule (ref), voiceDebugDataModule (ref)
+function DataProvider.init(p1) --[[ Line: 28 ]]
+	-- upvalues: LogDataModule (copy), ClientMemoryDataModule (copy), ServerMemoryDataModule (copy), NetworkDataModule (copy), ServerScriptsDataModule (copy), DataStoresDataModule (copy), ServerStatsDataModule (copy), ActionBindingsDataModule (copy), ServerJobsDataModule (copy), DebugVisualizationsDataModule (copy), LuauHeapDataModule (copy), VoiceChatDevConsoleTabEnabledEngineFeature (copy), GetFFlagVoiceDebugConsoleV2Module (copy), VoiceChatDataModule (copy), VoiceDebugDataModule (copy)
 	p1:setState({
 		DevConsoleData = {
-			ClientLogData = logDataModule.new(true),
-			ServerLogData = logDataModule.new(false),
-			ClientMemoryData = clientMemoryDataModule.new(),
-			ServerMemoryData = serverMemoryDataModule.new(),
-			ClientNetworkData = networkDataModule.new(true),
-			ServerNetworkData = networkDataModule.new(false),
-			ServerScriptsData = serverScriptsDataModule.new(),
-			DataStoresData = dataStoresDataModule.new(),
-			ServerStatsData = serverStatsDataModule.new(),
-			ActionBindingsData = actionBindingsDataModule.new(),
-			ServerJobsData = serverJobsDataModule.new(),
-			DebugVisualizationsData = debugVisualizationsDataModule.new(),
-			LuauHeapData = luauHeapDataModule.new(),
-			VoiceChatData = if voiceChatDevConsoleTabEnabledEngineFeature and not getFFlagVoiceDebugConsoleV2Module() then voiceChatDataModule.new() else nil,
-			VoiceDebugData = if voiceChatDevConsoleTabEnabledEngineFeature and getFFlagVoiceDebugConsoleV2Module() then voiceDebugDataModule.new() else nil
+			ClientLogData = LogDataModule.new(true),
+			ServerLogData = LogDataModule.new(false),
+			ClientMemoryData = ClientMemoryDataModule.new(),
+			ServerMemoryData = ServerMemoryDataModule.new(),
+			ClientNetworkData = NetworkDataModule.new(true),
+			ServerNetworkData = NetworkDataModule.new(false),
+			ServerScriptsData = ServerScriptsDataModule.new(),
+			DataStoresData = DataStoresDataModule.new(),
+			ServerStatsData = ServerStatsDataModule.new(),
+			ActionBindingsData = ActionBindingsDataModule.new(),
+			ServerJobsData = ServerJobsDataModule.new(),
+			DebugVisualizationsData = DebugVisualizationsDataModule.new(),
+			LuauHeapData = LuauHeapDataModule.new(),
+			VoiceChatData = if VoiceChatDevConsoleTabEnabledEngineFeature and not GetFFlagVoiceDebugConsoleV2Module() then VoiceChatDataModule.new() else nil,
+			VoiceDebugData = if VoiceChatDevConsoleTabEnabledEngineFeature and GetFFlagVoiceDebugConsoleV2Module() then VoiceDebugDataModule.new() else nil
 		}
 	})
 end
 
-function dataProvider.didMount(p1)
-	-- upvalues: voiceChatDevConsoleTabEnabledEngineFeature (ref), getFFlagVoiceDebugConsoleV2Module (ref), devConsoleStartDataOnMount (ref)
+function DataProvider.didMount(p1) --[[ Line: 54 ]]
+	-- upvalues: VoiceChatDevConsoleTabEnabledEngineFeature (copy), GetFFlagVoiceDebugConsoleV2Module (copy), DevConsoleStartDataOnMount (copy)
 	p1.state.DevConsoleData.ClientLogData:start()
 	p1.state.DevConsoleData.ClientMemoryData:start()
 	
-	if voiceChatDevConsoleTabEnabledEngineFeature then
-		if getFFlagVoiceDebugConsoleV2Module() then
+	if VoiceChatDevConsoleTabEnabledEngineFeature then
+		if GetFFlagVoiceDebugConsoleV2Module() then
 			p1.state.DevConsoleData.VoiceDebugData:start()
 		else
 			p1.state.DevConsoleData.VoiceChatData:start()
 		end
 	end
-	if devConsoleStartDataOnMount and p1.props.isDeveloperView then
-		for i, v in pairs(p1.state.DevConsoleData) do
-			if not v:isRunning() then
-				v:start()
+	if DevConsoleStartDataOnMount and p1.props.isDeveloperView then
+		for _, value in pairs(p1.state.DevConsoleData) do
+			if not value:isRunning() then
+				value:start()
 			end
 		end
 	end
 end
 
-function dataProvider.willUpdate(p2, p3, _)
+function DataProvider.willUpdate(p2, p3, _) --[[ Line: 75 ]]
 	if p3.isDeveloperView and not p2.props.isDeveloperView then
-		for i, v in pairs(p2.state.DevConsoleData) do
-			if not v:isRunning() then
-				v:start()
+		for _, value in pairs(p2.state.DevConsoleData) do
+			if not value:isRunning() then
+				value:start()
 			end
 		end
 	end
 end
 
-function dataProvider.render(p4)
-	-- upvalues: roactModule (ref), dataContextModule (ref)
-	return roactModule.createElement(dataContextModule.Provider, { value = p4.state.DevConsoleData }, roactModule.oneChild(p4.props[roactModule.Children]))
+function DataProvider.render(p4) --[[ Line: 85 ]]
+	-- upvalues: RoactModule (copy), DataContextModule (copy)
+	return RoactModule.createElement(DataContextModule.Provider, { value = p4.state.DevConsoleData }, RoactModule.oneChild(p4.props[RoactModule.Children]))
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p4, _)
+return RoactRoduxModule.UNSTABLE_connect2(function(p4, _) --[[ Line: 91 | Named "mapStateToProps" ]]
 	return { isDeveloperView = p4.MainView.isDeveloperView }
-end, nil)(dataProvider)
+end, nil)(DataProvider)

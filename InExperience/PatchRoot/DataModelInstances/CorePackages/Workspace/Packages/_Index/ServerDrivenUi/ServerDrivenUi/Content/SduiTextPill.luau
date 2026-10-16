@@ -1,58 +1,59 @@
-﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local colors = require(parent.Style).Colors
-local useTokens = foundationModule.Hooks.useTokens
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
+﻿local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local Colors = require(Parent.Style).Colors
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 
-return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), colors (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
+return ReactModule.memo(function(p1) --[[ Line: 25 | Named "SduiTextPill" ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), Colors (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
 	if p1.text and p1.text ~= "" then
-		local layoutOrder = p1.layoutOrder
-		local anchorPoint = p1.anchorPoint
-		local position = p1.position
-		local zIndex = p1.zIndex
-		local backgroundColor3 = p1.backgroundColor3
-		local backgroundTransparency = p1.backgroundTransparency
-		local textColor3 = p1.textColor3
-		local var1 = useTokens()
-		local small = var1.Padding.Small
-		local xSmall = var1.Padding.XSmall
-		local fontStyle = p1.fontStyle or var1.Typography.LabelSmall
+		local LayoutOrder = p1.layoutOrder
+		local AnchorPoint = p1.anchorPoint
+		local Position = p1.position
+		local ZIndex = p1.zIndex
+		local BackgroundColor3 = p1.backgroundColor3
+		local BackgroundTransparency = p1.backgroundTransparency
+		local TextColor3 = p1.textColor3
+		local UseTokensResult = UseTokensFunction()
+		local Small = UseTokensResult.Padding.Small
+		local XSmall = UseTokensResult.Padding.XSmall
+		local FontStyle = p1.fontStyle or UseTokensResult.Typography.LabelSmall
 		
-		return reactModule.createElement("Frame", {
-			[reactModule.Tag] = "data-testid=--sdui-text-pill",
-			BackgroundColor3 = backgroundColor3 or colors.White,
-			BackgroundTransparency = backgroundTransparency or 0,
-			Position = position,
-			AnchorPoint = anchorPoint,
-			LayoutOrder = layoutOrder,
-			ZIndex = zIndex,
+		return ReactModule.createElement("Frame", {
+			[ReactModule.Tag] = "data-testid=--sdui-text-pill",
+			BackgroundColor3 = BackgroundColor3 or Colors.White,
+			BackgroundTransparency = BackgroundTransparency or 0,
+			Position = Position,
+			AnchorPoint = AnchorPoint,
+			LayoutOrder = LayoutOrder,
+			ZIndex = ZIndex,
 			AutomaticSize = Enum.AutomaticSize.XY
 		}, {
-			Corner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) }),
-			UIPadding = reactModule.createElement("UIPadding", {
-				PaddingTop = UDim.new(0, xSmall),
-				PaddingLeft = UDim.new(0, small),
-				PaddingBottom = UDim.new(0, xSmall),
-				PaddingRight = UDim.new(0, small)
+			Corner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) }),
+			UIPadding = ReactModule.createElement("UIPadding", {
+				PaddingTop = UDim.new(0, XSmall),
+				PaddingLeft = UDim.new(0, Small),
+				PaddingBottom = UDim.new(0, XSmall),
+				PaddingRight = UDim.new(0, Small)
 			}),
-			TextLabel = reactModule.createElement("TextLabel", {
+			TextLabel = ReactModule.createElement("TextLabel", {
 				BackgroundTransparency = 1,
 				TextWrapped = false,
-				Size = UDim2.new(0, 0, 0, fontStyle.FontSize * fontStyle.LineHeight),
+				Size = UDim2.new(0, 0, 0, FontStyle.FontSize * FontStyle.LineHeight),
 				AutomaticSize = Enum.AutomaticSize.X,
 				Text = p1.text,
-				TextColor3 = textColor3 or var1.LightMode.Content.Emphasis.Color3,
-				Font = if foundationFontFaceMigration then nil else fontStyle.Font,
-				FontFace = if foundationFontFaceMigration then normalizeFontFace(fontStyle.Font) else nil,
-				TextSize = fontStyle.FontSize,
+				TextColor3 = TextColor3 or UseTokensResult.LightMode.Content.Emphasis.Color3,
+				Font = if FoundationFontFaceMigration then nil else FontStyle.Font,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(FontStyle.Font) else nil,
+				TextSize = FontStyle.FontSize,
 				TextXAlignment = Enum.TextXAlignment.Center,
 				TextYAlignment = Enum.TextYAlignment.Center,
 				TextTruncate = Enum.TextTruncate.AtEnd
 			})
 		})
+	else
+		return nil
 	end
-	return nil
 end)

@@ -1,122 +1,193 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local dashModule = require(parent.Dash)
-local reactModule = require(parent.React)
-local reactUtilsModule = require(parent.ReactUtils)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local constantsModule = require(foundation.Constants)
-local stateLayerAffordanceModule = require(foundation.Enums.StateLayerAffordance)
-local sheet = script:FindFirstAncestor("Sheet")
-local sheetContextModule = require(sheet.SheetContext)
-local sheetTypeModule = require(sheet.SheetType)
-local scrollViewModule = require(foundation.Components.ScrollView)
-local _ = require(foundation.Components.Types)
-local viewModule = require(foundation.Components.View)
-local isScrollingFrameOverflowingYModule = require(foundation.Utility.isScrollingFrameOverflowingY)
-local useComposedRef = reactUtilsModule.useComposedRef
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local DashModule = require(Parent.Dash)
+local ReactModule = require(Parent.React)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local ConstantsModule = require(Foundation.Constants)
+local StateLayerAffordanceModule = require(Foundation.Enums.StateLayerAffordance)
+local Sheet = script:FindFirstAncestor("Sheet")
+local SheetContextModule = require(Sheet.SheetContext)
+local SheetTypeModule = require(Sheet.SheetType)
+local FlagsModule = require(Foundation.Utility.Flags)
+local ScrollViewModule = require(Foundation.Components.ScrollView)
+local _ = require(Foundation.Components.Types)
+local ViewModule = require(Foundation.Components.View)
+local DevAssertModule = require(Foundation.Utility.devAssert)
+local IsScrollingFrameOverflowingYModule = require(Foundation.Utility.isScrollingFrameOverflowingY)
+local UseComposedRefFunction = require(Parent.ReactUtils).useComposedRef
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useTokensModule (ref), reactModule (ref), sheetContextModule (ref), isScrollingFrameOverflowingYModule (ref), sheetTypeModule (ref), viewModule (ref), stateLayerAffordanceModule (ref), dashModule (ref), useComposedRef (ref), scrollViewModule (ref), constantsModule (ref)
-	local var1 = useTokensModule()
-	local var2 = reactModule.useContext(sheetContextModule)
-	local innerScrollingEnabled = var2.innerScrollingEnabled
-	local setInnerScrollY = var2.setInnerScrollY
-	local innerScrollingRef = var2.innerScrollingRef
-	local actionsHeight = var2.actionsHeight
-	local sheetContentHeight = var2.sheetContentHeight
-	local setHasActionsDivider = var2.setHasActionsDivider
-	local bottomPadding = var2.bottomPadding
-	local hasHeader = var2.hasHeader
-	local hasFullBleed = var2.hasFullBleed
-	local fullBleedHeight = var2.fullBleedHeight
-	local sheetType = var2.sheetType
-	local testId = var2.testId
-	assert(innerScrollingEnabled and (setInnerScrollY and (actionsHeight and (setHasActionsDivider and (bottomPadding and (hasHeader and testId))))), "SheetContent must be used within a Sheet")
-	local var3, var4 = reactModule.useBinding(false)
-	local var5 = reactModule.useCallback(function(p3)
-		-- upvalues: setInnerScrollY (ref), isScrollingFrameOverflowingYModule (copy), setHasActionsDivider (ref), var4 (ref)
-		setInnerScrollY(p3.CanvasPosition.Y)
-		local var6 = isScrollingFrameOverflowingYModule(p3, 1)
-		setHasActionsDivider(var6)
-		var4(var6)
-	end, { setHasActionsDivider, setInnerScrollY })
-	local var6, var7 = reactModule.useBinding(0)
-	local var8 = reactModule.useCallback(function(p3)
-		-- upvalues: var7 (ref)
-		var7(p3.AbsoluteSize.Y)
-	end, {})
-	local var9 = sheetType == sheetTypeModule.Bottom
-	local var10 = if p1.isContentFullBleed then nil else UDim.new(0, var1.Padding.Small)
-	local var11 = p1.Selectable == nil or p1.Selectable
+local function _(ScrollFrame): number --[[ Line: 26 | Named "getMaxCanvasPositionY" ]]
+	return (math.max(0, ScrollFrame.AbsoluteCanvasSize.Y - ScrollFrame.AbsoluteWindowSize.Y))
+end
+
+return ReactModule.memo(ReactModule.forwardRef(function(Gui, Ref) --[[ Line: 40 | Named "SheetContent" ]]
+	-- upvalues: UseTokensModule (copy), ReactModule (copy), SheetContextModule (copy), FlagsModule (copy), DevAssertModule (copy), IsScrollingFrameOverflowingYModule (copy), SheetTypeModule (copy), ViewModule (copy), StateLayerAffordanceModule (copy), DashModule (copy), UseComposedRefFunction (copy), ConstantsModule (copy), ScrollViewModule (copy)
+	local UseTokensModuleResult = UseTokensModule()
+	local UseContextResult = ReactModule.useContext(SheetContextModule)
+	local InnerScrollingEnabled = UseContextResult.innerScrollingEnabled
+	local SetInnerScrollYFunction = UseContextResult.setInnerScrollY
+	local InnerScrollingRef = UseContextResult.innerScrollingRef
+	local ActionsHeight = UseContextResult.actionsHeight
+	local SheetContentHeight = UseContextResult.sheetContentHeight
+	local SetHasActionsDividerFunction = UseContextResult.setHasActionsDivider
+	local BottomPadding = UseContextResult.bottomPadding
+	local HasHeader = UseContextResult.hasHeader
+	local HasFullBleed = UseContextResult.hasFullBleed
+	local FullBleedHeight = UseContextResult.fullBleedHeight
+	local SheetType = UseContextResult.sheetType
+	local TestId = UseContextResult.testId
+	assert(InnerScrollingEnabled and (SetInnerScrollYFunction and (ActionsHeight and (SetHasActionsDividerFunction and (BottomPadding and (HasHeader and TestId))))), "SheetContent must be used within a Sheet")
+	local IsIsReversed: boolean = if FlagsModule.FoundationSheetReversedContent then Gui.isReversed == true else false
+	local ContentRevealOffset = if IsIsReversed then UseContextResult.contentRevealOffset else nil
 	
-	return reactModule.createElement(scrollViewModule, {
+	if FlagsModule.FoundationSheetReversedContent then
+		DevAssertModule(not (IsIsReversed and HasFullBleed), "Sheet.Content with isReversed=true is unsupported when used with Sheet.FullBleed")
+	end
+	if FlagsModule.FoundationSheetReversedContent then
+		local SetIsContentReversedFunction = UseContextResult.setIsContentReversed
+		ReactModule.useLayoutEffect(function() --[[ Line: 78 ]]
+			-- upvalues: IsIsReversed (copy), SetIsContentReversedFunction (copy)
+			if IsIsReversed and SetIsContentReversedFunction then
+				SetIsContentReversedFunction(true)
+				
+				return function() --[[ Line: 83 ]]
+					-- upvalues: SetIsContentReversedFunction (upval)
+					SetIsContentReversedFunction(false)
+				end
+			else
+				return nil
+			end
+		end, { IsIsReversed, SetIsContentReversedFunction })
+	end
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(false)
+	local UseRefResult = if FlagsModule.FoundationSheetReversedContent then ReactModule.useRef(true) else nil
+	local WindowSizeY = nil
+	local Callback = nil
+	
+	if FlagsModule.FoundationSheetReversedContent then
+		WindowSizeY, Callback = ReactModule.useBinding(0)
+	end
+	local UseResult = ReactModule.useCallback(function(ScrollFrame) --[[ Line: 97 ]]
+		-- upvalues: IsIsReversed (copy), UseRefResult (copy), SetInnerScrollYFunction (copy), IsScrollingFrameOverflowingYModule (upval), Callback (ref), SetHasActionsDividerFunction (copy), UseBindingResult2 (copy)
+		if IsIsReversed and UseRefResult.current then
+			ScrollFrame.CanvasPosition = Vector2.new(0, (math.max(0, ScrollFrame.AbsoluteCanvasSize.Y - ScrollFrame.AbsoluteWindowSize.Y)))
+		end
+		SetInnerScrollYFunction(ScrollFrame.CanvasPosition.Y)
+		local IsScrollingFrameOverflowingYModule1 = IsScrollingFrameOverflowingYModule(ScrollFrame, 1)
+		
+		if IsIsReversed then
+			Callback(ScrollFrame.AbsoluteWindowSize.Y)
+			SetHasActionsDividerFunction(math.max(0, ScrollFrame.AbsoluteCanvasSize.Y - ScrollFrame.AbsoluteWindowSize.Y) - ScrollFrame.CanvasPosition.Y > 1)
+		else
+			SetHasActionsDividerFunction(IsScrollingFrameOverflowingYModule1)
+		end
+		UseBindingResult2(IsScrollingFrameOverflowingYModule1)
+	end, {
+		IsIsReversed,
+		SetHasActionsDividerFunction,
+		SetInnerScrollYFunction
+	})
+	local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(0)
+	local IsSheetTypeMatch = SheetType == SheetTypeModule.Bottom
+	local _UDim = if Gui.isContentFullBleed then nil else UDim.new(0, UseTokensModuleResult.Padding.Small)
+	local NoSelectable = Gui.Selectable == nil or Gui.Selectable
+	local Element = ReactModule.createElement(ScrollViewModule, {
 		ZIndex = 1,
-		tag = "fill size-full-0 auto-y",
-		scrollingFrameRef = useComposedRef(innerScrollingRef, p1.scrollingFrameRef),
+		scrollingFrameRef = UseComposedRefFunction(InnerScrollingRef, Gui.scrollingFrameRef),
 		selection = {
-			Selectable = if var3 then var3:map(function(p3)
-				-- upvalues: var11 (ref)
-				return var11 and p3
+			Selectable = if UseBindingResult then UseBindingResult:map(function(p1) --[[ Line: 143 ]]
+				-- upvalues: NoSelectable (copy)
+				return NoSelectable and p1
 			end) else nil,
-			NextSelectionUp = p1.NextSelectionUp,
-			NextSelectionDown = p1.NextSelectionDown,
-			NextSelectionLeft = p1.NextSelectionLeft,
-			NextSelectionRight = p1.NextSelectionRight
+			NextSelectionUp = Gui.NextSelectionUp,
+			NextSelectionDown = Gui.NextSelectionDown,
+			NextSelectionLeft = Gui.NextSelectionLeft,
+			NextSelectionRight = Gui.NextSelectionRight
 		},
 		scroll = {
-			ScrollingEnabled = innerScrollingEnabled,
+			ScrollingEnabled = InnerScrollingEnabled,
 			AutomaticCanvasSize = Enum.AutomaticSize.Y,
-			CanvasSize = if sheetContentHeight then var6:map(function(p3)
-				return UDim2.new(1, 0, 0, p3)
+			CanvasSize = if SheetContentHeight then UseBindingResult1:map(function(YOffset): UDim2 --[[ Line: 212 ]]
+				return UDim2.new(1, 0, 0, YOffset)
 			end) else UDim2.fromScale(1, 0),
 			ScrollingDirection = Enum.ScrollingDirection.Y
 		},
-		Size = if sheetContentHeight then UDim2.fromScale(1, 1) else nil,
+		Size = if SheetContentHeight then UDim2.fromScale(1, 1) else nil,
+		Position = if ContentRevealOffset then ContentRevealOffset:map(function(p1): UDim2 --[[ Line: 220 ]]
+			return UDim2.fromOffset(0, -p1)
+		end) else nil,
 		padding = {
-			top = hasHeader:map(function(p3)
-				-- upvalues: hasFullBleed (ref), var9 (ref), var1 (ref)
-				return if p3 or hasFullBleed then UDim.new(0, 0) else UDim.new(0, if var9 then var1.Padding.Small else var1.Margin.Small)
+			top = HasHeader:map(function(p1): UDim --[[ Line: 225 ]]
+				-- upvalues: HasFullBleed (copy), IsSheetTypeMatch (copy), UseTokensModuleResult (copy)
+				return if p1 or HasFullBleed then UDim.new(0, 0) else UDim.new(0, if IsSheetTypeMatch then UseTokensModuleResult.Padding.Small else UseTokensModuleResult.Margin.Small)
 			end),
-			bottom = if var9 then actionsHeight:map(function(p3)
-				-- upvalues: bottomPadding (ref), var1 (ref)
-				return UDim.new(0, p3 + bottomPadding + var1.Margin.Small)
-			end) else UDim.new(0, var1.Padding.Small),
-			left = var10,
-			right = var10
+			bottom = if IsSheetTypeMatch then ActionsHeight:map(function(p1): UDim --[[ Line: 231 ]]
+				-- upvalues: BottomPadding (copy), UseTokensModuleResult (copy)
+				return UDim.new(0, p1 + BottomPadding + UseTokensModuleResult.Margin.Small)
+			end) else UDim.new(0, UseTokensModuleResult.Padding.Small),
+			left = _UDim,
+			right = _UDim
 		},
-		ClipsDescendants = if var9 then hasHeader else true,
-		onCanvasPositionChanged = function(p3)
-			-- upvalues: setInnerScrollY (ref)
-			setInnerScrollY(p3.CanvasPosition.Y)
+		ClipsDescendants = not IsSheetTypeMatch or HasHeader,
+		onCanvasPositionChanged = function(ScrollFrame) --[[ Line: 239 ]]
+			-- upvalues: IsIsReversed (copy), UseRefResult (copy), SetHasActionsDividerFunction (copy), SetInnerScrollYFunction (copy)
+			if IsIsReversed then
+				UseRefResult.current = math.max(0, ScrollFrame.AbsoluteCanvasSize.Y - ScrollFrame.AbsoluteWindowSize.Y) - ScrollFrame.CanvasPosition.Y <= 1
+				SetHasActionsDividerFunction(not UseRefResult.current)
+			end
+			SetInnerScrollYFunction(ScrollFrame.CanvasPosition.Y)
 		end,
-		onAbsoluteCanvasSizeChanged = var5,
-		onAbsoluteWindowSizeChanged = var5,
-		testId = `{testId}--content`,
-		ref = p2
-	}, reactModule.createElement(viewModule, {
-		onAbsoluteSizeChanged = var8,
+		onAbsoluteCanvasSizeChanged = UseResult,
+		onAbsoluteWindowSizeChanged = UseResult,
+		testId = `{TestId}--content`,
+		tag = if ContentRevealOffset then "size-full" else "fill size-full-0 auto-y",
+		ref = Ref
+	}, (ReactModule.createElement(ViewModule, {
+		onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame) --[[ Line: 115 ]]
+			-- upvalues: UseBindingResult2_1 (copy)
+			UseBindingResult2_1(Frame.AbsoluteSize.Y)
+		end, {}),
+		Position = if ContentRevealOffset then ContentRevealOffset:map(function(YOffset): UDim2 --[[ Line: 123 ]]
+			return UDim2.fromOffset(0, YOffset)
+		end) else nil,
+		Size = if ContentRevealOffset then ReactModule.joinBindings({
+			windowSizeY = WindowSizeY,
+			revealOffset = ContentRevealOffset
+		}):map(function(p1): UDim2 --[[ Line: 129 ]]
+			return UDim2.new(1, 0, 0, (math.max(0, p1.windowSizeY - p1.revealOffset)))
+		end) elseif IsIsReversed then WindowSizeY:map(function(YOffset): UDim2 --[[ Line: 132 ]]
+			return UDim2.new(1, 0, 0, YOffset)
+		end) else nil,
 		tag = {
 			["col align-x-center gap-medium size-full-0 auto-y"] = true,
-			["padding-x-medium"] = not p1.isContentFullBleed
+			["padding-x-medium"] = not Gui.isContentFullBleed,
+			["align-y-bottom"] = IsIsReversed
 		}
 	}, {
-		FullBleedSpacer = if hasFullBleed and fullBleedHeight then reactModule.createElement(viewModule, {
-			Size = fullBleedHeight:map(function(p3)
-				return UDim2.new(1, 0, 0, math.max(0, p3))
+		FullBleedSpacer = if HasFullBleed and FullBleedHeight then ReactModule.createElement(ViewModule, {
+			Size = FullBleedHeight:map(function(p1: number): UDim2 --[[ Line: 187 ]]
+				return UDim2.new(1, 0, 0, (math.max(0, p1)))
 			end),
-			LayoutOrder = constantsModule.MIN_LAYOUT_ORDER,
-			testId = `{testId}--content--full-bleed-spacer`
+			LayoutOrder = ConstantsModule.MIN_LAYOUT_ORDER,
+			testId = `{TestId}--content--full-bleed-spacer`
 		}) else nil,
-		Children = reactModule.createElement(reactModule.Fragment, nil, p1.children),
-		ContentInteractionSinkContainer = reactModule.createElement("Folder", nil, {
-			ContentInteractionSink = if var2.isVerticalSheetGesture then reactModule.createElement(viewModule, {
+		Children = ReactModule.createElement(ReactModule.Fragment, nil, Gui.children),
+		ContentInteractionSinkContainer = ReactModule.createElement("Folder", nil, {
+			ContentInteractionSink = if UseContextResult.isVerticalSheetGesture then ReactModule.createElement(ViewModule, {
 				Selectable = false,
 				ZIndex = 2,
 				Size = UDim2.fromScale(1, 1),
-				testId = `{testId}--content--interaction-sink`,
-				stateLayer = { affordance = stateLayerAffordanceModule.None },
-				onActivated = dashModule.noop
+				testId = `{TestId}--content--interaction-sink`,
+				stateLayer = { affordance = StateLayerAffordanceModule.None },
+				onActivated = DashModule.noop
 			}) else nil
 		})
-	}))
+	})))
+	
+	return if ContentRevealOffset then ReactModule.createElement(ViewModule, {
+		ClipsDescendants = true,
+		ZIndex = 1,
+		tag = "fill size-full-0",
+		testId = `{TestId}--content--viewport`
+	}, { ScrollView = Element }) else Element
 end))

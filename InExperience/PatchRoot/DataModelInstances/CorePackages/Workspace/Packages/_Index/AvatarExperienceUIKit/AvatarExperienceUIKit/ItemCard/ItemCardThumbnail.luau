@@ -1,88 +1,93 @@
-﻿local runService = game:GetService("RunService")
-local parent = script:FindFirstAncestor("AvatarExperienceUIKit").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local image = foundationModule.Image
-local skeleton = foundationModule.Skeleton
-local radius = foundationModule.Enums.Radius
-local itemCardThumbnailSkeletonModule = require(script.Parent.ItemCardThumbnailSkeleton)
-local useDesignTokens = require(parent.Style).useDesignTokens
-local fFlagLuaAppHomePageFirstImageLoadObserver = require(parent.SharedFlags).FFlagLuaAppHomePageFirstImageLoadObserver
-local fFlagAXTestSkeletonInCatalog = require(parent.AvatarExperienceFlags).FFlagAXTestSkeletonInCatalog
-local fFlagAXTestSkeletonInCatalog_1 = game:DefineFastFlag("AXTestDontUseSkeletonOnloadInCatalog", false) and fFlagAXTestSkeletonInCatalog
+﻿local RunService = game:GetService("RunService")
+local Parent = script:FindFirstAncestor("AvatarExperienceUIKit").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local Image = FoundationModule.Image
+local Skeleton = FoundationModule.Skeleton
+local Radius = FoundationModule.Enums.Radius
+local ItemCardThumbnailSkeletonModule = require(script.Parent.ItemCardThumbnailSkeleton)
+local UseDesignTokensFunction = require(Parent.Style).useDesignTokens
+local FFlagLuaAppHomePageFirstImageLoadObserver = require(Parent.SharedFlags).FFlagLuaAppHomePageFirstImageLoadObserver
+local FFlagAXTestSkeletonInCatalog = require(Parent.AvatarExperienceFlags).FFlagAXTestSkeletonInCatalog
+local FFlagAXTestSkeletonInCatalog1 = game:DefineFastFlag("AXTestDontUseSkeletonOnloadInCatalog", false) and FFlagAXTestSkeletonInCatalog
 
-return reactModule.forwardRef(function(p1, p2)
-	-- upvalues: reactModule (ref), useDesignTokens (ref), fFlagLuaAppHomePageFirstImageLoadObserver (ref), runService (ref), fFlagAXTestSkeletonInCatalog (ref), fFlagAXTestSkeletonInCatalog_1 (ref), itemCardThumbnailSkeletonModule (ref), radius (ref), image (ref), skeleton (ref)
-	local var1, var2 = reactModule.useState(false)
-	local var3 = useDesignTokens()
-	local tag = p1.tag
-	local var4 = reactModule.useCallback(function(p3)
-		-- upvalues: p2 (ref), var2 (ref), p1 (ref), runService (copy)
-		if typeof(p2) == "function" then
-			p2(p3)
-		elseif typeof(p2) == "table" then
-			p2.current = p3
+return ReactModule.forwardRef(function(p1, Callback) --[[ Line: 34 | Named "ItemCardThumbnail" ]]
+	-- upvalues: ReactModule (copy), UseDesignTokensFunction (copy), FFlagLuaAppHomePageFirstImageLoadObserver (copy), RunService (copy), FFlagAXTestSkeletonInCatalog (copy), FFlagAXTestSkeletonInCatalog1 (copy), ItemCardThumbnailSkeletonModule (copy), Radius (copy), Image (copy), Skeleton (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseDesignTokensResult = UseDesignTokensFunction()
+	local Tag = p1.tag
+	local ObservedName = if FFlagLuaAppHomePageFirstImageLoadObserver then if Tag then `{Tag} observed-image` else "observed-image" else Tag
+	local UseResult = ReactModule.useCallback(function(Current) --[[ Line: 43 ]]
+		-- upvalues: Callback (copy), UseStateResult2 (copy), p1 (copy), RunService (upval)
+		if typeof(Callback) == "function" then
+			Callback(Current)
+		elseif typeof(Callback) == "table" then
+			Callback.current = Current
 		end
-		var2(false)
+		UseStateResult2(false)
 		
-		if p3 and p1.url then
-			local heartbeatConnection = nil
-			local currentTime = tick()
-			heartbeatConnection = runService.Heartbeat:Connect(function(p4)
-				-- upvalues: currentTime (write), p3 (ref), var2 (copy), p1 (copy), heartbeatConnection (write)
-				currentTime += p4
+		if Current and p1.url then
+			local Connection = nil
+			local CurrentTime = tick()
+			Connection = RunService.Heartbeat:Connect(function(DeltaTime) --[[ Line: 53 ]]
+				-- upvalues: CurrentTime (ref), Current (copy), UseStateResult2 (upval), p1 (upval), Connection (ref)
+				CurrentTime += DeltaTime
 				
-				if p3.IsLoaded then
-					var2(true)
+				if Current.IsLoaded then
+					UseStateResult2(true)
 					
 					if p1.onLoaded then
-						p1.onLoaded(currentTime)
+						p1.onLoaded(CurrentTime)
 					end
-					heartbeatConnection:Disconnect()
+					Connection:Disconnect()
 					
 					return
-				elseif not p3.Parent then
-					heartbeatConnection:Disconnect()
+				elseif not Current.Parent then
+					Connection:Disconnect()
 				end
 			end)
 		end
 	end, { p1.onLoaded, p1.url })
 	
-	return if not (not fFlagAXTestSkeletonInCatalog or not p1.inSkeletonExperiment) then reactModule.createElement(reactModule.Fragment, nil, {
-		ItemCardThumbnailSkeleton = if fFlagAXTestSkeletonInCatalog_1 or var1 then nil else reactModule.createElement(itemCardThumbnailSkeletonModule, {
+	return if FFlagAXTestSkeletonInCatalog and p1.inSkeletonExperiment then ReactModule.createElement(ReactModule.Fragment, nil, {
+		ItemCardThumbnailSkeleton = if FFlagAXTestSkeletonInCatalog1 or UseStateResult then nil else ReactModule.createElement(ItemCardThumbnailSkeletonModule, {
 			ZIndex = 2,
 			Size = UDim2.fromScale(1, 1),
 			testId = `item-card-thumbnail-skeleton-{p1.url}`,
-			radius = radius.Medium
+			radius = Radius.Medium
 		}),
-		ItemCardThumbnailImage = reactModule.createElement(image, {
+		ItemCardThumbnailImage = ReactModule.createElement(Image, {
 			imageRect = p1.imageRect,
 			Image = p1.url,
 			Size = UDim2.fromScale(1, 1),
 			ScaleType = Enum.ScaleType.Crop,
-			ref = var4,
+			ref = UseResult,
 			testId = `item-card-thumbnail-image-{p1.url}`,
 			tag = p1.tag
 		}, {
-			CornerRadius = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, var3.Radius.Medium) })
+			CornerRadius = ReactModule.createElement("UICorner", {
+				CornerRadius = UDim.new(0, UseDesignTokensResult.Radius.Medium)
+			})
 		})
-	}) else reactModule.createElement(reactModule.Fragment, nil, {
-		ItemCardThumbnailSkeleton = if not var1 then reactModule.createElement(skeleton, {
+	}) else ReactModule.createElement(ReactModule.Fragment, nil, {
+		ItemCardThumbnailSkeleton = if UseStateResult then nil else ReactModule.createElement(Skeleton, {
 			ZIndex = 2,
 			Size = UDim2.fromScale(1, 1),
 			testId = `item-card-thumbnail-skeleton-{p1.url}`,
-			radius = radius.Medium
-		}) else nil,
-		ItemCardThumbnailImage = reactModule.createElement(image, {
+			radius = Radius.Medium
+		}),
+		ItemCardThumbnailImage = ReactModule.createElement(Image, {
 			imageRect = p1.imageRect,
 			Image = p1.url,
 			Size = UDim2.fromScale(1, 1),
 			ScaleType = Enum.ScaleType.Crop,
-			ref = var4,
+			ref = UseResult,
 			testId = `item-card-thumbnail-image-{p1.url}`,
-			tag = if fFlagLuaAppHomePageFirstImageLoadObserver then if tag then `{tag} observed-image` else "observed-image" else tag
+			tag = ObservedName
 		}, {
-			CornerRadius = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, var3.Radius.Medium) })
+			CornerRadius = ReactModule.createElement("UICorner", {
+				CornerRadius = UDim.new(0, UseDesignTokensResult.Radius.Medium)
+			})
 		})
 	})
 end)

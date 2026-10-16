@@ -1,102 +1,104 @@
-﻿local httpService = game:GetService("HttpService")
-local squadsCore = script:FindFirstAncestor("SquadsCore")
-local signalsModule = require(squadsCore.Parent.Signals)
-local getLuckyRecommendation = require(squadsCore.NetworkRequests).getLuckyRecommendation
-local squadLuckyRecommendationErrorModule = require(squadsCore.Enums.SquadLuckyRecommendationError)
-local squadLuckyRecommendationPhaseModule = require(squadsCore.Enums.SquadLuckyRecommendationPhase)
-local squadLuckyRecommendationRevealTypeModule = require(squadsCore.Enums.SquadLuckyRecommendationRevealType)
-local _ = require(squadsCore.Types)
+﻿local HttpService = game:GetService("HttpService")
+local SquadsCore = script:FindFirstAncestor("SquadsCore")
+local SignalsModule = require(SquadsCore.Parent.Signals)
+local GetLuckyRecommendationFunction = require(SquadsCore.NetworkRequests).getLuckyRecommendation
+local SquadLuckyRecommendationErrorModule = require(SquadsCore.Enums.SquadLuckyRecommendationError)
+local SquadLuckyRecommendationPhaseModule = require(SquadsCore.Enums.SquadLuckyRecommendationPhase)
+local SquadLuckyRecommendationRevealTypeModule = require(SquadsCore.Enums.SquadLuckyRecommendationRevealType)
+local _ = require(SquadsCore.Types)
 
-return function()
-	-- upvalues: signalsModule (ref), squadLuckyRecommendationPhaseModule (ref), squadLuckyRecommendationRevealTypeModule (ref), getLuckyRecommendation (ref), httpService (ref), squadLuckyRecommendationErrorModule (ref)
-	local var1, var2 = signalsModule.createSignal({ phase = squadLuckyRecommendationPhaseModule.Idle })
-	local var3 = nil
-	local var4 = nil
+return function() --[[ Line: 46 ]]
+	-- upvalues: SignalsModule (copy), SquadLuckyRecommendationPhaseModule (copy), SquadLuckyRecommendationRevealTypeModule (copy), GetLuckyRecommendationFunction (copy), HttpService (copy), SquadLuckyRecommendationErrorModule (copy)
+	local Signal, Signal2 = SignalsModule.createSignal({ phase = SquadLuckyRecommendationPhaseModule.Idle })
+	local Callback: (() -> ())? = nil
+	local AnalyticsContext = nil
 	
-	local var5 = function(p1, p2)
-		-- upvalues: var3 (write), squadLuckyRecommendationRevealTypeModule (copy), var4 (write), var2 (ref), squadLuckyRecommendationPhaseModule (copy), getLuckyRecommendation (copy)
-		if var3 then
-			var3()
-			var3 = nil
+	local function v10(PickRequestId, SquadId) --[[ Line: 60 ]]
+		-- upvalues: Callback (ref), SquadLuckyRecommendationRevealTypeModule (upval), AnalyticsContext (ref), Signal2 (copy), SquadLuckyRecommendationPhaseModule (upval), GetLuckyRecommendationFunction (upval)
+		if Callback then
+			Callback()
+			Callback = nil
 		end
-		local t = {
+		local config = {
 			result = nil,
-			pickRequestId = p1,
-			squadId = p2,
-			revealType = squadLuckyRecommendationRevealTypeModule.Default
+			pickRequestId = PickRequestId,
+			squadId = SquadId,
+			revealType = SquadLuckyRecommendationRevealTypeModule.Default
 		}
-		var4 = t
-		var2({ phase = squadLuckyRecommendationPhaseModule.Rolling })
-		var3 = getLuckyRecommendation(p1, function(p3)
-			-- upvalues: var3 (copy), t (ref)
-			var3 = nil
-			t.result = { isSuccess = true, recommendation = p3 }
-		end, function(p3)
-			-- upvalues: var3 (copy), t (ref)
-			var3 = nil
-			t.result = { isSuccess = false, error = p3 }
+		AnalyticsContext = config
+		Signal2({ phase = SquadLuckyRecommendationPhaseModule.Rolling })
+		Callback = GetLuckyRecommendationFunction(PickRequestId, function(Recommendation) --[[ Line: 71 ]]
+			-- upvalues: Callback (upval), config (copy)
+			Callback = nil
+			config.result = { isSuccess = true, recommendation = Recommendation }
+		end, function(p1) --[[ Line: 74 ]]
+			-- upvalues: Callback (upval), config (copy)
+			Callback = nil
+			config.result = { isSuccess = false, error = p1 }
 		end)
 	end
 	
 	return {
-		getState = var1,
-		getAnalyticsContext = function()
-			-- upvalues: var4 (write)
+		getState = Signal,
+		getAnalyticsContext = function() --[[ Line: 119 ]]
+			-- upvalues: AnalyticsContext (ref)
 			return {
-				pickRequestId = if var4 then var4.pickRequestId else nil,
-				revealType = if var4 then var4.revealType else nil
+				pickRequestId = if AnalyticsContext then AnalyticsContext.pickRequestId else nil,
+				revealType = if AnalyticsContext then AnalyticsContext.revealType else nil
 			}
 		end,
-		startRoll = function(p1, p2)
-			-- upvalues: var4 (write), var1 (ref), squadLuckyRecommendationPhaseModule (copy), squadLuckyRecommendationRevealTypeModule (copy), httpService (copy), var5 (ref)
-			if p2 and var4 ~= nil and var4.squadId == p1 then
-				if var1(false).phase == squadLuckyRecommendationPhaseModule.Revealed then
-					var4.revealType = squadLuckyRecommendationRevealTypeModule.Restored
+		startRoll = function(SquadId, p1) --[[ Line: 80 ]]
+			-- upvalues: AnalyticsContext (ref), Signal (copy), SquadLuckyRecommendationPhaseModule (upval), SquadLuckyRecommendationRevealTypeModule (upval), HttpService (upval), v10 (copy)
+			if p1 and AnalyticsContext ~= nil and AnalyticsContext.squadId == SquadId then
+				if Signal(false).phase == SquadLuckyRecommendationPhaseModule.Revealed then
+					AnalyticsContext.revealType = SquadLuckyRecommendationRevealTypeModule.Restored
 					
 					return
-				elseif var4.result == nil or not var4.result.isSuccess then
-					var5(httpService:GenerateGUID(false), p1)
+				end
+				if AnalyticsContext.result ~= nil and AnalyticsContext.result.isSuccess then
+					AnalyticsContext.revealType = SquadLuckyRecommendationRevealTypeModule.Preloaded
 					
 					return
-				else
-					var4.revealType = squadLuckyRecommendationRevealTypeModule.Preloaded
 				end
 			end
+			v10(HttpService:GenerateGUID(false), SquadId)
 		end,
-		endRoll = function()
-			-- upvalues: var1 (ref), squadLuckyRecommendationPhaseModule (copy), var3 (write), var4 (write), var2 (ref), squadLuckyRecommendationErrorModule (copy)
-			if var1(false).phase ~= squadLuckyRecommendationPhaseModule.Rolling then return end
-			if var3 then
-				var3()
-				var3 = nil
+		endRoll = function() --[[ Line: 95 ]]
+			-- upvalues: Signal (copy), SquadLuckyRecommendationPhaseModule (upval), Callback (ref), AnalyticsContext (ref), Signal2 (copy), SquadLuckyRecommendationErrorModule (upval)
+			if Signal(false).phase ~= SquadLuckyRecommendationPhaseModule.Rolling then return end
+			if Callback then
+				Callback()
+				Callback = nil
 			end
-			local var6 = if var4 ~= nil then nil else var4.result
+			local Result = if AnalyticsContext == nil then nil else AnalyticsContext.result
 			
-			if var6 == nil then
-				var2({
-					phase = squadLuckyRecommendationPhaseModule.Errored,
-					error = squadLuckyRecommendationErrorModule.Timeout
-				})
-				
-				return
-			elseif var6.isSuccess then
-				var2({
-					phase = squadLuckyRecommendationPhaseModule.Revealed,
-					recommendation = var6.recommendation
+			if Result == nil then
+				Signal2({
+					phase = SquadLuckyRecommendationPhaseModule.Errored,
+					error = SquadLuckyRecommendationErrorModule.Timeout
 				})
 				
 				return
 			end
-			var2({
-				phase = squadLuckyRecommendationPhaseModule.Errored,
-				error = var6.error
-			})
+			if Result.isSuccess then
+				Signal2({
+					phase = SquadLuckyRecommendationPhaseModule.Revealed,
+					recommendation = Result.recommendation
+				})
+				
+				return
+			else
+				Signal2({
+					phase = SquadLuckyRecommendationPhaseModule.Errored,
+					error = Result.error
+				})
+			end
 		end,
-		cancelFetch = function()
-			-- upvalues: var3 (write)
-			if var3 then
-				var3()
-				var3 = nil
+		cancelFetch = function() --[[ Line: 53 ]]
+			-- upvalues: Callback (ref)
+			if Callback then
+				Callback()
+				Callback = nil
 			end
 		end
 	}

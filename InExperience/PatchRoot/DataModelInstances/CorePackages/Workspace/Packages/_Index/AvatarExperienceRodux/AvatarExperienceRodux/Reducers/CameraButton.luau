@@ -1,15 +1,15 @@
-﻿local avatarExperienceRodux = script:FindFirstAncestor("AvatarExperienceRodux")
-local parent = avatarExperienceRodux.Parent
-local cryoModule = require(parent.Cryo)
-local _ = require(avatarExperienceRodux.Types.RoduxTypes)
+﻿local AvatarExperienceRodux = script:FindFirstAncestor("AvatarExperienceRodux")
+local Parent = AvatarExperienceRodux.Parent
+local CryoModule = require(Parent.Cryo)
+local _ = require(AvatarExperienceRodux.Types.RoduxTypes)
 
-return require(parent.Rodux).createReducer({ enabled = false, errorOccurred = false }, {
-	[require(avatarExperienceRodux.Actions.SetCameraButtonStatus).name] = function(p1, p2)
-		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p1, { enabled = p2.status })
+return (require(Parent.Rodux).createReducer({ enabled = false, errorOccurred = false }, {
+	[require(AvatarExperienceRodux.Actions.SetCameraButtonStatus).name] = function(p1, p2) --[[ Line: 25 ]]
+		-- upvalues: CryoModule (copy)
+		return (CryoModule.Dictionary.join(p1, { enabled = p2.status }))
 	end,
-	[require(avatarExperienceRodux.Actions.SetCameraButtonErrorOccurred).name] = function(p1, p2)
-		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p1, { errorOccurred = p2.errorOccurred })
+	[require(AvatarExperienceRodux.Actions.SetCameraButtonErrorOccurred).name] = function(p1, p2) --[[ Line: 32 ]]
+		-- upvalues: CryoModule (copy)
+		return (CryoModule.Dictionary.join(p1, { errorOccurred = p2.errorOccurred }))
 	end
-})
+}))

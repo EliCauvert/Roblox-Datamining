@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("DisableCDLQrCodeForMaquettes", false)
 
-return function()
+return function() --[[ Line: 3 ]]
 	return game:GetFastFlag("DisableCDLQrCodeForMaquettes")
 end

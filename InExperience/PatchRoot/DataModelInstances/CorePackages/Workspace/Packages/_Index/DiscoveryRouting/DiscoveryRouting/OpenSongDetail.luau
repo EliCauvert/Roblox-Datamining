@@ -1,20 +1,21 @@
-﻿local parent = script:FindFirstAncestor("DiscoveryRouting").Parent
-local appPage = require(parent.RobloxAppEnums).AppPage
-local navigateDown = require(parent.NavigationRodux).Thunks.NavigateDown
-local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
-local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
+﻿local Parent = script:FindFirstAncestor("DiscoveryRouting").Parent
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local NavigateDownFunction = require(Parent.NavigationRodux).Thunks.NavigateDown
+local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3Dispatch
+local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
 
-return function(p1)
-	-- upvalues: appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref)
-	return function(p2)
-		-- upvalues: appPage (copy), p1 (ref), fFlagSignalsNavP3Dispatch (copy), var1 (copy), navigateDown (copy)
-		local t = { name = appPage.SongDetail, songId = p1 }
+return function(SongId) --[[ Line: 11 ]]
+	-- upvalues: AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy)
+	return function(p1) --[[ Line: 12 ]]
+		-- upvalues: AppPage (upval), SongId (copy), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), NavigateDownFunction (upval)
+		local config = { name = AppPage.SongDetail, songId = SongId }
 		
-		if fFlagSignalsNavP3Dispatch then
-			var1.down(var1.fromLegacyPage(t))
+		if FFlagSignalsNavP3Dispatch then
+			NavigationCommands.down(NavigationCommands.fromLegacyPage(config))
 			
 			return
+		else
+			p1:dispatch(NavigateDownFunction(config))
 		end
-		p2:dispatch(navigateDown(t))
 	end
 end

@@ -1,17 +1,17 @@
-﻿local parent = script:FindFirstAncestor("Foundation").Parent
-local dashModule = require(parent.Dash)
-local foundationCloudAssetsModule = require(parent.FoundationCloudAssets)
-local assets = foundationCloudAssetsModule.Assets
-local preloadAsset = foundationCloudAssetsModule.preloadAsset
+﻿local Parent = script:FindFirstAncestor("Foundation").Parent
+local DashModule = require(Parent.Dash)
+local FoundationCloudAssetsModule = require(Parent.FoundationCloudAssets)
+local Assets = FoundationCloudAssetsModule.Assets
+local PreloadAssetFunction = FoundationCloudAssetsModule.preloadAsset
 
-return function(p1)
-	-- upvalues: dashModule (ref), assets (ref), preloadAsset (ref)
+return function(p1) --[[ Line: 9 ]]
+	-- upvalues: DashModule (copy), Assets (copy), PreloadAssetFunction (copy)
 	if typeof(p1) == "string" then
 		p1 = { p1 }
 	end
-	dashModule.forEach(p1, function(p2)
-		-- upvalues: assets (copy), preloadAsset (copy)
-		assert(assets[p2], `preloadAssets should only be used with valid FoundationCloudAssets; {p2} is an invalid name`)
-		preloadAsset(p2)
+	DashModule.forEach(p1, function(p2) --[[ Line: 12 ]]
+		-- upvalues: Assets (upval), PreloadAssetFunction (upval)
+		assert(Assets[p2], `preloadAssets should only be used with valid FoundationCloudAssets; {p2} is an invalid name`)
+		PreloadAssetFunction(p2)
 	end)
 end

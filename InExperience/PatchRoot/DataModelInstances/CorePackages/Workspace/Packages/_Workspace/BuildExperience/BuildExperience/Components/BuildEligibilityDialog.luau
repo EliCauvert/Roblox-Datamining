@@ -1,44 +1,44 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local useBuildPageEligibilityModule = require(buildExperience.useBuildPageEligibility)
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local dialog = foundationModule.Dialog
-local dialogSize = foundationModule.Enums.DialogSize
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
+local UseBuildPageEligibilityModule = require(BuildExperience.useBuildPageEligibility)
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local Dialog = FoundationModule.Dialog
+local DialogSize = FoundationModule.Enums.DialogSize
 
-return function(p1)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), useBuildPageEligibilityModule (ref), reactModule (ref), dialog (ref), dialogSize (ref), buttonVariant (ref)
-	local var1 = useLocalization({
-		dialogAction = localizationStringsModule.BUILD_ELIGIBILITY_DIALOG_ACTION,
-		errorDescription = localizationStringsModule.BUILD_ELIGIBILITY_ERROR_DESCRIPTION,
-		errorTitle = localizationStringsModule.BUILD_ELIGIBILITY_ERROR_TITLE,
-		ineligibleDescription = localizationStringsModule.BUILD_ELIGIBILITY_INELIGIBLE_DESCRIPTION,
-		ineligibleTitle = localizationStringsModule.BUILD_ELIGIBILITY_INELIGIBLE_TITLE
+return function(p1) --[[ Line: 21 | Named "BuildEligibilityDialog" ]]
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseBuildPageEligibilityModule (copy), ReactModule (copy), Dialog (copy), DialogSize (copy), ButtonVariant (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
+		dialogAction = LocalizationStringsModule.BUILD_ELIGIBILITY_DIALOG_ACTION,
+		errorDescription = LocalizationStringsModule.BUILD_ELIGIBILITY_ERROR_DESCRIPTION,
+		errorTitle = LocalizationStringsModule.BUILD_ELIGIBILITY_ERROR_TITLE,
+		ineligibleDescription = LocalizationStringsModule.BUILD_ELIGIBILITY_INELIGIBLE_DESCRIPTION,
+		ineligibleTitle = LocalizationStringsModule.BUILD_ELIGIBILITY_INELIGIBLE_TITLE
 	})
-	local var2 = p1.variant == useBuildPageEligibilityModule.Status.Ineligible
+	local IsVariantMatch = p1.variant == UseBuildPageEligibilityModule.Status.Ineligible
 	
-	return reactModule.createElement(dialog.Root, {
+	return ReactModule.createElement(Dialog.Root, {
 		testId = "build-eligibility-dialog",
-		size = dialogSize.Small
+		size = DialogSize.Small
 	}, {
-		Title = reactModule.createElement(dialog.Title, {
+		Title = ReactModule.createElement(Dialog.Title, {
 			LayoutOrder = 1,
-			text = if var2 then var1.ineligibleTitle else var1.errorTitle
+			text = if IsVariantMatch then UseLocalizationResult.ineligibleTitle else UseLocalizationResult.errorTitle
 		}),
-		Content = reactModule.createElement(dialog.Content, { LayoutOrder = 2 }, {
-			Description = reactModule.createElement(dialog.Text, {
-				Text = if var2 then var1.ineligibleDescription else var1.errorDescription
+		Content = ReactModule.createElement(Dialog.Content, { LayoutOrder = 2 }, {
+			Description = ReactModule.createElement(Dialog.Text, {
+				Text = if IsVariantMatch then UseLocalizationResult.ineligibleDescription else UseLocalizationResult.errorDescription
 			})
 		}),
-		Actions = reactModule.createElement(dialog.Actions, {
+		Actions = ReactModule.createElement(Dialog.Actions, {
 			LayoutOrder = 3,
 			actions = {
 				{
-					text = var1.dialogAction,
-					variant = buttonVariant.Emphasis,
+					text = UseLocalizationResult.dialogAction,
+					variant = ButtonVariant.Emphasis,
 					onActivated = p1.onDismiss
 				}
 			}

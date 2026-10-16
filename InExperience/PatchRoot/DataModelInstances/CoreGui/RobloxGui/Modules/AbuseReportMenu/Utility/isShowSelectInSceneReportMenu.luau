@@ -1,32 +1,34 @@
-﻿local abuseReportMenu = script:FindFirstAncestor("AbuseReportMenu")
-local experienceStateCaptureService = game:GetService("ExperienceStateCaptureService")
-local constantsModule = require(abuseReportMenu.Components.Constants)
-local isInSelectInSceneReportMenuOverrideListModule = require(abuseReportMenu.Utility.isInSelectInSceneReportMenuOverrideList)
-local var1 = false
-task.defer(function()
-	-- upvalues: var1 (write), isInSelectInSceneReportMenuOverrideListModule (ref)
-	var1 = isInSelectInSceneReportMenuOverrideListModule()
+﻿local AbuseReportMenu = script:FindFirstAncestor("AbuseReportMenu")
+local ExperienceStateCaptureService = game:GetService("ExperienceStateCaptureService")
+local ConstantsModule = require(AbuseReportMenu.Components.Constants)
+local IsInSelectInSceneReportMenuOverrideListModule = require(AbuseReportMenu.Utility.isInSelectInSceneReportMenuOverrideList)
+local v1 = false
+task.defer(function() --[[ Line: 8 ]]
+	-- upvalues: v1 (ref), IsInSelectInSceneReportMenuOverrideListModule (copy)
+	v1 = IsInSelectInSceneReportMenuOverrideListModule()
 end)
 
-return function(p1)
-	-- upvalues: experienceStateCaptureService (ref), constantsModule (ref), var1 (write)
+return function(Callback: (any) -> ()): boolean --[[ Line: 12 ]]
+	-- upvalues: ExperienceStateCaptureService (copy), ConstantsModule (copy), v1 (ref)
 	if not game:GetEngineFeature("SafetyServiceCaptureModeReportProp") then
 		return false
-	elseif not game:GetEngineFeature("CaptureModeEnabled") then
+	end
+	if not game:GetEngineFeature("CaptureModeEnabled") then
 		return false
-	elseif game:GetEngineFeature("ExperienceStateCaptureMinMemEnabled") then
-		if not experienceStateCaptureService:CanEnterCaptureMode() then
-			p1({
+	end
+	if game:GetEngineFeature("ExperienceStateCaptureMinMemEnabled") then
+		if not ExperienceStateCaptureService:CanEnterCaptureMode() then
+			Callback({
 				memoryRequirementMet = 0,
-				type = constantsModule.AnalyticsActions.SetMemoryRequirementMet
+				type = ConstantsModule.AnalyticsActions.SetMemoryRequirementMet
 			})
 			
 			return false
 		end
-		p1({
+		Callback({
 			memoryRequirementMet = 1,
-			type = constantsModule.AnalyticsActions.SetMemoryRequirementMet
+			type = ConstantsModule.AnalyticsActions.SetMemoryRequirementMet
 		})
 	end
-	return game:GetEngineFeature("ExperienceStateCaptureHiddenSelection")
+	return if game:GetEngineFeature("ExperienceStateCaptureHiddenSelection") then not v1 or true else false
 end

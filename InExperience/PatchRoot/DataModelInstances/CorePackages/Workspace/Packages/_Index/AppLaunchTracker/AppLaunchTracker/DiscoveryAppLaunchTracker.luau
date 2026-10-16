@@ -1,40 +1,40 @@
-﻿local appLaunchTracker = script:FindFirstAncestor("AppLaunchTracker")
-local roduxPerfTrackerModule = require(appLaunchTracker.RoduxPerfTracker)
-local discoveryAppLaunchEventsModule = require(appLaunchTracker.DiscoveryAppLaunchEvents)
-local _ = require(appLaunchTracker.AppLaunchTrackerTypes)
-local var1 = math.random(10000) <= require(appLaunchTracker.Flags).FIntAppLaunchTrackerEnableHundredthsPercent
-local luaAppShouldTrackTopThunks = game:DefineFastFlag("LuaAppShouldTrackTopThunks", false)
-local luaAppLaunchTrackerTimeoutSec = game:DefineFastInt("LuaAppLaunchTrackerTimeoutSec", 60)
-local luaAppLaunchTrackerMilestones = game:DefineFastString("LuaAppLaunchTrackerMilestones", "lua_app_starter_script_requires_begin,lua_app_starter_script_requires_end,startup_page_did_mount,fetch_homepage_data_begin,home_page_container_init,fetch_homepage_data_end,home_page_interactive_legacy,home_page_interactive")
-local t = {}
-t.__index = t
+﻿local AppLaunchTracker = script:FindFirstAncestor("AppLaunchTracker")
+local RoduxPerfTrackerModule = require(AppLaunchTracker.RoduxPerfTracker)
+local DiscoveryAppLaunchEventsModule = require(AppLaunchTracker.DiscoveryAppLaunchEvents)
+local _ = require(AppLaunchTracker.AppLaunchTrackerTypes)
+local IsRandomValueBelow = math.random(10000) <= require(AppLaunchTracker.Flags).FIntAppLaunchTrackerEnableHundredthsPercent
+local LuaAppShouldTrackTopThunks = game:DefineFastFlag("LuaAppShouldTrackTopThunks", false)
+local LuaAppLaunchTrackerTimeoutSec = game:DefineFastInt("LuaAppLaunchTrackerTimeoutSec", 60)
+local LuaAppLaunchTrackerMilestones = game:DefineFastString("LuaAppLaunchTrackerMilestones", "lua_app_starter_script_requires_begin,lua_app_starter_script_requires_end,startup_page_did_mount,fetch_homepage_data_begin,home_page_container_init,fetch_homepage_data_end,home_page_interactive_legacy,home_page_interactive")
+local DiscoveryAppLaunchTrackerModule = {}
+DiscoveryAppLaunchTrackerModule.__index = DiscoveryAppLaunchTrackerModule
 
-function t.isEnabled()
-	-- upvalues: var1 (write)
-	return var1
+function DiscoveryAppLaunchTrackerModule.isEnabled() --[[ Line: 45 ]]
+	-- upvalues: IsRandomValueBelow (ref)
+	return IsRandomValueBelow
 end
 
-function t.disable()
-	-- upvalues: var1 (write)
-	var1 = false
+function DiscoveryAppLaunchTrackerModule.disable() --[[ Line: 49 ]]
+	-- upvalues: IsRandomValueBelow (ref)
+	IsRandomValueBelow = false
 end
 
-function t.new(p1)
-	-- upvalues: luaAppLaunchTrackerMilestones (ref), discoveryAppLaunchEventsModule (ref), roduxPerfTrackerModule (ref), luaAppShouldTrackTopThunks (ref), t (ref), luaAppLaunchTrackerTimeoutSec (ref), var1 (write)
-	local ok, status = pcall(function()
-		-- upvalues: luaAppLaunchTrackerMilestones (copy)
+function DiscoveryAppLaunchTrackerModule.new(LoggingProtocol) --[[ Line: 53 ]]
+	-- upvalues: LuaAppLaunchTrackerMilestones (copy), DiscoveryAppLaunchEventsModule (copy), RoduxPerfTrackerModule (copy), LuaAppShouldTrackTopThunks (copy), DiscoveryAppLaunchTrackerModule (copy), LuaAppLaunchTrackerTimeoutSec (copy), IsRandomValueBelow (ref)
+	local Success, Result = pcall(function() --[[ Line: 54 ]]
+		-- upvalues: LuaAppLaunchTrackerMilestones (upval)
 		local t = {}
 		
-		for i in luaAppLaunchTrackerMilestones:gmatch("([A-Za-z0-9_]+)") do
+		for i in LuaAppLaunchTrackerMilestones:gmatch("([A-Za-z0-9_]+)") do
 			t[i] = true
 		end
 		return t
 	end)
 	
-	if not ok then
-		discoveryAppLaunchEventsModule.reportError(p1, "Failed to parse FStringLuaAppLaunchTrackerMilestones")
+	if not Success then
+		DiscoveryAppLaunchEventsModule.reportError(LoggingProtocol, "Failed to parse FStringLuaAppLaunchTrackerMilestones")
 	end
-	local tbl = setmetatable({
+	local self = setmetatable({
 		numTileRenders = 0,
 		numTilesInit = 0,
 		numFeedRenders = 0,
@@ -42,71 +42,71 @@ function t.new(p1)
 		totalSduiDuration = 0,
 		previousMilestone = "",
 		previousMilestoneTime = 0,
-		roduxTracker = roduxPerfTrackerModule.new(true, luaAppShouldTrackTopThunks, true),
-		loggingProtocol = p1,
-		supportedMilestones = if ok then status else {}
-	}, t)
+		roduxTracker = RoduxPerfTrackerModule.new(true, LuaAppShouldTrackTopThunks, true),
+		loggingProtocol = LoggingProtocol,
+		supportedMilestones = if Success then Result else {}
+	}, DiscoveryAppLaunchTrackerModule)
 	
-	if luaAppLaunchTrackerTimeoutSec > 0 then
-		task.delay(luaAppLaunchTrackerTimeoutSec, function()
-			-- upvalues: var1 (copy), discoveryAppLaunchEventsModule (copy), p1 (ref), tbl (ref), t (copy)
-			if var1 then
-				discoveryAppLaunchEventsModule.reportError(p1, `Timeout after previousMilestone: {tbl.previousMilestone}`)
-				tbl.roduxTracker:stopTracking()
-				t.disable()
+	if LuaAppLaunchTrackerTimeoutSec > 0 then
+		task.delay(LuaAppLaunchTrackerTimeoutSec, function() --[[ Line: 82 ]]
+			-- upvalues: IsRandomValueBelow (upval), DiscoveryAppLaunchEventsModule (upval), LoggingProtocol (copy), self (copy), DiscoveryAppLaunchTrackerModule (upval)
+			if IsRandomValueBelow then
+				DiscoveryAppLaunchEventsModule.reportError(LoggingProtocol, `Timeout after previousMilestone: {self.previousMilestone}`)
+				self.roduxTracker:stopTracking()
+				DiscoveryAppLaunchTrackerModule.disable()
 			end
 		end)
 	end
-	return tbl
+	return self
 end
 
-function t:trackTileRender()
+function DiscoveryAppLaunchTrackerModule:trackTileRender() --[[ Line: 97 ]]
 	self.numTileRenders += 1
 end
 
-function t:trackTileInit()
+function DiscoveryAppLaunchTrackerModule:trackTileInit() --[[ Line: 100 ]]
 	self.numTilesInit += 1
 end
 
-function t:trackFeedRender()
+function DiscoveryAppLaunchTrackerModule:trackFeedRender() --[[ Line: 103 ]]
 	self.numFeedRenders += 1
 end
 
-function t:trackNumFeedItems(p2)
-	self.numFeedItems = p2
+function DiscoveryAppLaunchTrackerModule:trackNumFeedItems(NumFeedItems) --[[ Line: 106 ]]
+	self.numFeedItems = NumFeedItems
 end
 
-function t:trackSduiDuration(p2)
-	self.totalSduiDuration += p2
+function DiscoveryAppLaunchTrackerModule:trackSduiDuration(p1) --[[ Line: 110 ]]
+	self.totalSduiDuration += p1
 end
 
-function t:onMilestoneChanged(p2)
-	-- upvalues: var1 (write), discoveryAppLaunchEventsModule (ref)
-	if not var1 then return end
-	if not self.supportedMilestones[p2] then return end
-	local processTime = os.clock()
+function DiscoveryAppLaunchTrackerModule:onMilestoneChanged(PreviousMilestone) --[[ Line: 114 ]]
+	-- upvalues: IsRandomValueBelow (ref), DiscoveryAppLaunchEventsModule (copy)
+	if not IsRandomValueBelow then return end
+	if not self.supportedMilestones[PreviousMilestone] then return end
+	local ClockTime = os.clock()
 	
 	if self.previousMilestoneTime > 0 then
-		discoveryAppLaunchEventsModule.reportStatsforMilestone(self.loggingProtocol, p2, self.previousMilestone, (processTime - self.previousMilestoneTime) * 1000, self.roduxTracker:getStats(), self.numTilesInit, self.numTileRenders, self.numFeedItems, self.numFeedRenders, self.totalSduiDuration)
+		DiscoveryAppLaunchEventsModule.reportStatsforMilestone(self.loggingProtocol, PreviousMilestone, self.previousMilestone, (ClockTime - self.previousMilestoneTime) * 1000, self.roduxTracker:getStats(), self.numTilesInit, self.numTileRenders, self.numFeedItems, self.numFeedRenders, self.totalSduiDuration)
 	end
 	self.roduxTracker:clear()
 	self.numFeedRenders = 0
 	self.numTilesInit = 0
 	self.numTileRenders = 0
 	self.totalSduiDuration = 0
-	self.previousMilestone = p2
-	self.previousMilestoneTime = processTime
+	self.previousMilestone = PreviousMilestone
+	self.previousMilestoneTime = ClockTime
 end
 
-function t:stopTracking()
-	-- upvalues: t (ref)
+function DiscoveryAppLaunchTrackerModule:stopTracking() --[[ Line: 152 ]]
+	-- upvalues: DiscoveryAppLaunchTrackerModule (copy)
 	self.roduxTracker:stopTracking()
-	t.disable()
+	DiscoveryAppLaunchTrackerModule.disable()
 end
 
-function t.createDefault(...)
-	-- upvalues: t (ref)
-	t.default = t.new(...)
+function DiscoveryAppLaunchTrackerModule.createDefault(...) --[[ Line: 157 ]]
+	-- upvalues: DiscoveryAppLaunchTrackerModule (copy)
+	DiscoveryAppLaunchTrackerModule.default = DiscoveryAppLaunchTrackerModule.new(...)
 end
 
-return t
+return DiscoveryAppLaunchTrackerModule

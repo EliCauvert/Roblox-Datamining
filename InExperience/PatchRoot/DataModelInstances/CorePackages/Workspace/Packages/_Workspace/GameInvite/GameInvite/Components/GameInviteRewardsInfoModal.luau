@@ -1,114 +1,115 @@
-﻿local parent = script:FindFirstAncestor("GameInvite").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local partialPageModal = require(parent.UIBlox).App.Dialog.Modal.PartialPageModal
-local localizationService = game:GetService("LocalizationService")
-local browserService = game:GetService("BrowserService")
-local httpService = game:GetService("HttpService")
-local getFStringReferralRewardsTermsURL = require(parent.SharedFlags).GetFStringReferralRewardsTermsURL
-local enableRewardsWebViewOverlay = game:DefineFastFlag("EnableRewardsWebViewOverlay", false)
+﻿local Parent = script:FindFirstAncestor("GameInvite").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local PartialPageModal = require(Parent.UIBlox).App.Dialog.Modal.PartialPageModal
+local LocalizationService = game:GetService("LocalizationService")
+local BrowserService = game:GetService("BrowserService")
+local HttpService = game:GetService("HttpService")
+local GetFStringReferralRewardsTermsURLFunction = require(Parent.SharedFlags).GetFStringReferralRewardsTermsURL
+local EnableRewardsWebViewOverlay = game:DefineFastFlag("EnableRewardsWebViewOverlay", false)
 
-local _ = function()
+local function _() --[[ Line: 27 ]]
 	return workspace.CurrentCamera.ViewportSize
 end
 
-local var1 = function(p1)
-	-- upvalues: localizationService (ref)
-	if not p1 or p1 == "" then
+local function v9(ExpiryUtc): string --[[ Line: 32 ]]
+	-- upvalues: LocalizationService (copy)
+	if not ExpiryUtc or ExpiryUtc == "" then
 		return ""
 	end
-	local var2 = DateTime and DateTime.fromIsoDate(p1) or nil
+	local _DateTime = DateTime and DateTime.fromIsoDate(ExpiryUtc) or nil
 	
-	if var2 then
-		local robloxLocaleId = localizationService.RobloxLocaleId
+	if _DateTime then
+		local RobloxLocaleId = LocalizationService.RobloxLocaleId
 		
-		return `{var2:FormatLocalTime("LL", robloxLocaleId)} {var2:FormatLocalTime("LT", robloxLocaleId)}`
+		return `{_DateTime:FormatLocalTime("LL", RobloxLocaleId)} {_DateTime:FormatLocalTime("LT", RobloxLocaleId)}`
+	else
+		return ""
 	end
-	return ""
 end
 
-return function(p1)
-	-- upvalues: reactModule (ref), foundationModule (ref), partialPageModal (ref), var1 (ref), enableRewardsWebViewOverlay (ref), httpService (ref), getFStringReferralRewardsTermsURL (ref), browserService (ref)
-	return reactModule.createElement("ScreenGui", {
+return function(p1) --[[ Line: 46 ]]
+	-- upvalues: ReactModule (copy), FoundationModule (copy), PartialPageModal (copy), v9 (copy), EnableRewardsWebViewOverlay (copy), HttpService (copy), GetFStringReferralRewardsTermsURLFunction (copy), BrowserService (copy)
+	return ReactModule.createElement("ScreenGui", {
 		DisplayOrder = 100,
 		IgnoreGuiInset = true,
 		ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 	}, {
-		RewardsInfoModalContainer = reactModule.createElement(foundationModule.View, {
+		RewardsInfoModalContainer = ReactModule.createElement(FoundationModule.View, {
 			tag = "size-full-full bg-over-media-100",
-			onActivated = function()
-				-- upvalues: p1 (ref)
+			onActivated = function() --[[ Line: 55 ]]
+				-- upvalues: p1 (copy)
 				if p1.setModalOpen then
 					p1.setModalOpen(false)
 				end
 			end
 		}, {
-			RewardsInfoModal = reactModule.createElement(partialPageModal, {
+			RewardsInfoModal = ReactModule.createElement(PartialPageModal, {
 				title = p1.title,
 				screenSize = workspace.CurrentCamera.ViewportSize,
 				position = UDim2.new(0.5, 0, 0.5, 0),
-				onCloseClicked = function()
-					-- upvalues: p1 (ref)
+				onCloseClicked = function() --[[ Line: 65 ]]
+					-- upvalues: p1 (copy)
 					if p1.setModalOpen then
 						p1.setModalOpen(false)
 					end
 				end
 			}, {
-				RewardsInfoModalContent = reactModule.createElement(foundationModule.View, {
+				RewardsInfoModalContent = ReactModule.createElement(FoundationModule.View, {
 					tag = "col size-full-0 auto-y gap-y-large padding-top-large",
 					Size = UDim2.new(1, 0, 0, 180)
 				}, {
-					RewardsInfoModalTitle = reactModule.createElement(foundationModule.Text, {
+					RewardsInfoModalTitle = ReactModule.createElement(FoundationModule.Text, {
 						tag = "text-title-medium auto-xy text-align-x-left text-wrap",
 						LayoutOrder = 0,
 						Text = p1.rewardDetailsTitle
 					}),
-					RewardsInfoModalBody = reactModule.createElement(foundationModule.Text, {
+					RewardsInfoModalBody = ReactModule.createElement(FoundationModule.Text, {
 						tag = "text-body-medium auto-xy text-align-x-left text-wrap padding-top-small",
 						LayoutOrder = 1,
 						Text = p1.rewardDetailsBody
 					}),
-					RewardsInfoModalLimitsTitle = reactModule.createElement(foundationModule.Text, {
+					RewardsInfoModalLimitsTitle = ReactModule.createElement(FoundationModule.Text, {
 						tag = "text-title-medium auto-xy text-align-x-left text-wrap padding-top-medium",
 						LayoutOrder = 2,
 						Text = p1.rewardLimitsTitle
 					}),
-					RewardInfoExpiresText = reactModule.createElement(foundationModule.Text, {
+					RewardInfoExpiresText = ReactModule.createElement(FoundationModule.Text, {
 						tag = "text-body-medium auto-xy text-align-x-left text-wrap padding-top-small",
 						LayoutOrder = 3,
-						Text = p1.rewardsExpiresText .. " " .. var6(p1.expiryUtc)
+						Text = p1.rewardsExpiresText .. " " .. v9(p1.expiryUtc)
 					}),
-					RewardsInfoModalLimitsBody = reactModule.createElement(foundationModule.Text, {
+					RewardsInfoModalLimitsBody = ReactModule.createElement(FoundationModule.Text, {
 						tag = "text-body-medium auto-xy text-align-x-left text-wrap",
 						LayoutOrder = 4,
 						Text = p1.rewardLimitsBody
 					}),
-					RewardsInfoModalCreatorSupportText = reactModule.createElement(foundationModule.Text, {
+					RewardsInfoModalCreatorSupportText = ReactModule.createElement(FoundationModule.Text, {
 						tag = "text-caption-medium auto-xy text-align-x-left text-wrap padding-top-xlarge",
 						LayoutOrder = 5,
 						Text = p1.rewardCreatorSupportText
 					}),
-					RewardsInfoModalTermsContainer = reactModule.createElement(foundationModule.View, {
+					RewardsInfoModalTermsContainer = ReactModule.createElement(FoundationModule.View, {
 						tag = "row grow auto-xy align-x-left padding-top-small",
 						BackgroundTransparency = 1,
 						LayoutOrder = 6,
-						onActivated = function()
-							-- upvalues: enableRewardsWebViewOverlay (copy), httpService (copy), getFStringReferralRewardsTermsURL (copy), p1 (ref), browserService (copy)
-							browserService:SendCommand(if enableRewardsWebViewOverlay then httpService:JSONEncode({
+						onActivated = function() --[[ Line: 109 ]]
+							-- upvalues: EnableRewardsWebViewOverlay (upval), HttpService (upval), GetFStringReferralRewardsTermsURLFunction (upval), p1 (copy), BrowserService (upval)
+							BrowserService:SendCommand(if EnableRewardsWebViewOverlay then HttpService:JSONEncode({
 								command = "open",
 								visible = true,
 								isGenericWebview = true,
 								enableOverlayReplacement = true,
-								url = getFStringReferralRewardsTermsURL(),
+								url = GetFStringReferralRewardsTermsURLFunction(),
 								title = p1.rewardsTerms
-							}) else httpService:JSONEncode({
+							}) else HttpService:JSONEncode({
 								command = "open",
-								url = getFStringReferralRewardsTermsURL(),
+								url = GetFStringReferralRewardsTermsURLFunction(),
 								title = p1.rewardsTerms
 							}))
 						end
 					}, {
-						RewardsInfoModalTermsText = reactModule.createElement(foundationModule.Text, {
+						RewardsInfoModalTermsText = ReactModule.createElement(FoundationModule.Text, {
 							tag = "text-label-small auto-xy text-align-x-left text-wrap",
 							RichText = true,
 							Text = `<u><b>{p1.rewardsTerms}</b></u>`

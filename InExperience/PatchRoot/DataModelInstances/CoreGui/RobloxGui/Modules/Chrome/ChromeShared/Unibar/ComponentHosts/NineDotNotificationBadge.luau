@@ -1,14 +1,14 @@
-﻿local chromeShared = script:FindFirstAncestor("ChromeShared")
-local corePackagesService = game:GetService("CorePackages")
-local reactModule = require(corePackagesService.Packages.React)
-local serviceModule = require(chromeShared.Service)
-local _ = require(corePackagesService.Workspace.Packages.Chrome)
-local useObservableValueModule = require(chromeShared.Hooks.useObservableValue)
+﻿local ChromeShared = script:FindFirstAncestor("ChromeShared")
+local CorePackages = game:GetService("CorePackages")
+local ReactModule = require(CorePackages.Packages.React)
+local ServiceModule = require(ChromeShared.Service)
+local _ = require(CorePackages.Workspace.Packages.Chrome)
+local UseObservableValueModule = require(ChromeShared.Hooks.useObservableValue)
 
-return function(vectorA)
-	-- upvalues: useObservableValueModule (ref), serviceModule (ref), reactModule (ref)
-	local cloned = table.clone(vectorA.iconHostProps)
-	cloned.showNineDotActivityIndicator = useObservableValueModule(serviceModule:nineDotActivityIndicatorVisible()) == true
+return function(p1) --[[ Line: 27 | Named "NineDotNotificationBadge" ]]
+	-- upvalues: UseObservableValueModule (copy), ServiceModule (copy), ReactModule (copy)
+	local Copy = table.clone(p1.iconHostProps)
+	Copy.showNineDotActivityIndicator = UseObservableValueModule(ServiceModule:nineDotActivityIndicatorVisible()) == true
 	
-	return reactModule.createElement(vectorA.NotificationBadge, cloned)
+	return ReactModule.createElement(p1.NotificationBadge, Copy)
 end

@@ -1,50 +1,49 @@
-﻿local appStorageService = game:GetService("AppStorageService")
-local httpService = game:GetService("HttpService")
-local t = {}
-t.__index = t
+﻿local AppStorageService = game:GetService("AppStorageService")
+local HttpService = game:GetService("HttpService")
+local AppStorageJsonCacheUtils = {}
+AppStorageJsonCacheUtils.__index = AppStorageJsonCacheUtils
 
-function t.new(p1)
-	-- upvalues: appStorageService (ref), httpService (ref), t (ref)
-	local t_1 = {
-		_appStorageService = p1 or appStorageService,
-		_httpService = httpService,
+function AppStorageJsonCacheUtils.new(p1) --[[ Line: 20 ]]
+	-- upvalues: AppStorageService (copy), HttpService (copy), AppStorageJsonCacheUtils (copy)
+	local config = {
+		_appStorageService = p1 or AppStorageService,
+		_httpService = HttpService,
 		_jsonDecodeCache = {}
 	}
-	setmetatable(t_1, t)
+	setmetatable(config, AppStorageJsonCacheUtils)
 	
-	return t_1
+	return config
 end
 
-function t:getCachedJsonForKey(p1, p2)
-	local var1
-	local _ = nil
-	
+function AppStorageJsonCacheUtils:getCachedJsonForKey(p1, p2) --[[ Line: 30 ]]
+	local DecodeInternalResult = nil
 	if self._jsonDecodeCache[p1] == nil or p2 then
-		var1 = self:decodeInternal(p1)
-		self._jsonDecodeCache[p1] = var1
+		DecodeInternalResult = self:decodeInternal(p1)
+		self._jsonDecodeCache[p1] = DecodeInternalResult
 	else
-		var1 = self._jsonDecodeCache[p1]
+		DecodeInternalResult = self._jsonDecodeCache[p1]
 	end
-	return var1.result
+	return DecodeInternalResult.result
 end
 
-function t.decodeInternal(p1, p2)
-	local ok, status = pcall(function()
-		-- upvalues: p1 (ref), p2 (ref)
+function AppStorageJsonCacheUtils.decodeInternal(p1, p2) --[[ Line: 41 ]]
+	local Success, Result = pcall(function() --[[ Line: 42 ]]
+		-- upvalues: p1 (copy), p2 (copy)
 		return p1._appStorageService:GetItem(p2)
 	end)
 	
-	if not ok then
+	if Success then
+		local Success1, Result1 = pcall(function() --[[ Line: 50 ]]
+			-- upvalues: p1 (copy), Result (copy)
+			return p1._httpService:JSONDecode(Result)
+		end)
+		
+		return if Success1 then { result = Result1 } else { result = nil }
+	else
 		return { result = nil }
 	end
-	local ok_1, status_1 = pcall(function()
-		-- upvalues: p1 (ref), status (ref)
-		return p1._httpService:JSONDecode(status)
-	end)
-	
-	return if ok_1 then { result = status_1 } else { result = nil }
 end
 
-t.default = t.new(nil)
+AppStorageJsonCacheUtils.default = AppStorageJsonCacheUtils.new(nil)
 
-return t
+return AppStorageJsonCacheUtils

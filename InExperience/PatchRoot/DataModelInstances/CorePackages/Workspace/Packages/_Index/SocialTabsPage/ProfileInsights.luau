@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.ProfileInsights.ProfileInsights)
+﻿return (require(script.Parent.Parent.Parent._Index.ProfileInsights.ProfileInsights))

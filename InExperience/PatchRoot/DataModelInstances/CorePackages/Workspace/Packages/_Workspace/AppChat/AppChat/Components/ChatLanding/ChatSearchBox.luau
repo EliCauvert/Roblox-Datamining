@@ -1,10 +1,10 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local searchTopBarModule = require(appChat.Components.ChatLanding.SearchTopBar)
-local t = {
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local SearchTopBarModule = require(AppChat.Components.ChatLanding.SearchTopBar)
+local config = {
 	paddingTop = 0,
 	paddingBottom = 6,
 	paddingLeft = 12,
@@ -12,34 +12,34 @@ local t = {
 	layoutOrder = -1
 }
 
-local var1 = function() end
+local function CancelCallback() --[[ Line: 32 ]] end
 
-return function(p1)
-	-- upvalues: cryoModule (ref), t (ref), useLocalization (ref), reactModule (ref), searchTopBarModule (ref), var1 (ref)
-	local var2 = cryoModule.Dictionary.union(t, p1)
-	local var3 = useLocalization({
+return function(p1) --[[ Line: 34 ]]
+	-- upvalues: CryoModule (copy), config (copy), UseLocalizationFunction (copy), ReactModule (copy), SearchTopBarModule (copy), CancelCallback (copy)
+	local UnionResult = CryoModule.Dictionary.union(config, p1)
+	local UseLocalizationResult = UseLocalizationFunction({
 		searchPlaceholderText = "Feature.Chat.Label.SearchWord",
 		cancelText = "Feature.Chat.Action.Cancel"
 	})
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		Size = UDim2.new(1, 0, 0, var2.height - var2.paddingBottom - var2.paddingTop),
-		LayoutOrder = var2.layoutOrder
+		Size = UDim2.new(1, 0, 0, UnionResult.height - UnionResult.paddingBottom - UnionResult.paddingTop),
+		LayoutOrder = UnionResult.layoutOrder
 	}, {
-		filterBox = reactModule.createElement(searchTopBarModule, {
+		filterBox = ReactModule.createElement(SearchTopBarModule, {
 			shouldShowCancel = false,
 			captureFocusOnMount = false,
-			initialInputText = var2.initialText or "",
-			cancelText = var3.cancelText,
-			searchPlaceholderText = var3.searchPlaceholderText,
-			cancelCallback = var1,
-			filterBoxPaddingTop = var2.paddingTop,
-			filterBoxPaddingBottom = var2.paddingBottom,
-			filterBoxPaddingLeft = var2.paddingLeft,
-			filterBoxPaddingRight = var2.paddingRight,
-			textChangedCallback = var2.onFilter
+			initialInputText = UnionResult.initialText or "",
+			cancelText = UseLocalizationResult.cancelText,
+			searchPlaceholderText = UseLocalizationResult.searchPlaceholderText,
+			cancelCallback = CancelCallback,
+			filterBoxPaddingTop = UnionResult.paddingTop,
+			filterBoxPaddingBottom = UnionResult.paddingBottom,
+			filterBoxPaddingLeft = UnionResult.paddingLeft,
+			filterBoxPaddingRight = UnionResult.paddingRight,
+			textChangedCallback = UnionResult.onFilter
 		}),
-		heightFlexOverride = reactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.None })
+		heightFlexOverride = ReactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.None })
 	})
 end

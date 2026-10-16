@@ -1,55 +1,55 @@
-﻿local parent = script:FindFirstAncestor("ApolloPresence").Parent
-local cryoModule = require(parent.Cryo)
-local presenceType = require(parent.GraphQLServer).types.PresenceType
-local t = {
-	[presenceType.Offline] = 0,
-	[presenceType.Online] = 1,
-	[presenceType.InGame] = 2,
-	[presenceType.InStudio] = 3
+﻿local Parent = script:FindFirstAncestor("ApolloPresence").Parent
+local CryoModule = require(Parent.Cryo)
+local PresenceType = require(Parent.GraphQLServer).types.PresenceType
+local config = {
+	[PresenceType.Offline] = 0,
+	[PresenceType.Online] = 1,
+	[PresenceType.InGame] = 2,
+	[PresenceType.InStudio] = 3
 }
-local var1 = cryoModule.List.foldLeft(cryoModule.Dictionary.keys(t), function(p1, p2)
-	-- upvalues: t (ref)
-	p1[tostring(t[p2])] = p2
+local FoldLeftResult = CryoModule.List.foldLeft(CryoModule.Dictionary.keys(config), function(p1, p2) --[[ Line: 18 ]]
+	-- upvalues: config (copy)
+	p1[tostring(config[p2])] = p2
 	
 	return p1
 end, {})
 
-local function _(p1)
+local function _(p1): string --[[ Line: 23 | Named "convertToStringWithDefault" ]]
 	return if p1 then tostring(p1) else ""
 end
 
 return {
-	formatNumberToPresenceType = function(p1)
-		-- upvalues: var1 (ref), presenceType (ref)
-		return if p1 then var1[tostring(p1)] else presenceType.Offline
+	formatNumberToPresenceType = function(p1) --[[ Line: 27 ]]
+		-- upvalues: FoldLeftResult (copy), PresenceType (copy)
+		return p1 and FoldLeftResult[tostring(p1)] or PresenceType.Offline
 	end,
-	formatPresenceTypeToNumber = function(p1)
-		-- upvalues: t (ref), presenceType (ref)
-		return if p1 then t[p1] else t[presenceType.Offline]
+	formatPresenceTypeToNumber = function(p1) --[[ Line: 31 ]]
+		-- upvalues: config (copy), PresenceType (copy)
+		return p1 and config[p1] or config[PresenceType.Offline]
 	end,
-	formatUserPresence = function(p1)
-		-- upvalues: var1 (ref), presenceType (ref)
-		local userPresenceType
-		local t = { id = p1.id }
+	formatUserPresence = function(p1) --[[ Line: 58 ]]
+		-- upvalues: FoldLeftResult (copy), PresenceType (copy)
+		local config = { id = p1.id }
+		local UserPresenceType = nil
 		
 		if p1.userPresenceType then
-			userPresenceType = p1.userPresenceType
+			UserPresenceType = p1.userPresenceType
 		else
-			local userPresenceNumber = p1.userPresenceNumber
-			userPresenceType = if userPresenceNumber then var1[tostring(userPresenceNumber)] else presenceType.Offline
+			local UserPresenceNumber = p1.userPresenceNumber
+			UserPresenceType = UserPresenceNumber and FoldLeftResult[tostring(UserPresenceNumber)] or PresenceType.Offline
 		end
-		t.userPresenceType = userPresenceType
-		t.lastLocation = p1.lastLocation or ""
-		t.lastOnline = p1.lastOnline or ""
-		local gameId = p1.gameId
-		t.gameId = if gameId then tostring(gameId) else ""
-		local placeId = p1.placeId
-		t.placeId = if placeId then tostring(placeId) else ""
-		local rootPlaceId = p1.rootPlaceId
-		t.rootPlaceId = if rootPlaceId then tostring(rootPlaceId) else ""
-		local universeId = p1.universeId
-		t.universeId = if universeId then tostring(universeId) else ""
+		config.userPresenceType = UserPresenceType
+		config.lastLocation = p1.lastLocation or ""
+		config.lastOnline = p1.lastOnline or ""
+		local GameId = p1.gameId
+		config.gameId = if GameId then tostring(GameId) else ""
+		local PlaceId = p1.placeId
+		config.placeId = if PlaceId then tostring(PlaceId) else ""
+		local RootPlaceId = p1.rootPlaceId
+		config.rootPlaceId = if RootPlaceId then tostring(RootPlaceId) else ""
+		local UniverseId = p1.universeId
+		config.universeId = if UniverseId then tostring(UniverseId) else ""
 		
-		return t
+		return config
 	end
 }

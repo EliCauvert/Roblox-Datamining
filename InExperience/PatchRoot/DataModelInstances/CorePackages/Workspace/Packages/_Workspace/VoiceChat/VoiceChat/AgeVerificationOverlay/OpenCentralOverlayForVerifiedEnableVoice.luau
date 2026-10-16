@@ -1,11 +1,11 @@
-﻿local parent = script:FindFirstAncestor("VoiceChat").Parent
-local centralOverlayType = require(parent.RobloxAppEnums).CentralOverlayType
-local setCentralOverlay = require(parent.CentralOverlay).Actions.SetCentralOverlay
+﻿local Parent = script:FindFirstAncestor("VoiceChat").Parent
+local CentralOverlayType = require(Parent.RobloxAppEnums).CentralOverlayType
+local SetCentralOverlayFunction = require(Parent.CentralOverlay).Actions.SetCentralOverlay
 
-return function(p1)
-	-- upvalues: setCentralOverlay (ref), centralOverlayType (ref)
-	return function(p2)
-		-- upvalues: setCentralOverlay (copy), centralOverlayType (copy), p1 (ref)
-		p2:dispatch(setCentralOverlay(centralOverlayType.VerifiedEnableVoice, p1 or {}))
+return function(p1) --[[ Line: 6 ]]
+	-- upvalues: SetCentralOverlayFunction (copy), CentralOverlayType (copy)
+	return function(p2) --[[ Line: 7 ]]
+		-- upvalues: SetCentralOverlayFunction (upval), CentralOverlayType (upval), p1 (copy)
+		p2:dispatch(SetCentralOverlayFunction(CentralOverlayType.VerifiedEnableVoice, p1 or {}))
 	end
 end

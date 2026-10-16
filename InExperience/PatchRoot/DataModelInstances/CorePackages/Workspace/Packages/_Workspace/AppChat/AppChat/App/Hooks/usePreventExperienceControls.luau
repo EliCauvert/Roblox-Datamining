@@ -1,5 +1,5 @@
-﻿local contextActionService = game:GetService("ContextActionService")
-local useEffect = require(script:FindFirstAncestor("AppChat").Parent.React).useEffect
+﻿local ContextActionService = game:GetService("ContextActionService")
+local UseEffectFunction = require(script:FindFirstAncestor("AppChat").Parent.React).useEffect
 local list = {
 	Enum.PlayerActions.CharacterForward, Enum.PlayerActions.CharacterBackward,
 	Enum.PlayerActions.CharacterLeft, Enum.PlayerActions.CharacterRight,
@@ -11,19 +11,19 @@ local list = {
 	Enum.UserInputType.MouseButton2
 }
 
-return function(p1)
-	-- upvalues: useEffect (ref), contextActionService (ref), list (ref)
-	useEffect(function()
-		-- upvalues: p1 (ref), contextActionService (copy), list (copy)
+return function(p1) --[[ Line: 31 ]]
+	-- upvalues: UseEffectFunction (copy), ContextActionService (copy), list (copy)
+	UseEffectFunction(function() --[[ Line: 32 ]]
+		-- upvalues: p1 (copy), ContextActionService (upval), list (upval)
 		if p1 then
-			contextActionService:BindCoreActionAtPriority("AppChatDisableGameControls", function(_, _, p2)
-				return if p2.KeyCode == Enum.KeyCode.Escape then Enum.ContextActionResult.Pass else Enum.ContextActionResult.Sink
+			ContextActionService:BindCoreActionAtPriority("AppChatDisableGameControls", function(_, _, Input) --[[ Line: 34 ]]
+				return if Input.KeyCode == Enum.KeyCode.Escape then Enum.ContextActionResult.Pass else Enum.ContextActionResult.Sink
 			end, false, Enum.ContextActionPriority.Low.Value, unpack(list))
 		end
-		return function()
-			-- upvalues: p1 (copy), contextActionService (copy)
+		return function() --[[ Line: 43 ]]
+			-- upvalues: p1 (upval), ContextActionService (upval)
 			if p1 then
-				contextActionService:UnbindCoreAction("AppChatDisableGameControls")
+				ContextActionService:UnbindCoreAction("AppChatDisableGameControls")
 			end
 		end
 	end, { p1 })

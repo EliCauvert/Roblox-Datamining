@@ -1,34 +1,33 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local parent = script.Parent.Parent
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local appFonts = require(corePackagesService.Workspace.Packages.Style).AppFonts
-local colorsModule = require(parent.Colors)
-local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
-local notification = roactModule.PureComponent:extend("Notification")
+﻿local CorePackages = game:GetService("CorePackages")
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local AppFonts = require(CorePackages.Workspace.Packages.Style).AppFonts
+local ColorsModule = require(script.Parent.Parent.Colors)
+local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
+local Notification = RoactModule.PureComponent:extend("Notification")
 
-function notification.render(p1)
-	-- upvalues: roactModule (ref), colorsModule (ref), appFonts (ref), robloxTranslatorModule (ref)
-	return roactModule.createElement("Frame", {
+function Notification.render(p1) --[[ Line: 11 ]]
+	-- upvalues: RoactModule (copy), ColorsModule (copy), AppFonts (copy), RobloxTranslatorModule (copy)
+	return RoactModule.createElement("Frame", {
 		LayoutOrder = 0,
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
 		Size = UDim2.new(1, -10, 0, 45)
 	}, {
-		UIListLayout = roactModule.createElement("UIListLayout", {
+		UIListLayout = RoactModule.createElement("UIListLayout", {
 			Padding = UDim.new(0, 10),
 			FillDirection = Enum.FillDirection.Horizontal,
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			VerticalAlignment = Enum.VerticalAlignment.Center
 		}),
-		ExclamationPoint = roactModule.createElement("ImageLabel", {
+		ExclamationPoint = RoactModule.createElement("ImageLabel", {
 			BackgroundTransparency = 1,
 			Image = "rbxasset://textures/ui/InspectMenu/ico_alert_tilt.png",
 			LayoutOrder = 1,
 			Size = UDim2.new(0, 16, 0, 16),
-			ImageColor3 = colorsModule.White
+			ImageColor3 = ColorsModule.White
 		}),
-		PartOfBundleText = roactModule.createElement("TextLabel", {
+		PartOfBundleText = RoactModule.createElement("TextLabel", {
 			BorderSizePixel = 0,
 			BackgroundTransparency = 1,
 			LayoutOrder = 2,
@@ -36,16 +35,16 @@ function notification.render(p1)
 			TextScaled = true,
 			TextSize = 12,
 			Size = UDim2.new(1, -30, 1, 0),
-			TextColor3 = colorsModule.White,
+			TextColor3 = ColorsModule.White,
 			TextXAlignment = Enum.TextXAlignment.Left,
-			Font = appFonts.default:getDefault(),
-			Text = robloxTranslatorModule:FormatByKeyForLocale(p1.props.noticeKey, p1.props.locale)
+			Font = AppFonts.default:getDefault(),
+			Text = RobloxTranslatorModule:FormatByKeyForLocale(p1.props.noticeKey, p1.props.locale)
 		}, {
-			UITextSizeConstraint = roactModule.createElement("UITextSizeConstraint", { MaxTextSize = 16 })
+			UITextSizeConstraint = RoactModule.createElement("UITextSizeConstraint", { MaxTextSize = 16 })
 		})
 	})
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p1, _)
+return RoactRoduxModule.UNSTABLE_connect2(function(p1, _) --[[ Line: 54 ]]
 	return { locale = p1.locale }
-end)(notification)
+end)(Notification)

@@ -1,68 +1,68 @@
-﻿local parent = script:FindFirstAncestor("InExperienceShop").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local useTokens = foundationModule.Hooks.useTokens
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local t = {
+﻿local Parent = script:FindFirstAncestor("InExperienceShop").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local config = {
 	searchPlaceholder = "Feature.Catalog.Label.Search",
 	clear = "Feature.Avatar.Action.Clear"
 }
 
-return function(p1)
-	-- upvalues: useTokens (ref), useLocalization (ref), t (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), reactModule (ref), foundationModule (ref)
-	local var1 = useTokens()
-	local var2 = useLocalization(t)
+return function(p1) --[[ Line: 33 | Named "SearchInputView" ]]
+	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), config (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), ReactModule (copy), FoundationModule (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseLocalizationResult = UseLocalizationFunction(config)
 	
-	return reactModule.createElement(foundationModule.View, {
+	return ReactModule.createElement(FoundationModule.View, {
 		tag = "row align-y-center gap-small size-full-0 auto-y padding-x-xlarge radius-medium",
 		testId = "SearchInputView"
 	}, {
-		BackButton = reactModule.createElement(foundationModule.IconButton, {
+		BackButton = ReactModule.createElement(FoundationModule.IconButton, {
 			LayoutOrder = 0,
-			icon = foundationModule.Enums.IconName.ChevronLargeLeft,
-			variant = foundationModule.Enums.ButtonVariant.Utility,
-			size = foundationModule.Enums.ButtonSize.Small,
+			icon = FoundationModule.Enums.IconName.ChevronLargeLeft,
+			variant = FoundationModule.Enums.ButtonVariant.Utility,
+			size = FoundationModule.Enums.ButtonSize.Small,
 			onActivated = p1.onBack
 		}),
-		SearchField = reactModule.createElement(foundationModule.View, {
+		SearchField = ReactModule.createElement(FoundationModule.View, {
 			tag = "fill radius-medium bg-surface-200",
 			LayoutOrder = 1,
 			Size = UDim2.fromOffset(0, 36)
 		}, {
-			SearchIcon = reactModule.createElement(foundationModule.Icon, {
-				name = foundationModule.Enums.IconName.MagnifyingGlass,
-				size = foundationModule.Enums.IconSize.Small,
+			SearchIcon = ReactModule.createElement(FoundationModule.Icon, {
+				name = FoundationModule.Enums.IconName.MagnifyingGlass,
+				size = FoundationModule.Enums.IconSize.Small,
 				AnchorPoint = Vector2.new(0, 0.5),
 				Position = UDim2.new(0, 12, 0.5, 0)
 			}),
-			TextBox = reactModule.createElement("TextBox", {
+			TextBox = ReactModule.createElement("TextBox", {
 				ref = p1.textBoxRef,
 				AnchorPoint = Vector2.new(0, 0.5),
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
 				ClearTextOnFocus = false,
 				ClipsDescendants = true,
-				FontFace = if foundationFontFaceMigration then normalizeFontFace(var1.Typography.BodyMedium.Font) else Font.fromEnum(var1.Typography.BodyMedium.Font),
-				PlaceholderText = var2.searchPlaceholder,
-				PlaceholderColor3 = var1.Color.Content.Default.Color3,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.BodyMedium.Font) else Font.fromEnum(UseTokensResult.Typography.BodyMedium.Font),
+				PlaceholderText = UseLocalizationResult.searchPlaceholder,
+				PlaceholderColor3 = UseTokensResult.Color.Content.Default.Color3,
 				Position = UDim2.new(0, 40, 0.5, 0),
 				Size = UDim2.new(1, -40, 1, 0),
 				Text = p1.text,
-				TextColor3 = var1.Color.Content.Emphasis.Color3,
-				TextSize = var1.Typography.BodyMedium.FontSize,
+				TextColor3 = UseTokensResult.Color.Content.Emphasis.Color3,
+				TextSize = UseTokensResult.Typography.BodyMedium.FontSize,
 				TextXAlignment = Enum.TextXAlignment.Left,
 				TextWrapped = false,
-				[reactModule.Change.Text] = p1.onTextChanged,
-				[reactModule.Event.FocusLost] = p1.onFocusLost
+				[ReactModule.Change.Text] = p1.onTextChanged,
+				[ReactModule.Event.FocusLost] = p1.onFocusLost
 			})
 		}),
-		ClearButton = reactModule.createElement(foundationModule.Button, {
+		ClearButton = ReactModule.createElement(FoundationModule.Button, {
 			LayoutOrder = 2,
-			text = var2.clear,
-			variant = foundationModule.Enums.ButtonVariant.Utility,
-			size = foundationModule.Enums.InputSize.XSmall,
+			text = UseLocalizationResult.clear,
+			variant = FoundationModule.Enums.ButtonVariant.Utility,
+			size = FoundationModule.Enums.InputSize.XSmall,
 			onActivated = p1.onClear
 		})
 	})

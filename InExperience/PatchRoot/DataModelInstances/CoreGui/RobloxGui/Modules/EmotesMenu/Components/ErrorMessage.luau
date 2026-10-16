@@ -1,76 +1,76 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local parent = script.Parent.Parent
-local hideErrorModule = require(parent.Actions.HideError)
-local constantsModule = require(parent.Constants)
-local errorMessage = roactModule.PureComponent:extend("ErrorMessage")
+﻿local CorePackages = game:GetService("CorePackages")
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local Parent = script.Parent.Parent
+local HideErrorModule = require(Parent.Actions.HideError)
+local ConstantsModule = require(Parent.Constants)
+local ErrorMessage = RoactModule.PureComponent:extend("ErrorMessage")
 
-function errorMessage.render(p1)
-	-- upvalues: constantsModule (ref), roactModule (ref)
-	local layout = constantsModule.Layouts[p1.props.layout]
+function ErrorMessage.render(p1) --[[ Line: 17 ]]
+	-- upvalues: ConstantsModule (copy), RoactModule (copy)
+	local Layout = ConstantsModule.Layouts[p1.props.layout]
 	
-	return roactModule.createElement("Frame", {
-		Size = layout.ErrorFrameSize,
-		Position = layout.ErrorFramePosition,
-		BackgroundColor3 = constantsModule.Colors.Black,
-		BackgroundTransparency = constantsModule.ErrorFrameBackgroundTransparency,
-		BorderSizePixel = constantsModule.ErrorFrameBorderSize,
+	return RoactModule.createElement("Frame", {
+		Size = Layout.ErrorFrameSize,
+		Position = Layout.ErrorFramePosition,
+		BackgroundColor3 = ConstantsModule.Colors.Black,
+		BackgroundTransparency = ConstantsModule.ErrorFrameBackgroundTransparency,
+		BorderSizePixel = ConstantsModule.ErrorFrameBorderSize,
 		Selectable = false,
 		Visible = p1.props.displayOptions.errorVisible,
-		[roactModule.Event.TouchTap] = function()
-			-- upvalues: p1 (ref)
+		[RoactModule.Event.TouchTap] = function() --[[ Line: 29 ]]
+			-- upvalues: p1 (copy)
 			p1.props.close()
 		end,
-		[roactModule.Event.InputBegan] = function(_, p2)
-			-- upvalues: p1 (ref)
-			if p2.UserInputType == Enum.UserInputType.MouseButton1 then
+		[RoactModule.Event.InputBegan] = function(_, Input) --[[ Line: 33 ]]
+			-- upvalues: p1 (copy)
+			if Input.UserInputType == Enum.UserInputType.MouseButton1 then
 				p1.props.close()
 			end
 		end
 	}, {
-		AsspectRatioConstraint = roactModule.createElement("UIAspectRatioConstraint", { AspectRatio = layout.ErrorFrameAspectRatio }),
-		SizeConstraint = roactModule.createElement("UISizeConstraint", {
-			MinSize = layout.ErrorFrameMinSize,
-			MaxSize = layout.ErrorFrameMaxSize
+		AsspectRatioConstraint = RoactModule.createElement("UIAspectRatioConstraint", { AspectRatio = Layout.ErrorFrameAspectRatio }),
+		SizeConstraint = RoactModule.createElement("UISizeConstraint", {
+			MinSize = Layout.ErrorFrameMinSize,
+			MaxSize = Layout.ErrorFrameMaxSize
 		}),
-		ErrorIcon = roactModule.createElement("ImageLabel", {
+		ErrorIcon = RoactModule.createElement("ImageLabel", {
 			BackgroundTransparency = 1,
 			AnchorPoint = Vector2.new(0, 0.5),
-			Position = UDim2.new(0, layout.ErrorIconOffset, 0.5, 0),
-			Size = UDim2.new(0.2, -layout.ErrorIconOffset * 2, 1, -layout.ErrorIconOffset * 2),
-			Image = layout.ErrorIcon
+			Position = UDim2.new(0, Layout.ErrorIconOffset, 0.5, 0),
+			Size = UDim2.new(0.2, -Layout.ErrorIconOffset * 2, 1, -Layout.ErrorIconOffset * 2),
+			Image = Layout.ErrorIcon
 		}, {
-			AsspectRatioConstraint = roactModule.createElement("UIAspectRatioConstraint", { AspectRatio = 1 })
+			AsspectRatioConstraint = RoactModule.createElement("UIAspectRatioConstraint", { AspectRatio = 1 })
 		}),
-		ErrorText = roactModule.createElement("TextLabel", {
+		ErrorText = RoactModule.createElement("TextLabel", {
 			TextScaled = true,
 			BackgroundTransparency = 1,
 			AnchorPoint = Vector2.new(0, 0.5),
-			Position = UDim2.new(0.2, -layout.ErrorIconOffset, 0.5, 0),
+			Position = UDim2.new(0.2, -Layout.ErrorIconOffset, 0.5, 0),
 			Size = UDim2.new(0.8, 0, 1, 0),
 			Text = p1.props.displayOptions.errorText,
-			TextSize = layout.ErrorTextSize,
-			TextColor3 = constantsModule.Colors.White,
+			TextSize = Layout.ErrorTextSize,
+			TextColor3 = ConstantsModule.Colors.White,
 			TextXAlignment = Enum.TextXAlignment.Left,
-			Font = layout.ErrorTextFont
+			Font = Layout.ErrorTextFont
 		}, {
-			SizeConstraint = roactModule.createElement("UISizeConstraint", {
-				MaxSize = Vector2.new(layout.ErrorFrameMaxSize.X, layout.ErrorTextSize + constantsModule.TextPadding)
+			SizeConstraint = RoactModule.createElement("UISizeConstraint", {
+				MaxSize = Vector2.new(Layout.ErrorFrameMaxSize.X, Layout.ErrorTextSize + ConstantsModule.TextPadding)
 			}),
-			TextSizeConstraint = roactModule.createElement("UITextSizeConstraint", { MaxTextSize = layout.ErrorTextSize })
+			TextSizeConstraint = RoactModule.createElement("UITextSizeConstraint", { MaxTextSize = Layout.ErrorTextSize })
 		})
 	})
 end
 
-return roactRoduxModule.connect(function(p1)
+return RoactRoduxModule.connect(function(p1) --[[ Line: 86 | Named "mapStateToProps" ]]
 	return { displayOptions = p1.displayOptions, layout = p1.layout }
-end, function(p1)
-	-- upvalues: hideErrorModule (ref)
+end, function(Callback) --[[ Line: 93 | Named "mapDispatchToProps" ]]
+	-- upvalues: HideErrorModule (copy)
 	return {
-		close = function()
-			-- upvalues: p1 (ref), hideErrorModule (copy)
-			return p1(hideErrorModule())
+		close = function() --[[ Line: 95 ]]
+			-- upvalues: Callback (copy), HideErrorModule (upval)
+			return Callback(HideErrorModule())
 		end
 	}
-end)(errorMessage)
+end)(ErrorMessage)

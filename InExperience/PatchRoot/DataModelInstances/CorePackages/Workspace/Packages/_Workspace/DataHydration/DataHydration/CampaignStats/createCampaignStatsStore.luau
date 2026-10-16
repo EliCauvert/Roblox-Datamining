@@ -1,51 +1,51 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local _ = require(dataHydration.Parent.HttpClient)
-local createDataCacheModule = require(dataHydration.createDataCache)
-local createDataResolverModule = require(dataHydration.createDataResolver)
-local _ = require(dataHydration.DataHydrationTypes)
-local fetchCampaignStatsModule = require(script.Parent.fetchCampaignStats)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local _ = require(DataHydration.Parent.HttpClient)
+local CreateDataCacheModule = require(DataHydration.createDataCache)
+local CreateDataResolverModule = require(DataHydration.createDataResolver)
+local _ = require(DataHydration.DataHydrationTypes)
+local FetchCampaignStatsModule = require(script.Parent.fetchCampaignStats)
 local _ = require(script.Parent.CampaignStatsTypes)
 
-return function(p1)
-	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), fetchCampaignStatsModule (ref)
-	p1 = p1 or {}
-	local t = {
-		network = p1.network,
-		baseUrl = p1.baseUrl,
-		nowMs = p1.nowMs
+return function(p1) --[[ Line: 32 | Named "createCampaignStatsStore" ]]
+	-- upvalues: CreateDataCacheModule (copy), CreateDataResolverModule (copy), FetchCampaignStatsModule (copy)
+	local P0 = p1 or {}
+	local config = {
+		network = P0.network,
+		baseUrl = P0.baseUrl,
+		nowMs = P0.nowMs
 	}
-	local var1 = createDataCacheModule(p1.ttlSeconds or 300)
-	local var2 = createDataResolverModule({
+	local DataCacheModule = CreateDataCacheModule(P0.ttlSeconds or 300)
+	local DataResolverModule = CreateDataResolverModule({
 		supportsMultiGet = false,
 		replaceItems = true,
-		cache = var1,
-		fetchFn = function(p2, _)
-			-- upvalues: fetchCampaignStatsModule (copy), t (ref)
-			return fetchCampaignStatsModule.fetchCampaignStats(tonumber(p2), t)
+		cache = DataCacheModule,
+		fetchFn = function(p2, _) --[[ Line: 46 ]]
+			-- upvalues: FetchCampaignStatsModule (upval), config (copy)
+			return FetchCampaignStatsModule.fetchCampaignStats(tonumber(p2), config)
 		end
 	})
 	
 	return {
-		getCampaignStats = function(p2)
-			-- upvalues: var2 (ref)
-			return var2.getCachedItem(tostring(p2))
+		getCampaignStats = function(p2) --[[ Line: 56 ]]
+			-- upvalues: DataResolverModule (copy)
+			return DataResolverModule.getCachedItem((tostring(p2)))
 		end,
-		fetchCampaignStats = function(p2)
-			-- upvalues: var2 (ref)
-			return var2.fetchItem(tostring(p2))
+		fetchCampaignStats = function(Number) --[[ Line: 59 ]]
+			-- upvalues: DataResolverModule (copy)
+			return DataResolverModule.fetchItem((tostring(Number)))
 		end,
-		getAndFetchCampaignStats = function(p2, p3)
-			-- upvalues: var2 (ref)
-			return var2.getAndFetchItem(tostring(p2), p3)
+		getAndFetchCampaignStats = function(p2, p3) --[[ Line: 62 ]]
+			-- upvalues: DataResolverModule (copy)
+			return DataResolverModule.getAndFetchItem(tostring(p2), p3)
 		end,
-		isCampaignStatsRequestInQueueOrInFlight = function(p2)
-			-- upvalues: var2 (ref)
-			return var2.isRequestInQueueOrInFlight(tostring(p2))
+		isCampaignStatsRequestInQueueOrInFlight = function(p2) --[[ Line: 65 ]]
+			-- upvalues: DataResolverModule (copy)
+			return DataResolverModule.isRequestInQueueOrInFlight((tostring(p2)))
 		end,
-		updateCampaignStats = function(p2, p3)
-			-- upvalues: var1 (ref)
-			var1.replaceItem(tostring(p2), {
-				byCampaign = p3,
+		updateCampaignStats = function(p2, ByCampaign) --[[ Line: 68 ]]
+			-- upvalues: DataCacheModule (copy)
+			DataCacheModule.replaceItem(tostring(p2), {
+				byCampaign = ByCampaign,
 				failedMetrics = {
 					plays = false,
 					adClicks = false,
@@ -54,7 +54,7 @@ return function(p1)
 				}
 			})
 		end,
-		clear = var2.clear,
-		dispose = var2.dispose
+		clear = DataResolverModule.clear,
+		dispose = DataResolverModule.dispose
 	}
 end

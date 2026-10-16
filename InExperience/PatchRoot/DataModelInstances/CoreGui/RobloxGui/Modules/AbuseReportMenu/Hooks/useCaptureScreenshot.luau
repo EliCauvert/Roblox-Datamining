@@ -1,25 +1,22 @@
-﻿local abuseReportMenu = script:FindFirstAncestor("AbuseReportMenu")
-local corePackagesService = game:GetService("CorePackages")
-local reactModule = require(corePackagesService.Packages.React)
-local _ = require(abuseReportMenu.Components.Types)
-local tnSAvatarIdentificationModule = require(corePackagesService.Workspace.Packages.TnSAvatarIdentification)
-local tnSAdIdentificationModule = require(corePackagesService.Workspace.Packages.TnSAdIdentification)
-local screenshotManager = require(corePackagesService.Workspace.Packages.TnSScreenshot).ScreenshotManager
-local avatarIdentification = tnSAvatarIdentificationModule.AvatarIdentification
-local adIdentification = tnSAdIdentificationModule.AdIdentification
+﻿local CorePackages = game:GetService("CorePackages")
+local ReactModule = require(CorePackages.Packages.React)
+local _ = require(script:FindFirstAncestor("AbuseReportMenu").Components.Types)
+local ScreenshotManager = require(CorePackages.Workspace.Packages.TnSScreenshot).ScreenshotManager
+local AvatarIdentification = require(CorePackages.Workspace.Packages.TnSAvatarIdentification).AvatarIdentification
+local AdIdentification = require(CorePackages.Workspace.Packages.TnSAdIdentification).AdIdentification
 
-return function(p1, p2, p3)
-	-- upvalues: reactModule (ref), screenshotManager (ref), avatarIdentification (ref), adIdentification (ref)
-	return reactModule.useCallback(function()
-		-- upvalues: screenshotManager (copy), p2 (ref), p1 (ref), avatarIdentification (copy), adIdentification (copy), p3 (ref)
-		screenshotManager:TakeScreenshotWithCallback(p2, p1)
-		local visibleAvatars, visibleAvatars_1 = avatarIdentification.getVisibleAvatars()
-		local visibleAds, visibleAds_1 = adIdentification.getVisibleAds()
-		p3({
-			identifiedAvatars = visibleAvatars,
-			identifiedAds = visibleAds,
-			avatarIDStats = visibleAvatars_1,
-			adIDStats = visibleAds_1
+return function(p1, p2, Callback) --[[ Line: 18 ]]
+	-- upvalues: ReactModule (copy), ScreenshotManager (copy), AvatarIdentification (copy), AdIdentification (copy)
+	return ReactModule.useCallback(function() --[[ Line: 23 ]]
+		-- upvalues: ScreenshotManager (upval), p2 (copy), p1 (copy), AvatarIdentification (upval), AdIdentification (upval), Callback (copy)
+		ScreenshotManager:TakeScreenshotWithCallback(p2, p1)
+		local VisibleAvatars, VisibleAvatars2 = AvatarIdentification.getVisibleAvatars()
+		local VisibleAds, VisibleAds2 = AdIdentification.getVisibleAds()
+		Callback({
+			identifiedAvatars = VisibleAvatars,
+			identifiedAds = VisibleAds,
+			avatarIDStats = VisibleAvatars2,
+			adIDStats = VisibleAds2
 		})
-	end, { p2, p1, p3 })
+	end, { p2, p1, Callback })
 end

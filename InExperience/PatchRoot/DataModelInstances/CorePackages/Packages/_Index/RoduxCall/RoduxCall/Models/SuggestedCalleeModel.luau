@@ -1,44 +1,44 @@
-﻿local roduxCall = script:FindFirstAncestor("RoduxCall")
-local parent = roduxCall.Parent
-local tModule = require(parent.t)
-local cryoModule = require(parent.Cryo)
-local enumsModule = require(roduxCall.Enums)
-local t = {}
+﻿local RoduxCall = script:FindFirstAncestor("RoduxCall")
+local Parent = RoduxCall.Parent
+local TModule = require(Parent.t)
+local CryoModule = require(Parent.Cryo)
+local EnumsModule = require(RoduxCall.Enums)
+local SuggestedCalleeModelModule = {}
 
-function t.new(p1)
-	-- upvalues: t (ref)
-	assert(t.isValid(p1))
-	t.__index = t
-	setmetatable(p1, t)
+function SuggestedCalleeModelModule.new(p1) --[[ Line: 9 ]]
+	-- upvalues: SuggestedCalleeModelModule (copy)
+	assert(SuggestedCalleeModelModule.isValid(p1))
+	SuggestedCalleeModelModule.__index = SuggestedCalleeModelModule
+	setmetatable(p1, SuggestedCalleeModelModule)
 	
 	return p1
 end
 
-function t.mock(p1)
-	-- upvalues: t (ref)
-	p1 = p1 or {}
+function SuggestedCalleeModelModule.mock(p1) --[[ Line: 21 ]]
+	-- upvalues: SuggestedCalleeModelModule (copy)
+	local P1 = p1 or {}
 	
-	return t.new({
+	return (SuggestedCalleeModelModule.new({
 		lastLocation = "",
-		userId = p1.userId or 12345,
-		userPresenceType = p1.userPresenceType or "Offline"
+		userId = P1.userId or 12345,
+		userPresenceType = P1.userPresenceType or "Offline"
+	}))
+end
+
+function SuggestedCalleeModelModule.format(p1) --[[ Line: 33 ]]
+	-- upvalues: CryoModule (copy), EnumsModule (copy)
+	return CryoModule.Dictionary.join(p1, {
+		userPresenceType = EnumsModule.PresenceType[p1.userPresenceType]
 	})
 end
 
-function t.format(p1)
-	-- upvalues: cryoModule (ref), enumsModule (ref)
-	return cryoModule.Dictionary.join(p1, {
-		userPresenceType = enumsModule.PresenceType[p1.userPresenceType]
-	})
-end
-
-t.isValid = tModule.strictInterface({
-	userId = tModule.number,
-	userPresenceType = function(p1)
-		-- upvalues: enumsModule (ref)
-		return enumsModule.PresenceType[p1] ~= nil
+SuggestedCalleeModelModule.isValid = TModule.strictInterface({
+	userId = TModule.number,
+	userPresenceType = function(p1): boolean --[[ Line: 41 ]]
+		-- upvalues: EnumsModule (copy)
+		return EnumsModule.PresenceType[p1] ~= nil
 	end,
-	lastLocation = tModule.string
+	lastLocation = TModule.string
 })
 
-return t
+return SuggestedCalleeModelModule

@@ -1,3 +1,3 @@
-﻿return function(p1)
-	return if p1 ~= nil then if p1 ~= "" then if p1 ~= -1 then typeof(p1) == "table" and next(p1) == nil else true else true else true
+﻿return function(p1): boolean --[[ Line: 2 ]]
+	return p1 == nil or (p1 == "" or (p1 == -1 or typeof(p1) == "table" and next(p1) == nil))
 end

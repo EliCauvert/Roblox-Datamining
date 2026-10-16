@@ -1,110 +1,117 @@
-﻿local appStorageService = game:GetService("AppStorageService")
-local httpService = game:GetService("HttpService")
-local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local reactModule = require(parent.React)
-local useLocalUserId = require(parent.RobloxAppHooks).useLocalUserId
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useTelemetryModule = require(appChat.Telemetry.useTelemetry)
+﻿local AppStorageService = game:GetService("AppStorageService")
+local HttpService = game:GetService("HttpService")
+local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local ReactModule = require(Parent.React)
+local UseLocalUserIdFunction = require(Parent.RobloxAppHooks).useLocalUserId
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseTelemetryModule = require(AppChat.Telemetry.useTelemetry)
 local _ = require(script.Parent.MessageFtuxTooltipVariant)
-local messageFtuxTooltipDismissSignalModule = require(script.Parent.MessageFtuxTooltipDismissSignal)
-local useMessageFtuxTooltipConfigModule = require(script.Parent.useMessageFtuxTooltipConfig)
-local chatConversationTelemetryEventsModule = require(appChat.Components.ChatConversation.ChatConversationTelemetryEvents)
-local chatConversationTelemetryLayerModule = require(appChat.Telemetry.Layers.ChatConversationTelemetryLayer)
-local t = {
-	GetItem = function(_, p1)
-		-- upvalues: appStorageService (ref)
-		return appStorageService:GetItem(p1)
+local MessageFtuxTooltipDismissSignalModule = require(script.Parent.MessageFtuxTooltipDismissSignal)
+local UseMessageFtuxTooltipConfigModule = require(script.Parent.useMessageFtuxTooltipConfig)
+local ChatConversationTelemetryEventsModule = require(AppChat.Components.ChatConversation.ChatConversationTelemetryEvents)
+local ChatConversationTelemetryLayerModule = require(AppChat.Telemetry.Layers.ChatConversationTelemetryLayer)
+local config = {
+	GetItem = function(_, Key) --[[ Line: 26 ]]
+		-- upvalues: AppStorageService (copy)
+		return AppStorageService:GetItem(Key)
 	end,
-	SetItem = function(_, p1, p2)
-		-- upvalues: appStorageService (ref)
-		appStorageService:SetItem(p1, p2)
+	SetItem = function(_, Key, Json) --[[ Line: 29 ]]
+		-- upvalues: AppStorageService (copy)
+		AppStorageService:SetItem(Key, Json)
 	end,
-	Flush = function()
-		-- upvalues: appStorageService (ref)
-		appStorageService:Flush()
+	Flush = function() --[[ Line: 32 ]]
+		-- upvalues: AppStorageService (copy)
+		AppStorageService:Flush()
 	end
 }
 
-return function(p1, p2)
-	-- upvalues: t (ref), useMessageFtuxTooltipConfigModule (ref), useTelemetryModule (ref), chatConversationTelemetryLayerModule (ref), reactModule (ref), useLocalUserId (ref), chatConversationTelemetryEventsModule (ref), httpService (ref), messageFtuxTooltipDismissSignalModule (ref), useLocalization (ref)
-	p2 = p2 or t
-	local var1 = useMessageFtuxTooltipConfigModule(p1)
-	local var2 = useTelemetryModule(chatConversationTelemetryLayerModule.Context)
-	local var3 = reactModule.useRef(var2)
-	var3.current = var2
-	local var4 = useLocalUserId() or ""
-	local var5, var6 = reactModule.useState(true)
-	local var7 = reactModule.useRef({})
-	local var8 = reactModule.useCallback(function()
-		-- upvalues: var3 (ref), chatConversationTelemetryEventsModule (copy), p1 (ref)
-		var3.current.emit(chatConversationTelemetryEventsModule.ConversationMessageFtuxTooltipImpression, { tooltipVariant = p1 })
-	end, { p1 })
-	local var9 = reactModule.useCallback(function()
-		-- upvalues: var3 (ref), chatConversationTelemetryEventsModule (copy), p1 (ref)
-		var3.current.emit(chatConversationTelemetryEventsModule.ConversationMessageFtuxTooltipDismissed, { tooltipVariant = p1 })
-	end, { p1 })
-	local var10 = reactModule.useCallback(function()
-		-- upvalues: var5 (ref), var9 (ref), var7 (ref), var4 (ref), var1 (ref), p2 (ref), httpService (copy), var6 (ref)
-		if var5 then
+return function(TooltipVariant, p1) --[[ Line: 43 | Named "useMessageFtuxTooltip" ]]
+	-- upvalues: config (copy), UseMessageFtuxTooltipConfigModule (copy), UseTelemetryModule (copy), ChatConversationTelemetryLayerModule (copy), ReactModule (copy), UseLocalUserIdFunction (copy), ChatConversationTelemetryEventsModule (copy), HttpService (copy), MessageFtuxTooltipDismissSignalModule (copy), UseLocalizationFunction (copy)
+	local P6 = p1 or config
+	local UseMessageFtuxTooltipConfigModuleResult = UseMessageFtuxTooltipConfigModule(TooltipVariant)
+	local UseTelemetryModuleResult = UseTelemetryModule(ChatConversationTelemetryLayerModule.Context)
+	local UseRefResult = ReactModule.useRef(UseTelemetryModuleResult)
+	UseRefResult.current = UseTelemetryModuleResult
+	local UseLocalUserIdResult = UseLocalUserIdFunction() or ""
+	local UseStateResult, UseStateResult2 = ReactModule.useState(true)
+	local UseRefResult1 = ReactModule.useRef({})
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 54 ]]
+		-- upvalues: UseRefResult (copy), ChatConversationTelemetryEventsModule (upval), TooltipVariant (copy)
+		UseRefResult.current.emit(ChatConversationTelemetryEventsModule.ConversationMessageFtuxTooltipImpression, { tooltipVariant = TooltipVariant })
+	end, { TooltipVariant })
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 60 ]]
+		-- upvalues: UseRefResult (copy), ChatConversationTelemetryEventsModule (upval), TooltipVariant (copy)
+		UseRefResult.current.emit(ChatConversationTelemetryEventsModule.ConversationMessageFtuxTooltipDismissed, { tooltipVariant = TooltipVariant })
+	end, { TooltipVariant })
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 67 ]]
+		-- upvalues: UseStateResult (copy), UseResult1 (copy), UseRefResult1 (copy), UseLocalUserIdResult (copy), UseMessageFtuxTooltipConfigModuleResult (copy), P6 (copy), HttpService (upval), UseStateResult2 (copy)
+		if not UseStateResult then
+			UseResult1()
+			UseRefResult1.current[UseLocalUserIdResult] = UseMessageFtuxTooltipConfigModuleResult.textKey
+			local Success, _ = pcall(function() --[[ Line: 73 ]]
+				-- upvalues: P6 (upval), UseMessageFtuxTooltipConfigModuleResult (upval), HttpService (upval), UseRefResult1 (upval)
+				P6:SetItem(UseMessageFtuxTooltipConfigModuleResult.storageKey, HttpService:JSONEncode(UseRefResult1.current))
+				P6:Flush()
+			end)
+			UseStateResult2(Success)
+			
 			return
 		end
-		var9()
-		var7.current[var4] = var1.textKey
-		local ok, _ = pcall(function()
-			-- upvalues: p2 (copy), var1 (copy), httpService (copy), var7 (copy)
-			p2:SetItem(var1.storageKey, httpService:JSONEncode(var7.current))
-			p2:Flush()
-		end)
-		var6(ok)
 	end, {
-		var1.storageKey, var1.textKey, var4, var5, p2, var9
+		UseMessageFtuxTooltipConfigModuleResult.storageKey,
+		UseMessageFtuxTooltipConfigModuleResult.textKey, UseLocalUserIdResult,
+		UseStateResult, P6, UseResult1
 	})
-	reactModule.useEffect(function()
-		-- upvalues: p2 (ref), var1 (ref), httpService (copy), var7 (ref), var4 (ref), var6 (ref), var8 (ref)
-		local ok, status = pcall(function()
-			-- upvalues: p2 (copy), var1 (copy), httpService (copy)
-			return httpService:JSONDecode(p2:GetItem(var1.storageKey))
+	ReactModule.useEffect(function() --[[ Line: 90 ]]
+		-- upvalues: P6 (copy), UseMessageFtuxTooltipConfigModuleResult (copy), HttpService (upval), UseRefResult1 (copy), UseLocalUserIdResult (copy), UseStateResult2 (copy), UseResult (copy)
+		local Success, Result = pcall(function() --[[ Line: 91 ]]
+			-- upvalues: P6 (upval), UseMessageFtuxTooltipConfigModuleResult (upval), HttpService (upval)
+			return HttpService:JSONDecode((P6:GetItem(UseMessageFtuxTooltipConfigModuleResult.storageKey)))
 		end)
-		var7.current = if ok then status else {}
-		local var11 = var7.current[var4] == var1.textKey
-		var6(var11)
+		UseRefResult1.current = if Success then Result else {}
+		local IsCurrentEntryMatch = UseRefResult1.current[UseLocalUserIdResult] == UseMessageFtuxTooltipConfigModuleResult.textKey
+		UseStateResult2(IsCurrentEntryMatch)
 		
-		if not var11 then
-			var8()
+		if not IsCurrentEntryMatch then
+			UseResult()
 		end
 	end, {
-		var1.storageKey,
-		var1.textKey,
-		var4,
-		p2,
-		var8
+		UseMessageFtuxTooltipConfigModuleResult.storageKey,
+		UseMessageFtuxTooltipConfigModuleResult.textKey,
+		UseLocalUserIdResult,
+		P6,
+		UseResult
 	})
-	reactModule.useEffect(function()
-		-- upvalues: var5 (ref), messageFtuxTooltipDismissSignalModule (copy), p1 (ref), var10 (ref)
-		if var5 then
-			return
-		end
-		local dismissedConnection = messageFtuxTooltipDismissSignalModule.dismissed:connect(function(p3)
-			-- upvalues: p1 (copy), var10 (copy)
-			if p3 == p1 then
-				var10()
+	ReactModule.useEffect(function() --[[ Line: 111 ]]
+		-- upvalues: UseStateResult (copy), MessageFtuxTooltipDismissSignalModule (upval), TooltipVariant (copy), UseResult2 (copy)
+		if UseStateResult then return end
+		local DismissedConnection = MessageFtuxTooltipDismissSignalModule.dismissed:connect(function(TooltipVariant1) --[[ Line: 115 ]]
+			-- upvalues: TooltipVariant (upval), UseResult2 (upval)
+			if TooltipVariant1 == TooltipVariant then
+				UseResult2()
 			end
 		end)
 		
-		return function()
-			-- upvalues: dismissedConnection (ref)
-			dismissedConnection:disconnect()
+		return function() --[[ Line: 120 ]]
+			-- upvalues: DismissedConnection (copy)
+			DismissedConnection:disconnect()
 		end
-	end, { p1, var10, var5 })
-	local var11 = useLocalization({ tooltipText = var1.textKey })
+	end, { TooltipVariant, UseResult2, UseStateResult })
+	local UseLocalizationResult = UseLocalizationFunction({
+		tooltipText = UseMessageFtuxTooltipConfigModuleResult.textKey
+	})
 	
-	return reactModule.useMemo(function()
-		-- upvalues: var11 (ref), var5 (ref), var10 (ref)
+	return ReactModule.useMemo(function() --[[ Line: 128 ]]
+		-- upvalues: UseLocalizationResult (copy), UseStateResult (copy), UseResult2 (copy)
 		return {
-			text = var11.tooltipText,
-			isDismissed = var5,
-			handleDismiss = var10
+			text = UseLocalizationResult.tooltipText,
+			isDismissed = UseStateResult,
+			handleDismiss = UseResult2
 		}
-	end, { var11.tooltipText, var5, var10 })
+	end, {
+		UseLocalizationResult.tooltipText,
+		UseStateResult,
+		UseResult2
+	})
 end

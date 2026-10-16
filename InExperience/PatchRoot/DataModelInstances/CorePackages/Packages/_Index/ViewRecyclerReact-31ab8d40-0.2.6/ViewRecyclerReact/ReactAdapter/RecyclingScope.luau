@@ -1,56 +1,57 @@
-﻿local viewRecyclerReact = script:FindFirstAncestor("ViewRecyclerReact")
-local _ = require(viewRecyclerReact.Parent.ViewRecycler)
-local reactModule = require(viewRecyclerReact.Parent.React)
-local recyclingRootModule = require(viewRecyclerReact.ReactAdapter.Private.RecyclingRoot)
-local recyclingScopeContextModule = require(viewRecyclerReact.ReactAdapter.Private.RecyclingScopeContext)
-local createElement = reactModule.createElement
+﻿local ViewRecyclerReact = script:FindFirstAncestor("ViewRecyclerReact")
+local _ = require(ViewRecyclerReact.Parent.ViewRecycler)
+local ReactModule = require(ViewRecyclerReact.Parent.React)
+local RecyclingRootModule = require(ViewRecyclerReact.ReactAdapter.Private.RecyclingRoot)
+local RecyclingScopeContextModule = require(ViewRecyclerReact.ReactAdapter.Private.RecyclingScopeContext)
+local CreateElementFunction = ReactModule.createElement
 
 return {
-	create = function(p1)
-		-- upvalues: reactModule (ref), recyclingRootModule (ref), createElement (ref), recyclingScopeContextModule (ref)
-		local var1 = if p1 == nil then nil else p1.createPortal
+	create = function(p1) --[[ Line: 20 ]]
+		-- upvalues: ReactModule (copy), RecyclingRootModule (copy), CreateElementFunction (copy), RecyclingScopeContextModule (copy)
+		local CreatePortal = if p1 == nil then nil else p1.createPortal
 		
-		return function(p2)
-			-- upvalues: var1 (ref), reactModule (copy), recyclingRootModule (copy), createElement (copy), recyclingScopeContextModule (copy)
-			assert(var1 ~= nil, "RecyclingScope requires a configured portal renderer")
-			local _, var2 = reactModule.useState(0)
-			local var3 = reactModule.useRef(0)
-			local var4 = reactModule.useRef(false)
-			local var5 = reactModule.useRef(false)
-			local var6 = reactModule.useState(function()
-				-- upvalues: recyclingRootModule (copy), var4 (ref), var2 (ref)
-				return recyclingRootModule.new(function()
-					-- upvalues: var4 (copy), var2 (copy)
-					if not var4.current then
-						var2(function(p3)
+		return function(p2) --[[ Line: 23 | Named "RecyclingScope" ]]
+			-- upvalues: CreatePortal (copy), ReactModule (upval), RecyclingRootModule (upval), CreateElementFunction (upval), RecyclingScopeContextModule (upval)
+			assert(CreatePortal ~= nil, "RecyclingScope requires a configured portal renderer")
+			local _, UseStateResult2 = ReactModule.useState(0)
+			local UseRefResult = ReactModule.useRef(0)
+			local UseRefResult1 = ReactModule.useRef(false)
+			local UseRefResult2 = ReactModule.useRef(false)
+			local UseStateResult = ReactModule.useState(function() --[[ Line: 29 ]]
+				-- upvalues: RecyclingRootModule (upval), UseRefResult1 (copy), UseStateResult2 (copy)
+				return RecyclingRootModule.new(function() --[[ Line: 30 ]]
+					-- upvalues: UseRefResult1 (upval), UseStateResult2 (upval)
+					if not UseRefResult1.current then
+						UseStateResult2(function(p3: number): number --[[ Line: 32 ]]
 							return p3 + 1
 						end)
 					end
 				end)
 			end)
 			
-			local function destroyRootIfReady()
-				-- upvalues: var4 (ref), var3 (ref), var5 (ref), var6 (ref)
-				if var4.current and var3.current == 0 and not var5.current then
-					var5.current = true
-					var6.destroy()
+			local function destroyRootIfReady() --[[ Line: 39 ]]
+				-- upvalues: UseRefResult1 (copy), UseRefResult (copy), UseRefResult2 (copy), UseStateResult (copy)
+				if UseRefResult1.current and UseRefResult.current == 0 and not UseRefResult2.current then
+					UseRefResult2.current = true
+					UseStateResult.destroy()
 				end
 			end
 			
-			local var7 = reactModule.useState(function()
-				-- upvalues: var5 (ref), var4 (ref), var3 (ref), destroyRootIfReady (ref)
-				return function()
-					-- upvalues: var5 (copy), var4 (copy), var3 (copy), destroyRootIfReady (copy)
-					assert(not var5.current, "RecyclingScope: cannot register after destruction")
-					var4.current = false
-					var3.current += 1
-					local var8 = true
+			local UseStateResult1 = ReactModule.useState(function() --[[ Line: 46 ]]
+				-- upvalues: UseRefResult2 (copy), UseRefResult1 (copy), UseRefResult (copy), destroyRootIfReady (copy)
+				return function() --[[ Line: 47 ]]
+					-- upvalues: UseRefResult2 (upval), UseRefResult1 (upval), UseRefResult (upval), destroyRootIfReady (upval)
+					assert(not UseRefResult2.current, "RecyclingScope: cannot register after destruction")
+					UseRefResult1.current = false
+					local UseRefResult3 = UseRefResult
+					UseRefResult3.current += 1
+					local Flag = true
 					
-					return function()
-						-- upvalues: var8 (write), var3 (copy), destroyRootIfReady (copy)
-						if var8 then
-							var8 = false
-							var3.current -= 1
+					return function() --[[ Line: 52 ]]
+						-- upvalues: Flag (ref), UseRefResult (upval), destroyRootIfReady (upval)
+						if Flag then
+							Flag = false
+							UseRefResult.current -= 1
 							task.defer(destroyRootIfReady)
 							
 							return
@@ -58,35 +59,40 @@ return {
 					end
 				end
 			end)
-			local var8 = reactModule.useMemo(function()
-				-- upvalues: var6 (ref), p2 (ref), var7 (ref)
+			local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 62 ]]
+				-- upvalues: UseStateResult (copy), p2 (copy), UseStateResult1 (copy)
 				return {
-					root = var6,
+					root = UseStateResult,
 					listOptions = {
 						maxPoolSize = p2.maxPoolSize,
 						diagnostics = p2.diagnostics
 					},
-					registerConsumer = var7
+					registerConsumer = UseStateResult1
 				}
-			end, { p2.maxPoolSize, p2.diagnostics, var7, var6 })
-			reactModule.useEffect(function()
-				-- upvalues: var4 (ref), destroyRootIfReady (ref)
-				var4.current = false
+			end, {
+				p2.maxPoolSize,
+				p2.diagnostics,
+				UseStateResult1,
+				UseStateResult
+			})
+			ReactModule.useEffect(function() --[[ Line: 73 ]]
+				-- upvalues: UseRefResult1 (copy), destroyRootIfReady (copy)
+				UseRefResult1.current = false
 				
-				return function()
-					-- upvalues: var4 (copy), destroyRootIfReady (copy)
-					var4.current = true
+				return function() --[[ Line: 75 ]]
+					-- upvalues: UseRefResult1 (upval), destroyRootIfReady (upval)
+					UseRefResult1.current = true
 					task.defer(destroyRootIfReady)
 				end
-			end, { var6 })
-			local t = {
-				Consumers = createElement(recyclingScopeContextModule.Provider, { value = var8 }, p2.children)
+			end, { UseStateResult })
+			local config = {
+				Consumers = CreateElementFunction(RecyclingScopeContextModule.Provider, { value = UseMemoResult }, p2.children)
 			}
 			
-			for i, v in var6.getPortalChildren(var1) do
-				t[i] = v
+			for i, value in UseStateResult.getPortalChildren(CreatePortal) do
+				config[i] = value
 			end
-			return createElement(reactModule.Fragment, nil, t)
+			return CreateElementFunction(ReactModule.Fragment, nil, config)
 		end
 	end
 }

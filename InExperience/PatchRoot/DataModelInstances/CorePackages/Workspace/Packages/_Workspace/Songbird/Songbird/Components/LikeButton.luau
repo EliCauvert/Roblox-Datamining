@@ -1,17 +1,16 @@
-﻿local songbird = script:FindFirstAncestor("Songbird")
-local constantsModule = require(songbird.constants)
-local cryoModule = require(songbird.Parent.Cryo)
-local reactModule = require(songbird.Parent.React)
-local foundationModule = require(songbird.Parent.Foundation)
-local t = { size = constantsModule.ICON_SIZE }
+﻿local Songbird = script:FindFirstAncestor("Songbird")
+local CryoModule = require(Songbird.Parent.Cryo)
+local ReactModule = require(Songbird.Parent.React)
+local FoundationModule = require(Songbird.Parent.Foundation)
+local config = { size = require(Songbird.constants).ICON_SIZE }
 
-return function(p1)
-	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), foundationModule (ref)
-	local var1 = cryoModule.Dictionary.join(t, p1)
+return function(p1) --[[ Line: 20 | Named "LikeButton" ]]
+	-- upvalues: CryoModule (copy), config (copy), ReactModule (copy), FoundationModule (copy)
+	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	
-	return reactModule.createElement(foundationModule.IconButton, {
-		icon = if var1.isFavorited then "icons/common/ratingFilled_medium" else "icons/common/rating_medium",
-		size = foundationModule.Enums.IconSize.Medium,
-		onActivated = if var1.onFavorite then var1.onFavorite else function() end
+	return ReactModule.createElement(FoundationModule.IconButton, {
+		icon = if JoinResult.isFavorited then "icons/common/ratingFilled_medium" else "icons/common/rating_medium",
+		size = FoundationModule.Enums.IconSize.Medium,
+		onActivated = if JoinResult.onFavorite then JoinResult.onFavorite else function() --[[ Line: 26 ]] end
 	})
 end

@@ -1,143 +1,142 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local parent = script.Parent.Parent
-local actions = parent.Actions
-local thunks = parent.Thunks
-local constantsModule = require(parent.Constants)
-local getSegmentFromPositionModule = require(parent.Utility.GetSegmentFromPosition)
-local focusSegmentModule = require(actions.FocusSegment)
-local hideMenuModule = require(actions.HideMenu)
-local playEmoteModule = require(thunks.PlayEmote)
-local emotesButtons = roactModule.PureComponent:extend("EmotesButtons")
+﻿local CorePackages = game:GetService("CorePackages")
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local Parent = script.Parent.Parent
+local Actions = Parent.Actions
+local ConstantsModule = require(Parent.Constants)
+local GetSegmentFromPositionModule = require(Parent.Utility.GetSegmentFromPosition)
+local FocusSegmentModule = require(Actions.FocusSegment)
+local HideMenuModule = require(Actions.HideMenu)
+local PlayEmoteModule = require(Parent.Thunks.PlayEmote)
+local EmotesButtons = RoactModule.PureComponent:extend("EmotesButtons")
 
-local function _(p1, p2)
-	-- upvalues: constantsModule (ref)
-	local var1 = p1.AbsoluteSize.X / 2
+local function _(Frame, Offset): boolean --[[ Line: 24 | Named "positionInsideOuterCircle" ]]
+	-- upvalues: ConstantsModule (copy)
+	local XRatio = Frame.AbsoluteSize.X / 2
 	
-	return var1 * constantsModule.InnerCircleSizeRatio < p2.Magnitude and p2.Magnitude < var1
+	return XRatio * ConstantsModule.InnerCircleSizeRatio < Offset.Magnitude and Offset.Magnitude < XRatio
 end
 
-local function getSegmentFromInput(a, b)
-	-- upvalues: constantsModule (ref), getSegmentFromPositionModule (ref)
-	local var1 = Vector2.new(b.Position.X, b.Position.Y) - a.AbsolutePosition - a.AbsoluteSize / 2
-	local vector2 = Vector2.new(var1.X, -var1.Y)
-	local var2 = a.AbsoluteSize.X / 2
+local function getSegmentFromInput(Frame: Frame, Input) --[[ Line: 31 ]]
+	-- upvalues: ConstantsModule (copy), GetSegmentFromPositionModule (copy)
+	local VectorDelta = Vector2.new(Input.Position.X, Input.Position.Y) - Frame.AbsolutePosition - Frame.AbsoluteSize / 2
+	local _Vector2 = Vector2.new(VectorDelta.X, -VectorDelta.Y)
+	local XRatio = Frame.AbsoluteSize.X / 2
+	local IsXRatioAbove: boolean = XRatio * ConstantsModule.InnerCircleSizeRatio < _Vector2.Magnitude and XRatio > _Vector2.Magnitude
 	
-	return if var2 * constantsModule.InnerCircleSizeRatio < vector2.Magnitude and vector2.Magnitude < var2 then getSegmentFromPositionModule(vector2) else 0
+	return if IsXRatioAbove then GetSegmentFromPositionModule(_Vector2) else 0
 end
 
-local _ = function(value)
-	if #value == 0 then
-		return
-	end
-	return value[math.random(1, #value)]
+local _ = function(p1) --[[ Line: 47 | Named "getRandomAssetId" ]]
+	if #p1 == 0 then return end
+	return p1[math.random(1, #p1)]
 end
 
-local _ = function(p1)
-	-- upvalues: constantsModule (ref)
-	return constantsModule.EmotesImage:format(p1)
+local _ = function(p1) --[[ Line: 56 | Named "getEmoteImage" ]]
+	-- upvalues: ConstantsModule (copy)
+	return ConstantsModule.EmotesImage:format(p1)
 end
 
-function emotesButtons.render(p1)
-	-- upvalues: constantsModule (ref), roactModule (ref), getSegmentFromInput (ref)
-	local currentEmotes = p1.props.emotesPage.currentEmotes
-	local emotesInfo = p1.props.emotesPage.emotesInfo
-	local t = {}
+function EmotesButtons.render(p1) --[[ Line: 60 ]]
+	-- upvalues: ConstantsModule (copy), RoactModule (copy), getSegmentFromInput (copy)
+	local EmotesInfo = p1.props.emotesPage.emotesInfo
+	local ImageLabels = {}
 	
-	for i, v in pairs(currentEmotes) do
-		local var1 = emotesInfo[v]
+	for i, currentEmote in pairs(p1.props.emotesPage.currentEmotes) do
+		local Emotes = EmotesInfo[currentEmote]
 		
-		if constantsModule.EmotesPerPage >= i then
+		if ConstantsModule.EmotesPerPage < i then
 			warn("EmotesMenu: Number of emotes in page exceeds max emotes per page")
 			break
+		else
+			local NewEmotesPerPage = 360 / ConstantsModule.EmotesPerPage * (i - 1) + ConstantsModule.SegmentsStartRotation
+			local InnerCircleSizeRatioRatio = ConstantsModule.InnerCircleSizeRatio / 2
+			local InnerCircleSizeRatioDelta = (1 - ConstantsModule.InnerCircleSizeRatio) / 2 - ConstantsModule.SlotNumberSize - ConstantsModule.ImageOutsidePadding
+			local InnerCircleSizeRatioDeltaDelta = InnerCircleSizeRatioDelta / 2 + ConstantsModule.SlotNumberSize - ConstantsModule.ImageOutsidePadding / 2
+			local Cosine = math.cos((math.rad(NewEmotesPerPage)))
+			local Sine = math.sin((math.rad(NewEmotesPerPage)))
+			ImageLabels[i] = RoactModule.createElement("ImageLabel", {
+				BackgroundTransparency = 1,
+				ZIndex = 2,
+				Image = ConstantsModule.EmotesImage:format(if #Emotes == 0 then nil else Emotes[math.random(1, #Emotes)]),
+				AnchorPoint = Vector2.new(0.5, 0.5),
+				Position = UDim2.new(0.5 + InnerCircleSizeRatioRatio * Cosine + InnerCircleSizeRatioDeltaDelta * Cosine, 0, 0.5 + InnerCircleSizeRatioRatio * Sine + InnerCircleSizeRatioDeltaDelta * Sine, 0),
+				Size = UDim2.new(InnerCircleSizeRatioDelta, 0, InnerCircleSizeRatioDelta, 0)
+			}, {
+				AsspectRatioConstraint = RoactModule.createElement("UIAspectRatioConstraint", { AspectRatio = 1 })
+			})
+			continue
 		end
-		local var2 = 360 / constantsModule.EmotesPerPage * (i - 1) + constantsModule.SegmentsStartRotation
-		local var3 = constantsModule.InnerCircleSizeRatio / 2
-		local var4 = (1 - constantsModule.InnerCircleSizeRatio) / 2 - constantsModule.SlotNumberSize - constantsModule.ImageOutsidePadding
-		local var5 = var4 / 2 + constantsModule.SlotNumberSize - constantsModule.ImageOutsidePadding / 2
-		local var6 = math.cos(math.rad(var2))
-		local var7 = math.sin(math.rad(var2))
-		t[i] = roactModule.createElement("ImageLabel", {
-			BackgroundTransparency = 1,
-			ZIndex = 2,
-			Image = constantsModule.EmotesImage:format(if #var1 == 0 then nil else var1[math.random(1, #var1)]),
-			AnchorPoint = Vector2.new(0.5, 0.5),
-			Position = UDim2.new(0.5 + var3 * var6 + var5 * var6, 0, 0.5 + var3 * var7 + var5 * var7, 0),
-			Size = UDim2.new(var4, 0, var4, 0)
-		}, {
-			AsspectRatioConstraint = roactModule.createElement("UIAspectRatioConstraint", { AspectRatio = 1 })
-		})
 	end
-	return roactModule.createElement("TextButton", {
+	return RoactModule.createElement("TextButton", {
 		AnchorPoint = Vector2.new(0.5, 0.5),
 		Size = UDim2.new(1, 0, 1, 0),
 		Position = UDim2.new(0.5, 0, 0.5, 0),
 		BackgroundTransparency = 1,
 		Text = "",
-		[roactModule.Event.InputChanged] = function(p2, p3)
-			-- upvalues: getSegmentFromInput (copy), p1 (ref)
-			local userInputType = p3.UserInputType
+		[RoactModule.Event.InputChanged] = function(Frame, Input) --[[ Line: 117 ]]
+			-- upvalues: getSegmentFromInput (upval), p1 (copy)
+			local UserInputType = Input.UserInputType
 			
-			if userInputType == Enum.UserInputType.MouseMovement or userInputType == Enum.UserInputType.Touch then
-				local var8 = getSegmentFromInput(p2, p3)
+			if UserInputType == Enum.UserInputType.MouseMovement or UserInputType == Enum.UserInputType.Touch then
+				local SegmentFromInput = getSegmentFromInput(Frame, Input)
 				
-				if var8 == p1.props.emotesWheel.focusedSegmentIndex then return end
-				if p1.props.emotesPage.currentEmotes[var8] then
-					p1.props.focusSegment(var8)
+				if SegmentFromInput == p1.props.emotesWheel.focusedSegmentIndex then return end
+				if p1.props.emotesPage.currentEmotes[SegmentFromInput] then
+					p1.props.focusSegment(SegmentFromInput)
 					
 					return
 				end
 				p1.props.focusSegment(0)
 			end
 		end,
-		[roactModule.Event.Activated] = function(p2, p3)
-			-- upvalues: getSegmentFromInput (copy), p1 (ref)
-			local var8 = getSegmentFromInput(p2, p3)
+		[RoactModule.Event.Activated] = function(Frame, p2) --[[ Line: 135 ]]
+			-- upvalues: getSegmentFromInput (upval), p1 (copy)
+			local SegmentFromInput = getSegmentFromInput(Frame, p2)
 			
-			if var8 == 0 then
+			if SegmentFromInput == 0 then
 				p1.props.hideMenu()
 				
 				return
 			end
-			local var9 = p1.props.emotesPage.currentEmotes[var8]
+			local CurrentEmote = p1.props.emotesPage.currentEmotes[SegmentFromInput]
 			
-			if not var9 then return end
-			local var10 = p1.props.emotesPage.emotesInfo[var9]
+			if not CurrentEmote then return end
+			local Emotes = p1.props.emotesPage.emotesInfo[CurrentEmote]
 			
-			if var10 then
-				p1.props.playEmote(var9, var8, if #var10 == 0 then nil else var10[math.random(1, #var10)])
+			if Emotes then
+				p1.props.playEmote(CurrentEmote, SegmentFromInput, if #Emotes == 0 then nil else Emotes[math.random(1, #Emotes)])
 				
 				return
 			end
 		end,
-		[roactModule.Event.MouseLeave] = function()
-			-- upvalues: p1 (ref)
+		[RoactModule.Event.MouseLeave] = function() --[[ Line: 156 ]]
+			-- upvalues: p1 (copy)
 			p1.props.focusSegment(0)
 		end
-	}, t)
+	}, ImageLabels)
 end
 
-return roactRoduxModule.connect(function(p2)
+return RoactRoduxModule.connect(function(p2) --[[ Line: 162 | Named "mapStateToProps" ]]
 	return {
 		displayOptions = p2.displayOptions,
 		emotesPage = p2.emotesPage,
 		emotesWheel = p2.emotesWheel
 	}
-end, function(p2)
-	-- upvalues: playEmoteModule (ref), focusSegmentModule (ref), hideMenuModule (ref)
+end, function(Callback) --[[ Line: 170 | Named "mapDispatchToProps" ]]
+	-- upvalues: PlayEmoteModule (copy), FocusSegmentModule (copy), HideMenuModule (copy)
 	return {
-		playEmote = function(p3, p4, p5)
-			-- upvalues: p2 (ref), playEmoteModule (copy)
-			return p2(playEmoteModule(p3, p4, p5))
+		playEmote = function(p2, p3, p4) --[[ Line: 172 ]]
+			-- upvalues: Callback (copy), PlayEmoteModule (upval)
+			return Callback(PlayEmoteModule(p2, p3, p4))
 		end,
-		focusSegment = function(p3)
-			-- upvalues: p2 (ref), focusSegmentModule (copy)
-			return p2(focusSegmentModule(p3))
+		focusSegment = function(p2) --[[ Line: 176 ]]
+			-- upvalues: Callback (copy), FocusSegmentModule (upval)
+			return Callback(FocusSegmentModule(p2))
 		end,
-		hideMenu = function()
-			-- upvalues: p2 (ref), hideMenuModule (copy)
-			return p2(hideMenuModule())
+		hideMenu = function() --[[ Line: 180 ]]
+			-- upvalues: Callback (copy), HideMenuModule (upval)
+			return Callback(HideMenuModule())
 		end
 	}
-end)(emotesButtons)
+end)(EmotesButtons)

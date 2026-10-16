@@ -1,40 +1,40 @@
-﻿local progressLoading = script:FindFirstAncestor("ProgressLoading")
-local parent = progressLoading.Parent
-local engineFeatureEnableDeferredAssetManagerServiceModule = require(progressLoading.Flags.EngineFeatureEnableDeferredAssetManagerService)
-local var1 = if engineFeatureEnableDeferredAssetManagerServiceModule then game:GetService("DeferredAssetManagerService") else nil
-local signalsModule = require(parent.Signals)
+﻿local ProgressLoading = script:FindFirstAncestor("ProgressLoading")
+local EngineFeatureEnableDeferredAssetManagerServiceModule = require(ProgressLoading.Flags.EngineFeatureEnableDeferredAssetManagerService)
+local DeferredAssetManagerService = if EngineFeatureEnableDeferredAssetManagerServiceModule then game:GetService("DeferredAssetManagerService") else nil
+local SignalsModule = require(ProgressLoading.Parent.Signals)
 
-return function(value)
-	-- upvalues: var1 (ref), engineFeatureEnableDeferredAssetManagerServiceModule (ref), signalsModule (ref)
-	local value_1 = value or var1
+return function(p1) --[[ Line: 22 | Named "createDeferredAssetStore" ]]
+	-- upvalues: DeferredAssetManagerService (copy), EngineFeatureEnableDeferredAssetManagerServiceModule (copy), SignalsModule (copy)
+	local P0 = p1 or DeferredAssetManagerService
 	
-	if engineFeatureEnableDeferredAssetManagerServiceModule or value ~= nil then
-		local var2, var3 = signalsModule.createSignal(value_1:GetPrefetchDownloadStatus())
-		local prefetchDownloadStatusChangedConnection = value_1.PrefetchDownloadStatusChanged:Connect(function(p1)
-			-- upvalues: var3 (ref)
-			var3(p1)
+	if EngineFeatureEnableDeferredAssetManagerServiceModule or p1 ~= nil then
+		local Signal, Signal2 = SignalsModule.createSignal((P0:GetPrefetchDownloadStatus()))
+		local PrefetchDownloadStatusChangedConnection = P0.PrefetchDownloadStatusChanged:Connect(function(Status) --[[ Line: 35 ]]
+			-- upvalues: Signal2 (copy)
+			Signal2(Status)
 		end)
-		local var4, var5 = signalsModule.createSignal(value_1.PregameLoadingScreenOnly)
-		local var6 = value_1:GetPropertyChangedSignal("PregameLoadingScreenOnly"):Connect(function()
-			-- upvalues: var5 (ref), value_1 (ref)
-			var5(value_1.PregameLoadingScreenOnly)
+		local Signal1, Signal2_1 = SignalsModule.createSignal(P0.PregameLoadingScreenOnly)
+		local Connection = P0:GetPropertyChangedSignal("PregameLoadingScreenOnly"):Connect(function() --[[ Line: 43 ]]
+			-- upvalues: Signal2_1 (copy), P0 (copy)
+			Signal2_1(P0.PregameLoadingScreenOnly)
 		end)
 		
 		return {
-			getDownloadStatus = var2,
-			getPregameLoadingScreenOnly = var4,
-			cleanUp = function()
-				-- upvalues: prefetchDownloadStatusChangedConnection (ref), var6 (ref)
-				prefetchDownloadStatusChangedConnection:Disconnect()
-				var6:Disconnect()
+			getDownloadStatus = Signal,
+			getPregameLoadingScreenOnly = Signal1,
+			cleanUp = function() --[[ Line: 50 ]]
+				-- upvalues: PrefetchDownloadStatusChangedConnection (copy), Connection (copy)
+				PrefetchDownloadStatusChangedConnection:Disconnect()
+				Connection:Disconnect()
 			end
 		}
+	else
+		return {
+			getDownloadStatus = function() --[[ Line: 26 ]] end,
+			getPregameLoadingScreenOnly = function(): boolean --[[ Line: 27 ]]
+				return false
+			end,
+			cleanUp = function() --[[ Line: 30 ]] end
+		}
 	end
-	return {
-		getDownloadStatus = function() end,
-		getPregameLoadingScreenOnly = function()
-			return false
-		end,
-		cleanUp = function() end
-	}
 end

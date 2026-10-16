@@ -1,11 +1,11 @@
-﻿local parent = script.Parent.Parent
-local getPaymentFromPlatformModule = require(parent.Utils.getPaymentFromPlatform)
-local _ = require(parent.Utils.getPaymentFromPlatformLegacy)
-local getHasAmazonUserAgentModule = require(parent.Utils.getHasAmazonUserAgent)
-local getHasQuestUserAgentModule = require(parent.Utils.getHasQuestUserAgent)
-local getFFlagEnableLuobuInGameUpsellModule = require(parent.Flags.GetFFlagEnableLuobuInGameUpsell)
+﻿local Parent = script.Parent.Parent
+local GetPaymentFromPlatformModule = require(Parent.Utils.getPaymentFromPlatform)
+local _ = require(Parent.Utils.getPaymentFromPlatformLegacy)
+local GetHasAmazonUserAgentModule = require(Parent.Utils.getHasAmazonUserAgent)
+local GetHasQuestUserAgentModule = require(Parent.Utils.getHasQuestUserAgent)
+local GetFFlagEnableLuobuInGameUpsellModule = require(Parent.Flags.GetFFlagEnableLuobuInGameUpsell)
 
-return function(p1)
-	-- upvalues: getHasAmazonUserAgentModule (ref), getFFlagEnableLuobuInGameUpsellModule (ref), getHasQuestUserAgentModule (ref), getPaymentFromPlatformModule (ref)
-	return getPaymentFromPlatformModule(p1, getFFlagEnableLuobuInGameUpsellModule(), getHasAmazonUserAgentModule(), getHasQuestUserAgentModule())
+return function(p1) --[[ Line: 9 ]]
+	-- upvalues: GetHasAmazonUserAgentModule (copy), GetFFlagEnableLuobuInGameUpsellModule (copy), GetHasQuestUserAgentModule (copy), GetPaymentFromPlatformModule (copy)
+	return GetPaymentFromPlatformModule(p1, GetFFlagEnableLuobuInGameUpsellModule(), GetHasAmazonUserAgentModule(), (GetHasQuestUserAgentModule()))
 end

@@ -1,43 +1,42 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local constantsModule = require(foundation.Constants)
-local flagsModule = require(foundation.Utility.Flags)
-local popoverSideModule = require(foundation.Enums.PopoverSide)
-local radiusModule = require(foundation.Enums.Radius)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local var1 = if flagsModule.FoundationPopoverPluginOverlayMeasurement and flagsModule.FoundationPluginShadowSize then constantsModule.PLUGIN_SHADOW_SIZE else constantsModule.SHADOW_SIZE
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local ConstantsModule = require(Foundation.Constants)
+local FlagsModule = require(Foundation.Utility.Flags)
+local PopoverSideModule = require(Foundation.Enums.PopoverSide)
+local RadiusModule = require(Foundation.Enums.Radius)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local PLUGINSHADOWSIZE = if FlagsModule.FoundationPopoverPluginOverlayMeasurement and FlagsModule.FoundationPluginShadowSize then ConstantsModule.PLUGIN_SHADOW_SIZE else ConstantsModule.SHADOW_SIZE
 
-return function(p1, p2, p3, p4, p5, p6)
-	-- upvalues: useTokensModule (ref), reactModule (ref), radiusModule (ref), popoverSideModule (ref), var1 (ref)
-	local var2 = useTokensModule()
-	local var3 = reactModule.useMemo(function()
-		-- upvalues: p3 (ref), radiusModule (copy), var2 (ref)
-		return if p3 == radiusModule.XSmall then var2.Size.Size_50 elseif p3 == radiusModule.Small then var2.Size.Size_100 elseif p3 == radiusModule.Medium then var2.Size.Size_200 elseif p3 == radiusModule.Large then var2.Size.Size_300 else 0
-	end, { p3, var2 })
+return function(p1, Top, Circle, p2, p3, Frame) --[[ Line: 19 | Named "useArrowPosition" ]]
+	-- upvalues: UseTokensModule (copy), ReactModule (copy), RadiusModule (copy), PopoverSideModule (copy), PLUGINSHADOWSIZE (copy)
+	local UseTokensModuleResult = UseTokensModule()
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 28 ]]
+		-- upvalues: Circle (copy), RadiusModule (upval), UseTokensModuleResult (copy)
+		return if Circle == RadiusModule.XSmall then UseTokensModuleResult.Size.Size_50 elseif Circle == RadiusModule.Small then UseTokensModuleResult.Size.Size_100 elseif Circle == RadiusModule.Medium then UseTokensModuleResult.Size.Size_200 elseif Circle == RadiusModule.Large then UseTokensModuleResult.Size.Size_300 else 0
+	end, { Circle, UseTokensModuleResult })
 	
-	return p1:map(function(p7)
-		-- upvalues: var3 (ref), p3 (ref), radiusModule (copy), p5 (ref), p2 (ref), popoverSideModule (copy), p6 (ref), p4 (ref), var1 (copy)
-		local var4
-		local offset = p7.X.Offset
-		local offset_1 = p7.Y.Offset
-		local var5 = (if p3 == radiusModule.Circle then math.min(offset, offset_1) / 2 else var3) + p5
-		local var6 = if p2 ~= popoverSideModule.Top then p2 == popoverSideModule.Bottom else true
-		local var7 = if var6 then offset else offset_1
-		local _ = nil
+	return p1:map(function(Vector): UDim2 --[[ Line: 42 ]]
+		-- upvalues: UseMemoResult (copy), Circle (copy), RadiusModule (upval), p3 (copy), Top (copy), PopoverSideModule (upval), Frame (copy), p2 (copy), PLUGINSHADOWSIZE (upval)
+		local Offset: number = Vector.X.Offset
+		local Offset1: number = Vector.Y.Offset
+		local MinValue = (if Circle == RadiusModule.Circle then math.min(Offset, Offset1) / 2 else UseMemoResult) + p3
+		local IsTopMatch: boolean = Top == PopoverSideModule.Top or Top == PopoverSideModule.Bottom
+		local Offset2: number = if IsTopMatch then Offset else Offset1
+		local Value = nil
 		
-		if p6 and typeof(p6) == "Instance" then
-			local absoluteSize = p6.AbsoluteSize
-			local var8 = if var6 then absoluteSize.X else absoluteSize.Y
-			local var9 = if p4 == 0 then 0 elseif p4 == 0.5 then (var7 - var8) / 2 else var7 - var8
-			local maxValue = math.max(0, var9)
-			local minValue = math.min(var7, var9 + var8)
-			var4 = if maxValue <= minValue then (maxValue + minValue) / 2 elseif var7 < var9 then var7 - p5 else p5
+		if Frame and typeof(Frame) == "Instance" then
+			local AbsoluteSize = Frame.AbsoluteSize
+			local X = if IsTopMatch then AbsoluteSize.X else AbsoluteSize.Y
+			local OffsetRatio: number = if p2 == 0 then 0 elseif p2 == 0.5 then (Offset2 - X) / 2 else Offset2 - X
+			local Largest = math.max(0, OffsetRatio)
+			local Smallest = math.min(Offset2, OffsetRatio + X)
+			Value = if Largest <= Smallest then (Largest + Smallest) / 2 elseif Offset2 < OffsetRatio then Offset2 - p3 else p3
 		else
-			var4 = var7 * p4
+			Value = Offset2 * p2
 		end
-		local var10 = var7 - var5
-		var4 = if var5 <= var10 then math.clamp(var4, var5, var10) else var7 / 2
+		local MaxValue = Offset2 - MinValue
+		local ClampedValue: number = if MinValue <= MaxValue then math.clamp(Value, MinValue, MaxValue) else Offset2 / 2
 		
-		return if var6 then UDim2.fromOffset(var1 + var4, var1 + (if p2 == popoverSideModule.Top then offset_1 else 0)) else UDim2.fromOffset(var1 + (if p2 == popoverSideModule.Left then offset else 0), var1 + var4)
+		return if IsTopMatch then UDim2.fromOffset(PLUGINSHADOWSIZE + ClampedValue, PLUGINSHADOWSIZE + (if Top == PopoverSideModule.Top then Offset1 else 0)) else UDim2.fromOffset(PLUGINSHADOWSIZE + (if Top == PopoverSideModule.Left then Offset else 0), PLUGINSHADOWSIZE + ClampedValue)
 	end)
 end

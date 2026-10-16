@@ -1,8 +1,8 @@
-﻿local parent = script:FindFirstAncestor("ChatUIPrimitives").Parent
-local reactModule = require(parent.React)
-local viewRecyclerModule = require(parent.ViewRecycler)
+﻿local Parent = script:FindFirstAncestor("ChatUIPrimitives").Parent
+local ReactModule = require(Parent.React)
+local ViewRecyclerModule = require(Parent.ViewRecycler)
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), viewRecyclerModule (ref)
-	return reactModule.createElement(viewRecyclerModule.VirtualList, p1.listProps)
+return ReactModule.memo(function(p1) --[[ Line: 10 | Named "MessageListView" ]]
+	-- upvalues: ReactModule (copy), ViewRecyclerModule (copy)
+	return ReactModule.createElement(ViewRecyclerModule.VirtualList, p1.listProps)
 end)

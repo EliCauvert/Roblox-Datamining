@@ -1,590 +1,590 @@
-﻿local t = {}
-local playersService = game:GetService("Players")
+﻿local ChatWindowModule = {}
+local Players = game:GetService("Players")
 local _ = game:GetService("Chat")
-local playerGui = playersService.LocalPlayer:WaitForChild("PlayerGui")
-local chatService = game:GetService("Chat")
-local clientChatModules = chatService:WaitForChild("ClientChatModules")
-local parent = script.Parent
-local chatChannelModule = require(parent:WaitForChild("ChatChannel"))
-local chatSettingsModule = require(clientChatModules:WaitForChild("ChatSettings"))
-local curveUtilModule = require(parent:WaitForChild("CurveUtil"))
-local t_1 = {}
-t_1.__index = t_1
+local PlayerGui = Players.LocalPlayer:WaitForChild("PlayerGui")
+local Chat = game:GetService("Chat")
+local Parent = script.Parent
+local ChatChannelModule = require(Parent:WaitForChild("ChatChannel"))
+local ChatSettingsModule = require(Chat:WaitForChild("ClientChatModules"):WaitForChild("ChatSettings"))
+local CurveUtilModule = require(Parent:WaitForChild("CurveUtil"))
+local Module = {}
+Module.__index = Module
 
-function getClassicChatEnabled()
-	-- upvalues: chatSettingsModule (ref), playersService (ref)
-	return if chatSettingsModule.ClassicChatEnabled == nil then playersService.ClassicChat else chatSettingsModule.ClassicChatEnabled
+function getClassicChatEnabled() --[[ Line: 34 ]]
+	-- upvalues: ChatSettingsModule (copy), Players (copy)
+	return if ChatSettingsModule.ClassicChatEnabled == nil then Players.ClassicChat else ChatSettingsModule.ClassicChatEnabled
 end
 
-function getBubbleChatEnabled()
-	-- upvalues: chatSettingsModule (ref), playersService (ref)
-	return if chatSettingsModule.BubbleChatEnabled == nil then playersService.BubbleChat else chatSettingsModule.BubbleChatEnabled
+function getBubbleChatEnabled() --[[ Line: 41 ]]
+	-- upvalues: ChatSettingsModule (copy), Players (copy)
+	return if ChatSettingsModule.BubbleChatEnabled == nil then Players.BubbleChat else ChatSettingsModule.BubbleChatEnabled
 end
 
-function bubbleChatOnly()
+function bubbleChatOnly() --[[ Line: 48 ]]
 	return not getClassicChatEnabled() and getBubbleChatEnabled()
 end
 
-function mergeProps(p1, p2)
-	if not p1 or not p2 then return end
-	for i, v in pairs(p1) do
-		if p2[i] ~= nil then
-			p2[i] = v
+function mergeProps(List, p1) --[[ Line: 53 ]]
+	if not List or not p1 then return end
+	for i, value in pairs(List) do
+		if p1[i] ~= nil then
+			p1[i] = value
 		end
 	end
 end
 
-function t_1.CreateGuiObjects(p3, p4)
-	-- upvalues: chatService (ref), chatSettingsModule (ref), playerGui (ref)
-	local var1 = nil
-	pcall(function()
-		-- upvalues: var1 (write), chatService (copy)
-		var1 = chatService:InvokeChatCallback(Enum.ChatCallbackType.OnCreatingChatWindow, nil)
+function Module.CreateGuiObjects(p2, Parent) --[[ Line: 62 ]]
+	-- upvalues: Chat (copy), ChatSettingsModule (copy), PlayerGui (copy)
+	local InvokeChatResult = nil
+	pcall(function() --[[ Line: 64 ]]
+		-- upvalues: InvokeChatResult (ref), Chat (upval)
+		InvokeChatResult = Chat:InvokeChatCallback(Enum.ChatCallbackType.OnCreatingChatWindow, nil)
 	end)
-	mergeProps(var1, chatSettingsModule)
-	local frame = Instance.new("Frame")
-	frame.BackgroundTransparency = 1
-	frame.Active = chatSettingsModule.WindowDraggable
-	frame.Parent = p4
-	frame.AutoLocalize = false
-	local chatBarParentFrame = Instance.new("Frame")
-	chatBarParentFrame.Selectable = false
-	chatBarParentFrame.Name = "ChatBarParentFrame"
-	chatBarParentFrame.BackgroundTransparency = 1
-	chatBarParentFrame.Parent = frame
-	local channelsBarParentFrame = Instance.new("Frame")
-	channelsBarParentFrame.Selectable = false
-	channelsBarParentFrame.Name = "ChannelsBarParentFrame"
-	channelsBarParentFrame.BackgroundTransparency = 1
-	channelsBarParentFrame.Position = UDim2.new(0, 0, 0, 0)
-	channelsBarParentFrame.Parent = frame
-	local chatChannelParentFrame = Instance.new("Frame")
-	chatChannelParentFrame.Selectable = false
-	chatChannelParentFrame.Name = "ChatChannelParentFrame"
-	chatChannelParentFrame.BackgroundTransparency = 1
-	chatChannelParentFrame.BackgroundColor3 = chatSettingsModule.BackGroundColor
-	chatChannelParentFrame.BackgroundTransparency = 0.6
-	chatChannelParentFrame.BorderSizePixel = 0
-	chatChannelParentFrame.Parent = frame
-	local imageButton = Instance.new("ImageButton")
-	imageButton.Selectable = false
-	imageButton.Image = ""
-	imageButton.BackgroundTransparency = 0.6
-	imageButton.BorderSizePixel = 0
-	imageButton.Visible = false
-	imageButton.BackgroundColor3 = chatSettingsModule.BackGroundColor
-	imageButton.Active = true
+	mergeProps(InvokeChatResult, ChatSettingsModule)
+	local Frame = Instance.new("Frame")
+	Frame.BackgroundTransparency = 1
+	Frame.Active = ChatSettingsModule.WindowDraggable
+	Frame.Parent = Parent
+	Frame.AutoLocalize = false
+	local ChatBarParentFrame = Instance.new("Frame")
+	ChatBarParentFrame.Selectable = false
+	ChatBarParentFrame.Name = "ChatBarParentFrame"
+	ChatBarParentFrame.BackgroundTransparency = 1
+	ChatBarParentFrame.Parent = Frame
+	local ChannelsBarParentFrame = Instance.new("Frame")
+	ChannelsBarParentFrame.Selectable = false
+	ChannelsBarParentFrame.Name = "ChannelsBarParentFrame"
+	ChannelsBarParentFrame.BackgroundTransparency = 1
+	ChannelsBarParentFrame.Position = UDim2.new(0, 0, 0, 0)
+	ChannelsBarParentFrame.Parent = Frame
+	local ChatChannelParentFrame = Instance.new("Frame")
+	ChatChannelParentFrame.Selectable = false
+	ChatChannelParentFrame.Name = "ChatChannelParentFrame"
+	ChatChannelParentFrame.BackgroundTransparency = 1
+	ChatChannelParentFrame.BackgroundColor3 = ChatSettingsModule.BackGroundColor
+	ChatChannelParentFrame.BackgroundTransparency = 0.6
+	ChatChannelParentFrame.BorderSizePixel = 0
+	ChatChannelParentFrame.Parent = Frame
+	local ImageButton = Instance.new("ImageButton")
+	ImageButton.Selectable = false
+	ImageButton.Image = ""
+	ImageButton.BackgroundTransparency = 0.6
+	ImageButton.BorderSizePixel = 0
+	ImageButton.Visible = false
+	ImageButton.BackgroundColor3 = ChatSettingsModule.BackGroundColor
+	ImageButton.Active = true
 	
 	if bubbleChatOnly() then
-		imageButton.Position = UDim2.new(1, -imageButton.AbsoluteSize.X, 0, 0)
+		ImageButton.Position = UDim2.new(1, -ImageButton.AbsoluteSize.X, 0, 0)
 	else
-		imageButton.Position = UDim2.new(1, -imageButton.AbsoluteSize.X, 1, -imageButton.AbsoluteSize.Y)
+		ImageButton.Position = UDim2.new(1, -ImageButton.AbsoluteSize.X, 1, -ImageButton.AbsoluteSize.Y)
 	end
-	imageButton.Parent = frame
-	local imageLabel = Instance.new("ImageLabel")
-	imageLabel.Selectable = false
-	imageLabel.Size = UDim2.new(0.8, 0, 0.8, 0)
-	imageLabel.Position = UDim2.new(0.2, 0, 0.2, 0)
-	imageLabel.BackgroundTransparency = 1
-	imageLabel.Image = "rbxassetid://261880743"
-	imageLabel.Parent = imageButton
+	ImageButton.Parent = Frame
+	local Image = Instance.new("ImageLabel")
+	Image.Selectable = false
+	Image.Size = UDim2.new(0.8, 0, 0.8, 0)
+	Image.Position = UDim2.new(0.2, 0, 0.2, 0)
+	Image.BackgroundTransparency = 1
+	Image.Image = "rbxassetid://261880743"
+	Image.Parent = ImageButton
 	
-	local function _()
-		-- upvalues: frame (ref)
-		local var2 = frame
-		while var2 and not var2:IsA("ScreenGui") do
-			var2 = var2.Parent
+	local function _() --[[ Line: 122 | Named "GetScreenGuiParent" ]]
+		-- upvalues: Frame (copy)
+		local Parent = Frame
+		while Parent and not Parent:IsA("ScreenGui") do
+			Parent = Parent.Parent
 		end
-		return var2
+		return Parent
 	end
 	
-	local var3 = 3
-	local var4 = frame
-	while var4 and not var4:IsA("ScreenGui") do
-		var4 = var4.Parent
+	local v1 = 3
+	local Frame3 = Frame
+	while Frame3 and not Frame3:IsA("ScreenGui") do
+		Frame3 = Frame3.Parent
 	end
-	local var5 = var4
+	local Frame2 = Frame3
 	
-	if var5.AbsoluteSize.X <= 640 then
-		var3 = 1
-	elseif var5.AbsoluteSize.X <= 1024 then
-		var3 = 2
+	if Frame2.AbsoluteSize.X <= 640 then
+		v1 = 1
+	elseif Frame2.AbsoluteSize.X <= 1024 then
+		v1 = 2
 	end
-	local var6 = false
+	Frame3 = false
 	
-	local function doCheckSizeBounds()
-		-- upvalues: var6 (write), frame (ref), playerGui (copy), chatSettingsModule (copy), channelsBarParentFrame (ref), chatBarParentFrame (ref)
-		if var6 then return end
-		var6 = true
+	local function doCheckSizeBounds() --[[ Line: 145 ]]
+		-- upvalues: Frame3 (ref), Frame (copy), PlayerGui (upval), ChatSettingsModule (upval), ChannelsBarParentFrame (copy), ChatBarParentFrame (copy)
+		if Frame3 then return end
+		Frame3 = true
 		
-		if not frame:IsDescendantOf(playerGui) then return end
-		local var7 = frame
-		while var7 and not var7:IsA("ScreenGui") do
-			var7 = var7.Parent
+		if not Frame:IsDescendantOf(PlayerGui) then return end
+		local Parent = Frame
+		while Parent and not Parent:IsA("ScreenGui") do
+			Parent = Parent.Parent
 		end
-		local minimumWindowSize = chatSettingsModule.MinimumWindowSize
-		local maximumWindowSize = chatSettingsModule.MaximumWindowSize
-		local var8 = minimumWindowSize.X.Scale * var7.AbsoluteSize.X + minimumWindowSize.X.Offset
-		local maxValue = math.max(minimumWindowSize.Y.Scale * var7.AbsoluteSize.Y + minimumWindowSize.Y.Offset, channelsBarParentFrame.AbsoluteSize.Y + chatBarParentFrame.AbsoluteSize.Y)
-		local var9 = maximumWindowSize.X.Scale * var7.AbsoluteSize.X + maximumWindowSize.X.Offset
-		local var10 = maximumWindowSize.Y.Scale * var7.AbsoluteSize.Y + maximumWindowSize.Y.Offset
-		local x = frame.AbsoluteSize.X
-		local y = frame.AbsoluteSize.Y
+		local Frame1 = Parent
+		local MinimumWindowSize = ChatSettingsModule.MinimumWindowSize
+		local MaximumWindowSize = ChatSettingsModule.MaximumWindowSize
+		local NewScale = MinimumWindowSize.X.Scale * Frame1.AbsoluteSize.X + MinimumWindowSize.X.Offset
+		local Largest = math.max(MinimumWindowSize.Y.Scale * Frame1.AbsoluteSize.Y + MinimumWindowSize.Y.Offset, ChannelsBarParentFrame.AbsoluteSize.Y + ChatBarParentFrame.AbsoluteSize.Y)
+		local NewScale1 = MaximumWindowSize.X.Scale * Frame1.AbsoluteSize.X + MaximumWindowSize.X.Offset
+		local NewScale2 = MaximumWindowSize.Y.Scale * Frame1.AbsoluteSize.Y + MaximumWindowSize.Y.Offset
+		local X = Frame.AbsoluteSize.X
+		local Y: number = Frame.AbsoluteSize.Y
 		
-		if x < var8 then
-			frame.Size += UDim2.new(0, var8 - x, 0, 0)
-		elseif var9 < x then
-			frame.Size += UDim2.new(0, var9 - x, 0, 0)
+		if X < NewScale then
+			Frame.Size += UDim2.new(0, NewScale - X, 0, 0)
+		elseif NewScale1 < X then
+			Frame.Size += UDim2.new(0, NewScale1 - X, 0, 0)
 		end
-		if y < maxValue then
-			frame.Size += UDim2.new(0, 0, 0, maxValue - y)
-		elseif var10 < y then
-			frame.Size += UDim2.new(0, 0, 0, var10 - y)
+		if Y < Largest then
+			Frame.Size += UDim2.new(0, 0, 0, Largest - Y)
+		elseif NewScale2 < Y then
+			Frame.Size += UDim2.new(0, 0, 0, NewScale2 - Y)
 		end
-		frame.Size = UDim2.new(frame.AbsoluteSize.X / var7.AbsoluteSize.X, 0, frame.AbsoluteSize.Y / var7.AbsoluteSize.Y, 0)
-		var6 = false
+		Frame.Size = UDim2.new(Frame.AbsoluteSize.X / Frame1.AbsoluteSize.X, 0, Frame.AbsoluteSize.Y / Frame1.AbsoluteSize.Y, 0)
+		Frame3 = false
 	end
 	
-	frame.Changed:connect(function(p5)
-		-- upvalues: doCheckSizeBounds (ref)
-		if p5 == "AbsoluteSize" then
+	Frame.Changed:connect(function(Property) --[[ Line: 196 ]]
+		-- upvalues: doCheckSizeBounds (copy)
+		if Property == "AbsoluteSize" then
 			doCheckSizeBounds()
 		end
 	end)
-	imageButton.DragBegin:connect(function(_)
-		-- upvalues: frame (ref)
-		frame.Draggable = false
+	ImageButton.DragBegin:connect(function(_) --[[ Line: 202 ]]
+		-- upvalues: Frame (copy)
+		Frame.Draggable = false
 	end)
 	
-	local function UpdatePositionFromDrag(p5)
-		-- upvalues: chatSettingsModule (copy), frame (ref), imageButton (ref)
-		if chatSettingsModule.WindowDraggable == false and chatSettingsModule.WindowResizable == false then return end
-		local var11 = p5 - frame.AbsolutePosition + imageButton.AbsoluteSize
-		frame.Size = UDim2.new(0, var11.X, 0, var11.Y)
+	local function UpdatePositionFromDrag(AbsolutePosition) --[[ Line: 206 ]]
+		-- upvalues: ChatSettingsModule (upval), Frame (copy), ImageButton (copy)
+		if ChatSettingsModule.WindowDraggable == false and ChatSettingsModule.WindowResizable == false then return end
+		local NewAbsolutePosition = AbsolutePosition - Frame.AbsolutePosition + ImageButton.AbsoluteSize
+		Frame.Size = UDim2.new(0, NewAbsolutePosition.X, 0, NewAbsolutePosition.Y)
 		
 		if bubbleChatOnly() then
-			imageButton.Position = UDim2.new(1, -imageButton.AbsoluteSize.X, 0, 0)
+			ImageButton.Position = UDim2.new(1, -ImageButton.AbsoluteSize.X, 0, 0)
 			
 			return
+		else
+			ImageButton.Position = UDim2.new(1, -ImageButton.AbsoluteSize.X, 1, -ImageButton.AbsoluteSize.Y)
 		end
-		imageButton.Position = UDim2.new(1, -imageButton.AbsoluteSize.X, 1, -imageButton.AbsoluteSize.Y)
 	end
 	
-	imageButton.DragStopped:connect(function(_, _)
-		-- upvalues: frame (ref), chatSettingsModule (copy)
-		frame.Draggable = chatSettingsModule.WindowDraggable
+	ImageButton.DragStopped:connect(function(_, _) --[[ Line: 219 ]]
+		-- upvalues: Frame (copy), ChatSettingsModule (upval)
+		Frame.Draggable = ChatSettingsModule.WindowDraggable
 	end)
-	local var11 = false
-	imageButton.Changed:connect(function(p5)
-		-- upvalues: frame (ref), var11 (write), UpdatePositionFromDrag (ref), imageButton (ref)
-		if p5 == "AbsolutePosition" and not frame.Draggable then
-			if var11 then return end
-			var11 = true
-			UpdatePositionFromDrag(imageButton.AbsolutePosition)
-			var11 = false
+	local Flag = false
+	ImageButton.Changed:connect(function(Property) --[[ Line: 225 ]]
+		-- upvalues: Frame (copy), Flag (ref), UpdatePositionFromDrag (copy), ImageButton (copy)
+		if Property == "AbsolutePosition" and not Frame.Draggable then
+			if Flag then return end
+			Flag = true
+			UpdatePositionFromDrag(ImageButton.AbsolutePosition)
+			Flag = false
 		end
 	end)
 	
-	local _ = function(p5)
-		-- upvalues: var3 (write), chatSettingsModule (copy)
-		return math.max(32, (if var3 == 1 then p5 or chatSettingsModule.ChatChannelsTabTextSizePhone else p5 or chatSettingsModule.ChatChannelsTabTextSize) + 8) + 2
+	local _ = function(p3): number --[[ Line: 236 | Named "CalculateChannelsBarPixelSize" ]]
+		-- upvalues: v1 (ref), ChatSettingsModule (upval)
+		return math.max(32, (if v1 == 1 then p3 or ChatSettingsModule.ChatChannelsTabTextSizePhone else p3 or ChatSettingsModule.ChatChannelsTabTextSize) + 8) + 2
 	end
 	
-	local _ = function(p5)
-		-- upvalues: var3 (write), chatSettingsModule (copy)
-		return (if var3 == 1 then p5 or chatSettingsModule.ChatBarTextSizePhone else p5 or chatSettingsModule.ChatBarTextSize) + 14 + 10
+	local _ = function(p3): number --[[ Line: 249 | Named "CalculateChatBarPixelSize" ]]
+		-- upvalues: v1 (ref), ChatSettingsModule (upval)
+		return (if v1 == 1 then p3 or ChatSettingsModule.ChatBarTextSizePhone else p3 or ChatSettingsModule.ChatBarTextSize) + 14 + 10
 	end
 	
 	if bubbleChatOnly() then
-		chatBarParentFrame.Position = UDim2.new(0, 0, 0, 0)
-		channelsBarParentFrame.Visible = false
-		channelsBarParentFrame.Active = false
-		chatChannelParentFrame.Visible = false
-		chatChannelParentFrame.Active = false
-		local _ = 0
-		local _ = 0
-		local var12 = frame
-		while var12 and not var12:IsA("ScreenGui") do
-			var12 = var12.Parent
+		ChatBarParentFrame.Position = UDim2.new(0, 0, 0, 0)
+		ChannelsBarParentFrame.Visible = false
+		ChannelsBarParentFrame.Active = false
+		ChatChannelParentFrame.Visible = false
+		ChatChannelParentFrame.Active = false
+		local Frame4 = Frame
+		while Frame4 and not Frame4:IsA("ScreenGui") do
+			Frame4 = Frame4.Parent
 		end
-		local scale, offset
-		local _ = var12
-		
-		if var3 == 1 then
-			scale = chatSettingsModule.DefaultWindowSizePhone.X.Scale
-			offset = chatSettingsModule.DefaultWindowSizePhone.X.Offset
-		elseif var3 == 2 then
-			scale = chatSettingsModule.DefaultWindowSizeTablet.X.Scale
-			offset = chatSettingsModule.DefaultWindowSizeTablet.X.Offset
+		local Scale = nil
+		local Offset = nil
+		if v1 == 1 then
+			Scale = ChatSettingsModule.DefaultWindowSizePhone.X.Scale
+			Offset = ChatSettingsModule.DefaultWindowSizePhone.X.Offset
+		elseif v1 == 2 then
+			Scale = ChatSettingsModule.DefaultWindowSizeTablet.X.Scale
+			Offset = ChatSettingsModule.DefaultWindowSizeTablet.X.Offset
 		else
-			scale = chatSettingsModule.DefaultWindowSizeDesktop.X.Scale
-			offset = chatSettingsModule.DefaultWindowSizeDesktop.X.Offset
+			Scale = ChatSettingsModule.DefaultWindowSizeDesktop.X.Scale
+			Offset = ChatSettingsModule.DefaultWindowSizeDesktop.X.Offset
 		end
-		local var13 = nil
-		frame.Size = UDim2.new(scale, offset, 0, (if var3 == 1 then var13 or chatSettingsModule.ChatBarTextSizePhone else var13 or chatSettingsModule.ChatBarTextSize) + 14 + 10)
-		frame.Position = chatSettingsModule.DefaultWindowPosition
+		local v2 = nil
+		Frame.Size = UDim2.new(Scale, Offset, 0, (if v1 == 1 then v2 or ChatSettingsModule.ChatBarTextSizePhone else v2 or ChatSettingsModule.ChatBarTextSize) + 14 + 10)
+		Frame.Position = ChatSettingsModule.DefaultWindowPosition
 	else
-		local var14 = frame
-		while var14 and not var14:IsA("ScreenGui") do
-			var14 = var14.Parent
+		local Frame5 = Frame
+		while Frame5 and not Frame5:IsA("ScreenGui") do
+			Frame5 = Frame5.Parent
 		end
-		local _ = var14
-		
-		if var3 == 1 then
-			frame.Size = chatSettingsModule.DefaultWindowSizePhone
-		elseif var3 == 2 then
-			frame.Size = chatSettingsModule.DefaultWindowSizeTablet
+		if v1 == 1 then
+			Frame.Size = ChatSettingsModule.DefaultWindowSizePhone
+		elseif v1 == 2 then
+			Frame.Size = ChatSettingsModule.DefaultWindowSizeTablet
 		else
-			frame.Size = chatSettingsModule.DefaultWindowSizeDesktop
+			Frame.Size = ChatSettingsModule.DefaultWindowSizeDesktop
 		end
-		frame.Position = chatSettingsModule.DefaultWindowPosition
+		Frame.Position = ChatSettingsModule.DefaultWindowPosition
 	end
-	if var3 == 1 then
-		chatSettingsModule.ChatWindowTextSize = chatSettingsModule.ChatWindowTextSizePhone
-		chatSettingsModule.ChatChannelsTabTextSize = chatSettingsModule.ChatChannelsTabTextSizePhone
-		chatSettingsModule.ChatBarTextSize = chatSettingsModule.ChatBarTextSizePhone
+	if v1 == 1 then
+		ChatSettingsModule.ChatWindowTextSize = ChatSettingsModule.ChatWindowTextSizePhone
+		ChatSettingsModule.ChatChannelsTabTextSize = ChatSettingsModule.ChatChannelsTabTextSizePhone
+		ChatSettingsModule.ChatBarTextSize = ChatSettingsModule.ChatBarTextSizePhone
 	end
-	local _ = function(p5)
-		-- upvalues: frame (ref)
-		frame.Active = p5
-		frame.Draggable = p5
+	local _ = function(Active) --[[ Line: 318 | Named "UpdateDraggable" ]]
+		-- upvalues: Frame (copy)
+		Frame.Active = Active
+		Frame.Draggable = Active
 	end
 	
-	local function UpdateResizable(p5)
-		-- upvalues: imageButton (ref), chatBarParentFrame (ref)
-		imageButton.Visible = p5
-		imageButton.Draggable = p5
-		local offset = chatBarParentFrame.Size.Y.Offset
+	local function UpdateResizable(Draggable) --[[ Line: 323 ]]
+		-- upvalues: ImageButton (copy), ChatBarParentFrame (copy)
+		ImageButton.Visible = Draggable
+		ImageButton.Draggable = Draggable
+		local Offset = ChatBarParentFrame.Size.Y.Offset
 		
-		if p5 then
-			chatBarParentFrame.Size = UDim2.new(1, (-offset) - 2, 0, offset)
+		if Draggable then
+			ChatBarParentFrame.Size = UDim2.new(1, -Offset - 2, 0, Offset)
 			
-			if bubbleChatOnly() then
-				return
-			else
-				chatBarParentFrame.Position = UDim2.new(0, 0, 1, -offset)
+			if not bubbleChatOnly() then
+				ChatBarParentFrame.Position = UDim2.new(0, 0, 1, -Offset)
 				
 				return
 			end
 		else
-			chatBarParentFrame.Size = UDim2.new(1, 0, 0, offset)
+			ChatBarParentFrame.Size = UDim2.new(1, 0, 0, Offset)
 			
 			if not bubbleChatOnly() then
-				chatBarParentFrame.Position = UDim2.new(0, 0, 1, -offset)
+				ChatBarParentFrame.Position = UDim2.new(0, 0, 1, -Offset)
 			end
 		end
 	end
 	
-	local function UpdateChatChannelParentFrameSize()
-		-- upvalues: var3 (write), chatSettingsModule (copy), chatChannelParentFrame (ref)
-		local var15 = nil
-		local var16 = math.max(32, (if var3 == 1 then var15 or chatSettingsModule.ChatChannelsTabTextSizePhone else var15 or chatSettingsModule.ChatChannelsTabTextSize) + 8) + 2
-		local var17 = nil
-		local var18 = (if var3 == 1 then var17 or chatSettingsModule.ChatBarTextSizePhone else var17 or chatSettingsModule.ChatBarTextSize) + 14 + 10
+	local function UpdateChatChannelParentFrameSize() --[[ Line: 342 ]]
+		-- upvalues: v1 (ref), ChatSettingsModule (upval), ChatChannelParentFrame (copy)
+		local v3 = nil
+		local NewLargest = math.max(32, (if v1 == 1 then v3 or ChatSettingsModule.ChatChannelsTabTextSizePhone else v3 or ChatSettingsModule.ChatChannelsTabTextSize) + 8) + 2
+		local v4 = nil
+		local v5 = (if v1 == 1 then v4 or ChatSettingsModule.ChatBarTextSizePhone else v4 or ChatSettingsModule.ChatBarTextSize) + 14 + 10
 		
-		if chatSettingsModule.ShowChannelsBar then
-			chatChannelParentFrame.Size = UDim2.new(1, 0, 1, -(var16 + var18 + 2 + 2))
-			chatChannelParentFrame.Position = UDim2.new(0, 0, 0, var16 + 2)
+		if ChatSettingsModule.ShowChannelsBar then
+			ChatChannelParentFrame.Size = UDim2.new(1, 0, 1, -(NewLargest + v5 + 2 + 2))
+			ChatChannelParentFrame.Position = UDim2.new(0, 0, 0, NewLargest + 2)
 			
 			return
+		else
+			ChatChannelParentFrame.Size = UDim2.new(1, 0, 1, -(v5 + 2 + 2))
+			ChatChannelParentFrame.Position = UDim2.new(0, 0, 0, 2)
 		end
-		chatChannelParentFrame.Size = UDim2.new(1, 0, 1, -(var18 + 2 + 2))
-		chatChannelParentFrame.Position = UDim2.new(0, 0, 0, 2)
 	end
 	
-	local _ = function(p5)
-		-- upvalues: var3 (write), chatSettingsModule (copy), channelsBarParentFrame (ref), UpdateChatChannelParentFrameSize (ref)
-		channelsBarParentFrame.Size = UDim2.new(1, 0, 0, math.max(32, (if var3 == 1 then p5 or chatSettingsModule.ChatChannelsTabTextSizePhone else p5 or chatSettingsModule.ChatChannelsTabTextSize) + 8) + 2)
+	local _ = function(p3) --[[ Line: 357 | Named "UpdateChatChannelsTabTextSize" ]]
+		-- upvalues: v1 (ref), ChatSettingsModule (upval), ChannelsBarParentFrame (copy), UpdateChatChannelParentFrameSize (copy)
+		ChannelsBarParentFrame.Size = UDim2.new(1, 0, 0, math.max(32, (if v1 == 1 then p3 or ChatSettingsModule.ChatChannelsTabTextSizePhone else p3 or ChatSettingsModule.ChatChannelsTabTextSize) + 8) + 2)
 		UpdateChatChannelParentFrameSize()
 	end
 	
-	local function UpdateChatBarTextSize(p5)
-		-- upvalues: var3 (write), chatSettingsModule (copy), chatBarParentFrame (ref), imageButton (ref), UpdateChatChannelParentFrameSize (ref), UpdateResizable (ref)
-		local var15 = (if var3 == 1 then p5 or chatSettingsModule.ChatBarTextSizePhone else p5 or chatSettingsModule.ChatBarTextSize) + 14 + 10
-		chatBarParentFrame.Size = UDim2.new(1, 0, 0, var15)
+	local function UpdateChatBarTextSize(ChatBarTextSize) --[[ Line: 364 ]]
+		-- upvalues: v1 (ref), ChatSettingsModule (upval), ChatBarParentFrame (copy), ImageButton (copy), UpdateChatChannelParentFrameSize (copy), UpdateResizable (copy)
+		local YOffset = (if v1 == 1 then ChatBarTextSize or ChatSettingsModule.ChatBarTextSizePhone else ChatBarTextSize or ChatSettingsModule.ChatBarTextSize) + 14 + 10
+		ChatBarParentFrame.Size = UDim2.new(1, 0, 0, YOffset)
 		
 		if not bubbleChatOnly() then
-			chatBarParentFrame.Position = UDim2.new(0, 0, 1, -var15)
+			ChatBarParentFrame.Position = UDim2.new(0, 0, 1, -YOffset)
 		end
-		imageButton.Size = UDim2.new(0, var15, 0, var15)
-		imageButton.Position = UDim2.new(1, -var15, 1, -var15)
+		ImageButton.Size = UDim2.new(0, YOffset, 0, YOffset)
+		ImageButton.Position = UDim2.new(1, -YOffset, 1, -YOffset)
 		UpdateChatChannelParentFrameSize()
-		UpdateResizable(chatSettingsModule.WindowResizable)
+		UpdateResizable(ChatSettingsModule.WindowResizable)
 	end
 	
-	local _ = function(p5)
-		-- upvalues: channelsBarParentFrame (ref), UpdateChatChannelParentFrameSize (ref)
-		channelsBarParentFrame.Visible = p5
+	local _ = function(Visible) --[[ Line: 379 | Named "UpdateShowChannelsBar" ]]
+		-- upvalues: ChannelsBarParentFrame (copy), UpdateChatChannelParentFrameSize (copy)
+		ChannelsBarParentFrame.Visible = Visible
 		UpdateChatChannelParentFrameSize()
 	end
 	
-	local chatChannelsTabTextSize = chatSettingsModule.ChatChannelsTabTextSize
-	channelsBarParentFrame.Size = UDim2.new(1, 0, 0, math.max(32, (if var3 == 1 then chatChannelsTabTextSize or chatSettingsModule.ChatChannelsTabTextSizePhone else chatChannelsTabTextSize or chatSettingsModule.ChatChannelsTabTextSize) + 8) + 2)
+	local ChatChannelsTabTextSize = ChatSettingsModule.ChatChannelsTabTextSize
+	ChannelsBarParentFrame.Size = UDim2.new(1, 0, 0, math.max(32, (if v1 == 1 then ChatChannelsTabTextSize or ChatSettingsModule.ChatChannelsTabTextSizePhone else ChatChannelsTabTextSize or ChatSettingsModule.ChatChannelsTabTextSize) + 8) + 2)
 	UpdateChatChannelParentFrameSize()
-	UpdateChatBarTextSize(chatSettingsModule.ChatBarTextSize)
-	local windowDraggable = chatSettingsModule.WindowDraggable
-	frame.Active = windowDraggable
-	frame.Draggable = windowDraggable
-	UpdateResizable(chatSettingsModule.WindowResizable)
-	channelsBarParentFrame.Visible = chatSettingsModule.ShowChannelsBar
+	UpdateChatBarTextSize(ChatSettingsModule.ChatBarTextSize)
+	local WindowDraggable = ChatSettingsModule.WindowDraggable
+	Frame.Active = WindowDraggable
+	Frame.Draggable = WindowDraggable
+	UpdateResizable(ChatSettingsModule.WindowResizable)
+	ChannelsBarParentFrame.Visible = ChatSettingsModule.ShowChannelsBar
 	UpdateChatChannelParentFrameSize()
-	chatSettingsModule.SettingsChanged:connect(function(p5, p6)
-		-- upvalues: frame (ref), UpdateResizable (ref), var3 (write), chatSettingsModule (copy), channelsBarParentFrame (ref), UpdateChatChannelParentFrameSize (ref), UpdateChatBarTextSize (ref)
-		if p5 == "WindowDraggable" then
-			frame.Active = p6
-			frame.Draggable = p6
+	ChatSettingsModule.SettingsChanged:connect(function(p3, Draggable) --[[ Line: 390 ]]
+		-- upvalues: Frame (copy), UpdateResizable (copy), v1 (ref), ChatSettingsModule (upval), ChannelsBarParentFrame (copy), UpdateChatChannelParentFrameSize (copy), UpdateChatBarTextSize (copy)
+		if p3 == "WindowDraggable" then
+			Frame.Active = Draggable
+			Frame.Draggable = Draggable
 			
 			return
-		elseif p5 == "WindowResizable" then
-			UpdateResizable(p6)
+		end
+		if p3 == "WindowResizable" then
+			UpdateResizable(Draggable)
 			
 			return
-		elseif p5 == "ChatChannelsTabTextSize" then
-			channelsBarParentFrame.Size = UDim2.new(1, 0, 0, math.max(32, (if var3 == 1 then p6 or chatSettingsModule.ChatChannelsTabTextSizePhone else p6 or chatSettingsModule.ChatChannelsTabTextSize) + 8) + 2)
+		end
+		if p3 == "ChatChannelsTabTextSize" then
+			ChannelsBarParentFrame.Size = UDim2.new(1, 0, 0, math.max(32, (if v1 == 1 then Draggable or ChatSettingsModule.ChatChannelsTabTextSizePhone else Draggable or ChatSettingsModule.ChatChannelsTabTextSize) + 8) + 2)
 			UpdateChatChannelParentFrameSize()
 			
 			return
-		elseif p5 == "ChatBarTextSize" then
-			UpdateChatBarTextSize(p6)
+		end
+		if p3 == "ChatBarTextSize" then
+			UpdateChatBarTextSize(Draggable)
 			
 			return
-		elseif p5 == "ShowChannelsBar" then
-			channelsBarParentFrame.Visible = p6
+		end
+		if p3 == "ShowChannelsBar" then
+			ChannelsBarParentFrame.Visible = Draggable
 			UpdateChatChannelParentFrameSize()
 		end
 	end)
-	p3.GuiObject = frame
-	p3.GuiObjects.BaseFrame = frame
-	p3.GuiObjects.ChatBarParentFrame = chatBarParentFrame
-	p3.GuiObjects.ChannelsBarParentFrame = channelsBarParentFrame
-	p3.GuiObjects.ChatChannelParentFrame = chatChannelParentFrame
-	p3.GuiObjects.ChatResizerFrame = imageButton
-	p3.GuiObjects.ResizeIcon = imageLabel
-	p3:AnimGuiObjects()
+	p2.GuiObject = Frame
+	p2.GuiObjects.BaseFrame = Frame
+	p2.GuiObjects.ChatBarParentFrame = ChatBarParentFrame
+	p2.GuiObjects.ChannelsBarParentFrame = ChannelsBarParentFrame
+	p2.GuiObjects.ChatChannelParentFrame = ChatChannelParentFrame
+	p2.GuiObjects.ChatResizerFrame = ImageButton
+	p2.GuiObjects.ResizeIcon = Image
+	p2:AnimGuiObjects()
 end
 
-function t_1.GetChatBar(p5)
-	return p5.ChatBar
+function Module.GetChatBar(p3) --[[ Line: 420 ]]
+	return p3.ChatBar
 end
 
-function t_1.RegisterChatBar(p5, p6)
-	p5.ChatBar = p6
-	p5.ChatBar:CreateGuiObjects(p5.GuiObjects.ChatBarParentFrame)
+function Module.RegisterChatBar(p3, ChatBar) --[[ Line: 424 ]]
+	p3.ChatBar = ChatBar
+	p3.ChatBar:CreateGuiObjects(p3.GuiObjects.ChatBarParentFrame)
 end
 
-function t_1.RegisterChannelsBar(p5, p6)
-	p5.ChannelsBar = p6
-	p5.ChannelsBar:CreateGuiObjects(p5.GuiObjects.ChannelsBarParentFrame)
+function Module.RegisterChannelsBar(p3, ChannelsBar) --[[ Line: 429 ]]
+	p3.ChannelsBar = ChannelsBar
+	p3.ChannelsBar:CreateGuiObjects(p3.GuiObjects.ChannelsBarParentFrame)
 end
 
-function t_1.RegisterMessageLogDisplay(p5, p6)
-	p5.MessageLogDisplay = p6
-	p5.MessageLogDisplay.GuiObject.Parent = p5.GuiObjects.ChatChannelParentFrame
+function Module.RegisterMessageLogDisplay(p3, MessageLogDisplay) --[[ Line: 434 ]]
+	p3.MessageLogDisplay = MessageLogDisplay
+	p3.MessageLogDisplay.GuiObject.Parent = p3.GuiObjects.ChatChannelParentFrame
 end
 
-function t_1.AddChannel(p5, p6)
-	-- upvalues: chatChannelModule (ref)
-	if p5:GetChannel(p6) then
-		error("Channel '" .. p24 .. "' already exists!")
+function Module.AddChannel(p3, Text: string) --[[ Line: 439 ]]
+	-- upvalues: ChatChannelModule (copy)
+	if p3:GetChannel(Text) then
+		error("Channel '" .. Text .. "' already exists!")
 		
 		return
 	end
-	local var15 = chatChannelModule.new(p6, p5.MessageLogDisplay)
-	p5.Channels[p6:lower()] = var15
-	var15:SetActive(false)
-	local var16 = p5.ChannelsBar:AddChannelTab(p6)
-	var16.NameTag.MouseButton1Click:connect(function()
-		-- upvalues: p5 (ref), p6 (ref)
-		p5:SwitchCurrentChannel(p6)
+	local NewChatChannel = ChatChannelModule.new(Text, p3.MessageLogDisplay)
+	p3.Channels[Text:lower()] = NewChatChannel
+	NewChatChannel:SetActive(false)
+	local AddChannelTabResult = p3.ChannelsBar:AddChannelTab(Text)
+	AddChannelTabResult.NameTag.MouseButton1Click:connect(function() --[[ Line: 451 ]]
+		-- upvalues: p3 (copy), Text (copy)
+		p3:SwitchCurrentChannel(Text)
 	end)
-	var15:RegisterChannelTab(var16)
+	NewChatChannel:RegisterChannelTab(AddChannelTabResult)
 	
-	return var15
+	return NewChatChannel
 end
 
-function t_1.GetFirstChannel(p5)
-	for i, v in pairs(p5.Channels) do
-		return v
+function Module.GetFirstChannel(p3) --[[ Line: 460 ]]
+	for _, channel in pairs(p3.Channels) do
+		return channel
 	end
 	return nil
 end
 
-function t_1.RemoveChannel(p6, p7)
-	-- upvalues: chatSettingsModule (ref)
-	if not p6:GetChannel(p7) then
-		error("Channel '" .. p27 .. "' does not exist!")
+function Module.RemoveChannel(p4, Text: string) --[[ Line: 469 ]]
+	-- upvalues: ChatSettingsModule (copy)
+	if not p4:GetChannel(Text) then
+		error("Channel '" .. Text .. "' does not exist!")
 	end
-	local var15 = p7:lower()
-	local var16 = false
+	local Lowered = Text:lower()
+	local Flag = false
 	
-	if p6.Channels[var15] == p6:GetCurrentChannel() then
-		var16 = true
-		p6:SwitchCurrentChannel(nil)
+	if p4.Channels[Lowered] == p4:GetCurrentChannel() then
+		Flag = true
+		p4:SwitchCurrentChannel(nil)
 	end
-	p6.Channels[var15]:Destroy()
-	p6.Channels[var15] = nil
-	p6.ChannelsBar:RemoveChannelTab(p7)
+	p4.Channels[Lowered]:Destroy()
+	p4.Channels[Lowered] = nil
+	p4.ChannelsBar:RemoveChannelTab(Text)
 	
-	if var16 then
-		local var17
-		local _ = nil
+	if Flag then
+		local IsLoweredMatch = Lowered == ChatSettingsModule.GeneralChannelName:lower()
+		local Name = nil
 		
-		if p6:GetChannel(chatSettingsModule.GeneralChannelName) ~= nil and not (var15 == chatSettingsModule.GeneralChannelName:lower()) then
-			var17 = chatSettingsModule.GeneralChannelName
+		if p4:GetChannel(ChatSettingsModule.GeneralChannelName) ~= nil and not IsLoweredMatch then
+			Name = ChatSettingsModule.GeneralChannelName
 		else
-			local firstChannel = p6:GetFirstChannel()
-			var17 = if firstChannel then firstChannel.Name else nil
+			local FirstChannel = p4:GetFirstChannel()
+			Name = FirstChannel and FirstChannel.Name or nil
 		end
-		p6:SwitchCurrentChannel(var17)
+		p4:SwitchCurrentChannel(Name)
 	end
-	if not chatSettingsModule.ShowChannelsBar and p6.ChatBar.TargetChannel == p7 then
-		p6.ChatBar:SetChannelTarget(chatSettingsModule.GeneralChannelName)
+	if not ChatSettingsModule.ShowChannelsBar and p4.ChatBar.TargetChannel == Text then
+		p4.ChatBar:SetChannelTarget(ChatSettingsModule.GeneralChannelName)
 	end
 end
 
-function t_1.GetChannel(p6, p7)
-	return if p7 then p6.Channels[p7:lower()] else nil
+function Module.GetChannel(p4, GeneralChannelName: string) --[[ Line: 511 ]]
+	return GeneralChannelName and p4.Channels[GeneralChannelName:lower()] or nil
 end
 
-function t_1.GetTargetMessageChannel(p6)
-	-- upvalues: chatSettingsModule (ref)
-	if chatSettingsModule.ShowChannelsBar then
-		local currentChannel = p6:GetCurrentChannel()
+function Module.GetTargetMessageChannel(p4) --[[ Line: 515 ]]
+	-- upvalues: ChatSettingsModule (copy)
+	if ChatSettingsModule.ShowChannelsBar then
+		local CurrentChannel = p4:GetCurrentChannel()
 		
-		return currentChannel and currentChannel.Name
+		return CurrentChannel and CurrentChannel.Name
+	else
+		return p4.ChatBar.TargetChannel
 	end
-	return p6.ChatBar.TargetChannel
 end
 
-function t_1.GetCurrentChannel(p6)
-	return p6.CurrentChannel
+function Module.GetCurrentChannel(p4) --[[ Line: 524 ]]
+	return p4.CurrentChannel
 end
 
-function t_1.SwitchCurrentChannel(p6, p7)
-	-- upvalues: chatSettingsModule (ref)
-	if not chatSettingsModule.ShowChannelsBar then
-		local var15 = p6:GetChannel(p7)
+function Module.SwitchCurrentChannel(p4, Name) --[[ Line: 528 ]]
+	-- upvalues: ChatSettingsModule (copy)
+	if not ChatSettingsModule.ShowChannelsBar then
+		local Channel = p4:GetChannel(Name)
 		
-		if var15 then
-			p6.ChatBar:SetChannelTarget(var15.Name)
+		if Channel then
+			p4.ChatBar:SetChannelTarget(Channel.Name)
 		end
-		p7 = chatSettingsModule.GeneralChannelName
+		Name = ChatSettingsModule.GeneralChannelName
 	end
-	local currentChannel = p6:GetCurrentChannel()
-	local var16 = p6:GetChannel(p7)
+	local CurrentChannel = p4:GetCurrentChannel()
+	local Channel1 = p4:GetChannel(Name)
 	
-	if var16 == nil then
-		error(string.format("Channel '%s' does not exist.", p7))
+	if Channel1 == nil then
+		error(string.format("Channel '%s' does not exist.", Name))
 	end
-	if var16 ~= currentChannel then
-		if currentChannel then
-			currentChannel:SetActive(false)
-			p6.ChannelsBar:GetChannelTab(currentChannel.Name):SetActive(false)
+	if Channel1 ~= CurrentChannel then
+		if CurrentChannel then
+			CurrentChannel:SetActive(false)
+			p4.ChannelsBar:GetChannelTab(CurrentChannel.Name):SetActive(false)
 		end
-		if var16 then
-			var16:SetActive(true)
-			p6.ChannelsBar:GetChannelTab(var16.Name):SetActive(true)
+		if Channel1 then
+			Channel1:SetActive(true)
+			p4.ChannelsBar:GetChannelTab(Channel1.Name):SetActive(true)
 		end
-		p6.CurrentChannel = var16
+		p4.CurrentChannel = Channel1
 	end
 end
 
-function t_1.UpdateFrameVisibility(p6)
-	p6.GuiObject.Visible = p6.Visible and p6.CoreGuiEnabled
+function Module.UpdateFrameVisibility(p4) --[[ Line: 562 ]]
+	p4.GuiObject.Visible = p4.Visible and p4.CoreGuiEnabled
 end
 
-function t_1.GetVisible(p6)
-	return p6.Visible
+function Module.GetVisible(p4) --[[ Line: 566 ]]
+	return p4.Visible
 end
 
-function t_1.SetVisible(value, p6)
-	value.Visible = p6
-	value:UpdateFrameVisibility()
+function Module.SetVisible(p4, Visible) --[[ Line: 570 ]]
+	p4.Visible = Visible
+	p4:UpdateFrameVisibility()
 end
 
-function t_1.GetCoreGuiEnabled(p6)
-	return p6.CoreGuiEnabled
+function Module.GetCoreGuiEnabled(p4) --[[ Line: 575 ]]
+	return p4.CoreGuiEnabled
 end
 
-function t_1.SetCoreGuiEnabled(value, p6)
-	value.CoreGuiEnabled = p6
-	value:UpdateFrameVisibility()
+function Module.SetCoreGuiEnabled(p4, CoreGuiEnabled) --[[ Line: 579 ]]
+	p4.CoreGuiEnabled = CoreGuiEnabled
+	p4:UpdateFrameVisibility()
 end
 
-function t_1.EnableResizable(p6)
-	p6.GuiObjects.ChatResizerFrame.Active = true
+function Module.EnableResizable(p4) --[[ Line: 584 ]]
+	p4.GuiObjects.ChatResizerFrame.Active = true
 end
 
-function t_1.DisableResizable(p6)
-	p6.GuiObjects.ChatResizerFrame.Active = false
+function Module.DisableResizable(p4) --[[ Line: 588 ]]
+	p4.GuiObjects.ChatResizerFrame.Active = false
 end
 
-function t_1.FadeOutBackground(value, p6)
-	-- upvalues: curveUtilModule (ref)
-	value.ChannelsBar:FadeOutBackground(p6)
-	value.MessageLogDisplay:FadeOutBackground(p6)
-	value.ChatBar:FadeOutBackground(p6)
-	value.AnimParams.Background_TargetTransparency = 1
-	value.AnimParams.Background_NormalizedExptValue = curveUtilModule:NormalizedDefaultExptValueInSeconds(p6)
+function Module.FadeOutBackground(p4, p5) --[[ Line: 592 ]]
+	-- upvalues: CurveUtilModule (copy)
+	p4.ChannelsBar:FadeOutBackground(p5)
+	p4.MessageLogDisplay:FadeOutBackground(p5)
+	p4.ChatBar:FadeOutBackground(p5)
+	p4.AnimParams.Background_TargetTransparency = 1
+	p4.AnimParams.Background_NormalizedExptValue = CurveUtilModule:NormalizedDefaultExptValueInSeconds(p5)
 end
 
-function t_1.FadeInBackground(value, p6)
-	-- upvalues: curveUtilModule (ref)
-	value.ChannelsBar:FadeInBackground(p6)
-	value.MessageLogDisplay:FadeInBackground(p6)
-	value.ChatBar:FadeInBackground(p6)
-	value.AnimParams.Background_TargetTransparency = 0.6
-	value.AnimParams.Background_NormalizedExptValue = curveUtilModule:NormalizedDefaultExptValueInSeconds(p6)
+function Module.FadeInBackground(p4, p5) --[[ Line: 601 ]]
+	-- upvalues: CurveUtilModule (copy)
+	p4.ChannelsBar:FadeInBackground(p5)
+	p4.MessageLogDisplay:FadeInBackground(p5)
+	p4.ChatBar:FadeInBackground(p5)
+	p4.AnimParams.Background_TargetTransparency = 0.6
+	p4.AnimParams.Background_NormalizedExptValue = CurveUtilModule:NormalizedDefaultExptValueInSeconds(p5)
 end
 
-function t_1.FadeOutText(p6, p7)
-	p6.MessageLogDisplay:FadeOutText(p7)
-	p6.ChannelsBar:FadeOutText(p7)
+function Module.FadeOutText(p4, p5) --[[ Line: 610 ]]
+	p4.MessageLogDisplay:FadeOutText(p5)
+	p4.ChannelsBar:FadeOutText(p5)
 end
 
-function t_1.FadeInText(p6, p7)
-	p6.MessageLogDisplay:FadeInText(p7)
-	p6.ChannelsBar:FadeInText(p7)
+function Module.FadeInText(p4, p5) --[[ Line: 615 ]]
+	p4.MessageLogDisplay:FadeInText(p5)
+	p4.ChannelsBar:FadeInText(p5)
 end
 
-function t_1.AnimGuiObjects(p6)
-	p6.GuiObjects.ChatChannelParentFrame.BackgroundTransparency = p6.AnimParams.Background_CurrentTransparency
-	p6.GuiObjects.ChatResizerFrame.BackgroundTransparency = p6.AnimParams.Background_CurrentTransparency
-	p6.GuiObjects.ResizeIcon.ImageTransparency = p6.AnimParams.Background_CurrentTransparency
+function Module.AnimGuiObjects(p4) --[[ Line: 620 ]]
+	p4.GuiObjects.ChatChannelParentFrame.BackgroundTransparency = p4.AnimParams.Background_CurrentTransparency
+	p4.GuiObjects.ChatResizerFrame.BackgroundTransparency = p4.AnimParams.Background_CurrentTransparency
+	p4.GuiObjects.ResizeIcon.ImageTransparency = p4.AnimParams.Background_CurrentTransparency
 end
 
-function t_1.InitializeAnimParams(p6)
-	-- upvalues: curveUtilModule (ref)
-	p6.AnimParams.Background_TargetTransparency = 0.6
-	p6.AnimParams.Background_CurrentTransparency = 0.6
-	p6.AnimParams.Background_NormalizedExptValue = curveUtilModule:NormalizedDefaultExptValueInSeconds(0)
+function Module.InitializeAnimParams(p4) --[[ Line: 626 ]]
+	-- upvalues: CurveUtilModule (copy)
+	p4.AnimParams.Background_TargetTransparency = 0.6
+	p4.AnimParams.Background_CurrentTransparency = 0.6
+	p4.AnimParams.Background_NormalizedExptValue = CurveUtilModule:NormalizedDefaultExptValueInSeconds(0)
 end
 
-function t_1.Update(p6, p7)
-	-- upvalues: curveUtilModule (ref)
-	p6.ChatBar:Update(p7)
-	p6.ChannelsBar:Update(p7)
-	p6.MessageLogDisplay:Update(p7)
-	p6.AnimParams.Background_CurrentTransparency = curveUtilModule:Expt(p6.AnimParams.Background_CurrentTransparency, p6.AnimParams.Background_TargetTransparency, p6.AnimParams.Background_NormalizedExptValue, p7)
-	p6:AnimGuiObjects()
+function Module.Update(p4, p5) --[[ Line: 632 ]]
+	-- upvalues: CurveUtilModule (copy)
+	p4.ChatBar:Update(p5)
+	p4.ChannelsBar:Update(p5)
+	p4.MessageLogDisplay:Update(p5)
+	p4.AnimParams.Background_CurrentTransparency = CurveUtilModule:Expt(p4.AnimParams.Background_CurrentTransparency, p4.AnimParams.Background_TargetTransparency, p4.AnimParams.Background_NormalizedExptValue, p5)
+	p4:AnimGuiObjects()
 end
 
-function t.new()
-	-- upvalues: t_1 (ref)
-	local tbl = setmetatable({}, t_1)
-	tbl.GuiObject = nil
-	tbl.GuiObjects = {}
-	tbl.ChatBar = nil
-	tbl.ChannelsBar = nil
-	tbl.MessageLogDisplay = nil
-	tbl.Channels = {}
-	tbl.CurrentChannel = nil
-	tbl.Visible = true
-	tbl.CoreGuiEnabled = true
-	tbl.AnimParams = {}
-	tbl:InitializeAnimParams()
+function ChatWindowModule.new() --[[ Line: 650 ]]
+	-- upvalues: Module (copy)
+	local self = setmetatable({}, Module)
+	self.GuiObject = nil
+	self.GuiObjects = {}
+	self.ChatBar = nil
+	self.ChannelsBar = nil
+	self.MessageLogDisplay = nil
+	self.Channels = {}
+	self.CurrentChannel = nil
+	self.Visible = true
+	self.CoreGuiEnabled = true
+	self.AnimParams = {}
+	self:InitializeAnimParams()
 	
-	return tbl
+	return self
 end
 
-return t
+return ChatWindowModule

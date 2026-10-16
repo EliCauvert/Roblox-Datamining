@@ -1,32 +1,32 @@
-﻿local currencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
-local parent = currencyTransfers.Parent
-local urlBuilderModule = require(parent.UrlBuilder)
-local tModule = require(parent.t)
-local promiseModule = require(parent.Promise)
-local initiateTransferModelModule = require(currencyTransfers.Models.InitiateTransferModel)
-local httpRequestModule = require(currencyTransfers.NetworkRequests.HttpRequest)
-local transferOriginationModule = require(currencyTransfers.Enums.TransferOrigination)
-local var1 = urlBuilderModule.UrlBuilder.new({
+﻿local CurrencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
+local Parent = CurrencyTransfers.Parent
+local UrlBuilderModule = require(Parent.UrlBuilder)
+local TModule = require(Parent.t)
+local PromiseModule = require(Parent.Promise)
+local InitiateTransferModelModule = require(CurrencyTransfers.Models.InitiateTransferModel)
+local HttpRequestModule = require(CurrencyTransfers.NetworkRequests.HttpRequest)
+local TransferOriginationModule = require(CurrencyTransfers.Enums.TransferOrigination)
+local v1 = UrlBuilderModule.UrlBuilder.new({
 	path = "transfer/v1/robux-transfer/initiate-transfer",
-	base = urlBuilderModule.UrlBase.APIS
+	base = UrlBuilderModule.UrlBase.APIS
 })()
-local var2 = tModule.strictInterface({
-	recipientId = tModule.number,
-	transferOrigination = tModule.optional(tModule.string)
+local StrictInterfaceResult = TModule.strictInterface({
+	recipientId = TModule.number,
+	transferOrigination = TModule.optional(TModule.string)
 })
 
-return function(p1, p2, p3)
-	-- upvalues: var2 (ref), httpRequestModule (ref), transferOriginationModule (ref), var1 (ref), initiateTransferModelModule (ref), promiseModule (ref)
-	assert(var2(p1))
+return function(p1, p2, p3) --[[ Line: 32 | Named "initiateTransferRequest" ]]
+	-- upvalues: StrictInterfaceResult (copy), HttpRequestModule (copy), TransferOriginationModule (copy), v1 (copy), InitiateTransferModelModule (copy), PromiseModule (copy)
+	assert(StrictInterfaceResult(p1))
 	
-	return (if p3 ~= nil then httpRequestModule.new(p2) else httpRequestModule.fromNetworkImpl(p3)):post(var1, {
+	return (if p3 == nil then HttpRequestModule.new(p2) else HttpRequestModule.fromNetworkImpl(p3)):post(v1, {
 		recipientId = p1.recipientId,
-		transferOrigin = transferOriginationModule.toEnumInteger[p1.transferOrigination or transferOriginationModule.Unknown] or transferOriginationModule.toEnumInteger[transferOriginationModule.Unknown]
-	}):andThen(function(p4)
-		-- upvalues: initiateTransferModelModule (copy)
-		return initiateTransferModelModule.format(p4)
-	end):catch(function(p4)
-		-- upvalues: promiseModule (copy)
-		return promiseModule.reject(p4)
+		transferOrigin = TransferOriginationModule.toEnumInteger[p1.transferOrigination or TransferOriginationModule.Unknown] or TransferOriginationModule.toEnumInteger[TransferOriginationModule.Unknown]
+	}):andThen(function(Result) --[[ Line: 49 ]]
+		-- upvalues: InitiateTransferModelModule (upval)
+		return InitiateTransferModelModule.format(Result)
+	end):catch(function(Err) --[[ Line: 52 ]]
+		-- upvalues: PromiseModule (upval)
+		return PromiseModule.reject(Err)
 	end)
 end

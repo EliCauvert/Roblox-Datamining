@@ -1,84 +1,85 @@
-﻿local reactModule = require(script:FindFirstAncestor("MomentsCreation").Parent.React)
-local uDim = UDim.new(0, 0)
+﻿local ReactModule = require(script:FindFirstAncestor("MomentsCreation").Parent.React)
+local _UDim = UDim.new(0, 0)
 
-local function _(p1)
-	local UIPadding = p1:FindFirstChildOfClass("UIPadding")
+local function _(Parent) --[[ Line: 37 | Named "ensureUIPadding" ]]
+	local UIPadding = Parent:FindFirstChildOfClass("UIPadding")
 	
 	if UIPadding then
 		return UIPadding
+	else
+		local Padding = Instance.new("UIPadding")
+		Padding.Parent = Parent
+		
+		return Padding
 	end
-	local UIPadding_1 = Instance.new("UIPadding")
-	UIPadding_1.Parent = p1
-	
-	return UIPadding_1
 end
 
-local _ = function(p1)
-	-- upvalues: uDim (ref)
-	return p1.PaddingTop == uDim and (p1.PaddingBottom == uDim and (p1.PaddingLeft == uDim and p1.PaddingRight == uDim))
+local _ = function(UIPadding): boolean --[[ Line: 47 | Named "isZeroed" ]]
+	-- upvalues: _UDim (copy)
+	return UIPadding.PaddingTop == _UDim and (UIPadding.PaddingBottom == _UDim and UIPadding.PaddingLeft == _UDim) and UIPadding.PaddingRight == _UDim
 end
 
-local function relocateBoxPadding(p1)
-	-- upvalues: uDim (ref)
-	local UIPadding = p1:FindFirstChildOfClass("UIPadding")
+local function relocateBoxPadding(Object) --[[ Line: 54 ]]
+	-- upvalues: _UDim (copy)
+	local UIPadding = Object:FindFirstChildOfClass("UIPadding")
 	
 	if UIPadding == nil then return end
-	if UIPadding.PaddingTop == uDim and (UIPadding.PaddingBottom == uDim and (UIPadding.PaddingLeft == uDim and UIPadding.PaddingRight == uDim)) then return end
-	local parent = p1.Parent
+	if UIPadding.PaddingTop == _UDim and (UIPadding.PaddingBottom == _UDim and (UIPadding.PaddingLeft == _UDim and UIPadding.PaddingRight == _UDim)) then return end
+	local Parent = Object.Parent
 	
-	if parent == nil or not parent:IsA("GuiObject") then return end
-	local var1
-	local UIPadding_1 = parent:FindFirstChildOfClass("UIPadding")
+	if Parent == nil or not Parent:IsA("GuiObject") then return end
+	local UIPadding1 = Parent:FindFirstChildOfClass("UIPadding")
+	local UIPadding2 = nil
 	
-	if UIPadding_1 then
-		var1 = UIPadding_1
+	if UIPadding1 then
+		UIPadding2 = UIPadding1
 	else
-		local UIPadding_2 = Instance.new("UIPadding")
-		UIPadding_2.Parent = parent
-		var1 = UIPadding_2
+		local Padding = Instance.new("UIPadding")
+		Padding.Parent = Parent
+		UIPadding2 = Padding
 	end
-	var1.PaddingTop = UIPadding.PaddingTop
-	var1.PaddingBottom = UIPadding.PaddingBottom
-	var1.PaddingLeft = UIPadding.PaddingLeft
-	var1.PaddingRight = UIPadding.PaddingRight
-	UIPadding.PaddingTop = uDim
-	UIPadding.PaddingBottom = uDim
-	UIPadding.PaddingLeft = uDim
-	UIPadding.PaddingRight = uDim
+	UIPadding2.PaddingTop = UIPadding.PaddingTop
+	UIPadding2.PaddingBottom = UIPadding.PaddingBottom
+	UIPadding2.PaddingLeft = UIPadding.PaddingLeft
+	UIPadding2.PaddingRight = UIPadding.PaddingRight
+	UIPadding.PaddingTop = _UDim
+	UIPadding.PaddingBottom = _UDim
+	UIPadding.PaddingLeft = _UDim
+	UIPadding.PaddingRight = _UDim
 end
 
-local function tryRelocate(p1)
-	-- upvalues: relocateBoxPadding (ref)
-	local var1 = nil
+local function tryRelocate(Descendant) --[[ Line: 86 ]]
+	-- upvalues: relocateBoxPadding (copy)
+	local v1 = nil
 	
-	if p1:IsA("TextBox") then
-		var1 = p1
-	elseif p1:IsA("UIPadding") then
-		local parent = p1.Parent
+	if Descendant:IsA("TextBox") then
+		v1 = Descendant
+	elseif Descendant:IsA("UIPadding") then
+		local Parent = Descendant.Parent
 		
-		if parent and parent:IsA("TextBox") then
-			var1 = parent
+		if Parent and Parent:IsA("TextBox") then
+			v1 = Parent
 		end
 	end
-	if var1 ~= nil and (var1.Name == "TextBox" or var1.Name == "MobileTextBox") then
-		relocateBoxPadding(var1)
+	if v1 ~= nil and (v1.Name == "TextBox" or v1.Name == "MobileTextBox") then
+		relocateBoxPadding(v1)
 	end
 end
 
-return function(p1)
-	-- upvalues: reactModule (ref), tryRelocate (ref)
-	local var1 = reactModule.useRef(nil)
+return function(p1) --[[ Line: 101 | Named "useComposerParentTextPadding" ]]
+	-- upvalues: ReactModule (copy), tryRelocate (copy)
+	local UseRefResult = ReactModule.useRef(nil)
 	
-	return reactModule.useCallback(function(p2)
-		-- upvalues: var1 (ref), p1 (ref), tryRelocate (copy)
-		if var1.current ~= nil then
-			var1.current:Disconnect()
-			var1.current = nil
+	return ReactModule.useCallback(function(Object) --[[ Line: 104 ]]
+		-- upvalues: UseRefResult (copy), p1 (copy), tryRelocate (upval)
+		if UseRefResult.current ~= nil then
+			UseRefResult.current:Disconnect()
+			UseRefResult.current = nil
 		end
-		if p2 == nil or not p1 then return end
-		for i, v in p2:GetDescendants() do
-			tryRelocate(v)
+		if Object == nil or not p1 then return end
+		for _, descendant in Object:GetDescendants() do
+			tryRelocate(descendant)
 		end
-		var1.current = p2.DescendantAdded:Connect(tryRelocate)
+		UseRefResult.current = Object.DescendantAdded:Connect(tryRelocate)
 	end, { p1 })
 end

@@ -1,11 +1,11 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local _ = require(foundation.Components.Types)
-local viewModule = require(foundation.Components.View)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local _ = require(Foundation.Components.Types)
+local ViewModule = require(Foundation.Components.View)
 
-return function(p1)
-	-- upvalues: reactModule (ref), viewModule (ref)
-	return reactModule.createElement(viewModule, {
+return function(p1) --[[ Line: 17 | Named "PopoverArrow" ]]
+	-- upvalues: ReactModule (copy), ViewModule (copy)
+	return ReactModule.createElement(ViewModule, {
 		Rotation = 45,
 		tag = "anchor-center-center",
 		Size = UDim2.fromOffset(p1.size, p1.size),

@@ -1,115 +1,120 @@
-﻿local textService = game:GetService("TextService")
-local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local fFlagProfilePlatformNewProfileHeader = require(parent.SharedFlags).FFlagProfilePlatformNewProfileHeader
-local useProfileWrapperContextModule = require(profilePlatform.Contexts.useProfileWrapperContext)
-local useDynamicSizeMarginModule = require(profilePlatform.Hooks.useDynamicSizeMargin)
-local useAboutSectionHeightModule = require(profilePlatform.Hooks.useAboutSectionHeight)
-local textKeysModule = require(profilePlatform.Common.TextKeys)
-local enumsModule = require(profilePlatform.Common.Enums)
-local reactModule = require(parent.React)
-local UIBloxModule = require(parent.UIBlox)
-local foundationModule = require(parent.Foundation)
-local getTextSize = require(parent.Style).GetTextSize
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local localizationModule = require(parent.Localization)
-local responsiveModule = require(parent.Responsive)
-local useScreenSize = require(parent.RobloxAppHooks).useScreenSize
-local useIsSpatial = responsiveModule.useIsSpatial
-local usePreferredInput = responsiveModule.usePreferredInput
-local useLocalization = localizationModule.Hooks.useLocalization
-local horizontalPageMargin = UIBloxModule.App.Container.HorizontalPageMargin
-local expandableTextArea = UIBloxModule.App.Text.ExpandableTextArea
-local useTokens = foundationModule.Hooks.useTokens
-local text = foundationModule.Text
-local view = foundationModule.View
+﻿local TextService = game:GetService("TextService")
+local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local FFlagProfilePlatformNewProfileHeader = require(Parent.SharedFlags).FFlagProfilePlatformNewProfileHeader
+local UseProfileWrapperContextModule = require(ProfilePlatform.Contexts.useProfileWrapperContext)
+local UseDynamicSizeMarginModule = require(ProfilePlatform.Hooks.useDynamicSizeMargin)
+local UseAboutSectionHeightModule = require(ProfilePlatform.Hooks.useAboutSectionHeight)
+local TextKeysModule = require(ProfilePlatform.Common.TextKeys)
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local ReactModule = require(Parent.React)
+local UIBloxModule = require(Parent.UIBlox)
+local FoundationModule = require(Parent.Foundation)
+local GetTextSizeFunction = require(Parent.Style).GetTextSize
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local ResponsiveModule = require(Parent.Responsive)
+local UseScreenSizeFunction = require(Parent.RobloxAppHooks).useScreenSize
+local UseIsSpatialFunction = ResponsiveModule.useIsSpatial
+local UsePreferredInputFunction = ResponsiveModule.usePreferredInput
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local HorizontalPageMargin = UIBloxModule.App.Container.HorizontalPageMargin
+local ExpandableTextArea = UIBloxModule.App.Text.ExpandableTextArea
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local Text = FoundationModule.Text
+local View = FoundationModule.View
 
-return function(p1)
-	-- upvalues: useTokens (ref), useScreenSize (ref), useDynamicSizeMarginModule (ref), useProfileWrapperContextModule (ref), reactModule (ref), useLocalization (ref), textKeysModule (ref), useIsSpatial (ref), usePreferredInput (ref), responsiveModule (ref), useAboutSectionHeightModule (ref), fFlagProfilePlatformNewProfileHeader (ref), foundationFontFaceMigration (ref), getTextSize (ref), textService (ref), enumsModule (ref), view (ref), text (ref), horizontalPageMargin (ref), expandableTextArea (ref)
-	local var1
-	local var2 = useTokens()
-	local var3 = useScreenSize()
-	local var4, var5 = useDynamicSizeMarginModule()
-	local var6 = useProfileWrapperContextModule()
-	local bodyMedium = var2.Typography.BodyMedium
-	local var7, var8 = reactModule.useState(var3.X)
-	local profileType = var6.profileType
-	local var9 = useLocalization({
-		moreText = textKeysModule.More,
-		noBioYet = textKeysModule.NoBioYet
+return function(p1) --[[ Line: 41 | Named "Description" ]]
+	-- upvalues: UseTokensFunction (copy), UseScreenSizeFunction (copy), UseDynamicSizeMarginModule (copy), UseProfileWrapperContextModule (copy), ReactModule (copy), UseLocalizationFunction (copy), TextKeysModule (copy), UseIsSpatialFunction (copy), UsePreferredInputFunction (copy), ResponsiveModule (copy), UseAboutSectionHeightModule (copy), FFlagProfilePlatformNewProfileHeader (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), TextService (copy), EnumsModule (copy), View (copy), Text (copy), HorizontalPageMargin (copy), ExpandableTextArea (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseScreenSizeResult = UseScreenSizeFunction()
+	local UseDynamicSizeMarginModuleResult, UseDynamicSizeMarginModuleResult2 = UseDynamicSizeMarginModule()
+	local UseProfileWrapperContextModuleResult = UseProfileWrapperContextModule()
+	local BodyMedium = UseTokensResult.Typography.BodyMedium
+	local UseStateResult, UseStateResult2 = ReactModule.useState(UseScreenSizeResult.X)
+	local ProfileType = UseProfileWrapperContextModuleResult.profileType
+	local UseLocalizationResult = UseLocalizationFunction({
+		moreText = TextKeysModule.More,
+		noBioYet = TextKeysModule.NoBioYet
 	})
-	local description = p1.description
-	local var10 = useIsSpatial() or usePreferredInput() == responsiveModule.Input.Directional
-	local var11, var12 = useAboutSectionHeightModule(description, var7, var4)
-	local var13 = if fFlagProfilePlatformNewProfileHeader then var12 else reactModule.useMemo(function()
-		-- upvalues: description (write), foundationFontFaceMigration (copy), getTextSize (copy), bodyMedium (ref), textService (copy), var10 (ref)
-		local replaced = string.gsub(description or "", "[\r\n]+", " ")
+	local Description = p1.description
+	local UseIsSpatialResult = UseIsSpatialFunction()
+	local IsUsePreferredInputResultMatch = UsePreferredInputFunction() == ResponsiveModule.Input.Directional
+	local UseIsSpatialResult1 = UseIsSpatialResult or IsUsePreferredInputResultMatch
+	local UseAboutSectionHeightModuleResult, UseAboutSectionHeightModuleResult2 = UseAboutSectionHeightModule(Description, UseStateResult, UseDynamicSizeMarginModuleResult)
+	local UseAboutSectionHeightModuleResult1 = if FFlagProfilePlatformNewProfileHeader then UseAboutSectionHeightModuleResult2 else ReactModule.useMemo(function() --[[ Line: 61 ]]
+		-- upvalues: Description (ref), FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), BodyMedium (copy), TextService (upval), UseIsSpatialResult1 (copy)
+		local Replaced = string.gsub(Description or "", "[\r\n]+", " ")
 		
-		return (if foundationFontFaceMigration then getTextSize(replaced, bodyMedium.FontSize, bodyMedium.Font, Vector2.new(1e999, 1e999), { addTemporaryPadding = false }).Y else textService:GetTextSize(replaced, bodyMedium.FontSize, bodyMedium.Font, Vector2.new(1e999, 1e999)).Y) * (if var10 then 2.6 else 2)
-	end, { description, bodyMedium.FontSize, bodyMedium.Font, var10 })
+		return (if FoundationFontFaceMigration then GetTextSizeFunction(Replaced, BodyMedium.FontSize, BodyMedium.Font, Vector2.new(1e999, 1e999), { addTemporaryPadding = false }).Y else TextService:GetTextSize(Replaced, BodyMedium.FontSize, BodyMedium.Font, Vector2.new(1e999, 1e999)).Y) * (if UseIsSpatialResult1 then 2.6 else 2)
+	end, {
+		Description,
+		BodyMedium.FontSize,
+		BodyMedium.Font,
+		UseIsSpatialResult1
+	})
+	local IsUseAboutSectionHeightModuleResultBelow = if FFlagProfilePlatformNewProfileHeader then UseAboutSectionHeightModuleResult2 < UseAboutSectionHeightModuleResult else nil
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 85 ]]
+		-- upvalues: UseStateResult (copy), UseDynamicSizeMarginModuleResult (copy), ReactModule (upval), UseAboutSectionHeightModuleResult1 (copy)
+		return (ReactModule.createElement("UISizeConstraint", {
+			MaxSize = Vector2.new(UseStateResult - UseDynamicSizeMarginModuleResult * 2, UseAboutSectionHeightModuleResult1)
+		}))
+	end, {
+		UseAboutSectionHeightModuleResult1,
+		UseStateResult,
+		UseDynamicSizeMarginModuleResult
+	})
 	
-	if fFlagProfilePlatformNewProfileHeader then
-		var1 = var12 < var11
-		var1 = nil
-	else
-		var1 = nil
-	end
-	local var14 = reactModule.useMemo(function()
-		-- upvalues: var7 (ref), var4 (ref), reactModule (copy), var13 (ref)
-		return reactModule.createElement("UISizeConstraint", { MaxSize = Vector2.new(var7 - var4 * 2, var13) })
-	end, { var13, var7, var4 })
-	
-	if description == nil or description == "" then
-		if fFlagProfilePlatformNewProfileHeader then
+	if Description == nil or Description == "" then
+		if FFlagProfilePlatformNewProfileHeader then
 			return nil
 		end
-		description = var9.noBioYet
+		Description = UseLocalizationResult.noBioYet
 	end
-	return if profileType == enumsModule.ProfileTypes.User or profileType == enumsModule.ProfileTypes.Contact then reactModule.createElement("Frame", {
+	return if ProfileType == EnumsModule.ProfileTypes.User or ProfileType == EnumsModule.ProfileTypes.Contact then ReactModule.createElement("Frame", {
 		LayoutOrder = p1.layoutOrder,
 		Size = UDim2.new(1, 0, 0, 0),
 		BackgroundTransparency = 1,
 		AutomaticSize = Enum.AutomaticSize.Y,
-		[reactModule.Change.AbsoluteSize] = function(p2)
-			-- upvalues: var5 (ref), var8 (ref)
-			var5(p2)
-			var8(p2.AbsoluteSize.X)
+		[ReactModule.Change.AbsoluteSize] = function(Frame) --[[ Line: 106 ]]
+			-- upvalues: UseDynamicSizeMarginModuleResult2 (copy), UseStateResult2 (copy)
+			UseDynamicSizeMarginModuleResult2(Frame)
+			UseStateResult2(Frame.AbsoluteSize.X)
 		end
 	}, {
-		UIPadding = reactModule.createElement("UIPadding", {
-			PaddingLeft = UDim.new(0, var4),
-			PaddingRight = UDim.new(0, var4)
+		UIPadding = ReactModule.createElement("UIPadding", {
+			PaddingLeft = UDim.new(0, UseDynamicSizeMarginModuleResult),
+			PaddingRight = UDim.new(0, UseDynamicSizeMarginModuleResult)
 		}),
-		DescriptionContainer = reactModule.createElement(view, { tag = "size-full col gap-xsmall" }, {
-			Description = reactModule.createElement(text, {
+		DescriptionContainer = ReactModule.createElement(View, { tag = "size-full col gap-xsmall" }, {
+			Description = ReactModule.createElement(Text, {
 				LayoutOrder = 1,
 				tag = "auto-xy text-wrap text-align-x-left text-align-y-top text-truncate-split",
-				Text = description,
-				fontStyle = bodyMedium
-			}, { UISizeConstraint = var14 }),
-			MoreButton = if fFlagProfilePlatformNewProfileHeader then if var1 then reactModule.createElement(text, {
+				Text = Description,
+				fontStyle = BodyMedium
+			}, { UISizeConstraint = UseMemoResult }),
+			MoreButton = if FFlagProfilePlatformNewProfileHeader then if IsUseAboutSectionHeightModuleResultBelow then ReactModule.createElement(Text, {
 				LayoutOrder = 2,
 				RichText = true,
 				tag = "auto-xy text-wrap text-align-x-left text-align-y-top text-truncate-split",
-				Text = `<u>{var9.moreText}</u>`,
-				fontStyle = var2.Typography.TitleMedium,
+				Text = `<u>{UseLocalizationResult.moreText}</u>`,
+				fontStyle = UseTokensResult.Typography.TitleMedium,
 				onActivated = p1.onActivateMoreButton
-			}) else nil else reactModule.createElement(text, {
+			}) else nil else ReactModule.createElement(Text, {
 				LayoutOrder = 2,
 				RichText = true,
 				tag = "auto-xy text-wrap text-align-x-left text-align-y-top text-truncate-split",
-				Text = `<u>{var9.moreText}</u>`,
-				fontStyle = var2.Typography.TitleMedium,
+				Text = `<u>{UseLocalizationResult.moreText}</u>`,
+				fontStyle = UseTokensResult.Typography.TitleMedium,
 				onActivated = p1.onActivateMoreButton
 			})
 		})
-	}) else reactModule.createElement(horizontalPageMargin, {
+	}) else ReactModule.createElement(HorizontalPageMargin, {
 		backgroundTransparency = 1,
 		useAutomaticSizing = true,
 		layoutOrder = p1.layoutOrder,
 		size = UDim2.new(1, 0, 0, 0)
 	}, {
-		Description = reactModule.createElement(expandableTextArea, {
+		Description = ReactModule.createElement(ExpandableTextArea, {
 			compactNumberOfLines = 3,
 			Text = p1.description,
 			padding = Vector2.new(0, 0)

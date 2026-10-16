@@ -1,47 +1,46 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local VRService = game:GetService("VRService")
-local userInputService = game:GetService("UserInputService")
-local inGameMenuDependenciesModule = require(corePackagesService.Packages.InGameMenuDependencies)
-local roact = inGameMenuDependenciesModule.Roact
-local roactRodux = inGameMenuDependenciesModule.RoactRodux
-local parent = script.Parent.Parent.Parent
-local setInputTypeModule = require(parent.Actions.SetInputType)
-local externalEventConnectionModule = require(parent.Utility.ExternalEventConnection)
-local inputTypeMap = require(parent.Resources.Constants).InputTypeMap
-local lastInputTypeConnector = roact.PureComponent:extend("LastInputTypeConnector")
+﻿local VRService = game:GetService("VRService")
+local UserInputService = game:GetService("UserInputService")
+local InGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
+local Roact = InGameMenuDependenciesModule.Roact
+local RoactRodux = InGameMenuDependenciesModule.RoactRodux
+local Parent = script.Parent.Parent.Parent
+local SetInputTypeModule = require(Parent.Actions.SetInputType)
+local ExternalEventConnectionModule = require(Parent.Utility.ExternalEventConnection)
+local InputTypeMap = require(Parent.Resources.Constants).InputTypeMap
+local LastInputTypeConnector = Roact.PureComponent:extend("LastInputTypeConnector")
 
-function lastInputTypeConnector.updateInputType(p1, p2)
-	-- upvalues: VRService (ref), inputTypeMap (ref)
+function LastInputTypeConnector.updateInputType(p1, p2) --[[ Line: 19 ]]
+	-- upvalues: VRService (copy), InputTypeMap (copy)
 	if VRService.VREnabled then
-		p2 = inputTypeMap[Enum.UserInputType.MouseMovement]
+		p2 = InputTypeMap[Enum.UserInputType.MouseMovement]
 	end
 	if p2 then
 		p1.props.setInputType(p2)
 	end
 end
 
-function lastInputTypeConnector.init(p1)
-	-- upvalues: inputTypeMap (ref), userInputService (ref)
-	p1:updateInputType(inputTypeMap[userInputService:GetLastInputType()])
+function LastInputTypeConnector.init(p1) --[[ Line: 32 ]]
+	-- upvalues: InputTypeMap (copy), UserInputService (copy)
+	p1:updateInputType(InputTypeMap[UserInputService:GetLastInputType()])
 end
 
-function lastInputTypeConnector.render(p1)
-	-- upvalues: roact (ref), externalEventConnectionModule (ref), userInputService (ref), inputTypeMap (ref)
-	return roact.createElement(externalEventConnectionModule, {
-		event = userInputService.LastInputTypeChanged,
-		callback = function(p2)
-			-- upvalues: inputTypeMap (copy), p1 (ref)
-			p1:updateInputType(inputTypeMap[p2])
+function LastInputTypeConnector.render(p1) --[[ Line: 37 ]]
+	-- upvalues: Roact (copy), ExternalEventConnectionModule (copy), UserInputService (copy), InputTypeMap (copy)
+	return Roact.createElement(ExternalEventConnectionModule, {
+		event = UserInputService.LastInputTypeChanged,
+		callback = function(p2) --[[ Line: 40 ]]
+			-- upvalues: InputTypeMap (upval), p1 (copy)
+			p1:updateInputType(InputTypeMap[p2])
 		end
 	})
 end
 
-return roactRodux.UNSTABLE_connect2(nil, function(p1)
-	-- upvalues: setInputTypeModule (ref)
+return RoactRodux.UNSTABLE_connect2(nil, function(Callback) --[[ Line: 47 ]]
+	-- upvalues: SetInputTypeModule (copy)
 	return {
-		setInputType = function(value)
-			-- upvalues: p1 (ref), setInputTypeModule (copy)
-			return p1(setInputTypeModule(value))
+		setInputType = function(p1) --[[ Line: 49 ]]
+			-- upvalues: Callback (copy), SetInputTypeModule (upval)
+			return Callback(SetInputTypeModule(p1))
 		end
 	}
-end)(lastInputTypeConnector)
+end)(LastInputTypeConnector)

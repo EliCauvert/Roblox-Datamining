@@ -91,48 +91,48 @@
 			universeId = "789"
 		}
 	},
-	convertGraphQlOnlineFriendsToPresenceApiFormat = function(p1)
-		local t = {}
-		local t_1 = {}
+	convertGraphQlOnlineFriendsToPresenceApiFormat = function(List) --[[ Line: 100 ]]
+		local List1 = {}
+		local SortScores = {}
 		
-		for i, v in p1 do
-			local id = v.id
-			local presence = v.presence
-			table.insert(t, {
-				userId = id,
-				userPresenceType = presence.userPresenceType,
-				lastLocation = presence.lastLocation,
-				lastOnline = presence.lastOnline,
-				gameId = presence.gameId,
-				placeId = presence.placeId,
-				rootPlaceId = presence.rootPlaceId,
-				universeId = presence.universeId
+		for _, value in List do
+			local Id = value.id
+			local Presence = value.presence
+			table.insert(List1, {
+				userId = Id,
+				userPresenceType = Presence.userPresenceType,
+				lastLocation = Presence.lastLocation,
+				lastOnline = Presence.lastOnline,
+				gameId = Presence.gameId,
+				placeId = Presence.placeId,
+				rootPlaceId = Presence.rootPlaceId,
+				universeId = Presence.universeId
 			})
-			t_1[id] = v.sortScore
+			SortScores[Id] = value.sortScore
 		end
-		return t, t_1
+		return List1, SortScores
 	end,
-	convertGraphQlOnlineFriendsToExectedSignalFormat = function(value)
-		local t = {}
+	convertGraphQlOnlineFriendsToExectedSignalFormat = function(List) --[[ Line: 123 ]]
+		local List1 = {}
 		
-		for i, v in value do
-			local id = v.id
-			local presence = v.presence
-			table.insert(t, {
-				id = id,
-				sortScore = v.sortScore,
+		for _, value in List do
+			local Id = value.id
+			local Presence = value.presence
+			table.insert(List1, {
+				id = Id,
+				sortScore = value.sortScore,
 				presence = {
-					id = id,
-					userPresenceType = presence.userPresenceType,
-					lastLocation = presence.lastLocation,
-					lastOnline = presence.lastOnline,
-					gameId = presence.gameId,
-					placeId = presence.placeId,
-					rootPlaceId = presence.rootPlaceId,
-					universeId = presence.universeId
+					id = Id,
+					userPresenceType = Presence.userPresenceType,
+					lastLocation = Presence.lastLocation,
+					lastOnline = Presence.lastOnline,
+					gameId = Presence.gameId,
+					placeId = Presence.placeId,
+					rootPlaceId = Presence.rootPlaceId,
+					universeId = Presence.universeId
 				}
 			})
 		end
-		return t
+		return List1
 	end
 }

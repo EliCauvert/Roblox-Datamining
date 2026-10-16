@@ -1,32 +1,35 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local _ = require(foundation.Components.BaseMenu)
-local _ = require(foundation.Components.Types)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local _ = require(Foundation.Components.BaseMenu)
+local _ = require(Foundation.Components.Types)
 
-local function markSelectedItem(p1, p2)
-	-- upvalues: markSelectedItem (ref)
-	if p2 == nil then
-		return p1, nil
+local function markSelectedItem(Items, Id) --[[ Line: 10 ]]
+	-- upvalues: markSelectedItem (copy)
+	if Id == nil then
+		return Items, nil
 	end
-	local t = {}
-	local var1 = nil
+	local List = {}
+	local v1 = nil
 	
-	for i, v in p1 do
-		if v.id then
-			local var2 = v
-			
-			if v.id == p2 then
-				var2 = table.clone(v)
-				var2.isChecked = true
-				var1 = var2
+	for _, item in Items do
+		if not item.id then
+			if item.items then
+				local MarkSelectedItemResult, MarkSelectedItemResult2 = markSelectedItem(item.items, Id)
+				table.insert(List, { title = item.title, items = MarkSelectedItemResult })
+				v1 = v1 or MarkSelectedItemResult2
+				continue
 			end
-			table.insert(t, var2)
-		elseif v.items then
-			local var3, var4 = markSelectedItem(v.items, p2)
-			table.insert(t, { title = v.title, items = var3 })
-			var1 = var1 or var4
+			continue
 		end
+		local item1 = item
+		
+		if item.id == Id then
+			item1 = table.clone(item)
+			item1.isChecked = true
+			v1 = item1
+		end
+		table.insert(List, item1)
 	end
-	return t, var1
+	return List, v1
 end
 
 return markSelectedItem

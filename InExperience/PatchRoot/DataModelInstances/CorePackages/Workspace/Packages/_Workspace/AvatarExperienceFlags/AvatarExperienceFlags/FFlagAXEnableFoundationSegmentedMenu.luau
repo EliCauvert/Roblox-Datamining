@@ -1,1 +1,3 @@
-﻿return game:DefineFastFlag("AXEnableFoundationSegmentedMenu", false) or require(script:FindFirstAncestor("AvatarExperienceFlags").Parent.SharedFlags).FFlagEnableMeTabProfile
+﻿local FFlagEnableMeTabProfile = require(script:FindFirstAncestor("AvatarExperienceFlags").Parent.SharedFlags).FFlagEnableMeTabProfile
+
+return game:DefineFastFlag("AXEnableFoundationSegmentedMenu", false) or FFlagEnableMeTabProfile

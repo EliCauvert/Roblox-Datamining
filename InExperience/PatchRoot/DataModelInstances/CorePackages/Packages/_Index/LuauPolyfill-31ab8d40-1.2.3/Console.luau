@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.Console.Console)
+﻿return (require(script.Parent.Parent.Parent._Index.Console.Console))

@@ -1,44 +1,44 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local cryoModule = require(appChat.Parent.Cryo)
-local conversation = require(appChat.SocialLibraries).Conversation
-local getConversationTitleModule = require(appChat.Conversations.getConversationTitle)
-local getOtherParticipant = conversation.getOtherParticipant
-local getConversationGameId = conversation.getConversationGameId
-local populateUserIdsWithStateModule = require(script.Parent.populateUserIdsWithState)
-local getThumbnailsForUserIdsModule = require(appChat.Users.getThumbnailsForUserIds)
-local getLastMessageContentModule = require(script.Parent.getLastMessageContent)
-local roduxPresenceModule = require(appChat.Http.RoduxPresence)
-local fFlagAppChatPresenceStoreMigrationModule = require(appChat.Flags.FFlagAppChatPresenceStoreMigration)
-local userPresenceUtilsModule = require(appChat.Users.userPresenceUtils)
-local getConversationTimestampModule = require(appChat.Utils.getConversationTimestamp)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local CryoModule = require(AppChat.Parent.Cryo)
+local Conversation = require(AppChat.SocialLibraries).Conversation
+local GetConversationTitleModule = require(AppChat.Conversations.getConversationTitle)
+local GetOtherParticipantFunction = Conversation.getOtherParticipant
+local GetConversationGameIdFunction = Conversation.getConversationGameId
+local PopulateUserIdsWithStateModule = require(script.Parent.populateUserIdsWithState)
+local GetThumbnailsForUserIdsModule = require(AppChat.Users.getThumbnailsForUserIds)
+local GetLastMessageContentModule = require(script.Parent.getLastMessageContent)
+local RoduxPresenceModule = require(AppChat.Http.RoduxPresence)
+local FFlagAppChatPresenceStoreMigrationModule = require(AppChat.Flags.FFlagAppChatPresenceStoreMigration)
+local UserPresenceUtilsModule = require(AppChat.Users.userPresenceUtils)
+local GetConversationTimestampModule = require(AppChat.Utils.getConversationTimestamp)
 
-return function(p1, p2)
-	-- upvalues: cryoModule (ref), fFlagAppChatPresenceStoreMigrationModule (ref), getOtherParticipant (ref), roduxPresenceModule (ref), userPresenceUtilsModule (ref), getConversationTimestampModule (ref), getConversationTitleModule (ref), populateUserIdsWithStateModule (ref), getLastMessageContentModule (ref), getThumbnailsForUserIdsModule (ref), getConversationGameId (ref)
-	local participants = p2.participants or {}
-	local var1 = cryoModule.List.filter(participants, function(p3)
-		-- upvalues: p1 (ref)
-		return p3 ~= p1.LocalUserId
+return function(p1, p2) --[[ Line: 40 ]]
+	-- upvalues: CryoModule (copy), FFlagAppChatPresenceStoreMigrationModule (copy), GetOtherParticipantFunction (copy), RoduxPresenceModule (copy), UserPresenceUtilsModule (copy), GetConversationTimestampModule (copy), GetConversationTitleModule (copy), PopulateUserIdsWithStateModule (copy), GetLastMessageContentModule (copy), GetThumbnailsForUserIdsModule (copy), GetConversationGameIdFunction (copy)
+	local Participants = p2.participants or {}
+	local FilterResult = CryoModule.List.filter(Participants, function(LocalUserId): boolean --[[ Line: 42 ]]
+		-- upvalues: p1 (copy)
+		return LocalUserId ~= p1.LocalUserId
 	end)
-	local var2 = if not (fFlagAppChatPresenceStoreMigrationModule or p2.conversationType ~= "OneToOneConversation") then userPresenceUtilsModule.getUserDisplayPresence(roduxPresenceModule.Selectors.getUserPresenceByUserId(p1, getOtherParticipant(p1, p2.participants))) else nil
+	local UserDisplayPresence = if FFlagAppChatPresenceStoreMigrationModule or p2.conversationType ~= "OneToOneConversation" then nil else UserPresenceUtilsModule.getUserDisplayPresence((RoduxPresenceModule.Selectors.getUserPresenceByUserId(p1, (GetOtherParticipantFunction(p1, p2.participants)))))
 	local t = {}
-	local users = p1.Users
+	local Users = p1.Users
 	
-	for i, v in pairs(participants) do
-		t[v] = users[v]
+	for _, participant in pairs(Participants) do
+		t[participant] = Users[participant]
 	end
-	return cryoModule.Dictionary.join({
+	return CryoModule.Dictionary.join({
 		id = p2.id,
-		title = getConversationTitleModule(p2),
-		participants = populateUserIdsWithStateModule(p1, participants),
-		otherParticipants = var1,
+		title = GetConversationTitleModule(p2),
+		participants = PopulateUserIdsWithStateModule(p1, Participants),
+		otherParticipants = FilterResult,
 		isDefaultTitle = p2.isDefaultTitle,
 		hasGroupUp = p2.hasGroupUp,
-		lastMessageContent = getLastMessageContentModule(p2) or "",
+		lastMessageContent = GetLastMessageContentModule(p2) or "",
 		hasUnreadMessages = p2.hasUnreadMessages or false,
-		thumbnails = getThumbnailsForUserIdsModule(var1),
-		presenceText = if fFlagAppChatPresenceStoreMigrationModule then nil else var2 and var2.text,
-		presenceImage = if fFlagAppChatPresenceStoreMigrationModule then nil else var2 and var2.image,
-		gameId = getConversationGameId(p2, p1.LocalUserId, t),
+		thumbnails = GetThumbnailsForUserIdsModule(FilterResult),
+		presenceText = if FFlagAppChatPresenceStoreMigrationModule then nil else UserDisplayPresence and UserDisplayPresence.text,
+		presenceImage = if FFlagAppChatPresenceStoreMigrationModule then nil else UserDisplayPresence and UserDisplayPresence.image,
+		gameId = GetConversationGameIdFunction(p2, p1.LocalUserId, t),
 		serverState = p2.serverState,
 		moderationType = p2.moderationType,
 		userPendingStatus = p2.userPendingStatus,
@@ -46,7 +46,7 @@ return function(p1, p2)
 		osaAcknowledgementStatus = p2.osaAcknowledgementStatus,
 		userOptedIntoChatMessages = p2.userOptedIntoChatMessages
 	}, {
-		shortRelativeTime = p2.lastUpdated and getConversationTimestampModule(p2.lastUpdated),
+		shortRelativeTime = p2.lastUpdated and GetConversationTimestampModule(p2.lastUpdated),
 		longRelativeTime = p2.lastUpdated and p2.lastUpdated:GetLongRelativeTime(),
 		unixTime = p2.lastUpdated and p2.lastUpdated:GetUnixTimestamp()
 	})

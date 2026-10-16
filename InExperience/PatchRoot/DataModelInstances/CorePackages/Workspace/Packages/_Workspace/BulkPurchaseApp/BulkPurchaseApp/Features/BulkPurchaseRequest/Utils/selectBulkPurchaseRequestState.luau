@@ -1,39 +1,39 @@
-﻿local bulkPurchaseApp = script:FindFirstAncestor("BulkPurchaseApp")
-local _ = require(bulkPurchaseApp.Store.Types)
-local purchasableStateEnumModule = require(bulkPurchaseApp.Enums.PurchasableStateEnum)
-local createPurchasableItemModule = require(script.Parent.createPurchasableItem)
-local createOwnedItemModule = require(script.Parent.createOwnedItem)
-local createUnpurchasableItemModule = require(script.Parent.createUnpurchasableItem)
-local fFlagAXAddPlusUpsellToBulkPurchaseModule = require(bulkPurchaseApp.Flags.FFlagAXAddPlusUpsellToBulkPurchase)
-local fFlagAXAddOffersToBulkPurchaseModule = require(bulkPurchaseApp.Flags.FFlagAXAddOffersToBulkPurchase)
+﻿local BulkPurchaseApp = script:FindFirstAncestor("BulkPurchaseApp")
+local _ = require(BulkPurchaseApp.Store.Types)
+local PurchasableStateEnumModule = require(BulkPurchaseApp.Enums.PurchasableStateEnum)
+local CreatePurchasableItemModule = require(script.Parent.createPurchasableItem)
+local CreateOwnedItemModule = require(script.Parent.createOwnedItem)
+local CreateUnpurchasableItemModule = require(script.Parent.createUnpurchasableItem)
+local FFlagAXAddPlusUpsellToBulkPurchaseModule = require(BulkPurchaseApp.Flags.FFlagAXAddPlusUpsellToBulkPurchase)
+local FFlagAXAddOffersToBulkPurchaseModule = require(BulkPurchaseApp.Flags.FFlagAXAddOffersToBulkPurchase)
 
-return function(p1)
-	-- upvalues: purchasableStateEnumModule (ref), createPurchasableItemModule (ref), createOwnedItemModule (ref), createUnpurchasableItemModule (ref), fFlagAXAddOffersToBulkPurchaseModule (ref), fFlagAXAddPlusUpsellToBulkPurchaseModule (ref)
-	local t = {}
-	local t_1 = {}
-	local t_2 = {}
+return function(p1) --[[ Line: 14 | Named "selectBulkPurchaseRequestState" ]]
+	-- upvalues: PurchasableStateEnumModule (copy), CreatePurchasableItemModule (copy), CreateOwnedItemModule (copy), CreateUnpurchasableItemModule (copy), FFlagAXAddOffersToBulkPurchaseModule (copy), FFlagAXAddPlusUpsellToBulkPurchaseModule (copy)
+	local Items = {}
+	local OwnedItems = {}
+	local UnpurchasableItems = {}
 	
 	if p1.itemData then
-		for i, v in p1.itemData do
-			if v.purchasableState == purchasableStateEnumModule.Purchasable then
-				table.insert(t, createPurchasableItemModule(v))
+		for _, value in p1.itemData do
+			if value.purchasableState == PurchasableStateEnumModule.Purchasable then
+				table.insert(Items, CreatePurchasableItemModule(value))
 				
-				if v.ownedCount and v.ownedCount > 0 then
-					table.insert(t_1, createOwnedItemModule(v))
+				if value.ownedCount and value.ownedCount > 0 then
+					table.insert(OwnedItems, CreateOwnedItemModule(value))
 				end
 			else
-				table.insert(t_2, createUnpurchasableItemModule(v))
+				table.insert(UnpurchasableItems, CreateUnpurchasableItemModule(value))
 			end
 		end
 	end
 	return {
 		totalCost = p1.totalCost or 0,
-		items = t,
-		ownedItems = t_1,
-		unpurchasableItems = t_2,
+		items = Items,
+		ownedItems = OwnedItems,
+		unpurchasableItems = UnpurchasableItems,
 		balance = p1.balance or 0,
 		discountInformation = p1.discountInformation,
-		offerData = if fFlagAXAddOffersToBulkPurchaseModule then p1.offerData else nil,
-		disablePurchase = if fFlagAXAddPlusUpsellToBulkPurchaseModule then p1.disablePurchase else nil
+		offerData = if FFlagAXAddOffersToBulkPurchaseModule then p1.offerData else nil,
+		disablePurchase = if FFlagAXAddPlusUpsellToBulkPurchaseModule then p1.disablePurchase else nil
 	}
 end

@@ -1,101 +1,99 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local _ = require(buildExperience.Stores.BuildLibrary.createBuildLibraryStore)
-local libraryCategoriesModule = require(script.Parent.Parent.LibraryCategories)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local _ = require(BuildExperience.Stores.BuildLibrary.createBuildLibraryStore)
+local LibraryCategoriesModule = require(script.Parent.Parent.LibraryCategories)
 local _ = require(script.Parent.LibraryBrowserView)
 local _ = require(script.Parent.Parent.LibraryTypes)
-local useLibraryStringsModule = require(script.Parent.Parent.useLibraryStrings)
-local useLibraryItemsModule = require(script.Parent.Parent.useLibraryItems)
-local getFolderPreviewModule = require(script.Parent.Parent.getFolderPreview)
+local UseLibraryStringsModule = require(script.Parent.Parent.useLibraryStrings)
+local UseLibraryItemsModule = require(script.Parent.Parent.useLibraryItems)
+local GetFolderPreviewModule = require(script.Parent.Parent.getFolderPreview)
 local _ = require(script.Parent.Parent.LibraryWorldCutout.LibraryWorldCutoutView)
 
-local function useCarousel(p1, p2, p3, p4)
-	-- upvalues: useLibraryItemsModule (ref), reactModule (ref)
-	local var1, var2, var3 = useLibraryItemsModule(p1, p2, p3, p4, 6)
+local function useCarousel(Library, UseSignalStateResult, p1, Query) --[[ Line: 39 ]]
+	-- upvalues: UseLibraryItemsModule (copy), ReactModule (copy)
+	local UseLibraryItemsModuleResult, UseLibraryItemsModuleResult2, UseLibraryItemsModuleResult3 = UseLibraryItemsModule(Library, UseSignalStateResult, p1, Query, 6)
 	
 	return {
-		items = var1,
-		hasMore = var2,
-		onScrollChanged = reactModule.useCallback(function(p5)
-			-- upvalues: var3 (ref)
-			if p5.AbsoluteWindowSize.X > 0 and p5.AbsoluteCanvasSize.X > 0 and p5.AbsoluteCanvasSize.X - 192 <= p5.CanvasPosition.X + p5.AbsoluteWindowSize.X then
-				var3()
+		items = UseLibraryItemsModuleResult,
+		hasMore = UseLibraryItemsModuleResult2,
+		onScrollChanged = ReactModule.useCallback(function(ScrollFrame) --[[ Line: 46 ]]
+			-- upvalues: UseLibraryItemsModuleResult3 (copy)
+			if ScrollFrame.AbsoluteWindowSize.X > 0 and ScrollFrame.AbsoluteCanvasSize.X > 0 and ScrollFrame.AbsoluteCanvasSize.X - 192 <= ScrollFrame.CanvasPosition.X + ScrollFrame.AbsoluteWindowSize.X then
+				UseLibraryItemsModuleResult3()
 			end
-		end, { var3 })
+		end, { UseLibraryItemsModuleResult3 })
 	}
 end
 
-return function(p1)
-	-- upvalues: useLibraryStringsModule (ref), signalsReactModule (ref), useCarousel (ref), libraryCategoriesModule (ref), getFolderPreviewModule (ref)
-	local var1 = useLibraryStringsModule()
-	local var2 = signalsReactModule.useSignalState(p1.library.getItems)
-	local query = p1.query
-	local t = {
-		Model = useCarousel(p1.library, var2, "Model", query),
-		Image = useCarousel(p1.library, var2, "Image", query),
-		Sound = useCarousel(p1.library, var2, "Sound", query)
+return function(p1) --[[ Line: 59 | Named "useLibraryBrowserViewModel" ]]
+	-- upvalues: UseLibraryStringsModule (copy), SignalsReactModule (copy), useCarousel (copy), LibraryCategoriesModule (copy), GetFolderPreviewModule (copy)
+	local UseLibraryStringsModuleResult = UseLibraryStringsModule()
+	local UseSignalStateResult = SignalsReactModule.useSignalState(p1.library.getItems)
+	local Query = p1.query
+	local config = {
+		Model = useCarousel(p1.library, UseSignalStateResult, "Model", Query),
+		Image = useCarousel(p1.library, UseSignalStateResult, "Image", Query),
+		Sound = useCarousel(p1.library, UseSignalStateResult, "Sound", Query)
 	}
-	local t_1 = {}
+	local List = {}
 	
-	for i, v in t do
-		for i_1, v_1 in v.items do
-			table.insert(t_1, v_1)
+	for _, value in config do
+		for _, item in value.items do
+			table.insert(List, item)
 		end
 	end
-	local var3 = if p1.isReady then "Ready" else "Loading"
-	local t_2 = {}
+	local Ready: string = if p1.isReady then "Ready" else "Loading"
+	local Categories = {}
 	
-	for i_1, v_1 in libraryCategoriesModule.fromItems(t_1, var1) do
-		local itemKind = t[v_1.itemKind]
-		local t_3 = {}
+	for _, value1 in LibraryCategoriesModule.fromItems(List, UseLibraryStringsModuleResult) do
+		local Entry = config[value1.itemKind]
+		local Items = {}
 		
-		for i_2, v_2 in itemKind.items do
-			table.insert(t_3, {
-				tileKey = `library-item-{v_2.id}`,
-				itemId = v_2.id,
-				itemKind = v_2.kind,
-				isFolder = v_2.className == "Folder",
-				folderPreview = getFolderPreviewModule(v_2, var2),
-				displayName = v_2.displayName,
-				unavailableText = var1.modelUnavailable,
-				thumbnail = v_2.image,
-				model = v_2.model,
-				onActivated = if p1.onOpenItem == nil and p1.onOpenCategory == nil then nil else function()
-					-- upvalues: v_2 (ref), p1 (ref)
-					if v_2.className == "Folder" then
-						if p1.onOpenCategory == nil then
-							return
-						else
-							p1.onOpenCategory(v_2.kind, v_2.id, v_2.displayName, v_2.id)
+		for _, item1 in Entry.items do
+			table.insert(Items, {
+				tileKey = `library-item-{item1.id}`,
+				itemId = item1.id,
+				itemKind = item1.kind,
+				isFolder = item1.className == "Folder",
+				folderPreview = GetFolderPreviewModule(item1, UseSignalStateResult),
+				displayName = item1.displayName,
+				unavailableText = UseLibraryStringsModuleResult.modelUnavailable,
+				thumbnail = item1.image,
+				model = item1.model,
+				onActivated = if p1.onOpenItem == nil and p1.onOpenCategory == nil then nil else function() --[[ Line: 91 ]]
+					-- upvalues: item1 (copy), p1 (copy)
+					if item1.className == "Folder" then
+						if p1.onOpenCategory ~= nil then
+							p1.onOpenCategory(item1.kind, item1.id, item1.displayName, item1.id)
 							
 							return
 						end
 					elseif p1.onOpenItem ~= nil then
-						p1.onOpenItem(v_2.id, v_2.kind)
+						p1.onOpenItem(item1.id, item1.kind)
 					end
 				end
 			})
 		end
-		table.insert(t_2, {
-			categoryKey = v_1.key,
-			itemKind = v_1.itemKind,
-			title = v_1.title,
-			items = t_3,
-			status = var3,
-			hasMore = itemKind.hasMore,
-			onScrollChanged = itemKind.onScrollChanged,
-			onOpenCategory = if p1.onOpenCategory == nil then nil else function()
-				-- upvalues: p1 (ref), v_1 (ref)
-				p1.onOpenCategory(v_1.itemKind, v_1.key, v_1.title)
+		table.insert(Categories, {
+			categoryKey = value1.key,
+			itemKind = value1.itemKind,
+			title = value1.title,
+			items = Items,
+			status = Ready,
+			hasMore = Entry.hasMore,
+			onScrollChanged = Entry.onScrollChanged,
+			onOpenCategory = if p1.onOpenCategory == nil then nil else function() --[[ Line: 104 ]]
+				-- upvalues: p1 (copy), value1 (copy)
+				p1.onOpenCategory(value1.itemKind, value1.key, value1.title)
 			end
 		})
 	end
 	return {
-		categories = t_2,
-		status = var3,
-		strings = var1,
+		categories = Categories,
+		status = Ready,
+		strings = UseLibraryStringsModuleResult,
 		worldCutout = p1.worldCutout
 	}
 end

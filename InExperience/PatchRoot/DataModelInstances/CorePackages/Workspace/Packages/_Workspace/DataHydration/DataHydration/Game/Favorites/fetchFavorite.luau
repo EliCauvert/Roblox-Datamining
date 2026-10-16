@@ -1,12 +1,12 @@
-﻿local httpRequestModule = require(script:FindFirstAncestor("DataHydration").Parent.HttpRequest)
-local favoritesUrlBuilderModule = require(script.Parent.FavoritesUrlBuilder)
+﻿local HttpRequestModule = require(script:FindFirstAncestor("DataHydration").Parent.HttpRequest)
+local FavoritesUrlBuilderModule = require(script.Parent.FavoritesUrlBuilder)
 
-return function(p1)
-	-- upvalues: favoritesUrlBuilderModule (ref), httpRequestModule (ref)
-	return httpRequestModule.config({
-		requestFunction = function(p2, p3, p4)
-			-- upvalues: httpRequestModule (copy)
-			return httpRequestModule.requestFunctions.HttpRbxApi(p2, p3, p4)
+return function(p1) --[[ Line: 10 | Named "fetchFavorite" ]]
+	-- upvalues: FavoritesUrlBuilderModule (copy), HttpRequestModule (copy)
+	return HttpRequestModule.config({
+		requestFunction = function(p2, p3, p4) --[[ Line: 14 ]]
+			-- upvalues: HttpRequestModule (upval)
+			return HttpRequestModule.requestFunctions.HttpRbxApi(p2, p3, p4)
 		end
-	})(favoritesUrlBuilderModule.buildFavoriteUrl(p1), "GET")
+	})(FavoritesUrlBuilderModule.buildFavoriteUrl(p1), "GET")
 end

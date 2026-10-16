@@ -1,46 +1,46 @@
-﻿local faceAnimatorService = game:GetService("FaceAnimatorService")
-local expChat = script:FindFirstAncestor("ExpChat")
-local parent = expChat.Parent
-local roactModule = require(parent.Roact)
-local roactRoduxModule = require(parent.RoactRodux)
-local reactUtilsModule = require(parent.ReactUtils)
-local dictionary = require(parent.llama).Dictionary
-local sharedFlagsModule = require(parent.SharedFlags)
-local eventConnection = reactUtilsModule.EventConnection
-local configModule = require(expChat.Config)
-local avatarChatUISettings = configModule.AvatarChatUISettings
-local permissions = configModule.Permissions
-local globalFlagsModule = require(expChat.GlobalFlags)
-local fFlagExpChatUseProximityStore = sharedFlagsModule.FFlagExpChatUseProximityStore
-local var1 = if fFlagExpChatUseProximityStore then require(parent.ReactIs) else nil
-local controlBubbleModule = require(script.Parent.ControlBubble)
-local getFFlagExpChatEnableVoiceReverseNudgeModule = require(expChat.Flags.GetFFlagExpChatEnableVoiceReverseNudge)
-local getFFlagExpChatUseVoiceParticipantsStore = sharedFlagsModule.GetFFlagExpChatUseVoiceParticipantsStore
-local preventMicToggleIfGameConsumedEvent = game:DefineFastFlag("PreventMicToggleIfGameConsumedEvent", false)
-local playerButtons = roactModule.PureComponent:extend("PlayerButtons")
-playerButtons.defaultProps = { LayoutOrder = 1 }
+﻿local FaceAnimatorService = game:GetService("FaceAnimatorService")
+local ExpChat = script:FindFirstAncestor("ExpChat")
+local Parent = ExpChat.Parent
+local RoactModule = require(Parent.Roact)
+local RoactRoduxModule = require(Parent.RoactRodux)
+local Dictionary = require(Parent.llama).Dictionary
+local SharedFlagsModule = require(Parent.SharedFlags)
+local EventConnection = require(Parent.ReactUtils).EventConnection
+local ConfigModule = require(ExpChat.Config)
+local AvatarChatUISettings = ConfigModule.AvatarChatUISettings
+local Permissions = ConfigModule.Permissions
+local GlobalFlagsModule = require(ExpChat.GlobalFlags)
+local FFlagExpChatUseProximityStore = SharedFlagsModule.FFlagExpChatUseProximityStore
+local ReactIsModule = if FFlagExpChatUseProximityStore then require(Parent.ReactIs) else nil
+local ControlBubbleModule = require(script.Parent.ControlBubble)
+local GetFFlagExpChatEnableVoiceReverseNudgeModule = require(ExpChat.Flags.GetFFlagExpChatEnableVoiceReverseNudge)
+local GetFFlagExpChatUseVoiceParticipantsStoreFunction = SharedFlagsModule.GetFFlagExpChatUseVoiceParticipantsStore
+local PreventMicToggleIfGameConsumedEvent = game:DefineFastFlag("PreventMicToggleIfGameConsumedEvent", false)
+local PlayerButtons = RoactModule.PureComponent:extend("PlayerButtons")
+PlayerButtons.defaultProps = { LayoutOrder = 1 }
 
-function playerButtons.init(p1)
-	-- upvalues: faceAnimatorService (ref), preventMicToggleIfGameConsumedEvent (ref), getFFlagExpChatUseVoiceParticipantsStore (ref), permissions (ref)
+function PlayerButtons.init(p1) --[[ Line: 41 ]]
+	-- upvalues: FaceAnimatorService (copy), PreventMicToggleIfGameConsumedEvent (copy), GetFFlagExpChatUseVoiceParticipantsStoreFunction (copy), Permissions (copy)
 	p1:setState({
-		cameraEnabled = if faceAnimatorService then faceAnimatorService:IsStarted() and faceAnimatorService.VideoAnimationEnabled else false
+		cameraEnabled = if FaceAnimatorService then FaceAnimatorService:IsStarted() and FaceAnimatorService.VideoAnimationEnabled else false
 	})
 	
-	function p0.toggleMic(p2, p3)
-		-- upvalues: preventMicToggleIfGameConsumedEvent (copy), p1 (ref), getFFlagExpChatUseVoiceParticipantsStore (copy)
-		if preventMicToggleIfGameConsumedEvent and p2 then
+	function p1.toggleMic(p2, p3) --[[ Line: 49 ]]
+		-- upvalues: PreventMicToggleIfGameConsumedEvent (upval), p1 (copy), GetFFlagExpChatUseVoiceParticipantsStoreFunction (upval)
+		if not PreventMicToggleIfGameConsumedEvent or not p2 then
+			p1.props.onClickedVoiceIndicator(p1.props.userId, if GetFFlagExpChatUseVoiceParticipantsStoreFunction() then p3 else p1.props.voiceState)
+			
 			return
 		end
-		p1.props.onClickedVoiceIndicator(p1.props.userId, if getFFlagExpChatUseVoiceParticipantsStore() then p3 else p1.props.voiceState)
 	end
 	
-	function p0.onVideoButtonPressed()
-		-- upvalues: p1 (ref), permissions (copy)
+	function p1.onVideoButtonPressed() --[[ Line: 61 ]]
+		-- upvalues: p1 (copy), Permissions (upval)
 		if p1.props.hasCameraPermissions then
 			p1:toggleVideo()
 		else
-			local var2 = function(p2, _)
-				-- upvalues: p1 (copy)
+			local function v19(p2, _) --[[ Line: 64 ]]
+				-- upvalues: p1 (upval)
 				if p2 then
 					p1:toggleVideo()
 					
@@ -55,152 +55,152 @@ function playerButtons.init(p1)
 			end
 			
 			if p1.props.getPermissions then
-				p1.props.getPermissions(var2, permissions.CAMERA_ACCESS)
+				p1.props.getPermissions(v19, Permissions.CAMERA_ACCESS)
 				
 				return
 			end
 		end
 	end
 	
-	function p0.toggleVideo()
-		-- upvalues: p1 (ref)
+	function p1.toggleVideo() --[[ Line: 86 ]]
+		-- upvalues: p1 (copy)
 		p1.props.onClickedCameraIndicator()
 	end
 	
-	function p0.updateVideo()
-		-- upvalues: p1 (ref), faceAnimatorService (copy)
+	function p1.updateVideo() --[[ Line: 90 ]]
+		-- upvalues: p1 (copy), FaceAnimatorService (upval)
 		p1:setState({
-			cameraEnabled = faceAnimatorService.VideoAnimationEnabled
+			cameraEnabled = FaceAnimatorService.VideoAnimationEnabled
 		})
 	end
 end
 
-function playerButtons.shouldShowCameraIndicator(p1)
+function PlayerButtons.shouldShowCameraIndicator(p1) --[[ Line: 97 ]]
 	return p1.props.isLocalPlayer and p1:getCameraButtonVisibleAtMount()
 end
 
-function playerButtons.shouldShowMicOffIndicator(p1)
-	-- upvalues: globalFlagsModule (ref)
-	if not p1.props.isLocalPlayer then
+function PlayerButtons.shouldShowMicOffIndicator(p1): boolean --[[ Line: 101 ]]
+	-- upvalues: GlobalFlagsModule (copy)
+	if p1.props.isLocalPlayer then
+		local IsMuted: boolean = p1.props.voiceState == "Muted" or p1.props.voiceState == "LOCAL_MUTED"
+		
+		return if GlobalFlagsModule.JoinWithoutMicPermissions then IsMuted else IsMuted or not p1.props.hasMicPermissions
+	else
 		return false
 	end
-	local var2 = if p1.props.voiceState ~= "Muted" then p1.props.voiceState == "LOCAL_MUTED" else true
-	
-	return if globalFlagsModule.JoinWithoutMicPermissions then var2 else var2 or not p1.props.hasMicPermissions
 end
 
-function playerButtons.getCameraButtonVisibleAtMount(p1)
-	return if p1.props.isCameraOnlyUser and p1.props.isCameraOnlyUser() then false elseif p1.props.isCamEnabledForUserAndPlace then p1.props.isCamEnabledForUserAndPlace() else false
+function PlayerButtons.getCameraButtonVisibleAtMount(p1) --[[ Line: 114 ]]
+	return (not p1.props.isCameraOnlyUser or not p1.props.isCameraOnlyUser()) and (if p1.props.isCamEnabledForUserAndPlace then p1.props.isCamEnabledForUserAndPlace() else false)
 end
 
-function playerButtons.render(p1)
-	-- upvalues: globalFlagsModule (ref), getFFlagExpChatUseVoiceParticipantsStore (ref), avatarChatUISettings (ref), roactModule (ref), fFlagExpChatUseProximityStore (ref), var1 (ref), dictionary (ref), controlBubbleModule (ref), faceAnimatorService (ref), eventConnection (ref)
-	local var2 = p1.props.hasMicPermissions or p1.props.voiceEnabled
+function PlayerButtons.render(p1) --[[ Line: 130 ]]
+	-- upvalues: GlobalFlagsModule (copy), GetFFlagExpChatUseVoiceParticipantsStoreFunction (copy), AvatarChatUISettings (copy), RoactModule (copy), FFlagExpChatUseProximityStore (copy), ReactIsModule (copy), Dictionary (copy), ControlBubbleModule (copy), FaceAnimatorService (copy), EventConnection (copy)
+	local VoiceEnabled = if p1.props.hasMicPermissions then if GlobalFlagsModule.JoinWithoutMicPermissions then p1.props.voiceEnabled else p1.props.hasMicPermissions elseif GlobalFlagsModule.JoinWithoutMicPermissions then p1.props.voiceEnabled else p1.props.voiceEnabled
+	local ShouldShowCameraIndicator = p1:shouldShowCameraIndicator()
+	local ShouldShowMicOffIndicator = not GetFFlagExpChatUseVoiceParticipantsStoreFunction() and p1:shouldShowMicOffIndicator()
+	local VoiceEnabled1 = ShouldShowCameraIndicator and VoiceEnabled
+	local ChatSettings = p1.props.chatSettings
+	local DoubleIconCornerRadiusOffset = VoiceEnabled1 and AvatarChatUISettings.DoubleIconCornerRadiusOffset or AvatarChatUISettings.SingleIconCornerRadiusOffset
+	local DoubleIconButtonSize = VoiceEnabled1 and AvatarChatUISettings.DoubleIconButtonSize or AvatarChatUISettings.SingleIconButtonSize
+	local Microphone: string = if p1.props.isLocalPlayer then "microphone" else "speaker"
+	local VideoOnLight: string = if p1.state.cameraEnabled and p1:getCameraButtonVisibleAtMount() then "icons/controls/voice/video_on_light" else "icons/controls/voice/video_off_light"
 	
-	if globalFlagsModule.JoinWithoutMicPermissions then
-		var2 = p1.props.voiceEnabled
-	end
-	local var3 = p1:shouldShowCameraIndicator()
-	local var4 = if getFFlagExpChatUseVoiceParticipantsStore() then false else p1:shouldShowMicOffIndicator()
-	local var5 = var3 and var2
-	local chatSettings = p1.props.chatSettings
-	local var6 = if var5 then avatarChatUISettings.DoubleIconCornerRadiusOffset else avatarChatUISettings.SingleIconCornerRadiusOffset
-	local var7 = if var5 then avatarChatUISettings.DoubleIconButtonSize else avatarChatUISettings.SingleIconButtonSize
-	local var8 = if p1.props.isLocalPlayer then "microphone" else "speaker"
-	
-	return roactModule.createElement("Frame", {
+	return RoactModule.createElement("Frame", {
 		AnchorPoint = Vector2.new(0.5, 1),
 		Position = UDim2.new(0.5, 0, 1, -8),
 		AutomaticSize = Enum.AutomaticSize.X,
-		Size = UDim2.fromOffset(0, avatarChatUISettings.FrameHeight),
+		Size = UDim2.fromOffset(0, AvatarChatUISettings.FrameHeight),
 		LayoutOrder = p1.props.LayoutOrder,
-		BackgroundTransparency = chatSettings.BackgroundTransparency,
-		BackgroundColor3 = chatSettings.BackgroundColor3,
-		Visible = if fFlagExpChatUseProximityStore and var1.isBinding(p1.props.Visible) then p1.props.Visible:map(function(p2)
-			-- upvalues: var2 (write), var3 (ref)
-			return if p2 then var2 else var3
-		end) else var2 or var3
+		BackgroundTransparency = ChatSettings.BackgroundTransparency,
+		BackgroundColor3 = ChatSettings.BackgroundColor3,
+		Visible = if FFlagExpChatUseProximityStore and ReactIsModule.isBinding(p1.props.Visible) then p1.props.Visible:map(function(p2) --[[ Line: 163 ]]
+			-- upvalues: VoiceEnabled (ref), ShouldShowCameraIndicator (copy)
+			return p2 and VoiceEnabled or ShouldShowCameraIndicator
+		end) else VoiceEnabled or ShouldShowCameraIndicator
 	}, {
-		Scale = roactModule.createElement("UIScale", {
-			Scale = if not p1.props.isInsideMaximizeDistance then 0.75 else 1
+		Scale = RoactModule.createElement("UIScale", {
+			Scale = if p1.props.isInsideMaximizeDistance then 1 else 0.75
 		}),
-		UICorner = roactModule.createElement("UICorner", { CornerRadius = UDim.new(0, var6) }),
-		Container = roactModule.createElement("ImageLabel", dictionary.join({ BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1) }, chatSettings.ImageLabel), {
-			UICorner = roactModule.createElement("UICorner", { CornerRadius = UDim.new(0, var6) }),
-			UIListLayout = roactModule.createElement("UIListLayout", {
+		UICorner = RoactModule.createElement("UICorner", { CornerRadius = UDim.new(0, DoubleIconCornerRadiusOffset) }),
+		Container = RoactModule.createElement("ImageLabel", Dictionary.join({ BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1) }, ChatSettings.ImageLabel), {
+			UICorner = RoactModule.createElement("UICorner", { CornerRadius = UDim.new(0, DoubleIconCornerRadiusOffset) }),
+			UIListLayout = RoactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Horizontal,
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				HorizontalAlignment = Enum.HorizontalAlignment.Center,
 				VerticalAlignment = Enum.VerticalAlignment.Center
 			}),
-			MicrophoneBubble = var2 and roactModule.createElement(controlBubbleModule, {
+			MicrophoneBubble = VoiceEnabled and RoactModule.createElement(ControlBubbleModule, {
 				LayoutOrder = 1,
 				onActivated = p1.toggleMic,
-				chatSettings = chatSettings,
-				controlBubbleSize = var7,
-				cornerRadiusOffset = var6,
-				iconAssetName = if var4 then "icons/controls/voice/microphone_off_light" else nil,
-				iconSize = avatarChatUISettings.IconSize,
-				iconTransparency = avatarChatUISettings.IconTransparency,
-				voiceState = if getFFlagExpChatUseVoiceParticipantsStore() then nil else p1.props.voiceState,
-				iconStyle = var8,
-				isUserToxic = if getFFlagExpChatUseVoiceParticipantsStore() then nil else p1.props.isUserToxic,
-				userId = if getFFlagExpChatUseVoiceParticipantsStore() then p1.props.userId else nil
+				chatSettings = ChatSettings,
+				controlBubbleSize = DoubleIconButtonSize,
+				cornerRadiusOffset = DoubleIconCornerRadiusOffset,
+				iconAssetName = if ShouldShowMicOffIndicator then "icons/controls/voice/microphone_off_light" else nil,
+				iconSize = AvatarChatUISettings.IconSize,
+				iconTransparency = AvatarChatUISettings.IconTransparency,
+				voiceState = if GetFFlagExpChatUseVoiceParticipantsStoreFunction() then nil else p1.props.voiceState,
+				iconStyle = Microphone,
+				isUserToxic = if GetFFlagExpChatUseVoiceParticipantsStoreFunction() then nil else p1.props.isUserToxic,
+				userId = if GetFFlagExpChatUseVoiceParticipantsStoreFunction() then p1.props.userId else nil
 			}),
-			Divider = var2 and (var3 and roactModule.createElement("Frame", {
+			Divider = VoiceEnabled and (ShouldShowCameraIndicator and RoactModule.createElement("Frame", {
 				BorderSizePixel = 0,
 				LayoutOrder = 2,
 				ZIndex = 1,
-				Size = avatarChatUISettings.DividerSize,
+				Size = AvatarChatUISettings.DividerSize,
 				AnchorPoint = Vector2.new(0.5, 1),
-				BackgroundColor3 = avatarChatUISettings.DividerColor
+				BackgroundColor3 = AvatarChatUISettings.DividerColor
 			})),
-			CameraBubble = var3 and roactModule.createElement(controlBubbleModule, {
+			CameraBubble = ShouldShowCameraIndicator and RoactModule.createElement(ControlBubbleModule, {
 				LayoutOrder = 3,
 				onActivated = p1.onVideoButtonPressed or p1.toggleVideo,
-				chatSettings = chatSettings,
-				cornerRadiusOffset = var6,
-				controlBubbleSize = var7,
-				iconAssetName = if p1.state.cameraEnabled and p1:getCameraButtonVisibleAtMount() then "icons/controls/voice/video_on_light" else "icons/controls/voice/video_off_light",
-				iconSize = avatarChatUISettings.IconSize,
-				iconTransparency = avatarChatUISettings.IconTransparency,
-				iconStyle = var8,
-				isUserToxic = if getFFlagExpChatUseVoiceParticipantsStore() then nil else p1.props.isUserToxic
+				chatSettings = ChatSettings,
+				cornerRadiusOffset = DoubleIconCornerRadiusOffset,
+				controlBubbleSize = DoubleIconButtonSize,
+				iconAssetName = VideoOnLight,
+				iconSize = AvatarChatUISettings.IconSize,
+				iconTransparency = AvatarChatUISettings.IconTransparency,
+				iconStyle = Microphone,
+				isUserToxic = if GetFFlagExpChatUseVoiceParticipantsStoreFunction() then nil else p1.props.isUserToxic
 			})
 		}),
-		Carat = chatSettings.TailVisible and roactModule.createElement("ImageLabel", {
+		Carat = ChatSettings.TailVisible and RoactModule.createElement("ImageLabel", {
 			LayoutOrder = 3,
 			BackgroundTransparency = 1,
 			Image = "rbxasset://textures/ui/InGameChat/Caret.png",
 			AnchorPoint = Vector2.new(0.5, 0),
 			Position = UDim2.new(0.5, 0, 1, -1),
 			Size = UDim2.fromOffset(12, 8),
-			ImageColor3 = chatSettings.BackgroundColor3,
-			ImageTransparency = chatSettings.BackgroundTransparency
+			ImageColor3 = ChatSettings.BackgroundColor3,
+			ImageTransparency = ChatSettings.BackgroundTransparency
 		}, {
-			CaratGradient = chatSettings.UIGradient and roactModule.createElement("UIGradient", chatSettings.UIGradient)
+			CaratGradient = ChatSettings.UIGradient and RoactModule.createElement("UIGradient", ChatSettings.UIGradient)
 		}),
-		BubbleGradient = chatSettings.UIGradient and roactModule.createElement("UIGradient", chatSettings.UIGradient),
-		VideoEnabledChanged = faceAnimatorService and roactModule.createElement(eventConnection, {
-			event = faceAnimatorService:GetPropertyChangedSignal("VideoAnimationEnabled"),
+		BubbleGradient = ChatSettings.UIGradient and RoactModule.createElement("UIGradient", ChatSettings.UIGradient),
+		VideoEnabledChanged = FaceAnimatorService and RoactModule.createElement(EventConnection, {
+			event = FaceAnimatorService:GetPropertyChangedSignal("VideoAnimationEnabled"),
 			callback = p1.updateVideo
 		}) or nil
 	})
 end
 
-return if getFFlagExpChatUseVoiceParticipantsStore() then playerButtons else roactRoduxModule.connect(function(p1, p2)
-	-- upvalues: getFFlagExpChatEnableVoiceReverseNudgeModule (ref)
-	local userId = false
+local function mapStateToProps(p1, p2) --[[ Line: 246 ]]
+	-- upvalues: GetFFlagExpChatEnableVoiceReverseNudgeModule (copy)
+	local ReverseNudgeToxicUser = false
 	
-	if getFFlagExpChatEnableVoiceReverseNudgeModule() and p1.ReverseNudgeToxicUsers then
-		userId = p1.ReverseNudgeToxicUsers[p2.userId]
+	if GetFFlagExpChatEnableVoiceReverseNudgeModule() and p1.ReverseNudgeToxicUsers then
+		ReverseNudgeToxicUser = p1.ReverseNudgeToxicUsers[p2.userId]
 		
-		if userId == nil then
-			userId = false
+		if ReverseNudgeToxicUser == nil then
+			ReverseNudgeToxicUser = false
 		end
 	end
 	return {
 		voiceState = p1.Voice.participants[p2.userId],
-		isUserToxic = userId
+		isUserToxic = ReverseNudgeToxicUser
 	}
-end)(playerButtons)
+end
+
+return if GetFFlagExpChatUseVoiceParticipantsStoreFunction() then PlayerButtons else RoactRoduxModule.connect(mapStateToProps)(PlayerButtons)

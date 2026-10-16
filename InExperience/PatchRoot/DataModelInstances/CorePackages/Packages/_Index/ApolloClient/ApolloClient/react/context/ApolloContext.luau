@@ -1,23 +1,23 @@
-﻿local parent = script.Parent.Parent.Parent.Parent
-local weakMap = require(parent.LuauPolyfill).WeakMap
-local reactModule = require(parent.React)
+﻿local Parent = script.Parent.Parent.Parent.Parent
+local WeakMap = require(Parent.LuauPolyfill).WeakMap
+local ReactModule = require(Parent.React)
 local _ = require(script.Parent.Parent.Parent.core)
-local var1 = weakMap.new()
+local NewWeakMap = WeakMap.new()
 
 return {
-	getApolloContext = function()
-		-- upvalues: var1 (write), reactModule (ref)
-		local createContext = var1:get(reactModule.createContext)
+	getApolloContext = function() --[[ Line: 33 ]]
+		-- upvalues: NewWeakMap (ref), ReactModule (copy)
+		local GetResult = NewWeakMap:get(ReactModule.createContext)
 		
-		if createContext == nil then
-			createContext = reactModule.createContext({})
-			createContext.displayName = "ApolloContext"
-			var1:set(reactModule.createContext, createContext)
+		if GetResult == nil then
+			GetResult = ReactModule.createContext({})
+			GetResult.displayName = "ApolloContext"
+			NewWeakMap:set(ReactModule.createContext, GetResult)
 		end
-		return createContext
+		return GetResult
 	end,
-	resetApolloContext = function()
-		-- upvalues: var1 (write), weakMap (ref)
-		var1 = weakMap.new()
+	resetApolloContext = function() --[[ Line: 45 ]]
+		-- upvalues: NewWeakMap (ref), WeakMap (copy)
+		NewWeakMap = WeakMap.new()
 	end
 }

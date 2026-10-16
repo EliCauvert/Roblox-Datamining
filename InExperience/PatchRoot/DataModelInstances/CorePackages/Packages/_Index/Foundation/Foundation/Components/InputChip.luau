@@ -1,1 +1,1 @@
-﻿return require(script.InputChip)
+﻿return (require(script.InputChip))

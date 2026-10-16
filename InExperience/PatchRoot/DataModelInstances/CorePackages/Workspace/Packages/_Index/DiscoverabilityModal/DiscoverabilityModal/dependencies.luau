@@ -1,22 +1,21 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent
-local luaSocialLibrariesDepsModule = require(parent_1.LuaSocialLibrariesDeps)
-local roduxNetworking = luaSocialLibrariesDepsModule.RoduxNetworking
-local httpRequest = luaSocialLibrariesDepsModule.httpRequest
-local var1 = require(parent_1.Lumberyak).Logger.new(nil, "DiscoverabilityModal"):new("DiscoverabilityModal Networking")
-local RODUX_KEY = require(parent.Common.Constants).RODUX_KEY
-local var2 = roduxNetworking.config({
-	keyPath = RODUX_KEY .. ".NetworkStatus",
-	networkImpl = httpRequest.config({
-		requestFunction = function(p1, p2, p3)
-			-- upvalues: var1 (ref), httpRequest (ref)
-			var1:info("Fetching: {}", string.format("[ requestMethod = %q, url = %q ]", p2, p1))
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent
+local LuaSocialLibrariesDepsModule = require(Parent1.LuaSocialLibrariesDeps)
+local HttpRequest = LuaSocialLibrariesDepsModule.httpRequest
+local DiscoverabilityModalNetworking = require(Parent1.Lumberyak).Logger.new(nil, "DiscoverabilityModal"):new("DiscoverabilityModal Networking")
+local RODUXKEY = require(Parent.Common.Constants).RODUX_KEY
+local ConfigResult = LuaSocialLibrariesDepsModule.RoduxNetworking.config({
+	keyPath = RODUXKEY .. ".NetworkStatus",
+	networkImpl = HttpRequest.config({
+		requestFunction = function(p1, p2, p3) --[[ Line: 13 ]]
+			-- upvalues: DiscoverabilityModalNetworking (copy), HttpRequest (copy)
+			DiscoverabilityModalNetworking:info("Fetching: {}", string.format("[ requestMethod = %q, url = %q ]", p2, p1))
 			
-			return httpRequest.requestFunctions.HttpRbxApi(p1, p2, p3)
+			return HttpRequest.requestFunctions.HttpRbxApi(p1, p2, p3)
 		end,
-		postRequestFunction = function(p1, p2)
-			-- upvalues: var1 (ref)
-			var1:debug("Returned: {}", string.format("[ requestMethod = %q, url = %q, statusCode = %s, body = %s ]", p2.requestMethod, p2.url, p1.StatusCode, p1.Body))
+		postRequestFunction = function(p1, p2) --[[ Line: 17 ]]
+			-- upvalues: DiscoverabilityModalNetworking (copy)
+			DiscoverabilityModalNetworking:debug("Returned: {}", string.format("[ requestMethod = %q, url = %q, statusCode = %s, body = %s ]", p2.requestMethod, p2.url, p1.StatusCode, p1.Body))
 		end,
 		maxRetryCount = game:DefineFastInt("DiscoverabilityModalHttpRetryCount", 3)
 	})
@@ -24,31 +23,31 @@ local var2 = roduxNetworking.config({
 
 return {
 	AppStorageService = game:GetService("AppStorageService"),
-	SocialLuaAnalytics = require(parent_1.SocialLuaAnalytics),
-	Dash = require(parent_1.Dash),
-	UIBlox = require(parent_1.UIBlox),
-	Foundation = require(parent_1.Foundation),
-	Roact = require(parent_1.Roact),
-	RoactRodux = require(parent_1.RoactRodux),
-	Rodux = require(parent_1.Rodux),
-	React = require(parent_1.React),
-	ContactsProtocol = require(parent_1.ContactsProtocol).ContactsProtocol,
-	Promise = require(parent_1.Promise),
-	enumerate = require(parent_1.enumerate),
-	RoactNavigation = require(parent_1.RoactNavigation),
-	rolloutByApplicationId = require(parent_1.AppCommonLib).rolloutByApplicationId,
-	RoduxNetworking = var2,
-	SocialLibraries = luaSocialLibrariesDepsModule.SocialLibraries.config({}),
-	SocialModalsCommon = require(parent_1.SocialModalsCommon),
-	PermissionsProtocol = require(parent_1.PermissionsProtocol).PermissionsProtocol,
-	NetworkingUserSettings = luaSocialLibrariesDepsModule.NetworkingUserSettings.config({ roduxNetworking = var2 }),
-	RoduxUserPermissions = luaSocialLibrariesDepsModule.RoduxUserPermissions.config({ keyPath = RODUX_KEY .. ".UserPermissions" }),
-	LocalizationProvider = require(parent_1.Localization).LocalizationProvider,
+	SocialLuaAnalytics = require(Parent1.SocialLuaAnalytics),
+	Dash = require(Parent1.Dash),
+	UIBlox = require(Parent1.UIBlox),
+	Foundation = require(Parent1.Foundation),
+	Roact = require(Parent1.Roact),
+	RoactRodux = require(Parent1.RoactRodux),
+	Rodux = require(Parent1.Rodux),
+	React = require(Parent1.React),
+	ContactsProtocol = require(Parent1.ContactsProtocol).ContactsProtocol,
+	Promise = require(Parent1.Promise),
+	enumerate = require(Parent1.enumerate),
+	RoactNavigation = require(Parent1.RoactNavigation),
+	rolloutByApplicationId = require(Parent1.AppCommonLib).rolloutByApplicationId,
+	RoduxNetworking = ConfigResult,
+	SocialLibraries = LuaSocialLibrariesDepsModule.SocialLibraries.config({}),
+	SocialModalsCommon = require(Parent1.SocialModalsCommon),
+	PermissionsProtocol = require(Parent1.PermissionsProtocol).PermissionsProtocol,
+	NetworkingUserSettings = LuaSocialLibrariesDepsModule.NetworkingUserSettings.config({ roduxNetworking = ConfigResult }),
+	RoduxUserPermissions = LuaSocialLibrariesDepsModule.RoduxUserPermissions.config({ keyPath = RODUXKEY .. ".UserPermissions" }),
+	LocalizationProvider = require(Parent1.Localization).LocalizationProvider,
 	Hooks = {
-		useLocalization = require(parent_1.Localization).Hooks.useLocalization,
-		useNavigation = require(parent_1.Navigation).useNavigation,
-		useSelector = require(parent_1.RoactUtils).Hooks.RoactRodux.useSelector,
-		useDispatch = require(parent_1.RoactUtils).Hooks.RoactRodux.useDispatch
+		useLocalization = require(Parent1.Localization).Hooks.useLocalization,
+		useNavigation = require(Parent1.Navigation).useNavigation,
+		useSelector = require(Parent1.RoactUtils).Hooks.RoactRodux.useSelector,
+		useDispatch = require(Parent1.RoactUtils).Hooks.RoactRodux.useDispatch
 	},
-	getFStringSocialProfileLayer = require(parent_1.SharedFlags).getFStringSocialProfileLayer
+	getFStringSocialProfileLayer = require(Parent1.SharedFlags).getFStringSocialProfileLayer
 }

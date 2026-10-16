@@ -1,37 +1,37 @@
-﻿local gameTile = script:FindFirstAncestor("GameTile")
-local parent = gameTile.Parent
-local mutedError = require(parent.Loggers).mutedError
-local flaggedMutedError = require(parent.Loggers).flaggedMutedError
-local _ = require(gameTile.GameTileTypes)
-local tileBadgePositionCalculators = require(gameTile.GameTileConstants).TileBadgePositionCalculators
+﻿local GameTile = script:FindFirstAncestor("GameTile")
+local Parent = GameTile.Parent
+local MutedErrorFunction = require(Parent.Loggers).mutedError
+local FlaggedMutedErrorFunction = require(Parent.Loggers).flaggedMutedError
+local _ = require(GameTile.GameTileTypes)
+local TileBadgePositionCalculators = require(GameTile.GameTileConstants).TileBadgePositionCalculators
 
-local function _(p1)
-	-- upvalues: tileBadgePositionCalculators (ref), flaggedMutedError (ref)
-	local var1 = tileBadgePositionCalculators[p1] ~= nil
+local function _(p1): boolean --[[ Line: 13 | Named "isValidTileBadgePosition" ]]
+	-- upvalues: TileBadgePositionCalculators (copy), FlaggedMutedErrorFunction (copy)
+	local HasTileBadgePositionCalculator = TileBadgePositionCalculators[p1] ~= nil
 	
-	if not var1 then
-		flaggedMutedError("GameTileOverlayBadgeInvalidPositionError", `Unsupported game tile badge position: {p1}`)
+	if not HasTileBadgePositionCalculator then
+		FlaggedMutedErrorFunction("GameTileOverlayBadgeInvalidPositionError", `Unsupported game tile badge position: {p1}`)
 	end
-	return var1
+	return HasTileBadgePositionCalculator
 end
 
-return function(p1)
-	-- upvalues: tileBadgePositionCalculators (ref), flaggedMutedError (ref), mutedError (ref)
+return function(List) --[[ Line: 26 | Named "getValidTileBadges" ]]
+	-- upvalues: TileBadgePositionCalculators (copy), FlaggedMutedErrorFunction (copy), MutedErrorFunction (copy)
 	local t = {}
 	
-	for i, v in p1 do
-		local var1 = tileBadgePositionCalculators[i] ~= nil
+	for i, value in List do
+		local HasTileBadgePositionCalculator = TileBadgePositionCalculators[i] ~= nil
 		
-		if not var1 then
-			flaggedMutedError("GameTileOverlayBadgeInvalidPositionError", `Unsupported game tile badge position: {i}`)
+		if not HasTileBadgePositionCalculator then
+			FlaggedMutedErrorFunction("GameTileOverlayBadgeInvalidPositionError", `Unsupported game tile badge position: {i}`)
 		end
-		if var1 and #v > 0 then
-			local var2 = v[1]
+		if HasTileBadgePositionCalculator and #value > 0 then
+			local Entry = value[1]
 			
-			if var2.tileBadgeType and var2.analyticsId then
-				t[i] = { v[1] }
+			if Entry.tileBadgeType and Entry.analyticsId then
+				t[i] = { value[1] }
 			else
-				mutedError("Invalid tile badge metadata.")
+				MutedErrorFunction("Invalid tile badge metadata.")
 			end
 		end
 	end

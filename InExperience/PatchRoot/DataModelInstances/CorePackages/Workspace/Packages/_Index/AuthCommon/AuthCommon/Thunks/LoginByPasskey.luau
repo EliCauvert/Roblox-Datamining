@@ -1,53 +1,53 @@
-﻿local authCommon = script:FindFirstAncestor("AuthCommon")
-local parent = authCommon.Parent
-local httpService = game:GetService("HttpService")
-local promiseModule = require(parent.Promise)
-local loginRequestsModule = require(authCommon.Http.Requests.LoginRequests)
-local loginResultModule = require(authCommon.Models.LoginResult)
-local loginErrorCodesModule = require(authCommon.Enums.LoginErrorCodes)
-local loginMethodsModule = require(authCommon.Enums.LoginMethods)
-local appStorageUtilitiesModule = require(authCommon.Utils.AppStorageUtilities)
-local fFlagEnableLastLoginMethodTracking = require(parent.SharedFlags).FFlagEnableLastLoginMethodTracking
-local fFlagEnableRecordLogin = require(parent.SharedFlags).FFlagEnableRecordLogin
-local logger = require(parent.Loggers).Logger
-local recordLoginModule = require(authCommon.Utils.recordLogin)
+﻿local AuthCommon = script:FindFirstAncestor("AuthCommon")
+local Parent = AuthCommon.Parent
+local HttpService = game:GetService("HttpService")
+local PromiseModule = require(Parent.Promise)
+local LoginRequestsModule = require(AuthCommon.Http.Requests.LoginRequests)
+local LoginResultModule = require(AuthCommon.Models.LoginResult)
+local LoginErrorCodesModule = require(AuthCommon.Enums.LoginErrorCodes)
+local LoginMethodsModule = require(AuthCommon.Enums.LoginMethods)
+local AppStorageUtilitiesModule = require(AuthCommon.Utils.AppStorageUtilities)
+local FFlagEnableLastLoginMethodTracking = require(Parent.SharedFlags).FFlagEnableLastLoginMethodTracking
+local FFlagEnableRecordLogin = require(Parent.SharedFlags).FFlagEnableRecordLogin
+local Logger = require(Parent.Loggers).Logger
+local RecordLoginModule = require(AuthCommon.Utils.recordLogin)
 
-return function(p1, p2, p3)
-	-- upvalues: loginRequestsModule (ref), loginResultModule (ref), fFlagEnableLastLoginMethodTracking (ref), appStorageUtilitiesModule (ref), loginMethodsModule (ref), fFlagEnableRecordLogin (ref), recordLoginModule (ref), logger (ref), httpService (ref), loginErrorCodesModule (ref), promiseModule (ref)
-	return function(_)
-		-- upvalues: loginRequestsModule (copy), p1 (ref), p2 (ref), p3 (ref), loginResultModule (copy), fFlagEnableLastLoginMethodTracking (copy), appStorageUtilitiesModule (copy), loginMethodsModule (copy), fFlagEnableRecordLogin (copy), recordLoginModule (copy), logger (copy), httpService (copy), loginErrorCodesModule (copy), promiseModule (copy)
-		return loginRequestsModule.logByPasskey(p1, p2, p3):andThen(function(p4)
-			-- upvalues: loginResultModule (copy), fFlagEnableLastLoginMethodTracking (copy), appStorageUtilitiesModule (copy), loginMethodsModule (copy), fFlagEnableRecordLogin (copy), recordLoginModule (copy)
-			assert(p4, "no login attempt result")
-			assert(#p4 == 1, "no result or more than one result")
-			local var1 = loginResultModule.fromJsonData(p4[1])
-			assert(var1, "result invalid")
+return function(p1, p2, p3) --[[ Line: 19 | Named "loginByPasskey" ]]
+	-- upvalues: LoginRequestsModule (copy), LoginResultModule (copy), FFlagEnableLastLoginMethodTracking (copy), AppStorageUtilitiesModule (copy), LoginMethodsModule (copy), FFlagEnableRecordLogin (copy), RecordLoginModule (copy), Logger (copy), HttpService (copy), LoginErrorCodesModule (copy), PromiseModule (copy)
+	return function(_) --[[ Line: 20 ]]
+		-- upvalues: LoginRequestsModule (upval), p1 (copy), p2 (copy), p3 (copy), LoginResultModule (upval), FFlagEnableLastLoginMethodTracking (upval), AppStorageUtilitiesModule (upval), LoginMethodsModule (upval), FFlagEnableRecordLogin (upval), RecordLoginModule (upval), Logger (upval), HttpService (upval), LoginErrorCodesModule (upval), PromiseModule (upval)
+		return LoginRequestsModule.logByPasskey(p1, p2, p3):andThen(function(Entry) --[[ Line: 21 ]]
+			-- upvalues: LoginResultModule (upval), FFlagEnableLastLoginMethodTracking (upval), AppStorageUtilitiesModule (upval), LoginMethodsModule (upval), FFlagEnableRecordLogin (upval), RecordLoginModule (upval)
+			assert(Entry, "no login attempt result")
+			assert(#Entry == 1, "no result or more than one result")
+			local FromJsonDataResult = LoginResultModule.fromJsonData(Entry[1])
+			assert(FromJsonDataResult, "result invalid")
 			
-			if fFlagEnableLastLoginMethodTracking then
-				appStorageUtilitiesModule.setLastSuccessfulSignInMethod(loginMethodsModule.Passkey)
+			if FFlagEnableLastLoginMethodTracking then
+				AppStorageUtilitiesModule.setLastSuccessfulSignInMethod(LoginMethodsModule.Passkey)
 			end
-			if fFlagEnableRecordLogin then
-				pcall(function()
-					-- upvalues: recordLoginModule (copy), var1 (ref), loginMethodsModule (copy)
-					recordLoginModule(var1, loginMethodsModule.Passkey, var1.user.name)
+			if FFlagEnableRecordLogin then
+				pcall(function() --[[ Line: 30 ]]
+					-- upvalues: RecordLoginModule (upval), FromJsonDataResult (copy), LoginMethodsModule (upval)
+					RecordLoginModule(FromJsonDataResult, LoginMethodsModule.Passkey, FromJsonDataResult.user.name)
 				end)
 			end
-			return var1
-		end, function(p4)
-			-- upvalues: logger (copy), httpService (copy), loginErrorCodesModule (copy), promiseModule (copy)
-			logger:error("Error logging in by passkey. Error: {}", p4.Body)
-			local body = httpService:JSONDecode(p4.Body)
-			local code = body.errors[1].code
-			local var1 = "Authentication.Login.Response.SomethingWentWrong"
-			local userFacingMessage = body and (body.errors and (body.errors[1] and body.errors[1].userFacingMessage))
+			return FromJsonDataResult
+		end, function(p4) --[[ Line: 36 ]]
+			-- upvalues: Logger (upval), HttpService (upval), LoginErrorCodesModule (upval), PromiseModule (upval)
+			Logger:error("Error logging in by passkey. Error: {}", p4.Body)
+			local Data = HttpService:JSONDecode(p4.Body)
+			local Code = Data.errors[1].code
+			local ErrorKey = "Authentication.Login.Response.SomethingWentWrong"
+			local UserFacingMessage = Data and (Data.errors and (Data.errors[1] and Data.errors[1].userFacingMessage))
 			
-			if code == loginErrorCodesModule.IncorrectCValueOrPassword then
-				var1 = "Authentication.Login.Response.InvalidPasskeyCredential"
+			if Code == LoginErrorCodesModule.IncorrectCValueOrPassword then
+				ErrorKey = "Authentication.Login.Response.InvalidPasskeyCredential"
 			end
-			return promiseModule.reject({
-				errorCode = code,
-				errorKey = var1,
-				userFacingMessage = userFacingMessage
+			return PromiseModule.reject({
+				errorCode = Code,
+				errorKey = ErrorKey,
+				userFacingMessage = UserFacingMessage
 			})
 		end)
 	end

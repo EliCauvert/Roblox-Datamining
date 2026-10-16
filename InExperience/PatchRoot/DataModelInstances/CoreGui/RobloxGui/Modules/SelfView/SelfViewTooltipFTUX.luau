@@ -1,80 +1,80 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local userInputService = game:GetService("UserInputService")
-local coreGuiService = game:GetService("CoreGui")
-local _ = coreGuiService:WaitForChild("RobloxGui")
-local reactModule = require(corePackagesService.Packages.React)
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local withTooltip = UIBloxModule.App.Dialog.TooltipV2.withTooltip
-local tooltipOrientation = UIBloxModule.App.Dialog.Enum.TooltipOrientation
-local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
-local promiseModule = require(corePackagesService.Packages.Promise)
+﻿local CorePackages = game:GetService("CorePackages")
+local UserInputService = game:GetService("UserInputService")
+local CoreGui = game:GetService("CoreGui")
+local _ = CoreGui:WaitForChild("RobloxGui")
+local ReactModule = require(CorePackages.Packages.React)
+local UIBloxModule = require(CorePackages.Packages.UIBlox)
+local WithTooltipFunction = UIBloxModule.App.Dialog.TooltipV2.withTooltip
+local TooltipOrientation = UIBloxModule.App.Dialog.Enum.TooltipOrientation
+local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
+local PromiseModule = require(CorePackages.Packages.Promise)
 
-return function(p1)
-	-- upvalues: reactModule (ref), robloxTranslatorModule (ref), coreGuiService (ref), tooltipOrientation (ref), userInputService (ref), promiseModule (ref), withTooltip (ref)
-	local var1, var2 = reactModule.useState(true)
-	local fallbackText = p1.fallbackText
-	pcall(function()
-		-- upvalues: fallbackText (write), robloxTranslatorModule (copy), p1 (ref)
-		fallbackText = robloxTranslatorModule:FormatByKey(p1.translationKey)
+return function(p1) --[[ Line: 15 ]]
+	-- upvalues: ReactModule (copy), RobloxTranslatorModule (copy), CoreGui (copy), TooltipOrientation (copy), UserInputService (copy), PromiseModule (copy), WithTooltipFunction (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(true)
+	local FallbackText = p1.fallbackText
+	pcall(function() --[[ Line: 19 ]]
+		-- upvalues: FallbackText (ref), RobloxTranslatorModule (upval), p1 (copy)
+		FallbackText = RobloxTranslatorModule:FormatByKey(p1.translationKey)
 	end)
-	local t = {
+	local config = {
 		textAlignment = Enum.TextXAlignment.Left,
-		bodyText = fallbackText
+		bodyText = FallbackText
 	}
-	local t_1 = {
+	local config1 = {
 		DisplayOrder = 10,
-		active = var1,
-		guiTarget = coreGuiService,
-		preferredOrientation = tooltipOrientation.Left
+		active = UseStateResult,
+		guiTarget = CoreGui,
+		preferredOrientation = TooltipOrientation.Left
 	}
-	local inputBeganConnection = nil
+	local Connection = nil
 	
-	local _ = function()
-		-- upvalues: var2 (ref), inputBeganConnection (write)
-		var2(false)
+	local function _() --[[ Line: 35 ]]
+		-- upvalues: UseStateResult2 (copy), Connection (ref)
+		UseStateResult2(false)
 		
-		if inputBeganConnection then
-			inputBeganConnection:Disconnect()
-			inputBeganConnection = nil
+		if Connection then
+			Connection:Disconnect()
+			Connection = nil
 		end
 	end
 	
-	inputBeganConnection = userInputService.InputBegan:Connect(function(p2)
-		-- upvalues: var2 (ref), inputBeganConnection (write)
-		local userInputType = p2.UserInputType
+	Connection = UserInputService.InputBegan:Connect(function(Input) --[[ Line: 44 ]]
+		-- upvalues: UseStateResult2 (copy), Connection (ref)
+		local UserInputType = Input.UserInputType
 		
-		if userInputType == Enum.UserInputType.MouseButton1 or userInputType == Enum.UserInputType.Touch then
-			var2(false)
+		if UserInputType == Enum.UserInputType.MouseButton1 or UserInputType == Enum.UserInputType.Touch then
+			UseStateResult2(false)
 			
-			if inputBeganConnection then
-				inputBeganConnection:Disconnect()
-				inputBeganConnection = nil
+			if Connection then
+				Connection:Disconnect()
+				Connection = nil
 			end
 		end
 	end)
-	promiseModule.delay(p1.tooltipLifetime):andThen(function()
-		-- upvalues: var2 (ref), inputBeganConnection (write)
-		var2(false)
+	PromiseModule.delay(p1.tooltipLifetime):andThen(function() --[[ Line: 50 ]]
+		-- upvalues: UseStateResult2 (copy), Connection (ref)
+		UseStateResult2(false)
 		
-		if inputBeganConnection then
-			inputBeganConnection:Disconnect()
-			inputBeganConnection = nil
+		if Connection then
+			Connection:Disconnect()
+			Connection = nil
 		end
 	end)
 	
-	return withTooltip(t, t_1, function(p2)
-		-- upvalues: reactModule (copy)
-		local var3 = function(p3)
-			-- upvalues: p2 (ref)
-			p2(p3)
+	return WithTooltipFunction(config, config1, function(Callback) --[[ Line: 54 ]]
+		-- upvalues: ReactModule (upval)
+		local function v17(p2) --[[ Line: 55 ]]
+			-- upvalues: Callback (copy)
+			Callback(p2)
 		end
 		
-		return reactModule.createElement("Frame", {
+		return ReactModule.createElement("Frame", {
 			Visible = false,
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 1, 0),
-			[reactModule.Change.AbsoluteSize] = var3,
-			[reactModule.Change.AbsolutePosition] = var3
+			[ReactModule.Change.AbsoluteSize] = v17,
+			[ReactModule.Change.AbsolutePosition] = v17
 		})
 	end)
 end

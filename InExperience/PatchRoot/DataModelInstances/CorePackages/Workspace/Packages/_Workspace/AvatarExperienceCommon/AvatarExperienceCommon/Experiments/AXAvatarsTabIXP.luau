@@ -1,30 +1,28 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceCommon").Parent
-local appUserLayers = require(parent.ExperimentLayers).AppUserLayers
-local IXPUtilsModule = require(parent.IXPUtils)
-local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
-local fFlagAXAvatarsTabIXP = avatarExperienceFlagsModule.FFlagAXAvatarsTabIXP
-local fFlagAXAvatarsTabIXPEnabledForAll = avatarExperienceFlagsModule.FFlagAXAvatarsTabIXPEnabledForAll
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceCommon").Parent
+local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
+local FFlagAXAvatarsTabIXP = AvatarExperienceFlagsModule.FFlagAXAvatarsTabIXP
+local FFlagAXAvatarsTabIXPEnabledForAll = AvatarExperienceFlagsModule.FFlagAXAvatarsTabIXPEnabledForAll
 
-return IXPUtilsModule.defineIXPTest({
+return require(Parent.IXPUtils).defineIXPTest({
 	name = "AvatarExperience.UA.MarketplaceView.AvatarsTab",
 	recordExposure = false,
-	layer = appUserLayers.AvatarExperienceUAMarketplaceView,
-	getIsUserInExperiment = function(p1)
+	layer = require(Parent.ExperimentLayers).AppUserLayers.AvatarExperienceUAMarketplaceView,
+	getIsUserInExperiment = function(p1): boolean --[[ Line: 27 ]]
 		return p1.IsAvatarsTabEnabled ~= nil
 	end,
-	getDependentFlagsEnabled = function()
+	getDependentFlagsEnabled = function(): boolean --[[ Line: 31 ]]
 		return true
 	end,
-	getEnabledFlag = function()
-		-- upvalues: fFlagAXAvatarsTabIXP (ref)
-		return fFlagAXAvatarsTabIXP
+	getEnabledFlag = function() --[[ Line: 35 ]]
+		-- upvalues: FFlagAXAvatarsTabIXP (copy)
+		return FFlagAXAvatarsTabIXP
 	end,
-	getEnabledForAllFlag = function()
-		-- upvalues: fFlagAXAvatarsTabIXPEnabledForAll (ref)
-		return fFlagAXAvatarsTabIXPEnabledForAll
+	getEnabledForAllFlag = function() --[[ Line: 39 ]]
+		-- upvalues: FFlagAXAvatarsTabIXPEnabledForAll (copy)
+		return FFlagAXAvatarsTabIXPEnabledForAll
 	end,
 	variables = {
-		EnabledForUser = function(p1, p2)
+		EnabledForUser = function(p1, p2) --[[ Line: 44 ]]
 			return p2 or (p1.IsAvatarsTabEnabled or false)
 		end
 	}

@@ -1,6 +1,6 @@
-﻿local robloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
+﻿local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
 
 return {
-	selfViewVisibilityUpdatedSignal = require(robloxGui.Modules.SelfView.selfViewVisibilityUpdatedSignal),
-	getSelfViewVisibility = require(robloxGui.Modules.SelfView.publicApi).getSelfViewIsOpenAndVisible
+	selfViewVisibilityUpdatedSignal = require(RobloxGui.Modules.SelfView.selfViewVisibilityUpdatedSignal),
+	getSelfViewVisibility = require(RobloxGui.Modules.SelfView.publicApi).getSelfViewIsOpenAndVisible
 }

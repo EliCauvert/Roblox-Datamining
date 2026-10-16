@@ -1,8 +1,8 @@
-﻿local signalsModule = require(script:FindFirstAncestor("BuildExperience").Parent.Signals)
-local buildExperienceLibraryImageClasses = game:DefineFastString("BuildExperienceLibraryImageClasses", "Decal,Texture,ImageLabel,ImageButton")
-local buildExperienceLibraryRoots = game:DefineFastString("BuildExperienceLibraryRoots", "Workspace,ReplicatedStorage,ReplicatedFirst,Lighting,SoundService,StarterGui,StarterPack,StarterPlayer")
-local buildExperienceLibraryDescriptionAttribute = game:DefineFastString("BuildExperienceLibraryDescriptionAttribute", "SemanticDescription")
-local t = {
+﻿local SignalsModule = require(script:FindFirstAncestor("BuildExperience").Parent.Signals)
+local BuildExperienceLibraryImageClasses = game:DefineFastString("BuildExperienceLibraryImageClasses", "Decal,Texture,ImageLabel,ImageButton")
+local BuildExperienceLibraryRoots = game:DefineFastString("BuildExperienceLibraryRoots", "Workspace,ReplicatedStorage,ReplicatedFirst,Lighting,SoundService,StarterGui,StarterPack,StarterPlayer")
+local BuildExperienceLibraryDescriptionAttribute = game:DefineFastString("BuildExperienceLibraryDescriptionAttribute", "SemanticDescription")
+local config = {
 	Decal = "Texture",
 	Texture = "Texture",
 	ImageLabel = "Image",
@@ -11,56 +11,56 @@ local t = {
 	Beam = "Texture",
 	Trail = "Texture"
 }
-local t_1 = { Model = 1, Image = 2, Sound = 3 }
+local config1 = { Model = 1, Image = 2, Sound = 3 }
 
-local function parseList(p1)
-	local t = {}
+local function parseList(Text: string) --[[ Line: 46 ]]
+	local List = {}
 	
-	for i in string.gmatch(p1, "[^,]+") do
-		local match = string.match(i, "^%s*(.-)%s*$")
+	for i in string.gmatch(Text, "[^,]+") do
+		local Match: string? = string.match(i, "^%s*(.-)%s*$")
 		
-		if match ~= "" and not table.find(t, match) then
-			table.insert(t, match)
+		if Match ~= "" and not table.find(List, Match) then
+			table.insert(List, Match)
 		end
 	end
-	return t
+	return List
 end
 
-return function(p2)
-	-- upvalues: parseList (ref), buildExperienceLibraryImageClasses (ref), buildExperienceLibraryRoots (ref), signalsModule (ref), t (ref), buildExperienceLibraryDescriptionAttribute (ref), t_1 (ref)
-	p2 = p2 or game
-	local var1 = parseList(buildExperienceLibraryImageClasses)
-	local var2 = parseList(buildExperienceLibraryRoots)
-	local var3, var4 = signalsModule.createSignal({})
-	local tbl = setmetatable({}, { __mode = "k" })
-	local var5 = 0
-	local var6 = nil
+return function(p1) --[[ Line: 57 | Named "createBuildLibraryStore" ]]
+	-- upvalues: parseList (copy), BuildExperienceLibraryImageClasses (copy), BuildExperienceLibraryRoots (copy), SignalsModule (copy), config (copy), BuildExperienceLibraryDescriptionAttribute (copy), config1 (copy)
+	local P0 = p1 or game
+	local ParseListResult = parseList(BuildExperienceLibraryImageClasses)
+	local ParseListResult1 = parseList(BuildExperienceLibraryRoots)
+	local Signal, Signal2 = SignalsModule.createSignal({})
+	local self = setmetatable({}, { __mode = "k" })
+	local Count = 0
+	local Ancestor = nil
 	
-	local function _(p3)
-		-- upvalues: tbl (ref), var5 (write)
-		if tbl[p3] == nil then
-			var5 += 1
-			tbl[p3] = `Instance:{var5}`
+	local function _(Key) --[[ Line: 65 | Named "getId" ]]
+		-- upvalues: self (copy), Count (ref)
+		if self[Key] == nil then
+			Count += 1
+			self[Key] = `Instance:{Count}`
 		end
-		return tbl[p3]
+		return self[Key]
 	end
 	
-	local t_2 = {}
+	local t = {}
 	
-	local function sameItems(p3, p4)
-		if #p3 ~= #p4 then
+	local function sameItems(p2, List): boolean --[[ Line: 76 ]]
+		if #p2 ~= #List then
 			return false
 		end
-		for i, v in p4 do
-			local var7 = p3[i]
+		for i, value in List do
+			local v1 = p2[i]
 			
-			for i_1, v_1 in v do
-				if var7[i_1] ~= v_1 then
+			for i1, value1 in value do
+				if v1[i1] ~= value1 then
 					return false
 				end
 			end
-			for i_1 in var7 do
-				if v[i_1] == nil then
+			for i2 in v1 do
+				if value[i2] == nil then
 					return false
 				end
 			end
@@ -69,149 +69,151 @@ return function(p2)
 	end
 	
 	return {
-		refresh = function()
-			-- upvalues: var6 (write), tbl (ref), var5 (write), var2 (ref), p2 (ref), var1 (ref), t (copy), buildExperienceLibraryDescriptionAttribute (copy), t_1 (copy), sameItems (ref), var3 (ref), t_2 (write), var4 (ref)
-			local t_3 = {}
-			local t_4 = {}
-			var6 = nil
+		refresh = function() --[[ Line: 96 ]]
+			-- upvalues: Ancestor (ref), self (copy), Count (ref), ParseListResult1 (copy), P0 (copy), ParseListResult (copy), config (upval), BuildExperienceLibraryDescriptionAttribute (upval), config1 (upval), sameItems (copy), Signal (copy), t (ref), Signal2 (copy)
+			local List = {}
+			local t1 = {}
+			Ancestor = nil
 			
-			local function parentFolderId(p5, p6, p7, p8)
-				-- upvalues: tbl (copy), var5 (copy), t_4 (ref), t_3 (ref), parentFolderId (ref)
-				local parent = p5.Parent
-				while parent ~= nil and parent ~= p6 do
-					if parent.ClassName ~= "Folder" then
-						parent = parent.Parent
+			local function parentFolderId(Parent, Parent1, RootName, Kind): string? --[[ Line: 100 ]]
+				-- upvalues: self (upval), Count (upval), t1 (copy), List (copy), parentFolderId (copy)
+				local Parent2 = Parent.Parent
+				while Parent2 ~= nil and Parent2 ~= Parent1 do
+					if Parent2.ClassName ~= "Folder" then
+						Parent2 = Parent2.Parent
 						continue
 					end
-					local var8 = "%*:%*"
+					local v2 = "%*:%*"
+					local Parent3 = Parent2
 					
-					if tbl[parent] == nil then
-						var5 += 1
-						tbl[parent] = `Instance:{var5}`
+					if self[Parent3] == nil then
+						Count += 1
+						self[Parent3] = `Instance:{Count}`
 					end
-					var8 = var8:format(tbl[parent], p8)
+					local FormatResult: string = v2:format(self[Parent3], Kind)
 					
-					if not t_4[var8] then
-						t_4[var8] = true
-						table.insert(t_3, {
+					if not t1[FormatResult] then
+						t1[FormatResult] = true
+						table.insert(List, {
 							className = "Folder",
-							id = var8,
-							instance = parent,
-							displayName = parent.Name,
-							path = parent:GetFullName(),
-							kind = p8,
-							folderId = parentFolderId(parent, p6, p7, p8),
-							rootName = p7
+							id = FormatResult,
+							instance = Parent2,
+							displayName = Parent2.Name,
+							path = Parent2:GetFullName(),
+							kind = Kind,
+							folderId = parentFolderId(Parent2, Parent1, RootName, Kind),
+							rootName = RootName
 						})
 					end
-					return var8
+					return FormatResult
 				end
 				return nil
 			end
 			
-			for i, v in var2 do
-				local ok, status = pcall(function()
-					-- upvalues: p2 (copy), v (ref)
-					return p2:GetService(v)
+			for _, RootName in ParseListResult1 do
+				local Success, Result = pcall(function() --[[ Line: 130 ]]
+					-- upvalues: P0 (upval), RootName (copy)
+					return P0:GetService(RootName)
 				end)
 				
-				if ok and status ~= nil then
-					if v == "Workspace" then
-						var6 = status
+				if Success and Result ~= nil then
+					if RootName == "Workspace" then
+						Ancestor = Result
 					end
-					local children = status:GetChildren()
-					local var9 = 1
-					while var9 <= #children do
-						local var10 = children[var9]
-						var9 += 1
-						local className = var10.ClassName
+					local Children = Result:GetChildren()
+					local Count1 = 1
+					while Count1 <= #Children do
+						local Child = Children[Count1]
+						Count1 += 1
+						local ClassName = Child.ClassName
 						
-						if className ~= "Model" then
-							for i_1, v_1 in var10:GetChildren() do
-								table.insert(children, v_1)
+						if ClassName ~= "Model" then
+							for _, child in Child:GetChildren() do
+								table.insert(Children, child)
 							end
 						end
-						local var11
-						local var12 = if table.find(var1, className) then t[className] else nil
-						local _ = nil
+						local Entry = if table.find(ParseListResult, ClassName) then config[ClassName] else nil
+						local Kind = nil
 						
-						if className == "Model" then
-							var11 = "Model"
-						elseif className == "Sound" then
-							var11 = "Sound"
-							var12 = "SoundId"
-						elseif var12 == nil then continue end
-						var11 = "Image"
-						local var13 = if var12 ~= nil then nil else var10[var12]
-						
-						if var13 == "" then continue end
-						local i_1 = var10:GetAttribute(buildExperienceLibraryDescriptionAttribute)
-						local t_5 = {}
-						
-						if tbl[var10] == nil then
-							var5 += 1
-							tbl[var10] = `Instance:{var5}`
+						if ClassName == "Model" then
+							Kind = "Model"
+						elseif ClassName == "Sound" then
+							Kind = "Sound"
+							Entry = "SoundId"
+						else
+							if Entry == nil then continue end
+							Kind = "Image"
 						end
-						t_5.id = tbl[var10]
-						t_5.instance = var10
-						t_5.displayName = var10.Name
-						t_5.path = var10:GetFullName()
-						t_5.className = className
-						t_5.kind = var11
-						t_5.folderId = parentFolderId(var10, status, v, var11)
-						t_5.rootName = v
-						t_5.description = if type(i_1) == "string" and i_1 ~= "" then i_1 else nil
-						t_5.image = if var11 == "Image" then var13 else nil
-						t_5.soundId = if var11 == "Sound" then var13 else nil
-						t_5.model = if var11 == "Model" then var10 else nil
-						table.insert(t_3, t_5)
+						local ChildEntry = if Entry == nil then nil else Child[Entry]
+						
+						if ChildEntry == "" then continue end
+						local Attribute = Child:GetAttribute(BuildExperienceLibraryDescriptionAttribute)
+						local t2 = {}
+						
+						if self[Child] == nil then
+							Count += 1
+							self[Child] = `Instance:{Count}`
+						end
+						t2.id = self[Child]
+						t2.instance = Child
+						t2.displayName = Child.Name
+						t2.path = Child:GetFullName()
+						t2.className = ClassName
+						t2.kind = Kind
+						t2.folderId = parentFolderId(Child, Result, RootName, Kind)
+						t2.rootName = RootName
+						t2.description = if type(Attribute) == "string" and Attribute ~= "" then Attribute else nil
+						t2.image = if Kind == "Image" then ChildEntry else nil
+						t2.soundId = if Kind == "Sound" then ChildEntry else nil
+						t2.model = if Kind == "Model" then Child else nil
+						table.insert(List, t2)
 					end
 				end
 			end
-			local t_5 = {}
+			local t3 = {}
 			
-			for i_1, v_1 in t_3 do
-				t_5[v_1] = string.lower(v_1.displayName)
+			for _, value in List do
+				t3[value] = string.lower(value.displayName)
 			end
-			table.sort(t_3, function(p9, p10)
-				-- upvalues: t_1 (copy), t_5 (ref)
-				if p9.kind ~= p10.kind then
-					return t_1[p9.kind] < t_1[p10.kind]
+			table.sort(List, function(A, B): boolean --[[ Line: 187 ]]
+				-- upvalues: config1 (upval), t3 (copy)
+				if A.kind == B.kind then
+					local Entry = t3[A]
+					local Entry1 = t3[B]
+					
+					return if Entry == Entry1 then if A.path == B.path then A.id < B.id else A.path < B.path else Entry < Entry1
+				else
+					return config1[A.kind] < config1[B.kind]
 				end
-				local var14 = t_5[p9]
-				local var15 = t_5[p10]
-				
-				return if var14 == var15 then if p9.path == p10.path then p9.id < p10.id else p9.path < p10.path else var14 < var15
 			end)
 			
-			if sameItems(var3(false), t_3) then return end
-			t_2 = {}
+			if sameItems(Signal(false), List) then return end
+			t = {}
 			
-			for i_2, v_2 in t_3 do
-				t_2[v_2.id] = v_2
+			for _, value1 in List do
+				t[value1.id] = value1
 			end
-			var4(t_3)
+			Signal2(List)
 		end,
-		getItems = var3,
-		getItem = function(p9, p10)
-			-- upvalues: var3 (ref), t_2 (write)
-			var3(p9)
+		getItems = Signal,
+		getItem = function(p3, p4) --[[ Line: 210 ]]
+			-- upvalues: Signal (copy), t (ref)
+			Signal(p3)
 			
-			return t_2[p10]
+			return t[p4]
 		end,
-		resolveWorldItem = function(p9)
-			-- upvalues: tbl (ref), t_2 (write), var6 (write)
-			local var14
-			local var15 = p9
-			while var15 ~= nil do
-				local var16 = tbl[var15]
-				var14 = if var16 ~= nil then nil else t_2[var16]
+		resolveWorldItem = function(Parent) --[[ Line: 215 ]]
+			-- upvalues: self (copy), t (ref), Ancestor (ref)
+			local Parent1 = Parent
+			local Entry = nil
+			while Parent1 ~= nil do
+				local SelfEntry = self[Parent1]
+				Entry = if SelfEntry == nil then nil else t[SelfEntry]
 				
-				if var14 == nil or var14.model ~= var15 then
-					var15 = var15.Parent
-					continue
+				if Entry ~= nil and Entry.model == Parent1 then
+					return if Ancestor == nil or not Parent1:IsDescendantOf(Ancestor) then nil else Entry
 				end
-				return if var6 == nil or not var15:IsDescendantOf(var6) then nil else var14
+				Parent1 = Parent1.Parent
 			end
 			return nil
 		end

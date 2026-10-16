@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Index.LuaSocialLibrariesDeps.LuaSocialLibrariesDeps)
+﻿return (require(script.Parent._Index.LuaSocialLibrariesDeps.LuaSocialLibrariesDeps))

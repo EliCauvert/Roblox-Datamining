@@ -1,70 +1,70 @@
-﻿local editProfile = script:FindFirstAncestor("EditProfile")
-local parent = editProfile.Parent
-local reactModule = require(parent.React)
-local UIBloxModule = require(parent.UIBlox)
-local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
-local useScreenSize = require(parent.RobloxAppHooks).useScreenSize
-local textKeysModule = require(editProfile.Common.TextKeys)
-local constantsModule = require(editProfile.Common.Constants)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local buttonType = UIBloxModule.App.Button.Enum.ButtonType
-local useNavigationProps = require(parent.RobloxAppNavigation).useNavigationProps
-local useNavigation = require(parent.Navigation).useNavigation
-local focusNavigatorWrapperModule = require(editProfile.Utils.FocusNavigatorWrapper)
-local fFlagEditProfileFixFocusNavigationModule = require(editProfile.Flags.FFlagEditProfileFixFocusNavigation)
+﻿local EditProfile = script:FindFirstAncestor("EditProfile")
+local Parent = EditProfile.Parent
+local ReactModule = require(Parent.React)
+local UIBloxModule = require(Parent.UIBlox)
+local InteractiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
+local UseScreenSizeFunction = require(Parent.RobloxAppHooks).useScreenSize
+local TextKeysModule = require(EditProfile.Common.TextKeys)
+local ConstantsModule = require(EditProfile.Common.Constants)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
+local UseNavigationPropsFunction = require(Parent.RobloxAppNavigation).useNavigationProps
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local FocusNavigatorWrapperModule = require(EditProfile.Utils.FocusNavigatorWrapper)
+local FFlagEditProfileFixFocusNavigationModule = require(EditProfile.Flags.FFlagEditProfileFixFocusNavigation)
 
-return function()
-	-- upvalues: useNavigationProps (ref), useNavigation (ref), useScreenSize (ref), useLocalization (ref), textKeysModule (ref), constantsModule (ref), fFlagEditProfileFixFocusNavigationModule (ref), focusNavigatorWrapperModule (ref), reactModule (ref), interactiveAlert (ref), buttonType (ref)
-	local var1 = useNavigationProps(function(_, p1)
+return function() --[[ Line: 18 | Named "EditSocialNetworksErrorModal" ]]
+	-- upvalues: UseNavigationPropsFunction (copy), UseNavigationFunction (copy), UseScreenSizeFunction (copy), UseLocalizationFunction (copy), TextKeysModule (copy), ConstantsModule (copy), FFlagEditProfileFixFocusNavigationModule (copy), FocusNavigatorWrapperModule (copy), ReactModule (copy), InteractiveAlert (copy), ButtonType (copy)
+	local UseNavigationPropsResult = UseNavigationPropsFunction(function(_, p1) --[[ Line: 19 ]]
 		return { errorCode = p1.errorCode }
 	end)
-	local var2 = useNavigation()
-	local var3 = useScreenSize()
-	local var4 = useLocalization({
-		title = textKeysModule.SocialNetworksError,
-		InvalidFacebook = textKeysModule.InvalidFacebook,
-		InvalidX = textKeysModule.InvalidX,
-		InvalidYouTube = textKeysModule.InvalidYouTube,
-		InvalidTwitch = textKeysModule.InvalidTwitch,
-		InvalidGuilded = textKeysModule.InvalidGuilded,
-		OK = textKeysModule.OK
+	local UseNavigationResult = UseNavigationFunction()
+	local UseScreenSizeResult = UseScreenSizeFunction()
+	local UseLocalizationResult = UseLocalizationFunction({
+		title = TextKeysModule.SocialNetworksError,
+		InvalidFacebook = TextKeysModule.InvalidFacebook,
+		InvalidX = TextKeysModule.InvalidX,
+		InvalidYouTube = TextKeysModule.InvalidYouTube,
+		InvalidTwitch = TextKeysModule.InvalidTwitch,
+		InvalidGuilded = TextKeysModule.InvalidGuilded,
+		OK = TextKeysModule.OK
 	})
-	local errorCode = ({
-		[constantsModule.SocialNetworksErrorCodes.Facebook] = var4.InvalidFacebook,
-		[constantsModule.SocialNetworksErrorCodes.Twitter] = var4.InvalidX,
-		[constantsModule.SocialNetworksErrorCodes.YouTube] = var4.InvalidYouTube,
-		[constantsModule.SocialNetworksErrorCodes.Twitch] = var4.InvalidTwitch,
-		[constantsModule.SocialNetworksErrorCodes.Guilded] = var4.InvalidGuilded
-	})[var1.errorCode]
+	local Entry = ({
+		[ConstantsModule.SocialNetworksErrorCodes.Facebook] = UseLocalizationResult.InvalidFacebook,
+		[ConstantsModule.SocialNetworksErrorCodes.Twitter] = UseLocalizationResult.InvalidX,
+		[ConstantsModule.SocialNetworksErrorCodes.YouTube] = UseLocalizationResult.InvalidYouTube,
+		[ConstantsModule.SocialNetworksErrorCodes.Twitch] = UseLocalizationResult.InvalidTwitch,
+		[ConstantsModule.SocialNetworksErrorCodes.Guilded] = UseLocalizationResult.InvalidGuilded
+	})[UseNavigationPropsResult.errorCode]
 	
-	local function onClose()
-		-- upvalues: var2 (ref)
-		var2.goBack()
+	local function onClose() --[[ Line: 45 ]]
+		-- upvalues: UseNavigationResult (copy)
+		UseNavigationResult.goBack()
 	end
 	
-	return if fFlagEditProfileFixFocusNavigationModule then focusNavigatorWrapperModule({ onClose = onClose }, {
-		reactModule.createElement(interactiveAlert, {
-			screenSize = var3,
-			title = var4.title,
-			bodyText = errorCode,
+	return if FFlagEditProfileFixFocusNavigationModule then FocusNavigatorWrapperModule({ onClose = onClose }, {
+		ReactModule.createElement(InteractiveAlert, {
+			screenSize = UseScreenSizeResult,
+			title = UseLocalizationResult.title,
+			bodyText = Entry,
 			buttonStackInfo = {
 				buttons = {
 					{
-						buttonType = buttonType.PrimarySystem,
-						props = { onActivated = onClose, text = var4.OK }
+						buttonType = ButtonType.PrimarySystem,
+						props = { onActivated = onClose, text = UseLocalizationResult.OK }
 					}
 				}
 			}
 		})
-	}) else reactModule.createElement(interactiveAlert, {
-		screenSize = var3,
-		title = var4.title,
-		bodyText = errorCode,
+	}) else ReactModule.createElement(InteractiveAlert, {
+		screenSize = UseScreenSizeResult,
+		title = UseLocalizationResult.title,
+		bodyText = Entry,
 		buttonStackInfo = {
 			buttons = {
 				{
-					buttonType = buttonType.PrimarySystem,
-					props = { onActivated = onClose, text = var4.OK }
+					buttonType = ButtonType.PrimarySystem,
+					props = { onActivated = onClose, text = UseLocalizationResult.OK }
 				}
 			}
 		}

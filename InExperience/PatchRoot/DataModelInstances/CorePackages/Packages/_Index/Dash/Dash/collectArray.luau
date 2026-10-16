@@ -1,15 +1,15 @@
 ﻿local _ = require(script.Parent.Types)
-local insert = table.insert
+local InsertFunction = table.insert
 
-return function(p1, p2)
-	-- upvalues: insert (ref)
+return function(List, Callback) --[[ Line: 18 | Named "collectArray" ]]
+	-- upvalues: InsertFunction (copy)
 	local t = {}
 	
-	for i, v in p1 do
-		local var1 = p2(i, v)
+	for i, value in List do
+		local CallbackResult = Callback(i, value)
 		
-		if var1 ~= nil then
-			insert(t, var1)
+		if CallbackResult ~= nil then
+			InsertFunction(t, CallbackResult)
 		end
 	end
 	return t

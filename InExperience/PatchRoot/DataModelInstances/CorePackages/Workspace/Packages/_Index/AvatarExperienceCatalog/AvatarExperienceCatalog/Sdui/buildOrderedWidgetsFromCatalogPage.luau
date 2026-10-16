@@ -1,64 +1,64 @@
-﻿local avatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
-local parent = avatarExperienceCatalog.Parent
-local dataHydrationModule = require(parent.DataHydration)
-local getSduiApiStore = require(parent.SduiSharedUtilities).getSduiApiStore
-local _ = require(avatarExperienceCatalog.Models.WidgetListInfo)
+﻿local AvatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
+local Parent = AvatarExperienceCatalog.Parent
+local DataHydrationModule = require(Parent.DataHydration)
+local GetSduiApiStoreFunction = require(Parent.SduiSharedUtilities).getSduiApiStore
+local _ = require(AvatarExperienceCatalog.Models.WidgetListInfo)
 
-local function asLegacyContent(p1)
-	if typeof(p1) ~= "table" then
+local function asLegacyContent(Content) --[[ Line: 28 ]]
+	if typeof(Content) ~= "table" then
 		return {}
 	end
-	local t = {}
+	local List = {}
 	
-	for i, v in p1 do
-		if typeof(v) == "table" then
-			table.insert(t, v)
+	for _, value in Content do
+		if typeof(value) == "table" then
+			table.insert(List, value)
 		end
 	end
-	return t
+	return List
 end
 
-return function(p2, p3)
-	-- upvalues: getSduiApiStore (ref), dataHydrationModule (ref), asLegacyContent (ref)
-	local t = {}
-	local inputData = getSduiApiStore().getInputData(p2, p3)
+return function(p1, p2) --[[ Line: 42 | Named "buildOrderedWidgetsFromCatalogPage" ]]
+	-- upvalues: GetSduiApiStoreFunction (copy), DataHydrationModule (copy), asLegacyContent (copy)
+	local List = {}
+	local InputData = GetSduiApiStoreFunction().getInputData(p1, p2)
 	
-	if typeof(inputData) ~= "table" then
-		return t
+	if typeof(InputData) ~= "table" then
+		return List
 	end
-	local entryOrder = inputData.entry_order
-	local entryMap = inputData.entry_map
+	local EntryOrder = InputData.entry_order
+	local EntryMap = InputData.entry_map
 	
-	if typeof(entryOrder) ~= "table" or typeof(entryMap) ~= "table" then
-		return t
+	if typeof(EntryOrder) ~= "table" or typeof(EntryMap) ~= "table" then
+		return List
 	end
-	local marketplaceCatalogSortStore = dataHydrationModule.MarketplaceCatalogSort.getMarketplaceCatalogSortStore(false)
+	local MarketplaceCatalogSortStore = DataHydrationModule.MarketplaceCatalogSort.getMarketplaceCatalogSortStore(false)
 	
-	for i, v in entryOrder do
-		if typeof(v) == "string" and v ~= "" then
-			local var1 = entryMap[v]
+	for _, value in EntryOrder do
+		if typeof(value) == "string" and value ~= "" then
+			local Entry = EntryMap[value]
 			
-			if typeof(var1) == "table" then
-				local var2 = if typeof(var1.input_data) == "table" and typeof(var1.input_data.kind) == "table" and typeof(var1.input_data.kind.value) == "table" then var1.input_data.kind.value else nil
-				local var3 = if typeof(var2) == "table" and typeof(var2.id) == "string" then var2.id else nil
+			if typeof(Entry) == "table" then
+				local Value = if typeof(Entry.input_data) == "table" and typeof(Entry.input_data.kind) == "table" and typeof(Entry.input_data.kind.value) == "table" then Entry.input_data.kind.value else nil
+				local Id = if typeof(Value) == "table" and typeof(Value.id) == "string" then Value.id else nil
 				
-				if var3 ~= nil and var3 ~= "" then
-					local marketplaceCatalogSort = marketplaceCatalogSortStore.getMarketplaceCatalogSort(var3)
-					local var4 = if marketplaceCatalogSort and marketplaceCatalogSort.data then marketplaceCatalogSort.data(false) else nil
+				if Id ~= nil and Id ~= "" then
+					local MarketplaceCatalogSort = MarketplaceCatalogSortStore.getMarketplaceCatalogSort(Id)
+					local DataResult = if MarketplaceCatalogSort and MarketplaceCatalogSort.data then MarketplaceCatalogSort.data(false) else nil
 					
-					if var4 then
-						table.insert(t, {
-							id = var3,
-							type = var4.type,
-							tagId = var4.tagId,
-							content = asLegacyContent(var4.content)
+					if DataResult then
+						table.insert(List, {
+							id = Id,
+							type = DataResult.type,
+							tagId = DataResult.tagId,
+							content = asLegacyContent(DataResult.content)
 						})
 					else
-						table.insert(t, { type = nil, tagId = nil, id = var3, content = {} })
+						table.insert(List, { type = nil, tagId = nil, id = Id, content = {} })
 					end
 				end
 			end
 		end
 	end
-	return t
+	return List
 end

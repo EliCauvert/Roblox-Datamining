@@ -1,30 +1,30 @@
-﻿local tModule = require(script:FindFirstAncestor("RoduxGames").Parent.t)
-local t = {}
+﻿local TModule = require(script:FindFirstAncestor("RoduxGames").Parent.t)
+local GameMediaModelModule = {}
 
-function t.new(p1)
-	-- upvalues: t (ref)
-	assert(t.isValid(p1))
-	t.__index = t
-	setmetatable(p1, t)
+function GameMediaModelModule.new(p1) --[[ Line: 19 ]]
+	-- upvalues: GameMediaModelModule (copy)
+	assert(GameMediaModelModule.isValid(p1))
+	GameMediaModelModule.__index = GameMediaModelModule
+	setmetatable(p1, GameMediaModelModule)
 	
 	return p1
 end
 
-function t.mock(p1)
-	-- upvalues: t (ref)
-	p1 = p1 or {}
+function GameMediaModelModule.mock(p1) --[[ Line: 31 ]]
+	-- upvalues: GameMediaModelModule (copy)
+	local P1 = p1 or {}
 	
-	return t.new({
-		assetTypeId = p1.assetTypeId or 1,
-		assetType = p1.assetType or "Image",
-		imageId = p1.imageId or 1234567890,
-		approved = p1.approved or false
-	})
+	return (GameMediaModelModule.new({
+		assetTypeId = P1.assetTypeId or 1,
+		assetType = P1.assetType or "Image",
+		imageId = P1.imageId or 1234567890,
+		approved = P1.approved or false
+	}))
 end
 
-function t.format(p1)
-	-- upvalues: t (ref)
-	return t.new({
+function GameMediaModelModule.format(p1) --[[ Line: 44 ]]
+	-- upvalues: GameMediaModelModule (copy)
+	return (GameMediaModelModule.new({
 		assetTypeId = p1.assetTypeId,
 		assetType = p1.assetType,
 		imageId = p1.imageId,
@@ -32,17 +32,17 @@ function t.format(p1)
 		videoTitle = p1.videoTitle,
 		approved = if p1.approved then p1.approved else false,
 		altText = p1.altText
-	})
+	}))
 end
 
-t.isValid = tModule.strictInterface({
-	assetTypeId = tModule.optional(tModule.number),
-	assetType = tModule.string,
-	imageId = tModule.optional(tModule.number),
-	videoHash = tModule.optional(tModule.string),
-	videoTitle = tModule.optional(tModule.string),
-	approved = tModule.boolean,
-	altText = tModule.optional(tModule.string)
+GameMediaModelModule.isValid = TModule.strictInterface({
+	assetTypeId = TModule.optional(TModule.number),
+	assetType = TModule.string,
+	imageId = TModule.optional(TModule.number),
+	videoHash = TModule.optional(TModule.string),
+	videoTitle = TModule.optional(TModule.string),
+	approved = TModule.boolean,
+	altText = TModule.optional(TModule.string)
 })
 
-return t
+return GameMediaModelModule

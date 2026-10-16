@@ -1,33 +1,32 @@
-﻿local inGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
-local roact = inGameMenuDependenciesModule.Roact
-local cryo = inGameMenuDependenciesModule.Cryo
-local UIBlox = inGameMenuDependenciesModule.UIBlox
-local parent = script.Parent.Parent
-local imageSetLabel = UIBlox.Core.ImageSet.ImageSetLabel
-local imageSetButton = UIBlox.Core.ImageSet.ImageSetButton
-local assetsModule = require(parent.Resources.Assets)
+﻿local InGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
+local Roact = InGameMenuDependenciesModule.Roact
+local Cryo = InGameMenuDependenciesModule.Cryo
+local UIBlox = InGameMenuDependenciesModule.UIBlox
+local ImageSetLabel = UIBlox.Core.ImageSet.ImageSetLabel
+local ImageSetButton = UIBlox.Core.ImageSet.ImageSetButton
+local AssetsModule = require(script.Parent.Parent.Resources.Assets)
 
-local function _(value)
-	-- upvalues: roact (ref), assetsModule (ref), cryo (ref)
-	return roact.forwardRef(function(p1, p2)
-		-- upvalues: assetsModule (copy), cryo (copy), roact (copy), value (ref)
-		local imageKey = assetsModule.Images[p1.imageKey]
+local function _(p1) --[[ Line: 20 | Named "makeAssetImageComponent" ]]
+	-- upvalues: Roact (copy), AssetsModule (copy), Cryo (copy)
+	return Roact.forwardRef(function(p2, p3) --[[ Line: 21 ]]
+		-- upvalues: AssetsModule (upval), Cryo (upval), Roact (upval), p1 (copy)
+		local Image = AssetsModule.Images[p2.imageKey]
 		
-		return roact.createElement(value, cryo.Dictionary.join(cryo.Dictionary.join(p1, { imageKey = cryo.None }, if typeof(imageKey) == "string" then { Image = imageKey } else imageKey, { BackgroundTransparency = 1 }), { [roact.Ref] = p2 }))
+		return Roact.createElement(p1, Cryo.Dictionary.join(Cryo.Dictionary.join(p2, { imageKey = Cryo.None }, if typeof(Image) == "string" then { Image = Image } else Image, { BackgroundTransparency = 1 }), { [Roact.Ref] = p3 }))
 	end)
 end
 
 return {
-	Label = roact.forwardRef(function(p1, p2)
-		-- upvalues: assetsModule (ref), cryo (ref), roact (ref), imageSetLabel (ref)
-		local imageKey = assetsModule.Images[p1.imageKey]
+	Label = Roact.forwardRef(function(p1, p2) --[[ Line: 21 ]]
+		-- upvalues: AssetsModule (copy), Cryo (copy), Roact (copy), ImageSetLabel (copy)
+		local Image = AssetsModule.Images[p1.imageKey]
 		
-		return roact.createElement(imageSetLabel, cryo.Dictionary.join(cryo.Dictionary.join(p1, { imageKey = cryo.None }, if typeof(imageKey) == "string" then { Image = imageKey } else imageKey, { BackgroundTransparency = 1 }), { [roact.Ref] = p2 }))
+		return Roact.createElement(ImageSetLabel, Cryo.Dictionary.join(Cryo.Dictionary.join(p1, { imageKey = Cryo.None }, if typeof(Image) == "string" then { Image = Image } else Image, { BackgroundTransparency = 1 }), { [Roact.Ref] = p2 }))
 	end),
-	Button = roact.forwardRef(function(p1, p2)
-		-- upvalues: assetsModule (ref), cryo (ref), roact (ref), imageSetButton (ref)
-		local imageKey = assetsModule.Images[p1.imageKey]
+	Button = Roact.forwardRef(function(p1, p2) --[[ Line: 21 ]]
+		-- upvalues: AssetsModule (copy), Cryo (copy), Roact (copy), ImageSetButton (copy)
+		local Image = AssetsModule.Images[p1.imageKey]
 		
-		return roact.createElement(imageSetButton, cryo.Dictionary.join(cryo.Dictionary.join(p1, { imageKey = cryo.None }, if typeof(imageKey) == "string" then { Image = imageKey } else imageKey, { BackgroundTransparency = 1 }), { [roact.Ref] = p2 }))
+		return Roact.createElement(ImageSetButton, Cryo.Dictionary.join(Cryo.Dictionary.join(p1, { imageKey = Cryo.None }, if typeof(Image) == "string" then { Image = Image } else Image, { BackgroundTransparency = 1 }), { [Roact.Ref] = p2 }))
 	end)
 }

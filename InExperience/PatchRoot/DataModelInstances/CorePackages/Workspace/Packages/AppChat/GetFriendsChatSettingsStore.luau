@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent._Workspace.AppChat.AppChat.Stores.GetFriendsChatSettingsStore)
+﻿return (require(script.Parent.Parent._Workspace.AppChat.AppChat.Stores.GetFriendsChatSettingsStore))

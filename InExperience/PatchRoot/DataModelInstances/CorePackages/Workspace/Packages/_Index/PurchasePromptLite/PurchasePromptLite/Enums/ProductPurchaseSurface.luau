@@ -2,6 +2,7 @@
 	Unknown = "Unknown",
 	InExperience = "InExperience",
 	EDP = "EDP",
+	EDPPreview = "EDPPreview",
 	PaidAccess = "PaidAccess",
 	Catalog = "Catalog",
 	InExperienceShopHome = "InExperienceShopHome",

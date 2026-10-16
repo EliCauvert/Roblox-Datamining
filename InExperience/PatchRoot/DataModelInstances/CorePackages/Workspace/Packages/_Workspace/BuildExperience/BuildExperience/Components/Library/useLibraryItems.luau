@@ -1,79 +1,79 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local reactModule = require(buildExperience.Parent.React)
-local _ = require(buildExperience.Stores.BuildLibrary.createBuildLibraryStore)
-local sendBuildExperienceEventModule = require(buildExperience.Telemetry.sendBuildExperienceEvent)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local ReactModule = require(BuildExperience.Parent.React)
+local _ = require(BuildExperience.Stores.BuildLibrary.createBuildLibraryStore)
+local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
 
-return function(p1, p2, p3, p4, p5, p6, p7)
-	-- upvalues: reactModule (ref), sendBuildExperienceEventModule (ref)
-	local var1 = reactModule.useMemo(function()
+return function(p1, List, Kind, Text: string, Count, p2, FolderId) --[[ Line: 6 | Named "useLibraryItems" ]]
+	-- upvalues: ReactModule (copy), SendBuildExperienceEventModule (copy)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 15 ]]
 		return {}
 	end, {
 		p1,
-		p3 or false,
-		p4,
-		p6 or false,
-		p7 or false
+		Kind or false,
+		Text,
+		p2 or false,
+		FolderId or false
 	})
-	local var2, var3 = reactModule.useState({ key = var1, count = p5 })
-	local var4 = if var2.key == var1 then var2.count else p5
-	local t = {}
-	local var5 = 0
-	local lowerText = string.lower(p4)
-	local t_1 = {}
+	local UseStateResult, UseStateResult2 = ReactModule.useState({ key = UseMemoResult, count = Count })
+	local Count1 = if UseStateResult.key == UseMemoResult then UseStateResult.count else Count
+	local List1 = {}
+	local Count2 = 0
+	local Lowered = string.lower(Text)
+	local FolderIds = {}
 	
-	if lowerText ~= "" and p7 ~= nil then
-		for i, v in p2 do
-			if v.className == "Folder" and v.folderId ~= nil then
-				t_1[v.id] = v.folderId
+	if Lowered ~= "" and FolderId ~= nil then
+		for _, value in List do
+			if value.className == "Folder" and value.folderId ~= nil then
+				FolderIds[value.id] = value.folderId
 			end
 		end
 	end
-	for i, v in p2 do
-		local var6 = v.folderId == p7
+	for _, value1 in List do
+		local IsFolderIdMatch = value1.folderId == FolderId
 		
-		if lowerText == "" then
-			if (p3 == nil or v.kind == p3) and var6 and (lowerText == "" or string.find(string.lower(v.displayName), lowerText, 1, true) ~= nil) then
-				var5 += 1
-				
-				if var5 <= var4 then
-					table.insert(t, v)
-				end
+		if Lowered ~= "" then
+			local FolderId1 = value1.folderId
+			while FolderId ~= nil and (FolderId1 ~= nil and FolderId1 ~= FolderId) do
+				FolderId1 = FolderIds[FolderId1]
 			end
+			IsFolderIdMatch = value1.className ~= "Folder" and (FolderId == nil or FolderId1 == FolderId)
 		end
-		local folderId = v.folderId
-		while p7 ~= nil and (folderId ~= nil and folderId ~= p7) do
-			folderId = t_1[folderId]
-		end
-		var6 = v.className ~= "Folder" and (if p7 ~= nil then folderId == p7 else true)
-	end
-	local var7 = var4 < var5
-	local var8 = reactModule.useRef({ key = var1, count = var4 })
-	reactModule.useEffect(function()
-		-- upvalues: var8 (ref), var1 (ref), var4 (ref), var5 (write), sendBuildExperienceEventModule (copy), p6 (ref), p3 (ref), p7 (ref)
-		local current = var8.current
-		
-		if current.key == var1 and current.count < var4 then
-			local var9 = math.min(var4, var5) - math.min(current.count, var5)
+		if (Kind == nil or value1.kind == Kind) and (IsFolderIdMatch and (Lowered == "" or string.find(string.lower(value1.displayName), Lowered, 1, true) ~= nil)) then
+			Count2 += 1
 			
-			if var9 > 0 then
-				sendBuildExperienceEventModule("LIBRARY_LOAD_MORE", { universeId = game.GameId, placeId = game.PlaceId }, {
-					surface = if p6 ~= nil then "Browser" else "Category",
-					kind = p3 or "All",
-					scope = if p7 ~= nil then "Root" else "Folder",
-					addedCount = tostring(var9),
-					visibleCount = tostring(math.min(var4, var5))
+			if Count2 <= Count1 then
+				table.insert(List1, value1)
+			end
+		end
+	end
+	local IsCountBelow = Count1 < Count2
+	local UseRefResult = ReactModule.useRef({ key = UseMemoResult, count = Count1 })
+	ReactModule.useEffect(function() --[[ Line: 53 ]]
+		-- upvalues: UseRefResult (copy), UseMemoResult (copy), Count1 (copy), Count2 (ref), SendBuildExperienceEventModule (upval), p2 (copy), Kind (copy), FolderId (copy)
+		local Current = UseRefResult.current
+		
+		if Current.key == UseMemoResult and Current.count < Count1 then
+			local SmallestDelta = math.min(Count1, Count2) - math.min(Current.count, Count2)
+			
+			if SmallestDelta > 0 then
+				SendBuildExperienceEventModule("LIBRARY_LOAD_MORE", { universeId = game.GameId, placeId = game.PlaceId }, {
+					surface = if p2 == nil then "Browser" else "Category",
+					kind = Kind or "All",
+					scope = if FolderId == nil then "Root" else "Folder",
+					addedCount = tostring(SmallestDelta),
+					visibleCount = tostring((math.min(Count1, Count2)))
 				})
 			end
 		end
-		var8.current = { key = var1, count = var4 }
+		UseRefResult.current = { key = UseMemoResult, count = Count1 }
 	end, {
-		var1, var4, var5, p3 or false, p6 or false, p7 or false
+		UseMemoResult, Count1, Count2, Kind or false, p2 or false, FolderId or false
 	})
 	
-	return t, var7, reactModule.useCallback(function()
-		-- upvalues: var7 (ref), var3 (ref), var1 (ref), var4 (ref), p5 (ref)
-		if var7 then
-			var3({ key = var1, count = var4 + p5 })
+	return List1, IsCountBelow, (ReactModule.useCallback(function() --[[ Line: 69 ]]
+		-- upvalues: IsCountBelow (copy), UseStateResult2 (copy), UseMemoResult (copy), Count1 (copy), Count (copy)
+		if IsCountBelow then
+			UseStateResult2({ key = UseMemoResult, count = Count1 + Count })
 		end
-	end, { var1, var4, p5, var7 })
+	end, { UseMemoResult, Count1, Count, IsCountBelow }))
 end

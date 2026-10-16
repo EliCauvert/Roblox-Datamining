@@ -1,14 +1,13 @@
-﻿local sharedFlagsModule = require(script.Parent.Parent.SharedFlags)
-local UIBlox = sharedFlagsModule.UIBlox
+﻿local SharedFlagsModule = require(script.Parent.Parent.SharedFlags)
+local UIBlox = SharedFlagsModule.UIBlox
 
 return {
 	useFoundationButton = true,
 	enableTooltipV2HoverControllerReRenderFix = UIBlox.GetFFlagUIBloxEnableTooltipV2HoverControllerReRenderFix(),
 	enableTooltipV2BodyFontFix = UIBlox.GetFFlagUIBloxEnableTooltipV2BodyFontFix(),
-	enableOpenTypeSupport = sharedFlagsModule.GetFFlagLuaAppEnableOpenTypeSupport(),
+	enableOpenTypeSupport = SharedFlagsModule.GetFFlagLuaAppEnableOpenTypeSupport(),
 	didMountUpdateFullPageModal = UIBlox.GetFFlagUIBloxDidMountUpdateFullPageModal(),
 	useFoundationToastButtonSizing = UIBlox.FFlagUIBloxToastFoundationButtonSizing,
-	useTokenizedShortcutBar = sharedFlagsModule.FFlagEnableConsoleExpControls,
-	disableTokenScaling = UIBlox.FFlagUIBloxDisableTokenScaling,
-	deprecateComponentGlobalSemanticTokenUse = UIBlox.FFlagUIBloxDeprecateComponentGlobalSemanticTokenUse
+	useTokenizedShortcutBar = SharedFlagsModule.FFlagEnableConsoleExpControls,
+	disableTokenScaling = UIBlox.FFlagUIBloxDisableTokenScaling
 }

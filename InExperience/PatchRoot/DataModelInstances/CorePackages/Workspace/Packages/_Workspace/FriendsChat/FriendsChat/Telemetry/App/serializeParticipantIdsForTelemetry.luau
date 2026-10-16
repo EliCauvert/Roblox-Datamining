@@ -1,20 +1,20 @@
-﻿local httpService = game:GetService("HttpService")
+﻿local HttpService = game:GetService("HttpService")
 
-return function(p1, p2)
-	-- upvalues: httpService (ref)
-	local t = {}
-	
-	for i, v in p1 or {} do
-		local var1 = tonumber(if typeof(v) == "table" then v.id else v)
+return function(p1, Number) --[[ Line: 10 | Named "serializeParticipantIdsForTelemetry" ]]
+	-- upvalues: HttpService (copy)
+	local List = {}
+	local P0 = p1 or {}
+	for _, value in P0 do
+		local Number1: number? = tonumber(if typeof(value) == "table" then value.id else value)
 		
-		if var1 ~= nil and var1 ~= p2 then
-			table.insert(t, var1)
+		if Number1 ~= nil and Number1 ~= Number then
+			table.insert(List, Number1)
 		end
 	end
-	local ok, status = pcall(function()
-		-- upvalues: httpService (copy), t (ref)
-		return httpService:JSONEncode(t)
+	local Success, Result = pcall(function() --[[ Line: 21 ]]
+		-- upvalues: HttpService (upval), List (copy)
+		return HttpService:JSONEncode(List)
 	end)
 	
-	return if ok then status else "[]"
+	return if Success then Result else "[]"
 end

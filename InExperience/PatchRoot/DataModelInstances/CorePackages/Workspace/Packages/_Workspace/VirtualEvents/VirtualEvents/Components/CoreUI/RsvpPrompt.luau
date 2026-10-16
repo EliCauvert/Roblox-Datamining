@@ -1,42 +1,40 @@
-﻿local textService = game:GetService("TextService")
-local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local foundationModule = require(parent_1.Foundation)
-local localizationModule = require(parent_1.Localization)
-local reactModule = require(parent_1.React)
-local UIBloxModule = require(parent_1.UIBlox)
-local useScreenSize = require(parent_1.CoreScriptsRoactCommon).useScreenSize
-local useRoactService = require(parent_1.RobloxAppHooks).useRoactService
-local roactNetworking = require(parent_1.RoactServiceTags).RoactNetworking
-local notificationModalsManagerModule = require(parent_1.NotificationModalsManager)
-local gameTileModule = require(parent_1.GameTile)
-local mouseIconOverrideService = require(parent_1.CoreScriptsCommon).MouseIconOverrideService
-local useDesignTokens = require(parent_1.Style).useDesignTokens
-local constantsModule = require(parent.constants)
-local postRsvpStatusModule = require(parent.Common.postRsvpStatus)
-local formatDateLocalizedModule = require(parent.Common.formatDateLocalized)
-local serviceOverrideContextModule = require(parent.Components.CoreUI.ServiceOverrideContext)
-local useContext = reactModule.useContext
-local buttonType = UIBloxModule.App.Button.Enum.ButtonType
-local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
-local loadableImage = UIBloxModule.App.Loading.LoadableImage
-local useLocalization = localizationModule.Hooks.useLocalization
-local text = foundationModule.Text
-local view = foundationModule.View
-local useTokens = foundationModule.Hooks.useTokens
-local getTextBoundsAsync = foundationModule.Utility.getTextBoundsAsync
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local gameTileThumbnailBadges = gameTileModule.GameTileThumbnailBadges
-local scrollView = foundationModule.ScrollView
-local scrollBarVisibility = foundationModule.Enums.ScrollBarVisibility
-local luaAppFixRsvpPromptDescriptionScrolling = game:DefineFastFlag("LuaAppFixRsvpPromptDescriptionScrolling", false)
+﻿local TextService = game:GetService("TextService")
+local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local FoundationModule = require(Parent1.Foundation)
+local ReactModule = require(Parent1.React)
+local UIBloxModule = require(Parent1.UIBlox)
+local UseScreenSizeFunction = require(Parent1.CoreScriptsRoactCommon).useScreenSize
+local UseRoactServiceFunction = require(Parent1.RobloxAppHooks).useRoactService
+local RoactNetworking = require(Parent1.RoactServiceTags).RoactNetworking
+local NotificationModalsManagerModule = require(Parent1.NotificationModalsManager)
+local MouseIconOverrideService = require(Parent1.CoreScriptsCommon).MouseIconOverrideService
+local UseDesignTokensFunction = require(Parent1.Style).useDesignTokens
+local ConstantsModule = require(Parent.constants)
+local PostRsvpStatusModule = require(Parent.Common.postRsvpStatus)
+local FormatDateLocalizedModule = require(Parent.Common.formatDateLocalized)
+local ServiceOverrideContextModule = require(Parent.Components.CoreUI.ServiceOverrideContext)
+local UseContextFunction = ReactModule.useContext
+local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
+local InteractiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
+local LoadableImage = UIBloxModule.App.Loading.LoadableImage
+local UseLocalizationFunction = require(Parent1.Localization).Hooks.useLocalization
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local GetTextBoundsAsyncFunction = FoundationModule.Utility.getTextBoundsAsync
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local GameTileThumbnailBadges = require(Parent1.GameTile).GameTileThumbnailBadges
+local ScrollView = FoundationModule.ScrollView
+local ScrollBarVisibility = FoundationModule.Enums.ScrollBarVisibility
+local LuaAppFixRsvpPromptDescriptionScrolling = game:DefineFastFlag("LuaAppFixRsvpPromptDescriptionScrolling", false)
 
-return function(p1)
-	-- upvalues: useScreenSize (ref), useLocalization (ref), reactModule (ref), mouseIconOverrideService (ref), constantsModule (ref), useRoactService (ref), roactNetworking (ref), formatDateLocalizedModule (ref), useContext (ref), serviceOverrideContextModule (ref), postRsvpStatusModule (ref), notificationModalsManagerModule (ref), buttonType (ref), useDesignTokens (ref), useTokens (ref), luaAppFixRsvpPromptDescriptionScrolling (ref), foundationFontFaceMigration (ref), getTextBoundsAsync (ref), textService (ref), loadableImage (ref), gameTileThumbnailBadges (ref), normalizeFontFace (ref), scrollView (ref), scrollBarVisibility (ref), text (ref), view (ref), interactiveAlert (ref)
-	local var1 = useScreenSize()
-	local var2 = p1.enableInputDelayed ~= nil or p1.enableInputDelayed
-	local var3 = useLocalization({
+return function(p1) --[[ Line: 77 ]]
+	-- upvalues: UseScreenSizeFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), MouseIconOverrideService (copy), ConstantsModule (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), FormatDateLocalizedModule (copy), UseContextFunction (copy), ServiceOverrideContextModule (copy), PostRsvpStatusModule (copy), NotificationModalsManagerModule (copy), ButtonType (copy), UseDesignTokensFunction (copy), UseTokensFunction (copy), LuaAppFixRsvpPromptDescriptionScrolling (copy), FoundationFontFaceMigration (copy), GetTextBoundsAsyncFunction (copy), TextService (copy), LoadableImage (copy), GameTileThumbnailBadges (copy), NormalizeFontFaceFunction (copy), ScrollView (copy), ScrollBarVisibility (copy), Text (copy), View (copy), InteractiveAlert (copy)
+	local UseScreenSizeResult = UseScreenSizeFunction()
+	local NoEnableInputDelayed = p1.enableInputDelayed == nil or p1.enableInputDelayed
+	local UseLocalizationResult = UseLocalizationFunction({
 		joinEvent = "Feature.VirtualEvents.JoinEvent",
 		notifyMe = "Feature.VirtualEvents.NotifyMe",
 		unfollowEvent = "Feature.VirtualEvents.UnfollowEvent",
@@ -44,335 +42,344 @@ return function(p1)
 		dateAtTime = "Feature.VirtualEvents.Label.DateAtTime",
 		toastText = "Feature.VirtualEvents.Label.ReminderSetForEventTime"
 	})
-	reactModule.useEffect(function()
-		-- upvalues: mouseIconOverrideService (copy)
-		mouseIconOverrideService.push("RSVPPromptOverride", Enum.OverrideMouseIconBehavior.ForceShow)
+	ReactModule.useEffect(function() --[[ Line: 91 ]]
+		-- upvalues: MouseIconOverrideService (upval)
+		MouseIconOverrideService.push("RSVPPromptOverride", Enum.OverrideMouseIconBehavior.ForceShow)
 		
-		return function()
-			-- upvalues: mouseIconOverrideService (copy)
-			mouseIconOverrideService.pop("RSVPPromptOverride")
+		return function() --[[ Line: 94 ]]
+			-- upvalues: MouseIconOverrideService (upval)
+			MouseIconOverrideService.pop("RSVPPromptOverride")
 		end
 	end, {})
-	local eventDetails = p1.promptData.eventDetails
-	local displayTitle = eventDetails.displayTitle
-	local displayDescription = eventDetails.displayDescription
-	local thumbnails = eventDetails.thumbnails
-	local var4 = if thumbnails and thumbnails[1] and thumbnails[1].mediaId then thumbnails[1].mediaId else constantsModule.DEFAULT_EVENT_MEDIA_ID
-	local var5 = useRoactService(roactNetworking)
-	local isGoing = eventDetails.userRsvpStatus == "going"
-	local none = Enum.RsvpStatus.None
+	local EventDetails = p1.promptData.eventDetails
+	local DisplayTitle = EventDetails.displayTitle
+	local DisplayDescription = EventDetails.displayDescription
+	local Thumbnails = EventDetails.thumbnails
+	local MediaId = if Thumbnails and Thumbnails[1] and Thumbnails[1].mediaId then Thumbnails[1].mediaId else ConstantsModule.DEFAULT_EVENT_MEDIA_ID
+	local UseRoactServiceResult = UseRoactServiceFunction(RoactNetworking)
+	local IsGoing = EventDetails.userRsvpStatus == "going"
+	local Going = if EventDetails.userRsvpStatus == "going" then Enum.RsvpStatus.Going elseif EventDetails.userRsvpStatus == "notGoing" then Enum.RsvpStatus.NotGoing else Enum.RsvpStatus.None
+	local UnfollowEvent = if IsGoing then UseLocalizationResult.unfollowEvent else UseLocalizationResult.notifyMe
+	local v1 = nil
+	local EventTime = nil
 	
-	if eventDetails.userRsvpStatus == "going" then
-		none = Enum.RsvpStatus.Going
-	elseif eventDetails.userRsvpStatus == "notGoing" then
-		none = Enum.RsvpStatus.NotGoing
-	end
-	local var6 = if isGoing then var3.unfollowEvent else var3.notifyMe
-	local dateTime = nil
-	local var7 = nil
-	
-	if eventDetails.eventTime and eventDetails.eventTime.startUtc then
-		dateTime = DateTime.fromIsoDate(eventDetails.eventTime.startUtc)
+	if EventDetails.eventTime and EventDetails.eventTime.startUtc then
+		v1 = DateTime.fromIsoDate(EventDetails.eventTime.startUtc)
 		
-		if dateTime then
-			var7 = formatDateLocalizedModule(var3.dateAtTime, dateTime)
+		if v1 then
+			EventTime = FormatDateLocalizedModule(UseLocalizationResult.dateAtTime, v1)
 		end
 	end
-	local var8 = if isGoing then var3.unfollowEvent else var3.joinEvent
-	local socialService = useContext(serviceOverrideContextModule).socialService
-	local var9 = reactModule.useCallback(function()
-		-- upvalues: isGoing (ref), postRsvpStatusModule (copy), var5 (ref), p1 (ref), socialService (ref), none (write), var3 (ref), displayTitle (ref), var7 (write), notificationModalsManagerModule (copy)
-		if isGoing then
-			postRsvpStatusModule(var5, p1.promptData.eventId, "notGoing"):andThen(function()
-				-- upvalues: socialService (copy), p1 (copy), none (copy)
-				socialService:PromptRsvpToEventCompleted(p1.promptData.eventId, true, Enum.RsvpStatus.NotGoing, none)
-			end, function(p2)
-				-- upvalues: socialService (copy), p1 (copy), none (copy)
-				socialService:PromptRsvpToEventCompleted(p1.promptData.eventId, false, Enum.RsvpStatus.None, none)
+	local UnfollowEvent1 = if IsGoing then UseLocalizationResult.unfollowEvent else UseLocalizationResult.joinEvent
+	local SocialService = UseContextFunction(ServiceOverrideContextModule).socialService
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 145 ]]
+		-- upvalues: IsGoing (copy), PostRsvpStatusModule (upval), UseRoactServiceResult (copy), p1 (copy), SocialService (copy), Going (ref), UseLocalizationResult (copy), DisplayTitle (copy), EventTime (ref), NotificationModalsManagerModule (upval)
+		if IsGoing then
+			PostRsvpStatusModule(UseRoactServiceResult, p1.promptData.eventId, "notGoing"):andThen(function() --[[ Line: 147 ]]
+				-- upvalues: SocialService (upval), p1 (upval), Going (upval)
+				SocialService:PromptRsvpToEventCompleted(p1.promptData.eventId, true, Enum.RsvpStatus.NotGoing, Going)
+			end, function(p2) --[[ Line: 154 ]]
+				-- upvalues: SocialService (upval), p1 (upval), Going (upval)
+				SocialService:PromptRsvpToEventCompleted(p1.promptData.eventId, false, Enum.RsvpStatus.None, Going)
 				warn("Error updating rsvp status: ", p2)
 			end)
 		else
-			postRsvpStatusModule(var5, p1.promptData.eventId, "going"):andThen(function()
-				-- upvalues: socialService (copy), p1 (copy), none (copy), var3 (copy), displayTitle (copy), var7 (copy), notificationModalsManagerModule (copy)
-				socialService:PromptRsvpToEventCompleted(p1.promptData.eventId, true, Enum.RsvpStatus.Going, none)
-				notificationModalsManagerModule.SetUIBloxToast({
-					toastTitle = var3.toastText:gsub("{(.-)}", { eventName = displayTitle, eventTime = var7 }),
+			PostRsvpStatusModule(UseRoactServiceResult, p1.promptData.eventId, "going"):andThen(function() --[[ Line: 164 ]]
+				-- upvalues: SocialService (upval), p1 (upval), Going (upval), UseLocalizationResult (upval), DisplayTitle (upval), EventTime (upval), NotificationModalsManagerModule (upval)
+				SocialService:PromptRsvpToEventCompleted(p1.promptData.eventId, true, Enum.RsvpStatus.Going, Going)
+				NotificationModalsManagerModule.SetUIBloxToast({
+					toastTitle = UseLocalizationResult.toastText:gsub("{(.-)}", { eventName = DisplayTitle, eventTime = EventTime }),
 					sequenceNumber = DateTime.now().UnixTimestamp
 				})
-			end, function(p2)
-				-- upvalues: socialService (copy), p1 (copy), none (copy)
-				socialService:PromptRsvpToEventCompleted(p1.promptData.eventId, false, Enum.RsvpStatus.None, none)
+			end, function(p2) --[[ Line: 181 ]]
+				-- upvalues: SocialService (upval), p1 (upval), Going (upval)
+				SocialService:PromptRsvpToEventCompleted(p1.promptData.eventId, false, Enum.RsvpStatus.None, Going)
 				warn("Error updating rsvp status: ", p2)
 			end)
 		end
 		p1.closePrompt()
-	end, { socialService, p1.closePrompt, isGoing })
-	local var10 = reactModule.useCallback(function()
-		-- upvalues: eventDetails (ref), socialService (ref), p1 (ref), none (write)
-		local none_1 = Enum.RsvpStatus.None
-		
-		if eventDetails.userRsvpStatus == "notGoing" then
-			none_1 = Enum.RsvpStatus.NotGoing
-		elseif eventDetails.userRsvpStatus == "going" then
-			none_1 = Enum.RsvpStatus.Going
-		end
-		socialService:PromptRsvpToEventCompleted(p1.promptData.eventId, true, none_1, none)
+	end, { SocialService, p1.closePrompt, IsGoing })
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 194 ]]
+		-- upvalues: EventDetails (copy), SocialService (copy), p1 (copy), Going (ref)
+		SocialService:PromptRsvpToEventCompleted(p1.promptData.eventId, true, if EventDetails.userRsvpStatus == "notGoing" then Enum.RsvpStatus.NotGoing elseif EventDetails.userRsvpStatus == "going" then Enum.RsvpStatus.Going else Enum.RsvpStatus.None, Going)
 		p1.closePrompt()
 	end, {
-		socialService,
+		SocialService,
 		p1.closePrompt,
-		eventDetails.userRsvpStatus
+		EventDetails.userRsvpStatus
 	})
-	local var11 = reactModule.useMemo(function()
-		-- upvalues: buttonType (copy), var2 (ref), var9 (ref), var6 (write)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 206 ]]
+		-- upvalues: ButtonType (upval), NoEnableInputDelayed (copy), UseResult (copy), UnfollowEvent (ref)
 		return {
 			buttons = {
 				{
-					buttonType = buttonType.PrimaryContextual,
+					buttonType = ButtonType.PrimaryContextual,
 					props = {
 						delayInputSeconds = 2,
-						enableInputDelayed = var2,
-						isDelayedInput = var2,
-						onActivated = var9,
-						text = var6
+						enableInputDelayed = NoEnableInputDelayed,
+						isDelayedInput = NoEnableInputDelayed,
+						onActivated = UseResult,
+						text = UnfollowEvent
 					}
 				}
 			}
 		}
-	end, { var3, var9, var2, var6 })
-	local var12, var13 = reactModule.useState(Vector2.new(0, 0))
-	local var14 = reactModule.useCallback(function(p2)
-		-- upvalues: var13 (ref)
-		var13(p2.AbsoluteSize)
-	end, { var13 })
-	local var15, var16 = reactModule.useState(0)
-	local var17, var18 = reactModule.useState(0)
-	local var19 = reactModule.useRef(nil)
-	local var20 = reactModule.useRef(nil)
-	local var21 = reactModule.useCallback(function(p2)
-		-- upvalues: var16 (ref)
-		local ceiled = math.ceil(p2.TextBounds.Y)
+	end, {
+		UseLocalizationResult,
+		UseResult,
+		NoEnableInputDelayed,
+		UnfollowEvent
+	})
+	local UseStateResult, UseStateResult2 = ReactModule.useState(Vector2.new(0, 0))
+	local UseResult2 = ReactModule.useCallback(function(Frame) --[[ Line: 225 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(Frame.AbsoluteSize)
+	end, { UseStateResult2 })
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(0)
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(0)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseResult3 = ReactModule.useCallback(function(Label) --[[ Line: 235 ]]
+		-- upvalues: UseStateResult2_1 (copy)
+		local Ceiled = math.ceil(Label.TextBounds.Y)
 		
-		if ceiled > 0 then
-			var16(function(p3)
-				-- upvalues: ceiled (ref)
-				return if ceiled == p3 then p3 else ceiled
+		if Ceiled > 0 then
+			UseStateResult2_1(function(Ceiled1) --[[ Line: 238 ]]
+				-- upvalues: Ceiled (copy)
+				return if Ceiled == Ceiled1 then Ceiled1 else Ceiled
 			end)
 		end
-	end, { var16 })
-	local size300 = useDesignTokens().Size.Size_300
-	local var22 = useTokens()
-	local bodyLarge = var22.Typography.BodyLarge
-	local overrideUseWideMode = p1.overrideUseWideMode or (var1.Y < 600 and var1.Y < var1.X)
-	reactModule.useEffect(function()
-		-- upvalues: luaAppFixRsvpPromptDescriptionScrolling (copy), var16 (ref)
-		if luaAppFixRsvpPromptDescriptionScrolling then
-			var16(0)
+	end, { UseStateResult2_1 })
+	local Size300 = UseDesignTokensFunction().Size.Size_300
+	local UseTokensResult = UseTokensFunction()
+	local BodyLarge = UseTokensResult.Typography.BodyLarge
+	local OverrideUseWideMode = p1.overrideUseWideMode or UseScreenSizeResult.Y < 600 and UseScreenSizeResult.Y < UseScreenSizeResult.X
+	ReactModule.useEffect(function() --[[ Line: 258 ]]
+		-- upvalues: LuaAppFixRsvpPromptDescriptionScrolling (upval), UseStateResult2_1 (copy)
+		if LuaAppFixRsvpPromptDescriptionScrolling then
+			UseStateResult2_1(0)
 		end
-	end, { overrideUseWideMode, displayDescription })
-	reactModule.useEffect(function()
-		-- upvalues: luaAppFixRsvpPromptDescriptionScrolling (copy), var20 (ref), var18 (ref), foundationFontFaceMigration (copy), var19 (ref), getTextBoundsAsync (copy), displayDescription (ref), var16 (ref), textService (copy)
-		if luaAppFixRsvpPromptDescriptionScrolling then
-			if var20.current then
-				var18(var20.current.AbsoluteSize.Y)
+	end, { OverrideUseWideMode, DisplayDescription })
+	ReactModule.useEffect(function() --[[ Line: 264 ]]
+		-- upvalues: LuaAppFixRsvpPromptDescriptionScrolling (upval), UseRefResult1 (copy), UseStateResult2_2 (copy), FoundationFontFaceMigration (upval), UseRefResult (copy), GetTextBoundsAsyncFunction (upval), DisplayDescription (copy), UseStateResult2_1 (copy), TextService (upval)
+		if LuaAppFixRsvpPromptDescriptionScrolling then
+			if UseRefResult1.current then
+				UseStateResult2_2(UseRefResult1.current.AbsoluteSize.Y)
 			end
 			return
-		elseif foundationFontFaceMigration then
-			local current = var19.current
+		elseif FoundationFontFaceMigration then
+			local Current = UseRefResult.current
 			
-			if current then
-				local var23 = false
-				task.spawn(function()
-					-- upvalues: getTextBoundsAsync (copy), displayDescription (copy), current (ref), var23 (write), var16 (copy), var20 (copy), var18 (copy)
-					local var24 = getTextBoundsAsync(displayDescription, current.FontFace, current.TextSize, current.AbsoluteSize.X)
-					
-					if var23 or not var24 then return end
-					var16(var24.Y * current.LineHeight)
-					
-					if var20.current then
-						var18(var20.current.AbsoluteSize.Y)
-					end
-				end)
+			if not Current then return end
+			local Current1 = false
+			task.spawn(function() --[[ Line: 279 ]]
+				-- upvalues: GetTextBoundsAsyncFunction (upval), DisplayDescription (upval), Current (copy), Current1 (ref), UseStateResult2_1 (upval), UseRefResult1 (upval), UseStateResult2_2 (upval)
+				local TextBoundsAsync = GetTextBoundsAsyncFunction(DisplayDescription, Current.FontFace, Current.TextSize, Current.AbsoluteSize.X)
 				
-				return function()
-					-- upvalues: var23 (write)
-					var23 = true
+				if Current1 or not TextBoundsAsync then return end
+				UseStateResult2_1(TextBoundsAsync.Y * Current.LineHeight)
+				
+				if UseRefResult1.current then
+					UseStateResult2_2(UseRefResult1.current.AbsoluteSize.Y)
 				end
+			end)
+			
+			return function() --[[ Line: 298 ]]
+				-- upvalues: Current1 (ref)
+				Current1 = true
 			end
-			return
-		elseif not var19.current then return end
-		local getTextBoundsParams = Instance.new("GetTextBoundsParams")
-		getTextBoundsParams.Text = displayDescription
-		getTextBoundsParams.Font = var19.current.FontFace
-		getTextBoundsParams.Size = var19.current.TextSize
-		getTextBoundsParams.Width = var19.current.AbsoluteSize.X
-		var16(textService:GetTextBoundsAsync(getTextBoundsParams).Y * var19.current.LineHeight)
+		elseif not UseRefResult.current then return end
+		local Current1 = "GetTextBoundsParams"
+		local NewInstance = Instance.new(Current1)
+		Current1 = DisplayDescription
+		NewInstance.Text = Current1
+		Current1 = UseRefResult
+		Current1 = Current1.current
+		Current1 = Current1.FontFace
+		NewInstance.Font = Current1
+		Current1 = UseRefResult
+		Current1 = Current1.current
+		Current1 = Current1.TextSize
+		NewInstance.Size = Current1
+		Current1 = UseRefResult
+		Current1 = Current1.current
+		Current1 = Current1.AbsoluteSize
+		Current1 = Current1.X
+		NewInstance.Width = Current1
+		Current1 = TextService
+		Current1 = Current1:GetTextBoundsAsync(NewInstance)
+		UseStateResult2_1(Current1.Y * UseRefResult.current.LineHeight)
 		
-		if var20.current then
-			var18(var20.current.AbsoluteSize.Y)
+		if UseRefResult1.current then
+			UseStateResult2_2(UseRefResult1.current.AbsoluteSize.Y)
 		end
-	end, { var19, var12.X, displayDescription, overrideUseWideMode })
+	end, {
+		UseRefResult,
+		UseStateResult.X,
+		DisplayDescription,
+		OverrideUseWideMode
+	})
 	
-	return reactModule.createElement(interactiveAlert, {
+	return ReactModule.createElement(InteractiveAlert, {
 		isMiddleContentFocusable = false,
-		onCloseClicked = var10,
-		buttonStackInfo = var11,
-		middleContent = reactModule.useCallback(function()
-			-- upvalues: var1 (ref), overrideUseWideMode (ref), var12 (ref), constantsModule (copy), luaAppFixRsvpPromptDescriptionScrolling (copy), var17 (ref), size300 (ref), var15 (ref), reactModule (copy), loadableImage (copy), var4 (write), dateTime (write), gameTileThumbnailBadges (copy), var7 (write), displayDescription (ref), foundationFontFaceMigration (copy), normalizeFontFace (copy), bodyLarge (ref), var22 (ref), var21 (ref), var19 (ref), scrollView (copy), scrollBarVisibility (copy), text (copy), view (copy), var14 (ref), displayTitle (ref), var20 (ref)
-			local var23 = var1.Y - 80 - 200
+		onCloseClicked = UseResult1,
+		buttonStackInfo = UseMemoResult,
+		middleContent = ReactModule.useCallback(function() --[[ Line: 322 ]]
+			-- upvalues: UseScreenSizeResult (copy), OverrideUseWideMode (copy), UseStateResult (copy), ConstantsModule (upval), LuaAppFixRsvpPromptDescriptionScrolling (upval), UseStateResult3 (copy), Size300 (copy), UseStateResult1 (copy), ReactModule (upval), LoadableImage (upval), MediaId (ref), v1 (ref), GameTileThumbnailBadges (upval), EventTime (ref), DisplayDescription (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), BodyLarge (copy), UseTokensResult (copy), UseResult3 (copy), UseRefResult (copy), ScrollView (upval), ScrollBarVisibility (upval), Text (upval), View (upval), UseResult2 (copy), DisplayTitle (copy), UseRefResult1 (copy)
+			local YDelta = UseScreenSizeResult.Y - 80 - 200
 			
-			if var23 < 80 then
-				var23 = 80
+			if YDelta < 80 then
+				YDelta = 80
 			end
-			if overrideUseWideMode then
-				local var24 = var12.X * 0.6
+			if OverrideUseWideMode then
+				local ScaledX = UseStateResult.X * 0.6
 				
-				if var24 * 1 / constantsModule.THUMBNAIL_ASPECT_RATIO < var23 then
-					var23 = var24 * 1 / constantsModule.THUMBNAIL_ASPECT_RATIO
+				if ScaledX * 1 / ConstantsModule.THUMBNAIL_ASPECT_RATIO < YDelta then
+					YDelta = ScaledX * 1 / ConstantsModule.THUMBNAIL_ASPECT_RATIO
 				end
-				if luaAppFixRsvpPromptDescriptionScrolling then
-					var23 = math.max(var23 - var17 - size300, 80)
+				if LuaAppFixRsvpPromptDescriptionScrolling then
+					YDelta = math.max(YDelta - UseStateResult3 - Size300, 80)
 				end
 			end
-			local var25 = if luaAppFixRsvpPromptDescriptionScrolling and var15 == 0 then 80 else var15
-			local minValue = math.min(var25, var23)
-			local var26 = var23
+			local UseStateResult2 = if LuaAppFixRsvpPromptDescriptionScrolling and UseStateResult1 == 0 then 80 else UseStateResult1
+			local Smallest = math.min(UseStateResult2, YDelta)
+			local YOffset: number = YDelta
 			
-			if not overrideUseWideMode then
-				local var27 = if luaAppFixRsvpPromptDescriptionScrolling then math.max(var23 - var17 - size300 * 2, 80) else var23
-				minValue = if luaAppFixRsvpPromptDescriptionScrolling then math.min(var25, var27 * 0.4) else math.min(var15, var27 * 0.4)
-				var26 = var27 - minValue
+			if not OverrideUseWideMode then
+				local Largest: number = if LuaAppFixRsvpPromptDescriptionScrolling then math.max(YDelta - UseStateResult3 - Size300 * 2, 80) else YDelta
+				Smallest = if LuaAppFixRsvpPromptDescriptionScrolling then math.min(UseStateResult2, Largest * 0.4) else math.min(UseStateResult1, Largest * 0.4)
+				YOffset = Largest - Smallest
 			end
-			local var28
-			local frame = reactModule.createElement("Frame", {
+			local Frame = ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 1,
-				AutomaticSize = if overrideUseWideMode then Enum.AutomaticSize.X else Enum.AutomaticSize.Y,
-				Size = if overrideUseWideMode then UDim2.new(0.6, 0, 0, var26) else UDim2.new(1, 0, 0, var26)
+				AutomaticSize = if OverrideUseWideMode then Enum.AutomaticSize.X else Enum.AutomaticSize.Y,
+				Size = if OverrideUseWideMode then UDim2.new(0.6, 0, 0, YOffset) else UDim2.new(1, 0, 0, YOffset)
 			}, {
-				Thumbnail = reactModule.createElement(loadableImage, {
+				Thumbnail = ReactModule.createElement(LoadableImage, {
 					BackgroundTransparency = 1,
 					useShimmerAnimationWhileLoading = true,
 					showFailedStateWhenLoadingFailed = true,
 					Position = UDim2.fromScale(0.5, 0.5),
 					AnchorPoint = Vector2.new(0.5, 0.5),
 					Size = UDim2.fromScale(1, 1),
-					Image = "rbxassetid://" .. var15,
+					Image = "rbxassetid://" .. MediaId,
 					cornerRadius = UDim.new(0, 8)
 				}),
-				AspectRatioConstraint = reactModule.createElement("UIAspectRatioConstraint", {
-					AspectRatio = constantsModule.THUMBNAIL_ASPECT_RATIO,
+				AspectRatioConstraint = ReactModule.createElement("UIAspectRatioConstraint", {
+					AspectRatio = ConstantsModule.THUMBNAIL_ASPECT_RATIO,
 					DominantAxis = Enum.DominantAxis.Width,
 					AspectType = Enum.AspectType.FitWithinMaxSize
 				}),
-				Overlay = if dateTime then reactModule.createElement("Frame", {
+				Overlay = if v1 then ReactModule.createElement("Frame", {
 					ZIndex = 2,
 					BackgroundTransparency = 1,
 					Size = UDim2.fromScale(1, 1)
 				}, {
-					Badge = reactModule.createElement(gameTileThumbnailBadges, {
+					Badge = ReactModule.createElement(GameTileThumbnailBadges, {
 						tileBadgesByPosition = {
-							ImageTopLeft = { { tileBadgeType = "Text", text = var7 } }
+							ImageTopLeft = { { tileBadgeType = "Text", text = EventTime } }
 						}
 					})
 				}) else nil
 			})
-			local var29 = if overrideUseWideMode then if luaAppFixRsvpPromptDescriptionScrolling then UDim2.new(0.4, -size300, 0, minValue) else UDim2.new(0.4, 0, 0, minValue) else UDim2.new(1, 0, 0, minValue)
-			local _ = nil
+			local _UDim2: UDim2 = if OverrideUseWideMode then if LuaAppFixRsvpPromptDescriptionScrolling then UDim2.new(0.4, -Size300, 0, Smallest) else UDim2.new(0.4, 0, 0, Smallest) else UDim2.new(1, 0, 0, Smallest)
+			local ScrollingFrame = nil
 			
-			if luaAppFixRsvpPromptDescriptionScrolling then
-				local var30 = if var15 > 0 then var15 else 10000
-				var28 = reactModule.createElement("ScrollingFrame", {
+			if LuaAppFixRsvpPromptDescriptionScrolling then
+				local UseStateResult4: number = if UseStateResult1 > 0 then UseStateResult1 else 10000
+				ScrollingFrame = ReactModule.createElement("ScrollingFrame", {
 					LayoutOrder = 3,
 					ScrollBarThickness = 0,
 					BackgroundTransparency = 1,
 					BorderSizePixel = 0,
 					ClipsDescendants = true,
-					Size = var29,
-					CanvasSize = UDim2.new(0, 0, 0, var30 + 2),
+					Size = _UDim2,
+					CanvasSize = UDim2.new(0, 0, 0, UseStateResult4 + 2),
 					ScrollingDirection = Enum.ScrollingDirection.Y
 				}, {
-					Body = reactModule.createElement("TextLabel", {
-						Size = UDim2.new(1, 0, 0, var30),
+					Body = ReactModule.createElement("TextLabel", {
+						Size = UDim2.new(1, 0, 0, UseStateResult4),
 						BackgroundTransparency = 1,
 						BorderSizePixel = 0,
-						Text = displayDescription,
+						Text = DisplayDescription,
 						TextTruncate = Enum.TextTruncate.None,
 						TextWrapped = true,
-						FontFace = if foundationFontFaceMigration then normalizeFontFace(bodyLarge.Font) else Font.fromEnum(bodyLarge.Font),
-						TextSize = bodyLarge.FontSize,
-						LineHeight = bodyLarge.LineHeight,
-						TextColor3 = var22.Color.Content.Emphasis.Color3,
-						TextTransparency = var22.Color.Content.Emphasis.Transparency,
+						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(BodyLarge.Font) else Font.fromEnum(BodyLarge.Font),
+						TextSize = BodyLarge.FontSize,
+						LineHeight = BodyLarge.LineHeight,
+						TextColor3 = UseTokensResult.Color.Content.Emphasis.Color3,
+						TextTransparency = UseTokensResult.Color.Content.Emphasis.Transparency,
 						TextXAlignment = Enum.TextXAlignment.Left,
 						TextYAlignment = Enum.TextYAlignment.Top,
-						[reactModule.Change.TextBounds] = var21,
-						ref = var19
+						[ReactModule.Change.TextBounds] = UseResult3,
+						ref = UseRefResult
 					})
 				})
 			else
-				var28 = reactModule.createElement(scrollView, {
+				ScrollingFrame = ReactModule.createElement(ScrollView, {
 					tag = "col align-y-top",
 					LayoutOrder = 3,
 					scroll = {
 						AutomaticCanvasSize = Enum.AutomaticSize.Y,
 						CanvasSize = UDim2.fromScale(1, 0),
-						scrollBarVisibility = scrollBarVisibility.Auto,
+						scrollBarVisibility = ScrollBarVisibility.Auto,
 						ScrollingDirection = Enum.ScrollingDirection.Y,
 						VerticalScrollBarInset = Enum.ScrollBarInset.ScrollBar
 					},
-					Size = var29
+					Size = _UDim2
 				}, {
-					Body = reactModule.createElement(text, {
+					Body = ReactModule.createElement(Text, {
 						tag = "size-full-0 text-body-large text-align-y-top text-align-x-left",
 						TextWrapped = true,
-						Text = displayDescription,
-						Size = UDim2.new(1, 0, 0, var15),
+						Text = DisplayDescription,
+						Size = UDim2.new(1, 0, 0, UseStateResult1),
 						padding = Vector2.new(0, 0),
-						ref = var19
+						ref = UseRefResult
 					})
 				})
 			end
-			return if overrideUseWideMode then reactModule.createElement(view, {
+			return if OverrideUseWideMode then ReactModule.createElement(View, {
 				tag = "col align-x-center size-full-0 auto-y gap-medium",
 				Size = UDim2.new(1, 0, 0, 0),
-				onAbsoluteSizeChanged = var14
+				onAbsoluteSizeChanged = UseResult2
 			}, {
-				Title = reactModule.createElement(text, {
+				Title = ReactModule.createElement(Text, {
 					tag = "size-full-0 auto-y text-title-large text-align-x-left",
 					LayoutOrder = 1,
-					Text = displayTitle,
-					ref = var20
+					Text = DisplayTitle,
+					ref = UseRefResult1
 				}),
-				Contents = reactModule.createElement(view, {
+				Contents = ReactModule.createElement(View, {
 					LayoutOrder = 2,
 					tag = {
-						["row align-y-top gap-medium size-full-0"] = luaAppFixRsvpPromptDescriptionScrolling,
-						["row align-y-center gap-medium size-full-0"] = not luaAppFixRsvpPromptDescriptionScrolling
+						["row align-y-top gap-medium size-full-0"] = LuaAppFixRsvpPromptDescriptionScrolling,
+						["row align-y-center gap-medium size-full-0"] = not LuaAppFixRsvpPromptDescriptionScrolling
 					},
-					Size = UDim2.new(1, 0, 0, var26)
-				}, { ThumbnailFrame = frame, BodyScrollView = var28 })
-			}) else reactModule.createElement(view, {
+					Size = UDim2.new(1, 0, 0, YOffset)
+				}, { ThumbnailFrame = Frame, BodyScrollView = ScrollingFrame })
+			}) else ReactModule.createElement(View, {
 				tag = "col align-x-center size-full-0 auto-y gap-medium",
 				Size = UDim2.new(1, 0, 0, 0),
-				onAbsoluteSizeChanged = var14
+				onAbsoluteSizeChanged = UseResult2
 			}, {
-				ThumbnailFrame = frame,
-				Title = reactModule.createElement(text, {
+				ThumbnailFrame = Frame,
+				Title = ReactModule.createElement(Text, {
 					tag = "size-full-0 auto-y text-title-large text-align-x-left",
 					LayoutOrder = 2,
-					Text = displayTitle,
-					ref = var20
+					Text = DisplayTitle,
+					ref = UseRefResult1
 				}),
-				BodyScrollView = var28
+				BodyScrollView = ScrollingFrame
 			})
 		end, {
-			var4, displayTitle, displayDescription, dateTime, var7, var12, var15, var14,
-			var1, size300, var17, var22, bodyLarge, var21, overrideUseWideMode,
+			MediaId, DisplayTitle, DisplayDescription, v1, EventTime, UseStateResult,
+			UseStateResult1, UseResult2, UseScreenSizeResult, Size300, UseStateResult3,
+			UseTokensResult, BodyLarge, UseResult3, OverrideUseWideMode,
 			p1.overrideUseWideMode
 		}),
 		position = UDim2.fromScale(0.5, 0.5),
-		screenSize = var1,
-		title = var8
+		screenSize = UseScreenSizeResult,
+		title = UnfollowEvent1
 	})
 end

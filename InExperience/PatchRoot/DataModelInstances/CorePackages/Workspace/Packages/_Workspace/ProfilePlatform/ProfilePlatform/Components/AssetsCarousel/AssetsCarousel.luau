@@ -1,179 +1,149 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local enumsModule = require(profilePlatform.Common.Enums)
-local collectionCarousel = require(parent.CollectionViews).CollectionCarousel
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useScreenSize = require(parent.RobloxAppHooks).useScreenSize
-local useScreenSize_1 = require(parent.CoreScriptsRoactCommon).useScreenSize
-local useProfileWrapperContextModule = require(profilePlatform.Contexts.useProfileWrapperContext)
-local useProfileFormFactorModule = require(profilePlatform.Hooks.useProfileFormFactor)
-local useDynamicSizeMarginModule = require(profilePlatform.Hooks.useDynamicSizeMargin)
-local formFactor = require(parent.FormFactor).Enums.FormFactor
-local responsiveModule = require(parent.Responsive)
-local useBreakpointX = responsiveModule.useBreakpointX
-local useIsSpatial = require(parent.Responsive).useIsSpatial
-local usePreferredInput = responsiveModule.usePreferredInput
-local foundationModule = require(parent.Foundation)
-local assetTileModule = require(script.Parent.AssetTile)
-local marketplaceAssetTileModule = require(script.Parent.MarketplaceAssetTile)
-local _ = require(profilePlatform.Common.AssetInfo)
-local textKeysModule = require(profilePlatform.Common.TextKeys)
-local fFlagProfilePlatformEnableInventory = require(parent.SharedFlags).FFlagProfilePlatformEnableInventory
-local fFlagProfilePlatformEnableVRModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableVR)
-local fFlagProfilePlatformDisableCurrentlyWearingOnConsoleModule = require(profilePlatform.Flags.FFlagProfilePlatformDisableCurrentlyWearingOnConsole)
-local fFlagAddIEMProfilePage = require(parent.SharedFlags).FFlagAddIEMProfilePage
-local fFlagProfilePlatformFixResaleLimitedPriceModule = require(profilePlatform.Flags.FFlagProfilePlatformFixResaleLimitedPrice)
-local fFlagProfilePlatformEnableBundlesInAssetsCarousel = require(parent.SharedFlags).FFlagProfilePlatformEnableBundlesInAssetsCarousel
-local fFlagAXEnableProfileTab = require(parent.SharedFlags).FFlagAXEnableProfileTab
-local fFlagSplitPaneProfileMaxWidth = require(parent.SharedFlags).FFlagSplitPaneProfileMaxWidth
-local fFlagAssetsCarouselPassActivateHeaderPropModule = require(profilePlatform.Flags.FFlagAssetsCarouselPassActivateHeaderProp)
-local seeMoreCurrentlyWearingCompact = game:DefineFastFlag("SeeMoreCurrentlyWearingCompact", false)
-local seeMoreCurrentlyWearingWide = game:DefineFastFlag("SeeMoreCurrentlyWearingWide", false)
-local profilePlatformUseNewLayoutForAssetsCarousel = game:DefineFastFlag("ProfilePlatformUseNewLayoutForAssetsCarousel", false)
-local useTokens = foundationModule.Hooks.useTokens
-local var1 = 2
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local CollectionCarousel = require(Parent.CollectionViews).CollectionCarousel
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseScreenSizeFunction1 = require(Parent.RobloxAppHooks).useScreenSize
+local UseScreenSizeFunction = require(Parent.CoreScriptsRoactCommon).useScreenSize
+local UseProfileWrapperContextModule = require(ProfilePlatform.Contexts.useProfileWrapperContext)
+local UseProfileFormFactorModule = require(ProfilePlatform.Hooks.useProfileFormFactor)
+local UseDynamicSizeMarginModule = require(ProfilePlatform.Hooks.useDynamicSizeMargin)
+local FormFactor = require(Parent.FormFactor).Enums.FormFactor
+local ResponsiveModule = require(Parent.Responsive)
+local UseBreakpointXFunction = ResponsiveModule.useBreakpointX
+local UseIsSpatialFunction = require(Parent.Responsive).useIsSpatial
+local UsePreferredInputFunction = ResponsiveModule.usePreferredInput
+local AssetTileModule = require(script.Parent.AssetTile)
+local MarketplaceAssetTileModule = require(script.Parent.MarketplaceAssetTile)
+local _ = require(ProfilePlatform.Common.AssetInfo)
+local TextKeysModule = require(ProfilePlatform.Common.TextKeys)
+local FFlagProfilePlatformEnableInventory = require(Parent.SharedFlags).FFlagProfilePlatformEnableInventory
+local FFlagProfilePlatformEnableVRModule = require(ProfilePlatform.Flags.FFlagProfilePlatformEnableVR)
+local FFlagProfilePlatformDisableCurrentlyWearingOnConsoleModule = require(ProfilePlatform.Flags.FFlagProfilePlatformDisableCurrentlyWearingOnConsole)
+local FFlagAddIEMProfilePage = require(Parent.SharedFlags).FFlagAddIEMProfilePage
+local FFlagProfilePlatformFixResaleLimitedPriceModule = require(ProfilePlatform.Flags.FFlagProfilePlatformFixResaleLimitedPrice)
+local FFlagProfilePlatformEnableBundlesInAssetsCarousel = require(Parent.SharedFlags).FFlagProfilePlatformEnableBundlesInAssetsCarousel
+local FFlagAXEnableProfileTab = require(Parent.SharedFlags).FFlagAXEnableProfileTab
+local FFlagSplitPaneProfileMaxWidth = require(Parent.SharedFlags).FFlagSplitPaneProfileMaxWidth
+local SeeMoreCurrentlyWearingCompact = game:DefineFastFlag("SeeMoreCurrentlyWearingCompact", false)
+local SeeMoreCurrentlyWearingWide = game:DefineFastFlag("SeeMoreCurrentlyWearingWide", false)
+local ProfilePlatformUseNewLayoutForAssetsCarousel = game:DefineFastFlag("ProfilePlatformUseNewLayoutForAssetsCarousel", false)
+local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
+local v1 = 2
 
-return function(value)
-	-- upvalues: fFlagAXEnableProfileTab (ref), enumsModule (ref), useProfileFormFactorModule (ref), fFlagAddIEMProfilePage (ref), useProfileWrapperContextModule (ref), profilePlatformUseNewLayoutForAssetsCarousel (ref), useTokens (ref), fFlagProfilePlatformEnableVRModule (ref), useIsSpatial (ref), fFlagProfilePlatformDisableCurrentlyWearingOnConsoleModule (ref), usePreferredInput (ref), responsiveModule (ref), useScreenSize (ref), useScreenSize_1 (ref), useDynamicSizeMarginModule (ref), reactModule (ref), fFlagProfilePlatformEnableInventory (ref), useLocalization (ref), textKeysModule (ref), seeMoreCurrentlyWearingCompact (ref), seeMoreCurrentlyWearingWide (ref), useSelector (ref), formFactor (ref), var1 (write), useBreakpointX (ref), marketplaceAssetTileModule (ref), assetTileModule (ref), fFlagProfilePlatformFixResaleLimitedPriceModule (ref), fFlagProfilePlatformEnableBundlesInAssetsCarousel (ref), fFlagSplitPaneProfileMaxWidth (ref), collectionCarousel (ref), fFlagAssetsCarouselPassActivateHeaderPropModule (ref)
-	local var2
-	local var3 = fFlagAXEnableProfileTab and value.tileVariant == enumsModule.ProfileTabVariants.MeTab
+return function(p1) --[[ Line: 78 | Named "AssetsCarousel" ]]
+	-- upvalues: FFlagAXEnableProfileTab (copy), EnumsModule (copy), UseProfileFormFactorModule (copy), FFlagAddIEMProfilePage (copy), UseProfileWrapperContextModule (copy), ProfilePlatformUseNewLayoutForAssetsCarousel (copy), UseTokensFunction (copy), FFlagProfilePlatformEnableVRModule (copy), UseIsSpatialFunction (copy), FFlagProfilePlatformDisableCurrentlyWearingOnConsoleModule (copy), UsePreferredInputFunction (copy), ResponsiveModule (copy), UseScreenSizeFunction1 (copy), UseScreenSizeFunction (copy), UseDynamicSizeMarginModule (copy), ReactModule (copy), FFlagProfilePlatformEnableInventory (copy), UseLocalizationFunction (copy), TextKeysModule (copy), SeeMoreCurrentlyWearingCompact (copy), SeeMoreCurrentlyWearingWide (copy), UseSelectorFunction (copy), FormFactor (copy), v1 (ref), UseBreakpointXFunction (copy), MarketplaceAssetTileModule (copy), AssetTileModule (copy), FFlagProfilePlatformFixResaleLimitedPriceModule (copy), FFlagProfilePlatformEnableBundlesInAssetsCarousel (copy), FFlagSplitPaneProfileMaxWidth (copy), CollectionCarousel (copy)
+	local IsTileVariantMatch: boolean = FFlagAXEnableProfileTab and p1.tileVariant == EnumsModule.ProfileTabVariants.MeTab
+	local IsFormFactorMatch = if FFlagAXEnableProfileTab then UseProfileFormFactorModule().formFactor == EnumsModule.ProfileFormFactor.Wide else nil
+	local Source = if FFlagAddIEMProfilePage then UseProfileWrapperContextModule().sourceInfo.source else nil
+	local UseTokensResult = if ProfilePlatformUseNewLayoutForAssetsCarousel then UseTokensFunction() else nil
+	local UseIsSpatialResult = if FFlagProfilePlatformEnableVRModule then UseIsSpatialFunction() else nil
+	local IsUsePreferredInputResultMatch: boolean = if FFlagProfilePlatformDisableCurrentlyWearingOnConsoleModule then UsePreferredInputFunction() == ResponsiveModule.Input.Directional else false
+	local UseIsSpatialResult1 = FFlagProfilePlatformEnableVRModule and UseIsSpatialResult or FFlagProfilePlatformDisableCurrentlyWearingOnConsoleModule and IsUsePreferredInputResultMatch
+	local UseScreenSizeResult = UseScreenSizeFunction1()
+	local UseScreenSizeResult1 = if FFlagAddIEMProfilePage then UseScreenSizeFunction() else nil
 	
-	if fFlagAXEnableProfileTab then
-		var2 = useProfileFormFactorModule().formFactor == enumsModule.ProfileFormFactor.Wide
-		var2 = nil
-	else
-		var2 = nil
+	if FFlagAddIEMProfilePage and Source == EnumsModule.Sources.InExperienceProfile then
+		UseScreenSizeResult = UseScreenSizeResult1
 	end
-	local var4
-	local var5 = if fFlagAddIEMProfilePage then useProfileWrapperContextModule().sourceInfo.source else nil
-	local var6 = if profilePlatformUseNewLayoutForAssetsCarousel then useTokens() else nil
-	local var7 = if fFlagProfilePlatformEnableVRModule then useIsSpatial() else nil
+	local UseDynamicSizeMarginModuleResult, UseDynamicSizeMarginModuleResult2 = UseDynamicSizeMarginModule()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
+	local Title = if FFlagProfilePlatformEnableInventory then p1.title else UseLocalizationFunction({ currentlyWearing = TextKeysModule.CurrentlyWearing })
 	
-	if fFlagProfilePlatformDisableCurrentlyWearingOnConsoleModule then
-		var4 = usePreferredInput() == responsiveModule.Input.Directional
-		var4 = nil
-	else
-		var4 = false
-	end
-	local var8 = if fFlagProfilePlatformEnableVRModule then var7 else fFlagProfilePlatformDisableCurrentlyWearingOnConsoleModule and var4
-	local var9 = useScreenSize()
-	local var10 = if fFlagAddIEMProfilePage then useScreenSize_1() else nil
-	
-	if fFlagAddIEMProfilePage and var5 == enumsModule.Sources.InExperienceProfile then
-		var9 = var10
-	end
-	local var11, var12 = useDynamicSizeMarginModule()
-	local var13, var14 = reactModule.useState(0)
-	local var15 = if fFlagProfilePlatformEnableInventory then value.title else useLocalization({ currentlyWearing = textKeysModule.CurrentlyWearing })
-	
-	if seeMoreCurrentlyWearingCompact or seeMoreCurrentlyWearingWide then
-		local var16 = useSelector(function(p1)
-			-- upvalues: formFactor (copy)
-			return p1.FormFactor == formFactor.WIDE
+	if SeeMoreCurrentlyWearingCompact or SeeMoreCurrentlyWearingWide then
+		local UseSelectorResult = UseSelectorFunction(function(p2): boolean --[[ Line: 107 ]]
+			-- upvalues: FormFactor (upval)
+			return p2.FormFactor == FormFactor.WIDE
 		end)
 		
-		if seeMoreCurrentlyWearingWide and var16 then
-			var1 = 4
-		elseif seeMoreCurrentlyWearingCompact and not var16 then
-			var1 = 3
+		if SeeMoreCurrentlyWearingWide and UseSelectorResult then
+			v1 = 4
+		elseif SeeMoreCurrentlyWearingCompact and not UseSelectorResult then
+			v1 = 3
 		end
 	end
-	local var17 = if fFlagAddIEMProfilePage then useBreakpointX() else nil
+	local UseBreakpointXResult = if FFlagAddIEMProfilePage then UseBreakpointXFunction() else nil
 	
-	if fFlagAddIEMProfilePage and var5 == enumsModule.Sources.InExperienceProfile then
-		var1 = if var17 == responsiveModule.Keys.XSmall then 2 elseif var17 == responsiveModule.Keys.Small then 3 else 5
+	if FFlagAddIEMProfilePage and Source == EnumsModule.Sources.InExperienceProfile then
+		v1 = if UseBreakpointXResult == ResponsiveModule.Keys.XSmall then 2 elseif UseBreakpointXResult == ResponsiveModule.Keys.Small then 3 else 5
 	end
-	local var18
-	local var19 = if fFlagAXEnableProfileTab and var3 and var2 then 5 else var1
-	local var20 = reactModule.useCallback(function(p1, p2, p3)
-		-- upvalues: reactModule (copy), var3 (ref), marketplaceAssetTileModule (copy), assetTileModule (copy), fFlagProfilePlatformFixResaleLimitedPriceModule (copy), fFlagProfilePlatformEnableBundlesInAssetsCarousel (copy), var8 (ref), value (ref)
-		return reactModule.createElement("Frame", { BackgroundTransparency = 1, Size = p3, LayoutOrder = p2 }, {
-			[`{p1.name}`] = reactModule.createElement(if var3 then marketplaceAssetTileModule else assetTileModule, {
-				name = p1.name,
-				price = p1.price,
-				isOffSale = if p1.isOffSale then true else nil,
-				lowestResalePrice = if fFlagProfilePlatformFixResaleLimitedPriceModule then p1.lowestResalePrice else nil,
-				assetId = p1.id,
-				itemType = if fFlagProfilePlatformEnableBundlesInAssetsCarousel then p1.itemType else "Asset",
-				onActivated = function()
-					-- upvalues: var8 (copy), value (copy), p1 (ref), p2 (ref)
-					if var8 then
+	local v2: number = if FFlagAXEnableProfileTab and IsTileVariantMatch and IsFormFactorMatch then 5 else v1
+	local UseResult = ReactModule.useCallback(function(p2, LayoutOrder, Size) --[[ Line: 139 ]]
+		-- upvalues: ReactModule (upval), IsTileVariantMatch (copy), MarketplaceAssetTileModule (upval), AssetTileModule (upval), FFlagProfilePlatformFixResaleLimitedPriceModule (upval), FFlagProfilePlatformEnableBundlesInAssetsCarousel (upval), UseIsSpatialResult1 (copy), p1 (copy)
+		return ReactModule.createElement("Frame", {
+			BackgroundTransparency = 1,
+			Size = Size,
+			LayoutOrder = LayoutOrder
+		}, {
+			[`{p2.name}`] = ReactModule.createElement(if IsTileVariantMatch then MarketplaceAssetTileModule else AssetTileModule, {
+				name = p2.name,
+				price = p2.price,
+				isOffSale = if p2.isOffSale then true else nil,
+				lowestResalePrice = if FFlagProfilePlatformFixResaleLimitedPriceModule then p2.lowestResalePrice else nil,
+				assetId = p2.id,
+				itemType = if FFlagProfilePlatformEnableBundlesInAssetsCarousel then p2.itemType else "Asset",
+				onActivated = function() --[[ Line: 161 ]]
+					-- upvalues: UseIsSpatialResult1 (upval), p1 (upval), p2 (copy), LayoutOrder (copy)
+					if not UseIsSpatialResult1 then
+						p1.openItemDetails(p2.id, p2.itemType, nil, nil, LayoutOrder)
+						
 						return
 					end
-					value.openItemDetails(p1.id, p1.itemType, nil, nil, p2)
 				end
 			})
 		}), "CW_Tile"
 	end, {
-		value.openItemDetails,
-		var8,
-		if fFlagAXEnableProfileTab then var3 else nil
+		p1.openItemDetails,
+		UseIsSpatialResult1,
+		if FFlagAXEnableProfileTab then IsTileVariantMatch else nil
 	})
-	local var21 = reactModule.useCallback(function(p1)
-		-- upvalues: var14 (ref), fFlagAddIEMProfilePage (copy), var5 (ref), enumsModule (copy)
-		var14(p1)
+	local UseResult1 = ReactModule.useCallback(function(p2: number): number --[[ Line: 176 ]]
+		-- upvalues: UseStateResult2 (copy), FFlagAddIEMProfilePage (upval), Source (copy), EnumsModule (upval)
+		UseStateResult2(p2)
 		
-		return p1 + 42 + (if fFlagAddIEMProfilePage and var5 == enumsModule.Sources.InExperienceProfile then 16 else 0)
+		return p2 + 42 + (if FFlagAddIEMProfilePage and Source == EnumsModule.Sources.InExperienceProfile then 16 else 0)
 	end, {})
-	local var22 = var19 < #value.assets
-	local createElement = reactModule.createElement
-	local var23 = "Frame"
-	local t = {
-		Size = UDim2.new(1, 0, 0, var13 + 42 + (if fFlagAddIEMProfilePage and var5 == enumsModule.Sources.InExperienceProfile then 16 else 0) + (if var22 then 0 else 60 + var9.Y * 0.01)),
+	local v3 = v2 < #p1.assets
+	
+	return ReactModule.createElement("Frame", {
+		Size = UDim2.new(1, 0, 0, UseStateResult + 42 + (if FFlagAddIEMProfilePage and Source == EnumsModule.Sources.InExperienceProfile then 16 else 0) + (if v3 then 0 else 60 + UseScreenSizeResult.Y * 0.01)),
 		AutomaticSize = Enum.AutomaticSize.Y,
 		BackgroundTransparency = 1,
-		LayoutOrder = value.layoutOrder,
-		[reactModule.Change.AbsoluteSize] = var12
-	}
-	local t_1 = {}
-	
-	if fFlagSplitPaneProfileMaxWidth then
-		var18 = reactModule.createElement
-		var18 = var18("Frame", {
+		LayoutOrder = p1.layoutOrder,
+		[ReactModule.Change.AbsoluteSize] = UseDynamicSizeMarginModuleResult2
+	}, {
+		ConstrainedCarousel = if FFlagSplitPaneProfileMaxWidth then ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.fromScale(1, 1),
 			Position = UDim2.fromOffset(0, 0)
 		}, {
-			MaxWidthConstraint = reactModule.createElement("UISizeConstraint", { MaxSize = Vector2.new(850, 1e999) }),
-			CollectionCarousel = reactModule.createElement(collectionCarousel, {
+			MaxWidthConstraint = ReactModule.createElement("UISizeConstraint", { MaxSize = Vector2.new(850, 1e999) }),
+			CollectionCarousel = ReactModule.createElement(CollectionCarousel, {
 				fractionalItemAmount = 0.8,
-				LayoutOrder = value.layoutOrder,
-				title = if fFlagProfilePlatformEnableInventory then value.title else var15.currentlyWearing,
-				items = value.assets,
-				renderItem = var20,
-				getItemHeight = var21,
-				numColumns = if fFlagAXEnableProfileTab then var19 else var1,
-				columnGap = if fFlagAXEnableProfileTab and var3 and var2 then 12 elseif profilePlatformUseNewLayoutForAssetsCarousel then var6.Gap.Medium else 8,
-				sideMargin = var11,
-				onActivateHeader = if fFlagAssetsCarouselPassActivateHeaderPropModule then value.onActivateHeader elseif fFlagProfilePlatformEnableInventory and not var8 then value.onActivateHeader else nil
+				LayoutOrder = p1.layoutOrder,
+				title = if FFlagProfilePlatformEnableInventory then p1.title else Title.currentlyWearing,
+				items = p1.assets,
+				renderItem = UseResult,
+				getItemHeight = UseResult1,
+				numColumns = if FFlagAXEnableProfileTab then v2 else v1,
+				columnGap = if FFlagAXEnableProfileTab and IsTileVariantMatch and IsFormFactorMatch then 12 elseif ProfilePlatformUseNewLayoutForAssetsCarousel then UseTokensResult.Gap.Medium else 8,
+				sideMargin = UseDynamicSizeMarginModuleResult,
+				onActivateHeader = p1.onActivateHeader
 			})
-		})
-	else
-		var18 = nil
-	end
-	local createElement_1
-	t_1.ConstrainedCarousel = var18
-	
-	if fFlagSplitPaneProfileMaxWidth then
-		createElement_1 = nil
-	else
-		createElement_1 = reactModule.createElement
-		createElement_1 = createElement_1(collectionCarousel, {
+		}) else nil,
+		CollectionCarousel = if FFlagSplitPaneProfileMaxWidth then nil else ReactModule.createElement(CollectionCarousel, {
 			fractionalItemAmount = 0.8,
-			LayoutOrder = value.layoutOrder,
-			title = if fFlagProfilePlatformEnableInventory then value.title else var15.currentlyWearing,
-			items = value.assets,
-			renderItem = var20,
-			getItemHeight = var21,
-			numColumns = if fFlagAXEnableProfileTab then var19 else var1,
-			columnGap = if fFlagAXEnableProfileTab and var3 and var2 then 12 elseif profilePlatformUseNewLayoutForAssetsCarousel then var6.Gap.Medium else 8,
-			sideMargin = var11,
-			onActivateHeader = if fFlagAssetsCarouselPassActivateHeaderPropModule then value.onActivateHeader elseif fFlagProfilePlatformEnableInventory and not var8 then value.onActivateHeader else nil
+			LayoutOrder = p1.layoutOrder,
+			title = if FFlagProfilePlatformEnableInventory then p1.title else Title.currentlyWearing,
+			items = p1.assets,
+			renderItem = UseResult,
+			getItemHeight = UseResult1,
+			numColumns = if FFlagAXEnableProfileTab then v2 else v1,
+			columnGap = if FFlagAXEnableProfileTab and IsTileVariantMatch and IsFormFactorMatch then 12 elseif ProfilePlatformUseNewLayoutForAssetsCarousel then UseTokensResult.Gap.Medium else 8,
+			sideMargin = UseDynamicSizeMarginModuleResult,
+			onActivateHeader = p1.onActivateHeader
 		})
-	end
-	t_1.CollectionCarousel = createElement_1
-	
-	return createElement(var23, t, t_1)
+	})
 end

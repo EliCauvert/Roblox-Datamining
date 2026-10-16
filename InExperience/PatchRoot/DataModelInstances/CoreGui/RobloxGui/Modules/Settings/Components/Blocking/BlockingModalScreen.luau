@@ -1,57 +1,55 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local robloxGui = coreGuiService:WaitForChild("RobloxGui")
-local corePackagesService = game:GetService("CorePackages")
-local tModule = require(corePackagesService.Packages.t)
-local roactModule = require(corePackagesService.Packages.Roact)
-local foundationModule = require(corePackagesService.Packages.Foundation)
-local blockingModalContainerModule = require(script.Parent.BlockingModalContainer)
-local renderWithCoreScriptsStyleProviderModule = require(robloxGui.Modules.Common.renderWithCoreScriptsStyleProvider)
-local focusNavigationUtilsModule = require(corePackagesService.Workspace.Packages.FocusNavigationUtils)
-local focusRoot = focusNavigationUtilsModule.FocusRoot
-local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
-local useOverlay = foundationModule.Hooks.useOverlay
-local blockingModalScreen = roactModule.PureComponent:extend("BlockingModalScreen")
-blockingModalScreen.validateProps = tModule.interface({
-	closeModal = tModule.callback,
-	player = tModule.interface({
-		DisplayName = tModule.string,
-		Name = tModule.string,
-		UserId = tModule.number
+﻿local CoreGui = game:GetService("CoreGui")
+local CorePackages = game:GetService("CorePackages")
+local TModule = require(CorePackages.Packages.t)
+local RoactModule = require(CorePackages.Packages.Roact)
+local BlockingModalContainerModule = require(script.Parent.BlockingModalContainer)
+local RenderWithCoreScriptsStyleProviderModule = require(CoreGui:WaitForChild("RobloxGui").Modules.Common.renderWithCoreScriptsStyleProvider)
+local FocusNavigationUtilsModule = require(CorePackages.Workspace.Packages.FocusNavigationUtils)
+local FocusRoot = FocusNavigationUtilsModule.FocusRoot
+local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
+local UseOverlayFunction = require(CorePackages.Packages.Foundation).Hooks.useOverlay
+local BlockingModalScreen = RoactModule.PureComponent:extend("BlockingModalScreen")
+BlockingModalScreen.validateProps = TModule.interface({
+	closeModal = TModule.callback,
+	player = TModule.interface({
+		DisplayName = TModule.string,
+		Name = TModule.string,
+		UserId = TModule.number
 	}),
-	translator = tModule.optional(tModule.table),
-	source = tModule.optional(tModule.string),
-	onBlockingSuccess = tModule.optional(tModule.callback),
-	overlay = tModule.optional(tModule.instanceIsA("GuiBase2d"))
+	translator = TModule.optional(TModule.table),
+	source = TModule.optional(TModule.string),
+	onBlockingSuccess = TModule.optional(TModule.callback),
+	overlay = TModule.optional(TModule.instanceIsA("GuiBase2d"))
 })
 
-function blockingModalScreen.render(p1)
-	-- upvalues: roactModule (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), blockingModalContainerModule (ref), coreGuiService (ref), renderWithCoreScriptsStyleProviderModule (ref)
-	local overlay = p1.props.overlay
-	local var1 = roactModule.createElement(focusRoot, {
+function BlockingModalScreen.render(p1) --[[ Line: 33 ]]
+	-- upvalues: RoactModule (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), BlockingModalContainerModule (copy), CoreGui (copy), RenderWithCoreScriptsStyleProviderModule (copy)
+	local Overlay = p1.props.overlay
+	local Element = RoactModule.createElement(FocusRoot, {
 		isIsolated = true,
 		isAutoFocusRoot = true,
-		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.CentralOverlay
+		surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.CentralOverlay
 	}, {
-		BlockingModalContainerWrapper = roactModule.createElement(blockingModalContainerModule, p1.props)
+		BlockingModalContainerWrapper = RoactModule.createElement(BlockingModalContainerModule, p1.props)
 	})
 	
-	return renderWithCoreScriptsStyleProviderModule(if overlay ~= nil then {
-		roactModule.createElement(roactModule.Portal, { target = coreGuiService }, {
-			BlockingModalScreen = roactModule.createElement("ScreenGui", {
+	return RenderWithCoreScriptsStyleProviderModule(if Overlay == nil then {
+		RoactModule.createElement(RoactModule.Portal, { target = CoreGui }, {
+			BlockingModalScreen = RoactModule.createElement("ScreenGui", {
 				IgnoreGuiInset = true,
 				AutoLocalize = false,
 				DisplayOrder = 6
-			}, { BlockingModalContainer = var1 })
+			}, { BlockingModalContainer = Element })
 		})
 	} else {
-		roactModule.createElement(roactModule.Portal, { target = overlay }, { BlockingModalScreen = var1 })
+		RoactModule.createElement(RoactModule.Portal, { target = Overlay }, { BlockingModalScreen = Element })
 	})
 end
 
-return function(p1)
-	-- upvalues: useOverlay (ref), roactModule (ref), blockingModalScreen (ref)
-	local cloned = table.clone(p1)
-	cloned.overlay = useOverlay()
+return function(Tbl) --[[ Line: 72 | Named "BlockingModalScreenWithFoundationOverlay" ]]
+	-- upvalues: UseOverlayFunction (copy), RoactModule (copy), BlockingModalScreen (copy)
+	local Copy = table.clone(Tbl)
+	Copy.overlay = UseOverlayFunction()
 	
-	return roactModule.createElement(blockingModalScreen, cloned)
+	return RoactModule.createElement(BlockingModalScreen, Copy)
 end

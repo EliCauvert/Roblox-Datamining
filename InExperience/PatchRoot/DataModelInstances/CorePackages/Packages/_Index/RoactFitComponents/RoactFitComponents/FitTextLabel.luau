@@ -1,44 +1,44 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent
-local cryoModule = require(parent_1.Cryo)
-local roactModule = require(parent_1.Roact)
-local flagsModule = require(parent.Flags)
-local _ = nil
-local ok, status = pcall(function()
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent
+local CryoModule = require(Parent1.Cryo)
+local RoactModule = require(Parent1.Roact)
+local FlagsModule = require(Parent.Flags)
+local Result1 = nil
+local Success, Result = pcall(function() --[[ Line: 9 ]]
 	return game:GetEngineFeature("TextBoundsRoundUp")
 end)
-local status_1 = ok and status
-local textService = game:GetService("TextService")
+Result1 = Success and Result
+local TextService = game:GetService("TextService")
 
-local function getTextHeight(p1, p2, p3, p4)
-	-- upvalues: status_1 (write), textService (ref)
-	return if status_1 then textService:GetTextSize(p1, p2, p3, Vector2.new(p4, 10000)).Y else textService:GetTextSize(p1, p2, p3, Vector2.new(p4, 10000)).Y + 2
+local function getTextHeight(String, TextSize, PropsFont, X) --[[ Line: 17 ]]
+	-- upvalues: Result1 (ref), TextService (copy)
+	return if Result1 then TextService:GetTextSize(String, TextSize, PropsFont, Vector2.new(X, 10000)).Y else TextService:GetTextSize(String, TextSize, PropsFont, Vector2.new(X, 10000)).Y + 2
 end
 
-local function getTextWidth(p1, p2, p3)
-	-- upvalues: status_1 (write), textService (ref)
-	return if status_1 then textService:GetTextSize(p1, p2, p3, Vector2.new(10000, 10000)).X else textService:GetTextSize(p1, p2, p3, Vector2.new(10000, 10000)).X + 2
+local function getTextWidth(String, TextSize, PropsFont) --[[ Line: 25 ]]
+	-- upvalues: Result1 (ref), TextService (copy)
+	return if Result1 then TextService:GetTextSize(String, TextSize, PropsFont, Vector2.new(10000, 10000)).X else TextService:GetTextSize(String, TextSize, PropsFont, Vector2.new(10000, 10000)).X + 2
 end
 
-local function getFontTextBoundsAsync(p1, p2, p3, p4)
-	-- upvalues: textService (ref)
-	local getTextBoundsParams = Instance.new("GetTextBoundsParams")
-	getTextBoundsParams.Text = p1
-	getTextBoundsParams.Font = p3
-	getTextBoundsParams.Size = p2
-	getTextBoundsParams.Width = p4
-	local ok, status = pcall(function()
-		-- upvalues: textService (copy), getTextBoundsParams (ref)
-		return textService:GetTextBoundsAsync(getTextBoundsParams)
+local function getFontTextBoundsAsync(Text, TextSize, PropsFont, Width) --[[ Line: 33 ]]
+	-- upvalues: TextService (copy)
+	local GetTextBoundsParams = Instance.new("GetTextBoundsParams")
+	GetTextBoundsParams.Text = Text
+	GetTextBoundsParams.Font = PropsFont
+	GetTextBoundsParams.Size = TextSize
+	GetTextBoundsParams.Width = Width
+	local Success, Result = pcall(function() --[[ Line: 40 ]]
+		-- upvalues: TextService (upval), GetTextBoundsParams (copy)
+		return TextService:GetTextBoundsAsync(GetTextBoundsParams)
 	end)
-	getTextBoundsParams:Destroy()
+	GetTextBoundsParams:Destroy()
 	
-	return if ok and typeof(status) == "Vector2" then status else nil
+	return if Success and typeof(Result) == "Vector2" then Result else nil
 end
 
-local t = { FitToText = {} }
-local fitTextLabel = roactModule.PureComponent:extend("FitTextLabel")
-fitTextLabel.defaultProps = {
+local Width = { FitToText = {} }
+local FitTextLabel = RoactModule.PureComponent:extend("FitTextLabel")
+FitTextLabel.defaultProps = {
 	Text = "Label",
 	TextSize = 12,
 	TextWrapped = true,
@@ -46,128 +46,129 @@ fitTextLabel.defaultProps = {
 	Font = Enum.Font.SourceSans
 }
 
-function fitTextLabel.init(p1)
-	-- upvalues: flagsModule (ref), roactModule (ref)
-	if flagsModule.RoactFitComponentsFontDatatypeSupport then
+function FitTextLabel.init(p1) --[[ Line: 67 ]]
+	-- upvalues: FlagsModule (copy), RoactModule (copy)
+	if FlagsModule.RoactFitComponentsFontDatatypeSupport then
 		p1.measurementId = 0
 		p1.mounted = false
 	end
-	if roactModule.Ref == "ref" then
-		p1.frameRef = p1.props.forwardedRef or roactModule.createRef()
+	if RoactModule.Ref == "ref" then
+		p1.frameRef = p1.props.forwardedRef or RoactModule.createRef()
 	else
-		p1.frameRef = p1.props[roactModule.Ref] or roactModule.createRef()
+		p1.frameRef = p1.props[RoactModule.Ref] or RoactModule.createRef()
 	end
-	function p11.onResize()
-		-- upvalues: p1 (ref), flagsModule (copy)
+	function p1.onResize() --[[ Line: 79 ]]
+		-- upvalues: p1 (copy), FlagsModule (upval)
 		if not p1.frameRef.current then return end
-		if flagsModule.RoactFitComponentsFontDatatypeSupport and typeof(p1.props.Font) == "Font" then
+		if FlagsModule.RoactFitComponentsFontDatatypeSupport and typeof(p1.props.Font) == "Font" then
 			p1:__resizeForFont(p1.frameRef.current)
 			
 			return
-		elseif flagsModule.RoactFitComponentsFontDatatypeSupport then
+		end
+		if FlagsModule.RoactFitComponentsFontDatatypeSupport then
 			p1.measurementId += 1
 		end
 		p1.frameRef.current.Size = p1:__getSize(p1.frameRef.current)
 	end
 end
 
-function fitTextLabel.render(p1)
-	-- upvalues: roactModule (ref)
-	return roactModule.createElement(if p1.props.onActivated then "TextButton" else "TextLabel", p1:__getFilteredProps())
+function FitTextLabel.render(p1) --[[ Line: 95 ]]
+	-- upvalues: RoactModule (copy)
+	return RoactModule.createElement(if p1.props.onActivated then "TextButton" else "TextLabel", p1:__getFilteredProps())
 end
 
-function fitTextLabel.didMount(p1)
-	-- upvalues: flagsModule (ref)
-	if flagsModule.RoactFitComponentsFontDatatypeSupport then
+function FitTextLabel.didMount(p1) --[[ Line: 100 ]]
+	-- upvalues: FlagsModule (copy)
+	if FlagsModule.RoactFitComponentsFontDatatypeSupport then
 		p1.mounted = true
 	end
 	p1.onResize()
 end
 
-function fitTextLabel.didUpdate(p1)
+function FitTextLabel.didUpdate(p1) --[[ Line: 107 ]]
 	p1.onResize()
 end
 
-function fitTextLabel.willUnmount(p1)
-	-- upvalues: flagsModule (ref)
-	if flagsModule.RoactFitComponentsFontDatatypeSupport then
+function FitTextLabel.willUnmount(p1) --[[ Line: 111 ]]
+	-- upvalues: FlagsModule (copy)
+	if FlagsModule.RoactFitComponentsFontDatatypeSupport then
 		p1.mounted = false
 		p1.measurementId += 1
 	end
 end
 
-function fitTextLabel.__getFilteredProps(p1)
-	-- upvalues: cryoModule (ref), roactModule (ref), flagsModule (ref)
-	local t = {
-		width = cryoModule.None,
-		maximumWidth = cryoModule.None,
-		onActivated = cryoModule.None,
-		forwardedRef = cryoModule.None,
-		Size = UDim2.new(if typeof(p1.props.width) == "UDim" then p1.props.width else UDim.new(0, 0), UDim.new(0, 0)),
-		[roactModule.Ref] = p1.frameRef,
-		[roactModule.Children] = cryoModule.Dictionary.join(p1.props[roactModule.Children] or {}, {
-			sizeConstraint = p1.props.maximumWidth < 1e999 and roactModule.createElement("UISizeConstraint", { MaxSize = Vector2.new(p1.props.maximumWidth, 1e999) })
+function FitTextLabel.__getFilteredProps(p1) --[[ Line: 118 ]]
+	-- upvalues: CryoModule (copy), RoactModule (copy), FlagsModule (copy)
+	local Label = {
+		width = CryoModule.None,
+		maximumWidth = CryoModule.None,
+		onActivated = CryoModule.None,
+		forwardedRef = CryoModule.None,
+		Size = UDim2.new(typeof(p1.props.width) == "UDim" and p1.props.width or UDim.new(0, 0), UDim.new(0, 0)),
+		[RoactModule.Ref] = p1.frameRef,
+		[RoactModule.Children] = CryoModule.Dictionary.join(p1.props[RoactModule.Children] or {}, {
+			sizeConstraint = p1.props.maximumWidth < 1e999 and RoactModule.createElement("UISizeConstraint", { MaxSize = Vector2.new(p1.props.maximumWidth, 1e999) })
 		}),
-		[roactModule.Event.Activated] = p1.props.onActivated,
-		[roactModule.Change.AbsoluteSize] = function(p2)
-			-- upvalues: p1 (ref), roactModule (copy)
-			if p1.props[roactModule.Change.AbsoluteSize] then
-				p1.props[roactModule.Change.AbsoluteSize](p2)
+		[RoactModule.Event.Activated] = p1.props.onActivated,
+		[RoactModule.Change.AbsoluteSize] = function(p2) --[[ Line: 140 ]]
+			-- upvalues: p1 (copy), RoactModule (upval)
+			if p1.props[RoactModule.Change.AbsoluteSize] then
+				p1.props[RoactModule.Change.AbsoluteSize](p2)
 			end
 			p1.onResize()
 		end
 	}
 	
-	if flagsModule.RoactFitComponentsFontDatatypeSupport and typeof(p1.props.Font) == "Font" then
-		t.Font = cryoModule.None
-		t.FontFace = p1.props.Font
+	if FlagsModule.RoactFitComponentsFontDatatypeSupport and typeof(p1.props.Font) == "Font" then
+		Label.Font = CryoModule.None
+		Label.FontFace = p1.props.Font
 	end
-	return cryoModule.Dictionary.join(p1.props, t)
+	return CryoModule.Dictionary.join(p1.props, Label)
 end
 
-function fitTextLabel.__resizeForFont(p1, p2)
-	-- upvalues: t (ref), getFontTextBoundsAsync (ref)
+function FitTextLabel.__resizeForFont(p1, Frame) --[[ Line: 156 ]]
+	-- upvalues: Width (copy), getFontTextBoundsAsync (copy)
 	p1.measurementId += 1
-	local measurementId = p1.measurementId
-	local text = p1.props.Text
-	local textSize = p1.props.TextSize
-	local font = p1.props.Font
-	local maximumWidth = p1.props.maximumWidth
-	local width = p1.props.width
-	local maxValue = math.max(if maximumWidth < 1e999 then maximumWidth else 0, p2.AbsoluteSize.X)
-	task.spawn(function()
-		-- upvalues: width (write), t (copy), getFontTextBoundsAsync (copy), text (ref), textSize (ref), font (ref), maximumWidth (ref), p1 (ref), measurementId (ref), maxValue (ref)
-		if width == t.FitToText then
-			local var1 = getFontTextBoundsAsync(text, textSize, font, 10000)
-			width = UDim.new(0, var1 and math.min(math.ceil(var1.X), maximumWidth) or 0)
+	local MeasurementId = p1.measurementId
+	local Text = p1.props.Text
+	local TextSize = p1.props.TextSize
+	local PropsFont = p1.props.Font
+	local MaximumWidth: number = p1.props.maximumWidth
+	local Width1 = p1.props.width
+	local Largest = math.max(MaximumWidth < 1e999 and MaximumWidth or 0, Frame.AbsoluteSize.X)
+	task.spawn(function() --[[ Line: 167 ]]
+		-- upvalues: Width1 (ref), Width (upval), getFontTextBoundsAsync (upval), Text (copy), TextSize (copy), PropsFont (copy), MaximumWidth (copy), p1 (copy), MeasurementId (copy), Largest (copy)
+		if Width1 == Width.FitToText then
+			local FontTextBoundsAsync = getFontTextBoundsAsync(Text, TextSize, PropsFont, 10000)
+			Width1 = UDim.new(0, FontTextBoundsAsync and math.min(math.ceil(FontTextBoundsAsync.X), MaximumWidth) or 0)
 		end
-		if not p1.mounted or p1.measurementId ~= measurementId then return end
-		local var2 = getFontTextBoundsAsync(text, textSize, font, maxValue)
-		local y = var2 and math.ceil(var2.Y) or textSize
+		if not p1.mounted or p1.measurementId ~= MeasurementId then return end
+		local FontTextBoundsAsync = getFontTextBoundsAsync(Text, TextSize, PropsFont, Largest)
+		local Ceiled = FontTextBoundsAsync and math.ceil(FontTextBoundsAsync.Y) or TextSize
 		
-		if p1.mounted and p1.measurementId == measurementId and p1.frameRef.current then
-			p1.frameRef.current.Size = UDim2.new(width, UDim.new(0, y))
+		if p1.mounted and p1.measurementId == MeasurementId and p1.frameRef.current then
+			p1.frameRef.current.Size = UDim2.new(Width1, UDim.new(0, Ceiled))
 			
 			return
 		end
 	end)
 end
 
-function fitTextLabel.__getSize(p1, p2)
-	-- upvalues: t (ref), getTextWidth (ref), getTextHeight (ref)
-	local maximumWidth = p1.props.maximumWidth
-	local width = p1.props.width
+function FitTextLabel.__getSize(p1, Frame): UDim2 --[[ Line: 188 ]]
+	-- upvalues: Width (copy), getTextWidth (copy), getTextHeight (copy)
+	local MaximumWidth: number = p1.props.maximumWidth
+	local Width1 = p1.props.width
 	
-	if width == t.FitToText then
-		width = UDim.new(0, math.min(getTextWidth(p1.props.Text, p1.props.TextSize, p1.props.Font), maximumWidth))
+	if Width1 == Width.FitToText then
+		Width1 = UDim.new(0, (math.min(getTextWidth(p1.props.Text, p1.props.TextSize, p1.props.Font), MaximumWidth)))
 	end
-	return UDim2.new(width, UDim.new(0, getTextHeight(p1.props.Text, p1.props.TextSize, p1.props.Font, math.max(if maximumWidth < 1e999 then maximumWidth else 0, p2.AbsoluteSize.X))))
+	return UDim2.new(Width1, UDim.new(0, (getTextHeight(p1.props.Text, p1.props.TextSize, p1.props.Font, (math.max(MaximumWidth < 1e999 and MaximumWidth or 0, Frame.AbsoluteSize.X))))))
 end
 
-local var1 = if roactModule.Ref == "ref" then roactModule.forwardRef(function(p1, p2)
-	-- upvalues: roactModule (ref), fitTextLabel (ref), cryoModule (ref)
-	return roactModule.createElement(fitTextLabel, cryoModule.Dictionary.join(p1, { forwardedRef = p2 }))
-end) else fitTextLabel
-var1.Width = t
+local ForwardRefResult = if RoactModule.Ref == "ref" then RoactModule.forwardRef(function(p1, ForwardedRef) --[[ Line: 209 ]]
+	-- upvalues: RoactModule (copy), FitTextLabel (copy), CryoModule (copy)
+	return RoactModule.createElement(FitTextLabel, CryoModule.Dictionary.join(p1, { forwardedRef = ForwardedRef }))
+end) else FitTextLabel
+ForwardRefResult.Width = Width
 
-return var1
+return ForwardRefResult

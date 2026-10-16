@@ -1,7 +1,7 @@
 ﻿local VRService = require(script:FindFirstAncestor("AppCommonLib").Parent.MockableProxyServices).VRService
-local isVRModeInStudioModule = require(script.Parent.isVRModeInStudio)
+local IsVRModeInStudioModule = require(script.Parent.isVRModeInStudio)
 
-return function()
-	-- upvalues: isVRModeInStudioModule (ref), VRService (ref)
-	return if isVRModeInStudioModule() then true else VRService.VREnabled
+return function() --[[ Line: 7 | Named "isSpatial" ]]
+	-- upvalues: IsVRModeInStudioModule (copy), VRService (copy)
+	return if IsVRModeInStudioModule() then true else VRService.VREnabled
 end

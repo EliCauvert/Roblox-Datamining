@@ -1,33 +1,33 @@
-﻿local avatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
-local parent = avatarExperienceInspectAndBuy.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local divider = foundationModule.Divider
-local dividerOrientation = foundationModule.Enums.DividerOrientation
-local _ = require(avatarExperienceInspectAndBuy.Enums.ViewType)
+﻿local AvatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
+local Parent = AvatarExperienceInspectAndBuy.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local Divider = FoundationModule.Divider
+local DividerOrientation = FoundationModule.Enums.DividerOrientation
+local _ = require(AvatarExperienceInspectAndBuy.Enums.ViewType)
 
-return function(p1)
-	-- upvalues: reactModule (ref), foundationModule (ref), divider (ref), dividerOrientation (ref)
-	local panelConfig = p1.panelConfig
+return function(Frame) --[[ Line: 78 | Named "ResponsivePanelLayout" ]]
+	-- upvalues: ReactModule (copy), FoundationModule (copy), Divider (copy), DividerOrientation (copy)
+	local PanelConfig = Frame.panelConfig
 	
-	return reactModule.createElement(foundationModule.View, {
+	return ReactModule.createElement(FoundationModule.View, {
 		ClipsDescendants = true,
-		tag = panelConfig.tag,
-		LayoutOrder = p1.LayoutOrder
+		tag = PanelConfig.tag,
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		FirstPanel = if p1.renderFirstPanel then reactModule.createElement(foundationModule.View, {
-			Size = if p1.renderSecondPanel then panelConfig.panelSizes.first else UDim2.new(1, 0, 1, 0),
-			LayoutOrder = panelConfig.layoutOrder.first
+		FirstPanel = if Frame.renderFirstPanel then ReactModule.createElement(FoundationModule.View, {
+			Size = if Frame.renderSecondPanel then PanelConfig.panelSizes.first else UDim2.new(1, 0, 1, 0),
+			LayoutOrder = PanelConfig.layoutOrder.first
 		}, {
-			RightBorder = if panelConfig.showRightBorder then reactModule.createElement(divider, {
-				orientation = dividerOrientation.Vertical,
+			RightBorder = if PanelConfig.showRightBorder then ReactModule.createElement(Divider, {
+				orientation = DividerOrientation.Vertical,
 				Position = UDim2.new(1, -1, 0, 0)
 			}) else nil,
-			StartSlot = p1.renderFirstPanel()
+			StartSlot = Frame.renderFirstPanel()
 		}) else nil,
-		SecondPanel = if p1.renderSecondPanel then reactModule.createElement(foundationModule.View, {
-			Size = if p1.renderFirstPanel then panelConfig.panelSizes.second else UDim2.new(1, 0, 1, 0),
-			LayoutOrder = panelConfig.layoutOrder.second
-		}, { EndSlot = p1.renderSecondPanel() }) else nil
+		SecondPanel = if Frame.renderSecondPanel then ReactModule.createElement(FoundationModule.View, {
+			Size = if Frame.renderFirstPanel then PanelConfig.panelSizes.second else UDim2.new(1, 0, 1, 0),
+			LayoutOrder = PanelConfig.layoutOrder.second
+		}, { EndSlot = Frame.renderSecondPanel() }) else nil
 	})
 end

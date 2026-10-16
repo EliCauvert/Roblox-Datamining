@@ -1,268 +1,270 @@
-﻿local gamepadService = game:GetService("GamepadService")
-local avatarExperienceUIKit = script:FindFirstAncestor("AvatarExperienceUIKit")
-local parent = avatarExperienceUIKit.Parent
-local reactModule = require(parent.React)
-local reactOtterModule = require(parent.ReactOtter)
-local useAnimatedBinding = reactOtterModule.useAnimatedBinding
-local foundationModule = require(parent.Foundation)
-local useTokens = foundationModule.Hooks.useTokens
-local view = foundationModule.View
-local scrollingFrameWithIndicatorsModule = require(avatarExperienceUIKit.ScrollingFrameWithIndicators.ScrollingFrameWithIndicators)
-local makeOtterSpringValueModule = require(avatarExperienceUIKit.Utils.makeOtterSpringValue)
-local getCenterScrollOffsetModule = require(avatarExperienceUIKit.Utils.getCenterScrollOffset)
-local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
-local fFlagAXCategoryMenuVisualFixes = avatarExperienceFlagsModule.FFlagAXCategoryMenuVisualFixes
-local fFlagAXScrollHighlightedTabIntoView = avatarExperienceFlagsModule.FFlagAXScrollHighlightedTabIntoView
-local t = { Transparency = 1 }
-local tabGroupTabModule = require(script.Parent.TabGroupTab)
-local t_1 = {
+﻿local GamepadService = game:GetService("GamepadService")
+local AvatarExperienceUIKit = script:FindFirstAncestor("AvatarExperienceUIKit")
+local Parent = AvatarExperienceUIKit.Parent
+local ReactModule = require(Parent.React)
+local ReactOtterModule = require(Parent.ReactOtter)
+local UseAnimatedBindingFunction = ReactOtterModule.useAnimatedBinding
+local FoundationModule = require(Parent.Foundation)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local View = FoundationModule.View
+local ScrollingFrameWithIndicatorsModule = require(AvatarExperienceUIKit.ScrollingFrameWithIndicators.ScrollingFrameWithIndicators)
+local MakeOtterSpringValueModule = require(AvatarExperienceUIKit.Utils.makeOtterSpringValue)
+local GetCenterScrollOffsetModule = require(AvatarExperienceUIKit.Utils.getCenterScrollOffset)
+local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
+local FFlagAXCategoryMenuVisualFixes = AvatarExperienceFlagsModule.FFlagAXCategoryMenuVisualFixes
+local FFlagAXScrollHighlightedTabIntoView = AvatarExperienceFlagsModule.FFlagAXScrollHighlightedTabIntoView
+local BackgroundStyle = { Transparency = 1 }
+local TabGroupTabModule = require(script.Parent.TabGroupTab)
+local Layout = {
 	FillDirection = Enum.FillDirection.Horizontal,
 	SortOrder = Enum.SortOrder.LayoutOrder,
 	HorizontalFlex = Enum.UIFlexAlignment.None
 }
-local t_2 = { Transparency = 1 }
-local t_3 = { dampingRatio = 1, frequency = 5 }
+local BackgroundStyle1 = { Transparency = 1 }
+local config = { dampingRatio = 1, frequency = 5 }
 
-local function getActiveTabPosition(p1)
-	return UDim2.new(0, p1, 1, 0)
+local function getActiveTabPosition(XOffset): UDim2 --[[ Line: 70 ]]
+	return UDim2.new(0, XOffset, 1, 0)
 end
 
-local function getActiveTabSize(value)
-	return UDim2.new(0, value, 0, 3)
+local function getActiveTabSize(XOffset): UDim2 --[[ Line: 74 ]]
+	return UDim2.new(0, XOffset, 0, 3)
 end
 
-return reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useTokens (ref), useAnimatedBinding (ref), reactModule (ref), fFlagAXCategoryMenuVisualFixes (ref), makeOtterSpringValueModule (ref), t_3 (ref), reactOtterModule (ref), fFlagAXScrollHighlightedTabIntoView (ref), getCenterScrollOffsetModule (ref), gamepadService (ref), tabGroupTabModule (ref), getActiveTabPosition (ref), getActiveTabSize (ref), view (ref), t_2 (ref), t_1 (ref), scrollingFrameWithIndicatorsModule (ref), t (ref)
-	local var1 = useTokens()
-	local var2, var3 = useAnimatedBinding(0)
-	local var4, var5 = useAnimatedBinding(0)
-	local var6 = reactModule.useRef(nil)
-	local var7 = reactModule.useRef(nil)
-	local var8 = reactModule.useRef(nil)
-	local var9 = reactModule.useCallback(function(p3, p4, p5)
-		-- upvalues: fFlagAXCategoryMenuVisualFixes (copy), var4 (ref), var3 (ref), makeOtterSpringValueModule (copy), t_3 (copy), var5 (ref), reactOtterModule (copy)
-		if not p5 and (not fFlagAXCategoryMenuVisualFixes or var4:getValue() > 0) then
-			var3(makeOtterSpringValueModule(p3, t_3))
-			var5(makeOtterSpringValueModule(p4, t_3))
+return ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 78 | Named "TabGroup" ]]
+	-- upvalues: UseTokensFunction (copy), UseAnimatedBindingFunction (copy), ReactModule (copy), FFlagAXCategoryMenuVisualFixes (copy), MakeOtterSpringValueModule (copy), config (copy), ReactOtterModule (copy), FFlagAXScrollHighlightedTabIntoView (copy), GetCenterScrollOffsetModule (copy), GamepadService (copy), TabGroupTabModule (copy), getActiveTabPosition (copy), getActiveTabSize (copy), View (copy), BackgroundStyle1 (copy), Layout (copy), ScrollingFrameWithIndicatorsModule (copy), BackgroundStyle (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = UseAnimatedBindingFunction(0)
+	local UseAnimatedBindingResult1, UseAnimatedBindingResult2_1 = UseAnimatedBindingFunction(0)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseRefResult2 = ReactModule.useRef(nil)
+	local UseResult = ReactModule.useCallback(function(p1, p2, p3) --[[ Line: 87 ]]
+		-- upvalues: FFlagAXCategoryMenuVisualFixes (upval), UseAnimatedBindingResult1 (copy), UseAnimatedBindingResult2 (copy), MakeOtterSpringValueModule (upval), config (upval), UseAnimatedBindingResult2_1 (copy), ReactOtterModule (upval)
+		if not p3 and (not FFlagAXCategoryMenuVisualFixes or UseAnimatedBindingResult1:getValue() > 0) then
+			UseAnimatedBindingResult2(MakeOtterSpringValueModule(p1, config))
+			UseAnimatedBindingResult2_1(MakeOtterSpringValueModule(p2, config))
+			
+			return
+		else
+			UseAnimatedBindingResult2(ReactOtterModule.instant(p1))
+			UseAnimatedBindingResult2_1(ReactOtterModule.instant(p2))
+		end
+	end, {})
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 100 ]]
+		-- upvalues: UseRefResult2 (copy), UseRefResult (copy), UseRefResult1 (copy)
+		local Current = UseRefResult2.current
+		local Current1 = UseRefResult.current
+		local Current2 = UseRefResult1.current
+		
+		if not Current or not Current1 or not Current2 then return end
+		local ScrollingFrame = Current.getScrollingFrame()
+		
+		if not ScrollingFrame then return end
+		local X: number = ScrollingFrame.AbsoluteSize.X
+		
+		if X <= 0 then return end
+		local X1: number = ScrollingFrame.CanvasPosition.X
+		local XDelta = Current2.AbsolutePosition.X - Current1.AbsolutePosition.X
+		local NewXDelta = XDelta + Current2.AbsoluteSize.X
+		
+		if XDelta < X1 then
+			Current.scrollToOffset(XDelta)
 			
 			return
 		end
-		var3(reactOtterModule.instant(p3))
-		var5(reactOtterModule.instant(p4))
+		if X1 + X < NewXDelta then
+			Current.scrollToOffset(NewXDelta - X)
+		end
 	end, {})
-	local var10 = reactModule.useCallback(function()
-		-- upvalues: var8 (ref), var6 (ref), var7 (ref)
-		local current = var8.current
-		local current_1 = var6.current
-		local current_2 = var7.current
+	local UseResult2 = if FFlagAXScrollHighlightedTabIntoView then ReactModule.useCallback(function(Frame: Frame) --[[ Line: 137 ]]
+		-- upvalues: UseRefResult2 (copy), GetCenterScrollOffsetModule (upval)
+		local Current = UseRefResult2.current
 		
-		if not current or not current_1 or not current_2 then return end
-		local scrollingFrame = current.getScrollingFrame()
+		if not Current then return end
+		local ScrollingFrame = Current.getScrollingFrame()
 		
-		if not scrollingFrame then return end
-		local x = scrollingFrame.AbsoluteSize.X
+		if not ScrollingFrame then return end
+		if not Frame or not Frame:IsDescendantOf(game) or not Frame:IsDescendantOf(ScrollingFrame) then return end
+		local X = ScrollingFrame.CanvasPosition.X
+		local CenterScrollOffsetModule = GetCenterScrollOffsetModule(Frame.AbsolutePosition.X - ScrollingFrame.AbsolutePosition.X + X, Frame.AbsoluteSize.X, X, ScrollingFrame.AbsoluteWindowSize.X)
 		
-		if x <= 0 then return end
-		local x_1 = scrollingFrame.CanvasPosition.X
-		local var11 = current_2.AbsolutePosition.X - current_1.AbsolutePosition.X
-		local var12 = var11 + current_2.AbsoluteSize.X
-		
-		if var11 < x_1 then
-			current.scrollToOffset(var11)
+		if CenterScrollOffsetModule ~= nil then
+			Current.scrollToOffset(CenterScrollOffsetModule)
 			
 			return
-		elseif x_1 + x < var12 then
-			current.scrollToOffset(var12 - x)
 		end
-	end, {})
-	local var11 = if fFlagAXScrollHighlightedTabIntoView then reactModule.useCallback(function(p3)
-		-- upvalues: var8 (ref), getCenterScrollOffsetModule (copy)
-		local current = var8.current
-		
-		if not current then return end
-		local scrollingFrame = current.getScrollingFrame()
-		
-		if not scrollingFrame then return end
-		if not p3 or not p3:IsDescendantOf(game) or not p3:IsDescendantOf(scrollingFrame) then return end
-		local x = scrollingFrame.CanvasPosition.X
-		local var12 = getCenterScrollOffsetModule(p3.AbsolutePosition.X - scrollingFrame.AbsolutePosition.X + x, p3.AbsoluteSize.X, x, scrollingFrame.AbsoluteWindowSize.X)
-		
-		if var12 == nil then
-			return
-		end
-		current.scrollToOffset(var12)
 	end, {}) else nil
-	local var12 = reactModule.useCallback(function(p3)
-		-- upvalues: var6 (ref), var7 (ref), p1 (ref), var9 (ref), fFlagAXScrollHighlightedTabIntoView (copy), var11 (write), var10 (ref)
-		local current = var6.current
-		var7.current = p3
+	local UseResult3 = ReactModule.useCallback(function(Current) --[[ Line: 167 ]]
+		-- upvalues: UseRefResult (copy), UseRefResult1 (copy), Frame (copy), UseResult (copy), FFlagAXScrollHighlightedTabIntoView (upval), UseResult2 (ref), UseResult1 (copy)
+		local Current1 = UseRefResult.current
+		UseRefResult1.current = Current
 		
-		for i, v in p1.items do
-			if v.id == p1.activeTabId and v.ref then
-				v.ref.current = p3
+		for _, item in Frame.items do
+			if item.id == Frame.activeTabId and item.ref then
+				item.ref.current = Current
 			end
 		end
-		if p3 and current then
-			var9(p3.AbsolutePosition.X - current.AbsolutePosition.X, p3.AbsoluteSize.X)
+		if Current and Current1 then
+			UseResult(Current.AbsolutePosition.X - Current1.AbsolutePosition.X, Current.AbsoluteSize.X)
 			
-			if fFlagAXScrollHighlightedTabIntoView and var11 then
-				var11(p3)
+			if FFlagAXScrollHighlightedTabIntoView and UseResult2 then
+				UseResult2(Current)
 				
 				return
 			end
-			var10()
+			UseResult1()
 		end
 	end, {
-		p1.activeTabId,
-		p1.items,
-		var10,
-		var11,
-		var9
+		Frame.activeTabId,
+		Frame.items,
+		UseResult1,
+		UseResult2,
+		UseResult
 	})
-	reactModule.useEffect(function()
-		-- upvalues: var6 (ref), var7 (ref), var9 (ref), fFlagAXCategoryMenuVisualFixes (copy), fFlagAXScrollHighlightedTabIntoView (copy), var11 (write), var10 (ref)
-		local current = var6.current
-		local current_1 = var7.current
+	ReactModule.useEffect(function() --[[ Line: 198 ]]
+		-- upvalues: UseRefResult (copy), UseRefResult1 (copy), UseResult (copy), FFlagAXCategoryMenuVisualFixes (upval), FFlagAXScrollHighlightedTabIntoView (upval), UseResult2 (ref), UseResult1 (copy)
+		local Current = UseRefResult.current
+		local Current1 = UseRefResult1.current
 		
-		if current_1 and current then
-			var9(current_1.AbsolutePosition.X - current.AbsolutePosition.X, current_1.AbsoluteSize.X, fFlagAXCategoryMenuVisualFixes)
+		if Current1 and Current then
+			UseResult(Current1.AbsolutePosition.X - Current.AbsolutePosition.X, Current1.AbsoluteSize.X, FFlagAXCategoryMenuVisualFixes)
 			
-			if fFlagAXScrollHighlightedTabIntoView and var11 then
-				var11(current_1)
+			if FFlagAXScrollHighlightedTabIntoView and UseResult2 then
+				UseResult2(Current1)
 				
 				return
 			end
-			var10()
+			UseResult1()
 		end
-	end, { var10, var11, var9 })
+	end, { UseResult1, UseResult2, UseResult })
 	
-	if fFlagAXScrollHighlightedTabIntoView then
-		reactModule.useEffect(function()
-			-- upvalues: var8 (ref), gamepadService (copy), var11 (write)
-			local current = var8.current
+	if FFlagAXScrollHighlightedTabIntoView then
+		ReactModule.useEffect(function() --[[ Line: 220 ]]
+			-- upvalues: UseRefResult2 (copy), GamepadService (upval), UseResult2 (ref)
+			local Current = UseRefResult2.current
 			
-			if not current then return end
-			local scrollingFrame = current.getScrollingFrame()
+			if not Current then return end
+			local ScrollingFrame = Current.getScrollingFrame()
 			
-			if scrollingFrame then
-				local selectionChangedConnection = scrollingFrame.SelectionChanged:Connect(function(_, _, p4)
-					-- upvalues: gamepadService (copy), var11 (copy)
-					if gamepadService.GamepadCursorEnabled then return end
-					if var11 then
-						var11(p4)
-					end
-				end)
-				
-				return function()
-					-- upvalues: selectionChangedConnection (ref)
-					selectionChangedConnection:Disconnect()
+			if not ScrollingFrame then return end
+			local SelectionChangedConnection = ScrollingFrame.SelectionChanged:Connect(function(_, _, p1) --[[ Line: 232 ]]
+				-- upvalues: GamepadService (upval), UseResult2 (upval)
+				if GamepadService.GamepadCursorEnabled then return end
+				if UseResult2 then
+					UseResult2(p1)
 				end
+			end)
+			
+			return function() --[[ Line: 244 ]]
+				-- upvalues: SelectionChangedConnection (copy)
+				SelectionChangedConnection:Disconnect()
 			end
 		end, {})
 	end
-	if fFlagAXCategoryMenuVisualFixes then
-		reactModule.useEffect(function()
-			-- upvalues: p1 (ref), var7 (ref), var3 (ref), reactOtterModule (copy), var5 (ref)
-			local var13 = false
+	if FFlagAXCategoryMenuVisualFixes then
+		ReactModule.useEffect(function() --[[ Line: 257 ]]
+			-- upvalues: Frame (copy), UseRefResult1 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), UseAnimatedBindingResult2_1 (copy)
+			local Flag = false
 			
-			if p1.activeTabId ~= nil then
-				for i, v in p1.items do
-					if v.id == p1.activeTabId then
-						var13 = true
+			if Frame.activeTabId ~= nil then
+				for _, item in Frame.items do
+					if item.id == Frame.activeTabId then
+						Flag = true
 						break
 					end
 				end
 			end
-			if not var13 then
-				var7.current = nil
-				var3(reactOtterModule.instant(0))
-				var5(reactOtterModule.instant(0))
+			if not Flag then
+				UseRefResult1.current = nil
+				UseAnimatedBindingResult2(ReactOtterModule.instant(0))
+				UseAnimatedBindingResult2_1(ReactOtterModule.instant(0))
 			end
-		end, { p1.activeTabId, p1.items })
-		reactModule.useImperativeHandle(p1.controllerRef, function()
-			-- upvalues: var8 (ref)
+		end, { Frame.activeTabId, Frame.items })
+		ReactModule.useImperativeHandle(Frame.controllerRef, function() --[[ Line: 276 ]]
+			-- upvalues: UseRefResult2 (copy)
 			return {
-				scrollToOffset = function(value)
-					-- upvalues: var8 (copy)
-					local current = var8.current
+				scrollToOffset = function(XDelta) --[[ Line: 278 ]]
+					-- upvalues: UseRefResult2 (upval)
+					local Current = UseRefResult2.current
 					
-					if current then
-						current.scrollToOffset(value)
+					if Current then
+						Current.scrollToOffset(XDelta)
 					end
 				end,
-				setOffset = function(value)
-					-- upvalues: var8 (copy)
-					local current = var8.current
+				setOffset = function(p1) --[[ Line: 284 ]]
+					-- upvalues: UseRefResult2 (upval)
+					local Current = UseRefResult2.current
 					
-					if current then
-						current.setOffset(value)
+					if Current then
+						Current.setOffset(p1)
 					end
 				end,
-				getScrollingFrame = function()
-					-- upvalues: var8 (copy)
-					local current = var8.current
+				getScrollingFrame = function() --[[ Line: 290 ]]
+					-- upvalues: UseRefResult2 (upval)
+					local Current = UseRefResult2.current
 					
-					return if current then current.getScrollingFrame() else nil
+					return if Current then Current.getScrollingFrame() else nil
 				end
 			}
 		end, {})
 	end
-	local t_4 = {}
+	local Elements = {}
 	
-	for i, v in p1.items do
-		local var13 = p1.activeTabId == v.id
-		t_4[v.id] = reactModule.createElement(tabGroupTabModule, {
-			ref = if var13 then var12 else v.ref,
-			text = v.text,
-			onActivated = if p1.onTabActivated then function()
-				-- upvalues: p1 (ref), v (ref)
-				p1.onTabActivated(v.id)
+	for LayoutOrder, item in Frame.items do
+		local IsActiveTabIdMatch = Frame.activeTabId == item.id
+		Elements[item.id] = ReactModule.createElement(TabGroupTabModule, {
+			ref = if IsActiveTabIdMatch then UseResult3 else item.ref,
+			text = item.text,
+			onActivated = if Frame.onTabActivated then function() --[[ Line: 305 ]]
+				-- upvalues: Frame (copy), item (copy)
+				Frame.onTabActivated(item.id)
 			end else nil,
-			isActive = var13,
-			fontStyle = p1.tabFontStyle,
-			padding = p1.tabPadding,
-			textStyle = p1.tabTextStyle,
-			activeTextStyle = p1.tabActiveTextStyle,
-			LayoutOrder = i
+			isActive = IsActiveTabIdMatch,
+			fontStyle = Frame.tabFontStyle,
+			padding = Frame.tabPadding,
+			textStyle = Frame.tabTextStyle,
+			activeTextStyle = Frame.tabActiveTextStyle,
+			LayoutOrder = LayoutOrder
 		})
 	end
-	local var14 = reactModule.createElement(view, {
+	local Element = ReactModule.createElement(View, {
 		ZIndex = -1,
-		ref = var6,
+		ref = UseRefResult,
 		Size = UDim2.fromScale(1, 0),
 		AutomaticSize = Enum.AutomaticSize.XY,
-		backgroundStyle = t_2,
-		layout = t_1
-	}, t_4)
-	local frame = reactModule.createElement("Frame", {
+		backgroundStyle = BackgroundStyle1,
+		layout = Layout
+	}, Elements)
+	local Frame1 = ReactModule.createElement("Frame", {
 		BorderSizePixel = 0,
-		Position = reactModule.useMemo(function()
-			-- upvalues: var2 (ref), getActiveTabPosition (copy)
-			return var2:map(getActiveTabPosition)
+		Position = ReactModule.useMemo(function() --[[ Line: 318 ]]
+			-- upvalues: UseAnimatedBindingResult (copy), getActiveTabPosition (upval)
+			return UseAnimatedBindingResult:map(getActiveTabPosition)
 		end, {}),
-		Size = reactModule.useMemo(function()
-			-- upvalues: var4 (ref), getActiveTabSize (copy)
-			return var4:map(getActiveTabSize)
+		Size = ReactModule.useMemo(function() --[[ Line: 322 ]]
+			-- upvalues: UseAnimatedBindingResult1 (copy), getActiveTabSize (upval)
+			return UseAnimatedBindingResult1:map(getActiveTabSize)
 		end, {}),
-		BackgroundColor3 = var1.Color.Content.Emphasis.Color3,
+		BackgroundColor3 = UseTokensResult.Color.Content.Emphasis.Color3,
 		AnchorPoint = Vector2.new(0, 1)
 	})
 	
-	return reactModule.createElement(scrollingFrameWithIndicatorsModule, {
+	return ReactModule.createElement(ScrollingFrameWithIndicatorsModule, {
 		Size = UDim2.fromScale(1, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
-		BackgroundTransparency = p1.BackgroundTransparency,
-		BackgroundColor3 = p1.BackgroundColor3,
-		LayoutOrder = p1.LayoutOrder,
-		Position = p1.Position,
-		ZIndex = p1.ZIndex,
-		ref = p2,
-		controllerRef = var8
-	}, if fFlagAXCategoryMenuVisualFixes then {
-		Content = reactModule.createElement(view, {
+		BackgroundTransparency = Frame.BackgroundTransparency,
+		BackgroundColor3 = Frame.BackgroundColor3,
+		LayoutOrder = Frame.LayoutOrder,
+		Position = Frame.Position,
+		ZIndex = Frame.ZIndex,
+		ref = Ref,
+		controllerRef = UseRefResult2
+	}, if FFlagAXCategoryMenuVisualFixes then {
+		Content = ReactModule.createElement(View, {
 			Size = UDim2.fromScale(0, 0),
 			AutomaticSize = Enum.AutomaticSize.XY,
-			backgroundStyle = t
-		}, { InnerNavigation = var14, ActiveTabIndicator = frame })
-	} else { InnerNavigation = var14, ActiveTabIndicator = frame })
+			backgroundStyle = BackgroundStyle
+		}, { InnerNavigation = Element, ActiveTabIndicator = Frame1 })
+	} else { InnerNavigation = Element, ActiveTabIndicator = Frame1 })
 end)

@@ -1,45 +1,48 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local roactModule = require(parent_1.Roact)
-local tModule = require(parent_1.t)
-local imagesModule = require(parent.App.ImageSet.Images)
-local emptyStateModule = require(parent.App.Indicator.EmptyState)
-local buttonModule = require(parent.App.Button.Button)
-local buttonTypeModule = require(parent.App.Button.Enum.ButtonType)
-local renderOnFailedStyleModule = require(parent.App.Loading.Enum.RenderOnFailedStyle)
-local failedStatePage = roactModule.PureComponent:extend("FailedStatePage")
-failedStatePage.validateProps = tModule.strictInterface({
-	onRetry = tModule.optional(tModule.callback),
-	renderOnFailed = tModule.optional(renderOnFailedStyleModule.isEnumValue),
-	text = tModule.optional(tModule.string)
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local RoactModule = require(Parent1.Roact)
+local TModule = require(Parent1.t)
+local ImagesModule = require(Parent.App.ImageSet.Images)
+local EmptyStateModule = require(Parent.App.Indicator.EmptyState)
+local ButtonModule = require(Parent.App.Button.Button)
+local ButtonTypeModule = require(Parent.App.Button.Enum.ButtonType)
+local RenderOnFailedStyleModule = require(Parent.App.Loading.Enum.RenderOnFailedStyle)
+local FailedStatePage = RoactModule.PureComponent:extend("FailedStatePage")
+FailedStatePage.validateProps = TModule.strictInterface({
+	onRetry = TModule.optional(TModule.callback),
+	renderOnFailed = TModule.optional(RenderOnFailedStyleModule.isEnumValue),
+	text = TModule.optional(TModule.string)
 })
-failedStatePage.defaultProps = { renderOnFailed = renderOnFailedStyleModule.RetryButton }
+FailedStatePage.defaultProps = { renderOnFailed = RenderOnFailedStyleModule.RetryButton }
 
-function failedStatePage.render(p1)
-	-- upvalues: renderOnFailedStyleModule (ref), roactModule (ref), emptyStateModule (ref), imagesModule (ref), buttonModule (ref), buttonTypeModule (ref)
-	if p1.props.renderOnFailed == renderOnFailedStyleModule.EmptyStatePage then
-		return roactModule.createElement(emptyStateModule, {
+function FailedStatePage.render(p1) --[[ Line: 36 ]]
+	-- upvalues: RenderOnFailedStyleModule (copy), RoactModule (copy), EmptyStateModule (copy), ImagesModule (copy), ButtonModule (copy), ButtonTypeModule (copy)
+	if p1.props.renderOnFailed == RenderOnFailedStyleModule.EmptyStatePage then
+		return RoactModule.createElement(EmptyStateModule, {
 			position = UDim2.fromScale(0.5, 0.5),
 			anchorPoint = Vector2.new(0.5, 0.5),
 			onActivated = p1.props.onRetry,
-			icon = imagesModule["icons/status/noconnection_large"],
+			icon = ImagesModule["icons/status/noconnection_large"],
 			text = p1.props.text
 		})
-	elseif p1.props.renderOnFailed ~= renderOnFailedStyleModule.RetryButton then
+	elseif p1.props.renderOnFailed ~= RenderOnFailedStyleModule.RetryButton then
 		error("Failed to provide proper RenderOnFailedStyle")
 		
 		return
-	elseif p1.props.onRetry then
-		return roactModule.createElement(buttonModule, {
-			buttonType = buttonTypeModule.Secondary,
-			size = UDim2.fromOffset(44, 44),
-			position = UDim2.fromScale(0.5, 0.5),
-			anchorPoint = Vector2.new(0.5, 0.5),
-			onActivated = p1.props.onRetry,
-			icon = imagesModule["icons/common/refresh"]
-		})
+	else
+		if p1.props.onRetry then
+			return RoactModule.createElement(ButtonModule, {
+				buttonType = ButtonTypeModule.Secondary,
+				size = UDim2.fromOffset(44, 44),
+				position = UDim2.fromScale(0.5, 0.5),
+				anchorPoint = Vector2.new(0.5, 0.5),
+				onActivated = p1.props.onRetry,
+				icon = ImagesModule["icons/common/refresh"]
+			})
+		else
+			error("OnRetry callback empty. OnRetry needs to be a function to render the RetryButton")
+		end
 	end
-	error("OnRetry callback empty. OnRetry needs to be a function to render the RetryButton")
 end
 
-return failedStatePage
+return FailedStatePage

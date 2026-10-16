@@ -1,21 +1,21 @@
-﻿local gameTile = script:FindFirstAncestor("GameTile")
-local parent = gameTile.Parent
-local reactModule = require(parent.React)
-local videoUtilsModule = require(parent.VideoUtils)
-local videoPlayer = videoUtilsModule.VideoPlayer
-local videoPlaybackCoordinator = videoUtilsModule.VideoPlaybackCoordinator
-local _ = require(gameTile.GameTileTypes)
-local fFlagLuaAppEdpMediaGalleryFullScreen = require(parent.SharedFlags).FFlagLuaAppEdpMediaGalleryFullScreen
-local fFlagLuaAppVideoTileDisableActivation = require(parent.SharedFlags).FFlagLuaAppVideoTileDisableActivation
-local fFlagLuaAppVideoTileHideCenterPlayButton = require(parent.SharedFlags).FFlagLuaAppVideoTileHideCenterPlayButton
-local fFlagLuaAppHomeMomentVideoFallback = require(parent.SharedFlags).FFlagLuaAppHomeMomentVideoFallback
+﻿local GameTile = script:FindFirstAncestor("GameTile")
+local Parent = GameTile.Parent
+local ReactModule = require(Parent.React)
+local VideoUtilsModule = require(Parent.VideoUtils)
+local VideoPlayer = VideoUtilsModule.VideoPlayer
+local VideoPlaybackCoordinator = VideoUtilsModule.VideoPlaybackCoordinator
+local _ = require(GameTile.GameTileTypes)
+local FFlagLuaAppEdpMediaGalleryFullScreen = require(Parent.SharedFlags).FFlagLuaAppEdpMediaGalleryFullScreen
+local FFlagLuaAppVideoTileDisableActivation = require(Parent.SharedFlags).FFlagLuaAppVideoTileDisableActivation
+local FFlagLuaAppVideoTileHideCenterPlayButton = require(Parent.SharedFlags).FFlagLuaAppVideoTileHideCenterPlayButton
+local FFlagLuaAppHomeMomentVideoFallback = require(Parent.SharedFlags).FFlagLuaAppHomeMomentVideoFallback
 
-return function(p1)
-	-- upvalues: reactModule (ref), videoPlaybackCoordinator (ref), videoPlayer (ref), fFlagLuaAppHomeMomentVideoFallback (ref), fFlagLuaAppVideoTileHideCenterPlayButton (ref), fFlagLuaAppVideoTileDisableActivation (ref), fFlagLuaAppEdpMediaGalleryFullScreen (ref)
-	return reactModule.createElement(videoPlayer, {
+return function(p1) --[[ Line: 40 | Named "GameTileVideoThumbnail" ]]
+	-- upvalues: ReactModule (copy), VideoPlaybackCoordinator (copy), VideoPlayer (copy), FFlagLuaAppHomeMomentVideoFallback (copy), FFlagLuaAppVideoTileHideCenterPlayButton (copy), FFlagLuaAppVideoTileDisableActivation (copy), FFlagLuaAppEdpMediaGalleryFullScreen (copy)
+	return ReactModule.createElement(VideoPlayer, {
 		muted = true,
 		video = p1.video,
-		accessContext = if fFlagLuaAppHomeMomentVideoFallback then p1.accessContext else nil,
+		accessContext = if FFlagLuaAppHomeMomentVideoFallback then p1.accessContext else nil,
 		thumbnail = p1.image,
 		shouldStartPlayback = p1.playing,
 		looped = p1.looped,
@@ -23,36 +23,36 @@ return function(p1)
 		ScaleType = if p1.isTileContained then Enum.ScaleType.Tile else nil,
 		ZIndex = p1.ZIndex,
 		cornerRadius = p1.cornerRadius,
-		hideCenterPlayButton = if fFlagLuaAppVideoTileHideCenterPlayButton then true else nil,
-		disableActivation = if fFlagLuaAppVideoTileDisableActivation then true else nil,
-		onVideoLoaded = reactModule.useCallback(function(p2, p3)
-			-- upvalues: p1 (ref), videoPlaybackCoordinator (copy)
+		hideCenterPlayButton = if FFlagLuaAppVideoTileHideCenterPlayButton then true else nil,
+		disableActivation = if FFlagLuaAppVideoTileDisableActivation then true else nil,
+		onVideoLoaded = ReactModule.useCallback(function(p2, p3) --[[ Line: 42 ]]
+			-- upvalues: p1 (copy), VideoPlaybackCoordinator (upval)
 			if p1.videoAnalytics then
-				p1.videoAnalytics.reportVideoLoad(p1.itemIndex, if p1.videoPlaybackCoordinator then p1.videoPlaybackCoordinator.currentPlaybackSessionId else videoPlaybackCoordinator.default.currentPlaybackSessionId, p2, p3)
+				p1.videoAnalytics.reportVideoLoad(p1.itemIndex, if p1.videoPlaybackCoordinator then p1.videoPlaybackCoordinator.currentPlaybackSessionId else VideoPlaybackCoordinator.default.currentPlaybackSessionId, p2, p3)
 			end
 		end, {
 			p1.itemIndex,
 			p1.videoAnalytics,
 			p1.videoPlaybackCoordinator
 		}),
-		onVideoLooped = reactModule.useCallback(function()
-			-- upvalues: p1 (ref), videoPlaybackCoordinator (copy)
+		onVideoLooped = ReactModule.useCallback(function() --[[ Line: 62 ]]
+			-- upvalues: p1 (copy), VideoPlaybackCoordinator (upval)
 			if p1.videoAnalytics then
-				p1.videoAnalytics.reportVideoLoop(p1.itemIndex, if p1.videoPlaybackCoordinator then p1.videoPlaybackCoordinator.currentPlaybackSessionId else videoPlaybackCoordinator.default.currentPlaybackSessionId)
+				p1.videoAnalytics.reportVideoLoop(p1.itemIndex, if p1.videoPlaybackCoordinator then p1.videoPlaybackCoordinator.currentPlaybackSessionId else VideoPlaybackCoordinator.default.currentPlaybackSessionId)
 			end
 		end, {
 			p1.itemIndex,
 			p1.videoAnalytics,
 			p1.videoPlaybackCoordinator
 		}),
-		onVideoPlayerActivated = if fFlagLuaAppVideoTileDisableActivation then nil elseif fFlagLuaAppEdpMediaGalleryFullScreen then p1.onActivated else nil,
-		videoAnalyticsContext = reactModule.useMemo(function()
-			-- upvalues: p1 (ref), videoPlaybackCoordinator (copy)
+		onVideoPlayerActivated = if FFlagLuaAppVideoTileDisableActivation then nil elseif FFlagLuaAppEdpMediaGalleryFullScreen then p1.onActivated else nil,
+		videoAnalyticsContext = ReactModule.useMemo(function() --[[ Line: 79 ]]
+			-- upvalues: p1 (copy), VideoPlaybackCoordinator (upval)
 			return {
 				videoAnalyticsData = { source = "universe", sourceId = p1.universeId },
-				getPlaybackSessionId = function()
-					-- upvalues: p1 (copy), videoPlaybackCoordinator (copy)
-					return if p1.videoPlaybackCoordinator then p1.videoPlaybackCoordinator.currentPlaybackSessionId else videoPlaybackCoordinator.default.currentPlaybackSessionId
+				getPlaybackSessionId = function() --[[ Line: 85 ]]
+					-- upvalues: p1 (upval), VideoPlaybackCoordinator (upval)
+					return if p1.videoPlaybackCoordinator then p1.videoPlaybackCoordinator.currentPlaybackSessionId else VideoPlaybackCoordinator.default.currentPlaybackSessionId
 				end
 			}
 		end, { p1.universeId, p1.videoPlaybackCoordinator })

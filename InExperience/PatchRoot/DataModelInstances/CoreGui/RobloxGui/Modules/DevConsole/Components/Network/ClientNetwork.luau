@@ -1,15 +1,15 @@
-﻿local roactModule = require(game:GetService("CorePackages").Packages.Roact)
-local dataConsumerModule = require(script.Parent.Parent.Parent.Components.DataConsumer)
-local networkViewModule = require(script.Parent.NetworkView)
-local clientNetwork = roactModule.Component:extend("ClientNetwork")
+﻿local RoactModule = require(game:GetService("CorePackages").Packages.Roact)
+local DataConsumerModule = require(script.Parent.Parent.Parent.Components.DataConsumer)
+local NetworkViewModule = require(script.Parent.NetworkView)
+local ClientNetwork = RoactModule.Component:extend("ClientNetwork")
 
-function clientNetwork.init(p1, _)
+function ClientNetwork.init(p1, _) --[[ Line: 10 ]]
 	p1.state = { targetNetworkData = p1.props.ClientNetworkData }
 end
 
-function clientNetwork.render(p1)
-	-- upvalues: roactModule (ref), networkViewModule (ref)
-	return roactModule.createElement(networkViewModule, {
+function ClientNetwork.render(p1) --[[ Line: 16 ]]
+	-- upvalues: RoactModule (copy), NetworkViewModule (copy)
+	return RoactModule.createElement(NetworkViewModule, {
 		size = p1.props.size,
 		searchTerm = p1.props.searchTerm,
 		layoutOrder = p1.props.layoutOrder,
@@ -17,4 +17,4 @@ function clientNetwork.render(p1)
 	})
 end
 
-return dataConsumerModule(clientNetwork, "ClientNetworkData")
+return DataConsumerModule(ClientNetwork, "ClientNetworkData")

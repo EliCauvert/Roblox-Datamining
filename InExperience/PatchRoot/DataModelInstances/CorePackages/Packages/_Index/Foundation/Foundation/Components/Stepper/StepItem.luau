@@ -1,75 +1,75 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local builderIconsModule = require(parent.BuilderIcons)
-local reactModule = require(parent.React)
-local fillBehaviorModule = require(foundation.Enums.FillBehavior)
-local iconModule = require(foundation.Components.Icon)
-local _ = require(foundation.Enums.InputSize)
-local stepperStepStateModule = require(foundation.Enums.StepperStepState)
-local textModule = require(foundation.Components.Text)
-local _ = require(foundation.Components.Types)
-local viewModule = require(foundation.Components.View)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local useStepperVariantsModule = require(script.Parent.useStepperVariants)
-local icon = builderIconsModule.Icon
-local iconVariant = builderIconsModule.IconVariant
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local BuilderIconsModule = require(Parent.BuilderIcons)
+local ReactModule = require(Parent.React)
+local FillBehaviorModule = require(Foundation.Enums.FillBehavior)
+local IconModule = require(Foundation.Components.Icon)
+local _ = require(Foundation.Enums.InputSize)
+local StepperStepStateModule = require(Foundation.Enums.StepperStepState)
+local TextModule = require(Foundation.Components.Text)
+local _ = require(Foundation.Components.Types)
+local ViewModule = require(Foundation.Components.View)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local UseStepperVariantsModule = require(script.Parent.useStepperVariants)
+local Icon = BuilderIconsModule.Icon
+local IconVariant = BuilderIconsModule.IconVariant
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useTokensModule (ref), fillBehaviorModule (ref), useStepperVariantsModule (ref), reactModule (ref), viewModule (ref), stepperStepStateModule (ref), iconModule (ref), icon (ref), iconVariant (ref), textModule (ref)
-	local var1 = useTokensModule()
-	local var2 = useStepperVariantsModule(var1, p1.size, p1.stepState, p1.fillBehavior == fillBehaviorModule.Fill)
+return ReactModule.memo(ReactModule.forwardRef(function(Frame, Ref) --[[ Line: 41 | Named "StepItem" ]]
+	-- upvalues: UseTokensModule (copy), FillBehaviorModule (copy), UseStepperVariantsModule (copy), ReactModule (copy), ViewModule (copy), StepperStepStateModule (copy), IconModule (copy), Icon (copy), IconVariant (copy), TextModule (copy)
+	local UseTokensModuleResult = UseTokensModule()
+	local UseStepperVariantsModuleResult = UseStepperVariantsModule(UseTokensModuleResult, Frame.size, Frame.stepState, Frame.fillBehavior == FillBehaviorModule.Fill)
 	
-	return reactModule.createElement(viewModule, {
-		tag = var2.container.tag,
-		testId = p1.testId,
-		LayoutOrder = p1.LayoutOrder
+	return ReactModule.createElement(ViewModule, {
+		tag = UseStepperVariantsModuleResult.container.tag,
+		testId = Frame.testId,
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		Measure = reactModule.createElement(viewModule, { LayoutOrder = 1, tag = "size-full", ref = p2 }),
-		Content = reactModule.createElement(viewModule, {
+		Measure = ReactModule.createElement(ViewModule, { LayoutOrder = 1, tag = "size-full", ref = Ref }),
+		Content = ReactModule.createElement(ViewModule, {
 			LayoutOrder = 2,
-			tag = var2.content.tag,
-			padding = var2.content.padding,
-			testId = `{p1.testId}--content`
+			tag = UseStepperVariantsModuleResult.content.tag,
+			padding = UseStepperVariantsModuleResult.content.padding,
+			testId = `{Frame.testId}--content`
 		}, {
-			IndicatorOuter = reactModule.createElement(viewModule, {
+			IndicatorOuter = ReactModule.createElement(ViewModule, {
 				LayoutOrder = 1,
-				tag = var2.indicatorOuter.tag,
-				testId = `{p1.testId}--indicator-outer`
+				tag = UseStepperVariantsModuleResult.indicatorOuter.tag,
+				testId = `{Frame.testId}--indicator-outer`
 			}, {
-				Indicator = reactModule.createElement(viewModule, {
-					tag = var2.indicatorInner.tag,
-					testId = `{p1.testId}--indicator`
+				Indicator = ReactModule.createElement(ViewModule, {
+					tag = UseStepperVariantsModuleResult.indicatorInner.tag,
+					testId = `{Frame.testId}--indicator`
 				}, {
-					StepIndex = if p1.stepState == stepperStepStateModule.Complete then reactModule.createElement(iconModule, {
-						name = icon.Check,
-						style = var1.Inverse.Content.Emphasis,
-						size = var2.icon.size,
-						variant = iconVariant.Filled,
-						testId = `{p1.testId}--check`
-					}) else reactModule.createElement(textModule, {
-						Text = tostring(p1.index),
-						tag = var2.index.tag,
-						testId = `{p1.testId}--index`
+					StepIndex = if Frame.stepState == StepperStepStateModule.Complete then ReactModule.createElement(IconModule, {
+						name = Icon.Check,
+						style = UseTokensModuleResult.Inverse.Content.Emphasis,
+						size = UseStepperVariantsModuleResult.icon.size,
+						variant = IconVariant.Filled,
+						testId = `{Frame.testId}--check`
+					}) else ReactModule.createElement(TextModule, {
+						Text = tostring(Frame.index),
+						tag = UseStepperVariantsModuleResult.index.tag,
+						testId = `{Frame.testId}--index`
 					})
 				})
 			}),
-			TextColumn = reactModule.createElement(viewModule, {
+			TextColumn = ReactModule.createElement(ViewModule, {
 				LayoutOrder = 2,
-				tag = var2.textColumn.tag,
-				padding = var2.textColumn.padding,
-				testId = `{p1.testId}--text-column`
+				tag = UseStepperVariantsModuleResult.textColumn.tag,
+				padding = UseStepperVariantsModuleResult.textColumn.padding,
+				testId = `{Frame.testId}--text-column`
 			}, {
-				Label = reactModule.createElement(textModule, {
+				Label = ReactModule.createElement(TextModule, {
 					LayoutOrder = 1,
-					Text = p1.step.label,
-					tag = var2.label.tag,
-					testId = `{p1.testId}--label`
+					Text = Frame.step.label,
+					tag = UseStepperVariantsModuleResult.label.tag,
+					testId = `{Frame.testId}--label`
 				}),
-				Description = if p1.step.description then reactModule.createElement(textModule, {
+				Description = if Frame.step.description then ReactModule.createElement(TextModule, {
 					LayoutOrder = 2,
-					Text = p1.step.description,
-					tag = var2.description.tag,
-					testId = `{p1.testId}--description`
+					Text = Frame.step.description,
+					tag = UseStepperVariantsModuleResult.description.tag,
+					testId = `{Frame.testId}--description`
 				}) else nil
 			})
 		})

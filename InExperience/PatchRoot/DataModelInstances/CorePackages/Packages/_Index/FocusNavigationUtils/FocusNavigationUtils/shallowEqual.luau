@@ -1,11 +1,11 @@
-﻿return function(p1, p2)
-	for i, v in p1 do
-		if p2[i] ~= v then
+﻿return function(List, List1): boolean --[[ Line: 4 | Named "shallowEqual" ]]
+	for i, value in List do
+		if List1[i] ~= value then
 			return false
 		end
 	end
-	for i, v in p2 do
-		if p1[i] ~= v then
+	for i1, value1 in List1 do
+		if List[i1] ~= value1 then
 			return false
 		end
 	end

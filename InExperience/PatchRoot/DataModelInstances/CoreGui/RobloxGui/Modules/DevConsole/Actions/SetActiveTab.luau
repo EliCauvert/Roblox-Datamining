@@ -1,3 +1,3 @@
-﻿return require(script.Parent.Parent.Action)("SetActiveTab", function(p1, p2)
-	return { newTabIndex = p1, isClientView = p2 }
+﻿return require(script.Parent.Parent.Action)("SetActiveTab", function(NewTabIndex, IsClientView) --[[ Line: 4 ]]
+	return { newTabIndex = NewTabIndex, isClientView = IsClientView }
 end)

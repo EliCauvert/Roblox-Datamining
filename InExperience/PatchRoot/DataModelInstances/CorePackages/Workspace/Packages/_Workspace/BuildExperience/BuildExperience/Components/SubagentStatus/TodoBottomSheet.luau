@@ -1,40 +1,40 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local todoListModule = require(script.Parent.TodoList)
-local sheet = foundationModule.Sheet
-local text = foundationModule.Text
-local view = foundationModule.View
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local TodoListModule = require(script.Parent.TodoList)
+local Sheet = FoundationModule.Sheet
+local Text = FoundationModule.Text
+local View = FoundationModule.View
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), sheet (ref), view (ref), text (ref), todoListModule (ref)
-	local testId = p1.testId or "subagent-status-bottom-sheet"
+return ReactModule.memo(function(p1) --[[ Line: 25 | Named "TodoBottomSheet" ]]
+	-- upvalues: ReactModule (copy), Sheet (copy), View (copy), Text (copy), TodoListModule (copy)
+	local TestId = p1.testId or "subagent-status-bottom-sheet"
 	
-	return reactModule.createElement(sheet.Root, {
+	return ReactModule.createElement(Sheet.Root, {
 		defaultSnapPointIndex = 1,
 		isOpen = p1.isOpen,
 		onClose = p1.onClose,
 		snapPoints = { 0.5, 1 },
-		testId = testId
+		testId = TestId
 	}, {
-		Header = reactModule.createElement(sheet.Header, { hasCloseAffordance = true }, {
-			TitleWrapper = reactModule.createElement(view, {
+		Header = ReactModule.createElement(Sheet.Header, { hasCloseAffordance = true }, {
+			TitleWrapper = ReactModule.createElement(View, {
 				LayoutOrder = 1,
 				tag = "size-full-0 auto-y padding-y-small"
 			}, {
-				Title = reactModule.createElement(text, {
+				Title = ReactModule.createElement(Text, {
 					LayoutOrder = 1,
 					tag = "size-full-0 auto-y text-heading-small text-wrap text-align-x-left content-emphasis",
 					Text = p1.title,
-					testId = `{testId}-title`
+					testId = `{TestId}-title`
 				})
 			})
 		}),
-		Content = reactModule.createElement(sheet.Content, nil, {
-			List = reactModule.createElement(todoListModule, {
+		Content = ReactModule.createElement(Sheet.Content, nil, {
+			List = ReactModule.createElement(TodoListModule, {
 				LayoutOrder = 1,
 				items = p1.items,
-				testId = `{testId}-list`
+				testId = `{TestId}-list`
 			})
 		})
 	})

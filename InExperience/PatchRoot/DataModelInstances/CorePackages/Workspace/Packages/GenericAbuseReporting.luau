@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.GenericAbuseReporting.GenericAbuseReporting)
+﻿return (require(script.Parent._Workspace.GenericAbuseReporting.GenericAbuseReporting))

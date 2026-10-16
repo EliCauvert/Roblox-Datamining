@@ -1,10 +1,10 @@
-﻿local var1, var2 = require(script:FindFirstAncestor("LocalUserIdStore").Parent.Signals).createSignal("")
+﻿local Signal, Signal2 = require(script:FindFirstAncestor("LocalUserIdStore").Parent.Signals).createSignal("")
 
 return {
-	getCurrentUserId = var1,
-	setCurrentUserId = var2,
-	reset = function()
-		-- upvalues: var2 (ref)
-		var2("")
+	getCurrentUserId = Signal,
+	setCurrentUserId = Signal2,
+	reset = function() --[[ Line: 26 ]]
+		-- upvalues: Signal2 (copy)
+		Signal2("")
 	end
 }

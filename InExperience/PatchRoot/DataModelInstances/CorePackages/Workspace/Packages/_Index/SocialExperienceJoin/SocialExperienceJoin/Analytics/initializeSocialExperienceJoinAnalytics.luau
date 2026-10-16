@@ -1,19 +1,19 @@
-﻿local socialLuaAnalyticsModule = require(script:FindFirstAncestor("SocialExperienceJoin").Parent.SocialLuaAnalytics)
-local analyticsFactory = socialLuaAnalyticsModule.Analytics.AnalyticsFactory
-local defaultAnalyticsService = socialLuaAnalyticsModule.Analytics.DefaultAnalyticsService
-local getEventStreamActionListModule = require(script.Parent.getEventStreamActionList)
-local telemetryActionListModule = require(script.Parent.TelemetryActionList)
+﻿local SocialLuaAnalyticsModule = require(script:FindFirstAncestor("SocialExperienceJoin").Parent.SocialLuaAnalytics)
+local AnalyticsFactory = SocialLuaAnalyticsModule.Analytics.AnalyticsFactory
+local DefaultAnalyticsService = SocialLuaAnalyticsModule.Analytics.DefaultAnalyticsService
+local GetEventStreamActionListModule = require(script.Parent.getEventStreamActionList)
+local TelemetryActionListModule = require(script.Parent.TelemetryActionList)
 
-return function(p1)
-	-- upvalues: getEventStreamActionListModule (ref), analyticsFactory (ref), telemetryActionListModule (ref), defaultAnalyticsService (ref)
-	return analyticsFactory.setUpAnalyticsFactory({
+return function(p1) --[[ Line: 11 ]]
+	-- upvalues: GetEventStreamActionListModule (copy), AnalyticsFactory (copy), TelemetryActionListModule (copy), DefaultAnalyticsService (copy)
+	return AnalyticsFactory.setUpAnalyticsFactory({
 		eventLists = {
-			EventStream = getEventStreamActionListModule(p1),
-			Telemetry = telemetryActionListModule
+			EventStream = GetEventStreamActionListModule(p1),
+			Telemetry = TelemetryActionListModule
 		},
 		analyticsImpl = {
-			EventStream = defaultAnalyticsService.EventStream,
-			Telemetry = defaultAnalyticsService.Telemetry
+			EventStream = DefaultAnalyticsService.EventStream,
+			Telemetry = DefaultAnalyticsService.Telemetry
 		}
 	})()
 end

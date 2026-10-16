@@ -1,23 +1,30 @@
-﻿local function _(p1)
-	return if p1 ~= nil then p1 == "" else true
+﻿local function _(p1): boolean --[[ Line: 26 | Named "isBlank" ]]
+	return p1 == nil or p1 == ""
 end
 
-return function(p1, p2)
-	local var1
-	if p1 then
-		local username = p1.username
-		var1 = if if username ~= nil then username == "" else true then nil else p1.username
-	end
-	local var2 = var1 or (p2.username or "")
-	local var3 = var1 ~= nil and var1 ~= p2.username
-	local var4 = if p1 then p1.displayName else nil
+return function(p1, p2) --[[ Line: 30 | Named "resolveSuccessIdentity" ]]
+	local Username = nil
+	repeat
+		if p1 then
+			local Username1 = p1.username
+			
+			if Username1 ~= nil and Username1 ~= "" then
+				Username = p1.username
+				break
+			end
+		end
+		Username = nil
+	until true
+	local Username1 = Username or (p2.username or "")
+	local IsNotUsernameMatch: boolean = Username ~= nil and Username ~= p2.username
+	local DisplayName = if p1 then p1.displayName else nil
 	
-	if if var4 ~= nil then var4 == "" else true then
-		var4 = if var3 then var2 else p2.displayName
+	if DisplayName == nil or DisplayName == "" then
+		DisplayName = if IsNotUsernameMatch then Username1 else p2.displayName
 	end
 	return {
-		username = var2,
-		displayName = var4,
-		didUsernameChange = var3
+		username = Username1,
+		displayName = DisplayName,
+		didUsernameChange = IsNotUsernameMatch
 	}
 end

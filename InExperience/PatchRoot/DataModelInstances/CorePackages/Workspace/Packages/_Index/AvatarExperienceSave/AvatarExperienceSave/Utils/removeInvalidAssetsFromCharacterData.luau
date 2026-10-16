@@ -1,20 +1,20 @@
-﻿local avatarExperienceSave = script:FindFirstAncestor("AvatarExperienceSave")
-local tutilsModule = require(avatarExperienceSave.Parent.tutils)
-local _ = require(avatarExperienceSave.Context.AvatarSaveContext)
+﻿local AvatarExperienceSave = script:FindFirstAncestor("AvatarExperienceSave")
+local TutilsModule = require(AvatarExperienceSave.Parent.tutils)
+local _ = require(AvatarExperienceSave.Context.AvatarSaveContext)
 
-return function(value, p1)
-	-- upvalues: tutilsModule (ref)
-	local var1 = false
+return function(p1, List) --[[ Line: 8 | Named "removeInvalidAssetsFromCharacterData" ]]
+	-- upvalues: TutilsModule (copy)
+	local Flag = false
 	
-	for i, v in p1 do
-		if value.equipped.EquippedAssets[v] and value.equipped.EquippedAssets[v][i] then
-			var1 = true
-			value.equipped.EquippedAssets[v][i] = nil
+	for i, value in List do
+		if p1.equipped.EquippedAssets[value] and p1.equipped.EquippedAssets[value][i] then
+			Flag = true
+			p1.equipped.EquippedAssets[value][i] = nil
 			
-			if tutilsModule.fieldCount(value.equipped.EquippedAssets[v]) == 0 then
-				value.equipped.EquippedAssets[v] = nil
+			if TutilsModule.fieldCount(p1.equipped.EquippedAssets[value]) == 0 then
+				p1.equipped.EquippedAssets[value] = nil
 			end
 		end
 	end
-	return value, var1
+	return p1, Flag
 end

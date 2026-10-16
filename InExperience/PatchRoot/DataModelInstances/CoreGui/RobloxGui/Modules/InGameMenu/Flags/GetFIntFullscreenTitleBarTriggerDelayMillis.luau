@@ -1,10 +1,10 @@
 ﻿game:DefineFastInt("FullscreenTitleBarTriggerDelayMillis", 0)
 
-return function()
-	local fullscreenTitleBarTriggerDelayMillisFastInt = game:GetFastInt("FullscreenTitleBarTriggerDelayMillis")
+return function() --[[ Line: 5 ]]
+	local FullscreenTitleBarTriggerDelayMillisFastInt = game:GetFastInt("FullscreenTitleBarTriggerDelayMillis")
 	
-	if fullscreenTitleBarTriggerDelayMillisFastInt < 0 then
-		fullscreenTitleBarTriggerDelayMillisFastInt = 0
+	if FullscreenTitleBarTriggerDelayMillisFastInt < 0 then
+		FullscreenTitleBarTriggerDelayMillisFastInt = 0
 	end
-	return fullscreenTitleBarTriggerDelayMillisFastInt
+	return FullscreenTitleBarTriggerDelayMillisFastInt
 end

@@ -1,28 +1,26 @@
-﻿local parent = script:FindFirstAncestor("SduiSharedContent").Parent
-local reactModule = require(parent.React)
-local cryoModule = require(parent.Cryo)
-local foundationModule = require(parent.Foundation)
-local signalsReactModule = require(parent.SignalsReact)
-local textSizeModule = require(parent.TextSize)
-local getPreferredTextSizeLineBudget = require(parent.SduiSharedUtilities).getPreferredTextSizeLineBudget
-local sduiTextModule = require(script.Parent.SduiText)
-local useTokens = foundationModule.Hooks.useTokens
+﻿local Parent = script:FindFirstAncestor("SduiSharedContent").Parent
+local ReactModule = require(Parent.React)
+local CryoModule = require(Parent.Cryo)
+local SignalsReactModule = require(Parent.SignalsReact)
+local TextSizeModule = require(Parent.TextSize)
+local GetPreferredTextSizeLineBudgetFunction = require(Parent.SduiSharedUtilities).getPreferredTextSizeLineBudget
+local SduiTextModule = require(script.Parent.SduiText)
+local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
 
-return function(p1)
-	-- upvalues: useTokens (ref), signalsReactModule (ref), textSizeModule (ref), getPreferredTextSizeLineBudget (ref), reactModule (ref), sduiTextModule (ref), cryoModule (ref)
-	local var1 = useTokens()
-	local var2 = signalsReactModule.useSignalState(function(p2)
-		-- upvalues: textSizeModule (copy)
-		return textSizeModule.getTextSizeStore(p2).getTextSizeOffset(p2)
-	end)
-	local maxValue = math.max(p1.maxLines or 1, 1)
-	local fontStyle = p1.fontStyle or var1.Typography.BodyMedium
+return function(p1) --[[ Line: 21 | Named "SduiLineLimitedText" ]]
+	-- upvalues: UseTokensFunction (copy), SignalsReactModule (copy), TextSizeModule (copy), GetPreferredTextSizeLineBudgetFunction (copy), ReactModule (copy), SduiTextModule (copy), CryoModule (copy)
+	local UseTokensResult = UseTokensFunction()
+	local Largest = math.max(p1.maxLines or 1, 1)
+	local FontStyle = p1.fontStyle or UseTokensResult.Typography.BodyMedium
 	
-	return reactModule.createElement(sduiTextModule, cryoModule.Dictionary.join(p1, {
-		automaticSize = cryoModule.None,
-		maxLines = cryoModule.None,
-		size = UDim2.new(if p1.size then p1.size.X else UDim.new(1, 0), UDim.new(0, math.ceil(maxValue * fontStyle.FontSize * fontStyle.LineHeight + getPreferredTextSizeLineBudget(var2, maxValue)))),
-		textWrapped = if p1.textWrapped ~= nil then maxValue > 1 else p1.textWrapped,
-		textTruncate = if p1.textTruncate ~= nil then Enum.TextTruncate.SplitWord else p1.textTruncate
+	return ReactModule.createElement(SduiTextModule, CryoModule.Dictionary.join(p1, {
+		automaticSize = CryoModule.None,
+		maxLines = CryoModule.None,
+		size = UDim2.new(if p1.size then p1.size.X else UDim.new(1, 0), UDim.new(0, (math.ceil(Largest * FontStyle.FontSize * FontStyle.LineHeight + GetPreferredTextSizeLineBudgetFunction(SignalsReactModule.useSignalState(function(p2) --[[ Line: 23 ]]
+			-- upvalues: TextSizeModule (upval)
+			return TextSizeModule.getTextSizeStore(p2).getTextSizeOffset(p2)
+		end), Largest))))),
+		textWrapped = if p1.textWrapped == nil then Largest > 1 else p1.textWrapped,
+		textTruncate = if p1.textTruncate == nil then Enum.TextTruncate.SplitWord else p1.textTruncate
 	}))
 end

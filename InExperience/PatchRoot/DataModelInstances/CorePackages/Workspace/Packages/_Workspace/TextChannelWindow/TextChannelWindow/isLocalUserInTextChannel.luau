@@ -1,6 +1,6 @@
-﻿local findLocalTextSourceModule = require(script.Parent.findLocalTextSource)
+﻿local FindLocalTextSourceModule = require(script.Parent.findLocalTextSource)
 
-return function(p1, p2)
-	-- upvalues: findLocalTextSourceModule (ref)
-	return findLocalTextSourceModule(p1, p2) ~= nil
+return function(p1, p2): boolean --[[ Line: 6 | Named "isLocalUserInTextChannel" ]]
+	-- upvalues: FindLocalTextSourceModule (copy)
+	return FindLocalTextSourceModule(p1, p2) ~= nil
 end

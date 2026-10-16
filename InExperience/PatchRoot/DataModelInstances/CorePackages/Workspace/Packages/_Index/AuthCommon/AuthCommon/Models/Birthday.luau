@@ -1,56 +1,55 @@
-﻿local parent = script:FindFirstAncestor("AuthCommon").Parent
-local argCheckModule = require(parent.ArgCheck)
-local dateTime = require(parent.Time).DateTime
+﻿local Parent = script:FindFirstAncestor("AuthCommon").Parent
+local ArgCheckModule = require(Parent.ArgCheck)
+local _DateTime = require(Parent.Time).DateTime
 local t = {}
-local t_1 = {}
-t[t_1] = true
+local BirthdayModule = { [t] = true }
 
-function t.new(p1)
-	-- upvalues: argCheckModule (ref), t (ref)
-	local t_1 = { Month = 1, Day = 1, Year = 1970 }
+function BirthdayModule.new(Values) --[[ Line: 20 ]]
+	-- upvalues: ArgCheckModule (copy), BirthdayModule (copy)
+	local config = { Month = 1, Day = 1, Year = 1970 }
 	
-	if p1 then
-		t_1.Month = p1.Month or t_1.Month
-		t_1.Day = p1.Day or t_1.Day
-		t_1.Year = p1.Year or t_1.Year
-		argCheckModule.isNonNegativeNumber(t_1.Month, "month in Birthday constructor")
-		argCheckModule.isNonNegativeNumber(t_1.Day, "day in Birthday constructor")
-		argCheckModule.isNonNegativeNumber(t_1.Year, "year in Birthday constructor")
+	if Values then
+		config.Month = Values.Month or config.Month
+		config.Day = Values.Day or config.Day
+		config.Year = Values.Year or config.Year
+		ArgCheckModule.isNonNegativeNumber(config.Month, "month in Birthday constructor")
+		ArgCheckModule.isNonNegativeNumber(config.Day, "day in Birthday constructor")
+		ArgCheckModule.isNonNegativeNumber(config.Year, "year in Birthday constructor")
 	end
-	setmetatable(t_1, t)
+	setmetatable(config, BirthdayModule)
 	
-	return t_1
+	return config
 end
 
-function t:IsUnder13()
-	-- upvalues: t (ref), dateTime (ref)
-	local var1 = t.new(dateTime.now():GetValues())
+function BirthdayModule:IsUnder13(): boolean --[[ Line: 41 ]]
+	-- upvalues: BirthdayModule (copy), _DateTime (copy)
+	local NewBirthday = BirthdayModule.new(_DateTime.now():GetValues())
 	
-	return var1.Year - 13 < self.Year or (if self.Year < var1.Year - 13 then false elseif var1.Month >= self.Month then var1.Month == self.Month and var1.Day < self.Day else true)
+	return NewBirthday.Year - 13 < self.Year or self.Year >= NewBirthday.Year - 13 and (NewBirthday.Month < self.Month or NewBirthday.Month == self.Month and NewBirthday.Day < self.Day)
 end
 
-function t:GetAgeInYears(p1)
-	-- upvalues: dateTime (ref), t (ref)
-	local var1 = t.new(p1 or dateTime.now():GetValues())
+function BirthdayModule.GetAgeInYears(p1, p2) --[[ Line: 52 ]]
+	-- upvalues: _DateTime (copy), BirthdayModule (copy)
+	local NewBirthday = BirthdayModule.new(if p2 then p2 else _DateTime.now():GetValues())
 	
-	return if var1.Month < self.Month or var1.Month == self.Month and var1.Day < self.Day then var1.Year - self.Year - 1 else var1.Year - self.Year
+	return if NewBirthday.Month < p1.Month or NewBirthday.Month == p1.Month and NewBirthday.Day < p1.Day then NewBirthday.Year - p1.Year - 1 else NewBirthday.Year - p1.Year
 end
 
-function t:FormatForEndpoint()
+function BirthdayModule:FormatForEndpoint(): string --[[ Line: 63 ]]
 	return self.Year .. "-" .. self.Month .. "-" .. self.Day .. "T12:00:00.000Z"
 end
 
-function t:ToString(p1)
-	p1 = p1 or " "
+function BirthdayModule:ToString(p1): string --[[ Line: 67 ]]
+	local P6 = p1 or " "
 	
-	return self.Month .. p2 .. self.Day .. p2 .. self.Year
+	return self.Month .. P6 .. self.Day .. P6 .. self.Year
 end
 
-function t:is()
-	-- upvalues: t_1 (ref)
-	return type(self) == "table" and self[t_1] == true
+function BirthdayModule:is(): boolean --[[ Line: 73 ]]
+	-- upvalues: t (copy)
+	return type(self) == "table" and self[t] == true
 end
 
-t.__index = t
+BirthdayModule.__index = BirthdayModule
 
-return t
+return BirthdayModule

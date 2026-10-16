@@ -1,67 +1,67 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local fStringSocialCaptureIXPLayer = require(corePackagesService.Workspace.Packages.SharedFlags).FStringSocialCaptureIXPLayer
-local fStringSocialCaptureTakenIXPLayer = require(corePackagesService.Workspace.Packages.SharedFlags).FStringSocialCaptureTakenIXPLayer
+﻿local CorePackages = game:GetService("CorePackages")
+local FStringSocialCaptureIXPLayer = require(CorePackages.Workspace.Packages.SharedFlags).FStringSocialCaptureIXPLayer
+local FStringSocialCaptureTakenIXPLayer = require(CorePackages.Workspace.Packages.SharedFlags).FStringSocialCaptureTakenIXPLayer
 local _ = require(script.Parent.Parent.Flags.GetFFlagEnableNewInviteMenuIXP)
-local getFStringLargerRobuxUpsellIxpLayer = require(corePackagesService.Workspace.Packages.SharedFlags).GetFStringLargerRobuxUpsellIxpLayer
-local getFStringLuaAppExperienceMenuLayer = require(corePackagesService.Workspace.Packages.SharedFlags).GetFStringLuaAppExperienceMenuLayer
-local getFStringLuaAppConsoleExperienceMenuLayerModule = require(script.Parent.Parent.Flags.GetFStringLuaAppConsoleExperienceMenuLayer)
-local getFFlagReportAnythingAnnotationIXP = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagReportAnythingAnnotationIXP
-local getFStringReportAnythingAnnotationIXPLayerName = require(corePackagesService.Workspace.Packages.SharedFlags).GetFStringReportAnythingAnnotationIXPLayerName
-local getFStringChatTranslationLayerNameModule = require(script.Parent.Parent.Flags.GetFStringChatTranslationLayerName)
-local getFFlagChatTranslationSettingEnabledModule = require(script.Parent.Parent.Flags.GetFFlagChatTranslationSettingEnabled)
-local getFFlagVoiceUserAgencyEnableIXPModule = require(script.Parent.Parent.Flags.GetFFlagVoiceUserAgencyEnableIXP)
-local getFStringVoiceUserAgencyIXPLayerNameModule = require(script.Parent.Parent.Flags.GetFStringVoiceUserAgencyIXPLayerName)
-local getFFlagLuaInExperienceCoreScriptsGameInviteUnificationModule = require(script.Parent.Parent.Flags.GetFFlagLuaInExperienceCoreScriptsGameInviteUnification)
-local getFStringDesktopToastNotificationLayer = require(corePackagesService.Workspace.Packages.SharedFlags).getFStringDesktopToastNotificationLayer
-local getFStringGameInviteMenuLayer = require(corePackagesService.Workspace.Packages.SharedFlags).GetFStringGameInviteMenuLayer
-local getFFlagUXForCameraPerformanceIXPEnabledModule = require(script.Parent.Parent.Flags.GetFFlagUXForCameraPerformanceIXPEnabled)
-local getFStringUXForCameraPerformanceIXPLayerNameModule = require(script.Parent.Parent.Flags.GetFStringUXForCameraPerformanceIXPLayerName)
-local getFStringVoiceExposureIXPLayerNameModule = require(script.Parent.Parent.Flags.GetFStringVoiceExposureIXPLayerName)
-local getFStringAndroidPhoneVerificationLayer = require(corePackagesService.Workspace.Packages.SharedFlags).GetFStringAndroidPhoneVerificationLayer
-local getFStringIOSPhoneVerificationLayer = require(corePackagesService.Workspace.Packages.SharedFlags).GetFStringIOSPhoneVerificationLayer
-local getFFlagEnableAppChatInExperience = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagEnableAppChatInExperience
-local getFStringAppChatInExperienceIXPLayer = require(corePackagesService.Workspace.Packages.SharedFlags).getFStringAppChatInExperienceIXPLayer
-local fStringReportMenuIXPLayer = require(corePackagesService.Workspace.Packages.SharedFlags).FStringReportMenuIXPLayer
-local fStringReportingIXPLayer = require(corePackagesService.Workspace.Packages.SharedFlags).FStringReportingIXPLayer
+local GetFStringLargerRobuxUpsellIxpLayerFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFStringLargerRobuxUpsellIxpLayer
+local GetFStringLuaAppExperienceMenuLayerFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFStringLuaAppExperienceMenuLayer
+local GetFStringLuaAppConsoleExperienceMenuLayerModule = require(script.Parent.Parent.Flags.GetFStringLuaAppConsoleExperienceMenuLayer)
+local GetFFlagReportAnythingAnnotationIXPFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagReportAnythingAnnotationIXP
+local GetFStringReportAnythingAnnotationIXPLayerNameFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFStringReportAnythingAnnotationIXPLayerName
+local GetFStringChatTranslationLayerNameModule = require(script.Parent.Parent.Flags.GetFStringChatTranslationLayerName)
+local GetFFlagChatTranslationSettingEnabledModule = require(script.Parent.Parent.Flags.GetFFlagChatTranslationSettingEnabled)
+local GetFFlagVoiceUserAgencyEnableIXPModule = require(script.Parent.Parent.Flags.GetFFlagVoiceUserAgencyEnableIXP)
+local GetFStringVoiceUserAgencyIXPLayerNameModule = require(script.Parent.Parent.Flags.GetFStringVoiceUserAgencyIXPLayerName)
+local GetFFlagLuaInExperienceCoreScriptsGameInviteUnificationModule = require(script.Parent.Parent.Flags.GetFFlagLuaInExperienceCoreScriptsGameInviteUnification)
+local GetFStringDesktopToastNotificationLayerFunction = require(CorePackages.Workspace.Packages.SharedFlags).getFStringDesktopToastNotificationLayer
+local GetFStringGameInviteMenuLayerFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFStringGameInviteMenuLayer
+local GetFFlagUXForCameraPerformanceIXPEnabledModule = require(script.Parent.Parent.Flags.GetFFlagUXForCameraPerformanceIXPEnabled)
+local GetFStringUXForCameraPerformanceIXPLayerNameModule = require(script.Parent.Parent.Flags.GetFStringUXForCameraPerformanceIXPLayerName)
+local GetFStringVoiceExposureIXPLayerNameModule = require(script.Parent.Parent.Flags.GetFStringVoiceExposureIXPLayerName)
+local GetFStringAndroidPhoneVerificationLayerFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFStringAndroidPhoneVerificationLayer
+local GetFStringIOSPhoneVerificationLayerFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFStringIOSPhoneVerificationLayer
+local GetFFlagEnableAppChatInExperienceFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagEnableAppChatInExperience
+local GetFStringAppChatInExperienceIXPLayerFunction = require(CorePackages.Workspace.Packages.SharedFlags).getFStringAppChatInExperienceIXPLayer
+local FStringReportMenuIXPLayer = require(CorePackages.Workspace.Packages.SharedFlags).FStringReportMenuIXPLayer
+local FStringReportingIXPLayer = require(CorePackages.Workspace.Packages.SharedFlags).FStringReportingIXPLayer
 
-return function()
-	-- upvalues: getFStringDesktopToastNotificationLayer (ref), fStringReportMenuIXPLayer (ref), fStringReportingIXPLayer (ref), fStringSocialCaptureIXPLayer (ref), fStringSocialCaptureTakenIXPLayer (ref), getFStringLuaAppExperienceMenuLayer (ref), getFStringLuaAppConsoleExperienceMenuLayerModule (ref), getFStringLargerRobuxUpsellIxpLayer (ref), getFFlagReportAnythingAnnotationIXP (ref), getFStringReportAnythingAnnotationIXPLayerName (ref), getFFlagChatTranslationSettingEnabledModule (ref), getFStringChatTranslationLayerNameModule (ref), getFFlagVoiceUserAgencyEnableIXPModule (ref), getFStringVoiceUserAgencyIXPLayerNameModule (ref), getFFlagLuaInExperienceCoreScriptsGameInviteUnificationModule (ref), getFStringGameInviteMenuLayer (ref), getFFlagUXForCameraPerformanceIXPEnabledModule (ref), getFStringUXForCameraPerformanceIXPLayerNameModule (ref), getFStringVoiceExposureIXPLayerNameModule (ref), getFStringAndroidPhoneVerificationLayer (ref), getFStringIOSPhoneVerificationLayer (ref), getFFlagEnableAppChatInExperience (ref), getFStringAppChatInExperienceIXPLayer (ref)
-	local list = {
-		"AbuseReports", getFStringDesktopToastNotificationLayer(),
-		fStringReportMenuIXPLayer, fStringReportingIXPLayer,
-		fStringSocialCaptureIXPLayer, fStringSocialCaptureTakenIXPLayer
+return function() --[[ Line: 41 ]]
+	-- upvalues: GetFStringDesktopToastNotificationLayerFunction (copy), FStringReportMenuIXPLayer (copy), FStringReportingIXPLayer (copy), FStringSocialCaptureIXPLayer (copy), FStringSocialCaptureTakenIXPLayer (copy), GetFStringLuaAppExperienceMenuLayerFunction (copy), GetFStringLuaAppConsoleExperienceMenuLayerModule (copy), GetFStringLargerRobuxUpsellIxpLayerFunction (copy), GetFFlagReportAnythingAnnotationIXPFunction (copy), GetFStringReportAnythingAnnotationIXPLayerNameFunction (copy), GetFFlagChatTranslationSettingEnabledModule (copy), GetFStringChatTranslationLayerNameModule (copy), GetFFlagVoiceUserAgencyEnableIXPModule (copy), GetFStringVoiceUserAgencyIXPLayerNameModule (copy), GetFFlagLuaInExperienceCoreScriptsGameInviteUnificationModule (copy), GetFStringGameInviteMenuLayerFunction (copy), GetFFlagUXForCameraPerformanceIXPEnabledModule (copy), GetFStringUXForCameraPerformanceIXPLayerNameModule (copy), GetFStringVoiceExposureIXPLayerNameModule (copy), GetFStringAndroidPhoneVerificationLayerFunction (copy), GetFStringIOSPhoneVerificationLayerFunction (copy), GetFFlagEnableAppChatInExperienceFunction (copy), GetFStringAppChatInExperienceIXPLayerFunction (copy)
+	local List = {
+		"AbuseReports", GetFStringDesktopToastNotificationLayerFunction(),
+		FStringReportMenuIXPLayer, FStringReportingIXPLayer,
+		FStringSocialCaptureIXPLayer, FStringSocialCaptureTakenIXPLayer
 	}
-	table.insert(list, getFStringLuaAppExperienceMenuLayer())
-	table.insert(list, getFStringLuaAppConsoleExperienceMenuLayerModule())
+	table.insert(List, GetFStringLuaAppExperienceMenuLayerFunction())
+	table.insert(List, GetFStringLuaAppConsoleExperienceMenuLayerModule())
 	
-	if getFStringLargerRobuxUpsellIxpLayer() then
-		table.insert(list, getFStringLargerRobuxUpsellIxpLayer())
+	if GetFStringLargerRobuxUpsellIxpLayerFunction() then
+		table.insert(List, GetFStringLargerRobuxUpsellIxpLayerFunction())
 	end
-	if getFFlagReportAnythingAnnotationIXP() then
-		table.insert(list, getFStringReportAnythingAnnotationIXPLayerName())
+	if GetFFlagReportAnythingAnnotationIXPFunction() then
+		table.insert(List, GetFStringReportAnythingAnnotationIXPLayerNameFunction())
 	end
-	if getFFlagChatTranslationSettingEnabledModule() and #getFStringChatTranslationLayerNameModule() > 0 then
-		table.insert(list, getFStringChatTranslationLayerNameModule())
+	if GetFFlagChatTranslationSettingEnabledModule() and #GetFStringChatTranslationLayerNameModule() > 0 then
+		table.insert(List, GetFStringChatTranslationLayerNameModule())
 	end
-	if getFFlagVoiceUserAgencyEnableIXPModule() then
-		table.insert(list, getFStringVoiceUserAgencyIXPLayerNameModule())
+	if GetFFlagVoiceUserAgencyEnableIXPModule() then
+		table.insert(List, GetFStringVoiceUserAgencyIXPLayerNameModule())
 	end
-	if getFFlagLuaInExperienceCoreScriptsGameInviteUnificationModule() then
-		table.insert(list, getFStringGameInviteMenuLayer())
+	if GetFFlagLuaInExperienceCoreScriptsGameInviteUnificationModule() then
+		table.insert(List, GetFStringGameInviteMenuLayerFunction())
 	end
-	if getFFlagUXForCameraPerformanceIXPEnabledModule() then
-		table.insert(list, getFStringUXForCameraPerformanceIXPLayerNameModule())
+	if GetFFlagUXForCameraPerformanceIXPEnabledModule() then
+		table.insert(List, GetFStringUXForCameraPerformanceIXPLayerNameModule())
 	end
-	table.insert(list, getFStringVoiceExposureIXPLayerNameModule())
+	table.insert(List, GetFStringVoiceExposureIXPLayerNameModule())
 	
-	if getFStringAndroidPhoneVerificationLayer() then
-		table.insert(list, getFStringAndroidPhoneVerificationLayer())
+	if GetFStringAndroidPhoneVerificationLayerFunction() then
+		table.insert(List, GetFStringAndroidPhoneVerificationLayerFunction())
 	end
-	if getFStringIOSPhoneVerificationLayer() then
-		table.insert(list, getFStringIOSPhoneVerificationLayer())
+	if GetFStringIOSPhoneVerificationLayerFunction() then
+		table.insert(List, GetFStringIOSPhoneVerificationLayerFunction())
 	end
-	if getFFlagEnableAppChatInExperience() then
-		table.insert(list, getFStringAppChatInExperienceIXPLayer())
+	if GetFFlagEnableAppChatInExperienceFunction() then
+		table.insert(List, GetFStringAppChatInExperienceIXPLayerFunction())
 	end
-	return list
+	return List
 end

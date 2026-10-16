@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent.Parent._Workspace.OnPlatformSurveys.OnPlatformSurveys.Enums.WebViewEventType)
+﻿return (require(script.Parent.Parent.Parent.Parent._Workspace.OnPlatformSurveys.OnPlatformSurveys.Enums.WebViewEventType))

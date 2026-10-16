@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent._Workspace.GenericAbuseReporting.GenericAbuseReporting.UXFlow.ReportWithReasonAndComment.AREntrypoint)
+﻿return (require(script.Parent.Parent._Workspace.GenericAbuseReporting.GenericAbuseReporting.UXFlow.ReportWithReasonAndComment.AREntrypoint))

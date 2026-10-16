@@ -1,8 +1,8 @@
-﻿local reactModule = require(script:FindFirstAncestor("GenericAbuseReporting").Parent.React)
+﻿local ReactModule = require(script:FindFirstAncestor("GenericAbuseReporting").Parent.React)
 
-return function(p1)
-	-- upvalues: reactModule (ref)
-	return reactModule.createElement("UIListLayout", {
+return function(p1) --[[ Line: 12 | Named "UIListLayout" ]]
+	-- upvalues: ReactModule (copy)
+	return ReactModule.createElement("UIListLayout", {
 		FillDirection = p1.FillDirection,
 		HorizontalAlignment = p1.HorizontalAlignment,
 		Padding = p1.Padding,

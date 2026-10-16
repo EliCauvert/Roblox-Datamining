@@ -1,41 +1,41 @@
 ﻿local UGCValidationService = game:GetService("UGCValidationService")
-local parent = script.Parent.Parent.Parent
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local wrapTargetCageUVReferenceValuesModule = require(parent.WrapTargetCageUVReferenceValues)
-local getFIntUGCValidateCageDuplicateUVThresholdModule = require(parent.flags.getFIntUGCValidateCageDuplicateUVThreshold)
+local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
+local WrapTargetCageUVReferenceValuesModule = require(Parent.WrapTargetCageUVReferenceValues)
+local GetFIntUGCValidateCageDuplicateUVThresholdModule = require(Parent.flags.getFIntUGCValidateCageDuplicateUVThreshold)
 
 return {
 	categories = {
-		validationEnumsModule.UploadCategory.LAYERED_CLOTHING,
-		validationEnumsModule.UploadCategory.EYEBROW_EYELASH
+		ValidationEnumsModule.UploadCategory.LAYERED_CLOTHING,
+		ValidationEnumsModule.UploadCategory.EYEBROW_EYELASH
 	},
 	requiredData = {
-		validationEnumsModule.SharedDataMember.innerCagesData,
-		validationEnumsModule.SharedDataMember.outerCagesData
+		ValidationEnumsModule.SharedDataMember.innerCagesData,
+		ValidationEnumsModule.SharedDataMember.outerCagesData
 	},
 	conditionalData = {},
 	expectedFailures = {},
-	run = function(p1, p2)
-		-- upvalues: wrapTargetCageUVReferenceValuesModule (ref), UGCValidationService (ref), getFIntUGCValidateCageDuplicateUVThresholdModule (ref), errorSourceStringsModule (ref)
-		local t = {}
+	run = function(p1, p2) --[[ Line: 37 ]]
+		-- upvalues: WrapTargetCageUVReferenceValuesModule (copy), UGCValidationService (copy), GetFIntUGCValidateCageDuplicateUVThresholdModule (copy), ErrorSourceStringsModule (copy)
+		local List = {}
 		
-		for i, v in pairs(wrapTargetCageUVReferenceValuesModule) do
-			for i_1, v_1 in pairs(v) do
-				table.insert(t, v_1)
+		for _, value in pairs(WrapTargetCageUVReferenceValuesModule) do
+			for _, value1 in pairs(value) do
+				table.insert(List, value1)
 			end
 		end
-		local function checkCage(p3, p4)
-			-- upvalues: UGCValidationService (copy), t (ref), getFIntUGCValidateCageDuplicateUVThresholdModule (copy), p1 (ref), errorSourceStringsModule (copy)
-			for i, v in p3 do
-				local var1 = UGCValidationService:ValidateEditableMeshUVDuplicates(t, v.editable)
+		local function checkCage(InnerCagesData, p3) --[[ Line: 46 ]]
+			-- upvalues: UGCValidationService (upval), List (copy), GetFIntUGCValidateCageDuplicateUVThresholdModule (upval), p1 (copy), ErrorSourceStringsModule (upval)
+			for PartName, value in InnerCagesData do
+				local ValidateEditableMeshUVDuplicatesResult = UGCValidationService:ValidateEditableMeshUVDuplicates(List, value.editable)
 				
-				if getFIntUGCValidateCageDuplicateUVThresholdModule() < var1 then
-					p1:fail(errorSourceStringsModule.Keys.CageUV_ExtraDuplicateUVs, {
-						count = tostring(var1),
-						cageType = if p4 then "inner" else "outer",
-						partName = i
+				if GetFIntUGCValidateCageDuplicateUVThresholdModule() < ValidateEditableMeshUVDuplicatesResult then
+					p1:fail(ErrorSourceStringsModule.Keys.CageUV_ExtraDuplicateUVs, {
+						count = tostring(ValidateEditableMeshUVDuplicatesResult),
+						cageType = if p3 then "inner" else "outer",
+						partName = PartName
 					})
 				end
 			end

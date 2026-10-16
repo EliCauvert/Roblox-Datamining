@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.NetworkingCall.NetworkingCall)
+﻿return (require(script.Parent.Parent.Parent._Index.NetworkingCall.NetworkingCall))

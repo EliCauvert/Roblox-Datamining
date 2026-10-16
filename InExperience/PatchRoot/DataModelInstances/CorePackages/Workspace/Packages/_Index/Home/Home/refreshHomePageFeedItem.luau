@@ -1,29 +1,33 @@
-﻿local home = script:FindFirstAncestor("Home")
-local parent = home.Parent
-local appPage = require(parent.RobloxAppEnums).AppPage
-local promiseModule = require(parent.Promise)
-local _ = require(parent.SduiCoreSystem)
-local sduiLoadTimer = require(parent.SduiSharedUtilities).SduiLoadTimer
-local fetchHomePageModule = require(home.fetchHomePage)
+﻿local Home = script:FindFirstAncestor("Home")
+local Parent = Home.Parent
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local PromiseModule = require(Parent.Promise)
+local _ = require(Parent.SduiCoreSystem)
+local SduiLoadTimer = require(Parent.SduiSharedUtilities).SduiLoadTimer
+local FetchHomePageModule = require(Home.fetchHomePage)
 
-return function(p1, p2, p3, p4, p5)
-	-- upvalues: sduiLoadTimer (ref), appPage (ref), fetchHomePageModule (ref), promiseModule (ref)
-	local var1 = sduiLoadTimer.createLoadTimer(appPage.Home)
-	var1.start("feed-item-refresh")
+return function(TopicId, FeedItemKey, RequestIntent, ReportError, p1) --[[ Line: 14 | Named "refreshHomePageFeedItem" ]]
+	-- upvalues: SduiLoadTimer (copy), AppPage (copy), FetchHomePageModule (copy), PromiseModule (copy)
+	local LoadTimer = SduiLoadTimer.createLoadTimer(AppPage.Home)
+	LoadTimer.start("feed-item-refresh")
 	
-	return fetchHomePageModule(var1, {
-		requestIntent = p3,
-		contextualFeatures = p5.contextFeatures,
-		focusedRefresh = { topicId = p1, feedItemKey = p2, reportError = p4 }
-	}):andThen(function(p6)
-		-- upvalues: var1 (ref)
-		var1.logRefreshComplete()
+	return FetchHomePageModule(LoadTimer, {
+		requestIntent = RequestIntent,
+		contextualFeatures = p1.contextFeatures,
+		focusedRefresh = {
+			topicId = TopicId,
+			feedItemKey = FeedItemKey,
+			reportError = ReportError
+		}
+	}):andThen(function(Result) --[[ Line: 33 ]]
+		-- upvalues: LoadTimer (copy)
+		LoadTimer.logRefreshComplete()
 		
-		return p6
-	end, function(p6)
-		-- upvalues: var1 (ref), promiseModule (copy)
-		var1.logRefreshComplete()
+		return Result
+	end, function(p2) --[[ Line: 36 ]]
+		-- upvalues: LoadTimer (copy), PromiseModule (upval)
+		LoadTimer.logRefreshComplete()
 		
-		return promiseModule.reject(p6)
+		return PromiseModule.reject(p2)
 	end)
 end

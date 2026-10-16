@@ -1,9 +1,9 @@
-﻿local authentication = require(script:FindFirstAncestor("AuthCommon").Parent.Lumberyak).Logger.new(nil, "Authentication")
-authentication:addSink({
-	maxLevel = authentication.Levels.Warning,
-	log = function(_, p1, _)
+﻿local Authentication = require(script:FindFirstAncestor("AuthCommon").Parent.Lumberyak).Logger.new(nil, "Authentication")
+Authentication:addSink({
+	maxLevel = Authentication.Levels.Warning,
+	log = function(_, p1, _) --[[ Line: 10 ]]
 		print(p1)
 	end
 })
 
-return authentication
+return Authentication

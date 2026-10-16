@@ -1,27 +1,27 @@
-﻿local roactModule = require(game:GetService("CorePackages").Packages.Roact)
-local constantsModule = require(script.Parent.Parent.Constants)
-local checkboxModule = require(script.Parent.Checkbox)
-local _ = constantsModule.DefaultFontSize.MainWindow
-local _ = constantsModule.Color.Text
-local _ = constantsModule.Font.MainWindow
-local _ = constantsModule.Font.MainWindowBold
-local checkboxHeight = constantsModule.UtilityBarFormatting.CheckboxHeight
-local _ = constantsModule.UtilityBarFormatting.CheckboxInnerPadding
+﻿local RoactModule = require(game:GetService("CorePackages").Packages.Roact)
+local ConstantsModule = require(script.Parent.Parent.Constants)
+local CheckboxModule = require(script.Parent.Checkbox)
+local _ = ConstantsModule.DefaultFontSize.MainWindow
+local _ = ConstantsModule.Color.Text
+local _ = ConstantsModule.Font.MainWindow
+local _ = ConstantsModule.Font.MainWindowBold
+local CheckboxHeight = ConstantsModule.UtilityBarFormatting.CheckboxHeight
+local _ = ConstantsModule.UtilityBarFormatting.CheckboxInnerPadding
 
-return function(p1)
-	-- upvalues: roactModule (ref), checkboxModule (ref), checkboxHeight (ref)
-	return roactModule.createElement("Frame", {
+return function(Frame) --[[ Line: 23 | Named "CellCheckbox" ]]
+	-- upvalues: RoactModule (copy), CheckboxModule (copy), CheckboxHeight (copy)
+	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		Size = p1.size,
-		Position = p1.pos,
-		LayoutOrder = p1.LayoutOrder
+		Size = Frame.size,
+		Position = Frame.pos,
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		Checkbox = roactModule.createElement(checkboxModule, {
-			Name = p1.name,
-			IsSelected = p1.isSelected,
-			Size = UDim2.new(0, checkboxHeight, 0, checkboxHeight),
-			Position = UDim2.new(0, 0, 0.5, -checkboxHeight / 2),
-			OnSelectedStateChanged = p1.OnCheckboxClicked
+		Checkbox = RoactModule.createElement(CheckboxModule, {
+			Name = Frame.name,
+			IsSelected = Frame.isSelected,
+			Size = UDim2.new(0, CheckboxHeight, 0, CheckboxHeight),
+			Position = UDim2.new(0, 0, 0.5, -CheckboxHeight / 2),
+			OnSelectedStateChanged = Frame.OnCheckboxClicked
 		})
 	})
 end

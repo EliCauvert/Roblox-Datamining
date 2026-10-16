@@ -1,111 +1,119 @@
-﻿local chatUIPrimitives = script:FindFirstAncestor("ChatUIPrimitives")
-local parent = chatUIPrimitives.Parent
-local intervalPerformanceTracker = require(parent.IntervalPerformanceTracker).IntervalPerformanceTracker
-local timeToInteractiveTracker = require(parent.TimeToInteractiveTracker).TimeToInteractiveTracker
-local expChatPerfTracker = require(parent.Lumberyak).Logger.new(nil, "ExpChatPerfTracker")
-local expChatPerfEventConfigModule = require(script.Parent.ExpChatPerfEventConfig)
-local eventTypes = expChatPerfEventConfigModule.EventTypes
-local events = expChatPerfEventConfigModule.Events
-local eventConfig = expChatPerfEventConfigModule.EventConfig
-local socialLuaAnalyticsModule = require(parent.SocialLuaAnalytics)
-local scrollIntervalTrackerModule = require(parent.ScrollIntervalTracker)
-local fFlagExpChatMigrateScrollIntervalTrackerModule = require(chatUIPrimitives.Flags.FFlagExpChatMigrateScrollIntervalTracker)
-local fFlagExpChatPerfTrackerTabNameModule = require(chatUIPrimitives.Flags.FFlagExpChatPerfTrackerTabName)
-local t = {
-	start = function(p1, p2, p3)
-		-- upvalues: eventConfig (ref), eventTypes (ref), timeToInteractiveTracker (ref), fFlagExpChatPerfTrackerTabNameModule (ref), intervalPerformanceTracker (ref), expChatPerfTracker (ref)
-		local var1 = eventConfig[p1] or {}
+﻿local ChatUIPrimitives = script:FindFirstAncestor("ChatUIPrimitives")
+local Parent = ChatUIPrimitives.Parent
+local IntervalPerformanceTracker = require(Parent.IntervalPerformanceTracker).IntervalPerformanceTracker
+local TimeToInteractiveTracker = require(Parent.TimeToInteractiveTracker).TimeToInteractiveTracker
+local ExpChatPerfTracker = require(Parent.Lumberyak).Logger.new(nil, "ExpChatPerfTracker")
+local ExpChatPerfEventConfigModule = require(script.Parent.ExpChatPerfEventConfig)
+local EventTypes = ExpChatPerfEventConfigModule.EventTypes
+local Events = ExpChatPerfEventConfigModule.Events
+local EventConfig = ExpChatPerfEventConfigModule.EventConfig
+local SocialLuaAnalyticsModule = require(Parent.SocialLuaAnalytics)
+local ScrollIntervalTrackerModule = require(Parent.ScrollIntervalTracker)
+local FFlagExpChatMigrateScrollIntervalTrackerModule = require(ChatUIPrimitives.Flags.FFlagExpChatMigrateScrollIntervalTracker)
+local FFlagExpChatPerfTrackerTabNameModule = require(ChatUIPrimitives.Flags.FFlagExpChatPerfTrackerTabName)
+local ExpChatPerfTrackerModule = {
+	start = function(DebugName, p1, p2): boolean --[[ Line: 25 ]]
+		-- upvalues: EventConfig (copy), EventTypes (copy), TimeToInteractiveTracker (copy), FFlagExpChatPerfTrackerTabNameModule (copy), IntervalPerformanceTracker (copy), ExpChatPerfTracker (copy)
+		local EventConfigEntry = EventConfig[DebugName] or {}
 		
-		if var1.type == eventTypes.TTI then
-			var1.onStart(p2)
-			timeToInteractiveTracker.trackStart(var1.baseName)
+		if EventConfigEntry.type == EventTypes.TTI then
+			EventConfigEntry.onStart(p1)
+			TimeToInteractiveTracker.trackStart(EventConfigEntry.baseName)
 			
-			if fFlagExpChatPerfTrackerTabNameModule and p3 and p3.tabName then
-				timeToInteractiveTracker.updateMetadata(var1.baseName, { page = p3.tabName })
+			if FFlagExpChatPerfTrackerTabNameModule and p2 and p2.tabName then
+				TimeToInteractiveTracker.updateMetadata(EventConfigEntry.baseName, { page = p2.tabName })
 			end
 			return true
-		elseif var1.type ~= eventTypes.Interval then
-			expChatPerfTracker:warning(`ExpChatPerfTracker.start: unknown event type for event: {p1}`)
-			
-			return false
-		elseif not var1.canStart(p2) then
-			return false
-		end
-		intervalPerformanceTracker:cancelTracking(var1.name)
-		var1.onStart(p2)
-		
-		if fFlagExpChatPerfTrackerTabNameModule and p3 then
-			intervalPerformanceTracker:startTracking(var1.name, nil, var1.intervalMetrics, true, true, p3)
 		else
-			intervalPerformanceTracker:startTracking(var1.name, nil, var1.intervalMetrics, true, true)
-		end
-		return true
-	end,
-	finish = function(p4, p5, p6)
-		-- upvalues: eventConfig (ref), eventTypes (ref), fFlagExpChatPerfTrackerTabNameModule (ref), timeToInteractiveTracker (ref), expChatPerfTracker (ref), intervalPerformanceTracker (ref)
-		local var2 = eventConfig[p4] or {}
-		
-		if var2.type == eventTypes.TTI then
-			if not var2.canFinish(p5) then return end
-			if fFlagExpChatPerfTrackerTabNameModule and p6 and p6.tabName then
-				timeToInteractiveTracker.updateMetadata(var2.baseName, { page = p6.tabName })
+			if EventConfigEntry.type ~= EventTypes.Interval then
+				ExpChatPerfTracker:warning(`ExpChatPerfTracker.start: unknown event type for event: {DebugName}`)
+				
+				return false
 			end
-			timeToInteractiveTracker.trackEnd(var2.baseName)
+			if not EventConfigEntry.canStart(p1) then
+				return false
+			end
+			IntervalPerformanceTracker:cancelTracking(EventConfigEntry.name)
+			EventConfigEntry.onStart(p1)
 			
-			return
-		elseif var2.type ~= eventTypes.Interval then
-			expChatPerfTracker:warning(`ExpChatPerfTracker.finish: unknown event type for event: {p4}`)
-			
-			return
-		elseif not var2.canFinish(p5) then return end
-		if fFlagExpChatPerfTrackerTabNameModule and p6 then
-			expChatPerfTracker:warning("Unable to update finished interval extra fields")
+			if FFlagExpChatPerfTrackerTabNameModule and p2 then
+				IntervalPerformanceTracker:startTracking(EventConfigEntry.name, nil, EventConfigEntry.intervalMetrics, true, true, p2)
+			else
+				IntervalPerformanceTracker:startTracking(EventConfigEntry.name, nil, EventConfigEntry.intervalMetrics, true, true)
+			end
+			return true
 		end
-		var2.onFinish(p5)
-		intervalPerformanceTracker:stopAndLogTracking(var2.name)
 	end,
-	cancel = function(p7, p8)
-		-- upvalues: eventConfig (ref), eventTypes (ref), timeToInteractiveTracker (ref), intervalPerformanceTracker (ref), expChatPerfTracker (ref)
-		local var3 = eventConfig[p7] or {}
+	finish = function(DebugName, p3, p4) --[[ Line: 61 ]]
+		-- upvalues: EventConfig (copy), EventTypes (copy), FFlagExpChatPerfTrackerTabNameModule (copy), TimeToInteractiveTracker (copy), ExpChatPerfTracker (copy), IntervalPerformanceTracker (copy)
+		local EventConfigEntry = EventConfig[DebugName] or {}
 		
-		if var3.type == eventTypes.TTI then
-			timeToInteractiveTracker.resetEvent(var3.baseName)
+		if EventConfigEntry.type == EventTypes.TTI then
+			if not EventConfigEntry.canFinish(p3) then return end
+			if FFlagExpChatPerfTrackerTabNameModule and p4 and p4.tabName then
+				TimeToInteractiveTracker.updateMetadata(EventConfigEntry.baseName, { page = p4.tabName })
+			end
+			TimeToInteractiveTracker.trackEnd(EventConfigEntry.baseName)
 			
 			return
-		elseif var3.type == eventTypes.Interval then
-			var3.onFinish(p8)
-			intervalPerformanceTracker:cancelTracking(var3.name)
+		else
+			if EventConfigEntry.type ~= EventTypes.Interval then
+				ExpChatPerfTracker:warning(`ExpChatPerfTracker.finish: unknown event type for event: {DebugName}`)
+				
+				return
+			end
+			if not EventConfigEntry.canFinish(p3) then return end
+			if FFlagExpChatPerfTrackerTabNameModule and p4 then
+				ExpChatPerfTracker:warning("Unable to update finished interval extra fields")
+			end
+			EventConfigEntry.onFinish(p3)
+			IntervalPerformanceTracker:stopAndLogTracking(EventConfigEntry.name)
+		end
+	end,
+	cancel = function(p5, p6) --[[ Line: 85 ]]
+		-- upvalues: EventConfig (copy), EventTypes (copy), TimeToInteractiveTracker (copy), IntervalPerformanceTracker (copy), ExpChatPerfTracker (copy)
+		local EventConfigEntry = EventConfig[p5] or {}
+		
+		if EventConfigEntry.type == EventTypes.TTI then
+			TimeToInteractiveTracker.resetEvent(EventConfigEntry.baseName)
 			
 			return
 		end
-		expChatPerfTracker:warning(`ExpChatPerfTracker.cancel: unknown event type for event: {p7}`)
+		if EventConfigEntry.type == EventTypes.Interval then
+			EventConfigEntry.onFinish(p6)
+			IntervalPerformanceTracker:cancelTracking(EventConfigEntry.name)
+			
+			return
+		else
+			ExpChatPerfTracker:warning(`ExpChatPerfTracker.cancel: unknown event type for event: {p5}`)
+		end
 	end
 }
 
-function t.cancelAll()
-	-- upvalues: eventConfig (ref), t (ref)
-	for i, v in eventConfig do
-		t.cancel(i)
+function ExpChatPerfTrackerModule.cancelAll() --[[ Line: 97 ]]
+	-- upvalues: EventConfig (copy), ExpChatPerfTrackerModule (copy)
+	for i, _ in EventConfig do
+		ExpChatPerfTrackerModule.cancel(i)
 	end
 end
 
-t.Events = events
+ExpChatPerfTrackerModule.Events = Events
 
-function t.startChatWindowScrollInterval(p9, p10, p11, p12)
-	-- upvalues: t (ref), fFlagExpChatMigrateScrollIntervalTrackerModule (ref), scrollIntervalTrackerModule (ref), socialLuaAnalyticsModule (ref)
-	local t_1 = { debugName = p9 }
+function ExpChatPerfTrackerModule.startChatWindowScrollInterval(DebugName, p7, p8, p9) --[[ Line: 104 ]]
+	-- upvalues: ExpChatPerfTrackerModule (copy), FFlagExpChatMigrateScrollIntervalTrackerModule (copy), ScrollIntervalTrackerModule (copy), SocialLuaAnalyticsModule (copy)
+	local config = { debugName = DebugName }
 	
-	local var4 = function(p13)
-		-- upvalues: t (copy), p9 (ref), p12 (ref)
-		return t.start(p9, p13, p12)
+	local function v17(p10) --[[ Line: 113 ]]
+		-- upvalues: ExpChatPerfTrackerModule (upval), DebugName (copy), p9 (copy)
+		return ExpChatPerfTrackerModule.start(DebugName, p10, p9)
 	end
 	
-	local var5 = function(p13)
-		-- upvalues: t (copy), p9 (ref)
-		t.finish(p9, p13)
+	local function v18(p10) --[[ Line: 116 ]]
+		-- upvalues: ExpChatPerfTrackerModule (upval), DebugName (copy)
+		ExpChatPerfTrackerModule.finish(DebugName, p10)
 	end
 	
-	return if fFlagExpChatMigrateScrollIntervalTrackerModule then scrollIntervalTrackerModule.createScrollIntervalTracker(var4, var5, p10, p11, t_1) else socialLuaAnalyticsModule.Performance.createScrollIntervalTracker(var4, var5, p10, p11, t_1)
+	return if FFlagExpChatMigrateScrollIntervalTrackerModule then ScrollIntervalTrackerModule.createScrollIntervalTracker(v17, v18, p7, p8, config) else SocialLuaAnalyticsModule.Performance.createScrollIntervalTracker(v17, v18, p7, p8, config)
 end
 
-return t
+return ExpChatPerfTrackerModule

@@ -1,166 +1,254 @@
-﻿local circularBufferModule = require(script.Parent.Parent.Parent.CircularBuffer)
-local signalModule = require(script.Parent.Parent.Parent.Signal)
-local voiceDebugFieldMetaModule = require(script.Parent.VoiceDebugFieldMeta)
-local voiceChatService = game:GetService("VoiceChatService")
-local newDevConsoleMaxGraphCount = tonumber(settings():GetFVariable("NewDevConsoleMaxGraphCount")) or 60
-local getFFlagVoiceDebugConsoleV2Module = require(script.Parent.GetFFlagVoiceDebugConsoleV2)
+﻿local CircularBufferModule = require(script.Parent.Parent.Parent.CircularBuffer)
+local SignalModule = require(script.Parent.Parent.Parent.Signal)
+local VoiceDebugFieldMetaModule = require(script.Parent.VoiceDebugFieldMeta)
+local VoiceChatService = game:GetService("VoiceChatService")
+local Number: number = tonumber(settings():GetFVariable("NewDevConsoleMaxGraphCount")) or 60
+local GetFFlagVoiceDebugConsoleV2Module = require(script.Parent.GetFFlagVoiceDebugConsoleV2)
 
-local function parseCodecFromSdp(p1)
-	if not p1 or p1 == "" then
+local function parseCodecFromSdp(Text: string) --[[ Line: 107 ]]
+	if Text and Text ~= "" then
+		local _, Match2, Match3, Match4 = string.match(Text, "a=rtpmap:(%d+) (%a+)/(%d+)/(%d+)")
+		
+		return if Match2 and Match3 and Match4 then string.format("%s/%s/%s", Match2, Match3, Match4) else nil
+	else
 		return nil
 	end
-	local _, match, match_1, match_2 = string.match(p1, "a=rtpmap:(%d+) (%a+)/(%d+)/(%d+)")
+end
+
+local function computeBitrateKbps(p1, p2, p3: number) --[[ Line: 118 ]]
+	return if type(p1) == "number" and type(p2) == "number" and type(p3) == "number" and p3 > 0 then if p1 < p2 then nil else (p1 - p2) * 8 / p3 / 1000 else nil
+end
+
+local function computeSubscriptionBitrates(Subscriptions, PrevSubscriptionBytesBySsrc, p1: number) --[[ Line: 138 ]]
+	local t = {}
 	
-	return if match and match_1 and match_2 then string.format("%s/%s/%s", match, match_1, match_2) else nil
+	for i, subscription in Subscriptions do
+		local AudioSsrc: number = subscription.audioSsrc
+		
+		if type(AudioSsrc) == "number" and AudioSsrc == AudioSsrc and AudioSsrc % 1 == 0 then
+			t[AudioSsrc] = true
+			local PrevSubscriptionBytesBySsrcEntry = PrevSubscriptionBytesBySsrc[AudioSsrc]
+			local IncomingBytes = subscription.incomingBytes
+			local Bytes = PrevSubscriptionBytesBySsrcEntry ~= nil and PrevSubscriptionBytesBySsrcEntry.userId == subscription.userId and PrevSubscriptionBytesBySsrcEntry.bytes or nil
+			subscription.incomingBitrateKbps = if type(IncomingBytes) == "number" and type(Bytes) == "number" and type(p1) == "number" and p1 > 0 then if IncomingBytes < Bytes then nil else (IncomingBytes - Bytes) * 8 / p1 / 1000 else nil
+			PrevSubscriptionBytesBySsrc[AudioSsrc] = {
+				userId = subscription.userId,
+				bytes = subscription.incomingBytes
+			}
+		end
+	end
+	for i in PrevSubscriptionBytesBySsrc do
+		if not t[i] then
+			PrevSubscriptionBytesBySsrc[i] = nil
+		end
+	end
 end
 
-local function computeBitrateKbps(p1, p2, p3)
-	return if not (type(p1) ~= "number" or type(p2) ~= "number" or (type(p3) ~= "number" or p3 <= 0)) then if p1 < p2 then nil else (p1 - p2) * 8 / p3 / 1000 else nil
-end
-
-local function computeLossPercent(p1, p2)
-	if type(p1) ~= "number" or type(p2) ~= "number" then
+local function computeLossPercent(p2, p3) --[[ Line: 162 ]]
+	if type(p2) == "number" and type(p3) == "number" then
+		local v1 = p2 + p3
+		
+		return if v1 <= 0 then nil else p3 / v1 * 100
+	else
 		return nil
 	end
-	local var1 = p1 + p2
+end
+
+local function deltaSince(p2, p3) --[[ Line: 177 ]]
+	return if type(p2) == "number" and type(p3) == "number" and p2 >= p3 then p2 - p3 else nil
+end
+
+local function nativeSecondsToWallClockSeconds(p2, p3, p4) --[[ Line: 184 ]]
+	return p4 + (p2 - p3)
+end
+
+local function formatWallClockTime(p2): string --[[ Line: 188 ]]
+	return (os.date("%H:%M:%S", p2))
+end
+
+local function decorateOperationEntries(Operations, NativeNowSeconds, Timestamp) --[[ Line: 192 ]]
+	local Buffer = table.create(#Operations)
 	
-	return if var1 <= 0 then nil else p2 / var1 * 100
+	for i, operation in Operations do
+		Buffer[i] = {
+			name = operation.name,
+			operationType = operation.operationType,
+			timestampSeconds = operation.timestampSeconds,
+			timestampText = if operation.timestampSeconds then os.date("%H:%M:%S", Timestamp + (operation.timestampSeconds - NativeNowSeconds)) else nil
+		}
+	end
+	return Buffer
 end
 
-local function deltaSince(p1, p2)
-	return if type(p1) == "number" and type(p2) == "number" and p1 >= p2 then p1 - p2 else nil
-end
+local VoiceDebugDataModule = {}
+VoiceDebugDataModule.__index = VoiceDebugDataModule
 
-local t = {}
-t.__index = t
-
-function t.new()
-	-- upvalues: t (ref), signalModule (ref)
-	local t_1 = {}
-	setmetatable(t_1, t)
-	t_1._statsUpdated = signalModule.new()
-	t_1._statsData = {}
-	t_1._series = {}
-	t_1._connectivityData = {}
-	t_1._isRunning = false
+function VoiceDebugDataModule.new() --[[ Line: 211 ]]
+	-- upvalues: VoiceDebugDataModule (copy), SignalModule (copy)
+	local t = {}
+	setmetatable(t, VoiceDebugDataModule)
+	t._statsUpdated = SignalModule.new()
+	t._statsData = {}
+	t._series = {}
+	t._connectivityData = {}
+	t._subscriptionsData = {}
+	t._remoteOperationsData = {}
+	t._prevSubscriptionBytesBySsrc = {}
+	t._isRunning = false
 	
-	return t_1
+	return t
 end
 
-function t:Signal()
+function VoiceDebugDataModule:Signal() --[[ Line: 226 ]]
 	return self._statsUpdated
 end
 
-function t:getCurrentData()
+function VoiceDebugDataModule:getCurrentData() --[[ Line: 230 ]]
 	return self._statsData
 end
 
-function t:getSeries()
+function VoiceDebugDataModule:getSeries() --[[ Line: 234 ]]
 	return self._series
 end
 
-function t:isRunning()
+function VoiceDebugDataModule.getSeriesSnapshot(p2) --[[ Line: 241 ]]
+	local t = {}
+	
+	for i, sery in p2._series do
+		t[i] = {
+			max = sery.max,
+			min = sery.min,
+			dataSet = sery.dataSet:clone()
+		}
+	end
+	return t
+end
+
+function VoiceDebugDataModule:isRunning() --[[ Line: 253 ]]
 	return self._isRunning
 end
 
-function t:getConnectivity()
+function VoiceDebugDataModule:getConnectivity() --[[ Line: 257 ]]
 	return self._connectivityData
 end
 
-function t:_updateSeriesValue(p1, p2, p3)
-	-- upvalues: circularBufferModule (ref), newDevConsoleMaxGraphCount (ref)
-	if not self._series[p1] then
-		local var1 = circularBufferModule.new(newDevConsoleMaxGraphCount)
-		var1:push_back({ value = p2, time = p3 })
-		self._series[p1] = { max = p2, min = p2, dataSet = var1 }
+function VoiceDebugDataModule:getSubscriptions() --[[ Line: 261 ]]
+	return self._subscriptionsData.subscriptions or {}
+end
+
+function VoiceDebugDataModule:getRemoteOperations() --[[ Line: 265 ]]
+	return self._remoteOperationsData
+end
+
+function VoiceDebugDataModule:_updateSeriesValue(p3, Value, Time) --[[ Line: 269 ]]
+	-- upvalues: CircularBufferModule (copy), Number (copy)
+	if not self._series[p3] then
+		local NewCircularBuffer = CircularBufferModule.new(Number)
+		NewCircularBuffer:push_back({ value = Value, time = Time })
+		self._series[p3] = { max = Value, min = Value, dataSet = NewCircularBuffer }
 		
 		return
 	end
-	local var2 = self._series[p1]
-	local max = var2.max
-	local min = var2.min
-	local var3 = var2.dataSet:push_back({ value = p2, time = p3 })
+	local Sery = self._series[p3]
+	local Max = Sery.max
+	local Min = Sery.min
+	local Push_backResult = Sery.dataSet:push_back({ value = Value, time = Time })
 	
-	if var3 and (max == var3.value or min == var3.value) then
-		local var4 = var2.dataSet:iterator()
-		local var5 = var4:next()
-		local value = var5 and var5.value
-		local value_1 = var5 and var5.value
-		while var5 do
-			value = if var5.value < value then value else var5.value
-			value_1 = if value_1 < var5.value then value_1 else var5.value
-			var5 = var4:next()
+	if Push_backResult and (Max == Push_backResult.value or Min == Push_backResult.value) then
+		local IteratorResult = Sery.dataSet:iterator()
+		local Key = IteratorResult:next()
+		local Value1 = Key and Key.value
+		local Value2 = Key and Key.value
+		while Key do
+			Value1 = Key.value < Value1 and Value1 or Key.value
+			Value2 = Value2 < Key.value and Value2 or Key.value
+			Key = IteratorResult:next()
 		end
-		if max == var3.value then
-			max = value
+		if Max == Push_backResult.value then
+			Max = Value1
 		end
-		if min == var3.value then
-			min = value_1
+		if Min == Push_backResult.value then
+			Min = Value2
 		end
 	end
-	var2.max = if max < p2 then p2 else max
-	var2.min = if min < p2 then min else p2
+	Sery.max = Max < Value and Value or Max
+	Sery.min = Min < Value and Min or Value
 end
 
-function t:start()
-	-- upvalues: voiceChatService (ref), getFFlagVoiceDebugConsoleV2Module (ref), voiceDebugFieldMetaModule (ref)
-	if voiceChatService and not self._statsListenerConnection then
-		self._statsListenerConnection = voiceChatService.VoiceChatStatsCollected:Connect(function()
-			-- upvalues: self (ref), voiceChatService (copy), getFFlagVoiceDebugConsoleV2Module (copy), voiceDebugFieldMetaModule (copy)
-			local incomingBytes, prevIncomingBytes
-			self._statsData = voiceChatService:lastVoiceChatStats()
-			self._connectivityData = voiceChatService:lastVoiceChatConnectivity()
-			local timestamp = os.time()
+function VoiceDebugDataModule:start() --[[ Line: 321 ]]
+	-- upvalues: VoiceChatService (copy), GetFFlagVoiceDebugConsoleV2Module (copy), decorateOperationEntries (copy), computeSubscriptionBitrates (copy), VoiceDebugFieldMetaModule (copy)
+	if VoiceChatService and not self._statsListenerConnection then
+		self._statsListenerConnection = VoiceChatService.VoiceChatStatsCollected:Connect(function() --[[ Line: 323 ]]
+			-- upvalues: self (copy), VoiceChatService (upval), GetFFlagVoiceDebugConsoleV2Module (upval), decorateOperationEntries (upval), computeSubscriptionBitrates (upval), VoiceDebugFieldMetaModule (upval)
+			self._statsData = VoiceChatService:lastVoiceChatStats()
+			self._connectivityData = VoiceChatService:lastVoiceChatConnectivity()
+			self._subscriptionsData = VoiceChatService:lastVoiceChatSubscriptions() or {}
+			local LastVoiceChatRemoteOperationsResult = VoiceChatService:lastVoiceChatRemoteOperations() or {}
+			local Timestamp = os.time()
 			
-			if getFFlagVoiceDebugConsoleV2Module() then
-				local var6, match, match_1
-				local processTime = os.clock()
-				local var7 = if self._prevBytesClock then processTime - self._prevBytesClock else nil
-				local statsData = self._statsData
-				incomingBytes = self._statsData.incomingBytes
-				prevIncomingBytes = self._prevIncomingBytes
-				statsData.incomingBitrateKbps = if type(incomingBytes) == "number" and type(prevIncomingBytes) == "number" and (type(var7) == "number" and var7 > 0) then if incomingBytes < prevIncomingBytes then nil else (incomingBytes - prevIncomingBytes) * 8 / var7 / 1000 else nil
-				local statsData_1 = self._statsData
-				incomingBytes = self._statsData.outgoingBytes
-				prevIncomingBytes = self._prevOutgoingBytes
-				statsData_1.outgoingBitrateKbps = if type(incomingBytes) == "number" and type(prevIncomingBytes) == "number" and (type(var7) == "number" and var7 > 0) then if incomingBytes < prevIncomingBytes then nil else (incomingBytes - prevIncomingBytes) * 8 / var7 / 1000 else nil
+			if GetFFlagVoiceDebugConsoleV2Module() then
+				local NativeNowSeconds = LastVoiceChatRemoteOperationsResult.nativeNowSeconds
+				
+				if NativeNowSeconds then
+					local Timestamp1 = os.time()
+					self._remoteOperationsData = {
+						sent = decorateOperationEntries(LastVoiceChatRemoteOperationsResult.sent or {}, NativeNowSeconds, Timestamp1),
+						received = decorateOperationEntries(LastVoiceChatRemoteOperationsResult.received or {}, NativeNowSeconds, Timestamp1),
+						operations = decorateOperationEntries(LastVoiceChatRemoteOperationsResult.operations or {}, NativeNowSeconds, Timestamp1),
+						sentCaptureEnabled = LastVoiceChatRemoteOperationsResult.sentCaptureEnabled == true,
+						receivedCaptureEnabled = LastVoiceChatRemoteOperationsResult.receivedCaptureEnabled == true,
+						opQueueCaptureEnabled = LastVoiceChatRemoteOperationsResult.opQueueCaptureEnabled == true
+					}
+				else
+					self._remoteOperationsData = {}
+				end
+				local ClockTime = os.clock()
+				local ClockTimeDelta = self._prevBytesClock and ClockTime - self._prevBytesClock or nil
+				local IncomingBytes = self._statsData.incomingBytes
+				local PrevIncomingBytes = self._prevIncomingBytes
+				self._statsData.incomingBitrateKbps = if type(IncomingBytes) == "number" and type(PrevIncomingBytes) == "number" and type(ClockTimeDelta) == "number" and ClockTimeDelta > 0 then if IncomingBytes < PrevIncomingBytes then nil else (IncomingBytes - PrevIncomingBytes) * 8 / ClockTimeDelta / 1000 else nil
+				local OutgoingBytes = self._statsData.outgoingBytes
+				local PrevOutgoingBytes = self._prevOutgoingBytes
+				self._statsData.outgoingBitrateKbps = if type(OutgoingBytes) == "number" and type(PrevOutgoingBytes) == "number" and type(ClockTimeDelta) == "number" and ClockTimeDelta > 0 then if OutgoingBytes < PrevOutgoingBytes then nil else (OutgoingBytes - PrevOutgoingBytes) * 8 / ClockTimeDelta / 1000 else nil
 				self._prevIncomingBytes = self._statsData.incomingBytes
 				self._prevOutgoingBytes = self._statsData.outgoingBytes
-				self._prevBytesClock = processTime
-				local statsData_2 = self._statsData
-				incomingBytes = self._connectivityData.sdpPublishOffer
+				self._prevBytesClock = ClockTime
+				local StatsData = self._statsData
+				local SdpPublishOffer: string = self._connectivityData.sdpPublishOffer
+				local Formatted = nil
 				
-				if incomingBytes and incomingBytes ~= "" then
-					prevIncomingBytes, match, match_1, match_2 = string.match(incomingBytes, "a=rtpmap:(%d+) (%a+)/(%d+)/(%d+)")
-					var6 = if match and match_1 and match_2 then string.format("%s/%s/%s", match, match_1, match_2) else nil
+				if SdpPublishOffer and SdpPublishOffer ~= "" then
+					local _, Match2, Match3, Match4 = string.match(SdpPublishOffer, "a=rtpmap:(%d+) (%a+)/(%d+)/(%d+)")
+					Formatted = if Match2 and Match3 and Match4 then string.format("%s/%s/%s", Match2, Match3, Match4) else nil
 				else
-					var6 = nil
+					Formatted = nil
 				end
-				local var8
-				statsData_2.outgoingCodec = var6
-				local statsData_3 = self._statsData
-				prevIncomingBytes = self._statsData.incomingPackets
-				match = self._prevIncomingPackets
-				incomingBytes = if type(prevIncomingBytes) == "number" and type(match) == "number" and prevIncomingBytes >= match then prevIncomingBytes - match else nil
-				match = self._statsData.incomingPacketsLost
-				match_1 = self._prevIncomingPacketsLost
-				prevIncomingBytes = if type(match) == "number" and type(match_1) == "number" and match >= match_1 then match - match_1 else nil
+				StatsData.outgoingCodec = Formatted
+				local StatsData1 = self._statsData
+				local IncomingPackets = self._statsData.incomingPackets
+				local PrevIncomingPackets = self._prevIncomingPackets
+				local IncomingPacketsDelta = if type(IncomingPackets) == "number" and type(PrevIncomingPackets) == "number" and IncomingPackets >= PrevIncomingPackets then IncomingPackets - PrevIncomingPackets else nil
+				local IncomingPacketsLost = self._statsData.incomingPacketsLost
+				local PrevIncomingPacketsLost = self._prevIncomingPacketsLost
+				local IncomingPacketsLostDelta = if type(IncomingPacketsLost) == "number" and (type(PrevIncomingPacketsLost) == "number" and IncomingPacketsLost >= PrevIncomingPacketsLost) then IncomingPacketsLost - PrevIncomingPacketsLost else nil
+				local IncomingLossPercent = nil
 				
-				if type(incomingBytes) == "number" and type(prevIncomingBytes) == "number" then
-					match = incomingBytes + prevIncomingBytes
-					var8 = if match <= 0 then nil else prevIncomingBytes / match * 100
+				if type(IncomingPacketsDelta) == "number" and type(IncomingPacketsLostDelta) == "number" then
+					local v1 = IncomingPacketsDelta + IncomingPacketsLostDelta
+					IncomingLossPercent = if v1 <= 0 then nil else IncomingPacketsLostDelta / v1 * 100
 				else
-					var8 = nil
+					IncomingLossPercent = nil
 				end
-				statsData_3.incomingLossPercent = var8
+				StatsData1.incomingLossPercent = IncomingLossPercent
 				self._prevIncomingPackets = self._statsData.incomingPackets
 				self._prevIncomingPacketsLost = self._statsData.incomingPacketsLost
+				computeSubscriptionBitrates(self._subscriptionsData.subscriptions or {}, self._prevSubscriptionBytesBySsrc, ClockTimeDelta)
 			end
-			for i, incomingBytes in self._statsData do
-				prevIncomingBytes = voiceDebugFieldMetaModule[i]
+			for i, value in self._statsData do
+				local VoiceDebugFieldMetaModuleEntry = VoiceDebugFieldMetaModule[i]
 				
-				if prevIncomingBytes and prevIncomingBytes.plottable and type(incomingBytes) == "number" then
-					self:_updateSeriesValue(i, incomingBytes, timestamp)
+				if VoiceDebugFieldMetaModuleEntry and VoiceDebugFieldMetaModuleEntry.plottable and type(value) == "number" then
+					self:_updateSeriesValue(i, value, Timestamp)
 				end
 			end
 			self._statsUpdated:Fire(self._statsData)
@@ -169,7 +257,7 @@ function t:start()
 	end
 end
 
-function t:stop()
+function VoiceDebugDataModule:stop() --[[ Line: 383 ]]
 	self._isRunning = false
 	
 	if self._statsListenerConnection then
@@ -181,11 +269,16 @@ function t:stop()
 	self._prevOutgoingBytes = nil
 	self._prevIncomingPackets = nil
 	self._prevIncomingPacketsLost = nil
+	self._prevSubscriptionBytesBySsrc = {}
 end
 
-t._parseCodecFromSdp = parseCodecFromSdp
-t._computeBitrateKbps = computeBitrateKbps
-t._computeLossPercent = computeLossPercent
-t._deltaSince = deltaSince
+VoiceDebugDataModule._parseCodecFromSdp = parseCodecFromSdp
+VoiceDebugDataModule._computeBitrateKbps = computeBitrateKbps
+VoiceDebugDataModule._computeLossPercent = computeLossPercent
+VoiceDebugDataModule._deltaSince = deltaSince
+VoiceDebugDataModule._computeSubscriptionBitrates = computeSubscriptionBitrates
+VoiceDebugDataModule._nativeSecondsToWallClockSeconds = nativeSecondsToWallClockSeconds
+VoiceDebugDataModule._formatWallClockTime = formatWallClockTime
+VoiceDebugDataModule._decorateOperationEntries = decorateOperationEntries
 
-return t
+return VoiceDebugDataModule

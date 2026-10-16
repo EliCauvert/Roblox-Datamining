@@ -1,7 +1,7 @@
-﻿local parent = script:FindFirstAncestor("GameTile").Parent
-local foundationModule = require(parent.Foundation)
-local gameTileLayoutType = require(script.Parent.GameTileTypes).GameTileLayoutType
-local sharedFlagsModule = require(parent.SharedFlags)
+﻿local Parent = script:FindFirstAncestor("GameTile").Parent
+local GameTileLayoutType = require(script.Parent.GameTileTypes).GameTileLayoutType
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagLuaAppEnableReportExperience = SharedFlagsModule.FFlagLuaAppEnableReportExperience
 
 return {
 	TileOverlay = { BottomRightPosition = UDim2.new(0.96, 0, 0.93, 0) },
@@ -15,35 +15,35 @@ return {
 		ImageBottomRight = "ImageBottomRight"
 	},
 	TileBadgePositionCalculators = {
-		ImageTopLeft = function(p1)
-			return UDim2.new(0, p1, 0, p1), Vector2.new(0, 0)
+		ImageTopLeft = function(XOffset) --[[ Line: 37 ]]
+			return UDim2.new(0, XOffset, 0, XOffset), Vector2.new(0, 0)
 		end,
-		ImageBottomLeft = function(p1)
-			return UDim2.new(0, p1, 1, -p1), Vector2.new(0, 1)
+		ImageBottomLeft = function(XOffset) --[[ Line: 40 ]]
+			return UDim2.new(0, XOffset, 1, -XOffset), Vector2.new(0, 1)
 		end,
-		ImageTopRight = function(p1)
-			return UDim2.new(1, -p1, 0, p1), Vector2.new(1, 0)
+		ImageTopRight = function(YOffset) --[[ Line: 43 ]]
+			return UDim2.new(1, -YOffset, 0, YOffset), Vector2.new(1, 0)
 		end,
-		ImageBottomRight = function(p1)
+		ImageBottomRight = function(p1) --[[ Line: 46 ]]
 			return UDim2.new(1, -p1, 1, -p1), Vector2.new(1, 1)
 		end
 	},
 	TileBadgeIconNamesByType = {
 		PaidAccess = "icons/menu/gem_small",
-		["icons/menu/lock_closed"] = foundationModule.Enums.IconName.LockClosed
+		["icons/menu/lock_closed"] = require(Parent.Foundation).Enums.IconName.LockClosed
 	},
 	TileTextLines = {
-		[gameTileLayoutType.Narrow] = {
+		[GameTileLayoutType.Narrow] = {
 			titleTextLines = 2,
 			metadataTextLines = 1,
 			largeMetadataTextLines = 2
 		},
-		[gameTileLayoutType.Wide] = {
+		[GameTileLayoutType.Wide] = {
 			titleTextLines = 1,
 			metadataTextLines = 1,
 			largeMetadataTextLines = 1
 		},
-		[gameTileLayoutType.Event] = {
+		[GameTileLayoutType.Event] = {
 			titleTextLines = 1,
 			metadataTextLines = 1,
 			largeMetadataTextLines = 1
@@ -53,7 +53,7 @@ return {
 		NotInterested = "NotInterested",
 		WhyThisAd = "WhyThisAd",
 		ReportAd = "ReportAd",
-		GameDetails = if sharedFlagsModule.FFlagLuaAppContinueSortInstantPlay then "GameDetails" else nil,
-		ReportExperience = if sharedFlagsModule.FFlagLuaAppEnableReportExperience then "ReportExperience" else nil
+		GameDetails = if SharedFlagsModule.FFlagLuaAppContinueSortInstantPlay then "GameDetails" else nil,
+		ReportExperience = if FFlagLuaAppEnableReportExperience then "ReportExperience" else nil
 	}
 }

@@ -1,31 +1,30 @@
-﻿local expChat = script:FindFirstAncestor("ExpChat")
-local parent = expChat.Parent
-local fFlagExpChatUseGuacForCrossAgeChat = require(parent.SharedFlags).FFlagExpChatUseGuacForCrossAgeChat
-local var1 = if fFlagExpChatUseGuacForCrossAgeChat then require(parent.UniversalAppPolicy) else nil
-local IXPServiceWrapperModule = require(expChat.IXPServiceWrapper)
-local expChatCrossAgeChatActivityIXPLayerName = game:DefineFastString("ExpChatCrossAgeChatActivityIXPLayerName", "User.Communication.AgeCheckedUser")
-local expChatCrossAgeChatActivityIXPLayerValue = game:DefineFastString("ExpChatCrossAgeChatActivityIXPLayerValue", "CrossAgeChatActivityEnabled")
-local var2 = nil
-local var3 = nil
+﻿local ExpChat = script:FindFirstAncestor("ExpChat")
+local Parent = ExpChat.Parent
+local FFlagExpChatUseGuacForCrossAgeChat = require(Parent.SharedFlags).FFlagExpChatUseGuacForCrossAgeChat
+local UniversalAppPolicyModule = if FFlagExpChatUseGuacForCrossAgeChat then require(Parent.UniversalAppPolicy) else nil
+local IXPServiceWrapperModule = require(ExpChat.IXPServiceWrapper)
+local ExpChatCrossAgeChatActivityIXPLayerName = game:DefineFastString("ExpChatCrossAgeChatActivityIXPLayerName", "User.Communication.AgeCheckedUser")
+local ExpChatCrossAgeChatActivityIXPLayerValue = game:DefineFastString("ExpChatCrossAgeChatActivityIXPLayerValue", "CrossAgeChatActivityEnabled")
+local v1 = nil
+local v2 = nil
 
-local function fetchIXPData()
-	-- upvalues: var2 (write), var3 (write), IXPServiceWrapperModule (ref), expChatCrossAgeChatActivityIXPLayerName (ref), expChatCrossAgeChatActivityIXPLayerValue (ref)
-	local ok, status = pcall(function()
-		-- upvalues: IXPServiceWrapperModule (copy), expChatCrossAgeChatActivityIXPLayerName (copy)
-		return IXPServiceWrapperModule:GetLayerData(expChatCrossAgeChatActivityIXPLayerName)
+local function fetchIXPData() --[[ Line: 21 ]]
+	-- upvalues: v1 (ref), v2 (ref), IXPServiceWrapperModule (copy), ExpChatCrossAgeChatActivityIXPLayerName (copy), ExpChatCrossAgeChatActivityIXPLayerValue (copy)
+	v1, v8 = pcall(function() --[[ Line: 22 ]]
+		-- upvalues: IXPServiceWrapperModule (upval), ExpChatCrossAgeChatActivityIXPLayerName (upval)
+		return IXPServiceWrapperModule:GetLayerData(ExpChatCrossAgeChatActivityIXPLayerName)
 	end)
-	var2 = ok
-	var3 = status
 	
-	if var2 and var3 and var3[expChatCrossAgeChatActivityIXPLayerValue] ~= nil then
-		IXPServiceWrapperModule:LogUserLayerExposure(expChatCrossAgeChatActivityIXPLayerName)
+	if v1 and v2 and v2[ExpChatCrossAgeChatActivityIXPLayerValue] ~= nil then
+		IXPServiceWrapperModule:LogUserLayerExposure(ExpChatCrossAgeChatActivityIXPLayerName)
 		
-		return var3[expChatCrossAgeChatActivityIXPLayerValue]
+		return v2[ExpChatCrossAgeChatActivityIXPLayerValue]
+	else
+		return false
 	end
-	return false
 end
 
-return function()
-	-- upvalues: fFlagExpChatUseGuacForCrossAgeChat (ref), var1 (write), var2 (write), var3 (write), expChatCrossAgeChatActivityIXPLayerValue (ref), fetchIXPData (ref)
-	return if fFlagExpChatUseGuacForCrossAgeChat then if var1.getAppFeaturePolicies().getShowCrossAgeChat() then if var2 and var3 then var3[expChatCrossAgeChatActivityIXPLayerValue] else fetchIXPData() else false else false
+return function() --[[ Line: 35 ]]
+	-- upvalues: FFlagExpChatUseGuacForCrossAgeChat (copy), UniversalAppPolicyModule (ref), v1 (ref), v2 (ref), ExpChatCrossAgeChatActivityIXPLayerValue (copy), fetchIXPData (copy)
+	return if FFlagExpChatUseGuacForCrossAgeChat and UniversalAppPolicyModule.getAppFeaturePolicies().getShowCrossAgeChat() then if v1 and v2 then v2[ExpChatCrossAgeChatActivityIXPLayerValue] else fetchIXPData() else false
 end

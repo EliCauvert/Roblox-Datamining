@@ -1,145 +1,137 @@
-﻿local squads = script:FindFirstAncestor("Squads")
-local dependenciesModule = require(squads.dependencies)
-local parent = squads.Parent
-local reactModule = require(parent.React)
-local useLocalUserId = require(parent.RobloxAppHooks).useLocalUserId
-local cryo = dependenciesModule.Cryo
-local foundation = dependenciesModule.Foundation
-local roact = dependenciesModule.Roact
-local useSelector = dependenciesModule.Hooks.useSelector
-local squadState = require(parent.SquadsCore.Enums).SquadState
-local useSquadState = require(parent.SquadsCore.Hooks).useSquadState
-local useTokens = foundation.Hooks.useTokens
-local _ = require(squads.Common.ModelTypes)
-local squadUserPartyStatusModule = require(squads.Enums.SquadUserPartyStatus)
-local squadLobbyUserCardModule = require(script.Parent.SquadLobbyUserCard)
-local squadLobbyUpsellCardModule = require(script.Parent.SquadLobbyUpsellCard)
-local fFlagEnableSquadRegroupExperimentationSmallScreenFix = require(parent.SharedFlags).FFlagEnableSquadRegroupExperimentationSmallScreenFix
+﻿local Squads = script:FindFirstAncestor("Squads")
+local DependenciesModule = require(Squads.dependencies)
+local Parent = Squads.Parent
+local ReactModule = require(Parent.React)
+local UseLocalUserIdFunction = require(Parent.RobloxAppHooks).useLocalUserId
+local Cryo = DependenciesModule.Cryo
+local Roact = DependenciesModule.Roact
+local UseSelectorFunction = DependenciesModule.Hooks.useSelector
+local SquadState = require(Parent.SquadsCore.Enums).SquadState
+local UseSquadStateFunction = require(Parent.SquadsCore.Hooks).useSquadState
+local UseTokensFunction = DependenciesModule.Foundation.Hooks.useTokens
+local _ = require(Squads.Common.ModelTypes)
+local SquadUserPartyStatusModule = require(Squads.Enums.SquadUserPartyStatus)
+local SquadLobbyUserCardModule = require(script.Parent.SquadLobbyUserCard)
+local SquadLobbyUpsellCardModule = require(script.Parent.SquadLobbyUpsellCard)
+local FFlagEnableSquadRegroupExperimentationSmallScreenFix = require(Parent.SharedFlags).FFlagEnableSquadRegroupExperimentationSmallScreenFix
 
-return function(p1)
-	-- upvalues: useTokens (ref), useLocalUserId (ref), useSquadState (ref), reactModule (ref), squadState (ref), cryo (ref), squadUserPartyStatusModule (ref), fFlagEnableSquadRegroupExperimentationSmallScreenFix (ref), useSelector (ref), squadLobbyUserCardModule (ref), squadLobbyUpsellCardModule (ref), roact (ref)
-	local var1 = useTokens()
-	local var2 = tonumber(useLocalUserId()) or 0
-	local var3 = useSquadState()
-	local medium = var1.Gap.Medium
-	local xLarge = var1.Padding.XLarge
-	local var4, var5, var6 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref), xLarge (ref), var3 (ref), squadState (copy), cryo (copy), squadUserPartyStatusModule (copy), medium (ref), fFlagEnableSquadRegroupExperimentationSmallScreenFix (copy)
+return function(p1) --[[ Line: 45 ]]
+	-- upvalues: UseTokensFunction (copy), UseLocalUserIdFunction (copy), UseSquadStateFunction (copy), ReactModule (copy), SquadState (copy), Cryo (copy), SquadUserPartyStatusModule (copy), FFlagEnableSquadRegroupExperimentationSmallScreenFix (copy), UseSelectorFunction (copy), SquadLobbyUserCardModule (copy), SquadLobbyUpsellCardModule (copy), Roact (copy)
+	local UseTokensResult = UseTokensFunction()
+	local Number: number = tonumber(UseLocalUserIdFunction()) or 0
+	local UseSquadStateResult = UseSquadStateFunction()
+	local Medium = UseTokensResult.Gap.Medium
+	local XLarge = UseTokensResult.Padding.XLarge
+	local UseMemoResult, UseMemoResult2, UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 52 ]]
+		-- upvalues: p1 (copy), XLarge (copy), UseSquadStateResult (copy), SquadState (upval), Cryo (upval), SquadUserPartyStatusModule (upval), Medium (copy), FFlagEnableSquadRegroupExperimentationSmallScreenFix (upval)
 		if p1.containerSize.Y == 0 or p1.containerSize.X == 0 then
 			return Vector2.new(0, 0), 0, 0
 		end
-		local var7
-		local var8 = p1.containerSize.X - xLarge * 2
-		local var9 = if var3 ~= squadState.Active then math.max(#cryo.List.filter(p1.users, function(p2)
-			-- upvalues: squadUserPartyStatusModule (copy)
-			return p2.partyStatus ~= squadUserPartyStatusModule.Inactive
+		local XDelta = p1.containerSize.X - XLarge * 2
+		local XDeltaRatio = XDelta / p1.containerSize.Y
+		local Largest: number = if UseSquadStateResult == SquadState.Active then math.max(#Cryo.List.filter(p1.users, function(p2): boolean --[[ Line: 64 ]]
+			-- upvalues: SquadUserPartyStatusModule (upval)
+			return p2.partyStatus ~= SquadUserPartyStatusModule.Inactive
 		end), 2) else 1
+		local Ceiled = nil
+		local Largest1 = nil
 		
-		if var9 <= 3 and var8 / p1.containerSize.Y > 1.75 then
-			var7 = var9 * 120 + (var9 - 1) * medium <= var8
-			var7 = nil
+		if Largest <= 3 and XDeltaRatio > 1.75 and Largest * 120 + (Largest - 1) * Medium <= XDelta then
+			Ceiled = 1
+			Largest1 = Largest
+		elseif Largest <= 3 then
+			Ceiled = Largest
+			Largest1 = 1
 		else
-			var7 = false
+			Ceiled = math.ceil(Largest / 2)
+			Largest1 = 2
 		end
-		local var10, var11
-		local _ = nil
-		local _ = nil
+		local Smallest = math.min(Ceiled, (math.clamp(math.floor((p1.containerSize.Y + Medium) / (120 + Medium)), 1, 3)))
 		
-		if var7 then
-			var10 = 1
-			var11 = var9
-		elseif var9 <= 3 then
-			var10 = var9
-			var11 = 1
-		else
-			var10 = math.ceil(var9 / 2)
-			var11 = 2
-		end
-		local minValue = math.min(var10, math.clamp(math.floor((p1.containerSize.Y + medium) / (120 + medium)), 1, 3))
-		
-		return Vector2.new((var8 + medium) / var11 - medium, if fFlagEnableSquadRegroupExperimentationSmallScreenFix then math.max(120, p1.containerSize.Y + medium) / minValue - medium else (p1.containerSize.Y + medium) / minValue - medium), var10, var11
-	end, { medium, p1.containerSize, p1.users, xLarge })
-	local var7 = useSelector(reactModule.useCallback(function(p2)
+		return Vector2.new((XDelta + Medium) / Largest1 - Medium, if FFlagEnableSquadRegroupExperimentationSmallScreenFix then math.max(120, p1.containerSize.Y + Medium) / Smallest - Medium else (p1.containerSize.Y + Medium) / Smallest - Medium), Ceiled, Largest1
+	end, { Medium, p1.containerSize, p1.users, XLarge })
+	local UseSelectorResult = UseSelectorFunction((ReactModule.useCallback(function(p2) --[[ Line: 101 ]]
 		return p2.Squad.UserBlocking.isBlockedByMe
-	end, {}))
-	local var8 = reactModule.useMemo(function()
-		-- upvalues: var4 (ref), reactModule (copy), squadLobbyUserCardModule (copy), var7 (ref), p1 (ref), squadUserPartyStatusModule (copy), var2 (ref), var3 (ref), squadState (copy), squadLobbyUpsellCardModule (copy), var5 (ref), var6 (ref), medium (ref)
-		if var4.X == 0 or var4.Y == 0 then
+	end, {})))
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 107 ]]
+		-- upvalues: UseMemoResult (copy), ReactModule (upval), SquadLobbyUserCardModule (upval), UseSelectorResult (copy), p1 (copy), SquadUserPartyStatusModule (upval), Number (copy), UseSquadStateResult (copy), SquadState (upval), SquadLobbyUpsellCardModule (upval), UseMemoResult2 (copy), UseMemoResult3 (copy), Medium (copy)
+		if UseMemoResult.X == 0 or UseMemoResult.Y == 0 then
 			return {}
 		end
-		local t = {}
+		local List = {}
 		
-		local var9 = function(p2, p3, p4)
-			-- upvalues: reactModule (copy), squadLobbyUserCardModule (copy), var4 (copy), var7 (copy), p1 (copy)
-			return reactModule.createElement(squadLobbyUserCardModule, {
-				size = UDim2.fromOffset(var4.X, var4.Y),
-				isBlocked = var7[tostring(p3.userId)],
-				isConnecting = p4,
-				layoutOrder = p2,
+		local function v29(LayoutOrder, User, IsPartyStatusMatch) --[[ Line: 113 ]]
+			-- upvalues: ReactModule (upval), SquadLobbyUserCardModule (upval), UseMemoResult (upval), UseSelectorResult (upval), p1 (upval)
+			return ReactModule.createElement(SquadLobbyUserCardModule, {
+				size = UDim2.fromOffset(UseMemoResult.X, UseMemoResult.Y),
+				isBlocked = UseSelectorResult[tostring(User.userId)],
+				isConnecting = IsPartyStatusMatch,
+				layoutOrder = LayoutOrder,
 				onActivated = p1.onUserCardActivated,
-				user = p3,
+				user = User,
 				isInExperience = p1.isInExperience
 			})
 		end
 		
-		for i, v in ipairs(p1.users) do
-			if v.partyStatus ~= squadUserPartyStatusModule.Inactive then
-				if v.userId == var2 then
-					table.insert(t, var9(0, v, v.partyStatus == squadUserPartyStatusModule.Connecting))
+		for i, user in ipairs(p1.users) do
+			if user.partyStatus ~= SquadUserPartyStatusModule.Inactive then
+				if user.userId == Number then
+					table.insert(List, v29(0, user, user.partyStatus == SquadUserPartyStatusModule.Connecting))
 				else
-					table.insert(t, var9(i, v, v.partyStatus == squadUserPartyStatusModule.Connecting))
+					table.insert(List, v29(i, user, user.partyStatus == SquadUserPartyStatusModule.Connecting))
 				end
 			end
 		end
-		if #t == 1 and var3 ~= squadState.Initializing then
-			table.insert(t, reactModule.createElement(squadLobbyUpsellCardModule, {
-				size = UDim2.fromOffset(var4.X, var4.Y),
-				layoutOrder = #t + 1,
+		if #List == 1 and UseSquadStateResult ~= SquadState.Initializing then
+			table.insert(List, (ReactModule.createElement(SquadLobbyUpsellCardModule, {
+				size = UDim2.fromOffset(UseMemoResult.X, UseMemoResult.Y),
+				layoutOrder = #List + 1,
 				navigateToHomePage = p1.navigateToHomePage,
 				navigateToSquadInviteFriends = p1.navigateToSquadInviteFriends
-			}))
+			})))
 		end
-		local t_1 = {}
+		local Frames = {}
 		
-		for i_2 = 1, var5 do
-			local t_2 = {}
+		for i1 = 1, UseMemoResult2 do
+			local t = {}
 			
-			for i_1 = 1, var6 do
-				local var10 = (i_2 - 1) * var6 + i_1
+			for i2 = 1, UseMemoResult3 do
+				local NewI = (i1 - 1) * UseMemoResult3 + i2
 				
-				if t[var10] then
-					t_2["Card" .. var24] = t[var10]
+				if List[NewI] then
+					t["Card" .. NewI] = List[NewI]
 				end
 			end
-			t_2.UIListLayout = reactModule.createElement("UIListLayout", {
+			t.UIListLayout = ReactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Horizontal,
 				HorizontalAlignment = Enum.HorizontalAlignment.Center,
 				SortOrder = Enum.SortOrder.LayoutOrder,
-				Padding = UDim.new(0, medium)
+				Padding = UDim.new(0, Medium)
 			})
-			t_1["Row" .. i_2] = reactModule.createElement("Frame", {
+			Frames["Row" .. i1] = ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
-				Size = UDim2.new(1, 0, 0, var4.Y),
-				LayoutOrder = i_2
-			}, t_2)
+				Size = UDim2.new(1, 0, 0, UseMemoResult.Y),
+				LayoutOrder = i1
+			}, t)
 		end
-		return t_1
+		return Frames
 	end, {
-		var4, medium, var7, var2, var6, var5, p1.navigateToHomePage,
-		p1.navigateToSquadInviteFriends, p1.onUserCardActivated, p1.users, var3
+		UseMemoResult, Medium, UseSelectorResult, Number, UseMemoResult3,
+		UseMemoResult2, p1.navigateToHomePage, p1.navigateToSquadInviteFriends,
+		p1.onUserCardActivated, p1.users, UseSquadStateResult
 	})
-	var8.UIListLayout = reactModule.createElement("UIListLayout", {
+	UseMemoResult1.UIListLayout = ReactModule.createElement("UIListLayout", {
 		FillDirection = Enum.FillDirection.Vertical,
 		HorizontalAlignment = Enum.HorizontalAlignment.Center,
 		VerticalAlignment = Enum.VerticalAlignment.Top,
 		SortOrder = Enum.SortOrder.LayoutOrder,
-		Padding = UDim.new(0, medium)
+		Padding = UDim.new(0, Medium)
 	})
-	var8.UIPadding = reactModule.createElement("UIPadding", {
+	UseMemoResult1.UIPadding = ReactModule.createElement("UIPadding", {
 		PaddingBottom = p1.paddingBottom,
-		PaddingLeft = UDim.new(0, xLarge),
-		PaddingRight = UDim.new(0, xLarge)
+		PaddingLeft = UDim.new(0, XLarge),
+		PaddingRight = UDim.new(0, XLarge)
 	})
 	
-	return roact.createFragment(var8)
+	return Roact.createFragment(UseMemoResult1)
 end

@@ -1,30 +1,30 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent
-local notificationCardContextModule = require(parent.NotificationCardContext)
-local reactModule = require(parent_1.Parent.React)
-local _ = require(parent_1.type)
-local constantsModule = require(parent_1.constants)
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent
+local NotificationCardContextModule = require(Parent.NotificationCardContext)
+local ReactModule = require(Parent1.Parent.React)
+local _ = require(Parent1.type)
+local ConstantsModule = require(Parent1.constants)
 
-return function(p1)
-	-- upvalues: constantsModule (ref), reactModule (ref), notificationCardContextModule (ref)
-	local t = {
-		thumbnail = constantsModule.CardSizeDefault.thumbnail,
-		cardPadding = constantsModule.Padding.DefaultCardPadding
+return function(p1) --[[ Line: 24 | Named "NotificationCardProvider" ]]
+	-- upvalues: ConstantsModule (copy), ReactModule (copy), NotificationCardContextModule (copy)
+	local CardSize = {
+		thumbnail = ConstantsModule.CardSizeDefault.thumbnail,
+		cardPadding = ConstantsModule.Padding.DefaultCardPadding
 	}
 	
 	if p1.isCompact then
-		t.thumbnail = constantsModule.CardSizeCompact.thumbnail
-		t.cardPadding = constantsModule.Padding.CompactCardPadding
+		CardSize.thumbnail = ConstantsModule.CardSizeCompact.thumbnail
+		CardSize.cardPadding = ConstantsModule.Padding.CompactCardPadding
 	end
-	return reactModule.createElement(notificationCardContextModule.Provider, {
+	return ReactModule.createElement(NotificationCardContextModule.Provider, {
 		value = {
 			notificationPayload = p1.notificationPayload,
 			state = p1.state,
-			cardSize = t,
+			cardSize = CardSize,
 			handleActions = p1.handleActions,
 			openMetaActions = p1.openMetaActions,
 			readOnly = p1.readOnly,
-			cardTransparency = if p1.isCompact then constantsModule.CardTransparency.Compact else constantsModule.CardTransparency.Default
+			cardTransparency = if p1.isCompact then ConstantsModule.CardTransparency.Compact else ConstantsModule.CardTransparency.Default
 		}
 	}, p1.children)
 end

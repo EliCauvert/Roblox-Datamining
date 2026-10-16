@@ -1,44 +1,47 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local reactModule = require(profilePlatform.Parent.React)
-local enumsModule = require(profilePlatform.Common.Enums)
-local _ = require(profilePlatform.Common.Types)
-local useInspectAvatarDataModule = require(profilePlatform.Components.InspectAvatar.useInspectAvatarData)
-local useRecentActivityPurchaseModule = require(script.Parent.useRecentActivityPurchase)
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local ReactModule = require(ProfilePlatform.Parent.React)
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local _ = require(ProfilePlatform.Common.Types)
+local UseInspectAvatarDataModule = require(ProfilePlatform.Components.InspectAvatar.useInspectAvatarData)
+local UseRecentActivityPurchaseModule = require(script.Parent.useRecentActivityPurchase)
 
-return function(p1)
-	-- upvalues: reactModule (ref), enumsModule (ref), useInspectAvatarDataModule (ref), useRecentActivityPurchaseModule (ref)
-	local assetIds = p1.assetIds
-	local var1 = useInspectAvatarDataModule(reactModule.useMemo(function()
-		-- upvalues: assetIds (ref), enumsModule (copy)
-		local t = {}
+return function(p1) --[[ Line: 37 | Named "useRecentActivityInspectAndBuyViewModel" ]]
+	-- upvalues: ReactModule (copy), EnumsModule (copy), UseInspectAvatarDataModule (copy), UseRecentActivityPurchaseModule (copy)
+	local AssetIds = p1.assetIds
+	local UseInspectAvatarDataModuleResult = UseInspectAvatarDataModule((ReactModule.useMemo(function() --[[ Line: 39 ]]
+		-- upvalues: AssetIds (copy), EnumsModule (upval)
+		local List = {}
 		
-		for i, v in assetIds do
-			table.insert(t, { assetId = v, itemType = enumsModule.ItemTypes.Asset })
+		for _, assetId in AssetIds do
+			table.insert(List, {
+				assetId = assetId,
+				itemType = EnumsModule.ItemTypes.Asset
+			})
 		end
-		return t
-	end, { assetIds }))
-	local displayItems = var1.displayItems
-	local var2 = useRecentActivityPurchaseModule({
-		displayItems = displayItems,
-		localUserId = var1.localUserId,
+		return List
+	end, { AssetIds })))
+	local DisplayItems = UseInspectAvatarDataModuleResult.displayItems
+	local UseRecentActivityPurchaseModuleResult = UseRecentActivityPurchaseModule({
+		displayItems = DisplayItems,
+		localUserId = UseInspectAvatarDataModuleResult.localUserId,
 		onClose = p1.onClose
 	})
 	
 	return {
-		displayItems = displayItems,
-		selectedItems = var2.selectedItems,
-		isLoading = var1.isLoading,
-		purchaseSummary = var2.purchaseSummary,
-		isPurchasing = var2.isPurchasing,
-		isConfirmingPurchase = var2.isConfirmingPurchase,
-		isShowingInsufficientRobux = var2.isShowingInsufficientRobux,
-		robuxBalance = var2.robuxBalance,
-		onToggleItem = var2.onToggleItem,
-		onBuyAll = var2.onBuyAll,
-		onConfirmPurchase = var2.onConfirmPurchase,
-		onCancelPurchase = var2.onCancelPurchase,
-		onDismissInsufficientRobux = var2.onDismissInsufficientRobux,
+		displayItems = DisplayItems,
+		selectedItems = UseRecentActivityPurchaseModuleResult.selectedItems,
+		isLoading = UseInspectAvatarDataModuleResult.isLoading,
+		purchaseSummary = UseRecentActivityPurchaseModuleResult.purchaseSummary,
+		isPurchasing = UseRecentActivityPurchaseModuleResult.isPurchasing,
+		isConfirmingPurchase = UseRecentActivityPurchaseModuleResult.isConfirmingPurchase,
+		isShowingInsufficientRobux = UseRecentActivityPurchaseModuleResult.isShowingInsufficientRobux,
+		robuxBalance = UseRecentActivityPurchaseModuleResult.robuxBalance,
+		onToggleItem = UseRecentActivityPurchaseModuleResult.onToggleItem,
+		onBuyAll = UseRecentActivityPurchaseModuleResult.onBuyAll,
+		onConfirmPurchase = UseRecentActivityPurchaseModuleResult.onConfirmPurchase,
+		onCancelPurchase = UseRecentActivityPurchaseModuleResult.onCancelPurchase,
+		onDismissInsufficientRobux = UseRecentActivityPurchaseModuleResult.onDismissInsufficientRobux,
 		onClose = p1.onClose,
-		openItemDetails = reactModule.useCallback(function(_, _, _) end, {})
+		openItemDetails = ReactModule.useCallback(function(_, _, _) --[[ Line: 56 ]] end, {})
 	}
 end

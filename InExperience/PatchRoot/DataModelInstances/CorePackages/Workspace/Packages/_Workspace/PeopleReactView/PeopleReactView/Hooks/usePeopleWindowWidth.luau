@@ -1,45 +1,45 @@
-﻿local reactModule = require(script:FindFirstAncestor("PeopleReactView").Parent.React)
+﻿local ReactModule = require(script:FindFirstAncestor("PeopleReactView").Parent.React)
 
-return function()
-	-- upvalues: reactModule (ref)
-	local var1, var2 = reactModule.useState(0)
-	local var3 = reactModule.useRef(nil)
+return function() --[[ Line: 8 | Named "usePeopleWindowWidth" ]]
+	-- upvalues: ReactModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
+	local UseRefResult = ReactModule.useRef(nil)
 	
-	return var1, reactModule.useCallback(function(p1)
-		-- upvalues: var3 (ref), var2 (ref)
-		if var3.current then
-			var3.current()
-			var3.current = nil
+	return UseStateResult, (ReactModule.useCallback(function(p1) --[[ Line: 12 ]]
+		-- upvalues: UseRefResult (copy), UseStateResult2 (copy)
+		if UseRefResult.current then
+			UseRefResult.current()
+			UseRefResult.current = nil
 		end
 		if p1 then
-			local var4 = nil
+			local Connection = nil
 			
-			local function track()
-				-- upvalues: var4 (write), p1 (ref), var2 (copy)
-				if var4 then
-					var4:Disconnect()
+			local function track() --[[ Line: 22 ]]
+				-- upvalues: Connection (ref), p1 (copy), UseStateResult2 (upval)
+				if Connection then
+					Connection:Disconnect()
 				end
-				local scrollingFrame = p1:FindFirstAncestorWhichIsA("ScrollingFrame") or p1
-				var2(scrollingFrame.AbsoluteSize.X)
-				var4 = scrollingFrame:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
-					-- upvalues: var2 (copy), scrollingFrame (ref)
-					var2(scrollingFrame.AbsoluteSize.X)
+				local ScrollingFrame = p1:FindFirstAncestorWhichIsA("ScrollingFrame") or p1
+				UseStateResult2(ScrollingFrame.AbsoluteSize.X)
+				Connection = ScrollingFrame:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ Line: 28 ]]
+					-- upvalues: UseStateResult2 (upval), ScrollingFrame (copy)
+					UseStateResult2(ScrollingFrame.AbsoluteSize.X)
 				end)
 			end
 			
 			track()
-			local ancestryChangedConnection = p1.AncestryChanged:Connect(track)
+			local AncestryChangedConnection = p1.AncestryChanged:Connect(track)
 			
-			function var3.current()
-				-- upvalues: ancestryChangedConnection (ref), var4 (write)
-				ancestryChangedConnection:Disconnect()
+			function UseRefResult.current() --[[ Line: 37 ]]
+				-- upvalues: AncestryChangedConnection (copy), Connection (ref)
+				AncestryChangedConnection:Disconnect()
 				
-				if var4 then
-					var4:Disconnect()
+				if Connection then
+					Connection:Disconnect()
 				end
 			end
 			
 			return
 		end
-	end, {})
+	end, {}))
 end

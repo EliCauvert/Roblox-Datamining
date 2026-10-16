@@ -1,31 +1,28 @@
-﻿local parent = script:FindFirstAncestor("SplitPane").Parent
-local foundationModule = require(parent.Foundation)
-local appCompositionModule = require(parent.AppComposition)
-local sharedFlagsModule = require(parent.SharedFlags)
-local breakpoint = foundationModule.Enums.Breakpoint
-local resolveBreakpoint = appCompositionModule.resolveBreakpoint
-local fFlagEnableSplitPane = sharedFlagsModule.FFlagEnableSplitPane
-local large = breakpoint.Large
-local t = {
-	[breakpoint.XSmall] = 1,
-	[breakpoint.Small] = 2,
-	[breakpoint.Medium] = 3,
-	[breakpoint.Large] = 4,
-	[breakpoint.XLarge] = 5,
-	[breakpoint.XXLarge] = 6
+﻿local Parent = script:FindFirstAncestor("SplitPane").Parent
+local Breakpoint = require(Parent.Foundation).Enums.Breakpoint
+local ResolveBreakpointFunction = require(Parent.AppComposition).resolveBreakpoint
+local FFlagEnableSplitPane = require(Parent.SharedFlags).FFlagEnableSplitPane
+local Large = Breakpoint.Large
+local config = {
+	[Breakpoint.XSmall] = 1,
+	[Breakpoint.Small] = 2,
+	[Breakpoint.Medium] = 3,
+	[Breakpoint.Large] = 4,
+	[Breakpoint.XLarge] = 5,
+	[Breakpoint.XXLarge] = 6
 }
 
-local function _(p1, p2)
-	-- upvalues: t (ref)
-	return (t[p2] or 0) <= (t[p1] or 0)
+local function _(p1, p2): boolean --[[ Line: 30 | Named "isBreakpointAtLeast" ]]
+	-- upvalues: config (copy)
+	return (config[p2] or 0) <= (config[p1] or 0)
 end
 
 return {
-	isSplitEnabledForWidth = function(p1)
+	isSplitEnabledForWidth = function(p1: number): boolean --[[ Line: 34 ]]
 		return p1 >= 800
 	end,
-	shouldDefaultToCollapsed = function(p1)
-		-- upvalues: fFlagEnableSplitPane (ref), resolveBreakpoint (ref), large (ref), t (ref)
-		return if fFlagEnableSplitPane then not ((t[large] or 0) <= (t[resolveBreakpoint(p1)] or 0)) else false
+	shouldDefaultToCollapsed = function(p1): boolean --[[ Line: 38 ]]
+		-- upvalues: FFlagEnableSplitPane (copy), ResolveBreakpointFunction (copy), Large (copy), config (copy)
+		return if FFlagEnableSplitPane then not ((config[Large] or 0) <= (config[ResolveBreakpointFunction(p1)] or 0)) else false
 	end
 }

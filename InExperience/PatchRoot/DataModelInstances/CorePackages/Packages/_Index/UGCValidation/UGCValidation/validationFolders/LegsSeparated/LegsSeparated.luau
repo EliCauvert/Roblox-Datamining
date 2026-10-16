@@ -1,174 +1,175 @@
-﻿local parent = script.Parent.Parent.Parent
-local constantsModule = require(parent.Constants)
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local boundsDataUtilsModule = require(parent.util.BoundsDataUtils)
-local boundsCalculatorModule = require(parent.util.BoundsCalculator)
-local getFFlagUGCValidateHeadAboveTorsoModule = require(parent.flags.getFFlagUGCValidateHeadAboveTorso)
-local getFStringUGCValidateLegHipAttachmentRangeModule = require(parent.flags.GetFStringUGCValidateLegHipAttachmentRange)
-local getFStringUGCValidateAllowedLegOverlapMultiplierModule = require(parent.flags.GetFStringUGCValidateAllowedLegOverlapMultiplier)
-local t = {
+﻿local Parent = script.Parent.Parent.Parent
+local ConstantsModule = require(Parent.Constants)
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
+local BoundsDataUtilsModule = require(Parent.util.BoundsDataUtils)
+local BoundsCalculatorModule = require(Parent.util.BoundsCalculator)
+local GetFFlagUGCValidateHeadAboveTorsoModule = require(Parent.flags.getFFlagUGCValidateHeadAboveTorso)
+local GetFStringUGCValidateLegHipAttachmentRangeModule = require(Parent.flags.GetFStringUGCValidateLegHipAttachmentRange)
+local GetFStringUGCValidateAllowedLegOverlapMultiplierModule = require(Parent.flags.GetFStringUGCValidateAllowedLegOverlapMultiplier)
+local LegsSeparatedModule = {
 	categories = {
-		validationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
-		validationEnumsModule.UploadCategory.FULL_BODY
+		ValidationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
+		ValidationEnumsModule.UploadCategory.FULL_BODY
 	},
 	requiredData = {
-		validationEnumsModule.SharedDataMember.rootInstance,
-		validationEnumsModule.SharedDataMember.renderMeshesData
+		ValidationEnumsModule.SharedDataMember.rootInstance,
+		ValidationEnumsModule.SharedDataMember.renderMeshesData
 	}
 }
 
-if getFFlagUGCValidateHeadAboveTorsoModule() then
-	t.conditionalData = {
-		validationEnumsModule.SharedDataMember.fullBodyPartsMetrics
+if GetFFlagUGCValidateHeadAboveTorsoModule() then
+	LegsSeparatedModule.conditionalData = {
+		ValidationEnumsModule.SharedDataMember.fullBodyPartsMetrics
 	}
 end
-t.expectedFailures = {}
+LegsSeparatedModule.expectedFailures = {}
 
-local function validateAttachmentPosition(p1, p2, p3)
-	-- upvalues: getFStringUGCValidateLegHipAttachmentRangeModule (ref), errorSourceStringsModule (ref)
-	if p3 == Enum.AssetType.RightLeg then
-		local var1 = p2.RightUpperLeg.Size.X * getFStringUGCValidateLegHipAttachmentRangeModule.asNumber()
+local function validateAttachmentPosition(p1, RootInstance, AssetType) --[[ Line: 42 ]]
+	-- upvalues: GetFStringUGCValidateLegHipAttachmentRangeModule (copy), ErrorSourceStringsModule (copy)
+	if AssetType == Enum.AssetType.RightLeg then
+		local ScaledX = RootInstance.RightUpperLeg.Size.X * GetFStringUGCValidateLegHipAttachmentRangeModule.asNumber()
 		
-		if var1 < p2.RightUpperLeg.RightHipRigAttachment.CFrame.Position.X then
-			p1:fail(errorSourceStringsModule.Keys.LegsSeparated_HipAttachmentOutOfRange, {
+		if ScaledX < RootInstance.RightUpperLeg.RightHipRigAttachment.CFrame.Position.X then
+			p1:fail(ErrorSourceStringsModule.Keys.LegsSeparated_HipAttachmentOutOfRange, {
 				attachmentPath = "RightUpperLeg.RightHipRigAttachment.CFrame.Position.X",
 				comparison = "greater than",
-				currentValue = string.format("%.2f", p2.RightUpperLeg.RightHipRigAttachment.CFrame.Position.X),
-				cutoff = string.format("%.2f", var1)
+				currentValue = string.format("%.2f", RootInstance.RightUpperLeg.RightHipRigAttachment.CFrame.Position.X),
+				cutoff = string.format("%.2f", ScaledX)
 			})
 			
 			return
 		end
-	elseif p3 == Enum.AssetType.LeftLeg then
-		local var2 = -p2.LeftUpperLeg.Size.X * getFStringUGCValidateLegHipAttachmentRangeModule.asNumber()
+	elseif AssetType == Enum.AssetType.LeftLeg then
+		local ScaledAsNumberResult = -RootInstance.LeftUpperLeg.Size.X * GetFStringUGCValidateLegHipAttachmentRangeModule.asNumber()
 		
-		if p2.LeftUpperLeg.LeftHipRigAttachment.CFrame.Position.X < var2 then
-			p1:fail(errorSourceStringsModule.Keys.LegsSeparated_HipAttachmentOutOfRange, {
+		if RootInstance.LeftUpperLeg.LeftHipRigAttachment.CFrame.Position.X < ScaledAsNumberResult then
+			p1:fail(ErrorSourceStringsModule.Keys.LegsSeparated_HipAttachmentOutOfRange, {
 				attachmentPath = "LeftUpperLeg.LeftHipRigAttachment.CFrame.Position.X",
 				comparison = "less than",
-				currentValue = string.format("%.2f", p2.LeftUpperLeg.LeftHipRigAttachment.CFrame.Position.X),
-				cutoff = string.format("%.2f", var2)
+				currentValue = string.format("%.2f", RootInstance.LeftUpperLeg.LeftHipRigAttachment.CFrame.Position.X),
+				cutoff = string.format("%.2f", ScaledAsNumberResult)
 			})
 		end
 	end
 end
 
-local function calculateBounds(p1, p2)
-	-- upvalues: boundsDataUtilsModule (ref)
-	local t = {}
+local function calculateBounds(p1, List) --[[ Line: 73 ]]
+	-- upvalues: BoundsDataUtilsModule (copy)
+	local CombineBoundsResult = {}
 	
-	for i, v in p2 do
-		t = boundsDataUtilsModule.combineBounds(t, p1[v].boundsData)
+	for _, value in List do
+		CombineBoundsResult = BoundsDataUtilsModule.combineBounds(CombineBoundsResult, p1[value].boundsData)
 	end
-	return t
+	return CombineBoundsResult
 end
 
-local function buildEditableMeshesFromSharedData(p3)
+local function buildEditableMeshesFromSharedData(p2) --[[ Line: 81 ]]
 	local t = {}
 	
-	for i, v in p3.renderMeshesData do
-		local var1 = p3.rootInstance:FindFirstChild(i, true)
+	for ChildName, value in p2.renderMeshesData do
+		local Child = p2.rootInstance:FindFirstChild(ChildName, true)
 		
-		if var1 and v.editable then
-			t[var1] = { MeshId = { created = false, instance = v.editable } }
+		if Child and value.editable then
+			t[Child] = { MeshId = { created = false, instance = value.editable } }
 		end
 	end
 	return t
 end
 
-local function createAllBodyPartsFromRootInstance(p4)
-	local t = {}
+local function createAllBodyPartsFromRootInstance(RootInstance) --[[ Line: 92 ]]
+	local Parts = {}
 	
-	for i, v in p4:GetChildren() do
-		if v:IsA("MeshPart") then
-			t[v.Name] = v
+	for _, Part in RootInstance:GetChildren() do
+		if Part:IsA("MeshPart") then
+			Parts[Part.Name] = Part
 		end
 	end
-	return t
+	return Parts
 end
 
-local function checkLegOverlap(p5, p6)
-	-- upvalues: calculateBounds (ref), constantsModule (ref), boundsDataUtilsModule (ref), getFStringUGCValidateAllowedLegOverlapMultiplierModule (ref), errorSourceStringsModule (ref)
-	local var2 = calculateBounds(p6, {
-		constantsModule.NAMED_R15_BODY_PARTS.LeftUpperLeg,
-		constantsModule.NAMED_R15_BODY_PARTS.LeftLowerLeg,
-		constantsModule.NAMED_R15_BODY_PARTS.LeftFoot
+local function checkLegOverlap(p3, FullBodyPartsMetrics) --[[ Line: 102 ]]
+	-- upvalues: calculateBounds (copy), ConstantsModule (copy), BoundsDataUtilsModule (copy), GetFStringUGCValidateAllowedLegOverlapMultiplierModule (copy), ErrorSourceStringsModule (copy)
+	local Bounds = calculateBounds(FullBodyPartsMetrics, {
+		ConstantsModule.NAMED_R15_BODY_PARTS.LeftUpperLeg,
+		ConstantsModule.NAMED_R15_BODY_PARTS.LeftLowerLeg,
+		ConstantsModule.NAMED_R15_BODY_PARTS.LeftFoot
 	})
-	local var3 = boundsDataUtilsModule.calculateBoundsCenters(var2)
-	local var4 = boundsDataUtilsModule.calculateBoundsDimensions(var2)
-	local var5 = calculateBounds(p6, {
-		constantsModule.NAMED_R15_BODY_PARTS.RightUpperLeg,
-		constantsModule.NAMED_R15_BODY_PARTS.RightLowerLeg,
-		constantsModule.NAMED_R15_BODY_PARTS.RightFoot
+	local BoundsCenters = BoundsDataUtilsModule.calculateBoundsCenters(Bounds)
+	local BoundsDimensions = BoundsDataUtilsModule.calculateBoundsDimensions(Bounds)
+	local Bounds1 = calculateBounds(FullBodyPartsMetrics, {
+		ConstantsModule.NAMED_R15_BODY_PARTS.RightUpperLeg,
+		ConstantsModule.NAMED_R15_BODY_PARTS.RightLowerLeg,
+		ConstantsModule.NAMED_R15_BODY_PARTS.RightFoot
 	})
-	local var6 = boundsDataUtilsModule.calculateBoundsCenters(var5)
-	local var7 = boundsDataUtilsModule.calculateBoundsDimensions(var5)
+	local BoundsCenters1 = BoundsDataUtilsModule.calculateBoundsCenters(Bounds1)
+	local BoundsDimensions1 = BoundsDataUtilsModule.calculateBoundsDimensions(Bounds1)
 	
-	if not var3 or not var4 or (not var6 or not var7) then return end
-	local var8 = (var4.X + var7.X) * 0.5 - (var6.X - var3.X)
+	if not BoundsCenters or not BoundsDimensions or not BoundsCenters1 or not BoundsDimensions1 then return end
+	local XDelta = (BoundsDimensions.X + BoundsDimensions1.X) * 0.5 - (BoundsCenters1.X - BoundsCenters.X)
 	
-	if var8 <= 0 then return end
-	local var9 = var4.X * getFStringUGCValidateAllowedLegOverlapMultiplierModule.asNumber()
-	local var10 = var7.X * getFStringUGCValidateAllowedLegOverlapMultiplierModule.asNumber()
+	if XDelta <= 0 then return end
+	local ScaledX = BoundsDimensions.X * GetFStringUGCValidateAllowedLegOverlapMultiplierModule.asNumber()
+	local ScaledX1 = BoundsDimensions1.X * GetFStringUGCValidateAllowedLegOverlapMultiplierModule.asNumber()
 	
-	if var9 < var8 or var10 < var8 then
-		p5:fail(errorSourceStringsModule.Keys.LegsSeparated_LegsOverlap, {
-			overlap = string.format("%.2f", var8),
-			leftMax = string.format("%.2f", var9),
-			rightMax = string.format("%.2f", var10)
+	if ScaledX < XDelta or ScaledX1 < XDelta then
+		p3:fail(ErrorSourceStringsModule.Keys.LegsSeparated_LegsOverlap, {
+			overlap = string.format("%.2f", XDelta),
+			leftMax = string.format("%.2f", ScaledX),
+			rightMax = string.format("%.2f", ScaledX1)
 		})
 	end
 end
 
-local function validateFullBodySeparation(p5, p6)
-	-- upvalues: getFFlagUGCValidateHeadAboveTorsoModule (ref), checkLegOverlap (ref), createAllBodyPartsFromRootInstance (ref), buildEditableMeshesFromSharedData (ref), validationEnumsModule (ref), boundsCalculatorModule (ref), errorSourceStringsModule (ref)
-	if getFFlagUGCValidateHeadAboveTorsoModule() then
-		local fullBodyPartsMetrics = p6.fullBodyPartsMetrics
+local function validateFullBodySeparation(p3, p4) --[[ Line: 140 ]]
+	-- upvalues: GetFFlagUGCValidateHeadAboveTorsoModule (copy), checkLegOverlap (copy), createAllBodyPartsFromRootInstance (copy), buildEditableMeshesFromSharedData (copy), ValidationEnumsModule (copy), BoundsCalculatorModule (copy), ErrorSourceStringsModule (copy)
+	if GetFFlagUGCValidateHeadAboveTorsoModule() then
+		local FullBodyPartsMetrics = p4.fullBodyPartsMetrics
 		
-		if fullBodyPartsMetrics and next(fullBodyPartsMetrics) then
-			checkLegOverlap(p5, fullBodyPartsMetrics)
+		if FullBodyPartsMetrics and next(FullBodyPartsMetrics) then
+			checkLegOverlap(p3, FullBodyPartsMetrics)
 			
 			return
 		end
 		return
 	else
-		local var2, var3, var4 = boundsCalculatorModule.calculateIndividualFullBodyPartsData(createAllBodyPartsFromRootInstance(p6.rootInstance), {
-			isServer = p6.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.Backend,
-			editableMeshes = buildEditableMeshesFromSharedData(p6)
+		local IndividualFullBodyPartsData, IndividualFullBodyPartsData2, IndividualFullBodyPartsData3 = BoundsCalculatorModule.calculateIndividualFullBodyPartsData(createAllBodyPartsFromRootInstance(p4.rootInstance), {
+			isServer = p4.consumerConfig.consumerEnv == ValidationEnumsModule.ConsumerEnv.Backend,
+			editableMeshes = buildEditableMeshesFromSharedData(p4)
 		}, nil, false)
 		
-		if var2 then
-			checkLegOverlap(p5, var4)
+		if IndividualFullBodyPartsData then
+			checkLegOverlap(p3, IndividualFullBodyPartsData3)
 			
 			return
+		else
+			p3:fail(ErrorSourceStringsModule.Keys.LegsSeparated_BoundsCalculationFailed, {
+				details = if IndividualFullBodyPartsData2 then table.concat(IndividualFullBodyPartsData2, "; ") else "Unknown error"
+			})
 		end
-		p5:fail(errorSourceStringsModule.Keys.LegsSeparated_BoundsCalculationFailed, {
-			details = if var3 then table.concat(var3, "; ") else "Unknown error"
-		})
 	end
 end
 
-local function _(value)
-	return if value.uploadEnum and value.uploadEnum.assetType then value.uploadEnum.assetType else nil
+local function _(p3) --[[ Line: 167 | Named "getAssetTypeFromUploadEnum" ]]
+	return if p3.uploadEnum and p3.uploadEnum.assetType then p3.uploadEnum.assetType else nil
 end
 
-function t.run(p5, p6)
-	-- upvalues: validationEnumsModule (ref), validateFullBodySeparation (ref), validateAttachmentPosition (ref)
-	if p6.uploadCategory == validationEnumsModule.UploadCategory.FULL_BODY then
-		validateFullBodySeparation(p5, p6)
+function LegsSeparatedModule.run(p3, p4) --[[ Line: 174 ]]
+	-- upvalues: ValidationEnumsModule (copy), validateFullBodySeparation (copy), validateAttachmentPosition (copy)
+	if p4.uploadCategory == ValidationEnumsModule.UploadCategory.FULL_BODY then
+		validateFullBodySeparation(p3, p4)
 		
 		return
 	end
-	local var2 = if p6.uploadEnum and p6.uploadEnum.assetType then p6.uploadEnum.assetType else nil
+	local AssetType = if p4.uploadEnum and p4.uploadEnum.assetType then p4.uploadEnum.assetType else nil
 	
-	if not var2 then return end
-	if var2 == Enum.AssetType.RightLeg or var2 == Enum.AssetType.LeftLeg then
-		validateAttachmentPosition(p5, p6.rootInstance, var2)
+	if not AssetType then return end
+	if AssetType == Enum.AssetType.RightLeg or AssetType == Enum.AssetType.LeftLeg then
+		validateAttachmentPosition(p3, p4.rootInstance, AssetType)
 		
 		return
 	end
 end
 
-return t
+return LegsSeparatedModule

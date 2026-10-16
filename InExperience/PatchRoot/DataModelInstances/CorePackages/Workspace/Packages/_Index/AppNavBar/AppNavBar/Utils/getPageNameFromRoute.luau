@@ -1,21 +1,21 @@
-﻿local parent = script.Parent.Parent.Parent
-local _ = require(parent.Navigation)
-local navigationRoduxModule = require(parent.NavigationRodux)
-local t = {
-	[navigationRoduxModule.Constants.TempRnSwitchNavigatorName] = true
+﻿local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.Navigation)
+local NavigationRoduxModule = require(Parent.NavigationRodux)
+local config = {
+	[NavigationRoduxModule.Constants.TempRnSwitchNavigatorName] = true
 }
 
-if require(parent.SharedFlags).FFlagAppIaHomeSubTab then
-	t[navigationRoduxModule.Constants.HomeContainerName] = true
+if require(Parent.SharedFlags).FFlagAppIaHomeSubTab then
+	config[NavigationRoduxModule.Constants.HomeContainerName] = true
 end
-return function(p1)
-	-- upvalues: t (ref)
-	if not p1 then
+return function(Route) --[[ Line: 20 ]]
+	-- upvalues: config (copy)
+	if not Route then
 		return nil
 	end
-	local var1 = p1
-	while t[var1.routeName] and (var1.routes and var1.index) do
-		var1 = var1.routes[var1.index]
+	local Route1 = Route
+	while config[Route1.routeName] and (Route1.routes and Route1.index) do
+		Route1 = Route1.routes[Route1.index]
 	end
-	return var1.routeName
+	return Route1.routeName
 end

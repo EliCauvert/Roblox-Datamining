@@ -1,54 +1,56 @@
-﻿local parent = script.Parent.Parent
-local error = require(parent.LuauPolyfill).Error
-local promiseModule = require(parent.Promise)
-local response = require(script.Parent.Response).Response
-local request = require(script.Parent.Request).Request
+﻿local Parent = script.Parent.Parent
+local Error = require(Parent.LuauPolyfill).Error
+local PromiseModule = require(Parent.Promise)
+local Response = require(script.Parent.Response).Response
+local Request = require(script.Parent.Request).Request
 
-local function _(p1)
-	-- upvalues: response (ref)
-	return response.new(p1.Body, {
+local function _(p1) --[[ Line: 34 | Named "parseResponse" ]]
+	-- upvalues: Response (copy)
+	return Response.new(p1.Body, {
 		status = p1.StatusCode,
 		statusText = p1.StatusMessage,
 		headers = p1.Headers
 	})
 end
 
-return function(p1)
-	-- upvalues: promiseModule (ref), request (ref), error (ref), response (ref)
-	return function(p2, p3)
-		-- upvalues: promiseModule (copy), request (copy), error (copy), p1 (ref), response (copy)
-		return promiseModule.new(function(p4, p5)
-			-- upvalues: request (copy), p2 (ref), p3 (ref), error (copy), p1 (copy), response (copy)
-			local ok, status = pcall(function()
-				-- upvalues: request (copy), p2 (copy), p3 (copy)
-				return request.new(p2, p3)
+return function(HttpService) --[[ Line: 44 | Named "buildFetch" ]]
+	-- upvalues: PromiseModule (copy), Request (copy), Error (copy), Response (copy)
+	return function(p1, p2) --[[ Line: 45 | Named "fetch" ]]
+		-- upvalues: PromiseModule (upval), Request (upval), Error (upval), HttpService (copy), Response (upval)
+		return PromiseModule.new(function(Callback1, Callback: (any) -> ()) --[[ Line: 46 ]]
+			-- upvalues: Request (upval), p1 (copy), p2 (copy), Error (upval), HttpService (upval), Response (upval)
+			local Success, Result = pcall(function() --[[ Line: 47 ]]
+				-- upvalues: Request (upval), p1 (upval), p2 (upval)
+				return Request.new(p1, p2)
 			end)
 			
-			if ok then
-				p1:RequestInternal({
-					Url = status.url,
-					Method = status.method,
-					Body = status.body,
-					Headers = status.headers.headerList,
-					CachePolicy = status.cache
-				}):Start(function(p6, p7)
-					-- upvalues: status (ref), p5 (ref), error (copy), response (copy), p4 (ref)
-					if p6 then
-						p4(response.new(p7.Body, {
-							status = p7.StatusCode,
-							statusText = p7.StatusMessage,
-							headers = p7.Headers
-						}))
+			if Success then
+				HttpService:RequestInternal({
+					Url = Result.url,
+					Method = Result.method,
+					Body = Result.body,
+					Headers = Result.headers.headerList,
+					CachePolicy = Result.cache
+				}):Start(function(p3, p4) --[[ Line: 66 ]]
+					-- upvalues: Result (copy), Callback (copy), Error (upval), Response (upval), Callback1 (copy)
+					if p3 then
+						Callback1((Response.new(p4.Body, {
+							status = p4.StatusCode,
+							statusText = p4.StatusMessage,
+							headers = p4.Headers
+						})))
 						
 						return
+					else
+						Result.signal:fire()
+						Callback(Error.new(p4.ErrorMessage))
 					end
-					status.signal:fire()
-					p5(error.new(p7.ErrorMessage))
 				end)
 				
 				return
+			else
+				Callback(Error.new(Result))
 			end
-			p5(error.new(status))
 		end)
 	end
 end

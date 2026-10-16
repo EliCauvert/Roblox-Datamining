@@ -1,186 +1,186 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceUIKit").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local UIBloxModule = require(parent.UIBlox)
-local iconWithTooltip = require(parent.AppBlox).IconWithTooltip
-local tooltipOrientation = UIBloxModule.App.Dialog.Enum.TooltipOrientation
-local button = UIBloxModule.App.Button.Button
-local buttonType = UIBloxModule.App.Button.Enum.ButtonType
-local standardButtonSize = UIBloxModule.App.Button.Enum.StandardButtonSize
-local useDesignTokens = require(parent.Style).useDesignTokens
-local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
-local fFlagAXWidgetHeaderTreatEmptyTextAsNil = avatarExperienceFlagsModule.FFlagAXWidgetHeaderTreatEmptyTextAsNil
-local fFlagAXCatalogItemInformationPopover = avatarExperienceFlagsModule.FFlagAXCatalogItemInformationPopover
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local fFlagAXWidgetHeaderFlexLayout = avatarExperienceFlagsModule.FFlagAXWidgetHeaderFlexLayout
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceUIKit").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UIBloxModule = require(Parent.UIBlox)
+local IconWithTooltip = require(Parent.AppBlox).IconWithTooltip
+local TooltipOrientation = UIBloxModule.App.Dialog.Enum.TooltipOrientation
+local Button = UIBloxModule.App.Button.Button
+local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
+local StandardButtonSize = UIBloxModule.App.Button.Enum.StandardButtonSize
+local UseDesignTokensFunction = require(Parent.Style).useDesignTokens
+local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
+local FFlagAXWidgetHeaderTreatEmptyTextAsNil = AvatarExperienceFlagsModule.FFlagAXWidgetHeaderTreatEmptyTextAsNil
+local FFlagAXCatalogItemInformationPopover = AvatarExperienceFlagsModule.FFlagAXCatalogItemInformationPopover
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local FFlagAXWidgetHeaderFlexLayout = AvatarExperienceFlagsModule.FFlagAXWidgetHeaderFlexLayout
 
-local function _(p1)
+local function _(p1) --[[ Line: 43 | Named "nonEmptyOrNil" ]]
 	return if p1 == nil or p1 == "" then nil else p1
 end
 
-return function(p1)
-	-- upvalues: reactModule (ref), useDesignTokens (ref), useLocalization (ref), fFlagAXWidgetHeaderTreatEmptyTextAsNil (ref), fFlagAXCatalogItemInformationPopover (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), fFlagAXWidgetHeaderFlexLayout (ref), iconWithTooltip (ref), tooltipOrientation (ref), button (ref), buttonType (ref), standardButtonSize (ref)
-	local titleText, var1, var2
-	local var3, var4 = reactModule.useBinding(Vector2.new())
-	local var5 = useDesignTokens()
-	local var6 = useLocalization({
+return function(Frame) --[[ Line: 47 | Named "WidgetHeader" ]]
+	-- upvalues: ReactModule (copy), UseDesignTokensFunction (copy), UseLocalizationFunction (copy), FFlagAXWidgetHeaderTreatEmptyTextAsNil (copy), FFlagAXCatalogItemInformationPopover (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), FFlagAXWidgetHeaderFlexLayout (copy), IconWithTooltip (copy), TooltipOrientation (copy), Button (copy), ButtonType (copy), StandardButtonSize (copy)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(Vector2.new())
+	local UseDesignTokensResult = UseDesignTokensFunction()
+	local UseLocalizationResult = UseLocalizationFunction({
 		seeAllButtonText = "Feature.Catalog.ActionSeeAll",
-		title = p1.titleKey,
-		description = p1.descriptionKey
+		title = Frame.titleKey,
+		description = Frame.descriptionKey
 	})
-	local _ = nil
-	local _ = nil
+	local DescriptionText = nil
+	local TitleText = nil
 	
-	if fFlagAXWidgetHeaderTreatEmptyTextAsNil then
-		titleText = p1.titleText
-		local var7 = if titleText == nil or titleText == "" then nil else titleText
+	if FFlagAXWidgetHeaderTreatEmptyTextAsNil then
+		local TitleText1 = Frame.titleText
+		local TitleText11 = if TitleText1 == nil or TitleText1 == "" then nil else TitleText1
 		
-		if not var7 then
-			titleText = var6.title
-			var7 = if titleText == nil or titleText == "" then nil else titleText
+		if not TitleText11 then
+			local Title = UseLocalizationResult.title
+			TitleText11 = if Title == nil or Title == "" then nil else Title
 		end
-		var1 = var7
-		titleText = p1.descriptionText
-		local var8 = if titleText == nil or titleText == "" then nil else titleText
+		TitleText = TitleText11
+		local DescriptionText1 = Frame.descriptionText
+		local DescriptionText2 = if DescriptionText1 == nil or DescriptionText1 == "" then nil else DescriptionText1
 		
-		if not var8 then
-			titleText = var6.description
-			var8 = if titleText == nil or titleText == "" then nil else titleText
+		if not DescriptionText2 then
+			local Description = UseLocalizationResult.description
+			DescriptionText2 = if Description == nil or Description == "" then nil else Description
 		end
-		var2 = var8
+		DescriptionText = DescriptionText2
 	else
-		var1 = if p1.titleText then p1.titleText else var6.title
-		var2 = if p1.descriptionText then p1.descriptionText else var6.description
+		TitleText = if Frame.titleText then Frame.titleText else UseLocalizationResult.title
+		DescriptionText = if Frame.descriptionText then Frame.descriptionText else UseLocalizationResult.description
 	end
-	local var9 = fFlagAXCatalogItemInformationPopover and (p1.informationPopoverText ~= nil and (p1.informationPopoverText ~= "" and p1.onInformationIconActivated ~= nil))
-	titleText = if var1 then reactModule.createElement("TextLabel", {
+	local HasOnInformationIconActivated: boolean = FFlagAXCatalogItemInformationPopover and (Frame.informationPopoverText ~= nil and (Frame.informationPopoverText ~= "" and Frame.onInformationIconActivated ~= nil))
+	local TextLabel = if TitleText then ReactModule.createElement("TextLabel", {
 		LayoutOrder = 1,
 		BackgroundTransparency = 1,
-		Text = var1,
-		Font = if foundationFontFaceMigration then nil else var5.Typography.HeadingSmall.Font,
-		FontFace = if foundationFontFaceMigration then normalizeFontFace(var5.Typography.HeadingSmall.Font) else nil,
-		TextSize = var5.Typography.HeadingSmall.FontSize,
-		LineHeight = var5.Typography.HeadingSmall.LineHeight,
-		TextColor3 = var5.Color.Content.Emphasis.Color3,
-		TextTransparency = var5.Color.Content.Emphasis.Transparency,
+		Text = TitleText,
+		Font = if FoundationFontFaceMigration then nil else UseDesignTokensResult.Typography.HeadingSmall.Font,
+		FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseDesignTokensResult.Typography.HeadingSmall.Font) else nil,
+		TextSize = UseDesignTokensResult.Typography.HeadingSmall.FontSize,
+		LineHeight = UseDesignTokensResult.Typography.HeadingSmall.LineHeight,
+		TextColor3 = UseDesignTokensResult.Color.Content.Emphasis.Color3,
+		TextTransparency = UseDesignTokensResult.Color.Content.Emphasis.Transparency,
 		TextTruncate = Enum.TextTruncate.AtEnd,
-		Size = if var9 then UDim2.fromOffset(0, 0) else UDim2.fromScale(1, 0),
-		AutomaticSize = if var9 then Enum.AutomaticSize.XY else Enum.AutomaticSize.Y,
+		Size = if HasOnInformationIconActivated then UDim2.fromOffset(0, 0) else UDim2.fromScale(1, 0),
+		AutomaticSize = if HasOnInformationIconActivated then Enum.AutomaticSize.XY else Enum.AutomaticSize.Y,
 		TextXAlignment = Enum.TextXAlignment.Left
 	}, {
-		UIFlexItem = if var9 then reactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.Shrink }) else nil,
-		UISizeConstraint = if fFlagAXWidgetHeaderFlexLayout then nil elseif p1.seeAllCallback then reactModule.createElement("UISizeConstraint", {
-			MinSize = var3:map(function(p2)
-				return Vector2.new(0, p2.Y)
+		UIFlexItem = if HasOnInformationIconActivated then ReactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.Shrink }) else nil,
+		UISizeConstraint = if FFlagAXWidgetHeaderFlexLayout then nil elseif Frame.seeAllCallback then ReactModule.createElement("UISizeConstraint", {
+			MinSize = UseBindingResult:map(function(p1): Vector2 --[[ Line: 102 ]]
+				return Vector2.new(0, p1.Y)
 			end)
 		}) else nil
 	}) else nil
+	local Frame1 = if TitleText then if HasOnInformationIconActivated then ReactModule.createElement("Frame", {
+		LayoutOrder = 1,
+		BackgroundTransparency = 1,
+		BorderSizePixel = 0,
+		Size = UDim2.new(1, 0, 0, 0),
+		AutomaticSize = Enum.AutomaticSize.Y
+	}, {
+		UIListLayout = ReactModule.createElement("UIListLayout", {
+			FillDirection = Enum.FillDirection.Horizontal,
+			HorizontalFlex = Enum.UIFlexAlignment.Fill,
+			SortOrder = Enum.SortOrder.LayoutOrder,
+			VerticalAlignment = Enum.VerticalAlignment.Center,
+			Padding = UDim.new(0, UseDesignTokensResult.Size.Size_100)
+		}),
+		Title = TextLabel,
+		InformationIcon = ReactModule.createElement("Frame", {
+			LayoutOrder = 2,
+			BackgroundTransparency = 1,
+			BorderSizePixel = 0,
+			Size = UDim2.fromOffset(0, 0),
+			AutomaticSize = Enum.AutomaticSize.XY
+		}, {
+			UIFlexItem = ReactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.None }),
+			Icon = ReactModule.createElement(IconWithTooltip, {
+				triggerPointName = "CatalogItemInformationTooltip",
+				supportTenFootUi = true,
+				supportVR = true,
+				tooltipOrientation = TooltipOrientation.Right,
+				hoverText = Frame.informationPopoverText,
+				onActivateTooltip = Frame.onInformationIconActivated
+			})
+		})
+	}) else TextLabel else nil
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
-		LayoutOrder = p1.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		UIListLayout = if fFlagAXWidgetHeaderFlexLayout then reactModule.createElement("UIListLayout", {
+		UIListLayout = if FFlagAXWidgetHeaderFlexLayout then ReactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Horizontal,
 			HorizontalAlignment = Enum.HorizontalAlignment.Right,
 			VerticalAlignment = Enum.VerticalAlignment.Center,
 			SortOrder = Enum.SortOrder.LayoutOrder,
-			Padding = UDim.new(0, var5.Size.Size_300)
+			Padding = UDim.new(0, UseDesignTokensResult.Size.Size_300)
 		}) else nil,
-		TitleDescriptionFrame = if var1 or var2 then reactModule.createElement("Frame", {
+		TitleDescriptionFrame = if TitleText or DescriptionText then ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
-			LayoutOrder = if fFlagAXWidgetHeaderFlexLayout then 1 else nil,
-			Size = if fFlagAXWidgetHeaderFlexLayout then UDim2.new(1, 0, 0, 0) elseif p1.seeAllCallback then var3:map(function(p2)
-				-- upvalues: var5 (ref)
-				return UDim2.new(1, 0 - (p2.X + var5.Size.Size_300), 0, 0)
+			LayoutOrder = if FFlagAXWidgetHeaderFlexLayout then 1 else nil,
+			Size = if FFlagAXWidgetHeaderFlexLayout then UDim2.new(1, 0, 0, 0) elseif Frame.seeAllCallback then UseBindingResult:map(function(p1): UDim2 --[[ Line: 191 ]]
+				-- upvalues: UseDesignTokensResult (copy)
+				return UDim2.new(1, 0 - (p1.X + UseDesignTokensResult.Size.Size_300), 0, 0)
 			end) else UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y
 		}, {
-			UIFlexItem = if fFlagAXWidgetHeaderFlexLayout then reactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.Shrink }) else nil,
-			UIListLayout = reactModule.createElement("UIListLayout", {
+			UIFlexItem = if FFlagAXWidgetHeaderFlexLayout then ReactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.Shrink }) else nil,
+			UIListLayout = ReactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Vertical,
 				SortOrder = Enum.SortOrder.LayoutOrder,
-				Padding = UDim.new(0, var5.Size.Size_100)
+				Padding = UDim.new(0, UseDesignTokensResult.Size.Size_100)
 			}),
-			Title = if var1 then if var9 then reactModule.createElement("Frame", {
-				LayoutOrder = 1,
-				BackgroundTransparency = 1,
-				BorderSizePixel = 0,
-				Size = UDim2.new(1, 0, 0, 0),
-				AutomaticSize = Enum.AutomaticSize.Y
-			}, {
-				UIListLayout = reactModule.createElement("UIListLayout", {
-					FillDirection = Enum.FillDirection.Horizontal,
-					HorizontalFlex = Enum.UIFlexAlignment.Fill,
-					SortOrder = Enum.SortOrder.LayoutOrder,
-					VerticalAlignment = Enum.VerticalAlignment.Center,
-					Padding = UDim.new(0, var5.Size.Size_100)
-				}),
-				Title = titleText,
-				InformationIcon = reactModule.createElement("Frame", {
-					LayoutOrder = 2,
-					BackgroundTransparency = 1,
-					BorderSizePixel = 0,
-					Size = UDim2.fromOffset(0, 0),
-					AutomaticSize = Enum.AutomaticSize.XY
-				}, {
-					UIFlexItem = reactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.None }),
-					Icon = reactModule.createElement(iconWithTooltip, {
-						triggerPointName = "CatalogItemInformationTooltip",
-						supportTenFootUi = true,
-						supportVR = true,
-						tooltipOrientation = tooltipOrientation.Right,
-						hoverText = p1.informationPopoverText,
-						onActivateTooltip = p1.onInformationIconActivated
-					})
-				})
-			}) else titleText else nil,
-			Description = if var2 then reactModule.createElement("TextLabel", {
+			Title = Frame1,
+			Description = if DescriptionText then ReactModule.createElement("TextLabel", {
 				LayoutOrder = 2,
 				BackgroundTransparency = 1,
-				Text = var2,
-				Font = if foundationFontFaceMigration then nil else var5.Typography.BodyLarge.Font,
-				FontFace = if foundationFontFaceMigration then normalizeFontFace(var5.Typography.BodyLarge.Font) else nil,
-				TextSize = var5.Typography.BodyLarge.FontSize,
-				TextColor3 = var5.Color.Content.Default.Color3,
-				TextTransparency = var5.Color.Content.Default.Transparency,
+				Text = DescriptionText,
+				Font = if FoundationFontFaceMigration then nil else UseDesignTokensResult.Typography.BodyLarge.Font,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseDesignTokensResult.Typography.BodyLarge.Font) else nil,
+				TextSize = UseDesignTokensResult.Typography.BodyLarge.FontSize,
+				TextColor3 = UseDesignTokensResult.Color.Content.Default.Color3,
+				TextTransparency = UseDesignTokensResult.Color.Content.Default.Transparency,
 				TextTruncate = Enum.TextTruncate.SplitWord,
 				Size = UDim2.fromScale(1, 0),
 				AutomaticSize = Enum.AutomaticSize.Y,
 				TextXAlignment = Enum.TextXAlignment.Left
 			}) else nil
 		}) else nil,
-		SeeAll = if fFlagAXWidgetHeaderFlexLayout and p1.seeAllCallback then reactModule.createElement(button, {
+		SeeAll = if FFlagAXWidgetHeaderFlexLayout and Frame.seeAllCallback then ReactModule.createElement(Button, {
 			layoutOrder = 2,
 			fitContent = true,
-			buttonType = buttonType.Secondary,
-			text = var6.seeAllButtonText,
-			standardSize = standardButtonSize.XSmall,
-			onActivated = p1.seeAllCallback,
-			buttonRef = p1.seeAllRef,
-			NextSelectionDown = p1.NextSelectionDown,
-			NextSelectionUp = p1.NextSelectionUp
-		}) elseif p1.seeAllCallback then reactModule.createElement(button, {
-			buttonType = buttonType.Secondary,
+			buttonType = ButtonType.Secondary,
+			text = UseLocalizationResult.seeAllButtonText,
+			standardSize = StandardButtonSize.XSmall,
+			onActivated = Frame.seeAllCallback,
+			buttonRef = Frame.seeAllRef,
+			NextSelectionDown = Frame.NextSelectionDown,
+			NextSelectionUp = Frame.NextSelectionUp
+		}) elseif Frame.seeAllCallback then ReactModule.createElement(Button, {
+			buttonType = ButtonType.Secondary,
 			anchorPoint = Vector2.new(1, 0),
 			position = UDim2.fromScale(1, 0),
-			text = var6.seeAllButtonText,
+			text = UseLocalizationResult.seeAllButtonText,
 			fitContent = true,
-			standardSize = standardButtonSize.XSmall,
-			onActivated = p1.seeAllCallback,
-			buttonRef = p1.seeAllRef,
-			[reactModule.Change.AbsoluteSize] = function(p2)
-				-- upvalues: var4 (ref)
-				var4(p2.AbsoluteSize)
+			standardSize = StandardButtonSize.XSmall,
+			onActivated = Frame.seeAllCallback,
+			buttonRef = Frame.seeAllRef,
+			[ReactModule.Change.AbsoluteSize] = function(Frame) --[[ Line: 251 ]]
+				-- upvalues: UseBindingResult2 (copy)
+				UseBindingResult2(Frame.AbsoluteSize)
 			end,
-			NextSelectionDown = p1.NextSelectionDown,
-			NextSelectionUp = p1.NextSelectionUp
+			NextSelectionDown = Frame.NextSelectionDown,
+			NextSelectionUp = Frame.NextSelectionUp
 		}) else nil
 	})
 end

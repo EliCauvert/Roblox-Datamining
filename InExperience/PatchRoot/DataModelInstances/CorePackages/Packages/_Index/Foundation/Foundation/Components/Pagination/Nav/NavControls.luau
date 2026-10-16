@@ -1,66 +1,65 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local viewModule = require(foundation.Components.View)
-local _ = require(foundation.Enums.PaginationSize)
-local paginationDirectionModule = require(foundation.Enums.PaginationDirection)
-local navButtonModule = require(script.Parent.NavButton)
-local paginationSlotsUtilsModule = require(script.Parent.Parent.paginationSlotsUtils)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local ViewModule = require(Foundation.Components.View)
+local _ = require(Foundation.Enums.PaginationSize)
+local PaginationDirectionModule = require(Foundation.Enums.PaginationDirection)
+local NavButtonModule = require(script.Parent.NavButton)
+local PaginationSlotsUtilsModule = require(script.Parent.Parent.paginationSlotsUtils)
 local _ = require(script.Parent.Parent.usePaginationSelectionChain)
-local t = {
+local config = {
 	start = {
-		paginationDirectionModule.First,
-		paginationDirectionModule.Backward
+		PaginationDirectionModule.First,
+		PaginationDirectionModule.Backward
 	},
 	["end"] = {
-		paginationDirectionModule.Forward,
-		paginationDirectionModule.Last
+		PaginationDirectionModule.Forward,
+		PaginationDirectionModule.Last
 	}
 }
-local t_1 = { start = "left-nav", ["end"] = "right-nav" }
+local config1 = { start = "left-nav", ["end"] = "right-nav" }
 
-local function _(p1, p2)
-	-- upvalues: paginationDirectionModule (ref)
-	return if p1 == paginationDirectionModule.First or p1 == paginationDirectionModule.Last then p2.hasFirstLastButtons else true
+local function _(First, p1) --[[ Line: 56 | Named "shouldShowNavButton" ]]
+	-- upvalues: PaginationDirectionModule (copy)
+	return First ~= PaginationDirectionModule.First and First ~= PaginationDirectionModule.Last or p1.hasFirstLastButtons
 end
 
-local _ = function(p1, p2)
-	-- upvalues: paginationDirectionModule (ref)
-	return if p1 == paginationDirectionModule.First then p2.isFirstDisabled elseif p1 == paginationDirectionModule.Backward then p2.isBackDisabled elseif p1 == paginationDirectionModule.Forward then p2.isForwardDisabled else p2.isLastDisabled
+local _ = function(Backward, p1) --[[ Line: 64 | Named "getIsDisabled" ]]
+	-- upvalues: PaginationDirectionModule (copy)
+	return if Backward == PaginationDirectionModule.First then p1.isFirstDisabled elseif Backward == PaginationDirectionModule.Backward then p1.isBackDisabled elseif Backward == PaginationDirectionModule.Forward then p1.isForwardDisabled else p1.isLastDisabled
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: t (ref), paginationDirectionModule (ref), paginationSlotsUtilsModule (ref), reactModule (ref), navButtonModule (ref), viewModule (ref), t_1 (ref)
-	local side = t[p1.side]
-	local t_2 = {}
-	local var1 = 0
+return ReactModule.memo(function(Frame) --[[ Line: 76 | Named "NavControls" ]]
+	-- upvalues: config (copy), PaginationDirectionModule (copy), PaginationSlotsUtilsModule (copy), ReactModule (copy), NavButtonModule (copy), ViewModule (copy), config1 (copy)
+	local Entry = config[Frame.side]
+	local Elements = {}
+	local LayoutOrder = 0
 	
-	for i = 1, #side do
-		local var2 = side[i]
-		local var3 = if var2 == paginationDirectionModule.First or var2 == paginationDirectionModule.Last then p1.hasFirstLastButtons else true
+	for i = 1, #Entry do
+		local Entry1 = Entry[i]
 		
-		if var3 then
-			var1 += 1
-			var3 = paginationSlotsUtilsModule.NAV_SLOT_IDS[var2]
-			local slotBindings = p1.selection.getSlotBindings(var3)
-			t_2[var2] = reactModule.createElement(navButtonModule, {
-				baseTestId = p1.testId,
-				slotSize = p1.size,
-				direction = var2,
-				isDisabled = if var2 == paginationDirectionModule.First then p1.isFirstDisabled elseif var2 == paginationDirectionModule.Backward then p1.isBackDisabled elseif var2 == paginationDirectionModule.Forward then p1.isForwardDisabled else p1.isLastDisabled,
-				LayoutOrder = var1,
-				onDirectionActivated = p1.onDirectionActivated,
-				ref = p1.selection.getSlotRef(var3),
-				Selectable = slotBindings.Selectable,
-				NextSelectionLeft = slotBindings.NextSelectionLeft,
-				NextSelectionRight = slotBindings.NextSelectionRight,
-				NextSelectionUp = slotBindings.NextSelectionUp,
-				NextSelectionDown = slotBindings.NextSelectionDown
+		if Entry1 ~= PaginationDirectionModule.First and Entry1 ~= PaginationDirectionModule.Last or Frame.hasFirstLastButtons then
+			LayoutOrder += 1
+			local NAVSLOTID = PaginationSlotsUtilsModule.NAV_SLOT_IDS[Entry1]
+			local SlotBindings = Frame.selection.getSlotBindings(NAVSLOTID)
+			Elements[Entry1] = ReactModule.createElement(NavButtonModule, {
+				baseTestId = Frame.testId,
+				slotSize = Frame.size,
+				direction = Entry1,
+				isDisabled = if Entry1 == PaginationDirectionModule.First then Frame.isFirstDisabled elseif Entry1 == PaginationDirectionModule.Backward then Frame.isBackDisabled elseif Entry1 == PaginationDirectionModule.Forward then Frame.isForwardDisabled else Frame.isLastDisabled,
+				LayoutOrder = LayoutOrder,
+				onDirectionActivated = Frame.onDirectionActivated,
+				ref = Frame.selection.getSlotRef(NAVSLOTID),
+				Selectable = SlotBindings.Selectable,
+				NextSelectionLeft = SlotBindings.NextSelectionLeft,
+				NextSelectionRight = SlotBindings.NextSelectionRight,
+				NextSelectionUp = SlotBindings.NextSelectionUp,
+				NextSelectionDown = SlotBindings.NextSelectionDown
 			})
 		end
 	end
-	return reactModule.createElement(viewModule, {
+	return ReactModule.createElement(ViewModule, {
 		tag = "row gap-xsmall auto-xy",
-		LayoutOrder = p1.LayoutOrder,
-		testId = `{p1.testId}--{t_1[p4.side]}`
-	}, t_2)
+		LayoutOrder = Frame.LayoutOrder,
+		testId = `{Frame.testId}--{config1[Frame.side]}`
+	}, Elements)
 end)

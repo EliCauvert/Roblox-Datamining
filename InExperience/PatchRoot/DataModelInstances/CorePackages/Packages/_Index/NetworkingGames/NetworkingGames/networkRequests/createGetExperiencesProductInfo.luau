@@ -1,9 +1,9 @@
-﻿local GAMES_URLModule = require(script.Parent.Parent.GAMES_URL)
+﻿local GAMESURLModule = require(script.Parent.Parent.GAMES_URL)
 
-return function(p1)
-	-- upvalues: GAMES_URLModule (ref)
-	return p1.roduxNetworking.GET({ Name = "GetExperiencesProductInfo" }, function(p2, p3)
-		-- upvalues: GAMES_URLModule (copy)
-		return p2(GAMES_URLModule):path("v1"):path("games"):path("games-product-info"):expandedQueryArgsWithIds("universeIds", p3)
+return function(p1) --[[ Line: 9 ]]
+	-- upvalues: GAMESURLModule (copy)
+	return p1.roduxNetworking.GET({ Name = "GetExperiencesProductInfo" }, function(Callback, p2) --[[ Line: 12 ]]
+		-- upvalues: GAMESURLModule (upval)
+		return Callback(GAMESURLModule):path("v1"):path("games"):path("games-product-info"):expandedQueryArgsWithIds("universeIds", p2)
 	end)
 end

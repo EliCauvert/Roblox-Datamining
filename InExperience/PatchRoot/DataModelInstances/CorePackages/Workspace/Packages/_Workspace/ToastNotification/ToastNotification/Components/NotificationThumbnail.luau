@@ -1,122 +1,128 @@
-﻿local parent = script.Parent.Parent
-local context = parent.context
-local dependenciesModule = require(parent.dependencies)
-local imagePile = dependenciesModule.AppBlox.ImagePile
-local react = dependenciesModule.React
-local UIBlox = dependenciesModule.UIBlox
-local loadableImage = UIBlox.App.Loading.LoadableImage
-local useStyle = UIBlox.Core.Style.useStyle
-local typeModule = require(parent.type)
-local getRbxthumbWithTypeSizeAndOptions = dependenciesModule.getRbxthumbWithTypeSizeAndOptions
-local userLibConstants = dependenciesModule.UserLibConstants
-local parent_1 = parent.Parent
-local notificationsCommonModule = require(parent_1.NotificationsCommon)
-local constants = notificationsCommonModule.constants
-local sharedFlagsModule = require(parent_1.SharedFlags)
-local toastNotificationHelperModule = require(parent.utils.toastNotificationHelper)
-local images = UIBlox.App.ImageSet.Images
-local imageSetLabel = UIBlox.Core.ImageSet.ImageSetLabel
-local var1 = images["icons/graphic/logomark-gradient_xlarge"]
-local safety = images["icons/common/safety"]
-local getFFlagEnableToastIconSupport = sharedFlagsModule.GetFFlagEnableToastIconSupport
-local fFlagNotificationThumbnailUseProfileFrameThumbnail = notificationsCommonModule.FFlagNotificationThumbnailUseProfileFrameThumbnail
-local useNotificationCardStateModule = require(context.useNotificationCardState)
+﻿local Parent = script.Parent.Parent
+local DependenciesModule = require(Parent.dependencies)
+local ImagePile = DependenciesModule.AppBlox.ImagePile
+local React = DependenciesModule.React
+local UIBlox = DependenciesModule.UIBlox
+local LoadableImage = UIBlox.App.Loading.LoadableImage
+local UseStyleFunction = UIBlox.Core.Style.useStyle
+local TypeModule = require(Parent.type)
+local GetRbxthumbWithTypeSizeAndOptionsFunction = DependenciesModule.getRbxthumbWithTypeSizeAndOptions
+local UserLibConstants = DependenciesModule.UserLibConstants
+local Parent1 = Parent.Parent
+local NotificationsCommonModule = require(Parent1.NotificationsCommon)
+local Constants = NotificationsCommonModule.constants
+local ToastNotificationHelperModule = require(Parent.utils.toastNotificationHelper)
+local Images = UIBlox.App.ImageSet.Images
+local ImageSetLabel = UIBlox.Core.ImageSet.ImageSetLabel
+local IconsGraphicLogomarkGradientXlarge = Images["icons/graphic/logomark-gradient_xlarge"]
+local IconsCommonSafety = Images["icons/common/safety"]
+local GetFFlagEnableToastIconSupportFunction = require(Parent1.SharedFlags).GetFFlagEnableToastIconSupport
+local FFlagNotificationThumbnailUseProfileFrameThumbnail = NotificationsCommonModule.FFlagNotificationThumbnailUseProfileFrameThumbnail
+local UseNotificationCardStateModule = require(Parent.context.useNotificationCardState)
 
-local var2 = function(p1)
-	-- upvalues: typeModule (ref), userLibConstants (ref)
-	return if p1 == typeModule.SENDERThumbnailTypeEnum.Game then userLibConstants.RbxthumbTypes.GameIcon elseif p1 == typeModule.SENDERThumbnailTypeEnum.User then userLibConstants.RbxthumbTypes.AvatarHeadShot elseif p1 == typeModule.SENDERThumbnailTypeEnum.Group then userLibConstants.RbxthumbTypes.GroupIcon elseif p1 == typeModule.SENDERThumbnailTypeEnum.Asset then userLibConstants.RbxthumbTypes.Asset elseif p1 == typeModule.SENDERThumbnailTypeEnum.Bundle then userLibConstants.RbxthumbTypes.BundleThumbnail else userLibConstants.RbxthumbTypes.GameIcon
+local function v18(IdType) --[[ Line: 32 ]]
+	-- upvalues: TypeModule (copy), UserLibConstants (copy)
+	return if IdType == TypeModule.SENDERThumbnailTypeEnum.Game then UserLibConstants.RbxthumbTypes.GameIcon elseif IdType == TypeModule.SENDERThumbnailTypeEnum.User then UserLibConstants.RbxthumbTypes.AvatarHeadShot elseif IdType == TypeModule.SENDERThumbnailTypeEnum.Group then UserLibConstants.RbxthumbTypes.GroupIcon elseif IdType == TypeModule.SENDERThumbnailTypeEnum.Asset then UserLibConstants.RbxthumbTypes.Asset elseif IdType == TypeModule.SENDERThumbnailTypeEnum.Bundle then UserLibConstants.RbxthumbTypes.BundleThumbnail else UserLibConstants.RbxthumbTypes.GameIcon
 end
 
-local var3 = if toastNotificationHelperModule.isUserThumbnail then toastNotificationHelperModule.isUserThumbnail else function(p1)
-	-- upvalues: typeModule (ref)
-	return p1.idType == typeModule.SENDERThumbnailTypeEnum.User
+local IsUserThumbnail = if ToastNotificationHelperModule.isUserThumbnail then ToastNotificationHelperModule.isUserThumbnail else function(p1): boolean --[[ Line: 50 ]]
+	-- upvalues: TypeModule (copy)
+	return p1.idType == TypeModule.SENDERThumbnailTypeEnum.User
 end
 
-return function()
-	-- upvalues: useNotificationCardStateModule (ref), useStyle (ref), var3 (ref), fFlagNotificationThumbnailUseProfileFrameThumbnail (ref), getRbxthumbWithTypeSizeAndOptions (ref), var2 (ref), getFFlagEnableToastIconSupport (ref), typeModule (ref), constants (ref), react (ref), imageSetLabel (ref), safety (ref), var1 (ref), imagePile (ref), loadableImage (ref)
-	local var4 = useNotificationCardStateModule("thumbnail")
+return function() --[[ Line: 54 ]]
+	-- upvalues: UseNotificationCardStateModule (copy), UseStyleFunction (copy), IsUserThumbnail (copy), FFlagNotificationThumbnailUseProfileFrameThumbnail (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (copy), v18 (copy), GetFFlagEnableToastIconSupportFunction (copy), TypeModule (copy), Constants (copy), React (copy), ImageSetLabel (copy), IconsCommonSafety (copy), IconsGraphicLogomarkGradientXlarge (copy), ImagePile (copy), LoadableImage (copy)
+	local Thumbnail = UseNotificationCardStateModule("thumbnail")
 	
-	if var4 == nil or #var4 == 0 then
+	if Thumbnail == nil or #Thumbnail == 0 then
 		return nil
 	end
-	local var5 = useStyle()
-	local t = {}
-	local var6 = false
+	local UseStyleResult = UseStyleFunction()
+	local Images = {}
+	local Flag = false
 	
-	for i, v in ipairs(var4) do
-		if not var3(v) then
-			var6 = true
+	for _, value in ipairs(Thumbnail) do
+		if not IsUserThumbnail(value) then
+			Flag = true
 		end
-		t[tostring(v.id)] = if fFlagNotificationThumbnailUseProfileFrameThumbnail then getRbxthumbWithTypeSizeAndOptions(v.id, var2(v.idType), 150, nil, nil, var3(v)) else getRbxthumbWithTypeSizeAndOptions(v.id, var2(v.idType), 150)
+		Images[tostring(value.id)] = if FFlagNotificationThumbnailUseProfileFrameThumbnail then GetRbxthumbWithTypeSizeAndOptionsFunction(value.id, v18(value.idType), 150, nil, nil, IsUserThumbnail(value)) else GetRbxthumbWithTypeSizeAndOptionsFunction(value.id, v18(value.idType), 150)
 	end
-	local t_1 = {}
+	local Images1 = {}
 	
-	if getFFlagEnableToastIconSupport() then
-		local var7 = var4[1]
+	if GetFFlagEnableToastIconSupportFunction() then
+		local ThumbnailEntry = Thumbnail[1]
 		
-		if var7.idType == typeModule.SENDERThumbnailTypeEnum.Icon then
-			return if var7.id == constants.SafetyThumbnailId then react.createElement("Frame", {
+		if ThumbnailEntry.idType == TypeModule.SENDERThumbnailTypeEnum.Icon then
+			return if ThumbnailEntry.id == Constants.SafetyThumbnailId then React.createElement("Frame", {
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
 				Size = UDim2.fromScale(1, 1),
 				SizeConstraint = Enum.SizeConstraint.RelativeXX
 			}, {
-				Icon = react.createElement(imageSetLabel, {
+				Icon = React.createElement(ImageSetLabel, {
 					LayoutOrder = 1,
 					BackgroundTransparency = 1,
 					Size = UDim2.fromScale(1, 1),
 					AnchorPoint = Vector2.new(0.5, 0.5),
 					Position = UDim2.fromScale(0.5, 0.5),
-					Image = safety,
-					ImageColor3 = var5.Theme.IconDefault.Color
+					Image = IconsCommonSafety,
+					ImageColor3 = UseStyleResult.Theme.IconDefault.Color
 				})
-			}) else react.createElement("Frame", {
+			}) else React.createElement("Frame", {
 				BackgroundTransparency = 0,
 				BorderSizePixel = 0,
 				Size = UDim2.fromScale(1, 1),
 				SizeConstraint = Enum.SizeConstraint.RelativeXX,
-				BackgroundColor3 = var5.Tokens.Color.Extended.Black.Black_100.Color3
+				BackgroundColor3 = UseStyleResult.Tokens.Color.Extended.Black.Black_100.Color3
 			}, {
-				UICorner = react.createElement("UICorner", { CornerRadius = UDim.new(0, 8) }),
-				Icon = react.createElement(imageSetLabel, {
+				UICorner = React.createElement("UICorner", { CornerRadius = UDim.new(0, 8) }),
+				Icon = React.createElement(ImageSetLabel, {
 					LayoutOrder = 1,
 					BackgroundTransparency = 1,
 					Size = UDim2.fromScale(0.8, 0.8),
 					AnchorPoint = Vector2.new(0.5, 0.5),
 					Position = UDim2.fromScale(0.5, 0.5),
-					Image = var1
+					Image = IconsGraphicLogomarkGradientXlarge
 				})
 			})
-		elseif var6 then
-			local var8 = var4[1]
+		end
+	end
+	if Flag then
+		local ThumbnailEntry = Thumbnail[1]
+		
+		if ThumbnailEntry == nil then
+			return nil
+		else
+			local _UDim = UDim.new(0.5, 0)
 			
-			return if var8 == nil then nil else react.createElement("Frame", {
+			return React.createElement("Frame", {
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
 				Size = UDim2.fromScale(1, 1),
 				SizeConstraint = Enum.SizeConstraint.RelativeXX
 			}, {
-				Thumbnail = react.createElement(loadableImage, {
+				Thumbnail = React.createElement(LoadableImage, {
 					BackgroundTransparency = 1,
 					showFailedStateWhenLoadingFailed = true,
 					useShimmerAnimationWhileLoading = true,
 					ZIndex = 1,
-					Image = if fFlagNotificationThumbnailUseProfileFrameThumbnail then getRbxthumbWithTypeSizeAndOptions(var8.id, var2(var8.idType), 150, nil, nil, var3(var8)) else getRbxthumbWithTypeSizeAndOptions(var8.id, var2(var8.idType), 150),
+					Image = if FFlagNotificationThumbnailUseProfileFrameThumbnail then GetRbxthumbWithTypeSizeAndOptionsFunction(ThumbnailEntry.id, v18(ThumbnailEntry.idType), 150, nil, nil, IsUserThumbnail(ThumbnailEntry)) else GetRbxthumbWithTypeSizeAndOptionsFunction(ThumbnailEntry.id, v18(ThumbnailEntry.idType), 150),
 					Size = UDim2.fromScale(1, 1),
-					cornerRadius = if var3(var8) then UDim.new(0.5, 0) else UDim.new(0, 8)
+					cornerRadius = if IsUserThumbnail(ThumbnailEntry) then _UDim else UDim.new(0, 8)
 				})
 			})
 		end
-		for i_1, v_1 in t do
-			table.insert(t_1, {
-				Image = v_1,
+	else
+		for _, image in Images do
+			table.insert(Images1, {
+				Image = image,
 				BackgroundColor3 = Color3.fromRGB(101, 102, 104)
 			})
 		end
-		return react.createElement(imagePile, {
-			images = t_1,
-			imageBorderColor = var5.Theme.BackgroundUIDefault.Color,
-			imageBorderThickness = if #t_1 > 1 then 2 else 0
+		return React.createElement(ImagePile, {
+			images = Images1,
+			imageBorderColor = UseStyleResult.Theme.BackgroundUIDefault.Color,
+			imageBorderThickness = if #Images1 > 1 then 2 else 0
 		})
 	end
 end

@@ -1,54 +1,52 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local requests = require(corePackagesService.Workspace.Packages.Http).Requests
-local promiseModule = require(corePackagesService.Packages.Promise)
-local apiFetchUsersPresences = require(corePackagesService.Workspace.Packages.UserLib).Thunks.ApiFetchUsersPresences
-local DEPRECATED_UsersGetFriends = requests.DEPRECATED_UsersGetFriends
-local fetchUserFriendsStarted = require(corePackagesService.Workspace.Packages.LegacyFriendsRodux).Actions.FetchUserFriendsStarted
-local fetchUserFriendsFailed = require(corePackagesService.Workspace.Packages.LegacyFriendsRodux).Actions.FetchUserFriendsFailed
-local fetchUserFriendsCompleted = require(corePackagesService.Workspace.Packages.LegacyFriendsRodux).Actions.FetchUserFriendsCompleted
-local userModel = require(corePackagesService.Workspace.Packages.UserLib).Models.UserModel
-local updateUsers = require(corePackagesService.Workspace.Packages.UserLib).Thunks.UpdateUsers
-local getFFlagInviteListRerank = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagInviteListRerank
+﻿local CorePackages = game:GetService("CorePackages")
+local PromiseModule = require(CorePackages.Packages.Promise)
+local ApiFetchUsersPresencesFunction = require(CorePackages.Workspace.Packages.UserLib).Thunks.ApiFetchUsersPresences
+local DEPRECATEDUsersGetFriendsFunction = require(CorePackages.Workspace.Packages.Http).Requests.DEPRECATED_UsersGetFriends
+local FetchUserFriendsStartedFunction = require(CorePackages.Workspace.Packages.LegacyFriendsRodux).Actions.FetchUserFriendsStarted
+local FetchUserFriendsFailedFunction = require(CorePackages.Workspace.Packages.LegacyFriendsRodux).Actions.FetchUserFriendsFailed
+local FetchUserFriendsCompletedFunction = require(CorePackages.Workspace.Packages.LegacyFriendsRodux).Actions.FetchUserFriendsCompleted
+local UserModel = require(CorePackages.Workspace.Packages.UserLib).Models.UserModel
+local UpdateUsersFunction = require(CorePackages.Workspace.Packages.UserLib).Thunks.UpdateUsers
+local GetFFlagInviteListRerankFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagInviteListRerank
 
-return function(p1, p2, _, p3)
-	-- upvalues: fetchUserFriendsStarted (ref), DEPRECATED_UsersGetFriends (ref), getFFlagInviteListRerank (ref), userModel (ref), updateUsers (ref), apiFetchUsersPresences (ref), fetchUserFriendsCompleted (ref), promiseModule (ref), fetchUserFriendsFailed (ref)
-	return function(p4)
-		-- upvalues: fetchUserFriendsStarted (copy), p2 (ref), DEPRECATED_UsersGetFriends (copy), p1 (ref), p3 (ref), getFFlagInviteListRerank (copy), userModel (copy), updateUsers (copy), apiFetchUsersPresences (copy), fetchUserFriendsCompleted (copy), promiseModule (copy), fetchUserFriendsFailed (copy)
-		p4:dispatch(fetchUserFriendsStarted(p2))
+return function(p1, p2, _, p3) --[[ Line: 16 ]]
+	-- upvalues: FetchUserFriendsStartedFunction (copy), DEPRECATEDUsersGetFriendsFunction (copy), GetFFlagInviteListRerankFunction (copy), UserModel (copy), UpdateUsersFunction (copy), ApiFetchUsersPresencesFunction (copy), FetchUserFriendsCompletedFunction (copy), PromiseModule (copy), FetchUserFriendsFailedFunction (copy)
+	return function(p4) --[[ Line: 17 ]]
+		-- upvalues: FetchUserFriendsStartedFunction (upval), p2 (copy), DEPRECATEDUsersGetFriendsFunction (upval), p1 (copy), p3 (copy), GetFFlagInviteListRerankFunction (upval), UserModel (upval), UpdateUsersFunction (upval), ApiFetchUsersPresencesFunction (upval), FetchUserFriendsCompletedFunction (upval), PromiseModule (upval), FetchUserFriendsFailedFunction (upval)
+		p4:dispatch(FetchUserFriendsStartedFunction(p2))
 		
-		return DEPRECATED_UsersGetFriends(p1, p2, p3):andThen(function(p5)
-			-- upvalues: getFFlagInviteListRerank (copy), userModel (copy), p4 (ref), updateUsers (copy)
-			local responseBody = p5.responseBody
-			local t = {}
-			local t_1 = {}
+		return DEPRECATEDUsersGetFriendsFunction(p1, p2, p3):andThen(function(Result) --[[ Line: 21 ]]
+			-- upvalues: GetFFlagInviteListRerankFunction (upval), UserModel (upval), p4 (copy), UpdateUsersFunction (upval)
+			local List = {}
+			local FromDataTableResults = {}
 			
-			for i, v in pairs(responseBody.data) do
-				local var1 = tostring(v.id)
-				v.isFriend = true
+			for FriendRank, entry in pairs(Result.responseBody.data) do
+				local Text = tostring(entry.id)
+				entry.isFriend = true
 				
-				if getFFlagInviteListRerank() then
-					v.friendRank = i
+				if GetFFlagInviteListRerankFunction() then
+					entry.friendRank = FriendRank
 				end
-				local var2 = userModel.fromDataTable(v)
-				table.insert(t, var1)
-				t_1[var2.id] = var2
+				local FromDataTableResult = UserModel.fromDataTable(entry)
+				table.insert(List, Text)
+				FromDataTableResults[FromDataTableResult.id] = FromDataTableResult
 			end
-			p4:dispatch(updateUsers(t_1))
+			p4:dispatch(UpdateUsersFunction(FromDataTableResults))
 			
-			return t
-		end):andThen(function(p6)
-			-- upvalues: p4 (ref), apiFetchUsersPresences (copy), p1 (copy)
-			return p4:dispatch(apiFetchUsersPresences(p1, p6))
-		end):andThen(function(p6)
-			-- upvalues: p4 (ref), fetchUserFriendsCompleted (copy), p2 (copy), promiseModule (copy)
-			p4:dispatch(fetchUserFriendsCompleted(p2))
+			return List
+		end):andThen(function(Result) --[[ Line: 43 ]]
+			-- upvalues: p4 (copy), ApiFetchUsersPresencesFunction (upval), p1 (upval)
+			return p4:dispatch(ApiFetchUsersPresencesFunction(p1, Result))
+		end):andThen(function(Result) --[[ Line: 46 ]]
+			-- upvalues: p4 (copy), FetchUserFriendsCompletedFunction (upval), p2 (upval), PromiseModule (upval)
+			p4:dispatch(FetchUserFriendsCompletedFunction(p2))
 			
-			return promiseModule.resolve(p6)
-		end, function(p6)
-			-- upvalues: p4 (ref), fetchUserFriendsFailed (copy), p2 (copy), promiseModule (copy)
-			p4:dispatch(fetchUserFriendsFailed(p2, p6))
+			return PromiseModule.resolve(Result)
+		end, function(p5) --[[ Line: 50 ]]
+			-- upvalues: p4 (copy), FetchUserFriendsFailedFunction (upval), p2 (upval), PromiseModule (upval)
+			p4:dispatch(FetchUserFriendsFailedFunction(p2, p5))
 			
-			return promiseModule.reject(p6)
+			return PromiseModule.reject(p5)
 		end)
 	end
 end

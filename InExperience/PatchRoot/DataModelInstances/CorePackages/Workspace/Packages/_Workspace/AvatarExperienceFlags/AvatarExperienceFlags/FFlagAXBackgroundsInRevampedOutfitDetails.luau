@@ -1,0 +1,3 @@
+﻿local AXBackgroundsInRevampedOutfitDetails = game:DefineFastFlag("AXBackgroundsInRevampedOutfitDetails", false)
+
+return require(script.Parent.FFlagAXBackgroundsInOutfitDetails) and AXBackgroundsInRevampedOutfitDetails

@@ -1,4 +1,4 @@
-﻿local jestConfigsModule = require(script.Parent.Parent.Dev.JestConfigs)
+﻿local JestConfigsModule = require(script.Parent.Parent.Dev.JestConfigs)
 
 return {
 	displayName = "PurchasePrompt-MockDataModel",
@@ -10,9 +10,9 @@ return {
 		"**/Network.getPlayerOwns.test"
 	},
 	setupFilesAfterEnv = {
-		jestConfigsModule.setupFiles.UIBloxInitializer,
-		jestConfigsModule.setupFiles.createPromiseRejectionHandler(),
-		jestConfigsModule.setupFiles.RetryTimes
+		JestConfigsModule.setupFiles.UIBloxInitializer,
+		JestConfigsModule.setupFiles.createPromiseRejectionHandler(),
+		JestConfigsModule.setupFiles.RetryTimes
 	},
 	coveragePathIgnorePatterns = { "Localization/Locales/.*%.lua$" }
 }

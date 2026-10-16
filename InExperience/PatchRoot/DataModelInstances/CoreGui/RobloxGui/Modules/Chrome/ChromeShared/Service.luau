@@ -1,1 +1,1 @@
-﻿return require(script.ChromeService).new()
+﻿return (require(script.ChromeService).new())

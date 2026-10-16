@@ -1,1 +1,1 @@
-﻿return require(script.Parent.FFlagAppChatNavigateBackIfOSAUnacknowledged)
+﻿return (require(script.Parent.FFlagAppChatNavigateBackIfOSAUnacknowledged))

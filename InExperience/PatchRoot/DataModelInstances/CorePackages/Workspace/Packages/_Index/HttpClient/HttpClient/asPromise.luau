@@ -1,102 +1,109 @@
-﻿local parent = script:FindFirstAncestor("HttpClient").Parent
-local promiseModule = require(parent.Promise)
-local signalsModule = require(parent.Signals)
+﻿local Parent = script:FindFirstAncestor("HttpClient").Parent
+local PromiseModule = require(Parent.Promise)
+local SignalsModule = require(Parent.Signals)
 local _ = require(script.Parent.types)
-local fFlagHttpClientRetryExtensionsModule = require(script.Parent.Flags.FFlagHttpClientRetryExtensions)
-local t = {}
+local FFlagHttpClientRetryExtensionsModule = require(script.Parent.Flags.FFlagHttpClientRetryExtensions)
+local Effects = {}
 
-return function(p1)
-	-- upvalues: promiseModule (ref), t (ref), fFlagHttpClientRetryExtensionsModule (ref), signalsModule (ref)
-	local t_1 = {}
+return function(p1) --[[ Line: 17 | Named "asPromise" ]]
+	-- upvalues: PromiseModule (copy), Effects (copy), FFlagHttpClientRetryExtensionsModule (copy), SignalsModule (copy)
+	local t = {}
 	
-	return promiseModule.new(function(p2, p3, p4)
-		-- upvalues: t (copy), t_1 (ref), fFlagHttpClientRetryExtensionsModule (copy), p1 (ref), signalsModule (copy)
-		local var1 = false
-		local var2 = false
+	return PromiseModule.new(function(Callback1, Callback2, Callback: (any) -> ()) --[[ Line: 19 ]]
+		-- upvalues: Effects (upval), t (copy), FFlagHttpClientRetryExtensionsModule (upval), p1 (copy), SignalsModule (upval)
+		local Flag = false
+		local Flag1 = false
 		
-		local function _()
-			-- upvalues: var2 (write), t (copy), t_1 (copy), fFlagHttpClientRetryExtensionsModule (copy), p1 (copy)
-			if var2 then return end
-			var2 = true
-			local var3 = t[t_1]
-			t[t_1] = nil
+		local function _() --[[ Line: 23 | Named "cleanupEffect" ]]
+			-- upvalues: Flag1 (ref), Effects (upval), t (upval), FFlagHttpClientRetryExtensionsModule (upval), p1 (upval)
+			if Flag1 then return end
+			Flag1 = true
+			local Effect: () -> () = Effects[t]
+			Effects[t] = nil
 			
-			if var3 ~= nil then
-				var3()
+			if Effect ~= nil then
+				Effect()
 			end
-			if fFlagHttpClientRetryExtensionsModule then
+			if FFlagHttpClientRetryExtensionsModule then
 				p1.dispose()
 			end
 		end
 		
-		local function settle(value)
-			-- upvalues: var1 (write), var2 (write), t (copy), t_1 (copy), fFlagHttpClientRetryExtensionsModule (copy), p1 (copy), p2 (ref), p3 (ref)
-			if var1 then return end
-			var1 = true
+		local function settle(StateResult) --[[ Line: 39 ]]
+			-- upvalues: Flag (ref), Flag1 (ref), Effects (upval), t (upval), FFlagHttpClientRetryExtensionsModule (upval), p1 (upval), Callback1 (copy), Callback2 (copy)
+			if Flag then return end
+			Flag = true
 			
-			if not var2 then
-				var2 = true
-				local var3 = t[t_1]
-				t[t_1] = nil
+			if not Flag1 then
+				Flag1 = true
+				local Effect: () -> () = Effects[t]
+				Effects[t] = nil
 				
-				if var3 ~= nil then
-					var3()
+				if Effect ~= nil then
+					Effect()
 				end
-				if fFlagHttpClientRetryExtensionsModule then
+				if FFlagHttpClientRetryExtensionsModule then
 					p1.dispose()
 				end
 			end
-			if value.status == "succeeded" then
-				p2(value.result)
+			if StateResult.status == "succeeded" then
+				Callback1(StateResult.result)
 				
 				return
-			elseif fFlagHttpClientRetryExtensionsModule then
-				p3({
-					responseCode = value.errorCode,
-					errorMessage = value.error,
-					response = value.response
+			end
+			if FFlagHttpClientRetryExtensionsModule then
+				Callback2({
+					responseCode = StateResult.errorCode,
+					errorMessage = StateResult.error,
+					response = StateResult.response
 				})
 				
 				return
+			else
+				Callback2({
+					responseCode = StateResult.errorCode,
+					errorMessage = StateResult.error
+				})
 			end
-			p3({
-				responseCode = value.errorCode,
-				errorMessage = value.error
-			})
 		end
 		
-		local var3 = p1.state(false)
+		local StateResult = p1.state(false)
 		
-		if var3.status ~= "pending" then
-			settle(var3)
+		if StateResult.status ~= "pending" then
+			settle(StateResult)
 			
 			return
 		end
-		local _ = nil
-		local var4 = signalsModule.createEffect(function(p5)
-			-- upvalues: p1 (copy), settle (ref)
-			local var5 = p1.state(p5)
+		local Effect: () -> () = SignalsModule.createEffect(function(p2) --[[ Line: 62 ]]
+			-- upvalues: p1 (upval), settle (copy)
+			local StateResult = p1.state(p2)
 			
-			if var5.status == "pending" then
+			if StateResult.status ~= "pending" then
+				settle(StateResult)
+				
 				return
 			end
-			settle(var5)
 		end)
-		t[t_1] = var4
-		p4(function()
-			-- upvalues: var1 (write), var2 (write), t (copy), t_1 (copy), fFlagHttpClientRetryExtensionsModule (copy), p1 (copy)
-			if var1 then return end
-			var1 = true
+		
+		if Flag1 then
+			Effect()
+		else
+			Effects[t] = Effect
+		end
+		Callback(function() --[[ Line: 75 ]]
+			-- upvalues: Flag (ref), Flag1 (ref), Effects (upval), t (upval), FFlagHttpClientRetryExtensionsModule (upval), p1 (upval)
+			if Flag then return end
+			Flag = true
 			
-			if var2 then return end
-			var2 = true
-			local var5 = t[t_1]
-			t[t_1] = nil
+			if Flag1 then return end
+			Flag1 = true
+			local Effect: () -> () = Effects[t]
+			Effects[t] = nil
 			
-			if var5 ~= nil then
-				var5()
+			if Effect ~= nil then
+				Effect()
 			end
-			if fFlagHttpClientRetryExtensionsModule then
+			if FFlagHttpClientRetryExtensionsModule then
 				p1.dispose()
 			end
 		end)

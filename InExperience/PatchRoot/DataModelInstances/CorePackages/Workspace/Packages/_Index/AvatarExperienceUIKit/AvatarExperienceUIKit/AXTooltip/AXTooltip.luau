@@ -1,40 +1,40 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceUIKit").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local useTokens = foundationModule.Hooks.useTokens
-local popover = foundationModule.Popover
-local popoverAlign = foundationModule.Enums.PopoverAlign
-local radius = foundationModule.Enums.Radius
-local t = {
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceUIKit").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local Popover = FoundationModule.Popover
+local PopoverAlign = FoundationModule.Enums.PopoverAlign
+local Radius = FoundationModule.Enums.Radius
+local config = {
 	Top = UDim2.fromScale(0.5, 0),
 	Bottom = UDim2.fromScale(0.5, 1),
 	Left = UDim2.fromScale(0, 0.5),
 	Right = UDim2.fromScale(1, 0.5)
 }
 
-return function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), popover (ref), t (ref), popoverAlign (ref), radius (ref), foundationModule (ref)
-	return reactModule.createElement(popover.Root, { isOpen = p1.isOpen }, {
-		AXTooltipAnchor = reactModule.createElement(popover.Anchor, { Position = t[p1.popoverSide] }),
-		AXTooltipContent = reactModule.createElement(popover.Content, {
-			align = popoverAlign.Center,
+return function(p1) --[[ Line: 31 ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), Popover (copy), config (copy), PopoverAlign (copy), Radius (copy), FoundationModule (copy)
+	return ReactModule.createElement(Popover.Root, { isOpen = p1.isOpen }, {
+		AXTooltipAnchor = ReactModule.createElement(Popover.Anchor, { Position = config[p1.popoverSide] }),
+		AXTooltipContent = ReactModule.createElement(Popover.Content, {
+			align = PopoverAlign.Center,
 			side = p1.popoverSide,
-			backgroundStyle = useTokens().Color.System.Contrast,
-			radius = radius.Medium
+			backgroundStyle = UseTokensFunction().Color.System.Contrast,
+			radius = Radius.Medium
 		}, {
-			AXTooltipTextFrame = reactModule.createElement(foundationModule.View, {
+			AXTooltipTextFrame = ReactModule.createElement(FoundationModule.View, {
 				tag = "col gap-xsmall padding-y-small padding-x-medium auto-xy"
 			}, {
-				AXTooltipTitle = reactModule.createElement(foundationModule.Text, {
+				AXTooltipTitle = ReactModule.createElement(FoundationModule.Text, {
 					Text = p1.tooltipText,
 					Size = if p1.maxWidth then UDim2.new(0, p1.maxWidth, 0, 0) else nil,
 					tag = if p1.maxWidth then "auto-y text-title-medium content-inverse-emphasis" else "auto-xy text-title-medium content-inverse-emphasis",
 					TextWrapped = if p1.maxWidth then true else nil
 				})
 			}),
-			AXTooltipOverlayButton = reactModule.createElement("TextButton", {
+			AXTooltipOverlayButton = ReactModule.createElement("TextButton", {
 				Transparency = 1,
-				[reactModule.Event.Activated] = p1.onTooltipActivated,
+				[ReactModule.Event.Activated] = p1.onTooltipActivated,
 				Size = UDim2.fromScale(1, 1)
 			})
 		})

@@ -1,34 +1,35 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local reactModule = require(parent_1.React)
-local signalsReactModule = require(parent_1.SignalsReact)
-local foundationModule = require(parent_1.Foundation)
-local view = foundationModule.View
-local useTokens = foundationModule.Hooks.useTokens
-local stateLayerAffordance = foundationModule.Enums.StateLayerAffordance
-local playerListVisibilityStoreModule = require(parent.Common.PlayerListVisibilityStore)
-local playerContextualMenuStoreModule = require(parent.Common.PlayerContextualMenuStore)
-local constantsModule = require(parent.Common.Constants)
-local t = { affordance = stateLayerAffordance.None }
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
+local SignalsReactModule = require(Parent1.SignalsReact)
+local FoundationModule = require(Parent1.Foundation)
+local View = FoundationModule.View
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local PlayerListVisibilityStoreModule = require(Parent.Common.PlayerListVisibilityStore)
+local PlayerContextualMenuStoreModule = require(Parent.Common.PlayerContextualMenuStore)
+local ConstantsModule = require(Parent.Common.Constants)
+local StateLayer = {
+	affordance = FoundationModule.Enums.StateLayerAffordance.None
+}
 
-local function LeaderboardScrimMobile()
-	-- upvalues: useTokens (ref), signalsReactModule (ref), playerListVisibilityStoreModule (ref), reactModule (ref), playerContextualMenuStoreModule (ref), view (ref), t (ref), constantsModule (ref)
-	return reactModule.createElement(view, {
+local function LeaderboardScrimMobile() --[[ Line: 20 ]]
+	-- upvalues: UseTokensFunction (copy), SignalsReactModule (copy), PlayerListVisibilityStoreModule (copy), ReactModule (copy), PlayerContextualMenuStoreModule (copy), View (copy), StateLayer (copy), ConstantsModule (copy)
+	return ReactModule.createElement(View, {
 		tag = "size-full",
 		ZIndex = 0,
-		backgroundStyle = useTokens().Color.Common.Scrim,
-		Visible = signalsReactModule.useSignalBinding(playerListVisibilityStoreModule.getEffectiveVisible),
-		onActivated = reactModule.useCallback(function()
-			-- upvalues: playerContextualMenuStoreModule (copy), playerListVisibilityStoreModule (copy)
-			playerContextualMenuStoreModule.closeContextMenu()
-			playerListVisibilityStoreModule.setVisible(false)
+		backgroundStyle = UseTokensFunction().Color.Common.Scrim,
+		Visible = SignalsReactModule.useSignalBinding(PlayerListVisibilityStoreModule.getEffectiveVisible),
+		onActivated = ReactModule.useCallback(function() --[[ Line: 24 ]]
+			-- upvalues: PlayerContextualMenuStoreModule (upval), PlayerListVisibilityStoreModule (upval)
+			PlayerContextualMenuStoreModule.closeContextMenu()
+			PlayerListVisibilityStoreModule.setVisible(false)
 		end, {}),
-		stateLayer = t,
-		selection = constantsModule.NOT_SELECTABLE
+		stateLayer = StateLayer,
+		selection = ConstantsModule.NOT_SELECTABLE
 	})
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), LeaderboardScrimMobile (ref)
-	return if p1.isSmallTouchDevice then reactModule.createElement(LeaderboardScrimMobile) else nil
+return ReactModule.memo(function(p1) --[[ Line: 42 | Named "LeaderboardScrim" ]]
+	-- upvalues: ReactModule (copy), LeaderboardScrimMobile (copy)
+	return if p1.isSmallTouchDevice then ReactModule.createElement(LeaderboardScrimMobile) else nil
 end)

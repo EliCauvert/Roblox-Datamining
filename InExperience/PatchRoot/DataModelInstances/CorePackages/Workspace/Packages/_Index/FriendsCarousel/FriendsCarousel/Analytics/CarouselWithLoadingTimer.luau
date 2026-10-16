@@ -1,45 +1,46 @@
-﻿local parent = script:FindFirstAncestor("FriendsCarousel").Parent
-local reactModule = require(parent.React)
-local UIBloxModule = require(parent.UIBlox)
-local useLocalUserId = require(parent.RobloxAppHooks).useLocalUserId
-local useLoadingTimers = require(parent.SocialLuaAnalytics).Analytics.Timing.useLoadingTimers
-local retrievalStatus = UIBloxModule.App.Loading.Enum.RetrievalStatus
-local analyticsSetupModule = require(script.Parent.AnalyticsSetup)
-local eventNamesModule = require(script.Parent.EventNames)
+﻿local Parent = script:FindFirstAncestor("FriendsCarousel").Parent
+local ReactModule = require(Parent.React)
+local UseLocalUserIdFunction = require(Parent.RobloxAppHooks).useLocalUserId
+local UseLoadingTimersFunction = require(Parent.SocialLuaAnalytics).Analytics.Timing.useLoadingTimers
+local RetrievalStatus = require(Parent.UIBlox).App.Loading.Enum.RetrievalStatus
+local AnalyticsSetupModule = require(script.Parent.AnalyticsSetup)
+local EventNamesModule = require(script.Parent.EventNames)
 local UILoadingEventsModule = require(script.Parent.UILoadingEvents)
 
-return function(p1)
-	-- upvalues: useLocalUserId (ref), useLoadingTimers (ref), reactModule (ref), analyticsSetupModule (ref), eventNamesModule (ref), retrievalStatus (ref), UILoadingEventsModule (ref)
-	local var1 = useLocalUserId()
-	local var2 = useLoadingTimers({})
-	local var3 = reactModule.useRef({})
-	local var4 = reactModule.useMemo(function()
-		-- upvalues: analyticsSetupModule (copy), var1 (ref)
-		return analyticsSetupModule({
-			infoForAllEvents = { uid = if var1 then tostring(var1) else nil }
+return function(p1) --[[ Line: 27 | Named "CarouselWithLoadingTimer" ]]
+	-- upvalues: UseLocalUserIdFunction (copy), UseLoadingTimersFunction (copy), ReactModule (copy), AnalyticsSetupModule (copy), EventNamesModule (copy), RetrievalStatus (copy), UILoadingEventsModule (copy)
+	local UseLocalUserIdResult = UseLocalUserIdFunction()
+	local UseLoadingTimersResult = UseLoadingTimersFunction({})
+	local UseRefResult = ReactModule.useRef({})
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 32 ]]
+		-- upvalues: AnalyticsSetupModule (upval), UseLocalUserIdResult (copy)
+		return AnalyticsSetupModule({
+			infoForAllEvents = {
+				uid = if UseLocalUserIdResult then tostring(UseLocalUserIdResult) else nil
+			}
 		})
-	end, { var1 })
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref)
-		var2.start("carouselLoadingTime")
+	end, { UseLocalUserIdResult })
+	ReactModule.useEffect(function() --[[ Line: 40 ]]
+		-- upvalues: UseLoadingTimersResult (copy)
+		UseLoadingTimersResult.start("carouselLoadingTime")
 	end, {})
 	
-	local var5 = function(p2, p3)
-		-- upvalues: var4 (ref), eventNamesModule (copy), retrievalStatus (copy)
-		var4.fireAnalyticsEvent(eventNamesModule.FriendsCarouselUILoadingTime, {
-			loadingTime = if p3 and typeof(p3) == "number" and p3 >= 0 then p3 else 0,
-			fetch = p2,
-			status = retrievalStatus.Done.rawValue()
+	local function v10(Fetch, CarouselLoadingTime: number) --[[ Line: 44 ]]
+		-- upvalues: UseMemoResult (copy), EventNamesModule (upval), RetrievalStatus (upval)
+		UseMemoResult.fireAnalyticsEvent(EventNamesModule.FriendsCarouselUILoadingTime, {
+			loadingTime = if CarouselLoadingTime and typeof(CarouselLoadingTime) == "number" and CarouselLoadingTime >= 0 then CarouselLoadingTime else 0,
+			fetch = Fetch,
+			status = RetrievalStatus.Done.rawValue()
 		})
 	end
 	
 	return p1.renderComponent({
-		onSuccessfulRender = function(p2)
-			-- upvalues: var3 (ref), UILoadingEventsModule (copy), var2 (ref), var5 (ref)
-			if var3.current[UILoadingEventsModule.EmptyHint] or var3.current[`{UILoadingEventsModule.EmptyHint}{UILoadingEventsModule.ExperimentSuffix}`] then return end
-			if p2 and not var3.current[p2] then
-				var3.current[p2] = true
-				var5(p2, var2.getTime("carouselLoadingTime"))
+		onSuccessfulRender = function(Fetch) --[[ Line: 57 ]]
+			-- upvalues: UseRefResult (copy), UILoadingEventsModule (upval), UseLoadingTimersResult (copy), v10 (copy)
+			if UseRefResult.current[UILoadingEventsModule.EmptyHint] or UseRefResult.current[`{UILoadingEventsModule.EmptyHint}{UILoadingEventsModule.ExperimentSuffix}`] then return end
+			if Fetch and not UseRefResult.current[Fetch] then
+				UseRefResult.current[Fetch] = true
+				v10(Fetch, (UseLoadingTimersResult.getTime("carouselLoadingTime")))
 				
 				return
 			end

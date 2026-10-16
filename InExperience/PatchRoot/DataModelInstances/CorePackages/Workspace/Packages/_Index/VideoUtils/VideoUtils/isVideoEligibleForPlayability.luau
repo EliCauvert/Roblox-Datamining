@@ -1,27 +1,27 @@
-﻿local parent = script:FindFirstAncestor("VideoUtils").Parent
-local cryoModule = require(parent.Cryo)
-local playabilityStatusEnum = require(parent.DiscoveryTypes).PlayabilityStatusEnum
-local fFlagLuaAppUsePrevalidatedVideoGamePlayability = require(parent.SharedFlags).FFlagLuaAppUsePrevalidatedVideoGamePlayability
+﻿local Parent = script:FindFirstAncestor("VideoUtils").Parent
+local CryoModule = require(Parent.Cryo)
+local PlayabilityStatusEnum = require(Parent.DiscoveryTypes).PlayabilityStatusEnum
+local FFlagLuaAppUsePrevalidatedVideoGamePlayability = require(Parent.SharedFlags).FFlagLuaAppUsePrevalidatedVideoGamePlayability
 local list = {
-	playabilityStatusEnum.UnderReview,
-	playabilityStatusEnum.UniverseRootPlaceIsPrivate,
-	playabilityStatusEnum.InsufficientPermissionFriendsOnly,
-	playabilityStatusEnum.InsufficientPermissionGroupOnly,
-	playabilityStatusEnum.GameUnapproved, playabilityStatusEnum.AccountRestricted,
-	playabilityStatusEnum.ComplianceBlocked,
-	playabilityStatusEnum.ContextualPlayabilityRegionalCompliance,
-	playabilityStatusEnum.ContextualPlayabilityAgeRecommendationParentalControls,
-	playabilityStatusEnum.ContextualPlayabilityAgeGated,
-	playabilityStatusEnum.ContextualPlayabilityUnrated,
-	playabilityStatusEnum.ContextualPlayabilityAgeGatedByDescriptor,
-	playabilityStatusEnum.ContextualPlayabilityExperienceBlockedParentalControls,
-	playabilityStatusEnum.ContextualPlayabilityRequireParentApproval,
-	playabilityStatusEnum.ContextualPlayabilityAgeCheckRequired,
-	playabilityStatusEnum.ContextualPlayabilityCoreGated,
-	playabilityStatusEnum.ContextualPlayabilityUnverifiedSeventeenPlusUser
+	PlayabilityStatusEnum.UnderReview,
+	PlayabilityStatusEnum.UniverseRootPlaceIsPrivate,
+	PlayabilityStatusEnum.InsufficientPermissionFriendsOnly,
+	PlayabilityStatusEnum.InsufficientPermissionGroupOnly,
+	PlayabilityStatusEnum.GameUnapproved, PlayabilityStatusEnum.AccountRestricted,
+	PlayabilityStatusEnum.ComplianceBlocked,
+	PlayabilityStatusEnum.ContextualPlayabilityRegionalCompliance,
+	PlayabilityStatusEnum.ContextualPlayabilityAgeRecommendationParentalControls,
+	PlayabilityStatusEnum.ContextualPlayabilityAgeGated,
+	PlayabilityStatusEnum.ContextualPlayabilityUnrated,
+	PlayabilityStatusEnum.ContextualPlayabilityAgeGatedByDescriptor,
+	PlayabilityStatusEnum.ContextualPlayabilityExperienceBlockedParentalControls,
+	PlayabilityStatusEnum.ContextualPlayabilityRequireParentApproval,
+	PlayabilityStatusEnum.ContextualPlayabilityAgeCheckRequired,
+	PlayabilityStatusEnum.ContextualPlayabilityCoreGated,
+	PlayabilityStatusEnum.ContextualPlayabilityUnverifiedSeventeenPlusUser
 }
 
-return function(p1, p2, p3)
-	-- upvalues: fFlagLuaAppUsePrevalidatedVideoGamePlayability (ref), cryoModule (ref), list (ref)
-	return if fFlagLuaAppUsePrevalidatedVideoGamePlayability and p3 then true else not (not p1 or p2 == nil) and (p2.isPlayable == true or cryoModule.List.find(list, p2.playabilityStatus) == nil)
+return function(p1, p2, p3): boolean --[[ Line: 38 | Named "isVideoEligibleForPlayability" ]]
+	-- upvalues: FFlagLuaAppUsePrevalidatedVideoGamePlayability (copy), CryoModule (copy), list (copy)
+	return if FFlagLuaAppUsePrevalidatedVideoGamePlayability and p3 then true elseif p1 and p2 ~= nil then p2.isPlayable == true or CryoModule.List.find(list, p2.playabilityStatus) == nil else false
 end

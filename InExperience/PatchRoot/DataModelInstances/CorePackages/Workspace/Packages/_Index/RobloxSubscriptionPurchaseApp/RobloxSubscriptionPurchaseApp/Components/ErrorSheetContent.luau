@@ -1,96 +1,100 @@
-﻿local robloxSubscriptionPurchaseApp = script:FindFirstAncestor("RobloxSubscriptionPurchaseApp")
-local parent = robloxSubscriptionPurchaseApp.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local robloxSubscriptionStoreModule = require(robloxSubscriptionPurchaseApp.Store.RobloxSubscriptionStore)
-local errorReasonModule = require(robloxSubscriptionPurchaseApp.Enums.ErrorReason)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local completeRobloxSubscriptionUpsellFlowModule = require(robloxSubscriptionPurchaseApp.Actions.completeRobloxSubscriptionUpsellFlow)
-local sheet = foundationModule.Sheet
-local view = foundationModule.View
-local text = foundationModule.Text
-local icon = foundationModule.Icon
-local button = foundationModule.Button
-local iconName = foundationModule.Enums.IconName
-local useTokens = foundationModule.Hooks.useTokens
-local fillBehavior = foundationModule.Enums.FillBehavior
-local buttonVariant = foundationModule.Enums.ButtonVariant
+﻿local RobloxSubscriptionPurchaseApp = script:FindFirstAncestor("RobloxSubscriptionPurchaseApp")
+local Parent = RobloxSubscriptionPurchaseApp.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local RobloxSubscriptionStoreModule = require(RobloxSubscriptionPurchaseApp.Store.RobloxSubscriptionStore)
+local ErrorReasonModule = require(RobloxSubscriptionPurchaseApp.Enums.ErrorReason)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local CompleteRobloxSubscriptionUpsellFlowModule = require(RobloxSubscriptionPurchaseApp.Actions.completeRobloxSubscriptionUpsellFlow)
+local Sheet = FoundationModule.Sheet
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local Icon = FoundationModule.Icon
+local Button = FoundationModule.Button
+local IconName = FoundationModule.Enums.IconName
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local FillBehavior = FoundationModule.Enums.FillBehavior
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
 
-local function mapErrorReasonToCopy(p1, p2)
-	-- upvalues: errorReasonModule (ref)
-	local var1 = ({
-		[errorReasonModule.GenericError] = { p2.GenericErrorTitle, p2.GenericErrorBody },
-		[errorReasonModule.AlreadySubscribed] = { p2.AlreadySubscribedTitle, p2.AlreadySubscribedBody },
-		[errorReasonModule.UnsupportedPlatform] = { p2.UnsupportedPlatformTitle, p2.UnsupportedPlatformBody }
-	})[p1]
+local function mapErrorReasonToCopy(UseSignalStateResult, p1) --[[ Line: 32 ]]
+	-- upvalues: ErrorReasonModule (copy)
+	local Entry = ({
+		[ErrorReasonModule.GenericError] = { p1.GenericErrorTitle, p1.GenericErrorBody },
+		[ErrorReasonModule.AlreadySubscribed] = { p1.AlreadySubscribedTitle, p1.AlreadySubscribedBody },
+		[ErrorReasonModule.UnsupportedPlatform] = { p1.UnsupportedPlatformTitle, p1.UnsupportedPlatformBody },
+		[ErrorReasonModule.ReferralIneligible] = { p1.GenericErrorTitle, p1.ReferralIneligibleBody },
+		[ErrorReasonModule.ReferralSelfReferral] = { p1.GenericErrorTitle, p1.ReferralSelfReferralBody }
+	})[UseSignalStateResult]
 	
-	return if var1 then { title = var1[1], body = var1[2] } else { title = p2.GenericErrorTitle, body = p2.GenericErrorBody }
+	return if Entry then { title = Entry[1], body = Entry[2] } else { title = p1.GenericErrorTitle, body = p1.GenericErrorBody }
 end
 
-return function()
-	-- upvalues: robloxSubscriptionStoreModule (ref), signalsReactModule (ref), useTokens (ref), useLocalization (ref), reactModule (ref), mapErrorReasonToCopy (ref), completeRobloxSubscriptionUpsellFlowModule (ref), sheet (ref), view (ref), text (ref), icon (ref), iconName (ref), button (ref), fillBehavior (ref), buttonVariant (ref)
-	local var1 = signalsReactModule.useSignalState(robloxSubscriptionStoreModule.get().getErrorReason)
-	local var2 = useTokens()
-	local var3 = useLocalization({
+return function() --[[ Line: 63 | Named "useErrorSheetSlots" ]]
+	-- upvalues: RobloxSubscriptionStoreModule (copy), SignalsReactModule (copy), UseTokensFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), mapErrorReasonToCopy (copy), CompleteRobloxSubscriptionUpsellFlowModule (copy), Sheet (copy), View (copy), Text (copy), Icon (copy), IconName (copy), Button (copy), FillBehavior (copy), ButtonVariant (copy)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(RobloxSubscriptionStoreModule.get().getErrorReason)
+	local UseTokensResult = UseTokensFunction()
+	local UseLocalizationResult = UseLocalizationFunction({
 		okButton = "Features.Transfers.Action.Ok",
 		GenericErrorTitle = "Feature.RobloxSubscription.Title.GenericError",
 		GenericErrorBody = "Feature.RobloxSubscription.Body.GenericError",
 		AlreadySubscribedTitle = "Feature.RobloxSubscription.Title.AlreadySubscribed",
 		AlreadySubscribedBody = "Feature.RobloxSubscription.Body.AlreadySubscribed",
 		UnsupportedPlatformTitle = "Feature.RobloxSubscription.Title.UnsupportedPlatform",
-		UnsupportedPlatformBody = "Feature.RobloxSubscription.Body.UnsupportedPlatform"
+		UnsupportedPlatformBody = "Feature.RobloxSubscription.Body.UnsupportedPlatform",
+		ReferralIneligibleBody = "Feature.RobloxSubscription.Description.NoLongerValidReferralGenericError",
+		ReferralSelfReferralBody = "Feature.RobloxSubscription.Message.AlreadySubscribed"
 	})
-	local var4 = reactModule.useMemo(function()
-		-- upvalues: mapErrorReasonToCopy (copy), var1 (ref), var3 (ref)
-		return mapErrorReasonToCopy(var1, var3)
-	end, { var1, var3 })
-	local var5 = reactModule.useCallback(function()
-		-- upvalues: completeRobloxSubscriptionUpsellFlowModule (copy)
-		completeRobloxSubscriptionUpsellFlowModule()
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 79 ]]
+		-- upvalues: mapErrorReasonToCopy (upval), UseSignalStateResult (copy), UseLocalizationResult (copy)
+		return (mapErrorReasonToCopy(UseSignalStateResult, UseLocalizationResult))
+	end, { UseSignalStateResult, UseLocalizationResult })
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 83 ]]
+		-- upvalues: CompleteRobloxSubscriptionUpsellFlowModule (upval)
+		CompleteRobloxSubscriptionUpsellFlowModule()
 	end, {})
 	
-	return reactModule.useMemo(function()
-		-- upvalues: reactModule (copy), sheet (copy), view (copy), text (copy), var4 (ref), icon (copy), iconName (copy), var2 (ref), button (copy), var3 (ref), var5 (ref), fillBehavior (copy), buttonVariant (copy)
+	return ReactModule.useMemo(function() --[[ Line: 87 ]]
+		-- upvalues: ReactModule (upval), Sheet (upval), View (upval), Text (upval), UseMemoResult (copy), Icon (upval), IconName (upval), UseTokensResult (copy), Button (upval), UseLocalizationResult (copy), UseResult (copy), FillBehavior (upval), ButtonVariant (upval)
 		return {
-			Header = reactModule.createElement(sheet.Header, { hasCloseAffordance = true }, {
-				TitleRow = reactModule.createElement(view, { LayoutOrder = 1, tag = "auto-xy gap-small row" }, {
-					Title = reactModule.createElement(text, {
+			Header = ReactModule.createElement(Sheet.Header, { hasCloseAffordance = true }, {
+				TitleRow = ReactModule.createElement(View, { LayoutOrder = 1, tag = "auto-xy gap-small row" }, {
+					Title = ReactModule.createElement(Text, {
 						tag = "auto-xy text-heading-small content-emphasis text-align-x-center",
-						Text = var4.title
+						Text = UseMemoResult.title
 					})
 				})
 			}),
-			Content = reactModule.createElement(sheet.Content, { LayoutOrder = 2 }, {
-				Body = reactModule.createElement(view, {
+			Content = ReactModule.createElement(Sheet.Content, { LayoutOrder = 2 }, {
+				Body = ReactModule.createElement(View, {
 					tag = "col size-full-0 auto-y align-x-center gap-medium padding-x-large"
 				}, {
-					CenterIcon = reactModule.createElement(icon, {
+					CenterIcon = ReactModule.createElement(Icon, {
 						LayoutOrder = 1,
-						name = iconName.TriangleExclamation,
-						size = var2.Size.Size_1200
+						name = IconName.TriangleExclamation,
+						size = UseTokensResult.Size.Size_1200
 					}),
-					BodyText = reactModule.createElement(text, {
+					BodyText = ReactModule.createElement(Text, {
 						LayoutOrder = 2,
 						tag = "size-full-0 auto-y text-body-medium content-default text-align-x-center text-wrap",
-						Text = var4.body
+						Text = UseMemoResult.body
 					})
 				})
 			}),
-			Actions = reactModule.createElement(sheet.Actions, { LayoutOrder = 3 }, {
-				reactModule.createElement(view, {
+			Actions = ReactModule.createElement(Sheet.Actions, { LayoutOrder = 3 }, {
+				ReactModule.createElement(View, {
 					LayoutOrder = 1,
 					tag = "row wrap auto-xy align-y-center align-x-center size-full-0 gap-medium"
 				}, {
-					reactModule.createElement(button, {
+					ReactModule.createElement(Button, {
 						LayoutOrder = 1,
-						text = var3.okButton,
-						onActivated = var5,
-						fillBehavior = fillBehavior.Fill,
-						variant = buttonVariant.Emphasis
+						text = UseLocalizationResult.okButton,
+						onActivated = UseResult,
+						fillBehavior = FillBehavior.Fill,
+						variant = ButtonVariant.Emphasis
 					})
 				})
 			})
 		}
-	end, { var4, var3.okButton, var5 })
+	end, { UseMemoResult, UseLocalizationResult.okButton, UseResult })
 end

@@ -1,50 +1,53 @@
-﻿local appStorageService = game:GetService("AppStorageService")
-local reactModule = require(script:FindFirstAncestor("AvatarExperienceControlBar").Parent.React)
-local var1 = false
+﻿local AppStorageService = game:GetService("AppStorageService")
+local ReactModule = require(script:FindFirstAncestor("AvatarExperienceControlBar").Parent.React)
+local Flag = false
 
-return function(p1, p2)
-	-- upvalues: reactModule (ref), var1 (write), appStorageService (ref)
-	local var2, var3 = reactModule.useState(nil)
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var3 (ref), var1 (copy), appStorageService (copy), p2 (ref)
+return function(p1, p2) --[[ Line: 10 | Named "useMeProfileEntryTooltip" ]]
+	-- upvalues: ReactModule (copy), Flag (ref), AppStorageService (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	ReactModule.useEffect(function() --[[ Line: 13 ]]
+		-- upvalues: p1 (copy), UseStateResult2 (copy), Flag (upval), AppStorageService (upval), p2 (copy)
 		if not p1 then
-			var3(nil)
-			
-			return
-		elseif var1 then
-			var3(nil)
+			UseStateResult2(nil)
 			
 			return
 		end
-		local ok, status = pcall(function()
-			-- upvalues: appStorageService (copy)
-			return appStorageService:GetItem("MeProfileEntryTooltipShown")
-		end)
-		var3(if ok and status == "1" then nil else p2)
+		if Flag then
+			UseStateResult2(nil)
+			
+			return
+		else
+			local Success, Result = pcall(function() --[[ Line: 22 ]]
+				-- upvalues: AppStorageService (upval)
+				return AppStorageService:GetItem("MeProfileEntryTooltipShown")
+			end)
+			UseStateResult2(if Success and Result == "1" then nil else p2)
+		end
 	end, { p1, p2 })
-	local var4 = reactModule.useCallback(function()
-		-- upvalues: var1 (copy), appStorageService (copy)
-		if var1 then
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 28 ]]
+		-- upvalues: Flag (upval), AppStorageService (upval)
+		if not Flag then
+			Flag = true
+			pcall(function() --[[ Line: 34 ]]
+				-- upvalues: AppStorageService (upval)
+				AppStorageService:SetItem("MeProfileEntryTooltipShown", "1")
+				AppStorageService:Flush()
+			end)
+			
 			return
 		end
-		var1 = true
-		pcall(function()
-			-- upvalues: appStorageService (copy)
-			appStorageService:SetItem("MeProfileEntryTooltipShown", "1")
-			appStorageService:Flush()
-		end)
 	end, {})
-	local var5 = p1 and (p2 ~= nil and var2 == p2)
+	local IsUseStateResultMatch: boolean = p1 and (p2 ~= nil and UseStateResult == p2)
 	
 	return {
-		showTooltip = var5,
-		onShown = var4,
-		dismiss = reactModule.useCallback(function()
-			-- upvalues: var5 (ref), var4 (ref), var3 (ref)
-			if var5 then
-				var4()
+		showTooltip = IsUseStateResultMatch,
+		onShown = UseResult,
+		dismiss = ReactModule.useCallback(function() --[[ Line: 41 ]]
+			-- upvalues: IsUseStateResultMatch (copy), UseResult (copy), UseStateResult2 (copy)
+			if IsUseStateResultMatch then
+				UseResult()
 			end
-			var3(nil)
-		end, { var5, var4 })
+			UseStateResult2(nil)
+		end, { IsUseStateResultMatch, UseResult })
 	}
 end

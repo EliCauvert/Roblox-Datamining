@@ -1,7 +1,10 @@
-﻿return function(p1)
+﻿return function(p1): string --[[ Line: 1 ]]
 	if p1 then
-		local title = p1.title or p1.titleForViewer
+		local Title = p1.title or p1.titleForViewer
 		
-		return if title then string.gsub(tostring(title), "\n", "") else ""
+		if Title then
+			return string.gsub(tostring(Title), "\n", "")
+		end
 	end
+	return ""
 end

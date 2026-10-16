@@ -1,28 +1,33 @@
-﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
-local parent = momentsCreation.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local dialog = foundationModule.Dialog
-local useCreationFlowStringsModule = require(momentsCreation.Hooks.useCreationFlowStrings)
+﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
+local Parent = MomentsCreation.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local Dialog = FoundationModule.Dialog
+local UseCreationFlowStringsModule = require(MomentsCreation.Hooks.useCreationFlowStrings)
 
-return function(p1)
-	-- upvalues: useCreationFlowStringsModule (ref), reactModule (ref), dialog (ref), foundationModule (ref)
-	local var1 = useCreationFlowStringsModule()
+return function(p1) --[[ Line: 18 ]]
+	-- upvalues: UseCreationFlowStringsModule (copy), ReactModule (copy), Dialog (copy), FoundationModule (copy)
+	local UseCreationFlowStringsModuleResult = UseCreationFlowStringsModule()
 	
-	return reactModule.createElement(dialog.Root, {
+	return ReactModule.createElement(Dialog.Root, {
 		hasBackdrop = true,
-		size = foundationModule.Enums.DialogSize.Medium
+		size = FoundationModule.Enums.DialogSize.Medium
 	}, {
-		DialogTitle = reactModule.createElement(dialog.Title, { LayoutOrder = 1, text = var1.StayFriendlyModeration }),
-		DialogContent = reactModule.createElement(dialog.Content, { LayoutOrder = 2 }, {
-			DialogText = reactModule.createElement(dialog.Text, { Text = var1.CommunityStandardsText })
+		DialogTitle = ReactModule.createElement(Dialog.Title, {
+			LayoutOrder = 1,
+			text = UseCreationFlowStringsModuleResult.StayFriendlyModeration
 		}),
-		DialogActions = reactModule.createElement(dialog.Actions, {
+		DialogContent = ReactModule.createElement(Dialog.Content, { LayoutOrder = 2 }, {
+			DialogText = ReactModule.createElement(Dialog.Text, {
+				Text = UseCreationFlowStringsModuleResult.CommunityStandardsText
+			})
+		}),
+		DialogActions = ReactModule.createElement(Dialog.Actions, {
 			LayoutOrder = 3,
 			actions = {
 				{
-					text = var1.GeneralCtaOk,
-					variant = foundationModule.Enums.ButtonVariant.Emphasis,
+					text = UseCreationFlowStringsModuleResult.GeneralCtaOk,
+					variant = FoundationModule.Enums.ButtonVariant.Emphasis,
 					onActivated = p1.onConfirm
 				}
 			}

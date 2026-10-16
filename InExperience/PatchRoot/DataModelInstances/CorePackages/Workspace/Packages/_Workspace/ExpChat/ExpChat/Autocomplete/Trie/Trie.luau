@@ -1,57 +1,56 @@
-﻿local list = require(script:FindFirstAncestor("ExpChat").Parent.llama).List
-local trieNodeModule = require(script:FindFirstAncestor("Autocomplete").Trie.TrieNode)
-local t = {}
-t.__index = t
+﻿local List = require(script:FindFirstAncestor("ExpChat").Parent.llama).List
+local TrieNodeModule = require(script:FindFirstAncestor("Autocomplete").Trie.TrieNode)
+local TrieModule = {}
+TrieModule.__index = TrieModule
 
-function t.new()
-	-- upvalues: t (ref), trieNodeModule (ref)
-	local t_1 = {}
-	setmetatable(t_1, t)
-	t_1.root = trieNodeModule.new("")
-	
-	return t_1
-end
-
-function t:insert(p1)
-	-- upvalues: trieNodeModule (ref)
-	local root = self.root
-	
-	for i = 1, #p1 do
-		local substring = string.sub(p1, i, i)
-		
-		if not root.children[substring] then
-			root.children[substring] = trieNodeModule.new(substring)
-		end
-		root = root.children[substring]
-	end
-	root.isEndOfWord = true
-end
-
-function t:autocomplete(p2)
-	local substring
+function TrieModule.new() --[[ Line: 11 ]]
+	-- upvalues: TrieModule (copy), TrieNodeModule (copy)
 	local t = {}
-	local root = self.root
+	setmetatable(t, TrieModule)
+	t.root = TrieNodeModule.new("")
 	
-	for i = 1, #p2 do
-		substring = string.sub(p2, i, i)
+	return t
+end
+
+function TrieModule:insert(Text: string) --[[ Line: 18 ]]
+	-- upvalues: TrieNodeModule (copy)
+	local Root = self.root
+	
+	for i = 1, #Text do
+		local Segment = string.sub(Text, i, i)
 		
-		if not root.children[substring] then
-			return t
+		if not Root.children[Segment] then
+			Root.children[Segment] = TrieNodeModule.new(Segment)
 		end
-		root = root.children[substring]
+		Root = Root.children[Segment]
 	end
-	return self:helper(root, t, string.sub(p2, 1, #p2 - 1))
+	Root.isEndOfWord = true
 end
 
-function t:helper(p3, p4, p5)
-	-- upvalues: list (ref)
-	if p3.isEndOfWord then
-		p4 = list.push(p4, p5 .. p2.data)
+function TrieModule:autocomplete(Text: string) --[[ Line: 30 ]]
+	local HelperResult = {}
+	local Root = self.root
+	
+	for i = 1, #Text do
+		local Segment = string.sub(Text, i, i)
+		
+		if not Root.children[Segment] then
+			return HelperResult
+		end
+		Root = Root.children[Segment]
 	end
-	for i, v in pairs(p3.children) do
-		p4 = self:helper(v, p4, p5 .. p2.data)
-	end
-	return p4
+	return (self:helper(Root, HelperResult, (string.sub(Text, 1, #Text - 1))))
 end
 
-return t
+function TrieModule:helper(Root, HelperResult, Text) --[[ Line: 45 ]]
+	-- upvalues: List (copy)
+	if Root.isEndOfWord then
+		HelperResult = List.push(HelperResult, Text .. Root.data)
+	end
+	for _, child in pairs(Root.children) do
+		HelperResult = self:helper(child, HelperResult, Text .. Root.data)
+	end
+	return HelperResult
+end
+
+return TrieModule

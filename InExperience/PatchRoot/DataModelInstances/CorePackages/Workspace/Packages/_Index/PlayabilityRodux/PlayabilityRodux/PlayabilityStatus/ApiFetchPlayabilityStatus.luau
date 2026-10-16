@@ -1,68 +1,68 @@
-﻿local playabilityRodux = script:FindFirstAncestor("PlayabilityRodux")
-local parent = playabilityRodux.Parent
-local promiseModule = require(parent.Promise)
-local resultModule = require(parent.Result)
-local performFetch = require(parent.Http).PerformFetch
-local gamesMultigetPlayabilityStatusModule = require(playabilityRodux.PlayabilityStatus.GamesMultigetPlayabilityStatus)
-local setPlayabilityStatusModule = require(playabilityRodux.PlayabilityStatus.SetPlayabilityStatus)
-local playabilityStatusModelModule = require(playabilityRodux.PlayabilityStatus.PlayabilityStatusModel)
-local loggerModule = require(playabilityRodux.Logger)
+﻿local PlayabilityRodux = script:FindFirstAncestor("PlayabilityRodux")
+local Parent = PlayabilityRodux.Parent
+local PromiseModule = require(Parent.Promise)
+local ResultModule = require(Parent.Result)
+local PerformFetch = require(Parent.Http).PerformFetch
+local GamesMultigetPlayabilityStatusModule = require(PlayabilityRodux.PlayabilityStatus.GamesMultigetPlayabilityStatus)
+local SetPlayabilityStatusModule = require(PlayabilityRodux.PlayabilityStatus.SetPlayabilityStatus)
+local PlayabilityStatusModelModule = require(PlayabilityRodux.PlayabilityStatus.PlayabilityStatusModel)
+local LoggerModule = require(PlayabilityRodux.Logger)
 
-local function keyMapper(p1)
-	return "luaapp.gamesapi.playabilitystatus." .. p0
+local function keyMapper(Text): string --[[ Line: 15 ]]
+	return "luaapp.gamesapi.playabilitystatus." .. Text
 end
 
 return {
 	KeyMapper = keyMapper,
-	Fetch = function(p1, p2)
-		-- upvalues: performFetch (ref), keyMapper (ref), gamesMultigetPlayabilityStatusModule (ref), resultModule (ref), playabilityStatusModelModule (ref), setPlayabilityStatusModule (ref), loggerModule (ref), promiseModule (ref)
+	Fetch = function(p1, p2) --[[ Line: 23 ]]
+		-- upvalues: PerformFetch (copy), keyMapper (copy), GamesMultigetPlayabilityStatusModule (copy), ResultModule (copy), PlayabilityStatusModelModule (copy), SetPlayabilityStatusModule (copy), LoggerModule (copy), PromiseModule (copy)
 		assert(type(p2) == "table", "ApiFetchPlayabilityStatus thunk expects universeIds to be a table")
 		assert(#p2 > 0, "ApiFetchPlayabilityStatus thunk expects universeIds count to be greater than 0")
 		assert(#p2 <= 100, "ApiFetchPlayabilityStatus thunk expects universeIds count to not exceed " .. 100)
 		
-		return performFetch.Batch(p2, keyMapper, function(p3, p4)
-			-- upvalues: gamesMultigetPlayabilityStatusModule (copy), p1 (ref), resultModule (copy), playabilityStatusModelModule (copy), setPlayabilityStatusModule (copy), loggerModule (copy), promiseModule (copy)
-			return gamesMultigetPlayabilityStatusModule(p1, p4):andThen(function(p5)
-				-- upvalues: p4 (ref), resultModule (copy), playabilityStatusModelModule (copy), p3 (ref), setPlayabilityStatusModule (copy), loggerModule (copy), promiseModule (copy)
-				local t = {}
+		return PerformFetch.Batch(p2, keyMapper, function(p3, p4) --[[ Line: 31 ]]
+			-- upvalues: GamesMultigetPlayabilityStatusModule (upval), p1 (copy), ResultModule (upval), PlayabilityStatusModelModule (upval), SetPlayabilityStatusModule (upval), LoggerModule (upval), PromiseModule (upval)
+			return GamesMultigetPlayabilityStatusModule(p1, p4):andThen(function(Result) --[[ Line: 32 ]]
+				-- upvalues: p4 (copy), ResultModule (upval), PlayabilityStatusModelModule (upval), p3 (copy), SetPlayabilityStatusModule (upval), LoggerModule (upval), PromiseModule (upval)
+				local NewResults = {}
 				
-				for i, v in ipairs(p4) do
-					t["luaapp.gamesapi.playabilitystatus." .. v] = resultModule.new(false, nil)
+				for _, value in ipairs(p4) do
+					NewResults["luaapp.gamesapi.playabilitystatus." .. value] = ResultModule.new(false, nil)
 				end
-				local responseBody = p5 and p5.responseBody
+				local ResponseBody = Result and Result.responseBody
 				
-				if responseBody == nil then
-					loggerModule:warning("Response from GameGetVotes is malformed!")
+				if ResponseBody == nil then
+					LoggerModule:warning("Response from GameGetVotes is malformed!")
 				else
-					local t_1 = {}
+					local t = {}
 					
-					for i_1, v_1 in pairs(responseBody) do
-						playabilityStatusModelModule.fromJsonData(v_1):match(function(p6)
-							-- upvalues: t_1 (ref), t (ref), v_1 (ref), resultModule (copy)
-							t_1[p6.universeId] = p6
-							t["luaapp.gamesapi.playabilitystatus." .. tostring(v_1.universeId)] = resultModule.new(true, nil)
-						end):matchError(function(p6)
-							warn(p6)
+					for _, value1 in pairs(ResponseBody) do
+						PlayabilityStatusModelModule.fromJsonData(value1):match(function(p5) --[[ Line: 45 ]]
+							-- upvalues: t (copy), NewResults (copy), value1 (copy), ResultModule (upval)
+							t[p5.universeId] = p5
+							NewResults["luaapp.gamesapi.playabilitystatus." .. tostring(value1.universeId)] = ResultModule.new(true, nil)
+						end):matchError(function(p5) --[[ Line: 49 ]]
+							warn(p5)
 						end)
 					end
-					if next(t_1) then
-						p3:dispatch(setPlayabilityStatusModule(t_1))
+					if next(t) then
+						p3:dispatch(SetPlayabilityStatusModule(t))
 					end
 				end
-				return promiseModule.resolve(t)
-			end, function(_)
-				-- upvalues: p4 (ref), resultModule (copy), promiseModule (copy)
-				local t = {}
+				return PromiseModule.resolve(NewResults)
+			end, function(_) --[[ Line: 62 ]]
+				-- upvalues: p4 (copy), ResultModule (upval), PromiseModule (upval)
+				local NewResults = {}
 				
-				for i, v in ipairs(p4) do
-					t["luaapp.gamesapi.playabilitystatus." .. v] = resultModule.new(false, nil)
+				for _, value in ipairs(p4) do
+					NewResults["luaapp.gamesapi.playabilitystatus." .. value] = ResultModule.new(false, nil)
 				end
-				return promiseModule.resolve(t)
+				return PromiseModule.resolve(NewResults)
 			end)
 		end)
 	end,
-	GetFetchingStatus = function(p6, p7)
-		-- upvalues: performFetch (ref)
-		return performFetch.GetStatus(p6, "luaapp.gamesapi.playabilitystatus." .. p9)
+	GetFetchingStatus = function(p5, Text) --[[ Line: 72 ]]
+		-- upvalues: PerformFetch (copy)
+		return PerformFetch.GetStatus(p5, "luaapp.gamesapi.playabilitystatus." .. Text)
 	end
 }

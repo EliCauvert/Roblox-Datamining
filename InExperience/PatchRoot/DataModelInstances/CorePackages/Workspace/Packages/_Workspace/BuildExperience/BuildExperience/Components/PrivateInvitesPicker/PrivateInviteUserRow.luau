@@ -1,17 +1,16 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local useUserProfileInfoModule = require(buildExperience.Components.UserPicker.useUserProfileInfo)
-local text = foundationModule.Text
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local ReactModule = require(Parent.React)
+local UseUserProfileInfoModule = require(BuildExperience.Components.UserPicker.useUserProfileInfo)
+local Text = require(Parent.Foundation).Text
 
-return function(p1)
-	-- upvalues: useUserProfileInfoModule (ref), reactModule (ref), text (ref)
-	local var1 = useUserProfileInfoModule(p1.userId)
+return function(p1) --[[ Line: 20 | Named "PrivateInviteUserRow" ]]
+	-- upvalues: UseUserProfileInfoModule (copy), ReactModule (copy), Text (copy)
+	local UseUserProfileInfoModuleResult = UseUserProfileInfoModule(p1.userId)
 	
-	return reactModule.createElement(text, {
+	return ReactModule.createElement(Text, {
 		tag = "size-full-0 auto-y text-body-medium text-align-x-left content-default",
 		LayoutOrder = p1.layoutOrder,
-		Text = if var1.displayName ~= "" then p1.unknownText else var1.displayName
+		Text = if UseUserProfileInfoModuleResult.displayName == "" then p1.unknownText else UseUserProfileInfoModuleResult.displayName
 	})
 end

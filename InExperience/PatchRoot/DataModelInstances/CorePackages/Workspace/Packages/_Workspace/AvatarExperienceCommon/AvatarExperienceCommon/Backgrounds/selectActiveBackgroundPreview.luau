@@ -1,6 +1,6 @@
-﻿return function(value)
-	local var1 = value and value.AvatarExperience
-	local outfitTryOn = var1 and (var1.AvatarScene and var1.AvatarScene.OutfitTryOn)
+﻿return function(p1) --[[ Line: 3 | Named "selectActiveBackgroundPreview" ]]
+	local AvatarExperience = p1 and p1.AvatarExperience or p1
+	local OutfitTryOn = AvatarExperience and (AvatarExperience.AvatarScene and AvatarExperience.AvatarScene.OutfitTryOn)
 	
-	return if outfitTryOn then outfitTryOn.BackgroundPreview else nil
+	return if OutfitTryOn then OutfitTryOn.BackgroundPreview else nil
 end

@@ -1,35 +1,35 @@
-﻿local parent = script:FindFirstAncestor("WhatsNew").Parent
-local foundationModule = require(parent.Foundation)
-local localization = require(parent.InExperienceLocales).Localization
-local localizationProvider = require(parent.Localization).LocalizationProvider
-local reactModule = require(parent.React)
-local reactRobloxModule = require(parent.ReactRoblox)
-local ensureWhatsNewStoreInitializedModule = require(script.Parent.store.ensureWhatsNewStoreInitialized)
+﻿local Parent = script:FindFirstAncestor("WhatsNew").Parent
+local FoundationModule = require(Parent.Foundation)
+local Localization = require(Parent.InExperienceLocales).Localization
+local LocalizationProvider = require(Parent.Localization).LocalizationProvider
+local ReactModule = require(Parent.React)
+local ReactRobloxModule = require(Parent.ReactRoblox)
+local EnsureWhatsNewStoreInitializedModule = require(script.Parent.store.ensureWhatsNewStoreInitialized)
 local _ = require(script.Parent.registry.ScopeActions)
-local whatsNewScreenHostModule = require(script.Parent.components.WhatsNewScreenHost)
-local localizationService = game:GetService("LocalizationService")
-local inGameWhatsNew = Instance.new("ScreenGui")
-inGameWhatsNew.Name = "InGameWhatsNew"
-inGameWhatsNew.DisplayOrder = 16
-inGameWhatsNew.IgnoreGuiInset = true
-inGameWhatsNew.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-inGameWhatsNew.ResetOnSpawn = false
-inGameWhatsNew.Parent = game:GetService("CoreGui")
-local var1 = nil
+local WhatsNewScreenHostModule = require(script.Parent.components.WhatsNewScreenHost)
+local LocalizationService = game:GetService("LocalizationService")
+local InGameWhatsNew = Instance.new("ScreenGui")
+InGameWhatsNew.Name = "InGameWhatsNew"
+InGameWhatsNew.DisplayOrder = 16
+InGameWhatsNew.IgnoreGuiInset = true
+InGameWhatsNew.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+InGameWhatsNew.ResetOnSpawn = false
+InGameWhatsNew.Parent = game:GetService("CoreGui")
+local v1 = nil
 
 return {
-	createInGameWhatsNewHost = function(p1)
-		-- upvalues: var1 (write), ensureWhatsNewStoreInitializedModule (ref), reactModule (ref), foundationModule (ref), localizationProvider (ref), localization (ref), localizationService (ref), inGameWhatsNew (ref), whatsNewScreenHostModule (ref), reactRobloxModule (ref)
-		if var1 ~= nil then
-			return var1
+	createInGameWhatsNewHost = function(p1) --[[ Line: 36 ]]
+		-- upvalues: v1 (ref), EnsureWhatsNewStoreInitializedModule (copy), ReactModule (copy), FoundationModule (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), InGameWhatsNew (copy), WhatsNewScreenHostModule (copy), ReactRobloxModule (copy)
+		if v1 ~= nil then
+			return v1
 		end
-		ensureWhatsNewStoreInitializedModule.ensureWhatsNewStoreInitialized({ scopeActions = p1.scopeActions })
-		local var2 = reactModule.createElement(foundationModule.FoundationProvider, { colorMode = foundationModule.Enums.ColorMode.Dark }, {
-			LocalizationProvider = reactModule.createElement(localizationProvider, {
-				localization = localization.new(localizationService.RobloxLocaleId)
+		EnsureWhatsNewStoreInitializedModule.ensureWhatsNewStoreInitialized({ scopeActions = p1.scopeActions })
+		local Element = ReactModule.createElement(FoundationModule.FoundationProvider, { colorMode = FoundationModule.Enums.ColorMode.Dark }, {
+			LocalizationProvider = ReactModule.createElement(LocalizationProvider, {
+				localization = Localization.new(LocalizationService.RobloxLocaleId)
 			}, {
-				Overlay = reactModule.createElement(foundationModule.OverlayProvider, { gui = inGameWhatsNew }, {
-					Host = reactModule.createElement(whatsNewScreenHostModule, {
+				Overlay = ReactModule.createElement(FoundationModule.OverlayProvider, { gui = InGameWhatsNew }, {
+					Host = ReactModule.createElement(WhatsNewScreenHostModule, {
 						screenScopeId = "InGame",
 						isEnabled = true,
 						scopeActions = p1.scopeActions
@@ -37,21 +37,21 @@ return {
 				})
 			})
 		})
-		local var3 = reactRobloxModule.createRoot(inGameWhatsNew)
-		local ok, status = pcall(function()
-			-- upvalues: var3 (ref), var2 (ref)
-			var3:render(var2)
+		local Root = ReactRobloxModule.createRoot(InGameWhatsNew)
+		local Success, Result = pcall(function() --[[ Line: 65 ]]
+			-- upvalues: Root (copy), Element (copy)
+			Root:render(Element)
 		end)
 		
-		if not ok then
-			warn(`WhatsNew createInGameWhatsNewHost render failed: {status}`)
+		if not Success then
+			warn(`WhatsNew createInGameWhatsNewHost render failed: {Result}`)
 		end
-		var1 = var3
+		v1 = Root
 		
-		return var3
+		return Root
 	end,
-	resetForTests = function()
-		-- upvalues: var1 (write)
-		var1 = nil
+	resetForTests = function() --[[ Line: 77 ]]
+		-- upvalues: v1 (ref)
+		v1 = nil
 	end
 }

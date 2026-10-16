@@ -1,34 +1,34 @@
-﻿local bulkPurchaseApp = script:FindFirstAncestor("BulkPurchaseApp")
-local parent = bulkPurchaseApp.Parent
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useDesignTokens = require(parent.Style).useDesignTokens
-local UIBloxModule = require(parent.UIBlox)
-local styledTextLabel = UIBloxModule.App.Text.StyledTextLabel
-local button = UIBloxModule.App.Button.Button
-local buttonType = UIBloxModule.App.Button.Enum.ButtonType
-local fullPagePromptModule = require(bulkPurchaseApp.Components.FullPagePrompt)
-local fullPagePromptTwoPanelLayoutModule = require(bulkPurchaseApp.Components.FullPagePromptTwoPanelLayout)
-local dividerModule = require(bulkPurchaseApp.Components.Divider)
-local itemListHeaderModule = require(bulkPurchaseApp.Components.ItemListHeader)
-local fullPagePromptScrollListModule = require(bulkPurchaseApp.Components.FullPagePromptScrollList)
-local boxModule = require(bulkPurchaseApp.Components.Box)
-local priceBoxLineDEPRECATEDModule = require(bulkPurchaseApp.Components.PriceBoxLine_DEPRECATED)
-local _ = require(parent.Style)
-local itemCardThumbnail = require(parent.AvatarExperienceUIKit).ItemCardComponents.ItemCardThumbnail
-local itemListModule = require(bulkPurchaseApp.Components.ItemList)
-local _ = require(parent.AvatarExperienceCommon)
-local itemStatusToItemStatusKeyModule = require(bulkPurchaseApp.Enums.ItemStatusToItemStatusKey)
-local itemStatusKeyToLocalizationKeyModule = require(bulkPurchaseApp.Enums.ItemStatusKeyToLocalizationKey)
+﻿local BulkPurchaseApp = script:FindFirstAncestor("BulkPurchaseApp")
+local Parent = BulkPurchaseApp.Parent
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseDesignTokensFunction = require(Parent.Style).useDesignTokens
+local UIBloxModule = require(Parent.UIBlox)
+local StyledTextLabel = UIBloxModule.App.Text.StyledTextLabel
+local Button = UIBloxModule.App.Button.Button
+local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
+local FullPagePromptModule = require(BulkPurchaseApp.Components.FullPagePrompt)
+local FullPagePromptTwoPanelLayoutModule = require(BulkPurchaseApp.Components.FullPagePromptTwoPanelLayout)
+local DividerModule = require(BulkPurchaseApp.Components.Divider)
+local ItemListHeaderModule = require(BulkPurchaseApp.Components.ItemListHeader)
+local FullPagePromptScrollListModule = require(BulkPurchaseApp.Components.FullPagePromptScrollList)
+local BoxModule = require(BulkPurchaseApp.Components.Box)
+local PriceBoxLineDEPRECATEDModule = require(BulkPurchaseApp.Components.PriceBoxLine_DEPRECATED)
+local _ = require(Parent.Style)
+local ItemCardThumbnail = require(Parent.AvatarExperienceUIKit).ItemCardComponents.ItemCardThumbnail
+local ItemListModule = require(BulkPurchaseApp.Components.ItemList)
+local _ = require(Parent.AvatarExperienceCommon)
+local ItemStatusToItemStatusKeyModule = require(BulkPurchaseApp.Enums.ItemStatusToItemStatusKey)
+local ItemStatusKeyToLocalizationKeyModule = require(BulkPurchaseApp.Enums.ItemStatusKeyToLocalizationKey)
 
-local function _(p1, p2)
-	local cloned = table.clone(p1)
-	cloned.id = p2
+local function _(Tbl, Id) --[[ Line: 32 | Named "toCardPropsWithId" ]]
+	local Copy = table.clone(Tbl)
+	Copy.id = Id
 	
-	return cloned
+	return Copy
 end
 
-local t = {
+local config = {
 	heading = "CoreScripts.BulkPurchasePrompt.PartialPurchaseCompletedPrompt.Heading",
 	unsuccessfulHeading = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorHeading",
 	notice = "CoreScripts.BulkPurchasePrompt.PartialPurchaseCompletedPrompt.Notice",
@@ -41,7 +41,7 @@ local t = {
 	dismissCTA = "CoreScripts.BulkPurchasePrompt.PartialPurchaseCompletedPrompt.PriceBox.DismissCTA"
 }
 
-local function mapTokens(p1)
+local function mapTokens(p1) --[[ Line: 58 ]]
 	return {
 		boxBackground = p1.Color.Surface.Surface_100.Color3,
 		boxPadding = p1.Size.Size_600,
@@ -57,122 +57,122 @@ local function mapTokens(p1)
 	}
 end
 
-local function mapBulkPurchasePartialSuccessItemsToRowPresentation(p1, p2, p3, p4)
-	-- upvalues: itemStatusToItemStatusKeyModule (ref), reactModule (ref), itemCardThumbnail (ref)
-	local t = {}
+local function mapBulkPurchasePartialSuccessItemsToRowPresentation(SuccessfulItems, p1, SuccessColor, FailureColor) --[[ Line: 74 ]]
+	-- upvalues: ItemStatusToItemStatusKeyModule (copy), ReactModule (copy), ItemCardThumbnail (copy)
+	local List = {}
 	
-	for i, v in p1 do
-		local cloned = table.clone({
-			presentationSlot = reactModule.createElement(itemCardThumbnail, { url = v.image }),
-			title = v.name,
+	for _, successfulItem in SuccessfulItems do
+		local Copy = table.clone({
+			presentationSlot = ReactModule.createElement(ItemCardThumbnail, { url = successfulItem.image }),
+			title = successfulItem.name,
 			priceLineContent = {
 				{
 					type = "text",
-					text = p2[itemStatusToItemStatusKeyModule[v.status]],
-					colorStyle = if v.status == Enum.MarketplaceItemPurchaseStatus.Success then p3 else p4
+					text = p1[ItemStatusToItemStatusKeyModule[successfulItem.status]],
+					colorStyle = if successfulItem.status == Enum.MarketplaceItemPurchaseStatus.Success then SuccessColor else FailureColor
 				}
 			}
 		})
-		cloned.id = v.id
-		table.insert(t, cloned)
+		Copy.id = successfulItem.id
+		table.insert(List, Copy)
 	end
-	return t
+	return List
 end
 
-return function(p5)
-	-- upvalues: useDesignTokens (ref), mapTokens (ref), useLocalization (ref), t (ref), itemStatusKeyToLocalizationKeyModule (ref), reactModule (ref), fullPagePromptModule (ref), styledTextLabel (ref), fullPagePromptTwoPanelLayoutModule (ref), fullPagePromptScrollListModule (ref), itemListHeaderModule (ref), itemListModule (ref), mapBulkPurchasePartialSuccessItemsToRowPresentation (ref), dividerModule (ref), boxModule (ref), priceBoxLineDEPRECATEDModule (ref), button (ref), buttonType (ref)
-	local var1 = useDesignTokens(mapTokens)
-	local var2 = useLocalization(t)
-	local var3 = useLocalization(itemStatusKeyToLocalizationKeyModule)
-	local var4, var5 = reactModule.useBinding(Vector2.new(0, 0))
-	local var6 = #p5.successfulItems > 0
+return function(p2) --[[ Line: 111 | Named "BulkPurchasePartialSuccess" ]]
+	-- upvalues: UseDesignTokensFunction (copy), mapTokens (copy), UseLocalizationFunction (copy), config (copy), ItemStatusKeyToLocalizationKeyModule (copy), ReactModule (copy), FullPagePromptModule (copy), StyledTextLabel (copy), FullPagePromptTwoPanelLayoutModule (copy), FullPagePromptScrollListModule (copy), ItemListHeaderModule (copy), ItemListModule (copy), mapBulkPurchasePartialSuccessItemsToRowPresentation (copy), DividerModule (copy), BoxModule (copy), PriceBoxLineDEPRECATEDModule (copy), Button (copy), ButtonType (copy)
+	local UseDesignTokensResult = UseDesignTokensFunction(mapTokens)
+	local UseLocalizationResult = UseLocalizationFunction(config)
+	local UseLocalizationResult1 = UseLocalizationFunction(ItemStatusKeyToLocalizationKeyModule)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(Vector2.new(0, 0))
+	local v1 = #p2.successfulItems > 0
 	
-	return reactModule.createElement(fullPagePromptModule, {
-		onClose = p5.onDismiss,
-		title = if var6 then var2.heading else var2.unsuccessfulHeading
-	}, reactModule.createElement("UIListLayout", {
+	return ReactModule.createElement(FullPagePromptModule, {
+		onClose = p2.onDismiss,
+		title = if v1 then UseLocalizationResult.heading else UseLocalizationResult.unsuccessfulHeading
+	}, ReactModule.createElement("UIListLayout", {
 		SortOrder = Enum.SortOrder.LayoutOrder,
 		HorizontalAlignment = Enum.HorizontalAlignment.Left,
 		VerticalAlignment = Enum.VerticalAlignment.Top,
-		Padding = UDim.new(0, var1.noticeMarginBottom)
-	}), reactModule.createElement("Frame", {
+		Padding = UDim.new(0, UseDesignTokensResult.noticeMarginBottom)
+	}), ReactModule.createElement("Frame", {
 		Size = UDim2.fromScale(1, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
-		[reactModule.Change.AbsoluteSize] = function(p6)
-			-- upvalues: var5 (ref)
-			var5(p6.AbsoluteSize)
+		[ReactModule.Change.AbsoluteSize] = function(Frame) --[[ Line: 137 ]]
+			-- upvalues: UseBindingResult2 (copy)
+			UseBindingResult2(Frame.AbsoluteSize)
 		end
-	}, reactModule.createElement(styledTextLabel, {
+	}, ReactModule.createElement(StyledTextLabel, {
 		layoutOrder = 1,
-		fontStyle = var1.noticeFontStyle,
-		colorStyle = var1.noticeColorStyle,
-		text = var2.notice,
+		fontStyle = UseDesignTokensResult.noticeFontStyle,
+		colorStyle = UseDesignTokensResult.noticeColorStyle,
+		text = UseLocalizationResult.notice,
 		automaticSize = Enum.AutomaticSize.XY
-	})), reactModule.createElement(fullPagePromptTwoPanelLayoutModule, {
+	})), ReactModule.createElement(FullPagePromptTwoPanelLayoutModule, {
 		LayoutOrder = 2,
-		size = var4:map(function(p6)
-			-- upvalues: var1 (ref)
-			return UDim2.new(1, 0, 1, -(p6.Y + var1.noticeMarginBottom))
+		size = UseBindingResult:map(function(p3): UDim2 --[[ Line: 151 ]]
+			-- upvalues: UseDesignTokensResult (copy)
+			return UDim2.new(1, 0, 1, -(p3.Y + UseDesignTokensResult.noticeMarginBottom))
 		end),
-		startSlot = reactModule.createElement(fullPagePromptScrollListModule, {
+		startSlot = ReactModule.createElement(FullPagePromptScrollListModule, {
 			LayoutOrder = 1,
-			size = reactModule.createBinding(UDim2.fromScale(1, 1))
-		}, reactModule.createElement(itemListHeaderModule, {
+			size = ReactModule.createBinding(UDim2.fromScale(1, 1))
+		}, ReactModule.createElement(ItemListHeaderModule, {
 			LayoutOrder = 1,
-			heading = var2.itemListUnsuccessfulHeading,
-			itemCount = var2.itemListUnsuccessfulCount:gsub("{.*}", tostring(#p5.unsuccessfulItems))
-		}), reactModule.createElement(itemListModule, {
+			heading = UseLocalizationResult.itemListUnsuccessfulHeading,
+			itemCount = UseLocalizationResult.itemListUnsuccessfulCount:gsub("{.*}", (tostring(#p2.unsuccessfulItems)))
+		}), ReactModule.createElement(ItemListModule, {
 			LayoutOrder = 2,
-			items = mapBulkPurchasePartialSuccessItemsToRowPresentation(p5.unsuccessfulItems, var3, var1.successColor, var1.failureColor)
-		}), if var6 then reactModule.createElement(dividerModule, { LayoutOrder = 3 }) else nil, if var6 then reactModule.createElement(itemListHeaderModule, {
+			items = mapBulkPurchasePartialSuccessItemsToRowPresentation(p2.unsuccessfulItems, UseLocalizationResult1, UseDesignTokensResult.successColor, UseDesignTokensResult.failureColor)
+		}), if v1 then ReactModule.createElement(DividerModule, { LayoutOrder = 3 }) else nil, if v1 then ReactModule.createElement(ItemListHeaderModule, {
 			LayoutOrder = 4,
-			heading = var2.itemListSuccessfulHeading,
-			itemCount = var2.itemListSuccessfulCount:gsub("{.*}", tostring(#p5.successfulItems))
-		}) else nil, if var6 then reactModule.createElement(itemListModule, {
+			heading = UseLocalizationResult.itemListSuccessfulHeading,
+			itemCount = UseLocalizationResult.itemListSuccessfulCount:gsub("{.*}", (tostring(#p2.successfulItems)))
+		}) else nil, if v1 then ReactModule.createElement(ItemListModule, {
 			LayoutOrder = 5,
-			items = mapBulkPurchasePartialSuccessItemsToRowPresentation(p5.successfulItems, var3, var1.successColor, var1.failureColor)
+			items = mapBulkPurchasePartialSuccessItemsToRowPresentation(p2.successfulItems, UseLocalizationResult1, UseDesignTokensResult.successColor, UseDesignTokensResult.failureColor)
 		}) else nil),
-		endSlot = reactModule.createElement("Frame", {
+		endSlot = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.fromScale(1, 0),
 			AutomaticSize = Enum.AutomaticSize.Y
-		}, reactModule.createElement("UIListLayout", {
+		}, ReactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			HorizontalAlignment = Enum.HorizontalAlignment.Center,
 			VerticalAlignment = Enum.VerticalAlignment.Center,
-			Padding = UDim.new(0, var1.buttonMarginTop)
-		}), reactModule.createElement(boxModule, {
+			Padding = UDim.new(0, UseDesignTokensResult.buttonMarginTop)
+		}), ReactModule.createElement(BoxModule, {
 			BorderSizePixel = 0,
-			padding = var1.boxPadding,
-			cornerRadius = UDim.new(0, var1.boxCornerRadius),
+			padding = UseDesignTokensResult.boxPadding,
+			cornerRadius = UDim.new(0, UseDesignTokensResult.boxCornerRadius),
 			Size = UDim2.fromScale(1, 0),
 			AutomaticSize = Enum.AutomaticSize.Y,
-			BackgroundColor3 = var1.boxBackground
+			BackgroundColor3 = UseDesignTokensResult.boxBackground
 		}, {
-			Layout = reactModule.createElement("UIListLayout", {
+			Layout = ReactModule.createElement("UIListLayout", {
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				HorizontalAlignment = Enum.HorizontalAlignment.Center,
 				VerticalAlignment = Enum.VerticalAlignment.Top,
-				Padding = UDim.new(0, var1.lineItemSpacing)
+				Padding = UDim.new(0, UseDesignTokensResult.lineItemSpacing)
 			}),
-			RobuxSpent = reactModule.createElement(priceBoxLineDEPRECATEDModule, {
+			RobuxSpent = ReactModule.createElement(PriceBoxLineDEPRECATEDModule, {
 				highlight = true,
 				LayoutOrder = 1,
-				text = var2.robuxSpent,
-				amount = p5.robuxSpent
+				text = UseLocalizationResult.robuxSpent,
+				amount = p2.robuxSpent
 			}),
-			CurrentBalance = reactModule.createElement(priceBoxLineDEPRECATEDModule, {
+			CurrentBalance = ReactModule.createElement(PriceBoxLineDEPRECATEDModule, {
 				LayoutOrder = 2,
-				text = var2.currentBalance,
-				amount = p5.currentBalance
+				text = UseLocalizationResult.currentBalance,
+				amount = p2.currentBalance
 			})
-		}), reactModule.createElement(button, {
-			text = var2.dismissCTA,
-			onActivated = p5.onDismiss,
-			buttonType = buttonType.PrimarySystem,
-			size = UDim2.new(1, 0, 0, var1.buttonHeight)
+		}), ReactModule.createElement(Button, {
+			text = UseLocalizationResult.dismissCTA,
+			onActivated = p2.onDismiss,
+			buttonType = ButtonType.PrimarySystem,
+			size = UDim2.new(1, 0, 0, UseDesignTokensResult.buttonHeight)
 		}))
 	}))
 end

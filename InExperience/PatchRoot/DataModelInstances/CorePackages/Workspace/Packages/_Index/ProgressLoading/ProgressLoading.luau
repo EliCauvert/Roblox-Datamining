@@ -1,43 +1,43 @@
-﻿local createLazyComponent = require(script.Parent.RoactUtils).Components.createLazyComponent
+﻿local CreateLazyComponentFunction = require(script.Parent.RoactUtils).Components.createLazyComponent
 local _ = require(script.TiltLoadingScreen.Types)
 
 return {
 	Components = {
-		Footer = createLazyComponent(function()
+		Footer = CreateLazyComponentFunction(function() --[[ Line: 11 ]]
 			return require(script.Components.Footer)
 		end),
-		TiltKeyart = createLazyComponent(function()
+		TiltKeyart = CreateLazyComponentFunction(function() --[[ Line: 14 ]]
 			return require(script.TiltLoadingScreen.Components.TiltKeyart)
 		end),
-		TiltLockup = createLazyComponent(function()
+		TiltLockup = CreateLazyComponentFunction(function() --[[ Line: 17 ]]
 			return require(script.TiltLoadingScreen.Components.TiltLockup)
 		end)
 	},
-	ProgressLoadingAssetsScreenGui = createLazyComponent(function()
+	ProgressLoadingAssetsScreenGui = CreateLazyComponentFunction(function() --[[ Line: 21 ]]
 		return require(script.ProgressLoadingAssetsScreenGui)
 	end),
-	PreGameLoadingScreen = createLazyComponent(function()
+	PreGameLoadingScreen = CreateLazyComponentFunction(function() --[[ Line: 24 ]]
 		return require(script.PreGameLoadingScreen)
 	end),
 	GetDeferredAssetStore = require(script.Stores.GetDeferredAssetStore),
 	PregameOverride = require(script.Stores.PregameOverride),
-	TiltLoadingScreen = createLazyComponent(function()
+	TiltLoadingScreen = CreateLazyComponentFunction(function() --[[ Line: 29 ]]
 		return require(script.TiltLoadingScreen)
 	end),
 	useLoadingScreenAnimation = require(script.TiltLoadingScreen.Hooks.useLoadingScreenAnimation),
-	LoadingScreenView = createLazyComponent(function()
+	LoadingScreenView = CreateLazyComponentFunction(function() --[[ Line: 34 ]]
 		return require(script.LoadingScreenView)
 	end),
-	AutoTranslateBadge = createLazyComponent(function()
+	AutoTranslateBadge = CreateLazyComponentFunction(function() --[[ Line: 38 ]]
 		return require(script.Components.AutoTranslateBadge)
 	end),
-	PolicyContainer = createLazyComponent(function()
+	PolicyContainer = CreateLazyComponentFunction(function() --[[ Line: 41 ]]
 		return require(script.Components.PolicyContainer)
 	end),
-	ServerStatus = createLazyComponent(function()
+	ServerStatus = CreateLazyComponentFunction(function() --[[ Line: 44 ]]
 		return require(script.Components.ServerStatus)
 	end),
-	ServerStatusWithCountdown = createLazyComponent(function()
+	ServerStatusWithCountdown = CreateLazyComponentFunction(function() --[[ Line: 47 ]]
 		return require(script.Components.ServerStatusWithCountdown)
 	end),
 	PlaceLauncherState = require(script.Enums.PlaceLauncherState),

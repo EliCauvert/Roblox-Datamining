@@ -1,52 +1,53 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local accountUpgrade = script:FindFirstAncestor("AccountUpgrade")
-local parent = accountUpgrade.Parent
-local reactModule = require(parent.React)
-local reactRobloxModule = require(parent.ReactRoblox)
-local t = {
-	[require(accountUpgrade.AccountUpgradeFlow).Pioneer] = {
+﻿local CoreGui = game:GetService("CoreGui")
+local AccountUpgrade = script:FindFirstAncestor("AccountUpgrade")
+local Parent = AccountUpgrade.Parent
+local ReactModule = require(Parent.React)
+local ReactRobloxModule = require(Parent.ReactRoblox)
+local config = {
+	[require(AccountUpgrade.AccountUpgradeFlow).Pioneer] = {
 		canDismiss = true,
-		getView = function()
-			return require(script.Parent.AccountUpgradePromptApp)
+		getView = function() --[[ Line: 62 ]]
+			return (require(script.Parent.AccountUpgradePromptApp))
 		end
 	}
 }
-local var1 = nil
-local var2 = nil
-local t_1 = {}
+local ScreenGui = nil
+local Root = nil
 
-local function _(p1, p2)
-	-- upvalues: var2 (write), var1 (write)
-	return var2 == p1 and var1 == p2
+local function _(p1, p2): boolean --[[ Line: 73 | Named "isCurrentHost" ]]
+	-- upvalues: Root (ref), ScreenGui (ref)
+	return Root == p1 and ScreenGui == p2
 end
 
-local function cleanupHost(p1, p2)
-	-- upvalues: var2 (write), var1 (write)
-	if not (var2 == p1 and var1 == p2) then return end
-	var2 = nil
-	var1 = nil
+local function cleanupHost(Root1, ScreenGui1) --[[ Line: 77 ]]
+	-- upvalues: Root (ref), ScreenGui (ref)
+	if Root ~= Root1 or ScreenGui ~= ScreenGui1 then return end
+	Root = nil
+	ScreenGui = nil
 	
-	if p1 then
-		pcall(function()
-			-- upvalues: p1 (ref)
-			p1:unmount()
+	if Root1 then
+		pcall(function() --[[ Line: 86 ]]
+			-- upvalues: Root1 (copy)
+			Root1:unmount()
 		end)
 	end
-	if p2 then
-		p2:Destroy()
+	if ScreenGui1 then
+		ScreenGui1:Destroy()
 	end
 end
 
-function t_1.unmount()
-	-- upvalues: cleanupHost (ref), var2 (write), var1 (write)
-	cleanupHost(var2, var1)
-end
+local InExperienceController = {
+	unmount = function() --[[ Line: 95 ]]
+		-- upvalues: cleanupHost (copy), Root (ref), ScreenGui (ref)
+		cleanupHost(Root, ScreenGui)
+	end
+}
 
-local _ = function(p1, p2, p3, p4)
-	-- upvalues: var2 (write), var1 (write), cleanupHost (ref)
-	task.defer(function()
-		-- upvalues: p1 (ref), p2 (ref), var2 (copy), var1 (copy), cleanupHost (copy), p3 (ref), p4 (ref)
-		if not (var2 == p1 and var1 == p2) then return end
+local _ = function(p1, p2, p3, p4) --[[ Line: 99 | Named "completeAfterCurrentEvent" ]]
+	-- upvalues: Root (ref), ScreenGui (ref), cleanupHost (copy)
+	task.defer(function() --[[ Line: 105 ]]
+		-- upvalues: p1 (copy), p2 (copy), Root (upval), ScreenGui (upval), cleanupHost (upval), p3 (copy), p4 (copy)
+		if Root ~= p1 or ScreenGui ~= p2 then return end
 		cleanupHost(p1, p2)
 		
 		if p3 then
@@ -55,120 +56,119 @@ local _ = function(p1, p2, p3, p4)
 	end)
 end
 
-local _ = function()
-	-- upvalues: var2 (write), var1 (write), coreGuiService (ref)
-	return var2 ~= nil and (var1 ~= nil and var1.Parent == coreGuiService)
+local _ = function(): boolean --[[ Line: 118 | Named "isMounted" ]]
+	-- upvalues: Root (ref), ScreenGui (ref), CoreGui (copy)
+	return Root ~= nil and (ScreenGui ~= nil and ScreenGui.Parent == CoreGui)
 end
 
-local _ = function()
-	-- upvalues: var2 (write), var1 (write), coreGuiService (ref), t_1 (ref)
-	if var2 ~= nil then
-		if not (var2 ~= nil and (var1 ~= nil and var1.Parent == coreGuiService)) then
-			t_1.unmount()
-		end
+local _ = function() --[[ Line: 122 | Named "unmountStaleHost" ]]
+	-- upvalues: Root (ref), ScreenGui (ref), CoreGui (copy), InExperienceController (copy)
+	if Root ~= nil and (Root == nil or (ScreenGui == nil or ScreenGui.Parent ~= CoreGui)) then
+		InExperienceController.unmount()
 	end
 end
 
-function t_1.mount(p1)
-	-- upvalues: var2 (write), var1 (write), coreGuiService (ref), t_1 (ref), t (ref), reactRobloxModule (ref), cleanupHost (ref), reactModule (ref)
-	if var2 ~= nil then
-		if not (var2 ~= nil and (var1 ~= nil and var1.Parent == coreGuiService)) then
-			t_1.unmount()
-		end
+function InExperienceController.mount(p1): string --[[ Line: 128 ]]
+	-- upvalues: Root (ref), ScreenGui (ref), CoreGui (copy), InExperienceController (copy), config (copy), ReactRobloxModule (copy), cleanupHost (copy), ReactModule (copy)
+	if Root ~= nil and (Root == nil or (ScreenGui == nil or ScreenGui.Parent ~= CoreGui)) then
+		InExperienceController.unmount()
 	end
-	if var2 ~= nil and (var1 ~= nil and var1.Parent == coreGuiService) then
+	if Root ~= nil and (ScreenGui ~= nil and ScreenGui.Parent == CoreGui) then
 		return "already_mounted"
 	end
-	local flow = t[p1.flow]
+	local Entry = config[p1.flow]
 	
-	if flow == nil then
+	if Entry == nil then
 		return "unsupported_flow"
 	end
-	local screenGui = Instance.new("ScreenGui")
-	var1 = screenGui
-	local var3 = nil
-	local ok, status = pcall(function()
-		-- upvalues: screenGui (ref), coreGuiService (copy), reactRobloxModule (copy), var3 (write), var2 (copy), p1 (ref), var1 (copy), cleanupHost (copy), flow (ref), reactModule (copy)
-		screenGui.Name = "InExperienceAccountUpgradePrompt"
-		screenGui.AutoLocalize = false
-		screenGui.DisplayOrder = 6
-		screenGui.IgnoreGuiInset = true
-		screenGui.ResetOnSpawn = false
-		screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-		screenGui.Parent = coreGuiService
-		local var4 = reactRobloxModule.createRoot(screenGui)
-		var3 = var4
-		var2 = var4
-		local var5 = false
+	local ScreenGui1 = Instance.new("ScreenGui")
+	ScreenGui = ScreenGui1
+	local v1 = nil
+	local Success, Result = pcall(function() --[[ Line: 145 ]]
+		-- upvalues: ScreenGui1 (copy), CoreGui (upval), ReactRobloxModule (upval), v1 (ref), Root (upval), p1 (copy), ScreenGui (upval), cleanupHost (upval), Entry (copy), ReactModule (upval)
+		ScreenGui1.Name = "InExperienceAccountUpgradePrompt"
+		ScreenGui1.AutoLocalize = false
+		ScreenGui1.DisplayOrder = 6
+		ScreenGui1.IgnoreGuiInset = true
+		ScreenGui1.ResetOnSpawn = false
+		ScreenGui1.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+		ScreenGui1.Parent = CoreGui
+		local Root1 = ReactRobloxModule.createRoot(ScreenGui1)
+		v1 = Root1
+		Root = Root1
+		local Flag = false
 		
-		local _ = function(p2)
-			-- upvalues: var5 (write), var4 (ref), screenGui (copy), p1 (copy), var2 (copy), var1 (copy), cleanupHost (copy)
-			if var5 then
-				return
-			end
-			var5 = true
-			local onComplete = p1.onComplete
-			task.defer(function()
-				-- upvalues: var4 (ref), screenGui (ref), var2 (copy), var1 (copy), cleanupHost (copy), onComplete (ref), p2 (ref)
-				if not (var2 == var4 and var1 == screenGui) then return end
-				cleanupHost(var4, screenGui)
-				
-				if onComplete then
-					onComplete(p2)
-				end
-			end)
-		end
-		
-		local var6 = function(p2)
-			-- upvalues: var5 (write), var4 (ref), screenGui (copy), p1 (copy), var2 (copy), var1 (copy), cleanupHost (copy)
-			local t = { reason = "success", result = p2 }
-			
-			if var5 then
-				return
-			end
-			var5 = true
-			local onComplete = p1.onComplete
-			task.defer(function()
-				-- upvalues: var4 (ref), screenGui (ref), var2 (copy), var1 (copy), cleanupHost (copy), onComplete (ref), t (ref)
-				if not (var2 == var4 and var1 == screenGui) then return end
-				cleanupHost(var4, screenGui)
-				
-				if onComplete then
-					onComplete(t)
-				end
-			end)
-		end
-		
-		var4:render(if flow.canDismiss then reactModule.createElement(flow.getView(), {
-			flow = p1.flow,
-			onDismiss = function()
-				-- upvalues: var5 (write), var4 (ref), screenGui (copy), p1 (copy), var2 (copy), var1 (copy), cleanupHost (copy)
-				local t = { reason = "user_closed" }
-				
-				if var5 then
-					return
-				end
-				var5 = true
-				local onComplete = p1.onComplete
-				task.defer(function()
-					-- upvalues: var4 (ref), screenGui (ref), var2 (copy), var1 (copy), cleanupHost (copy), onComplete (ref), t (ref)
-					if not (var2 == var4 and var1 == screenGui) then return end
-					cleanupHost(var4, screenGui)
+		local function _(p2) --[[ Line: 158 ]]
+			-- upvalues: Flag (ref), Root1 (copy), ScreenGui1 (upval), p1 (upval), Root (upval), ScreenGui (upval), cleanupHost (upval)
+			if not Flag then
+				Flag = true
+				local OnComplete = p1.onComplete
+				task.defer(function() --[[ Line: 105 ]]
+					-- upvalues: Root1 (copy), ScreenGui1 (copy), Root (upval), ScreenGui (upval), cleanupHost (upval), OnComplete (copy), p2 (copy)
+					if Root ~= Root1 or ScreenGui ~= ScreenGui1 then return end
+					cleanupHost(Root1, ScreenGui1)
 					
-					if onComplete then
-						onComplete(t)
+					if OnComplete then
+						OnComplete(p2)
 					end
 				end)
+				
+				return
+			end
+		end
+		
+		local function OnComplete(Result) --[[ Line: 165 ]]
+			-- upvalues: Flag (ref), Root1 (copy), ScreenGui1 (upval), p1 (upval), Root (upval), ScreenGui (upval), cleanupHost (upval)
+			local config = { reason = "success", result = Result }
+			
+			if not Flag then
+				Flag = true
+				local OnComplete = p1.onComplete
+				task.defer(function() --[[ Line: 105 ]]
+					-- upvalues: Root1 (copy), ScreenGui1 (copy), Root (upval), ScreenGui (upval), cleanupHost (upval), OnComplete (copy), config (copy)
+					if Root ~= Root1 or ScreenGui ~= ScreenGui1 then return end
+					cleanupHost(Root1, ScreenGui1)
+					
+					if OnComplete then
+						OnComplete(config)
+					end
+				end)
+				
+				return
+			end
+		end
+		
+		Root1:render(if Entry.canDismiss then ReactModule.createElement(Entry.getView(), {
+			flow = p1.flow,
+			onDismiss = function() --[[ Line: 177 ]]
+				-- upvalues: Flag (ref), Root1 (copy), ScreenGui1 (upval), p1 (upval), Root (upval), ScreenGui (upval), cleanupHost (upval)
+				local config = { reason = "user_closed" }
+				
+				if not Flag then
+					Flag = true
+					local OnCompleteFunction = p1.onComplete
+					task.defer(function() --[[ Line: 105 ]]
+						-- upvalues: Root1 (copy), ScreenGui1 (copy), Root (upval), ScreenGui (upval), cleanupHost (upval), OnCompleteFunction (copy), config (copy)
+						if Root ~= Root1 or ScreenGui ~= ScreenGui1 then return end
+						cleanupHost(Root1, ScreenGui1)
+						
+						if OnCompleteFunction then
+							OnCompleteFunction(config)
+						end
+					end)
+					
+					return
+				end
 			end,
-			onComplete = var6
-		}) else reactModule.createElement(flow.getView(), { flow = p1.flow, onComplete = var6 }))
+			onComplete = OnComplete
+		}) else ReactModule.createElement(Entry.getView(), { flow = p1.flow, onComplete = OnComplete }))
 	end)
 	
-	if not ok then
-		cleanupHost(var3, screenGui)
-		error(status, 0)
+	if not Success then
+		cleanupHost(v1, ScreenGui1)
+		error(Result, 0)
 	end
 	return "mounted"
 end
 
-return t_1
+return InExperienceController

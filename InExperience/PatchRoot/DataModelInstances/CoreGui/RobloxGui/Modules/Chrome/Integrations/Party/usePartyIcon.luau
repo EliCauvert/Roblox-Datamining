@@ -1,111 +1,121 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local reactModule = require(corePackagesService.Packages.React)
-local crossExperienceVoiceModule = require(corePackagesService.Workspace.Packages.CrossExperienceVoice)
-local roactUtilsModule = require(corePackagesService.Workspace.Packages.RoactUtils)
-local sharedFlagsModule = require(corePackagesService.Workspace.Packages.SharedFlags)
-local getColorFromUserIdModule = require(corePackagesService.Workspace.Packages.SquadsCore.getColorFromUserId)
-local useLastActiveParticipant = crossExperienceVoiceModule.Hooks.useLastActiveParticipant
-local useSequentialAnimation = crossExperienceVoiceModule.Hooks.useSequentialAnimation
-local usePrevious = roactUtilsModule.Hooks.usePrevious
-local getStandardSizeAvatarHeadShotRbxthumb = require(corePackagesService.Workspace.Packages.UserLib).Utils.getStandardSizeAvatarHeadShotRbxthumb
-local partyVoiceTopbarActivityIndicatorAnimationMs = game:DefineFastInt("PartyVoiceTopbarActivityIndicatorAnimationMs", 50)
-local partyVoiceTopbarActivityIndicatorDebounceMs = game:DefineFastInt("PartyVoiceTopbarActivityIndicatorDebounceMs", 50)
-local getFFlagEnableCrossExpVoice = sharedFlagsModule.GetFFlagEnableCrossExpVoice
+﻿local CorePackages = game:GetService("CorePackages")
+local ReactModule = require(CorePackages.Packages.React)
+local CrossExperienceVoiceModule = require(CorePackages.Workspace.Packages.CrossExperienceVoice)
+local GetColorFromUserIdModule = require(CorePackages.Workspace.Packages.SquadsCore.getColorFromUserId)
+local UseLastActiveParticipantFunction = CrossExperienceVoiceModule.Hooks.useLastActiveParticipant
+local UseSequentialAnimationFunction = CrossExperienceVoiceModule.Hooks.useSequentialAnimation
+local UsePreviousFunction = require(CorePackages.Workspace.Packages.RoactUtils).Hooks.usePrevious
+local GetStandardSizeAvatarHeadShotRbxthumbFunction = require(CorePackages.Workspace.Packages.UserLib).Utils.getStandardSizeAvatarHeadShotRbxthumb
+local PartyVoiceTopbarActivityIndicatorAnimationMs = game:DefineFastInt("PartyVoiceTopbarActivityIndicatorAnimationMs", 50)
+local PartyVoiceTopbarActivityIndicatorDebounceMs = game:DefineFastInt("PartyVoiceTopbarActivityIndicatorDebounceMs", 50)
+local GetFFlagEnableCrossExpVoiceFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagEnableCrossExpVoice
 
-function createAnimations(p1, p2)
-	-- upvalues: partyVoiceTopbarActivityIndicatorAnimationMs (ref)
+function createAnimations(Value, Value1) --[[ Line: 32 ]]
+	-- upvalues: PartyVoiceTopbarActivityIndicatorAnimationMs (copy)
 	return {
 		ICON_OUT_ANIMATION = {
 			value = 0,
-			durationInMs = partyVoiceTopbarActivityIndicatorAnimationMs,
+			durationInMs = PartyVoiceTopbarActivityIndicatorAnimationMs,
 			easingStyle = Enum.EasingStyle.Linear
 		},
 		ICON_IN_ANIMATION = {
-			value = p1,
-			durationInMs = partyVoiceTopbarActivityIndicatorAnimationMs,
+			value = Value,
+			durationInMs = PartyVoiceTopbarActivityIndicatorAnimationMs,
 			easingStyle = Enum.EasingStyle.Linear
 		},
 		AVATAR_IN_ANIMATION = {
-			value = p2,
-			durationInMs = partyVoiceTopbarActivityIndicatorAnimationMs,
+			value = Value1,
+			durationInMs = PartyVoiceTopbarActivityIndicatorAnimationMs,
 			easingStyle = Enum.EasingStyle.Linear
 		},
 		AVATAR_OUT_ANIMATION = {
 			value = 0,
-			durationInMs = partyVoiceTopbarActivityIndicatorAnimationMs,
+			durationInMs = PartyVoiceTopbarActivityIndicatorAnimationMs,
 			easingStyle = Enum.EasingStyle.Linear
 		}
 	}
 end
 
-function getDisplayImage(p1, p2)
-	-- upvalues: getStandardSizeAvatarHeadShotRbxthumb (ref), getColorFromUserIdModule (ref)
+function getDisplayImage(p1, p2) --[[ Line: 57 ]]
+	-- upvalues: GetStandardSizeAvatarHeadShotRbxthumbFunction (copy), GetColorFromUserIdModule (copy)
 	return {
-		thumbnail = if p1 ~= -1 then p2 else getStandardSizeAvatarHeadShotRbxthumb(tostring(p1)),
-		backgroundColor = if p1 ~= -1 then nil else getColorFromUserIdModule(p1)
+		thumbnail = if p1 == -1 then p2 else GetStandardSizeAvatarHeadShotRbxthumbFunction((tostring(p1))),
+		backgroundColor = if p1 == -1 then nil else GetColorFromUserIdModule(p1)
 	}
 end
 
-function usePartyIcon(p1, p2, p3)
-	-- upvalues: getFFlagEnableCrossExpVoice (ref), useLastActiveParticipant (ref), usePrevious (ref), reactModule (ref), useSequentialAnimation (ref), crossExperienceVoiceModule (ref), partyVoiceTopbarActivityIndicatorDebounceMs (ref)
-	if getFFlagEnableCrossExpVoice() then
-		local var1 = useLastActiveParticipant()
-		local var2 = if var1 then var1.userId else -1
-		local var3 = usePrevious(var2)
-		local var4, var5 = reactModule.useState(getDisplayImage(var2, p3))
-		local var6, var7 = useSequentialAnimation(if var2 == -1 then p1 else p2)
-		local var8 = reactModule.useMemo(function()
-			-- upvalues: p1 (ref), p2 (ref)
+function usePartyIcon(p1, p2, p3) --[[ Line: 64 ]]
+	-- upvalues: GetFFlagEnableCrossExpVoiceFunction (copy), UseLastActiveParticipantFunction (copy), UsePreviousFunction (copy), ReactModule (copy), UseSequentialAnimationFunction (copy), CrossExperienceVoiceModule (copy), PartyVoiceTopbarActivityIndicatorDebounceMs (copy)
+	if GetFFlagEnableCrossExpVoiceFunction() then
+		local UseLastActiveParticipantResult = UseLastActiveParticipantFunction()
+		local UserId = UseLastActiveParticipantResult and UseLastActiveParticipantResult.userId or -1
+		local UsePreviousResult = UsePreviousFunction(UserId)
+		local UseStateResult, UseStateResult2 = ReactModule.useState(getDisplayImage(UserId, p3))
+		local UseSequentialAnimationResult, UseSequentialAnimationResult2 = UseSequentialAnimationFunction(if UserId == -1 then p1 else p2)
+		local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 75 ]]
+			-- upvalues: p1 (copy), p2 (copy)
 			return createAnimations(p1, p2)
 		end, { p1, p2 })
-		local var9 = reactModule.useCallback(function(p4)
-			-- upvalues: var5 (ref), p3 (ref)
-			var5(function(p5)
-				-- upvalues: p4 (ref), p3 (copy)
-				local var10 = getDisplayImage(p4, p3)
+		local UseResult = ReactModule.useCallback(function(p4) --[[ Line: 79 ]]
+			-- upvalues: UseStateResult2 (copy), p3 (copy)
+			UseStateResult2(function(p5) --[[ Line: 80 ]]
+				-- upvalues: p4 (copy), p3 (upval)
+				local DisplayImage = getDisplayImage(p4, p3)
 				
-				return if p5.thumbnail == var10.thumbnail and p5.backgroundColor == var10.backgroundColor then p5 else var10
+				return if p5.thumbnail == DisplayImage.thumbnail and p5.backgroundColor == DisplayImage.backgroundColor then p5 else DisplayImage
 			end)
-		end, { p3, var5 })
-		local var10 = reactModule.useMemo(function()
-			-- upvalues: crossExperienceVoiceModule (copy), var7 (ref), partyVoiceTopbarActivityIndicatorDebounceMs (copy)
-			return crossExperienceVoiceModule.Utils.debounce(function(p4, p5)
-				-- upvalues: var7 (copy)
-				var7(p4, p5)
-			end, partyVoiceTopbarActivityIndicatorDebounceMs)
+		end, { p3, UseStateResult2 })
+		local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 93 ]]
+			-- upvalues: CrossExperienceVoiceModule (upval), UseSequentialAnimationResult2 (copy), PartyVoiceTopbarActivityIndicatorDebounceMs (upval)
+			return CrossExperienceVoiceModule.Utils.debounce(function(p4, p5) --[[ Line: 95 ]]
+				-- upvalues: UseSequentialAnimationResult2 (upval)
+				UseSequentialAnimationResult2(p4, p5)
+			end, PartyVoiceTopbarActivityIndicatorDebounceMs)
 		end, {})
-		reactModule.useEffect(function()
-			-- upvalues: var3 (ref), var2 (ref), var10 (ref), var8 (ref), var9 (ref), var7 (ref)
-			if var3 == nil or var2 == var3 then
-				var9(var2)
+		ReactModule.useEffect(function() --[[ Line: 103 ]]
+			-- upvalues: UsePreviousResult (copy), UserId (copy), UseMemoResult1 (copy), UseMemoResult (copy), UseResult (copy), UseSequentialAnimationResult2 (copy)
+			if UsePreviousResult == nil or UserId == UsePreviousResult then
+				UseResult(UserId)
 				
 				return
 			end
-			var10.cancel()
+			UseMemoResult1.cancel()
 			
-			if var2 == -1 then
-				var10.call({ var8.AVATAR_OUT_ANIMATION, var8.ICON_IN_ANIMATION }, function()
-					-- upvalues: var9 (copy)
-					var9(-1)
-				end)
-				
-				return
-			elseif var3 == -1 then
-				var7({ var8.ICON_OUT_ANIMATION, var8.AVATAR_IN_ANIMATION }, function()
-					-- upvalues: var9 (copy), var2 (copy)
-					var9(var2)
+			if UserId == -1 then
+				UseMemoResult1.call({
+					UseMemoResult.AVATAR_OUT_ANIMATION,
+					UseMemoResult.ICON_IN_ANIMATION
+				}, function() --[[ Line: 110 ]]
+					-- upvalues: UseResult (upval)
+					UseResult(-1)
 				end)
 				
 				return
 			end
-			var9(var2)
-		end, { var2, var9, var10, var8 })
+			if UsePreviousResult == -1 then
+				UseSequentialAnimationResult2({
+					UseMemoResult.ICON_OUT_ANIMATION,
+					UseMemoResult.AVATAR_IN_ANIMATION
+				}, function() --[[ Line: 118 ]]
+					-- upvalues: UseResult (upval), UserId (upval)
+					UseResult(UserId)
+				end)
+				
+				return
+			else
+				UseResult(UserId)
+			end
+		end, { UserId, UseResult, UseMemoResult1, UseMemoResult })
 		
-		return { image = var4, size = var6 }
+		return {
+			image = UseStateResult,
+			size = UseSequentialAnimationResult
+		}
+	else
+		local Binding, _ = ReactModule.createBinding(p1)
+		
+		return { image = getDisplayImage(-1, p3), size = Binding }
 	end
-	local var11, _ = reactModule.createBinding(p1)
-	
-	return { image = getDisplayImage(-1, p3), size = var11 }
 end
 
 return usePartyIcon

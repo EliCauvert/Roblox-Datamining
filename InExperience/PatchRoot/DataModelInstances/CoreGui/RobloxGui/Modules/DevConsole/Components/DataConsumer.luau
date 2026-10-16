@@ -1,10 +1,9 @@
-﻿local components = script.Parent.Parent.Components
-local roactModule = require(game:GetService("CorePackages").Packages.Roact)
-local immutableModule = require(script.Parent.Parent.Immutable)
-local dataContextModule = require(components.DataContext)
+﻿local RoactModule = require(game:GetService("CorePackages").Packages.Roact)
+local ImmutableModule = require(script.Parent.Parent.Immutable)
+local DataContextModule = require(script.Parent.Parent.Components.DataContext)
 
-return function(p1, ...)
-	-- upvalues: roactModule (ref), immutableModule (ref), dataContextModule (ref)
+return function(p1, ...) --[[ Line: 8 ]]
+	-- upvalues: RoactModule (copy), ImmutableModule (copy), DataContextModule (copy)
 	if not p1 then
 		error("Expected component to be passed to connection, got nil.")
 	end
@@ -13,37 +12,39 @@ return function(p1, ...)
 	for i = 1, select("#", ...) do
 		t[i] = select(i, ...)
 	end
-	local var1 = roactModule.Component:extend(string.format("Consumer(%s)_DependsOn_%s", tostring(p1), t[1]))
+	local ExtendResult = RoactModule.Component:extend((string.format("Consumer(%s)_DependsOn_%s", tostring(p1), t[1])))
 	
-	function var4.init(p2)
-		-- upvalues: t (ref)
-		local t_1 = {}
+	function ExtendResult.init(p2) --[[ Line: 21 ]]
+		-- upvalues: t (copy)
+		local DevConsoles = {}
 		
-		for i, v in pairs(t) do
-			local var2 = p2.props.DevConsoleData[v]
+		for _, value in pairs(t) do
+			local DevConsole = p2.props.DevConsoleData[value]
 			
-			if var2 then
-				t_1[v] = var2
-				continue
+			if not DevConsole then
+				error((string.format("%s %s", tostring(value), "could not be found. Make sure DataProvider is above this consumer")))
+				
+				return
 			end
-			error(string.format("%s %s", tostring(v), "could not be found. Make sure DataProvider is above this consumer"))
-			
-			return
+			DevConsoles[value] = DevConsole
 		end
-		p2:setState(t_1)
+		p2:setState(DevConsoles)
 	end
 	
-	function var4.render(p3)
-		-- upvalues: immutableModule (copy), roactModule (copy), p1 (ref)
-		return roactModule.createElement(p1, immutableModule.JoinDictionaries(p3.props.componentProps, p3.state))
+	function ExtendResult.render(p3) --[[ Line: 40 ]]
+		-- upvalues: ImmutableModule (upval), RoactModule (upval), p1 (copy)
+		return RoactModule.createElement(p1, (ImmutableModule.JoinDictionaries(p3.props.componentProps, p3.state)))
 	end
 	
-	return function(p3)
-		-- upvalues: roactModule (copy), dataContextModule (copy), var1 (ref)
-		return roactModule.createElement(dataContextModule.Consumer, {
-			render = function(p4)
-				-- upvalues: roactModule (copy), var1 (copy), p3 (ref)
-				return roactModule.createElement(var1, { componentProps = p3, DevConsoleData = p4 })
+	return function(ComponentProps) --[[ Line: 45 | Named "DataConsumerWrapper" ]]
+		-- upvalues: RoactModule (upval), DataContextModule (upval), ExtendResult (copy)
+		return RoactModule.createElement(DataContextModule.Consumer, {
+			render = function(DevConsoleData) --[[ Line: 47 ]]
+				-- upvalues: RoactModule (upval), ExtendResult (upval), ComponentProps (copy)
+				return RoactModule.createElement(ExtendResult, {
+					componentProps = ComponentProps,
+					DevConsoleData = DevConsoleData
+				})
 			end
 		})
 	end

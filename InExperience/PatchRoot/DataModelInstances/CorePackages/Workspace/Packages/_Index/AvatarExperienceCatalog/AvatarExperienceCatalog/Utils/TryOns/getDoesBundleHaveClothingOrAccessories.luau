@@ -1,4 +1,4 @@
-﻿local t = {
+﻿local config = {
 	[tostring(Enum.AssetType.Torso.Value)] = true,
 	[tostring(Enum.AssetType.RightArm.Value)] = true,
 	[tostring(Enum.AssetType.LeftArm.Value)] = true,
@@ -9,16 +9,17 @@
 	[tostring(Enum.AssetType.DynamicHead.Value)] = true
 }
 
-return function(p1)
-	-- upvalues: t (ref)
+return function(p1): boolean --[[ Line: 21 | Named "getDoesBundleHaveClothingOrAccessories" ]]
+	-- upvalues: config (copy)
 	if p1 then
 		if p1.itemType ~= Enum.AvatarItemType.Bundle.Name then
 			return false
-		elseif p1.bundleType and tostring(p1.bundleType) ~= tostring(Enum.BundleType.BodyParts.Value) then
+		end
+		if p1.bundleType and tostring(p1.bundleType) ~= tostring(Enum.BundleType.BodyParts.Value) then
 			return false
 		end
-		for i, v in p1.items do
-			if v.type == Enum.AvatarItemType.Asset.Name and v.type == Enum.AvatarItemType.Asset.Name and (v.assetType and not t[v.assetType]) then
+		for _, item in p1.items do
+			if item.type == Enum.AvatarItemType.Asset.Name and item.type == Enum.AvatarItemType.Asset.Name and item.assetType and not config[item.assetType] then
 				return true
 			end
 		end

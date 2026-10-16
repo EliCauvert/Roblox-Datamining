@@ -1,21 +1,21 @@
-﻿local userInputService = game:GetService("UserInputService")
-local reactModule = require(script:FindFirstAncestor("Moments").Parent.React)
+﻿local UserInputService = game:GetService("UserInputService")
+local ReactModule = require(script:FindFirstAncestor("Moments").Parent.React)
 
-return function()
-	-- upvalues: reactModule (ref), userInputService (ref)
-	local var1, var2 = reactModule.useState(userInputService.PreferredInput)
-	reactModule.useEffect(function()
-		-- upvalues: userInputService (copy), var2 (ref)
-		local var3 = userInputService:GetPropertyChangedSignal("PreferredInput"):Connect(function()
-			-- upvalues: var2 (copy), userInputService (copy)
-			var2(userInputService.PreferredInput)
+return function() --[[ Line: 18 ]]
+	-- upvalues: ReactModule (copy), UserInputService (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(UserInputService.PreferredInput)
+	ReactModule.useEffect(function() --[[ Line: 21 ]]
+		-- upvalues: UserInputService (upval), UseStateResult2 (copy)
+		local Connection = UserInputService:GetPropertyChangedSignal("PreferredInput"):Connect(function() --[[ Line: 24 ]]
+			-- upvalues: UseStateResult2 (upval), UserInputService (upval)
+			UseStateResult2(UserInputService.PreferredInput)
 		end)
 		
-		return function()
-			-- upvalues: var3 (ref)
-			var3:Disconnect()
+		return function() --[[ Line: 28 ]]
+			-- upvalues: Connection (copy)
+			Connection:Disconnect()
 		end
 	end, {})
 	
-	return var1
+	return UseStateResult
 end

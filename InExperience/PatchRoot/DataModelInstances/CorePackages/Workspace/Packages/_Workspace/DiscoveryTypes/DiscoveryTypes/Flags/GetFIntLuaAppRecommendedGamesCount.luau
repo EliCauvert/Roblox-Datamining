@@ -1,10 +1,10 @@
 ﻿game:DefineFastInt("LuaAppRecommendedGamesCount", 6)
 
-return function()
-	local luaAppRecommendedGamesCountFastInt = game:GetFastInt("LuaAppRecommendedGamesCount")
+return function(): number --[[ Line: 3 ]]
+	local LuaAppRecommendedGamesCountFastInt: number = game:GetFastInt("LuaAppRecommendedGamesCount")
 	
-	if luaAppRecommendedGamesCountFastInt > 20 then
-		warn("Maximum Recommended Games Fetch Count has exceeded 20: ", luaAppRecommendedGamesCountFastInt)
+	if LuaAppRecommendedGamesCountFastInt > 20 then
+		warn("Maximum Recommended Games Fetch Count has exceeded 20: ", LuaAppRecommendedGamesCountFastInt)
 	end
-	return luaAppRecommendedGamesCountFastInt
+	return LuaAppRecommendedGamesCountFastInt
 end

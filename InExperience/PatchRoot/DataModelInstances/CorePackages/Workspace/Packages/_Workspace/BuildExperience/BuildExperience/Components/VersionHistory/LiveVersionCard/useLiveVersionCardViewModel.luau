@@ -1,106 +1,114 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local gameGetGameInfoStoreModule = require(parent.DataHydration.GameGetGameInfoStore)
-local gameGetVotesStoreModule = require(parent.DataHydration.GameGetVotesStore)
-local localizationModule = require(parent.Localization)
-local placeVersionHistoryModule = require(parent.DataHydration.PlaceVersionHistory)
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local timeModule = require(parent.Time)
-local fFlagBuildEventsUpdate1Module = require(buildExperience.Flags.FFlagBuildEventsUpdate1)
-local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local launchExperienceModule = require(parent.BuildExperiencePlaytestLaunch.launchExperience)
-local sendBuildExperienceEventModule = require(buildExperience.Telemetry.sendBuildExperienceEvent)
-local versionHistoryUtilsModule = require(script.Parent.Parent.VersionHistoryUtils)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local GameGetGameInfoStoreModule = require(Parent.DataHydration.GameGetGameInfoStore)
+local GameGetVotesStoreModule = require(Parent.DataHydration.GameGetVotesStore)
+local LocalizationModule = require(Parent.Localization)
+local PlaceVersionHistoryModule = require(Parent.DataHydration.PlaceVersionHistory)
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local FFlagBuildEventsUpdate1Module = require(BuildExperience.Flags.FFlagBuildEventsUpdate1)
+local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
+local LaunchExperienceModule = require(Parent.BuildExperiencePlaytestLaunch.launchExperience)
+local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
+local VersionHistoryUtilsModule = require(script.Parent.Parent.VersionHistoryUtils)
 local _ = require(script.Parent.LiveVersionCardView)
-local dateHelper = timeModule.DateHelper
-local useAbbreviatedNumberLocalization = localizationModule.Hooks.useAbbreviatedNumberLocalization
-local useLocalization = localizationModule.Hooks.useLocalization
+local DateHelper = require(Parent.Time).DateHelper
+local UseAbbreviatedNumberLocalizationFunction = LocalizationModule.Hooks.useAbbreviatedNumberLocalization
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
 
-return function(p1)
-	-- upvalues: placeVersionHistoryModule (ref), reactModule (ref), signalsReactModule (ref), gameGetGameInfoStoreModule (ref), gameGetVotesStoreModule (ref), versionHistoryUtilsModule (ref), useLocalization (ref), dateHelper (ref), localizationStringsModule (ref), useAbbreviatedNumberLocalization (ref), sendBuildExperienceEventModule (ref), fFlagBuildEventsUpdate1Module (ref), launchExperienceModule (ref)
-	local placeVersionHistoryStore = placeVersionHistoryModule.getPlaceVersionHistoryStore()
-	local var1 = signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: placeVersionHistoryStore (ref), p1 (ref)
-		return placeVersionHistoryStore.getLiveVersion(p1.placeId)
-	end, { p1.placeId, placeVersionHistoryStore }).data)
-	reactModule.useEffect(function()
-		-- upvalues: placeVersionHistoryStore (ref), p1 (ref)
-		placeVersionHistoryStore.fetchLiveVersion(p1.placeId)
-	end, { p1.placeId, placeVersionHistoryStore })
-	local var2 = if p1.universeId == nil or p1.universeId == 0 then nil else tostring(p1.universeId)
-	local var3 = signalsReactModule.useSignalState(function(p2)
-		-- upvalues: gameGetGameInfoStoreModule (copy), var2 (ref)
-		return if var2 == nil then nil else gameGetGameInfoStoreModule(p2).getAndFetchGameInfo(var2).data(p2)
+return function(p1) --[[ Line: 36 | Named "useLiveVersionCardViewModel" ]]
+	-- upvalues: PlaceVersionHistoryModule (copy), ReactModule (copy), SignalsReactModule (copy), GameGetGameInfoStoreModule (copy), GameGetVotesStoreModule (copy), VersionHistoryUtilsModule (copy), UseLocalizationFunction (copy), DateHelper (copy), LocalizationStringsModule (copy), UseAbbreviatedNumberLocalizationFunction (copy), SendBuildExperienceEventModule (copy), FFlagBuildEventsUpdate1Module (copy), LaunchExperienceModule (copy)
+	local PlaceVersionHistoryStore = PlaceVersionHistoryModule.getPlaceVersionHistoryStore()
+	local UseSignalStateResult = SignalsReactModule.useSignalState(ReactModule.useMemo(function() --[[ Line: 38 ]]
+		-- upvalues: PlaceVersionHistoryStore (copy), p1 (copy)
+		return PlaceVersionHistoryStore.getLiveVersion(p1.placeId)
+	end, { p1.placeId, PlaceVersionHistoryStore }).data)
+	ReactModule.useEffect(function() --[[ Line: 43 ]]
+		-- upvalues: PlaceVersionHistoryStore (copy), p1 (copy)
+		PlaceVersionHistoryStore.fetchLiveVersion(p1.placeId)
+	end, { p1.placeId, PlaceVersionHistoryStore })
+	local Text = if p1.universeId == nil or p1.universeId == 0 then nil else tostring(p1.universeId)
+	local UseSignalStateResult1 = SignalsReactModule.useSignalState(function(p2) --[[ Line: 50 | Named "getGameInfo" ]]
+		-- upvalues: GameGetGameInfoStoreModule (upval), Text (copy)
+		local GameGetGameInfoStoreModuleResult = GameGetGameInfoStoreModule(p2)
+		
+		return if Text == nil then nil else GameGetGameInfoStoreModuleResult.getAndFetchGameInfo(Text).data(p2)
 	end)
-	local var4 = signalsReactModule.useSignalState(function(p2)
-		-- upvalues: gameGetGameInfoStoreModule (copy), var2 (ref)
-		return var2 ~= nil and gameGetGameInfoStoreModule(p2).getAndFetchGameInfo(var2).status(p2) == "NotReady"
+	local UseSignalStateResult2 = SignalsReactModule.useSignalState(function(p2): boolean --[[ Line: 55 | Named "getIsGameInfoLoading" ]]
+		-- upvalues: GameGetGameInfoStoreModule (upval), Text (copy)
+		local GameGetGameInfoStoreModuleResult = GameGetGameInfoStoreModule(p2)
+		
+		return Text ~= nil and GameGetGameInfoStoreModuleResult.getAndFetchGameInfo(Text).status(p2) == "NotReady"
 	end)
-	local var5 = signalsReactModule.useSignalState(function(p2)
-		-- upvalues: gameGetVotesStoreModule (copy), var2 (ref)
-		return if var2 == nil then nil else gameGetVotesStoreModule(p2).getAndFetchVote(var2).data(p2)
+	local UseSignalStateResult3 = SignalsReactModule.useSignalState(function(p2) --[[ Line: 62 | Named "getVotes" ]]
+		-- upvalues: GameGetVotesStoreModule (upval), Text (copy)
+		local GameGetVotesStoreModuleResult = GameGetVotesStoreModule(p2)
+		
+		return if Text == nil then nil else GameGetVotesStoreModuleResult.getAndFetchVote(Text).data(p2)
 	end)
-	local var6 = signalsReactModule.useSignalState(function(p2)
-		-- upvalues: gameGetVotesStoreModule (copy), var2 (ref)
-		return var2 ~= nil and gameGetVotesStoreModule(p2).getAndFetchVote(var2).status(p2) == "NotReady"
+	local UseSignalStateResult4 = SignalsReactModule.useSignalState(function(p2): boolean --[[ Line: 67 | Named "getAreVotesLoading" ]]
+		-- upvalues: GameGetVotesStoreModule (upval), Text (copy)
+		local GameGetVotesStoreModuleResult = GameGetVotesStoreModule(p2)
+		
+		return Text ~= nil and GameGetVotesStoreModuleResult.getAndFetchVote(Text).status(p2) == "NotReady"
 	end)
-	local var7 = if var1 then var1.placeVersion else nil
-	local var8 = if var7 then versionHistoryUtilsModule.getVersionNumber(var7) else 0
-	local var9 = 1
-	local var10 = 0
-	local var11 = ""
+	local PlaceVersion = if UseSignalStateResult then UseSignalStateResult.placeVersion else nil
+	local VersionNumber = if PlaceVersion then VersionHistoryUtilsModule.getVersionNumber(PlaceVersion) else 0
+	local v1 = 1
+	local v2 = 0
+	local v3 = ""
 	
-	if var7 then
-		local createdDateParts, createdDateParts_1, createdDateParts_2 = versionHistoryUtilsModule.getCreatedDateParts(var7.createdTime)
-		var9 = createdDateParts
-		var10 = createdDateParts_1
-		var11 = createdDateParts_2
+	if PlaceVersion then
+		v1, v2, v26 = VersionHistoryUtilsModule.getCreatedDateParts(PlaceVersion.createdTime)
 	end
-	local var12 = useLocalization({
+	local UseLocalizationResult = UseLocalizationFunction({
 		createdDate = {
-			localizationStringsModule.LIVE_VERSION_CARD_CREATED_DATE,
-			MONTH = useLocalization(dateHelper.MonthsLocalizationKeys)[var9],
-			DAY = var10,
-			YEAR = var11
+			LocalizationStringsModule.LIVE_VERSION_CARD_CREATED_DATE,
+			MONTH = UseLocalizationFunction(DateHelper.MonthsLocalizationKeys)[v1],
+			DAY = v2,
+			YEAR = v3
 		},
-		fallbackDescription = localizationStringsModule.LIVE_VERSION_CARD_FALLBACK_DESCRIPTION,
-		play = localizationStringsModule.LIVE_VERSION_CARD_PLAY,
+		fallbackDescription = LocalizationStringsModule.LIVE_VERSION_CARD_FALLBACK_DESCRIPTION,
+		play = LocalizationStringsModule.LIVE_VERSION_CARD_PLAY,
 		versionNumber = {
-			if var8 < 10 then localizationStringsModule.LIVE_VERSION_CARD_VERSION_PADDED else localizationStringsModule.LIVE_VERSION_CARD_VERSION_COMPACT,
-			VERSION_NUMBER = var8
+			if VersionNumber < 10 then LocalizationStringsModule.LIVE_VERSION_CARD_VERSION_PADDED else LocalizationStringsModule.LIVE_VERSION_CARD_VERSION_COMPACT,
+			VERSION_NUMBER = VersionNumber
 		},
 		versionTitle = {
-			localizationStringsModule.LIVE_VERSION_CARD_VERSION_TITLE,
-			VERSION = var8
+			LocalizationStringsModule.LIVE_VERSION_CARD_VERSION_TITLE,
+			VERSION = VersionNumber
 		}
 	})
+	local UseLocalizationResult1 = UseLocalizationFunction({
+		versionLabel = {
+			LocalizationStringsModule.VERSION_HISTORY_VERSION_LABEL,
+			VERSION = UseLocalizationResult.versionNumber,
+			CREATED_DATE = UseLocalizationResult.createdDate
+		}
+	})
+	local UseAbbreviatedNumberLocalizationResult = UseAbbreviatedNumberLocalizationFunction(if UseSignalStateResult3 then UseSignalStateResult3.upVotes else nil)
+	local UseAbbreviatedNumberLocalizationResult1 = UseAbbreviatedNumberLocalizationFunction(if UseSignalStateResult1 then UseSignalStateResult1.totalVisits else nil)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 112 ]]
+		-- upvalues: SendBuildExperienceEventModule (upval), FFlagBuildEventsUpdate1Module (upval), p1 (copy), LaunchExperienceModule (upval)
+		SendBuildExperienceEventModule(if FFlagBuildEventsUpdate1Module then "PLAYTEST_CLICK" else "PLAY_CLICK", { universeId = p1.universeId, placeId = p1.placeId }, if FFlagBuildEventsUpdate1Module then { context = "LiveVersionCard" } else nil)
+		LaunchExperienceModule(p1.placeId, "LiveVersionCard")
+		
+		if p1.onPlayActivated then
+			p1.onPlayActivated()
+		end
+	end, { p1.placeId, p1.universeId, p1.onPlayActivated })
 	
-	return if var7 == nil then nil else {
-		versionLabel = useLocalization({
-			versionLabel = {
-				localizationStringsModule.VERSION_HISTORY_VERSION_LABEL,
-				VERSION = var12.versionNumber,
-				CREATED_DATE = var12.createdDate
-			}
-		}).versionLabel,
-		title = if var7.title == nil or var7.title == "" then var12.versionTitle else var7.title,
-		description = if var7.description == nil or var7.description == "" then var12.fallbackDescription else var7.description,
-		totalUpVotes = useAbbreviatedNumberLocalization(if var5 then var5.upVotes else nil),
-		totalVisits = useAbbreviatedNumberLocalization(if var3 then var3.totalVisits else nil),
-		isTotalUpVotesLoading = var6,
-		isTotalVisitsLoading = var4,
-		playText = var12.play,
+	return if PlaceVersion == nil then nil else {
+		versionLabel = UseLocalizationResult1.versionLabel,
+		title = if PlaceVersion.title == nil or PlaceVersion.title == "" then UseLocalizationResult.versionTitle else PlaceVersion.title,
+		description = if PlaceVersion.description == nil or PlaceVersion.description == "" then UseLocalizationResult.fallbackDescription else PlaceVersion.description,
+		totalUpVotes = UseAbbreviatedNumberLocalizationResult,
+		totalVisits = UseAbbreviatedNumberLocalizationResult1,
+		isTotalUpVotesLoading = UseSignalStateResult4,
+		isTotalVisitsLoading = UseSignalStateResult2,
+		playText = UseLocalizationResult.play,
 		isPlayDisabled = p1.isPlayDisabled,
-		onPlayActivated = reactModule.useCallback(function()
-			-- upvalues: sendBuildExperienceEventModule (copy), fFlagBuildEventsUpdate1Module (copy), p1 (ref), launchExperienceModule (copy)
-			sendBuildExperienceEventModule(if fFlagBuildEventsUpdate1Module then "PLAYTEST_CLICK" else "PLAY_CLICK", { universeId = p1.universeId, placeId = p1.placeId }, if fFlagBuildEventsUpdate1Module then { context = "LiveVersionCard" } else nil)
-			launchExperienceModule(p1.placeId, "LiveVersionCard")
-			
-			if p1.onPlayActivated then
-				p1.onPlayActivated()
-			end
-		end, { p1.placeId, p1.universeId, p1.onPlayActivated }),
+		onPlayActivated = UseResult,
 		layoutOrder = p1.layoutOrder,
 		testId = p1.testId
 	}

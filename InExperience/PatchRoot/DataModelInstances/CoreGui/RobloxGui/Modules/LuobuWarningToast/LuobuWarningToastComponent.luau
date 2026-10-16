@@ -1,51 +1,48 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local coreGuiService = game:GetService("CoreGui")
-local roactModule = require(corePackagesService.Packages.Roact)
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local images = UIBloxModule.App.ImageSet.Images
-local toast = UIBloxModule.App.Dialog.Toast
-local robloxGui = coreGuiService:WaitForChild("RobloxGui")
-local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
-local contentProviderService = game:GetService("ContentProvider")
-local renderWithCoreScriptsStyleProviderModule = require(robloxGui.Modules.Common.renderWithCoreScriptsStyleProvider)
-local luobuWarningToastComponent = roactModule.PureComponent:extend("LuobuWarningToastComponent")
-local var1 = robloxTranslatorModule:FormatByKey("InGame.CommonUI.Message.LuobuGameJoinWarning")
+﻿local CorePackages = game:GetService("CorePackages")
+local RoactModule = require(CorePackages.Packages.Roact)
+local UIBloxModule = require(CorePackages.Packages.UIBlox)
+local Images = UIBloxModule.App.ImageSet.Images
+local Toast = UIBloxModule.App.Dialog.Toast
+local ContentProvider = game:GetService("ContentProvider")
+local RenderWithCoreScriptsStyleProviderModule = require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.Common.renderWithCoreScriptsStyleProvider)
+local LuobuWarningToastComponent = RoactModule.PureComponent:extend("LuobuWarningToastComponent")
+local InGameCommonUIMessageLuobuGameJoinWarning = require(CorePackages.Workspace.Packages.RobloxTranslator):FormatByKey("InGame.CommonUI.Message.LuobuGameJoinWarning")
 
-function luobuWarningToastComponent.init(p1)
-	-- upvalues: images (ref), contentProviderService (ref), var1 (ref)
+function LuobuWarningToastComponent.init(p1) --[[ Line: 18 ]]
+	-- upvalues: Images (copy), ContentProvider (copy), InGameCommonUIMessageLuobuGameJoinWarning (copy)
 	p1.state = { isLoaded = false }
-	task.spawn(function()
-		-- upvalues: images (copy), contentProviderService (copy), p1 (ref)
-		local image = images["icons/status/alert"].Image
-		pcall(function()
-			-- upvalues: contentProviderService (copy), image (ref)
-			contentProviderService:PreloadAsync({ image })
+	task.spawn(function() --[[ Line: 23 ]]
+		-- upvalues: Images (upval), ContentProvider (upval), p1 (copy)
+		local Image = Images["icons/status/alert"].Image
+		pcall(function() --[[ Line: 25 ]]
+			-- upvalues: ContentProvider (upval), Image (copy)
+			ContentProvider:PreloadAsync({ Image })
 		end)
 		p1:setState({ isLoaded = true })
 	end)
 	
-	function p0.getToastContent()
-		-- upvalues: images (copy), var1 (copy)
+	function p1.getToastContent() --[[ Line: 33 ]]
+		-- upvalues: Images (upval), InGameCommonUIMessageLuobuGameJoinWarning (upval)
 		return {
-			iconImage = images["icons/status/alert"],
+			iconImage = Images["icons/status/alert"],
 			iconColorStyle = { Transparency = 0, Color = Color3.new(1, 1, 1) },
-			toastTitle = var1
+			toastTitle = InGameCommonUIMessageLuobuGameJoinWarning
 		}
 	end
 end
 
-function luobuWarningToastComponent.render(p1)
-	-- upvalues: roactModule (ref), toast (ref), renderWithCoreScriptsStyleProviderModule (ref)
-	return if p1.state.isLoaded then renderWithCoreScriptsStyleProviderModule({
-		RobloxCaptureNotificationGui = roactModule.createElement("ScreenGui", {
+function LuobuWarningToastComponent.render(p1) --[[ Line: 45 ]]
+	-- upvalues: RoactModule (copy), Toast (copy), RenderWithCoreScriptsStyleProviderModule (copy)
+	return if p1.state.isLoaded then RenderWithCoreScriptsStyleProviderModule({
+		RobloxCaptureNotificationGui = RoactModule.createElement("ScreenGui", {
 			AutoLocalize = false,
 			DisplayOrder = 9,
 			IgnoreGuiInset = true,
 			OnTopOfCoreBlur = true,
 			ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 		}, {
-			Content = roactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
-				WarningToast = roactModule.createElement(toast, {
+			Content = RoactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
+				WarningToast = RoactModule.createElement(Toast, {
 					duration = 5,
 					show = true,
 					toastContent = p1.getToastContent()
@@ -55,4 +52,4 @@ function luobuWarningToastComponent.render(p1)
 	}) else nil
 end
 
-return luobuWarningToastComponent
+return LuobuWarningToastComponent

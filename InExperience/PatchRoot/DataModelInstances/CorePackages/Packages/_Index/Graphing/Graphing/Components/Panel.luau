@@ -1,1 +1,1 @@
-﻿return require(script.Panel)
+﻿return (require(script.Panel))

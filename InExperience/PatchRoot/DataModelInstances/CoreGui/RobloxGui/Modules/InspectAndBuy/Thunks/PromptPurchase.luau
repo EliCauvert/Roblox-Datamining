@@ -1,47 +1,48 @@
-﻿local playersService = game:GetService("Players")
-local marketplaceService = game:GetService("MarketplaceService")
-local parent = script.Parent.Parent
-local thunkModule = require(parent.Thunk)
-local analyticsModule = require(parent.Services.Analytics)
-local constantsModule = require(parent.Constants)
-local setItemBeingPurchasedModule = require(parent.Actions.SetItemBeingPurchased)
-local sendCounterModule = require(parent.Thunks.SendCounter)
-local reportPurchaseAttemptUnifiedEventModule = require(parent.Thunks.ReportPurchaseAttemptUnifiedEvent)
-local fFlagAXIaBSinglePurchaseUnifiedEventsModule = require(parent.Flags.FFlagAXIaBSinglePurchaseUnifiedEvents)
-local fixInspectAndBuyThirdPartySales = game:DefineFastFlag("FixInspectAndBuyThirdPartySales", false)
-local list = { analyticsModule }
+﻿local Players = game:GetService("Players")
+local MarketplaceService = game:GetService("MarketplaceService")
+local Parent = script.Parent.Parent
+local ThunkModule = require(Parent.Thunk)
+local AnalyticsModule = require(Parent.Services.Analytics)
+local ConstantsModule = require(Parent.Constants)
+local SetItemBeingPurchasedModule = require(Parent.Actions.SetItemBeingPurchased)
+local SendCounterModule = require(Parent.Thunks.SendCounter)
+local ReportPurchaseAttemptUnifiedEventModule = require(Parent.Thunks.ReportPurchaseAttemptUnifiedEvent)
+local FFlagAXIaBSinglePurchaseUnifiedEventsModule = require(Parent.Flags.FFlagAXIaBSinglePurchaseUnifiedEvents)
+local FixInspectAndBuyThirdPartySales = game:DefineFastFlag("FixInspectAndBuyThirdPartySales", false)
+local list = { AnalyticsModule }
 
-return function(p1, p2, p3, p4, p5, p6, p7)
-	-- upvalues: thunkModule (ref), list (ref), analyticsModule (ref), constantsModule (ref), fFlagAXIaBSinglePurchaseUnifiedEventsModule (ref), setItemBeingPurchasedModule (ref), marketplaceService (ref), playersService (ref), sendCounterModule (ref), fixInspectAndBuyThirdPartySales (ref), reportPurchaseAttemptUnifiedEventModule (ref)
-	return thunkModule.new(script.Name, list, function(p8, p9)
-		-- upvalues: analyticsModule (copy), p4 (ref), p2 (ref), constantsModule (copy), fFlagAXIaBSinglePurchaseUnifiedEventsModule (copy), p6 (ref), setItemBeingPurchasedModule (copy), p1 (ref), marketplaceService (copy), playersService (copy), p3 (ref), p5 (ref), sendCounterModule (copy), p7 (ref), fixInspectAndBuyThirdPartySales (copy), reportPurchaseAttemptUnifiedEventModule (copy)
-		local var1 = p9[analyticsModule]
-		local var2 = p4 ~= nil and p2 ~= constantsModule.ItemType.Bundle
-		local var3 = if fFlagAXIaBSinglePurchaseUnifiedEventsModule and var2 then p6 else nil
-		p8:dispatch(setItemBeingPurchasedModule(p1, p2, var3))
+return function(AssetId, Bundle, CollectibleItemId, CollectibleProductId, CollectibleItemInstanceId, ExpectedPrice, p1) --[[ Line: 22 | Named "PromptPurchase" ]]
+	-- upvalues: ThunkModule (copy), list (copy), AnalyticsModule (copy), ConstantsModule (copy), FFlagAXIaBSinglePurchaseUnifiedEventsModule (copy), SetItemBeingPurchasedModule (copy), MarketplaceService (copy), Players (copy), SendCounterModule (copy), FixInspectAndBuyThirdPartySales (copy), ReportPurchaseAttemptUnifiedEventModule (copy)
+	return ThunkModule.new(script.Name, list, function(p2, p3) --[[ Line: 31 ]]
+		-- upvalues: AnalyticsModule (upval), CollectibleProductId (copy), Bundle (copy), ConstantsModule (upval), FFlagAXIaBSinglePurchaseUnifiedEventsModule (upval), ExpectedPrice (copy), SetItemBeingPurchasedModule (upval), AssetId (copy), MarketplaceService (upval), Players (upval), CollectibleItemId (copy), CollectibleItemInstanceId (copy), SendCounterModule (upval), p1 (copy), FixInspectAndBuyThirdPartySales (upval), ReportPurchaseAttemptUnifiedEventModule (upval)
+		local v1 = p3[AnalyticsModule]
+		local IsNotBundleMatch: boolean = CollectibleProductId ~= nil and Bundle ~= ConstantsModule.ItemType.Bundle
+		local ExpectedPrice1 = if FFlagAXIaBSinglePurchaseUnifiedEventsModule and IsNotBundleMatch then ExpectedPrice else nil
+		p2:dispatch(SetItemBeingPurchasedModule(AssetId, Bundle, ExpectedPrice1))
 		
-		if var2 then
-			marketplaceService:PromptCollectiblesPurchase(playersService.LocalPlayer, p1, p3, p5, p4, p6)
-			p8:dispatch(sendCounterModule(constantsModule.Counters.PromptLimitedCollectiblesPurchase))
-		elseif p2 == constantsModule.ItemType.Bundle then
-			marketplaceService:PromptBundlePurchase(playersService.LocalPlayer, p1)
-			p8:dispatch(sendCounterModule(constantsModule.Counters.PromptBundlePurchase))
-		elseif p2 == constantsModule.ItemType.Asset then
-			if fixInspectAndBuyThirdPartySales or p3 == nil or not not p7 then
-				marketplaceService:PromptRobloxPurchase(p1, false)
-				p8:dispatch(sendCounterModule(constantsModule.Counters.PromptRobloxPurchase))
+		if IsNotBundleMatch then
+			MarketplaceService:PromptCollectiblesPurchase(Players.LocalPlayer, AssetId, CollectibleItemId, CollectibleItemInstanceId, CollectibleProductId, ExpectedPrice)
+			p2:dispatch(SendCounterModule(ConstantsModule.Counters.PromptLimitedCollectiblesPurchase))
+		elseif Bundle == ConstantsModule.ItemType.Bundle then
+			MarketplaceService:PromptBundlePurchase(Players.LocalPlayer, AssetId)
+			p2:dispatch(SendCounterModule(ConstantsModule.Counters.PromptBundlePurchase))
+		elseif Bundle == ConstantsModule.ItemType.Asset then
+			if FixInspectAndBuyThirdPartySales or CollectibleItemId == nil or not not p1 then
+				MarketplaceService:PromptRobloxPurchase(AssetId, false)
+				p2:dispatch(SendCounterModule(ConstantsModule.Counters.PromptRobloxPurchase))
 			else
-				marketplaceService:PromptPurchase(playersService.LocalPlayer, p1, false)
-				p8:dispatch(sendCounterModule(constantsModule.Counters.PromptUnlimitedCollectiblePurchase))
+				MarketplaceService:PromptPurchase(Players.LocalPlayer, AssetId, false)
+				p2:dispatch(SendCounterModule(ConstantsModule.Counters.PromptUnlimitedCollectiblePurchase))
 			end
 		else
-			p8:dispatch(sendCounterModule(constantsModule.Counters.PromptPurchaseUnknownItemType))
+			p2:dispatch(SendCounterModule(ConstantsModule.Counters.PromptPurchaseUnknownItemType))
 		end
-		if fFlagAXIaBSinglePurchaseUnifiedEventsModule then
-			p8:dispatch(reportPurchaseAttemptUnifiedEventModule(p1, p2, var3))
+		if FFlagAXIaBSinglePurchaseUnifiedEventsModule then
+			p2:dispatch(ReportPurchaseAttemptUnifiedEventModule(AssetId, Bundle, ExpectedPrice1))
 			
 			return
+		else
+			v1.reportPurchaseAttempt(Bundle, AssetId)
 		end
-		var1.reportPurchaseAttempt(p2, p1)
 	end)
 end

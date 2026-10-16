@@ -1,7 +1,7 @@
-﻿local reactModule = require(script:FindFirstAncestor("ProfileQRCode").Parent.React)
-local profileQRCodeAnalyticsModule = require(script.Parent.ProfileQRCodeAnalytics)
+﻿local ReactModule = require(script:FindFirstAncestor("ProfileQRCode").Parent.React)
+local ProfileQRCodeAnalyticsModule = require(script.Parent.ProfileQRCodeAnalytics)
 
-return function()
-	-- upvalues: reactModule (ref), profileQRCodeAnalyticsModule (ref)
-	return reactModule.useContext(profileQRCodeAnalyticsModule)
+return function() --[[ Line: 8 ]]
+	-- upvalues: ReactModule (copy), ProfileQRCodeAnalyticsModule (copy)
+	return ReactModule.useContext(ProfileQRCodeAnalyticsModule)
 end

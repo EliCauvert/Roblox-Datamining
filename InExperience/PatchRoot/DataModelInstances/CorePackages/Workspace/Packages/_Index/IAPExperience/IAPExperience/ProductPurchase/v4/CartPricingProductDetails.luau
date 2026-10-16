@@ -1,32 +1,35 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local reactModule = require(parent_1.React)
-local view = require(parent_1.Foundation).View
-local productDetailsContainerModule = require(parent.Generic.ProductDetailsContainer)
-local cartPricingLoadingModule = require(script.Parent.CartPricingLoading)
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
+local View = require(Parent1.Foundation).View
+local ProductDetailsContainerModule = require(Parent.Generic.ProductDetailsContainer)
+local CartPricingLoadingModule = require(script.Parent.CartPricingLoading)
 local _ = require(script.Parent.useCartPricing)
-local _ = require(parent.Enums.UnifiedPurchaseModalTypeEnum)
-local fFlagUnifiedPurchaseAddSkeleton = require(parent.Parent.SharedFlags).FFlagUnifiedPurchaseAddSkeleton
+local _ = require(Parent.Enums.UnifiedPurchaseModalTypeEnum)
+local FFlagUnifiedPurchaseAddSkeleton = require(Parent.Parent.SharedFlags).FFlagUnifiedPurchaseAddSkeleton
+local FFlagLuaAppsEnablePromptVIPServerPurchase = require(Parent.Parent.SharedFlags).FFlagLuaAppsEnablePromptVIPServerPurchase
 
-return function(p1)
-	-- upvalues: reactModule (ref), cartPricingLoadingModule (ref), view (ref), productDetailsContainerModule (ref), fFlagUnifiedPurchaseAddSkeleton (ref)
-	local cartPricing = p1.cartPricing
+return function(p1) --[[ Line: 32 | Named "CartPricingProductDetails" ]]
+	-- upvalues: ReactModule (copy), CartPricingLoadingModule (copy), View (copy), ProductDetailsContainerModule (copy), FFlagLuaAppsEnablePromptVIPServerPurchase (copy), FFlagUnifiedPurchaseAddSkeleton (copy)
+	local CartPricing = p1.cartPricing
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "col align-x-center align-y-center gap-medium size-full-0 auto-y",
 		LayoutOrder = 1
 	}, {
-		Details = reactModule.createElement(productDetailsContainerModule, {
+		Details = ReactModule.createElement(ProductDetailsContainerModule, {
 			purchaseModalType = p1.purchaseModalType,
-			product = cartPricing.mergedProductForDetails,
+			product = CartPricing.mergedProductForDetails,
 			subtitleView = p1.subtitleView,
 			priceSuffix = p1.priceSuffix,
-			isLoading = if fFlagUnifiedPurchaseAddSkeleton then p1.isLoading else nil,
-			subtotalItemCount = if cartPricing.showCartOfferUi and cartPricing.cartAggregate then cartPricing.cartAggregate.itemCount else nil,
-			hideProductDetails = cartPricing.shouldHideLookProductDetails,
+			includePriceSuffixOnOriginal = if FFlagLuaAppsEnablePromptVIPServerPurchase then p1.includePriceSuffixOnOriginal else nil,
+			priceText = if FFlagLuaAppsEnablePromptVIPServerPurchase then p1.priceText else nil,
+			isLoading = if FFlagUnifiedPurchaseAddSkeleton then p1.isLoading else nil,
+			subtotalItemCount = if CartPricing.showCartOfferUi and CartPricing.cartAggregate then CartPricing.cartAggregate.itemCount else nil,
+			hideProductDetails = CartPricing.shouldHideLookProductDetails,
 			hideDiscountSummary = p1.isCartPricingLoading,
-			savingsSummary = cartPricing.cartPricingSavingsSummary
+			savingsSummary = CartPricing.cartPricingSavingsSummary
 		}),
-		CartPricingLoading = if p1.isCartPricingLoading then reactModule.createElement(cartPricingLoadingModule, { LayoutOrder = 2, isLoading = p1.isCartPricingLoading }) else nil
+		CartPricingLoading = if p1.isCartPricingLoading then ReactModule.createElement(CartPricingLoadingModule, { LayoutOrder = 2, isLoading = p1.isCartPricingLoading }) else nil
 	})
 end

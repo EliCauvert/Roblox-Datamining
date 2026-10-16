@@ -1,7 +1,7 @@
-﻿local parent = script.Parent.Parent
-local _ = require(parent.type)
+﻿local Parent = script.Parent.Parent
+local _ = require(Parent.type)
 
-return require(parent.Parent.React).createContext({
+return (require(Parent.Parent.React).createContext({
 	notificationPayload = nil,
 	state = nil,
 	cardSize = nil,
@@ -9,4 +9,4 @@ return require(parent.Parent.React).createContext({
 	openMetaActions = nil,
 	readOnly = nil,
 	cardTransparency = nil
-})
+}))

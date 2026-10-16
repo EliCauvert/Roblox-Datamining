@@ -1,10 +1,10 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local reactModule = require(moments.Parent.React)
-local momentsHeaderContainerModule = require(moments.Components.MomentsHeader.MomentsHeaderContainer)
+﻿local Moments = script:FindFirstAncestor("Moments")
+local ReactModule = require(Moments.Parent.React)
+local MomentsHeaderContainerModule = require(Moments.Components.MomentsHeader.MomentsHeaderContainer)
 
-return function(p1)
-	-- upvalues: reactModule (ref), momentsHeaderContainerModule (ref)
-	return reactModule.createElement(momentsHeaderContainerModule, {
+return function(p1) --[[ Line: 15 | Named "MomentsBackHeader" ]]
+	-- upvalues: ReactModule (copy), MomentsHeaderContainerModule (copy)
+	return ReactModule.createElement(MomentsHeaderContainerModule, {
 		variant = "back",
 		showTopScrim = true,
 		layoutOrder = p1.layoutOrder,

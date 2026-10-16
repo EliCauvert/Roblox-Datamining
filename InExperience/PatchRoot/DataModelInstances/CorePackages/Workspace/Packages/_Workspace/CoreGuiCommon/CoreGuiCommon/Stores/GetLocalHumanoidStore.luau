@@ -1,1 +1,1 @@
-﻿return require(script:FindFirstAncestor("CoreGuiCommon").Parent.Signals).createComputed(require(script.createLocalHumanoidStore))
+﻿return require(script:FindFirstAncestor("CoreGuiCommon").Parent.Signals).createComputed((require(script.createLocalHumanoidStore)))

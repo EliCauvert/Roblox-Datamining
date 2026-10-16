@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Index.NetworkingUserSettings.NetworkingUserSettings)
+﻿return (require(script.Parent._Index.NetworkingUserSettings.NetworkingUserSettings))

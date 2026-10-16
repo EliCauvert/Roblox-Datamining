@@ -1,57 +1,58 @@
-﻿local luauPolyfillModule = require(script.Parent.Parent.Parent.LuauPolyfill)
-local setTimeout = luauPolyfillModule.setTimeout
-local clearTimeout = luauPolyfillModule.clearTimeout
-local t = {
-	runAfterInteractions = function(_, p1)
-		p1()
+﻿local LuauPolyfillModule = require(script.Parent.Parent.Parent.LuauPolyfill)
+local SetTimeoutFunction = LuauPolyfillModule.setTimeout
+local ClearTimeoutFunction = LuauPolyfillModule.clearTimeout
+local config = {
+	runAfterInteractions = function(_, Callback: () -> ()) --[[ Line: 20 ]]
+		Callback()
 		
 		return nil
 	end
 }
-local t_1 = {}
-t_1.__index = t_1
+local BatchinatorModule = {}
+BatchinatorModule.__index = BatchinatorModule
 
-function t_1.new(p1, p2)
-	-- upvalues: t_1 (ref)
-	local tbl = setmetatable({}, t_1)
-	tbl._delay = p2
-	tbl._callback = p1
+function BatchinatorModule.new(_callback, _delay) --[[ Line: 64 ]]
+	-- upvalues: BatchinatorModule (copy)
+	local self = setmetatable({}, BatchinatorModule)
+	self._delay = _delay
+	self._callback = _callback
 	
-	return tbl
+	return self
 end
 
-function t_1:dispose(p1)
-	local var1 = p1 or { abort = false }
+function BatchinatorModule:dispose(p1) --[[ Line: 71 ]]
+	local Config = if p1 then p1 else { abort = false }
 	
 	if self._taskHandle then
 		self._taskHandle.cancel()
 		
-		if not var1.abort then
+		if not Config.abort then
 			self._callback()
 		end
 		self._taskHandle = nil
 	end
 end
 
-function t_1:schedule()
-	-- upvalues: setTimeout (ref), t (ref), clearTimeout (ref)
-	if self._taskHandle then
+function BatchinatorModule:schedule() --[[ Line: 85 ]]
+	-- upvalues: SetTimeoutFunction (copy), config (copy), ClearTimeoutFunction (copy)
+	if not self._taskHandle then
+		local SetTimeoutResult = SetTimeoutFunction(function() --[[ Line: 90 ]]
+			-- upvalues: self (copy), config (upval)
+			self._taskHandle = config:runAfterInteractions(function() --[[ Line: 91 ]]
+				-- upvalues: self (upval)
+				self._taskHandle = nil
+				self._callback()
+			end)
+		end, self._delay)
+		self._taskHandle = {
+			cancel = function() --[[ Line: 100 ]]
+				-- upvalues: ClearTimeoutFunction (upval), SetTimeoutResult (copy)
+				return ClearTimeoutFunction(SetTimeoutResult)
+			end
+		}
+		
 		return
 	end
-	local var1 = setTimeout(function()
-		-- upvalues: self (ref), t (copy)
-		self._taskHandle = t:runAfterInteractions(function()
-			-- upvalues: self (copy)
-			self._taskHandle = nil
-			self._callback()
-		end)
-	end, self._delay)
-	self._taskHandle = {
-		cancel = function()
-			-- upvalues: clearTimeout (copy), var1 (ref)
-			return clearTimeout(var1)
-		end
-	}
 end
 
-return t_1
+return BatchinatorModule

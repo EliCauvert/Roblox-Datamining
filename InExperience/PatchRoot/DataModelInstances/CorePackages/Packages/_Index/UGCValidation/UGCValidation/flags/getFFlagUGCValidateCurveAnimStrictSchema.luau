@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("UGCValidateCurveAnimStrictSchema", false)
 
-return function()
+return function() --[[ Line: 3 ]]
 	return game:GetFastFlag("UGCValidateCurveAnimStrictSchema")
 end

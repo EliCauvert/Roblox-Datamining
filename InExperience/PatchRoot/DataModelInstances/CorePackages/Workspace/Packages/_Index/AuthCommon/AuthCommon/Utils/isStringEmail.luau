@@ -1,8 +1,9 @@
-﻿return function(p1)
-	if p1 and p1 ~= "" then
-		assert(p1, "")
+﻿return function(Text: string): boolean --[[ Line: 2 ]]
+	if Text and Text ~= "" then
+		assert(Text, "")
 		
-		return string.find(p1, "^.+@.+%..+$") ~= nil
+		return string.find(Text, "^.+@.+%..+$") ~= nil
+	else
+		return false
 	end
-	return false
 end

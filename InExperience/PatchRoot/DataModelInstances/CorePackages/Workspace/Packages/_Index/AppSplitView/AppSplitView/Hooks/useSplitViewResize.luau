@@ -1,98 +1,97 @@
-﻿local appSplitView = script:FindFirstAncestor("AppSplitView")
-local reactModule = require(appSplitView.Parent.React)
-local enumsModule = require(appSplitView.Common.Enums)
+﻿local AppSplitView = script:FindFirstAncestor("AppSplitView")
+local ReactModule = require(AppSplitView.Parent.React)
+local EnumsModule = require(AppSplitView.Common.Enums)
 
-local function toSupportSize(p1)
-	return UDim2.new(0, p1, 1, 0)
+local function toSupportSize(XOffset): UDim2 --[[ Line: 10 ]]
+	return UDim2.new(0, XOffset, 1, 0)
 end
 
-return function(p1)
-	-- upvalues: enumsModule (ref), reactModule (ref), toSupportSize (ref)
-	local navWidth = p1.navWidth
-	local supportWidth = p1.supportWidth
-	local var1 = (p1.variant or enumsModule.SplitVariant.SplitRight) == enumsModule.SplitVariant.SplitRight
-	local var2, var3 = reactModule.useState(p1.hasWidthOverride == true)
-	local var4, var5 = reactModule.useBinding(supportWidth)
-	local var6, var7 = reactModule.useBinding(supportWidth)
-	local var8 = reactModule.useRef(supportWidth)
-	local var9 = reactModule.useRef(p1)
-	var9.current = p1
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var3 (ref)
-		if p1.hasWidthOverride then
-			var3(true)
+return function(Current) --[[ Line: 22 | Named "useSplitViewResize" ]]
+	-- upvalues: EnumsModule (copy), ReactModule (copy), toSupportSize (copy)
+	local NavWidth = Current.navWidth
+	local SupportWidth = Current.supportWidth
+	local IsSplitRightMatch = (Current.variant or EnumsModule.SplitVariant.SplitRight) == EnumsModule.SplitVariant.SplitRight
+	local UseStateResult, UseStateResult2 = ReactModule.useState(Current.hasWidthOverride == true)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(SupportWidth)
+	local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(SupportWidth)
+	local UseRefResult = ReactModule.useRef(SupportWidth)
+	local UseRefResult1 = ReactModule.useRef(Current)
+	UseRefResult1.current = Current
+	ReactModule.useEffect(function() --[[ Line: 35 ]]
+		-- upvalues: Current (copy), UseStateResult2 (copy)
+		if Current.hasWidthOverride then
+			UseStateResult2(true)
 		end
-	end, { p1.hasWidthOverride })
-	reactModule.useEffect(function()
-		-- upvalues: var5 (ref), supportWidth (ref), var8 (ref), var7 (ref)
-		var5(supportWidth)
+	end, { Current.hasWidthOverride })
+	ReactModule.useEffect(function() --[[ Line: 41 ]]
+		-- upvalues: UseBindingResult2 (copy), SupportWidth (copy), UseRefResult (copy), UseBindingResult2_1 (copy)
+		UseBindingResult2(SupportWidth)
 		
-		if supportWidth == 0 then
-			var8.current = 0
-			var7(0)
+		if SupportWidth == 0 then
+			UseRefResult.current = 0
+			UseBindingResult2_1(0)
 		end
-	end, { supportWidth })
-	local var10 = reactModule.useCallback(function(p2)
-		-- upvalues: var8 (ref), var7 (ref)
-		local x = p2.AbsoluteSize.X
-		var8.current = x
-		var7(x)
-	end, {})
-	local var11 = reactModule.useCallback(function(p2)
-		-- upvalues: var3 (ref), var9 (ref), enumsModule (copy), var5 (ref), var8 (ref)
-		var3(true)
-		var5(var8.current + (if (var9.current.variant or enumsModule.SplitVariant.SplitRight) == enumsModule.SplitVariant.SplitRight then -1 else 1) * p2.X)
-	end, {})
-	local var12 = reactModule.useCallback(function()
-		-- upvalues: var9 (ref), var8 (ref)
-		local current = var9.current
+	end, { SupportWidth })
+	local UseResult = ReactModule.useCallback(function(p1): UDim2 --[[ Line: 70 ]]
+		-- upvalues: NavWidth (copy)
+		return UDim2.new(0, NavWidth + p1, 0, 0)
+	end, { NavWidth })
+	local UseResult1 = ReactModule.useCallback(function(p1): UDim2 --[[ Line: 74 ]]
+		-- upvalues: NavWidth (copy)
+		return UDim2.new(1, -(NavWidth + p1), 1, 0)
+	end, { NavWidth })
+	local UseResult2 = ReactModule.useCallback(function(p1): UDim2 --[[ Line: 78 ]]
+		-- upvalues: IsSplitRightMatch (copy), NavWidth (copy)
+		local NavWidthDelta: number = if IsSplitRightMatch then -p1 - 12 else NavWidth + p1 - 12
 		
-		if current.onSupportPaneWidthChanged then
-			current.onSupportPaneWidthChanged(var8.current)
-		end
+		return if IsSplitRightMatch then UDim2.new(1, NavWidthDelta, 0, 0) else UDim2.new(0, NavWidthDelta, 0, 0)
+	end, { NavWidth, IsSplitRightMatch })
+	local UseResult3 = ReactModule.useCallback(function(p1): UDim2 --[[ Line: 83 ]]
+		return UDim2.new(1, -p1, 0, 0)
 	end, {})
-	local var13 = reactModule.useCallback(function(p2)
-		-- upvalues: navWidth (ref)
-		return UDim2.new(0, navWidth + p2, 0, 0)
-	end, { navWidth })
-	local var14 = reactModule.useCallback(function(p2)
-		-- upvalues: navWidth (ref)
-		return UDim2.new(1, -(navWidth + p2), 1, 0)
-	end, { navWidth })
-	local var15 = reactModule.useCallback(function(p2)
-		-- upvalues: var1 (ref), navWidth (ref)
-		local var16 = if var1 then (-p2) - 12 else navWidth + p2 - 12
-		
-		return if var1 then UDim2.new(1, var16, 0, 0) else UDim2.new(0, var16, 0, 0)
-	end, { navWidth, var1 })
-	local var16 = reactModule.useCallback(function(p2)
-		return UDim2.new(1, -p2, 0, 0)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 99 ]]
+		-- upvalues: UseBindingResult (copy), toSupportSize (upval)
+		return UseBindingResult:map(toSupportSize)
 	end, {})
 	
 	return {
 		resizerHitWidth = 24,
-		contentPosition = reactModule.useMemo(function()
-			-- upvalues: var1 (ref), navWidth (ref), var6 (ref), var13 (ref)
-			return if var1 then UDim2.new(0, navWidth, 0, 0) else var6:map(var13)
-		end, { var1, navWidth, var13 }),
-		contentSize = reactModule.useMemo(function()
-			-- upvalues: var6 (ref), var14 (ref)
-			return var6:map(var14)
-		end, { var14 }),
-		supportPosition = reactModule.useMemo(function()
-			-- upvalues: var1 (ref), var6 (ref), var16 (ref), navWidth (ref)
-			return if var1 then var6:map(var16) else UDim2.new(0, navWidth, 0, 0)
-		end, { var1, navWidth, var16 }),
-		supportSize = if var2 then reactModule.useMemo(function()
-			-- upvalues: var4 (ref), toSupportSize (copy)
-			return var4:map(toSupportSize)
-		end, {}) else nil,
-		resizerPosition = reactModule.useMemo(function()
-			-- upvalues: var6 (ref), var15 (ref)
-			return var6:map(var15)
-		end, { var15 }),
-		onSupportAbsoluteSizeChanged = var10,
-		onResizerDrag = var11,
-		onResizerDragEnd = var12
+		contentPosition = ReactModule.useMemo(function() --[[ Line: 87 ]]
+			-- upvalues: IsSplitRightMatch (copy), NavWidth (copy), UseBindingResult1 (copy), UseResult (copy)
+			return if IsSplitRightMatch then UDim2.new(0, NavWidth, 0, 0) else UseBindingResult1:map(UseResult)
+		end, { IsSplitRightMatch, NavWidth, UseResult }),
+		contentSize = ReactModule.useMemo(function() --[[ Line: 91 ]]
+			-- upvalues: UseBindingResult1 (copy), UseResult1 (copy)
+			return UseBindingResult1:map(UseResult1)
+		end, { UseResult1 }),
+		supportPosition = ReactModule.useMemo(function() --[[ Line: 95 ]]
+			-- upvalues: IsSplitRightMatch (copy), UseBindingResult1 (copy), UseResult3 (copy), NavWidth (copy)
+			return if IsSplitRightMatch then UseBindingResult1:map(UseResult3) else UDim2.new(0, NavWidth, 0, 0)
+		end, { IsSplitRightMatch, NavWidth, UseResult3 }),
+		supportSize = if UseStateResult then UseMemoResult else nil,
+		resizerPosition = ReactModule.useMemo(function() --[[ Line: 104 ]]
+			-- upvalues: UseBindingResult1 (copy), UseResult2 (copy)
+			return UseBindingResult1:map(UseResult2)
+		end, { UseResult2 }),
+		onSupportAbsoluteSizeChanged = ReactModule.useCallback(function(Frame) --[[ Line: 49 ]]
+			-- upvalues: UseRefResult (copy), UseBindingResult2_1 (copy)
+			local X = Frame.AbsoluteSize.X
+			UseRefResult.current = X
+			UseBindingResult2_1(X)
+		end, {}),
+		onResizerDrag = ReactModule.useCallback(function(p1) --[[ Line: 55 ]]
+			-- upvalues: UseStateResult2 (copy), UseRefResult1 (copy), EnumsModule (upval), UseBindingResult2 (copy), UseRefResult (copy)
+			UseStateResult2(true)
+			local IsSplitRightMatch = (UseRefResult1.current.variant or EnumsModule.SplitVariant.SplitRight) == EnumsModule.SplitVariant.SplitRight
+			UseBindingResult2(UseRefResult.current + (if IsSplitRightMatch then -1 else 1) * p1.X)
+		end, {}),
+		onResizerDragEnd = ReactModule.useCallback(function() --[[ Line: 63 ]]
+			-- upvalues: UseRefResult1 (copy), UseRefResult (copy)
+			local Current = UseRefResult1.current
+			
+			if Current.onSupportPaneWidthChanged then
+				Current.onSupportPaneWidthChanged(UseRefResult.current)
+			end
+		end, {})
 	}
 end

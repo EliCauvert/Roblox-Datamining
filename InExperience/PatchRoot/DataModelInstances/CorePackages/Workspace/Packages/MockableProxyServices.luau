@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.MockableProxyServices.MockableProxyServices)
+﻿return (require(script.Parent._Workspace.MockableProxyServices.MockableProxyServices))

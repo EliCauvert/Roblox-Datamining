@@ -1,27 +1,31 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceCommon").Parent
-local reactModule = require(parent.React)
-local useOverlay = require(parent.Foundation).Hooks.useOverlay
-local useFocusGuiObject = require(parent.ReactFocusNavigation).useFocusGuiObject
-local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
-local useFocusNavigableSurfaceRegistryConnection = focusNavigationUtilsModule.useFocusNavigableSurfaceRegistryConnection
-local wasLastInputGamepad = require(parent.RoactUtils).wasLastInputGamepad
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceCommon").Parent
+local ReactModule = require(Parent.React)
+local UseOverlayFunction = require(Parent.Foundation).Hooks.useOverlay
+local UseFocusGuiObjectFunction = require(Parent.ReactFocusNavigation).useFocusGuiObject
+local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
+local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
+local UseFocusNavigableSurfaceRegistryConnectionFunction = FocusNavigationUtilsModule.useFocusNavigableSurfaceRegistryConnection
+local WasLastInputGamepadFunction = require(Parent.RoactUtils).wasLastInputGamepad
 
-return function(p1)
-	-- upvalues: useOverlay (ref), useFocusNavigableSurfaceRegistryConnection (ref), focusNavigableSurfaceIdentifierEnum (ref), useFocusGuiObject (ref), wasLastInputGamepad (ref), reactModule (ref)
-	local var1 = useOverlay()
-	useFocusNavigableSurfaceRegistryConnection(p1.current, focusNavigableSurfaceIdentifierEnum.CentralOverlay)
-	local var2 = useFocusGuiObject()
-	local var3 = wasLastInputGamepad()
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var1 (ref), var3 (ref), var2 (ref)
-		if p1.current and var1 == nil and var3 then
-			task.delay(0.1, function()
-				-- upvalues: var2 (copy), p1 (copy)
-				var2(p1.current)
+return function(p1) --[[ Line: 14 ]]
+	-- upvalues: UseOverlayFunction (copy), UseFocusNavigableSurfaceRegistryConnectionFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), UseFocusGuiObjectFunction (copy), WasLastInputGamepadFunction (copy), ReactModule (copy)
+	local UseOverlayResult = UseOverlayFunction()
+	UseFocusNavigableSurfaceRegistryConnectionFunction(p1.current, FocusNavigableSurfaceIdentifierEnum.CentralOverlay)
+	local UseFocusGuiObjectResult = UseFocusGuiObjectFunction()
+	local WasLastInputGamepadResult = WasLastInputGamepadFunction()
+	ReactModule.useEffect(function() --[[ Line: 22 ]]
+		-- upvalues: p1 (copy), UseOverlayResult (copy), WasLastInputGamepadResult (copy), UseFocusGuiObjectResult (copy)
+		if p1.current and UseOverlayResult == nil and WasLastInputGamepadResult then
+			task.delay(0.1, function() --[[ Line: 24 ]]
+				-- upvalues: UseFocusGuiObjectResult (upval), p1 (upval)
+				UseFocusGuiObjectResult(p1.current)
 			end)
 		end
-	end, { var2, var1, var3 })
+	end, {
+		UseFocusGuiObjectResult,
+		UseOverlayResult,
+		WasLastInputGamepadResult
+	})
 	
-	return var1
+	return UseOverlayResult
 end

@@ -1,65 +1,64 @@
-﻿local adService = game:GetService("AdService")
-local coreGuiService = game:GetService("CoreGui")
-local localizationService = game:GetService("LocalizationService")
-local parent = script.Parent
-local parent_1 = parent.Parent
-local reactModule = require(parent_1.React)
-local reactRobloxModule = require(parent_1.ReactRoblox)
-local inExperienceLocalesModule = require(parent_1.InExperienceLocales)
-local localizationModule = require(parent_1.Localization)
-local foundationModule = require(parent_1.Foundation)
-local roactModule = require(parent_1.Roact)
-local disclosureButtonListenerComponentModule = require(parent.DisclosureButtonListenerComponent)
-local adsInteractivityControlsModule = require(parent.AdsInteractivityControls)
-local localizationProvider = localizationModule.LocalizationProvider
-local foundationProvider = foundationModule.FoundationProvider
-local adsInteractivityControlsFixStyleLink = game:DefineFastFlag("AdsInteractivityControlsFixStyleLink", false)
+﻿local AdService = game:GetService("AdService")
+local CoreGui = game:GetService("CoreGui")
+local LocalizationService = game:GetService("LocalizationService")
+local Parent = script.Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
+local ReactRobloxModule = require(Parent1.ReactRoblox)
+local InExperienceLocalesModule = require(Parent1.InExperienceLocales)
+local FoundationModule = require(Parent1.Foundation)
+local RoactModule = require(Parent1.Roact)
+local DisclosureButtonListenerComponentModule = require(Parent.DisclosureButtonListenerComponent)
+local AdsInteractivityControlsModule = require(Parent.AdsInteractivityControls)
+local LocalizationProvider = require(Parent1.Localization).LocalizationProvider
+local FoundationProvider = FoundationModule.FoundationProvider
+local AdsInteractivityControlsFixStyleLink = game:DefineFastFlag("AdsInteractivityControlsFixStyleLink", false)
 
-local function initializeImmersiveAds()
-	-- upvalues: coreGuiService (ref), adService (ref), roactModule (ref), adsInteractivityControlsModule (ref), adsInteractivityControlsFixStyleLink (ref)
-	local adGuiInteractivityControls = Instance.new("Folder")
-	adGuiInteractivityControls.Name = "AdGuiInteractivityControls"
-	adGuiInteractivityControls.Parent = coreGuiService
+local function initializeImmersiveAds() --[[ Line: 22 ]]
+	-- upvalues: CoreGui (copy), AdService (copy), RoactModule (copy), AdsInteractivityControlsModule (copy), AdsInteractivityControlsFixStyleLink (copy)
+	local AdGuiInteractivityControls = Instance.new("Folder")
+	AdGuiInteractivityControls.Name = "AdGuiInteractivityControls"
+	AdGuiInteractivityControls.Parent = CoreGui
 	local t = {}
-	adService.adGuiRegisterUI:Connect(function(p1)
-		-- upvalues: t (ref), roactModule (copy), adsInteractivityControlsModule (copy), adsInteractivityControlsFixStyleLink (copy), adGuiInteractivityControls (ref)
-		if not p1:IsA("AdGui") then return end
-		if t[p1] then return end
-		local var1 = roactModule.createElement(adsInteractivityControlsModule, { adGui = p1 })
+	AdService.adGuiRegisterUI:Connect(function(AdGui) --[[ Line: 30 ]]
+		-- upvalues: t (copy), RoactModule (upval), AdsInteractivityControlsModule (upval), AdsInteractivityControlsFixStyleLink (upval), AdGuiInteractivityControls (copy)
+		if not AdGui:IsA("AdGui") then return end
+		if t[AdGui] then return end
+		local Element = RoactModule.createElement(AdsInteractivityControlsModule, { adGui = AdGui })
 		
-		if adsInteractivityControlsFixStyleLink then
-			var1 = roactModule.createElement("Folder", nil, var1)
+		if AdsInteractivityControlsFixStyleLink then
+			Element = RoactModule.createElement("Folder", nil, Element)
 		end
-		t[p1] = roactModule.mount(var1, adGuiInteractivityControls, "AdsInteractivityControls")
-		p1.Destroying:Connect(function()
-			-- upvalues: roactModule (copy), t (copy), p1 (ref)
-			roactModule.unmount(t[p1])
-			t[p1] = nil
+		t[AdGui] = RoactModule.mount(Element, AdGuiInteractivityControls, "AdsInteractivityControls")
+		AdGui.Destroying:Connect(function() --[[ Line: 46 ]]
+			-- upvalues: RoactModule (upval), t (upval), AdGui (copy)
+			RoactModule.unmount(t[AdGui])
+			t[AdGui] = nil
 		end)
 	end)
-	adService:SetAdGuiInteractivityHandlerInitialized()
+	AdService:SetAdGuiInteractivityHandlerInitialized()
 end
 
-local function initializeImmersiveBrandedAds()
-	-- upvalues: coreGuiService (ref), reactRobloxModule (ref), reactModule (ref), localizationProvider (ref), inExperienceLocalesModule (ref), localizationService (ref), foundationProvider (ref), foundationModule (ref), disclosureButtonListenerComponentModule (ref)
-	local immersiveBrandedAds = Instance.new("ScreenGui")
-	immersiveBrandedAds.Name = "ImmersiveBrandedAds"
-	immersiveBrandedAds.ResetOnSpawn = false
-	immersiveBrandedAds.IgnoreGuiInset = true
-	immersiveBrandedAds.Parent = coreGuiService
-	reactRobloxModule.createRoot(immersiveBrandedAds):render({
-		localizationProvider = reactModule.createElement(localizationProvider, {
-			localization = inExperienceLocalesModule.Localization.new(localizationService.RobloxLocaleId)
+local function initializeImmersiveBrandedAds() --[[ Line: 55 ]]
+	-- upvalues: CoreGui (copy), ReactRobloxModule (copy), ReactModule (copy), LocalizationProvider (copy), InExperienceLocalesModule (copy), LocalizationService (copy), FoundationProvider (copy), FoundationModule (copy), DisclosureButtonListenerComponentModule (copy)
+	local ImmersiveBrandedAds = Instance.new("ScreenGui")
+	ImmersiveBrandedAds.Name = "ImmersiveBrandedAds"
+	ImmersiveBrandedAds.ResetOnSpawn = false
+	ImmersiveBrandedAds.IgnoreGuiInset = true
+	ImmersiveBrandedAds.Parent = CoreGui
+	ReactRobloxModule.createRoot(ImmersiveBrandedAds):render({
+		localizationProvider = ReactModule.createElement(LocalizationProvider, {
+			localization = InExperienceLocalesModule.Localization.new(LocalizationService.RobloxLocaleId)
 		}, {
-			foundationProvider = reactModule.createElement(foundationProvider, { colorMode = foundationModule.Enums.ColorMode.Dark }, {
-				disclosureButtonListener = reactModule.createElement(disclosureButtonListenerComponentModule)
+			foundationProvider = ReactModule.createElement(FoundationProvider, { colorMode = FoundationModule.Enums.ColorMode.Dark }, {
+				disclosureButtonListener = ReactModule.createElement(DisclosureButtonListenerComponentModule)
 			})
 		})
 	})
 end
 
-return function()
-	-- upvalues: initializeImmersiveAds (ref), initializeImmersiveBrandedAds (ref)
+return function() --[[ Line: 75 ]]
+	-- upvalues: initializeImmersiveAds (copy), initializeImmersiveBrandedAds (copy)
 	initializeImmersiveAds()
 	initializeImmersiveBrandedAds()
 end

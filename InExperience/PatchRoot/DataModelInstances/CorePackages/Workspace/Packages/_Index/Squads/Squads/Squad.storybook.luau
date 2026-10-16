@@ -1,68 +1,70 @@
-﻿local squads = script:FindFirstAncestor("Squads")
-local parent = squads.Parent
-local reactModule = require(parent.React)
-local UIBloxModule = require(parent.UIBlox)
-UIBloxModule.init(require(parent.Dev.RobloxAppUIBloxConfig))
-local mockLocale = require(parent.Dev.SocialTestHelpers).StoryHelpers.mockLocale
-local dependenciesModule = require(squads.dependencies)
-local cryo = dependenciesModule.Cryo
-local foundation = dependenciesModule.Foundation
-local roact = dependenciesModule.Roact
-local appStyleProvider = UIBloxModule.App.Style.AppStyleProvider
-roact.setGlobalConfig({ propValidation = true, elementTracing = true })
-local t = {
+﻿local Squads = script:FindFirstAncestor("Squads")
+local Parent = Squads.Parent
+local ReactModule = require(Parent.React)
+local UIBloxModule = require(Parent.UIBlox)
+UIBloxModule.init(require(Parent.Dev.RobloxAppUIBloxConfig))
+local MockLocaleFunction = require(Parent.Dev.SocialTestHelpers).StoryHelpers.mockLocale
+local DependenciesModule = require(Squads.dependencies)
+local Cryo = DependenciesModule.Cryo
+local Foundation = DependenciesModule.Foundation
+local Roact = DependenciesModule.Roact
+local AppStyleProvider = UIBloxModule.App.Style.AppStyleProvider
+Roact.setGlobalConfig({ propValidation = true, elementTracing = true })
+local config = {
 	Default = { themeName = "Light", fontName = "Gotham" },
 	Light = { themeName = "Light", fontName = "Gotham" },
 	Dark = { themeName = "Dark", fontName = "Gotham" }
 }
-local t_1 = { language = "en-us" }
+local config1 = { language = "en-us" }
 
-local function useCreateOverlay(p1)
-	-- upvalues: reactModule (ref)
-	local var1 = reactModule.useRef(Instance.new("Frame"))
+local function useCreateOverlay(p1) --[[ Line: 44 ]]
+	-- upvalues: ReactModule (copy)
+	local UseRefResult = ReactModule.useRef(Instance.new("Frame"))
 	
-	if var1.current.Parent ~= p1.focus then
-		var1.current.Parent = p1.focus
+	if UseRefResult.current.Parent ~= p1.focus then
+		UseRefResult.current.Parent = p1.focus
 	end
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref)
-		var1.current.Size = UDim2.fromScale(1, 1)
-		var1.current.BackgroundTransparency = 1
+	ReactModule.useEffect(function() --[[ Line: 52 ]]
+		-- upvalues: UseRefResult (copy)
+		UseRefResult.current.Size = UDim2.fromScale(1, 1)
+		UseRefResult.current.BackgroundTransparency = 1
 		
-		return function()
-			-- upvalues: var1 (copy)
-			var1.current:Destroy()
+		return function() --[[ Line: 56 ]]
+			-- upvalues: UseRefResult (upval)
+			UseRefResult.current:Destroy()
 		end
 	end, {})
 	
-	return var1.current
+	return UseRefResult.current
 end
 
 return {
 	name = "Squads",
-	storyRoot = squads,
-	roact = roact,
-	mapDefinition = function(p1)
-		-- upvalues: cryo (ref), t_1 (ref)
-		return cryo.Dictionary.join(p1, { controls = cryo.Dictionary.join(t_1, p1.controls or {}) })
+	storyRoot = Squads,
+	roact = Roact,
+	mapDefinition = function(p1) --[[ Line: 68 ]]
+		-- upvalues: Cryo (copy), config1 (copy)
+		return Cryo.Dictionary.join(p1, {
+			controls = Cryo.Dictionary.join(config1, p1.controls or {})
+		})
 	end,
-	mapStory = function(p1)
-		-- upvalues: useCreateOverlay (ref), t (ref), roact (ref), foundation (ref), appStyleProvider (ref), mockLocale (ref)
-		return function(p2)
-			-- upvalues: useCreateOverlay (copy), t (copy), roact (copy), foundation (copy), appStyleProvider (copy), mockLocale (copy), p1 (ref)
-			local var1 = if p2 then t[p2.theme] else t.Default
+	mapStory = function(p1) --[[ Line: 72 ]]
+		-- upvalues: useCreateOverlay (copy), config (copy), Roact (copy), Foundation (copy), AppStyleProvider (copy), MockLocaleFunction (copy)
+		return function(p2) --[[ Line: 73 ]]
+			-- upvalues: useCreateOverlay (upval), config (upval), Roact (upval), Foundation (upval), AppStyleProvider (upval), MockLocaleFunction (upval), p1 (copy)
+			local Entry = p2 and config[p2.theme] or config.Default
 			
-			return roact.createElement("Frame", {
+			return Roact.createElement("Frame", {
 				BackgroundTransparency = 1,
 				AutomaticSize = Enum.AutomaticSize.XY,
 				Size = UDim2.new(1, 0, 1, 0)
 			}, {
-				roact.createElement(foundation.FoundationProvider, {
+				Roact.createElement(Foundation.FoundationProvider, {
 					device = "Desktop",
-					colorMode = var1.themeName,
+					colorMode = Entry.themeName,
 					overlayGui = useCreateOverlay(p2)
 				}, {
-					roact.createElement(appStyleProvider, { style = var1 }, { Child = mockLocale(p1, p2) })
+					Roact.createElement(AppStyleProvider, { style = Entry }, { Child = MockLocaleFunction(p1, p2) })
 				})
 			})
 		end

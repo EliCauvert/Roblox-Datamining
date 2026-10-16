@@ -1,154 +1,145 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local creatorCreditModule = require(parent.DataHydration.CreatorCredit)
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local creatorCreditConfigModule = require(buildExperience.CreatorCreditConfig)
-local useOpenBuyRobuxWebViewModule = require(buildExperience.Components.CreatorCreditSheet.useOpenBuyRobuxWebView)
-local useRefreshCreatorCreditOnUnhideModule = require(buildExperience.Components.CreatorCreditSheet.useRefreshCreatorCreditOnUnhide)
-local localizationStringsModule = require(buildExperience.LocalizationStrings)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local CreatorCreditModule = require(Parent.DataHydration.CreatorCredit)
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local CreatorCreditConfigModule = require(BuildExperience.CreatorCreditConfig)
+local UseOpenBuyRobuxWebViewModule = require(BuildExperience.Components.CreatorCreditSheet.useOpenBuyRobuxWebView)
+local UseRefreshCreatorCreditOnUnhideModule = require(BuildExperience.Components.CreatorCreditSheet.useRefreshCreatorCreditOnUnhide)
+local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
+local FFlagBuildExperienceFreeLimitCardModule = require(BuildExperience.Flags.FFlagBuildExperienceFreeLimitCard)
 
-local function _(p1)
-	-- upvalues: creatorCreditConfigModule (ref)
-	return if p1 == nil then nil elseif p1.allowed == nil then if p1.freeTrialRemaining > 0 then nil elseif p1.limitSettings.additionalUsageEnabled then if p1.robuxBalance < creatorCreditConfigModule.FIntMinimumUsableRobuxBalance then "InsufficientRobuxBalance" elseif p1.limitSettings.dailyLimitSet and p1.limitRemaining < creatorCreditConfigModule.FIntMinimumUsableRobuxBalance then "DailyLimitReached" else nil else "FreeTrialExhausted" elseif p1.allowed then nil else p1.reason
+local function _(p1) --[[ Line: 36 | Named "getQuotaBlockReason" ]]
+	-- upvalues: CreatorCreditConfigModule (copy)
+	return if p1 == nil then nil elseif p1.allowed == nil then if p1.freeTrialRemaining > 0 then nil elseif p1.limitSettings.additionalUsageEnabled then if p1.robuxBalance < CreatorCreditConfigModule.FIntMinimumUsableRobuxBalance then "InsufficientRobuxBalance" elseif p1.limitSettings.dailyLimitSet and p1.limitRemaining < CreatorCreditConfigModule.FIntMinimumUsableRobuxBalance then "DailyLimitReached" else nil else "FreeTrialExhausted" elseif p1.allowed then nil else p1.reason
 end
 
-return function(p1)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), creatorCreditModule (ref), reactModule (ref), signalsReactModule (ref), creatorCreditConfigModule (ref), useOpenBuyRobuxWebViewModule (ref), useRefreshCreatorCreditOnUnhideModule (ref)
-	local var1 = useLocalization({
-		adjustLimit = localizationStringsModule.CREATOR_CREDIT_ADJUST_LIMIT_BUTTON,
-		buyMoreDescription = localizationStringsModule.CREATOR_CREDIT_BUY_MORE_ROBUX_DESCRIPTION,
-		buyMoreTitle = localizationStringsModule.CREATOR_CREDIT_BUY_MORE_ROBUX_TITLE,
-		buyRobux = localizationStringsModule.CREATOR_CREDIT_BUY_ROBUX_SHEET_CONFIRM,
-		dailyLimitDescription = localizationStringsModule.CREATOR_CREDIT_DAILY_LIMIT_REACHED_DESCRIPTION,
-		dailyLimitTitle = localizationStringsModule.CREATOR_CREDIT_DAILY_LIMIT_REACHED_TITLE,
-		freeTrialDescription = localizationStringsModule.CREATOR_CREDIT_FREE_TRIAL_EXHAUSTED_DESCRIPTION,
-		freeTrialTitle = localizationStringsModule.CREATOR_CREDIT_FREE_TRIAL_EXHAUSTED_TITLE,
-		notNow = localizationStringsModule.CREATOR_CREDIT_NOT_NOW_BUTTON,
-		viewUsage = localizationStringsModule.CREATOR_CREDIT_VIEW_USAGE_BUTTON
+return function(p1) --[[ Line: 61 | Named "useCreatorCreditChatUpsellViewModel" ]]
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagBuildExperienceFreeLimitCardModule (copy), CreatorCreditModule (copy), ReactModule (copy), SignalsReactModule (copy), CreatorCreditConfigModule (copy), UseOpenBuyRobuxWebViewModule (copy), UseRefreshCreatorCreditOnUnhideModule (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
+		adjustLimit = LocalizationStringsModule.CREATOR_CREDIT_ADJUST_LIMIT_BUTTON,
+		buyMoreDescription = LocalizationStringsModule.CREATOR_CREDIT_BUY_MORE_ROBUX_DESCRIPTION,
+		buyMoreTitle = LocalizationStringsModule.CREATOR_CREDIT_BUY_MORE_ROBUX_TITLE,
+		buyRobux = LocalizationStringsModule.CREATOR_CREDIT_BUY_ROBUX_SHEET_CONFIRM,
+		dailyLimitDescription = LocalizationStringsModule.CREATOR_CREDIT_DAILY_LIMIT_REACHED_DESCRIPTION,
+		dailyLimitTitle = LocalizationStringsModule.CREATOR_CREDIT_DAILY_LIMIT_REACHED_TITLE,
+		freeTrialDescription = if FFlagBuildExperienceFreeLimitCardModule then LocalizationStringsModule.CREATOR_CREDIT_FREE_LIMIT_REACHED_DESCRIPTION else LocalizationStringsModule.CREATOR_CREDIT_FREE_TRIAL_EXHAUSTED_DESCRIPTION,
+		freeTrialTitle = if FFlagBuildExperienceFreeLimitCardModule then LocalizationStringsModule.CREATOR_CREDIT_FREE_LIMIT_REACHED_TITLE else LocalizationStringsModule.CREATOR_CREDIT_FREE_TRIAL_EXHAUSTED_TITLE,
+		freeTrialAction = if FFlagBuildExperienceFreeLimitCardModule then LocalizationStringsModule.CREATOR_CREDIT_MANAGE_USAGE_BUTTON else LocalizationStringsModule.CREATOR_CREDIT_VIEW_USAGE_BUTTON,
+		notNow = LocalizationStringsModule.CREATOR_CREDIT_NOT_NOW_BUTTON,
+		viewUsage = LocalizationStringsModule.CREATOR_CREDIT_VIEW_USAGE_BUTTON
 	})
-	local creatorCreditStore = creatorCreditModule.getCreatorCreditStore(false)
-	local var2 = signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: creatorCreditStore (ref)
-		return creatorCreditStore.getQuotaSummary()
-	end, { creatorCreditStore }).data)
-	local var3 = if var2 ~= nil then nil else var2.nextResetEligibleTime
-	local var4, var5 = reactModule.useState(false)
-	local outOfCreditsPromptFailureCount = p1.outOfCreditsPromptFailureCount or 0
-	local var6 = reactModule.useRef(outOfCreditsPromptFailureCount)
-	local var7 = reactModule.useRef(0)
-	local var8, var9 = reactModule.useState(nil)
-	local var10 = reactModule.useCallback(function()
-		-- upvalues: var7 (ref), creatorCreditStore (ref), var9 (ref), creatorCreditConfigModule (copy)
-		local current = var7.current
-		creatorCreditStore.refreshQuotaSummary():andThen(function(p2)
-			-- upvalues: current (ref), var7 (copy), var9 (copy), creatorCreditConfigModule (copy)
-			if p2 ~= nil and current == var7.current then
-				var9(if p2 == nil then nil elseif p2.allowed ~= nil then if p2.freeTrialRemaining > 0 then nil elseif not p2.limitSettings.additionalUsageEnabled then if p2.robuxBalance < creatorCreditConfigModule.FIntMinimumUsableRobuxBalance then "InsufficientRobuxBalance" elseif p2.limitSettings.dailyLimitSet and p2.limitRemaining < creatorCreditConfigModule.FIntMinimumUsableRobuxBalance then "DailyLimitReached" else nil else "FreeTrialExhausted" elseif p2.allowed then nil else p2.reason)
+	local CreatorCreditStore = CreatorCreditModule.getCreatorCreditStore(false)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(ReactModule.useMemo(function() --[[ Line: 82 ]]
+		-- upvalues: CreatorCreditStore (copy)
+		return CreatorCreditStore.getQuotaSummary()
+	end, { CreatorCreditStore }).data)
+	local NextResetEligibleTime = if UseSignalStateResult == nil then nil else UseSignalStateResult.nextResetEligibleTime
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local OutOfCreditsPromptFailureCount = p1.outOfCreditsPromptFailureCount or 0
+	local UseRefResult = ReactModule.useRef(OutOfCreditsPromptFailureCount)
+	local UseRefResult1 = ReactModule.useRef(0)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 94 ]]
+		-- upvalues: UseRefResult1 (copy), CreatorCreditStore (copy), UseStateResult2_1 (copy), CreatorCreditConfigModule (upval)
+		local Current = UseRefResult1.current
+		CreatorCreditStore.refreshQuotaSummary():andThen(function(Result) --[[ Line: 98 ]]
+			-- upvalues: Current (copy), UseRefResult1 (upval), UseStateResult2_1 (upval), CreatorCreditConfigModule (upval)
+			if Result ~= nil and Current == UseRefResult1.current then
+				UseStateResult2_1(if Result == nil then nil elseif Result.allowed == nil then if Result.freeTrialRemaining > 0 then nil elseif Result.limitSettings.additionalUsageEnabled then if Result.robuxBalance < CreatorCreditConfigModule.FIntMinimumUsableRobuxBalance then "InsufficientRobuxBalance" elseif Result.limitSettings.dailyLimitSet and Result.limitRemaining < CreatorCreditConfigModule.FIntMinimumUsableRobuxBalance then "DailyLimitReached" else nil else "FreeTrialExhausted" elseif Result.allowed then nil else Result.reason)
 			end
-		end):catch(function() end)
-	end, { creatorCreditStore })
-	reactModule.useEffect(function()
-		-- upvalues: outOfCreditsPromptFailureCount (ref), var6 (ref), var7 (ref), var9 (ref), p1 (ref), var5 (ref), var10 (ref)
-		if var6.current < outOfCreditsPromptFailureCount then
-			var7.current += 1
-			var9(p1.outOfCreditsPromptFailureReason)
-			var5(false)
-			var10()
+		end):catch(function() --[[ Line: 103 ]] end)
+	end, { CreatorCreditStore })
+	ReactModule.useEffect(function() --[[ Line: 105 ]]
+		-- upvalues: OutOfCreditsPromptFailureCount (copy), UseRefResult (copy), UseRefResult1 (copy), UseStateResult2_1 (copy), p1 (copy), UseStateResult2 (copy), UseResult (copy)
+		if UseRefResult.current < OutOfCreditsPromptFailureCount then
+			UseRefResult1.current += 1
+			UseStateResult2_1(p1.outOfCreditsPromptFailureReason)
+			UseStateResult2(false)
+			UseResult()
 		end
-		var6.current = outOfCreditsPromptFailureCount
+		UseRefResult.current = OutOfCreditsPromptFailureCount
 	end, {
-		outOfCreditsPromptFailureCount,
+		OutOfCreditsPromptFailureCount,
 		p1.outOfCreditsPromptFailureReason,
-		var10
+		UseResult
 	})
-	local var11 = reactModule.useRef(p1.isAssistantResponding)
-	reactModule.useEffect(function()
-		-- upvalues: var11 (ref), p1 (ref), creatorCreditConfigModule (copy), var10 (ref)
-		local var12 = var11.current and not p1.isAssistantResponding
-		var11.current = p1.isAssistantResponding
+	local UseRefResult2 = ReactModule.useRef(p1.isAssistantResponding)
+	ReactModule.useEffect(function() --[[ Line: 116 ]]
+		-- upvalues: UseRefResult2 (copy), p1 (copy), CreatorCreditConfigModule (upval), UseResult (copy)
+		local NoIsAssistantResponding: boolean = UseRefResult2.current and not p1.isAssistantResponding
+		UseRefResult2.current = p1.isAssistantResponding
 		
-		if var12 then
-			local delayedThread = task.delay(creatorCreditConfigModule.FIntPostTurnRefreshDelaySeconds, var10)
-			
-			return function()
-				-- upvalues: delayedThread (ref)
-				task.cancel(delayedThread)
-			end
-		end
-	end, { p1.isAssistantResponding, var10 })
-	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), creatorCreditConfigModule (copy), var10 (ref)
-		if var3 == nil or var3 == "" then return end
-		local dateTime = DateTime.fromIsoDate(var3)
+		if not NoIsAssistantResponding then return end
+		local DelayedThread = task.delay(CreatorCreditConfigModule.FIntPostTurnRefreshDelaySeconds, UseResult)
 		
-		if dateTime == nil then
-			return
+		return function() --[[ Line: 123 ]]
+			-- upvalues: DelayedThread (copy)
+			task.cancel(DelayedThread)
 		end
-		local delayedThread = task.delay(math.max(1, dateTime.UnixTimestamp - DateTime.now().UnixTimestamp + creatorCreditConfigModule.FIntResetRefreshBufferSeconds), var10)
+	end, { p1.isAssistantResponding, UseResult })
+	ReactModule.useEffect(function() --[[ Line: 128 ]]
+		-- upvalues: NextResetEligibleTime (copy), CreatorCreditConfigModule (upval), UseResult (copy)
+		if NextResetEligibleTime == nil or NextResetEligibleTime == "" then return end
+		local _DateTime = DateTime.fromIsoDate(NextResetEligibleTime)
 		
-		return function()
-			-- upvalues: delayedThread (ref)
-			task.cancel(delayedThread)
+		if _DateTime == nil then return end
+		local DelayedThread = task.delay(math.max(1, _DateTime.UnixTimestamp - DateTime.now().UnixTimestamp + CreatorCreditConfigModule.FIntResetRefreshBufferSeconds), UseResult)
+		
+		return function() --[[ Line: 143 ]]
+			-- upvalues: DelayedThread (copy)
+			task.cancel(DelayedThread)
 		end
-	end, { var3, var10 })
-	local var12 = useOpenBuyRobuxWebViewModule(reactModule.useCallback(function()
-		-- upvalues: var10 (ref), var5 (ref)
-		var10()
-		var5(true)
-	end, { var10 }))
-	useRefreshCreatorCreditOnUnhideModule(var10)
-	local var13 = reactModule.useCallback(function()
-		-- upvalues: var5 (ref), p1 (ref)
-		var5(true)
+	end, { NextResetEligibleTime, UseResult })
+	local UseOpenBuyRobuxWebViewModuleResult = UseOpenBuyRobuxWebViewModule((ReactModule.useCallback(function() --[[ Line: 148 ]]
+		-- upvalues: UseResult (copy), UseStateResult2 (copy)
+		UseResult()
+		UseStateResult2(true)
+	end, { UseResult })))
+	UseRefreshCreatorCreditOnUnhideModule(UseResult)
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 155 ]]
+		-- upvalues: UseStateResult2 (copy), p1 (copy)
+		UseStateResult2(true)
 		
 		if p1.onOpenCreatorCreditPage then
 			p1.onOpenCreatorCreditPage()
 		end
 	end, { p1.onOpenCreatorCreditPage })
-	local var14 = reactModule.useCallback(function()
-		-- upvalues: var5 (ref)
-		var5(true)
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 161 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(true)
 	end, {})
-	local var15 = var8
+	local UseStateResult1_1 = UseStateResult1 or (if UseSignalStateResult == nil then nil elseif UseSignalStateResult.allowed == nil then if UseSignalStateResult.freeTrialRemaining > 0 then nil elseif UseSignalStateResult.limitSettings.additionalUsageEnabled then if UseSignalStateResult.robuxBalance < CreatorCreditConfigModule.FIntMinimumUsableRobuxBalance then "InsufficientRobuxBalance" elseif UseSignalStateResult.limitSettings.dailyLimitSet and UseSignalStateResult.limitRemaining < CreatorCreditConfigModule.FIntMinimumUsableRobuxBalance then "DailyLimitReached" else nil else "FreeTrialExhausted" elseif UseSignalStateResult.allowed then nil else UseSignalStateResult.reason)
+	local BuyMoreTitle = UseLocalizationResult.buyMoreTitle
+	local BuyMoreDescription = UseLocalizationResult.buyMoreDescription
+	local BuyRobux = UseLocalizationResult.buyRobux
+	local ViewUsage = UseLocalizationResult.viewUsage
+	local OnBuyMoreRobuxCardPrimaryAction = UseOpenBuyRobuxWebViewModuleResult
+	local OnBuyMoreRobuxCardSecondaryAction = UseResult1
 	
-	if not var15 then
-		var15 = if var2 == nil then nil elseif var2.allowed ~= nil then if var2.freeTrialRemaining > 0 then nil elseif not var2.limitSettings.additionalUsageEnabled then if var2.robuxBalance < creatorCreditConfigModule.FIntMinimumUsableRobuxBalance then "InsufficientRobuxBalance" elseif var2.limitSettings.dailyLimitSet and var2.limitRemaining < creatorCreditConfigModule.FIntMinimumUsableRobuxBalance then "DailyLimitReached" else nil else "FreeTrialExhausted" elseif var2.allowed then nil else var2.reason
-	end
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local buyMoreTitle = var1.buyMoreTitle
-	local buyMoreDescription = var1.buyMoreDescription
-	local buyRobux = var1.buyRobux
-	local viewUsage = var1.viewUsage
-	local var16 = var12
-	local var17 = var13
-	
-	if var15 == "FreeTrialExhausted" then
-		buyMoreTitle = var1.freeTrialTitle
-		buyMoreDescription = var1.freeTrialDescription
-		buyRobux = var1.viewUsage
-		viewUsage = var1.notNow
-		var16 = var13
-		var17 = var14
-	elseif var15 == "DailyLimitReached" then
-		buyMoreTitle = var1.dailyLimitTitle
-		buyMoreDescription = var1.dailyLimitDescription
-		buyRobux = var1.adjustLimit
-		viewUsage = var1.notNow
-		var16 = var13
-		var17 = var14
+	if UseStateResult1_1 == "FreeTrialExhausted" then
+		BuyMoreTitle = UseLocalizationResult.freeTrialTitle
+		BuyMoreDescription = UseLocalizationResult.freeTrialDescription
+		BuyRobux = UseLocalizationResult.freeTrialAction
+		ViewUsage = UseLocalizationResult.notNow
+		OnBuyMoreRobuxCardPrimaryAction = UseResult1
+		OnBuyMoreRobuxCardSecondaryAction = UseResult2
+	elseif UseStateResult1_1 == "DailyLimitReached" then
+		BuyMoreTitle = UseLocalizationResult.dailyLimitTitle
+		BuyMoreDescription = UseLocalizationResult.dailyLimitDescription
+		BuyRobux = UseLocalizationResult.adjustLimit
+		ViewUsage = UseLocalizationResult.notNow
+		OnBuyMoreRobuxCardPrimaryAction = UseResult1
+		OnBuyMoreRobuxCardSecondaryAction = UseResult2
 	end
 	return {
-		showBuyMoreRobuxCard = var15 ~= nil and (not var4 and p1.onOpenCreatorCreditPage ~= nil),
-		buyMoreRobuxCardTitle = buyMoreTitle,
-		buyMoreRobuxCardDescription = buyMoreDescription,
-		buyMoreRobuxCardPrimaryActionText = buyRobux,
-		onBuyMoreRobuxCardPrimaryAction = var16,
-		buyMoreRobuxCardSecondaryActionText = viewUsage,
-		onBuyMoreRobuxCardSecondaryAction = var17
+		showBuyMoreRobuxCard = UseStateResult1_1 ~= nil and (not UseStateResult and p1.onOpenCreatorCreditPage ~= nil),
+		buyMoreRobuxCardTitle = BuyMoreTitle,
+		buyMoreRobuxCardDescription = BuyMoreDescription,
+		buyMoreRobuxCardPrimaryActionText = BuyRobux,
+		onBuyMoreRobuxCardPrimaryAction = OnBuyMoreRobuxCardPrimaryAction,
+		buyMoreRobuxCardSecondaryActionText = ViewUsage,
+		onBuyMoreRobuxCardSecondaryAction = OnBuyMoreRobuxCardSecondaryAction
 	}
 end

@@ -1,54 +1,55 @@
-﻿local serverDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
-local parent = serverDrivenUi.Parent
-local edpStoreAnalyticsModule = require(parent.EdpStoreAnalytics)
-local edpStoreAnalyticsLogger = edpStoreAnalyticsModule.EdpStoreAnalyticsLogger
-local storeEnums = edpStoreAnalyticsModule.Constants.StoreEnums
-local unifiedEventLogEnums = require(parent.AvatarExperienceAnalytics).UnifiedEventLogEnums
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local sduiErrors = sduiCoreSystemModule.SduiErrors
-local sduiLogger = sduiCoreSystemModule.SduiLogger
-local findAnalyticsFieldInAncestors = sduiCoreSystemModule.findAnalyticsFieldInAncestors
-local sduiMarketplaceItemImpressionsHandlerModule = require(serverDrivenUi.Impressions.SduiMarketplaceItemImpressionsHandler)
-local marketplaceUnifiedItemType = unifiedEventLogEnums.MarketplaceUnifiedItemType
-local tbl = setmetatable({}, { __mode = "k" })
+﻿local ServerDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
+local Parent = ServerDrivenUi.Parent
+local EdpStoreAnalyticsModule = require(Parent.EdpStoreAnalytics)
+local EdpStoreAnalyticsLogger = EdpStoreAnalyticsModule.EdpStoreAnalyticsLogger
+local StoreEnums = EdpStoreAnalyticsModule.Constants.StoreEnums
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local SduiErrors = SduiCoreSystemModule.SduiErrors
+local SduiLogger = SduiCoreSystemModule.SduiLogger
+local FindAnalyticsFieldInAncestorsFunction = SduiCoreSystemModule.findAnalyticsFieldInAncestors
+local SduiMarketplaceItemImpressionsHandlerModule = require(ServerDrivenUi.Impressions.SduiMarketplaceItemImpressionsHandler)
+local MarketplaceUnifiedItemType = require(Parent.AvatarExperienceAnalytics).UnifiedEventLogEnums.MarketplaceUnifiedItemType
+local self = setmetatable({}, { __mode = "k" })
 
-return function(p1, p2, p3, p4, p5, p6)
-	-- upvalues: findAnalyticsFieldInAncestors (ref), marketplaceUnifiedItemType (ref), sduiMarketplaceItemImpressionsHandlerModule (ref), sduiLogger (ref), sduiErrors (ref), tbl (ref), edpStoreAnalyticsLogger (ref), storeEnums (ref)
-	if #p2 == 0 then return end
-	local t = { analyticsData = p4 }
-	local var1 = findAnalyticsFieldInAncestors("itemType", t)
+return function(Key, p1, p2, AnalyticsData, p3, p4) --[[ Line: 46 | Named "SduiDevStoreSeeAllImpressionsHandler" ]]
+	-- upvalues: FindAnalyticsFieldInAncestorsFunction (copy), MarketplaceUnifiedItemType (copy), SduiMarketplaceItemImpressionsHandlerModule (copy), SduiLogger (copy), SduiErrors (copy), self (copy), EdpStoreAnalyticsLogger (copy), StoreEnums (copy)
+	if #p1 == 0 then return end
+	local config = { analyticsData = AnalyticsData }
+	local ItemType = FindAnalyticsFieldInAncestorsFunction("itemType", config)
 	
-	if if var1 ~= nil then nil else marketplaceUnifiedItemType[var1] then
-		sduiMarketplaceItemImpressionsHandlerModule(p1, p2, p3, p4, p5, p6)
+	if if ItemType == nil then nil else MarketplaceUnifiedItemType[ItemType] then
+		SduiMarketplaceItemImpressionsHandlerModule(Key, p1, p2, AnalyticsData, p3, p4)
 	end
-	local var2 = findAnalyticsFieldInAncestors("experienceStoreProductType", t)
+	local ExperienceStoreProductType = FindAnalyticsFieldInAncestorsFunction("experienceStoreProductType", config)
 	
-	if not var2 then
-		sduiLogger.reportError(sduiErrors.SduiErrorType.FailedToLogExperienceStoreImpressions, {
+	if not ExperienceStoreProductType then
+		SduiLogger.reportError(SduiErrors.SduiErrorType.FailedToLogExperienceStoreImpressions, {
 			name = "SduiDevStoreSeeAllImpressionsHandler",
 			message = "Missing experienceStoreProductType on collectionAnalyticsData"
-		}, p1.appPage)
+		}, Key.appPage)
 		
 		return
 	end
-	local var3 = tostring(var2)
-	local var4 = tbl[p1]
+	local Text = tostring(ExperienceStoreProductType)
+	local SelfEntry = self[Key]
 	
-	if not var4 then
-		var4 = {}
-		tbl[p1] = var4
+	if not SelfEntry then
+		SelfEntry = {}
+		self[Key] = SelfEntry
 	end
-	if var4[var3] then
+	if not SelfEntry[Text] then
+		SelfEntry[Text] = true
+		local EdpLocationType = FindAnalyticsFieldInAncestorsFunction("edpLocationType", config)
+		local UniverseId = FindAnalyticsFieldInAncestorsFunction("universeId", config)
+		EdpStoreAnalyticsLogger.logImpression({
+			layoutOrder = 1,
+			actionType = StoreEnums.ActionType.Impression,
+			productType = ExperienceStoreProductType,
+			locationType = EdpLocationType,
+			universeId = if UniverseId == nil then nil else tonumber((tostring(UniverseId)))
+		})
+		EdpStoreAnalyticsLogger.logExperienceStoreExposure()
+		
 		return
 	end
-	var4[var3] = true
-	local var5 = findAnalyticsFieldInAncestors("universeId", t)
-	edpStoreAnalyticsLogger.logImpression({
-		layoutOrder = 1,
-		actionType = storeEnums.ActionType.Impression,
-		productType = var2,
-		locationType = findAnalyticsFieldInAncestors("edpLocationType", t),
-		universeId = if var5 ~= nil then nil else tonumber(tostring(var5))
-	})
-	edpStoreAnalyticsLogger.logExperienceStoreExposure()
 end

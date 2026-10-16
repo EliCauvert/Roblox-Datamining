@@ -1,11 +1,12 @@
-﻿local avatarScreenProperties = require(script:FindFirstAncestor("AvatarExperienceAnalytics").Parent.AvatarExperienceNavigation).AvatarRoute.AvatarScreenProperties
+﻿local AvatarScreenProperties = require(script:FindFirstAncestor("AvatarExperienceAnalytics").Parent.AvatarExperienceNavigation).AvatarRoute.AvatarScreenProperties
 
-return function(p1)
-	-- upvalues: avatarScreenProperties (ref)
-	if typeof(p1) ~= "string" or p1 == "" then
+return function(p1) --[[ Line: 21 | Named "getUnifiedLoggingSurfaceForAppPage" ]]
+	-- upvalues: AvatarScreenProperties (copy)
+	if typeof(p1) == "string" and p1 ~= "" then
+		local AvatarScreenProperty = AvatarScreenProperties[p1]
+		
+		return if AvatarScreenProperty and AvatarScreenProperty.analyticsData then AvatarScreenProperty.analyticsData.unifiedLoggingSurface else nil
+	else
 		return nil
 	end
-	local var1 = avatarScreenProperties[p1]
-	
-	return if var1 and var1.analyticsData then var1.analyticsData.unifiedLoggingSurface else nil
 end

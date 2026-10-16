@@ -1,61 +1,45 @@
-﻿local sduiSharedContent = script:FindFirstAncestor("SduiSharedContent")
-local parent = sduiSharedContent.Parent
-local reactModule = require(parent.React)
-local cryoModule = require(parent.Cryo)
-local foundationModule = require(parent.Foundation)
-local _ = require(parent.SduiCompat)
-local checkAndFormatPossibleLink = require(parent.CollectionViews).checkAndFormatPossibleLink
-local sduiTextModule = require(script.Parent.SduiText)
-local useTokens = foundationModule.Hooks.useTokens
-local fFlagSduiLinkTextStyleOverrideModule = require(sduiSharedContent.Flags.FFlagSduiLinkTextStyleOverride)
+﻿local SduiSharedContent = script:FindFirstAncestor("SduiSharedContent")
+local Parent = SduiSharedContent.Parent
+local ReactModule = require(Parent.React)
+local CryoModule = require(Parent.Cryo)
+local _ = require(Parent.SduiCompat)
+local CheckAndFormatPossibleLinkFunction = require(Parent.CollectionViews).checkAndFormatPossibleLink
+local SduiTextModule = require(script.Parent.SduiText)
+local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
+local FFlagSduiLinkTextStyleOverrideModule = require(SduiSharedContent.Flags.FFlagSduiLinkTextStyleOverride)
 
-return function(p1)
-	-- upvalues: useTokens (ref), fFlagSduiLinkTextStyleOverrideModule (ref), checkAndFormatPossibleLink (ref), reactModule (ref), sduiTextModule (ref), cryoModule (ref)
-	local var1 = useTokens()
-	local text = p1.text
-	local richText = p1.richText
+return function(p1) --[[ Line: 28 | Named "SduiLinkText" ]]
+	-- upvalues: UseTokensFunction (copy), FFlagSduiLinkTextStyleOverrideModule (copy), CheckAndFormatPossibleLinkFunction (copy), ReactModule (copy), SduiTextModule (copy), CryoModule (copy)
+	local UseTokensResult = UseTokensFunction()
+	local Text = p1.text
+	local RichText = p1.richText
 	
-	if text then
-		local var2
-		local var3 = if p1.linkStyle and p1.linkStyle.Color3 then p1.linkStyle.Color3 else var1.Color.Content.Link.Color3
-		local formattedText = string.format("rgb(%d, %d, %d)", math.round(var3.R * 255), math.round(var3.G * 255), math.round(var3.B * 255))
+	if Text then
+		local LinkStyleColor3 = if p1.linkStyle and p1.linkStyle.Color3 then p1.linkStyle.Color3 else UseTokensResult.Color.Content.Link.Color3
+		local NoFFlagSduiLinkTextStyleOverrideModule: boolean = not FFlagSduiLinkTextStyleOverrideModule or p1.isLinkBold ~= false
+		local ColorName: string = `<font color="{string.format("rgb(%d, %d, %d)", math.round(LinkStyleColor3.R * 255), math.round(LinkStyleColor3.G * 255), (math.round(LinkStyleColor3.B * 255)))}">`
+		local Text1 = "</font>"
 		
-		if fFlagSduiLinkTextStyleOverrideModule then
-			var2 = p1.isLinkBold ~= false
-			var2 = nil
-		else
-			var2 = true
+		if if FFlagSduiLinkTextStyleOverrideModule then p1.isLinkUnderlined == true else false then
+			ColorName ..= "<u>"
+			Text1 = "</u>" .. Text1
 		end
-		local var4
-		if fFlagSduiLinkTextStyleOverrideModule then
-			var4 = p1.isLinkUnderlined == true
-			var4 = nil
-		else
-			var4 = false
+		if NoFFlagSduiLinkTextStyleOverrideModule then
+			ColorName ..= "<b>"
+			Text1 = "</b>" .. Text1
 		end
-		local var5 = `<font color="{formattedText}">`
-		local var6 = "</font>"
+		local CheckAndFormatPossibleLinkResult, CheckAndFormatPossibleLinkResult2 = CheckAndFormatPossibleLinkFunction(Text, nil, nil, ColorName, Text1)
 		
-		if var4 then
-			var5 ..= "<u>"
-			var6 = "</u>" .. var12
-		end
-		if var2 then
-			var5 ..= "<b>"
-			var6 = "</b>" .. var12
-		end
-		local var7, var8 = checkAndFormatPossibleLink(text, nil, nil, var5, var6)
-		
-		if var7 then
-			text = var8
-			richText = true
+		if CheckAndFormatPossibleLinkResult then
+			Text = CheckAndFormatPossibleLinkResult2
+			RichText = true
 		end
 	end
-	return reactModule.createElement(sduiTextModule, cryoModule.Dictionary.join(p1, {
-		text = text,
-		richText = richText,
-		linkStyle = cryoModule.None,
-		isLinkBold = if fFlagSduiLinkTextStyleOverrideModule then cryoModule.None else nil,
-		isLinkUnderlined = if fFlagSduiLinkTextStyleOverrideModule then cryoModule.None else nil
+	return ReactModule.createElement(SduiTextModule, CryoModule.Dictionary.join(p1, {
+		text = Text,
+		richText = RichText,
+		linkStyle = CryoModule.None,
+		isLinkBold = if FFlagSduiLinkTextStyleOverrideModule then CryoModule.None else nil,
+		isLinkUnderlined = if FFlagSduiLinkTextStyleOverrideModule then CryoModule.None else nil
 	}))
 end

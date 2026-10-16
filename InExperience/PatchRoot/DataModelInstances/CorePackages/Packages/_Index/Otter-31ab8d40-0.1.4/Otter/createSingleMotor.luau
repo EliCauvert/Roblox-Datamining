@@ -1,51 +1,52 @@
-﻿local runService = game:GetService("RunService")
-local createSignalModule = require(script.Parent.createSignal)
-local t = { prototype = {} }
-t.__index = t.prototype
+﻿local RunService = game:GetService("RunService")
+local CreateSignalModule = require(script.Parent.createSignal)
+local config = { prototype = {} }
+config.__index = config.prototype
 
-local function createSingleMotor(p1)
-	-- upvalues: createSignalModule (ref), t (ref)
-	assert(typeof(p1) == "number")
-	local t_1 = {
+local function createSingleMotor(Value) --[[ Line: 9 ]]
+	-- upvalues: CreateSignalModule (copy), config (copy)
+	assert(typeof(Value) == "number")
+	local config1 = {
 		__goal = nil,
 		__running = false,
-		__state = { complete = true, value = p1 },
-		__onComplete = createSignalModule(),
-		__onStep = createSignalModule()
+		__state = { complete = true, value = Value },
+		__onComplete = CreateSignalModule(),
+		__onStep = CreateSignalModule()
 	}
-	setmetatable(t_1, t)
+	setmetatable(config1, config)
 	
-	return t_1
+	return config1
 end
 
-function t.prototype.start(p1)
-	-- upvalues: runService (ref)
-	if p1.__running then
+function config.prototype.start(p1) --[[ Line: 28 ]]
+	-- upvalues: RunService (copy)
+	if not p1.__running then
+		p1.__connection = RunService.Heartbeat:Connect(function(DeltaTime) --[[ Line: 33 ]]
+			-- upvalues: p1 (copy)
+			p1:step(DeltaTime)
+		end)
+		p1.__running = true
+		
 		return
 	end
-	p1.__connection = runService.Heartbeat:Connect(function(p2)
-		-- upvalues: p1 (ref)
-		p1:step(p2)
-	end)
-	p1.__running = true
 end
 
-function t.prototype.stop(p1)
+function config.prototype.stop(p1) --[[ Line: 40 ]]
 	if p1.__connection ~= nil then
 		p1.__connection:Disconnect()
 	end
 	p1.__running = false
 end
 
-function t.prototype.step(p1, p2)
+function config.prototype.step(p1, p2) --[[ Line: 48 ]]
 	assert(typeof(p2) == "number")
 	
 	if p1.__state.complete then return end
 	if p1.__goal == nil then return end
-	local state = p1.__goal:step(p1.__state, p2)
+	local StepResult = p1.__goal:step(p1.__state, p2)
 	
-	if state ~= nil then
-		p1.__state = state
+	if StepResult ~= nil then
+		p1.__state = StepResult
 	end
 	p1.__onStep:fire(p1.__state.value)
 	
@@ -55,25 +56,25 @@ function t.prototype.step(p1, p2)
 	end
 end
 
-function t.prototype.setGoal(value, p1)
-	value.__goal = p1
-	value.__state.complete = false
-	value:start()
+function config.prototype.setGoal(p1, p2) --[[ Line: 73 ]]
+	p1.__goal = p2
+	p1.__state.complete = false
+	p1:start()
 end
 
-function t.prototype.onStep(p1, p2)
+function config.prototype.onStep(p1, p2) --[[ Line: 79 ]]
 	assert(typeof(p2) == "function")
 	
 	return p1.__onStep:subscribe(p2)
 end
 
-function t.prototype.onComplete(p1, p2)
+function config.prototype.onComplete(p1, p2) --[[ Line: 85 ]]
 	assert(typeof(p2) == "function")
 	
 	return p1.__onComplete:subscribe(p2)
 end
 
-function t.prototype.destroy(p1)
+function config.prototype.destroy(p1) --[[ Line: 91 ]]
 	p1:stop()
 end
 

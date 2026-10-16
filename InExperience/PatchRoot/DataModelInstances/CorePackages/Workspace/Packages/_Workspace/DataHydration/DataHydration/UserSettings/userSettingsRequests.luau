@@ -1,60 +1,60 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local parent = dataHydration.Parent
-local httpModule = require(parent.Http)
-local httpClientModule = require(parent.HttpClient)
-local withCsrfRetryModule = require(dataHydration.withCsrfRetry)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local Parent = DataHydration.Parent
+local HttpModule = require(Parent.Http)
+local HttpClientModule = require(Parent.HttpClient)
+local WithCsrfRetryModule = require(DataHydration.withCsrfRetry)
 local _ = require(script.Parent.UserSettingsStoreTypes)
-local fetch = httpClientModule.fetch
-local asPromise = httpClientModule.asPromise
+local FetchFunction = HttpClientModule.fetch
+local AsPromiseFunction = HttpClientModule.asPromise
 
-local function _()
-	-- upvalues: httpModule (ref)
-	return `{httpModule.Url.APIS_URL}user-settings-api/v1/user-settings`
+local function _(): string --[[ Line: 23 | Named "settingsAndOptionsUrl" ]]
+	-- upvalues: HttpModule (copy)
+	return `{HttpModule.Url.APIS_URL}user-settings-api/v1/user-settings`
 end
 
-local function normalizeCachedUserSettings(value)
-	if typeof(value) ~= "table" then
+local function normalizeCachedUserSettings(CurrentValues) --[[ Line: 27 ]]
+	if typeof(CurrentValues) ~= "table" then
 		return {}
 	end
 	local t = {}
 	
-	for i, v in value do
-		t[i] = { currentValue = v }
+	for i, currentValue in CurrentValues do
+		t[i] = { currentValue = currentValue }
 	end
 	return t
 end
 
-local _ = function()
-	-- upvalues: httpModule (ref)
-	return `{httpModule.Url.APIS_URL}user-settings-api/v1/user-settings`
+local _ = function(): string --[[ Line: 38 | Named "settingsUpdateUrl" ]]
+	-- upvalues: HttpModule (copy)
+	return `{HttpModule.Url.APIS_URL}user-settings-api/v1/user-settings`
 end
 
 return {
-	fetchSettingsAndOptions = function(value)
-		-- upvalues: httpClientModule (ref), fetch (ref), httpModule (ref), normalizeCachedUserSettings (ref), asPromise (ref)
-		return asPromise(fetch({
+	fetchSettingsAndOptions = function(p1) --[[ Line: 42 ]]
+		-- upvalues: HttpClientModule (copy), FetchFunction (copy), HttpModule (copy), normalizeCachedUserSettings (copy), AsPromiseFunction (copy)
+		return AsPromiseFunction((FetchFunction({
 			method = "GET",
 			analyticsKey = "user-settings.settings-and-options.get",
-			url = `{httpModule.Url.APIS_URL}user-settings-api/v1/user-settings`,
-			network = if value then value.network else httpClientModule.createRequestInternalNetwork(),
-			decode = function(p1)
-				-- upvalues: normalizeCachedUserSettings (copy)
-				return normalizeCachedUserSettings(p1)
+			url = `{HttpModule.Url.APIS_URL}user-settings-api/v1/user-settings`,
+			network = p1 and p1.network or HttpClientModule.createRequestInternalNetwork(),
+			decode = function(p2) --[[ Line: 49 ]]
+				-- upvalues: normalizeCachedUserSettings (upval)
+				return (normalizeCachedUserSettings(p2))
 			end
-		}))
+		})))
 	end,
-	postUserSettings = function(value, p1)
-		-- upvalues: httpClientModule (ref), fetch (ref), httpModule (ref), withCsrfRetryModule (ref), asPromise (ref)
-		return asPromise(fetch({
+	postUserSettings = function(Body, p1) --[[ Line: 56 ]]
+		-- upvalues: HttpClientModule (copy), FetchFunction (copy), HttpModule (copy), WithCsrfRetryModule (copy), AsPromiseFunction (copy)
+		return AsPromiseFunction((FetchFunction({
 			method = "POST",
 			analyticsKey = "user-settings.update.post",
-			url = `{httpModule.Url.APIS_URL}user-settings-api/v1/user-settings`,
-			body = value,
-			network = withCsrfRetryModule(if p1 then p1.network else httpClientModule.createRequestInternalNetwork()),
-			decode = function(_)
-				-- upvalues: value (ref)
-				return value
+			url = `{HttpModule.Url.APIS_URL}user-settings-api/v1/user-settings`,
+			body = Body,
+			network = WithCsrfRetryModule(p1 and p1.network or HttpClientModule.createRequestInternalNetwork()),
+			decode = function(_) --[[ Line: 64 ]]
+				-- upvalues: Body (copy)
+				return Body
 			end
-		}))
+		})))
 	end
 }

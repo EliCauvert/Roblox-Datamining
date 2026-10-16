@@ -1,10 +1,10 @@
-﻿local promptFriendRequestModalContainerModule = require(script.Components.PromptFriendRequestModalContainer)
-local launchUserRelationshipModalModule = require(script.InExperience.launchUserRelationshipModal)
+﻿local PromptFriendRequestModalContainerModule = require(script.Components.PromptFriendRequestModalContainer)
+local LaunchUserRelationshipModalModule = require(script.InExperience.launchUserRelationshipModal)
 
 return {
 	["jest.config"] = script["jest.config"],
-	launchPromptFriendRequestModal = function(p1)
-		-- upvalues: launchUserRelationshipModalModule (ref), promptFriendRequestModalContainerModule (ref)
-		launchUserRelationshipModalModule(promptFriendRequestModalContainerModule, { userId = p1 })
+	launchPromptFriendRequestModal = function(UserId) --[[ Line: 6 ]]
+		-- upvalues: LaunchUserRelationshipModalModule (copy), PromptFriendRequestModalContainerModule (copy)
+		LaunchUserRelationshipModalModule(PromptFriendRequestModalContainerModule, { userId = UserId })
 	end
 }

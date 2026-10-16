@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("RefactorHelpPage5", false)
+﻿return (game:DefineFastFlag("RefactorHelpPage5", false))

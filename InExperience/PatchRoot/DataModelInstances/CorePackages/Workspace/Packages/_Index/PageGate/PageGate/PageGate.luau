@@ -1,8 +1,20 @@
-﻿local enablePLTPrefetchCallbacks = game:DefineFastFlag("EnablePLTPrefetchCallbacks", false)
-local resolveEnumItemModule = require(script.Parent.resolveEnumItem)
-local signalWithModule = require(script.Parent.signalWith)
-local t = {
-	FFlagEnablePLTPrefetchCallbacks = enablePLTPrefetchCallbacks,
+﻿local SignalWithModule = require(script.Parent.signalWith)
+local config = {
+	isEnabled = function() --[[ Line: 28 ]]
+		return game:GetEngineFeature("PageMilestoneSignalEnabled")
+	end,
+	getService = function() --[[ Line: 31 ]]
+		return game:GetService("AppLifecycleObserverService")
+	end,
+	resolveEnumItem = require(script.Parent.resolveEnumItem),
+	defer = function(Callback) --[[ Line: 35 ]]
+		task.defer(Callback)
+	end,
+	warn = warn
+}
+
+return {
+	FFlagEnablePLTPrefetchCallbacks = game:DefineFastFlag("EnablePLTPrefetchCallbacks", false),
 	Page = {
 		AvatarEditor = "AvatarEditor",
 		Party = "Party",
@@ -14,25 +26,9 @@ local t = {
 		SurfaceMounted = "SurfaceMounted",
 		FunctionallyReady = "FunctionallyReady",
 		SurfaceReady = "SurfaceReady"
-	}
+	},
+	signal = function(p1, p2) --[[ Line: 41 ]]
+		-- upvalues: SignalWithModule (copy), config (copy)
+		SignalWithModule(config, p1, p2)
+	end
 }
-local t_1 = {
-	isEnabled = function()
-		return game:GetEngineFeature("PageMilestoneSignalEnabled")
-	end,
-	getService = function()
-		return game:GetService("AppLifecycleObserverService")
-	end,
-	resolveEnumItem = resolveEnumItemModule,
-	defer = function(p1)
-		task.defer(p1)
-	end,
-	warn = warn
-}
-
-function t.signal(value, p1)
-	-- upvalues: signalWithModule (ref), t_1 (ref)
-	signalWithModule(t_1, value, p1)
-end
-
-return t

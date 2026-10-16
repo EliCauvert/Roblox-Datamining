@@ -1,17 +1,17 @@
-﻿local parent = script:FindFirstAncestor("StreamNotifications").Parent
-local promiseModule = require(parent.Promise)
-local var1 = require(parent.UrlBuilder).UrlBuilder.new({
+﻿local Parent = script:FindFirstAncestor("StreamNotifications").Parent
+local PromiseModule = require(Parent.Promise)
+local NewResult = require(Parent.UrlBuilder).UrlBuilder.new({
 	path = "v2/stream-notifications/action/{notificationId}/{actionPath}",
-	base = require(parent.Http).Url.NOTIFICATION_URL
+	base = require(Parent.Http).Url.NOTIFICATION_URL
 })
 
-return function(p1, p2, p3)
-	-- upvalues: promiseModule (ref), var1 (ref)
-	return if p2 == nil or p2 == "" or (p3 == nil or p3 == "") then promiseModule.reject() else p1(var1({ notificationId = p2, actionPath = p3 }), "POST", { postBody = "{}" }):andThen(function(p4)
-		-- upvalues: promiseModule (copy)
-		return if p4.responseCode == 200 then promiseModule.resolve() else promiseModule.reject()
-	end, function(_)
-		-- upvalues: promiseModule (copy)
-		return promiseModule.reject()
+return function(Callback, NotificationId, ActionPath) --[[ Line: 13 ]]
+	-- upvalues: PromiseModule (copy), NewResult (copy)
+	return if NotificationId == nil or NotificationId == "" or ActionPath == nil or ActionPath == "" then PromiseModule.reject() else Callback(NewResult({ notificationId = NotificationId, actionPath = ActionPath }), "POST", { postBody = "{}" }):andThen(function(Result) --[[ Line: 23 ]]
+		-- upvalues: PromiseModule (upval)
+		return if Result.responseCode == 200 then PromiseModule.resolve() else PromiseModule.reject()
+	end, function(_) --[[ Line: 29 ]]
+		-- upvalues: PromiseModule (upval)
+		return PromiseModule.reject()
 	end)
 end

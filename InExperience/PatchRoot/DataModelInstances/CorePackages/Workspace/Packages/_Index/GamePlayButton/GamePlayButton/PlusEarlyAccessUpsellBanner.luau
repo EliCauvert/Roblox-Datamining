@@ -1,47 +1,47 @@
-﻿local gamePlayButton = script:FindFirstAncestor("GamePlayButton")
-local parent = gamePlayButton.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local view = foundationModule.View
-local text = foundationModule.Text
-local icon = foundationModule.Icon
-local iconName = foundationModule.Enums.IconName
-local iconSize = foundationModule.Enums.IconSize
-local roactServiceTagsModule = require(parent.RoactServiceTags)
-local useRoactService = require(parent.RobloxAppHooks).useRoactService
-local usePlayButtonStateModule = require(gamePlayButton.usePlayButtonState)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
+﻿local GamePlayButton = script:FindFirstAncestor("GamePlayButton")
+local Parent = GamePlayButton.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local Icon = FoundationModule.Icon
+local IconName = FoundationModule.Enums.IconName
+local IconSize = FoundationModule.Enums.IconSize
+local RoactServiceTagsModule = require(Parent.RoactServiceTags)
+local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
+local UsePlayButtonStateModule = require(GamePlayButton.usePlayButtonState)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 
-return reactModule.memo(function(p1)
-	-- upvalues: useLocalization (ref), useRoactService (ref), roactServiceTagsModule (ref), usePlayButtonStateModule (ref), reactModule (ref), view (ref), icon (ref), iconName (ref), iconSize (ref), text (ref)
-	local var1 = useLocalization({
+return ReactModule.memo(function(Frame) --[[ Line: 25 | Named "PlusEarlyAccessUpsellBanner" ]]
+	-- upvalues: UseLocalizationFunction (copy), UseRoactServiceFunction (copy), RoactServiceTagsModule (copy), UsePlayButtonStateModule (copy), ReactModule (copy), View (copy), Icon (copy), IconName (copy), IconSize (copy), Text (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
 		subscribe = "Feature.RobloxSubscription.Action.Subscribe",
 		joinEarly = "Feature.RobloxSubscription.Description.JoinEarly"
 	})
-	local earlyAccess = usePlayButtonStateModule(useRoactService(roactServiceTagsModule.RoactNetworking), p1.universeId).earlyAccess
+	local EarlyAccess = UsePlayButtonStateModule(UseRoactServiceFunction(RoactServiceTagsModule.RoactNetworking), Frame.universeId).earlyAccess
 	
-	return if earlyAccess == nil or not earlyAccess.showPlusUpsell then nil else reactModule.createElement(view, {
+	return if EarlyAccess == nil or not EarlyAccess.showPlusUpsell then nil else ReactModule.createElement(View, {
 		tag = "row align-y-center gap-small size-full-1100 padding-medium stroke-default radius-medium clip",
 		testId = "--early-access-plus-upsell",
-		LayoutOrder = p1.LayoutOrder,
-		onActivated = earlyAccess.openUpsell
+		LayoutOrder = Frame.LayoutOrder,
+		onActivated = EarlyAccess.openUpsell
 	}, {
-		PlusIcon = reactModule.createElement(icon, {
+		PlusIcon = ReactModule.createElement(Icon, {
 			LayoutOrder = 1,
-			name = iconName.RobloxPlus,
-			size = iconSize.Medium
+			name = IconName.RobloxPlus,
+			size = IconSize.Medium
 		}),
-		Label = reactModule.createElement(text, {
+		Label = ReactModule.createElement(Text, {
 			tag = "fill auto-y text-body-medium text-align-x-left text-truncate-end content-emphasis",
 			LayoutOrder = 2,
-			Text = var1.joinEarly
+			Text = UseLocalizationResult.joinEarly
 		}),
-		Subscribe = reactModule.createElement(text, {
+		Subscribe = ReactModule.createElement(Text, {
 			tag = "auto-xy text-body-medium content-emphasis",
 			RichText = true,
 			LayoutOrder = 3,
 			testId = "--early-access-subscribe",
-			Text = `<u>{var1.subscribe}</u>`
+			Text = `<u>{UseLocalizationResult.subscribe}</u>`
 		})
 	})
 end)

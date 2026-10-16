@@ -1,104 +1,106 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local foundationModule = require(profilePlatform.Parent.Foundation)
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local iconName = foundationModule.Enums.IconName
-local enumsModule = require(profilePlatform.Common.Enums)
-local _ = require(profilePlatform.Components.CTARow.Types)
-local eventNamesModule = require(profilePlatform.Analytics.EventNames)
-local profileTypes = enumsModule.ProfileTypes
-local fFlagProfilePlatformEnableEditAppearanceMenuModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableEditAppearanceMenu)
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local FoundationModule = require(ProfilePlatform.Parent.Foundation)
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local IconName = FoundationModule.Enums.IconName
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local _ = require(ProfilePlatform.Components.CTARow.Types)
+local EventNamesModule = require(ProfilePlatform.Analytics.EventNames)
+local ProfileTypes = EnumsModule.ProfileTypes
+local FFlagProfilePlatformEnableEditAppearanceMenuModule = require(ProfilePlatform.Flags.FFlagProfilePlatformEnableEditAppearanceMenu)
+local FFlagProfilePlatformEditBackgroundMenuItemModule = require(ProfilePlatform.Flags.FFlagProfilePlatformEditBackgroundMenuItem)
+local FFlagProfilePlatformEnableEditLookModule = require(ProfilePlatform.Flags.FFlagProfilePlatformEnableEditLook)
 
 return {
-	[enumsModule.ProfileActions.EditAppearance] = if fFlagProfilePlatformEnableEditAppearanceMenuModule then function(p1)
-		-- upvalues: enumsModule (ref), buttonVariant (ref), profileTypes (ref), eventNamesModule (ref)
+	[EnumsModule.ProfileActions.EditAppearance] = if FFlagProfilePlatformEnableEditAppearanceMenuModule then function(p1) --[[ Line: 22 ]]
+		-- upvalues: EnumsModule (copy), ButtonVariant (copy), ProfileTypes (copy), EventNamesModule (copy)
 		return {
-			text = p1.localized[enumsModule.ProfileActions.EditAppearance],
-			variant = buttonVariant.Emphasis,
+			text = p1.localized[EnumsModule.ProfileActions.EditAppearance],
+			variant = ButtonVariant.Emphasis,
 			onActivated = {
-				[profileTypes.User] = function()
-					-- upvalues: p1 (ref), eventNamesModule (copy)
-					p1.analytics.fireAnalyticsEvent(eventNamesModule.CTAButtonEditAppearance, { buttonSurface = p1.buttonSurface })
+				[ProfileTypes.User] = function() --[[ Line: 27 ]]
+					-- upvalues: p1 (copy), EventNamesModule (upval)
+					p1.analytics.fireAnalyticsEvent(EventNamesModule.CTAButtonEditAppearance, { buttonSurface = p1.buttonSurface })
 				end
 			}
 		}
 	end else nil,
-	[enumsModule.ProfileActions.EditAvatar] = function(p1)
-		-- upvalues: enumsModule (ref), fFlagProfilePlatformEnableEditAppearanceMenuModule (ref), iconName (ref), profileTypes (ref), eventNamesModule (ref)
+	[EnumsModule.ProfileActions.EditAvatar] = function(p1) --[[ Line: 37 ]]
+		-- upvalues: EnumsModule (copy), FFlagProfilePlatformEnableEditAppearanceMenuModule (copy), IconName (copy), ProfileTypes (copy), EventNamesModule (copy)
 		return {
-			text = p1.localized[enumsModule.ProfileActions.EditAvatar],
-			icon = if fFlagProfilePlatformEnableEditAppearanceMenuModule then iconName.Person else nil,
+			text = p1.localized[EnumsModule.ProfileActions.EditAvatar],
+			icon = if FFlagProfilePlatformEnableEditAppearanceMenuModule then IconName.Person else nil,
 			onActivated = {
-				[profileTypes.User] = function()
-					-- upvalues: p1 (ref), fFlagProfilePlatformEnableEditAppearanceMenuModule (copy), eventNamesModule (copy)
-					p1.analytics.fireAnalyticsEvent(if fFlagProfilePlatformEnableEditAppearanceMenuModule then eventNamesModule.EditAppearanceMenuEditAvatar else eventNamesModule.CTAButtonEditAvatar, { buttonSurface = p1.buttonSurface })
+				[ProfileTypes.User] = function() --[[ Line: 42 ]]
+					-- upvalues: p1 (copy), FFlagProfilePlatformEnableEditAppearanceMenuModule (upval), EventNamesModule (upval)
+					p1.analytics.fireAnalyticsEvent(if FFlagProfilePlatformEnableEditAppearanceMenuModule then EventNamesModule.EditAppearanceMenuEditAvatar else EventNamesModule.CTAButtonEditAvatar, { buttonSurface = p1.buttonSurface })
 					p1.navigateTo.editAvatar()
 				end
 			}
 		}
 	end,
-	[enumsModule.ProfileActions.EditLook] = if require(profilePlatform.Flags.FFlagProfilePlatformEnableEditLook) then function(p1)
-		-- upvalues: enumsModule (ref), iconName (ref), profileTypes (ref), eventNamesModule (ref)
+	[EnumsModule.ProfileActions.EditLook] = if FFlagProfilePlatformEnableEditLookModule then function(p1) --[[ Line: 58 ]]
+		-- upvalues: EnumsModule (copy), IconName (copy), ProfileTypes (copy), EventNamesModule (copy)
 		return {
-			text = p1.localized[enumsModule.ProfileActions.EditLook],
-			icon = iconName.Person,
+			text = p1.localized[EnumsModule.ProfileActions.EditLook],
+			icon = IconName.Person,
 			onActivated = {
-				[profileTypes.User] = function()
-					-- upvalues: p1 (ref), eventNamesModule (copy)
-					p1.analytics.fireAnalyticsEvent(eventNamesModule.CTAButtonEditLook, { buttonSurface = p1.buttonSurface })
+				[ProfileTypes.User] = function() --[[ Line: 63 ]]
+					-- upvalues: p1 (copy), EventNamesModule (upval)
+					p1.analytics.fireAnalyticsEvent(EventNamesModule.CTAButtonEditLook, { buttonSurface = p1.buttonSurface })
 					p1.navigateTo.editAvatar()
 				end
 			}
 		}
 	end else nil,
-	[enumsModule.ProfileActions.EditEmotes] = if fFlagProfilePlatformEnableEditAppearanceMenuModule then function(p1)
-		-- upvalues: enumsModule (ref), iconName (ref), profileTypes (ref), eventNamesModule (ref)
+	[EnumsModule.ProfileActions.EditEmotes] = if FFlagProfilePlatformEnableEditAppearanceMenuModule then function(p1) --[[ Line: 75 ]]
+		-- upvalues: EnumsModule (copy), IconName (copy), ProfileTypes (copy), EventNamesModule (copy)
 		return {
-			text = p1.localized[enumsModule.ProfileActions.EditEmotes],
-			icon = iconName.SquareFaceWavingHand,
+			text = p1.localized[EnumsModule.ProfileActions.EditEmotes],
+			icon = IconName.SquareFaceWavingHand,
 			onActivated = {
-				[profileTypes.User] = function()
-					-- upvalues: p1 (ref), eventNamesModule (copy)
-					p1.analytics.fireAnalyticsEvent(eventNamesModule.EditAppearanceMenuEditEmote, { buttonSurface = p1.buttonSurface })
-					local editEmotes = p1.navigateTo.editEmotes
+				[ProfileTypes.User] = function() --[[ Line: 80 ]]
+					-- upvalues: p1 (copy), EventNamesModule (upval)
+					p1.analytics.fireAnalyticsEvent(EventNamesModule.EditAppearanceMenuEditEmote, { buttonSurface = p1.buttonSurface })
+					local EditEmotesFunction: () -> () = p1.navigateTo.editEmotes
 					
-					if editEmotes then
-						editEmotes()
+					if EditEmotesFunction then
+						EditEmotesFunction()
 					end
 				end
 			}
 		}
 	end else nil,
-	[enumsModule.ProfileActions.SwitchAvatar] = if fFlagProfilePlatformEnableEditAppearanceMenuModule then function(p1)
-		-- upvalues: enumsModule (ref), iconName (ref), profileTypes (ref), eventNamesModule (ref)
+	[EnumsModule.ProfileActions.SwitchAvatar] = if FFlagProfilePlatformEnableEditAppearanceMenuModule then function(p1) --[[ Line: 95 ]]
+		-- upvalues: EnumsModule (copy), IconName (copy), ProfileTypes (copy), EventNamesModule (copy)
 		return {
-			text = p1.localized[enumsModule.ProfileActions.SwitchAvatar],
-			icon = iconName.PersonStandingArrowReverse,
+			text = p1.localized[EnumsModule.ProfileActions.SwitchAvatar],
+			icon = IconName.PersonStandingArrowReverse,
 			onActivated = {
-				[profileTypes.User] = function()
-					-- upvalues: p1 (ref), eventNamesModule (copy)
-					p1.analytics.fireAnalyticsEvent(eventNamesModule.EditAppearanceMenuSwitchAvatar, { buttonSurface = p1.buttonSurface })
-					local switchAvatar = p1.navigateTo.switchAvatar
+				[ProfileTypes.User] = function() --[[ Line: 100 ]]
+					-- upvalues: p1 (copy), EventNamesModule (upval)
+					p1.analytics.fireAnalyticsEvent(EventNamesModule.EditAppearanceMenuSwitchAvatar, { buttonSurface = p1.buttonSurface })
+					local SwitchAvatarFunction: () -> () = p1.navigateTo.switchAvatar
 					
-					if switchAvatar then
-						switchAvatar()
+					if SwitchAvatarFunction then
+						SwitchAvatarFunction()
 					end
 				end
 			}
 		}
 	end else nil,
-	[enumsModule.ProfileActions.EditBackground] = if fFlagProfilePlatformEnableEditAppearanceMenuModule and require(profilePlatform.Flags.FFlagProfilePlatformEditBackgroundMenuItem) then function(p1)
-		-- upvalues: enumsModule (ref), iconName (ref), profileTypes (ref), eventNamesModule (ref)
+	[EnumsModule.ProfileActions.EditBackground] = if FFlagProfilePlatformEnableEditAppearanceMenuModule and FFlagProfilePlatformEditBackgroundMenuItemModule then function(p1) --[[ Line: 116 ]]
+		-- upvalues: EnumsModule (copy), IconName (copy), ProfileTypes (copy), EventNamesModule (copy)
 		return {
-			text = p1.localized[enumsModule.ProfileActions.EditBackground],
-			icon = iconName.Image,
+			text = p1.localized[EnumsModule.ProfileActions.EditBackground],
+			icon = IconName.Image,
 			onActivated = {
-				[profileTypes.User] = function()
-					-- upvalues: p1 (ref), eventNamesModule (copy)
-					p1.analytics.fireAnalyticsEvent(eventNamesModule.EditAppearanceMenuEditBackground, { buttonSurface = p1.buttonSurface })
-					local editBackground = p1.navigateTo.editBackground
+				[ProfileTypes.User] = function() --[[ Line: 121 ]]
+					-- upvalues: p1 (copy), EventNamesModule (upval)
+					p1.analytics.fireAnalyticsEvent(EventNamesModule.EditAppearanceMenuEditBackground, { buttonSurface = p1.buttonSurface })
+					local EditBackgroundFunction: () -> () = p1.navigateTo.editBackground
 					
-					if editBackground then
-						editBackground()
+					if EditBackgroundFunction then
+						EditBackgroundFunction()
 					end
 				end
 			}

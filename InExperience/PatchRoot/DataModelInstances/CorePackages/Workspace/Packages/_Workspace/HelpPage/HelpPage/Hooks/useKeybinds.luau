@@ -1,21 +1,21 @@
-﻿local parent = script.Parent.Parent
-local reactModule = require(parent.Parent.React)
-local keybindContextModule = require(parent.Context.KeybindContext)
-local useAbilitiesModule = require(script.Parent.useAbilities)
-local fFlagHelpPageCCLModule = require(parent.Flags.FFlagHelpPageCCL)
+﻿local Parent = script.Parent.Parent
+local ReactModule = require(Parent.Parent.React)
+local KeybindContextModule = require(Parent.Context.KeybindContext)
+local UseAbilitiesModule = require(script.Parent.useAbilities)
+local FFlagHelpPageCCLModule = require(Parent.Flags.FFlagHelpPageCCL)
 
-return function()
-	-- upvalues: reactModule (ref), keybindContextModule (ref), fFlagHelpPageCCLModule (ref), useAbilitiesModule (ref)
-	local var1 = reactModule.useContext(keybindContextModule)
-	local var2 = if fFlagHelpPageCCLModule then useAbilitiesModule() else nil
+return function() --[[ Line: 13 ]]
+	-- upvalues: ReactModule (copy), KeybindContextModule (copy), FFlagHelpPageCCLModule (copy), UseAbilitiesModule (copy)
+	local UseContextResult = ReactModule.useContext(KeybindContextModule)
+	local UseAbilitiesModuleResult = if FFlagHelpPageCCLModule then UseAbilitiesModule() else nil
 	
-	if var2 == nil or var1.controls == nil then
-		return var1
+	if UseAbilitiesModuleResult == nil or UseContextResult.controls == nil then
+		return UseContextResult
 	end
-	local cloned = table.clone(var1.controls)
+	local Copy = table.clone(UseContextResult.controls)
 	
-	for i, v in var2 do
-		cloned[i] = v
+	for i, value in UseAbilitiesModuleResult do
+		Copy[i] = value
 	end
-	return { groups = var1.groups, controls = cloned }
+	return { groups = UseContextResult.groups, controls = Copy }
 end

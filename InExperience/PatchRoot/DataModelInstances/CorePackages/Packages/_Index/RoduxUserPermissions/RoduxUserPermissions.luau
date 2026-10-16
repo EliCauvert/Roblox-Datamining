@@ -1,22 +1,22 @@
-﻿local parent = script.Parent
-local dashModule = require(parent.Dash)
-local roduxNetworkingModule = require(parent.RoduxNetworking)
-local networkingUserSettingsModule = require(parent.NetworkingUserSettings)
-local networkingAccountInformationModule = require(parent.NetworkingAccountInformation)
-local userPermissionsReducerModule = require(script.Reducers.UserPermissionsReducer)
+﻿local Parent = script.Parent
+local DashModule = require(Parent.Dash)
+local RoduxNetworkingModule = require(Parent.RoduxNetworking)
+local NetworkingUserSettingsModule = require(Parent.NetworkingUserSettings)
+local NetworkingAccountInformationModule = require(Parent.NetworkingAccountInformation)
+local UserPermissionsReducerModule = require(script.Reducers.UserPermissionsReducer)
 
 return {
-	config = function(p1)
-		-- upvalues: dashModule (ref), networkingUserSettingsModule (ref), roduxNetworkingModule (ref), networkingAccountInformationModule (ref), userPermissionsReducerModule (ref)
-		p1 = dashModule.join(p1, {
-			networkingUserSettings = networkingUserSettingsModule.config({ roduxNetworking = roduxNetworkingModule.mock() }),
-			networkingAccountInformation = networkingAccountInformationModule.config({ roduxNetworking = roduxNetworkingModule.mock() })
+	config = function(p1) --[[ Line: 9 ]]
+		-- upvalues: DashModule (copy), NetworkingUserSettingsModule (copy), RoduxNetworkingModule (copy), NetworkingAccountInformationModule (copy), UserPermissionsReducerModule (copy)
+		local JoinResult = DashModule.join(p1, {
+			networkingUserSettings = NetworkingUserSettingsModule.config({ roduxNetworking = RoduxNetworkingModule.mock() }),
+			networkingAccountInformation = NetworkingAccountInformationModule.config({ roduxNetworking = RoduxNetworkingModule.mock() })
 		})
 		
 		return {
-			installReducer = function()
-				-- upvalues: userPermissionsReducerModule (copy), p1 (write)
-				return userPermissionsReducerModule(p1)
+			installReducer = function() --[[ Line: 20 ]]
+				-- upvalues: UserPermissionsReducerModule (upval), JoinResult (ref)
+				return UserPermissionsReducerModule(JoinResult)
 			end
 		}
 	end

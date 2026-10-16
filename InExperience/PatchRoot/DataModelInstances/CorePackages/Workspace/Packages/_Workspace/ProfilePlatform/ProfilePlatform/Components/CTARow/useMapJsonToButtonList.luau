@@ -1,188 +1,196 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local _ = require(profilePlatform.Components.CTARow.Types)
-local foundationModule = require(parent.Foundation)
-local iconName = foundationModule.Enums.IconName
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local reactModule = require(parent.React)
-local roactUtilsModule = require(parent.RoactUtils)
-local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
-local useEffectOnce = roactUtilsModule.Hooks.useEffectOnce
-local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
-local navigateDown = require(parent.NavigationRodux).Thunks.NavigateDown
-local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
-local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
-local networkingPresenceModule = require(profilePlatform.Networking.NetworkingPresence)
-local networkStatus = require(profilePlatform.Networking.myRoduxNetworking).Enum.NetworkStatus
-local useProfileActionsModule = require(profilePlatform.Hooks.useProfileActions)
-local useProfileJsonComponentModule = require(profilePlatform.Hooks.useProfileJsonComponent)
-local useProfileWrapperContextModule = require(profilePlatform.Contexts.useProfileWrapperContext)
-local enumsModule = require(profilePlatform.Common.Enums)
-local fFlagEnableProfilePlatformDisabledActions = require(parent.SharedFlags).FFlagEnableProfilePlatformDisabledActions
-local fFlagEnableCommunityVerificationModalModule = require(profilePlatform.Flags.FFlagEnableCommunityVerificationModal)
-local fFlagPortEnableCommunityVerificationModalModule = require(profilePlatform.Flags.FFlagPortEnableCommunityVerificationModal)
-local fFlagEnableProfilePlatformDisabledReasonTextModule = require(profilePlatform.Flags.FFlagEnableProfilePlatformDisabledReasonText)
-local fFlagProfilePlatformAddCurrentlyPlayingModule = require(profilePlatform.Flags.FFlagProfilePlatformAddCurrentlyPlaying)
-local fFlagProfilePlatformPresenceStoreMigrationModule = require(profilePlatform.Flags.FFlagProfilePlatformPresenceStoreMigration)
-local fFlagJoinabilityCTARefactor = require(parent.SharedFlags).FFlagJoinabilityCTARefactor
-local var2 = if fFlagProfilePlatformPresenceStoreMigrationModule then require(parent.DataHydration).Presence.PresenceStore.get() else nil
-local useProfileAnalyticsContextModule = require(profilePlatform.Contexts.useProfileAnalyticsContext)
-local eventNamesModule = require(profilePlatform.Analytics.EventNames)
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local _ = require(ProfilePlatform.Components.CTARow.Types)
+local FoundationModule = require(Parent.Foundation)
+local IconName = FoundationModule.Enums.IconName
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local ReactModule = require(Parent.React)
+local RoactUtilsModule = require(Parent.RoactUtils)
+local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
+local UseEffectOnceFunction = RoactUtilsModule.Hooks.useEffectOnce
+local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
+local NavigateDownFunction = require(Parent.NavigationRodux).Thunks.NavigateDown
+local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3Dispatch
+local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
+local NetworkingPresenceModule = require(ProfilePlatform.Networking.NetworkingPresence)
+local NetworkStatus = require(ProfilePlatform.Networking.myRoduxNetworking).Enum.NetworkStatus
+local UseProfileActionsModule = require(ProfilePlatform.Hooks.useProfileActions)
+local UseProfileJsonComponentModule = require(ProfilePlatform.Hooks.useProfileJsonComponent)
+local UseProfileWrapperContextModule = require(ProfilePlatform.Contexts.useProfileWrapperContext)
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local FFlagEnableProfilePlatformDisabledActions = require(Parent.SharedFlags).FFlagEnableProfilePlatformDisabledActions
+local FFlagEnableCommunityVerificationModalModule = require(ProfilePlatform.Flags.FFlagEnableCommunityVerificationModal)
+local FFlagPortEnableCommunityVerificationModalModule = require(ProfilePlatform.Flags.FFlagPortEnableCommunityVerificationModal)
+local FFlagEnableProfilePlatformDisabledReasonTextModule = require(ProfilePlatform.Flags.FFlagEnableProfilePlatformDisabledReasonText)
+local FFlagProfilePlatformAddCurrentlyPlayingModule = require(ProfilePlatform.Flags.FFlagProfilePlatformAddCurrentlyPlaying)
+local FFlagProfilePlatformPresenceStoreMigrationModule = require(ProfilePlatform.Flags.FFlagProfilePlatformPresenceStoreMigration)
+local FFlagJoinabilityCTARefactor = require(Parent.SharedFlags).FFlagJoinabilityCTARefactor
+local GetResult = if FFlagProfilePlatformPresenceStoreMigrationModule then require(Parent.DataHydration).Presence.PresenceStore.get() else nil
+local UseProfileAnalyticsContextModule = require(ProfilePlatform.Contexts.useProfileAnalyticsContext)
+local EventNamesModule = require(ProfilePlatform.Analytics.EventNames)
 
-local function profileMenuItemFromResolvedAction(p1, p2, p3)
-	local var3 = p2.onActivated[p3]
+local function profileMenuItemFromResolvedAction(Id, p1, ProfileType) --[[ Line: 53 ]]
+	local OnActivatedEntry = p1.onActivated[ProfileType]
 	
-	if var3 then
+	if OnActivatedEntry then
 		return {
-			id = p1,
-			displayValue = { icon = p2.icon, text = p2.text },
-			onActivated = var3,
-			isDisabled = p2.isDisabled
+			id = Id,
+			displayValue = { icon = p1.icon, text = p1.text },
+			onActivated = OnActivatedEntry,
+			isDisabled = p1.isDisabled
 		}
+	else
+		warn("profileMenuItemFromResolvedAction: action not available for profile type", Id, ProfileType)
+		
+		return nil
 	end
-	warn("profileMenuItemFromResolvedAction: action not available for profile type", p1, p3)
-	
-	return nil
 end
 
-local function contextualMenuItemsFromJsonActions(p1, p2, p3)
-	-- upvalues: profileMenuItemFromResolvedAction (ref)
-	local t = {}
-	
-	for i, v in ipairs(p1 or {}) do
-		local t_1 = { items = {} }
-		
-		for i_1, v_1 in ipairs(if type(v) == "table" then v else { v }) do
-			local var3 = p2[v_1]
+local function contextualMenuItemsFromJsonActions(Contextual, p1, ProfileType) --[[ Line: 71 ]]
+	-- upvalues: profileMenuItemFromResolvedAction (copy)
+	local List = {}
+	local Iterator = ipairs
+	local Contextual1 = Contextual or {}
+	for _, value in Iterator(Contextual1) do
+		local config = { items = {} }
+		local List1 = if type(value) == "table" then value else { value }
+		for _, value1 in ipairs(List1) do
+			local v1 = p1[value1]
 			
-			if var3 then
-				local var4 = profileMenuItemFromResolvedAction(v_1, var3, p3)
+			if v1 then
+				local ProfileMenuItemFromResolvedActionResult = profileMenuItemFromResolvedAction(value1, v1, ProfileType)
 				
-				if var4 then
-					table.insert(t_1.items, var4)
+				if ProfileMenuItemFromResolvedActionResult then
+					table.insert(config.items, ProfileMenuItemFromResolvedActionResult)
 				end
 			end
 		end
-		if #t_1.items > 0 then
-			table.insert(t, t_1)
+		if #config.items > 0 then
+			table.insert(List, config)
 		end
 	end
-	return t
+	return List
 end
 
-local function hasJoinExperience(p4)
-	-- upvalues: enumsModule (ref), fFlagJoinabilityCTARefactor (ref)
-	for i, v in p4 do
-		if v.type ~= enumsModule.ProfileActions.JoinExperience then
-			if fFlagJoinabilityCTARefactor and v.type == enumsModule.ProfileActions.PlayExperience then
-				return true
-			end
+local function hasJoinExperience(Buttons): boolean --[[ Line: 99 ]]
+	-- upvalues: EnumsModule (copy), FFlagJoinabilityCTARefactor (copy)
+	for _, button in Buttons do
+		if button.type == EnumsModule.ProfileActions.JoinExperience then
+			return true
+		elseif FFlagJoinabilityCTARefactor and button.type == EnumsModule.ProfileActions.PlayExperience then
+			return true
 		end
-		return true
 	end
 	return false
 end
 
-return function(p5)
-	-- upvalues: useDispatch (ref), useProfileJsonComponentModule (ref), enumsModule (ref), useProfileActionsModule (ref), useProfileWrapperContextModule (ref), useProfileAnalyticsContextModule (ref), fFlagProfilePlatformPresenceStoreMigrationModule (ref), useSelector (ref), networkingPresenceModule (ref), networkStatus (ref), fFlagProfilePlatformAddCurrentlyPlayingModule (ref), reactModule (ref), hasJoinExperience (ref), var2 (ref), useEffectOnce (ref), contextualMenuItemsFromJsonActions (ref), fFlagEnableProfilePlatformDisabledActions (ref), fFlagEnableCommunityVerificationModalModule (ref), fFlagPortEnableCommunityVerificationModalModule (ref), iconName (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), fFlagEnableProfilePlatformDisabledReasonTextModule (ref), buttonVariant (ref), profileMenuItemFromResolvedAction (ref), eventNamesModule (ref)
-	local var5 = useDispatch()
-	local actions = useProfileJsonComponentModule(enumsModule.Components.Actions) or {}
-	local var6 = useProfileActionsModule(enumsModule.ButtonSurface.Actions)
-	local profileType = useProfileWrapperContextModule().profileType
-	local var7 = useProfileAnalyticsContextModule()
-	local var8 = if fFlagProfilePlatformPresenceStoreMigrationModule then nil else useSelector(function(p6)
-		-- upvalues: networkingPresenceModule (copy), p5 (ref), networkStatus (copy)
-		return networkingPresenceModule.GetPresencesFromUserIds.getStatus(p6, p5) == networkStatus.NotStarted
+return function(p2) --[[ Line: 111 | Named "useMapJsonToButtonList" ]]
+	-- upvalues: UseDispatchFunction (copy), UseProfileJsonComponentModule (copy), EnumsModule (copy), UseProfileActionsModule (copy), UseProfileWrapperContextModule (copy), UseProfileAnalyticsContextModule (copy), FFlagProfilePlatformPresenceStoreMigrationModule (copy), UseSelectorFunction (copy), NetworkingPresenceModule (copy), NetworkStatus (copy), FFlagProfilePlatformAddCurrentlyPlayingModule (copy), ReactModule (copy), hasJoinExperience (copy), GetResult (copy), UseEffectOnceFunction (copy), contextualMenuItemsFromJsonActions (copy), FFlagEnableProfilePlatformDisabledActions (copy), FFlagEnableCommunityVerificationModalModule (copy), FFlagPortEnableCommunityVerificationModalModule (copy), IconName (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), FFlagEnableProfilePlatformDisabledReasonTextModule (copy), ButtonVariant (copy), profileMenuItemFromResolvedAction (copy), EventNamesModule (copy)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseProfileJsonComponentModuleResult = UseProfileJsonComponentModule(EnumsModule.Components.Actions) or {}
+	local UseProfileActionsModuleResult = UseProfileActionsModule(EnumsModule.ButtonSurface.Actions)
+	local ProfileType = UseProfileWrapperContextModule().profileType
+	local UseProfileAnalyticsContextModuleResult = UseProfileAnalyticsContextModule()
+	local UseSelectorResult = if FFlagProfilePlatformPresenceStoreMigrationModule then nil else UseSelectorFunction(function(p3): boolean --[[ Line: 120 ]]
+		-- upvalues: NetworkingPresenceModule (upval), p2 (copy), NetworkStatus (upval)
+		return NetworkingPresenceModule.GetPresencesFromUserIds.getStatus(p3, p2) == NetworkStatus.NotStarted
 	end)
 	
-	if fFlagProfilePlatformAddCurrentlyPlayingModule then
-		reactModule.useEffect(function()
-			-- upvalues: actions (ref), hasJoinExperience (copy), fFlagProfilePlatformPresenceStoreMigrationModule (copy), var2 (copy), p5 (ref), var5 (ref), networkingPresenceModule (copy)
-			if actions.buttons and hasJoinExperience(actions.buttons) then
-				if fFlagProfilePlatformPresenceStoreMigrationModule then
-					var2.RefreshPresenceByUserId(p5)
+	if FFlagProfilePlatformAddCurrentlyPlayingModule then
+		ReactModule.useEffect(function() --[[ Line: 125 ]]
+			-- upvalues: UseProfileJsonComponentModuleResult (copy), hasJoinExperience (upval), FFlagProfilePlatformPresenceStoreMigrationModule (upval), GetResult (upval), p2 (copy), UseDispatchResult (copy), NetworkingPresenceModule (upval)
+			if UseProfileJsonComponentModuleResult.buttons and hasJoinExperience(UseProfileJsonComponentModuleResult.buttons) then
+				if FFlagProfilePlatformPresenceStoreMigrationModule then
+					GetResult.RefreshPresenceByUserId(p2)
 					
 					return
 				end
-				var5(networkingPresenceModule.GetPresencesFromUserIds.API({ p5 }))
+				UseDispatchResult(NetworkingPresenceModule.GetPresencesFromUserIds.API({ p2 }))
 			end
-		end, { actions.buttons, var5, p5 })
+		end, {
+			UseProfileJsonComponentModuleResult.buttons,
+			UseDispatchResult,
+			p2
+		})
 	else
-		useEffectOnce(function()
-			-- upvalues: fFlagProfilePlatformPresenceStoreMigrationModule (copy), var2 (copy), p5 (ref), var5 (ref), networkingPresenceModule (copy)
-			if fFlagProfilePlatformPresenceStoreMigrationModule then
-				var2.RefreshPresenceByUserId(p5)
+		UseEffectOnceFunction(function() --[[ Line: 136 ]]
+			-- upvalues: FFlagProfilePlatformPresenceStoreMigrationModule (upval), GetResult (upval), p2 (copy), UseDispatchResult (copy), NetworkingPresenceModule (upval)
+			if FFlagProfilePlatformPresenceStoreMigrationModule then
+				GetResult.RefreshPresenceByUserId(p2)
 				
 				return
+			else
+				UseDispatchResult(NetworkingPresenceModule.GetPresencesFromUserIds.API({ p2 }))
 			end
-			var5(networkingPresenceModule.GetPresencesFromUserIds.API({ p5 }))
-		end, actions.buttons ~= nil and (hasJoinExperience(actions.buttons) and (if fFlagProfilePlatformPresenceStoreMigrationModule then true else var8)))
+		end, UseProfileJsonComponentModuleResult.buttons ~= nil and (hasJoinExperience(UseProfileJsonComponentModuleResult.buttons) and (if FFlagProfilePlatformPresenceStoreMigrationModule then true else UseSelectorResult)))
 	end
-	return reactModule.useMemo(function()
-		-- upvalues: actions (ref), var6 (ref), contextualMenuItemsFromJsonActions (copy), profileType (ref), fFlagEnableProfilePlatformDisabledActions (copy), fFlagEnableCommunityVerificationModalModule (copy), enumsModule (copy), fFlagPortEnableCommunityVerificationModalModule (copy), iconName (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var5 (ref), navigateDown (copy), fFlagEnableProfilePlatformDisabledReasonTextModule (copy), buttonVariant (copy), profileMenuItemFromResolvedAction (copy), var7 (ref), eventNamesModule (copy)
-		local t = {}
-		
-		for i, v in ipairs(actions.buttons or {}) do
-			local type = var6[v.type]
+	return (ReactModule.useMemo(function() --[[ Line: 149 ]]
+		-- upvalues: UseProfileJsonComponentModuleResult (copy), UseProfileActionsModuleResult (copy), contextualMenuItemsFromJsonActions (upval), ProfileType (copy), FFlagEnableProfilePlatformDisabledActions (upval), FFlagEnableCommunityVerificationModalModule (upval), EnumsModule (upval), FFlagPortEnableCommunityVerificationModalModule (upval), IconName (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval), FFlagEnableProfilePlatformDisabledReasonTextModule (upval), ButtonVariant (upval), profileMenuItemFromResolvedAction (upval), UseProfileAnalyticsContextModuleResult (copy), EventNamesModule (upval)
+		local List = {}
+		local Iterator = ipairs
+		local Buttons = UseProfileJsonComponentModuleResult.buttons or {}
+		for _, value in Iterator(Buttons) do
+			local UseProfileActionsModuleResultEntry = UseProfileActionsModuleResult[value.type]
 			
-			if not type then
-				warn("useMapJsonToButtonList: unrecognized action type", v.type)
+			if not UseProfileActionsModuleResultEntry then
+				warn("useMapJsonToButtonList: unrecognized action type", value.type)
 				continue
 			end
-			local cloned = table.clone(type)
-			local var9 = contextualMenuItemsFromJsonActions(v.subActions, var6, profileType)
+			local Copy = table.clone(UseProfileActionsModuleResultEntry)
+			local ContextualMenuItemsFromJsonActionsResult = contextualMenuItemsFromJsonActions(value.subActions, UseProfileActionsModuleResult, ProfileType)
 			
-			if fFlagEnableProfilePlatformDisabledActions and v.disabledReason then
-				if fFlagEnableCommunityVerificationModalModule and v.type == enumsModule.ProfileActions.JoinCommunity and (v.disabledReason == enumsModule.DisabledReasons.InsufficientVerificationLevelLow or v.disabledReason == enumsModule.DisabledReasons.InsufficientVerificationLevelMedium or v.disabledReason == enumsModule.DisabledReasons.InsufficientVerificationLevelHigh) then
-					cloned.icon = if fFlagEnableCommunityVerificationModalModule and fFlagPortEnableCommunityVerificationModalModule then iconName.LockClosed else nil
-					cloned.onActivated = {
-						[profileType] = function()
-							-- upvalues: enumsModule (copy), v (ref), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var5 (copy), navigateDown (copy)
-							local t = {
-								name = enumsModule.Screens.CommunityVerificationModal,
-								extraProps = { disabledReason = v.disabledReason }
+			if FFlagEnableProfilePlatformDisabledActions and value.disabledReason then
+				if FFlagEnableCommunityVerificationModalModule and value.type == EnumsModule.ProfileActions.JoinCommunity and (value.disabledReason == EnumsModule.DisabledReasons.InsufficientVerificationLevelLow or value.disabledReason == EnumsModule.DisabledReasons.InsufficientVerificationLevelMedium or value.disabledReason == EnumsModule.DisabledReasons.InsufficientVerificationLevelHigh) then
+					Copy.icon = if FFlagEnableCommunityVerificationModalModule and FFlagPortEnableCommunityVerificationModalModule then IconName.LockClosed else nil
+					Copy.onActivated = {
+						[ProfileType] = function() --[[ Line: 177 ]]
+							-- upvalues: EnumsModule (upval), value (copy), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (upval), NavigateDownFunction (upval)
+							local config = {
+								name = EnumsModule.Screens.CommunityVerificationModal,
+								extraProps = { disabledReason = value.disabledReason }
 							}
 							
-							return if fFlagSignalsNavP3Dispatch then var1.down(var1.fromLegacyPage(t)) else var5(navigateDown(t))
+							return if FFlagSignalsNavP3Dispatch then NavigationCommands.down(NavigationCommands.fromLegacyPage(config)) else UseDispatchResult(NavigateDownFunction(config))
 						end
 					}
 				else
-					cloned.isDisabled = true
-					cloned.disabledReason = if fFlagEnableProfilePlatformDisabledReasonTextModule then v.disabledReason else nil
+					Copy.isDisabled = true
+					Copy.disabledReason = if FFlagEnableProfilePlatformDisabledReasonTextModule then value.disabledReason else nil
 				end
 			end
-			local _ = nil
-			local var10 = if #t == 0 and not cloned.isDisabled then cloned.variant or buttonVariant.Emphasis else buttonVariant.Standard
-			local var11 = profileMenuItemFromResolvedAction(v.type, cloned, profileType)
+			local Variant = if #List == 0 and not Copy.isDisabled then Copy.variant or ButtonVariant.Emphasis else ButtonVariant.Standard
+			local ProfileMenuItemFromResolvedActionResult = profileMenuItemFromResolvedAction(value.type, Copy, ProfileType)
 			
-			if var11 then
-				table.insert(t, {
-					contextualMenuItems = var9,
-					menuItem = var11,
-					buttonStyle = var10,
-					isLoading = cloned.isLoading,
-					disabledReason = cloned.disabledReason
+			if ProfileMenuItemFromResolvedActionResult then
+				table.insert(List, {
+					contextualMenuItems = ContextualMenuItemsFromJsonActionsResult,
+					menuItem = ProfileMenuItemFromResolvedActionResult,
+					buttonStyle = Variant,
+					isLoading = Copy.isLoading,
+					disabledReason = Copy.disabledReason
 				})
 			end
 		end
-		local var12 = contextualMenuItemsFromJsonActions(actions.contextual, var6, profileType)
+		local ContextualMenuItemsFromJsonActionsResult = contextualMenuItemsFromJsonActions(UseProfileJsonComponentModuleResult.contextual, UseProfileActionsModuleResult, ProfileType)
 		
-		if #var12 > 0 then
-			table.insert(t, {
+		if #ContextualMenuItemsFromJsonActionsResult > 0 then
+			table.insert(List, {
 				menuItem = {
-					id = enumsModule.ProfileActions.ContextualOverflow,
-					displayValue = { icon = iconName.ThreeDotsHorizontal },
-					onActivated = function()
-						-- upvalues: var7 (copy), eventNamesModule (copy)
-						var7.fireAnalyticsEvent(eventNamesModule.ContextualMenuButton)
+					id = EnumsModule.ProfileActions.ContextualOverflow,
+					displayValue = { icon = IconName.ThreeDotsHorizontal },
+					onActivated = function() --[[ Line: 227 ]]
+						-- upvalues: UseProfileAnalyticsContextModuleResult (upval), EventNamesModule (upval)
+						UseProfileAnalyticsContextModuleResult.fireAnalyticsEvent(EventNamesModule.ContextualMenuButton)
 					end
 				},
-				contextualMenuItems = var12,
-				buttonStyle = buttonVariant.Standard
+				contextualMenuItems = ContextualMenuItemsFromJsonActionsResult,
+				buttonStyle = ButtonVariant.Standard
 			})
 		end
-		return t
+		return List
 	end, {
-		actions.buttons, actions.contextual, var6, var5, profileType, var7
-	})
+		UseProfileJsonComponentModuleResult.buttons,
+		UseProfileJsonComponentModuleResult.contextual, UseProfileActionsModuleResult,
+		UseDispatchResult, ProfileType, UseProfileAnalyticsContextModuleResult
+	}))
 end

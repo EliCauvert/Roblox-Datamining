@@ -1,41 +1,39 @@
-﻿local parent = script:FindFirstAncestor("GameDetail").Parent
-local appPage = require(parent.RobloxAppEnums).AppPage
-local sduiSharedUtilitiesModule = require(parent.SduiSharedUtilities)
-local sduiResponseType = sduiSharedUtilitiesModule.SduiResponseType
-local getSduiApiStore = sduiSharedUtilitiesModule.getSduiApiStore
-local getSduiTemplateStore = sduiSharedUtilitiesModule.getSduiTemplateStore
-local sduiApiStorePostConfigContentType = sduiSharedUtilitiesModule.SduiApiStorePostConfigContentType
-local sduiCapabilities = sduiSharedUtilitiesModule.SduiCapabilities
-local getExperienceDetailsUrlModule = require(script.Parent.getExperienceDetailsUrl)
-local getExperienceDetailsPageKeyModule = require(script.Parent.getExperienceDetailsPageKey)
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagSduiEdpClientTemplateCache = sharedFlagsModule.FFlagSduiEdpClientTemplateCache
-local fFlagSduiEdpTemplatePrewarm = sharedFlagsModule.FFlagSduiEdpTemplatePrewarm
-local fFlagSduiAdvertiseRuntimeSupportSets = sharedFlagsModule.FFlagSduiAdvertiseRuntimeSupportSets
-local fFlagInfoTableStableItemKeys = sharedFlagsModule.FFlagInfoTableStableItemKeys
+﻿local Parent = script:FindFirstAncestor("GameDetail").Parent
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local SduiSharedUtilitiesModule = require(Parent.SduiSharedUtilities)
+local SduiResponseType = SduiSharedUtilitiesModule.SduiResponseType
+local GetSduiApiStoreFunction = SduiSharedUtilitiesModule.getSduiApiStore
+local GetSduiTemplateStoreFunction = SduiSharedUtilitiesModule.getSduiTemplateStore
+local SduiApiStorePostConfigContentType = SduiSharedUtilitiesModule.SduiApiStorePostConfigContentType
+local SduiCapabilities = SduiSharedUtilitiesModule.SduiCapabilities
+local GetExperienceDetailsUrlModule = require(script.Parent.getExperienceDetailsUrl)
+local GetExperienceDetailsPageKeyModule = require(script.Parent.getExperienceDetailsPageKey)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagSduiEdpClientTemplateCache = SharedFlagsModule.FFlagSduiEdpClientTemplateCache
+local FFlagSduiEdpTemplatePrewarm = SharedFlagsModule.FFlagSduiEdpTemplatePrewarm
+local FFlagSduiAdvertiseRuntimeSupportSets = SharedFlagsModule.FFlagSduiAdvertiseRuntimeSupportSets
+local FFlagInfoTableStableItemKeys = SharedFlagsModule.FFlagInfoTableStableItemKeys
+local FFlagLuaAppEdpMomentVideo = SharedFlagsModule.FFlagLuaAppEdpMomentVideo
 
-return function(p1, p2, p3)
-	-- upvalues: getExperienceDetailsUrlModule (ref), parent (ref), fFlagSduiEdpClientTemplateCache (ref), fFlagSduiAdvertiseRuntimeSupportSets (ref), sduiCapabilities (ref), fFlagSduiEdpTemplatePrewarm (ref), fFlagInfoTableStableItemKeys (ref), getSduiTemplateStore (ref), appPage (ref), sduiApiStorePostConfigContentType (ref), getSduiApiStore (ref), sduiResponseType (ref), getExperienceDetailsPageKeyModule (ref)
-	local var1 = getExperienceDetailsUrlModule(p1)
-	local serviceContractsProtoModule = require(parent.ServiceContractsProto)
-	local experienceDetailsPage = serviceContractsProtoModule.apppageplatform.experiencedetails.experience_details_page
-	local t = nil
+return function(p1, LoadTimer, p2) --[[ Line: 21 | Named "fetchExperienceDetailsPage" ]]
+	-- upvalues: GetExperienceDetailsUrlModule (copy), Parent (copy), FFlagSduiEdpClientTemplateCache (copy), FFlagSduiAdvertiseRuntimeSupportSets (copy), SduiCapabilities (copy), FFlagSduiEdpTemplatePrewarm (copy), FFlagLuaAppEdpMomentVideo (copy), FFlagInfoTableStableItemKeys (copy), GetSduiTemplateStoreFunction (copy), AppPage (copy), SduiApiStorePostConfigContentType (copy), GetSduiApiStoreFunction (copy), SduiResponseType (copy), GetExperienceDetailsPageKeyModule (copy)
+	local ExperienceDetailsUrlModule = GetExperienceDetailsUrlModule(p1)
+	local ServiceContractsProtoModule = require(Parent.ServiceContractsProto)
+	local ExperienceDetailsPage = ServiceContractsProtoModule.apppageplatform.experiencedetails.experience_details_page
+	local v1 = nil
 	
-	if fFlagSduiEdpClientTemplateCache then
-		local var2
-		local clientCapabilities = serviceContractsProtoModule.apppageplatform.shared.client_capabilities.ClientCapabilities
-		local _ = nil
+	if FFlagSduiEdpClientTemplateCache then
+		local ClientCapabilities = ServiceContractsProtoModule.apppageplatform.shared.client_capabilities.ClientCapabilities
+		local ClientCapabilities1 = nil
 		
-		if fFlagSduiAdvertiseRuntimeSupportSets then
-			var2 = sduiCapabilities.buildClientCapabilities()
+		if FFlagSduiAdvertiseRuntimeSupportSets then
+			ClientCapabilities1 = SduiCapabilities.buildClientCapabilities()
 		else
-			local enabledCapabilityNumbers
-			local _ = nil
-			
-			if fFlagSduiEdpTemplatePrewarm then
-				enabledCapabilityNumbers = sduiCapabilities.getEnabledCapabilityNumbers(sduiCapabilities.getEnabledCapabilities())
+			local EnabledCapabilityNumbers = nil
+			if FFlagSduiEdpTemplatePrewarm then
+				EnabledCapabilityNumbers = SduiCapabilities.getEnabledCapabilityNumbers((SduiCapabilities.getEnabledCapabilities()))
 			else
-				local list = {
+				local List = {
 					"CAPABILITY_SUPPORTS_EDP_PERSISTENT_ACTION_BAR_PLAY_BUTTON",
 					"CAPABILITY_SUPPORTS_EDP_COMMUNITY_SECTION",
 					"CAPABILITY_SUPPORTS_EDP_BUILD_TAG",
@@ -43,33 +41,34 @@ return function(p1, p2, p3)
 					"CAPABILITY_SUPPORTS_PIN_SHORTCUT_ACTION",
 					"CAPABILITY_SUPPORTS_SCALED_PLAY_BUTTON_AND_IMAGE_SIZES",
 					"CAPABILITY_SUPPORTS_CONTAINER_QUERIES",
-					"CAPABILITY_SUPPORTS_EDP_EARLY_ACCESS_UPSELL"
+					"CAPABILITY_SUPPORTS_EDP_EARLY_ACCESS_UPSELL",
+					if FFlagLuaAppEdpMomentVideo then "CAPABILITY_SUPPORTS_EDP_MEDIA_GALLERY_MOMENT_VIDEO" else nil
 				}
 				
-				if fFlagInfoTableStableItemKeys then
-					table.insert(list, "CAPABILITY_SUPPORTS_EDP_INFO_TABLE_STABLE_ITEM_KEYS")
+				if FFlagInfoTableStableItemKeys then
+					table.insert(List, "CAPABILITY_SUPPORTS_EDP_INFO_TABLE_STABLE_ITEM_KEYS")
 				end
-				enabledCapabilityNumbers = sduiCapabilities.getEnabledCapabilityNumbers(list)
+				EnabledCapabilityNumbers = SduiCapabilities.getEnabledCapabilityNumbers(List)
 			end
-			var2 = clientCapabilities.new({ enabled_capabilities = enabledCapabilityNumbers })
+			ClientCapabilities1 = ClientCapabilities.new({ enabled_capabilities = EnabledCapabilityNumbers })
 		end
-		t = {
-			contentType = sduiApiStorePostConfigContentType.Proto,
-			protoMessage = experienceDetailsPage.ExperienceDetailsPageRequest,
+		v1 = {
+			contentType = SduiApiStorePostConfigContentType.Proto,
+			protoMessage = ExperienceDetailsPage.ExperienceDetailsPageRequest,
 			body = {
-				cached_roblox_component_to_template_id = getSduiTemplateStore().getCachedRobloxComponentToTemplateId(appPage.ExperienceDetail),
-				client_capabilities = var2
+				cached_roblox_component_to_template_id = GetSduiTemplateStoreFunction().getCachedRobloxComponentToTemplateId(AppPage.ExperienceDetail),
+				client_capabilities = ClientCapabilities1
 			}
 		}
 	end
-	getSduiApiStore().fetchIfNeeded({
-		responseType = sduiResponseType.Protobuf,
-		url = var1,
-		surfaceKey = appPage.ExperienceDetail,
-		configKey = getExperienceDetailsPageKeyModule(p1),
-		loadTimer = p2,
-		apiProto = experienceDetailsPage.ExperienceDetailsPageResponse,
-		postConfig = if fFlagSduiEdpClientTemplateCache then t else nil,
-		enableTemplateCache = if fFlagSduiEdpClientTemplateCache then true else nil
-	}, p3)
+	GetSduiApiStoreFunction().fetchIfNeeded({
+		responseType = SduiResponseType.Protobuf,
+		url = ExperienceDetailsUrlModule,
+		surfaceKey = AppPage.ExperienceDetail,
+		configKey = GetExperienceDetailsPageKeyModule(p1),
+		loadTimer = LoadTimer,
+		apiProto = ExperienceDetailsPage.ExperienceDetailsPageResponse,
+		postConfig = if FFlagSduiEdpClientTemplateCache then v1 else nil,
+		enableTemplateCache = if FFlagSduiEdpClientTemplateCache then true else nil
+	}, p2)
 end

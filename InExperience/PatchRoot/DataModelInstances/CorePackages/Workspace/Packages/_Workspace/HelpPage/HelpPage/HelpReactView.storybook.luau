@@ -1,27 +1,24 @@
-﻿local localizationService = game:GetService("LocalizationService")
-local parent = script.Parent
-local parent_1 = parent.Parent
-local reactModule = require(parent_1.React)
-local foundationModule = require(parent_1.Foundation)
-local reactRobloxModule = require(parent_1.ReactRoblox)
-local localization = require(parent_1.InExperienceLocales).Localization
-local localizationProvider = require(parent_1.Localization).LocalizationProvider
-local keybindContextProviderModule = require(parent.Context.KeybindContextProvider)
-local var1 = localization.new(localizationService.RobloxLocaleId)
-local foundationProvider = foundationModule.FoundationProvider
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
+local FoundationModule = require(Parent1.Foundation)
+local LocalizationProvider = require(Parent1.Localization).LocalizationProvider
+local KeybindContextProviderModule = require(Parent.Context.KeybindContextProvider)
+local NewResult = require(Parent1.InExperienceLocales).Localization.new(game:GetService("LocalizationService").RobloxLocaleId)
+local FoundationProvider = FoundationModule.FoundationProvider
 
 return {
-	name = parent.Name,
-	storyRoot = parent,
-	roact = reactModule,
-	reactRoblox = reactRobloxModule,
-	mapStory = function(p1)
-		-- upvalues: reactModule (ref), localizationProvider (ref), var1 (ref), keybindContextProviderModule (ref), foundationProvider (ref), foundationModule (ref)
-		return function(p2)
-			-- upvalues: reactModule (copy), localizationProvider (copy), var1 (copy), keybindContextProviderModule (copy), foundationProvider (copy), foundationModule (copy), p1 (ref)
-			return reactModule.createElement(localizationProvider, { localization = var1 }, {
-				KeybindContextProvider = reactModule.createElement(keybindContextProviderModule, nil, {
-					FoundationProvider = reactModule.createElement(foundationProvider, { colorMode = foundationModule.Enums.ColorMode.Dark }, { reactModule.createElement(p1, p2) })
+	name = Parent.Name,
+	storyRoot = Parent,
+	roact = ReactModule,
+	reactRoblox = require(Parent1.ReactRoblox),
+	mapStory = function(p1) --[[ Line: 19 ]]
+		-- upvalues: ReactModule (copy), LocalizationProvider (copy), NewResult (copy), KeybindContextProviderModule (copy), FoundationProvider (copy), FoundationModule (copy)
+		return function(p2) --[[ Line: 20 ]]
+			-- upvalues: ReactModule (upval), LocalizationProvider (upval), NewResult (upval), KeybindContextProviderModule (upval), FoundationProvider (upval), FoundationModule (upval), p1 (copy)
+			return ReactModule.createElement(LocalizationProvider, { localization = NewResult }, {
+				KeybindContextProvider = ReactModule.createElement(KeybindContextProviderModule, nil, {
+					FoundationProvider = ReactModule.createElement(FoundationProvider, { colorMode = FoundationModule.Enums.ColorMode.Dark }, { ReactModule.createElement(p1, p2) })
 				})
 			})
 		end

@@ -1,17 +1,17 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local useSelector = require(profilePlatform.Parent.RoactUtils).Hooks.RoactRodux.useSelector
-local constantsModule = require(profilePlatform.Common.Constants)
-local getDeepValueModule = require(profilePlatform.Utils.getDeepValue)
-local useProfileWrapperContextModule = require(profilePlatform.Contexts.useProfileWrapperContext)
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local UseSelectorFunction = require(ProfilePlatform.Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local ConstantsModule = require(ProfilePlatform.Common.Constants)
+local GetDeepValueModule = require(ProfilePlatform.Utils.getDeepValue)
+local UseProfileWrapperContextModule = require(ProfilePlatform.Contexts.useProfileWrapperContext)
 
-return function()
-	-- upvalues: useProfileWrapperContextModule (ref), useSelector (ref), getDeepValueModule (ref), constantsModule (ref)
-	local var1 = useProfileWrapperContextModule()
-	local profileId = var1.profileId
-	local profileType = var1.profileType
+return function() --[[ Line: 10 ]]
+	-- upvalues: UseProfileWrapperContextModule (copy), UseSelectorFunction (copy), GetDeepValueModule (copy), ConstantsModule (copy)
+	local UseProfileWrapperContextModuleResult = UseProfileWrapperContextModule()
+	local ProfileId = UseProfileWrapperContextModuleResult.profileId
+	local ProfileType = UseProfileWrapperContextModuleResult.profileType
 	
-	return useSelector(function(p1)
-		-- upvalues: getDeepValueModule (copy), constantsModule (copy), profileType (ref), profileId (ref)
-		return getDeepValueModule(p1, `{constantsModule.RODUX_KEY}.Profiles.{profileType}.{profileId}`) or {}
+	return UseSelectorFunction(function(p1) --[[ Line: 15 ]]
+		-- upvalues: GetDeepValueModule (upval), ConstantsModule (upval), ProfileType (copy), ProfileId (copy)
+		return GetDeepValueModule(p1, `{ConstantsModule.RODUX_KEY}.Profiles.{ProfileType}.{ProfileId}`) or {}
 	end)
 end

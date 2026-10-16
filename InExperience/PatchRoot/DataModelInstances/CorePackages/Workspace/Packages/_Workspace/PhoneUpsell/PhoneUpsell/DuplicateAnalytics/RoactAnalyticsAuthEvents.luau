@@ -1,35 +1,34 @@
-﻿local phoneUpsell = script:FindFirstAncestor("PhoneUpsell")
-local parent = phoneUpsell.Parent
-local upsellCardModalActionModule = require(phoneUpsell.DuplicateAnalytics.upsellCardModalAction)
-local upsellCardFormInteractionModule = require(phoneUpsell.DuplicateAnalytics.upsellCardFormInteraction)
-local eventStreamConstantsModule = require(phoneUpsell.DuplicateAnalytics.EventStreamConstants)
-local roactAnalytics = require(parent.RoactServiceTags).RoactAnalytics
+﻿local PhoneUpsell = script:FindFirstAncestor("PhoneUpsell")
+local UpsellCardModalActionModule = require(PhoneUpsell.DuplicateAnalytics.upsellCardModalAction)
+local UpsellCardFormInteractionModule = require(PhoneUpsell.DuplicateAnalytics.upsellCardFormInteraction)
+local EventStreamConstantsModule = require(PhoneUpsell.DuplicateAnalytics.EventStreamConstants)
+local RoactAnalytics = require(PhoneUpsell.Parent.RoactServiceTags).RoactAnalytics
 
 return {
-	get = function(p1)
-		-- upvalues: roactAnalytics (ref), upsellCardModalActionModule (ref), eventStreamConstantsModule (ref), upsellCardFormInteractionModule (ref)
-		local var1 = roactAnalytics.get(p1)
+	get = function(p1) --[[ Line: 16 ]]
+		-- upvalues: RoactAnalytics (copy), UpsellCardModalActionModule (copy), EventStreamConstantsModule (copy), UpsellCardFormInteractionModule (copy)
+		local GetResult = RoactAnalytics.get(p1)
 		
 		return {
-			reportModalShownWithSection = function(p2, p3, p4)
-				-- upvalues: upsellCardModalActionModule (copy), var1 (ref), eventStreamConstantsModule (copy)
-				upsellCardModalActionModule(var1.EventStream, p2, "", eventStreamConstantsModule.ActionType.Shown, p3, p4)
+			reportModalShownWithSection = function(p2, p3, p4) --[[ Line: 21 ]]
+				-- upvalues: UpsellCardModalActionModule (upval), GetResult (copy), EventStreamConstantsModule (upval)
+				UpsellCardModalActionModule(GetResult.EventStream, p2, "", EventStreamConstantsModule.ActionType.Shown, p3, p4)
 			end,
-			reportModalShownWithSectionAndError = function(p2, p3, p4, p5, p6)
-				-- upvalues: upsellCardModalActionModule (copy), var1 (ref), eventStreamConstantsModule (copy)
-				upsellCardModalActionModule(var1.EventStream, p2, p3, eventStreamConstantsModule.ActionType.Shown, p4, p5, p6)
+			reportModalShownWithSectionAndError = function(p2, p3, p4, p5, p6) --[[ Line: 32 ]]
+				-- upvalues: UpsellCardModalActionModule (upval), GetResult (copy), EventStreamConstantsModule (upval)
+				UpsellCardModalActionModule(GetResult.EventStream, p2, p3, EventStreamConstantsModule.ActionType.Shown, p4, p5, p6)
 			end,
-			reportModalDismissedWithSection = function(p2, p3, p4)
-				-- upvalues: upsellCardModalActionModule (copy), var1 (ref), eventStreamConstantsModule (copy)
-				upsellCardModalActionModule(var1.EventStream, p2, "", eventStreamConstantsModule.ActionType.Dismiss, p3, p4)
+			reportModalDismissedWithSection = function(p2, p3, p4) --[[ Line: 44 ]]
+				-- upvalues: UpsellCardModalActionModule (upval), GetResult (copy), EventStreamConstantsModule (upval)
+				UpsellCardModalActionModule(GetResult.EventStream, p2, "", EventStreamConstantsModule.ActionType.Dismiss, p3, p4)
 			end,
-			reportModalActionWithSection = function(p2, p3, p4, p5, p6, p7)
-				-- upvalues: upsellCardModalActionModule (copy), var1 (ref)
-				upsellCardModalActionModule(var1.EventStream, p2, p3, p4, p5, p6, p7)
+			reportModalActionWithSection = function(p2, p3, p4, p5, p6, p7) --[[ Line: 55 ]]
+				-- upvalues: UpsellCardModalActionModule (upval), GetResult (copy)
+				UpsellCardModalActionModule(GetResult.EventStream, p2, p3, p4, p5, p6, p7)
 			end,
-			reportInteractWithActionAndSection = function(p2, p3, p4, p5, p6, p7)
-				-- upvalues: upsellCardFormInteractionModule (copy), var1 (ref)
-				upsellCardFormInteractionModule(var1.EventStream, p2, p3, p4, p5, p6, p7)
+			reportInteractWithActionAndSection = function(p2, p3, p4, p5, p6, p7) --[[ Line: 59 ]]
+				-- upvalues: UpsellCardFormInteractionModule (upval), GetResult (copy)
+				UpsellCardFormInteractionModule(GetResult.EventStream, p2, p3, p4, p5, p6, p7)
 			end
 		}
 	end

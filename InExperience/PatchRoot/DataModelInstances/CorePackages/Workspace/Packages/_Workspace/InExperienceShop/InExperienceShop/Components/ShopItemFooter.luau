@@ -1,48 +1,62 @@
-﻿local inExperienceShop = script:FindFirstAncestor("InExperienceShop")
-local parent = inExperienceShop.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local _ = require(inExperienceShop.Types)
-local initiateShopItemPurchaseModule = require(inExperienceShop.initiateShopItemPurchase)
-local button = foundationModule.Button
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local inputSize = foundationModule.Enums.InputSize
-local fFlagLuaAppEnableGamePassFreeTrialsModule = require(inExperienceShop.Flags.FFlagLuaAppEnableGamePassFreeTrials)
-local t = {
+﻿local InExperienceShop = script:FindFirstAncestor("InExperienceShop")
+local Parent = InExperienceShop.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local _ = require(InExperienceShop.Types)
+local InitiateShopItemPurchaseModule = require(InExperienceShop.initiateShopItemPurchase)
+local FFlagCategoryLoggingInShopPurchaseModule = require(InExperienceShop.Flags.FFlagCategoryLoggingInShopPurchase)
+local Button = FoundationModule.Button
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local InputSize = FoundationModule.Enums.InputSize
+local FFlagLuaAppEnableGamePassFreeTrialsModule = require(InExperienceShop.Flags.FFlagLuaAppEnableGamePassFreeTrials)
+local config = {
 	owned = "Feature.Catalog.Label.Owned",
 	buy = "Feature.Catalog.Action.Buy",
 	try = "Feature.Catalog.Action.Try"
 }
 
-return reactModule.memo(function(p1)
-	-- upvalues: useLocalization (ref), t (ref), reactModule (ref), initiateShopItemPurchaseModule (ref), button (ref), buttonVariant (ref), inputSize (ref), fFlagLuaAppEnableGamePassFreeTrialsModule (ref)
-	local var1 = useLocalization(t)
+return ReactModule.memo(function(Frame: Frame) --[[ Line: 37 | Named "ShopItemFooter" ]]
+	-- upvalues: UseLocalizationFunction (copy), config (copy), ReactModule (copy), FFlagCategoryLoggingInShopPurchaseModule (copy), InitiateShopItemPurchaseModule (copy), Button (copy), ButtonVariant (copy), InputSize (copy), FFlagLuaAppEnableGamePassFreeTrialsModule (copy)
+	local UseLocalizationResult = UseLocalizationFunction(config)
+	local PurchaseCategoryLocation = Frame.purchaseCategoryLocation
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 42 ]]
+		-- upvalues: FFlagCategoryLoggingInShopPurchaseModule (upval), PurchaseCategoryLocation (copy), InitiateShopItemPurchaseModule (upval), Frame (copy)
+		if FFlagCategoryLoggingInShopPurchaseModule and PurchaseCategoryLocation ~= nil then
+			InitiateShopItemPurchaseModule(Frame.itemId, Frame.itemType, Frame.shopPageType, PurchaseCategoryLocation)
+			
+			return
+		else
+			InitiateShopItemPurchaseModule(Frame.itemId, Frame.itemType, Frame.shopPageType)
+		end
+	end, {
+		Frame.itemId,
+		Frame.itemType,
+		Frame.shopPageType,
+		PurchaseCategoryLocation
+	})
 	
-	return if p1.isOwned or false then reactModule.createElement(button, {
+	return if Frame.isOwned or false then ReactModule.createElement(Button, {
 		isDisabled = true,
-		text = var1.owned,
-		variant = buttonVariant.Standard,
-		size = inputSize.Small,
+		text = UseLocalizationResult.owned,
+		variant = ButtonVariant.Standard,
+		size = InputSize.Small,
 		width = UDim.new(1, 0),
-		LayoutOrder = p1.LayoutOrder,
-		onActivated = function() end
-	}) elseif fFlagLuaAppEnableGamePassFreeTrialsModule and p1.showTry then reactModule.createElement(button, {
-		text = var1.try,
-		variant = buttonVariant.Standard,
-		size = inputSize.Small,
+		LayoutOrder = Frame.LayoutOrder,
+		onActivated = function() --[[ Line: 58 ]] end
+	}) elseif FFlagLuaAppEnableGamePassFreeTrialsModule and Frame.showTry then ReactModule.createElement(Button, {
+		text = UseLocalizationResult.try,
+		variant = ButtonVariant.Standard,
+		size = InputSize.Small,
 		width = UDim.new(1, 0),
-		onActivated = function() end,
-		LayoutOrder = p1.LayoutOrder
-	}) else reactModule.createElement(button, {
-		text = var1.buy,
-		variant = buttonVariant.Standard,
-		size = inputSize.Small,
+		onActivated = function() --[[ Line: 68 ]] end,
+		LayoutOrder = Frame.LayoutOrder
+	}) else ReactModule.createElement(Button, {
+		text = UseLocalizationResult.buy,
+		variant = ButtonVariant.Standard,
+		size = InputSize.Small,
 		width = UDim.new(1, 0),
-		onActivated = reactModule.useCallback(function()
-			-- upvalues: initiateShopItemPurchaseModule (copy), p1 (ref)
-			initiateShopItemPurchaseModule(p1.itemId, p1.itemType, p1.shopPageType)
-		end, { p1.itemId, p1.itemType, p1.shopPageType }),
-		LayoutOrder = p1.LayoutOrder
+		onActivated = UseResult,
+		LayoutOrder = Frame.LayoutOrder
 	})
 end)

@@ -1,6 +1,6 @@
-﻿return function(p1, p2)
-	p2:connect(function(p3)
-		-- upvalues: p1 (ref)
-		p1:SetMenuIsOpen(p3, "in_experience_shop")
+﻿return function(GuiService, p1) --[[ Line: 19 | Named "initializeShopMenuController" ]]
+	p1:connect(function(Open) --[[ Line: 20 ]]
+		-- upvalues: GuiService (copy)
+		GuiService:SetMenuIsOpen(Open, "in_experience_shop")
 	end)
 end

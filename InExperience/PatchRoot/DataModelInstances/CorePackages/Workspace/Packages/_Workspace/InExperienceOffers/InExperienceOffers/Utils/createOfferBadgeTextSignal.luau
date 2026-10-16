@@ -1,14 +1,14 @@
-﻿local inExperienceOffers = script:FindFirstAncestor("InExperienceOffers")
-local parent = inExperienceOffers.Parent
-local signalsModule = require(parent.Signals)
-local fFlagHideOfferNotificationsWhenShopEmpty = require(parent.SharedFlags).FFlagHideOfferNotificationsWhenShopEmpty
-local getOffersStoreModule = require(inExperienceOffers.Stores.GetOffersStore)
-local getOfferBadgeTextModule = require(inExperienceOffers.Utils.getOfferBadgeText)
+﻿local InExperienceOffers = script:FindFirstAncestor("InExperienceOffers")
+local Parent = InExperienceOffers.Parent
+local SignalsModule = require(Parent.Signals)
+local FFlagHideOfferNotificationsWhenShopEmpty = require(Parent.SharedFlags).FFlagHideOfferNotificationsWhenShopEmpty
+local GetOffersStoreModule = require(InExperienceOffers.Stores.GetOffersStore)
+local GetOfferBadgeTextModule = require(InExperienceOffers.Utils.getOfferBadgeText)
 
-return function(value)
-	-- upvalues: signalsModule (ref), fFlagHideOfferNotificationsWhenShopEmpty (ref), getOffersStoreModule (ref), getOfferBadgeTextModule (ref)
-	return signalsModule.createComputed(function(p1)
-		-- upvalues: fFlagHideOfferNotificationsWhenShopEmpty (copy), getOffersStoreModule (copy), getOfferBadgeTextModule (copy), value (ref)
-		return if fFlagHideOfferNotificationsWhenShopEmpty and not getOffersStoreModule(false).getShopHasItems(p1) then nil else getOfferBadgeTextModule(getOffersStoreModule(false).getOffers(p1), value)
+return function(p1) --[[ Line: 10 | Named "createOfferBadgeTextSignal" ]]
+	-- upvalues: SignalsModule (copy), FFlagHideOfferNotificationsWhenShopEmpty (copy), GetOffersStoreModule (copy), GetOfferBadgeTextModule (copy)
+	return SignalsModule.createComputed(function(p2) --[[ Line: 11 ]]
+		-- upvalues: FFlagHideOfferNotificationsWhenShopEmpty (upval), GetOffersStoreModule (upval), GetOfferBadgeTextModule (upval), p1 (copy)
+		return if FFlagHideOfferNotificationsWhenShopEmpty and not GetOffersStoreModule(false).getShopHasItems(p2) then nil else GetOfferBadgeTextModule(GetOffersStoreModule(false).getOffers(p2), p1)
 	end)
 end

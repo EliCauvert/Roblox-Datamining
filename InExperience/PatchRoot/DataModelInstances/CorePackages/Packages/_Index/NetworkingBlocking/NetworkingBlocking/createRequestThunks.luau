@@ -1,13 +1,13 @@
-﻿local networkRequests = script.Parent.networkRequests
-local createGetBlockedUsersModule = require(networkRequests.createGetBlockedUsers)
-local createBlockUserByIdModule = require(networkRequests.createBlockUserById)
-local createUnblockUserByIdModule = require(networkRequests.createUnblockUserById)
+﻿local NetworkRequests = script.Parent.networkRequests
+local CreateGetBlockedUsersModule = require(NetworkRequests.createGetBlockedUsers)
+local CreateBlockUserByIdModule = require(NetworkRequests.createBlockUserById)
+local CreateUnblockUserByIdModule = require(NetworkRequests.createUnblockUserById)
 
-return function(p1)
-	-- upvalues: createGetBlockedUsersModule (ref), createBlockUserByIdModule (ref), createUnblockUserByIdModule (ref)
+return function(p1) --[[ Line: 7 ]]
+	-- upvalues: CreateGetBlockedUsersModule (copy), CreateBlockUserByIdModule (copy), CreateUnblockUserByIdModule (copy)
 	return {
-		GetBlockedUsers = createGetBlockedUsersModule(p1),
-		BlockUserById = createBlockUserByIdModule(p1),
-		UnblockUserById = createUnblockUserByIdModule(p1)
+		GetBlockedUsers = CreateGetBlockedUsersModule(p1),
+		BlockUserById = CreateBlockUserByIdModule(p1),
+		UnblockUserById = CreateUnblockUserByIdModule(p1)
 	}
 end

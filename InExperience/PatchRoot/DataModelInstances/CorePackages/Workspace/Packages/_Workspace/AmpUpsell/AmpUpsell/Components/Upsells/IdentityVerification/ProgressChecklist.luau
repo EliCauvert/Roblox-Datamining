@@ -1,53 +1,53 @@
-﻿local ampUpsell = script:FindFirstAncestor("AmpUpsell")
-local parent = ampUpsell.Parent
-local reactModule = require(parent.React)
-local progressTileModule = require(script.Parent.ProgressTile)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local IDVStep = require(ampUpsell.Common.Enums).IDVStep
+﻿local AmpUpsell = script:FindFirstAncestor("AmpUpsell")
+local Parent = AmpUpsell.Parent
+local ReactModule = require(Parent.React)
+local ProgressTileModule = require(script.Parent.ProgressTile)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local IDVStep = require(AmpUpsell.Common.Enums).IDVStep
 
-return function(p1)
-	-- upvalues: useLocalization (ref), IDVStep (ref), reactModule (ref), progressTileModule (ref)
-	local var1 = useLocalization({
+return function(p1) --[[ Line: 15 | Named "ProgressChecklist" ]]
+	-- upvalues: UseLocalizationFunction (copy), IDVStep (copy), ReactModule (copy), ProgressTileModule (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
 		connectedMobile = "Verification.Identity.Label.ConnectingToMobile",
 		verifyingYou = "Verification.Identity.Label.VerifyingYou",
 		waitingForResults = "Verification.Identity.Label.VerificationWaitingForResults",
 		updatingRbxProfile = "Verification.Identity.Label.UpdatingRoblox"
 	})
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.new(1, 0, 0, p1.entryHeight * 4),
 		LayoutOrder = p1.layoutOrder
 	}, {
-		UIListLayout = reactModule.createElement("UIListLayout", {
+		UIListLayout = ReactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			FillDirection = Enum.FillDirection.Vertical,
 			HorizontalAlignment = Enum.HorizontalAlignment.Center,
 			VerticalAlignment = Enum.VerticalAlignment.Center
 		}),
-		MobileCheck = reactModule.createElement(progressTileModule, {
+		MobileCheck = ReactModule.createElement(ProgressTileModule, {
 			layoutOrder = 1,
 			frameHeight = p1.entryHeight,
 			finished = IDVStep.ConnectedMobile <= p1.latestStepCompleted,
-			progressText = var1.connectedMobile
+			progressText = UseLocalizationResult.connectedMobile
 		}),
-		VerifiedCheck = reactModule.createElement(progressTileModule, {
+		VerifiedCheck = ReactModule.createElement(ProgressTileModule, {
 			layoutOrder = 2,
 			frameHeight = p1.entryHeight,
 			finished = IDVStep.Verified <= p1.latestStepCompleted,
-			progressText = var1.verifyingYou
+			progressText = UseLocalizationResult.verifyingYou
 		}),
-		GotResultsCheck = reactModule.createElement(progressTileModule, {
+		GotResultsCheck = ReactModule.createElement(ProgressTileModule, {
 			layoutOrder = 3,
 			frameHeight = p1.entryHeight,
 			finished = IDVStep.GotResults <= p1.latestStepCompleted,
-			progressText = var1.waitingForResults
+			progressText = UseLocalizationResult.waitingForResults
 		}),
-		UpdateProfileCheck = reactModule.createElement(progressTileModule, {
+		UpdateProfileCheck = ReactModule.createElement(ProgressTileModule, {
 			layoutOrder = 4,
 			frameHeight = p1.entryHeight,
 			finished = IDVStep.UpdatedRobloxProfile <= p1.latestStepCompleted,
-			progressText = var1.updatingRbxProfile
+			progressText = UseLocalizationResult.updatingRbxProfile
 		})
 	})
 end

@@ -1,31 +1,29 @@
-﻿local parent = script:FindFirstAncestor("AppBlox").Parent
-local UIBloxModule = require(parent.UIBlox)
-local tModule = require(parent.t)
-local roactModule = require(parent.Roact)
-local getTextSize = require(parent.Style).GetTextSize
-local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
-local styledTextLabel = UIBloxModule.App.Text.StyledTextLabel
-local validateImage = UIBloxModule.Core.ImageSet.Validator.validateImage
-local iconSize = UIBloxModule.App.ImageSet.Enum.IconSize
-local getIconSize = UIBloxModule.App.ImageSet.getIconSize
-local withStyle = UIBloxModule.Core.Style.withStyle
-local actionBar = UIBloxModule.App.Button.ActionBar
-local fFlagUIBloxEnableActionBarButtonOverride = game:DefineFastFlag("LuaAppFixUnifiedPlayButtonStickyActionBar", false) and require(parent.SharedFlags).UIBlox.FFlagUIBloxEnableActionBarButtonOverride
-local var1 = getIconSize(iconSize.Large)
-local stickyActionBar = roactModule.PureComponent:extend("StickyActionBar")
-stickyActionBar.validateProps = tModule.strictInterface({
-	actionBarProps = tModule.optional(tModule.table),
-	actionBarWidth = tModule.optional(tModule.number),
-	infoProps = tModule.optional(tModule.strictInterface({
-		title = tModule.string,
-		icon = tModule.optional(validateImage),
-		enableInfoAtStart = tModule.optional(tModule.boolean),
-		infoSectionWidth = tModule.optional(tModule.integer)
+﻿local Parent = script:FindFirstAncestor("AppBlox").Parent
+local UIBloxModule = require(Parent.UIBlox)
+local TModule = require(Parent.t)
+local RoactModule = require(Parent.Roact)
+local GetTextSizeFunction = require(Parent.Style).GetTextSize
+local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
+local StyledTextLabel = UIBloxModule.App.Text.StyledTextLabel
+local WithStyleFunction = UIBloxModule.Core.Style.withStyle
+local ActionBar = UIBloxModule.App.Button.ActionBar
+local FFlagUIBloxEnableActionBarButtonOverride = require(Parent.SharedFlags).UIBlox.FFlagUIBloxEnableActionBarButtonOverride
+local FFlagUIBloxEnableActionBarButtonOverride1 = game:DefineFastFlag("LuaAppFixUnifiedPlayButtonStickyActionBar", false) and FFlagUIBloxEnableActionBarButtonOverride
+local IconSize = UIBloxModule.App.ImageSet.getIconSize(UIBloxModule.App.ImageSet.Enum.IconSize.Large)
+local StickyActionBar = RoactModule.PureComponent:extend("StickyActionBar")
+StickyActionBar.validateProps = TModule.strictInterface({
+	actionBarProps = TModule.optional(TModule.table),
+	actionBarWidth = TModule.optional(TModule.number),
+	infoProps = TModule.optional(TModule.strictInterface({
+		title = TModule.string,
+		icon = TModule.optional(UIBloxModule.Core.ImageSet.Validator.validateImage),
+		enableInfoAtStart = TModule.optional(TModule.boolean),
+		infoSectionWidth = TModule.optional(TModule.integer)
 	})),
-	width = tModule.optional(tModule.integer),
-	layoutOrder = tModule.optional(tModule.integer)
+	width = TModule.optional(TModule.integer),
+	layoutOrder = TModule.optional(TModule.integer)
 })
-stickyActionBar.defaultProps = {
+StickyActionBar.defaultProps = {
 	actionBarProps = nil,
 	actionBarWidth = 380,
 	infoProps = nil,
@@ -33,78 +31,95 @@ stickyActionBar.defaultProps = {
 	width = nil
 }
 
-function stickyActionBar.init(p1)
-	-- upvalues: getTextSize (ref)
+function StickyActionBar.init(p1) --[[ Line: 77 ]]
+	-- upvalues: GetTextSizeFunction (copy)
 	p1.state = { containerWidth = nil }
 	
-	function p0.onContainerSizeChange(p2)
-		-- upvalues: p1 (ref)
-		p1:setState(function(_, _)
-			-- upvalues: p2 (ref)
-			return { containerWidth = p2.AbsoluteSize.X }
+	function p1.onContainerSizeChange(Frame) --[[ Line: 81 ]]
+		-- upvalues: p1 (copy)
+		p1:setState(function(_, _) --[[ Line: 82 ]]
+			-- upvalues: Frame (copy)
+			return { containerWidth = Frame.AbsoluteSize.X }
 		end)
 	end
 	
-	local _ = function()
-		-- upvalues: p1 (ref)
+	local function _(): UDim2 --[[ Line: 89 ]]
+		-- upvalues: p1 (copy)
 		return UDim2.fromOffset(p1.props.actionBarWidth, 48)
 	end
 	
-	local _ = function(p2, p3, p4)
-		-- upvalues: p1 (ref)
-		return if p4 and p4.infoSectionWidth then p4.infoSectionWidth elseif p3 then p2 - 80 - UDim2.fromOffset(p1.props.actionBarWidth, 48).X.Offset else p2 - 80
+	local _ = function(p2: number, p3, p4) --[[ Line: 93 ]]
+		-- upvalues: p1 (copy)
+		if p4 and p4.infoSectionWidth then
+			return p4.infoSectionWidth
+		else
+			local Offset = UDim2.fromOffset(p1.props.actionBarWidth, 48).X.Offset
+			
+			return p3 and p2 - 80 - Offset or p2 - 80
+		end
 	end
 	
-	local var2 = function(p2, p3, p4, p5)
-		-- upvalues: p1 (ref)
-		if p5 or not p4 then
+	local function v13(p2: number, NewX: number, p3, p4) --[[ Line: 104 ]]
+		-- upvalues: p1 (copy)
+		if p4 or not p3 then
 			return {
 				left = 24,
 				right = 24,
 				horizontalAlignment = Enum.HorizontalAlignment.Left
 			}
+		else
+			local Offset = UDim2.fromOffset(p1.props.actionBarWidth, 48).X.Offset
+			
+			return {
+				right = 24,
+				left = math.max(Offset + (if p2 < 1280 then 24 else 80), (p2 - NewX) / 2) - Offset
+			}
 		end
-		local offset = UDim2.fromOffset(p1.props.actionBarWidth, 48).X.Offset
-		
-		return {
-			right = 24,
-			left = math.max(offset + (if p2 < 1280 then 24 else 80), (p2 - p3) / 2) - offset
-		}
 	end
 	
-	local _ = function(p2, p3, p4)
-		-- upvalues: getTextSize (copy)
-		return getTextSize(p2, p3.RelativeSize * p4.Font.BaseSize, p3.Font, Vector2.new(10000, 10000)).X
+	local _ = function(p2, p3, p4) --[[ Line: 128 ]]
+		-- upvalues: GetTextSizeFunction (upval)
+		return GetTextSizeFunction(p2, p3.RelativeSize * p4.Font.BaseSize, p3.Font, (Vector2.new(10000, 10000))).X
 	end
 	
-	function p0.getLayoutConfig(p2, p3, p4, p5, p6, p7, p8)
-		-- upvalues: p1 (ref), getTextSize (copy), var2 (ref)
-		local var3 = if p1.props.infoProps and p1.props.infoProps.enableInfoAtStart then true else false
-		
-		return {
-			layoutOrder = if var3 then { infoSection = 1, actionBarSection = 2 } else { infoSection = 2, actionBarSection = 1 },
-			infoHorizontalAlignment = Enum.HorizontalAlignment.Left,
-			infoSectionWidth = if p4 and p4.infoSectionWidth then p4.infoSectionWidth elseif p3 then p2 - 80 - UDim2.fromOffset(p1.props.actionBarWidth, 48).X.Offset else p2 - 80,
-			infoSectionPadding = var2(p2, getTextSize(p6, p7.RelativeSize * p8.Font.BaseSize, p7.Font, Vector2.new(10000, 10000)).X + p5 + (if p5 > 0 then 12 else 0), p3, var3),
-			actionBarSectionSize = UDim2.fromOffset(p1.props.actionBarWidth, 48),
-			actionBarSectionMarginOverride = { left = 0, right = 0, top = 0, bottom = 0 }
+	function p1.getLayoutConfig(p2: number, HasActionBarProps, InfoProps, XOffset: number, Title, Header, p3) --[[ Line: 135 ]]
+		-- upvalues: p1 (copy), GetTextSizeFunction (upval), v13 (copy)
+		local v1: boolean = if p1.props.infoProps and p1.props.infoProps.enableInfoAtStart then true else false
+		local NewX = GetTextSizeFunction(Title, Header.RelativeSize * p3.Font.BaseSize, Header.Font, (Vector2.new(10000, 10000))).X + XOffset + (if XOffset > 0 then 12 else 0)
+		local config = {
+			layoutOrder = v1 and { infoSection = 1, actionBarSection = 2 } or { infoSection = 2, actionBarSection = 1 },
+			infoHorizontalAlignment = Enum.HorizontalAlignment.Left
 		}
+		local InfoSectionWidth = nil
+		
+		if InfoProps and InfoProps.infoSectionWidth then
+			InfoSectionWidth = InfoProps.infoSectionWidth
+		else
+			local Offset = UDim2.fromOffset(p1.props.actionBarWidth, 48).X.Offset
+			InfoSectionWidth = HasActionBarProps and p2 - 80 - Offset or p2 - 80
+		end
+		config.infoSectionWidth = InfoSectionWidth
+		config.infoSectionPadding = v13(p2, NewX, HasActionBarProps, v1)
+		config.actionBarSectionSize = UDim2.fromOffset(p1.props.actionBarWidth, 48)
+		config.actionBarSectionMarginOverride = { left = 0, right = 0, top = 0, bottom = 0 }
+		
+		return config
 	end
 end
 
-function stickyActionBar.render(p1)
-	-- upvalues: withStyle (ref), var1 (ref), roactModule (ref), actionBar (ref), fFlagUIBloxEnableActionBarButtonOverride (ref), imageSetLabel (ref), styledTextLabel (ref)
-	local var2 = p1.props.actionBarProps ~= nil
-	local var3 = p1.props.infoProps ~= nil
-	local width = p1.props.width or p1.state.containerWidth
-	assert(var2 or var3, "Either actionbar or info should be present!")
+function StickyActionBar.render(p1) --[[ Line: 176 ]]
+	-- upvalues: WithStyleFunction (copy), IconSize (copy), RoactModule (copy), ActionBar (copy), FFlagUIBloxEnableActionBarButtonOverride1 (copy), ImageSetLabel (copy), StyledTextLabel (copy)
+	local HasActionBarProps = p1.props.actionBarProps ~= nil
+	local HasInfoProps = p1.props.infoProps ~= nil
+	local Width = p1.props.width or p1.state.containerWidth
+	assert(HasActionBarProps or HasInfoProps, "Either actionbar or info should be present!")
 	
-	return withStyle(function(p2)
-		-- upvalues: var3 (ref), p1 (ref), var1 (copy), width (ref), var2 (ref), roactModule (copy), actionBar (copy), fFlagUIBloxEnableActionBarButtonOverride (copy), imageSetLabel (copy), styledTextLabel (copy)
-		local var4 = var3 and (p1.props.infoProps.icon and (var1 or 0))
-		local var5 = if var3 then p1.props.infoProps.title else ""
-		local header2 = p2.Font.Header2
-		local layoutConfig = p1.getLayoutConfig(width or 0, var2, p1.props.infoProps, var4, var5, header2, p2)
+	return WithStyleFunction(function(p2) --[[ Line: 181 ]]
+		-- upvalues: HasInfoProps (copy), p1 (copy), IconSize (upval), Width (copy), HasActionBarProps (copy), RoactModule (upval), ActionBar (upval), FFlagUIBloxEnableActionBarButtonOverride1 (upval), ImageSetLabel (upval), StyledTextLabel (upval)
+		local IconSize1 = HasInfoProps and p1.props.infoProps.icon and IconSize or 0
+		local Title = HasInfoProps and p1.props.infoProps.title or ""
+		local Header2 = p2.Font.Header2
+		local LayoutConfig = p1.getLayoutConfig(Width or 0, HasActionBarProps, p1.props.infoProps, IconSize1, Title, Header2, p2)
 		
 		return p1:renderHorizontalLayout({
 			layoutOrder = p1.props.layoutOrder,
@@ -113,46 +128,46 @@ function stickyActionBar.render(p1)
 			horizontalAlignment = Enum.HorizontalAlignment.Left,
 			padding = { left = 56, right = 24 }
 		}, {
-			ActionBarSection = var2 and (p1:renderHorizontalLayout({
-				layoutOrder = layoutConfig.layoutOrder.actionBarSection,
-				size = layoutConfig.actionBarSectionSize,
+			ActionBarSection = HasActionBarProps and p1:renderHorizontalLayout({
+				layoutOrder = LayoutConfig.layoutOrder.actionBarSection,
+				size = LayoutConfig.actionBarSectionSize,
 				horizontalAlignment = Enum.HorizontalAlignment.Left
 			}, {
-				ActionBar = roactModule.createElement(actionBar, {
+				ActionBar = RoactModule.createElement(ActionBar, {
 					enableButtonAtStart = true,
 					button = p1.props.actionBarProps.button,
-					buttonOverride = if fFlagUIBloxEnableActionBarButtonOverride then p1.props.actionBarProps.buttonOverride else nil,
+					buttonOverride = if FFlagUIBloxEnableActionBarButtonOverride1 then p1.props.actionBarProps.buttonOverride else nil,
 					icons = p1.props.actionBarProps.icons,
-					marginOverride = layoutConfig.actionBarSectionMarginOverride
+					marginOverride = LayoutConfig.actionBarSectionMarginOverride
 				})
-			}) or nil),
-			InfoSection = var3 and (width ~= nil and p1:renderHorizontalLayout({
+			}) or nil,
+			InfoSection = HasInfoProps and (Width ~= nil and p1:renderHorizontalLayout({
 				internalSpacing = 12,
-				layoutOrder = layoutConfig.layoutOrder.infoSection,
-				width = layoutConfig.infoSectionWidth,
-				horizontalAlignment = layoutConfig.infoHorizontalAlignment,
-				padding = layoutConfig.infoSectionPadding
+				layoutOrder = LayoutConfig.layoutOrder.infoSection,
+				width = LayoutConfig.infoSectionWidth,
+				horizontalAlignment = LayoutConfig.infoHorizontalAlignment,
+				padding = LayoutConfig.infoSectionPadding
 			}, {
-				Icon = p1.props.infoProps.icon and roactModule.createElement(imageSetLabel, {
+				Icon = p1.props.infoProps.icon and RoactModule.createElement(ImageSetLabel, {
 					LayoutOrder = 1,
 					BackgroundTransparency = 1,
-					Size = UDim2.new(0, var4, 0, var4),
+					Size = UDim2.new(0, IconSize1, 0, IconSize1),
 					Position = UDim2.new(0, 0, 0, 0),
 					Image = p1.props.infoProps.icon,
 					ScaleType = Enum.ScaleType.Crop
 				}, {
-					RoundCorner = roactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) })
+					RoundCorner = RoactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) })
 				}) or nil,
-				Title = roactModule.createElement(styledTextLabel, {
+				Title = RoactModule.createElement(StyledTextLabel, {
 					layoutOrder = 2,
 					fluidSizing = false,
 					textWrapped = true,
 					size = UDim2.new(0, 0, 0, 48),
 					automaticSize = Enum.AutomaticSize.X,
-					text = var5,
+					text = Title,
 					textXAlignment = Enum.TextXAlignment.Left,
 					colorStyle = p2.Theme.TextEmphasis,
-					fontStyle = header2,
+					fontStyle = Header2,
 					textTruncate = Enum.TextTruncate.AtEnd
 				})
 			}))
@@ -160,30 +175,30 @@ function stickyActionBar.render(p1)
 	end)
 end
 
-function stickyActionBar.renderHorizontalLayout(_, p1, p2)
-	-- upvalues: roactModule (ref)
-	return roactModule.createElement("Frame", {
-		Size = if p1.size then p1.size else UDim2.new(0, p1.width, 0, 0),
+function StickyActionBar:renderHorizontalLayout(p1, p2) --[[ Line: 255 ]]
+	-- upvalues: RoactModule (copy)
+	return RoactModule.createElement("Frame", {
+		Size = p1.size and p1.size or UDim2.new(0, p1.width, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
 		BackgroundTransparency = 1,
 		LayoutOrder = p1.layoutOrder,
-		[roactModule.Change.AbsoluteSize] = p1.onContainerSizeChange
+		[RoactModule.Change.AbsoluteSize] = p1.onContainerSizeChange
 	}, {
-		Layout = roactModule.createElement("UIListLayout", {
+		Layout = RoactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Horizontal,
 			HorizontalAlignment = p1.horizontalAlignment,
 			VerticalAlignment = Enum.VerticalAlignment.Center,
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			Padding = UDim.new(0, p1.internalSpacing or 0)
 		}),
-		Padding = if p1.padding then roactModule.createElement("UIPadding", {
+		Padding = if p1.padding then RoactModule.createElement("UIPadding", {
 			PaddingLeft = UDim.new(0, p1.padding.left or 0),
 			PaddingRight = UDim.new(0, p1.padding.right or 0),
 			PaddingTop = UDim.new(0, p1.padding.top or 0),
 			PaddingBottom = UDim.new(0, p1.padding.bottom or 0)
 		}) else nil,
-		Elements = roactModule.createFragment(p2)
+		Elements = RoactModule.createFragment(p2)
 	})
 end
 
-return stickyActionBar
+return StickyActionBar

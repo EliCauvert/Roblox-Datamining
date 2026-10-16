@@ -1,87 +1,87 @@
-﻿local eventNamesModule = require(script.Parent.EventNames)
-local enums = require(script.Parent.Parent.Parent.SocialLuaAnalytics).Analytics.Enums
-local contexts = enums.Contexts
-local subPages = enums.SubPages
-local eventTypes = enums.EventTypes
+﻿local EventNamesModule = require(script.Parent.EventNames)
+local Enums = require(script.Parent.Parent.Parent.SocialLuaAnalytics).Analytics.Enums
+local Contexts = Enums.Contexts
+local SubPages = Enums.SubPages
+local EventTypes = Enums.EventTypes
 
-local var1 = function(p1)
+local function ProfileUserId(p1) --[[ Line: 11 ]]
 	return p1
 end
 
 return {
-	[eventNamesModule.RequestFriendship] = {
-		context = contexts.FriendsLanding,
-		eventType = eventTypes.ButtonClick,
+	[EventNamesModule.RequestFriendship] = {
+		context = Contexts.FriendsLanding,
+		eventType = EventTypes.ButtonClick,
 		additionalInfo = {
 			btn = "addFriend",
-			subpage = subPages.PlayerContextualMenu
+			subpage = SubPages.PlayerContextualMenu
 		},
-		formatRulesForAdditionalInfo = { profileUserId = var1 }
+		formatRulesForAdditionalInfo = { profileUserId = ProfileUserId }
 	},
-	[eventNamesModule.Unfriend] = {
-		context = contexts.FriendsLanding,
-		eventType = eventTypes.ButtonClick,
+	[EventNamesModule.Unfriend] = {
+		context = Contexts.FriendsLanding,
+		eventType = EventTypes.ButtonClick,
 		additionalInfo = {
 			btn = "unFriend",
-			subpage = subPages.PlayerContextualMenu
+			subpage = SubPages.PlayerContextualMenu
 		},
-		formatRulesForAdditionalInfo = { profileUserId = var1 }
+		formatRulesForAdditionalInfo = { profileUserId = ProfileUserId }
 	},
-	[eventNamesModule.AcceptFriendRequest] = {
-		context = contexts.FriendsLanding,
-		eventType = eventTypes.ButtonClick,
+	[EventNamesModule.AcceptFriendRequest] = {
+		context = Contexts.FriendsLanding,
+		eventType = EventTypes.ButtonClick,
 		additionalInfo = {
 			btn = "acceptFriend",
-			subpage = subPages.PlayerContextualMenu
+			subpage = SubPages.PlayerContextualMenu
 		},
-		formatRulesForAdditionalInfo = { profileUserId = var1 }
+		formatRulesForAdditionalInfo = { profileUserId = ProfileUserId }
 	},
-	[eventNamesModule.IgnoreFriendRequest] = {
-		context = contexts.FriendsLanding,
-		eventType = eventTypes.ButtonClick,
+	[EventNamesModule.IgnoreFriendRequest] = {
+		context = Contexts.FriendsLanding,
+		eventType = EventTypes.ButtonClick,
 		additionalInfo = {
 			btn = "ignoreFriend",
-			subpage = subPages.PlayerContextualMenu
+			subpage = SubPages.PlayerContextualMenu
 		},
-		formatRulesForAdditionalInfo = { profileUserId = var1 }
+		formatRulesForAdditionalInfo = { profileUserId = ProfileUserId }
 	},
-	[eventNamesModule.BlockPlayer] = {
-		context = contexts.FriendsLanding,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = { btn = "block", subpage = subPages.PlayerContextualMenu },
-		formatRulesForAdditionalInfo = { profileUserId = var1 }
+	[EventNamesModule.BlockPlayer] = {
+		context = Contexts.FriendsLanding,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = { btn = "block", subpage = SubPages.PlayerContextualMenu },
+		formatRulesForAdditionalInfo = { profileUserId = ProfileUserId }
 	},
-	[eventNamesModule.ReportPlayer] = {
-		context = contexts.FriendsLanding,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = { btn = "report", subpage = subPages.PlayerContextualMenu },
-		formatRulesForAdditionalInfo = { profileUserId = var1 }
+	[EventNamesModule.ReportPlayer] = {
+		context = Contexts.FriendsLanding,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = { btn = "report", subpage = SubPages.PlayerContextualMenu },
+		formatRulesForAdditionalInfo = { profileUserId = ProfileUserId }
 	},
-	[eventNamesModule.JoinExperience] = {
-		context = contexts.FriendsLanding,
-		eventType = eventTypes.ButtonClick,
+	[EventNamesModule.JoinExperience] = {
+		context = Contexts.FriendsLanding,
+		eventType = EventTypes.ButtonClick,
 		additionalInfo = {
 			btn = "joinUser",
-			subpage = subPages.PlayerContextualMenu
+			subpage = SubPages.PlayerContextualMenu
 		},
-		formatRulesForAdditionalInfo = { profileUserId = var1 }
+		formatRulesForAdditionalInfo = { profileUserId = ProfileUserId }
 	},
-	[eventNamesModule.ViewExperienceDetails] = {
-		context = contexts.FriendsLanding,
-		eventType = eventTypes.ButtonClick,
+	[EventNamesModule.ViewExperienceDetails] = {
+		context = Contexts.FriendsLanding,
+		eventType = EventTypes.ButtonClick,
 		additionalInfo = {
 			btn = "viewExperienceDetails",
-			subpage = subPages.PlayerContextualMenu
+			subpage = SubPages.PlayerContextualMenu
 		},
-		formatRulesForAdditionalInfo = { profileUserId = var1 }
+		formatRulesForAdditionalInfo = { profileUserId = ProfileUserId }
 	},
-	[eventNamesModule.ViewPlatformProfile] = {
-		context = contexts.FriendsLanding,
-		eventType = eventTypes.ButtonClick,
+	[EventNamesModule.ViewPlatformProfile] = {
+		context = Contexts.FriendsLanding,
+		eventType = EventTypes.ButtonClick,
 		additionalInfo = {
 			btn = "viewPlatformProfile",
-			subpage = subPages.PlayerContextualMenu
+			subpage = SubPages.PlayerContextualMenu
 		},
-		formatRulesForAdditionalInfo = { profileUserId = var1 }
+		formatRulesForAdditionalInfo = { profileUserId = ProfileUserId }
 	}
 }

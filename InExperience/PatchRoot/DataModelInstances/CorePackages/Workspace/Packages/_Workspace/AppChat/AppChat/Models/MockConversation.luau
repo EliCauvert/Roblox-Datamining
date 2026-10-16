@@ -1,58 +1,58 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local generateStringId = require(parent.AppCommonLib).GenerateStringId
-local orderedMap = require(parent.AppCommonLib).OrderedMap
-local constantsModule = require(appChat.Constants)
-local dateTime = require(parent.Time).DateTime
-local conversationModule = require(script.Parent.Conversation)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local GenerateStringIdFunction = require(Parent.AppCommonLib).GenerateStringId
+local OrderedMap = require(Parent.AppCommonLib).OrderedMap
+local ConstantsModule = require(AppChat.Constants)
+local _DateTime = require(Parent.Time).DateTime
+local ConversationModule = require(script.Parent.Conversation)
 
-local function getMessageId(p1)
+local function getMessageId(p1) --[[ Line: 11 ]]
 	return p1.id
 end
 
-local function messageSortPredicate(p1, p2)
+local function messageSortPredicate(p1, p2): boolean --[[ Line: 15 ]]
 	return p1.sent:GetUnixTimestamp() < p2.sent:GetUnixTimestamp()
 end
 
-local function sendingMessageSortPredicate(p1, p2)
+local function sendingMessageSortPredicate(p1, p2): boolean --[[ Line: 22 ]]
 	return p1.order < p2.order
 end
 
-local t = {}
-t.__index = t
+local MockConversationModule = {}
+MockConversationModule.__index = MockConversationModule
 
-function t.mock(p1)
-	-- upvalues: conversationModule (ref), orderedMap (ref), getMessageId (ref), messageSortPredicate (ref), sendingMessageSortPredicate (ref), generateStringId (ref), constantsModule (ref), dateTime (ref)
-	local var1 = conversationModule.new()
-	var1.messages = orderedMap.new(getMessageId, messageSortPredicate)
-	var1.sendingMessages = orderedMap.new(getMessageId, sendingMessageSortPredicate)
-	var1.id = generateStringId()
-	var1.clientId = generateStringId()
-	var1.title = ""
-	var1.initiator = generateStringId()
-	var1.hasUnreadMessages = false
-	var1.conversationType = conversationModule.Type.MULTI_USER_CONVERSATION
-	var1.participants = {}
-	var1.usersTyping = {}
-	var1.isUserLeaving = false
-	var1.fetchingOlderMessages = false
-	var1.fetchedOldestMessage = false
-	var1.serverState = constantsModule.ServerState.NONE
-	var1.pinnedGame = {}
-	var1.pinnedGame.universeId = generateStringId()
-	var1.pinnedGame.rootPlaceId = generateStringId()
-	var1.lastUpdated = dateTime.now()
-	var1.titleForViewer = "title"
-	var1.isDefaultTitle = true
+function MockConversationModule.mock(List) --[[ Line: 29 ]]
+	-- upvalues: ConversationModule (copy), OrderedMap (copy), getMessageId (copy), messageSortPredicate (copy), sendingMessageSortPredicate (copy), GenerateStringIdFunction (copy), ConstantsModule (copy), _DateTime (copy)
+	local NewConversation = ConversationModule.new()
+	NewConversation.messages = OrderedMap.new(getMessageId, messageSortPredicate)
+	NewConversation.sendingMessages = OrderedMap.new(getMessageId, sendingMessageSortPredicate)
+	NewConversation.id = GenerateStringIdFunction()
+	NewConversation.clientId = GenerateStringIdFunction()
+	NewConversation.title = ""
+	NewConversation.initiator = GenerateStringIdFunction()
+	NewConversation.hasUnreadMessages = false
+	NewConversation.conversationType = ConversationModule.Type.MULTI_USER_CONVERSATION
+	NewConversation.participants = {}
+	NewConversation.usersTyping = {}
+	NewConversation.isUserLeaving = false
+	NewConversation.fetchingOlderMessages = false
+	NewConversation.fetchedOldestMessage = false
+	NewConversation.serverState = ConstantsModule.ServerState.NONE
+	NewConversation.pinnedGame = {}
+	NewConversation.pinnedGame.universeId = GenerateStringIdFunction()
+	NewConversation.pinnedGame.rootPlaceId = GenerateStringIdFunction()
+	NewConversation.lastUpdated = _DateTime.now()
+	NewConversation.titleForViewer = "title"
+	NewConversation.isDefaultTitle = true
 	
-	if p1 ~= nil then
-		for i, v in pairs(p1) do
-			var1[i] = v
+	if List ~= nil then
+		for i, value in pairs(List) do
+			NewConversation[i] = value
 		end
 	end
-	setmetatable(var1, { __index = conversationModule })
+	setmetatable(NewConversation, { __index = ConversationModule })
 	
-	return var1
+	return NewConversation
 end
 
-return t
+return MockConversationModule

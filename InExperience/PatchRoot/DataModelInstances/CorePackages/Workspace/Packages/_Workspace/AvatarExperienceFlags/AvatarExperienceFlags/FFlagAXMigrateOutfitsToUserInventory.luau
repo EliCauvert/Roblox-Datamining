@@ -1,1 +1,4 @@
-﻿return game:DefineFastFlag("AXMigrateOutfitsToUserInventory2", false) and (require(script.Parent.FFlagAXInventoryDurablesSupport) and require(script.Parent.FFlagAXAvatarEditorStoresContext))
+﻿local FFlagAXInventoryDurablesSupportModule = require(script.Parent.FFlagAXInventoryDurablesSupport)
+local FFlagAXAvatarEditorStoresContextModule = require(script.Parent.FFlagAXAvatarEditorStoresContext)
+
+return game:DefineFastFlag("AXMigrateOutfitsToUserInventory2", false) and (FFlagAXInventoryDurablesSupportModule and FFlagAXAvatarEditorStoresContextModule)

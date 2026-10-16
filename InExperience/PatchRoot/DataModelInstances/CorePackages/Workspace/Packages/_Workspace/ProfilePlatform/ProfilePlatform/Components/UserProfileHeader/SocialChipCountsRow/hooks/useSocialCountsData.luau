@@ -1,59 +1,59 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local cryoModule = require(parent.Cryo)
-local localizationModule = require(parent.Localization)
-local enumsModule = require(profilePlatform.Common.Enums)
-local useProfileJsonComponentModule = require(profilePlatform.Hooks.useProfileJsonComponent)
-local useLocalization = localizationModule.Hooks.useLocalization
-local abbreviateCount = localizationModule.abbreviateCount
-local socialCountsConfigModule = require(script.Parent.Parent.config.SocialCountsConfig)
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local CryoModule = require(Parent.Cryo)
+local LocalizationModule = require(Parent.Localization)
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local UseProfileJsonComponentModule = require(ProfilePlatform.Hooks.useProfileJsonComponent)
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
+local AbbreviateCountFunction = LocalizationModule.abbreviateCount
+local SocialCountsConfigModule = require(script.Parent.Parent.config.SocialCountsConfig)
 
-return function(_, p1, p2, p3)
-	-- upvalues: useProfileJsonComponentModule (ref), enumsModule (ref), reactModule (ref), cryoModule (ref), socialCountsConfigModule (ref), useLocalization (ref), abbreviateCount (ref)
-	local counts = useProfileJsonComponentModule(enumsModule.Components.UserProfileHeader).counts
-	local var1 = useLocalization(reactModule.useMemo(function()
-		-- upvalues: cryoModule (copy), socialCountsConfigModule (copy)
-		return cryoModule.Dictionary.map(socialCountsConfigModule.RowConfig, function(p4)
-			return p4.textKey
+return function(_, p1, p2, MutualFriendIds) --[[ Line: 25 | Named "useSocialCountsData" ]]
+	-- upvalues: UseProfileJsonComponentModule (copy), EnumsModule (copy), ReactModule (copy), CryoModule (copy), SocialCountsConfigModule (copy), UseLocalizationFunction (copy), AbbreviateCountFunction (copy)
+	local Counts = UseProfileJsonComponentModule(EnumsModule.Components.UserProfileHeader).counts
+	local UseLocalizationResult = UseLocalizationFunction((ReactModule.useMemo(function() --[[ Line: 33 ]]
+		-- upvalues: CryoModule (upval), SocialCountsConfigModule (upval)
+		return CryoModule.Dictionary.map(SocialCountsConfigModule.RowConfig, function(p3) --[[ Line: 34 ]]
+			return p3.textKey
 		end)
-	end, {}))
-	local var2 = useLocalization(reactModule.useMemo(function()
-		-- upvalues: cryoModule (copy), socialCountsConfigModule (copy)
-		return cryoModule.Dictionary.map(socialCountsConfigModule.RowConfig, function(p4)
-			return p4.singleTextKey
+	end, {})))
+	local UseLocalizationResult1 = UseLocalizationFunction((ReactModule.useMemo(function() --[[ Line: 41 ]]
+		-- upvalues: CryoModule (upval), SocialCountsConfigModule (upval)
+		return CryoModule.Dictionary.map(SocialCountsConfigModule.RowConfig, function(p3) --[[ Line: 42 ]]
+			return p3.singleTextKey
 		end)
-	end, {}))
+	end, {})))
 	
-	return reactModule.useMemo(function()
-		-- upvalues: counts (ref), socialCountsConfigModule (copy), var1 (ref), var2 (ref), p3 (ref), abbreviateCount (copy), p2 (ref), p1 (ref)
-		local t = {}
+	return ReactModule.useMemo(function() --[[ Line: 49 ]]
+		-- upvalues: Counts (copy), SocialCountsConfigModule (upval), UseLocalizationResult (copy), UseLocalizationResult1 (copy), MutualFriendIds (copy), AbbreviateCountFunction (upval), p2 (copy), p1 (copy)
+		local List = {}
 		
-		for i, v in counts do
-			local var3 = socialCountsConfigModule.RowConfig[i]
+		for FieldName, count in Counts do
+			local RowConfigEntry = SocialCountsConfigModule.RowConfig[FieldName]
 			
-			if var3 then
-				local enabledKey = counts[var3.enabledKey]
+			if RowConfigEntry then
+				local Count = Counts[RowConfigEntry.enabledKey]
 				
-				if enabledKey == nil then
-					enabledKey = true
+				if Count == nil then
+					Count = true
 				end
-				table.insert(t, {
-					fieldName = i,
-					count = abbreviateCount(v),
-					text = if v == 1 and var2[i] then var2[i] else var1[i],
-					layoutOrder = var3.layoutOrder,
-					leading = if var3.getLeading and p3 then var3.getLeading({ mutualFriendIds = p3 }) else nil,
-					isDisabled = var3.getIsDisabled(p2, p1, enabledKey)
+				table.insert(List, {
+					fieldName = FieldName,
+					count = AbbreviateCountFunction(count),
+					text = if count == 1 and UseLocalizationResult1[FieldName] then UseLocalizationResult1[FieldName] else UseLocalizationResult[FieldName],
+					layoutOrder = RowConfigEntry.layoutOrder,
+					leading = if RowConfigEntry.getLeading and MutualFriendIds then RowConfigEntry.getLeading({ mutualFriendIds = MutualFriendIds }) else nil,
+					isDisabled = RowConfigEntry.getIsDisabled(p2, p1, Count)
 				})
 			end
 		end
-		table.sort(t, function(p4, p5)
-			return p4.layoutOrder < p5.layoutOrder
+		table.sort(List, function(A, B): boolean --[[ Line: 89 ]]
+			return A.layoutOrder < B.layoutOrder
 		end)
 		
-		return t
+		return List
 	end, {
-		counts, var1, var2, p2, p1, p3
+		Counts, UseLocalizationResult, UseLocalizationResult1, p2, p1, MutualFriendIds
 	})
 end

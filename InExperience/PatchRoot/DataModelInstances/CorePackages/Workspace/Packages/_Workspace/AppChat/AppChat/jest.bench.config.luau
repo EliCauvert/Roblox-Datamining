@@ -1,11 +1,11 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local jestConfigsModule = require(appChat.Parent.Dev.JestConfigs)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local JestConfigsModule = require(AppChat.Parent.Dev.JestConfigs)
 
-return jestConfigsModule.createBenchmarkConfig("AppChatBenchmarks", {
+return JestConfigsModule.createBenchmarkConfig("AppChatBenchmarks", {
 	setupFilesAfterEnv = {
-		jestConfigsModule.setupFiles.UIBloxInitializer,
-		jestConfigsModule.setupFiles.createPromiseRejectionHandler(),
-		appChat.setupJest,
-		appChat.setupLogger
+		JestConfigsModule.setupFiles.UIBloxInitializer,
+		JestConfigsModule.setupFiles.createPromiseRejectionHandler(),
+		AppChat.setupJest,
+		AppChat.setupLogger
 	}
 })

@@ -1,65 +1,66 @@
-﻿local appStorageService = game:GetService("AppStorageService")
-local parent = script:FindFirstAncestor("PurchasePromptLite").Parent
-local url = require(parent.Http).Url
-local promiseModule = require(parent.Promise)
+﻿local AppStorageService = game:GetService("AppStorageService")
+local Parent = script:FindFirstAncestor("PurchasePromptLite").Parent
+local Url = require(Parent.Http).Url
+local PromiseModule = require(Parent.Promise)
 
-local function APIGetRobloxSubscriptionMetadata(p1)
-	-- upvalues: promiseModule (ref), url (ref)
-	return if p1 == nil then promiseModule.reject() else p1(string.format("%sroblox-subscriptions/v1/metadata", url.APIS_URL), "GET"):andThen(function(p2)
-		-- upvalues: promiseModule (copy)
-		return promiseModule.resolve(p2.responseBody)
-	end, function(p2)
-		-- upvalues: promiseModule (copy)
-		return promiseModule.reject(p2)
+local function APIGetRobloxSubscriptionMetadata(Callback) --[[ Line: 18 ]]
+	-- upvalues: PromiseModule (copy), Url (copy)
+	return if Callback == nil then PromiseModule.reject() else Callback(string.format("%sroblox-subscriptions/v1/metadata", Url.APIS_URL), "GET"):andThen(function(Result) --[[ Line: 25 ]]
+		-- upvalues: PromiseModule (upval)
+		return PromiseModule.resolve(Result.responseBody)
+	end, function(p1) --[[ Line: 27 ]]
+		-- upvalues: PromiseModule (upval)
+		return PromiseModule.reject(p1)
 	end)
 end
 
-local function _()
-	-- upvalues: appStorageService (ref)
-	return appStorageService:GetItem("UnifiedPurchaseFlowIsUserEligible") == "true"
+local function _(): boolean --[[ Line: 32 | Named "getUnifiedPurchaseFlowIsUserEligibleFromStorage" ]]
+	-- upvalues: AppStorageService (copy)
+	return AppStorageService:GetItem("UnifiedPurchaseFlowIsUserEligible") == "true"
 end
 
-local _ = function()
-	-- upvalues: appStorageService (ref)
-	return tonumber(appStorageService:GetItem("UnifiedPurchaseFlowExpirationTimeSecondsUTC")) or -1
+local _ = function(): number --[[ Line: 37 | Named "getUnifiedPurchaseFlowExpirationTimeSecondsUTCFromStorage" ]]
+	-- upvalues: AppStorageService (copy)
+	return tonumber((AppStorageService:GetItem("UnifiedPurchaseFlowExpirationTimeSecondsUTC"))) or -1
 end
 
-local _ = function(p1, p2)
-	-- upvalues: appStorageService (ref)
+local _ = function(p1, p2) --[[ Line: 42 | Named "persistUnifiedPurchaseFlowMetadata" ]]
+	-- upvalues: AppStorageService (copy)
 	if p1 then
-		appStorageService:SetItem("UnifiedPurchaseFlowIsUserEligible", "true")
+		AppStorageService:SetItem("UnifiedPurchaseFlowIsUserEligible", "true")
 	else
-		appStorageService:SetItem("UnifiedPurchaseFlowIsUserEligible", "false")
+		AppStorageService:SetItem("UnifiedPurchaseFlowIsUserEligible", "false")
 	end
-	appStorageService:SetItem("UnifiedPurchaseFlowExpirationTimeSecondsUTC", tostring(p2))
-	appStorageService:Flush()
+	AppStorageService:SetItem("UnifiedPurchaseFlowExpirationTimeSecondsUTC", (tostring(p2)))
+	AppStorageService:Flush()
 end
 
-return function(p1, p2)
-	-- upvalues: promiseModule (ref), appStorageService (ref), APIGetRobloxSubscriptionMetadata (ref)
+return function(p1, p2) --[[ Line: 54 | Named "getIsUserEligibleForUnifiedPurchaseFlow" ]]
+	-- upvalues: PromiseModule (copy), AppStorageService (copy), APIGetRobloxSubscriptionMetadata (copy)
 	if p2 == "DeveloperSubscription" then
-		return promiseModule.resolve(true)
+		return PromiseModule.resolve(true)
+	else
+		local Timestamp = os.time(os.date("!*t"))
+		local Number: number = tonumber((AppStorageService:GetItem("UnifiedPurchaseFlowExpirationTimeSecondsUTC"))) or -1
+		
+		return if Number == -1 or Timestamp >= Number then APIGetRobloxSubscriptionMetadata(p1):andThen(function(Result) --[[ Line: 69 ]]
+			-- upvalues: Timestamp (copy), AppStorageService (upval), PromiseModule (upval)
+			local UnifiedPurchaseFlowMetadata = Result.unifiedPurchaseFlowMetadata
+			local IsUserEligibleForUnifiedPurchaseFlow = UnifiedPurchaseFlowMetadata.isUserEligibleForUnifiedPurchaseFlow
+			local NewTimestamp = Timestamp + (UnifiedPurchaseFlowMetadata.expiresInSeconds or 0)
+			
+			if IsUserEligibleForUnifiedPurchaseFlow then
+				AppStorageService:SetItem("UnifiedPurchaseFlowIsUserEligible", "true")
+			else
+				AppStorageService:SetItem("UnifiedPurchaseFlowIsUserEligible", "false")
+			end
+			AppStorageService:SetItem("UnifiedPurchaseFlowExpirationTimeSecondsUTC", (tostring(NewTimestamp)))
+			AppStorageService:Flush()
+			
+			return PromiseModule.resolve(IsUserEligibleForUnifiedPurchaseFlow)
+		end):catch(function(_) --[[ Line: 78 ]]
+			-- upvalues: PromiseModule (upval)
+			return PromiseModule.resolve(false)
+		end) else PromiseModule.resolve(AppStorageService:GetItem("UnifiedPurchaseFlowIsUserEligible") == "true")
 	end
-	local timestamp = os.time(os.date("!*t"))
-	local unifiedPurchaseFlowExpirationTimeSecondsUTC = tonumber(appStorageService:GetItem("UnifiedPurchaseFlowExpirationTimeSecondsUTC")) or -1
-	
-	return if unifiedPurchaseFlowExpirationTimeSecondsUTC == -1 or timestamp >= unifiedPurchaseFlowExpirationTimeSecondsUTC then APIGetRobloxSubscriptionMetadata(p1):andThen(function(p3)
-		-- upvalues: timestamp (ref), appStorageService (copy), promiseModule (copy)
-		local unifiedPurchaseFlowMetadata = p3.unifiedPurchaseFlowMetadata
-		local isUserEligibleForUnifiedPurchaseFlow = unifiedPurchaseFlowMetadata.isUserEligibleForUnifiedPurchaseFlow
-		local var1 = timestamp + (unifiedPurchaseFlowMetadata.expiresInSeconds or 0)
-		
-		if isUserEligibleForUnifiedPurchaseFlow then
-			appStorageService:SetItem("UnifiedPurchaseFlowIsUserEligible", "true")
-		else
-			appStorageService:SetItem("UnifiedPurchaseFlowIsUserEligible", "false")
-		end
-		appStorageService:SetItem("UnifiedPurchaseFlowExpirationTimeSecondsUTC", tostring(var1))
-		appStorageService:Flush()
-		
-		return promiseModule.resolve(isUserEligibleForUnifiedPurchaseFlow)
-	end):catch(function(_)
-		-- upvalues: promiseModule (copy)
-		return promiseModule.resolve(false)
-	end) else promiseModule.resolve(appStorageService:GetItem("UnifiedPurchaseFlowIsUserEligible") == "true")
 end

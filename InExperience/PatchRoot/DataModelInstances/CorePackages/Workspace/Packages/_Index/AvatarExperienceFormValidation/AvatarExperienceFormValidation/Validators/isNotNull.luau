@@ -1,9 +1,10 @@
-﻿local formValidationErrorEnumModule = require(script.Parent.Parent.FormValidationErrorEnum)
+﻿local FormValidationErrorEnumModule = require(script.Parent.Parent.FormValidationErrorEnum)
 
-return function(p1)
-	-- upvalues: formValidationErrorEnumModule (ref)
+return function(p1) --[[ Line: 4 | Named "isNotNull" ]]
+	-- upvalues: FormValidationErrorEnumModule (copy)
 	if p1 == nil then
-		return false, formValidationErrorEnumModule.FailedIsNotNull
+		return false, FormValidationErrorEnumModule.FailedIsNotNull
+	else
+		return true
 	end
-	return true
 end

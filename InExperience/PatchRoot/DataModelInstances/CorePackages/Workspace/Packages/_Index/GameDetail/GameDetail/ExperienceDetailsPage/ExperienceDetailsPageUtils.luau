@@ -1,35 +1,39 @@
 ﻿local _ = require(script:FindFirstAncestor("GameDetail").Parent.Navigation)
 
 return {
-	getFromPropsOrNavigationParams = function(p1, p2)
-		local extraProps = p1.navigation and p1.navigation.getParam("extraProps")
+	getFromPropsOrNavigationParams = function(p1, p2) --[[ Line: 14 ]]
+		local ExtraPropsParam = p1.navigation and p1.navigation.getParam("extraProps")
 		
-		return p1[p2] or extraProps and extraProps[p2]
+		return p1[p2] or ExtraPropsParam and ExtraPropsParam[p2]
 	end,
-	getUniverseId = function(p1)
-		local extraProps = p1.navigation and p1.navigation.getParam("extraProps")
-		local universeId = p1.universeId or extraProps and extraProps.universeId
+	getUniverseId = function(p1) --[[ Line: 20 ]]
+		local ExtraPropsParam = p1.navigation and p1.navigation.getParam("extraProps")
+		local UniverseId = p1.universeId or ExtraPropsParam and ExtraPropsParam.universeId
 		
-		return universeId or p1.navigation and p1.navigation.getParam("detail")
+		return if UniverseId then UniverseId else p1.navigation and p1.navigation.getParam("detail")
 	end,
-	getAnalyticsSource = function(p1)
-		local extraProps = p1.navigation and p1.navigation.getParam("extraProps")
+	getAnalyticsSource = function(p1) --[[ Line: 28 ]]
+		local ExtraPropsParam = p1.navigation and p1.navigation.getParam("extraProps")
 		
-		return p1.source or extraProps and extraProps.source or "None"
+		return p1.source or ExtraPropsParam and ExtraPropsParam.source or "None"
 	end,
-	getTilePositionIndex = function(p1)
-		local extraProps = p1.navigation and p1.navigation.getParam("extraProps")
-		local index = p1.index or extraProps and extraProps.index
+	getTilePositionIndex = function(p1) --[[ Line: 32 ]]
+		local ExtraPropsParam = p1.navigation and p1.navigation.getParam("extraProps")
+		local Index = p1.index or ExtraPropsParam and ExtraPropsParam.index
 		
-		if type(index) == "number" then
-			return index
-		elseif type(index) == "string" then
-			local var1 = tonumber(index)
-			
-			return var1 or -1
+		if type(Index) == "number" then
+			return Index
 		end
+		if type(Index) == "string" then
+			local Number: number? = tonumber(Index)
+			
+			if Number then
+				return Number
+			end
+		end
+		return -1
 	end,
-	getResolvedIdentifier = function(p1, p2)
-		return p1 .. "_" .. p6
+	getResolvedIdentifier = function(Text, Text1): string --[[ Line: 47 ]]
+		return Text .. "_" .. Text1
 	end
 }

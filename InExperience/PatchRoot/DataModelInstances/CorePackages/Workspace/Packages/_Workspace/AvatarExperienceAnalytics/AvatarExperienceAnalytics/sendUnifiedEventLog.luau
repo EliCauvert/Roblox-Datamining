@@ -1,45 +1,49 @@
-﻿local sessionService = game:GetService("SessionService")
-local parent = script:FindFirstAncestor("AvatarExperienceAnalytics").Parent
-local cryoModule = require(parent.Cryo)
-local isRunningInStudio = require(parent.AppCommonLib).isRunningInStudio
-local debugPanelModule = require(parent.DebugPanel)
-local analyticsServiceModule = require(script.Parent.AnalyticsService)
-local unifiedEventLogConstantsModule = require(script.Parent.UnifiedEventLogConstants)
-local unifiedEventPageStoreModule = require(script.Parent.Store.UnifiedEventPageStore)
-local unifiedEventCounterAggregatorModule = require(script.Parent.Lib.UnifiedEventCounterAggregator)
+﻿local SessionService = game:GetService("SessionService")
+local Parent = script:FindFirstAncestor("AvatarExperienceAnalytics").Parent
+local CryoModule = require(Parent.Cryo)
+local IsRunningInStudioFunction = require(Parent.AppCommonLib).isRunningInStudio
+local DebugPanelModule = require(Parent.DebugPanel)
+local DeviceTier = require(Parent.Devices).DeviceTier
+local AnalyticsServiceModule = require(script.Parent.AnalyticsService)
+local UnifiedEventLogConstantsModule = require(script.Parent.UnifiedEventLogConstants)
+local UnifiedEventPageStoreModule = require(script.Parent.Store.UnifiedEventPageStore)
+local UnifiedEventCounterAggregatorModule = require(script.Parent.Lib.UnifiedEventCounterAggregator)
 local AXUnifiedEventFilterModule = require(script.Parent.AXUnifiedEventFilter)
-local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
-local fFlagAXSendUnifiedEventLogWithInstance = avatarExperienceFlagsModule.FFlagAXSendUnifiedEventLogWithInstance
-local fFlagAXDebugPanelImpressed = avatarExperienceFlagsModule.FFlagAXDebugPanelImpressed
-local fFlagAXUnifiedEventPageContext = avatarExperienceFlagsModule.FFlagAXUnifiedEventPageContext
-local fFlagAXUnifiedEventCounters = avatarExperienceFlagsModule.FFlagAXUnifiedEventCounters
+local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
+local FFlagAXSendUnifiedEventLogWithInstance = AvatarExperienceFlagsModule.FFlagAXSendUnifiedEventLogWithInstance
+local FFlagAXDebugPanelImpressed = AvatarExperienceFlagsModule.FFlagAXDebugPanelImpressed
+local FFlagAXUnifiedEventPageContext = AvatarExperienceFlagsModule.FFlagAXUnifiedEventPageContext
+local FFlagAXUnifiedEventCounters = AvatarExperienceFlagsModule.FFlagAXUnifiedEventCounters
+local FFlagAXUnifiedEventDeviceTier = AvatarExperienceFlagsModule.FFlagAXUnifiedEventDeviceTier
 local AXSendUnifiedEventsInStudio = game:DefineFastFlag("AXSendUnifiedEventsInStudio", false)
+local DeviceMemoryTier = if FFlagAXUnifiedEventDeviceTier then DeviceTier.GetDeviceMemoryTier() else nil
 
-return function(p1, p2, p3)
-	-- upvalues: fFlagAXUnifiedEventPageContext (ref), sessionService (ref), unifiedEventPageStoreModule (ref), cryoModule (ref), fFlagAXDebugPanelImpressed (ref), debugPanelModule (ref), fFlagAXSendUnifiedEventLogWithInstance (ref), unifiedEventLogConstantsModule (ref), isRunningInStudio (ref), AXSendUnifiedEventsInStudio (ref), fFlagAXUnifiedEventCounters (ref), AXUnifiedEventFilterModule (ref), unifiedEventCounterAggregatorModule (ref), analyticsServiceModule (ref)
-	local level2aSessionTag
-	if fFlagAXUnifiedEventPageContext then
-		level2aSessionTag = sessionService:GetSessionTag("level2a")
-		local pageFields = unifiedEventPageStoreModule.getPageFields()
-		p1 = cryoModule.Dictionary.join({
-			navigationPage = pageFields.navigationPage,
-			navigationOpaquePage = pageFields.navigationOpaquePage,
-			sessionTag = if level2aSessionTag == nil or level2aSessionTag == "" then unifiedEventPageStoreModule.UNKNOWN else level2aSessionTag
-		}, p1)
+return function(JoinResult, p1, p2) --[[ Line: 34 ]]
+	-- upvalues: FFlagAXUnifiedEventPageContext (copy), SessionService (copy), UnifiedEventPageStoreModule (copy), CryoModule (copy), FFlagAXUnifiedEventDeviceTier (copy), DeviceMemoryTier (copy), FFlagAXDebugPanelImpressed (copy), DebugPanelModule (copy), FFlagAXSendUnifiedEventLogWithInstance (copy), UnifiedEventLogConstantsModule (copy), IsRunningInStudioFunction (copy), AXSendUnifiedEventsInStudio (copy), FFlagAXUnifiedEventCounters (copy), AXUnifiedEventFilterModule (copy), UnifiedEventCounterAggregatorModule (copy), AnalyticsServiceModule (copy)
+	if FFlagAXUnifiedEventPageContext then
+		local Level2aSessionTag = SessionService:GetSessionTag("level2a")
+		local PageFields = UnifiedEventPageStoreModule.getPageFields()
+		JoinResult = CryoModule.Dictionary.join({
+			navigationPage = PageFields.navigationPage,
+			navigationOpaquePage = PageFields.navigationOpaquePage,
+			sessionTag = if Level2aSessionTag == nil or Level2aSessionTag == "" then UnifiedEventPageStoreModule.UNKNOWN else Level2aSessionTag
+		}, JoinResult)
 	end
-	if fFlagAXDebugPanelImpressed then
-		debugPanelModule.AnalyticsFeed.notify({
+	if FFlagAXUnifiedEventDeviceTier then
+		JoinResult = CryoModule.Dictionary.join({ deviceTier = DeviceMemoryTier or "Unknown" }, JoinResult)
+	end
+	if FFlagAXDebugPanelImpressed then
+		DebugPanelModule.AnalyticsFeed.notify({
 			feedId = "ax.marketplaceLogging",
-			fields = p1,
-			instance = if fFlagAXSendUnifiedEventLogWithInstance then p2 else nil,
-			eventName = unifiedEventLogConstantsModule.EVENT_NAME,
-			ctx = unifiedEventLogConstantsModule.EVENT_NAME
+			fields = JoinResult,
+			instance = if FFlagAXSendUnifiedEventLogWithInstance then p1 else nil,
+			eventName = UnifiedEventLogConstantsModule.EVENT_NAME,
+			ctx = UnifiedEventLogConstantsModule.EVENT_NAME
 		})
 	end
-	if isRunningInStudio() and not AXSendUnifiedEventsInStudio then return end
-	if fFlagAXUnifiedEventCounters then
-		level2aSessionTag = if p3 == nil or p3.filterPassed == nil then AXUnifiedEventFilterModule.filter(p1, { skipReporting = true }) else p3.filterPassed
-		unifiedEventCounterAggregatorModule.record(p1, level2aSessionTag)
+	if IsRunningInStudioFunction() and not AXSendUnifiedEventsInStudio then return end
+	if FFlagAXUnifiedEventCounters then
+		UnifiedEventCounterAggregatorModule.record(JoinResult, if p2 == nil or p2.filterPassed == nil then AXUnifiedEventFilterModule.filter(JoinResult, { skipReporting = true }) else p2.filterPassed)
 	end
-	analyticsServiceModule.EventStream:sendTelemetryEvent(unifiedEventLogConstantsModule.EVENT_NAME, unifiedEventLogConstantsModule.EVENT_NAME, p1)
+	AnalyticsServiceModule.EventStream:sendTelemetryEvent(UnifiedEventLogConstantsModule.EVENT_NAME, UnifiedEventLogConstantsModule.EVENT_NAME, JoinResult)
 end

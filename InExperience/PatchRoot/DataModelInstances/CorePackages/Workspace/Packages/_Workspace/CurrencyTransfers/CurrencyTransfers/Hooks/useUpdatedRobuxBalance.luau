@@ -1,45 +1,48 @@
-﻿local currencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
-local parent = currencyTransfers.Parent
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local promiseModule = require(parent.Promise)
-local getBalanceRequestModule = require(currencyTransfers.NetworkRequests.getBalanceRequest)
-local _ = require(currencyTransfers.Hooks.useTransferStore)
+﻿local CurrencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
+local Parent = CurrencyTransfers.Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local PromiseModule = require(Parent.Promise)
+local GetBalanceRequestModule = require(CurrencyTransfers.NetworkRequests.getBalanceRequest)
+local _ = require(CurrencyTransfers.Hooks.useTransferStore)
 
-return function(p1)
-	-- upvalues: reactModule (ref), getBalanceRequestModule (ref), promiseModule (ref), signalsReactModule (ref)
-	local setRobuxBalanceAmount = p1.setRobuxBalanceAmount
-	local setBalanceReceivedFromApi = p1.setBalanceReceivedFromApi
-	reactModule.useEffect(function()
-		-- upvalues: getBalanceRequestModule (copy), p1 (ref), setRobuxBalanceAmount (ref), setBalanceReceivedFromApi (ref), promiseModule (copy)
-		local var1 = false
-		getBalanceRequestModule(nil, p1.getNetworkImpl()):andThen(function(p2)
-			-- upvalues: var1 (write), setRobuxBalanceAmount (copy), setBalanceReceivedFromApi (copy), promiseModule (copy), getBalanceRequestModule (copy), p1 (copy)
-			if var1 then
+return function(p1) --[[ Line: 19 | Named "useUpdatedRobuxBalance" ]]
+	-- upvalues: ReactModule (copy), GetBalanceRequestModule (copy), PromiseModule (copy), SignalsReactModule (copy)
+	local SetRobuxBalanceAmountFunction = p1.setRobuxBalanceAmount
+	local SetBalanceReceivedFromApiFunction = p1.setBalanceReceivedFromApi
+	ReactModule.useEffect(function() --[[ Line: 27 ]]
+		-- upvalues: GetBalanceRequestModule (upval), p1 (copy), SetRobuxBalanceAmountFunction (copy), SetBalanceReceivedFromApiFunction (copy), PromiseModule (upval)
+		local Flag = false
+		GetBalanceRequestModule(nil, p1.getNetworkImpl()):andThen(function(Result) --[[ Line: 31 ]]
+			-- upvalues: Flag (ref), SetRobuxBalanceAmountFunction (upval), SetBalanceReceivedFromApiFunction (upval), PromiseModule (upval), GetBalanceRequestModule (upval), p1 (upval)
+			if not Flag then
+				SetRobuxBalanceAmountFunction(Result)
+				SetBalanceReceivedFromApiFunction(true)
+				PromiseModule.delay(0.5):andThen(function() --[[ Line: 39 ]]
+					-- upvalues: Flag (upval), GetBalanceRequestModule (upval), p1 (upval), SetRobuxBalanceAmountFunction (upval)
+					if Flag then return end
+					return GetBalanceRequestModule(nil, p1.getNetworkImpl()):andThen(function(Result) --[[ Line: 44 ]]
+						-- upvalues: Flag (upval), SetRobuxBalanceAmountFunction (upval)
+						if not Flag then
+							SetRobuxBalanceAmountFunction(Result)
+							
+							return
+						end
+					end):catch(function() --[[ Line: 50 ]] end)
+				end):catch(function() --[[ Line: 52 ]] end)
+				
 				return
 			end
-			setRobuxBalanceAmount(p2)
-			setBalanceReceivedFromApi(true)
-			promiseModule.delay(0.5):andThen(function()
-				-- upvalues: var1 (copy), getBalanceRequestModule (copy), p1 (copy), setRobuxBalanceAmount (copy)
-				if var1 then
-					return
-				end
-				return getBalanceRequestModule(nil, p1.getNetworkImpl()):andThen(function(p3)
-					-- upvalues: var1 (copy), setRobuxBalanceAmount (copy)
-					if var1 then
-						return
-					end
-					setRobuxBalanceAmount(p3)
-				end):catch(function() end)
-			end):catch(function() end)
-		end):catch(function() end)
+		end):catch(function() --[[ Line: 54 ]] end)
 		
-		return function()
-			-- upvalues: var1 (write)
-			var1 = true
+		return function() --[[ Line: 56 ]]
+			-- upvalues: Flag (ref)
+			Flag = true
 		end
-	end, { setRobuxBalanceAmount, setBalanceReceivedFromApi })
+	end, {
+		SetRobuxBalanceAmountFunction,
+		SetBalanceReceivedFromApiFunction
+	})
 	
-	return signalsReactModule.useSignalState(p1.getRobuxBalanceAmount) or 0
+	return SignalsReactModule.useSignalState(p1.getRobuxBalanceAmount) or 0
 end

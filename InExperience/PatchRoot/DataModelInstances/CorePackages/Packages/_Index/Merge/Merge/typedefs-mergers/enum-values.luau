@@ -1,51 +1,50 @@
-﻿local parent = script.Parent.Parent.Parent
-local luauPolyfillModule = require(parent.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local boolean = luauPolyfillModule.Boolean
-local map = luauPolyfillModule.Map
-local t = {}
-local _ = require(parent.GraphQL)
-local mergeDirectives = require(script.Parent.directives).mergeDirectives
+﻿local Parent = script.Parent.Parent.Parent
+local LuauPolyfillModule = require(Parent.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local Boolean = LuauPolyfillModule.Boolean
+local Map = LuauPolyfillModule.Map
+local _ = require(Parent.GraphQL)
+local MergeDirectivesFunction = require(script.Parent.directives).mergeDirectives
 local _ = require(script.Parent["merge-typedefs_types"])
-local compareNodes = require(parent.Utils).compareNodes
+local CompareNodes = require(Parent.Utils).compareNodes
 
-function t.mergeEnumValues(p1, p2, p3)
-	-- upvalues: boolean (ref), array (ref), map (ref), mergeDirectives (ref), compareNodes (ref)
-	if boolean.toJSBoolean(if typeof(p3) == "table" then p3.consistentEnumMerge else nil) then
-		local t = {}
-		
-		if boolean.toJSBoolean(p1) then
-			t = array.concat(t, p1)
-		end
-		p1 = p2
-		p2 = t
-	end
-	local var1 = map.new()
-	
-	if p1 then
-		for i, v in p1 do
-			var1:set(v.name.value, v)
-		end
-	end
-	if p2 then
-		for i, v in p2 do
-			local value = v.name.value
+return {
+	mergeEnumValues = function(List, ConcatResult, p1) --[[ Line: 30 ]]
+		-- upvalues: Boolean (copy), Array (copy), Map (copy), MergeDirectivesFunction (copy), CompareNodes (copy)
+		if Boolean.toJSBoolean(if typeof(p1) == "table" then p1.consistentEnumMerge else nil) then
+			local ConcatResult1 = {}
 			
-			if boolean.toJSBoolean(var1:has(value)) then
-				local var2 = var1:get(value)
-				var2.description = if boolean.toJSBoolean(v.description) then v.description else var2.description
-				var2.directives = mergeDirectives(v.directives, var2.directives)
-			else
-				var1:set(value, v)
+			if Boolean.toJSBoolean(List) then
+				ConcatResult1 = Array.concat(ConcatResult1, List)
+			end
+			List = ConcatResult
+			ConcatResult = ConcatResult1
+		end
+		local NewMap = Map.new()
+		
+		if List then
+			for _, value in List do
+				NewMap:set(value.name.value, value)
 			end
 		end
+		if ConcatResult then
+			for _, value1 in ConcatResult do
+				local Value = value1.name.value
+				
+				if Boolean.toJSBoolean(NewMap:has(Value)) then
+					local GetResult = NewMap:get(Value)
+					GetResult.description = Boolean.toJSBoolean(value1.description) and value1.description or GetResult.description
+					GetResult.directives = MergeDirectivesFunction(value1.directives, GetResult.directives)
+				else
+					NewMap:set(Value, value1)
+				end
+			end
+		end
+		local ConcatResult2 = Array.concat({}, NewMap:values())
+		
+		if p1 and Boolean.toJSBoolean(p1.sort) then
+			Array.sort(ConcatResult2, CompareNodes)
+		end
+		return ConcatResult2
 	end
-	local var3 = array.concat({}, var1:values())
-	
-	if p3 and boolean.toJSBoolean(p3.sort) then
-		array.sort(var3, compareNodes)
-	end
-	return var3
-end
-
-return t
+}

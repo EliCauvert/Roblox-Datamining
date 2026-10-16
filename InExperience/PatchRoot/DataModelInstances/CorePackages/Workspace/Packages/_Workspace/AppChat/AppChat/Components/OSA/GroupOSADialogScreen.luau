@@ -1,47 +1,55 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local reactModule = require(parent.React)
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local useNavigation = require(parent.Navigation).useNavigation
-local API = require(parent.AppChatNetworking).rodux.GetConversationDetails.API
-local removedConversationModule = require(appChat.Conversations.Actions.RemovedConversation)
-local enumScreensModule = require(appChat.EnumScreens)
-local groupOSADialogModule = require(script.Parent.GroupOSADialog)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local ReactModule = require(Parent.React)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local APIFunction = require(Parent.AppChatNetworking).rodux.GetConversationDetails.API
+local RemovedConversationModule = require(AppChat.Conversations.Actions.RemovedConversation)
+local EnumScreensModule = require(AppChat.EnumScreens)
+local GroupOSADialogModule = require(script.Parent.GroupOSADialog)
 
-return function()
-	-- upvalues: useNavigation (ref), useDispatch (ref), reactModule (ref), API (ref), enumScreensModule (ref), removedConversationModule (ref), groupOSADialogModule (ref)
-	local var1 = useNavigation()
-	local var2 = useDispatch()
-	local conversationId = var1.getParam("conversationId", nil)
+return function() --[[ Line: 15 | Named "GroupOSADialogScreen" ]]
+	-- upvalues: UseNavigationFunction (copy), UseDispatchFunction (copy), ReactModule (copy), APIFunction (copy), EnumScreensModule (copy), RemovedConversationModule (copy), GroupOSADialogModule (copy)
+	local UseNavigationResult = UseNavigationFunction()
+	local UseDispatchResult = UseDispatchFunction()
+	local ConversationIdParam = UseNavigationResult.getParam("conversationId", nil)
 	
-	return reactModule.createElement(groupOSADialogModule, {
-		conversationId = conversationId,
-		onClose = reactModule.useCallback(function()
-			-- upvalues: var1 (ref)
-			if var1.isFocused() then
-				var1.goBack()
+	return ReactModule.createElement(GroupOSADialogModule, {
+		conversationId = ConversationIdParam,
+		onClose = ReactModule.useCallback(function() --[[ Line: 22 ]]
+			-- upvalues: UseNavigationResult (copy)
+			if UseNavigationResult.isFocused() then
+				UseNavigationResult.goBack()
 			end
-		end, { var1 }),
-		onJoin = reactModule.useCallback(function()
-			-- upvalues: conversationId (ref), var2 (ref), API (copy), var1 (ref), enumScreensModule (copy)
-			if conversationId then
-				var2(API(conversationId))
+		end, { UseNavigationResult }),
+		onJoin = ReactModule.useCallback(function() --[[ Line: 28 ]]
+			-- upvalues: ConversationIdParam (copy), UseDispatchResult (copy), APIFunction (upval), UseNavigationResult (copy), EnumScreensModule (upval)
+			if ConversationIdParam then
+				UseDispatchResult(APIFunction(ConversationIdParam))
 			end
-			var1.navigate(enumScreensModule.ChatConversation, {
+			UseNavigationResult.navigate(EnumScreensModule.ChatConversation, {
 				isNavigatedFromGroupOSAJoin = true,
-				conversationId = conversationId
+				conversationId = ConversationIdParam
 			})
-		end, { var1, conversationId, var2 }),
-		onDecline = reactModule.useCallback(function()
-			-- upvalues: conversationId (ref), var2 (ref), removedConversationModule (copy), var1 (ref)
-			if conversationId then
-				var2(removedConversationModule(conversationId))
+		end, {
+			UseNavigationResult,
+			ConversationIdParam,
+			UseDispatchResult
+		}),
+		onDecline = ReactModule.useCallback(function() --[[ Line: 39 ]]
+			-- upvalues: ConversationIdParam (copy), UseDispatchResult (copy), RemovedConversationModule (upval), UseNavigationResult (copy)
+			if ConversationIdParam then
+				UseDispatchResult(RemovedConversationModule(ConversationIdParam))
 			end
-			if var1.isFocused() then
-				var1.goBack()
+			if UseNavigationResult.isFocused() then
+				UseNavigationResult.goBack()
 			end
-		end, { var1, var2, conversationId }),
-		impressionId = var1.getParam("impressionId", nil),
-		modalVariant = var1.getParam("modalVariant", nil)
+		end, {
+			UseNavigationResult,
+			UseDispatchResult,
+			ConversationIdParam
+		}),
+		impressionId = UseNavigationResult.getParam("impressionId", nil),
+		modalVariant = UseNavigationResult.getParam("modalVariant", nil)
 	})
 end

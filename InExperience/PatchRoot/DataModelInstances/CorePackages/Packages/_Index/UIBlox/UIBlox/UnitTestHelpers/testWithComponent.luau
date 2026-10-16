@@ -1,36 +1,36 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local httpService = game:GetService("HttpService")
-local parent = script.Parent
-local parent_1 = parent.Parent.Parent
-local foundationProvider = require(parent_1.Foundation).FoundationProvider
-local roactModule = require(parent_1.Roact)
-local dumpInstanceTreeModule = require(parent.dumpInstanceTree)
+﻿local CoreGui = game:GetService("CoreGui")
+local HttpService = game:GetService("HttpService")
+local Parent = script.Parent
+local Parent1 = Parent.Parent.Parent
+local FoundationProvider = require(Parent1.Foundation).FoundationProvider
+local RoactModule = require(Parent1.Roact)
+local DumpInstanceTreeModule = require(Parent.dumpInstanceTree)
 
-local function TestApp(p1)
-	-- upvalues: roactModule (ref)
-	return roactModule.createElement("ScreenGui", { ZIndexBehavior = Enum.ZIndexBehavior.Sibling }, p1[roactModule.Children])
+local function TestApp(p1) --[[ Line: 34 ]]
+	-- upvalues: RoactModule (copy)
+	return RoactModule.createElement("ScreenGui", { ZIndexBehavior = Enum.ZIndexBehavior.Sibling }, p1[RoactModule.Children])
 end
 
-return function(p1, p2)
-	-- upvalues: roactModule (ref), TestApp (ref), foundationProvider (ref), httpService (ref), coreGuiService (ref), dumpInstanceTreeModule (ref)
-	local var1 = ("TestApp-%s"):format(httpService:GenerateGUID(false))
-	local var2 = roactModule.mount(roactModule.createElement(TestApp, nil, {
-		FoundationProvider = roactModule.createElement(foundationProvider, { theme = "Dark" }, { TestComponent = p1 })
-	}), coreGuiService, var1)
-	local var3 = ("game.CoreGui.%s.TestComponent"):format(var1)
-	local ok, status = pcall(function()
-		-- upvalues: p2 (ref), var3 (ref)
-		p2(var3)
+return function(TestComponent, Callback) --[[ Line: 40 | Named "testWithComponent" ]]
+	-- upvalues: RoactModule (copy), TestApp (copy), FoundationProvider (copy), HttpService (copy), CoreGui (copy), DumpInstanceTreeModule (copy)
+	local TestAppName: string = ("TestApp-%s"):format(HttpService:GenerateGUID(false))
+	local MountResult = RoactModule.mount(RoactModule.createElement(TestApp, nil, {
+		FoundationProvider = RoactModule.createElement(FoundationProvider, { theme = "Dark" }, { TestComponent = TestComponent })
+	}), CoreGui, TestAppName)
+	local TestComponentName: string = ("game.CoreGui.%s.TestComponent"):format(TestAppName)
+	local Success, Result = pcall(function() --[[ Line: 51 ]]
+		-- upvalues: Callback (copy), TestComponentName (copy)
+		Callback(TestComponentName)
 	end)
 	
-	if not ok then
+	if not Success then
 		print("Test instance tree:")
-		dumpInstanceTreeModule(coreGuiService:FindFirstChild(var1))
+		DumpInstanceTreeModule(CoreGui:FindFirstChild(TestAppName))
 		print("Test instance tree end\n")
 	end
-	roactModule.unmount(var2)
+	RoactModule.unmount(MountResult)
 	
-	if not ok then
-		error(status)
+	if not Success then
+		error(Result)
 	end
 end

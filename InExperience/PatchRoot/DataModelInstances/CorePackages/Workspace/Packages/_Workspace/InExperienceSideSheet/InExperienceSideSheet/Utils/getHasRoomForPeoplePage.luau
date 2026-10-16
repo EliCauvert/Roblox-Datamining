@@ -1,30 +1,28 @@
-﻿local inExperienceSideSheet = script:FindFirstAncestor("InExperienceSideSheet")
-local parent = inExperienceSideSheet.Parent
-local displayModule = require(parent.Display)
-local _ = require(parent.Signals)
-local constantsModule = require(inExperienceSideSheet.Common.Constants)
-local flagsModule = require(inExperienceSideSheet.Flags)
-local getSideSheetDrawerWidthModule = require(script.Parent.getSideSheetDrawerWidth)
-local hasRoomForPeoplePageModule = require(script.Parent.hasRoomForPeoplePage)
-local fFlagClosePeoplePageWhenNoRoomBesideSideSheet = flagsModule.FFlagClosePeoplePageWhenNoRoomBesideSideSheet
+﻿local InExperienceSideSheet = script:FindFirstAncestor("InExperienceSideSheet")
+local Parent = InExperienceSideSheet.Parent
+local DisplayModule = require(Parent.Display)
+local _ = require(Parent.Signals)
+local ConstantsModule = require(InExperienceSideSheet.Common.Constants)
+local GetSideSheetDrawerWidthModule = require(script.Parent.getSideSheetDrawerWidth)
+local HasRoomForPeoplePageModule = require(script.Parent.hasRoomForPeoplePage)
+local FFlagClosePeoplePageWhenNoRoomBesideSideSheet = require(InExperienceSideSheet.Flags).FFlagClosePeoplePageWhenNoRoomBesideSideSheet
 
-return function(p1, p2)
-	-- upvalues: fFlagClosePeoplePageWhenNoRoomBesideSideSheet (ref), displayModule (ref), getSideSheetDrawerWidthModule (ref), constantsModule (ref), hasRoomForPeoplePageModule (ref)
-	local var1
-	local var2 = if p1 == nil then false else p1
-	local _ = nil
+return function(p1, p2) --[[ Line: 15 ]]
+	-- upvalues: FFlagClosePeoplePageWhenNoRoomBesideSideSheet (copy), DisplayModule (copy), GetSideSheetDrawerWidthModule (copy), ConstantsModule (copy), HasRoomForPeoplePageModule (copy)
+	local P0 = p1 ~= nil and p1
+	local XDelta = nil
 	
-	if fFlagClosePeoplePageWhenNoRoomBesideSideSheet and p2 ~= nil then
-		var1 = p2
+	if FFlagClosePeoplePageWhenNoRoomBesideSideSheet and p2 ~= nil then
+		XDelta = p2
 	else
-		local displayStore = displayModule.GetDisplayStore(var2)
-		local deviceSafePadding = displayStore.getDeviceSafePadding(var2)
-		var1 = displayStore.getViewportSize(var2).X - deviceSafePadding.left - deviceSafePadding.right
+		local DisplayStore = DisplayModule.GetDisplayStore(P0)
+		local DeviceSafePadding = DisplayStore.getDeviceSafePadding(P0)
+		XDelta = DisplayStore.getViewportSize(P0).X - DeviceSafePadding.left - DeviceSafePadding.right
 	end
-	local var3 = getSideSheetDrawerWidthModule(var2)
+	local SideSheetDrawerWidthModule = GetSideSheetDrawerWidthModule(P0)
 	
-	if var3 <= 0 then
-		var3 = constantsModule.NominalSideSheetWidth
+	if SideSheetDrawerWidthModule <= 0 then
+		SideSheetDrawerWidthModule = ConstantsModule.NominalSideSheetWidth
 	end
-	return hasRoomForPeoplePageModule(var1, var3)
+	return HasRoomForPeoplePageModule(XDelta, SideSheetDrawerWidthModule)
 end

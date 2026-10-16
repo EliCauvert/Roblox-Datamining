@@ -1,18 +1,17 @@
-﻿local parent = script:FindFirstAncestor("AppChat").Parent
-local appChatNetworkingModule = require(parent.AppChatNetworking)
-local immutable = require(parent.AppCommonLib).Immutable
-local updateUsers = require(parent.UserLib).Thunks.UpdateUsers
-local getConversationMetadata = appChatNetworkingModule.rodux.GetConversationMetadata
+﻿local Parent = script:FindFirstAncestor("AppChat").Parent
+local Immutable = require(Parent.AppCommonLib).Immutable
+local UpdateUsersFunction = require(Parent.UserLib).Thunks.UpdateUsers
+local GetConversationMetadata = require(Parent.AppChatNetworking).rodux.GetConversationMetadata
 
-return function(p1)
-	-- upvalues: immutable (ref), updateUsers (ref), getConversationMetadata (ref)
-	return function(p2)
-		-- upvalues: p1 (ref), immutable (copy), updateUsers (copy), getConversationMetadata (copy)
-		local var1 = p2:getState().Users[p1]
+return function(p1) --[[ Line: 14 ]]
+	-- upvalues: Immutable (copy), UpdateUsersFunction (copy), GetConversationMetadata (copy)
+	return function(p2) --[[ Line: 15 ]]
+		-- upvalues: p1 (copy), Immutable (upval), UpdateUsersFunction (upval), GetConversationMetadata (upval)
+		local User = p2:getState().Users[p1]
 		
-		if var1 then
-			p2:dispatch(updateUsers({ immutable.Set(var1, "isFriend", false) }))
-			p2:dispatch(getConversationMetadata.API())
+		if User then
+			p2:dispatch(UpdateUsersFunction({ (Immutable.Set(User, "isFriend", false)) }))
+			p2:dispatch(GetConversationMetadata.API())
 		end
 	end
 end

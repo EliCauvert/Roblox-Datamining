@@ -1,182 +1,188 @@
-﻿local httpService = game:GetService("HttpService")
-local memStorageService = game:GetService("MemStorageService")
-local playersService = game:GetService("Players")
-local teleportService = game:GetService("TeleportService")
-local useTeleportedPlacesBackHistory2EngineFeature = game:GetEngineFeature("UseTeleportedPlacesBackHistory2")
-local parent = script:FindFirstAncestor("CoreScriptsRoactCommon").Parent
-local cryoModule = require(parent.Cryo)
-local signalsModule = require(parent.Signals)
-local flagsModule = require(script.Parent.Flags)
-local fFlagUseLocalTraversalHistory = flagsModule.FFlagUseLocalTraversalHistory
-local fFlagUseTeleportTraversalHistory = flagsModule.FFlagUseTeleportTraversalHistory
-local t = {}
-t.__index = t
+﻿local HttpService = game:GetService("HttpService")
+local MemStorageService = game:GetService("MemStorageService")
+local Players = game:GetService("Players")
+local TeleportService = game:GetService("TeleportService")
+local UseTeleportedPlacesBackHistory2EngineFeature = game:GetEngineFeature("UseTeleportedPlacesBackHistory2")
+local Parent = script:FindFirstAncestor("CoreScriptsRoactCommon").Parent
+local CryoModule = require(Parent.Cryo)
+local SignalsModule = require(Parent.Signals)
+local FlagsModule = require(script.Parent.Flags)
+local FFlagUseLocalTraversalHistory = FlagsModule.FFlagUseLocalTraversalHistory
+local FFlagUseTeleportTraversalHistory = FlagsModule.FFlagUseTeleportTraversalHistory
+local LocalTraversalHistoryModule = {}
+LocalTraversalHistoryModule.__index = LocalTraversalHistoryModule
 
-function t.new(p1)
-	-- upvalues: signalsModule (ref), t (ref), memStorageService (ref), httpService (ref)
-	local t_1 = { _connections = {}, _historyKey = "", _history = {} }
-	local var1, var2 = signalsModule.createSignal({})
-	t_1._historySignal = var1
-	t_1._setHistorySignal = var2
+function LocalTraversalHistoryModule.new(Local) --[[ Line: 51 ]]
+	-- upvalues: SignalsModule (copy), LocalTraversalHistoryModule (copy), MemStorageService (copy), HttpService (copy)
+	local Signal, Signal2 = SignalsModule.createSignal({})
+	local config = {
+		_connections = {},
+		_historyKey = "",
+		_history = {},
+		_historySignal = Signal,
+		_setHistorySignal = Signal2
+	}
 	
-	if p1 == nil or p1 == "" then
-		return setmetatable(t_1, t)
-	end
-	local function initLocalHistory()
-		-- upvalues: t_1 (ref), p1 (ref), memStorageService (copy), httpService (copy)
-		t_1._historyKey = "TraversalHistory" .. p0
-		local historyKeyItem = memStorageService:GetItem(t_1._historyKey)
-		
-		if historyKeyItem and historyKeyItem ~= "" then
-			local var3 = httpService:JSONDecode(historyKeyItem)
+	if Local == nil or Local == "" then
+		return (setmetatable(config, LocalTraversalHistoryModule))
+	else
+		local function initLocalHistory() --[[ Line: 62 ]]
+			-- upvalues: config (copy), Local (copy), MemStorageService (upval), HttpService (upval)
+			config._historyKey = "TraversalHistory" .. Local
+			local Item = MemStorageService:GetItem(config._historyKey)
 			
-			if typeof(var3) == "table" then
-				t_1._history = var3
+			if Item and Item ~= "" then
+				local Data = HttpService:JSONDecode(Item)
+				
+				if typeof(Data) == "table" then
+					config._history = Data
+				end
 			end
+			table.insert(config._history, 1, {
+				universeId = tostring(game.GameId),
+				placeId = tostring(game.PlaceId)
+			})
+			MemStorageService:SetItem(config._historyKey, HttpService:JSONEncode(config._history))
+			config._setHistorySignal(config._history)
 		end
-		table.insert(t_1._history, 1, {
-			universeId = tostring(game.GameId),
-			placeId = tostring(game.PlaceId)
-		})
-		memStorageService:SetItem(t_1._historyKey, httpService:JSONEncode(t_1._history))
-		t_1._setHistorySignal(t_1._history)
+		
+		table.insert(config._connections, game.Loaded:Connect(function() --[[ Line: 82 ]]
+			-- upvalues: initLocalHistory (copy)
+			initLocalHistory()
+		end))
+		
+		return (setmetatable(config, LocalTraversalHistoryModule))
 	end
-	
-	table.insert(t_1._connections, game.Loaded:Connect(function()
-		-- upvalues: initLocalHistory (ref)
-		initLocalHistory()
-	end))
-	
-	return setmetatable(t_1, t)
 end
 
-function t:addHistoryEntry(p1)
+function LocalTraversalHistoryModule:addHistoryEntry(p1) --[[ Line: 90 ]]
 	table.insert(self._history, 1, p1)
 	self._setHistorySignal(self._history)
 end
 
-function t:addHistoryEntries(p1)
-	-- upvalues: cryoModule (ref)
-	self._history = cryoModule.List.join(p1, self._history)
+function LocalTraversalHistoryModule:addHistoryEntries(p1) --[[ Line: 95 ]]
+	-- upvalues: CryoModule (copy)
+	self._history = CryoModule.List.join(p1, self._history)
 	self._setHistorySignal(self._history)
 end
 
-local function _(p1, p2)
+local function _(p1, p2) --[[ Line: 101 | Named "getNMostRecent" ]]
 	if p2 == nil then
 		return p1
 	end
-	local t = {}
+	local List = {}
 	
 	for i = 1, p2 do
-		table.insert(t, p1[i])
+		table.insert(List, p1[i])
 	end
-	return t
+	return List
 end
 
-function t:getHistory(p3)
-	local history = self._history
+function LocalTraversalHistoryModule:getHistory(p3) --[[ Line: 112 ]]
+	local History = self._history
 	
 	if p3 == nil then
-		return history
+		return History
 	end
-	local t = {}
+	local List = {}
 	
 	for i = 1, p3 do
-		table.insert(t, history[i])
+		table.insert(List, History[i])
 	end
-	return t
+	return List
 end
 
-function t.getUniverseHistorySignal(value, p4)
-	-- upvalues: signalsModule (ref)
-	return signalsModule.createComputed(function(p5)
-		-- upvalues: value (ref), p4 (ref)
-		local var1
-		local var2 = value._historySignal(p5)
+function LocalTraversalHistoryModule.getUniverseHistorySignal(p4, p5) --[[ Line: 115 ]]
+	-- upvalues: SignalsModule (copy)
+	return SignalsModule.createComputed(function(p6) --[[ Line: 116 ]]
+		-- upvalues: p4 (copy), p5 (copy)
+		local HistorySignalResult = p4._historySignal(p6)
+		local HistorySignalResult1 = nil
 		
-		if p4 == nil then
-			var1 = var2
+		if p5 == nil then
+			HistorySignalResult1 = HistorySignalResult
 		else
-			local t = {}
+			local List = {}
 			
-			for i = 1, p4 do
-				table.insert(t, var2[i])
+			for i = 1, p5 do
+				table.insert(List, HistorySignalResult[i])
 			end
-			var1 = t
+			HistorySignalResult1 = List
 		end
-		local t = {}
+		local List1 = {}
 		
-		for i_1, v in var1 do
-			table.insert(t, v.universeId)
+		for _, value in HistorySignalResult1 do
+			table.insert(List1, value.universeId)
 		end
-		return t
+		return List1
 	end)
 end
 
-function t:getUniverseHistory(p6)
-	-- upvalues: fFlagUseTeleportTraversalHistory (ref), useTeleportedPlacesBackHistory2EngineFeature (ref), teleportService (ref), cryoModule (ref)
-	local t = {}
+function LocalTraversalHistoryModule:getUniverseHistory(p7) --[[ Line: 127 ]]
+	-- upvalues: FFlagUseTeleportTraversalHistory (copy), UseTeleportedPlacesBackHistory2EngineFeature (copy), TeleportService (copy), CryoModule (copy)
+	local List = {}
 	
-	if fFlagUseTeleportTraversalHistory and useTeleportedPlacesBackHistory2EngineFeature then
-		local var3 = cryoModule.List.map(teleportService:TeleportedUniversesBackHistory(), tostring)
+	if FFlagUseTeleportTraversalHistory and UseTeleportedPlacesBackHistory2EngineFeature then
+		local MapResult = CryoModule.List.map(TeleportService:TeleportedUniversesBackHistory(), tostring)
 		
-		if p6 == nil then
-			return var3
+		if p7 == nil then
+			return MapResult
 		end
-		local t_1 = {}
+		local List1 = {}
 		
-		for i = 1, p6 do
-			table.insert(t_1, var3[i])
+		for i = 1, p7 do
+			table.insert(List1, MapResult[i])
 		end
-		t = t_1
+		List = List1
 		
-		return t
+		return List
 	else
-		local var4
-		local history = self._history
+		local History = self._history
+		local History1 = nil
 		
-		if p6 == nil then
-			var4 = history
+		if p7 == nil then
+			History1 = History
 		else
-			local t_1 = {}
+			local List2 = {}
 			
-			for i_1 = 1, p6 do
-				table.insert(t_1, history[i_1])
+			for i1 = 1, p7 do
+				table.insert(List2, History[i1])
 			end
-			var4 = t_1
+			History1 = List2
 		end
-		for i_2, v in var4 do
-			table.insert(t, v.universeId)
+		for _, value in History1 do
+			table.insert(List, value.universeId)
 		end
-		return t
+		return List
 	end
 end
 
-function t:writeHistory()
-	-- upvalues: memStorageService (ref), httpService (ref)
-	memStorageService:SetItem(self._historyKey, httpService:JSONEncode(self._history))
+function LocalTraversalHistoryModule:writeHistory() --[[ Line: 143 ]]
+	-- upvalues: MemStorageService (copy), HttpService (copy)
+	MemStorageService:SetItem(self._historyKey, HttpService:JSONEncode(self._history))
 end
 
-function t:disconnect()
-	for i, v in self._connections do
-		v:Disconnect()
+function LocalTraversalHistoryModule:disconnect() --[[ Line: 147 ]]
+	for _, connection in self._connections do
+		connection:Disconnect()
 	end
 	self._connections = {}
 end
 
-local _ = function()
-	-- upvalues: playersService (ref)
-	local var5 = if playersService.LocalPlayer then playersService.LocalPlayer.UserId else nil
+local _ = function(): string --[[ Line: 154 | Named "getDefaultId" ]]
+	-- upvalues: Players (copy)
+	local UserId = Players.LocalPlayer and Players.LocalPlayer.UserId or nil
 	
-	return if var5 == nil or var5 <= 0 then "Local" else tostring(var5)
+	return if UserId == nil or UserId <= 0 then "Local" else tostring(UserId)
 end
 
-if not fFlagUseLocalTraversalHistory and not fFlagUseTeleportTraversalHistory then
-	t.default = t.new("")
+if FFlagUseLocalTraversalHistory or FFlagUseTeleportTraversalHistory then
+	local UserId = Players.LocalPlayer and Players.LocalPlayer.UserId or nil
+	LocalTraversalHistoryModule.default = LocalTraversalHistoryModule.new(if UserId == nil or UserId <= 0 then "Local" else tostring(UserId))
 	
-	return t
+	return LocalTraversalHistoryModule
+else
+	LocalTraversalHistoryModule.default = LocalTraversalHistoryModule.new("")
+	
+	return LocalTraversalHistoryModule
 end
-local var5 = if playersService.LocalPlayer then playersService.LocalPlayer.UserId else nil
-t.default = t.new(if var5 == nil or var5 <= 0 then "Local" else tostring(var5))
-
-return t

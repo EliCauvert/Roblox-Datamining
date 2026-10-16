@@ -1,47 +1,48 @@
-﻿local userList = script:FindFirstAncestor("UserList")
-local parent = userList.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local convertToFoundationPresenceEnum = require(parent.SocialCommon).Utils.convertToFoundationPresenceEnum
-local _ = require(userList.Common.Types)
-local enumsModule = require(userList.Common.Enums)
-local useUserDataValuesModule = require(userList.Hooks.useUserDataValues)
-local baseRowModule = require(script.Parent.BaseRow)
-local useIsRobloxSubscriber = require(parent.UserProfiles).Hooks.useIsRobloxSubscriber
-local fFlagEnableBlackbirdCheck = require(parent.SharedFlags).FFlagEnableBlackbirdCheck
-local fFlagFixUserRowCombinedName = require(parent.SharedFlags).FFlagFixUserRowCombinedName
-local fFlagUserListCtaIntegrationEnabled = require(parent.SharedFlags).FFlagUserListCtaIntegrationEnabled
-local fFlagUserListUsernameFallbackConfig = require(parent.SharedFlags).FFlagUserListUsernameFallbackConfig
-local fFlagAddStatusIndicatorToBaseRow = require(parent.SharedFlags).FFlagAddStatusIndicatorToBaseRow
-local fFlagUserListSurfaceExtensions = require(parent.SharedFlags).FFlagUserListSurfaceExtensions
+﻿local UserList = script:FindFirstAncestor("UserList")
+local Parent = UserList.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local ConvertToFoundationPresenceEnumFunction = require(Parent.SocialCommon).Utils.convertToFoundationPresenceEnum
+local _ = require(UserList.Common.Types)
+local EnumsModule = require(UserList.Common.Enums)
+local UseUserDataValuesModule = require(UserList.Hooks.useUserDataValues)
+local BaseRowModule = require(script.Parent.BaseRow)
+local UseIsRobloxSubscriberFunction = require(Parent.UserProfiles).Hooks.useIsRobloxSubscriber
+local FFlagEnableBlackbirdCheck = require(Parent.SharedFlags).FFlagEnableBlackbirdCheck
+local FFlagFixUserRowCombinedName = require(Parent.SharedFlags).FFlagFixUserRowCombinedName
+local FFlagUserListCtaIntegrationEnabled = require(Parent.SharedFlags).FFlagUserListCtaIntegrationEnabled
+local FFlagUserListUsernameFallbackConfig = require(Parent.SharedFlags).FFlagUserListUsernameFallbackConfig
+local FFlagAddStatusIndicatorToBaseRow = require(Parent.SharedFlags).FFlagAddStatusIndicatorToBaseRow
+local FFlagUserListSurfaceExtensions = require(Parent.SharedFlags).FFlagUserListSurfaceExtensions
 
-return reactModule.memo(function(p1)
-	-- upvalues: useUserDataValuesModule (ref), fFlagEnableBlackbirdCheck (ref), useIsRobloxSubscriber (ref), fFlagFixUserRowCombinedName (ref), fFlagUserListUsernameFallbackConfig (ref), foundationModule (ref), convertToFoundationPresenceEnum (ref), reactModule (ref), baseRowModule (ref), fFlagAddStatusIndicatorToBaseRow (ref), fFlagUserListCtaIntegrationEnabled (ref), enumsModule (ref), fFlagUserListSurfaceExtensions (ref)
-	local var1 = useUserDataValuesModule(p1.entityId)
-	local var2 = if fFlagEnableBlackbirdCheck then useIsRobloxSubscriber(if p1.entityId then p1.entityId else nil) else nil
-	local var3 = if fFlagFixUserRowCombinedName then if var1.combinedName ~= "" then nil else var1.combinedName elseif var1.displayName ~= "" then nil else var1.displayName
-	local var4 = if p1.configs and p1.configs.showSubtitle ~= nil then p1.configs.showSubtitle else true
-	local var5 = if fFlagUserListUsernameFallbackConfig then if var1.username ~= "" then nil else `@{var1.username}` else nil
+return ReactModule.memo(function(p1) --[[ Line: 48 | Named "UserRow" ]]
+	-- upvalues: UseUserDataValuesModule (copy), FFlagEnableBlackbirdCheck (copy), UseIsRobloxSubscriberFunction (copy), FFlagFixUserRowCombinedName (copy), FFlagUserListUsernameFallbackConfig (copy), FoundationModule (copy), ConvertToFoundationPresenceEnumFunction (copy), ReactModule (copy), BaseRowModule (copy), FFlagAddStatusIndicatorToBaseRow (copy), FFlagUserListCtaIntegrationEnabled (copy), EnumsModule (copy), FFlagUserListSurfaceExtensions (copy)
+	local UseUserDataValuesModuleResult = UseUserDataValuesModule(p1.entityId)
+	local UseIsRobloxSubscriberResult = if FFlagEnableBlackbirdCheck then UseIsRobloxSubscriberFunction(if p1.entityId then p1.entityId else nil) else nil
+	local NoConfigs = not p1.configs or p1.configs.showSubtitle == nil or p1.configs.showSubtitle
+	local Text = if FFlagUserListUsernameFallbackConfig then if UseUserDataValuesModuleResult.username == "" then nil else `@{UseUserDataValuesModuleResult.username}` else nil
+	local NoConfigs1 = not p1.configs or p1.configs.showPresence == nil or p1.configs.showPresence
+	local Config = if FFlagUserListUsernameFallbackConfig then if p1.configs and p1.configs.showUsernameAsContextualFallback and not p1.contextualInfo then { text = Text } else p1.contextualInfo else nil
 	
-	return reactModule.createElement(baseRowModule, {
+	return ReactModule.createElement(BaseRowModule, {
 		userId = p1.entityId,
-		userPresenceType = if (if p1.configs and p1.configs.showPresence ~= nil then p1.configs.showPresence else true) and p1.presence then convertToFoundationPresenceEnum(p1.presence) else foundationModule.Enums.UserPresence.None,
-		title = var3,
-		subtitle = if fFlagUserListUsernameFallbackConfig then if var4 then var5 else nil elseif var4 and var1.username ~= "" then `@{var1.username}` else nil,
+		userPresenceType = if NoConfigs1 and p1.presence then ConvertToFoundationPresenceEnumFunction(p1.presence) else FoundationModule.Enums.UserPresence.None,
+		title = if FFlagFixUserRowCombinedName then if UseUserDataValuesModuleResult.combinedName == "" then nil else UseUserDataValuesModuleResult.combinedName elseif UseUserDataValuesModuleResult.displayName == "" then nil else UseUserDataValuesModuleResult.displayName,
+		subtitle = if FFlagUserListUsernameFallbackConfig then if NoConfigs then Text else nil elseif NoConfigs and UseUserDataValuesModuleResult.username ~= "" then `@{UseUserDataValuesModuleResult.username}` else nil,
 		layoutMode = p1.layoutMode,
 		onActivated = p1.onActivated,
-		isTitleLoading = if p1.loadingState and p1.loadingState.title ~= nil then p1.loadingState.title else var1.isLoading,
-		isSubtitleLoading = if p1.loadingState and p1.loadingState.subtitle ~= nil then p1.loadingState.subtitle else var1.isLoading,
+		isTitleLoading = if p1.loadingState and p1.loadingState.title ~= nil then p1.loadingState.title else UseUserDataValuesModuleResult.isLoading,
+		isSubtitleLoading = if p1.loadingState and p1.loadingState.subtitle ~= nil then p1.loadingState.subtitle else UseUserDataValuesModuleResult.isLoading,
 		isContextualInfoLoading = p1.loadingState and p1.loadingState.contextualInfo,
-		contextualInfo = if fFlagUserListUsernameFallbackConfig then if not fFlagUserListUsernameFallbackConfig then if p1.configs and p1.configs.showUsernameAsContextualFallback and not p1.contextualInfo then { text = var5 } else p1.contextualInfo else nil else p1.contextualInfo,
+		contextualInfo = if FFlagUserListUsernameFallbackConfig then Config else p1.contextualInfo,
 		primaryCta = p1.primaryCta,
 		secondaryCta = p1.secondaryCta,
-		shouldShowNewIndicator = if fFlagAddStatusIndicatorToBaseRow then p1.shouldShowNewIndicator else nil,
-		ctaLoading = if fFlagUserListCtaIntegrationEnabled then p1.ctaLoading else nil,
+		shouldShowNewIndicator = if FFlagAddStatusIndicatorToBaseRow then p1.shouldShowNewIndicator else nil,
+		ctaLoading = if FFlagUserListCtaIntegrationEnabled then p1.ctaLoading else nil,
 		trailingContent = p1.trailingContent,
 		layoutOrder = p1.layoutOrder,
-		trustedConnectionIndicatorEnabled = p1.layoutMode == enumsModule.RowLayoutMode.Wide,
-		isRobloxSubscriber = if fFlagEnableBlackbirdCheck then var2 else nil,
-		disableRowActivation = if fFlagUserListSurfaceExtensions and p1.configs then p1.configs.disableRowActivation else nil
+		trustedConnectionIndicatorEnabled = p1.layoutMode == EnumsModule.RowLayoutMode.Wide,
+		isRobloxSubscriber = if FFlagEnableBlackbirdCheck then UseIsRobloxSubscriberResult else nil,
+		disableRowActivation = if FFlagUserListSurfaceExtensions and p1.configs then p1.configs.disableRowActivation else nil
 	})
 end)

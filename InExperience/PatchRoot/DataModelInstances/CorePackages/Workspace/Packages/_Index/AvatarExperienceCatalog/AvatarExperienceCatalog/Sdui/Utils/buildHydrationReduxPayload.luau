@@ -1,30 +1,30 @@
-﻿local avatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
-local _ = require(avatarExperienceCatalog.Parent.AvatarExperienceRodux)
-local _ = require(avatarExperienceCatalog.Components.ResultsList.WidgetListInfoViewModel)
+﻿local AvatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
+local _ = require(AvatarExperienceCatalog.Parent.AvatarExperienceRodux)
+local _ = require(AvatarExperienceCatalog.Components.ResultsList.WidgetListInfoViewModel)
 
-return function(p1, p2)
+return function(List, List1) --[[ Line: 18 | Named "buildHydrationReduxPayload" ]]
 	local t = {}
 	
-	for i, v in p1 do
-		local type = v.type
-		local var1 = tostring(v.id)
+	for _, value in List do
+		local Type = value.type
+		local Text = tostring(value.id)
 		
-		if not t[type] then
-			t[type] = {}
+		if not t[Type] then
+			t[Type] = {}
 		end
-		local cloned = table.clone(v)
-		cloned.id = var1
-		t[type][var1] = cloned
+		local Copy = table.clone(value)
+		Copy.id = Text
+		t[Type][Text] = Copy
 	end
-	for i, v_1 in p2 do
-		local type = v_1.type
-		local var2 = tostring(v_1.id)
+	for _, value1 in List1 do
+		local Type = value1.type
+		local Text = tostring(value1.id)
 		
-		if not t[type] then
-			t[type] = {}
+		if not t[Type] then
+			t[Type] = {}
 		end
-		if not t[type][var2] then
-			t[type][var2] = { failedToHydrate = true, id = var2, type = type }
+		if not t[Type][Text] then
+			t[Type][Text] = { failedToHydrate = true, id = Text, type = Type }
 		end
 	end
 	return t

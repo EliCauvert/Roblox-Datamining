@@ -1,31 +1,32 @@
-﻿local parent = script.Parent.Parent
-local socialLuaAnalyticsModule = require(parent.Parent.SocialLuaAnalytics)
-local fireDiagCounter = socialLuaAnalyticsModule.Analytics.FireEvent.fireDiagCounter
-local fireDiag = socialLuaAnalyticsModule.Analytics.FireEvent.fireDiag
-local fFlagUserProfilesLogErrorCodesModule = require(parent.Flags.FFlagUserProfilesLogErrorCodes)
-local diagCountersListModule = require(script.Parent.DiagCountersList)
+﻿local Parent = script.Parent.Parent
+local SocialLuaAnalyticsModule = require(Parent.Parent.SocialLuaAnalytics)
+local FireDiagCounterFunction = SocialLuaAnalyticsModule.Analytics.FireEvent.fireDiagCounter
+local FireDiagFunction = SocialLuaAnalyticsModule.Analytics.FireEvent.fireDiag
+local FFlagUserProfilesLogErrorCodesModule = require(Parent.Flags.FFlagUserProfilesLogErrorCodes)
+local DiagCountersListModule = require(script.Parent.DiagCountersList)
 local _ = require(script.Parent.EventNames)
 
-return function(p1)
-	-- upvalues: fFlagUserProfilesLogErrorCodesModule (ref), fireDiag (ref), diagCountersListModule (ref), fireDiagCounter (ref)
-	if fFlagUserProfilesLogErrorCodesModule then
-		local var1 = fireDiag({
+return function(p1) --[[ Line: 14 ]]
+	-- upvalues: FFlagUserProfilesLogErrorCodesModule (copy), FireDiagFunction (copy), DiagCountersListModule (copy), FireDiagCounterFunction (copy)
+	if FFlagUserProfilesLogErrorCodesModule then
+		local FireDiagResult = FireDiagFunction({
 			diagImpl = p1.analytics.Diag,
-			eventList = diagCountersListModule
+			eventList = DiagCountersListModule
 		})
 		
-		return function(p2, p3)
-			-- upvalues: diagCountersListModule (copy), var1 (ref)
-			return if diagCountersListModule[p2] then var1(p2, p3) else p2
+		return function(p2, p3) --[[ Line: 23 ]]
+			-- upvalues: DiagCountersListModule (upval), FireDiagResult (copy)
+			return if DiagCountersListModule[p2] then FireDiagResult(p2, p3) else p2
 		end
-	end
-	local var2 = fireDiagCounter({
-		diagImpl = p1.analytics.Diag,
-		eventList = diagCountersListModule
-	})
-	
-	return function(p2)
-		-- upvalues: diagCountersListModule (copy), var2 (ref)
-		return if diagCountersListModule[p2] then var2(p2) else p2
+	else
+		local FireDiagCounterResult = FireDiagCounterFunction({
+			diagImpl = p1.analytics.Diag,
+			eventList = DiagCountersListModule
+		})
+		
+		return function(p2) --[[ Line: 36 ]]
+			-- upvalues: DiagCountersListModule (upval), FireDiagCounterResult (copy)
+			return if DiagCountersListModule[p2] then FireDiagCounterResult(p2) else p2
+		end
 	end
 end

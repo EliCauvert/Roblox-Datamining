@@ -1,48 +1,48 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local _ = require(dataHydration.Parent.HttpClient)
-local createDataCacheModule = require(dataHydration.createDataCache)
-local createDataResolverModule = require(dataHydration.createDataResolver)
-local _ = require(dataHydration.DataHydrationTypes)
-local fetchAdCampaignsModule = require(script.Parent.fetchAdCampaigns)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local _ = require(DataHydration.Parent.HttpClient)
+local CreateDataCacheModule = require(DataHydration.createDataCache)
+local CreateDataResolverModule = require(DataHydration.createDataResolver)
+local _ = require(DataHydration.DataHydrationTypes)
+local FetchAdCampaignsModule = require(script.Parent.fetchAdCampaigns)
 local _ = require(script.Parent.AdCampaignsTypes)
 
-return function(p1)
-	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), fetchAdCampaignsModule (ref)
-	p1 = p1 or {}
-	local t = { network = p1.network, baseUrl = p1.baseUrl }
-	local var1 = createDataCacheModule(p1.ttlSeconds or 300)
-	local var2 = createDataResolverModule({
+return function(p1) --[[ Line: 33 | Named "createAdCampaignsStore" ]]
+	-- upvalues: CreateDataCacheModule (copy), CreateDataResolverModule (copy), FetchAdCampaignsModule (copy)
+	local P0 = p1 or {}
+	local config = { network = P0.network, baseUrl = P0.baseUrl }
+	local DataCacheModule = CreateDataCacheModule(P0.ttlSeconds or 300)
+	local DataResolverModule = CreateDataResolverModule({
 		supportsMultiGet = false,
 		replaceItems = true,
-		cache = var1,
-		fetchFn = function(_, _)
-			-- upvalues: fetchAdCampaignsModule (copy), t (ref)
-			return fetchAdCampaignsModule.fetchAdCampaigns(t)
+		cache = DataCacheModule,
+		fetchFn = function(_, _) --[[ Line: 47 ]]
+			-- upvalues: FetchAdCampaignsModule (upval), config (copy)
+			return FetchAdCampaignsModule.fetchAdCampaigns(config)
 		end
 	})
 	
 	return {
-		getAdCampaigns = function()
-			-- upvalues: var2 (ref)
-			return var2.getCachedItem("0")
+		getAdCampaigns = function() --[[ Line: 53 ]]
+			-- upvalues: DataResolverModule (copy)
+			return DataResolverModule.getCachedItem("0")
 		end,
-		fetchAdCampaigns = function()
-			-- upvalues: var2 (ref)
-			return var2.fetchItem("0")
+		fetchAdCampaigns = function() --[[ Line: 56 ]]
+			-- upvalues: DataResolverModule (copy)
+			return DataResolverModule.fetchItem("0")
 		end,
-		getAndFetchAdCampaigns = function()
-			-- upvalues: var2 (ref)
-			return var2.getAndFetchItem("0")
+		getAndFetchAdCampaigns = function() --[[ Line: 59 ]]
+			-- upvalues: DataResolverModule (copy)
+			return DataResolverModule.getAndFetchItem("0")
 		end,
-		isAdCampaignsRequestInQueueOrInFlight = function()
-			-- upvalues: var2 (ref)
-			return var2.isRequestInQueueOrInFlight("0")
+		isAdCampaignsRequestInQueueOrInFlight = function() --[[ Line: 62 ]]
+			-- upvalues: DataResolverModule (copy)
+			return DataResolverModule.isRequestInQueueOrInFlight("0")
 		end,
-		updateAdCampaigns = function(p2)
-			-- upvalues: var1 (ref)
-			var1.replaceItem("0", p2)
+		updateAdCampaigns = function(p2) --[[ Line: 65 ]]
+			-- upvalues: DataCacheModule (copy)
+			DataCacheModule.replaceItem("0", p2)
 		end,
-		clear = var2.clear,
-		dispose = var2.dispose
+		clear = DataResolverModule.clear,
+		dispose = DataResolverModule.dispose
 	}
 end

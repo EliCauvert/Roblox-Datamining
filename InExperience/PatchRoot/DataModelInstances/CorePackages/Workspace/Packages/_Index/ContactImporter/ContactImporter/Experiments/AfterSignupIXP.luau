@@ -1,21 +1,21 @@
-﻿local parent = script.Parent.Parent
+﻿local Parent = script.Parent.Parent
 local IXPService = game:GetService("IXPService")
-local useUserExperiment = require(parent.Parent.RoactAppExperiment).useUserExperiment
-local fStringPVCIAfterSignupLayerModule = require(parent.Flags.FStringPVCIAfterSignupLayer)
-local fStringPVCIAfterSignupVariantKeyModule = require(parent.Flags.FStringPVCIAfterSignupVariantKey)
+local UseUserExperimentFunction = require(Parent.Parent.RoactAppExperiment).useUserExperiment
+local FStringPVCIAfterSignupLayerModule = require(Parent.Flags.FStringPVCIAfterSignupLayer)
+local FStringPVCIAfterSignupVariantKeyModule = require(Parent.Flags.FStringPVCIAfterSignupVariantKey)
 
-local var1 = function(p1)
-	-- upvalues: fStringPVCIAfterSignupLayerModule (ref), fStringPVCIAfterSignupVariantKeyModule (ref)
-	return (p1[fStringPVCIAfterSignupLayerModule] or {})[fStringPVCIAfterSignupVariantKeyModule]
+local function v4(p1) --[[ Line: 12 ]]
+	-- upvalues: FStringPVCIAfterSignupLayerModule (copy), FStringPVCIAfterSignupVariantKeyModule (copy)
+	return (p1[FStringPVCIAfterSignupLayerModule] or {})[FStringPVCIAfterSignupVariantKeyModule]
 end
 
 return {
-	usePVAndCIAfterSignupVariant = function(value)
-		-- upvalues: useUserExperiment (ref), fStringPVCIAfterSignupLayerModule (ref), var1 (ref)
-		return useUserExperiment({ fStringPVCIAfterSignupLayerModule }, var1, (value or { isExposureEnabled = false }).isExposureEnabled)
+	usePVAndCIAfterSignupVariant = function(p1) --[[ Line: 18 ]]
+		-- upvalues: UseUserExperimentFunction (copy), FStringPVCIAfterSignupLayerModule (copy), v4 (copy)
+		return (UseUserExperimentFunction({ FStringPVCIAfterSignupLayerModule }, v4, (p1 or { isExposureEnabled = false }).isExposureEnabled))
 	end,
-	logExposure = function()
-		-- upvalues: IXPService (ref), fStringPVCIAfterSignupLayerModule (ref)
-		IXPService:LogUserLayerExposure(fStringPVCIAfterSignupLayerModule)
+	logExposure = function() --[[ Line: 26 ]]
+		-- upvalues: IXPService (copy), FStringPVCIAfterSignupLayerModule (copy)
+		IXPService:LogUserLayerExposure(FStringPVCIAfterSignupLayerModule)
 	end
 }

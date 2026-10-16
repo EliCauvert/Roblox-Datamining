@@ -1,17 +1,17 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local enumsModule = require(profilePlatform.Common.Enums)
-local userLibModule = require(parent.UserLib)
-local avatarExperienceInspectAndBuyModule = require(parent.AvatarExperienceInspectAndBuy)
-local constants = avatarExperienceInspectAndBuyModule.Constants
-local getPriceStatusInShop = avatarExperienceInspectAndBuyModule.Utils.getPriceStatusInShop
-local priceStatus = avatarExperienceInspectAndBuyModule.Enums.PriceStatus
-local constants_1 = userLibModule.Utils.Constants
-local getRbxthumbWithTypeSizeAndOptions = userLibModule.Utils.getRbxthumbWithTypeSizeAndOptions
-local _ = require(profilePlatform.Common.Types)
-local asset = constants_1.RbxthumbTypes.Asset
-local bundleThumbnail = constants_1.RbxthumbTypes.BundleThumbnail
-local t = {
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local UserLibModule = require(Parent.UserLib)
+local AvatarExperienceInspectAndBuyModule = require(Parent.AvatarExperienceInspectAndBuy)
+local Constants = AvatarExperienceInspectAndBuyModule.Constants
+local GetPriceStatusInShopFunction = AvatarExperienceInspectAndBuyModule.Utils.getPriceStatusInShop
+local PriceStatus = AvatarExperienceInspectAndBuyModule.Enums.PriceStatus
+local Constants1 = UserLibModule.Utils.Constants
+local GetRbxthumbWithTypeSizeAndOptionsFunction = UserLibModule.Utils.getRbxthumbWithTypeSizeAndOptions
+local _ = require(ProfilePlatform.Common.Types)
+local Asset = Constants1.RbxthumbTypes.Asset
+local BundleThumbnail = Constants1.RbxthumbTypes.BundleThumbnail
+local config = {
 	Shirt = "Classic Shirt",
 	Pants = "Classic Pants",
 	TShirt = "Classic T-Shirt",
@@ -19,65 +19,70 @@ local t = {
 	DressSkirtAccessory = "Dresses & Skirts"
 }
 
-local function isPurchasableStatus(p1)
-	-- upvalues: priceStatus (ref)
-	return if p1 ~= priceStatus.Free then if p1 ~= priceStatus.PurchaseFromRoblox then p1 == priceStatus.PurchaseFromResale else true else true
+local function _(p1): boolean --[[ Line: 38 | Named "isBundle" ]]
+	-- upvalues: EnumsModule (copy)
+	return p1.itemType == EnumsModule.ItemTypes.Bundle or p1.itemType == "Bundle"
 end
 
-local function _(p1)
-	-- upvalues: enumsModule (ref)
-	return if p1.itemType ~= enumsModule.ItemTypes.Bundle then p1.itemType == "Bundle" else true
-end
-
-local function getAssetTypeDisplayName(value, p1)
-	-- upvalues: t (ref)
-	if not value then
+local function getAssetTypeDisplayName(ItemSubType, AssetTypeNames) --[[ Line: 47 ]]
+	-- upvalues: config (copy)
+	if not ItemSubType then
 		return ""
-	elseif p1 and p1[value] then
-		return p1[value]
 	end
-	local var1 = tonumber(value)
+	if AssetTypeNames and AssetTypeNames[ItemSubType] then
+		return AssetTypeNames[ItemSubType]
+	end
+	local Number: number? = tonumber(ItemSubType)
 	
-	if not var1 then
-		return t[value] or value
+	if not Number then
+		return config[ItemSubType] or ItemSubType
 	end
-	for i, v in Enum.AvatarAssetType:GetEnumItems() do
-		if v.Value == var1 then
-			return t[v.Name] or v.Name:gsub("(%l)(%u)", "%1 %2")
+	for _, enumItem in Enum.AvatarAssetType:GetEnumItems() do
+		if enumItem.Value == Number then
+			return config[enumItem.Name] or enumItem.Name:gsub("(%l)(%u)", "%1 %2")
 		end
 	end
 	return ""
 end
 
 return {
-	isPurchasableStatus = isPurchasableStatus,
-	getPriceStatus = function(p2)
-		-- upvalues: getPriceStatusInShop (ref)
-		return getPriceStatusInShop(p2)
+	isPurchasableStatus = function(Free): boolean --[[ Line: 32 ]]
+		-- upvalues: PriceStatus (copy)
+		return Free == PriceStatus.Free or (Free == PriceStatus.PurchaseFromRoblox or Free == PriceStatus.PurchaseFromResale)
 	end,
-	PriceStatusEnum = priceStatus,
-	getThumbnailUrl = function(p2)
-		-- upvalues: enumsModule (ref), bundleThumbnail (ref), asset (ref), getRbxthumbWithTypeSizeAndOptions (ref)
-		return getRbxthumbWithTypeSizeAndOptions(p2.id, if if p2.itemType ~= enumsModule.ItemTypes.Bundle then p2.itemType == "Bundle" else true then bundleThumbnail else asset, 150)
+	getPriceStatus = function(p1) --[[ Line: 96 ]]
+		-- upvalues: GetPriceStatusInShopFunction (copy)
+		return GetPriceStatusInShopFunction(p1)
 	end,
-	getItemTypeDisplayName = function(p2, p3)
-		-- upvalues: enumsModule (ref), getAssetTypeDisplayName (ref)
-		if p2.taxonomyName then
-			return p2.taxonomyName
-		end
-		local assetTypeNames = p3.assetTypeNames
+	PriceStatusEnum = PriceStatus,
+	getThumbnailUrl = function(p1) --[[ Line: 42 ]]
+		-- upvalues: EnumsModule (copy), BundleThumbnail (copy), Asset (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (copy)
+		local IsItemTypeMatch: boolean = p1.itemType == EnumsModule.ItemTypes.Bundle or p1.itemType == "Bundle"
 		
-		return if if p2.itemType ~= enumsModule.ItemTypes.Bundle then p2.itemType == "Bundle" else true then if p2.itemSubType and assetTypeNames and assetTypeNames[p2.itemSubType] then assetTypeNames[p2.itemSubType] elseif p3 and p3.bundle then p3.bundle else "Bundle" else getAssetTypeDisplayName(p2.itemSubType, assetTypeNames)
+		return GetRbxthumbWithTypeSizeAndOptionsFunction(p1.id, if IsItemTypeMatch then BundleThumbnail else Asset, 150)
 	end,
-	shouldShowBundleParts = function(p2)
-		-- upvalues: getPriceStatusInShop (ref), priceStatus (ref)
-		local var2 = getPriceStatusInShop(p2)
-		
-		if not p2.isOwned then
-			return if if var2 ~= priceStatus.Free then if var2 ~= priceStatus.PurchaseFromRoblox then var2 == priceStatus.PurchaseFromResale else true else true then p2.bundlePartsCount ~= nil and p2.bundlePartsCount > 0 else false
+	getItemTypeDisplayName = function(p1, p2) --[[ Line: 69 ]]
+		-- upvalues: EnumsModule (copy), getAssetTypeDisplayName (copy)
+		if p1.taxonomyName then
+			return p1.taxonomyName
+		else
+			local AssetTypeNames = p2.assetTypeNames
+			local IsItemTypeMatch: boolean = p1.itemType == EnumsModule.ItemTypes.Bundle or p1.itemType == "Bundle"
+			
+			return if IsItemTypeMatch then if p1.itemSubType and AssetTypeNames and AssetTypeNames[p1.itemSubType] then AssetTypeNames[p1.itemSubType] elseif p2 and p2.bundle then p2.bundle else "Bundle" else getAssetTypeDisplayName(p1.itemSubType, AssetTypeNames)
 		end
 	end,
-	ASSET_TYPE_LOCALIZATION_KEYS = constants.AssetLocalizationKeys,
-	BUNDLE_TYPE_LOCALIZATION_KEYS = constants.BundleLocalizationKeys,
-	PRICE_STATUS_LOCALIZATION_KEYS = constants.PriceStatusLocalizationKeys
+	shouldShowBundleParts = function(p1): boolean --[[ Line: 86 ]]
+		-- upvalues: GetPriceStatusInShopFunction (copy), PriceStatus (copy)
+		local PriceStatusInShop = GetPriceStatusInShopFunction(p1)
+		
+		if p1.isOwned or PriceStatusInShop ~= PriceStatus.Free and (PriceStatusInShop ~= PriceStatus.PurchaseFromRoblox and PriceStatusInShop ~= PriceStatus.PurchaseFromResale) then
+			return false
+		else
+			return p1.bundlePartsCount ~= nil and p1.bundlePartsCount > 0
+		end
+	end,
+	ASSET_TYPE_LOCALIZATION_KEYS = Constants.AssetLocalizationKeys,
+	BUNDLE_TYPE_LOCALIZATION_KEYS = Constants.BundleLocalizationKeys,
+	PRICE_STATUS_LOCALIZATION_KEYS = Constants.PriceStatusLocalizationKeys
 }

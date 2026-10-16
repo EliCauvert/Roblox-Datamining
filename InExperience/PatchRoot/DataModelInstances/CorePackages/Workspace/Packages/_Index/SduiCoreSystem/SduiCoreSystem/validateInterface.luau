@@ -1,9 +1,9 @@
-﻿local tModule = require(script:FindFirstAncestor("SduiCoreSystem").Parent.t)
+﻿local TModule = require(script:FindFirstAncestor("SduiCoreSystem").Parent.t)
 
-return function(p1, p2, p3)
-	-- upvalues: tModule (ref)
+return function(p1, p2, p3: boolean) --[[ Line: 11 | Named "validateInterface" ]]
+	-- upvalues: TModule (copy)
 	if p3 == nil then
 		p3 = true
 	end
-	return (if p3 then tModule.interface(p2) else tModule.strictInterface(p2))(p1)
+	return (if p3 then TModule.interface(p2) else TModule.strictInterface(p2))(p1)
 end

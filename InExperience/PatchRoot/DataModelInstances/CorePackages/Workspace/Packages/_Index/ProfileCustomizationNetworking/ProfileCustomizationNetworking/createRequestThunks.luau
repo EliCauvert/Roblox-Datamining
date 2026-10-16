@@ -1,11 +1,11 @@
-﻿local networkRequests = script.Parent.networkRequests
-local createUpdateProfileCustomizationModule = require(networkRequests.createUpdateProfileCustomization)
-local createGetProfileCustomizationModule = require(networkRequests.createGetProfileCustomization)
+﻿local NetworkRequests = script.Parent.networkRequests
+local CreateUpdateProfileCustomizationModule = require(NetworkRequests.createUpdateProfileCustomization)
+local CreateGetProfileCustomizationModule = require(NetworkRequests.createGetProfileCustomization)
 
-return function(p1)
-	-- upvalues: createUpdateProfileCustomizationModule (ref), createGetProfileCustomizationModule (ref)
+return function(p1) --[[ Line: 6 ]]
+	-- upvalues: CreateUpdateProfileCustomizationModule (copy), CreateGetProfileCustomizationModule (copy)
 	return {
-		UpdateProfileCustomization = createUpdateProfileCustomizationModule(p1),
-		GetProfileCustomization = createGetProfileCustomizationModule(p1)
+		UpdateProfileCustomization = CreateUpdateProfileCustomizationModule(p1),
+		GetProfileCustomization = CreateGetProfileCustomizationModule(p1)
 	}
 end

@@ -1,56 +1,42 @@
-﻿local parent = script:FindFirstAncestor("FriendsChat").Parent
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local expChatConversationListAdapterModule = require(script.Parent.Parent.ConversationList.ExpChatConversationListAdapter)
-local getFriendsChatHeaderPropsModule = require(script.Parent.Parent.HeaderBar.getFriendsChatHeaderProps)
+﻿local Parent = script:FindFirstAncestor("FriendsChat").Parent
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
+local ExpChatConversationListAdapterModule = require(script.Parent.Parent.ConversationList.ExpChatConversationListAdapter)
+local GetFriendsChatHeaderPropsModule = require(script.Parent.Parent.HeaderBar.getFriendsChatHeaderProps)
 
-local function areSelectedHeaderFieldsEqual(p1, p2)
-	-- upvalues: cryoModule (ref)
-	if p1 == p2 then
-		return true
-	elseif p1 == nil or p2 == nil then
-		return false
-	end
-	local var1 = false
-	
-	if p1.title == p2.title then
-		var1 = false
-		
-		if p1.titleForViewer == p2.titleForViewer then
-			var1 = cryoModule.List.equals
-			var1 = var1(p1.participants or {}, p2.participants or {})
-		end
-	end
-	return var1
+local function areSelectedHeaderFieldsEqual(p1, p2) --[[ Line: 38 ]]
+	-- upvalues: CryoModule (copy)
+	return p1 == p2 or p1 ~= nil and p2 ~= nil and (p1.title == p2.title and p1.titleForViewer == p2.titleForViewer and CryoModule.List.equals(p1.participants or {}, p2.participants or {}))
 end
 
-return function(p1)
-	-- upvalues: expChatConversationListAdapterModule (ref), reactModule (ref), signalsModule (ref), areSelectedHeaderFieldsEqual (ref), signalsReactModule (ref), getFriendsChatHeaderPropsModule (ref)
-	local conversationId = p1.conversationId
-	local hasConversationId = p1.hasConversationId
-	local localUserId = p1.localUserId
-	local conversationStore = expChatConversationListAdapterModule.getConversationStore()
-	local var1 = signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), hasConversationId (ref), conversationStore (ref), conversationId (ref), areSelectedHeaderFieldsEqual (copy)
-		return signalsModule.createComputed(function(p2)
-			-- upvalues: hasConversationId (copy), conversationStore (copy), conversationId (copy)
-			if not hasConversationId then
+return function(p1) --[[ Line: 50 | Named "useConversationHeaderProps" ]]
+	-- upvalues: ExpChatConversationListAdapterModule (copy), ReactModule (copy), SignalsModule (copy), areSelectedHeaderFieldsEqual (copy), SignalsReactModule (copy), GetFriendsChatHeaderPropsModule (copy)
+	local ConversationId = p1.conversationId
+	local HasConversationId = p1.hasConversationId
+	local LocalUserId = p1.localUserId
+	local ConversationStore = ExpChatConversationListAdapterModule.getConversationStore()
+	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 56 ]]
+		-- upvalues: SignalsModule (upval), HasConversationId (copy), ConversationStore (copy), ConversationId (copy), areSelectedHeaderFieldsEqual (upval)
+		return SignalsModule.createComputed(function(p2) --[[ Line: 57 ]]
+			-- upvalues: HasConversationId (upval), ConversationStore (upval), ConversationId (upval)
+			if HasConversationId then
+				local Conversation = ConversationStore.getConversation(ConversationId, p2)
+				
+				return if Conversation == nil then nil else {
+					title = Conversation.title,
+					titleForViewer = Conversation.titleForViewer,
+					participants = Conversation.participants
+				}
+			else
 				return nil
 			end
-			local conversation = conversationStore.getConversation(conversationId, p2)
-			
-			return if conversation == nil then nil else {
-				title = conversation.title,
-				titleForViewer = conversation.titleForViewer,
-				participants = conversation.participants
-			}
 		end, areSelectedHeaderFieldsEqual)
-	end, { conversationStore, conversationId, hasConversationId }))
+	end, { ConversationStore, ConversationId, HasConversationId })))
 	
-	return reactModule.useMemo(function()
-		-- upvalues: var1 (ref), getFriendsChatHeaderPropsModule (copy), localUserId (ref)
-		return if var1 == nil then nil else getFriendsChatHeaderPropsModule(var1, localUserId)
-	end, { var1, localUserId })
+	return ReactModule.useMemo(function() --[[ Line: 74 ]]
+		-- upvalues: UseSignalStateResult (copy), GetFriendsChatHeaderPropsModule (upval), LocalUserId (copy)
+		return if UseSignalStateResult == nil then nil else GetFriendsChatHeaderPropsModule(UseSignalStateResult, LocalUserId)
+	end, { UseSignalStateResult, LocalUserId })
 end

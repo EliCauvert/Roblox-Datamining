@@ -1,19 +1,19 @@
-﻿local parent = script.Parent.Parent.Parent
-local reactModule = require(parent.React)
-local UIBloxModule = require(parent.UIBlox)
-local images = UIBloxModule.App.ImageSet.Images
-local iconButton = UIBloxModule.App.Button.IconButton
-local iconSize = UIBloxModule.App.ImageSet.Enum.IconSize
+﻿local Parent = script.Parent.Parent.Parent
+local ReactModule = require(Parent.React)
+local UIBloxModule = require(Parent.UIBlox)
+local Images = UIBloxModule.App.ImageSet.Images
+local IconButton = UIBloxModule.App.Button.IconButton
+local IconSize = UIBloxModule.App.ImageSet.Enum.IconSize
 
-return function(p1)
-	-- upvalues: reactModule (ref), iconButton (ref), iconSize (ref), images (ref)
-	return function()
-		-- upvalues: reactModule (copy), iconButton (copy), iconSize (copy), images (copy), p1 (ref)
-		return reactModule.createElement(iconButton, {
+return function(OnActivated) --[[ Line: 10 | Named "makeCloseButton" ]]
+	-- upvalues: ReactModule (copy), IconButton (copy), IconSize (copy), Images (copy)
+	return function() --[[ Line: 11 ]]
+		-- upvalues: ReactModule (upval), IconButton (upval), IconSize (upval), Images (upval), OnActivated (copy)
+		return ReactModule.createElement(IconButton, {
 			size = UDim2.fromOffset(0, 0),
-			iconSize = iconSize.Medium,
-			icon = images["icons/navigation/close"],
-			onActivated = p1
+			iconSize = IconSize.Medium,
+			icon = Images["icons/navigation/close"],
+			onActivated = OnActivated
 		})
 	end
 end

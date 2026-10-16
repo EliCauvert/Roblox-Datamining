@@ -1,94 +1,90 @@
-﻿local serverDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
-local parent = serverDrivenUi.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local signalsReactModule = require(parent.SignalsReact)
-local roactUtilsModule = require(parent.RoactUtils)
-local cryoModule = require(parent.Cryo)
-local game = require(parent.DataHydration).Game
-local _ = require(parent.SduiCoreSystem)
-local playerFeedbackModule = require(parent.PlayerFeedback)
-local centralOverlayModule = require(parent.CentralOverlay)
-local robloxAppEnumsModule = require(parent.RobloxAppEnums)
-local sharedFlagsModule = require(parent.SharedFlags)
-local useTokens = foundationModule.Hooks.useTokens
-local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
-local gamePlayerFeedbackPrompt = playerFeedbackModule.GamePlayerFeedbackPrompt
-local setCentralOverlay = centralOverlayModule.Actions.SetCentralOverlay
-local centralOverlayType = robloxAppEnumsModule.CentralOverlayType
-local sduiAssociatedItemsRowModule = require(serverDrivenUi.Content.SduiAssociatedItemsRow)
-local getFFlagEdpPlayerFeedbackEnabled = sharedFlagsModule.GetFFlagEdpPlayerFeedbackEnabled
+﻿local ServerDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
+local Parent = ServerDrivenUi.Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local CryoModule = require(Parent.Cryo)
+local Game = require(Parent.DataHydration).Game
+local _ = require(Parent.SduiCoreSystem)
+local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local GamePlayerFeedbackPrompt = require(Parent.PlayerFeedback).GamePlayerFeedbackPrompt
+local SetCentralOverlayFunction = require(Parent.CentralOverlay).Actions.SetCentralOverlay
+local CentralOverlayType = require(Parent.RobloxAppEnums).CentralOverlayType
+local SduiAssociatedItemsRowModule = require(ServerDrivenUi.Content.SduiAssociatedItemsRow)
+local GetFFlagEdpPlayerFeedbackEnabledFunction = require(Parent.SharedFlags).GetFFlagEdpPlayerFeedbackEnabled
 
-return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), useDispatch (ref), game (ref), signalsReactModule (ref), reactModule (ref), getFFlagEdpPlayerFeedbackEnabled (ref), setCentralOverlay (ref), centralOverlayType (ref), sduiAssociatedItemsRowModule (ref), cryoModule (ref), gamePlayerFeedbackPrompt (ref)
-	local layoutOrder = p1.layoutOrder
-	local var1 = useTokens()
-	local var2 = useDispatch()
-	local universeId = p1.universeId
-	local var3 = signalsReactModule.useSignalState(game.getGameInfoStore(false).getAndFetchGameInfo(universeId).data)
-	local rootPlaceId = var3 and var3.rootPlaceId
-	local var4 = signalsReactModule.useSignalState(game.getVotesStore(false).getAndFetchUserVote(universeId).data)
-	local var5 = signalsReactModule.useSignalState(reactModule.useCallback(function(p2)
-		-- upvalues: rootPlaceId (ref), game (copy)
-		return if rootPlaceId then game.getUserVoteFeedbackMetadataStore(p2).getUserVoteFeedbackMetadata(rootPlaceId).data(p2) else nil
-	end, { rootPlaceId }))
-	local var6 = reactModule.useCallback(function()
-		-- upvalues: rootPlaceId (ref), game (copy)
-		if rootPlaceId then
-			game.getUserVoteFeedbackMetadataStore(false).clearItem(rootPlaceId)
+return ReactModule.memo(function(p1) --[[ Line: 35 | Named "ExperienceAssociatedItemsRow" ]]
+	-- upvalues: UseTokensFunction (copy), UseDispatchFunction (copy), Game (copy), SignalsReactModule (copy), ReactModule (copy), GetFFlagEdpPlayerFeedbackEnabledFunction (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy), SduiAssociatedItemsRowModule (copy), CryoModule (copy), GamePlayerFeedbackPrompt (copy)
+	local LayoutOrder = p1.layoutOrder
+	local UseTokensResult = UseTokensFunction()
+	local UseDispatchResult = UseDispatchFunction()
+	local UniverseId = p1.universeId
+	local UseSignalStateResult = SignalsReactModule.useSignalState(Game.getGameInfoStore(false).getAndFetchGameInfo(UniverseId).data)
+	local RootPlaceId = UseSignalStateResult and UseSignalStateResult.rootPlaceId
+	local UseSignalStateResult1 = SignalsReactModule.useSignalState(Game.getVotesStore(false).getAndFetchUserVote(UniverseId).data)
+	local UseSignalStateResult11 = SignalsReactModule.useSignalState((ReactModule.useCallback(function(p2) --[[ Line: 49 ]]
+		-- upvalues: RootPlaceId (copy), Game (upval)
+		return if RootPlaceId then Game.getUserVoteFeedbackMetadataStore(p2).getUserVoteFeedbackMetadata(RootPlaceId).data(p2) else nil
+	end, { RootPlaceId })))
+	local CanSubmitReview = GetFFlagEdpPlayerFeedbackEnabledFunction() and (UseSignalStateResult11 and UseSignalStateResult11.canSubmitReview)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 66 ]]
+		-- upvalues: RootPlaceId (copy), Game (upval)
+		if RootPlaceId then
+			Game.getUserVoteFeedbackMetadataStore(false).clearItem(RootPlaceId)
 		end
-	end, { rootPlaceId })
+	end, { RootPlaceId })
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 74 ]]
+		-- upvalues: UseSignalStateResult11 (copy), UseSignalStateResult1 (copy), UseDispatchResult (copy), SetCentralOverlayFunction (upval), CentralOverlayType (upval), UniverseId (copy), UseResult (copy)
+		if UseSignalStateResult11 and UseSignalStateResult11.canSubmitReview and UseSignalStateResult1 and (UseSignalStateResult1.userVote == true or UseSignalStateResult1.userVote == false) then
+			local config = { [true] = "Upvote", [false] = "Downvote" }
+			local Category = nil
+			
+			for _, category in UseSignalStateResult11.categories do
+				if category.type == config[UseSignalStateResult1.userVote] then
+					Category = category
+					break
+				end
+			end
+			UseDispatchResult(SetCentralOverlayFunction(CentralOverlayType.GamePlayerFeedbackForm, {
+				universeId = UniverseId,
+				playerFeedbackMetadata = {
+					rootPlaceId = UseSignalStateResult11.rootPlaceId,
+					canSubmitReview = UseSignalStateResult11.canSubmitReview,
+					canSubmitComment = UseSignalStateResult11.canSubmitComment,
+					categoryType = config[UseSignalStateResult1.userVote],
+					category = Category,
+					comment = UseSignalStateResult11.comment,
+					metadata = UseSignalStateResult11.metadata
+				},
+				onSubmitted = UseResult
+			}))
+		end
+	end, {
+		UseSignalStateResult11,
+		UniverseId,
+		UseDispatchResult,
+		UseSignalStateResult1,
+		UseResult
+	})
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
-		LayoutOrder = layoutOrder
+		LayoutOrder = LayoutOrder
 	}, {
-		MinHeightConstraint = reactModule.createElement("UISizeConstraint", { MinSize = Vector2.new(0, var1.Size.Size_700) }),
-		Layout = reactModule.createElement("UIListLayout", {
+		MinHeightConstraint = ReactModule.createElement("UISizeConstraint", { MinSize = Vector2.new(0, UseTokensResult.Size.Size_700) }),
+		Layout = ReactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
 			SortOrder = Enum.SortOrder.LayoutOrder,
-			Padding = UDim.new(0, var1.Padding.Small)
+			Padding = UDim.new(0, UseTokensResult.Padding.Small)
 		}),
-		ChipsRow = reactModule.createElement(sduiAssociatedItemsRowModule, cryoModule.Dictionary.join(p1, { universeId = nil, layoutOrder = 1 })),
-		FeedbackPrompt = if getFFlagEdpPlayerFeedbackEnabled() and (var5 and var5.canSubmitReview) and rootPlaceId then reactModule.createElement(gamePlayerFeedbackPrompt, {
+		ChipsRow = ReactModule.createElement(SduiAssociatedItemsRowModule, CryoModule.Dictionary.join(p1, { universeId = nil, layoutOrder = 1 })),
+		FeedbackPrompt = if CanSubmitReview and RootPlaceId then ReactModule.createElement(GamePlayerFeedbackPrompt, {
 			LayoutOrder = 2,
-			placeId = rootPlaceId,
-			onButtonClick = reactModule.useCallback(function()
-				-- upvalues: var5 (ref), var4 (ref), var2 (ref), setCentralOverlay (copy), centralOverlayType (copy), universeId (ref), var6 (ref)
-				if var5 and var5.canSubmitReview and var4 and (var4.userVote == true or var4.userVote == false) then
-					local t = { [true] = "Upvote", [false] = "Downvote" }
-					local var7 = nil
-					
-					for i, v in var5.categories do
-						if v.type == t[var4.userVote] then
-							var7 = v
-							break
-						end
-					end
-					var2(setCentralOverlay(centralOverlayType.GamePlayerFeedbackForm, {
-						universeId = universeId,
-						playerFeedbackMetadata = {
-							rootPlaceId = var5.rootPlaceId,
-							canSubmitReview = var5.canSubmitReview,
-							canSubmitComment = var5.canSubmitComment,
-							categoryType = t[var4.userVote],
-							category = var7,
-							comment = var5.comment,
-							metadata = var5.metadata
-						},
-						onSubmitted = var6
-					}))
-				end
-			end, {
-				var5,
-				universeId,
-				var2,
-				var4,
-				var6
-			}),
-			onDimiss = var6
+			placeId = RootPlaceId,
+			onButtonClick = UseResult1,
+			onDimiss = UseResult
 		}) else nil
 	})
 end)

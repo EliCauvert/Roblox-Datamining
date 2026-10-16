@@ -1,35 +1,34 @@
-﻿local reactModule = require(script:FindFirstAncestor("AppChat").Parent.React)
+﻿local ReactModule = require(script:FindFirstAncestor("AppChat").Parent.React)
 
-local function _(p1, p2, p3)
-	return p2 or (p3 ~= nil and p3:IsDescendantOf(p1))
+local function _(Ancestor, p1, Object) --[[ Line: 15 | Named "isSelectionWithin" ]]
+	return p1 or Object ~= nil and Object:IsDescendantOf(Ancestor)
 end
 
 return {
-	useDescendantSelected = function()
-		-- upvalues: reactModule (ref)
-		local var1, var2 = reactModule.useState(nil)
-		local var3, var4 = reactModule.useState(false)
-		local var5 = reactModule.useCallback(function(p1)
-			-- upvalues: var2 (ref)
-			var2(p1)
+	useDescendantSelected = function() --[[ Line: 19 ]]
+		-- upvalues: ReactModule (copy)
+		local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+		local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
+		local UseResult = ReactModule.useCallback(function(p1) --[[ Line: 22 ]]
+			-- upvalues: UseStateResult2 (copy)
+			UseStateResult2(p1)
 		end, {})
-		reactModule.useEffect(function()
-			-- upvalues: var4 (ref), var1 (ref)
-			var4(false)
+		ReactModule.useEffect(function() --[[ Line: 26 ]]
+			-- upvalues: UseStateResult2_1 (copy), UseStateResult (copy)
+			UseStateResult2_1(false)
 			
-			if var1 then
-				local selectionChangedConnection = var1.SelectionChanged:Connect(function(p1, _, p2)
-					-- upvalues: var4 (copy), var1 (copy)
-					var4(p1 or (p2 ~= nil and p2:IsDescendantOf(var1)))
-				end)
-				
-				return function()
-					-- upvalues: selectionChangedConnection (ref)
-					selectionChangedConnection:Disconnect()
-				end
+			if not UseStateResult then return end
+			local SelectionChangedConnection = UseStateResult.SelectionChanged:Connect(function(p1, _, Object) --[[ Line: 33 ]]
+				-- upvalues: UseStateResult2_1 (upval), UseStateResult (upval)
+				UseStateResult2_1(p1 or Object ~= nil and Object:IsDescendantOf(UseStateResult))
+			end)
+			
+			return function() --[[ Line: 38 ]]
+				-- upvalues: SelectionChangedConnection (copy)
+				SelectionChangedConnection:Disconnect()
 			end
-		end, { var1 })
+		end, { UseStateResult })
 		
-		return var3, var5
+		return UseStateResult1, UseResult
 	end
 }

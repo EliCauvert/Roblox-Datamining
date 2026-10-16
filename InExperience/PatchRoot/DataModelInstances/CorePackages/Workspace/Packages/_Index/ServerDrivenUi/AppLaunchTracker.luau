@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.AppLaunchTracker.AppLaunchTracker)
+﻿return (require(script.Parent.Parent.Parent._Index.AppLaunchTracker.AppLaunchTracker))

@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.AuthenticationStatus.AuthenticationStatus)
+﻿return (require(script.Parent.Parent.Parent._Index.AuthenticationStatus.AuthenticationStatus))

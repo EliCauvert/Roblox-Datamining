@@ -1,14 +1,14 @@
-﻿local sduiSharedUtilities = script:FindFirstAncestor("SduiSharedUtilities")
-local parent = sduiSharedUtilities.Parent
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local textSizeModule = require(parent.TextSize)
-local getPreferredTextSizeLineBudgetModule = require(sduiSharedUtilities.getPreferredTextSizeLineBudget)
+﻿local SduiSharedUtilities = script:FindFirstAncestor("SduiSharedUtilities")
+local Parent = SduiSharedUtilities.Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local TextSizeModule = require(Parent.TextSize)
+local GetPreferredTextSizeLineBudgetModule = require(SduiSharedUtilities.getPreferredTextSizeLineBudget)
 
-return function(p1)
-	-- upvalues: reactModule (ref), textSizeModule (ref), getPreferredTextSizeLineBudgetModule (ref), signalsReactModule (ref)
-	return signalsReactModule.useSignalState(reactModule.useCallback(function(p2)
-		-- upvalues: textSizeModule (copy), getPreferredTextSizeLineBudgetModule (copy), p1 (ref)
-		return getPreferredTextSizeLineBudgetModule(textSizeModule.getTextSizeStore(p2).getTextSizeOffset(p2), p1)
-	end, { p1 }))
+return function(p1) --[[ Line: 15 | Named "usePreferredTextSizeLineBudget" ]]
+	-- upvalues: ReactModule (copy), TextSizeModule (copy), GetPreferredTextSizeLineBudgetModule (copy), SignalsReactModule (copy)
+	return SignalsReactModule.useSignalState((ReactModule.useCallback(function(p2) --[[ Line: 16 ]]
+		-- upvalues: TextSizeModule (upval), GetPreferredTextSizeLineBudgetModule (upval), p1 (copy)
+		return GetPreferredTextSizeLineBudgetModule(TextSizeModule.getTextSizeStore(p2).getTextSizeOffset(p2), p1)
+	end, { p1 })))
 end

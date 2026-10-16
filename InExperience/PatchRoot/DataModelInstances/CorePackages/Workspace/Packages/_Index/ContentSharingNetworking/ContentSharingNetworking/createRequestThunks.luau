@@ -1,26 +1,26 @@
-﻿local parent = script.Parent
-local networkRequests = parent.networkRequests
-local fFlagContentFeedEnableReactions = require(parent.Parent.SharedFlags).FFlagContentFeedEnableReactions
-local createAddReactionModule = require(networkRequests.createAddReaction)
-local createCheckMomentsEligibilityModule = require(networkRequests.createCheckMomentsEligibility)
-local createDeletePostModule = require(networkRequests.createDeletePost)
-local createGetPostsByCursorModule = require(networkRequests.createGetPostsByCursor)
-local createGetPostsByPostIdModule = require(networkRequests.createGetPostsByPostId)
-local createGetPostsByUserIdModule = require(networkRequests.createGetPostsByUserId)
-local createGetThumbnailByAssetIdModule = require(networkRequests.createGetThumbnailByAssetId)
-local createRemoveReactionModule = require(networkRequests.createRemoveReaction)
+﻿local Parent = script.Parent
+local NetworkRequests = Parent.networkRequests
+local FFlagContentFeedEnableReactions = require(Parent.Parent.SharedFlags).FFlagContentFeedEnableReactions
+local CreateAddReactionModule = require(NetworkRequests.createAddReaction)
+local CreateCheckMomentsEligibilityModule = require(NetworkRequests.createCheckMomentsEligibility)
+local CreateDeletePostModule = require(NetworkRequests.createDeletePost)
+local CreateGetPostsByCursorModule = require(NetworkRequests.createGetPostsByCursor)
+local CreateGetPostsByPostIdModule = require(NetworkRequests.createGetPostsByPostId)
+local CreateGetPostsByUserIdModule = require(NetworkRequests.createGetPostsByUserId)
+local CreateGetThumbnailByAssetIdModule = require(NetworkRequests.createGetThumbnailByAssetId)
+local CreateRemoveReactionModule = require(NetworkRequests.createRemoveReaction)
 
-return function(p1)
-	-- upvalues: fFlagContentFeedEnableReactions (ref), createAddReactionModule (ref), createCheckMomentsEligibilityModule (ref), createDeletePostModule (ref), networkRequests (ref), createGetPostsByCursorModule (ref), createGetPostsByPostIdModule (ref), createGetPostsByUserIdModule (ref), createGetThumbnailByAssetIdModule (ref), createRemoveReactionModule (ref)
+return function(p1) --[[ Line: 16 ]]
+	-- upvalues: FFlagContentFeedEnableReactions (copy), CreateAddReactionModule (copy), CreateCheckMomentsEligibilityModule (copy), CreateDeletePostModule (copy), NetworkRequests (copy), CreateGetPostsByCursorModule (copy), CreateGetPostsByPostIdModule (copy), CreateGetPostsByUserIdModule (copy), CreateGetThumbnailByAssetIdModule (copy), CreateRemoveReactionModule (copy)
 	return {
-		AddReaction = if fFlagContentFeedEnableReactions then createAddReactionModule(p1) else nil,
-		CheckMomentsEligibility = createCheckMomentsEligibilityModule(p1),
-		DeletePost = createDeletePostModule(p1),
-		GetActiveCategories = require(networkRequests.createGetActiveCategories)(p1),
-		GetPostsByCursor = createGetPostsByCursorModule(p1),
-		GetPostsByPostId = createGetPostsByPostIdModule(p1),
-		GetPostsByUserId = createGetPostsByUserIdModule(p1),
-		GetThumbnailByAssetId = createGetThumbnailByAssetIdModule(p1),
-		RemoveReaction = if fFlagContentFeedEnableReactions then createRemoveReactionModule(p1) else nil
+		AddReaction = if FFlagContentFeedEnableReactions then CreateAddReactionModule(p1) else nil,
+		CheckMomentsEligibility = CreateCheckMomentsEligibilityModule(p1),
+		DeletePost = CreateDeletePostModule(p1),
+		GetActiveCategories = require(NetworkRequests.createGetActiveCategories)(p1),
+		GetPostsByCursor = CreateGetPostsByCursorModule(p1),
+		GetPostsByPostId = CreateGetPostsByPostIdModule(p1),
+		GetPostsByUserId = CreateGetPostsByUserIdModule(p1),
+		GetThumbnailByAssetId = CreateGetThumbnailByAssetIdModule(p1),
+		RemoveReaction = if FFlagContentFeedEnableReactions then CreateRemoveReactionModule(p1) else nil
 	}
 end

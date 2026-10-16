@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent.Parent._Index.Moments.Moments.Stores.GetMomentsStore.createUserMomentsFeedSource)
+﻿return (require(script.Parent.Parent.Parent.Parent._Index.Moments.Moments.Stores.GetMomentsStore.createUserMomentsFeedSource))

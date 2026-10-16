@@ -1,90 +1,93 @@
-﻿local parent = script.Parent.Parent.Parent.Parent
-local reactModule = require(parent.React)
-local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-local inputHandlersModule = require(parent.InputHandlers)
-local useFocusRoot = focusNavigationUtilsModule.useFocusRoot
-local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
-local focusNavigationEventNameEnum = focusNavigationUtilsModule.FocusNavigationEventNameEnum
-local useDefaultFocusBehavior = require(parent.ReactFocusNavigation).useDefaultFocusBehavior
+﻿local Parent = script.Parent.Parent.Parent.Parent
+local ReactModule = require(Parent.React)
+local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
+local InputHandlersModule = require(Parent.InputHandlers)
+local UseFocusRootFunction = FocusNavigationUtilsModule.useFocusRoot
+local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
+local FocusNavigationEventNameEnum = FocusNavigationUtilsModule.FocusNavigationEventNameEnum
+local UseDefaultFocusBehaviorFunction = require(Parent.ReactFocusNavigation).useDefaultFocusBehavior
 
-local function _(p1, p2)
-	return function(p3)
-		-- upvalues: p1 (ref), p2 (ref)
+local function _(p1, p2) --[[ Line: 13 | Named "mergeRefs" ]]
+	return function(Current) --[[ Line: 14 ]]
+		-- upvalues: p1 (copy), p2 (copy)
 		if type(p1) == "function" then
-			p1(p3)
+			p1(Current)
 		elseif p1 ~= nil then
-			p1.current = p3
+			p1.current = Current
 		end
 		if type(p2) == "function" then
-			p2(p3)
+			p2(Current)
 			
 			return
-		elseif p2 ~= nil then
-			p2.current = p3
+		end
+		if p2 ~= nil then
+			p2.current = Current
 		end
 	end
 end
 
-return function(p1, p2)
-	-- upvalues: useDefaultFocusBehavior (ref), useFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), reactModule (ref)
-	local var1, var2 = useDefaultFocusBehavior()
-	local var3 = useFocusRoot({
+return function(p1, Callback) --[[ Line: 31 | Named "useFocusNavigationRefs" ]]
+	-- upvalues: UseDefaultFocusBehaviorFunction (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), ReactModule (copy)
+	local UseDefaultFocusBehaviorResult, UseDefaultFocusBehaviorResult2 = UseDefaultFocusBehaviorFunction()
+	local UseFocusRootResult = UseFocusRootFunction({
 		isAutoFocusRoot = true,
-		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.CentralOverlay,
+		surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.CentralOverlay,
 		customEventHandlers = {
-			[focusNavigationEventNameEnum.NavigateBack] = { handler = inputHandlersModule.onRelease(p1) }
+			[FocusNavigationEventNameEnum.NavigateBack] = { handler = InputHandlersModule.onRelease(p1) }
 		}
 	})
-	local var4 = reactModule.useMemo(function()
-		-- upvalues: var3 (ref), var2 (ref)
-		return function(p3)
-			-- upvalues: var3 (ref), var2 (ref)
-			if type(var3) == "function" then
-				var3(p3)
-			elseif var3 ~= nil then
-				var3.current = p3
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 44 ]]
+		-- upvalues: UseFocusRootResult (copy), UseDefaultFocusBehaviorResult2 (copy)
+		return function(Current) --[[ Line: 14 ]]
+			-- upvalues: UseFocusRootResult (copy), UseDefaultFocusBehaviorResult2 (copy)
+			if type(UseFocusRootResult) == "function" then
+				UseFocusRootResult(Current)
+			elseif UseFocusRootResult ~= nil then
+				UseFocusRootResult.current = Current
 			end
-			if type(var2) == "function" then
-				var2(p3)
+			if type(UseDefaultFocusBehaviorResult2) == "function" then
+				UseDefaultFocusBehaviorResult2(Current)
 				
 				return
-			elseif var2 ~= nil then
-				var2.current = p3
+			end
+			if UseDefaultFocusBehaviorResult2 ~= nil then
+				UseDefaultFocusBehaviorResult2.current = Current
 			end
 		end
-	end, { var3, var2 })
-	local var5 = reactModule.useRef(nil)
-	local var6 = reactModule.useMemo(function()
-		-- upvalues: var5 (ref), var1 (ref)
-		return function(p3)
-			-- upvalues: var5 (ref), var1 (ref)
-			if type(var5) == "function" then
-				var5(p3)
-			elseif var5 ~= nil then
-				var5.current = p3
+	end, { UseFocusRootResult, UseDefaultFocusBehaviorResult2 })
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 50 ]]
+		-- upvalues: UseRefResult (copy), UseDefaultFocusBehaviorResult (copy)
+		return function(Current) --[[ Line: 14 ]]
+			-- upvalues: UseRefResult (copy), UseDefaultFocusBehaviorResult (copy)
+			if type(UseRefResult) == "function" then
+				UseRefResult(Current)
+			elseif UseRefResult ~= nil then
+				UseRefResult.current = Current
 			end
-			if type(var1) == "function" then
-				var1(p3)
+			if type(UseDefaultFocusBehaviorResult) == "function" then
+				UseDefaultFocusBehaviorResult(Current)
 				
 				return
-			elseif var1 ~= nil then
-				var1.current = p3
+			end
+			if UseDefaultFocusBehaviorResult ~= nil then
+				UseDefaultFocusBehaviorResult.current = Current
 			end
 		end
-	end, { var1 })
-	local var7 = reactModule.useRef(false)
-	reactModule.useEffect(function()
-		-- upvalues: var5 (ref), var7 (ref), p2 (ref)
-		local current = var5.current
+	end, { UseDefaultFocusBehaviorResult })
+	local UseRefResult1 = ReactModule.useRef(false)
+	ReactModule.useEffect(function() --[[ Line: 56 ]]
+		-- upvalues: UseRefResult (copy), UseRefResult1 (copy), Callback (copy)
+		local Current = UseRefResult.current
 		
-		if current and not var7.current then
-			var7.current = true
+		if Current and not UseRefResult1.current then
+			UseRefResult1.current = true
 			
-			if p2 then
-				p2(current)
+			if Callback then
+				Callback(Current)
 			end
 		end
-	end, { var5.current, p2 })
+	end, { UseRefResult.current, Callback })
 	
-	return var4, var6
+	return UseMemoResult, UseMemoResult1
 end

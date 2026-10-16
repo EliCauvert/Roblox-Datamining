@@ -1,94 +1,94 @@
-﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
-local parent = momentsCreation.Parent
-local cryoModule = require(parent.Cryo)
-local foundationModule = require(parent.Foundation)
-local momentsCommonModule = require(parent.MomentsCommon)
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local fFlagMomentsComments = require(parent.SharedFlags).FFlagMomentsComments
-local button = foundationModule.Button
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local inputPlacement = foundationModule.Enums.InputPlacement
-local inputSize = foundationModule.Enums.InputSize
-local text = foundationModule.Text
-local toggle = foundationModule.Toggle
-local view = foundationModule.View
-local useCallback = reactModule.useCallback
-local useDeviceInsets = momentsCommonModule.Hooks.useDeviceInsets
-local useSignalState = signalsReactModule.useSignalState
-local useTokens = foundationModule.Hooks.useTokens
-local getCreationFlowStoreModule = require(momentsCreation.Stores.GetCreationFlowStore)
-local fireAnalyticsEventModule = require(momentsCreation.Analytics.fireAnalyticsEvent)
-local makeCreationEventFieldsModule = require(momentsCreation.Analytics.makeCreationEventFields)
-local generatedTextFeedbackContainerModule = require(momentsCreation.Components.GeneratedTextFeedback.GeneratedTextFeedbackContainer)
-local constantsModule = require(momentsCreation.Constants)
-local useCreationFlowStringsModule = require(momentsCreation.Hooks.useCreationFlowStrings)
-local eventNames = momentsCommonModule.Analytics.EventNames
-local sessionManager = momentsCommonModule.Analytics.SessionManager
-local funnelEventNames = momentsCommonModule.Analytics.FunnelEventNames
-local fFlagMomentTextGenerationFilteredSignal = momentsCommonModule.Flags.FFlagMomentTextGenerationFilteredSignal
-local getFFlagMomentsUseUploadPostAsync = momentsCommonModule.Flags.GetFFlagMomentsUseUploadPostAsync
-local fFlagMomentsCommentsCreatorControlModule = require(momentsCreation.Flags.FFlagMomentsCommentsCreatorControl)
+﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
+local Parent = MomentsCreation.Parent
+local CryoModule = require(Parent.Cryo)
+local FoundationModule = require(Parent.Foundation)
+local MomentsCommonModule = require(Parent.MomentsCommon)
+local ReactModule = require(Parent.React)
+local FFlagMomentsComments = require(Parent.SharedFlags).FFlagMomentsComments
+local Button = FoundationModule.Button
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local InputPlacement = FoundationModule.Enums.InputPlacement
+local InputSize = FoundationModule.Enums.InputSize
+local Text = FoundationModule.Text
+local Toggle = FoundationModule.Toggle
+local View = FoundationModule.View
+local UseCallbackFunction = ReactModule.useCallback
+local UseDeviceInsetsFunction = MomentsCommonModule.Hooks.useDeviceInsets
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local GetCreationFlowStoreModule = require(MomentsCreation.Stores.GetCreationFlowStore)
+local FireAnalyticsEventModule = require(MomentsCreation.Analytics.fireAnalyticsEvent)
+local MakeCreationEventFieldsModule = require(MomentsCreation.Analytics.makeCreationEventFields)
+local GeneratedTextFeedbackContainerModule = require(MomentsCreation.Components.GeneratedTextFeedback.GeneratedTextFeedbackContainer)
+local ConstantsModule = require(MomentsCreation.Constants)
+local UseCreationFlowStringsModule = require(MomentsCreation.Hooks.useCreationFlowStrings)
+local EventNames = MomentsCommonModule.Analytics.EventNames
+local SessionManager = MomentsCommonModule.Analytics.SessionManager
+local FunnelEventNames = MomentsCommonModule.Analytics.FunnelEventNames
+local FFlagMomentTextGenerationFilteredSignal = MomentsCommonModule.Flags.FFlagMomentTextGenerationFilteredSignal
+local GetFFlagMomentsUseUploadPostAsyncFunction = MomentsCommonModule.Flags.GetFFlagMomentsUseUploadPostAsync
+local FFlagMomentsCommentsCreatorControlModule = require(MomentsCreation.Flags.FFlagMomentsCommentsCreatorControl)
 
-local function AllowCommentsToggle(p1)
-	-- upvalues: useCreationFlowStringsModule (ref), getCreationFlowStoreModule (ref), useSignalState (ref), useCallback (ref), fFlagMomentsComments (ref), sessionManager (ref), funnelEventNames (ref), fireAnalyticsEventModule (ref), eventNames (ref), cryoModule (ref), makeCreationEventFieldsModule (ref), reactModule (ref), toggle (ref), inputPlacement (ref), inputSize (ref)
-	local var1 = getCreationFlowStoreModule(false)
+local function AllowCommentsToggle(p1) --[[ Line: 53 ]]
+	-- upvalues: UseCreationFlowStringsModule (copy), GetCreationFlowStoreModule (copy), UseSignalStateFunction (copy), UseCallbackFunction (copy), FFlagMomentsComments (copy), SessionManager (copy), FunnelEventNames (copy), FireAnalyticsEventModule (copy), EventNames (copy), CryoModule (copy), MakeCreationEventFieldsModule (copy), ReactModule (copy), Toggle (copy), InputPlacement (copy), InputSize (copy)
+	local UseCreationFlowStringsModuleResult = UseCreationFlowStringsModule()
+	local CreationFlowStoreModule = GetCreationFlowStoreModule(false)
 	
-	return reactModule.createElement(toggle, {
+	return ReactModule.createElement(Toggle, {
 		testId = "moments-allow-comments-toggle",
-		isChecked = useSignalState(var1.getCommentsEnabled),
-		label = useCreationFlowStringsModule().PublishingAllowComments,
+		isChecked = UseSignalStateFunction(CreationFlowStoreModule.getCommentsEnabled),
+		label = UseCreationFlowStringsModuleResult.PublishingAllowComments,
 		LayoutOrder = p1.layoutOrder,
-		onActivated = useCallback(function(p2)
-			-- upvalues: var1 (ref), fFlagMomentsComments (copy), sessionManager (copy), funnelEventNames (copy), fireAnalyticsEventModule (copy), eventNames (copy), cryoModule (copy), makeCreationEventFieldsModule (copy)
-			var1.updateCommentsEnabled(p2)
+		onActivated = UseCallbackFunction(function(p2) --[[ Line: 58 ]]
+			-- upvalues: CreationFlowStoreModule (copy), FFlagMomentsComments (upval), SessionManager (upval), FunnelEventNames (upval), FireAnalyticsEventModule (upval), EventNames (upval), CryoModule (upval), MakeCreationEventFieldsModule (upval)
+			CreationFlowStoreModule.updateCommentsEnabled(p2)
 			
-			if fFlagMomentsComments then
-				fireAnalyticsEventModule(eventNames.MomentCommentsSettingToggled, cryoModule.Dictionary.join(makeCreationEventFieldsModule.makeCreationBaseFields(sessionManager.getSessionId(funnelEventNames.FunnelTypes.CreationFlow)), { commentsEnabled = tostring(p2) }))
+			if FFlagMomentsComments then
+				FireAnalyticsEventModule(EventNames.MomentCommentsSettingToggled, CryoModule.Dictionary.join(MakeCreationEventFieldsModule.makeCreationBaseFields((SessionManager.getSessionId(FunnelEventNames.FunnelTypes.CreationFlow))), { commentsEnabled = tostring(p2) }))
 			end
-		end, { var1.updateCommentsEnabled }),
-		placement = inputPlacement.End,
-		size = inputSize.Medium
+		end, { CreationFlowStoreModule.updateCommentsEnabled }),
+		placement = InputPlacement.End,
+		size = InputSize.Medium
 	})
 end
 
-return function(p1)
-	-- upvalues: useDeviceInsets (ref), useTokens (ref), useCreationFlowStringsModule (ref), getCreationFlowStoreModule (ref), reactModule (ref), useSignalState (ref), fFlagMomentsCommentsCreatorControlModule (ref), getFFlagMomentsUseUploadPostAsync (ref), useCallback (ref), sessionManager (ref), funnelEventNames (ref), fireAnalyticsEventModule (ref), eventNames (ref), cryoModule (ref), makeCreationEventFieldsModule (ref), view (ref), constantsModule (ref), AllowCommentsToggle (ref), fFlagMomentTextGenerationFilteredSignal (ref), generatedTextFeedbackContainerModule (ref), button (ref), foundationModule (ref), inputSize (ref), buttonVariant (ref), text (ref)
-	local var1 = useDeviceInsets()
-	local var2 = useTokens()
-	local var3 = useCreationFlowStringsModule()
-	local var4 = getCreationFlowStoreModule(false)
-	local var5 = reactModule.useRef(nil)
-	local publishingCtaSecondary = var3.PublishingCtaSecondary
-	local var6 = useSignalState(var4.getDescription)
-	reactModule.useEffect(function()
-		-- upvalues: var5 (ref), var6 (ref)
-		local current = var5.current
+return function(p1) --[[ Line: 82 ]]
+	-- upvalues: UseDeviceInsetsFunction (copy), UseTokensFunction (copy), UseCreationFlowStringsModule (copy), GetCreationFlowStoreModule (copy), ReactModule (copy), UseSignalStateFunction (copy), FFlagMomentsCommentsCreatorControlModule (copy), GetFFlagMomentsUseUploadPostAsyncFunction (copy), UseCallbackFunction (copy), SessionManager (copy), FunnelEventNames (copy), FireAnalyticsEventModule (copy), EventNames (copy), CryoModule (copy), MakeCreationEventFieldsModule (copy), View (copy), ConstantsModule (copy), AllowCommentsToggle (copy), FFlagMomentTextGenerationFilteredSignal (copy), GeneratedTextFeedbackContainerModule (copy), Button (copy), FoundationModule (copy), InputSize (copy), ButtonVariant (copy), Text (copy)
+	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
+	local UseTokensResult = UseTokensFunction()
+	local UseCreationFlowStringsModuleResult = UseCreationFlowStringsModule()
+	local CreationFlowStoreModule = GetCreationFlowStoreModule(false)
+	local UseRefResult = ReactModule.useRef(nil)
+	local PublishingCtaSecondary = UseCreationFlowStringsModuleResult.PublishingCtaSecondary
+	local UseSignalStateResult = UseSignalStateFunction(CreationFlowStoreModule.getDescription)
+	ReactModule.useEffect(function() --[[ Line: 95 ]]
+		-- upvalues: UseRefResult (copy), UseSignalStateResult (copy)
+		local Current = UseRefResult.current
 		
-		if current ~= nil then
-			current.Text = var6
+		if Current ~= nil then
+			Current.Text = UseSignalStateResult
 		end
-	end, { var6 })
-	local var7 = fFlagMomentsCommentsCreatorControlModule and getFFlagMomentsUseUploadPostAsync()
+	end, { UseSignalStateResult })
+	local FFlagMomentsUseUploadPostAsync = FFlagMomentsCommentsCreatorControlModule and GetFFlagMomentsUseUploadPostAsyncFunction()
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "align-x-center size-full-0 auto-y",
 		LayoutOrder = p1.layoutOrder,
 		padding = {
-			top = UDim.new(0, var2.Padding.Large),
-			bottom = UDim.new(0, math.max(var1.bottom, var2.Padding.Large)),
-			left = UDim.new(0, math.max(var1.left, var2.Padding.XLarge)),
-			right = UDim.new(0, math.max(var1.right, var2.Padding.XLarge))
+			top = UDim.new(0, UseTokensResult.Padding.Large),
+			bottom = UDim.new(0, (math.max(UseDeviceInsetsResult.bottom, UseTokensResult.Padding.Large))),
+			left = UDim.new(0, (math.max(UseDeviceInsetsResult.left, UseTokensResult.Padding.XLarge))),
+			right = UDim.new(0, (math.max(UseDeviceInsetsResult.right, UseTokensResult.Padding.XLarge)))
 		}
 	}, {
-		SizeConstraint = reactModule.createElement(view, {
+		SizeConstraint = ReactModule.createElement(View, {
 			tag = "col align-x-center gap-large size-full-0 auto-y",
-			sizeConstraint = { MaxSize = constantsModule.BottomBarSizeConstraint }
+			sizeConstraint = { MaxSize = ConstantsModule.BottomBarSizeConstraint }
 		}, {
-			TextBoxContainer = reactModule.createElement(view, {
+			TextBoxContainer = ReactModule.createElement(View, {
 				tag = "size-full-2100 padding-medium radius-medium bg-surface-100"
 			}, {
-				TextBox = reactModule.createElement("TextBox", {
+				TextBox = ReactModule.createElement("TextBox", {
 					Size = UDim2.fromScale(1, 1),
 					BackgroundTransparency = 1,
 					ClearTextOnFocus = false,
@@ -96,63 +96,65 @@ return function(p1)
 					Font = Enum.Font.BuilderSans,
 					MaxVisibleGraphemes = 140,
 					MultiLine = false,
-					PlaceholderColor3 = var2.Color.Content.Muted.Color3,
-					PlaceholderText = var3.PublishingDescription,
-					ref = var5,
+					PlaceholderColor3 = UseTokensResult.Color.Content.Muted.Color3,
+					PlaceholderText = UseCreationFlowStringsModuleResult.PublishingDescription,
+					ref = UseRefResult,
 					ShowNativeInput = true,
-					TextColor3 = var2.Color.ActionStandard.Foreground.Color3,
-					TextSize = var2.FontSize.FontSize_400,
+					TextColor3 = UseTokensResult.Color.ActionStandard.Foreground.Color3,
+					TextSize = UseTokensResult.FontSize.FontSize_400,
 					TextWrapped = true,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					TextYAlignment = Enum.TextYAlignment.Top,
-					[reactModule.Change.Text] = useCallback(function(p2)
-						local var8 = p2.Text:gsub("[\r\n]+", " ")
-						local charCount = utf8.len(var8)
+					[ReactModule.Change.Text] = UseCallbackFunction(function(p2) --[[ Line: 121 ]]
+						local Text = p2.Text:gsub("[\r\n]+", " ")
+						local Length = utf8.len(Text)
 						
-						if charCount ~= nil and charCount >= 140 then
-							var8 = string.sub(var8, 1, utf8.offset(var8, 141) - 1)
+						if Length ~= nil and Length >= 140 then
+							Text = string.sub(Text, 1, utf8.offset(Text, 141) - 1)
 						end
-						if var8 ~= p2.Text then
-							p2.Text = var8
+						if Text ~= p2.Text then
+							p2.Text = Text
 						end
 					end, {}),
-					[reactModule.Event.FocusLost] = useCallback(function()
-						-- upvalues: var5 (ref), var4 (ref), sessionManager (copy), funnelEventNames (copy), fireAnalyticsEventModule (copy), eventNames (copy), cryoModule (copy), makeCreationEventFieldsModule (copy)
-						local current = var5.current
-						var4.updateDescription(if current ~= nil then "" else current.Text)
-						fireAnalyticsEventModule(eventNames.EditingFlowDescriptionEdited, cryoModule.Dictionary.join(makeCreationEventFieldsModule.makeToolFieldFromKind("description"), makeCreationEventFieldsModule.makeCreationBaseFields(sessionManager.getSessionId(funnelEventNames.FunnelTypes.CreationFlow))))
-					end, { var4.updateDescription })
+					[ReactModule.Event.FocusLost] = UseCallbackFunction(function() --[[ Line: 105 ]]
+						-- upvalues: UseRefResult (copy), CreationFlowStoreModule (copy), SessionManager (upval), FunnelEventNames (upval), FireAnalyticsEventModule (upval), EventNames (upval), CryoModule (upval), MakeCreationEventFieldsModule (upval)
+						local Current = UseRefResult.current
+						CreationFlowStoreModule.updateDescription(if Current == nil then "" else Current.Text)
+						FireAnalyticsEventModule(EventNames.EditingFlowDescriptionEdited, CryoModule.Dictionary.join(MakeCreationEventFieldsModule.makeToolFieldFromKind("description"), MakeCreationEventFieldsModule.makeCreationBaseFields((SessionManager.getSessionId(FunnelEventNames.FunnelTypes.CreationFlow)))))
+					end, { CreationFlowStoreModule.updateDescription })
 				})
 			}),
-			AllowComments = if var7 then reactModule.createElement(AllowCommentsToggle, { layoutOrder = 1 }) else nil,
-			GeneratedTextFeedback = if fFlagMomentTextGenerationFilteredSignal then reactModule.createElement(generatedTextFeedbackContainerModule, { layoutOrder = if var7 then 2 else 1 }) else nil,
-			CTAs = reactModule.createElement(view, {
+			AllowComments = if FFlagMomentsUseUploadPostAsync then ReactModule.createElement(AllowCommentsToggle, { layoutOrder = 1 }) else nil,
+			GeneratedTextFeedback = if FFlagMomentTextGenerationFilteredSignal then ReactModule.createElement(GeneratedTextFeedbackContainerModule, {
+				layoutOrder = if FFlagMomentsUseUploadPostAsync then 2 else 1
+			}) else nil,
+			CTAs = ReactModule.createElement(View, {
 				tag = "row align-x-center align-y-bottom gap-small position-bottom-center anchor-bottom-center size-full-0 auto-y",
-				LayoutOrder = if var7 then 3 else 2
+				LayoutOrder = if FFlagMomentsUseUploadPostAsync then 3 else 2
 			}, {
-				PostButton = reactModule.createElement(button, {
+				PostButton = ReactModule.createElement(Button, {
 					LayoutOrder = 1,
-					fillBehavior = foundationModule.Enums.FillBehavior.Fill,
+					fillBehavior = FoundationModule.Enums.FillBehavior.Fill,
 					onActivated = p1.onPublish,
-					size = inputSize.Medium,
-					text = var3.PublishingCtaPrimary,
-					variant = buttonVariant.Emphasis,
+					size = InputSize.Medium,
+					text = UseCreationFlowStringsModuleResult.PublishingCtaPrimary,
+					variant = ButtonVariant.Emphasis,
 					width = UDim.new(0.5, 0)
 				}),
-				ReturnToEditingButton = reactModule.createElement(button, {
+				ReturnToEditingButton = ReactModule.createElement(Button, {
 					LayoutOrder = 2,
-					fillBehavior = foundationModule.Enums.FillBehavior.Fill,
-					text = publishingCtaSecondary,
-					variant = buttonVariant.Standard,
+					fillBehavior = FoundationModule.Enums.FillBehavior.Fill,
+					text = PublishingCtaSecondary,
+					variant = ButtonVariant.Standard,
 					width = UDim.new(0.5, 0),
 					onActivated = p1.onReturnToEditing,
-					size = inputSize.Medium
+					size = InputSize.Medium
 				})
 			}),
-			Disclaimer = reactModule.createElement(text, {
+			Disclaimer = ReactModule.createElement(Text, {
 				tag = "auto-xy text-body-small text-align-x-center text-align-y-top content-neutral",
-				LayoutOrder = if var7 then 4 else 3,
-				Text = var3.CreationTooltip
+				LayoutOrder = if FFlagMomentsUseUploadPostAsync then 4 else 3,
+				Text = UseCreationFlowStringsModuleResult.CreationTooltip
 			})
 		})
 	})

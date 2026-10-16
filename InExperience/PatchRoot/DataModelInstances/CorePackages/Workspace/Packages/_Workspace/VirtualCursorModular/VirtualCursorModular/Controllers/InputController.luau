@@ -1,19 +1,19 @@
-﻿local parent = script.Parent.Parent
-local contextActionService = game:GetService("ContextActionService")
-local gamepadService = game:GetService("GamepadService")
-local guiService = game:GetService("GuiService")
-local userInputService = game:GetService("UserInputService")
-local utilModule = require(parent.Util)
-local processThumbstickInput = utilModule.ProcessThumbstickInput
-local getRectCenter = utilModule.GetRectCenter
-local getThumbstickInputFromDirectionalInput = utilModule.GetThumbstickInputFromDirectionalInput
-local enumsModule = require(parent.Enums)
-local t = {}
-t.__index = t
+﻿local Parent = script.Parent.Parent
+local ContextActionService = game:GetService("ContextActionService")
+local GamepadService = game:GetService("GamepadService")
+local GuiService = game:GetService("GuiService")
+local UserInputService = game:GetService("UserInputService")
+local UtilModule = require(Parent.Util)
+local ProcessThumbstickInputFunction = UtilModule.ProcessThumbstickInput
+local GetRectCenterFunction = UtilModule.GetRectCenter
+local GetThumbstickInputFromDirectionalInputFunction = UtilModule.GetThumbstickInputFromDirectionalInput
+local EnumsModule = require(Parent.Enums)
+local InputController = {}
+InputController.__index = InputController
 
-function t.new(p1)
-	-- upvalues: enumsModule (ref), t (ref)
-	return setmetatable({
+function InputController.new(_cursorController) --[[ Line: 37 ]]
+	-- upvalues: EnumsModule (copy), InputController (copy)
+	return (setmetatable({
 		_enabled = false,
 		_previousSelection = nil,
 		_selectedObjectChangedConnection = nil,
@@ -21,15 +21,15 @@ function t.new(p1)
 		_selectedRectChangedConnection = nil,
 		_inputBeganConnection = nil,
 		_inputEndedConnection = nil,
-		_cursorController = p1,
+		_cursorController = _cursorController,
 		_moveVector = Vector2.new(),
 		_scrollVector = Vector2.new(),
-		_behavior = enumsModule.Behavior.SelectionPreview,
+		_behavior = EnumsModule.Behavior.SelectionPreview,
 		_activeDirections = {}
-	}, t)
+	}, InputController))
 end
 
-function t:Destroy()
+function InputController:Destroy() --[[ Line: 56 ]]
 	if self._selectedObjectChangedConnection then
 		self._selectedObjectChangedConnection:Disconnect()
 	end
@@ -47,50 +47,53 @@ function t:Destroy()
 	end
 end
 
-function t:OnMove(_, p1)
-	-- upvalues: enumsModule (ref), guiService (ref), processThumbstickInput (ref), getRectCenter (ref)
-	if self._behavior ~= enumsModule.Behavior.SelectionPreview then
+function InputController:OnMove(_, p1) --[[ Line: 78 ]]
+	-- upvalues: EnumsModule (copy), GuiService (copy), ProcessThumbstickInputFunction (copy), GetRectCenterFunction (copy)
+	if self._behavior ~= EnumsModule.Behavior.SelectionPreview then
 		return Enum.ContextActionResult.Pass
-	elseif guiService.SelectedObject == nil then
-		return Enum.ContextActionResult.Pass
-	elseif p1 then
-		self._moveVector = processThumbstickInput(Vector2.new(p1.Position.X, p1.Position.Y))
 	end
-	local var1 = (if guiService.SelectedCoreObject ~= nil then guiService.SelectedObject ~= nil else true) and self._moveVector ~= Vector2.zero
+	if GuiService.SelectedObject == nil then
+		return Enum.ContextActionResult.Pass
+	end
+	if p1 then
+		self._moveVector = ProcessThumbstickInputFunction(Vector2.new(p1.Position.X, p1.Position.Y))
+	end
+	local IsNotMoveVectorMatch = self._moveVector ~= Vector2.zero
+	local IsNotMoveVectorMatch1: boolean = (GuiService.SelectedCoreObject == nil or GuiService.SelectedObject ~= nil) and IsNotMoveVectorMatch
 	
-	if var1 and not self._cursorController:GetEnabled() then
+	if IsNotMoveVectorMatch1 and not self._cursorController:GetEnabled() then
 		if self._previousSelection then
-			self._cursorController:Enable(getRectCenter(self._previousSelection.SelectionRect2D))
-		elseif guiService.SelectedObject then
-			self._cursorController:Enable(getRectCenter(guiService.SelectedObject.SelectionRect2D))
+			self._cursorController:Enable(GetRectCenterFunction(self._previousSelection.SelectionRect2D))
+		elseif GuiService.SelectedObject then
+			self._cursorController:Enable(GetRectCenterFunction(GuiService.SelectedObject.SelectionRect2D))
 		end
-	elseif not var1 and self._cursorController:GetEnabled() then
+	elseif not IsNotMoveVectorMatch1 and self._cursorController:GetEnabled() then
 		self._cursorController:Disable()
 	end
-	local selectedRectChangedConnection = self._selectedRectChangedConnection
+	local SelectedRectChangedConnection = self._selectedRectChangedConnection
 	
-	if selectedRectChangedConnection then
-		selectedRectChangedConnection:Disconnect()
+	if SelectedRectChangedConnection then
+		SelectedRectChangedConnection:Disconnect()
 		self._selectedRectChangedConnection = nil
 	end
-	if var1 and guiService.SelectedObject then
-		local selectedObject = guiService.SelectedObject
-		self._selectedRectChangedConnection = selectedObject:GetPropertyChangedSignal("SelectionRect2D"):Connect(function()
-			-- upvalues: selectedObject (ref), self (ref), enumsModule (copy), getRectCenter (copy)
-			if selectedObject and self._behavior == enumsModule.Behavior.SelectionPreview then
-				self._cursorController:TweenPosition(getRectCenter(selectedObject.SelectionRect2D))
+	if IsNotMoveVectorMatch1 and GuiService.SelectedObject then
+		local SelectedObject = GuiService.SelectedObject
+		self._selectedRectChangedConnection = SelectedObject:GetPropertyChangedSignal("SelectionRect2D"):Connect(function() --[[ Line: 119 ]]
+			-- upvalues: SelectedObject (copy), self (copy), EnumsModule (upval), GetRectCenterFunction (upval)
+			if SelectedObject and self._behavior == EnumsModule.Behavior.SelectionPreview then
+				self._cursorController:TweenPosition(GetRectCenterFunction(SelectedObject.SelectionRect2D))
 			end
 		end)
-		self._cursorController:TweenPosition(getRectCenter(guiService.SelectedObject.SelectionRect2D))
+		self._cursorController:TweenPosition(GetRectCenterFunction(GuiService.SelectedObject.SelectionRect2D))
 	end
 	return Enum.ContextActionResult.Pass
 end
 
-function t:OnScroll(p1, p2)
-	-- upvalues: enumsModule (ref)
-	if self._behavior == enumsModule.Behavior.VirtualCursor then
-		if p1 == Enum.UserInputState.Change and p2 then
-			self._scrollVector = Vector2.new(p2.Position.X, p2.Position.Y) * Vector2.new(1, -1)
+function InputController:OnScroll(Cancel, p1) --[[ Line: 132 ]]
+	-- upvalues: EnumsModule (copy)
+	if self._behavior == EnumsModule.Behavior.VirtualCursor then
+		if Cancel == Enum.UserInputState.Change and p1 then
+			self._scrollVector = Vector2.new(p1.Position.X, p1.Position.Y) * Vector2.new(1, -1)
 			
 			return Enum.ContextActionResult.Sink
 		end
@@ -99,135 +102,140 @@ function t:OnScroll(p1, p2)
 	return Enum.ContextActionResult.Pass
 end
 
-function t:OnActivate(p1, _)
-	-- upvalues: guiService (ref)
-	if p1 == Enum.UserInputState.Begin then
-		if guiService.SelectedObject or guiService.SelectedCoreObject then
+function InputController:OnActivate(UserInputState, _) --[[ Line: 145 ]]
+	-- upvalues: GuiService (copy)
+	if UserInputState == Enum.UserInputState.Begin then
+		if GuiService.SelectedObject or GuiService.SelectedCoreObject then
 			self._cursorController:PlayTweenActivate()
 		end
-	elseif p1 == Enum.UserInputState.End and (guiService.SelectedObject or guiService.SelectedCoreObject) then
+	elseif UserInputState == Enum.UserInputState.End and (GuiService.SelectedObject or GuiService.SelectedCoreObject) then
 		self._cursorController:PlayTweenDefault()
 	end
 	return Enum.ContextActionResult.Pass
 end
 
-function t:OnDirectionalButtons(p1, p2)
-	-- upvalues: enumsModule (ref), getThumbstickInputFromDirectionalInput (ref), processThumbstickInput (ref)
-	if self._behavior ~= enumsModule.Behavior.VirtualCursor or not p2 then
+function InputController:OnDirectionalButtons(UserInputState, Input) --[[ Line: 159 ]]
+	-- upvalues: EnumsModule (copy), GetThumbstickInputFromDirectionalInputFunction (copy), ProcessThumbstickInputFunction (copy)
+	if self._behavior ~= EnumsModule.Behavior.VirtualCursor or not Input then
 		return Enum.ContextActionResult.Pass
 	end
-	local pass = Enum.ContextActionResult.Pass
+	local KeyCode = Input.KeyCode
 	
-	if p1 == Enum.UserInputState.Begin or p1 == Enum.UserInputState.Change then
-		self._activeDirections[p2.KeyCode] = p2.Position.Z
-		pass = Enum.ContextActionResult.Sink
+	if KeyCode ~= Enum.KeyCode.ButtonUp and KeyCode ~= Enum.KeyCode.ButtonDown and KeyCode ~= Enum.KeyCode.ButtonLeft and KeyCode ~= Enum.KeyCode.ButtonRight then
+		return Enum.ContextActionResult.Pass
+	end
+	local Pass = Enum.ContextActionResult.Pass
+	
+	if UserInputState == Enum.UserInputState.Begin or UserInputState == Enum.UserInputState.Change then
+		self._activeDirections[Input.KeyCode] = Input.Position.Z
+		Pass = Enum.ContextActionResult.Sink
 	else
-		self._activeDirections[p2.KeyCode] = nil
+		self._activeDirections[Input.KeyCode] = nil
 	end
-	local zero = Vector2.zero
+	local ZeroVector = Vector2.zero
 	
-	for i, v in self._activeDirections do
-		zero += getThumbstickInputFromDirectionalInput(i, v)
+	for i, activeDirection in self._activeDirections do
+		ZeroVector += GetThumbstickInputFromDirectionalInputFunction(i, activeDirection)
 	end
-	if zero.Magnitude > 1 then
-		zero = zero.Unit
+	if ZeroVector.Magnitude > 1 then
+		ZeroVector = ZeroVector.Unit
 	end
-	self._moveVector = processThumbstickInput(zero)
+	self._moveVector = ProcessThumbstickInputFunction(ZeroVector)
 	
-	return pass
+	return Pass
 end
 
-function t:GetMoveVector()
+function InputController:GetMoveVector() --[[ Line: 205 ]]
 	return self._moveVector
 end
 
-function t:GetScrollVector()
+function InputController:GetScrollVector() --[[ Line: 209 ]]
 	return self._scrollVector
 end
 
-function t:SetBehavior(p3)
-	-- upvalues: enumsModule (ref), contextActionService (ref), gamepadService (ref), processThumbstickInput (ref), userInputService (ref), guiService (ref)
-	local behavior = self._behavior
-	self._behavior = p3
+function InputController:SetBehavior(_behavior) --[[ Line: 213 ]]
+	-- upvalues: EnumsModule (copy), ContextActionService (copy), GamepadService (copy), ProcessThumbstickInputFunction (copy), UserInputService (copy), GuiService (copy)
+	local Behavior = self._behavior
+	self._behavior = _behavior
 	
-	if behavior == enumsModule.Behavior.VirtualCursor then
+	if Behavior == EnumsModule.Behavior.VirtualCursor then
 		self._moveVector = Vector2.new()
 		self._scrollVector = Vector2.new()
 		table.clear(self._activeDirections)
-		contextActionService:UnbindCoreAction(enumsModule.Action.DirectionalMove)
-		contextActionService:UnbindCoreAction(enumsModule.Action.Scroll)
-		local gamepadThumbstick1ChangedConnection = self._gamepadThumbstick1ChangedConnection
+		ContextActionService:UnbindCoreAction(EnumsModule.Action.DirectionalMove)
+		ContextActionService:UnbindCoreAction(EnumsModule.Action.Scroll)
+		local GamepadThumbstick1ChangedConnection = self._gamepadThumbstick1ChangedConnection
 		
-		if gamepadThumbstick1ChangedConnection then
-			gamepadThumbstick1ChangedConnection:Disconnect()
+		if GamepadThumbstick1ChangedConnection then
+			GamepadThumbstick1ChangedConnection:Disconnect()
 			self._gamepadThumbstick1ChangedConnection = nil
 		end
-		local inputBeganConnection = self._inputBeganConnection
+		local InputBeganConnection = self._inputBeganConnection
 		
-		if inputBeganConnection then
-			inputBeganConnection:Disconnect()
+		if InputBeganConnection then
+			InputBeganConnection:Disconnect()
 			self._inputBeganConnection = nil
 		end
-		local inputEndedConnection = self._inputEndedConnection
+		local InputEndedConnection = self._inputEndedConnection
 		
-		if inputEndedConnection then
-			inputEndedConnection:Disconnect()
+		if InputEndedConnection then
+			InputEndedConnection:Disconnect()
 			self._inputEndedConnection = nil
 		end
 		self:OnScroll(Enum.UserInputState.Cancel, nil)
-	elseif behavior == enumsModule.Behavior.SelectionPreview then
-		contextActionService:UnbindCoreAction(enumsModule.Action.Move)
-		local selectedObjectChangedConnection = self._selectedObjectChangedConnection
+	elseif Behavior == EnumsModule.Behavior.SelectionPreview then
+		ContextActionService:UnbindCoreAction(EnumsModule.Action.Move)
+		local SelectedObjectChangedConnection = self._selectedObjectChangedConnection
 		
-		if selectedObjectChangedConnection then
-			selectedObjectChangedConnection:Disconnect()
+		if SelectedObjectChangedConnection then
+			SelectedObjectChangedConnection:Disconnect()
 			self._selectedObjectChangedConnection = nil
 		end
-		local selectedRectChangedConnection = self._selectedRectChangedConnection
+		local SelectedRectChangedConnection = self._selectedRectChangedConnection
 		
-		if selectedRectChangedConnection then
-			selectedRectChangedConnection:Disconnect()
+		if SelectedRectChangedConnection then
+			SelectedRectChangedConnection:Disconnect()
 			self._selectedRectChangedConnection = nil
 		end
 	end
-	if self._behavior == enumsModule.Behavior.VirtualCursor then
-		contextActionService:BindCoreActionAtPriority(enumsModule.Action.Scroll, function(_, p4, p5)
-			-- upvalues: self (ref)
-			return self:OnScroll(p4, p5)
+	if self._behavior == EnumsModule.Behavior.VirtualCursor then
+		ContextActionService:BindCoreActionAtPriority(EnumsModule.Action.Scroll, function(_, p1, p2) --[[ Line: 263 ]]
+			-- upvalues: self (copy)
+			return self:OnScroll(p1, p2)
 		end, false, Enum.ContextActionPriority.High.Value, Enum.KeyCode.Thumbstick2)
-		contextActionService:BindCoreActionAtPriority(enumsModule.Action.DirectionalMove, function(_, p4, p5)
-			-- upvalues: self (ref)
-			return self:OnDirectionalButtons(p4, p5)
+		ContextActionService:BindCoreActionAtPriority(EnumsModule.Action.DirectionalMove, function(_, UserInputState, Input) --[[ Line: 273 ]]
+			-- upvalues: self (copy)
+			return self:OnDirectionalButtons(UserInputState, Input)
 		end, false, Enum.ContextActionPriority.High.Value, Enum.KeyCode.ButtonUp, Enum.KeyCode.ButtonDown, Enum.KeyCode.ButtonLeft, Enum.KeyCode.ButtonRight)
-		self._gamepadThumbstick1ChangedConnection = gamepadService.GamepadThumbstick1Changed:Connect(function(p4)
-			-- upvalues: self (ref), processThumbstickInput (copy)
-			self._moveVector = processThumbstickInput(p4)
+		self._gamepadThumbstick1ChangedConnection = GamepadService.GamepadThumbstick1Changed:Connect(function(Event) --[[ Line: 284 ]]
+			-- upvalues: self (copy), ProcessThumbstickInputFunction (upval)
+			self._moveVector = ProcessThumbstickInputFunction(Event)
 		end)
-		self._inputBeganConnection = userInputService.InputBegan:Connect(function(p4, _)
-			-- upvalues: self (ref)
-			if p4.KeyCode == Enum.KeyCode.ButtonA or p4.KeyCode == Enum.KeyCode.ButtonCenter then
-				self:OnActivate(Enum.UserInputState.Begin, p4)
+		self._inputBeganConnection = UserInputService.InputBegan:Connect(function(Input, _) --[[ Line: 289 ]]
+			-- upvalues: self (copy)
+			if Input.KeyCode == Enum.KeyCode.ButtonA or Input.KeyCode == Enum.KeyCode.ButtonCenter then
+				self:OnActivate(Enum.UserInputState.Begin, Input)
 			end
 		end)
-		self._inputEndedConnection = userInputService.InputEnded:Connect(function(p4, _)
-			-- upvalues: self (ref)
-			if p4.KeyCode == Enum.KeyCode.ButtonA or p4.KeyCode == Enum.KeyCode.ButtonCenter then
-				self:OnActivate(Enum.UserInputState.End, p4)
+		self._inputEndedConnection = UserInputService.InputEnded:Connect(function(Input, _) --[[ Line: 295 ]]
+			-- upvalues: self (copy)
+			if Input.KeyCode == Enum.KeyCode.ButtonA or Input.KeyCode == Enum.KeyCode.ButtonCenter then
+				self:OnActivate(Enum.UserInputState.End, Input)
 			end
 		end)
 		
 		return
-	elseif self._behavior == enumsModule.Behavior.SelectionPreview then
-		self._selectedObjectChangedConnection = guiService:GetPropertyChangedSignal("SelectedObject"):Connect(function()
-			-- upvalues: self (ref), guiService (copy)
+	elseif self._behavior == EnumsModule.Behavior.SelectionPreview then
+		self._selectedObjectChangedConnection = GuiService:GetPropertyChangedSignal("SelectedObject"):Connect(function() --[[ Line: 301 ]]
+			-- upvalues: self (copy), GuiService (upval)
 			self:OnMove(Enum.UserInputState.Change, nil)
-			self._previousSelection = guiService.SelectedObject
+			self._previousSelection = GuiService.SelectedObject
 		end)
-		contextActionService:BindCoreActionAtPriority(enumsModule.Action.Move, function(_, p4, p5)
-			-- upvalues: self (ref)
-			return self:OnMove(p4, p5)
+		ContextActionService:BindCoreActionAtPriority(EnumsModule.Action.Move, function(_, p1, p2) --[[ Line: 308 ]]
+			-- upvalues: self (copy)
+			return self:OnMove(p1, p2)
 		end, false, Enum.ContextActionPriority.High.Value, Enum.KeyCode.Thumbstick1)
 	end
 end
 
-return t
+return InputController

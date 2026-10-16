@@ -1,4 +1,4 @@
-﻿local flags = script.Flags
+﻿local Flags = script.Flags
 
 return {
 	CoreVoiceManager = require(script.CoreVoiceManager),
@@ -7,15 +7,15 @@ return {
 	Analytics = require(script.Analytics),
 	VoiceVolumeControlsEligibility = require(script.VoiceVolumeControlsEligibility),
 	Flags = {
-		GetFFlagVoiceChatServiceManagerUseAvatarChat = require(flags.GetFFlagVoiceChatServiceManagerUseAvatarChat),
-		GetFFlagBatchVoiceParticipantsUpdates = require(flags.GetFFlagBatchVoiceParticipantsUpdates),
-		GetFIntThrottleParticipantsUpdateMs = require(flags.GetFIntThrottleParticipantsUpdateMs),
-		GetFFlagEnableFtuxExitOnMuteToggle = require(flags.GetFFlagEnableFtuxExitOnMuteToggle),
-		GetFFlagEnableExpJoinMicPermAnalytics = require(flags.GetFFlagEnableExpJoinMicPermAnalytics),
-		GetFFlagEnableSeamlessVoiceFeature = require(flags.GetFFlagEnableSeamlessVoiceFeature),
-		GetFFlagFixGetPlayerByUserIdStringCast = require(flags.GetFFlagFixGetPlayerByUserIdStringCast),
-		GetFFlagVoiceVolumeControlsEnableVoiceVolumeImpressionsTelemetry = require(flags.GetFFlagVoiceVolumeControlsEnableVoiceVolumeImpressionsTelemetry),
-		GetFFlagMicConsumerRegistry = require(flags.GetFFlagMicConsumerRegistry)
+		GetFFlagVoiceChatServiceManagerUseAvatarChat = require(Flags.GetFFlagVoiceChatServiceManagerUseAvatarChat),
+		GetFFlagBatchVoiceParticipantsUpdates = require(Flags.GetFFlagBatchVoiceParticipantsUpdates),
+		GetFIntThrottleParticipantsUpdateMs = require(Flags.GetFIntThrottleParticipantsUpdateMs),
+		GetFFlagEnableFtuxExitOnMuteToggle = require(Flags.GetFFlagEnableFtuxExitOnMuteToggle),
+		GetFFlagEnableExpJoinMicPermAnalytics = require(Flags.GetFFlagEnableExpJoinMicPermAnalytics),
+		GetFFlagEnableSeamlessVoiceFeature = require(Flags.GetFFlagEnableSeamlessVoiceFeature),
+		GetFFlagFixGetPlayerByUserIdStringCast = require(Flags.GetFFlagFixGetPlayerByUserIdStringCast),
+		GetFFlagVoiceVolumeControlsEnableVoiceVolumeImpressionsTelemetry = require(Flags.GetFFlagVoiceVolumeControlsEnableVoiceVolumeImpressionsTelemetry),
+		GetFFlagMicConsumerRegistry = require(Flags.GetFFlagMicConsumerRegistry)
 	},
 	Requests = {
 		GetShowAgeVerificationOverlay = require(script.Requests.GetShowAgeVerificationOverlay)

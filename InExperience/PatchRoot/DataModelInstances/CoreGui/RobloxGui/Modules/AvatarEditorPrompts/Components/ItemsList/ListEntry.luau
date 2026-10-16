@@ -1,81 +1,81 @@
-﻿local corePackagesService = game:GetService("CorePackages")
+﻿local CorePackages = game:GetService("CorePackages")
 local _ = game:GetService("CoreGui").RobloxGui.Modules
-local cryoModule = require(corePackagesService.Packages.Cryo)
-local roactModule = require(corePackagesService.Packages.Roact)
-local tModule = require(corePackagesService.Packages.t)
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local foundationModule = require(corePackagesService.Packages.Foundation)
-local getTextSize = require(corePackagesService.Workspace.Packages.Style).GetTextSize
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local text = require(corePackagesService.Workspace.Packages.AppCommonLib).Text
-local roactFitComponents = require(corePackagesService.Packages.AvatarExperienceDeps).RoactFitComponents
-local fitTextLabel = roactFitComponents.FitTextLabel
-local withStyle = UIBloxModule.Style.withStyle
-local listEntry = roactModule.PureComponent:extend("ListEntry")
-listEntry.validateProps = tModule.strictInterface({
-	text = tModule.string,
-	hasBullet = tModule.boolean,
-	layoutOrder = tModule.integer,
-	positionChangedCallback = tModule.optional(tModule.callback),
-	NextSelectionLeft = tModule.optional(tModule.table),
-	NextSelectionRight = tModule.optional(tModule.table),
-	NextSelectionUp = tModule.optional(tModule.table),
-	NextSelectionDown = tModule.optional(tModule.table),
-	forwardRef = tModule.optional(tModule.table)
+local CryoModule = require(CorePackages.Packages.Cryo)
+local RoactModule = require(CorePackages.Packages.Roact)
+local TModule = require(CorePackages.Packages.t)
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local GetTextSizeFunction = require(CorePackages.Workspace.Packages.Style).GetTextSize
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local FoundationFontFaceMigration1 = require(CorePackages.Workspace.Packages.SharedFlags).FFlagFontFaceAX and FoundationFontFaceMigration
+local Text = require(CorePackages.Workspace.Packages.AppCommonLib).Text
+local RoactFitComponents = require(CorePackages.Packages.AvatarExperienceDeps).RoactFitComponents
+local FitTextLabel = RoactFitComponents.FitTextLabel
+local WithStyleFunction = require(CorePackages.Packages.UIBlox).Style.withStyle
+local ListEntry = RoactModule.PureComponent:extend("ListEntry")
+ListEntry.validateProps = TModule.strictInterface({
+	text = TModule.string,
+	hasBullet = TModule.boolean,
+	layoutOrder = TModule.integer,
+	positionChangedCallback = TModule.optional(TModule.callback),
+	NextSelectionLeft = TModule.optional(TModule.table),
+	NextSelectionRight = TModule.optional(TModule.table),
+	NextSelectionUp = TModule.optional(TModule.table),
+	NextSelectionDown = TModule.optional(TModule.table),
+	forwardRef = TModule.optional(TModule.table)
 })
 
-function listEntry.render(p1)
-	-- upvalues: withStyle (ref), foundationFontFaceMigration (ref), getTextSize (ref), text (ref), roactModule (ref), roactFitComponents (ref), normalizeFontFace (ref), fitTextLabel (ref)
-	return withStyle(function(p2)
-		-- upvalues: foundationFontFaceMigration (copy), getTextSize (copy), text (copy), p1 (ref), roactModule (copy), roactFitComponents (copy), normalizeFontFace (copy), fitTextLabel (copy)
-		local font = p2.Font
-		local theme = p2.Theme
-		local font_1 = font.CaptionBody.Font
-		local var1 = font.BaseSize * font.CaptionBody.RelativeSize
-		local var2 = if foundationFontFaceMigration then getTextSize("\226\128\162 ", var1, p2.Tokens.Typography.BodySmall.Font, Vector2.new(10000, 10000)).X else text.GetTextWidth("\226\128\162 ", font_1, var1)
+function ListEntry.render(p1) --[[ Line: 40 ]]
+	-- upvalues: WithStyleFunction (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), Text (copy), RoactModule (copy), RoactFitComponents (copy), NormalizeFontFaceFunction (copy), FitTextLabel (copy), FoundationFontFaceMigration1 (copy)
+	return WithStyleFunction(function(p2) --[[ Line: 41 ]]
+		-- upvalues: FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), Text (upval), p1 (copy), RoactModule (upval), RoactFitComponents (upval), NormalizeFontFaceFunction (upval), FitTextLabel (upval), FoundationFontFaceMigration1 (upval)
+		local _Font = p2.Font
+		local Theme = p2.Theme
+		local CaptionBodyFont = _Font.CaptionBody.Font
+		local ScaledBaseSize = _Font.BaseSize * _Font.CaptionBody.RelativeSize
+		local X = if FoundationFontFaceMigration then GetTextSizeFunction("• ", ScaledBaseSize, p2.Tokens.Typography.BodySmall.Font, Vector2.new(10000, 10000)).X else Text.GetTextWidth("• ", CaptionBodyFont, ScaledBaseSize)
 		
-		return roactModule.createElement(roactFitComponents.FitFrameVertical, {
+		return RoactModule.createElement(RoactFitComponents.FitFrameVertical, {
 			width = UDim.new(1, 0),
 			FillDirection = Enum.FillDirection.Horizontal,
 			VerticalAlignment = Enum.VerticalAlignment.Top,
 			BackgroundTransparency = 1,
 			LayoutOrder = p1.props.layoutOrder,
-			[roactModule.Change.AbsolutePosition] = p1.props.positionChangedCallback,
+			[RoactModule.Change.AbsolutePosition] = p1.props.positionChangedCallback,
 			NextSelectionLeft = p1.props.NextSelectionLeft,
 			NextSelectionRight = p1.props.NextSelectionRight,
 			NextSelectionUp = p1.props.NextSelectionUp,
 			NextSelectionDown = p1.props.NextSelectionDown,
-			[roactModule.Ref] = p1.props.forwardRef
+			[RoactModule.Ref] = p1.props.forwardRef
 		}, {
-			Bullet = p1.props.hasBullet and roactModule.createElement("TextLabel", {
+			Bullet = p1.props.hasBullet and RoactModule.createElement("TextLabel", {
 				BackgroundTransparency = 1,
-				Text = "\226\128\162 ",
+				Text = "• ",
 				LayoutOrder = 1,
-				Size = UDim2.fromOffset(var2, var1),
-				Font = if foundationFontFaceMigration then nil else font_1,
-				FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.BodySmall.Font) else nil,
-				TextSize = var1,
-				TextColor3 = theme.TextDefault.Color,
-				TextTransparency = theme.TextDefault.Transparency,
+				Size = UDim2.fromOffset(X, ScaledBaseSize),
+				Font = if FoundationFontFaceMigration then nil else CaptionBodyFont,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Tokens.Typography.BodySmall.Font) else nil,
+				TextSize = ScaledBaseSize,
+				TextColor3 = Theme.TextDefault.Color,
+				TextTransparency = Theme.TextDefault.Transparency,
 				TextXAlignment = Enum.TextXAlignment.Left
 			}),
-			Text = roactModule.createElement(fitTextLabel, {
+			Text = RoactModule.createElement(FitTextLabel, {
 				BackgroundTransparency = 1,
 				LayoutOrder = 2,
-				width = UDim.new(1, if p1.props.hasBullet then -var2 else 0),
+				width = UDim.new(1, p1.props.hasBullet and -X or 0),
 				Text = p1.props.text,
-				Font = font_1,
-				TextSize = var1,
-				TextColor3 = theme.TextDefault.Color,
-				TextTransparency = theme.TextDefault.Transparency,
+				Font = if FoundationFontFaceMigration1 then NormalizeFontFaceFunction(p2.Tokens.Typography.BodySmall.Font) else CaptionBodyFont,
+				TextSize = ScaledBaseSize,
+				TextColor3 = Theme.TextDefault.Color,
+				TextTransparency = Theme.TextDefault.Transparency,
 				TextXAlignment = Enum.TextXAlignment.Left
 			})
 		})
 	end)
 end
 
-return roactModule.forwardRef(function(p1, p2)
-	-- upvalues: roactModule (ref), listEntry (ref), cryoModule (ref)
-	return roactModule.createElement(listEntry, cryoModule.Dictionary.join(p1, { forwardRef = p2 }))
+return RoactModule.forwardRef(function(p1, ForwardRef) --[[ Line: 102 ]]
+	-- upvalues: RoactModule (copy), ListEntry (copy), CryoModule (copy)
+	return RoactModule.createElement(ListEntry, CryoModule.Dictionary.join(p1, { forwardRef = ForwardRef }))
 end)

@@ -1,51 +1,51 @@
-﻿local cancelSubscriptionApp = script:FindFirstAncestor("CancelSubscriptionApp")
-local parent = cancelSubscriptionApp.Parent
-local reactModule = require(parent.React)
-local UIBloxModule = require(parent.UIBlox)
-local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
-local buttonType = UIBloxModule.App.Button.Enum.ButtonType
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local errorLarge = UIBloxModule.App.ImageSet.Images["icons/status/error_large"]
-local useScreenSize = require(parent.EconomyCommonCoreScriptHooks).useScreenSize
-local errorStateEnumModule = require(cancelSubscriptionApp.Enums.ErrorStateEnum)
-local t = {
-	[errorStateEnumModule.Expiring] = "CoreScripts.CancelUserSubscriptionPrompt.ExpiringPrompt.Heading",
-	[errorStateEnumModule.Unsubscribed] = "CoreScripts.CancelUserSubscriptionPrompt.UnsubscribedPrompt.Heading",
-	[errorStateEnumModule.ErrorCancelling] = "CoreScripts.CancelUserSubscriptionPrompt.ErrorCancellingPrompt.Heading"
+﻿local CancelSubscriptionApp = script:FindFirstAncestor("CancelSubscriptionApp")
+local Parent = CancelSubscriptionApp.Parent
+local ReactModule = require(Parent.React)
+local UIBloxModule = require(Parent.UIBlox)
+local InteractiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
+local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local IconsStatusErrorLarge = UIBloxModule.App.ImageSet.Images["icons/status/error_large"]
+local UseScreenSizeFunction = require(Parent.EconomyCommonCoreScriptHooks).useScreenSize
+local ErrorStateEnumModule = require(CancelSubscriptionApp.Enums.ErrorStateEnum)
+local config = {
+	[ErrorStateEnumModule.Expiring] = "CoreScripts.CancelUserSubscriptionPrompt.ExpiringPrompt.Heading",
+	[ErrorStateEnumModule.Unsubscribed] = "CoreScripts.CancelUserSubscriptionPrompt.UnsubscribedPrompt.Heading",
+	[ErrorStateEnumModule.ErrorCancelling] = "CoreScripts.CancelUserSubscriptionPrompt.ErrorCancellingPrompt.Heading"
 }
-local t_1 = {
-	[errorStateEnumModule.Expiring] = "CoreScripts.CancelUserSubscriptionPrompt.ExpiringPrompt.Body",
-	[errorStateEnumModule.Unsubscribed] = "CoreScripts.CancelUserSubscriptionPrompt.UnsubscribedPrompt.Body",
-	[errorStateEnumModule.ErrorCancelling] = "CoreScripts.CancelUserSubscriptionPrompt.ErrorCancellingPrompt.Body"
+local config1 = {
+	[ErrorStateEnumModule.Expiring] = "CoreScripts.CancelUserSubscriptionPrompt.ExpiringPrompt.Body",
+	[ErrorStateEnumModule.Unsubscribed] = "CoreScripts.CancelUserSubscriptionPrompt.UnsubscribedPrompt.Body",
+	[ErrorStateEnumModule.ErrorCancelling] = "CoreScripts.CancelUserSubscriptionPrompt.ErrorCancellingPrompt.Body"
 }
 
-return function(p1)
-	-- upvalues: useLocalization (ref), t (ref), t_1 (ref), reactModule (ref), interactiveAlert (ref), errorLarge (ref), buttonType (ref), useScreenSize (ref)
-	local var1 = useLocalization({
+return function(p1) --[[ Line: 30 | Named "CancelUserSubscriptionErrorPrompt" ]]
+	-- upvalues: UseLocalizationFunction (copy), config (copy), config1 (copy), ReactModule (copy), InteractiveAlert (copy), IconsStatusErrorLarge (copy), ButtonType (copy), UseScreenSizeFunction (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
 		buttonText = "CoreScripts.CancelUserSubscriptionPrompt.Error.ButtonText",
-		heading = t[p1.errorState],
-		bodyText = t_1[p1.errorState]
+		heading = config[p1.errorState],
+		bodyText = config1[p1.errorState]
 	})
 	
-	return reactModule.createElement(interactiveAlert, {
-		title = var1.heading,
-		titleIcon = errorLarge,
-		bodyText = var1.bodyText,
+	return ReactModule.createElement(InteractiveAlert, {
+		title = UseLocalizationResult.heading,
+		titleIcon = IconsStatusErrorLarge,
+		bodyText = UseLocalizationResult.bodyText,
 		buttonStackInfo = {
 			buttons = {
 				{
 					isDefaultChild = true,
-					buttonType = buttonType.PrimarySystem,
+					buttonType = ButtonType.PrimarySystem,
 					props = {
-						onActivated = p1.onDismiss or function() end,
-						text = var1.buttonText,
+						onActivated = p1.onDismiss or function() --[[ Line: 46 ]] end,
+						text = UseLocalizationResult.buttonText,
 						delayInputSeconds = 0.75,
-						[reactModule.Tag] = "data-testid=CancelSubscriptionApp_OkButton"
+						[ReactModule.Tag] = "data-testid=CancelSubscriptionApp_OkButton"
 					}
 				}
 			}
 		},
 		position = UDim2.fromScale(0.5, 0.5),
-		screenSize = useScreenSize()
+		screenSize = UseScreenSizeFunction()
 	})
 end

@@ -1,1 +1,3 @@
-﻿return game:DefineFastFlag("CurrencyTransferDeepLinkValidateSender", false) and require(script.Parent.FFlagEnableCurrencyTransferDeepLink)
+﻿local FFlagEnableCurrencyTransferDeepLinkModule = require(script.Parent.FFlagEnableCurrencyTransferDeepLink)
+
+return game:DefineFastFlag("CurrencyTransferDeepLinkValidateSender", false) and FFlagEnableCurrencyTransferDeepLinkModule

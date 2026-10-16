@@ -1,11 +1,10 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local socialLibrariesModule = require(appChat.SocialLibraries)
-local _ = require(appChat.types)
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local warning = socialLibrariesModule.Components.AlertViews.Warning
-local t = {
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local _ = require(AppChat.types)
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local Warning = require(AppChat.SocialLibraries).Components.AlertViews.Warning
+local config = {
 	titleText = "Placeholder title",
 	bodyText = "Placeholder body",
 	cancelText = "TempCancel",
@@ -21,9 +20,9 @@ local t = {
 	width = UDim.new(0.8, 0)
 }
 
-function LeaveGroupDialog(p1)
-	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), warning (ref)
-	return reactModule.createElement(warning, cryoModule.Dictionary.join(t, p1))
+function LeaveGroupDialog(p1) --[[ Line: 54 ]]
+	-- upvalues: CryoModule (copy), config (copy), ReactModule (copy), Warning (copy)
+	return ReactModule.createElement(Warning, (CryoModule.Dictionary.join(config, p1)))
 end
 
 return LeaveGroupDialog

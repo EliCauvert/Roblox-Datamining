@@ -1,52 +1,53 @@
-﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
-local dataHydrationModule = require(parent.DataHydration)
-local signalsModule = require(parent.Signals)
-local setCurrentToastMessage = require(parent.ToastRodux).Actions.SetCurrentToastMessage
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
-local sduiActionType = sduiCoreSystemModule.SduiActionType
+﻿local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
+local DataHydrationModule = require(Parent.DataHydration)
+local SignalsModule = require(Parent.Signals)
+local SetCurrentToastMessageFunction = require(Parent.ToastRodux).Actions.SetCurrentToastMessage
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
+local SduiActionType = SduiCoreSystemModule.SduiActionType
 
-return function(p1, _, p2, _)
-	-- upvalues: sduiErrorType (ref), sduiActionType (ref), dataHydrationModule (ref), signalsModule (ref), setCurrentToastMessage (ref)
-	local var1 = if p1 then p1.actionParams else nil
+return function(p1, _, p2, _) --[[ Line: 18 | Named "SduiJoinCommunityAction" ]]
+	-- upvalues: SduiErrorType (copy), SduiActionType (copy), DataHydrationModule (copy), SignalsModule (copy), SetCurrentToastMessageFunction (copy)
+	local ActionParams = p1 and p1.actionParams or nil
 	
-	if var1 == nil then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if ActionParams == nil then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			message = "Missing action params",
-			name = sduiActionType.JoinCommunity
+			name = SduiActionType.JoinCommunity
 		}, p2.appPage)
 		
 		return
 	end
-	local communityId = var1.communityId
+	local CommunityId = ActionParams.communityId
 	
-	if communityId == nil or typeof(communityId) ~= "string" then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if CommunityId == nil or typeof(CommunityId) ~= "string" then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			message = "Missing actionParam: communityId",
 			propName = "communityId",
-			name = sduiActionType.JoinCommunity
+			name = SduiActionType.JoinCommunity
 		}, p2.appPage)
 		
 		return
+	else
+		local JoinCommunityResult = DataHydrationModule.CommunityUserMembership.getCommunityUserMembershipStore(false).joinCommunity(CommunityId)
+		local DispatchFunction = p2.dependencies.dispatch
+		local t = {}
+		t.dispose = SignalsModule.createEffect(function(p3) --[[ Line: 50 ]]
+			-- upvalues: JoinCommunityResult (copy), DispatchFunction (copy), SetCurrentToastMessageFunction (upval), t (copy)
+			local JoinCommunityResultResult = JoinCommunityResult(p3)
+			
+			if JoinCommunityResultResult == nil then return end
+			if JoinCommunityResultResult.type == "error" then
+				DispatchFunction(SetCurrentToastMessageFunction({
+					toastMessage = "Feature.Toast.NetworkingError.SomethingIsWrong"
+				}))
+			end
+			local DisposeFunction: () -> () = t.dispose
+			
+			if DisposeFunction then
+				DisposeFunction()
+				t.dispose = nil
+			end
+		end)
 	end
-	local var2 = dataHydrationModule.CommunityUserMembership.getCommunityUserMembershipStore(false).joinCommunity(communityId)
-	local dispatch = p2.dependencies.dispatch
-	local t = {}
-	t.dispose = signalsModule.createEffect(function(p3)
-		-- upvalues: var2 (ref), dispatch (ref), setCurrentToastMessage (copy), t (ref)
-		local var3 = var2(p3)
-		
-		if var3 == nil then return end
-		if var3.type == "error" then
-			dispatch(setCurrentToastMessage({
-				toastMessage = "Feature.Toast.NetworkingError.SomethingIsWrong"
-			}))
-		end
-		local dispose = t.dispose
-		
-		if dispose then
-			dispose()
-			t.dispose = nil
-		end
-	end)
 end

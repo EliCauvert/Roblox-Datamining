@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.CoreScriptsPlayerFeedback.CoreScriptsPlayerFeedback)
+﻿return (require(script.Parent._Workspace.CoreScriptsPlayerFeedback.CoreScriptsPlayerFeedback))

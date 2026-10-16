@@ -1,74 +1,76 @@
-﻿local currencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
-local parent = currencyTransfers.Parent
-local httpService = game:GetService("HttpService")
-local reactModule = require(parent.React)
-local sharedFlagsModule = require(parent.SharedFlags)
-local transferRobuxAppModule = require(currencyTransfers.Components.TransferRobuxApp)
-local createTransferStoreModule = require(currencyTransfers.Stores.createTransferStore)
-local promptStateModule = require(currencyTransfers.Enums.PromptState)
-local transferDirectionModule = require(currencyTransfers.Enums.TransferDirection)
-local transferOriginationModule = require(currencyTransfers.Enums.TransferOrigination)
-local getFFlagCurrencyTransferUseBackendTransferLimitsModule = require(currencyTransfers.Flags.GetFFlagCurrencyTransferUseBackendTransferLimits)
-local handleTransferErrorModule = require(currencyTransfers.Actions.Send.handleTransferError)
-local handleTransferBlockModule = require(currencyTransfers.Actions.Send.handleTransferBlock)
-local failureReasonModule = require(currencyTransfers.Enums.FailureReason)
-local errorTransferModelModule = require(currencyTransfers.Models.ErrorTransferModel)
-local transferRetryOriginModule = require(currencyTransfers.Enums.TransferRetryOrigin)
-local ampWizardTransferConstantsModule = require(currencyTransfers.Constants.AmpWizardTransferConstants)
-local currencyTransferTelemetryModule = require(currencyTransfers.Events.CurrencyTransferTelemetry)
-local robuxTransferFlowEventNameModule = require(currencyTransfers.Enums.RobuxTransferFlowEventName)
-local logCurrencyTransferCounterModule = require(currencyTransfers.Utils.logCurrencyTransferCounter)
-local logRobuxTransferFlowEventModule = require(currencyTransfers.Utils.logRobuxTransferFlowEvent)
+﻿local CurrencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
+local Parent = CurrencyTransfers.Parent
+local HttpService = game:GetService("HttpService")
+local ReactModule = require(Parent.React)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local TransferRobuxAppModule = require(CurrencyTransfers.Components.TransferRobuxApp)
+local CreateTransferStoreModule = require(CurrencyTransfers.Stores.createTransferStore)
+local PromptStateModule = require(CurrencyTransfers.Enums.PromptState)
+local TransferDirectionModule = require(CurrencyTransfers.Enums.TransferDirection)
+local TransferOriginationModule = require(CurrencyTransfers.Enums.TransferOrigination)
+local GetFFlagCurrencyTransferUseBackendTransferLimitsModule = require(CurrencyTransfers.Flags.GetFFlagCurrencyTransferUseBackendTransferLimits)
+local HandleTransferErrorModule = require(CurrencyTransfers.Actions.Send.handleTransferError)
+local HandleTransferBlockModule = require(CurrencyTransfers.Actions.Send.handleTransferBlock)
+local FailureReasonModule = require(CurrencyTransfers.Enums.FailureReason)
+local ErrorTransferModelModule = require(CurrencyTransfers.Models.ErrorTransferModel)
+local TransferRetryOriginModule = require(CurrencyTransfers.Enums.TransferRetryOrigin)
+local AmpWizardTransferConstantsModule = require(CurrencyTransfers.Constants.AmpWizardTransferConstants)
+local CurrencyTransferTelemetryModule = require(CurrencyTransfers.Events.CurrencyTransferTelemetry)
+local RobuxTransferFlowEventNameModule = require(CurrencyTransfers.Enums.RobuxTransferFlowEventName)
+local LogCurrencyTransferCounterModule = require(CurrencyTransfers.Utils.logCurrencyTransferCounter)
+local LogRobuxTransferFlowEventModule = require(CurrencyTransfers.Utils.logRobuxTransferFlowEvent)
 
-return function(p1)
-	-- upvalues: createTransferStoreModule (ref), sharedFlagsModule (ref), httpService (ref), transferDirectionModule (ref), transferOriginationModule (ref), logCurrencyTransferCounterModule (ref), currencyTransferTelemetryModule (ref), logRobuxTransferFlowEventModule (ref), robuxTransferFlowEventNameModule (ref), getFFlagCurrencyTransferUseBackendTransferLimitsModule (ref), errorTransferModelModule (ref), failureReasonModule (ref), ampWizardTransferConstantsModule (ref), handleTransferBlockModule (ref), transferRetryOriginModule (ref), handleTransferErrorModule (ref), reactModule (ref), transferRobuxAppModule (ref), promptStateModule (ref)
-	local initiateResponse = p1.initiateResponse
-	assert(type(initiateResponse) == "table", "[InExperienceTransferFlow] initiateResponse must be a table")
-	local var1 = createTransferStoreModule()
+return function(p1) --[[ Line: 80 | Named "InExperienceTransferFlow" ]]
+	-- upvalues: CreateTransferStoreModule (copy), SharedFlagsModule (copy), HttpService (copy), TransferDirectionModule (copy), TransferOriginationModule (copy), LogCurrencyTransferCounterModule (copy), CurrencyTransferTelemetryModule (copy), LogRobuxTransferFlowEventModule (copy), RobuxTransferFlowEventNameModule (copy), GetFFlagCurrencyTransferUseBackendTransferLimitsModule (copy), ErrorTransferModelModule (copy), FailureReasonModule (copy), AmpWizardTransferConstantsModule (copy), HandleTransferBlockModule (copy), TransferRetryOriginModule (copy), HandleTransferErrorModule (copy), ReactModule (copy), TransferRobuxAppModule (copy), PromptStateModule (copy)
+	local InitiateResponse = p1.initiateResponse
+	assert(type(InitiateResponse) == "table", "[InExperienceTransferFlow] initiateResponse must be a table")
+	local TransferStoreModule = CreateTransferStoreModule()
 	
-	if sharedFlagsModule.FFlagEnableRobuxTransferFlowEventIngest then
-		var1.setTransferClientSessionId(httpService:GenerateGUID(false))
+	if SharedFlagsModule.FFlagEnableRobuxTransferFlowEventIngest then
+		TransferStoreModule.setTransferClientSessionId(HttpService:GenerateGUID(false))
 	end
-	var1.setDirection(transferDirectionModule.Send)
-	var1.setTransferOrigination(transferOriginationModule.InExperience)
-	logCurrencyTransferCounterModule(var1, currencyTransferTelemetryModule.CurrencyTransferFlowOpenedCounter)
+	TransferStoreModule.setDirection(TransferDirectionModule.Send)
+	TransferStoreModule.setTransferOrigination(TransferOriginationModule.InExperience)
+	LogCurrencyTransferCounterModule(TransferStoreModule, CurrencyTransferTelemetryModule.CurrencyTransferFlowOpenedCounter)
 	
-	if sharedFlagsModule.FFlagEnableRobuxTransferFlowEventIngest then
-		logRobuxTransferFlowEventModule(var1, robuxTransferFlowEventNameModule.in_experience_flow_open)
+	if SharedFlagsModule.FFlagEnableRobuxTransferFlowEventIngest then
+		LogRobuxTransferFlowEventModule(TransferStoreModule, RobuxTransferFlowEventNameModule.in_experience_flow_open)
 	end
 	if p1.onClose then
-		var1.setOnClose(p1.onClose)
+		TransferStoreModule.setOnClose(p1.onClose)
 	end
-	if getFFlagCurrencyTransferUseBackendTransferLimitsModule() then
-		local var2
-		if initiateResponse.minimumTransferAmount then
-			var1.setMinimumTransferAmount(initiateResponse.minimumTransferAmount)
+	if GetFFlagCurrencyTransferUseBackendTransferLimitsModule() then
+		if InitiateResponse.minimumTransferAmount then
+			TransferStoreModule.setMinimumTransferAmount(InitiateResponse.minimumTransferAmount)
 		end
-		if initiateResponse.maximumTransferAmount then
-			var1.setMaximumTransferAmount(initiateResponse.maximumTransferAmount)
+		if InitiateResponse.maximumTransferAmount then
+			TransferStoreModule.setMaximumTransferAmount(InitiateResponse.maximumTransferAmount)
 		end
 	end
-	if initiateResponse.failureReason == nil then
-		assert(initiateResponse.transferRequestId, "[InExperienceTransferFlow] Missing initiateResponse.transferRequestId")
-		var2 = initiateResponse.robuxTransfer.transferAmount
-		assert(type(var2) == "number" and var2 > 0, "[InExperienceTransferFlow] transferAmount must be a positive number")
-		var1.setTransferRequestId(initiateResponse.transferRequestId)
-		var1.setRobuxBalanceAmount(initiateResponse.senderRobuxBalance)
-		var1.setBalanceReceivedFromApi(true)
-		var1.setUserRelationshipDetail(initiateResponse.userRelationshipDetail)
-		var1.setRecipient(initiateResponse.robuxTransfer.recipient)
-		var1.setSender(initiateResponse.robuxTransfer.sender)
-		var1.setSelectedAmount(var2)
-		var1.setPromptState(promptStateModule.TransferConfirm)
+	if InitiateResponse.failureReason == nil then
+		assert(InitiateResponse.transferRequestId, "[InExperienceTransferFlow] Missing initiateResponse.transferRequestId")
+		local TransferAmount: number = InitiateResponse.robuxTransfer.transferAmount
+		assert(type(TransferAmount) == "number" and TransferAmount > 0, "[InExperienceTransferFlow] transferAmount must be a positive number")
+		TransferStoreModule.setTransferRequestId(InitiateResponse.transferRequestId)
+		TransferStoreModule.setRobuxBalanceAmount(InitiateResponse.senderRobuxBalance)
+		TransferStoreModule.setBalanceReceivedFromApi(true)
+		TransferStoreModule.setUserRelationshipDetail(InitiateResponse.userRelationshipDetail)
+		TransferStoreModule.setRecipient(InitiateResponse.robuxTransfer.recipient)
+		TransferStoreModule.setSender(InitiateResponse.robuxTransfer.sender)
+		TransferStoreModule.setSelectedAmount(TransferAmount)
+		TransferStoreModule.setPromptState(PromptStateModule.TransferConfirm)
 		
-		return reactModule.createElement(transferRobuxAppModule, { transferStore = var1 })
+		return ReactModule.createElement(TransferRobuxAppModule, { transferStore = TransferStoreModule })
+	else
+		local FormatResult = ErrorTransferModelModule.format(InitiateResponse)
+		
+		if FormatResult.failureReason == FailureReasonModule.AmpRecourseAvailable and FormatResult.ampRecourseActions and FormatResult.ampFeatureCheck then
+			if not table.find(FormatResult.ampRecourseActions, AmpWizardTransferConstantsModule.RECOURSE_PLUS_SUBSCRIPTION) or FormatResult.ampFeatureCheck ~= "CanInitiateRobuxTransfer" then
+				HandleTransferBlockModule(TransferStoreModule, FormatResult.ampRecourseActions, FormatResult.ampFeatureCheck, TransferRetryOriginModule.ProcessTransfer)
+			end
+		else
+			HandleTransferErrorModule(TransferStoreModule, FormatResult)
+		end
+		return ReactModule.createElement(TransferRobuxAppModule, { transferStore = TransferStoreModule })
 	end
-	var2 = errorTransferModelModule.format(initiateResponse)
-	
-	if var2.failureReason ~= failureReasonModule.AmpRecourseAvailable or not var2.ampRecourseActions or not var2.ampFeatureCheck then
-		handleTransferErrorModule(var1, var2)
-	elseif not table.find(var2.ampRecourseActions, ampWizardTransferConstantsModule.RECOURSE_PLUS_SUBSCRIPTION) or var2.ampFeatureCheck ~= "CanInitiateRobuxTransfer" then
-		handleTransferBlockModule(var1, var2.ampRecourseActions, var2.ampFeatureCheck, transferRetryOriginModule.ProcessTransfer)
-	end
-	return reactModule.createElement(transferRobuxAppModule, { transferStore = var1 })
 end

@@ -1,25 +1,23 @@
-﻿local chrome = script:FindFirstAncestor("Chrome")
-local corePackagesService = game:GetService("CorePackages")
-local serviceModule = require(chrome.Service)
-local commonIconModule = require(chrome.Integrations.CommonIcon)
-local sideSheetPlacement = require(corePackagesService.Workspace.Packages.Chrome).Enums.SideSheetPlacement
-local inGameMenuIntegrationUtilsModule = require(script.Parent.InGameMenuIntegrationUtils)
-local traversalHistoryPage = inGameMenuIntegrationUtilsModule.createPageOpenSignal("TraversalHistoryPage")
+﻿local Chrome = script:FindFirstAncestor("Chrome")
+local ServiceModule = require(Chrome.Service)
+local CommonIconModule = require(Chrome.Integrations.CommonIcon)
+local InGameMenuIntegrationUtilsModule = require(script.Parent.InGameMenuIntegrationUtils)
+local TraversalHistoryPage = InGameMenuIntegrationUtilsModule.createPageOpenSignal("TraversalHistoryPage")
 
-return serviceModule:register({
+return ServiceModule:register({
 	id = "traversal_history",
 	label = "CoreScripts.TopBar.Traversal.History",
-	initialAvailability = serviceModule.AvailabilitySignal.Available,
-	sideSheetPlacement = sideSheetPlacement.BelowFold,
-	activated = function(_)
-		-- upvalues: inGameMenuIntegrationUtilsModule (ref), traversalHistoryPage (ref)
-		inGameMenuIntegrationUtilsModule.toggleIGMPage("TraversalHistoryPage", traversalHistoryPage:get())
+	initialAvailability = ServiceModule.AvailabilitySignal.Available,
+	sideSheetPlacement = require(game:GetService("CorePackages").Workspace.Packages.Chrome).Enums.SideSheetPlacement.BelowFold,
+	activated = function(_) --[[ Line: 18 ]]
+		-- upvalues: InGameMenuIntegrationUtilsModule (copy), TraversalHistoryPage (copy)
+		InGameMenuIntegrationUtilsModule.toggleIGMPage("TraversalHistoryPage", TraversalHistoryPage:get())
 	end,
-	isActivated = traversalHistoryPage,
+	isActivated = TraversalHistoryPage,
 	components = {
-		Icon = function(_)
-			-- upvalues: commonIconModule (ref), traversalHistoryPage (ref)
-			return commonIconModule("Clock", nil, traversalHistoryPage)
+		Icon = function(_) --[[ Line: 23 ]]
+			-- upvalues: CommonIconModule (copy), TraversalHistoryPage (copy)
+			return CommonIconModule("Clock", nil, TraversalHistoryPage)
 		end
 	}
 })

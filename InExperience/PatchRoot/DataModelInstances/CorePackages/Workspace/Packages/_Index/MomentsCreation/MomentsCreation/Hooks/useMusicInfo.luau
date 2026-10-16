@@ -1,28 +1,28 @@
-﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
-local parent = momentsCreation.Parent
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local getMusicStoreModule = require(momentsCreation.Stores.GetMusicStore)
-local _ = require(momentsCreation.Types.Music)
+﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
+local Parent = MomentsCreation.Parent
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local GetMusicStoreModule = require(MomentsCreation.Stores.GetMusicStore)
+local _ = require(MomentsCreation.Types.Music)
 
-return function(p1)
-	-- upvalues: getMusicStoreModule (ref), reactModule (ref), signalsModule (ref)
-	local var1 = getMusicStoreModule()
-	local var2, var3 = reactModule.useState(var1.getInfoMap(false))
-	reactModule.useEffect(function()
-		-- upvalues: signalsModule (copy), var3 (ref), var1 (ref)
-		return signalsModule.createEffect(function(p2)
-			-- upvalues: var3 (copy), var1 (copy)
-			var3(var1.getInfoMap(p2))
+return function(p1) --[[ Line: 18 | Named "useMusicInfo" ]]
+	-- upvalues: GetMusicStoreModule (copy), ReactModule (copy), SignalsModule (copy)
+	local MusicStoreModule = GetMusicStoreModule()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(MusicStoreModule.getInfoMap(false))
+	ReactModule.useEffect(function() --[[ Line: 22 ]]
+		-- upvalues: SignalsModule (upval), UseStateResult2 (copy), MusicStoreModule (copy)
+		return SignalsModule.createEffect(function(p2) --[[ Line: 23 ]]
+			-- upvalues: UseStateResult2 (upval), MusicStoreModule (upval)
+			UseStateResult2(MusicStoreModule.getInfoMap(p2))
 		end)
-	end, { var1 })
-	local var4 = if p1 ~= nil then nil else var2[p1]
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var4 (ref), var1 (ref)
-		if p1 ~= nil and var4 == nil then
-			var1.fetchInfo(p1)
+	end, { MusicStoreModule })
+	local UseStateResultEntry = if p1 == nil then nil else UseStateResult[p1]
+	ReactModule.useEffect(function() --[[ Line: 29 ]]
+		-- upvalues: p1 (copy), UseStateResultEntry (copy), MusicStoreModule (copy)
+		if p1 ~= nil and UseStateResultEntry == nil then
+			MusicStoreModule.fetchInfo(p1)
 		end
-	end, { p1, var4, var1 })
+	end, { p1, UseStateResultEntry, MusicStoreModule })
 	
-	return var4
+	return UseStateResultEntry
 end

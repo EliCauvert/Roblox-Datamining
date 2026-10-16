@@ -1,11 +1,11 @@
-﻿local parent = script:FindFirstAncestor("GenericChallenges").Parent
-local localizationService = game:GetService("LocalizationService")
-local localization = require(parent.RobloxAppLocales).Localization
-local localizeStrings = require(parent.Localization).localizeStrings
+﻿local Parent = script:FindFirstAncestor("GenericChallenges").Parent
+local LocalizationService = game:GetService("LocalizationService")
+local Localization = require(Parent.RobloxAppLocales).Localization
+local LocalizeStringsFunction = require(Parent.Localization).localizeStrings
 
-return function(p1)
-	-- upvalues: localizeStrings (ref), localization (ref), localizationService (ref)
-	return localizeStrings(localization.new(localizationService.RobloxLocaleId), {
-		title = if p1 ~= nil then p1 else "Feature.AccountSettings.Heading.Tab.Security"
+return function(p1) --[[ Line: 10 ]]
+	-- upvalues: LocalizeStringsFunction (copy), Localization (copy), LocalizationService (copy)
+	return LocalizeStringsFunction(Localization.new(LocalizationService.RobloxLocaleId), {
+		title = if p1 == nil then "Feature.AccountSettings.Heading.Tab.Security" else p1
 	}).title
 end

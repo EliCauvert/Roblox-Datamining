@@ -1,11 +1,11 @@
-﻿local parent = script.Parent
-local reactModule = require(parent.Parent.React)
-local helpPageContainerModule = require(parent.Components.HelpPageContainer)
-local keybindContextProviderModule = require(parent.Context.KeybindContextProvider)
+﻿local Parent = script.Parent
+local ReactModule = require(Parent.Parent.React)
+local HelpPageContainerModule = require(Parent.Components.HelpPageContainer)
+local KeybindContextProviderModule = require(Parent.Context.KeybindContextProvider)
 
-return function()
-	-- upvalues: reactModule (ref), keybindContextProviderModule (ref), helpPageContainerModule (ref)
-	return reactModule.createElement(keybindContextProviderModule, nil, {
-		HelpPageContainer = reactModule.createElement(helpPageContainerModule)
+return function() --[[ Line: 10 | Named "_createPageView" ]]
+	-- upvalues: ReactModule (copy), KeybindContextProviderModule (copy), HelpPageContainerModule (copy)
+	return ReactModule.createElement(KeybindContextProviderModule, nil, {
+		HelpPageContainer = ReactModule.createElement(HelpPageContainerModule)
 	})
 end

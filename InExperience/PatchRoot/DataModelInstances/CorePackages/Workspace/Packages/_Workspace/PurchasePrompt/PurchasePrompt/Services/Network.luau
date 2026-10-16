@@ -1,569 +1,608 @@
-﻿local purchasePrompt = script:FindFirstAncestor("PurchasePrompt")
-local parent = purchasePrompt.Parent
-local httpService = game:GetService("HttpService")
-local contentProviderService = game:GetService("ContentProvider")
-local marketplaceService = game:GetService("MarketplaceService")
-local insertService = game:GetService("InsertService")
-local userInputService = game:GetService("UserInputService")
-local playersService = game:GetService("Players")
-local creatorStoreService = game:GetService("CreatorStoreService")
-local urlBuilder = require(parent.PurchasePromptDeps).UrlBuilder.UrlBuilder
-local promiseModule = require(purchasePrompt.Promise)
-local premiumProductModule = require(purchasePrompt.Models.PremiumProduct)
-local _ = require(purchasePrompt.types)
-local debugLogModule = require(purchasePrompt.Utils.debugLog)
-local serializeTableModule = require(purchasePrompt.Utils.serializeTable)
-local isGenericChallengeResponseModule = require(purchasePrompt.Utils.isGenericChallengeResponse)
-local enablePlayerOwnsBundleApiEngineFeature = game:GetEngineFeature("EnablePlayerOwnsBundleApi")
-local enableDevSubscriptionPurchaseWithRobuxEngineFeature = game:GetEngineFeature("EnableDevSubscriptionPurchaseWithRobux")
-local getFFlagEnablePromptPurchaseRequestedV2Module = require(purchasePrompt.Flags.GetFFlagEnablePromptPurchaseRequestedV2)
-local getFFlagEnablePromptPurchaseRequestedV2Take2Module = require(purchasePrompt.Flags.GetFFlagEnablePromptPurchaseRequestedV2Take2)
-local getFFlagEnableCreatorStorePurchasingCutoverModule = require(purchasePrompt.Flags.GetFFlagEnableCreatorStorePurchasingCutover)
-local fFlagEnableUnifiedPurchaseFlowForDevSubs = require(parent.SharedFlags).FFlagEnableUnifiedPurchaseFlowForDevSubs
-local fFlagUnifiedPurchaseSupportRefetchingLooksAfterUpsellModule = require(purchasePrompt.Flags.FFlagUnifiedPurchaseSupportRefetchingLooksAfterUpsell)
-local fFlagEnableRequestLocationTypeForSduiPurchaseModule = require(purchasePrompt.Flags.FFlagEnableRequestLocationTypeForSduiPurchase)
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagUseGetGamePassOwnershipApi = sharedFlagsModule.FFlagUseGetGamePassOwnershipApi
-local fFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow = sharedFlagsModule.FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow
-local fFlagEnablePurchasePayloadInExperienceShop = sharedFlagsModule.FFlagEnablePurchasePayloadInExperienceShop
-local fFlagEnableMarketplacePurchaseDeepLinkAttribution = sharedFlagsModule.FFlagEnableMarketplacePurchaseDeepLinkAttribution
-local fFlagRefreshPriceOnRetryAfterUpsellModule = require(purchasePrompt.Flags.FFlagRefreshPriceOnRetryAfterUpsell)
-local fFlagPurchasePromptCartPricingEnabledModule = require(purchasePrompt.Flags.FFlagPurchasePromptCartPricingEnabled)
-local fFlagEnableInExperienceOffersPurchaseFlow = sharedFlagsModule.FFlagEnableInExperienceOffersPurchaseFlow
-local fFlagPurchasePromptFetchCartPricingForLooks = sharedFlagsModule.FFlagPurchasePromptFetchCartPricingForLooks
-local replaced = string.gsub(string.gsub(contentProviderService.BaseUrl:lower(), "/m.", "/www."), "http:", "https:")
-replaced = string.gsub(replaced, "https://www", "https://api")
-local replaced_1 = string.gsub(replaced, "https://www", "https://apis")
-local replaced_2 = string.gsub(replaced, "https://www", "https://games")
-local replaced_3 = string.gsub(replaced, "https://www", "https://abtesting")
-local replaced_4 = string.gsub(replaced, "https://www.", "https://catalog.")
-local replaced_5 = string.gsub(replaced, "https://www.", "https://economy.")
-local replaced_6 = string.gsub(replaced, "https://www.", "https://premiumfeatures.")
-local replaced_7 = string.gsub(replaced, "https://www.", "https://economycreatorstats.")
-local replaced_8 = string.gsub(replaced, "https://www", "https://users")
+﻿local PurchasePrompt = script:FindFirstAncestor("PurchasePrompt")
+local Parent = PurchasePrompt.Parent
+local HttpService = game:GetService("HttpService")
+local MarketplaceService = game:GetService("MarketplaceService")
+local InsertService = game:GetService("InsertService")
+local UserInputService = game:GetService("UserInputService")
+local Players = game:GetService("Players")
+local CreatorStoreService = game:GetService("CreatorStoreService")
+local UrlBuilder = require(Parent.PurchasePromptDeps).UrlBuilder.UrlBuilder
+local PromiseModule = require(PurchasePrompt.Promise)
+local PremiumProductModule = require(PurchasePrompt.Models.PremiumProduct)
+local _ = require(PurchasePrompt.types)
+local DebugLogModule = require(PurchasePrompt.Utils.debugLog)
+local SerializeTableModule = require(PurchasePrompt.Utils.serializeTable)
+local IsGenericChallengeResponseModule = require(PurchasePrompt.Utils.isGenericChallengeResponse)
+local IsGetPassOwnershipApiEnabledModule = require(PurchasePrompt.Utils.isGetPassOwnershipApiEnabled)
+local EnablePlayerOwnsBundleApiEngineFeature = game:GetEngineFeature("EnablePlayerOwnsBundleApi")
+local EnableDevSubscriptionPurchaseWithRobuxEngineFeature = game:GetEngineFeature("EnableDevSubscriptionPurchaseWithRobux")
+local GetFFlagEnablePromptPurchaseRequestedV2Module = require(PurchasePrompt.Flags.GetFFlagEnablePromptPurchaseRequestedV2)
+local GetFFlagEnablePromptPurchaseRequestedV2Take2Module = require(PurchasePrompt.Flags.GetFFlagEnablePromptPurchaseRequestedV2Take2)
+local GetFFlagEnableCreatorStorePurchasingCutoverModule = require(PurchasePrompt.Flags.GetFFlagEnableCreatorStorePurchasingCutover)
+local FFlagEnableUnifiedPurchaseFlowForDevSubs = require(Parent.SharedFlags).FFlagEnableUnifiedPurchaseFlowForDevSubs
+local FFlagUnifiedPurchaseSupportRefetchingLooksAfterUpsellModule = require(PurchasePrompt.Flags.FFlagUnifiedPurchaseSupportRefetchingLooksAfterUpsell)
+local FFlagEnableRequestLocationTypeForSduiPurchaseModule = require(PurchasePrompt.Flags.FFlagEnableRequestLocationTypeForSduiPurchase)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagUseGetGamePassOwnershipApi = SharedFlagsModule.FFlagUseGetGamePassOwnershipApi
+local FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow = SharedFlagsModule.FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow
+local FFlagEnablePurchasePayloadInExperienceShop = SharedFlagsModule.FFlagEnablePurchasePayloadInExperienceShop
+local FFlagEnableMarketplacePurchaseDeepLinkAttribution = SharedFlagsModule.FFlagEnableMarketplacePurchaseDeepLinkAttribution
+local FFlagRefreshPriceOnRetryAfterUpsellModule = require(PurchasePrompt.Flags.FFlagRefreshPriceOnRetryAfterUpsell)
+local FFlagPurchasePromptCartPricingEnabledModule = require(PurchasePrompt.Flags.FFlagPurchasePromptCartPricingEnabled)
+local FFlagEnableInExperienceOffersPurchaseFlow = SharedFlagsModule.FFlagEnableInExperienceOffersPurchaseFlow
+local FFlagPurchasePromptFetchCartPricingForLooks = SharedFlagsModule.FFlagPurchasePromptFetchCartPricingForLooks
+local Replaced = string.gsub(string.gsub(game:GetService("ContentProvider").BaseUrl:lower(), "/m.", "/www."), "http:", "https:")
+local _ = string.gsub(Replaced, "https://www", "https://api")
+local Replaced1 = string.gsub(Replaced, "https://www", "https://apis")
+local Replaced2 = string.gsub(Replaced, "https://www", "https://games")
+local Replaced3 = string.gsub(Replaced, "https://www", "https://abtesting")
+local Replaced4 = string.gsub(Replaced, "https://www.", "https://catalog.")
+local Replaced5 = string.gsub(Replaced, "https://www.", "https://economy.")
+local Replaced6 = string.gsub(Replaced, "https://www.", "https://premiumfeatures.")
+local Replaced7 = string.gsub(Replaced, "https://www.", "https://economycreatorstats.")
+local Replaced8 = string.gsub(Replaced, "https://www", "https://users")
 
-local function request(p1, p2, p3)
-	-- upvalues: debugLogModule (ref), serializeTableModule (ref), httpService (ref)
-	debugLogModule(function()
-		-- upvalues: p1 (ref), serializeTableModule (copy)
-		return "Request " .. p1.Url .. "\n" .. serializeTableModule(p1)
+local function request(Options, Callback1, Callback) --[[ Line: 58 ]]
+	-- upvalues: DebugLogModule (copy), SerializeTableModule (copy), HttpService (copy)
+	DebugLogModule(function(): string --[[ Line: 59 ]]
+		-- upvalues: Options (copy), SerializeTableModule (upval)
+		return "Request " .. Options.Url .. "\n" .. SerializeTableModule(Options)
 	end)
 	
-	return httpService:RequestInternal(p1):Start(function(p4, p5)
-		-- upvalues: debugLogModule (copy), p1 (ref), serializeTableModule (copy), httpService (copy), p2 (ref), p3 (ref)
-		debugLogModule(function()
-			-- upvalues: p1 (copy), serializeTableModule (copy), p5 (ref)
-			return "Response " .. p1.Url .. "\n" .. serializeTableModule(p5)
+	return HttpService:RequestInternal(Options):Start(function(p1, p2) --[[ Line: 62 ]]
+		-- upvalues: DebugLogModule (upval), Options (copy), SerializeTableModule (upval), HttpService (upval), Callback1 (copy), Callback (copy)
+		DebugLogModule(function(): string --[[ Line: 63 ]]
+			-- upvalues: Options (upval), SerializeTableModule (upval), p2 (copy)
+			return "Response " .. Options.Url .. "\n" .. SerializeTableModule(p2)
 		end)
 		
-		if not p4 then
-			p3(tostring(p5.StatusMessage))
+		if not p1 then
+			Callback((tostring(p2.StatusMessage)))
 			
 			return
 		end
-		local _ = nil
-		local ok, status = pcall(httpService.JSONDecode, httpService, p5.Body)
-		local var1 = status
+		local Success, Result = pcall(HttpService.JSONDecode, HttpService, p2.Body)
 		
-		if ok then
-			p2(var1)
+		if Success then
+			Callback1(Result)
 			
 			return
+		else
+			Callback("Could not parse JSON.")
 		end
-		p3("Could not parse JSON.")
 	end)
 end
 
-local function getABTestGroup(p1, p2)
-	-- upvalues: promiseModule (ref), request (ref), replaced_3 (ref), httpService (ref)
-	local list = {
+local function getABTestGroup(SubjectTargetId, ExperimentName) --[[ Line: 83 ]]
+	-- upvalues: PromiseModule (copy), request (copy), Replaced3 (copy), HttpService (copy)
+	local Input = {
 		{
 			SubjectType = 1,
-			ExperimentName = p2,
-			SubjectTargetId = p1
+			ExperimentName = ExperimentName,
+			SubjectTargetId = SubjectTargetId
 		}
 	}
 	
-	return promiseModule.new(function(p3, p4)
-		-- upvalues: request (copy), replaced_3 (copy), httpService (copy), list (ref)
+	return PromiseModule.new(function(p1, p2) --[[ Line: 92 ]]
+		-- upvalues: request (upval), Replaced3 (upval), HttpService (upval), Input (copy)
 		return request({
 			Method = "POST",
-			Url = replaced_3 .. "v1/get-enrollments",
-			Body = httpService:JSONEncode(list),
+			Url = Replaced3 .. "v1/get-enrollments",
+			Body = HttpService:JSONEncode(Input),
 			Headers = {
 				["Content-Type"] = "application/json",
 				Accept = "application/json"
 			}
-		}, p3, p4)
-	end)
-end
-
-local function getProductInfo(p1, p2)
-	-- upvalues: marketplaceService (ref)
-	return marketplaceService:GetProductInfoAsync(p1, p2)
-end
-
-local function getSubscriptionProductInfo(p1)
-	-- upvalues: marketplaceService (ref)
-	return marketplaceService:GetSubscriptionProductInfoAsync(p1)
-end
-
-local function getPremiumProductInfo()
-	-- upvalues: promiseModule (ref), request (ref), replaced_6 (ref), premiumProductModule (ref), userInputService (ref)
-	return promiseModule.new(function(p1, p2)
-		-- upvalues: request (copy), replaced_6 (copy), premiumProductModule (copy), userInputService (copy)
-		request({
-			Method = "GET",
-			Url = replaced_6 .. "v1/products?typeName=Subscription"
-		}, function(p3)
-			-- upvalues: premiumProductModule (copy), userInputService (copy), p1 (ref)
-			local var1 = nil
-			
-			for i, v in ipairs(p3.products) do
-				local var2 = premiumProductModule(v)
-				
-				if var2 ~= nil and (var1 == nil or var2.robuxAmount < var1.robuxAmount) then
-					var1 = var2
-				end
-			end
-			if userInputService:GetPlatform() == Enum.Platform.Android and var1 ~= nil and var1.mobileProductId ~= nil then
-				var1.mobileProductId = var1.mobileProductId:lower()
-			end
-			p1(var1)
-		end, p2)
-	end)
-end
-
-local function getPlayerOwns(p1, p2, p3)
-	-- upvalues: marketplaceService (ref), enablePlayerOwnsBundleApiEngineFeature (ref), fFlagUseGetGamePassOwnershipApi (ref)
-	return if p3 == Enum.InfoType.Asset then marketplaceService:PlayerOwnsAssetAsync(p1, p2) elseif enablePlayerOwnsBundleApiEngineFeature and p3 == Enum.InfoType.Bundle then marketplaceService:PlayerOwnsBundleAsync(p1, p2) elseif p3 == Enum.InfoType.GamePass then if fFlagUseGetGamePassOwnershipApi then false else marketplaceService:UserOwnsGamePassAsync(p1.UserId, p2) else p3 == Enum.InfoType.Subscription and marketplaceService:IsPlayerSubscribed(p1, p2)
-end
-
-local function performPurchase(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12)
-	-- upvalues: getFFlagEnablePromptPurchaseRequestedV2Module (ref), getFFlagEnablePromptPurchaseRequestedV2Take2Module (ref), fFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow (ref), marketplaceService (ref), fFlagEnablePurchasePayloadInExperienceShop (ref), fFlagEnableMarketplacePurchaseDeepLinkAttribution (ref), isGenericChallengeResponseModule (ref)
-	local ok, status = pcall(function()
-		-- upvalues: getFFlagEnablePromptPurchaseRequestedV2Module (copy), getFFlagEnablePromptPurchaseRequestedV2Take2Module (copy), fFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow (copy), marketplaceService (copy), p1 (ref), p2 (ref), p3 (ref), p4 (ref), p5 (ref), p6 (ref), p7 (ref), p8 (ref), p9 (ref), p10 (ref), fFlagEnablePurchasePayloadInExperienceShop (copy), p11 (ref), p12 (ref), fFlagEnableMarketplacePurchaseDeepLinkAttribution (copy)
-		return if not (not getFFlagEnablePromptPurchaseRequestedV2Module() and not getFFlagEnablePromptPurchaseRequestedV2Take2Module()) then if fFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow then marketplaceService:PerformPurchase(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, if fFlagEnablePurchasePayloadInExperienceShop then p11 else nil, p12) elseif fFlagEnablePurchasePayloadInExperienceShop then marketplaceService:PerformPurchase(p1, p2, p3, p4, p5, p6, p7, p8, p9, nil, p11, if fFlagEnableMarketplacePurchaseDeepLinkAttribution then p12 else nil) else marketplaceService:PerformPurchase(p1, p2, p3, p4, p5, p6, p7, p8, p9, nil, nil, if fFlagEnableMarketplacePurchaseDeepLinkAttribution then p12 else nil) else marketplaceService:PerformPurchase(p1, p2, p3, p4, p5, p6, p7, p8)
-	end)
-	
-	if ok then
-		return status
-	elseif isGenericChallengeResponseModule(status) then
-		return status
-	end
-	error(tostring(status))
-end
-
-local function performPurchaseV2(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11)
-	-- upvalues: marketplaceService (ref), isGenericChallengeResponseModule (ref)
-	local ok, status = pcall(function()
-		-- upvalues: p6 (ref), p7 (ref), p8 (ref), p9 (ref), p10 (ref), p11 (ref), marketplaceService (copy), p1 (ref), p2 (ref), p3 (ref), p4 (ref), p5 (ref)
-		return marketplaceService:PerformPurchaseV2(p1, p2, p3, p4, p5, {
-			CollectibleItemId = p6,
-			CollectibleProductId = p7,
-			IdempotencyKey = p8,
-			PurchaseAuthToken = p9,
-			CollectibleItemInstanceId = p10,
-			PurchaseOptions = p11
-		})
-	end)
-	
-	if ok then
-		return status
-	elseif isGenericChallengeResponseModule(status) then
-		return status
-	end
-	error(tostring(status))
-end
-
-local function performCreatorStorePurchase(p1, p2)
-	-- upvalues: creatorStoreService (ref), isGenericChallengeResponseModule (ref)
-	local ok, status = pcall(function()
-		-- upvalues: creatorStoreService (copy), p1 (ref), p2 (ref)
-		return creatorStoreService:performCreatorStorePurchase(p1, p2)
-	end)
-	
-	if ok then
-		return status
-	elseif isGenericChallengeResponseModule(status) then
-		return status
-	end
-	error(tostring(status))
-end
-
-local function getAssetInfo(value)
-	-- upvalues: creatorStoreService (ref)
-	return creatorStoreService:getAssetInfoAsync(value)
-end
-
-local function getCreatorStoreProductInfo(p1, p2)
-	-- upvalues: creatorStoreService (ref)
-	return creatorStoreService:getCreatorStoreProductInfoAsync(p1, p2)
-end
-
-local function loadAssetForEquip(value)
-	-- upvalues: insertService (ref)
-	return insertService:LoadAsset(value)
-end
-
-local function getAccountInfo()
-	-- upvalues: promiseModule (ref), request (ref), replaced_8 (ref)
-	return promiseModule.new(function(p1, p2)
-		-- upvalues: request (copy), replaced_8 (copy)
-		request({
-			Method = "GET",
-			Url = replaced_8 .. "v1/users/authenticated/app-launch-info"
 		}, p1, p2)
 	end)
 end
 
-local function getBalanceInfo()
-	-- upvalues: promiseModule (ref), request (ref), replaced_5 (ref)
-	return promiseModule.new(function(p1, p2)
-		-- upvalues: request (copy), replaced_5 (copy)
-		request({ Method = "GET", Url = replaced_5 .. "v1/user/currency" }, p1, p2)
+local function getProductInfo(AssetId, InfoType) --[[ Line: 105 ]]
+	-- upvalues: MarketplaceService (copy)
+	return MarketplaceService:GetProductInfoAsync(AssetId, InfoType)
+end
+
+local function getSubscriptionProductInfo(SubscriptionId) --[[ Line: 109 ]]
+	-- upvalues: MarketplaceService (copy)
+	return MarketplaceService:GetSubscriptionProductInfoAsync(SubscriptionId)
+end
+
+local function getPremiumProductInfo() --[[ Line: 113 ]]
+	-- upvalues: PromiseModule (copy), request (copy), Replaced6 (copy), PremiumProductModule (copy), UserInputService (copy)
+	return PromiseModule.new(function(Callback, p1) --[[ Line: 114 ]]
+		-- upvalues: request (upval), Replaced6 (upval), PremiumProductModule (upval), UserInputService (upval)
+		request({
+			Method = "GET",
+			Url = Replaced6 .. "v1/products?typeName=Subscription"
+		}, function(p2) --[[ Line: 118 ]]
+			-- upvalues: PremiumProductModule (upval), UserInputService (upval), Callback (copy)
+			local v1 = nil
+			
+			for _, product in ipairs(p2.products) do
+				local PremiumProductModuleResult = PremiumProductModule(product)
+				
+				if PremiumProductModuleResult ~= nil and (v1 == nil or PremiumProductModuleResult.robuxAmount < v1.robuxAmount) then
+					v1 = PremiumProductModuleResult
+				end
+			end
+			if UserInputService:GetPlatform() == Enum.Platform.Android and v1 ~= nil and v1.mobileProductId ~= nil then
+				v1.mobileProductId = v1.mobileProductId:lower()
+			end
+			Callback(v1)
+		end, p1)
 	end)
 end
 
-local function getBundleDetails(p1)
-	-- upvalues: replaced_4 (ref), promiseModule (ref), request (ref)
-	local t = {
+local function getPlayerOwns(Player, GamePassId, InfoType) --[[ Line: 141 ]]
+	-- upvalues: MarketplaceService (copy), EnablePlayerOwnsBundleApiEngineFeature (copy), FFlagUseGetGamePassOwnershipApi (copy), IsGetPassOwnershipApiEnabledModule (copy)
+	if InfoType == Enum.InfoType.Asset then
+		return MarketplaceService:PlayerOwnsAssetAsync(Player, GamePassId)
+	end
+	if EnablePlayerOwnsBundleApiEngineFeature and InfoType == Enum.InfoType.Bundle then
+		return MarketplaceService:PlayerOwnsBundleAsync(Player, GamePassId)
+	end
+	if InfoType ~= Enum.InfoType.GamePass then
+		return InfoType == Enum.InfoType.Subscription and MarketplaceService:IsPlayerSubscribed(Player, GamePassId)
+	end
+	if FFlagUseGetGamePassOwnershipApi then
+		local Success, Result = pcall(function() --[[ Line: 149 ]]
+			-- upvalues: MarketplaceService (upval), Player (copy), GamePassId (copy)
+			return MarketplaceService:GetPassOwnershipAsync(Player, GamePassId)
+		end)
+		
+		if Success then
+			return typeof(Result) == "table" and Result.Owned == true
+		end
+		if IsGetPassOwnershipApiEnabledModule() then
+			error(Result, 0)
+		end
+	end
+	return MarketplaceService:UserOwnsGamePassAsync(Player.UserId, GamePassId)
+end
+
+local function performPurchase(InfoType, ProductId, ExpectedPrice, RequestId, IsRobloxPurchase, CollectibleItemId, CollectibleProductId, IdempotencyKey, PurchaseAuthToken, TimedOptionsDays, PurchasePayload, PurchaseOptions) --[[ Line: 169 ]]
+	-- upvalues: GetFFlagEnablePromptPurchaseRequestedV2Module (copy), GetFFlagEnablePromptPurchaseRequestedV2Take2Module (copy), FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow (copy), MarketplaceService (copy), FFlagEnablePurchasePayloadInExperienceShop (copy), FFlagEnableMarketplacePurchaseDeepLinkAttribution (copy), IsGenericChallengeResponseModule (copy)
+	local Success, Result = pcall(function() --[[ Line: 183 ]]
+		-- upvalues: GetFFlagEnablePromptPurchaseRequestedV2Module (upval), GetFFlagEnablePromptPurchaseRequestedV2Take2Module (upval), FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow (upval), MarketplaceService (upval), InfoType (copy), ProductId (copy), ExpectedPrice (copy), RequestId (copy), IsRobloxPurchase (copy), CollectibleItemId (copy), CollectibleProductId (copy), IdempotencyKey (copy), PurchaseAuthToken (copy), TimedOptionsDays (copy), FFlagEnablePurchasePayloadInExperienceShop (upval), PurchasePayload (copy), PurchaseOptions (copy), FFlagEnableMarketplacePurchaseDeepLinkAttribution (upval)
+		return if GetFFlagEnablePromptPurchaseRequestedV2Module() or GetFFlagEnablePromptPurchaseRequestedV2Take2Module() then if FFlagAXSupportRentalPurchaseInUnifiedProductPurchaseFlow then MarketplaceService:PerformPurchase(InfoType, ProductId, ExpectedPrice, RequestId, IsRobloxPurchase, CollectibleItemId, CollectibleProductId, IdempotencyKey, PurchaseAuthToken, TimedOptionsDays, if FFlagEnablePurchasePayloadInExperienceShop then PurchasePayload else nil, PurchaseOptions) elseif FFlagEnablePurchasePayloadInExperienceShop then MarketplaceService:PerformPurchase(InfoType, ProductId, ExpectedPrice, RequestId, IsRobloxPurchase, CollectibleItemId, CollectibleProductId, IdempotencyKey, PurchaseAuthToken, nil, PurchasePayload, if FFlagEnableMarketplacePurchaseDeepLinkAttribution then PurchaseOptions else nil) else MarketplaceService:PerformPurchase(InfoType, ProductId, ExpectedPrice, RequestId, IsRobloxPurchase, CollectibleItemId, CollectibleProductId, IdempotencyKey, PurchaseAuthToken, nil, nil, if FFlagEnableMarketplacePurchaseDeepLinkAttribution then PurchaseOptions else nil) else MarketplaceService:PerformPurchase(InfoType, ProductId, ExpectedPrice, RequestId, IsRobloxPurchase, CollectibleItemId, CollectibleProductId, IdempotencyKey)
+	end)
+	
+	if Success then
+		return Result
+	elseif IsGenericChallengeResponseModule(Result) then
+		return Result
+	else
+		error((tostring(Result)))
+	end
+end
+
+local function performPurchaseV2(InfoType, ProductId, ExpectedPrice, RequestId, IsRobloxPurchase, CollectibleItemId, CollectibleProductId, IdempotencyKey, PurchaseAuthToken, CollectibleItemInstanceId, PurchaseOptions) --[[ Line: 259 ]]
+	-- upvalues: MarketplaceService (copy), IsGenericChallengeResponseModule (copy)
+	local Success, Result = pcall(function() --[[ Line: 272 ]]
+		-- upvalues: CollectibleItemId (copy), CollectibleProductId (copy), IdempotencyKey (copy), PurchaseAuthToken (copy), CollectibleItemInstanceId (copy), PurchaseOptions (copy), MarketplaceService (upval), InfoType (copy), ProductId (copy), ExpectedPrice (copy), RequestId (copy), IsRobloxPurchase (copy)
+		return MarketplaceService:PerformPurchaseV2(InfoType, ProductId, ExpectedPrice, RequestId, IsRobloxPurchase, {
+			CollectibleItemId = CollectibleItemId,
+			CollectibleProductId = CollectibleProductId,
+			IdempotencyKey = IdempotencyKey,
+			PurchaseAuthToken = PurchaseAuthToken,
+			CollectibleItemInstanceId = CollectibleItemInstanceId,
+			PurchaseOptions = PurchaseOptions
+		})
+	end)
+	
+	if Success then
+		return Result
+	elseif IsGenericChallengeResponseModule(Result) then
+		return Result
+	else
+		error((tostring(Result)))
+	end
+end
+
+local function performCreatorStorePurchase(p1, p2) --[[ Line: 306 ]]
+	-- upvalues: CreatorStoreService (copy), IsGenericChallengeResponseModule (copy)
+	local Success, Result = pcall(function() --[[ Line: 307 ]]
+		-- upvalues: CreatorStoreService (upval), p1 (copy), p2 (copy)
+		return CreatorStoreService:performCreatorStorePurchase(p1, p2)
+	end)
+	
+	if Success then
+		return Result
+	elseif IsGenericChallengeResponseModule(Result) then
+		return Result
+	else
+		error((tostring(Result)))
+	end
+end
+
+local function getAssetInfo(p1) --[[ Line: 326 ]]
+	-- upvalues: CreatorStoreService (copy)
+	return CreatorStoreService:getAssetInfoAsync(p1)
+end
+
+local function getCreatorStoreProductInfo(p1, p2) --[[ Line: 330 ]]
+	-- upvalues: CreatorStoreService (copy)
+	return CreatorStoreService:getCreatorStoreProductInfoAsync(p1, p2)
+end
+
+local function loadAssetForEquip(AssetId) --[[ Line: 334 ]]
+	-- upvalues: InsertService (copy)
+	return InsertService:LoadAsset(AssetId)
+end
+
+local function getAccountInfo() --[[ Line: 338 ]]
+	-- upvalues: PromiseModule (copy), request (copy), Replaced8 (copy)
+	return PromiseModule.new(function(p1, p2) --[[ Line: 339 ]]
+		-- upvalues: request (upval), Replaced8 (upval)
+		request({
+			Method = "GET",
+			Url = Replaced8 .. "v1/users/authenticated/app-launch-info"
+		}, p1, p2)
+	end)
+end
+
+local function getBalanceInfo() --[[ Line: 347 ]]
+	-- upvalues: PromiseModule (copy), request (copy), Replaced5 (copy)
+	return PromiseModule.new(function(p1, p2) --[[ Line: 348 ]]
+		-- upvalues: request (upval), Replaced5 (upval)
+		request({ Method = "GET", Url = Replaced5 .. "v1/user/currency" }, p1, p2)
+	end)
+end
+
+local function getBundleDetails(p1) --[[ Line: 356 ]]
+	-- upvalues: Replaced4 (copy), PromiseModule (copy), request (copy)
+	local config = {
 		Method = "GET",
-		Url = replaced_4 .. "v1/bundles/" .. tostring(p1) .. "/details"
+		Url = Replaced4 .. "v1/bundles/" .. tostring(p1) .. "/details"
 	}
 	
-	return promiseModule.new(function(p2, p3)
-		-- upvalues: request (copy), t (ref)
-		spawn(function()
-			-- upvalues: request (copy), t (copy), p2 (ref), p3 (ref)
-			request(t, p2, p3)
+	return PromiseModule.new(function(p2, p3) --[[ Line: 363 ]]
+		-- upvalues: request (upval), config (copy)
+		spawn(function() --[[ Line: 364 ]]
+			-- upvalues: request (upval), config (upval), p2 (copy), p3 (copy)
+			request(config, p2, p3)
 		end)
 	end)
 end
 
-local function getProductPurchasableDetails(p1)
-	-- upvalues: replaced_5 (ref), promiseModule (ref), request (ref)
-	local t = {
+local function getProductPurchasableDetails(p1) --[[ Line: 370 ]]
+	-- upvalues: Replaced5 (copy), PromiseModule (copy), request (copy)
+	local config = {
 		Method = "GET",
-		Url = replaced_5 .. "v1/products/" .. tostring(p1) .. "?showPurchasable=true"
+		Url = Replaced5 .. "v1/products/" .. tostring(p1) .. "?showPurchasable=true"
 	}
 	
-	return promiseModule.new(function(p2, p3)
-		-- upvalues: request (copy), t (ref)
-		spawn(function()
-			-- upvalues: request (copy), t (copy), p2 (ref), p3 (ref)
-			request(t, p2, p3)
+	return PromiseModule.new(function(p2, p3) --[[ Line: 377 ]]
+		-- upvalues: request (upval), config (copy)
+		spawn(function() --[[ Line: 378 ]]
+			-- upvalues: request (upval), config (upval), p2 (copy), p3 (copy)
+			request(config, p2, p3)
 		end)
 	end)
 end
 
-local function getCatalogItemDetails(p1, p2)
-	-- upvalues: replaced_4 (ref), promiseModule (ref), request (ref)
-	local t = {
+local function getCatalogItemDetails(p1, p2) --[[ Line: 384 ]]
+	-- upvalues: Replaced4 (copy), PromiseModule (copy), request (copy)
+	local config = {
 		Method = "GET",
-		Url = string.format("%sv1/catalog/items/%d/details?itemType=%s", replaced_4, p1, p2)
+		Url = string.format("%sv1/catalog/items/%d/details?itemType=%s", Replaced4, p1, p2)
 	}
 	
-	return promiseModule.new(function(p3, p4)
-		-- upvalues: request (copy), t (ref)
-		spawn(function()
-			-- upvalues: request (copy), t (copy), p3 (ref), p4 (ref)
-			request(t, p3, p4)
+	return PromiseModule.new(function(p3, p4) --[[ Line: 390 ]]
+		-- upvalues: request (upval), config (copy)
+		spawn(function() --[[ Line: 391 ]]
+			-- upvalues: request (upval), config (upval), p3 (copy), p4 (copy)
+			request(config, p3, p4)
 		end)
 	end)
 end
 
-local function getResellers(p1, p2)
-	-- upvalues: replaced_1 (ref), promiseModule (ref), request (ref)
-	local t = {
+local function getResellers(p1, p2) --[[ Line: 397 ]]
+	-- upvalues: Replaced1 (copy), PromiseModule (copy), request (copy)
+	local config = {
 		Method = "GET",
-		Url = string.format("%smarketplace-sales/v1/item/%s/resellers?cursor=&limit=%d", replaced_1, p1, p2 or 10)
+		Url = string.format("%smarketplace-sales/v1/item/%s/resellers?cursor=&limit=%d", Replaced1, p1, p2 or 10)
 	}
 	
-	return promiseModule.new(function(p3, p4)
-		-- upvalues: request (copy), t (ref)
-		spawn(function()
-			-- upvalues: request (copy), t (copy), p3 (ref), p4 (ref)
-			request(t, p3, p4)
+	return PromiseModule.new(function(p3, p4) --[[ Line: 409 ]]
+		-- upvalues: request (upval), config (copy)
+		spawn(function() --[[ Line: 410 ]]
+			-- upvalues: request (upval), config (upval), p3 (copy), p4 (copy)
+			request(config, p3, p4)
 		end)
 	end)
 end
 
-local function postCartPricing(p1)
-	-- upvalues: replaced_1 (ref), httpService (ref), promiseModule (ref), request (ref)
-	local t = {
+local function postCartPricing(Input) --[[ Line: 416 ]]
+	-- upvalues: Replaced1 (copy), HttpService (copy), PromiseModule (copy), request (copy)
+	local config = {
 		Method = "POST",
-		Url = replaced_1 .. "marketplace-sales/v1/cart-pricing",
-		Body = httpService:JSONEncode(p1),
+		Url = Replaced1 .. "marketplace-sales/v1/cart-pricing",
+		Body = HttpService:JSONEncode(Input),
 		Headers = {
 			["Content-Type"] = "application/json",
 			Accept = "application/json"
 		}
 	}
 	
-	return promiseModule.new(function(p2, p3)
-		-- upvalues: request (copy), t (ref)
-		spawn(function()
-			-- upvalues: request (copy), t (copy), p2 (ref), p3 (ref)
-			request(t, function(p4)
-				-- upvalues: p2 (copy)
-				p2(p4)
-			end, function(p4)
-				-- upvalues: p3 (copy)
-				p3(p4)
+	return PromiseModule.new(function(Callback, Callback1) --[[ Line: 429 ]]
+		-- upvalues: request (upval), config (copy)
+		spawn(function() --[[ Line: 430 ]]
+			-- upvalues: request (upval), config (upval), Callback (copy), Callback1 (copy)
+			request(config, function(p1) --[[ Line: 431 ]]
+				-- upvalues: Callback (upval)
+				Callback(p1)
+			end, function(p1) --[[ Line: 433 ]]
+				-- upvalues: Callback1 (upval)
+				Callback1(p1)
 			end)
 		end)
 	end)
 end
 
-local function postInGameItemCartPricing(p1)
-	-- upvalues: replaced_1 (ref), httpService (ref), promiseModule (ref), request (ref)
-	local t = {
+local function postInGameItemCartPricing(Input) --[[ Line: 441 ]]
+	-- upvalues: Replaced1 (copy), HttpService (copy), PromiseModule (copy), request (copy)
+	local config = {
 		Method = "POST",
-		Url = replaced_1 .. "checkout/v1/cart-pricing",
-		Body = httpService:JSONEncode(p1),
+		Url = Replaced1 .. "checkout/v1/cart-pricing",
+		Body = HttpService:JSONEncode(Input),
 		Headers = {
 			["Content-Type"] = "application/json",
 			Accept = "application/json"
 		}
 	}
 	
-	return promiseModule.new(function(p2, p3)
-		-- upvalues: request (copy), t (ref)
-		request(t, p2, p3)
+	return PromiseModule.new(function(p1, p2) --[[ Line: 452 ]]
+		-- upvalues: request (upval), config (copy)
+		request(config, p1, p2)
 	end)
 end
 
-local function postPremiumImpression()
-	-- upvalues: replaced_7 (ref), httpService (ref), promiseModule (ref)
-	local t = {
+local function postPremiumImpression() --[[ Line: 457 ]]
+	-- upvalues: Replaced7 (copy), HttpService (copy), PromiseModule (copy)
+	local config = {
 		Method = "POST",
-		Url = replaced_7 .. "v1/universes/" .. tostring(game.GameId) .. "/premium-impressions/increment",
-		Body = httpService:JSONEncode("{}"),
+		Url = Replaced7 .. "v1/universes/" .. tostring(game.GameId) .. "/premium-impressions/increment",
+		Body = HttpService:JSONEncode("{}"),
 		Headers = {
 			["Content-Type"] = "application/json",
 			Accept = "application/json"
 		}
 	}
 	
-	return promiseModule.new(function(_, _)
-		-- upvalues: httpService (copy), t (ref)
-		spawn(function()
-			-- upvalues: httpService (copy), t (copy)
-			return httpService:RequestInternal(t):Start(function(_, _) end)
+	return PromiseModule.new(function(_, _) --[[ Line: 472 ]]
+		-- upvalues: HttpService (upval), config (copy)
+		spawn(function() --[[ Line: 473 ]]
+			-- upvalues: HttpService (upval), config (upval)
+			return HttpService:RequestInternal(config):Start(function(_, _) --[[ Line: 474 ]] end)
 		end)
 	end)
 end
 
-local function getPremiumUpsellPrecheck()
-	-- upvalues: replaced_6 (ref), playersService (ref), promiseModule (ref), httpService (ref)
-	local t = {
+local function getPremiumUpsellPrecheck() --[[ Line: 481 ]]
+	-- upvalues: Replaced6 (copy), Players (copy), PromiseModule (copy), HttpService (copy)
+	local config = {
 		Method = "GET",
-		Url = string.format("%sv1/users/%d/premium-upsell-precheck?universeId=%d&placeId=%d", replaced_6, playersService.LocalPlayer.UserId, game.GameId, game.PlaceId)
+		Url = string.format("%sv1/users/%d/premium-upsell-precheck?universeId=%d&placeId=%d", Replaced6, Players.LocalPlayer.UserId, game.GameId, game.PlaceId)
 	}
 	
-	return promiseModule.new(function(p1, p2)
-		-- upvalues: httpService (copy), t (ref)
-		spawn(function()
-			-- upvalues: httpService (copy), t (copy), p1 (ref), p2 (ref)
-			return httpService:RequestInternal(t):Start(function(p3, p4)
-				-- upvalues: p1 (copy), p2 (copy)
-				if p3 and p4.StatusCode == 200 then
-					p1()
+	return PromiseModule.new(function(Callback1, Callback) --[[ Line: 493 ]]
+		-- upvalues: HttpService (upval), config (copy)
+		spawn(function() --[[ Line: 494 ]]
+			-- upvalues: HttpService (upval), config (upval), Callback1 (copy), Callback (copy)
+			return HttpService:RequestInternal(config):Start(function(p1, p2) --[[ Line: 495 ]]
+				-- upvalues: Callback1 (upval), Callback (upval)
+				if p1 and p2.StatusCode == 200 then
+					Callback1()
 					
 					return
+				else
+					Callback()
 				end
-				p2()
 			end)
 		end)
 	end)
 end
 
-local function getSubscriptionPurchaseInfo(p1)
-	-- upvalues: marketplaceService (ref)
-	return marketplaceService:GetSubscriptionPurchaseInfoAsync(p1)
+local function getSubscriptionPurchaseInfo(SubscriptionId) --[[ Line: 506 ]]
+	-- upvalues: MarketplaceService (copy)
+	return MarketplaceService:GetSubscriptionPurchaseInfoAsync(SubscriptionId)
 end
 
-local function performSubscriptionPurchase(p1, p2)
-	-- upvalues: marketplaceService (ref)
-	return marketplaceService:PerformSubscriptionPurchaseV2(p1, p2)
+local function performSubscriptionPurchase(SubscriptionId, PaymentProvider) --[[ Line: 510 ]]
+	-- upvalues: MarketplaceService (copy)
+	return MarketplaceService:PerformSubscriptionPurchaseV2(SubscriptionId, PaymentProvider)
 end
 
-local function getPurchaseWarning(p1, p2, p3)
-	-- upvalues: urlBuilder (ref), promiseModule (ref), request (ref)
-	local t = {
+local function getPurchaseWarning(p1, p2, p3) --[[ Line: 514 ]]
+	-- upvalues: UrlBuilder (copy), PromiseModule (copy), request (copy)
+	local config = {
 		Method = "GET",
-		Url = urlBuilder.economy.purchaseWarning.getPurchaseWarning(p1, p2, not p3)
+		Url = UrlBuilder.economy.purchaseWarning.getPurchaseWarning(p1, p2, not p3)
 	}
 	
-	return promiseModule.new(function(p4, p5)
-		-- upvalues: request (copy), t (ref)
-		spawn(function()
-			-- upvalues: request (copy), t (copy), p4 (ref), p5 (ref)
-			request(t, p4, p5)
+	return PromiseModule.new(function(p4, p5) --[[ Line: 520 ]]
+		-- upvalues: request (upval), config (copy)
+		spawn(function() --[[ Line: 521 ]]
+			-- upvalues: request (upval), config (upval), p4 (copy), p5 (copy)
+			request(config, p4, p5)
 		end)
 	end)
 end
 
-local function postPurchaseWarningAcknowledge(p1)
-	-- upvalues: urlBuilder (ref), httpService (ref), promiseModule (ref)
-	local t = {
+local function postPurchaseWarningAcknowledge(Acknowledgement) --[[ Line: 527 ]]
+	-- upvalues: UrlBuilder (copy), HttpService (copy), PromiseModule (copy)
+	local config = {
 		Method = "POST",
-		Url = urlBuilder.economy.purchaseWarning.ackPurchaseWarning(),
-		Body = httpService:JSONEncode({ acknowledgement = p1 }),
+		Url = UrlBuilder.economy.purchaseWarning.ackPurchaseWarning(),
+		Body = HttpService:JSONEncode({ acknowledgement = Acknowledgement }),
 		Headers = {
 			["Content-Type"] = "application/json",
 			Accept = "application/json"
 		}
 	}
 	
-	return promiseModule.new(function(_, _)
-		-- upvalues: httpService (copy), t (ref)
-		spawn(function()
-			-- upvalues: httpService (copy), t (copy)
-			return httpService:RequestInternal(t):Start(function(_, _) end)
+	return PromiseModule.new(function(_, _) --[[ Line: 541 ]]
+		-- upvalues: HttpService (upval), config (copy)
+		spawn(function() --[[ Line: 542 ]]
+			-- upvalues: HttpService (upval), config (upval)
+			return HttpService:RequestInternal(config):Start(function(_, _) --[[ Line: 543 ]] end)
 		end)
 	end)
 end
 
-local function checkUserPurchaseSettings()
-	-- upvalues: urlBuilder (ref), httpService (ref), promiseModule (ref), request (ref)
-	local t = {
+local function checkUserPurchaseSettings() --[[ Line: 550 ]]
+	-- upvalues: UrlBuilder (copy), HttpService (copy), PromiseModule (copy), request (copy)
+	local config = {
 		Method = "POST",
-		Url = urlBuilder.economy.paymentsGateway.checkUserPurchaseSettings(),
-		Body = httpService:JSONEncode("{}"),
+		Url = UrlBuilder.economy.paymentsGateway.checkUserPurchaseSettings(),
+		Body = HttpService:JSONEncode("{}"),
 		Headers = {
 			["Content-Type"] = "application/json",
 			Accept = "application/json"
 		}
 	}
 	
-	return promiseModule.new(function(p1, p2)
-		-- upvalues: request (copy), t (ref)
-		spawn(function()
-			-- upvalues: request (copy), t (copy), p1 (ref), p2 (ref)
-			request(t, p1, p2)
+	return PromiseModule.new(function(p1, p2) --[[ Line: 563 ]]
+		-- upvalues: request (upval), config (copy)
+		spawn(function() --[[ Line: 564 ]]
+			-- upvalues: request (upval), config (upval), p1 (copy), p2 (copy)
+			request(config, p1, p2)
 		end)
 	end)
 end
 
-local function getVngShopUrl()
-	-- upvalues: urlBuilder (ref), promiseModule (ref), request (ref)
-	local t = {
+local function getVngShopUrl() --[[ Line: 570 ]]
+	-- upvalues: UrlBuilder (copy), PromiseModule (copy), request (copy)
+	local config = {
 		Method = "GET",
-		Url = urlBuilder.economy.vngPayments.getVngShopUrl()
+		Url = UrlBuilder.economy.vngPayments.getVngShopUrl()
 	}
 	
-	return promiseModule.new(function(p1, p2)
-		-- upvalues: request (copy), t (ref)
-		spawn(function()
-			-- upvalues: request (copy), t (copy), p1 (ref), p2 (ref)
-			request(t, p1, p2)
+	return PromiseModule.new(function(p1, p2) --[[ Line: 578 ]]
+		-- upvalues: request (upval), config (copy)
+		spawn(function() --[[ Line: 579 ]]
+			-- upvalues: request (upval), config (upval), p1 (copy), p2 (copy)
+			request(config, p1, p2)
 		end)
 	end)
 end
 
-local function performDevProductEdpPurchase(p1, p2)
-	-- upvalues: fFlagEnableRequestLocationTypeForSduiPurchaseModule (ref), replaced_1 (ref), httpService (ref), promiseModule (ref), request (ref)
-	local requestLocationType, var1
-	local _ = nil
-	
-	if fFlagEnableRequestLocationTypeForSduiPurchaseModule then
-		requestLocationType = p2.requestLocationType
-		var1 = if requestLocationType == nil or requestLocationType == "" then ("%sdeveloper-products/v1/developer-products/%i/purchase"):format(replaced_1, p1) else ("%sdeveloper-products/v1/developer-products/%i/purchase?requestLocationType=%s"):format(replaced_1, p1, requestLocationType)
+local function performDevProductEdpPurchase(p1, Input) --[[ Line: 585 ]]
+	-- upvalues: FFlagEnableRequestLocationTypeForSduiPurchaseModule (copy), Replaced1 (copy), HttpService (copy), PromiseModule (copy), request (copy)
+	local SdeveloperName = nil
+	if FFlagEnableRequestLocationTypeForSduiPurchaseModule then
+		local RequestLocationType = Input.requestLocationType
+		SdeveloperName = if RequestLocationType == nil or RequestLocationType == "" then ("%sdeveloper-products/v1/developer-products/%i/purchase"):format(Replaced1, p1) else ("%sdeveloper-products/v1/developer-products/%i/purchase?requestLocationType=%s"):format(Replaced1, p1, RequestLocationType)
 	else
-		var1 = ("%sdeveloper-products/v1/developer-products/%i/purchase?requestLocationType=ExperienceDetailPage"):format(replaced_1, p1)
+		SdeveloperName = ("%sdeveloper-products/v1/developer-products/%i/purchase?requestLocationType=ExperienceDetailPage"):format(Replaced1, p1)
 	end
-	requestLocationType = {
+	local config = {
 		Method = "POST",
-		Url = var1,
-		Body = httpService:JSONEncode(p2),
+		Url = SdeveloperName,
+		Body = HttpService:JSONEncode(Input),
 		Headers = {
 			["Content-Type"] = "application/json",
 			Accept = "application/json"
 		}
 	}
 	
-	return promiseModule.new(function(p3, p4)
-		-- upvalues: request (copy), requestLocationType (ref)
-		spawn(function()
-			-- upvalues: request (copy), requestLocationType (copy), p3 (ref), p4 (ref)
-			request(requestLocationType, p3, p4)
+	return PromiseModule.new(function(p2, p3) --[[ Line: 613 ]]
+		-- upvalues: request (upval), config (copy)
+		spawn(function() --[[ Line: 614 ]]
+			-- upvalues: request (upval), config (upval), p2 (copy), p3 (copy)
+			request(config, p2, p3)
 		end)
 	end)
 end
 
-local function getExperienceProductInfo(p1)
-	-- upvalues: replaced_2 (ref), promiseModule (ref), request (ref)
-	local t = {
+local function getExperienceProductInfo(p1) --[[ Line: 620 ]]
+	-- upvalues: Replaced2 (copy), PromiseModule (copy), request (copy)
+	local config = {
 		Method = "GET",
-		Url = ("%sv1/games/games-product-info?universeIds=%s"):format(replaced_2, p1)
+		Url = ("%sv1/games/games-product-info?universeIds=%s"):format(Replaced2, p1)
 	}
 	
-	return promiseModule.new(function(p2, p3)
-		-- upvalues: request (copy), t (ref)
-		spawn(function()
-			-- upvalues: request (copy), t (copy), p2 (ref), p3 (ref)
-			request(t, p2, p3)
+	return PromiseModule.new(function(p2, p3) --[[ Line: 628 ]]
+		-- upvalues: request (upval), config (copy)
+		spawn(function() --[[ Line: 629 ]]
+			-- upvalues: request (upval), config (upval), p2 (copy), p3 (copy)
+			request(config, p2, p3)
 		end)
 	end)
 end
 
-local function performExperiencePurchase(p1, p2)
-	-- upvalues: replaced_5 (ref), httpService (ref), promiseModule (ref), request (ref)
-	local t = {
+local function getUniversePrivateServerSettings(p1) --[[ Line: 635 ]]
+	-- upvalues: Replaced1 (copy), PromiseModule (copy), request (copy)
+	local config = {
+		Method = "GET",
+		Url = ("%sprivate-servers-api/universe-private-server-settings?universeId=%d"):format(Replaced1, p1)
+	}
+	
+	return PromiseModule.new(function(p2, p3) --[[ Line: 643 ]]
+		-- upvalues: request (upval), config (copy)
+		spawn(function() --[[ Line: 644 ]]
+			-- upvalues: request (upval), config (upval), p2 (copy), p3 (copy)
+			request(config, p2, p3)
+		end)
+	end)
+end
+
+local function performExperiencePurchase(p1, Input) --[[ Line: 650 ]]
+	-- upvalues: Replaced5 (copy), HttpService (copy), PromiseModule (copy), request (copy)
+	local config = {
 		Method = "POST",
-		Url = ("%sv1/purchases/products/%s"):format(replaced_5, p1),
-		Body = httpService:JSONEncode(p2),
+		Url = ("%sv1/purchases/products/%s"):format(Replaced5, p1),
+		Body = HttpService:JSONEncode(Input),
 		Headers = {
 			["Content-Type"] = "application/json",
 			Accept = "application/json"
 		}
 	}
 	
-	return promiseModule.new(function(p3, p4)
-		-- upvalues: request (copy), t (ref)
-		spawn(function()
-			-- upvalues: request (copy), t (copy), p3 (ref), p4 (ref)
-			request(t, p3, p4)
+	return PromiseModule.new(function(p2, p3) --[[ Line: 663 ]]
+		-- upvalues: request (upval), config (copy)
+		spawn(function() --[[ Line: 664 ]]
+			-- upvalues: request (upval), config (upval), p2 (copy), p3 (copy)
+			request(config, p2, p3)
 		end)
 	end)
 end
 
-local function performLookPurchase(p1, p2)
-	-- upvalues: replaced_1 (ref), httpService (ref), promiseModule (ref), request (ref)
-	local t = {
+local function performLookPurchase(p1, Input) --[[ Line: 670 ]]
+	-- upvalues: Replaced1 (copy), HttpService (copy), PromiseModule (copy), request (copy)
+	local config = {
 		Method = "POST",
-		Url = ("%slook-api/v2/looks/%s/purchase"):format(replaced_1, p1),
-		Body = httpService:JSONEncode(p2),
+		Url = ("%slook-api/v2/looks/%s/purchase"):format(Replaced1, p1),
+		Body = HttpService:JSONEncode(Input),
 		Headers = {
 			["Content-Type"] = "application/json",
 			Accept = "application/json"
 		}
 	}
 	
-	return promiseModule.new(function(p3, p4)
-		-- upvalues: request (copy), t (ref)
-		spawn(function()
-			-- upvalues: request (copy), t (copy), p3 (ref), p4 (ref)
-			request(t, p3, p4)
+	return PromiseModule.new(function(p2, p3) --[[ Line: 683 ]]
+		-- upvalues: request (upval), config (copy)
+		spawn(function() --[[ Line: 684 ]]
+			-- upvalues: request (upval), config (upval), p2 (copy), p3 (copy)
+			request(config, p2, p3)
 		end)
 	end)
 end
 
-local function performLookPurchaseBulkPurchase(p1, p2, p3)
-	-- upvalues: replaced_1 (ref), httpService (ref), playersService (ref), promiseModule (ref), request (ref)
-	local t = {
+local function performLookPurchaseBulkPurchase(LookId, p1, LineItems) --[[ Line: 690 ]]
+	-- upvalues: Replaced1 (copy), HttpService (copy), Players (copy), PromiseModule (copy), request (copy)
+	local config = {
 		Method = "POST",
-		Url = ("%scloud/v2/avatar-marketplace-orders?idempotencyKey.key=%s"):format(replaced_1, p2),
-		Body = httpService:JSONEncode({
-			purchasingUser = `users/{playersService.LocalPlayer.UserId}`,
+		Url = ("%scloud/v2/avatar-marketplace-orders?idempotencyKey.key=%s"):format(Replaced1, p1),
+		Body = HttpService:JSONEncode({
+			purchasingUser = `users/{Players.LocalPlayer.UserId}`,
 			context = {
 				productSurface = "MARKETPLACE_UA",
-				lookId = p1,
-				lookContext = { lookIds = { p1 } }
+				lookId = LookId,
+				lookContext = { lookIds = { LookId } }
 			},
-			fulfillmentGroups = { { strategy = "BEST_EFFORT", lineItems = p3 } }
+			fulfillmentGroups = { { strategy = "BEST_EFFORT", lineItems = LineItems } }
 		}),
 		Headers = {
 			["Content-Type"] = "application/json",
@@ -571,110 +610,111 @@ local function performLookPurchaseBulkPurchase(p1, p2, p3)
 		}
 	}
 	
-	return promiseModule.new(function(p4, p5)
-		-- upvalues: request (copy), t (ref)
-		spawn(function()
-			-- upvalues: request (copy), t (copy), p4 (ref), p5 (ref)
-			request(t, p4, p5)
+	return PromiseModule.new(function(p2, p3) --[[ Line: 722 ]]
+		-- upvalues: request (upval), config (copy)
+		spawn(function() --[[ Line: 723 ]]
+			-- upvalues: request (upval), config (upval), p2 (copy), p3 (copy)
+			request(config, p2, p3)
 		end)
 	end)
 end
 
-local function performDeveloperSubscriptionRobuxPurchase(p1, p2)
-	-- upvalues: enableDevSubscriptionPurchaseWithRobuxEngineFeature (ref), marketplaceService (ref)
-	if not enableDevSubscriptionPurchaseWithRobuxEngineFeature then
+local function performDeveloperSubscriptionRobuxPurchase(SubscriptionId, PriceInRobux) --[[ Line: 729 ]]
+	-- upvalues: EnableDevSubscriptionPurchaseWithRobuxEngineFeature (copy), MarketplaceService (copy)
+	if not EnableDevSubscriptionPurchaseWithRobuxEngineFeature then
 		error("Developer subscription Robux purchase requires engine feature to be enabled")
 		
 		return
 	end
-	local ok, status = pcall(function()
-		-- upvalues: marketplaceService (copy), p1 (ref), p2 (ref)
-		marketplaceService:PerformSubscriptionPurchaseWithRobuxAsync(p1, p2)
+	local Success, Result = pcall(function() --[[ Line: 731 ]]
+		-- upvalues: MarketplaceService (upval), SubscriptionId (copy), PriceInRobux (copy)
+		MarketplaceService:PerformSubscriptionPurchaseWithRobuxAsync(SubscriptionId, PriceInRobux)
 	end)
 	
-	if not ok then
-		error(status)
+	if not Success then
+		error(Result)
 	end
 end
 
-local function getUnifiedPurchaseFlowUserEligibility()
-	-- upvalues: replaced_1 (ref), promiseModule (ref), request (ref)
-	local t = {
+local function getUnifiedPurchaseFlowUserEligibility() --[[ Line: 743 ]]
+	-- upvalues: Replaced1 (copy), PromiseModule (copy), request (copy)
+	local config = {
 		Method = "GET",
-		Url = ("%sroblox-subscriptions/v1/metadata"):format(replaced_1)
+		Url = ("%sroblox-subscriptions/v1/metadata"):format(Replaced1)
 	}
 	
-	return promiseModule.new(function(p1, p2)
-		-- upvalues: request (copy), t (ref)
-		spawn(function()
-			-- upvalues: request (copy), t (copy), p1 (ref), p2 (ref)
-			request(t, p1, p2)
+	return PromiseModule.new(function(p1, p2) --[[ Line: 751 ]]
+		-- upvalues: request (upval), config (copy)
+		spawn(function() --[[ Line: 752 ]]
+			-- upvalues: request (upval), config (upval), p1 (copy), p2 (copy)
+			request(config, p1, p2)
 		end)
 	end)
 end
 
-local function GetLookDetailsV2ProductInfo(p1)
-	-- upvalues: replaced_1 (ref), promiseModule (ref), request (ref)
-	local t = {
+local function GetLookDetailsV2ProductInfo(p1) --[[ Line: 758 ]]
+	-- upvalues: Replaced1 (copy), PromiseModule (copy), request (copy)
+	local config = {
 		Method = "GET",
-		Url = string.format("%slook-api/v2/looks/%s", replaced_1, p1)
+		Url = string.format("%slook-api/v2/looks/%s", Replaced1, p1)
 	}
 	
-	return promiseModule.new(function(p2, p3)
-		-- upvalues: request (copy), t (ref)
-		spawn(function()
-			-- upvalues: request (copy), t (copy), p2 (ref), p3 (ref)
-			request(t, p2, p3)
+	return PromiseModule.new(function(p2, p3) --[[ Line: 766 ]]
+		-- upvalues: request (upval), config (copy)
+		spawn(function() --[[ Line: 767 ]]
+			-- upvalues: request (upval), config (upval), p2 (copy), p3 (copy)
+			request(config, p2, p3)
 		end)
 	end)
 end
 
 return {
-	new = function()
-		-- upvalues: promiseModule (ref), getABTestGroup (ref), getProductInfo (ref), getPlayerOwns (ref), performPurchase (ref), performPurchaseV2 (ref), getFFlagEnableCreatorStorePurchasingCutoverModule (ref), performCreatorStorePurchase (ref), loadAssetForEquip (ref), getAccountInfo (ref), getAssetInfo (ref), getBalanceInfo (ref), getBundleDetails (ref), getProductPurchasableDetails (ref), fFlagRefreshPriceOnRetryAfterUpsellModule (ref), getCatalogItemDetails (ref), getResellers (ref), getCreatorStoreProductInfo (ref), getPremiumProductInfo (ref), postPremiumImpression (ref), getPremiumUpsellPrecheck (ref), getSubscriptionPurchaseInfo (ref), performSubscriptionPurchase (ref), getPurchaseWarning (ref), postPurchaseWarningAcknowledge (ref), checkUserPurchaseSettings (ref), getVngShopUrl (ref), performDevProductEdpPurchase (ref), getExperienceProductInfo (ref), performExperiencePurchase (ref), performLookPurchase (ref), getUnifiedPurchaseFlowUserEligibility (ref), fFlagPurchasePromptFetchCartPricingForLooks (ref), performLookPurchaseBulkPurchase (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), performDeveloperSubscriptionRobuxPurchase (ref), getSubscriptionProductInfo (ref), fFlagUnifiedPurchaseSupportRefetchingLooksAfterUpsellModule (ref), GetLookDetailsV2ProductInfo (ref), fFlagPurchasePromptCartPricingEnabledModule (ref), postCartPricing (ref), fFlagEnableInExperienceOffersPurchaseFlow (ref), postInGameItemCartPricing (ref)
-		local t = {
-			getABTestGroup = promiseModule.promisify(getABTestGroup),
-			getProductInfo = promiseModule.promisify(getProductInfo),
-			getPlayerOwns = promiseModule.promisify(getPlayerOwns),
-			performPurchase = promiseModule.promisify(performPurchase),
-			performPurchaseV2 = promiseModule.promisify(performPurchaseV2),
-			performCreatorStorePurchase = if getFFlagEnableCreatorStorePurchasingCutoverModule() then promiseModule.promisify(performCreatorStorePurchase) else nil,
-			loadAssetForEquip = promiseModule.promisify(loadAssetForEquip),
-			getAccountInfo = promiseModule.promisify(getAccountInfo),
-			getAssetInfo = if getFFlagEnableCreatorStorePurchasingCutoverModule() then promiseModule.promisify(getAssetInfo) else nil,
-			getBalanceInfo = promiseModule.promisify(getBalanceInfo),
+	new = function() --[[ Line: 777 ]]
+		-- upvalues: PromiseModule (copy), getABTestGroup (copy), getProductInfo (copy), getPlayerOwns (copy), performPurchase (copy), performPurchaseV2 (copy), GetFFlagEnableCreatorStorePurchasingCutoverModule (copy), performCreatorStorePurchase (copy), loadAssetForEquip (copy), getAccountInfo (copy), getAssetInfo (copy), getBalanceInfo (copy), getBundleDetails (copy), getProductPurchasableDetails (copy), FFlagRefreshPriceOnRetryAfterUpsellModule (copy), getCatalogItemDetails (copy), getResellers (copy), getCreatorStoreProductInfo (copy), getPremiumProductInfo (copy), postPremiumImpression (copy), getPremiumUpsellPrecheck (copy), getSubscriptionPurchaseInfo (copy), performSubscriptionPurchase (copy), getPurchaseWarning (copy), postPurchaseWarningAcknowledge (copy), checkUserPurchaseSettings (copy), getVngShopUrl (copy), performDevProductEdpPurchase (copy), getExperienceProductInfo (copy), performExperiencePurchase (copy), getUniversePrivateServerSettings (copy), performLookPurchase (copy), getUnifiedPurchaseFlowUserEligibility (copy), FFlagPurchasePromptFetchCartPricingForLooks (copy), performLookPurchaseBulkPurchase (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (copy), performDeveloperSubscriptionRobuxPurchase (copy), getSubscriptionProductInfo (copy), FFlagUnifiedPurchaseSupportRefetchingLooksAfterUpsellModule (copy), GetLookDetailsV2ProductInfo (copy), FFlagPurchasePromptCartPricingEnabledModule (copy), postCartPricing (copy), FFlagEnableInExperienceOffersPurchaseFlow (copy), postInGameItemCartPricing (copy)
+		local config = {
+			getABTestGroup = PromiseModule.promisify(getABTestGroup),
+			getProductInfo = PromiseModule.promisify(getProductInfo),
+			getPlayerOwns = PromiseModule.promisify(getPlayerOwns),
+			performPurchase = PromiseModule.promisify(performPurchase),
+			performPurchaseV2 = PromiseModule.promisify(performPurchaseV2),
+			performCreatorStorePurchase = if GetFFlagEnableCreatorStorePurchasingCutoverModule() then PromiseModule.promisify(performCreatorStorePurchase) else nil,
+			loadAssetForEquip = PromiseModule.promisify(loadAssetForEquip),
+			getAccountInfo = PromiseModule.promisify(getAccountInfo),
+			getAssetInfo = if GetFFlagEnableCreatorStorePurchasingCutoverModule() then PromiseModule.promisify(getAssetInfo) else nil,
+			getBalanceInfo = PromiseModule.promisify(getBalanceInfo),
 			getBundleDetails = getBundleDetails,
 			getProductPurchasableDetails = getProductPurchasableDetails,
-			getCatalogItemDetails = if fFlagRefreshPriceOnRetryAfterUpsellModule then getCatalogItemDetails else nil,
-			getResellers = if fFlagRefreshPriceOnRetryAfterUpsellModule then getResellers else nil,
-			getCreatorStoreProductInfo = if getFFlagEnableCreatorStorePurchasingCutoverModule() then promiseModule.promisify(getCreatorStoreProductInfo) else nil,
-			getPremiumProductInfo = promiseModule.promisify(getPremiumProductInfo),
-			postPremiumImpression = promiseModule.promisify(postPremiumImpression),
-			getPremiumUpsellPrecheck = promiseModule.promisify(getPremiumUpsellPrecheck),
-			getSubscriptionPurchaseInfo = promiseModule.promisify(getSubscriptionPurchaseInfo),
-			performSubscriptionPurchase = promiseModule.promisify(performSubscriptionPurchase),
-			getPurchaseWarning = promiseModule.promisify(getPurchaseWarning),
-			postPurchaseWarningAcknowledge = promiseModule.promisify(postPurchaseWarningAcknowledge),
-			checkUserPurchaseSettings = promiseModule.promisify(checkUserPurchaseSettings),
-			getVngShopUrl = promiseModule.promisify(getVngShopUrl),
-			performDevProductEdpPurchase = promiseModule.promisify(performDevProductEdpPurchase),
-			getExperienceProductInfo = promiseModule.promisify(getExperienceProductInfo),
-			performExperiencePurchase = promiseModule.promisify(performExperiencePurchase),
-			performLookPurchase = promiseModule.promisify(performLookPurchase),
-			getUnifiedPurchaseFlowUserEligibility = promiseModule.promisify(getUnifiedPurchaseFlowUserEligibility),
-			performLookPurchaseBulkPurchase = if fFlagPurchasePromptFetchCartPricingForLooks then promiseModule.promisify(performLookPurchaseBulkPurchase) else nil,
-			performDeveloperSubscriptionRobuxPurchase = if fFlagEnableUnifiedPurchaseFlowForDevSubs then promiseModule.promisify(performDeveloperSubscriptionRobuxPurchase) else nil,
-			getSubscriptionProductInfo = if fFlagEnableUnifiedPurchaseFlowForDevSubs then promiseModule.promisify(getSubscriptionProductInfo) else nil,
-			GetLookDetailsV2ProductInfo = if fFlagUnifiedPurchaseSupportRefetchingLooksAfterUpsellModule then promiseModule.promisify(GetLookDetailsV2ProductInfo) else nil,
-			postCartPricing = if fFlagPurchasePromptCartPricingEnabledModule then postCartPricing else nil,
-			postInGameItemCartPricing = if fFlagEnableInExperienceOffersPurchaseFlow then postInGameItemCartPricing else nil
+			getCatalogItemDetails = if FFlagRefreshPriceOnRetryAfterUpsellModule then getCatalogItemDetails else nil,
+			getResellers = if FFlagRefreshPriceOnRetryAfterUpsellModule then getResellers else nil,
+			getCreatorStoreProductInfo = if GetFFlagEnableCreatorStorePurchasingCutoverModule() then PromiseModule.promisify(getCreatorStoreProductInfo) else nil,
+			getPremiumProductInfo = PromiseModule.promisify(getPremiumProductInfo),
+			postPremiumImpression = PromiseModule.promisify(postPremiumImpression),
+			getPremiumUpsellPrecheck = PromiseModule.promisify(getPremiumUpsellPrecheck),
+			getSubscriptionPurchaseInfo = PromiseModule.promisify(getSubscriptionPurchaseInfo),
+			performSubscriptionPurchase = PromiseModule.promisify(performSubscriptionPurchase),
+			getPurchaseWarning = PromiseModule.promisify(getPurchaseWarning),
+			postPurchaseWarningAcknowledge = PromiseModule.promisify(postPurchaseWarningAcknowledge),
+			checkUserPurchaseSettings = PromiseModule.promisify(checkUserPurchaseSettings),
+			getVngShopUrl = PromiseModule.promisify(getVngShopUrl),
+			performDevProductEdpPurchase = PromiseModule.promisify(performDevProductEdpPurchase),
+			getExperienceProductInfo = PromiseModule.promisify(getExperienceProductInfo),
+			performExperiencePurchase = PromiseModule.promisify(performExperiencePurchase),
+			getUniversePrivateServerSettings = PromiseModule.promisify(getUniversePrivateServerSettings),
+			performLookPurchase = PromiseModule.promisify(performLookPurchase),
+			getUnifiedPurchaseFlowUserEligibility = PromiseModule.promisify(getUnifiedPurchaseFlowUserEligibility),
+			performLookPurchaseBulkPurchase = if FFlagPurchasePromptFetchCartPricingForLooks then PromiseModule.promisify(performLookPurchaseBulkPurchase) else nil,
+			performDeveloperSubscriptionRobuxPurchase = if FFlagEnableUnifiedPurchaseFlowForDevSubs then PromiseModule.promisify(performDeveloperSubscriptionRobuxPurchase) else nil,
+			getSubscriptionProductInfo = if FFlagEnableUnifiedPurchaseFlowForDevSubs then PromiseModule.promisify(getSubscriptionProductInfo) else nil,
+			GetLookDetailsV2ProductInfo = if FFlagUnifiedPurchaseSupportRefetchingLooksAfterUpsellModule then PromiseModule.promisify(GetLookDetailsV2ProductInfo) else nil,
+			postCartPricing = if FFlagPurchasePromptCartPricingEnabledModule then postCartPricing else nil,
+			postInGameItemCartPricing = if FFlagEnableInExperienceOffersPurchaseFlow then postInGameItemCartPricing else nil
 		}
-		setmetatable(t, {
-			__tostring = function()
+		setmetatable(config, {
+			__tostring = function(): string --[[ Line: 833 ]]
 				return "Service(Network)"
 			end
 		})
 		
-		return t
+		return config
 	end
 }

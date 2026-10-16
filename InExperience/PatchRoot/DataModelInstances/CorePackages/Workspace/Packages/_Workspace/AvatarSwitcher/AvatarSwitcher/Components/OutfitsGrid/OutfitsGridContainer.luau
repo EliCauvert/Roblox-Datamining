@@ -1,9 +1,9 @@
-﻿local avatarSwitcher = script:FindFirstAncestor("AvatarSwitcher")
-local reactModule = require(avatarSwitcher.Parent.React)
-local outfitsGridModule = require(avatarSwitcher.Components.OutfitsGrid.OutfitsGrid)
-local useOutfitsGridPropsModule = require(avatarSwitcher.Components.OutfitsGrid.useOutfitsGridProps)
+﻿local AvatarSwitcher = script:FindFirstAncestor("AvatarSwitcher")
+local ReactModule = require(AvatarSwitcher.Parent.React)
+local OutfitsGridModule = require(AvatarSwitcher.Components.OutfitsGrid.OutfitsGrid)
+local UseOutfitsGridPropsModule = require(AvatarSwitcher.Components.OutfitsGrid.useOutfitsGridProps)
 
-return function()
-	-- upvalues: useOutfitsGridPropsModule (ref), reactModule (ref), outfitsGridModule (ref)
-	return reactModule.createElement(outfitsGridModule, useOutfitsGridPropsModule())
+return function() --[[ Line: 14 | Named "OutfitsGridContainer" ]]
+	-- upvalues: UseOutfitsGridPropsModule (copy), ReactModule (copy), OutfitsGridModule (copy)
+	return ReactModule.createElement(OutfitsGridModule, (UseOutfitsGridPropsModule()))
 end

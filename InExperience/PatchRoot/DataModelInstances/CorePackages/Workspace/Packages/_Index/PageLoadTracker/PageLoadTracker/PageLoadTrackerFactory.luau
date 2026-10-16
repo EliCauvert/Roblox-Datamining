@@ -1,24 +1,24 @@
-﻿local createPageTrackerModule = require(script.Parent.createPageTracker)
+﻿local CreatePageTrackerModule = require(script.Parent.createPageTracker)
 
-local function getTracker(p1, p2)
-	-- upvalues: createPageTrackerModule (ref)
+local function getTracker(p1, p2) --[[ Line: 10 ]]
+	-- upvalues: CreatePageTrackerModule (copy)
 	if p1.trackers[p2] == nil then
-		p1.trackers[p2] = createPageTrackerModule()
+		p1.trackers[p2] = CreatePageTrackerModule()
 	end
 	return p1.trackers[p2]
 end
 
-local function removeTracker(p1, p2)
-	local var1 = p1.trackers[p2]
+local function removeTracker(p1, p2) --[[ Line: 18 ]]
+	local Tracker = p1.trackers[p2]
 	
-	if var1 then
-		var1:stop()
+	if Tracker then
+		Tracker:stop()
 		p1.trackers[p2] = nil
 	end
 end
 
-local function _()
-	-- upvalues: getTracker (ref), removeTracker (ref)
+local function _() --[[ Line: 27 | Named "createFactory" ]]
+	-- upvalues: getTracker (copy), removeTracker (copy)
 	return {
 		trackers = {},
 		getTracker = getTracker,
@@ -26,18 +26,18 @@ local function _()
 	}
 end
 
-local var1 = nil
+local Config = nil
 
 return {
-	getInstance = function()
-		-- upvalues: var1 (write), getTracker (ref), removeTracker (ref)
-		if not var1 then
-			var1 = {
+	getInstance = function() --[[ Line: 39 ]]
+		-- upvalues: Config (ref), getTracker (copy), removeTracker (copy)
+		if not Config then
+			Config = {
 				trackers = {},
 				getTracker = getTracker,
 				removeTracker = removeTracker
 			}
 		end
-		return var1
+		return Config
 	end
 }

@@ -1,8 +1,8 @@
-﻿local playersService = game:GetService("Players")
+﻿local Players = game:GetService("Players")
 
-return function()
-	-- upvalues: playersService (ref)
-	local localPlayer = playersService.LocalPlayer
+return function(): boolean --[[ Line: 15 | Named "useIsLocalUserUnder13" ]]
+	-- upvalues: Players (copy)
+	local LocalPlayer = Players.LocalPlayer
 	
-	return if localPlayer == nil then false else localPlayer:GetUnder13() == true
+	return LocalPlayer ~= nil and LocalPlayer:GetUnder13() == true
 end

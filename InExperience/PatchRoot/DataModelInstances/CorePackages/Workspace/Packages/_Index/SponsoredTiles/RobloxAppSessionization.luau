@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.RobloxAppSessionization.RobloxAppSessionization)
+﻿return (require(script.Parent.Parent.Parent._Index.RobloxAppSessionization.RobloxAppSessionization))

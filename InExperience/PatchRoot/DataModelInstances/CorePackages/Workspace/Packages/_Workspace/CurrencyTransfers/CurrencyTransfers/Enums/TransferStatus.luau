@@ -1,27 +1,29 @@
-﻿local t = {
+﻿local TransferStatusModule = {
 	Initiated = "Initiated",
 	Pending = "Pending",
 	Cancelled = "Cancelled",
 	Failed = "Failed",
 	Completed = "Completed"
 }
-local t_1 = {
-	[0] = t.Initiated,
-	[1] = t.Pending,
-	[2] = t.Cancelled,
-	[3] = t.Failed,
-	[4] = t.Completed
+local config = {
+	[0] = TransferStatusModule.Initiated,
+	[1] = TransferStatusModule.Pending,
+	[2] = TransferStatusModule.Cancelled,
+	[3] = TransferStatusModule.Failed,
+	[4] = TransferStatusModule.Completed
 }
 
-function t.fromValue(p1)
-	-- upvalues: t_1 (ref), t (ref)
+function TransferStatusModule.fromValue(p1) --[[ Line: 21 ]]
+	-- upvalues: config (copy), TransferStatusModule (copy)
 	if p1 == nil then
 		return nil
-	elseif type(p1) == "number" then
-		return t_1[p1]
-	elseif type(p1) == "string" then
-		for i, v in pairs(t) do
-			if v == p1 then
+	end
+	if type(p1) == "number" then
+		return config[p1]
+	end
+	if type(p1) == "string" then
+		for _, value in pairs(TransferStatusModule) do
+			if value == p1 then
 				return p1
 			end
 		end
@@ -29,4 +31,4 @@ function t.fromValue(p1)
 	return nil
 end
 
-return t
+return TransferStatusModule

@@ -1,32 +1,32 @@
-﻿local groups = script:FindFirstAncestor("Groups")
-local parent = groups.Parent
-local _ = require(parent.Navigation)
-local reactModule = require(parent.React)
-local roactNavigationModule = require(parent.RoactNavigation)
-local groupDetailPaneModule = require(groups.Components.GroupDetailPane)
-local groupsPageModule = require(groups.Components.GroupsPage)
-local groupsRoutesModule = require(script.Parent.GroupsRoutes)
+﻿local Groups = script:FindFirstAncestor("Groups")
+local Parent = Groups.Parent
+local _ = require(Parent.Navigation)
+local ReactModule = require(Parent.React)
+local RoactNavigationModule = require(Parent.RoactNavigation)
+local GroupDetailPaneModule = require(Groups.Components.GroupDetailPane)
+local GroupsPageModule = require(Groups.Components.GroupsPage)
+local GroupsRoutesModule = require(script.Parent.GroupsRoutes)
 
-return roactNavigationModule.createRobloxStackNavigator({
+return RoactNavigationModule.createRobloxStackNavigator({
 	{
-		[groupsRoutesModule.GroupsPage] = {
-			screen = function(_)
-				-- upvalues: reactModule (ref), groupsPageModule (ref)
-				return reactModule.createElement(groupsPageModule)
+		[GroupsRoutesModule.GroupsPage] = {
+			screen = function(_) --[[ Line: 17 ]]
+				-- upvalues: ReactModule (copy), GroupsPageModule (copy)
+				return ReactModule.createElement(GroupsPageModule)
 			end
 		}
 	},
 	{
-		[groupsRoutesModule.GroupDetailPane] = {
-			screen = function(p1)
-				-- upvalues: reactModule (ref), groupDetailPaneModule (ref)
-				return reactModule.createElement(groupDetailPaneModule, { navigation = p1.navigation })
+		[GroupsRoutesModule.GroupDetailPane] = {
+			screen = function(p1) --[[ Line: 21 ]]
+				-- upvalues: ReactModule (copy), GroupDetailPaneModule (copy)
+				return ReactModule.createElement(GroupDetailPaneModule, { navigation = p1.navigation })
 			end,
 			navigationOptions = { disableBackButton = false }
 		}
 	}
 }, {
 	keepVisitedScreensMounted = false,
-	initialRouteName = groupsRoutesModule.GroupsPage,
-	backBehavior = roactNavigationModule.BackBehavior.History
+	initialRouteName = GroupsRoutesModule.GroupsPage,
+	backBehavior = RoactNavigationModule.BackBehavior.History
 })

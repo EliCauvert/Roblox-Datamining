@@ -1,12 +1,12 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local memo = reactModule.memo
-local iconWithTextCellModule = require(appChat.Components.Cells.IconWithTextCell)
-local fFlagDebugAppChatEnableDomLocatorsModule = require(appChat.Flags.FFlagDebugAppChatEnableDomLocators)
-local domLocatorsModule = require(appChat.Utils.DomLocators)
-local t = {
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local MemoFunction = ReactModule.memo
+local IconWithTextCellModule = require(AppChat.Components.Cells.IconWithTextCell)
+local FFlagDebugAppChatEnableDomLocatorsModule = require(AppChat.Flags.FFlagDebugAppChatEnableDomLocators)
+local DomLocatorsModule = require(AppChat.Utils.DomLocators)
+local config = {
 	Text = "(translated 'add friends' text here)",
 	iconImage = nil,
 	iconSize = 36,
@@ -17,22 +17,22 @@ local t = {
 	style = nil
 }
 
-function AddFriendsEntry(p1)
-	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), iconWithTextCellModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref)
-	local var1 = cryoModule.Dictionary.join(t, p1)
+function AddFriendsEntry(p1) --[[ Line: 36 ]]
+	-- upvalues: CryoModule (copy), config (copy), ReactModule (copy), IconWithTextCellModule (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), DomLocatorsModule (copy)
+	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	
-	return reactModule.createElement(iconWithTextCellModule, {
+	return ReactModule.createElement(IconWithTextCellModule, {
 		showDivider = false,
-		Size = UDim2.new(1, 0, 0, var1.cellHeight),
-		primaryIcon = var1.iconImage,
-		primaryIconSize = var1.iconSize,
-		iconCellWidth = var1.iconCellWidth,
-		Text = var1.Text,
-		onActivated = var1.onActivated,
-		LayoutOrder = var1.LayoutOrder,
-		style = var1.style,
-		testId = if fFlagDebugAppChatEnableDomLocatorsModule then domLocatorsModule.chatDetailsListActionButton(var1.Text) else nil
+		Size = UDim2.new(1, 0, 0, JoinResult.cellHeight),
+		primaryIcon = JoinResult.iconImage,
+		primaryIconSize = JoinResult.iconSize,
+		iconCellWidth = JoinResult.iconCellWidth,
+		Text = JoinResult.Text,
+		onActivated = JoinResult.onActivated,
+		LayoutOrder = JoinResult.LayoutOrder,
+		style = JoinResult.style,
+		testId = if FFlagDebugAppChatEnableDomLocatorsModule then DomLocatorsModule.chatDetailsListActionButton(JoinResult.Text) else nil
 	})
 end
 
-return memo(AddFriendsEntry)
+return MemoFunction(AddFriendsEntry)

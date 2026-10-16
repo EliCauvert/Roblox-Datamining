@@ -1,22 +1,22 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local promise = require(corePackagesService.Packages.InGameMenuDependencies).Promise
-local performFetch = require(corePackagesService.Workspace.Packages.Http).PerformFetch
-local parent = script.Parent.Parent
-local postFeedbackModule = require(parent.Network.PostFeedback)
-local incrementFeedbackSubmissionAttemptsModule = require(parent.Actions.IncrementFeedbackSubmissionAttempts)
+﻿local CorePackages = game:GetService("CorePackages")
+local Promise = require(CorePackages.Packages.InGameMenuDependencies).Promise
+local PerformFetch = require(CorePackages.Workspace.Packages.Http).PerformFetch
+local Parent = script.Parent.Parent
+local PostFeedbackModule = require(Parent.Network.PostFeedback)
+local IncrementFeedbackSubmissionAttemptsModule = require(Parent.Actions.IncrementFeedbackSubmissionAttempts)
 
-return function(p1, p2, p3, p4, p5, p6, p7, p8)
-	-- upvalues: performFetch (ref), postFeedbackModule (ref), incrementFeedbackSubmissionAttemptsModule (ref), promise (ref)
-	return performFetch.Single("PostFeedbackRequest", function(p9)
-		-- upvalues: postFeedbackModule (copy), p1 (ref), p2 (ref), p3 (ref), p4 (ref), p5 (ref), p6 (ref), p7 (ref), incrementFeedbackSubmissionAttemptsModule (copy), p8 (ref), promise (copy)
-		return postFeedbackModule(p1, p2, p3, p4, p5, p6, p7):andThen(function(p10)
-			-- upvalues: p9 (ref), incrementFeedbackSubmissionAttemptsModule (copy), p8 (copy), promise (copy)
-			p9:dispatch(incrementFeedbackSubmissionAttemptsModule(p8))
+return function(p1, p2, p3, p4, p5, p6, p7, p8) --[[ Line: 17 ]]
+	-- upvalues: PerformFetch (copy), PostFeedbackModule (copy), IncrementFeedbackSubmissionAttemptsModule (copy), Promise (copy)
+	return PerformFetch.Single("PostFeedbackRequest", function(p9) --[[ Line: 28 ]]
+		-- upvalues: PostFeedbackModule (upval), p1 (copy), p2 (copy), p3 (copy), p4 (copy), p5 (copy), p6 (copy), p7 (copy), IncrementFeedbackSubmissionAttemptsModule (upval), p8 (copy), Promise (upval)
+		return PostFeedbackModule(p1, p2, p3, p4, p5, p6, p7):andThen(function(Result) --[[ Line: 37 ]]
+			-- upvalues: p9 (copy), IncrementFeedbackSubmissionAttemptsModule (upval), p8 (upval), Promise (upval)
+			p9:dispatch(IncrementFeedbackSubmissionAttemptsModule(p8))
 			
-			return promise.resolve(p10)
-		end, function(p10)
-			-- upvalues: promise (copy)
-			return promise.reject(p10)
+			return Promise.resolve(Result)
+		end, function(p10) --[[ Line: 40 ]]
+			-- upvalues: Promise (upval)
+			return Promise.reject(p10)
 		end)
 	end)
 end

@@ -1,12 +1,12 @@
-﻿local trustedContacts = script:FindFirstAncestor("TrustedContacts")
-local parent = trustedContacts.Parent
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local trustedConnectionStatus = require(trustedContacts.Enums).TrustedConnectionStatus
+﻿local TrustedContacts = script:FindFirstAncestor("TrustedContacts")
+local Parent = TrustedContacts.Parent
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local TrustedConnectionStatus = require(TrustedContacts.Enums).TrustedConnectionStatus
 
-return function(p1)
-	-- upvalues: useLocalization (ref), reactModule (ref), trustedConnectionStatus (ref)
-	local var1 = useLocalization({
+return function(p1) --[[ Line: 14 | Named "useModalTexts" ]]
+	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), TrustedConnectionStatus (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
 		addTFHeader = "Feature.Friends.TrustedFriend.Label.AddTrustedFriend",
 		addTFBody = "Feature.Friends.Description.DoMoreWithTrustedFriends",
 		acceptTFHeader = "Feature.Friends.TrustedFriend.AddBack.Header",
@@ -14,20 +14,27 @@ return function(p1)
 		newTFHeader = "Feature.Friends.TrustedFriend.Info.Modal.Header",
 		newTFBody = "Feature.Friends.Description.YouCanDoMoreWithTrustedFriends"
 	})
-	local var2 = if p1 then reactModule.useMemo(function()
-		-- upvalues: trustedConnectionStatus (copy), var1 (ref)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 24 ]]
+		-- upvalues: TrustedConnectionStatus (upval), UseLocalizationResult (copy)
 		return {
-			[trustedConnectionStatus.Friends] = { header = var1.addTFHeader, description = var1.addTFBody },
-			[trustedConnectionStatus.RequestReceived] = {
-				header = var1.acceptTFHeader,
-				description = var1.acceptTFBody
+			[TrustedConnectionStatus.Friends] = {
+				header = UseLocalizationResult.addTFHeader,
+				description = UseLocalizationResult.addTFBody
 			},
-			[trustedConnectionStatus.TrustedFriends] = { header = var1.newTFHeader, description = var1.newTFBody }
+			[TrustedConnectionStatus.RequestReceived] = {
+				header = UseLocalizationResult.acceptTFHeader,
+				description = UseLocalizationResult.acceptTFBody
+			},
+			[TrustedConnectionStatus.TrustedFriends] = {
+				header = UseLocalizationResult.newTFHeader,
+				description = UseLocalizationResult.newTFBody
+			}
 		}
-	end, { var1 })[p1] else nil
+	end, { UseLocalizationResult })
+	local UseMemoResultEntry = if p1 then UseMemoResult[p1] else nil
 	
 	return {
-		header = if var2 then var2.header else "",
-		description = if var2 then var2.description else ""
+		header = if UseMemoResultEntry then UseMemoResultEntry.header else "",
+		description = if UseMemoResultEntry then UseMemoResultEntry.description else ""
 	}
 end

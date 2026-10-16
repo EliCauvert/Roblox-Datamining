@@ -1,37 +1,38 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local roduxModule = require(corePackagesService.Packages.Rodux)
-local cryoModule = require(corePackagesService.Packages.Cryo)
+﻿local CorePackages = game:GetService("CorePackages")
+local RoduxModule = require(CorePackages.Packages.Rodux)
+local CryoModule = require(CorePackages.Packages.Cryo)
 
 if require(script.Parent.Parent.Flags.FFlagTopBarDeprecateMoreMenuRodux) then
 	return nil
+else
+	local Actions = script.Parent.Parent.Actions
+	
+	return (RoduxModule.createReducer({
+		open = false,
+		backpackOpen = false,
+		leaderboardOpen = false,
+		emotesOpen = false,
+		emotesEnabled = true
+	}, {
+		[require(Actions.SetMoreMenuOpen).name] = function(p1, p2) --[[ Line: 30 ]]
+			-- upvalues: CryoModule (copy)
+			return CryoModule.Dictionary.join(p1, { open = p2.open })
+		end,
+		[require(Actions.SetBackpackOpen).name] = function(p1, p2) --[[ Line: 36 ]]
+			-- upvalues: CryoModule (copy)
+			return CryoModule.Dictionary.join(p1, { open = false, backpackOpen = p2.open })
+		end,
+		[require(Actions.SetEmotesOpen).name] = function(p1, p2) --[[ Line: 43 ]]
+			-- upvalues: CryoModule (copy)
+			return CryoModule.Dictionary.join(p1, { open = false, emotesOpen = p2.open })
+		end,
+		[require(Actions.SetEmotesEnabled).name] = function(p1, p2) --[[ Line: 50 ]]
+			-- upvalues: CryoModule (copy)
+			return CryoModule.Dictionary.join(p1, { emotesEnabled = p2.enabled })
+		end,
+		[require(Actions.SetLeaderboardOpen).name] = function(p1, p2) --[[ Line: 56 ]]
+			-- upvalues: CryoModule (copy)
+			return CryoModule.Dictionary.join(p1, { open = false, leaderboardOpen = p2.open })
+		end
+	}))
 end
-local actions = script.Parent.Parent.Actions
-
-return roduxModule.createReducer({
-	open = false,
-	backpackOpen = false,
-	leaderboardOpen = false,
-	emotesOpen = false,
-	emotesEnabled = true
-}, {
-	[require(actions.SetMoreMenuOpen).name] = function(p1, p2)
-		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p1, { open = p2.open })
-	end,
-	[require(actions.SetBackpackOpen).name] = function(p1, p2)
-		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p1, { open = false, backpackOpen = p2.open })
-	end,
-	[require(actions.SetEmotesOpen).name] = function(p1, p2)
-		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p1, { open = false, emotesOpen = p2.open })
-	end,
-	[require(actions.SetEmotesEnabled).name] = function(p1, p2)
-		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p1, { emotesEnabled = p2.enabled })
-	end,
-	[require(actions.SetLeaderboardOpen).name] = function(p1, p2)
-		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p1, { open = false, leaderboardOpen = p2.open })
-	end
-})

@@ -1,43 +1,47 @@
-﻿local parent = script.Parent.Parent
-local constantsModule = require(parent.Constants)
-local _ = require(parent.util.Types)
-local getEditableMeshFromContextModule = require(parent.util.getEditableMeshFromContext)
+﻿local Parent = script.Parent.Parent
+local ConstantsModule = require(Parent.Constants)
+local _ = require(Parent.util.Types)
+local GetEditableMeshFromContextModule = require(Parent.util.getEditableMeshFromContext)
 
-local function getContent(p1, p2)
-	-- upvalues: constantsModule (ref)
-	if p2 == constantsModule.MESH_CONTENT_TYPE.RENDER_MESH then
-		assert(p1:IsA("MeshPart"), "Only MESH_TYPE.RENDER_MESH is only supported for MeshPart")
+local function getContent(Object, INNERCAGE) --[[ Line: 12 ]]
+	-- upvalues: ConstantsModule (copy)
+	if INNERCAGE == ConstantsModule.MESH_CONTENT_TYPE.RENDER_MESH then
+		assert(Object:IsA("MeshPart"), "Only MESH_TYPE.RENDER_MESH is only supported for MeshPart")
 		
-		return p1.MeshId
-	elseif p2 == constantsModule.MESH_CONTENT_TYPE.OUTER_CAGE then
-		assert(p1:IsA("BaseWrap"), "Only MESH_TYPE.OUTER_CAGE is only supported for BaseWrap")
+		return Object.MeshId
+	elseif INNERCAGE == ConstantsModule.MESH_CONTENT_TYPE.OUTER_CAGE then
+		assert(Object:IsA("BaseWrap"), "Only MESH_TYPE.OUTER_CAGE is only supported for BaseWrap")
 		
-		return p1.CageMeshId
-	elseif p2 == constantsModule.MESH_CONTENT_TYPE.INNER_CAGE then
-		assert(p1:IsA("WrapLayer"), "Only MESH_TYPE.INNER_CAGE is only supported for WrapLayer")
+		return Object.CageMeshId
+	elseif INNERCAGE ~= ConstantsModule.MESH_CONTENT_TYPE.INNER_CAGE then
+		error("No valid mesh content type was provided")
 		
-		return p1.ReferenceMeshId
+		return
+	else
+		assert(Object:IsA("WrapLayer"), "Only MESH_TYPE.INNER_CAGE is only supported for WrapLayer")
+		
+		return Object.ReferenceMeshId
 	end
-	error("No valid mesh content type was provided")
 end
 
-return function(p1, p2, p3)
-	-- upvalues: getContent (ref), constantsModule (ref), getEditableMeshFromContextModule (ref)
-	local var1 = getContent(p1, p2)
-	local fullName = p1:GetFullName()
-	local var2 = constantsModule.MESH_CONTENT_TYPE_TO_FIELD_NAME[p2]
-	local var3, var4 = getEditableMeshFromContextModule(p1, var2, p3)
+return function(Object, p1, p2) --[[ Line: 27 | Named "getMeshInfo" ]]
+	-- upvalues: getContent (copy), ConstantsModule (copy), GetEditableMeshFromContextModule (copy)
+	local Content = getContent(Object, p1)
+	local FullName = Object:GetFullName()
+	local MESHCONTENTTYPETOFIELDNAMEEntry = ConstantsModule.MESH_CONTENT_TYPE_TO_FIELD_NAME[p1]
+	local EditableMeshFromContextModule, EditableMeshFromContextModule2 = GetEditableMeshFromContextModule(Object, MESHCONTENTTYPETOFIELDNAMEEntry, p2)
 	
-	if var3 then
+	if EditableMeshFromContextModule then
 		return true, nil, {
-			fullName = fullName,
-			fieldName = var2,
-			contentId = var1,
-			context = p1.ClassName,
-			editableMesh = var4
+			fullName = FullName,
+			fieldName = MESHCONTENTTYPETOFIELDNAMEEntry,
+			contentId = Content,
+			context = Object.ClassName,
+			editableMesh = EditableMeshFromContextModule2
+		}
+	else
+		return false, {
+			string.format("Mesh for '%s' failed to load. Make sure the mesh exists and try again.", FullName)
 		}
 	end
-	return false, {
-		string.format("Mesh for '%s' failed to load. Make sure the mesh exists and try again.", fullName)
-	}
 end

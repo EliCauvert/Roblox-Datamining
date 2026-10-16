@@ -1,51 +1,51 @@
-﻿local inExperienceDetailsPrompt = script:FindFirstAncestor("InExperienceDetailsPrompt")
-local parent = inExperienceDetailsPrompt.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local sheet = foundationModule.Sheet
-local useScaledValue = foundationModule.Hooks.useScaledValue
-local _ = require(parent.DataHydration)
-local inExperienceDetailsPromptErrorContentModule = require(inExperienceDetailsPrompt.Features.InExperienceDetailsPromptErrorContent)
-local inExperienceDetailsPromptHeaderModule = require(inExperienceDetailsPrompt.Features.InExperienceDetailsPromptHeader)
-local inExperienceDetailsPromptContentModule = require(inExperienceDetailsPrompt.Features.InExperienceDetailsPromptContent)
-local inExperienceDetailsPromptActionsModule = require(inExperienceDetailsPrompt.Features.InExperienceDetailsPromptActions)
-local fFlagLuaAppIedpOverlayAndNavigationFix = require(parent.SharedFlags).FFlagLuaAppIedpOverlayAndNavigationFix
-local fFlagLuaAppIedpFixPlayButton = require(parent.SharedFlags).FFlagLuaAppIedpFixPlayButton
+﻿local InExperienceDetailsPrompt = script:FindFirstAncestor("InExperienceDetailsPrompt")
+local Parent = InExperienceDetailsPrompt.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local Sheet = FoundationModule.Sheet
+local UseScaledValueFunction = FoundationModule.Hooks.useScaledValue
+local _ = require(Parent.DataHydration)
+local InExperienceDetailsPromptErrorContentModule = require(InExperienceDetailsPrompt.Features.InExperienceDetailsPromptErrorContent)
+local InExperienceDetailsPromptHeaderModule = require(InExperienceDetailsPrompt.Features.InExperienceDetailsPromptHeader)
+local InExperienceDetailsPromptContentModule = require(InExperienceDetailsPrompt.Features.InExperienceDetailsPromptContent)
+local InExperienceDetailsPromptActionsModule = require(InExperienceDetailsPrompt.Features.InExperienceDetailsPromptActions)
+local FFlagLuaAppIedpOverlayAndNavigationFix = require(Parent.SharedFlags).FFlagLuaAppIedpOverlayAndNavigationFix
+local FFlagLuaAppIedpFixPlayButton = require(Parent.SharedFlags).FFlagLuaAppIedpFixPlayButton
 
-local function sheetChildren(p1)
-	-- upvalues: reactModule (ref), sheet (ref), inExperienceDetailsPromptErrorContentModule (ref), inExperienceDetailsPromptHeaderModule (ref), inExperienceDetailsPromptContentModule (ref), inExperienceDetailsPromptActionsModule (ref), fFlagLuaAppIedpFixPlayButton (ref)
+local function sheetChildren(p1) --[[ Line: 42 ]]
+	-- upvalues: ReactModule (copy), Sheet (copy), InExperienceDetailsPromptErrorContentModule (copy), InExperienceDetailsPromptHeaderModule (copy), InExperienceDetailsPromptContentModule (copy), InExperienceDetailsPromptActionsModule (copy), FFlagLuaAppIedpFixPlayButton (copy)
 	return if p1.errorType then {
-		Content = reactModule.createElement(sheet.Content, nil, {
-			ErrorContent = reactModule.createElement(inExperienceDetailsPromptErrorContentModule, { errorType = p1.errorType })
+		Content = ReactModule.createElement(Sheet.Content, nil, {
+			ErrorContent = ReactModule.createElement(InExperienceDetailsPromptErrorContentModule, { errorType = p1.errorType })
 		})
 	} else {
-		Header = reactModule.createElement(inExperienceDetailsPromptHeaderModule, {
+		Header = ReactModule.createElement(InExperienceDetailsPromptHeaderModule, {
 			name = p1.name,
 			imageUri = p1.imageUri,
 			creator = p1.creator
 		}),
-		Content = reactModule.createElement(sheet.Content, nil, {
-			MainContent = reactModule.createElement(inExperienceDetailsPromptContentModule, {
+		Content = ReactModule.createElement(Sheet.Content, nil, {
+			MainContent = ReactModule.createElement(InExperienceDetailsPromptContentModule, {
 				ageRecommendation = p1.ageRecommendation,
 				rating = p1.rating
 			})
 		}),
-		Actions = reactModule.createElement(inExperienceDetailsPromptActionsModule, {
+		Actions = ReactModule.createElement(InExperienceDetailsPromptActionsModule, {
 			playability = p1.playability,
 			onJoin = p1.onJoin,
-			rootPlaceId = if fFlagLuaAppIedpFixPlayButton then p1.rootPlaceId else nil,
+			rootPlaceId = if FFlagLuaAppIedpFixPlayButton then p1.rootPlaceId else nil,
 			playabilityRetrievalStatus = p1.playabilityRetrievalStatus
 		})
 	}
 end
 
-return function(p1)
-	-- upvalues: useScaledValue (ref), reactModule (ref), sheet (ref), fFlagLuaAppIedpOverlayAndNavigationFix (ref), sheetChildren (ref)
-	return reactModule.createElement(sheet.Root, {
+return function(p1) --[[ Line: 74 | Named "InExperienceDetailsPrompt" ]]
+	-- upvalues: UseScaledValueFunction (copy), ReactModule (copy), Sheet (copy), FFlagLuaAppIedpOverlayAndNavigationFix (copy), sheetChildren (copy)
+	return ReactModule.createElement(Sheet.Root, {
 		preferCenterSheet = true,
 		ref = p1.focusRootRef,
-		sheetRef = if fFlagLuaAppIedpOverlayAndNavigationFix then p1.sheetRef else nil,
-		snapPoints = { useScaledValue(260) },
+		sheetRef = if FFlagLuaAppIedpOverlayAndNavigationFix then p1.sheetRef else nil,
+		snapPoints = { (UseScaledValueFunction(260)) },
 		onClose = p1.onClose
-	}, sheetChildren(p1))
+	}, (sheetChildren(p1)))
 end

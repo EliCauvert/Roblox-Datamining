@@ -1,47 +1,47 @@
-﻿local parent = script:FindFirstAncestor("PhoneUpsell").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local UIBloxModule = require(parent.UIBlox)
-local useStyle = UIBloxModule.Core.Style.useStyle
-local colors = UIBloxModule.App.Style.Colors
+﻿local Parent = script:FindFirstAncestor("PhoneUpsell").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local UIBloxModule = require(Parent.UIBlox)
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local Colors = UIBloxModule.App.Style.Colors
 
-return function(p1)
-	-- upvalues: useStyle (ref), reactModule (ref), colors (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
-	local var1 = useStyle()
+return function(p1) --[[ Line: 20 | Named "PhoneVerificationStatusOverlay" ]]
+	-- upvalues: UseStyleFunction (copy), ReactModule (copy), Colors (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	local UseStyleResult = UseStyleFunction()
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 0.3,
-		BackgroundColor3 = colors.Black,
+		BackgroundColor3 = Colors.Black,
 		Size = UDim2.new(1, 0, 1, 0)
 	}, {
-		MiddleContent = reactModule.createElement("Frame", {
+		MiddleContent = ReactModule.createElement("Frame", {
 			BorderSizePixel = 0,
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 1, 0)
 		}, {
-			ListLayout = reactModule.createElement("UIListLayout", {
+			ListLayout = ReactModule.createElement("UIListLayout", {
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				HorizontalAlignment = Enum.HorizontalAlignment.Center,
 				VerticalAlignment = Enum.VerticalAlignment.Center,
 				Padding = UDim.new(0, 24)
 			}),
 			Image = p1.image,
-			Padding = reactModule.createElement("UIPadding", {
-				PaddingLeft = UDim.new(0, var1.Tokens.Size.Size_600),
-				PaddingRight = UDim.new(0, var1.Tokens.Size.Size_600)
+			Padding = ReactModule.createElement("UIPadding", {
+				PaddingLeft = UDim.new(0, UseStyleResult.Tokens.Size.Size_600),
+				PaddingRight = UDim.new(0, UseStyleResult.Tokens.Size.Size_600)
 			}),
-			VerifyingText = reactModule.createElement("TextLabel", {
+			VerifyingText = ReactModule.createElement("TextLabel", {
 				LayoutOrder = 1,
 				BackgroundTransparency = 1,
 				TextWrapped = true,
 				AutomaticSize = Enum.AutomaticSize.XY,
-				TextSize = var1.Font.BaseSize * var1.Font.Header1.RelativeSize,
-				TextColor3 = colors.White,
+				TextSize = UseStyleResult.Font.BaseSize * UseStyleResult.Font.Header1.RelativeSize,
+				TextColor3 = Colors.White,
 				Text = p1.text,
-				Font = if foundationFontFaceMigration then nil else var1.Font.Header1.Font,
-				FontFace = if foundationFontFaceMigration then normalizeFontFace(var1.Tokens.Typography.HeadingSmall.Font) else nil
+				Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.Header1.Font,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.HeadingSmall.Font) else nil
 			})
 		})
 	})

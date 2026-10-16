@@ -1,7 +1,7 @@
-﻿local parent = script.Parent.Parent
+﻿local Parent = script.Parent.Parent
 
-return require(parent.Parent.Rodux).createReducer(Vector2.new(0, 0), {
-	[require(parent.Actions.ScreenSizeChanged).name] = function(_, p1)
+return require(Parent.Parent.Rodux).createReducer(Vector2.new(0, 0), {
+	[require(Parent.Actions.ScreenSizeChanged).name] = function(_, p1) --[[ Line: 13 ]]
 		return p1.screenSize
 	end
 })

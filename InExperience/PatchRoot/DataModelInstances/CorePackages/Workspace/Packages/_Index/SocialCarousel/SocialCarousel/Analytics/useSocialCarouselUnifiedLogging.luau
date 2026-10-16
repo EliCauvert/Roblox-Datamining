@@ -1,74 +1,78 @@
-﻿local socialCarousel = script:FindFirstAncestor("SocialCarousel")
-local parent = socialCarousel.Parent
-local reactModule = require(parent.React)
-local cryoModule = require(parent.Cryo)
-local roactUtilsModule = require(parent.RoactUtils)
-local collectionViewsModule = require(parent.CollectionViews)
-local unifiedLoggingModule = require(parent.UnifiedLogging)
-local impressionsModule = require(parent.Impressions)
-local sharedFlagsModule = require(parent.SharedFlags)
-local tile = require(socialCarousel.Common.Enums).Tile
-local topicContentsReducer = require(parent.TopicContentsRodux).TopicContentsReducer
-local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
-local useCollectionImpressionsSignal = collectionViewsModule.useCollectionImpressionsSignal
-local screenSizeImpressionsTracker = impressionsModule.ScreenSizeImpressionsTracker
-local frameBoundsImpressionsTracker = impressionsModule.FrameBoundsImpressionsTracker
-local impressionsTagUtility = impressionsModule.ImpressionsTagUtility
-local sendItemImpressions = unifiedLoggingModule.SendItemImpressions
-local fFlagLuaAppHomeFriendsRemoveItemImpressions = sharedFlagsModule.FFlagLuaAppHomeFriendsRemoveItemImpressions
-local fFlagLuaAppUseFrameBoundsImpressions = sharedFlagsModule.FFlagLuaAppUseFrameBoundsImpressions
+﻿local SocialCarousel = script:FindFirstAncestor("SocialCarousel")
+local Parent = SocialCarousel.Parent
+local ReactModule = require(Parent.React)
+local CryoModule = require(Parent.Cryo)
+local ImpressionsModule = require(Parent.Impressions)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local Tile = require(SocialCarousel.Common.Enums).Tile
+local TopicContentsReducer = require(Parent.TopicContentsRodux).TopicContentsReducer
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local UseCollectionImpressionsSignalFunction = require(Parent.CollectionViews).useCollectionImpressionsSignal
+local ScreenSizeImpressionsTracker = ImpressionsModule.ScreenSizeImpressionsTracker
+local FrameBoundsImpressionsTracker = ImpressionsModule.FrameBoundsImpressionsTracker
+local ImpressionsTagUtility = ImpressionsModule.ImpressionsTagUtility
+local SendItemImpressions = require(Parent.UnifiedLogging).SendItemImpressions
+local FFlagLuaAppHomeFriendsRemoveItemImpressions = SharedFlagsModule.FFlagLuaAppHomeFriendsRemoveItemImpressions
+local FFlagLuaAppUseFrameBoundsImpressions = SharedFlagsModule.FFlagLuaAppUseFrameBoundsImpressions
 
-return function(p1, p2, p3, p4, p5)
-	-- upvalues: useCollectionImpressionsSignal (ref), reactModule (ref), fFlagLuaAppHomeFriendsRemoveItemImpressions (ref), cryoModule (ref), tile (ref), sendItemImpressions (ref), useSelector (ref), topicContentsReducer (ref), impressionsTagUtility (ref), fFlagLuaAppUseFrameBoundsImpressions (ref), frameBoundsImpressionsTracker (ref), screenSizeImpressionsTracker (ref)
+return function(p1, p2, p3, p4, p5) --[[ Line: 31 ]]
+	-- upvalues: UseCollectionImpressionsSignalFunction (copy), ReactModule (copy), FFlagLuaAppHomeFriendsRemoveItemImpressions (copy), CryoModule (copy), Tile (copy), SendItemImpressions (copy), UseSelectorFunction (copy), TopicContentsReducer (copy), ImpressionsTagUtility (copy), FFlagLuaAppUseFrameBoundsImpressions (copy), FrameBoundsImpressionsTracker (copy), ScreenSizeImpressionsTracker (copy)
 	if p4 and p4.tiles and p3 then
-		local var1, var2 = useCollectionImpressionsSignal(p3.scrollViewPositionChangedSignal)
-		local var3 = reactModule.useCallback(function(p6)
-			-- upvalues: fFlagLuaAppHomeFriendsRemoveItemImpressions (copy), p3 (ref), cryoModule (copy), p4 (ref), tile (copy), sendItemImpressions (copy), p2 (ref), p1 (ref)
-			if fFlagLuaAppHomeFriendsRemoveItemImpressions and p3.skipItemImpressionsLog then
+		local UseCollectionImpressionsSignalResult, UseCollectionImpressionsSignalResult2 = UseCollectionImpressionsSignalFunction(p3.scrollViewPositionChangedSignal)
+		local UseResult = ReactModule.useCallback(function(p6) --[[ Line: 46 ]]
+			-- upvalues: FFlagLuaAppHomeFriendsRemoveItemImpressions (upval), p3 (copy), CryoModule (upval), p4 (copy), Tile (upval), SendItemImpressions (upval), p2 (copy), p1 (copy)
+			if not FFlagLuaAppHomeFriendsRemoveItemImpressions or not p3.skipItemImpressionsLog then
+				SendItemImpressions.sendFromFriendsCarousel(p2, p1, p6, CryoModule.Dictionary.map(p4.tiles, function(p7) --[[ Line: 51 ]]
+					-- upvalues: CryoModule (upval), Tile (upval)
+					return CryoModule.Dictionary.join(p7, { isFriend = p7.tileType == Tile.Friend })
+				end), p3.appPage, p3.sortIndex, p3.sortId, p3.impressionTag)
+				
 				return
 			end
-			sendItemImpressions.sendFromFriendsCarousel(p2, p1, p6, cryoModule.Dictionary.map(p4.tiles, function(p7)
-				-- upvalues: cryoModule (copy), tile (copy)
-				return cryoModule.Dictionary.join(p7, { isFriend = p7.tileType == tile.Friend })
-			end), p3.appPage, p3.sortIndex, p3.sortId, p3.impressionTag)
 		end, {
 			p2, p1, p4.tiles, p3.appPage, p3.sortIndex, p3.sortId, p3.impressionTag,
-			if fFlagLuaAppHomeFriendsRemoveItemImpressions then p3.skipItemImpressionsLog else nil
+			if FFlagLuaAppHomeFriendsRemoveItemImpressions then p3.skipItemImpressionsLog else nil
 		})
-		local var4 = useSelector(function(p6)
-			-- upvalues: p3 (ref), topicContentsReducer (copy)
-			return if p3.sortId then p6.Personalization and (p6.Personalization[topicContentsReducer.key] and (p6.Personalization[topicContentsReducer.key][p3.sortId] and p6.Personalization[topicContentsReducer.key][p3.sortId].updatedTimestamp)) else nil
+		local UseSelectorResult = UseSelectorFunction(function(p6) --[[ Line: 78 ]]
+			-- upvalues: p3 (copy), TopicContentsReducer (upval)
+			return if p3.sortId then p6.Personalization and (p6.Personalization[TopicContentsReducer.key] and (p6.Personalization[TopicContentsReducer.key][p3.sortId] and p6.Personalization[TopicContentsReducer.key][p3.sortId].updatedTimestamp)) else nil
 		end)
-		reactModule.useEffect(function()
-			-- upvalues: var4 (ref), p5 (ref)
-			if var4 then
-				p5.current = var4
+		ReactModule.useEffect(function() --[[ Line: 89 ]]
+			-- upvalues: UseSelectorResult (copy), p5 (copy)
+			if UseSelectorResult then
+				p5.current = UseSelectorResult
 			end
-		end, { var4 })
+		end, { UseSelectorResult })
 		
 		return {
-			onCollectionViewabilityChanged = var2,
-			tagTileForImpressions = reactModule.useCallback(function(p6, p7)
-				-- upvalues: impressionsTagUtility (copy), p3 (ref)
-				impressionsTagUtility.AddTag(p6, p3.impressionTag, p7)
+			onCollectionViewabilityChanged = UseCollectionImpressionsSignalResult2,
+			tagTileForImpressions = ReactModule.useCallback(function(p6, p7) --[[ Line: 95 ]]
+				-- upvalues: ImpressionsTagUtility (upval), p3 (copy)
+				ImpressionsTagUtility.AddTag(p6, p3.impressionTag, p7)
 				
-				return function()
-					-- upvalues: impressionsTagUtility (copy), p6 (ref), p3 (copy), p7 (ref)
-					impressionsTagUtility.RemoveTag(p6, p3.impressionTag, p7)
+				return function() --[[ Line: 98 ]]
+					-- upvalues: ImpressionsTagUtility (upval), p6 (copy), p3 (upval), p7 (copy)
+					ImpressionsTagUtility.RemoveTag(p6, p3.impressionTag, p7)
 				end
 			end, { p3.impressionTag }),
-			renderImpressionsTrackerComponent = reactModule.useCallback(function(p6)
-				-- upvalues: reactModule (copy), fFlagLuaAppUseFrameBoundsImpressions (copy), frameBoundsImpressionsTracker (copy), screenSizeImpressionsTracker (copy), p3 (ref), var1 (ref), var3 (ref), p5 (ref)
-				return reactModule.createElement(if fFlagLuaAppUseFrameBoundsImpressions then frameBoundsImpressionsTracker else screenSizeImpressionsTracker, {
+			renderImpressionsTrackerComponent = ReactModule.useCallback(function(ParentRef) --[[ Line: 106 ]]
+				-- upvalues: ReactModule (upval), FFlagLuaAppUseFrameBoundsImpressions (upval), FrameBoundsImpressionsTracker (upval), ScreenSizeImpressionsTracker (upval), p3 (copy), UseCollectionImpressionsSignalResult (copy), UseResult (copy), p5 (copy)
+				return ReactModule.createElement(if FFlagLuaAppUseFrameBoundsImpressions then FrameBoundsImpressionsTracker else ScreenSizeImpressionsTracker, {
 					pageContext = p3.appPage,
-					parentRef = p6,
+					parentRef = ParentRef,
 					impressionsTag = p3.impressionTag,
-					scrollViewPositionChangedSignal = var1,
-					sendImpressions = var3,
+					scrollViewPositionChangedSignal = UseCollectionImpressionsSignalResult,
+					sendImpressions = UseResult,
 					dataUpdatedTimestamp = p5.current
 				})
-			end, { p3.impressionTag, var1, p3.appPage, var3 })
+			end, {
+				p3.impressionTag,
+				UseCollectionImpressionsSignalResult,
+				p3.appPage,
+				UseResult
+			})
 		}
+	else
+		return nil
 	end
-	return nil
 end

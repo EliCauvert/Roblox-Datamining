@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("EnableWebAmpWizardForFAEHandoff", false)
 
-return function()
+return function() --[[ Line: 3 ]]
 	return game:GetFastFlag("EnableWebAmpWizardForFAEHandoff")
 end

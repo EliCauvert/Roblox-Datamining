@@ -1,34 +1,33 @@
-﻿local parent = script:FindFirstAncestor("Moments").Parent
-local foundationModule = require(parent.Foundation)
-local localizationModule = require(parent.Localization)
-local reactModule = require(parent.React)
-local dialog = foundationModule.Dialog
-local useLocalization = localizationModule.Hooks.useLocalization
-local t = {
+﻿local Parent = script:FindFirstAncestor("Moments").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local Dialog = FoundationModule.Dialog
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local config = {
 	title = "Feature.Moments.Label.MomentUnavailable",
 	body = "Feature.Moments.Label.MomentUnavailableDefault",
 	ok = "Feature.Moments.Action.Ok"
 }
 
-return function(p1)
-	-- upvalues: useLocalization (ref), t (ref), reactModule (ref), dialog (ref), foundationModule (ref)
-	local var1 = useLocalization(t)
+return function(p1) --[[ Line: 22 | Named "MomentUnavailableDialog" ]]
+	-- upvalues: UseLocalizationFunction (copy), config (copy), ReactModule (copy), Dialog (copy), FoundationModule (copy)
+	local UseLocalizationResult = UseLocalizationFunction(config)
 	
-	return reactModule.createElement(dialog.Root, {
+	return ReactModule.createElement(Dialog.Root, {
 		disablePortal = false,
 		hasBackdrop = true,
-		size = foundationModule.Enums.DialogSize.Medium
+		size = FoundationModule.Enums.DialogSize.Medium
 	}, {
-		DialogTitle = reactModule.createElement(dialog.Title, { LayoutOrder = 1, text = var1.title }),
-		DialogContent = reactModule.createElement(dialog.Content, { LayoutOrder = 2 }, {
-			DialogText = reactModule.createElement(dialog.Text, { Text = var1.body })
+		DialogTitle = ReactModule.createElement(Dialog.Title, { LayoutOrder = 1, text = UseLocalizationResult.title }),
+		DialogContent = ReactModule.createElement(Dialog.Content, { LayoutOrder = 2 }, {
+			DialogText = ReactModule.createElement(Dialog.Text, { Text = UseLocalizationResult.body })
 		}),
-		DialogActions = reactModule.createElement(dialog.Actions, {
+		DialogActions = ReactModule.createElement(Dialog.Actions, {
 			LayoutOrder = 3,
 			actions = {
 				{
-					text = var1.ok,
-					variant = foundationModule.Enums.ButtonVariant.Standard,
+					text = UseLocalizationResult.ok,
+					variant = FoundationModule.Enums.ButtonVariant.Standard,
 					onActivated = p1.onDismiss
 				}
 			}

@@ -1,16 +1,16 @@
-﻿local avatarScreenPropertiesModule = require(script:FindFirstAncestor("AvatarExperienceNavigation").AvatarRoute.AvatarScreenProperties)
+﻿local AvatarScreenPropertiesModule = require(script:FindFirstAncestor("AvatarExperienceNavigation").AvatarRoute.AvatarScreenProperties)
 
-return function(p1)
-	-- upvalues: avatarScreenPropertiesModule (ref)
+return function(p1) --[[ Line: 15 | Named "getActiveAvatarScreen" ]]
+	-- upvalues: AvatarScreenPropertiesModule (copy)
 	if not p1 then
 		return nil
 	end
-	local var1 = p1
-	while var1 and var1.routes do
-		local index = var1.routes[var1.index]
+	local v1 = p1
+	while v1 and v1.routes do
+		local Route = v1.routes[v1.index]
 		
-		if index == nil or not avatarScreenPropertiesModule[index.routeName] then break end
-		var1 = index
+		if Route == nil or not AvatarScreenPropertiesModule[Route.routeName] then break end
+		v1 = Route
 	end
-	return var1
+	return v1
 end

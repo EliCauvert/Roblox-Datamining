@@ -1,14 +1,18 @@
-﻿local parent = script:FindFirstAncestor("VirtualEvents").Parent
-local appPage = require(parent.RobloxAppEnums).AppPage
-local sduiLoadTimer = require(parent.SduiSharedUtilities).SduiLoadTimer
-local fetchEventDetailsPageModule = require(script.Parent.fetchEventDetailsPage)
+﻿local Parent = script:FindFirstAncestor("VirtualEvents").Parent
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local SduiLoadTimer = require(Parent.SduiSharedUtilities).SduiLoadTimer
+local FetchEventDetailsPageModule = require(script.Parent.fetchEventDetailsPage)
 
-return function(p1, p2, p3)
-	-- upvalues: sduiLoadTimer (ref), appPage (ref), fetchEventDetailsPageModule (ref)
-	local var1 = sduiLoadTimer.createLoadTimer(appPage.EventDetails)
-	var1.start("navigate")
-	fetchEventDetailsPageModule(p2, var1)
-	p1.navigate(appPage.EventDetails, {
-		extraProps = { eventId = p2, pageTimer = var1, universeId = p3 }
+return function(p1, EventId, UniverseId) --[[ Line: 15 | Named "navigateToEventDetails" ]]
+	-- upvalues: SduiLoadTimer (copy), AppPage (copy), FetchEventDetailsPageModule (copy)
+	local LoadTimer = SduiLoadTimer.createLoadTimer(AppPage.EventDetails)
+	LoadTimer.start("navigate")
+	FetchEventDetailsPageModule(EventId, LoadTimer)
+	p1.navigate(AppPage.EventDetails, {
+		extraProps = {
+			eventId = EventId,
+			pageTimer = LoadTimer,
+			universeId = UniverseId
+		}
 	})
 end

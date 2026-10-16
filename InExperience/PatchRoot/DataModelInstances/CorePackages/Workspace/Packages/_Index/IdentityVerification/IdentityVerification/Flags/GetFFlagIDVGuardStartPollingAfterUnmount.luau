@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("IDVGuardStartPollingAfterUnmount", false)
 
-return function()
+return function() --[[ Line: 3 ]]
 	return game:GetFastFlag("IDVGuardStartPollingAfterUnmount")
 end

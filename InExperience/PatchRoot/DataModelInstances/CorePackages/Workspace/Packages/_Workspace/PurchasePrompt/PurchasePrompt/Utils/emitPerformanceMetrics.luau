@@ -1,40 +1,44 @@
-﻿local purchasePrompt = script:FindFirstAncestor("PurchasePrompt")
-local parent = purchasePrompt.Parent
-local purchasePromptLiteModule = require(parent.PurchasePromptLite)
-local enums = require(parent.PurchasePromptLite).Enums
-local _ = require(purchasePrompt.types)
-local getTTIEventName = purchasePromptLiteModule.getTTIEventName
-local intervalPerformanceTracker = require(parent.IntervalPerformanceTracker).IntervalPerformanceTracker
-local timeToInteractiveTracker = require(parent.TimeToInteractiveTracker).TimeToInteractiveTracker
-local constantsModule = require(purchasePrompt.Misc.Constants)
-local productPurchaseContainerFPSDuration = game:DefineFastInt("ProductPurchaseContainerFPSDuration", 2)
-local fIntTTIUnifiedPurchaseSamplingRate = require(parent.SharedFlags).FIntTTIUnifiedPurchaseSamplingRate
-local t = {
-	[enums.ProductPurchaseSurface.Catalog] = true,
-	[enums.ProductPurchaseSurface.EDP] = true
+﻿local PurchasePrompt = script:FindFirstAncestor("PurchasePrompt")
+local Parent = PurchasePrompt.Parent
+local Enums = require(Parent.PurchasePromptLite).Enums
+local _ = require(PurchasePrompt.types)
+local GetTTIEventNameFunction = require(Parent.PurchasePromptLite).getTTIEventName
+local IntervalPerformanceTracker = require(Parent.IntervalPerformanceTracker).IntervalPerformanceTracker
+local TimeToInteractiveTracker = require(Parent.TimeToInteractiveTracker).TimeToInteractiveTracker
+local ConstantsModule = require(PurchasePrompt.Misc.Constants)
+local ProductPurchaseContainerFPSDuration = game:DefineFastInt("ProductPurchaseContainerFPSDuration", 2)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FIntTTIUnifiedPurchaseSamplingRate = SharedFlagsModule.FIntTTIUnifiedPurchaseSamplingRate
+local FFlagEnableEdpPreviewPurchaseSurface = SharedFlagsModule.FFlagEnableEdpPreviewPurchaseSurface
+local config = {
+	[Enums.ProductPurchaseSurface.Catalog] = true,
+	[Enums.ProductPurchaseSurface.EDP] = true
 }
 
-if require(purchasePrompt.Flags.FFlagEnableInExperiencePurchaseModalMetrics) then
-	t[enums.ProductPurchaseSurface.InExperience] = true
+if require(PurchasePrompt.Flags.FFlagEnableInExperiencePurchaseModalMetrics) then
+	config[Enums.ProductPurchaseSurface.InExperience] = true
 end
-function emitPerformanceMetrics(p1, p2)
-	-- upvalues: t (ref)
-	if p2 ~= nil and t[p2] then
+if FFlagEnableEdpPreviewPurchaseSurface then
+	config[Enums.ProductPurchaseSurface.EDPPreview] = true
+end
+function emitPerformanceMetrics(p1, p2) --[[ Line: 33 ]]
+	-- upvalues: config (copy)
+	if p2 ~= nil and config[p2] then
 		emitFPSMetrics(p1, p2)
 		emitTTIMetrics(p2)
 	end
 end
 
-function emitFPSMetrics(p1, p2)
-	-- upvalues: intervalPerformanceTracker (ref), constantsModule (ref), productPurchaseContainerFPSDuration (ref)
-	intervalPerformanceTracker:startTracking(constantsModule.PerformanceMetrics.Prefix.UnifiedPurchaseModal .. "_" .. p1 .. "_" .. p2, productPurchaseContainerFPSDuration, nil, true, true)
-	intervalPerformanceTracker:startTracking(constantsModule.PerformanceMetrics.Prefix.PurchaseModal .. "_" .. p1 .. "_" .. p2, productPurchaseContainerFPSDuration, nil, true, true)
+function emitFPSMetrics(Text, Text1) --[[ Line: 41 ]]
+	-- upvalues: IntervalPerformanceTracker (copy), ConstantsModule (copy), ProductPurchaseContainerFPSDuration (copy)
+	IntervalPerformanceTracker:startTracking(ConstantsModule.PerformanceMetrics.Prefix.UnifiedPurchaseModal .. "_" .. Text .. "_" .. Text1, ProductPurchaseContainerFPSDuration, nil, true, true)
+	IntervalPerformanceTracker:startTracking(ConstantsModule.PerformanceMetrics.Prefix.PurchaseModal .. "_" .. Text .. "_" .. Text1, ProductPurchaseContainerFPSDuration, nil, true, true)
 end
 
-function emitTTIMetrics(p1)
-	-- upvalues: getTTIEventName (ref), timeToInteractiveTracker (ref), fIntTTIUnifiedPurchaseSamplingRate (ref)
-	timeToInteractiveTracker.trackEnd(getTTIEventName(p1), {
-		samplingRateOverride = fIntTTIUnifiedPurchaseSamplingRate
+function emitTTIMetrics(p1) --[[ Line: 62 ]]
+	-- upvalues: GetTTIEventNameFunction (copy), TimeToInteractiveTracker (copy), FIntTTIUnifiedPurchaseSamplingRate (copy)
+	TimeToInteractiveTracker.trackEnd(GetTTIEventNameFunction(p1), {
+		samplingRateOverride = FIntTTIUnifiedPurchaseSamplingRate
 	})
 end
 

@@ -1,28 +1,28 @@
-﻿local dependenciesModule = require(script:FindFirstAncestor("FriendsLanding").dependencies)
-local promise = dependenciesModule.Promise
-local t = dependenciesModule.t
-local friendsNetworking = dependenciesModule.FriendsNetworking
-local var1 = t.strictInterface({
-	localUserId = t.string,
-	inactiveFriendsNetworkRequestStatus = t.string,
-	onResolve = t.union(t.callback, t.table),
-	onError = t.union(t.callback, t.table)
+﻿local DependenciesModule = require(script:FindFirstAncestor("FriendsLanding").dependencies)
+local Promise = DependenciesModule.Promise
+local T = DependenciesModule.t
+local FriendsNetworking = DependenciesModule.FriendsNetworking
+local StrictInterfaceResult = T.strictInterface({
+	localUserId = T.string,
+	inactiveFriendsNetworkRequestStatus = T.string,
+	onResolve = T.union(T.callback, T.table),
+	onError = T.union(T.callback, T.table)
 })
 
-return function(p1)
-	-- upvalues: var1 (ref), friendsNetworking (ref), promise (ref)
+return function(Callback) --[[ Line: 16 ]]
+	-- upvalues: StrictInterfaceResult (copy), FriendsNetworking (copy), Promise (copy)
 	return {
-		refreshPageData = function(p2)
-			-- upvalues: var1 (copy), p1 (ref), friendsNetworking (copy), promise (copy)
-			assert(var1(p2))
-			local t = {}
-			table.insert(t, p1(friendsNetworking.GetFriendRequestsCount.API()))
+		refreshPageData = function(p1) --[[ Line: 18 ]]
+			-- upvalues: StrictInterfaceResult (upval), Callback (copy), FriendsNetworking (upval), Promise (upval)
+			assert(StrictInterfaceResult(p1))
+			local List = {}
+			table.insert(List, Callback(FriendsNetworking.GetFriendRequestsCount.API()))
 			
-			return promise.all(t):andThen(p2.onResolve):catch(p2.onError)
+			return Promise.all(List):andThen(p1.onResolve):catch(p1.onError)
 		end,
-		getFriendRequestsCount = function()
-			-- upvalues: p1 (ref), friendsNetworking (copy)
-			return p1(friendsNetworking.GetFriendRequestsCount.API())
+		getFriendRequestsCount = function() --[[ Line: 26 ]]
+			-- upvalues: Callback (copy), FriendsNetworking (upval)
+			return Callback(FriendsNetworking.GetFriendRequestsCount.API())
 		end
 	}
 end

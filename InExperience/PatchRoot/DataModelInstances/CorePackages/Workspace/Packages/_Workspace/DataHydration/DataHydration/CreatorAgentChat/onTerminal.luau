@@ -1,97 +1,103 @@
-﻿local createEffect = require(script:FindFirstAncestor("DataHydration").Parent.Signals).createEffect
+﻿local CreateEffectFunction = require(script:FindFirstAncestor("DataHydration").Parent.Signals).createEffect
 local _ = require(script.Parent.types)
 local t = {}
 
-return function(a, b, p1)
-	-- upvalues: t (ref), createEffect (ref)
-	local t_1 = {}
-	local var1 = false
-	local var2 = false
+return function(Callback, Callback1: (any) -> (), Callback2: (any, any) -> ()) --[[ Line: 25 | Named "onTerminal" ]]
+	-- upvalues: t (copy), CreateEffectFunction (copy)
+	local t1 = {}
+	local Flag = false
+	local Flag1 = false
 	
-	local function _()
-		-- upvalues: var2 (write), t (copy), t_1 (ref)
-		if var2 then return end
-		var2 = true
-		local var3 = t[t_1]
-		t[t_1] = nil
+	local function _() --[[ Line: 34 | Named "cleanupEffect" ]]
+		-- upvalues: Flag1 (ref), t (upval), t1 (copy)
+		if Flag1 then return end
+		Flag1 = true
+		local Entry: () -> () = t[t1]
+		t[t1] = nil
 		
-		if var3 ~= nil then
-			var3()
+		if Entry ~= nil then
+			Entry()
 		end
 	end
 	
-	local _ = function(value)
-		-- upvalues: var1 (write), var2 (write), t (copy), t_1 (ref), b (ref), p1 (ref)
-		if var1 then return end
-		var1 = true
+	local _ = function(p1) --[[ Line: 46 | Named "settle" ]]
+		-- upvalues: Flag (ref), Flag1 (ref), t (upval), t1 (copy), Callback1 (copy), Callback2 (copy)
+		if Flag then return end
+		Flag = true
 		
-		if not var2 then
-			var2 = true
-			local var3 = t[t_1]
-			t[t_1] = nil
+		if not Flag1 then
+			Flag1 = true
+			local Entry: () -> () = t[t1]
+			t[t1] = nil
 			
-			if var3 ~= nil then
-				var3()
+			if Entry ~= nil then
+				Entry()
 			end
 		end
-		if value.status == "succeeded" and b then
-			b(value.result)
+		if p1.status == "succeeded" and Callback1 then
+			Callback1(p1.result)
 			
 			return
-		elseif value.status == "failed" and p1 then
-			p1(value.error or "request failed", value.errorCode)
+		end
+		if p1.status == "failed" and Callback2 then
+			Callback2(p1.error or "request failed", p1.errorCode)
 		end
 	end
 	
-	local var3 = a(false)
+	local CallbackResult = Callback(false)
 	
-	if var3.status == "pending" then
-		local _ = nil
-		local var4 = createEffect(function(p2)
-			-- upvalues: a (ref), var1 (write), var2 (write), t (copy), t_1 (ref), b (ref), p1 (ref)
-			local var5 = a(p2)
+	if CallbackResult.status == "pending" then
+		local Effect: () -> () = CreateEffectFunction(function(p1) --[[ Line: 67 ]]
+			-- upvalues: Callback (copy), Flag (ref), Flag1 (ref), t (upval), t1 (copy), Callback1 (copy), Callback2 (copy)
+			local CallbackResult = Callback(p1)
 			
-			if var5.status == "pending" then return end
-			if var1 then return end
-			var1 = true
+			if CallbackResult.status == "pending" then return end
+			if Flag then return end
+			Flag = true
 			
-			if not var2 then
-				var2 = true
-				local var6 = t[t_1]
-				t[t_1] = nil
+			if not Flag1 then
+				Flag1 = true
+				local Entry: () -> () = t[t1]
+				t[t1] = nil
 				
-				if var6 ~= nil then
-					var6()
+				if Entry ~= nil then
+					Entry()
 				end
 			end
-			if var5.status == "succeeded" and b then
-				b(var5.result)
+			if CallbackResult.status == "succeeded" and Callback1 then
+				Callback1(CallbackResult.result)
 				
 				return
-			elseif var5.status == "failed" and p1 then
-				p1(var5.error or "request failed", var5.errorCode)
+			end
+			if CallbackResult.status == "failed" and Callback2 then
+				Callback2(CallbackResult.error or "request failed", CallbackResult.errorCode)
 			end
 		end)
 		
-		if var2 then
-			var4()
+		if Flag1 then
+			Effect()
 		else
-			t[t_1] = var4
+			t[t1] = Effect
 		end
 		return
 	else
-		var1 = true
-		var2 = true
-		local var5 = t[t_1]
-		t[t_1] = nil
-		
-		if var5 ~= nil then
-			var5()
-		end
-		if var3.status == "succeeded" and b then
-			b(var3.result)
-		elseif var3.status == "failed" and p1 then
-			p1(var3.error or "request failed", var3.errorCode)
+		if not Flag then
+			Flag = true
+			
+			if not Flag1 then
+				Flag1 = true
+				local Entry: () -> () = t[t1]
+				t[t1] = nil
+				
+				if Entry ~= nil then
+					Entry()
+				end
+			end
+			if CallbackResult.status == "succeeded" and Callback1 then
+				Callback1(CallbackResult.result)
+			elseif CallbackResult.status == "failed" and Callback2 then
+				Callback2(CallbackResult.error or "request failed", CallbackResult.errorCode)
+			end
 		end
 	end
 end

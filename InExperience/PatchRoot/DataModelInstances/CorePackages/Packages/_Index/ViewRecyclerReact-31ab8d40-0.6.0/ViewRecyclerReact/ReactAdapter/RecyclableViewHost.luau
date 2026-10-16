@@ -1,92 +1,92 @@
-﻿local viewRecyclerReact = script:FindFirstAncestor("ViewRecyclerReact")
-local viewRecyclerRobloxModule = require(viewRecyclerReact.Parent.ViewRecyclerRoblox)
-local reactModule = require(viewRecyclerReact.Parent.React)
-local recyclableViewContextModule = require(viewRecyclerReact.ReactAdapter.Private.RecyclableViewContext)
-local recyclableViewReadinessModule = require(viewRecyclerReact.ReactAdapter.RecyclableViewReadiness)
-local recyclableViewRegistryModule = require(viewRecyclerReact.ReactAdapter.Private.RecyclableViewRegistry)
-local reparentableHost = viewRecyclerRobloxModule.ReparentableHost
-local _ = require(viewRecyclerReact.ReactAdapter.Private.RecyclableView)
-local signalsReactModule = require(viewRecyclerReact.Parent.SignalsReact)
-local createElement = reactModule.createElement
+﻿local ViewRecyclerReact = script:FindFirstAncestor("ViewRecyclerReact")
+local ReactModule = require(ViewRecyclerReact.Parent.React)
+local RecyclableViewContextModule = require(ViewRecyclerReact.ReactAdapter.Private.RecyclableViewContext)
+local RecyclableViewReadinessModule = require(ViewRecyclerReact.ReactAdapter.RecyclableViewReadiness)
+local RecyclableViewRegistryModule = require(ViewRecyclerReact.ReactAdapter.Private.RecyclableViewRegistry)
+local ReparentableHost = require(ViewRecyclerReact.Parent.ViewRecyclerRoblox).ReparentableHost
+local _ = require(ViewRecyclerReact.ReactAdapter.Private.RecyclableView)
+local SignalsReactModule = require(ViewRecyclerReact.Parent.SignalsReact)
+local CreateElementFunction = ReactModule.createElement
 
-local function CommitObserver(p1)
-	-- upvalues: signalsReactModule (ref), reactModule (ref)
-	local itemView = p1.itemView
-	local var1 = signalsReactModule.useSignalState(itemView.contentRevision)
-	reactModule.useLayoutEffect(function()
-		-- upvalues: itemView (ref), var1 (ref)
-		itemView.commitContent(var1)
-	end, { var1, itemView.commitContent })
+local function CommitObserver(p1) --[[ Line: 22 ]]
+	-- upvalues: SignalsReactModule (copy), ReactModule (copy)
+	local ItemView = p1.itemView
+	local UseSignalStateResult = SignalsReactModule.useSignalState(ItemView.contentRevision)
+	ReactModule.useLayoutEffect(function() --[[ Line: 27 ]]
+		-- upvalues: ItemView (copy), UseSignalStateResult (copy)
+		ItemView.commitContent(UseSignalStateResult)
+	end, { UseSignalStateResult, ItemView.commitContent })
 	
 	return nil
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), reparentableHost (ref), recyclableViewRegistryModule (ref), createElement (ref), signalsReactModule (ref), recyclableViewReadinessModule (ref), CommitObserver (ref), recyclableViewContextModule (ref)
-	local itemView = p1.itemView
-	local signal = itemView.signal
-	local var1 = itemView.portalFrame(false)
-	assert(var1 ~= nil, "RecyclableViewHost: view host was destroyed before unmount")
-	local var2 = reactModule.useState(function()
-		-- upvalues: itemView (ref), signal (ref)
+return (ReactModule.memo(function(p1) --[[ Line: 33 | Named "RecyclableViewHost" ]]
+	-- upvalues: ReactModule (copy), ReparentableHost (copy), RecyclableViewRegistryModule (copy), CreateElementFunction (copy), SignalsReactModule (copy), RecyclableViewReadinessModule (copy), CommitObserver (copy), RecyclableViewContextModule (copy)
+	local ItemView = p1.itemView
+	local Signal = ItemView.signal
+	local PortalFrameResult = ItemView.portalFrame(false)
+	assert(PortalFrameResult ~= nil, "RecyclableViewHost: view host was destroyed before unmount")
+	local UseStateResult = ReactModule.useState(function() --[[ Line: 38 ]]
+		-- upvalues: ItemView (copy), Signal (copy)
 		return {
-			placement = itemView.compositionPlacement,
-			assignmentSignal = signal,
-			indexSignal = itemView.indexSignal,
-			itemSignal = itemView.itemSignal,
-			itemKeySignal = itemView.itemKeySignal
+			placement = ItemView.compositionPlacement,
+			assignmentSignal = Signal,
+			indexSignal = ItemView.indexSignal,
+			itemSignal = ItemView.itemSignal,
+			itemKeySignal = ItemView.itemKeySignal
 		}
 	end)
-	reactModule.useLayoutEffect(function()
-		-- upvalues: var1 (ref), reparentableHost (copy), itemView (ref)
-		local var3 = itemView.bindHost({
-			clearSelection = function()
-				-- upvalues: reparentableHost (copy), var1 (copy)
-				reparentableHost.clearSelection(var1)
+	ReactModule.useLayoutEffect(function() --[[ Line: 48 ]]
+		-- upvalues: PortalFrameResult (copy), ReparentableHost (upval), ItemView (copy)
+		local BindHostResult = ItemView.bindHost({
+			clearSelection = function() --[[ Line: 55 ]]
+				-- upvalues: ReparentableHost (upval), PortalFrameResult (upval)
+				ReparentableHost.clearSelection(PortalFrameResult)
 			end,
-			detachFromPlaceholder = function(p2)
-				-- upvalues: var1 (copy), reparentableHost (copy)
-				if var1.Parent == p2 then
-					reparentableHost.detach(var1)
+			detachFromPlaceholder = function(Parent) --[[ Line: 49 ]]
+				-- upvalues: PortalFrameResult (upval), ReparentableHost (upval)
+				if PortalFrameResult.Parent == Parent then
+					ReparentableHost.detach(PortalFrameResult)
 				end
 			end
 		})
 		
-		return function()
-			-- upvalues: reparentableHost (copy), var1 (copy), var3 (ref)
-			reparentableHost.detach(var1)
-			var3()
+		return function() --[[ Line: 60 ]]
+			-- upvalues: ReparentableHost (upval), PortalFrameResult (upval), BindHostResult (copy)
+			ReparentableHost.detach(PortalFrameResult)
+			BindHostResult()
 		end
-	end, { itemView, var1 })
-	local metadata = recyclableViewRegistryModule.getMetadata(itemView.itemViewType)
-	assert(metadata ~= nil, "RecyclableViewHost: unknown Recyclable view type")
-	local var3 = reactModule.useMemo(function()
-		-- upvalues: createElement (copy), metadata (ref), itemView (ref)
-		return createElement(metadata.signalComponent, {
-			itemSignal = itemView.itemSignal,
-			pending = itemView.pending
+	end, { ItemView, PortalFrameResult })
+	local Metadata = RecyclableViewRegistryModule.getMetadata(ItemView.itemViewType)
+	assert(Metadata ~= nil, "RecyclableViewHost: unknown Recyclable view type")
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 68 ]]
+		-- upvalues: CreateElementFunction (upval), Metadata (copy), ItemView (copy)
+		return CreateElementFunction(Metadata.signalComponent, {
+			itemSignal = ItemView.itemSignal,
+			pending = ItemView.pending
 		})
-	end, { itemView, metadata })
-	local var4 = signalsReactModule.useSignalState(itemView.hasItem)
-	reactModule.useLayoutEffect(function()
-		-- upvalues: var4 (ref), itemView (ref)
-		if var4 then
-			itemView.setContentMounted(true)
+	end, { ItemView, Metadata })
+	local UseSignalStateResult = SignalsReactModule.useSignalState(ItemView.hasItem)
+	ReactModule.useLayoutEffect(function() --[[ Line: 77 ]]
+		-- upvalues: UseSignalStateResult (copy), ItemView (copy)
+		if UseSignalStateResult then
+			ItemView.setContentMounted(true)
 			
-			return function()
-				-- upvalues: itemView (copy)
-				itemView.setContentMounted(false)
+			return function() --[[ Line: 82 ]]
+				-- upvalues: ItemView (upval)
+				ItemView.setContentMounted(false)
 			end
+		else
+			return nil
 		end
-		return nil
-	end, { var4, itemView })
+	end, { UseSignalStateResult, ItemView })
 	local t = {}
 	
-	if var4 then
-		t.Content = var3
+	if UseSignalStateResult then
+		t.Content = UseMemoResult
 	end
-	if var4 and metadata.readiness == recyclableViewReadinessModule.ReadyOnCommit then
-		t.Observer = createElement(CommitObserver, { itemView = itemView })
+	if UseSignalStateResult and Metadata.readiness == RecyclableViewReadinessModule.ReadyOnCommit then
+		t.Observer = CreateElementFunction(CommitObserver, { itemView = ItemView })
 	end
-	return p1.createPortal(createElement(recyclableViewContextModule.Provider, { value = var2 }, t), var1)
-end)
+	return p1.createPortal(CreateElementFunction(RecyclableViewContextModule.Provider, { value = UseStateResult }, t), PortalFrameResult)
+end))

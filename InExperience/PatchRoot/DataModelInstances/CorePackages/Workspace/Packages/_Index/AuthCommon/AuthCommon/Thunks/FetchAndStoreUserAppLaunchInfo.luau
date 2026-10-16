@@ -1,27 +1,27 @@
-﻿local authCommon = script:FindFirstAncestor("AuthCommon")
-local appStorageUtilitiesModule = require(authCommon.Utils.AppStorageUtilities)
-local getUserAppLaunchInfoModule = require(authCommon.Http.Requests.GetUserAppLaunchInfo)
-local promiseModule = require(authCommon.Parent.Promise)
-local appStorageService = game:GetService("AppStorageService")
+﻿local AuthCommon = script:FindFirstAncestor("AuthCommon")
+local AppStorageUtilitiesModule = require(AuthCommon.Utils.AppStorageUtilities)
+local GetUserAppLaunchInfoModule = require(AuthCommon.Http.Requests.GetUserAppLaunchInfo)
+local PromiseModule = require(AuthCommon.Parent.Promise)
+local AppStorageService = game:GetService("AppStorageService")
 
-return function(p1)
-	-- upvalues: promiseModule (ref), getUserAppLaunchInfoModule (ref), appStorageUtilitiesModule (ref), appStorageService (ref)
-	local _, var1 = promiseModule.new(function(p2)
-		-- upvalues: getUserAppLaunchInfoModule (copy), p1 (ref), appStorageUtilitiesModule (copy), appStorageService (copy)
-		getUserAppLaunchInfoModule(p1):andThen(function(p3)
-			-- upvalues: appStorageUtilitiesModule (copy), appStorageService (copy), p2 (ref)
-			if p3 and p3.responseBody then
-				local name = p3.responseBody.name
-				appStorageUtilitiesModule.setIncompleteSignupUserId(tostring(p3.responseBody.id))
-				appStorageUtilitiesModule.setIncompleteSignupUsername(name)
-				appStorageService:Flush()
+return function(p1) --[[ Line: 8 ]]
+	-- upvalues: PromiseModule (copy), GetUserAppLaunchInfoModule (copy), AppStorageUtilitiesModule (copy), AppStorageService (copy)
+	local _, v1 = PromiseModule.new(function(Callback) --[[ Line: 9 ]]
+		-- upvalues: GetUserAppLaunchInfoModule (upval), p1 (copy), AppStorageUtilitiesModule (upval), AppStorageService (upval)
+		GetUserAppLaunchInfoModule(p1):andThen(function(Result) --[[ Line: 10 ]]
+			-- upvalues: AppStorageUtilitiesModule (upval), AppStorageService (upval), Callback (copy)
+			if Result and Result.responseBody then
+				local Name = Result.responseBody.name
+				AppStorageUtilitiesModule.setIncompleteSignupUserId((tostring(Result.responseBody.id)))
+				AppStorageUtilitiesModule.setIncompleteSignupUsername(Name)
+				AppStorageService:Flush()
 			end
-			p2(true)
-		end):catch(function(_)
-			-- upvalues: p2 (ref)
-			p2(false)
+			Callback(true)
+		end):catch(function(_) --[[ Line: 19 ]]
+			-- upvalues: Callback (copy)
+			Callback(false)
 		end)
 	end):await()
 	
-	return var1
+	return v1
 end

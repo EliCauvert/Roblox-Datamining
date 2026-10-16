@@ -1,15 +1,15 @@
-﻿local var1 = nil
-local var2 = require(script:FindFirstAncestor("ContactImporter").Parent.AppCommonLib).Signal.new()
+﻿local Status = nil
+local NewResult = require(script:FindFirstAncestor("ContactImporter").Parent.AppCommonLib).Signal.new()
 
 return {
-	getStatus = function()
-		-- upvalues: var1 (write)
-		return var1
+	getStatus = function() --[[ Line: 14 ]]
+		-- upvalues: Status (ref)
+		return Status
 	end,
-	setStatus = function(value)
-		-- upvalues: var1 (write), var2 (ref)
-		var1 = value
-		var2:fire(value)
+	setStatus = function(Value) --[[ Line: 9 ]]
+		-- upvalues: Status (ref), NewResult (copy)
+		Status = Value
+		NewResult:fire(Value)
 	end,
-	statusChanged = var2
+	statusChanged = NewResult
 }

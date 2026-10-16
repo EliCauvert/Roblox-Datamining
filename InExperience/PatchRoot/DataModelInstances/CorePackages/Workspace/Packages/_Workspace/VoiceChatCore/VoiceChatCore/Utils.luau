@@ -1,47 +1,47 @@
-﻿local httpService = game:GetService("HttpService")
-local playersService = game:GetService("Players")
-local t = {}
-t.__index = t
+﻿local HttpService = game:GetService("HttpService")
+local Players = game:GetService("Players")
+local Module = {}
+Module.__index = Module
 
-function t.new()
-	-- upvalues: t (ref)
-	return setmetatable({ listeners = {} }, t)
+function Module.new() --[[ Line: 18 ]]
+	-- upvalues: Module (copy)
+	return (setmetatable({ listeners = {} }, Module))
 end
 
-function t:addListener(p1, p2)
+function Module:addListener(p1, p2) --[[ Line: 26 ]]
 	if not self.listeners[p1] then
 		self.listeners[p1] = {}
 	end
 	table.insert(self.listeners[p1], p2)
 end
 
-function t:removeListener(p1, p2)
-	local var1 = self.listeners[p1]
+function Module:removeListener(p1, Value) --[[ Line: 33 ]]
+	local Listener = self.listeners[p1]
 	
-	if not var1 then return end
-	local index = table.find(var1, p2)
+	if not Listener then return end
+	local FoundIndex: number? = table.find(Listener, Value)
 	
-	if index then
-		table.remove(var1, index)
+	if FoundIndex then
+		table.remove(Listener, FoundIndex)
 		
-		if #var1 == 0 then
+		if #Listener == 0 then
 			self.listeners[p1] = nil
 		end
 	end
 end
 
-function t:removeAllListeners()
+function Module:removeAllListeners() --[[ Line: 48 ]]
 	table.clear(self.listeners)
 end
 
-function t:emit(p1, ...)
-	local var1 = self.listeners[p1]
+function Module:emit(p1, ...) --[[ Line: 52 ]]
+	local Listener = self.listeners[p1]
 	
-	if not var1 then return end
-	for i, v in table.clone(var1) do
-		pcall(function(...)
-			-- upvalues: v (ref)
-			v(...)
+	if not Listener then return end
+	for _, value in table.clone(Listener) do
+		pcall(function(...) --[[ Line: 60 ]]
+			-- upvalues: value (copy)
+			value(...)
 			
 			return nil
 		end, ...)
@@ -49,57 +49,57 @@ function t:emit(p1, ...)
 end
 
 return {
-	jsonDecode = function(p2)
-		-- upvalues: httpService (ref)
-		local ok, status = pcall(function()
-			-- upvalues: httpService (copy), p2 (ref)
-			return httpService:JSONDecode(p2)
+	jsonDecode = function(Input) --[[ Line: 67 ]]
+		-- upvalues: HttpService (copy)
+		local Success, Result = pcall(function() --[[ Line: 68 ]]
+			-- upvalues: HttpService (upval), Input (copy)
+			return HttpService:JSONDecode(Input)
 		end)
 		
-		return if ok and status then status else {}
+		return if Success and Result then Result else {}
 	end,
-	EventEmitter = t,
-	shorten = function(p2)
+	EventEmitter = Module,
+	shorten = function(p2): string --[[ Line: 78 ]]
 		return "..." .. string.sub(tostring(p2), -4)
 	end,
-	avoidEmitting = function(p2)
-		p2.DescendantAdded:Connect(function(p3)
-			if p3:HasTag("RbxDefaultVoiceEmitter") then
-				task.defer(function()
-					-- upvalues: p3 (ref)
-					p3:Destroy()
+	avoidEmitting = function(Object) --[[ Line: 82 ]]
+		Object.DescendantAdded:Connect(function(Descendant) --[[ Line: 83 | Named "prune" ]]
+			if Descendant:HasTag("RbxDefaultVoiceEmitter") then
+				task.defer(function() --[[ Line: 86 ]]
+					-- upvalues: Descendant (copy)
+					Descendant:Destroy()
 				end)
 			end
 		end)
 		
-		for i, v in p2:GetDescendants() do
-			if v:HasTag("RbxDefaultVoiceEmitter") then
-				task.defer(function()
-					-- upvalues: v (ref)
-					v:Destroy()
+		for _, descendant in Object:GetDescendants() do
+			if descendant:HasTag("RbxDefaultVoiceEmitter") then
+				task.defer(function() --[[ Line: 86 ]]
+					-- upvalues: descendant (copy)
+					descendant:Destroy()
 				end)
 			end
 		end
 	end,
-	destroyDefaultEmitter = function(p3)
-		-- upvalues: playersService (ref)
-		local localPlayer = playersService.LocalPlayer
+	destroyDefaultEmitter = function(Object) --[[ Line: 97 ]]
+		-- upvalues: Players (copy)
+		local LocalPlayer = Players.LocalPlayer
 		
-		if not localPlayer then return end
-		local character = localPlayer.Character
+		if not LocalPlayer then return end
+		local Character = LocalPlayer.Character
 		
-		if not character then return end
-		if p3:IsDescendantOf(character) then
-			task.defer(function()
-				-- upvalues: p3 (ref)
-				p3:Destroy()
+		if not Character then return end
+		if Object:IsDescendantOf(Character) then
+			task.defer(function() --[[ Line: 108 ]]
+				-- upvalues: Object (copy)
+				Object:Destroy()
 			end)
 		end
 	end,
-	bind = function(p3, p4)
-		return function(...)
-			-- upvalues: p3 (ref), p4 (ref)
-			return p3[p4](p3, ...)
+	bind = function(p2, p3) --[[ Line: 114 ]]
+		return function(...) --[[ Line: 115 ]]
+			-- upvalues: p2 (copy), p3 (copy)
+			return p2[p3](p2, ...)
 		end
 	end
 }

@@ -1,19 +1,19 @@
-﻿local appChatNetworking = script:FindFirstAncestor("AppChatNetworking")
-local luauPolyfillModule = require(appChatNetworking.Parent.LuauPolyfill)
-local CHAT_PLATFORM_BASE_URLModule = require(appChatNetworking.url.CHAT_PLATFORM_BASE_URL)
-local _ = require(appChatNetworking.responses.SharedTypes)
+﻿local AppChatNetworking = script:FindFirstAncestor("AppChatNetworking")
+local LuauPolyfillModule = require(AppChatNetworking.Parent.LuauPolyfill)
+local CHATPLATFORMBASEURLModule = require(AppChatNetworking.url.CHAT_PLATFORM_BASE_URL)
+local _ = require(AppChatNetworking.responses.SharedTypes)
 
-return require(script.Parent.RoduxNetworking).POST(script.Name, function(p1, p2, p3, p4)
-	-- upvalues: luauPolyfillModule (ref), CHAT_PLATFORM_BASE_URLModule (ref)
-	return p1(CHAT_PLATFORM_BASE_URLModule):path("v1"):path("create-conversations"):body({
+return require(script.Parent.RoduxNetworking).POST(script.Name, function(Callback, p1, p2, Name) --[[ Line: 15 ]]
+	-- upvalues: LuauPolyfillModule (copy), CHATPLATFORMBASEURLModule (copy)
+	return Callback(CHATPLATFORMBASEURLModule):path("v1"):path("create-conversations"):body({
 		conversations = {
 			{
-				type = p2,
-				name = p4,
-				participant_user_ids = luauPolyfillModule.Array.map(p3, function(p5)
-					return tonumber(p5)
+				type = p1,
+				name = Name,
+				participant_user_ids = LuauPolyfillModule.Array.map(p2, function(p3): number --[[ Line: 21 ]]
+					return (tonumber(p3))
 				end)
 			}
 		}
-	}):setStatusIds(p3)
+	}):setStatusIds(p2)
 end)

@@ -1,25 +1,26 @@
-﻿local signalsModule = require(script:FindFirstAncestor("Moments").Parent.Signals)
+﻿local SignalsModule = require(script:FindFirstAncestor("Moments").Parent.Signals)
 
-return function()
-	-- upvalues: signalsModule (ref)
-	local var1, var2 = signalsModule.createSignal({})
+return function() --[[ Line: 15 | Named "createExpandedCommentsStore" ]]
+	-- upvalues: SignalsModule (copy)
+	local Signal, Signal2 = SignalsModule.createSignal({})
 	
 	return {
-		getExpandedCommentIds = var1,
-		toggle = function(p1)
-			-- upvalues: var2 (ref)
-			var2(function(p2)
-				-- upvalues: p1 (ref)
-				local cloned = table.clone(p2)
+		getExpandedCommentIds = Signal,
+		toggle = function(p1) --[[ Line: 18 ]]
+			-- upvalues: Signal2 (copy)
+			Signal2(function(Tbl) --[[ Line: 19 ]]
+				-- upvalues: p1 (copy)
+				local Copy = table.clone(Tbl)
 				
-				if cloned[p1] then
-					cloned[p1] = nil
+				if Copy[p1] then
+					Copy[p1] = nil
 					
-					return cloned
+					return Copy
+				else
+					Copy[p1] = true
+					
+					return Copy
 				end
-				cloned[p1] = true
-				
-				return cloned
 			end)
 		end
 	}

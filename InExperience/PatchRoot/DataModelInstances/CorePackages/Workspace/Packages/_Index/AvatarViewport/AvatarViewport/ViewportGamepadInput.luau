@@ -1,55 +1,57 @@
-﻿local avatarViewport = script:FindFirstAncestor("AvatarViewport")
-local constantsModule = require(avatarViewport.Constants)
+﻿local AvatarViewport = script:FindFirstAncestor("AvatarViewport")
+local ConstantsModule = require(AvatarViewport.Constants)
 
 return {
-	getThumbstickAxis = function(p1, p2)
-		if p1.Magnitude < p2 then
+	getThumbstickAxis = function(Offset, p1): number --[[ Line: 9 ]]
+		if Offset.Magnitude < p1 then
 			return 0
+		else
+			local Magnitude = math.abs(math.cos((math.atan2(Offset.Y, Offset.X))) * p1)
+			
+			return math.max(math.abs(Offset.X) - Magnitude, 0) / (1 - Magnitude) * math.sign(Offset.X)
 		end
-		local absValue = math.abs(math.cos(math.atan2(p1.Y, p1.X)) * p2)
-		
-		return math.max(math.abs(p1.X) - absValue, 0) / (1 - absValue) * math.sign(p1.X)
 	end,
-	getThumbstickAxisY = function(p1, p2)
-		if p1.Magnitude < p2 then
+	getThumbstickAxisY = function(Offset, p1): number --[[ Line: 23 ]]
+		if Offset.Magnitude < p1 then
 			return 0
-		end
-		local absValue = math.abs(math.sin(math.atan2(p1.Y, p1.X)) * p2)
-		
-		return math.max(math.abs(p1.Y) - absValue, 0) / (1 - absValue) * math.sign(p1.Y)
-	end,
-	computeYawDeltaDegrees = function(p1, p2, p3, p4)
-		local var1
-		if p1.Magnitude < p4 then
-			var1 = 0
 		else
-			local absValue = math.abs(math.cos(math.atan2(p1.Y, p1.X)) * p4)
-			var1 = math.max(math.abs(p1.X) - absValue, 0) / (1 - absValue) * math.sign(p1.X)
+			local Magnitude = math.abs(math.sin((math.atan2(Offset.Y, Offset.X))) * p1)
+			
+			return math.max(math.abs(Offset.Y) - Magnitude, 0) / (1 - Magnitude) * math.sign(Offset.Y)
 		end
-		return if var1 == 0 then 0 else -var1 * p3 * p2
 	end,
-	computeZoomGestureDelta = function(p1, p2, p3, p4, p5)
-		local var1
-		if p1.Magnitude < p4 then
-			var1 = 0
+	computeYawDeltaDegrees = function(Offset, p1, p2, p3) --[[ Line: 36 ]]
+		local ScaledLargest = nil
+		if Offset.Magnitude < p3 then
+			ScaledLargest = 0
 		else
-			local absValue = math.abs(math.sin(math.atan2(p1.Y, p1.X)) * p4)
-			var1 = math.max(math.abs(p1.Y) - absValue, 0) / (1 - absValue) * math.sign(p1.Y)
+			local Magnitude = math.abs(math.cos((math.atan2(Offset.Y, Offset.X))) * p3)
+			ScaledLargest = math.max(math.abs(Offset.X) - Magnitude, 0) / (1 - Magnitude) * math.sign(Offset.X)
 		end
-		return if math.abs(var1) < p5 then 0 else var1 * p3 * p2
+		return if ScaledLargest == 0 then 0 else -ScaledLargest * p2 * p1
 	end,
-	isRotating = function(p1, p2)
-		local var1
-		if p1.Magnitude < p2 then
-			var1 = 0
+	computeZoomGestureDelta = function(Offset, p1, p2, p3, p4) --[[ Line: 55 ]]
+		local Value = nil
+		if Offset.Magnitude < p3 then
+			Value = 0
 		else
-			local absValue = math.abs(math.cos(math.atan2(p1.Y, p1.X)) * p2)
-			var1 = math.max(math.abs(p1.X) - absValue, 0) / (1 - absValue) * math.sign(p1.X)
+			local Magnitude = math.abs(math.sin((math.atan2(Offset.Y, Offset.X))) * p3)
+			Value = math.max(math.abs(Offset.Y) - Magnitude, 0) / (1 - Magnitude) * math.sign(Offset.Y)
 		end
-		return var1 ~= 0
+		return if math.abs(Value) < p4 then 0 else Value * p2 * p1
 	end,
-	defaultDeadzone = constantsModule.GamepadThumbstickDeadzone,
-	getDefaultYawSpeedDegPerSecond = require(avatarViewport.Flags.GetFIntAvatarViewportGamepadYawDegreesPerSecond),
-	getDefaultZoomGestureSpeedPerSecond = require(avatarViewport.Flags.GetFIntAvatarViewportGamepadZoomGestureSpeedPerSecond),
-	defaultZoomAxisThreshold = constantsModule.GamepadZoomAxisThreshold
+	isRotating = function(Offset, p1): boolean --[[ Line: 51 ]]
+		local ScaledLargest = nil
+		if Offset.Magnitude < p1 then
+			ScaledLargest = 0
+		else
+			local Magnitude = math.abs(math.cos((math.atan2(Offset.Y, Offset.X))) * p1)
+			ScaledLargest = math.max(math.abs(Offset.X) - Magnitude, 0) / (1 - Magnitude) * math.sign(Offset.X)
+		end
+		return ScaledLargest ~= 0
+	end,
+	defaultDeadzone = ConstantsModule.GamepadThumbstickDeadzone,
+	getDefaultYawSpeedDegPerSecond = require(AvatarViewport.Flags.GetFIntAvatarViewportGamepadYawDegreesPerSecond),
+	getDefaultZoomGestureSpeedPerSecond = require(AvatarViewport.Flags.GetFIntAvatarViewportGamepadZoomGestureSpeedPerSecond),
+	defaultZoomAxisThreshold = ConstantsModule.GamepadZoomAxisThreshold
 }

@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.ProfileCard.ProfileCard)
+﻿return (require(script.Parent.Parent.Parent._Index.ProfileCard.ProfileCard))

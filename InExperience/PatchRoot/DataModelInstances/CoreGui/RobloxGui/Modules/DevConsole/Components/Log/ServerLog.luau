@@ -1,34 +1,34 @@
-﻿local roactModule = require(game:GetService("CorePackages").Packages.Roact)
-local dataConsumerModule = require(script.Parent.Parent.DataConsumer)
-local commandLineHeight = require(script.Parent.Parent.Parent.Constants).LogFormatting.CommandLineHeight
-local devConsoleCommandLineModule = require(script.Parent.DevConsoleCommandLine)
-local logOutputModule = require(script.Parent.LogOutput)
-local serverLog = roactModule.Component:extend("ServerLog")
+﻿local RoactModule = require(game:GetService("CorePackages").Packages.Roact)
+local DataConsumerModule = require(script.Parent.Parent.DataConsumer)
+local CommandLineHeight = require(script.Parent.Parent.Parent.Constants).LogFormatting.CommandLineHeight
+local DevConsoleCommandLineModule = require(script.Parent.DevConsoleCommandLine)
+local LogOutputModule = require(script.Parent.LogOutput)
+local ServerLog = RoactModule.Component:extend("ServerLog")
 
-function serverLog.init(p1)
-	function p0.initServerLogData()
-		-- upvalues: p1 (ref)
+function ServerLog.init(p1) --[[ Line: 15 ]]
+	function p1.initServerLogData() --[[ Line: 16 ]]
+		-- upvalues: p1 (copy)
 		return p1.props.ServerLogData:getLogData()
 	end
 end
 
-function serverLog.render(p1)
-	-- upvalues: roactModule (ref), logOutputModule (ref), commandLineHeight (ref), devConsoleCommandLineModule (ref)
-	return roactModule.createElement("Frame", {
+function ServerLog.render(p1) --[[ Line: 21 ]]
+	-- upvalues: RoactModule (copy), LogOutputModule (copy), CommandLineHeight (copy), DevConsoleCommandLineModule (copy)
+	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = p1.props.size,
 		LayoutOrder = p1.props.layoutOrder
 	}, {
-		Scroll = roactModule.createElement(logOutputModule, {
-			size = UDim2.new(1, 0, 1, -(commandLineHeight + 4)),
+		Scroll = RoactModule.createElement(LogOutputModule, {
+			size = UDim2.new(1, 0, 1, -(CommandLineHeight + 4)),
 			targetSignal = p1.props.ServerLogData:Signal(),
 			initLogOutput = p1.initServerLogData
 		}),
-		CommandLine = roactModule.createElement(devConsoleCommandLineModule, {
-			pos = UDim2.new(0, 0, 1, -commandLineHeight),
-			height = commandLineHeight
+		CommandLine = RoactModule.createElement(DevConsoleCommandLineModule, {
+			pos = UDim2.new(0, 0, 1, -CommandLineHeight),
+			height = CommandLineHeight
 		})
 	})
 end
 
-return dataConsumerModule(serverLog, "ServerLogData")
+return DataConsumerModule(ServerLog, "ServerLogData")

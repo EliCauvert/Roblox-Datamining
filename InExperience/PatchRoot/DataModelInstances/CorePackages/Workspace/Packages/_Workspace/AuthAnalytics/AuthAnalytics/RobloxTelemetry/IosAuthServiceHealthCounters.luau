@@ -1,154 +1,155 @@
-﻿local userInputService = game:GetService("UserInputService")
-local runService = game:GetService("RunService")
-local parent = script:FindFirstAncestor("AuthAnalytics").Parent
-local default = require(parent.LoggingProtocol).default
-local telemetryConfigsModule = require(script.Parent.TelemetryConfigs)
-local getFFlagEnableIosAuthServiceLuaIXP = require(parent.SharedFlags).GetFFlagEnableIosAuthServiceLuaIXP
+﻿local UserInputService = game:GetService("UserInputService")
+local RunService = game:GetService("RunService")
+local Parent = script:FindFirstAncestor("AuthAnalytics").Parent
+local Default = require(Parent.LoggingProtocol).default
+local TelemetryConfigsModule = require(script.Parent.TelemetryConfigs)
+local GetFFlagEnableIosAuthServiceLuaIXPFunction = require(Parent.SharedFlags).GetFFlagEnableIosAuthServiceLuaIXP
 
-local function _()
-	-- upvalues: userInputService (ref)
-	return userInputService:GetPlatform() == Enum.Platform.IOS
+local function _(): boolean --[[ Line: 33 | Named "isIos" ]]
+	-- upvalues: UserInputService (copy)
+	return UserInputService:GetPlatform() == Enum.Platform.IOS
 end
 
-local _ = function(a)
-	if a == nil or a == "" then
+local _ = function(Text: string) --[[ Line: 40 | Named "majorMinor" ]]
+	if Text == nil or Text == "" then
 		return nil
+	else
+		local Parts = string.split(Text, ".")
+		
+		return if #Parts == 0 then nil elseif #Parts == 1 then Parts[1] else Parts[1] .. "." .. Parts[2]
 	end
-	local parts = string.split(a, ".")
-	
-	return if #parts == 0 then nil elseif #parts == 1 then parts[1] else parts[1] .. "." .. parts[2]
 end
 
-local function buildCustomFields(p1, p2, p3, p4)
-	-- upvalues: runService (ref)
-	local t = {
+local function buildCustomFields(Surface, CredentialType, ErrorCode, IosAuthServiceEnabled) --[[ Line: 55 ]]
+	-- upvalues: RunService (copy)
+	local config = {
 		source = "lua",
-		surface = p1,
-		iosAuthServiceEnabled = if p4 then "true" else "false"
+		surface = Surface,
+		iosAuthServiceEnabled = if IosAuthServiceEnabled then "true" else "false"
 	}
 	
-	if p2 ~= nil and p2 ~= "" then
-		t.credentialType = p2
+	if CredentialType ~= nil and CredentialType ~= "" then
+		config.credentialType = CredentialType
 	end
-	if p3 ~= nil and p3 ~= "" then
-		t.errorCode = p3
+	if ErrorCode ~= nil and ErrorCode ~= "" then
+		config.errorCode = ErrorCode
 	end
-	local var1
-	local robloxVersion = runService:GetRobloxVersion()
+	local RobloxVersion: string = RunService:GetRobloxVersion()
+	local RobloxVersion1 = nil
 	
-	if robloxVersion == nil or robloxVersion == "" then
-		var1 = nil
+	if RobloxVersion == nil or RobloxVersion == "" then
+		RobloxVersion1 = nil
 	else
-		local parts = string.split(robloxVersion, ".")
-		var1 = if #parts == 0 then nil elseif #parts == 1 then parts[1] else parts[1] .. "." .. parts[2]
+		local Parts = string.split(RobloxVersion, ".")
+		RobloxVersion1 = if #Parts == 0 then nil elseif #Parts == 1 then Parts[1] else Parts[1] .. "." .. Parts[2]
 	end
-	if var1 ~= nil and var1 ~= "" then
-		t.robloxVersion = var1
+	if RobloxVersion1 ~= nil and RobloxVersion1 ~= "" then
+		config.robloxVersion = RobloxVersion1
 	end
-	return t
+	return config
 end
 
-local _ = function(p1, p2, p3, p4, p5)
-	-- upvalues: getFFlagEnableIosAuthServiceLuaIXP (ref), userInputService (ref), default (ref), buildCustomFields (ref)
-	if not getFFlagEnableIosAuthServiceLuaIXP() then return end
-	if userInputService:GetPlatform() == Enum.Platform.IOS then
-		default:logRobloxTelemetryCounter(p1, 1, buildCustomFields(p2, p3, p4, p5))
+local _ = function(p1, Surface, CredentialType, ErrorCode, p2) --[[ Line: 82 | Named "logCounter" ]]
+	-- upvalues: GetFFlagEnableIosAuthServiceLuaIXPFunction (copy), UserInputService (copy), Default (copy), buildCustomFields (copy)
+	if not GetFFlagEnableIosAuthServiceLuaIXPFunction() then return end
+	if UserInputService:GetPlatform() == Enum.Platform.IOS then
+		Default:logRobloxTelemetryCounter(p1, 1, (buildCustomFields(Surface, CredentialType, ErrorCode, p2)))
 		
 		return
 	end
 end
 
 return {
-	reportLoginSuccess = function(p1)
-		-- upvalues: telemetryConfigsModule (ref), getFFlagEnableIosAuthServiceLuaIXP (ref), userInputService (ref), default (ref), buildCustomFields (ref)
-		local iosAuthServiceLoginSuccessConfig = telemetryConfigsModule.IosAuthServiceLoginSuccessConfig
-		local credentialType = p1.credentialType
-		local iosAuthServiceEnabled = p1.iosAuthServiceEnabled
+	reportLoginSuccess = function(p1) --[[ Line: 106 ]]
+		-- upvalues: TelemetryConfigsModule (copy), GetFFlagEnableIosAuthServiceLuaIXPFunction (copy), UserInputService (copy), Default (copy), buildCustomFields (copy)
+		local IosAuthServiceLoginSuccessConfig = TelemetryConfigsModule.IosAuthServiceLoginSuccessConfig
+		local CredentialType = p1.credentialType
+		local IosAuthServiceEnabled = p1.iosAuthServiceEnabled
 		
-		if not getFFlagEnableIosAuthServiceLuaIXP() then return end
-		if userInputService:GetPlatform() == Enum.Platform.IOS then
-			default:logRobloxTelemetryCounter(iosAuthServiceLoginSuccessConfig, 1, buildCustomFields("login", credentialType, nil, iosAuthServiceEnabled))
+		if not GetFFlagEnableIosAuthServiceLuaIXPFunction() then return end
+		if UserInputService:GetPlatform() == Enum.Platform.IOS then
+			Default:logRobloxTelemetryCounter(IosAuthServiceLoginSuccessConfig, 1, (buildCustomFields("login", CredentialType, nil, IosAuthServiceEnabled)))
 			
 			return
 		end
 	end,
-	reportLoginFailure = function(p1)
-		-- upvalues: telemetryConfigsModule (ref), getFFlagEnableIosAuthServiceLuaIXP (ref), userInputService (ref), default (ref), buildCustomFields (ref)
-		local iosAuthServiceLoginFailureConfig = telemetryConfigsModule.IosAuthServiceLoginFailureConfig
-		local credentialType = p1.credentialType
-		local errorCode = p1.errorCode
-		local iosAuthServiceEnabled = p1.iosAuthServiceEnabled
+	reportLoginFailure = function(p1) --[[ Line: 116 ]]
+		-- upvalues: TelemetryConfigsModule (copy), GetFFlagEnableIosAuthServiceLuaIXPFunction (copy), UserInputService (copy), Default (copy), buildCustomFields (copy)
+		local IosAuthServiceLoginFailureConfig = TelemetryConfigsModule.IosAuthServiceLoginFailureConfig
+		local CredentialType = p1.credentialType
+		local ErrorCode = p1.errorCode
+		local IosAuthServiceEnabled = p1.iosAuthServiceEnabled
 		
-		if not getFFlagEnableIosAuthServiceLuaIXP() then return end
-		if userInputService:GetPlatform() == Enum.Platform.IOS then
-			default:logRobloxTelemetryCounter(iosAuthServiceLoginFailureConfig, 1, buildCustomFields("login", credentialType, errorCode, iosAuthServiceEnabled))
+		if not GetFFlagEnableIosAuthServiceLuaIXPFunction() then return end
+		if UserInputService:GetPlatform() == Enum.Platform.IOS then
+			Default:logRobloxTelemetryCounter(IosAuthServiceLoginFailureConfig, 1, (buildCustomFields("login", CredentialType, ErrorCode, IosAuthServiceEnabled)))
 			
 			return
 		end
 	end,
-	reportLoginTwoStepRequired = function(p1)
-		-- upvalues: telemetryConfigsModule (ref), getFFlagEnableIosAuthServiceLuaIXP (ref), userInputService (ref), default (ref), buildCustomFields (ref)
-		local iosAuthServiceLoginTwoStepRequiredConfig = telemetryConfigsModule.IosAuthServiceLoginTwoStepRequiredConfig
-		local credentialType = p1.credentialType
-		local iosAuthServiceEnabled = p1.iosAuthServiceEnabled
+	reportLoginTwoStepRequired = function(p1) --[[ Line: 128 ]]
+		-- upvalues: TelemetryConfigsModule (copy), GetFFlagEnableIosAuthServiceLuaIXPFunction (copy), UserInputService (copy), Default (copy), buildCustomFields (copy)
+		local IosAuthServiceLoginTwoStepRequiredConfig = TelemetryConfigsModule.IosAuthServiceLoginTwoStepRequiredConfig
+		local CredentialType = p1.credentialType
+		local IosAuthServiceEnabled = p1.iosAuthServiceEnabled
 		
-		if not getFFlagEnableIosAuthServiceLuaIXP() then return end
-		if userInputService:GetPlatform() == Enum.Platform.IOS then
-			default:logRobloxTelemetryCounter(iosAuthServiceLoginTwoStepRequiredConfig, 1, buildCustomFields("login", credentialType, nil, iosAuthServiceEnabled))
+		if not GetFFlagEnableIosAuthServiceLuaIXPFunction() then return end
+		if UserInputService:GetPlatform() == Enum.Platform.IOS then
+			Default:logRobloxTelemetryCounter(IosAuthServiceLoginTwoStepRequiredConfig, 1, (buildCustomFields("login", CredentialType, nil, IosAuthServiceEnabled)))
 			
 			return
 		end
 	end,
-	reportSignupSuccess = function(value)
-		-- upvalues: telemetryConfigsModule (ref), getFFlagEnableIosAuthServiceLuaIXP (ref), userInputService (ref), default (ref), buildCustomFields (ref)
-		local iosAuthServiceSignupSuccessConfig = telemetryConfigsModule.IosAuthServiceSignupSuccessConfig
-		local credentialType = value.credentialType
-		local iosAuthServiceEnabled = value.iosAuthServiceEnabled
+	reportSignupSuccess = function(p1) --[[ Line: 138 ]]
+		-- upvalues: TelemetryConfigsModule (copy), GetFFlagEnableIosAuthServiceLuaIXPFunction (copy), UserInputService (copy), Default (copy), buildCustomFields (copy)
+		local IosAuthServiceSignupSuccessConfig = TelemetryConfigsModule.IosAuthServiceSignupSuccessConfig
+		local CredentialType = p1.credentialType
+		local IosAuthServiceEnabled = p1.iosAuthServiceEnabled
 		
-		if not getFFlagEnableIosAuthServiceLuaIXP() then return end
-		if userInputService:GetPlatform() == Enum.Platform.IOS then
-			default:logRobloxTelemetryCounter(iosAuthServiceSignupSuccessConfig, 1, buildCustomFields("signup", credentialType, nil, iosAuthServiceEnabled))
+		if not GetFFlagEnableIosAuthServiceLuaIXPFunction() then return end
+		if UserInputService:GetPlatform() == Enum.Platform.IOS then
+			Default:logRobloxTelemetryCounter(IosAuthServiceSignupSuccessConfig, 1, (buildCustomFields("signup", CredentialType, nil, IosAuthServiceEnabled)))
 			
 			return
 		end
 	end,
-	reportSignupFailure = function(value)
-		-- upvalues: telemetryConfigsModule (ref), getFFlagEnableIosAuthServiceLuaIXP (ref), userInputService (ref), default (ref), buildCustomFields (ref)
-		local iosAuthServiceSignupFailureConfig = telemetryConfigsModule.IosAuthServiceSignupFailureConfig
-		local credentialType = value.credentialType
-		local errorCode = value.errorCode
-		local iosAuthServiceEnabled = value.iosAuthServiceEnabled
+	reportSignupFailure = function(p1) --[[ Line: 148 ]]
+		-- upvalues: TelemetryConfigsModule (copy), GetFFlagEnableIosAuthServiceLuaIXPFunction (copy), UserInputService (copy), Default (copy), buildCustomFields (copy)
+		local IosAuthServiceSignupFailureConfig = TelemetryConfigsModule.IosAuthServiceSignupFailureConfig
+		local CredentialType = p1.credentialType
+		local ErrorCode = p1.errorCode
+		local IosAuthServiceEnabled = p1.iosAuthServiceEnabled
 		
-		if not getFFlagEnableIosAuthServiceLuaIXP() then return end
-		if userInputService:GetPlatform() == Enum.Platform.IOS then
-			default:logRobloxTelemetryCounter(iosAuthServiceSignupFailureConfig, 1, buildCustomFields("signup", credentialType, errorCode, iosAuthServiceEnabled))
+		if not GetFFlagEnableIosAuthServiceLuaIXPFunction() then return end
+		if UserInputService:GetPlatform() == Enum.Platform.IOS then
+			Default:logRobloxTelemetryCounter(IosAuthServiceSignupFailureConfig, 1, (buildCustomFields("signup", CredentialType, ErrorCode, IosAuthServiceEnabled)))
 			
 			return
 		end
 	end,
-	reportPasswordSaveSuccess = function(p1)
-		-- upvalues: telemetryConfigsModule (ref), getFFlagEnableIosAuthServiceLuaIXP (ref), userInputService (ref), default (ref), buildCustomFields (ref)
-		local iosAuthServicePasswordSaveSuccessConfig = telemetryConfigsModule.IosAuthServicePasswordSaveSuccessConfig
-		local credentialType = p1.credentialType
-		local iosAuthServiceEnabled = p1.iosAuthServiceEnabled
+	reportPasswordSaveSuccess = function(p1) --[[ Line: 158 ]]
+		-- upvalues: TelemetryConfigsModule (copy), GetFFlagEnableIosAuthServiceLuaIXPFunction (copy), UserInputService (copy), Default (copy), buildCustomFields (copy)
+		local IosAuthServicePasswordSaveSuccessConfig = TelemetryConfigsModule.IosAuthServicePasswordSaveSuccessConfig
+		local CredentialType = p1.credentialType
+		local IosAuthServiceEnabled = p1.iosAuthServiceEnabled
 		
-		if not getFFlagEnableIosAuthServiceLuaIXP() then return end
-		if userInputService:GetPlatform() == Enum.Platform.IOS then
-			default:logRobloxTelemetryCounter(iosAuthServicePasswordSaveSuccessConfig, 1, buildCustomFields("passwordSave", credentialType, nil, iosAuthServiceEnabled))
+		if not GetFFlagEnableIosAuthServiceLuaIXPFunction() then return end
+		if UserInputService:GetPlatform() == Enum.Platform.IOS then
+			Default:logRobloxTelemetryCounter(IosAuthServicePasswordSaveSuccessConfig, 1, (buildCustomFields("passwordSave", CredentialType, nil, IosAuthServiceEnabled)))
 			
 			return
 		end
 	end,
-	reportPasswordSaveFailure = function(p1)
-		-- upvalues: telemetryConfigsModule (ref), getFFlagEnableIosAuthServiceLuaIXP (ref), userInputService (ref), default (ref), buildCustomFields (ref)
-		local iosAuthServicePasswordSaveFailureConfig = telemetryConfigsModule.IosAuthServicePasswordSaveFailureConfig
-		local credentialType = p1.credentialType
-		local errorCode = p1.errorCode
-		local iosAuthServiceEnabled = p1.iosAuthServiceEnabled
+	reportPasswordSaveFailure = function(p1) --[[ Line: 168 ]]
+		-- upvalues: TelemetryConfigsModule (copy), GetFFlagEnableIosAuthServiceLuaIXPFunction (copy), UserInputService (copy), Default (copy), buildCustomFields (copy)
+		local IosAuthServicePasswordSaveFailureConfig = TelemetryConfigsModule.IosAuthServicePasswordSaveFailureConfig
+		local CredentialType = p1.credentialType
+		local ErrorCode = p1.errorCode
+		local IosAuthServiceEnabled = p1.iosAuthServiceEnabled
 		
-		if not getFFlagEnableIosAuthServiceLuaIXP() then return end
-		if userInputService:GetPlatform() == Enum.Platform.IOS then
-			default:logRobloxTelemetryCounter(iosAuthServicePasswordSaveFailureConfig, 1, buildCustomFields("passwordSave", credentialType, errorCode, iosAuthServiceEnabled))
+		if not GetFFlagEnableIosAuthServiceLuaIXPFunction() then return end
+		if UserInputService:GetPlatform() == Enum.Platform.IOS then
+			Default:logRobloxTelemetryCounter(IosAuthServicePasswordSaveFailureConfig, 1, (buildCustomFields("passwordSave", CredentialType, ErrorCode, IosAuthServiceEnabled)))
 			
 			return
 		end

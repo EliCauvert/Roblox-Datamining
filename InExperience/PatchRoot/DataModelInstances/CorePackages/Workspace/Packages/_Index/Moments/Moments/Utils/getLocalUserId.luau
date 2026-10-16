@@ -1,8 +1,8 @@
-﻿local playersService = game:GetService("Players")
+﻿local Players = game:GetService("Players")
 
-return function()
-	-- upvalues: playersService (ref)
-	local localPlayer = playersService.LocalPlayer
+return function() --[[ Line: 3 ]]
+	-- upvalues: Players (copy)
+	local LocalPlayer = Players.LocalPlayer
 	
-	return if localPlayer == nil then nil else localPlayer.UserId
+	return if LocalPlayer == nil then nil else LocalPlayer.UserId
 end

@@ -1,28 +1,27 @@
-﻿local parent = script:FindFirstAncestor("RoactUtils").Parent
-local guiService = game:GetService("GuiService")
-local httpService = game:GetService("HttpService")
-local userInputService = game:GetService("UserInputService")
-local notificationType = require(parent.RobloxAppEnums).NotificationType
-local reactModule = require(parent.React)
-local _ = { LIGHT = "lightcontent", DEFAULT = "default" }
+﻿local Parent = script:FindFirstAncestor("RoactUtils").Parent
+local GuiService = game:GetService("GuiService")
+local HttpService = game:GetService("HttpService")
+local UserInputService = game:GetService("UserInputService")
+local NotificationType = require(Parent.RobloxAppEnums).NotificationType
+local ReactModule = require(Parent.React)
 
-local var1 = function(p1)
-	-- upvalues: userInputService (ref), guiService (ref), httpService (ref), notificationType (ref)
-	if userInputService:GetPlatform() == Enum.Platform.IOS then
-		guiService:BroadcastNotification(httpService:JSONEncode({ style = p1 }), notificationType.SET_STATUS_BAR_STYLE)
+local function v6(Style) --[[ Line: 18 ]]
+	-- upvalues: UserInputService (copy), GuiService (copy), HttpService (copy), NotificationType (copy)
+	if UserInputService:GetPlatform() == Enum.Platform.IOS then
+		GuiService:BroadcastNotification(HttpService:JSONEncode({ style = Style }), NotificationType.SET_STATUS_BAR_STYLE)
 	end
 end
 
-return function(p1, p2)
-	-- upvalues: var1 (ref), reactModule (ref)
-	p2 = p2 or var1
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), p2 (ref)
-		p2(if p1 then "lightcontent" else "default")
+return function(p1, p2) --[[ Line: 30 | Named "useIOSStatusBarStyler" ]]
+	-- upvalues: v6 (copy), ReactModule (copy)
+	local Callback = p2 or v6
+	ReactModule.useEffect(function() --[[ Line: 33 ]]
+		-- upvalues: p1 (copy), Callback (copy)
+		Callback(if p1 then "lightcontent" else "default")
 		
-		return function()
-			-- upvalues: p2 (copy)
-			p2("default")
+		return function() --[[ Line: 36 ]]
+			-- upvalues: Callback (upval)
+			Callback("default")
 		end
 	end, { p1 })
 end

@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.ChatIntervention.ChatIntervention)
+﻿return (require(script.Parent.Parent.Parent._Index.ChatIntervention.ChatIntervention))

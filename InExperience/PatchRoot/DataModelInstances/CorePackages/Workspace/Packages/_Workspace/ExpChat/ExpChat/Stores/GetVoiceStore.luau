@@ -1,1 +1,1 @@
-﻿return require(script:FindFirstAncestor("ExpChat").Parent.Signals).createComputed(require(script.createVoiceStore))
+﻿return require(script:FindFirstAncestor("ExpChat").Parent.Signals).createComputed((require(script.createVoiceStore)))

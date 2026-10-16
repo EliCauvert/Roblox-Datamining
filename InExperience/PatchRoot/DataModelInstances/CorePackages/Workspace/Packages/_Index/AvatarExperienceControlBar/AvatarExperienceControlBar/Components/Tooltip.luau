@@ -1,52 +1,52 @@
-﻿local avatarExperienceControlBar = script:FindFirstAncestor("AvatarExperienceControlBar")
-local parent = avatarExperienceControlBar.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local popover = foundationModule.Popover
-local popoverSide = foundationModule.Enums.PopoverSide
-local popoverAlign = foundationModule.Enums.PopoverAlign
-local radius = foundationModule.Enums.Radius
-local useTokens = foundationModule.Hooks.useTokens
-local _ = require(avatarExperienceControlBar.ControlBarTypes)
-local compactTooltipContentModule = require(script.Parent.CompactTooltipContent)
-local fFlagMeProfileEntryTooltipEnabled = require(parent.AvatarExperienceFlags).FFlagMeProfileEntryTooltipEnabled
+﻿local AvatarExperienceControlBar = script:FindFirstAncestor("AvatarExperienceControlBar")
+local Parent = AvatarExperienceControlBar.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local Popover = FoundationModule.Popover
+local PopoverSide = FoundationModule.Enums.PopoverSide
+local PopoverAlign = FoundationModule.Enums.PopoverAlign
+local Radius = FoundationModule.Enums.Radius
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local _ = require(AvatarExperienceControlBar.ControlBarTypes)
+local CompactTooltipContentModule = require(script.Parent.CompactTooltipContent)
+local FFlagMeProfileEntryTooltipEnabled = require(Parent.AvatarExperienceFlags).FFlagMeProfileEntryTooltipEnabled
 
-return function(p1)
-	-- upvalues: useTokens (ref), fFlagMeProfileEntryTooltipEnabled (ref), popoverSide (ref), reactModule (ref), popover (ref), popoverAlign (ref), radius (ref), compactTooltipContentModule (ref), foundationModule (ref)
-	local var1 = useTokens()
-	local var2 = fFlagMeProfileEntryTooltipEnabled and p1.compact == true
-	local side = p1.side or popoverSide.Right
-	local var3 = nil
+return function(Frame) --[[ Line: 17 | Named "Tooltip" ]]
+	-- upvalues: UseTokensFunction (copy), FFlagMeProfileEntryTooltipEnabled (copy), PopoverSide (copy), ReactModule (copy), Popover (copy), PopoverAlign (copy), Radius (copy), CompactTooltipContentModule (copy), FoundationModule (copy)
+	local UseTokensResult = UseTokensFunction()
+	local IsCompact: boolean = FFlagMeProfileEntryTooltipEnabled and Frame.compact == true
+	local Side = Frame.side or PopoverSide.Right
+	local UseMemoResult = nil
 	
-	if fFlagMeProfileEntryTooltipEnabled then
-		var3 = reactModule.useMemo(function()
-			-- upvalues: side (ref), var1 (ref)
-			return { position = side, offset = var1.Size.Size_150 }
-		end, { side, var1.Size.Size_150 })
-		reactModule.useEffect(function()
-			-- upvalues: p1 (ref)
-			if p1.open and p1.onShown then
-				p1.onShown()
+	if FFlagMeProfileEntryTooltipEnabled then
+		UseMemoResult = ReactModule.useMemo(function() --[[ Line: 23 ]]
+			-- upvalues: Side (copy), UseTokensResult (copy)
+			return { position = Side, offset = UseTokensResult.Size.Size_150 }
+		end, { Side, UseTokensResult.Size.Size_150 })
+		ReactModule.useEffect(function() --[[ Line: 26 ]]
+			-- upvalues: Frame (copy)
+			if Frame.open and Frame.onShown then
+				Frame.onShown()
 			end
-		end, { p1.open, p1.onShown })
+		end, { Frame.open, Frame.onShown })
 	end
-	return reactModule.createElement(popover.Root, { isOpen = p1.open or false }, {
-		Anchor = reactModule.createElement(popover.Anchor, {
-			LayoutOrder = if fFlagMeProfileEntryTooltipEnabled then p1.LayoutOrder else nil,
-			Visible = if fFlagMeProfileEntryTooltipEnabled then p1.Visible else nil
-		}, p1.children),
-		Content = reactModule.createElement(popover.Content, {
-			align = p1.align or (if var2 then popoverAlign.Start else popoverAlign.Center),
-			side = if var2 then var3 else side,
-			backgroundStyle = if var2 then var1.Inverse.Surface.Surface_0 else var1.Color.OverMedia.OverMedia_0,
-			radius = p1.radius or (if var2 then radius.Medium else radius.Small),
-			selectionGroup = if var2 then false else nil
-		}, if var2 then reactModule.createElement(compactTooltipContentModule, { bodyText = p1.bodyText, onDismiss = p1.onDismiss }) else reactModule.createElement(foundationModule.View, { tag = "col gap-small auto-xy padding-medium" }, {
-			Title = if p1.titleText then reactModule.createElement(foundationModule.Text, {
+	return ReactModule.createElement(Popover.Root, { isOpen = Frame.open or false }, {
+		Anchor = ReactModule.createElement(Popover.Anchor, {
+			LayoutOrder = if FFlagMeProfileEntryTooltipEnabled then Frame.LayoutOrder else nil,
+			Visible = if FFlagMeProfileEntryTooltipEnabled then Frame.Visible else nil
+		}, Frame.children),
+		Content = ReactModule.createElement(Popover.Content, {
+			align = Frame.align or (if IsCompact then PopoverAlign.Start else PopoverAlign.Center),
+			side = if IsCompact then UseMemoResult else Side,
+			backgroundStyle = if IsCompact then UseTokensResult.Inverse.Surface.Surface_0 else UseTokensResult.Color.OverMedia.OverMedia_0,
+			radius = Frame.radius or (if IsCompact then Radius.Medium else Radius.Small),
+			selectionGroup = not IsCompact and nil
+		}, if IsCompact then ReactModule.createElement(CompactTooltipContentModule, { bodyText = Frame.bodyText, onDismiss = Frame.onDismiss }) else ReactModule.createElement(FoundationModule.View, { tag = "col gap-small auto-xy padding-medium" }, {
+			Title = if Frame.titleText then ReactModule.createElement(FoundationModule.Text, {
 				tag = "auto-xy text-title-medium content-emphasis",
-				Text = p1.titleText
+				Text = Frame.titleText
 			}) else nil,
-			Subtitle = if p1.bodyText then reactModule.createElement(foundationModule.Text, { tag = "auto-xy text-body-small", Text = p1.bodyText }) else nil
+			Subtitle = if Frame.bodyText then ReactModule.createElement(FoundationModule.Text, { tag = "auto-xy text-body-small", Text = Frame.bodyText }) else nil
 		}))
 	})
 end

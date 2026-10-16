@@ -1,19 +1,19 @@
-﻿local t = {
-	new = function()
+﻿local CountryCodeModule = {
+	new = function() --[[ Line: 4 ]]
 		return {}
 	end
 }
 
-function t.fromJSON(p1)
-	-- upvalues: t (ref)
-	local var1 = t.new()
-	var1.name = p1.name
-	var1.code = p1.code
-	var1.prefix = p1.prefix
-	var1.localizedName = p1.localizedName
-	var1.isDefault = p1.isDefault
+function CountryCodeModule.fromJSON(p1) --[[ Line: 10 ]]
+	-- upvalues: CountryCodeModule (copy)
+	local NewCountryCode = CountryCodeModule.new()
+	NewCountryCode.name = p1.name
+	NewCountryCode.code = p1.code
+	NewCountryCode.prefix = p1.prefix
+	NewCountryCode.localizedName = p1.localizedName
+	NewCountryCode.isDefault = p1.isDefault
 	
-	return var1
+	return NewCountryCode
 end
 
-return t
+return CountryCodeModule

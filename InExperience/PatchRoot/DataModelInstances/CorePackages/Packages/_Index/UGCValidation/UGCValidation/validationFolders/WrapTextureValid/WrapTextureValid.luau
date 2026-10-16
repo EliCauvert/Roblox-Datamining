@@ -1,93 +1,85 @@
 ﻿local UGCValidationService = game:GetService("UGCValidationService")
-local parent = script.Parent.Parent.Parent
-local constantsModule = require(parent.Constants)
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local wrapTargetCageUVReferenceValuesModule = require(parent.WrapTargetCageUVReferenceValues)
-local createEditableInstancesForContextModule = require(parent.util.createEditableInstancesForContext)
-local getFFlagUGCValidationAllowFullVaasModule = require(parent.flags.getFFlagUGCValidationAllowFullVaas)
-local getFFlagUGCValidateTransitionMakeupBoundsModule = require(parent.flags.getFFlagUGCValidateTransitionMakeupBounds)
-local t = {
+local Parent = script.Parent.Parent.Parent
+local ConstantsModule = require(Parent.Constants)
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
+local WrapTargetCageUVReferenceValuesModule = require(Parent.WrapTargetCageUVReferenceValues)
+local CreateEditableInstancesForContextModule = require(Parent.util.createEditableInstancesForContext)
+local GetFFlagUGCValidationAllowFullVaasModule = require(Parent.flags.getFFlagUGCValidationAllowFullVaas)
+local GetFFlagUGCValidateTransitionMakeupBoundsModule = require(Parent.flags.getFFlagUGCValidateTransitionMakeupBounds)
+local config = {
 	Publish = true,
 	Backend = true,
 	Internal = true,
 	InExpServer = true
 }
-local t_1 = { InExpServer = true, InExpClient = true }
-local vector2 = Vector2.new(3.28941798, 0.313124001)
-local vector2_1 = Vector2.new(3.71058202, 0.734287024)
+local config1 = { InExpServer = true, InExpClient = true }
+local _Vector2 = Vector2.new(3.28941798, 0.313124001)
+local _Vector2_1 = Vector2.new(3.71058202, 0.734287024)
 
 return {
-	categories = { validationEnumsModule.UploadCategory.MAKEUP },
+	categories = { ValidationEnumsModule.UploadCategory.MAKEUP },
 	requiredData = {
-		validationEnumsModule.SharedDataMember.rootInstance,
-		validationEnumsModule.SharedDataMember.consumerConfig
+		ValidationEnumsModule.SharedDataMember.rootInstance,
+		ValidationEnumsModule.SharedDataMember.consumerConfig
 	},
 	expectedFailures = {},
-	run = function(p1, p2)
-		-- upvalues: getFFlagUGCValidationAllowFullVaasModule (ref), validationEnumsModule (ref), t (ref), t_1 (ref), createEditableInstancesForContextModule (ref), errorSourceStringsModule (ref), UGCValidationService (ref), wrapTargetCageUVReferenceValuesModule (ref), constantsModule (ref), getFFlagUGCValidateTransitionMakeupBoundsModule (ref), vector2 (ref), vector2_1 (ref)
-		local rootInstance = p2.rootInstance
-		local wrapTextureTransfer = rootInstance:FindFirstChildOfClass("WrapTextureTransfer")
+	run = function(p1, p2) --[[ Line: 43 ]]
+		-- upvalues: GetFFlagUGCValidationAllowFullVaasModule (copy), ValidationEnumsModule (copy), config (copy), config1 (copy), CreateEditableInstancesForContextModule (copy), ErrorSourceStringsModule (copy), UGCValidationService (copy), WrapTargetCageUVReferenceValuesModule (copy), ConstantsModule (copy), GetFFlagUGCValidateTransitionMakeupBoundsModule (copy), _Vector2 (copy), _Vector2_1 (copy)
+		local RootInstance = p2.rootInstance
+		local WrapTextureTransfer = RootInstance:FindFirstChildOfClass("WrapTextureTransfer")
 		
-		if wrapTextureTransfer == nil then
-			error(string.format("WrapTextureTransfer child not found for %s", rootInstance.Name))
+		if WrapTextureTransfer == nil then
+			error(string.format("WrapTextureTransfer child not found for %s", RootInstance.Name))
 		end
-		local var1
-		local consumerConfig = p2.consumerConfig
+		local ConsumerConfig = p2.consumerConfig
+		local IsVaaS = GetFFlagUGCValidationAllowFullVaasModule() and ConsumerConfig.isVaaS
+		local IsValidationEnvMatch: boolean = if IsVaaS then ConsumerConfig.validationEnv == ValidationEnumsModule.ValidationEnv.Backend else config[ConsumerConfig.source] == true
+		local IsEntry = config1[ConsumerConfig.source] == true
+		p1:setReportingInstance(WrapTextureTransfer)
+		local ReferenceCageMeshContent = WrapTextureTransfer.ReferenceCageMeshContent
+		local IsNotUriMatch: boolean = ReferenceCageMeshContent.Uri ~= nil and ReferenceCageMeshContent.Uri ~= ""
+		local EditableMeshEditableInstanceInfo, EditableMeshEditableInstanceInfo2 = CreateEditableInstancesForContextModule.getEditableInstanceInfo(ReferenceCageMeshContent, p2.consumerConfig.preloadedEditableMeshes, "EditableMesh", IsEntry)
 		
-		if getFFlagUGCValidationAllowFullVaasModule() and consumerConfig.isVaaS then
-			var1 = consumerConfig.validationEnv == validationEnumsModule.ValidationEnv.Backend
-			var1 = nil
-		else
-			var1 = t[consumerConfig.source] == true
-		end
-		local var2 = t_1[consumerConfig.source] == true
-		p1:setReportingInstance(wrapTextureTransfer)
-		local referenceCageMeshContent = wrapTextureTransfer.ReferenceCageMeshContent
-		local var3 = referenceCageMeshContent.Uri ~= nil and referenceCageMeshContent.Uri ~= ""
-		local editableMesh, editableMesh_1 = createEditableInstancesForContextModule.getEditableInstanceInfo(referenceCageMeshContent, p2.consumerConfig.preloadedEditableMeshes, "EditableMesh", var2)
-		
-		if editableMesh and editableMesh_1 and editableMesh_1.instance then
-			local instance = editableMesh_1.instance
-			local ok, status = pcall(function()
-				-- upvalues: UGCValidationService (copy), wrapTargetCageUVReferenceValuesModule (copy), instance (ref)
-				return UGCValidationService:ValidateEditableMeshUVValuesInReference(wrapTargetCageUVReferenceValuesModule.Head, instance)
+		if EditableMeshEditableInstanceInfo and EditableMeshEditableInstanceInfo2 and EditableMeshEditableInstanceInfo2.instance then
+			local EditableMeshEditableInstanceInfoInstance = EditableMeshEditableInstanceInfo2.instance
+			local Success, Result = pcall(function() --[[ Line: 98 ]]
+				-- upvalues: UGCValidationService (upval), WrapTargetCageUVReferenceValuesModule (upval), EditableMeshEditableInstanceInfoInstance (copy)
+				return UGCValidationService:ValidateEditableMeshUVValuesInReference(WrapTargetCageUVReferenceValuesModule.Head, EditableMeshEditableInstanceInfoInstance)
 			end)
 			
-			if ok then
-				if not status then
-					p1:fail(errorSourceStringsModule.Keys.WrapTexture_InvalidUV, { instanceName = wrapTextureTransfer:GetFullName() })
+			if Success then
+				if not Result then
+					p1:fail(ErrorSourceStringsModule.Keys.WrapTexture_InvalidUV, { instanceName = WrapTextureTransfer:GetFullName() })
 					
 					return
 				end
-				local MAKEUP_INFO = constantsModule.MAKEUP_INFO
-				local var4 = false
+				local MAKEUPINFO = ConstantsModule.MAKEUP_INFO
+				local v1 = if GetFFlagUGCValidateTransitionMakeupBoundsModule() then WrapTextureTransfer.UVMinBound:FuzzyEq(_Vector2) and WrapTextureTransfer.UVMaxBound:FuzzyEq(_Vector2_1) else false
 				
-				if getFFlagUGCValidateTransitionMakeupBoundsModule() then
-					var4 = wrapTextureTransfer.UVMinBound:FuzzyEq(vector2) and wrapTextureTransfer.UVMaxBound:FuzzyEq(vector2_1)
-				end
-				if not var4 then
-					if not wrapTextureTransfer.UVMinBound:FuzzyEq(MAKEUP_INFO.WrapTextureTransferUVBounds.MinBound) then
-						p1:fail(errorSourceStringsModule.Keys.WrapTexture_InvalidMinBound, {
-							instanceName = wrapTextureTransfer:GetFullName(),
-							actual = tostring(wrapTextureTransfer.UVMinBound),
-							expected = tostring(MAKEUP_INFO.WrapTextureTransferUVBounds.MinBound)
+				if not v1 then
+					if not WrapTextureTransfer.UVMinBound:FuzzyEq(MAKEUPINFO.WrapTextureTransferUVBounds.MinBound) then
+						p1:fail(ErrorSourceStringsModule.Keys.WrapTexture_InvalidMinBound, {
+							instanceName = WrapTextureTransfer:GetFullName(),
+							actual = tostring(WrapTextureTransfer.UVMinBound),
+							expected = tostring(MAKEUPINFO.WrapTextureTransferUVBounds.MinBound)
 						})
 						
 						return
-					elseif not wrapTextureTransfer.UVMaxBound:FuzzyEq(MAKEUP_INFO.WrapTextureTransferUVBounds.MaxBound) then
-						p1:fail(errorSourceStringsModule.Keys.WrapTexture_InvalidMaxBound, {
-							instanceName = wrapTextureTransfer:GetFullName(),
-							actual = tostring(wrapTextureTransfer.UVMaxBound),
-							expected = tostring(MAKEUP_INFO.WrapTextureTransferUVBounds.MaxBound)
+					end
+					if not WrapTextureTransfer.UVMaxBound:FuzzyEq(MAKEUPINFO.WrapTextureTransferUVBounds.MaxBound) then
+						p1:fail(ErrorSourceStringsModule.Keys.WrapTexture_InvalidMaxBound, {
+							instanceName = WrapTextureTransfer:GetFullName(),
+							actual = tostring(WrapTextureTransfer.UVMaxBound),
+							expected = tostring(MAKEUPINFO.WrapTextureTransferUVBounds.MaxBound)
 						})
 						
-						if getFFlagUGCValidateTransitionMakeupBoundsModule() then return end
+						if GetFFlagUGCValidateTransitionMakeupBoundsModule() then return end
 					end
 				end
-				if getFFlagUGCValidateTransitionMakeupBoundsModule() and var1 then
-					if var4 then
+				if GetFFlagUGCValidateTransitionMakeupBoundsModule() and IsValidationEnvMatch then
+					if v1 then
 						p1:setTelemetryContext("makeupBounds=Old")
 						
 						return
@@ -95,19 +87,24 @@ return {
 					p1:setTelemetryContext("makeupBounds=New")
 				end
 				return
-			elseif var1 then
-				p1:forceError(string.format("Failed to load UVs for '%s'. Make sure the UV map exists and try again.", wrapTextureTransfer:GetFullName()))
+			else
+				if IsValidationEnvMatch then
+					p1:forceError(string.format("Failed to load UVs for '%s'. Make sure the UV map exists and try again.", WrapTextureTransfer:GetFullName()))
+				end
+				p1:fail(ErrorSourceStringsModule.Keys.WrapTexture_FailedToLoadUV, { instanceName = WrapTextureTransfer:GetFullName() })
+				
+				return
 			end
-			p1:fail(errorSourceStringsModule.Keys.WrapTexture_FailedToLoadUV, { instanceName = wrapTextureTransfer:GetFullName() })
-			
-			return
-		elseif not var3 then
-			p1:fail(errorSourceStringsModule.Keys.WrapTexture_NoCage, { instanceName = wrapTextureTransfer:GetFullName() })
-			
-			return
-		elseif var1 then
-			p1:forceError(string.format("Failed to load ReferenceCageContent for %s", wrapTextureTransfer:GetFullName()))
+		else
+			if not IsNotUriMatch then
+				p1:fail(ErrorSourceStringsModule.Keys.WrapTexture_NoCage, { instanceName = WrapTextureTransfer:GetFullName() })
+				
+				return
+			end
+			if IsValidationEnvMatch then
+				p1:forceError(string.format("Failed to load ReferenceCageContent for %s", WrapTextureTransfer:GetFullName()))
+			end
+			p1:fail(ErrorSourceStringsModule.Keys.WrapTexture_FailedToLoadCage, { instanceName = WrapTextureTransfer:GetFullName() })
 		end
-		p1:fail(errorSourceStringsModule.Keys.WrapTexture_FailedToLoadCage, { instanceName = wrapTextureTransfer:GetFullName() })
 	end
 }

@@ -1,35 +1,36 @@
-﻿local reactModule = require(script:FindFirstAncestor("Foundation").Parent.React)
+﻿local ReactModule = require(script:FindFirstAncestor("Foundation").Parent.React)
 
-return function(p1)
-	-- upvalues: reactModule (ref)
-	local var1, var2 = reactModule.useBinding(Vector2.new(0, 0))
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var2 (ref)
-		local current = p1.current
+return function(p1) --[[ Line: 5 | Named "useDialogSize" ]]
+	-- upvalues: ReactModule (copy)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(Vector2.new(0, 0))
+	ReactModule.useEffect(function() --[[ Line: 8 ]]
+		-- upvalues: p1 (copy), UseBindingResult2 (copy)
+		local Current = p1.current
 		
-		if not current then return end
-		local function updateDialogSize()
-			-- upvalues: current (ref), var2 (copy)
-			local absoluteSize = current.AbsoluteSize
+		if not Current then return end
+		local function updateDialogSize() --[[ Line: 14 ]]
+			-- upvalues: Current (copy), UseBindingResult2 (upval)
+			local AbsoluteSize = Current.AbsoluteSize
 			
-			if absoluteSize.X == 0 or absoluteSize.Y == 0 then
+			if AbsoluteSize.X ~= 0 and AbsoluteSize.Y ~= 0 then
+				UseBindingResult2(AbsoluteSize)
+				
 				return
 			end
-			var2(absoluteSize)
 		end
 		
-		local absoluteSize = current.AbsoluteSize
+		local AbsoluteSize = Current.AbsoluteSize
 		
-		if absoluteSize.X ~= 0 and absoluteSize.Y ~= 0 then
-			var2(absoluteSize)
+		if AbsoluteSize.X ~= 0 and AbsoluteSize.Y ~= 0 then
+			UseBindingResult2(AbsoluteSize)
 		end
-		local var3 = current:GetPropertyChangedSignal("AbsoluteSize"):Connect(updateDialogSize)
+		local Connection = Current:GetPropertyChangedSignal("AbsoluteSize"):Connect(updateDialogSize)
 		
-		return function()
-			-- upvalues: var3 (ref)
-			var3:Disconnect()
+		return function() --[[ Line: 26 ]]
+			-- upvalues: Connection (copy)
+			Connection:Disconnect()
 		end
 	end, {})
 	
-	return var1
+	return UseBindingResult
 end

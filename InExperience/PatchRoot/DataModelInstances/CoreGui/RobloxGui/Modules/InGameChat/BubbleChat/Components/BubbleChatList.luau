@@ -1,95 +1,96 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local cryoModule = require(corePackagesService.Packages.Cryo)
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local tModule = require(corePackagesService.Packages.t)
-local chatBubbleModule = require(script.Parent.ChatBubble)
-local typesModule = require(script.Parent.Parent.Types)
+﻿local CorePackages = game:GetService("CorePackages")
+local CryoModule = require(CorePackages.Packages.Cryo)
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local TModule = require(CorePackages.Packages.t)
+local ChatBubbleModule = require(script.Parent.ChatBubble)
 local _ = game:GetService("CoreGui"):WaitForChild("RobloxGui")
-local bubbleChatList = roactModule.Component:extend("BubbleChatList")
-bubbleChatList.validateProps = tModule.strictInterface({
-	userId = tModule.string,
-	isVisible = tModule.optional(tModule.boolean),
-	theme = tModule.optional(tModule.string),
-	onLastBubbleFadeOut = tModule.optional(tModule.callback),
-	chatSettings = typesModule.IChatSettings,
-	renderFirstInsert = tModule.optional(tModule.callback),
-	insertSize = tModule.optional(tModule.Vector2),
-	messageIds = tModule.array(tModule.string)
+local BubbleChatList = RoactModule.Component:extend("BubbleChatList")
+BubbleChatList.validateProps = TModule.strictInterface({
+	userId = TModule.string,
+	isVisible = TModule.optional(TModule.boolean),
+	theme = TModule.optional(TModule.string),
+	onLastBubbleFadeOut = TModule.optional(TModule.callback),
+	chatSettings = require(script.Parent.Parent.Types).IChatSettings,
+	renderFirstInsert = TModule.optional(TModule.callback),
+	insertSize = TModule.optional(TModule.Vector2),
+	messageIds = TModule.array(TModule.string)
 })
-bubbleChatList.defaultProps = { theme = "Light" }
+BubbleChatList.defaultProps = { theme = "Light" }
 
-function bubbleChatList.getDerivedStateFromProps(p1, p2)
-	-- upvalues: cryoModule (ref)
-	local t = {}
+function BubbleChatList.getDerivedStateFromProps(p1, p2) --[[ Line: 32 ]]
+	-- upvalues: CryoModule (copy)
+	local List = {}
 	
 	if p2.bubbles then
-		for i, v in ipairs(p2.bubbles) do
-			if not cryoModule.List.find(p1.messageIds, v.messageId) then
-				table.insert(t, { fadingOut = true, messageId = v.messageId })
+		for _, bubble in ipairs(p2.bubbles) do
+			if not CryoModule.List.find(p1.messageIds, bubble.messageId) then
+				table.insert(List, { fadingOut = true, messageId = bubble.messageId })
 			end
 		end
 	end
-	for i, v in ipairs(p1.messageIds) do
-		table.insert(t, { fadingOut = false, messageId = v })
+	for _, messageId in ipairs(p1.messageIds) do
+		table.insert(List, { fadingOut = false, messageId = messageId })
 	end
-	return { bubbles = t }
+	return { bubbles = List }
 end
 
-function bubbleChatList.init(p3, p4)
-	-- upvalues: cryoModule (ref)
+function BubbleChatList.init(p3, p4) --[[ Line: 60 ]]
+	-- upvalues: CryoModule (copy)
 	if (not p4.messageIds or #p4.messageIds == 0) and p4.onLastBubbleFadeOut then
 		p4.onLastBubbleFadeOut()
 	end
-	function p2.onBubbleFadeOut(p5)
-		-- upvalues: cryoModule (copy), p3 (ref)
-		local var1 = cryoModule.List.filter(p3.state.bubbles, function(p6)
-			-- upvalues: p5 (ref)
-			return p6.messageId ~= p5
+	function p3.onBubbleFadeOut(MessageId) --[[ Line: 67 ]]
+		-- upvalues: CryoModule (upval), p3 (copy)
+		local FilterResult = CryoModule.List.filter(p3.state.bubbles, function(p5): boolean --[[ Line: 68 ]]
+			-- upvalues: MessageId (copy)
+			return p5.messageId ~= MessageId
 		end)
 		
-		if #var1 == 0 and p3.props.onLastBubbleFadeOut then
+		if #FilterResult == 0 and p3.props.onLastBubbleFadeOut then
 			p3.props.onLastBubbleFadeOut()
 			
 			return
+		else
+			p3:setState({ bubbles = FilterResult })
 		end
-		p3:setState({ bubbles = var1 })
 	end
 end
 
-function bubbleChatList.render(p3)
-	-- upvalues: roactModule (ref), chatBubbleModule (ref)
-	local t = {}
-	local chatSettings = p3.props.chatSettings
-	t.Layout = roactModule.createElement("UIListLayout", {
-		SortOrder = Enum.SortOrder.LayoutOrder,
-		HorizontalAlignment = Enum.HorizontalAlignment.Center,
-		VerticalAlignment = Enum.VerticalAlignment.Bottom,
-		Padding = UDim.new(0, chatSettings.BubblesSpacing)
-	})
-	t.CaretPadding = chatSettings.TailVisible and (p3.props.showCarat and roactModule.createElement("UIPadding", { PaddingBottom = UDim.new(0, 8) }))
+function BubbleChatList.render(p3) --[[ Line: 83 ]]
+	-- upvalues: RoactModule (copy), ChatBubbleModule (copy)
+	local ChatSettings = p3.props.chatSettings
+	local config = {
+		Layout = RoactModule.createElement("UIListLayout", {
+			SortOrder = Enum.SortOrder.LayoutOrder,
+			HorizontalAlignment = Enum.HorizontalAlignment.Center,
+			VerticalAlignment = Enum.VerticalAlignment.Bottom,
+			Padding = UDim.new(0, ChatSettings.BubblesSpacing)
+		}),
+		CaretPadding = ChatSettings.TailVisible and (p3.props.showCarat and RoactModule.createElement("UIPadding", { PaddingBottom = UDim.new(0, 8) }))
+	}
 	
-	for i, v in ipairs(p3.state.bubbles) do
-		local var1 = i == #p3.state.bubbles
-		t["Bubble" .. v.messageId] = roactModule.createElement(chatBubbleModule, {
-			messageId = v.messageId,
-			isMostRecent = var1,
+	for i, bubble in ipairs(p3.state.bubbles) do
+		local IsMostRecent = i == #p3.state.bubbles
+		config["Bubble" .. bubble.messageId] = RoactModule.createElement(ChatBubbleModule, {
+			messageId = bubble.messageId,
+			isMostRecent = IsMostRecent,
 			theme = p3.props.theme,
-			fadingOut = v.fadingOut,
+			fadingOut = bubble.fadingOut,
 			onFadeOut = p3.onBubbleFadeOut,
-			chatSettings = chatSettings,
-			renderInsert = if var1 then p3.props.renderFirstInsert else nil,
+			chatSettings = ChatSettings,
+			renderInsert = IsMostRecent and p3.props.renderFirstInsert or nil,
 			insertSize = p3.props.insertSize,
 			showCarat = p3.props.showCarat
 		})
 	end
-	return roactModule.createElement("Frame", {
+	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Visible = p3.props.isVisible,
 		Size = UDim2.fromScale(1, 1)
-	}, t)
+	}, config)
 end
 
-return roactRoduxModule.connect(function(p4, p5)
+return RoactRoduxModule.connect(function(p4, p5) --[[ Line: 127 | Named "mapStateToProps" ]]
 	return { messageIds = p4.userMessages[p5.userId] or {} }
-end)(bubbleChatList)
+end)(BubbleChatList)

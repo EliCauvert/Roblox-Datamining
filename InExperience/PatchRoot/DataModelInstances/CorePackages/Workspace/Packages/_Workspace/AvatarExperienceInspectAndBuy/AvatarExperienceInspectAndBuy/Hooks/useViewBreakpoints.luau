@@ -1,43 +1,43 @@
-﻿local avatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
-local parent = avatarExperienceInspectAndBuy.Parent
-local reactModule = require(parent.React)
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local tutilsModule = require(parent.tutils)
-local useTokens = require(parent.Foundation).Hooks.useTokens
-local viewTypeModule = require(avatarExperienceInspectAndBuy.Enums.ViewType)
+﻿local AvatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
+local Parent = AvatarExperienceInspectAndBuy.Parent
+local ReactModule = require(Parent.React)
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local TutilsModule = require(Parent.tutils)
+local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
+local ViewTypeModule = require(AvatarExperienceInspectAndBuy.Enums.ViewType)
 
-local function selectView(p1)
+local function selectView(p1) --[[ Line: 32 ]]
 	return p1.view
 end
 
-return function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), viewTypeModule (ref), useSelector (ref), selectView (ref), tutilsModule (ref)
-	local var1 = useTokens()
+return function(YOffset) --[[ Line: 44 | Named "useViewBreakpoints" ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), ViewTypeModule (copy), UseSelectorFunction (copy), selectView (copy), TutilsModule (copy)
+	local UseTokensResult = UseTokensFunction()
 	
-	return reactModule.useMemo(function()
-		-- upvalues: viewTypeModule (copy), p1 (ref), var1 (ref)
+	return ReactModule.useMemo(function() --[[ Line: 46 ]]
+		-- upvalues: ViewTypeModule (upval), YOffset (copy), UseTokensResult (copy)
 		return {
-			[viewTypeModule.Wide] = {
-				ContainerSize = UDim2.new(0, 800, 0.9, -p1),
+			[ViewTypeModule.Wide] = {
+				ContainerSize = UDim2.new(0, 800, 0.9, -YOffset),
 				ContainerAnchorPoint = Vector2.new(0.5, 0.5),
-				ContainerPosition = UDim2.new(0.5, 0, 0.5, p1 / 2),
-				OverlaySize = UDim2.new(1, 0, 1, p1),
-				OverlayPosition = UDim2.new(0, 0, 0, -p1)
+				ContainerPosition = UDim2.new(0.5, 0, 0.5, YOffset / 2),
+				OverlaySize = UDim2.new(1, 0, 1, YOffset),
+				OverlayPosition = UDim2.new(0, 0, 0, -YOffset)
 			},
-			[viewTypeModule.WideLandscape] = {
-				ContainerSize = UDim2.new(0.95, 0, 1, -p1),
+			[ViewTypeModule.WideLandscape] = {
+				ContainerSize = UDim2.new(0.95, 0, 1, -YOffset),
 				ContainerAnchorPoint = Vector2.new(0.5, 0),
-				ContainerPosition = UDim2.new(0.5, 0, 0, p1 + var1.Padding.XSmall),
-				OverlaySize = UDim2.new(1, 0, 1, p1),
-				OverlayPosition = UDim2.new(0, 0, 0, -p1)
+				ContainerPosition = UDim2.new(0.5, 0, 0, YOffset + UseTokensResult.Padding.XSmall),
+				OverlaySize = UDim2.new(1, 0, 1, YOffset),
+				OverlayPosition = UDim2.new(0, 0, 0, -YOffset)
 			},
-			[viewTypeModule.Compact] = {
-				ContainerSize = UDim2.new(1, 0, 1, -p1),
+			[ViewTypeModule.Compact] = {
+				ContainerSize = UDim2.new(1, 0, 1, -YOffset),
 				ContainerAnchorPoint = Vector2.new(0, 0),
-				ContainerPosition = UDim2.new(0, 0, 0, p1 + var1.Padding.Small),
-				OverlaySize = UDim2.new(1, 0, 1, p1),
-				OverlayPosition = UDim2.new(0, 0, 0, -p1)
+				ContainerPosition = UDim2.new(0, 0, 0, YOffset + UseTokensResult.Padding.Small),
+				OverlaySize = UDim2.new(1, 0, 1, YOffset),
+				OverlayPosition = UDim2.new(0, 0, 0, -YOffset)
 			}
 		}
-	end, { p1 })[useSelector(selectView, tutilsModule.deepEqual)] or {}
+	end, { YOffset })[UseSelectorFunction(selectView, TutilsModule.deepEqual)] or {}
 end

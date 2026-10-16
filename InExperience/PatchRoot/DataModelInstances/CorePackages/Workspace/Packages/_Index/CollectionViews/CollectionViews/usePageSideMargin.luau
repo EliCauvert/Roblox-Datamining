@@ -1,25 +1,32 @@
-﻿local collectionViews = script:FindFirstAncestor("CollectionViews")
-local parent = collectionViews.Parent
-local collectionItemSize = require(collectionViews.CollectionViewTypes).CollectionItemSize
-local useCollectionLayoutParamsModule = require(collectionViews.useCollectionLayoutParams)
-local formFactor = require(parent.FormFactor).Enums.FormFactor
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local useAppPolicy = require(parent.UniversalAppPolicy).useAppPolicy
-local discoveryTypesModule = require(parent.DiscoveryTypes)
-local appCompositionModule = require(parent.AppComposition)
-local fFlagLuaAppCompositionAlways = require(parent.SharedFlags).FFlagLuaAppCompositionAlways
-local GAME_CAROUSEL_SIDE_COMPACT_PADDING = discoveryTypesModule.Constants.GAME_CAROUSEL_SIDE_COMPACT_PADDING
-local GAME_CAROUSEL_SIDE_WIDE_PADDING = discoveryTypesModule.Constants.GAME_CAROUSEL_SIDE_WIDE_PADDING
+﻿local CollectionViews = script:FindFirstAncestor("CollectionViews")
+local Parent = CollectionViews.Parent
+local CollectionItemSize = require(CollectionViews.CollectionViewTypes).CollectionItemSize
+local UseCollectionLayoutParamsModule = require(CollectionViews.useCollectionLayoutParams)
+local FormFactor = require(Parent.FormFactor).Enums.FormFactor
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
+local DiscoveryTypesModule = require(Parent.DiscoveryTypes)
+local AppCompositionModule = require(Parent.AppComposition)
+local FFlagLuaAppCompositionAlways = require(Parent.SharedFlags).FFlagLuaAppCompositionAlways
+local GAMECAROUSELSIDECOMPACTPADDING = DiscoveryTypesModule.Constants.GAME_CAROUSEL_SIDE_COMPACT_PADDING
+local GAMECAROUSELSIDEWIDEPADDING = DiscoveryTypesModule.Constants.GAME_CAROUSEL_SIDE_WIDE_PADDING
 
-return function(p1, p2)
-	-- upvalues: appCompositionModule (ref), fFlagLuaAppCompositionAlways (ref), useSelector (ref), useAppPolicy (ref), formFactor (ref), GAME_CAROUSEL_SIDE_COMPACT_PADDING (ref), GAME_CAROUSEL_SIDE_WIDE_PADDING (ref), useCollectionLayoutParamsModule (ref), collectionItemSize (ref)
-	local margin = appCompositionModule.useCompositionLayout().margin
+return function(p1, p2) --[[ Line: 17 | Named "usePageSideMargin" ]]
+	-- upvalues: AppCompositionModule (copy), FFlagLuaAppCompositionAlways (copy), UseSelectorFunction (copy), UseAppPolicyFunction (copy), FormFactor (copy), GAMECAROUSELSIDECOMPACTPADDING (copy), GAMECAROUSELSIDEWIDEPADDING (copy), UseCollectionLayoutParamsModule (copy), CollectionItemSize (copy)
+	local Margin = AppCompositionModule.useCompositionLayout().margin
 	
-	return if fFlagLuaAppCompositionAlways then margin elseif p2 then margin else useCollectionLayoutParamsModule(collectionItemSize.Small, p1, false, if useAppPolicy(function(p3)
-		return p3.useGridPageLayout()
-	end) then nil else {
-		sideMargin = if useSelector(function(p3)
+	if FFlagLuaAppCompositionAlways then
+		return Margin
+	else
+		local UseSelectorResult = UseSelectorFunction(function(p3) --[[ Line: 25 ]]
 			return p3.FormFactor
-		end) == formFactor.COMPACT then GAME_CAROUSEL_SIDE_COMPACT_PADDING else GAME_CAROUSEL_SIDE_WIDE_PADDING
-	}).sideMargin
+		end)
+		local UseCollectionLayoutParamsModuleResult = UseCollectionLayoutParamsModule(CollectionItemSize.Small, p1, false, if UseAppPolicyFunction(function(p3) --[[ Line: 29 ]]
+			return p3.useGridPageLayout()
+		end) then nil else {
+			sideMargin = if UseSelectorResult == FormFactor.COMPACT then GAMECAROUSELSIDECOMPACTPADDING else GAMECAROUSELSIDEWIDEPADDING
+		})
+		
+		return if p2 then Margin else UseCollectionLayoutParamsModuleResult.sideMargin
+	end
 end

@@ -1,18 +1,19 @@
-﻿return function(value, p1, p2)
-	value.defer(function()
-		-- upvalues: value (ref), p1 (ref), p2 (ref)
-		if not value.isEnabled() then return end
-		local ok, status = pcall(value.getService)
+﻿return function(p1, p2, p3) --[[ Line: 14 | Named "signalWith" ]]
+	p1.defer(function() --[[ Line: 17 ]]
+		-- upvalues: p1 (copy), p2 (copy), p3 (copy)
+		if not p1.isEnabled() then return end
+		local Success, Result = pcall(p1.getService)
 		
-		if not ok or status == nil then return end
-		local pageType = value.resolveEnumItem("PageType", p1)
-		local pageMilestoneType = value.resolveEnumItem("PageMilestoneType", p2)
+		if not Success or Result == nil then return end
+		local PageType = p1.resolveEnumItem("PageType", p2)
+		local PageMilestoneType = p1.resolveEnumItem("PageMilestoneType", p3)
 		
-		if pageType == nil or pageMilestoneType == nil then
-			value.warn(`PageGate.signal: no enum for page "{p0}" / milestone "{p1}"`)
+		if PageType == nil or PageMilestoneType == nil then
+			p1.warn(`PageGate.signal: no enum for page "{p1}" / milestone "{p2}"`)
 			
 			return
+		else
+			Result:TriggerOnPageMilestone(PageType, PageMilestoneType)
 		end
-		status:TriggerOnPageMilestone(pageType, pageMilestoneType)
 	end)
 end

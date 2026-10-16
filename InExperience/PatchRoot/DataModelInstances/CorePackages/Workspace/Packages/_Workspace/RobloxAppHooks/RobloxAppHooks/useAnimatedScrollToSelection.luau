@@ -1,33 +1,33 @@
-﻿local parent = script:FindFirstAncestor("RobloxAppHooks").Parent
-local reactModule = require(parent.React)
-local reactOtterModule = require(parent.ReactOtter)
-local t = { dampingRatio = 1, frequency = 3 }
+﻿local Parent = script:FindFirstAncestor("RobloxAppHooks").Parent
+local ReactModule = require(Parent.React)
+local ReactOtterModule = require(Parent.ReactOtter)
+local config = { dampingRatio = 1, frequency = 3 }
 
-local function _(value, p1, p2, p3, p4)
-	local var1 = if p2 == Enum.ScrollingDirection.X then value.CanvasPosition.X + (p1.AbsolutePosition.X - value.AbsolutePosition.X) else value.CanvasPosition.Y + (p1.AbsolutePosition.Y - value.AbsolutePosition.Y)
+local function _(Frame: Frame, Frame1: Frame, ScrollingDirection, p1, p2): number --[[ Line: 10 | Named "calculateTargetScrollOffset" ]]
+	local NewX = if ScrollingDirection == Enum.ScrollingDirection.X then Frame.CanvasPosition.X + (Frame1.AbsolutePosition.X - Frame.AbsolutePosition.X) else Frame.CanvasPosition.Y + (Frame1.AbsolutePosition.Y - Frame.AbsolutePosition.Y)
 	
-	return if var1 < p4 then 0 else math.max(var1 - p3, 0)
+	return if NewX < p2 then 0 else math.max(NewX - p1, 0)
 end
 
-return function(p1, p2, p3, p4)
-	-- upvalues: t (ref), reactOtterModule (ref), reactModule (ref)
-	p2 = p2 or 0
-	p3 = p3 or 0
-	local var1 = p4 or t
-	local var2, var3 = reactOtterModule.useAnimatedBinding(0)
+return function(ScrollingDirection, p1, p2, p3) --[[ Line: 28 | Named "useAnimatedScrollToSelection" ]]
+	-- upvalues: config (copy), ReactOtterModule (copy), ReactModule (copy)
+	local P6 = p1 or 0
+	local P7 = p2 or 0
+	local Config = if p3 then p3 else config
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(0)
 	
-	return reactModule.useMemo(function()
-		-- upvalues: var2 (ref), p1 (ref)
-		return var2:map(function(p5)
-			-- upvalues: p1 (copy)
-			return if p1 == Enum.ScrollingDirection.X then Vector2.new(p5, 0) else Vector2.new(0, p5)
+	return ReactModule.useMemo(function() --[[ Line: 59 ]]
+		-- upvalues: UseAnimatedBindingResult (copy), ScrollingDirection (copy)
+		return UseAnimatedBindingResult:map(function(X): Vector2 --[[ Line: 60 ]]
+			-- upvalues: ScrollingDirection (upval)
+			return if ScrollingDirection == Enum.ScrollingDirection.X then Vector2.new(X, 0) else Vector2.new(0, X)
 		end)
-	end, { p1 }), reactModule.useCallback(function(p5, p6, _, p7)
-		-- upvalues: p1 (ref), p2 (ref), p3 (ref), var3 (ref), reactOtterModule (copy), var1 (ref)
-		if p6 then return end
-		if p7 and p7:IsDescendantOf(p5) then
-			local var4 = if p1 == Enum.ScrollingDirection.X then p5.CanvasPosition.X + (p7.AbsolutePosition.X - p5.AbsolutePosition.X) else p5.CanvasPosition.Y + (p7.AbsolutePosition.Y - p5.AbsolutePosition.Y)
-			var3(reactOtterModule.spring(if var4 < p3 then 0 else math.max(var4 - p2, 0), var1))
+	end, { ScrollingDirection }), (ReactModule.useCallback(function(Frame: Frame, p4, _, Frame1: Frame) --[[ Line: 41 ]]
+		-- upvalues: ScrollingDirection (copy), P6 (copy), P7 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), Config (copy)
+		if p4 then return end
+		if Frame1 and Frame1:IsDescendantOf(Frame) then
+			local NewX = if ScrollingDirection == Enum.ScrollingDirection.X then Frame.CanvasPosition.X + (Frame1.AbsolutePosition.X - Frame.AbsolutePosition.X) else Frame.CanvasPosition.Y + (Frame1.AbsolutePosition.Y - Frame.AbsolutePosition.Y)
+			UseAnimatedBindingResult2(ReactOtterModule.spring(if NewX < P7 then 0 else math.max(NewX - P6, 0), Config))
 		end
-	end, { p2, p1, p3, var1 })
+	end, { P6, ScrollingDirection, P7, Config }))
 end

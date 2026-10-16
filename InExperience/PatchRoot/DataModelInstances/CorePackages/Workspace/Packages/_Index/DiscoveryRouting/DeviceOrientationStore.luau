@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.DeviceOrientationStore.DeviceOrientationStore)
+﻿return (require(script.Parent.Parent.Parent._Index.DeviceOrientationStore.DeviceOrientationStore))

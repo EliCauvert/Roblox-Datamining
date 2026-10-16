@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Index.Merge.Merge)
+﻿return (require(script.Parent._Index.Merge.Merge))

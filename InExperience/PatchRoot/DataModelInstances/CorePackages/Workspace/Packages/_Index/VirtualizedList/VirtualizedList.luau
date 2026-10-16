@@ -1,1 +1,1 @@
-﻿return require(game:GetService("CorePackages").Packages.VirtualizedList)
+﻿return (require(game:GetService("CorePackages").Packages.VirtualizedList))

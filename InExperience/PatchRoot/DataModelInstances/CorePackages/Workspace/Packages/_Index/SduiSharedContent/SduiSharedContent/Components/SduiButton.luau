@@ -1,13 +1,13 @@
-﻿local parent = script:FindFirstAncestor("SduiSharedContent").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local _ = require(parent.SduiCompat)
-local fFlagLuaAppSduiGameTileFeedback = require(parent.SharedFlags).FFlagLuaAppSduiGameTileFeedback
+﻿local Parent = script:FindFirstAncestor("SduiSharedContent").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local _ = require(Parent.SduiCompat)
+local FFlagLuaAppSduiGameTileFeedback = require(Parent.SharedFlags).FFlagLuaAppSduiGameTileFeedback
 
-return function(p1)
-	-- upvalues: reactModule (ref), foundationModule (ref), fFlagLuaAppSduiGameTileFeedback (ref)
-	return reactModule.createElement(foundationModule.Button, {
-		ref = if fFlagLuaAppSduiGameTileFeedback then p1.buttonRef else nil,
+return function(p1) --[[ Line: 45 | Named "SduiButton" ]]
+	-- upvalues: ReactModule (copy), FoundationModule (copy), FFlagLuaAppSduiGameTileFeedback (copy)
+	return ReactModule.createElement(FoundationModule.Button, {
+		ref = if FFlagLuaAppSduiGameTileFeedback then p1.buttonRef else nil,
 		AnchorPoint = p1.anchorPoint,
 		LayoutOrder = p1.layoutOrder,
 		Position = p1.position,

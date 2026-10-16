@@ -1,43 +1,53 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local reactModule = require(profilePlatform.Parent.React)
-local enumsModule = require(profilePlatform.Common.Enums)
-local insertServiceLoadAssetModule = require(profilePlatform.Utils.insertServiceLoadAsset)
-local useProfileJsonComponentModule = require(profilePlatform.Hooks.useProfileJsonComponent)
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local ReactModule = require(ProfilePlatform.Parent.React)
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local InsertServiceLoadAssetModule = require(ProfilePlatform.Utils.insertServiceLoadAsset)
+local UseProfileJsonComponentModule = require(ProfilePlatform.Hooks.useProfileJsonComponent)
 
-local function _(value)
-	if value == nil then
+local function _(p1): number? --[[ Line: 14 | Named "parseAssetId" ]]
+	if p1 == nil then
 		return nil
 	end
-	local assetId = value.assetId
+	local AssetId: number = p1.assetId
 	
-	if type(assetId) == "number" and assetId > 0 then
-		return assetId
-	elseif type(assetId) == "string" then
-		local var1 = tonumber(assetId)
-		
-		return if var1 and var1 > 0 then var1 else nil
+	if type(AssetId) == "number" and AssetId > 0 then
+		return AssetId
 	end
+	if type(AssetId) == "string" then
+		local Number: number? = tonumber(AssetId)
+		
+		if Number and Number > 0 then
+			return Number
+		end
+	end
+	return nil
 end
 
-local function findInnerImageId(p1)
-	if type(p1) == "table" then
-		local imageId = p1.ImageId
+local function findInnerImageId(Object): number? --[[ Line: 37 ]]
+	if type(Object) == "table" then
+		local ImageId = Object.ImageId
 		
-		if type(imageId) == "table" then
-			local value = imageId.Value
+		if type(ImageId) == "table" then
+			local Value: number = ImageId.Value
 			
-			return if type(value) == "number" and value > 0 then value else nil
-		elseif typeof(p1) ~= "Instance" then
+			if type(Value) == "number" and Value > 0 then
+				return Value
+			end
+		end
+		return nil
+	else
+		if typeof(Object) ~= "Instance" then
 			return nil
 		end
-		for i, v in ipairs(p1:GetDescendants()) do
-			local imageId = v:FindFirstChild("ImageId")
+		local Value = nil
+		for _, descendant in ipairs(Object:GetDescendants()) do
+			local ImageId = descendant:FindFirstChild("ImageId")
 			
-			if imageId ~= nil and (imageId:IsA("IntValue") or imageId:IsA("NumberValue")) then
-				local value = imageId.Value
+			if ImageId ~= nil and (ImageId:IsA("IntValue") or ImageId:IsA("NumberValue")) then
+				Value = ImageId.Value
 				
-				if type(value) == "number" and value > 0 then
-					return value
+				if type(Value) == "number" and Value > 0 then
+					return Value
 				end
 			end
 		end
@@ -45,56 +55,66 @@ local function findInnerImageId(p1)
 	end
 end
 
-return function()
-	-- upvalues: useProfileJsonComponentModule (ref), enumsModule (ref), reactModule (ref), insertServiceLoadAssetModule (ref), findInnerImageId (ref)
-	local var1, assetId, var2
-	local var3 = useProfileJsonComponentModule(enumsModule.Components.ProfileBackground)
-	
-	if var3 == nil then
-		var1 = nil
-	else
-		assetId = var3.assetId
-		
-		if type(assetId) == "number" and assetId > 0 then
-			var1 = assetId
-		elseif type(assetId) == "string" then
-			var2 = tonumber(assetId)
-			var1 = if var2 and var2 > 0 then var2 else nil
+return function() --[[ Line: 73 | Named "useAvatarBackgroundFromWrapper" ]]
+	-- upvalues: UseProfileJsonComponentModule (copy), EnumsModule (copy), ReactModule (copy), InsertServiceLoadAssetModule (copy), findInnerImageId (copy)
+	local UseProfileJsonComponentModuleResult = UseProfileJsonComponentModule(EnumsModule.Components.ProfileBackground)
+	local v1 = nil
+	repeat
+		if UseProfileJsonComponentModuleResult == nil then
+			v1 = nil
+			break
 		end
-	end
-	assetId, var10 = reactModule.useState(nil)
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), var2 (ref), insertServiceLoadAssetModule (copy), findInnerImageId (copy)
-		if var1 == nil then
-			var2(nil)
+		local AssetId: number = UseProfileJsonComponentModuleResult.assetId
+		
+		if type(AssetId) == "number" and AssetId > 0 then
+			v1 = AssetId
+			break
+		end
+		if type(AssetId) == "string" then
+			local Number: number? = tonumber(AssetId)
+			
+			if Number and Number > 0 then
+				v1 = Number
+				break
+			end
+		end
+		v1 = nil
+	until true
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	ReactModule.useEffect(function() --[[ Line: 81 ]]
+		-- upvalues: v1 (copy), UseStateResult2 (copy), InsertServiceLoadAssetModule (upval), findInnerImageId (upval)
+		if v1 == nil then
+			UseStateResult2(nil)
 			
 			return nil
-		end
-		local var4 = false
-		task.spawn(function()
-			-- upvalues: insertServiceLoadAssetModule (copy), var1 (copy), var4 (write), findInnerImageId (copy), var2 (copy)
-			local ok, status = pcall(function()
-				-- upvalues: insertServiceLoadAssetModule (copy), var1 (copy)
-				return insertServiceLoadAssetModule(var1)
+		else
+			local Flag = false
+			task.spawn(function() --[[ Line: 88 ]]
+				-- upvalues: InsertServiceLoadAssetModule (upval), v1 (upval), Flag (ref), findInnerImageId (upval), UseStateResult2 (upval)
+				local Success, Result = pcall(function() --[[ Line: 89 ]]
+					-- upvalues: InsertServiceLoadAssetModule (upval), v1 (upval)
+					return InsertServiceLoadAssetModule(v1)
+				end)
+				
+				if not Success or Flag or Result == nil then return end
+				local InnerImageId = findInnerImageId(Result)
+				
+				if Flag then return end
+				if InnerImageId == nil then
+					UseStateResult2(nil)
+					
+					return
+				else
+					UseStateResult2("rbxassetid://" .. tostring(InnerImageId))
+				end
 			end)
 			
-			if not ok or var4 or status == nil then return end
-			local var5 = findInnerImageId(status)
-			
-			if var4 then return end
-			if var5 == nil then
-				var2(nil)
-				
-				return
+			return function() --[[ Line: 109 ]]
+				-- upvalues: Flag (ref)
+				Flag = true
 			end
-			var2("rbxassetid://" .. tostring(var5))
-		end)
-		
-		return function()
-			-- upvalues: var4 (write)
-			var4 = true
 		end
-	end, { var1, var2 })
+	end, { v1, UseStateResult2 })
 	
-	return assetId
+	return UseStateResult
 end

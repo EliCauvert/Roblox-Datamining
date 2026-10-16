@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent._Workspace.VerifiedBadges.VerifiedBadges.Components.VerifiedBadge)
+﻿return (require(script.Parent.Parent._Workspace.VerifiedBadges.VerifiedBadges.Components.VerifiedBadge))

@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.AuthAnalytics.AuthAnalytics)
+﻿return (require(script.Parent._Workspace.AuthAnalytics.AuthAnalytics))

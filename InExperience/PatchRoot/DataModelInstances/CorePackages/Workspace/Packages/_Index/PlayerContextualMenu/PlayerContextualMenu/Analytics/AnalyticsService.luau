@@ -1,17 +1,17 @@
-﻿local eventIngestService = game:GetService("EventIngestService")
-local analyticsModule = require(script.Parent.Parent.Parent.Analytics)
-local getPlatformTarget = analyticsModule.getPlatformTarget
+﻿local EventIngestService = game:GetService("EventIngestService")
+local AnalyticsModule = require(script.Parent.Parent.Parent.Analytics)
+local GetPlatformTargetFunction = AnalyticsModule.getPlatformTarget
 
 return {
-	Diag = analyticsModule.Analytics.new(game:GetService("RbxAnalyticsService")).Diag,
+	Diag = AnalyticsModule.Analytics.new((game:GetService("RbxAnalyticsService"))).Diag,
 	EventStream = {
-		setRBXEventStream = function(_, p1, p2, p3)
-			-- upvalues: eventIngestService (ref), getPlatformTarget (ref)
-			eventIngestService:SetRBXEventStream(getPlatformTarget(), p1, p2, p3 or {})
+		setRBXEventStream = function(_, EventContext, EventName, p1) --[[ Line: 14 ]]
+			-- upvalues: EventIngestService (copy), GetPlatformTargetFunction (copy)
+			EventIngestService:SetRBXEventStream(GetPlatformTargetFunction(), EventContext, EventName, p1 or {})
 		end,
-		sendEventDeferred = function(_, p1, p2, p3)
-			-- upvalues: eventIngestService (ref), getPlatformTarget (ref)
-			eventIngestService:SendEventDeferred(getPlatformTarget(), p1, p2, p3 or {})
+		sendEventDeferred = function(_, EventContext, EventName, p1) --[[ Line: 19 ]]
+			-- upvalues: EventIngestService (copy), GetPlatformTargetFunction (copy)
+			EventIngestService:SendEventDeferred(GetPlatformTargetFunction(), EventContext, EventName, p1 or {})
 		end
 	}
 }

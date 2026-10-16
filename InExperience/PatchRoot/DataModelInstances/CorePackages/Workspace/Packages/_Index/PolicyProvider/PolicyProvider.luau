@@ -1,1 +1,1 @@
-﻿return require(game:GetService("CorePackages").Packages.PolicyProvider)
+﻿return (require(game:GetService("CorePackages").Packages.PolicyProvider))

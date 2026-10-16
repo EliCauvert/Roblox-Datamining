@@ -1,19 +1,20 @@
-﻿local focusNavigationModule = require(script.Parent.FocusNavigation)
-local focusBehaviorHooksModule = require(script.FocusBehaviorHooks)
+﻿local FocusNavigationModule = require(script.Parent.FocusNavigation)
+local FocusBehaviorHooksModule = require(script.FocusBehaviorHooks)
 
 return {
-	FocusNavigationService = focusNavigationModule.FocusNavigationService,
-	EngineInterface = focusNavigationModule.EngineInterface,
+	FocusNavigationService = FocusNavigationModule.FocusNavigationService,
+	EngineInterface = FocusNavigationModule.EngineInterface,
 	FocusNavigationContext = require(script.FocusNavigationContext),
 	useActiveEventMap = require(script.useActiveEventMap),
 	useFocusedGuiObject = require(script.useFocusedGuiObject),
+	useEventDispatched = require(script.useEventDispatched),
 	useFocusGuiObject = require(script.useFocusGuiObject),
 	useEventMap = require(script.useEventMap),
 	useEventHandler = require(script.useEventHandler),
 	useEventHandlerMap = require(script.useEventHandlerMap),
 	useContainerFocusBehavior = require(script.useContainerFocusBehavior),
-	useDefaultFocusBehavior = focusBehaviorHooksModule.useDefaultFocusBehavior,
-	useMostRecentFocusBehavior = focusBehaviorHooksModule.useMostRecentFocusBehavior,
-	useMostRecentOrDefaultFocusBehavior = focusBehaviorHooksModule.useMostRecentOrDefaultFocusBehavior,
+	useDefaultFocusBehavior = FocusBehaviorHooksModule.useDefaultFocusBehavior,
+	useMostRecentFocusBehavior = FocusBehaviorHooksModule.useMostRecentFocusBehavior,
+	useMostRecentOrDefaultFocusBehavior = FocusBehaviorHooksModule.useMostRecentOrDefaultFocusBehavior,
 	useDispatchSyntheticEvent = require(script.useDispatchSyntheticEvent)
 }

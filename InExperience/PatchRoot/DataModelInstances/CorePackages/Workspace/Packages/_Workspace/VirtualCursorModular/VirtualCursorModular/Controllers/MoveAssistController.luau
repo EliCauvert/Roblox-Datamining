@@ -1,110 +1,111 @@
-﻿local parent = script.Parent.Parent
-local sharedFlagsModule = require(script:FindFirstAncestor("VirtualCursorModular").Parent.SharedFlags)
-local fFlagEnableVirtualCursorDebugging = sharedFlagsModule.FFlagEnableVirtualCursorDebugging
-local fFlagVirtualCursorMoveAssistIntentRamp = sharedFlagsModule.FFlagVirtualCursorMoveAssistIntentRamp
-local propertiesModule = require(parent.Properties)
-local moveAssistMinInputMagnitude = propertiesModule.MoveAssistMinInputMagnitude
-local var1 = propertiesModule.CursorRadius * 0.5
+﻿local SharedFlagsModule = require(script:FindFirstAncestor("VirtualCursorModular").Parent.SharedFlags)
+local FFlagEnableVirtualCursorDebugging = SharedFlagsModule.FFlagEnableVirtualCursorDebugging
+local FFlagVirtualCursorMoveAssistIntentRamp = SharedFlagsModule.FFlagVirtualCursorMoveAssistIntentRamp
+local PropertiesModule = require(script.Parent.Parent.Properties)
+local MoveAssistMinInputMagnitude = PropertiesModule.MoveAssistMinInputMagnitude
+local ScaledCursorRadius = PropertiesModule.CursorRadius * 0.5
 
-local function _(p1)
-	local magnitude = p1.Magnitude
+local function _(Offset) --[[ Line: 50 | Named "normalizeSafe" ]]
+	local Magnitude: number = Offset.Magnitude
 	
-	return if magnitude > 0.00001 then p1 / magnitude else Vector2.zero
+	return if Magnitude > 0.00001 then Offset / Magnitude else Vector2.zero
 end
 
-local _ = function(p1, p2, p3)
-	return Vector2.new(math.clamp(p1.X, p2.X, p2.X + p3.X), math.clamp(p1.Y, p2.Y, p2.Y + p3.Y))
+local _ = function(Vector, Vector1, Vector3): Vector2 --[[ Line: 58 | Named "closestPointOnRect" ]]
+	return Vector2.new(math.clamp(Vector.X, Vector1.X, Vector1.X + Vector3.X), (math.clamp(Vector.Y, Vector1.Y, Vector1.Y + Vector3.Y)))
 end
 
-local _ = function(p1)
+local _ = function(p1: number): number --[[ Line: 67 | Named "smoothStep" ]]
 	return p1 * p1 * (3 - p1 * 2)
 end
 
-local function computeAimPoint(p1, p2, p3, p4)
-	local absoluteSize = p1.AbsoluteSize
-	local absolutePosition = p1.AbsolutePosition
-	local var2 = absolutePosition - Vector2.new(p3, p3)
-	local var3 = absoluteSize + Vector2.new(p4, p4)
-	local vector2 = Vector2.new(math.clamp(p2.X, var2.X, var2.X + var3.X), math.clamp(p2.Y, var2.Y, var2.Y + var3.Y))
-	local var4 = absolutePosition + absoluteSize / 2
-	local clampedValue = math.clamp(1 - math.max(absoluteSize.X, absoluteSize.Y) / p4 / 0.5, 0, 1)
+local function computeAimPoint(Frame: Frame, Vector, X, X1) --[[ Line: 75 ]]
+	local AbsoluteSize: number = Frame.AbsoluteSize
+	local AbsolutePosition = Frame.AbsolutePosition
+	local AbsolutePositionDelta = AbsolutePosition - Vector2.new(X, X)
+	local NewAbsoluteSize = AbsoluteSize + Vector2.new(X1, X1)
+	local NewAbsolutePosition = AbsolutePosition + AbsoluteSize / 2
+	local ClampedValue = math.clamp(1 - math.max(AbsoluteSize.X, AbsoluteSize.Y) / X1 / 0.5, 0, 1)
 	
-	return vector2:Lerp(var4, clampedValue), Vector2.new(math.clamp(p2.X, absolutePosition.X, absolutePosition.X + absoluteSize.X), math.clamp(p2.Y, absolutePosition.Y, absolutePosition.Y + absoluteSize.Y)):Lerp(var4, clampedValue)
+	return Vector2.new(math.clamp(Vector.X, AbsolutePositionDelta.X, AbsolutePositionDelta.X + NewAbsoluteSize.X), (math.clamp(Vector.Y, AbsolutePositionDelta.Y, AbsolutePositionDelta.Y + NewAbsoluteSize.Y))):Lerp(NewAbsolutePosition, ClampedValue), (Vector2.new(math.clamp(Vector.X, AbsolutePosition.X, AbsolutePosition.X + AbsoluteSize.X), (math.clamp(Vector.Y, AbsolutePosition.Y, AbsolutePosition.Y + AbsoluteSize.Y))):Lerp(NewAbsolutePosition, ClampedValue))
 end
 
-local function scoreCandidate(p1, p2, p3, p4, p5)
-	-- upvalues: computeAimPoint (ref), propertiesModule (ref)
-	local absoluteSize = p1.AbsoluteSize
-	local var2 = (absoluteSize.X * math.abs(p3.Y) + absoluteSize.Y * math.abs(p3.X)) / p5
+local function scoreCandidate(Frame: Frame, CursorPosition, Vector, CursorRadius, p1) --[[ Line: 111 ]]
+	-- upvalues: computeAimPoint (copy), PropertiesModule (copy)
+	local AbsoluteSize = Frame.AbsoluteSize
+	local XRatio = (AbsoluteSize.X * math.abs(Vector.Y) + AbsoluteSize.Y * math.abs(Vector.X)) / p1
 	
-	if var2 >= 1 then
+	if XRatio >= 1 then
 		return nil
 	end
-	local clampedValue = math.clamp(1 - var2 ^ 2, 0, 1)
-	local var3, var4 = computeAimPoint(p1, p2, p4, p5)
-	local var5 = var3 - p2
-	local magnitude = var5.Magnitude
-	local magnitude_1 = var5.Magnitude
-	local var6 = if magnitude_1 > 0.00001 then var5 / magnitude_1 else Vector2.zero
-	local var7 = p3:Dot(var6)
-	local var8 = magnitude < propertiesModule.MoveAssistRadius and var7 > 0.25
-	local var9 = 0
+	local ClampedValue = math.clamp(1 - XRatio ^ 2, 0, 1)
+	local AimPoint, AimPoint2 = computeAimPoint(Frame, CursorPosition, CursorRadius, p1)
+	local AimPointDelta = AimPoint - CursorPosition
+	local Magnitude = AimPointDelta.Magnitude
+	local Magnitude1: number = AimPointDelta.Magnitude
+	local AimPointDeltaRatio = if Magnitude1 > 0.00001 then AimPointDelta / Magnitude1 else Vector2.zero
+	local DotProduct: number = Vector:Dot(AimPointDeltaRatio)
+	local IsDotProductAbove: boolean = Magnitude < PropertiesModule.MoveAssistRadius and DotProduct > 0.25
+	local Influence = 0
 	
-	if var8 then
-		local clampedValue_1 = math.clamp(1 - magnitude / propertiesModule.MoveAssistRadius, 0, 1)
-		var9 = clampedValue_1 * clampedValue_1 * (3 - clampedValue_1 * 2) * var7 * clampedValue
+	if IsDotProductAbove then
+		local ClampedValue1 = math.clamp(1 - Magnitude / PropertiesModule.MoveAssistRadius, 0, 1)
+		Influence = ClampedValue1 * ClampedValue1 * (3 - ClampedValue1 * 2) * DotProduct * ClampedValue
 	end
 	return {
-		scored = var8,
-		influence = var9,
-		dirToButton = var6,
-		distance = magnitude,
-		dot = var7,
-		aimPoint = var4
+		scored = IsDotProductAbove,
+		influence = Influence,
+		dirToButton = AimPointDeltaRatio,
+		distance = Magnitude,
+		dot = DotProduct,
+		aimPoint = AimPoint2
 	}
 end
 
-local function computeAssistStrength(p1, p2, p3, p4, p5, p6, p7)
-	-- upvalues: var1 (ref)
-	local var2 = if p1 > 0 then (p1 - p2) / p1 else 0
-	local var3 = if p5 then 0.08 else 0.15
-	local clampedValue = math.clamp((var2 - var3) / (0.4 - var3), 0, 1)
-	local clampedValue_1 = math.clamp((p3 - 0.25) / 0.75, 0, 1)
-	local clampedValue_2 = math.clamp(p4 / var1, 0, 1)
+local function computeAssistStrength(BestInfluence: number, p1: number, Dot: number, Distance, IsAssistTargetMatch, ClampedValue, ClampedValue1) --[[ Line: 164 ]]
+	-- upvalues: ScaledCursorRadius (copy)
+	local BestInfluenceRatio = if BestInfluence > 0 then (BestInfluence - p1) / BestInfluence else 0
+	local v1: number = if IsAssistTargetMatch then 0.08 else 0.15
+	local ClampedValue2 = math.clamp((BestInfluenceRatio - v1) / (0.4 - v1), 0, 1)
+	local ClampedValue3 = math.clamp((Dot - 0.25) / 0.75, 0, 1)
+	local ClampedValue4 = math.clamp(Distance / ScaledCursorRadius, 0, 1)
 	
 	return {
-		assistStrength = math.clamp(p6 * p7 * clampedValue * clampedValue_1 * clampedValue_2, 0, 1),
-		confidence = var2,
-		confidenceStrength = clampedValue,
-		inputFollowStrength = clampedValue_1,
-		arrivalFactor = clampedValue_2
+		assistStrength = math.clamp(ClampedValue * ClampedValue1 * ClampedValue2 * ClampedValue3 * ClampedValue4, 0, 1),
+		confidence = BestInfluenceRatio,
+		confidenceStrength = ClampedValue2,
+		inputFollowStrength = ClampedValue3,
+		arrivalFactor = ClampedValue4
 	}
 end
 
-local t = {}
-t.__index = t
+local MoveAssistController = {}
+MoveAssistController.__index = MoveAssistController
 
-function t.new()
-	-- upvalues: t (ref), fFlagEnableVirtualCursorDebugging (ref)
-	local tbl = setmetatable({ _assistTarget = nil, _debugSnapshot = nil }, t)
+function MoveAssistController.new() --[[ Line: 232 ]]
+	-- upvalues: MoveAssistController (copy), FFlagEnableVirtualCursorDebugging (copy)
+	local self = setmetatable({ _assistTarget = nil, _debugSnapshot = nil }, MoveAssistController)
 	
-	if fFlagEnableVirtualCursorDebugging then
+	if FFlagEnableVirtualCursorDebugging then
 		print("[VirtualCursor] MoveAssistController created")
 	end
-	return tbl
+	return self
 end
 
-function t:applyMoveAssist(p1, p2)
-	-- upvalues: fFlagEnableVirtualCursorDebugging (ref), propertiesModule (ref), fFlagVirtualCursorMoveAssistIntentRamp (ref), moveAssistMinInputMagnitude (ref), scoreCandidate (ref), computeAssistStrength (ref)
-	local cursorPosition = p2.cursorPosition
-	local candidates = p2.candidates
-	local clampedValue = math.clamp(p2.strengthMultiplier, 0, 1)
-	local var2 = nil
+function MoveAssistController:applyMoveAssist(Offset, _debugSnapshot) --[[ Line: 248 ]]
+	-- upvalues: FFlagEnableVirtualCursorDebugging (copy), PropertiesModule (copy), FFlagVirtualCursorMoveAssistIntentRamp (copy), MoveAssistMinInputMagnitude (copy), scoreCandidate (copy), computeAssistStrength (copy)
+	local CursorPosition = _debugSnapshot.cursorPosition
+	local Candidates = _debugSnapshot.candidates
+	local ClampedValue = math.clamp(_debugSnapshot.strengthMultiplier, 0, 1)
+	local List = nil
 	
-	if fFlagEnableVirtualCursorDebugging then
-		local t = {}
-		var2 = t
-		local t_1 = {
+	if FFlagEnableVirtualCursorDebugging then
+		local Candidates1 = {}
+		List = Candidates1
+		local Magnitude: number = Offset.Magnitude
+		local OffsetRatio = if Magnitude > 0.00001 then Offset / Magnitude else Vector2.zero
+		local Magnitude1: number = Offset.Magnitude
+		self._debugSnapshot = {
 			active = false,
 			committed = nil,
 			intentFactor = 0,
@@ -114,159 +115,156 @@ function t:applyMoveAssist(p1, p2)
 			arrivalFactor = 0,
 			assistStrength = 0,
 			bestInfluence = 0,
-			cursorPosition = cursorPosition,
-			radius = propertiesModule.MoveAssistRadius
+			cursorPosition = CursorPosition,
+			radius = PropertiesModule.MoveAssistRadius,
+			inputDir = OffsetRatio,
+			finalDir = if Magnitude1 > 0.00001 then Offset / Magnitude1 else Vector2.zero,
+			inputMagnitude = Offset.Magnitude,
+			candidates = Candidates1,
+			masterGain = ClampedValue
 		}
-		local magnitude = p1.Magnitude
-		t_1.inputDir = if magnitude > 0.00001 then p1 / magnitude else Vector2.zero
-		local magnitude_1 = p1.Magnitude
-		t_1.finalDir = if magnitude_1 > 0.00001 then p1 / magnitude_1 else Vector2.zero
-		t_1.inputMagnitude = p1.Magnitude
-		t_1.candidates = t
-		t_1.masterGain = clampedValue
-		self._debugSnapshot = t_1
 	end
-	if clampedValue <= 0 or not candidates or #candidates == 0 then
+	if ClampedValue <= 0 or not Candidates or #Candidates == 0 then
 		self._assistTarget = nil
 		
-		return p1
+		return Offset
 	end
-	local magnitude = p1.Magnitude
+	local Magnitude: number = Offset.Magnitude
 	
-	if magnitude < 0.00001 then
+	if Magnitude < 0.00001 then
 		self._assistTarget = nil
 		
 		return Vector2.zero
 	end
-	local clampedValue_1
-	local _ = nil
-	
-	if fFlagVirtualCursorMoveAssistIntentRamp then
-		clampedValue_1 = math.clamp((magnitude - moveAssistMinInputMagnitude) / (0.7 - moveAssistMinInputMagnitude), 0, 1)
+	local ClampedValue1 = nil
+	if FFlagVirtualCursorMoveAssistIntentRamp then
+		ClampedValue1 = math.clamp((Magnitude - MoveAssistMinInputMagnitude) / (0.7 - MoveAssistMinInputMagnitude), 0, 1)
 		
-		if clampedValue_1 <= 0 then
+		if ClampedValue1 <= 0 then
 			self._assistTarget = nil
 			
-			return p1
+			return Offset
 		end
-	elseif magnitude < moveAssistMinInputMagnitude then
-		self._assistTarget = nil
-		
-		return p1
+	else
+		if Magnitude < MoveAssistMinInputMagnitude then
+			self._assistTarget = nil
+			
+			return Offset
+		end
+		ClampedValue1 = 1
 	end
-	clampedValue_1 = 1
-	local cursorRadius = propertiesModule.CursorRadius
-	local var3 = cursorRadius * 2
-	local var4 = p1 / magnitude
-	local var5 = 0
-	local var6 = 0
-	local zero = Vector2.zero
-	local var7 = 0
-	local var8 = 0
-	local var9 = nil
-	local var10 = nil
+	local CursorRadius: number = PropertiesModule.CursorRadius
+	local ScaledCursorRadius = CursorRadius * 2
+	local OffsetRatio = Offset / Magnitude
+	local BestInfluence = 0
+	local v1 = 0
+	local ZeroVector = Vector2.zero
+	local Distance = 0
+	local Dot = 0
+	local Committed = nil
+	local v2 = nil
 	
-	for i, v in candidates do
-		local var11 = nil
+	for _, candidate in Candidates do
+		local v3 = nil
 		
-		if var2 then
-			local t = {
+		if List then
+			local config = {
 				influence = 0,
 				aimPoint = nil,
 				state = "skipped",
-				position = v.AbsolutePosition,
-				size = v.AbsoluteSize
+				position = candidate.AbsolutePosition,
+				size = candidate.AbsoluteSize
 			}
-			var11 = t
-			table.insert(var2, t)
+			v3 = config
+			table.insert(List, config)
 		end
-		local var12 = scoreCandidate(v, cursorPosition, var4, cursorRadius, var3)
+		local ScoreCandidateResult = scoreCandidate(candidate, CursorPosition, OffsetRatio, CursorRadius, ScaledCursorRadius)
 		
-		if var12 then
-			if var11 then
-				var11.aimPoint = var12.aimPoint
+		if ScoreCandidateResult then
+			if v3 then
+				v3.aimPoint = ScoreCandidateResult.aimPoint
 				
-				if var12.scored then
-					var11.influence = var12.influence
-					var11.state = "scored"
+				if ScoreCandidateResult.scored then
+					v3.influence = ScoreCandidateResult.influence
+					v3.state = "scored"
 				end
 			end
-			if var12.scored then
-				local influence = var12.influence
+			if ScoreCandidateResult.scored then
+				local Influence = ScoreCandidateResult.influence
 				
-				if self._assistTarget ~= nil and v == self._assistTarget then
-					influence *= 1.25
+				if self._assistTarget ~= nil and candidate == self._assistTarget then
+					Influence *= 1.25
 				end
-				if var5 < influence then
-					var6 = var5
-					var5 = influence
-					zero = var12.dirToButton
-					var7 = var12.distance
-					var8 = var12.dot
-					var9 = v
-					var10 = var11
-				elseif var6 < influence then
-					var6 = influence
+				if BestInfluence < Influence then
+					v1 = BestInfluence
+					BestInfluence = Influence
+					ZeroVector = ScoreCandidateResult.dirToButton
+					Distance = ScoreCandidateResult.distance
+					Dot = ScoreCandidateResult.dot
+					Committed = candidate
+					v2 = v3
+				elseif v1 < Influence then
+					v1 = Influence
 				end
 			end
 		end
 	end
-	if not var9 or var5 < 0.05 then
+	if not Committed or BestInfluence < 0.05 then
 		self._assistTarget = nil
 		
-		return p1
+		return Offset
 	end
-	local var13 = if self._assistTarget then var9 == self._assistTarget else false
+	local IsCommittedMatch: boolean = if self._assistTarget then Committed == self._assistTarget else false
 	
-	if var8 < (if var13 then 0.25 else 0.5) then
+	if Dot < (if IsCommittedMatch then 0.25 else 0.5) then
 		self._assistTarget = nil
 		
-		return p1
+		return Offset
 	end
-	local var14 = computeAssistStrength(var5, var6, var8, var7, var13, clampedValue, clampedValue_1)
+	local AssistStrength = computeAssistStrength(BestInfluence, v1, Dot, Distance, IsCommittedMatch, ClampedValue, ClampedValue1)
 	
-	if var14.assistStrength <= 0 then
+	if AssistStrength.assistStrength <= 0 then
 		self._assistTarget = nil
 		
-		return p1
+		return Offset
 	end
-	self._assistTarget = var9
-	local var15 = var4:Lerp(zero, var14.assistStrength)
-	local magnitude_1 = var15.Magnitude
-	local var16 = if magnitude_1 > 0.00001 then var15 / magnitude_1 else Vector2.zero
+	self._assistTarget = Committed
+	local Interpolated = OffsetRatio:Lerp(ZeroVector, AssistStrength.assistStrength)
+	local Magnitude1: number = Interpolated.Magnitude
+	local InterpolatedRatio = if Magnitude1 > 0.00001 then Interpolated / Magnitude1 else Vector2.zero
 	
-	if var16 == Vector2.zero then
-		return p1
+	if InterpolatedRatio == Vector2.zero then
+		return Offset
 	end
-	local var17 = var16 * magnitude
+	local ScaledInterpolatedRatio = InterpolatedRatio * Magnitude
 	
-	if fFlagEnableVirtualCursorDebugging then
-		if (var17 - p1).Magnitude > 0 then
-			print("Move input adjusted from", p1, "to", var17)
+	if FFlagEnableVirtualCursorDebugging then
+		if (ScaledInterpolatedRatio - Offset).Magnitude > 0 then
+			print("Move input adjusted from", Offset, "to", ScaledInterpolatedRatio)
 		end
-		local debugSnapshot = self._debugSnapshot
+		local DebugSnapshot = self._debugSnapshot
 		
-		if debugSnapshot then
-			debugSnapshot.active = true
-			debugSnapshot.finalDir = var16
-			debugSnapshot.intentFactor = clampedValue_1
-			debugSnapshot.confidence = var14.confidence
-			debugSnapshot.confidenceStrength = var14.confidenceStrength
-			debugSnapshot.inputFollowStrength = var14.inputFollowStrength
-			debugSnapshot.arrivalFactor = var14.arrivalFactor
-			debugSnapshot.assistStrength = var14.assistStrength
-			debugSnapshot.bestInfluence = var5
-			debugSnapshot.committed = var9
+		if DebugSnapshot then
+			DebugSnapshot.active = true
+			DebugSnapshot.finalDir = InterpolatedRatio
+			DebugSnapshot.intentFactor = ClampedValue1
+			DebugSnapshot.confidence = AssistStrength.confidence
+			DebugSnapshot.confidenceStrength = AssistStrength.confidenceStrength
+			DebugSnapshot.inputFollowStrength = AssistStrength.inputFollowStrength
+			DebugSnapshot.arrivalFactor = AssistStrength.arrivalFactor
+			DebugSnapshot.assistStrength = AssistStrength.assistStrength
+			DebugSnapshot.bestInfluence = BestInfluence
+			DebugSnapshot.committed = Committed
 		end
-		if var10 then
-			var10.state = "committed"
+		if v2 then
+			v2.state = "committed"
 		end
 	end
-	return var17
+	return ScaledInterpolatedRatio
 end
 
-function t:clearDebugSnapshot()
+function MoveAssistController:clearDebugSnapshot() --[[ Line: 439 ]]
 	self._debugSnapshot = nil
 end
 
-return t
+return MoveAssistController

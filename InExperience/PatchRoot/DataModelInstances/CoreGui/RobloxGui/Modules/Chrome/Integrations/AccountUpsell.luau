@@ -1,55 +1,53 @@
-﻿local chrome = script:FindFirstAncestor("Chrome")
-local corePackagesService = game:GetService("CorePackages")
-local accountUpgradeModule = require(corePackagesService.Workspace.Packages.AccountUpgrade)
-local chromeModule = require(corePackagesService.Workspace.Packages.Chrome)
-local serviceModule = require(chrome.Service)
-local inExperienceSideSheetModule = require(corePackagesService.Workspace.Packages.InExperienceSideSheet)
-local isPioneerLaunch = require(corePackagesService.Workspace.Packages.PioneerUtils).isPioneerLaunch
-local reactModule = require(corePackagesService.Packages.React)
-local pioneer = accountUpgradeModule.AccountUpgradeFlow.Pioneer
-local var1 = nil
+﻿local CorePackages = game:GetService("CorePackages")
+local AccountUpgradeModule = require(CorePackages.Workspace.Packages.AccountUpgrade)
+local ChromeModule = require(CorePackages.Workspace.Packages.Chrome)
+local ServiceModule = require(script:FindFirstAncestor("Chrome").Service)
+local InExperienceSideSheetModule = require(CorePackages.Workspace.Packages.InExperienceSideSheet)
+local ReactModule = require(CorePackages.Packages.React)
+local Pioneer = AccountUpgradeModule.AccountUpgradeFlow.Pioneer
+local v1 = nil
 
-local function openAccountUpsell()
-	-- upvalues: accountUpgradeModule (ref), pioneer (ref), var1 (write)
-	if accountUpgradeModule.InExperienceController.mount({
-		flow = pioneer,
-		onComplete = function(p1)
-			-- upvalues: var1 (copy)
-			if p1.reason == "success" and var1 then
-				var1.availability:unavailable()
+local function openAccountUpsell() --[[ Line: 17 ]]
+	-- upvalues: AccountUpgradeModule (copy), Pioneer (copy), v1 (ref)
+	if AccountUpgradeModule.InExperienceController.mount({
+		flow = Pioneer,
+		onComplete = function(p1) --[[ Line: 20 ]]
+			-- upvalues: v1 (upval)
+			if p1.reason == "success" and v1 then
+				v1.availability:unavailable()
 			end
 		end
 	}) == "already_mounted" then
-		accountUpgradeModule.InExperienceController.unmount()
+		AccountUpgradeModule.InExperienceController.unmount()
 	end
 end
 
-local var2 = if isPioneerLaunch() then {
+local function AccountUpsellIntegration(p1) --[[ Line: 31 ]]
+	-- upvalues: ReactModule (copy), InExperienceSideSheetModule (copy), openAccountUpsell (copy)
+	return ReactModule.createElement(InExperienceSideSheetModule.AccountUpsell, {
+		layoutOrder = p1.layoutOrder,
+		placement = p1.placement,
+		onActivated = openAccountUpsell
+	})
+end
+
+local Config = if require(CorePackages.Workspace.Packages.PioneerUtils).isPioneerLaunch() then {
 	id = "AccountUpsell",
 	label = "CoreScripts.InGameMenu.UnlockMore.Title",
-	activated = function() end,
-	sideSheetPlacement = chromeModule.Enums.SideSheetPlacement.ScrollableContentBottom,
-	components = {
-		Widget = function(p1)
-			-- upvalues: reactModule (ref), inExperienceSideSheetModule (ref), openAccountUpsell (ref)
-			return reactModule.createElement(inExperienceSideSheetModule.AccountUpsell, {
-				layoutOrder = p1.layoutOrder,
-				placement = p1.placement,
-				onActivated = openAccountUpsell
-			})
-		end
-	}
+	activated = function() --[[ Line: 43 ]] end,
+	sideSheetPlacement = ChromeModule.Enums.SideSheetPlacement.ScrollableContentBottom,
+	components = { Widget = AccountUpsellIntegration }
 } else nil
 
-if var2 then
-	var2.initialAvailability = serviceModule.AvailabilitySignal.Unavailable
-	local var3 = serviceModule:register(var2)
-	var1 = var3
-	task.spawn(function()
-		-- upvalues: accountUpgradeModule (ref), pioneer (ref), var3 (ref)
-		if accountUpgradeModule.Eligibility.getAvailability(pioneer).granted then
-			var3.availability:available()
+if Config then
+	Config.initialAvailability = ServiceModule.AvailabilitySignal.Unavailable
+	local RegisterResult = ServiceModule:register(Config)
+	v1 = RegisterResult
+	task.spawn(function() --[[ Line: 56 ]]
+		-- upvalues: AccountUpgradeModule (copy), Pioneer (copy), RegisterResult (copy)
+		if AccountUpgradeModule.Eligibility.getAvailability(Pioneer).granted then
+			RegisterResult.availability:available()
 		end
 	end)
 end
-return var1 or {}
+return v1 or {}

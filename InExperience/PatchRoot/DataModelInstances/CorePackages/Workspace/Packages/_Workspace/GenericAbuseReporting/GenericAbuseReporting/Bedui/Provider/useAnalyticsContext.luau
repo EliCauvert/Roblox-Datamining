@@ -1,8 +1,8 @@
-﻿local genericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
-local reactModule = require(genericAbuseReporting.Parent.React)
-local abuseReportAnalyticsContextModule = require(genericAbuseReporting.Bedui.Provider.AbuseReportAnalyticsContext)
+﻿local GenericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
+local ReactModule = require(GenericAbuseReporting.Parent.React)
+local AbuseReportAnalyticsContextModule = require(GenericAbuseReporting.Bedui.Provider.AbuseReportAnalyticsContext)
 
-return function()
-	-- upvalues: reactModule (ref), abuseReportAnalyticsContextModule (ref)
-	return reactModule.useContext(abuseReportAnalyticsContextModule)
+return function() --[[ Line: 7 | Named "useAnalyticsContext" ]]
+	-- upvalues: ReactModule (copy), AbuseReportAnalyticsContextModule (copy)
+	return ReactModule.useContext(AbuseReportAnalyticsContextModule)
 end

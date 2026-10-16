@@ -1,98 +1,101 @@
-﻿local localizationService = game:GetService("LocalizationService")
-local guiService = game:GetService("GuiService")
-local parent = script.Parent
-local constantsModule = require(parent.Constants)
-local generatedTranslationsModule = require(parent.GeneratedTranslations)
+﻿local LocalizationService = game:GetService("LocalizationService")
+local GuiService = game:GetService("GuiService")
+local Parent = script.Parent
+local ConstantsModule = require(Parent.Constants)
+local GeneratedTranslationsModule = require(Parent.GeneratedTranslations)
 
-local function _(p1)
-	-- upvalues: guiService (ref), constantsModule (ref), generatedTranslationsModule (ref)
-	if guiService:FindFirstChild(constantsModule.LOCALIZATION_TABLE_NAME) then
+local function _(Parent) --[[ Line: 9 | Named "createUIBloxLocalizationTable" ]]
+	-- upvalues: GuiService (copy), ConstantsModule (copy), GeneratedTranslationsModule (copy)
+	if not GuiService:FindFirstChild(ConstantsModule.LOCALIZATION_TABLE_NAME) then
+		local LocalizationTable = Instance.new("LocalizationTable")
+		LocalizationTable.Name = ConstantsModule.LOCALIZATION_TABLE_NAME
+		LocalizationTable.Archivable = false
+		LocalizationTable.SourceLocaleId = "en-us"
+		LocalizationTable:SetEntries(GeneratedTranslationsModule)
+		LocalizationTable.Parent = Parent
+		
 		return
 	end
-	local localizationTable = Instance.new("LocalizationTable")
-	localizationTable.Name = constantsModule.LOCALIZATION_TABLE_NAME
-	localizationTable.Archivable = false
-	localizationTable.SourceLocaleId = "en-us"
-	localizationTable:SetEntries(generatedTranslationsModule)
-	localizationTable.Parent = p1
 end
 
-if not guiService:FindFirstChild(constantsModule.LOCALIZATION_TABLE_NAME) then
-	local localizationTable = Instance.new("LocalizationTable")
-	localizationTable.Name = constantsModule.LOCALIZATION_TABLE_NAME
-	localizationTable.Archivable = false
-	localizationTable.SourceLocaleId = "en-us"
-	localizationTable:SetEntries(generatedTranslationsModule)
-	localizationTable.Parent = guiService
+if not GuiService:FindFirstChild(ConstantsModule.LOCALIZATION_TABLE_NAME) then
+	local LocalizationTable = Instance.new("LocalizationTable")
+	LocalizationTable.Name = ConstantsModule.LOCALIZATION_TABLE_NAME
+	LocalizationTable.Archivable = false
+	LocalizationTable.SourceLocaleId = "en-us"
+	LocalizationTable:SetEntries(GeneratedTranslationsModule)
+	LocalizationTable.Parent = GuiService
 end
-local var1 = guiService.UIBloxLocalization:GetTranslator("en-us")
-local t = {}
+local EnUsTranslator = GuiService.UIBloxLocalization:GetTranslator("en-us")
+local Translators = {}
 
-local _ = function(p1)
-	-- upvalues: t (ref), guiService (ref)
-	local var2 = t[p1]
+local _ = function(Key) --[[ Line: 28 | Named "getTranslatorForLocale" ]]
+	-- upvalues: Translators (copy), GuiService (copy)
+	local Translator = Translators[Key]
 	
-	if var2 then
-		return var2
+	if Translator then
+		return Translator
+	else
+		local Translator1 = GuiService.UIBloxLocalization:GetTranslator(Key)
+		Translators[Key] = Translator1
+		
+		return Translator1
 	end
-	local var3 = guiService.UIBloxLocalization:GetTranslator(p1)
-	t[p1] = var3
-	
-	return var3
 end
 
-local _ = function()
-	-- upvalues: localizationService (ref), t (ref), guiService (ref)
-	local robloxLocaleId = localizationService.RobloxLocaleId
-	local var2 = t[robloxLocaleId]
+local _ = function() --[[ Line: 40 | Named "getTranslator" ]]
+	-- upvalues: LocalizationService (copy), Translators (copy), GuiService (copy)
+	local RobloxLocaleId = LocalizationService.RobloxLocaleId
+	local Translator = Translators[RobloxLocaleId]
 	
-	if var2 then
-		return var2
+	if Translator then
+		return Translator
+	else
+		local Translator1 = GuiService.UIBloxLocalization:GetTranslator(RobloxLocaleId)
+		Translators[RobloxLocaleId] = Translator1
+		
+		return Translator1
 	end
-	local var3 = guiService.UIBloxLocalization:GetTranslator(robloxLocaleId)
-	t[robloxLocaleId] = var3
-	
-	return var3
 end
 
-local function formatByKeyWithFallback(p1, p2, p3)
-	-- upvalues: var1 (ref)
-	local ok, status = pcall(function()
-		-- upvalues: p3 (ref), p1 (ref), p2 (ref)
-		return p3:FormatByKey(p1, p2)
+local function formatByKeyWithFallback(p1, p2, Translator) --[[ Line: 44 ]]
+	-- upvalues: EnUsTranslator (copy)
+	local Success, Result = pcall(function() --[[ Line: 45 ]]
+		-- upvalues: Translator (copy), p1 (copy), p2 (copy)
+		return Translator:FormatByKey(p1, p2)
 	end)
 	
-	return if ok then status elseif p3.LocaleId == "zh-cjv" then "" else var1:FormatByKey(p1, p2)
+	return if Success then Result elseif Translator.LocaleId == "zh-cjv" then "" else EnUsTranslator:FormatByKey(p1, p2)
 end
 
 return {
-	FormatByKey = function(_, p1, p2)
-		-- upvalues: formatByKeyWithFallback (ref), localizationService (ref), t (ref), guiService (ref)
-		local var2
-		local robloxLocaleId = localizationService.RobloxLocaleId
-		local var3 = t[robloxLocaleId]
+	FormatByKey = function(_, p1, p2) --[[ Line: 60 ]]
+		-- upvalues: formatByKeyWithFallback (copy), LocalizationService (copy), Translators (copy), GuiService (copy)
+		local RobloxLocaleId = LocalizationService.RobloxLocaleId
+		local Translator = Translators[RobloxLocaleId]
+		local Translator1 = nil
 		
-		if var3 then
-			var2 = var3
+		if Translator then
+			Translator1 = Translator
 		else
-			var3 = guiService.UIBloxLocalization:GetTranslator(robloxLocaleId)
-			t[robloxLocaleId] = var3
-			var2 = var3
+			local Translator2 = GuiService.UIBloxLocalization:GetTranslator(RobloxLocaleId)
+			Translators[RobloxLocaleId] = Translator2
+			Translator1 = Translator2
 		end
-		return formatByKeyWithFallback(p1, p2, var2)
+		return formatByKeyWithFallback(p1, p2, Translator1)
 	end,
-	FormatByKeyForLocale = function(_, p1, p2, p3)
-		-- upvalues: formatByKeyWithFallback (ref), t (ref), guiService (ref)
-		local var2
-		local var3 = t[p2]
+	FormatByKeyForLocale = function(_, p1, Key, p2) --[[ Line: 64 ]]
+		-- upvalues: formatByKeyWithFallback (copy), Translators (copy), GuiService (copy)
+		local Translator = Translators[Key]
+		local Translator1 = nil
 		
-		if var3 then
-			var2 = var3
+		if Translator then
+			Translator1 = Translator
 		else
-			var3 = guiService.UIBloxLocalization:GetTranslator(p2)
-			t[p2] = var3
-			var2 = var3
+			local Translator2 = GuiService.UIBloxLocalization:GetTranslator(Key)
+			Translators[Key] = Translator2
+			Translator1 = Translator2
 		end
-		return formatByKeyWithFallback(p1, p3, var2)
+		return formatByKeyWithFallback(p1, p2, Translator1)
 	end
 }

@@ -1,118 +1,114 @@
-﻿local parent = script:FindFirstAncestor("UserProfiles").Parent
-local createSignal = require(parent.Signals).createSignal
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagEnableVerifiedBadgeStore = sharedFlagsModule.FFlagEnableVerifiedBadgeStore
-local fFlagEnableBlackbirdCheck = sharedFlagsModule.FFlagEnableBlackbirdCheck
+﻿local Parent = script:FindFirstAncestor("UserProfiles").Parent
+local CreateSignalFunction = require(Parent.Signals).createSignal
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagEnableVerifiedBadgeStore = SharedFlagsModule.FFlagEnableVerifiedBadgeStore
+local FFlagEnableBlackbirdCheck = SharedFlagsModule.FFlagEnableBlackbirdCheck
 
 return {
-	update = function(p1, p2)
-		-- upvalues: fFlagEnableVerifiedBadgeStore (ref), fFlagEnableBlackbirdCheck (ref)
+	update = function(p1, p2) --[[ Line: 60 ]]
+		-- upvalues: FFlagEnableVerifiedBadgeStore (copy), FFlagEnableBlackbirdCheck (copy)
 		if not p2 or type(p2) ~= "table" then return end
-		local names = p2.names
+		local Names = p2.names
 		
-		if names and type(names) == "table" then
-			local username = names.username
+		if Names and type(Names) == "table" then
+			local Username = Names.username
 			
-			if username and type(username) == "string" then
-				p1.names.setUsername(username)
+			if Username and type(Username) == "string" then
+				p1.names.setUsername(Username)
 			end
-			local displayName = names.displayName
+			local DisplayName = Names.displayName
 			
-			if displayName and type(displayName) == "string" then
-				p1.names.setDisplayName(displayName)
+			if DisplayName and type(DisplayName) == "string" then
+				p1.names.setDisplayName(DisplayName)
 			end
-			local combinedName = names.combinedName
+			local CombinedName = Names.combinedName
 			
-			if combinedName and type(combinedName) == "string" then
-				p1.names.setCombinedName(combinedName)
+			if CombinedName and type(CombinedName) == "string" then
+				p1.names.setCombinedName(CombinedName)
 			end
-			local inExperienceCombinedName = names.inExperienceCombinedName
+			local InExperienceCombinedName = Names.inExperienceCombinedName
 			
-			if inExperienceCombinedName and type(inExperienceCombinedName) == "string" then
-				p1.names.setInExperienceCombinedName(inExperienceCombinedName)
+			if InExperienceCombinedName and type(InExperienceCombinedName) == "string" then
+				p1.names.setInExperienceCombinedName(InExperienceCombinedName)
 			end
-			local platformName = names.platformName
+			local PlatformName = Names.platformName
 			
-			if platformName and type(platformName) == "string" then
-				p1.names.setPlatformName(platformName)
+			if PlatformName and type(PlatformName) == "string" then
+				p1.names.setPlatformName(PlatformName)
 			end
-			local contactName = names.contactName
+			local ContactName = Names.contactName
 			
-			if contactName and type(contactName) == "string" then
-				p1.names.setContactName(contactName)
+			if ContactName and type(ContactName) == "string" then
+				p1.names.setContactName(ContactName)
 			end
-			local alias = names.alias
+			local Alias = Names.alias
 			
-			if alias and type(alias) == "string" then
-				p1.names.setAlias(alias)
+			if Alias and type(Alias) == "string" then
+				p1.names.setAlias(Alias)
 			end
 		end
-		local platformProfileId = p2.platformProfileId
+		local PlatformProfileId = p2.platformProfileId
 		
-		if platformProfileId and type(platformProfileId) == "string" then
-			p1.setPlatformProfileId(platformProfileId)
+		if PlatformProfileId and type(PlatformProfileId) == "string" then
+			p1.setPlatformProfileId(PlatformProfileId)
 		end
-		local var1 = if fFlagEnableVerifiedBadgeStore then p2.isVerified else nil
+		local IsVerified = if FFlagEnableVerifiedBadgeStore then p2.isVerified else nil
 		
-		if var1 ~= nil and type(var1) == "boolean" then
-			p1.setIsVerified(var1)
+		if IsVerified ~= nil and type(IsVerified) == "boolean" then
+			p1.setIsVerified(IsVerified)
 		end
-		local var2 = if fFlagEnableBlackbirdCheck then p2.hasRobloxSubscription else nil
+		local HasRobloxSubscription = if FFlagEnableBlackbirdCheck then p2.hasRobloxSubscription else nil
 		
-		if var2 ~= nil and type(var2) == "boolean" then
-			p1.setHasRobloxSubscription(var2)
+		if HasRobloxSubscription ~= nil and type(HasRobloxSubscription) == "boolean" then
+			p1.setHasRobloxSubscription(HasRobloxSubscription)
 		end
 	end,
-	create = function(p1)
-		-- upvalues: createSignal (ref), fFlagEnableVerifiedBadgeStore (ref), fFlagEnableBlackbirdCheck (ref)
-		local var1, var2 = createSignal("")
-		local var3, var4 = createSignal("")
-		local var5, var6 = createSignal("")
-		local var7, var8 = createSignal("")
-		local var9, var10 = createSignal("")
-		local var11, var12 = createSignal("")
-		local var13, var14 = createSignal("")
-		local var15, var16 = createSignal("")
-		local var17 = nil
-		local var18 = nil
+	create = function(UserId) --[[ Line: 113 ]]
+		-- upvalues: CreateSignalFunction (copy), FFlagEnableVerifiedBadgeStore (copy), FFlagEnableBlackbirdCheck (copy)
+		local Signal, Signal2 = CreateSignalFunction("")
+		local Signal1, Signal2_1 = CreateSignalFunction("")
+		local Signal3, Signal2_2 = CreateSignalFunction("")
+		local Signal4, Signal2_3 = CreateSignalFunction("")
+		local Signal5, Signal2_4 = CreateSignalFunction("")
+		local Signal6, Signal2_5 = CreateSignalFunction("")
+		local Signal7, Signal2_6 = CreateSignalFunction("")
+		local Signal8, Signal2_7 = CreateSignalFunction("")
+		local v1 = nil
+		local v2 = nil
 		
-		if fFlagEnableVerifiedBadgeStore then
-			local var19, var20 = createSignal(false)
-			var17 = var19
-			var18 = var20
+		if FFlagEnableVerifiedBadgeStore then
+			v1, v32 = CreateSignalFunction(false)
 		end
-		local var21 = nil
-		local var22 = nil
+		local v3 = nil
+		local v4 = nil
 		
-		if fFlagEnableBlackbirdCheck then
-			local var23, var24 = createSignal(false)
-			var21 = var23
-			var22 = var24
+		if FFlagEnableBlackbirdCheck then
+			v3, v34 = CreateSignalFunction(false)
 		end
 		return {
-			userId = p1,
+			userId = UserId,
 			names = {
-				getUsername = var1,
-				setUsername = var2,
-				getDisplayName = var3,
-				setDisplayName = var4,
-				getCombinedName = var5,
-				setCombinedName = var6,
-				getInExperienceCombinedName = var7,
-				setInExperienceCombinedName = var8,
-				getPlatformName = var9,
-				setPlatformName = var10,
-				getContactName = var11,
-				setContactName = var12,
-				getAlias = var13,
-				setAlias = var14
+				getUsername = Signal,
+				setUsername = Signal2,
+				getDisplayName = Signal1,
+				setDisplayName = Signal2_1,
+				getCombinedName = Signal3,
+				setCombinedName = Signal2_2,
+				getInExperienceCombinedName = Signal4,
+				setInExperienceCombinedName = Signal2_3,
+				getPlatformName = Signal5,
+				setPlatformName = Signal2_4,
+				getContactName = Signal6,
+				setContactName = Signal2_5,
+				getAlias = Signal7,
+				setAlias = Signal2_6
 			},
-			getPlatformProfileId = var15,
-			setPlatformProfileId = var16,
-			getIsVerified = if fFlagEnableVerifiedBadgeStore then var17 else nil,
-			setIsVerified = if fFlagEnableVerifiedBadgeStore then var18 else nil,
-			getHasRobloxSubscription = if fFlagEnableBlackbirdCheck then var21 else nil,
-			setHasRobloxSubscription = if fFlagEnableBlackbirdCheck then var22 else nil
+			getPlatformProfileId = Signal8,
+			setPlatformProfileId = Signal2_7,
+			getIsVerified = if FFlagEnableVerifiedBadgeStore then v1 else nil,
+			setIsVerified = if FFlagEnableVerifiedBadgeStore then v2 else nil,
+			getHasRobloxSubscription = if FFlagEnableBlackbirdCheck then v3 else nil,
+			setHasRobloxSubscription = if FFlagEnableBlackbirdCheck then v4 else nil
 		}
 	end
 }

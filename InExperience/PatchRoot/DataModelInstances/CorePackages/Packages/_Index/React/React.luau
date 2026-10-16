@@ -1,7 +1,6 @@
-﻿local parent = script.Parent
-local _ = require(parent.LuauPolyfill)
-local reactModule = require(script.React)
+﻿local Parent = script.Parent
+local _ = require(Parent.LuauPolyfill)
 local _ = require(script.ReactLazy)
-local _ = require(parent.Shared)
+local _ = require(Parent.Shared)
 
-return reactModule
+return (require(script.React))

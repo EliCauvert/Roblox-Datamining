@@ -1,75 +1,78 @@
-﻿local peopleReactView = script:FindFirstAncestor("PeopleReactView")
-local parent = peopleReactView.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local peopleServiceModule = require(parent.PeopleService)
-local signalsReactModule = require(parent.SignalsReact)
-local constantsModule = require(peopleReactView.Constants)
-local button = foundationModule.Button
-local buttonSize = foundationModule.Enums.ButtonSize
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local view = foundationModule.View
-local useTokens = foundationModule.Hooks.useTokens
-local useSignalState = signalsReactModule.useSignalState
+﻿local PeopleReactView = script:FindFirstAncestor("PeopleReactView")
+local Parent = PeopleReactView.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local PeopleServiceModule = require(Parent.PeopleService)
+local ConstantsModule = require(PeopleReactView.Constants)
+local Button = FoundationModule.Button
+local ButtonSize = FoundationModule.Enums.ButtonSize
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local View = FoundationModule.View
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 
-return function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), peopleServiceModule (ref), useSignalState (ref), view (ref), constantsModule (ref), button (ref), buttonVariant (ref), buttonSize (ref)
-	local var1 = useTokens()
-	local var2 = reactModule.useMemo(function()
-		-- upvalues: peopleServiceModule (copy)
-		return peopleServiceModule.getService("PeopleUtility")
+return function(Player: Player) --[[ Line: 28 | Named "PlatformNameSection" ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), PeopleServiceModule (copy), UseSignalStateFunction (copy), View (copy), ConstantsModule (copy), Button (copy), ButtonVariant (copy), ButtonSize (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 31 ]]
+		-- upvalues: PeopleServiceModule (upval)
+		return PeopleServiceModule.getService("PeopleUtility")
 	end, {})
-	local var3 = reactModule.useMemo(function()
-		-- upvalues: peopleServiceModule (copy)
-		return peopleServiceModule.getService("PeopleListStore")
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 35 ]]
+		-- upvalues: PeopleServiceModule (upval)
+		return PeopleServiceModule.getService("PeopleListStore")
 	end, {})
-	local var4 = useSignalState(reactModule.useMemo(function()
-		-- upvalues: var3 (ref), p1 (ref)
-		return var3.getPlatformName(p1.UserId)
-	end, { p1.UserId }))
-	local var5 = useSignalState(reactModule.useMemo(function()
-		-- upvalues: var3 (ref), p1 (ref)
-		return var3.getPlatformProfileId(p1.UserId)
-	end, { p1.UserId }))
-	local var6 = reactModule.useMemo(function()
-		-- upvalues: var2 (ref), var5 (ref)
-		return var2.canShowPlatformProfile(var5)
-	end, { var5 })
-	local var7 = reactModule.useRef(nil)
+	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 44 ]]
+		-- upvalues: UseMemoResult1 (copy), Player (copy)
+		return UseMemoResult1.getPlatformProfileId(Player.UserId)
+	end, { Player.UserId })
+	local UseSignalStateResult: string = UseSignalStateFunction((ReactModule.useMemo(function() --[[ Line: 40 ]]
+		-- upvalues: UseMemoResult1 (copy), Player (copy)
+		return UseMemoResult1.getPlatformName(Player.UserId)
+	end, { Player.UserId })))
+	local UseSignalStateResult1 = UseSignalStateFunction(UseMemoResult2)
+	local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 52 ]]
+		-- upvalues: UseMemoResult (copy), UseSignalStateResult1 (copy)
+		return UseMemoResult.canShowPlatformProfile(UseSignalStateResult1)
+	end, { UseSignalStateResult1 })
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 57 ]]
+		-- upvalues: UseMemoResult (copy), UseSignalStateResult1 (copy)
+		UseMemoResult.showPlatformProfile(UseSignalStateResult1)
+	end, { UseSignalStateResult1 })
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseResult1 = ReactModule.useCallback(function(Current) --[[ Line: 63 ]]
+		-- upvalues: UseRefResult (copy), UseMemoResult3 (copy)
+		UseRefResult.current = Current
+		
+		if Current and UseMemoResult3 then
+			Current.NextSelectionLeft = Current
+			Current.NextSelectionRight = nil
+		end
+	end, { UseMemoResult3 })
+	local IsLengthAbove: boolean = UseSignalStateResult and (type(UseSignalStateResult) == "string" and string.len(UseSignalStateResult) > 0)
 	
-	return if var4 and (type(var4) == "string" and string.len(var4) > 0) then reactModule.createElement(view, {
+	return if IsLengthAbove then ReactModule.createElement(View, {
 		tag = "row gap-xsmall align-y-center auto-x size-0-full",
 		LayoutOrder = -1
 	}, {
-		PlatformIconContainer = reactModule.createElement(view, { tag = "auto-xy", LayoutOrder = 1 }, {
-			PlatformIcon = reactModule.createElement("ImageLabel", {
+		PlatformIconContainer = ReactModule.createElement(View, { tag = "auto-xy", LayoutOrder = 1 }, {
+			PlatformIcon = ReactModule.createElement("ImageLabel", {
 				LayoutOrder = 1,
 				BackgroundTransparency = 1,
-				Image = constantsModule.PEOPLEPAGE.PERSON_ROW.PLATFORM_LOGO_IMAGE,
-				Size = UDim2.fromOffset(var1.Size.Size_900, var1.Size.Size_900),
-				ImageColor3 = var1.Color.Content.Default.Color3
+				Image = ConstantsModule.PEOPLEPAGE.PERSON_ROW.PLATFORM_LOGO_IMAGE,
+				Size = UDim2.fromOffset(UseTokensResult.Size.Size_900, UseTokensResult.Size.Size_900),
+				ImageColor3 = UseTokensResult.Color.Content.Default.Color3
 			})
 		}),
-		PlatformNameButton = reactModule.createElement(button, {
+		PlatformNameButton = ReactModule.createElement(Button, {
 			LayoutOrder = 2,
-			onActivated = reactModule.useCallback(function()
-				-- upvalues: var2 (ref), var5 (ref)
-				var2.showPlatformProfile(var5)
-			end, { var5 }),
-			text = var4,
-			variant = buttonVariant.Text,
-			size = buttonSize.Small,
-			isDisabled = not var6,
-			Selectable = var6,
-			ref = reactModule.useCallback(function(p2)
-				-- upvalues: var7 (ref), var6 (ref)
-				var7.current = p2
-				
-				if p2 and var6 then
-					p2.NextSelectionLeft = p2
-					p2.NextSelectionRight = nil
-				end
-			end, { var6 })
+			onActivated = UseResult,
+			text = UseSignalStateResult,
+			variant = ButtonVariant.Text,
+			size = ButtonSize.Small,
+			isDisabled = not UseMemoResult3,
+			Selectable = UseMemoResult3,
+			ref = UseResult1
 		})
 	}) else nil
 end

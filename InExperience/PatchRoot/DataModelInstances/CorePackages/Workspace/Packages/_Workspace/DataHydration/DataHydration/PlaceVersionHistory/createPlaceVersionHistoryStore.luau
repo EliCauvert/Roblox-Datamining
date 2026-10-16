@@ -1,177 +1,180 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local parent = dataHydration.Parent
-local cryoModule = require(parent.Cryo)
-local _ = require(parent.HttpClient)
-local promiseModule = require(parent.Promise)
-local signalsModule = require(parent.Signals)
-local createSingleEntityResolverModule = require(dataHydration.createSingleEntityResolver)
-local fetchPlaceVersionHistoryModule = require(script.Parent.fetchPlaceVersionHistory)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local Parent = DataHydration.Parent
+local CryoModule = require(Parent.Cryo)
+local _ = require(Parent.HttpClient)
+local PromiseModule = require(Parent.Promise)
+local SignalsModule = require(Parent.Signals)
+local CreateSingleEntityResolverModule = require(DataHydration.createSingleEntityResolver)
+local FetchPlaceVersionHistoryModule = require(script.Parent.fetchPlaceVersionHistory)
 local _ = require(script.Parent.PlaceVersionHistoryStoreTypes)
 
-return function(p1)
-	-- upvalues: createSingleEntityResolverModule (ref), fetchPlaceVersionHistoryModule (ref), promiseModule (ref), signalsModule (ref), cryoModule (ref)
-	p1 = p1 or {}
-	local t = {
-		network = p1.network,
-		baseUrl = p1.baseUrl,
-		developBaseUrl = p1.developBaseUrl
+return function(p1) --[[ Line: 28 | Named "createPlaceVersionHistoryStore" ]]
+	-- upvalues: CreateSingleEntityResolverModule (copy), FetchPlaceVersionHistoryModule (copy), PromiseModule (copy), SignalsModule (copy), CryoModule (copy)
+	local P0 = p1 or {}
+	local config = {
+		network = P0.network,
+		baseUrl = P0.baseUrl,
+		developBaseUrl = P0.developBaseUrl
 	}
-	local var1 = createSingleEntityResolverModule(function(p2)
-		-- upvalues: fetchPlaceVersionHistoryModule (copy), t (ref)
-		return fetchPlaceVersionHistoryModule.fetchHistory(p2, t)
+	local SingleEntityResolverModule = CreateSingleEntityResolverModule(function(p2) --[[ Line: 36 ]]
+		-- upvalues: FetchPlaceVersionHistoryModule (upval), config (copy)
+		return FetchPlaceVersionHistoryModule.fetchHistory(p2, config)
 	end)
-	local var2 = createSingleEntityResolverModule(function(p2)
-		-- upvalues: fetchPlaceVersionHistoryModule (copy), t (ref)
-		return fetchPlaceVersionHistoryModule.fetchHistory(p2, t, { isPublished = true, pageSize = 1 }):andThen(function(p3)
-			return { placeVersion = p3.placeVersions[1] }
+	local SingleEntityResolverModule1 = CreateSingleEntityResolverModule(function(p2) --[[ Line: 42 ]]
+		-- upvalues: FetchPlaceVersionHistoryModule (upval), config (copy)
+		return FetchPlaceVersionHistoryModule.fetchHistory(p2, config, { isPublished = true, pageSize = 1 }):andThen(function(Result) --[[ Line: 48 ]]
+			return { placeVersion = Result.placeVersions[1] }
 		end)
 	end, { resolver = { replaceItems = true } })
+	local t = {}
+	local ResolveResult = PromiseModule.resolve()
 	
-	local function fetchPageHistory(p2, p3)
-		-- upvalues: fetchPlaceVersionHistoryModule (copy), t (ref), var1 (ref)
-		return fetchPlaceVersionHistoryModule.fetchHistory(p2, t, p3):andThen(function(p4)
-			-- upvalues: var1 (copy), p2 (ref)
-			var1.update(p2, p4)
-			
-			return p4
-		end)
-	end
-	
-	local t_1 = {}
-	local var3 = promiseModule.resolve()
-	
-	local function _(value)
-		-- upvalues: t_1 (ref), signalsModule (copy)
-		local var4 = t_1[value]
+	local function _(Key) --[[ Line: 73 | Named "getFetchingMoreHistorySignal" ]]
+		-- upvalues: t (copy), SignalsModule (upval)
+		local Entry = t[Key]
 		
-		if var4 == nil then
-			local var5, var6 = signalsModule.createSignal(false)
-			var4 = { getIsFetching = var5, setIsFetching = var6 }
-			t_1[value] = var4
+		if Entry == nil then
+			local Signal, Signal2 = SignalsModule.createSignal(false)
+			Entry = { getIsFetching = Signal, setIsFetching = Signal2 }
+			t[Key] = Entry
 		end
-		return var4
+		return Entry
 	end
 	
 	return {
-		getHistory = var1.get,
-		fetchHistory = var1.fetch,
-		getAndFetchHistory = var1.getAndFetch,
-		updateHistory = var1.update,
-		fetchPageHistory = fetchPageHistory,
-		fetchMoreHistory = function(p2, p3)
-			-- upvalues: var1 (ref), t_1 (ref), signalsModule (copy), var3 (ref), fetchPlaceVersionHistoryModule (copy), t (ref), cryoModule (copy)
-			local var4 = var1.get(p2).data(false)
-			local var5 = t_1[p2]
+		getHistory = SingleEntityResolverModule.get,
+		fetchHistory = SingleEntityResolverModule.fetch,
+		getAndFetchHistory = SingleEntityResolverModule.getAndFetch,
+		updateHistory = SingleEntityResolverModule.update,
+		fetchPageHistory = function(p2, p3) --[[ Line: 56 ]]
+			-- upvalues: FetchPlaceVersionHistoryModule (upval), config (copy), SingleEntityResolverModule (copy)
+			return FetchPlaceVersionHistoryModule.fetchHistory(p2, config, p3):andThen(function(Result) --[[ Line: 62 ]]
+				-- upvalues: SingleEntityResolverModule (upval), p2 (copy)
+				SingleEntityResolverModule.update(p2, Result)
+				
+				return Result
+			end)
+		end,
+		fetchMoreHistory = function(Key, Cursor) --[[ Line: 90 ]]
+			-- upvalues: SingleEntityResolverModule (copy), t (copy), SignalsModule (upval), ResolveResult (copy), FetchPlaceVersionHistoryModule (upval), config (copy), CryoModule (upval)
+			local DataResult = SingleEntityResolverModule.get(Key).data(false)
+			local Entry = t[Key]
 			
-			if var5 == nil then
-				local var6, var7 = signalsModule.createSignal(false)
-				var5 = { getIsFetching = var6, setIsFetching = var7 }
-				t_1[p2] = var5
+			if Entry == nil then
+				local Signal, Signal2 = SignalsModule.createSignal(false)
+				Entry = { getIsFetching = Signal, setIsFetching = Signal2 }
+				t[Key] = Entry
 			end
-			if var4 == nil or not var4.hasMore or (var4.nextCursor ~= p3 or p3 == "") or var5.getIsFetching(false) then
-				return var3
+			local Entry1 = Entry
+			
+			if DataResult == nil or not DataResult.hasMore or DataResult.nextCursor ~= Cursor or Cursor == "" or Entry1.getIsFetching(false) then
+				return ResolveResult
+			else
+				Entry1.setIsFetching(true)
+				local Promise = FetchPlaceVersionHistoryModule.fetchHistory(Key, config, {
+					cursor = Cursor,
+					pageSize = FetchPlaceVersionHistoryModule.DEFAULT_HISTORY_PAGE_SIZE
+				}):andThen(function(Result) --[[ Line: 108 ]]
+					-- upvalues: SingleEntityResolverModule (upval), Key (copy), DataResult (copy), Cursor (copy), CryoModule (upval)
+					if SingleEntityResolverModule.get(Key).data(false) == DataResult then
+						SingleEntityResolverModule.cache.replaceItem(tostring(Key), {
+							hasMore = Result.hasMore and Result.nextCursor ~= Cursor,
+							nextCursor = Result.nextCursor,
+							placeVersions = CryoModule.List.join(DataResult.placeVersions or {}, Result.placeVersions or {})
+						})
+					end
+				end)
+				Promise:finally(function() --[[ Line: 120 ]]
+					-- upvalues: Entry1 (copy)
+					Entry1.setIsFetching(false)
+				end)
+				
+				return Promise
 			end
-			var5.setIsFetching(true)
-			local var8 = fetchPlaceVersionHistoryModule.fetchHistory(p2, t, {
-				cursor = p3,
-				pageSize = fetchPlaceVersionHistoryModule.DEFAULT_HISTORY_PAGE_SIZE
-			}):andThen(function(p4)
-				-- upvalues: var1 (copy), p2 (ref), var4 (ref), p3 (ref), cryoModule (copy)
-				if var1.get(p2).data(false) == var4 then
-					var1.cache.replaceItem(tostring(p2), {
-						hasMore = p4.hasMore and p4.nextCursor ~= p3,
-						nextCursor = p4.nextCursor,
-						placeVersions = cryoModule.List.join(var4.placeVersions or {}, p4.placeVersions or {})
-					})
+		end,
+		getIsFetchingMoreHistory = function(Key) --[[ Line: 86 ]]
+			-- upvalues: t (copy), SignalsModule (upval)
+			local Entry = t[Key]
+			
+			if Entry == nil then
+				local Signal, Signal2 = SignalsModule.createSignal(false)
+				Entry = { getIsFetching = Signal, setIsFetching = Signal2 }
+				t[Key] = Entry
+			end
+			return Entry.getIsFetching
+		end,
+		getLiveVersion = SingleEntityResolverModule1.get,
+		fetchLiveVersion = SingleEntityResolverModule1.fetch,
+		getAndFetchLiveVersion = SingleEntityResolverModule1.getAndFetch,
+		revertVersion = function(AssetId, AssetId1, AssetVersionNumber) --[[ Line: 126 ]]
+			-- upvalues: FetchPlaceVersionHistoryModule (upval), config (copy), SingleEntityResolverModule (copy)
+			return FetchPlaceVersionHistoryModule.revertVersion(AssetId1, AssetVersionNumber, config):andThen(function(_) --[[ Line: 133 ]]
+				-- upvalues: AssetId1 (copy), AssetVersionNumber (copy), SingleEntityResolverModule (upval), AssetId (copy)
+				local config = {
+					assetId = AssetId1,
+					assetVersionNumber = AssetVersionNumber
+				}
+				SingleEntityResolverModule.fetch(AssetId)
+				
+				return config
+			end):catch(function(Err) --[[ Line: 142 ]]
+				error(Err)
+			end)
+		end,
+		rollbackPlace = function(p2, p3, p4, p5) --[[ Line: 147 ]]
+			-- upvalues: FetchPlaceVersionHistoryModule (upval), config (copy), SingleEntityResolverModule (copy)
+			return FetchPlaceVersionHistoryModule.rollbackPlace(p2, p3, p4, p5, config):andThen(function(Result) --[[ Line: 155 ]]
+				-- upvalues: SingleEntityResolverModule (upval), p2 (copy)
+				SingleEntityResolverModule.fetch(p2)
+				
+				return Result
+			end):catch(function(Err) --[[ Line: 159 ]]
+				error(Err)
+			end)
+		end,
+		addVersionNote = function(p2, Version, p3) --[[ Line: 164 ]]
+			-- upvalues: FetchPlaceVersionHistoryModule (upval), config (copy), SingleEntityResolverModule (copy)
+			return FetchPlaceVersionHistoryModule.addVersionNote(p2, Version, p3, config):andThen(function(Result) --[[ Line: 171 ]]
+				-- upvalues: SingleEntityResolverModule (upval), p2 (copy), Version (copy), p3 (copy)
+				local DataResult = SingleEntityResolverModule.get(p2).data(false)
+				
+				if DataResult == nil or typeof(DataResult.placeVersions) ~= "table" then
+					return Result
 				end
-			end)
-			var8:finally(function()
-				-- upvalues: var5 (ref)
-				var5.setIsFetching(false)
-			end)
-			
-			return var8
-		end,
-		getIsFetchingMoreHistory = function(p2)
-			-- upvalues: t_1 (ref), signalsModule (copy)
-			local var4 = t_1[p2]
-			
-			if var4 == nil then
-				local var5, var6 = signalsModule.createSignal(false)
-				var4 = { getIsFetching = var5, setIsFetching = var6 }
-				t_1[p2] = var4
-			end
-			return var4.getIsFetching
-		end,
-		getLiveVersion = var2.get,
-		fetchLiveVersion = var2.fetch,
-		getAndFetchLiveVersion = var2.getAndFetch,
-		revertVersion = function(p2, p3, p4)
-			-- upvalues: fetchPlaceVersionHistoryModule (copy), t (ref), var1 (ref)
-			return fetchPlaceVersionHistoryModule.revertVersion(p3, p4, t):andThen(function(_)
-				-- upvalues: p3 (ref), p4 (ref), var1 (copy), p2 (ref)
-				local t = { assetId = p3, assetVersionNumber = p4 }
-				var1.fetch(p2)
+				local PlaceVersions = {}
 				
-				return t
-			end):catch(function(p5)
-				error(p5)
-			end)
-		end,
-		rollbackPlace = function(p2, p3, p4, p5)
-			-- upvalues: fetchPlaceVersionHistoryModule (copy), t (ref), var1 (ref)
-			return fetchPlaceVersionHistoryModule.rollbackPlace(p2, p3, p4, p5, t):andThen(function(p6)
-				-- upvalues: var1 (copy), p2 (ref)
-				var1.fetch(p2)
-				
-				return p6
-			end):catch(function(p6)
-				error(p6)
-			end)
-		end,
-		addVersionNote = function(p2, p3, p4)
-			-- upvalues: fetchPlaceVersionHistoryModule (copy), t (ref), var1 (ref)
-			return fetchPlaceVersionHistoryModule.addVersionNote(p2, p3, p4, t):andThen(function(p5)
-				-- upvalues: var1 (copy), p2 (ref), p3 (ref), p4 (ref)
-				local var4 = var1.get(p2).data(false)
-				
-				if var4 == nil or typeof(var4.placeVersions) ~= "table" then
-					return p5
-				end
-				local t = {}
-				
-				for i, v in var4.placeVersions do
-					if v.version ~= p3 then
-						t[i] = v
+				for i, placeVersion in DataResult.placeVersions do
+					if placeVersion.version ~= Version then
+						PlaceVersions[i] = placeVersion
 						continue
 					end
-					local t_1 = {}
+					local t = {}
 					
-					for i_1, v_1 in v do
-						t_1[i_1] = v_1
+					for i1, value in placeVersion do
+						t[i1] = value
 					end
-					t_1.title = p4.title
-					t_1.description = p4.description
-					t[i] = t_1
+					t.title = p3.title
+					t.description = p3.description
+					PlaceVersions[i] = t
 				end
-				var1.cache.replaceItem(tostring(p2), {
-					hasMore = var4.hasMore,
-					nextCursor = var4.nextCursor,
-					placeVersions = t
+				SingleEntityResolverModule.cache.replaceItem(tostring(p2), {
+					hasMore = DataResult.hasMore,
+					nextCursor = DataResult.nextCursor,
+					placeVersions = PlaceVersions
 				})
 				
-				return p5
+				return Result
 			end)
 		end,
-		clear = function()
-			-- upvalues: var1 (ref), var2 (ref)
-			var1.clear()
-			var2.clear()
+		clear = function() --[[ Line: 201 ]]
+			-- upvalues: SingleEntityResolverModule (copy), SingleEntityResolverModule1 (copy)
+			SingleEntityResolverModule.clear()
+			SingleEntityResolverModule1.clear()
 		end,
-		dispose = function()
-			-- upvalues: var1 (ref), var2 (ref)
-			var1.dispose()
-			var2.dispose()
+		dispose = function() --[[ Line: 206 ]]
+			-- upvalues: SingleEntityResolverModule (copy), SingleEntityResolverModule1 (copy)
+			SingleEntityResolverModule.dispose()
+			SingleEntityResolverModule1.dispose()
 		end
 	}
 end

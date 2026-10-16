@@ -1,5 +1,5 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceInspectAndBuy").Parent
-local _ = require(parent.AXCommon)
-local _ = require(parent.AvatarExperienceModel)
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceInspectAndBuy").Parent
+local _ = require(Parent.AXCommon)
+local _ = require(Parent.AvatarExperienceModel)
 
 return {}

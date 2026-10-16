@@ -1,48 +1,49 @@
-﻿local runService = game:GetService("RunService")
-local reactModule = require(script:FindFirstAncestor("CollectionViews").Parent.React)
+﻿local RunService = game:GetService("RunService")
+local ReactModule = require(script:FindFirstAncestor("CollectionViews").Parent.React)
 
-return function(p1, p2)
-	-- upvalues: reactModule (ref), runService (ref)
-	local var1, var2 = reactModule.useBinding(false)
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), p2 (ref), var2 (ref), runService (copy)
-		local current = p1.current
+return function(p1, p2) --[[ Line: 9 | Named "useCarouselScrollingBinding" ]]
+	-- upvalues: ReactModule (copy), RunService (copy)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(false)
+	ReactModule.useEffect(function() --[[ Line: 15 ]]
+		-- upvalues: p1 (copy), p2 (copy), UseBindingResult2 (copy), RunService (upval)
+		local Current = p1.current
 		
-		if p2 and current then
-			assert(current, "scrollingFrame must exist")
-			local var3 = 0
-			local var4 = nil
-			local var5 = current:GetPropertyChangedSignal("CanvasPosition"):Connect(function()
-				-- upvalues: var3 (write), var4 (write), var2 (copy), runService (copy)
-				var3 = os.clock() + 0.01
+		if p2 and Current then
+			assert(Current, "scrollingFrame must exist")
+			local NewClockTime = 0
+			local HeartbeatConnection = nil
+			local Connection = Current:GetPropertyChangedSignal("CanvasPosition"):Connect(function() --[[ Line: 25 ]]
+				-- upvalues: NewClockTime (ref), HeartbeatConnection (ref), UseBindingResult2 (upval), RunService (upval)
+				NewClockTime = os.clock() + 0.01
 				
-				if not var4 then
-					var2(true)
-					var4 = runService.Heartbeat:Connect(function()
-						-- upvalues: var3 (copy), var2 (copy), var4 (copy)
-						if var3 <= os.clock() then
-							var2(false)
+				if not HeartbeatConnection then
+					UseBindingResult2(true)
+					HeartbeatConnection = RunService.Heartbeat:Connect(function() --[[ Line: 29 ]]
+						-- upvalues: NewClockTime (upval), UseBindingResult2 (upval), HeartbeatConnection (upval)
+						if NewClockTime <= os.clock() then
+							UseBindingResult2(false)
 							
-							if var4 then
-								var4:Disconnect()
-								var4 = nil
+							if HeartbeatConnection then
+								HeartbeatConnection:Disconnect()
+								HeartbeatConnection = nil
 							end
 						end
 					end)
 				end
 			end)
 			
-			return function()
-				-- upvalues: var5 (ref), var4 (write)
-				var5:Disconnect()
+			return function() --[[ Line: 41 ]]
+				-- upvalues: Connection (copy), HeartbeatConnection (ref)
+				Connection:Disconnect()
 				
-				if var4 then
-					var4:Disconnect()
+				if HeartbeatConnection then
+					HeartbeatConnection:Disconnect()
 				end
 			end
+		else
+			return nil
 		end
-		return nil
 	end, { p1 })
 	
-	return var1
+	return UseBindingResult
 end

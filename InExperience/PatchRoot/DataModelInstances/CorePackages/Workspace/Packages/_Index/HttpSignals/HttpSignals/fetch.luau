@@ -1,25 +1,26 @@
-﻿local createSignal = require(script.Parent.Parent.Signals).createSignal
+﻿local CreateSignalFunction = require(script.Parent.Parent.Signals).createSignal
 local _ = require(script.Parent.types)
-local httpService = game:GetService("HttpService")
+local HttpService = game:GetService("HttpService")
 
-return function(p1)
-	-- upvalues: createSignal (ref), httpService (ref)
-	local var1, var2 = createSignal(function()
+return function(Options) --[[ Line: 16 | Named "fetch" ]]
+	-- upvalues: CreateSignalFunction (copy), HttpService (copy)
+	local Signal, Signal2 = CreateSignalFunction(function() --[[ Line: 17 ]]
 		return { status = "pending" }
 	end)
-	local var3 = httpService:RequestInternal(p1)
-	var3:Start(function(p2, p3)
-		-- upvalues: var2 (ref)
-		if p2 then
-			var2({ status = "success", data = p3 })
+	local RequestInternalResult = HttpService:RequestInternal(Options)
+	RequestInternalResult:Start(function(p1, Data) --[[ Line: 23 ]]
+		-- upvalues: Signal2 (copy)
+		if p1 then
+			Signal2({ status = "success", data = Data })
 			
 			return
+		else
+			Signal2({ status = "error", error = Data })
 		end
-		var2({ status = "error", error = p3 })
 	end)
 	
-	return var1, function()
-		-- upvalues: var3 (ref)
-		var3:Cancel()
+	return Signal, function() --[[ Line: 31 | Named "cancelRequest" ]]
+		-- upvalues: RequestInternalResult (copy)
+		RequestInternalResult:Cancel()
 	end
 end

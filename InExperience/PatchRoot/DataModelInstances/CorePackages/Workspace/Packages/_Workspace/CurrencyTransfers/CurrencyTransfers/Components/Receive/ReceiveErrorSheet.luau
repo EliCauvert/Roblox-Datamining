@@ -1,146 +1,148 @@
-﻿local currencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
-local parent = currencyTransfers.Parent
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local getTransferRequestByIdRequestModule = require(currencyTransfers.NetworkRequests.getTransferRequestByIdRequest)
-local useUserNameFromUserIdModule = require(currencyTransfers.Hooks.useUserNameFromUserId)
-local transferLocalizationKeysModule = require(currencyTransfers.Localization.TransferLocalizationKeys)
-local transferLocaleFormatModule = require(currencyTransfers.Localization.transferLocaleFormat)
-local foundationModule = require(parent.Foundation)
-local sheet = foundationModule.Sheet
-local view = foundationModule.View
-local text = foundationModule.Text
-local button = foundationModule.Button
-local icon = foundationModule.Icon
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local fillBehavior = foundationModule.Enums.FillBehavior
-local useScaledValue = foundationModule.Hooks.useScaledValue
-local useTokens = foundationModule.Hooks.useTokens
-local enums = foundationModule.Enums
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local failureReasonModule = require(currencyTransfers.Enums.FailureReason)
-local useTransferStoreModule = require(currencyTransfers.Hooks.useTransferStore)
+﻿local CurrencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
+local Parent = CurrencyTransfers.Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local GetTransferRequestByIdRequestModule = require(CurrencyTransfers.NetworkRequests.getTransferRequestByIdRequest)
+local UseUserNameFromUserIdModule = require(CurrencyTransfers.Hooks.useUserNameFromUserId)
+local TransferLocalizationKeysModule = require(CurrencyTransfers.Localization.TransferLocalizationKeys)
+local TransferLocaleFormatModule = require(CurrencyTransfers.Localization.transferLocaleFormat)
+local FoundationModule = require(Parent.Foundation)
+local Sheet = FoundationModule.Sheet
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local Button = FoundationModule.Button
+local Icon = FoundationModule.Icon
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local FillBehavior = FoundationModule.Enums.FillBehavior
+local UseScaledValueFunction = FoundationModule.Hooks.useScaledValue
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local Enums = FoundationModule.Enums
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local FailureReasonModule = require(CurrencyTransfers.Enums.FailureReason)
+local UseTransferStoreModule = require(CurrencyTransfers.Hooks.useTransferStore)
 
-local function _(p1, p2, p3)
-	-- upvalues: failureReasonModule (ref), transferLocaleFormatModule (ref)
-	if not p1 then
-		return p2.GenericError, p2.TryAgain
+local function _(TransferDisabledForUser, p1, p2) --[[ Line: 38 | Named "getErrorMessageAndButton" ]]
+	-- upvalues: FailureReasonModule (copy), TransferLocaleFormatModule (copy)
+	if not TransferDisabledForUser then
+		return p1.GenericError, p1.TryAgain
 	end
-	local accountDisabled
-	local OK = p2.OK
-	local _ = nil
+	local OK = p1.OK
+	local AccountDisabled = nil
 	
-	if p1 == failureReasonModule.TransferDisabledForUser then
-		accountDisabled = p2.AccountDisabled
-	elseif p1 == failureReasonModule.TransferExpired then
-		accountDisabled = transferLocaleFormatModule.substituteUsername(p2.TransferExpired, tostring(p3))
+	if TransferDisabledForUser == FailureReasonModule.TransferDisabledForUser then
+		AccountDisabled = p1.AccountDisabled
+	elseif TransferDisabledForUser == FailureReasonModule.TransferExpired then
+		AccountDisabled = TransferLocaleFormatModule.substituteUsername(p1.TransferExpired, (tostring(p2)))
 	else
-		accountDisabled = p2.GenericError
-		OK = p2.TryAgain
+		AccountDisabled = p1.GenericError
+		OK = p1.TryAgain
 	end
-	return accountDisabled, OK
+	return AccountDisabled, OK
 end
 
-local getFFlagCurrencyTransferFocusNavigationModule = require(currencyTransfers.Flags.GetFFlagCurrencyTransferFocusNavigation)
-local useTransferSheetFocusModule = require(currencyTransfers.Hooks.useTransferSheetFocus)
+local GetFFlagCurrencyTransferFocusNavigationModule = require(CurrencyTransfers.Flags.GetFFlagCurrencyTransferFocusNavigation)
+local UseTransferSheetFocusModule = require(CurrencyTransfers.Hooks.useTransferSheetFocus)
 
-return function(_)
-	-- upvalues: useTransferStoreModule (ref), useTokens (ref), signalsReactModule (ref), failureReasonModule (ref), reactModule (ref), getTransferRequestByIdRequestModule (ref), useUserNameFromUserIdModule (ref), useLocalization (ref), transferLocalizationKeysModule (ref), transferLocaleFormatModule (ref), getFFlagCurrencyTransferFocusNavigationModule (ref), useTransferSheetFocusModule (ref), sheet (ref), useScaledValue (ref), view (ref), icon (ref), enums (ref), text (ref), button (ref), buttonVariant (ref), fillBehavior (ref)
-	local genericError, tryAgain
-	local var1 = useTransferStoreModule()
-	local var2 = useTokens()
-	local var3 = signalsReactModule.useSignalState(var1.getErrorTransferModel)
-	local var4 = signalsReactModule.useSignalState(var1.getSender)
-	local var5 = signalsReactModule.useSignalState(var1.getRobuxTransfer)
-	local var6 = signalsReactModule.useSignalState(var1.getTransferRequestId)
-	local triggerOnClose = var1.triggerOnClose
-	local var7 = if var3 then var3.failureReason else nil
-	local var8 = var7 == failureReasonModule.TransferExpired
-	reactModule.useEffect(function()
-		-- upvalues: var8 (ref), var4 (ref), var5 (ref), var6 (ref), getTransferRequestByIdRequestModule (copy), var1 (ref)
-		if var8 and not var4 and (not var5 or not var5.sender) and var6 then
-			getTransferRequestByIdRequestModule({ transferRequestId = var6 }, nil, var1.getNetworkImpl()):andThen(function(p1)
-				-- upvalues: var1 (copy)
-				if p1 and p1.transfer and p1.transfer.sender then
-					var1.setSender(p1.transfer.sender)
+return function(_) --[[ Line: 67 | Named "ReceiveErrorSheet" ]]
+	-- upvalues: UseTransferStoreModule (copy), UseTokensFunction (copy), SignalsReactModule (copy), FailureReasonModule (copy), ReactModule (copy), GetTransferRequestByIdRequestModule (copy), UseUserNameFromUserIdModule (copy), UseLocalizationFunction (copy), TransferLocalizationKeysModule (copy), TransferLocaleFormatModule (copy), GetFFlagCurrencyTransferFocusNavigationModule (copy), UseTransferSheetFocusModule (copy), Sheet (copy), UseScaledValueFunction (copy), View (copy), Icon (copy), Enums (copy), Text (copy), Button (copy), ButtonVariant (copy), FillBehavior (copy)
+	local UseTransferStoreModuleResult = UseTransferStoreModule()
+	local UseTokensResult = UseTokensFunction()
+	local UseSignalStateResult = SignalsReactModule.useSignalState(UseTransferStoreModuleResult.getErrorTransferModel)
+	local UseSignalStateResult1 = SignalsReactModule.useSignalState(UseTransferStoreModuleResult.getSender)
+	local UseSignalStateResult2 = SignalsReactModule.useSignalState(UseTransferStoreModuleResult.getRobuxTransfer)
+	local UseSignalStateResult3 = SignalsReactModule.useSignalState(UseTransferStoreModuleResult.getTransferRequestId)
+	local TriggerOnClose = UseTransferStoreModuleResult.triggerOnClose
+	local FailureReason = if UseSignalStateResult then UseSignalStateResult.failureReason else nil
+	local IsFailureReasonMatch = FailureReason == FailureReasonModule.TransferExpired
+	ReactModule.useEffect(function() --[[ Line: 84 ]]
+		-- upvalues: IsFailureReasonMatch (copy), UseSignalStateResult1 (copy), UseSignalStateResult2 (copy), UseSignalStateResult3 (copy), GetTransferRequestByIdRequestModule (upval), UseTransferStoreModuleResult (copy)
+		if IsFailureReasonMatch and not UseSignalStateResult1 and (not UseSignalStateResult2 or not UseSignalStateResult2.sender) and UseSignalStateResult3 then
+			GetTransferRequestByIdRequestModule({ transferRequestId = UseSignalStateResult3 }, nil, UseTransferStoreModuleResult.getNetworkImpl()):andThen(function(Result) --[[ Line: 94 ]]
+				-- upvalues: UseTransferStoreModuleResult (upval)
+				if Result and Result.transfer and Result.transfer.sender then
+					UseTransferStoreModuleResult.setSender(Result.transfer.sender)
 				end
-			end):catch(function() end)
+			end):catch(function() --[[ Line: 99 ]] end)
 			
 			return
 		end
-	end, { var8, var6, var4, var5 })
-	local var9 = var4 or (if var5 then var5.sender else nil)
-	local var10 = if var9 then var9.targetId else nil
-	local var11 = useUserNameFromUserIdModule(if var8 and var10 and var10 ~= 0 then var10 else nil)
-	local var12 = if var9 and (var9.targetName or var9.targetDisplayName) then var9.targetName or var9.targetDisplayName elseif var8 and var11 and var11 ~= "" then var11 else nil
-	local var13 = useLocalization(transferLocalizationKeysModule.Presets.ReceiveErrorSheet)
+	end, {
+		IsFailureReasonMatch,
+		UseSignalStateResult3,
+		UseSignalStateResult1,
+		UseSignalStateResult2
+	})
+	local UseSignalStateResult1_1 = UseSignalStateResult1 or (UseSignalStateResult2 and UseSignalStateResult2.sender or nil)
+	local TargetId = if UseSignalStateResult1_1 then UseSignalStateResult1_1.targetId else nil
+	local UseUserNameFromUserIdModuleResult = UseUserNameFromUserIdModule(if IsFailureReasonMatch and TargetId and TargetId ~= 0 then TargetId else nil)
+	local TargetName = if UseSignalStateResult1_1 and (UseSignalStateResult1_1.targetName or UseSignalStateResult1_1.targetDisplayName) then UseSignalStateResult1_1.targetName or UseSignalStateResult1_1.targetDisplayName elseif IsFailureReasonMatch and UseUserNameFromUserIdModuleResult and UseUserNameFromUserIdModuleResult ~= "" then UseUserNameFromUserIdModuleResult else nil
+	local UseLocalizationResult = UseLocalizationFunction(TransferLocalizationKeysModule.Presets.ReceiveErrorSheet)
+	local TryAgain = nil
+	local GenericError = nil
 	
-	if var7 then
-		local accountDisabled
-		local OK = var13.OK
-		local _ = nil
+	if FailureReason then
+		local OK = UseLocalizationResult.OK
+		local AccountDisabled = nil
 		
-		if var7 == failureReasonModule.TransferDisabledForUser then
-			accountDisabled = var13.AccountDisabled
-		elseif var7 == failureReasonModule.TransferExpired then
-			accountDisabled = transferLocaleFormatModule.substituteUsername(var13.TransferExpired, tostring(var12))
+		if FailureReason == FailureReasonModule.TransferDisabledForUser then
+			AccountDisabled = UseLocalizationResult.AccountDisabled
+		elseif FailureReason == FailureReasonModule.TransferExpired then
+			AccountDisabled = TransferLocaleFormatModule.substituteUsername(UseLocalizationResult.TransferExpired, (tostring(TargetName)))
 		else
-			accountDisabled = var13.GenericError
-			OK = var13.TryAgain
+			AccountDisabled = UseLocalizationResult.GenericError
+			OK = UseLocalizationResult.TryAgain
 		end
-		genericError = accountDisabled
-		tryAgain = OK
+		GenericError = AccountDisabled
+		TryAgain = OK
 	else
-		genericError = var13.GenericError
-		tryAgain = var13.TryAgain
+		GenericError = UseLocalizationResult.GenericError
+		TryAgain = UseLocalizationResult.TryAgain
 	end
-	local var14 = nil
-	local var15 = nil
+	local Ref = nil
+	local Ref1 = nil
 	
-	if getFFlagCurrencyTransferFocusNavigationModule() then
-		local var16, var17 = useTransferSheetFocusModule(triggerOnClose)
-		var14 = var16
-		var15 = var17
+	if GetFFlagCurrencyTransferFocusNavigationModule() then
+		Ref, Ref1 = UseTransferSheetFocusModule(TriggerOnClose)
 	end
-	return reactModule.createElement(sheet.Root, {
+	return ReactModule.createElement(Sheet.Root, {
 		preferCenterSheet = true,
-		snapPoints = { useScaledValue(300), 0.5 },
-		onClose = triggerOnClose,
-		ref = var14
+		snapPoints = { UseScaledValueFunction(300), 0.5 },
+		onClose = TriggerOnClose,
+		ref = Ref
 	}, {
-		Content = reactModule.createElement(sheet.Content, { LayoutOrder = 1 }, {
-			SheetContentContainer = reactModule.createElement(view, {
+		Content = ReactModule.createElement(Sheet.Content, { LayoutOrder = 1 }, {
+			SheetContentContainer = ReactModule.createElement(View, {
 				tag = "col gap-xlarge auto-y size-full-0 align-x-center align-y-center padding-top-xlarge"
 			}, {
-				ErrorIconContainer = reactModule.createElement(view, {
+				ErrorIconContainer = ReactModule.createElement(View, {
 					tag = "size-1200-1200 radius-circle align-x-center align-y-center bg-inverse-emphasis",
 					LayoutOrder = 1
 				}, {
-					ErrorIcon = reactModule.createElement(icon, {
+					ErrorIcon = ReactModule.createElement(Icon, {
 						tag = "content-inverse-emphasis",
-						name = enums.IconName.TriangleExclamation,
-						size = var2.Size.Size_1200
+						name = Enums.IconName.TriangleExclamation,
+						size = UseTokensResult.Size.Size_1200
 					})
 				}),
-				ErrorMessage = reactModule.createElement(text, {
+				ErrorMessage = ReactModule.createElement(Text, {
 					tag = "text-body-large content-emphasis text-align-x-center auto-y text-wrap",
 					LayoutOrder = 2,
-					Text = genericError,
+					Text = GenericError,
 					Size = UDim2.new(1, 0, 0, 0)
 				})
 			})
 		}),
-		Actions = reactModule.createElement(sheet.Actions, { LayoutOrder = 2 }, {
-			reactModule.createElement(view, {
+		Actions = ReactModule.createElement(Sheet.Actions, { LayoutOrder = 2 }, {
+			ReactModule.createElement(View, {
 				tag = "col auto-y align-y-center align-x-center size-full-0 gap-small"
 			}, {
-				reactModule.createElement(view, { tag = "row auto-y size-full-0 gap-small" }, {
-					reactModule.createElement(button, {
-						ref = var15,
-						text = tryAgain,
-						onActivated = triggerOnClose,
-						variant = buttonVariant.Emphasis,
-						fillBehavior = fillBehavior.Fill
+				ReactModule.createElement(View, { tag = "row auto-y size-full-0 gap-small" }, {
+					ReactModule.createElement(Button, {
+						ref = Ref1,
+						text = TryAgain,
+						onActivated = TriggerOnClose,
+						variant = ButtonVariant.Emphasis,
+						fillBehavior = FillBehavior.Fill
 					})
 				})
 			})

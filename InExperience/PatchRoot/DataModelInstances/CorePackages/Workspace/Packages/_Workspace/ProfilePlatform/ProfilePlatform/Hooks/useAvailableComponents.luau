@@ -1,63 +1,56 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local _ = require(parent.SocialCommon)
-local _ = require(profilePlatform.Types.Component)
-local enumsModule = require(profilePlatform.Common.Enums)
-local getAvailableUserComponentsModule = require(profilePlatform.Hooks.getAvailableUserComponents)
-local getAvailableCommunityComponentsModule = require(profilePlatform.Hooks.getAvailableCommunityComponents)
-local getAvailableContactComponentsModule = require(profilePlatform.Hooks.getAvailableContactComponents)
-local getDeepValueModule = require(profilePlatform.Utils.getDeepValue)
-local useProfileWrapperContextModule = require(profilePlatform.Contexts.useProfileWrapperContext)
-local useAreWebViewsSupportedModule = require(profilePlatform.Hooks.useAreWebViewsSupported)
-local useIsProfileQrCodeEnabledModule = require(profilePlatform.Hooks.useIsProfileQrCodeEnabled)
-local useCanRenderTransferOnProfileModule = require(profilePlatform.Hooks.useCanRenderTransferOnProfile)
-local useCanSeeChatTabModule = require(profilePlatform.Hooks.useCanSeeChatTab)
-local useLocalUserId = require(parent.RobloxAppHooks).useLocalUserId
-local fFlagProfilePlatformEnableVRModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableVR)
-local fFlagProfilePlatformEnableCurrencyTransfer = require(parent.SharedFlags).FFlagProfilePlatformEnableCurrencyTransfer
-local fFlagProfilePlatformCTAsRefactorModule = require(profilePlatform.Flags.FFlagProfilePlatformCTAsRefactor)
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local _ = require(Parent.SocialCommon)
+local _ = require(ProfilePlatform.Types.Component)
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local GetAvailableUserComponentsModule = require(ProfilePlatform.Hooks.getAvailableUserComponents)
+local GetAvailableCommunityComponentsModule = require(ProfilePlatform.Hooks.getAvailableCommunityComponents)
+local GetAvailableContactComponentsModule = require(ProfilePlatform.Hooks.getAvailableContactComponents)
+local GetDeepValueModule = require(ProfilePlatform.Utils.getDeepValue)
+local UseProfileWrapperContextModule = require(ProfilePlatform.Contexts.useProfileWrapperContext)
+local UseAreWebViewsSupportedModule = require(ProfilePlatform.Hooks.useAreWebViewsSupported)
+local UseIsProfileQrCodeEnabledModule = require(ProfilePlatform.Hooks.useIsProfileQrCodeEnabled)
+local UseCanRenderTransferOnProfileModule = require(ProfilePlatform.Hooks.useCanRenderTransferOnProfile)
+local UseCanSeeChatTabModule = require(ProfilePlatform.Hooks.useCanSeeChatTab)
+local UseLocalUserIdFunction = require(Parent.RobloxAppHooks).useLocalUserId
+local FFlagProfilePlatformEnableVRModule = require(ProfilePlatform.Flags.FFlagProfilePlatformEnableVR)
+local FFlagProfilePlatformEnableCurrencyTransfer = require(Parent.SharedFlags).FFlagProfilePlatformEnableCurrencyTransfer
 
-return function()
-	-- upvalues: useProfileWrapperContextModule (ref), getDeepValueModule (ref), useAreWebViewsSupportedModule (ref), useIsProfileQrCodeEnabledModule (ref), useCanRenderTransferOnProfileModule (ref), useCanSeeChatTabModule (ref), fFlagProfilePlatformCTAsRefactorModule (ref), useLocalUserId (ref), reactModule (ref), enumsModule (ref), getAvailableUserComponentsModule (ref), fFlagProfilePlatformEnableVRModule (ref), fFlagProfilePlatformEnableCurrencyTransfer (ref), getAvailableCommunityComponentsModule (ref), getAvailableContactComponentsModule (ref)
-	local var1
-	local var2 = useProfileWrapperContextModule()
-	local profileType = var2.profileType
-	local var3 = getDeepValueModule(var2, "sourceInfo.contextualInfoType")
-	local var4 = useAreWebViewsSupportedModule()
-	local var5 = useIsProfileQrCodeEnabledModule()
-	local var6 = useCanRenderTransferOnProfileModule()
-	local var7 = useCanSeeChatTabModule()
-	local var8 = if fFlagProfilePlatformCTAsRefactorModule then useLocalUserId() else nil
+return function() --[[ Line: 22 ]]
+	-- upvalues: UseProfileWrapperContextModule (copy), GetDeepValueModule (copy), UseAreWebViewsSupportedModule (copy), UseIsProfileQrCodeEnabledModule (copy), UseCanRenderTransferOnProfileModule (copy), UseCanSeeChatTabModule (copy), UseLocalUserIdFunction (copy), ReactModule (copy), EnumsModule (copy), GetAvailableUserComponentsModule (copy), FFlagProfilePlatformEnableVRModule (copy), FFlagProfilePlatformEnableCurrencyTransfer (copy), GetAvailableCommunityComponentsModule (copy), GetAvailableContactComponentsModule (copy)
+	local UseProfileWrapperContextModuleResult = UseProfileWrapperContextModule()
+	local ProfileType = UseProfileWrapperContextModuleResult.profileType
+	local SourceInfoContextualInfoType = GetDeepValueModule(UseProfileWrapperContextModuleResult, "sourceInfo.contextualInfoType")
+	local UseAreWebViewsSupportedModuleResult = UseAreWebViewsSupportedModule()
+	local UseIsProfileQrCodeEnabledModuleResult = UseIsProfileQrCodeEnabledModule()
+	local UseCanRenderTransferOnProfileModuleResult = UseCanRenderTransferOnProfileModule()
+	local UseCanSeeChatTabModuleResult = UseCanSeeChatTabModule()
+	local IsTextMatch = tostring(UseProfileWrapperContextModuleResult.profileId) == tostring((UseLocalUserIdFunction()))
 	
-	if fFlagProfilePlatformCTAsRefactorModule then
-		var1 = tostring(var2.profileId) == tostring(var8)
-		var1 = nil
-	else
-		var1 = false
-	end
-	return reactModule.useMemo(function()
-		-- upvalues: profileType (ref), enumsModule (copy), getAvailableUserComponentsModule (copy), var3 (ref), fFlagProfilePlatformEnableVRModule (copy), var4 (ref), var5 (ref), fFlagProfilePlatformEnableCurrencyTransfer (copy), var6 (ref), var7 (ref), fFlagProfilePlatformCTAsRefactorModule (copy), var1 (ref), getAvailableCommunityComponentsModule (copy), getAvailableContactComponentsModule (copy)
-		return if profileType == enumsModule.ProfileTypes.User then getAvailableUserComponentsModule(var3, if fFlagProfilePlatformEnableVRModule then {
-			areWebViewsSupported = var4,
-			isProfileQrCodeEnabled = var5,
-			canRenderTransferInProfile = if fFlagProfilePlatformEnableCurrencyTransfer then var6 else false,
-			canSeeChatTab = var7,
-			isSelfView = if fFlagProfilePlatformCTAsRefactorModule then var1 else nil
+	return (ReactModule.useMemo(function() --[[ Line: 35 ]]
+		-- upvalues: ProfileType (copy), EnumsModule (upval), GetAvailableUserComponentsModule (upval), SourceInfoContextualInfoType (copy), FFlagProfilePlatformEnableVRModule (upval), UseAreWebViewsSupportedModuleResult (copy), UseIsProfileQrCodeEnabledModuleResult (copy), FFlagProfilePlatformEnableCurrencyTransfer (upval), UseCanRenderTransferOnProfileModuleResult (copy), UseCanSeeChatTabModuleResult (copy), IsTextMatch (copy), GetAvailableCommunityComponentsModule (upval), GetAvailableContactComponentsModule (upval)
+		return if ProfileType == EnumsModule.ProfileTypes.User then GetAvailableUserComponentsModule(SourceInfoContextualInfoType, if FFlagProfilePlatformEnableVRModule then {
+			areWebViewsSupported = UseAreWebViewsSupportedModuleResult,
+			isProfileQrCodeEnabled = UseIsProfileQrCodeEnabledModuleResult,
+			canRenderTransferInProfile = if FFlagProfilePlatformEnableCurrencyTransfer then UseCanRenderTransferOnProfileModuleResult else false,
+			canSeeChatTab = UseCanSeeChatTabModuleResult,
+			isSelfView = IsTextMatch
 		} else {
-			canRenderTransferInProfile = if fFlagProfilePlatformEnableCurrencyTransfer then var6 else false,
-			canSeeChatTab = var7,
-			isSelfView = if fFlagProfilePlatformCTAsRefactorModule then var1 else nil
-		}) elseif profileType == enumsModule.ProfileTypes.Community then getAvailableCommunityComponentsModule() elseif profileType == enumsModule.ProfileTypes.Contact then getAvailableContactComponentsModule() else {}
-	end, if fFlagProfilePlatformEnableVRModule then {
-		profileType,
-		var3,
-		if fFlagProfilePlatformCTAsRefactorModule then var1 else nil,
-		if fFlagProfilePlatformEnableCurrencyTransfer then var6 else nil,
-		var7
+			canRenderTransferInProfile = if FFlagProfilePlatformEnableCurrencyTransfer then UseCanRenderTransferOnProfileModuleResult else false,
+			canSeeChatTab = UseCanSeeChatTabModuleResult,
+			isSelfView = IsTextMatch
+		}) elseif ProfileType == EnumsModule.ProfileTypes.Community then GetAvailableCommunityComponentsModule() elseif ProfileType == EnumsModule.ProfileTypes.Contact then GetAvailableContactComponentsModule() else {}
+	end, if FFlagProfilePlatformEnableVRModule then {
+		ProfileType,
+		SourceInfoContextualInfoType,
+		IsTextMatch,
+		if FFlagProfilePlatformEnableCurrencyTransfer then UseCanRenderTransferOnProfileModuleResult else nil,
+		UseCanSeeChatTabModuleResult
 	} else {
-		profileType, var3, var4, var5,
-		if fFlagProfilePlatformCTAsRefactorModule then var1 else nil,
-		if fFlagProfilePlatformEnableCurrencyTransfer then var6 else nil, var7
-	})
+		ProfileType, SourceInfoContextualInfoType, UseAreWebViewsSupportedModuleResult,
+		UseIsProfileQrCodeEnabledModuleResult, IsTextMatch,
+		if FFlagProfilePlatformEnableCurrencyTransfer then UseCanRenderTransferOnProfileModuleResult else nil,
+		UseCanSeeChatTabModuleResult
+	}))
 end

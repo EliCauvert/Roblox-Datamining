@@ -1,47 +1,47 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local reactModule = require(corePackagesService.Packages.React)
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local useStyle = UIBloxModule.Core.Style.useStyle
-local withLocalization = require(corePackagesService.Workspace.Packages.Localization).withLocalization
-local parent = script.Parent.Parent.Parent
-local FTUXConstantsModule = require(parent.Resources.FTUXConstants)
-local _ = require(parent.Enums.PlatformEnum)
+﻿local CorePackages = game:GetService("CorePackages")
+local ReactModule = require(CorePackages.Packages.React)
+local UIBloxModule = require(CorePackages.Packages.UIBlox)
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local WithLocalizationFunction = require(CorePackages.Workspace.Packages.Localization).withLocalization
+local Parent = script.Parent.Parent.Parent
+local FTUXConstantsModule = require(Parent.Resources.FTUXConstants)
+local _ = require(Parent.Enums.PlatformEnum)
 
-return function(p1)
-	-- upvalues: useStyle (ref), FTUXConstantsModule (ref), withLocalization (ref), reactModule (ref), UIBloxModule (ref)
-	local var1 = useStyle()
-	local theme = var1.Theme
-	local font = var1.Font
-	local panelConstants = FTUXConstantsModule[p1.platform].PanelConstants
-	local color = theme.BackgroundContrast.Color
-	local HEADER_HEIGHT_RATIO = panelConstants.HEADER_HEIGHT_RATIO
-	local var2 = panelConstants.CONTENT_PADDING / panelConstants.SLIDESHOW_FRAME_WIDTH
-	local var3 = 1 - 2 * var2
+return function(p1) --[[ Line: 18 | Named "Header" ]]
+	-- upvalues: UseStyleFunction (copy), FTUXConstantsModule (copy), WithLocalizationFunction (copy), ReactModule (copy), UIBloxModule (copy)
+	local UseStyleResult = UseStyleFunction()
+	local Theme = UseStyleResult.Theme
+	local UseStyleResultFont = UseStyleResult.Font
+	local PanelConstants = FTUXConstantsModule[p1.platform].PanelConstants
+	local Color = Theme.BackgroundContrast.Color
+	local HEADERHEIGHTRATIO = PanelConstants.HEADER_HEIGHT_RATIO
+	local CONTENTPADDINGRatio = PanelConstants.CONTENT_PADDING / PanelConstants.SLIDESHOW_FRAME_WIDTH
+	local XScale = 1 - 2 * CONTENTPADDINGRatio
 	
-	return withLocalization({ headerText = "CoreScripts.VRFTUX.Heading.Header" })(function(p2)
-		-- upvalues: reactModule (copy), color (ref), HEADER_HEIGHT_RATIO (ref), var3 (ref), var2 (ref), UIBloxModule (copy), font (ref), theme (ref)
-		return reactModule.createElement("Frame", {
+	return WithLocalizationFunction({ headerText = "CoreScripts.VRFTUX.Heading.Header" })(function(p2) --[[ Line: 33 ]]
+		-- upvalues: ReactModule (upval), Color (copy), HEADERHEIGHTRATIO (copy), XScale (copy), CONTENTPADDINGRatio (copy), UIBloxModule (upval), UseStyleResultFont (copy), Theme (copy)
+		return ReactModule.createElement("Frame", {
 			BackgroundTransparency = 0,
 			LayoutOrder = 1,
-			BackgroundColor3 = color,
-			Size = UDim2.new(1, 0, HEADER_HEIGHT_RATIO, 0)
+			BackgroundColor3 = Color,
+			Size = UDim2.new(1, 0, HEADERHEIGHTRATIO, 0)
 		}, {
-			UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0.26, 0) }),
-			HeaderFrame = reactModule.createElement("Frame", {
+			UICorner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0.26, 0) }),
+			HeaderFrame = ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				Size = UDim2.new(1, 0, 1, 0),
 				Position = UDim2.new(0, 0, 0, 0)
 			}, {
-				Box = reactModule.createElement("Frame", {
+				Box = ReactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
-					Size = UDim2.new(var3, 0, 1, 0),
-					Position = UDim2.new(var2, 0, 0, 0)
+					Size = UDim2.new(XScale, 0, 1, 0),
+					Position = UDim2.new(CONTENTPADDINGRatio, 0, 0, 0)
 				}, {
-					HeaderText = reactModule.createElement(UIBloxModule.App.Text.StyledTextLabel, {
+					HeaderText = ReactModule.createElement(UIBloxModule.App.Text.StyledTextLabel, {
 						fluidSizing = true,
 						text = p2.headerText,
-						fontStyle = font.Header1,
-						colorStyle = theme.TextEmphasis,
+						fontStyle = UseStyleResultFont.Header1,
+						colorStyle = Theme.TextEmphasis,
 						textXAlignment = Enum.TextXAlignment.Left,
 						size = UDim2.new(1, 0, 1, 0),
 						automaticSize = Enum.AutomaticSize.XY

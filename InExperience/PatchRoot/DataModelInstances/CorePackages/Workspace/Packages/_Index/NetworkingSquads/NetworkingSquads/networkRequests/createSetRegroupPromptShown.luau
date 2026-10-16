@@ -1,10 +1,10 @@
-﻿local SQUAD_URLModule = require(script.Parent.Parent.SQUAD_URL)
+﻿local SQUADURLModule = require(script.Parent.Parent.SQUAD_URL)
 local _ = require(script.Parent.Parent.networkingSquadTypes)
 
-return function(p1)
-	-- upvalues: SQUAD_URLModule (ref)
-	return p1.roduxNetworking.POST("SetRegroupPromptShown", function(p2, p3)
-		-- upvalues: SQUAD_URLModule (copy)
-		return p2(SQUAD_URLModule):path("group-up"):path("v1"):path("set-regroup-prompt-shown"):body({ groupUpId = p3.groupUpId })
-	end)
+return function(p1) --[[ Line: 5 ]]
+	-- upvalues: SQUADURLModule (copy)
+	return (p1.roduxNetworking.POST("SetRegroupPromptShown", function(Callback, p2) --[[ Line: 10 ]]
+		-- upvalues: SQUADURLModule (upval)
+		return Callback(SQUADURLModule):path("group-up"):path("v1"):path("set-regroup-prompt-shown"):body({ groupUpId = p2.groupUpId })
+	end))
 end

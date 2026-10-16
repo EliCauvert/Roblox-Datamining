@@ -1,75 +1,75 @@
-﻿local genericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
-local parent = genericAbuseReporting.Parent
-local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
-local iconButton = foundationModule.IconButton
-local inputSize = foundationModule.Enums.InputSize
-local sheet = foundationModule.Sheet
-local view = foundationModule.View
-local abuseReportTooltipModule = require(genericAbuseReporting.BeduiV2.Components.AbuseReportTooltip)
-local _ = require(genericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.AbuseSheetFlowTypes)
-local _ = require(genericAbuseReporting.Enums.AbuseVector)
-local useFocusNavigationRefsModule = require(genericAbuseReporting.BeduiV2.Hooks.FocusNavigation.useFocusNavigationRefs)
+﻿local GenericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
+local Parent = GenericAbuseReporting.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local FocusNavigableSurfaceIdentifierEnum = require(Parent.FocusNavigationUtils).FocusNavigableSurfaceIdentifierEnum
+local IconButton = FoundationModule.IconButton
+local InputSize = FoundationModule.Enums.InputSize
+local Sheet = FoundationModule.Sheet
+local View = FoundationModule.View
+local AbuseReportTooltipModule = require(GenericAbuseReporting.BeduiV2.Components.AbuseReportTooltip)
+local _ = require(GenericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.AbuseSheetFlowTypes)
+local _ = require(GenericAbuseReporting.Enums.AbuseVector)
+local UseFocusNavigationRefsModule = require(GenericAbuseReporting.BeduiV2.Hooks.FocusNavigation.useFocusNavigationRefs)
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), useFocusNavigationRefsModule (ref), focusNavigableSurfaceIdentifierEnum (ref), sheet (ref), view (ref), iconButton (ref), inputSize (ref), foundationModule (ref), buttonVariant (ref), abuseReportTooltipModule (ref)
-	local abuseReportFlow = p1.abuseReportFlow
-	local config = abuseReportFlow.config
-	local currentPageElement = abuseReportFlow.currentPageElement
-	local canGoBack = abuseReportFlow.canGoBack
-	local var1, var2 = reactModule.useState(if config.display.titleDisclosure then config.display.titleDisclosure.openByDefault else false)
-	local var3 = useFocusNavigationRefsModule(focusNavigableSurfaceIdentifierEnum.CentralOverlay, function()
-		-- upvalues: var2 (ref)
-		var2(false)
+return ReactModule.memo(function(p1) --[[ Line: 34 ]]
+	-- upvalues: ReactModule (copy), UseFocusNavigationRefsModule (copy), FocusNavigableSurfaceIdentifierEnum (copy), Sheet (copy), View (copy), IconButton (copy), InputSize (copy), FoundationModule (copy), ButtonVariant (copy), AbuseReportTooltipModule (copy)
+	local AbuseReportFlow = p1.abuseReportFlow
+	local Config = AbuseReportFlow.config
+	local CurrentPageElement = AbuseReportFlow.currentPageElement
+	local CanGoBack = AbuseReportFlow.canGoBack
+	local UseStateResult, UseStateResult2 = ReactModule.useState(Config.display.titleDisclosure and Config.display.titleDisclosure.openByDefault or false)
+	local UseFocusNavigationRefsModuleResult = UseFocusNavigationRefsModule(FocusNavigableSurfaceIdentifierEnum.CentralOverlay, function() --[[ Line: 43 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(false)
 	end)
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), p1 (ref)
-		if var1 then
+	ReactModule.useEffect(function() --[[ Line: 47 ]]
+		-- upvalues: UseStateResult (copy), p1 (copy)
+		if UseStateResult then
 			p1.takeoverFocus(true)
 			
 			return
+		else
+			p1.takeoverFocus(false)
 		end
-		p1.takeoverFocus(false)
-	end, { p1.takeoverFocus, var1 })
-	local var4 = reactModule.useCallback(function()
-		-- upvalues: var2 (ref)
-		var2(function(p2)
+	end, { p1.takeoverFocus, UseStateResult })
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 55 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(function(p2): boolean --[[ Line: 56 ]]
 			return not p2
 		end)
 	end, {})
 	
-	return reactModule.createElement(reactModule.Fragment, nil, {
-		Header = reactModule.createElement(sheet.Header, nil, reactModule.createElement(view, {
+	return ReactModule.createElement(ReactModule.Fragment, nil, {
+		Header = ReactModule.createElement(Sheet.Header, nil, ReactModule.createElement(View, {
 			tag = "row flex-between align-y-center gap-small size-full-0 auto-y"
 		}, {
-			reactModule.createElement(view, { tag = "row align-y-center gap-small auto-xy" }, {
-				BackIcon = if canGoBack then reactModule.createElement(iconButton, {
+			ReactModule.createElement(View, { tag = "row align-y-center gap-small auto-xy" }, {
+				BackIcon = if CanGoBack then ReactModule.createElement(IconButton, {
 					LayoutOrder = 1,
-					size = inputSize.Medium,
-					icon = foundationModule.Enums.IconName.ChevronLargeLeft,
-					variant = buttonVariant.Utility,
-					onActivated = abuseReportFlow.goBack
+					size = InputSize.Medium,
+					icon = FoundationModule.Enums.IconName.ChevronLargeLeft,
+					variant = ButtonVariant.Utility,
+					onActivated = AbuseReportFlow.goBack
 				}) else nil
 			}),
-			AbuseReportTooltip = if config.display.titleDisclosure then reactModule.createElement(abuseReportTooltipModule, {
+			AbuseReportTooltip = if Config.display.titleDisclosure then ReactModule.createElement(AbuseReportTooltipModule, {
 				layoutOrder = 3,
-				tooltipTitle = config.display.titleDisclosure.tooltipTitle,
-				tooltipText = config.display.titleDisclosure.tooltipText,
-				buttonLabel = config.display.titleDisclosure.buttonLabel,
-				isOpen = var1,
-				onClose = var4,
-				ref = var3
-			}, reactModule.createElement(iconButton, {
+				tooltipTitle = Config.display.titleDisclosure.tooltipTitle,
+				tooltipText = Config.display.titleDisclosure.tooltipText,
+				buttonLabel = Config.display.titleDisclosure.buttonLabel,
+				isOpen = UseStateResult,
+				onClose = UseResult,
+				ref = UseFocusNavigationRefsModuleResult
+			}, ReactModule.createElement(IconButton, {
 				LayoutOrder = 3,
-				size = inputSize.Medium,
-				icon = foundationModule.Enums.IconName.CircleI,
-				variant = buttonVariant.Utility,
-				onActivated = var4
+				size = InputSize.Medium,
+				icon = FoundationModule.Enums.IconName.CircleI,
+				variant = ButtonVariant.Utility,
+				onActivated = UseResult
 			})) else nil
 		})),
-		Content = currentPageElement
+		Content = CurrentPageElement
 	})
 end)

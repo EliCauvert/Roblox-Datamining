@@ -1,136 +1,141 @@
-﻿local parent = script:FindFirstAncestor("SocialCarousel").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local useTokens = foundationModule.Hooks.useTokens
-local usePreferences = foundationModule.Hooks.usePreferences
-local view = foundationModule.View
-local text = foundationModule.Text
-local marqueeTextMotionModule = require(script.Parent.MarqueeTextMotion)
+﻿local SocialCarousel = script:FindFirstAncestor("SocialCarousel")
+local Parent = SocialCarousel.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UsePreferencesFunction = FoundationModule.Hooks.usePreferences
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local MarqueeTextMotionModule = require(script.Parent.MarqueeTextMotion)
+local MarqueePlayStatus = require(SocialCarousel.Common.Enums).MarqueePlayStatus
 
-local function renderCopy(p1, p2, p3, p4)
-	-- upvalues: reactModule (ref), text (ref)
-	return reactModule.createElement(text, {
+local function renderCopy(Text1, FontStyle, XOffset1, XOffset) --[[ Line: 16 ]]
+	-- upvalues: ReactModule (copy), Text (copy)
+	return ReactModule.createElement(Text, {
 		tag = "auto-y text-align-x-left content-default",
-		Text = p1,
-		fontStyle = p2,
+		Text = Text1,
+		fontStyle = FontStyle,
 		TextTruncate = Enum.TextTruncate.None,
-		Size = UDim2.fromOffset(p4, 0),
-		Position = UDim2.fromOffset(p3, 0)
+		Size = UDim2.fromOffset(XOffset, 0),
+		Position = UDim2.fromOffset(XOffset1, 0)
 	})
 end
 
-return function(p1)
-	-- upvalues: useTokens (ref), usePreferences (ref), marqueeTextMotionModule (ref), reactModule (ref), view (ref), renderCopy (ref), text (ref)
-	local var1 = usePreferences()
-	local fontStyle = p1.fontStyle or useTokens().Typography.LabelSmall
-	local var2 = if p1.speed ~= nil then marqueeTextMotionModule.DEFAULT_SPEED else p1.speed
-	local var3 = if p1.maxLoops ~= nil then marqueeTextMotionModule.DEFAULT_MAX_LOOPS else p1.maxLoops
-	local var4 = p1.isActive == nil or p1.isActive
-	local var5 = if p1.reducedMotion ~= nil then var1.reducedMotion else p1.reducedMotion
-	local direction = p1.direction or marqueeTextMotionModule.textDirectionFromLocale(game:GetService("LocalizationService").RobloxLocaleId)
-	local heartbeat = p1.heartbeat or game:GetService("RunService").Heartbeat
-	local var6, var7 = reactModule.useState(0)
-	local var8, var9 = reactModule.useState(0)
-	local var10, var11 = reactModule.useState(false)
-	local var12, var13 = reactModule.useBinding(0)
-	local var14 = reactModule.useRef(0)
-	local var15 = reactModule.useRef(false)
-	local var16 = marqueeTextMotionModule.travelDistance(var6, var8)
-	local var17 = var4 and (not var5 and (not var10 and var16 > 0))
-	local var18 = not var17 and marqueeTextMotionModule.overflows(var6, var8)
-	reactModule.useEffect(function()
-		-- upvalues: var14 (ref), var15 (ref), var13 (ref), var11 (ref)
-		var14.current = 0
-		var15.current = false
-		var13(0)
-		var11(false)
-	end, { p1.text, var3, var5 })
-	local var19 = reactModule.useCallback(function(p2)
-		-- upvalues: var17 (ref), marqueeTextMotionModule (copy), var12 (ref), var14 (ref), var16 (ref), var2 (ref), var3 (ref), var15 (ref), var13 (ref), var11 (ref), p1 (ref)
-		if not var17 then return end
-		local var20 = marqueeTextMotionModule.advance({
+return function(Frame) --[[ Line: 46 | Named "MarqueeText" ]]
+	-- upvalues: UseTokensFunction (copy), UsePreferencesFunction (copy), MarqueeTextMotionModule (copy), MarqueePlayStatus (copy), ReactModule (copy), View (copy), renderCopy (copy), Text (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UsePreferencesResult = UsePreferencesFunction()
+	local FontStyle = Frame.fontStyle or UseTokensResult.Typography.LabelSmall
+	local DEFAULTSPEED = if Frame.speed == nil then MarqueeTextMotionModule.DEFAULT_SPEED else Frame.speed
+	local DEFAULTMAXLOOPS = if Frame.maxLoops == nil then MarqueeTextMotionModule.DEFAULT_MAX_LOOPS else Frame.maxLoops
+	local PlayStatus = Frame.playStatus or MarqueePlayStatus.Playing
+	local ReducedMotion = if Frame.reducedMotion == nil then UsePreferencesResult.reducedMotion else Frame.reducedMotion
+	local Direction = Frame.direction or MarqueeTextMotionModule.textDirectionFromLocale(game:GetService("LocalizationService").RobloxLocaleId)
+	local Heartbeat = Frame.heartbeat or game:GetService("RunService").Heartbeat
+	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(0)
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(false)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
+	local UseRefResult = ReactModule.useRef(0)
+	local UseRefResult1 = ReactModule.useRef(false)
+	local TravelDistanceResult: number = MarqueeTextMotionModule.travelDistance(UseStateResult, UseStateResult1)
+	local OverflowsResult = MarqueeTextMotionModule.overflows(UseStateResult, UseStateResult1)
+	local IsNotRequiresOverflow = PlayStatus ~= MarqueePlayStatus.Idle and (not ReducedMotion and (not UseStateResult3 and (TravelDistanceResult > 0 and (Frame.requiresOverflow ~= true or OverflowsResult))))
+	local IsPlayStatusMatch: boolean = IsNotRequiresOverflow and PlayStatus == MarqueePlayStatus.Playing
+	local OverflowsResult1 = not IsNotRequiresOverflow and OverflowsResult
+	ReactModule.useEffect(function() --[[ Line: 79 ]]
+		-- upvalues: UseRefResult (copy), UseRefResult1 (copy), UseBindingResult2 (copy), UseStateResult2_2 (copy)
+		UseRefResult.current = 0
+		UseRefResult1.current = false
+		UseBindingResult2(0)
+		UseStateResult2_2(false)
+	end, { Frame.text, DEFAULTMAXLOOPS, ReducedMotion, Frame.runId })
+	local UseResult = ReactModule.useCallback(function(p1) --[[ Line: 86 ]]
+		-- upvalues: IsPlayStatusMatch (copy), MarqueeTextMotionModule (upval), UseBindingResult (copy), UseRefResult (copy), TravelDistanceResult (copy), DEFAULTSPEED (copy), DEFAULTMAXLOOPS (copy), UseRefResult1 (copy), UseBindingResult2 (copy), UseStateResult2_2 (copy), Frame (copy)
+		if not IsPlayStatusMatch then return end
+		local AdvanceResult = MarqueeTextMotionModule.advance({
 			finished = false,
-			offset = var12:getValue(),
-			loopsCompleted = var14.current
-		}, var16, var2, p2, var3)
-		var14.current = var20.loopsCompleted
+			offset = UseBindingResult:getValue(),
+			loopsCompleted = UseRefResult.current
+		}, TravelDistanceResult, DEFAULTSPEED, p1, DEFAULTMAXLOOPS)
+		UseRefResult.current = AdvanceResult.loopsCompleted
 		
-		if var20.finished then
-			if var15.current then return end
-			var15.current = true
-			var13(0)
-			var11(true)
+		if not AdvanceResult.finished then
+			UseBindingResult2(AdvanceResult.offset)
+		elseif UseRefResult1.current then return end
+		UseRefResult1.current = true
+		UseBindingResult2(0)
+		UseStateResult2_2(true)
+		
+		if Frame.onFinished then
+			Frame.onFinished()
 			
-			if p1.onFinished then
-				p1.onFinished()
-				
-				return
-			end
-		else
-			var13(var20.offset)
+			return
 		end
 	end, {
-		var17, var16, var2, var3, p1.onFinished, var12
+		IsPlayStatusMatch, TravelDistanceResult, DEFAULTSPEED, DEFAULTMAXLOOPS,
+		Frame.onFinished, UseBindingResult
 	})
-	reactModule.useEffect(function()
-		-- upvalues: var17 (ref), heartbeat (ref), var19 (ref)
-		if var17 then
-			local var20 = heartbeat:Connect(var19)
+	ReactModule.useEffect(function() --[[ Line: 114 ]]
+		-- upvalues: IsPlayStatusMatch (copy), Heartbeat (copy), UseResult (copy)
+		if IsPlayStatusMatch then
+			local Connection = Heartbeat:Connect(UseResult)
 			
-			return function()
-				-- upvalues: var20 (ref)
-				var20:Disconnect()
+			return function() --[[ Line: 120 ]]
+				-- upvalues: Connection (copy)
+				Connection:Disconnect()
 			end
+		else
+			return function() --[[ Line: 116 ]] end
 		end
-		return function() end
-	end, { var17, heartbeat, var19 })
-	local var20 = direction == Enum.TextDirection.RightToLeft
+	end, { IsPlayStatusMatch, Heartbeat, UseResult })
+	local IsDirectionMatch = Direction == Enum.TextDirection.RightToLeft
+	local MapResult = UseBindingResult:map(function(p1): UDim2 --[[ Line: 127 ]]
+		-- upvalues: IsNotRequiresOverflow (copy), MarqueeTextMotionModule (upval), Direction (copy), IsDirectionMatch (copy)
+		if IsNotRequiresOverflow then
+			local SignedOffsetResult = MarqueeTextMotionModule.signedOffset(p1, Direction)
+			
+			return if IsDirectionMatch then UDim2.new(1, SignedOffsetResult, 0, 0) else UDim2.fromOffset(SignedOffsetResult, 0)
+		else
+			return UDim2.fromOffset(0, 0)
+		end
+	end)
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "size-full-0 auto-y clip",
-		LayoutOrder = p1.LayoutOrder,
-		onAbsoluteSizeChanged = function(value)
-			-- upvalues: var9 (ref)
-			var9(value.AbsoluteSize.X)
+		LayoutOrder = Frame.LayoutOrder,
+		onAbsoluteSizeChanged = function(Frame) --[[ Line: 168 ]]
+			-- upvalues: UseStateResult2_1 (copy)
+			UseStateResult2_1(Frame.AbsoluteSize.X)
 		end
 	}, {
-		Measure = reactModule.createElement(text, {
+		Measure = ReactModule.createElement(Text, {
 			TextTransparency = 1,
 			tag = "size-0 auto-x",
-			Text = p1.text,
-			fontStyle = fontStyle,
+			Text = Frame.text,
+			fontStyle = FontStyle,
 			TextTruncate = Enum.TextTruncate.None,
-			onAbsoluteSizeChanged = function(value)
-				-- upvalues: var7 (ref)
-				var7(value.AbsoluteSize.X)
+			onAbsoluteSizeChanged = function(Frame) --[[ Line: 178 ]]
+				-- upvalues: UseStateResult2 (copy)
+				UseStateResult2(Frame.AbsoluteSize.X)
 			end
 		}),
-		Content = if var17 then reactModule.createElement(view, {
+		Content = if IsNotRequiresOverflow then ReactModule.createElement(View, {
 			tag = "auto-y no-clip",
-			Size = UDim2.fromOffset(var16 + var6, 0),
-			AnchorPoint = if var20 then Vector2.new(1, 0) else Vector2.new(0, 0),
-			Position = var12:map(function(p2)
-				-- upvalues: var17 (ref), marqueeTextMotionModule (copy), direction (ref), var20 (ref)
-				if not var17 then
-					return UDim2.fromOffset(0, 0)
-				end
-				local var21 = marqueeTextMotionModule.signedOffset(p2, direction)
-				
-				return if var20 then UDim2.new(1, var21, 0, 0) else UDim2.fromOffset(var21, 0)
-			end)
+			Size = UDim2.fromOffset(TravelDistanceResult + UseStateResult, 0),
+			AnchorPoint = if IsDirectionMatch then Vector2.new(1, 0) else Vector2.new(0, 0),
+			Position = MapResult
 		}, {
-			Leading = renderCopy(p1.text, fontStyle, if var20 then var16 else 0, var6),
-			Trailing = renderCopy(p1.text, fontStyle, if var20 then 0 else var16, var6)
-		}) else reactModule.createElement(text, {
+			Leading = renderCopy(Frame.text, FontStyle, if IsDirectionMatch then TravelDistanceResult else 0, UseStateResult),
+			Trailing = renderCopy(Frame.text, FontStyle, if IsDirectionMatch then 0 else TravelDistanceResult, UseStateResult)
+		}) else ReactModule.createElement(Text, {
 			testId = "marquee-text",
-			Text = p1.text,
-			fontStyle = fontStyle,
-			TextTruncate = if var18 then Enum.TextTruncate.AtEnd else Enum.TextTruncate.None,
+			Text = Frame.text,
+			fontStyle = FontStyle,
+			TextTruncate = if OverflowsResult1 then Enum.TextTruncate.AtEnd else Enum.TextTruncate.None,
 			tag = {
-				["size-full-0 auto-y text-align-x-left text-truncate-end content-default"] = var18 and not var20,
-				["size-full-0 auto-y text-align-x-left content-default"] = not var18 and not var20,
-				["size-full-0 auto-y text-align-x-right text-truncate-end content-default"] = var18 and var20,
-				["size-full-0 auto-y text-align-x-right content-default"] = not var18 and var20
+				["size-full-0 auto-y text-align-x-center text-truncate-end content-default"] = OverflowsResult1,
+				["size-full-0 auto-y text-align-x-center content-default"] = not OverflowsResult1
 			}
 		})
 	})

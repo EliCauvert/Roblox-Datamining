@@ -1,119 +1,118 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local navigationModule = require(parent.Navigation)
-local inputHandlersModule = require(parent.InputHandlers)
-local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-local profileContextualMenuModule = require(script.Parent.ProfileContextualMenu)
-local useScreenSize = require(parent.RobloxAppHooks).useScreenSize
-local useProfileActionsModule = require(profilePlatform.Hooks.useProfileActions)
-local useProfileJsonComponentModule = require(profilePlatform.Hooks.useProfileJsonComponent)
-local useNavigation = navigationModule.useNavigation
-local focusNavigableSurfaceWrapper = focusNavigationUtilsModule.FocusNavigableSurfaceWrapper
-local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
-local focusNavigationEventNameEnum = focusNavigationUtilsModule.FocusNavigationEventNameEnum
-local useAppFocusRoot = focusNavigationUtilsModule.useAppFocusRoot
-local constantsModule = require(profilePlatform.Common.Constants)
-local enumsModule = require(profilePlatform.Common.Enums)
-local fFlagProfilePlatformAddTC = require(parent.SharedFlags).FFlagProfilePlatformAddTC
-local fFlagProfileContextualMenuDisableFix = require(parent.SharedFlags).FFlagProfileContextualMenuDisableFix
-local fFlagProfileFixMenuNavigation = require(parent.SharedFlags).FFlagProfileFixMenuNavigation
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local InputHandlersModule = require(Parent.InputHandlers)
+local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
+local ProfileContextualMenuModule = require(script.Parent.ProfileContextualMenu)
+local UseScreenSizeFunction = require(Parent.RobloxAppHooks).useScreenSize
+local UseProfileActionsModule = require(ProfilePlatform.Hooks.useProfileActions)
+local UseProfileJsonComponentModule = require(ProfilePlatform.Hooks.useProfileJsonComponent)
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local FocusNavigableSurfaceWrapper = FocusNavigationUtilsModule.FocusNavigableSurfaceWrapper
+local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
+local FocusNavigationEventNameEnum = FocusNavigationUtilsModule.FocusNavigationEventNameEnum
+local UseAppFocusRootFunction = FocusNavigationUtilsModule.useAppFocusRoot
+local ConstantsModule = require(ProfilePlatform.Common.Constants)
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local FFlagProfilePlatformAddTC = require(Parent.SharedFlags).FFlagProfilePlatformAddTC
+local FFlagProfileContextualMenuDisableFix = require(Parent.SharedFlags).FFlagProfileContextualMenuDisableFix
+local FFlagProfileFixMenuNavigation = require(Parent.SharedFlags).FFlagProfileFixMenuNavigation
 
-return function(_)
-	-- upvalues: useScreenSize (ref), useNavigation (ref), constantsModule (ref), useProfileJsonComponentModule (ref), enumsModule (ref), useProfileActionsModule (ref), reactModule (ref), fFlagProfileFixMenuNavigation (ref), useAppFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), fFlagProfileContextualMenuDisableFix (ref), fFlagProfilePlatformAddTC (ref), profileContextualMenuModule (ref), focusNavigableSurfaceWrapper (ref)
-	local var1 = useScreenSize()
-	local var2 = useNavigation()
-	local param = var2.getParam(constantsModule.Navigation.ON_CLOSE)
-	local param_1 = var2.getParam(constantsModule.Navigation.ON_DISMISS_REF)
-	local var3 = var2.getParam(constantsModule.Navigation.GET_ROOT_ELEMENT_REF)()
-	local var4 = if var3 then var3.AbsolutePosition else Vector2.new(0, 0)
-	local var5 = useProfileActionsModule(enumsModule.ButtonSurface.ContextualMenu)
-	local contextual = (useProfileJsonComponentModule(enumsModule.Components.Actions) or {}).contextual
-	local var6, var7 = reactModule.useState(true)
-	local var8 = reactModule.useCallback(function()
-		-- upvalues: var7 (ref), var2 (ref), param (ref)
-		var7(false)
-		var2.pop()
-		param()
-	end, { var2, param })
-	local var9 = if fFlagProfileFixMenuNavigation then useAppFocusRoot({
+return function(_) --[[ Line: 24 | Named "ProfileContextualMenuContainer" ]]
+	-- upvalues: UseScreenSizeFunction (copy), UseNavigationFunction (copy), ConstantsModule (copy), UseProfileJsonComponentModule (copy), EnumsModule (copy), UseProfileActionsModule (copy), ReactModule (copy), FFlagProfileFixMenuNavigation (copy), UseAppFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), FFlagProfileContextualMenuDisableFix (copy), FFlagProfilePlatformAddTC (copy), ProfileContextualMenuModule (copy), FocusNavigableSurfaceWrapper (copy)
+	local UseScreenSizeResult = UseScreenSizeFunction()
+	local UseNavigationResult = UseNavigationFunction()
+	local Param = UseNavigationResult.getParam(ConstantsModule.Navigation.ON_CLOSE)
+	local Param1 = UseNavigationResult.getParam(ConstantsModule.Navigation.ON_DISMISS_REF)
+	local Current = UseNavigationResult.getParam(ConstantsModule.Navigation.GET_ROOT_ELEMENT_REF)()
+	local AbsolutePosition = if Current then Current.AbsolutePosition else Vector2.new(0, 0)
+	local UseProfileJsonComponentModuleResult = UseProfileJsonComponentModule(EnumsModule.Components.Actions) or {}
+	local UseProfileActionsModuleResult = UseProfileActionsModule(EnumsModule.ButtonSurface.ContextualMenu)
+	local Contextual = UseProfileJsonComponentModuleResult.contextual
+	local UseStateResult, UseStateResult2 = ReactModule.useState(true)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 42 ]]
+		-- upvalues: UseStateResult2 (copy), UseNavigationResult (copy), Param (copy)
+		UseStateResult2(false)
+		UseNavigationResult.pop()
+		Param()
+	end, { UseNavigationResult, Param })
+	local UseAppFocusRootResult = if FFlagProfileFixMenuNavigation then UseAppFocusRootFunction({
 		isAutoFocusRoot = true,
-		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.ContextualMenu,
+		surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.ContextualMenu,
 		customEventHandlers = {
-			[focusNavigationEventNameEnum.NavigateBack] = {
-				handler = inputHandlersModule.onRelease(function()
-					-- upvalues: var8 (ref)
-					var8()
+			[FocusNavigationEventNameEnum.NavigateBack] = {
+				handler = InputHandlersModule.onRelease(function() --[[ Line: 54 ]]
+					-- upvalues: UseResult (copy)
+					UseResult()
 				end)
 			}
 		},
-		isFocusable = var6
+		isFocusable = UseStateResult
 	}) else nil
-	reactModule.useEffect(function()
-		-- upvalues: param_1 (ref), var8 (ref)
-		if param_1 then
-			param_1.current = var8
-			
-			return function()
-				-- upvalues: param_1 (copy)
-				param_1.current = nil
-			end
+	ReactModule.useEffect(function() --[[ Line: 64 ]]
+		-- upvalues: Param1 (copy), UseResult (copy)
+		if not Param1 then return end
+		Param1.current = UseResult
+		
+		return function() --[[ Line: 69 ]]
+			-- upvalues: Param1 (upval)
+			Param1.current = nil
 		end
-	end, { var8 })
-	local var10 = reactModule.useMemo(function()
-		-- upvalues: contextual (ref), var5 (ref), fFlagProfileContextualMenuDisableFix (copy), fFlagProfilePlatformAddTC (copy), var8 (ref)
-		if not contextual then
+	end, { UseResult })
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 74 ]]
+		-- upvalues: Contextual (copy), UseProfileActionsModuleResult (copy), FFlagProfileContextualMenuDisableFix (upval), FFlagProfilePlatformAddTC (upval), UseResult (copy)
+		if not Contextual then
 			return {}
 		end
-		local t = {}
+		local List = {}
 		
-		for i, v in contextual do
-			local var11 = var5[v]
+		for _, value in Contextual do
+			local UseProfileActionsModuleResultEntry = UseProfileActionsModuleResult[value]
 			
-			if var11 then
-				table.insert(t, {
-					text = var11.text,
-					disabled = if fFlagProfileContextualMenuDisableFix then nil elseif fFlagProfilePlatformAddTC then var11.isDisabled else nil,
-					isDisabled = if fFlagProfileContextualMenuDisableFix then var11.isDisabled else nil,
-					onActivated = function()
-						-- upvalues: var8 (copy), var11 (ref)
-						var8()
-						var11.onActivated()
+			if UseProfileActionsModuleResultEntry then
+				table.insert(List, {
+					text = UseProfileActionsModuleResultEntry.text,
+					disabled = if FFlagProfileContextualMenuDisableFix then nil elseif FFlagProfilePlatformAddTC then UseProfileActionsModuleResultEntry.isDisabled else nil,
+					isDisabled = if FFlagProfileContextualMenuDisableFix then UseProfileActionsModuleResultEntry.isDisabled else nil,
+					onActivated = function() --[[ Line: 90 ]]
+						-- upvalues: UseResult (upval), UseProfileActionsModuleResultEntry (copy)
+						UseResult()
+						UseProfileActionsModuleResultEntry.onActivated()
 					end
 				})
 			end
 		end
-		return t
-	end, { contextual, var8, var5 })
+		return List
+	end, { Contextual, UseResult, UseProfileActionsModuleResult })
 	
-	return if fFlagProfileFixMenuNavigation then reactModule.createElement(profileContextualMenuModule, {
-		buttonProps = var10,
-		screenSize = var1,
-		onDismiss = var8,
-		rootElementPosition = var4,
-		rootElementRef = { current = var3 },
-		isOpen = var6,
-		menuRef = var9
-	}) else reactModule.createElement(focusNavigableSurfaceWrapper, {
+	return if FFlagProfileFixMenuNavigation then ReactModule.createElement(ProfileContextualMenuModule, {
+		buttonProps = UseMemoResult,
+		screenSize = UseScreenSizeResult,
+		onDismiss = UseResult,
+		rootElementPosition = AbsolutePosition,
+		rootElementRef = { current = Current },
+		isOpen = UseStateResult,
+		menuRef = UseAppFocusRootResult
+	}) else ReactModule.createElement(FocusNavigableSurfaceWrapper, {
 		isIsolated = true,
-		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.PopUp,
+		surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.PopUp,
 		customEventHandlers = {
-			[focusNavigationEventNameEnum.NavigateBack] = {
-				handler = inputHandlersModule.onRelease(function(p1)
-					-- upvalues: var8 (ref)
-					var8()
+			[FocusNavigationEventNameEnum.NavigateBack] = {
+				handler = InputHandlersModule.onRelease(function(p1) --[[ Line: 116 ]]
+					-- upvalues: UseResult (copy)
+					UseResult()
 					p1:cancel()
 				end)
 			}
 		}
 	}, {
-		reactModule.createElement(profileContextualMenuModule, {
-			buttonProps = var10,
-			screenSize = var1,
-			onDismiss = var8,
-			rootElementPosition = var4,
-			rootElementRef = { current = var3 },
-			isOpen = var6
+		ReactModule.createElement(ProfileContextualMenuModule, {
+			buttonProps = UseMemoResult,
+			screenSize = UseScreenSizeResult,
+			onDismiss = UseResult,
+			rootElementPosition = AbsolutePosition,
+			rootElementRef = { current = Current },
+			isOpen = UseStateResult
 		})
 	})
 end

@@ -1,65 +1,64 @@
-﻿local avatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
-local parent = avatarExperienceCommon.Parent
-local reactModule = require(parent.React)
-local navigationModule = require(parent.Navigation)
-local safeAppStorageServiceModule = require(avatarExperienceCommon.Lib.SafeAppStorageService)
-local avatarExperienceNavigationModule = require(parent.AvatarExperienceNavigation)
-local avatarScreen = avatarExperienceNavigationModule.Enums.AvatarScreen
-local useAvatarRoute = avatarExperienceNavigationModule.AvatarRoute.Hooks.useAvatarRoute
-local useNavigation = navigationModule.useNavigation
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local useIsSpatial = require(parent.Responsive).useIsSpatial
-local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
-local fFlagAXEnhancedAvatarHeadsFtuxUseMemStorage = avatarExperienceFlagsModule.FFlagAXEnhancedAvatarHeadsFtuxUseMemStorage
-local fIntAXEnhancedAvatarHeadsFtuxDelay = avatarExperienceFlagsModule.FIntAXEnhancedAvatarHeadsFtuxDelay
+﻿local AvatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
+local Parent = AvatarExperienceCommon.Parent
+local ReactModule = require(Parent.React)
+local SafeAppStorageServiceModule = require(AvatarExperienceCommon.Lib.SafeAppStorageService)
+local AvatarExperienceNavigationModule = require(Parent.AvatarExperienceNavigation)
+local AvatarScreen = AvatarExperienceNavigationModule.Enums.AvatarScreen
+local UseAvatarRouteFunction = AvatarExperienceNavigationModule.AvatarRoute.Hooks.useAvatarRoute
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local UseIsSpatialFunction = require(Parent.Responsive).useIsSpatial
+local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
+local FFlagAXEnhancedAvatarHeadsFtuxUseMemStorage = AvatarExperienceFlagsModule.FFlagAXEnhancedAvatarHeadsFtuxUseMemStorage
+local FIntAXEnhancedAvatarHeadsFtuxDelay = AvatarExperienceFlagsModule.FIntAXEnhancedAvatarHeadsFtuxDelay
 
-local var1 = function(p1)
+local function v9(p1) --[[ Line: 25 ]]
 	return p1.ScreenSize
 end
 
-return function()
-	-- upvalues: useNavigation (ref), useAvatarRoute (ref), useSelector (ref), var1 (ref), reactModule (ref), safeAppStorageServiceModule (ref), fFlagAXEnhancedAvatarHeadsFtuxUseMemStorage (ref), useIsSpatial (ref), avatarScreen (ref), fIntAXEnhancedAvatarHeadsFtuxDelay (ref)
-	local var2 = useNavigation()
-	local var3 = useAvatarRoute()
-	local var4 = useSelector(var1)
-	local var5 = reactModule.useMemo(function()
-		-- upvalues: var3 (ref)
-		return var3 and (var3.opaque and var3.opaque.name)
-	end, { var3 })
-	local var6 = reactModule.useCallback(function()
-		-- upvalues: safeAppStorageServiceModule (copy), fFlagAXEnhancedAvatarHeadsFtuxUseMemStorage (copy)
-		return safeAppStorageServiceModule.getItem("AXEnhancedAvatarHeadsFtux", fFlagAXEnhancedAvatarHeadsFtuxUseMemStorage)
+return function() --[[ Line: 29 | Named "useEnhancedAvatarHeadsFtux" ]]
+	-- upvalues: UseNavigationFunction (copy), UseAvatarRouteFunction (copy), UseSelectorFunction (copy), v9 (copy), ReactModule (copy), SafeAppStorageServiceModule (copy), FFlagAXEnhancedAvatarHeadsFtuxUseMemStorage (copy), UseIsSpatialFunction (copy), AvatarScreen (copy), FIntAXEnhancedAvatarHeadsFtuxDelay (copy)
+	local UseNavigationResult = UseNavigationFunction()
+	local UseAvatarRouteResult = UseAvatarRouteFunction()
+	local UseSelectorResult = UseSelectorFunction(v9)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 34 ]]
+		-- upvalues: UseAvatarRouteResult (copy)
+		return UseAvatarRouteResult and (UseAvatarRouteResult.opaque and UseAvatarRouteResult.opaque.name)
+	end, { UseAvatarRouteResult })
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 38 ]]
+		-- upvalues: SafeAppStorageServiceModule (upval), FFlagAXEnhancedAvatarHeadsFtuxUseMemStorage (upval)
+		return SafeAppStorageServiceModule.getItem("AXEnhancedAvatarHeadsFtux", FFlagAXEnhancedAvatarHeadsFtuxUseMemStorage)
 	end, {})
-	local var7 = reactModule.useCallback(function()
-		-- upvalues: safeAppStorageServiceModule (copy), fFlagAXEnhancedAvatarHeadsFtuxUseMemStorage (copy)
-		safeAppStorageServiceModule.setItem("AXEnhancedAvatarHeadsFtux", "true", fFlagAXEnhancedAvatarHeadsFtuxUseMemStorage)
-		safeAppStorageServiceModule.flush()
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 42 ]]
+		-- upvalues: SafeAppStorageServiceModule (upval), FFlagAXEnhancedAvatarHeadsFtuxUseMemStorage (upval)
+		SafeAppStorageServiceModule.setItem("AXEnhancedAvatarHeadsFtux", "true", FFlagAXEnhancedAvatarHeadsFtuxUseMemStorage)
+		SafeAppStorageServiceModule.flush()
 	end, {})
-	local var8 = useIsSpatial()
-	reactModule.useEffect(function()
-		-- upvalues: var8 (ref), var6 (ref), var5 (ref), avatarScreen (copy), fIntAXEnhancedAvatarHeadsFtuxDelay (copy), var2 (ref), var4 (ref), var7 (ref)
-		if var8 then return end
-		if var6() == "true" then return end
-		if var5 == avatarScreen.AvatarEditor then
-			local delayedThread = task.delay(fIntAXEnhancedAvatarHeadsFtuxDelay / 1000, function()
-				-- upvalues: var2 (copy), avatarScreen (copy), var4 (copy), var7 (copy)
-				var2.navigate(avatarScreen.EnhancedAvatarHeadsFtuxPrompt, {
-					screenSize = var4,
-					onConfirm = function()
-						-- upvalues: var7 (copy)
-						var7()
-					end
-				})
-			end)
-			
-			return function()
-				-- upvalues: delayedThread (ref)
-				if delayedThread then
-					task.cancel(delayedThread)
+	local UseIsSpatialResult = UseIsSpatialFunction()
+	ReactModule.useEffect(function() --[[ Line: 50 ]]
+		-- upvalues: UseIsSpatialResult (copy), UseResult (copy), UseMemoResult (copy), AvatarScreen (upval), FIntAXEnhancedAvatarHeadsFtuxDelay (upval), UseNavigationResult (copy), UseSelectorResult (copy), UseResult1 (copy)
+		if UseIsSpatialResult then return end
+		if UseResult() == "true" then return end
+		if UseMemoResult ~= AvatarScreen.AvatarEditor then return end
+		local DelayedThread = task.delay(FIntAXEnhancedAvatarHeadsFtuxDelay / 1000, function() --[[ Line: 65 ]]
+			-- upvalues: UseNavigationResult (upval), AvatarScreen (upval), UseSelectorResult (upval), UseResult1 (upval)
+			UseNavigationResult.navigate(AvatarScreen.EnhancedAvatarHeadsFtuxPrompt, {
+				screenSize = UseSelectorResult,
+				onConfirm = function() --[[ Line: 68 ]]
+					-- upvalues: UseResult1 (upval)
+					UseResult1()
 				end
+			})
+		end)
+		
+		return function() --[[ Line: 74 ]]
+			-- upvalues: DelayedThread (copy)
+			if DelayedThread then
+				task.cancel(DelayedThread)
 			end
 		end
 	end, {
-		var6, var7, var5, var4, var2, var8
+		UseResult, UseResult1, UseMemoResult, UseSelectorResult, UseNavigationResult,
+		UseIsSpatialResult
 	})
 end

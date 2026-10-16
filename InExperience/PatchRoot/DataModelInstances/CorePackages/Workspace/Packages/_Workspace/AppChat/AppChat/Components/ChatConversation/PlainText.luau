@@ -1,22 +1,22 @@
-﻿local textService = game:GetService("TextService")
-local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local chatBubbleContainerModule = require(script.Parent.Bubble.ChatBubbleContainer)
-local reactModule = require(parent.React)
-local getTextSize = require(parent.Style).GetTextSize
-local useStyle = require(parent.UIBlox).Core.Style.useStyle
-local cryoModule = require(parent.Cryo)
-local useTokens = require(parent.Foundation).Hooks.useTokens
-local fFlagAppChatEnableAutotranslationModule = require(appChat.Flags.FFlagAppChatEnableAutotranslation)
-local fFlagAppChatBlueSentBubblesModule = require(appChat.Flags.FFlagAppChatBlueSentBubbles)
-local foundationModule = require(parent.Foundation)
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local view = foundationModule.View
-local text = foundationModule.Text
-local divider = foundationModule.Divider
-local dividerVariant = foundationModule.Enums.DividerVariant
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local t = {
+﻿local TextService = game:GetService("TextService")
+local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local ChatBubbleContainerModule = require(script.Parent.Bubble.ChatBubbleContainer)
+local ReactModule = require(Parent.React)
+local GetTextSizeFunction = require(Parent.Style).GetTextSize
+local UseStyleFunction = require(Parent.UIBlox).Core.Style.useStyle
+local CryoModule = require(Parent.Cryo)
+local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
+local FFlagAppChatEnableAutotranslationModule = require(AppChat.Flags.FFlagAppChatEnableAutotranslation)
+local FFlagAppChatBlueSentBubblesModule = require(AppChat.Flags.FFlagAppChatBlueSentBubbles)
+local FoundationModule = require(Parent.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local Divider = FoundationModule.Divider
+local DividerVariant = FoundationModule.Enums.DividerVariant
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local config = {
 	text = "",
 	maxWidth = 0,
 	innerPadding = 0,
@@ -28,135 +28,135 @@ local t = {
 	isRepliedTo = false,
 	isPressed = false,
 	isLastMessageInMessageGroup = false,
-	[reactModule.Change.AbsoluteSize] = function() end
+	[ReactModule.Change.AbsoluteSize] = function() --[[ Line: 56 ]] end
 }
 
-function PlainText(p1)
-	-- upvalues: cryoModule (ref), t (ref), useTokens (ref), useStyle (ref), foundationFontFaceMigration (ref), getTextSize (ref), textService (ref), fFlagAppChatBlueSentBubblesModule (ref), fFlagAppChatEnableAutotranslationModule (ref), reactModule (ref), normalizeFontFace (ref), chatBubbleContainerModule (ref), view (ref), text (ref), divider (ref), dividerVariant (ref)
-	local var1
-	local var2 = cryoModule.Dictionary.join(t, p1)
-	local var3 = useTokens()
-	local var4 = useStyle()
-	local maxWidth = var2.maxWidth
-	local innerPadding = var2.innerPadding
-	local maxValue = math.max(0, maxWidth - innerPadding)
-	local body = var4.Font.Body
-	local textSize = var2.textSize or var4.Font.BaseSize * body.RelativeSize
-	local text_1 = var2.text
-	local font = var2.font or body.Font
-	local isRepliedTo = var2.isRepliedTo
-	local vector2 = Vector2.new(maxValue, if isRepliedTo then textSize * 3 else 1e999)
-	local var5 = if foundationFontFaceMigration then getTextSize(text_1, textSize, font, vector2, { addTemporaryPadding = false }) else textService:GetTextSize(text_1, textSize, font, vector2)
-	local isRepliedTo_1 = var2.isRepliedTo
-	
-	if not var2.isUnfiltered then
-		var1 = fFlagAppChatBlueSentBubblesModule and not var2.isIncoming
-	end
-	local var6 = if isRepliedTo_1 then var4.Theme.TextDefault.Color elseif var1 then Color3.new(1, 1, 1) elseif var2.isIncoming then var3.Color.Content.Emphasis.Color3 else var3.Color.ActionEmphasis.Foreground.Color3
-	local var7 = if fFlagAppChatEnableAutotranslationModule then reactModule.useMemo(function()
-		-- upvalues: isRepliedTo (ref), textSize (ref)
+function PlainText(p1) --[[ Line: 63 ]]
+	-- upvalues: CryoModule (copy), config (copy), UseTokensFunction (copy), UseStyleFunction (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), TextService (copy), FFlagAppChatBlueSentBubblesModule (copy), FFlagAppChatEnableAutotranslationModule (copy), ReactModule (copy), NormalizeFontFaceFunction (copy), ChatBubbleContainerModule (copy), View (copy), Text (copy), Divider (copy), DividerVariant (copy)
+	local JoinResult = CryoModule.Dictionary.join(config, p1)
+	local UseTokensResult = UseTokensFunction()
+	local UseStyleResult = UseStyleFunction()
+	local MaxWidth: number = JoinResult.maxWidth
+	local InnerPadding: number = JoinResult.innerPadding
+	local Largest = math.max(0, MaxWidth - InnerPadding)
+	local Body = UseStyleResult.Font.Body
+	local TextSize = JoinResult.textSize or UseStyleResult.Font.BaseSize * Body.RelativeSize
+	local Text1 = JoinResult.text
+	local _Font = JoinResult.font or Body.Font
+	local IsRepliedTo = JoinResult.isRepliedTo
+	local _Vector2 = Vector2.new(Largest, if IsRepliedTo then TextSize * 3 else 1e999)
+	local TextSize1 = if FoundationFontFaceMigration then GetTextSizeFunction(Text1, TextSize, _Font, _Vector2, { addTemporaryPadding = false }) else TextService:GetTextSize(Text1, TextSize, _Font, _Vector2)
+	local IsRepliedTo1 = JoinResult.isRepliedTo
+	local NoIsIncoming: boolean = if JoinResult.isUnfiltered then not JoinResult.isIncoming else FFlagAppChatBlueSentBubblesModule and not JoinResult.isIncoming
+	local Color = if IsRepliedTo1 then UseStyleResult.Theme.TextDefault.Color elseif NoIsIncoming then Color3.new(1, 1, 1) elseif JoinResult.isIncoming then UseTokensResult.Color.Content.Emphasis.Color3 else UseTokensResult.Color.ActionEmphasis.Foreground.Color3
+	local UseMemoResult = if FFlagAppChatEnableAutotranslationModule then ReactModule.useMemo(function() --[[ Line: 102 ]]
+		-- upvalues: IsRepliedTo (copy), TextSize (copy)
 		return {
 			MinSize = Vector2.new(0, 0),
-			MaxSize = Vector2.new(1e999, if isRepliedTo then textSize * 3 else 1e999)
+			MaxSize = Vector2.new(1e999, if IsRepliedTo then TextSize * 3 else 1e999)
 		}
-	end, { isRepliedTo, var2.textSize }) else nil
-	local var8 = if fFlagAppChatEnableAutotranslationModule then reactModule.useMemo(function()
-		-- upvalues: maxValue (ref), maxWidth (ref)
+	end, { IsRepliedTo, JoinResult.textSize }) else nil
+	local UseMemoResult1 = if FFlagAppChatEnableAutotranslationModule then ReactModule.useMemo(function() --[[ Line: 110 ]]
+		-- upvalues: Largest (copy), MaxWidth (copy)
 		return {
 			MinSize = Vector2.new(0, 0),
-			MaxSize = Vector2.new(maxValue or maxWidth, 1e999)
+			MaxSize = Vector2.new(Largest or MaxWidth, 1e999)
 		}
-	end, { maxValue, maxWidth }) else nil
+	end, { Largest, MaxWidth }) else nil
 	
-	if fFlagAppChatEnableAutotranslationModule and var2.translatedText then
-		local t_1 = {
-			TextColor3 = var6,
-			Font = if foundationFontFaceMigration then nil else font,
-			FontFace = if foundationFontFaceMigration then normalizeFontFace(font) else nil,
-			TextSize = textSize,
-			TextTransparency = if var2.isPending then var4.Theme.TextMuted.Transparency else 0,
-			sizeConstraint = var7
+	if FFlagAppChatEnableAutotranslationModule and JoinResult.translatedText then
+		local config1 = {
+			TextColor3 = Color,
+			Font = if FoundationFontFaceMigration then nil else _Font,
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(_Font) else nil,
+			TextSize = TextSize,
+			TextTransparency = JoinResult.isPending and UseStyleResult.Theme.TextMuted.Transparency or 0,
+			sizeConstraint = UseMemoResult
 		}
 		
-		return reactModule.createElement(chatBubbleContainerModule, {
-			isIncoming = var2.isIncoming,
-			hasTail = var2.hasTail,
-			isPending = var2.isPending,
-			isUnfiltered = var2.isUnfiltered,
+		return ReactModule.createElement(ChatBubbleContainerModule, {
+			isIncoming = JoinResult.isIncoming,
+			hasTail = JoinResult.hasTail,
+			isPending = JoinResult.isPending,
+			isUnfiltered = JoinResult.isUnfiltered,
 			padding = {
-				top = UDim.new(0, innerPadding),
-				bottom = UDim.new(0, innerPadding),
-				left = UDim.new(0, innerPadding + 2),
-				right = UDim.new(0, innerPadding + 2)
+				top = UDim.new(0, InnerPadding),
+				bottom = UDim.new(0, InnerPadding),
+				left = UDim.new(0, InnerPadding + 2),
+				right = UDim.new(0, InnerPadding + 2)
 			},
-			LayoutOrder = var2.LayoutOrder,
-			isRepliedTo = var2.isRepliedTo,
-			isPressed = var2.isPressed,
-			[reactModule.Change.AbsoluteSize] = var2[reactModule.Change.AbsoluteSize],
-			isLastMessageInMessageGroup = var2.isLastMessageInMessageGroup,
-			bubbleRef = var2.bubbleRef
+			LayoutOrder = JoinResult.LayoutOrder,
+			isRepliedTo = JoinResult.isRepliedTo,
+			isPressed = JoinResult.isPressed,
+			[ReactModule.Change.AbsoluteSize] = JoinResult[ReactModule.Change.AbsoluteSize],
+			isLastMessageInMessageGroup = JoinResult.isLastMessageInMessageGroup,
+			bubbleRef = JoinResult.bubbleRef
 		}, {
-			Wrapper = reactModule.createElement(view, { tag = "auto-xy col gap-xsmall", sizeConstraint = var8 }, {
-				textContent = reactModule.createElement(text, cryoModule.Dictionary.union(t_1, {
+			Wrapper = ReactModule.createElement(View, {
+				tag = "auto-xy col gap-xsmall",
+				sizeConstraint = UseMemoResult1
+			}, {
+				textContent = ReactModule.createElement(Text, CryoModule.Dictionary.union(config1, {
 					LayoutOrder = 1,
-					Text = text_1,
+					Text = Text1,
 					tag = {
 						["text-align-x-left text-align-y-top auto-xy text-wrap content-muted text-body-small"] = true,
-						["text-truncate-end"] = isRepliedTo,
-						["text-truncate-none"] = not isRepliedTo
+						["text-truncate-end"] = IsRepliedTo,
+						["text-truncate-none"] = not IsRepliedTo
 					}
 				})),
-				Divider = reactModule.createElement(view, { tag = "size-0 self-stretch auto-y", LayoutOrder = 2 }, reactModule.createElement(divider, { variant = dividerVariant.Default })),
-				translatedTextContent = reactModule.createElement(text, cryoModule.Dictionary.union(t_1, {
+				Divider = ReactModule.createElement(View, { tag = "size-0 self-stretch auto-y", LayoutOrder = 2 }, ReactModule.createElement(Divider, { variant = DividerVariant.Default })),
+				translatedTextContent = ReactModule.createElement(Text, CryoModule.Dictionary.union(config1, {
 					LayoutOrder = 3,
-					Text = var2.translatedText,
+					Text = JoinResult.translatedText,
 					tag = {
 						["text-align-x-left text-align-y-top auto-xy text-wrap"] = true,
-						["text-truncate-none"] = not isRepliedTo,
-						["text-truncate-end"] = isRepliedTo
+						["text-truncate-none"] = not IsRepliedTo,
+						["text-truncate-end"] = IsRepliedTo
 					}
 				}))
 			})
 		})
-	end
-	return reactModule.createElement(chatBubbleContainerModule, {
-		isIncoming = var2.isIncoming,
-		hasTail = var2.hasTail,
-		isPending = var2.isPending,
-		isUnfiltered = var2.isUnfiltered,
-		padding = {
-			top = UDim.new(0, innerPadding),
-			bottom = UDim.new(0, innerPadding),
-			left = UDim.new(0, innerPadding + 2),
-			right = UDim.new(0, innerPadding + 2)
-		},
-		LayoutOrder = var2.LayoutOrder,
-		isRepliedTo = var2.isRepliedTo,
-		isPressed = var2.isPressed,
-		[reactModule.Change.AbsoluteSize] = var2[reactModule.Change.AbsoluteSize],
-		isLastMessageInMessageGroup = var2.isLastMessageInMessageGroup,
-		bubbleRef = var2.bubbleRef
-	}, {
-		textContent = reactModule.createElement("TextLabel", {
-			BackgroundTransparency = 1,
-			TextWrapped = true,
-			Text = text_1,
-			TextXAlignment = Enum.TextXAlignment.Left,
-			TextColor3 = var6,
-			AutomaticSize = Enum.AutomaticSize.XY,
-			Font = if foundationFontFaceMigration then nil else font,
-			FontFace = if foundationFontFaceMigration then normalizeFontFace(font) else nil,
-			TextSize = textSize,
-			Size = UDim2.fromOffset(math.ceil(var5.X), math.ceil(var5.Y)),
-			TextTransparency = if var2.isPending then var4.Theme.TextMuted.Transparency else 0,
-			TextYAlignment = Enum.TextYAlignment.Top,
-			TextTruncate = if isRepliedTo then Enum.TextTruncate.AtEnd else nil
+	else
+		return ReactModule.createElement(ChatBubbleContainerModule, {
+			isIncoming = JoinResult.isIncoming,
+			hasTail = JoinResult.hasTail,
+			isPending = JoinResult.isPending,
+			isUnfiltered = JoinResult.isUnfiltered,
+			padding = {
+				top = UDim.new(0, InnerPadding),
+				bottom = UDim.new(0, InnerPadding),
+				left = UDim.new(0, InnerPadding + 2),
+				right = UDim.new(0, InnerPadding + 2)
+			},
+			LayoutOrder = JoinResult.LayoutOrder,
+			isRepliedTo = JoinResult.isRepliedTo,
+			isPressed = JoinResult.isPressed,
+			[ReactModule.Change.AbsoluteSize] = JoinResult[ReactModule.Change.AbsoluteSize],
+			isLastMessageInMessageGroup = JoinResult.isLastMessageInMessageGroup,
+			bubbleRef = JoinResult.bubbleRef
 		}, {
-			SizeConstraint = reactModule.createElement("UISizeConstraint", {
-				MaxSize = Vector2.new(maxValue or maxWidth, if isRepliedTo then textSize * 3 else 1e999)
+			textContent = ReactModule.createElement("TextLabel", {
+				BackgroundTransparency = 1,
+				TextWrapped = true,
+				Text = Text1,
+				TextXAlignment = Enum.TextXAlignment.Left,
+				TextColor3 = Color,
+				AutomaticSize = Enum.AutomaticSize.XY,
+				Font = if FoundationFontFaceMigration then nil else _Font,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(_Font) else nil,
+				TextSize = TextSize,
+				Size = UDim2.fromOffset(math.ceil(TextSize1.X), (math.ceil(TextSize1.Y))),
+				TextTransparency = JoinResult.isPending and UseStyleResult.Theme.TextMuted.Transparency or 0,
+				TextYAlignment = Enum.TextYAlignment.Top,
+				TextTruncate = if IsRepliedTo then Enum.TextTruncate.AtEnd else nil
+			}, {
+				SizeConstraint = ReactModule.createElement("UISizeConstraint", {
+					MaxSize = Vector2.new(Largest or MaxWidth, if IsRepliedTo then TextSize * 3 else 1e999)
+				})
 			})
 		})
-	})
+	end
 end
 
 return PlainText

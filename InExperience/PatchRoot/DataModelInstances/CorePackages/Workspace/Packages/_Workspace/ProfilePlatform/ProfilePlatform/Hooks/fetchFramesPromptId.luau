@@ -1,59 +1,60 @@
-﻿local parent = script:FindFirstAncestor("ProfilePlatform").Parent
-local httpService = game:GetService("HttpService")
-local promiseModule = require(parent.Promise)
-local var1 = require(parent.UrlBuilder).UrlBuilder.new({
+﻿local Parent = script:FindFirstAncestor("ProfilePlatform").Parent
+local HttpService = game:GetService("HttpService")
+local PromiseModule = require(Parent.Promise)
+local Url = require(Parent.UrlBuilder).UrlBuilder.new({
 	path = "modals-api/v1/prompts",
-	base = require(parent.UrlBuilder).UrlBase.APIS,
+	base = require(Parent.UrlBuilder).UrlBase.APIS,
 	query = { entryPoint = "SelfUserProfileOpen" }
 })()
 
-return function()
-	-- upvalues: promiseModule (ref), httpService (ref), var1 (ref)
-	return promiseModule.new(function(p1, p2)
-		-- upvalues: httpService (copy), var1 (copy)
-		httpService:RequestInternal({ Method = "GET", Url = var1 }):Start(function(p3, p4)
-			-- upvalues: p2 (ref), httpService (copy), p1 (ref)
-			if not p3 or not p4 or p4.StatusCode ~= 200 then
-				p2()
+return function() --[[ Line: 18 | Named "fetchFramesPromptId" ]]
+	-- upvalues: PromiseModule (copy), HttpService (copy), Url (copy)
+	return PromiseModule.new(function(Callback1, Callback) --[[ Line: 19 ]]
+		-- upvalues: HttpService (upval), Url (upval)
+		HttpService:RequestInternal({ Method = "GET", Url = Url }):Start(function(p1, p2) --[[ Line: 24 ]]
+			-- upvalues: Callback (copy), HttpService (upval), Callback1 (copy)
+			if not p1 or not p2 or p2.StatusCode ~= 200 then
+				Callback()
 				
 				return
 			end
-			local body = p4.Body
+			local Body = p2.Body
 			
-			if typeof(body) == "string" then
-				local ok, status = pcall(function()
-					-- upvalues: httpService (copy), body (write)
-					return httpService:JSONDecode(body)
+			if typeof(Body) == "string" then
+				local Success, Result = pcall(function() --[[ Line: 31 ]]
+					-- upvalues: HttpService (upval), Body (ref)
+					return HttpService:JSONDecode(Body)
 				end)
 				
-				if not ok then
-					p2()
+				if not Success then
+					Callback()
 					
 					return
 				end
-				body = status
+				Body = Result
 			end
-			local pageEntries = body and (body.pageEntries or body.page_entries)
+			local PageEntries = Body and (Body.pageEntries or Body.page_entries)
 			
-			if not pageEntries then
-				p2()
+			if not PageEntries then
+				Callback()
 				
 				return
 			end
-			for i, v in pageEntries do
-				local pageEntry = v.pageEntry or v.page_entry
+			local Identifier = nil
+			for _, pageEntry in PageEntries do
+				local PageEntry = pageEntry.pageEntry or pageEntry.page_entry
 				
-				if (pageEntry and (pageEntry.robloxComponent or pageEntry.roblox_component)) == "ProfileCompletionCardCarousel" then
-					local identifier = pageEntry.identifier
+				if (PageEntry and (PageEntry.robloxComponent or PageEntry.roblox_component)) == "ProfileCompletionCardCarousel" then
+					Identifier = PageEntry.identifier
 					
-					if identifier and identifier ~= "" then
-						p1(identifier)
+					if Identifier and Identifier ~= "" then
+						Callback1(Identifier)
 						
 						return
 					end
 				end
 			end
-			p2()
+			Callback()
 		end)
 	end)
 end

@@ -1,48 +1,53 @@
-﻿local gameCollections = script:FindFirstAncestor("GameCollections")
-local useNavigateToSeeAllModule = require(gameCollections.useNavigateToSeeAll)
-local useNavigateToSortLinkWebViewModule = require(gameCollections.useNavigateToSortLinkWebView)
-local parent = gameCollections.Parent
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local _ = require(parent.DiscoveryTypes)
-local fFlagLuaAppHeaderButtonText = require(parent.SharedFlags).FFlagLuaAppHeaderButtonText
+﻿local GameCollections = script:FindFirstAncestor("GameCollections")
+local UseNavigateToSeeAllModule = require(GameCollections.useNavigateToSeeAll)
+local UseNavigateToSortLinkWebViewModule = require(GameCollections.useNavigateToSortLinkWebView)
+local Parent = GameCollections.Parent
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local _ = require(Parent.DiscoveryTypes)
+local FFlagLuaAppHeaderButtonText = require(Parent.SharedFlags).FFlagLuaAppHeaderButtonText
 
-return function(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11)
-	-- upvalues: useNavigateToSeeAllModule (ref), reactModule (ref), useNavigateToSortLinkWebViewModule (ref), useLocalization (ref), fFlagLuaAppHeaderButtonText (ref)
-	local var1 = useNavigateToSeeAllModule(p2, p3, p4, p5, p6, p7)
-	local var2 = useNavigateToSortLinkWebViewModule()
-	local var3 = if p8 then reactModule.useCallback(function()
-		-- upvalues: p2 (ref), p3 (ref), p8 (ref), var2 (ref), p7 (ref)
-		local var4 = if p2 then if p3 then p2.topicId else p2.gameSetTypeId else nil
+return function(Callback1, p1, p2, p3, p4, p5, p6, p7, p8, p9, Callback) --[[ Line: 15 | Named "useGameSortHeaderButtonParams" ]]
+	-- upvalues: UseNavigateToSeeAllModule (copy), ReactModule (copy), UseNavigateToSortLinkWebViewModule (copy), UseLocalizationFunction (copy), FFlagLuaAppHeaderButtonText (copy)
+	local UseNavigateToSeeAllModuleResult = UseNavigateToSeeAllModule(p1, p2, p3, p4, p5, p6)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 29 ]]
+		-- upvalues: UseNavigateToSeeAllModuleResult (copy), Callback1 (copy)
+		UseNavigateToSeeAllModuleResult()
+		Callback1()
+	end, { UseNavigateToSeeAllModuleResult, Callback1 })
+	local UseNavigateToSortLinkWebViewModuleResult = UseNavigateToSortLinkWebViewModule()
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 35 ]]
+		-- upvalues: p1 (copy), p2 (copy), p7 (copy), UseNavigateToSortLinkWebViewModuleResult (copy), p6 (copy)
+		local TopicId = if p1 then if p2 then p1.topicId else p1.gameSetTypeId else nil
 		
-		if p8 then
-			var2(p8, p7, if p2 then p2.displayName else "", var4)
+		if p7 then
+			UseNavigateToSortLinkWebViewModuleResult(p7, p6, p1 and p1.displayName or "", TopicId)
 		end
 	end, {
-		var2,
-		p8,
+		UseNavigateToSortLinkWebViewModuleResult,
 		p7,
-		p2,
-		p3
-	}) else reactModule.useCallback(function()
-		-- upvalues: var1 (ref), p1 (ref)
-		var1()
-		p1()
-	end, { var1, p1 })
+		p6,
+		p1,
+		p2
+	})
+	local Callback2 = if p7 then UseResult1 else UseResult
+	local UseLocalizationResult = UseLocalizationFunction({ learnMore = "Feature.GameDetails.Label.LearnMore" })
 	
-	return var3, if fFlagLuaAppHeaderButtonText and p10 then p10 elseif p8 then useLocalization({ learnMore = "Feature.GameDetails.Label.LearnMore" }).learnMore else nil, reactModule.useCallback(function()
-		-- upvalues: p11 (ref), p2 (ref), p9 (ref), p3 (ref), var2 (ref), p7 (ref), var3 (ref)
-		if p11 then
-			p11()
-			
-			return
-		elseif p2 and p9 then
-			var2(p9, p7, if p2 then p2.displayName else "", if p3 then p2.topicId else p2.gameSetTypeId)
+	return Callback2, if FFlagLuaAppHeaderButtonText and p9 then p9 elseif p7 then UseLocalizationResult.learnMore else nil, (ReactModule.useCallback(function() --[[ Line: 57 ]]
+		-- upvalues: Callback (copy), p1 (copy), p8 (copy), p2 (copy), UseNavigateToSortLinkWebViewModuleResult (copy), p6 (copy), Callback2 (copy)
+		if Callback then
+			Callback()
 			
 			return
 		end
-		var3()
+		if p1 and p8 then
+			UseNavigateToSortLinkWebViewModuleResult(p8, p6, p1 and p1.displayName or "", if p2 then p1.topicId else p1.gameSetTypeId)
+			
+			return
+		else
+			Callback2()
+		end
 	end, {
-		var2, p9, p7, p2, p3, var3, p11
-	})
+		UseNavigateToSortLinkWebViewModuleResult, p8, p6, p1, p2, Callback2, Callback
+	}))
 end

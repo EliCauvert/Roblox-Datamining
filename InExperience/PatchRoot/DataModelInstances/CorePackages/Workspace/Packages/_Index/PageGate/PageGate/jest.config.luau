@@ -1,9 +1,9 @@
-﻿local jestConfigsModule = require(script.Parent.Parent.Dev.JestConfigs)
+﻿local JestConfigsModule = require(script.Parent.Parent.Dev.JestConfigs)
 
 return {
 	displayName = "PageGate",
 	setupFilesAfterEnv = {
-		jestConfigsModule.setupFiles.LogHandler,
-		jestConfigsModule.setupFiles.createPromiseRejectionHandler()
+		JestConfigsModule.setupFiles.LogHandler,
+		JestConfigsModule.setupFiles.createPromiseRejectionHandler()
 	}
 }

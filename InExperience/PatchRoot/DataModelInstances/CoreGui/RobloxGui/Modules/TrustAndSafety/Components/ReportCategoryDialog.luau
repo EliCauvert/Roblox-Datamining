@@ -1,95 +1,94 @@
 ﻿local _ = game:GetService("ContextActionService")
-local corePackagesService = game:GetService("CorePackages")
+local CorePackages = game:GetService("CorePackages")
 local _ = game:GetService("GuiService")
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local tModule = require(corePackagesService.Packages.t)
-local cryoModule = require(corePackagesService.Packages.Cryo)
-local signalsModule = require(corePackagesService.Packages.Signals)
-local displayModule = require(corePackagesService.Workspace.Packages.Display)
-local parent = script.Parent.Parent
-local dependenciesModule = require(parent.Dependencies)
-local _ = require(dependenciesModule.FocusHandler)
-local playerInterfaceModule = require(dependenciesModule.playerInterface)
-local themedTextLabelModule = require(dependenciesModule.ThemedTextLabel)
-local withLocalizationModule = require(dependenciesModule.withLocalization)
-local robloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
-local withVoiceState = require(robloxGui.Modules.VoiceChat.VoiceStateContext).withVoiceState
-local default = require(robloxGui.Modules.VoiceChat.VoiceChatServiceManager).default
-local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
-local gameIconModule = require(dependenciesModule.GameIcon)
-local _ = require(parent.Components.BlockPlayerItem)
-local endReportFlowModule = require(parent.Actions.EndReportFlow)
-local _ = require(parent.Actions.OpenBlockPlayerDialog)
-local selectReportCategoryModule = require(parent.Actions.SelectReportCategory)
-local sendAnalyticsModule = require(parent.Utility.SendAnalytics)
-local sessionUtilityModule = require(parent.Utility.SessionUtility)
-local constantsModule = require(parent.Resources.Constants)
-local modalDialogModule = require(parent.Components.ModalDialog)
-local assetsModule = require(parent.Resources.Assets)
-local _ = require(parent.Components.GameCell)
-local barOnTopScrollingFrameModule = require(dependenciesModule.BarOnTopScrollingFrame)
-local cell = UIBloxModule.App.Table.Cell
-local provider = UIBloxModule.Core.Style.Provider
-local withStyle = UIBloxModule.Core.Style.withStyle
-local colors = UIBloxModule.App.Style.Colors
-local fFlagTopBarSignalizeScreenSize = require(corePackagesService.Workspace.Packages.CoreGuiCommon).Flags.FFlagTopBarSignalizeScreenSize
-local t = {
-	BackgroundDefault = { Transparency = 1, Color = colors.Flint },
-	BackgroundOnHover = { Transparency = 0.666, Color = colors.Graphite },
-	BackgroundOnPress = { Transparency = 0, Color = colors.Graphite }
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local UIBloxModule = require(CorePackages.Packages.UIBlox)
+local TModule = require(CorePackages.Packages.t)
+local CryoModule = require(CorePackages.Packages.Cryo)
+local SignalsModule = require(CorePackages.Packages.Signals)
+local DisplayModule = require(CorePackages.Workspace.Packages.Display)
+local Parent = script.Parent.Parent
+local DependenciesModule = require(Parent.Dependencies)
+local _ = require(DependenciesModule.FocusHandler)
+local ThemedTextLabelModule = require(DependenciesModule.ThemedTextLabel)
+local WithLocalizationModule = require(DependenciesModule.withLocalization)
+local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
+local WithVoiceStateFunction = require(RobloxGui.Modules.VoiceChat.VoiceStateContext).withVoiceState
+local Default = require(RobloxGui.Modules.VoiceChat.VoiceChatServiceManager).default
+local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
+local GameIconModule = require(DependenciesModule.GameIcon)
+local _ = require(Parent.Components.BlockPlayerItem)
+local EndReportFlowModule = require(Parent.Actions.EndReportFlow)
+local _ = require(Parent.Actions.OpenBlockPlayerDialog)
+local SelectReportCategoryModule = require(Parent.Actions.SelectReportCategory)
+local SendAnalyticsModule = require(Parent.Utility.SendAnalytics)
+local SessionUtilityModule = require(Parent.Utility.SessionUtility)
+local ConstantsModule = require(Parent.Resources.Constants)
+local ModalDialogModule = require(Parent.Components.ModalDialog)
+local AssetsModule = require(Parent.Resources.Assets)
+local _ = require(Parent.Components.GameCell)
+local BarOnTopScrollingFrameModule = require(DependenciesModule.BarOnTopScrollingFrame)
+local Cell = UIBloxModule.App.Table.Cell
+local Provider = UIBloxModule.Core.Style.Provider
+local WithStyleFunction = UIBloxModule.Core.Style.withStyle
+local Colors = UIBloxModule.App.Style.Colors
+local FFlagTopBarSignalizeScreenSize = require(CorePackages.Workspace.Packages.CoreGuiCommon).Flags.FFlagTopBarSignalizeScreenSize
+local config = {
+	BackgroundDefault = { Transparency = 1, Color = Colors.Flint },
+	BackgroundOnHover = { Transparency = 0.666, Color = Colors.Graphite },
+	BackgroundOnPress = { Transparency = 0, Color = Colors.Graphite }
 }
 
-local function Divider(p1)
-	-- upvalues: roactModule (ref), cryoModule (ref), colors (ref)
-	return roactModule.createElement("Frame", cryoModule.Dictionary.join({ Size = UDim2.new(1, 0, 0, 1) }, p1, {
+local function Divider(p1) --[[ Line: 68 ]]
+	-- upvalues: RoactModule (copy), CryoModule (copy), Colors (copy)
+	return RoactModule.createElement("Frame", CryoModule.Dictionary.join({ Size = UDim2.new(1, 0, 0, 1) }, p1, {
 		BorderSizePixel = 0,
 		BackgroundTransparency = 0.5,
-		BackgroundColor3 = colors.Graphite,
-		theme = cryoModule.None
+		BackgroundColor3 = Colors.Graphite,
+		theme = CryoModule.None
 	}))
 end
 
-local function CategoryCellContent(p1)
-	-- upvalues: roactModule (ref), imageSetLabel (ref), themedTextLabelModule (ref)
-	return roactModule.createElement("Frame", {
+local function CategoryCellContent(p1) --[[ Line: 86 ]]
+	-- upvalues: RoactModule (copy), ImageSetLabel (copy), ThemedTextLabelModule (copy)
+	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.new(1, 0, 0, 72),
 		AutomaticSize = Enum.AutomaticSize.XY
 	}, {
-		ListLayout = roactModule.createElement("UIListLayout", {
+		ListLayout = RoactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Horizontal,
 			SortOrder = Enum.SortOrder.LayoutOrder
 		}),
-		IconFrame = roactModule.createElement("Frame", {
+		IconFrame = RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 1,
 			Size = UDim2.new(0, 68, 1, 0)
 		}, {
-			Layout = roactModule.createElement("UIListLayout", {
+			Layout = RoactModule.createElement("UIListLayout", {
 				HorizontalAlignment = Enum.HorizontalAlignment.Left,
 				VerticalAlignment = Enum.VerticalAlignment.Center
 			}),
 			CustomIcon = p1.iconComponent or nil,
-			Icon = p1.icon and roactModule.createElement(imageSetLabel, {
+			Icon = p1.icon and RoactModule.createElement(ImageSetLabel, {
 				BackgroundTransparency = 1,
 				Image = p1.icon.Image,
 				Size = p1.icon.Size
 			})
 		}),
-		TextFrame = roactModule.createElement("Frame", {
+		TextFrame = RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 2,
 			Size = UDim2.new(1, -68, 1, 0)
 		}, {
-			ListLayout = roactModule.createElement("UIListLayout", {
+			ListLayout = RoactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Vertical,
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				VerticalAlignment = Enum.VerticalAlignment.Center,
 				Padding = UDim.new(0, 2)
 			}),
-			Text = roactModule.createElement(themedTextLabelModule, {
+			Text = RoactModule.createElement(ThemedTextLabelModule, {
 				themeKey = "TextEmphasis",
 				fontKey = "Header2",
 				AnchorPoint = Vector2.new(0, 0.5),
@@ -98,7 +97,7 @@ local function CategoryCellContent(p1)
 				TextTruncate = Enum.TextTruncate.AtEnd,
 				TextXAlignment = Enum.TextXAlignment.Left
 			}),
-			SubText = roactModule.createElement(themedTextLabelModule, {
+			SubText = RoactModule.createElement(ThemedTextLabelModule, {
 				fontKey = "CaptionBody",
 				themeKey = "TextMuted",
 				AnchorPoint = Vector2.new(0, 0.5),
@@ -111,148 +110,150 @@ local function CategoryCellContent(p1)
 	})
 end
 
-local function CategoryCell(p1)
-	-- upvalues: roactModule (ref), cell (ref), CategoryCellContent (ref)
-	return roactModule.createElement(cell, {
+local function CategoryCell(p1) --[[ Line: 145 ]]
+	-- upvalues: RoactModule (copy), Cell (copy), CategoryCellContent (copy)
+	return RoactModule.createElement(Cell, {
 		userInteractionEnabled = true,
 		onActivated = p1.onActivated,
 		layoutOrder = p1.layoutOrder,
 		size = UDim2.new(1, 0, 0, 72),
 		head = CategoryCellContent(p1),
-		tail = roactModule.createElement("Frame")
+		tail = RoactModule.createElement("Frame")
 	})
 end
 
-local reportCategoryDialog = roactModule.PureComponent:extend("ReportCategoryDialog")
-reportCategoryDialog.validateProps = tModule.strictInterface({
-	isReportCategoryMenuOpen = tModule.boolean,
-	screenSize = if fFlagTopBarSignalizeScreenSize then nil else tModule.Vector2,
-	inputType = tModule.optional(tModule.string),
-	reportType = tModule.optional(tModule.valueOf(constantsModule.ReportType)),
-	targetPlayer = tModule.optional(playerInterfaceModule),
-	closeDialog = tModule.callback,
-	selectReportCategory = tModule.optional(tModule.callback),
-	playerFocusedFlow = tModule.boolean
+local ReportCategoryDialog = RoactModule.PureComponent:extend("ReportCategoryDialog")
+ReportCategoryDialog.validateProps = TModule.strictInterface({
+	isReportCategoryMenuOpen = TModule.boolean,
+	screenSize = if FFlagTopBarSignalizeScreenSize then nil else TModule.Vector2,
+	inputType = TModule.optional(TModule.string),
+	reportType = TModule.optional(TModule.valueOf(ConstantsModule.ReportType)),
+	targetPlayer = TModule.optional((require(DependenciesModule.playerInterface))),
+	closeDialog = TModule.callback,
+	selectReportCategory = TModule.optional(TModule.callback),
+	playerFocusedFlow = TModule.boolean
 })
 
-function reportCategoryDialog.init(p1)
-	-- upvalues: roactModule (ref), fFlagTopBarSignalizeScreenSize (ref), displayModule (ref), signalsModule (ref)
-	p1.buttonRef = roactModule.createRef()
+function ReportCategoryDialog.init(p1) --[[ Line: 169 ]]
+	-- upvalues: RoactModule (copy), FFlagTopBarSignalizeScreenSize (copy), DisplayModule (copy), SignalsModule (copy)
+	p1.buttonRef = RoactModule.createRef()
 	
-	function p3.onCancel()
-		-- upvalues: p1 (ref)
+	function p1.onCancel() --[[ Line: 172 ]]
+		-- upvalues: p1 (copy)
 		p1.props.closeDialog()
 	end
 	
-	if fFlagTopBarSignalizeScreenSize then
-		local getViewportSize = displayModule.GetDisplayStore(false).getViewportSize
-		p1.disposeScreenSize = signalsModule.createEffect(function(p2)
-			-- upvalues: p1 (ref), getViewportSize (ref)
-			p1:setState({ screenSize = getViewportSize(p2) })
+	if FFlagTopBarSignalizeScreenSize then
+		local GetViewportSizeFunction = DisplayModule.GetDisplayStore(false).getViewportSize
+		p1.disposeScreenSize = SignalsModule.createEffect(function(p2) --[[ Line: 179 ]]
+			-- upvalues: p1 (copy), GetViewportSizeFunction (copy)
+			p1:setState({ screenSize = GetViewportSizeFunction(p2) })
 		end)
 	end
 end
 
-function reportCategoryDialog.willUnmount(p1)
-	-- upvalues: fFlagTopBarSignalizeScreenSize (ref)
-	if fFlagTopBarSignalizeScreenSize then
+function ReportCategoryDialog.willUnmount(p1) --[[ Line: 187 ]]
+	-- upvalues: FFlagTopBarSignalizeScreenSize (copy)
+	if FFlagTopBarSignalizeScreenSize then
 		p1.disposeScreenSize()
 	end
 end
 
-function reportCategoryDialog.renderContents(p1, p2, p3)
-	-- upvalues: roactModule (ref), default (ref), cryoModule (ref), CategoryCell (ref), assetsModule (ref), constantsModule (ref), Divider (ref), gameIconModule (ref), withStyle (ref), t (ref), provider (ref), barOnTopScrollingFrameModule (ref)
+function ReportCategoryDialog.renderContents(p1, VoiceEnabled, p2) --[[ Line: 193 ]]
+	-- upvalues: RoactModule (copy), Default (copy), CryoModule (copy), CategoryCell (copy), AssetsModule (copy), ConstantsModule (copy), Divider (copy), GameIconModule (copy), WithStyleFunction (copy), config (copy), Provider (copy), BarOnTopScrollingFrameModule (copy)
 	local _ = p1.props
-	local t_1 = {
-		ListLayout = roactModule.createElement("UIListLayout", {
+	local Elements = {
+		ListLayout = RoactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
 			SortOrder = Enum.SortOrder.LayoutOrder
 		})
 	}
-	local var1 = p2
+	local Flag: boolean = VoiceEnabled
 	
-	if p2 then
-		local recentUsersInteractionData = default:getRecentUsersInteractionData()
+	if VoiceEnabled then
+		local RecentUsersInteractionData = Default:getRecentUsersInteractionData()
 		
-		if not recentUsersInteractionData or cryoModule.isEmpty(recentUsersInteractionData) then
-			var1 = false
-		elseif p1.props.playerFocusedFlow then
-			var1 = p1.props.targetPlayer and recentUsersInteractionData[tostring(p1.props.targetPlayer.UserId)] ~= nil
+		if RecentUsersInteractionData and not CryoModule.isEmpty(RecentUsersInteractionData) then
+			if p1.props.playerFocusedFlow then
+				Flag = p1.props.targetPlayer and RecentUsersInteractionData[tostring(p1.props.targetPlayer.UserId)] ~= nil
+			end
+		else
+			Flag = false
 		end
 	end
-	if var1 then
-		table.insert(t_1, roactModule.createElement(CategoryCell, {
-			text = p3.voiceHeader,
-			subtext = p3.voiceDescription,
-			icon = assetsModule.Images.VoiceChatIcon,
-			layoutOrder = #t_1 + 1,
-			onActivated = function()
-				-- upvalues: p1 (ref), constantsModule (copy)
-				p1.props.selectReportCategory(constantsModule.Category.Voice)
+	if Flag then
+		table.insert(Elements, RoactModule.createElement(CategoryCell, {
+			text = p2.voiceHeader,
+			subtext = p2.voiceDescription,
+			icon = AssetsModule.Images.VoiceChatIcon,
+			layoutOrder = #Elements + 1,
+			onActivated = function() --[[ Line: 227 ]]
+				-- upvalues: p1 (copy), ConstantsModule (upval)
+				p1.props.selectReportCategory(ConstantsModule.Category.Voice)
 			end
 		}))
-		table.insert(t_1, roactModule.createElement(Divider, { LayoutOrder = #t_1 + 1 }))
+		table.insert(Elements, RoactModule.createElement(Divider, { LayoutOrder = #Elements + 1 }))
 	end
-	table.insert(t_1, roactModule.createElement(CategoryCell, {
-		text = p3.textHeader,
-		subtext = p3.textDescription,
-		icon = assetsModule.Images.TextChatIcon,
-		layoutOrder = #t_1 + 1,
-		onActivated = function()
-			-- upvalues: p1 (ref), constantsModule (copy)
-			p1.props.selectReportCategory(constantsModule.Category.Text)
+	table.insert(Elements, RoactModule.createElement(CategoryCell, {
+		text = p2.textHeader,
+		subtext = p2.textDescription,
+		icon = AssetsModule.Images.TextChatIcon,
+		layoutOrder = #Elements + 1,
+		onActivated = function() --[[ Line: 247 ]]
+			-- upvalues: p1 (copy), ConstantsModule (upval)
+			p1.props.selectReportCategory(ConstantsModule.Category.Text)
 		end
 	}))
-	table.insert(t_1, roactModule.createElement(Divider, { LayoutOrder = #t_1 + 1 }))
+	table.insert(Elements, RoactModule.createElement(Divider, { LayoutOrder = #Elements + 1 }))
 	
 	if not p1.props.playerFocusedFlow then
-		table.insert(t_1, roactModule.createElement(CategoryCell, {
-			iconComponent = roactModule.createElement(gameIconModule, {
+		table.insert(Elements, RoactModule.createElement(CategoryCell, {
+			iconComponent = RoactModule.createElement(GameIconModule, {
 				iconSize = 33,
 				gameId = game.GameId,
 				cornerRadius = UDim.new(0, 8)
 			}),
-			text = p3.experienceHeader,
-			subtext = p3.experienceDescription,
-			layoutOrder = #t_1 + 1,
-			onActivated = function()
-				-- upvalues: p1 (ref), constantsModule (copy)
-				p1.props.selectReportCategory(constantsModule.Category.Experience)
+			text = p2.experienceHeader,
+			subtext = p2.experienceDescription,
+			layoutOrder = #Elements + 1,
+			onActivated = function() --[[ Line: 271 ]]
+				-- upvalues: p1 (copy), ConstantsModule (upval)
+				p1.props.selectReportCategory(ConstantsModule.Category.Experience)
 			end
 		}))
-		table.insert(t_1, roactModule.createElement(Divider, { LayoutOrder = #t_1 + 1 }))
+		table.insert(Elements, RoactModule.createElement(Divider, { LayoutOrder = #Elements + 1 }))
 	end
-	table.insert(t_1, roactModule.createElement(CategoryCell, {
-		text = p3.otherHeader,
-		subtext = p3.otherDescription,
-		icon = assetsModule.Images.OtherIcon,
-		layoutOrder = #t_1 + 1,
-		onActivated = function()
-			-- upvalues: p1 (ref), constantsModule (copy)
-			p1.props.selectReportCategory(constantsModule.Category.Other)
+	table.insert(Elements, RoactModule.createElement(CategoryCell, {
+		text = p2.otherHeader,
+		subtext = p2.otherDescription,
+		icon = AssetsModule.Images.OtherIcon,
+		layoutOrder = #Elements + 1,
+		onActivated = function() --[[ Line: 292 ]]
+			-- upvalues: p1 (copy), ConstantsModule (upval)
+			p1.props.selectReportCategory(ConstantsModule.Category.Other)
 		end
 	}))
-	table.insert(t_1, roactModule.createElement(Divider, { LayoutOrder = #t_1 + 1 }))
+	table.insert(Elements, RoactModule.createElement(Divider, { LayoutOrder = #Elements + 1 }))
 	
-	return withStyle(function(p4)
-		-- upvalues: cryoModule (copy), t (copy), roactModule (copy), provider (copy), barOnTopScrollingFrameModule (copy), p1 (ref), t_1 (ref)
-		return roactModule.createElement(provider, {
-			style = cryoModule.Dictionary.join(p4, { Theme = cryoModule.Dictionary.join(p4.Theme, t) })
+	return WithStyleFunction(function(p3) --[[ Line: 305 ]]
+		-- upvalues: CryoModule (upval), config (upval), RoactModule (upval), Provider (upval), BarOnTopScrollingFrameModule (upval), p1 (copy), Elements (copy)
+		return RoactModule.createElement(Provider, {
+			style = CryoModule.Dictionary.join(p3, { Theme = CryoModule.Dictionary.join(p3.Theme, config) })
 		}, {
-			roactModule.createElement(barOnTopScrollingFrameModule, {
+			RoactModule.createElement(BarOnTopScrollingFrameModule, {
 				Size = UDim2.fromScale(1, 1),
 				CanvasSize = UDim2.new(1, 0, 0, 72),
 				scrollingFrameRef = p1.scrollingFrameRef
-			}, t_1)
+			}, Elements)
 		})
 	end)
 end
 
-function reportCategoryDialog.render(p1)
-	-- upvalues: withVoiceState (ref), withLocalizationModule (ref), roactModule (ref), modalDialogModule (ref), fFlagTopBarSignalizeScreenSize (ref)
-	return withVoiceState(function(p2)
-		-- upvalues: withLocalizationModule (copy), roactModule (copy), modalDialogModule (copy), p1 (ref), fFlagTopBarSignalizeScreenSize (copy)
-		return withLocalizationModule({
+function ReportCategoryDialog.render(p1) --[[ Line: 322 ]]
+	-- upvalues: WithVoiceStateFunction (copy), WithLocalizationModule (copy), RoactModule (copy), ModalDialogModule (copy), FFlagTopBarSignalizeScreenSize (copy)
+	return WithVoiceStateFunction(function(p2) --[[ Line: 323 ]]
+		-- upvalues: WithLocalizationModule (upval), RoactModule (upval), ModalDialogModule (upval), p1 (copy), FFlagTopBarSignalizeScreenSize (upval)
+		return WithLocalizationModule({
 			titleText = "CoreScripts.InGameMenu.Report.MenuTitle",
 			dismissText = "CoreScripts.InGameMenu.Report.Done",
 			voiceHeader = "CoreScripts.InGameMenu.Report.Category.Header.Voice",
@@ -263,13 +264,13 @@ function reportCategoryDialog.render(p1)
 			experienceDescription = "CoreScripts.InGameMenu.Report.Category.Description.Experience",
 			otherHeader = "CoreScripts.InGameMenu.Report.Category.Header.Other",
 			otherDescription = "CoreScripts.InGameMenu.Report.Category.Description.Other"
-		})(function(p3)
-			-- upvalues: roactModule (copy), modalDialogModule (copy), p1 (copy), fFlagTopBarSignalizeScreenSize (copy), p2 (ref)
-			return roactModule.createFragment({
-				ModalDialog = roactModule.createElement(modalDialogModule, {
+		})(function(p3) --[[ Line: 335 ]]
+			-- upvalues: RoactModule (upval), ModalDialogModule (upval), p1 (upval), FFlagTopBarSignalizeScreenSize (upval), p2 (copy)
+			return RoactModule.createFragment({
+				ModalDialog = RoactModule.createElement(ModalDialogModule, {
 					showCloseButton = true,
 					visible = p1.props.isReportCategoryMenuOpen,
-					screenSize = if fFlagTopBarSignalizeScreenSize then p1.state.screenSize else p1.props.screenSize,
+					screenSize = if FFlagTopBarSignalizeScreenSize then p1.state.screenSize else p1.props.screenSize,
 					titleText = p3.titleText,
 					contents = p1:renderContents(p2.voiceEnabled, p3),
 					onDismiss = p1.onCancel
@@ -279,27 +280,27 @@ function reportCategoryDialog.render(p1)
 	end)
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p1, _)
-	-- upvalues: constantsModule (ref), fFlagTopBarSignalizeScreenSize (ref)
+return RoactRoduxModule.UNSTABLE_connect2(function(p1, _) --[[ Line: 350 ]]
+	-- upvalues: ConstantsModule (copy), FFlagTopBarSignalizeScreenSize (copy)
 	return {
-		isReportCategoryMenuOpen = p1.report.currentPage == constantsModule.Page.Category,
+		isReportCategoryMenuOpen = p1.report.currentPage == ConstantsModule.Page.Category,
 		reportType = p1.report.reportType,
 		targetPlayer = p1.report.targetPlayer,
-		screenSize = if fFlagTopBarSignalizeScreenSize then nil else p1.displayOptions.screenSize,
-		playerFocusedFlow = p1.report.beginningReportType == constantsModule.ReportType.Player
+		screenSize = if FFlagTopBarSignalizeScreenSize then nil else p1.displayOptions.screenSize,
+		playerFocusedFlow = p1.report.beginningReportType == ConstantsModule.ReportType.Player
 	}
-end, function(p1)
-	-- upvalues: selectReportCategoryModule (ref), endReportFlowModule (ref), sendAnalyticsModule (ref), constantsModule (ref), sessionUtilityModule (ref)
+end, function(Callback) --[[ Line: 359 ]]
+	-- upvalues: SelectReportCategoryModule (copy), EndReportFlowModule (copy), SendAnalyticsModule (copy), ConstantsModule (copy), SessionUtilityModule (copy)
 	return {
-		selectReportCategory = function(p2)
-			-- upvalues: p1 (ref), selectReportCategoryModule (copy)
-			p1(selectReportCategoryModule(p2))
+		selectReportCategory = function(p1) --[[ Line: 361 ]]
+			-- upvalues: Callback (copy), SelectReportCategoryModule (upval)
+			Callback(SelectReportCategoryModule(p1))
 		end,
-		closeDialog = function()
-			-- upvalues: p1 (ref), endReportFlowModule (copy), sendAnalyticsModule (copy), constantsModule (copy), sessionUtilityModule (copy)
-			p1(endReportFlowModule())
-			sendAnalyticsModule(constantsModule.Analytics.ReportType, constantsModule.Analytics.ReportFlowAbandoned, { source = constantsModule.Analytics.ReportType })
-			sessionUtilityModule.endAbuseReportSession()
+		closeDialog = function() --[[ Line: 364 ]]
+			-- upvalues: Callback (copy), EndReportFlowModule (upval), SendAnalyticsModule (upval), ConstantsModule (upval), SessionUtilityModule (upval)
+			Callback(EndReportFlowModule())
+			SendAnalyticsModule(ConstantsModule.Analytics.ReportType, ConstantsModule.Analytics.ReportFlowAbandoned, { source = ConstantsModule.Analytics.ReportType })
+			SessionUtilityModule.endAbuseReportSession()
 		end
 	}
-end)(reportCategoryDialog)
+end)(ReportCategoryDialog)

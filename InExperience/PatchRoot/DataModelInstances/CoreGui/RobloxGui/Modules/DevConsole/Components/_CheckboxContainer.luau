@@ -1,32 +1,32 @@
-﻿local textService = game:GetService("TextService")
-local roactModule = require(game:GetService("CorePackages").Packages.Roact)
-local components = script.Parent.Parent.Components
-local checkboxModule = require(components._Checkbox)
-local checkboxDropdownModule = require(components._CheckboxDropdown)
-local constantsModule = require(script.Parent.Parent.Constants)
-local checkboxHeight = constantsModule.UtilityBarFormatting.CheckboxHeight
-local var1 = constantsModule.UtilityBarFormatting.CheckboxInnerPadding * 2
-local filterUnfilled = constantsModule.Image.FilterUnfilled
-local filterFilled = constantsModule.Image.FilterFilled
-local checkboxContainer = roactModule.PureComponent:extend("CheckboxContainer")
+﻿local TextService = game:GetService("TextService")
+local RoactModule = require(game:GetService("CorePackages").Packages.Roact)
+local Components = script.Parent.Parent.Components
+local CheckboxModule = require(Components._Checkbox)
+local CheckboxDropdownModule = require(Components._CheckboxDropdown)
+local ConstantsModule = require(script.Parent.Parent.Constants)
+local CheckboxHeight = ConstantsModule.UtilityBarFormatting.CheckboxHeight
+local ScaledCheckboxInnerPadding = ConstantsModule.UtilityBarFormatting.CheckboxInnerPadding * 2
+local FilterUnfilled = ConstantsModule.Image.FilterUnfilled
+local FilterFilled = ConstantsModule.Image.FilterFilled
+local CheckboxContainer = RoactModule.PureComponent:extend("CheckboxContainer")
 
-function checkboxContainer.init(p1)
-	-- upvalues: textService (ref), constantsModule (ref), checkboxHeight (ref), var1 (ref), roactModule (ref)
-	function p0.onCheckboxClicked(p2, p3)
-		-- upvalues: p1 (ref)
+function CheckboxContainer.init(p1) --[[ Line: 20 ]]
+	-- upvalues: TextService (copy), ConstantsModule (copy), CheckboxHeight (copy), ScaledCheckboxInnerPadding (copy), RoactModule (copy)
+	function p1.onCheckboxClicked(p2, p3) --[[ Line: 21 ]]
+		-- upvalues: p1 (copy)
 		p1.props.onCheckboxChanged(p2, p3)
 	end
 	
-	function p0.onCheckboxExpanded(_, p2)
-		-- upvalues: p1 (ref)
-		if p2.UserInputType == Enum.UserInputType.MouseButton1 or p2.UserInputType == Enum.UserInputType.Touch and p2.UserInputState == Enum.UserInputState.End then
+	function p1:onCheckboxExpanded(Input) --[[ Line: 27 ]]
+		-- upvalues: p1 (copy)
+		if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch and Input.UserInputState == Enum.UserInputState.End then
 			p1:setState({ expanded = true })
 		end
 	end
 	
-	function p0.onCloseCheckbox(_, p2)
-		-- upvalues: p1 (ref)
-		if p2.UserInputType == Enum.UserInputType.MouseButton1 or p2.UserInputType == Enum.UserInputType.Touch and p2.UserInputState == Enum.UserInputState.End then
+	function p1:onCloseCheckbox(Input) --[[ Line: 39 ]]
+		-- upvalues: p1 (copy)
+		if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch and Input.UserInputState == Enum.UserInputState.End then
 			p1:setState({ expanded = false })
 		end
 	end
@@ -34,98 +34,97 @@ function checkboxContainer.init(p1)
 	if not p1.props.orderedCheckboxState then
 		warn("CheckboxContainer must be passed a list of Box Names or else it only creates an empty frame")
 	end
-	local t = {}
-	local var2 = 0
-	local var3 = 0
+	local TextWidths = {}
+	local NewX = 0
+	local NumCheckboxes = 0
 	
-	for i, v in ipairs(p1.props.orderedCheckboxState) do
-		local nameTextSize = textService:GetTextSize(v.name, constantsModule.DefaultFontSize.UtilBar, constantsModule.Font.UtilBar, Vector2.new(0, 0))
-		t[i] = nameTextSize.X
-		var2 = var2 + nameTextSize.X + checkboxHeight + var1
-		var3 += 1
+	for i, value in ipairs(p1.props.orderedCheckboxState) do
+		local TextSize = TextService:GetTextSize(value.name, ConstantsModule.DefaultFontSize.UtilBar, ConstantsModule.Font.UtilBar, Vector2.new(0, 0))
+		TextWidths[i] = TextSize.X
+		NewX = NewX + TextSize.X + CheckboxHeight + ScaledCheckboxInnerPadding
+		NumCheckboxes += 1
 	end
-	p1.ref = roactModule.createRef()
+	p1.ref = RoactModule.createRef()
 	p1.state = {
 		expanded = false,
-		textWidths = t,
-		numCheckboxes = var3,
-		minFullLength = var2
+		textWidths = TextWidths,
+		numCheckboxes = NumCheckboxes,
+		minFullLength = NewX
 	}
 end
 
-function checkboxContainer.render(p2)
-	-- upvalues: roactModule (ref), checkboxModule (ref), constantsModule (ref), checkboxHeight (ref), filterFilled (ref), filterUnfilled (ref), checkboxDropdownModule (ref)
-	local t = {}
-	local frameWidth = p2.props.frameWidth
-	local frameHeight = p2.props.frameHeight
-	local pos = p2.props.pos
-	local layoutOrder = p2.props.layoutOrder
-	local orderedCheckboxState = p2.props.orderedCheckboxState
-	local minFullLength = p2.state.minFullLength
-	local expanded = p2.state.expanded
-	local numCheckboxes = p2.state.numCheckboxes
-	local var4 = false
+function CheckboxContainer.render(p2) --[[ Line: 79 ]]
+	-- upvalues: RoactModule (copy), CheckboxModule (copy), ConstantsModule (copy), CheckboxHeight (copy), FilterFilled (copy), FilterUnfilled (copy), CheckboxDropdownModule (copy)
+	local Elements = {}
+	local FrameWidth = p2.props.frameWidth
+	local FrameHeight = p2.props.frameHeight
+	local Pos = p2.props.pos
+	local LayoutOrder = p2.props.layoutOrder
+	local MinFullLength = p2.state.minFullLength
+	local Expanded = p2.state.expanded
+	local NumCheckboxes = p2.state.numCheckboxes
+	local v1 = false
 	
-	for i, v in ipairs(orderedCheckboxState) do
-		t[v.name] = roactModule.createElement(checkboxModule, {
-			name = v.name,
-			font = constantsModule.Font.UtilBar,
-			fontSize = constantsModule.DefaultFontSize.UtilBar,
-			checkboxHeight = checkboxHeight,
-			frameHeight = frameHeight,
-			layoutOrder = i,
-			isSelected = v.state,
-			selectedColor = constantsModule.Color.SelectedBlue,
-			unselectedColor = constantsModule.Color.UnselectedGray,
+	for LayoutOrder1, value in ipairs(p2.props.orderedCheckboxState) do
+		Elements[value.name] = RoactModule.createElement(CheckboxModule, {
+			name = value.name,
+			font = ConstantsModule.Font.UtilBar,
+			fontSize = ConstantsModule.DefaultFontSize.UtilBar,
+			checkboxHeight = CheckboxHeight,
+			frameHeight = FrameHeight,
+			layoutOrder = LayoutOrder1,
+			isSelected = value.state,
+			selectedColor = ConstantsModule.Color.SelectedBlue,
+			unselectedColor = ConstantsModule.Color.UnselectedGray,
 			onCheckboxClicked = p2.onCheckboxClicked
 		})
-		var4 = var4 or v.state
+		v1 = v1 or value.state
 	end
-	if frameWidth >= minFullLength then
-		t.CheckboxLayout = roactModule.createElement("UIListLayout", {
+	if FrameWidth >= MinFullLength then
+		Elements.CheckboxLayout = RoactModule.createElement("UIListLayout", {
 			HorizontalAlignment = Enum.HorizontalAlignment.Left,
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			VerticalAlignment = Enum.VerticalAlignment.Top,
 			FillDirection = Enum.FillDirection.Horizontal
 		})
 		
-		return roactModule.createElement("Frame", {
+		return RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
-			Size = UDim2.new(0, frameWidth, 0, frameHeight),
-			Position = pos,
-			LayoutOrder = layoutOrder
-		}, t)
+			Size = UDim2.new(0, FrameWidth, 0, FrameHeight),
+			Position = Pos,
+			LayoutOrder = LayoutOrder
+		}, Elements)
 	end
-	t.CheckboxLayout = roactModule.createElement("UIListLayout", {
+	Elements.CheckboxLayout = RoactModule.createElement("UIListLayout", {
 		HorizontalAlignment = Enum.HorizontalAlignment.Left,
 		SortOrder = Enum.SortOrder.LayoutOrder,
 		VerticalAlignment = Enum.VerticalAlignment.Top,
 		FillDirection = Enum.FillDirection.Vertical
 	})
-	local expanded_1 = p2.ref.current and expanded
-	local uDim2 = nil
+	local Expanded1 = p2.ref.current and Expanded
+	local AbsolutePosition: UDim2? = nil
 	
-	if expanded_1 then
-		local absolutePosition = p2.ref.current.AbsolutePosition
-		uDim2 = UDim2.new(0, absolutePosition.X, 0, absolutePosition.Y + frameHeight + 3)
+	if Expanded1 then
+		local AbsolutePosition1 = p2.ref.current.AbsolutePosition
+		AbsolutePosition = UDim2.new(0, AbsolutePosition1.X, 0, AbsolutePosition1.Y + FrameHeight + 3)
 	end
-	return roactModule.createElement("ImageButton", {
-		Size = UDim2.new(0, frameHeight, 0, frameHeight),
-		LayoutOrder = layoutOrder,
-		Image = if expanded_1 then filterFilled else filterUnfilled,
+	return RoactModule.createElement("ImageButton", {
+		Size = UDim2.new(0, FrameHeight, 0, FrameHeight),
+		LayoutOrder = LayoutOrder,
+		Image = Expanded1 and FilterFilled or FilterUnfilled,
 		BackgroundTransparency = 1,
-		BorderColor3 = constantsModule.Color.Text,
-		[roactModule.Event.InputEnded] = p2.onCheckboxExpanded,
-		[roactModule.Ref] = p2.ref
+		BorderColor3 = ConstantsModule.Color.Text,
+		[RoactModule.Event.InputEnded] = p2.onCheckboxExpanded,
+		[RoactModule.Ref] = p2.ref
 	}, {
-		DropDown = expanded_1 and roactModule.createElement(checkboxDropdownModule, {
-			absolutePosition = uDim2,
-			frameWidth = frameWidth,
-			elementHeight = frameHeight,
-			numElements = numCheckboxes,
+		DropDown = Expanded1 and RoactModule.createElement(CheckboxDropdownModule, {
+			absolutePosition = AbsolutePosition,
+			frameWidth = FrameWidth,
+			elementHeight = FrameHeight,
+			numElements = NumCheckboxes,
 			onCloseCheckbox = p2.onCloseCheckbox
-		}, t)
+		}, Elements)
 	})
 end
 
-return checkboxContainer
+return CheckboxContainer

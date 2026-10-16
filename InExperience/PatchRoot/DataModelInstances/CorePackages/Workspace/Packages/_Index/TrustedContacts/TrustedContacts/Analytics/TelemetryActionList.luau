@@ -1,610 +1,610 @@
-﻿local trustedContacts = script:FindFirstAncestor("TrustedContacts")
-local parent = trustedContacts.Parent
-local socialLuaAnalyticsModule = require(parent.SocialLuaAnalytics)
-local supportedTelemetryBackends = socialLuaAnalyticsModule.Analytics.Enums.SupportedTelemetryBackends
-local eventTypes = socialLuaAnalyticsModule.Analytics.Enums.EventTypes
-local contexts = socialLuaAnalyticsModule.Analytics.Enums.Contexts
-local eventNamesModule = require(script.Parent.EventNames)
-local buttonNamesModule = require(script.Parent.ButtonNames)
-local fFlagTFUpdateAnalyticsModule = require(trustedContacts.Flags.FFlagTFUpdateAnalytics)
+﻿local TrustedContacts = script:FindFirstAncestor("TrustedContacts")
+local SocialLuaAnalyticsModule = require(TrustedContacts.Parent.SocialLuaAnalytics)
+local SupportedTelemetryBackends = SocialLuaAnalyticsModule.Analytics.Enums.SupportedTelemetryBackends
+local EventTypes = SocialLuaAnalyticsModule.Analytics.Enums.EventTypes
+local Contexts = SocialLuaAnalyticsModule.Analytics.Enums.Contexts
+local EventNamesModule = require(script.Parent.EventNames)
+local ButtonNamesModule = require(script.Parent.ButtonNames)
+local FFlagTCLearnMoreLinkModule = require(TrustedContacts.Flags.FFlagTCLearnMoreLink)
+local FFlagTFUpdateAnalyticsModule = require(TrustedContacts.Flags.FFlagTFUpdateAnalytics)
 
 return {
 	defaults = {
 		links = "https://github.rbx.com/Roblox/proto-schemas/blob/master/production/eventstream/social/trusted_connections.proto",
 		throttlingThousandths = game:DefineFastInt("TrustedContactsAnalyticsThrottlingThousandths", 10000)
 	},
-	[eventNamesModule.FriendsRenameInfoModalSeen] = {
+	[EventNamesModule.FriendsRenameInfoModalSeen] = {
 		description = "Friends rename info modal mounted",
 		lastUpdated = { 25, 6, 4 },
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function()
-					-- upvalues: eventTypes (ref)
-					return eventTypes.UserSeen
+				type = SupportedTelemetryBackends.EventIngest,
+				overrideName = function() --[[ Line: 25 ]]
+					-- upvalues: EventTypes (copy)
+					return EventTypes.UserSeen
 				end,
-				staticCustomFields = { eventContext = contexts.FriendsRenameInfoModal }
+				staticCustomFields = { eventContext = Contexts.FriendsRenameInfoModal }
 			},
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.TCUpsellModalSeen] = {
+	[EventNamesModule.TCUpsellModalSeen] = {
 		description = "TC Upsell modal mounted",
 		lastUpdated = { 25, 6, 4 },
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function()
-					-- upvalues: eventTypes (ref)
-					return eventTypes.UserSeen
+				type = SupportedTelemetryBackends.EventIngest,
+				overrideName = function() --[[ Line: 43 ]]
+					-- upvalues: EventTypes (copy)
+					return EventTypes.UserSeen
 				end,
-				staticCustomFields = { eventContext = contexts.TCUpsellModal },
+				staticCustomFields = { eventContext = Contexts.TCUpsellModal },
 				dynamicCustomFields = {
-					modalVariant = function(p1)
+					modalVariant = function(p1) --[[ Line: 50 ]]
 						return p1
 					end,
-					source = function(p1)
+					source = function(p1) --[[ Line: 53 ]]
 						return p1
 					end
 				}
 			},
 			{
-				type = supportedTelemetryBackends.RobloxTelemetryCounter,
+				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					modalVariant = function(p1)
+					modalVariant = function(p1) --[[ Line: 61 ]]
 						return p1
 					end,
-					source = function(p1)
+					source = function(p1) --[[ Line: 64 ]]
 						return p1
 					end
 				}
 			}
 		}
 	},
-	[eventNamesModule.TCEducationModalSeen] = {
+	[EventNamesModule.TCEducationModalSeen] = {
 		description = "TC Education modal mounted",
 		lastUpdated = { 25, 6, 4 },
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function()
-					-- upvalues: eventTypes (ref)
-					return eventTypes.UserSeen
+				type = SupportedTelemetryBackends.EventIngest,
+				overrideName = function() --[[ Line: 77 ]]
+					-- upvalues: EventTypes (copy)
+					return EventTypes.UserSeen
 				end,
-				staticCustomFields = { eventContext = contexts.TCEducationModal }
+				staticCustomFields = { eventContext = Contexts.TCEducationModal }
 			},
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.FriendsRenameLearnMoreClicked] = {
+	[EventNamesModule.FriendsRenameLearnMoreClicked] = {
 		description = "Friends rename info modal learn more text clicked",
 		lastUpdated = { 25, 6, 4 },
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function()
-					-- upvalues: eventTypes (ref)
-					return eventTypes.ButtonClick
+				type = SupportedTelemetryBackends.EventIngest,
+				overrideName = function() --[[ Line: 95 ]]
+					-- upvalues: EventTypes (copy)
+					return EventTypes.ButtonClick
 				end,
 				staticCustomFields = {
-					eventContext = contexts.FriendsRenameInfoModal,
-					btn = buttonNamesModule.LearnMore
+					eventContext = Contexts.FriendsRenameInfoModal,
+					btn = ButtonNamesModule.LearnMore
 				}
 			},
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.TrustedFriendsModalOkClicked] = {
+	[EventNamesModule.TrustedFriendsModalOkClicked] = {
 		description = "Trusted friends info modal ok button clicked",
 		lastUpdated = { 26, 3, 20 },
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function()
-					-- upvalues: eventTypes (ref)
-					return eventTypes.ButtonClick
+				type = SupportedTelemetryBackends.EventIngest,
+				overrideName = function() --[[ Line: 114 ]]
+					-- upvalues: EventTypes (copy)
+					return EventTypes.ButtonClick
 				end,
 				staticCustomFields = {
-					eventContext = contexts.TCUpsellModal,
-					btn = buttonNamesModule.Ok
+					eventContext = Contexts.TCUpsellModal,
+					btn = ButtonNamesModule.Ok
 				}
 			},
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.TCUpsellCloseClicked] = {
+	[EventNamesModule.TCUpsellCloseClicked] = {
 		description = "TC Upsell modal close button clicked",
 		lastUpdated = { 25, 6, 4 },
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function()
-					-- upvalues: eventTypes (ref)
-					return eventTypes.ButtonClick
+				type = SupportedTelemetryBackends.EventIngest,
+				overrideName = function() --[[ Line: 133 ]]
+					-- upvalues: EventTypes (copy)
+					return EventTypes.ButtonClick
 				end,
 				staticCustomFields = {
-					eventContext = contexts.TCUpsellModal,
-					btn = buttonNamesModule.Close
+					eventContext = Contexts.TCUpsellModal,
+					btn = ButtonNamesModule.Close
 				},
 				dynamicCustomFields = {
-					modalVariant = function(p1)
+					modalVariant = function(p1) --[[ Line: 141 ]]
 						return p1
 					end,
-					source = function(p1)
+					source = function(p1) --[[ Line: 144 ]]
 						return p1
 					end
 				}
 			},
 			{
-				type = supportedTelemetryBackends.RobloxTelemetryCounter,
+				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					modalVariant = function(p1)
+					modalVariant = function(p1) --[[ Line: 152 ]]
 						return p1
 					end,
-					source = function(p1)
+					source = function(p1) --[[ Line: 155 ]]
 						return p1
 					end
 				}
 			}
 		}
 	},
-	[eventNamesModule.TCUpsellAcceptTrustedConnectionClicked] = {
+	[EventNamesModule.TCUpsellAcceptTrustedConnectionClicked] = {
 		description = "TC Upsell modal accept trusted connection button clicked",
 		lastUpdated = { 25, 9, 17 },
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function()
-					-- upvalues: eventTypes (ref)
-					return eventTypes.ButtonClick
+				type = SupportedTelemetryBackends.EventIngest,
+				overrideName = function() --[[ Line: 168 ]]
+					-- upvalues: EventTypes (copy)
+					return EventTypes.ButtonClick
 				end,
 				staticCustomFields = {
-					eventContext = contexts.TCUpsellModal,
-					btn = buttonNamesModule.AcceptTrustedConnection
+					eventContext = Contexts.TCUpsellModal,
+					btn = ButtonNamesModule.AcceptTrustedConnection
 				}
 			},
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.TCUpsellAddTrustedConnectionClicked] = {
+	[EventNamesModule.TCUpsellAddTrustedConnectionClicked] = {
 		description = "TC Upsell modal add trusted connection button clicked",
 		lastUpdated = { 25, 9, 17 },
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function()
-					-- upvalues: eventTypes (ref)
-					return eventTypes.ButtonClick
+				type = SupportedTelemetryBackends.EventIngest,
+				overrideName = function() --[[ Line: 187 ]]
+					-- upvalues: EventTypes (copy)
+					return EventTypes.ButtonClick
 				end,
 				staticCustomFields = {
-					eventContext = contexts.TCUpsellModal,
-					btn = buttonNamesModule.AddTrustedConnection
+					eventContext = Contexts.TCUpsellModal,
+					btn = ButtonNamesModule.AddTrustedConnection
 				}
 			},
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.TCEducationGotItClicked] = {
+	[EventNamesModule.TCEducationGotItClicked] = {
 		description = "TC Education modal got it button clicked",
 		lastUpdated = { 25, 6, 4 },
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function()
-					-- upvalues: eventTypes (ref)
-					return eventTypes.ButtonClick
+				type = SupportedTelemetryBackends.EventIngest,
+				overrideName = function() --[[ Line: 206 ]]
+					-- upvalues: EventTypes (copy)
+					return EventTypes.ButtonClick
 				end,
 				staticCustomFields = {
-					eventContext = contexts.TCEducationModal,
-					btn = buttonNamesModule.GotIt
+					eventContext = Contexts.TCEducationModal,
+					btn = ButtonNamesModule.GotIt
 				}
 			},
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.TCEducationCloseClicked] = {
+	[EventNamesModule.TCEducationCloseClicked] = {
 		description = "TC Education modal close button clicked",
 		lastUpdated = { 25, 6, 4 },
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function()
-					-- upvalues: eventTypes (ref)
-					return eventTypes.ButtonClick
+				type = SupportedTelemetryBackends.EventIngest,
+				overrideName = function() --[[ Line: 225 ]]
+					-- upvalues: EventTypes (copy)
+					return EventTypes.ButtonClick
 				end,
 				staticCustomFields = {
-					eventContext = contexts.TCEducationModal,
-					btn = buttonNamesModule.Close
+					eventContext = Contexts.TCEducationModal,
+					btn = ButtonNamesModule.Close
 				}
 			},
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.TCUpsellCancelClicked] = {
+	[EventNamesModule.TCUpsellCancelClicked] = {
 		description = "TC Upsell modal cancel button clicked",
 		lastUpdated = { 25, 9, 17 },
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function()
-					-- upvalues: eventTypes (ref)
-					return eventTypes.ButtonClick
+				type = SupportedTelemetryBackends.EventIngest,
+				overrideName = function() --[[ Line: 244 ]]
+					-- upvalues: EventTypes (copy)
+					return EventTypes.ButtonClick
 				end,
 				staticCustomFields = {
-					eventContext = contexts.TCUpsellModal,
-					btn = buttonNamesModule.Cancel
+					eventContext = Contexts.TCUpsellModal,
+					btn = ButtonNamesModule.Cancel
 				},
 				dynamicCustomFields = {
-					modalVariant = function(p1)
+					modalVariant = function(p1) --[[ Line: 252 ]]
 						return p1
 					end,
-					source = function(p1)
+					source = function(p1) --[[ Line: 255 ]]
 						return p1
 					end
 				}
 			},
 			{
-				type = supportedTelemetryBackends.RobloxTelemetryCounter,
+				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					modalVariant = function(p1)
+					modalVariant = function(p1) --[[ Line: 263 ]]
 						return p1
 					end,
-					source = function(p1)
+					source = function(p1) --[[ Line: 266 ]]
 						return p1
 					end
 				}
 			}
 		}
 	},
-	[eventNamesModule.TCUpsellAddViaLinkClicked] = {
+	[EventNamesModule.TCUpsellAddViaLinkClicked] = {
 		description = "TC Upsell modal 'Add via link' button clicked",
 		lastUpdated = { 26, 1, 28 },
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function()
-					-- upvalues: eventTypes (ref)
-					return eventTypes.ButtonClick
+				type = SupportedTelemetryBackends.EventIngest,
+				overrideName = function() --[[ Line: 279 ]]
+					-- upvalues: EventTypes (copy)
+					return EventTypes.ButtonClick
 				end,
 				staticCustomFields = {
-					eventContext = contexts.TCUpsellModal,
-					btn = buttonNamesModule.AddViaLink
+					eventContext = Contexts.TCUpsellModal,
+					btn = ButtonNamesModule.AddViaLink
 				},
 				dynamicCustomFields = {
-					modalVariant = function(p1)
+					modalVariant = function(p1) --[[ Line: 287 ]]
 						return p1
 					end,
-					source = function(p1)
+					source = function(p1) --[[ Line: 290 ]]
 						return p1
 					end
 				}
 			},
 			{
-				type = supportedTelemetryBackends.RobloxTelemetryCounter,
+				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					modalVariant = function(p1)
+					modalVariant = function(p1) --[[ Line: 298 ]]
 						return p1
 					end,
-					source = function(p1)
+					source = function(p1) --[[ Line: 301 ]]
 						return p1
 					end
 				}
 			}
 		}
 	},
-	[eventNamesModule.TrustedFriendsVPCPrologueOpened] = {
+	[EventNamesModule.TrustedFriendsVPCPrologueOpened] = {
 		description = "Trusted Friends VPC Prologue open button clicked in TC modal",
 		lastUpdated = { 26, 2, 26 },
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function()
-					-- upvalues: eventTypes (ref)
-					return eventTypes.ButtonClick
+				type = SupportedTelemetryBackends.EventIngest,
+				overrideName = function() --[[ Line: 314 ]]
+					-- upvalues: EventTypes (copy)
+					return EventTypes.ButtonClick
 				end,
 				staticCustomFields = {
-					eventContext = contexts.TCUpsellModal,
-					btn = buttonNamesModule.OpenVPCPrologue
+					eventContext = Contexts.TCUpsellModal,
+					btn = ButtonNamesModule.OpenVPCPrologue
 				},
 				dynamicCustomFields = {
-					modalVariant = function(p1)
+					modalVariant = function(p1) --[[ Line: 322 ]]
 						return p1
 					end,
-					source = function(p1)
+					source = function(p1) --[[ Line: 325 ]]
 						return p1
 					end
 				}
 			},
 			{
-				type = supportedTelemetryBackends.RobloxTelemetryCounter,
+				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					modalVariant = function(p1)
+					modalVariant = function(p1) --[[ Line: 333 ]]
 						return p1
 					end,
-					source = function(p1)
+					source = function(p1) --[[ Line: 336 ]]
 						return p1
 					end
 				}
 			}
 		}
 	},
-	[eventNamesModule.TrustedFriendsVPCAskClicked] = {
+	[EventNamesModule.TrustedFriendsVPCAskClicked] = {
 		description = "Trusted Friends VPC Prologue Ask button clicked",
 		lastUpdated = { 26, 2, 26 },
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function()
-					-- upvalues: eventTypes (ref)
-					return eventTypes.ButtonClick
+				type = SupportedTelemetryBackends.EventIngest,
+				overrideName = function() --[[ Line: 349 ]]
+					-- upvalues: EventTypes (copy)
+					return EventTypes.ButtonClick
 				end,
 				staticCustomFields = {
-					eventContext = contexts.TrustedFriendsVPCPrologue,
-					btn = buttonNamesModule.Ask
+					eventContext = Contexts.TrustedFriendsVPCPrologue,
+					btn = ButtonNamesModule.Ask
 				}
 			},
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.TrustedFriendsVPCCancelClicked] = {
+	[EventNamesModule.TrustedFriendsVPCCancelClicked] = {
 		description = "Trusted Friends VPC Prologue Cancel button clicked",
 		lastUpdated = { 26, 2, 26 },
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function()
-					-- upvalues: eventTypes (ref)
-					return eventTypes.ButtonClick
+				type = SupportedTelemetryBackends.EventIngest,
+				overrideName = function() --[[ Line: 368 ]]
+					-- upvalues: EventTypes (copy)
+					return EventTypes.ButtonClick
 				end,
 				staticCustomFields = {
-					eventContext = contexts.TrustedFriendsVPCPrologue,
-					btn = buttonNamesModule.Cancel
+					eventContext = Contexts.TrustedFriendsVPCPrologue,
+					btn = ButtonNamesModule.Cancel
 				}
 			},
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.TCEducationManageConnectionsClicked] = {
+	[EventNamesModule.TCEducationManageConnectionsClicked] = {
 		description = "TC Education modal manage connections button clicked",
 		lastUpdated = { 25, 6, 4 },
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function()
-					-- upvalues: eventTypes (ref)
-					return eventTypes.ButtonClick
+				type = SupportedTelemetryBackends.EventIngest,
+				overrideName = function() --[[ Line: 387 ]]
+					-- upvalues: EventTypes (copy)
+					return EventTypes.ButtonClick
 				end,
 				staticCustomFields = {
-					eventContext = contexts.TCEducationModal,
-					btn = buttonNamesModule.ManageConnections
+					eventContext = Contexts.TCEducationModal,
+					btn = ButtonNamesModule.ManageConnections
 				}
 			},
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.TCStreamNotificationAcceptClicked] = if require(parent.SharedFlags).FFlagTCStreamNotifEventReceiver then {
+	[EventNamesModule.TCStreamNotificationAcceptClicked] = {
 		description = "TC stream notification accept CTA clicked",
 		lastUpdated = { 26, 1, 16 },
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function()
-					-- upvalues: eventTypes (ref)
-					return eventTypes.ButtonClick
+				type = SupportedTelemetryBackends.EventIngest,
+				overrideName = function() --[[ Line: 406 ]]
+					-- upvalues: EventTypes (copy)
+					return EventTypes.ButtonClick
 				end,
 				staticCustomFields = {
-					eventContext = contexts.StreamNotification,
-					btn = buttonNamesModule.AcceptTrustedConnection
+					eventContext = Contexts.StreamNotification,
+					btn = ButtonNamesModule.AcceptTrustedConnection
 				}
 			},
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
-	} else nil,
-	[eventNamesModule.TCToastNotificationAcceptClicked] = {
+	},
+	[EventNamesModule.TCToastNotificationAcceptClicked] = {
 		description = "TC toast notification accept CTA clicked",
 		lastUpdated = { 26, 1, 16 },
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function()
-					-- upvalues: eventTypes (ref)
-					return eventTypes.ButtonClick
+				type = SupportedTelemetryBackends.EventIngest,
+				overrideName = function() --[[ Line: 425 ]]
+					-- upvalues: EventTypes (copy)
+					return EventTypes.ButtonClick
 				end,
 				staticCustomFields = {
-					eventContext = contexts.ToastNotification,
-					btn = buttonNamesModule.AcceptTrustedConnection
+					eventContext = Contexts.ToastNotification,
+					btn = ButtonNamesModule.AcceptTrustedConnection
 				}
 			},
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.TCUpsellIsATrustedConnectionNowToastShown] = if fFlagTFUpdateAnalyticsModule then {
+	[EventNamesModule.TCUpsellIsATrustedConnectionNowToastShown] = if FFlagTFUpdateAnalyticsModule then {
 		description = "TC Upsell modal 'is a trusted connection now' success toast shown",
 		lastUpdated = { 26, 6, 5 },
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function()
-					-- upvalues: eventTypes (ref)
-					return eventTypes.UserSeen
+				type = SupportedTelemetryBackends.EventIngest,
+				overrideName = function() --[[ Line: 445 ]]
+					-- upvalues: EventTypes (copy)
+					return EventTypes.UserSeen
 				end,
-				staticCustomFields = { eventContext = contexts.TCUpsellModal },
+				staticCustomFields = { eventContext = Contexts.TCUpsellModal },
 				dynamicCustomFields = {
-					modalVariant = function(p1)
+					modalVariant = function(p1) --[[ Line: 452 ]]
 						return p1
 					end,
-					source = function(p1)
+					source = function(p1) --[[ Line: 455 ]]
 						return p1
 					end
 				}
 			},
 			{
-				type = supportedTelemetryBackends.RobloxTelemetryCounter,
+				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					modalVariant = function(p1)
+					modalVariant = function(p1) --[[ Line: 463 ]]
 						return p1
 					end,
-					source = function(p1)
+					source = function(p1) --[[ Line: 466 ]]
 						return p1
 					end
 				}
 			}
 		}
 	} else nil,
-	[eventNamesModule.TCUpsellInvalidTrustedFriendState] = if fFlagTFUpdateAnalyticsModule then {
+	[EventNamesModule.TCUpsellInvalidTrustedFriendState] = if FFlagTFUpdateAnalyticsModule then {
 		description = "TC Upsell modal encountered an invalid trusted friend state",
 		lastUpdated = { 26, 6, 5 },
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function()
-					-- upvalues: eventTypes (ref)
-					return eventTypes.UserSeen
+				type = SupportedTelemetryBackends.EventIngest,
+				overrideName = function() --[[ Line: 481 ]]
+					-- upvalues: EventTypes (copy)
+					return EventTypes.UserSeen
 				end,
-				staticCustomFields = { eventContext = contexts.TCUpsellModal },
+				staticCustomFields = { eventContext = Contexts.TCUpsellModal },
 				dynamicCustomFields = {
-					modalVariant = function(p1)
+					modalVariant = function(p1) --[[ Line: 488 ]]
 						return p1
 					end,
-					source = function(p1)
+					source = function(p1) --[[ Line: 491 ]]
 						return p1
 					end,
-					tfActionsEnum = function(p1)
+					tfActionsEnum = function(p1) --[[ Line: 494 ]]
 						return p1
 					end
 				}
 			},
 			{
-				type = supportedTelemetryBackends.RobloxTelemetryCounter,
+				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					modalVariant = function(p1)
+					modalVariant = function(p1) --[[ Line: 502 ]]
 						return p1
 					end,
-					source = function(p1)
+					source = function(p1) --[[ Line: 505 ]]
 						return p1
 					end,
-					tfActionsEnum = function(p1)
+					tfActionsEnum = function(p1) --[[ Line: 508 ]]
 						return p1
 					end
 				}
 			}
 		}
 	} else nil,
-	[eventNamesModule.TCUpsellAgePrecheckTriggered] = if fFlagTFUpdateAnalyticsModule then {
+	[EventNamesModule.TCUpsellAgePrecheckTriggered] = if FFlagTFUpdateAnalyticsModule then {
 		description = "TC Upsell facial age estimation precheck triggered",
 		lastUpdated = { 26, 6, 5 },
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function()
-					-- upvalues: eventTypes (ref)
-					return eventTypes.UserSeen
+				type = SupportedTelemetryBackends.EventIngest,
+				overrideName = function() --[[ Line: 523 ]]
+					-- upvalues: EventTypes (copy)
+					return EventTypes.UserSeen
 				end,
-				staticCustomFields = { eventContext = contexts.TCUpsellModal },
+				staticCustomFields = { eventContext = Contexts.TCUpsellModal },
 				dynamicCustomFields = {
-					source = function(p1)
+					source = function(p1) --[[ Line: 530 ]]
 						return p1
 					end,
-					tfActionsEnum = function(p1)
+					tfActionsEnum = function(p1) --[[ Line: 533 ]]
 						return p1
 					end
 				}
 			},
 			{
-				type = supportedTelemetryBackends.RobloxTelemetryCounter,
+				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					source = function(p1)
+					source = function(p1) --[[ Line: 541 ]]
 						return p1
 					end,
-					tfActionsEnum = function(p1)
+					tfActionsEnum = function(p1) --[[ Line: 544 ]]
 						return p1
 					end
 				}
 			}
 		}
 	} else nil,
-	[eventNamesModule.TCUpsellAgePrecheckSucceeded] = if fFlagTFUpdateAnalyticsModule then {
+	[EventNamesModule.TCUpsellAgePrecheckSucceeded] = if FFlagTFUpdateAnalyticsModule then {
 		description = "TC Upsell facial age estimation precheck succeeded",
 		lastUpdated = { 26, 6, 5 },
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function()
-					-- upvalues: eventTypes (ref)
-					return eventTypes.UserSeen
+				type = SupportedTelemetryBackends.EventIngest,
+				overrideName = function() --[[ Line: 559 ]]
+					-- upvalues: EventTypes (copy)
+					return EventTypes.UserSeen
 				end,
-				staticCustomFields = { eventContext = contexts.TCUpsellModal },
+				staticCustomFields = { eventContext = Contexts.TCUpsellModal },
 				dynamicCustomFields = {
-					source = function(p1)
+					source = function(p1) --[[ Line: 566 ]]
 						return p1
 					end,
-					tfActionsEnum = function(p1)
+					tfActionsEnum = function(p1) --[[ Line: 569 ]]
 						return p1
 					end
 				}
 			},
 			{
-				type = supportedTelemetryBackends.RobloxTelemetryCounter,
+				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					source = function(p1)
+					source = function(p1) --[[ Line: 577 ]]
 						return p1
 					end,
-					tfActionsEnum = function(p1)
+					tfActionsEnum = function(p1) --[[ Line: 580 ]]
 						return p1
 					end
 				}
 			}
 		}
 	} else nil,
-	[eventNamesModule.TCUpsellAgePrecheckFailed] = if fFlagTFUpdateAnalyticsModule then {
+	[EventNamesModule.TCUpsellAgePrecheckFailed] = if FFlagTFUpdateAnalyticsModule then {
 		description = "TC Upsell facial age estimation precheck failed",
 		lastUpdated = { 26, 6, 5 },
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function()
-					-- upvalues: eventTypes (ref)
-					return eventTypes.UserSeen
+				type = SupportedTelemetryBackends.EventIngest,
+				overrideName = function() --[[ Line: 595 ]]
+					-- upvalues: EventTypes (copy)
+					return EventTypes.UserSeen
 				end,
-				staticCustomFields = { eventContext = contexts.TCUpsellModal },
+				staticCustomFields = { eventContext = Contexts.TCUpsellModal },
 				dynamicCustomFields = {
-					source = function(p1)
+					source = function(p1) --[[ Line: 602 ]]
 						return p1
 					end,
-					tfActionsEnum = function(p1)
+					tfActionsEnum = function(p1) --[[ Line: 605 ]]
 						return p1
 					end
 				}
 			},
 			{
-				type = supportedTelemetryBackends.RobloxTelemetryCounter,
+				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					source = function(p1)
+					source = function(p1) --[[ Line: 613 ]]
 						return p1
 					end,
-					tfActionsEnum = function(p1)
+					tfActionsEnum = function(p1) --[[ Line: 616 ]]
 						return p1
 					end
 				}
 			}
 		}
 	} else nil,
-	[eventNamesModule.TCUpsellLearnMoreClicked] = if require(trustedContacts.Flags.FFlagTCLearnMoreLink) then {
+	[EventNamesModule.TCUpsellLearnMoreClicked] = if FFlagTCLearnMoreLinkModule then {
 		description = "Learn more link clicked",
 		lastUpdated = { 12, 3, 26 },
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function()
-					-- upvalues: eventTypes (ref)
-					return eventTypes.ButtonClick
+				type = SupportedTelemetryBackends.EventIngest,
+				overrideName = function() --[[ Line: 631 ]]
+					-- upvalues: EventTypes (copy)
+					return EventTypes.ButtonClick
 				end,
 				staticCustomFields = {
 					btn = "LearnMoreLink",
-					eventContext = contexts.TCUpsellModal
+					eventContext = Contexts.TCUpsellModal
 				}
 			},
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	} else nil
 }

@@ -1,13 +1,12 @@
-﻿return function(p1)
-	local var1 = p1:gmatch("%s*([A-Za-z0-9_-]+)=\"([^\"]*)\"%s*")
-	local var2 = p1:gmatch("%s*([A-Za-z0-9_-]+)='([^']*)'%s*")
+﻿return function(Text: string) --[[ Line: 1 | Named "parseXmlAttributes" ]]
+	local SAZaZ09S = Text:gmatch("%s*([A-Za-z0-9_-]+)='([^']*)'%s*")
 	local t = {}
 	
-	for i, v in var1 do
-		t[i] = v or ""
+	for i, value in Text:gmatch("%s*([A-Za-z0-9_-]+)=\"([^\"]*)\"%s*") do
+		t[i] = value or ""
 	end
-	for i_1, v_1 in var2 do
-		t[i_1] = v_1 or ""
+	for i1, sAZaZ09 in SAZaZ09S do
+		t[i1] = sAZaZ09 or ""
 	end
 	return t
 end

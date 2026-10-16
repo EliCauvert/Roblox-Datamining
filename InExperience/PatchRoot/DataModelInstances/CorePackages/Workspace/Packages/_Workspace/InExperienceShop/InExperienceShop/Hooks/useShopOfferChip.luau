@@ -1,85 +1,82 @@
-﻿local inExperienceShop = script:FindFirstAncestor("InExperienceShop")
-local parent = inExperienceShop.Parent
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagEnableUserOffers = sharedFlagsModule.FFlagEnableUserOffers
-local fFlagHideOfferNotificationsWhenShopEmpty = sharedFlagsModule.FFlagHideOfferNotificationsWhenShopEmpty
-local inExperienceOffersModule = require(parent.InExperienceOffers)
-local useOffersForKey = inExperienceOffersModule.Hooks.useOffersForKey
-local selectActiveOffer = inExperienceOffersModule.Utils.selectActiveOffer
-local useRemainingTimeText = inExperienceOffersModule.Hooks.useRemainingTimeText
-local useShopHasItems = inExperienceOffersModule.Hooks.useShopHasItems
-local offerDialogStateModule = require(inExperienceShop.Components.OfferDialogs.OfferDialogState)
-local useCloseOnCoreMenuModule = require(inExperienceShop.Hooks.useCloseOnCoreMenu)
-local useOfferModalTextModule = require(inExperienceShop.Hooks.useOfferModalText)
-local fFlagShopCloseOfferDialogOnCoreMenuModule = require(inExperienceShop.Flags.FFlagShopCloseOfferDialogOnCoreMenu)
-local fFlagShowLargerOfferBannerOnDesktop2Module = require(inExperienceShop.Flags.FFlagShowLargerOfferBannerOnDesktop2)
+﻿local InExperienceShop = script:FindFirstAncestor("InExperienceShop")
+local Parent = InExperienceShop.Parent
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagEnableUserOffers = SharedFlagsModule.FFlagEnableUserOffers
+local FFlagHideOfferNotificationsWhenShopEmpty = SharedFlagsModule.FFlagHideOfferNotificationsWhenShopEmpty
+local InExperienceOffersModule = require(Parent.InExperienceOffers)
+local UseOffersForKeyFunction = InExperienceOffersModule.Hooks.useOffersForKey
+local SelectActiveOfferFunction = InExperienceOffersModule.Utils.selectActiveOffer
+local UseRemainingTimeTextFunction = InExperienceOffersModule.Hooks.useRemainingTimeText
+local UseShopHasItemsFunction = InExperienceOffersModule.Hooks.useShopHasItems
+local OfferDialogStateModule = require(InExperienceShop.Components.OfferDialogs.OfferDialogState)
+local UseCloseOnCoreMenuModule = require(InExperienceShop.Hooks.useCloseOnCoreMenu)
+local UseOfferModalTextModule = require(InExperienceShop.Hooks.useOfferModalText)
+local FFlagShopCloseOfferDialogOnCoreMenuModule = require(InExperienceShop.Flags.FFlagShopCloseOfferDialogOnCoreMenu)
+local FFlagShowLargerOfferBannerOnDesktop2Module = require(InExperienceShop.Flags.FFlagShowLargerOfferBannerOnDesktop2)
 
-return function(p1, p2)
-	-- upvalues: useOffersForKey (ref), reactModule (ref), selectActiveOffer (ref), useRemainingTimeText (ref), fFlagHideOfferNotificationsWhenShopEmpty (ref), useShopHasItems (ref), fFlagEnableUserOffers (ref), useLocalization (ref), fFlagShowLargerOfferBannerOnDesktop2Module (ref), useOfferModalTextModule (ref), offerDialogStateModule (ref), fFlagShopCloseOfferDialogOnCoreMenuModule (ref), useCloseOnCoreMenuModule (ref)
-	local var1 = useOffersForKey(p1)
-	local var2 = reactModule.useMemo(function()
-		-- upvalues: selectActiveOffer (copy), var1 (ref)
-		return selectActiveOffer(var1, "banner")
-	end, { var1 })
-	local var3 = if var2 ~= nil then nil else var2.presentationData.banner
-	local var4 = useRemainingTimeText(if var2 then var2.expirationTimeInUTC else nil)
-	local var5 = fFlagEnableUserOffers and (var2 ~= nil and var4 ~= nil)
-	
-	if fFlagHideOfferNotificationsWhenShopEmpty and not useShopHasItems() then
-		var5 = false
-	end
-	local var6 = useLocalization({
+return function(p1, p2) --[[ Line: 56 | Named "useShopOfferChip" ]]
+	-- upvalues: UseOffersForKeyFunction (copy), ReactModule (copy), SelectActiveOfferFunction (copy), UseRemainingTimeTextFunction (copy), FFlagHideOfferNotificationsWhenShopEmpty (copy), UseShopHasItemsFunction (copy), FFlagEnableUserOffers (copy), UseLocalizationFunction (copy), FFlagShowLargerOfferBannerOnDesktop2Module (copy), UseOfferModalTextModule (copy), OfferDialogStateModule (copy), FFlagShopCloseOfferDialogOnCoreMenuModule (copy), UseCloseOnCoreMenuModule (copy)
+	local UseOffersForKeyResult = UseOffersForKeyFunction(p1)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 60 ]]
+		-- upvalues: SelectActiveOfferFunction (upval), UseOffersForKeyResult (copy)
+		return SelectActiveOfferFunction(UseOffersForKeyResult, "banner")
+	end, { UseOffersForKeyResult })
+	local Banner = if UseMemoResult == nil then nil else UseMemoResult.presentationData.banner
+	local UseRemainingTimeTextResult = UseRemainingTimeTextFunction(UseMemoResult and UseMemoResult.expirationTimeInUTC or nil)
+	local Inverted: boolean = FFlagHideOfferNotificationsWhenShopEmpty and not UseShopHasItemsFunction()
+	local HasUseRemainingTimeTextResult = if FFlagEnableUserOffers then not Inverted and (UseMemoResult ~= nil and UseRemainingTimeTextResult ~= nil) else not Inverted and FFlagEnableUserOffers
+	local UseLocalizationResult = UseLocalizationFunction({
 		offerEndTime = {
 			"Feature.InExperienceShop.Label.OfferEndTime",
-			offer = if var3 ~= nil then "" else var3.title,
-			timeRemaining = var4 or ""
+			offer = if Banner == nil then "" else Banner.title,
+			timeRemaining = UseRemainingTimeTextResult or ""
 		}
 	})
-	local var7 = nil
-	local icon = nil
+	local Title = nil
+	local Icon = nil
 	
-	if var5 and var3 ~= nil then
-		var7 = if p2 then var3.title else var6.offerEndTime
-		icon = var3.icon
+	if HasUseRemainingTimeTextResult and Banner ~= nil then
+		Title = if p2 then Banner.title else UseLocalizationResult.offerEndTime
+		Icon = Banner.icon
 	end
-	local var8 = if var3 ~= nil then nil else var3.modal
-	local var9 = if var2 ~= nil then nil else var2.expirationTimeInUTC
-	local var10 = if fFlagShowLargerOfferBannerOnDesktop2Module then useOfferModalTextModule(if var8 then var8.body else "", if var8 then var4 else nil) else {
+	local Modal = if Banner == nil then nil else Banner.modal
+	local ExpirationTimeInUTC = if UseMemoResult == nil then nil else UseMemoResult.expirationTimeInUTC
+	local UseOfferModalTextModuleResult = if FFlagShowLargerOfferBannerOnDesktop2Module then UseOfferModalTextModule(if Modal then Modal.body else "", if Modal then UseRemainingTimeTextResult else nil) else {
 		viewTermsText = "",
-		bodyText = if var8 then var8.body else ""
+		bodyText = if Modal then Modal.body else ""
 	}
-	local var11, var12 = reactModule.useState(offerDialogStateModule.None)
-	local var13 = reactModule.useCallback(function()
-		-- upvalues: var12 (ref), offerDialogStateModule (copy)
-		var12(offerDialogStateModule.Details)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(OfferDialogStateModule.None)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 126 ]]
+		-- upvalues: UseStateResult2 (copy), OfferDialogStateModule (upval)
+		UseStateResult2(OfferDialogStateModule.Details)
 	end, {})
-	local var14 = reactModule.useCallback(function()
-		-- upvalues: var12 (ref), offerDialogStateModule (copy)
-		var12(offerDialogStateModule.Terms)
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 129 ]]
+		-- upvalues: UseStateResult2 (copy), OfferDialogStateModule (upval)
+		UseStateResult2(OfferDialogStateModule.Terms)
 	end, {})
-	local var15 = reactModule.useCallback(function()
-		-- upvalues: var12 (ref), offerDialogStateModule (copy)
-		var12(offerDialogStateModule.None)
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 134 ]]
+		-- upvalues: UseStateResult2 (copy), OfferDialogStateModule (upval)
+		UseStateResult2(OfferDialogStateModule.None)
 	end, {})
 	
-	if fFlagShopCloseOfferDialogOnCoreMenuModule then
-		useCloseOnCoreMenuModule(var15)
+	if FFlagShopCloseOfferDialogOnCoreMenuModule then
+		UseCloseOnCoreMenuModule(UseResult2)
 	end
 	return {
-		showOfferChip = var5,
-		offerChipText = var7,
-		offerChipIcon = icon,
-		offerModal = var8,
-		offerExpirationTimeInUTC = var9,
-		offerBodyText = var10.bodyText,
-		offerViewTermsText = var10.viewTermsText,
-		offerDialog = var11,
-		onOfferChipActivated = var13,
-		onOfferViewTerms = var14,
-		onOfferShopNow = var15,
-		onOfferDetailsClose = var15,
-		onOfferTermsClose = var15
+		showOfferChip = HasUseRemainingTimeTextResult,
+		offerChipText = Title,
+		offerChipIcon = Icon,
+		offerModal = Modal,
+		offerExpirationTimeInUTC = ExpirationTimeInUTC,
+		offerBodyText = UseOfferModalTextModuleResult.bodyText,
+		offerViewTermsText = UseOfferModalTextModuleResult.viewTermsText,
+		offerDialog = UseStateResult,
+		onOfferChipActivated = UseResult,
+		onOfferViewTerms = UseResult1,
+		onOfferShopNow = UseResult2,
+		onOfferDetailsClose = UseResult2,
+		onOfferTermsClose = UseResult2
 	}
 end

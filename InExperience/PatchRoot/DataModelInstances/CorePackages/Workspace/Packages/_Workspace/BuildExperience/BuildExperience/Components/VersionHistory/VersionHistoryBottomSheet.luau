@@ -1,203 +1,195 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local fFlagBuildAgentRollbackModule = require(buildExperience.Flags.FFlagBuildAgentRollback)
-local fFlagBuildExperienceVersionHistoryPaginationModule = require(buildExperience.Flags.FFlagBuildExperienceVersionHistoryPagination)
-local fIntBuildExperienceVersionHistoryLoadMoreViewportPercentModule = require(buildExperience.Flags.FIntBuildExperienceVersionHistoryLoadMoreViewportPercent)
-local latestVersionCardViewModule = require(script.Parent.LatestVersionCard.LatestVersionCardView)
-local liveVersionCardViewModule = require(script.Parent.LiveVersionCard.LiveVersionCardView)
-local restoreVersionDialogModule = require(script.Parent.RestoreVersionDialog)
-local versionHistoryCardModule = require(script.Parent.VersionHistoryCard)
-local versionHistorySectionModule = require(script.Parent.VersionHistorySection)
-local useScrollEndReachedModule = require(script.Parent.useScrollEndReached)
-local useScrollPerformanceTrackerModule = require(buildExperience.Telemetry.useScrollPerformanceTracker)
-local checkbox = foundationModule.Checkbox
-local sheet = foundationModule.Sheet
-local text = foundationModule.Text
-local view = foundationModule.View
-local useScaledValue = foundationModule.Hooks.useScaledValue
-local VERSION_HISTORY_VERSIONS_TITLE = localizationStringsModule.VERSION_HISTORY_VERSIONS_TITLE
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
+local FIntBuildExperienceVersionHistoryLoadMoreViewportPercentModule = require(BuildExperience.Flags.FIntBuildExperienceVersionHistoryLoadMoreViewportPercent)
+local LatestVersionCardViewModule = require(script.Parent.LatestVersionCard.LatestVersionCardView)
+local LiveVersionCardViewModule = require(script.Parent.LiveVersionCard.LiveVersionCardView)
+local RestoreVersionDialogModule = require(script.Parent.RestoreVersionDialog)
+local VersionHistoryCardModule = require(script.Parent.VersionHistoryCard)
+local VersionHistorySectionModule = require(script.Parent.VersionHistorySection)
+local UseScrollEndReachedModule = require(script.Parent.useScrollEndReached)
+local UseScrollPerformanceTrackerModule = require(BuildExperience.Telemetry.useScrollPerformanceTracker)
+local Checkbox = FoundationModule.Checkbox
+local Sheet = FoundationModule.Sheet
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local UseScaledValueFunction = FoundationModule.Hooks.useScaledValue
+local VERSIONHISTORYVERSIONSTITLE = LocalizationStringsModule.VERSION_HISTORY_VERSIONS_TITLE
 
-local function VersionHistoryContent(p1)
-	-- upvalues: useScrollPerformanceTrackerModule (ref), fFlagBuildExperienceVersionHistoryPaginationModule (ref), useScrollEndReachedModule (ref), fIntBuildExperienceVersionHistoryLoadMoreViewportPercentModule (ref), reactModule (ref), sheet (ref)
-	useScrollPerformanceTrackerModule("LuaApp_Build_VersionHistory_Scroll", p1.scrollingFrameRef)
+local function VersionHistoryContent(p1) --[[ Line: 54 ]]
+	-- upvalues: UseScrollPerformanceTrackerModule (copy), UseScrollEndReachedModule (copy), FIntBuildExperienceVersionHistoryLoadMoreViewportPercentModule (copy), ReactModule (copy), Sheet (copy)
+	UseScrollPerformanceTrackerModule("LuaApp_Build_VersionHistory_Scroll", p1.scrollingFrameRef)
+	UseScrollEndReachedModule(p1.scrollingFrameRef, FIntBuildExperienceVersionHistoryLoadMoreViewportPercentModule / 100, p1.onEndReached)
 	
-	if fFlagBuildExperienceVersionHistoryPaginationModule then
-		useScrollEndReachedModule(p1.scrollingFrameRef, fIntBuildExperienceVersionHistoryLoadMoreViewportPercentModule / 100, p1.onEndReached)
-	end
-	return reactModule.createElement(sheet.Content, { scrollingFrameRef = p1.scrollingFrameRef }, p1.children)
+	return ReactModule.createElement(Sheet.Content, { scrollingFrameRef = p1.scrollingFrameRef }, p1.children)
 end
 
-return function(p1)
-	-- upvalues: reactModule (ref), useLocalization (ref), localizationStringsModule (ref), VERSION_HISTORY_VERSIONS_TITLE (ref), fFlagBuildAgentRollbackModule (ref), latestVersionCardViewModule (ref), versionHistoryCardModule (ref), view (ref), checkbox (ref), text (ref), useScaledValue (ref), versionHistorySectionModule (ref), liveVersionCardViewModule (ref), sheet (ref), VersionHistoryContent (ref), fFlagBuildExperienceVersionHistoryPaginationModule (ref), restoreVersionDialogModule (ref)
-	local testId = p1.testId or "version-history-bottom-sheet"
-	local scrollingFrameRef = p1.scrollingFrameRef or reactModule.useRef(nil)
-	local var1, var2 = reactModule.useState(nil)
-	local var3, var4 = reactModule.useState(false)
-	local var5, var6 = reactModule.useState(true)
-	local var7 = useLocalization({
-		allVersions = localizationStringsModule.VERSION_HISTORY_ALL_VERSIONS,
-		hideAutosaved = localizationStringsModule.VERSION_HISTORY_HIDE_AUTOSAVED,
-		published = localizationStringsModule.VERSION_HISTORY_PUBLISHED,
-		title = VERSION_HISTORY_VERSIONS_TITLE
+return function(p1) --[[ Line: 71 | Named "VersionHistoryBottomSheet" ]]
+	-- upvalues: ReactModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), VERSIONHISTORYVERSIONSTITLE (copy), LatestVersionCardViewModule (copy), VersionHistoryCardModule (copy), View (copy), Checkbox (copy), Text (copy), UseScaledValueFunction (copy), VersionHistorySectionModule (copy), LiveVersionCardViewModule (copy), Sheet (copy), VersionHistoryContent (copy), RestoreVersionDialogModule (copy)
+	local TestId = p1.testId or "version-history-bottom-sheet"
+	local UseRefResult = ReactModule.useRef(nil)
+	local ScrollingFrameRef = p1.scrollingFrameRef or UseRefResult
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(true)
+	local UseLocalizationResult = UseLocalizationFunction({
+		allVersions = LocalizationStringsModule.VERSION_HISTORY_ALL_VERSIONS,
+		hideAutosaved = LocalizationStringsModule.VERSION_HISTORY_HIDE_AUTOSAVED,
+		published = LocalizationStringsModule.VERSION_HISTORY_PUBLISHED,
+		title = VERSIONHISTORYVERSIONSTITLE
 	})
-	local var8 = reactModule.useCallback(function(p2)
-		-- upvalues: var2 (ref)
-		var2(p2)
+	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 91 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(p2)
 	end, {})
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 95 ]]
+		-- upvalues: UseStateResult1 (copy), UseStateResult2 (copy)
+		if not UseStateResult1 then
+			UseStateResult2(nil)
+			
+			return
+		end
+	end, { UseStateResult1 })
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 103 ]]
+		-- upvalues: UseStateResult (copy), p1 (copy), UseStateResult1 (copy), UseStateResult2_1 (copy), UseStateResult2 (copy)
+		if UseStateResult == nil then return end
+		if p1.isRestoreDisabled or UseStateResult1 then return end
+		UseStateResult2_1(true)
+		local OnRestoreResult = p1.onRestore(UseStateResult)
+		
+		if OnRestoreResult == nil then
+			UseStateResult2_1(false)
+			
+			return
+		else
+			OnRestoreResult:andThen(function() --[[ Line: 117 ]]
+				-- upvalues: UseStateResult2_1 (upval), UseStateResult2 (upval), p1 (upval)
+				UseStateResult2_1(false)
+				UseStateResult2(nil)
+				
+				if p1.onRestoreStarted ~= nil then
+					p1.onRestoreStarted()
+				end
+			end):catch(function() --[[ Line: 124 ]]
+				-- upvalues: UseStateResult2_1 (upval)
+				UseStateResult2_1(false)
+			end)
+		end
+	end, {
+		UseStateResult,
+		p1.isRestoreDisabled,
+		p1.onRestore,
+		p1.onRestoreStarted,
+		UseStateResult1
+	})
+	local Published = UseLocalizationResult.published
 	
-	return reactModule.createElement(reactModule.Fragment, nil, {
-		Sheet = reactModule.createElement(sheet.Root, {
+	return ReactModule.createElement(ReactModule.Fragment, nil, {
+		Sheet = ReactModule.createElement(Sheet.Root, {
 			defaultSnapPointIndex = 2,
 			isOpen = p1.isOpen == nil or p1.isOpen,
 			snapPoints = { 0.5, 1 },
-			onClose = reactModule.useCallback(function()
-				-- upvalues: var2 (ref), p1 (ref)
-				var2(nil)
+			onClose = ReactModule.useCallback(function() --[[ Line: 86 ]]
+				-- upvalues: UseStateResult2 (copy), p1 (copy)
+				UseStateResult2(nil)
 				p1.onClose()
 			end, { p1.onClose }),
-			testId = testId
+			testId = TestId
 		}, {
-			Header = reactModule.createElement(sheet.Header, { hasCloseAffordance = true }, {
-				Title = reactModule.createElement(text, {
+			Header = ReactModule.createElement(Sheet.Header, { hasCloseAffordance = true }, {
+				Title = ReactModule.createElement(Text, {
 					LayoutOrder = 1,
-					Text = var7.title,
+					Text = UseLocalizationResult.title,
 					tag = {
 						["shrink auto-xy text-wrap text-align-x-left content-emphasis"] = true,
 						["text-heading-medium"] = true
 					}
 				})
 			}),
-			Content = reactModule.createElement(VersionHistoryContent, {
-				scrollingFrameRef = scrollingFrameRef,
-				onEndReached = if fFlagBuildExperienceVersionHistoryPaginationModule then p1.onEndReached else nil
+			Content = ReactModule.createElement(VersionHistoryContent, {
+				scrollingFrameRef = ScrollingFrameRef,
+				onEndReached = p1.onEndReached
 			}, {
-				Sections = reactModule.createElement(view, {
+				Sections = ReactModule.createElement(View, {
 					tag = "col size-full-0 auto-y",
 					layout = {
 						FillDirection = Enum.FillDirection.Vertical,
-						Padding = UDim.new(0, useScaledValue(32))
+						Padding = UDim.new(0, (UseScaledValueFunction(32)))
 					},
-					testId = `{testId}-sections`
+					testId = `{TestId}-sections`
 				}, {
-					Published = if p1.liveVersion then reactModule.createElement(versionHistorySectionModule, {
+					Published = if p1.liveVersion then ReactModule.createElement(VersionHistorySectionModule, {
 						layoutOrder = 1,
-						title = var7.published,
-						testId = `{testId}-published`
+						title = Published,
+						testId = `{TestId}-published`
 					}, {
-						LiveVersionCard = reactModule.createElement(liveVersionCardViewModule, p1.liveVersion)
+						LiveVersionCard = ReactModule.createElement(LiveVersionCardViewModule, p1.liveVersion)
 					}) else nil,
-					AllVersions = reactModule.createElement(versionHistorySectionModule, {
+					AllVersions = ReactModule.createElement(VersionHistorySectionModule, {
 						layoutOrder = 2,
-						title = var7.allVersions,
-						testId = `{testId}-all-versions`
+						title = UseLocalizationResult.allVersions,
+						testId = `{TestId}-all-versions`
 					}, {
-						AutosaveFilter = reactModule.createElement(view, { LayoutOrder = 1, tag = "row size-full-0 auto-y" }, {
-							Checkbox = reactModule.createElement(checkbox, {
-								label = var7.hideAutosaved,
-								isChecked = var5,
-								onActivated = var6,
-								testId = `{testId}-autosave-filter`
+						AutosaveFilter = ReactModule.createElement(View, { LayoutOrder = 1, tag = "row size-full-0 auto-y" }, {
+							Checkbox = ReactModule.createElement(Checkbox, {
+								label = UseLocalizationResult.hideAutosaved,
+								isChecked = UseStateResult3,
+								onActivated = UseStateResult2_2,
+								testId = `{TestId}-autosave-filter`
 							})
 						}),
-						Status = if p1.statusText then reactModule.createElement(text, {
+						Status = if p1.statusText then ReactModule.createElement(Text, {
 							LayoutOrder = 2,
 							tag = "size-full-0 auto-y padding-bottom-medium text-body-medium text-wrap text-align-x-left content-default",
 							Text = p1.statusText
 						}) else nil,
-						Cards = reactModule.createElement(view, {
+						Cards = ReactModule.createElement(View, {
 							LayoutOrder = 3,
 							tag = "col gap-medium size-full-0 auto-y padding-bottom-large"
-						}, reactModule.useMemo(function()
-							-- upvalues: p1 (ref), reactModule (copy), latestVersionCardViewModule (copy), var5 (ref), testId (ref), versionHistoryCardModule (copy), var8 (ref)
-							local t = {}
-							local var9 = p1.latestVersion ~= nil
+						}, (ReactModule.useMemo(function() --[[ Line: 138 ]]
+							-- upvalues: p1 (copy), ReactModule (upval), LatestVersionCardViewModule (upval), UseStateResult3 (copy), TestId (copy), VersionHistoryCardModule (upval), UseResult (copy)
+							local Elements = {}
+							local HasLatestVersion = p1.latestVersion ~= nil
 							
-							if var9 then
-								t.LatestVersionCard = reactModule.createElement(latestVersionCardViewModule, p1.latestVersion)
+							if HasLatestVersion then
+								Elements.LatestVersionCard = ReactModule.createElement(LatestVersionCardViewModule, p1.latestVersion)
 							end
-							for i, v in p1.entries do
-								if (not var9 or i ~= 1) and (not var5 or not v.isAutosaved) then
-									t[v.id] = reactModule.createElement(versionHistoryCardModule, {
-										layoutOrder = i,
-										versionLabel = v.versionLabel,
-										title = v.title,
-										description = v.description,
-										badgeText = v.badgeText,
+							for LayoutOrder, entry in p1.entries do
+								if (not HasLatestVersion or LayoutOrder ~= 1) and (not UseStateResult3 or not entry.isAutosaved) then
+									Elements[entry.id] = ReactModule.createElement(VersionHistoryCardModule, {
+										layoutOrder = LayoutOrder,
+										versionLabel = entry.versionLabel,
+										title = entry.title,
+										description = entry.description,
+										badgeText = entry.badgeText,
 										isRestoreDisabled = p1.isRestoreDisabled,
-										onRestore = function()
-											-- upvalues: var8 (copy), v (ref)
-											var8(v)
+										onRestore = function() --[[ Line: 159 ]]
+											-- upvalues: UseResult (upval), entry (copy)
+											UseResult(entry)
 										end,
-										testId = `{testId}-card-{v.id}`
+										testId = `{TestId}-card-{entry.id}`
 									})
 								end
 							end
-							return t
+							return Elements
 						end, {
-							p1.entries, p1.isRestoreDisabled, p1.latestVersion, var5, var8, testId
-						}))
+							p1.entries, p1.isRestoreDisabled, p1.latestVersion, UseStateResult3, UseResult,
+							TestId
+						})))
 					})
 				})
 			})
 		}),
-		RestoreDialog = if var1 then reactModule.createElement(restoreVersionDialogModule, {
+		RestoreDialog = if UseStateResult then ReactModule.createElement(RestoreVersionDialogModule, {
 			isOpen = true,
-			title = var1.versionLabel,
-			description = var1.description,
-			isLoading = if fFlagBuildAgentRollbackModule then var3 else nil,
-			onRestore = reactModule.useCallback(function()
-				-- upvalues: var1 (ref), fFlagBuildAgentRollbackModule (copy), var2 (ref), p1 (ref), var3 (ref), var4 (ref)
-				if var1 == nil then return end
-				if fFlagBuildAgentRollbackModule then
-					if p1.isRestoreDisabled or var3 then return end
-					var4(true)
-					local var10 = p1.onRestore(var1)
-					
-					if var10 == nil then
-						var4(false)
-						
-						return
-					end
-					var10:andThen(function()
-						-- upvalues: var4 (copy), var2 (copy), p1 (copy)
-						var4(false)
-						var2(nil)
-						
-						if p1.onRestoreStarted ~= nil then
-							p1.onRestoreStarted()
-						end
-					end):catch(function()
-						-- upvalues: var4 (copy)
-						var4(false)
-					end)
-					
-					return
-				else
-					var2(nil)
-					
-					if p1.isRestoreDisabled then
-						return
-					end
-					p1.onRestore(var1)
-				end
-			end, {
-				var1,
-				p1.isRestoreDisabled,
-				p1.onRestore,
-				p1.onRestoreStarted,
-				var3
-			}),
-			onCancel = reactModule.useCallback(function()
-				-- upvalues: var3 (ref), var2 (ref)
-				if var3 then
-					return
-				end
-				var2(nil)
-			end, { var3 })
+			title = UseStateResult.versionLabel,
+			description = UseStateResult.description,
+			isLoading = UseStateResult1,
+			onRestore = UseResult2,
+			onCancel = UseResult1
 		}) else nil
 	})
 end

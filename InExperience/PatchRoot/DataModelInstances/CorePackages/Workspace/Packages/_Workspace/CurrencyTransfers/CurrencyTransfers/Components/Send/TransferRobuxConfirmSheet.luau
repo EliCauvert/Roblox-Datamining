@@ -1,268 +1,274 @@
-﻿local currencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
-local parent = currencyTransfers.Parent
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local sharedFlagsModule = require(parent.SharedFlags)
-local transferLocalizationKeysModule = require(currencyTransfers.Localization.TransferLocalizationKeys)
-local foundationModule = require(parent.Foundation)
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local sheet = foundationModule.Sheet
-local button = foundationModule.Button
-local view = foundationModule.View
-local text = foundationModule.Text
-local fillBehavior = foundationModule.Enums.FillBehavior
-local enums = foundationModule.Enums
-local iconVariant = foundationModule.Enums.IconVariant
-local getIconRichText = foundationModule.Utility.getIconRichText
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local transferRobuxHeaderModule = require(currencyTransfers.Components.Generic.TransferRobuxHeader)
-local transferProfileThumbnailModule = require(currencyTransfers.Components.Generic.TransferProfileThumbnail)
-local robuxTextModule = require(currencyTransfers.Components.Generic.RobuxText)
-local useTransferStoreModule = require(currencyTransfers.Hooks.useTransferStore)
-local setTransferPromptStateModule = require(currencyTransfers.Actions.Send.setTransferPromptState)
-local processTransferModule = require(currencyTransfers.Actions.Send.processTransfer)
-local promptStateModule = require(currencyTransfers.Enums.PromptState)
-local transferOriginationModule = require(currencyTransfers.Enums.TransferOrigination)
-local currencyTransferTelemetryModule = require(currencyTransfers.Events.CurrencyTransferTelemetry)
-local robuxTransferFlowEventNameModule = require(currencyTransfers.Enums.RobuxTransferFlowEventName)
-local logCurrencyTransferCounterModule = require(currencyTransfers.Utils.logCurrencyTransferCounter)
-local logRobuxTransferFlowEventModule = require(currencyTransfers.Utils.logRobuxTransferFlowEvent)
-local getFFlagCurrencyTransferFlowUIImprovementFixModule = require(currencyTransfers.Flags.GetFFlagCurrencyTransferFlowUIImprovementFix)
-local getFIntCurrencyTransferDeveloperCommissionRateModule = require(currencyTransfers.Flags.GetFIntCurrencyTransferDeveloperCommissionRate)
-local getFIntCurrencyTransferPlatformFeeRateModule = require(currencyTransfers.Flags.GetFIntCurrencyTransferPlatformFeeRate)
-local getFFlagCurrencyTransferFocusNavigationModule = require(currencyTransfers.Flags.GetFFlagCurrencyTransferFocusNavigation)
-local useTransferSheetFocusModule = require(currencyTransfers.Hooks.useTransferSheetFocus)
+﻿local CurrencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
+local Parent = CurrencyTransfers.Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local TransferLocalizationKeysModule = require(CurrencyTransfers.Localization.TransferLocalizationKeys)
+local FoundationModule = require(Parent.Foundation)
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local Sheet = FoundationModule.Sheet
+local Button = FoundationModule.Button
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local FillBehavior = FoundationModule.Enums.FillBehavior
+local Enums = FoundationModule.Enums
+local IconVariant = FoundationModule.Enums.IconVariant
+local GetIconRichTextFunction = FoundationModule.Utility.getIconRichText
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local TransferRobuxHeaderModule = require(CurrencyTransfers.Components.Generic.TransferRobuxHeader)
+local TransferProfileThumbnailModule = require(CurrencyTransfers.Components.Generic.TransferProfileThumbnail)
+local RobuxTextModule = require(CurrencyTransfers.Components.Generic.RobuxText)
+local UseTransferStoreModule = require(CurrencyTransfers.Hooks.useTransferStore)
+local SetTransferPromptStateModule = require(CurrencyTransfers.Actions.Send.setTransferPromptState)
+local ProcessTransferModule = require(CurrencyTransfers.Actions.Send.processTransfer)
+local PromptStateModule = require(CurrencyTransfers.Enums.PromptState)
+local TransferOriginationModule = require(CurrencyTransfers.Enums.TransferOrigination)
+local CurrencyTransferTelemetryModule = require(CurrencyTransfers.Events.CurrencyTransferTelemetry)
+local RobuxTransferFlowEventNameModule = require(CurrencyTransfers.Enums.RobuxTransferFlowEventName)
+local LogCurrencyTransferCounterModule = require(CurrencyTransfers.Utils.logCurrencyTransferCounter)
+local LogRobuxTransferFlowEventModule = require(CurrencyTransfers.Utils.logRobuxTransferFlowEvent)
+local GetFFlagCurrencyTransferFlowUIImprovementFixModule = require(CurrencyTransfers.Flags.GetFFlagCurrencyTransferFlowUIImprovementFix)
+local GetFIntCurrencyTransferDeveloperCommissionRateModule = require(CurrencyTransfers.Flags.GetFIntCurrencyTransferDeveloperCommissionRate)
+local GetFIntCurrencyTransferPlatformFeeRateModule = require(CurrencyTransfers.Flags.GetFIntCurrencyTransferPlatformFeeRate)
+local GetFFlagCurrencyTransferFocusNavigationModule = require(CurrencyTransfers.Flags.GetFFlagCurrencyTransferFocusNavigation)
+local UseTransferSheetFocusModule = require(CurrencyTransfers.Hooks.useTransferSheetFocus)
 
-return function(_)
-	-- upvalues: useLocalization (ref), transferLocalizationKeysModule (ref), useTransferStoreModule (ref), reactModule (ref), logCurrencyTransferCounterModule (ref), currencyTransferTelemetryModule (ref), sharedFlagsModule (ref), logRobuxTransferFlowEventModule (ref), robuxTransferFlowEventNameModule (ref), signalsReactModule (ref), transferOriginationModule (ref), getFFlagCurrencyTransferFocusNavigationModule (ref), useTransferSheetFocusModule (ref), getFFlagCurrencyTransferFlowUIImprovementFixModule (ref), getFIntCurrencyTransferDeveloperCommissionRateModule (ref), getFIntCurrencyTransferPlatformFeeRateModule (ref), sheet (ref), transferRobuxHeaderModule (ref), view (ref), transferProfileThumbnailModule (ref), text (ref), getIconRichText (ref), enums (ref), iconVariant (ref), robuxTextModule (ref), button (ref), setTransferPromptStateModule (ref), promptStateModule (ref), processTransferModule (ref), buttonVariant (ref), fillBehavior (ref), foundationModule (ref)
-	local var1 = useLocalization(transferLocalizationKeysModule.Presets.TransferRobuxConfirmSheet)
-	local var2 = useTransferStoreModule()
-	reactModule.useEffect(function()
-		-- upvalues: logCurrencyTransferCounterModule (copy), var2 (ref), currencyTransferTelemetryModule (copy), sharedFlagsModule (copy), logRobuxTransferFlowEventModule (copy), robuxTransferFlowEventNameModule (copy)
-		logCurrencyTransferCounterModule(var2, currencyTransferTelemetryModule.CurrencyTransferConfirmSheetShownCounter)
+return function(_) --[[ Line: 59 | Named "TransferRobuxConfirmSheet" ]]
+	-- upvalues: UseLocalizationFunction (copy), TransferLocalizationKeysModule (copy), UseTransferStoreModule (copy), ReactModule (copy), LogCurrencyTransferCounterModule (copy), CurrencyTransferTelemetryModule (copy), SharedFlagsModule (copy), LogRobuxTransferFlowEventModule (copy), RobuxTransferFlowEventNameModule (copy), SignalsReactModule (copy), TransferOriginationModule (copy), GetFFlagCurrencyTransferFocusNavigationModule (copy), UseTransferSheetFocusModule (copy), GetFFlagCurrencyTransferFlowUIImprovementFixModule (copy), GetFIntCurrencyTransferDeveloperCommissionRateModule (copy), GetFIntCurrencyTransferPlatformFeeRateModule (copy), Sheet (copy), TransferRobuxHeaderModule (copy), View (copy), TransferProfileThumbnailModule (copy), Text (copy), GetIconRichTextFunction (copy), Enums (copy), IconVariant (copy), RobuxTextModule (copy), Button (copy), SetTransferPromptStateModule (copy), PromptStateModule (copy), ProcessTransferModule (copy), ButtonVariant (copy), FillBehavior (copy), FoundationModule (copy)
+	local UseLocalizationResult = UseLocalizationFunction(TransferLocalizationKeysModule.Presets.TransferRobuxConfirmSheet)
+	local UseTransferStoreModuleResult = UseTransferStoreModule()
+	ReactModule.useEffect(function() --[[ Line: 64 ]]
+		-- upvalues: LogCurrencyTransferCounterModule (upval), UseTransferStoreModuleResult (copy), CurrencyTransferTelemetryModule (upval), SharedFlagsModule (upval), LogRobuxTransferFlowEventModule (upval), RobuxTransferFlowEventNameModule (upval)
+		LogCurrencyTransferCounterModule(UseTransferStoreModuleResult, CurrencyTransferTelemetryModule.CurrencyTransferConfirmSheetShownCounter)
 		
-		if sharedFlagsModule.FFlagEnableRobuxTransferFlowEventIngest then
-			logRobuxTransferFlowEventModule(var2, robuxTransferFlowEventNameModule.confirm_shown)
+		if SharedFlagsModule.FFlagEnableRobuxTransferFlowEventIngest then
+			LogRobuxTransferFlowEventModule(UseTransferStoreModuleResult, RobuxTransferFlowEventNameModule.confirm_shown)
 		end
 		return nil
-	end, { var2 })
-	local getRobuxBalanceAmount = signalsReactModule.useSignalState(var2.getRobuxBalanceAmount) or 0
-	local getSelectedAmount = signalsReactModule.useSignalState(var2.getSelectedAmount) or 0
-	local userRelationshipDetail = var2.getUserRelationshipDetail(false)
-	local recipient = var2.getRecipient(false)
-	local var3 = var2.getTransferOrigination(false) == transferOriginationModule.InExperience
-	local triggerOnClose = var2.triggerOnClose
-	local var4 = nil
-	local var5 = nil
+	end, { UseTransferStoreModuleResult })
+	local UseSignalStateResult = SignalsReactModule.useSignalState(UseTransferStoreModuleResult.getRobuxBalanceAmount) or 0
+	local UseSignalStateResult1 = SignalsReactModule.useSignalState(UseTransferStoreModuleResult.getSelectedAmount) or 0
+	local UserRelationshipDetail = UseTransferStoreModuleResult.getUserRelationshipDetail(false)
+	local Recipient = UseTransferStoreModuleResult.getRecipient(false)
+	local IsTransferOriginationMatch = UseTransferStoreModuleResult.getTransferOrigination(false) == TransferOriginationModule.InExperience
+	local TriggerOnClose = UseTransferStoreModuleResult.triggerOnClose
+	local Ref = nil
+	local Ref1 = nil
 	
-	if getFFlagCurrencyTransferFocusNavigationModule() then
-		local var6, var7 = useTransferSheetFocusModule(triggerOnClose)
-		var4 = var6
-		var5 = var7
+	if GetFFlagCurrencyTransferFocusNavigationModule() then
+		Ref, Ref1 = UseTransferSheetFocusModule(TriggerOnClose)
 	end
-	local year = os.date("*t").year
-	local var8, var9 = reactModule.useState(userRelationshipDetail)
-	local var10, var11 = reactModule.useState(recipient)
-	reactModule.useEffect(function()
-		-- upvalues: userRelationshipDetail (ref), var9 (ref)
-		if userRelationshipDetail then
-			var9(userRelationshipDetail)
+	local Year = os.date("*t").year
+	local UseStateResult, UseStateResult2 = ReactModule.useState(UserRelationshipDetail)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(Recipient)
+	ReactModule.useEffect(function() --[[ Line: 88 ]]
+		-- upvalues: UserRelationshipDetail (copy), UseStateResult2 (copy)
+		if UserRelationshipDetail then
+			UseStateResult2(UserRelationshipDetail)
 		end
-	end, { userRelationshipDetail })
-	reactModule.useEffect(function()
-		-- upvalues: recipient (ref), var11 (ref)
-		if recipient then
-			var11(recipient)
+	end, { UserRelationshipDetail })
+	ReactModule.useEffect(function() --[[ Line: 94 ]]
+		-- upvalues: Recipient (copy), UseStateResult2_1 (copy)
+		if Recipient then
+			UseStateResult2_1(Recipient)
 		end
-	end, { recipient })
-	local var12 = reactModule.useMemo(function()
-		-- upvalues: getFFlagCurrencyTransferFlowUIImprovementFixModule (copy), var8 (ref), var1 (ref), year (ref)
-		if getFFlagCurrencyTransferFlowUIImprovementFixModule() then
-			if not var8 or not var8.friendSinceDate then
-				return var1.NewConnection
+	end, { Recipient })
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 101 ]]
+		-- upvalues: GetFFlagCurrencyTransferFlowUIImprovementFixModule (upval), UseStateResult (copy), UseLocalizationResult (copy), Year (copy)
+		if GetFFlagCurrencyTransferFlowUIImprovementFixModule() then
+			if not UseStateResult or not UseStateResult.friendSinceDate then
+				return UseLocalizationResult.NewConnection
 			end
-			local friendSinceDate = var8.friendSinceDate
-			local timestamp = os.time()
-			local floored = math.floor((timestamp - os.time({
+			local FriendSinceDate = UseStateResult.friendSinceDate
+			local Timestamp = os.time()
+			local Floored = math.floor((Timestamp - os.time({
 				hour = 0,
 				min = 0,
 				sec = 0,
-				year = friendSinceDate.year,
-				month = friendSinceDate.month,
-				day = friendSinceDate.day
+				year = FriendSinceDate.year,
+				month = FriendSinceDate.month,
+				day = FriendSinceDate.day
 			})) / 86400)
 			
-			if floored < 1 then
-				return var1.NewConnection
+			if Floored < 1 then
+				return UseLocalizationResult.NewConnection
 			end
-			local dateString = os.date("*t", timestamp)
-			local var13 = (dateString.year - friendSinceDate.year) * 12 + (dateString.month - friendSinceDate.month)
+			local DateInfo = os.date("*t", Timestamp)
+			local NewYear = (DateInfo.year - FriendSinceDate.year) * 12 + (DateInfo.month - FriendSinceDate.month)
 			
-			if dateString.day < friendSinceDate.day then
-				var13 -= 1
+			if DateInfo.day < FriendSinceDate.day then
+				NewYear -= 1
 			end
-			return if var13 >= 12 then string.gsub(var1.ConnectedYear, "{year}", tostring(math.floor(var13 / 12))) elseif var13 >= 1 then if var13 <= 1 then string.gsub(var1.ConnectedMonthsSingular, "{amount}", tostring(var13)) else string.gsub(var1.ConnectedMonths, "{amount}", tostring(var13)) elseif floored <= 1 then string.gsub(var1.ConnectedDaysSingular, "{amount}", tostring(floored)) else string.gsub(var1.ConnectedDays, "{amount}", tostring(floored))
-		elseif not var8 or not var8.friendSinceYear then
-			return var1.NewConnection
+			return if NewYear >= 12 then string.gsub(UseLocalizationResult.ConnectedYear, "{year}", (tostring((math.floor(NewYear / 12))))) elseif NewYear >= 1 then if NewYear <= 1 then string.gsub(UseLocalizationResult.ConnectedMonthsSingular, "{amount}", (tostring(NewYear))) else string.gsub(UseLocalizationResult.ConnectedMonths, "{amount}", (tostring(NewYear))) elseif Floored <= 1 then string.gsub(UseLocalizationResult.ConnectedDaysSingular, "{amount}", (tostring(Floored))) else string.gsub(UseLocalizationResult.ConnectedDays, "{amount}", (tostring(Floored)))
+		elseif UseStateResult and UseStateResult.friendSinceYear then
+			local YearDelta = Year - UseStateResult.friendSinceYear
+			
+			return if YearDelta == 0 then UseLocalizationResult.NewConnection else string.gsub(UseLocalizationResult.ConnectedYear, "{year}", (tostring(YearDelta)))
+		else
+			return UseLocalizationResult.NewConnection
 		end
-		local var14 = year - var8.friendSinceYear
+	end, {
+		Year, UseStateResult, UseLocalizationResult.ConnectedYear,
+		UseLocalizationResult.ConnectedMonths,
+		UseLocalizationResult.ConnectedMonthsSingular,
+		UseLocalizationResult.ConnectedDays,
+		UseLocalizationResult.ConnectedDaysSingular,
+		UseLocalizationResult.NewConnection
+	})
+	local UseMemoResult1 = ReactModule.useMemo(function(): string --[[ Line: 164 ]]
+		-- upvalues: UseStateResult (copy), GetFFlagCurrencyTransferFlowUIImprovementFixModule (upval), UseLocalizationResult (copy)
+		local MutualFriendsCount: number = UseStateResult.mutualFriendsCount
 		
-		return if var14 == 0 then var1.NewConnection else string.gsub(var1.ConnectedYear, "{year}", tostring(var14))
+		return if GetFFlagCurrencyTransferFlowUIImprovementFixModule() and UseStateResult.areFriends and MutualFriendsCount <= 1 then string.gsub(UseLocalizationResult.MutualConnectionSingular, "{amount}", (tostring(MutualFriendsCount))) else string.gsub(UseLocalizationResult.MutualConnection, "{amount}", (tostring(MutualFriendsCount)))
 	end, {
-		year, var8, var1.ConnectedYear, var1.ConnectedMonths,
-		var1.ConnectedMonthsSingular, var1.ConnectedDays,
-		var1.ConnectedDaysSingular, var1.NewConnection
+		UseStateResult.mutualFriendsCount,
+		UseStateResult.areFriends,
+		UseLocalizationResult.MutualConnection,
+		UseLocalizationResult.MutualConnectionSingular
 	})
-	local var13 = reactModule.useMemo(function()
-		-- upvalues: var8 (ref), getFFlagCurrencyTransferFlowUIImprovementFixModule (copy), var1 (ref)
-		local mutualFriendsCount = var8.mutualFriendsCount
-		
-		return if getFFlagCurrencyTransferFlowUIImprovementFixModule() and var8.areFriends and mutualFriendsCount <= 1 then string.gsub(var1.MutualConnectionSingular, "{amount}", tostring(mutualFriendsCount)) else string.gsub(var1.MutualConnection, "{amount}", tostring(mutualFriendsCount))
+	local UseMemoResult2 = ReactModule.useMemo(function(): string --[[ Line: 183 ]]
+		-- upvalues: UseLocalizationResult (copy), UseStateResult (copy)
+		return string.gsub(UseLocalizationResult.JoinedInYear, "{year}", (tostring(UseStateResult.userAccountSinceYear)))
+	end, { UseStateResult.userAccountSinceYear })
+	local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 188 ]]
+		-- upvalues: GetFFlagCurrencyTransferFlowUIImprovementFixModule (upval), IsTransferOriginationMatch (copy), UseSignalStateResult1 (copy), GetFIntCurrencyTransferDeveloperCommissionRateModule (upval), GetFIntCurrencyTransferPlatformFeeRateModule (upval), UseLocalizationResult (copy)
+		return if GetFFlagCurrencyTransferFlowUIImprovementFixModule() then if IsTransferOriginationMatch and UseSignalStateResult1 then string.gsub(string.gsub(UseLocalizationResult.RecipientWillGetInGame, "{amount}", (tostring((math.ceil(UseSignalStateResult1 * (1 - (GetFIntCurrencyTransferDeveloperCommissionRateModule() + GetFIntCurrencyTransferPlatformFeeRateModule()) / 100)))))), "{commissionPercentage}", (tostring((GetFIntCurrencyTransferDeveloperCommissionRateModule())))) elseif UseSignalStateResult1 then string.gsub(UseLocalizationResult.RecipientWillGetInApp, "{amount}", (tostring(UseSignalStateResult1))) else nil elseif IsTransferOriginationMatch and UseSignalStateResult1 then string.gsub(UseLocalizationResult.RecipientWillGet, "{amount}", (tostring((math.ceil(UseSignalStateResult1 * (1 - (GetFIntCurrencyTransferDeveloperCommissionRateModule() + GetFIntCurrencyTransferPlatformFeeRateModule()) / 100)))))) else nil
 	end, {
-		var8.mutualFriendsCount,
-		var8.areFriends,
-		var1.MutualConnection,
-		var1.MutualConnectionSingular
+		IsTransferOriginationMatch, UseSignalStateResult1,
+		UseLocalizationResult.RecipientWillGet,
+		UseLocalizationResult.RecipientWillGetInGame,
+		UseLocalizationResult.RecipientWillGetInApp,
+		GetFFlagCurrencyTransferFlowUIImprovementFixModule()
 	})
-	local var14 = reactModule.useMemo(function()
-		-- upvalues: var1 (ref), var8 (ref)
-		return string.gsub(var1.JoinedInYear, "{year}", tostring(var8.userAccountSinceYear))
-	end, { var8.userAccountSinceYear })
-	local var15 = reactModule.useMemo(function()
-		-- upvalues: getFFlagCurrencyTransferFlowUIImprovementFixModule (copy), var3 (ref), getSelectedAmount (ref), getFIntCurrencyTransferDeveloperCommissionRateModule (copy), getFIntCurrencyTransferPlatformFeeRateModule (copy), var1 (ref)
-		return if getFFlagCurrencyTransferFlowUIImprovementFixModule() then if var3 and getSelectedAmount then string.gsub(string.gsub(var1.RecipientWillGetInGame, "{amount}", tostring(math.ceil(getSelectedAmount * (1 - (getFIntCurrencyTransferDeveloperCommissionRateModule() + getFIntCurrencyTransferPlatformFeeRateModule()) / 100)))), "{commissionPercentage}", tostring(getFIntCurrencyTransferDeveloperCommissionRateModule())) elseif getSelectedAmount then string.gsub(var1.RecipientWillGetInApp, "{amount}", tostring(getSelectedAmount)) else nil elseif var3 and getSelectedAmount then string.gsub(var1.RecipientWillGet, "{amount}", tostring(math.ceil(getSelectedAmount * (1 - (getFIntCurrencyTransferDeveloperCommissionRateModule() + getFIntCurrencyTransferPlatformFeeRateModule()) / 100)))) else nil
-	end, {
-		var3, getSelectedAmount, var1.RecipientWillGet, var1.RecipientWillGetInGame,
-		var1.RecipientWillGetInApp,
-		getFFlagCurrencyTransferFlowUIImprovementFixModule()
-	})
-	local var16 = getFFlagCurrencyTransferFlowUIImprovementFixModule() and not var8.areFriends
+	local SizeFull0AutoYTextBodySmallTextWrapTextAlignXCenterContentDefault: string = if GetFFlagCurrencyTransferFlowUIImprovementFixModule() then "size-full-0 auto-y text-body-small text-wrap text-align-x-center content-default" else "auto-xy text-caption-small text-align-x-center content-muted"
+	local NoAreFriends: boolean = GetFFlagCurrencyTransferFlowUIImprovementFixModule() and not UseStateResult.areFriends
 	
-	return reactModule.createElement(sheet.Root, {
+	return ReactModule.createElement(Sheet.Root, {
 		preferCenterSheet = true,
-		onClose = triggerOnClose,
-		ref = var4
+		onClose = TriggerOnClose,
+		ref = Ref
 	}, {
-		Header = reactModule.createElement(sheet.Header, {}, {
-			TransferRobuxHeader = reactModule.createElement(transferRobuxHeaderModule, {
-				titleText = var1.SendRobux,
-				robuxBalanceAmount = getRobuxBalanceAmount
+		Header = ReactModule.createElement(Sheet.Header, {}, {
+			TransferRobuxHeader = ReactModule.createElement(TransferRobuxHeaderModule, {
+				titleText = UseLocalizationResult.SendRobux,
+				robuxBalanceAmount = UseSignalStateResult
 			})
 		}),
-		Content = reactModule.createElement(sheet.Content, { LayoutOrder = 2 }, {
-			SheetContentContainer = reactModule.createElement(view, { tag = "col gap-large auto-y size-full-0 align-x-center" }, {
-				ProfileCard = reactModule.createElement(view, {
+		Content = ReactModule.createElement(Sheet.Content, { LayoutOrder = 2 }, {
+			SheetContentContainer = ReactModule.createElement(View, { tag = "col gap-large auto-y size-full-0 align-x-center" }, {
+				ProfileCard = ReactModule.createElement(View, {
 					LayoutOrder = 1,
-					Size = if getFFlagCurrencyTransferFlowUIImprovementFixModule() then nil else UDim2.new(1, 0, 0, 250),
-					tag = if getFFlagCurrencyTransferFlowUIImprovementFixModule() then "col gap-xlarge align-x-center bg-shift-100 size-full-0 auto-y radius-medium padding-large" else "col gap-xlarge align-x-center bg-shift-100 align-y-center radius-medium padding-large"
+					Size = if GetFFlagCurrencyTransferFlowUIImprovementFixModule() then nil else UDim2.new(1, 0, 0, 250),
+					tag = if GetFFlagCurrencyTransferFlowUIImprovementFixModule() then "col gap-xlarge align-x-center bg-shift-100 size-full-0 auto-y radius-medium padding-large" else "col gap-xlarge align-x-center bg-shift-100 align-y-center radius-medium padding-large"
 				}, {
-					RecipientProfile = if var10 and var10.targetId then reactModule.createElement(transferProfileThumbnailModule, {
+					RecipientProfile = if UseStateResult1 and UseStateResult1.targetId then ReactModule.createElement(TransferProfileThumbnailModule, {
 						showUsername = true,
 						layoutOrder = 1,
-						userId = tostring(var10.targetId),
-						username = var10.targetName,
-						displayName = var10.targetDisplayName,
+						userId = tostring(UseStateResult1.targetId),
+						username = UseStateResult1.targetName,
+						displayName = UseStateResult1.targetDisplayName,
 						size = UDim2.fromOffset(60, 60),
 						thumbnailSize = Enum.ThumbnailSize.Size48x48
 					}) else nil,
-					InfoRow = reactModule.createElement(view, {
+					InfoRow = ReactModule.createElement(View, {
 						tag = "col gap-medium align-x-center align-y-start auto-y size-full-0",
 						LayoutOrder = 2
 					}, {
-						FirstRow = reactModule.createElement(view, {
+						FirstRow = ReactModule.createElement(View, {
 							tag = "row align-x-center align-y-center auto-xy",
 							LayoutOrder = 1
 						}, {
-							ConnectedDetail = if var8 and var8.areFriends then reactModule.createElement(text, {
+							ConnectedDetail = if UseStateResult and UseStateResult.areFriends then ReactModule.createElement(Text, {
 								tag = "auto-xy text-body-medium content-default text-no-wrap",
 								RichText = true,
 								LayoutOrder = 1,
-								Text = `{getIconRichText(enums.IconName.Calendar, iconVariant.Filled)} {var12}`
+								Text = `{GetIconRichTextFunction(Enums.IconName.Calendar, IconVariant.Filled)} {UseMemoResult}`
 							}) else nil,
-							Spacer = if var8 and var8.areFriends then reactModule.createElement(view, {
+							Spacer = if UseStateResult and UseStateResult.areFriends then ReactModule.createElement(View, {
 								tag = "auto-xy",
 								LayoutOrder = 2,
 								Size = UDim2.new(0, 8, 0, 0)
 							}) else nil,
-							MutualDetail = reactModule.createElement(text, {
+							MutualDetail = ReactModule.createElement(Text, {
 								tag = "auto-xy text-body-medium content-default text-no-wrap",
 								RichText = true,
 								LayoutOrder = 3,
-								Text = `{getIconRichText(enums.IconName.TwoPeople, iconVariant.Filled)} {var13}`
+								Text = `{GetIconRichTextFunction(Enums.IconName.TwoPeople, IconVariant.Filled)} {UseMemoResult1}`
 							}),
-							Spacer2 = if var16 then reactModule.createElement(view, {
+							Spacer2 = if NoAreFriends then ReactModule.createElement(View, {
 								tag = "auto-xy",
 								LayoutOrder = 4,
 								Size = UDim2.new(0, 8, 0, 0)
 							}) else nil,
-							InlineJoinedDetail = if var16 then reactModule.createElement(text, {
+							InlineJoinedDetail = if NoAreFriends then ReactModule.createElement(Text, {
 								tag = "auto-xy text-body-medium content-default text-no-wrap",
 								RichText = true,
 								LayoutOrder = 5,
-								Text = `{getIconRichText(enums.IconName.CircleI, iconVariant.Filled)} {var14}`
+								Text = `{GetIconRichTextFunction(Enums.IconName.CircleI, IconVariant.Filled)} {UseMemoResult2}`
 							}) else nil
 						}),
-						JoinedDetail = if var16 then nil else reactModule.createElement(text, {
+						JoinedDetail = if NoAreFriends then nil else ReactModule.createElement(Text, {
 							tag = "auto-xy text-body-medium content-default text-no-wrap padding-y-xsmall",
 							RichText = true,
 							LayoutOrder = 2,
-							Text = `{getIconRichText(enums.IconName.CircleI, iconVariant.Filled)} {var14}`
+							Text = `{GetIconRichTextFunction(Enums.IconName.CircleI, IconVariant.Filled)} {UseMemoResult2}`
 						})
 					})
 				}),
-				AmountDisplay = reactModule.createElement(view, {
+				AmountDisplay = ReactModule.createElement(View, {
 					LayoutOrder = 2,
-					tag = if getFFlagCurrencyTransferFlowUIImprovementFixModule() then "col align-x-center align-y-center size-full-0 auto-y radius-medium bg-shift-100 padding-large" else "col align-x-center align-y-center size-full-2000 radius-medium bg-shift-100"
+					tag = if GetFFlagCurrencyTransferFlowUIImprovementFixModule() then "col align-x-center align-y-center size-full-0 auto-y radius-medium bg-shift-100 padding-large" else "col align-x-center align-y-center size-full-2000 radius-medium bg-shift-100"
 				}, {
-					Amount = reactModule.createElement(robuxTextModule, { layoutOrder = 1, amount = getSelectedAmount or 0 }),
-					RecipientText = if var15 then reactModule.createElement(text, {
+					Amount = ReactModule.createElement(RobuxTextModule, { layoutOrder = 1, amount = UseSignalStateResult1 or 0 }),
+					RecipientText = if UseMemoResult3 then ReactModule.createElement(Text, {
 						LayoutOrder = 2,
-						Text = var15,
-						tag = if getFFlagCurrencyTransferFlowUIImprovementFixModule() then "size-full-0 auto-y text-body-small text-wrap text-align-x-center content-default" else "auto-xy text-caption-small text-align-x-center content-muted"
+						Text = UseMemoResult3,
+						tag = SizeFull0AutoYTextBodySmallTextWrapTextAlignXCenterContentDefault
 					}) else nil
 				})
 			})
 		}),
-		Actions = reactModule.createElement(sheet.Actions, { LayoutOrder = 3 }, {
-			reactModule.createElement(view, {
+		Actions = ReactModule.createElement(Sheet.Actions, { LayoutOrder = 3 }, {
+			ReactModule.createElement(View, {
 				tag = "col align-x-center align-y-center gap-medium size-full-1000"
 			}, {
-				reactModule.createElement(view, {
+				ReactModule.createElement(View, {
 					tag = "row gap-small size-full-0 auto-y",
 					LayoutOrder = 1
 				}, {
-					SendButton = reactModule.createElement(button, {
+					SendButton = ReactModule.createElement(Button, {
 						LayoutOrder = 1,
-						ref = var5,
-						text = var1.Send,
-						onActivated = function()
-							-- upvalues: getSelectedAmount (ref), getRobuxBalanceAmount (ref), setTransferPromptStateModule (copy), var2 (ref), promptStateModule (copy), processTransferModule (copy)
-							if getSelectedAmount and getRobuxBalanceAmount < getSelectedAmount then
-								setTransferPromptStateModule(var2, promptStateModule.TransferInsufficientBalance)
+						ref = Ref1,
+						text = UseLocalizationResult.Send,
+						onActivated = function() --[[ Line: 369 ]]
+							-- upvalues: UseSignalStateResult1 (copy), UseSignalStateResult (copy), SetTransferPromptStateModule (upval), UseTransferStoreModuleResult (copy), PromptStateModule (upval), ProcessTransferModule (upval)
+							if UseSignalStateResult1 and UseSignalStateResult < UseSignalStateResult1 then
+								SetTransferPromptStateModule(UseTransferStoreModuleResult, PromptStateModule.TransferInsufficientBalance)
 								
 								return
+							else
+								ProcessTransferModule(UseTransferStoreModuleResult, UseSignalStateResult1 or 0)
 							end
-							processTransferModule(var2, getSelectedAmount or 0)
 						end,
-						inputDelay = if var3 then 2.5 else nil,
-						variant = buttonVariant.Emphasis,
-						fillBehavior = fillBehavior.Fill
+						inputDelay = if IsTransferOriginationMatch then 2.5 else nil,
+						variant = ButtonVariant.Emphasis,
+						fillBehavior = FillBehavior.Fill
 					}),
-					EditButton = if not var3 then reactModule.createElement(button, {
+					EditButton = if IsTransferOriginationMatch then nil else ReactModule.createElement(Button, {
 						LayoutOrder = 2,
-						text = var1.Edit,
-						onActivated = function()
-							-- upvalues: setTransferPromptStateModule (copy), var2 (ref), promptStateModule (copy)
-							setTransferPromptStateModule(var2, promptStateModule.TransferInput)
+						text = UseLocalizationResult.Edit,
+						onActivated = function() --[[ Line: 384 ]]
+							-- upvalues: SetTransferPromptStateModule (upval), UseTransferStoreModuleResult (copy), PromptStateModule (upval)
+							SetTransferPromptStateModule(UseTransferStoreModuleResult, PromptStateModule.TransferInput)
 						end,
-						variant = buttonVariant.Standard,
-						fillBehavior = fillBehavior.Fill
-					}) else nil
+						variant = ButtonVariant.Standard,
+						fillBehavior = FillBehavior.Fill
+					})
 				}),
-				Disclaimer = reactModule.createElement(foundationModule.Text, {
+				Disclaimer = ReactModule.createElement(FoundationModule.Text, {
 					tag = "wrap size-full-0 auto-y text-caption-small text-wrap text-align-x-left",
 					LayoutOrder = 2,
-					Text = var1.AgeEstimationDisclaimer
+					Text = UseLocalizationResult.AgeEstimationDisclaimer
 				})
 			})
 		})

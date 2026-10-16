@@ -1,14 +1,14 @@
-﻿local rodux = require(game:GetService("CorePackages").Packages.InGameMenuDependencies).Rodux
-local parent = script.Parent
-local globalConfigModule = require(parent.GlobalConfig)
-local reducerModule = require(parent.reducer)
+﻿local Rodux = require(game:GetService("CorePackages").Packages.InGameMenuDependencies).Rodux
+local Parent = script.Parent
+local GlobalConfigModule = require(Parent.GlobalConfig)
+local ReducerModule = require(Parent.reducer)
 
-return function()
-	-- upvalues: rodux (ref), globalConfigModule (ref), reducerModule (ref)
-	local list = { rodux.thunkMiddleware }
+return function() --[[ Line: 11 | Named "createStore" ]]
+	-- upvalues: Rodux (copy), GlobalConfigModule (copy), ReducerModule (copy)
+	local List = { Rodux.thunkMiddleware }
 	
-	if globalConfigModule.logStore then
-		table.insert(list, rodux.loggerMiddleware)
+	if GlobalConfigModule.logStore then
+		table.insert(List, Rodux.loggerMiddleware)
 	end
-	return rodux.Store.new(reducerModule, nil, list)
+	return Rodux.Store.new(ReducerModule, nil, List)
 end

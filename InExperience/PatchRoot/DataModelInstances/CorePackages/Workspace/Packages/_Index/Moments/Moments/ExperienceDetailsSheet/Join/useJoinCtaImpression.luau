@@ -1,49 +1,50 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local momentsCommonModule = require(parent.MomentsCommon)
-local verticalPagerModule = require(moments.Components.VerticalPager)
-local useMomentsSession = require(moments.Stores.GetMomentsStore.MomentsSessionContext).useMomentsSession
-local makeJoinImpressionFieldsModule = require(moments.Analytics.makeJoinImpressionFields)
-local analytics = momentsCommonModule.Analytics
-local eventNames = analytics.EventNames
-local useSignalState = signalsReactModule.useSignalState
-local useVerticalPager = verticalPagerModule.useVerticalPager
-local usePagerItem = verticalPagerModule.usePagerItem
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local VerticalPagerModule = require(Moments.Components.VerticalPager)
+local UseMomentsSessionFunction = require(Moments.Stores.GetMomentsStore.MomentsSessionContext).useMomentsSession
+local MakeJoinImpressionFieldsModule = require(Moments.Analytics.makeJoinImpressionFields)
+local MomentImpressionMemoryModule = require(Moments.Components.Feed.Items.Moment.MomentImpressionMemory)
+local FFlagMomentsFixOverlayRemountImpressionsModule = require(Moments.Flags.FFlagMomentsFixOverlayRemountImpressions)
+local Analytics = require(Parent.MomentsCommon).Analytics
+local EventNames = Analytics.EventNames
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local UseVerticalPagerFunction = VerticalPagerModule.useVerticalPager
+local UsePagerItemFunction = VerticalPagerModule.usePagerItem
 
-return function(p1, p2)
-	-- upvalues: useVerticalPager (ref), usePagerItem (ref), useMomentsSession (ref), reactModule (ref), signalsModule (ref), useSignalState (ref), makeJoinImpressionFieldsModule (ref), analytics (ref), eventNames (ref)
-	local var1 = useVerticalPager()
-	local var2 = useMomentsSession()
-	local item = usePagerItem().item
-	local var3 = useSignalState(reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), item (ref), var1 (ref)
-		return signalsModule.createComputed(function(p3)
-			-- upvalues: item (copy), var1 (copy)
-			return if item == nil then false else var1.store.getCurrentItem(p3) == item
+return function(p1, p2) --[[ Line: 51 | Named "useJoinCtaImpression" ]]
+	-- upvalues: UseVerticalPagerFunction (copy), UsePagerItemFunction (copy), UseMomentsSessionFunction (copy), ReactModule (copy), SignalsModule (copy), UseSignalStateFunction (copy), FFlagMomentsFixOverlayRemountImpressionsModule (copy), MomentImpressionMemoryModule (copy), MakeJoinImpressionFieldsModule (copy), Analytics (copy), EventNames (copy)
+	local UseVerticalPagerResult = UseVerticalPagerFunction()
+	local UsePagerItemResult = UsePagerItemFunction()
+	local UseMomentsSessionResult = UseMomentsSessionFunction()
+	local Item = UsePagerItemResult.item
+	local UseSignalStateResult = UseSignalStateFunction((ReactModule.useMemo(function() --[[ Line: 58 ]]
+		-- upvalues: SignalsModule (upval), Item (copy), UseVerticalPagerResult (copy)
+		return SignalsModule.createComputed(function(p3): boolean --[[ Line: 59 ]]
+			-- upvalues: Item (upval), UseVerticalPagerResult (upval)
+			return Item ~= nil and UseVerticalPagerResult.store.getCurrentItem(p3) == Item
 		end)
-	end, { var1, item }))
-	local var4 = reactModule.useRef(false)
-	reactModule.useEffect(function()
-		-- upvalues: var4 (ref), var3 (ref), p2 (ref), p1 (ref), item (ref), makeJoinImpressionFieldsModule (copy), var2 (ref), analytics (copy), eventNames (copy)
-		local current = var4.current
-		var4.current = var3
+	end, { UseVerticalPagerResult, Item })))
+	local JoinCta = if FFlagMomentsFixOverlayRemountImpressionsModule then MomentImpressionMemoryModule.useImpressionRef("joinCta") else ReactModule.useRef(false)
+	ReactModule.useEffect(function() --[[ Line: 77 ]]
+		-- upvalues: JoinCta (copy), UseSignalStateResult (copy), p2 (copy), p1 (copy), Item (copy), MakeJoinImpressionFieldsModule (upval), UseMomentsSessionResult (copy), Analytics (upval), EventNames (upval)
+		local Current = JoinCta.current
+		JoinCta.current = UseSignalStateResult
 		
 		if not p2 or p1 then return end
-		if not var3 or current then return end
-		if item == nil or item.kind ~= "moment" then return end
-		local var5 = makeJoinImpressionFieldsModule(item.moment, var2.getSessionSource(false))
+		if not UseSignalStateResult or Current then return end
+		if Item == nil or Item.kind ~= "moment" then return end
+		local JoinImpressionFieldsModule = MakeJoinImpressionFieldsModule(Item.moment, UseMomentsSessionResult.getSessionSource(false))
 		
-		if var5 ~= nil then
-			analytics.fireAnalyticsEvent(eventNames.FeedExperienceJoinImpression, var5)
+		if JoinImpressionFieldsModule ~= nil then
+			Analytics.fireAnalyticsEvent(EventNames.FeedExperienceJoinImpression, JoinImpressionFieldsModule)
 		end
 	end, {
-		var3,
+		UseSignalStateResult,
 		p2,
 		p1,
-		item,
-		var2
+		Item,
+		UseMomentsSessionResult
 	})
 end

@@ -1,20 +1,20 @@
-﻿local emoteUtility = require(script:FindFirstAncestor("AvatarExperienceProfilePictureEditor").Parent.Thumbnailing).EmoteUtility
+﻿local EmoteUtility = require(script:FindFirstAncestor("AvatarExperienceProfilePictureEditor").Parent.Thumbnailing).EmoteUtility
 
-return function(p1, p2)
-	-- upvalues: emoteUtility (ref)
-	local var1 = emoteUtility.LoadKeyframesForPose(p1, if p2 then tonumber(p2) else nil, nil, true, true)
+return function(Object, p1) --[[ Line: 10 | Named "applyCloseupPreviewPose" ]]
+	-- upvalues: EmoteUtility (copy)
+	local KeyframesForPose = EmoteUtility.LoadKeyframesForPose(Object, if p1 then tonumber(p1) else nil, nil, true, true)
 	
-	if var1 then
-		emoteUtility.ApplyKeyframesForPose(p1, var1)
+	if KeyframesForPose then
+		EmoteUtility.ApplyKeyframesForPose(Object, KeyframesForPose)
 	else
-		emoteUtility.SetPlayerCharacterNeutralPose(p1)
-		local humanoid = p1:FindFirstChildOfClass("Humanoid")
+		EmoteUtility.SetPlayerCharacterNeutralPose(Object)
+		local Humanoid = Object:FindFirstChildOfClass("Humanoid")
 		
-		if humanoid and humanoid.RigType == Enum.HumanoidRigType.R6 then
-			emoteUtility.AdjustArmOnR6ForTool(p1)
+		if Humanoid and Humanoid.RigType == Enum.HumanoidRigType.R6 then
+			EmoteUtility.AdjustArmOnR6ForTool(Object)
 		end
 	end
-	local runService = game:GetService("RunService")
-	runService.PreAnimation:Wait()
-	runService.PostSimulation:Wait()
+	local RunService = game:GetService("RunService")
+	RunService.PreAnimation:Wait()
+	RunService.PostSimulation:Wait()
 end

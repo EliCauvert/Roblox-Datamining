@@ -1,178 +1,193 @@
-﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
-local reactModule = require(parent.React)
-local roactUtilsModule = require(parent.RoactUtils)
-local universalAppPolicyModule = require(parent.UniversalAppPolicy)
-local httpService = game:GetService("HttpService")
-local playersService = game:GetService("Players")
-local default = require(parent.ExternalContentSharingProtocol).ExternalContentSharingProtocol.default
-local urlBuilderModule = require(parent.UrlBuilder)
-local robloxAppEnumsModule = require(parent.RobloxAppEnums)
-local navigationRoduxModule = require(parent.NavigationRodux)
-local toastRoduxModule = require(parent.ToastRodux)
-local httpRequestModule = require(parent.HttpRequest)
-local _ = require(parent.LuauPolyfill)
-local discoveryAnalyticsModule = require(parent.DiscoveryAnalytics)
-local discoveryUtilsModule = require(parent.DiscoveryUtils)
-local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
-local useAppPolicy = universalAppPolicyModule.useAppPolicy
-local urlBuilder = urlBuilderModule.UrlBuilder
-local urlBase = urlBuilderModule.UrlBase
-local appPage = robloxAppEnumsModule.AppPage
-local navigateDown = navigationRoduxModule.Thunks.NavigateDown
-local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
-local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
-local toastType = toastRoduxModule.Enums.ToastType
-local setCurrentToastMessage = toastRoduxModule.Actions.SetCurrentToastMessage
-local gameCopyExperienceLink = discoveryAnalyticsModule.Events.gameCopyExperienceLink
-local gameShareExperienceLink = discoveryAnalyticsModule.Events.gameShareExperienceLink
-local logResponseError = discoveryUtilsModule.logResponseError
-local discoveryEventErrorLogger = discoveryUtilsModule.DiscoveryEventErrorLogger
+﻿local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
+local ReactModule = require(Parent.React)
+local HttpService = game:GetService("HttpService")
+local Players = game:GetService("Players")
+local Default = require(Parent.ExternalContentSharingProtocol).ExternalContentSharingProtocol.default
+local UrlBuilderModule = require(Parent.UrlBuilder)
+local ToastRoduxModule = require(Parent.ToastRodux)
+local HttpRequestModule = require(Parent.HttpRequest)
+local _ = require(Parent.LuauPolyfill)
+local DiscoveryAnalyticsModule = require(Parent.DiscoveryAnalytics)
+local DiscoveryUtilsModule = require(Parent.DiscoveryUtils)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
+local UrlBuilder = UrlBuilderModule.UrlBuilder
+local UrlBase = UrlBuilderModule.UrlBase
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local NavigateDownFunction = require(Parent.NavigationRodux).Thunks.NavigateDown
+local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3Dispatch
+local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
+local ToastType = ToastRoduxModule.Enums.ToastType
+local SetCurrentToastMessageFunction = ToastRoduxModule.Actions.SetCurrentToastMessage
+local GameCopyExperienceLinkFunction = DiscoveryAnalyticsModule.Events.gameCopyExperienceLink
+local GameShareExperienceLinkFunction = DiscoveryAnalyticsModule.Events.gameShareExperienceLink
+local LogResponseErrorFunction = DiscoveryUtilsModule.logResponseError
+local DiscoveryEventErrorLogger = DiscoveryUtilsModule.DiscoveryEventErrorLogger
+local FFlagLuaAppAddUniverseIdToEngagementEvents = require(Parent.SharedFlags).FFlagLuaAppAddUniverseIdToEngagementEvents
 
-local function fetchShareLinkId(p1)
-	-- upvalues: urlBuilder (ref), urlBase (ref), httpService (ref), httpRequestModule (ref), discoveryEventErrorLogger (ref), logResponseError (ref)
-	local t = {
+local function fetchShareLinkId(UniverseId) --[[ Line: 46 ]]
+	-- upvalues: UrlBuilder (copy), UrlBase (copy), HttpService (copy), HttpRequestModule (copy), DiscoveryEventErrorLogger (copy), LogResponseErrorFunction (copy)
+	local config = {
 		linkType = "ExperienceDetails",
-		data = { universeId = p1 }
+		data = { universeId = UniverseId }
 	}
 	
-	return httpRequestModule.config({
-		requestFunction = function(p2, p3, p4)
-			-- upvalues: httpRequestModule (copy)
-			return httpRequestModule.requestFunctions.RequestInternal(p2, p3, p4)
+	return HttpRequestModule.config({
+		requestFunction = function(p1, p2, p3) --[[ Line: 65 ]]
+			-- upvalues: HttpRequestModule (upval)
+			return HttpRequestModule.requestFunctions.RequestInternal(p1, p2, p3)
 		end
-	})(urlBuilder.new({
+	})(UrlBuilder.new({
 		path = "sharelinks/v1/get-or-create-link",
-		base = urlBase.APIS
+		base = UrlBase.APIS
 	})(), "POST", {
-		postBody = httpService:JSONEncode({
-			linkType = t.linkType,
-			data = httpService:JSONEncode(t.data)
+		postBody = HttpService:JSONEncode({
+			linkType = config.linkType,
+			data = HttpService:JSONEncode(config.data)
 		})
-	}):andThen(function(p2)
-		-- upvalues: discoveryEventErrorLogger (copy), p1 (ref)
-		local responseBody = p2.responseBody or p2.result
+	}):andThen(function(Result) --[[ Line: 73 ]]
+		-- upvalues: DiscoveryEventErrorLogger (upval), UniverseId (copy)
+		local ResponseBody = Result.responseBody or Result.result
 		
-		if responseBody and responseBody.linkId then
-			return responseBody.linkId
+		if ResponseBody and ResponseBody.linkId then
+			return ResponseBody.linkId
+		else
+			DiscoveryEventErrorLogger.reportError("FetchShareLinkIdInvalidResponse", "Share link response missing linkId", {
+				universeId = UniverseId,
+				responseBody = Result.responseBody or Result.result
+			})
+			error("Failed to fetch share link id")
 		end
-		discoveryEventErrorLogger.reportError("FetchShareLinkIdInvalidResponse", "Share link response missing linkId", {
-			universeId = p1,
-			responseBody = p2.responseBody or p2.result
+	end):catch(function(Err) --[[ Line: 89 ]]
+		-- upvalues: LogResponseErrorFunction (upval), DiscoveryEventErrorLogger (upval), UniverseId (copy)
+		local StatusCode = if type(Err) == "table" and Err.StatusCode then Err.StatusCode else nil
+		LogResponseErrorFunction("sharelinks/v1/get-or-create-link", { StatusCode = StatusCode })
+		DiscoveryEventErrorLogger.reportError("FetchShareLinkIdFailed", "Failed to fetch share link id", {
+			universeId = UniverseId,
+			statusCode = StatusCode,
+			error = tostring(Err)
 		})
-		error("Failed to fetch share link id")
-	end):catch(function(p2)
-		-- upvalues: logResponseError (copy), discoveryEventErrorLogger (copy), p1 (ref)
-		local var2 = if type(p2) == "table" and p2.StatusCode then p2.StatusCode else nil
-		logResponseError("sharelinks/v1/get-or-create-link", { StatusCode = var2 })
-		discoveryEventErrorLogger.reportError("FetchShareLinkIdFailed", "Failed to fetch share link id", {
-			universeId = p1,
-			statusCode = var2,
-			error = tostring(p2)
-		})
-		error(p2)
+		error(Err)
 	end)
 end
 
-local function generateExperienceDetailsShareLinkUrl(p1, p2, p3)
-	-- upvalues: urlBuilder (ref)
-	local _ = nil
-	local var2 = nil
+local function generateExperienceDetailsShareLinkUrl(LinkId, UniverseId, PlaceId) --[[ Line: 101 ]]
+	-- upvalues: UrlBuilder (copy)
+	local Stamp: string? = nil
 	
-	if p1 then
-		var2 = tostring(DateTime.now().UnixTimestampMillis)
+	if LinkId then
+		Stamp = tostring(DateTime.now().UnixTimestampMillis)
 		
-		return urlBuilder.sharelinks.shortUrl({ type = "ExperienceDetails", linkId = p1, stamp = var2 }), var2
+		return UrlBuilder.sharelinks.shortUrl({
+			type = "ExperienceDetails",
+			linkId = LinkId,
+			stamp = Stamp
+		}), Stamp
+	else
+		return UrlBuilder.game.info.appsflyer({ universeId = UniverseId, placeId = PlaceId }), Stamp
 	end
-	return urlBuilder.game.info.appsflyer({ universeId = p2, placeId = p3 }), var2
 end
 
-local function handleCopyLink(p1, p2, p3, p4)
-	-- upvalues: fetchShareLinkId (ref), generateExperienceDetailsShareLinkUrl (ref), playersService (ref), gameCopyExperienceLink (ref), default (ref), setCurrentToastMessage (ref), toastType (ref)
-	fetchShareLinkId(p1):andThen(function(p5)
-		-- upvalues: generateExperienceDetailsShareLinkUrl (copy), p1 (ref), p2 (ref), playersService (copy), gameCopyExperienceLink (copy), p3 (ref), default (copy), p4 (ref), setCurrentToastMessage (copy), toastType (copy)
-		local var2, var3 = generateExperienceDetailsShareLinkUrl(p5, p1, p2)
-		gameCopyExperienceLink({
-			ctx = p3,
-			uid = tostring(playersService.LocalPlayer and playersService.LocalPlayer.UserId),
-			placeId = p2,
-			stamp = var3
-		}, p3)
-		default:shareUrl({ context = "GameDetailsMoreWebURL", url = var2 })
-		p4(setCurrentToastMessage({
+local function handleCopyLink(UniverseId, PlaceId, Ctx, Callback) --[[ Line: 119 ]]
+	-- upvalues: fetchShareLinkId (copy), generateExperienceDetailsShareLinkUrl (copy), Players (copy), GameCopyExperienceLinkFunction (copy), FFlagLuaAppAddUniverseIdToEngagementEvents (copy), Default (copy), SetCurrentToastMessageFunction (copy), ToastType (copy)
+	fetchShareLinkId(UniverseId):andThen(function(Result) --[[ Line: 121 ]]
+		-- upvalues: generateExperienceDetailsShareLinkUrl (upval), UniverseId (copy), PlaceId (copy), Players (upval), GameCopyExperienceLinkFunction (upval), Ctx (copy), FFlagLuaAppAddUniverseIdToEngagementEvents (upval), Default (upval), Callback (copy), SetCurrentToastMessageFunction (upval), ToastType (upval)
+		local ExperienceDetailsShareLinkUrl, ExperienceDetailsShareLinkUrl2 = generateExperienceDetailsShareLinkUrl(Result, UniverseId, PlaceId)
+		GameCopyExperienceLinkFunction({
+			ctx = Ctx,
+			uid = tostring(Players.LocalPlayer and Players.LocalPlayer.UserId),
+			placeId = PlaceId,
+			stamp = ExperienceDetailsShareLinkUrl2,
+			universeId = if FFlagLuaAppAddUniverseIdToEngagementEvents then UniverseId else nil
+		}, Ctx)
+		Default:shareUrl({
+			context = "GameDetailsMoreWebURL",
+			url = ExperienceDetailsShareLinkUrl
+		})
+		Callback(SetCurrentToastMessageFunction({
 			toastMessage = "Feature.GameDetails.Toast.LinkCopied",
-			toastType = toastType.SuccessConfirmation
+			toastType = ToastType.SuccessConfirmation
 		}))
-	end):catch(function(_)
-		-- upvalues: p4 (ref), setCurrentToastMessage (copy), toastType (copy)
-		p4(setCurrentToastMessage({
+	end):catch(function(_) --[[ Line: 143 ]]
+		-- upvalues: Callback (copy), SetCurrentToastMessageFunction (upval), ToastType (upval)
+		Callback(SetCurrentToastMessageFunction({
 			toastMessage = "Feature.Toast.NetworkingError.SomethingIsWrong",
-			toastType = toastType.NetworkingError
+			toastType = ToastType.NetworkingError
 		}))
 	end)
 end
 
-return function(p1, p2, p3)
-	-- upvalues: useDispatch (ref), useAppPolicy (ref), reactModule (ref), handleCopyLink (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), fetchShareLinkId (ref), generateExperienceDetailsShareLinkUrl (ref), playersService (ref), gameShareExperienceLink (ref), default (ref), urlBuilder (ref)
-	local var2 = useDispatch()
-	local var3 = useAppPolicy(function(p4)
-		return p4.shouldShareToAccountProvider()
+return function(UniverseId, PlaceId, Ctx) --[[ Line: 156 | Named "useExperienceDetailsShare" ]]
+	-- upvalues: UseDispatchFunction (copy), UseAppPolicyFunction (copy), ReactModule (copy), handleCopyLink (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), fetchShareLinkId (copy), generateExperienceDetailsShareLinkUrl (copy), Players (copy), GameShareExperienceLinkFunction (copy), FFlagLuaAppAddUniverseIdToEngagementEvents (copy), Default (copy), UrlBuilder (copy)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseAppPolicyResult = UseAppPolicyFunction(function(p1) --[[ Line: 162 ]]
+		return p1.shouldShareToAccountProvider()
 	end)
 	
-	return reactModule.useCallback(function()
-		-- upvalues: p2 (ref), var3 (ref), handleCopyLink (copy), p1 (ref), p3 (ref), var2 (ref), appPage (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), navigateDown (copy), fetchShareLinkId (copy), generateExperienceDetailsShareLinkUrl (copy), playersService (copy), gameShareExperienceLink (copy), default (copy), urlBuilder (copy)
-		if not p2 then return end
-		if not var3 then
-			handleCopyLink(p1, p2, p3, var2)
+	return ReactModule.useCallback(function() --[[ Line: 166 ]]
+		-- upvalues: PlaceId (copy), UseAppPolicyResult (copy), handleCopyLink (upval), UniverseId (copy), Ctx (copy), UseDispatchResult (copy), AppPage (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), NavigateDownFunction (upval), fetchShareLinkId (upval), generateExperienceDetailsShareLinkUrl (upval), Players (upval), GameShareExperienceLinkFunction (upval), FFlagLuaAppAddUniverseIdToEngagementEvents (upval), Default (upval), UrlBuilder (upval)
+		if not PlaceId then return end
+		if not UseAppPolicyResult then
+			handleCopyLink(UniverseId, PlaceId, Ctx, UseDispatchResult)
 			
 			return
-		elseif not var3 then
-			fetchShareLinkId(p1):andThen(function(p4)
-				-- upvalues: generateExperienceDetailsShareLinkUrl (copy), p1 (copy), p2 (copy), playersService (copy), gameShareExperienceLink (copy), p3 (copy), default (copy)
-				local var4, var5 = generateExperienceDetailsShareLinkUrl(p4, p1, p2)
-				gameShareExperienceLink({
+		end
+		if not UseAppPolicyResult then
+			fetchShareLinkId(UniverseId):andThen(function(Result) --[[ Line: 194 ]]
+				-- upvalues: generateExperienceDetailsShareLinkUrl (upval), UniverseId (upval), PlaceId (upval), Players (upval), GameShareExperienceLinkFunction (upval), Ctx (upval), FFlagLuaAppAddUniverseIdToEngagementEvents (upval), Default (upval)
+				local ExperienceDetailsShareLinkUrl, ExperienceDetailsShareLinkUrl2 = generateExperienceDetailsShareLinkUrl(Result, UniverseId, PlaceId)
+				GameShareExperienceLinkFunction({
 					shareToAppsflyer = true,
-					ctx = p3,
-					uid = tostring(playersService.LocalPlayer and playersService.LocalPlayer.UserId),
-					placeId = p2,
-					shortShareLinkFailed = not p4,
-					stamp = var5,
-					linkId = p4
-				}, p3)
-				default:shareUrl({ context = "GameDetailsMoreWebURL", url = var4 })
-			end):catch(function(_)
-				-- upvalues: p1 (copy), p2 (copy), urlBuilder (copy), playersService (copy), gameShareExperienceLink (copy), p3 (copy), default (copy)
-				local _ = nil
-				local var4 = urlBuilder.game.info.appsflyer({ universeId = p1, placeId = p2 })
-				gameShareExperienceLink({
+					ctx = Ctx,
+					uid = tostring(Players.LocalPlayer and Players.LocalPlayer.UserId),
+					placeId = PlaceId,
+					shortShareLinkFailed = not Result,
+					stamp = ExperienceDetailsShareLinkUrl2,
+					linkId = Result,
+					universeId = if FFlagLuaAppAddUniverseIdToEngagementEvents then UniverseId else nil
+				}, Ctx)
+				Default:shareUrl({
+					context = "GameDetailsMoreWebURL",
+					url = ExperienceDetailsShareLinkUrl
+				})
+			end):catch(function(_) --[[ Line: 217 ]]
+				-- upvalues: UniverseId (upval), PlaceId (upval), UrlBuilder (upval), Players (upval), GameShareExperienceLinkFunction (upval), Ctx (upval), FFlagLuaAppAddUniverseIdToEngagementEvents (upval), Default (upval)
+				local AppsflyerResult = UrlBuilder.game.info.appsflyer({ universeId = UniverseId, placeId = PlaceId })
+				GameShareExperienceLinkFunction({
 					shortShareLinkFailed = true,
 					shareToAppsflyer = true,
 					linkId = nil,
-					ctx = p3,
-					uid = tostring(playersService.LocalPlayer and playersService.LocalPlayer.UserId),
-					placeId = p2,
-					stamp = nil
-				}, p3)
-				default:shareUrl({ context = "GameDetailsMoreWebURL", url = var4 })
+					ctx = Ctx,
+					uid = tostring(Players.LocalPlayer and Players.LocalPlayer.UserId),
+					placeId = PlaceId,
+					stamp = nil,
+					universeId = if FFlagLuaAppAddUniverseIdToEngagementEvents then UniverseId else nil
+				}, Ctx)
+				Default:shareUrl({ context = "GameDetailsMoreWebURL", url = AppsflyerResult })
 			end)
 			
 			return
 		end
-		local t = {
-			name = appPage.SdkShare,
-			extraProps = { context = "GameDetailsMoreWebURL", universeId = p1 }
+		local config = {
+			name = AppPage.SdkShare,
+			extraProps = {
+				context = "GameDetailsMoreWebURL",
+				universeId = UniverseId
+			}
 		}
 		
-		if fFlagSignalsNavP3Dispatch then
-			var1.down(var1.fromLegacyPage(t))
+		if FFlagSignalsNavP3Dispatch then
+			NavigationCommands.down(NavigationCommands.fromLegacyPage(config))
 			
 			return
+		else
+			UseDispatchResult(NavigateDownFunction(config))
 		end
-		var2(navigateDown(t))
 	end, {
-		p1,
-		p2,
-		var3,
-		var2,
-		p3
+		UniverseId,
+		PlaceId,
+		UseAppPolicyResult,
+		UseDispatchResult,
+		Ctx
 	})
 end

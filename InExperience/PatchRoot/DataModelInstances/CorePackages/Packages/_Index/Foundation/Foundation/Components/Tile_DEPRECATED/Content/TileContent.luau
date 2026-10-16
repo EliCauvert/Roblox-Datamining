@@ -1,21 +1,22 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local viewModule = require(foundation.Components.View)
-local useTileModule = require(foundation.Components.Tile_DEPRECATED.useTile)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local t = { LayoutOrder = 2 }
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local ViewModule = require(Foundation.Components.View)
+local UseTileModule = require(Foundation.Components.Tile_DEPRECATED.useTile)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local config = { LayoutOrder = 2 }
 
-return function(p1)
-	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useTileModule (ref), reactModule (ref), viewModule (ref)
-	local var1 = withDefaultsModule(p1, t)
-	local var2 = useTileModule()
+return function(p1) --[[ Line: 20 | Named "TileContent" ]]
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UseTileModule (copy), ReactModule (copy), ViewModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
+	local UseTokensModuleResult = UseTokensModule()
+	local UseTileModuleResult = UseTileModule()
 	
-	return reactModule.createElement(viewModule, {
+	return ReactModule.createElement(ViewModule, {
 		tag = "col align-y-top gap-small size-full",
 		flexItem = { FlexMode = Enum.UIFlexMode.Shrink },
-		padding = if var2.isContained then useTokensModule().Padding.Small else nil,
-		LayoutOrder = var1.LayoutOrder,
-		testId = `{var2.testId}--content`
-	}, var1.children)
+		padding = if UseTileModuleResult.isContained then UseTokensModuleResult.Padding.Small else nil,
+		LayoutOrder = WithDefaultsModuleResult.LayoutOrder,
+		testId = `{UseTileModuleResult.testId}--content`
+	}, WithDefaultsModuleResult.children)
 end

@@ -1,18 +1,17 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local _ = require(profilePlatform.Types.Component)
-local enumsModule = require(profilePlatform.Common.Enums)
-local getSupportedActionsForProfileTypeModule = require(profilePlatform.Hooks.getSupportedActionsForProfileType)
-local fFlagProfilePlatformCTAsRefactorModule = require(profilePlatform.Flags.FFlagProfilePlatformCTAsRefactor)
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local _ = require(ProfilePlatform.Types.Component)
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local GetSupportedActionsForProfileTypeModule = require(ProfilePlatform.Hooks.getSupportedActionsForProfileType)
 
-return function()
-	-- upvalues: enumsModule (ref), fFlagProfilePlatformCTAsRefactorModule (ref), getSupportedActionsForProfileTypeModule (ref)
+return function() --[[ Line: 7 ]]
+	-- upvalues: EnumsModule (copy), GetSupportedActionsForProfileTypeModule (copy)
 	return {
-		{ component = enumsModule.Components.ContactProfileHeader },
-		{ component = enumsModule.Components.ContactDescription },
+		{ component = EnumsModule.Components.ContactProfileHeader },
+		{ component = EnumsModule.Components.ContactDescription },
 		{
-			component = enumsModule.Components.Actions,
-			supportedActions = if fFlagProfilePlatformCTAsRefactorModule then getSupportedActionsForProfileTypeModule(enumsModule.ProfileTypes.Contact) else nil,
-			isActionsV2Supported = if fFlagProfilePlatformCTAsRefactorModule then true else nil
+			isActionsV2Supported = true,
+			component = EnumsModule.Components.Actions,
+			supportedActions = GetSupportedActionsForProfileTypeModule(EnumsModule.ProfileTypes.Contact)
 		}
 	}
 end

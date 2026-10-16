@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.InExperienceShop.InExperienceShop)
+﻿return (require(script.Parent._Workspace.InExperienceShop.InExperienceShop))

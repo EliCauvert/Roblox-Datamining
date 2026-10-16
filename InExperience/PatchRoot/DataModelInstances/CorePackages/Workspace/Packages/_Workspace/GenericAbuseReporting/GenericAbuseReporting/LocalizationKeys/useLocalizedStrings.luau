@@ -1,9 +1,9 @@
-﻿local parent = script:FindFirstAncestor("GenericAbuseReporting").Parent
-local reactModule = require(parent.React)
-local localizationKeysContextModule = require(script.Parent.LocalizationKeysContext)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
+﻿local Parent = script:FindFirstAncestor("GenericAbuseReporting").Parent
+local ReactModule = require(Parent.React)
+local LocalizationKeysContextModule = require(script.Parent.LocalizationKeysContext)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 
-return function()
-	-- upvalues: reactModule (ref), localizationKeysContextModule (ref), useLocalization (ref)
-	return useLocalization(reactModule.useContext(localizationKeysContextModule))
+return function() --[[ Line: 8 | Named "useLocalizedStrings" ]]
+	-- upvalues: ReactModule (copy), LocalizationKeysContextModule (copy), UseLocalizationFunction (copy)
+	return (UseLocalizationFunction((ReactModule.useContext(LocalizationKeysContextModule))))
 end

@@ -1,15 +1,15 @@
-﻿local pageLoggerModule = require(script.Parent.pageLogger)
-local componentModule = require(script.Parent.component)
+﻿local PageLoggerModule = require(script.Parent.pageLogger)
+local ComponentModule = require(script.Parent.component)
 
 return {
-	init = function(p1)
-		-- upvalues: pageLoggerModule (ref)
-		pageLoggerModule:setParent(p1)
+	init = function(p1) --[[ Line: 6 ]]
+		-- upvalues: PageLoggerModule (copy)
+		PageLoggerModule:setParent(p1)
 	end,
-	doSomething = function()
-		-- upvalues: pageLoggerModule (ref), componentModule (ref)
-		pageLoggerModule:info("calling {root} {foo}")
+	doSomething = function() --[[ Line: 9 ]]
+		-- upvalues: PageLoggerModule (copy), ComponentModule (copy)
+		PageLoggerModule:info("calling {root} {foo}")
 		
-		return componentModule()
+		return ComponentModule()
 	end
 }

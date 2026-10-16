@@ -1,12 +1,11 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local socialLibrariesModule = require(appChat.SocialLibraries)
-local _ = require(appChat.types)
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local textInput = socialLibrariesModule.Components.AlertViews.TextInput
-local usePositionOffsetForVirtualKeyboardModule = require(appChat.Hooks.usePositionOffsetForVirtualKeyboard)
-local t = {
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local _ = require(AppChat.types)
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local TextInput = require(AppChat.SocialLibraries).Components.AlertViews.TextInput
+local UsePositionOffsetForVirtualKeyboardModule = require(AppChat.Hooks.usePositionOffsetForVirtualKeyboard)
+local config = {
 	titleText = "Placeholder",
 	cancelText = "CancelText",
 	confirmText = "ConfirmText",
@@ -19,10 +18,10 @@ local t = {
 	soakAreaColor3 = Color3.fromRGB(25, 25, 25)
 }
 
-function EditChatGroupNameDialog(p1)
-	-- upvalues: cryoModule (ref), t (ref), usePositionOffsetForVirtualKeyboardModule (ref), reactModule (ref), textInput (ref)
-	return reactModule.createElement(textInput, cryoModule.Dictionary.join(cryoModule.Dictionary.join(t, p1), {
-		shouldAdjustForKeyboard = usePositionOffsetForVirtualKeyboardModule({ isNearBottomOfScreen = false }) == nil
+function EditChatGroupNameDialog(p1) --[[ Line: 46 ]]
+	-- upvalues: CryoModule (copy), config (copy), UsePositionOffsetForVirtualKeyboardModule (copy), ReactModule (copy), TextInput (copy)
+	return ReactModule.createElement(TextInput, CryoModule.Dictionary.join(CryoModule.Dictionary.join(config, p1), {
+		shouldAdjustForKeyboard = UsePositionOffsetForVirtualKeyboardModule({ isNearBottomOfScreen = false }) == nil
 	}))
 end
 

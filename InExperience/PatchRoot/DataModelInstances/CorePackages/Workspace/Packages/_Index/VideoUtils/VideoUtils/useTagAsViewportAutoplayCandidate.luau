@@ -1,120 +1,102 @@
-﻿local collectionService = game:GetService("CollectionService")
-local videoUtils = script:FindFirstAncestor("VideoUtils")
-local parent = videoUtils.Parent
-local reactModule = require(parent.React)
+﻿local CollectionService = game:GetService("CollectionService")
+local VideoUtils = script:FindFirstAncestor("VideoUtils")
+local Parent = VideoUtils.Parent
+local ReactModule = require(Parent.React)
 local _ = require(script.Parent.FeedVideoPlaybackContext)
-local viewportAutoplayVideoKeyAttributeModule = require(script.Parent.ViewportAutoplayVideoKeyAttribute)
-local userIntentModeAutoplayCandidateTagModule = require(script.Parent.UserIntentModeAutoplayCandidateTag)
-local videoEndReason = require(videoUtils.Analytics.Enums).VideoEndReason
-local viewportAutoplayCandidateTagModule = require(script.Parent.ViewportAutoplayCandidateTag)
-local viewportAutoplayRowSpanAttributeModule = require(script.Parent.ViewportAutoplayRowSpanAttribute)
-local viewportAutoplayCellVerticalPaddingAttributeModule = require(script.Parent.ViewportAutoplayCellVerticalPaddingAttribute)
-local viewportAutoplayAlignmentTypeAttributeModule = require(script.Parent.ViewportAutoplayAlignmentTypeAttribute)
-local alignmentType = require(parent.DiscoveryTypes).GameCollectionItemTypes.AlignmentType
-local fFlagLuaAppOneByTwoHoverIdleAutoplay = require(parent.SharedFlags).FFlagLuaAppOneByTwoHoverIdleAutoplay
-local fFlagLuaAppTileVideoCandidateOnly = require(parent.SharedFlags).FFlagLuaAppTileVideoCandidateOnly
-local fFlagLuaAppFixHiddenTileVideoCleanup = require(parent.SharedFlags).FFlagLuaAppFixHiddenTileVideoCleanup
-local fFlagLuaAppVideoAutoplayFeedElection = require(parent.SharedFlags).FFlagLuaAppVideoAutoplayFeedElection
-local fFlagLuaAppVideoAutoplayOneByTwoTileCandidatePercentageUpdate = require(parent.SharedFlags).FFlagLuaAppVideoAutoplayOneByTwoTileCandidatePercentageUpdate
-local fFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor = require(parent.SharedFlags).FFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor
-local fFlagLuaAppVideoAutoplayElectOnNewCandidateModule = require(script.Parent.FFlagLuaAppVideoAutoplayElectOnNewCandidate)
+local ViewportAutoplayVideoKeyAttributeModule = require(script.Parent.ViewportAutoplayVideoKeyAttribute)
+local UserIntentModeAutoplayCandidateTagModule = require(script.Parent.UserIntentModeAutoplayCandidateTag)
+local VideoEndReason = require(VideoUtils.Analytics.Enums).VideoEndReason
+local ViewportAutoplayCandidateTagModule = require(script.Parent.ViewportAutoplayCandidateTag)
+local ViewportAutoplayRowSpanAttributeModule = require(script.Parent.ViewportAutoplayRowSpanAttribute)
+local ViewportAutoplayCellVerticalPaddingAttributeModule = require(script.Parent.ViewportAutoplayCellVerticalPaddingAttribute)
+local ViewportAutoplayAlignmentTypeAttributeModule = require(script.Parent.ViewportAutoplayAlignmentTypeAttribute)
+local AlignmentType = require(Parent.DiscoveryTypes).GameCollectionItemTypes.AlignmentType
+local FFlagLuaAppOneByTwoHoverIdleAutoplay = require(Parent.SharedFlags).FFlagLuaAppOneByTwoHoverIdleAutoplay
+local FFlagLuaAppTileVideoCandidateOnly = require(Parent.SharedFlags).FFlagLuaAppTileVideoCandidateOnly
+local FFlagLuaAppFixHiddenTileVideoCleanup = require(Parent.SharedFlags).FFlagLuaAppFixHiddenTileVideoCleanup
+local FFlagLuaAppVideoAutoplayFeedElection = require(Parent.SharedFlags).FFlagLuaAppVideoAutoplayFeedElection
+local FFlagLuaAppVideoAutoplayElectOnNewCandidateModule = require(script.Parent.FFlagLuaAppVideoAutoplayElectOnNewCandidate)
 
-local function _(p1)
-	-- upvalues: fFlagLuaAppTileVideoCandidateOnly (ref)
-	return not fFlagLuaAppTileVideoCandidateOnly or p1 == true
+local function _(Enabled): boolean --[[ Line: 31 | Named "isVideoAutoplayCandidate" ]]
+	-- upvalues: FFlagLuaAppTileVideoCandidateOnly (copy)
+	return not FFlagLuaAppTileVideoCandidateOnly or Enabled == true
 end
 
-local _ = function(p1, p2, p3)
-	-- upvalues: fFlagLuaAppFixHiddenTileVideoCleanup (ref), fFlagLuaAppTileVideoCandidateOnly (ref)
-	local var1 = not (fFlagLuaAppFixHiddenTileVideoCleanup and p2)
-	
-	if var1 then
-		var1 = (if fFlagLuaAppTileVideoCandidateOnly then p1 == true else not fFlagLuaAppTileVideoCandidateOnly) or p3
-	end
-	return var1
+local _ = function(Enabled, p1, p2) --[[ Line: 35 | Named "shouldTagUserIntentModeCandidate" ]]
+	-- upvalues: FFlagLuaAppFixHiddenTileVideoCleanup (copy), FFlagLuaAppTileVideoCandidateOnly (copy)
+	return not (FFlagLuaAppFixHiddenTileVideoCleanup and p1) and (not FFlagLuaAppTileVideoCandidateOnly or Enabled == true or p2)
 end
 
-local _ = function(p1, p2)
-	-- upvalues: fFlagLuaAppVideoAutoplayFeedElection (ref), fFlagLuaAppVideoAutoplayElectOnNewCandidateModule (ref)
-	return p1 or fFlagLuaAppVideoAutoplayFeedElection and (p2 or fFlagLuaAppVideoAutoplayElectOnNewCandidateModule)
+local _ = function(p1, p2) --[[ Line: 44 | Named "shouldNotifyUserIntentModeCandidateRegistered" ]]
+	-- upvalues: FFlagLuaAppVideoAutoplayFeedElection (copy), FFlagLuaAppVideoAutoplayElectOnNewCandidateModule (copy)
+	return p1 or FFlagLuaAppVideoAutoplayFeedElection and (p2 or FFlagLuaAppVideoAutoplayElectOnNewCandidateModule)
 end
 
-return function(value, p1, p2, p3, p4, p5, p6, p7)
-	-- upvalues: fFlagLuaAppOneByTwoHoverIdleAutoplay (ref), reactModule (ref), fFlagLuaAppFixHiddenTileVideoCleanup (ref), fFlagLuaAppTileVideoCandidateOnly (ref), fFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor (ref), alignmentType (ref), viewportAutoplayVideoKeyAttributeModule (ref), fFlagLuaAppVideoAutoplayOneByTwoTileCandidatePercentageUpdate (ref), viewportAutoplayRowSpanAttributeModule (ref), viewportAutoplayCellVerticalPaddingAttributeModule (ref), viewportAutoplayAlignmentTypeAttributeModule (ref), collectionService (ref), viewportAutoplayCandidateTagModule (ref), userIntentModeAutoplayCandidateTagModule (ref), fFlagLuaAppVideoAutoplayFeedElection (ref), fFlagLuaAppVideoAutoplayElectOnNewCandidateModule (ref), videoEndReason (ref)
-	local var1 = if p1 then p1.viewportVideoAutoplayController else nil
-	local var2 = if fFlagLuaAppOneByTwoHoverIdleAutoplay and p7 then p7.videoKey else nil
-	local var3 = fFlagLuaAppOneByTwoHoverIdleAutoplay and (p7 ~= nil and p7.isUserIntentModeAutoplayCandidate)
-	local var4 = fFlagLuaAppOneByTwoHoverIdleAutoplay and p7 ~= nil
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), fFlagLuaAppOneByTwoHoverIdleAutoplay (copy), p2 (ref), p3 (ref), var3 (ref), fFlagLuaAppFixHiddenTileVideoCleanup (copy), fFlagLuaAppTileVideoCandidateOnly (copy), value (ref), fFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor (copy), p4 (ref), p6 (ref), alignmentType (copy), var2 (ref), viewportAutoplayVideoKeyAttributeModule (copy), fFlagLuaAppVideoAutoplayOneByTwoTileCandidatePercentageUpdate (copy), viewportAutoplayRowSpanAttributeModule (copy), viewportAutoplayCellVerticalPaddingAttributeModule (copy), p5 (ref), viewportAutoplayAlignmentTypeAttributeModule (copy), collectionService (copy), viewportAutoplayCandidateTagModule (copy), userIntentModeAutoplayCandidateTagModule (copy), var4 (ref), fFlagLuaAppVideoAutoplayFeedElection (copy), fFlagLuaAppVideoAutoplayElectOnNewCandidateModule (copy), videoEndReason (copy)
-		if not var1 then return end
-		if fFlagLuaAppOneByTwoHoverIdleAutoplay then
-			local var5 = p2
-			local var6 = var3
-			local var7 = not (fFlagLuaAppFixHiddenTileVideoCleanup and p3)
-			
-			if var7 then
-				var7 = (if fFlagLuaAppTileVideoCandidateOnly then var5 == true else not fFlagLuaAppTileVideoCandidateOnly) or var6
-			end
-			if not var7 then return end
-		elseif fFlagLuaAppTileVideoCandidateOnly and not p2 then return end
-		if fFlagLuaAppFixHiddenTileVideoCleanup and p3 then return end
-		local current = value.current
+return function(p1, p2, Enabled, p3, Value, Value1, LeftPin, p4) --[[ Line: 55 | Named "useTagAsViewportAutoplayCandidate" ]]
+	-- upvalues: FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), ReactModule (copy), FFlagLuaAppFixHiddenTileVideoCleanup (copy), FFlagLuaAppTileVideoCandidateOnly (copy), AlignmentType (copy), ViewportAutoplayVideoKeyAttributeModule (copy), ViewportAutoplayRowSpanAttributeModule (copy), ViewportAutoplayCellVerticalPaddingAttributeModule (copy), ViewportAutoplayAlignmentTypeAttributeModule (copy), CollectionService (copy), ViewportAutoplayCandidateTagModule (copy), UserIntentModeAutoplayCandidateTagModule (copy), FFlagLuaAppVideoAutoplayFeedElection (copy), FFlagLuaAppVideoAutoplayElectOnNewCandidateModule (copy), VideoEndReason (copy)
+	local ViewportVideoAutoplayController = if p2 then p2.viewportVideoAutoplayController else nil
+	local VideoKey = if FFlagLuaAppOneByTwoHoverIdleAutoplay and p4 then p4.videoKey else nil
+	local IsUserIntentModeAutoplayCandidate = FFlagLuaAppOneByTwoHoverIdleAutoplay and (p4 ~= nil and p4.isUserIntentModeAutoplayCandidate)
+	local v1: boolean = FFlagLuaAppOneByTwoHoverIdleAutoplay and p4 ~= nil
+	ReactModule.useEffect(function() --[[ Line: 77 ]]
+		-- upvalues: ViewportVideoAutoplayController (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (upval), Enabled (copy), p3 (copy), IsUserIntentModeAutoplayCandidate (copy), FFlagLuaAppFixHiddenTileVideoCleanup (upval), FFlagLuaAppTileVideoCandidateOnly (upval), p1 (copy), Value (copy), LeftPin (copy), AlignmentType (upval), VideoKey (copy), ViewportAutoplayVideoKeyAttributeModule (upval), ViewportAutoplayRowSpanAttributeModule (upval), ViewportAutoplayCellVerticalPaddingAttributeModule (upval), Value1 (copy), ViewportAutoplayAlignmentTypeAttributeModule (upval), CollectionService (upval), ViewportAutoplayCandidateTagModule (upval), UserIntentModeAutoplayCandidateTagModule (upval), v1 (copy), FFlagLuaAppVideoAutoplayFeedElection (upval), FFlagLuaAppVideoAutoplayElectOnNewCandidateModule (upval), VideoEndReason (upval)
+		if not ViewportVideoAutoplayController then return end
+		if FFlagLuaAppOneByTwoHoverIdleAutoplay then
+			if FFlagLuaAppFixHiddenTileVideoCleanup and p3 or FFlagLuaAppTileVideoCandidateOnly and Enabled ~= true and not IsUserIntentModeAutoplayCandidate then return end
+		else
+			if FFlagLuaAppTileVideoCandidateOnly and not Enabled then return end
+			if FFlagLuaAppFixHiddenTileVideoCleanup and p3 then return end
+		end
+		local Current = p1.current
 		
-		if not current then return end
-		if fFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor and p4 == 2 and (p6 ~= alignmentType.LeftPin and p6 ~= alignmentType.RightPin) then return end
-		if fFlagLuaAppOneByTwoHoverIdleAutoplay and var2 then
-			current:SetAttribute(viewportAutoplayVideoKeyAttributeModule, var2)
+		if not Current then return end
+		if Value == 2 and LeftPin ~= AlignmentType.LeftPin and LeftPin ~= AlignmentType.RightPin then return end
+		if FFlagLuaAppOneByTwoHoverIdleAutoplay and VideoKey then
+			Current:SetAttribute(ViewportAutoplayVideoKeyAttributeModule, VideoKey)
 		end
-		if (fFlagLuaAppVideoAutoplayOneByTwoTileCandidatePercentageUpdate or fFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor) and p4 ~= nil then
-			current:SetAttribute(viewportAutoplayRowSpanAttributeModule, p4)
+		if Value ~= nil then
+			Current:SetAttribute(ViewportAutoplayRowSpanAttributeModule, Value)
+			Current:SetAttribute(ViewportAutoplayCellVerticalPaddingAttributeModule, Value1)
+			Current:SetAttribute(ViewportAutoplayAlignmentTypeAttributeModule, LeftPin)
+		end
+		if not FFlagLuaAppOneByTwoHoverIdleAutoplay or (not FFlagLuaAppTileVideoCandidateOnly or Enabled == true) then
+			CollectionService:AddTag(Current, ViewportAutoplayCandidateTagModule)
+		end
+		if FFlagLuaAppOneByTwoHoverIdleAutoplay and IsUserIntentModeAutoplayCandidate then
+			CollectionService:AddTag(Current, UserIntentModeAutoplayCandidateTagModule)
+		end
+		if FFlagLuaAppOneByTwoHoverIdleAutoplay then
+			local ElectOnNewCandidate = ViewportVideoAutoplayController.electOnNewCandidate
 			
-			if fFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor then
-				current:SetAttribute(viewportAutoplayCellVerticalPaddingAttributeModule, p5)
-				current:SetAttribute(viewportAutoplayAlignmentTypeAttributeModule, p6)
+			if v1 and ViewportVideoAutoplayController:isUserIntentWithSelectiveAutoplay() or FFlagLuaAppVideoAutoplayFeedElection and (ElectOnNewCandidate or FFlagLuaAppVideoAutoplayElectOnNewCandidateModule) then
+				ViewportVideoAutoplayController:onCandidateRegistered(Current)
 			end
+		elseif FFlagLuaAppVideoAutoplayFeedElection and (ViewportVideoAutoplayController.electOnNewCandidate or FFlagLuaAppVideoAutoplayElectOnNewCandidateModule) then
+			ViewportVideoAutoplayController:onCandidateRegistered(Current)
 		end
-		if not fFlagLuaAppOneByTwoHoverIdleAutoplay or (not fFlagLuaAppTileVideoCandidateOnly or p2 == true) then
-			collectionService:AddTag(current, viewportAutoplayCandidateTagModule)
-		end
-		if fFlagLuaAppOneByTwoHoverIdleAutoplay and var3 then
-			collectionService:AddTag(current, userIntentModeAutoplayCandidateTagModule)
-		end
-		if fFlagLuaAppOneByTwoHoverIdleAutoplay then
-			if var4 and var1:isUserIntentWithSelectiveAutoplay() or fFlagLuaAppVideoAutoplayFeedElection and (var1.electOnNewCandidate or fFlagLuaAppVideoAutoplayElectOnNewCandidateModule) then
-				var1:onCandidateRegistered(current)
-			end
-		elseif fFlagLuaAppVideoAutoplayFeedElection and (var1.electOnNewCandidate or fFlagLuaAppVideoAutoplayElectOnNewCandidateModule) then
-			var1:onCandidateRegistered(current)
-		end
-		return function()
-			-- upvalues: collectionService (copy), current (ref), viewportAutoplayCandidateTagModule (copy), fFlagLuaAppOneByTwoHoverIdleAutoplay (copy), userIntentModeAutoplayCandidateTagModule (copy), fFlagLuaAppVideoAutoplayOneByTwoTileCandidatePercentageUpdate (copy), fFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor (copy), p4 (copy), viewportAutoplayRowSpanAttributeModule (copy), viewportAutoplayCellVerticalPaddingAttributeModule (copy), viewportAutoplayAlignmentTypeAttributeModule (copy), viewportAutoplayVideoKeyAttributeModule (copy), var1 (copy), videoEndReason (copy)
-			collectionService:RemoveTag(current, viewportAutoplayCandidateTagModule)
+		return function() --[[ Line: 149 ]]
+			-- upvalues: CollectionService (upval), Current (copy), ViewportAutoplayCandidateTagModule (upval), FFlagLuaAppOneByTwoHoverIdleAutoplay (upval), UserIntentModeAutoplayCandidateTagModule (upval), Value (upval), ViewportAutoplayRowSpanAttributeModule (upval), ViewportAutoplayCellVerticalPaddingAttributeModule (upval), ViewportAutoplayAlignmentTypeAttributeModule (upval), ViewportAutoplayVideoKeyAttributeModule (upval), ViewportVideoAutoplayController (upval), VideoEndReason (upval)
+			CollectionService:RemoveTag(Current, ViewportAutoplayCandidateTagModule)
 			
-			if fFlagLuaAppOneByTwoHoverIdleAutoplay then
-				collectionService:RemoveTag(current, userIntentModeAutoplayCandidateTagModule)
+			if FFlagLuaAppOneByTwoHoverIdleAutoplay then
+				CollectionService:RemoveTag(Current, UserIntentModeAutoplayCandidateTagModule)
 			end
-			if (fFlagLuaAppVideoAutoplayOneByTwoTileCandidatePercentageUpdate or fFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor) and p4 ~= nil then
-				current:SetAttribute(viewportAutoplayRowSpanAttributeModule, nil)
-				
-				if fFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor then
-					current:SetAttribute(viewportAutoplayCellVerticalPaddingAttributeModule, nil)
-					current:SetAttribute(viewportAutoplayAlignmentTypeAttributeModule, nil)
-				end
+			if Value ~= nil then
+				Current:SetAttribute(ViewportAutoplayRowSpanAttributeModule, nil)
+				Current:SetAttribute(ViewportAutoplayCellVerticalPaddingAttributeModule, nil)
+				Current:SetAttribute(ViewportAutoplayAlignmentTypeAttributeModule, nil)
 			end
-			if fFlagLuaAppOneByTwoHoverIdleAutoplay then
-				current:SetAttribute(viewportAutoplayVideoKeyAttributeModule, nil)
+			if FFlagLuaAppOneByTwoHoverIdleAutoplay then
+				Current:SetAttribute(ViewportAutoplayVideoKeyAttributeModule, nil)
 			end
-			var1:resetIfActiveInstance(current, videoEndReason.Unmounted)
+			ViewportVideoAutoplayController:resetIfActiveInstance(Current, VideoEndReason.Unmounted)
 		end
 	end, {
-		var1, value, if fFlagLuaAppTileVideoCandidateOnly then p2 else nil,
-		if fFlagLuaAppFixHiddenTileVideoCleanup then p3 else nil,
-		if fFlagLuaAppVideoAutoplayOneByTwoTileCandidatePercentageUpdate or fFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor then p4 else nil,
-		if fFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor then p5 else nil,
-		if fFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor then p6 else nil,
-		if fFlagLuaAppOneByTwoHoverIdleAutoplay then var2 else nil,
-		if fFlagLuaAppOneByTwoHoverIdleAutoplay then var3 else nil,
-		if fFlagLuaAppOneByTwoHoverIdleAutoplay then var4 else nil
+		ViewportVideoAutoplayController, p1,
+		if FFlagLuaAppTileVideoCandidateOnly then Enabled else nil,
+		if FFlagLuaAppFixHiddenTileVideoCleanup then p3 else nil, Value, Value1,
+		LeftPin, if FFlagLuaAppOneByTwoHoverIdleAutoplay then VideoKey else nil,
+		if FFlagLuaAppOneByTwoHoverIdleAutoplay then IsUserIntentModeAutoplayCandidate else nil,
+		if FFlagLuaAppOneByTwoHoverIdleAutoplay then v1 else nil
 	})
 end

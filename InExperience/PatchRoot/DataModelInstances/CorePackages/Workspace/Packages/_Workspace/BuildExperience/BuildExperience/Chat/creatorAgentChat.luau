@@ -1,418 +1,693 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local creatorAgentChatModule = require(parent.DataHydration.CreatorAgentChat)
-local sharedFlagsModule = require(parent.SharedFlags)
-local signalsModule = require(parent.Signals)
-local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local fFlagBuildExperienceClientDataModelTools = sharedFlagsModule.FFlagBuildExperienceClientDataModelTools
-local fFlagBuildExperienceManageDevProductModule = require(buildExperience.Flags.FFlagBuildExperienceManageDevProduct)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local CreatorAgentChatModule = require(Parent.DataHydration.CreatorAgentChat)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local SignalsModule = require(Parent.Signals)
+local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
+local FFlagBuildExperienceClientDataModelTools = SharedFlagsModule.FFlagBuildExperienceClientDataModelTools
+local FFlagBuildExperiencePromptFailureTelemetry = SharedFlagsModule.FFlagBuildExperiencePromptFailureTelemetry
+local FFlagBuildExperienceManageDevProductModule = require(BuildExperience.Flags.FFlagBuildExperienceManageDevProduct)
 local _ = require(script.Parent.chatTypes)
-local askUserControllerModule = require(script.Parent.askUserController)
-local var1 = if fFlagBuildExperienceClientDataModelTools then require(script.Parent.clientDataModelController) else nil
-local clientLogsControllerModule = require(script.Parent.clientLogsController)
-local localToolOverlayModule = require(script.Parent.localToolOverlay)
-local proposePlanControllerModule = require(script.Parent.proposePlanController)
-local var2 = if fFlagBuildExperienceManageDevProductModule then require(script.Parent.askManageDevProductController) else nil
-local sendBuildExperienceEventModule = require(buildExperience.Telemetry.sendBuildExperienceEvent)
-local fFlagBuildEventsUpdate1Module = require(buildExperience.Flags.FFlagBuildEventsUpdate1)
-local fFlagBuildRemoveTeamTestEnabledCapabilityFlagModule = require(buildExperience.Flags.FFlagBuildRemoveTeamTestEnabledCapabilityFlag)
-local studioAskUserTool = creatorAgentChatModule.StudioAskUserTool
-local studioClientDataModelTools = creatorAgentChatModule.StudioClientDataModelTools
-local studioClientLogsTool = creatorAgentChatModule.StudioClientLogsTool
-local studioProposePlanTool = creatorAgentChatModule.StudioProposePlanTool
-local studioManageDevProductTool = creatorAgentChatModule.StudioManageDevProductTool
-local debug = creatorAgentChatModule.debug
-local fFlagEnableTeamTestLua = sharedFlagsModule.FFlagEnableTeamTestLua
-local errorCodes = creatorAgentChatModule.ErrorCodes
-local forbidden = errorCodes.Forbidden
-local t = {
+local AskUserControllerModule = require(script.Parent.askUserController)
+local ClientDataModelControllerModule = if FFlagBuildExperienceClientDataModelTools then require(script.Parent.clientDataModelController) else nil
+local ClientLogsControllerModule = require(script.Parent.clientLogsController)
+local LocalToolOverlayModule = require(script.Parent.localToolOverlay)
+local IsWaitingOnUserInputModule = require(script.Parent.isWaitingOnUserInput)
+local ProposePlanControllerModule = require(script.Parent.proposePlanController)
+local AskManageDevProductControllerModule = if FFlagBuildExperienceManageDevProductModule then require(script.Parent.askManageDevProductController) else nil
+local CreatePromptLifecycleTelemetryModule = require(BuildExperience.Telemetry.createPromptLifecycleTelemetry)
+local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
+local FFlagBuildEventsUpdate1Module = require(BuildExperience.Flags.FFlagBuildEventsUpdate1)
+local StudioAskUserTool = CreatorAgentChatModule.StudioAskUserTool
+local StudioClientDataModelTools = CreatorAgentChatModule.StudioClientDataModelTools
+local StudioClientLogsTool = CreatorAgentChatModule.StudioClientLogsTool
+local StudioProposePlanTool = CreatorAgentChatModule.StudioProposePlanTool
+local StudioManageDevProductTool = CreatorAgentChatModule.StudioManageDevProductTool
+local Debug = CreatorAgentChatModule.debug
+local TurnStateReducer = CreatorAgentChatModule.TurnStateReducer
+local ErrorCodes = CreatorAgentChatModule.ErrorCodes
+local Forbidden = ErrorCodes.Forbidden
+local config = {
 	FreeTrialExhausted = "FreeTrialExhausted",
 	DailyLimitReached = "DailyLimitReached",
 	InsufficientRobuxBalance = "InsufficientRobuxBalance"
 }
-local t_1 = {
-	[errorCodes.InvalidParams] = localizationStringsModule.CHAT_ERROR_INVALID_PARAMS,
-	[errorCodes.Unauthorized] = localizationStringsModule.CHAT_ERROR_UNAUTHORIZED,
-	[errorCodes.Forbidden] = localizationStringsModule.CHAT_ERROR_FORBIDDEN,
-	[errorCodes.NotFound] = localizationStringsModule.CHAT_ERROR_NOT_FOUND,
-	[errorCodes.Conflict] = localizationStringsModule.CHAT_ERROR_CONFLICT,
-	[errorCodes.Gone] = localizationStringsModule.CHAT_ERROR_GONE,
-	[errorCodes.UpstreamUnavailable] = localizationStringsModule.CHAT_ERROR_UPSTREAM_UNAVAILABLE,
-	[errorCodes.InternalError] = localizationStringsModule.CHAT_ERROR_INTERNAL,
-	[errorCodes.OutOfCredits] = localizationStringsModule.CHAT_ERROR_OUT_OF_CREDITS
+local config1 = {
+	[ErrorCodes.InvalidParams] = LocalizationStringsModule.CHAT_ERROR_INVALID_PARAMS,
+	[ErrorCodes.Unauthorized] = LocalizationStringsModule.CHAT_ERROR_UNAUTHORIZED,
+	[ErrorCodes.Forbidden] = LocalizationStringsModule.CHAT_ERROR_FORBIDDEN,
+	[ErrorCodes.NotFound] = LocalizationStringsModule.CHAT_ERROR_NOT_FOUND,
+	[ErrorCodes.Conflict] = LocalizationStringsModule.CHAT_ERROR_CONFLICT,
+	[ErrorCodes.Gone] = LocalizationStringsModule.CHAT_ERROR_GONE,
+	[ErrorCodes.UpstreamUnavailable] = LocalizationStringsModule.CHAT_ERROR_UPSTREAM_UNAVAILABLE,
+	[ErrorCodes.InternalError] = LocalizationStringsModule.CHAT_ERROR_INTERNAL,
+	[ErrorCodes.OutOfCredits] = LocalizationStringsModule.CHAT_ERROR_OUT_OF_CREDITS
 }
 
-local function getPromptFailureComposerError(p1)
-	-- upvalues: localizationStringsModule (ref), t_1 (ref)
-	if p1.isContentPolicy then
-		return localizationStringsModule.CHAT_POLICY_REJECTION
-	elseif p1.setupStage == "missing_project" then
-		return localizationStringsModule.CHAT_MISSING_PROJECT
-	elseif p1.errorCode ~= nil then
-		local errorCode = t_1[p1.errorCode]
-		
-		return if errorCode == nil then localizationStringsModule.CHAT_DEFAULT_FAILURE else errorCode
-	end
+local function _(p1) --[[ Line: 125 | Named "getOutOfCreditsReason" ]]
+	-- upvalues: config (copy)
+	return if p1 == nil then nil else config[p1]
 end
 
-local function getToolResultFailureComposerError(p1)
-	-- upvalues: forbidden (ref), localizationStringsModule (ref), t_1 (ref)
-	local t = {
-		outOfCreditsReason = nil,
-		setupStage = nil,
-		errorCode = p1,
-		isContentPolicy = p1 == forbidden
-	}
-	
-	if t.isContentPolicy then
-		return localizationStringsModule.CHAT_POLICY_REJECTION
-	elseif t.setupStage == "missing_project" then
-		return localizationStringsModule.CHAT_MISSING_PROJECT
-	elseif t.errorCode ~= nil then
-		local errorCode = t_1[t.errorCode]
-		
-		return if errorCode == nil then localizationStringsModule.CHAT_DEFAULT_FAILURE else errorCode
-	end
-end
-
-local function _(p1)
-	-- upvalues: t (ref)
-	return if p1 == nil then nil else t[p1]
-end
-
-local function resolvePromptFailure(p1, p2)
-	-- upvalues: errorCodes (ref), t (ref), forbidden (ref)
+local function resolvePromptFailure(p1, SetupError) --[[ Line: 134 ]]
+	-- upvalues: FFlagBuildExperiencePromptFailureTelemetry (copy), ErrorCodes (copy), config (copy), Forbidden (copy)
 	if p1 == nil then
-		return if p2 == nil then nil else {
+		return if SetupError == nil then nil else {
 			outOfCreditsReason = nil,
 			isContentPolicy = false,
-			errorCode = p2.errorCode,
-			setupStage = p2.stage
+			errorCode = SetupError.errorCode,
+			setupStage = SetupError.stage,
+			requestFailure = if FFlagBuildExperiencePromptFailureTelemetry then SetupError.requestFailure else nil
 		}
-	elseif p1.status ~= "failed" then
+	end
+	if p1.status ~= "failed" then
 		return nil
 	end
-	local var3
-	local t_1 = { errorCode = p1.errorCode }
+	local config1 = { errorCode = p1.errorCode }
+	local Entry = nil
 	
-	if p1.errorCode == errorCodes.OutOfCredits then
-		local error = p1.error
-		var3 = if error == nil then nil else t[error]
+	if p1.errorCode == ErrorCodes.OutOfCredits then
+		local Error = p1.error
+		Entry = if Error == nil then nil else config[Error]
 	else
-		var3 = nil
+		Entry = nil
 	end
-	t_1.outOfCreditsReason = var3
-	t_1.isContentPolicy = p1.errorCode == forbidden
+	config1.outOfCreditsReason = Entry
+	config1.isContentPolicy = p1.errorCode == Forbidden
+	config1.requestFailure = if FFlagBuildExperiencePromptFailureTelemetry then p1.requestFailure else nil
 	
-	return t_1
+	return config1
 end
 
-local function getPromptFailureTelemetryParameters(p1)
-	local t = { isContentPolicy = tostring(p1.isContentPolicy) }
+local function getPromptFailureTelemetryParameters(p1) --[[ Line: 160 ]]
+	local config = { isContentPolicy = tostring(p1.isContentPolicy) }
 	
 	if p1.errorCode ~= nil then
-		t.errorCode = tostring(p1.errorCode)
+		config.errorCode = tostring(p1.errorCode)
 	end
 	if p1.outOfCreditsReason ~= nil then
-		t.outOfCreditsReason = p1.outOfCreditsReason
+		config.outOfCreditsReason = p1.outOfCreditsReason
 	end
 	if p1.setupStage ~= nil then
-		t.setupStage = p1.setupStage
+		config.setupStage = p1.setupStage
 	end
-	return t
+	return config
 end
 
-local _ = function(value)
-	-- upvalues: localizationStringsModule (ref), t_1 (ref)
-	local t = {
+local _ = function(p1, p2) --[[ Line: 176 | Named "addPromptFailureTelemetryParameters" ]]
+	-- upvalues: LocalizationStringsModule (copy), config1 (copy)
+	local RequestFailure = p2.requestFailure
+	local CHATPOLICYREJECTION = nil
+	
+	if RequestFailure ~= nil then
+		p1.failureKind = RequestFailure.kind
+		
+		if RequestFailure.httpStatusCode ~= nil then
+			p1.httpStatusCode = tostring(RequestFailure.httpStatusCode)
+		end
+	end
+	repeat
+		if p2.isContentPolicy then
+			CHATPOLICYREJECTION = LocalizationStringsModule.CHAT_POLICY_REJECTION
+			break
+		end
+		if p2.setupStage == "missing_project" then
+			CHATPOLICYREJECTION = LocalizationStringsModule.CHAT_MISSING_PROJECT
+			break
+		end
+		if p2.errorCode ~= nil then
+			local Entry = config1[p2.errorCode]
+			
+			if Entry ~= nil then
+				CHATPOLICYREJECTION = Entry
+				break
+			end
+		end
+		CHATPOLICYREJECTION = LocalizationStringsModule.CHAT_DEFAULT_FAILURE
+	until true
+	p1.errorCopyKey = CHATPOLICYREJECTION
+end
+
+local _ = function(p1, List) --[[ Line: 188 | Named "addLifecycleTelemetryParameters" ]]
+	for i, value in List do
+		p1[i] = value
+	end
+end
+
+local _ = function(p2) --[[ Line: 197 | Named "getAgentTurnFailureTelemetryParameters" ]]
+	local config = { status = p2.status }
+	
+	if p2.stopReason ~= nil then
+		config.stopReason = p2.stopReason
+	end
+	if p2.errorCode ~= nil then
+		config.errorCode = tostring(p2.errorCode)
+	end
+	return config
+end
+
+local config2 = {
+	agent_message = true,
+	agent_message_chunk = true,
+	tool_call_update = true,
+	tool_call_content_chunk = true
+}
+local config3 = { tool_call_update = true, tool_call_content_chunk = true }
+
+local function trackPromptActivity(SendPromptResult, p2, Callback) --[[ Line: 225 ]]
+	-- upvalues: TurnStateReducer (copy), config2 (copy), config3 (copy), IsWaitingOnUserInputModule (copy), SignalsModule (copy)
+	local EmptyTurnState = TurnStateReducer.createEmptyTurnState("", nil)
+	local HasResponse = false
+	local IsWaitingOnUser = false
+	local TurnHandle = nil
+	local OnUpdateResult = nil
+	
+	local function _() --[[ Line: 236 | Named "reportActivity" ]]
+		-- upvalues: p2 (copy), HasResponse (ref), IsWaitingOnUser (ref)
+		p2.markActivity({
+			hasResponse = HasResponse,
+			isWaitingOnUser = IsWaitingOnUser
+		})
+	end
+	
+	local function onUpdate(p3, SequenceNumber) --[[ Line: 243 ]]
+		-- upvalues: config2 (upval), HasResponse (ref), config3 (upval), EmptyTurnState (ref), TurnStateReducer (upval), IsWaitingOnUser (ref), IsWaitingOnUserInputModule (upval), Callback (copy), p2 (copy)
+		if config2[p3.sessionUpdate] == true then
+			HasResponse = true
+		end
+		if config3[p3.sessionUpdate] == true then
+			EmptyTurnState = TurnStateReducer.applySessionUpdate(EmptyTurnState, p3, { sequenceNumber = SequenceNumber })
+			IsWaitingOnUser = IsWaitingOnUserInputModule(EmptyTurnState, Callback(false).submittedToolCallIds)
+		end
+		p2.markActivity({
+			hasResponse = HasResponse,
+			isWaitingOnUser = IsWaitingOnUser
+		})
+	end
+	
+	local Effect = SignalsModule.createEffect(function(p3) --[[ Line: 255 ]]
+		-- upvalues: SendPromptResult (copy), Callback (copy), TurnHandle (ref), OnUpdateResult (ref), onUpdate (copy), IsWaitingOnUserInputModule (upval), EmptyTurnState (ref), IsWaitingOnUser (ref), p2 (copy), HasResponse (ref)
+		local TurnHandle1 = SendPromptResult.getTurnHandle(p3)
+		local SubmittedToolCallIds = Callback(p3).submittedToolCallIds
+		
+		if TurnHandle1 ~= nil and TurnHandle1 ~= TurnHandle and TurnHandle1.onUpdate ~= nil then
+			TurnHandle = TurnHandle1
+			OnUpdateResult = TurnHandle1.onUpdate(onUpdate)
+		end
+		local IsWaitingOnUserInputModule1 = IsWaitingOnUserInputModule(EmptyTurnState, SubmittedToolCallIds)
+		
+		if IsWaitingOnUserInputModule1 ~= IsWaitingOnUser then
+			IsWaitingOnUser = IsWaitingOnUserInputModule1
+			p2.markActivity({
+				hasResponse = HasResponse,
+				isWaitingOnUser = IsWaitingOnUser
+			})
+		end
+	end)
+	
+	return function() --[[ Line: 270 ]]
+		-- upvalues: Effect (copy), OnUpdateResult (ref)
+		Effect()
+		
+		if OnUpdateResult ~= nil then
+			OnUpdateResult()
+			OnUpdateResult = nil
+		end
+	end
+end
+
+local _ = function(p2): boolean --[[ Line: 279 | Named "isAgentTurnFailure" ]]
+	return p2.status == "failed" or p2.stopReason == "error"
+end
+
+local _ = function(p2) --[[ Line: 283 | Named "formatSetupErrorMessage" ]]
+	-- upvalues: LocalizationStringsModule (copy), config1 (copy)
+	local config = {
 		isContentPolicy = false,
-		errorCode = value.errorCode,
-		setupStage = value.stage
+		errorCode = p2.errorCode,
+		setupStage = p2.stage
 	}
 	
-	if t.isContentPolicy then
-		return localizationStringsModule.CHAT_POLICY_REJECTION
-	elseif t.setupStage == "missing_project" then
-		return localizationStringsModule.CHAT_MISSING_PROJECT
-	elseif t.errorCode ~= nil then
-		local errorCode = t_1[t.errorCode]
-		
-		return if errorCode == nil then localizationStringsModule.CHAT_DEFAULT_FAILURE else errorCode
+	if config.isContentPolicy then
+		return LocalizationStringsModule.CHAT_POLICY_REJECTION
 	end
+	if config.setupStage == "missing_project" then
+		return LocalizationStringsModule.CHAT_MISSING_PROJECT
+	end
+	if config.errorCode ~= nil then
+		local Entry = config1[config.errorCode]
+		
+		if Entry ~= nil then
+			return Entry
+		end
+	end
+	return LocalizationStringsModule.CHAT_DEFAULT_FAILURE
 end
 
-local function createLocalToolControllers(p1, p2, p3)
-	-- upvalues: localToolOverlayModule (ref), askUserControllerModule (ref), proposePlanControllerModule (ref), clientLogsControllerModule (ref), var1 (ref), var2 (ref)
+local function createLocalToolControllers(p2, p3, p4) --[[ Line: 294 ]]
+	-- upvalues: LocalToolOverlayModule (copy), AskUserControllerModule (copy), ProposePlanControllerModule (copy), ClientLogsControllerModule (copy), ClientDataModelControllerModule (copy), AskManageDevProductControllerModule (copy)
 	local t = {}
-	local var3 = localToolOverlayModule()
-	local var4 = askUserControllerModule(p1, t, var3, p2)
-	local var5 = proposePlanControllerModule(p1, t, var3, p2)
-	local var6 = clientLogsControllerModule(p1, t, p3)
-	local var7 = if var1 ~= nil then nil else var1(p1, t, p3)
-	local var8 = if var2 ~= nil then nil else var2(p1, t, var3, p2)
+	local LocalToolOverlayModuleResult = LocalToolOverlayModule()
+	local AskUserControllerModuleResult = AskUserControllerModule(p2, t, LocalToolOverlayModuleResult, p3)
+	local ProposePlanControllerModuleResult = ProposePlanControllerModule(p2, t, LocalToolOverlayModuleResult, p3)
+	local ClientLogsControllerModuleResult = ClientLogsControllerModule(p2, t, p4)
+	local ClientDataModelControllerModuleResult = if ClientDataModelControllerModule == nil then nil else ClientDataModelControllerModule(p2, t, p4)
+	local AskManageDevProductControllerModuleResult = if AskManageDevProductControllerModule == nil then nil else AskManageDevProductControllerModule(p2, t, LocalToolOverlayModuleResult, p3)
 	
 	return {
-		getOptimisticLocalTools = var3.getOptimisticLocalTools,
-		getLocalToolActions = var3.getLocalToolActions,
-		hasDisplayedAnswerStack = var4.hasDisplayedAnswerStack,
-		syncFromTurnState = function(p4)
-			-- upvalues: var4 (ref), var5 (ref), var6 (ref), var7 (ref), var8 (ref)
-			var4.syncAnswerStack(p4)
-			var5.syncPlanProposal(p4)
-			var6.syncClientLogsRequest(p4)
+		getOptimisticLocalTools = LocalToolOverlayModuleResult.getOptimisticLocalTools,
+		getLocalToolActions = LocalToolOverlayModuleResult.getLocalToolActions,
+		hasDisplayedAnswerStack = AskUserControllerModuleResult.hasDisplayedAnswerStack,
+		syncFromTurnState = function(p5) --[[ Line: 317 ]]
+			-- upvalues: AskUserControllerModuleResult (copy), ProposePlanControllerModuleResult (copy), ClientLogsControllerModuleResult (copy), ClientDataModelControllerModuleResult (copy), AskManageDevProductControllerModuleResult (copy)
+			AskUserControllerModuleResult.syncAnswerStack(p5)
+			ProposePlanControllerModuleResult.syncPlanProposal(p5)
+			ClientLogsControllerModuleResult.syncClientLogsRequest(p5)
 			
-			if var7 ~= nil then
-				var7.syncClientDataModelRequests(p4)
+			if ClientDataModelControllerModuleResult ~= nil then
+				ClientDataModelControllerModuleResult.syncClientDataModelRequests(p5)
 			end
-			if var8 ~= nil then
-				var8.syncManageDevProductRequests(p4)
+			if AskManageDevProductControllerModuleResult ~= nil then
+				AskManageDevProductControllerModuleResult.syncManageDevProductRequests(p5)
 			end
 		end,
-		trySubmitComposerText = function(p4)
-			-- upvalues: var4 (ref), var5 (ref), var8 (ref)
-			return var4.trySubmitComposerText(p4) or (var5.trySubmitComposerText(p4) or (var8 ~= nil and var8.trySubmitComposerText(p4)))
+		trySubmitComposerText = function(p5) --[[ Line: 328 ]]
+			-- upvalues: AskUserControllerModuleResult (copy), ProposePlanControllerModuleResult (copy), AskManageDevProductControllerModuleResult (copy)
+			return AskUserControllerModuleResult.trySubmitComposerText(p5) or (ProposePlanControllerModuleResult.trySubmitComposerText(p5) or AskManageDevProductControllerModuleResult ~= nil and AskManageDevProductControllerModuleResult.trySubmitComposerText(p5))
 		end,
-		stopPending = function()
-			-- upvalues: var4 (ref), var5 (ref), var7 (ref), var8 (ref)
-			var4.stopPendingAnswer()
-			var5.stopPendingPlan()
+		trySubmitAnswerText = AskUserControllerModuleResult.trySubmitAnswerText,
+		stopPending = function() --[[ Line: 334 ]]
+			-- upvalues: AskUserControllerModuleResult (copy), ProposePlanControllerModuleResult (copy), ClientDataModelControllerModuleResult (copy), AskManageDevProductControllerModuleResult (copy)
+			AskUserControllerModuleResult.stopPendingAnswer()
+			ProposePlanControllerModuleResult.stopPendingPlan()
 			
-			if var7 ~= nil then
-				var7.revokePending()
+			if ClientDataModelControllerModuleResult ~= nil then
+				ClientDataModelControllerModuleResult.revokePending()
 			end
-			if var8 ~= nil then
-				var8.stopPending()
+			if AskManageDevProductControllerModuleResult ~= nil then
+				AskManageDevProductControllerModuleResult.stopPending()
 			end
 		end
 	}
 end
 
 return {
-	createLiveAssistantTurn = function(p1, p2, p3, p4, p5, p6)
-		-- upvalues: createLocalToolControllers (ref), studioAskUserTool (ref), studioProposePlanTool (ref), studioClientLogsTool (ref), fFlagBuildExperienceClientDataModelTools (ref), studioClientDataModelTools (ref), fFlagBuildExperienceManageDevProductModule (ref), studioManageDevProductTool (ref), fFlagBuildRemoveTeamTestEnabledCapabilityFlagModule (ref), fFlagEnableTeamTestLua (ref), sendBuildExperienceEventModule (ref), fFlagBuildEventsUpdate1Module (ref), resolvePromptFailure (ref), debug (ref), getPromptFailureTelemetryParameters (ref), localizationStringsModule (ref), t_1 (ref)
-		local var3 = createLocalToolControllers(p1, p4, p5)
-		local universeId = p1.universeId
-		local list = {
-			studioAskUserTool.LOCAL_TOOL_DEFINITION,
-			studioProposePlanTool.LOCAL_TOOL_DEFINITION,
-			studioClientLogsTool.LOCAL_TOOL_DEFINITION
+	createLiveAssistantTurn = function(p2, Prompt, Callback2, p3, p4, Callback) --[[ Line: 349 ]]
+		-- upvalues: createLocalToolControllers (copy), StudioAskUserTool (copy), StudioProposePlanTool (copy), StudioClientLogsTool (copy), FFlagBuildExperienceClientDataModelTools (copy), StudioClientDataModelTools (copy), FFlagBuildExperienceManageDevProductModule (copy), StudioManageDevProductTool (copy), FFlagBuildExperiencePromptFailureTelemetry (copy), CreatePromptLifecycleTelemetryModule (copy), SendBuildExperienceEventModule (copy), FFlagBuildEventsUpdate1Module (copy), resolvePromptFailure (copy), Debug (copy), getPromptFailureTelemetryParameters (copy), LocalizationStringsModule (copy), config1 (copy), trackPromptActivity (copy)
+		local LocalToolControllers = createLocalToolControllers(p2, p3, p4)
+		local UniverseId = p2.universeId
+		local List = {
+			StudioAskUserTool.LOCAL_TOOL_DEFINITION,
+			StudioProposePlanTool.LOCAL_TOOL_DEFINITION,
+			StudioClientLogsTool.LOCAL_TOOL_DEFINITION
 		}
 		
-		if fFlagBuildExperienceClientDataModelTools then
-			table.insert(list, studioClientDataModelTools.SEARCH_LOCAL_TOOL_DEFINITION)
-			table.insert(list, studioClientDataModelTools.INSPECT_LOCAL_TOOL_DEFINITION)
+		if FFlagBuildExperienceClientDataModelTools then
+			table.insert(List, StudioClientDataModelTools.SEARCH_LOCAL_TOOL_DEFINITION)
+			table.insert(List, StudioClientDataModelTools.INSPECT_LOCAL_TOOL_DEFINITION)
 		end
-		if fFlagBuildExperienceManageDevProductModule then
-			table.insert(list, studioManageDevProductTool.LOCAL_TOOL_DEFINITION)
+		if FFlagBuildExperienceManageDevProductModule then
+			table.insert(List, StudioManageDevProductTool.LOCAL_TOOL_DEFINITION)
 		end
-		local var4 = nil
-		var4 = p1.sendPrompt({
-			prompt = p2,
+		local PromptLifecycleTelemetryModule = if FFlagBuildExperiencePromptFailureTelemetry then CreatePromptLifecycleTelemetryModule(function() --[[ Line: 384 ]]
+			-- upvalues: UniverseId (copy), p2 (copy)
+			return {
+				universeId = UniverseId,
+				placeId = p2.placeId,
+				conversationId = p2.getCasSessionId()
+			}
+		end) else nil
+		
+		local function handleReceived(TurnId) --[[ Line: 402 ]]
+			-- upvalues: FFlagBuildEventsUpdate1Module (upval), SendBuildExperienceEventModule (upval), UniverseId (copy), p2 (copy), Callback (copy)
+			if FFlagBuildEventsUpdate1Module then
+				SendBuildExperienceEventModule("SEND_PROMPT_RECIEVED", {
+					universeId = UniverseId,
+					placeId = p2.placeId,
+					conversationId = p2.getCasSessionId(),
+					turnId = TurnId
+				})
+			end
+			if Callback ~= nil then
+				Callback(TurnId)
+			end
+		end
+		
+		local SendPromptResult = nil
+		local Callback1: (() -> ())? = nil
+		
+		local function _(p5) --[[ Line: 419 | Named "finishPromptTelemetry" ]]
+			-- upvalues: Callback1 (ref)
+			if Callback1 ~= nil then
+				Callback1()
+				Callback1 = nil
+			end
+			p5.finish()
+		end
+		
+		SendPromptResult = p2.sendPrompt({
+			prompt = Prompt,
 			promptMeta = {
 				_roblox = {
-					application = if fFlagBuildExperienceClientDataModelTools then "build-on-mobile" else nil,
-					localTools = list,
-					providerConfig = { universeId = universeId },
-					teamTestEnabled = if fFlagBuildRemoveTeamTestEnabledCapabilityFlagModule then nil else fFlagEnableTeamTestLua
+					application = if FFlagBuildExperienceClientDataModelTools then "build-on-mobile" else nil,
+					localTools = List,
+					providerConfig = { universeId = UniverseId }
 				}
 			},
-			onDroppedChatMessage = function(p7)
-				-- upvalues: sendBuildExperienceEventModule (copy), universeId (ref), p1 (ref)
-				sendBuildExperienceEventModule("DROPPED_CHAT_MESSAGE", {
-					universeId = universeId,
-					placeId = p1.placeId,
-					conversationId = p1.getCasSessionId(),
-					messageId = p7
+			onDroppedChatMessage = function(MessageId) --[[ Line: 393 ]]
+				-- upvalues: SendBuildExperienceEventModule (upval), UniverseId (copy), p2 (copy)
+				SendBuildExperienceEventModule("DROPPED_CHAT_MESSAGE", {
+					universeId = UniverseId,
+					placeId = p2.placeId,
+					conversationId = p2.getCasSessionId(),
+					messageId = MessageId
 				})
 			end,
-			onReceived = if fFlagBuildEventsUpdate1Module or p6 ~= nil then function(p7)
-				-- upvalues: fFlagBuildEventsUpdate1Module (copy), sendBuildExperienceEventModule (copy), universeId (ref), p1 (ref), p6 (ref)
-				if fFlagBuildEventsUpdate1Module then
-					sendBuildExperienceEventModule("SEND_PROMPT_RECIEVED", {
-						universeId = universeId,
-						placeId = p1.placeId,
-						conversationId = p1.getCasSessionId(),
-						turnId = p7
-					})
-				end
-				if p6 ~= nil then
-					p6(p7)
-				end
-			end else nil,
-			onCompleted = function(p7)
-				-- upvalues: resolvePromptFailure (copy), var4 (write), debug (copy), universeId (ref), p1 (ref), sendBuildExperienceEventModule (copy), getPromptFailureTelemetryParameters (copy), p3 (ref)
-				local var5 = resolvePromptFailure(p7, var4.getSetupError(false))
+			onReceived = if FFlagBuildEventsUpdate1Module or Callback ~= nil then handleReceived else nil,
+			onCompleted = function(p5) --[[ Line: 428 ]]
+				-- upvalues: resolvePromptFailure (upval), SendPromptResult (ref), Debug (upval), UniverseId (copy), p2 (copy), getPromptFailureTelemetryParameters (upval), FFlagBuildExperiencePromptFailureTelemetry (upval), PromptLifecycleTelemetryModule (copy), LocalizationStringsModule (upval), config1 (upval), SendBuildExperienceEventModule (upval), Callback1 (ref), Callback2 (copy)
+				local ResolvePromptFailureResult = resolvePromptFailure(p5, SendPromptResult.getSetupError(false))
 				
-				if var5 ~= nil then
-					debug.log("info", "prompt send failed", {
-						errorCode = var5.errorCode,
-						isContentPolicy = var5.isContentPolicy,
-						setupStage = var5.setupStage,
-						universeId = universeId,
-						placeId = p1.placeId
+				if ResolvePromptFailureResult == nil then
+					if FFlagBuildExperiencePromptFailureTelemetry and PromptLifecycleTelemetryModule ~= nil and p5 ~= nil and (p5.status == "failed" or p5.stopReason == "error") then
+						local config = { status = p5.status }
+						
+						if p5.stopReason ~= nil then
+							config.stopReason = p5.stopReason
+						end
+						if p5.errorCode ~= nil then
+							config.errorCode = tostring(p5.errorCode)
+						end
+						for i1, value1 in PromptLifecycleTelemetryModule.getLifecycleParameters() do
+							config[i1] = value1
+						end
+						SendBuildExperienceEventModule("AGENT_TURN_FAILED", {
+							universeId = UniverseId,
+							placeId = p2.placeId,
+							conversationId = p2.getCasSessionId()
+						}, config)
+					end
+				else
+					Debug.log("info", "prompt send failed", {
+						errorCode = ResolvePromptFailureResult.errorCode,
+						isContentPolicy = ResolvePromptFailureResult.isContentPolicy,
+						setupStage = ResolvePromptFailureResult.setupStage,
+						universeId = UniverseId,
+						placeId = p2.placeId
 					})
-					sendBuildExperienceEventModule("SEND_PROMPT_FAILED", {
-						universeId = universeId,
-						placeId = p1.placeId,
-						conversationId = p1.getCasSessionId()
-					}, getPromptFailureTelemetryParameters(var5))
+					local PromptFailureTelemetryParameters = getPromptFailureTelemetryParameters(ResolvePromptFailureResult)
+					
+					if FFlagBuildExperiencePromptFailureTelemetry and PromptLifecycleTelemetryModule ~= nil then
+						local RequestFailure = ResolvePromptFailureResult.requestFailure
+						local CHATPOLICYREJECTION = nil
+						
+						if RequestFailure ~= nil then
+							PromptFailureTelemetryParameters.failureKind = RequestFailure.kind
+							
+							if RequestFailure.httpStatusCode ~= nil then
+								PromptFailureTelemetryParameters.httpStatusCode = tostring(RequestFailure.httpStatusCode)
+							end
+						end
+						repeat
+							if ResolvePromptFailureResult.isContentPolicy then
+								CHATPOLICYREJECTION = LocalizationStringsModule.CHAT_POLICY_REJECTION
+								break
+							end
+							if ResolvePromptFailureResult.setupStage == "missing_project" then
+								CHATPOLICYREJECTION = LocalizationStringsModule.CHAT_MISSING_PROJECT
+								break
+							end
+							if ResolvePromptFailureResult.errorCode ~= nil then
+								local Entry = config1[ResolvePromptFailureResult.errorCode]
+								
+								if Entry ~= nil then
+									CHATPOLICYREJECTION = Entry
+									break
+								end
+							end
+							CHATPOLICYREJECTION = LocalizationStringsModule.CHAT_DEFAULT_FAILURE
+						until true
+						PromptFailureTelemetryParameters.errorCopyKey = CHATPOLICYREJECTION
+						
+						for i, value in PromptLifecycleTelemetryModule.getLifecycleParameters() do
+							PromptFailureTelemetryParameters[i] = value
+						end
+					end
+					SendBuildExperienceEventModule("SEND_PROMPT_FAILED", {
+						universeId = UniverseId,
+						placeId = p2.placeId,
+						conversationId = p2.getCasSessionId()
+					}, PromptFailureTelemetryParameters)
 				end
-				p3(var5)
+				if FFlagBuildExperiencePromptFailureTelemetry and PromptLifecycleTelemetryModule ~= nil then
+					if Callback1 ~= nil then
+						Callback1()
+						Callback1 = nil
+					end
+					PromptLifecycleTelemetryModule.finish()
+				end
+				Callback2(ResolvePromptFailureResult)
 			end
 		})
 		
 		return {
-			getOptimisticLocalTools = var3.getOptimisticLocalTools,
-			getLocalToolActions = var3.getLocalToolActions,
-			getSetupErrorText = function(value)
-				-- upvalues: var4 (write), localizationStringsModule (copy), t_1 (copy)
-				local setupError = var4.getSetupError(value)
+			getOptimisticLocalTools = LocalToolControllers.getOptimisticLocalTools,
+			getLocalToolActions = LocalToolControllers.getLocalToolActions,
+			getSetupErrorText = function(p6) --[[ Line: 484 ]]
+				-- upvalues: SendPromptResult (ref), LocalizationStringsModule (upval), config1 (upval)
+				local SetupError = SendPromptResult.getSetupError(p6)
 				
-				if setupError == nil then
+				if SetupError == nil then
 					return nil
 				end
-				local t = {
+				local config = {
 					isContentPolicy = false,
-					errorCode = setupError.errorCode,
-					setupStage = setupError.stage
+					errorCode = SetupError.errorCode,
+					setupStage = SetupError.stage
 				}
 				
-				if t.isContentPolicy then
-					return localizationStringsModule.CHAT_POLICY_REJECTION
-				elseif t.setupStage == "missing_project" then
-					return localizationStringsModule.CHAT_MISSING_PROJECT
-				elseif t.errorCode ~= nil then
-					local errorCode = t_1[t.errorCode]
-					
-					return if errorCode == nil then localizationStringsModule.CHAT_DEFAULT_FAILURE else errorCode
+				if config.isContentPolicy then
+					return LocalizationStringsModule.CHAT_POLICY_REJECTION
 				end
+				if config.setupStage == "missing_project" then
+					return LocalizationStringsModule.CHAT_MISSING_PROJECT
+				end
+				if config.errorCode ~= nil then
+					local Entry = config1[config.errorCode]
+					
+					if Entry ~= nil then
+						return Entry
+					end
+				end
+				return LocalizationStringsModule.CHAT_DEFAULT_FAILURE
 			end,
-			start = function()
-				-- upvalues: var4 (write)
-				var4.start()
+			start = function() --[[ Line: 489 ]]
+				-- upvalues: FFlagBuildExperiencePromptFailureTelemetry (upval), PromptLifecycleTelemetryModule (copy), Callback1 (ref), trackPromptActivity (upval), SendPromptResult (ref), LocalToolControllers (copy)
+				if FFlagBuildExperiencePromptFailureTelemetry and PromptLifecycleTelemetryModule ~= nil then
+					PromptLifecycleTelemetryModule.start()
+					
+					if Callback1 == nil then
+						Callback1 = trackPromptActivity(SendPromptResult, PromptLifecycleTelemetryModule, LocalToolControllers.getOptimisticLocalTools)
+					end
+				end
+				SendPromptResult.start()
 			end,
-			stop = function()
-				-- upvalues: var3 (ref), var4 (write)
-				var3.stopPending()
-				var4.stop()
+			stop = function() --[[ Line: 503 ]]
+				-- upvalues: LocalToolControllers (copy), SendPromptResult (ref)
+				LocalToolControllers.stopPending()
+				SendPromptResult.stop()
 			end,
-			detach = var3.stopPending,
-			syncFromTurnState = var3.syncFromTurnState,
-			trySubmitComposerText = var3.trySubmitComposerText
+			reportUserStop = if FFlagBuildExperiencePromptFailureTelemetry and PromptLifecycleTelemetryModule ~= nil then PromptLifecycleTelemetryModule.reportUserStop else nil,
+			detach = if FFlagBuildExperiencePromptFailureTelemetry and PromptLifecycleTelemetryModule ~= nil then function() --[[ Line: 520 ]]
+				-- upvalues: LocalToolControllers (copy), PromptLifecycleTelemetryModule (copy), Callback1 (ref)
+				LocalToolControllers.stopPending()
+				
+				if Callback1 ~= nil then
+					Callback1()
+					Callback1 = nil
+				end
+				PromptLifecycleTelemetryModule.finish()
+			end else LocalToolControllers.stopPending,
+			syncFromTurnState = LocalToolControllers.syncFromTurnState,
+			trySubmitComposerText = LocalToolControllers.trySubmitComposerText,
+			trySubmitAnswerText = LocalToolControllers.trySubmitAnswerText
 		}
 	end,
-	createResumedAssistantTurn = function(p1, p2, p3, p4, p5, p6)
-		-- upvalues: createLocalToolControllers (ref), signalsModule (ref), sendBuildExperienceEventModule (ref)
-		local var3 = createLocalToolControllers(p1, p5, p6)
-		local var4 = signalsModule.createSignal(nil)
-		local var5 = false
-		local var6 = false
-		local var7 = nil
-		local var8 = nil
+	createResumedAssistantTurn = function(p6, p7, Callback, AfterSequenceId, p8, p9) --[[ Line: 531 ]]
+		-- upvalues: createLocalToolControllers (copy), SignalsModule (copy), FFlagBuildExperiencePromptFailureTelemetry (copy), SendBuildExperienceEventModule (copy)
+		local LocalToolControllers = createLocalToolControllers(p6, p8, p9)
+		local Flag = false
+		local Flag1 = false
+		local StartPollingActiveTurnResult: (() -> ())? = nil
+		local Effect: (() -> ())? = nil
 		
-		local function _()
-			-- upvalues: var8 (write), var7 (write)
-			if var8 ~= nil then
-				var8()
-				var8 = nil
+		local function _() --[[ Line: 553 | Named "cleanupObservers" ]]
+			-- upvalues: Effect (ref), StartPollingActiveTurnResult (ref)
+			if Effect ~= nil then
+				Effect()
+				Effect = nil
 			end
-			if var7 ~= nil then
-				var7()
-				var7 = nil
+			if StartPollingActiveTurnResult ~= nil then
+				StartPollingActiveTurnResult()
+				StartPollingActiveTurnResult = nil
 			end
 		end
 		
-		local _ = function()
-			-- upvalues: var6 (write), var8 (write), var7 (write), p3 (ref)
-			if var6 then return end
-			var6 = true
+		local function finish() --[[ Line: 564 ]]
+			-- upvalues: Flag1 (ref), Effect (ref), StartPollingActiveTurnResult (ref), FFlagBuildExperiencePromptFailureTelemetry (upval), p7 (copy), SendBuildExperienceEventModule (upval), p6 (copy), Callback (copy)
+			if Flag1 then return end
+			Flag1 = true
 			
-			if var8 ~= nil then
-				var8()
-				var8 = nil
+			if Effect ~= nil then
+				Effect()
+				Effect = nil
 			end
-			if var7 ~= nil then
-				var7()
-				var7 = nil
+			if StartPollingActiveTurnResult ~= nil then
+				StartPollingActiveTurnResult()
+				StartPollingActiveTurnResult = nil
 			end
-			p3(nil)
+			if FFlagBuildExperiencePromptFailureTelemetry then
+				local StateResult = p7.state(false)
+				
+				if (StateResult.status == "failed" or StateResult.stopReason == "error") and StateResult.requestId == nil then
+					local config = { status = StateResult.status }
+					
+					if StateResult.stopReason ~= nil then
+						config.stopReason = StateResult.stopReason
+					end
+					if StateResult.errorCode ~= nil then
+						config.errorCode = tostring(StateResult.errorCode)
+					end
+					config.isResumedTurn = "true"
+					SendBuildExperienceEventModule("AGENT_TURN_FAILED", {
+						universeId = p6.universeId,
+						placeId = p6.placeId,
+						conversationId = p6.getCasSessionId()
+					}, config)
+				end
+			end
+			Callback(nil)
 		end
+		
+		local Flag2 = false
 		
 		return {
-			getOptimisticLocalTools = var3.getOptimisticLocalTools,
-			getLocalToolActions = var3.getLocalToolActions,
-			getSetupErrorText = var4,
-			start = function()
-				-- upvalues: var5 (write), sendBuildExperienceEventModule (copy), p1 (ref), p4 (ref), var7 (write), var8 (write), signalsModule (copy), p2 (ref), var6 (write), p3 (ref)
-				if var5 then return end
-				var5 = true
-				local t = {
-					onDroppedChatMessage = function(p7)
-						-- upvalues: sendBuildExperienceEventModule (copy), p1 (copy)
-						sendBuildExperienceEventModule("DROPPED_CHAT_MESSAGE", {
-							universeId = p1.universeId,
-							placeId = p1.placeId,
-							conversationId = p1.getCasSessionId(),
-							messageId = p7
+			getOptimisticLocalTools = LocalToolControllers.getOptimisticLocalTools,
+			getLocalToolActions = LocalToolControllers.getLocalToolActions,
+			getSetupErrorText = SignalsModule.createSignal(nil),
+			start = function() --[[ Line: 610 ]]
+				-- upvalues: Flag (ref), SendBuildExperienceEventModule (upval), p6 (copy), AfterSequenceId (copy), StartPollingActiveTurnResult (ref), Effect (ref), SignalsModule (upval), p7 (copy), finish (copy)
+				if Flag then return end
+				Flag = true
+				local config = {
+					onDroppedChatMessage = function(MessageId) --[[ Line: 616 ]]
+						-- upvalues: SendBuildExperienceEventModule (upval), p6 (upval)
+						SendBuildExperienceEventModule("DROPPED_CHAT_MESSAGE", {
+							universeId = p6.universeId,
+							placeId = p6.placeId,
+							conversationId = p6.getCasSessionId(),
+							messageId = MessageId
 						})
 					end
 				}
 				
-				if p4 ~= nil then
-					t.afterSequenceId = p4
+				if AfterSequenceId ~= nil then
+					config.afterSequenceId = AfterSequenceId
 				end
-				var7 = p1.startPollingActiveTurn(t)
-				var8 = signalsModule.createEffect(function(p7)
-					-- upvalues: p2 (copy), var6 (copy), var8 (copy), var7 (copy), p3 (copy)
-					if p2.state(p7).isDone then
-						if var6 then return end
-						var6 = true
-						
-						if var8 ~= nil then
-							var8()
-							var8 = nil
-						end
-						if var7 ~= nil then
-							var7()
-							var7 = nil
-						end
-						p3(nil)
+				StartPollingActiveTurnResult = p6.startPollingActiveTurn(config)
+				Effect = SignalsModule.createEffect(function(p10) --[[ Line: 630 ]]
+					-- upvalues: p7 (upval), finish (upval)
+					if p7.state(p10).isDone then
+						finish()
 					end
 				end)
 			end,
-			stop = function()
-				-- upvalues: var6 (write), var8 (write), var7 (write), var3 (ref), p2 (ref)
-				var6 = true
+			stop = function() --[[ Line: 642 ]]
+				-- upvalues: Flag1 (ref), Effect (ref), StartPollingActiveTurnResult (ref), LocalToolControllers (copy), p7 (copy)
+				Flag1 = true
 				
-				if var8 ~= nil then
-					var8()
-					var8 = nil
+				if Effect ~= nil then
+					Effect()
+					Effect = nil
 				end
-				if var7 ~= nil then
-					var7()
-					var7 = nil
+				if StartPollingActiveTurnResult ~= nil then
+					StartPollingActiveTurnResult()
+					StartPollingActiveTurnResult = nil
 				end
-				var3.stopPending()
-				p2.cancel()
+				LocalToolControllers.stopPending()
+				p7.cancel()
 			end,
-			detach = function()
-				-- upvalues: var6 (write), var8 (write), var7 (write), var3 (ref)
-				var6 = true
+			reportUserStop = if FFlagBuildExperiencePromptFailureTelemetry then function() --[[ Line: 593 ]]
+				-- upvalues: Flag1 (ref), Flag2 (ref), SendBuildExperienceEventModule (upval), p6 (copy)
+				if not Flag1 and not Flag2 then
+					Flag2 = true
+					SendBuildExperienceEventModule("SEND_PROMPT_STOPPED", {
+						universeId = p6.universeId,
+						placeId = p6.placeId,
+						conversationId = p6.getCasSessionId()
+					}, { isResumedTurn = "true" })
+					
+					return
+				end
+			end else nil,
+			detach = function() --[[ Line: 649 ]]
+				-- upvalues: Flag1 (ref), Effect (ref), StartPollingActiveTurnResult (ref), LocalToolControllers (copy)
+				Flag1 = true
 				
-				if var8 ~= nil then
-					var8()
-					var8 = nil
+				if Effect ~= nil then
+					Effect()
+					Effect = nil
 				end
-				if var7 ~= nil then
-					var7()
-					var7 = nil
+				if StartPollingActiveTurnResult ~= nil then
+					StartPollingActiveTurnResult()
+					StartPollingActiveTurnResult = nil
 				end
-				var3.stopPending()
+				LocalToolControllers.stopPending()
 			end,
-			syncFromTurnState = var3.syncFromTurnState,
-			trySubmitComposerText = var3.trySubmitComposerText
+			syncFromTurnState = LocalToolControllers.syncFromTurnState,
+			trySubmitComposerText = LocalToolControllers.trySubmitComposerText,
+			trySubmitAnswerText = LocalToolControllers.trySubmitAnswerText
 		}
 	end,
-	getPromptFailureComposerError = getPromptFailureComposerError,
-	getToolResultFailureComposerError = getToolResultFailureComposerError
+	getPromptFailureComposerError = function(p6) --[[ Line: 100 ]]
+		-- upvalues: LocalizationStringsModule (copy), config1 (copy)
+		if p6.isContentPolicy then
+			return LocalizationStringsModule.CHAT_POLICY_REJECTION
+		end
+		if p6.setupStage == "missing_project" then
+			return LocalizationStringsModule.CHAT_MISSING_PROJECT
+		end
+		if p6.errorCode ~= nil then
+			local Entry = config1[p6.errorCode]
+			
+			if Entry ~= nil then
+				return Entry
+			end
+		end
+		return LocalizationStringsModule.CHAT_DEFAULT_FAILURE
+	end,
+	getToolResultFailureComposerError = function(ErrorCode) --[[ Line: 116 ]]
+		-- upvalues: Forbidden (copy), LocalizationStringsModule (copy), config1 (copy)
+		local config = {
+			outOfCreditsReason = nil,
+			setupStage = nil,
+			errorCode = ErrorCode,
+			isContentPolicy = ErrorCode == Forbidden
+		}
+		
+		if config.isContentPolicy then
+			return LocalizationStringsModule.CHAT_POLICY_REJECTION
+		end
+		if config.setupStage == "missing_project" then
+			return LocalizationStringsModule.CHAT_MISSING_PROJECT
+		end
+		if config.errorCode ~= nil then
+			local Entry = config1[config.errorCode]
+			
+			if Entry ~= nil then
+				return Entry
+			end
+		end
+		return LocalizationStringsModule.CHAT_DEFAULT_FAILURE
+	end
 }

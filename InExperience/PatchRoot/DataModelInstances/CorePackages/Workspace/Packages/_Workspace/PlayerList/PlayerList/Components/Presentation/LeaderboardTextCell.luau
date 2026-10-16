@@ -1,17 +1,17 @@
-﻿local parent = script.Parent.Parent.Parent.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local view = foundationModule.View
-local text = foundationModule.Text
+﻿local Parent = script.Parent.Parent.Parent.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local Text = FoundationModule.Text
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), view (ref), text (ref)
-	return reactModule.createElement(view, {
+return ReactModule.memo(function(p1) --[[ Line: 19 | Named "LeaderboardTextCell" ]]
+	-- upvalues: ReactModule (copy), View (copy), Text (copy)
+	return ReactModule.createElement(View, {
 		tag = "clip",
 		Size = UDim2.fromOffset(p1.width, p1.rowHeight),
 		LayoutOrder = p1.layoutOrder
 	}, {
-		Text = reactModule.createElement(text, {
+		Text = ReactModule.createElement(Text, {
 			Text = p1.text,
 			tag = p1.textTag or "size-full text-body-small text-align-x-left content-default"
 		})

@@ -1,15 +1,15 @@
 ﻿return {
-	combineReactTags = function(...)
-		local packed = table.pack(...)
-		local t = {}
+	combineReactTags = function(...) --[[ Line: 15 ]]
+		local Packed = table.pack(...)
+		local List = {}
 		
-		for i = 1, packed.n do
-			local var1 = packed[i]
+		for i = 1, Packed.n do
+			local Entry = Packed[i]
 			
-			if var1 and var1 ~= "" then
-				table.insert(t, var1)
+			if Entry and Entry ~= "" then
+				table.insert(List, Entry)
 			end
 		end
-		return if #t > 0 then table.concat(t, " ") else nil
+		return if #List > 0 then table.concat(List, " ") else nil
 	end
 }

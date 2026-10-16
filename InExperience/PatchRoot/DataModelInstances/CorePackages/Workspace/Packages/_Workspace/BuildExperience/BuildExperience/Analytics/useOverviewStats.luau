@@ -1,22 +1,29 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local _ = require(buildExperience.Parent.DataHydration.ExperienceAnalytics)
-local analyticsMetricModule = require(buildExperience.Analytics.AnalyticsMetric)
-local _ = require(buildExperience.Analytics.AnalyticsWindow)
-local useExperienceMetricSeriesModule = require(buildExperience.Analytics.useExperienceMetricSeries)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local _ = require(BuildExperience.Parent.DataHydration.ExperienceAnalytics)
+local AnalyticsMetricModule = require(BuildExperience.Analytics.AnalyticsMetric)
+local _ = require(BuildExperience.Analytics.AnalyticsWindow)
+local UseExperienceMetricSeriesModule = require(BuildExperience.Analytics.useExperienceMetricSeries)
 
-return function(p1, p2, p3)
-	-- upvalues: useExperienceMetricSeriesModule (ref), analyticsMetricModule (ref)
-	local function _(p4)
-		-- upvalues: p3 (ref)
+return function(p1, p2, p3) --[[ Line: 23 | Named "useOverviewStats" ]]
+	-- upvalues: UseExperienceMetricSeriesModule (copy), AnalyticsMetricModule (copy)
+	local function _(p4) --[[ Line: 28 | Named "latestFor" ]]
+		-- upvalues: p3 (copy)
 		return if p3 == nil then nil else p3[p4.id]
 	end
 	
+	local DailyActiveUsers = AnalyticsMetricModule.DailyActiveUsers
+	local TotalPlaytime = AnalyticsMetricModule.TotalPlaytime
+	local PlaythroughRate = AnalyticsMetricModule.PlaythroughRate
+	local D1Retention = AnalyticsMetricModule.D1Retention
+	local PayerConversion = AnalyticsMetricModule.PayerConversion
+	local Arppu = AnalyticsMetricModule.Arppu
+	
 	return {
-		[analyticsMetricModule.DailyActiveUsers.id] = useExperienceMetricSeriesModule(p1, analyticsMetricModule.DailyActiveUsers, p2, if p3 ~= nil then nil else p3[analyticsMetricModule.DailyActiveUsers.id]),
-		[analyticsMetricModule.TotalPlaytime.id] = useExperienceMetricSeriesModule(p1, analyticsMetricModule.TotalPlaytime, p2, if p3 ~= nil then nil else p3[analyticsMetricModule.TotalPlaytime.id]),
-		[analyticsMetricModule.PlaythroughRate.id] = useExperienceMetricSeriesModule(p1, analyticsMetricModule.PlaythroughRate, p2, if p3 ~= nil then nil else p3[analyticsMetricModule.PlaythroughRate.id]),
-		[analyticsMetricModule.D1Retention.id] = useExperienceMetricSeriesModule(p1, analyticsMetricModule.D1Retention, p2, if p3 ~= nil then nil else p3[analyticsMetricModule.D1Retention.id]),
-		[analyticsMetricModule.PayerConversion.id] = useExperienceMetricSeriesModule(p1, analyticsMetricModule.PayerConversion, p2, if p3 ~= nil then nil else p3[analyticsMetricModule.PayerConversion.id]),
-		[analyticsMetricModule.Arppu.id] = useExperienceMetricSeriesModule(p1, analyticsMetricModule.Arppu, p2, if p3 ~= nil then nil else p3[analyticsMetricModule.Arppu.id])
+		[AnalyticsMetricModule.DailyActiveUsers.id] = UseExperienceMetricSeriesModule(p1, AnalyticsMetricModule.DailyActiveUsers, p2, if p3 == nil then nil else p3[DailyActiveUsers.id]),
+		[AnalyticsMetricModule.TotalPlaytime.id] = UseExperienceMetricSeriesModule(p1, AnalyticsMetricModule.TotalPlaytime, p2, if p3 == nil then nil else p3[TotalPlaytime.id]),
+		[AnalyticsMetricModule.PlaythroughRate.id] = UseExperienceMetricSeriesModule(p1, AnalyticsMetricModule.PlaythroughRate, p2, if p3 == nil then nil else p3[PlaythroughRate.id]),
+		[AnalyticsMetricModule.D1Retention.id] = UseExperienceMetricSeriesModule(p1, AnalyticsMetricModule.D1Retention, p2, if p3 == nil then nil else p3[D1Retention.id]),
+		[AnalyticsMetricModule.PayerConversion.id] = UseExperienceMetricSeriesModule(p1, AnalyticsMetricModule.PayerConversion, p2, if p3 == nil then nil else p3[PayerConversion.id]),
+		[AnalyticsMetricModule.Arppu.id] = UseExperienceMetricSeriesModule(p1, AnalyticsMetricModule.Arppu, p2, if p3 == nil then nil else p3[Arppu.id])
 	}
 end

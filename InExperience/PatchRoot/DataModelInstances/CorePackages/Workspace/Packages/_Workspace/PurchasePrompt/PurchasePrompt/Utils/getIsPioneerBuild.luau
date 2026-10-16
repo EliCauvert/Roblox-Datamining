@@ -1,6 +1,6 @@
-﻿local pioneerInfo = require(script:FindFirstAncestor("PurchasePrompt").Parent.PioneerUtils).PioneerInfo
+﻿local PioneerInfo = require(script:FindFirstAncestor("PurchasePrompt").Parent.PioneerUtils).PioneerInfo
 
-return function()
-	-- upvalues: pioneerInfo (ref)
-	return pioneerInfo.isDaveyBazooka()
+return function() --[[ Line: 7 ]]
+	-- upvalues: PioneerInfo (copy)
+	return PioneerInfo.isDaveyBazooka()
 end

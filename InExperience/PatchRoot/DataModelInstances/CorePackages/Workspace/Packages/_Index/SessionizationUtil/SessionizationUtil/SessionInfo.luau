@@ -1,50 +1,51 @@
-﻿local sessionService = game:GetService("SessionService")
-local sessionType = require(script:FindFirstAncestor("SessionizationUtil").Parent.RobloxAppSessionization).SessionType
-local t = {}
-t.__index = t
+﻿local SessionService = game:GetService("SessionService")
+local SessionType = require(script:FindFirstAncestor("SessionizationUtil").Parent.RobloxAppSessionization).SessionType
+local SessionInfoModule = {}
+SessionInfoModule.__index = SessionInfoModule
 
-function t.new(p1, p2, p3, p4, p5)
-	-- upvalues: t (ref)
-	local tbl = setmetatable({}, t)
-	tbl.level = p1
-	tbl.sessionId = p2
-	tbl.tagName = p3
-	tbl.creationTimestamp = p4
-	tbl.metadata = p5 or {}
+function SessionInfoModule.new(Level, SessionId, TagName, CreationTimestamp, p1) --[[ Line: 40 ]]
+	-- upvalues: SessionInfoModule (copy)
+	local self = setmetatable({}, SessionInfoModule)
+	self.level = Level
+	self.sessionId = SessionId
+	self.tagName = TagName
+	self.creationTimestamp = CreationTimestamp
+	self.metadata = p1 or {}
 	
-	return tbl
+	return self
 end
 
-function t:__tostring()
-	local var1 = 0
+function SessionInfoModule:__tostring(): string --[[ Line: 63 ]]
+	local Count = 0
 	
-	for i in pairs(self.metadata) do
-		var1 += 1
+	for _ in pairs(self.metadata) do
+		Count += 1
 	end
-	return string.format("SessionInfo{level=%s, sessionId=%s, tagName=%s, creationTimestamp=%s, metadata_count=%d}", tostring(self.level), tostring(self.sessionId), tostring(self.tagName), tostring(self.creationTimestamp), var1)
+	return string.format("SessionInfo{level=%s, sessionId=%s, tagName=%s, creationTimestamp=%s, metadata_count=%d}", tostring(self.level), tostring(self.sessionId), tostring(self.tagName), tostring(self.creationTimestamp), Count)
 end
 
-function t.getSessionByLevel(p1)
-	-- upvalues: sessionType (ref), sessionService (ref), t (ref)
-	local rootSID, var2
-	local _ = nil
-	local _ = nil
-	local var3 = sessionType.StructuralIdentifier[p1]
+function SessionInfoModule.getSessionByLevel(Level) --[[ Line: 97 ]]
+	-- upvalues: SessionType (copy), SessionService (copy), SessionInfoModule (copy)
+	local StructuralIdentifierEntry = SessionType.StructuralIdentifier[Level]
+	local RootSID = nil
+	local SessionTag = nil
 	
-	if p1 == sessionType.StructuralIdentifier.Level0 then
-		rootSID = sessionService:GetRootSID()
-		var2 = nil
-	elseif not var3 then
-		rootSID = nil
-		var2 = nil
-	elseif sessionService:SessionExists(var3) then
-		rootSID = sessionService:GetSessionID(var3)
-		var2 = sessionService:GetSessionTag(var3)
+	if Level == SessionType.StructuralIdentifier.Level0 then
+		RootSID = SessionService:GetRootSID()
+		SessionTag = nil
+	elseif StructuralIdentifierEntry then
+		if SessionService:SessionExists(StructuralIdentifierEntry) then
+			RootSID = SessionService:GetSessionID(StructuralIdentifierEntry)
+			SessionTag = SessionService:GetSessionTag(StructuralIdentifierEntry)
+		else
+			RootSID = nil
+			SessionTag = nil
+		end
 	else
-		rootSID = nil
-		var2 = nil
+		RootSID = nil
+		SessionTag = nil
 	end
-	return t.new(p1, rootSID, var2, nil, {})
+	return SessionInfoModule.new(Level, RootSID, SessionTag, nil, {})
 end
 
-return t
+return SessionInfoModule

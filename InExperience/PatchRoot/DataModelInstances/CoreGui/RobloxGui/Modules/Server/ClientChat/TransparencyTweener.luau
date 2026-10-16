@@ -1,124 +1,129 @@
-﻿local t = {}
-local runService = game:GetService("RunService")
+﻿local RunService = game:GetService("RunService")
 local _ = script.Parent
-local t_1 = {
+local config = {
 	__ClassName = "TransparencyTweener",
-	__tostring = function(p1)
-		return p1.__ClassName .. ": " .. p0.MemoryLocation
+	__tostring = function(p1): string --[[ Line: 21 ]]
+		return p1.__ClassName .. ": " .. p1.MemoryLocation
 	end,
 	__metatable = "The metatable is locked"
 }
 
-function t_1:__index(p1, _)
-	-- upvalues: t_1 (ref)
-	if rawget(self, p1) then
-		return rawget(self, p1)
-	elseif rawget(t_1, p1) then
-		return rawget(t_1, p1)
-	elseif p1 == "Transparency" then
-		return rawget(self, "InternalLastTweenPercentage")
+function config.__index(p1, Text, _) --[[ Line: 26 ]]
+	-- upvalues: config (copy)
+	if rawget(p1, Text) then
+		return (rawget(p1, Text))
+	elseif rawget(config, Text) then
+		return (rawget(config, Text))
+	elseif Text == "Transparency" then
+		return (rawget(p1, "InternalLastTweenPercentage"))
+	else
+		error(Text .. " is not a valid member of " .. p1.__ClassName)
 	end
-	error(p1 .. " is not a valid member of " .. self.__ClassName)
 end
 
-function t_1:__newindex(p1, p2)
-	if p1 == "Transparency" then
-		self.InternalLastTweenPercentage = p2
-		self:SetPropertiesToTweenPercentage(p2)
+function config.__newindex(p1, Text, InternalLastTweenPercentage) --[[ Line: 36 ]]
+	if Text == "Transparency" then
+		p1.InternalLastTweenPercentage = InternalLastTweenPercentage
+		p1:SetPropertiesToTweenPercentage(InternalLastTweenPercentage)
 		
 		return
+	else
+		error(Text .. " is not a valid member of " .. p1.__ClassName)
 	end
-	error(p1 .. " is not a valid member of " .. self.__ClassName)
 end
 
-function t_1.Dump(p1)
-	local var1 = tostring(p1)
+function config.Dump(p1): string --[[ Line: 49 ]]
+	local Text = tostring(p1)
 	
-	for i, v in pairs(p1.TweenObjects) do
-		local var2 = " | "
+	for i, tweenObject in pairs(p1.TweenObjects) do
+		local Text1 = " | "
 		
 		if type(i) == "table" then
-			var2 ..= "{{" .. i:Dump() .. "}}"
+			Text1 ..= "{{" .. i:Dump() .. "}}"
 		elseif type(i) == "userdata" then
-			var2 ..= i.Name .. "/" .. i:GetFullName()
+			Text1 ..= i.Name .. "/" .. i:GetFullName()
 		end
-		for i_1, v_1 in pairs(v) do
-			var2 ..= " [" .. i_1 .. "=" .. string.sub(tostring(v_1), 1, 4) .. "]"
+		for i1, value in pairs(tweenObject) do
+			Text1 ..= " [" .. i1 .. "=" .. string.sub(tostring(value), 1, 4) .. "]"
 		end
-		var1 ..= var2
+		Text ..= Text1
 	end
-	return var1
+	return Text
 end
 
-function t_1.OutputTest(p2)
-	print("Test Output for {={" .. p5:Dump() .. "}=}")
+function config.OutputTest(p2) --[[ Line: 70 ]]
+	print("Test Output for {={" .. p2:Dump() .. "}=}")
 	
-	for i, v in pairs(p2.TweenObjects) do
+	for i, tweenObject in pairs(p2.TweenObjects) do
 		print("TweenObject:", i)
 		
-		for i_1, v_1 in pairs(v) do
-			print("\t[" .. i_1 .. "=" .. string.sub(tostring(v_1), 1, 4) .. "] Actual:" .. i[i_1])
+		for i1, value in pairs(tweenObject) do
+			print("\t[" .. i1 .. "=" .. string.sub(tostring(value), 1, 4) .. "] Actual:" .. i[i1])
 		end
 	end
 end
 
-function t_1.RegisterTweenObjectProperty(p3, p4, p5, p6)
-	p6 = p6 or p4[p5]
+function config.RegisterTweenObjectProperty(p3, p4, p5, p6) --[[ Line: 80 ]]
+	local P12 = p6 or p4[p5]
 	
 	if not p3.TweenObjects[p4] then
 		p3.TweenObjects[p4] = {}
 	end
-	p3.TweenObjects[p4][p5] = p6
-	p3:SetObjectPropertyToPercentValue(p4, p5, p6, p3.InternalLastTweenPercentage)
+	p3.TweenObjects[p4][p5] = P12
+	p3:SetObjectPropertyToPercentValue(p4, p5, P12, p3.InternalLastTweenPercentage)
 end
 
-function t_1.UnregisterTweenObject(p3, p4)
+function config.UnregisterTweenObject(p3, p4) --[[ Line: 92 ]]
 	p3.TweenObjects[p4] = nil
 end
 
-function t_1.SetObjectPropertyToPercentValue(_, p3, p4, p5, p6)
-	p3[p4] = p5 + (1 - p5) * p6
+function config:SetObjectPropertyToPercentValue(p3, Key, p4: number, InternalLastTweenPercentage) --[[ Line: 96 ]]
+	p3[Key] = p4 + (1 - p4) * InternalLastTweenPercentage
 end
 
-function t_1.SetPropertiesToTweenPercentage(value, p3)
-	for i, v in pairs(value.TweenObjects) do
-		for i_1, v_1 in pairs(v) do
-			value:SetObjectPropertyToPercentValue(i, i_1, v_1, p3)
+function config.SetPropertiesToTweenPercentage(p3, InternalLastTweenPercentage) --[[ Line: 102 ]]
+	for i, tweenObject in pairs(p3.TweenObjects) do
+		for i1, value in pairs(tweenObject) do
+			p3:SetObjectPropertyToPercentValue(i, i1, value, InternalLastTweenPercentage)
 		end
 	end
 end
 
-function t_1.Tween(p4, p5, p6, p7)
-	-- upvalues: runService (ref)
+function config.Tween(p4, p5: number, InternalLastTweenPercentage, InternalLastTweenPercentage1) --[[ Line: 110 ]]
+	-- upvalues: RunService (copy)
 	if p4.Tweening then
-		p4.QueuedTween = { p5, p6, p7 }
+		p4.QueuedTween = {
+			p5,
+			InternalLastTweenPercentage,
+			InternalLastTweenPercentage1
+		}
 		p4.TweenIsQueued = true
 		p4:CancelTween()
 		
 		return
 	end
 	p4.Tweening = true
-	local var3 = p7
+	local InternalLastTweenPercentage2 = InternalLastTweenPercentage1
 	
-	if var3 then
-		p4:SetPropertiesToTweenPercentage(var3)
+	if InternalLastTweenPercentage2 then
+		p4:SetPropertiesToTweenPercentage(InternalLastTweenPercentage2)
 	else
-		var3 = p4.InternalLastTweenPercentage
+		InternalLastTweenPercentage2 = p4.InternalLastTweenPercentage
 	end
-	local currentTime = tick()
-	local var4 = currentTime + p5
-	local var5 = p6 - var3
-	local var6 = 0
-	spawn(function()
-		-- upvalues: var4 (ref), p4 (ref), var6 (write), currentTime (ref), p5 (ref), var3 (write), var5 (ref), runService (copy), p6 (ref)
-		local currentTime_1 = tick()
-		while currentTime_1 < var4 and not p4.Canceled do
-			var6 = math.min(math.max((currentTime_1 - currentTime) / p5, 0), 1)
-			local var7 = var3 + var5 * var6
-			p4.InternalLastTweenPercentage = var7
-			p4:SetPropertiesToTweenPercentage(var7)
-			runService.RenderStepped:wait()
-			currentTime_1 = tick()
+	local CurrentTime = tick()
+	local NewCurrentTime = CurrentTime + p5
+	local InternalLastTweenPercentageDelta = InternalLastTweenPercentage - InternalLastTweenPercentage2
+	local Smallest = 0
+	spawn(function() --[[ Line: 132 ]]
+		-- upvalues: NewCurrentTime (copy), p4 (copy), Smallest (ref), CurrentTime (copy), p5 (copy), InternalLastTweenPercentage2 (ref), InternalLastTweenPercentageDelta (copy), RunService (upval), InternalLastTweenPercentage (copy)
+		local CurrentTime1 = tick()
+		while CurrentTime1 < NewCurrentTime and not p4.Canceled do
+			Smallest = math.min(math.max((CurrentTime1 - CurrentTime) / p5, 0), 1)
+			local NewInternalLastTweenPercentage = InternalLastTweenPercentage2 + InternalLastTweenPercentageDelta * Smallest
+			p4.InternalLastTweenPercentage = NewInternalLastTweenPercentage
+			p4:SetPropertiesToTweenPercentage(NewInternalLastTweenPercentage)
+			RunService.RenderStepped:wait()
+			CurrentTime1 = tick()
 		end
 		if p4.Canceled then
 			p4.Canceled = false
@@ -131,30 +136,30 @@ function t_1.Tween(p4, p5, p6, p7)
 				return
 			end
 		else
-			p4.InternalLastTweenPercentage = p6
-			p4:SetPropertiesToTweenPercentage(p6)
+			p4.InternalLastTweenPercentage = InternalLastTweenPercentage
+			p4:SetPropertiesToTweenPercentage(InternalLastTweenPercentage)
 		end
 		p4.Tweening = false
 	end)
 end
 
-function t_1.CancelTween(p8)
-	p8.Canceled = true
+function config.CancelTween(p6) --[[ Line: 163 ]]
+	p6.Canceled = true
 end
 
-function t.new()
-	-- upvalues: t_1 (ref)
-	local t = {}
-	t.MemoryLocation = tostring(t):match("[0123456789ABCDEF]+")
-	t.TweenObjects = setmetatable({}, { __mode = "k" })
-	t.Transparency = nil
-	t.InternalLastTweenPercentage = 0
-	t.Tweening = false
-	t.Canceled = false
-	t.TweenIsQueued = false
-	t.QueuedTween = {}
-	
-	return setmetatable(t, t_1)
-end
-
-return t
+return {
+	new = function() --[[ Line: 169 ]]
+		-- upvalues: config (copy)
+		local t = {}
+		t.MemoryLocation = tostring(t):match("[0123456789ABCDEF]+")
+		t.TweenObjects = setmetatable({}, { __mode = "k" })
+		t.Transparency = nil
+		t.InternalLastTweenPercentage = 0
+		t.Tweening = false
+		t.Canceled = false
+		t.TweenIsQueued = false
+		t.QueuedTween = {}
+		
+		return (setmetatable(t, config))
+	end
+}

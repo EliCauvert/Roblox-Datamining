@@ -1,69 +1,69 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local parent = dataHydration.Parent
-local signalsModule = require(parent.Signals)
-local promiseModule = require(parent.Promise)
-local createDataCacheModule = require(dataHydration.createDataCache)
-local createDataResolverModule = require(dataHydration.createDataResolver)
-local _ = require(dataHydration.DataHydrationTypes)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local Parent = DataHydration.Parent
+local SignalsModule = require(Parent.Signals)
+local PromiseModule = require(Parent.Promise)
+local CreateDataCacheModule = require(DataHydration.createDataCache)
+local CreateDataResolverModule = require(DataHydration.createDataResolver)
+local _ = require(DataHydration.DataHydrationTypes)
 local _ = require(script.Parent.BadgesTypes)
-local requestRemoveBadgeModule = require(script.Parent.requestRemoveBadge)
-local badgesUrlBuilderModule = require(script.Parent.BadgesUrlBuilder)
-local discoveryUtilsModule = require(parent.DiscoveryUtils)
-local logResponseError = discoveryUtilsModule.logResponseError
-local discoveryEventErrorLogger = discoveryUtilsModule.DiscoveryEventErrorLogger
+local RequestRemoveBadgeModule = require(script.Parent.requestRemoveBadge)
+local BadgesUrlBuilderModule = require(script.Parent.BadgesUrlBuilder)
+local DiscoveryUtilsModule = require(Parent.DiscoveryUtils)
+local LogResponseErrorFunction = DiscoveryUtilsModule.logResponseError
+local DiscoveryEventErrorLogger = DiscoveryUtilsModule.DiscoveryEventErrorLogger
 
-return function()
-	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), promiseModule (ref), signalsModule (ref), requestRemoveBadgeModule (ref), logResponseError (ref), badgesUrlBuilderModule (ref), discoveryEventErrorLogger (ref)
-	local var1 = createDataCacheModule()
-	local var2 = createDataResolverModule({
-		cache = var1,
-		fetchFn = function(_)
-			-- upvalues: promiseModule (copy)
-			return promiseModule.resolve({})
+return function() --[[ Line: 26 | Named "createBadgeInfoStore" ]]
+	-- upvalues: CreateDataCacheModule (copy), CreateDataResolverModule (copy), PromiseModule (copy), SignalsModule (copy), RequestRemoveBadgeModule (copy), LogResponseErrorFunction (copy), BadgesUrlBuilderModule (copy), DiscoveryEventErrorLogger (copy)
+	local DataCacheModule = CreateDataCacheModule()
+	local DataResolverModule = CreateDataResolverModule({
+		cache = DataCacheModule,
+		fetchFn = function(_) --[[ Line: 30 ]]
+			-- upvalues: PromiseModule (upval)
+			return PromiseModule.resolve({})
 		end
 	})
 	
 	return {
-		getBadgeInfo = var2.getCachedItem,
-		getBadgeInfos = var2.getCachedItems,
-		updateBadges = var1.updateItems,
-		removeBadge = function(p1)
-			-- upvalues: signalsModule (copy), var1 (ref), requestRemoveBadgeModule (copy), logResponseError (copy), badgesUrlBuilderModule (copy), discoveryEventErrorLogger (copy)
-			local var3, var4 = signalsModule.createSignal(nil)
-			local var5 = var1.getItem(p1).data(false)
-			local var6 = if var5 then var5.isEarnedByUser else nil
+		getBadgeInfo = DataResolverModule.getCachedItem,
+		getBadgeInfos = DataResolverModule.getCachedItems,
+		updateBadges = DataCacheModule.updateItems,
+		removeBadge = function(BadgeId) --[[ Line: 37 ]]
+			-- upvalues: SignalsModule (upval), DataCacheModule (copy), RequestRemoveBadgeModule (upval), LogResponseErrorFunction (upval), BadgesUrlBuilderModule (upval), DiscoveryEventErrorLogger (upval)
+			local Signal, Signal2 = SignalsModule.createSignal(nil)
+			local DataResult = DataCacheModule.getItem(BadgeId).data(false)
+			local IsEarnedByUser = if DataResult then DataResult.isEarnedByUser else nil
 			
-			if var6 == true then
-				var1.updateItem(p1, { isEarnedByUser = false })
+			if IsEarnedByUser == true then
+				DataCacheModule.updateItem(BadgeId, { isEarnedByUser = false })
 			end
-			requestRemoveBadgeModule(p1):andThen(function()
-				-- upvalues: var4 (ref)
-				var4({ type = "success" })
-			end):catch(function(p2)
-				-- upvalues: var5 (ref), var1 (copy), p1 (ref), var6 (ref), var4 (ref), logResponseError (copy), badgesUrlBuilderModule (copy), discoveryEventErrorLogger (copy)
-				if var5 then
-					var1.updateItem(p1, { isEarnedByUser = var6 })
+			RequestRemoveBadgeModule(BadgeId):andThen(function() --[[ Line: 56 ]]
+				-- upvalues: Signal2 (copy)
+				Signal2({ type = "success" })
+			end):catch(function(Err) --[[ Line: 61 ]]
+				-- upvalues: DataResult (copy), DataCacheModule (upval), BadgeId (copy), IsEarnedByUser (copy), Signal2 (copy), LogResponseErrorFunction (upval), BadgesUrlBuilderModule (upval), DiscoveryEventErrorLogger (upval)
+				if DataResult then
+					DataCacheModule.updateItem(BadgeId, { isEarnedByUser = IsEarnedByUser })
 				end
-				local var7 = if type(p2) == "table" and p2.StatusCode then p2.StatusCode else nil
-				local var8 = if type(p2) == "table" and p2.StatusMessage then p2.StatusMessage elseif type(p2) == "string" then p2 else nil
-				var4({
+				local StatusCode = if type(Err) == "table" and Err.StatusCode then Err.StatusCode else nil
+				local StatusMessage = if type(Err) == "table" and Err.StatusMessage then Err.StatusMessage elseif type(Err) == "string" then Err else nil
+				Signal2({
 					type = "error",
 					errorType = "NetworkError",
-					statusCode = var7,
-					statusMessage = var8
+					statusCode = StatusCode,
+					statusMessage = StatusMessage
 				})
-				logResponseError(badgesUrlBuilderModule.BADGE_REMOVE_URL, { StatusCode = var7 })
-				discoveryEventErrorLogger.reportError("removeBadge", "Error removing badge", {
+				LogResponseErrorFunction(BadgesUrlBuilderModule.BADGE_REMOVE_URL, { StatusCode = StatusCode })
+				DiscoveryEventErrorLogger.reportError("removeBadge", "Error removing badge", {
 					method = "DELETE",
-					badgeId = p1,
-					statusCode = var7,
-					statusMessage = var8
+					badgeId = BadgeId,
+					statusCode = StatusCode,
+					statusMessage = StatusMessage
 				})
 			end)
 			
-			return var3
+			return Signal
 		end,
-		clear = var2.clear,
-		dispose = var2.dispose
+		clear = DataResolverModule.clear,
+		dispose = DataResolverModule.dispose
 	}
 end

@@ -1,24 +1,24 @@
-﻿local avatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
-local parent = avatarExperienceCatalog.Parent
-local reactModule = require(parent.React)
-local _ = require(parent.Foundation)
-local _ = require(parent.SduiSharedUtilities).SduiLoadTimer
-local constantsModule = require(script.Parent.Constants)
-local catalogSduiEntryPointModule = require(script.Parent.CatalogSduiEntryPoint)
-local marketplaceCategoryMenuSkeletonModule = require(avatarExperienceCatalog.Components.MarketplaceCategoryMenuSkeleton.MarketplaceCategoryMenuSkeleton)
-local fFlagAXMarketplaceLoadingSkeleton = require(parent.AvatarExperienceFlags).FFlagAXMarketplaceLoadingSkeleton
+﻿local AvatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
+local Parent = AvatarExperienceCatalog.Parent
+local ReactModule = require(Parent.React)
+local _ = require(Parent.Foundation)
+local _ = require(Parent.SduiSharedUtilities).SduiLoadTimer
+local ConstantsModule = require(script.Parent.Constants)
+local CatalogSduiEntryPointModule = require(script.Parent.CatalogSduiEntryPoint)
+local MarketplaceCategoryMenuSkeletonModule = require(AvatarExperienceCatalog.Components.MarketplaceCategoryMenuSkeleton.MarketplaceCategoryMenuSkeleton)
+local FFlagAXMarketplaceLoadingSkeleton = require(Parent.AvatarExperienceFlags).FFlagAXMarketplaceLoadingSkeleton
 
-return function(p1)
-	-- upvalues: fFlagAXMarketplaceLoadingSkeleton (ref), reactModule (ref), marketplaceCategoryMenuSkeletonModule (ref), catalogSduiEntryPointModule (ref), constantsModule (ref)
-	return reactModule.createElement(catalogSduiEntryPointModule, {
+return function(p1) --[[ Line: 26 | Named "CatalogSduiCategoryMenuEntryPoint" ]]
+	-- upvalues: FFlagAXMarketplaceLoadingSkeleton (copy), ReactModule (copy), MarketplaceCategoryMenuSkeletonModule (copy), CatalogSduiEntryPointModule (copy), ConstantsModule (copy)
+	return ReactModule.createElement(CatalogSduiEntryPointModule, {
 		context = p1.context,
-		identifier = constantsModule.CatalogCategoryMenuIdentifier,
+		identifier = ConstantsModule.CatalogCategoryMenuIdentifier,
 		appPage = p1.appPage,
 		loadTimer = p1.loadTimer,
 		Size = p1.Size,
 		Position = p1.Position,
 		shouldDisplayError = p1.shouldDisplayError,
-		shouldDisplayLoading = if fFlagAXMarketplaceLoadingSkeleton then true else false,
-		loadingSlot = if fFlagAXMarketplaceLoadingSkeleton then reactModule.createElement(marketplaceCategoryMenuSkeletonModule) else nil
+		shouldDisplayLoading = if FFlagAXMarketplaceLoadingSkeleton then true else false,
+		loadingSlot = if FFlagAXMarketplaceLoadingSkeleton then ReactModule.createElement(MarketplaceCategoryMenuSkeletonModule) else nil
 	})
 end

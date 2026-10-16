@@ -1,24 +1,24 @@
-﻿local avatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
-local parent = avatarExperienceProfilePictureEditor.Parent
-local ampApiProvider = require(parent.AmpUpsell).AmpApiProvider
-local accessResponseEnum = require(parent.AmpUpsell).AmpEnums.AccessResponseEnum
-local profileFrameAmpConstantsModule = require(avatarExperienceProfilePictureEditor.Common.ProfileFrameAmpConstants)
+﻿local AvatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
+local Parent = AvatarExperienceProfilePictureEditor.Parent
+local AmpApiProvider = require(Parent.AmpUpsell).AmpApiProvider
+local AccessResponseEnum = require(Parent.AmpUpsell).AmpEnums.AccessResponseEnum
+local ProfileFrameAmpConstantsModule = require(AvatarExperienceProfilePictureEditor.Common.ProfileFrameAmpConstants)
 
-return function()
-	-- upvalues: ampApiProvider (ref), profileFrameAmpConstantsModule (ref), accessResponseEnum (ref)
-	local access = ampApiProvider.upsellFeatureAccess(profileFrameAmpConstantsModule.FEATURE_NAME, {}, profileFrameAmpConstantsModule.NAME_SPACE).access
+return function() --[[ Line: 26 | Named "getProfileFrameAmpAccess" ]]
+	-- upvalues: AmpApiProvider (copy), ProfileFrameAmpConstantsModule (copy), AccessResponseEnum (copy)
+	local Access = AmpApiProvider.upsellFeatureAccess(ProfileFrameAmpConstantsModule.FEATURE_NAME, {}, ProfileFrameAmpConstantsModule.NAME_SPACE).access
 	
-	return if access == accessResponseEnum.Error then {
+	return if Access == AccessResponseEnum.Error then {
 		hasError = true,
 		access = { granted = false, canUpsell = false }
-	} elseif access == accessResponseEnum.Pending then {
+	} elseif Access == AccessResponseEnum.Pending then {
 		hasError = false,
 		access = { granted = false, canUpsell = false }
 	} else {
 		hasError = false,
 		access = {
-			granted = access == accessResponseEnum.Granted,
-			canUpsell = access == accessResponseEnum.Actionable
+			granted = Access == AccessResponseEnum.Granted,
+			canUpsell = Access == AccessResponseEnum.Actionable
 		}
 	}
 end

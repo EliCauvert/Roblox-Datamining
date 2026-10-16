@@ -1,27 +1,26 @@
-﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local navigateToEventDetails = require(parent.VirtualEvents).navigateToEventDetails
-local appPage = require(parent.RobloxAppEnums).AppPage
-local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
-local fFlagLuaAppSduiEventDetailsEnabled = require(parent.SharedFlags).FFlagLuaAppSduiEventDetailsEnabled
+﻿local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
+local NavigateToEventDetailsFunction = require(Parent.VirtualEvents).navigateToEventDetails
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local SduiErrorType = require(Parent.SduiCoreSystem).SduiErrors.SduiErrorType
+local FFlagLuaAppSduiEventDetailsEnabled = require(Parent.SharedFlags).FFlagLuaAppSduiEventDetailsEnabled
 
-return function(p1, p2, p3, _)
-	-- upvalues: sduiErrorType (ref), fFlagLuaAppSduiEventDetailsEnabled (ref), navigateToEventDetails (ref), appPage (ref)
-	local var1 = if p1 then p1.actionParams else nil
+return function(p1, p2, p3, _) --[[ Line: 16 ]]
+	-- upvalues: SduiErrorType (copy), FFlagLuaAppSduiEventDetailsEnabled (copy), NavigateToEventDetailsFunction (copy), AppPage (copy)
+	local ActionParams = p1 and p1.actionParams or nil
 	
-	if var1 == nil then
-		p3.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if ActionParams == nil then
+		p3.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			name = "OpenEventDetails",
 			message = "Missing actionParams"
 		}, p3.appPage)
 		
 		return
 	end
-	assert(var1, "actionParams must exist")
-	local eventId = var1.eventId
+	assert(ActionParams, "actionParams must exist")
+	local EventId = ActionParams.eventId
 	
-	if eventId == nil then
-		p3.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if EventId == nil then
+		p3.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			name = "OpenEventDetails",
 			message = "Missing eventId",
 			propName = "eventId"
@@ -29,18 +28,19 @@ return function(p1, p2, p3, _)
 		
 		return
 	end
-	local universeId = var1.universeId or p2 and (p2.analyticsData and p2.analyticsData.universeId)
-	local navigation = p3.dependencies.getNavigation()
+	local UniverseId = ActionParams.universeId or p2 and (p2.analyticsData and p2.analyticsData.universeId)
+	local Navigation = p3.dependencies.getNavigation()
 	
-	if fFlagLuaAppSduiEventDetailsEnabled then
-		navigateToEventDetails(navigation, tostring(eventId), if universeId then tostring(universeId) else nil)
+	if FFlagLuaAppSduiEventDetailsEnabled then
+		NavigateToEventDetailsFunction(Navigation, tostring(EventId), if UniverseId then tostring(UniverseId) else nil)
 		
 		return
+	else
+		Navigation.navigate(AppPage.EventDetails, {
+			extraProps = {
+				currentTime = DateTime.now(),
+				virtualEventId = tostring(EventId)
+			}
+		})
 	end
-	navigation.navigate(appPage.EventDetails, {
-		extraProps = {
-			currentTime = DateTime.now(),
-			virtualEventId = tostring(eventId)
-		}
-	})
 end

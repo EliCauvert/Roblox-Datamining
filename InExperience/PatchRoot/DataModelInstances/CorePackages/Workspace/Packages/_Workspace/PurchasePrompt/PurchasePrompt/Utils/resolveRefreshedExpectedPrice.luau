@@ -1,33 +1,33 @@
-﻿return function(p1, p2, p3, p4)
-	local price = nil
+﻿return function(p1, p2, CollectibleItemInstanceId, Days) --[[ Line: 1 | Named "resolveRefreshedExpectedPrice" ]]
+	local Price = nil
 	
-	if p3 and p3 ~= "" then
+	if CollectibleItemInstanceId and CollectibleItemInstanceId ~= "" then
 		if p2 ~= nil and p2.data ~= nil then
-			for i, v in ipairs(p2.data) do
-				if v.collectibleItemInstanceId == p3 then
-					price = v.price
+			for _, entry in ipairs(p2.data) do
+				if entry.collectibleItemInstanceId == CollectibleItemInstanceId then
+					Price = entry.price
 					break
 				end
 			end
 		end
-		if price == nil and p1 ~= nil then
-			price = p1.lowestResalePrice
+		if Price == nil and p1 ~= nil then
+			Price = p1.lowestResalePrice
 			
-			return price
+			return Price
 		end
-	elseif p4 and p4 ~= 0 then
-		if p1 == nil or not p1.timedOptions then
-			return price
-		end
-		for i, v in ipairs(p1.timedOptions) do
-			if v.days == p4 then
-				price = v.price
-				
-				return price
+	elseif Days and Days ~= 0 then
+		if p1 ~= nil and p1.timedOptions then
+			for _, timedOption in ipairs(p1.timedOptions) do
+				if timedOption.days == Days then
+					Price = timedOption.price
+					
+					return Price
+				end
 			end
+			return Price
 		end
-		return price
 	elseif p1 ~= nil then
-		price = p1.price
+		Price = p1.price
 	end
+	return Price
 end

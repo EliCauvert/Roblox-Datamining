@@ -1,275 +1,287 @@
-﻿local notificationService = game:GetService("NotificationService")
-local realtimeDeliveryModule = require(script:FindFirstAncestor("DataHydration").Parent.RealtimeDelivery)
-local acpProtocolModule = require(script.Parent.AcpProtocol)
-local debugModule = require(script.Parent.Parent.debug)
-local parseFrameModule = require(script.Parent.parseFrame)
+﻿local NotificationService = game:GetService("NotificationService")
+local RealtimeDeliveryModule = require(script:FindFirstAncestor("DataHydration").Parent.RealtimeDelivery)
+local AcpProtocolModule = require(script.Parent.AcpProtocol)
+local DebugModule = require(script.Parent.Parent.debug)
+local ParseFrameModule = require(script.Parent.parseFrame)
 local _ = require(script.Parent.Parent.types)
-local var1 = nil
-local var2 = 0
-local var3 = nil
-local var4 = 0
+local NewResult = nil
+local Count = 0
+local Callback = nil
+local FramesReceivedCount = 0
 
-local function _(p1)
+local function _(p1): boolean --[[ Line: 28 | Named "isConnectionState" ]]
 	return typeof(p1) == "EnumItem" and p1.EnumType == Enum.ConnectionState
 end
 
-local _ = function(p1)
-	return if #p1 <= 4000 then p1 else string.sub(p1, 1, 4000) .. "\226\128\166"
+local _ = function(Text: string): string --[[ Line: 32 | Named "previewString" ]]
+	return if #Text <= 4000 then Text else string.sub(Text, 1, 4000) .. "…"
 end
 
-local function summarizeDetail(p1, p2)
-	if typeof(p1) == "string" then
+local function summarizeDetail(Text: string, DetailType) --[[ Line: 39 ]]
+	if typeof(Text) == "string" then
 		return {
 			shape = "string",
-			length = #p1,
-			preview = if #p1 <= 4000 then p1 else string.sub(p1, 1, 4000) .. "\226\128\166",
-			detailType = p2
+			length = #Text,
+			preview = if #Text <= 4000 then Text else string.sub(Text, 1, 4000) .. "…",
+			detailType = DetailType
 		}
-	elseif typeof(p1) ~= "table" then
+	end
+	if typeof(Text) ~= "table" then
 		return {
-			shape = typeof(p1),
-			value = tostring(p1),
-			detailType = p2
+			shape = typeof(Text),
+			value = tostring(Text),
+			detailType = DetailType
 		}
 	end
-	local t = {}
+	local List = {}
 	
-	for i in p1 do
-		table.insert(t, i)
+	for i in Text do
+		table.insert(List, i)
 	end
-	table.sort(t)
+	table.sort(List)
 	
-	return { shape = "table", keys = t, detailType = p2 }
+	return { shape = "table", keys = List, detailType = DetailType }
 end
 
-local function extractRawFrame(p3)
-	if typeof(p3) == "string" then
-		return p3
-	elseif typeof(p3) ~= "table" then
+local function extractRawFrame(p1) --[[ Line: 69 ]]
+	if typeof(p1) == "string" then
+		return p1
+	end
+	if typeof(p1) ~= "table" then
 		return nil
 	end
-	for i, v in {
+	local v1 = nil
+	for _, value in {
 		"frame",
 		"payload",
 		"message",
 		"data",
 		"body"
 	} do
-		local var5 = p3[v]
+		v1 = p1[value]
 		
-		if typeof(var5) == "string" and var5 ~= "" then
-			return var5
+		if typeof(v1) == "string" and v1 ~= "" then
+			return v1
 		end
 	end
 	return nil
 end
 
-local _ = function(p4)
-	return if typeof(p4) == "table" then p4.sequence_number else nil
+local _ = function(p2) --[[ Line: 85 | Named "extractRtnSequenceNumber" ]]
+	return if typeof(p2) == "table" then p2.sequence_number else nil
 end
 
-local function describeParsedFrame(p4)
-	if typeof(p4) ~= "table" then
+local function describeParsedFrame(p2) --[[ Line: 92 ]]
+	if typeof(p2) ~= "table" then
 		return { kind = "unknown" }
-	elseif p4.kind == "notification" and typeof(p4.notification) == "table" then
-		local t = { kind = "notification", method = p4.notification.method }
-		local params = p4.notification.params
+	end
+	if p2.kind ~= "notification" or typeof(p2.notification) ~= "table" then
+		return if p2.kind == "response" and typeof(p2.response) == "table" then {
+			kind = "response",
+			id = p2.response.id,
+			hasError = typeof(p2.response.error) == "table"
+		} else { kind = p2.kind }
+	end
+	local config = { kind = "notification", method = p2.notification.method }
+	local Params = p2.notification.params
+	
+	if typeof(Params) == "table" then
+		config.sessionId = Params.sessionId
+		local Update = Params.update
 		
-		if typeof(params) == "table" then
-			t.sessionId = params.sessionId
-			local update = params.update
-			
-			if typeof(update) == "table" then
-				if typeof(update.sessionUpdate) == "string" then
-					t.sessionUpdate = update.sessionUpdate
-				end
-				if update.sessionUpdate == "state_change" then
-					t.state = update.state
-					t.stopReason = update.stop_reason
-				end
+		if typeof(Update) == "table" then
+			if typeof(Update.sessionUpdate) == "string" then
+				config.sessionUpdate = Update.sessionUpdate
+			end
+			if Update.sessionUpdate == "state_change" then
+				config.state = Update.state
+				config.stopReason = Update.stop_reason
 			end
 		end
-		return t
-	else
-		return if p4.kind == "response" and typeof(p4.response) == "table" then {
-			kind = "response",
-			id = p4.response.id,
-			hasError = typeof(p4.response.error) == "table"
-		} else { kind = p4.kind }
 	end
+	return config
 end
 
-local _ = function(p4, p5, p6)
-	-- upvalues: debugModule (ref), acpProtocolModule (ref)
-	debugModule.log("info", "CAP RTN connection state", {
-		namespace = acpProtocolModule.CapRtnNamespace,
-		connectionState = tostring(p4),
-		sequenceNumber = p5,
-		seqByNamespace = p6
+local _ = function(p2, SequenceNumber, SeqByNamespace) --[[ Line: 128 | Named "onCapConnectionState" ]]
+	-- upvalues: DebugModule (copy), AcpProtocolModule (copy)
+	DebugModule.log("info", "CAP RTN connection state", {
+		namespace = AcpProtocolModule.CapRtnNamespace,
+		connectionState = tostring(p2),
+		sequenceNumber = SequenceNumber,
+		seqByNamespace = SeqByNamespace
 	})
 end
 
-local function onSignalRConnectionState(value, p4, p5)
-	-- upvalues: acpProtocolModule (ref), debugModule (ref)
-	debugModule.log("info", "SignalR connection state", {
-		connectionState = tostring(value),
-		sequenceNumber = p4,
-		capNamespace = acpProtocolModule.CapRtnNamespace,
-		capSequenceNumber = if typeof(p5) == "table" then p5[acpProtocolModule.CapRtnNamespace] else nil
+local function onSignalRConnectionState(p2, SequenceNumber, p3) --[[ Line: 137 ]]
+	-- upvalues: AcpProtocolModule (copy), DebugModule (copy)
+	DebugModule.log("info", "SignalR connection state", {
+		connectionState = tostring(p2),
+		sequenceNumber = SequenceNumber,
+		capNamespace = AcpProtocolModule.CapRtnNamespace,
+		capSequenceNumber = if typeof(p3) == "table" then p3[AcpProtocolModule.CapRtnNamespace] else nil
 	})
 end
 
-local function onCapEvent(p4, p5, p6)
-	-- upvalues: var4 (write), debugModule (ref), acpProtocolModule (ref), summarizeDetail (ref), extractRawFrame (ref), parseFrameModule (ref), describeParsedFrame (ref)
-	var4 += 1
-	local var6 = var4
-	debugModule.log("info", "CAP RTN message received", {
-		namespace = acpProtocolModule.CapRtnNamespace,
-		messageIndex = var6,
-		sequenceNumber = if typeof(p5) ~= "table" then p5.sequence_number else nil,
-		summary = summarizeDetail(p5, p6)
+local function onCapEvent(p2, p3, DetailType) --[[ Line: 151 ]]
+	-- upvalues: FramesReceivedCount (ref), DebugModule (copy), AcpProtocolModule (copy), summarizeDetail (copy), extractRawFrame (copy), ParseFrameModule (copy), describeParsedFrame (copy)
+	FramesReceivedCount += 1
+	local MessageIndex: number = FramesReceivedCount
+	DebugModule.log("info", "CAP RTN message received", {
+		namespace = AcpProtocolModule.CapRtnNamespace,
+		messageIndex = MessageIndex,
+		sequenceNumber = if typeof(p3) == "table" then p3.sequence_number else nil,
+		summary = summarizeDetail(p3, DetailType)
 	})
-	local var7 = extractRawFrame(p5)
+	local ExtractRawFrameResult: string = extractRawFrame(p3)
 	
-	if var7 == nil then
-		debugModule.log("warn", "CAP RTN message has no parseable frame field", {
+	if ExtractRawFrameResult == nil then
+		DebugModule.log("warn", "CAP RTN message has no parseable frame field", {
 			hint = "Expected string body or table key frame|payload|message|data|body",
-			namespace = acpProtocolModule.CapRtnNamespace,
-			messageIndex = var6,
-			summary = summarizeDetail(p5, p6)
+			namespace = AcpProtocolModule.CapRtnNamespace,
+			messageIndex = MessageIndex,
+			summary = summarizeDetail(p3, DetailType)
 		})
 		
 		return
 	end
-	debugModule.log("info", "CAP RTN raw frame", {
-		namespace = acpProtocolModule.CapRtnNamespace,
-		messageIndex = var6,
-		length = #var7,
-		preview = if #var7 <= 4000 then var7 else string.sub(var7, 1, 4000) .. "\226\128\166"
+	DebugModule.log("info", "CAP RTN raw frame", {
+		namespace = AcpProtocolModule.CapRtnNamespace,
+		messageIndex = MessageIndex,
+		length = #ExtractRawFrameResult,
+		preview = if #ExtractRawFrameResult <= 4000 then ExtractRawFrameResult else string.sub(ExtractRawFrameResult, 1, 4000) .. "…"
 	})
-	local var8 = parseFrameModule(var7)
+	local ParseFrameModuleResult = ParseFrameModule(ExtractRawFrameResult)
 	
-	if var8 == nil then
-		debugModule.log("warn", "CAP frame dropped (parseFrame returned nil)", {
+	if ParseFrameModuleResult == nil then
+		DebugModule.log("warn", "CAP frame dropped (parseFrame returned nil)", {
 			hint = "Expected JSON-RPC notification or response",
-			messageIndex = var6,
-			preview = if #var7 <= 4000 then var7 else string.sub(var7, 1, 4000) .. "\226\128\166"
+			messageIndex = MessageIndex,
+			preview = if #ExtractRawFrameResult <= 4000 then ExtractRawFrameResult else string.sub(ExtractRawFrameResult, 1, 4000) .. "…"
 		})
 		
 		return
 	end
-	local var9 = describeParsedFrame(var8)
-	debugModule.log("info", "CAP frame ingested", { messageIndex = var6, parsed = var9 })
-	p4.ingestFrame(var8, {
-		sequenceNumber = if typeof(p5) ~= "table" then p5.sequence_number else nil
+	local DescribeParsedFrameResult = describeParsedFrame(ParseFrameModuleResult)
+	DebugModule.log("info", "CAP frame ingested", {
+		messageIndex = MessageIndex,
+		parsed = DescribeParsedFrameResult
+	})
+	p2.ingestFrame(ParseFrameModuleResult, {
+		sequenceNumber = if typeof(p3) == "table" then p3.sequence_number else nil
 	})
 	
-	if var8.kind == "response" then
-		debugModule.log("info", "CAP response ingested", { messageIndex = var6, parsed = var9 })
-		
-		return
-	end
-	local sessionId = var9.sessionId
-	
-	local function logTurnSnapshot(p7)
-		-- upvalues: sessionId (ref), p4 (ref), debugModule (copy), var6 (ref)
-		if typeof(sessionId) ~= "string" then return end
-		local activeTurnHandle = p4.getActiveTurnHandle(sessionId)
-		
-		if activeTurnHandle == nil then
-			return
-		end
-		debugModule.log("info", p7, {
-			messageIndex = var6,
-			turn = debugModule.formatTurnState(activeTurnHandle.state(false))
-		})
-	end
-	
-	if var9.sessionUpdate == "agent_message_chunk" or var9.sessionUpdate == "state_change" then
-		logTurnSnapshot(`CAP turn state after {var9.sessionUpdate}`)
-	end
-end
-
-local _ = function(value, p4, p5, p6)
-	-- upvalues: debugModule (ref), acpProtocolModule (ref), onCapEvent (ref)
-	if typeof(p4) == "EnumItem" and p4.EnumType == Enum.ConnectionState then
-		debugModule.log("info", "CAP RTN connection state", {
-			namespace = acpProtocolModule.CapRtnNamespace,
-			connectionState = tostring(p4),
-			sequenceNumber = p5,
-			seqByNamespace = p6
+	if ParseFrameModuleResult.kind == "response" then
+		DebugModule.log("info", "CAP response ingested", {
+			messageIndex = MessageIndex,
+			parsed = DescribeParsedFrameResult
 		})
 		
 		return
 	end
-	onCapEvent(value, p4, p5)
-end
-
-local _ = function()
-	-- upvalues: var1 (write), realtimeDeliveryModule (ref), notificationService (ref)
-	if var1 == nil then
-		var1 = realtimeDeliveryModule.RobloxEventReceiver.new(notificationService)
-	end
-end
-
-local function subscribeCapNamespace(p4)
-	-- upvalues: acpProtocolModule (ref), debugModule (ref), var1 (write), onCapEvent (ref), onSignalRConnectionState (ref)
-	local capRtnNamespace = acpProtocolModule.CapRtnNamespace
-	debugModule.log("info", "listening on CAP RTN namespace (SignalR topic)", {
-		via = "NotificationService.RobloxEventReceived + RobloxConnectionChanged",
-		namespace = capRtnNamespace
-	})
-	local var6 = var1:observeEvent(capRtnNamespace, function(p5, p6, p7)
-		-- upvalues: p4 (ref), debugModule (copy), acpProtocolModule (copy), onCapEvent (copy)
-		if typeof(p5) == "EnumItem" and p5.EnumType == Enum.ConnectionState then
-			debugModule.log("info", "CAP RTN connection state", {
-				namespace = acpProtocolModule.CapRtnNamespace,
-				connectionState = tostring(p5),
-				sequenceNumber = p6,
-				seqByNamespace = p7
+	local SessionId = DescribeParsedFrameResult.sessionId
+	
+	local function logTurnSnapshot(Message) --[[ Line: 210 ]]
+		-- upvalues: SessionId (copy), p2 (copy), DebugModule (upval), MessageIndex (copy)
+		if typeof(SessionId) ~= "string" then return end
+		local ActiveTurnHandle = p2.getActiveTurnHandle(SessionId)
+		
+		if ActiveTurnHandle ~= nil then
+			DebugModule.log("info", Message, {
+				messageIndex = MessageIndex,
+				turn = DebugModule.formatTurnState(ActiveTurnHandle.state(false))
 			})
 			
 			return
 		end
-		onCapEvent(p4, p5, p6)
-	end)
-	local signalR = var1:observeEvent("signalR", function(p5, p6, p7)
-		-- upvalues: onSignalRConnectionState (copy)
-		if typeof(p5) == "EnumItem" and p5.EnumType == Enum.ConnectionState then
-			onSignalRConnectionState(p5, p6, p7)
-		end
-	end)
+	end
 	
-	return function()
-		-- upvalues: var6 (ref), signalR (ref)
-		var6:Disconnect()
-		signalR:Disconnect()
+	if DescribeParsedFrameResult.sessionUpdate == "agent_message_chunk" or DescribeParsedFrameResult.sessionUpdate == "state_change" then
+		logTurnSnapshot(`CAP turn state after {DescribeParsedFrameResult.sessionUpdate}`)
 	end
 end
 
-return function(p4)
-	-- upvalues: var1 (write), realtimeDeliveryModule (ref), notificationService (ref), var2 (write), var3 (write), var4 (write), subscribeCapNamespace (ref), debugModule (ref), acpProtocolModule (ref)
-	if var1 == nil then
-		var1 = realtimeDeliveryModule.RobloxEventReceiver.new(notificationService)
-	end
-	var2 += 1
-	
-	if var3 == nil then
-		var4 = 0
-		var3 = subscribeCapNamespace(p4)
-		debugModule.log("info", "CAP RTN listener active \226\128\148 waiting for SignalR posts", { namespace = acpProtocolModule.CapRtnNamespace })
-	end
-	return function()
-		-- upvalues: var2 (copy), var3 (copy), debugModule (copy), acpProtocolModule (copy), var4 (copy)
-		var2 -= 1
+local _ = function(p2, p3, SequenceNumber, SeqByNamespace) --[[ Line: 229 | Named "onNamespaceSignal" ]]
+	-- upvalues: DebugModule (copy), AcpProtocolModule (copy), onCapEvent (copy)
+	if typeof(p3) == "EnumItem" and p3.EnumType == Enum.ConnectionState then
+		DebugModule.log("info", "CAP RTN connection state", {
+			namespace = AcpProtocolModule.CapRtnNamespace,
+			connectionState = tostring(p3),
+			sequenceNumber = SequenceNumber,
+			seqByNamespace = SeqByNamespace
+		})
 		
-		if var2 <= 0 and var3 then
-			var3()
-			var3 = nil
-			var2 = 0
-			debugModule.log("info", "CAP RTN listener stopped", {
-				namespace = acpProtocolModule.CapRtnNamespace,
-				framesReceivedCount = var4
+		return
+	else
+		onCapEvent(p2, p3, SequenceNumber)
+	end
+end
+
+local _ = function() --[[ Line: 238 | Named "ensureReceiver" ]]
+	-- upvalues: NewResult (ref), RealtimeDeliveryModule (copy), NotificationService (copy)
+	if NewResult == nil then
+		NewResult = RealtimeDeliveryModule.RobloxEventReceiver.new(NotificationService)
+	end
+end
+
+local function subscribeCapNamespace(p2) --[[ Line: 244 ]]
+	-- upvalues: AcpProtocolModule (copy), DebugModule (copy), NewResult (ref), onCapEvent (copy), onSignalRConnectionState (copy)
+	local CapRtnNamespace = AcpProtocolModule.CapRtnNamespace
+	DebugModule.log("info", "listening on CAP RTN namespace (SignalR topic)", {
+		via = "NotificationService.RobloxEventReceived + RobloxConnectionChanged",
+		namespace = CapRtnNamespace
+	})
+	local ObserveEventResult = NewResult:observeEvent(CapRtnNamespace, function(p3, SequenceNumber, SeqByNamespace) --[[ Line: 251 ]]
+		-- upvalues: p2 (copy), DebugModule (upval), AcpProtocolModule (upval), onCapEvent (upval)
+		if typeof(p3) == "EnumItem" and p3.EnumType == Enum.ConnectionState then
+			DebugModule.log("info", "CAP RTN connection state", {
+				namespace = AcpProtocolModule.CapRtnNamespace,
+				connectionState = tostring(p3),
+				sequenceNumber = SequenceNumber,
+				seqByNamespace = SeqByNamespace
+			})
+			
+			return
+		else
+			onCapEvent(p2, p3, SequenceNumber)
+		end
+	end)
+	local SignalR = NewResult:observeEvent("signalR", function(p3, SequenceNumber, p4) --[[ Line: 257 ]]
+		-- upvalues: onSignalRConnectionState (upval)
+		if typeof(p3) == "EnumItem" and p3.EnumType == Enum.ConnectionState then
+			onSignalRConnectionState(p3, SequenceNumber, p4)
+		end
+	end)
+	
+	return function() --[[ Line: 264 ]]
+		-- upvalues: ObserveEventResult (copy), SignalR (copy)
+		ObserveEventResult:Disconnect()
+		SignalR:Disconnect()
+	end
+end
+
+return function(p2) --[[ Line: 270 | Named "wireCapDelivery" ]]
+	-- upvalues: NewResult (ref), RealtimeDeliveryModule (copy), NotificationService (copy), Count (ref), Callback (ref), FramesReceivedCount (ref), subscribeCapNamespace (copy), DebugModule (copy), AcpProtocolModule (copy)
+	if NewResult == nil then
+		NewResult = RealtimeDeliveryModule.RobloxEventReceiver.new(NotificationService)
+	end
+	Count += 1
+	
+	if Callback == nil then
+		FramesReceivedCount = 0
+		Callback = subscribeCapNamespace(p2)
+		DebugModule.log("info", "CAP RTN listener active — waiting for SignalR posts", { namespace = AcpProtocolModule.CapRtnNamespace })
+	end
+	return function() --[[ Line: 282 ]]
+		-- upvalues: Count (upval), Callback (upval), DebugModule (upval), AcpProtocolModule (upval), FramesReceivedCount (upval)
+		Count -= 1
+		
+		if Count <= 0 and Callback then
+			Callback()
+			Callback = nil
+			Count = 0
+			DebugModule.log("info", "CAP RTN listener stopped", {
+				namespace = AcpProtocolModule.CapRtnNamespace,
+				framesReceivedCount = FramesReceivedCount
 			})
 		end
 	end

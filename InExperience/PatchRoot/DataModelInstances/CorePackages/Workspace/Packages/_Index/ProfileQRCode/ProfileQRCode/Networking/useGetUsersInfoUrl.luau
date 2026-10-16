@@ -1,13 +1,13 @@
-﻿local profileQRCode = script:FindFirstAncestor("ProfileQRCode")
-local configureRoduxUsersModule = require(profileQRCode.Networking.configureRoduxUsers)
-local useDispatch = require(profileQRCode.Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+﻿local ProfileQRCode = script:FindFirstAncestor("ProfileQRCode")
+local ConfigureRoduxUsersModule = require(ProfileQRCode.Networking.configureRoduxUsers)
+local UseDispatchFunction = require(ProfileQRCode.Parent.RoactUtils).Hooks.RoactRodux.useDispatch
 
-return function()
-	-- upvalues: useDispatch (ref), configureRoduxUsersModule (ref)
-	local var1 = useDispatch()
+return function() --[[ Line: 7 ]]
+	-- upvalues: UseDispatchFunction (copy), ConfigureRoduxUsersModule (copy)
+	local UseDispatchResult = UseDispatchFunction()
 	
-	return function(p1)
-		-- upvalues: var1 (ref), configureRoduxUsersModule (copy)
-		return var1(configureRoduxUsersModule.GetUserV2FromUserId.API(p1))
+	return function(p1) --[[ Line: 10 ]]
+		-- upvalues: UseDispatchResult (copy), ConfigureRoduxUsersModule (upval)
+		return UseDispatchResult(ConfigureRoduxUsersModule.GetUserV2FromUserId.API(p1))
 	end
 end

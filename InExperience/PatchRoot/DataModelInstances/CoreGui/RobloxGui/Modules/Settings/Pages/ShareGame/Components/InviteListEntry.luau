@@ -1,137 +1,137 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local playersService = game:GetService("Players")
-local reactModule = require(corePackagesService.Packages.React)
-local reactRobloxModule = require(corePackagesService.Packages.ReactRoblox)
-local modules = game:GetService("CoreGui").RobloxGui.Modules
-local shareGame = modules.Settings.Pages.ShareGame
-local openTypeSupport = require(corePackagesService.Packages.UIBlox).Utility.OpenTypeSupport
-local constants = require(corePackagesService.Workspace.Packages.CoreScriptsCommon).Constants
-local themeModule = require(modules.Settings.Theme)
-local appFonts = require(corePackagesService.Workspace.Packages.Style).AppFonts
-local gameInviteEvents = require(corePackagesService.Workspace.Packages.GameInvite).GameInviteEvents
-local constantsModule = require(shareGame.Constants)
-local presenceUtilModule = require(shareGame.PresenceUtil)
-local singleUserThumbnailModule = require(shareGame.Components.SingleUserThumbnail)
-local inviteButtonModule = require(shareGame.Components.InviteButton)
-local inviteStatus = constantsModule.InviteStatus
-local throttleFunctionCallModule = require(shareGame.ThrottleFunctionCall)
-local getFFlagAbuseReportAnalyticsHasLaunchDataModule = require(modules.Settings.Flags.GetFFlagAbuseReportAnalyticsHasLaunchData)
-local getFFlagEnableNewInviteSendEndpointModule = require(modules.Flags.GetFFlagEnableNewInviteSendEndpoint)
-local getFFlagThrottleInviteSendEndpointModule = require(modules.Flags.GetFFlagThrottleInviteSendEndpoint)
-local getFIntThrottleInviteSendEndpointDelayModule = require(modules.Flags.GetFIntThrottleInviteSendEndpointDelay)
-local getFFlagLuaAppEnableOpenTypeSupport = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagLuaAppEnableOpenTypeSupport
-local rect = Rect.new(10, 10, 10, 10)
+﻿local CorePackages = game:GetService("CorePackages")
+local Players = game:GetService("Players")
+local ReactModule = require(CorePackages.Packages.React)
+local ReactRobloxModule = require(CorePackages.Packages.ReactRoblox)
+local Modules = game:GetService("CoreGui").RobloxGui.Modules
+local ShareGame = Modules.Settings.Pages.ShareGame
+local OpenTypeSupport = require(CorePackages.Packages.UIBlox).Utility.OpenTypeSupport
+local Constants = require(CorePackages.Workspace.Packages.CoreScriptsCommon).Constants
+local ThemeModule = require(Modules.Settings.Theme)
+local AppFonts = require(CorePackages.Workspace.Packages.Style).AppFonts
+local GameInviteEvents = require(CorePackages.Workspace.Packages.GameInvite).GameInviteEvents
+local PresenceUtilModule = require(ShareGame.PresenceUtil)
+local SingleUserThumbnailModule = require(ShareGame.Components.SingleUserThumbnail)
+local InviteButtonModule = require(ShareGame.Components.InviteButton)
+local InviteStatus = require(ShareGame.Constants).InviteStatus
+local ThrottleFunctionCallModule = require(ShareGame.ThrottleFunctionCall)
+local GetFFlagAbuseReportAnalyticsHasLaunchDataModule = require(Modules.Settings.Flags.GetFFlagAbuseReportAnalyticsHasLaunchData)
+local GetFFlagEnableNewInviteSendEndpointModule = require(Modules.Flags.GetFFlagEnableNewInviteSendEndpoint)
+local GetFFlagThrottleInviteSendEndpointModule = require(Modules.Flags.GetFFlagThrottleInviteSendEndpoint)
+local GetFIntThrottleInviteSendEndpointDelayModule = require(Modules.Flags.GetFIntThrottleInviteSendEndpointDelay)
+local GetFFlagLuaAppEnableOpenTypeSupportFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagLuaAppEnableOpenTypeSupport
+local _Rect = Rect.new(10, 10, 10, 10)
 
-return function(p1)
-	-- upvalues: reactModule (ref), inviteStatus (ref), playersService (ref), getFFlagEnableNewInviteSendEndpointModule (ref), gameInviteEvents (ref), getFFlagAbuseReportAnalyticsHasLaunchDataModule (ref), getFFlagThrottleInviteSendEndpointModule (ref), throttleFunctionCallModule (ref), getFIntThrottleInviteSendEndpointDelayModule (ref), rect (ref), themeModule (ref), reactRobloxModule (ref), singleUserThumbnailModule (ref), presenceUtilModule (ref), constants (ref), appFonts (ref), getFFlagLuaAppEnableOpenTypeSupport (ref), openTypeSupport (ref), inviteButtonModule (ref)
-	local user = p1.user
-	local var1 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref), inviteStatus (copy), user (ref), playersService (copy), getFFlagEnableNewInviteSendEndpointModule (copy), gameInviteEvents (copy), getFFlagAbuseReportAnalyticsHasLaunchDataModule (copy)
-		local inviteUser = p1.inviteUser
-		local inviteStatus_1 = p1.inviteStatus
-		local analytics = p1.analytics
+return function(p1) --[[ Line: 64 ]]
+	-- upvalues: ReactModule (copy), InviteStatus (copy), Players (copy), GetFFlagEnableNewInviteSendEndpointModule (copy), GameInviteEvents (copy), GetFFlagAbuseReportAnalyticsHasLaunchDataModule (copy), GetFFlagThrottleInviteSendEndpointModule (copy), ThrottleFunctionCallModule (copy), GetFIntThrottleInviteSendEndpointDelayModule (copy), _Rect (copy), ThemeModule (copy), ReactRobloxModule (copy), SingleUserThumbnailModule (copy), PresenceUtilModule (copy), Constants (copy), AppFonts (copy), GetFFlagLuaAppEnableOpenTypeSupportFunction (copy), OpenTypeSupport (copy), InviteButtonModule (copy)
+	local User = p1.user
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 66 ]]
+		-- upvalues: p1 (copy), InviteStatus (upval), User (copy), Players (upval), GetFFlagEnableNewInviteSendEndpointModule (upval), GameInviteEvents (upval), GetFFlagAbuseReportAnalyticsHasLaunchDataModule (upval)
+		local InviteUserFunction = p1.inviteUser
+		local InviteStatus1 = p1.inviteStatus
+		local Analytics = p1.analytics
 		
-		if inviteStatus_1 and inviteStatus_1 ~= inviteStatus.Failed then return end
-		local var2 = function(p2)
-			-- upvalues: user (copy), playersService (copy), analytics (ref)
-			if not p2 then return end
-			local list = { user.id }
+		if InviteStatus1 and InviteStatus1 ~= InviteStatus.Failed then return end
+		local function v25(Result) --[[ Line: 74 ]]
+			-- upvalues: User (upval), Players (upval), Analytics (copy)
+			if not Result then return end
+			local list = { User.id }
 			
-			if playersService.LocalPlayer and p2 then
-				analytics:onActivatedInviteSent(playersService.LocalPlayer.UserId, p2.conversationId, list)
+			if Players.LocalPlayer and Result then
+				Analytics:onActivatedInviteSent(Players.LocalPlayer.UserId, Result.conversationId, list)
 			end
 		end
 		
-		if not getFFlagEnableNewInviteSendEndpointModule() then
-			inviteUser(user.id):andThen(var2, function() end)
+		if GetFFlagEnableNewInviteSendEndpointModule() then
+			local IsNotLaunchDataMatch: boolean = p1.launchData ~= nil and p1.launchData ~= ""
+			Analytics:sendEvent(p1.trigger, GameInviteEvents.SendInvite, {
+				recipient = User.id,
+				isLaunchDataProvided = if GetFFlagAbuseReportAnalyticsHasLaunchDataModule() then IsNotLaunchDataMatch else nil
+			})
+			InviteUserFunction(User.id, Analytics, p1.trigger, p1.inviteMessageId, p1.launchData):andThen(v25, function() --[[ Line: 97 ]] end)
 			
 			return
+		else
+			InviteUserFunction(User.id):andThen(v25, function() --[[ Line: 100 ]] end)
 		end
-		analytics:sendEvent(p1.trigger, gameInviteEvents.SendInvite, {
-			recipient = user.id,
-			isLaunchDataProvided = if getFFlagAbuseReportAnalyticsHasLaunchDataModule() then p1.launchData ~= nil and p1.launchData ~= "" else nil
-		})
-		inviteUser(user.id, analytics, p1.trigger, p1.inviteMessageId, p1.launchData):andThen(var2, function() end)
-	end, { p1.inviteUser, p1.inviteStatus, p1.analytics, user })
+	end, { p1.inviteUser, p1.inviteStatus, p1.analytics, User })
 	
-	if getFFlagThrottleInviteSendEndpointModule() then
-		var1 = reactModule.useCallback(throttleFunctionCallModule(getFIntThrottleInviteSendEndpointDelayModule(), var1), { var1 })
+	if GetFFlagThrottleInviteSendEndpointModule() then
+		UseResult = ReactModule.useCallback(ThrottleFunctionCallModule(GetFIntThrottleInviteSendEndpointDelayModule(), UseResult), { UseResult })
 	end
-	if p1.visible then
-		return reactModule.createElement("ImageButton", {
-			Size = UDim2.new(1, 0, 0, 60),
-			ScaleType = Enum.ScaleType.Stretch,
-			SliceCenter = rect,
-			BackgroundColor3 = themeModule.color("PlayerRowFrame"),
-			BackgroundTransparency = themeModule.transparency("PlayerRowFrame", 1),
-			ImageTransparency = 0.85,
-			LayoutOrder = p1.layoutOrder,
-			[reactRobloxModule.Event.Activated] = if p1.isFullRowActivatable then var1 else nil
+	if not p1.visible then return end
+	return ReactModule.createElement("ImageButton", {
+		Size = UDim2.new(1, 0, 0, 60),
+		ScaleType = Enum.ScaleType.Stretch,
+		SliceCenter = _Rect,
+		BackgroundColor3 = ThemeModule.color("PlayerRowFrame"),
+		BackgroundTransparency = ThemeModule.transparency("PlayerRowFrame", 1),
+		ImageTransparency = 0.85,
+		LayoutOrder = p1.layoutOrder,
+		[ReactRobloxModule.Event.Activated] = if p1.isFullRowActivatable then UseResult else nil
+	}, {
+		UICorner = ReactModule.createElement("UICorner", { CornerRadius = ThemeModule.MenuContainerCornerRadius }),
+		Padding = ReactModule.createElement("UIPadding", {
+			PaddingRight = UDim.new(0, 16),
+			PaddingLeft = UDim.new(0, 8)
+		}),
+		Thumbnail = ReactModule.createElement(SingleUserThumbnailModule, {
+			user = User,
+			size = UDim2.new(0, 44, 0, 44),
+			position = UDim2.new(0, 0, 0.5, 0),
+			anchorPoint = Vector2.new(0, 0.5)
+		}),
+		UserInfo = ReactModule.createElement("Frame", {
+			BackgroundTransparency = 1,
+			ClipsDescendants = true,
+			Position = UDim2.new(0, 44, 0, 0),
+			Size = UDim2.new(1, -118, 1, 0)
 		}, {
-			UICorner = reactModule.createElement("UICorner", { CornerRadius = themeModule.MenuContainerCornerRadius }),
-			Padding = reactModule.createElement("UIPadding", {
-				PaddingRight = UDim.new(0, 16),
-				PaddingLeft = UDim.new(0, 8)
+			Padding = ReactModule.createElement("UIPadding", { PaddingLeft = UDim.new(0, 8) }),
+			ListLayout = ReactModule.createElement("UIListLayout", {
+				FillDirection = Enum.FillDirection.Vertical,
+				VerticalAlignment = Enum.VerticalAlignment.Center,
+				Padding = UDim.new(0, 4)
 			}),
-			Thumbnail = reactModule.createElement(singleUserThumbnailModule, {
-				user = user,
-				size = UDim2.new(0, 44, 0, 44),
-				position = UDim2.new(0, 0, 0.5, 0),
-				anchorPoint = Vector2.new(0, 0.5)
-			}),
-			UserInfo = reactModule.createElement("Frame", {
+			DisplayNameWrapper = ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
-				ClipsDescendants = true,
-				Position = UDim2.new(0, 44, 0, 0),
-				Size = UDim2.new(1, -118, 1, 0)
+				Size = UDim2.new(0, 0, 0, 16)
 			}, {
-				Padding = reactModule.createElement("UIPadding", { PaddingLeft = UDim.new(0, 8) }),
-				ListLayout = reactModule.createElement("UIListLayout", {
-					FillDirection = Enum.FillDirection.Vertical,
+				PresenceIconLayout = ReactModule.createElement("UIListLayout", {
+					FillDirection = Enum.FillDirection.Horizontal,
+					HorizontalAlignment = Enum.HorizontalAlignment.Left,
 					VerticalAlignment = Enum.VerticalAlignment.Center,
+					SortOrder = Enum.SortOrder.LayoutOrder,
 					Padding = UDim.new(0, 4)
 				}),
-				DisplayNameWrapper = reactModule.createElement("Frame", {
-					BackgroundTransparency = 1,
-					Size = UDim2.new(0, 0, 0, 16)
-				}, {
-					PresenceIconLayout = reactModule.createElement("UIListLayout", {
-						FillDirection = Enum.FillDirection.Horizontal,
-						HorizontalAlignment = Enum.HorizontalAlignment.Left,
-						VerticalAlignment = Enum.VerticalAlignment.Center,
-						SortOrder = Enum.SortOrder.LayoutOrder,
-						Padding = UDim.new(0, 4)
-					}),
-					Icon = presenceUtilModule.GetIcon(user.presence),
-					DisplayName = reactModule.createElement("TextLabel", {
-						TextSize = 16,
-						BackgroundTransparency = 1,
-						LayoutOrder = 2,
-						Size = UDim2.new(0, 0, 0, 16),
-						Text = user.displayName,
-						TextColor3 = constants.COLORS.WHITE,
-						Font = appFonts.default:getMedium(),
-						TextXAlignment = Enum.TextXAlignment.Left
-					})
-				}),
-				Username = reactModule.createElement("TextLabel", {
+				Icon = PresenceUtilModule.GetIcon(User.presence),
+				DisplayName = ReactModule.createElement("TextLabel", {
 					TextSize = 16,
 					BackgroundTransparency = 1,
+					LayoutOrder = 2,
 					Size = UDim2.new(0, 0, 0, 16),
-					Text = "@" .. user.name,
-					TextColor3 = constants.COLORS.PUMICE,
-					Font = appFonts.default:getDefault(),
-					TextXAlignment = Enum.TextXAlignment.Left,
-					OpenTypeFeatures = if getFFlagLuaAppEnableOpenTypeSupport() then openTypeSupport:getUserNameStylisticAlternative() else nil
+					Text = User.displayName,
+					TextColor3 = Constants.COLORS.WHITE,
+					Font = AppFonts.default:getMedium(),
+					TextXAlignment = Enum.TextXAlignment.Left
 				})
 			}),
-			InviteButton = reactModule.createElement(inviteButtonModule, {
-				size = UDim2.new(0, 66, 0, 36),
-				position = UDim2.new(1, 0, 0.5, 0),
-				anchorPoint = Vector2.new(1, 0.5),
-				onInvite = var1,
-				inviteStatus = p1.inviteStatus
+			Username = ReactModule.createElement("TextLabel", {
+				TextSize = 16,
+				BackgroundTransparency = 1,
+				Size = UDim2.new(0, 0, 0, 16),
+				Text = "@" .. User.name,
+				TextColor3 = Constants.COLORS.PUMICE,
+				Font = AppFonts.default:getDefault(),
+				TextXAlignment = Enum.TextXAlignment.Left,
+				OpenTypeFeatures = if GetFFlagLuaAppEnableOpenTypeSupportFunction() then OpenTypeSupport:getUserNameStylisticAlternative() else nil
 			})
+		}),
+		InviteButton = ReactModule.createElement(InviteButtonModule, {
+			size = UDim2.new(0, 66, 0, 36),
+			position = UDim2.new(1, 0, 0.5, 0),
+			anchorPoint = Vector2.new(1, 0.5),
+			onInvite = UseResult,
+			inviteStatus = p1.inviteStatus
 		})
-	end
+	})
 end

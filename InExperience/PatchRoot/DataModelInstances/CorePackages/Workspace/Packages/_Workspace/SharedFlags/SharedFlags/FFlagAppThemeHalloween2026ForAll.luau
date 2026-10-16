@@ -1,0 +1,1 @@
+﻿return game:DefineFastFlag("AppThemeHalloween2026ForAll", false)

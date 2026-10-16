@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.InExperienceSessionization.InExperienceSessionization)
+﻿return (require(script.Parent._Workspace.InExperienceSessionization.InExperienceSessionization))

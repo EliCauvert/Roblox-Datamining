@@ -1,8 +1,8 @@
-﻿local universeActivationStoreTypesModule = require(script.UniverseActivationStoreTypes)
+﻿local UniverseActivationStoreTypesModule = require(script.UniverseActivationStoreTypes)
 
 return {
-	Audience = universeActivationStoreTypesModule.Audience,
+	Audience = UniverseActivationStoreTypesModule.Audience,
 	createUniverseActivationStore = require(script.createUniverseActivationStore),
 	getUniverseActivationStore = require(script.getUniverseActivationStore),
-	UniverseActivationStoreTypes = universeActivationStoreTypesModule
+	UniverseActivationStoreTypes = UniverseActivationStoreTypesModule
 }

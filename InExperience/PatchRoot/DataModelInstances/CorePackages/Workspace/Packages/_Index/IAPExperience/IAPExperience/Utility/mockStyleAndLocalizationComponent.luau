@@ -1,20 +1,20 @@
-﻿local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local roactModule = require(parent_1.Roact)
-local UIBloxModule = require(parent_1.UIBlox)
-local appStyleProvider = UIBloxModule.App.Style.AppStyleProvider
-local dark = require(parent_1.Foundation).Enums.ColorMode.Dark
-local gotham = UIBloxModule.App.Style.Constants.FontName.Gotham
-local localeProviderModule = require(parent.Locale.LocaleProvider)
+﻿local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local RoactModule = require(Parent1.Roact)
+local UIBloxModule = require(Parent1.UIBlox)
+local AppStyleProvider = UIBloxModule.App.Style.AppStyleProvider
+local Dark = require(Parent1.Foundation).Enums.ColorMode.Dark
+local Gotham = UIBloxModule.App.Style.Constants.FontName.Gotham
+local LocaleProviderModule = require(Parent.Locale.LocaleProvider)
 
-return function(p1)
-	-- upvalues: roactModule (ref), localeProviderModule (ref), appStyleProvider (ref), dark (ref), gotham (ref)
-	return roactModule.createElement(localeProviderModule, {
+return function(p1) --[[ Line: 17 ]]
+	-- upvalues: RoactModule (copy), LocaleProviderModule (copy), AppStyleProvider (copy), Dark (copy), Gotham (copy)
+	return RoactModule.createElement(LocaleProviderModule, {
 		locale = "en-us",
-		render = function()
-			-- upvalues: roactModule (copy), appStyleProvider (copy), dark (copy), gotham (copy), p1 (ref)
-			return roactModule.createElement(appStyleProvider, { style = { themeName = dark, fontName = gotham } }, {
-				roactModule.createElement("Frame", { Size = UDim2.new(1, 0, 1, 0) }, p1)
+		render = function() --[[ Line: 20 ]]
+			-- upvalues: RoactModule (upval), AppStyleProvider (upval), Dark (upval), Gotham (upval), p1 (copy)
+			return RoactModule.createElement(AppStyleProvider, { style = { themeName = Dark, fontName = Gotham } }, {
+				RoactModule.createElement("Frame", { Size = UDim2.new(1, 0, 1, 0) }, p1)
 			})
 		end
 	})

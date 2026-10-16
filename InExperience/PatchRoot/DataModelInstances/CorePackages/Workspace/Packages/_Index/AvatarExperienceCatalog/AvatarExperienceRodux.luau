@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.AvatarExperienceRodux.AvatarExperienceRodux)
+﻿return (require(script.Parent.Parent.Parent._Index.AvatarExperienceRodux.AvatarExperienceRodux))

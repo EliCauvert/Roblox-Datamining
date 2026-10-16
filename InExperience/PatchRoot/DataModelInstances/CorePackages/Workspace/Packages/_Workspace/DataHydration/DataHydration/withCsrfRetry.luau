@@ -1,89 +1,91 @@
 ﻿local _ = require(script:FindFirstAncestor("DataHydration").Parent.HttpClient)
 
-local function getCsrfToken(p1)
-	local headers = p1.headers
+local function getCsrfToken(p1) --[[ Line: 14 ]]
+	local Headers = p1.headers
 	
-	if headers == nil then
+	if Headers == nil then
 		return nil
 	end
-	for i, v in headers do
-		if string.lower(tostring(i)) == "x-csrf-token" then
-			return v
+	for i, header in Headers do
+		if string.lower((tostring(i))) == "x-csrf-token" then
+			return header
 		end
 	end
 	return nil
 end
 
-local function _(p2, p3)
+local function _(List, List1) --[[ Line: 27 | Named "mergeHeaders" ]]
 	local t = {}
 	
-	if p2 then
-		for i, v in p2 do
-			t[i] = v
+	if List then
+		for i, value in List do
+			t[i] = value
 		end
 	end
-	for i, v in p3 do
-		t[i] = v
+	for i1, value1 in List1 do
+		t[i1] = value1
 	end
 	return t
 end
 
-return function(p4)
-	-- upvalues: getCsrfToken (ref)
+return function(p2) --[[ Line: 40 | Named "withCsrfRetry" ]]
+	-- upvalues: getCsrfToken (copy)
 	return {
-		request = function(p5, p6)
-			-- upvalues: p4 (ref), getCsrfToken (copy)
-			local var1 = false
-			local var2 = nil
-			var2 = p4.request(p5, function(p7, p8)
-				-- upvalues: var1 (write), p6 (ref), getCsrfToken (copy), p5 (ref), var2 (write), p4 (copy)
-				if var1 then return end
-				if not p7 or typeof(p8) ~= "table" then
-					p6(p7, p8)
-					
-					return
-				elseif p8.statusCode ~= 403 then
-					p6(true, p8)
+		request = function(p3, Callback) --[[ Line: 41 ]]
+			-- upvalues: p2 (copy), getCsrfToken (upval)
+			local Flag = false
+			local RequestResult = nil
+			RequestResult = p2.request(p3, function(p4, p5) --[[ Line: 48 ]]
+				-- upvalues: Flag (ref), Callback (copy), getCsrfToken (upval), p3 (copy), RequestResult (ref), p2 (upval)
+				if Flag then return end
+				if not p4 or typeof(p5) ~= "table" then
+					Callback(p4, p5)
 					
 					return
 				end
-				local var3 = getCsrfToken(p8)
-				
-				if var3 == nil then
-					p6(true, p8)
+				if p5.statusCode ~= 403 then
+					Callback(true, p5)
 					
 					return
 				end
-				local t = { url = p5.url, method = p5.method, body = p5.body }
-				local headers = p5.headers
-				local t_1 = { ["x-csrf-token"] = var3 }
-				local t_2 = {}
+				local CsrfToken = getCsrfToken(p5)
 				
-				if headers then
-					for i, v in headers do
-						t_2[i] = v
+				if CsrfToken == nil then
+					Callback(true, p5)
+					
+					return
+				end
+				local config = { url = p3.url, method = p3.method, body = p3.body }
+				local Headers = p3.headers
+				local config1 = { ["x-csrf-token"] = CsrfToken }
+				local Headers1 = {}
+				
+				if Headers then
+					for i, header in Headers do
+						Headers1[i] = header
 					end
 				end
-				for i, v in t_1 do
-					t_2[i] = v
+				for i1, value in config1 do
+					Headers1[i1] = value
 				end
-				t.headers = t_2
-				var2 = p4.request(t, function(p9, p10)
-					-- upvalues: var1 (copy), p6 (copy)
-					if var1 then
+				config.headers = Headers1
+				RequestResult = p2.request(config, function(p6, p7) --[[ Line: 73 ]]
+					-- upvalues: Flag (upval), Callback (upval)
+					if not Flag then
+						Callback(p6, p7)
+						
 						return
 					end
-					p6(p9, p10)
 				end)
 			end)
 			
-			return function()
-				-- upvalues: var1 (write), var2 (write)
-				if var1 then return end
-				var1 = true
+			return function() --[[ Line: 81 ]]
+				-- upvalues: Flag (ref), RequestResult (ref)
+				if Flag then return end
+				Flag = true
 				
-				if var2 then
-					var2()
+				if RequestResult then
+					RequestResult()
 				end
 			end
 		end

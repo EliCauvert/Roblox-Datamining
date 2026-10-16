@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.ToastRodux.ToastRodux)
+﻿return (require(script.Parent.Parent.Parent._Index.ToastRodux.ToastRodux))

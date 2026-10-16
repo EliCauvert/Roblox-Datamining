@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent.AppCommonLib).Signal.new()
+﻿return (require(script.Parent.Parent.Parent.AppCommonLib).Signal.new())

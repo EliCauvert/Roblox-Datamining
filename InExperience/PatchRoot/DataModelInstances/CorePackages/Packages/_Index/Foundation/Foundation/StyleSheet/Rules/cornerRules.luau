@@ -1,129 +1,125 @@
-﻿local cornerPropertyModule = require(script:FindFirstAncestor("Foundation").Enums.CornerProperty)
+﻿local CornerPropertyModule = require(script:FindFirstAncestor("Foundation").Enums.CornerProperty)
 local _ = require(script.Parent.Types)
-local uDim = UDim.new(0, 0)
+local _UDim = UDim.new(0, 0)
 local list = {
-	cornerPropertyModule.TopLeft,
-	cornerPropertyModule.TopRight,
-	cornerPropertyModule.BottomRight,
-	cornerPropertyModule.BottomLeft
+	CornerPropertyModule.TopLeft,
+	CornerPropertyModule.TopRight,
+	CornerPropertyModule.BottomRight,
+	CornerPropertyModule.BottomLeft
 }
-local t = {
-	["top-left"] = cornerPropertyModule.TopLeft,
-	["top-right"] = cornerPropertyModule.TopRight,
-	["bottom-right"] = cornerPropertyModule.BottomRight,
-	["bottom-left"] = cornerPropertyModule.BottomLeft
+local config = {
+	["top-left"] = CornerPropertyModule.TopLeft,
+	["top-right"] = CornerPropertyModule.TopRight,
+	["bottom-right"] = CornerPropertyModule.BottomRight,
+	["bottom-left"] = CornerPropertyModule.BottomLeft
 }
-local t_1 = {
+local config1 = {
 	top = {
-		cornerPropertyModule.TopLeft,
-		cornerPropertyModule.TopRight
+		CornerPropertyModule.TopLeft,
+		CornerPropertyModule.TopRight
 	},
 	bottom = {
-		cornerPropertyModule.BottomLeft,
-		cornerPropertyModule.BottomRight
+		CornerPropertyModule.BottomLeft,
+		CornerPropertyModule.BottomRight
 	},
 	left = {
-		cornerPropertyModule.TopLeft,
-		cornerPropertyModule.BottomLeft
+		CornerPropertyModule.TopLeft,
+		CornerPropertyModule.BottomLeft
 	},
 	right = {
-		cornerPropertyModule.TopRight,
-		cornerPropertyModule.BottomRight
+		CornerPropertyModule.TopRight,
+		CornerPropertyModule.BottomRight
 	}
 }
 
-local function _(p1, p2)
+local function _(p1, List) --[[ Line: 44 | Named "cornerProperties" ]]
 	local t = {}
 	
-	for i, v in p2 do
-		t[v] = p1
+	for _, value in List do
+		t[value] = p1
 	end
 	return t
 end
 
-local _ = function(p3)
-	-- upvalues: uDim (ref), list (ref)
-	local t = { pseudo = "UICorner", priority = 0, tag = p3 }
-	local t_1 = {}
+local _ = function(Tag) --[[ Line: 54 | Named "zeroedBaseline" ]]
+	-- upvalues: _UDim (copy), list (copy)
+	local config = { pseudo = "UICorner", priority = 0, tag = Tag }
+	local Properties = {}
 	
-	for i, v in list do
-		t_1[v] = uDim
+	for _, value in list do
+		Properties[value] = _UDim
 	end
-	t.properties = t_1
+	config.properties = Properties
 	
-	return t
+	return config
 end
 
-return function(p4, p5)
-	-- upvalues: list (ref), t_1 (ref), uDim (ref), t (ref)
-	local t_2 = {}
+return function(List, Callback) --[[ Line: 63 | Named "cornerRules" ]]
+	-- upvalues: list (copy), config1 (copy), _UDim (copy), config (copy)
+	local List1 = {}
 	
-	for i, v in p4 do
-		local v_1
-		local var1 = p5(v)
-		local cornerValue = var1.cornerValue
-		local attributes = var1.attributes
-		local t_3 = {
+	for _, value in List do
+		local CallbackResult = Callback(value)
+		local CornerValue = CallbackResult.cornerValue
+		local Attributes = CallbackResult.attributes
+		local config2 = {
 			pseudo = "UICorner",
 			priority = 1,
-			tag = `radius-{v.name}`
+			tag = `radius-{value.name}`
 		}
-		local t_4 = {}
+		local Properties = {}
 		
-		for i_1, v_1 in list do
-			t_4[v_1] = cornerValue
+		for _, value1 in list do
+			Properties[value1] = CornerValue
 		end
-		local i_1, t_7
-		t_3.properties = t_4
-		t_3.attributes = attributes
-		table.insert(t_2, t_3)
+		config2.properties = Properties
+		config2.attributes = Attributes
+		table.insert(List1, config2)
 		
-		for i_2, v_2 in t_1 do
-			local var2 = `radius-{i_2}-{v.name}`
-			local t_5 = { pseudo = "UICorner", priority = 2, tag = var2 }
-			v_1 = {}
+		for i, value2 in config1 do
+			local RadiusName: string = `radius-{i}-{value.name}`
+			local config3 = { pseudo = "UICorner", priority = 2, tag = RadiusName }
+			local Properties1 = {}
 			
-			for t_7, i_4 in v_2 do
-				v_1[i_4] = cornerValue
+			for _, value3 in value2 do
+				Properties1[value3] = CornerValue
 			end
-			t_5.properties = v_1
-			t_5.attributes = attributes
-			i_1 = {}
-			v_1 = { pseudo = "UICorner", priority = 0, tag = var2 }
-			local var3 = uDim
-			t_7 = {}
+			config3.properties = Properties1
+			config3.attributes = Attributes
+			local Children = {}
+			local config4 = { pseudo = "UICorner", priority = 0, tag = RadiusName }
+			local Properties2 = {}
 			
-			for i_5, v_5 in list do
-				t_7[v_5] = var3
+			for _, value4 in list do
+				Properties2[value4] = _UDim
 			end
-			v_1.properties = t_7
-			-- Unknown statement at pc 1: <SetList>
-			t_5.children = i_1
-			table.insert(t_2, t_5)
+			config4.properties = Properties2
+			Children[1] = config4
+			config3.children = Children
+			table.insert(List1, config3)
 		end
-		for i_2, v_2 in t do
-			local var4 = `radius-{i_2}-{v.name}`
-			local t_5 = { pseudo = "UICorner", priority = 3, tag = var4 }
-			local t_6 = {}
+		for i1, value5 in config do
+			local RadiusName: string = `radius-{i1}-{value.name}`
+			local config5 = { pseudo = "UICorner", priority = 3, tag = RadiusName }
+			local Properties3 = {}
 			
-			for i_4, v_4 in { v_2 } do
-				t_6[v_4] = cornerValue
+			for _, value6 in { value5 } do
+				Properties3[value6] = CornerValue
 			end
-			t_5.properties = t_6
-			t_5.attributes = attributes
-			i_1 = {}
-			v_1 = { pseudo = "UICorner", priority = 0, tag = var4 }
-			local var5 = uDim
-			t_7 = {}
+			config5.properties = Properties3
+			config5.attributes = Attributes
+			local Children = {}
+			local config6 = { pseudo = "UICorner", priority = 0, tag = RadiusName }
+			local Properties4 = {}
 			
-			for i_5, v_5 in list do
-				t_7[v_5] = var5
+			for _, value7 in list do
+				Properties4[value7] = _UDim
 			end
-			v_1.properties = t_7
-			-- Unknown statement at pc 1: <SetList>
-			t_5.children = i_1
-			table.insert(t_2, t_5)
+			config6.properties = Properties4
+			Children[1] = config6
+			config5.children = Children
+			table.insert(List1, config5)
 		end
 	end
-	return t_2
+	return List1
 end

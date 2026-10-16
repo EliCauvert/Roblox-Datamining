@@ -1,44 +1,44 @@
-﻿local parent = script:FindFirstAncestor("AccountUpgrade").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local avatar = foundationModule.Avatar
-local text = foundationModule.Text
-local view = foundationModule.View
-local avatarSize = foundationModule.Enums.AvatarSize
+﻿local Parent = script:FindFirstAncestor("AccountUpgrade").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local Avatar = FoundationModule.Avatar
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local AvatarSize = FoundationModule.Enums.AvatarSize
 
-return function(p1)
-	-- upvalues: reactModule (ref), view (ref), avatar (ref), avatarSize (ref), text (ref)
-	local displayName = p1.displayName
+return function(Frame) --[[ Line: 20 | Named "AccountUpgradeIdentityHeader" ]]
+	-- upvalues: ReactModule (copy), View (copy), Avatar (copy), AvatarSize (copy), Text (copy)
+	local DisplayName = Frame.displayName
 	
-	if displayName == nil or displayName == "" then
-		displayName = p1.username
+	if DisplayName == nil or DisplayName == "" then
+		DisplayName = Frame.username
 	end
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "col align-x-center gap-medium size-full-0 auto-y",
 		testId = "account-upgrade-identity-header",
-		LayoutOrder = p1.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		Avatar = reactModule.createElement(avatar, {
+		Avatar = ReactModule.createElement(Avatar, {
 			LayoutOrder = 1,
 			testId = "account-upgrade-identity-avatar",
-			userId = p1.userId,
-			size = avatarSize.Pictogram
+			userId = Frame.userId,
+			size = AvatarSize.Pictogram
 		}),
-		Credentials = reactModule.createElement(view, {
+		Credentials = ReactModule.createElement(View, {
 			tag = "col align-x-center gap-xsmall size-full-0 auto-y",
 			LayoutOrder = 2
 		}, {
-			DisplayName = reactModule.createElement(text, {
+			DisplayName = ReactModule.createElement(Text, {
 				tag = "size-full-0 auto-y text-heading-small text-wrap text-align-x-center content-default",
 				LayoutOrder = 1,
 				testId = "account-upgrade-display-name",
-				Text = displayName
+				Text = DisplayName
 			}),
-			Username = reactModule.createElement(text, {
+			Username = ReactModule.createElement(Text, {
 				tag = "size-full-0 auto-y text-label-medium text-wrap text-align-x-center content-muted",
 				LayoutOrder = 2,
 				testId = "account-upgrade-username",
-				Text = `@{p1.username}`
+				Text = `@{Frame.username}`
 			})
 		})
 	})

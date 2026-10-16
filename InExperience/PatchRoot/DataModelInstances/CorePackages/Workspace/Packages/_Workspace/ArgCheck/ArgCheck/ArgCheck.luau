@@ -1,183 +1,184 @@
-﻿local debugLuaArgCheck = game:DefineFastFlag("DebugLuaArgCheck", false)
-local var1 = game:GetService("RunService"):IsStudio()
-local t = {
-	isEnabled = function()
-		-- upvalues: debugLuaArgCheck (ref), var1 (ref)
-		return debugLuaArgCheck or (_G.__TESTEZ_RUNNING_TEST__ or var1)
+﻿local DebugLuaArgCheck = game:DefineFastFlag("DebugLuaArgCheck", false)
+local IsStudio = game:GetService("RunService"):IsStudio()
+local ArgCheckModule = {
+	isEnabled = function() --[[ Line: 7 ]]
+		-- upvalues: DebugLuaArgCheck (copy), IsStudio (copy)
+		return DebugLuaArgCheck or (_G.__TESTEZ_RUNNING_TEST__ or IsStudio)
 	end
 }
 
-local function _(p1, p2)
-	-- upvalues: t (ref)
-	if t.isEnabled() then
+local function _(p1, p2) --[[ Line: 11 | Named "assert_" ]]
+	-- upvalues: ArgCheckModule (copy)
+	if ArgCheckModule.isEnabled() then
 		assert(p1, p2)
 	end
 end
 
-local function stubArgCheckFunction()
+local function stubArgCheckFunction(): boolean --[[ Line: 17 ]]
 	return true
 end
 
-function t.wrap(p1)
-	-- upvalues: t (ref), stubArgCheckFunction (ref)
-	return if t.isEnabled() then p1 else stubArgCheckFunction
+function ArgCheckModule.wrap(p1) --[[ Line: 43 ]]
+	-- upvalues: ArgCheckModule (copy), stubArgCheckFunction (copy)
+	return if ArgCheckModule.isEnabled() then p1 else stubArgCheckFunction
 end
 
-function t.isNonNegativeNumber(p1, p2)
-	-- upvalues: t (ref)
-	local var2 = typeof(p1) == "number" and p1 >= 0
-	local formattedText = string.format("expects %s to be a non-negative number!", p2)
+function ArgCheckModule.isNonNegativeNumber(p1: number, p2): number --[[ Line: 47 ]]
+	-- upvalues: ArgCheckModule (copy)
+	local v1: boolean = typeof(p1) == "number" and p1 >= 0
+	local Formatted = string.format("expects %s to be a non-negative number!", p2)
 	
-	if t.isEnabled() then
-		assert(var2, formattedText)
+	if ArgCheckModule.isEnabled() then
+		assert(v1, Formatted)
 	end
 	return p1
 end
 
-function t.isType(p1, p2, p3)
-	-- upvalues: t (ref)
-	local var2 = typeof(p1) == p2
-	local formattedText = string.format("expects %s to be a %s! it was: %s", p3, p2, typeof(p1))
+function ArgCheckModule.isType(p1, ValueType, p2) --[[ Line: 54 ]]
+	-- upvalues: ArgCheckModule (copy)
+	local IsValueTypeMatch = typeof(p1) == ValueType
+	local Formatted = string.format("expects %s to be a %s! it was: %s", p2, ValueType, (typeof(p1)))
 	
-	if t.isEnabled() then
-		assert(var2, formattedText)
+	if ArgCheckModule.isEnabled() then
+		assert(IsValueTypeMatch, Formatted)
 	end
 	return p1
 end
 
-function t.isInTypes(p1, p2, p3)
-	-- upvalues: t (ref)
-	for i, v in ipairs(p2) do
-		if typeof(p1) == v then
+function ArgCheckModule.isInTypes(p1, List, p2) --[[ Line: 63 ]]
+	-- upvalues: ArgCheckModule (copy)
+	for _, value in ipairs(List) do
+		if typeof(p1) == value then
 			return p1
 		end
 	end
-	local formattedText = string.format("expects %s to be one of expectedTypes! it was: %s", p3, typeof(p1))
+	local Formatted = string.format("expects %s to be one of expectedTypes! it was: %s", p2, (typeof(p1)))
 	
-	if t.isEnabled() then
-		assert(false, formattedText)
+	if ArgCheckModule.isEnabled() then
+		assert(false, Formatted)
 	end
 	return p1
 end
 
-function t.isTypeOrNil(p4, p5, p6)
-	-- upvalues: t (ref)
-	local var2 = if p4 ~= nil then typeof(p4) == p5 else true
-	local formattedText = string.format("expects %s to be a %s! it was: %s", p6, p5, typeof(p4))
+function ArgCheckModule.isTypeOrNil(p3, ValueType, p4) --[[ Line: 75 ]]
+	-- upvalues: ArgCheckModule (copy)
+	local v1: boolean = p3 == nil or typeof(p3) == ValueType
+	local Formatted = string.format("expects %s to be a %s! it was: %s", p4, ValueType, (typeof(p3)))
 	
-	if t.isEnabled() then
-		assert(var2, formattedText)
+	if ArgCheckModule.isEnabled() then
+		assert(v1, Formatted)
 	end
-	return p4
+	return p3
 end
 
-function t.isNotNil(p4, p5)
-	-- upvalues: t (ref)
-	local var2 = p4 ~= nil
-	local formattedText = string.format("expects %s to be not nil!", p5)
+function ArgCheckModule.isNotNil(p3, p4) --[[ Line: 84 ]]
+	-- upvalues: ArgCheckModule (copy)
+	local v1 = p3 ~= nil
+	local Formatted = string.format("expects %s to be not nil!", p4)
 	
-	if t.isEnabled() then
-		assert(var2, formattedText)
+	if ArgCheckModule.isEnabled() then
+		assert(v1, Formatted)
 	end
-	return p4
+	return p3
 end
 
-function t.isNonEmptyString(p4, p5)
-	-- upvalues: t (ref)
-	local var2 = typeof(p4) == "string" and p4 ~= ""
-	local formattedText = string.format("expects %s to be a non-empty string!", p5)
+function ArgCheckModule.isNonEmptyString(p3, p4) --[[ Line: 90 ]]
+	-- upvalues: ArgCheckModule (copy)
+	local v1: boolean = typeof(p3) == "string" and p3 ~= ""
+	local Formatted = string.format("expects %s to be a non-empty string!", p4)
 	
-	if t.isEnabled() then
-		assert(var2, formattedText)
+	if ArgCheckModule.isEnabled() then
+		assert(v1, Formatted)
 	end
-	return p4
+	return p3
 end
 
-function t.isEqual(p4, p5, p6)
-	-- upvalues: t (ref)
-	local var2 = p4 == p5
-	local formattedText = string.format("expects %s to equal %s! it was: %s", p6, tostring(p5), tostring(p4))
+function ArgCheckModule.isEqual(p3, p4, p5) --[[ Line: 96 ]]
+	-- upvalues: ArgCheckModule (copy)
+	local v1 = p3 == p4
+	local Formatted = string.format("expects %s to equal %s! it was: %s", p5, tostring(p4), (tostring(p3)))
 	
-	if t.isEnabled() then
-		assert(var2, formattedText)
+	if ArgCheckModule.isEnabled() then
+		assert(v1, Formatted)
 	end
-	return p4
+	return p3
 end
 
-function t.representsInteger(p4, p5)
-	-- upvalues: t (ref)
-	local var2 = tonumber(p4)
-	local var3 = var2 ~= nil
-	local formattedText = string.format("expects %s to represent a number!", p5)
+function ArgCheckModule.representsInteger(p3, p4) --[[ Line: 106 ]]
+	-- upvalues: ArgCheckModule (copy)
+	local Number: number? = tonumber(p3)
+	local HasNumber = Number ~= nil
+	local Formatted = string.format("expects %s to represent a number!", p4)
 	
-	if t.isEnabled() then
-		assert(var3, formattedText)
+	if ArgCheckModule.isEnabled() then
+		assert(HasNumber, Formatted)
 	end
-	local var4 = var2 % 1 == 0
-	local formattedText_1 = string.format("expects %s to represent an integer!", p5)
+	local IsNumberMatch = Number % 1 == 0
+	local Formatted1 = string.format("expects %s to represent an integer!", p4)
 	
-	if t.isEnabled() then
-		assert(var4, formattedText_1)
+	if ArgCheckModule.isEnabled() then
+		assert(IsNumberMatch, Formatted1)
 	end
-	return p4
+	return p3
 end
 
-function t.matchesInterface(p4, p5, p6, p7)
-	-- upvalues: t (ref)
-	if t.isEnabled() then
-		local t_1 = {
-			integer = t.representsInteger,
-			nonEmptyString = t.isNonEmptyString
+function ArgCheckModule.matchesInterface(List, Entry, Text, p3) --[[ Line: 137 ]]
+	-- upvalues: ArgCheckModule (copy)
+	if ArgCheckModule.isEnabled() then
+		local config = {
+			integer = ArgCheckModule.representsInteger,
+			nonEmptyString = ArgCheckModule.isNonEmptyString
 		}
 		
-		if type(p5) == "string" then
-			if p7 and p7[p5] then
-				t.matchesInterface(p4, p7[p5], p6, p7)
-				
-				return p4
-			end
-			local var2 = t_1[p5]
+		if type(Entry) ~= "string" then
+			ArgCheckModule.isType(List, "table", Text)
 			
-			if type(var2) == "function" then
-				var2(p4, p6)
-				
-				return p4
-			end
-			t.isType(p4, p5, p6)
-			
-			return p4
-		else
-			t.isType(p4, "table", p6)
-			
-			if p5[1] == nil then
-				for i, v in pairs(p5) do
-					if string.sub(i, 1, 1) ~= "_" then
-						local text = p6 .. "." .. i
-						local var3 = p4[i]
+			if Entry[1] == nil then
+				for i1, value1 in pairs(Entry) do
+					if string.sub(i1, 1, 1) ~= "_" then
+						local Text1 = Text .. "." .. i1
+						local Entry1 = List[i1]
 						
-						if p5._required and p5._required[i] or var3 ~= nil then
-							t.matchesInterface(var3, v, text, p7)
+						if Entry._required and Entry._required[i1] or Entry1 ~= nil then
+							ArgCheckModule.matchesInterface(Entry1, value1, Text1, p3)
 						end
 					end
 				end
 			else
-				for i, v in ipairs(p4) do
-					t.matchesInterface(v, p5[1], p6 .. "[" .. i .. "]", p7)
+				for i, value in ipairs(List) do
+					ArgCheckModule.matchesInterface(value, Entry[1], Text .. "[" .. i .. "]", p3)
 				end
-				return p4
+				return List
+			end
+		else
+			if p3 and p3[Entry] then
+				ArgCheckModule.matchesInterface(List, p3[Entry], Text, p3)
+				
+				return List
+			end
+			local Callback: (any, any) -> () = config[Entry]
+			
+			if type(Callback) == "function" then
+				Callback(List, Text)
+				
+				return List
+			else
+				ArgCheckModule.isType(List, Entry, Text)
+				
+				return List
 			end
 		end
 	end
-	return p4
+	return List
 end
 
-function t.assert(...)
-	-- upvalues: t (ref)
-	local var4, var5 = ...
+function ArgCheckModule.assert(...) --[[ Line: 179 ]]
+	-- upvalues: ArgCheckModule (copy)
+	local v1, v2 = ...
 	
-	if t.isEnabled() then
-		assert(var4, var5)
+	if ArgCheckModule.isEnabled() then
+		assert(v1, v2)
 	end
 end
 
-return t
+return ArgCheckModule

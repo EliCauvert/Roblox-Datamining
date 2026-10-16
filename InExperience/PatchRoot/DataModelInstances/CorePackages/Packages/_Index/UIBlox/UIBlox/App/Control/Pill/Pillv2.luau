@@ -1,28 +1,28 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local parent_2 = parent_1.Parent
-local core = parent_1.Core
-local cryoModule = require(parent_2.Cryo)
-local reactModule = require(parent_2.React)
-local foundationModule = require(parent_2.Foundation)
-local imagesModule = require(parent.ImageSet.Images)
-local iconSizeModule = require(parent.ImageSet.Enum.IconSize)
-local getIconSizeModule = require(parent.ImageSet.getIconSize)
-local useSelectionCursorModule = require(parent.SelectionImage.useSelectionCursor)
-local cursorKindModule = require(parent.SelectionImage.CursorKind)
-local useStyleModule = require(core.Style.useStyle)
-local controlStateModule = require(core.Control.Enum.ControlState)
-local interactableModule = require(core.Control.Interactable)
-local useControlStateModule = require(core.Control.useControlState)
-local getContentStyleModule = require(core.Button.getContentStyle)
-local genericTextLabelModule = require(core.Text.GenericTextLabel.GenericTextLabel)
-local imageSetComponentModule = require(parent_1.Core.ImageSet.ImageSetComponent)
-local skeleton = foundationModule.Skeleton
-local radius = foundationModule.Enums.Radius
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local getTextSizeModule = require(parent_1.Core.Text.GetTextSize)
-local getFontFromFontStyleModule = require(parent_1.Core.Text.GetFontFromFontStyle)
-local t = {
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local Parent2 = Parent1.Parent
+local Core = Parent1.Core
+local CryoModule = require(Parent2.Cryo)
+local ReactModule = require(Parent2.React)
+local FoundationModule = require(Parent2.Foundation)
+local ImagesModule = require(Parent.ImageSet.Images)
+local IconSizeModule = require(Parent.ImageSet.Enum.IconSize)
+local GetIconSizeModule = require(Parent.ImageSet.getIconSize)
+local UseSelectionCursorModule = require(Parent.SelectionImage.useSelectionCursor)
+local CursorKindModule = require(Parent.SelectionImage.CursorKind)
+local UseStyleModule = require(Core.Style.useStyle)
+local ControlStateModule = require(Core.Control.Enum.ControlState)
+local InteractableModule = require(Core.Control.Interactable)
+local UseControlStateModule = require(Core.Control.useControlState)
+local GetContentStyleModule = require(Core.Button.getContentStyle)
+local GenericTextLabelModule = require(Core.Text.GenericTextLabel.GenericTextLabel)
+local ImageSetComponentModule = require(Parent1.Core.ImageSet.ImageSetComponent)
+local Skeleton = FoundationModule.Skeleton
+local Radius = FoundationModule.Enums.Radius
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local GetTextSizeModule = require(Parent1.Core.Text.GetTextSize)
+local GetFontFromFontStyleModule = require(Parent1.Core.Text.GetFontFromFontStyle)
+local config = {
 	hasBorder = false,
 	isDisabled = false,
 	isLoading = false,
@@ -30,151 +30,155 @@ local t = {
 	layoutOrder = 1,
 	text = ""
 }
-local t_1 = {
-	[controlStateModule.Default] = "SystemPrimaryContent",
-	[controlStateModule.Hover] = "SystemPrimaryContent"
+local config1 = {
+	[ControlStateModule.Default] = "SystemPrimaryContent",
+	[ControlStateModule.Hover] = "SystemPrimaryContent"
 }
-local t_2 = {
-	[controlStateModule.Default] = "TextDefault",
-	[controlStateModule.Hover] = "TextEmphasis"
+local config2 = {
+	[ControlStateModule.Default] = "TextDefault",
+	[ControlStateModule.Hover] = "TextEmphasis"
 }
-local t_3 = {
-	[controlStateModule.Default] = "SystemPrimaryContent",
-	[controlStateModule.Hover] = "SystemPrimaryContent"
+local config3 = {
+	[ControlStateModule.Default] = "SystemPrimaryContent",
+	[ControlStateModule.Hover] = "SystemPrimaryContent"
 }
-local t_4 = {
-	[controlStateModule.Default] = "BackgroundUIDefault",
-	[controlStateModule.Hover] = "BackgroundUIDefault"
+local config4 = {
+	[ControlStateModule.Default] = "BackgroundUIDefault",
+	[ControlStateModule.Hover] = "BackgroundUIDefault"
 }
-local t_5 = {
-	[controlStateModule.Default] = "SystemPrimaryDefault",
-	[controlStateModule.Hover] = "SystemPrimaryOnHover"
+local config5 = {
+	[ControlStateModule.Default] = "SystemPrimaryDefault",
+	[ControlStateModule.Hover] = "SystemPrimaryOnHover"
 }
-local t_6 = {
-	[controlStateModule.Default] = "BackgroundOnHover",
-	[controlStateModule.Hover] = "BackgroundOnHover"
+local config6 = {
+	[ControlStateModule.Default] = "BackgroundOnHover",
+	[ControlStateModule.Hover] = "BackgroundOnHover"
 }
 
-local function Pillv2(p1)
-	-- upvalues: cryoModule (ref), t (ref), useControlStateModule (ref), reactModule (ref), useStyleModule (ref), useSelectionCursorModule (ref), cursorKindModule (ref), t_3 (ref), t_2 (ref), t_5 (ref), t_4 (ref), getContentStyleModule (ref), t_1 (ref), t_6 (ref), getIconSizeModule (ref), iconSizeModule (ref), getTextSizeModule (ref), foundationFontFaceMigration (ref), getFontFromFontStyleModule (ref), skeleton (ref), radius (ref), controlStateModule (ref), interactableModule (ref), genericTextLabelModule (ref), imageSetComponentModule (ref), imagesModule (ref)
-	local var1 = cryoModule.Dictionary.join(t, p1)
-	local text = var1.text
-	local var2, var3 = useControlStateModule()
-	local var4 = reactModule.useCallback(function(p2, p3)
-		-- upvalues: var1 (ref), var3 (ref)
-		if var1.onStateChanged then
-			var1.onStateChanged(p2, p3)
+local function Pillv2(p1) --[[ Line: 115 ]]
+	-- upvalues: CryoModule (copy), config (copy), UseControlStateModule (copy), ReactModule (copy), UseStyleModule (copy), UseSelectionCursorModule (copy), CursorKindModule (copy), config3 (copy), config2 (copy), config5 (copy), config4 (copy), GetContentStyleModule (copy), config1 (copy), config6 (copy), GetIconSizeModule (copy), IconSizeModule (copy), GetTextSizeModule (copy), FoundationFontFaceMigration (copy), GetFontFromFontStyleModule (copy), Skeleton (copy), Radius (copy), ControlStateModule (copy), InteractableModule (copy), GenericTextLabelModule (copy), ImageSetComponentModule (copy), ImagesModule (copy)
+	local JoinResult = CryoModule.Dictionary.join(config, p1)
+	local Text: string = JoinResult.text
+	local UseControlStateModuleResult, UseControlStateModuleResult2 = UseControlStateModule()
+	local UseResult = ReactModule.useCallback(function(p2, p3) --[[ Line: 120 ]]
+		-- upvalues: JoinResult (copy), UseControlStateModuleResult2 (copy)
+		if JoinResult.onStateChanged then
+			JoinResult.onStateChanged(p2, p3)
 		end
-		var3(p2, p3)
-	end, { var1.onStateChanged })
-	local var5 = useStyleModule()
-	local font = var5.Font
-	local var6 = useSelectionCursorModule(cursorKindModule.SmallPill)
-	local var7 = if var1.isSelected then t_3 else t_2
-	local var8 = if var1.isSelected then t_5 else t_4
-	local var9 = getContentStyleModule(t_1, var2, var5)
-	local var10 = getContentStyleModule(var7, var2, var5)
-	local var11 = getContentStyleModule(var8, var2, var5)
-	local var12 = getContentStyleModule(t_6, var2, var5)
-	local var13 = getIconSizeModule(iconSizeModule.Small)
-	local var14 = font.CaptionHeader.RelativeSize * font.BaseSize
-	local x = getTextSizeModule(text, var14, if foundationFontFaceMigration then getFontFromFontStyleModule(font.CaptionHeader) else font.CaptionHeader.Font, Vector2.new(10000, 10000)).X
-	local var15 = x + 24
-	local var16 = 216
+		UseControlStateModuleResult2(p2, p3)
+	end, { JoinResult.onStateChanged })
+	local UseStyleModuleResult = UseStyleModule()
+	local UseStyleModuleResultFont = UseStyleModuleResult.Font
+	local UseSelectionCursorModuleResult = UseSelectionCursorModule(CursorKindModule.SmallPill)
+	local ContentStyleModule = GetContentStyleModule(config1, UseControlStateModuleResult, UseStyleModuleResult)
+	local ContentStyleModule1 = GetContentStyleModule(if JoinResult.isSelected then config3 else config2, UseControlStateModuleResult, UseStyleModuleResult)
+	local ContentStyleModule2 = GetContentStyleModule(if JoinResult.isSelected then config5 else config4, UseControlStateModuleResult, UseStyleModuleResult)
+	local ContentStyleModule3 = GetContentStyleModule(config6, UseControlStateModuleResult, UseStyleModuleResult)
+	local IconSizeModule1: number = GetIconSizeModule(IconSizeModule.Small)
+	local ScaledRelativeSize = UseStyleModuleResultFont.CaptionHeader.RelativeSize * UseStyleModuleResultFont.BaseSize
+	local X: number = GetTextSizeModule(Text, ScaledRelativeSize, if FoundationFontFaceMigration then GetFontFromFontStyleModule(UseStyleModuleResultFont.CaptionHeader) else UseStyleModuleResultFont.CaptionHeader.Font, Vector2.new(10000, 10000)).X
+	local XOffset = X + 24
+	local XOffset1 = 216
 	
-	if var1.isSelected then
-		local var17 = 4 + var13
-		var15 += var17
-		var16 -= var17
+	if JoinResult.isSelected then
+		local NewIconSizeModule = 4 + IconSizeModule1
+		XOffset += NewIconSizeModule
+		XOffset1 -= NewIconSizeModule
 	end
-	return if var1.isLoading then reactModule.createElement(skeleton, {
-		LayoutOrder = var1.layoutOrder,
-		Size = UDim2.fromOffset(var15, 28),
-		radius = radius.Circle
-	}) else reactModule.createElement(interactableModule, {
-		Size = UDim2.new(0, var15, 0, 28),
-		BackgroundColor3 = var11.Color,
-		BackgroundTransparency = var11.Transparency,
-		ImageColor3 = var11.Color,
-		ImageTransparency = var11.Transparency,
-		AutoButtonColor = false,
-		BorderSizePixel = 0,
-		LayoutOrder = var1.layoutOrder,
-		ScaleType = Enum.ScaleType.Slice,
-		isDisabled = var1.isDisabled,
-		SelectionImageObject = var6,
-		[reactModule.Event.Activated] = if not var1.isLoading then var1.onActivated else nil,
-		onStateChanged = var4,
-		ref = var1.controlRef,
-		NextSelectionLeft = var1.NextSelectionLeft,
-		NextSelectionRight = var1.NextSelectionRight,
-		NextSelectionUp = var1.NextSelectionUp,
-		NextSelectionDown = var1.NextSelectionDown
-	}, {
-		UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) }),
-		UISizeConstraint = reactModule.createElement("UISizeConstraint", {
-			MinSize = Vector2.new(28, 28),
-			MaxSize = Vector2.new(240, 28)
-		}),
-		BackgroundLayer2 = reactModule.createElement("Frame", {
+	if JoinResult.isLoading then
+		return ReactModule.createElement(Skeleton, {
+			LayoutOrder = JoinResult.layoutOrder,
+			Size = UDim2.fromOffset(XOffset, 28),
+			radius = Radius.Circle
+		})
+	else
+		local IsUseControlStateModuleResultMatch: boolean = not JoinResult.isSelected and UseControlStateModuleResult == ControlStateModule.Hover
+		
+		return ReactModule.createElement(InteractableModule, {
+			Size = UDim2.new(0, XOffset, 0, 28),
+			BackgroundColor3 = ContentStyleModule2.Color,
+			BackgroundTransparency = ContentStyleModule2.Transparency,
+			ImageColor3 = ContentStyleModule2.Color,
+			ImageTransparency = ContentStyleModule2.Transparency,
+			AutoButtonColor = false,
 			BorderSizePixel = 0,
-			Size = UDim2.fromScale(1, 1),
-			BackgroundColor3 = var12.Color,
-			BackgroundTransparency = if not var1.isSelected and var2 == controlStateModule.Hover then var12.Transparency else 1
+			LayoutOrder = JoinResult.layoutOrder,
+			ScaleType = Enum.ScaleType.Slice,
+			isDisabled = JoinResult.isDisabled,
+			SelectionImageObject = UseSelectionCursorModuleResult,
+			[ReactModule.Event.Activated] = if JoinResult.isLoading then nil else JoinResult.onActivated,
+			onStateChanged = UseResult,
+			ref = JoinResult.controlRef,
+			NextSelectionLeft = JoinResult.NextSelectionLeft,
+			NextSelectionRight = JoinResult.NextSelectionRight,
+			NextSelectionUp = JoinResult.NextSelectionUp,
+			NextSelectionDown = JoinResult.NextSelectionDown
 		}, {
-			UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) }),
-			UIStroke = if var1.hasBorder then reactModule.createElement("UIStroke", {
-				Thickness = 1,
-				Color = var5.Theme.Divider.Color,
-				Transparency = var5.Theme.Divider.Transparency
-			}) else nil,
-			Content = reactModule.createElement("Frame", {
-				ClipsDescendants = true,
-				BackgroundTransparency = 1,
-				AnchorPoint = Vector2.new(0.5, 0.5),
-				Position = UDim2.fromScale(0.5, 0.5),
-				Size = UDim2.new(0, x + 4 + var13, 1, 0)
+			UICorner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) }),
+			UISizeConstraint = ReactModule.createElement("UISizeConstraint", {
+				MinSize = Vector2.new(28, 28),
+				MaxSize = Vector2.new(240, 28)
+			}),
+			BackgroundLayer2 = ReactModule.createElement("Frame", {
+				BorderSizePixel = 0,
+				Size = UDim2.fromScale(1, 1),
+				BackgroundColor3 = ContentStyleModule3.Color,
+				BackgroundTransparency = if IsUseControlStateModuleResultMatch then ContentStyleModule3.Transparency else 1
 			}, {
-				UIListLayout = reactModule.createElement("UIListLayout", {
-					Padding = UDim.new(0, 4),
-					FillDirection = Enum.FillDirection.Horizontal,
-					SortOrder = Enum.SortOrder.LayoutOrder,
-					VerticalAlignment = Enum.VerticalAlignment.Center,
-					HorizontalAlignment = Enum.HorizontalAlignment.Center
-				}),
-				TextArea = string.len(text) > 0 and reactModule.createElement("Frame", {
-					LayoutOrder = 1,
-					BackgroundTransparency = 1,
-					Size = UDim2.fromOffset(x, var14)
-				}, {
-					PillText = reactModule.createElement(genericTextLabelModule, {
-						BackgroundTransparency = 1,
-						Text = text,
-						fontStyle = font.CaptionHeader,
-						colorStyle = var10,
-						TextTruncate = Enum.TextTruncate.AtEnd,
-						Size = UDim2.fromOffset(var16, var14),
-						TextXAlignment = Enum.TextXAlignment.Left,
-						TextYAlignment = Enum.TextYAlignment.Center
-					}),
-					reactModule.createElement("UISizeConstraint", { MaxSize = Vector2.new(var16, 28) })
-				}),
-				CloseIcon = var1.isSelected and reactModule.createElement(imageSetComponentModule.Label, {
-					LayoutOrder = 2,
+				UICorner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) }),
+				UIStroke = if JoinResult.hasBorder then ReactModule.createElement("UIStroke", {
+					Thickness = 1,
+					Color = UseStyleModuleResult.Theme.Divider.Color,
+					Transparency = UseStyleModuleResult.Theme.Divider.Transparency
+				}) else nil,
+				Content = ReactModule.createElement("Frame", {
+					ClipsDescendants = true,
 					BackgroundTransparency = 1,
 					AnchorPoint = Vector2.new(0.5, 0.5),
-					Size = UDim2.fromOffset(var13, var13),
-					Image = imagesModule["icons/navigation/close_small"],
-					ImageColor3 = var9.Color,
-					ImageTransparency = var9.Transparency
-				}),
-				UISizeConstraint = reactModule.createElement("UISizeConstraint", { MaxSize = Vector2.new(216, 28) })
+					Position = UDim2.fromScale(0.5, 0.5),
+					Size = UDim2.new(0, X + 4 + IconSizeModule1, 1, 0)
+				}, {
+					UIListLayout = ReactModule.createElement("UIListLayout", {
+						Padding = UDim.new(0, 4),
+						FillDirection = Enum.FillDirection.Horizontal,
+						SortOrder = Enum.SortOrder.LayoutOrder,
+						VerticalAlignment = Enum.VerticalAlignment.Center,
+						HorizontalAlignment = Enum.HorizontalAlignment.Center
+					}),
+					TextArea = string.len(Text) > 0 and ReactModule.createElement("Frame", {
+						LayoutOrder = 1,
+						BackgroundTransparency = 1,
+						Size = UDim2.fromOffset(X, ScaledRelativeSize)
+					}, {
+						PillText = ReactModule.createElement(GenericTextLabelModule, {
+							BackgroundTransparency = 1,
+							Text = Text,
+							fontStyle = UseStyleModuleResultFont.CaptionHeader,
+							colorStyle = ContentStyleModule1,
+							TextTruncate = Enum.TextTruncate.AtEnd,
+							Size = UDim2.fromOffset(XOffset1, ScaledRelativeSize),
+							TextXAlignment = Enum.TextXAlignment.Left,
+							TextYAlignment = Enum.TextYAlignment.Center
+						}),
+						ReactModule.createElement("UISizeConstraint", { MaxSize = Vector2.new(XOffset1, 28) })
+					}),
+					CloseIcon = JoinResult.isSelected and ReactModule.createElement(ImageSetComponentModule.Label, {
+						LayoutOrder = 2,
+						BackgroundTransparency = 1,
+						AnchorPoint = Vector2.new(0.5, 0.5),
+						Size = UDim2.fromOffset(IconSizeModule1, IconSizeModule1),
+						Image = ImagesModule["icons/navigation/close_small"],
+						ImageColor3 = ContentStyleModule.Color,
+						ImageTransparency = ContentStyleModule.Transparency
+					}),
+					UISizeConstraint = ReactModule.createElement("UISizeConstraint", { MaxSize = Vector2.new(216, 28) })
+				})
 			})
 		})
-	})
+	end
 end
 
-return reactModule.forwardRef(function(p1, p2)
-	-- upvalues: reactModule (ref), Pillv2 (ref), cryoModule (ref)
-	return reactModule.createElement(Pillv2, cryoModule.Dictionary.join(p1, { controlRef = p2 }))
+return ReactModule.forwardRef(function(p1, ControlRef) --[[ Line: 263 ]]
+	-- upvalues: ReactModule (copy), Pillv2 (copy), CryoModule (copy)
+	return ReactModule.createElement(Pillv2, CryoModule.Dictionary.join(p1, { controlRef = ControlRef }))
 end)

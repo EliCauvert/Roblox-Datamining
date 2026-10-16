@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent._Workspace.DataHydration.DataHydration.PrivatePlaytesters.IsPrivatePlaytester)
+﻿return (require(script.Parent.Parent._Workspace.DataHydration.DataHydration.PrivatePlaytesters.IsPrivatePlaytester))

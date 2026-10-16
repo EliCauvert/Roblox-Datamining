@@ -1,9 +1,9 @@
-﻿local contactImporterModalInfoModule = require(script.Parent.contactImporterModalInfo)
+﻿local ContactImporterModalInfoModule = require(script.Parent.contactImporterModalInfo)
 
-return function(p1)
-	-- upvalues: contactImporterModalInfoModule (ref)
-	local appStorageService = p1.appStorageService
-	local userid = p1.userid
+return function(p1) --[[ Line: 14 ]]
+	-- upvalues: ContactImporterModalInfoModule (copy)
+	local AppStorageService = p1.appStorageService
+	local Userid = p1.userid
 	
-	return if contactImporterModalInfoModule:isUserOptedInLocalStorage(appStorageService, userid) then false else contactImporterModalInfoModule:shouldUserSeeModalPotentiallyAgain(appStorageService, userid)
+	return not ContactImporterModalInfoModule:isUserOptedInLocalStorage(AppStorageService, Userid) and ContactImporterModalInfoModule:shouldUserSeeModalPotentiallyAgain(AppStorageService, Userid)
 end

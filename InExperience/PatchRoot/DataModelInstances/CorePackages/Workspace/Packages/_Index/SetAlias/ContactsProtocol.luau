@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.ContactsProtocol.ContactsProtocol)
+﻿return (require(script.Parent.Parent.Parent._Index.ContactsProtocol.ContactsProtocol))

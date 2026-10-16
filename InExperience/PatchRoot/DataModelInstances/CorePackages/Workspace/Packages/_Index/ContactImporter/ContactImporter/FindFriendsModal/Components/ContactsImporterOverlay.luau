@@ -1,1 +1,1 @@
-﻿return require(script.ContactsImporterOverlayContainer)
+﻿return (require(script.ContactsImporterOverlayContainer))

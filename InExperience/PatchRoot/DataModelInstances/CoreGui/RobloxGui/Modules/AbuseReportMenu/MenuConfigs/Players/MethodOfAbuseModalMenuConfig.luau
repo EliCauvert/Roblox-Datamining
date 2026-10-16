@@ -1,44 +1,42 @@
-﻿local abuseReportMenu = script:FindFirstAncestor("AbuseReportMenu")
-local coreGuiService = game:GetService("CoreGui")
-local _ = require(abuseReportMenu.Components.Types)
-local corePackagesService = game:GetService("CorePackages")
-local constantsModule = require(abuseReportMenu.Components.Constants)
-local getAvailableMethodsOfAbuseModule = require(abuseReportMenu.Utility.getAvailableMethodsOfAbuse)
-local tnSIXPWrapperModule = require(abuseReportMenu.IXP.TnSIXPWrapper)
-local default = require(coreGuiService.RobloxGui.Modules.VoiceChat.VoiceChatServiceManager).default
-local cryoModule = require(corePackagesService.Packages.Cryo)
+﻿local AbuseReportMenu = script:FindFirstAncestor("AbuseReportMenu")
+local _ = require(AbuseReportMenu.Components.Types)
+local ConstantsModule = require(AbuseReportMenu.Components.Constants)
+local GetAvailableMethodsOfAbuseModule = require(AbuseReportMenu.Utility.getAvailableMethodsOfAbuse)
+local TnSIXPWrapperModule = require(AbuseReportMenu.IXP.TnSIXPWrapper)
+local Default = require(game:GetService("CoreGui").RobloxGui.Modules.VoiceChat.VoiceChatServiceManager).default
+local CryoModule = require(game:GetService("CorePackages").Packages.Cryo)
 
 return {
 	componentType = "modalSelector",
 	fieldLabel = "MethodOfAbuse",
 	componentName = "MethodOfAbuse",
-	getIsVisible = function(p1)
-		-- upvalues: tnSIXPWrapperModule (ref)
-		return p1.isVoiceEnabled or tnSIXPWrapperModule.getReportAnythingAvatarEnabled()
+	getIsVisible = function(p1) --[[ Line: 15 ]]
+		-- upvalues: TnSIXPWrapperModule (copy)
+		return p1.isVoiceEnabled or TnSIXPWrapperModule.getReportAnythingAvatarEnabled()
 	end,
-	getMenuItems = function(p1)
-		-- upvalues: cryoModule (ref), default (ref), getAvailableMethodsOfAbuseModule (ref), tnSIXPWrapperModule (ref)
-		return getAvailableMethodsOfAbuseModule(p1.isVoiceEnabled and not cryoModule.isEmpty(default:getRecentUsersInteractionData()), tnSIXPWrapperModule.getReportAnythingAvatarEnabled())
+	getMenuItems = function(p1) --[[ Line: 18 ]]
+		-- upvalues: CryoModule (copy), Default (copy), GetAvailableMethodsOfAbuseModule (copy), TnSIXPWrapperModule (copy)
+		return GetAvailableMethodsOfAbuseModule(p1.isVoiceEnabled and not CryoModule.isEmpty(Default:getRecentUsersInteractionData()), TnSIXPWrapperModule.getReportAnythingAvatarEnabled())
 	end,
-	getSelectedValue = function(p1)
+	getSelectedValue = function(p1) --[[ Line: 24 ]]
 		return p1.methodOfAbuse
 	end,
-	onUpdateSelectedOption = function(p1, p2, p3, p4)
-		-- upvalues: constantsModule (ref)
-		p3({
-			type = constantsModule.PlayerMenuActions.UpdateMethodOfAbuse,
+	onUpdateSelectedOption = function(p1, p2, Callback: (any) -> (), p3) --[[ Line: 27 ]]
+		-- upvalues: ConstantsModule (copy)
+		Callback({
+			type = ConstantsModule.PlayerMenuActions.UpdateMethodOfAbuse,
 			methodOfAbuse = p1.identifier
 		})
 		
 		if p1.identifier ~= p2.methodOfAbuse then
-			p4.reportAnythingDispatch({
-				type = constantsModule.ReportAnythingActions.ClearAnnotationFlowProperties
+			p3.reportAnythingDispatch({
+				type = ConstantsModule.ReportAnythingActions.ClearAnnotationFlowProperties
 			})
-			p4.analyticsDispatch({
-				type = constantsModule.AnalyticsActions.IncrementTypeofabuseChanged
+			p3.analyticsDispatch({
+				type = ConstantsModule.AnalyticsActions.IncrementTypeofabuseChanged
 			})
-			p4.analyticsDispatch({
-				type = constantsModule.AnalyticsActions.SetTypeOfAbuseSelection,
+			p3.analyticsDispatch({
+				type = ConstantsModule.AnalyticsActions.SetTypeOfAbuseSelection,
 				selection = p1.identifier
 			})
 		end

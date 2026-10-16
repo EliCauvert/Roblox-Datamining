@@ -1,27 +1,27 @@
-﻿local virtualEvents = script:FindFirstAncestor("VirtualEvents")
-local _ = require(virtualEvents.Parent.GraphQLServer)
-local constantsModule = require(virtualEvents.constants)
-local _ = require(virtualEvents.Parent.AppBlox)
-local fFlagLuaAppLimitEventThumbnailToOneModule = require(virtualEvents.Flags.FFlagLuaAppLimitEventThumbnailToOne)
+﻿local VirtualEvents = script:FindFirstAncestor("VirtualEvents")
+local _ = require(VirtualEvents.Parent.GraphQLServer)
+local ConstantsModule = require(VirtualEvents.constants)
+local _ = require(VirtualEvents.Parent.AppBlox)
+local FFlagLuaAppLimitEventThumbnailToOneModule = require(VirtualEvents.Flags.FFlagLuaAppLimitEventThumbnailToOne)
 
-return function(p1)
-	-- upvalues: fFlagLuaAppLimitEventThumbnailToOneModule (ref), constantsModule (ref)
-	local t = {}
+return function(List) --[[ Line: 21 | Named "getGalleryItems" ]]
+	-- upvalues: FFlagLuaAppLimitEventThumbnailToOneModule (copy), ConstantsModule (copy)
+	local List1 = {}
 	
-	if p1 then
-		for i, v in p1 do
-			if v.assetType == "Image" and v.imageId then
-				table.insert(t, {
+	if List then
+		for _, value in List do
+			if value.assetType == "Image" and value.imageId then
+				table.insert(List1, {
 					isYouTubeVideo = false,
-					imageId = ("rbxassetid://%s"):format(v.imageId)
+					imageId = ("rbxassetid://%s"):format(value.imageId)
 				})
 			end
 		end
 	end
-	return if #t > 0 then if fFlagLuaAppLimitEventThumbnailToOneModule then { t[1] } else t else {
+	return if #List1 > 0 then if FFlagLuaAppLimitEventThumbnailToOneModule then { List1[1] } else List1 else {
 		{
 			isYouTubeVideo = false,
-			imageId = constantsModule.DEFAULT_EVENT_THUMBNAIL
+			imageId = ConstantsModule.DEFAULT_EVENT_THUMBNAIL
 		}
 	}
 end

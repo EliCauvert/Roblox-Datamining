@@ -1,1 +1,3 @@
-﻿return game:DefineFastFlag("AXInventoryIncludeUnavailableItems", false) and require(script.Parent.FFlagAXModeratedItemsFlow)
+﻿local FFlagAXModeratedItemsFlowModule = require(script.Parent.FFlagAXModeratedItemsFlow)
+
+return game:DefineFastFlag("AXInventoryIncludeUnavailableItems", false) and FFlagAXModeratedItemsFlowModule

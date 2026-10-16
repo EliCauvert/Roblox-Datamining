@@ -1,88 +1,88 @@
-﻿local signalsModule = require(script:FindFirstAncestor("System").Parent.Signals)
-local createSignal = signalsModule.createSignal
-local createEffect = signalsModule.createEffect
-local t = {}
-t.__index = t
+﻿local SignalsModule = require(script:FindFirstAncestor("System").Parent.Signals)
+local CreateSignalFunction = SignalsModule.createSignal
+local CreateEffectFunction = SignalsModule.createEffect
+local LifecycleModule = {}
+LifecycleModule.__index = LifecycleModule
 
-function t.new(p1)
-	-- upvalues: t (ref), createSignal (ref), createEffect (ref)
-	local tbl = setmetatable({}, t)
-	local defaultVisible = false
-	local defaultEnabled = false
+function LifecycleModule.new(p1) --[[ Line: 36 ]]
+	-- upvalues: LifecycleModule (copy), CreateSignalFunction (copy), CreateEffectFunction (copy)
+	local self = setmetatable({}, LifecycleModule)
+	local DefaultVisible = false
+	local DefaultEnabled = false
 	
 	if p1 then
-		defaultVisible = p1.defaultVisible
-		defaultEnabled = p1.defaultEnabled
+		DefaultVisible = p1.defaultVisible
+		DefaultEnabled = p1.defaultEnabled
 	end
-	local var1, var2 = createSignal(defaultVisible)
-	local var3, var4 = createSignal(defaultEnabled)
-	tbl.getVisible = var1
-	tbl.setVisible = var2
-	tbl.getEnabled = var3
-	tbl.setEnabled = var4
-	local t_1 = {}
-	local t_2 = {}
-	local var5 = createEffect(function(p2)
-		-- upvalues: var1 (ref), tbl (ref), t_1 (ref), var2 (ref)
-		local var6 = var1(p2)
+	local Signal, Signal2 = CreateSignalFunction(DefaultVisible)
+	local Signal1, Signal2_1 = CreateSignalFunction(DefaultEnabled)
+	self.getVisible = Signal
+	self.setVisible = Signal2
+	self.getEnabled = Signal1
+	self.setEnabled = Signal2_1
+	local List = {}
+	local List1 = {}
+	local Effect = CreateEffectFunction(function(p2) --[[ Line: 58 ]]
+		-- upvalues: Signal (copy), self (copy), List (copy), Signal2 (copy)
+		local SignalResult = Signal(p2)
 		
-		if tbl.getEnabled(false) then
-			for i, v in t_1 do
-				local var7 = v(var6)
+		if self.getEnabled(false) then
+			local v1 = nil
+			for _, value in List do
+				v1 = value(SignalResult)
 				
-				if type(var7) == "boolean" and var7 ~= var6 then
-					var2(var7)
-					
-					return
+				if type(v1) == "boolean" and v1 ~= SignalResult then
+					Signal2(v1)
+					break
 				end
 			end
 		end
 	end)
-	local var8 = createEffect(function(p3)
-		-- upvalues: var3 (ref), t_2 (ref)
-		local var9 = var3(p3)
+	local Effect1 = CreateEffectFunction(function(p3) --[[ Line: 71 ]]
+		-- upvalues: Signal1 (copy), List1 (copy)
+		local SignalResult = Signal1(p3)
 		
-		for i, v in t_2 do
-			v(var9)
+		for _, value in List1 do
+			value(SignalResult)
 		end
 	end)
 	
-	function tbl.dispose(_)
-		-- upvalues: var5 (ref), var8 (ref)
-		var5()
-		var8()
+	function self:dispose() --[[ Line: 78 ]]
+		-- upvalues: Effect (copy), Effect1 (copy)
+		Effect()
+		Effect1()
 	end
 	
-	function tbl.onVisibilityChanged(_, p4)
-		-- upvalues: t_1 (ref)
-		table.insert(t_1, p4)
+	function self:onVisibilityChanged(Value) --[[ Line: 83 ]]
+		-- upvalues: List (copy)
+		table.insert(List, Value)
 		
-		return function()
-			-- upvalues: t_1 (copy), p4 (ref)
-			local index = table.find(t_1, p4)
+		return function() --[[ Line: 86 ]]
+			-- upvalues: List (upval), Value (copy)
+			local FoundIndex: number? = table.find(List, Value)
 			
-			if index then
-				table.remove(t_1, index)
+			if FoundIndex then
+				table.remove(List, FoundIndex)
 			end
 		end
 	end
 	
-	function tbl.onEnabledChanged(_, p4)
-		-- upvalues: t_2 (ref), var3 (ref)
-		table.insert(t_2, p4)
-		p4(var3(false))
+	function self:onEnabledChanged(Callback: (any) -> ()) --[[ Line: 94 ]]
+		-- upvalues: List1 (copy), Signal1 (copy)
+		table.insert(List1, Callback)
+		Callback(Signal1(false))
 		
-		return function()
-			-- upvalues: t_2 (copy), p4 (ref)
-			local index = table.find(t_2, p4)
+		return function() --[[ Line: 97 ]]
+			-- upvalues: List1 (upval), Callback (copy)
+			local FoundIndex: number? = table.find(List1, Callback)
 			
-			if index then
-				table.remove(t_2, index)
+			if FoundIndex then
+				table.remove(List1, FoundIndex)
 			end
 		end
 	end
 	
-	return tbl
+	return self
 end
 
-return t
+return LifecycleModule

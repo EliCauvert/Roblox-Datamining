@@ -1,49 +1,50 @@
-﻿return function(p1, p2)
-	if p1 == p2 then
+﻿return function(Text: string, Text1: string) --[[ Line: 2 | Named "computeEditDistance" ]]
+	if Text == Text1 then
 		return 0
 	end
-	local p0Count = #p1
-	local p1Count = #p2
+	local CountText = #Text
+	local CountText1 = #Text1
 	
-	if p0Count == 0 then
-		return p1Count
-	elseif p1Count == 0 then
-		return p0Count
-	elseif p0Count < p1Count then
-		p2 = p1
-		p1 = p2
-		local var1 = p1Count
-		p1Count = p0Count
-		p0Count = var1
+	if CountText == 0 then
+		return CountText1
 	end
-	local list = table.create(p1Count + 1)
-	local list_1 = table.create(p1Count + 1)
+	if CountText1 == 0 then
+		return CountText
+	end
+	if CountText < CountText1 then
+		local Text2: string = Text1
+		Text1 = Text
+		Text = Text2
+		local Count: number = CountText1
+		CountText1 = CountText
+		CountText = Count
+	end
+	local Buffer = table.create(CountText1 + 1)
+	local Buffer1 = table.create(CountText1 + 1)
 	
-	for i = 0, p1Count do
-		list[i + 1] = i
+	for i = 0, CountText1 do
+		Buffer[i + 1] = i
 	end
-	for i_2 = 1, p0Count do
-		list_1[1] = i_2
-		local byteValue = string.byte(p1, i_2)
+	for i1 = 1, CountText do
+		Buffer1[1] = i1
+		local ByteValue = string.byte(Text, i1)
 		
-		for i_1 = 1, p1Count do
-			local var2 = if byteValue == string.byte(p2, i_1) then 0 else 1
-			local var3 = list[i_1 + 1] + 1
-			local var4 = list_1[i_1] + 1
-			local var5 = list[i_1] + var2
-			local var6 = var3
+		for i2 = 1, CountText1 do
+			local NewBufferEntry = Buffer1[i2] + 1
+			local NewBufferEntry1 = Buffer[i2] + (if ByteValue == string.byte(Text1, i2) then 0 else 1)
+			local NewBufferEntry2 = Buffer[i2 + 1] + 1
 			
-			if var4 < var6 then
-				var6 = var4
+			if NewBufferEntry < NewBufferEntry2 then
+				NewBufferEntry2 = NewBufferEntry
 			end
-			if var5 < var6 then
-				var6 = var5
+			if NewBufferEntry1 < NewBufferEntry2 then
+				NewBufferEntry2 = NewBufferEntry1
 			end
-			list_1[i_1 + 1] = var6
+			Buffer1[i2 + 1] = NewBufferEntry2
 		end
-		local var7 = list_1
-		list_1 = list
-		list = var7
+		local Buffer2 = Buffer1
+		Buffer1 = Buffer
+		Buffer = Buffer2
 	end
-	return list[p1Count + 1]
+	return Buffer[CountText1 + 1]
 end

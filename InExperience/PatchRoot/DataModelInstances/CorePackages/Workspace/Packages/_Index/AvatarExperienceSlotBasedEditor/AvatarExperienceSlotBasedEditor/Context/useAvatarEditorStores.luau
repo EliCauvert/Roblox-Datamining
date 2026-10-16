@@ -1,15 +1,16 @@
-﻿local reactModule = require(script:FindFirstAncestor("AvatarExperienceSlotBasedEditor").Parent.React)
-local avatarEditorStoresModule = require(script.Parent.AvatarEditorStores)
-local createAvatarEditorStoresModule = require(script.Parent.Parent.Stores.createAvatarEditorStores)
+﻿local ReactModule = require(script:FindFirstAncestor("AvatarExperienceSlotBasedEditor").Parent.React)
+local AvatarEditorStoresModule = require(script.Parent.AvatarEditorStores)
+local CreateAvatarEditorStoresModule = require(script.Parent.Parent.Stores.createAvatarEditorStores)
 
-return function()
-	-- upvalues: reactModule (ref), avatarEditorStoresModule (ref), createAvatarEditorStoresModule (ref)
-	local var1 = reactModule.useContext(avatarEditorStoresModule)
+return function() --[[ Line: 14 | Named "useAvatarEditorStores" ]]
+	-- upvalues: ReactModule (copy), AvatarEditorStoresModule (copy), CreateAvatarEditorStoresModule (copy)
+	local UseContextResult = ReactModule.useContext(AvatarEditorStoresModule)
 	
-	if var1 then
-		return var1
+	if UseContextResult then
+		return UseContextResult
+	else
+		warn("useAvatarEditorStores was used without an AvatarEditorStores context provider. Providing a temporary default value instead.")
+		
+		return CreateAvatarEditorStoresModule()
 	end
-	warn("useAvatarEditorStores was used without an AvatarEditorStores context provider. Providing a temporary default value instead.")
-	
-	return createAvatarEditorStoresModule()
 end

@@ -1,195 +1,202 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local playersService = game:GetService("Players")
-local cryoModule = require(corePackagesService.Packages.Cryo)
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local tModule = require(corePackagesService.Packages.t)
-local parent = script.Parent.Parent
-local dependenciesModule = require(parent.Dependencies)
-local barOnTopScrollingFrameModule = require(dependenciesModule.BarOnTopScrollingFrame)
-local dividerModule = require(dependenciesModule.Divider)
-local playerCellModule = require(dependenciesModule.PlayerCell)
-local playerSearchPredicateModule = require(dependenciesModule.PlayerSearchPredicate)
-local searchBarModule = require(dependenciesModule.SearchBar)
-local _ = require(dependenciesModule.ThemedTextLabel)
-local withLocalizationModule = require(dependenciesModule.withLocalization)
-local navigateBackModule = require(parent.Actions.NavigateBack)
-local endReportFlowModule = require(parent.Actions.EndReportFlow)
-local selectReportListingModule = require(parent.Actions.SelectReportListing)
-local _ = require(parent.Resources.Assets)
-local constantsModule = require(parent.Resources.Constants)
-local modalDialogModule = require(parent.Components.ModalDialog)
-local gameCellModule = require(parent.Components.GameCell)
-local sendAnalyticsModule = require(parent.Utility.SendAnalytics)
-local sessionUtilityModule = require(parent.Utility.SessionUtility)
-local robloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
-local default = require(robloxGui.Modules.VoiceChat.VoiceChatServiceManager).default
-local voiceIndicatorFuncModule = require(robloxGui.Modules.VoiceChat.Components.VoiceIndicatorFunc)
-local voiceStateContextModule = require(robloxGui.Modules.VoiceChat.VoiceStateContext)
-local constantsModule_1 = require(robloxGui.Modules.VoiceChat.Constants)
-local reactModule = require(corePackagesService.Packages.React)
-local colors = UIBloxModule.App.Style.Colors
-local headerBar = UIBloxModule.App.Bar.HeaderBar
-local iconButton = UIBloxModule.App.Button.IconButton
-local iconSize = UIBloxModule.App.ImageSet.Enum.IconSize
-local provider = UIBloxModule.Core.Style.Provider
-local images = UIBloxModule.App.ImageSet.Images
-local withStyle = UIBloxModule.Core.Style.withStyle
-local isPlayerVerified = require(corePackagesService.Workspace.Packages.UserLib).Utils.isPlayerVerified
-local makeBackButton = require(corePackagesService.Workspace.Packages.AppHeaderBar).makeBackButton
-local t = {
-	BackgroundDefault = { Transparency = 1, Color = colors.Flint }
+﻿local CorePackages = game:GetService("CorePackages")
+local Players = game:GetService("Players")
+local CryoModule = require(CorePackages.Packages.Cryo)
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local UIBloxModule = require(CorePackages.Packages.UIBlox)
+local TModule = require(CorePackages.Packages.t)
+local Parent = script.Parent.Parent
+local DependenciesModule = require(Parent.Dependencies)
+local BarOnTopScrollingFrameModule = require(DependenciesModule.BarOnTopScrollingFrame)
+local DividerModule = require(DependenciesModule.Divider)
+local PlayerCellModule = require(DependenciesModule.PlayerCell)
+local PlayerSearchPredicateModule = require(DependenciesModule.PlayerSearchPredicate)
+local SearchBarModule = require(DependenciesModule.SearchBar)
+local _ = require(DependenciesModule.ThemedTextLabel)
+local WithLocalizationModule = require(DependenciesModule.withLocalization)
+local NavigateBackModule = require(Parent.Actions.NavigateBack)
+local EndReportFlowModule = require(Parent.Actions.EndReportFlow)
+local SelectReportListingModule = require(Parent.Actions.SelectReportListing)
+local _ = require(Parent.Resources.Assets)
+local ConstantsModule = require(Parent.Resources.Constants)
+local ModalDialogModule = require(Parent.Components.ModalDialog)
+local GameCellModule = require(Parent.Components.GameCell)
+local SendAnalyticsModule = require(Parent.Utility.SendAnalytics)
+local SessionUtilityModule = require(Parent.Utility.SessionUtility)
+local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
+local Default = require(RobloxGui.Modules.VoiceChat.VoiceChatServiceManager).default
+local VoiceIndicatorFuncModule = require(RobloxGui.Modules.VoiceChat.Components.VoiceIndicatorFunc)
+local VoiceStateContextModule = require(RobloxGui.Modules.VoiceChat.VoiceStateContext)
+local ConstantsModule1 = require(RobloxGui.Modules.VoiceChat.Constants)
+local ReactModule = require(CorePackages.Packages.React)
+local HeaderBar = UIBloxModule.App.Bar.HeaderBar
+local IconButton = UIBloxModule.App.Button.IconButton
+local IconSize = UIBloxModule.App.ImageSet.Enum.IconSize
+local Provider = UIBloxModule.Core.Style.Provider
+local Images = UIBloxModule.App.ImageSet.Images
+local WithStyleFunction = UIBloxModule.Core.Style.withStyle
+local IsPlayerVerifiedFunction = require(CorePackages.Workspace.Packages.UserLib).Utils.isPlayerVerified
+local MakeBackButtonFunction = require(CorePackages.Workspace.Packages.AppHeaderBar).makeBackButton
+local config = {
+	BackgroundDefault = {
+		Transparency = 1,
+		Color = UIBloxModule.App.Style.Colors.Flint
+	}
 }
-local reportMenu = roactModule.PureComponent:extend("ReportMenu")
+local ReportMenu = RoactModule.PureComponent:extend("ReportMenu")
 
-local var1 = function(p1)
-	-- upvalues: reactModule (ref), voiceStateContextModule (ref), voiceIndicatorFuncModule (ref), cryoModule (ref)
-	return if reactModule.useContext(voiceStateContextModule.Context).voiceEnabled then reactModule.createElement(voiceIndicatorFuncModule, cryoModule.Dictionary.join(p1, {})) else nil
+local function v38(p1) --[[ Line: 63 ]]
+	-- upvalues: ReactModule (copy), VoiceStateContextModule (copy), VoiceIndicatorFuncModule (copy), CryoModule (copy)
+	return if ReactModule.useContext(VoiceStateContextModule.Context).voiceEnabled then ReactModule.createElement(VoiceIndicatorFuncModule, CryoModule.Dictionary.join(p1, {})) else nil
 end
 
-reportMenu.validateProps = tModule.strictInterface({
-	isReportMenuOpen = tModule.boolean,
-	screenSize = tModule.Vector2,
-	closeDialog = tModule.callback,
-	openReportDialog = tModule.callback,
-	canNavigateBack = tModule.boolean,
-	reportCategory = tModule.optional(tModule.string),
-	navigateBack = tModule.optional(tModule.callback)
+ReportMenu.validateProps = TModule.strictInterface({
+	isReportMenuOpen = TModule.boolean,
+	screenSize = TModule.Vector2,
+	closeDialog = TModule.callback,
+	openReportDialog = TModule.callback,
+	canNavigateBack = TModule.boolean,
+	reportCategory = TModule.optional(TModule.string),
+	navigateBack = TModule.optional(TModule.callback)
 })
 
-function reportMenu.init(p1)
-	-- upvalues: roactModule (ref), default (ref)
-	p1.scrollingFrameRef = roactModule.createRef()
+function ReportMenu.init(p1) --[[ Line: 81 ]]
+	-- upvalues: RoactModule (copy), Default (copy)
+	p1.scrollingFrameRef = RoactModule.createRef()
 	p1.state = { isFilterMode = false, filterText = nil }
 	
-	function p1.onSearch()
-		-- upvalues: p1 (ref)
+	function p1.onSearch() --[[ Line: 89 ]]
+		-- upvalues: p1 (copy)
 		p1:setState({ isFilterMode = true, filterText = "" })
 	end
 	
-	function p1.onTextChanged(p2)
-		-- upvalues: p1 (ref)
-		p1:setState({ filterText = p2 })
+	function p1.onTextChanged(FilterText) --[[ Line: 96 ]]
+		-- upvalues: p1 (copy)
+		p1:setState({ filterText = FilterText })
 	end
 	
-	function p1.onCancel()
-		-- upvalues: p1 (ref), roactModule (copy)
-		p1:setState({ isFilterMode = false, filterText = roactModule.None })
+	function p1.onCancel() --[[ Line: 102 ]]
+		-- upvalues: p1 (copy), RoactModule (upval)
+		p1:setState({ isFilterMode = false, filterText = RoactModule.None })
 	end
 	
-	function p1.scrollToTop()
-		-- upvalues: p1 (ref)
-		local value = p1.scrollingFrameRef:getValue()
+	function p1.scrollToTop() --[[ Line: 109 ]]
+		-- upvalues: p1 (copy)
+		local Value = p1.scrollingFrameRef:getValue()
 		
-		if value then
-			value:scrollToTop()
+		if Value then
+			Value:scrollToTop()
 		end
 	end
 	
-	function p1.navigateBack()
-		-- upvalues: p1 (ref)
+	function p1.navigateBack() --[[ Line: 116 ]]
+		-- upvalues: p1 (copy)
 		p1.props.navigateBack(p1.state.filterText ~= nil)
 	end
 	
-	function p1.closeDialog()
-		-- upvalues: p1 (ref)
+	function p1.closeDialog() --[[ Line: 120 ]]
+		-- upvalues: p1 (copy)
 		p1.props.closeDialog(p1.state.filterText ~= nil)
 	end
 	
 	p1.layoutBindings = {}
 	
-	function p1.getLayoutBinding(p2, p3)
-		-- upvalues: p1 (ref), roactModule (copy)
-		local var2 = p1.layoutBindings[p2]
+	function p1.getLayoutBinding(p2, Value) --[[ Line: 125 ]]
+		-- upvalues: p1 (copy), RoactModule (upval)
+		local LayoutBinding = p1.layoutBindings[p2]
 		
-		if not var2 then
-			local var3, var4 = roactModule.createBinding(p3)
-			var2 = { valueBinding = var3, setValue = var4, value = p3 }
-			p1.layoutBindings[p2] = var2
+		if not LayoutBinding then
+			local Binding, Binding2 = RoactModule.createBinding(Value)
+			LayoutBinding = {
+				valueBinding = Binding,
+				setValue = Binding2,
+				value = Value
+			}
+			p1.layoutBindings[p2] = LayoutBinding
 		end
-		if var2.value ~= p3 then
-			var2.value = p3
-			var2.setValue(p3)
+		if LayoutBinding.value ~= Value then
+			LayoutBinding.value = Value
+			LayoutBinding.setValue(Value)
 		end
-		return var2.valueBinding
+		return LayoutBinding.valueBinding
 	end
 	
-	function p1.playerIsVoiceActive(p2)
-		-- upvalues: default (copy)
-		return default.participants[tostring(p2)] ~= nil
+	function p1.playerIsVoiceActive(p2): boolean --[[ Line: 145 ]]
+		-- upvalues: Default (upval)
+		return Default.participants[tostring(p2)] ~= nil
 	end
 	
 	p1.sortedUserIds = {}
 end
 
-local function sortPlayers(p1, p2)
-	return p1.DisplayName:lower() < p2.DisplayName:lower()
+local function sortPlayers(Player, Player1): boolean --[[ Line: 152 ]]
+	return Player.DisplayName:lower() < Player1.DisplayName:lower()
 end
 
-function reportMenu.getPlayerList(p1)
-	-- upvalues: cryoModule (ref), playersService (ref), sortPlayers (ref), playerSearchPredicateModule (ref)
-	local t = {}
+function ReportMenu.getPlayerList(p1) --[[ Line: 156 ]]
+	-- upvalues: CryoModule (copy), Players (copy), sortPlayers (copy), PlayerSearchPredicateModule (copy)
+	local List = {}
 	
-	for i, v in ipairs(cryoModule.List.sort(playersService:GetPlayers(), sortPlayers)) do
-		if v ~= playersService.LocalPlayer then
+	for _, Player in ipairs((CryoModule.List.sort(Players:GetPlayers(), sortPlayers))) do
+		if Player ~= Players.LocalPlayer then
 			if not p1.state.isFilterMode then
-				table.insert(t, v)
-			elseif playerSearchPredicateModule(p1.state.filterText, v.Name, v.DisplayName) then
-				table.insert(t, v)
+				table.insert(List, Player)
+			elseif PlayerSearchPredicateModule(p1.state.filterText, Player.Name, Player.DisplayName) then
+				table.insert(List, Player)
 			end
 		end
 	end
-	return cryoModule.List.sort(t, function(p2, p3)
-		return p2.DisplayName:lower() < p3.DisplayName:lower()
-	end)
+	return (CryoModule.List.sort(List, function(Player, Player1): boolean --[[ Line: 172 ]]
+		return Player.DisplayName:lower() < Player1.DisplayName:lower()
+	end))
 end
 
-local t_1 = {
-	[constantsModule.Category.Voice] = "CoreScripts.InGameMenu.Report.Title.VoiceChat",
-	[constantsModule.Category.Text] = "CoreScripts.InGameMenu.Report.Title.TextChat",
-	[constantsModule.Category.Other] = "CoreScripts.InGameMenu.Report.Title.Other"
+local config1 = {
+	[ConstantsModule.Category.Voice] = "CoreScripts.InGameMenu.Report.Title.VoiceChat",
+	[ConstantsModule.Category.Text] = "CoreScripts.InGameMenu.Report.Title.TextChat",
+	[ConstantsModule.Category.Other] = "CoreScripts.InGameMenu.Report.Title.Other"
 }
 
-function reportMenu.categoryTitle(p2)
-	-- upvalues: t_1 (ref)
-	return t_1[p2.props.reportCategory] or "CoreScripts.InGameMenu.Report.MenuTitle"
+function ReportMenu.categoryTitle(p2) --[[ Line: 184 ]]
+	-- upvalues: config1 (copy)
+	return config1[p2.props.reportCategory] or "CoreScripts.InGameMenu.Report.MenuTitle"
 end
 
-function reportMenu.renderHeaderBar(p2)
-	-- upvalues: makeBackButton (ref), roactModule (ref), iconButton (ref), iconSize (ref), images (ref), withLocalizationModule (ref), headerBar (ref), searchBarModule (ref)
-	local var2 = if p2.props.canNavigateBack then makeBackButton(p2.navigateBack) else function()
-		-- upvalues: roactModule (copy), iconButton (copy), iconSize (copy), images (copy), p2 (ref)
-		return roactModule.createElement(iconButton, {
-			iconSize = iconSize.Medium,
-			icon = images["icons/navigation/close"],
+function ReportMenu.renderHeaderBar(p2) --[[ Line: 188 ]]
+	-- upvalues: MakeBackButtonFunction (copy), RoactModule (copy), IconButton (copy), IconSize (copy), Images (copy), WithLocalizationModule (copy), HeaderBar (copy), SearchBarModule (copy)
+	local BackButton = nil
+	BackButton = if p2.props.canNavigateBack then MakeBackButtonFunction(p2.navigateBack) else function() --[[ Line: 193 ]]
+		-- upvalues: RoactModule (upval), IconButton (upval), IconSize (upval), Images (upval), p2 (copy)
+		return RoactModule.createElement(IconButton, {
+			iconSize = IconSize.Medium,
+			icon = Images["icons/navigation/close"],
 			onActivated = p2.closeDialog
 		})
 	end
 	
-	return if p2.state.isFilterMode then roactModule.createElement("Frame", {
+	return if p2.state.isFilterMode then RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Position = UDim2.fromOffset(24, 6),
 		Size = UDim2.new(1, -48, 1, -12)
 	}, {
-		roactModule.createElement(searchBarModule, {
+		RoactModule.createElement(SearchBarModule, {
 			autoCaptureFocus = true,
 			size = UDim2.fromScale(1, 1),
 			text = p2.state.filterText,
 			onTextChanged = p2.onTextChanged,
 			onCancelled = p2.onCancel
 		})
-	}) else withLocalizationModule({ titleText = p2:categoryTitle() })(function(p3)
-		-- upvalues: roactModule (copy), headerBar (copy), var2 (write), iconButton (copy), iconSize (copy), images (copy), p2 (ref)
-		return roactModule.createElement(headerBar, {
+	}) else WithLocalizationModule({ titleText = p2:categoryTitle() })(function(p3) --[[ Line: 205 ]]
+		-- upvalues: RoactModule (upval), HeaderBar (upval), BackButton (ref), IconButton (upval), IconSize (upval), Images (upval), p2 (copy)
+		return RoactModule.createElement(HeaderBar, {
 			backgroundTransparency = 1,
 			barHeight = 48,
-			renderLeft = var2,
-			renderRight = function()
-				-- upvalues: roactModule (copy), iconButton (copy), iconSize (copy), images (copy), p2 (copy)
-				return roactModule.createElement(iconButton, {
-					iconSize = iconSize.Medium,
-					icon = images["icons/common/search"],
+			renderLeft = BackButton,
+			renderRight = function() --[[ Line: 210 ]]
+				-- upvalues: RoactModule (upval), IconButton (upval), IconSize (upval), Images (upval), p2 (upval)
+				return RoactModule.createElement(IconButton, {
+					iconSize = IconSize.Medium,
+					icon = Images["icons/common/search"],
 					onActivated = p2.onSearch
 				})
 			end,
@@ -199,105 +206,105 @@ function reportMenu.renderHeaderBar(p2)
 	end)
 end
 
-function reportMenu.renderContents(p2)
-	-- upvalues: constantsModule (ref), roactModule (ref), gameCellModule (ref), default (ref), dividerModule (ref), playerCellModule (ref), isPlayerVerified (ref), var1 (ref), constantsModule_1 (ref), withStyle (ref), cryoModule (ref), t (ref), provider (ref), barOnTopScrollingFrameModule (ref)
-	local props = p2.props
-	local var2 = p2.props.reportCategory == constantsModule.Category.Voice
-	local var3 = 0
-	local t_1 = {
-		ListLayout = roactModule.createElement("UIListLayout", {
+function ReportMenu.renderContents(p2) --[[ Line: 238 ]]
+	-- upvalues: ConstantsModule (copy), RoactModule (copy), GameCellModule (copy), Default (copy), DividerModule (copy), PlayerCellModule (copy), IsPlayerVerifiedFunction (copy), v38 (copy), ConstantsModule1 (copy), WithStyleFunction (copy), CryoModule (copy), config (copy), Provider (copy), BarOnTopScrollingFrameModule (copy)
+	local Props = p2.props
+	local IsReportCategoryMatch = p2.props.reportCategory == ConstantsModule.Category.Voice
+	local v1 = 0
+	local Elements = {
+		ListLayout = RoactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
 			SortOrder = Enum.SortOrder.LayoutOrder
 		})
 	}
 	
-	if not p2.state.isFilterMode and p2.props.reportCategory == constantsModule.Category.None then
-		t_1.GameCell = roactModule.createElement(gameCellModule, {
+	if not p2.state.isFilterMode and p2.props.reportCategory == ConstantsModule.Category.None then
+		Elements.GameCell = RoactModule.createElement(GameCellModule, {
 			gameId = game.GameId,
-			layoutOrder = p2.getLayoutBinding("GameCell", var3),
-			onActivated = function()
-				-- upvalues: props (ref), constantsModule (copy)
-				props.openReportDialog(constantsModule.ReportType.Place, nil)
+			layoutOrder = p2.getLayoutBinding("GameCell", v1),
+			onActivated = function() --[[ Line: 255 ]]
+				-- upvalues: Props (copy), ConstantsModule (upval)
+				Props.openReportDialog(ConstantsModule.ReportType.Place, nil)
 			end
 		})
 	end
-	var3 += 1
-	local var4 = 72
-	local playerList = p2:getPlayerList()
-	local var5 = if var2 then default:getRecentUsersInteractionData() else {}
+	local v2 = v1 + 1
+	local YOffset = 72
+	local PlayerList = p2:getPlayerList()
+	local RecentUsersInteractionData = if IsReportCategoryMatch then Default:getRecentUsersInteractionData() else {}
 	p2.sortedUserIds = {}
 	
-	for i, v in pairs(playerList) do
-		local var6 = tostring(v.UserId)
+	for _, Player in pairs(PlayerList) do
+		local Text = tostring(Player.UserId)
 		
-		if not var2 or var5[tostring(v.UserId)] then
-			table.insert(p2.sortedUserIds, v.UserId)
-			local var7 = 0
+		if not IsReportCategoryMatch or RecentUsersInteractionData[tostring(Player.UserId)] then
+			table.insert(p2.sortedUserIds, Player.UserId)
+			local Count = 0
 			
-			if var2 then
-				var7 += 1
+			if IsReportCategoryMatch then
+				Count += 1
 			end
 			if p2.props.isReportMenuOpen then
-				var7 += 2
+				Count += 2
 			end
-			t_1["Divider" .. var44] = roactModule.createElement(dividerModule, {
-				LayoutOrder = p2.getLayoutBinding("Divider" .. var44, var3),
+			Elements["Divider" .. Text] = RoactModule.createElement(DividerModule, {
+				LayoutOrder = p2.getLayoutBinding("Divider" .. Text, v2),
 				Size = UDim2.new(1, 0, 0, 1)
 			})
-			var3 += 1
-			t_1["PlayerCell" .. var44] = roactModule.createElement(playerCellModule, {
+			local v3 = v2 + 1
+			Elements["PlayerCell" .. Text] = RoactModule.createElement(PlayerCellModule, {
 				isOnline = true,
 				isSelected = false,
-				userId = v.UserId,
-				username = v.Name,
-				displayName = v.DisplayName,
-				hasVerifiedBadge = isPlayerVerified(v),
-				LayoutOrder = p2.getLayoutBinding("PlayerCell" .. var44, var3),
-				onActivated = function()
-					-- upvalues: props (ref), constantsModule (copy), v (ref)
-					props.openReportDialog(constantsModule.ReportType.Player, v)
+				userId = Player.UserId,
+				username = Player.Name,
+				displayName = Player.DisplayName,
+				hasVerifiedBadge = IsPlayerVerifiedFunction(Player),
+				LayoutOrder = p2.getLayoutBinding("PlayerCell" .. Text, v3),
+				onActivated = function() --[[ Line: 300 ]]
+					-- upvalues: Props (copy), ConstantsModule (upval), Player (copy)
+					Props.openReportDialog(ConstantsModule.ReportType.Player, Player)
 				end,
-				memoKey = var7
+				memoKey = Count
 			}, {
-				VoiceIndicator = var2 and (p2.props.isReportMenuOpen and (roactModule.createElement(var1, {
+				VoiceIndicator = IsReportCategoryMatch and p2.props.isReportMenuOpen and RoactModule.createElement(v38, {
 					hideOnError = true,
 					iconStyle = "SpeakerLight",
-					userId = tostring(v.UserId),
+					userId = tostring(Player.UserId),
 					size = UDim2.fromOffset(36, 36),
-					onClicked = function()
-						-- upvalues: default (copy), v (ref), constantsModule_1 (copy)
-						default:ToggleMutePlayer(v.UserId, constantsModule_1.VOICE_CONTEXT_TYPE.REPORT_MENU)
+					onClicked = function() --[[ Line: 312 ]]
+						-- upvalues: Default (upval), Player (copy), ConstantsModule1 (upval)
+						Default:ToggleMutePlayer(Player.UserId, ConstantsModule1.VOICE_CONTEXT_TYPE.REPORT_MENU)
 					end
-				}) or nil))
+				}) or nil
 			})
-			var3 += 1
-			var4 += 73
+			v2 = v3 + 1
+			YOffset += 73
 		end
 	end
-	t_1.DividerEnd = roactModule.createElement(dividerModule, {
-		LayoutOrder = p2.getLayoutBinding("DividerEnd", var3),
+	Elements.DividerEnd = RoactModule.createElement(DividerModule, {
+		LayoutOrder = p2.getLayoutBinding("DividerEnd", v2),
 		Size = UDim2.new(1, 0, 0, 1)
 	})
-	var3 += 1
+	local _ = v2 + 1
 	
-	return withStyle(function(p3)
-		-- upvalues: cryoModule (copy), t (copy), roactModule (copy), provider (copy), barOnTopScrollingFrameModule (copy), var4 (write), p2 (ref), t_1 (ref)
-		return roactModule.createElement(provider, {
-			style = cryoModule.Dictionary.join(p3, { Theme = cryoModule.Dictionary.join(p3.Theme, t) })
+	return WithStyleFunction(function(p3) --[[ Line: 332 ]]
+		-- upvalues: CryoModule (upval), config (upval), RoactModule (upval), Provider (upval), BarOnTopScrollingFrameModule (upval), YOffset (ref), p2 (copy), Elements (copy)
+		return RoactModule.createElement(Provider, {
+			style = CryoModule.Dictionary.join(p3, { Theme = CryoModule.Dictionary.join(p3.Theme, config) })
 		}, {
-			roactModule.createElement(barOnTopScrollingFrameModule, {
+			RoactModule.createElement(BarOnTopScrollingFrameModule, {
 				Size = UDim2.fromScale(1, 1),
-				CanvasSize = UDim2.new(1, 0, 0, var4),
+				CanvasSize = UDim2.new(1, 0, 0, YOffset),
 				scrollingFrameRef = p2.scrollingFrameRef
-			}, t_1)
+			}, Elements)
 		})
 	end)
 end
 
-function reportMenu.render(p3)
-	-- upvalues: roactModule (ref), modalDialogModule (ref)
-	return roactModule.createFragment({
-		ModalDialog = roactModule.createElement(modalDialogModule, {
+function ReportMenu.render(p3) --[[ Line: 349 ]]
+	-- upvalues: RoactModule (copy), ModalDialogModule (copy)
+	return RoactModule.createFragment({
+		ModalDialog = RoactModule.createElement(ModalDialogModule, {
 			visible = p3.props.isReportMenuOpen,
 			screenSize = p3.props.screenSize,
 			headerBar = p3:renderHeaderBar(),
@@ -308,50 +315,53 @@ function reportMenu.render(p3)
 	})
 end
 
-function reportMenu.didUpdate(p3, p4)
-	-- upvalues: roactModule (ref)
+function ReportMenu.didUpdate(p3, p4) --[[ Line: 365 ]]
+	-- upvalues: RoactModule (copy)
 	if p4.isReportMenuOpen and not p3.props.isReportMenuOpen then
-		p3:setState({ isFilterMode = false, filterText = roactModule.None })
-		local value = p3.scrollingFrameRef:getValue()
+		p3:setState({ isFilterMode = false, filterText = RoactModule.None })
+		local Value = p3.scrollingFrameRef:getValue()
 		
-		if value and value.CanvasPosition.Y > 0 then
-			value.CanvasPosition = Vector2.new(0, 0)
+		if Value and Value.CanvasPosition.Y > 0 then
+			Value.CanvasPosition = Vector2.new(0, 0)
 		end
 	end
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p3, _)
-	-- upvalues: constantsModule (ref)
+return RoactRoduxModule.UNSTABLE_connect2(function(p3, _) --[[ Line: 379 ]]
+	-- upvalues: ConstantsModule (copy)
 	return {
-		isReportMenuOpen = p3.report.currentPage == constantsModule.Page.Listing,
+		isReportMenuOpen = p3.report.currentPage == ConstantsModule.Page.Listing,
 		screenSize = p3.displayOptions.screenSize,
 		reportCategory = p3.report.reportCategory,
 		canNavigateBack = #p3.report.history > 1
 	}
-end, function(p3)
-	-- upvalues: navigateBackModule (ref), sendAnalyticsModule (ref), constantsModule (ref), endReportFlowModule (ref), sessionUtilityModule (ref), selectReportListingModule (ref)
+end, function(Callback) --[[ Line: 387 ]]
+	-- upvalues: NavigateBackModule (copy), SendAnalyticsModule (copy), ConstantsModule (copy), EndReportFlowModule (copy), SessionUtilityModule (copy), SelectReportListingModule (copy)
 	return {
-		navigateBack = function(p4)
-			-- upvalues: p3 (ref), navigateBackModule (copy), sendAnalyticsModule (copy), constantsModule (copy)
-			p3(navigateBackModule())
-			sendAnalyticsModule(constantsModule.Page.Listing, constantsModule.Analytics.ReportFlowBack, {
-				source = constantsModule.Page.Listing,
-				filterTextChanged = p4
+		navigateBack = function(FilterTextChanged) --[[ Line: 389 ]]
+			-- upvalues: Callback (copy), NavigateBackModule (upval), SendAnalyticsModule (upval), ConstantsModule (upval)
+			Callback(NavigateBackModule())
+			SendAnalyticsModule(ConstantsModule.Page.Listing, ConstantsModule.Analytics.ReportFlowBack, {
+				source = ConstantsModule.Page.Listing,
+				filterTextChanged = FilterTextChanged
 			})
 		end,
-		closeDialog = function(p4)
-			-- upvalues: p3 (ref), endReportFlowModule (copy), sendAnalyticsModule (copy), constantsModule (copy), sessionUtilityModule (copy)
-			p3(endReportFlowModule())
-			sendAnalyticsModule(constantsModule.Page.Listing, constantsModule.Analytics.ReportFlowAbandoned, {
-				source = constantsModule.Page.Listing,
-				filterTextChanged = p4
+		closeDialog = function(FilterTextChanged) --[[ Line: 396 ]]
+			-- upvalues: Callback (copy), EndReportFlowModule (upval), SendAnalyticsModule (upval), ConstantsModule (upval), SessionUtilityModule (upval)
+			Callback(EndReportFlowModule())
+			SendAnalyticsModule(ConstantsModule.Page.Listing, ConstantsModule.Analytics.ReportFlowAbandoned, {
+				source = ConstantsModule.Page.Listing,
+				filterTextChanged = FilterTextChanged
 			})
-			sessionUtilityModule.endAbuseReportSession()
+			SessionUtilityModule.endAbuseReportSession()
 		end,
-		openReportDialog = function(p4, p5, p6)
-			-- upvalues: p3 (ref), selectReportListingModule (copy), sendAnalyticsModule (copy), constantsModule (copy)
-			p3(selectReportListingModule(p4, p5, p6))
-			sendAnalyticsModule(constantsModule.Page.Listing, constantsModule.Analytics.ReportFlowAdvance, { source = constantsModule.Page.Listing, reportType = p4 })
+		openReportDialog = function(ReportType, Player, p3) --[[ Line: 404 ]]
+			-- upvalues: Callback (copy), SelectReportListingModule (upval), SendAnalyticsModule (upval), ConstantsModule (upval)
+			Callback(SelectReportListingModule(ReportType, Player, p3))
+			SendAnalyticsModule(ConstantsModule.Page.Listing, ConstantsModule.Analytics.ReportFlowAdvance, {
+				source = ConstantsModule.Page.Listing,
+				reportType = ReportType
+			})
 		end
 	}
-end)(reportMenu)
+end)(ReportMenu)

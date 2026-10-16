@@ -1,143 +1,120 @@
-﻿local expChat = script:FindFirstAncestor("ExpChat")
-local parent = expChat.Parent
-local signalsModule = require(parent.Signals)
-local tutilsModule = require(parent.tutils)
-local expChatSharedModule = require(parent.ExpChatShared)
-local shouldRenderTextChannelInDefaultWindow = expChatSharedModule.shouldRenderTextChannelInDefaultWindow
-local getTextChannelDisplayMode = expChatSharedModule.getTextChannelDisplayMode
-local friendsChatTabNameModule = require(parent.FriendsChat.FriendsChatTabName)
-local shouldSuppressUnreadForTabMetadataModule = require(expChat.shouldSuppressUnreadForTabMetadata)
-local sharedFlagsModule = require(parent.SharedFlags)
-local getFFlagExpChatFixChannelTabsMidExperienceToggleModule = require(expChat.Flags.getFFlagExpChatFixChannelTabsMidExperienceToggle)
-local getFFlagTextChatEnableUniverseChatTabs = expChatSharedModule.Flags.GetFFlagTextChatEnableUniverseChatTabs
-local getFFlagExpChatSuppressWelcomeMessageTabUnread = expChatSharedModule.Flags.GetFFlagExpChatSuppressWelcomeMessageTabUnread
-local fFlagExpChatEnableFriendsTab = sharedFlagsModule.FFlagExpChatEnableFriendsTab
-local fFlagExpChatFriendsTabRequireDefaultChannels = sharedFlagsModule.FFlagExpChatFriendsTabRequireDefaultChannels
-local isGlobalTabFirstModule = require(expChat.isGlobalTabFirst)
-local getDefaultTabNameModule = require(expChat.getDefaultTabName)
-local fFlagExpChatGlobalTabDefaultModule = require(expChat.Flags.FFlagExpChatGlobalTabDefault)
-local createSignal = signalsModule.createSignal
-local createComputed = signalsModule.createComputed
-local getFixedTabPriority = nil
+﻿local ExpChat = script:FindFirstAncestor("ExpChat")
+local Parent = ExpChat.Parent
+local SignalsModule = require(Parent.Signals)
+local TutilsModule = require(Parent.tutils)
+local ExpChatSharedModule = require(Parent.ExpChatShared)
+local ShouldRenderTextChannelInDefaultWindowFunction = ExpChatSharedModule.shouldRenderTextChannelInDefaultWindow
+local GetTextChannelDisplayModeFunction = ExpChatSharedModule.getTextChannelDisplayMode
+local FriendsChatTabNameModule = require(Parent.FriendsChat.FriendsChatTabName)
+local ShouldSuppressUnreadForTabMetadataModule = require(ExpChat.shouldSuppressUnreadForTabMetadata)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local GetFFlagExpChatFixChannelTabsMidExperienceToggleModule = require(ExpChat.Flags.getFFlagExpChatFixChannelTabsMidExperienceToggle)
+local GetFFlagTextChatEnableUniverseChatTabsFunction = ExpChatSharedModule.Flags.GetFFlagTextChatEnableUniverseChatTabs
+local GetFFlagExpChatSuppressWelcomeMessageTabUnreadFunction = ExpChatSharedModule.Flags.GetFFlagExpChatSuppressWelcomeMessageTabUnread
+local FFlagExpChatEnableFriendsTab = SharedFlagsModule.FFlagExpChatEnableFriendsTab
+local FFlagExpChatFriendsTabRequireDefaultChannels = SharedFlagsModule.FFlagExpChatFriendsTabRequireDefaultChannels
+local IsGlobalTabFirstModule = require(ExpChat.isGlobalTabFirst)
+local GetDefaultTabNameModule = require(ExpChat.getDefaultTabName)
+local FFlagExpChatGlobalTabDefaultModule = require(ExpChat.Flags.FFlagExpChatGlobalTabDefault)
+local CreateSignalFunction = SignalsModule.createSignal
+local CreateComputedFunction = SignalsModule.createComputed
+local Callback = nil
 
-local function reorderTabs(value)
-	-- upvalues: getFixedTabPriority (write)
-	local cloned = table.clone(value)
-	local t = {}
+local function reorderTabs(Tbl) --[[ Line: 86 ]]
+	-- upvalues: Callback (ref)
+	local Copy = table.clone(Tbl)
+	local List = {}
 	
-	for i, v in pairs(cloned) do
-		table.insert(t, v)
+	for _, value in pairs(Copy) do
+		table.insert(List, value)
 	end
-	table.sort(t, function(p1, p2)
-		-- upvalues: getFixedTabPriority (copy)
-		local var1 = getFixedTabPriority(p1.name)
-		local var2 = getFixedTabPriority(p2.name)
+	table.sort(List, function(A, B): boolean --[[ Line: 94 ]]
+		-- upvalues: Callback (upval)
+		local CallbackResult = Callback(A.name)
+		local CallbackResult1 = Callback(B.name)
 		
-		return if var1 and var2 then var1 < var2 elseif var1 then true elseif var2 then false else p1.tabIndex < p2.tabIndex
+		return if CallbackResult and CallbackResult1 then CallbackResult < CallbackResult1 elseif CallbackResult then true else not CallbackResult1 and A.tabIndex < B.tabIndex
 	end)
 	
-	for i_1, v_1 in ipairs(t) do
-		cloned[v_1.name] = {
-			type = v_1.type,
-			name = v_1.name,
-			tabIndex = i_1,
-			HasUnreadMessages = v_1.HasUnreadMessages
+	for TabIndex, value1 in ipairs(List) do
+		Copy[value1.name] = {
+			type = value1.type,
+			name = value1.name,
+			tabIndex = TabIndex,
+			HasUnreadMessages = value1.HasUnreadMessages
 		}
 	end
-	return cloned
+	return Copy
 end
 
-local function _(p1, p2)
-	-- upvalues: reorderTabs (ref)
-	local cloned = table.clone(p1)
-	cloned[p2.name] = p2
+local function _(Tbl, p1) --[[ Line: 121 | Named "insertTabAndReorder" ]]
+	-- upvalues: reorderTabs (copy)
+	local Copy = table.clone(Tbl)
+	Copy[p1.name] = p1
 	
-	return reorderTabs(cloned)
+	return (reorderTabs(Copy))
 end
 
-local _ = function(p1, p2)
-	-- upvalues: reorderTabs (ref)
-	local cloned = table.clone(p1)
-	cloned[p2.name] = nil
+local _ = function(Tbl, p1) --[[ Line: 131 | Named "removeTabAndReorder" ]]
+	-- upvalues: reorderTabs (copy)
+	local Copy = table.clone(Tbl)
+	Copy[p1.name] = nil
 	
-	return reorderTabs(cloned)
+	return (reorderTabs(Copy))
 end
 
-getFixedTabPriority = function(p1)
-	-- upvalues: fFlagExpChatGlobalTabDefaultModule (ref), isGlobalTabFirstModule (ref), friendsChatTabNameModule (ref), fFlagExpChatEnableFriendsTab (ref), getFFlagTextChatEnableUniverseChatTabs (ref)
-	return if fFlagExpChatGlobalTabDefaultModule and isGlobalTabFirstModule() then if p1 == "RBXGlobal" then 1 elseif p1 == "RBXGeneral" then 2 elseif p1 == friendsChatTabNameModule and fFlagExpChatEnableFriendsTab then 3 else nil elseif p1 == "RBXGeneral" then 1 elseif p1 == "RBXGlobal" and getFFlagTextChatEnableUniverseChatTabs() then 2 elseif p1 == friendsChatTabNameModule and fFlagExpChatEnableFriendsTab then 3 else nil
+Callback = function(Name) --[[ Line: 144 | Named "getFixedTabPriority" ]]
+	-- upvalues: FFlagExpChatGlobalTabDefaultModule (copy), IsGlobalTabFirstModule (copy), FriendsChatTabNameModule (copy), FFlagExpChatEnableFriendsTab (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (copy)
+	return if FFlagExpChatGlobalTabDefaultModule and IsGlobalTabFirstModule() then if Name == "RBXGlobal" then 1 elseif Name == "RBXGeneral" then 2 elseif Name == FriendsChatTabNameModule and FFlagExpChatEnableFriendsTab then 3 else nil elseif Name == "RBXGeneral" then 1 elseif Name == "RBXGlobal" and GetFFlagTextChatEnableUniverseChatTabsFunction() then 2 elseif Name == FriendsChatTabNameModule and FFlagExpChatEnableFriendsTab then 3 else nil
 end
 
-local function pruneNonSpecialTabs(value)
-	-- upvalues: getFixedTabPriority (write), reorderTabs (ref)
+local function pruneNonSpecialTabs(AllChannelTabs) --[[ Line: 171 ]]
+	-- upvalues: Callback (ref), reorderTabs (copy)
 	local t = {}
 	
-	for i, v in value do
-		if getFixedTabPriority(i) ~= nil then
-			t[i] = v
+	for i, allChannelTab in AllChannelTabs do
+		if Callback(i) ~= nil then
+			t[i] = allChannelTab
 		end
 	end
-	return reorderTabs(t)
+	return (reorderTabs(t))
 end
 
-local _ = function(p1)
-	-- upvalues: getFFlagTextChatEnableUniverseChatTabs (ref), fFlagExpChatFriendsTabRequireDefaultChannels (ref), fFlagExpChatEnableFriendsTab (ref)
-	local var1
-	if not getFFlagTextChatEnableUniverseChatTabs() then
-		var1 = fFlagExpChatFriendsTabRequireDefaultChannels and (fFlagExpChatEnableFriendsTab and not p1.channelTabsConfigurationEnabled)
-	end
-	return var1
+local _ = function(p1): boolean --[[ Line: 188 | Named "isDefaultTabOnlyMode" ]]
+	-- upvalues: GetFFlagTextChatEnableUniverseChatTabsFunction (copy), FFlagExpChatFriendsTabRequireDefaultChannels (copy), FFlagExpChatEnableFriendsTab (copy)
+	return if GetFFlagTextChatEnableUniverseChatTabsFunction() then not p1.channelTabsConfigurationEnabled else FFlagExpChatFriendsTabRequireDefaultChannels and (FFlagExpChatEnableFriendsTab and not p1.channelTabsConfigurationEnabled)
 end
 
-local function markTabUnread(p1, p2)
-	local var1 = p1.allChannelTabs[p2]
+local function markTabUnread(Tbl, Name) --[[ Line: 195 ]]
+	local AllChannelTab = Tbl.allChannelTabs[Name]
 	
-	if var1 == nil or var1.HasUnreadMessages or p2 == p1.selectedTabName then
-		return p1
+	if AllChannelTab == nil or AllChannelTab.HasUnreadMessages or Name == Tbl.selectedTabName then
+		return Tbl
+	else
+		local Copy = table.clone(Tbl)
+		Copy.allChannelTabs = table.clone(Tbl.allChannelTabs)
+		local Copy1 = table.clone(AllChannelTab)
+		Copy1.HasUnreadMessages = true
+		Copy.allChannelTabs[Name] = Copy1
+		
+		return Copy
 	end
-	local cloned = table.clone(p1)
-	cloned.allChannelTabs = table.clone(p1.allChannelTabs)
-	local cloned_1 = table.clone(var1)
-	cloned_1.HasUnreadMessages = true
-	cloned.allChannelTabs[p2] = cloned_1
-	
-	return cloned
 end
 
-local function isTargetChannelNoOp(p1, p2, p3, p4)
-	-- upvalues: fFlagExpChatGlobalTabDefaultModule (ref), getFFlagTextChatEnableUniverseChatTabs (ref), fFlagExpChatFriendsTabRequireDefaultChannels (ref), fFlagExpChatEnableFriendsTab (ref), getFixedTabPriority (write)
-	if fFlagExpChatGlobalTabDefaultModule and p4 and not p1.hasUserSelectedTab then
+local function isTargetChannelNoOp(p1, SelectedTabName, p2, p3): boolean --[[ Line: 209 ]]
+	-- upvalues: FFlagExpChatGlobalTabDefaultModule (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (copy), FFlagExpChatFriendsTabRequireDefaultChannels (copy), FFlagExpChatEnableFriendsTab (copy), Callback (ref)
+	if FFlagExpChatGlobalTabDefaultModule and p3 and not p1.hasUserSelectedTab then
 		return false
+	else
+		local AllChannelTab = if SelectedTabName then p1.allChannelTabs[SelectedTabName] else nil
+		
+		return if AllChannelTab then not p2 and (p1.selectedTabName == SelectedTabName and (AllChannelTab.type == "FriendsChat" or not AllChannelTab.HasUnreadMessages)) else SelectedTabName == nil or ((if GetFFlagTextChatEnableUniverseChatTabsFunction() then not p1.channelTabsConfigurationEnabled else FFlagExpChatFriendsTabRequireDefaultChannels and (FFlagExpChatEnableFriendsTab and not p1.channelTabsConfigurationEnabled)) and Callback(SelectedTabName) == nil or p1.selectedTabName == SelectedTabName)
 	end
-	local var1 = if p2 then p1.allChannelTabs[p2] else nil
-	
-	if var1 then
-		return not p3 and (p1.selectedTabName == p2 and (if var1.type ~= "FriendsChat" then not var1.HasUnreadMessages else true))
-	end
-	local var2 = true
-	
-	if p2 ~= nil then
-		local var3
-		if getFFlagTextChatEnableUniverseChatTabs() then
-			var3 = not p1.channelTabsConfigurationEnabled
-		else
-			var3 = fFlagExpChatFriendsTabRequireDefaultChannels
-			
-			if var3 then
-				var3 = fFlagExpChatEnableFriendsTab
-				
-				if var3 then
-				end
-			end
-		end
-		var2 = if var3 then true else p1.selectedTabName == p2
-	end
-	return var2
 end
 
-return function()
-	-- upvalues: createSignal (ref), createComputed (ref), tutilsModule (ref), getFFlagTextChatEnableUniverseChatTabs (ref), getFFlagExpChatSuppressWelcomeMessageTabUnread (ref), shouldSuppressUnreadForTabMetadataModule (ref), markTabUnread (ref), isTargetChannelNoOp (ref), fFlagExpChatGlobalTabDefaultModule (ref), reorderTabs (ref), fFlagExpChatFriendsTabRequireDefaultChannels (ref), fFlagExpChatEnableFriendsTab (ref), getFixedTabPriority (write), getDefaultTabNameModule (ref), isGlobalTabFirstModule (ref), shouldRenderTextChannelInDefaultWindow (ref), getTextChannelDisplayMode (ref), getFFlagExpChatFixChannelTabsMidExperienceToggleModule (ref), pruneNonSpecialTabs (ref)
-	local var1, var2 = createSignal({
+return function() --[[ Line: 231 | Named "createChannelTabsStore" ]]
+	-- upvalues: CreateSignalFunction (copy), CreateComputedFunction (copy), TutilsModule (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (copy), GetFFlagExpChatSuppressWelcomeMessageTabUnreadFunction (copy), ShouldSuppressUnreadForTabMetadataModule (copy), markTabUnread (copy), isTargetChannelNoOp (copy), FFlagExpChatGlobalTabDefaultModule (copy), reorderTabs (copy), FFlagExpChatFriendsTabRequireDefaultChannels (copy), FFlagExpChatEnableFriendsTab (copy), Callback (ref), GetDefaultTabNameModule (copy), IsGlobalTabFirstModule (copy), ShouldRenderTextChannelInDefaultWindowFunction (copy), GetTextChannelDisplayModeFunction (copy), GetFFlagExpChatFixChannelTabsMidExperienceToggleModule (copy), pruneNonSpecialTabs (copy)
+	local Signal, Signal2 = CreateSignalFunction({
 		selectedTabName = nil,
 		channelTabsConfigurationEnabled = false,
 		hasUserSelectedTab = false,
@@ -145,327 +122,314 @@ return function()
 	})
 	
 	return {
-		getChannelTabsState = var1,
-		getSelectedTabName = createComputed(function(p1)
-			-- upvalues: var1 (ref)
-			return var1(p1).selectedTabName
+		getChannelTabsState = Signal,
+		getSelectedTabName = CreateComputedFunction(function(p1) --[[ Line: 242 ]]
+			-- upvalues: Signal (copy)
+			return Signal(p1).selectedTabName
 		end),
-		getUnreadChannels = createComputed(function(p1)
-			-- upvalues: var1 (ref)
+		getUnreadChannels = CreateComputedFunction(function(p1) --[[ Line: 247 ]]
+			-- upvalues: Signal (copy)
 			local t = {}
 			
-			for i, v in pairs(var1(p1).allChannelTabs) do
-				if v.HasUnreadMessages then
+			for i, allChannelTab in pairs(Signal(p1).allChannelTabs) do
+				if allChannelTab.HasUnreadMessages then
 					t[i] = true
 				end
 			end
 			return t
-		end, tutilsModule.deepEqual),
-		handleIncomingOrOutgoingMessage = function(a, b, p2)
-			-- upvalues: getFFlagTextChatEnableUniverseChatTabs (copy), getFFlagExpChatSuppressWelcomeMessageTabUnread (copy), shouldSuppressUnreadForTabMetadataModule (copy), var2 (ref), markTabUnread (copy)
-			if not getFFlagTextChatEnableUniverseChatTabs() and not a.TextChannel or b then return end
-			if getFFlagExpChatSuppressWelcomeMessageTabUnread() and shouldSuppressUnreadForTabMetadataModule(a.Metadata) then return end
-			local name = nil
+		end, TutilsModule.deepEqual),
+		handleIncomingOrOutgoingMessage = function(TextChatMessage, p2, p3) --[[ Line: 260 ]]
+			-- upvalues: GetFFlagTextChatEnableUniverseChatTabsFunction (upval), GetFFlagExpChatSuppressWelcomeMessageTabUnreadFunction (upval), ShouldSuppressUnreadForTabMetadataModule (upval), Signal2 (copy), markTabUnread (upval)
+			if not GetFFlagTextChatEnableUniverseChatTabsFunction() and not TextChatMessage.TextChannel or p2 then return end
+			if GetFFlagExpChatSuppressWelcomeMessageTabUnreadFunction() and ShouldSuppressUnreadForTabMetadataModule(TextChatMessage.Metadata) then return end
+			local Name = nil
 			
-			if getFFlagTextChatEnableUniverseChatTabs() then
-				if p2 then
-					name = p2
-				elseif a.TextChannel then
-					name = a.TextChannel.Name
+			if GetFFlagTextChatEnableUniverseChatTabsFunction() then
+				if p3 then
+					Name = p3
 				else
-					return
+					if not TextChatMessage.TextChannel then return end
+					Name = TextChatMessage.TextChannel.Name
 				end
 			end
-			var2(function(p3)
-				-- upvalues: getFFlagTextChatEnableUniverseChatTabs (copy), a (ref), name (write), markTabUnread (copy)
-				if not getFFlagTextChatEnableUniverseChatTabs() then
-					local textChannel = a.TextChannel
+			Signal2(function(p4) --[[ Line: 289 ]]
+				-- upvalues: GetFFlagTextChatEnableUniverseChatTabsFunction (upval), TextChatMessage (copy), Name (ref), markTabUnread (upval)
+				if not GetFFlagTextChatEnableUniverseChatTabsFunction() then
+					local TextChannel = TextChatMessage.TextChannel
 					
-					if textChannel == nil then
-						return p3
-					end
-					name = textChannel.Name
-				end
-				if name == "RBXSystem" then
-					name = "RBXGeneral"
-				end
-				return markTabUnread(p3, name)
-			end)
-		end,
-		setSelectedTab = function(value)
-			-- upvalues: var2 (ref)
-			var2(function(p2)
-				-- upvalues: value (ref)
-				local var3 = p2.allChannelTabs[value]
-				
-				if p2.selectedTabName == value and (var3 == nil or not var3.HasUnreadMessages) then
-					return p2
-				end
-				local cloned = table.clone(p2)
-				cloned.selectedTabName = value
-				
-				if cloned.allChannelTabs[value] then
-					cloned.allChannelTabs = table.clone(cloned.allChannelTabs)
-					local cloned_1 = table.clone(cloned.allChannelTabs[value])
-					cloned_1.HasUnreadMessages = false
-					cloned.allChannelTabs[value] = cloned_1
-				end
-				return cloned
-			end)
-		end,
-		setTargetChannel = function(value, p2, p3)
-			-- upvalues: var2 (ref), isTargetChannelNoOp (copy), fFlagExpChatGlobalTabDefaultModule (copy), reorderTabs (copy), getFFlagTextChatEnableUniverseChatTabs (copy), fFlagExpChatFriendsTabRequireDefaultChannels (copy), fFlagExpChatEnableFriendsTab (copy), getFixedTabPriority (copy)
-			var2(function(p4)
-				-- upvalues: isTargetChannelNoOp (copy), value (ref), p2 (ref), p3 (ref), fFlagExpChatGlobalTabDefaultModule (copy), reorderTabs (copy), getFFlagTextChatEnableUniverseChatTabs (copy), fFlagExpChatFriendsTabRequireDefaultChannels (copy), fFlagExpChatEnableFriendsTab (copy), getFixedTabPriority (copy)
-				if isTargetChannelNoOp(p4, value, p2, p3) then
-					return p4
-				end
-				local cloned = table.clone(p4)
-				
-				if fFlagExpChatGlobalTabDefaultModule and p3 then
-					cloned.hasUserSelectedTab = true
-				end
-				if value and cloned.allChannelTabs[value] then
-					local var3 = cloned.allChannelTabs[value]
-					local t = {
-						type = var3.type,
-						name = var3.name,
-						tabIndex = if p2 then 0 else var3.tabIndex,
-						HasUnreadMessages = var3.type == "FriendsChat" and var3.HasUnreadMessages
-					}
-					local cloned_1 = table.clone(cloned.allChannelTabs)
-					cloned_1[t.name] = t
-					cloned.allChannelTabs = reorderTabs(cloned_1)
-					cloned.selectedTabName = var3.name
-					
-					return cloned
-				elseif value ~= nil then
-					local var4
-					if not getFFlagTextChatEnableUniverseChatTabs() then
-						var4 = fFlagExpChatFriendsTabRequireDefaultChannels and (fFlagExpChatEnableFriendsTab and not cloned.channelTabsConfigurationEnabled)
-					end
-					if var4 and getFixedTabPriority(value) == nil then
-						return cloned
-					else
-						cloned.selectedTabName = value
-						
-						return cloned
-					end
-				end
-			end)
-		end,
-		addChannelTab = function(p2, p3)
-			-- upvalues: var2 (ref), getFFlagTextChatEnableUniverseChatTabs (copy), fFlagExpChatFriendsTabRequireDefaultChannels (copy), fFlagExpChatEnableFriendsTab (copy), reorderTabs (copy), getFixedTabPriority (copy), fFlagExpChatGlobalTabDefaultModule (copy), getDefaultTabNameModule (copy), isGlobalTabFirstModule (copy)
-			local name = p2.name
-			var2(function(p4)
-				-- upvalues: name (ref), p2 (ref), getFFlagTextChatEnableUniverseChatTabs (copy), fFlagExpChatFriendsTabRequireDefaultChannels (copy), fFlagExpChatEnableFriendsTab (copy), p3 (ref), reorderTabs (copy), getFixedTabPriority (copy), fFlagExpChatGlobalTabDefaultModule (copy), getDefaultTabNameModule (copy), isGlobalTabFirstModule (copy)
-				if p4.allChannelTabs[name] ~= nil then
-					return p4
-				elseif p2.type == "TextChat" and name ~= "RBXGeneral" then
-					local var3
-					if not getFFlagTextChatEnableUniverseChatTabs() then
-						var3 = fFlagExpChatFriendsTabRequireDefaultChannels and (fFlagExpChatEnableFriendsTab and not p4.channelTabsConfigurationEnabled)
-					end
-					if var3 then
+					if TextChannel == nil then
 						return p4
 					end
+					Name = TextChannel.Name
 				end
-				local cloned = table.clone(p4)
-				local allChannelTabs = cloned.allChannelTabs
+				if Name == "RBXSystem" then
+					Name = "RBXGeneral"
+				end
+				return (markTabUnread(p4, Name))
+			end)
+		end,
+		setSelectedTab = function(SelectedTabName) --[[ Line: 330 ]]
+			-- upvalues: Signal2 (copy)
+			Signal2(function(Tbl) --[[ Line: 331 ]]
+				-- upvalues: SelectedTabName (copy)
+				local AllChannelTab = Tbl.allChannelTabs[SelectedTabName]
+				
+				if Tbl.selectedTabName == SelectedTabName and (AllChannelTab == nil or not AllChannelTab.HasUnreadMessages) then
+					return Tbl
+				end
+				local Copy = table.clone(Tbl)
+				Copy.selectedTabName = SelectedTabName
+				
+				if Copy.allChannelTabs[SelectedTabName] then
+					Copy.allChannelTabs = table.clone(Copy.allChannelTabs)
+					local Copy1 = table.clone(Copy.allChannelTabs[SelectedTabName])
+					Copy1.HasUnreadMessages = false
+					Copy.allChannelTabs[SelectedTabName] = Copy1
+				end
+				return Copy
+			end)
+		end,
+		setTargetChannel = function(SelectedTabName, p2, p3) --[[ Line: 351 ]]
+			-- upvalues: Signal2 (copy), isTargetChannelNoOp (upval), FFlagExpChatGlobalTabDefaultModule (upval), reorderTabs (upval), GetFFlagTextChatEnableUniverseChatTabsFunction (upval), FFlagExpChatFriendsTabRequireDefaultChannels (upval), FFlagExpChatEnableFriendsTab (upval), Callback (upval)
+			Signal2(function(Tbl) --[[ Line: 352 ]]
+				-- upvalues: isTargetChannelNoOp (upval), SelectedTabName (copy), p2 (copy), p3 (copy), FFlagExpChatGlobalTabDefaultModule (upval), reorderTabs (upval), GetFFlagTextChatEnableUniverseChatTabsFunction (upval), FFlagExpChatFriendsTabRequireDefaultChannels (upval), FFlagExpChatEnableFriendsTab (upval), Callback (upval)
+				if isTargetChannelNoOp(Tbl, SelectedTabName, p2, p3) then
+					return Tbl
+				end
+				local Copy = table.clone(Tbl)
+				
+				if FFlagExpChatGlobalTabDefaultModule and p3 then
+					Copy.hasUserSelectedTab = true
+				end
+				if SelectedTabName and Copy.allChannelTabs[SelectedTabName] then
+					local AllChannelTab = Copy.allChannelTabs[SelectedTabName]
+					local config = {
+						type = AllChannelTab.type,
+						name = AllChannelTab.name,
+						tabIndex = if p2 then 0 else AllChannelTab.tabIndex,
+						HasUnreadMessages = AllChannelTab.type == "FriendsChat" and AllChannelTab.HasUnreadMessages
+					}
+					local Copy1 = table.clone(Copy.allChannelTabs)
+					Copy1[config.name] = config
+					Copy.allChannelTabs = reorderTabs(Copy1)
+					Copy.selectedTabName = AllChannelTab.name
+					
+					return Copy
+				elseif SelectedTabName == nil or (if GetFFlagTextChatEnableUniverseChatTabsFunction() then not Copy.channelTabsConfigurationEnabled else FFlagExpChatFriendsTabRequireDefaultChannels and (FFlagExpChatEnableFriendsTab and not Copy.channelTabsConfigurationEnabled)) and Callback(SelectedTabName) == nil then
+					return Copy
+				else
+					Copy.selectedTabName = SelectedTabName
+					
+					return Copy
+				end
+			end)
+		end,
+		addChannelTab = function(p2, p3) --[[ Line: 402 ]]
+			-- upvalues: Signal2 (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (upval), FFlagExpChatFriendsTabRequireDefaultChannels (upval), FFlagExpChatEnableFriendsTab (upval), reorderTabs (upval), Callback (upval), FFlagExpChatGlobalTabDefaultModule (upval), GetDefaultTabNameModule (upval), IsGlobalTabFirstModule (upval)
+			local Name = p2.name
+			Signal2(function(Tbl) --[[ Line: 405 ]]
+				-- upvalues: Name (copy), p2 (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (upval), FFlagExpChatFriendsTabRequireDefaultChannels (upval), FFlagExpChatEnableFriendsTab (upval), p3 (copy), reorderTabs (upval), Callback (upval), FFlagExpChatGlobalTabDefaultModule (upval), GetDefaultTabNameModule (upval), IsGlobalTabFirstModule (upval)
+				if Tbl.allChannelTabs[Name] ~= nil then
+					return Tbl
+				end
+				if p2.type == "TextChat" and Name ~= "RBXGeneral" and (if GetFFlagTextChatEnableUniverseChatTabsFunction() then not Tbl.channelTabsConfigurationEnabled else FFlagExpChatFriendsTabRequireDefaultChannels and (FFlagExpChatEnableFriendsTab and not Tbl.channelTabsConfigurationEnabled)) then
+					return Tbl
+				end
+				local Copy = table.clone(Tbl)
+				local AllChannelTabs = Copy.allChannelTabs
 				
 				if p3 ~= nil then
 					local t = {}
 					
-					for i, v in cloned.allChannelTabs do
-						if p3 <= v.tabIndex then
-							local cloned_1 = table.clone(v)
-							cloned_1.tabIndex = v.tabIndex + 1
-							t[i] = cloned_1
+					for i, allChannelTab in Copy.allChannelTabs do
+						if p3 <= allChannelTab.tabIndex then
+							local Copy2 = table.clone(allChannelTab)
+							Copy2.tabIndex = allChannelTab.tabIndex + 1
+							t[i] = Copy2
 						else
-							t[i] = v
+							t[i] = allChannelTab
 						end
 					end
-					allChannelTabs = t
+					AllChannelTabs = t
 				end
-				local t = {
+				local config = {
 					HasUnreadMessages = false,
 					type = p2.type,
-					name = name,
+					name = Name,
 					tabIndex = p3 or 0
 				}
-				local cloned_1 = table.clone(allChannelTabs)
-				cloned_1[t.name] = t
-				cloned.allChannelTabs = reorderTabs(cloned_1)
-				local var4 = getFixedTabPriority(name)
-				local var5 = getFixedTabPriority(cloned.selectedTabName)
+				local Copy1 = table.clone(AllChannelTabs)
+				Copy1[config.name] = config
+				Copy.allChannelTabs = reorderTabs(Copy1)
+				local v1 = Callback(Name)
+				local v2 = Callback(Copy.selectedTabName)
 				
-				if cloned.selectedTabName == nil then
-					if p2.type == "TextChat" then
-						return cloned
+				if Copy.selectedTabName ~= nil then
+					if v1 ~= nil and v1 < (v2 or 1e999) and (not FFlagExpChatEnableFriendsTab or v2 ~= nil) and (not FFlagExpChatGlobalTabDefaultModule or not IsGlobalTabFirstModule() or Name ~= "RBXGlobal" or not Copy.hasUserSelectedTab) then
+						Copy.selectedTabName = Name
 					end
-					if fFlagExpChatGlobalTabDefaultModule then
-						cloned.selectedTabName = getDefaultTabNameModule(cloned.allChannelTabs) or name
+				elseif p2.type ~= "TextChat" then
+					if FFlagExpChatGlobalTabDefaultModule then
+						Copy.selectedTabName = GetDefaultTabNameModule(Copy.allChannelTabs) or Name
 						
-						return cloned
+						return Copy
+					else
+						Copy.selectedTabName = if Copy.allChannelTabs.RBXGeneral then "RBXGeneral" else Name
+						
+						return Copy
 					end
-					cloned.selectedTabName = if cloned.allChannelTabs.RBXGeneral then "RBXGeneral" else name
-					
-					return cloned
-				elseif var4 ~= nil and var4 < (var5 or 1e999) and (not fFlagExpChatEnableFriendsTab or var5 ~= nil) and (not fFlagExpChatGlobalTabDefaultModule or not isGlobalTabFirstModule() or (name ~= "RBXGlobal" or not cloned.hasUserSelectedTab)) then
-					cloned.selectedTabName = name
 				end
+				return Copy
 			end)
 		end,
-		handleLocalTextChannelParticipantAdded = function(p4)
-			-- upvalues: shouldRenderTextChannelInDefaultWindow (copy), getTextChannelDisplayMode (copy), var2 (ref), getFFlagTextChatEnableUniverseChatTabs (copy), fFlagExpChatFriendsTabRequireDefaultChannels (copy), fFlagExpChatEnableFriendsTab (copy), reorderTabs (copy), getFixedTabPriority (copy), fFlagExpChatGlobalTabDefaultModule (copy), getDefaultTabNameModule (copy), isGlobalTabFirstModule (copy)
+		handleLocalTextChannelParticipantAdded = function(p4) --[[ Line: 485 ]]
+			-- upvalues: ShouldRenderTextChannelInDefaultWindowFunction (upval), GetTextChannelDisplayModeFunction (upval), Signal2 (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (upval), FFlagExpChatFriendsTabRequireDefaultChannels (upval), FFlagExpChatEnableFriendsTab (upval), reorderTabs (upval), Callback (upval), FFlagExpChatGlobalTabDefaultModule (upval), GetDefaultTabNameModule (upval), IsGlobalTabFirstModule (upval)
 			if p4.Name == "RBXSystem" then return end
-			if shouldRenderTextChannelInDefaultWindow(p4, getTextChannelDisplayMode()) then
-				local t = { type = "TextChat", name = p4.Name }
-				local name = t.name
-				local var3 = nil
-				var2(function(p5)
-					-- upvalues: name (ref), t (ref), getFFlagTextChatEnableUniverseChatTabs (copy), fFlagExpChatFriendsTabRequireDefaultChannels (copy), fFlagExpChatEnableFriendsTab (copy), var3 (ref), reorderTabs (copy), getFixedTabPriority (copy), fFlagExpChatGlobalTabDefaultModule (copy), getDefaultTabNameModule (copy), isGlobalTabFirstModule (copy)
-					if p5.allChannelTabs[name] ~= nil then
-						return p5
-					elseif t.type == "TextChat" and name ~= "RBXGeneral" then
-						local var4
-						if not getFFlagTextChatEnableUniverseChatTabs() then
-							var4 = fFlagExpChatFriendsTabRequireDefaultChannels and (fFlagExpChatEnableFriendsTab and not p5.channelTabsConfigurationEnabled)
-						end
-						if var4 then
-							return p5
-						end
+			if ShouldRenderTextChannelInDefaultWindowFunction(p4, GetTextChannelDisplayModeFunction()) then
+				local config = { type = "TextChat", name = p4.Name }
+				local Name = config.name
+				local v1 = nil
+				Signal2(function(Tbl) --[[ Line: 405 ]]
+					-- upvalues: Name (copy), config (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (upval), FFlagExpChatFriendsTabRequireDefaultChannels (upval), FFlagExpChatEnableFriendsTab (upval), v1 (copy), reorderTabs (upval), Callback (upval), FFlagExpChatGlobalTabDefaultModule (upval), GetDefaultTabNameModule (upval), IsGlobalTabFirstModule (upval)
+					if Tbl.allChannelTabs[Name] ~= nil then
+						return Tbl
 					end
-					local cloned = table.clone(p5)
-					local allChannelTabs = cloned.allChannelTabs
+					if config.type == "TextChat" and Name ~= "RBXGeneral" and (if GetFFlagTextChatEnableUniverseChatTabsFunction() then not Tbl.channelTabsConfigurationEnabled else FFlagExpChatFriendsTabRequireDefaultChannels and (FFlagExpChatEnableFriendsTab and not Tbl.channelTabsConfigurationEnabled)) then
+						return Tbl
+					end
+					local Copy = table.clone(Tbl)
+					local AllChannelTabs = Copy.allChannelTabs
 					
-					if var3 ~= nil then
+					if v1 ~= nil then
 						local t = {}
 						
-						for i, v in cloned.allChannelTabs do
-							if var3 <= v.tabIndex then
-								local cloned_1 = table.clone(v)
-								cloned_1.tabIndex = v.tabIndex + 1
-								t[i] = cloned_1
+						for i, allChannelTab in Copy.allChannelTabs do
+							if v1 <= allChannelTab.tabIndex then
+								local Copy2 = table.clone(allChannelTab)
+								Copy2.tabIndex = allChannelTab.tabIndex + 1
+								t[i] = Copy2
 							else
-								t[i] = v
+								t[i] = allChannelTab
 							end
 						end
-						allChannelTabs = t
+						AllChannelTabs = t
 					end
-					local t = {
+					local config = {
 						HasUnreadMessages = false,
-						type = t.type,
-						name = name,
-						tabIndex = var3 or 0
+						type = config.type,
+						name = Name,
+						tabIndex = v1 or 0
 					}
-					local cloned_1 = table.clone(allChannelTabs)
-					cloned_1[t.name] = t
-					cloned.allChannelTabs = reorderTabs(cloned_1)
-					local var5 = getFixedTabPriority(name)
-					local var6 = getFixedTabPriority(cloned.selectedTabName)
+					local Copy1 = table.clone(AllChannelTabs)
+					Copy1[config.name] = config
+					Copy.allChannelTabs = reorderTabs(Copy1)
+					local v2 = Callback(Name)
+					local v3 = Callback(Copy.selectedTabName)
 					
-					if cloned.selectedTabName == nil then
-						if t.type == "TextChat" then
-							return cloned
+					if Copy.selectedTabName ~= nil then
+						if v2 ~= nil and v2 < (v3 or 1e999) and (not FFlagExpChatEnableFriendsTab or v3 ~= nil) and (not FFlagExpChatGlobalTabDefaultModule or not IsGlobalTabFirstModule() or Name ~= "RBXGlobal" or not Copy.hasUserSelectedTab) then
+							Copy.selectedTabName = Name
 						end
-						if fFlagExpChatGlobalTabDefaultModule then
-							cloned.selectedTabName = getDefaultTabNameModule(cloned.allChannelTabs) or name
+					elseif config.type ~= "TextChat" then
+						if FFlagExpChatGlobalTabDefaultModule then
+							Copy.selectedTabName = GetDefaultTabNameModule(Copy.allChannelTabs) or Name
 							
-							return cloned
+							return Copy
+						else
+							Copy.selectedTabName = if Copy.allChannelTabs.RBXGeneral then "RBXGeneral" else Name
+							
+							return Copy
 						end
-						cloned.selectedTabName = if cloned.allChannelTabs.RBXGeneral then "RBXGeneral" else name
-						
-						return cloned
-					elseif var5 ~= nil and var5 < (var6 or 1e999) and (not fFlagExpChatEnableFriendsTab or var6 ~= nil) and (not fFlagExpChatGlobalTabDefaultModule or not isGlobalTabFirstModule() or (name ~= "RBXGlobal" or not cloned.hasUserSelectedTab)) then
-						cloned.selectedTabName = name
 					end
+					return Copy
 				end)
 				
 				return
 			end
 		end,
-		handleChannelRemoved = function(p5)
-			-- upvalues: var2 (ref), reorderTabs (copy), fFlagExpChatGlobalTabDefaultModule (copy), getDefaultTabNameModule (copy)
-			var2(function(p6)
-				-- upvalues: p5 (ref), reorderTabs (copy), fFlagExpChatGlobalTabDefaultModule (copy), getDefaultTabNameModule (copy)
-				local var4 = p6.allChannelTabs[p5]
+		handleChannelRemoved = function(p5) --[[ Line: 497 ]]
+			-- upvalues: Signal2 (copy), reorderTabs (upval), FFlagExpChatGlobalTabDefaultModule (upval), GetDefaultTabNameModule (upval)
+			Signal2(function(Tbl) --[[ Line: 498 ]]
+				-- upvalues: p5 (copy), reorderTabs (upval), FFlagExpChatGlobalTabDefaultModule (upval), GetDefaultTabNameModule (upval)
+				local AllChannelTab = Tbl.allChannelTabs[p5]
 				
-				if var4 == nil then
-					return p6
+				if AllChannelTab == nil then
+					return Tbl
 				end
-				local cloned = table.clone(p6)
-				local cloned_1 = table.clone(cloned.allChannelTabs)
-				cloned_1[var4.name] = nil
-				cloned.allChannelTabs = reorderTabs(cloned_1)
+				local Copy = table.clone(Tbl)
+				local Copy1 = table.clone(Copy.allChannelTabs)
+				Copy1[AllChannelTab.name] = nil
+				Copy.allChannelTabs = reorderTabs(Copy1)
 				
-				if var4.name == cloned.selectedTabName then
-					if fFlagExpChatGlobalTabDefaultModule then
-						cloned.selectedTabName = getDefaultTabNameModule(cloned.allChannelTabs)
+				if AllChannelTab.name == Copy.selectedTabName then
+					if FFlagExpChatGlobalTabDefaultModule then
+						Copy.selectedTabName = GetDefaultTabNameModule(Copy.allChannelTabs)
 					else
-						cloned.selectedTabName = if cloned.allChannelTabs.RBXGeneral then "RBXGeneral" else nil
+						Copy.selectedTabName = if Copy.allChannelTabs.RBXGeneral then "RBXGeneral" else nil
 					end
 				end
-				if cloned.selectedTabName and cloned.allChannelTabs[cloned.selectedTabName] then
-					cloned.allChannelTabs = table.clone(cloned.allChannelTabs)
-					local cloned_2 = table.clone(cloned.allChannelTabs[cloned.selectedTabName])
-					cloned_2.HasUnreadMessages = false
-					cloned.allChannelTabs[cloned.selectedTabName] = cloned_2
+				if Copy.selectedTabName and Copy.allChannelTabs[Copy.selectedTabName] then
+					Copy.allChannelTabs = table.clone(Copy.allChannelTabs)
+					local Copy2 = table.clone(Copy.allChannelTabs[Copy.selectedTabName])
+					Copy2.HasUnreadMessages = false
+					Copy.allChannelTabs[Copy.selectedTabName] = Copy2
 				end
-				return cloned
+				return Copy
 			end)
 		end,
-		markChannelUnread = function(p5)
-			-- upvalues: var2 (ref), markTabUnread (copy)
-			var2(function(p6)
-				-- upvalues: markTabUnread (copy), p5 (ref)
-				return markTabUnread(p6, p5)
+		markChannelUnread = function(p5) --[[ Line: 308 ]]
+			-- upvalues: Signal2 (copy), markTabUnread (upval)
+			Signal2(function(p6) --[[ Line: 309 ]]
+				-- upvalues: markTabUnread (upval), p5 (copy)
+				return (markTabUnread(p6, p5))
 			end)
 		end,
-		setChannelUnreadStatus = function(value, p5)
-			-- upvalues: var2 (ref)
-			var2(function(p6)
-				-- upvalues: value (ref), p5 (ref)
-				local var4 = p6.allChannelTabs[value]
+		setChannelUnreadStatus = function(p5, HasUnreadMessages) --[[ Line: 314 ]]
+			-- upvalues: Signal2 (copy)
+			Signal2(function(Tbl) --[[ Line: 315 ]]
+				-- upvalues: p5 (copy), HasUnreadMessages (copy)
+				local AllChannelTab = Tbl.allChannelTabs[p5]
 				
-				if var4 == nil or var4.HasUnreadMessages == p5 then
-					return p6
-				end
-				local cloned = table.clone(p6)
-				cloned.allChannelTabs = table.clone(cloned.allChannelTabs)
-				local cloned_1 = table.clone(cloned.allChannelTabs[value])
-				cloned_1.HasUnreadMessages = p5
-				cloned.allChannelTabs[value] = cloned_1
-				
-				return cloned
-			end)
-		end,
-		setChannelTabsConfigurationEnabled = function(value)
-			-- upvalues: var2 (ref), getFFlagTextChatEnableUniverseChatTabs (copy), getFFlagExpChatFixChannelTabsMidExperienceToggleModule (copy), pruneNonSpecialTabs (copy), fFlagExpChatGlobalTabDefaultModule (copy), getDefaultTabNameModule (copy)
-			var2(function(p5)
-				-- upvalues: getFFlagTextChatEnableUniverseChatTabs (copy), getFFlagExpChatFixChannelTabsMidExperienceToggleModule (copy), value (ref), pruneNonSpecialTabs (copy), fFlagExpChatGlobalTabDefaultModule (copy), getDefaultTabNameModule (copy)
-				if not getFFlagTextChatEnableUniverseChatTabs() then
-					return p5
-				elseif not getFFlagExpChatFixChannelTabsMidExperienceToggleModule() or value then
-					local cloned = table.clone(p5)
-					cloned.channelTabsConfigurationEnabled = value
+				if AllChannelTab == nil or AllChannelTab.HasUnreadMessages == HasUnreadMessages then
+					return Tbl
+				else
+					local Copy = table.clone(Tbl)
+					Copy.allChannelTabs = table.clone(Copy.allChannelTabs)
+					local Copy1 = table.clone(Copy.allChannelTabs[p5])
+					Copy1.HasUnreadMessages = HasUnreadMessages
+					Copy.allChannelTabs[p5] = Copy1
 					
-					return cloned
+					return Copy
 				end
-				local var4 = pruneNonSpecialTabs(p5.allChannelTabs)
-				local selectedTabName = p5.selectedTabName
+			end)
+		end,
+		setChannelTabsConfigurationEnabled = function(ChannelTabsConfigurationEnabled) --[[ Line: 529 ]]
+			-- upvalues: Signal2 (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (upval), GetFFlagExpChatFixChannelTabsMidExperienceToggleModule (upval), pruneNonSpecialTabs (upval), FFlagExpChatGlobalTabDefaultModule (upval), GetDefaultTabNameModule (upval)
+			Signal2(function(Tbl) --[[ Line: 530 ]]
+				-- upvalues: GetFFlagTextChatEnableUniverseChatTabsFunction (upval), GetFFlagExpChatFixChannelTabsMidExperienceToggleModule (upval), ChannelTabsConfigurationEnabled (copy), pruneNonSpecialTabs (upval), FFlagExpChatGlobalTabDefaultModule (upval), GetDefaultTabNameModule (upval)
+				if not GetFFlagTextChatEnableUniverseChatTabsFunction() then
+					return Tbl
+				end
+				if not GetFFlagExpChatFixChannelTabsMidExperienceToggleModule() or ChannelTabsConfigurationEnabled then
+					local Copy = table.clone(Tbl)
+					Copy.channelTabsConfigurationEnabled = ChannelTabsConfigurationEnabled
+					
+					return Copy
+				end
+				local PruneNonSpecialTabsResult = pruneNonSpecialTabs(Tbl.allChannelTabs)
+				local SelectedTabName = Tbl.selectedTabName
 				
-				if selectedTabName == nil or var4[selectedTabName] == nil then
-					selectedTabName = if fFlagExpChatGlobalTabDefaultModule then getDefaultTabNameModule(var4) or (if var4.RBXGlobal then "RBXGlobal" else nil) elseif var4.RBXGeneral then "RBXGeneral" elseif var4.RBXGlobal then "RBXGlobal" else nil
+				if SelectedTabName == nil or PruneNonSpecialTabsResult[SelectedTabName] == nil then
+					SelectedTabName = if FFlagExpChatGlobalTabDefaultModule then GetDefaultTabNameModule(PruneNonSpecialTabsResult) or (if PruneNonSpecialTabsResult.RBXGlobal then "RBXGlobal" else nil) elseif PruneNonSpecialTabsResult.RBXGeneral then "RBXGeneral" elseif PruneNonSpecialTabsResult.RBXGlobal then "RBXGlobal" else nil
 				end
-				if selectedTabName and var4[selectedTabName] then
-					var4[selectedTabName].HasUnreadMessages = false
+				if SelectedTabName and PruneNonSpecialTabsResult[SelectedTabName] then
+					PruneNonSpecialTabsResult[SelectedTabName].HasUnreadMessages = false
 				end
 				return {
 					channelTabsConfigurationEnabled = false,
-					allChannelTabs = var4,
-					selectedTabName = selectedTabName,
-					hasUserSelectedTab = p5.hasUserSelectedTab
+					allChannelTabs = PruneNonSpecialTabsResult,
+					selectedTabName = SelectedTabName,
+					hasUserSelectedTab = Tbl.hasUserSelectedTab
 				}
 			end)
 		end

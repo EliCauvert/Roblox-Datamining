@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.VideoUtils.VideoUtils)
+﻿return (require(script.Parent.Parent.Parent._Index.VideoUtils.VideoUtils))

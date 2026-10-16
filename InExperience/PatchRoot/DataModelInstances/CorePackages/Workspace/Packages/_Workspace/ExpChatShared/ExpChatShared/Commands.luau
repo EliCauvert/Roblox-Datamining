@@ -5,27 +5,27 @@ local RBXUnmuteCommandModule = require(script.RBXUnmuteCommand)
 local RBXVersionCommandModule = require(script.RBXVersionCommand)
 local RBXEmoteCommandModule = require(script.RBXEmoteCommand)
 local RBXTeamCommandModule = require(script.RBXTeamCommand)
-local RBXWhisperCommand = require(script.Whisper).RBXWhisperCommand
 local RBXClearCommandModule = require(script.RBXClearCommand)
 local RBXOnlineCommandModule = require(script.RBXOnlineCommand)
-local expChatLocalUserCountEnabledEngineFeature = game:GetEngineFeature("ExpChatLocalUserCountEnabled")
-local expChatEnableVirtualLocalOnlineCommand = game:DefineFastFlag("ExpChatEnableVirtualLocalOnlineCommand", false)
+local ExpChatLocalUserCountEnabledEngineFeature = game:GetEngineFeature("ExpChatLocalUserCountEnabled")
+local ExpChatEnableVirtualLocalOnlineCommand = game:DefineFastFlag("ExpChatEnableVirtualLocalOnlineCommand", false)
 local _ = require(script.types)
 
 return {
 	enabledCommands = {
 		RBXConsoleCommandModule, RBXHelpCommandModule, RBXMuteCommandModule,
 		RBXUnmuteCommandModule, RBXVersionCommandModule, RBXEmoteCommandModule,
-		RBXTeamCommandModule, RBXWhisperCommand, RBXClearCommandModule
+		RBXTeamCommandModule, require(script.Whisper).RBXWhisperCommand,
+		RBXClearCommandModule
 	},
-	getVirtualLocalEnabledCommands = function()
-		-- upvalues: expChatLocalUserCountEnabledEngineFeature (ref), expChatEnableVirtualLocalOnlineCommand (ref), RBXOnlineCommandModule (ref)
-		local t = {}
+	getVirtualLocalEnabledCommands = function() --[[ Line: 33 ]]
+		-- upvalues: ExpChatLocalUserCountEnabledEngineFeature (copy), ExpChatEnableVirtualLocalOnlineCommand (copy), RBXOnlineCommandModule (copy)
+		local List = {}
 		
-		if expChatLocalUserCountEnabledEngineFeature and expChatEnableVirtualLocalOnlineCommand then
-			table.insert(t, RBXOnlineCommandModule)
+		if ExpChatLocalUserCountEnabledEngineFeature and ExpChatEnableVirtualLocalOnlineCommand then
+			table.insert(List, RBXOnlineCommandModule)
 		end
-		return t
+		return List
 	end,
 	autoCastCommand = require(script.autoCastCommand),
 	RBXClearCommand = RBXClearCommandModule,

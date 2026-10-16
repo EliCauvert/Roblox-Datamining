@@ -1,37 +1,37 @@
-﻿return function()
-	local t = {}
+﻿return function() --[[ Line: 8 | Named "createEvent" ]]
+	local Tbl = {}
 	
 	return {
-		fire = function(...)
-			-- upvalues: t (write)
-			for i, v in t do
-				v(...)
+		fire = function(...) --[[ Line: 14 ]]
+			-- upvalues: Tbl (ref)
+			for _, value in Tbl do
+				value(...)
 			end
 		end,
-		connect = function(p1)
-			-- upvalues: t (write)
-			local var1 = true
+		connect = function(Callback) --[[ Line: 20 ]]
+			-- upvalues: Tbl (ref)
+			local Flag = true
 			
-			local var2 = function(...)
-				-- upvalues: var1 (write), p1 (ref)
-				if var1 then
-					p1(...)
+			local function Value(...) --[[ Line: 22 ]]
+				-- upvalues: Flag (ref), Callback (copy)
+				if Flag then
+					Callback(...)
 				end
 			end
 			
-			local cloned = table.clone(t)
-			table.insert(cloned, var2)
-			t = cloned
+			local Copy = table.clone(Tbl)
+			table.insert(Copy, Value)
+			Tbl = Copy
 			
-			return function()
-				-- upvalues: var1 (write), t (copy), var2 (ref)
-				var1 = false
-				local index = table.find(t, var2)
+			return function() --[[ Line: 30 ]]
+				-- upvalues: Flag (ref), Tbl (upval), Value (copy)
+				Flag = false
+				local FoundIndex: number? = table.find(Tbl, Value)
 				
-				if index ~= nil then
-					local cloned = table.clone(t)
-					table.remove(cloned, index)
-					t = cloned
+				if FoundIndex ~= nil then
+					local Copy = table.clone(Tbl)
+					table.remove(Copy, FoundIndex)
+					Tbl = Copy
 				end
 			end
 		end

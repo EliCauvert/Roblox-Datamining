@@ -1,49 +1,55 @@
-﻿local authCommon = script:FindFirstAncestor("AuthCommon")
-local parent = authCommon.Parent
-local httpService = game:GetService("HttpService")
-local url = require(parent.Http).Url
-local consoleAuthRequestWrapper = require(parent.Http).Utils.ConsoleAuthRequestWrapper
-local appStorageUtilitiesModule = require(authCommon.Utils.AppStorageUtilities)
-local getAppFeaturePolicies = require(parent.UniversalAppPolicy).getAppFeaturePolicies
-local fFlagEnableLuaAccountSwitch = require(parent.SharedFlags).FFlagEnableLuaAccountSwitch
+﻿local AuthCommon = script:FindFirstAncestor("AuthCommon")
+local Parent = AuthCommon.Parent
+local HttpService = game:GetService("HttpService")
+local Url = require(Parent.Http).Url
+local ConsoleAuthRequestWrapperFunction = require(Parent.Http).Utils.ConsoleAuthRequestWrapper
+local AppStorageUtilitiesModule = require(AuthCommon.Utils.AppStorageUtilities)
+local GetAppFeaturePoliciesFunction = require(Parent.UniversalAppPolicy).getAppFeaturePolicies
+local FFlagEnableLuaAccountSwitch = require(Parent.SharedFlags).FFlagEnableLuaAccountSwitch
 
 return {
-	configuration = function(p1, p2)
-		-- upvalues: url (ref)
-		return p1(string.format("%sv1/users/%d/configuration", url.TWOSTEPVERIFICATION_URL, p2), "GET")
+	configuration = function(Callback, p1) --[[ Line: 24 ]]
+		-- upvalues: Url (copy)
+		return Callback(string.format("%sv1/users/%d/configuration", Url.TWOSTEPVERIFICATION_URL, p1), "GET")
 	end,
-	resend = function(p1, p2, p3)
-		-- upvalues: url (ref), httpService (ref)
-		return p1(string.format("%sv1/twostepverification/resend", url.AUTH_URL), "POST", {
+	resend = function(Callback, Username, Ticket) --[[ Line: 30 ]]
+		-- upvalues: Url (copy), HttpService (copy)
+		return Callback(string.format("%sv1/twostepverification/resend", Url.AUTH_URL), "POST", {
 			maxRetryCount = 0,
-			postBody = httpService:JSONEncode({ actionType = "Login", username = p2, ticket = p3 })
-		})
-	end,
-	verify = function(p1, p2, p3, p4, p5)
-		-- upvalues: url (ref), httpService (ref)
-		return p1(string.format("%sv1/twostepverification/verify", url.AUTH_URL), "POST", {
-			maxRetryCount = 0,
-			postBody = httpService:JSONEncode({
+			postBody = HttpService:JSONEncode({
 				actionType = "Login",
-				username = p2,
-				ticket = p3,
-				code = p4,
-				rememberDevice = p5
+				username = Username,
+				ticket = Ticket
 			})
 		})
 	end,
-	login = function(p1, p2, p3, p4, p5)
-		-- upvalues: url (ref), getAppFeaturePolicies (ref), httpService (ref), fFlagEnableLuaAccountSwitch (ref), appStorageUtilitiesModule (ref), consoleAuthRequestWrapper (ref)
-		local formattedText = string.format("%sv3/users/%s/two-step-verification/login", url.AUTH_URL, p2)
-		local var1 = getAppFeaturePolicies()
-		local var2 = httpService:JSONEncode({
-			challengeId = p3,
-			verificationToken = p4,
-			rememberDevice = p5,
-			accountBlob = fFlagEnableLuaAccountSwitch and appStorageUtilitiesModule.getAccountBlob() or nil,
-			accountLinkParameters = if var1.getLinkingPlatform() then { LinkingPlatform = var1.getLinkingPlatform() } else nil
+	verify = function(Callback, Username, Ticket, Code, RememberDevice) --[[ Line: 41 ]]
+		-- upvalues: Url (copy), HttpService (copy)
+		return Callback(string.format("%sv1/twostepverification/verify", Url.AUTH_URL), "POST", {
+			maxRetryCount = 0,
+			postBody = HttpService:JSONEncode({
+				actionType = "Login",
+				username = Username,
+				ticket = Ticket,
+				code = Code,
+				rememberDevice = RememberDevice
+			})
+		})
+	end,
+	login = function(Callback, p1, ChallengeId, VerificationToken, RememberDevice) --[[ Line: 54 ]]
+		-- upvalues: Url (copy), GetAppFeaturePoliciesFunction (copy), HttpService (copy), FFlagEnableLuaAccountSwitch (copy), AppStorageUtilitiesModule (copy), ConsoleAuthRequestWrapperFunction (copy)
+		local Formatted = string.format("%sv3/users/%s/two-step-verification/login", Url.AUTH_URL, p1)
+		local AppFeaturePolicies = GetAppFeaturePoliciesFunction()
+		local Json = HttpService:JSONEncode({
+			challengeId = ChallengeId,
+			verificationToken = VerificationToken,
+			rememberDevice = RememberDevice,
+			accountBlob = FFlagEnableLuaAccountSwitch and AppStorageUtilitiesModule.getAccountBlob() or nil,
+			accountLinkParameters = if AppFeaturePolicies.getLinkingPlatform() then {
+				LinkingPlatform = AppFeaturePolicies.getLinkingPlatform()
+			} else nil
 		})
 		
-		return if var1.getUseSingleSignOn() and var1.getLinkedAuthEndpointsEnabled() then consoleAuthRequestWrapper(p1, formattedText, "POST", { maxRetryCount = 0, postBody = var2 }) else p1(formattedText, "POST", { maxRetryCount = 0, postBody = var2 })
+		return if AppFeaturePolicies.getUseSingleSignOn() and AppFeaturePolicies.getLinkedAuthEndpointsEnabled() then ConsoleAuthRequestWrapperFunction(Callback, Formatted, "POST", { maxRetryCount = 0, postBody = Json }) else Callback(Formatted, "POST", { maxRetryCount = 0, postBody = Json })
 	end
 }

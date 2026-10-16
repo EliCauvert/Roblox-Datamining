@@ -1,3 +1,3 @@
-﻿local dependenciesModule = require(script.Parent.Parent.dependencies)
+﻿local DependenciesModule = require(script.Parent.Parent.dependencies)
 
-return dependenciesModule.React.createContext({ fireAnalyticsEvent = dependenciesModule.Dash.noop })
+return DependenciesModule.React.createContext({ fireAnalyticsEvent = DependenciesModule.Dash.noop })

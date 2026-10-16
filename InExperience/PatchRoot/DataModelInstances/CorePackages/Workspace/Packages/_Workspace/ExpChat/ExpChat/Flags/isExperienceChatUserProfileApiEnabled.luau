@@ -1,71 +1,59 @@
-﻿local var1
-local appStorageService = game:GetService("AppStorageService")
+﻿local AppStorageService = game:GetService("AppStorageService")
 game:DefineFastInt("ExperienceChatUserProfileApiRollout_v1", 0)
 game:DefineFastFlag("ExperienceChatUserProfileApiEnabledForAll_v1", false)
 
-local _ = function(p1)
-	-- upvalues: appStorageService (ref)
-	local appInstallationIdItem = (p1 or appStorageService):GetItem("AppInstallationId")
-	local var2 = typeof(appInstallationIdItem)
+local function _(p1) --[[ Line: 8 ]]
+	-- upvalues: AppStorageService (copy)
+	local AppInstallationIdItem: string = (if p1 then p1 else AppStorageService):GetItem("AppInstallationId")
+	local ValueType = typeof(AppInstallationIdItem)
 	
-	return if var2 == "number" then appInstallationIdItem elseif var2 == "string" then if string.len(appInstallationIdItem) <= 0 then nil else tonumber(string.sub(appInstallationIdItem, -2)) else nil
+	return if ValueType == "number" then AppInstallationIdItem elseif ValueType == "string" then if string.len(AppInstallationIdItem) <= 0 then nil else tonumber((string.sub(AppInstallationIdItem, -2))) else nil
 end
 
-local _ = function(p1, p2)
-	-- upvalues: appStorageService (ref)
-	local var2 = p1()
-	local appInstallationIdItem = (p2 or appStorageService):GetItem("AppInstallationId")
-	local var3 = typeof(appInstallationIdItem)
-	local var4 = if var3 == "number" then appInstallationIdItem elseif var3 == "string" then if string.len(appInstallationIdItem) <= 0 then nil else tonumber(string.sub(appInstallationIdItem, -2)) else nil
+local _ = function(Callback, p1): boolean --[[ Line: 35 ]]
+	-- upvalues: AppStorageService (copy)
+	local CallbackResult: number = Callback()
+	local AppInstallationIdItem: string = (if p1 then p1 else AppStorageService):GetItem("AppInstallationId")
+	local ValueType = typeof(AppInstallationIdItem)
+	local AppInstallationIdItem1 = if ValueType == "number" then AppInstallationIdItem elseif ValueType == "string" then if string.len(AppInstallationIdItem) <= 0 then nil else tonumber((string.sub(AppInstallationIdItem, -2))) else nil
 	
-	return if var4 == nil then var2 >= 100 else var4 % 100 + 1 <= var2
+	return if AppInstallationIdItem1 == nil then CallbackResult >= 100 else AppInstallationIdItem1 % 100 + 1 <= CallbackResult
 end
 
-local _ = function(p1, p2)
-	-- upvalues: appStorageService (ref)
-	local var2
-	local var3 = p1()
-	local appInstallationIdItem = (p2 or appStorageService):GetItem("AppInstallationId")
-	local var4 = typeof(appInstallationIdItem)
-	local var5 = if var4 == "number" then appInstallationIdItem elseif var4 == "string" then if string.len(appInstallationIdItem) <= 0 then nil else tonumber(string.sub(appInstallationIdItem, -2)) else nil
+local _ = function(Callback, p1) --[[ Line: 51 ]]
+	-- upvalues: AppStorageService (copy)
+	local CallbackResult: number = Callback()
+	local AppInstallationIdItem: string = (if p1 then p1 else AppStorageService):GetItem("AppInstallationId")
+	local ValueType = typeof(AppInstallationIdItem)
+	local AppInstallationIdItem1 = if ValueType == "number" then AppInstallationIdItem elseif ValueType == "string" then if string.len(AppInstallationIdItem) <= 0 then nil else tonumber((string.sub(AppInstallationIdItem, -2))) else nil
+	local IsCallbackResultAbove: boolean = if AppInstallationIdItem1 == nil then CallbackResult >= 100 else AppInstallationIdItem1 % 100 + 1 <= CallbackResult
 	
-	if var5 == nil then
-		var2 = var3 >= 100
-		var2 = nil
-	else
-		var2 = var5 % 100 + 1 <= var3
-	end
-	return function()
-		-- upvalues: var2 (ref)
-		return var2
+	return function() --[[ Line: 57 ]]
+		-- upvalues: IsCallbackResultAbove (copy)
+		return IsCallbackResultAbove
 	end
 end
 
-local _ = function()
+local _ = function() --[[ Line: 62 ]]
 	return game:GetFastInt("ExperienceChatUserProfileApiRollout_v1")
 end
 
-local _ = function()
+local _ = function() --[[ Line: 66 ]]
 	return game:GetFastFlag("ExperienceChatUserProfileApiEnabledForAll_v1")
 end
 
-local experienceChatUserProfileApiRolloutV1FastInt = game:GetFastInt("ExperienceChatUserProfileApiRollout_v1")
-local appInstallationIdItem = appStorageService:GetItem("AppInstallationId")
-local var2 = typeof(appInstallationIdItem)
-local var3 = if var2 == "number" then appInstallationIdItem elseif var2 == "string" then if string.len(appInstallationIdItem) <= 0 then nil else tonumber(string.sub(appInstallationIdItem, -2)) else nil
+local ExperienceChatUserProfileApiRolloutV1FastInt: number = game:GetFastInt("ExperienceChatUserProfileApiRollout_v1")
+local AppInstallationIdItem: string = AppStorageService:GetItem("AppInstallationId")
+local ValueType = typeof(AppInstallationIdItem)
+local AppInstallationIdItem1 = if ValueType == "number" then AppInstallationIdItem elseif ValueType == "string" then if string.len(AppInstallationIdItem) <= 0 then nil else tonumber((string.sub(AppInstallationIdItem, -2))) else nil
+local IsExperienceChatUserProfileApiRolloutV1FastIntAbove: boolean = if AppInstallationIdItem1 == nil then ExperienceChatUserProfileApiRolloutV1FastInt >= 100 else AppInstallationIdItem1 % 100 + 1 <= ExperienceChatUserProfileApiRolloutV1FastInt
 
-if var3 == nil then
-	var1 = experienceChatUserProfileApiRolloutV1FastInt >= 100
-	var1 = nil
-else
-	var1 = var3 % 100 + 1 <= experienceChatUserProfileApiRolloutV1FastInt
-end
-local var4 = function()
-	-- upvalues: var1 (ref)
-	return var1
+local function v11() --[[ Line: 57 ]]
+	-- upvalues: IsExperienceChatUserProfileApiRolloutV1FastIntAbove (copy)
+	return IsExperienceChatUserProfileApiRolloutV1FastIntAbove
 end
 
-return function()
-	-- upvalues: var4 (ref)
-	return game:GetFastFlag("ExperienceChatUserProfileApiEnabledForAll_v1") or var4()
+return function() --[[ Line: 72 ]]
+	-- upvalues: v11 (copy)
+	return game:GetFastFlag("ExperienceChatUserProfileApiEnabledForAll_v1") or v11()
 end

@@ -1,38 +1,34 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local foundationModule = require(parent_1.Foundation)
-local localizationModule = require(parent_1.Localization)
-local reactModule = require(parent_1.React)
-local roactUtilsModule = require(parent_1.RoactUtils)
-local robloxAppHooksModule = require(parent_1.RobloxAppHooks)
-local UIBloxModule = require(parent_1.UIBlox)
-local view = foundationModule.View
-local buttonType = UIBloxModule.App.Button.Enum.ButtonType
-local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
-local useAnalyticsModule = require(parent.Analytics.useAnalytics)
-local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
-local useLocalization = localizationModule.Hooks.useLocalization
-local usePinInputStateWhileOpenModule = require(parent.Hooks.usePinInputStateWhileOpen)
-local useScreenSize = robloxAppHooksModule.useScreenSize
-local capturePromptItemModule = require(parent.Components.CaptureService.CapturePromptItem)
-local eventNamesModule = require(parent.Analytics.EventNames)
-local shareCapturePromptFinishedModule = require(parent.Thunks.ShareCapturePromptFinished)
-local _ = require(parent.Types)
-local fFlagCapturePermissionsPromptFreeMouseModule = require(parent.Flags.FFlagCapturePermissionsPromptFreeMouse)
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
+local UIBloxModule = require(Parent1.UIBlox)
+local View = require(Parent1.Foundation).View
+local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
+local InteractiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
+local UseAnalyticsModule = require(Parent.Analytics.useAnalytics)
+local UseDispatchFunction = require(Parent1.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseLocalizationFunction = require(Parent1.Localization).Hooks.useLocalization
+local UsePinInputStateWhileOpenModule = require(Parent.Hooks.usePinInputStateWhileOpen)
+local UseScreenSizeFunction = require(Parent1.RobloxAppHooks).useScreenSize
+local CapturePromptItemModule = require(Parent.Components.CaptureService.CapturePromptItem)
+local EventNamesModule = require(Parent.Analytics.EventNames)
+local ShareCapturePromptFinishedModule = require(Parent.Thunks.ShareCapturePromptFinished)
+local _ = require(Parent.Types)
+local FFlagCapturePermissionsPromptFreeMouseModule = require(Parent.Flags.FFlagCapturePermissionsPromptFreeMouse)
 
-return function(p1)
-	-- upvalues: useAnalyticsModule (ref), useDispatch (ref), useScreenSize (ref), reactModule (ref), useLocalization (ref), usePinInputStateWhileOpenModule (ref), fFlagCapturePermissionsPromptFreeMouseModule (ref), eventNamesModule (ref), shareCapturePromptFinishedModule (ref), buttonType (ref), view (ref), capturePromptItemModule (ref), interactiveAlert (ref)
-	local var1 = useAnalyticsModule()
-	local var2 = useDispatch()
-	local var3 = useScreenSize()
-	local var4, var5 = reactModule.useState(Vector2.new(0, 0))
-	local var6, var7 = reactModule.useState(Vector2.new(0, 0))
-	local var8, var9 = reactModule.useState(Vector2.new(0, 0))
-	local content = p1.promptData.content
-	local isU13LocalSavePrompt = p1.promptData.isU13LocalSavePrompt
-	local var10 = p1.enableInputDelayed ~= nil or p1.enableInputDelayed
-	local var11 = typeof(content) == "Content" and (content.Object ~= nil and content.Object:IsA("VideoCapture"))
-	local var12 = useLocalization({
+return function(p1) --[[ Line: 40 ]]
+	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), UseScreenSizeFunction (copy), ReactModule (copy), UseLocalizationFunction (copy), UsePinInputStateWhileOpenModule (copy), FFlagCapturePermissionsPromptFreeMouseModule (copy), EventNamesModule (copy), ShareCapturePromptFinishedModule (copy), ButtonType (copy), View (copy), CapturePromptItemModule (copy), InteractiveAlert (copy)
+	local UseAnalyticsModuleResult = UseAnalyticsModule()
+	local UseDispatchResult = UseDispatchFunction()
+	local UseScreenSizeResult = UseScreenSizeFunction()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(Vector2.new(0, 0))
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(Vector2.new(0, 0))
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(Vector2.new(0, 0))
+	local Content = p1.promptData.content
+	local IsU13LocalSavePrompt = p1.promptData.isU13LocalSavePrompt
+	local NoEnableInputDelayed = p1.enableInputDelayed == nil or p1.enableInputDelayed
+	local IsVideoCapture = typeof(Content) == "Content" and (Content.Object ~= nil and Content.Object:IsA("VideoCapture"))
+	local UseLocalizationResult = UseLocalizationFunction({
 		no = "Feature.Captures.Action.NoThanks",
 		saveBodyText = "Feature.Captures.Body.SaveCapturesPrompt",
 		saveTitle = "Feature.Captures.Title.SaveCapturesPrompt",
@@ -41,115 +37,123 @@ return function(p1)
 		shareTitle = "Feature.Captures.Title.ShareCapturePrompt",
 		shareYes = "Feature.Captures.Action.Share"
 	})
-	local var13 = if isU13LocalSavePrompt then var12.saveBodyText else var12.shareBodyText
-	local var14 = if isU13LocalSavePrompt then var12.saveTitle else var12.shareTitle
-	local var15 = if isU13LocalSavePrompt then var12.saveYes else var12.shareYes
-	usePinInputStateWhileOpenModule(fFlagCapturePermissionsPromptFreeMouseModule)
-	reactModule.useEffect(function()
-		-- upvalues: isU13LocalSavePrompt (ref), var1 (ref), eventNamesModule (copy), var11 (ref)
-		if not isU13LocalSavePrompt then
-			var1.fireEvent(eventNamesModule.ShareCapturePromptViewed)
+	local SaveBodyText = if IsU13LocalSavePrompt then UseLocalizationResult.saveBodyText else UseLocalizationResult.shareBodyText
+	local SaveTitle = if IsU13LocalSavePrompt then UseLocalizationResult.saveTitle else UseLocalizationResult.shareTitle
+	local SaveYes = if IsU13LocalSavePrompt then UseLocalizationResult.saveYes else UseLocalizationResult.shareYes
+	UsePinInputStateWhileOpenModule(FFlagCapturePermissionsPromptFreeMouseModule)
+	ReactModule.useEffect(function() --[[ Line: 71 ]]
+		-- upvalues: IsU13LocalSavePrompt (copy), UseAnalyticsModuleResult (copy), EventNamesModule (upval), IsVideoCapture (copy)
+		if not IsU13LocalSavePrompt then
+			UseAnalyticsModuleResult.fireEvent(EventNamesModule.ShareCapturePromptViewed)
 			
-			if var11 then
-				var1.fireEvent(eventNamesModule.ShareCapturePromptVideoPrompted)
+			if IsVideoCapture then
+				UseAnalyticsModuleResult.fireEvent(EventNamesModule.ShareCapturePromptVideoPrompted)
 			end
 		end
-	end, { var1.fireEvent, isU13LocalSavePrompt, var11 })
-	local var16 = reactModule.useCallback(function(p2)
-		-- upvalues: var5 (ref)
-		var5(p2.AbsoluteSize)
-	end, { var5 })
-	local var17 = reactModule.useCallback(function(p2)
-		-- upvalues: var7 (ref)
-		var7(p2.AbsoluteSize)
-	end, { var7 })
-	local var18 = reactModule.useCallback(function()
-		-- upvalues: isU13LocalSavePrompt (ref), var1 (ref), eventNamesModule (copy), var11 (ref), var2 (ref), shareCapturePromptFinishedModule (copy), p1 (ref)
-		if not isU13LocalSavePrompt then
-			var1.fireEvent(eventNamesModule.ShareCapturePromptAccepted)
-			
-			if var11 then
-				var1.fireEvent(eventNamesModule.ShareCapturePromptVideoAccepted)
-			end
-		end
-		var2(shareCapturePromptFinishedModule(p1.promptId, p1.promptData, true))
 	end, {
-		var1.fireEvent, var2, isU13LocalSavePrompt, var11, p1.promptData, p1.promptId
+		UseAnalyticsModuleResult.fireEvent,
+		IsU13LocalSavePrompt,
+		IsVideoCapture
 	})
-	local var19 = reactModule.useCallback(function()
-		-- upvalues: isU13LocalSavePrompt (ref), var1 (ref), eventNamesModule (copy), var11 (ref), var2 (ref), shareCapturePromptFinishedModule (copy), p1 (ref)
-		if not isU13LocalSavePrompt then
-			var1.fireEvent(eventNamesModule.ShareCapturePromptRejected)
+	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 84 ]]
+		-- upvalues: UseStateResult2_1 (copy)
+		UseStateResult2_1(Frame.AbsoluteSize)
+	end, { UseStateResult2_1 })
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 89 ]]
+		-- upvalues: IsU13LocalSavePrompt (copy), UseAnalyticsModuleResult (copy), EventNamesModule (upval), IsVideoCapture (copy), UseDispatchResult (copy), ShareCapturePromptFinishedModule (upval), p1 (copy)
+		if not IsU13LocalSavePrompt then
+			UseAnalyticsModuleResult.fireEvent(EventNamesModule.ShareCapturePromptAccepted)
 			
-			if var11 then
-				var1.fireEvent(eventNamesModule.ShareCapturePromptVideoRejected)
+			if IsVideoCapture then
+				UseAnalyticsModuleResult.fireEvent(EventNamesModule.ShareCapturePromptVideoAccepted)
 			end
 		end
-		var2(shareCapturePromptFinishedModule(p1.promptId, p1.promptData, false))
+		UseDispatchResult(ShareCapturePromptFinishedModule(p1.promptId, p1.promptData, true))
 	end, {
-		var1.fireEvent, var2, isU13LocalSavePrompt, var11, p1.promptData, p1.promptId
+		UseAnalyticsModuleResult.fireEvent, UseDispatchResult, IsU13LocalSavePrompt,
+		IsVideoCapture, p1.promptData, p1.promptId
+	})
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 103 ]]
+		-- upvalues: IsU13LocalSavePrompt (copy), UseAnalyticsModuleResult (copy), EventNamesModule (upval), IsVideoCapture (copy), UseDispatchResult (copy), ShareCapturePromptFinishedModule (upval), p1 (copy)
+		if not IsU13LocalSavePrompt then
+			UseAnalyticsModuleResult.fireEvent(EventNamesModule.ShareCapturePromptRejected)
+			
+			if IsVideoCapture then
+				UseAnalyticsModuleResult.fireEvent(EventNamesModule.ShareCapturePromptVideoRejected)
+			end
+		end
+		UseDispatchResult(ShareCapturePromptFinishedModule(p1.promptId, p1.promptData, false))
+	end, {
+		UseAnalyticsModuleResult.fireEvent, UseDispatchResult, IsU13LocalSavePrompt,
+		IsVideoCapture, p1.promptData, p1.promptId
 	})
 	
-	return reactModule.createElement(interactiveAlert, {
+	return ReactModule.createElement(InteractiveAlert, {
 		isMiddleContentFocusable = false,
-		bodyText = var13,
-		buttonStackInfo = reactModule.useMemo(function()
-			-- upvalues: var19 (ref), var12 (ref), buttonType (copy), var10 (ref), var18 (ref), var15 (ref)
+		bodyText = SaveBodyText,
+		buttonStackInfo = ReactModule.useMemo(function() --[[ Line: 120 ]]
+			-- upvalues: UseResult2 (copy), UseLocalizationResult (copy), ButtonType (upval), NoEnableInputDelayed (copy), UseResult1 (copy), SaveYes (copy)
 			return {
 				buttons = {
 					{
 						isDefaultChild = true,
-						props = { onActivated = var19, text = var12.no }
+						props = {
+							onActivated = UseResult2,
+							text = UseLocalizationResult.no
+						}
 					},
 					{
 						isDefaultChild = false,
-						buttonType = buttonType.PrimarySystem,
+						buttonType = ButtonType.PrimarySystem,
 						props = {
 							delayInputSeconds = 2,
-							enableInputDelayed = var10,
-							isDelayedInput = var10,
-							onActivated = var18,
-							text = var15
+							enableInputDelayed = NoEnableInputDelayed,
+							isDelayedInput = NoEnableInputDelayed,
+							onActivated = UseResult1,
+							text = SaveYes
 						}
 					}
 				}
 			}
 		end, {
-			var10,
-			var12,
-			var18,
-			var19,
-			var15
+			NoEnableInputDelayed,
+			UseLocalizationResult,
+			UseResult1,
+			UseResult2,
+			SaveYes
 		}),
-		middleContent = reactModule.useCallback(function()
-			-- upvalues: var4 (ref), var6 (ref), var3 (ref), reactModule (copy), view (copy), var17 (ref), capturePromptItemModule (copy), content (ref)
-			return reactModule.createElement(view, {
+		middleContent = ReactModule.useCallback(function() --[[ Line: 146 ]]
+			-- upvalues: UseStateResult (copy), UseStateResult1 (copy), UseScreenSizeResult (copy), ReactModule (upval), View (upval), UseResult (copy), CapturePromptItemModule (upval), Content (copy)
+			return ReactModule.createElement(View, {
 				Size = UDim2.new(1, 0, 0, 200),
 				sizeConstraint = {
-					MaxSize = Vector2.new(1e999, var3.Y - 80 - (var4.Y - var6.Y))
+					MaxSize = Vector2.new(1e999, UseScreenSizeResult.Y - 80 - (UseStateResult.Y - UseStateResult1.Y))
 				},
-				onAbsoluteSizeChanged = var17
+				onAbsoluteSizeChanged = UseResult
 			}, {
-				CapturePromptItem = reactModule.createElement(capturePromptItemModule, {
+				CapturePromptItem = ReactModule.createElement(CapturePromptItemModule, {
 					isSelected = true,
 					showCheckbox = false,
-					content = content,
-					updateSelected = function() end
+					content = Content,
+					updateSelected = function() --[[ Line: 161 ]] end
 				})
 			})
 		end, {
-			var4,
-			content,
-			var6,
-			reactModule.useCallback(function(p2)
-				-- upvalues: var9 (ref)
-				var9(p2.Resolution)
-			end, { var9 }),
-			var8
+			UseStateResult,
+			Content,
+			UseStateResult1,
+			ReactModule.useCallback(function(p2) --[[ Line: 116 ]]
+				-- upvalues: UseStateResult2_2 (copy)
+				UseStateResult2_2(p2.Resolution)
+			end, { UseStateResult2_2 }),
+			UseStateResult3
 		}),
-		onAbsoluteSizeChanged = var16,
+		onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame) --[[ Line: 80 ]]
+			-- upvalues: UseStateResult2 (copy)
+			UseStateResult2(Frame.AbsoluteSize)
+		end, { UseStateResult2 }),
 		position = UDim2.fromScale(0.5, 0.5),
-		screenSize = var3,
-		title = var14
+		screenSize = UseScreenSizeResult,
+		title = SaveTitle
 	})
 end

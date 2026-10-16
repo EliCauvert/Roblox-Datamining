@@ -1,16 +1,16 @@
-﻿local signalsModule = require(script:FindFirstAncestor("GameTile").Parent.Signals)
+﻿local SignalsModule = require(script:FindFirstAncestor("GameTile").Parent.Signals)
 
-return function()
-	-- upvalues: signalsModule (ref)
-	local var1, var2 = signalsModule.createSignal({})
+return function() --[[ Line: 15 | Named "createGameTileHiddenStore" ]]
+	-- upvalues: SignalsModule (copy)
+	local Signal, Signal2 = SignalsModule.createSignal({})
 	
 	return {
-		setGameHidden = function(p1, p2)
-			-- upvalues: var1 (ref), var2 (ref)
-			local cloned = table.clone(var1(false))
-			cloned[p1] = p2
-			var2(cloned)
+		setGameHidden = function(Key, p1) --[[ Line: 18 ]]
+			-- upvalues: Signal (copy), Signal2 (copy)
+			local Copy = table.clone(Signal(false))
+			Copy[Key] = p1
+			Signal2(Copy)
 		end,
-		getHiddenGames = var1
+		getHiddenGames = Signal
 	}
 end

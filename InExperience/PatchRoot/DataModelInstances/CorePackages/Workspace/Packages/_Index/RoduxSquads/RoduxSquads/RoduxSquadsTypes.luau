@@ -1,5 +1,5 @@
-﻿local roduxSquads = script:FindFirstAncestor("RoduxSquads")
-local _ = require(roduxSquads.Enums.ExperienceInviteVoteType)
-local _ = require(roduxSquads.Enums.ExperienceInviteType)
+﻿local RoduxSquads = script:FindFirstAncestor("RoduxSquads")
+local _ = require(RoduxSquads.Enums.ExperienceInviteVoteType)
+local _ = require(RoduxSquads.Enums.ExperienceInviteType)
 
 return {}

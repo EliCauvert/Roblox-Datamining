@@ -1,27 +1,26 @@
-﻿local parent = script:FindFirstAncestor("GameLaunch").Parent
-local default = require(parent.LoggingProtocol).default
-local cryoModule = require(parent.Cryo)
-local _ = require(parent.ExperienceService)
-local experienceService = require(parent.ExperienceService).ExperienceService
-local getFFlagMoveLuaExpLaunchBegin = require(parent.ExperienceService).Flags.GetFFlagMoveLuaExpLaunchBegin
-local fFlagDeferInExperienceRbxmDownload = require(parent.SharedFlags).FFlagDeferInExperienceRbxmDownload
-local fFlagEnableDeferredAssetManagerService = require(parent.SharedFlags).FFlagEnableDeferredAssetManagerService
-local var1 = if fFlagDeferInExperienceRbxmDownload and fFlagEnableDeferredAssetManagerService then game:GetService("DeferredAssetManagerService") else nil
+﻿local Parent = script:FindFirstAncestor("GameLaunch").Parent
+local Default = require(Parent.LoggingProtocol).default
+local CryoModule = require(Parent.Cryo)
+local _ = require(Parent.ExperienceService)
+local ExperienceService = require(Parent.ExperienceService).ExperienceService
+local GetFFlagMoveLuaExpLaunchBeginFunction = require(Parent.ExperienceService).Flags.GetFFlagMoveLuaExpLaunchBegin
+local FFlagDeferInExperienceRbxmDownload = require(Parent.SharedFlags).FFlagDeferInExperienceRbxmDownload
+local FFlagEnableDeferredAssetManagerService = require(Parent.SharedFlags).FFlagEnableDeferredAssetManagerService
+local DeferredAssetManagerService = if FFlagDeferInExperienceRbxmDownload and FFlagEnableDeferredAssetManagerService then game:GetService("DeferredAssetManagerService") else nil
 
-return function(p1, p2, p3, _, p4, p5)
-	-- upvalues: getFFlagMoveLuaExpLaunchBegin (ref), default (ref), cryoModule (ref), fFlagDeferInExperienceRbxmDownload (ref), fFlagEnableDeferredAssetManagerService (ref), var1 (ref), experienceService (ref)
-	if not getFFlagMoveLuaExpLaunchBegin() then
-		default:logEvent("experience_launch_begin")
+return function(p1, ReferralPage, p2, _, p3, p4) --[[ Line: 19 | Named "LaunchGame" ]]
+	-- upvalues: GetFFlagMoveLuaExpLaunchBeginFunction (copy), Default (copy), CryoModule (copy), FFlagDeferInExperienceRbxmDownload (copy), FFlagEnableDeferredAssetManagerService (copy), DeferredAssetManagerService (copy), ExperienceService (copy)
+	if not GetFFlagMoveLuaExpLaunchBeginFunction() then
+		Default:logEvent("experience_launch_begin")
 	end
-	local t = { placeId = tonumber(p1), referralPage = p2 }
+	local JoinResult = { placeId = tonumber(p1), referralPage = ReferralPage }
 	
-	if p3 then
-		t = cryoModule.Dictionary.join(t, p3)
+	if p2 then
+		JoinResult = CryoModule.Dictionary.join(JoinResult, p2)
 	end
-	if fFlagDeferInExperienceRbxmDownload and fFlagEnableDeferredAssetManagerService then
-		local var2 = var1
-		var2.JoiningPlaceId = t.placeId or 0
-		var2.JoiningUniverseId = tonumber(t.universeId) or 0
+	if FFlagDeferInExperienceRbxmDownload and FFlagEnableDeferredAssetManagerService then
+		DeferredAssetManagerService.JoiningPlaceId = JoinResult.placeId or 0
+		DeferredAssetManagerService.JoiningUniverseId = tonumber(JoinResult.universeId) or 0
 	end
-	experienceService:LaunchExperience(t, p4, p5)
+	ExperienceService:LaunchExperience(JoinResult, p3, p4)
 end

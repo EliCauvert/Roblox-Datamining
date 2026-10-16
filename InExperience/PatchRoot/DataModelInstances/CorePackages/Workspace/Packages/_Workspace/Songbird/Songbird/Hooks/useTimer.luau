@@ -1,25 +1,25 @@
-﻿local songbird = script:FindFirstAncestor("Songbird")
-local cryoModule = require(songbird.Parent.Cryo)
-local useEffect = require(songbird.Parent.React).useEffect
+﻿local Songbird = script:FindFirstAncestor("Songbird")
+local CryoModule = require(Songbird.Parent.Cryo)
+local UseEffectFunction = require(Songbird.Parent.React).useEffect
 
-return function(value, p1, p2)
-	-- upvalues: useEffect (ref), cryoModule (ref)
-	useEffect(function()
-		-- upvalues: value (ref), p1 (ref)
-		local var1 = true
-		task.spawn(function()
-			-- upvalues: var1 (write), value (copy), p1 (copy)
-			while var1 do
-				task.wait(value)
+return function(Duration, Callback, p1) --[[ Line: 8 | Named "useTimer" ]]
+	-- upvalues: UseEffectFunction (copy), CryoModule (copy)
+	UseEffectFunction(function() --[[ Line: 9 ]]
+		-- upvalues: Duration (copy), Callback (copy)
+		local Flag = true
+		task.spawn(function() --[[ Line: 12 ]]
+			-- upvalues: Flag (ref), Duration (upval), Callback (upval)
+			while Flag do
+				task.wait(Duration)
 				
-				if not var1 then break end
-				p1()
+				if not Flag then break end
+				Callback()
 			end
 		end)
 		
-		return function()
-			-- upvalues: var1 (write)
-			var1 = false
+		return function() --[[ Line: 24 ]]
+			-- upvalues: Flag (ref)
+			Flag = false
 		end
-	end, cryoModule.Dictionary.join({ value, p1 }, p2 or {}))
+	end, CryoModule.Dictionary.join({ Duration, Callback }, p1 or {}))
 end

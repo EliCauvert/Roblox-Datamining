@@ -1,58 +1,59 @@
-﻿local onPlatformSurveys = script:FindFirstAncestor("OnPlatformSurveys")
-local parent = onPlatformSurveys.Parent
-local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local dialogSize = foundationModule.Enums.DialogSize
-local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
-local sheet = foundationModule.Sheet
-local text = foundationModule.Text
-local view = foundationModule.View
-local useScaledValue = foundationModule.Hooks.useScaledValue
-local useSurveyFocusRefsModule = require(onPlatformSurveys.Hooks.useSurveyFocusRefs)
+﻿local OnPlatformSurveys = script:FindFirstAncestor("OnPlatformSurveys")
+local Parent = OnPlatformSurveys.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local DialogSize = FoundationModule.Enums.DialogSize
+local FocusNavigableSurfaceIdentifierEnum = require(Parent.FocusNavigationUtils).FocusNavigableSurfaceIdentifierEnum
+local Sheet = FoundationModule.Sheet
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local UseScaledValueFunction = FoundationModule.Hooks.useScaledValue
+local UseSurveyFocusRefsModule = require(OnPlatformSurveys.Hooks.useSurveyFocusRefs)
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), useScaledValue (ref), useSurveyFocusRefsModule (ref), focusNavigableSurfaceIdentifierEnum (ref), sheet (ref), dialogSize (ref), text (ref), view (ref)
-	local var1 = p1.isOpen ~= false
-	local onClose = p1.onClose
-	local var2, var3 = reactModule.useState(0)
-	local var4, var5 = reactModule.useState(0)
-	local var6 = (if p1.children then var2 else 0) + useScaledValue(116) + (if p1.footer then var4 else 0)
+return ReactModule.memo(function(p1) --[[ Line: 29 | Named "SurveyModal" ]]
+	-- upvalues: ReactModule (copy), UseScaledValueFunction (copy), UseSurveyFocusRefsModule (copy), FocusNavigableSurfaceIdentifierEnum (copy), Sheet (copy), DialogSize (copy), Text (copy), View (copy)
+	local IsIsOpen = p1.isOpen ~= false
+	local OnClose = p1.onClose
+	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(0)
+	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 35 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(Frame.AbsoluteSize.Y)
+	end, {})
+	local UseResult1 = ReactModule.useCallback(function(Frame) --[[ Line: 38 ]]
+		-- upvalues: UseStateResult2_1 (copy)
+		UseStateResult2_1(Frame.AbsoluteSize.Y)
+	end, {})
+	local NewUseScaledValueResult = (if p1.children then UseStateResult else 0) + UseScaledValueFunction(116) + (if p1.footer then UseStateResult1 else 0)
 	
-	return reactModule.createElement(sheet.Root, {
+	return ReactModule.createElement(Sheet.Root, {
 		preferCenterSheet = true,
-		isOpen = var1,
-		onClose = onClose,
-		size = dialogSize.Large,
-		centerSheetHeight = var6,
-		snapPoints = reactModule.useMemo(function()
-			-- upvalues: var6 (ref)
-			return { var6 }
-		end, { var6 }),
-		ref = useSurveyFocusRefsModule(focusNavigableSurfaceIdentifierEnum.CentralOverlay, onClose)
+		isOpen = IsIsOpen,
+		onClose = OnClose,
+		size = DialogSize.Large,
+		centerSheetHeight = NewUseScaledValueResult,
+		snapPoints = ReactModule.useMemo(function() --[[ Line: 47 ]]
+			-- upvalues: NewUseScaledValueResult (copy)
+			return { NewUseScaledValueResult }
+		end, { NewUseScaledValueResult }),
+		ref = UseSurveyFocusRefsModule(FocusNavigableSurfaceIdentifierEnum.CentralOverlay, OnClose)
 	}, {
-		Header = reactModule.createElement(sheet.Header, { hasCloseAffordance = true }, {
-			Title = p1.title and reactModule.createElement(text, {
+		Header = ReactModule.createElement(Sheet.Header, { hasCloseAffordance = true }, {
+			Title = p1.title and ReactModule.createElement(Text, {
 				tag = "fill auto-y text-heading-small text-wrap text-align-x-left content-emphasis",
 				Text = p1.title
 			}) or nil
 		}),
-		Content = reactModule.createElement(sheet.Content, {}, {
-			Body = reactModule.createElement(view, {
+		Content = ReactModule.createElement(Sheet.Content, {}, {
+			Body = ReactModule.createElement(View, {
 				tag = "col size-full-0 auto-y padding-bottom-small",
-				onAbsoluteSizeChanged = reactModule.useCallback(function(p2)
-					-- upvalues: var3 (ref)
-					var3(p2.AbsoluteSize.Y)
-				end, {})
+				onAbsoluteSizeChanged = UseResult
 			}, p1.children)
 		}),
-		Actions = p1.footer and reactModule.createElement(sheet.Actions, {}, {
-			Footer = reactModule.createElement(view, {
+		Actions = p1.footer and ReactModule.createElement(Sheet.Actions, {}, {
+			Footer = ReactModule.createElement(View, {
 				tag = "row size-full-0 auto-y",
-				onAbsoluteSizeChanged = reactModule.useCallback(function(p2)
-					-- upvalues: var5 (ref)
-					var5(p2.AbsoluteSize.Y)
-				end, {})
+				onAbsoluteSizeChanged = UseResult1
 			}, p1.footer)
 		}) or nil
 	})

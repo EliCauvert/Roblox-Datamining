@@ -1,12 +1,12 @@
-﻿local parent = script:FindFirstAncestor("RoactUtils").Parent
-local reactModule = require(parent.React)
-local dashModule = require(parent.Dash)
-local useIsGamepadModule = require(script.Parent.Hooks.useIsGamepad)
+﻿local Parent = script:FindFirstAncestor("RoactUtils").Parent
+local ReactModule = require(Parent.React)
+local DashModule = require(Parent.Dash)
+local UseIsGamepadModule = require(script.Parent.Hooks.useIsGamepad)
 
-return function(p1)
-	-- upvalues: useIsGamepadModule (ref), reactModule (ref), dashModule (ref)
-	return function(p2)
-		-- upvalues: useIsGamepadModule (copy), reactModule (copy), p1 (ref), dashModule (copy)
-		return reactModule.createElement(p1, dashModule.join(p2, { isGamepadInput = useIsGamepadModule() }))
+return function(p1) --[[ Line: 12 | Named "withIsGamepadInput" ]]
+	-- upvalues: UseIsGamepadModule (copy), ReactModule (copy), DashModule (copy)
+	return function(p2) --[[ Line: 13 ]]
+		-- upvalues: UseIsGamepadModule (upval), ReactModule (upval), p1 (copy), DashModule (upval)
+		return ReactModule.createElement(p1, DashModule.join(p2, { isGamepadInput = UseIsGamepadModule() }))
 	end
 end

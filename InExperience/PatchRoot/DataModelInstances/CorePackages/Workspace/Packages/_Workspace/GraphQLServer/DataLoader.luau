@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.DataLoader.DataLoader)
+﻿return (require(script.Parent.Parent.Parent._Index.DataLoader.DataLoader))

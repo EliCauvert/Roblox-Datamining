@@ -1,3 +1,4 @@
-﻿local corePackagesService = game:GetService("CorePackages")
+﻿local CorePackages = game:GetService("CorePackages")
+local EnabledResult = require(CorePackages.Workspace.Packages.Chrome).Enabled()
 
-return require(corePackagesService.Workspace.Packages.SharedFlags).FFlagEnableConsoleExpControls and require(corePackagesService.Workspace.Packages.Chrome).Enabled()
+return require(CorePackages.Workspace.Packages.SharedFlags).FFlagEnableConsoleExpControls and EnabledResult

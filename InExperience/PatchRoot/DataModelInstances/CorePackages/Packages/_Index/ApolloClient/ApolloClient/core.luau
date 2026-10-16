@@ -1,49 +1,50 @@
-﻿local t = {}
-local parent = script.Parent
-local parent_1 = parent.Parent
-local object = require(parent_1.LuauPolyfill).Object
-local DEV = require(parent.utilities).DEV
-local apolloClientModule = require(script.ApolloClient)
-t.ApolloClient = apolloClientModule.ApolloClient
-t.mergeOptions = apolloClientModule.mergeOptions
-local observableQueryModule = require(script.ObservableQuery)
-t.applyNextFetchPolicy = observableQueryModule.applyNextFetchPolicy
-t.ObservableQuery = observableQueryModule.ObservableQuery
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent
+local Object = require(Parent1.LuauPolyfill).Object
+local DEV = require(Parent.utilities).DEV
+local ApolloClientModule = require(script.ApolloClient)
+local ObservableQueryModule = require(script.ObservableQuery)
 local _ = require(script.watchQueryOptions)
-t.NetworkStatus = require(script.networkStatus).NetworkStatus
-object.assign(t, require(script.types))
+local CoreModule = {
+	ApolloClient = ApolloClientModule.ApolloClient,
+	mergeOptions = ApolloClientModule.mergeOptions,
+	applyNextFetchPolicy = ObservableQueryModule.applyNextFetchPolicy,
+	ObservableQuery = ObservableQueryModule.ObservableQuery,
+	NetworkStatus = require(script.networkStatus).NetworkStatus
+}
+Object.assign(CoreModule, (require(script.types)))
 local _ = require(script.LocalState)
-local errorsModule = require(script.Parent.errors)
-t.isApolloError = errorsModule.isApolloError
-t.ApolloError = errorsModule.ApolloError
-local cacheModule = require(script.Parent.cache)
-t.ApolloCache = cacheModule.ApolloCache
-t.defaultDataIdFromObject = cacheModule.defaultDataIdFromObject
-t.InMemoryCache = cacheModule.InMemoryCache
-t.MissingFieldError = cacheModule.MissingFieldError
-t.makeVar = cacheModule.makeVar
-t.None = cacheModule.None
-object.assign(t, require(script.Parent.cache.inmemory.types))
-object.assign(t, require(script.Parent.link.core))
-object.assign(t, require(script.Parent.link.http))
-local utilsModule = require(script.Parent.link.utils)
-t.fromError = utilsModule.fromError
-t.toPromise = utilsModule.toPromise
-t.fromPromise = utilsModule.fromPromise
-t.throwServerError = utilsModule.throwServerError
-local utilitiesModule = require(script.Parent.utilities)
-t.Observable = utilitiesModule.Observable
-t.isReference = utilitiesModule.isReference
-t.makeReference = utilitiesModule.makeReference
-t.NULL = utilitiesModule.NULL
-local setVerbosity = require(parent.jsutils.invariant).setVerbosity
-t.setLogVerbosity = setVerbosity
-setVerbosity(if DEV then "log" else "silent")
-local graphQLTagModule = require(parent_1.GraphQLTag)
-t.gql = graphQLTagModule.default
-t.resetCaches = graphQLTagModule.resetCaches
-t.disableFragmentWarnings = graphQLTagModule.disableFragmentWarnings
-t.enableExperimentalFragmentVariables = graphQLTagModule.enableExperimentalFragmentVariables
-t.disableExperimentalFragmentVariables = graphQLTagModule.disableExperimentalFragmentVariables
+local ErrorsModule = require(script.Parent.errors)
+CoreModule.isApolloError = ErrorsModule.isApolloError
+CoreModule.ApolloError = ErrorsModule.ApolloError
+local CacheModule = require(script.Parent.cache)
+CoreModule.ApolloCache = CacheModule.ApolloCache
+CoreModule.defaultDataIdFromObject = CacheModule.defaultDataIdFromObject
+CoreModule.InMemoryCache = CacheModule.InMemoryCache
+CoreModule.MissingFieldError = CacheModule.MissingFieldError
+CoreModule.makeVar = CacheModule.makeVar
+CoreModule.None = CacheModule.None
+Object.assign(CoreModule, (require(script.Parent.cache.inmemory.types)))
+Object.assign(CoreModule, (require(script.Parent.link.core)))
+Object.assign(CoreModule, (require(script.Parent.link.http)))
+local UtilsModule = require(script.Parent.link.utils)
+CoreModule.fromError = UtilsModule.fromError
+CoreModule.toPromise = UtilsModule.toPromise
+CoreModule.fromPromise = UtilsModule.fromPromise
+CoreModule.throwServerError = UtilsModule.throwServerError
+local UtilitiesModule = require(script.Parent.utilities)
+CoreModule.Observable = UtilitiesModule.Observable
+CoreModule.isReference = UtilitiesModule.isReference
+CoreModule.makeReference = UtilitiesModule.makeReference
+CoreModule.NULL = UtilitiesModule.NULL
+local SetVerbosityFunction: (any) -> () = require(Parent.jsutils.invariant).setVerbosity
+CoreModule.setLogVerbosity = SetVerbosityFunction
+SetVerbosityFunction(if DEV then "log" else "silent")
+local GraphQLTagModule = require(Parent1.GraphQLTag)
+CoreModule.gql = GraphQLTagModule.default
+CoreModule.resetCaches = GraphQLTagModule.resetCaches
+CoreModule.disableFragmentWarnings = GraphQLTagModule.disableFragmentWarnings
+CoreModule.enableExperimentalFragmentVariables = GraphQLTagModule.enableExperimentalFragmentVariables
+CoreModule.disableExperimentalFragmentVariables = GraphQLTagModule.disableExperimentalFragmentVariables
 
-return t
+return CoreModule

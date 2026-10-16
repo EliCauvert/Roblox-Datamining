@@ -1,54 +1,54 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local reactModule = require(parent.React)
-local reactIsModule = require(parent.ReactIs)
-local getTestIdTagModule = require(foundation.Utility.getTestIdTag)
-local _ = require(foundation.Components.Types)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local ReactModule = require(Parent.React)
+local ReactIsModule = require(Parent.ReactIs)
+local GetTestIdTagModule = require(Foundation.Utility.getTestIdTag)
+local _ = require(Foundation.Components.Types)
 
-local function getPadding(p1)
-	-- upvalues: reactIsModule (ref)
-	return if reactIsModule.isBinding(p1) then {
-		PaddingTop = p1,
-		PaddingBottom = p1,
-		PaddingLeft = p1,
-		PaddingRight = p1
-	} elseif typeof(p1) == "table" then {
-		PaddingTop = p1.top,
-		PaddingBottom = p1.bottom,
-		PaddingLeft = p1.left,
-		PaddingRight = p1.right
-	} elseif typeof(p1) == "number" then {
-		PaddingTop = UDim.new(0, p1),
-		PaddingBottom = UDim.new(0, p1),
-		PaddingLeft = UDim.new(0, p1),
-		PaddingRight = UDim.new(0, p1)
-	} elseif typeof(p1) == "Vector2" then {
-		PaddingTop = UDim.new(0, p1.Y),
-		PaddingBottom = UDim.new(0, p1.Y),
-		PaddingLeft = UDim.new(0, p1.X),
-		PaddingRight = UDim.new(0, p1.X)
-	} elseif typeof(p1) == "UDim" then {
-		PaddingTop = p1,
-		PaddingBottom = p1,
-		PaddingLeft = p1,
-		PaddingRight = p1
-	} elseif typeof(p1) == "UDim2" then {
-		PaddingTop = p1.Y,
-		PaddingBottom = p1.Y,
-		PaddingLeft = p1.X,
-		PaddingRight = p1.X
+local function getPadding(Offset) --[[ Line: 14 ]]
+	-- upvalues: ReactIsModule (copy)
+	return if ReactIsModule.isBinding(Offset) then {
+		PaddingTop = Offset,
+		PaddingBottom = Offset,
+		PaddingLeft = Offset,
+		PaddingRight = Offset
+	} elseif typeof(Offset) == "table" then {
+		PaddingTop = Offset.top,
+		PaddingBottom = Offset.bottom,
+		PaddingLeft = Offset.left,
+		PaddingRight = Offset.right
+	} elseif typeof(Offset) == "number" then {
+		PaddingTop = UDim.new(0, Offset),
+		PaddingBottom = UDim.new(0, Offset),
+		PaddingLeft = UDim.new(0, Offset),
+		PaddingRight = UDim.new(0, Offset)
+	} elseif typeof(Offset) == "Vector2" then {
+		PaddingTop = UDim.new(0, Offset.Y),
+		PaddingBottom = UDim.new(0, Offset.Y),
+		PaddingLeft = UDim.new(0, Offset.X),
+		PaddingRight = UDim.new(0, Offset.X)
+	} elseif typeof(Offset) == "UDim" then {
+		PaddingTop = Offset,
+		PaddingBottom = Offset,
+		PaddingLeft = Offset,
+		PaddingRight = Offset
+	} elseif typeof(Offset) == "UDim2" then {
+		PaddingTop = Offset.Y,
+		PaddingBottom = Offset.Y,
+		PaddingLeft = Offset.X,
+		PaddingRight = Offset.X
 	} else {}
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: getPadding (ref), reactModule (ref), getTestIdTagModule (ref)
-	local var1 = getPadding(p1.value)
+return ReactModule.memo(function(p1) --[[ Line: 73 | Named "Padding" ]]
+	-- upvalues: getPadding (copy), ReactModule (copy), GetTestIdTagModule (copy)
+	local Padding = getPadding(p1.value)
 	
-	return reactModule.createElement("UIPadding", {
-		PaddingTop = var1.PaddingTop,
-		PaddingBottom = var1.PaddingBottom,
-		PaddingLeft = var1.PaddingLeft,
-		PaddingRight = var1.PaddingRight,
-		[reactModule.Tag] = getTestIdTagModule(p1.testId)
+	return ReactModule.createElement("UIPadding", {
+		PaddingTop = Padding.PaddingTop,
+		PaddingBottom = Padding.PaddingBottom,
+		PaddingLeft = Padding.PaddingLeft,
+		PaddingRight = Padding.PaddingRight,
+		[ReactModule.Tag] = GetTestIdTagModule(p1.testId)
 	})
 end)

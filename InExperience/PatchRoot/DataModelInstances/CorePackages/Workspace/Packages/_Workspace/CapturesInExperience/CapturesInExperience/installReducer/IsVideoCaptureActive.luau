@@ -1,11 +1,11 @@
-﻿local parent = script.Parent.Parent
-local _ = require(parent.Enums.CaptureTriggerType)
+﻿local Parent = script.Parent.Parent
+local _ = require(Parent.Enums.CaptureTriggerType)
 
-return require(parent.Parent.Rodux).createReducer({ status = false, triggerType = nil }, {
-	[require(parent.Actions.VideoCaptureStarted).name] = function(_, p1)
+return require(Parent.Parent.Rodux).createReducer({ status = false, triggerType = nil }, {
+	[require(Parent.Actions.VideoCaptureStarted).name] = function(_, p1) --[[ Line: 22 ]]
 		return { status = true, triggerType = p1.triggerType }
 	end,
-	[require(parent.Actions.VideoCaptureStopped).name] = function(_, p1)
+	[require(Parent.Actions.VideoCaptureStopped).name] = function(_, p1) --[[ Line: 29 ]]
 		return { status = false, triggerType = p1.triggerType }
 	end
 })

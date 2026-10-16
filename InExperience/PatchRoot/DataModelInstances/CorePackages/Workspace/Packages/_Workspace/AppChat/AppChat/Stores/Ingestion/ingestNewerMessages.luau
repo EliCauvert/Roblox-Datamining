@@ -1,9 +1,9 @@
 ﻿local _ = require(script:FindFirstAncestor("AppChat").Parent.AppChatNetworking)
-local buildValidMessagesModule = require(script.Parent.buildValidMessages)
-local ingestBatchModule = require(script.Parent.ingestBatch)
-local ingestOperationModule = require(script.Parent.IngestOperation)
+local BuildValidMessagesModule = require(script.Parent.buildValidMessages)
+local IngestBatchModule = require(script.Parent.ingestBatch)
+local IngestOperationModule = require(script.Parent.IngestOperation)
 
-return function(p1, p2)
-	-- upvalues: buildValidMessagesModule (ref), ingestBatchModule (ref), ingestOperationModule (ref)
-	return ingestBatchModule(p1, buildValidMessagesModule(p1, p2), ingestOperationModule.Prepend)
+return function(p1, p2) --[[ Line: 22 | Named "ingestNewerMessages" ]]
+	-- upvalues: BuildValidMessagesModule (copy), IngestBatchModule (copy), IngestOperationModule (copy)
+	return IngestBatchModule(p1, BuildValidMessagesModule(p1, p2), IngestOperationModule.Prepend)
 end

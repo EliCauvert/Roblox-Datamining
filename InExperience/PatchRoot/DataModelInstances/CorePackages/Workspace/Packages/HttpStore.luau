@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.HttpStore.HttpStore)
+﻿return (require(script.Parent._Workspace.HttpStore.HttpStore))

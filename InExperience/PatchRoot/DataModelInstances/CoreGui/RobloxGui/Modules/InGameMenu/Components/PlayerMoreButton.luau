@@ -1,42 +1,42 @@
-﻿local inGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
-local roact = inGameMenuDependenciesModule.Roact
-local UIBlox = inGameMenuDependenciesModule.UIBlox
-local t = inGameMenuDependenciesModule.t
-local withStyle = UIBlox.Core.Style.withStyle
-local parent = script.Parent.Parent
-local fFlagLuaMenuPerfImprovementsModule = require(parent.Flags.FFlagLuaMenuPerfImprovements)
-local assetsModule = require(parent.Resources.Assets)
-local imageSetButton = UIBlox.Core.ImageSet.ImageSetButton
-local moreButton = roact.PureComponent:extend("MoreButton")
-moreButton.validateProps = t.strictInterface({
-	onActivated = t.callback,
-	LayoutOrder = t.integer,
-	userId = if fFlagLuaMenuPerfImprovementsModule then t.number else nil
+﻿local InGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
+local Roact = InGameMenuDependenciesModule.Roact
+local UIBlox = InGameMenuDependenciesModule.UIBlox
+local T = InGameMenuDependenciesModule.t
+local WithStyleFunction = UIBlox.Core.Style.withStyle
+local Parent = script.Parent.Parent
+local FFlagLuaMenuPerfImprovementsModule = require(Parent.Flags.FFlagLuaMenuPerfImprovements)
+local AssetsModule = require(Parent.Resources.Assets)
+local ImageSetButton = UIBlox.Core.ImageSet.ImageSetButton
+local MoreButton = Roact.PureComponent:extend("MoreButton")
+MoreButton.validateProps = T.strictInterface({
+	onActivated = T.callback,
+	LayoutOrder = T.integer,
+	userId = FFlagLuaMenuPerfImprovementsModule and T.number or nil
 })
 
-function moreButton.init(p1)
-	-- upvalues: fFlagLuaMenuPerfImprovementsModule (ref)
-	if fFlagLuaMenuPerfImprovementsModule then
-		function p0.onActivated()
-			-- upvalues: p1 (ref)
+function MoreButton.init(p1) --[[ Line: 25 ]]
+	-- upvalues: FFlagLuaMenuPerfImprovementsModule (copy)
+	if FFlagLuaMenuPerfImprovementsModule then
+		function p1.onActivated() --[[ Line: 27 ]]
+			-- upvalues: p1 (copy)
 			p1.props.onActivated(p1.props.userId)
 		end
 	end
 end
 
-function moreButton.render(p1)
-	-- upvalues: withStyle (ref), fFlagLuaMenuPerfImprovementsModule (ref), roact (ref), imageSetButton (ref), assetsModule (ref)
-	return withStyle(function(p2)
-		-- upvalues: p1 (ref), fFlagLuaMenuPerfImprovementsModule (copy), roact (copy), imageSetButton (copy), assetsModule (copy)
-		return roact.createElement(imageSetButton, {
+function MoreButton.render(p1) --[[ Line: 33 ]]
+	-- upvalues: WithStyleFunction (copy), FFlagLuaMenuPerfImprovementsModule (copy), Roact (copy), ImageSetButton (copy), AssetsModule (copy)
+	return WithStyleFunction(function(p2) --[[ Line: 34 ]]
+		-- upvalues: p1 (copy), FFlagLuaMenuPerfImprovementsModule (upval), Roact (upval), ImageSetButton (upval), AssetsModule (upval)
+		return Roact.createElement(ImageSetButton, {
 			Size = UDim2.new(0, 36, 0, 36),
 			BackgroundTransparency = 1,
-			Image = assetsModule.Images.MoreActions,
+			Image = AssetsModule.Images.MoreActions,
 			ImageColor3 = p2.Theme.IconEmphasis.Color,
 			LayoutOrder = p1.props.LayoutOrder,
-			[roact.Event.Activated] = if fFlagLuaMenuPerfImprovementsModule then if p1.props.onActivated then p1.onActivated else nil else p1.props.onActivated
+			[Roact.Event.Activated] = if FFlagLuaMenuPerfImprovementsModule then p1.props.onActivated and p1.onActivated or nil else p1.props.onActivated
 		})
 	end)
 end
 
-return moreButton
+return MoreButton

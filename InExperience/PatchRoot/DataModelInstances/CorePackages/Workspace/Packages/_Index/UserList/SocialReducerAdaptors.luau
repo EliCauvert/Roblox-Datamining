@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.SocialReducerAdaptors.SocialReducerAdaptors)
+﻿return (require(script.Parent.Parent.Parent._Index.SocialReducerAdaptors.SocialReducerAdaptors))

@@ -1,421 +1,415 @@
-﻿local parent = script:FindFirstAncestor("DataHydration").Parent
-local signalsModule = require(parent.Signals)
-local sharedFlagsModule = require(parent.SharedFlags)
-local acpProtocolModule = require(script.Parent.Acp.AcpProtocol)
-local experimentOverrideModule = require(script.Parent.experimentOverride)
-local sessionHistoryMergeModule = require(script.Parent.sessionHistoryMerge)
+﻿local Parent = script:FindFirstAncestor("DataHydration").Parent
+local SignalsModule = require(Parent.Signals)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local AcpProtocolModule = require(script.Parent.Acp.AcpProtocol)
+local ClassifyRequestFailureModule = require(script.Parent.classifyRequestFailure)
+local ExperimentOverrideModule = require(script.Parent.experimentOverride)
+local SessionHistoryMergeModule = require(script.Parent.sessionHistoryMerge)
 local _ = require(script.Parent.types)
-local constantsModule = require(script.Parent.ChatSession.constants)
-local historyLoaderModule = require(script.Parent.ChatSession.historyLoader)
-local historyPageUtilsModule = require(script.Parent.ChatSession.historyPageUtils)
-local historyPollingModule = require(script.Parent.ChatSession.historyPolling)
-local sendPromptModule = require(script.Parent.ChatSession.sendPrompt)
-local sessionHistoryCacheModule = require(script.Parent.ChatSession.sessionHistoryCache)
-local sessionScalarStateModule = require(script.Parent.ChatSession.sessionScalarState)
+local ConstantsModule = require(script.Parent.ChatSession.constants)
+local HistoryLoaderModule = require(script.Parent.ChatSession.historyLoader)
+local HistoryPageUtilsModule = require(script.Parent.ChatSession.historyPageUtils)
+local HistoryPollingModule = require(script.Parent.ChatSession.historyPolling)
+local SendPromptModule = require(script.Parent.ChatSession.sendPrompt)
+local SessionHistoryCacheModule = require(script.Parent.ChatSession.sessionHistoryCache)
+local SessionScalarStateModule = require(script.Parent.ChatSession.sessionScalarState)
 local _ = require(script.Parent.ChatSession.sessionDeps)
-local fFlagBuildExperiencePinForBuild = sharedFlagsModule.FFlagBuildExperiencePinForBuild
+local FFlagBuildExperiencePinForBuild = SharedFlagsModule.FFlagBuildExperiencePinForBuild
+local FFlagBuildExperiencePromptFailureTelemetry = SharedFlagsModule.FFlagBuildExperiencePromptFailureTelemetry
 
-return function(p1, p2, p3, p4)
-	-- upvalues: sessionScalarStateModule (ref), constantsModule (ref), sessionHistoryCacheModule (ref), experimentOverrideModule (ref), sessionHistoryMergeModule (ref), signalsModule (ref), historyPageUtilsModule (ref), historyLoaderModule (ref), historyPollingModule (ref), acpProtocolModule (ref), fFlagBuildExperiencePinForBuild (ref), sendPromptModule (ref)
-	local t = {}
-	local t_1 = {}
-	local var1 = sessionScalarStateModule.createSessionScalarState(p4)
-	local var2 = nil
-	local rpcTimeoutSeconds = p1.rpcTimeoutSeconds or constantsModule.getRpcTimeoutSeconds()
-	local var3 = sessionHistoryCacheModule.createSessionHistoryCache()
-	local var4 = 0
-	local var5 = nil
-	local var6 = nil
+return function(Deps, UniverseId, PlaceId, p1) --[[ Line: 39 | Named "createChatSession" ]]
+	-- upvalues: SessionScalarStateModule (copy), ConstantsModule (copy), SessionHistoryCacheModule (copy), ExperimentOverrideModule (copy), SessionHistoryMergeModule (copy), SignalsModule (copy), HistoryPageUtilsModule (copy), HistoryLoaderModule (copy), HistoryPollingModule (copy), AcpProtocolModule (copy), FFlagBuildExperiencePromptFailureTelemetry (copy), ClassifyRequestFailureModule (copy), FFlagBuildExperiencePinForBuild (copy), SendPromptModule (copy)
+	local LoadedBySequenceId = {}
+	local OverlayBySequenceId = {}
+	local SessionScalarState = SessionScalarStateModule.createSessionScalarState(p1)
+	local Callback = nil
+	local RpcTimeoutSeconds = Deps.rpcTimeoutSeconds or ConstantsModule.getRpcTimeoutSeconds()
+	local SessionHistoryCache = SessionHistoryCacheModule.createSessionHistoryCache()
+	local Count = 0
+	local PendingExperimentKey = nil
+	local Experiment = nil
 	
-	local function _()
-		-- upvalues: experimentOverrideModule (copy), var1 (ref), var5 (write)
-		return experimentOverrideModule.getKey(var1.getCasSessionId(false)) or var5
+	local function _() --[[ Line: 61 | Named "getExperimentKey" ]]
+		-- upvalues: ExperimentOverrideModule (upval), SessionScalarState (copy), PendingExperimentKey (ref)
+		return ExperimentOverrideModule.getKey(SessionScalarState.getCasSessionId(false)) or PendingExperimentKey
 	end
 	
-	local _ = function()
-		-- upvalues: var6 (write), experimentOverrideModule (copy), var1 (ref), var5 (write)
-		local getExperiment
-		if experimentOverrideModule.isEnabled() then
-			getExperiment = experimentOverrideModule.getExperiment
-			getExperiment = getExperiment(experimentOverrideModule.getKey(var1.getCasSessionId(false)) or var5)
-		else
-			getExperiment = nil
-		end
-		var6 = getExperiment
+	local _ = function() --[[ Line: 65 | Named "captureSessionNewExperiment" ]]
+		-- upvalues: Experiment (ref), ExperimentOverrideModule (upval), SessionScalarState (copy), PendingExperimentKey (ref)
+		Experiment = if ExperimentOverrideModule.isEnabled() then ExperimentOverrideModule.getExperiment(ExperimentOverrideModule.getKey(SessionScalarState.getCasSessionId(false)) or PendingExperimentKey) else nil
 	end
 	
-	local function buildMergedHistory()
-		-- upvalues: sessionHistoryMergeModule (copy), t (write), t_1 (write)
-		return sessionHistoryMergeModule.orderMergedHistoryItems(t, t_1)
+	local function buildMergedHistory() --[[ Line: 71 ]]
+		-- upvalues: SessionHistoryMergeModule (upval), LoadedBySequenceId (ref), OverlayBySequenceId (ref)
+		return SessionHistoryMergeModule.orderMergedHistoryItems(LoadedBySequenceId, OverlayBySequenceId)
 	end
 	
-	local var7, var8 = signalsModule.createSignal(buildMergedHistory())
+	local Signal, Signal2 = SignalsModule.createSignal(buildMergedHistory())
 	
-	local function notifySessionStateChanged()
-		-- upvalues: var8 (ref), buildMergedHistory (ref)
-		var8(buildMergedHistory())
-	end
-	
-	local function noteHistorySequenceIds(p5)
-		-- upvalues: var1 (ref), historyPageUtilsModule (copy)
-		var1.noteHistorySequenceId(historyPageUtilsModule.getMaxHistorySequenceId(p5))
-	end
-	
-	local function noteTurnSequenceIds(p5)
-		-- upvalues: var1 (ref)
-		local getLatestProcessedSequenceNumber = p5.getLatestProcessedSequenceNumber
+	local function snapshotActiveSession() --[[ Line: 94 ]]
+		-- upvalues: SessionScalarState (copy), LoadedBySequenceId (ref), OverlayBySequenceId (ref)
+		local CasSessionId = SessionScalarState.getCasSessionId(false)
 		
-		if getLatestProcessedSequenceNumber ~= nil then
-			var1.noteHistorySequenceId(getLatestProcessedSequenceNumber())
-		end
-	end
-	
-	local function snapshotActiveSession()
-		-- upvalues: var1 (ref), t (write), t_1 (write)
-		local casSessionId = var1.getCasSessionId(false)
-		
-		return if casSessionId == nil or casSessionId == "" then nil else {
-			loadedBySequenceId = t,
-			overlayBySequenceId = t_1,
-			hasLoadedHistory = var1.getHasLoadedHistory(false),
-			nextHistoryPageToken = var1.getNextHistoryPageToken(false),
-			latestObservedHistorySequenceId = var1.getLatestObservedHistorySequenceId(false)
+		return if CasSessionId == nil or CasSessionId == "" then nil else {
+			loadedBySequenceId = LoadedBySequenceId,
+			overlayBySequenceId = OverlayBySequenceId,
+			hasLoadedHistory = SessionScalarState.getHasLoadedHistory(false),
+			nextHistoryPageToken = SessionScalarState.getNextHistoryPageToken(false),
+			latestObservedHistorySequenceId = SessionScalarState.getLatestObservedHistorySequenceId(false)
 		}
 	end
 	
-	local _ = function()
-		-- upvalues: var1 (ref), snapshotActiveSession (ref), var3 (ref)
-		local casSessionId = var1.getCasSessionId(false)
+	local _ = function() --[[ Line: 108 | Named "saveActiveSessionToCache" ]]
+		-- upvalues: SessionScalarState (copy), snapshotActiveSession (copy), SessionHistoryCache (copy)
+		local CasSessionId = SessionScalarState.getCasSessionId(false)
 		
-		if casSessionId == nil or casSessionId == "" or not var1.getHasLoadedHistory(false) then return end
-		local var9 = snapshotActiveSession()
+		if CasSessionId == nil or CasSessionId == "" or not SessionScalarState.getHasLoadedHistory(false) then return end
+		local SnapshotActiveSessionResult = snapshotActiveSession()
 		
-		if var9 ~= nil then
-			var3.save(casSessionId, var9)
+		if SnapshotActiveSessionResult ~= nil then
+			SessionHistoryCache.save(CasSessionId, SnapshotActiveSessionResult)
 		end
 	end
 	
-	local _ = function(p5)
-		-- upvalues: var3 (ref), t (write), t_1 (write), var1 (ref), var8 (ref), buildMergedHistory (ref)
-		local var9 = var3.restore(p5)
+	local _ = function(p2): boolean --[[ Line: 119 | Named "restoreSessionFromCache" ]]
+		-- upvalues: SessionHistoryCache (copy), LoadedBySequenceId (ref), OverlayBySequenceId (ref), SessionScalarState (copy), Signal2 (copy), buildMergedHistory (copy)
+		local RestoreResult = SessionHistoryCache.restore(p2)
 		
-		if var9 == nil then
+		if RestoreResult == nil then
 			return false
-		end
-		t = var9.loadedBySequenceId
-		t_1 = var9.overlayBySequenceId
-		var1.setHasLoadedHistory(var9.hasLoadedHistory)
-		var1.setNextHistoryPageToken(var9.nextHistoryPageToken)
-		var1.setLatestObservedHistorySequenceId(var9.latestObservedHistorySequenceId)
-		var8(buildMergedHistory())
-		
-		return true
-	end
-	
-	local function clearActiveSessionState()
-		-- upvalues: t (write), t_1 (write), var1 (ref), var8 (ref), buildMergedHistory (ref)
-		t = {}
-		t_1 = {}
-		var1.setHasLoadedHistory(false)
-		var1.setNextHistoryPageToken(nil)
-		var1.setHistoryLoadInFlight(false)
-		var1.setLatestObservedHistorySequenceId(nil)
-		var8(buildMergedHistory())
-	end
-	
-	local function setCasSessionIdInternal(value)
-		-- upvalues: var1 (ref), var4 (write), snapshotActiveSession (ref), var3 (ref), t (write), t_1 (write), var8 (ref), buildMergedHistory (ref), p1 (ref), clearActiveSessionState (ref)
-		if value == "" then return end
-		if var1.getCasSessionId(false) == value then return end
-		var4 += 1
-		local casSessionId = var1.getCasSessionId(false)
-		
-		if casSessionId ~= nil and casSessionId ~= "" and var1.getHasLoadedHistory(false) then
-			local var9 = snapshotActiveSession()
+		else
+			LoadedBySequenceId = RestoreResult.loadedBySequenceId
+			OverlayBySequenceId = RestoreResult.overlayBySequenceId
+			SessionScalarState.setHasLoadedHistory(RestoreResult.hasLoadedHistory)
+			SessionScalarState.setNextHistoryPageToken(RestoreResult.nextHistoryPageToken)
+			SessionScalarState.setLatestObservedHistorySequenceId(RestoreResult.latestObservedHistorySequenceId)
+			Signal2(buildMergedHistory())
 			
-			if var9 ~= nil then
-				var3.save(casSessionId, var9)
+			return true
+		end
+	end
+	
+	local function clearActiveSessionState() --[[ Line: 133 ]]
+		-- upvalues: LoadedBySequenceId (ref), OverlayBySequenceId (ref), SessionScalarState (copy), Signal2 (copy), buildMergedHistory (copy)
+		LoadedBySequenceId = {}
+		OverlayBySequenceId = {}
+		SessionScalarState.setHasLoadedHistory(false)
+		SessionScalarState.setNextHistoryPageToken(nil)
+		SessionScalarState.setHistoryLoadInFlight(false)
+		SessionScalarState.setLatestObservedHistorySequenceId(nil)
+		Signal2(buildMergedHistory())
+	end
+	
+	local function setCasSessionIdInternal(SessionId) --[[ Line: 143 ]]
+		-- upvalues: SessionScalarState (copy), Count (ref), snapshotActiveSession (copy), SessionHistoryCache (copy), LoadedBySequenceId (ref), OverlayBySequenceId (ref), Signal2 (copy), buildMergedHistory (copy), Deps (copy), clearActiveSessionState (copy)
+		if SessionId == "" then return end
+		if SessionScalarState.getCasSessionId(false) == SessionId then return end
+		Count += 1
+		local CasSessionId = SessionScalarState.getCasSessionId(false)
+		
+		if CasSessionId ~= nil and CasSessionId ~= "" and SessionScalarState.getHasLoadedHistory(false) then
+			local SnapshotActiveSessionResult = snapshotActiveSession()
+			
+			if SnapshotActiveSessionResult ~= nil then
+				SessionHistoryCache.save(CasSessionId, SnapshotActiveSessionResult)
 			end
 		end
-		local var10
-		var1.setCasSessionId(value)
-		var1.setHistoryLoadInFlight(false)
-		local var11 = var3.restore(value)
+		SessionScalarState.setCasSessionId(SessionId)
+		SessionScalarState.setHistoryLoadInFlight(false)
+		local RestoreResult = SessionHistoryCache.restore(SessionId)
+		local Flag = nil
 		
-		if var11 == nil then
-			var10 = false
+		if RestoreResult == nil then
+			Flag = false
 		else
-			t = var11.loadedBySequenceId
-			t_1 = var11.overlayBySequenceId
-			var1.setHasLoadedHistory(var11.hasLoadedHistory)
-			var1.setNextHistoryPageToken(var11.nextHistoryPageToken)
-			var1.setLatestObservedHistorySequenceId(var11.latestObservedHistorySequenceId)
-			var8(buildMergedHistory())
-			var10 = true
+			LoadedBySequenceId = RestoreResult.loadedBySequenceId
+			OverlayBySequenceId = RestoreResult.overlayBySequenceId
+			SessionScalarState.setHasLoadedHistory(RestoreResult.hasLoadedHistory)
+			SessionScalarState.setNextHistoryPageToken(RestoreResult.nextHistoryPageToken)
+			SessionScalarState.setLatestObservedHistorySequenceId(RestoreResult.latestObservedHistorySequenceId)
+			Signal2(buildMergedHistory())
+			Flag = true
 		end
-		if var10 then
-			p1.onCasSessionIdChanged(value)
+		if Flag then
+			Deps.onCasSessionIdChanged(SessionId)
 			
 			return
-		end
-		clearActiveSessionState()
-		p1.onCasSessionIdChanged(value)
-	end
-	
-	local function mergeHistoryPage(p5, p6)
-		-- upvalues: sessionHistoryMergeModule (copy), t (write), t_1 (write), var1 (ref), historyPageUtilsModule (copy), var8 (ref), buildMergedHistory (ref)
-		sessionHistoryMergeModule.mergeHistoryIntoMap(t, p5, t_1)
-		var1.setNextHistoryPageToken(p6)
-		var1.noteHistorySequenceId(historyPageUtilsModule.getMaxHistorySequenceId(p5))
-		var8(buildMergedHistory())
-	end
-	
-	local function ingestRealtimeUpdate(p5, p6)
-		-- upvalues: sessionHistoryMergeModule (copy), t_1 (write), t (write), var1 (ref), var8 (ref), buildMergedHistory (ref)
-		if sessionHistoryMergeModule.ingestOverlayUpdate(t_1, t, p5, p6) then
-			var1.noteHistorySequenceId(p6)
-			var8(buildMergedHistory())
+		else
+			clearActiveSessionState()
+			Deps.onCasSessionIdChanged(SessionId)
 		end
 	end
 	
-	local var9 = historyLoaderModule.createHistoryLoader({
-		deps = p1,
-		rpcTimeoutSeconds = rpcTimeoutSeconds,
-		getCasSessionId = function()
-			-- upvalues: var1 (ref)
-			return var1.getCasSessionId(false)
+	local function mergeHistoryPage(p2, p3) --[[ Line: 163 ]]
+		-- upvalues: SessionHistoryMergeModule (upval), LoadedBySequenceId (ref), OverlayBySequenceId (ref), SessionScalarState (copy), HistoryPageUtilsModule (upval), Signal2 (copy), buildMergedHistory (copy)
+		SessionHistoryMergeModule.mergeHistoryIntoMap(LoadedBySequenceId, p2, OverlayBySequenceId)
+		SessionScalarState.setNextHistoryPageToken(p3)
+		SessionScalarState.noteHistorySequenceId(HistoryPageUtilsModule.getMaxHistorySequenceId(p2))
+		Signal2(buildMergedHistory())
+	end
+	
+	local HistoryLoader = HistoryLoaderModule.createHistoryLoader({
+		deps = Deps,
+		rpcTimeoutSeconds = RpcTimeoutSeconds,
+		getCasSessionId = function() --[[ Line: 180 ]]
+			-- upvalues: SessionScalarState (copy)
+			return SessionScalarState.getCasSessionId(false)
 		end,
-		getHistoryLoadInFlight = function()
-			-- upvalues: var1 (ref)
-			return var1.getHistoryLoadInFlight(false)
+		getHistoryLoadInFlight = function() --[[ Line: 183 ]]
+			-- upvalues: SessionScalarState (copy)
+			return SessionScalarState.getHistoryLoadInFlight(false)
 		end,
-		setHistoryLoadInFlight = var1.setHistoryLoadInFlight,
-		getNextHistoryPageToken = function()
-			-- upvalues: var1 (ref)
-			return var1.getNextHistoryPageToken(false)
+		setHistoryLoadInFlight = SessionScalarState.setHistoryLoadInFlight,
+		getNextHistoryPageToken = function() --[[ Line: 187 ]]
+			-- upvalues: SessionScalarState (copy)
+			return SessionScalarState.getNextHistoryPageToken(false)
 		end,
-		setNextHistoryPageToken = var1.setNextHistoryPageToken,
-		getLoadedBySequenceId = function()
-			-- upvalues: t (write)
-			return t
+		setNextHistoryPageToken = SessionScalarState.setNextHistoryPageToken,
+		getLoadedBySequenceId = function() --[[ Line: 191 ]]
+			-- upvalues: LoadedBySequenceId (ref)
+			return LoadedBySequenceId
 		end,
-		setLoadedBySequenceId = function(value)
-			-- upvalues: t (write)
-			t = value
+		setLoadedBySequenceId = function(Value) --[[ Line: 194 ]]
+			-- upvalues: LoadedBySequenceId (ref)
+			LoadedBySequenceId = Value
 		end,
-		getOverlayBySequenceId = function()
-			-- upvalues: t_1 (write)
-			return t_1
+		getOverlayBySequenceId = function() --[[ Line: 197 ]]
+			-- upvalues: OverlayBySequenceId (ref)
+			return OverlayBySequenceId
 		end,
-		setOverlayBySequenceId = function(value)
-			-- upvalues: t_1 (write)
-			t_1 = value
+		setOverlayBySequenceId = function(Value) --[[ Line: 200 ]]
+			-- upvalues: OverlayBySequenceId (ref)
+			OverlayBySequenceId = Value
 		end,
 		buildMergedHistory = buildMergedHistory,
 		mergeHistoryPage = mergeHistoryPage,
-		noteHistorySequenceIds = noteHistorySequenceIds,
-		notifyMergedHistoryChanged = notifySessionStateChanged,
-		markHistoryLoaded = var1.markHistoryLoaded,
-		getRefreshGeneration = function()
-			-- upvalues: var4 (write)
-			return var4
+		noteHistorySequenceIds = function(p2) --[[ Line: 83 ]]
+			-- upvalues: SessionScalarState (copy), HistoryPageUtilsModule (upval)
+			SessionScalarState.noteHistorySequenceId(HistoryPageUtilsModule.getMaxHistorySequenceId(p2))
 		end,
-		onInitialSessionLoad = function(p5, p6)
-			-- upvalues: experimentOverrideModule (copy)
-			if not experimentOverrideModule.isEnabled() then return end
-			local key = experimentOverrideModule.getKey(p5)
+		notifyMergedHistoryChanged = function() --[[ Line: 79 ]]
+			-- upvalues: Signal2 (copy), buildMergedHistory (copy)
+			Signal2(buildMergedHistory())
+		end,
+		markHistoryLoaded = SessionScalarState.markHistoryLoaded,
+		getRefreshGeneration = function() --[[ Line: 208 ]]
+			-- upvalues: Count (ref)
+			return Count
+		end,
+		onInitialSessionLoad = function(p2, p3) --[[ Line: 211 ]]
+			-- upvalues: ExperimentOverrideModule (upval)
+			if not ExperimentOverrideModule.isEnabled() then return end
+			local Key = ExperimentOverrideModule.getKey(p2)
 			
-			if experimentOverrideModule.isPending(key) then return end
-			local var10 = if p6 == nil or p6._meta == nil or p6._meta._roblox == nil then nil else p6._meta._roblox.experiment
+			if ExperimentOverrideModule.isPending(Key) then return end
+			local Experiment = if p3 == nil or p3._meta == nil or p3._meta._roblox == nil then nil else p3._meta._roblox.experiment
 			
-			if var10 == nil then
-				experimentOverrideModule.clear(key)
+			if Experiment == nil then
+				ExperimentOverrideModule.clear(Key)
 				
 				return
+			else
+				ExperimentOverrideModule.hydrate(Key, Experiment.specVersion)
 			end
-			experimentOverrideModule.hydrate(key, var10.specVersion)
 		end
 	})
-	local var10 = historyPollingModule.createHistoryPolling({
-		deps = p1,
-		rpcTimeoutSeconds = rpcTimeoutSeconds,
-		getCasSessionId = function()
-			-- upvalues: var1 (ref)
-			return var1.getCasSessionId(false)
+	local HistoryPolling = HistoryPollingModule.createHistoryPolling({
+		deps = Deps,
+		rpcTimeoutSeconds = RpcTimeoutSeconds,
+		getCasSessionId = function() --[[ Line: 238 ]]
+			-- upvalues: SessionScalarState (copy)
+			return SessionScalarState.getCasSessionId(false)
 		end,
-		getNextHistoryPageToken = function()
-			-- upvalues: var1 (ref)
-			return var1.getNextHistoryPageToken(false)
+		getNextHistoryPageToken = function() --[[ Line: 241 ]]
+			-- upvalues: SessionScalarState (copy)
+			return SessionScalarState.getNextHistoryPageToken(false)
 		end,
 		mergeHistoryPage = mergeHistoryPage
 	})
 	
-	local function ensureInitialized()
-		-- upvalues: var1 (ref), p1 (ref), acpProtocolModule (copy), historyPageUtilsModule (copy), rpcTimeoutSeconds (ref)
-		if var1.getInitialized(false) then
-			return true, nil
+	local function ensureInitialized() --[[ Line: 247 ]]
+		-- upvalues: SessionScalarState (copy), Deps (copy), AcpProtocolModule (upval), HistoryPageUtilsModule (upval), RpcTimeoutSeconds (copy), FFlagBuildExperiencePromptFailureTelemetry (upval), ClassifyRequestFailureModule (upval)
+		if SessionScalarState.getInitialized(false) then
+			return true, nil, nil
 		end
-		local var11 = historyPageUtilsModule.awaitRequestState(p1.initialize({ protocolVersion = acpProtocolModule.ProtocolVersion }).state, os.clock() + rpcTimeoutSeconds)
+		local AwaitRequestStateResult = HistoryPageUtilsModule.awaitRequestState(Deps.initialize({ protocolVersion = AcpProtocolModule.ProtocolVersion }).state, os.clock() + RpcTimeoutSeconds)
 		
-		if var11.status == "succeeded" then
-			var1.setInitialized(true)
+		if AwaitRequestStateResult.status == "succeeded" then
+			SessionScalarState.setInitialized(true)
 			
-			return true, nil
+			return true, nil, nil
 		end
-		return false, var11.errorCode
+		local v1 = false
+		local ErrorCode = AwaitRequestStateResult.errorCode
+		
+		if FFlagBuildExperiencePromptFailureTelemetry then
+			return v1, ErrorCode, (ClassifyRequestFailureModule(AwaitRequestStateResult))
+		else
+			return v1, ErrorCode, nil
+		end
 	end
 	
-	local var11 = sendPromptModule.createSendPrompt({
+	local SendPrompt = SendPromptModule.createSendPrompt({
 		ensureInitialized = ensureInitialized,
-		ensureCasSession = function()
-			-- upvalues: var1 (ref), p2 (ref), p3 (ref), ensureInitialized (ref), p1 (ref), var6 (write), fFlagBuildExperiencePinForBuild (copy), historyPageUtilsModule (copy), rpcTimeoutSeconds (ref), experimentOverrideModule (copy), var5 (write), setCasSessionIdInternal (ref)
-			local casSessionId = var1.getCasSessionId(false)
+		ensureCasSession = function() --[[ Line: 262 ]]
+			-- upvalues: SessionScalarState (copy), UniverseId (copy), PlaceId (copy), ensureInitialized (copy), FFlagBuildExperiencePromptFailureTelemetry (upval), Deps (copy), Experiment (ref), FFlagBuildExperiencePinForBuild (upval), HistoryPageUtilsModule (upval), RpcTimeoutSeconds (copy), ClassifyRequestFailureModule (upval), ExperimentOverrideModule (upval), PendingExperimentKey (ref), setCasSessionIdInternal (copy)
+			local CasSessionId = SessionScalarState.getCasSessionId(false)
 			
-			if casSessionId ~= nil then
-				return casSessionId, nil
-			elseif p2 == nil or p3 == nil then
+			if CasSessionId ~= nil then
+				return CasSessionId, nil
+			end
+			if UniverseId == nil or PlaceId == nil then
 				return nil, { stage = "missing_project" }
 			end
-			local var12, var13 = ensureInitialized()
+			local EnsureInitializedResult, EnsureInitializedResult2, EnsureInitializedResult3 = ensureInitialized()
 			
-			if not var12 then
-				return nil, { stage = "initialize", errorCode = var13 }
+			if not EnsureInitializedResult then
+				return nil, {
+					stage = "initialize",
+					errorCode = EnsureInitializedResult2,
+					requestFailure = if FFlagBuildExperiencePromptFailureTelemetry then EnsureInitializedResult3 else nil
+				}
 			end
-			local var14 = historyPageUtilsModule.awaitRequestState(p1.sessionNew({
-				project = { universeId = p2, placeId = p3 },
-				experiment = var6,
-				application = if fFlagBuildExperiencePinForBuild then "build" else nil
-			}).state, os.clock() + rpcTimeoutSeconds)
+			local AwaitRequestStateResult = HistoryPageUtilsModule.awaitRequestState(Deps.sessionNew({
+				project = { universeId = UniverseId, placeId = PlaceId },
+				experiment = Experiment,
+				application = if FFlagBuildExperiencePinForBuild then "build" else nil
+			}).state, os.clock() + RpcTimeoutSeconds)
 			
-			if var14.status ~= "succeeded" then
-				return nil, { stage = "session_new", errorCode = var14.errorCode }
+			if AwaitRequestStateResult.status ~= "succeeded" then
+				return nil, {
+					stage = "session_new",
+					errorCode = AwaitRequestStateResult.errorCode,
+					requestFailure = if FFlagBuildExperiencePromptFailureTelemetry then ClassifyRequestFailureModule(AwaitRequestStateResult) else nil
+				}
 			end
-			local result = var14.result
-			local var15 = if typeof(result) == "table" then result.sessionId else nil
+			local Result = AwaitRequestStateResult.result
+			local SessionId = if typeof(Result) == "table" then Result.sessionId else nil
 			
-			if typeof(var15) ~= "string" or var15 == "" then
+			if typeof(SessionId) ~= "string" or SessionId == "" then
 				return nil, { stage = "session_new" }
-			elseif experimentOverrideModule.isEnabled() then
-				local key = experimentOverrideModule.getKey(var15)
+			end
+			if ExperimentOverrideModule.isEnabled() then
+				local Key = ExperimentOverrideModule.getKey(SessionId)
 				
-				if experimentOverrideModule.has(var5) then
-					experimentOverrideModule.move(var5, key)
-				elseif var6 ~= nil then
-					experimentOverrideModule.hydrate(key, var6.specVersion)
+				if ExperimentOverrideModule.has(PendingExperimentKey) then
+					ExperimentOverrideModule.move(PendingExperimentKey, Key)
+				elseif Experiment ~= nil then
+					ExperimentOverrideModule.hydrate(Key, Experiment.specVersion)
 				end
-				experimentOverrideModule.consumePending(key)
+				ExperimentOverrideModule.consumePending(Key)
 			end
-			setCasSessionIdInternal(var15)
+			setCasSessionIdInternal(SessionId)
 			
-			return var15, nil
+			return SessionId, nil
 		end,
-		getLatestObservedHistorySequenceId = function()
-			-- upvalues: var1 (ref)
-			return var1.getLatestObservedHistorySequenceId(false)
+		getLatestObservedHistorySequenceId = function() --[[ Line: 318 ]]
+			-- upvalues: SessionScalarState (copy)
+			return SessionScalarState.getLatestObservedHistorySequenceId(false)
 		end,
-		noteTurnSequenceIds = noteTurnSequenceIds,
-		startPollingTurnFromHistory = var10.startPollingTurnFromHistory,
-		getAssistantTurnSequence = function()
-			-- upvalues: var1 (ref)
-			return var1.getAssistantTurnSequence(false)
-		end,
-		incrementAssistantTurnSequence = var1.incrementAssistantTurnSequence,
-		sessionPrompt = function(p5)
-			-- upvalues: experimentOverrideModule (copy), var1 (ref), var5 (write), p1 (ref)
-			local getPromptExperiment
-			if experimentOverrideModule.isEnabled() then
-				getPromptExperiment = experimentOverrideModule.getPromptExperiment
-				getPromptExperiment = getPromptExperiment(experimentOverrideModule.getKey(var1.getCasSessionId(false)) or var5)
-			else
-				getPromptExperiment = nil
+		noteTurnSequenceIds = function(p2) --[[ Line: 87 ]]
+			-- upvalues: SessionScalarState (copy)
+			local GetLatestProcessedSequenceNumberFunction = p2.getLatestProcessedSequenceNumber
+			
+			if GetLatestProcessedSequenceNumberFunction ~= nil then
+				SessionScalarState.noteHistorySequenceId(GetLatestProcessedSequenceNumberFunction())
 			end
-			local var12 = p1.sessionPrompt({
-				sessionId = p5.sessionId,
-				prompt = p5.prompt,
-				_meta = p5._meta,
-				experiment = getPromptExperiment
+		end,
+		startPollingTurnFromHistory = HistoryPolling.startPollingTurnFromHistory,
+		getAssistantTurnSequence = function() --[[ Line: 323 ]]
+			-- upvalues: SessionScalarState (copy)
+			return SessionScalarState.getAssistantTurnSequence(false)
+		end,
+		incrementAssistantTurnSequence = SessionScalarState.incrementAssistantTurnSequence,
+		sessionPrompt = function(p2) --[[ Line: 330 ]]
+			-- upvalues: ExperimentOverrideModule (upval), SessionScalarState (copy), PendingExperimentKey (ref), Deps (copy)
+			local PromptExperiment = if ExperimentOverrideModule.isEnabled() then ExperimentOverrideModule.getPromptExperiment(ExperimentOverrideModule.getKey(SessionScalarState.getCasSessionId(false)) or PendingExperimentKey) else nil
+			local SessionPromptResult = Deps.sessionPrompt({
+				sessionId = p2.sessionId,
+				prompt = p2.prompt,
+				_meta = p2._meta,
+				experiment = PromptExperiment
 			})
 			
-			if getPromptExperiment ~= nil then
-				experimentOverrideModule.consumePending(experimentOverrideModule.getKey(var1.getCasSessionId(false)) or var5)
+			if PromptExperiment ~= nil then
+				ExperimentOverrideModule.consumePending(ExperimentOverrideModule.getKey(SessionScalarState.getCasSessionId(false)) or PendingExperimentKey)
 			end
-			return var12
+			return SessionPromptResult
 		end,
-		setActiveStop = function(value)
-			-- upvalues: var2 (write)
-			var2 = value
+		setActiveStop = function(Value) --[[ Line: 345 ]]
+			-- upvalues: Callback (ref)
+			Callback = Value
 		end
 	})
 	
 	return {
-		universeId = p2,
-		placeId = p3,
-		getCasSessionId = function()
-			-- upvalues: var1 (ref)
-			return var1.getCasSessionId(false)
+		universeId = UniverseId,
+		placeId = PlaceId,
+		getCasSessionId = function() --[[ Line: 386 ]]
+			-- upvalues: SessionScalarState (copy)
+			return SessionScalarState.getCasSessionId(false)
 		end,
 		setCasSessionId = setCasSessionIdInternal,
-		setPendingExperimentKey = function(value)
-			-- upvalues: var5 (write)
-			var5 = value
+		setPendingExperimentKey = function(Value) --[[ Line: 390 ]]
+			-- upvalues: PendingExperimentKey (ref)
+			PendingExperimentKey = Value
 		end,
-		hasLoadedHistory = function()
-			-- upvalues: var1 (ref)
-			return var1.getHasLoadedHistory(false)
+		hasLoadedHistory = function() --[[ Line: 393 ]]
+			-- upvalues: SessionScalarState (copy)
+			return SessionScalarState.getHasLoadedHistory(false)
 		end,
-		markHistoryLoaded = var1.markHistoryLoaded,
-		getNextHistoryPageToken = function()
-			-- upvalues: var1 (ref)
-			return var1.getNextHistoryPageToken(false)
+		markHistoryLoaded = SessionScalarState.markHistoryLoaded,
+		getNextHistoryPageToken = function() --[[ Line: 397 ]]
+			-- upvalues: SessionScalarState (copy)
+			return SessionScalarState.getNextHistoryPageToken(false)
 		end,
-		getMergedHistory = var7,
-		ingestRealtimeUpdate = ingestRealtimeUpdate,
+		getMergedHistory = Signal,
+		ingestRealtimeUpdate = function(p2, p3) --[[ Line: 170 ]]
+			-- upvalues: SessionHistoryMergeModule (upval), OverlayBySequenceId (ref), LoadedBySequenceId (ref), SessionScalarState (copy), Signal2 (copy), buildMergedHistory (copy)
+			if SessionHistoryMergeModule.ingestOverlayUpdate(OverlayBySequenceId, LoadedBySequenceId, p2, p3) then
+				SessionScalarState.noteHistorySequenceId(p3)
+				Signal2(buildMergedHistory())
+			end
+		end,
 		mergeHistoryPage = mergeHistoryPage,
-		refreshSession = var9.refreshSession,
-		loadOlderHistory = var9.loadOlderHistory,
-		requestOlderHistoryWhile = var9.requestOlderHistoryWhile,
-		sendPrompt = function(p5)
-			-- upvalues: var6 (write), experimentOverrideModule (copy), var1 (ref), var5 (write), var11 (ref)
-			local getExperiment
-			if experimentOverrideModule.isEnabled() then
-				getExperiment = experimentOverrideModule.getExperiment
-				getExperiment = getExperiment(experimentOverrideModule.getKey(var1.getCasSessionId(false)) or var5)
-			else
-				getExperiment = nil
-			end
-			var6 = getExperiment
+		refreshSession = HistoryLoader.refreshSession,
+		loadOlderHistory = HistoryLoader.loadOlderHistory,
+		requestOlderHistoryWhile = HistoryLoader.requestOlderHistoryWhile,
+		sendPrompt = function(p2) --[[ Line: 406 ]]
+			-- upvalues: Experiment (ref), ExperimentOverrideModule (upval), SessionScalarState (copy), PendingExperimentKey (ref), SendPrompt (copy)
+			Experiment = if ExperimentOverrideModule.isEnabled() then ExperimentOverrideModule.getExperiment(ExperimentOverrideModule.getKey(SessionScalarState.getCasSessionId(false)) or PendingExperimentKey) else nil
 			
-			return var11.sendPrompt(p5)
+			return SendPrompt.sendPrompt(p2)
 		end,
-		stopActiveTurn = function()
-			-- upvalues: var2 (write)
-			if var2 ~= nil then
-				var2()
+		stopActiveTurn = function() --[[ Line: 377 ]]
+			-- upvalues: Callback (ref)
+			if Callback ~= nil then
+				Callback()
 			end
 		end,
-		submitActiveToolResult = function(p5, p6, p7, p8)
-			-- upvalues: var1 (ref), p1 (ref)
-			local casSessionId = var1.getCasSessionId(false)
+		submitActiveToolResult = function(Content, p2, TurnId, ReferenceId) --[[ Line: 358 ]]
+			-- upvalues: SessionScalarState (copy), Deps (copy)
+			local CasSessionId = SessionScalarState.getCasSessionId(false)
 			
-			return if casSessionId == nil then nil else p1.submitToolResult({
-				sessionId = casSessionId,
-				turnId = p7,
-				referenceId = p8,
-				content = p5,
-				isError = if p6 ~= nil then false else p6
+			return if CasSessionId == nil then nil else Deps.submitToolResult({
+				sessionId = CasSessionId,
+				turnId = TurnId,
+				referenceId = ReferenceId,
+				content = Content,
+				isError = p2 ~= nil and p2
 			})
 		end,
-		getActiveTurnHandle = function()
-			-- upvalues: var1 (ref), p1 (ref)
-			local casSessionId = var1.getCasSessionId(false)
+		getActiveTurnHandle = function() --[[ Line: 350 ]]
+			-- upvalues: SessionScalarState (copy), Deps (copy)
+			local CasSessionId = SessionScalarState.getCasSessionId(false)
 			
-			return if casSessionId == nil then nil else p1.getActiveTurnHandle(casSessionId)
+			return if CasSessionId == nil then nil else Deps.getActiveTurnHandle(CasSessionId)
 		end,
-		startPollingActiveTurn = function(p5)
-			-- upvalues: var1 (ref), var10 (ref)
-			local casSessionId = var1.getCasSessionId(false)
+		startPollingActiveTurn = function(CasSessionId) --[[ Line: 413 ]]
+			-- upvalues: SessionScalarState (copy), HistoryPolling (copy)
+			local CasSessionId1 = SessionScalarState.getCasSessionId(false)
 			
-			return if casSessionId == nil then function() end else var10.startPollingActiveTurn(casSessionId, p5)
+			return if CasSessionId1 == nil then function() --[[ Line: 416 ]] end else HistoryPolling.startPollingActiveTurn(CasSessionId1, CasSessionId)
 		end
 	}
 end

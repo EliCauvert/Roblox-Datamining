@@ -1,14 +1,14 @@
-﻿local momentsCommon = script:FindFirstAncestor("MomentsCommon")
-local reactModule = require(momentsCommon.Parent.React)
-local useScreenSizeModule = require(script.Parent.useScreenSize)
-local formFactorModule = require(momentsCommon.Enums.FormFactor)
+﻿local MomentsCommon = script:FindFirstAncestor("MomentsCommon")
+local ReactModule = require(MomentsCommon.Parent.React)
+local UseScreenSizeModule = require(script.Parent.useScreenSize)
+local FormFactorModule = require(MomentsCommon.Enums.FormFactor)
 
-return function()
-	-- upvalues: useScreenSizeModule (ref), reactModule (ref), formFactorModule (ref)
-	local var1 = useScreenSizeModule()
+return function() --[[ Line: 27 | Named "useFormFactor" ]]
+	-- upvalues: UseScreenSizeModule (copy), ReactModule (copy), FormFactorModule (copy)
+	local UseScreenSizeModuleResult = UseScreenSizeModule()
 	
-	return reactModule.useMemo(function()
-		-- upvalues: var1 (ref), formFactorModule (copy)
-		return if var1.X < 600 then formFactorModule.MobilePortrait elseif var1.Y < 480 then formFactorModule.MobileLandscape else formFactorModule.Wide
-	end, { var1 })
+	return (ReactModule.useMemo(function() --[[ Line: 32 ]]
+		-- upvalues: UseScreenSizeModuleResult (copy), FormFactorModule (upval)
+		return if UseScreenSizeModuleResult.X < 600 then FormFactorModule.MobilePortrait elseif UseScreenSizeModuleResult.Y < 480 then FormFactorModule.MobileLandscape else FormFactorModule.Wide
+	end, { UseScreenSizeModuleResult }))
 end

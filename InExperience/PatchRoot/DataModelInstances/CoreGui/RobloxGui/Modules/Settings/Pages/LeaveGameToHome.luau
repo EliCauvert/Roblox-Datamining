@@ -1,139 +1,139 @@
-﻿local contextActionService = game:GetService("ContextActionService")
-local robloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
-local guiService = game:GetService("GuiService")
-local runService = game:GetService("RunService")
-local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
-local corePackagesService = game:GetService("CorePackages")
-local perfUtilsModule = require(robloxGui.Modules.Common.PerfUtils)
-local utilityModule = require(robloxGui.Modules.Settings.Utility)
-local linkingProtocol = require(corePackagesService.Workspace.Packages.LinkingProtocol).LinkingProtocol
-local themeModule = require(robloxGui.Modules.Settings.Theme)
-local create = require(corePackagesService.Workspace.Packages.AppCommonLib).Create
-local _ = nil
-robloxGui:WaitForChild("Modules"):WaitForChild("TenFootInterface")
-local var1 = require(robloxGui.Modules.TenFootInterface):IsEnabled()
-local rbxAnalyticsServiceExposePlaySessionIdEngineFeature = game:GetEngineFeature("RbxAnalyticsServiceExposePlaySessionId")
-local getFFlagEnableInGameMenuDurationLoggerModule = require(robloxGui.Modules.Common.Flags.GetFFlagEnableInGameMenuDurationLogger)
-local collectAnalyticsForSystemMenuFFlag = settings():GetFFlag("CollectAnalyticsForSystemMenu")
-local getDefaultQualityLevel = require(corePackagesService.Workspace.Packages.AppCommonLib).GetDefaultQualityLevel
-local var2 = if collectAnalyticsForSystemMenuFFlag then require(robloxGui.Modules:WaitForChild("InGameMenu"):WaitForChild("Resources"):WaitForChild("Constants")) else nil
-local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
-local var3 = (function()
-	-- upvalues: robloxGui (ref), rbxAnalyticsServiceExposePlaySessionIdEngineFeature (ref), rbxAnalyticsService (ref), getFFlagEnableInGameMenuDurationLoggerModule (ref), perfUtilsModule (ref), guiService (ref), collectAnalyticsForSystemMenuFFlag (ref), var2 (write), linkingProtocol (ref), runService (ref), getDefaultQualityLevel (ref), robloxTranslatorModule (ref), create (ref), themeModule (ref), var1 (ref), utilityModule (ref)
-	local leaveGameToHomePage = require(robloxGui.Modules.Settings.SettingsPageFactory):CreateNewPage()
-	leaveGameToHomePage.playsessionid = ""
+﻿local ContextActionService = game:GetService("ContextActionService")
+local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
+local GuiService = game:GetService("GuiService")
+local RunService = game:GetService("RunService")
+local RbxAnalyticsService = game:GetService("RbxAnalyticsService")
+local CorePackages = game:GetService("CorePackages")
+local PerfUtilsModule = require(RobloxGui.Modules.Common.PerfUtils)
+local UtilityModule = require(RobloxGui.Modules.Settings.Utility)
+local LinkingProtocol = require(CorePackages.Workspace.Packages.LinkingProtocol).LinkingProtocol
+local ThemeModule = require(RobloxGui.Modules.Settings.Theme)
+local CreateFunction = require(CorePackages.Workspace.Packages.AppCommonLib).Create
+local v1 = nil
+RobloxGui:WaitForChild("Modules"):WaitForChild("TenFootInterface")
+local IsEnabled = require(RobloxGui.Modules.TenFootInterface):IsEnabled()
+local RbxAnalyticsServiceExposePlaySessionIdEngineFeature = game:GetEngineFeature("RbxAnalyticsServiceExposePlaySessionId")
+local GetFFlagEnableInGameMenuDurationLoggerModule = require(RobloxGui.Modules.Common.Flags.GetFFlagEnableInGameMenuDurationLogger)
+local CollectAnalyticsForSystemMenuFFlag = settings():GetFFlag("CollectAnalyticsForSystemMenu")
+local GetDefaultQualityLevelFunction = require(CorePackages.Workspace.Packages.AppCommonLib).GetDefaultQualityLevel
+local ConstantsModule = if CollectAnalyticsForSystemMenuFFlag then require(RobloxGui.Modules:WaitForChild("InGameMenu"):WaitForChild("Resources"):WaitForChild("Constants")) else nil
+local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
+v1 = (function() --[[ Line: 51 | Named "Initialize" ]]
+	-- upvalues: RobloxGui (copy), RbxAnalyticsServiceExposePlaySessionIdEngineFeature (copy), RbxAnalyticsService (copy), GetFFlagEnableInGameMenuDurationLoggerModule (copy), PerfUtilsModule (copy), GuiService (copy), CollectAnalyticsForSystemMenuFFlag (copy), ConstantsModule (ref), LinkingProtocol (copy), RunService (copy), GetDefaultQualityLevelFunction (copy), RobloxTranslatorModule (copy), CreateFunction (copy), ThemeModule (copy), IsEnabled (copy), UtilityModule (copy)
+	local NewPage = require(RobloxGui.Modules.Settings.SettingsPageFactory):CreateNewPage()
+	NewPage.playsessionid = ""
 	
-	if rbxAnalyticsServiceExposePlaySessionIdEngineFeature then
-		leaveGameToHomePage.playsessionid = rbxAnalyticsService:GetPlaySessionId()
+	if RbxAnalyticsServiceExposePlaySessionIdEngineFeature then
+		NewPage.playsessionid = RbxAnalyticsService:GetPlaySessionId()
 	end
-	function leaveGameToHomePage.LeaveFunc()
-		-- upvalues: getFFlagEnableInGameMenuDurationLoggerModule (copy), perfUtilsModule (copy), guiService (copy), collectAnalyticsForSystemMenuFFlag (copy), rbxAnalyticsService (copy), var2 (copy), leaveGameToHomePage (ref), linkingProtocol (copy), runService (copy), getDefaultQualityLevel (copy)
-		if getFFlagEnableInGameMenuDurationLoggerModule() then
-			perfUtilsModule.leavingGame()
+	function NewPage.LeaveFunc() --[[ Line: 60 ]]
+		-- upvalues: GetFFlagEnableInGameMenuDurationLoggerModule (upval), PerfUtilsModule (upval), GuiService (upval), CollectAnalyticsForSystemMenuFFlag (upval), RbxAnalyticsService (upval), ConstantsModule (upval), NewPage (copy), LinkingProtocol (upval), RunService (upval), GetDefaultQualityLevelFunction (upval)
+		if GetFFlagEnableInGameMenuDurationLoggerModule() then
+			PerfUtilsModule.leavingGame()
 		end
-		guiService.SelectedCoreObject = nil
+		GuiService.SelectedCoreObject = nil
 		
-		if collectAnalyticsForSystemMenuFFlag then
-			rbxAnalyticsService:SetRBXEventStream(var2.AnalyticsTargetName, var2.AnalyticsInGameMenuName, var2.AnalyticsLeaveGameName, {
-				confirmed = var2.AnalyticsConfirmedName,
+		if CollectAnalyticsForSystemMenuFFlag then
+			RbxAnalyticsService:SetRBXEventStream(ConstantsModule.AnalyticsTargetName, ConstantsModule.AnalyticsInGameMenuName, ConstantsModule.AnalyticsLeaveGameName, {
+				confirmed = ConstantsModule.AnalyticsConfirmedName,
 				universeid = tostring(game.GameId),
-				source = var2.AnalyticsLeaveToHomeSource,
-				playsessionid = leaveGameToHomePage.playsessionid
+				source = ConstantsModule.AnalyticsLeaveToHomeSource,
+				playsessionid = NewPage.playsessionid
 			})
 		end
-		linkingProtocol.default:detectURL("roblox://navigation/home")
-		runService.RenderStepped:wait()
-		runService.RenderStepped:wait()
+		LinkingProtocol.default:detectURL("roblox://navigation/home")
+		RunService.RenderStepped:wait()
+		RunService.RenderStepped:wait()
 		game:Shutdown()
-		settings().Rendering.QualityLevel = getDefaultQualityLevel()
+		settings().Rendering.QualityLevel = GetDefaultQualityLevelFunction()
 	end
 	
-	function leaveGameToHomePage.DontLeaveFunc(p1)
-		-- upvalues: leaveGameToHomePage (ref), collectAnalyticsForSystemMenuFFlag (copy), rbxAnalyticsService (copy), var2 (copy)
-		if leaveGameToHomePage.HubRef then
-			leaveGameToHomePage.HubRef:PopMenu(p1, true)
+	function NewPage.DontLeaveFunc(IsUserInputTypeMatch) --[[ Line: 92 ]]
+		-- upvalues: NewPage (copy), CollectAnalyticsForSystemMenuFFlag (upval), RbxAnalyticsService (upval), ConstantsModule (upval)
+		if NewPage.HubRef then
+			NewPage.HubRef:PopMenu(IsUserInputTypeMatch, true)
 		end
-		if collectAnalyticsForSystemMenuFFlag then
-			rbxAnalyticsService:SetRBXEventStream(var2.AnalyticsTargetName, var2.AnalyticsInGameMenuName, var2.AnalyticsLeaveGameName, {
-				confirmed = var2.AnalyticsCancelledName,
+		if CollectAnalyticsForSystemMenuFFlag then
+			RbxAnalyticsService:SetRBXEventStream(ConstantsModule.AnalyticsTargetName, ConstantsModule.AnalyticsInGameMenuName, ConstantsModule.AnalyticsLeaveGameName, {
+				confirmed = ConstantsModule.AnalyticsCancelledName,
 				universeid = tostring(game.GameId),
-				source = var2.AnalyticsLeaveToHomeSource,
-				playsessionid = leaveGameToHomePage.playsessionid
+				source = ConstantsModule.AnalyticsLeaveToHomeSource,
+				playsessionid = NewPage.playsessionid
 			})
 		end
 	end
 	
-	function leaveGameToHomePage.DontLeaveFromHotkey(_, p1, p2)
-		-- upvalues: leaveGameToHomePage (ref)
-		if p1 == Enum.UserInputState.Begin then
-			leaveGameToHomePage.DontLeaveFunc(if p2.UserInputType ~= Enum.UserInputType.Gamepad1 then if p2.UserInputType ~= Enum.UserInputType.Gamepad2 then if p2.UserInputType ~= Enum.UserInputType.Gamepad3 then p2.UserInputType == Enum.UserInputType.Gamepad4 else true else true else true)
+	function NewPage:DontLeaveFromHotkey(UserInputState, Input) --[[ Line: 111 ]]
+		-- upvalues: NewPage (copy)
+		if UserInputState == Enum.UserInputState.Begin then
+			NewPage.DontLeaveFunc(Input.UserInputType == Enum.UserInputType.Gamepad1 or (Input.UserInputType == Enum.UserInputType.Gamepad2 or (Input.UserInputType == Enum.UserInputType.Gamepad3 or Input.UserInputType == Enum.UserInputType.Gamepad4)))
 		end
 	end
 	
-	function leaveGameToHomePage.DontLeaveFromButton(p1)
-		-- upvalues: leaveGameToHomePage (ref)
-		leaveGameToHomePage.DontLeaveFunc(p1)
+	function NewPage.DontLeaveFromButton(p1) --[[ Line: 119 ]]
+		-- upvalues: NewPage (copy)
+		NewPage.DontLeaveFunc(p1)
 	end
 	
-	leaveGameToHomePage.TabHeader = nil
-	leaveGameToHomePage.Page.Name = "LeaveGameToHomePage"
-	leaveGameToHomePage.ShouldShowBottomBar = false
-	leaveGameToHomePage.ShouldShowHubBar = false
-	local var4 = create("TextLabel")({
+	NewPage.TabHeader = nil
+	NewPage.Page.Name = "LeaveGameToHomePage"
+	NewPage.ShouldShowBottomBar = false
+	NewPage.ShouldShowHubBar = false
+	local Parent = CreateFunction("TextLabel")({
 		Name = "LeaveGameText",
 		BackgroundTransparency = 1,
 		TextWrapped = true,
 		ZIndex = 2,
-		Text = robloxTranslatorModule:FormatByKey(if collectAnalyticsForSystemMenuFFlag then var2.ConfirmLeaveGameLocalizedKey else "CoreScripts.InGameMenu.Prompt.ConfirmLeaveGame"),
-		Font = themeModule.font(Enum.Font.SourceSansBold, "Confirmation"),
-		FontSize = themeModule.fontSize(Enum.FontSize.Size36, "Confirmation"),
+		Text = RobloxTranslatorModule:FormatByKey(if CollectAnalyticsForSystemMenuFFlag then ConstantsModule.ConfirmLeaveGameLocalizedKey else "CoreScripts.InGameMenu.Prompt.ConfirmLeaveGame"),
+		Font = ThemeModule.font(Enum.Font.SourceSansBold, "Confirmation"),
+		FontSize = ThemeModule.fontSize(Enum.FontSize.Size36, "Confirmation"),
 		TextColor3 = Color3.new(1, 1, 1),
 		Size = UDim2.new(1, 0, 0, 200),
-		Parent = leaveGameToHomePage.Page,
-		Position = var1 and UDim2.new(0, 0, 0, 100) or UDim2.new(0, 0, 0, 0)
+		Parent = NewPage.Page,
+		Position = IsEnabled and UDim2.new(0, 0, 0, 100) or UDim2.new(0, 0, 0, 0)
 	})
-	local var5 = create("Frame")({
+	local Parent1 = CreateFunction("Frame")({
 		Name = "LeaveButtonContainer",
 		BackgroundTransparency = 1,
-		Parent = var4,
+		Parent = Parent,
 		Size = UDim2.new(1, 0, 0, 400),
 		Position = UDim2.new(0, 0, 1, 0)
 	})
-	local _ = create("UIGridLayout")({
+	local _ = CreateFunction("UIGridLayout")({
 		Name = "LeavetButtonsLayout",
-		CellSize = var1 and UDim2.new(0, 300, 0, 80) or UDim2.new(0, 200, 0, 50),
+		CellSize = IsEnabled and UDim2.new(0, 300, 0, 80) or UDim2.new(0, 200, 0, 50),
 		CellPadding = UDim2.new(0, 20, 0, 20),
 		FillDirection = Enum.FillDirection.Horizontal,
 		HorizontalAlignment = Enum.HorizontalAlignment.Center,
 		SortOrder = Enum.SortOrder.LayoutOrder,
 		VerticalAlignment = Enum.VerticalAlignment.Top,
-		Parent = var5
+		Parent = Parent1
 	})
 	
-	if utilityModule:IsSmallTouchScreen() then
-		var4.FontSize = Enum.FontSize.Size24
-		var4.Size = UDim2.new(1, 0, 0, 100)
-	elseif var1 then
-		var4.FontSize = Enum.FontSize.Size48
+	if UtilityModule:IsSmallTouchScreen() then
+		Parent.FontSize = Enum.FontSize.Size24
+		Parent.Size = UDim2.new(1, 0, 0, 100)
+	elseif IsEnabled then
+		Parent.FontSize = Enum.FontSize.Size48
 	end
-	leaveGameToHomePage.LeaveGameButton = utilityModule:MakeStyledButton("LeaveGame", "Leave", nil, leaveGameToHomePage.LeaveFunc)
-	leaveGameToHomePage.LeaveGameButton.NextSelectionRight = nil
-	leaveGameToHomePage.LeaveGameButton.Parent = var5
-	local dontLeaveGame = utilityModule:MakeStyledButton("DontLeaveGame", robloxTranslatorModule:FormatByKey("Feature.SettingsHub.Label.DontLeaveButton"), nil, leaveGameToHomePage.DontLeaveFromButton)
-	dontLeaveGame.NextSelectionLeft = nil
-	dontLeaveGame.Parent = var5
-	leaveGameToHomePage.Page.Size = UDim2.new(1, 0, 0, dontLeaveGame.AbsolutePosition.Y + dontLeaveGame.AbsoluteSize.Y)
+	NewPage.LeaveGameButton = UtilityModule:MakeStyledButton("LeaveGame", "Leave", nil, NewPage.LeaveFunc)
+	NewPage.LeaveGameButton.NextSelectionRight = nil
+	NewPage.LeaveGameButton.Parent = Parent1
+	local DontLeaveGame = UtilityModule:MakeStyledButton("DontLeaveGame", RobloxTranslatorModule:FormatByKey("Feature.SettingsHub.Label.DontLeaveButton"), nil, NewPage.DontLeaveFromButton)
+	DontLeaveGame.NextSelectionLeft = nil
+	DontLeaveGame.Parent = Parent1
+	NewPage.Page.Size = UDim2.new(1, 0, 0, DontLeaveGame.AbsolutePosition.Y + DontLeaveGame.AbsoluteSize.Y)
 	
-	return leaveGameToHomePage
+	return NewPage
 end)()
-var3.Displayed.Event:connect(function()
-	-- upvalues: guiService (ref), var3 (write), contextActionService (ref)
-	guiService.SelectedCoreObject = var3.LeaveGameButton
-	contextActionService:BindCoreAction("LeaveGameCancelAction", var3.DontLeaveFromHotkey, false, Enum.KeyCode.ButtonB)
+v1.Displayed.Event:connect(function() --[[ Line: 204 ]]
+	-- upvalues: GuiService (copy), v1 (ref), ContextActionService (copy)
+	GuiService.SelectedCoreObject = v1.LeaveGameButton
+	ContextActionService:BindCoreAction("LeaveGameCancelAction", v1.DontLeaveFromHotkey, false, Enum.KeyCode.ButtonB)
 end)
-var3.Hidden.Event:connect(function()
-	-- upvalues: contextActionService (ref)
-	contextActionService:UnbindCoreAction("LeaveGameCancelAction")
+v1.Hidden.Event:connect(function() --[[ Line: 209 ]]
+	-- upvalues: ContextActionService (copy)
+	ContextActionService:UnbindCoreAction("LeaveGameCancelAction")
 end)
 
-return var3
+return v1

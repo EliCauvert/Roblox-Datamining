@@ -1,126 +1,96 @@
-﻿local protoModule = require(script.Parent.Parent.Parent.Parent.Parent.proto)
-local typeRegistryModule = require(script.Parent.Parent.Parent.Parent.Parent.proto.typeRegistry)
-local t = {}
-local clientCapabilitiesModule = require(script.Parent.Parent.Parent.shared.v1beta1.client_capabilities)
-local hydrationContentModule = require(script.Parent.Parent.Parent.shared.v1beta1.hydration_content)
-local pageEntryModule = require(script.Parent.Parent.Parent.shared.v1beta1.page_entry)
-local templateEntryModule = require(script.Parent.Parent.Parent.shared.v1beta1.template_entry)
-local pageEntryContentModule = require(script.Parent.Parent.Parent.shared.v1beta1.page_entry_content)
-local t_1 = {}
-t_1.__index = t_1
+﻿local ProtoModule = require(script.Parent.Parent.Parent.Parent.Parent.proto)
+local TypeRegistryModule = require(script.Parent.Parent.Parent.Parent.Parent.proto.typeRegistry)
+local ClientCapabilitiesModule = require(script.Parent.Parent.Parent.shared.v1beta1.client_capabilities)
+local HydrationContentModule = require(script.Parent.Parent.Parent.shared.v1beta1.hydration_content)
+local PageEntryModule = require(script.Parent.Parent.Parent.shared.v1beta1.page_entry)
+local TemplateEntryModule = require(script.Parent.Parent.Parent.shared.v1beta1.template_entry)
+local PageEntryContentModule = require(script.Parent.Parent.Parent.shared.v1beta1.page_entry_content)
+local Module = {}
+Module.__index = Module
 
-function t_1.new(p1)
-	-- upvalues: pageEntryContentModule (ref), t_1 (ref)
-	return setmetatable({
+function Module.new(p1) --[[ Line: 374 ]]
+	-- upvalues: PageEntryContentModule (copy), Module (copy)
+	return (setmetatable({
 		badge_id = if p1 == nil or p1.badge_id == nil then 0 else p1.badge_id,
 		user_id = if p1 == nil or p1.user_id == nil then 0 else p1.user_id,
-		page_entry_format = if p1 == nil or p1.page_entry_format == nil then assert(pageEntryContentModule.PageEntryFormat.fromNumber(0), "Enum has no 0 default") else p1.page_entry_format,
+		page_entry_format = if p1 == nil or p1.page_entry_format == nil then assert(PageEntryContentModule.PageEntryFormat.fromNumber(0), "Enum has no 0 default") else p1.page_entry_format,
 		client_capabilities = if p1 == nil or p1.client_capabilities == nil then nil else p1.client_capabilities
-	}, t_1)
+	}, Module))
 end
 
-function t_1:encode()
-	-- upvalues: protoModule (ref), pageEntryContentModule (ref)
-	local buff = buffer.create(0)
-	local var1 = 0
+function Module:encode() --[[ Line: 390 ]]
+	-- upvalues: ProtoModule (copy), PageEntryContentModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.badge_id ~= nil and self.badge_id ~= 0 then
-		local var2, var3 = protoModule.writeTag(buff, var1, 1, protoModule.wireTypes.varint)
-		var2, var22 = protoModule.writeVarInt(var2, var3, self.badge_id)
-		buff = var2
-		var1 = var3
+		local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult, WriteTagResult2, self.badge_id)
 	end
 	if self.user_id ~= nil and self.user_id ~= 0 then
-		local var4, var5 = protoModule.writeTag(buff, var1, 2, protoModule.wireTypes.varint)
-		var4, var24 = protoModule.writeVarInt(var4, var5, self.user_id)
-		buff = var4
-		var1 = var5
+		local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult1, WriteTagResult2_1, self.user_id)
 	end
-	if self.page_entry_format ~= nil and (self.page_entry_format ~= nil and self.page_entry_format ~= 0 or self.page_entry_format ~= pageEntryContentModule.PageEntryFormat.fromNumber(0)) then
-		local var6, var7 = protoModule.writeTag(buff, var1, 3, protoModule.wireTypes.varint)
-		var6, var26 = protoModule.writeVarInt(var6, var7, pageEntryContentModule.PageEntryFormat.toNumber(self.page_entry_format))
-		buff = var6
-		var1 = var7
+	if self.page_entry_format ~= nil and (self.page_entry_format ~= nil and self.page_entry_format ~= 0 or self.page_entry_format ~= PageEntryContentModule.PageEntryFormat.fromNumber(0)) then
+		local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult3, WriteTagResult2_2, PageEntryContentModule.PageEntryFormat.toNumber(self.page_entry_format))
 	end
 	if self.client_capabilities ~= nil then
-		local var8 = self.client_capabilities:encode()
-		local var9, var10 = protoModule.writeTag(buff, var1, 4, protoModule.wireTypes.lengthDelimited)
-		var9, var29 = protoModule.writeBuffer(var9, var10, var8, buffer.len(var8))
-		buff = var9
-		var1 = var10
+		local EncodeResult = self.client_capabilities:encode()
+		local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeBuffer(WriteTagResult4, WriteTagResult2_3, EncodeResult, buffer.len(EncodeResult))
 	end
-	local buff_1 = buffer.create(var1)
-	buffer.copy(buff_1, 0, buff, 0, var1)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_1.decode(p1)
-	-- upvalues: t_1 (ref), protoModule (ref), pageEntryContentModule (ref), clientCapabilitiesModule (ref)
-	local var1 = t_1.new()
-	local var2 = 0
-	while var2 < buffer.len(p1) do
-		local _ = nil
-		local var3 = nil
-		local var4, var5, var6 = protoModule.readTag(p1, var2)
-		local var7 = var4
-		var3 = var5
-		var2 = var6
+function Module.decode(Buf) --[[ Line: 433 ]]
+	-- upvalues: Module (copy), ProtoModule (copy), PageEntryContentModule (copy), ClientCapabilitiesModule (copy)
+	local NewModule = Module.new()
+	local v1 = 0
+	while v1 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v31 = ProtoModule.readTag(Buf, v1)
 		
-		if var3 == protoModule.wireTypes.varint then
-			if var7 == 1 then
-				local _ = nil
-				local var8, var9 = protoModule.readVarIntI64(p1, var2)
-				var2 = var9
-				var1.badge_id = var8
-			elseif var7 == 2 then
-				local _ = nil
-				local var10, var11 = protoModule.readVarIntI64(p1, var2)
-				var2 = var11
-				var1.user_id = var10
-			elseif var7 == 3 then
-				local _ = nil
-				local var12, var13 = protoModule.readVarIntI32(p1, var2)
-				local var14 = var12
-				var2 = var13
-				var1.page_entry_format = pageEntryContentModule.PageEntryFormat.fromNumber(var14) or var14
+		if Tag2 == ProtoModule.wireTypes.varint then
+			if Tag == 1 then
+				NewModule.badge_id, v31 = ProtoModule.readVarIntI64(Buf, v1)
+			elseif Tag == 2 then
+				NewModule.user_id, v31 = ProtoModule.readVarIntI64(Buf, v1)
+			elseif Tag == 3 then
+				local VarIntI32
+				VarIntI32, v31 = ProtoModule.readVarIntI32(Buf, v1)
+				NewModule.page_entry_format = PageEntryContentModule.PageEntryFormat.fromNumber(VarIntI32) or VarIntI32
 			else
-				local _ = nil
-				local var15, var16 = protoModule.readVarInt(p1, var2)
-				local _ = var15
-				var2 = var16
+				local _
+				_, v31 = ProtoModule.readVarInt(Buf, v1)
 			end
-		end
-		if var3 == protoModule.wireTypes.lengthDelimited then
-			if var7 == 4 then
-				local _ = nil
-				local var17, var18 = protoModule.readBuffer(p1, var2)
-				var2 = var18
-				var1.client_capabilities = clientCapabilitiesModule.ClientCapabilities.decode(var17)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 4 then
+				local Buffer1
+				Buffer1, v31 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.client_capabilities = ClientCapabilitiesModule.ClientCapabilities.decode(Buffer1)
 			else
-				local _ = nil
-				local var19, var20 = protoModule.readVarInt(p1, var2)
-				var2 = var20 + var19
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v1)
+				v1 = VarInt2 + VarInt
 			end
-		elseif var3 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var21, var22 = protoModule.readFixed32(p1, var2)
-			local _ = var21
-			var2 = var22
-		elseif var3 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var23, var24 = protoModule.readFixed64(p1, var2)
-			local _ = var23
-			var2 = var24
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v31 = ProtoModule.readFixed32(Buf, v1)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v31 = ProtoModule.readFixed64(Buf, v1)
 		else
-			error("Unsupported wire type: " .. var33)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var1
+	return NewModule
 end
 
-function t_1:jsonEncode()
-	-- upvalues: pageEntryContentModule (ref)
+function Module:jsonEncode() --[[ Line: 495 ]]
+	-- upvalues: PageEntryContentModule (copy)
 	local t = {}
 	
 	if self.badge_id ~= nil and self.badge_id ~= 0 then
@@ -129,8 +99,8 @@ function t_1:jsonEncode()
 	if self.user_id ~= nil and self.user_id ~= 0 then
 		t.userId = self.user_id
 	end
-	if self.page_entry_format ~= nil and (self.page_entry_format ~= nil and self.page_entry_format ~= 0 or self.page_entry_format ~= pageEntryContentModule.PageEntryFormat.fromNumber(0)) then
-		t.pageEntryFormat = if typeof(self.page_entry_format) == "number" then self.page_entry_format else pageEntryContentModule.PageEntryFormat.toNumber(self.page_entry_format)
+	if self.page_entry_format ~= nil and (self.page_entry_format ~= nil and self.page_entry_format ~= 0 or self.page_entry_format ~= PageEntryContentModule.PageEntryFormat.fromNumber(0)) then
+		t.pageEntryFormat = if typeof(self.page_entry_format) == "number" then self.page_entry_format else PageEntryContentModule.PageEntryFormat.toNumber(self.page_entry_format)
 	end
 	if self.client_capabilities ~= nil then
 		t.clientCapabilities = self.client_capabilities:jsonEncode()
@@ -138,311 +108,269 @@ function t_1:jsonEncode()
 	return t
 end
 
-function t_1:jsonDecode()
-	-- upvalues: t_1 (ref), pageEntryContentModule (ref), clientCapabilitiesModule (ref)
-	local var25 = t_1.new()
+function Module:jsonDecode() --[[ Line: 528 ]]
+	-- upvalues: Module (copy), PageEntryContentModule (copy), ClientCapabilitiesModule (copy)
+	local NewModule = Module.new()
 	
 	if self.badge_id ~= nil then
-		var25.badge_id = self.badge_id
+		NewModule.badge_id = self.badge_id
 	end
 	if self.badgeId ~= nil then
-		var25.badge_id = self.badgeId
+		NewModule.badge_id = self.badgeId
 	end
 	if self.user_id ~= nil then
-		var25.user_id = self.user_id
+		NewModule.user_id = self.user_id
 	end
 	if self.userId ~= nil then
-		var25.user_id = self.userId
+		NewModule.user_id = self.userId
 	end
 	if self.page_entry_format ~= nil then
-		var25.page_entry_format = if typeof(self.page_entry_format) == "number" then pageEntryContentModule.PageEntryFormat.fromNumber(self.page_entry_format) or self.page_entry_format else pageEntryContentModule.PageEntryFormat.fromName(self.page_entry_format) or self.page_entry_format
+		NewModule.page_entry_format = (if typeof(self.page_entry_format) == "number" then PageEntryContentModule.PageEntryFormat.fromNumber(self.page_entry_format) else PageEntryContentModule.PageEntryFormat.fromName(self.page_entry_format)) or self.page_entry_format
 	end
 	if self.pageEntryFormat ~= nil then
-		var25.page_entry_format = if typeof(self.pageEntryFormat) == "number" then pageEntryContentModule.PageEntryFormat.fromNumber(self.pageEntryFormat) or self.pageEntryFormat else pageEntryContentModule.PageEntryFormat.fromName(self.pageEntryFormat) or self.pageEntryFormat
+		NewModule.page_entry_format = (if typeof(self.pageEntryFormat) == "number" then PageEntryContentModule.PageEntryFormat.fromNumber(self.pageEntryFormat) else PageEntryContentModule.PageEntryFormat.fromName(self.pageEntryFormat)) or self.pageEntryFormat
 	end
 	if self.client_capabilities ~= nil then
-		var25.client_capabilities = clientCapabilitiesModule.ClientCapabilities.jsonDecode(self.client_capabilities)
+		NewModule.client_capabilities = ClientCapabilitiesModule.ClientCapabilities.jsonDecode(self.client_capabilities)
 	end
 	if self.clientCapabilities ~= nil then
-		var25.client_capabilities = clientCapabilitiesModule.ClientCapabilities.jsonDecode(self.clientCapabilities)
+		NewModule.client_capabilities = ClientCapabilitiesModule.ClientCapabilities.jsonDecode(self.clientCapabilities)
 	end
-	return var25
+	return NewModule
 end
 
-t_1.descriptor = {
+Module.descriptor = {
 	name = "BadgeDetailsPageRequest",
 	fullName = "roblox.apppageplatform.badges.v1beta1.BadgeDetailsPageRequest"
 }
-t.BadgeDetailsPageRequest = t_1
-typeRegistryModule.default:register(t.BadgeDetailsPageRequest)
-local t_2 = {}
-t_2.__index = t_2
+local config = { BadgeDetailsPageRequest = Module }
+TypeRegistryModule.default:register(config.BadgeDetailsPageRequest)
+local Module1 = {}
+Module1.__index = Module1
 
-function t_2.new(p2)
-	-- upvalues: t_2 (ref)
-	return setmetatable({
-		page_entries = if p2 == nil or p2.page_entries == nil then {} else p2.page_entries,
-		hydration_data = if p2 == nil or p2.hydration_data == nil then nil else p2.hydration_data,
-		templates = if p2 == nil or p2.templates == nil then {} else p2.templates
-	}, t_2)
+function Module1.new(p1) --[[ Line: 598 ]]
+	-- upvalues: Module1 (copy)
+	return (setmetatable({
+		page_entries = if p1 == nil or p1.page_entries == nil then {} else p1.page_entries,
+		hydration_data = if p1 == nil or p1.hydration_data == nil then nil else p1.hydration_data,
+		templates = if p1 == nil or p1.templates == nil then {} else p1.templates
+	}, Module1))
 end
 
-function t_2:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var25 = 0
+function Module1:encode() --[[ Line: 606 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.page_entries ~= nil and #self.page_entries > 0 then
-		for i, v in self.page_entries do
-			local var26 = v:encode()
-			local var27, var28 = protoModule.writeTag(buff, var25, 1, protoModule.wireTypes.lengthDelimited)
-			var27, var61 = protoModule.writeBuffer(var27, var28, var26, buffer.len(var26))
-			buff = var27
-			var25 = var28
+		for _, pageEntry in self.page_entries do
+			local EncodeResult = pageEntry:encode()
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
 		end
 	end
 	if self.hydration_data ~= nil then
-		local var29 = self.hydration_data:encode()
-		local var30, var31 = protoModule.writeTag(buff, var25, 2, protoModule.wireTypes.lengthDelimited)
-		var30, var64 = protoModule.writeBuffer(var30, var31, var29, buffer.len(var29))
-		buff = var30
-		var25 = var31
+		local EncodeResult = self.hydration_data:encode()
+		local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
 	end
 	if self.templates ~= nil and next(self.templates) ~= nil then
-		for i, v in self.templates do
-			local var32, var33 = protoModule.writeTag(buffer.create(0), 0, 1, protoModule.wireTypes.lengthDelimited)
-			var32, var66 = protoModule.writeString(var32, var33, i)
-			local var34 = v:encode()
-			var33, var68 = protoModule.writeTag(var32, var33, 2, protoModule.wireTypes.lengthDelimited)
-			var33, var68 = protoModule.writeBuffer(var33, var68, var34, buffer.len(var34))
-			local var35 = var33
-			local var36 = var68
-			local var37, var38 = protoModule.writeTag(buff, var25, 3, protoModule.wireTypes.lengthDelimited)
-			var37, var72 = protoModule.writeBuffer(var37, var38, var35, var36)
-			buff = var37
-			var25 = var38
+		for i, template in self.templates do
+			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
+			local WriteStringResult, WriteStringResult2 = ProtoModule.writeString(WriteTagResult3, WriteTagResult2_2, i)
+			local EncodeResult = template:encode()
+			local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(WriteStringResult, WriteStringResult2, 2, ProtoModule.wireTypes.lengthDelimited)
+			local WriteBufferResult, WriteBufferResult2 = ProtoModule.writeBuffer(WriteTagResult4, WriteTagResult2_3, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult5, WriteTagResult2_4 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult5, WriteTagResult2_4, WriteBufferResult, WriteBufferResult2)
 		end
 	end
-	local buff_1 = buffer.create(var25)
-	buffer.copy(buff_1, 0, buff, 0, var25)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_2.decode(p2)
-	-- upvalues: t_2 (ref), protoModule (ref), t (ref), hydrationContentModule (ref), templateEntryModule (ref)
-	local var39 = t_2.new()
-	local var40 = 0
-	while var40 < buffer.len(p2) do
-		local _ = nil
-		local var41 = nil
-		local var42, var43, var44 = protoModule.readTag(p2, var40)
-		local var45 = var42
-		var41 = var43
-		var40 = var44
+function Module1.decode(Buf) --[[ Line: 643 ]]
+	-- upvalues: Module1 (copy), ProtoModule (copy), config (copy), HydrationContentModule (copy), TemplateEntryModule (copy)
+	local NewModule = Module1.new()
+	local v2 = 0
+	while v2 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v63 = ProtoModule.readTag(Buf, v2)
 		
-		if var41 == protoModule.wireTypes.varint then
-			local _ = nil
-			local var46, var47 = protoModule.readVarInt(p2, var40)
-			local _ = var46
-			var40 = var47
-			continue
-		end
-		if var41 == protoModule.wireTypes.lengthDelimited then
-			if var45 == 1 then
-				local _ = nil
-				local var48, var49 = protoModule.readBuffer(p2, var40)
-				var40 = var49
-				table.insert(var39.page_entries, t.BadgeDetailsPageEntry.decode(var48))
-			elseif var45 == 2 then
-				local _ = nil
-				local var50, var51 = protoModule.readBuffer(p2, var40)
-				var40 = var51
-				var39.hydration_data = hydrationContentModule.HydrationContent.decode(var50)
-			elseif var45 == 3 then
-				local _ = nil
-				local var52, var53 = protoModule.readBuffer(p2, var40)
-				var40 = var53
-				var52 = t.BadgeDetailsPageResponse_TemplatesEntry.decode(var52)
-				var39.templates[var52.key or ""] = var52.value or templateEntryModule.TemplateEntry.new()
+		if Tag2 == ProtoModule.wireTypes.varint then
+			local _
+			_, v63 = ProtoModule.readVarInt(Buf, v2)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v63 = ProtoModule.readBuffer(Buf, v2)
+				table.insert(NewModule.page_entries, config.BadgeDetailsPageEntry.decode(Buffer1))
+			elseif Tag == 2 then
+				local Buffer2
+				Buffer2, v63 = ProtoModule.readBuffer(Buf, v2)
+				NewModule.hydration_data = HydrationContentModule.HydrationContent.decode(Buffer2)
+			elseif Tag == 3 then
+				local Buffer3
+				Buffer3, v63 = ProtoModule.readBuffer(Buf, v2)
+				local DecodeResult = config.BadgeDetailsPageResponse_TemplatesEntry.decode(Buffer3)
+				local NewResult = TemplateEntryModule.TemplateEntry.new()
+				NewModule.templates[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			else
-				local _ = nil
-				local var54, var55 = protoModule.readVarInt(p2, var40)
-				var40 = var55 + var54
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v2)
+				v2 = VarInt2 + VarInt
 			end
-		elseif var41 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var56, var57 = protoModule.readFixed32(p2, var40)
-			local _ = var56
-			var40 = var57
-		elseif var41 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var58, var59 = protoModule.readFixed64(p2, var40)
-			local _ = var58
-			var40 = var59
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v63 = ProtoModule.readFixed32(Buf, v2)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v63 = ProtoModule.readFixed64(Buf, v2)
 		else
-			error("Unsupported wire type: " .. var76)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var39
+	return NewModule
 end
 
-function t_2:jsonEncode()
+function Module1:jsonEncode() --[[ Line: 704 ]]
 	local t = {}
 	
 	if self.page_entries ~= nil and #self.page_entries > 0 then
-		local t_1 = {}
+		local PageEntries = {}
 		
-		for i, v in self.page_entries do
-			table.insert(t_1, v:jsonEncode())
+		for _, pageEntry in self.page_entries do
+			table.insert(PageEntries, pageEntry:jsonEncode())
 		end
-		t.pageEntries = t_1
+		t.pageEntries = PageEntries
 	end
 	if self.hydration_data ~= nil then
 		t.hydrationData = self.hydration_data:jsonEncode()
 	end
 	if self.templates ~= nil and next(self.templates) ~= nil then
-		local t_1 = {}
+		local Templates = {}
 		
-		for i, v in self.templates do
-			t_1[i] = v:jsonEncode()
+		for i, template in self.templates do
+			Templates[i] = template:jsonEncode()
 		end
-		t.templates = t_1
+		t.templates = Templates
 	end
 	return t
 end
 
-function t_2:jsonDecode()
-	-- upvalues: t_2 (ref), t (ref), hydrationContentModule (ref), templateEntryModule (ref)
-	local var60 = t_2.new()
+function Module1:jsonDecode() --[[ Line: 730 ]]
+	-- upvalues: Module1 (copy), config (copy), HydrationContentModule (copy), TemplateEntryModule (copy)
+	local NewModule = Module1.new()
 	
 	if self.page_entries ~= nil then
-		local t_1 = {}
+		local Page_entries = {}
 		
-		for i, v in self.page_entries do
-			table.insert(t_1, t.BadgeDetailsPageEntry.jsonDecode(v))
+		for _, pageEntry in self.page_entries do
+			table.insert(Page_entries, config.BadgeDetailsPageEntry.jsonDecode(pageEntry))
 		end
-		var60.page_entries = t_1
+		NewModule.page_entries = Page_entries
 	end
 	if self.pageEntries ~= nil then
-		local t_1 = {}
+		local Page_entries = {}
 		
-		for i, v in self.pageEntries do
-			table.insert(t_1, t.BadgeDetailsPageEntry.jsonDecode(v))
+		for _, pageEntry1 in self.pageEntries do
+			table.insert(Page_entries, config.BadgeDetailsPageEntry.jsonDecode(pageEntry1))
 		end
-		var60.page_entries = t_1
+		NewModule.page_entries = Page_entries
 	end
 	if self.hydration_data ~= nil then
-		var60.hydration_data = hydrationContentModule.HydrationContent.jsonDecode(self.hydration_data)
+		NewModule.hydration_data = HydrationContentModule.HydrationContent.jsonDecode(self.hydration_data)
 	end
 	if self.hydrationData ~= nil then
-		var60.hydration_data = hydrationContentModule.HydrationContent.jsonDecode(self.hydrationData)
+		NewModule.hydration_data = HydrationContentModule.HydrationContent.jsonDecode(self.hydrationData)
 	end
 	if self.templates ~= nil then
-		local t_1 = {}
+		local Templates = {}
 		
-		for i, v in self.templates do
-			t_1[i] = templateEntryModule.TemplateEntry.jsonDecode(v)
+		for i, template in self.templates do
+			Templates[i] = TemplateEntryModule.TemplateEntry.jsonDecode(template)
 		end
-		var60.templates = t_1
+		NewModule.templates = Templates
 	end
-	return var60
+	return NewModule
 end
 
-t_2.descriptor = {
+Module1.descriptor = {
 	name = "BadgeDetailsPageResponse",
 	fullName = "roblox.apppageplatform.badges.v1beta1.BadgeDetailsPageResponse"
 }
-t.BadgeDetailsPageResponse = t_2
-typeRegistryModule.default:register(t.BadgeDetailsPageResponse)
-local t_3 = {}
-t_3.__index = t_3
+config.BadgeDetailsPageResponse = Module1
+TypeRegistryModule.default:register(config.BadgeDetailsPageResponse)
+local Module2 = {}
+Module2.__index = Module2
 
-function t_3.new(p3)
-	-- upvalues: t_3 (ref)
-	return setmetatable({
-		key = if p3 == nil or p3.key == nil then "" else p3.key,
-		value = if p3 == nil or p3.value == nil then nil else p3.value
-	}, t_3)
+function Module2.new(p1) --[[ Line: 789 ]]
+	-- upvalues: Module2 (copy)
+	return (setmetatable({
+		key = if p1 == nil or p1.key == nil then "" else p1.key,
+		value = if p1 == nil or p1.value == nil then nil else p1.value
+	}, Module2))
 end
 
-function t_3:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var61 = 0
+function Module2:encode() --[[ Line: 798 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.key ~= nil and self.key ~= "" then
-		local var62, var63 = protoModule.writeTag(buff, var61, 1, protoModule.wireTypes.lengthDelimited)
-		var62, var105 = protoModule.writeString(var62, var63, self.key)
-		buff = var62
-		var61 = var63
+		local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult, WriteTagResult2, self.key)
 	end
 	if self.value ~= nil then
-		local var64 = self.value:encode()
-		local var65, var66 = protoModule.writeTag(buff, var61, 2, protoModule.wireTypes.lengthDelimited)
-		var65, var108 = protoModule.writeBuffer(var65, var66, var64, buffer.len(var64))
-		buff = var65
-		var61 = var66
+		local EncodeResult = self.value:encode()
+		local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
 	end
-	local buff_1 = buffer.create(var61)
-	buffer.copy(buff_1, 0, buff, 0, var61)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_3.decode(p3)
-	-- upvalues: t_3 (ref), protoModule (ref), templateEntryModule (ref)
-	local var61 = t_3.new()
-	local var62 = 0
-	while var62 < buffer.len(p3) do
-		local _ = nil
-		local var63 = nil
-		local var64, var65, var66 = protoModule.readTag(p3, var62)
-		local var67 = var64
-		var63 = var65
-		var62 = var66
+function Module2.decode(Buf) --[[ Line: 818 ]]
+	-- upvalues: Module2 (copy), ProtoModule (copy), TemplateEntryModule (copy)
+	local NewModule = Module2.new()
+	local v3 = 0
+	while v3 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v91 = ProtoModule.readTag(Buf, v3)
 		
-		if var63 == protoModule.wireTypes.varint then
-			local _ = nil
-			local var68, var69 = protoModule.readVarInt(p3, var62)
-			local _ = var68
-			var62 = var69
-			continue
-		end
-		if var63 == protoModule.wireTypes.lengthDelimited then
-			if var67 == 1 then
-				local _ = nil
-				local var70, var71 = protoModule.readBuffer(p3, var62)
-				var62 = var71
-				var61.key = buffer.tostring(var70)
-			elseif var67 == 2 then
-				local _ = nil
-				local var72, var73 = protoModule.readBuffer(p3, var62)
-				var62 = var73
-				var61.value = templateEntryModule.TemplateEntry.decode(var72)
+		if Tag2 == ProtoModule.wireTypes.varint then
+			local _
+			_, v91 = ProtoModule.readVarInt(Buf, v3)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v91 = ProtoModule.readBuffer(Buf, v3)
+				NewModule.key = buffer.tostring(Buffer1)
+			elseif Tag == 2 then
+				local Buffer2
+				Buffer2, v91 = ProtoModule.readBuffer(Buf, v3)
+				NewModule.value = TemplateEntryModule.TemplateEntry.decode(Buffer2)
 			else
-				local _ = nil
-				local var74, var75 = protoModule.readVarInt(p3, var62)
-				var62 = var75 + var74
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v3)
+				v3 = VarInt2 + VarInt
 			end
-		elseif var63 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var76, var77 = protoModule.readFixed32(p3, var62)
-			local _ = var76
-			var62 = var77
-		elseif var63 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var78, var79 = protoModule.readFixed64(p3, var62)
-			local _ = var78
-			var62 = var79
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v91 = ProtoModule.readFixed32(Buf, v3)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v91 = ProtoModule.readFixed64(Buf, v3)
 		else
-			error("Unsupported wire type: " .. var112)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var61
+	return NewModule
 end
 
-function t_3:jsonEncode()
+function Module2:jsonEncode() --[[ Line: 866 ]]
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -454,293 +382,251 @@ function t_3:jsonEncode()
 	return t
 end
 
-function t_3:jsonDecode()
-	-- upvalues: t_3 (ref), templateEntryModule (ref)
-	local var80 = t_3.new()
+function Module2:jsonDecode() --[[ Line: 880 ]]
+	-- upvalues: Module2 (copy), TemplateEntryModule (copy)
+	local NewModule = Module2.new()
 	
 	if self.key ~= nil then
-		var80.key = self.key
+		NewModule.key = self.key
 	end
 	if self.value ~= nil then
-		var80.value = templateEntryModule.TemplateEntry.jsonDecode(self.value)
+		NewModule.value = TemplateEntryModule.TemplateEntry.jsonDecode(self.value)
 	end
-	return var80
+	return NewModule
 end
 
-t_3.descriptor = {
+Module2.descriptor = {
 	name = "BadgeDetailsPageResponse_TemplatesEntry",
 	fullName = "roblox.apppageplatform.badges.v1beta1.TemplatesEntry"
 }
-t.BadgeDetailsPageResponse_TemplatesEntry = t_3
-typeRegistryModule.default:register(t.BadgeDetailsPageResponse_TemplatesEntry)
-local t_4 = {}
-t_4.__index = t_4
+config.BadgeDetailsPageResponse_TemplatesEntry = Module2
+TypeRegistryModule.default:register(config.BadgeDetailsPageResponse_TemplatesEntry)
+local Module3 = {}
+Module3.__index = Module3
 
-function t_4.new(p4)
-	-- upvalues: t_4 (ref)
-	return setmetatable({
-		page_entries = if p4 == nil or p4.page_entries == nil then {} else p4.page_entries,
-		hydration_data = if p4 == nil or p4.hydration_data == nil then nil else p4.hydration_data,
-		templates = if p4 == nil or p4.templates == nil then {} else p4.templates
-	}, t_4)
+function Module3.new(p1) --[[ Line: 910 ]]
+	-- upvalues: Module3 (copy)
+	return (setmetatable({
+		page_entries = if p1 == nil or p1.page_entries == nil then {} else p1.page_entries,
+		hydration_data = if p1 == nil or p1.hydration_data == nil then nil else p1.hydration_data,
+		templates = if p1 == nil or p1.templates == nil then {} else p1.templates
+	}, Module3))
 end
 
-function t_4:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var80 = 0
+function Module3:encode() --[[ Line: 920 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.page_entries ~= nil and #self.page_entries > 0 then
-		for i, v in self.page_entries do
-			local var81 = v:encode()
-			local var82, var83 = protoModule.writeTag(buff, var80, 1, protoModule.wireTypes.lengthDelimited)
-			var82, var135 = protoModule.writeBuffer(var82, var83, var81, buffer.len(var81))
-			buff = var82
-			var80 = var83
+		for _, pageEntry in self.page_entries do
+			local EncodeResult = pageEntry:encode()
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
 		end
 	end
 	if self.hydration_data ~= nil then
-		local var84 = self.hydration_data:encode()
-		local var85, var86 = protoModule.writeTag(buff, var80, 2, protoModule.wireTypes.lengthDelimited)
-		var85, var138 = protoModule.writeBuffer(var85, var86, var84, buffer.len(var84))
-		buff = var85
-		var80 = var86
+		local EncodeResult = self.hydration_data:encode()
+		local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
 	end
 	if self.templates ~= nil and next(self.templates) ~= nil then
-		for i, v in self.templates do
-			local var87, var88 = protoModule.writeTag(buffer.create(0), 0, 1, protoModule.wireTypes.lengthDelimited)
-			var87, var140 = protoModule.writeString(var87, var88, i)
-			local var89 = v:encode()
-			var88, var142 = protoModule.writeTag(var87, var88, 2, protoModule.wireTypes.lengthDelimited)
-			var88, var142 = protoModule.writeBuffer(var88, var142, var89, buffer.len(var89))
-			local var90 = var88
-			local var91 = var142
-			local var92, var93 = protoModule.writeTag(buff, var80, 3, protoModule.wireTypes.lengthDelimited)
-			var92, var146 = protoModule.writeBuffer(var92, var93, var90, var91)
-			buff = var92
-			var80 = var93
+		for i, template in self.templates do
+			local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
+			local WriteStringResult, WriteStringResult2 = ProtoModule.writeString(WriteTagResult3, WriteTagResult2_2, i)
+			local EncodeResult = template:encode()
+			local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(WriteStringResult, WriteStringResult2, 2, ProtoModule.wireTypes.lengthDelimited)
+			local WriteBufferResult, WriteBufferResult2 = ProtoModule.writeBuffer(WriteTagResult4, WriteTagResult2_3, EncodeResult, buffer.len(EncodeResult))
+			local WriteTagResult5, WriteTagResult2_4 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult5, WriteTagResult2_4, WriteBufferResult, WriteBufferResult2)
 		end
 	end
-	local buff_1 = buffer.create(var80)
-	buffer.copy(buff_1, 0, buff, 0, var80)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_4.decode(p4)
-	-- upvalues: t_4 (ref), protoModule (ref), pageEntryContentModule (ref), hydrationContentModule (ref), t (ref), templateEntryModule (ref)
-	local var94 = t_4.new()
-	local var95 = 0
-	while var95 < buffer.len(p4) do
-		local _ = nil
-		local var96 = nil
-		local var97, var98, var99 = protoModule.readTag(p4, var95)
-		local var100 = var97
-		var96 = var98
-		var95 = var99
+function Module3.decode(Buf) --[[ Line: 957 ]]
+	-- upvalues: Module3 (copy), ProtoModule (copy), PageEntryContentModule (copy), HydrationContentModule (copy), config (copy), TemplateEntryModule (copy)
+	local NewModule = Module3.new()
+	local v4 = 0
+	while v4 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v123 = ProtoModule.readTag(Buf, v4)
 		
-		if var96 == protoModule.wireTypes.varint then
-			local _ = nil
-			local var101, var102 = protoModule.readVarInt(p4, var95)
-			local _ = var101
-			var95 = var102
-			continue
-		end
-		if var96 == protoModule.wireTypes.lengthDelimited then
-			if var100 == 1 then
-				local _ = nil
-				local var103, var104 = protoModule.readBuffer(p4, var95)
-				var95 = var104
-				table.insert(var94.page_entries, pageEntryContentModule.UniversalPageEntry.decode(var103))
-			elseif var100 == 2 then
-				local _ = nil
-				local var105, var106 = protoModule.readBuffer(p4, var95)
-				var95 = var106
-				var94.hydration_data = hydrationContentModule.HydrationContent.decode(var105)
-			elseif var100 == 3 then
-				local _ = nil
-				local var107, var108 = protoModule.readBuffer(p4, var95)
-				var95 = var108
-				var107 = t.BadgeDetailsPageV2Response_TemplatesEntry.decode(var107)
-				var94.templates[var107.key or ""] = var107.value or templateEntryModule.TemplateEntry.new()
+		if Tag2 == ProtoModule.wireTypes.varint then
+			local _
+			_, v123 = ProtoModule.readVarInt(Buf, v4)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v123 = ProtoModule.readBuffer(Buf, v4)
+				table.insert(NewModule.page_entries, PageEntryContentModule.UniversalPageEntry.decode(Buffer1))
+			elseif Tag == 2 then
+				local Buffer2
+				Buffer2, v123 = ProtoModule.readBuffer(Buf, v4)
+				NewModule.hydration_data = HydrationContentModule.HydrationContent.decode(Buffer2)
+			elseif Tag == 3 then
+				local Buffer3
+				Buffer3, v123 = ProtoModule.readBuffer(Buf, v4)
+				local DecodeResult = config.BadgeDetailsPageV2Response_TemplatesEntry.decode(Buffer3)
+				local NewResult = TemplateEntryModule.TemplateEntry.new()
+				NewModule.templates[DecodeResult.key or ""] = DecodeResult.value or NewResult
 			else
-				local _ = nil
-				local var109, var110 = protoModule.readVarInt(p4, var95)
-				var95 = var110 + var109
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v4)
+				v4 = VarInt2 + VarInt
 			end
-		elseif var96 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var111, var112 = protoModule.readFixed32(p4, var95)
-			local _ = var111
-			var95 = var112
-		elseif var96 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var113, var114 = protoModule.readFixed64(p4, var95)
-			local _ = var113
-			var95 = var114
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v123 = ProtoModule.readFixed32(Buf, v4)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v123 = ProtoModule.readFixed64(Buf, v4)
 		else
-			error("Unsupported wire type: " .. var150)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var94
+	return NewModule
 end
 
-function t_4:jsonEncode()
+function Module3:jsonEncode() --[[ Line: 1021 ]]
 	local t = {}
 	
 	if self.page_entries ~= nil and #self.page_entries > 0 then
-		local t_1 = {}
+		local PageEntries = {}
 		
-		for i, v in self.page_entries do
-			table.insert(t_1, v:jsonEncode())
+		for _, pageEntry in self.page_entries do
+			table.insert(PageEntries, pageEntry:jsonEncode())
 		end
-		t.pageEntries = t_1
+		t.pageEntries = PageEntries
 	end
 	if self.hydration_data ~= nil then
 		t.hydrationData = self.hydration_data:jsonEncode()
 	end
 	if self.templates ~= nil and next(self.templates) ~= nil then
-		local t_1 = {}
+		local Templates = {}
 		
-		for i, v in self.templates do
-			t_1[i] = v:jsonEncode()
+		for i, template in self.templates do
+			Templates[i] = template:jsonEncode()
 		end
-		t.templates = t_1
+		t.templates = Templates
 	end
 	return t
 end
 
-function t_4:jsonDecode()
-	-- upvalues: t_4 (ref), pageEntryContentModule (ref), hydrationContentModule (ref), templateEntryModule (ref)
-	local var115 = t_4.new()
+function Module3:jsonDecode() --[[ Line: 1047 ]]
+	-- upvalues: Module3 (copy), PageEntryContentModule (copy), HydrationContentModule (copy), TemplateEntryModule (copy)
+	local NewModule = Module3.new()
 	
 	if self.page_entries ~= nil then
-		local t = {}
+		local Page_entries = {}
 		
-		for i, v in self.page_entries do
-			table.insert(t, pageEntryContentModule.UniversalPageEntry.jsonDecode(v))
+		for _, pageEntry in self.page_entries do
+			table.insert(Page_entries, PageEntryContentModule.UniversalPageEntry.jsonDecode(pageEntry))
 		end
-		var115.page_entries = t
+		NewModule.page_entries = Page_entries
 	end
 	if self.pageEntries ~= nil then
-		local t = {}
+		local Page_entries = {}
 		
-		for i, v in self.pageEntries do
-			table.insert(t, pageEntryContentModule.UniversalPageEntry.jsonDecode(v))
+		for _, pageEntry1 in self.pageEntries do
+			table.insert(Page_entries, PageEntryContentModule.UniversalPageEntry.jsonDecode(pageEntry1))
 		end
-		var115.page_entries = t
+		NewModule.page_entries = Page_entries
 	end
 	if self.hydration_data ~= nil then
-		var115.hydration_data = hydrationContentModule.HydrationContent.jsonDecode(self.hydration_data)
+		NewModule.hydration_data = HydrationContentModule.HydrationContent.jsonDecode(self.hydration_data)
 	end
 	if self.hydrationData ~= nil then
-		var115.hydration_data = hydrationContentModule.HydrationContent.jsonDecode(self.hydrationData)
+		NewModule.hydration_data = HydrationContentModule.HydrationContent.jsonDecode(self.hydrationData)
 	end
 	if self.templates ~= nil then
-		local t = {}
+		local Templates = {}
 		
-		for i, v in self.templates do
-			t[i] = templateEntryModule.TemplateEntry.jsonDecode(v)
+		for i, template in self.templates do
+			Templates[i] = TemplateEntryModule.TemplateEntry.jsonDecode(template)
 		end
-		var115.templates = t
+		NewModule.templates = Templates
 	end
-	return var115
+	return NewModule
 end
 
-t_4.descriptor = {
+Module3.descriptor = {
 	name = "BadgeDetailsPageV2Response",
 	fullName = "roblox.apppageplatform.badges.v1beta1.BadgeDetailsPageV2Response"
 }
-t.BadgeDetailsPageV2Response = t_4
-typeRegistryModule.default:register(t.BadgeDetailsPageV2Response)
-local t_5 = {}
-t_5.__index = t_5
+config.BadgeDetailsPageV2Response = Module3
+TypeRegistryModule.default:register(config.BadgeDetailsPageV2Response)
+local Module4 = {}
+Module4.__index = Module4
 
-function t_5.new(p5)
-	-- upvalues: t_5 (ref)
-	return setmetatable({
-		key = if p5 == nil or p5.key == nil then "" else p5.key,
-		value = if p5 == nil or p5.value == nil then nil else p5.value
-	}, t_5)
+function Module4.new(p1) --[[ Line: 1112 ]]
+	-- upvalues: Module4 (copy)
+	return (setmetatable({
+		key = if p1 == nil or p1.key == nil then "" else p1.key,
+		value = if p1 == nil or p1.value == nil then nil else p1.value
+	}, Module4))
 end
 
-function t_5:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var116 = 0
+function Module4:encode() --[[ Line: 1121 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.key ~= nil and self.key ~= "" then
-		local var117, var118 = protoModule.writeTag(buff, var116, 1, protoModule.wireTypes.lengthDelimited)
-		var117, var179 = protoModule.writeString(var117, var118, self.key)
-		buff = var117
-		var116 = var118
+		local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult, WriteTagResult2, self.key)
 	end
 	if self.value ~= nil then
-		local var119 = self.value:encode()
-		local var120, var121 = protoModule.writeTag(buff, var116, 2, protoModule.wireTypes.lengthDelimited)
-		var120, var182 = protoModule.writeBuffer(var120, var121, var119, buffer.len(var119))
-		buff = var120
-		var116 = var121
+		local EncodeResult = self.value:encode()
+		local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
 	end
-	local buff_1 = buffer.create(var116)
-	buffer.copy(buff_1, 0, buff, 0, var116)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_5.decode(p5)
-	-- upvalues: t_5 (ref), protoModule (ref), templateEntryModule (ref)
-	local var116 = t_5.new()
-	local var117 = 0
-	while var117 < buffer.len(p5) do
-		local _ = nil
-		local var118 = nil
-		local var119, var120, var121 = protoModule.readTag(p5, var117)
-		local var122 = var119
-		var118 = var120
-		var117 = var121
+function Module4.decode(Buf) --[[ Line: 1143 ]]
+	-- upvalues: Module4 (copy), ProtoModule (copy), TemplateEntryModule (copy)
+	local NewModule = Module4.new()
+	local v5 = 0
+	while v5 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v151 = ProtoModule.readTag(Buf, v5)
 		
-		if var118 == protoModule.wireTypes.varint then
-			local _ = nil
-			local var123, var124 = protoModule.readVarInt(p5, var117)
-			local _ = var123
-			var117 = var124
-			continue
-		end
-		if var118 == protoModule.wireTypes.lengthDelimited then
-			if var122 == 1 then
-				local _ = nil
-				local var125, var126 = protoModule.readBuffer(p5, var117)
-				var117 = var126
-				var116.key = buffer.tostring(var125)
-			elseif var122 == 2 then
-				local _ = nil
-				local var127, var128 = protoModule.readBuffer(p5, var117)
-				var117 = var128
-				var116.value = templateEntryModule.TemplateEntry.decode(var127)
+		if Tag2 == ProtoModule.wireTypes.varint then
+			local _
+			_, v151 = ProtoModule.readVarInt(Buf, v5)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v151 = ProtoModule.readBuffer(Buf, v5)
+				NewModule.key = buffer.tostring(Buffer1)
+			elseif Tag == 2 then
+				local Buffer2
+				Buffer2, v151 = ProtoModule.readBuffer(Buf, v5)
+				NewModule.value = TemplateEntryModule.TemplateEntry.decode(Buffer2)
 			else
-				local _ = nil
-				local var129, var130 = protoModule.readVarInt(p5, var117)
-				var117 = var130 + var129
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v5)
+				v5 = VarInt2 + VarInt
 			end
-		elseif var118 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var131, var132 = protoModule.readFixed32(p5, var117)
-			local _ = var131
-			var117 = var132
-		elseif var118 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var133, var134 = protoModule.readFixed64(p5, var117)
-			local _ = var133
-			var117 = var134
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v151 = ProtoModule.readFixed32(Buf, v5)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v151 = ProtoModule.readFixed64(Buf, v5)
 		else
-			error("Unsupported wire type: " .. var186)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var116
+	return NewModule
 end
 
-function t_5:jsonEncode()
+function Module4:jsonEncode() --[[ Line: 1193 ]]
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -752,117 +638,98 @@ function t_5:jsonEncode()
 	return t
 end
 
-function t_5:jsonDecode()
-	-- upvalues: t_5 (ref), templateEntryModule (ref)
-	local var135 = t_5.new()
+function Module4:jsonDecode() --[[ Line: 1209 ]]
+	-- upvalues: Module4 (copy), TemplateEntryModule (copy)
+	local NewModule = Module4.new()
 	
 	if self.key ~= nil then
-		var135.key = self.key
+		NewModule.key = self.key
 	end
 	if self.value ~= nil then
-		var135.value = templateEntryModule.TemplateEntry.jsonDecode(self.value)
+		NewModule.value = TemplateEntryModule.TemplateEntry.jsonDecode(self.value)
 	end
-	return var135
+	return NewModule
 end
 
-t_5.descriptor = {
+Module4.descriptor = {
 	name = "BadgeDetailsPageV2Response_TemplatesEntry",
 	fullName = "roblox.apppageplatform.badges.v1beta1.TemplatesEntry"
 }
-t.BadgeDetailsPageV2Response_TemplatesEntry = t_5
-typeRegistryModule.default:register(t.BadgeDetailsPageV2Response_TemplatesEntry)
-local t_6 = {}
-t_6.__index = t_6
+config.BadgeDetailsPageV2Response_TemplatesEntry = Module4
+TypeRegistryModule.default:register(config.BadgeDetailsPageV2Response_TemplatesEntry)
+local Module5 = {}
+Module5.__index = Module5
 
-function t_6.new(p6)
-	-- upvalues: t_6 (ref)
-	return setmetatable({
-		page_entry = if p6 == nil or p6.page_entry == nil then nil else p6.page_entry,
-		kind = if p6 == nil or p6.kind == nil then nil else p6.kind
-	}, t_6)
+function Module5.new(p1) --[[ Line: 1239 ]]
+	-- upvalues: Module5 (copy)
+	return (setmetatable({
+		page_entry = if p1 == nil or p1.page_entry == nil then nil else p1.page_entry,
+		kind = if p1 == nil or p1.kind == nil then nil else p1.kind
+	}, Module5))
 end
 
-function t_6:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var135 = 0
+function Module5:encode() --[[ Line: 1246 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.page_entry ~= nil then
-		local var136 = self.page_entry:encode()
-		local var137, var138 = protoModule.writeTag(buff, var135, 1, protoModule.wireTypes.lengthDelimited)
-		var137, var209 = protoModule.writeBuffer(var137, var138, var136, buffer.len(var136))
-		buff = var137
-		var135 = var138
+		local EncodeResult = self.page_entry:encode()
+		local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
 	end
 	if self.kind ~= nil and self.kind.type == "badge_details" then
-		local var139 = self.kind.value:encode()
-		local var140, var141 = protoModule.writeTag(buff, var135, 2, protoModule.wireTypes.lengthDelimited)
-		var140, var212 = protoModule.writeBuffer(var140, var141, var139, buffer.len(var139))
-		buff = var140
-		var135 = var141
+		local EncodeResult = self.kind.value:encode()
+		local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
 	end
-	local buff_1 = buffer.create(var135)
-	buffer.copy(buff_1, 0, buff, 0, var135)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_6.decode(p6)
-	-- upvalues: t_6 (ref), protoModule (ref), pageEntryModule (ref), t (ref)
-	local var135 = t_6.new()
-	local var136 = 0
-	while var136 < buffer.len(p6) do
-		local _ = nil
-		local var137 = nil
-		local var138, var139, var140 = protoModule.readTag(p6, var136)
-		local var141 = var138
-		var137 = var139
-		var136 = var140
+function Module5.decode(Buf) --[[ Line: 1269 ]]
+	-- upvalues: Module5 (copy), ProtoModule (copy), PageEntryModule (copy), config (copy)
+	local NewModule = Module5.new()
+	local v6 = 0
+	while v6 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v172 = ProtoModule.readTag(Buf, v6)
 		
-		if var137 == protoModule.wireTypes.varint then
-			local _ = nil
-			local var142, var143 = protoModule.readVarInt(p6, var136)
-			local _ = var142
-			var136 = var143
-			continue
-		end
-		if var137 == protoModule.wireTypes.lengthDelimited then
-			if var141 == 1 then
-				local _ = nil
-				local var144, var145 = protoModule.readBuffer(p6, var136)
-				var136 = var145
-				var135.page_entry = pageEntryModule.PageEntry.decode(var144)
-			elseif var141 == 2 then
-				local _ = nil
-				local var146, var147 = protoModule.readBuffer(p6, var136)
-				var136 = var147
-				var135.kind = {
+		if Tag2 == ProtoModule.wireTypes.varint then
+			local _
+			_, v172 = ProtoModule.readVarInt(Buf, v6)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v172 = ProtoModule.readBuffer(Buf, v6)
+				NewModule.page_entry = PageEntryModule.PageEntry.decode(Buffer1)
+			elseif Tag == 2 then
+				local Buffer2
+				Buffer2, v172 = ProtoModule.readBuffer(Buf, v6)
+				NewModule.kind = {
 					type = "badge_details",
-					value = t.BadgeDetailsContent.decode(var146)
+					value = config.BadgeDetailsContent.decode(Buffer2)
 				}
 			else
-				local _ = nil
-				local var148, var149 = protoModule.readVarInt(p6, var136)
-				var136 = var149 + var148
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v6)
+				v6 = VarInt2 + VarInt
 			end
-		elseif var137 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var150, var151 = protoModule.readFixed32(p6, var136)
-			local _ = var150
-			var136 = var151
-		elseif var137 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var152, var153 = protoModule.readFixed64(p6, var136)
-			local _ = var152
-			var136 = var153
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v172 = ProtoModule.readFixed32(Buf, v6)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v172 = ProtoModule.readFixed64(Buf, v6)
 		else
-			error("Unsupported wire type: " .. var216)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var135
+	return NewModule
 end
 
-function t_6:jsonEncode()
+function Module5:jsonEncode() --[[ Line: 1317 ]]
 	local t = {}
 	
 	if self.page_entry ~= nil then
@@ -874,149 +741,124 @@ function t_6:jsonEncode()
 	return t
 end
 
-function t_6:jsonDecode()
-	-- upvalues: t_6 (ref), pageEntryModule (ref), t (ref)
-	local var154 = t_6.new()
+function Module5:jsonDecode() --[[ Line: 1333 ]]
+	-- upvalues: Module5 (copy), PageEntryModule (copy), config (copy)
+	local NewModule = Module5.new()
 	
 	if self.page_entry ~= nil then
-		var154.page_entry = pageEntryModule.PageEntry.jsonDecode(self.page_entry)
+		NewModule.page_entry = PageEntryModule.PageEntry.jsonDecode(self.page_entry)
 	end
 	if self.pageEntry ~= nil then
-		var154.page_entry = pageEntryModule.PageEntry.jsonDecode(self.pageEntry)
+		NewModule.page_entry = PageEntryModule.PageEntry.jsonDecode(self.pageEntry)
 	end
 	if self.badge_details ~= nil then
-		var154.kind = {
+		NewModule.kind = {
 			type = "badge_details",
-			value = t.BadgeDetailsContent.jsonDecode(self.badge_details)
+			value = config.BadgeDetailsContent.jsonDecode(self.badge_details)
 		}
 	end
 	if self.badgeDetails ~= nil then
-		var154.kind = {
+		NewModule.kind = {
 			type = "badge_details",
-			value = t.BadgeDetailsContent.jsonDecode(self.badgeDetails)
+			value = config.BadgeDetailsContent.jsonDecode(self.badgeDetails)
 		}
 	end
-	return var154
+	return NewModule
 end
 
-t_6.descriptor = {
+Module5.descriptor = {
 	name = "BadgeDetailsPageEntry",
 	fullName = "roblox.apppageplatform.badges.v1beta1.BadgeDetailsPageEntry"
 }
-t.BadgeDetailsPageEntry = t_6
-typeRegistryModule.default:register(t.BadgeDetailsPageEntry)
-local t_7 = {}
-t_7.__index = t_7
+config.BadgeDetailsPageEntry = Module5
+TypeRegistryModule.default:register(config.BadgeDetailsPageEntry)
+local Module6 = {}
+Module6.__index = Module6
 
-function t_7.new(p7)
-	-- upvalues: t_7 (ref)
-	return setmetatable({
-		badge_id = if p7 == nil or p7.badge_id == nil then "" else p7.badge_id,
-		universe_id = if p7 == nil or p7.universe_id == nil then "" else p7.universe_id,
-		localized_literals = if p7 == nil or p7.localized_literals == nil then nil else p7.localized_literals,
-		creator_key = if p7 == nil or p7.creator_key == nil then "" else p7.creator_key
-	}, t_7)
+function Module6.new(p1) --[[ Line: 1369 ]]
+	-- upvalues: Module6 (copy)
+	return (setmetatable({
+		badge_id = if p1 == nil or p1.badge_id == nil then "" else p1.badge_id,
+		universe_id = if p1 == nil or p1.universe_id == nil then "" else p1.universe_id,
+		localized_literals = if p1 == nil or p1.localized_literals == nil then nil else p1.localized_literals,
+		creator_key = if p1 == nil or p1.creator_key == nil then "" else p1.creator_key
+	}, Module6))
 end
 
-function t_7:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var154 = 0
+function Module6:encode() --[[ Line: 1378 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.badge_id ~= nil and self.badge_id ~= "" then
-		local var155, var156 = protoModule.writeTag(buff, var154, 1, protoModule.wireTypes.lengthDelimited)
-		var155, var238 = protoModule.writeString(var155, var156, self.badge_id)
-		buff = var155
-		var154 = var156
+		local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult, WriteTagResult2, self.badge_id)
 	end
 	if self.universe_id ~= nil and self.universe_id ~= "" then
-		local var157, var158 = protoModule.writeTag(buff, var154, 2, protoModule.wireTypes.lengthDelimited)
-		var157, var240 = protoModule.writeString(var157, var158, self.universe_id)
-		buff = var157
-		var154 = var158
+		local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult1, WriteTagResult2_1, self.universe_id)
 	end
 	if self.localized_literals ~= nil then
-		local var159 = self.localized_literals:encode()
-		local var160, var161 = protoModule.writeTag(buff, var154, 3, protoModule.wireTypes.lengthDelimited)
-		var160, var243 = protoModule.writeBuffer(var160, var161, var159, buffer.len(var159))
-		buff = var160
-		var154 = var161
+		local EncodeResult = self.localized_literals:encode()
+		local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeBuffer(WriteTagResult3, WriteTagResult2_2, EncodeResult, buffer.len(EncodeResult))
 	end
 	if self.creator_key ~= nil and self.creator_key ~= "" then
-		local var162, var163 = protoModule.writeTag(buff, var154, 4, protoModule.wireTypes.lengthDelimited)
-		var162, var245 = protoModule.writeString(var162, var163, self.creator_key)
-		buff = var162
-		var154 = var163
+		local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult4, WriteTagResult2_3, self.creator_key)
 	end
-	local buff_1 = buffer.create(var154)
-	buffer.copy(buff_1, 0, buff, 0, var154)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_7.decode(p7)
-	-- upvalues: t_7 (ref), protoModule (ref), t (ref)
-	local var154 = t_7.new()
-	local var155 = 0
-	while var155 < buffer.len(p7) do
-		local _ = nil
-		local var156 = nil
-		local var157, var158, var159 = protoModule.readTag(p7, var155)
-		local var160 = var157
-		var156 = var158
-		var155 = var159
+function Module6.decode(Buf) --[[ Line: 1408 ]]
+	-- upvalues: Module6 (copy), ProtoModule (copy), config (copy)
+	local NewModule = Module6.new()
+	local v7 = 0
+	while v7 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v196 = ProtoModule.readTag(Buf, v7)
 		
-		if var156 == protoModule.wireTypes.varint then
-			local _ = nil
-			local var161, var162 = protoModule.readVarInt(p7, var155)
-			local _ = var161
-			var155 = var162
-			continue
-		end
-		if var156 == protoModule.wireTypes.lengthDelimited then
-			if var160 == 1 then
-				local _ = nil
-				local var163, var164 = protoModule.readBuffer(p7, var155)
-				var155 = var164
-				var154.badge_id = buffer.tostring(var163)
-			elseif var160 == 2 then
-				local _ = nil
-				local var165, var166 = protoModule.readBuffer(p7, var155)
-				var155 = var166
-				var154.universe_id = buffer.tostring(var165)
-			elseif var160 == 3 then
-				local _ = nil
-				local var167, var168 = protoModule.readBuffer(p7, var155)
-				var155 = var168
-				var154.localized_literals = t.BadgeDetailsContent_LocalizedLiterals.decode(var167)
-			elseif var160 == 4 then
-				local _ = nil
-				local var169, var170 = protoModule.readBuffer(p7, var155)
-				var155 = var170
-				var154.creator_key = buffer.tostring(var169)
+		if Tag2 == ProtoModule.wireTypes.varint then
+			local _
+			_, v196 = ProtoModule.readVarInt(Buf, v7)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v196 = ProtoModule.readBuffer(Buf, v7)
+				NewModule.badge_id = buffer.tostring(Buffer1)
+			elseif Tag == 2 then
+				local Buffer2
+				Buffer2, v196 = ProtoModule.readBuffer(Buf, v7)
+				NewModule.universe_id = buffer.tostring(Buffer2)
+			elseif Tag == 3 then
+				local Buffer3
+				Buffer3, v196 = ProtoModule.readBuffer(Buf, v7)
+				NewModule.localized_literals = config.BadgeDetailsContent_LocalizedLiterals.decode(Buffer3)
+			elseif Tag == 4 then
+				local Buffer4
+				Buffer4, v196 = ProtoModule.readBuffer(Buf, v7)
+				NewModule.creator_key = buffer.tostring(Buffer4)
 			else
-				local _ = nil
-				local var171, var172 = protoModule.readVarInt(p7, var155)
-				var155 = var172 + var171
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v7)
+				v7 = VarInt2 + VarInt
 			end
-		elseif var156 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var173, var174 = protoModule.readFixed32(p7, var155)
-			local _ = var173
-			var155 = var174
-		elseif var156 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var175, var176 = protoModule.readFixed64(p7, var155)
-			local _ = var175
-			var155 = var176
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v196 = ProtoModule.readFixed32(Buf, v7)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v196 = ProtoModule.readFixed64(Buf, v7)
 		else
-			error("Unsupported wire type: " .. var249)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var154
+	return NewModule
 end
 
-function t_7:jsonEncode()
+function Module6:jsonEncode() --[[ Line: 1466 ]]
 	local t = {}
 	
 	if self.badge_id ~= nil and self.badge_id ~= "" then
@@ -1034,145 +876,123 @@ function t_7:jsonEncode()
 	return t
 end
 
-function t_7:jsonDecode()
-	-- upvalues: t_7 (ref), t (ref)
-	local var177 = t_7.new()
+function Module6:jsonDecode() --[[ Line: 1488 ]]
+	-- upvalues: Module6 (copy), config (copy)
+	local NewModule = Module6.new()
 	
 	if self.badge_id ~= nil then
-		var177.badge_id = self.badge_id
+		NewModule.badge_id = self.badge_id
 	end
 	if self.badgeId ~= nil then
-		var177.badge_id = self.badgeId
+		NewModule.badge_id = self.badgeId
 	end
 	if self.universe_id ~= nil then
-		var177.universe_id = self.universe_id
+		NewModule.universe_id = self.universe_id
 	end
 	if self.universeId ~= nil then
-		var177.universe_id = self.universeId
+		NewModule.universe_id = self.universeId
 	end
 	if self.localized_literals ~= nil then
-		var177.localized_literals = t.BadgeDetailsContent_LocalizedLiterals.jsonDecode(self.localized_literals)
+		NewModule.localized_literals = config.BadgeDetailsContent_LocalizedLiterals.jsonDecode(self.localized_literals)
 	end
 	if self.localizedLiterals ~= nil then
-		var177.localized_literals = t.BadgeDetailsContent_LocalizedLiterals.jsonDecode(self.localizedLiterals)
+		NewModule.localized_literals = config.BadgeDetailsContent_LocalizedLiterals.jsonDecode(self.localizedLiterals)
 	end
 	if self.creator_key ~= nil then
-		var177.creator_key = self.creator_key
+		NewModule.creator_key = self.creator_key
 	end
 	if self.creatorKey ~= nil then
-		var177.creator_key = self.creatorKey
+		NewModule.creator_key = self.creatorKey
 	end
-	return var177
+	return NewModule
 end
 
-t_7.descriptor = {
+Module6.descriptor = {
 	name = "BadgeDetailsContent",
 	fullName = "roblox.apppageplatform.badges.v1beta1.BadgeDetailsContent"
 }
-t.BadgeDetailsContent = t_7
-typeRegistryModule.default:register(t.BadgeDetailsContent)
-local t_8 = {}
-t_8.__index = t_8
+config.BadgeDetailsContent = Module6
+TypeRegistryModule.default:register(config.BadgeDetailsContent)
+local Module7 = {}
+Module7.__index = Module7
 
-function t_8.new(p8)
-	-- upvalues: t_8 (ref)
-	return setmetatable({
-		info_table = if p8 == nil or p8.info_table == nil then nil else p8.info_table,
-		action_module = if p8 == nil or p8.action_module == nil then nil else p8.action_module,
-		overflow_menu = if p8 == nil or p8.overflow_menu == nil then nil else p8.overflow_menu
-	}, t_8)
+function Module7.new(p1) --[[ Line: 1541 ]]
+	-- upvalues: Module7 (copy)
+	return (setmetatable({
+		info_table = if p1 == nil or p1.info_table == nil then nil else p1.info_table,
+		action_module = if p1 == nil or p1.action_module == nil then nil else p1.action_module,
+		overflow_menu = if p1 == nil or p1.overflow_menu == nil then nil else p1.overflow_menu
+	}, Module7))
 end
 
-function t_8:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var177 = 0
+function Module7:encode() --[[ Line: 1551 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.info_table ~= nil then
-		local var178 = self.info_table:encode()
-		local var179, var180 = protoModule.writeTag(buff, var177, 1, protoModule.wireTypes.lengthDelimited)
-		var179, var276 = protoModule.writeBuffer(var179, var180, var178, buffer.len(var178))
-		buff = var179
-		var177 = var180
+		local EncodeResult = self.info_table:encode()
+		local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeBuffer(WriteTagResult, WriteTagResult2, EncodeResult, buffer.len(EncodeResult))
 	end
 	if self.action_module ~= nil then
-		local var181 = self.action_module:encode()
-		local var182, var183 = protoModule.writeTag(buff, var177, 2, protoModule.wireTypes.lengthDelimited)
-		var182, var279 = protoModule.writeBuffer(var182, var183, var181, buffer.len(var181))
-		buff = var182
-		var177 = var183
+		local EncodeResult = self.action_module:encode()
+		local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeBuffer(WriteTagResult1, WriteTagResult2_1, EncodeResult, buffer.len(EncodeResult))
 	end
 	if self.overflow_menu ~= nil then
-		local var184 = self.overflow_menu:encode()
-		local var185, var186 = protoModule.writeTag(buff, var177, 3, protoModule.wireTypes.lengthDelimited)
-		var185, var282 = protoModule.writeBuffer(var185, var186, var184, buffer.len(var184))
-		buff = var185
-		var177 = var186
+		local EncodeResult = self.overflow_menu:encode()
+		local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeBuffer(WriteTagResult3, WriteTagResult2_2, EncodeResult, buffer.len(EncodeResult))
 	end
-	local buff_1 = buffer.create(var177)
-	buffer.copy(buff_1, 0, buff, 0, var177)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_8.decode(p8)
-	-- upvalues: t_8 (ref), protoModule (ref), t (ref)
-	local var177 = t_8.new()
-	local var178 = 0
-	while var178 < buffer.len(p8) do
-		local _ = nil
-		local var179 = nil
-		local var180, var181, var182 = protoModule.readTag(p8, var178)
-		local var183 = var180
-		var179 = var181
-		var178 = var182
+function Module7.decode(Buf) --[[ Line: 1578 ]]
+	-- upvalues: Module7 (copy), ProtoModule (copy), config (copy)
+	local NewModule = Module7.new()
+	local v8 = 0
+	while v8 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v222 = ProtoModule.readTag(Buf, v8)
 		
-		if var179 == protoModule.wireTypes.varint then
-			local _ = nil
-			local var184, var185 = protoModule.readVarInt(p8, var178)
-			local _ = var184
-			var178 = var185
-			continue
-		end
-		if var179 == protoModule.wireTypes.lengthDelimited then
-			if var183 == 1 then
-				local _ = nil
-				local var186, var187 = protoModule.readBuffer(p8, var178)
-				var178 = var187
-				var177.info_table = t.BadgeDetailsContent_LocalizedLiterals_InfoTable.decode(var186)
-			elseif var183 == 2 then
-				local _ = nil
-				local var188, var189 = protoModule.readBuffer(p8, var178)
-				var178 = var189
-				var177.action_module = t.BadgeDetailsContent_LocalizedLiterals_ActionModule.decode(var188)
-			elseif var183 == 3 then
-				local _ = nil
-				local var190, var191 = protoModule.readBuffer(p8, var178)
-				var178 = var191
-				var177.overflow_menu = t.BadgeDetailsContent_LocalizedLiterals_OverflowMenu.decode(var190)
+		if Tag2 == ProtoModule.wireTypes.varint then
+			local _
+			_, v222 = ProtoModule.readVarInt(Buf, v8)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v222 = ProtoModule.readBuffer(Buf, v8)
+				NewModule.info_table = config.BadgeDetailsContent_LocalizedLiterals_InfoTable.decode(Buffer1)
+			elseif Tag == 2 then
+				local Buffer2
+				Buffer2, v222 = ProtoModule.readBuffer(Buf, v8)
+				NewModule.action_module = config.BadgeDetailsContent_LocalizedLiterals_ActionModule.decode(Buffer2)
+			elseif Tag == 3 then
+				local Buffer3
+				Buffer3, v222 = ProtoModule.readBuffer(Buf, v8)
+				NewModule.overflow_menu = config.BadgeDetailsContent_LocalizedLiterals_OverflowMenu.decode(Buffer3)
 			else
-				local _ = nil
-				local var192, var193 = protoModule.readVarInt(p8, var178)
-				var178 = var193 + var192
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v8)
+				v8 = VarInt2 + VarInt
 			end
-		elseif var179 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var194, var195 = protoModule.readFixed32(p8, var178)
-			local _ = var194
-			var178 = var195
-		elseif var179 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var196, var197 = protoModule.readFixed64(p8, var178)
-			local _ = var196
-			var178 = var197
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v222 = ProtoModule.readFixed32(Buf, v8)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v222 = ProtoModule.readFixed64(Buf, v8)
 		else
-			error("Unsupported wire type: " .. var286)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var177
+	return NewModule
 end
 
-function t_8:jsonEncode()
+function Module7:jsonEncode() --[[ Line: 1631 ]]
 	local t = {}
 	
 	if self.info_table ~= nil then
@@ -1187,184 +1007,150 @@ function t_8:jsonEncode()
 	return t
 end
 
-function t_8:jsonDecode()
-	-- upvalues: t_8 (ref), t (ref)
-	local var198 = t_8.new()
+function Module7:jsonDecode() --[[ Line: 1649 ]]
+	-- upvalues: Module7 (copy), config (copy)
+	local NewModule = Module7.new()
 	
 	if self.info_table ~= nil then
-		var198.info_table = t.BadgeDetailsContent_LocalizedLiterals_InfoTable.jsonDecode(self.info_table)
+		NewModule.info_table = config.BadgeDetailsContent_LocalizedLiterals_InfoTable.jsonDecode(self.info_table)
 	end
 	if self.infoTable ~= nil then
-		var198.info_table = t.BadgeDetailsContent_LocalizedLiterals_InfoTable.jsonDecode(self.infoTable)
+		NewModule.info_table = config.BadgeDetailsContent_LocalizedLiterals_InfoTable.jsonDecode(self.infoTable)
 	end
 	if self.action_module ~= nil then
-		var198.action_module = t.BadgeDetailsContent_LocalizedLiterals_ActionModule.jsonDecode(self.action_module)
+		NewModule.action_module = config.BadgeDetailsContent_LocalizedLiterals_ActionModule.jsonDecode(self.action_module)
 	end
 	if self.actionModule ~= nil then
-		var198.action_module = t.BadgeDetailsContent_LocalizedLiterals_ActionModule.jsonDecode(self.actionModule)
+		NewModule.action_module = config.BadgeDetailsContent_LocalizedLiterals_ActionModule.jsonDecode(self.actionModule)
 	end
 	if self.overflow_menu ~= nil then
-		var198.overflow_menu = t.BadgeDetailsContent_LocalizedLiterals_OverflowMenu.jsonDecode(self.overflow_menu)
+		NewModule.overflow_menu = config.BadgeDetailsContent_LocalizedLiterals_OverflowMenu.jsonDecode(self.overflow_menu)
 	end
 	if self.overflowMenu ~= nil then
-		var198.overflow_menu = t.BadgeDetailsContent_LocalizedLiterals_OverflowMenu.jsonDecode(self.overflowMenu)
+		NewModule.overflow_menu = config.BadgeDetailsContent_LocalizedLiterals_OverflowMenu.jsonDecode(self.overflowMenu)
 	end
-	return var198
+	return NewModule
 end
 
-t_8.descriptor = {
+Module7.descriptor = {
 	name = "BadgeDetailsContent_LocalizedLiterals",
 	fullName = "roblox.apppageplatform.badges.v1beta1.LocalizedLiterals"
 }
-t.BadgeDetailsContent_LocalizedLiterals = t_8
-typeRegistryModule.default:register(t.BadgeDetailsContent_LocalizedLiterals)
-local t_9 = {}
-t_9.__index = t_9
+config.BadgeDetailsContent_LocalizedLiterals = Module7
+TypeRegistryModule.default:register(config.BadgeDetailsContent_LocalizedLiterals)
+local Module8 = {}
+Module8.__index = Module8
 
-function t_9.new(p9)
-	-- upvalues: t_9 (ref)
-	return setmetatable({
-		type_label = if p9 == nil or p9.type_label == nil then "" else p9.type_label,
-		earned_label = if p9 == nil or p9.earned_label == nil then "" else p9.earned_label,
-		updated_label = if p9 == nil or p9.updated_label == nil then "" else p9.updated_label,
-		experience_label = if p9 == nil or p9.experience_label == nil then "" else p9.experience_label,
-		rarity_label = if p9 == nil or p9.rarity_label == nil then "" else p9.rarity_label,
-		won_yesterday_label = if p9 == nil or p9.won_yesterday_label == nil then "" else p9.won_yesterday_label,
-		won_ever_label = if p9 == nil or p9.won_ever_label == nil then "" else p9.won_ever_label
-	}, t_9)
+function Module8.new(p1) --[[ Line: 1699 ]]
+	-- upvalues: Module8 (copy)
+	return (setmetatable({
+		type_label = if p1 == nil or p1.type_label == nil then "" else p1.type_label,
+		earned_label = if p1 == nil or p1.earned_label == nil then "" else p1.earned_label,
+		updated_label = if p1 == nil or p1.updated_label == nil then "" else p1.updated_label,
+		experience_label = if p1 == nil or p1.experience_label == nil then "" else p1.experience_label,
+		rarity_label = if p1 == nil or p1.rarity_label == nil then "" else p1.rarity_label,
+		won_yesterday_label = if p1 == nil or p1.won_yesterday_label == nil then "" else p1.won_yesterday_label,
+		won_ever_label = if p1 == nil or p1.won_ever_label == nil then "" else p1.won_ever_label
+	}, Module8))
 end
 
-function t_9:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var198 = 0
+function Module8:encode() --[[ Line: 1715 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.type_label ~= nil and self.type_label ~= "" then
-		local var199, var200 = protoModule.writeTag(buff, var198, 1, protoModule.wireTypes.lengthDelimited)
-		var199, var310 = protoModule.writeString(var199, var200, self.type_label)
-		buff = var199
-		var198 = var200
+		local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult, WriteTagResult2, self.type_label)
 	end
 	if self.earned_label ~= nil and self.earned_label ~= "" then
-		local var201, var202 = protoModule.writeTag(buff, var198, 2, protoModule.wireTypes.lengthDelimited)
-		var201, var312 = protoModule.writeString(var201, var202, self.earned_label)
-		buff = var201
-		var198 = var202
+		local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult1, WriteTagResult2_1, self.earned_label)
 	end
 	if self.updated_label ~= nil and self.updated_label ~= "" then
-		local var203, var204 = protoModule.writeTag(buff, var198, 3, protoModule.wireTypes.lengthDelimited)
-		var203, var314 = protoModule.writeString(var203, var204, self.updated_label)
-		buff = var203
-		var198 = var204
+		local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult3, WriteTagResult2_2, self.updated_label)
 	end
 	if self.experience_label ~= nil and self.experience_label ~= "" then
-		local var205, var206 = protoModule.writeTag(buff, var198, 4, protoModule.wireTypes.lengthDelimited)
-		var205, var316 = protoModule.writeString(var205, var206, self.experience_label)
-		buff = var205
-		var198 = var206
+		local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult4, WriteTagResult2_3, self.experience_label)
 	end
 	if self.rarity_label ~= nil and self.rarity_label ~= "" then
-		local var207, var208 = protoModule.writeTag(buff, var198, 5, protoModule.wireTypes.lengthDelimited)
-		var207, var318 = protoModule.writeString(var207, var208, self.rarity_label)
-		buff = var207
-		var198 = var208
+		local WriteTagResult5, WriteTagResult2_4 = ProtoModule.writeTag(Buf, Count, 5, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult5, WriteTagResult2_4, self.rarity_label)
 	end
 	if self.won_yesterday_label ~= nil and self.won_yesterday_label ~= "" then
-		local var209, var210 = protoModule.writeTag(buff, var198, 6, protoModule.wireTypes.lengthDelimited)
-		var209, var320 = protoModule.writeString(var209, var210, self.won_yesterday_label)
-		buff = var209
-		var198 = var210
+		local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(Buf, Count, 6, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult6, WriteTagResult2_5, self.won_yesterday_label)
 	end
 	if self.won_ever_label ~= nil and self.won_ever_label ~= "" then
-		local var211, var212 = protoModule.writeTag(buff, var198, 7, protoModule.wireTypes.lengthDelimited)
-		var211, var322 = protoModule.writeString(var211, var212, self.won_ever_label)
-		buff = var211
-		var198 = var212
+		local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult7, WriteTagResult2_6, self.won_ever_label)
 	end
-	local buff_1 = buffer.create(var198)
-	buffer.copy(buff_1, 0, buff, 0, var198)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_9.decode(p9)
-	-- upvalues: t_9 (ref), protoModule (ref)
-	local var198 = t_9.new()
-	local var199 = 0
-	while var199 < buffer.len(p9) do
-		local _ = nil
-		local var200 = nil
-		local var201, var202, var203 = protoModule.readTag(p9, var199)
-		local var204 = var201
-		var200 = var202
-		var199 = var203
+function Module8.decode(Buf) --[[ Line: 1761 ]]
+	-- upvalues: Module8 (copy), ProtoModule (copy)
+	local NewModule = Module8.new()
+	local v9 = 0
+	while v9 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v252 = ProtoModule.readTag(Buf, v9)
 		
-		if var200 == protoModule.wireTypes.varint then
-			local _ = nil
-			local var205, var206 = protoModule.readVarInt(p9, var199)
-			local _ = var205
-			var199 = var206
-			continue
-		end
-		if var200 == protoModule.wireTypes.lengthDelimited then
-			if var204 == 1 then
-				local _ = nil
-				local var207, var208 = protoModule.readBuffer(p9, var199)
-				var199 = var208
-				var198.type_label = buffer.tostring(var207)
-			elseif var204 == 2 then
-				local _ = nil
-				local var209, var210 = protoModule.readBuffer(p9, var199)
-				var199 = var210
-				var198.earned_label = buffer.tostring(var209)
-			elseif var204 == 3 then
-				local _ = nil
-				local var211, var212 = protoModule.readBuffer(p9, var199)
-				var199 = var212
-				var198.updated_label = buffer.tostring(var211)
-			elseif var204 == 4 then
-				local _ = nil
-				local var213, var214 = protoModule.readBuffer(p9, var199)
-				var199 = var214
-				var198.experience_label = buffer.tostring(var213)
-			elseif var204 == 5 then
-				local _ = nil
-				local var215, var216 = protoModule.readBuffer(p9, var199)
-				var199 = var216
-				var198.rarity_label = buffer.tostring(var215)
-			elseif var204 == 6 then
-				local _ = nil
-				local var217, var218 = protoModule.readBuffer(p9, var199)
-				var199 = var218
-				var198.won_yesterday_label = buffer.tostring(var217)
-			elseif var204 == 7 then
-				local _ = nil
-				local var219, var220 = protoModule.readBuffer(p9, var199)
-				var199 = var220
-				var198.won_ever_label = buffer.tostring(var219)
+		if Tag2 == ProtoModule.wireTypes.varint then
+			local _
+			_, v252 = ProtoModule.readVarInt(Buf, v9)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v252 = ProtoModule.readBuffer(Buf, v9)
+				NewModule.type_label = buffer.tostring(Buffer1)
+			elseif Tag == 2 then
+				local Buffer2
+				Buffer2, v252 = ProtoModule.readBuffer(Buf, v9)
+				NewModule.earned_label = buffer.tostring(Buffer2)
+			elseif Tag == 3 then
+				local Buffer3
+				Buffer3, v252 = ProtoModule.readBuffer(Buf, v9)
+				NewModule.updated_label = buffer.tostring(Buffer3)
+			elseif Tag == 4 then
+				local Buffer4
+				Buffer4, v252 = ProtoModule.readBuffer(Buf, v9)
+				NewModule.experience_label = buffer.tostring(Buffer4)
+			elseif Tag == 5 then
+				local Buffer5
+				Buffer5, v252 = ProtoModule.readBuffer(Buf, v9)
+				NewModule.rarity_label = buffer.tostring(Buffer5)
+			elseif Tag == 6 then
+				local Buffer6
+				Buffer6, v252 = ProtoModule.readBuffer(Buf, v9)
+				NewModule.won_yesterday_label = buffer.tostring(Buffer6)
+			elseif Tag == 7 then
+				local Buffer7
+				Buffer7, v252 = ProtoModule.readBuffer(Buf, v9)
+				NewModule.won_ever_label = buffer.tostring(Buffer7)
 			else
-				local _ = nil
-				local var221, var222 = protoModule.readVarInt(p9, var199)
-				var199 = var222 + var221
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v9)
+				v9 = VarInt2 + VarInt
 			end
-		elseif var200 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var223, var224 = protoModule.readFixed32(p9, var199)
-			local _ = var223
-			var199 = var224
-		elseif var200 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var225, var226 = protoModule.readFixed64(p9, var199)
-			local _ = var225
-			var199 = var226
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v252 = ProtoModule.readFixed32(Buf, v9)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v252 = ProtoModule.readFixed64(Buf, v9)
 		else
-			error("Unsupported wire type: " .. var326)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var198
+	return NewModule
 end
 
-function t_9:jsonEncode()
+function Module8:jsonEncode() --[[ Line: 1836 ]]
 	local t = {}
 	
 	if self.type_label ~= nil and self.type_label ~= "" then
@@ -1391,148 +1177,129 @@ function t_9:jsonEncode()
 	return t
 end
 
-function t_9:jsonDecode()
-	-- upvalues: t_9 (ref)
-	local var227 = t_9.new()
+function Module8:jsonDecode() --[[ Line: 1872 ]]
+	-- upvalues: Module8 (copy)
+	local NewModule = Module8.new()
 	
 	if self.type_label ~= nil then
-		var227.type_label = self.type_label
+		NewModule.type_label = self.type_label
 	end
 	if self.typeLabel ~= nil then
-		var227.type_label = self.typeLabel
+		NewModule.type_label = self.typeLabel
 	end
 	if self.earned_label ~= nil then
-		var227.earned_label = self.earned_label
+		NewModule.earned_label = self.earned_label
 	end
 	if self.earnedLabel ~= nil then
-		var227.earned_label = self.earnedLabel
+		NewModule.earned_label = self.earnedLabel
 	end
 	if self.updated_label ~= nil then
-		var227.updated_label = self.updated_label
+		NewModule.updated_label = self.updated_label
 	end
 	if self.updatedLabel ~= nil then
-		var227.updated_label = self.updatedLabel
+		NewModule.updated_label = self.updatedLabel
 	end
 	if self.experience_label ~= nil then
-		var227.experience_label = self.experience_label
+		NewModule.experience_label = self.experience_label
 	end
 	if self.experienceLabel ~= nil then
-		var227.experience_label = self.experienceLabel
+		NewModule.experience_label = self.experienceLabel
 	end
 	if self.rarity_label ~= nil then
-		var227.rarity_label = self.rarity_label
+		NewModule.rarity_label = self.rarity_label
 	end
 	if self.rarityLabel ~= nil then
-		var227.rarity_label = self.rarityLabel
+		NewModule.rarity_label = self.rarityLabel
 	end
 	if self.won_yesterday_label ~= nil then
-		var227.won_yesterday_label = self.won_yesterday_label
+		NewModule.won_yesterday_label = self.won_yesterday_label
 	end
 	if self.wonYesterdayLabel ~= nil then
-		var227.won_yesterday_label = self.wonYesterdayLabel
+		NewModule.won_yesterday_label = self.wonYesterdayLabel
 	end
 	if self.won_ever_label ~= nil then
-		var227.won_ever_label = self.won_ever_label
+		NewModule.won_ever_label = self.won_ever_label
 	end
 	if self.wonEverLabel ~= nil then
-		var227.won_ever_label = self.wonEverLabel
+		NewModule.won_ever_label = self.wonEverLabel
 	end
-	return var227
+	return NewModule
 end
 
-t_9.descriptor = {
+Module8.descriptor = {
 	name = "BadgeDetailsContent_LocalizedLiterals_InfoTable",
 	fullName = "roblox.apppageplatform.badges.v1beta1.InfoTable"
 }
-t.BadgeDetailsContent_LocalizedLiterals_InfoTable = t_9
-typeRegistryModule.default:register(t.BadgeDetailsContent_LocalizedLiterals_InfoTable)
-local t_10 = {}
-t_10.__index = t_10
+config.BadgeDetailsContent_LocalizedLiterals_InfoTable = Module8
+TypeRegistryModule.default:register(config.BadgeDetailsContent_LocalizedLiterals_InfoTable)
+local Module9 = {}
+Module9.__index = Module9
 
-function t_10.new(p10)
-	-- upvalues: t_10 (ref)
-	return setmetatable({
-		share = if p10 == nil or p10.share == nil then "" else p10.share,
-		report = if p10 == nil or p10.report == nil then "" else p10.report
-	}, t_10)
+function Module9.new(p1) --[[ Line: 1952 ]]
+	-- upvalues: Module9 (copy)
+	return (setmetatable({
+		share = if p1 == nil or p1.share == nil then "" else p1.share,
+		report = if p1 == nil or p1.report == nil then "" else p1.report
+	}, Module9))
 end
 
-function t_10:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var227 = 0
+function Module9:encode() --[[ Line: 1964 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.share ~= nil and self.share ~= "" then
-		local var228, var229 = protoModule.writeTag(buff, var227, 1, protoModule.wireTypes.lengthDelimited)
-		var228, var358 = protoModule.writeString(var228, var229, self.share)
-		buff = var228
-		var227 = var229
+		local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult, WriteTagResult2, self.share)
 	end
 	if self.report ~= nil and self.report ~= "" then
-		local var230, var231 = protoModule.writeTag(buff, var227, 2, protoModule.wireTypes.lengthDelimited)
-		var230, var360 = protoModule.writeString(var230, var231, self.report)
-		buff = var230
-		var227 = var231
+		local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult1, WriteTagResult2_1, self.report)
 	end
-	local buff_1 = buffer.create(var227)
-	buffer.copy(buff_1, 0, buff, 0, var227)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_10.decode(p10)
-	-- upvalues: t_10 (ref), protoModule (ref)
-	local var227 = t_10.new()
-	local var228 = 0
-	while var228 < buffer.len(p10) do
-		local _ = nil
-		local var229 = nil
-		local var230, var231, var232 = protoModule.readTag(p10, var228)
-		local var233 = var230
-		var229 = var231
-		var228 = var232
+function Module9.decode(Buf) --[[ Line: 1985 ]]
+	-- upvalues: Module9 (copy), ProtoModule (copy)
+	local NewModule = Module9.new()
+	local v10 = 0
+	while v10 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v276 = ProtoModule.readTag(Buf, v10)
 		
-		if var229 == protoModule.wireTypes.varint then
-			local _ = nil
-			local var234, var235 = protoModule.readVarInt(p10, var228)
-			local _ = var234
-			var228 = var235
-			continue
-		end
-		if var229 == protoModule.wireTypes.lengthDelimited then
-			if var233 == 1 then
-				local _ = nil
-				local var236, var237 = protoModule.readBuffer(p10, var228)
-				var228 = var237
-				var227.share = buffer.tostring(var236)
-			elseif var233 == 2 then
-				local _ = nil
-				local var238, var239 = protoModule.readBuffer(p10, var228)
-				var228 = var239
-				var227.report = buffer.tostring(var238)
+		if Tag2 == ProtoModule.wireTypes.varint then
+			local _
+			_, v276 = ProtoModule.readVarInt(Buf, v10)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v276 = ProtoModule.readBuffer(Buf, v10)
+				NewModule.share = buffer.tostring(Buffer1)
+			elseif Tag == 2 then
+				local Buffer2
+				Buffer2, v276 = ProtoModule.readBuffer(Buf, v10)
+				NewModule.report = buffer.tostring(Buffer2)
 			else
-				local _ = nil
-				local var240, var241 = protoModule.readVarInt(p10, var228)
-				var228 = var241 + var240
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v10)
+				v10 = VarInt2 + VarInt
 			end
-		elseif var229 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var242, var243 = protoModule.readFixed32(p10, var228)
-			local _ = var242
-			var228 = var243
-		elseif var229 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var244, var245 = protoModule.readFixed64(p10, var228)
-			local _ = var244
-			var228 = var245
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v276 = ProtoModule.readFixed32(Buf, v10)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v276 = ProtoModule.readFixed64(Buf, v10)
 		else
-			error("Unsupported wire type: " .. var364)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var227
+	return NewModule
 end
 
-function t_10:jsonEncode()
+function Module9:jsonEncode() --[[ Line: 2035 ]]
 	local t = {}
 	
 	if self.share ~= nil and self.share ~= "" then
@@ -1544,112 +1311,93 @@ function t_10:jsonEncode()
 	return t
 end
 
-function t_10:jsonDecode()
-	-- upvalues: t_10 (ref)
-	local var246 = t_10.new()
+function Module9:jsonDecode() --[[ Line: 2051 ]]
+	-- upvalues: Module9 (copy)
+	local NewModule = Module9.new()
 	
 	if self.share ~= nil then
-		var246.share = self.share
+		NewModule.share = self.share
 	end
 	if self.report ~= nil then
-		var246.report = self.report
+		NewModule.report = self.report
 	end
-	return var246
+	return NewModule
 end
 
-t_10.descriptor = {
+Module9.descriptor = {
 	name = "BadgeDetailsContent_LocalizedLiterals_ActionModule",
 	fullName = "roblox.apppageplatform.badges.v1beta1.ActionModule"
 }
-t.BadgeDetailsContent_LocalizedLiterals_ActionModule = t_10
-typeRegistryModule.default:register(t.BadgeDetailsContent_LocalizedLiterals_ActionModule)
-local t_11 = {}
-t_11.__index = t_11
+config.BadgeDetailsContent_LocalizedLiterals_ActionModule = Module9
+TypeRegistryModule.default:register(config.BadgeDetailsContent_LocalizedLiterals_ActionModule)
+local Module10 = {}
+Module10.__index = Module10
 
-function t_11.new(p11)
-	-- upvalues: t_11 (ref)
-	return setmetatable({
-		report = if p11 == nil or p11.report == nil then "" else p11.report,
-		remove = if p11 == nil or p11.remove == nil then "" else p11.remove
-	}, t_11)
+function Module10.new(p1) --[[ Line: 2083 ]]
+	-- upvalues: Module10 (copy)
+	return (setmetatable({
+		report = if p1 == nil or p1.report == nil then "" else p1.report,
+		remove = if p1 == nil or p1.remove == nil then "" else p1.remove
+	}, Module10))
 end
 
-function t_11:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var246 = 0
+function Module10:encode() --[[ Line: 2095 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.report ~= nil and self.report ~= "" then
-		local var247, var248 = protoModule.writeTag(buff, var246, 1, protoModule.wireTypes.lengthDelimited)
-		var247, var386 = protoModule.writeString(var247, var248, self.report)
-		buff = var247
-		var246 = var248
+		local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult, WriteTagResult2, self.report)
 	end
 	if self.remove ~= nil and self.remove ~= "" then
-		local var249, var250 = protoModule.writeTag(buff, var246, 2, protoModule.wireTypes.lengthDelimited)
-		var249, var388 = protoModule.writeString(var249, var250, self.remove)
-		buff = var249
-		var246 = var250
+		local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult1, WriteTagResult2_1, self.remove)
 	end
-	local buff_1 = buffer.create(var246)
-	buffer.copy(buff_1, 0, buff, 0, var246)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_11.decode(p11)
-	-- upvalues: t_11 (ref), protoModule (ref)
-	local var246 = t_11.new()
-	local var247 = 0
-	while var247 < buffer.len(p11) do
-		local _ = nil
-		local var248 = nil
-		local var249, var250, var251 = protoModule.readTag(p11, var247)
-		local var252 = var249
-		var248 = var250
-		var247 = var251
+function Module10.decode(Buf) --[[ Line: 2116 ]]
+	-- upvalues: Module10 (copy), ProtoModule (copy)
+	local NewModule = Module10.new()
+	local v11 = 0
+	while v11 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v295 = ProtoModule.readTag(Buf, v11)
 		
-		if var248 == protoModule.wireTypes.varint then
-			local _ = nil
-			local var253, var254 = protoModule.readVarInt(p11, var247)
-			local _ = var253
-			var247 = var254
-			continue
-		end
-		if var248 == protoModule.wireTypes.lengthDelimited then
-			if var252 == 1 then
-				local _ = nil
-				local var255, var256 = protoModule.readBuffer(p11, var247)
-				var247 = var256
-				var246.report = buffer.tostring(var255)
-			elseif var252 == 2 then
-				local _ = nil
-				local var257, var258 = protoModule.readBuffer(p11, var247)
-				var247 = var258
-				var246.remove = buffer.tostring(var257)
+		if Tag2 == ProtoModule.wireTypes.varint then
+			local _
+			_, v295 = ProtoModule.readVarInt(Buf, v11)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v295 = ProtoModule.readBuffer(Buf, v11)
+				NewModule.report = buffer.tostring(Buffer1)
+			elseif Tag == 2 then
+				local Buffer2
+				Buffer2, v295 = ProtoModule.readBuffer(Buf, v11)
+				NewModule.remove = buffer.tostring(Buffer2)
 			else
-				local _ = nil
-				local var259, var260 = protoModule.readVarInt(p11, var247)
-				var247 = var260 + var259
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v11)
+				v11 = VarInt2 + VarInt
 			end
-		elseif var248 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var261, var262 = protoModule.readFixed32(p11, var247)
-			local _ = var261
-			var247 = var262
-		elseif var248 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var263, var264 = protoModule.readFixed64(p11, var247)
-			local _ = var263
-			var247 = var264
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v295 = ProtoModule.readFixed32(Buf, v11)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v295 = ProtoModule.readFixed64(Buf, v11)
 		else
-			error("Unsupported wire type: " .. var392)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var246
+	return NewModule
 end
 
-function t_11:jsonEncode()
+function Module10:jsonEncode() --[[ Line: 2166 ]]
 	local t = {}
 	
 	if self.report ~= nil and self.report ~= "" then
@@ -1661,34 +1409,34 @@ function t_11:jsonEncode()
 	return t
 end
 
-function t_11:jsonDecode()
-	-- upvalues: t_11 (ref)
-	local var265 = t_11.new()
+function Module10:jsonDecode() --[[ Line: 2182 ]]
+	-- upvalues: Module10 (copy)
+	local NewModule = Module10.new()
 	
 	if self.report ~= nil then
-		var265.report = self.report
+		NewModule.report = self.report
 	end
 	if self.remove ~= nil then
-		var265.remove = self.remove
+		NewModule.remove = self.remove
 	end
-	return var265
+	return NewModule
 end
 
-t_11.descriptor = {
+Module10.descriptor = {
 	name = "BadgeDetailsContent_LocalizedLiterals_OverflowMenu",
 	fullName = "roblox.apppageplatform.badges.v1beta1.OverflowMenu"
 }
-t.BadgeDetailsContent_LocalizedLiterals_OverflowMenu = t_11
-typeRegistryModule.default:register(t.BadgeDetailsContent_LocalizedLiterals_OverflowMenu)
+config.BadgeDetailsContent_LocalizedLiterals_OverflowMenu = Module10
+TypeRegistryModule.default:register(config.BadgeDetailsContent_LocalizedLiterals_OverflowMenu)
 
 return {
-	BadgeDetailsPageRequest = t.BadgeDetailsPageRequest,
-	BadgeDetailsPageResponse = t.BadgeDetailsPageResponse,
-	BadgeDetailsPageV2Response = t.BadgeDetailsPageV2Response,
-	BadgeDetailsPageEntry = t.BadgeDetailsPageEntry,
-	BadgeDetailsContent = t.BadgeDetailsContent,
-	BadgeDetailsContent_LocalizedLiterals = t.BadgeDetailsContent_LocalizedLiterals,
-	BadgeDetailsContent_LocalizedLiterals_InfoTable = t.BadgeDetailsContent_LocalizedLiterals_InfoTable,
-	BadgeDetailsContent_LocalizedLiterals_ActionModule = t.BadgeDetailsContent_LocalizedLiterals_ActionModule,
-	BadgeDetailsContent_LocalizedLiterals_OverflowMenu = t.BadgeDetailsContent_LocalizedLiterals_OverflowMenu
+	BadgeDetailsPageRequest = config.BadgeDetailsPageRequest,
+	BadgeDetailsPageResponse = config.BadgeDetailsPageResponse,
+	BadgeDetailsPageV2Response = config.BadgeDetailsPageV2Response,
+	BadgeDetailsPageEntry = config.BadgeDetailsPageEntry,
+	BadgeDetailsContent = config.BadgeDetailsContent,
+	BadgeDetailsContent_LocalizedLiterals = config.BadgeDetailsContent_LocalizedLiterals,
+	BadgeDetailsContent_LocalizedLiterals_InfoTable = config.BadgeDetailsContent_LocalizedLiterals_InfoTable,
+	BadgeDetailsContent_LocalizedLiterals_ActionModule = config.BadgeDetailsContent_LocalizedLiterals_ActionModule,
+	BadgeDetailsContent_LocalizedLiterals_OverflowMenu = config.BadgeDetailsContent_LocalizedLiterals_OverflowMenu
 }

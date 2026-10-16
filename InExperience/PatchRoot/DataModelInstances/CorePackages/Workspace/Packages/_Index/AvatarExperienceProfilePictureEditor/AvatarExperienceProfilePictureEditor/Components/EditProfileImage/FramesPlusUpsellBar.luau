@@ -1,22 +1,22 @@
-﻿local avatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
-local parent = avatarExperienceProfilePictureEditor.Parent
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local plusSubscribeBannerModule = require(parent.AvatarExperienceCommon.PlusSubscribeBanner)
-local textKeysModule = require(avatarExperienceProfilePictureEditor.Common.TextKeys)
+﻿local AvatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
+local Parent = AvatarExperienceProfilePictureEditor.Parent
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local PlusSubscribeBannerModule = require(Parent.AvatarExperienceCommon.PlusSubscribeBanner)
+local TextKeysModule = require(AvatarExperienceProfilePictureEditor.Common.TextKeys)
 
-return function(p1)
-	-- upvalues: useLocalization (ref), textKeysModule (ref), reactModule (ref), plusSubscribeBannerModule (ref)
-	local var1 = useLocalization({
-		unlockBanner = textKeysModule.ProfileFramesUnlockBanner,
-		subscribe = textKeysModule.Subscribe
+return function(p1) --[[ Line: 20 | Named "FramesPlusUpsellBar" ]]
+	-- upvalues: UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), PlusSubscribeBannerModule (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
+		unlockBanner = TextKeysModule.ProfileFramesUnlockBanner,
+		subscribe = TextKeysModule.Subscribe
 	})
 	
-	return reactModule.createElement(plusSubscribeBannerModule, {
+	return ReactModule.createElement(PlusSubscribeBannerModule, {
 		showPlusIcon = true,
 		testId = "FramesPlusUpsellBar",
-		message = var1.unlockBanner,
-		actionText = p1.actionText or var1.subscribe,
+		message = UseLocalizationResult.unlockBanner,
+		actionText = p1.actionText or UseLocalizationResult.subscribe,
 		onActivated = p1.onSubscribeActivated,
 		LayoutOrder = p1.layoutOrder
 	})

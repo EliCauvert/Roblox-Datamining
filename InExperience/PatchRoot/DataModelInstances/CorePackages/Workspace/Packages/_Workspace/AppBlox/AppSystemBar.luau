@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.AppSystemBar.AppSystemBar)
+﻿return (require(script.Parent.Parent.Parent._Index.AppSystemBar.AppSystemBar))

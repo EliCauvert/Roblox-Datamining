@@ -1,64 +1,65 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
-local reactModule = require(parent.React)
-local reactUtilsModule = require(parent.ReactUtils)
-local foundationModule = require(parent.Foundation)
-local getColorStyleWithTransparencyModule = require(moments.Utils.getColorStyleWithTransparency)
-local fFlagMomentsActionRailSpacingModule = require(moments.Flags.FFlagMomentsActionRailSpacing)
-local icon = foundationModule.Icon
-local text = foundationModule.Text
-local view = foundationModule.View
-local iconSize = foundationModule.Enums.IconSize
-local useTokens = foundationModule.Hooks.useTokens
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
+local ReactModule = require(Parent.React)
+local ReactUtilsModule = require(Parent.ReactUtils)
+local FoundationModule = require(Parent.Foundation)
+local GetColorStyleWithTransparencyModule = require(Moments.Utils.getColorStyleWithTransparency)
+local FFlagMomentsActionRailSpacingModule = require(Moments.Flags.FFlagMomentsActionRailSpacing)
+local Icon = FoundationModule.Icon
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local IconSize = FoundationModule.Enums.IconSize
+local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-local function formatCount(p1, p2)
+local function formatCount(p1: number, IsCountIsCapped): string --[[ Line: 35 ]]
 	if p1 == nil then
 		return ""
+	else
+		local Formatted: string = if p1 >= 1000000 then string.format("%.1fM", p1 / 1000000) elseif p1 >= 1000 then string.format("%.1fK", p1 / 1000) else tostring(p1)
+		
+		return if IsCountIsCapped then `{Formatted}+` else Formatted
 	end
-	local var1 = if p1 >= 1000000 then string.format("%.1fM", p1 / 1000000) elseif p1 >= 1000 then string.format("%.1fK", p1 / 1000) else tostring(p1)
-	
-	return if p2 then `{var1}+` else var1
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactUtilsModule (ref), useTokens (ref), getColorStyleWithTransparencyModule (ref), fFlagMomentsActionRailSpacingModule (ref), reactModule (ref), view (ref), icon (ref), iconSize (ref), text (ref), formatCount (ref)
-	local count = p1.count
-	local var1 = reactUtilsModule.createNextOrder()
-	local var2 = useTokens()
-	local var3 = p1.animationRatio:map(function(p2)
-		-- upvalues: getColorStyleWithTransparencyModule (copy), var2 (ref)
-		return getColorStyleWithTransparencyModule(var2.Color.Content.Emphasis, p2)
+return ReactModule.memo(function(Frame) --[[ Line: 50 | Named "RailItem" ]]
+	-- upvalues: ReactUtilsModule (copy), UseTokensFunction (copy), GetColorStyleWithTransparencyModule (copy), FFlagMomentsActionRailSpacingModule (copy), ReactModule (copy), View (copy), Icon (copy), IconSize (copy), Text (copy), formatCount (copy)
+	local Count = Frame.count
+	local NextOrder = ReactUtilsModule.createNextOrder()
+	local UseTokensResult = UseTokensFunction()
+	local MapResult = Frame.animationRatio:map(function(p1) --[[ Line: 56 ]]
+		-- upvalues: GetColorStyleWithTransparencyModule (upval), UseTokensResult (copy)
+		return GetColorStyleWithTransparencyModule(UseTokensResult.Color.Content.Emphasis, p1)
 	end)
 	
-	return reactModule.createElement(view, {
-		LayoutOrder = p1.LayoutOrder,
-		tag = if fFlagMomentsActionRailSpacingModule then "col align-x-center align-y-center gap-small size-1200-1200 auto-xy radius-medium" else "col align-x-center align-y-center gap-xsmall size-1200-1200 radius-medium",
-		isDisabled = p1.isDisabled,
-		onActivated = p1.onActivated,
-		ref = p1.nativeRef,
-		testId = p1.testId
+	return ReactModule.createElement(View, {
+		LayoutOrder = Frame.LayoutOrder,
+		tag = if FFlagMomentsActionRailSpacingModule then "col align-x-center align-y-center gap-small size-1200-1200 auto-xy radius-medium" else "col align-x-center align-y-center gap-xsmall size-1200-1200 radius-medium",
+		isDisabled = Frame.isDisabled,
+		onActivated = Frame.onActivated,
+		ref = Frame.nativeRef,
+		testId = Frame.testId
 	}, {
-		Slot = if type(p1.slot) == "string" then reactModule.createElement(icon, {
-			LayoutOrder = var1(),
-			name = p1.slot,
-			size = iconSize.Large,
-			style = var3
-		}) else reactModule.createElement(view, {
+		Slot = if type(Frame.slot) == "string" then ReactModule.createElement(Icon, {
+			LayoutOrder = NextOrder(),
+			name = Frame.slot,
+			size = IconSize.Large,
+			style = MapResult
+		}) else ReactModule.createElement(View, {
 			tag = "auto-xy",
-			Active = p1.isDisabled ~= false,
-			LayoutOrder = var1()
-		}, p1.slot),
-		Count = if count then reactModule.createElement(text, {
+			Active = Frame.isDisabled ~= false,
+			LayoutOrder = NextOrder()
+		}, Frame.slot),
+		Count = if Count then ReactModule.createElement(Text, {
 			tag = "auto-xy text-caption-large text-align-x-center content-emphasis",
-			LayoutOrder = var1(),
-			Text = count:map(function(p2)
-				-- upvalues: formatCount (copy), p1 (ref)
-				return formatCount(p2, p1.countIsCapped == true)
+			LayoutOrder = NextOrder(),
+			Text = Count:map(function(p1) --[[ Line: 90 ]]
+				-- upvalues: formatCount (upval), Frame (copy)
+				return (formatCount(p1, Frame.countIsCapped == true))
 			end),
-			Visible = count:map(function(p2)
-				return p2 ~= nil
+			Visible = Count:map(function(p1): boolean --[[ Line: 93 ]]
+				return p1 ~= nil
 			end),
-			textStyle = var3
+			textStyle = MapResult
 		}) else nil
 	})
 end)

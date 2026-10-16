@@ -1,13 +1,15 @@
-﻿local parent = script:FindFirstAncestor("RobloxAppNavigation").Parent
-local reactModule = require(parent.React)
-local useNavigation = require(parent.Navigation).useNavigation
-local useEarlyIsFocused = require(parent.Navigation).useEarlyIsFocused
-local onScreenContextModule = require(script.Parent.OnScreenContext)
+﻿local Parent = script:FindFirstAncestor("RobloxAppNavigation").Parent
+local ReactModule = require(Parent.React)
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local UseEarlyIsFocusedFunction = require(Parent.Navigation).useEarlyIsFocused
+local OnScreenContextModule = require(script.Parent.OnScreenContext)
 
-return function()
-	-- upvalues: useNavigation (ref), reactModule (ref), onScreenContextModule (ref), useEarlyIsFocused (ref)
-	local var1 = useNavigation()
-	local var2 = reactModule.useContext(onScreenContextModule)
+return function() --[[ Line: 9 | Named "useIsRouteOnScreen" ]]
+	-- upvalues: UseNavigationFunction (copy), ReactModule (copy), OnScreenContextModule (copy), UseEarlyIsFocusedFunction (copy)
+	local UseNavigationResult = UseNavigationFunction()
+	local Key = if UseNavigationResult.state then UseNavigationResult.state.key else nil
+	local UseContextResult = ReactModule.useContext(OnScreenContextModule)
+	local UseEarlyIsFocusedResult = UseEarlyIsFocusedFunction()
 	
-	return if var2 == nil or var2.isOnScreen == nil then useEarlyIsFocused() else var2.isOnScreen == true and (if var2.currentRouteKey ~= nil then var2.currentRouteKey == (if var1.state then var1.state.key else nil) else true)
+	return if UseContextResult == nil or UseContextResult.isOnScreen == nil then UseEarlyIsFocusedResult else UseContextResult.isOnScreen == true and (UseContextResult.currentRouteKey == nil or UseContextResult.currentRouteKey == Key)
 end

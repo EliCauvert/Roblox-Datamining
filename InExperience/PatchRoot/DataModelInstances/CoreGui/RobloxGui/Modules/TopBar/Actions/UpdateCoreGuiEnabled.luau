@@ -1,3 +1,5 @@
-﻿return if require(script.Parent.Parent.Flags.FFlagTopBarDeprecateCoreGuiRodux) then nil else require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator(script.Name, function(p1, p2)
-	return { coreGuiType = p1, enabled = p2 }
+﻿local MakeActionCreatorFunction = require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator
+
+return if require(script.Parent.Parent.Flags.FFlagTopBarDeprecateCoreGuiRodux) then nil else MakeActionCreatorFunction(script.Name, function(CoreGuiType, Enabled) --[[ Line: 11 ]]
+	return { coreGuiType = CoreGuiType, enabled = Enabled }
 end)

@@ -1,152 +1,150 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local displayModule = require(parent.Display)
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local sharedFlagsModule = require(parent.SharedFlags)
-local signalsReactModule = require(parent.SignalsReact)
-local UIBloxModule = require(parent.UIBlox)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local fFlagEnableHomeRobloxLogo = sharedFlagsModule.FFlagEnableHomeRobloxLogo
-local headerBar = UIBloxModule.App.Bar.HeaderBar
-local button = foundationModule.Button
-local iconButton = foundationModule.IconButton
-local view = foundationModule.View
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local iconName = foundationModule.Enums.IconName
-local inputSize = foundationModule.Enums.InputSize
-local useScaledValue = foundationModule.Hooks.useScaledValue
-local useTokens = foundationModule.Hooks.useTokens
-local flyoutSidePanelIXP = require(parent.SharedExperimentDefinition).FlyoutSidePanelIXP
-local flyoutLeftHeader = require(parent.FlyoutSidePanel).Components.FlyoutLeftHeader
-local searchBarContainerModule = require(buildExperience.Components.SearchBar.SearchBarContainer)
-local getSearchQueryStoreModule = require(buildExperience.Stores.GetSearchQueryStore)
-local _ = require(buildExperience.Stores.GetSearchQueryStore.createSearchQueryStore)
-local buildSearchBarWidth = game:DefineFastInt("BuildSearchBarWidth", 400)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local DisplayModule = require(Parent.Display)
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
+local FFlagEnableHomeRobloxLogo = require(Parent.SharedFlags).FFlagEnableHomeRobloxLogo
+local HeaderBar = require(Parent.UIBlox).App.Bar.HeaderBar
+local Button = FoundationModule.Button
+local IconButton = FoundationModule.IconButton
+local View = FoundationModule.View
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local IconName = FoundationModule.Enums.IconName
+local InputSize = FoundationModule.Enums.InputSize
+local UseScaledValueFunction = FoundationModule.Hooks.useScaledValue
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local FlyoutSidePanelIXP = require(Parent.SharedExperimentDefinition).FlyoutSidePanelIXP
+local FlyoutLeftHeader = require(Parent.FlyoutSidePanel).Components.FlyoutLeftHeader
+local SearchBarContainerModule = require(BuildExperience.Components.SearchBar.SearchBarContainer)
+local GetSearchQueryStoreModule = require(BuildExperience.Stores.GetSearchQueryStore)
+local _ = require(BuildExperience.Stores.GetSearchQueryStore.createSearchQueryStore)
+local BuildSearchBarWidth = game:DefineFastInt("BuildSearchBarWidth", 400)
 
-local function renderFlyoutLeftHeader(p1)
-	-- upvalues: reactModule (ref), flyoutLeftHeader (ref), fFlagEnableHomeRobloxLogo (ref), flyoutSidePanelIXP (ref)
-	return reactModule.createElement(flyoutLeftHeader, {
+local function renderFlyoutLeftHeader(TitleText) --[[ Line: 42 ]]
+	-- upvalues: ReactModule (copy), FlyoutLeftHeader (copy), FFlagEnableHomeRobloxLogo (copy), FlyoutSidePanelIXP (copy)
+	return ReactModule.createElement(FlyoutLeftHeader, {
 		isRobloxLogoEnabled = false,
-		titleText = p1,
-		isFlyoutEntrypointEnabled = if fFlagEnableHomeRobloxLogo then flyoutSidePanelIXP.isFlyoutSidePanelEnabled() else nil,
-		isAlternateEntryPointEnabled = flyoutSidePanelIXP.isAlternateEntryPointEnabled()
+		titleText = TitleText,
+		isFlyoutEntrypointEnabled = if FFlagEnableHomeRobloxLogo then FlyoutSidePanelIXP.isFlyoutSidePanelEnabled() else nil,
+		isAlternateEntryPointEnabled = FlyoutSidePanelIXP.isAlternateEntryPointEnabled()
 	})
 end
 
-local function renderEmptyRight()
+local function renderEmptyRight() --[[ Line: 56 ]]
 	return nil
 end
 
-local function HeaderSearch(p1)
-	-- upvalues: useScaledValue (ref), buildSearchBarWidth (ref), useTokens (ref), signalsReactModule (ref), useLocalization (ref), reactModule (ref), view (ref), searchBarContainerModule (ref), button (ref), buttonVariant (ref), inputSize (ref)
-	local var1 = useScaledValue(buildSearchBarWidth)
-	local size2200 = useTokens().Size.Size_2200
-	local searchQueryStore = p1.searchQueryStore
-	local var2 = searchQueryStore.useIsSearchActive()
-	local var3 = signalsReactModule.useSignalBinding(searchQueryStore.getDraftQuery)
-	local var4 = useLocalization({
+local function HeaderSearch(p1) --[[ Line: 64 ]]
+	-- upvalues: UseScaledValueFunction (copy), BuildSearchBarWidth (copy), UseTokensFunction (copy), SignalsReactModule (copy), UseLocalizationFunction (copy), ReactModule (copy), View (copy), SearchBarContainerModule (copy), Button (copy), ButtonVariant (copy), InputSize (copy)
+	local UseScaledValueResult = UseScaledValueFunction(BuildSearchBarWidth)
+	local Size2200 = UseTokensFunction().Size.Size_2200
+	local SearchQueryStore = p1.searchQueryStore
+	local UseIsSearchActiveResult = SearchQueryStore.useIsSearchActive()
+	local UseSignalBindingResult = SignalsReactModule.useSignalBinding(SearchQueryStore.getDraftQuery)
+	local UseLocalizationResult = UseLocalizationFunction({
 		searchbarPlaceholder = "Feature.Build.Label.SearchGames",
 		cancelText = "Feature.Build.Action.Cancel"
 	})
-	reactModule.useEffect(function()
-		-- upvalues: searchQueryStore (ref)
-		return function()
-			-- upvalues: searchQueryStore (copy)
-			searchQueryStore.setIsSearchActive(false)
+	ReactModule.useEffect(function() --[[ Line: 77 ]]
+		-- upvalues: SearchQueryStore (copy)
+		return function() --[[ Line: 78 ]]
+			-- upvalues: SearchQueryStore (upval)
+			SearchQueryStore.setIsSearchActive(false)
 		end
-	end, { searchQueryStore })
+	end, { SearchQueryStore })
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "row align-y-center gap-small size-full",
 		testId = "BuildPageHeader.CenterSearchContainer"
 	}, {
-		LeftSpacer = reactModule.createElement(view, { LayoutOrder = 1, tag = "fill size-0-full" }),
-		SearchBarContainer = reactModule.createElement(view, {
+		LeftSpacer = ReactModule.createElement(View, { LayoutOrder = 1, tag = "fill size-0-full" }),
+		SearchBarContainer = ReactModule.createElement(View, {
 			LayoutOrder = 2,
 			tag = "row align-y-center shrink",
-			Size = UDim2.new(0, var1, 1, 0)
+			Size = UDim2.new(0, UseScaledValueResult, 1, 0)
 		}, {
-			SearchBar = reactModule.createElement(searchBarContainerModule, {
-				clear = searchQueryStore.clear,
-				onDismiss = searchQueryStore.endSearch,
-				onFocusGained = searchQueryStore.beginSearch,
-				onFocusLost = searchQueryStore.endSearchIfEmpty,
-				placeholder = var4.searchbarPlaceholder,
-				query = var3,
-				setQuery = searchQueryStore.setQuery
+			SearchBar = ReactModule.createElement(SearchBarContainerModule, {
+				clear = SearchQueryStore.clear,
+				onDismiss = SearchQueryStore.endSearch,
+				onFocusGained = SearchQueryStore.beginSearch,
+				onFocusLost = SearchQueryStore.endSearchIfEmpty,
+				placeholder = UseLocalizationResult.searchbarPlaceholder,
+				query = UseSignalBindingResult,
+				setQuery = SearchQueryStore.setQuery
 			})
 		}),
-		RightContainer = reactModule.createElement(view, {
+		RightContainer = ReactModule.createElement(View, {
 			LayoutOrder = 3,
 			tag = "row align-y-center fill size-0-full"
 		}, {
-			Cancel = if var2 then reactModule.createElement(button, {
+			Cancel = if UseIsSearchActiveResult then ReactModule.createElement(Button, {
 				testId = "BuildPageHeader.SearchCancelButton",
-				width = UDim.new(0, size2200),
-				text = var4.cancelText,
-				variant = buttonVariant.Utility,
-				size = inputSize.Medium,
-				onActivated = searchQueryStore.endSearch
+				width = UDim.new(0, Size2200),
+				text = UseLocalizationResult.cancelText,
+				variant = ButtonVariant.Utility,
+				size = InputSize.Medium,
+				onActivated = SearchQueryStore.endSearch
 			}) else nil
 		})
 	})
 end
 
-local function HeaderCenter(p1)
-	-- upvalues: displayModule (ref), signalsReactModule (ref), reactModule (ref), HeaderSearch (ref), getSearchQueryStoreModule (ref)
-	return if signalsReactModule.useSignalState(displayModule.GetDisplayStore(false).getDisplaySize) == Enum.DisplaySize.Small then nil else reactModule.createElement(HeaderSearch, {
-		searchQueryStore = p1.searchQueryStore or getSearchQueryStoreModule()
+local function HeaderCenter(p1) --[[ Line: 131 ]]
+	-- upvalues: DisplayModule (copy), SignalsReactModule (copy), ReactModule (copy), HeaderSearch (copy), GetSearchQueryStoreModule (copy)
+	return if SignalsReactModule.useSignalState(DisplayModule.GetDisplayStore(false).getDisplaySize) == Enum.DisplaySize.Small then nil else ReactModule.createElement(HeaderSearch, {
+		searchQueryStore = p1.searchQueryStore or GetSearchQueryStoreModule()
 	})
 end
 
-return function(p1)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), flyoutSidePanelIXP (ref), displayModule (ref), signalsReactModule (ref), getSearchQueryStoreModule (ref), reactModule (ref), HeaderCenter (ref), view (ref), iconButton (ref), iconName (ref), inputSize (ref), buttonVariant (ref), renderEmptyRight (ref), headerBar (ref), renderFlyoutLeftHeader (ref)
-	local title = useLocalization({ title = localizationStringsModule.BUILD_HEADER_TITLE }).title
-	local var1 = flyoutSidePanelIXP.isFlyoutSidePanelEnabled()
-	local _ = false
-	local _ = false
-	local _ = nil
-	local var2 = signalsReactModule.useSignalState(displayModule.GetDisplayStore(false).getDisplaySize)
-	local searchQueryStore = p1.searchQueryStore or getSearchQueryStoreModule()
-	local var3 = var2 == Enum.DisplaySize.Small and p1.onOpenSearch ~= nil
+return function(Frame) --[[ Line: 144 | Named "BuildPageHeader" ]]
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), FlyoutSidePanelIXP (copy), DisplayModule (copy), SignalsReactModule (copy), GetSearchQueryStoreModule (copy), ReactModule (copy), HeaderCenter (copy), View (copy), IconButton (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), renderEmptyRight (copy), HeaderBar (copy), renderFlyoutLeftHeader (copy)
+	local Title = UseLocalizationFunction({ title = LocalizationStringsModule.BUILD_HEADER_TITLE }).title
+	local IsFlyoutSidePanelEnabled = FlyoutSidePanelIXP.isFlyoutSidePanelEnabled()
+	local HasOnOpenSearch = false
+	local SearchQueryStore = nil
+	local UseSignalStateResult = SignalsReactModule.useSignalState(DisplayModule.GetDisplayStore(false).getDisplaySize)
+	SearchQueryStore = Frame.searchQueryStore or GetSearchQueryStoreModule()
+	local IsNotUseSignalStateResultMatch = UseSignalStateResult ~= Enum.DisplaySize.Small
+	HasOnOpenSearch = UseSignalStateResult == Enum.DisplaySize.Small and Frame.onOpenSearch ~= nil
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		ZIndex = 3,
 		tag = "composition-content-header size-full-0 auto-y",
 		testId = "BuildPageHeader",
-		LayoutOrder = p1.LayoutOrder,
-		Size = UDim2.new(1, 0, 0, p1.height)
+		LayoutOrder = Frame.LayoutOrder,
+		Size = UDim2.new(1, 0, 0, Frame.height)
 	}, {
-		HeaderBar = reactModule.createElement(headerBar, {
+		HeaderBar = ReactModule.createElement(HeaderBar, {
 			isTitleCentered = false,
-			barHeight = p1.height,
+			barHeight = Frame.height,
 			paddingLeft = UDim.new(0, 0),
 			paddingRight = UDim.new(0, 0),
-			renderLeft = if var1 then function()
-				-- upvalues: renderFlyoutLeftHeader (copy), title (ref)
-				return renderFlyoutLeftHeader(title)
+			renderLeft = if IsFlyoutSidePanelEnabled then function() --[[ Line: 202 ]]
+				-- upvalues: renderFlyoutLeftHeader (upval), Title (copy)
+				return renderFlyoutLeftHeader(Title)
 			end else nil,
-			title = if var1 then nil else title,
-			renderCenter = if var2 ~= Enum.DisplaySize.Small then function()
-				-- upvalues: reactModule (copy), HeaderCenter (copy), searchQueryStore (write)
-				return reactModule.createElement(HeaderCenter, { searchQueryStore = searchQueryStore })
+			title = if IsFlyoutSidePanelEnabled then nil else Title,
+			renderCenter = if IsNotUseSignalStateResultMatch then function() --[[ Line: 159 ]]
+				-- upvalues: ReactModule (upval), HeaderCenter (upval), SearchQueryStore (ref)
+				return ReactModule.createElement(HeaderCenter, { searchQueryStore = SearchQueryStore })
 			end else nil,
-			renderRight = if var3 then function()
-				-- upvalues: reactModule (copy), view (copy), var3 (write), iconButton (copy), iconName (copy), p1 (ref), inputSize (copy), buttonVariant (copy)
-				return reactModule.createElement(view, {
+			renderRight = if HasOnOpenSearch then function() --[[ Line: 167 ]]
+				-- upvalues: ReactModule (upval), View (upval), HasOnOpenSearch (ref), IconButton (upval), IconName (upval), Frame (copy), InputSize (upval), ButtonVariant (upval)
+				return ReactModule.createElement(View, {
 					tag = "row align-y-center gap-medium auto-xy",
 					testId = "BuildPageHeader.RightActions"
 				}, {
-					Search = if var3 then reactModule.createElement(iconButton, {
+					Search = if HasOnOpenSearch then ReactModule.createElement(IconButton, {
 						LayoutOrder = 1,
 						isCircular = true,
 						testId = "BuildPageHeader.SearchButton",
-						icon = iconName.MagnifyingGlass,
-						onActivated = p1.onOpenSearch,
-						size = inputSize.Medium,
-						variant = buttonVariant.Utility
+						icon = IconName.MagnifyingGlass,
+						onActivated = Frame.onOpenSearch,
+						size = InputSize.Medium,
+						variant = ButtonVariant.Utility
 					}) else nil
 				})
 			end else renderEmptyRight

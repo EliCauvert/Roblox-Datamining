@@ -1,15 +1,15 @@
-﻿local chatLineReporting = script:FindFirstAncestor("ChatLineReporting")
-local parent = chatLineReporting.Parent
-local reactModule = require(parent.React)
-local reactOtterModule = require(parent.ReactOtter)
-local foundationModule = require(parent.Foundation)
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useTokens = foundationModule.Hooks.useTokens
-local view = foundationModule.View
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local constantsModule = require(chatLineReporting.Common.Constants)
-local t = {
+﻿local ChatLineReporting = script:FindFirstAncestor("ChatLineReporting")
+local Parent = ChatLineReporting.Parent
+local ReactModule = require(Parent.React)
+local ReactOtterModule = require(Parent.ReactOtter)
+local FoundationModule = require(Parent.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local View = FoundationModule.View
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local ConstantsModule = require(ChatLineReporting.Common.Constants)
+local config = {
 	stiffness = 400,
 	damping = 40,
 	mass = 1,
@@ -17,27 +17,27 @@ local t = {
 	restingVelocityLimit = 0.1
 }
 
-return function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), useLocalization (ref), constantsModule (ref), reactOtterModule (ref), t (ref), view (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
-	local var1 = useTokens()
-	local var2, var3 = reactModule.useState(false)
-	local var4 = useLocalization(constantsModule.ChatLineLocalizationKeys)
-	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), p1 (ref)
-		var3(p1.visible)
+return function(p1) --[[ Line: 32 | Named "ChatLineReportInfo" ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), UseLocalizationFunction (copy), ConstantsModule (copy), ReactOtterModule (copy), config (copy), View (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseLocalizationResult = UseLocalizationFunction(ConstantsModule.ChatLineLocalizationKeys)
+	ReactModule.useEffect(function() --[[ Line: 38 ]]
+		-- upvalues: UseStateResult2 (copy), p1 (copy)
+		UseStateResult2(p1.visible)
 	end, { p1.visible })
-	local var5, var6 = reactOtterModule.useAnimatedBinding(1, function() end)
-	local var7 = reactModule.useMemo(function()
-		-- upvalues: var2 (ref)
-		return if var2 then 0 else 1
-	end, { var2 })
-	reactModule.useEffect(function()
-		-- upvalues: var6 (ref), reactOtterModule (copy), var7 (ref), t (copy)
-		var6(reactOtterModule.spring(var7, t))
-	end, { var7 })
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(1, function() --[[ Line: 42 ]] end)
+	local UseMemoResult = ReactModule.useMemo(function(): number --[[ Line: 44 ]]
+		-- upvalues: UseStateResult (copy)
+		return if UseStateResult then 0 else 1
+	end, { UseStateResult })
+	ReactModule.useEffect(function() --[[ Line: 48 ]]
+		-- upvalues: UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), UseMemoResult (copy), config (upval)
+		UseAnimatedBindingResult2(ReactOtterModule.spring(UseMemoResult, config))
+	end, { UseMemoResult })
 	
-	return reactModule.createElement("TextButton", {
-		Active = var5:map(function(p2)
+	return ReactModule.createElement("TextButton", {
+		Active = UseAnimatedBindingResult:map(function(p2): boolean --[[ Line: 53 ]]
 			return p2 == 0
 		end),
 		AutoButtonColor = false,
@@ -46,35 +46,35 @@ return function(p1)
 		Selectable = false,
 		Size = UDim2.new(1, 0, 1, 0),
 		Text = "",
-		[reactModule.Event.Activated] = function()
-			-- upvalues: var3 (ref)
-			var3(false)
+		[ReactModule.Event.Activated] = function() --[[ Line: 62 ]]
+			-- upvalues: UseStateResult2 (copy)
+			UseStateResult2(false)
 		end,
-		ZIndex = var5:map(function(p2)
+		ZIndex = UseAnimatedBindingResult:map(function(p2: number): number --[[ Line: 66 ]]
 			return (1 - p2) * 4
 		end)
 	}, {
-		InfoTextFrame = reactModule.createElement("Frame", {
+		InfoTextFrame = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			ClipsDescendants = true,
 			ZIndex = 2,
 			AutomaticSize = Enum.AutomaticSize.Y,
-			Size = var5:map(function(p2)
-				return UDim2.new(1, 0, 0, 60):Lerp(UDim2.new(1, 0, 0, 0), p2)
+			Size = UseAnimatedBindingResult:map(function(Alpha) --[[ Line: 74 ]]
+				return UDim2.new(1, 0, 0, 60):Lerp(UDim2.new(1, 0, 0, 0), Alpha)
 			end)
 		}, {
-			InfoTextContainer = reactModule.createElement(view, {
+			InfoTextContainer = ReactModule.createElement(View, {
 				tag = "bg-over-media-0 radius-medium anchor-bottom-left position-bottom-left",
 				Size = UDim2.new(1, 0, 1, -8)
 			}, {
-				InfoText = reactModule.createElement("TextLabel", {
+				InfoText = ReactModule.createElement("TextLabel", {
 					BackgroundTransparency = 1,
 					TextWrapped = true,
-					Font = if foundationFontFaceMigration then nil else var1.Typography.BodySmall.Font,
-					FontFace = if foundationFontFaceMigration then normalizeFontFace(var1.Typography.BodySmall.Font) else nil,
-					Text = var4.InfoTextKey,
-					TextColor3 = var1.Color.Content.Default.Color3,
-					TextSize = var1.Typography.BodySmall.FontSize,
+					Font = if FoundationFontFaceMigration then nil else UseTokensResult.Typography.BodySmall.Font,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.BodySmall.Font) else nil,
+					Text = UseLocalizationResult.InfoTextKey,
+					TextColor3 = UseTokensResult.Color.Content.Default.Color3,
+					TextSize = UseTokensResult.Typography.BodySmall.FontSize,
 					Size = UDim2.new(1, 0, 1, 0)
 				})
 			})

@@ -1,27 +1,32 @@
-﻿local parent = script:FindFirstAncestor("FriendsChat").Parent
-local reactModule = require(parent.React)
-local chatLandingTelemetryLayerModule = require(parent.AppChat.ChatLandingTelemetryLayer)
-local chatLandingTelemetryStateModule = require(parent.AppChat.ChatLandingTelemetryState)
-local useGetAndSetRefModule = require(parent.AppChat.useGetAndSetRef)
+﻿local Parent = script:FindFirstAncestor("FriendsChat").Parent
+local ReactModule = require(Parent.React)
+local ChatLandingTelemetryLayerModule = require(Parent.AppChat.ChatLandingTelemetryLayer)
+local ChatLandingTelemetryStateModule = require(Parent.AppChat.ChatLandingTelemetryState)
+local UseGetAndSetRefModule = require(Parent.AppChat.useGetAndSetRef)
 
-return function(p1)
-	-- upvalues: useGetAndSetRefModule (ref), reactModule (ref), chatLandingTelemetryStateModule (ref), chatLandingTelemetryLayerModule (ref)
-	local var1, var2 = useGetAndSetRefModule({})
+return function(p1) --[[ Line: 20 | Named "FriendsChatLandingTelemetryProviders" ]]
+	-- upvalues: UseGetAndSetRefModule (copy), ReactModule (copy), ChatLandingTelemetryStateModule (copy), ChatLandingTelemetryLayerModule (copy)
+	local UseGetAndSetRefModuleResult, UseGetAndSetRefModuleResult2 = UseGetAndSetRefModule({})
 	
-	return reactModule.createElement(chatLandingTelemetryStateModule.Provider, { value = { get = var1, set = var2 } }, {
-		Layer = reactModule.createElement(chatLandingTelemetryLayerModule.Provider, {
-			value = reactModule.useCallback(function()
-				-- upvalues: var1 (ref)
-				local var3 = var1()
+	return ReactModule.createElement(ChatLandingTelemetryStateModule.Provider, {
+		value = {
+			get = UseGetAndSetRefModuleResult,
+			set = UseGetAndSetRefModuleResult2
+		}
+	}, {
+		Layer = ReactModule.createElement(ChatLandingTelemetryLayerModule.Provider, {
+			value = ReactModule.useCallback(function() --[[ Line: 22 ]]
+				-- upvalues: UseGetAndSetRefModuleResult (copy)
+				local UseGetAndSetRefModuleResultResult = UseGetAndSetRefModuleResult()
 				
 				return {
-					chatLandingListCount = var3.chatLandingListCount,
-					pendingConversationCount = var3.pendingConversationCount,
-					unfilteredConversationCount = var3.unfilteredConversationCount,
-					searchSessionId = var3.searchSessionId,
-					activeFilters = var3.activeFilters
+					chatLandingListCount = UseGetAndSetRefModuleResultResult.chatLandingListCount,
+					pendingConversationCount = UseGetAndSetRefModuleResultResult.pendingConversationCount,
+					unfilteredConversationCount = UseGetAndSetRefModuleResultResult.unfilteredConversationCount,
+					searchSessionId = UseGetAndSetRefModuleResultResult.searchSessionId,
+					activeFilters = UseGetAndSetRefModuleResultResult.activeFilters
 				}
-			end, { var1 })
+			end, { UseGetAndSetRefModuleResult })
 		}, p1.children)
 	})
 end

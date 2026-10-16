@@ -1,1 +1,1 @@
-﻿return require(script.SetAliasModalEntryPoint)
+﻿return (require(script.SetAliasModalEntryPoint))

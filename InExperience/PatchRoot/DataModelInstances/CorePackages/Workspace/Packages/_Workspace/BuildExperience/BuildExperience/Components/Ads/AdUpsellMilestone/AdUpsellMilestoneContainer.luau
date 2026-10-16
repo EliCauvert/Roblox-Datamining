@@ -1,8 +1,8 @@
-﻿local reactModule = require(script:FindFirstAncestor("BuildExperience").Parent.React)
-local adUpsellMilestoneViewModule = require(script.Parent.AdUpsellMilestoneView)
-local useAdUpsellMilestoneViewModelModule = require(script.Parent.useAdUpsellMilestoneViewModel)
+﻿local ReactModule = require(script:FindFirstAncestor("BuildExperience").Parent.React)
+local AdUpsellMilestoneViewModule = require(script.Parent.AdUpsellMilestoneView)
+local UseAdUpsellMilestoneViewModelModule = require(script.Parent.useAdUpsellMilestoneViewModel)
 
-return function(p1)
-	-- upvalues: useAdUpsellMilestoneViewModelModule (ref), reactModule (ref), adUpsellMilestoneViewModule (ref)
-	return reactModule.createElement(adUpsellMilestoneViewModule, useAdUpsellMilestoneViewModelModule(p1))
+return function(p1) --[[ Line: 11 | Named "AdUpsellMilestoneContainer" ]]
+	-- upvalues: UseAdUpsellMilestoneViewModelModule (copy), ReactModule (copy), AdUpsellMilestoneViewModule (copy)
+	return ReactModule.createElement(AdUpsellMilestoneViewModule, (UseAdUpsellMilestoneViewModelModule(p1)))
 end

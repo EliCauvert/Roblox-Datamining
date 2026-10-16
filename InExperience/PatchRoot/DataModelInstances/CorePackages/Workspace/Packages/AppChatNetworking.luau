@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.AppChatNetworking.AppChatNetworking)
+﻿return (require(script.Parent._Workspace.AppChatNetworking.AppChatNetworking))

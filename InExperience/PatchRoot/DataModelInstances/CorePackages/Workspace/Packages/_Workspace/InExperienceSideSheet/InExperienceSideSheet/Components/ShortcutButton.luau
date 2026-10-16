@@ -1,79 +1,82 @@
-﻿local inExperienceSideSheet = script:FindFirstAncestor("InExperienceSideSheet")
-local parent = inExperienceSideSheet.Parent
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local foundationModule = require(parent.Foundation)
-local useTokens = foundationModule.Hooks.useTokens
-local isBuilderIcon = foundationModule.Utility.isBuilderIcon
-local icon = foundationModule.Icon
-local iconSize = foundationModule.Enums.IconSize
-local text = foundationModule.Text
-local view = foundationModule.View
-local buttonWidth = require(inExperienceSideSheet.Common.Enums).ButtonWidth
-local var1 = signalsModule.createSignal(nil)
+﻿local InExperienceSideSheet = script:FindFirstAncestor("InExperienceSideSheet")
+local Parent = InExperienceSideSheet.Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local FoundationModule = require(Parent.Foundation)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local IsBuilderIconFunction = FoundationModule.Utility.isBuilderIcon
+local Icon = FoundationModule.Icon
+local IconSize = FoundationModule.Enums.IconSize
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local ButtonWidth = require(InExperienceSideSheet.Common.Enums).ButtonWidth
+local Signal = require(Parent.Signals).createSignal(nil)
 
-local _ = function(p1)
+local function _(p1: number): number --[[ Line: 28 ]]
 	return p1 + (1 - p1) * 0.5
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), useLocalization (ref), signalsReactModule (ref), var1 (ref), reactModule (ref), iconSize (ref), isBuilderIcon (ref), buttonWidth (ref), view (ref), icon (ref), text (ref)
-	local var2 = useTokens()
-	local var3 = useLocalization({ label = p1.label })
-	local var4 = signalsReactModule.useSignalState(p1.getIsEnabled)
-	local var5 = signalsReactModule.useSignalState(p1.getShortcutIcon or var1)
-	local var6 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref)
+return ReactModule.memo(function(p1) --[[ Line: 41 | Named "ShortcutButton" ]]
+	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), SignalsReactModule (copy), Signal (copy), ReactModule (copy), IconSize (copy), IsBuilderIconFunction (copy), ButtonWidth (copy), View (copy), Icon (copy), Text (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseLocalizationResult = UseLocalizationFunction({ label = p1.label })
+	local UseSignalStateResult = SignalsReactModule.useSignalState(p1.getIsEnabled)
+	local UseSignalStateResult1 = SignalsReactModule.useSignalState(p1.getShortcutIcon or Signal)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 52 ]]
+		-- upvalues: p1 (copy)
 		p1.getOnActivated()()
 	end, { p1.getOnActivated })
-	local medium = iconSize.Medium
-	local xSmall = var2.Gap.XSmall
+	local Medium = IconSize.Medium
+	local XSmall = UseTokensResult.Gap.XSmall
 	
-	if isBuilderIcon(var5) then
-		medium = iconSize.XLarge
-		xSmall = var2.Gap.Small
+	if IsBuilderIconFunction(UseSignalStateResult1) then
+		Medium = IconSize.XLarge
+		XSmall = UseTokensResult.Gap.Small
 	end
-	local var7
-	local background = var2.Color.ActionStandard.Background
-	local foreground = var2.Color.ActionStandard.Foreground
-	local var8 = (p1.width or buttonWidth.Full) == buttonWidth.Full
-	local createElement = reactModule.createElement
-	local t = {
+	local Background = UseTokensResult.Color.ActionStandard.Background
+	local Foreground = UseTokensResult.Color.ActionStandard.Foreground
+	local IsFullMatch = (p1.width or ButtonWidth.Full) == ButtonWidth.Full
+	local CreateElementFunction = ReactModule.createElement
+	local config = {
 		tag = {
 			["row align-x-center align-y-center gap-small radius-medium bg-action-standard"] = true,
-			["size-full-1000"] = var8,
-			["fill size-0-1000"] = not var8
+			["size-full-1000"] = IsFullMatch,
+			["fill size-0-1000"] = not IsFullMatch
 		},
 		layout = {
 			FillDirection = Enum.FillDirection.Horizontal,
-			Padding = UDim.new(0, xSmall)
+			Padding = UDim.new(0, XSmall)
 		},
-		isDisabled = not var4
+		isDisabled = not UseSignalStateResult
 	}
-	local t_1 = { Color3 = background.Color3 }
+	local BackgroundStyle = { Color3 = Background.Color3 }
+	local Transparency = nil
 	
-	if var4 then
-		var7 = background.Transparency
+	if UseSignalStateResult then
+		Transparency = Background.Transparency
 	else
-		local transparency = background.Transparency
-		var7 = transparency + (1 - transparency) * 0.5
+		local Transparency1: number = Background.Transparency
+		Transparency = Transparency1 + (1 - Transparency1) * 0.5
 	end
-	t_1.Transparency = var7
-	t.backgroundStyle = t_1
-	t.onActivated = var6
-	t.LayoutOrder = p1.layoutOrder
+	BackgroundStyle.Transparency = Transparency
+	config.backgroundStyle = BackgroundStyle
+	config.onActivated = UseResult
+	config.LayoutOrder = p1.layoutOrder
 	
-	return createElement(view, t, {
-		ShortcutIcon = if var5 then reactModule.createElement(icon, { LayoutOrder = 1, name = var5, size = medium }) else nil,
-		Text = reactModule.createElement(text, {
+	return CreateElementFunction(View, config, {
+		ShortcutIcon = if UseSignalStateResult1 then ReactModule.createElement(Icon, {
+			LayoutOrder = 1,
+			name = UseSignalStateResult1,
+			size = Medium
+		}) else nil,
+		Text = ReactModule.createElement(Text, {
 			tag = "auto-x text-label-medium content-action-standard",
 			LayoutOrder = 2,
-			Text = var3.label,
+			Text = UseLocalizationResult.label,
 			textStyle = {
-				Color3 = foreground.Color3,
-				Transparency = if var4 then foreground.Transparency else 0.5
+				Color3 = Foreground.Color3,
+				Transparency = if UseSignalStateResult then Foreground.Transparency else 0.5
 			}
 		})
 	})

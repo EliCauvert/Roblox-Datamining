@@ -1,11 +1,11 @@
-﻿local navigationContextModule = require(script.views.NavigationContext)
+﻿local NavigationContextModule = require(script.views.NavigationContext)
 
 return {
 	createAppContainer = require(script.createAppContainer).createAppContainer,
 	getNavigation = require(script.getNavigation),
-	Context = navigationContextModule,
-	Provider = navigationContextModule.Provider,
-	Consumer = navigationContextModule.Consumer,
+	Context = NavigationContextModule,
+	Provider = NavigationContextModule.Provider,
+	Consumer = NavigationContextModule.Consumer,
 	withNavigation = require(script.views.withNavigation),
 	withNavigationFocus = require(script.views.withNavigationFocus),
 	createRobloxStackNavigator = require(script.navigators.createRobloxStackNavigator),

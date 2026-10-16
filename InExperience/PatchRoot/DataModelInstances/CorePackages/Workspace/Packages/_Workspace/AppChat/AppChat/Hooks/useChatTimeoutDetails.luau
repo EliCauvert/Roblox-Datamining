@@ -1,66 +1,67 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local appChatNetworkingModule = require(parent.AppChatNetworking)
-local _ = require(appChat.installReducer.ChatTimeouts)
-local reactModule = require(parent.React)
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local getDeepValue2Module = require(appChat.Utils.getDeepValue2)
-local luauPolyfillModule = require(parent.LuauPolyfill)
-local clearTimeout = luauPolyfillModule.clearTimeout
-local setTimeout = luauPolyfillModule.setTimeout
-local _ = require(appChat.Models.ConversationChannels)
-local currentConversationTimeoutEndedModule = require(appChat.Conversations.Actions.CurrentConversationTimeoutEnded)
-local getEffectiveChatTimeoutDetailsModule = require(appChat.Utils.getEffectiveChatTimeoutDetails)
-local fFlagAppChatReactiveFeatureRestrictions = require(parent.SharedFlags).FFlagAppChatReactiveFeatureRestrictions
-local name = require(appChat.Logger):new(script.Name)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local AppChatNetworkingModule = require(Parent.AppChatNetworking)
+local _ = require(AppChat.installReducer.ChatTimeouts)
+local ReactModule = require(Parent.React)
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local GetDeepValue2Module = require(AppChat.Utils.getDeepValue2)
+local LuauPolyfillModule = require(Parent.LuauPolyfill)
+local ClearTimeoutFunction = LuauPolyfillModule.clearTimeout
+local SetTimeoutFunction = LuauPolyfillModule.setTimeout
+local _ = require(AppChat.Models.ConversationChannels)
+local CurrentConversationTimeoutEndedModule = require(AppChat.Conversations.Actions.CurrentConversationTimeoutEnded)
+local GetEffectiveChatTimeoutDetailsModule = require(AppChat.Utils.getEffectiveChatTimeoutDetails)
+local FFlagAppChatReactiveFeatureRestrictions = require(Parent.SharedFlags).FFlagAppChatReactiveFeatureRestrictions
+local NewResult = require(AppChat.Logger):new(script.Name)
 
-return function(p1)
-	-- upvalues: useDispatch (ref), useSelector (ref), getDeepValue2Module (ref), getEffectiveChatTimeoutDetailsModule (ref), reactModule (ref), fFlagAppChatReactiveFeatureRestrictions (ref), setTimeout (ref), appChatNetworkingModule (ref), name (ref), currentConversationTimeoutEndedModule (ref), clearTimeout (ref)
-	local conversationId = p1.conversationId
-	local var1 = useDispatch()
-	local var2 = useSelector(function(p2)
-		-- upvalues: getDeepValue2Module (copy), conversationId (ref)
+return function(p1) --[[ Line: 26 | Named "useChatTimeoutDetails" ]]
+	-- upvalues: UseDispatchFunction (copy), UseSelectorFunction (copy), GetDeepValue2Module (copy), GetEffectiveChatTimeoutDetailsModule (copy), ReactModule (copy), FFlagAppChatReactiveFeatureRestrictions (copy), SetTimeoutFunction (copy), AppChatNetworkingModule (copy), NewResult (copy), CurrentConversationTimeoutEndedModule (copy), ClearTimeoutFunction (copy)
+	local ConversationId = p1.conversationId
+	local UseDispatchResult = UseDispatchFunction()
+	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 29 ]]
+		-- upvalues: GetDeepValue2Module (upval), ConversationId (copy)
 		return {
-			userTimeout = getDeepValue2Module(p2, "ChatAppReducer.ChatTimeouts.userTimeout"),
-			conversationTimeout = getDeepValue2Module(p2, `ChatAppReducer.ChatTimeouts.byConversationId.{conversationId}`)
+			userTimeout = GetDeepValue2Module(p2, "ChatAppReducer.ChatTimeouts.userTimeout"),
+			conversationTimeout = GetDeepValue2Module(p2, `ChatAppReducer.ChatTimeouts.byConversationId.{ConversationId}`)
 		}
 	end)
-	local var3 = getEffectiveChatTimeoutDetailsModule(var2.userTimeout, var2.conversationTimeout, p1.conversationModerationType, DateTime.now().UnixTimestamp)
-	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), fFlagAppChatReactiveFeatureRestrictions (copy), setTimeout (copy), var1 (ref), appChatNetworkingModule (copy), conversationId (ref), name (copy), currentConversationTimeoutEndedModule (copy), clearTimeout (copy)
-		local var4 = nil
+	local EffectiveChatTimeoutDetailsModule = GetEffectiveChatTimeoutDetailsModule(UseSelectorResult.userTimeout, UseSelectorResult.conversationTimeout, p1.conversationModerationType, DateTime.now().UnixTimestamp)
+	ReactModule.useEffect(function() --[[ Line: 43 ]]
+		-- upvalues: EffectiveChatTimeoutDetailsModule (copy), FFlagAppChatReactiveFeatureRestrictions (upval), SetTimeoutFunction (upval), UseDispatchResult (copy), AppChatNetworkingModule (upval), ConversationId (copy), NewResult (upval), CurrentConversationTimeoutEndedModule (upval), ClearTimeoutFunction (upval)
+		local v1 = nil
 		
-		if var3.isTimedOut then
-			local unixTimestamp = DateTime.now().UnixTimestamp
+		if EffectiveChatTimeoutDetailsModule.isTimedOut then
+			local UnixTimestamp = DateTime.now().UnixTimestamp
 			
-			if not fFlagAppChatReactiveFeatureRestrictions or unixTimestamp < var3.timeoutEndTimestamp then
-				var4 = setTimeout(function()
-					-- upvalues: fFlagAppChatReactiveFeatureRestrictions (copy), var1 (copy), appChatNetworkingModule (copy), conversationId (copy), name (copy), currentConversationTimeoutEndedModule (copy)
-					if fFlagAppChatReactiveFeatureRestrictions then
-						var1(appChatNetworkingModule.rodux.GetChatModerationStatuses.API(if conversationId then { conversationId } else nil)):catch(function()
-							-- upvalues: name (copy)
-							name:warning("Failed to refresh expired Party Chat restriction")
+			if not FFlagAppChatReactiveFeatureRestrictions or UnixTimestamp < EffectiveChatTimeoutDetailsModule.timeoutEndTimestamp then
+				v1 = SetTimeoutFunction(function() --[[ Line: 48 ]]
+					-- upvalues: FFlagAppChatReactiveFeatureRestrictions (upval), UseDispatchResult (upval), AppChatNetworkingModule (upval), ConversationId (upval), NewResult (upval), CurrentConversationTimeoutEndedModule (upval)
+					if FFlagAppChatReactiveFeatureRestrictions then
+						UseDispatchResult(AppChatNetworkingModule.rodux.GetChatModerationStatuses.API(if ConversationId then { ConversationId } else nil)):catch(function() --[[ Line: 54 ]]
+							-- upvalues: NewResult (upval)
+							NewResult:warning("Failed to refresh expired Party Chat restriction")
 						end)
 						
 						return
+					else
+						UseDispatchResult(CurrentConversationTimeoutEndedModule(ConversationId))
 					end
-					var1(currentConversationTimeoutEndedModule(conversationId))
-				end, (var3.timeoutEndTimestamp - unixTimestamp + 1) * 1000)
+				end, (EffectiveChatTimeoutDetailsModule.timeoutEndTimestamp - UnixTimestamp + 1) * 1000)
 			end
 		end
-		return function()
-			-- upvalues: var4 (write), clearTimeout (copy)
-			if var4 then
-				clearTimeout(var4)
+		return function() --[[ Line: 63 ]]
+			-- upvalues: v1 (ref), ClearTimeoutFunction (upval)
+			if v1 then
+				ClearTimeoutFunction(v1)
 			end
 		end
 	end, {
-		var3.isTimedOut,
-		var3.timeoutEndTimestamp,
-		conversationId,
-		var1
+		EffectiveChatTimeoutDetailsModule.isTimedOut,
+		EffectiveChatTimeoutDetailsModule.timeoutEndTimestamp,
+		ConversationId,
+		UseDispatchResult
 	})
 	
-	return var3
+	return EffectiveChatTimeoutDetailsModule
 end

@@ -1,59 +1,64 @@
-﻿local userList = script:FindFirstAncestor("UserList")
-local parent = userList.Parent
-local reactModule = require(parent.React)
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local networkingPresenceModule = require(userList.Networking.NetworkingPresence)
-local fFlagUserListPresenceStoreMigrationModule = require(userList.Flags.FFlagUserListPresenceStoreMigration)
-local view = require(parent.Foundation).View
-local navigateDown = require(parent.NavigationRodux).Thunks.NavigateDown
-local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
-local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
-local appPage = require(parent.RobloxAppEnums).AppPage
-local constantsModule = require(userList.Common.Constants)
-local userRowWrapperModule = require(script.Parent.UserRowWrapper)
+﻿local UserList = script:FindFirstAncestor("UserList")
+local Parent = UserList.Parent
+local ReactModule = require(Parent.React)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local NetworkingPresenceModule = require(UserList.Networking.NetworkingPresence)
+local FFlagUserListPresenceStoreMigrationModule = require(UserList.Flags.FFlagUserListPresenceStoreMigration)
+local View = require(Parent.Foundation).View
+local NavigateDownFunction = require(Parent.NavigationRodux).Thunks.NavigateDown
+local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3Dispatch
+local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local ConstantsModule = require(UserList.Common.Constants)
+local UserRowWrapperModule = require(script.Parent.UserRowWrapper)
 
-return function(p1)
-	-- upvalues: useDispatch (ref), reactModule (ref), appPage (ref), constantsModule (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), fFlagUserListPresenceStoreMigrationModule (ref), networkingPresenceModule (ref), view (ref), userRowWrapperModule (ref)
-	local var2 = useDispatch()
-	local var3 = reactModule.useCallback(function(p2)
-		-- upvalues: p1 (ref), appPage (copy), constantsModule (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var2 (ref), navigateDown (copy)
+return function(p1) --[[ Line: 26 | Named "UserList" ]]
+	-- upvalues: UseDispatchFunction (copy), ReactModule (copy), AppPage (copy), ConstantsModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), FFlagUserListPresenceStoreMigrationModule (copy), NetworkingPresenceModule (copy), View (copy), UserRowWrapperModule (copy)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseResult = ReactModule.useCallback(function(Detail) --[[ Line: 29 ]]
+		-- upvalues: p1 (copy), AppPage (upval), ConstantsModule (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval)
 		if p1.onUserSelected then
-			p1.onUserSelected(p2)
+			p1.onUserSelected(Detail)
 			
 			return
 		end
-		local t = {
-			name = appPage.ProfilePlatform,
-			detail = p2,
-			extraProps = { profileType = constantsModule.PROFILE_TYPE }
+		local config = {
+			name = AppPage.ProfilePlatform,
+			detail = Detail,
+			extraProps = { profileType = ConstantsModule.PROFILE_TYPE }
 		}
 		
-		if fFlagSignalsNavP3Dispatch then
-			var1.down(var1.fromLegacyPage(t))
+		if FFlagSignalsNavP3Dispatch then
+			NavigationCommands.down(NavigationCommands.fromLegacyPage(config))
 			
 			return
+		else
+			UseDispatchResult(NavigateDownFunction(config))
 		end
-		var2(navigateDown(t))
-	end, { p1.onUserSelected, var2 })
-	reactModule.useEffect(function()
-		-- upvalues: fFlagUserListPresenceStoreMigrationModule (copy), p1 (ref), var2 (ref), networkingPresenceModule (copy)
-		if not fFlagUserListPresenceStoreMigrationModule and #p1.userIds > 0 then
-			var2(networkingPresenceModule.GetPresencesFromUserIds.API(p1.userIds))
+	end, { p1.onUserSelected, UseDispatchResult })
+	ReactModule.useEffect(function() --[[ Line: 50 ]]
+		-- upvalues: FFlagUserListPresenceStoreMigrationModule (upval), p1 (copy), UseDispatchResult (copy), NetworkingPresenceModule (upval)
+		if not FFlagUserListPresenceStoreMigrationModule and #p1.userIds > 0 then
+			UseDispatchResult(NetworkingPresenceModule.GetPresencesFromUserIds.API(p1.userIds))
 		end
 	end, { p1.userIds })
 	
-	return if #p1.userIds == 0 then nil else reactModule.createElement(view, {
+	return if #p1.userIds == 0 then nil else ReactModule.createElement(View, {
 		tag = "size-full-0 auto-y col gap-large",
 		LayoutOrder = p1.layoutOrder or 0
 	}, {
-		UserRows = reactModule.createElement(reactModule.Fragment, {}, unpack(reactModule.useMemo(function()
-			-- upvalues: p1 (ref), reactModule (copy), userRowWrapperModule (copy), var3 (ref)
-			local t = {}
+		UserRows = ReactModule.createElement(ReactModule.Fragment, {}, unpack(ReactModule.useMemo(function() --[[ Line: 67 ]]
+			-- upvalues: p1 (copy), ReactModule (upval), UserRowWrapperModule (upval), UseResult (copy)
+			local Elements = {}
 			
-			for i, v in ipairs(p1.userIds) do
-				t[i] = reactModule.createElement(userRowWrapperModule, { userId = v, LayoutOrder = i, onActivated = var3 })
+			for LayoutOrder, userId in ipairs(p1.userIds) do
+				Elements[LayoutOrder] = ReactModule.createElement(UserRowWrapperModule, {
+					userId = userId,
+					LayoutOrder = LayoutOrder,
+					onActivated = UseResult
+				})
 			end
-			return t
+			return Elements
 		end, { p1.userIds })))
 	})
 end

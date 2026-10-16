@@ -1,128 +1,129 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local creatorAgentChatModule = require(parent.DataHydration.CreatorAgentChat)
-local fFlagBuildExperiencePersistPlaytestLogsModule = require(buildExperience.Flags.FFlagBuildExperiencePersistPlaytestLogs)
-local chatConstantsModule = require(script.Parent.chatConstants)
-local clientLogsCollectorModule = require(script.Parent.clientLogsCollector)
-local toolControllerUtilsModule = require(script.Parent.toolControllerUtils)
-local studioClientLogsTool = creatorAgentChatModule.StudioClientLogsTool
-local debug = creatorAgentChatModule.debug
-local awaitRequestState = toolControllerUtilsModule.awaitRequestState
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local CreatorAgentChatModule = require(Parent.DataHydration.CreatorAgentChat)
+local FFlagBuildExperiencePersistPlaytestLogsModule = require(BuildExperience.Flags.FFlagBuildExperiencePersistPlaytestLogs)
+local ChatConstantsModule = require(script.Parent.chatConstants)
+local ClientLogsCollectorModule = require(script.Parent.clientLogsCollector)
+local StudioClientLogsTool = CreatorAgentChatModule.StudioClientLogsTool
+local Debug = CreatorAgentChatModule.debug
+local AwaitRequestStateFunction = require(script.Parent.toolControllerUtils).awaitRequestState
 
-local function _(p1)
-	return if typeof(p1) == "table" then if typeof(p1.reason) == "string" and p1.reason ~= "" then p1.reason else nil else nil
+local function _(p1) --[[ Line: 34 | Named "getClientLogsReason" ]]
+	return if typeof(p1) == "table" and (typeof(p1.reason) == "string" and p1.reason ~= "") then p1.reason else nil
 end
 
-local function fetchLatestSavedVersion(p1)
-	-- upvalues: parent (ref)
-	if p1 == nil then
+local function fetchLatestSavedVersion(PlaceId) --[[ Line: 41 ]]
+	-- upvalues: Parent (copy)
+	if PlaceId == nil then
 		return nil
 	end
-	local var1, var2 = require(parent.DataHydration.PlaceVersionHistory).getPlaceVersionHistoryStore().fetchPageHistory(p1):await()
+	local v1, v2 = require(Parent.DataHydration.PlaceVersionHistory).getPlaceVersionHistoryStore().fetchPageHistory(PlaceId):await()
 	
-	if not var1 or typeof(var2) ~= "table" or typeof(var2.placeVersions) ~= "table" then
-		return nil
-	end
-	local var3 = var2.placeVersions[1]
-	
-	return if typeof(var3) == "table" then tonumber(var3.version) else nil
-end
-
-return function(p1, p2, p3)
-	-- upvalues: debug (ref), fFlagBuildExperiencePersistPlaytestLogsModule (ref), fetchLatestSavedVersion (ref), clientLogsCollectorModule (ref), awaitRequestState (ref), chatConstantsModule (ref), studioClientLogsTool (ref)
-	local function _()
-		-- upvalues: p3 (ref)
-		return if p3 ~= nil then p3() else true
-	end
-	
-	local function submitClientLogsResult(p4)
-		-- upvalues: debug (copy), fFlagBuildExperiencePersistPlaytestLogsModule (copy), fetchLatestSavedVersion (copy), p1 (ref), p3 (ref), p2 (ref), clientLogsCollectorModule (copy), awaitRequestState (copy), chatConstantsModule (copy)
-		local var1
-		debug.log("info", "ask_for_logs tool_result collecting", {
-			sessionId = p4.sessionId,
-			toolCallId = p4.toolCallId,
-			turnId = p4.turnId,
-			referenceId = p4.referenceId,
-			reason = p4.reason
-		})
-		local processTime = os.clock()
-		local _ = nil
+	if v1 and typeof(v2) == "table" and typeof(v2.placeVersions) == "table" then
+		local PlaceVersion = v2.placeVersions[1]
 		
-		if fFlagBuildExperiencePersistPlaytestLogsModule then
-			local var2 = fetchLatestSavedVersion(p1.placeId)
+		return if typeof(PlaceVersion) == "table" then tonumber(PlaceVersion.version) else nil
+	else
+		return nil
+	end
+end
+
+return function(p1, p2, Callback) --[[ Line: 58 | Named "createClientLogsController" ]]
+	-- upvalues: Debug (copy), FFlagBuildExperiencePersistPlaytestLogsModule (copy), fetchLatestSavedVersion (copy), ClientLogsCollectorModule (copy), AwaitRequestStateFunction (copy), ChatConstantsModule (copy), StudioClientLogsTool (copy)
+	local function _() --[[ Line: 63 | Named "canHandleClientLogs" ]]
+		-- upvalues: Callback (copy)
+		return Callback == nil or Callback()
+	end
+	
+	local function submitClientLogsResult(p3) --[[ Line: 67 ]]
+		-- upvalues: Debug (upval), FFlagBuildExperiencePersistPlaytestLogsModule (upval), fetchLatestSavedVersion (upval), p1 (copy), Callback (copy), p2 (copy), ClientLogsCollectorModule (upval), AwaitRequestStateFunction (upval), ChatConstantsModule (upval)
+		Debug.log("info", "ask_for_logs tool_result collecting", {
+			sessionId = p3.sessionId,
+			toolCallId = p3.toolCallId,
+			turnId = p3.turnId,
+			referenceId = p3.referenceId,
+			reason = p3.reason
+		})
+		local ClockTime = os.clock()
+		local CollectToolResultContentResult = nil
+		
+		if FFlagBuildExperiencePersistPlaytestLogsModule then
+			local LatestSavedVersion = fetchLatestSavedVersion(p1.placeId)
 			
-			if not (if p3 ~= nil then p3() else true) then
-				p2[p4.toolCallId] = nil
+			if Callback ~= nil and not Callback() then
+				p2[p3.toolCallId] = nil
 				
 				return
 			end
-			var1 = clientLogsCollectorModule.collectToolResultContent({
+			CollectToolResultContentResult = ClientLogsCollectorModule.collectToolResultContent({
 				universeId = p1.universeId,
 				placeId = p1.placeId,
-				minimumPlaceVersion = var2
+				minimumPlaceVersion = LatestSavedVersion
 			})
 		else
-			var1 = clientLogsCollectorModule.collectToolResultContent()
+			CollectToolResultContentResult = ClientLogsCollectorModule.collectToolResultContent()
 		end
-		local floored = math.floor((os.clock() - processTime) * 1000 + 0.5)
-		local var3 = p1.submitActiveToolResult(var1, false, p4.turnId, p4.referenceId)
+		local Floored = math.floor((os.clock() - ClockTime) * 1000 + 0.5)
+		local SubmitActiveToolResultResult = p1.submitActiveToolResult(CollectToolResultContentResult, false, p3.turnId, p3.referenceId)
 		
-		if var3 == nil then
-			debug.log("warn", "ask_for_logs tool_result submit aborted (no active session)", { toolCallId = p4.toolCallId, collectDurationMs = floored })
+		if SubmitActiveToolResultResult == nil then
+			Debug.log("warn", "ask_for_logs tool_result submit aborted (no active session)", { toolCallId = p3.toolCallId, collectDurationMs = Floored })
 			
 			return
 		end
-		local var4 = awaitRequestState(var3.state, os.clock() + chatConstantsModule.CAS_RPC_TIMEOUT_SECONDS)
-		local floored_1 = math.floor((os.clock() - os.clock()) * 1000 + 0.5)
+		local AwaitRequestStateResult = AwaitRequestStateFunction(SubmitActiveToolResultResult.state, os.clock() + ChatConstantsModule.CAS_RPC_TIMEOUT_SECONDS)
+		local Floored1 = math.floor((os.clock() - os.clock()) * 1000 + 0.5)
 		
-		if var4.status == "succeeded" then
-			debug.log("info", "ask_for_logs tool_result submitted", {
-				sessionId = p4.sessionId,
-				toolCallId = p4.toolCallId,
-				turnId = p4.turnId,
-				referenceId = p4.referenceId,
-				collectDurationMs = floored,
-				submitDurationMs = floored_1
+		if AwaitRequestStateResult.status == "succeeded" then
+			Debug.log("info", "ask_for_logs tool_result submitted", {
+				sessionId = p3.sessionId,
+				toolCallId = p3.toolCallId,
+				turnId = p3.turnId,
+				referenceId = p3.referenceId,
+				collectDurationMs = Floored,
+				submitDurationMs = Floored1
 			})
 			
 			return
+		else
+			Debug.log("warn", "ask_for_logs tool_result submit failed", {
+				sessionId = p3.sessionId,
+				toolCallId = p3.toolCallId,
+				turnId = p3.turnId,
+				referenceId = p3.referenceId,
+				collectDurationMs = Floored,
+				submitDurationMs = Floored1,
+				state = Debug.formatRequestState(AwaitRequestStateResult)
+			})
 		end
-		debug.log("warn", "ask_for_logs tool_result submit failed", {
-			sessionId = p4.sessionId,
-			toolCallId = p4.toolCallId,
-			turnId = p4.turnId,
-			referenceId = p4.referenceId,
-			collectDurationMs = floored,
-			submitDurationMs = floored_1,
-			state = debug.formatRequestState(var4)
-		})
 	end
 	
 	return {
-		syncClientLogsRequest = function(p4)
-			-- upvalues: p3 (ref), studioClientLogsTool (copy), p2 (ref), submitClientLogsResult (ref)
-			if not (if p3 ~= nil then p3() else true) then
+		syncClientLogsRequest = function(p3): boolean --[[ Line: 129 ]]
+			-- upvalues: Callback (copy), StudioClientLogsTool (upval), p2 (copy), submitClientLogsResult (copy)
+			if Callback ~= nil and not Callback() then
 				return false
 			end
-			local var1, var2, var3, var4 = studioClientLogsTool.findClientLogsRequestInTurnState(p4, p2)
+			local ClientLogsRequestInTurnState, ClientLogsRequestInTurnState2, ClientLogsRequestInTurnState3, ClientLogsRequestInTurnState4 = StudioClientLogsTool.findClientLogsRequestInTurnState(p3, p2)
 			
-			if var1 == nil then
+			if ClientLogsRequestInTurnState == nil then
 				return false
+			else
+				p2[ClientLogsRequestInTurnState] = true
+				local config = {
+					sessionId = p3.sessionId,
+					toolCallId = ClientLogsRequestInTurnState,
+					turnId = ClientLogsRequestInTurnState3,
+					referenceId = ClientLogsRequestInTurnState4,
+					reason = if typeof(ClientLogsRequestInTurnState2) == "table" and (typeof(ClientLogsRequestInTurnState2.reason) == "string" and ClientLogsRequestInTurnState2.reason ~= "") then ClientLogsRequestInTurnState2.reason else nil
+				}
+				task.spawn(function() --[[ Line: 148 ]]
+					-- upvalues: submitClientLogsResult (upval), config (copy)
+					submitClientLogsResult(config)
+				end)
+				
+				return true
 			end
-			p2[var1] = true
-			local t = {
-				sessionId = p4.sessionId,
-				toolCallId = var1,
-				turnId = var3,
-				referenceId = var4,
-				reason = if typeof(var2) ~= "table" then if typeof(var2.reason) == "string" and var2.reason ~= "" then var2.reason else nil else nil
-			}
-			task.spawn(function()
-				-- upvalues: submitClientLogsResult (copy), t (ref)
-				submitClientLogsResult(t)
-			end)
-			
-			return true
 		end
 	}
 end

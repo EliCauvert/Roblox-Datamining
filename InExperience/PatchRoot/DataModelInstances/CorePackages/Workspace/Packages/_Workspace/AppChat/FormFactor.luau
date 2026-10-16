@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.FormFactor.FormFactor)
+﻿return (require(script.Parent.Parent.Parent._Index.FormFactor.FormFactor))

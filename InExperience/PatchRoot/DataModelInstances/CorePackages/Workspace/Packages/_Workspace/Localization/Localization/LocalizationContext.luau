@@ -1,51 +1,53 @@
-﻿local t = {}
-t.__index = t
+﻿local LocalizationContextModule = {}
+LocalizationContextModule.__index = LocalizationContextModule
 
-function t:getBaseLanguage()
+function LocalizationContextModule:getBaseLanguage() --[[ Line: 47 ]]
 	return self:match("^(%w+)[-_]")
 end
 
-function t.new(p1)
-	-- upvalues: t (ref)
-	local t_1 = { _translations = p1 }
-	setmetatable(t_1, t)
+function LocalizationContextModule.new(_translations) --[[ Line: 51 ]]
+	-- upvalues: LocalizationContextModule (copy)
+	local config = { _translations = _translations }
+	setmetatable(config, LocalizationContextModule)
 	
-	return t_1
+	return config
 end
 
-function t:addTranslations(p1)
-	self._translations = p1
+function LocalizationContextModule:addTranslations(_translations) --[[ Line: 65 ]]
+	self._translations = _translations
 end
 
-function t.getRelevantLanguages(p1)
-	-- upvalues: t (ref)
-	local t_1 = {}
-	table.insert(t_1, p1)
-	local baseLanguage = t.getBaseLanguage(p1)
+function LocalizationContextModule.getRelevantLanguages(p1) --[[ Line: 75 ]]
+	-- upvalues: LocalizationContextModule (copy)
+	local List = {}
+	table.insert(List, p1)
+	local BaseLanguage = LocalizationContextModule.getBaseLanguage(p1)
 	
-	if baseLanguage then
-		table.insert(t_1, baseLanguage)
+	if BaseLanguage then
+		table.insert(List, BaseLanguage)
 	end
-	table.insert(t_1, "en-us")
+	table.insert(List, "en-us")
 	
-	return t_1
+	return List
 end
 
-function t:_getSourceString(p1, p2)
-	local var1 = self._translations[p1]
+function LocalizationContextModule:_getSourceString(BaseLanguage, p1) --[[ Line: 92 ]]
+	local Translation = self._translations[BaseLanguage]
 	
-	return if var1 then var1[p2] else nil
+	return if Translation then Translation[p1] else nil
 end
 
-function t:getString(p1, p2, p3)
-	-- upvalues: t (ref)
-	local baseLanguage = t.getBaseLanguage(p1)
-	local var1 = self:_getSourceString(p1, p2) or ((if baseLanguage then self:_getSourceString(baseLanguage, p2) else nil) or self:_getSourceString("en-us", p2))
+function LocalizationContextModule:getString(p1, p2, p3) --[[ Line: 107 ]]
+	-- upvalues: LocalizationContextModule (copy)
+	local BaseLanguage = LocalizationContextModule.getBaseLanguage(p1)
+	local SourceString = if BaseLanguage then self:_getSourceString(BaseLanguage, p2) else nil
+	local EnUs = self:_getSourceString("en-us", p2)
+	local SourceString1 = self:_getSourceString(p1, p2) or (SourceString or EnUs)
 	
-	if not var1 then
-		error(("Couldn't find value for translation key %q!\nTried these languages: %s, %s, %s"):format(p2, p1, baseLanguage, "en-us"), 2)
+	if not SourceString1 then
+		error(("Couldn't find value for translation key %q!\nTried these languages: %s, %s, %s"):format(p2, p1, BaseLanguage, "en-us"), 2)
 	end
-	return if p3 then var1:gsub("{(.-)}", p3) else var1
+	return if p3 then SourceString1:gsub("{(.-)}", p3) else SourceString1
 end
 
-return t
+return LocalizationContextModule

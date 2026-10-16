@@ -1,15 +1,19 @@
-﻿local avatarViewport = script:FindFirstAncestor("AvatarViewport")
-local reactModule = require(avatarViewport.Parent.React)
-local _ = require(avatarViewport.Types)
+﻿local AvatarViewport = script:FindFirstAncestor("AvatarViewport")
+local ReactModule = require(AvatarViewport.Parent.React)
+local _ = require(AvatarViewport.Types)
 
-return function()
-	-- upvalues: reactModule (ref)
-	local var1 = reactModule.useRef(nil)
-	local var2 = reactModule.useRef(nil)
-	local var3 = reactModule.useRef(nil)
+return function() --[[ Line: 10 | Named "useAvatarViewportScene" ]]
+	-- upvalues: ReactModule (copy)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseRefResult2 = ReactModule.useRef(nil)
 	
-	return reactModule.useMemo(function()
-		-- upvalues: var1 (ref), var2 (ref), var3 (ref)
-		return { viewportFrame = var1, worldModel = var2, camera = var3 }
-	end, { var1, var2, var3 })
+	return ReactModule.useMemo(function() --[[ Line: 15 ]]
+		-- upvalues: UseRefResult (copy), UseRefResult1 (copy), UseRefResult2 (copy)
+		return {
+			viewportFrame = UseRefResult,
+			worldModel = UseRefResult1,
+			camera = UseRefResult2
+		}
+	end, { UseRefResult, UseRefResult1, UseRefResult2 })
 end

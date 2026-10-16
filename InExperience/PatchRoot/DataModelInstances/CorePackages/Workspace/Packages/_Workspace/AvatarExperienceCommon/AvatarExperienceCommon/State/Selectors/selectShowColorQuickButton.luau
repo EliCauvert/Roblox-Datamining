@@ -1,13 +1,13 @@
-﻿local selectTryOnBodyIdsModule = require(script.Parent.selectTryOnBodyIds)
+﻿local SelectTryOnBodyIdsModule = require(script.Parent.selectTryOnBodyIds)
 
-return function(p1)
-	-- upvalues: selectTryOnBodyIdsModule (ref)
-	local lastToggledItem = p1.AvatarExperience.AvatarScene.OutfitTryOn.LastToggledItem
+return function(p1): boolean --[[ Line: 3 | Named "selectShowColorQuickButton" ]]
+	-- upvalues: SelectTryOnBodyIdsModule (copy)
+	local LastToggledItem = p1.AvatarExperience.AvatarScene.OutfitTryOn.LastToggledItem
 	
-	for i, v in selectTryOnBodyIdsModule(p1) do
-		local var1 = p1.AvatarExperience.Common.BundleInfos[v]
+	for _, value in SelectTryOnBodyIdsModule(p1) do
+		local BundleInfo = p1.AvatarExperience.Common.BundleInfos[value]
 		
-		if var1 and var1.isRecolorable and (lastToggledItem and lastToggledItem.itemId == v) then
+		if BundleInfo and BundleInfo.isRecolorable and LastToggledItem and LastToggledItem.itemId == value then
 			return true
 		end
 	end

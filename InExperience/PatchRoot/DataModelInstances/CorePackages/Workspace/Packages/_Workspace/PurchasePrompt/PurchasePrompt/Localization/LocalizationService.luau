@@ -1,69 +1,46 @@
-﻿local parent = script.Parent.Parent
-local itemTypeModule = require(parent.Enums.ItemType)
-local purchaseErrorModule = require(parent.Enums.PurchaseError)
-local symbolModule = require(parent.Symbols.Symbol)
-local keyMappingsModule = require(script.Parent.KeyMappings)
-local _ = {
-	["en-us"] = ",",
-	["en-gb"] = ",",
-	["es-mx"] = ",",
-	["es-es"] = ".",
-	["fr-fr"] = " ",
-	["de-de"] = " ",
-	["pt-br"] = ".",
-	["zh-cn"] = ",",
-	["zh-cjv"] = ",",
-	["zh-tw"] = ",",
-	["ko-kr"] = ",",
-	["ja-jp"] = ",",
-	["it-it"] = " ",
-	["ru-ru"] = ".",
-	["id-id"] = ".",
-	["vi-vn"] = ".",
-	["th-th"] = ",",
-	["tr-tr"] = "."
-}
-local formattedParam = symbolModule.named("FormattedParam")
+﻿local Parent = script.Parent.Parent
+local ItemTypeModule = require(Parent.Enums.ItemType)
+local PurchaseErrorModule = require(Parent.Enums.PurchaseError)
+local KeyMappingsModule = require(script.Parent.KeyMappings)
+local FormattedParam = require(Parent.Symbols.Symbol).named("FormattedParam")
 
-local function _(p1)
-	-- upvalues: formattedParam (ref)
-	return typeof(p1) == "table" and p1[formattedParam] == true
+local function _(p1): boolean --[[ Line: 44 | Named "isFormattedParam" ]]
+	-- upvalues: FormattedParam (copy)
+	return typeof(p1) == "table" and p1[FormattedParam] == true
 end
 
-local _ = function(p1)
-	-- upvalues: formattedParam (ref)
-	return { [formattedParam] = true, format = p1 }
+local _ = function(Format) --[[ Line: 48 | Named "createFormattedParam" ]]
+	-- upvalues: FormattedParam (copy)
+	return { [FormattedParam] = true, format = Format }
 end
 
-local _ = function(p1, p2)
-	local translations = p1.translations
-	local fallbackTranslations = p1.fallbackTranslations
+local _ = function(p1, p2) --[[ Line: 58 | Named "getLocalizedString" ]]
+	local Translations = p1.translations
+	local FallbackTranslations = p1.fallbackTranslations
 	
-	return if fallbackTranslations == nil or translations[p2] ~= nil then translations[p2] else fallbackTranslations[p2]
+	return if FallbackTranslations == nil or Translations[p2] ~= nil then Translations[p2] else FallbackTranslations[p2]
 end
 
-local _ = function(p1, p2)
-	local formattedText = string.format("%%1%s%%2", p2)
-	local _ = nil
+local _ = function(Text: string, p1): string --[[ Line: 81 | Named "addGroupDelimiters" ]]
+	local Formatted = string.format("%%1%s%%2", p1)
 	repeat
-		local replaced, replaced_1 = string.gsub(p1, "^(-?%d+)(%d%d%d)", formattedText)
-		p1 = replaced
-	until replaced_1 == 0
-	return p1
+		local Replaced2
+		Text, Replaced2 = string.gsub(Text, "^(-?%d+)(%d%d%d)", Formatted)
+	until Replaced2 == 0
+	return Text
 end
 
 return {
-	getKeyFromItemType = function(p1)
-		-- upvalues: itemTypeModule (ref), keyMappingsModule (ref)
-		assert(itemTypeModule.isMember(p1) or (if typeof(p1) ~= "number" then typeof(p1) == "string" else true), "provided item type " .. tostring(p1) .. " must be a number, string, or ItemType enum")
-		local _ = nil
+	getKeyFromItemType = function(Bundle) --[[ Line: 98 ]]
+		-- upvalues: ItemTypeModule (copy), KeyMappingsModule (copy)
+		assert(ItemTypeModule.isMember(Bundle) or (typeof(Bundle) == "number" or typeof(Bundle) == "string"), "provided item type " .. tostring(Bundle) .. " must be a number, string, or ItemType enum")
 		
-		return if p1 == itemTypeModule.Bundle then "CoreScripts.PurchasePrompt.ItemType.Bundle" else keyMappingsModule.AssetTypeById[tostring(p1)]
+		return if Bundle == ItemTypeModule.Bundle then "CoreScripts.PurchasePrompt.ItemType.Bundle" else KeyMappingsModule.AssetTypeById[tostring(Bundle)]
 	end,
-	getErrorKey = function(p1)
-		-- upvalues: purchaseErrorModule (ref), keyMappingsModule (ref)
-		assert(purchaseErrorModule.isMember(p1), "provided value " .. tostring(p1) .. " is not a member of PurchaseError enum")
+	getErrorKey = function(p1) --[[ Line: 122 ]]
+		-- upvalues: PurchaseErrorModule (copy), KeyMappingsModule (copy)
+		assert(PurchaseErrorModule.isMember(p1), "provided value " .. tostring(p1) .. " is not a member of PurchaseError enum")
 		
-		return keyMappingsModule.PurchaseErrorKey[p1]
+		return KeyMappingsModule.PurchaseErrorKey[p1]
 	end
 }

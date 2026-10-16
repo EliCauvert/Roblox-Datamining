@@ -1,15 +1,14 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local reactModule = require(parent.React)
-local cryoModule = require(parent.Cryo)
-local _ = require(parent.UIBlox)
-local socialLibrariesModule = require(appChat.SocialLibraries)
-local foundationModule = require(parent.Foundation)
-local useTokens = foundationModule.Hooks.useTokens
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local fFlagDebugAppChatEnableDomLocatorsModule = require(appChat.Flags.FFlagDebugAppChatEnableDomLocators)
-local presenceBubbleCellModule = require(script.Parent.PresenceBubbleCell)
-local t = {
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local ReactModule = require(Parent.React)
+local CryoModule = require(Parent.Cryo)
+local _ = require(Parent.UIBlox)
+local FoundationModule = require(Parent.Foundation)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local FFlagDebugAppChatEnableDomLocatorsModule = require(AppChat.Flags.FFlagDebugAppChatEnableDomLocators)
+local PresenceBubbleCellModule = require(script.Parent.PresenceBubbleCell)
+local config = {
 	avatarCirclePresenceImage = nil,
 	subTitleText = nil,
 	subTitleIcon = nil,
@@ -24,66 +23,66 @@ local t = {
 	paddingRight = 0,
 	Size = UDim2.new(1, 0, 1, 0),
 	thumbnails = {},
-	style = cryoModule.Dictionary.join(socialLibrariesModule.Components.TestStyle, { Tokens = { Color = { None = {} } } }),
-	showDivider = not require(appChat.Flags.FFlagAppChatRemoveConversationListDivider)
+	style = CryoModule.Dictionary.join(require(AppChat.SocialLibraries).Components.TestStyle, { Tokens = { Color = { None = {} } } }),
+	showDivider = not require(AppChat.Flags.FFlagAppChatRemoveConversationListDivider)
 }
 
-return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), cryoModule (ref), t (ref), reactModule (ref), presenceBubbleCellModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), foundationFontFaceMigration (ref)
-	local var1 = useTokens()
-	local var2 = cryoModule.Dictionary.join(t, p1)
-	local style = var2.style
-	local theme = style.Theme
-	local font = style.Font
-	local isTable = type(var2.avatarCirclePresenceImage) == "table"
+return ReactModule.memo(function(p1) --[[ Line: 76 | Named "StyledCell" ]]
+	-- upvalues: UseTokensFunction (copy), CryoModule (copy), config (copy), ReactModule (copy), PresenceBubbleCellModule (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), FoundationFontFaceMigration (copy)
+	local UseTokensResult = UseTokensFunction()
+	local JoinResult = CryoModule.Dictionary.join(config, p1)
+	local Style = JoinResult.style
+	local Theme = Style.Theme
+	local StyleFont = Style.Font
+	local IsTable = type(JoinResult.avatarCirclePresenceImage) == "table"
 	
-	return reactModule.createElement(presenceBubbleCellModule, {
-		childWidth = var2.childWidth,
-		titleText = var2.titleText,
-		secondaryTitleText = var2.secondaryTitleText,
-		subTitleText = var2.subTitleText,
-		subTitleTimestamp = var2.subTitleTimestamp,
-		subTitleIcon = var2.subTitleIcon,
-		testId = if fFlagDebugAppChatEnableDomLocatorsModule then var2.testId else nil,
-		avatarCirclePresenceImage = var2.avatarCirclePresenceImage,
-		thumbnails = var2.thumbnails,
-		onActivated = var2.onActivated,
-		onCircleActivated = var2.onCircleActivated,
-		Size = var2.Size,
-		isLoading = var2.isLoading,
-		showNewPresenceImage = isTable,
-		conversationId = var2.conversationId,
-		participants = var2.participants,
-		BackgroundColor3 = theme.BackgroundDefault.Color,
-		BackgroundTransparency = style.Tokens.Color.None.Transparency,
-		onPressedBackgroundColor3 = theme.BackgroundOnPress.Color,
-		onPressedBackgroundTransparency = theme.BackgroundOnPress.Transparency,
-		avatarCircleBackgroundColor3 = theme.PlaceHolder.Color,
-		avatarCircleDividerColor3 = theme.PlaceHolder.Color,
-		avatarCirclePresenceImageColor3 = if isTable then theme.OnlineStatus.Color else nil,
-		avatarCirclePresenceImageTransparency = if isTable then theme.OnlineStatus.Transparency else nil,
-		subTitleTextFont = if foundationFontFaceMigration then var1.Typography.BodySmall.Font else font.CaptionBody.Font,
-		subTitleTextTransparency = theme.TextDefault.Transparency,
-		subTitleTextColor3 = theme.TextDefault.Color,
-		subTitleTextSize = font.CaptionBody.RelativeSize * font.BaseSize,
-		subTitleIconColor3 = style.Theme.IconDefault.Color,
-		subTitleIconTransparency = style.Theme.IconDefault.Transparency,
-		titleFont = if foundationFontFaceMigration then var1.Typography.TitleLarge.Font else font.Header2.Font,
-		titleTextTransparency = if not var2.boldTitle then theme.TextDefault.Transparency else theme.TextEmphasis.Transparency,
-		titleTextColor3 = if not var2.boldTitle then theme.TextDefault.Color else theme.TextEmphasis.Color,
-		titleTextSize = font.Header2.RelativeSize * font.BaseSize,
-		secondaryTitleFont = if foundationFontFaceMigration then var1.Typography.TitleLarge.Font else font.Header2.Font,
-		secondaryTitleTextTransparency = theme.TextMuted.Transparency,
-		secondaryTitleTextColor3 = theme.TextMuted.Color,
-		secondaryTitleTextSize = font.Header2.RelativeSize * font.BaseSize,
-		showDivider = var2.showDivider,
-		dividerTransparency = theme.Divider.Transparency,
-		dividerColor3 = theme.Divider.Color,
-		avatarCircleSize = var1.Size.Size_1000,
-		avatarCircleCellWidth = var1.Size.Size_1200,
-		hideLeftAvatarPadding = var2.hideLeftAvatarPadding,
-		paddingLeft = var2.paddingLeft,
-		paddingRight = var2.paddingRight,
-		isRobloxSubscriber = var2.isRobloxSubscriber
-	}, var2.children or {})
+	return ReactModule.createElement(PresenceBubbleCellModule, {
+		childWidth = JoinResult.childWidth,
+		titleText = JoinResult.titleText,
+		secondaryTitleText = JoinResult.secondaryTitleText,
+		subTitleText = JoinResult.subTitleText,
+		subTitleTimestamp = JoinResult.subTitleTimestamp,
+		subTitleIcon = JoinResult.subTitleIcon,
+		testId = if FFlagDebugAppChatEnableDomLocatorsModule then JoinResult.testId else nil,
+		avatarCirclePresenceImage = JoinResult.avatarCirclePresenceImage,
+		thumbnails = JoinResult.thumbnails,
+		onActivated = JoinResult.onActivated,
+		onCircleActivated = JoinResult.onCircleActivated,
+		Size = JoinResult.Size,
+		isLoading = JoinResult.isLoading,
+		showNewPresenceImage = IsTable,
+		conversationId = JoinResult.conversationId,
+		participants = JoinResult.participants,
+		BackgroundColor3 = Theme.BackgroundDefault.Color,
+		BackgroundTransparency = Style.Tokens.Color.None.Transparency,
+		onPressedBackgroundColor3 = Theme.BackgroundOnPress.Color,
+		onPressedBackgroundTransparency = Theme.BackgroundOnPress.Transparency,
+		avatarCircleBackgroundColor3 = Theme.PlaceHolder.Color,
+		avatarCircleDividerColor3 = Theme.PlaceHolder.Color,
+		avatarCirclePresenceImageColor3 = if IsTable then Theme.OnlineStatus.Color else nil,
+		avatarCirclePresenceImageTransparency = if IsTable then Theme.OnlineStatus.Transparency else nil,
+		subTitleTextFont = if FoundationFontFaceMigration then UseTokensResult.Typography.BodySmall.Font else StyleFont.CaptionBody.Font,
+		subTitleTextTransparency = Theme.TextDefault.Transparency,
+		subTitleTextColor3 = Theme.TextDefault.Color,
+		subTitleTextSize = StyleFont.CaptionBody.RelativeSize * StyleFont.BaseSize,
+		subTitleIconColor3 = Style.Theme.IconDefault.Color,
+		subTitleIconTransparency = Style.Theme.IconDefault.Transparency,
+		titleFont = if FoundationFontFaceMigration then UseTokensResult.Typography.TitleLarge.Font else StyleFont.Header2.Font,
+		titleTextTransparency = if JoinResult.boldTitle then Theme.TextEmphasis.Transparency else Theme.TextDefault.Transparency,
+		titleTextColor3 = if JoinResult.boldTitle then Theme.TextEmphasis.Color else Theme.TextDefault.Color,
+		titleTextSize = StyleFont.Header2.RelativeSize * StyleFont.BaseSize,
+		secondaryTitleFont = if FoundationFontFaceMigration then UseTokensResult.Typography.TitleLarge.Font else StyleFont.Header2.Font,
+		secondaryTitleTextTransparency = Theme.TextMuted.Transparency,
+		secondaryTitleTextColor3 = Theme.TextMuted.Color,
+		secondaryTitleTextSize = StyleFont.Header2.RelativeSize * StyleFont.BaseSize,
+		showDivider = JoinResult.showDivider,
+		dividerTransparency = Theme.Divider.Transparency,
+		dividerColor3 = Theme.Divider.Color,
+		avatarCircleSize = UseTokensResult.Size.Size_1000,
+		avatarCircleCellWidth = UseTokensResult.Size.Size_1200,
+		hideLeftAvatarPadding = JoinResult.hideLeftAvatarPadding,
+		paddingLeft = JoinResult.paddingLeft,
+		paddingRight = JoinResult.paddingRight,
+		isRobloxSubscriber = JoinResult.isRobloxSubscriber
+	}, JoinResult.children or {})
 end)

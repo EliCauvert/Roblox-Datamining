@@ -1,1 +1,1 @@
-﻿return table.freeze({ X = "x", Y = "y" })
+﻿return (table.freeze({ X = "x", Y = "y" }))

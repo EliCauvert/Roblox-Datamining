@@ -1,1 +1,1 @@
-﻿return require(script.Media)
+﻿return (require(script.Media))

@@ -1,6 +1,6 @@
-﻿local universalAppPolicyModule = require(game:GetService("CorePackages").Workspace.Packages.UniversalAppPolicy)
+﻿local UniversalAppPolicyModule = require(game:GetService("CorePackages").Workspace.Packages.UniversalAppPolicy)
 
-return function()
-	-- upvalues: universalAppPolicyModule (ref)
-	return universalAppPolicyModule.getAppFeaturePolicies().getCanSeeChatTab()
+return function() --[[ Line: 5 ]]
+	-- upvalues: UniversalAppPolicyModule (copy)
+	return (UniversalAppPolicyModule.getAppFeaturePolicies().getCanSeeChatTab())
 end

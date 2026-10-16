@@ -1,16 +1,17 @@
-﻿local httpService = game:GetService("HttpService")
+﻿local HttpService = game:GetService("HttpService")
 local _ = require(script:FindFirstAncestor("DataHydration").Parent.MomentsTypes)
-local decodeEmojiSetsModule = require(script.Parent.decodeEmojiSets)
-local validateMomentsEmojiCatalogModule = require(script.Parent.validateMomentsEmojiCatalog)
+local DecodeEmojiSetsModule = require(script.Parent.decodeEmojiSets)
+local ValidateMomentsEmojiCatalogModule = require(script.Parent.validateMomentsEmojiCatalog)
 
 return {
-	parseMomentsEmojiFallbackCatalogJson = function(p1)
-		-- upvalues: httpService (ref), validateMomentsEmojiCatalogModule (ref), decodeEmojiSetsModule (ref)
+	parseMomentsEmojiFallbackCatalogJson = function(p1) --[[ Line: 13 ]]
+		-- upvalues: HttpService (copy), ValidateMomentsEmojiCatalogModule (copy), DecodeEmojiSetsModule (copy)
 		if p1 == "" then
 			return nil
+		else
+			local Success, Result = pcall(HttpService.JSONDecode, HttpService, p1)
+			
+			return if Success and ValidateMomentsEmojiCatalogModule.isValidGetEmojiSetsResponseShape(Result) then DecodeEmojiSetsModule.flattenEmojis(DecodeEmojiSetsModule.decodeGetEmojiSetsResponse(Result)) else nil
 		end
-		local ok, status = pcall(httpService.JSONDecode, httpService, p1)
-		
-		return if ok and validateMomentsEmojiCatalogModule.isValidGetEmojiSetsResponseShape(status) then decodeEmojiSetsModule.flattenEmojis(decodeEmojiSetsModule.decodeGetEmojiSetsResponse(status)) else nil
 	end
 }

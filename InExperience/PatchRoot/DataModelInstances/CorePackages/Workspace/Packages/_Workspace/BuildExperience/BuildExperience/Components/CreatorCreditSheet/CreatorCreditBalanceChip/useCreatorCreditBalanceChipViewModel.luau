@@ -1,30 +1,30 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local localizationService = game:GetService("LocalizationService")
-local creatorCreditModule = require(parent.DataHydration.CreatorCredit)
-local numberLocalization = require(parent.Localization).NumberLocalization
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local LocalizationService = game:GetService("LocalizationService")
+local CreatorCreditModule = require(Parent.DataHydration.CreatorCredit)
+local NumberLocalization = require(Parent.Localization).NumberLocalization
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
 local _ = require(script.Parent.CreatorCreditBalanceChipView)
-local useOpenBuyRobuxWebViewModule = require(script.Parent.Parent.useOpenBuyRobuxWebView)
+local UseOpenBuyRobuxWebViewModule = require(script.Parent.Parent.useOpenBuyRobuxWebView)
 
-local function _(p1)
-	-- upvalues: numberLocalization (ref), localizationService (ref)
-	return numberLocalization.localize(string.format("%.0f", math.floor(p1)), localizationService.RobloxLocaleId)
+local function _(Value: number) --[[ Line: 17 | Named "formatBalance" ]]
+	-- upvalues: NumberLocalization (copy), LocalizationService (copy)
+	return NumberLocalization.localize(string.format("%.0f", (math.floor(Value))), LocalizationService.RobloxLocaleId)
 end
 
-return function()
-	-- upvalues: creatorCreditModule (ref), reactModule (ref), signalsReactModule (ref), useOpenBuyRobuxWebViewModule (ref), numberLocalization (ref), localizationService (ref)
-	local creatorCreditStore = creatorCreditModule.getCreatorCreditStore(false)
-	local var1 = signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: creatorCreditStore (ref)
-		return creatorCreditStore.getQuotaSummary()
-	end, { creatorCreditStore }).data)
+return function() --[[ Line: 21 | Named "useCreatorCreditBalanceChipViewModel" ]]
+	-- upvalues: CreatorCreditModule (copy), ReactModule (copy), SignalsReactModule (copy), UseOpenBuyRobuxWebViewModule (copy), NumberLocalization (copy), LocalizationService (copy)
+	local CreatorCreditStore = CreatorCreditModule.getCreatorCreditStore(false)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(ReactModule.useMemo(function() --[[ Line: 23 ]]
+		-- upvalues: CreatorCreditStore (copy)
+		return CreatorCreditStore.getQuotaSummary()
+	end, { CreatorCreditStore }).data)
 	
 	return {
-		balanceText = if var1 ~= nil then nil else numberLocalization.localize(string.format("%.0f", math.floor(var1.robuxBalance)), localizationService.RobloxLocaleId),
-		onActivated = useOpenBuyRobuxWebViewModule(reactModule.useCallback(function()
-			-- upvalues: creatorCreditStore (ref)
-			creatorCreditStore.refreshQuotaSummary():catch(function() end)
-		end, { creatorCreditStore }))
+		balanceText = if UseSignalStateResult == nil then nil else NumberLocalization.localize(string.format("%.0f", (math.floor(UseSignalStateResult.robuxBalance))), LocalizationService.RobloxLocaleId),
+		onActivated = UseOpenBuyRobuxWebViewModule((ReactModule.useCallback(function() --[[ Line: 27 ]]
+			-- upvalues: CreatorCreditStore (copy)
+			CreatorCreditStore.refreshQuotaSummary():catch(function() --[[ Line: 28 ]] end)
+		end, { CreatorCreditStore })))
 	}
 end

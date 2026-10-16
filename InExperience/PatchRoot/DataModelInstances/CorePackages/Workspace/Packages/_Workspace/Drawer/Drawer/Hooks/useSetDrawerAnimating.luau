@@ -1,6 +1,6 @@
-﻿local getDrawerVisibleStoreModule = require(script.Parent.Parent.Stores.GetDrawerVisibleStore)
+﻿local GetDrawerVisibleStoreModule = require(script.Parent.Parent.Stores.GetDrawerVisibleStore)
 
-return function()
-	-- upvalues: getDrawerVisibleStoreModule (ref)
-	return getDrawerVisibleStoreModule(false).setDrawerAnimating
+return function() --[[ Line: 3 | Named "useSetDrawerAnimating" ]]
+	-- upvalues: GetDrawerVisibleStoreModule (copy)
+	return GetDrawerVisibleStoreModule(false).setDrawerAnimating
 end

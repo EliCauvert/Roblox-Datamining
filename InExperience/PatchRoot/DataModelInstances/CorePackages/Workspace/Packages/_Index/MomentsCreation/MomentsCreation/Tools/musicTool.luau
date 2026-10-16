@@ -1,39 +1,36 @@
-﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
-local parent = momentsCreation.Parent
-local builderIconsModule = require(parent.BuilderIcons)
-local momentsCommonModule = require(parent.MomentsCommon)
-local reactModule = require(parent.React)
-local creationFlowStateModule = require(momentsCreation.Enums.CreationFlowState)
-local _ = require(momentsCreation.Types.CreationFlowTypes)
-local createEditSessionModule = require(momentsCreation.Stores.createEditSession)
-local musicOverlayModule = require(momentsCreation.Components.MusicOverlay)
-local musicPickerV2ContainerModule = require(momentsCreation.Components.MusicPickerV2Container)
-local fFlagMomentsCreationMusicPickerV2Module = require(momentsCreation.Flags.FFlagMomentsCreationMusicPickerV2)
-local eventNames = momentsCommonModule.Analytics.EventNames
+﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
+local Parent = MomentsCreation.Parent
+local ReactModule = require(Parent.React)
+local _ = require(MomentsCreation.Types.CreationFlowTypes)
+local CreateEditSessionModule = require(MomentsCreation.Stores.createEditSession)
+local MusicOverlayModule = require(MomentsCreation.Components.MusicOverlay)
+local MusicPickerV2ContainerModule = require(MomentsCreation.Components.MusicPickerV2Container)
+local FFlagMomentsCreationMusicPickerV2Module = require(MomentsCreation.Flags.FFlagMomentsCreationMusicPickerV2)
+local EventNames = require(Parent.MomentsCommon).Analytics.EventNames
 
 return {
 	kind = "music",
 	presentation = "Overlay",
 	zIndex = 2,
-	step = creationFlowStateModule.Music,
+	step = require(MomentsCreation.Enums.CreationFlowState).Music,
 	cta = {
 		localizationKey = "Feature.Moments.Action.AddMusic",
 		order = 2,
-		icon = builderIconsModule.Icon.MusicNote,
-		analyticsEvent = eventNames.EditingFlowMusicButtonPressed,
-		commitAnalyticsEvent = eventNames.EditingFlowMusicDoneButtonPressed,
-		cancelAnalyticsEvent = eventNames.EditingFlowMusicBackButtonPressed
+		icon = require(Parent.BuilderIcons).Icon.MusicNote,
+		analyticsEvent = EventNames.EditingFlowMusicButtonPressed,
+		commitAnalyticsEvent = EventNames.EditingFlowMusicDoneButtonPressed,
+		cancelAnalyticsEvent = EventNames.EditingFlowMusicBackButtonPressed
 	},
 	supportedCaptureTypes = { Enum.CaptureType.Video, Enum.CaptureType.Screenshot },
-	createSession = function()
-		-- upvalues: createEditSessionModule (ref)
-		return createEditSessionModule()
+	createSession = function() --[[ Line: 41 ]]
+		-- upvalues: CreateEditSessionModule (copy)
+		return CreateEditSessionModule()
 	end,
-	renderEditor = function(p1)
-		-- upvalues: fFlagMomentsCreationMusicPickerV2Module (ref), reactModule (ref), musicPickerV2ContainerModule (ref), musicOverlayModule (ref)
-		return if fFlagMomentsCreationMusicPickerV2Module then reactModule.createElement(musicPickerV2ContainerModule, { controller = p1 }) else reactModule.createElement(musicOverlayModule, { controller = p1 })
+	renderEditor = function(Controller) --[[ Line: 44 ]]
+		-- upvalues: FFlagMomentsCreationMusicPickerV2Module (copy), ReactModule (copy), MusicPickerV2ContainerModule (copy), MusicOverlayModule (copy)
+		return if FFlagMomentsCreationMusicPickerV2Module then ReactModule.createElement(MusicPickerV2ContainerModule, { controller = Controller }) else ReactModule.createElement(MusicOverlayModule, { controller = Controller })
 	end,
-	toEdits = function(p1)
-		return { music = p1 }
+	toEdits = function(Music) --[[ Line: 50 ]]
+		return { music = Music }
 	end
 }

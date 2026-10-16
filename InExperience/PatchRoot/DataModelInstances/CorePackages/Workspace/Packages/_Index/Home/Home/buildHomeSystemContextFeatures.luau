@@ -1,5 +1,5 @@
-﻿local addSystemInfoToArgs = require(script:FindFirstAncestor("Home").Parent.DiscoveryUtils).AddSystemInfoToArgs
-local t = {
+﻿local AddSystemInfoToArgsFunction = require(script:FindFirstAncestor("Home").Parent.DiscoveryUtils).AddSystemInfoToArgs
+local config = {
 	cpuCores = "cpucore",
 	deviceManufacturer = "manufacturer",
 	if64Bit = "if_64bit",
@@ -12,28 +12,28 @@ local t = {
 	availRAM = "avail_ram"
 }
 
-return function()
-	-- upvalues: addSystemInfoToArgs (ref), t (ref)
-	local t_1 = {}
-	addSystemInfoToArgs(t_1)
-	local t_2 = {}
+return function() --[[ Line: 31 | Named "buildHomeSystemContextFeatures" ]]
+	-- upvalues: AddSystemInfoToArgsFunction (copy), config (copy)
+	local t = {}
+	AddSystemInfoToArgsFunction(t)
+	local t1 = {}
 	
-	for i, v in t do
-		local var1 = t_1[i]
+	for i, value in config do
+		local Entry = t[i]
 		
-		if var1 ~= nil and var1 ~= "" then
-			t_2[v] = tostring(var1)
+		if Entry ~= nil and Entry ~= "" then
+			t1[value] = tostring(Entry)
 		end
 	end
-	local maxResolution = t_1.maxResolution
+	local MaxResolution: string = t.maxResolution
 	
-	if typeof(maxResolution) == "string" then
-		local match, match_1 = string.match(maxResolution, "^(%d+)x(%d+)$")
+	if typeof(MaxResolution) == "string" then
+		local Match, Match2 = string.match(MaxResolution, "^(%d+)x(%d+)$")
 		
-		if match and match_1 then
-			t_2.screenwidth = match
-			t_2.screenheight = match_1
+		if Match and Match2 then
+			t1.screenwidth = Match
+			t1.screenheight = Match2
 		end
 	end
-	return t_2
+	return t1
 end

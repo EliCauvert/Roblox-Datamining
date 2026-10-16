@@ -1,1 +1,3 @@
-﻿return if require(script.Parent.FFlagLuaAppEdpMediaGalleryRedesign) then game:DefineFastFlag("LuaAppEdpMediaGalleryVideoPreview5", false) or require(script.Parent.FFlagLuaAppEdpMediaGalleryVideoPreviewIxp) else require(script.Parent.FFlagLuaAppEdpMediaGalleryRedesign)
+﻿local FFlagLuaAppEdpMediaGalleryVideoPreviewIxpModule = require(script.Parent.FFlagLuaAppEdpMediaGalleryVideoPreviewIxp)
+
+return require(script.Parent.FFlagLuaAppEdpMediaGalleryRedesign) and (game:DefineFastFlag("LuaAppEdpMediaGalleryVideoPreview5", false) or FFlagLuaAppEdpMediaGalleryVideoPreviewIxpModule)

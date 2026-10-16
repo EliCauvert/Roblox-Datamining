@@ -1,4 +1,4 @@
-﻿local jestConfigsModule = require(script.Parent.Parent.Dev.JestConfigs)
+﻿local JestConfigsModule = require(script.Parent.Parent.Dev.JestConfigs)
 
 return {
 	displayName = "IAPExperience",
@@ -9,8 +9,8 @@ return {
 		"!**/Generic/UnifiedProductDetails.test"
 	},
 	setupFilesAfterEnv = {
-		jestConfigsModule.setupFiles.UIBloxInitializer,
-		jestConfigsModule.setupFiles.createPromiseRejectionHandler(),
-		jestConfigsModule.setupFiles.RetryTimes
+		JestConfigsModule.setupFiles.UIBloxInitializer,
+		JestConfigsModule.setupFiles.createPromiseRejectionHandler(),
+		JestConfigsModule.setupFiles.RetryTimes
 	}
 }

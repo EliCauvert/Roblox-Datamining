@@ -1,19 +1,20 @@
-﻿local otterModule = require(game:GetService("CorePackages").Packages.Otter)
+﻿local OtterModule = require(game:GetService("CorePackages").Packages.Otter)
 
-return function(value)
-	-- upvalues: otterModule (ref)
-	local transparencyAnimation = value.TransparencyAnimation
+return function(p1) --[[ Line: 5 | Named "getTransparencySpringFromSettings" ]]
+	-- upvalues: OtterModule (copy)
+	local TransparencyAnimation = p1.TransparencyAnimation
 	
-	if transparencyAnimation.Enabled then
-		local t = {
-			dampingRatio = transparencyAnimation.SpringDampingRatio,
-			frequency = transparencyAnimation.SpringFrequency
+	if TransparencyAnimation.Enabled then
+		local config = {
+			dampingRatio = TransparencyAnimation.SpringDampingRatio,
+			frequency = TransparencyAnimation.SpringFrequency
 		}
 		
-		return function(p1)
-			-- upvalues: otterModule (copy), t (ref)
-			return otterModule.spring(p1, t)
+		return function(p2) --[[ Line: 15 ]]
+			-- upvalues: OtterModule (upval), config (copy)
+			return OtterModule.spring(p2, config)
 		end
+	else
+		return OtterModule.instant
 	end
-	return otterModule.instant
 end

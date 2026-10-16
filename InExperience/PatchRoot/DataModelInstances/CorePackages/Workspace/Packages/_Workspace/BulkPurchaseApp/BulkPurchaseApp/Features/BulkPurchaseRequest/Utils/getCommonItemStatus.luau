@@ -1,13 +1,12 @@
-﻿return function(p1)
-	local var1 = nil
+﻿return function(List) --[[ Line: 3 | Named "getCommonItemStatus" ]]
+	local v1 = nil
 	
-	for i, v in p1 do
-		if var1 == nil or v == var1 then
-			if var1 == nil then
-				var1 = v
-			end
+	for _, value in List do
+		if v1 ~= nil and value ~= v1 then
+			return nil
+		elseif v1 == nil then
+			v1 = value
 		end
-		return nil
 	end
-	return var1
+	return v1
 end

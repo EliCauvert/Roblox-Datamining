@@ -1,129 +1,131 @@
-﻿local _ = game:GetService("RunService")
-local runService = require(script:FindFirstAncestor("SplashScreenManager").Parent.MockableProxyServices).RunService
-local var1 = nil
+﻿local RunService = game:GetService("RunService")
+RunService = require(script:FindFirstAncestor("SplashScreenManager").Parent.MockableProxyServices).RunService
+local ColorCorrect = nil
 
-local function _()
-	-- upvalues: var1 (write)
-	var1 = Instance.new("ColorCorrectionEffect")
+local function _() --[[ Line: 19 | Named "obfuscateEnvironment" ]]
+	-- upvalues: ColorCorrect (ref)
+	ColorCorrect = Instance.new("ColorCorrectionEffect")
 	
-	if var1 then
-		var1.Name = "__SplashScreenManager_Fader__"
-		var1.Parent = game:GetService("Lighting")
-		var1.TintColor = Color3.new(0, 0, 0)
-		var1.Enabled = true
+	if ColorCorrect then
+		ColorCorrect.Name = "__SplashScreenManager_Fader__"
+		ColorCorrect.Parent = game:GetService("Lighting")
+		ColorCorrect.TintColor = Color3.new(0, 0, 0)
+		ColorCorrect.Enabled = true
 	end
 end
 
-local _ = function()
-	-- upvalues: var1 (write)
-	if var1 then
-		var1:Destroy()
-		var1 = nil
+local _ = function() --[[ Line: 30 | Named "unobfuscateEnvironment" ]]
+	-- upvalues: ColorCorrect (ref)
+	if ColorCorrect then
+		ColorCorrect:Destroy()
+		ColorCorrect = nil
 	end
 end
 
-local var2 = false
-local var3 = true
-local var4 = false
-local t = {}
+local Flag = false
+local Flag1 = true
+local Flag2 = false
+local List = {}
 
-local _ = function()
-	-- upvalues: t (ref), var3 (write)
-	for i, v in t do
-		v(var3)
+local _ = function() --[[ Line: 43 | Named "callCallbacks" ]]
+	-- upvalues: List (copy), Flag1 (ref)
+	for _, value in List do
+		value(Flag1)
 	end
 end
 
 return {
-	initialize = function(p1, p2, p3)
-		-- upvalues: var4 (write), var2 (write), var3 (write), var1 (write), t (ref), runService (write)
-		if not var4 and not var2 then
-			var3 = false
-			var1 = Instance.new("ColorCorrectionEffect")
+	initialize = function(p1: number, p2, p3) --[[ Line: 50 ]]
+		-- upvalues: Flag2 (ref), Flag (ref), Flag1 (ref), ColorCorrect (ref), List (copy), RunService (ref)
+		if not Flag2 and not Flag then
+			Flag1 = false
+			ColorCorrect = Instance.new("ColorCorrectionEffect")
 			
-			if var1 then
-				var1.Name = "__SplashScreenManager_Fader__"
-				var1.Parent = game:GetService("Lighting")
-				var1.TintColor = Color3.new(0, 0, 0)
-				var1.Enabled = true
+			if ColorCorrect then
+				ColorCorrect.Name = "__SplashScreenManager_Fader__"
+				ColorCorrect.Parent = game:GetService("Lighting")
+				ColorCorrect.TintColor = Color3.new(0, 0, 0)
+				ColorCorrect.Enabled = true
 			end
-			for i, v in t do
-				v(var3)
+			for _, value in List do
+				value(Flag1)
 			end
-			local t_1 = {}
-			local var5 = 0
-			local var6 = 1 / p1
-			p3 = p3 or p1
-			local currentTime = tick()
-			local var7 = 0
-			local renderSteppedConnection = nil
+			local List1 = {}
+			local Total = 0
+			local v1 = 1 / p1
+			local P2 = p3 or p1
+			local CurrentTime = tick()
+			local Elapsed = 0
+			local Connection = nil
 			
-			local _ = function()
-				-- upvalues: renderSteppedConnection (write), var1 (copy), var3 (copy), var4 (copy)
-				if renderSteppedConnection then
-					renderSteppedConnection:Disconnect()
+			local function _() --[[ Line: 65 ]]
+				-- upvalues: Connection (ref), ColorCorrect (upval), Flag1 (upval), Flag2 (upval)
+				if Connection then
+					Connection:Disconnect()
 				end
-				if var1 then
-					var1:Destroy()
-					var1 = nil
+				if ColorCorrect then
+					ColorCorrect:Destroy()
+					ColorCorrect = nil
 				end
-				var3 = true
-				var4 = false
+				Flag1 = true
+				Flag2 = false
 			end
 			
-			renderSteppedConnection = runService.RenderStepped:Connect(function(p4)
-				-- upvalues: var7 (write), currentTime (ref), t_1 (ref), var5 (write), p3 (ref), p2 (ref), var6 (ref), var3 (copy), t (copy), renderSteppedConnection (write), var1 (copy), var4 (copy)
-				var7 = tick() - currentTime
-				table.insert(t_1, p4)
-				var5 += p4
+			Connection = RunService.RenderStepped:Connect(function(DeltaTime) --[[ Line: 74 ]]
+				-- upvalues: Elapsed (ref), CurrentTime (copy), List1 (copy), Total (ref), P2 (copy), p2 (copy), v1 (copy), Flag1 (upval), List (upval), Connection (ref), ColorCorrect (upval), Flag2 (upval)
+				Elapsed = tick() - CurrentTime
+				table.insert(List1, DeltaTime)
+				Total += DeltaTime
 				
-				if p3 < #t_1 then
-					local removed = table.remove(t_1, 1)
+				if P2 < #List1 then
+					local Removed = table.remove(List1, 1)
 					
-					if removed ~= nil then
-						var5 -= removed
+					if Removed ~= nil then
+						Total -= Removed
 					end
 				end
-				if p2 and p2 < var7 or p3 <= #t_1 and math.floor(var5 / #t_1 * 100) <= math.floor(var6 * 100) then
-					var3 = true
+				local TotalRatio = Total / #List1
+				
+				if p2 and p2 < Elapsed or P2 <= #List1 and math.floor(TotalRatio * 100) <= math.floor(v1 * 100) then
+					Flag1 = true
 					
-					for i, v in t do
-						v(var3)
+					for _, value in List do
+						value(Flag1)
 					end
-					if renderSteppedConnection then
-						renderSteppedConnection:Disconnect()
+					if Connection then
+						Connection:Disconnect()
 					end
-					if var1 then
-						var1:Destroy()
-						var1 = nil
+					if ColorCorrect then
+						ColorCorrect:Destroy()
+						ColorCorrect = nil
 					end
-					var3 = true
-					var4 = false
+					Flag1 = true
+					Flag2 = false
 				end
 			end)
-			var4 = true
+			Flag2 = true
 		end
 	end,
-	addStatusChangeListener = function(p4)
-		-- upvalues: t (ref)
-		table.insert(t, p4)
+	addStatusChangeListener = function(p4) --[[ Line: 106 ]]
+		-- upvalues: List (copy)
+		table.insert(List, p4)
 		
 		return p4
 	end,
-	removeStatusChangeListener = function(p4)
-		-- upvalues: t (ref)
-		for i, v in t do
-			if v == p4 then
-				table.remove(t, i)
+	removeStatusChangeListener = function(p4) --[[ Line: 111 ]]
+		-- upvalues: List (copy)
+		for i, value in List do
+			if value == p4 then
+				table.remove(List, i)
 			end
 		end
 	end,
-	isFPSAtTarget = function()
-		-- upvalues: var3 (write)
-		return var3
+	isFPSAtTarget = function() --[[ Line: 119 ]]
+		-- upvalues: Flag1 (ref)
+		return Flag1
 	end,
-	__setTestMode = function()
-		-- upvalues: var2 (write)
-		var2 = true
+	__setTestMode = function() --[[ Line: 123 ]]
+		-- upvalues: Flag (ref)
+		Flag = true
 	end
 }

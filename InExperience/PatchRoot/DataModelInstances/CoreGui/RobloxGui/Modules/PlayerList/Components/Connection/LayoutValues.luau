@@ -1,16 +1,16 @@
-﻿local roactModule = require(game:GetService("CorePackages").Packages.Roact)
-local layoutValuesContextModule = require(script.Parent.LayoutValuesContext)
+﻿local RoactModule = require(game:GetService("CorePackages").Packages.Roact)
+local LayoutValuesContextModule = require(script.Parent.LayoutValuesContext)
 
 return {
-	Provider = function(p1)
-		-- upvalues: roactModule (ref), layoutValuesContextModule (ref)
-		return roactModule.createElement(layoutValuesContextModule.Provider, { value = p1.layoutValues }, roactModule.oneChild(p1[roactModule.Children]))
+	Provider = function(p1) --[[ Line: 7 ]]
+		-- upvalues: RoactModule (copy), LayoutValuesContextModule (copy)
+		return RoactModule.createElement(LayoutValuesContextModule.Provider, { value = p1.layoutValues }, RoactModule.oneChild(p1[RoactModule.Children]))
 	end,
-	Consumer = layoutValuesContextModule.Consumer,
-	WithLayoutValues = function(p1)
-		-- upvalues: roactModule (ref), layoutValuesContextModule (ref)
-		assert(type(p1) == "function", "Expect withLayoutValues callback to be a function.")
+	Consumer = LayoutValuesContextModule.Consumer,
+	WithLayoutValues = function(Callback) --[[ Line: 13 ]]
+		-- upvalues: RoactModule (copy), LayoutValuesContextModule (copy)
+		assert(type(Callback) == "function", "Expect withLayoutValues callback to be a function.")
 		
-		return roactModule.createElement(layoutValuesContextModule.Consumer, { render = p1 })
+		return RoactModule.createElement(LayoutValuesContextModule.Consumer, { render = Callback })
 	end
 }

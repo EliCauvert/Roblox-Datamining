@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent.Parent._Index.AvatarExperienceProfilePictureEditor.AvatarExperienceProfilePictureEditor.Common.Enums)
+﻿return (require(script.Parent.Parent.Parent.Parent._Index.AvatarExperienceProfilePictureEditor.AvatarExperienceProfilePictureEditor.Common.Enums))

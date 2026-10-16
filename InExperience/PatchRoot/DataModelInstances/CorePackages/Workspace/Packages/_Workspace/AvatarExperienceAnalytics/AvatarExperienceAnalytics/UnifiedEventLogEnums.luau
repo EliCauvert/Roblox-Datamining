@@ -10,7 +10,8 @@
 		WIDGET_IMPRESSION = 7,
 		WIDGET_LOADED = 8,
 		UI_ELEMENT_IMPRESSION = 9,
-		PAGE_VIEW = 10
+		PAGE_VIEW = 10,
+		PAGE_EXIT = 11
 	},
 	MarketplaceUnifiedItemType = {
 		UNDEFINED_ITEM_TYPE = 0,

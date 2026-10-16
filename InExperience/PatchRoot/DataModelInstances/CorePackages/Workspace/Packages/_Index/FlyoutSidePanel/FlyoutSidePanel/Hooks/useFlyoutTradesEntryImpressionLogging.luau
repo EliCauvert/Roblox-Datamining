@@ -1,34 +1,35 @@
-﻿local flyoutSidePanel = script:FindFirstAncestor("FlyoutSidePanel")
-local parent = flyoutSidePanel.Parent
-local reactModule = require(parent.React)
-local useDrawerVisible = require(parent.Drawer).Hooks.useDrawerVisible
-local flyoutAnalyticsModule = require(flyoutSidePanel.Analytics.FlyoutAnalytics)
-local flyoutContentSettingsModule = require(flyoutSidePanel.Config.FlyoutContentSettings)
+﻿local FlyoutSidePanel = script:FindFirstAncestor("FlyoutSidePanel")
+local Parent = FlyoutSidePanel.Parent
+local ReactModule = require(Parent.React)
+local UseDrawerVisibleFunction = require(Parent.Drawer).Hooks.useDrawerVisible
+local FlyoutAnalyticsModule = require(FlyoutSidePanel.Analytics.FlyoutAnalytics)
+local FlyoutContentSettingsModule = require(FlyoutSidePanel.Config.FlyoutContentSettings)
 
-return function(p1)
-	-- upvalues: useDrawerVisible (ref), reactModule (ref), flyoutContentSettingsModule (ref), flyoutAnalyticsModule (ref)
-	local var1 = useDrawerVisible()
-	local var2 = reactModule.useRef(false)
-	local var3 = false
+return function(List) --[[ Line: 9 | Named "useFlyoutTradesEntryImpressionLogging" ]]
+	-- upvalues: UseDrawerVisibleFunction (copy), ReactModule (copy), FlyoutContentSettingsModule (copy), FlyoutAnalyticsModule (copy)
+	local UseDrawerVisibleResult = UseDrawerVisibleFunction()
+	local UseRefResult = ReactModule.useRef(false)
+	local Flag = false
 	
-	for i, v in p1 do
-		if v.itemType == flyoutContentSettingsModule.ItemType.Trades then
-			var3 = true
+	for _, value in List do
+		if value.itemType == FlyoutContentSettingsModule.ItemType.Trades then
+			Flag = true
 			break
 		end
 	end
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), var2 (ref), var3 (write), flyoutAnalyticsModule (copy), flyoutContentSettingsModule (copy)
-		if not var1 then
-			var2.current = false
+	ReactModule.useEffect(function() --[[ Line: 21 ]]
+		-- upvalues: UseDrawerVisibleResult (copy), UseRefResult (copy), Flag (ref), FlyoutAnalyticsModule (upval), FlyoutContentSettingsModule (upval)
+		if not UseDrawerVisibleResult then
+			UseRefResult.current = false
 			
 			return
-		elseif var3 and not var2.current then
-			var2.current = true
-			flyoutAnalyticsModule.onFlyoutContentItemImpressed({
+		end
+		if Flag and not UseRefResult.current then
+			UseRefResult.current = true
+			FlyoutAnalyticsModule.onFlyoutContentItemImpressed({
 				source = "impression",
-				integrationId = flyoutContentSettingsModule.ItemType.Trades
+				integrationId = FlyoutContentSettingsModule.ItemType.Trades
 			})
 		end
-	end, { var1, var3 })
+	end, { UseDrawerVisibleResult, Flag })
 end

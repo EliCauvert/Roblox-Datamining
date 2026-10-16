@@ -1,3 +1,3 @@
-﻿local roduxModule = require(game:GetService("CorePackages").Packages.Rodux)
+﻿local RoduxModule = require(game:GetService("CorePackages").Packages.Rodux)
 
-return roduxModule.Store.new(require(game:GetService("CoreGui").RobloxGui.Modules.Settings.Pages.ShareGame.AppReducer), nil, { roduxModule.thunkMiddleware })
+return RoduxModule.Store.new(require(game:GetService("CoreGui").RobloxGui.Modules.Settings.Pages.ShareGame.AppReducer), nil, { RoduxModule.thunkMiddleware })

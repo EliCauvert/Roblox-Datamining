@@ -1,29 +1,31 @@
-﻿local sduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
-local _ = require(sduiCoreSystem.Parent.Signals)
-local propResultCategory = require(sduiCoreSystem.ClientBinding.SduiClientBindingTypes).PropResultCategory
-local buildDefaultPropModule = require(sduiCoreSystem.ClientBinding.PropBuilder.buildDefaultProp)
-local _ = require(sduiCoreSystem.SduiBuilderTypes)
-local _ = require(sduiCoreSystem.ClientBinding.SduiDataBindingContentType)
-local sduiPropUtilsModule = require(sduiCoreSystem.ClientBinding.PropBuilder.SduiPropUtils)
-local sduiClientBindingParsersModule = require(sduiCoreSystem.ClientBinding.PropBuilder.SduiClientBindingParsers)
+﻿local SduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
+local _ = require(SduiCoreSystem.Parent.Signals)
+local PropResultCategory = require(SduiCoreSystem.ClientBinding.SduiClientBindingTypes).PropResultCategory
+local BuildDefaultPropModule = require(SduiCoreSystem.ClientBinding.PropBuilder.buildDefaultProp)
+local _ = require(SduiCoreSystem.SduiBuilderTypes)
+local _ = require(SduiCoreSystem.ClientBinding.SduiDataBindingContentType)
+local SduiPropUtilsModule = require(SduiCoreSystem.ClientBinding.PropBuilder.SduiPropUtils)
+local SduiClientBindingParsersModule = require(SduiCoreSystem.ClientBinding.PropBuilder.SduiClientBindingParsers)
 
-local function buildStringProp(p1, p2, p3, p4, p5, p6, p7)
-	-- upvalues: sduiClientBindingParsersModule (ref), propResultCategory (ref), sduiPropUtilsModule (ref), buildDefaultPropModule (ref), buildStringProp (ref)
-	p7 = p7 or sduiClientBindingParsersModule.parseToString
+local function buildStringProp(p1, p2, p3, p4, p5, p6, p7) --[[ Line: 19 ]]
+	-- upvalues: SduiClientBindingParsersModule (copy), PropResultCategory (copy), SduiPropUtilsModule (copy), BuildDefaultPropModule (copy), buildStringProp (copy)
+	local Callback = p7 or SduiClientBindingParsersModule.parseToString
 	
 	if p1 == "translation" then
-		local var1 = p5.resolveLocalizedLiteral(p2)
+		local ResolveLocalizedLiteralResult = p5.resolveLocalizedLiteral(p2)
 		
-		if var1 then
-			return if p7 then p7(var1) else var1, propResultCategory.Literal
+		if ResolveLocalizedLiteralResult then
+			return if Callback then Callback(ResolveLocalizedLiteralResult) else ResolveLocalizedLiteralResult, PropResultCategory.Literal
+		else
+			return nil, PropResultCategory.Failed
 		end
-		return nil, propResultCategory.Failed
 	elseif p1 == "format" then
-		return sduiPropUtilsModule.generateFormatStringPropValue(p2, p3, p5, p4, p7), propResultCategory.PropSignal
+		return SduiPropUtilsModule.generateFormatStringPropValue(p2, p3, p5, p4, Callback), PropResultCategory.PropSignal
+	else
+		local DefaultPropModule, DefaultPropModule2 = BuildDefaultPropModule(p1, p2, p3, p4, p5, p6, Callback, buildStringProp)
+		
+		return DefaultPropModule, DefaultPropModule2
 	end
-	local var2, var3 = buildDefaultPropModule(p1, p2, p3, p4, p5, p6, p7, buildStringProp)
-	
-	return var2, var3
 end
 
 return buildStringProp

@@ -1,24 +1,23 @@
-﻿local parent = script:FindFirstAncestor("SocialCommon").Parent
-local reactModule = require(parent.React)
-local UIBloxModule = require(parent.UIBlox)
-local dashModule = require(parent.Dash)
-local text = require(parent.AppCommonLib).Text
-local useStyle = UIBloxModule.Core.Style.useStyle
-local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
-local imageSetButton = UIBloxModule.Core.ImageSet.ImageSetButton
-local styledTextLabel = UIBloxModule.App.Text.StyledTextLabel
-local iconSize = UIBloxModule.App.Constant.IconSize
-local badge = UIBloxModule.App.Indicator.Badge
-local colors = UIBloxModule.App.Style.Colors
-local useImpressionsTagger = require(parent.Impressions).useImpressionsTagger
-local t = {
+﻿local Parent = script:FindFirstAncestor("SocialCommon").Parent
+local ReactModule = require(Parent.React)
+local UIBloxModule = require(Parent.UIBlox)
+local DashModule = require(Parent.Dash)
+local Text = require(Parent.AppCommonLib).Text
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
+local ImageSetButton = UIBloxModule.Core.ImageSet.ImageSetButton
+local StyledTextLabel = UIBloxModule.App.Text.StyledTextLabel
+local Badge = UIBloxModule.App.Indicator.Badge
+local Colors = UIBloxModule.App.Style.Colors
+local UseImpressionsTaggerFunction = require(Parent.Impressions).useImpressionsTagger
+local config = {
 	badgeValue = nil,
 	icon = "",
 	labelText = "",
 	tileSize = 100,
 	borderThickness = 0,
-	onActivated = function() end,
-	iconSize = iconSize.Large,
+	onActivated = function() --[[ Line: 62 ]] end,
+	iconSize = UIBloxModule.App.Constant.IconSize.Large,
 	cornerRadius = UDim.new(0, 8),
 	styleProps = {
 		containFooterInTileSize = false,
@@ -26,81 +25,81 @@ local t = {
 	}
 }
 
-return function(p1)
-	-- upvalues: dashModule (ref), t (ref), useStyle (ref), text (ref), reactModule (ref), useImpressionsTagger (ref), imageSetButton (ref), imageSetLabel (ref), colors (ref), badge (ref), styledTextLabel (ref)
-	local var1 = dashModule.join(t, p1 or {})
-	local var2 = useStyle()
-	local font = var2.Font
-	local styleProps = var1.styleProps
-	local var3 = if styleProps.font then styleProps.font else font.CaptionHeader
-	local textHeight = text.GetTextHeight(var1.labelText, var3.Font, font.BaseSize * var3.RelativeSize)
-	local var4 = var1.tileSize - var1.borderThickness
-	local var5 = if var1.styleProps.containFooterInTileSize then var4 - textHeight * 2 - 8 else var4
-	local var6 = nil
+return function(p1) --[[ Line: 73 ]]
+	-- upvalues: DashModule (copy), config (copy), UseStyleFunction (copy), Text (copy), ReactModule (copy), UseImpressionsTaggerFunction (copy), ImageSetButton (copy), ImageSetLabel (copy), Colors (copy), Badge (copy), StyledTextLabel (copy)
+	local JoinResult = DashModule.join(config, p1 or {})
+	local UseStyleResult = UseStyleFunction()
+	local UseStyleResultFont = UseStyleResult.Font
+	local StyleProps = JoinResult.styleProps
+	local StylePropsFont = if StyleProps.font then StyleProps.font else UseStyleResultFont.CaptionHeader
+	local TextHeight: number = Text.GetTextHeight(JoinResult.labelText, StylePropsFont.Font, UseStyleResultFont.BaseSize * StylePropsFont.RelativeSize)
+	local TileSizeDelta = JoinResult.tileSize - JoinResult.borderThickness
+	local XOffset = if JoinResult.styleProps.containFooterInTileSize then TileSizeDelta - TextHeight * 2 - 8 else TileSizeDelta
+	local UseRefResult = nil
 	
-	if var1.impressionsTag then
-		var6 = reactModule.useRef(nil)
-		useImpressionsTagger(var6, var1.impressionsTag, var1.LayoutOrder)
+	if JoinResult.impressionsTag then
+		UseRefResult = ReactModule.useRef(nil)
+		UseImpressionsTaggerFunction(UseRefResult, JoinResult.impressionsTag, JoinResult.LayoutOrder)
 	end
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		LayoutOrder = var1.LayoutOrder,
+		LayoutOrder = JoinResult.LayoutOrder,
 		AutomaticSize = Enum.AutomaticSize.Y,
-		Size = UDim2.fromOffset(var5, 0),
-		ref = var6
+		Size = UDim2.fromOffset(XOffset, 0),
+		ref = UseRefResult
 	}, {
-		UIPadding = reactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, var1.borderThickness) }),
-		UIListLayout = reactModule.createElement("UIListLayout", {
+		UIPadding = ReactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, JoinResult.borderThickness) }),
+		UIListLayout = ReactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
 			VerticalAlignment = Enum.VerticalAlignment.Bottom,
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			Padding = UDim.new(0, 8)
 		}),
-		Tile = reactModule.createElement(imageSetButton, {
-			Size = UDim2.fromOffset(var5, var5),
-			BackgroundColor3 = var2.Theme.BackgroundUIDefault.Color,
-			BackgroundTransparency = var2.Theme.BackgroundUIDefault.Transparency,
-			[reactModule.Event.Activated] = var1.onActivated,
+		Tile = ReactModule.createElement(ImageSetButton, {
+			Size = UDim2.fromOffset(XOffset, XOffset),
+			BackgroundColor3 = UseStyleResult.Theme.BackgroundUIDefault.Color,
+			BackgroundTransparency = UseStyleResult.Theme.BackgroundUIDefault.Transparency,
+			[ReactModule.Event.Activated] = JoinResult.onActivated,
 			LayoutOrder = 1
 		}, {
-			UICorner = reactModule.createElement("UICorner", { CornerRadius = var1.cornerRadius }),
-			UIStroke = reactModule.createElement("UIStroke", {
-				Color = var2.Theme.Divider.Color,
-				Transparency = var2.Theme.Divider.Transparency,
-				Thickness = var1.borderThickness
+			UICorner = ReactModule.createElement("UICorner", { CornerRadius = JoinResult.cornerRadius }),
+			UIStroke = ReactModule.createElement("UIStroke", {
+				Color = UseStyleResult.Theme.Divider.Color,
+				Transparency = UseStyleResult.Theme.Divider.Transparency,
+				Thickness = JoinResult.borderThickness
 			}),
-			Icon = reactModule.createElement(imageSetLabel, {
+			Icon = ReactModule.createElement(ImageSetLabel, {
 				BackgroundTransparency = 1,
 				AnchorPoint = Vector2.new(0.5, 0.5),
-				ImageTransparency = var2.Theme.IconEmphasis.Transparency,
-				ImageColor3 = colors.White,
-				Image = var1.icon,
-				Size = UDim2.fromOffset(var1.iconSize, var1.iconSize),
+				ImageTransparency = UseStyleResult.Theme.IconEmphasis.Transparency,
+				ImageColor3 = Colors.White,
+				Image = JoinResult.icon,
+				Size = UDim2.fromOffset(JoinResult.iconSize, JoinResult.iconSize),
 				Position = UDim2.fromScale(0.5, 0.5)
 			}),
-			Badge = var1.badgeValue and reactModule.createElement(badge, {
+			Badge = JoinResult.badgeValue and ReactModule.createElement(Badge, {
 				anchorPoint = Vector2.new(1, 0),
-				position = UDim2.fromOffset(var1.tileSize - 8, 8),
-				value = var1.badgeValue
+				position = UDim2.fromOffset(JoinResult.tileSize - 8, 8),
+				value = JoinResult.badgeValue
 			})
 		}),
-		Label = reactModule.createElement(imageSetButton, {
+		Label = ReactModule.createElement(ImageSetButton, {
 			BackgroundTransparency = 1,
 			AutomaticSize = Enum.AutomaticSize.Y,
 			Size = UDim2.fromScale(1, 0),
-			[reactModule.Event.Activated] = var1.onActivated,
+			[ReactModule.Event.Activated] = JoinResult.onActivated,
 			LayoutOrder = 2
 		}, {
-			Text = reactModule.createElement(styledTextLabel, {
+			Text = ReactModule.createElement(StyledTextLabel, {
 				fluidSizing = false,
 				richText = false,
 				lineHeight = 1,
-				text = var1.labelText,
-				fontStyle = var3,
-				colorStyle = var2.Theme.TextEmphasis,
-				size = UDim2.fromOffset(var5, textHeight * 2),
+				text = JoinResult.labelText,
+				fontStyle = StylePropsFont,
+				colorStyle = UseStyleResult.Theme.TextEmphasis,
+				size = UDim2.fromOffset(XOffset, TextHeight * 2),
 				textTruncate = Enum.TextTruncate.AtEnd,
-				textXAlignment = styleProps.textXAlignment,
+				textXAlignment = StyleProps.textXAlignment,
 				textYAlignment = Enum.TextYAlignment.Top
 			})
 		})

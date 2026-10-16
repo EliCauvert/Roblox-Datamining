@@ -1,16 +1,16 @@
-﻿local parent = script:FindFirstAncestor("ProfileShareLinks").Parent
-local dashModule = require(parent.Dash)
-local eventNamesModule = require(script.Parent.EventNames)
+﻿local Parent = script:FindFirstAncestor("ProfileShareLinks").Parent
+local DashModule = require(Parent.Dash)
+local EventNamesModule = require(script.Parent.EventNames)
 
 return {
-	[eventNamesModule.ProfileShareLinkActivated] = {
+	[EventNamesModule.ProfileShareLinkActivated] = {
 		context = "",
-		eventType = require(parent.SocialLuaAnalytics).Analytics.Enums.EventTypes.ButtonClick,
-		additionalInfo = { btn = eventNamesModule.ProfileShareLinkActivated },
+		eventType = require(Parent.SocialLuaAnalytics).Analytics.Enums.EventTypes.ButtonClick,
+		additionalInfo = { btn = EventNamesModule.ProfileShareLinkActivated },
 		formatRulesForAdditionalInfo = {
-			context = dashModule.identity,
-			shareType = dashModule.identity,
-			stamp = dashModule.identity
+			context = DashModule.identity,
+			shareType = DashModule.identity,
+			stamp = DashModule.identity
 		}
 	}
 }

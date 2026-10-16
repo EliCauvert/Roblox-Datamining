@@ -1,15 +1,15 @@
-﻿local parent = script.Parent
-local networkRequests = parent.networkRequests
-local createUploadContactsByUserModule = require(networkRequests.createUploadContactsByUser)
-local createFindContactFriendsModule = require(networkRequests.createFindContactFriends)
-local createGetContactEntitiesByContactIdModule = require(networkRequests.createGetContactEntitiesByContactId)
-local _ = require(parent.Types.networkRequestsTypes)
+﻿local Parent = script.Parent
+local NetworkRequests = Parent.networkRequests
+local CreateUploadContactsByUserModule = require(NetworkRequests.createUploadContactsByUser)
+local CreateFindContactFriendsModule = require(NetworkRequests.createFindContactFriends)
+local CreateGetContactEntitiesByContactIdModule = require(NetworkRequests.createGetContactEntitiesByContactId)
+local _ = require(Parent.Types.networkRequestsTypes)
 
-return function(p1)
-	-- upvalues: createUploadContactsByUserModule (ref), createFindContactFriendsModule (ref), createGetContactEntitiesByContactIdModule (ref)
+return function(p1) --[[ Line: 8 ]]
+	-- upvalues: CreateUploadContactsByUserModule (copy), CreateFindContactFriendsModule (copy), CreateGetContactEntitiesByContactIdModule (copy)
 	return {
-		UploadContactsByUser = createUploadContactsByUserModule(p1),
-		FindContactFriends = createFindContactFriendsModule(p1),
-		GetContactEntitiesByContactId = createGetContactEntitiesByContactIdModule(p1)
+		UploadContactsByUser = CreateUploadContactsByUserModule(p1),
+		FindContactFriends = CreateFindContactFriendsModule(p1),
+		GetContactEntitiesByContactId = CreateGetContactEntitiesByContactIdModule(p1)
 	}
 end

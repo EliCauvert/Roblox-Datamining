@@ -1,37 +1,34 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local parent = script.Parent.Parent
-local constantsModule = require(parent.Constants)
-local _ = require(parent.Services.Analytics)
-local _ = require(corePackagesService.Workspace.Packages.AvatarExperienceInspectAndBuy)
+﻿local Parent = script.Parent.Parent
+local ConstantsModule = require(Parent.Constants)
+local _ = require(Parent.Services.Analytics)
+local _ = require(game:GetService("CorePackages").Workspace.Packages.AvatarExperienceInspectAndBuy)
 
-return function(p1, p2, p3, p4)
-	-- upvalues: constantsModule (ref)
+return function(p1, p2, Bundle, Price) --[[ Line: 18 ]]
+	-- upvalues: ConstantsModule (copy)
 	if not p2 then
-		return { price = p4 }
+		return { price = Price }
 	end
-	local bundleType, var1
-	local _ = nil
-	local _ = nil
-	
-	if p3 == constantsModule.ItemType.Bundle then
-		local var2 = p1.bundles and p1.bundles[p2]
+	local BundleType = nil
+	local Number = nil
+	if Bundle == ConstantsModule.ItemType.Bundle then
+		local Bundle1 = p1.bundles and p1.bundles[p2]
 		
-		if not var2 then
-			return { price = p4 }
+		if not Bundle1 then
+			return { price = Price }
 		end
-		bundleType = var2.bundleType
-		var1 = tonumber(var2.price)
+		BundleType = Bundle1.bundleType
+		Number = tonumber(Bundle1.price)
 	else
-		local var3 = p1.assets and p1.assets[p2]
+		local Asset = p1.assets and p1.assets[p2]
 		
-		if not var3 then
-			return { price = p4 }
+		if not Asset then
+			return { price = Price }
 		end
-		bundleType = var3.assetTypeId
-		var1 = tonumber(var3.price)
+		BundleType = Asset.assetTypeId
+		Number = tonumber(Asset.price)
 	end
 	return {
-		itemSubType = if bundleType == nil or bundleType == "" then nil else bundleType,
-		price = p4 or var1
+		itemSubType = if BundleType == nil or BundleType == "" then nil else BundleType,
+		price = Price or Number
 	}
 end

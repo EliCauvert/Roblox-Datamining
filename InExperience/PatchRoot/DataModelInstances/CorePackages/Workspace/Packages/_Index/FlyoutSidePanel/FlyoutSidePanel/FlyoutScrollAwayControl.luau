@@ -1,59 +1,59 @@
-﻿local parent = script:FindFirstAncestor("FlyoutSidePanel").Parent
-local signalsModule = require(parent.Signals)
-local visibilityControl = require(parent.AppNavBar).VisibilityControl
-local getDrawerVisibleStore = require(parent.Drawer).Stores.GetDrawerVisibleStore
-local t = {
+﻿local Parent = script:FindFirstAncestor("FlyoutSidePanel").Parent
+local SignalsModule = require(Parent.Signals)
+local VisibilityControl = require(Parent.AppNavBar).VisibilityControl
+local GetDrawerVisibleStoreFunction = require(Parent.Drawer).Stores.GetDrawerVisibleStore
+local Module = {
 	scrollAwayEnabled = false,
 	flyoutVisible = false,
 	contextualMenuVisible = false,
 	flyoutVisibleStore = nil,
 	disposeFlyoutVisibleEffect = nil
 }
-t.__index = t
-local var1 = nil
+Module.__index = Module
+local T = nil
 
-function t.getInstance()
-	-- upvalues: var1 (write), t (ref)
-	if not var1 then
-		var1 = {}
-		setmetatable(var1, t)
-		var1:initialize()
+function Module.getInstance() --[[ Line: 40 ]]
+	-- upvalues: T (ref), Module (copy)
+	if not T then
+		T = {}
+		setmetatable(T, Module)
+		T:initialize()
 	end
-	return var1
+	return T
 end
 
-function t.initialize(p1)
-	-- upvalues: getDrawerVisibleStore (ref), signalsModule (ref)
-	p1.flyoutVisibleStore = getDrawerVisibleStore(false)
-	p1.disposeFlyoutVisibleEffect = signalsModule.createEffect(function(p2)
-		-- upvalues: p1 (ref)
+function Module.initialize(p1) --[[ Line: 49 ]]
+	-- upvalues: GetDrawerVisibleStoreFunction (copy), SignalsModule (copy)
+	p1.flyoutVisibleStore = GetDrawerVisibleStoreFunction(false)
+	p1.disposeFlyoutVisibleEffect = SignalsModule.createEffect(function(p2) --[[ Line: 51 ]]
+		-- upvalues: p1 (copy)
 		p1.flyoutVisible = p1.flyoutVisibleStore.getDrawerVisible(p2)
 		p1:updateScrollAwayState()
 	end)
 end
 
-function t.updateScrollAwayState(p1)
-	-- upvalues: visibilityControl (ref)
-	visibilityControl.setEnabled(p1.scrollAwayEnabled and (not p1.flyoutVisible and not p1.contextualMenuVisible))
+function Module.updateScrollAwayState(p1) --[[ Line: 58 ]]
+	-- upvalues: VisibilityControl (copy)
+	VisibilityControl.setEnabled(p1.scrollAwayEnabled and (not p1.flyoutVisible and not p1.contextualMenuVisible))
 end
 
-function t.setScrollAwayEnabled(value, p1)
-	value.scrollAwayEnabled = p1
-	value:updateScrollAwayState()
+function Module.setScrollAwayEnabled(p1, ScrollAwayEnabled) --[[ Line: 63 ]]
+	p1.scrollAwayEnabled = ScrollAwayEnabled
+	p1:updateScrollAwayState()
 end
 
-function t.setContextualMenuVisible(value, p1)
-	value.contextualMenuVisible = p1
-	value:updateScrollAwayState()
+function Module.setContextualMenuVisible(p1, ContextualMenuVisible) --[[ Line: 68 ]]
+	p1.contextualMenuVisible = ContextualMenuVisible
+	p1:updateScrollAwayState()
 end
 
 return {
-	setScrollAwayEnabled = function(value)
-		-- upvalues: t (ref)
-		return t.getInstance():setScrollAwayEnabled(value)
+	setScrollAwayEnabled = function(p1) --[[ Line: 74 ]]
+		-- upvalues: Module (copy)
+		return Module.getInstance():setScrollAwayEnabled(p1)
 	end,
-	setContextualMenuVisible = function(value)
-		-- upvalues: t (ref)
-		return t.getInstance():setContextualMenuVisible(value)
+	setContextualMenuVisible = function(p1) --[[ Line: 77 ]]
+		-- upvalues: Module (copy)
+		return Module.getInstance():setContextualMenuVisible(p1)
 	end
 }

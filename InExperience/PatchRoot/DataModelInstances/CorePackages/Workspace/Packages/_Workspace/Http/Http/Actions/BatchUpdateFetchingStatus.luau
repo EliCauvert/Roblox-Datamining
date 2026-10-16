@@ -1,6 +1,6 @@
-﻿return require(script:FindFirstAncestor("Http").Parent.Rodux).makeActionCreator(script.Name, function(p1, p2)
+﻿return require(script:FindFirstAncestor("Http").Parent.Rodux).makeActionCreator(script.Name, function(FetchingStatuses, p1) --[[ Line: 11 ]]
 	return {
-		fetchingStatuses = p1,
-		shouldImmediatelyDispatch = p2 or false
+		fetchingStatuses = FetchingStatuses,
+		shouldImmediatelyDispatch = p1 or false
 	}
 end)

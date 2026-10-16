@@ -1,40 +1,40 @@
-﻿local reactModule = require(script:FindFirstAncestor("BuildExperience").Parent.React)
+﻿local ReactModule = require(script:FindFirstAncestor("BuildExperience").Parent.React)
 
-return function(p1, p2, p3)
-	-- upvalues: reactModule (ref)
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), p2 (ref), p3 (ref)
-		local current = p1.current
+return function(p1, p2, Callback) --[[ Line: 8 | Named "useScrollEndReached" ]]
+	-- upvalues: ReactModule (copy)
+	ReactModule.useEffect(function() --[[ Line: 13 ]]
+		-- upvalues: p1 (copy), p2 (copy), Callback (copy)
+		local Current = p1.current
 		
-		if current == nil then return end
-		local function checkDistanceToEnd()
-			-- upvalues: current (ref), p2 (copy), p3 (copy)
-			local y = current.AbsoluteWindowSize.Y
+		if Current == nil then return end
+		local function checkDistanceToEnd() --[[ Line: 19 ]]
+			-- upvalues: Current (copy), p2 (upval), Callback (upval)
+			local Y = Current.AbsoluteWindowSize.Y
 			
-			if current.AbsoluteCanvasSize.Y - y - current.CanvasPosition.Y <= y * p2 then
-				p3()
+			if Current.AbsoluteCanvasSize.Y - Y - Current.CanvasPosition.Y <= Y * p2 then
+				Callback()
 			end
 		end
 		
-		local t = {}
+		local List = {}
 		
-		for i, v in {
+		for _, PropertyName in {
 			"CanvasPosition",
 			"AbsoluteCanvasSize",
 			"AbsoluteWindowSize"
 		} do
-			table.insert(t, current:GetPropertyChangedSignal(v):Connect(checkDistanceToEnd))
+			table.insert(List, Current:GetPropertyChangedSignal(PropertyName):Connect(checkDistanceToEnd))
 		end
-		local y = current.AbsoluteWindowSize.Y
+		local Y = Current.AbsoluteWindowSize.Y
 		
-		if current.AbsoluteCanvasSize.Y - y - current.CanvasPosition.Y <= y * p2 then
-			p3()
+		if Current.AbsoluteCanvasSize.Y - Y - Current.CanvasPosition.Y <= Y * p2 then
+			Callback()
 		end
-		return function()
-			-- upvalues: t (ref)
-			for i, v in t do
-				v:Disconnect()
+		return function() --[[ Line: 34 ]]
+			-- upvalues: List (copy)
+			for _, Connection in List do
+				Connection:Disconnect()
 			end
 		end
-	end, { p1, p2, p3 })
+	end, { p1, p2, Callback })
 end

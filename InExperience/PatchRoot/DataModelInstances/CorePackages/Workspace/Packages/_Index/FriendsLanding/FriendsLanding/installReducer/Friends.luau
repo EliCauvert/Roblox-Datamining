@@ -1,13 +1,13 @@
-﻿local roduxFriends = require(script:FindFirstAncestor("FriendsLanding").dependencies).RoduxFriends
-local convertActionsModule = require(script.Parent.convertActions)
-local friendsActionAdaptorModule = require(script.Parent.friendsActionAdaptor)
-local t = {
+﻿local RoduxFriends = require(script:FindFirstAncestor("FriendsLanding").dependencies).RoduxFriends
+local ConvertActionsModule = require(script.Parent.convertActions)
+local FriendsActionAdaptorModule = require(script.Parent.friendsActionAdaptor)
+local config = {
 	countsByUserId = {},
 	byUserId = {},
 	requests = { receivedCount = 0 }
 }
 
-return function(p1)
-	-- upvalues: convertActionsModule (ref), roduxFriends (ref), friendsActionAdaptorModule (ref), t (ref)
-	return convertActionsModule(roduxFriends.installReducer(), friendsActionAdaptorModule(p1), t)
+return function(p1) --[[ Line: 16 ]]
+	-- upvalues: ConvertActionsModule (copy), RoduxFriends (copy), FriendsActionAdaptorModule (copy), config (copy)
+	return ConvertActionsModule(RoduxFriends.installReducer(), FriendsActionAdaptorModule(p1), config)
 end

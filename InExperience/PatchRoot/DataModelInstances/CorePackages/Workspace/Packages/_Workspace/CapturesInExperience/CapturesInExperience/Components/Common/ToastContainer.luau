@@ -1,190 +1,158 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local httpService = game:GetService("HttpService")
-local userInputService = game:GetService("UserInputService")
-local dashModule = require(parent_1.Dash)
-local localizationModule = require(parent_1.Localization)
-local reactModule = require(parent_1.React)
-local roactUtilsModule = require(parent_1.RoactUtils)
-local socialStopwatchModule = require(parent_1.SocialStopwatch)
-local UIBloxModule = require(parent_1.UIBlox)
-local images = UIBloxModule.App.ImageSet.Images
-local toast = UIBloxModule.App.Dialog.Toast
-local useAnalyticsModule = require(parent.Analytics.useAnalytics)
-local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
-local useLocalization = localizationModule.Hooks.useLocalization
-local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
-local capturesToastTypeModule = require(parent.Enums.CapturesToastType)
-local captureTypeModule = require(parent.Enums.CaptureType)
-local carouselOpenedModule = require(parent.Actions.CarouselOpened)
-local constantsModule = require(parent.Constants)
-local eventNamesModule = require(parent.Analytics.EventNames)
-local externalShareSourceTypeModule = require(parent.Enums.ExternalShareSourceType)
-local shareCaptureModule = require(parent.Thunks.ShareCapture)
-local startMomentsCreationFlowModule = require(parent.Thunks.StartMomentsCreationFlow)
-local toastVanishedModule = require(parent.Actions.ToastVanished)
-local _ = require(parent.Types)
-local toastControllerModule = require(script.Parent.ToastController)
-local fFlagBuildExperienceInGameCaptureToChat = require(parent_1.SharedFlags).FFlagBuildExperienceInGameCaptureToChat
-local fFlagCreateMomentsToastModule = require(parent.Flags.FFlagCreateMomentsToast)
-local fFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
-local _ = {
-	captureSaved = "captureSaved",
-	captureSavedToDevice = "captureSavedToDevice",
-	capturesEnabled = "capturesEnabled",
-	createAction = "createAction",
-	discoverPostWatch = "discoverPostWatch",
-	momentProcessingDescription = "momentProcessingDescription",
-	momentProcessingTitle = "momentProcessingTitle",
-	momentsTitle = "momentsTitle",
-	openInFiles = "openInFiles",
-	shareAction = "shareAction",
-	shareCaptureDescription = "shareCaptureDescription",
-	videoCaptureFailed = "videoCaptureFailed",
-	videoCaptureInitializationCapturingAlreadyError = "videoCaptureInitializationCapturingAlreadyError",
-	videoCaptureInitializationNoDeviceSupportError = "videoCaptureInitializationNoDeviceSupportError",
-	videoCaptureInitializationNoSpaceOnDeviceError = "videoCaptureInitializationNoSpaceOnDeviceError",
-	videoCaptureInitializationOtherError = "videoCaptureInitializationOtherError",
-	videoCaptureOtherError = "videoCaptureOtherError",
-	viewAction = "viewAction"
-}
-local var1 = if userInputService:GetPlatform() ~= Enum.Platform.Windows then userInputService:GetPlatform() == Enum.Platform.OSX else true
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local HttpService = game:GetService("HttpService")
+local UserInputService = game:GetService("UserInputService")
+local DashModule = require(Parent1.Dash)
+local ReactModule = require(Parent1.React)
+local RoactUtilsModule = require(Parent1.RoactUtils)
+local SocialStopwatchModule = require(Parent1.SocialStopwatch)
+local UIBloxModule = require(Parent1.UIBlox)
+local Images = UIBloxModule.App.ImageSet.Images
+local Toast = UIBloxModule.App.Dialog.Toast
+local UseAnalyticsModule = require(Parent.Analytics.useAnalytics)
+local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
+local UseLocalizationFunction = require(Parent1.Localization).Hooks.useLocalization
+local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
+local CapturesToastTypeModule = require(Parent.Enums.CapturesToastType)
+local CaptureTypeModule = require(Parent.Enums.CaptureType)
+local CarouselOpenedModule = require(Parent.Actions.CarouselOpened)
+local ConstantsModule = require(Parent.Constants)
+local EventNamesModule = require(Parent.Analytics.EventNames)
+local ExternalShareSourceTypeModule = require(Parent.Enums.ExternalShareSourceType)
+local ShareCaptureModule = require(Parent.Thunks.ShareCapture)
+local StartMomentsCreationFlowModule = require(Parent.Thunks.StartMomentsCreationFlow)
+local ToastVanishedModule = require(Parent.Actions.ToastVanished)
+local _ = require(Parent.Types)
+local ToastControllerModule = require(script.Parent.ToastController)
+local SharedFlagsModule = require(Parent1.SharedFlags)
+local FFlagBuildExperienceInGameCaptureToChat = SharedFlagsModule.FFlagBuildExperienceInGameCaptureToChat
+local FFlagMomentsCreationFeatureGate = SharedFlagsModule.FFlagMomentsCreationFeatureGate
+local GetMomentsCapabilitiesFunction = require(Parent1.MomentsCommon).Stores.GetMomentsCapabilities
+local FFlagCreateMomentsToastModule = require(Parent.Flags.FFlagCreateMomentsToast)
+local FFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(Parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
+local IsPlatformMatch: boolean = UserInputService:GetPlatform() == Enum.Platform.Windows or UserInputService:GetPlatform() == Enum.Platform.OSX
 
-local function _(p1)
-	-- upvalues: fFlagEnableCapturesGalleryRetrievalCoreScriptModule (ref), captureTypeModule (ref)
-	if not p1 then
+local function _(p1): boolean --[[ Line: 79 | Named "isVideoCapture" ]]
+	-- upvalues: FFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), CaptureTypeModule (copy)
+	if p1 then
+		local CaptureInfo = p1.captureInfo
+		
+		return if CaptureInfo then if FFlagEnableCapturesGalleryRetrievalCoreScriptModule then CaptureInfo.CaptureType == Enum.CaptureType.Video else CaptureInfo.type == CaptureTypeModule.Video else false
+	else
 		return false
 	end
-	local captureInfo = p1.captureInfo
-	
-	return if captureInfo then if fFlagEnableCapturesGalleryRetrievalCoreScriptModule then captureInfo.CaptureType == Enum.CaptureType.Video else captureInfo.type == captureTypeModule.Video else false
 end
 
-local t = {
-	[capturesToastTypeModule.CaptureSavedToDevice] = {
+local config = {
+	[CapturesToastTypeModule.CaptureSavedToDevice] = {
 		toastTitleKey = "captureSavedToDevice",
-		iconImage = images["icons/status/success"],
-		onActivated = if var1 then function(p1, _, p2)
-			-- upvalues: eventNamesModule (ref), fFlagEnableCapturesGalleryRetrievalCoreScriptModule (ref), captureTypeModule (ref)
-			local var2
-			p1.fireEvent(eventNamesModule.CapturesSavedToDeviceToastOpenButtonActivated)
+		iconImage = Images["icons/status/success"],
+		onActivated = if IsPlatformMatch then function(p1, _, p2) --[[ Line: 100 ]]
+			-- upvalues: EventNamesModule (copy), FFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), CaptureTypeModule (copy)
+			p1.fireEvent(EventNamesModule.CapturesSavedToDeviceToastOpenButtonActivated)
+			local IsCaptureTypeMatch = nil
 			
 			if p2 then
-				local captureInfo = p2.captureInfo
-				
-				if not captureInfo then
-					var2 = false
-				elseif fFlagEnableCapturesGalleryRetrievalCoreScriptModule then
-					var2 = captureInfo.CaptureType == Enum.CaptureType.Video
-					var2 = nil
-				else
-					var2 = captureInfo.type == captureTypeModule.Video
-				end
+				local CaptureInfo = p2.captureInfo
+				IsCaptureTypeMatch = if CaptureInfo then if FFlagEnableCapturesGalleryRetrievalCoreScriptModule then CaptureInfo.CaptureType == Enum.CaptureType.Video else CaptureInfo.type == CaptureTypeModule.Video else false
 			else
-				var2 = false
+				IsCaptureTypeMatch = false
 			end
-			if var2 then
+			if IsCaptureTypeMatch then
 				game:OpenVideosFolder()
 				
 				return
+			else
+				game:OpenScreenshotsFolder()
 			end
-			game:OpenScreenshotsFolder()
 		end else nil,
-		toastCTAKey = if var1 then "openInFiles" else nil
+		toastCTAKey = if IsPlatformMatch then "openInFiles" else nil
 	},
-	[capturesToastTypeModule.CaptureTaken] = {
+	[CapturesToastTypeModule.CaptureTaken] = {
 		toastCTAKey = "shareAction",
 		toastSubtitleKey = "shareCaptureDescription",
 		toastTitleKey = "captureSaved",
-		iconImage = images["icons/controls/screenshot"],
-		onActivated = function(p1, p2, p3)
-			-- upvalues: eventNamesModule (ref), fFlagEnableCapturesGalleryRetrievalCoreScriptModule (ref), captureTypeModule (ref), socialStopwatchModule (ref), shareCaptureModule (ref), externalShareSourceTypeModule (ref)
-			local var2
-			p1.fireEvent(eventNamesModule.CapturesShareToastButtonActivated)
+		iconImage = Images["icons/controls/screenshot"],
+		onActivated = function(p1, Callback: (any) -> (), p2) --[[ Line: 114 ]]
+			-- upvalues: EventNamesModule (copy), FFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), CaptureTypeModule (copy), SocialStopwatchModule (copy), ShareCaptureModule (copy), ExternalShareSourceTypeModule (copy)
+			p1.fireEvent(EventNamesModule.CapturesShareToastButtonActivated)
+			local IsCaptureTypeMatch = nil
 			
-			if p3 then
-				local captureInfo = p3.captureInfo
-				
-				if not captureInfo then
-					var2 = false
-				elseif fFlagEnableCapturesGalleryRetrievalCoreScriptModule then
-					var2 = captureInfo.CaptureType == Enum.CaptureType.Video
-					var2 = nil
-				else
-					var2 = captureInfo.type == captureTypeModule.Video
-				end
+			if p2 then
+				local CaptureInfo = p2.captureInfo
+				IsCaptureTypeMatch = if CaptureInfo then if FFlagEnableCapturesGalleryRetrievalCoreScriptModule then CaptureInfo.CaptureType == Enum.CaptureType.Video else CaptureInfo.type == CaptureTypeModule.Video else false
 			else
-				var2 = false
+				IsCaptureTypeMatch = false
 			end
-			if var2 then
-				p1.fireEvent(eventNamesModule.CapturesVideoShareToastButtonActivated)
+			if IsCaptureTypeMatch then
+				p1.fireEvent(EventNamesModule.CapturesVideoShareToastButtonActivated)
 			end
-			if p3 and p3.captureInfo then
-				if not socialStopwatchModule.Stopwatch.get(socialStopwatchModule.Events.CaptureShared) then
-					socialStopwatchModule.Stopwatch.start(socialStopwatchModule.Events.CaptureShared)
+			if p2 and p2.captureInfo then
+				if not SocialStopwatchModule.Stopwatch.get(SocialStopwatchModule.Events.CaptureShared) then
+					SocialStopwatchModule.Stopwatch.start(SocialStopwatchModule.Events.CaptureShared)
 				end
-				p2(shareCaptureModule(p3.captureInfo, externalShareSourceTypeModule.Toast))
+				Callback(ShareCaptureModule(p2.captureInfo, ExternalShareSourceTypeModule.Toast))
 			end
 		end
 	},
-	[capturesToastTypeModule.CaptureTakenWithAction] = {
+	[CapturesToastTypeModule.CaptureTakenWithAction] = {
 		toastTitleKey = "captureSaved",
-		iconImage = images["icons/controls/screenshot"],
-		onActivated = function(_, _, p1)
+		iconImage = Images["icons/controls/screenshot"],
+		onActivated = function(_, _, p1) --[[ Line: 134 ]]
 			if p1 and p1.toastAction and p1.captureInfo then
 				p1.toastAction.onActivated(p1.captureInfo)
 			end
 		end
 	},
-	[capturesToastTypeModule.CapturesActivated] = {
+	[CapturesToastTypeModule.CapturesActivated] = {
 		toastTitleKey = "capturesEnabled",
-		iconImage = images["icons/status/success"]
+		iconImage = Images["icons/status/success"]
 	},
-	[capturesToastTypeModule.CaptureTakenWithMomentsCTA] = {
-		duration = if fFlagCreateMomentsToastModule then 5 else nil
+	[CapturesToastTypeModule.CaptureTakenWithMomentsCTA] = {
+		duration = if FFlagCreateMomentsToastModule then 5 else nil
 	},
-	[capturesToastTypeModule.MomentProcessing] = {},
-	[capturesToastTypeModule.VideoCaptureFailed] = {
+	[CapturesToastTypeModule.MomentProcessing] = {},
+	[CapturesToastTypeModule.VideoCaptureFailed] = {
 		toastTitleKey = "videoCaptureFailed",
-		iconImage = images["icons/status/alert"]
+		iconImage = Images["icons/status/alert"]
 	},
-	[capturesToastTypeModule.VideoCaptureInitializationCapturingAlreadyError] = {
+	[CapturesToastTypeModule.VideoCaptureInitializationCapturingAlreadyError] = {
 		toastTitleKey = "videoCaptureInitializationCapturingAlreadyError",
-		iconImage = images["icons/status/alert"]
+		iconImage = Images["icons/status/alert"]
 	},
-	[capturesToastTypeModule.VideoCaptureInitializationNoDeviceSupportError] = {
+	[CapturesToastTypeModule.VideoCaptureInitializationNoDeviceSupportError] = {
 		toastTitleKey = "videoCaptureInitializationNoDeviceSupportError",
-		iconImage = images["icons/status/alert"]
+		iconImage = Images["icons/status/alert"]
 	},
-	[capturesToastTypeModule.VideoCaptureInitializationNoSpaceOnDeviceError] = {
+	[CapturesToastTypeModule.VideoCaptureInitializationNoSpaceOnDeviceError] = {
 		toastTitleKey = "videoCaptureInitializationNoSpaceOnDeviceError",
-		iconImage = images["icons/status/alert"]
+		iconImage = Images["icons/status/alert"]
 	},
-	[capturesToastTypeModule.VideoCaptureInitializationOtherError] = {
+	[CapturesToastTypeModule.VideoCaptureInitializationOtherError] = {
 		toastTitleKey = "videoCaptureInitializationOtherError",
-		iconImage = images["icons/status/alert"]
+		iconImage = Images["icons/status/alert"]
 	},
-	[capturesToastTypeModule.VideoCaptureOtherError] = {
+	[CapturesToastTypeModule.VideoCaptureOtherError] = {
 		toastTitleKey = "videoCaptureOtherError",
-		iconImage = images["icons/status/alert"]
+		iconImage = Images["icons/status/alert"]
 	},
-	[capturesToastTypeModule.ViewCapture] = {
+	[CapturesToastTypeModule.ViewCapture] = {
 		toastCTAKey = "viewAction",
 		toastTitleKey = "captureSaved",
-		iconImage = images["icons/controls/screenshot"],
-		onActivated = function(p1, p2)
-			-- upvalues: eventNamesModule (ref), carouselOpenedModule (ref)
-			p1.fireEvent(eventNamesModule.CapturesViewToastButtonActivated)
-			p2(carouselOpenedModule(1))
+		iconImage = Images["icons/controls/screenshot"],
+		onActivated = function(p1, Callback: (any) -> ()) --[[ Line: 173 ]]
+			-- upvalues: EventNamesModule (copy), CarouselOpenedModule (copy)
+			p1.fireEvent(EventNamesModule.CapturesViewToastButtonActivated)
+			Callback(CarouselOpenedModule(1))
 		end
 	}
 }
 
-return function(_)
-	-- upvalues: useAnalyticsModule (ref), useDispatch (ref), useLocalization (ref), useSelector (ref), constantsModule (ref), reactModule (ref), capturesToastTypeModule (ref), t (ref), toastVanishedModule (ref), fFlagBuildExperienceInGameCaptureToChat (ref), dashModule (ref), fFlagCreateMomentsToastModule (ref), toastControllerModule (ref), httpService (ref), startMomentsCreationFlowModule (ref), eventNamesModule (ref), toast (ref)
-	local var2 = useAnalyticsModule()
-	local var3 = useDispatch()
-	local var4 = useLocalization({
+return function(_) --[[ Line: 184 ]]
+	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), UseLocalizationFunction (copy), UseSelectorFunction (copy), ConstantsModule (copy), ReactModule (copy), CapturesToastTypeModule (copy), config (copy), ToastVanishedModule (copy), FFlagBuildExperienceInGameCaptureToChat (copy), DashModule (copy), FFlagMomentsCreationFeatureGate (copy), GetMomentsCapabilitiesFunction (copy), FFlagCreateMomentsToastModule (copy), ToastControllerModule (copy), HttpService (copy), StartMomentsCreationFlowModule (copy), EventNamesModule (copy), Toast (copy)
+	local UseAnalyticsModuleResult = UseAnalyticsModule()
+	local UseDispatchResult = UseDispatchFunction()
+	local UseLocalizationResult = UseLocalizationFunction({
 		captureSaved = "Feature.Captures.Toast.CaptureSaved",
 		captureSavedToDevice = "Feature.Captures.Toast.CaptureSavedToDevice",
 		capturesEnabled = "Feature.Captures.Toast.CapturesEnabled",
@@ -204,95 +172,96 @@ return function(_)
 		videoCaptureOtherError = "Feature.Captures.Toast.VideoCaptureOtherError",
 		viewAction = "Feature.Captures.Action.ViewCapture"
 	})
-	local var5 = useSelector(function(p1)
-		-- upvalues: constantsModule (copy)
-		return p1[constantsModule.RoduxKey].Toast.ToastType
+	local UseSelectorResult = UseSelectorFunction(function(p1) --[[ Line: 209 ]]
+		-- upvalues: ConstantsModule (upval)
+		return p1[ConstantsModule.RoduxKey].Toast.ToastType
 	end)
-	local var6 = useSelector(function(p1)
-		-- upvalues: constantsModule (copy)
-		return p1[constantsModule.RoduxKey].Toast.ToastConfig
+	local UseSelectorResult1 = UseSelectorFunction(function(p1) --[[ Line: 213 ]]
+		-- upvalues: ConstantsModule (upval)
+		return p1[ConstantsModule.RoduxKey].Toast.ToastConfig
 	end)
-	local var7 = useSelector(function(p1)
-		-- upvalues: constantsModule (copy)
-		return p1[constantsModule.RoduxKey].Toast.IsDismissed
+	local UseSelectorResult2 = UseSelectorFunction(function(p1) --[[ Line: 217 ]]
+		-- upvalues: ConstantsModule (upval)
+		return p1[ConstantsModule.RoduxKey].Toast.IsDismissed
 	end)
-	local var8 = reactModule.useCallback(function(p1)
-		-- upvalues: var4 (ref)
-		return if p1 then var4[p1] else nil
+	local UseResult = ReactModule.useCallback(function(p1) --[[ Line: 221 ]]
+		-- upvalues: UseLocalizationResult (copy)
+		return if p1 then UseLocalizationResult[p1] else nil
 	end)
-	local var9 = reactModule.useMemo(function()
-		-- upvalues: var5 (ref), capturesToastTypeModule (copy), t (copy), var3 (ref), toastVanishedModule (copy), var2 (ref), var6 (ref), constantsModule (copy), var8 (ref), fFlagBuildExperienceInGameCaptureToChat (copy), dashModule (copy)
-		if var5 == capturesToastTypeModule.None then
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 228 ]]
+		-- upvalues: UseSelectorResult (copy), CapturesToastTypeModule (upval), config (upval), UseDispatchResult (copy), ToastVanishedModule (upval), UseAnalyticsModuleResult (copy), UseSelectorResult1 (copy), ConstantsModule (upval), UseResult (copy), FFlagBuildExperienceInGameCaptureToChat (upval), DashModule (upval)
+		if UseSelectorResult == CapturesToastTypeModule.None then
 			return nil
+		else
+			local Entry = config[UseSelectorResult]
+			
+			return DashModule.join(Entry, {
+				buttonText = if FFlagBuildExperienceInGameCaptureToChat and UseSelectorResult1 and UseSelectorResult1.toastAction then UseSelectorResult1.toastAction.text else UseResult(Entry.toastCTAKey),
+				duration = Entry.duration or ConstantsModule.ToastDuration,
+				onActivated = if Entry.onActivated then function() --[[ Line: 244 ]]
+					-- upvalues: Entry (copy), UseAnalyticsModuleResult (upval), UseDispatchResult (upval), UseSelectorResult1 (upval), UseSelectorResult (copy), UseSelectorResult (upval), ToastVanishedModule (upval)
+					Entry.onActivated(UseAnalyticsModuleResult, UseDispatchResult, UseSelectorResult1)
+					
+					if UseSelectorResult == UseSelectorResult then
+						UseDispatchResult(ToastVanishedModule())
+					end
+				end else nil,
+				onDismissed = function() --[[ Line: 236 ]]
+					-- upvalues: UseSelectorResult (copy), UseSelectorResult (upval), UseDispatchResult (upval), ToastVanishedModule (upval)
+					if UseSelectorResult == UseSelectorResult then
+						UseDispatchResult(ToastVanishedModule())
+					end
+				end,
+				toastCTAKey = DashModule.None,
+				toastSubtitle = UseResult(Entry.toastSubtitleKey),
+				toastSubtitleKey = DashModule.None,
+				toastTitle = UseResult(Entry.toastTitleKey),
+				toastTitleKey = DashModule.None
+			})
 		end
-		local var10 = t[var5]
-		
-		return dashModule.join(var10, {
-			buttonText = if fFlagBuildExperienceInGameCaptureToChat and var6 and var6.toastAction then var6.toastAction.text else var8(var10.toastCTAKey),
-			duration = var10.duration or constantsModule.ToastDuration,
-			onActivated = if var10.onActivated then function()
-				-- upvalues: var10 (ref), var2 (copy), var3 (copy), var6 (copy), var5 (ref), var5 (copy), toastVanishedModule (copy)
-				var10.onActivated(var2, var3, var6)
-				
-				if var5 == var5 then
-					var3(toastVanishedModule())
-				end
-			end else nil,
-			onDismissed = function()
-				-- upvalues: var5 (ref), var5 (copy), var3 (copy), toastVanishedModule (copy)
-				if var5 == var5 then
-					var3(toastVanishedModule())
-				end
-			end,
-			toastCTAKey = dashModule.None,
-			toastSubtitle = var8(var10.toastSubtitleKey),
-			toastSubtitleKey = dashModule.None,
-			toastTitle = var8(var10.toastTitleKey),
-			toastTitleKey = dashModule.None
-		})
-	end, { var5, var6 })
+	end, { UseSelectorResult, UseSelectorResult1 })
 	
-	return if var9 then if fFlagCreateMomentsToastModule then if var5 == capturesToastTypeModule.CaptureTakenWithMomentsCTA then reactModule.createElement(toastControllerModule, {
+	return if UseMemoResult then if FFlagMomentsCreationFeatureGate and UseSelectorResult == CapturesToastTypeModule.CaptureTakenWithMomentsCTA and not GetMomentsCapabilitiesFunction(false).getCanCreateMoments(false) then nil elseif FFlagCreateMomentsToastModule then if UseSelectorResult == CapturesToastTypeModule.CaptureTakenWithMomentsCTA then ReactModule.createElement(ToastControllerModule, {
 		icon = "icons/brands/moments_large",
-		title = var8("momentsTitle"),
-		text = var8("discoverPostWatch"),
-		actionText = var8("createAction"),
-		onAction = function()
-			-- upvalues: var6 (ref), httpService (copy), var3 (ref), startMomentsCreationFlowModule (copy), var2 (ref), eventNamesModule (copy)
-			if var6 and var6.captureInfo then
-				local var10 = httpService:GenerateGUID(false)
-				var3(startMomentsCreationFlowModule(var6.captureInfo, var10))
-				var2.fireEvent(eventNamesModule.XExpMomentCreationStarted, { creationSessionId = var10 })
+		title = UseResult("momentsTitle"),
+		text = UseResult("discoverPostWatch"),
+		actionText = UseResult("createAction"),
+		onAction = function() --[[ Line: 289 ]]
+			-- upvalues: UseSelectorResult1 (copy), HttpService (upval), UseDispatchResult (copy), StartMomentsCreationFlowModule (upval), UseAnalyticsModuleResult (copy), EventNamesModule (upval)
+			if UseSelectorResult1 and UseSelectorResult1.captureInfo then
+				local Guid = HttpService:GenerateGUID(false)
+				UseDispatchResult(StartMomentsCreationFlowModule(UseSelectorResult1.captureInfo, Guid))
+				UseAnalyticsModuleResult.fireEvent(EventNamesModule.XExpMomentCreationStarted, { creationSessionId = Guid })
 			end
-			var2.fireEvent(eventNamesModule.CapturesCreateMomentToastButtonActivated)
+			UseAnalyticsModuleResult.fireEvent(EventNamesModule.CapturesCreateMomentToastButtonActivated)
 		end,
-		onDismissed = function()
-			-- upvalues: var3 (ref), toastVanishedModule (copy)
-			var3(toastVanishedModule())
+		onDismissed = function() --[[ Line: 299 ]]
+			-- upvalues: UseDispatchResult (copy), ToastVanishedModule (upval)
+			UseDispatchResult(ToastVanishedModule())
 		end,
-		duration = var9.duration,
-		show = not var7
-	}) elseif var5 == capturesToastTypeModule.MomentProcessing then reactModule.createElement(toastControllerModule, {
+		duration = UseMemoResult.duration,
+		show = not UseSelectorResult2
+	}) elseif UseSelectorResult == CapturesToastTypeModule.MomentProcessing then ReactModule.createElement(ToastControllerModule, {
 		icon = "icons/brands/moments_large",
-		title = var8("momentProcessingTitle"),
-		text = var8("momentProcessingDescription"),
-		onDismissed = function()
-			-- upvalues: var3 (ref), toastVanishedModule (copy)
-			var3(toastVanishedModule())
+		title = UseResult("momentProcessingTitle"),
+		text = UseResult("momentProcessingDescription"),
+		onDismissed = function() --[[ Line: 310 ]]
+			-- upvalues: UseDispatchResult (copy), ToastVanishedModule (upval)
+			UseDispatchResult(ToastVanishedModule())
 		end,
-		duration = var9.duration,
-		show = not var7
-	}) else reactModule.createElement(reactModule.Fragment, {}, {
-		[var5] = reactModule.createElement(toast, {
-			duration = var9.duration,
-			show = not var7,
-			toastContent = var9
+		duration = UseMemoResult.duration,
+		show = not UseSelectorResult2
+	}) else ReactModule.createElement(ReactModule.Fragment, {}, {
+		[UseSelectorResult] = ReactModule.createElement(Toast, {
+			duration = UseMemoResult.duration,
+			show = not UseSelectorResult2,
+			toastContent = UseMemoResult
 		})
-	}) else reactModule.createElement(reactModule.Fragment, {}, {
-		[var5] = reactModule.createElement(toast, {
-			duration = var9.duration,
-			show = not var7,
-			toastContent = var9
+	}) else ReactModule.createElement(ReactModule.Fragment, {}, {
+		[UseSelectorResult] = ReactModule.createElement(Toast, {
+			duration = UseMemoResult.duration,
+			show = not UseSelectorResult2,
+			toastContent = UseMemoResult
 		})
 	}) else nil
 end

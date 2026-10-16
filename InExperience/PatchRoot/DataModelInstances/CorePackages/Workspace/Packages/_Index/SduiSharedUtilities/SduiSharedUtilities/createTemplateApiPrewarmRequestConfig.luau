@@ -1,36 +1,36 @@
-﻿local sduiSharedUtilities = script:FindFirstAncestor("SduiSharedUtilities")
-local _ = require(sduiSharedUtilities.SduiApiRequestConfig)
-local sduiIntegrationTypesModule = require(sduiSharedUtilities.SduiIntegrationTypes)
-local _ = require(sduiSharedUtilities.SduiLoadTimer)
-local sduiProtobufResponseHelpersModule = require(sduiSharedUtilities.SduiProtobufResponseHelpers)
-local sduiTemplateApiModule = require(sduiSharedUtilities.SduiTemplateApi)
+﻿local SduiSharedUtilities = script:FindFirstAncestor("SduiSharedUtilities")
+local _ = require(SduiSharedUtilities.SduiApiRequestConfig)
+local SduiIntegrationTypesModule = require(SduiSharedUtilities.SduiIntegrationTypes)
+local _ = require(SduiSharedUtilities.SduiLoadTimer)
+local SduiProtobufResponseHelpersModule = require(SduiSharedUtilities.SduiProtobufResponseHelpers)
+local SduiTemplateApiModule = require(SduiSharedUtilities.SduiTemplateApi)
 
-return function(p1)
-	-- upvalues: sduiTemplateApiModule (ref), sduiIntegrationTypesModule (ref), sduiProtobufResponseHelpersModule (ref)
-	local var1 = sduiTemplateApiModule.createRequest({
+return function(p1) --[[ Line: 20 | Named "createTemplateApiPrewarmRequestConfig" ]]
+	-- upvalues: SduiTemplateApiModule (copy), SduiIntegrationTypesModule (copy), SduiProtobufResponseHelpersModule (copy)
+	local Request = SduiTemplateApiModule.createRequest({
 		surfaceKeys = p1.surfaceKeys,
 		locale = p1.locale,
 		capabilities = p1.capabilities
 	})
 	
-	return if var1 == nil then nil else {
+	return if Request == nil then nil else {
 		surfaceKey = "TemplatePrewarm",
 		allowNoConfigsBuilt = true,
-		responseType = sduiIntegrationTypesModule.SduiResponseType.Protobuf,
-		url = var1.url,
-		configKey = p1.configKey or var1.cacheKey,
+		responseType = SduiIntegrationTypesModule.SduiResponseType.Protobuf,
+		url = Request.url,
+		configKey = p1.configKey or Request.cacheKey,
 		loadTimer = p1.loadTimer,
-		apiProto = var1.responseProto,
-		postConfig = var1.postConfig,
-		parsePageEntriesFromResponse = function()
+		apiProto = Request.responseProto,
+		postConfig = Request.postConfig,
+		parsePageEntriesFromResponse = function() --[[ Line: 41 ]]
 			return {}
 		end,
-		parseTemplateEntriesFromResponse = function(value)
-			-- upvalues: sduiTemplateApiModule (copy), var1 (ref)
-			sduiTemplateApiModule.storeResponse(value, var1)
+		parseTemplateEntriesFromResponse = function(p2) --[[ Line: 44 ]]
+			-- upvalues: SduiTemplateApiModule (upval), Request (copy)
+			SduiTemplateApiModule.storeResponse(p2, Request)
 			
 			return {}, {}, {}
 		end,
-		parseLocalizedLiteralsFromResponse = sduiProtobufResponseHelpersModule.parseLocalizedLiteralsFromResponse
+		parseLocalizedLiteralsFromResponse = SduiProtobufResponseHelpersModule.parseLocalizedLiteralsFromResponse
 	}
 end

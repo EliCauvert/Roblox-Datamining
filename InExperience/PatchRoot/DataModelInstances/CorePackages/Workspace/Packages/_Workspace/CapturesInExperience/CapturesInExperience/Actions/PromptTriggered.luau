@@ -1,8 +1,11 @@
-﻿local parent = script.Parent.Parent
-local roduxModule = require(parent.Parent.Rodux)
-local _ = require(parent.Enums.PromptType)
-local _ = require(parent.Types)
+﻿local Parent = script.Parent.Parent
+local _ = require(Parent.Enums.PromptType)
+local _ = require(Parent.Types)
 
-return roduxModule.makeActionCreator(script.Name, function(p1, p2, p3)
-	return { promptData = p3, promptId = p1, promptType = p2 }
+return require(Parent.Parent.Rodux).makeActionCreator(script.Name, function(PromptId, PromptType, PromptData) --[[ Line: 15 ]]
+	return {
+		promptData = PromptData,
+		promptId = PromptId,
+		promptType = PromptType
+	}
 end)

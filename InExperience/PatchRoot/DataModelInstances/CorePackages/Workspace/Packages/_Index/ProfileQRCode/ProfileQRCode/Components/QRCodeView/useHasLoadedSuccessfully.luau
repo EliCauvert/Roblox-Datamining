@@ -1,14 +1,14 @@
-﻿local profileQRCode = script:FindFirstAncestor("ProfileQRCode")
-local eventNamesModule = require(profileQRCode.Analytics.EventNames)
-local useEffectOnce = require(profileQRCode.Parent.RoactUtils).Hooks.useEffectOnce
-local useShareLinkIdModule = require(profileQRCode.Rodux.useShareLinkId)
-local _ = require(profileQRCode.Analytics.useAnalytics)
+﻿local ProfileQRCode = script:FindFirstAncestor("ProfileQRCode")
+local EventNamesModule = require(ProfileQRCode.Analytics.EventNames)
+local UseEffectOnceFunction = require(ProfileQRCode.Parent.RoactUtils).Hooks.useEffectOnce
+local UseShareLinkIdModule = require(ProfileQRCode.Rodux.useShareLinkId)
+local _ = require(ProfileQRCode.Analytics.useAnalytics)
 
-return function(p1, p2)
-	-- upvalues: useShareLinkIdModule (ref), eventNamesModule (ref), useEffectOnce (ref)
-	local var1 = useShareLinkIdModule()
-	useEffectOnce(function()
-		-- upvalues: p1 (ref), eventNamesModule (copy), var1 (ref)
-		p1.fireEvent(eventNamesModule.QRPageLoad, { shareLinkId = var1 })
+return function(p1, p2) --[[ Line: 9 ]]
+	-- upvalues: UseShareLinkIdModule (copy), EventNamesModule (copy), UseEffectOnceFunction (copy)
+	local UseShareLinkIdModuleResult = UseShareLinkIdModule()
+	UseEffectOnceFunction(function() --[[ Line: 11 ]]
+		-- upvalues: p1 (copy), EventNamesModule (upval), UseShareLinkIdModuleResult (copy)
+		p1.fireEvent(EventNamesModule.QRPageLoad, { shareLinkId = UseShareLinkIdModuleResult })
 	end, p2)
 end

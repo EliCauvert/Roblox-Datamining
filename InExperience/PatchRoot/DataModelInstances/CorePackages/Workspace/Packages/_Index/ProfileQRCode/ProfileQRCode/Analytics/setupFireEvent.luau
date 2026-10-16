@@ -1,26 +1,26 @@
-﻿local socialLuaAnalyticsModule = require(script:FindFirstAncestor("ProfileQRCode").Parent.SocialLuaAnalytics)
-local diagActionListModule = require(script.Parent.DiagActionList)
-local fireEventStream = socialLuaAnalyticsModule.Analytics.FireEvent.fireEventStream
-local fireDiagCounter = socialLuaAnalyticsModule.Analytics.FireEvent.fireDiagCounter
-local eventStreamActionListModule = require(script.Parent.EventStreamActionList)
+﻿local SocialLuaAnalyticsModule = require(script:FindFirstAncestor("ProfileQRCode").Parent.SocialLuaAnalytics)
+local DiagActionListModule = require(script.Parent.DiagActionList)
+local FireEventStreamFunction = SocialLuaAnalyticsModule.Analytics.FireEvent.fireEventStream
+local FireDiagCounterFunction = SocialLuaAnalyticsModule.Analytics.FireEvent.fireDiagCounter
+local EventStreamActionListModule = require(script.Parent.EventStreamActionList)
 
-return function(p1)
-	-- upvalues: fireEventStream (ref), eventStreamActionListModule (ref), fireDiagCounter (ref), diagActionListModule (ref)
-	local var1 = fireEventStream({
+return function(p1) --[[ Line: 10 ]]
+	-- upvalues: FireEventStreamFunction (copy), EventStreamActionListModule (copy), FireDiagCounterFunction (copy), DiagActionListModule (copy)
+	local FireEventStreamResult = FireEventStreamFunction({
 		eventStreamImpl = p1.analytics.EventStream,
-		eventList = eventStreamActionListModule,
+		eventList = EventStreamActionListModule,
 		infoForAllEvents = p1.infoForAllEvents
 	})
-	local var2 = fireDiagCounter({
+	local FireDiagCounterResult = FireDiagCounterFunction({
 		diagImpl = p1.analytics.Diag,
-		eventList = diagActionListModule
+		eventList = DiagActionListModule
 	})
 	
-	return function(p2, p3)
-		-- upvalues: diagActionListModule (copy), var2 (ref), var1 (ref)
-		if diagActionListModule[p2] then
-			var2(p2)
+	return function(p2, p3) --[[ Line: 26 ]]
+		-- upvalues: DiagActionListModule (upval), FireDiagCounterResult (copy), FireEventStreamResult (copy)
+		if DiagActionListModule[p2] then
+			FireDiagCounterResult(p2)
 		end
-		return var1(p2, p3)
+		return FireEventStreamResult(p2, p3)
 	end
 end

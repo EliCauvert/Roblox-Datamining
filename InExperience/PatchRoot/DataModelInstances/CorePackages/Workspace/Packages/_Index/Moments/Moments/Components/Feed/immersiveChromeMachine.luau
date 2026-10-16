@@ -1,49 +1,50 @@
-﻿return function(p1, p2)
-	local now = p2.now
-	local var1 = true
-	local var2 = 0
-	local var3 = nil
-	local var4 = 0
-	local var5 = true
-	local var6 = false
-	local var7 = false
-	local var8 = false
-	local var9 = now()
-	local var10 = -1e999
+﻿return function(p1, p2) --[[ Line: 68 | Named "createImmersiveChromeMachine" ]]
+	local NowFunction = p2.now
+	local Flag = true
+	local Count = 0
+	local v1 = nil
+	local Count1 = 0
+	local Flag1 = true
+	local Flag2 = false
+	local ForceShow = false
+	local ForceHide = false
+	local NowResult = NowFunction()
+	local v2 = -1e999
 	
-	local function _(p3)
-		-- upvalues: var8 (write), var2 (write), var9 (write), now (ref), var1 (write), p2 (ref)
-		if var8 then return end
-		var2 = 0
-		var9 = now()
+	local function _(p3) --[[ Line: 89 | Named "applyShow" ]]
+		-- upvalues: ForceHide (ref), Count (ref), NowResult (ref), NowFunction (copy), Flag (ref), p2 (copy)
+		if ForceHide then return end
+		Count = 0
+		NowResult = NowFunction()
 		
-		if var1 then
+		if not Flag then
+			Flag = true
+			p2.setChromeVisible(true, p3)
+			
 			return
 		end
-		var1 = true
-		p2.setChromeVisible(true, p3)
 	end
 	
-	local _ = function(p3)
-		-- upvalues: var1 (write), var10 (write), now (ref), p2 (ref)
-		if var1 then
-			var1 = false
-			var10 = now()
+	local _ = function(p3) --[[ Line: 105 | Named "applyHide" ]]
+		-- upvalues: Flag (ref), v2 (ref), NowFunction (copy), p2 (copy)
+		if Flag then
+			Flag = false
+			v2 = NowFunction()
 			p2.setChromeVisible(false, p3 or "advance")
 			
 			return
 		end
 	end
 	
-	local _ = function()
-		-- upvalues: var7 (write), var1 (write), var2 (write), p1 (ref), var6 (write), var5 (write), now (ref), var9 (write), var10 (write), p2 (ref)
-		if var7 or not var1 then return end
-		if var2 < p1.hideAfterAdvances then return end
-		if var6 and not var5 then return end
-		if now() - var9 < p1.shownDwellMs then return end
-		if var1 then
-			var1 = false
-			var10 = now()
+	local _ = function() --[[ Line: 114 | Named "tryHide" ]]
+		-- upvalues: ForceShow (ref), Flag (ref), Count (ref), p1 (copy), Flag2 (ref), Flag1 (ref), NowFunction (copy), NowResult (ref), v2 (ref), p2 (copy)
+		if ForceShow or not Flag then return end
+		if Count < p1.hideAfterAdvances then return end
+		if Flag2 and not Flag1 then return end
+		if NowFunction() - NowResult < p1.shownDwellMs then return end
+		if Flag then
+			Flag = false
+			v2 = NowFunction()
 			p2.setChromeVisible(false, "advance")
 			
 			return
@@ -51,135 +52,142 @@
 	end
 	
 	return {
-		onActiveUpdate = function(p3, p4, p5)
-			-- upvalues: var3 (write), var5 (write), var6 (write), var4 (write), var8 (write), var2 (write), var9 (write), now (ref), var1 (write), p2 (ref), var7 (write), p1 (ref), var10 (write)
-			if var3 == nil then
-				var3 = p3
-				var5 = p4
-				var6 = p4
+		onActiveUpdate = function(p3, p4, p5) --[[ Line: 167 ]]
+			-- upvalues: v1 (ref), Flag1 (ref), Flag2 (ref), Count1 (ref), ForceHide (ref), Count (ref), NowResult (ref), NowFunction (copy), Flag (ref), p2 (copy), ForceShow (ref), p1 (copy), v2 (ref)
+			local v3 = v1
+			
+			if v3 == nil then
+				v1 = p3
+				Flag1 = p4
+				Flag2 = p4
 				
 				return
 			end
-			local var11 = p3 - var3
-			var3 = p3
+			local v4 = p3 - v3
+			v1 = p3
 			
-			if var11 == 0 then
-				if p5 then return end
-				if p4 then
-					local var12 = not var5 and var6
-					var5 = true
-					var6 = true
-					
-					if var12 then
-						var9 = now()
+			if v4 ~= 0 then
+				if Count1 > 0 and Count1 <= p3 then
+					if not ForceHide then
+						Count = 0
+						NowResult = NowFunction()
+						
+						if not Flag then
+							Flag = true
+							p2.setChromeVisible(true, "endOfFeed")
+						end
 					end
-					return
-				elseif not var5 then return end
-				var5 = false
-				
-				if not var6 then return end
-				if var7 then return end
-				if now() - var10 < p1.hiddenCooldownMs then return end
-				if var8 then return end
-				var2 = 0
-				var9 = now()
-				
-				if var1 then
-					return
+				elseif v4 == 1 then
+					Count += 1
+					
+					if not ForceShow and Flag and Count >= p1.hideAfterAdvances and (not Flag2 or Flag1) and (NowFunction() - NowResult >= p1.shownDwellMs and Flag) then
+						Flag = false
+						v2 = NowFunction()
+						p2.setChromeVisible(false, "advance")
+					end
+				elseif v4 < 0 then
+					if not ForceHide then
+						Count = 0
+						NowResult = NowFunction()
+						
+						if not Flag then
+							Flag = true
+							p2.setChromeVisible(true, "reverse")
+						end
+					end
+				else
+					Count = 0
 				end
-				var1 = true
+				Flag2 = false
+				
+				return
+			elseif p5 then return end
+			if p4 then
+				local Flag2_1: boolean = not Flag1 and Flag2
+				Flag1 = true
+				Flag2 = true
+				
+				if Flag2_1 then
+					NowResult = NowFunction()
+				end
+				return
+			elseif not Flag1 then return end
+			Flag1 = false
+			
+			if not Flag2 then return end
+			if ForceShow then return end
+			if NowFunction() - v2 < p1.hiddenCooldownMs then return end
+			if ForceHide then return end
+			Count = 0
+			NowResult = NowFunction()
+			
+			if not Flag then
+				Flag = true
 				p2.setChromeVisible(true, "pause")
 				
 				return
-			elseif var4 > 0 and var4 <= p3 then
-				if not var8 then
-					var2 = 0
-					var9 = now()
-					
-					if not var1 then
-						var1 = true
-						p2.setChromeVisible(true, "endOfFeed")
-					end
-				end
-			elseif var11 == 1 then
-				var2 += 1
-				
-				if not var7 and var1 and var2 >= p1.hideAfterAdvances and ((not var6 or var5) and (now() - var9 >= p1.shownDwellMs and var1)) then
-					var1 = false
-					var10 = now()
-					p2.setChromeVisible(false, "advance")
-				end
-			elseif var11 >= 0 then
-				var2 = 0
-			elseif not var8 then
-				var2 = 0
-				var9 = now()
-				
-				if not var1 then
-					var1 = true
-					p2.setChromeVisible(true, "reverse")
-				end
 			end
-			var6 = false
 		end,
-		setForceShow = function(value)
-			-- upvalues: var7 (write), var8 (write), var2 (write), var9 (write), now (ref), var1 (write), p2 (ref)
-			if value == var7 then return end
-			var7 = value
+		setForceShow = function(Value) --[[ Line: 134 ]]
+			-- upvalues: ForceShow (ref), ForceHide (ref), Count (ref), NowResult (ref), NowFunction (copy), Flag (ref), p2 (copy)
+			if Value == ForceShow then return end
+			ForceShow = Value
 			
-			if var7 then
-				if var8 then return end
-				var2 = 0
-				var9 = now()
+			if ForceShow then
+				if ForceHide then return end
+				Count = 0
+				NowResult = NowFunction()
 				
-				if var1 then return end
-				var1 = true
+				if Flag then return end
+				Flag = true
 				p2.setChromeVisible(true, "force")
 			end
 		end,
-		setForceHide = function(value)
-			-- upvalues: var8 (write), var1 (write), var10 (write), now (ref), p2 (ref), var2 (write), var9 (write)
-			if value == var8 then return end
-			var8 = value
+		setForceHide = function(Value) --[[ Line: 145 ]]
+			-- upvalues: ForceHide (ref), Flag (ref), v2 (ref), NowFunction (copy), p2 (copy), Count (ref), NowResult (ref)
+			if Value == ForceHide then return end
+			ForceHide = Value
 			
-			if var8 then
-				if var1 then
-					var1 = false
-					var10 = now()
+			if ForceHide then
+				if Flag then
+					Flag = false
+					v2 = NowFunction()
 					p2.setChromeVisible(false, "force")
 					
 					return
 				end
 				return
-			elseif var8 then return end
-			var2 = 0
-			var9 = now()
+			elseif ForceHide then return end
+			Count = 0
+			NowResult = NowFunction()
 			
-			if var1 then
+			if not Flag then
+				Flag = true
+				p2.setChromeVisible(true, "reveal")
+				
 				return
 			end
-			var1 = true
-			p2.setChromeVisible(true, "reveal")
 		end,
-		setCount = function(value)
-			-- upvalues: var4 (write)
-			var4 = value
+		setCount = function(Value) --[[ Line: 158 ]]
+			-- upvalues: Count1 (ref)
+			Count1 = Value
 		end,
-		reveal = function()
-			-- upvalues: var8 (write), var2 (write), var9 (write), now (ref), var1 (write), p2 (ref)
-			if var8 then return end
-			var2 = 0
-			var9 = now()
+		reveal = function() --[[ Line: 245 ]]
+			-- upvalues: ForceHide (ref), Count (ref), NowResult (ref), NowFunction (copy), Flag (ref), p2 (copy)
+			if ForceHide then return end
+			Count = 0
+			NowResult = NowFunction()
 			
-			if var1 then
+			if not Flag then
+				Flag = true
+				p2.setChromeVisible(true, "reveal")
+				
 				return
 			end
-			var1 = true
-			p2.setChromeVisible(true, "reveal")
 		end,
-		isVisible = function()
-			-- upvalues: var1 (write)
-			return var1
+		isVisible = function() --[[ Line: 255 ]]
+			-- upvalues: Flag (ref)
+			return Flag
 		end
 	}
 end

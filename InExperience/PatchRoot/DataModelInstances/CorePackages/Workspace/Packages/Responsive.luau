@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.Responsive.Responsive)
+﻿return (require(script.Parent._Workspace.Responsive.Responsive))

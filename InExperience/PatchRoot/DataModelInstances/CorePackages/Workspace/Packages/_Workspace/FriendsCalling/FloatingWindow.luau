@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.FloatingWindow.FloatingWindow)
+﻿return (require(script.Parent.Parent.Parent._Index.FloatingWindow.FloatingWindow))

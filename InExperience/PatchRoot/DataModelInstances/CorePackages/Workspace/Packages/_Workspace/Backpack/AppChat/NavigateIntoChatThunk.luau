@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent.Parent._Workspace.AppChat.AppChat.Conversations.Thunks.NavigateIntoChat)
+﻿return (require(script.Parent.Parent.Parent.Parent._Workspace.AppChat.AppChat.Conversations.Thunks.NavigateIntoChat))

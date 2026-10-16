@@ -1,196 +1,200 @@
-﻿local serverDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
-local parent = serverDrivenUi.Parent
-local httpService = game:GetService("HttpService")
-local runService = game:GetService("RunService")
-local omniFeedTypes = require(parent.DiscoveryTypes).OmniFeedTypes
-local _ = require(parent.LuauPolyfill)
-local makeOmniRecommendationsRequest = require(parent.GraphQlShared).MakeOmniRecommendationsRequest
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local sduiErrors = sduiCoreSystemModule.SduiErrors
-local sduiParseHelpers = sduiCoreSystemModule.SduiParseHelpers
-local sduiLoadTimer = require(parent.SduiSharedUtilities).SduiLoadTimer
-local seedHomeOmniSduiV2PayloadModule = require(serverDrivenUi.Migration.seedHomeOmniSduiV2Payload)
-local fStringLuaEnabledSduiTreatmentTypes = require(parent.SharedFlags).FStringLuaEnabledSduiTreatmentTypes
+﻿local ServerDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
+local Parent = ServerDrivenUi.Parent
+local HttpService = game:GetService("HttpService")
+local RunService = game:GetService("RunService")
+local OmniFeedTypes = require(Parent.DiscoveryTypes).OmniFeedTypes
+local _ = require(Parent.LuauPolyfill)
+local MakeOmniRecommendationsRequestFunction = require(Parent.GraphQlShared).MakeOmniRecommendationsRequest
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local SduiErrors = SduiCoreSystemModule.SduiErrors
+local SduiParseHelpers = SduiCoreSystemModule.SduiParseHelpers
+local SduiLoadTimer = require(Parent.SduiSharedUtilities).SduiLoadTimer
+local SeedHomeOmniSduiV2PayloadModule = require(ServerDrivenUi.Migration.seedHomeOmniSduiV2Payload)
+local FStringLuaEnabledSduiTreatmentTypes = require(Parent.SharedFlags).FStringLuaEnabledSduiTreatmentTypes
 local t = {}
 
-local function _(p1, p2, p3)
+local function _(p1, p2, p3): string --[[ Line: 39 | Named "getRefreshRequestKey" ]]
 	return `{p1}:{p2}:{p3}`
 end
 
-local _ = function(p1, p2)
-	-- upvalues: t (ref)
+local _ = function(p1, p2): boolean --[[ Line: 43 | Named "isCurrentRequest" ]]
+	-- upvalues: t (copy)
 	return t[p1] == p2
 end
 
-local function getSupportedSduiTreatmentTypes()
-	-- upvalues: runService (ref), fStringLuaEnabledSduiTreatmentTypes (ref)
-	local var1 = tonumber(string.match(runService:GetRobloxVersion(), ".(%d+)."))
-	local t = {}
+local function getSupportedSduiTreatmentTypes() --[[ Line: 47 ]]
+	-- upvalues: RunService (copy), FStringLuaEnabledSduiTreatmentTypes (copy)
+	local Number: number? = tonumber(string.match(RunService:GetRobloxVersion(), ".(%d+)."))
+	local List = {}
 	
-	for i, v in ipairs(string.split(fStringLuaEnabledSduiTreatmentTypes, ",")) do
-		if v ~= "" then
-			local match, match_1 = string.match(v, "(.*):(.*)")
-			local var2 = tonumber(match_1)
+	for _, value in ipairs((string.split(FStringLuaEnabledSduiTreatmentTypes, ","))) do
+		if value ~= "" then
+			local Match, Match2 = string.match(value, "(.*):(.*)")
+			local Number1: number? = tonumber(Match2)
 			
-			if match and var2 and var2 <= var1 then
-				table.insert(t, match)
+			if Match and Number1 and Number1 <= Number then
+				table.insert(List, Match)
 			end
 		end
 	end
-	return t
+	return List
 end
 
-local function findSortByTopicId(p1, p2)
-	for i, v in p1 do
-		if typeof(v) == "table" and v.topicId and tostring(v.topicId) == p2 then
-			return v
+local function findSortByTopicId(Sorts, p1) --[[ Line: 65 ]]
+	for _, sort in Sorts do
+		if typeof(sort) == "table" and sort.topicId and tostring(sort.topicId) == p1 then
+			return sort
 		end
 	end
 	return nil
 end
 
-local function hasPageEntryForFeedItemKey(p3, p4)
-	local pageEntries = p3.pageEntries
+local function hasPageEntryForFeedItemKey(Sduiv, FeedItemKey): boolean --[[ Line: 74 ]]
+	local PageEntries = Sduiv.pageEntries
 	
-	if typeof(pageEntries) ~= "table" then
+	if typeof(PageEntries) ~= "table" then
 		return false
 	end
-	for i, v in pageEntries do
-		if v and typeof(v) == "table" and (v.pageEntry and v.pageEntry.identifier == p4) then
+	for _, pageEntry in PageEntries do
+		if pageEntry and typeof(pageEntry) == "table" and pageEntry.pageEntry and pageEntry.pageEntry.identifier == FeedItemKey then
 			return true
 		end
 	end
 	return false
 end
 
-local _ = function(p5, p6, p7)
-	p5(p7.errorType, {
+local _ = function(Callback: (any, any) -> (), p2, p3) --[[ Line: 94 | Named "reportValidationError" ]]
+	Callback(p3.errorType, {
 		name = "discovery-api/omni-recommendation/sduiv2",
-		message = `{p7.message}, topicIds: {p6}`
+		message = `{p3.message}, topicIds: {p2}`
 	})
 end
 
-local _ = function(p5, p6, p7)
-	-- upvalues: sduiErrors (ref), sduiParseHelpers (ref)
-	p5(sduiErrors.SduiErrorType.FailedToFetchPage, {
+local _ = function(Callback: (any, any) -> (), p2, p3) --[[ Line: 101 | Named "reportNetworkError" ]]
+	-- upvalues: SduiErrors (copy), SduiParseHelpers (copy)
+	Callback(SduiErrors.SduiErrorType.FailedToFetchPage, {
 		name = "discovery-api/omni-recommendation/sduiv2",
-		message = `Omni recommendation feed item refresh failed: {sduiParseHelpers.stringifyValue(p7)}, topicIds: {p6}`
+		message = `Omni recommendation feed item refresh failed: {SduiParseHelpers.stringifyValue(p3)}, topicIds: {p2}`
 	})
 end
 
-local function validateResponseBody(p5, p6, p7)
-	-- upvalues: sduiErrors (ref), findSortByTopicId (ref), omniFeedTypes (ref), hasPageEntryForFeedItemKey (ref)
-	if p5 == nil or typeof(p5) ~= "table" then
+local function validateResponseBody(ResponseBody, p2, FeedItemKey) --[[ Line: 108 ]]
+	-- upvalues: SduiErrors (copy), findSortByTopicId (copy), OmniFeedTypes (copy), hasPageEntryForFeedItemKey (copy)
+	if ResponseBody == nil or typeof(ResponseBody) ~= "table" then
 		return false, {
 			message = "No response data from omni recommendation feed item refresh",
-			errorType = sduiErrors.SduiErrorType.InvalidFeedInResponse
+			errorType = SduiErrors.SduiErrorType.InvalidFeedInResponse
 		}
-	elseif p5.sorts == nil or typeof(p5.sorts) ~= "table" or #p5.sorts == 0 then
+	elseif ResponseBody.sorts == nil or typeof(ResponseBody.sorts) ~= "table" or #ResponseBody.sorts == 0 then
 		return false, {
 			message = "No sort data in omni recommendation feed item refresh response",
-			errorType = sduiErrors.SduiErrorType.InvalidFeedInResponse
+			errorType = SduiErrors.SduiErrorType.InvalidFeedInResponse
 		}
+	else
+		local SortByTopicId = findSortByTopicId(ResponseBody.sorts, p2)
+		
+		if SortByTopicId == nil then
+			return false, {
+				message = "Requested sort not found in omni recommendation feed item refresh response",
+				errorType = SduiErrors.SduiErrorType.InvalidFeedInResponse
+			}
+		elseif SortByTopicId.treatmentType ~= OmniFeedTypes.ServerDrivenUiV2 then
+			return false, {
+				errorType = SduiErrors.SduiErrorType.InvalidFeedInResponse,
+				message = `Requested sort is not SDUI V2 in omni recommendation feed item refresh response: {SortByTopicId.treatmentType}`
+			}
+		else
+			local FeedItemKey1 = if typeof(SortByTopicId) == "table" then SortByTopicId.feedItemKey else nil
+			
+			if typeof(FeedItemKey1) ~= "string" or FeedItemKey1 == "" then
+				return false, {
+					message = "Missing feedItemKey in omni recommendation feed item refresh response",
+					errorType = SduiErrors.SduiErrorType.InvalidFeedInResponse
+				}
+			elseif FeedItemKey1 ~= FeedItemKey then
+				return false, {
+					errorType = SduiErrors.SduiErrorType.InvalidFeedInResponse,
+					message = `Wrong feedItemKey in omni recommendation feed item refresh response: {FeedItemKey1}`
+				}
+			elseif ResponseBody.sduiv2 == nil or typeof(ResponseBody.sduiv2) ~= "table" then
+				return false, {
+					message = "No sduiv2 field in omni recommendation feed item refresh response",
+					errorType = SduiErrors.SduiErrorType.NilSduiTreeInResponse
+				}
+			elseif hasPageEntryForFeedItemKey(ResponseBody.sduiv2, FeedItemKey) then
+				return true, nil
+			else
+				return false, {
+					message = "Requested feed item not found in sduiv2 page entries",
+					errorType = SduiErrors.SduiErrorType.InvalidFeedInResponse
+				}
+			end
+		end
 	end
-	local var3 = findSortByTopicId(p5.sorts, p6)
-	
-	if var3 == nil then
-		return false, {
-			message = "Requested sort not found in omni recommendation feed item refresh response",
-			errorType = sduiErrors.SduiErrorType.InvalidFeedInResponse
-		}
-	elseif var3.treatmentType ~= omniFeedTypes.ServerDrivenUiV2 then
-		return false, {
-			errorType = sduiErrors.SduiErrorType.InvalidFeedInResponse,
-			message = `Requested sort is not SDUI V2 in omni recommendation feed item refresh response: {var3.treatmentType}`
-		}
-	end
-	local var4 = if typeof(var3) == "table" then var3.feedItemKey else nil
-	
-	if typeof(var4) ~= "string" or var4 == "" then
-		return false, {
-			message = "Missing feedItemKey in omni recommendation feed item refresh response",
-			errorType = sduiErrors.SduiErrorType.InvalidFeedInResponse
-		}
-	elseif var4 ~= p7 then
-		return false, {
-			errorType = sduiErrors.SduiErrorType.InvalidFeedInResponse,
-			message = `Wrong feedItemKey in omni recommendation feed item refresh response: {var4}`
-		}
-	elseif p5.sduiv2 == nil or typeof(p5.sduiv2) ~= "table" then
-		return false, {
-			message = "No sduiv2 field in omni recommendation feed item refresh response",
-			errorType = sduiErrors.SduiErrorType.NilSduiTreeInResponse
-		}
-	elseif hasPageEntryForFeedItemKey(p5.sduiv2, p7) then
-		return true, nil
-	end
-	return false, {
-		message = "Requested feed item not found in sduiv2 page entries",
-		errorType = sduiErrors.SduiErrorType.InvalidFeedInResponse
-	}
 end
 
-return function(p5, p6, p7, p8, p9, p10, p11)
-	-- upvalues: sduiLoadTimer (ref), omniFeedTypes (ref), getSupportedSduiTreatmentTypes (ref), httpService (ref), t (ref), makeOmniRecommendationsRequest (ref), validateResponseBody (ref), seedHomeOmniSduiV2PayloadModule (ref), sduiErrors (ref), sduiParseHelpers (ref)
-	local loadTimer = p11.loadTimer or sduiLoadTimer.createLoadTimer(p6)
-	loadTimer.start("feed-item-refresh")
-	local t_1 = {}
+return function(p2, p3, p4, p5, p6, Callback, p7) --[[ Line: 180 | Named "refreshOmniRecommendationFeedItem" ]]
+	-- upvalues: SduiLoadTimer (copy), OmniFeedTypes (copy), getSupportedSduiTreatmentTypes (copy), HttpService (copy), t (copy), MakeOmniRecommendationsRequestFunction (copy), validateResponseBody (copy), SeedHomeOmniSduiV2PayloadModule (copy), SduiErrors (copy), SduiParseHelpers (copy)
+	local LoadTimer = p7.loadTimer or SduiLoadTimer.createLoadTimer(p3)
+	LoadTimer.start("feed-item-refresh")
+	local List = {}
 	
-	for i, v in pairs(omniFeedTypes) do
-		table.insert(t_1, v)
+	for _, omniFeedType in pairs(OmniFeedTypes) do
+		table.insert(List, omniFeedType)
 	end
-	local var3 = nil
-	local ok, status = pcall(getSupportedSduiTreatmentTypes)
+	local v1 = nil
+	local Success, Result = pcall(getSupportedSduiTreatmentTypes)
 	
-	if ok then
-		var3 = status
+	if Success then
+		v1 = Result
 	end
-	local var4 = `{p6}:{p7}:{p8}`
-	local var5 = httpService:GenerateGUID(false):lower()
-	t[var4] = var5
+	local Text: string = `{p3}:{p4}:{p5}`
+	local Lowered = HttpService:GenerateGUID(false):lower()
+	t[Text] = Lowered
 	
-	return makeOmniRecommendationsRequest(p5, p6, httpService:GenerateGUID(false):lower(), nil, t_1, p9, { p7 }, var3, p11.contextFeatures):andThen(function(p12)
-		-- upvalues: var4 (ref), var5 (ref), t (copy), validateResponseBody (copy), p7 (ref), p8 (ref), p10 (ref), seedHomeOmniSduiV2PayloadModule (copy), p6 (ref), loadTimer (ref), sduiErrors (copy)
-		if t[var4] ~= var5 then return end
-		local var6 = if typeof(p12) == "table" then p12.responseBody else nil
-		local var7, var8 = validateResponseBody(var6, p7, p8)
+	return MakeOmniRecommendationsRequestFunction(p2, p3, HttpService:GenerateGUID(false):lower(), nil, List, p6, { p4 }, v1, p7.contextFeatures):andThen(function(Result) --[[ Line: 218 ]]
+		-- upvalues: Text (copy), Lowered (copy), t (upval), validateResponseBody (upval), p4 (copy), p5 (copy), Callback (copy), SeedHomeOmniSduiV2PayloadModule (upval), p3 (copy), LoadTimer (copy), SduiErrors (upval)
+		if t[Text] ~= Lowered then return end
+		local ResponseBody = if typeof(Result) == "table" then Result.responseBody else nil
+		local ValidateResponseBodyResult, ValidateResponseBodyResult2 = validateResponseBody(ResponseBody, p4, p5)
 		
-		if not var7 then
-			assert(var8, "Validation error should exist when response is invalid")
-			p10(var8.errorType, {
+		if not ValidateResponseBodyResult then
+			assert(ValidateResponseBodyResult2, "Validation error should exist when response is invalid")
+			Callback(ValidateResponseBodyResult2.errorType, {
 				name = "discovery-api/omni-recommendation/sduiv2",
-				message = `{var8.message}, topicIds: {p7}`
+				message = `{ValidateResponseBodyResult2.message}, topicIds: {p4}`
 			})
 			
 			return
 		end
-		local ok, status = pcall(function()
-			-- upvalues: seedHomeOmniSduiV2PayloadModule (copy), var6 (ref), p6 (copy), loadTimer (copy)
-			seedHomeOmniSduiV2PayloadModule(var6.sduiv2, p6, loadTimer)
+		local Success, Result1 = pcall(function() --[[ Line: 233 ]]
+			-- upvalues: SeedHomeOmniSduiV2PayloadModule (upval), ResponseBody (copy), p3 (upval), LoadTimer (upval)
+			SeedHomeOmniSduiV2PayloadModule(ResponseBody.sduiv2, p3, LoadTimer)
 		end)
 		
-		if ok then
-			return
-		end
-		p10(sduiErrors.SduiErrorType.ErrorStoringOmniData, {
-			name = "discovery-api/omni-recommendation/sduiv2",
-			message = `Error seeding omni recommendation feed item: {status}, topicIds: {p7}`
-		})
-	end):catch(function(p12)
-		-- upvalues: var4 (ref), var5 (ref), t (copy), p10 (ref), p7 (ref), sduiErrors (copy), sduiParseHelpers (copy)
-		if t[var4] == var5 then
-			p10(sduiErrors.SduiErrorType.FailedToFetchPage, {
+		if not Success then
+			Callback(SduiErrors.SduiErrorType.ErrorStoringOmniData, {
 				name = "discovery-api/omni-recommendation/sduiv2",
-				message = `Omni recommendation feed item refresh failed: {sduiParseHelpers.stringifyValue(p12)}, topicIds: {p7}`
+				message = `Error seeding omni recommendation feed item: {Result1}, topicIds: {p4}`
 			})
 			
 			return
 		end
-	end):finally(function()
-		-- upvalues: var4 (ref), var5 (ref), t (copy), loadTimer (ref)
-		if t[var4] == var5 then
-			loadTimer.logRefreshComplete()
-			t[var4] = nil
+	end):catch(function(Err) --[[ Line: 246 ]]
+		-- upvalues: Text (copy), Lowered (copy), t (upval), Callback (copy), p4 (copy), SduiErrors (upval), SduiParseHelpers (upval)
+		if t[Text] == Lowered then
+			Callback(SduiErrors.SduiErrorType.FailedToFetchPage, {
+				name = "discovery-api/omni-recommendation/sduiv2",
+				message = `Omni recommendation feed item refresh failed: {SduiParseHelpers.stringifyValue(Err)}, topicIds: {p4}`
+			})
+			
+			return
+		end
+	end):finally(function() --[[ Line: 253 ]]
+		-- upvalues: Text (copy), Lowered (copy), t (upval), LoadTimer (copy)
+		if t[Text] == Lowered then
+			LoadTimer.logRefreshComplete()
+			t[Text] = nil
 		end
 	end)
 end

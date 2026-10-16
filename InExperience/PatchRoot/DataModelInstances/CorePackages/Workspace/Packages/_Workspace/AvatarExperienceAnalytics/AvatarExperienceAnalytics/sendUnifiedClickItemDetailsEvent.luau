@@ -1,20 +1,19 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceAnalytics").Parent
-local sharedFlagsModule = require(parent.SharedFlags)
-local _ = require(parent.AvatarExperienceNavigation)
-local _ = require(parent.AvatarExperienceModel)
-local sendUnifiedEventForDeferredActionModule = require(script.Parent.sendUnifiedEventForDeferredAction)
-local getMarketplaceUnifiedItemTypeModule = require(script.Parent.Utils.getMarketplaceUnifiedItemType)
-local getUnifiedLoggingSurfaceModule = require(script.Parent.Utils.getUnifiedLoggingSurface)
-local unifiedEventLogEnumsModule = require(script.Parent.UnifiedEventLogEnums)
-local fFlagAXFixClickItemDetailsSurfaceLogging = sharedFlagsModule.FFlagAXFixClickItemDetailsSurfaceLogging
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceAnalytics").Parent
+local _ = require(Parent.AvatarExperienceNavigation)
+local _ = require(Parent.AvatarExperienceModel)
+local SendUnifiedEventForDeferredActionModule = require(script.Parent.sendUnifiedEventForDeferredAction)
+local GetMarketplaceUnifiedItemTypeModule = require(script.Parent.Utils.getMarketplaceUnifiedItemType)
+local GetUnifiedLoggingSurfaceModule = require(script.Parent.Utils.getUnifiedLoggingSurface)
+local UnifiedEventLogEnumsModule = require(script.Parent.UnifiedEventLogEnums)
+local FFlagAXFixClickItemDetailsSurfaceLogging = require(Parent.SharedFlags).FFlagAXFixClickItemDetailsSurfaceLogging
 
-return function(p1)
-	-- upvalues: sendUnifiedEventForDeferredActionModule (ref), unifiedEventLogEnumsModule (ref), getMarketplaceUnifiedItemTypeModule (ref), fFlagAXFixClickItemDetailsSurfaceLogging (ref), getUnifiedLoggingSurfaceModule (ref)
-	sendUnifiedEventForDeferredActionModule({
+return function(p1) --[[ Line: 28 | Named "sendUnifiedClickItemDetailsEvent" ]]
+	-- upvalues: SendUnifiedEventForDeferredActionModule (copy), UnifiedEventLogEnumsModule (copy), GetMarketplaceUnifiedItemTypeModule (copy), FFlagAXFixClickItemDetailsSurfaceLogging (copy), GetUnifiedLoggingSurfaceModule (copy)
+	SendUnifiedEventForDeferredActionModule({
 		elementName = "CLICK_ITEM_DETAILS",
-		action = unifiedEventLogEnumsModule.MarketplaceUnifiedAction.UI_ELEMENT_CLICK,
+		action = UnifiedEventLogEnumsModule.MarketplaceUnifiedAction.UI_ELEMENT_CLICK,
 		itemId = p1.itemId,
-		itemType = getMarketplaceUnifiedItemTypeModule(p1.itemType),
-		surface = if fFlagAXFixClickItemDetailsSurfaceLogging then getUnifiedLoggingSurfaceModule(p1.avatarRoute) else nil
+		itemType = GetMarketplaceUnifiedItemTypeModule(p1.itemType),
+		surface = if FFlagAXFixClickItemDetailsSurfaceLogging then GetUnifiedLoggingSurfaceModule(p1.avatarRoute) else nil
 	})
 end

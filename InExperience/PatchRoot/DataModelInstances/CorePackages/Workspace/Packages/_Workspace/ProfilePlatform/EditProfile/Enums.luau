@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent.Parent._Index.EditProfile.EditProfile.Common.Enums)
+﻿return (require(script.Parent.Parent.Parent.Parent._Index.EditProfile.EditProfile.Common.Enums))

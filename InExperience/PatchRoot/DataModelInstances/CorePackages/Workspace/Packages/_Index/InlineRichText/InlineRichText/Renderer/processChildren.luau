@@ -1,64 +1,66 @@
-﻿local inlineRichText = script:FindFirstAncestor("InlineRichText")
-local name = require(inlineRichText.Logger):new(script.Name)
-local cryoModule = require(inlineRichText.Parent.Cryo)
-local _ = require(inlineRichText.Types)
-local nodeTypeModule = require(inlineRichText.Enums.NodeType)
-local nodeRenderers = script.Parent.NodeRenderers
-local nodeConfigModule = require(inlineRichText.NodeConfig)
-local t = {
-	[nodeTypeModule.Plaintext] = require(nodeRenderers.PlaintextRenderer),
-	[nodeTypeModule.EngineTag] = require(nodeRenderers.EngineTagRenderer),
-	[nodeTypeModule.InlineCustom] = require(nodeRenderers.InlineCustomRenderer)
+﻿local InlineRichText = script:FindFirstAncestor("InlineRichText")
+local NewResult = require(InlineRichText.Logger):new(script.Name)
+local CryoModule = require(InlineRichText.Parent.Cryo)
+local _ = require(InlineRichText.Types)
+local NodeTypeModule = require(InlineRichText.Enums.NodeType)
+local NodeRenderers = script.Parent.NodeRenderers
+local NodeConfigModule = require(InlineRichText.NodeConfig)
+local config = {
+	[NodeTypeModule.Plaintext] = require(NodeRenderers.PlaintextRenderer),
+	[NodeTypeModule.EngineTag] = require(NodeRenderers.EngineTagRenderer),
+	[NodeTypeModule.InlineCustom] = require(NodeRenderers.InlineCustomRenderer)
 }
 
-return function(p1, p2)
-	-- upvalues: nodeConfigModule (ref), name (ref), cryoModule (ref), t (ref)
-	local t_1 = {}
-	local byNode = nodeConfigModule.getByNode(p1)
+return function(p1, p2) --[[ Line: 20 | Named "processChildren" ]]
+	-- upvalues: NodeConfigModule (copy), NewResult (copy), CryoModule (copy), config (copy)
+	local List = {}
+	local ByNode = NodeConfigModule.getByNode(p1)
 	
-	if not byNode then
-		name:warning(`Node {p1.name}: No config found for node type {p1.type}`)
+	if not ByNode then
+		NewResult:warning(`Node {p1.name}: No config found for node type {p1.type}`)
 		
-		return t_1
+		return List
 	end
-	for i, v in cryoModule.List.map(p1.children, function(p3)
-		-- upvalues: nodeConfigModule (copy), name (copy), byNode (ref), p1 (ref), t (copy), p2 (ref), cryoModule (copy)
-		local byNode_1 = nodeConfigModule.getByNode(p3)
+	for _, value in CryoModule.List.map(p1.children, function(p3) --[[ Line: 28 ]]
+		-- upvalues: NodeConfigModule (upval), NewResult (upval), ByNode (copy), p1 (copy), config (upval), p2 (copy), CryoModule (upval)
+		local ByNode = NodeConfigModule.getByNode(p3)
 		
-		if not byNode_1 then
-			name:warning(`Node {p3.name}: No config found for node {p3.name} type {p3.type}`)
-			
-			return {}
-		elseif not byNode.children[p3.type] then
-			name:warning(`Node {p3.name}: Node type {p3.type} is not a valid child of node {p1.name} type {p1.type}`)
+		if not ByNode then
+			NewResult:warning(`Node {p3.name}: No config found for node {p3.name} type {p3.type}`)
 			
 			return {}
 		end
-		local type = t[p3.type]
-		
-		if not type then
-			name:warning(`Node {p3.name}: No renderer found for type {p3.type}`)
+		if not ByNode.children[p3.type] then
+			NewResult:warning(`Node {p3.name}: Node type {p3.type} is not a valid child of node {p1.name} type {p1.type}`)
 			
 			return {}
 		end
-		local var1 = type(p3, p2)
+		local Callback = config[p3.type]
 		
-		if typeof(var1) ~= "table" then
-			var1 = { var1 }
+		if not Callback then
+			NewResult:warning(`Node {p3.name}: No renderer found for type {p3.type}`)
+			
+			return {}
 		end
-		if cryoModule.List.foldLeft(var1, function(p4, p5)
-			-- upvalues: byNode_1 (ref)
-			return p4 and byNode_1.validateRenderResult(p5)
+		local CallbackResult = Callback(p3, p2)
+		
+		if typeof(CallbackResult) ~= "table" then
+			CallbackResult = { CallbackResult }
+		end
+		if CryoModule.List.foldLeft(CallbackResult, function(p4, p5) --[[ Line: 49 ]]
+			-- upvalues: ByNode (copy)
+			return p4 and ByNode.validateRenderResult(p5)
 		end, true) then
-			return var1
+			return CallbackResult
+		else
+			NewResult:warning(`Node {p3.name}: Rendered result is not valid for type {p3.type}`)
+			
+			return {}
 		end
-		name:warning(`Node {p3.name}: Rendered result is not valid for type {p3.type}`)
-		
-		return {}
 	end) do
-		for i_1, v_1 in v do
-			table.insert(t_1, v_1)
+		for _, value1 in value do
+			table.insert(List, value1)
 		end
 	end
-	return t_1
+	return List
 end

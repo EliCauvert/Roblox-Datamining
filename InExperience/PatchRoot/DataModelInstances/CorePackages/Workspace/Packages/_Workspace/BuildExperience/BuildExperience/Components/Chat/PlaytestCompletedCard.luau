@@ -1,52 +1,84 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local chatCardPriorityModule = require(script.Parent.ChatCardEmphasis.ChatCardPriority)
-local useChatCardEmphasisModule = require(script.Parent.ChatCardEmphasis.useChatCardEmphasis)
-local fFlagBuildExperienceChatCardEmphasisModule = require(buildExperience.Flags.FFlagBuildExperienceChatCardEmphasis)
-local button = foundationModule.Button
-local iconName = foundationModule.Enums.IconName
-local text = foundationModule.Text
-local view = foundationModule.View
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local inputSize = foundationModule.Enums.InputSize
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
+local ChatCardPriorityModule = require(script.Parent.ChatCardEmphasis.ChatCardPriority)
+local UseChatCardEmphasisModule = require(script.Parent.ChatCardEmphasis.useChatCardEmphasis)
+local FFlagBuildExperienceChatCardEmphasisModule = require(BuildExperience.Flags.FFlagBuildExperienceChatCardEmphasis)
+local FFlagBuildExperiencePlaytestCardPublishCtaModule = require(BuildExperience.Flags.FFlagBuildExperiencePlaytestCardPublishCta)
+local Button = FoundationModule.Button
+local IconName = FoundationModule.Enums.IconName
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local FillBehavior = FoundationModule.Enums.FillBehavior
+local InputSize = FoundationModule.Enums.InputSize
 
-return function(p1)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), fFlagBuildExperienceChatCardEmphasisModule (ref), useChatCardEmphasisModule (ref), chatCardPriorityModule (ref), reactModule (ref), view (ref), text (ref), button (ref), iconName (ref), inputSize (ref), buttonVariant (ref)
-	local var1 = useLocalization({
-		description = localizationStringsModule.CHAT_COMPLETED_GAME_CREATION_DESCRIPTION,
-		playtest = localizationStringsModule.CHAT_PLAYTEST,
-		title = localizationStringsModule.CHAT_COMPLETED_GAME_CREATION_TITLE
+return function(Frame) --[[ Line: 36 | Named "PlaytestCompletedCard" ]]
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagBuildExperiencePlaytestCardPublishCtaModule (copy), FFlagBuildExperienceChatCardEmphasisModule (copy), UseChatCardEmphasisModule (copy), ChatCardPriorityModule (copy), ReactModule (copy), View (copy), Button (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy), Text (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
+		description = LocalizationStringsModule.CHAT_COMPLETED_GAME_CREATION_DESCRIPTION,
+		playtest = LocalizationStringsModule.CHAT_PLAYTEST,
+		publish = if FFlagBuildExperiencePlaytestCardPublishCtaModule then LocalizationStringsModule.BUILD_MENU_PUBLISH else nil,
+		title = LocalizationStringsModule.CHAT_COMPLETED_GAME_CREATION_TITLE
 	})
+	local IsIsLoading = Frame.isLoading == true
+	local UseChatCardEmphasisModuleResult = if FFlagBuildExperienceChatCardEmphasisModule then UseChatCardEmphasisModule(ChatCardPriorityModule.PlaytestCompleted) else nil
+	local OnPublish = Frame.onPublish
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "col gap-medium size-full-0 auto-y padding-medium stroke-standard stroke-emphasis radius-medium clip",
-		LayoutOrder = p1.LayoutOrder,
-		testId = p1.testId or "playtest-completed-card"
+		LayoutOrder = Frame.LayoutOrder,
+		testId = Frame.testId or "playtest-completed-card"
 	}, {
-		Title = reactModule.createElement(text, {
+		Title = ReactModule.createElement(Text, {
 			LayoutOrder = 1,
 			tag = "size-full-0 auto-y text-title-medium text-wrap text-align-x-left content-emphasis",
-			Text = p1.title or var1.title
+			Text = Frame.title or UseLocalizationResult.title
 		}),
-		Description = reactModule.createElement(text, {
+		Description = ReactModule.createElement(Text, {
 			LayoutOrder = 2,
 			tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-default",
-			Text = p1.description or var1.description
+			Text = Frame.description or UseLocalizationResult.description
 		}),
-		Playtest = reactModule.createElement(button, {
+		Actions = if FFlagBuildExperiencePlaytestCardPublishCtaModule and OnPublish ~= nil then ReactModule.createElement(View, {
+			LayoutOrder = 3,
+			tag = "row gap-small size-full-0 auto-y",
+			testId = "playtest-completed-card-actions"
+		}, {
+			Playtest = ReactModule.createElement(Button, {
+				LayoutOrder = 1,
+				testId = "playtest-completed-card-playtest-button",
+				text = UseLocalizationResult.playtest,
+				icon = IconName.PlaySmall,
+				size = InputSize.Small,
+				variant = if UseChatCardEmphasisModuleResult == false then ButtonVariant.SoftEmphasis else ButtonVariant.Emphasis,
+				fillBehavior = FillBehavior.Fill,
+				isLoading = IsIsLoading,
+				onActivated = Frame.onPlaytest
+			}),
+			Publish = ReactModule.createElement(Button, {
+				LayoutOrder = 2,
+				testId = "playtest-completed-card-publish-button",
+				text = UseLocalizationResult.publish,
+				size = InputSize.Small,
+				variant = ButtonVariant.Standard,
+				fillBehavior = FillBehavior.Fill,
+				isDisabled = Frame.isPublishDisabled == true,
+				onActivated = OnPublish
+			})
+		}) else ReactModule.createElement(Button, {
 			LayoutOrder = 3,
 			testId = "playtest-completed-card-playtest-button",
-			text = var1.playtest,
-			icon = iconName.PlaySmall,
-			size = inputSize.Small,
-			variant = if (if fFlagBuildExperienceChatCardEmphasisModule then useChatCardEmphasisModule(chatCardPriorityModule.PlaytestCompleted) else nil) == false then buttonVariant.SoftEmphasis else buttonVariant.Emphasis,
+			text = UseLocalizationResult.playtest,
+			icon = IconName.PlaySmall,
+			size = InputSize.Small,
+			variant = if UseChatCardEmphasisModuleResult == false then ButtonVariant.SoftEmphasis else ButtonVariant.Emphasis,
 			width = UDim.new(1, 0),
-			isLoading = p1.isLoading == true,
-			onActivated = p1.onPlaytest
+			isLoading = IsIsLoading,
+			onActivated = Frame.onPlaytest
 		})
 	})
 end

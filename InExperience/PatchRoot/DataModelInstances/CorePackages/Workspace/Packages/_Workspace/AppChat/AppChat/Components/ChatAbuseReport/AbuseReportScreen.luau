@@ -1,55 +1,55 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local reactModule = require(parent.React)
-local frameModule = require(appChat.Components.Common.Frame)
-local chatAbuseReportModule = require(script.Parent.ChatAbuseReport)
-local inputHandlersModule = require(parent.InputHandlers)
-local _ = require(parent.ReactFocusNavigation)
-local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
-local appFocusRoot = focusNavigationUtilsModule.AppFocusRoot
-local focusNavigationEventNameEnum = focusNavigationUtilsModule.FocusNavigationEventNameEnum
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local ReactModule = require(Parent.React)
+local FrameModule = require(AppChat.Components.Common.Frame)
+local ChatAbuseReportModule = require(script.Parent.ChatAbuseReport)
+local InputHandlersModule = require(Parent.InputHandlers)
+local _ = require(Parent.ReactFocusNavigation)
+local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
+local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
+local AppFocusRoot = FocusNavigationUtilsModule.AppFocusRoot
+local FocusNavigationEventNameEnum = FocusNavigationUtilsModule.FocusNavigationEventNameEnum
 
-return function(p1)
-	-- upvalues: reactModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), frameModule (ref), chatAbuseReportModule (ref), appFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref)
-	local navigation = p1.navigation
+return function(p1) --[[ Line: 15 | Named "AbuseReportScreen" ]]
+	-- upvalues: ReactModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), FrameModule (copy), ChatAbuseReportModule (copy), AppFocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy)
+	local Navigation = p1.navigation
 	
-	return reactModule.createElement(appFocusRoot, {
+	return ReactModule.createElement(AppFocusRoot, {
 		isIsolated = true,
 		isAutoFocusRoot = true,
 		isFocusable = true,
-		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.PopUp,
-		customEventHandlers = reactModule.useMemo(function()
-			-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), navigation (ref)
+		surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.PopUp,
+		customEventHandlers = ReactModule.useMemo(function() --[[ Line: 20 ]]
+			-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), Navigation (copy)
 			return {
-				[focusNavigationEventNameEnum.NavigateBack] = {
-					handler = inputHandlersModule.onRelease(function(p2)
-						-- upvalues: navigation (copy)
-						navigation.pop()
+				[FocusNavigationEventNameEnum.NavigateBack] = {
+					handler = InputHandlersModule.onRelease(function(p2) --[[ Line: 23 ]]
+						-- upvalues: Navigation (upval)
+						Navigation.pop()
 						p2:cancel()
 					end)
 				}
 			}
-		end, { navigation })
+		end, { Navigation })
 	}, {
-		reactModule.createElement(frameModule, {
+		(ReactModule.createElement(FrameModule, {
 			horizontalAlignment = Enum.HorizontalAlignment.Center,
 			verticalAlignment = Enum.VerticalAlignment.Center,
 			Size = UDim2.new(1, 0, 1, 0)
 		}, {
-			constraint = reactModule.createElement("UISizeConstraint", { MaxSize = Vector2.new(800, 450) }),
-			padding = reactModule.createElement("UIPadding", {
+			constraint = ReactModule.createElement("UISizeConstraint", { MaxSize = Vector2.new(800, 450) }),
+			padding = ReactModule.createElement("UIPadding", {
 				PaddingTop = UDim.new(0, 12),
 				PaddingBottom = UDim.new(0, 12),
 				PaddingLeft = UDim.new(0, 12),
 				PaddingRight = UDim.new(0, 12)
 			}),
-			abuseReportFlow = reactModule.createElement(chatAbuseReportModule, {
-				conversationId = navigation.getParam("conversationId", nil),
-				participantId = navigation.getParam("participantId", nil),
-				onAbandon = navigation.pop,
-				onComplete = navigation.pop
+			abuseReportFlow = ReactModule.createElement(ChatAbuseReportModule, {
+				conversationId = Navigation.getParam("conversationId", nil),
+				participantId = Navigation.getParam("participantId", nil),
+				onAbandon = Navigation.pop,
+				onComplete = Navigation.pop
 			})
-		})
+		}))
 	})
 end

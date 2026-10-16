@@ -1,14 +1,15 @@
-﻿local discountType = require(script:FindFirstAncestor("IAPExperience").ProductPurchase.PricingTypes).DiscountType
+﻿local DiscountType = require(script:FindFirstAncestor("IAPExperience").ProductPurchase.PricingTypes).DiscountType
 
-return function(p1)
-	-- upvalues: discountType (ref)
+return function(p1): boolean --[[ Line: 12 | Named "multiItemPriceQualifiesForDetailsDiscountSummary" ]]
+	-- upvalues: DiscountType (copy)
 	if not p1 then
 		return false
-	elseif #p1.discounts >= 2 then
+	end
+	if #p1.discounts >= 2 then
 		return true
 	end
-	for i, v in p1.discounts do
-		if v.type == discountType.BlackbirdSubscription or v.type == discountType.RobloxPlusSubscription then
+	for _, discount in p1.discounts do
+		if discount.type == DiscountType.BlackbirdSubscription or discount.type == DiscountType.RobloxPlusSubscription then
 			return true
 		end
 	end

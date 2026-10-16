@@ -1,6 +1,6 @@
-﻿local t = { ["&"] = "&amp;", ["<"] = "&lt;", [">"] = "&gt;" }
+﻿local config = { ["&"] = "&amp;", ["<"] = "&lt;", [">"] = "&gt;" }
 
-return function(p1)
-	-- upvalues: t (ref)
-	return string.gsub(p1, "[&<>]", t)
+return function(Text: string): string --[[ Line: 9 | Named "escapeRichText" ]]
+	-- upvalues: config (copy)
+	return (string.gsub(Text, "[&<>]", config))
 end

@@ -1,44 +1,42 @@
-﻿local shell = game:GetService("CoreGui"):FindFirstChild("RobloxGui"):FindFirstChild("Modules"):FindFirstChild("Shell")
-local contextActionService = game:GetService("ContextActionService")
-local guiService = game:GetService("GuiService")
-local corePackagesService = game:GetService("CorePackages")
-local globalSettingsModule = require(shell:FindFirstChild("GlobalSettings"))
-local utilityModule = require(shell:FindFirstChild("Utility"))
-local screenManagerModule = require(shell:FindFirstChild("ScreenManager"))
-local soundManagerModule = require(shell:FindFirstChild("SoundManager"))
-local analyticsModule = require(shell:FindFirstChild("Analytics"))
-local create = require(corePackagesService.Workspace.Packages.AppCommonLib).Create
+﻿local Shell = game:GetService("CoreGui"):FindFirstChild("RobloxGui"):FindFirstChild("Modules"):FindFirstChild("Shell")
+local ContextActionService = game:GetService("ContextActionService")
+local GuiService = game:GetService("GuiService")
+local GlobalSettingsModule = require(Shell:FindFirstChild("GlobalSettings"))
+local UtilityModule = require(Shell:FindFirstChild("Utility"))
+local ScreenManagerModule = require(Shell:FindFirstChild("ScreenManager"))
+local SoundManagerModule = require(Shell:FindFirstChild("SoundManager"))
+local AnalyticsModule = require(Shell:FindFirstChild("Analytics"))
+local CreateFunction = require(game:GetService("CorePackages").Workspace.Packages.AppCommonLib).Create
 
-return function()
-	-- upvalues: create (ref), globalSettingsModule (ref), soundManagerModule (ref), analyticsModule (ref), screenManagerModule (ref), guiService (ref), utilityModule (ref), contextActionService (ref)
-	local t = {}
-	local t_1 = {}
-	local var1 = nil
-	local var2 = false
-	local var3 = create("Frame")({
+return function() --[[ Line: 24 ]]
+	-- upvalues: CreateFunction (copy), GlobalSettingsModule (copy), SoundManagerModule (copy), AnalyticsModule (copy), ScreenManagerModule (copy), GuiService (copy), UtilityModule (copy), ContextActionService (copy)
+	local Buttons = {}
+	local SelectedCoreObject = nil
+	local Flag = false
+	local Parent = CreateFunction("Frame")({
 		Name = "ModalOverlay",
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
 		ZIndex = 4,
 		Size = UDim2.new(1, 0, 1, 0),
-		BackgroundColor3 = globalSettingsModule.ModalBackgroundColor
+		BackgroundColor3 = GlobalSettingsModule.ModalBackgroundColor
 	})
-	local var4 = create("Frame")({
+	local Parent1 = CreateFunction("Frame")({
 		Name = "SideBarContainer",
 		BorderSizePixel = 0,
 		ZIndex = 5,
 		Size = UDim2.new(0.3, 0, 1, 0),
 		Position = UDim2.new(1, 0, 0, 0),
-		BackgroundColor3 = globalSettingsModule.OverlayColor,
-		Parent = var3
+		BackgroundColor3 = GlobalSettingsModule.OverlayColor,
+		Parent = Parent
 	})
-	local var5 = create("TextButton")({
+	local SelectionImageObject = CreateFunction("TextButton")({
 		Name = "DummySelectionImage",
 		Size = UDim2.new(0, 0, 0, 0),
 		Visible = false,
-		soundManagerModule:CreateSound("MoveSelection")
+		SoundManagerModule:CreateSound("MoveSelection")
 	})
-	local var6 = create("TextLabel")({
+	local v1 = CreateFunction("TextLabel")({
 		Name = "Text",
 		BorderSizePixel = 0,
 		BackgroundTransparency = 1,
@@ -49,168 +47,169 @@ return function()
 		Position = UDim2.new(0, 65, 0, 156),
 		TextXAlignment = Enum.TextXAlignment.Left,
 		TextYAlignment = Enum.TextYAlignment.Top,
-		TextColor3 = globalSettingsModule.WhiteTextColor,
-		Font = globalSettingsModule.RegularFont,
-		FontSize = globalSettingsModule.DescriptionSize
+		TextColor3 = GlobalSettingsModule.WhiteTextColor,
+		Font = GlobalSettingsModule.RegularFont,
+		FontSize = GlobalSettingsModule.DescriptionSize
 	})
 	
-	local function recalcPositions()
-		-- upvalues: t_1 (ref)
-		for i = 1, #t_1 do
-			t_1[i].Position = UDim2.new(0, 0, 0, (i - 1) * 75 + 156)
+	local function recalcPositions() --[[ Line: 81 ]]
+		-- upvalues: Buttons (copy)
+		for i = 1, #Buttons do
+			Buttons[i].Position = UDim2.new(0, 0, 0, (i - 1) * 75 + 156)
 		end
 	end
 	
-	local closedEvent = Instance.new("BindableEvent")
-	closedEvent.Name = "ClosedEvent"
-	t.Closed = closedEvent.Event
+	local ClosedEvent = Instance.new("BindableEvent")
+	ClosedEvent.Name = "ClosedEvent"
+	local config = {
+		Closed = ClosedEvent.Event,
+		GetAnalyticsInfo = function(_) --[[ Line: 94 ]]
+			-- upvalues: AnalyticsModule (upval)
+			return {
+				[AnalyticsModule.WidgetNames("WidgetId")] = AnalyticsModule.WidgetNames("SideBarId")
+			}
+		end
+	}
 	
-	function t.GetAnalyticsInfo(_)
-		-- upvalues: analyticsModule (copy)
-		return {
-			[analyticsModule.WidgetNames("WidgetId")] = analyticsModule.WidgetNames("SideBarId")
-		}
-	end
-	
-	function t.AddItem(_, p1, p2)
-		-- upvalues: create (copy), globalSettingsModule (copy), var5 (ref), var4 (ref), soundManagerModule (copy), screenManagerModule (copy), t (ref), closedEvent (ref), t_1 (ref), recalcPositions (ref)
-		local var7 = create("TextButton")({
+	function config:AddItem(Text, Callback) --[[ Line: 98 ]]
+		-- upvalues: CreateFunction (upval), GlobalSettingsModule (upval), SelectionImageObject (copy), Parent1 (copy), SoundManagerModule (upval), ScreenManagerModule (upval), config (copy), ClosedEvent (copy), Buttons (copy), recalcPositions (copy)
+		local Button = CreateFunction("TextButton")({
 			Name = "SortButton",
 			Size = UDim2.new(1, 0, 0, 75),
 			BorderSizePixel = 0,
-			BackgroundColor3 = globalSettingsModule.BlueButtonColor,
+			BackgroundColor3 = GlobalSettingsModule.BlueButtonColor,
 			BackgroundTransparency = 1,
 			ZIndex = 6,
 			Text = "",
-			SelectionImageObject = var5,
-			Parent = var4,
-			soundManagerModule:CreateSound("MoveSelection")
+			SelectionImageObject = SelectionImageObject,
+			Parent = Parent1,
+			SoundManagerModule:CreateSound("MoveSelection")
 		})
-		local var8 = create("TextLabel")({
+		local Label = CreateFunction("TextLabel")({
 			Name = "SortName",
 			BackgroundTransparency = 1,
 			ZIndex = 7,
 			Size = UDim2.new(1, -65, 1, 0),
 			Position = UDim2.new(0, 65, 0, 0),
-			Text = p1,
+			Text = Text,
 			TextXAlignment = Enum.TextXAlignment.Left,
-			TextColor3 = globalSettingsModule.WhiteTextColor,
-			Font = globalSettingsModule.RegularFont,
-			FontSize = globalSettingsModule.MediumFontSize,
-			Parent = var7
+			TextColor3 = GlobalSettingsModule.WhiteTextColor,
+			Font = GlobalSettingsModule.RegularFont,
+			FontSize = GlobalSettingsModule.MediumFontSize,
+			Parent = Button
 		})
-		var7.MouseButton1Click:connect(function()
-			-- upvalues: soundManagerModule (copy), screenManagerModule (copy), t (copy), closedEvent (copy), p2 (ref)
-			soundManagerModule:Play("ButtonPress")
-			screenManagerModule:CloseCurrent(t)
-			closedEvent:Fire()
-			p2()
+		Button.MouseButton1Click:connect(function() --[[ Line: 128 ]]
+			-- upvalues: SoundManagerModule (upval), ScreenManagerModule (upval), config (upval), ClosedEvent (upval), Callback (copy)
+			SoundManagerModule:Play("ButtonPress")
+			ScreenManagerModule:CloseCurrent(config)
+			ClosedEvent:Fire()
+			Callback()
 		end)
-		var7.SelectionGained:connect(function()
-			-- upvalues: var7 (ref), var8 (ref), globalSettingsModule (copy)
-			var7.BackgroundTransparency = 0
-			var8.TextColor3 = globalSettingsModule.TextSelectedColor
+		Button.SelectionGained:connect(function() --[[ Line: 134 ]]
+			-- upvalues: Button (copy), Label (copy), GlobalSettingsModule (upval)
+			Button.BackgroundTransparency = 0
+			Label.TextColor3 = GlobalSettingsModule.TextSelectedColor
 		end)
-		var7.SelectionLost:connect(function()
-			-- upvalues: var7 (ref), var8 (ref), globalSettingsModule (copy)
-			var7.BackgroundTransparency = 1
-			var8.TextColor3 = globalSettingsModule.WhiteTextColor
+		Button.SelectionLost:connect(function() --[[ Line: 138 ]]
+			-- upvalues: Button (copy), Label (copy), GlobalSettingsModule (upval)
+			Button.BackgroundTransparency = 1
+			Label.TextColor3 = GlobalSettingsModule.WhiteTextColor
 		end)
-		t_1[#t_1 + 1] = var7
+		Buttons[#Buttons + 1] = Button
 		recalcPositions()
 	end
 	
-	function t.SetText(_, p1)
-		-- upvalues: var6 (ref), var4 (ref)
-		var6.Text = p1
-		var6.Parent = var4
+	function config:SetText(Text) --[[ Line: 147 ]]
+		-- upvalues: v1 (copy), Parent1 (copy)
+		v1.Text = Text
+		v1.Parent = Parent1
 	end
 	
-	function t.ResetText(_)
-		-- upvalues: var6 (ref)
-		var6.Text = ""
-		var6.Parent = nil
+	function config:ResetText() --[[ Line: 152 ]]
+		-- upvalues: v1 (copy)
+		v1.Text = ""
+		v1.Parent = nil
 	end
 	
-	function t.RemoveAllItems(_)
-		-- upvalues: t (ref), t_1 (ref)
-		t:ResetText()
+	function config:RemoveAllItems() --[[ Line: 157 ]]
+		-- upvalues: config (copy), Buttons (copy)
+		config:ResetText()
 		
-		for i, v in pairs(t_1) do
-			v:Destroy()
-			t_1[i] = nil
+		for i, button in pairs(Buttons) do
+			button:Destroy()
+			Buttons[i] = nil
 		end
 	end
 	
-	function t.SetSelectedObject(_, p1, p2)
-		-- upvalues: t_1 (ref), var1 (write), var2 (write), guiService (copy)
-		if #t_1 > 0 then
-			var1 = if p1 then t_1[p1] else t_1[1]
+	function config:SetSelectedObject(p1, Enabled) --[[ Line: 165 ]]
+		-- upvalues: Buttons (copy), SelectedCoreObject (ref), Flag (ref), GuiService (upval)
+		if #Buttons > 0 then
+			SelectedCoreObject = p1 and Buttons[p1] or Buttons[1]
 			
-			if p2 == true and var1 and var2 then
-				guiService.SelectedCoreObject = var1
+			if Enabled == true and SelectedCoreObject and Flag then
+				GuiService.SelectedCoreObject = SelectedCoreObject
 				
 				return
 			end
 		else
-			var1 = nil
+			SelectedCoreObject = nil
 		end
 	end
 	
-	function t.GetPriority(_)
-		-- upvalues: globalSettingsModule (copy)
-		return globalSettingsModule.OverlayPriority
+	function config:GetPriority() --[[ Line: 177 ]]
+		-- upvalues: GlobalSettingsModule (upval)
+		return GlobalSettingsModule.OverlayPriority
 	end
 	
-	function t.Show(p1)
-		-- upvalues: var3 (ref), screenManagerModule (copy), utilityModule (copy), globalSettingsModule (copy), var4 (ref), soundManagerModule (copy)
-		var3.Parent = screenManagerModule:GetScreenGuiByPriority(p1:GetPriority())
-		local _ = utilityModule.PropertyTweener(var3, "BackgroundTransparency", 1, globalSettingsModule.ModalBackgroundTransparency, 0.25, utilityModule.EaseInOutQuad, true, nil)
-		var4:TweenPositionInternal(UDim2.new(1 - var4.Size.X.Scale, 0, 0, 0), Enum.EasingDirection.InOut, Enum.EasingStyle.Quad, 0.25, true, nil)
-		soundManagerModule:Play("SideMenuSlideIn")
+	function config.Show(p1) --[[ Line: 181 ]]
+		-- upvalues: Parent (copy), ScreenManagerModule (upval), UtilityModule (upval), GlobalSettingsModule (upval), Parent1 (copy), SoundManagerModule (upval)
+		Parent.Parent = ScreenManagerModule:GetScreenGuiByPriority(p1:GetPriority())
+		local _ = UtilityModule.PropertyTweener(Parent, "BackgroundTransparency", 1, GlobalSettingsModule.ModalBackgroundTransparency, 0.25, UtilityModule.EaseInOutQuad, true, nil)
+		Parent1:TweenPositionInternal(UDim2.new(1 - Parent1.Size.X.Scale, 0, 0, 0), Enum.EasingDirection.InOut, Enum.EasingStyle.Quad, 0.25, true, nil)
+		SoundManagerModule:Play("SideMenuSlideIn")
 	end
 	
-	function t.Hide(_)
-		-- upvalues: utilityModule (copy), var3 (ref), var4 (ref)
-		local _ = utilityModule.PropertyTweener(var3, "BackgroundTransparency", 0.3, 1, 0.25, utilityModule.EaseInOutQuad, true, function()
-			-- upvalues: var3 (copy)
-			var3.Parent = nil
+	function config:Hide() --[[ Line: 190 ]]
+		-- upvalues: UtilityModule (upval), Parent (copy), Parent1 (copy)
+		local _ = UtilityModule.PropertyTweener(Parent, "BackgroundTransparency", 0.3, 1, 0.25, UtilityModule.EaseInOutQuad, true, function() --[[ Line: 192 ]]
+			-- upvalues: Parent (upval)
+			Parent.Parent = nil
 		end)
-		var4:TweenPositionInternal(UDim2.new(1, 0, 0, 0), Enum.EasingDirection.InOut, Enum.EasingStyle.Sine, 0.25, true)
+		Parent1:TweenPositionInternal(UDim2.new(1, 0, 0, 0), Enum.EasingDirection.InOut, Enum.EasingStyle.Sine, 0.25, true)
 	end
 	
-	function t.IsFocused(_)
-		-- upvalues: var2 (write)
-		return var2
+	function config:IsFocused() --[[ Line: 198 ]]
+		-- upvalues: Flag (ref)
+		return Flag
 	end
 	
-	function t.Focus(p1)
-		-- upvalues: var2 (write), guiService (copy), var4 (ref), var1 (write), utilityModule (copy), contextActionService (copy), screenManagerModule (copy), t (ref), closedEvent (ref)
-		var2 = true
-		guiService:AddSelectionParent("SideBar", var4)
+	function config.Focus(p1) --[[ Line: 202 ]]
+		-- upvalues: Flag (ref), GuiService (upval), Parent1 (copy), SelectedCoreObject (ref), UtilityModule (upval), ContextActionService (upval), ScreenManagerModule (upval), config (copy), ClosedEvent (copy)
+		Flag = true
+		GuiService:AddSelectionParent("SideBar", Parent1)
 		
-		if var1 then
-			utilityModule.SetSelectedCoreObject(var1)
+		if SelectedCoreObject then
+			UtilityModule.SetSelectedCoreObject(SelectedCoreObject)
 		else
 			p1:SetSelectedObject(1)
-			utilityModule.SetSelectedCoreObject(var1)
+			UtilityModule.SetSelectedCoreObject(SelectedCoreObject)
 		end
-		contextActionService:BindCoreAction("CloseSideBar", function(_, p2, _)
-			-- upvalues: screenManagerModule (copy), t (copy), closedEvent (copy)
-			if p2 == Enum.UserInputState.End then
-				screenManagerModule:CloseCurrent(t)
-				closedEvent:Fire()
+		ContextActionService:BindCoreAction("CloseSideBar", function(_, UserInputState, _) --[[ Line: 214 ]]
+			-- upvalues: ScreenManagerModule (upval), config (upval), ClosedEvent (upval)
+			if UserInputState == Enum.UserInputState.End then
+				ScreenManagerModule:CloseCurrent(config)
+				ClosedEvent:Fire()
 			end
 		end, false, Enum.KeyCode.ButtonB)
 	end
 	
-	function t.RemoveFocus(_)
-		-- upvalues: var2 (write), guiService (copy), contextActionService (copy), var1 (write)
-		var2 = false
-		guiService:RemoveSelectionGroup("SideBar")
-		contextActionService:UnbindCoreAction("CloseSideBar")
-		var1 = nil
+	function config:RemoveFocus() --[[ Line: 223 ]]
+		-- upvalues: Flag (ref), GuiService (upval), ContextActionService (upval), SelectedCoreObject (ref)
+		Flag = false
+		GuiService:RemoveSelectionGroup("SideBar")
+		ContextActionService:UnbindCoreAction("CloseSideBar")
+		SelectedCoreObject = nil
 	end
 	
-	return t
+	return config
 end

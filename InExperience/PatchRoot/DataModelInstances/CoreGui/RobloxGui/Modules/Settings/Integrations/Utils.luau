@@ -1,23 +1,23 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local robloxAppEnumsModule = require(corePackagesService.Workspace.Packages.RobloxAppEnums)
-local appCommonLibModule = require(corePackagesService.Workspace.Packages.AppCommonLib)
-local deviceOrientationMode = robloxAppEnumsModule.DeviceOrientationMode
+﻿local CorePackages = game:GetService("CorePackages")
+local RobloxAppEnumsModule = require(CorePackages.Workspace.Packages.RobloxAppEnums)
+local AppCommonLibModule = require(CorePackages.Workspace.Packages.AppCommonLib)
+local DeviceOrientationMode = RobloxAppEnumsModule.DeviceOrientationMode
 
 return {
-	getDeviceType = function()
-		-- upvalues: appCommonLibModule (ref), deviceOrientationMode (ref)
-		local viewportSize = workspace.CurrentCamera.ViewportSize
+	getDeviceType = function() --[[ Line: 26 ]]
+		-- upvalues: AppCommonLibModule (copy), DeviceOrientationMode (copy)
+		local ViewportSize = workspace.CurrentCamera.ViewportSize
 		
-		return appCommonLibModule.getDeviceType(if viewportSize.Y < viewportSize.X then deviceOrientationMode.Landscape else deviceOrientationMode.Portrait)
+		return AppCommonLibModule.getDeviceType(if ViewportSize.Y < ViewportSize.X then DeviceOrientationMode.Landscape else DeviceOrientationMode.Portrait)
 	end,
-	DeviceTypes = robloxAppEnumsModule.DeviceType,
-	getDeviceOrientation = function()
-		-- upvalues: deviceOrientationMode (ref)
-		local viewportSize = workspace.CurrentCamera.ViewportSize
+	DeviceTypes = RobloxAppEnumsModule.DeviceType,
+	getDeviceOrientation = function() --[[ Line: 19 ]]
+		-- upvalues: DeviceOrientationMode (copy)
+		local ViewportSize = workspace.CurrentCamera.ViewportSize
 		
-		return if viewportSize.Y < viewportSize.X then deviceOrientationMode.Landscape else deviceOrientationMode.Portrait
+		return if ViewportSize.Y < ViewportSize.X then DeviceOrientationMode.Landscape else DeviceOrientationMode.Portrait
 	end,
-	getViewportSize = function()
+	getViewportSize = function() --[[ Line: 14 ]]
 		return workspace.CurrentCamera.ViewportSize
 	end
 }

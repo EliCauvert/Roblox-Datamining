@@ -1,13 +1,13 @@
-﻿return function(p1, p2)
+﻿return function(p1, Callback) --[[ Line: 5 | Named "filter" ]]
 	local t = {}
-	local var1 = 1
+	local Count = 1
 	
 	for i = 1, #p1 do
-		local var2 = p1[i]
+		local v1 = p1[i]
 		
-		if p2(var2, i) then
-			t[var1] = var2
-			var1 += 1
+		if Callback(v1, i) then
+			t[Count] = v1
+			Count += 1
 		end
 	end
 	return t

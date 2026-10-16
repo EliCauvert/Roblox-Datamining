@@ -1,286 +1,281 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local corePackagesService = game:GetService("CorePackages")
-local contextActionService = game:GetService("ContextActionService")
-local userInputService = game:GetService("UserInputService")
-local robloxGui = coreGuiService:WaitForChild("RobloxGui")
-local utilityModule = require(robloxGui.Modules.Settings.Utility)
-local constantsModule = require(robloxGui.Modules:WaitForChild("InGameMenu"):WaitForChild("Resources"):WaitForChild("Constants"))
-local reactModule = require(corePackagesService.Packages.React)
-local foundationModule = require(corePackagesService.Packages.Foundation)
-local _ = require(corePackagesService.Packages.Signals)
-local signalsReactModule = require(corePackagesService.Packages.SignalsReact)
-local responsiveModule = require(corePackagesService.Workspace.Packages.Responsive)
-local useLocalization = require(corePackagesService.Workspace.Packages.Localization).Hooks.useLocalization
-local menuButtonModule = require(script.Parent.MenuButton)
-local useSignalState = signalsReactModule.useSignalState
-local useLastInput = responsiveModule.useLastInput
-local view = foundationModule.View
-local fIntRelocateMobileMenuButtonsVariantModule = require(robloxGui.Modules.Settings.Flags.FIntRelocateMobileMenuButtonsVariant)
-local fFlagAddTraversalHistoryReactMenuButtonsModule = require(robloxGui.Modules.Settings.Flags.FFlagAddTraversalHistoryReactMenuButtons)
-local fFlagGamepadIconSupportCheck = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagGamepadIconSupportCheck
-local menuButtonsDisconnectGamepadConnected = game:DefineFastFlag("MenuButtonsDisconnectGamepadConnected", false)
-local menuButtonsUseGreyResumeButton = game:DefineFastFlag("MenuButtonsUseGreyResumeButton", false)
-local fFlagIEMFocusNavSupportNewButtonsModule = require(robloxGui.Modules.Settings.Flags.FFlagIEMFocusNavSupportNewButtons)
+﻿local CorePackages = game:GetService("CorePackages")
+local ContextActionService = game:GetService("ContextActionService")
+local UserInputService = game:GetService("UserInputService")
+local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
+local UtilityModule = require(RobloxGui.Modules.Settings.Utility)
+local ConstantsModule = require(RobloxGui.Modules:WaitForChild("InGameMenu"):WaitForChild("Resources"):WaitForChild("Constants"))
+local ReactModule = require(CorePackages.Packages.React)
+local _ = require(CorePackages.Packages.Signals)
+local UseLocalizationFunction = require(CorePackages.Workspace.Packages.Localization).Hooks.useLocalization
+local MenuButtonModule = require(script.Parent.MenuButton)
+local UseSignalStateFunction = require(CorePackages.Packages.SignalsReact).useSignalState
+local UseLastInputFunction = require(CorePackages.Workspace.Packages.Responsive).useLastInput
+local View = require(CorePackages.Packages.Foundation).View
+local FIntRelocateMobileMenuButtonsVariantModule = require(RobloxGui.Modules.Settings.Flags.FIntRelocateMobileMenuButtonsVariant)
+local FFlagAddTraversalHistoryReactMenuButtonsModule = require(RobloxGui.Modules.Settings.Flags.FFlagAddTraversalHistoryReactMenuButtons)
+local FFlagGamepadIconSupportCheck = require(CorePackages.Workspace.Packages.SharedFlags).FFlagGamepadIconSupportCheck
+local MenuButtonsDisconnectGamepadConnected = game:DefineFastFlag("MenuButtonsDisconnectGamepadConnected", false)
+local MenuButtonsUseGreyResumeButton = game:DefineFastFlag("MenuButtonsUseGreyResumeButton", false)
+local FFlagIEMFocusNavSupportNewButtonsModule = require(RobloxGui.Modules.Settings.Flags.FFlagIEMFocusNavSupportNewButtons)
 
-local function createMenuButtons(p1, p2, p3)
-	-- upvalues: reactModule (ref), view (ref), fFlagIEMFocusNavSupportNewButtonsModule (ref), menuButtonModule (ref), fFlagGamepadIconSupportCheck (ref), fFlagAddTraversalHistoryReactMenuButtonsModule (ref)
+local function createMenuButtons(UseMemoResult, LastInput, IsSmall) --[[ Line: 37 ]]
+	-- upvalues: ReactModule (copy), View (copy), FFlagIEMFocusNavSupportNewButtonsModule (copy), MenuButtonModule (copy), FFlagGamepadIconSupportCheck (copy), FFlagAddTraversalHistoryReactMenuButtonsModule (copy)
 	local t = {}
 	
-	for i = 1, #p1 do
-		t["MenuButtonContainer" .. i] = reactModule.createElement(view, {
+	for i = 1, #UseMemoResult do
+		local Text = "MenuButtonContainer" .. i
+		local CreateElementFunction = ReactModule.createElement
+		local config = {
 			tag = "fill row align-y-center",
 			LayoutOrder = i,
-			SelectionGroup = if fFlagIEMFocusNavSupportNewButtonsModule then true else nil
-		}, {
-			MenuButton = reactModule.createElement(menuButtonModule, {
-				layoutOrder = 1,
-				text = p1[i].text,
-				lastInput = p2,
-				keyboardButtonImageHint = p1[i].hint.keyboardButtonImage,
-				gamepadButton = if fFlagGamepadIconSupportCheck then p1[i].hint.gamepadButton else nil,
-				gamepadButtonImageHint = p1[i].hint.gamepadButtonImage,
-				onActivated = p1[i].onActivated,
-				isEmphasized = p1[i].isEmphasized,
-				isSmall = p3,
-				isDisabled = p1[i].getIsDisabled(),
-				addTraversalHistoryMenu = if fFlagAddTraversalHistoryReactMenuButtonsModule then p1[i].addTraversalHistoryMenu else nil,
-				currentPageChangeSignal = if fFlagAddTraversalHistoryReactMenuButtonsModule then p1[i].currentPageChangeSignal else nil,
-				buttonRef = if fFlagIEMFocusNavSupportNewButtonsModule then p1[i].buttonRef else nil
-			})
+			SelectionGroup = if FFlagIEMFocusNavSupportNewButtonsModule then true else nil
+		}
+		local CreateElementFunction1 = ReactModule.createElement
+		local config1 = {
+			layoutOrder = 1,
+			text = UseMemoResult[i].text,
+			lastInput = LastInput,
+			keyboardButtonImageHint = UseMemoResult[i].hint.keyboardButtonImage,
+			gamepadButton = if FFlagGamepadIconSupportCheck then UseMemoResult[i].hint.gamepadButton else nil
+		}
+		config1.gamepadButtonImageHint = UseMemoResult[i].hint.gamepadButtonImage
+		config1.onActivated = UseMemoResult[i].onActivated
+		config1.isEmphasized = UseMemoResult[i].isEmphasized
+		config1.isSmall = IsSmall
+		config1.isDisabled = UseMemoResult[i].getIsDisabled()
+		config1.addTraversalHistoryMenu = if FFlagAddTraversalHistoryReactMenuButtonsModule then UseMemoResult[i].addTraversalHistoryMenu else nil
+		config1.currentPageChangeSignal = if FFlagAddTraversalHistoryReactMenuButtonsModule then UseMemoResult[i].currentPageChangeSignal else nil
+		config1.buttonRef = if FFlagIEMFocusNavSupportNewButtonsModule then UseMemoResult[i].buttonRef else nil
+		t[Text] = CreateElementFunction(View, config, {
+			MenuButton = CreateElementFunction1(MenuButtonModule, config1)
 		})
 	end
 	return t
 end
 
-return function(p4)
-	-- upvalues: reactModule (ref), utilityModule (ref), useSignalState (ref), fFlagIEMFocusNavSupportNewButtonsModule (ref), useLocalization (ref), constantsModule (ref), useLastInput (ref), fFlagAddTraversalHistoryReactMenuButtonsModule (ref), menuButtonsUseGreyResumeButton (ref), fIntRelocateMobileMenuButtonsVariantModule (ref), contextActionService (ref), userInputService (ref), menuButtonsDisconnectGamepadConnected (ref), view (ref), createMenuButtons (ref)
-	local var1, _ = reactModule.useState(utilityModule:IsSmallTouchScreen())
-	local _ = useSignalState(p4.getCanRespawn)
-	local var2 = reactModule.useRef(nil)
-	local var3 = reactModule.useRef(nil)
+return function(p1) --[[ Line: 77 | Named "MenuButtons" ]]
+	-- upvalues: ReactModule (copy), UtilityModule (copy), UseSignalStateFunction (copy), FFlagIEMFocusNavSupportNewButtonsModule (copy), UseLocalizationFunction (copy), ConstantsModule (copy), UseLastInputFunction (copy), FFlagAddTraversalHistoryReactMenuButtonsModule (copy), MenuButtonsUseGreyResumeButton (copy), FIntRelocateMobileMenuButtonsVariantModule (copy), ContextActionService (copy), UserInputService (copy), MenuButtonsDisconnectGamepadConnected (copy), View (copy), createMenuButtons (copy)
+	local UseStateResult, _ = ReactModule.useState(UtilityModule:IsSmallTouchScreen())
+	local _ = UseSignalStateFunction(p1.getCanRespawn)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(nil)
 	
-	if fFlagIEMFocusNavSupportNewButtonsModule then
-		reactModule.useEffect(function()
-			-- upvalues: p4 (ref), var3 (ref)
-			if p4.setResumeMenuButton then
-				p4.setResumeMenuButton(var3.current)
+	if FFlagIEMFocusNavSupportNewButtonsModule then
+		ReactModule.useEffect(function() --[[ Line: 86 ]]
+			-- upvalues: p1 (copy), UseRefResult1 (copy)
+			if p1.setResumeMenuButton then
+				p1.setResumeMenuButton(UseRefResult1.current)
 			end
-		end, { p4.setResumeMenuButton })
+		end, { p1.setResumeMenuButton })
 	end
-	local var4, var5 = reactModule.useBinding("")
-	local var6, var7 = reactModule.useBinding("")
-	local var8, var9 = reactModule.useBinding("")
-	local var10 = useLocalization({
-		LeaveGame = constantsModule.LeaveGameLocalizedKey,
-		Respawn = constantsModule.RespawnLocalizedKey,
-		Resume = constantsModule.ResumeLocalizedKey
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding("")
+	local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding("")
+	local UseBindingResult3, UseBindingResult2_2 = ReactModule.useBinding("")
+	local UseLocalizationResult = UseLocalizationFunction({
+		LeaveGame = ConstantsModule.LeaveGameLocalizedKey,
+		Respawn = ConstantsModule.RespawnLocalizedKey,
+		Resume = ConstantsModule.ResumeLocalizedKey
 	})
-	local var11 = useLastInput()
-	local var12 = reactModule.useMemo(function()
-		-- upvalues: var10 (ref), var4 (ref), var5 (ref), p4 (ref), constantsModule (copy), fFlagAddTraversalHistoryReactMenuButtonsModule (copy), var2 (ref), var6 (ref), var7 (ref), var8 (ref), var9 (ref), menuButtonsUseGreyResumeButton (copy), fIntRelocateMobileMenuButtonsVariantModule (copy), fFlagIEMFocusNavSupportNewButtonsModule (copy), var3 (ref)
+	local UseLastInputResult = UseLastInputFunction()
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 104 ]]
+		-- upvalues: UseLocalizationResult (copy), UseBindingResult (copy), UseBindingResult2 (copy), p1 (copy), ConstantsModule (upval), FFlagAddTraversalHistoryReactMenuButtonsModule (upval), UseRefResult (copy), UseBindingResult1 (copy), UseBindingResult2_1 (copy), UseBindingResult3 (copy), UseBindingResult2_2 (copy), MenuButtonsUseGreyResumeButton (upval), FIntRelocateMobileMenuButtonsVariantModule (upval), FFlagIEMFocusNavSupportNewButtonsModule (upval), UseRefResult1 (copy)
 		return {
 			{
 				name = "LeaveGameButton",
 				isEmphasized = false,
-				text = var10.LeaveGame,
+				text = UseLocalizationResult.LeaveGame,
 				hint = {
 					keyboard = "L",
 					keyboardButtonImage = "icons/controls/keys/key_l",
 					gamepadButton = Enum.KeyCode.ButtonX,
-					gamepadButtonImage = var4,
-					setGamepadButtonImage = var5
+					gamepadButtonImage = UseBindingResult,
+					setGamepadButtonImage = UseBindingResult2
 				},
-				getIsDisabled = function()
+				getIsDisabled = function(): boolean --[[ Line: 117 ]]
 					return false
 				end,
-				onActivated = function()
-					-- upvalues: p4 (copy), constantsModule (copy)
-					p4.onLeaveGame(constantsModule.AnalyticsMenuButtonSource)
+				onActivated = function() --[[ Line: 120 ]]
+					-- upvalues: p1 (upval), ConstantsModule (upval)
+					p1.onLeaveGame(ConstantsModule.AnalyticsMenuButtonSource)
 				end,
 				hotkeys = { Enum.KeyCode.L, Enum.KeyCode.ButtonX },
-				hotkeyFunc = function()
-					-- upvalues: p4 (copy), constantsModule (copy)
-					p4.onLeaveGame(constantsModule.AnalyticsMenuHotkeySource)
+				hotkeyFunc = function() --[[ Line: 124 ]]
+					-- upvalues: p1 (upval), ConstantsModule (upval)
+					p1.onLeaveGame(ConstantsModule.AnalyticsMenuHotkeySource)
 				end,
-				addTraversalHistoryMenu = if fFlagAddTraversalHistoryReactMenuButtonsModule then true else nil,
-				currentPageChangeSignal = if fFlagAddTraversalHistoryReactMenuButtonsModule then p4.currentPageChangeSignal else nil,
-				buttonRef = var2
+				addTraversalHistoryMenu = if FFlagAddTraversalHistoryReactMenuButtonsModule then true else nil,
+				currentPageChangeSignal = if FFlagAddTraversalHistoryReactMenuButtonsModule then p1.currentPageChangeSignal else nil,
+				buttonRef = UseRefResult
 			},
 			{
 				name = "ResetButton",
 				isEmphasized = false,
-				text = var10.Respawn,
+				text = UseLocalizationResult.Respawn,
 				hint = {
 					keyboard = "R",
 					keyboardButtonImage = "icons/controls/keys/key_r",
 					gamepadButton = Enum.KeyCode.ButtonY,
-					gamepadButtonImage = var6,
-					setGamepadButtonImage = var7
+					gamepadButtonImage = UseBindingResult1,
+					setGamepadButtonImage = UseBindingResult2_1
 				},
-				getIsDisabled = function()
-					-- upvalues: p4 (copy)
-					return not p4.getCanRespawn(false)
+				getIsDisabled = function(): boolean --[[ Line: 142 ]]
+					-- upvalues: p1 (upval)
+					return not p1.getCanRespawn(false)
 				end,
-				onActivated = function()
-					-- upvalues: p4 (copy), constantsModule (copy)
-					p4.onRespawn(constantsModule.AnalyticsMenuButtonSource)
+				onActivated = function() --[[ Line: 145 ]]
+					-- upvalues: p1 (upval), ConstantsModule (upval)
+					p1.onRespawn(ConstantsModule.AnalyticsMenuButtonSource)
 				end,
 				hotkeys = { Enum.KeyCode.R, Enum.KeyCode.ButtonY },
-				hotkeyFunc = function()
-					-- upvalues: p4 (copy), constantsModule (copy)
-					p4.onRespawn(constantsModule.AnalyticsMenuHotkeySource)
+				hotkeyFunc = function() --[[ Line: 149 ]]
+					-- upvalues: p1 (upval), ConstantsModule (upval)
+					p1.onRespawn(ConstantsModule.AnalyticsMenuHotkeySource)
 				end
 			},
 			{
 				name = "ResumeButton",
-				text = var10.Resume,
+				text = UseLocalizationResult.Resume,
 				hint = {
 					keyboard = "ESC",
 					keyboardButtonImage = "icons/controls/keys/key_esc",
 					gamepadButton = Enum.KeyCode.ButtonStart,
-					gamepadButtonImage = var8,
-					setGamepadButtonImage = var9
+					gamepadButtonImage = UseBindingResult3,
+					setGamepadButtonImage = UseBindingResult2_2
 				},
-				isEmphasized = if menuButtonsUseGreyResumeButton then false else not (fIntRelocateMobileMenuButtonsVariantModule == 1),
-				getIsDisabled = function()
+				isEmphasized = not MenuButtonsUseGreyResumeButton and not (FIntRelocateMobileMenuButtonsVariantModule == 1),
+				getIsDisabled = function(): boolean --[[ Line: 164 ]]
 					return false
 				end,
-				onActivated = function()
-					-- upvalues: p4 (copy), constantsModule (copy)
-					p4.onResume(constantsModule.AnalyticsMenuButtonSource)
+				onActivated = function() --[[ Line: 167 ]]
+					-- upvalues: p1 (upval), ConstantsModule (upval)
+					p1.onResume(ConstantsModule.AnalyticsMenuButtonSource)
 				end,
-				hotkeyFunc = function()
-					-- upvalues: p4 (copy), constantsModule (copy)
-					p4.onResume(constantsModule.AnalyticsMenuHotkeySource)
+				hotkeyFunc = function() --[[ Line: 170 ]]
+					-- upvalues: p1 (upval), ConstantsModule (upval)
+					p1.onResume(ConstantsModule.AnalyticsMenuHotkeySource)
 				end,
 				hotkeys = { Enum.KeyCode.ButtonB, Enum.KeyCode.ButtonStart },
-				buttonRef = if fFlagIEMFocusNavSupportNewButtonsModule then var3 else nil
+				buttonRef = if FFlagIEMFocusNavSupportNewButtonsModule then UseRefResult1 else nil
 			}
 		}
 	end, {
-		var10,
-		p4.onLeaveGame,
-		p4.onRespawn,
-		p4.onResume,
-		p4.getCanRespawn
+		UseLocalizationResult,
+		p1.onLeaveGame,
+		p1.onRespawn,
+		p1.onResume,
+		p1.getCanRespawn
 	})
-	local var13 = reactModule.useCallback(function(p5)
-		-- upvalues: p4 (ref), contextActionService (copy)
-		if not p4.getVisibility() then return end
-		for i = 1, #p5 do
-			if p5[i].hotkeyFunc ~= nil then
-				contextActionService:BindCoreAction(p5[i].name, p5[i].hotkeyFunc, false, unpack(p5[i].hotkeys))
+	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 179 ]]
+		-- upvalues: p1 (copy), ContextActionService (upval)
+		if not p1.getVisibility() then return end
+		for i = 1, #p2 do
+			if p2[i].hotkeyFunc ~= nil then
+				ContextActionService:BindCoreAction(p2[i].name, p2[i].hotkeyFunc, false, unpack(p2[i].hotkeys))
 			end
 		end
 	end, {})
-	local var14 = reactModule.useCallback(function(p6)
-		-- upvalues: contextActionService (copy)
-		for i = 1, #p6 do
-			contextActionService:UnbindCoreAction(p6[i].name)
+	local UseResult1 = ReactModule.useCallback(function(p3) --[[ Line: 196 ]]
+		-- upvalues: ContextActionService (upval)
+		for i = 1, #p3 do
+			ContextActionService:UnbindCoreAction(p3[i].name)
 		end
 	end, {})
-	local var15 = reactModule.useCallback(function(p7)
-		-- upvalues: var14 (ref), userInputService (copy), p4 (ref), var13 (ref)
-		local _ = function(p8, p9)
-			-- upvalues: var14 (copy), p7 (ref)
-			return function()
-				-- upvalues: p9 (ref), var14 (copy), p7 (copy), p8 (ref)
-				if not p9() then
-					var14(p7)
-					p8()
+	local UseResult2 = ReactModule.useCallback(function(p4) --[[ Line: 202 ]]
+		-- upvalues: UseResult1 (copy), UserInputService (upval), p1 (copy), UseResult (copy)
+		local function _(p5, p6) --[[ Line: 203 ]]
+			-- upvalues: UseResult1 (upval), p4 (copy)
+			return function() --[[ Line: 204 ]]
+				-- upvalues: p6 (copy), UseResult1 (upval), p4 (upval), p5 (copy)
+				if not p6() then
+					UseResult1(p4)
+					p5()
 				end
 			end
 		end
 		
-		local _ = function(p8, p9)
-			-- upvalues: var14 (copy), p7 (ref)
-			return function(_, p10, _)
-				-- upvalues: p8 (ref), p9 (ref), var14 (copy), p7 (copy)
-				if p10 == Enum.UserInputState.Begin then
-					local var16 = p8
-					local var17 = p9;
-					(function()
-						-- upvalues: var17 (ref), var14 (copy), p7 (copy), var16 (ref)
-						if not var17() then
-							var14(p7)
-							var16()
+		local _ = function(Callback1, Callback) --[[ Line: 212 ]]
+			-- upvalues: UseResult1 (upval), p4 (copy)
+			return function(_, UserInputState, _) --[[ Line: 213 ]]
+				-- upvalues: Callback1 (copy), Callback (copy), UseResult1 (upval), p4 (upval)
+				if UserInputState == Enum.UserInputState.Begin then
+					(function() --[[ Line: 204 ]]
+						-- upvalues: Callback (copy), UseResult1 (upval), p4 (upval), Callback1 (copy)
+						if not Callback() then
+							UseResult1(p4)
+							Callback1()
 						end
 					end)()
 				end
 			end
 		end
 		
-		for i = 1, #p7 do
-			local var16 = p7[i]
-			local onActivated = p7[i].onActivated
-			local getIsDisabled = p7[i].getIsDisabled
+		for i = 1, #p4 do
+			local OnActivated = p4[i].onActivated
+			local GetIsDisabled = p4[i].getIsDisabled
 			
-			function var35.onActivated()
-				-- upvalues: getIsDisabled (ref), var14 (copy), p7 (ref), onActivated (ref)
-				if not getIsDisabled() then
-					var14(p7)
-					onActivated()
+			p4[i].onActivated = function() --[[ Line: 204 ]]
+				-- upvalues: GetIsDisabled (copy), UseResult1 (upval), p4 (copy), OnActivated (copy)
+				if not GetIsDisabled() then
+					UseResult1(p4)
+					OnActivated()
 				end
 			end
 			
-			local var17 = p7[i]
-			local hotkeyFunc = p7[i].hotkeyFunc
-			local getIsDisabled_1 = p7[i].getIsDisabled
+			local HotkeyFunc = p4[i].hotkeyFunc
+			local GetIsDisabled1 = p4[i].getIsDisabled
 			
-			function var36.hotkeyFunc(_, p8, _)
-				-- upvalues: hotkeyFunc (ref), getIsDisabled_1 (ref), var14 (copy), p7 (ref)
-				if p8 == Enum.UserInputState.Begin then
-					local var18 = hotkeyFunc
-					local var19 = getIsDisabled_1;
-					(function()
-						-- upvalues: var19 (ref), var14 (copy), p7 (copy), var18 (ref)
-						if not var19() then
-							var14(p7)
-							var18()
+			p4[i].hotkeyFunc = function(_, UserInputState, _) --[[ Line: 213 ]]
+				-- upvalues: HotkeyFunc (copy), GetIsDisabled1 (copy), UseResult1 (upval), p4 (copy)
+				if UserInputState == Enum.UserInputState.Begin then
+					(function() --[[ Line: 204 ]]
+						-- upvalues: GetIsDisabled1 (copy), UseResult1 (upval), p4 (upval), HotkeyFunc (copy)
+						if not GetIsDisabled1() then
+							UseResult1(p4)
+							HotkeyFunc()
 						end
 					end)()
 				end
 			end
 			
-			p7[i].hint.setGamepadButtonImage(userInputService:GetImageForKeyCode(p7[i].hint.gamepadButton))
+			p4[i].hint.setGamepadButtonImage(UserInputService:GetImageForKeyCode(p4[i].hint.gamepadButton))
 		end
-		p4.setAddMenuKeyBindings(function()
-			-- upvalues: var13 (copy), p7 (ref)
-			var13(p7)
+		p1.setAddMenuKeyBindings(function() --[[ Line: 228 ]]
+			-- upvalues: UseResult (upval), p4 (copy)
+			UseResult(p4)
 		end)
-		p4.setRemoveMenuKeyBindings(function()
-			-- upvalues: var14 (copy), p7 (ref)
-			var14(p7)
+		p1.setRemoveMenuKeyBindings(function() --[[ Line: 231 ]]
+			-- upvalues: UseResult1 (upval), p4 (copy)
+			UseResult1(p4)
 		end)
 		
-		return p7
+		return p4
 	end, {})
-	local var18 = reactModule.useMemo(function()
-		-- upvalues: var15 (ref), var12 (ref)
-		return var15(var12)
-	end, { var12 })
-	reactModule.useEffect(function()
-		-- upvalues: userInputService (copy), var18 (ref), menuButtonsDisconnectGamepadConnected (copy)
-		local gamepadConnectedConnection = userInputService.GamepadConnected:Connect(function()
-			-- upvalues: var18 (copy), userInputService (copy)
-			for i = 1, #var18 do
-				var18[i].hint.setGamepadButtonImage(userInputService:GetImageForKeyCode(var18[i].hint.gamepadButton))
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 238 ]]
+		-- upvalues: UseResult2 (copy), UseMemoResult (copy)
+		return UseResult2(UseMemoResult)
+	end, { UseMemoResult })
+	ReactModule.useEffect(function() --[[ Line: 242 ]]
+		-- upvalues: UserInputService (upval), UseMemoResult1 (copy), MenuButtonsDisconnectGamepadConnected (upval)
+		local GamepadConnectedConnection = UserInputService.GamepadConnected:Connect(function() --[[ Line: 243 ]]
+			-- upvalues: UseMemoResult1 (upval), UserInputService (upval)
+			for i = 1, #UseMemoResult1 do
+				UseMemoResult1[i].hint.setGamepadButtonImage(UserInputService:GetImageForKeyCode(UseMemoResult1[i].hint.gamepadButton))
 			end
 		end)
 		
-		return function()
-			-- upvalues: menuButtonsDisconnectGamepadConnected (copy), gamepadConnectedConnection (ref)
-			if menuButtonsDisconnectGamepadConnected then
-				gamepadConnectedConnection:Disconnect()
+		return function() --[[ Line: 251 ]]
+			-- upvalues: MenuButtonsDisconnectGamepadConnected (upval), GamepadConnectedConnection (copy)
+			if MenuButtonsDisconnectGamepadConnected then
+				GamepadConnectedConnection:Disconnect()
 			end
 		end
-	end, { var18 })
+	end, { UseMemoResult1 })
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = {
 			["size-full row align-y-center"] = true,
-			["gap-small"] = not var1,
-			["gap-xsmall"] = var1
+			["gap-small"] = not UseStateResult,
+			["gap-xsmall"] = UseStateResult
 		}
-	}, createMenuButtons(var18, var11, var1))
+	}, (createMenuButtons(UseMemoResult1, UseLastInputResult, UseStateResult)))
 end

@@ -1,56 +1,55 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local buttonModule = require(foundation.Components.Button)
-local _ = require(foundation.Enums.ButtonVariant)
-local fillBehaviorModule = require(foundation.Enums.FillBehavior)
-local inputSizeModule = require(foundation.Enums.InputSize)
-local orientationModule = require(foundation.Enums.Orientation)
-local _ = require(foundation.Components.Types)
-local viewModule = require(foundation.Components.View)
-local devAssertModule = require(foundation.Utility.devAssert)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local t = {
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local ButtonModule = require(Foundation.Components.Button)
+local _ = require(Foundation.Enums.ButtonVariant)
+local FillBehaviorModule = require(Foundation.Enums.FillBehavior)
+local OrientationModule = require(Foundation.Enums.Orientation)
+local _ = require(Foundation.Components.Types)
+local ViewModule = require(Foundation.Components.View)
+local DevAssertModule = require(Foundation.Utility.devAssert)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local config = {
 	maxButtonCount = 3,
 	testId = "--foundation-button-group",
-	orientation = orientationModule.Horizontal,
-	size = inputSizeModule.Medium
+	orientation = OrientationModule.Horizontal,
+	size = require(Foundation.Enums.InputSize).Medium
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), devAssertModule (ref), orientationModule (ref), fillBehaviorModule (ref), reactModule (ref), buttonModule (ref), viewModule (ref), withCommonPropsModule (ref)
-	local var1 = withDefaultsModule(p1, t)
-	devAssertModule(#var1.buttons <= var1.maxButtonCount, `ButtonGroup: a maximum of {var1.maxButtonCount} buttons is supported, got {#var1.buttons}.`)
-	local var2 = var1.orientation == orientationModule.Vertical
-	local var3 = var2 or var1.fillBehavior == fillBehaviorModule.Fill
-	local var4 = if var2 or not var3 then nil else fillBehaviorModule.Fill
-	local t_1 = {}
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 57 | Named "ButtonGroup" ]]
+	-- upvalues: WithDefaultsModule (copy), config (copy), DevAssertModule (copy), OrientationModule (copy), FillBehaviorModule (copy), ReactModule (copy), ButtonModule (copy), ViewModule (copy), WithCommonPropsModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
+	DevAssertModule(#WithDefaultsModuleResult.buttons <= WithDefaultsModuleResult.maxButtonCount, `ButtonGroup: a maximum of {WithDefaultsModuleResult.maxButtonCount} buttons is supported, got {#WithDefaultsModuleResult.buttons}.`)
+	local IsOrientationMatch = WithDefaultsModuleResult.orientation == OrientationModule.Vertical
+	local IsOrientationMatch1: boolean = IsOrientationMatch or WithDefaultsModuleResult.fillBehavior == FillBehaviorModule.Fill
+	local Fill = if IsOrientationMatch or not IsOrientationMatch1 then nil else FillBehaviorModule.Fill
+	local Elements = {}
 	
-	for i, v in var1.buttons do
-		t_1[`{i}-{v.text}`] = reactModule.createElement(buttonModule, {
-			text = v.text,
-			onActivated = v.onActivated,
-			variant = v.variant,
-			isDisabled = v.isDisabled,
-			isLoading = v.isLoading,
-			icon = v.icon,
-			inputDelay = v.inputDelay,
-			ref = v.ref,
-			size = var1.size,
-			fillBehavior = var4,
-			LayoutOrder = i,
-			testId = v.testId or `{var1.testId}--button-{i}`
+	for LayoutOrder, button in WithDefaultsModuleResult.buttons do
+		Elements[`{LayoutOrder}-{button.text}`] = ReactModule.createElement(ButtonModule, {
+			text = button.text,
+			onActivated = button.onActivated,
+			variant = button.variant,
+			isDisabled = button.isDisabled,
+			isLoading = button.isLoading,
+			icon = button.icon,
+			inputDelay = button.inputDelay,
+			ref = button.ref,
+			size = WithDefaultsModuleResult.size,
+			fillBehavior = Fill,
+			LayoutOrder = LayoutOrder,
+			testId = button.testId or `{WithDefaultsModuleResult.testId}--button-{LayoutOrder}`
 		})
 	end
-	return reactModule.createElement(viewModule, withCommonPropsModule(var1, {
+	return ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, {
 		tag = {
 			["gap-small"] = true,
-			["col flex-x-fill"] = var2,
-			row = not var2 and var3,
-			["row wrap"] = not var2 and not var3,
-			["size-full-0 auto-y"] = var3,
-			["auto-xy"] = not var3
+			["col flex-x-fill"] = IsOrientationMatch,
+			row = not IsOrientationMatch and IsOrientationMatch1,
+			["row wrap"] = not IsOrientationMatch and not IsOrientationMatch1,
+			["size-full-0 auto-y"] = IsOrientationMatch1,
+			["auto-xy"] = not IsOrientationMatch1
 		},
-		ref = p2
-	}), t_1)
+		ref = Ref
+	}), Elements)
 end))

@@ -1,20 +1,19 @@
-﻿local appComposition = script:FindFirstAncestor("AppComposition")
-local parent = appComposition.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local _ = require(appComposition.AppCompositionTypes)
-local compositionConfigModule = require(appComposition.CompositionConfig)
-local getGlobalViewportBreakpointModule = require(appComposition.getGlobalViewportBreakpoint)
-local useTokens = foundationModule.Hooks.useTokens
+﻿local AppComposition = script:FindFirstAncestor("AppComposition")
+local Parent = AppComposition.Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local _ = require(AppComposition.AppCompositionTypes)
+local CompositionConfigModule = require(AppComposition.CompositionConfig)
+local GetGlobalViewportBreakpointModule = require(AppComposition.getGlobalViewportBreakpoint)
+local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
 
-return function()
-	-- upvalues: useTokens (ref), signalsReactModule (ref), getGlobalViewportBreakpointModule (ref), reactModule (ref), compositionConfigModule (ref)
-	local var1 = useTokens()
-	local var2 = signalsReactModule.useSignalState(getGlobalViewportBreakpointModule)
+return function() --[[ Line: 16 | Named "useCompositionLayout" ]]
+	-- upvalues: UseTokensFunction (copy), SignalsReactModule (copy), GetGlobalViewportBreakpointModule (copy), ReactModule (copy), CompositionConfigModule (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseSignalStateResult = SignalsReactModule.useSignalState(GetGlobalViewportBreakpointModule)
 	
-	return reactModule.useMemo(function()
-		-- upvalues: compositionConfigModule (copy), var2 (ref), var1 (ref)
-		return compositionConfigModule.getBaseConfig(var2, var1)
-	end, { var2, var1 })
+	return ReactModule.useMemo(function() --[[ Line: 20 ]]
+		-- upvalues: CompositionConfigModule (upval), UseSignalStateResult (copy), UseTokensResult (copy)
+		return CompositionConfigModule.getBaseConfig(UseSignalStateResult, UseTokensResult)
+	end, { UseSignalStateResult, UseTokensResult })
 end

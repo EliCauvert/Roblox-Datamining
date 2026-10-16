@@ -1,8 +1,8 @@
-﻿local appBlox = script:FindFirstAncestor("AppBlox")
-local useSignalState = require(appBlox.Parent.SignalsReact).useSignalState
-local getOverflowMenuSignalStoreModule = require(appBlox.OverflowMenu.getOverflowMenuSignalStore)
+﻿local AppBlox = script:FindFirstAncestor("AppBlox")
+local UseSignalStateFunction = require(AppBlox.Parent.SignalsReact).useSignalState
+local GetOverflowMenuSignalStoreModule = require(AppBlox.OverflowMenu.getOverflowMenuSignalStore)
 
-return function(p1)
-	-- upvalues: getOverflowMenuSignalStoreModule (ref), useSignalState (ref)
-	return useSignalState(getOverflowMenuSignalStoreModule().getActiveMenuKey) == p1
+return function(p1): boolean --[[ Line: 9 | Named "useOverflowMenuOpen" ]]
+	-- upvalues: GetOverflowMenuSignalStoreModule (copy), UseSignalStateFunction (copy)
+	return UseSignalStateFunction(GetOverflowMenuSignalStoreModule().getActiveMenuKey) == p1
 end

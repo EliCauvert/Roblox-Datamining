@@ -1,7 +1,7 @@
-﻿return function(p1)
-	for i, v in p1:GetDescendants() do
-		if v:IsA("GuiObject") and v.Selectable and v.Visible then
-			return v
+﻿return function(Object) --[[ Line: 1 | Named "getFirstFocusableDescendant" ]]
+	for _, Gui in Object:GetDescendants() do
+		if Gui:IsA("GuiObject") and Gui.Selectable and Gui.Visible then
+			return Gui
 		end
 	end
 	return nil

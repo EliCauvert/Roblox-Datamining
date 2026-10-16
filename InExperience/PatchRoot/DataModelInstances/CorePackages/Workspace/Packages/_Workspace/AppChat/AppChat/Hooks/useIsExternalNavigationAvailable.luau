@@ -1,20 +1,20 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local isPageAvailableModule = require(appChat.Utils.isPageAvailable)
-local useChatPlacementContext = require(appChat.Contexts.ChatPlacementContext).useChatPlacementContext
-local fFlagAppChatOnConsoles = require(parent.SharedFlags).FFlagAppChatOnConsoles
-local useAppPolicy = require(parent.UniversalAppPolicy).useAppPolicy
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local IsPageAvailableModule = require(AppChat.Utils.isPageAvailable)
+local UseChatPlacementContextFunction = require(AppChat.Contexts.ChatPlacementContext).useChatPlacementContext
+local FFlagAppChatOnConsoles = require(Parent.SharedFlags).FFlagAppChatOnConsoles
+local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
 
-return function(p1)
-	-- upvalues: useChatPlacementContext (ref), fFlagAppChatOnConsoles (ref), useAppPolicy (ref), isPageAvailableModule (ref)
-	local chatPlacement = useChatPlacementContext().chatPlacement
-	local var1 = if fFlagAppChatOnConsoles then useAppPolicy(function(p2)
-		return p2.getWebViewSupport()
+return function(List) --[[ Line: 21 ]]
+	-- upvalues: UseChatPlacementContextFunction (copy), FFlagAppChatOnConsoles (copy), UseAppPolicyFunction (copy), IsPageAvailableModule (copy)
+	local ChatPlacement = UseChatPlacementContextFunction().chatPlacement
+	local UseAppPolicyResult = if FFlagAppChatOnConsoles then UseAppPolicyFunction(function(p1) --[[ Line: 24 ]]
+		return p1.getWebViewSupport()
 	end) else nil
 	local t = {}
 	
-	for i, v in p1 do
-		t[v] = isPageAvailableModule(v, chatPlacement, if fFlagAppChatOnConsoles then var1 else nil)
+	for _, value in List do
+		t[value] = IsPageAvailableModule(value, ChatPlacement, if FFlagAppChatOnConsoles then UseAppPolicyResult else nil)
 	end
 	return t
 end

@@ -1,56 +1,56 @@
-﻿local parent = script:FindFirstAncestor("InExperienceLocales").Parent
-local localizationContext = require(parent.Localization).LocalizationContext
-local signal = require(parent.AppCommonLib).Signal
-local locales = game:GetService("CoreGui").RobloxGui.Modules.Common:FindFirstChild("Locales")
+﻿local Parent = script:FindFirstAncestor("InExperienceLocales").Parent
+local LocalizationContext = require(Parent.Localization).LocalizationContext
+local Signal = require(Parent.AppCommonLib).Signal
+local Locales = game:GetService("CoreGui").RobloxGui.Modules.Common:FindFirstChild("Locales")
 
-local function loadTables(p1)
-	-- upvalues: locales (ref), localizationContext (ref)
-	if not locales then
+local function loadTables(Locale) --[[ Line: 31 ]]
+	-- upvalues: Locales (copy), LocalizationContext (copy)
+	if not Locales then
 		error("ERROR: Locales tables does not exist")
 	end
 	local t = {}
 	
-	for i, v in ipairs(localizationContext.getRelevantLanguages(p1)) do
-		local var1 = locales:FindFirstChild(v)
+	for _, ChildName in ipairs((LocalizationContext.getRelevantLanguages(Locale))) do
+		local Child = Locales:FindFirstChild(ChildName)
 		
-		if var1 then
-			t[v] = require(var1)
+		if Child then
+			t[ChildName] = require(Child)
 		end
 	end
 	return t
 end
 
-local t = {}
-t.__index = t
+local LocalizationModule = {}
+LocalizationModule.__index = LocalizationModule
 
-function t.new(p2)
-	-- upvalues: signal (ref), localizationContext (ref), loadTables (ref), t (ref)
-	local t_1 = {
-		locale = p2,
-		changed = signal.new(),
-		localizationContext = localizationContext.new(loadTables(p2))
+function LocalizationModule.new(Locale) --[[ Line: 50 ]]
+	-- upvalues: Signal (copy), LocalizationContext (copy), loadTables (copy), LocalizationModule (copy)
+	local config = {
+		locale = Locale,
+		changed = Signal.new(),
+		localizationContext = LocalizationContext.new((loadTables(Locale)))
 	}
-	setmetatable(t_1, t)
+	setmetatable(config, LocalizationModule)
 	
-	return t_1
+	return config
 end
 
-function t:SetLocale(p2)
-	-- upvalues: loadTables (ref)
-	self.locale = p2
-	self.localizationContext:addTranslations(loadTables(p2))
+function LocalizationModule:SetLocale(Locale) --[[ Line: 60 ]]
+	-- upvalues: loadTables (copy)
+	self.locale = Locale
+	self.localizationContext:addTranslations((loadTables(Locale)))
 	self.changed:fire()
 end
 
-function t:GetLocale()
+function LocalizationModule:GetLocale() --[[ Line: 67 ]]
 	return self.locale
 end
 
-function t:Format(p2, p3)
-	if not p2 then
+function LocalizationModule:Format(p1, p2) --[[ Line: 71 ]]
+	if not p1 then
 		error("ERROR: NO STRING FOR KEY")
 	end
-	return self.localizationContext:getString(self.locale, p2, p3)
+	return (self.localizationContext:getString(self.locale, p1, p2))
 end
 
-return t
+return LocalizationModule

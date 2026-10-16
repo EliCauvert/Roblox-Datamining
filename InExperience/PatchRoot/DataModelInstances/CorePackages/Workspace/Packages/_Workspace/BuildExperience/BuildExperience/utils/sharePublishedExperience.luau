@@ -1,123 +1,122 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local default = require(parent.ExternalContentSharingProtocol).ExternalContentSharingProtocol.default
-local localizationModule = require(parent.Localization)
-local reactModule = require(parent.React)
-local universalShareSheet = require(parent.ShareSheet).UniversalShareSheet
-local sharedFlagsModule = require(parent.SharedFlags)
-local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local createExperienceShareLinkModule = require(buildExperience.utils.createExperienceShareLink)
-local fFlagBuildExperiencePublishedShareLinkModule = require(buildExperience.Flags.FFlagBuildExperiencePublishedShareLink)
-local fFlagEnableShareSheet = sharedFlagsModule.FFlagEnableShareSheet
-local isSubjectToDesktopPolicies = sharedFlagsModule.isSubjectToDesktopPolicies
-local var1 = if fFlagEnableShareSheet then require(parent.DataHydration) else nil
-local var2 = if fFlagEnableShareSheet then require(parent.Signals) else nil
-local var3 = if fFlagEnableShareSheet then require(parent.SignalsReact) else nil
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local Default = require(Parent.ExternalContentSharingProtocol).ExternalContentSharingProtocol.default
+local LocalizationModule = require(Parent.Localization)
+local ReactModule = require(Parent.React)
+local UniversalShareSheet = require(Parent.ShareSheet).UniversalShareSheet
+local SharedFlagsModule = require(Parent.SharedFlags)
+local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
+local CreateExperienceShareLinkModule = require(BuildExperience.utils.createExperienceShareLink)
+local FFlagEnableShareSheet = SharedFlagsModule.FFlagEnableShareSheet
+local IsSubjectToDesktopPoliciesFunction = SharedFlagsModule.isSubjectToDesktopPolicies
+local DataHydrationModule = if FFlagEnableShareSheet then require(Parent.DataHydration) else nil
+local SignalsModule = if FFlagEnableShareSheet then require(Parent.Signals) else nil
+local SignalsReactModule = if FFlagEnableShareSheet then require(Parent.SignalsReact) else nil
 
-local function getGameShareUrl(p1)
-	return `https://www.roblox.com/games/{p1}`
+local function formatSuccessSnackbarText(Entry) --[[ Line: 30 ]]
+	-- upvalues: LocalizationStringsModule (copy)
+	local Entry1 = Entry[1]
+	
+	return LocalizationStringsModule.formatGameSharedWithTarget(if Entry1 then Entry1.displayName else "")
 end
 
-local function formatSuccessSnackbarText(p1)
-	-- upvalues: localizationStringsModule (ref)
-	local var4 = p1[1]
+local function sharePublishedExperience(p1, p2) --[[ Line: 35 ]]
+	-- upvalues: FFlagEnableShareSheet (copy), UniversalShareSheet (copy), formatSuccessSnackbarText (copy), LocalizationStringsModule (copy), IsSubjectToDesktopPoliciesFunction (copy), Default (copy)
+	local Url: string = `https://www.roblox.com/games/{p1}`
 	
-	return localizationStringsModule.formatGameSharedWithTarget(if var4 then var4.displayName else "")
-end
-
-local function sharePublishedExperience(p1, p2)
-	-- upvalues: fFlagEnableShareSheet (ref), universalShareSheet (ref), formatSuccessSnackbarText (ref), localizationStringsModule (ref), isSubjectToDesktopPolicies (ref), default (ref)
-	local var4 = `https://www.roblox.com/games/{p1}`
-	
-	if fFlagEnableShareSheet then
-		universalShareSheet.show({
+	if FFlagEnableShareSheet then
+		UniversalShareSheet.show({
 			context = "BuildExperienceGameShare",
 			telemetryId = tostring(p1),
 			formatSuccessSnackbarText = formatSuccessSnackbarText,
-			messagePlaceholder = if p2 then localizationStringsModule.formatShareExperience(p2) else nil,
-			url = var4
+			messagePlaceholder = if p2 then LocalizationStringsModule.formatShareExperience(p2) else nil,
+			url = Url
 		})
 		
 		return nil
-	elseif isSubjectToDesktopPolicies() then
-		default:setClipboardText({ context = "BuildExperienceGameShare", text = var4 })
+	elseif IsSubjectToDesktopPoliciesFunction() then
+		Default:setClipboardText({ context = "BuildExperienceGameShare", text = Url })
 		
-		return { copiedToClipboard = true, url = var4 }
+		return { copiedToClipboard = true, url = Url }
+	else
+		Default:shareUrl({ context = "BuildExperienceGameShare", url = Url })
+		
+		return { copiedToClipboard = false, url = Url }
 	end
-	default:shareUrl({ context = "BuildExperienceGameShare", url = var4 })
-	
-	return { copiedToClipboard = false, url = var4 }
 end
 
 return {
-	getGameShareUrl = getGameShareUrl,
+	getGameShareUrl = function(p1): string --[[ Line: 26 ]]
+		return `https://www.roblox.com/games/{p1}`
+	end,
 	sharePublishedExperience = sharePublishedExperience,
-	useSharePublishedExperience = if fFlagEnableShareSheet then function(p1)
-		-- upvalues: reactModule (ref), var2 (ref), var1 (ref), var3 (ref), localizationModule (ref), localizationStringsModule (ref), universalShareSheet (ref), fFlagBuildExperiencePublishedShareLinkModule (ref), createExperienceShareLinkModule (ref)
-		local var4 = if p1 then tostring(p1) else nil
-		local var5 = var3.useSignalState(reactModule.useMemo(function()
-			-- upvalues: var2 (copy), var4 (ref), var1 (copy)
-			return var2.createComputed(function(p2)
-				-- upvalues: var4 (copy), var1 (copy)
-				return if var4 == nil then nil else var1.Game.getGameInfoStore(p2).getAndFetchGameInfo(var4).data(p2)
+	useSharePublishedExperience = if FFlagEnableShareSheet then function(p1) --[[ Line: 77 ]]
+		-- upvalues: ReactModule (copy), SignalsModule (copy), DataHydrationModule (copy), SignalsReactModule (copy), LocalizationModule (copy), LocalizationStringsModule (copy), UniversalShareSheet (copy), CreateExperienceShareLinkModule (copy)
+		local Text = if p1 then tostring(p1) else nil
+		local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 79 ]]
+			-- upvalues: SignalsModule (upval), Text (copy), DataHydrationModule (upval)
+			return SignalsModule.createComputed(function(p2) --[[ Line: 80 ]]
+				-- upvalues: Text (upval), DataHydrationModule (upval)
+				return if Text == nil then nil else DataHydrationModule.Game.getGameInfoStore(p2).getAndFetchGameInfo(Text).data(p2)
 			end)
-		end, { var4 }))
-		local var6 = if var5 and not var5.isUnavailable and var5.name ~= "" then var5.name else nil
-		local var7 = localizationModule.Hooks.useLocalization({
-			gameShared = localizationStringsModule.SHARE_GAME_SHARED,
-			messagePlaceholder = if var6 ~= nil then nil else {
-				localizationStringsModule.SHARE_EXPERIENCE,
-				EXPERIENCE_NAME = var6
+		end, { Text })))
+		local Name = if UseSignalStateResult and not UseSignalStateResult.isUnavailable and UseSignalStateResult.name ~= "" then UseSignalStateResult.name else nil
+		local UseLocalizationResult = LocalizationModule.Hooks.useLocalization({
+			gameShared = LocalizationStringsModule.SHARE_GAME_SHARED,
+			messagePlaceholder = if Name == nil then nil else {
+				LocalizationStringsModule.SHARE_EXPERIENCE,
+				EXPERIENCE_NAME = Name
 			}
 		})
-		local var8 = reactModule.useContext(localizationModule.LocalizationRoactContext)
-		local var9 = reactModule.useCallback(function(p2)
-			-- upvalues: var7 (ref), var8 (ref), localizationStringsModule (copy)
-			local var10 = p2[1]
+		local UseContextResult = ReactModule.useContext(LocalizationModule.LocalizationRoactContext)
+		local UseResult = ReactModule.useCallback(function(Entry) --[[ Line: 106 ]]
+			-- upvalues: UseLocalizationResult (copy), UseContextResult (copy), LocalizationStringsModule (upval)
+			local Entry1 = Entry[1]
 			
-			return if var10 == nil or var10.displayName == "" then var7.gameShared else var8:Format(localizationStringsModule.SHARE_GAME_SHARED_WITH_TARGET, { DISPLAY_NAME = var10.displayName })
-		end, { var7.gameShared, var8 })
-		local messagePlaceholder = var7.messagePlaceholder
+			return if Entry1 == nil or Entry1.displayName == "" then UseLocalizationResult.gameShared else UseContextResult:Format(LocalizationStringsModule.SHARE_GAME_SHARED_WITH_TARGET, { DISPLAY_NAME = Entry1.displayName })
+		end, { UseLocalizationResult.gameShared, UseContextResult })
+		local MessagePlaceholder = UseLocalizationResult.messagePlaceholder
 		
-		return reactModule.useCallback(function(p2)
-			-- upvalues: universalShareSheet (copy), var9 (ref), messagePlaceholder (ref), fFlagBuildExperiencePublishedShareLinkModule (copy), p1 (ref), createExperienceShareLinkModule (copy)
-			local function showShareSheet(p3)
-				-- upvalues: universalShareSheet (copy), p2 (ref), var9 (copy), messagePlaceholder (copy)
-				universalShareSheet.show({
+		return ReactModule.useCallback(function(p2) --[[ Line: 119 ]]
+			-- upvalues: UniversalShareSheet (upval), UseResult (copy), MessagePlaceholder (copy), p1 (copy), CreateExperienceShareLinkModule (upval)
+			local function showShareSheet(Result) --[[ Line: 120 ]]
+				-- upvalues: UniversalShareSheet (upval), p2 (copy), UseResult (upval), MessagePlaceholder (upval)
+				UniversalShareSheet.show({
 					context = "BuildExperienceGameShare",
 					telemetryId = tostring(p2),
-					formatSuccessSnackbarText = var9,
-					messagePlaceholder = messagePlaceholder,
-					url = p3 or `https://www.roblox.com/games/{p2}`
+					formatSuccessSnackbarText = UseResult,
+					messagePlaceholder = MessagePlaceholder,
+					url = Result or `https://www.roblox.com/games/{p2}`
 				})
 			end
 			
-			if fFlagBuildExperiencePublishedShareLinkModule and p1 ~= nil then
-				createExperienceShareLinkModule(p1, false):andThen(showShareSheet, function()
-					-- upvalues: universalShareSheet (copy), p2 (ref), var9 (copy), messagePlaceholder (copy)
-					universalShareSheet.show({
+			if p1 == nil then
+				UniversalShareSheet.show({
+					context = "BuildExperienceGameShare",
+					telemetryId = tostring(p2),
+					formatSuccessSnackbarText = UseResult,
+					messagePlaceholder = MessagePlaceholder,
+					url = `https://www.roblox.com/games/{p2}`
+				})
+				
+				return
+			else
+				CreateExperienceShareLinkModule(p1, false):andThen(showShareSheet, function() --[[ Line: 131 ]]
+					-- upvalues: UniversalShareSheet (upval), p2 (copy), UseResult (upval), MessagePlaceholder (upval)
+					UniversalShareSheet.show({
 						context = "BuildExperienceGameShare",
 						telemetryId = tostring(p2),
-						formatSuccessSnackbarText = var9,
-						messagePlaceholder = messagePlaceholder,
+						formatSuccessSnackbarText = UseResult,
+						messagePlaceholder = MessagePlaceholder,
 						url = `https://www.roblox.com/games/{p2}`
 					})
 				end)
-				
-				return
 			end
-			universalShareSheet.show({
-				context = "BuildExperienceGameShare",
-				telemetryId = tostring(p2),
-				formatSuccessSnackbarText = var9,
-				messagePlaceholder = messagePlaceholder,
-				url = `https://www.roblox.com/games/{p2}`
-			})
-		end, { var9, messagePlaceholder, p1 })
-	end else function()
-		-- upvalues: reactModule (ref), sharePublishedExperience (ref)
-		return reactModule.useCallback(function(p1)
-			-- upvalues: sharePublishedExperience (copy)
+		end, { UseResult, MessagePlaceholder, p1 })
+	end else function() --[[ Line: 140 ]]
+		-- upvalues: ReactModule (copy), sharePublishedExperience (copy)
+		return ReactModule.useCallback(function(p1) --[[ Line: 141 ]]
+			-- upvalues: sharePublishedExperience (upval)
 			sharePublishedExperience(p1, nil)
 		end, {})
 	end

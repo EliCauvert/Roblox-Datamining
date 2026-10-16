@@ -1,6 +1,6 @@
 ﻿local UGCValidationService = game:GetService("UGCValidationService")
-local t = { MeshId = true, CageMeshId = true, ReferenceMeshId = true }
-local t_1 = {
+local config = { MeshId = true, CageMeshId = true, ReferenceMeshId = true }
+local config1 = {
 	TextureId = true,
 	ColorMap = true,
 	MetalnessMap = true,
@@ -9,19 +9,19 @@ local t_1 = {
 	EmissiveMask = true
 }
 
-return function(p1)
-	-- upvalues: t (ref), UGCValidationService (ref), t_1 (ref)
-	local t_2 = {}
-	local t_3 = {}
-	local descendants = p1:GetDescendants()
-	table.insert(descendants, p1)
+return function(Object) --[[ Line: 17 | Named "preloadEditablesFromRootInstance" ]]
+	-- upvalues: config (copy), UGCValidationService (copy), config1 (copy)
+	local EditableMeshFromBinaryStringRobloxOnlies = {}
+	local EditableImageFromBinaryStringRobloxOnlies = {}
+	local Descendants = Object:GetDescendants()
+	table.insert(Descendants, Object)
 	
-	for i, v in descendants do
-		if v:IsA("BinaryStringValue") and t[v.Name] then
-			t_2[v.Parent[v.Name]] = UGCValidationService:CreateEditableMeshFromBinaryStringRobloxOnly(v)
-		elseif v:IsA("BinaryStringValue") and t_1[v.Name] then
-			t_3[v.Parent[v.Name]] = UGCValidationService:CreateEditableImageFromBinaryStringRobloxOnly(v)
+	for _, BinaryStringValue in Descendants do
+		if BinaryStringValue:IsA("BinaryStringValue") and config[BinaryStringValue.Name] then
+			EditableMeshFromBinaryStringRobloxOnlies[BinaryStringValue.Parent[BinaryStringValue.Name]] = UGCValidationService:CreateEditableMeshFromBinaryStringRobloxOnly(BinaryStringValue)
+		elseif BinaryStringValue:IsA("BinaryStringValue") and config1[BinaryStringValue.Name] then
+			EditableImageFromBinaryStringRobloxOnlies[BinaryStringValue.Parent[BinaryStringValue.Name]] = UGCValidationService:CreateEditableImageFromBinaryStringRobloxOnly(BinaryStringValue)
 		end
 	end
-	return t_2, t_3
+	return EditableMeshFromBinaryStringRobloxOnlies, EditableImageFromBinaryStringRobloxOnlies
 end

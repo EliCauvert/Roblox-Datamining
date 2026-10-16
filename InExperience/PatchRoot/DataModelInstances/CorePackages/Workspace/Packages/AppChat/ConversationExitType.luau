@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent._Workspace.AppChat.AppChat.Analytics.Enums.ConversationExitType)
+﻿return (require(script.Parent.Parent._Workspace.AppChat.AppChat.Analytics.Enums.ConversationExitType))

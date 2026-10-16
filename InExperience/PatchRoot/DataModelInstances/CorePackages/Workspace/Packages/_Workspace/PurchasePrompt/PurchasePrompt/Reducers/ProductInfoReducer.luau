@@ -1,87 +1,83 @@
-﻿local purchasePrompt = script:FindFirstAncestor("PurchasePrompt")
-local rodux = require(purchasePrompt.Parent.PurchasePromptDeps).Rodux
-local constantsModule = require(purchasePrompt.Misc.Constants)
-local completeRequestModule = require(purchasePrompt.Actions.CompleteRequest)
-local productInfoReceivedModule = require(purchasePrompt.Actions.ProductInfoReceived)
-local bundleProductInfoReceivedModule = require(purchasePrompt.Actions.BundleProductInfoReceived)
-local itemTypeModule = require(purchasePrompt.Enums.ItemType)
-local getPreviewImageUrlModule = require(purchasePrompt.getPreviewImageUrl)
-local fFlagEnableUnifiedPurchaseFlowForDevSubs = require(purchasePrompt.Parent.SharedFlags).FFlagEnableUnifiedPurchaseFlowForDevSubs
-local fFlagUnifiedPurchaseOptimizeTTIMarketplace = require(purchasePrompt.Parent.SharedFlags).FFlagUnifiedPurchaseOptimizeTTIMarketplace
-local fFlagAXFixMISUpsellDiscountSummary = require(purchasePrompt.Parent.SharedFlags).FFlagAXFixMISUpsellDiscountSummary
-local getFFlagTranslateDevProductsModule = require(purchasePrompt.Flags.GetFFlagTranslateDevProducts)
-local getFFlagFixBundlePromptThumbnailModule = require(purchasePrompt.Flags.GetFFlagFixBundlePromptThumbnail)
-local getFFlagEnableCreatorStorePurchasingCutoverModule = require(purchasePrompt.Flags.GetFFlagEnableCreatorStorePurchasingCutover)
-local productTypeEnum = require(purchasePrompt.types).ProductTypeEnum
-local normalizePriceDiscountDetailsModule = require(purchasePrompt.Utils.normalizePriceDiscountDetails)
-local fFlagPurchasePromptFetchCartPricingForLooks = require(purchasePrompt.Parent.SharedFlags).FFlagPurchasePromptFetchCartPricingForLooks
+﻿local PurchasePrompt = script:FindFirstAncestor("PurchasePrompt")
+local ConstantsModule = require(PurchasePrompt.Misc.Constants)
+local ItemTypeModule = require(PurchasePrompt.Enums.ItemType)
+local GetPreviewImageUrlModule = require(PurchasePrompt.getPreviewImageUrl)
+local FFlagEnableUnifiedPurchaseFlowForDevSubs = require(PurchasePrompt.Parent.SharedFlags).FFlagEnableUnifiedPurchaseFlowForDevSubs
+local FFlagUnifiedPurchaseOptimizeTTIMarketplace = require(PurchasePrompt.Parent.SharedFlags).FFlagUnifiedPurchaseOptimizeTTIMarketplace
+local FFlagAXFixMISUpsellDiscountSummary = require(PurchasePrompt.Parent.SharedFlags).FFlagAXFixMISUpsellDiscountSummary
+local GetFFlagTranslateDevProductsModule = require(PurchasePrompt.Flags.GetFFlagTranslateDevProducts)
+local GetFFlagFixBundlePromptThumbnailModule = require(PurchasePrompt.Flags.GetFFlagFixBundlePromptThumbnail)
+local GetFFlagEnableCreatorStorePurchasingCutoverModule = require(PurchasePrompt.Flags.GetFFlagEnableCreatorStorePurchasingCutover)
+local ProductTypeEnum = require(PurchasePrompt.types).ProductTypeEnum
+local NormalizePriceDiscountDetailsModule = require(PurchasePrompt.Utils.normalizePriceDiscountDetails)
+local FFlagPurchasePromptFetchCartPricingForLooks = require(PurchasePrompt.Parent.SharedFlags).FFlagPurchasePromptFetchCartPricingForLooks
+local FFlagLuaAppsEnablePromptVIPServerPurchase = require(PurchasePrompt.Parent.SharedFlags).FFlagLuaAppsEnablePromptVIPServerPurchase
 
-return rodux.createReducer({}, {
-	[productInfoReceivedModule.name] = function(_, p1)
-		-- upvalues: fFlagUnifiedPurchaseOptimizeTTIMarketplace (ref), constantsModule (ref), getFFlagTranslateDevProductsModule (ref), normalizePriceDiscountDetailsModule (ref), fFlagAXFixMISUpsellDiscountSummary (ref), getPreviewImageUrlModule (ref), getFFlagEnableCreatorStorePurchasingCutoverModule (ref), fFlagPurchasePromptFetchCartPricingForLooks (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), productTypeEnum (ref)
-		local productInfo = p1.productInfo
-		local var1 = ""
-		local var2 = ""
-		local var3 = nil
+return (require(PurchasePrompt.Parent.PurchasePromptDeps).Rodux.createReducer({}, {
+	[require(PurchasePrompt.Actions.ProductInfoReceived).name] = function(_, p1) --[[ Line: 33 ]]
+		-- upvalues: FFlagUnifiedPurchaseOptimizeTTIMarketplace (copy), ConstantsModule (copy), GetFFlagTranslateDevProductsModule (copy), NormalizePriceDiscountDetailsModule (copy), FFlagAXFixMISUpsellDiscountSummary (copy), GetPreviewImageUrlModule (copy), GetFFlagEnableCreatorStorePurchasingCutoverModule (copy), FFlagPurchasePromptFetchCartPricingForLooks (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (copy), ProductTypeEnum (copy), FFlagLuaAppsEnablePromptVIPServerPurchase (copy)
+		local ProductInfo = p1.productInfo
+		local CollectibleItemId = ""
+		local CollectibleProductId = ""
+		local IsProductTypeMatch = if FFlagUnifiedPurchaseOptimizeTTIMarketplace then ProductInfo.ProductType == ConstantsModule.ProductType.Asset or ProductInfo.ProductType == ConstantsModule.ProductType.Bundle else nil
 		
-		if fFlagUnifiedPurchaseOptimizeTTIMarketplace then
-			var3 = if productInfo.ProductType ~= constantsModule.ProductType.Asset then productInfo.ProductType == constantsModule.ProductType.Bundle else true
-		end
-		if productInfo.ProductType == constantsModule.ProductType.CollectibleItem or fFlagUnifiedPurchaseOptimizeTTIMarketplace and var3 then
-			var1 = productInfo.CollectibleItemId
-			var2 = productInfo.CollectibleProductId
+		if ProductInfo.ProductType == ConstantsModule.ProductType.CollectibleItem or FFlagUnifiedPurchaseOptimizeTTIMarketplace and IsProductTypeMatch then
+			CollectibleItemId = ProductInfo.CollectibleItemId
+			CollectibleProductId = ProductInfo.CollectibleProductId
 		end
 		return {
-			name = getFFlagTranslateDevProductsModule() and (productInfo.DisplayName or (productInfo.Name or productInfo.Name)),
-			description = productInfo.Description,
-			basePrice = productInfo.UserBasePriceInRobux or (productInfo.BasePriceInRobux or (productInfo.PriceInRobux or 0)),
-			price = productInfo.PriceInRobux or 0,
-			priceDiscountDetails = if normalizePriceDiscountDetailsModule then normalizePriceDiscountDetailsModule(productInfo.PriceDiscountDetails) else nil,
-			savingsSummaryOverride = if fFlagAXFixMISUpsellDiscountSummary then productInfo.SavingsSummaryOverride else nil,
-			premiumPrice = productInfo.PremiumPriceInRobux,
-			imageUrl = getPreviewImageUrlModule(productInfo),
-			assetTypeId = productInfo.AssetTypeId,
-			assetType = if getFFlagEnableCreatorStorePurchasingCutoverModule() then productInfo.AssetType else nil,
-			productId = productInfo.ProductId,
-			productType = productInfo.ProductType,
-			membershipTypeRequired = productInfo.MinimumMembershipLevel,
-			itemType = productInfo.AssetTypeId,
-			collectibleItemId = var1,
-			collectibleItemIds = if fFlagPurchasePromptFetchCartPricingForLooks then productInfo.CollectibleItemIds else nil,
-			cartPricingRequestedItems = if fFlagPurchasePromptFetchCartPricingForLooks then productInfo.CartPricingRequestedItems else nil,
-			collectibleProductId = var2,
-			productTargetId = if productInfo.TargetId then productInfo.TargetId else nil,
-			displayPrice = if fFlagEnableUnifiedPurchaseFlowForDevSubs and productInfo.ProductType == productTypeEnum.DeveloperSubscription then productInfo.DisplayPrice else nil
+			name = GetFFlagTranslateDevProductsModule() and (ProductInfo.DisplayName or ProductInfo.Name) or ProductInfo.Name,
+			description = ProductInfo.Description,
+			basePrice = ProductInfo.UserBasePriceInRobux or (ProductInfo.BasePriceInRobux or (ProductInfo.PriceInRobux or 0)),
+			price = ProductInfo.PriceInRobux or 0,
+			priceDiscountDetails = if NormalizePriceDiscountDetailsModule then NormalizePriceDiscountDetailsModule(ProductInfo.PriceDiscountDetails) else nil,
+			savingsSummaryOverride = if FFlagAXFixMISUpsellDiscountSummary then ProductInfo.SavingsSummaryOverride else nil,
+			premiumPrice = ProductInfo.PremiumPriceInRobux,
+			imageUrl = GetPreviewImageUrlModule(ProductInfo),
+			assetTypeId = ProductInfo.AssetTypeId,
+			assetType = if GetFFlagEnableCreatorStorePurchasingCutoverModule() then ProductInfo.AssetType else nil,
+			productId = ProductInfo.ProductId,
+			productType = ProductInfo.ProductType,
+			membershipTypeRequired = ProductInfo.MinimumMembershipLevel,
+			itemType = ProductInfo.AssetTypeId,
+			collectibleItemId = CollectibleItemId,
+			collectibleItemIds = if FFlagPurchasePromptFetchCartPricingForLooks then ProductInfo.CollectibleItemIds else nil,
+			cartPricingRequestedItems = if FFlagPurchasePromptFetchCartPricingForLooks then ProductInfo.CartPricingRequestedItems else nil,
+			collectibleProductId = CollectibleProductId,
+			productTargetId = if ProductInfo.TargetId then ProductInfo.TargetId else nil,
+			displayPrice = if FFlagEnableUnifiedPurchaseFlowForDevSubs and ProductInfo.ProductType == ProductTypeEnum.DeveloperSubscription then ProductInfo.DisplayPrice else nil,
+			isFreeWithRobloxPlus = if FFlagLuaAppsEnablePromptVIPServerPurchase then ProductInfo.IsFreeWithRobloxPlus else nil,
+			isMonthlyPrice = if FFlagLuaAppsEnablePromptVIPServerPurchase then ProductInfo.IsMonthlyPrice else nil
 		}
 	end,
-	[bundleProductInfoReceivedModule.name] = function(_, p1)
-		-- upvalues: getFFlagFixBundlePromptThumbnailModule (ref), itemTypeModule (ref), fFlagUnifiedPurchaseOptimizeTTIMarketplace (ref), normalizePriceDiscountDetailsModule (ref), getPreviewImageUrlModule (ref)
-		local bundleProductInfo = p1.bundleProductInfo
-		local id = nil
+	[require(PurchasePrompt.Actions.BundleProductInfoReceived).name] = function(_, p1) --[[ Line: 97 ]]
+		-- upvalues: GetFFlagFixBundlePromptThumbnailModule (copy), ItemTypeModule (copy), FFlagUnifiedPurchaseOptimizeTTIMarketplace (copy), NormalizePriceDiscountDetailsModule (copy), GetPreviewImageUrlModule (copy)
+		local BundleProductInfo = p1.bundleProductInfo
+		local Id = nil
 		
-		for i, v in ipairs(bundleProductInfo.items) do
-			if v.type == "UserOutfit" then
-				id = v.id
+		for _, item in ipairs(BundleProductInfo.items) do
+			if item.type == "UserOutfit" then
+				Id = item.id
 				
-				if getFFlagFixBundlePromptThumbnailModule() then break end
+				if GetFFlagFixBundlePromptThumbnailModule() then break end
 			end
 		end
-		bundleProductInfo.costumeId = id
-		bundleProductInfo.itemType = itemTypeModule.Bundle
+		BundleProductInfo.costumeId = Id
+		BundleProductInfo.itemType = ItemTypeModule.Bundle
 		
 		return {
 			assetTypeId = nil,
 			membershipTypeRequired = nil,
-			name = bundleProductInfo.name or (if fFlagUnifiedPurchaseOptimizeTTIMarketplace then bundleProductInfo.Name else nil),
-			basePrice = bundleProductInfo.UserBasePriceInRobux or (bundleProductInfo.BasePriceInRobux or (bundleProductInfo.PriceInRobux or 0)),
-			price = bundleProductInfo.product.priceInRobux or ((if fFlagUnifiedPurchaseOptimizeTTIMarketplace then bundleProductInfo.PriceInRobux else nil) or 0),
-			priceDiscountDetails = if normalizePriceDiscountDetailsModule then normalizePriceDiscountDetailsModule(bundleProductInfo.PriceDiscountDetails) else nil,
-			imageUrl = getPreviewImageUrlModule(bundleProductInfo),
-			productId = bundleProductInfo.product.id,
-			itemType = bundleProductInfo.itemType
+			name = BundleProductInfo.name or (if FFlagUnifiedPurchaseOptimizeTTIMarketplace then BundleProductInfo.Name else nil),
+			basePrice = BundleProductInfo.UserBasePriceInRobux or (BundleProductInfo.BasePriceInRobux or (BundleProductInfo.PriceInRobux or 0)),
+			price = BundleProductInfo.product.priceInRobux or ((if FFlagUnifiedPurchaseOptimizeTTIMarketplace then BundleProductInfo.PriceInRobux else nil) or 0),
+			priceDiscountDetails = if NormalizePriceDiscountDetailsModule then NormalizePriceDiscountDetailsModule(BundleProductInfo.PriceDiscountDetails) else nil,
+			imageUrl = GetPreviewImageUrlModule(BundleProductInfo),
+			productId = BundleProductInfo.product.id,
+			itemType = BundleProductInfo.itemType
 		}
 	end,
-	[completeRequestModule.name] = function(_, _)
+	[require(PurchasePrompt.Actions.CompleteRequest).name] = function(_, _) --[[ Line: 134 ]]
 		return {}
 	end
-})
+}))

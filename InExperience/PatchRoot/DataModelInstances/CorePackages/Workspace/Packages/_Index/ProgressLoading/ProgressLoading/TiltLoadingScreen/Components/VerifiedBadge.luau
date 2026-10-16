@@ -1,30 +1,30 @@
-﻿local parent = script:FindFirstAncestor("TiltLoadingScreen").Parent.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local view = foundationModule.View
-local icon = foundationModule.Icon
-local enums = foundationModule.Enums
+﻿local Parent = script:FindFirstAncestor("TiltLoadingScreen").Parent.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local Icon = FoundationModule.Icon
+local Enums = FoundationModule.Enums
 
-return function(p1)
-	-- upvalues: reactModule (ref), view (ref), icon (ref), enums (ref)
-	return reactModule.createElement(view, {
+return function(Frame) --[[ Line: 22 | Named "VerifiedBadge" ]]
+	-- upvalues: ReactModule (copy), View (copy), Icon (copy), Enums (copy)
+	return ReactModule.createElement(View, {
 		tag = "auto-xy",
 		testId = "tilt-verified-badge",
-		LayoutOrder = p1.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		Backplate = reactModule.createElement(icon, {
+		Backplate = ReactModule.createElement(Icon, {
 			name = "verified-backplate",
 			ZIndex = 1,
-			variant = enums.IconVariant.Filled,
-			size = enums.IconSize.Small,
-			style = p1.backplateStyle
+			variant = Enums.IconVariant.Filled,
+			size = Enums.IconSize.Small,
+			style = Frame.backplateStyle
 		}),
-		Check = reactModule.createElement(icon, {
+		Check = ReactModule.createElement(Icon, {
 			name = "verified-check",
 			ZIndex = 2,
-			variant = enums.IconVariant.Filled,
-			size = enums.IconSize.Small,
-			style = p1.checkStyle
+			variant = Enums.IconVariant.Filled,
+			size = Enums.IconSize.Small,
+			style = Frame.checkStyle
 		})
 	})
 end

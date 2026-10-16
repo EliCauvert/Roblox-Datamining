@@ -1,93 +1,92 @@
-﻿local avatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
-local parent = avatarExperienceCatalog.Parent
-local reactModule = require(parent.React)
-local roactNavigationModule = require(parent.RoactNavigation)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local withMappedNavigationParams = require(parent.AvatarExperienceNavigation).withMappedNavigationParams
-local AXPartialPageModal = require(parent.AvatarExperienceCommon).Components.AXPartialPageModal
-local foundationModule = require(parent.Foundation)
-local view = foundationModule.View
-local text = foundationModule.Text
-local checkbox = foundationModule.Checkbox
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local inputSize = foundationModule.Enums.InputSize
-local useMultiItemShoppingFtuxModule = require(avatarExperienceCatalog.Hooks.useMultiItemShoppingFtux)
+﻿local AvatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
+local Parent = AvatarExperienceCatalog.Parent
+local ReactModule = require(Parent.React)
+local RoactNavigationModule = require(Parent.RoactNavigation)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local AXPartialPageModal = require(Parent.AvatarExperienceCommon).Components.AXPartialPageModal
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local Checkbox = FoundationModule.Checkbox
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local InputSize = FoundationModule.Enums.InputSize
+local UseMultiItemShoppingFtuxModule = require(AvatarExperienceCatalog.Hooks.useMultiItemShoppingFtux)
 
-return withMappedNavigationParams(function(p1)
-	-- upvalues: useLocalization (ref), useMultiItemShoppingFtuxModule (ref), reactModule (ref), roactNavigationModule (ref), view (ref), text (ref), checkbox (ref), inputSize (ref), AXPartialPageModal (ref), buttonVariant (ref)
-	local var1 = useLocalization({
+return (require(Parent.AvatarExperienceNavigation).withMappedNavigationParams(function(p1) --[[ Line: 23 | Named "WearAvatarReplaceAllItemsPrompt" ]]
+	-- upvalues: UseLocalizationFunction (copy), UseMultiItemShoppingFtuxModule (copy), ReactModule (copy), RoactNavigationModule (copy), View (copy), Text (copy), Checkbox (copy), InputSize (copy), AXPartialPageModal (copy), ButtonVariant (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
 		confirmButtonText = "Feature.Catalog.Action.Checkout.Wear",
 		cancelButtonText = "Feature.Avatar.Action.Cancel",
 		titleText = "Feature.Catalog.Title.Checkout.WearAvatarReplaceAllItemsTitle",
 		bodyText = "Feature.Catalog.Label.Checkout.WearAvatarReplaceAllItemsBody",
 		checkboxText = "Feature.Catalog.Label.Checkout.DontWarnAgainText"
 	})
-	local var2 = useMultiItemShoppingFtuxModule()
-	local var3, var4 = reactModule.useState(false)
-	local var5 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref), roactNavigationModule (copy), var2 (ref)
-		p1.navigation.dispatch(roactNavigationModule.Actions.back(nil))
-		var2.incrementWearAvatarReplaceAllItemsPromptCount()
+	local UseMultiItemShoppingFtuxModuleResult = UseMultiItemShoppingFtuxModule()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 36 ]]
+		-- upvalues: p1 (copy), RoactNavigationModule (upval), UseMultiItemShoppingFtuxModuleResult (copy)
+		p1.navigation.dispatch(RoactNavigationModule.Actions.back(nil))
+		UseMultiItemShoppingFtuxModuleResult.incrementWearAvatarReplaceAllItemsPromptCount()
 	end, { p1.navigation })
-	local var6 = reactModule.useCallback(function()
-		-- upvalues: var5 (ref)
-		var5()
-	end, { var5 })
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 47 ]]
+		-- upvalues: UseResult (copy)
+		UseResult()
+	end, { UseResult })
 	
-	return reactModule.createElement(AXPartialPageModal, {
-		onBackgroundPress = var6,
+	return ReactModule.createElement(AXPartialPageModal, {
+		onBackgroundPress = UseResult1,
 		buttonStackProps = {
 			rowLayout = false,
 			buttons = {
 				{
 					props = {
-						onActivated = reactModule.useCallback(function()
-							-- upvalues: var5 (ref), p1 (ref), var3 (ref)
-							var5()
-							p1.onConfirm(var3)
-						end, { p1.onConfirm, var5, var3 }),
-						text = var1.confirmButtonText,
-						variant = buttonVariant.Emphasis,
-						size = inputSize.Medium
+						onActivated = ReactModule.useCallback(function() --[[ Line: 42 ]]
+							-- upvalues: UseResult (copy), p1 (copy), UseStateResult (copy)
+							UseResult()
+							p1.onConfirm(UseStateResult)
+						end, { p1.onConfirm, UseResult, UseStateResult }),
+						text = UseLocalizationResult.confirmButtonText,
+						variant = ButtonVariant.Emphasis,
+						size = InputSize.Medium
 					}
 				},
 				{
 					props = {
-						onActivated = var6,
-						text = var1.cancelButtonText,
-						variant = buttonVariant.Standard,
-						size = inputSize.Medium
+						onActivated = UseResult1,
+						text = UseLocalizationResult.cancelButtonText,
+						variant = ButtonVariant.Standard,
+						size = InputSize.Medium
 					}
 				}
 			}
 		}
-	}, (function()
-		-- upvalues: reactModule (copy), view (copy), text (copy), var1 (ref), checkbox (copy), var3 (ref), var4 (ref), inputSize (copy)
+	}, ((function() --[[ Line: 51 ]]
+		-- upvalues: ReactModule (upval), View (upval), Text (upval), UseLocalizationResult (copy), Checkbox (upval), UseStateResult (copy), UseStateResult2 (copy), InputSize (upval)
 		return {
-			ViewFrame = reactModule.createElement(view, {
+			ViewFrame = ReactModule.createElement(View, {
 				tag = "auto-y size-full-0 padding-bottom-xxlarge col align-x-left align-y-top"
 			}, {
-				PromptBodyTitle = reactModule.createElement(text, {
+				PromptBodyTitle = ReactModule.createElement(Text, {
 					tag = "auto-xy padding-bottom-small text-align-x-left text-heading-small text-wrap",
 					LayoutOrder = 1,
-					Text = var1.titleText
+					Text = UseLocalizationResult.titleText
 				}),
-				PromptBodyText = reactModule.createElement(text, {
+				PromptBodyText = ReactModule.createElement(Text, {
 					tag = "auto-xy padding-bottom-xxlarge text-align-x-left text-truncate-end text-body-large text-wrap",
 					LayoutOrder = 2,
-					Text = var1.bodyText
+					Text = UseLocalizationResult.bodyText
 				}),
-				DontWarnCheckbox = reactModule.createElement(checkbox, {
+				DontWarnCheckbox = ReactModule.createElement(Checkbox, {
 					LayoutOrder = 3,
-					isChecked = var3,
-					onActivated = function()
-						-- upvalues: var4 (copy), var3 (copy)
-						var4(not var3)
+					isChecked = UseStateResult,
+					onActivated = function() --[[ Line: 68 ]]
+						-- upvalues: UseStateResult2 (upval), UseStateResult (upval)
+						UseStateResult2(not UseStateResult)
 					end,
-					size = inputSize.Medium,
-					label = var1.checkboxText
+					size = InputSize.Medium,
+					label = UseLocalizationResult.checkboxText
 				})
 			})
 		}
-	end)())
-end)
+	end)()))
+end))

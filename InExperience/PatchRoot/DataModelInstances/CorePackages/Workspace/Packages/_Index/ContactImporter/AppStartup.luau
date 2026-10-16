@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.AppStartup.AppStartup)
+﻿return (require(script.Parent.Parent.Parent._Index.AppStartup.AppStartup))

@@ -1,55 +1,57 @@
-﻿local parent = script:FindFirstAncestor("FriendsChat").Parent
-local reactModule = require(parent.React)
-local fetchConversationListPageToSignals = require(script.Parent.ExpChatConversationListAdapter).fetchConversationListPageToSignals
-local name = require(parent.ExpChatShared).Logger:new(script.Name)
+﻿local Parent = script:FindFirstAncestor("FriendsChat").Parent
+local ReactModule = require(Parent.React)
+local FetchConversationListPageToSignalsFunction = require(script.Parent.ExpChatConversationListAdapter).fetchConversationListPageToSignals
+local NewResult = require(Parent.ExpChatShared).Logger:new(script.Name)
 
-return function(p1, p2)
-	-- upvalues: reactModule (ref), fetchConversationListPageToSignals (ref), name (ref)
-	local var1 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref), p2 (ref), fetchConversationListPageToSignals (copy), name (copy)
+return function(p1, p2) --[[ Line: 22 | Named "useConversationListPagination" ]]
+	-- upvalues: ReactModule (copy), FetchConversationListPageToSignalsFunction (copy), NewResult (copy)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 24 ]]
+		-- upvalues: p1 (copy), p2 (copy), FetchConversationListPageToSignalsFunction (upval), NewResult (upval)
 		if p1 and p2.isFetchingConversations ~= true then
-			fetchConversationListPageToSignals():catch(function(p3)
-				-- upvalues: name (copy)
-				name:warning(`Failed to retry FriendsChat conversation list fetch: {tostring(p3)}`)
+			FetchConversationListPageToSignalsFunction():catch(function(Err) --[[ Line: 29 ]]
+				-- upvalues: NewResult (upval)
+				NewResult:warning(`Failed to retry FriendsChat conversation list fetch: {tostring(Err)}`)
 			end)
 			
 			return
 		end
 	end, { p1, p2.isFetchingConversations })
-	local var2 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref), p2 (ref), fetchConversationListPageToSignals (copy), name (copy)
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 40 ]]
+		-- upvalues: p1 (copy), p2 (copy), FetchConversationListPageToSignalsFunction (upval), NewResult (upval)
 		if not p1 then return end
 		if p2.isFetchingConversations == true or p2.isExhausted == true then return end
-		local nextCursor = p2.nextCursor
+		local NextCursor = p2.nextCursor
 		
-		if nextCursor == nil or nextCursor == "" then
+		if NextCursor ~= nil and NextCursor ~= "" then
+			FetchConversationListPageToSignalsFunction({ cursor = NextCursor }):catch(function(Err) --[[ Line: 54 ]]
+				-- upvalues: NewResult (upval)
+				NewResult:warning(`Failed to fetch next FriendsChat conversation list page: {tostring(Err)}`)
+			end)
+			
 			return
 		end
-		fetchConversationListPageToSignals({ cursor = nextCursor }):catch(function(p3)
-			-- upvalues: name (copy)
-			name:warning(`Failed to fetch next FriendsChat conversation list page: {tostring(p3)}`)
-		end)
 	end, {
 		p1,
 		p2.isFetchingConversations,
 		p2.isExhausted,
 		p2.nextCursor
 	})
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), p2 (ref), fetchConversationListPageToSignals (copy), name (copy)
+	ReactModule.useEffect(function() --[[ Line: 67 ]]
+		-- upvalues: p1 (copy), p2 (copy), FetchConversationListPageToSignalsFunction (upval), NewResult (upval)
 		if not p1 then
 			return nil
 		elseif p2.isFetchingConversations == true then
 			return nil
 		elseif p2.hasFetchedInitialPage == true or p2.error ~= nil then
 			return nil
+		else
+			FetchConversationListPageToSignalsFunction():catch(function(Err) --[[ Line: 78 ]]
+				-- upvalues: NewResult (upval)
+				NewResult:warning(`Failed to fetch initial FriendsChat conversation list page: {tostring(Err)}`)
+			end)
+			
+			return nil
 		end
-		fetchConversationListPageToSignals():catch(function(p3)
-			-- upvalues: name (copy)
-			name:warning(`Failed to fetch initial FriendsChat conversation list page: {tostring(p3)}`)
-		end)
-		
-		return nil
 	end, {
 		p1,
 		p2.error,
@@ -57,5 +59,5 @@ return function(p1, p2)
 		p2.isFetchingConversations
 	})
 	
-	return { loadNext = var2, retryInitialFetch = var1 }
+	return { loadNext = UseResult1, retryInitialFetch = UseResult }
 end

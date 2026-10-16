@@ -1,127 +1,127 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local foundationModule = require(parent.Foundation)
-local markdownModule = require(parent.Markdown)
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local agentCardModule = require(script.Parent.AgentCard)
-local agentCardActionsModule = require(script.Parent.AgentCardActions)
-local getMarkdownRendererPropsModule = require(buildExperience.utils.getMarkdownRendererProps)
-local chatCardPriorityModule = require(buildExperience.Components.Chat.ChatCardEmphasis.ChatCardPriority)
-local useChatCardEmphasisModule = require(buildExperience.Components.Chat.ChatCardEmphasis.useChatCardEmphasis)
-local fFlagBuildExperienceChatCardEmphasisModule = require(buildExperience.Flags.FFlagBuildExperienceChatCardEmphasis)
-local button = foundationModule.Button
-local sheet = foundationModule.Sheet
-local text = foundationModule.Text
-local view = foundationModule.View
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local fillBehavior = foundationModule.Enums.FillBehavior
-local inputSize = foundationModule.Enums.InputSize
-local markdownViewer = markdownModule.Components.MarkdownViewer
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
+local AgentCardModule = require(script.Parent.AgentCard)
+local AgentCardActionsModule = require(script.Parent.AgentCardActions)
+local GetMarkdownRendererPropsModule = require(BuildExperience.utils.getMarkdownRendererProps)
+local ChatCardPriorityModule = require(BuildExperience.Components.Chat.ChatCardEmphasis.ChatCardPriority)
+local UseChatCardEmphasisModule = require(BuildExperience.Components.Chat.ChatCardEmphasis.useChatCardEmphasis)
+local FFlagBuildExperienceChatCardEmphasisModule = require(BuildExperience.Flags.FFlagBuildExperienceChatCardEmphasis)
+local Button = FoundationModule.Button
+local Sheet = FoundationModule.Sheet
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local FillBehavior = FoundationModule.Enums.FillBehavior
+local InputSize = FoundationModule.Enums.InputSize
+local MarkdownViewer = require(Parent.Markdown).Components.MarkdownViewer
 
-local function AgentPlanSheet(p1)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), foundationModule (ref), reactModule (ref), getMarkdownRendererPropsModule (ref), sheet (ref), text (ref), view (ref), markdownViewer (ref)
-	local var1 = useLocalization({ overview = localizationStringsModule.AGENT_PLAN_OVERVIEW })
-	local var2 = foundationModule.Hooks.useTokens()
-	local default = var2.Color.Content.Default
+local function AgentPlanSheet(p1) --[[ Line: 46 ]]
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), FoundationModule (copy), ReactModule (copy), GetMarkdownRendererPropsModule (copy), Sheet (copy), Text (copy), View (copy), MarkdownViewer (copy)
+	local UseTokensResult = FoundationModule.Hooks.useTokens()
+	local Default = UseTokensResult.Color.Content.Default
 	
-	return reactModule.createElement(sheet.Root, {
+	return ReactModule.createElement(Sheet.Root, {
 		defaultSnapPointIndex = 1,
 		isOpen = p1.isOpen,
 		onClose = p1.onClose,
 		snapPoints = { 0.5, 1 },
 		testId = p1.testId
 	}, {
-		Header = reactModule.createElement(sheet.Header, nil, {
-			Title = reactModule.createElement(text, {
+		Header = ReactModule.createElement(Sheet.Header, nil, {
+			Title = ReactModule.createElement(Text, {
 				LayoutOrder = 1,
 				tag = "size-full-0 auto-y margin-x-small padding-y-small text-heading-small text-wrap text-align-x-left content-emphasis",
 				Text = p1.title
 			})
 		}),
-		Content = reactModule.createElement(sheet.Content, nil, {
-			OverviewAndBody = reactModule.createElement(view, {
+		Content = ReactModule.createElement(Sheet.Content, nil, {
+			OverviewAndBody = ReactModule.createElement(View, {
 				tag = "col gap-xsmall size-full-0 auto-y margin-x-small padding-bottom-large"
 			}, {
-				Overview = reactModule.createElement(text, {
+				Overview = ReactModule.createElement(Text, {
 					LayoutOrder = 1,
 					tag = "size-full-0 auto-y text-title-medium text-wrap text-align-x-left content-default",
-					Text = var1.overview
+					Text = UseLocalizationFunction({ overview = LocalizationStringsModule.AGENT_PLAN_OVERVIEW }).overview
 				}),
-				Body = reactModule.createElement(markdownViewer, {
+				Body = ReactModule.createElement(MarkdownViewer, {
 					Markdown = p1.textContent,
 					WrapperProps = {
 						LayoutOrder = 2,
 						tag = "size-full-0 auto-y text-body-medium content-emphasis",
 						testId = `{p1.testId}-text-content`
 					},
-					MarkdownRendererProps = reactModule.useMemo(function()
-						-- upvalues: getMarkdownRendererPropsModule (copy), var2 (ref), default (ref)
-						return getMarkdownRendererPropsModule(var2, default)
-					end, { var2, default })
+					MarkdownRendererProps = ReactModule.useMemo(function() --[[ Line: 52 ]]
+						-- upvalues: GetMarkdownRendererPropsModule (upval), UseTokensResult (copy), Default (copy)
+						return GetMarkdownRendererPropsModule(UseTokensResult, Default)
+					end, { UseTokensResult, Default })
 				})
 			})
 		})
 	})
 end
 
-return function(p1)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), reactModule (ref), fFlagBuildExperienceChatCardEmphasisModule (ref), useChatCardEmphasisModule (ref), chatCardPriorityModule (ref), agentCardModule (ref), agentCardActionsModule (ref), button (ref), inputSize (ref), buttonVariant (ref), fillBehavior (ref), AgentPlanSheet (ref)
-	local var1 = useLocalization({
-		build = localizationStringsModule.AGENT_PLAN_BUILD,
-		view = localizationStringsModule.AGENT_PLAN_VIEW
+return function(p1) --[[ Line: 98 | Named "AgentPlanCard" ]]
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), FFlagBuildExperienceChatCardEmphasisModule (copy), UseChatCardEmphasisModule (copy), ChatCardPriorityModule (copy), AgentCardModule (copy), AgentCardActionsModule (copy), Button (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy), AgentPlanSheet (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
+		build = LocalizationStringsModule.AGENT_PLAN_BUILD,
+		view = LocalizationStringsModule.AGENT_PLAN_VIEW
 	})
-	local testId = p1.testId or "agent-plan-card"
-	local var2, var3 = reactModule.useState(false)
+	local TestId = p1.testId or "agent-plan-card"
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseChatCardEmphasisModuleResult = if FFlagBuildExperienceChatCardEmphasisModule then UseChatCardEmphasisModule(if p1.isBuildDisabled == true then nil else ChatCardPriorityModule.AgentProposal) else nil
 	
-	return reactModule.createElement(reactModule.Fragment, nil, {
-		Card = reactModule.createElement(agentCardModule, {
+	return ReactModule.createElement(ReactModule.Fragment, nil, {
+		Card = ReactModule.createElement(AgentCardModule, {
 			title = p1.title,
 			textContent = p1.summary or p1.textContent,
 			layoutOrder = p1.layoutOrder,
-			testId = testId
+			testId = TestId
 		}, {
-			Actions = reactModule.createElement(agentCardActionsModule, nil, {
-				Build = reactModule.createElement(button, {
+			Actions = ReactModule.createElement(AgentCardActionsModule, nil, {
+				Build = ReactModule.createElement(Button, {
 					LayoutOrder = 1,
-					text = var1.build,
-					size = inputSize.Small,
-					variant = if (if fFlagBuildExperienceChatCardEmphasisModule then useChatCardEmphasisModule(if p1.isBuildDisabled == true then nil else chatCardPriorityModule.AgentProposal) else nil) == false then buttonVariant.SoftEmphasis else buttonVariant.Emphasis,
-					fillBehavior = fillBehavior.Fill,
+					text = UseLocalizationResult.build,
+					size = InputSize.Small,
+					variant = if UseChatCardEmphasisModuleResult == false then ButtonVariant.SoftEmphasis else ButtonVariant.Emphasis,
+					fillBehavior = FillBehavior.Fill,
 					isDisabled = p1.isBuildDisabled == true,
-					onActivated = reactModule.useCallback(function()
-						-- upvalues: p1 (ref)
-						if p1.isBuildDisabled == true then
+					onActivated = ReactModule.useCallback(function() --[[ Line: 111 ]]
+						-- upvalues: p1 (copy)
+						if p1.isBuildDisabled ~= true then
+							p1.onBuild()
+							
 							return
 						end
-						p1.onBuild()
 					end, { p1.isBuildDisabled, p1.onBuild }),
-					testId = `{testId}-build-button`
+					testId = `{TestId}-build-button`
 				}),
-				View = reactModule.createElement(button, {
+				View = ReactModule.createElement(Button, {
 					LayoutOrder = 2,
-					text = var1.view,
-					size = inputSize.Small,
-					variant = buttonVariant.Standard,
-					fillBehavior = fillBehavior.Fill,
-					onActivated = reactModule.useCallback(function()
-						-- upvalues: var3 (ref)
-						var3(true)
+					text = UseLocalizationResult.view,
+					size = InputSize.Small,
+					variant = ButtonVariant.Standard,
+					fillBehavior = FillBehavior.Fill,
+					onActivated = ReactModule.useCallback(function() --[[ Line: 118 ]]
+						-- upvalues: UseStateResult2 (copy)
+						UseStateResult2(true)
 					end, {}),
-					testId = `{testId}-view-button`
+					testId = `{TestId}-view-button`
 				})
 			})
 		}),
-		Sheet = reactModule.createElement(AgentPlanSheet, {
+		Sheet = ReactModule.createElement(AgentPlanSheet, {
 			title = p1.title,
 			textContent = p1.textContent,
-			isOpen = var2,
-			onClose = reactModule.useCallback(function()
-				-- upvalues: var3 (ref)
-				var3(false)
+			isOpen = UseStateResult,
+			onClose = ReactModule.useCallback(function() --[[ Line: 122 ]]
+				-- upvalues: UseStateResult2 (copy)
+				UseStateResult2(false)
 			end, {}),
-			testId = `{testId}-sheet`
+			testId = `{TestId}-sheet`
 		})
 	})
 end

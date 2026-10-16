@@ -1,127 +1,132 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceTimedOptions").Parent
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local foundationModule = require(parent.Foundation)
-local useTokens = foundationModule.Hooks.useTokens
-local text = foundationModule.Text
-local view = foundationModule.View
-local enums = foundationModule.Enums
-local _ = require(parent.AvatarExperienceCommon)
-local wearTimeOptionButtonModule = require(script.Parent.WearTimeOptionButton)
-local AXTooltip = require(parent.AvatarExperienceUIKit).AXTooltipComponents.AXTooltip
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceTimedOptions").Parent
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local FoundationModule = require(Parent.Foundation)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local Enums = FoundationModule.Enums
+local _ = require(Parent.AvatarExperienceCommon)
+local WearTimeOptionButtonModule = require(script.Parent.WearTimeOptionButton)
+local AXTooltip = require(Parent.AvatarExperienceUIKit).AXTooltipComponents.AXTooltip
 
-return function(p1)
-	-- upvalues: useTokens (ref), useLocalization (ref), reactModule (ref), wearTimeOptionButtonModule (ref), view (ref), text (ref), foundationModule (ref), enums (ref), AXTooltip (ref)
-	local var1 = useTokens()
-	local var2 = useLocalization({
+return function(Frame) --[[ Line: 27 | Named "WearTimeOptionsCarousel" ]]
+	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), WearTimeOptionButtonModule (copy), View (copy), Text (copy), FoundationModule (copy), Enums (copy), AXTooltip (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseLocalizationResult = UseLocalizationFunction({
 		wearTimeOptions = "Feature.Durables.ItemDetails.WearTimeOptions.Title",
 		tooltipText = "Feature.Durables.FTUX.Tooltip"
 	})
-	local var3, var4 = reactModule.useState(false)
-	reactModule.useEffect(function()
-		-- upvalues: var4 (ref)
-		local delayedThread = task.delay(5, function()
-			-- upvalues: var4 (copy)
-			var4(false)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	ReactModule.useEffect(function() --[[ Line: 36 ]]
+		-- upvalues: UseStateResult2 (copy)
+		local DelayedThread = task.delay(5, function() --[[ Line: 37 ]]
+			-- upvalues: UseStateResult2 (upval)
+			UseStateResult2(false)
 		end)
 		
-		return function()
-			-- upvalues: delayedThread (ref)
-			task.cancel(delayedThread)
+		return function() --[[ Line: 41 ]]
+			-- upvalues: DelayedThread (copy)
+			task.cancel(DelayedThread)
 		end
 	end, {})
-	local var5, var6 = reactModule.useState(function()
-		-- upvalues: p1 (ref)
-		for i, v in p1.options do
-			if v.selected then
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(function() --[[ Line: 46 ]]
+		-- upvalues: Frame (copy)
+		for i, option in Frame.options do
+			if option.selected then
 				return i
 			end
 		end
 		return 1
 	end)
-	local var7 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref), reactModule (copy), wearTimeOptionButtonModule (copy), var5 (ref), var6 (ref)
-		local t = {}
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 57 ]]
+		-- upvalues: Frame (copy), ReactModule (upval), WearTimeOptionButtonModule (upval), UseStateResult1 (copy), UseStateResult2_1 (copy)
+		local Elements = {}
 		
-		for i, v in p1.options do
-			t[i] = reactModule.createElement(wearTimeOptionButtonModule, {
-				option = { days = v.days, price = v.price, selected = i == var5 },
-				onActivated = function()
-					-- upvalues: var6 (copy), i (ref), p1 (copy)
-					var6(i)
+		for LayoutOrder, option in Frame.options do
+			Elements[LayoutOrder] = ReactModule.createElement(WearTimeOptionButtonModule, {
+				option = {
+					days = option.days,
+					price = option.price,
+					selected = LayoutOrder == UseStateResult1
+				},
+				onActivated = function() --[[ Line: 66 ]]
+					-- upvalues: UseStateResult2_1 (upval), LayoutOrder (copy), Frame (upval)
+					UseStateResult2_1(LayoutOrder)
 					
-					if p1.onOptionActivated then
-						p1.onOptionActivated(i)
+					if Frame.onOptionActivated then
+						Frame.onOptionActivated(LayoutOrder)
 					end
 				end,
-				LayoutOrder = i
+				LayoutOrder = LayoutOrder
 			})
 		end
-		return t
-	end, { p1.options, var5, p1.onOptionActivated })
+		return Elements
+	end, { Frame.options, UseStateResult1, Frame.onOptionActivated })
+	local Element = ReactModule.createElement(View, { tag = "row gap-medium align-y-center auto-xy" }, {
+		Options = ReactModule.createElement(ReactModule.Fragment, nil, UseMemoResult)
+	})
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "size-full-0 auto-y col gap-medium",
-		LayoutOrder = p1.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		Heading = reactModule.createElement(view, {
+		Heading = ReactModule.createElement(View, {
 			tag = "auto-xy row gap-xxsmall align-y-center",
 			LayoutOrder = 1
 		}, {
-			HeadingText = reactModule.createElement(text, {
+			HeadingText = ReactModule.createElement(Text, {
 				LayoutOrder = 1,
-				Text = var2.wearTimeOptions,
-				textStyle = var1.Color.Content.Emphasis,
+				Text = UseLocalizationResult.wearTimeOptions,
+				textStyle = UseTokensResult.Color.Content.Emphasis,
 				fontStyle = {
-					Font = var1.Typography.TitleLarge.Font,
-					FontSize = var1.FontSize.FontSize_500
+					Font = UseTokensResult.Typography.TitleLarge.Font,
+					FontSize = UseTokensResult.FontSize.FontSize_500
 				},
 				AutomaticSize = Enum.AutomaticSize.XY
 			}),
-			InfoIconContainer = reactModule.createElement(view, { tag = "auto-xy", LayoutOrder = 2 }, {
-				InfoIcon = reactModule.createElement(foundationModule.IconButton, {
-					icon = enums.IconName.CircleI,
-					size = enums.IconSize.Small,
-					onActivated = function()
-						-- upvalues: var4 (ref)
-						var4(true)
+			InfoIconContainer = ReactModule.createElement(View, { tag = "auto-xy", LayoutOrder = 2 }, {
+				InfoIcon = ReactModule.createElement(FoundationModule.IconButton, {
+					icon = Enums.IconName.CircleI,
+					size = Enums.IconSize.Small,
+					onActivated = function() --[[ Line: 144 ]]
+						-- upvalues: UseStateResult2 (copy)
+						UseStateResult2(true)
 					end
 				}),
-				Tooltip = reactModule.createElement(AXTooltip, {
+				Tooltip = ReactModule.createElement(AXTooltip, {
 					popoverSide = "Top",
-					isOpen = var3,
-					tooltipText = var2.tooltipText,
-					maxWidth = var1.Size.Size_1200 * 3,
-					onTooltipActivated = function()
-						-- upvalues: var4 (ref)
-						var4(false)
+					isOpen = UseStateResult,
+					tooltipText = UseLocalizationResult.tooltipText,
+					maxWidth = UseTokensResult.Size.Size_1200 * 3,
+					onTooltipActivated = function() --[[ Line: 153 ]]
+						-- upvalues: UseStateResult2 (copy)
+						UseStateResult2(false)
 					end
 				})
 			})
 		}),
-		CarouselContainer = if p1.useWrapping then reactModule.createElement(view, {
+		CarouselContainer = if Frame.useWrapping then ReactModule.createElement(View, {
 			tag = "row wrap gap-medium align-y-center size-full-0 auto-y",
 			LayoutOrder = 2,
 			wrap = true
-		}, var7) else reactModule.createElement(view, {
+		}, UseMemoResult) else ReactModule.createElement(View, {
 			tag = "size-full-0",
 			LayoutOrder = 2,
-			Size = UDim2.new(1, 0, 0, var1.Size.Size_1200)
+			Size = UDim2.new(1, 0, 0, UseTokensResult.Size.Size_1200)
 		}, {
-			ScrollingFrame = reactModule.createElement("ScrollingFrame", {
+			ScrollingFrame = ReactModule.createElement("ScrollingFrame", {
 				ScrollBarThickness = 0,
 				BorderSizePixel = 0,
 				BackgroundTransparency = 1,
 				ClipsDescendants = false,
 				Selectable = false,
 				Size = UDim2.new(1, 0, 1, 0),
-				CanvasSize = UDim2.new(0, 0, 0, var1.Size.Size_1200),
+				CanvasSize = UDim2.new(0, 0, 0, UseTokensResult.Size.Size_1200),
 				AutomaticCanvasSize = Enum.AutomaticSize.X,
 				ScrollingDirection = Enum.ScrollingDirection.X,
 				ElasticBehavior = Enum.ElasticBehavior.Always
-			}, reactModule.createElement(view, { tag = "row gap-medium align-y-center auto-xy" }, {
-				Options = reactModule.createElement(reactModule.Fragment, nil, var7)
-			}))
+			}, Element)
 		})
 	})
 end

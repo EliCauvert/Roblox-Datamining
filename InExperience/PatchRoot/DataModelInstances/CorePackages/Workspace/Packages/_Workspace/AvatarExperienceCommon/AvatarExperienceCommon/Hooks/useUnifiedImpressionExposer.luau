@@ -1,14 +1,14 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceCommon").Parent
-local reactModule = require(parent.React)
-local IXPUtilsModule = require(parent.IXPUtils)
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceCommon").Parent
+local ReactModule = require(Parent.React)
+local IXPUtilsModule = require(Parent.IXPUtils)
 
-return function(p1, p2)
-	-- upvalues: reactModule (ref), IXPUtilsModule (ref)
-	return reactModule.useCallback(function(p3)
-		-- upvalues: p1 (ref), IXPUtilsModule (copy), p2 (ref)
-		local current = p1.current
+return function(p1, p2) --[[ Line: 7 | Named "unifiedImpressionExposer" ]]
+	-- upvalues: ReactModule (copy), IXPUtilsModule (copy)
+	return ReactModule.useCallback(function(p3) --[[ Line: 8 ]]
+		-- upvalues: p1 (copy), IXPUtilsModule (upval), p2 (copy)
+		local Current = p1.current
 		
-		if current and p3.visibleInstance:IsDescendantOf(current) then
+		if Current and p3.visibleInstance:IsDescendantOf(Current) then
 			IXPUtilsModule.logLayerExposure(p2)
 		end
 	end, { p2 })

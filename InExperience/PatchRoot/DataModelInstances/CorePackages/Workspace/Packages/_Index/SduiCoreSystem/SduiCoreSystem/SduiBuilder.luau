@@ -1,174 +1,171 @@
-﻿local sduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
-local parent = sduiCoreSystem.Parent
-local cryoModule = require(parent.Cryo)
-local tutilsModule = require(parent.tutils)
-local sduiBuilderProcessingPhase = require(sduiCoreSystem.SduiBuilderTypes).SduiBuilderProcessingPhase
-local _ = require(sduiCoreSystem.SduiComponentType)
-local sduiConfigTypesModule = require(sduiCoreSystem.SduiConfigTypes)
-local sduiErrorType = require(sduiCoreSystem.SduiErrors).SduiErrorType
-local parsePropsModule = require(sduiCoreSystem.parseProps)
-local validateInterfaceModule = require(sduiCoreSystem.validateInterface)
-local uiComponentInterface = sduiConfigTypesModule.UiComponentInterface
-local sduiCompatModule = require(parent.SduiCompat)
-local mapServerBindingProps = sduiCompatModule.mapServerBindingProps
-local serverBindingPropMap = sduiCompatModule.ServerBindingPropMap
-local sduiUsageRecorderModule = require(sduiCoreSystem.Analytics.SduiUsageRecorder)
-local recordV1ComponentUsageModule = require(sduiCoreSystem.Analytics.recordV1ComponentUsage)
+﻿local SduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
+local Parent = SduiCoreSystem.Parent
+local CryoModule = require(Parent.Cryo)
+local TutilsModule = require(Parent.tutils)
+local SduiBuilderProcessingPhase = require(SduiCoreSystem.SduiBuilderTypes).SduiBuilderProcessingPhase
+local _ = require(SduiCoreSystem.SduiComponentType)
+local SduiErrorType = require(SduiCoreSystem.SduiErrors).SduiErrorType
+local ParsePropsModule = require(SduiCoreSystem.parseProps)
+local ValidateInterfaceModule = require(SduiCoreSystem.validateInterface)
+local UiComponentInterface = require(SduiCoreSystem.SduiConfigTypes).UiComponentInterface
+local SduiCompatModule = require(Parent.SduiCompat)
+local MapServerBindingPropsFunction = SduiCompatModule.mapServerBindingProps
+local ServerBindingPropMap = SduiCompatModule.ServerBindingPropMap
+local SduiUsageRecorderModule = require(SduiCoreSystem.Analytics.SduiUsageRecorder)
+local RecordV1ComponentUsageModule = require(SduiCoreSystem.Analytics.recordV1ComponentUsage)
 local t = {}
 
 return {
-	getComponentType = function(p1, p2)
+	getComponentType = function(p1, p2) --[[ Line: 35 ]]
 		if not p1.__isClientBinding and p2.templateRegistry:shouldResolveTemplate(p1) then
 			p2.templateRegistry:resolveTemplateForConfig(p1, p2)
 		end
 		return p1.componentType
 	end,
-	buildAnalyticsContext = function(p1, p2, p3)
-		-- upvalues: t (ref), cryoModule (ref)
-		p2 = p2 or t
-		local var1 = p1.analyticsData or t
-		local var2 = cryoModule.Dictionary.join(p2.ancestorAnalyticsData or t, p2.analyticsData or t)
-		local getCollectionData = p2.getCollectionData
+	buildAnalyticsContext = function(p1, p2, p3) --[[ Line: 45 ]]
+		-- upvalues: t (copy), CryoModule (copy)
+		local P3 = p2 or t
+		local AnalyticsData = p1.analyticsData or t
+		local JoinResult = CryoModule.Dictionary.join(P3.ancestorAnalyticsData or t, P3.analyticsData or t)
+		local GetCollectionData = P3.getCollectionData
 		
 		if p3 then
-			var1 = cryoModule.Dictionary.join(var1, p3)
+			AnalyticsData = CryoModule.Dictionary.join(AnalyticsData, p3)
 		end
 		return {
-			analyticsData = var1,
-			ancestorAnalyticsData = var2,
-			getCollectionData = getCollectionData
+			analyticsData = AnalyticsData,
+			ancestorAnalyticsData = JoinResult,
+			getCollectionData = GetCollectionData
 		}
 	end,
-	tryCreateEagerProcessedComponentConfig = function(p1, p2, p3, p4, p5)
-		-- upvalues: sduiErrorType (ref), tutilsModule (ref), validateInterfaceModule (ref), uiComponentInterface (ref), mapServerBindingProps (ref), serverBindingPropMap (ref), recordV1ComponentUsageModule (ref), sduiUsageRecorderModule (ref), parsePropsModule (ref), sduiBuilderProcessingPhase (ref)
-		local instrumentation = p2.dependencies.instrumentation
-		instrumentation:startTimerFlow("EagerProcess")
+	tryCreateEagerProcessedComponentConfig = function(p1, p2, Name, p3, p4) --[[ Line: 79 ]]
+		-- upvalues: SduiErrorType (copy), TutilsModule (copy), ValidateInterfaceModule (copy), UiComponentInterface (copy), MapServerBindingPropsFunction (copy), ServerBindingPropMap (copy), RecordV1ComponentUsageModule (copy), SduiUsageRecorderModule (copy), ParsePropsModule (copy), SduiBuilderProcessingPhase (copy)
+		local Instrumentation = p2.dependencies.instrumentation
+		Instrumentation:startTimerFlow("EagerProcess")
 		
 		if not p1 then
-			p2.dependencies.logger.reportError(sduiErrorType.NilComponentConfig, { name = p3 }, p2.appPage)
-			instrumentation:stopTimerFlow("EagerProcess", p2, true)
+			p2.dependencies.logger.reportError(SduiErrorType.NilComponentConfig, { name = Name }, p2.appPage)
+			Instrumentation:stopTimerFlow("EagerProcess", p2, true)
 			
 			return false, p1
 		end
 		assert(p1, "componentConfig must exist")
 		
 		if p1.__processed then
-			p2.dependencies.logger.reportError(sduiErrorType.EagerReprocessing, {
+			p2.dependencies.logger.reportError(SduiErrorType.EagerReprocessing, {
 				message = "Eagerly evaluating a component that has already been processed",
 				componentType = p1.componentType,
-				name = p3
+				name = Name
 			}, p2.appPage)
-			instrumentation:stopTimerFlow("EagerProcess", p2, true)
+			Instrumentation:stopTimerFlow("EagerProcess", p2, true)
 			
 			return true, p1
 		end
-		local var1 = if p5 then tutilsModule.deepCopy(p1) else p1
+		local DeepCopyResult = if p4 then TutilsModule.deepCopy(p1) else p1
 		
-		if p2.templateRegistry:shouldResolveTemplate(var1) then
-			local props = var1.props
+		if p2.templateRegistry:shouldResolveTemplate(DeepCopyResult) then
+			local Props = DeepCopyResult.props
 			
-			if props and props.itemTemplateKey then
-				if props.items then
-					for i, v in props.items do
-						if v.templateKey == nil then
-							v.templateKey = props.itemTemplateKey
+			if Props and Props.itemTemplateKey then
+				if Props.items then
+					for _, item in Props.items do
+						if item.templateKey == nil then
+							item.templateKey = Props.itemTemplateKey
 						end
 					end
-				elseif props.item and props.item.templateKey == nil then
-					props.item.templateKey = props.itemTemplateKey
+				elseif Props.item and Props.item.templateKey == nil then
+					Props.item.templateKey = Props.itemTemplateKey
 				end
 			end
-			if not p2.templateRegistry:resolveTemplateForConfig(var1, p2) then
-				instrumentation:stopTimerFlow("EagerProcess", p2, true)
+			if not p2.templateRegistry:resolveTemplateForConfig(DeepCopyResult, p2) then
+				Instrumentation:stopTimerFlow("EagerProcess", p2, true)
 				
 				return false, p1
 			end
 		end
-		local componentType = var1.componentType
+		local ComponentType = DeepCopyResult.componentType
 		
-		if p2.componentDefinitions:getComponent(componentType) == nil then
-			p2.dependencies.logger.reportError(sduiErrorType.NoComponentRegistered, { componentType = componentType, name = p3 }, p2.appPage)
-			instrumentation:stopTimerFlow("EagerProcess", p2, true)
+		if p2.componentDefinitions:getComponent(ComponentType) == nil then
+			p2.dependencies.logger.reportError(SduiErrorType.NoComponentRegistered, { componentType = ComponentType, name = Name }, p2.appPage)
+			Instrumentation:stopTimerFlow("EagerProcess", p2, true)
 			
 			return false, p1
 		end
-		local var2, var3 = validateInterfaceModule(var1, uiComponentInterface, false)
+		local ValidateInterfaceModuleResult, ValidateInterfaceModuleResult2 = ValidateInterfaceModule(DeepCopyResult, UiComponentInterface, false)
 		
-		if not var2 then
-			p2.dependencies.logger.reportError(sduiErrorType.InvalidComponentConfig, {
-				message = `(Eager) Invalid config for component. err: {var3}`,
-				componentType = componentType,
-				name = p3,
-				value = var1
+		if not ValidateInterfaceModuleResult then
+			p2.dependencies.logger.reportError(SduiErrorType.InvalidComponentConfig, {
+				message = `(Eager) Invalid config for component. err: {ValidateInterfaceModuleResult2}`,
+				componentType = ComponentType,
+				name = Name,
+				value = DeepCopyResult
 			}, p2.appPage)
-			instrumentation:stopTimerFlow("EagerProcess", p2, true)
+			Instrumentation:stopTimerFlow("EagerProcess", p2, true)
 			
 			return false, p1
-		elseif var1.props then
-			local var4, var5 = mapServerBindingProps(var1.props, serverBindingPropMap)
+		end
+		if DeepCopyResult.props then
+			local MapServerBindingPropsResult1, MapServerBindingPropsResult2_1 = MapServerBindingPropsFunction(DeepCopyResult.props, ServerBindingPropMap)
 			
-			if var4 then
-				for i, v in var4 do
-					var1.props[i] = v
+			if MapServerBindingPropsResult1 then
+				for i1, value1 in MapServerBindingPropsResult1 do
+					DeepCopyResult.props[i1] = value1
 				end
 			end
-			if var5 then
-				p2.dependencies.logger.reportError(sduiErrorType.UnmappedServerBindingProp, {
-					componentType = componentType,
-					name = p3,
-					message = `Unmapped PascalCase props detected: {table.concat(var5, ", ")}. These props will not reach the camelCase component.`
+			if MapServerBindingPropsResult2_1 then
+				p2.dependencies.logger.reportError(SduiErrorType.UnmappedServerBindingProp, {
+					componentType = ComponentType,
+					name = Name,
+					message = `Unmapped PascalCase props detected: {table.concat(MapServerBindingPropsResult2_1, ", ")}. These props will not reach the camelCase component.`
 				}, p2.appPage)
 			end
 		end
-		if not var1.__usageRecorded then
-			recordV1ComponentUsageModule(p2.appPage, var1)
-			var1.__usageRecorded = true
-			sduiUsageRecorderModule.scheduleFlush()
+		if not DeepCopyResult.__usageRecorded then
+			RecordV1ComponentUsageModule(p2.appPage, DeepCopyResult)
+			DeepCopyResult.__usageRecorded = true
+			SduiUsageRecorderModule.scheduleFlush()
 		end
-		if var1.props then
-			parsePropsModule(componentType, var1.props, p3, p2, p4, nil, sduiBuilderProcessingPhase.Eager)
+		if DeepCopyResult.props then
+			ParsePropsModule(ComponentType, DeepCopyResult.props, Name, p2, p3, nil, SduiBuilderProcessingPhase.Eager)
 		end
-		if var1.conditionalProps then
-			for i, v in var1.conditionalProps do
-				local var6, var7 = mapServerBindingProps(v.propOverrides, serverBindingPropMap)
+		if DeepCopyResult.conditionalProps then
+			for _, conditionalProp in DeepCopyResult.conditionalProps do
+				local MapServerBindingPropsResult, MapServerBindingPropsResult2 = MapServerBindingPropsFunction(conditionalProp.propOverrides, ServerBindingPropMap)
 				
-				if var6 then
-					for i_1, v_1 in var6 do
-						v.propOverrides[i_1] = v_1
+				if MapServerBindingPropsResult then
+					for i, value in MapServerBindingPropsResult do
+						conditionalProp.propOverrides[i] = value
 					end
 				end
-				if var7 then
-					p2.dependencies.logger.reportError(sduiErrorType.UnmappedServerBindingProp, {
-						componentType = componentType,
-						name = p3,
-						message = `Unmapped PascalCase conditional props detected: {table.concat(var7, ", ")}. These props will not reach the camelCase component.`
+				if MapServerBindingPropsResult2 then
+					p2.dependencies.logger.reportError(SduiErrorType.UnmappedServerBindingProp, {
+						componentType = ComponentType,
+						name = Name,
+						message = `Unmapped PascalCase conditional props detected: {table.concat(MapServerBindingPropsResult2, ", ")}. These props will not reach the camelCase component.`
 					}, p2.appPage)
 				end
-				parsePropsModule(componentType, v.propOverrides, p3, p2, p4, nil, sduiBuilderProcessingPhase.Eager)
+				ParsePropsModule(ComponentType, conditionalProp.propOverrides, Name, p2, p3, nil, SduiBuilderProcessingPhase.Eager)
 			end
 		end
-		local var8 = p2.componentDefinitions:getPropInterface(componentType)
+		local PropInterface = p2.componentDefinitions:getPropInterface(ComponentType)
 		
-		if var8 then
-			local _ = nil
-			local var9, var10 = validateInterfaceModule(var1.props, var8)
-			local var11 = var10
+		if PropInterface then
+			local ValidateInterfaceModuleResult1, ValidateInterfaceModuleResult2_1 = ValidateInterfaceModule(DeepCopyResult.props, PropInterface)
 			
-			if var9 then
-				var1.__processed = true
-				instrumentation:stopTimerFlow("EagerProcess", p2)
-				
-				return true, var1
-			else
-				p2.dependencies.logger.reportError(sduiErrorType.InvalidProps, {
-					componentType = componentType,
-					name = p3,
-					message = var11
+			if not ValidateInterfaceModuleResult1 then
+				p2.dependencies.logger.reportError(SduiErrorType.InvalidProps, {
+					componentType = ComponentType,
+					name = Name,
+					message = ValidateInterfaceModuleResult2_1
 				}, p2.appPage)
-				instrumentation:stopTimerFlow("EagerProcess", p2, true)
+				Instrumentation:stopTimerFlow("EagerProcess", p2, true)
 				
 				return false, p1
 			end
 		end
+		DeepCopyResult.__processed = true
+		Instrumentation:stopTimerFlow("EagerProcess", p2)
+		
+		return true, DeepCopyResult
 	end
 }

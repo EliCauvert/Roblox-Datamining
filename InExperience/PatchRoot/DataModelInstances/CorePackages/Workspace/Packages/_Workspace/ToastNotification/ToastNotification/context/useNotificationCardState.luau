@@ -1,12 +1,12 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent
-local reactModule = require(parent_1.Parent.React)
-local notificationCardContextModule = require(parent.NotificationCardContext)
-local _ = require(parent_1.type)
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.Parent.React)
+local NotificationCardContextModule = require(Parent.NotificationCardContext)
+local _ = require(Parent1.type)
 
-return function(p1)
-	-- upvalues: reactModule (ref), notificationCardContextModule (ref)
-	local var1 = reactModule.useContext(notificationCardContextModule)
+return function(p1) --[[ Line: 8 | Named "useNotificationCardState" ]]
+	-- upvalues: ReactModule (copy), NotificationCardContextModule (copy)
+	local UseContextResult = ReactModule.useContext(NotificationCardContextModule)
 	
-	return if p1 then var1.state and (var1.state.visualItems and (var1.state.visualItems[p1] or {})) else var1.state
+	return if p1 then UseContextResult.state and UseContextResult.state.visualItems and UseContextResult.state.visualItems[p1] or {} else UseContextResult.state
 end

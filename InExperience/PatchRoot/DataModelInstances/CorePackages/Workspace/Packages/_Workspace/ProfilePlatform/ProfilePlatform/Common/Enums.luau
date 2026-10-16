@@ -1,18 +1,36 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local fFlagAddIEMProfilePage = require(parent.SharedFlags).FFlagAddIEMProfilePage
-local fFlagProfilePlatformEnableCurrencyTransfer = require(parent.SharedFlags).FFlagProfilePlatformEnableCurrencyTransfer
-local fFlagProfilePlatformEnableTradeItemsModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableTradeItems)
-local fFlagEnableProfileCompletion = require(parent.SharedFlags).FFlagEnableProfileCompletion
-local fFlagProfilePlatformEnableEditAppearanceMenuModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableEditAppearanceMenu)
-local fFlagProfilePlatformEditBackgroundMenuItemModule = require(profilePlatform.Flags.FFlagProfilePlatformEditBackgroundMenuItem)
-local fFlagSocialEnableProfileInspectAndBuy = require(parent.SharedFlags).FFlagSocialEnableProfileInspectAndBuy
-local fFlagProfilePlatformCTAsRefactorModule = require(profilePlatform.Flags.FFlagProfilePlatformCTAsRefactor)
-local fFlagProfilePlatformEnableMomentsModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableMoments)
-local fFlagFriendsCallingClientGateDEV = require(parent.SharedFlags).FFlagFriendsCallingClientGate_DEV
-local fFlagUseUserCtaCommonEnums = require(parent.SharedFlags).FFlagUseUserCtaCommonEnums
-local fFlagJoinabilityCTARefactor = require(parent.SharedFlags).FFlagJoinabilityCTARefactor
-local var1 = if fFlagUseUserCtaCommonEnums then require(parent.UserCtaCommon).Enums.UserCtaAction else nil
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local FFlagAddIEMProfilePage = require(Parent.SharedFlags).FFlagAddIEMProfilePage
+local FFlagProfilePlatformEnableCurrencyTransfer = require(Parent.SharedFlags).FFlagProfilePlatformEnableCurrencyTransfer
+local FFlagProfilePlatformEnableTradeItemsModule = require(ProfilePlatform.Flags.FFlagProfilePlatformEnableTradeItems)
+local FFlagEnableProfileCompletion = require(Parent.SharedFlags).FFlagEnableProfileCompletion
+local FFlagProfilePlatformEnableEditAppearanceMenuModule = require(ProfilePlatform.Flags.FFlagProfilePlatformEnableEditAppearanceMenu)
+local FFlagProfilePlatformEditBackgroundMenuItemModule = require(ProfilePlatform.Flags.FFlagProfilePlatformEditBackgroundMenuItem)
+local FFlagSocialEnableProfileInspectAndBuy = require(Parent.SharedFlags).FFlagSocialEnableProfileInspectAndBuy
+local FFlagProfilePlatformEnableMomentsModule = require(ProfilePlatform.Flags.FFlagProfilePlatformEnableMoments)
+local FFlagFriendsCallingClientGateDEV = require(Parent.SharedFlags).FFlagFriendsCallingClientGate_DEV
+local FFlagUseUserCtaCommonEnums = require(Parent.SharedFlags).FFlagUseUserCtaCommonEnums
+local FFlagJoinabilityCTARefactor = require(Parent.SharedFlags).FFlagJoinabilityCTARefactor
+local UserCtaCommonModule = require(Parent.UserCtaCommon)
+local UserCtaAction = if FFlagUseUserCtaCommonEnums then UserCtaCommonModule.Enums.UserCtaAction else nil
+
+local function buildSharedProfileActions() --[[ Line: 174 ]]
+	-- upvalues: UserCtaAction (copy), FFlagFriendsCallingClientGateDEV (copy), FFlagProfilePlatformEnableEditAppearanceMenuModule (copy), FFlagProfilePlatformEditBackgroundMenuItemModule (copy), FFlagProfilePlatformEnableCurrencyTransfer (copy), FFlagProfilePlatformEnableTradeItemsModule (copy), FFlagJoinabilityCTARefactor (copy)
+	local Copy = table.clone(UserCtaAction)
+	Copy.Call = if FFlagFriendsCallingClientGateDEV then UserCtaAction.Call else ""
+	Copy.EditAppearance = if FFlagProfilePlatformEnableEditAppearanceMenuModule then UserCtaAction.EditAppearance else ""
+	Copy.EditEmotes = if FFlagProfilePlatformEnableEditAppearanceMenuModule then UserCtaAction.EditEmotes else ""
+	Copy.SwitchAvatar = if FFlagProfilePlatformEnableEditAppearanceMenuModule then UserCtaAction.SwitchAvatar else ""
+	Copy.EditBackground = if FFlagProfilePlatformEnableEditAppearanceMenuModule and FFlagProfilePlatformEditBackgroundMenuItemModule then UserCtaAction.EditBackground else ""
+	Copy.CurrencyTransfer = if FFlagProfilePlatformEnableCurrencyTransfer then UserCtaAction.CurrencyTransfer else ""
+	Copy.TradeItems = if FFlagProfilePlatformEnableTradeItemsModule then UserCtaAction.TradeItems else ""
+	Copy.ContextualOverflow = UserCtaAction.ContextualOverflow
+	Copy.PlayExperience = if FFlagJoinabilityCTARefactor then UserCtaAction.PlayExperience else ""
+	Copy.ViewProfile = if FFlagJoinabilityCTARefactor then UserCtaAction.ViewProfile else ""
+	Copy.UnlockExperience = if FFlagJoinabilityCTARefactor then UserCtaAction.UnlockExperience else ""
+	
+	return Copy
+end
 
 return {
 	Components = {
@@ -34,26 +52,11 @@ return {
 		ProfileBackground = "ProfileBackground",
 		Events = "Events",
 		CurrentlyPlaying = "CurrentlyPlaying",
-		ProfileCompletion = if fFlagEnableProfileCompletion then "ProfileCompletion" else "",
-		Moments = if fFlagProfilePlatformEnableMomentsModule then "UserMoments" else ""
+		Announcements = "Announcements",
+		ProfileCompletion = if FFlagEnableProfileCompletion then "ProfileCompletion" else "",
+		Moments = if FFlagProfilePlatformEnableMomentsModule then "UserMoments" else ""
 	},
-	ProfileActions = if fFlagUseUserCtaCommonEnums then (function()
-		-- upvalues: var1 (ref), fFlagFriendsCallingClientGateDEV (ref), fFlagProfilePlatformEnableEditAppearanceMenuModule (ref), fFlagProfilePlatformEditBackgroundMenuItemModule (ref), fFlagProfilePlatformEnableCurrencyTransfer (ref), fFlagProfilePlatformEnableTradeItemsModule (ref), fFlagProfilePlatformCTAsRefactorModule (ref), fFlagJoinabilityCTARefactor (ref)
-		local cloned = table.clone(var1)
-		cloned.Call = if fFlagFriendsCallingClientGateDEV then var1.Call else ""
-		cloned.EditAppearance = if fFlagProfilePlatformEnableEditAppearanceMenuModule then var1.EditAppearance else ""
-		cloned.EditEmotes = if fFlagProfilePlatformEnableEditAppearanceMenuModule then var1.EditEmotes else ""
-		cloned.SwitchAvatar = if fFlagProfilePlatformEnableEditAppearanceMenuModule then var1.SwitchAvatar else ""
-		cloned.EditBackground = if fFlagProfilePlatformEnableEditAppearanceMenuModule and fFlagProfilePlatformEditBackgroundMenuItemModule then var1.EditBackground else ""
-		cloned.CurrencyTransfer = if fFlagProfilePlatformEnableCurrencyTransfer then var1.CurrencyTransfer else ""
-		cloned.TradeItems = if fFlagProfilePlatformEnableTradeItemsModule then var1.TradeItems else ""
-		cloned.ContextualOverflow = if fFlagProfilePlatformCTAsRefactorModule then var1.ContextualOverflow else ""
-		cloned.PlayExperience = if fFlagJoinabilityCTARefactor then var1.PlayExperience else ""
-		cloned.ViewProfile = if fFlagJoinabilityCTARefactor then var1.ViewProfile else ""
-		cloned.UnlockExperience = if fFlagJoinabilityCTARefactor then var1.UnlockExperience else ""
-		
-		return cloned
-	end)() else {
+	ProfileActions = if FFlagUseUserCtaCommonEnums then buildSharedProfileActions() else {
 		AcceptFriendRequest = "AcceptFriendRequest",
 		AcceptOffNetworkFriendRequest = "AcceptOffNetworkFriendRequest",
 		AddFriend = "AddFriend",
@@ -66,15 +69,15 @@ return {
 		PendingIncomingTrustedConnection = "PendingIncomingTrustedConnection",
 		Block = "Block",
 		CannotAddFriend = "CannotAddFriend",
-		Call = if fFlagFriendsCallingClientGateDEV then "Call" else "",
+		Call = if FFlagFriendsCallingClientGateDEV then "Call" else "",
 		Chat = "Chat",
 		EditAlias = "EditAlias",
-		EditAppearance = if fFlagProfilePlatformEnableEditAppearanceMenuModule then "EditAppearance" else "",
+		EditAppearance = if FFlagProfilePlatformEnableEditAppearanceMenuModule then "EditAppearance" else "",
 		EditAvatar = "EditAvatar",
 		EditLook = "EditLook",
-		EditEmotes = if fFlagProfilePlatformEnableEditAppearanceMenuModule then "EditEmotes" else "",
-		SwitchAvatar = if fFlagProfilePlatformEnableEditAppearanceMenuModule then "SwitchAvatar" else "",
-		EditBackground = if fFlagProfilePlatformEnableEditAppearanceMenuModule and fFlagProfilePlatformEditBackgroundMenuItemModule then "EditBackground" else "",
+		EditEmotes = if FFlagProfilePlatformEnableEditAppearanceMenuModule then "EditEmotes" else "",
+		SwitchAvatar = if FFlagProfilePlatformEnableEditAppearanceMenuModule then "SwitchAvatar" else "",
+		EditBackground = if FFlagProfilePlatformEnableEditAppearanceMenuModule and FFlagProfilePlatformEditBackgroundMenuItemModule then "EditBackground" else "",
 		EditProfile = "EditProfile",
 		IgnoreFriendRequest = "IgnoreFriendRequest",
 		JoinExperience = "JoinExperience",
@@ -97,11 +100,11 @@ return {
 		RemoveTrustedConnection = "RemoveTrustedConnection",
 		ViewPlatformProfile = "ViewPlatformProfile",
 		ViewAbout = "ViewAbout",
-		CurrencyTransfer = if fFlagProfilePlatformEnableCurrencyTransfer then "CurrencyTransfer" else "",
-		TradeItems = if fFlagProfilePlatformEnableTradeItemsModule then "TradeItems" else "",
-		ContextualOverflow = if fFlagProfilePlatformCTAsRefactorModule then "ContextualOverflow" else "",
+		CurrencyTransfer = if FFlagProfilePlatformEnableCurrencyTransfer then "CurrencyTransfer" else "",
+		TradeItems = if FFlagProfilePlatformEnableTradeItemsModule then "TradeItems" else "",
+		ContextualOverflow = "ContextualOverflow",
 		UnlockChat = "UnlockChat",
-		PlayExperience = if fFlagJoinabilityCTARefactor then "PlayExperience" else "",
+		PlayExperience = if FFlagJoinabilityCTARefactor then "PlayExperience" else "",
 		ViewProfile = "",
 		UnlockExperience = ""
 	},
@@ -135,8 +138,8 @@ return {
 		MutualConnectionsList = "MutualConnectionsList",
 		JoinGameCard = "JoinGameCard",
 		SchoolMemberList = "SchoolMemberList",
-		InExperienceProfile = if fFlagAddIEMProfilePage then "InExperienceProfile" else "",
-		MomentsFeed = if fFlagProfilePlatformEnableMomentsModule then "MomentsFeed" else ""
+		InExperienceProfile = if FFlagAddIEMProfilePage then "InExperienceProfile" else "",
+		MomentsFeed = if FFlagProfilePlatformEnableMomentsModule then "MomentsFeed" else ""
 	},
 	ContextualTypes = {
 		AccountDeleted = "AccountDeleted",
@@ -170,11 +173,11 @@ return {
 		EditProfileBackground = "EditProfileBackground",
 		CommunityVerificationModal = "CommunityVerificationModal",
 		PurchaseConfirmationModal = "PurchaseConfirmationModal",
-		TransferRobuxFlow = if fFlagProfilePlatformEnableCurrencyTransfer then "TransferRobuxFlow" else "",
-		InsufficientRobuxDialog = if fFlagSocialEnableProfileInspectAndBuy then "InsufficientRobuxDialog" else "",
-		InspectAvatarSheet = if fFlagSocialEnableProfileInspectAndBuy then "InspectAvatarSheet" else "",
-		MomentsAll = if fFlagProfilePlatformEnableMomentsModule then "MomentsAll" else "",
-		MomentsFeed = if fFlagProfilePlatformEnableMomentsModule then "MomentsFeed" else ""
+		TransferRobuxFlow = if FFlagProfilePlatformEnableCurrencyTransfer then "TransferRobuxFlow" else "",
+		InsufficientRobuxDialog = if FFlagSocialEnableProfileInspectAndBuy then "InsufficientRobuxDialog" else "",
+		InspectAvatarSheet = if FFlagSocialEnableProfileInspectAndBuy then "InspectAvatarSheet" else "",
+		MomentsAll = if FFlagProfilePlatformEnableMomentsModule then "MomentsAll" else "",
+		MomentsFeed = if FFlagProfilePlatformEnableMomentsModule then "MomentsFeed" else ""
 	},
 	NameTypes = {
 		Alias = "Alias",

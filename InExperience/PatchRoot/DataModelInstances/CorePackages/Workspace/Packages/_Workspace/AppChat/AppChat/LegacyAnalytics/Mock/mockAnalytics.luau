@@ -1,7 +1,7 @@
-﻿local roactModule = require(script:FindFirstAncestor("AppChat").Parent.Roact)
-local mockAnalyticsProviderModule = require(script.Parent.MockAnalyticsProvider)
+﻿local RoactModule = require(script:FindFirstAncestor("AppChat").Parent.Roact)
+local MockAnalyticsProviderModule = require(script.Parent.MockAnalyticsProvider)
 
-return function(p1)
-	-- upvalues: roactModule (ref), mockAnalyticsProviderModule (ref)
-	return roactModule.createElement(mockAnalyticsProviderModule, {}, { AnalyticsElement = p1 })
+return function(AnalyticsElement) --[[ Line: 7 ]]
+	-- upvalues: RoactModule (copy), MockAnalyticsProviderModule (copy)
+	return RoactModule.createElement(MockAnalyticsProviderModule, {}, { AnalyticsElement = AnalyticsElement })
 end

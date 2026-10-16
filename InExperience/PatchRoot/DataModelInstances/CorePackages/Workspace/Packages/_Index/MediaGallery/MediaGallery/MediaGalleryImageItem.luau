@@ -1,57 +1,77 @@
-﻿local mediaGallery = script:FindFirstAncestor("MediaGallery")
-local parent = mediaGallery.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local useTokens = foundationModule.Hooks.useTokens
-local iconButton = foundationModule.IconButton
-local inputSize = foundationModule.Enums.InputSize
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local image = foundationModule.Image
-local _ = require(mediaGallery.MediaGalleryTypes)
-local getImageUriModule = require(mediaGallery.getImageUri)
+﻿local MediaGallery = script:FindFirstAncestor("MediaGallery")
+local Parent = MediaGallery.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local IconButton = FoundationModule.IconButton
+local InputSize = FoundationModule.Enums.InputSize
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local Image = FoundationModule.Image
+local _ = require(MediaGallery.MediaGalleryTypes)
+local GetImageUriModule = require(MediaGallery.getImageUri)
 
-return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), getImageUriModule (ref), image (ref), iconButton (ref), foundationModule (ref), inputSize (ref), buttonVariant (ref)
-	local var1 = useTokens()
-	local imageId = p1.imageId
+return ReactModule.memo(function(p1) --[[ Line: 35 | Named "MediaGalleryImageItem" ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), GetImageUriModule (copy), Image (copy), IconButton (copy), FoundationModule (copy), InputSize (copy), ButtonVariant (copy)
+	local UseTokensResult = UseTokensFunction()
+	local ImageId = p1.imageId
 	
-	if p1.isYouTubeVideo and (imageId == nil or imageId == "") and p1.videoHash then
-		imageId = string.format("https://img.youtube.com/vi/%s/hqdefault.jpg", p1.videoHash)
+	if p1.isYouTubeVideo and (ImageId == nil or ImageId == "") and p1.videoHash then
+		ImageId = string.format("https://img.youtube.com/vi/%s/hqdefault.jpg", p1.videoHash)
 	end
-	local uDim = UDim.new(0, p1.cornerRadius or var1.Radius.Medium)
-	reactModule.useEffect(function()
-		-- upvalues: imageId (write), getImageUriModule (copy)
-		if imageId then
-			task.spawn(function()
-				-- upvalues: getImageUriModule (copy), imageId (copy)
-				local imageLabel = Instance.new("ImageLabel")
-				imageLabel.Image = getImageUriModule(imageId)
-				game:GetService("ContentProvider"):PreloadAsync({ imageLabel })
-				imageLabel:Destroy()
+	local _UDim = UDim.new(0, p1.cornerRadius or UseTokensResult.Radius.Medium)
+	ReactModule.useEffect(function() --[[ Line: 44 ]]
+		-- upvalues: ImageId (ref), GetImageUriModule (upval)
+		if ImageId then
+			task.spawn(function() --[[ Line: 46 ]]
+				-- upvalues: GetImageUriModule (upval), ImageId (upval)
+				local Image = Instance.new("ImageLabel")
+				Image.Image = GetImageUriModule(ImageId)
+				game:GetService("ContentProvider"):PreloadAsync({ Image })
+				Image:Destroy()
 			end)
 		end
-	end, { imageId })
+	end, { ImageId })
+	local UseResult = ReactModule.useCallback(function(AssetFetchStatus) --[[ Line: 55 ]]
+		-- upvalues: p1 (copy)
+		if p1.onMediaResolved then
+			p1.onMediaResolved(AssetFetchStatus == Enum.AssetFetchStatus.Success)
+		end
+	end, { p1.onMediaResolved })
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 61 ]]
+		-- upvalues: p1 (copy), ImageId (ref)
+		if p1.onYouTubeVideoPlay then
+			p1.onYouTubeVideoPlay({
+				index = p1.itemIndex,
+				imageId = ImageId,
+				videoHash = p1.videoHash or "",
+				videoTitle = p1.videoTitle
+			})
+			
+			return
+		end
+	end, {
+		p1.videoHash,
+		p1.videoTitle,
+		ImageId,
+		p1.onYouTubeVideoPlay,
+		p1.itemIndex
+	})
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
 		LayoutOrder = p1.itemIndex,
 		Size = p1.Size
 	}, {
-		Image = reactModule.createElement(image, {
+		Image = ReactModule.createElement(Image, {
 			ZIndex = 1,
-			cornerRadius = uDim,
+			cornerRadius = _UDim,
 			Size = UDim2.fromScale(1, 1),
-			Image = getImageUriModule(imageId),
+			Image = GetImageUriModule(ImageId),
 			ScaleType = Enum.ScaleType.Crop,
-			onLoaded = if p1.onMediaResolved then reactModule.useCallback(function(p2)
-				-- upvalues: p1 (ref)
-				if p1.onMediaResolved then
-					p1.onMediaResolved(p2 == Enum.AssetFetchStatus.Success)
-				end
-			end, { p1.onMediaResolved }) else nil
+			onLoaded = if p1.onMediaResolved then UseResult else nil
 		}),
-		GradientOverlay = if p1.showGradient == false or not p1.gradientOverlayHeight then nil else reactModule.createElement("Frame", {
+		GradientOverlay = if p1.showGradient == false or not p1.gradientOverlayHeight then nil else ReactModule.createElement("Frame", {
 			BorderSizePixel = 0,
 			ZIndex = 2,
 			AnchorPoint = Vector2.new(0, 1),
@@ -59,44 +79,26 @@ return reactModule.memo(function(p1)
 			Size = UDim2.new(1, 0, 0, p1.gradientOverlayHeight),
 			BackgroundColor3 = Color3.new(0, 0, 0)
 		}, {
-			Gradient = reactModule.createElement("UIGradient", {
+			Gradient = ReactModule.createElement("UIGradient", {
 				Rotation = 90,
 				Transparency = NumberSequence.new({
 					NumberSequenceKeypoint.new(0, 1),
 					NumberSequenceKeypoint.new(1, 0.2)
 				})
 			}),
-			UICorner = reactModule.createElement("UICorner", { CornerRadius = uDim })
+			UICorner = ReactModule.createElement("UICorner", { CornerRadius = _UDim })
 		}),
-		PlayButton = if p1.isYouTubeVideo then reactModule.createElement(iconButton, {
+		PlayButton = if p1.isYouTubeVideo then ReactModule.createElement(IconButton, {
 			isCircular = true,
 			ZIndex = 3,
-			icon = { name = foundationModule.Enums.IconName.PlayLarge },
-			size = inputSize.Large,
-			variant = buttonVariant.OverMedia,
-			onActivated = reactModule.useCallback(function()
-				-- upvalues: p1 (ref), imageId (write)
-				if p1.onYouTubeVideoPlay then
-					p1.onYouTubeVideoPlay({
-						index = p1.itemIndex,
-						imageId = imageId,
-						videoHash = p1.videoHash or "",
-						videoTitle = p1.videoTitle
-					})
-					
-					return
-				end
-			end, {
-				p1.videoHash,
-				p1.videoTitle,
-				imageId,
-				p1.onYouTubeVideoPlay,
-				p1.itemIndex
-			}),
+			icon = { name = FoundationModule.Enums.IconName.PlayLarge },
+			size = InputSize.Large,
+			variant = ButtonVariant.OverMedia,
+			onActivated = UseResult1,
 			AnchorPoint = Vector2.new(1, 1),
-			Position = UDim2.new(1, -var1.Size.Size_500, 1, -var1.Size.Size_500)
+			Position = UDim2.new(1, -UseTokensResult.Size.Size_500, 1, -UseTokensResult.Size.Size_500)
 		}) else nil,
-		ItemOverlay = if p1.overlay then reactModule.createElement("Frame", {
+		ItemOverlay = if p1.overlay then ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			ZIndex = 5,
 			Size = UDim2.fromScale(1, 1)

@@ -1,21 +1,21 @@
-﻿local timeToInteractiveTracker = script:FindFirstAncestor("TimeToInteractiveTracker")
-local reactModule = require(timeToInteractiveTracker.Parent.React)
-local constantsModule = require(timeToInteractiveTracker.Milestones.constants)
-local _ = require(timeToInteractiveTracker.Milestones.types)
+﻿local TimeToInteractiveTracker = script:FindFirstAncestor("TimeToInteractiveTracker")
+local ReactModule = require(TimeToInteractiveTracker.Parent.React)
+local ConstantsModule = require(TimeToInteractiveTracker.Milestones.constants)
+local _ = require(TimeToInteractiveTracker.Milestones.types)
 
-return function(value)
-	-- upvalues: reactModule (ref), constantsModule (ref)
-	return function(p1)
-		-- upvalues: reactModule (copy), value (ref), constantsModule (copy)
-		local var1 = reactModule.useRef(false)
+return function(Callback) --[[ Line: 25 | Named "createUseTTIRenderAndMountedTracking" ]]
+	-- upvalues: ReactModule (copy), ConstantsModule (copy)
+	return function(p1) --[[ Line: 26 ]]
+		-- upvalues: ReactModule (upval), Callback (copy), ConstantsModule (upval)
+		local UseRefResult = ReactModule.useRef(false)
 		
-		if not var1.current then
-			var1.current = true
-			value(p1, constantsModule.RenderStarted)
+		if not UseRefResult.current then
+			UseRefResult.current = true
+			Callback(p1, ConstantsModule.RenderStarted)
 		end
-		reactModule.useEffect(function()
-			-- upvalues: value (copy), p1 (ref), constantsModule (copy)
-			value(p1, constantsModule.SurfaceMounted)
+		ReactModule.useEffect(function() --[[ Line: 34 ]]
+			-- upvalues: Callback (upval), p1 (copy), ConstantsModule (upval)
+			Callback(p1, ConstantsModule.SurfaceMounted)
 		end, {})
 	end
 end

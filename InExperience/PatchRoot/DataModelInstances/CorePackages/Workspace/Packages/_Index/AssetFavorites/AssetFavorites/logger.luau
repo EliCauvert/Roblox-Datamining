@@ -1,23 +1,23 @@
-﻿local assetFavorites = require(script:FindFirstAncestor("AssetFavorites").Parent.Lumberyak).Logger.new(nil, "AssetFavorites")
-local ok, status = pcall(function()
+﻿local AssetFavorites = require(script:FindFirstAncestor("AssetFavorites").Parent.Lumberyak).Logger.new(nil, "AssetFavorites")
+local Success, Result = pcall(function() --[[ Line: 7 ]]
 	return {
 		level = game:DefineFastString("DebugLuaLogLevel", ""),
 		pattern = game:DefineFastString("DebugLuaLogPattern", "")
 	}
 end)
 
-if not ok then
-	status = { level = "debug", pattern = "" }
+if not Success then
+	Result = { level = "debug", pattern = "" }
 end
-assetFavorites:setContext({ prefix = "[{loggerName} - {level}] - " })
-assetFavorites:addSink({
-	maxLevel = assetFavorites.Levels.fromString(status.level),
-	log = function(_, p1, _)
-		-- upvalues: status (write)
-		if p1:match(status.pattern) then
+AssetFavorites:setContext({ prefix = "[{loggerName} - {level}] - " })
+AssetFavorites:addSink({
+	maxLevel = AssetFavorites.Levels.fromString(Result.level),
+	log = function(_, p1, _) --[[ Line: 24 ]]
+		-- upvalues: Result (ref)
+		if p1:match(Result.pattern) then
 			print(p1)
 		end
 	end
 })
 
-return assetFavorites
+return AssetFavorites

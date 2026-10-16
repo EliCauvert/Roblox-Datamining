@@ -1,51 +1,51 @@
 ﻿local _ = game:GetService("ScriptContext")
-local httpService = game:GetService("HttpService")
-local signalModule = require(script.Parent.Parent.Parent.Signal)
-local getClientReplicatorModule = require(script.Parent.Parent.Parent.Util.getClientReplicator)
-local t = {}
-t.__index = t
+local HttpService = game:GetService("HttpService")
+local SignalModule = require(script.Parent.Parent.Parent.Signal)
+local GetClientReplicatorModule = require(script.Parent.Parent.Parent.Util.getClientReplicator)
+local LuauHeapDataModule = {}
+LuauHeapDataModule.__index = LuauHeapDataModule
 
-function t.new()
-	-- upvalues: t (ref), signalModule (ref)
-	local t_1 = {}
-	setmetatable(t_1, t)
-	t_1._serverStatsUpdated = signalModule.new()
-	t_1._serverStatsData = {}
-	t_1._isRunning = false
+function LuauHeapDataModule.new() --[[ Line: 13 ]]
+	-- upvalues: LuauHeapDataModule (copy), SignalModule (copy)
+	local t = {}
+	setmetatable(t, LuauHeapDataModule)
+	t._serverStatsUpdated = SignalModule.new()
+	t._serverStatsData = {}
+	t._isRunning = false
 	
-	return t_1
+	return t
 end
 
-function t:Signal()
+function LuauHeapDataModule:Signal() --[[ Line: 23 ]]
 	return self._serverStatsUpdated
 end
 
-function t:getCurrentData()
+function LuauHeapDataModule:getCurrentData() --[[ Line: 27 ]]
 	return self._serverStatsData
 end
 
-function t:isRunning()
+function LuauHeapDataModule:isRunning() --[[ Line: 31 ]]
 	return self._isRunning
 end
 
-function t:start()
-	-- upvalues: getClientReplicatorModule (ref), httpService (ref)
-	local var1 = getClientReplicatorModule()
+function LuauHeapDataModule:start() --[[ Line: 35 ]]
+	-- upvalues: GetClientReplicatorModule (copy), HttpService (copy)
+	local ClientReplicatorModule = GetClientReplicatorModule()
 	
-	if var1 and not self._statsListenerConnection then
-		self._statsListenerConnection = var1.StatsReceived:connect(function(p1)
-			-- upvalues: self (ref), httpService (copy)
-			if p1 and p1.ServerLuauHeapData and #p1.ServerLuauHeapData > 0 then
-				self._serverStatsData = httpService:JSONDecode(p1.ServerLuauHeapData)
+	if ClientReplicatorModule and not self._statsListenerConnection then
+		self._statsListenerConnection = ClientReplicatorModule.StatsReceived:connect(function(Stats) --[[ Line: 38 ]]
+			-- upvalues: self (copy), HttpService (upval)
+			if Stats and Stats.ServerLuauHeapData and #Stats.ServerLuauHeapData > 0 then
+				self._serverStatsData = HttpService:JSONDecode(Stats.ServerLuauHeapData)
 				self._serverStatsUpdated:Fire(self._serverStatsData)
 			end
 		end)
-		var1:RequestServerStats(true)
+		ClientReplicatorModule:RequestServerStats(true)
 		self._isRunning = true
 	end
 end
 
-function t:stop()
+function LuauHeapDataModule:stop() --[[ Line: 49 ]]
 	if self._statsListenerConnection then
 		self._statsListenerConnection:Disconnect()
 		self._statsListenerConnection = nil
@@ -53,4 +53,4 @@ function t:stop()
 	self._isRunning = false
 end
 
-return t
+return LuauHeapDataModule

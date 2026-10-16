@@ -1,24 +1,39 @@
-﻿local platformModule = require(script.Parent.Platform)
-local getInputPlatformModule = require(script.Parent.getInputPlatform)
-local platformIconMapModule = require(script.Parent.PlatformIconMap)
-local userInputService = require(script.Parent.Parent.Services).UserInputService
-local guiService = require(script.Parent.Parent.Services).GuiService
-local t = {
-	[platformModule.PS4] = Enum.Platform.PS4,
-	[platformModule.PS5] = Enum.Platform.PS5,
-	[platformModule.Xbox] = Enum.Platform.XBoxOne
+﻿local PlatformModule = require(script.Parent.Platform)
+local GetInputPlatformModule = require(script.Parent.getInputPlatform)
+local PlatformIconMapModule = require(script.Parent.PlatformIconMap)
+local UserInputService = require(script.Parent.Parent.Services).UserInputService
+local GuiService = require(script.Parent.Parent.Services).GuiService
+local config = {
+	[PlatformModule.PS4] = Enum.Platform.PS4,
+	[PlatformModule.PS5] = Enum.Platform.PS5,
+	[PlatformModule.Xbox] = Enum.Platform.XBoxOne
 }
 
-local function _()
-	-- upvalues: userInputService (ref), guiService (ref), getInputPlatformModule (ref), t (ref)
-	local ok, status = pcall(userInputService.GetPlatform, userInputService)
+local function _() --[[ Line: 13 | Named "getPlatform" ]]
+	-- upvalues: UserInputService (copy), GuiService (copy), GetInputPlatformModule (copy), config (copy)
+	local Success, Result = pcall(UserInputService.GetPlatform, UserInputService)
 	
-	return if ok then status elseif guiService:IsTenFootInterface() then t[getInputPlatformModule()] else nil
+	if Success then
+		return Result
+	else
+		local IsTenFootInterface = GuiService:IsTenFootInterface()
+		local InputPlatformModule = GetInputPlatformModule()
+		
+		return if IsTenFootInterface then config[InputPlatformModule] else nil
+	end
 end
 
-return function()
-	-- upvalues: userInputService (ref), guiService (ref), getInputPlatformModule (ref), t (ref), platformIconMapModule (ref)
-	local ok, status = pcall(userInputService.GetPlatform, userInputService)
+return function() --[[ Line: 27 | Named "getBuilderIconForCurrentPlatform" ]]
+	-- upvalues: UserInputService (copy), GuiService (copy), GetInputPlatformModule (copy), config (copy), PlatformIconMapModule (copy)
+	local Success, Result = pcall(UserInputService.GetPlatform, UserInputService)
+	local Result1 = nil
 	
-	return platformIconMapModule[if ok then status elseif guiService:IsTenFootInterface() then t[getInputPlatformModule()] else nil]
+	if Success then
+		Result1 = Result
+	else
+		local IsTenFootInterface = GuiService:IsTenFootInterface()
+		local InputPlatformModule = GetInputPlatformModule()
+		Result1 = if IsTenFootInterface then config[InputPlatformModule] else nil
+	end
+	return PlatformIconMapModule[Result1]
 end

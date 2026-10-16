@@ -1,29 +1,29 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local userInputService = require(foundation.Utility.Wrappers.Services).UserInputService
-local _ = require(foundation.Enums.InputPlatform)
-local detectInputPlatformModule = require(script.Parent.detectInputPlatform)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local UserInputService = require(Foundation.Utility.Wrappers.Services).UserInputService
+local _ = require(Foundation.Enums.InputPlatform)
+local DetectInputPlatformModule = require(script.Parent.detectInputPlatform)
 
-return function()
-	-- upvalues: reactModule (ref), detectInputPlatformModule (ref), userInputService (ref)
-	local var1, var2 = reactModule.useState(detectInputPlatformModule)
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), detectInputPlatformModule (copy), userInputService (copy)
-		local function refresh()
-			-- upvalues: var2 (copy), detectInputPlatformModule (copy)
-			var2(detectInputPlatformModule())
+return function() --[[ Line: 24 | Named "useInputPlatform" ]]
+	-- upvalues: ReactModule (copy), DetectInputPlatformModule (copy), UserInputService (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(DetectInputPlatformModule)
+	ReactModule.useEffect(function() --[[ Line: 27 ]]
+		-- upvalues: UseStateResult2 (copy), DetectInputPlatformModule (upval), UserInputService (upval)
+		local function refresh() --[[ Line: 28 ]]
+			-- upvalues: UseStateResult2 (upval), DetectInputPlatformModule (upval)
+			UseStateResult2(DetectInputPlatformModule())
 		end
 		
-		local gamepadConnectedConnection = userInputService.GamepadConnected:Connect(refresh)
-		local gamepadDisconnectedConnection = userInputService.GamepadDisconnected:Connect(refresh)
-		var2(detectInputPlatformModule())
+		local GamepadConnectedConnection = UserInputService.GamepadConnected:Connect(refresh)
+		local GamepadDisconnectedConnection = UserInputService.GamepadDisconnected:Connect(refresh)
+		UseStateResult2(DetectInputPlatformModule())
 		
-		return function()
-			-- upvalues: gamepadConnectedConnection (ref), gamepadDisconnectedConnection (ref)
-			gamepadConnectedConnection:Disconnect()
-			gamepadDisconnectedConnection:Disconnect()
+		return function() --[[ Line: 37 ]]
+			-- upvalues: GamepadConnectedConnection (copy), GamepadDisconnectedConnection (copy)
+			GamepadConnectedConnection:Disconnect()
+			GamepadDisconnectedConnection:Disconnect()
 		end
 	end, {})
 	
-	return var1
+	return UseStateResult
 end

@@ -1,28 +1,28 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local appChatToastEventReceiverModule = require(appChat.Components.EventReceivers.AppChatToastEventReceiver)
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagExpChatEnableFriendsTab = sharedFlagsModule.FFlagExpChatEnableFriendsTab
-local getFFlagAppChatInExpToastSnoozeMenuDismissFix = sharedFlagsModule.GetFFlagAppChatInExpToastSnoozeMenuDismissFix
-local friendsSurfaceVisibility = require(parent.ExpChatShared).FriendsSurfaceVisibility
-local t = { hideAllChatToasts = false, isAppChatVisible = false }
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local AppChatToastEventReceiverModule = require(AppChat.Components.EventReceivers.AppChatToastEventReceiver)
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagExpChatEnableFriendsTab = SharedFlagsModule.FFlagExpChatEnableFriendsTab
+local GetFFlagAppChatInExpToastSnoozeMenuDismissFixFunction = SharedFlagsModule.GetFFlagAppChatInExpToastSnoozeMenuDismissFix
+local FriendsSurfaceVisibility = require(Parent.ExpChatShared).FriendsSurfaceVisibility
+local config = { hideAllChatToasts = false, isAppChatVisible = false }
 
-function AppChatToastManagerInExp(p1)
-	-- upvalues: cryoModule (ref), t (ref), fFlagExpChatEnableFriendsTab (ref), signalsReactModule (ref), friendsSurfaceVisibility (ref), reactModule (ref), appChatToastEventReceiverModule (ref), getFFlagAppChatInExpToastSnoozeMenuDismissFix (ref)
-	local var1 = cryoModule.Dictionary.join(t, p1)
+function AppChatToastManagerInExp(p1) --[[ Line: 26 ]]
+	-- upvalues: CryoModule (copy), config (copy), FFlagExpChatEnableFriendsTab (copy), SignalsReactModule (copy), FriendsSurfaceVisibility (copy), ReactModule (copy), AppChatToastEventReceiverModule (copy), GetFFlagAppChatInExpToastSnoozeMenuDismissFixFunction (copy)
+	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	
-	return reactModule.createElement(appChatToastEventReceiverModule, {
+	return ReactModule.createElement(AppChatToastEventReceiverModule, {
 		isInExperience = true,
-		navigateToChat = reactModule.useCallback(function(p2)
-			-- upvalues: var1 (ref)
-			var1.navigateToChat(p2)
-		end, { var1.navigateToChat }),
-		hideAllChatToasts = if getFFlagAppChatInExpToastSnoozeMenuDismissFix() then nil else var1.hideAllChatToasts,
-		isAppChatVisible = if getFFlagAppChatInExpToastSnoozeMenuDismissFix() then var1.isAppChatVisible else nil,
-		visibleFriendsConversationId = if fFlagExpChatEnableFriendsTab then signalsReactModule.useSignalState(friendsSurfaceVisibility.getVisibleConversationId) else nil
+		navigateToChat = ReactModule.useCallback(function(p2) --[[ Line: 34 ]]
+			-- upvalues: JoinResult (copy)
+			JoinResult.navigateToChat(p2)
+		end, { JoinResult.navigateToChat }),
+		hideAllChatToasts = if GetFFlagAppChatInExpToastSnoozeMenuDismissFixFunction() then nil else JoinResult.hideAllChatToasts,
+		isAppChatVisible = if GetFFlagAppChatInExpToastSnoozeMenuDismissFixFunction() then JoinResult.isAppChatVisible else nil,
+		visibleFriendsConversationId = if FFlagExpChatEnableFriendsTab then SignalsReactModule.useSignalState(FriendsSurfaceVisibility.getVisibleConversationId) else nil
 	})
 end
 

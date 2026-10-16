@@ -1,10 +1,10 @@
-﻿local parent = script.Parent.Parent
+﻿local Parent = script.Parent.Parent
 
-return require(parent.Parent.Rodux).createReducer(true, {
-	[require(parent.Actions.CapturesCoreGuiDisabled).name] = function(_, _)
+return require(Parent.Parent.Rodux).createReducer(true, {
+	[require(Parent.Actions.CapturesCoreGuiDisabled).name] = function(_, _): boolean --[[ Line: 14 ]]
 		return false
 	end,
-	[require(parent.Actions.CapturesCoreGuiEnabled).name] = function(_, _)
+	[require(Parent.Actions.CapturesCoreGuiEnabled).name] = function(_, _): boolean --[[ Line: 18 ]]
 		return true
 	end
 })

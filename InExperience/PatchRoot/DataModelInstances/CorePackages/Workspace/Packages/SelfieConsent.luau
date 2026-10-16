@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.SelfieConsent.SelfieConsent)
+﻿return (require(script.Parent._Workspace.SelfieConsent.SelfieConsent))

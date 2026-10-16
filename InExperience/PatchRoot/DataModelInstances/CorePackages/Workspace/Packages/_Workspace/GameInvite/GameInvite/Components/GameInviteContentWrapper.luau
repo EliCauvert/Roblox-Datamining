@@ -1,20 +1,19 @@
-﻿local gameInvite = script:FindFirstAncestor("GameInvite")
-local components = gameInvite.Components
-local reactModule = require(gameInvite.Parent.React)
-local gameInviteContextProviderModule = require(gameInvite.Context.GameInviteContextProvider)
-local gameInviteContentModule = require(components.GameInviteContent)
-local _ = require(gameInvite.gameInviteModalType)
+﻿local GameInvite = script:FindFirstAncestor("GameInvite")
+local ReactModule = require(GameInvite.Parent.React)
+local GameInviteContextProviderModule = require(GameInvite.Context.GameInviteContextProvider)
+local GameInviteContentModule = require(GameInvite.Components.GameInviteContent)
+local _ = require(GameInvite.gameInviteModalType)
 
-return function(p1)
-	-- upvalues: reactModule (ref), gameInviteContextProviderModule (ref), gameInviteContentModule (ref)
-	return reactModule.createElement(gameInviteContextProviderModule, {
+return function(p1) --[[ Line: 22 ]]
+	-- upvalues: ReactModule (copy), GameInviteContextProviderModule (copy), GameInviteContentModule (copy)
+	return ReactModule.createElement(GameInviteContextProviderModule, {
 		options = p1.options,
 		serverType = p1.serverType,
 		gameDetails = p1.gameDetails,
 		isLoadingCustomParams = p1.isLoading,
 		isCoreScript = p1.isCoreScript
 	}, {
-		GameInviteContent = reactModule.createElement(gameInviteContentModule, {
+		GameInviteContent = ReactModule.createElement(GameInviteContentModule, {
 			isLoadingCustomParams = p1.isLoading,
 			disableSelectionParentManagement = p1.disableSelectionParentManagement,
 			hideCloseButton = p1.hideCloseButton

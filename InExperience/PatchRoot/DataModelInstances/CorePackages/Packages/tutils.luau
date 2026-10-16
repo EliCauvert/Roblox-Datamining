@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Index.tutils.tutils)
+﻿return (require(script.Parent._Index.tutils.tutils))

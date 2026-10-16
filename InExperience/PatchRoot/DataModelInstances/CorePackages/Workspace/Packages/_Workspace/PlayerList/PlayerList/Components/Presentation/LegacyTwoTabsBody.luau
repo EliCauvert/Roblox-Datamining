@@ -1,111 +1,111 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local reactModule = require(parent_1.React)
-local signalsReactModule = require(parent_1.SignalsReact)
-local foundationModule = require(parent_1.Foundation)
-local foundationProvider = foundationModule.FoundationProvider
-local view = foundationModule.View
-local theme = foundationModule.Enums.Theme
-local localizationService = game:GetService("LocalizationService")
-local inExperienceLocalesModule = require(parent_1.InExperienceLocales)
-local localizationProvider = require(parent_1.Localization).LocalizationProvider
-local useLegacyVisibilityMirrorModule = require(parent.Hooks.useLegacyVisibilityMirror)
-local leaderboardTabsModule = require(parent.Components.Presentation.LeaderboardTabs)
-local platformLeaderboardViewModule = require(parent.Components.Presentation.PlatformLeaderboardView)
-local constantsModule = require(parent.Common.Constants)
-local fFlagPlayerListFixPlatformLeaderboardSizingModule = require(parent.Flags.FFlagPlayerListFixPlatformLeaderboardSizing)
-local fFlagPlayerListLocalizeGameTextModule = require(parent.Flags.FFlagPlayerListLocalizeGameText)
-local fFlagPlayerListTwoTabsOnLegacyPerformanceModule = require(parent.Flags.FFlagPlayerListTwoTabsOnLegacyPerformance)
-local fFlagPlatformLeaderboardsExposure3EnabledModule = require(parent.Flags.FFlagPlatformLeaderboardsExposure3Enabled)
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
+local SignalsReactModule = require(Parent1.SignalsReact)
+local FoundationModule = require(Parent1.Foundation)
+local FoundationProvider = FoundationModule.FoundationProvider
+local View = FoundationModule.View
+local Theme = FoundationModule.Enums.Theme
+local LocalizationService = game:GetService("LocalizationService")
+local InExperienceLocalesModule = require(Parent1.InExperienceLocales)
+local LocalizationProvider = require(Parent1.Localization).LocalizationProvider
+local UseLegacyVisibilityMirrorModule = require(Parent.Hooks.useLegacyVisibilityMirror)
+local LeaderboardTabsModule = require(Parent.Components.Presentation.LeaderboardTabs)
+local PlatformLeaderboardViewModule = require(Parent.Components.Presentation.PlatformLeaderboardView)
+local ConstantsModule = require(Parent.Common.Constants)
+local FFlagPlayerListFixPlatformLeaderboardSizingModule = require(Parent.Flags.FFlagPlayerListFixPlatformLeaderboardSizing)
+local FFlagPlayerListLocalizeGameTextModule = require(Parent.Flags.FFlagPlayerListLocalizeGameText)
+local FFlagPlayerListTwoTabsOnLegacyPerformanceModule = require(Parent.Flags.FFlagPlayerListTwoTabsOnLegacyPerformance)
+local FFlagPlatformLeaderboardsExposure3EnabledModule = require(Parent.Flags.FFlagPlatformLeaderboardsExposure3Enabled)
 
-return reactModule.memo(function(value)
-	-- upvalues: reactModule (ref), fFlagPlayerListLocalizeGameTextModule (ref), inExperienceLocalesModule (ref), localizationService (ref), fFlagPlayerListTwoTabsOnLegacyPerformanceModule (ref), useLegacyVisibilityMirrorModule (ref), signalsReactModule (ref), fFlagPlayerListFixPlatformLeaderboardSizingModule (ref), constantsModule (ref), view (ref), platformLeaderboardViewModule (ref), leaderboardTabsModule (ref), fFlagPlatformLeaderboardsExposure3EnabledModule (ref), localizationProvider (ref), foundationProvider (ref), theme (ref)
-	local frame
-	local server, server_1 = reactModule.useState("server")
-	local var1 = if fFlagPlayerListLocalizeGameTextModule then reactModule.useMemo(function()
-		-- upvalues: inExperienceLocalesModule (copy), localizationService (copy)
-		return inExperienceLocalesModule.Localization.new(localizationService.RobloxLocaleId)
+return ReactModule.memo(function(p1) --[[ Line: 41 | Named "LegacyTwoTabsBody" ]]
+	-- upvalues: ReactModule (copy), FFlagPlayerListLocalizeGameTextModule (copy), InExperienceLocalesModule (copy), LocalizationService (copy), FFlagPlayerListTwoTabsOnLegacyPerformanceModule (copy), UseLegacyVisibilityMirrorModule (copy), SignalsReactModule (copy), FFlagPlayerListFixPlatformLeaderboardSizingModule (copy), ConstantsModule (copy), View (copy), PlatformLeaderboardViewModule (copy), LeaderboardTabsModule (copy), FFlagPlatformLeaderboardsExposure3EnabledModule (copy), LocalizationProvider (copy), FoundationProvider (copy), Theme (copy)
+	local Server, Server2 = ReactModule.useState("server")
+	local UseMemoResult = if FFlagPlayerListLocalizeGameTextModule then ReactModule.useMemo(function() --[[ Line: 46 ]]
+		-- upvalues: InExperienceLocalesModule (upval), LocalizationService (upval)
+		return InExperienceLocalesModule.Localization.new(LocalizationService.RobloxLocaleId)
 	end, {}) else nil
-	local var2 = reactModule.useCallback(function()
-		-- upvalues: server_1 (ref)
-		server_1("server")
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 51 ]]
+		-- upvalues: Server2 (copy)
+		Server2("server")
 	end, {})
-	local var3 = if server ~= "server" then not (if fFlagPlayerListTwoTabsOnLegacyPerformanceModule then value.isVisible else signalsReactModule.useSignalState(useLegacyVisibilityMirrorModule(value.isVisible))) else true
-	local var4 = value.platformBodyHeight == nil
-	local _ = nil
+	local IsVisible = if FFlagPlayerListTwoTabsOnLegacyPerformanceModule then p1.isVisible else SignalsReactModule.useSignalState((UseLegacyVisibilityMirrorModule(p1.isVisible)))
+	local IsServer: boolean = Server == "server" or not IsVisible
+	local NoPlatformBodyHeight = p1.platformBodyHeight == nil
+	local Frame = nil
 	
-	if var3 then
-		frame = if var4 then reactModule.createElement("Frame", {
+	if IsServer then
+		Frame = if NoPlatformBodyHeight then ReactModule.createElement("Frame", {
 			Name = "LegacyTwoTabsServerBody",
 			LayoutOrder = 3,
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			Size = UDim2.fromScale(1, 1)
-		}, { ServerBody = value.serverBody }) else value.serverBody
+		}, { ServerBody = p1.serverBody }) else p1.serverBody
 	else
-		local var5 = if server == "friends" then "Friends" else "Global"
-		local platformBodyHeight = value.platformBodyHeight
+		local Friends: string = if Server == "friends" then "Friends" else "Global"
+		local PlatformBodyHeight = p1.platformBodyHeight
 		
-		if fFlagPlayerListFixPlatformLeaderboardSizingModule and platformBodyHeight ~= nil then
-			platformBodyHeight = math.max(platformBodyHeight, constantsModule.PLATFORM_BODY_MIN_HEIGHT)
+		if FFlagPlayerListFixPlatformLeaderboardSizingModule and PlatformBodyHeight ~= nil then
+			PlatformBodyHeight = math.max(PlatformBodyHeight, ConstantsModule.PLATFORM_BODY_MIN_HEIGHT)
 		end
-		frame = reactModule.createElement("Frame", {
+		Frame = ReactModule.createElement("Frame", {
 			Name = "LegacyTwoTabsPlatformBody",
 			LayoutOrder = 3,
 			BorderSizePixel = 0,
 			ClipsDescendants = true,
-			Size = if platformBodyHeight then UDim2.new(1, 0, 0, platformBodyHeight) else UDim2.new(1, 0, 1, 0),
-			BackgroundColor3 = value.backgroundColor,
-			BackgroundTransparency = value.backgroundTransparency
+			Size = if PlatformBodyHeight then UDim2.new(1, 0, 0, PlatformBodyHeight) else UDim2.new(1, 0, 1, 0),
+			BackgroundColor3 = p1.backgroundColor,
+			BackgroundTransparency = p1.backgroundTransparency
 		}, {
-			FlexRoot = reactModule.createElement(view, { tag = "col", Size = UDim2.fromScale(1, 1) }, {
-				PlatformLeaderboardView = reactModule.createElement(platformLeaderboardViewModule, {
+			FlexRoot = ReactModule.createElement(View, { tag = "col", Size = UDim2.fromScale(1, 1) }, {
+				PlatformLeaderboardView = ReactModule.createElement(PlatformLeaderboardViewModule, {
 					layoutOrder = 1,
-					tab = var5,
-					legacyPanelBackgroundColor = value.backgroundColor,
-					legacyPanelBackgroundTransparency = value.backgroundTransparency
+					tab = Friends,
+					legacyPanelBackgroundColor = p1.backgroundColor,
+					legacyPanelBackgroundTransparency = p1.backgroundTransparency
 				})
 			})
 		})
 	end
-	local t = {
+	local config = {
 		BackgroundTransparency = 1,
-		LayoutOrder = value.layoutOrder,
-		Size = if var4 then UDim2.fromScale(1, 1) else UDim2.new(1, 0, 0, 0)
+		LayoutOrder = p1.layoutOrder,
+		Size = if NoPlatformBodyHeight then UDim2.fromScale(1, 1) else UDim2.new(1, 0, 0, 0)
 	}
 	
-	if not var4 then
-		t.AutomaticSize = Enum.AutomaticSize.Y
+	if not NoPlatformBodyHeight then
+		config.AutomaticSize = Enum.AutomaticSize.Y
 	end
-	local frame_1 = reactModule.createElement("Frame", t, {
-		UIListLayout = reactModule.createElement("UIListLayout", {
+	local Frame1 = ReactModule.createElement("Frame", config, {
+		UIListLayout = ReactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			FillDirection = Enum.FillDirection.Vertical,
 			VerticalAlignment = Enum.VerticalAlignment.Top,
 			HorizontalAlignment = Enum.HorizontalAlignment.Left
 		}),
-		TabsRow = reactModule.createElement("Frame", {
+		TabsRow = ReactModule.createElement("Frame", {
 			Name = "LegacyTwoTabsTabsRow",
 			LayoutOrder = 1,
 			BorderSizePixel = 0,
 			AutomaticSize = Enum.AutomaticSize.Y,
 			Size = UDim2.new(1, 0, 0, 0),
-			BackgroundColor3 = value.backgroundColor,
-			BackgroundTransparency = value.backgroundTransparency
+			BackgroundColor3 = p1.backgroundColor,
+			BackgroundTransparency = p1.backgroundTransparency
 		}, {
-			LeaderboardTabs = reactModule.createElement(leaderboardTabsModule, {
-				activeTabId = server,
-				onActivated = server_1,
-				onPlatformTabsUnavailable = var2,
-				isVisible = if fFlagPlatformLeaderboardsExposure3EnabledModule then value.isVisible else nil
+			LeaderboardTabs = ReactModule.createElement(LeaderboardTabsModule, {
+				activeTabId = Server,
+				onActivated = Server2,
+				onPlatformTabsUnavailable = UseResult,
+				isVisible = if FFlagPlatformLeaderboardsExposure3EnabledModule then p1.isVisible else nil
 			})
 		}),
-		TitleBar = if var3 then value.titleBar else nil,
-		Body = frame
+		TitleBar = if IsServer then p1.titleBar else nil,
+		Body = Frame
 	})
 	
-	if fFlagPlayerListLocalizeGameTextModule then
-		frame_1 = reactModule.createElement(localizationProvider, { localization = var1 }, { Column = frame_1 })
+	if FFlagPlayerListLocalizeGameTextModule then
+		Frame1 = ReactModule.createElement(LocalizationProvider, { localization = UseMemoResult }, { Column = Frame1 })
 	end
-	return reactModule.createElement(foundationProvider, { theme = theme.Dark }, { Column = frame_1 })
+	return ReactModule.createElement(FoundationProvider, { theme = Theme.Dark }, { Column = Frame1 })
 end)

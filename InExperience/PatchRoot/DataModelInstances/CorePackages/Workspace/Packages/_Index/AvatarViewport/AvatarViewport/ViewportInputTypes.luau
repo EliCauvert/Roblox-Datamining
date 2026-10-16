@@ -1,23 +1,23 @@
-﻿local userInputService = game:GetService("UserInputService")
+﻿local UserInputService = game:GetService("UserInputService")
 
 return {
-	isMouseWheel = function(p1)
-		return p1.UserInputType == Enum.UserInputType.MouseWheel
+	isMouseWheel = function(Input): boolean --[[ Line: 8 ]]
+		return Input.UserInputType == Enum.UserInputType.MouseWheel
 	end,
-	isPrimaryPointerBegan = function(p1)
-		return p1.UserInputType == Enum.UserInputType.MouseButton1
+	isPrimaryPointerBegan = function(Input): boolean --[[ Line: 12 ]]
+		return Input.UserInputType == Enum.UserInputType.MouseButton1
 	end,
-	isPrimaryPointerEnded = function(p1)
-		return p1.UserInputType == Enum.UserInputType.MouseButton1
+	isPrimaryPointerEnded = function(Input): boolean --[[ Line: 16 ]]
+		return Input.UserInputType == Enum.UserInputType.MouseButton1
 	end,
-	isMouseMovement = function(p1)
-		return p1.UserInputType == Enum.UserInputType.MouseMovement
+	isMouseMovement = function(Input): boolean --[[ Line: 20 ]]
+		return Input.UserInputType == Enum.UserInputType.MouseMovement
 	end,
-	isTouch = function(p1)
-		return p1.UserInputType == Enum.UserInputType.Touch
+	isTouch = function(Input): boolean --[[ Line: 24 ]]
+		return Input.UserInputType == Enum.UserInputType.Touch
 	end,
-	isTouchEnabled = function()
-		-- upvalues: userInputService (ref)
-		return userInputService.TouchEnabled
+	isTouchEnabled = function() --[[ Line: 28 ]]
+		-- upvalues: UserInputService (copy)
+		return UserInputService.TouchEnabled
 	end
 }

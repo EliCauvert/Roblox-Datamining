@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.ApolloFriends.ApolloFriends)
+﻿return (require(script.Parent.Parent.Parent._Index.ApolloFriends.ApolloFriends))

@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.RoduxNetworking.RoduxNetworking)
+﻿return (require(script.Parent.Parent.Parent._Index.RoduxNetworking.RoduxNetworking))

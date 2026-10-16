@@ -1,5 +1,5 @@
 ﻿local _ = require(script.App.App)
-local constantsModule = require(script.Constants)
+local ConstantsModule = require(script.Constants)
 local _ = require(script.Types)
 
 return {
@@ -8,9 +8,9 @@ return {
 	Analytics = require(script.Analytics),
 	App = require(script.App),
 	CapturesPolicy = require(script.App.CapturesPolicy),
-	Constants = constantsModule,
+	Constants = ConstantsModule,
 	Context = require(script.Context),
 	Flags = require(script.Flags),
 	installReducer = require(script.installReducer),
-	RoduxKey = constantsModule.RoduxKey
+	RoduxKey = ConstantsModule.RoduxKey
 }

@@ -1,165 +1,172 @@
-﻿local vrSpatialUi = script:FindFirstAncestor("VrSpatialUi")
-local parent = vrSpatialUi.Parent
-local _ = require(parent.AppCommonLib)
-local observableModule = require(parent.Observable)
-local constantsModule = require(vrSpatialUi.Constants)
-local createUIGroupDragBarModule = require(vrSpatialUi.createUIGroupDragBar)
-local _ = require(vrSpatialUi.DragBar)
-local UIGroupStateModule = require(vrSpatialUi.UIGroupState)
-local panelManagedAnimatableModule = require(vrSpatialUi.PanelManagedAnimatable)
-local fFlagEnableSpatialUIBottomBarFixPlaceFilterModule = require(vrSpatialUi.Flags.FFlagEnableSpatialUIBottomBarFixPlaceFilter)
-local fFlagSpatialUIHiddenPanelRaycastFixModule = require(vrSpatialUi.Flags.FFlagSpatialUIHiddenPanelRaycastFix)
-local inExperienceUIVRIXP = require(parent.SharedExperimentDefinition).InExperienceUIVRIXP
-local spatialUIEnableCameraCacheFix = game:DefineFastFlag("SpatialUIEnableCameraCacheFix", false)
-local radians = math.rad(game:DefineFastInt("SpatialUIRepositionDeviationAngle", 10))
+﻿local VrSpatialUi = script:FindFirstAncestor("VrSpatialUi")
+local Parent = VrSpatialUi.Parent
+local _ = require(Parent.AppCommonLib)
+local ObservableModule = require(Parent.Observable)
+local ConstantsModule = require(VrSpatialUi.Constants)
+local CreateUIGroupDragBarModule = require(VrSpatialUi.createUIGroupDragBar)
+local _ = require(VrSpatialUi.DragBar)
+local UIGroupStateModule = require(VrSpatialUi.UIGroupState)
+local PanelManagedAnimatableModule = require(VrSpatialUi.PanelManagedAnimatable)
+local FFlagEnableSpatialUIBottomBarFixPlaceFilterModule = require(VrSpatialUi.Flags.FFlagEnableSpatialUIBottomBarFixPlaceFilter)
+local FFlagSpatialUIHiddenPanelRaycastFixModule = require(VrSpatialUi.Flags.FFlagSpatialUIHiddenPanelRaycastFix)
+local InExperienceUIVRIXP = require(Parent.SharedExperimentDefinition).InExperienceUIVRIXP
+local SpatialUIEnableCameraCacheFix = game:DefineFastFlag("SpatialUIEnableCameraCacheFix", false)
+local Radians = math.rad((game:DefineFastInt("SpatialUIRepositionDeviationAngle", 10)))
 
-function getUIGroupTypeForPanel(p1, p2)
-	local var1 = if p2 then p1[p2] else nil
+function getUIGroupTypeForPanel(p1, p2) --[[ Line: 47 ]]
+	local v1 = if p2 then p1[p2] else nil
 	
-	if var1 == nil then
+	if v1 == nil then
 		return nil
+	else
+		local PanelPositionProps = v1.panelPositionProps
+		
+		return if PanelPositionProps then PanelPositionProps.uiGroup else nil
 	end
-	local panelPositionProps = var1.panelPositionProps
-	
-	return if panelPositionProps then panelPositionProps.uiGroup else nil
 end
 
-function getDragBarSafely(p1)
+function getDragBarSafely(p1) --[[ Line: 63 ]]
 	return if p1 and p1.dragBar and p1.draggable then p1.dragBar else nil
 end
 
-function isTempPanel(p1)
-	-- upvalues: constantsModule (ref)
-	return p1 == constantsModule.PanelType.ToolTipsContainer
+function isTempPanel(ToolTipsContainer): boolean --[[ Line: 71 ]]
+	-- upvalues: ConstantsModule (copy)
+	return ToolTipsContainer == ConstantsModule.PanelType.ToolTipsContainer
 end
 
-function visitAllPanels(p1, p2)
-	for i, v in pairs(p1) do
-		p2(i, v)
+function visitAllPanels(List, Callback: (any, any) -> ()) --[[ Line: 75 ]]
+	for i, value in pairs(List) do
+		Callback(i, value)
 	end
 end
 
-function visitDraggablePanels(p3, p4, p5)
-	visitAllPanels(p3, function(p6, p7)
-		-- upvalues: p4 (ref), p5 (ref)
-		local panelPositionProps = p7.panelPositionProps
+function visitDraggablePanels(p1, UiGroup, Callback) --[[ Line: 84 ]]
+	visitAllPanels(p1, function(p2, p3) --[[ Line: 92 ]]
+		-- upvalues: UiGroup (copy), Callback (copy)
+		local PanelPositionProps = p3.panelPositionProps
 		
-		if panelPositionProps and not isTempPanel(p6) and (panelPositionProps.cameraFixedPanelProp and panelPositionProps.uiGroup == p4) then
-			p5(p6, panelPositionProps.cameraFixedPanelProp)
+		if PanelPositionProps and not isTempPanel(p2) and PanelPositionProps.cameraFixedPanelProp and PanelPositionProps.uiGroup == UiGroup then
+			Callback(p2, PanelPositionProps.cameraFixedPanelProp)
 		end
 	end)
 end
 
-function connect(p3, p4)
-	return { value = p3, connection = p3:connect(p4) }
+function connect(Value, p1) --[[ Line: 105 ]]
+	return { value = Value, connection = Value:connect(p1) }
 end
 
-function disconnect(p3)
-	if p3.connection then
-		p3.connection:disconnect()
-		p3.connection = nil
+function disconnect(p1) --[[ Line: 113 ]]
+	if p1.connection then
+		p1.connection:disconnect()
+		p1.connection = nil
 	end
 end
 
-function setPanelParent(value, p3)
-	-- upvalues: constantsModule (ref)
-	local var1 = p3 ~= nil
+function setPanelParent(p1, Parent) --[[ Line: 120 ]]
+	-- upvalues: ConstantsModule (copy)
+	local HasParent = Parent ~= nil
 	
-	if value.uiType == constantsModule.SpatialUIType.SpatialUI or value.uiType == constantsModule.SpatialUIType.SpatialUIRoact then
-		local panelObject = value.panelObject
-		panelObject.Enabled = var1
-		local adornee = panelObject.Adornee
-		adornee.CanCollide = false
-		adornee.CanTouch = false
-		adornee.Anchored = true
-		adornee.Parent = p3
+	if p1.uiType == ConstantsModule.SpatialUIType.SpatialUI or p1.uiType == ConstantsModule.SpatialUIType.SpatialUIRoact then
+		local PanelObject = p1.panelObject
+		PanelObject.Enabled = HasParent
+		local Adornee = PanelObject.Adornee
+		Adornee.CanCollide = false
+		Adornee.CanTouch = false
+		Adornee.Anchored = true
+		Adornee.Parent = Parent
 		
 		return
-	elseif value.uiType == constantsModule.SpatialUIType.SpatialUIPartOnly then
-		value.panelObject.Parent = p3
+	elseif p1.uiType == ConstantsModule.SpatialUIType.SpatialUIPartOnly then
+		p1.panelObject.Parent = Parent
 	end
 end
 
-function setPanelEnabledWithoutReparent(value, p3)
-	-- upvalues: constantsModule (ref)
-	if value.uiType == constantsModule.SpatialUIType.SpatialUI or value.uiType == constantsModule.SpatialUIType.SpatialUIRoact then
-		local panelObject = value.panelObject
-		panelObject.Enabled = p3
-		local adornee = panelObject.Adornee
-		adornee.CanCollide = false
-		adornee.CanTouch = false
-		adornee.Anchored = true
+function setPanelEnabledWithoutReparent(p1, Enabled) --[[ Line: 144 ]]
+	-- upvalues: ConstantsModule (copy)
+	if p1.uiType == ConstantsModule.SpatialUIType.SpatialUI or p1.uiType == ConstantsModule.SpatialUIType.SpatialUIRoact then
+		local PanelObject = p1.panelObject
+		PanelObject.Enabled = Enabled
+		local Adornee = PanelObject.Adornee
+		Adornee.CanCollide = false
+		Adornee.CanTouch = false
+		Adornee.Anchored = true
 	end
 end
 
-function setPanelVisibleState(value, p3, p4)
-	-- upvalues: fFlagEnableSpatialUIBottomBarFixPlaceFilterModule (ref), constantsModule (ref)
-	if fFlagEnableSpatialUIBottomBarFixPlaceFilterModule and p3 == constantsModule.PanelType.BottomBar then
-		setPanelEnabledWithoutReparent(value, p4)
+function setPanelVisibleState(p1, BottomBar, p2) --[[ Line: 159 ]]
+	-- upvalues: FFlagEnableSpatialUIBottomBarFixPlaceFilterModule (copy), ConstantsModule (copy)
+	if FFlagEnableSpatialUIBottomBarFixPlaceFilterModule and BottomBar == ConstantsModule.PanelType.BottomBar then
+		setPanelEnabledWithoutReparent(p1, p2)
 		
 		return
+	else
+		setPanelParent(p1, if p2 then workspace else nil)
 	end
-	setPanelParent(value, if p4 then workspace else nil)
 end
 
-local t = {}
-t.__index = t
+local UIGroupHelper = {}
+UIGroupHelper.__index = UIGroupHelper
 
-function t:setTopBarVisible(p3, p4)
-	self.topBarVisibleValue = connect(p3, p4)
+function UIGroupHelper:setTopBarVisible(p1, p2) --[[ Line: 183 ]]
+	self.topBarVisibleValue = connect(p1, p2)
 end
 
-function t:isTopBarVisible()
+function UIGroupHelper:isTopBarVisible() --[[ Line: 187 ]]
 	return self.topBarVisibleValue.value:get()
 end
 
-function t:prepareGuiToggleAnimationState(_)
-	-- upvalues: UIGroupStateModule (ref)
+function UIGroupHelper:prepareGuiToggleAnimationState(_) --[[ Line: 191 ]]
+	-- upvalues: UIGroupStateModule (copy)
 	self:setUIGroupState(UIGroupStateModule.GuiToggleAnimation)
 end
 
-function t:setUIGroupState(p3)
-	self.uiGroupState = p3
+function UIGroupHelper:setUIGroupState(UiGroupState) --[[ Line: 198 ]]
+	self.uiGroupState = UiGroupState
 end
 
-function t:animateBottomBarOnHeadMoveIfNeeded(_, p3, p4)
-	-- upvalues: UIGroupStateModule (ref), radians (ref)
+function UIGroupHelper:animateBottomBarOnHeadMoveIfNeeded(_, Vector, Vector1) --[[ Line: 202 ]]
+	-- upvalues: UIGroupStateModule (copy), Radians (copy)
 	if self.uiGroupState ~= UIGroupStateModule.GuiToggleAnimation or self.currentBottomBarAnimatable == nil then return end
-	if if radians >= math.abs(p3.X - p4.X) then radians < math.abs(p3.Y - p4.Y) else true then
+	local Magnitude = math.abs(Vector.Y - Vector1.Y)
+	
+	if Radians < math.abs(Vector.X - Vector1.X) or Magnitude > Radians then
 		self.currentBottomBarAnimatable:animateHideIfNeeded(false)
 		
 		return
+	else
+		self.currentBottomBarAnimatable:animateShowIfNeeded()
 	end
-	self.currentBottomBarAnimatable:animateShowIfNeeded()
 end
 
-function t:isGroupVisibleForPanel(p3, p4)
-	local var1 = getUIGroupTypeForPanel(p4, p3)
-	local var2 = if var1 then self.uiGroupVisibilityMap[var1] else nil
+function UIGroupHelper.isGroupVisibleForPanel(p1, BottomBar, p2) --[[ Line: 223 ]]
+	local UIGroupTypeForPanel = getUIGroupTypeForPanel(p2, BottomBar)
+	local UiGroupVisibility = if UIGroupTypeForPanel then p1.uiGroupVisibilityMap[UIGroupTypeForPanel] else nil
 	
-	return if var2 then var2.value:get() else true
+	return not UiGroupVisibility or UiGroupVisibility.value:get()
 end
 
-function t:applyGroupPanelsEnabled(p3, p4, p5)
-	local var1 = self.uiGroupVisibilityMap[p3]
-	local var2 = self:isTopBarVisible() and (if var1 then var1.value:get() else true)
+function UIGroupHelper:applyGroupPanelsEnabled(UIGroupTypeForPanel, p1, p2) --[[ Line: 238 ]]
+	local UiGroupVisibility = self.uiGroupVisibilityMap[UIGroupTypeForPanel]
+	local NoUiGroupVisibility = not UiGroupVisibility or UiGroupVisibility.value:get()
+	local NoUiGroupVisibility1 = self:isTopBarVisible() and NoUiGroupVisibility
 	
-	if p5 and var2 then
+	if not p2 or not NoUiGroupVisibility1 then
+		visitAllPanels(p1, function(p3, p4) --[[ Line: 250 ]]
+			-- upvalues: p1 (copy), UIGroupTypeForPanel (copy), NoUiGroupVisibility1 (copy)
+			if not isTempPanel(p3) and getUIGroupTypeForPanel(p1, p3) == UIGroupTypeForPanel then
+				setPanelVisibleState(p4, p3, NoUiGroupVisibility1)
+			end
+		end)
+		
 		return
 	end
-	visitAllPanels(p4, function(p6, p7)
-		-- upvalues: p4 (ref), p3 (ref), var2 (ref)
-		if not isTempPanel(p6) and getUIGroupTypeForPanel(p4, p6) == p3 then
-			setPanelVisibleState(p7, p6, var2)
-		end
-	end)
 end
 
-function t:updateAllElements(p3, p4)
-	-- upvalues: UIGroupStateModule (ref), constantsModule (ref), fFlagSpatialUIHiddenPanelRaycastFixModule (ref), fFlagEnableSpatialUIBottomBarFixPlaceFilterModule (ref), panelManagedAnimatableModule (ref)
-	local var1 = self:isTopBarVisible()
+function UIGroupHelper:updateAllElements(p1, p2) --[[ Line: 257 ]]
+	-- upvalues: UIGroupStateModule (copy), ConstantsModule (copy), FFlagSpatialUIHiddenPanelRaycastFixModule (copy), FFlagEnableSpatialUIBottomBarFixPlaceFilterModule (copy), PanelManagedAnimatableModule (copy)
+	local IsTopBarVisible = self:isTopBarVisible()
 	
-	if var1 then
+	if IsTopBarVisible then
 		self:setUIGroupState(UIGroupStateModule.Default)
 		
 		if self.currentBottomBarAnimatable then
@@ -167,194 +174,200 @@ function t:updateAllElements(p3, p4)
 			self.currentBottomBarAnimatable = nil
 		end
 	end
-	self:updateAllDragBar(p3, p4)
-	visitAllPanels(p3, function(p5, p6)
-		-- upvalues: constantsModule (copy), var1 (ref), fFlagSpatialUIHiddenPanelRaycastFixModule (copy), self (ref), p3 (ref), fFlagEnableSpatialUIBottomBarFixPlaceFilterModule (copy), UIGroupStateModule (copy), panelManagedAnimatableModule (copy)
-		local var2 = p5 == constantsModule.PanelType.BottomBar
+	self:updateAllDragBar(p1, p2)
+	visitAllPanels(p1, function(BottomBar, p3) --[[ Line: 271 ]]
+		-- upvalues: ConstantsModule (upval), IsTopBarVisible (copy), FFlagSpatialUIHiddenPanelRaycastFixModule (upval), self (copy), p1 (copy), FFlagEnableSpatialUIBottomBarFixPlaceFilterModule (upval), UIGroupStateModule (upval), PanelManagedAnimatableModule (upval)
+		local IsBottomBarMatch = BottomBar == ConstantsModule.PanelType.BottomBar
 		
-		if var1 then
-			if fFlagSpatialUIHiddenPanelRaycastFixModule and not self:isGroupVisibleForPanel(p5, p3) then
-				setPanelVisibleState(p6, p5, false)
-				
-				return
-			elseif fFlagEnableSpatialUIBottomBarFixPlaceFilterModule and var2 then
-				setPanelEnabledWithoutReparent(p6, true)
-				
-				return
-			end
-			setPanelParent(p6, workspace)
-			
-			return
-		elseif var2 and (self.uiGroupState == UIGroupStateModule.GuiToggleAnimation or p6.keepVisibleWhenTopBarHidden) then
-			if not self.currentBottomBarAnimatable then
-				self.currentBottomBarAnimatable = panelManagedAnimatableModule.create(p6.panelObject, self.bottomBarVisibility, p6.keepVisibleWhenTopBarHidden and self.uiGroupState ~= UIGroupStateModule.GuiToggleAnimation)
-				
-				if self.currentBottomBarAnimatable then
-					self.currentBottomBarAnimatable:hideAndBlockAnimationUntilLookBackAgain()
+		if not IsTopBarVisible then
+			if IsBottomBarMatch and (self.uiGroupState == UIGroupStateModule.GuiToggleAnimation or p3.keepVisibleWhenTopBarHidden) then
+				if not self.currentBottomBarAnimatable then
+					self.currentBottomBarAnimatable = PanelManagedAnimatableModule.create(p3.panelObject, self.bottomBarVisibility, p3.keepVisibleWhenTopBarHidden and self.uiGroupState ~= UIGroupStateModule.GuiToggleAnimation)
+					
+					if self.currentBottomBarAnimatable then
+						self.currentBottomBarAnimatable:hideAndBlockAnimationUntilLookBackAgain()
+					end
 				end
-			end
-			if not p6.keepVisibleWhenTopBarHidden then return end
-			if fFlagEnableSpatialUIBottomBarFixPlaceFilterModule then
-				setPanelEnabledWithoutReparent(p6, true)
+				if p3.keepVisibleWhenTopBarHidden then
+					if FFlagEnableSpatialUIBottomBarFixPlaceFilterModule then
+						setPanelEnabledWithoutReparent(p3, true)
+						
+						return
+					else
+						setPanelParent(p3, workspace)
+						
+						return
+					end
+				end
+			elseif FFlagEnableSpatialUIBottomBarFixPlaceFilterModule and IsBottomBarMatch then
+				setPanelEnabledWithoutReparent(p3, false)
 				
 				return
+			else
+				setPanelParent(p3, nil)
 			end
-			setPanelParent(p6, workspace)
+			return
+		elseif FFlagSpatialUIHiddenPanelRaycastFixModule and not self:isGroupVisibleForPanel(BottomBar, p1) then
+			setPanelVisibleState(p3, BottomBar, false)
 			
 			return
-		elseif fFlagEnableSpatialUIBottomBarFixPlaceFilterModule and var2 then
-			setPanelEnabledWithoutReparent(p6, false)
-			
-			return
+		else
+			if FFlagEnableSpatialUIBottomBarFixPlaceFilterModule and IsBottomBarMatch then
+				setPanelEnabledWithoutReparent(p3, true)
+				
+				return
+			else
+				setPanelParent(p3, workspace)
+			end
 		end
-		setPanelParent(p6, nil)
 	end)
 end
 
-function t:connectPanelVisibility(p3, p4, p5, p6)
-	-- upvalues: fFlagSpatialUIHiddenPanelRaycastFixModule (ref)
-	if isTempPanel(p3) then return end
-	self:disconnectPanelVisibility(p3, p5, p6)
-	local var1 = getUIGroupTypeForPanel(p5, p3)
+function UIGroupHelper:connectPanelVisibility(p1, p2, p3, p4) --[[ Line: 315 ]]
+	-- upvalues: FFlagSpatialUIHiddenPanelRaycastFixModule (copy)
+	if isTempPanel(p1) then return end
+	self:disconnectPanelVisibility(p1, p3, p4)
+	local UIGroupTypeForPanel = getUIGroupTypeForPanel(p3, p1)
 	
-	if not var1 then return end
-	self.uiGroupVisibilityMap[var1] = connect(p4, function()
-		-- upvalues: self (ref), p3 (ref), p5 (ref), p6 (ref), fFlagSpatialUIHiddenPanelRaycastFixModule (copy), var1 (ref)
-		self:updateDragBar(p3, p5, p6)
+	if not UIGroupTypeForPanel then return end
+	self.uiGroupVisibilityMap[UIGroupTypeForPanel] = connect(p2, function() --[[ Line: 330 ]]
+		-- upvalues: self (copy), p1 (copy), p3 (copy), p4 (copy), FFlagSpatialUIHiddenPanelRaycastFixModule (upval), UIGroupTypeForPanel (copy)
+		self:updateDragBar(p1, p3, p4)
 		
-		if fFlagSpatialUIHiddenPanelRaycastFixModule then
-			self:applyGroupPanelsEnabled(var1, p5)
+		if FFlagSpatialUIHiddenPanelRaycastFixModule then
+			self:applyGroupPanelsEnabled(UIGroupTypeForPanel, p3)
 		end
 	end)
-	self:updateDragBar(p3, p5, p6)
+	self:updateDragBar(p1, p3, p4)
 	
-	if fFlagSpatialUIHiddenPanelRaycastFixModule then
-		self:applyGroupPanelsEnabled(var1, p5, true)
+	if FFlagSpatialUIHiddenPanelRaycastFixModule then
+		self:applyGroupPanelsEnabled(UIGroupTypeForPanel, p3, true)
 	end
 end
 
-function t:disconnectPanelVisibility(p3, p4, p5)
-	if isTempPanel(p3) then return end
-	local var1 = getUIGroupTypeForPanel(p4, p3)
-	local var2 = if var1 then self.uiGroupVisibilityMap[var1] else nil
+function UIGroupHelper:disconnectPanelVisibility(p1, p2, p3) --[[ Line: 342 ]]
+	if isTempPanel(p1) then return end
+	local UIGroupTypeForPanel = getUIGroupTypeForPanel(p2, p1)
+	local UiGroupVisibility = if UIGroupTypeForPanel then self.uiGroupVisibilityMap[UIGroupTypeForPanel] else nil
 	
-	if var2 then
-		disconnect(var2)
-		self.uiGroupVisibilityMap[var1] = nil
-		self:updateDragBar(p3, p4, p5)
+	if UiGroupVisibility then
+		disconnect(UiGroupVisibility)
+		self.uiGroupVisibilityMap[UIGroupTypeForPanel] = nil
+		self:updateDragBar(p1, p2, p3)
 	end
 end
 
-function t:updateDragBar(p3, p4, p5)
-	local var1 = getUIGroupTypeForPanel(p4, p3)
-	local var2 = if var1 then p5[var1] else nil
+function UIGroupHelper:updateDragBar(p1, p2, p3) --[[ Line: 362 ]]
+	local UIGroupTypeForPanel = getUIGroupTypeForPanel(p2, p1)
+	local v1 = if UIGroupTypeForPanel then p3[UIGroupTypeForPanel] else nil
 	
-	if not var2 or not var2.dragBar or (not var2.draggable or isTempPanel(p3)) then return end
-	local var3 = self:isTopBarVisible()
-	local var4 = self.uiGroupVisibilityMap[var1]
+	if not v1 or not v1.dragBar or not v1.draggable or isTempPanel(p1) then return end
+	local IsTopBarVisible = self:isTopBarVisible()
+	local UiGroupVisibility = self.uiGroupVisibilityMap[UIGroupTypeForPanel]
 	
-	if if var4 then var3 and var4.value:get() else false then
-		var2.dragBar:show()
+	if if UiGroupVisibility then IsTopBarVisible and UiGroupVisibility.value:get() else false then
+		v1.dragBar:show()
 		
 		return
-	end
-	var2.dragBar:hide()
-end
-
-function t:updateAllDragBar(p3, p4)
-	for i, v in pairs(p3) do
-		self:updateDragBar(i, p3, p4)
+	else
+		v1.dragBar:hide()
 	end
 end
 
-function t:createUIGroup(p5, p6, p7, p8, p9, p10)
-	-- upvalues: constantsModule (ref), createUIGroupDragBarModule (ref), inExperienceUIVRIXP (ref)
-	local var1 = constantsModule.UIGROUP_INITITIAL_ROTATION_MAP[p6]
-	local var2 = self.uiGroups[p6]
-	local var3 = getDragBarSafely(var2)
+function UIGroupHelper:updateAllDragBar(List, p1) --[[ Line: 387 ]]
+	for i, _ in pairs(List) do
+		self:updateDragBar(i, List, p1)
+	end
+end
+
+function UIGroupHelper:createUIGroup(p2, Name, UiContainerSize, PositionProps, p3, p4) --[[ Line: 397 ]]
+	-- upvalues: ConstantsModule (copy), CreateUIGroupDragBarModule (copy), InExperienceUIVRIXP (copy)
+	local UIGROUPINITITIALROTATION = ConstantsModule.UIGROUP_INITITIAL_ROTATION_MAP[Name]
+	local UiGroup = self.uiGroups[Name]
+	local DragBarSafely = getDragBarSafely(UiGroup)
 	
-	if p10 and var1 and (var3 and var3:isEverDragged()) then
-		visitDraggablePanels(p9, p6, function(_, p11)
-			-- upvalues: var2 (ref), var1 (ref)
-			var2.dragBarOffset *= var1
-			p11.uiGroupElementOffset *= var1
+	if p4 and UIGROUPINITITIALROTATION and DragBarSafely and DragBarSafely:isEverDragged() then
+		visitDraggablePanels(p3, Name, function(_, p5) --[[ Line: 413 ]]
+			-- upvalues: UiGroup (copy), UIGROUPINITITIALROTATION (copy)
+			UiGroup.dragBarOffset *= UIGROUPINITITIALROTATION
+			p5.uiGroupElementOffset *= UIGROUPINITITIALROTATION
 		end)
 	end
-	local t = nil
-	local var4 = nil
-	var4 = createUIGroupDragBarModule({
-		name = p6,
-		dragFunction = function(_, _, _, _, _)
-			-- upvalues: p5 (ref), p6 (ref)
-			p5:dragUiGroupStep(p6)
+	local v1 = nil
+	local DragBar = nil
+	DragBar = CreateUIGroupDragBarModule({
+		name = Name,
+		dragFunction = function(_, _, _, _, _) --[[ Line: 422 ]]
+			-- upvalues: p2 (copy), Name (copy)
+			p2:dragUiGroupStep(Name)
 		end,
-		dragStartFunction = function(_, _, _, _, _, _, _)
-			-- upvalues: var1 (ref), t (write), var4 (write), p9 (ref), p6 (ref), p5 (ref)
-			if var1 and t and (var4 and not var4:isEverDragged()) then
-				var4:setCFrame(var4:getCFrame() * var1:Inverse())
-				t.dragBarOffset *= var1:Inverse()
-				visitDraggablePanels(p9, p6, function(_, p11)
-					-- upvalues: var1 (copy)
-					p11.uiGroupElementOffset *= var1:Inverse()
+		dragStartFunction = function(_, _, _, _, _, _, _) --[[ Line: 425 ]]
+			-- upvalues: UIGROUPINITITIALROTATION (copy), v1 (ref), DragBar (ref), p3 (copy), Name (copy), p2 (copy)
+			if UIGROUPINITITIALROTATION and v1 and DragBar and not DragBar:isEverDragged() then
+				DragBar:setCFrame(DragBar:getCFrame() * UIGROUPINITITIALROTATION:Inverse())
+				v1.dragBarOffset *= UIGROUPINITITIALROTATION:Inverse()
+				visitDraggablePanels(p3, Name, function(_, p5) --[[ Line: 434 ]]
+					-- upvalues: UIGROUPINITITIALROTATION (upval)
+					p5.uiGroupElementOffset *= UIGROUPINITITIALROTATION:Inverse()
 				end)
 			end
-			p5:dragUiGroupStart(p6)
+			p2:dragUiGroupStart(Name)
 		end,
-		dragEndFunction = function(_)
-			-- upvalues: p5 (ref), p6 (ref)
-			p5:dragUiGroupEnd(p6)
+		dragEndFunction = function(_) --[[ Line: 442 ]]
+			-- upvalues: p2 (copy), Name (copy)
+			p2:dragUiGroupEnd(Name)
 		end,
-		dragBarPartSize = constantsModule.DRAG_BAR_SIZE
+		dragBarPartSize = ConstantsModule.DRAG_BAR_SIZE
 	})
-	var4:hide()
-	t = {
+	DragBar:hide()
+	v1 = {
 		headScale = 1,
-		positionProps = p8,
-		uiContainerSize = p7,
-		draggable = inExperienceUIVRIXP:isDraggingAllowed(),
-		dragBar = var4,
-		dragBarOffset = constantsModule.UIGROUP_DRAGBAR_OFFSET_MAP[p6]
+		positionProps = PositionProps,
+		uiContainerSize = UiContainerSize,
+		draggable = InExperienceUIVRIXP:isDraggingAllowed(),
+		dragBar = DragBar,
+		dragBarOffset = ConstantsModule.UIGROUP_DRAGBAR_OFFSET_MAP[Name]
 	}
-	self.uiGroups[p6] = t
+	self.uiGroups[Name] = v1
 	
-	return t
+	return v1
 end
 
-function t.checkAndGetUIGroupTypeForTempPanel(_, p5, p6)
-	return if isTempPanel(p5) then getUIGroupTypeForPanel(p6, p5) else nil
+function UIGroupHelper:checkAndGetUIGroupTypeForTempPanel(p2, p3) --[[ Line: 460 ]]
+	return if isTempPanel(p2) then getUIGroupTypeForPanel(p3, p2) else nil
 end
 
-function t:getGroupCameraCFrameIfPossible(p5, p6)
-	-- upvalues: spatialUIEnableCameraCacheFix (ref)
-	local cFrame = workspace.CurrentCamera.CFrame
+function UIGroupHelper:getGroupCameraCFrameIfPossible(p2, p3) --[[ Line: 471 ]]
+	-- upvalues: SpatialUIEnableCameraCacheFix (copy)
+	local CurrentCameraCFrame = workspace.CurrentCamera.CFrame
 	
-	if spatialUIEnableCameraCacheFix and isTempPanel(p5) then
-		local var1 = getUIGroupTypeForPanel(p6, p5)
+	if SpatialUIEnableCameraCacheFix and isTempPanel(p2) then
+		local UIGroupTypeForPanel = getUIGroupTypeForPanel(p3, p2)
 		
-		if var1 ~= nil and self.uiGroups[var1].lastCameraCFrame then
-			cFrame = self.uiGroups[var1].lastCameraCFrame
+		if UIGroupTypeForPanel ~= nil and self.uiGroups[UIGroupTypeForPanel].lastCameraCFrame then
+			CurrentCameraCFrame = self.uiGroups[UIGroupTypeForPanel].lastCameraCFrame
 		end
 	end
-	return cFrame
+	return CurrentCameraCFrame
 end
 
-function t:getBottomBarVisibility()
+function UIGroupHelper:getBottomBarVisibility() --[[ Line: 487 ]]
 	return self.bottomBarVisibility
 end
 
-function t.new(p5)
-	-- upvalues: observableModule (ref), UIGroupStateModule (ref), t (ref)
-	local t_1 = {
+function UIGroupHelper.new(p2) --[[ Line: 491 ]]
+	-- upvalues: ObservableModule (copy), UIGroupStateModule (copy), UIGroupHelper (copy)
+	local config = {
 		currentBottomBarAnimatable = nil,
 		uiGroupVisibilityMap = {},
-		topBarVisibleValue = { value = observableModule.ObservableValue.new(p5) },
+		topBarVisibleValue = { value = ObservableModule.ObservableValue.new(p2) },
 		uiGroups = {},
 		uiGroupState = UIGroupStateModule.Default,
-		bottomBarVisibility = observableModule.ObservableValue.new(true)
+		bottomBarVisibility = ObservableModule.ObservableValue.new(true)
 	}
-	setmetatable(t_1, t)
+	setmetatable(config, UIGroupHelper)
 	
-	return t_1
+	return config
 end
 
-return t
+return UIGroupHelper

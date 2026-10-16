@@ -1,30 +1,30 @@
-﻿local parent = script:FindFirstAncestor("AmpUpsell").Parent
-local reactModule = require(parent.React)
-local QRDeepLinkDialog = require(parent.IdentityVerification).QRDeepLinkDialog
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local authButtonClick = require(parent.AuthAnalytics).Events.authButtonClick
+﻿local Parent = script:FindFirstAncestor("AmpUpsell").Parent
+local ReactModule = require(Parent.React)
+local QRDeepLinkDialog = require(Parent.IdentityVerification).QRDeepLinkDialog
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local AuthButtonClickFunction = require(Parent.AuthAnalytics).Events.authButtonClick
 
-return function(p1)
-	-- upvalues: useLocalization (ref), reactModule (ref), authButtonClick (ref), QRDeepLinkDialog (ref)
-	local appsFlyerLink = p1.appsFlyerLink
-	local onCancel = p1.onCancel
-	local sessionId = p1.sessionId
-	local entryPointEventCtx = p1.entryPointEventCtx
-	local var1 = useLocalization({
+return function(p1) --[[ Line: 19 | Named "FAEWithQRCodeUpsell" ]]
+	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), AuthButtonClickFunction (copy), QRDeepLinkDialog (copy)
+	local AppsFlyerLink = p1.appsFlyerLink
+	local OnCancelFunction = p1.onCancel
+	local SessionId = p1.sessionId
+	local EntryPointEventCtx = p1.entryPointEventCtx
+	local AmpFAEUpsellModalQRCodeTitle = UseLocalizationFunction({
 		title = "Amp.FAEUpsell.Modal.QRCode.Title",
 		description = "Amp.FAEUpsell.Modal.QRCode.Description",
 		footer = "Amp.FAEUpsell.Modal.QRCode.Footer"
 	})
 	
-	return reactModule.createElement(QRDeepLinkDialog, {
-		deeplink = appsFlyerLink,
-		title = var1.title,
-		description = var1.description,
-		footer = var1.footer,
-		onClose = reactModule.useCallback(function()
-			-- upvalues: authButtonClick (copy), entryPointEventCtx (ref), sessionId (ref), onCancel (ref)
-			authButtonClick(entryPointEventCtx, "closeFaeQR", sessionId)
-			onCancel()
-		end, { onCancel, sessionId, entryPointEventCtx })
+	return ReactModule.createElement(QRDeepLinkDialog, {
+		deeplink = AppsFlyerLink,
+		title = AmpFAEUpsellModalQRCodeTitle.title,
+		description = AmpFAEUpsellModalQRCodeTitle.description,
+		footer = AmpFAEUpsellModalQRCodeTitle.footer,
+		onClose = ReactModule.useCallback(function() --[[ Line: 31 ]]
+			-- upvalues: AuthButtonClickFunction (upval), EntryPointEventCtx (copy), SessionId (copy), OnCancelFunction (copy)
+			AuthButtonClickFunction(EntryPointEventCtx, "closeFaeQR", SessionId)
+			OnCancelFunction()
+		end, { OnCancelFunction, SessionId, EntryPointEventCtx })
 	})
 end

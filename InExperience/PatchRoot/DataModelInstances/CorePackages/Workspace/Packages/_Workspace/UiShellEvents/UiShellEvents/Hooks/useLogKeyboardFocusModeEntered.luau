@@ -1,14 +1,14 @@
-﻿local parent = script:FindFirstAncestor("UiShellEvents").Parent
-local reactModule = require(parent.React)
-local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-local telemetryService = game:GetService("TelemetryService")
-local t = {
+﻿local Parent = script:FindFirstAncestor("UiShellEvents").Parent
+local ReactModule = require(Parent.React)
+local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
+local TelemetryService = game:GetService("TelemetryService")
+local config = {
 	eventName = "KeyboardFocusModeEnteredCounter",
 	lastUpdated = "2026-06-22",
 	description = "Counts # of sessions that use keyboard mode.",
 	backends = { "RobloxTelemetryCounter" }
 }
-local t_1 = {
+local config1 = {
 	eventName = "KeyboardFocusModeEnteredEvent",
 	throttlingPercentage = 10000,
 	lastUpdated = "2026-06-22",
@@ -16,23 +16,23 @@ local t_1 = {
 	backends = { "EventIngest" }
 }
 
-return function()
-	-- upvalues: focusNavigationUtilsModule (ref), reactModule (ref), telemetryService (ref), t_1 (ref), t (ref)
-	local var1 = focusNavigationUtilsModule.useLastInputMode()
-	local var2 = focusNavigationUtilsModule.useLastInputMethod()
-	local var3 = reactModule.useRef(false)
-	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), var1 (ref), var2 (ref), telemetryService (copy), t_1 (copy), t (copy)
-		if not var3.current and var1 == "Focus" and var2 == "Keyboard" then
-			var3.current = true
-			telemetryService:LogEvent(t_1, {
+return function() --[[ Line: 23 | Named "useLogKeyboardFocusModeEntered" ]]
+	-- upvalues: FocusNavigationUtilsModule (copy), ReactModule (copy), TelemetryService (copy), config1 (copy), config (copy)
+	local UseLastInputModeResult = FocusNavigationUtilsModule.useLastInputMode()
+	local UseLastInputResult = FocusNavigationUtilsModule.useLastInputMethod()
+	local UseRefResult = ReactModule.useRef(false)
+	ReactModule.useEffect(function() --[[ Line: 28 ]]
+		-- upvalues: UseRefResult (copy), UseLastInputModeResult (copy), UseLastInputResult (copy), TelemetryService (upval), config1 (upval), config (upval)
+		if not UseRefResult.current and UseLastInputModeResult == "Focus" and UseLastInputResult == "Keyboard" then
+			UseRefResult.current = true
+			TelemetryService:LogEvent(config1, {
 				customFields = {},
 				standardizedFields = { "addSessionId", "addOSInfo", "addSessionInfo" }
 			})
-			telemetryService:LogCounter(t, {
+			TelemetryService:LogCounter(config, {
 				customFields = {},
 				standardizedFields = { "addSessionId", "addOSInfo", "addSessionInfo" }
 			})
 		end
-	end, { var1, var2 })
+	end, { UseLastInputModeResult, UseLastInputResult })
 end

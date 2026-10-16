@@ -1,80 +1,86 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local UIBloxModule = require(parent.UIBlox)
-local useStyle = UIBloxModule.Core.Style.useStyle
-local useTextSizeOffset = UIBloxModule.Core.Style.useTextSizeOffset
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useDebouncedUserSearchModule = require(script.Parent.Utils.useDebouncedUserSearch)
-local userCellWithCheckboxModule = require(script.Parent.UserCellWithCheckbox)
-local paginatedChatMembersModule = require(script.Parent.PaginatedChatMembers)
-local selectedMembersBarModule = require(script.Parent.SelectedMembersBar)
-local fFlagDebugAppChatEnableDomLocatorsModule = require(appChat.Flags.FFlagDebugAppChatEnableDomLocators)
-local domLocatorsModule = require(appChat.Utils.DomLocators)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UIBloxModule = require(Parent.UIBlox)
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local UseTextSizeOffsetFunction = UIBloxModule.Core.Style.useTextSizeOffset
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseDebouncedUserSearchModule = require(script.Parent.Utils.useDebouncedUserSearch)
+local UserCellWithCheckboxModule = require(script.Parent.UserCellWithCheckbox)
+local PaginatedChatMembersModule = require(script.Parent.PaginatedChatMembers)
+local SelectedMembersBarModule = require(script.Parent.SelectedMembersBar)
+local FFlagDebugAppChatEnableDomLocatorsModule = require(AppChat.Flags.FFlagDebugAppChatEnableDomLocators)
+local DomLocatorsModule = require(AppChat.Utils.DomLocators)
 
-local function renderUserEntry(p1, p2, p3, p4, _)
-	-- upvalues: reactModule (ref), foundationModule (ref), userCellWithCheckboxModule (ref)
-	return reactModule.createElement(foundationModule.View, {
+local function renderUserEntry(Text, p1, p2, Style, _) --[[ Line: 31 ]]
+	-- upvalues: ReactModule (copy), FoundationModule (copy), UserCellWithCheckboxModule (copy)
+	return ReactModule.createElement(FoundationModule.View, {
 		tag = "size-full-0 auto-y",
-		key = if p2 then "search_" .. p1 else p1
+		key = if p1 then "search_" .. Text else Text
 	}, {
-		cellContent = reactModule.createElement(userCellWithCheckboxModule, { style = p4, userId = p1 }),
-		debugId = p3.isDebugEnabled and reactModule.createElement(foundationModule.Text, {
+		cellContent = ReactModule.createElement(UserCellWithCheckboxModule, { style = Style, userId = Text }),
+		debugId = p2.isDebugEnabled and ReactModule.createElement(FoundationModule.Text, {
 			tag = "auto-xy position-bottom-right anchor-bottom-right",
-			Text = p1
+			Text = Text
 		}) or nil
 	})
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: useLocalization (ref), useStyle (ref), useTextSizeOffset (ref), useDebouncedUserSearchModule (ref), reactModule (ref), renderUserEntry (ref), foundationModule (ref), selectedMembersBarModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref), paginatedChatMembersModule (ref)
-	local var1 = useLocalization({ suggested = "Feature.Friends.Label.Suggested" })
-	local var2 = useStyle()
-	local var3 = useTextSizeOffset()
-	local var4, var5, var6 = useDebouncedUserSearchModule(p1.conversation)
-	local var7 = reactModule.useRef(nil)
-	local var8 = var6 ~= ""
+return ReactModule.memo(function(p1) --[[ Line: 57 | Named "SelectChatMembers" ]]
+	-- upvalues: UseLocalizationFunction (copy), UseStyleFunction (copy), UseTextSizeOffsetFunction (copy), UseDebouncedUserSearchModule (copy), ReactModule (copy), renderUserEntry (copy), FoundationModule (copy), SelectedMembersBarModule (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), DomLocatorsModule (copy), PaginatedChatMembersModule (copy)
+	local UseLocalizationResult = UseLocalizationFunction({ suggested = "Feature.Friends.Label.Suggested" })
+	local UseStyleResult = UseStyleFunction()
+	local UseTextSizeOffsetResult = UseTextSizeOffsetFunction()
+	local UseDebouncedUserSearchModuleResult, UseDebouncedUserSearchModuleResult2, UseDebouncedUserSearchModuleResult3 = UseDebouncedUserSearchModule(p1.conversation)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 65 ]]
+		-- upvalues: UseDebouncedUserSearchModuleResult2 (copy), UseRefResult (copy)
+		UseDebouncedUserSearchModuleResult2("")
+		
+		if UseRefResult and UseRefResult.current then
+			UseRefResult.current.focus()
+		end
+	end, { UseDebouncedUserSearchModuleResult2 })
+	local IsNotUseDebouncedUserSearchModuleResultMatch = UseDebouncedUserSearchModuleResult3 ~= ""
 	
-	return reactModule.createElement(foundationModule.View, { tag = "size-full col gap-small bg-surface-0" }, {
-		TopSection = reactModule.createElement(foundationModule.View, {
+	return ReactModule.createElement(FoundationModule.View, { tag = "size-full col gap-small bg-surface-0" }, {
+		TopSection = ReactModule.createElement(FoundationModule.View, {
 			tag = "col size-full-0 auto-y gap-small padding-x-medium",
 			LayoutOrder = 1
 		}, {
-			selectedMembersBar = p1.shouldShowSelectChatMembersBar and reactModule.createElement(selectedMembersBarModule, { LayoutOrder = 1 }) or nil,
-			searchBar = reactModule.createElement(foundationModule.TextInput, {
+			selectedMembersBar = p1.shouldShowSelectChatMembersBar and ReactModule.createElement(SelectedMembersBarModule, { LayoutOrder = 1 }) or nil,
+			searchBar = ReactModule.createElement(FoundationModule.TextInput, {
 				tag = "size-full-0 auto-y",
 				LayoutOrder = 2,
 				label = "",
 				leadingIcon = "icons/actions/friend_sort/search_people",
-				text = var6,
+				text = UseDebouncedUserSearchModuleResult3,
 				width = UDim.new(1, 0),
 				placeholder = p1.searchFriendsText,
-				onChanged = var5,
-				iconTrailing = if var8 then {
-					name = foundationModule.Enums.IconName.CircleX,
-					onActivated = reactModule.useCallback(function()
-						-- upvalues: var5 (ref), var7 (ref)
-						var5("")
-						
-						if var7 and var7.current then
-							var7.current.focus()
-						end
-					end, { var5 })
+				onChanged = UseDebouncedUserSearchModuleResult2,
+				iconTrailing = if IsNotUseDebouncedUserSearchModuleResultMatch then {
+					name = FoundationModule.Enums.IconName.CircleX,
+					onActivated = UseResult
 				} else nil,
-				textBoxRef = var7,
-				testId = if fFlagDebugAppChatEnableDomLocatorsModule then domLocatorsModule.selectChatMembersSearchInput(var6) else nil
+				textBoxRef = UseRefResult,
+				testId = if FFlagDebugAppChatEnableDomLocatorsModule then DomLocatorsModule.selectChatMembersSearchInput(UseDebouncedUserSearchModuleResult3) else nil
 			})
 		}),
-		friendsList = reactModule.createElement(foundationModule.View, { LayoutOrder = 3, tag = "size-full-0 fill" }, {
-			paginatedFriendsList = reactModule.createElement(paginatedChatMembersModule, {
-				userIds = if var8 then var4 else p1.friendIds,
-				renderItem = reactModule.useCallback(function(p2)
-					-- upvalues: renderUserEntry (copy), var8 (ref), p1 (ref), var2 (ref), var3 (ref)
-					return renderUserEntry(p2.item, var8, { isDebugEnabled = p1.isDebugEnabled }, var2, var3)
-				end, { p1.isDebugEnabled, var8, var2, var3 }),
-				fetchMoreFriends = if var8 then nil else p1.fetchMoreFriends,
-				headerText = if var8 then nil else var1.suggested
+		friendsList = ReactModule.createElement(FoundationModule.View, { LayoutOrder = 3, tag = "size-full-0 fill" }, {
+			paginatedFriendsList = ReactModule.createElement(PaginatedChatMembersModule, {
+				userIds = if IsNotUseDebouncedUserSearchModuleResultMatch then UseDebouncedUserSearchModuleResult else p1.friendIds,
+				renderItem = ReactModule.useCallback(function(p2) --[[ Line: 75 ]]
+					-- upvalues: renderUserEntry (upval), IsNotUseDebouncedUserSearchModuleResultMatch (copy), p1 (copy), UseStyleResult (copy), UseTextSizeOffsetResult (copy)
+					return renderUserEntry(p2.item, IsNotUseDebouncedUserSearchModuleResultMatch, { isDebugEnabled = p1.isDebugEnabled }, UseStyleResult, UseTextSizeOffsetResult)
+				end, {
+					p1.isDebugEnabled,
+					IsNotUseDebouncedUserSearchModuleResultMatch,
+					UseStyleResult,
+					UseTextSizeOffsetResult
+				}),
+				fetchMoreFriends = if IsNotUseDebouncedUserSearchModuleResultMatch then nil else p1.fetchMoreFriends,
+				headerText = if IsNotUseDebouncedUserSearchModuleResultMatch then nil else UseLocalizationResult.suggested
 			})
 		})
 	})

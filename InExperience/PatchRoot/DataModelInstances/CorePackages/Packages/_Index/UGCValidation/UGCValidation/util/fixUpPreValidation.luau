@@ -1,29 +1,37 @@
-﻿local parent = script.Parent.Parent
-local getEngineFeatureEngineSplitHumanoidRigDescriptionInUploadModule = require(parent.flags.getEngineFeatureEngineSplitHumanoidRigDescriptionInUpload)
-local splitHumanoidRigDescriptionForUploadModule = require(parent.util.SplitHumanoidRigDescriptionForUpload)
+﻿local Parent = script.Parent.Parent
+local GetEngineFeatureEngineSplitHumanoidRigDescriptionInUploadModule = require(Parent.flags.getEngineFeatureEngineSplitHumanoidRigDescriptionInUpload)
+local GetFFlagUGCValidationStripAccessoryHandleAttributesModule = require(Parent.flags.getFFlagUGCValidationStripAccessoryHandleAttributes)
+local SplitHumanoidRigDescriptionForUploadModule = require(Parent.util.SplitHumanoidRigDescriptionForUpload)
 
-return function(p1)
-	-- upvalues: getEngineFeatureEngineSplitHumanoidRigDescriptionInUploadModule (ref), splitHumanoidRigDescriptionForUploadModule (ref)
-	local var1 = p1:Clone()
+return function(Object) --[[ Line: 17 | Named "fixUpPreValidation" ]]
+	-- upvalues: GetEngineFeatureEngineSplitHumanoidRigDescriptionInUploadModule (copy), SplitHumanoidRigDescriptionForUploadModule (copy), GetFFlagUGCValidationStripAccessoryHandleAttributesModule (copy)
+	local ObjectClone = Object:Clone()
 	
-	if getEngineFeatureEngineSplitHumanoidRigDescriptionInUploadModule() then
-		splitHumanoidRigDescriptionForUploadModule.fixUploadInstance(var1)
+	if GetEngineFeatureEngineSplitHumanoidRigDescriptionInUploadModule() then
+		SplitHumanoidRigDescriptionForUploadModule.fixUploadInstance(ObjectClone)
 	end
-	var1 = var1:GetDescendants()
-	table.insert(var1, var1)
+	local Descendants = ObjectClone:GetDescendants()
+	table.insert(Descendants, ObjectClone)
 	
-	for i, v in var1 do
-		if v.Parent == nil or not v:IsA("Motor6D") and v.Name ~= "OriginalSize" and v.Name ~= "OriginalPosition" and (not v:IsA("Weld") or v.Name ~= "AccessoryWeld") and (not getEngineFeatureEngineSplitHumanoidRigDescriptionInUploadModule() or not v:IsA("Constraint") and not v:isA("NoCollisionConstraint")) then
-			if v:IsA("BasePart") then
-				v.Velocity = Vector3.new(0, 0, 0)
-				v.RotVelocity = Vector3.new(0, 0, 0)
+	for _, descendant in Descendants do
+		if descendant.Parent ~= nil and (descendant:IsA("Motor6D") or descendant.Name == "OriginalSize" or descendant.Name == "OriginalPosition" or descendant:IsA("Weld") and descendant.Name == "AccessoryWeld" or GetEngineFeatureEngineSplitHumanoidRigDescriptionInUploadModule() and (descendant:IsA("Constraint") or descendant:isA("NoCollisionConstraint"))) then
+			descendant:Destroy()
+			continue
+		end
+		if descendant:IsA("BasePart") then
+			descendant.Velocity = vector.create(0, 0, 0)
+			descendant.RotVelocity = vector.create(0, 0, 0)
+		end
+		local IsAccessory = if descendant.Parent then descendant.Parent:IsA("Accessory") else false
+		
+		if descendant:IsA("MeshPart") and not IsAccessory and descendant.TextureID == "" and not descendant:FindFirstChildWhichIsA("SurfaceAppearance") then
+			Instance.new("SurfaceAppearance").Parent = descendant
+		end
+		if GetFFlagUGCValidationStripAccessoryHandleAttributesModule() and (descendant:IsA("MeshPart") or descendant:IsA("Part")) and (descendant.Name == "Handle" and IsAccessory) then
+			for attribute in descendant:GetAttributes() do
+				descendant:SetAttribute(attribute, nil)
 			end
-			if v:IsA("MeshPart") and not (if v.Parent then v.Parent:IsA("Accessory") else false) and (v.TextureID == "" and not v:FindFirstChildWhichIsA("SurfaceAppearance")) then
-				Instance.new("SurfaceAppearance").Parent = v
-			end
-		else
-			v:Destroy()
 		end
 	end
-	return var1
+	return ObjectClone
 end

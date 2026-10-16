@@ -1,21 +1,21 @@
-﻿local reactModule = require(script:FindFirstAncestor("Responsive").Parent.React)
-local hardwareSafeAreaInsetsModule = require(script.Parent.Parent.HardwareSafeAreaInsets)
+﻿local ReactModule = require(script:FindFirstAncestor("Responsive").Parent.React)
+local HardwareSafeAreaInsetsModule = require(script.Parent.Parent.HardwareSafeAreaInsets)
 
-return function()
-	-- upvalues: reactModule (ref), hardwareSafeAreaInsetsModule (ref)
-	local var1, var2 = reactModule.useState(hardwareSafeAreaInsetsModule.deviceInsets())
-	reactModule.useLayoutEffect(function()
-		-- upvalues: hardwareSafeAreaInsetsModule (copy), var2 (ref), var1 (ref)
-		local var3 = hardwareSafeAreaInsetsModule:connect(var2)
+return function() --[[ Line: 6 ]]
+	-- upvalues: ReactModule (copy), HardwareSafeAreaInsetsModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(HardwareSafeAreaInsetsModule.deviceInsets())
+	ReactModule.useLayoutEffect(function() --[[ Line: 8 ]]
+		-- upvalues: HardwareSafeAreaInsetsModule (upval), UseStateResult2 (copy), UseStateResult (copy)
+		local Connection = HardwareSafeAreaInsetsModule:connect(UseStateResult2)
 		
-		if hardwareSafeAreaInsetsModule.diffInsets(var1, hardwareSafeAreaInsetsModule.deviceInsets()) then
-			var2(hardwareSafeAreaInsetsModule.deviceInsets)
+		if HardwareSafeAreaInsetsModule.diffInsets(UseStateResult, HardwareSafeAreaInsetsModule.deviceInsets()) then
+			UseStateResult2(HardwareSafeAreaInsetsModule.deviceInsets)
 		end
-		return function()
-			-- upvalues: var3 (ref)
-			var3:disconnect()
+		return function() --[[ Line: 13 ]]
+			-- upvalues: Connection (copy)
+			Connection:disconnect()
 		end
 	end, {})
 	
-	return var1
+	return UseStateResult
 end

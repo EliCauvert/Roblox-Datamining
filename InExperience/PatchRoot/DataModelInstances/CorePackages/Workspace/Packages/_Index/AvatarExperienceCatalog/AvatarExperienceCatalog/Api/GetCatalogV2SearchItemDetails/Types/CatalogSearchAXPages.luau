@@ -1,30 +1,30 @@
 ﻿local _ = require(script.Parent.AXPagesTypes)
 local AXPagesImplModule = require(script.Parent.AXPagesImpl)
-local avatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
-local _ = require(avatarExperienceCatalog.Parent.LuauPolyfill)
-local getCatalogV2SearchItemDetails = require(script.Parent.Parent.getCatalogV2SearchItemDetails).getCatalogV2SearchItemDetails
-local _ = require(avatarExperienceCatalog.Models.CatalogV2SearchItemDetails)
+local AvatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
+local _ = require(AvatarExperienceCatalog.Parent.LuauPolyfill)
+local GetCatalogV2SearchItemDetailsFunction = require(script.Parent.Parent.getCatalogV2SearchItemDetails).getCatalogV2SearchItemDetails
+local _ = require(AvatarExperienceCatalog.Models.CatalogV2SearchItemDetails)
 
-local function fetchNextPage(p1, p2, p3)
-	-- upvalues: getCatalogV2SearchItemDetails (ref)
-	if p3 and p3 ~= "" then
-		p2.cursor = p3
+local function fetchNextPage(p1, p2, Cursor) --[[ Line: 21 ]]
+	-- upvalues: GetCatalogV2SearchItemDetailsFunction (copy)
+	if Cursor and Cursor ~= "" then
+		p2.cursor = Cursor
 	end
-	local var1, _ = getCatalogV2SearchItemDetails(p1, p2)
-	local var2 = var1:expect()
+	local CatalogV2SearchItemDetails, _ = GetCatalogV2SearchItemDetailsFunction(p1, p2)
+	local NextPage = CatalogV2SearchItemDetails:expect()
 	
 	return {
-		data = if var2 then var2.data else {},
-		nextPageCursor = if var2 then var2.nextPageCursor else nil
+		data = NextPage and NextPage.data or {},
+		nextPageCursor = NextPage and NextPage.nextPageCursor or nil
 	}
 end
 
 return {
-	new = function(p1, p2, p3, p4)
-		-- upvalues: fetchNextPage (ref), AXPagesImplModule (ref)
-		return AXPagesImplModule.new(p3, p4, function(p5)
-			-- upvalues: fetchNextPage (copy), p1 (ref), p2 (ref)
-			return fetchNextPage(p1, p2, p5)
+	new = function(p1, p2, p3, p4) --[[ Line: 42 ]]
+		-- upvalues: fetchNextPage (copy), AXPagesImplModule (copy)
+		return AXPagesImplModule.new(p3, p4, function(Cursor) --[[ Line: 49 | Named "fetchNextPageWithContext" ]]
+			-- upvalues: fetchNextPage (upval), p1 (copy), p2 (copy)
+			return (fetchNextPage(p1, p2, Cursor))
 		end)
 	end
 }

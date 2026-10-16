@@ -1,1 +1,1 @@
-﻿return require(script.AppShortcutBarStatusListener)
+﻿return (require(script.AppShortcutBarStatusListener))

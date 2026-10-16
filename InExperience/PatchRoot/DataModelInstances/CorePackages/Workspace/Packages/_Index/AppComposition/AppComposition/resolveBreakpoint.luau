@@ -1,23 +1,23 @@
-﻿local breakpoint = require(script:FindFirstAncestor("AppComposition").Parent.Foundation).Enums.Breakpoint
-local t = {
-	[breakpoint.XSmall] = 360,
-	[breakpoint.Small] = 600,
-	[breakpoint.Medium] = 1140,
-	[breakpoint.Large] = 1520,
-	[breakpoint.XLarge] = 1920,
-	[breakpoint.XXLarge] = 1e999
+﻿local Breakpoint = require(script:FindFirstAncestor("AppComposition").Parent.Foundation).Enums.Breakpoint
+local config = {
+	[Breakpoint.XSmall] = 360,
+	[Breakpoint.Small] = 600,
+	[Breakpoint.Medium] = 1140,
+	[Breakpoint.Large] = 1520,
+	[Breakpoint.XLarge] = 1920,
+	[Breakpoint.XXLarge] = 1e999
 }
 local list = {
-	breakpoint.XSmall, breakpoint.Small, breakpoint.Medium, breakpoint.Large,
-	breakpoint.XLarge, breakpoint.XXLarge
+	Breakpoint.XSmall, Breakpoint.Small, Breakpoint.Medium, Breakpoint.Large,
+	Breakpoint.XLarge, Breakpoint.XXLarge
 }
 
-return function(p1)
-	-- upvalues: list (ref), t (ref), breakpoint (ref)
-	for i, v in list do
-		if p1 <= (t[v] or 0) then
-			return v
+return function(p1) --[[ Line: 26 | Named "resolveBreakpoint" ]]
+	-- upvalues: list (copy), config (copy), Breakpoint (copy)
+	for _, value in list do
+		if p1 <= (config[value] or 0) then
+			return value
 		end
 	end
-	return breakpoint.XXLarge
+	return Breakpoint.XXLarge
 end

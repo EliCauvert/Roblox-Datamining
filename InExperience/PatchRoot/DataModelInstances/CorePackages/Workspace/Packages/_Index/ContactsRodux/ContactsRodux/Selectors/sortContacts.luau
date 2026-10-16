@@ -1,25 +1,25 @@
-﻿local getDeepValue = require(script.Parent.Parent.Parent.LuaSocialLibrariesDeps).SocialLibraries.config({}).Dictionary.getDeepValue
+﻿local GetDeepValueFunction = require(script.Parent.Parent.Parent.LuaSocialLibrariesDeps).SocialLibraries.config({}).Dictionary.getDeepValue
 
-return function(p1)
-	-- upvalues: getDeepValue (ref)
-	local keyPath = p1.keyPath
+return function(p1) --[[ Line: 6 ]]
+	-- upvalues: GetDeepValueFunction (copy)
+	local KeyPath = p1.keyPath
 	
-	return function(p2)
-		-- upvalues: getDeepValue (copy), keyPath (ref)
-		local t = {}
+	return function(p2) --[[ Line: 8 ]]
+		-- upvalues: GetDeepValueFunction (upval), KeyPath (copy)
+		local List = {}
 		
-		for i, v in pairs(getDeepValue(p2, keyPath .. ".byContactId") or {}) do
-			table.insert(t, {
-				contactId = i,
-				contactName = v.contactName,
-				headshotThumbnailUrl = v.headshotThumbnailUrl,
-				avatarThumbnailUrl = v.avatarThumbnailUrl
+		for ContactId, value in pairs(GetDeepValueFunction(p2, KeyPath .. ".byContactId") or {}) do
+			table.insert(List, {
+				contactId = ContactId,
+				contactName = value.contactName,
+				headshotThumbnailUrl = value.headshotThumbnailUrl,
+				avatarThumbnailUrl = value.avatarThumbnailUrl
 			})
 		end
-		table.sort(t, function(p3, p4)
-			return if p3.contactName and p4.contactName and p3.contactName ~= p4.contactName then p3.contactName < p4.contactName else p3.contactId < p4.contactId
+		table.sort(List, function(A, B): boolean --[[ Line: 20 ]]
+			return if A.contactName and B.contactName and A.contactName ~= B.contactName then A.contactName < B.contactName else A.contactId < B.contactId
 		end)
 		
-		return t
+		return List
 	end
 end

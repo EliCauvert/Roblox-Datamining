@@ -1,186 +1,178 @@
-﻿local groups = script:FindFirstAncestor("Groups")
-local parent = groups.Parent
-local signalsModule = require(parent.Signals)
-local cryoModule = require(parent.Cryo)
-local _ = require(groups.Common.Types)
-local groupsWebApiModule = require(groups.Networking.GroupsWebApi)
-local t = {
+﻿local Groups = script:FindFirstAncestor("Groups")
+local Parent = Groups.Parent
+local SignalsModule = require(Parent.Signals)
+local CryoModule = require(Parent.Cryo)
+local _ = require(Groups.Common.Types)
+local GroupsWebApiModule = require(Groups.Networking.GroupsWebApi)
+local config = {
 	isLoading = false,
 	loadFailure = false,
 	groupsList = nil,
 	canCreateGroup = true
 }
 
-local function translateResultToGroup(p1, p2)
-	local var1
-	local group = p1.group or {}
-	local role = p1.role or {}
-	local owner = group.owner
-	local t = {
-		id = if group.id then group.id else 0,
-		name = group.name,
-		memberCount = group.memberCount,
+local function translateResultToGroup(p1, p2) --[[ Line: 38 ]]
+	local Group = p1.group or {}
+	local Role = p1.role or {}
+	local Owner = Group.owner
+	
+	return {
+		id = if Group.id then Group.id else 0,
+		name = Group.name,
+		memberCount = Group.memberCount,
 		role = {
-			name = role.name,
-			rank = if role.rank then role.rank else 0
+			name = Role.name,
+			rank = if Role.rank then Role.rank else 0
 		},
-		isPrimary = p1.isPrimaryGroup or false
+		isPrimary = p1.isPrimaryGroup or false,
+		isOwner = if Owner and Owner.userId then tostring(Owner.userId) == p2 else false,
+		groupHasVerifiedBadge = Group.hasVerifiedBadge or false,
+		hasSocialModules = Group.hasSocialModules or false,
+		thumbnail = Group.emblemUrl
 	}
-	
-	if owner and owner.userId then
-		var1 = tostring(owner.userId) == p2
-		var1 = nil
-	else
-		var1 = false
-	end
-	t.isOwner = var1
-	t.groupHasVerifiedBadge = group.hasVerifiedBadge or false
-	t.hasSocialModules = group.hasSocialModules or false
-	t.thumbnail = group.emblemUrl
-	
-	return t
 end
 
-local function compareNames(p1, p2)
-	local lowerText = string.lower(p1)
-	local lowerText_1 = string.lower(p2)
-	local substring = string.sub(lowerText, 1, 1)
-	local substring_1 = string.sub(lowerText_1, 1, 1)
-	local var1 = "a" <= substring and substring <= "z"
-	local var2 = "a" <= substring_1 and substring_1 <= "z"
+local function compareNames(Text: string, Text1: string): boolean --[[ Line: 62 ]]
+	local Lowered = string.lower(Text)
+	local Lowered1 = string.lower(Text1)
+	local Segment = string.sub(Lowered, 1, 1)
+	local Segment1 = string.sub(Lowered1, 1, 1)
+	local IsSegmentBelow: boolean = Segment >= "a" and Segment <= "z"
+	local IsSegmentBelow1: boolean = Segment1 >= "a" and Segment1 <= "z"
 	
-	return if not (not var1 and var2) then if var1 and not var2 then false else lowerText < lowerText_1 else true
+	return not IsSegmentBelow and IsSegmentBelow1 or (not IsSegmentBelow or IsSegmentBelow1) and Lowered < Lowered1
 end
 
-local function _(p1)
-	-- upvalues: compareNames (ref)
-	local cloned = table.clone(p1)
-	table.sort(cloned, function(p2, p3)
-		-- upvalues: compareNames (copy)
-		local isOwner = p2.isOwner or false
-		local isOwner_1 = p3.isOwner or false
-		local name = p2.name or ""
-		local name_1 = p3.name or ""
+local function _(Tbl) --[[ Line: 82 | Named "sortGroups" ]]
+	-- upvalues: compareNames (copy)
+	local Copy = table.clone(Tbl)
+	table.sort(Copy, function(A, B) --[[ Line: 84 ]]
+		-- upvalues: compareNames (upval)
+		local IsOwner = A.isOwner or false
+		local IsOwner1 = B.isOwner or false
+		local Name = A.name or ""
+		local Name1 = B.name or ""
 		
-		return if isOwner and isOwner_1 then compareNames(name, name_1) elseif isOwner then true elseif isOwner_1 then false else compareNames(name, name_1)
+		return if IsOwner and IsOwner1 then compareNames(Name, Name1) elseif IsOwner then true else not IsOwner1 and compareNames(Name, Name1)
 	end)
 	
-	return cloned
+	return Copy
 end
 
-local function getVisibleGroups(p1, p2)
-	if not p2 or not p2.groups then
+local function getVisibleGroups(MapResult, p1) --[[ Line: 107 ]]
+	if not p1 or not p1.groups then
 		return {}
 	end
 	local t = {}
 	
-	for i, v in ipairs(p1) do
-		t[v.id] = v
+	for _, value in ipairs(MapResult) do
+		t[value.id] = value
 	end
-	local t_1 = {}
+	local List = {}
 	
-	for i_1, v_1 in ipairs(p2.groups) do
-		if v_1 and v_1.canViewGroup and v_1.groupId then
-			local var1 = tonumber(v_1.groupId)
+	for _, group in ipairs(p1.groups) do
+		if group and group.canViewGroup and group.groupId then
+			local Number: number? = tonumber(group.groupId)
 			
-			if var1 and t[var1] then
-				table.insert(t_1, t[var1])
+			if Number and t[Number] then
+				table.insert(List, t[Number])
 			end
 		end
 	end
-	return t_1
+	return List
 end
 
-local function movePrimaryGroupToFront(p3)
-	local var2 = nil
+local function movePrimaryGroupToFront(List) --[[ Line: 133 ]]
+	local v1 = nil
 	
-	for i, v in ipairs(p3) do
-		if v.isPrimary then
-			var2 = i
+	for i, value in ipairs(List) do
+		if value.isPrimary then
+			v1 = i
 			break
 		end
 	end
-	if not var2 then
-		return p3
+	if not v1 then
+		return List
 	end
-	local t = {}
-	table.insert(t, p3[var2])
+	local List1 = {}
+	table.insert(List1, List[v1])
 	
-	for v, v_1 in ipairs(p3) do
-		if v ~= var2 then
-			table.insert(t, v_1)
+	for i1, value1 in ipairs(List) do
+		if i1 ~= v1 then
+			table.insert(List1, value1)
 		end
 	end
-	return t
+	return List1
 end
 
-local _ = function(p4)
-	if not p4 then
+local _ = function(p2): boolean --[[ Line: 159 | Named "deriveCanCreateGroup" ]]
+	if p2 then
+		local GroupLimit = p2.groupLimit
+		local CurrentGroupCount = p2.currentGroupCount
+		
+		return not GroupLimit or not CurrentGroupCount or CurrentGroupCount < GroupLimit
+	else
 		return true
 	end
-	local groupLimit = p4.groupLimit
-	local currentGroupCount = p4.currentGroupCount
-	
-	return if groupLimit and currentGroupCount then currentGroupCount < groupLimit else true
 end
 
-local function collectGroupIds(p4)
-	if not p4 then
+local function collectGroupIds(List) --[[ Line: 171 ]]
+	if not List then
 		return {}
 	end
-	local t = {}
+	local Ids = {}
 	
-	for i, v in ipairs(p4) do
-		if v.group and v.group.id then
-			table.insert(t, v.group.id)
+	for _, value in ipairs(List) do
+		if value.group and value.group.id then
+			table.insert(Ids, value.group.id)
 		end
 	end
-	return t
+	return Ids
 end
 
-return function()
-	-- upvalues: signalsModule (ref), t (ref), groupsWebApiModule (ref), collectGroupIds (ref), cryoModule (ref), translateResultToGroup (ref), getVisibleGroups (ref), compareNames (ref), movePrimaryGroupToFront (ref)
-	local var3, var4 = signalsModule.createSignal(t)
-	local t_1 = {}
-	local t_2 = {}
+return function() --[[ Line: 184 | Named "createGroupsListStore" ]]
+	-- upvalues: SignalsModule (copy), config (copy), GroupsWebApiModule (copy), collectGroupIds (copy), CryoModule (copy), translateResultToGroup (copy), getVisibleGroups (copy), compareNames (copy), movePrimaryGroupToFront (copy)
+	local Signal, Signal2 = SignalsModule.createSignal(config)
+	local Effects = {}
+	local List = {}
 	
-	local function cleanup()
-		-- upvalues: t_1 (write), t_2 (write)
-		for i, v in t_1 do
-			v()
+	local function cleanup() --[[ Line: 190 ]]
+		-- upvalues: Effects (ref), List (ref)
+		for _, effect in Effects do
+			effect()
 		end
-		for i, v_1 in t_2 do
-			v_1()
+		for _, value in List do
+			value()
 		end
-		t_1 = {}
-		t_2 = {}
+		Effects = {}
+		List = {}
 	end
 	
 	return {
-		getState = var3,
-		fetchGroups = function(p5)
-			-- upvalues: cleanup (ref), var4 (ref), groupsWebApiModule (copy), t_2 (write), signalsModule (copy), collectGroupIds (copy), cryoModule (copy), translateResultToGroup (copy), getVisibleGroups (copy), compareNames (copy), movePrimaryGroupToFront (copy), t_1 (write)
+		getState = Signal,
+		fetchGroups = function(p2) --[[ Line: 201 ]]
+			-- upvalues: cleanup (copy), Signal2 (copy), GroupsWebApiModule (upval), List (ref), SignalsModule (upval), collectGroupIds (upval), CryoModule (upval), translateResultToGroup (upval), getVisibleGroups (upval), compareNames (upval), movePrimaryGroupToFront (upval), Effects (ref)
 			cleanup()
-			var4({
+			Signal2({
 				isLoading = true,
 				loadFailure = false,
 				groupsList = nil,
 				canCreateGroup = true
 			})
-			local userGroupsWithRoles, userGroupsWithRoles_1 = groupsWebApiModule.GetUserGroupsWithRoles(p5)
-			local groupsMetadata, groupsMetadata_1 = groupsWebApiModule.GetGroupsMetadata()
-			table.insert(t_2, userGroupsWithRoles_1)
-			table.insert(t_2, groupsMetadata_1)
-			local var5 = false
-			table.insert(t_1, signalsModule.createEffect(function(p6)
-				-- upvalues: var5 (write), userGroupsWithRoles (ref), var4 (copy), collectGroupIds (copy), groupsWebApiModule (copy), t_2 (copy), signalsModule (copy), groupsMetadata (ref), cryoModule (copy), translateResultToGroup (copy), p5 (ref), getVisibleGroups (copy), compareNames (copy), movePrimaryGroupToFront (copy), t_1 (copy)
-				if var5 then return end
-				local var6 = userGroupsWithRoles(p6)
+			local UserGroupsWithRoles, UserGroupsWithRoles2 = GroupsWebApiModule.GetUserGroupsWithRoles(p2)
+			local GroupsMetadata, GroupsMetadata2 = GroupsWebApiModule.GetGroupsMetadata()
+			table.insert(List, UserGroupsWithRoles2)
+			table.insert(List, GroupsMetadata2)
+			local Flag = false
+			table.insert(Effects, (SignalsModule.createEffect(function(p3) --[[ Line: 220 ]]
+				-- upvalues: Flag (ref), UserGroupsWithRoles (copy), Signal2 (upval), collectGroupIds (upval), GroupsWebApiModule (upval), List (upval), SignalsModule (upval), GroupsMetadata (copy), CryoModule (upval), translateResultToGroup (upval), p2 (copy), getVisibleGroups (upval), compareNames (upval), movePrimaryGroupToFront (upval), Effects (upval)
+				if Flag then return end
+				local UserGroupsWithRolesResult = UserGroupsWithRoles(p3)
 				
-				if var6.status == "Loading" then return end
-				if var6.status == "Failed" then
-					var5 = true
-					var4({
+				if UserGroupsWithRolesResult.status == "Loading" then return end
+				if UserGroupsWithRolesResult.status == "Failed" then
+					Flag = true
+					Signal2({
 						isLoading = false,
 						loadFailure = true,
 						groupsList = nil,
@@ -189,11 +181,11 @@ return function()
 					
 					return
 				end
-				local var7 = if var6.data and var6.data.data then var6.data.data else {}
+				local Data = if UserGroupsWithRolesResult.data and UserGroupsWithRolesResult.data.data then UserGroupsWithRolesResult.data.data else {}
 				
-				if #var7 == 0 then
-					var5 = true
-					var4({
+				if #Data == 0 then
+					Flag = true
+					Signal2({
 						isLoading = false,
 						loadFailure = false,
 						canCreateGroup = true,
@@ -201,86 +193,75 @@ return function()
 					})
 					
 					return
+				else
+					local GroupPolicies, GroupPolicies2 = GroupsWebApiModule.GetGroupPolicies((collectGroupIds(Data)))
+					table.insert(List, GroupPolicies2)
+					table.insert(Effects, (SignalsModule.createEffect(function(p4) --[[ Line: 260 ]]
+						-- upvalues: Flag (upval), GroupPolicies (copy), GroupsMetadata (upval), CryoModule (upval), Data (copy), translateResultToGroup (upval), p2 (upval), getVisibleGroups (upval), compareNames (upval), Signal2 (upval), movePrimaryGroupToFront (upval)
+						if Flag then return end
+						local GroupPoliciesResult = GroupPolicies(p4)
+						
+						if GroupPoliciesResult.status == "Loading" then return end
+						local GroupsMetadataResult = GroupsMetadata(p4)
+						local Data1 = if GroupsMetadataResult.status == "Success" then GroupsMetadataResult.data else nil
+						Flag = true
+						local Data2 = if GroupPoliciesResult.status == "Success" then GroupPoliciesResult.data else nil
+						local MapResult = CryoModule.List.map(Data, function(p5) --[[ Line: 278 ]]
+							-- upvalues: translateResultToGroup (upval), p2 (upval)
+							return (translateResultToGroup(p5, p2))
+						end)
+						local Copy = table.clone(if Data2 then getVisibleGroups(MapResult, Data2) else {})
+						table.sort(Copy, function(A, B) --[[ Line: 84 ]]
+							-- upvalues: compareNames (upval)
+							local IsOwner = A.isOwner or false
+							local IsOwner1 = B.isOwner or false
+							local Name = A.name or ""
+							local Name1 = B.name or ""
+							
+							return if IsOwner and IsOwner1 then compareNames(Name, Name1) elseif IsOwner then true else not IsOwner1 and compareNames(Name, Name1)
+						end)
+						
+						if #Copy == 0 then
+							local config = { isLoading = false, loadFailure = false, groupsList = {} }
+							local CanCreateGroup = nil
+							
+							if Data1 then
+								local GroupLimit = Data1.groupLimit
+								local CurrentGroupCount = Data1.currentGroupCount
+								CanCreateGroup = not GroupLimit or not CurrentGroupCount or CurrentGroupCount < GroupLimit
+							else
+								CanCreateGroup = true
+							end
+							config.canCreateGroup = CanCreateGroup
+							Signal2(config)
+							
+							return
+						else
+							local config1 = {
+								isLoading = false,
+								loadFailure = false,
+								groupsList = movePrimaryGroupToFront(Copy)
+							}
+							local CanCreateGroup = nil
+							
+							if Data1 then
+								local GroupLimit = Data1.groupLimit
+								local CurrentGroupCount = Data1.currentGroupCount
+								CanCreateGroup = not GroupLimit or not CurrentGroupCount or CurrentGroupCount < GroupLimit
+							else
+								CanCreateGroup = true
+							end
+							config1.canCreateGroup = CanCreateGroup
+							Signal2(config1)
+						end
+					end)))
 				end
-				local groupPolicies, groupPolicies_1 = groupsWebApiModule.GetGroupPolicies(collectGroupIds(var7))
-				table.insert(t_2, groupPolicies_1)
-				table.insert(t_1, signalsModule.createEffect(function(p7)
-					-- upvalues: var5 (copy), groupPolicies (ref), groupsMetadata (copy), cryoModule (copy), var7 (ref), translateResultToGroup (copy), p5 (copy), getVisibleGroups (copy), compareNames (copy), var4 (copy), movePrimaryGroupToFront (copy)
-					if var5 then return end
-					local var8 = groupPolicies(p7)
-					
-					if var8.status == "Loading" then return end
-					local groupLimit
-					local var9 = groupsMetadata(p7)
-					local var10 = if var9.status == "Success" then var9.data else nil
-					var5 = true
-					local var11 = if var8.status == "Success" then var8.data else nil
-					local cloned = table.clone(if var11 then getVisibleGroups(cryoModule.List.map(var7, function(p8)
-						-- upvalues: translateResultToGroup (copy), p5 (copy)
-						return translateResultToGroup(p8, p5)
-					end), var11) else {})
-					table.sort(cloned, function(p8, p9)
-						-- upvalues: compareNames (copy)
-						local isOwner = p8.isOwner or false
-						local isOwner_1 = p9.isOwner or false
-						local name = p8.name or ""
-						local name_1 = p9.name or ""
-						
-						return if isOwner and isOwner_1 then compareNames(name, name_1) elseif isOwner then true elseif isOwner_1 then false else compareNames(name, name_1)
-					end)
-					
-					if #cloned == 0 then
-						local var12
-						local var13 = var4
-						local t = { isLoading = false, loadFailure = false, groupsList = {} }
-						
-						if var10 then
-							groupLimit = var10.groupLimit
-							local currentGroupCount = var10.currentGroupCount
-							
-							if groupLimit and currentGroupCount then
-								var12 = currentGroupCount < groupLimit
-								var12 = nil
-							else
-								var12 = true
-							end
-						else
-							var12 = true
-						end
-						t.canCreateGroup = var12
-						var13(t)
-						
-						return
-					else
-						local t = {
-							isLoading = false,
-							loadFailure = false,
-							groupsList = movePrimaryGroupToFront(cloned)
-						}
-						
-						if var10 then
-							local groupLimit_1 = var10.groupLimit
-							local currentGroupCount = var10.currentGroupCount
-							
-							if groupLimit_1 and currentGroupCount then
-								groupLimit = currentGroupCount < groupLimit_1
-								groupLimit = nil
-							else
-								groupLimit = true
-							end
-						else
-							groupLimit = true
-						end
-						t.canCreateGroup = groupLimit
-						var4(t)
-					end
-				end))
-			end))
+			end)))
 		end,
-		reset = function()
-			-- upvalues: cleanup (ref), var4 (ref), t (copy)
+		reset = function() --[[ Line: 311 ]]
+			-- upvalues: cleanup (copy), Signal2 (copy), config (upval)
 			cleanup()
-			var4(t)
+			Signal2(config)
 		end
 	}
 end

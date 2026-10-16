@@ -1,41 +1,43 @@
-﻿local sendMessageErrorModule = require(script:FindFirstAncestor("FriendsChat").Parent.AppChat.SendMessageError)
+﻿local SendMessageErrorModule = require(script:FindFirstAncestor("FriendsChat").Parent.AppChat.SendMessageError)
 
-return function(p1, p2)
-	-- upvalues: sendMessageErrorModule (ref)
-	local t = {
-		messageSentResult = sendMessageErrorModule.OtherFailure,
-		recipientIds = p2
+return function(p1, RecipientIds) --[[ Line: 27 | Named "getConversationMessageSentInfo" ]]
+	-- upvalues: SendMessageErrorModule (copy)
+	local config = {
+		messageSentResult = SendMessageErrorModule.OtherFailure,
+		recipientIds = RecipientIds
 	}
 	
 	if p1 == nil then
-		t.messageSentResult = sendMessageErrorModule.NoResponse
+		config.messageSentResult = SendMessageErrorModule.NoResponse
 		
-		return t
+		return config
 	elseif (p1.StatusCode or p1.responseCode) == 409 then
-		t.messageSentResult = sendMessageErrorModule.Conflict
+		config.messageSentResult = SendMessageErrorModule.Conflict
 		
-		return t
+		return config
 	elseif p1.responseBody == nil then
-		t.messageSentResult = sendMessageErrorModule.NoResponseBody
+		config.messageSentResult = SendMessageErrorModule.NoResponseBody
 		
-		return t
-	end
-	local messages = p1.responseBody.messages
-	
-	if messages == nil or #messages == 0 then
-		t.messageSentResult = sendMessageErrorModule.NoMessages
+		return config
+	else
+		local Messages = p1.responseBody.messages
 		
-		return t
-	end
-	local var1 = messages[1]
-	
-	if var1.status == nil then
-		t.messageSentResult = sendMessageErrorModule.NoMessageStatus
+		if Messages == nil or #Messages == 0 then
+			config.messageSentResult = SendMessageErrorModule.NoMessages
+			
+			return config
+		end
+		local Message = Messages[1]
 		
-		return t
+		if Message.status == nil then
+			config.messageSentResult = SendMessageErrorModule.NoMessageStatus
+			
+			return config
+		else
+			config.messageSentResult = Message.status
+			config.messageId = Message.id
+			
+			return config
+		end
 	end
-	t.messageSentResult = var1.status
-	t.messageId = var1.id
-	
-	return t
 end

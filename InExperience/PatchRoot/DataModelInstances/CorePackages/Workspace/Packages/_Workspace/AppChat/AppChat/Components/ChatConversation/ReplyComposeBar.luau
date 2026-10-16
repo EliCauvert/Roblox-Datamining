@@ -1,50 +1,52 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local fFlagAppChatUseProfileFrameThumbnailModule = require(appChat.Flags.FFlagAppChatUseProfileFrameThumbnail)
-local reactModule = require(parent.React)
-local cryoModule = require(parent.Cryo)
-local foundationModule = require(parent.Foundation)
-local builderIconsModule = require(parent.BuilderIcons)
-local replyComposeBarTextModule = require(script.Parent.ReplyComposeBarText)
-local useFoundationPresenceModule = require(appChat.Hooks.useFoundationPresence)
-local t = {
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local FFlagAppChatUseProfileFrameThumbnailModule = require(AppChat.Flags.FFlagAppChatUseProfileFrameThumbnail)
+local ReactModule = require(Parent.React)
+local CryoModule = require(Parent.Cryo)
+local FoundationModule = require(Parent.Foundation)
+local BuilderIconsModule = require(Parent.BuilderIcons)
+local ReplyComposeBarTextModule = require(script.Parent.ReplyComposeBarText)
+local UseFoundationPresenceModule = require(AppChat.Hooks.useFoundationPresence)
+local config = {
 	LayoutOrder = 3,
 	replyingToUserText = nil,
 	replyingToUserContent = nil,
 	replyingToUserId = nil,
-	onCloseActivated = function() end
+	onCloseActivated = function() --[[ Line: 32 ]] end
 }
 
-function ReplyComposeBar(p1)
-	-- upvalues: cryoModule (ref), t (ref), foundationModule (ref), useFoundationPresenceModule (ref), reactModule (ref), fFlagAppChatUseProfileFrameThumbnailModule (ref), replyComposeBarTextModule (ref), builderIconsModule (ref)
-	local var1 = cryoModule.Dictionary.union(t, p1)
+function ReplyComposeBar(p1) --[[ Line: 35 ]]
+	-- upvalues: CryoModule (copy), config (copy), FoundationModule (copy), UseFoundationPresenceModule (copy), ReactModule (copy), FFlagAppChatUseProfileFrameThumbnailModule (copy), ReplyComposeBarTextModule (copy), BuilderIconsModule (copy)
+	local UnionResult = CryoModule.Dictionary.union(config, p1)
+	local UseTokensResult = FoundationModule.Hooks.useTokens()
+	local UseFoundationPresenceModuleResult = UseFoundationPresenceModule(UnionResult.replyingToUserId)
 	
-	return reactModule.createElement(foundationModule.View, {
+	return ReactModule.createElement(FoundationModule.View, {
 		tag = "row size-full-0 auto-y align-y-center gap-medium",
-		LayoutOrder = var1.LayoutOrder
+		LayoutOrder = UnionResult.LayoutOrder
 	}, {
-		Avatar = var1.replyingToUserId and reactModule.createElement(foundationModule.Avatar, {
+		Avatar = UnionResult.replyingToUserId and ReactModule.createElement(FoundationModule.Avatar, {
 			LayoutOrder = 1,
-			userId = var1.replyingToUserId,
-			userPresence = useFoundationPresenceModule(var1.replyingToUserId).presence,
-			backgroundStyle = foundationModule.Hooks.useTokens().Color.Surface.Surface_200,
-			size = foundationModule.Enums.InputSize.Medium,
-			includeProfileFrame = fFlagAppChatUseProfileFrameThumbnailModule
+			userId = UnionResult.replyingToUserId,
+			userPresence = UseFoundationPresenceModuleResult.presence,
+			backgroundStyle = UseTokensResult.Color.Surface.Surface_200,
+			size = FoundationModule.Enums.InputSize.Medium,
+			includeProfileFrame = FFlagAppChatUseProfileFrameThumbnailModule
 		}) or nil,
-		Text = reactModule.createElement(replyComposeBarTextModule, {
+		Text = ReactModule.createElement(ReplyComposeBarTextModule, {
 			layoutOrder = 2,
-			userText = var1.replyingToUserText,
-			contentText = var1.replyingToUserContent
+			userText = UnionResult.replyingToUserText,
+			contentText = UnionResult.replyingToUserContent
 		}),
-		CloseButton = reactModule.createElement(foundationModule.IconButton, {
+		CloseButton = ReactModule.createElement(FoundationModule.IconButton, {
 			isCircular = true,
 			LayoutOrder = 3,
-			onActivated = var1.onCloseActivated,
-			icon = builderIconsModule.Icon.X,
-			variant = foundationModule.Enums.ButtonVariant.Utility,
-			size = foundationModule.Enums.InputSize.Medium
+			onActivated = UnionResult.onCloseActivated,
+			icon = BuilderIconsModule.Icon.X,
+			variant = FoundationModule.Enums.ButtonVariant.Utility,
+			size = FoundationModule.Enums.InputSize.Medium
 		})
 	})
 end
 
-return reactModule.memo(ReplyComposeBar)
+return ReactModule.memo(ReplyComposeBar)

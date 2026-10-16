@@ -1,33 +1,35 @@
-﻿local parent = script:FindFirstAncestor("Moments").Parent
-local reactModule = require(parent.React)
-local view = require(parent.Foundation).View
-local useSignalState = require(parent.SignalsReact).useSignalState
-local momentContextModule = require(script.Parent.Parent.MomentContext)
-local useMomentGesturesModule = require(script.Parent.useMomentGestures)
-local useReactionCommitModule = require(script.Parent.useReactionCommit)
+﻿local Parent = script:FindFirstAncestor("Moments").Parent
+local ReactModule = require(Parent.React)
+local View = require(Parent.Foundation).View
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local MomentContextModule = require(script.Parent.Parent.MomentContext)
+local UseMomentGesturesModule = require(script.Parent.useMomentGestures)
+local UseReactionCommitModule = require(script.Parent.useReactionCommit)
 
-return reactModule.memo(function(p1)
-	-- upvalues: momentContextModule (ref), useReactionCommitModule (ref), useSignalState (ref), reactModule (ref), useMomentGesturesModule (ref), view (ref)
-	local var1 = momentContextModule.useMoment()
-	local controller = var1.controller
-	local store = var1.store
-	local var2 = useReactionCommitModule()
+return ReactModule.memo(function(p1) --[[ Line: 33 | Named "MomentGestureLayer" ]]
+	-- upvalues: MomentContextModule (copy), UseReactionCommitModule (copy), UseSignalStateFunction (copy), ReactModule (copy), UseMomentGesturesModule (copy), View (copy)
+	local UseMomentResult = MomentContextModule.useMoment()
+	local Controller = UseMomentResult.controller
+	local Store = UseMomentResult.store
+	local UseReactionCommitModuleResult = UseReactionCommitModule()
+	local UseSignalStateResult = UseSignalStateFunction(Store.getIsModerated)
+	local UseSignalStateResult1 = UseSignalStateFunction(Store.getIsScrubbing)
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "size-full",
 		Active = true,
 		BackgroundTransparency = 1,
-		ref = useMomentGesturesModule(not useSignalState(store.getIsModerated) and not useSignalState(store.getIsScrubbing), {
-			onSingleTapConfirmed = reactModule.useCallback(function()
-				-- upvalues: controller (ref)
-				if controller ~= nil then
-					controller.toggle()
+		ref = UseMomentGesturesModule(not UseSignalStateResult and not UseSignalStateResult1, {
+			onSingleTapConfirmed = ReactModule.useCallback(function() --[[ Line: 49 ]]
+				-- upvalues: Controller (copy)
+				if Controller ~= nil then
+					Controller.toggle()
 				end
-			end, { controller }),
-			onDoubleTap = reactModule.useCallback(function(p2)
-				-- upvalues: var2 (ref)
-				var2("doubleTap", p2, nil)
-			end, { var2 })
+			end, { Controller }),
+			onDoubleTap = ReactModule.useCallback(function(p2) --[[ Line: 55 ]]
+				-- upvalues: UseReactionCommitModuleResult (copy)
+				UseReactionCommitModuleResult("doubleTap", p2, nil)
+			end, { UseReactionCommitModuleResult })
 		}).ref,
 		ZIndex = p1.ZIndex
 	})

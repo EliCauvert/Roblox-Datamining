@@ -1,82 +1,92 @@
-﻿local genericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
-local parent = genericAbuseReporting.Parent
-local reactModule = require(genericAbuseReporting.Parent.React)
-local foundationModule = require(parent.Foundation)
-local view = foundationModule.View
-local scrollView = foundationModule.ScrollView
-local scrollBarVisibility = foundationModule.Enums.ScrollBarVisibility
-local useLayerCollector = require(parent.UIBlox).Core.Layout.LayerCollector.useLayerCollector
+﻿local GenericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
+local Parent = GenericAbuseReporting.Parent
+local ReactModule = require(GenericAbuseReporting.Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local ScrollView = FoundationModule.ScrollView
+local ScrollBarVisibility = FoundationModule.Enums.ScrollBarVisibility
+local UseLayerCollectorFunction = require(Parent.UIBlox).Core.Layout.LayerCollector.useLayerCollector
 
-return reactModule.forwardRef(function(p1, p2)
-	-- upvalues: reactModule (ref), useLayerCollector (ref), view (ref), scrollView (ref), scrollBarVisibility (ref)
-	local var1 = reactModule.useRef(nil)
-	local var2, var3 = reactModule.useState(Vector2.zero)
-	local var4, var5 = reactModule.useState(Vector2.zero)
-	local var6, var7 = reactModule.useState(true)
-	local var8, var9 = reactModule.useState(false)
-	local absoluteSize = useLayerCollector().absoluteSize
-	reactModule.useLayoutEffect(function()
-		-- upvalues: var1 (ref), var3 (ref), var5 (ref)
-		if var1.current then
-			var3(var1.current.AbsoluteCanvasSize)
-			var5(var1.current.AbsoluteWindowSize)
-			local var10 = var1.current:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(function()
-				-- upvalues: var3 (copy), var1 (copy)
-				var3(var1.current.AbsoluteCanvasSize)
+return (ReactModule.forwardRef(function(p1, Ref) --[[ Line: 21 ]]
+	-- upvalues: ReactModule (copy), UseLayerCollectorFunction (copy), View (copy), ScrollView (copy), ScrollBarVisibility (copy)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(Vector2.zero)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(Vector2.zero)
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(true)
+	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(false)
+	local AbsoluteSize = UseLayerCollectorFunction().absoluteSize
+	ReactModule.useLayoutEffect(function() --[[ Line: 30 ]]
+		-- upvalues: UseRefResult (copy), UseStateResult2 (copy), UseStateResult2_1 (copy)
+		if UseRefResult.current then
+			UseStateResult2(UseRefResult.current.AbsoluteCanvasSize)
+			UseStateResult2_1(UseRefResult.current.AbsoluteWindowSize)
+			local Connection = UseRefResult.current:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(function() --[[ Line: 37 ]]
+				-- upvalues: UseStateResult2 (upval), UseRefResult (upval)
+				UseStateResult2(UseRefResult.current.AbsoluteCanvasSize)
 			end)
-			local var11 = var1.current:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(function()
-				-- upvalues: var5 (copy), var1 (copy)
-				var5(var1.current.AbsoluteWindowSize)
+			local Connection1 = UseRefResult.current:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(function() --[[ Line: 42 ]]
+				-- upvalues: UseStateResult2_1 (upval), UseRefResult (upval)
+				UseStateResult2_1(UseRefResult.current.AbsoluteWindowSize)
 			end)
 			
-			return function()
-				-- upvalues: var10 (ref), var11 (ref)
-				var10:Disconnect()
-				var11:Disconnect()
+			return function() --[[ Line: 46 ]]
+				-- upvalues: Connection (copy), Connection1 (copy)
+				Connection:Disconnect()
+				Connection1:Disconnect()
 			end
+		else
+			return function() --[[ Line: 51 ]] end
 		end
-		return function() end
-	end, { var1.current, absoluteSize })
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), var2 (ref), var4 (ref), var7 (ref), var9 (ref)
-		if var1.current then
-			local var10 = var1.current:GetPropertyChangedSignal("CanvasPosition"):Connect(function()
-				-- upvalues: var1 (copy), var2 (copy), var4 (copy), var7 (copy), var9 (copy)
-				local canvasPosition = var1.current.CanvasPosition
+	end, { UseRefResult.current, AbsoluteSize })
+	ReactModule.useEffect(function() --[[ Line: 54 ]]
+		-- upvalues: UseRefResult (copy), UseStateResult (copy), UseStateResult1 (copy), UseStateResult2_2 (copy), UseStateResult2_3 (copy)
+		if UseRefResult.current then
+			local Connection = UseRefResult.current:GetPropertyChangedSignal("CanvasPosition"):Connect(function() --[[ Line: 56 ]]
+				-- upvalues: UseRefResult (upval), UseStateResult (upval), UseStateResult1 (upval), UseStateResult2_2 (upval), UseStateResult2_3 (upval)
+				local CanvasPosition = UseRefResult.current.CanvasPosition
 				
-				if var2.Y == var4.Y then
-					var7(true)
-					var9(true)
-					
-					return
-				elseif canvasPosition.Y <= 0 then
-					var7(true)
-					
-					return
-				elseif var2.Y - var4.Y <= canvasPosition.Y then
-					var9(true)
+				if UseStateResult.Y == UseStateResult1.Y then
+					UseStateResult2_2(true)
+					UseStateResult2_3(true)
 					
 					return
 				end
-				var7(false)
-				var9(false)
+				if CanvasPosition.Y <= 0 then
+					UseStateResult2_2(true)
+					
+					return
+				end
+				if UseStateResult.Y - UseStateResult1.Y <= CanvasPosition.Y then
+					UseStateResult2_3(true)
+					
+					return
+				else
+					UseStateResult2_2(false)
+					UseStateResult2_3(false)
+				end
 			end)
 			
-			return function()
-				-- upvalues: var10 (ref)
-				var10:Disconnect()
+			return function() --[[ Line: 71 ]]
+				-- upvalues: Connection (copy)
+				Connection:Disconnect()
 			end
+		else
+			return function() --[[ Line: 75 ]] end
 		end
-		return function() end
-	end, { var1.current, absoluteSize, var2, var4 })
+	end, {
+		UseRefResult.current,
+		AbsoluteSize,
+		UseStateResult,
+		UseStateResult1
+	})
 	
-	return reactModule.createElement(view, { tag = "size-full" }, {
-		TopGradient = reactModule.createElement(view, {
+	return ReactModule.createElement(View, { tag = "size-full" }, {
+		TopGradient = ReactModule.createElement(View, {
 			ZIndex = 2,
 			Size = UDim2.new(1, -15, 0, p1.gradientHeight),
-			tag = if not var6 then "bg-surface-300" else nil
+			tag = if UseStateResult3 then nil else "bg-surface-300"
 		}, {
-			UIGradient = reactModule.createElement("UIGradient", {
+			UIGradient = ReactModule.createElement("UIGradient", {
 				Rotation = 90,
 				Transparency = NumberSequence.new({
 					NumberSequenceKeypoint.new(0, 0),
@@ -84,13 +94,13 @@ return reactModule.forwardRef(function(p1, p2)
 				})
 			})
 		}),
-		BottomGradient = reactModule.createElement(view, {
+		BottomGradient = ReactModule.createElement(View, {
 			ZIndex = 2,
 			Position = UDim2.new(0, 0, 1, -p1.gradientHeight),
 			Size = UDim2.new(1, -15, 0, p1.gradientHeight),
-			tag = if not var8 then "bg-surface-300" else nil
+			tag = if UseStateResult4 then nil else "bg-surface-300"
 		}, {
-			UIGradient = reactModule.createElement("UIGradient", {
+			UIGradient = ReactModule.createElement("UIGradient", {
 				Rotation = 270,
 				Transparency = NumberSequence.new({
 					NumberSequenceKeypoint.new(0, 0),
@@ -98,17 +108,17 @@ return reactModule.forwardRef(function(p1, p2)
 				})
 			})
 		}),
-		ScrollView = reactModule.createElement(scrollView, {
+		ScrollView = ReactModule.createElement(ScrollView, {
 			Size = p1.Size or UDim2.new(1, 0, 1, 0),
 			ZIndex = p1.ZIndex,
 			scroll = {
 				AutomaticCanvasSize = Enum.AutomaticSize.Y,
 				CanvasSize = UDim2.fromOffset(0, 0),
-				scrollBarVisibility = scrollBarVisibility.Always,
+				scrollBarVisibility = ScrollBarVisibility.Always,
 				ScrollingDirection = Enum.ScrollingDirection.Y
 			},
-			scrollingFrameRef = var1,
-			ref = p2
+			scrollingFrameRef = UseRefResult,
+			ref = Ref
 		}, p1.children)
 	})
-end)
+end))

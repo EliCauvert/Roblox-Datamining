@@ -1,65 +1,65 @@
-﻿local sessionService = game:GetService("SessionService")
-local parent = script:FindFirstAncestor("AvatarSwitcher").Parent
-local foundationModule = require(parent.Foundation)
-local orientation = foundationModule.Enums.Orientation
-local dialog = foundationModule.Dialog
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local dialogSize = foundationModule.Enums.DialogSize
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local avatarExperienceAnalyticsModule = require(parent.AvatarExperienceAnalytics)
-local addUnifiedEventLogging = avatarExperienceAnalyticsModule.addUnifiedEventLogging
-local unifiedEventLogEnums = avatarExperienceAnalyticsModule.UnifiedEventLogEnums
-local unifiedLoggingSurface = require(parent.AvatarExperienceNavigation).Enums.UnifiedLoggingSurface
+﻿local SessionService = game:GetService("SessionService")
+local Parent = script:FindFirstAncestor("AvatarSwitcher").Parent
+local FoundationModule = require(Parent.Foundation)
+local Orientation = FoundationModule.Enums.Orientation
+local Dialog = FoundationModule.Dialog
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local DialogSize = FoundationModule.Enums.DialogSize
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local AvatarExperienceAnalyticsModule = require(Parent.AvatarExperienceAnalytics)
+local AddUnifiedEventLoggingFunction = AvatarExperienceAnalyticsModule.addUnifiedEventLogging
+local UnifiedEventLogEnums = AvatarExperienceAnalyticsModule.UnifiedEventLogEnums
+local UnifiedLoggingSurface = require(Parent.AvatarExperienceNavigation).Enums.UnifiedLoggingSurface
 
-return function(p1)
-	-- upvalues: reactModule (ref), useLocalization (ref), addUnifiedEventLogging (ref), unifiedEventLogEnums (ref), unifiedLoggingSurface (ref), sessionService (ref), dialog (ref), dialogSize (ref), orientation (ref), buttonVariant (ref)
-	local var1 = reactModule.useRef(nil)
-	local var2 = reactModule.useRef(nil)
-	local var3 = useLocalization({
+return function(p1) --[[ Line: 31 | Named "RespawnChoiceDialog" ]]
+	-- upvalues: ReactModule (copy), UseLocalizationFunction (copy), AddUnifiedEventLoggingFunction (copy), UnifiedEventLogEnums (copy), UnifiedLoggingSurface (copy), SessionService (copy), Dialog (copy), DialogSize (copy), Orientation (copy), ButtonVariant (copy)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseLocalizationResult = UseLocalizationFunction({
 		headerText = "Feature.AvatarSwitcher.Heading.RespawnToSwitch",
 		contentText = "Feature.AvatarSwitcher.Label.RespawnLater",
 		respawnText = "Feature.AvatarSwitcher.Action.Respawn",
 		respawnLaterText = "Feature.AvatarSwitcher.Action.RespawnLater"
 	})
-	reactModule.useEffect(function()
-		-- upvalues: addUnifiedEventLogging (copy), var1 (ref), unifiedEventLogEnums (copy), unifiedLoggingSurface (copy), sessionService (copy), var2 (ref)
-		addUnifiedEventLogging(var1, {
+	ReactModule.useEffect(function() --[[ Line: 42 ]]
+		-- upvalues: AddUnifiedEventLoggingFunction (upval), UseRefResult (copy), UnifiedEventLogEnums (upval), UnifiedLoggingSurface (upval), SessionService (upval), UseRefResult1 (copy)
+		AddUnifiedEventLoggingFunction(UseRefResult, {
 			elementName = "CONFIRM_SWITCH_AVATAR_BUTTON",
-			action = unifiedEventLogEnums.MarketplaceUnifiedAction.UI_ELEMENT_CLICK,
-			surface = unifiedLoggingSurface.IN_EXPERIENCE_AVATAR_SWITCHER
-		}, { sessionTagName = sessionService:GetSessionTag("level2a") })
-		addUnifiedEventLogging(var2, {
+			action = UnifiedEventLogEnums.MarketplaceUnifiedAction.UI_ELEMENT_CLICK,
+			surface = UnifiedLoggingSurface.IN_EXPERIENCE_AVATAR_SWITCHER
+		}, { sessionTagName = SessionService:GetSessionTag("level2a") })
+		AddUnifiedEventLoggingFunction(UseRefResult1, {
 			elementName = "DEFER_SWITCH_AVATAR_BUTTON",
-			action = unifiedEventLogEnums.MarketplaceUnifiedAction.UI_ELEMENT_CLICK,
-			surface = unifiedLoggingSurface.IN_EXPERIENCE_AVATAR_SWITCHER
-		}, { sessionTagName = sessionService:GetSessionTag("level2a") })
+			action = UnifiedEventLogEnums.MarketplaceUnifiedAction.UI_ELEMENT_CLICK,
+			surface = UnifiedLoggingSurface.IN_EXPERIENCE_AVATAR_SWITCHER
+		}, { sessionTagName = SessionService:GetSessionTag("level2a") })
 	end, {})
 	
-	return reactModule.createElement(dialog.Root, {
+	return ReactModule.createElement(Dialog.Root, {
 		disablePortal = false,
 		hasBackdrop = true,
-		size = dialogSize.Small,
+		size = DialogSize.Small,
 		onClose = p1.onClose
 	}, {
-		DialogTitle = reactModule.createElement(dialog.Title, { text = var3.headerText }),
-		DialogContent = reactModule.createElement(dialog.Content, nil, {
-			DialogText = reactModule.createElement(dialog.Text, { Text = var3.contentText })
+		DialogTitle = ReactModule.createElement(Dialog.Title, { text = UseLocalizationResult.headerText }),
+		DialogContent = ReactModule.createElement(Dialog.Content, nil, {
+			DialogText = ReactModule.createElement(Dialog.Text, { Text = UseLocalizationResult.contentText })
 		}),
-		DialogActions = reactModule.createElement(dialog.Actions, {
-			orientation = orientation.Vertical,
+		DialogActions = ReactModule.createElement(Dialog.Actions, {
+			orientation = Orientation.Vertical,
 			actions = {
 				{
-					text = var3.respawnText,
-					variant = buttonVariant.Emphasis,
+					text = UseLocalizationResult.respawnText,
+					variant = ButtonVariant.Emphasis,
 					onActivated = p1.onConfirm,
-					ref = var1
+					ref = UseRefResult
 				},
 				{
-					text = var3.respawnLaterText,
-					variant = buttonVariant.Standard,
+					text = UseLocalizationResult.respawnLaterText,
+					variant = ButtonVariant.Standard,
 					onActivated = p1.onDefer,
-					ref = var2
+					ref = UseRefResult1
 				}
 			}
 		})

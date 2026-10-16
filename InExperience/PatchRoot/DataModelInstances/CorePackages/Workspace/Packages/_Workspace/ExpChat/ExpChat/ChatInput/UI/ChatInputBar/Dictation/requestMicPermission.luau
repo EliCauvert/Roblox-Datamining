@@ -1,23 +1,23 @@
-﻿local default = require(script:FindFirstAncestor("ExpChat").Parent.PermissionsProtocol).PermissionsProtocol.default
-local t = {
+﻿local Default = require(script:FindFirstAncestor("ExpChat").Parent.PermissionsProtocol).PermissionsProtocol.default
+local PermissionStatus = {
 	Granted = "granted",
 	Denied = "denied",
 	AlreadyAllowed = "already_allowed"
 }
 
 return {
-	requestMicPermission = function()
-		-- upvalues: default (ref), t (ref)
-		return default:hasPermissions({ default.Permissions.MICROPHONE_ACCESS }):andThen(function(p1)
-			-- upvalues: default (copy), t (copy)
-			return if p1.status == default.Status.AUTHORIZED then { status = t.AlreadyAllowed } else default:requestPermissions({ default.Permissions.MICROPHONE_ACCESS }):andThen(function(p2)
-				-- upvalues: default (copy), t (copy)
-				return if p2.status == default.Status.AUTHORIZED then { status = t.Granted } else { status = t.Denied }
+	requestMicPermission = function() --[[ Line: 23 ]]
+		-- upvalues: Default (copy), PermissionStatus (copy)
+		return Default:hasPermissions({ Default.Permissions.MICROPHONE_ACCESS }):andThen(function(Result) --[[ Line: 25 ]]
+			-- upvalues: Default (upval), PermissionStatus (upval)
+			return if Result.status == Default.Status.AUTHORIZED then { status = PermissionStatus.AlreadyAllowed } else Default:requestPermissions({ Default.Permissions.MICROPHONE_ACCESS }):andThen(function(Result) --[[ Line: 30 ]]
+				-- upvalues: Default (upval), PermissionStatus (upval)
+				return if Result.status == Default.Status.AUTHORIZED then { status = PermissionStatus.Granted } else { status = PermissionStatus.Denied }
 			end)
-		end):catch(function(p1)
-			-- upvalues: t (copy)
-			return { status = t.Denied, error = tostring(p1) }
+		end):catch(function(Err) --[[ Line: 37 ]]
+			-- upvalues: PermissionStatus (upval)
+			return { status = PermissionStatus.Denied, error = tostring(Err) }
 		end)
 	end,
-	PermissionStatus = t
+	PermissionStatus = PermissionStatus
 }

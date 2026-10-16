@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.ToastLite.ToastLite)
+﻿return (require(script.Parent.Parent.Parent._Index.ToastLite.ToastLite))

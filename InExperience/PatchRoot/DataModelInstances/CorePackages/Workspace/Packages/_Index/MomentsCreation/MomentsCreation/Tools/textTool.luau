@@ -1,44 +1,41 @@
-﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
-local parent = momentsCreation.Parent
-local builderIconsModule = require(parent.BuilderIcons)
-local momentsCommonModule = require(parent.MomentsCommon)
-local reactModule = require(parent.React)
-local creationFlowStateModule = require(momentsCreation.Enums.CreationFlowState)
-local _ = require(momentsCreation.Types.CreationFlowTypes)
-local createEditSessionModule = require(momentsCreation.Stores.createEditSession)
-local textOverlayControlsModule = require(momentsCreation.Components.TextOverlay.TextOverlayControls)
-local textOverlayLayerModule = require(momentsCreation.Components.TextOverlay.TextOverlayLayer)
-local eventNames = momentsCommonModule.Analytics.EventNames
+﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
+local Parent = MomentsCreation.Parent
+local ReactModule = require(Parent.React)
+local _ = require(MomentsCreation.Types.CreationFlowTypes)
+local CreateEditSessionModule = require(MomentsCreation.Stores.createEditSession)
+local TextOverlayControlsModule = require(MomentsCreation.Components.TextOverlay.TextOverlayControls)
+local TextOverlayLayerModule = require(MomentsCreation.Components.TextOverlay.TextOverlayLayer)
+local EventNames = require(Parent.MomentsCommon).Analytics.EventNames
 
 return {
 	kind = "text",
 	presentation = "Step",
 	zIndex = 3,
-	step = creationFlowStateModule.TextOverlay,
+	step = require(MomentsCreation.Enums.CreationFlowState).TextOverlay,
 	cta = {
 		localizationKey = "Feature.Moments.Action.AddText",
 		order = 3,
-		icon = builderIconsModule.Icon.TextUppercaseALowercaseA,
-		analyticsEvent = eventNames.EditingFlowTextOverlayButtonPressed,
-		commitAnalyticsEvent = eventNames.EditingFlowTextOverlayDoneButtonPressed,
-		cancelAnalyticsEvent = eventNames.EditingFlowTextOverlayBackButtonPressed
+		icon = require(Parent.BuilderIcons).Icon.TextUppercaseALowercaseA,
+		analyticsEvent = EventNames.EditingFlowTextOverlayButtonPressed,
+		commitAnalyticsEvent = EventNames.EditingFlowTextOverlayDoneButtonPressed,
+		cancelAnalyticsEvent = EventNames.EditingFlowTextOverlayBackButtonPressed
 	},
-	supportedCaptureTypes = { Enum.CaptureType.Video },
-	createSession = function()
-		-- upvalues: createEditSessionModule (ref)
-		return createEditSessionModule()
+	supportedCaptureTypes = if require(MomentsCreation.Flags.FFlagMomentsTextOverlayOnPhotos) then { Enum.CaptureType.Video, Enum.CaptureType.Screenshot } else { Enum.CaptureType.Video },
+	createSession = function() --[[ Line: 43 ]]
+		-- upvalues: CreateEditSessionModule (copy)
+		return CreateEditSessionModule()
 	end,
-	renderEditor = function(p1)
-		-- upvalues: reactModule (ref), textOverlayControlsModule (ref)
-		return reactModule.createElement(textOverlayControlsModule, { layoutOrder = 2, controller = p1 })
+	renderEditor = function(Controller) --[[ Line: 46 ]]
+		-- upvalues: ReactModule (copy), TextOverlayControlsModule (copy)
+		return ReactModule.createElement(TextOverlayControlsModule, { layoutOrder = 2, controller = Controller })
 	end,
-	renderPreviewLayer = function(p1, p2)
-		-- upvalues: reactModule (ref), textOverlayLayerModule (ref)
-		return reactModule.createElement(textOverlayLayerModule, { zIndex = 3, controller = p1, ctx = p2 })
+	renderPreviewLayer = function(Controller, Ctx) --[[ Line: 51 ]]
+		-- upvalues: ReactModule (copy), TextOverlayLayerModule (copy)
+		return ReactModule.createElement(TextOverlayLayerModule, { zIndex = 3, controller = Controller, ctx = Ctx })
 	end,
-	toEdits = function(p1)
-		local var1 = p1 and p1[1]
+	toEdits = function(Entry) --[[ Line: 54 ]]
+		local Entry1 = Entry and Entry[1]
 		
-		return if var1 == nil or var1.text == "" then {} else { textOverlays = p1 }
+		return if Entry1 == nil or Entry1.text == "" then {} else { textOverlays = Entry }
 	end
 }

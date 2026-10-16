@@ -1,26 +1,26 @@
-﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
-local momentsCommonModule = require(momentsCreation.Parent.MomentsCommon)
-local loggerModule = require(momentsCreation.Logger)
-local fFlagMomentsRealtimeSessionTelemetry = momentsCommonModule.Flags.FFlagMomentsRealtimeSessionTelemetry
+﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
+local MomentsCommonModule = require(MomentsCreation.Parent.MomentsCommon)
+local LoggerModule = require(MomentsCreation.Logger)
+local FFlagMomentsRealtimeSessionTelemetry = MomentsCommonModule.Flags.FFlagMomentsRealtimeSessionTelemetry
 
-return function(p1, p2)
-	-- upvalues: fFlagMomentsRealtimeSessionTelemetry (ref), momentsCommonModule (ref), loggerModule (ref)
-	p2.uploadStore.setSuccess(p1)
+return function(AssetId, p1) --[[ Line: 38 | Named "completeMomentUpload" ]]
+	-- upvalues: FFlagMomentsRealtimeSessionTelemetry (copy), MomentsCommonModule (copy), LoggerModule (copy)
+	p1.uploadStore.setSuccess(AssetId)
 	
-	if fFlagMomentsRealtimeSessionTelemetry then
-		momentsCommonModule.Analytics.reportMomentsCreationStep("upload", "success")
+	if FFlagMomentsRealtimeSessionTelemetry then
+		MomentsCommonModule.Analytics.reportMomentsCreationStep("upload", "success")
 	end
-	local feedStore = p2.feedStore
+	local FeedStore = p1.feedStore
 	
-	if feedStore then
-		feedStore.prependItem({ assetId = p1 })
+	if FeedStore then
+		FeedStore.prependItem({ assetId = AssetId })
 	end
-	local myCreationsStore = p2.myCreationsStore
+	local MyCreationsStore = p1.myCreationsStore
 	
-	if myCreationsStore then
-		myCreationsStore.prependItem({ assetId = p1 })
-		myCreationsStore.invalidateCount()
+	if MyCreationsStore then
+		MyCreationsStore.prependItem({ assetId = AssetId })
+		MyCreationsStore.invalidateCount()
 	end
-	p2.onPostedToFeed()
-	loggerModule:debug("event=completion assetId={} MomentsUseBackendPostStatusNotification={} localSuccessToast={}", tostring(p1), tostring(true), "suppressed")
+	p1.onPostedToFeed()
+	LoggerModule:debug("event=completion assetId={} MomentsUseBackendPostStatusNotification={} localSuccessToast={}", tostring(AssetId), tostring(true), "suppressed")
 end

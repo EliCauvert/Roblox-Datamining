@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Workspace.IxpServiceWrapper.IxpServiceWrapper)
+﻿return (require(script.Parent.Parent.Parent._Workspace.IxpServiceWrapper.IxpServiceWrapper))

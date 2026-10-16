@@ -1,73 +1,73 @@
-﻿local parent = script.Parent.Parent
-local luauPolyfillModule = require(parent.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local boolean = luauPolyfillModule.Boolean
-local object = luauPolyfillModule.Object
-local t = {
-	extractExtensionsFromSchema = require(parent.Utils).extractExtensionsFromSchema
-}
-local _ = require(parent.GraphQL)
-local mergeDeep = require(parent.Utils).mergeDeep
+﻿local Parent = script.Parent.Parent
+local LuauPolyfillModule = require(Parent.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local Boolean = LuauPolyfillModule.Boolean
+local Object = LuauPolyfillModule.Object
+local _ = require(Parent.GraphQL)
+local MergeDeepFunction = require(Parent.Utils).mergeDeep
 
-function t.mergeExtensions(p1)
-	-- upvalues: mergeDeep (ref)
-	return mergeDeep(p1)
-end
-
-local function applyExtensionObject(p1, p2)
-	-- upvalues: mergeDeep (ref), boolean (ref)
-	if p1 then
-		p1.extensions = mergeDeep({
-			if boolean.toJSBoolean(p1.extensions) then p1.extensions else {},
-			if boolean.toJSBoolean(p2) then p2 else {}
+local function applyExtensionObject(GetResult, Extensions) --[[ Line: 48 ]]
+	-- upvalues: MergeDeepFunction (copy), Boolean (copy)
+	if GetResult then
+		GetResult.extensions = MergeDeepFunction({
+			Boolean.toJSBoolean(GetResult.extensions) and GetResult.extensions or {},
+			Boolean.toJSBoolean(Extensions) and Extensions or {}
 		})
 		
 		return
 	end
 end
 
-function t.applyExtensions(p3, p4)
-	-- upvalues: applyExtensionObject (ref), object (ref), boolean (ref), array (ref)
-	applyExtensionObject(p3, p4.schemaExtensions)
-	
-	for i, v in object.entries(if boolean.toJSBoolean(p4.types) then p4.types else {}) do
-		local var1 = v[2]
-		local var2 = p3:getType(v[1])
-		
-		if boolean.toJSBoolean(var2) then
-			applyExtensionObject(var2, var1.extensions)
+return {
+	extractExtensionsFromSchema = require(Parent.Utils).extractExtensionsFromSchema,
+	mergeExtensions = function(p1) --[[ Line: 44 ]]
+		-- upvalues: MergeDeepFunction (copy)
+		return MergeDeepFunction(p1)
+	end,
+	applyExtensions = function(p1, p2) --[[ Line: 69 ]]
+		-- upvalues: applyExtensionObject (copy), Object (copy), Boolean (copy), Array (copy)
+		applyExtensionObject(p1, p2.schemaExtensions)
+		local EntriesFunction = Object.entries
+		local Types = Boolean.toJSBoolean(p2.types) and p2.types or {}
+		for _, value in EntriesFunction(Types) do
+			local v1 = value[2]
+			local Type = p1:getType(value[1])
 			
-			if var1.type == "object" or var1.type == "interface" then
-				for i_1, v_1 in object.entries(var1.fields) do
-					local var3 = v_1[2]
-					local var4 = var2:getFields():get(v_1[1])
-					
-					if boolean.toJSBoolean(var4) then
-						applyExtensionObject(var4, var3.extensions)
+			if Boolean.toJSBoolean(Type) then
+				applyExtensionObject(Type, v1.extensions)
+				
+				if v1.type == "object" or v1.type == "interface" then
+					for _, value1 in Object.entries(v1.fields) do
+						local v2 = value1[2]
+						local GetResult = Type:getFields():get(value1[1])
 						
-						for i_3, v_4 in object.entries(var3.arguments) do
-							local unpacked, unpacked_1 = table.unpack(v_4, 1, 2)
-							applyExtensionObject(array.find(var4.args, function(p5)
-								-- upvalues: unpacked (ref)
-								return p5.name == unpacked
-							end), unpacked_1)
+						if Boolean.toJSBoolean(GetResult) then
+							applyExtensionObject(GetResult, v2.extensions)
+							
+							for _, value2 in Object.entries(v2.arguments) do
+								local Unpacked, Unpacked2 = table.unpack(value2, 1, 2)
+								applyExtensionObject(Array.find(GetResult.args, function(p3): boolean --[[ Line: 107 ]]
+									-- upvalues: Unpacked (copy)
+									return p3.name == Unpacked
+								end), Unpacked2)
+							end
+						end
+					end
+				else
+					if v1.type == "input" then
+						for _, value3 in Object.entries(v1.fields) do
+							local Unpacked1, Unpacked2_1 = table.unpack(value3, 1, 2)
+							applyExtensionObject(Type:getFields():get(Unpacked1), Unpacked2_1.extensions)
+						end
+					elseif v1.type == "enum" then
+						for _, value4 in Object.entries(v1.values) do
+							local Unpacked3, Unpacked2_2 = table.unpack(value4, 1, 2)
+							applyExtensionObject(Type:getValue(Unpacked3), Unpacked2_2)
 						end
 					end
 				end
-			elseif var1.type == "input" then
-				for i_1, v_1 in object.entries(var1.fields) do
-					local unpacked, unpacked_1 = table.unpack(v_1, 1, 2)
-					applyExtensionObject(var2:getFields():get(unpacked), unpacked_1.extensions)
-				end
-			elseif var1.type == "enum" then
-				for i_1, v_1 in object.entries(var1.values) do
-					local unpacked, unpacked_1 = table.unpack(v_1, 1, 2)
-					applyExtensionObject(var2:getValue(unpacked), unpacked_1)
-				end
 			end
 		end
+		return p1
 	end
-	return p3
-end
-
-return t
+}

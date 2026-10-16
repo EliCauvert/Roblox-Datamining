@@ -1,12 +1,12 @@
-﻿local userInputService = game:GetService("UserInputService")
+﻿local UserInputService = game:GetService("UserInputService")
 
 return {
-	connectInputChanged = function(p1)
-		-- upvalues: userInputService (ref)
-		return userInputService.InputChanged:Connect(p1)
+	connectInputChanged = function(Callback) --[[ Line: 5 ]]
+		-- upvalues: UserInputService (copy)
+		return UserInputService.InputChanged:Connect(Callback)
 	end,
-	connectInputEnded = function(p1)
-		-- upvalues: userInputService (ref)
-		return userInputService.InputEnded:Connect(p1)
+	connectInputEnded = function(Callback) --[[ Line: 11 ]]
+		-- upvalues: UserInputService (copy)
+		return UserInputService.InputEnded:Connect(Callback)
 	end
 }

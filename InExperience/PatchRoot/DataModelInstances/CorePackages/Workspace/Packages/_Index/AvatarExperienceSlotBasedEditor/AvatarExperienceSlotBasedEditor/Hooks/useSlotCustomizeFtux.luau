@@ -1,110 +1,98 @@
-﻿local avatarExperienceSlotBasedEditor = script:FindFirstAncestor("AvatarExperienceSlotBasedEditor")
-local parent = avatarExperienceSlotBasedEditor.Parent
-local reactModule = require(parent.React)
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local useSlotBasedEditorContextModule = require(avatarExperienceSlotBasedEditor.Context.useSlotBasedEditorContext)
-local screenLayoutModule = require(avatarExperienceSlotBasedEditor.Enums.ScreenLayout)
-local navigationModule = require(parent.Navigation)
-local AXCommonModule = require(parent.AXCommon)
-local slotBasedEditorAnalytics = require(parent.AvatarExperienceAnalytics).Surfaces.SlotBasedEditorAnalytics
-local safeAppStorageService = AXCommonModule.Lib.SafeAppStorageService
-local avatarExperienceNavigationModule = require(parent.AvatarExperienceNavigation)
-local avatarScreen = avatarExperienceNavigationModule.Enums.AvatarScreen
-local useAvatarRoute = avatarExperienceNavigationModule.AvatarRoute.Hooks.useAvatarRoute
-local useNavigation = navigationModule.useNavigation
-local selectIsFullView = AXCommonModule.State.Selectors.selectIsFullView
-local useIsSpatial = require(parent.Responsive).useIsSpatial
-local menuItemEnum = require(parent.AXControlBar).Enums.MenuItemEnum
+﻿local AvatarExperienceSlotBasedEditor = script:FindFirstAncestor("AvatarExperienceSlotBasedEditor")
+local Parent = AvatarExperienceSlotBasedEditor.Parent
+local ReactModule = require(Parent.React)
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local UseSlotBasedEditorContextModule = require(AvatarExperienceSlotBasedEditor.Context.useSlotBasedEditorContext)
+local ScreenLayoutModule = require(AvatarExperienceSlotBasedEditor.Enums.ScreenLayout)
+local AXCommonModule = require(Parent.AXCommon)
+local SlotBasedEditorAnalytics = require(Parent.AvatarExperienceAnalytics).Surfaces.SlotBasedEditorAnalytics
+local SafeAppStorageService = AXCommonModule.Lib.SafeAppStorageService
+local AvatarExperienceNavigationModule = require(Parent.AvatarExperienceNavigation)
+local AvatarScreen = AvatarExperienceNavigationModule.Enums.AvatarScreen
+local UseAvatarRouteFunction = AvatarExperienceNavigationModule.AvatarRoute.Hooks.useAvatarRoute
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local SelectIsFullViewFunction = AXCommonModule.State.Selectors.selectIsFullView
+local UseIsSpatialFunction = require(Parent.Responsive).useIsSpatial
+local MenuItemEnum = require(Parent.AXControlBar).Enums.MenuItemEnum
 local AXSlotBasedEditorCustomizeFtuxUseMemStorage2 = game:DefineFastFlag("AXSlotBasedEditorCustomizeFtuxUseMemStorage2", false)
-local var1 = game:DefineFastInt("AXSlotBasedEditorCustomizeFtuxDelay2", 3000) / 1000
-local var2 = game:DefineFastInt("AXSlotBasedEditorAvatarSwitcherFtuxDelay2", 1000) / 1000
-local _ = {
-	INIT = "",
-	AVATAR_FOCUS_ICON = "AVATAR_FOCUS_ICON",
-	PROFILE_REDIRECT = "PROFILE_REDIRECT",
-	FINISHED = "FINISHED"
-}
+local AXSlotBasedEditorCustomizeFtuxDelayRatio = game:DefineFastInt("AXSlotBasedEditorCustomizeFtuxDelay2", 3000) / 1000
+local AXSlotBasedEditorAvatarSwitcherFtuxDelayRatio = game:DefineFastInt("AXSlotBasedEditorAvatarSwitcherFtuxDelay2", 1000) / 1000
 
-local var3 = function(p1)
+local function v14(p1) --[[ Line: 42 ]]
 	return p1.ScreenSize
 end
 
-return function(p1)
-	-- upvalues: useNavigation (ref), useAvatarRoute (ref), useSlotBasedEditorContextModule (ref), useSelector (ref), var3 (ref), useIsSpatial (ref), reactModule (ref), selectIsFullView (ref), safeAppStorageService (ref), AXSlotBasedEditorCustomizeFtuxUseMemStorage2 (ref), avatarScreen (ref), screenLayoutModule (ref), var1 (ref), slotBasedEditorAnalytics (ref), var2 (ref), menuItemEnum (ref)
-	local var4 = useNavigation()
-	local var5 = useAvatarRoute()
-	local var6 = useSlotBasedEditorContextModule()
-	local screenLayout = var6 and var6.screenLayout
-	local var7 = useSelector(var3)
-	local var8 = not useIsSpatial()
-	local var9 = reactModule.useMemo(function()
-		-- upvalues: var5 (ref)
-		return var5 and (var5.opaque and var5.opaque.name)
-	end, { var5 })
-	local var10 = useSelector(reactModule.useCallback(function(p2)
-		-- upvalues: selectIsFullView (copy), var9 (ref)
-		return selectIsFullView(p2, var9)
-	end, { var9 }))
-	local var11 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref), var10 (ref)
-		return p1(var10)
-	end, { var10 })
-	local var12 = reactModule.useCallback(function()
-		-- upvalues: safeAppStorageService (copy), AXSlotBasedEditorCustomizeFtuxUseMemStorage2 (copy)
-		return safeAppStorageService.getItem("AXSlotBasedEditorCustomizeFtux", AXSlotBasedEditorCustomizeFtuxUseMemStorage2)
+return function(Callback) --[[ Line: 48 | Named "useSlotCustomizeFtux" ]]
+	-- upvalues: UseNavigationFunction (copy), UseAvatarRouteFunction (copy), UseSlotBasedEditorContextModule (copy), UseSelectorFunction (copy), v14 (copy), UseIsSpatialFunction (copy), ReactModule (copy), SelectIsFullViewFunction (copy), SafeAppStorageService (copy), AXSlotBasedEditorCustomizeFtuxUseMemStorage2 (copy), AvatarScreen (copy), ScreenLayoutModule (copy), AXSlotBasedEditorCustomizeFtuxDelayRatio (copy), SlotBasedEditorAnalytics (copy), AXSlotBasedEditorAvatarSwitcherFtuxDelayRatio (copy), MenuItemEnum (copy)
+	local UseNavigationResult = UseNavigationFunction()
+	local UseAvatarRouteResult = UseAvatarRouteFunction()
+	local UseSlotBasedEditorContextModuleResult = UseSlotBasedEditorContextModule()
+	local ScreenLayout = UseSlotBasedEditorContextModuleResult and UseSlotBasedEditorContextModuleResult.screenLayout
+	local UseSelectorResult = UseSelectorFunction(v14)
+	local Inverted = not UseIsSpatialFunction()
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 56 ]]
+		-- upvalues: UseAvatarRouteResult (copy)
+		return UseAvatarRouteResult and (UseAvatarRouteResult.opaque and UseAvatarRouteResult.opaque.name)
+	end, { UseAvatarRouteResult })
+	local UseSelectorResult1 = UseSelectorFunction((ReactModule.useCallback(function(p1) --[[ Line: 60 ]]
+		-- upvalues: SelectIsFullViewFunction (upval), UseMemoResult (copy)
+		return SelectIsFullViewFunction(p1, UseMemoResult)
+	end, { UseMemoResult })))
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 66 ]]
+		-- upvalues: Callback (copy), UseSelectorResult1 (copy)
+		return Callback(UseSelectorResult1)
+	end, { UseSelectorResult1 })
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 70 ]]
+		-- upvalues: SafeAppStorageService (upval), AXSlotBasedEditorCustomizeFtuxUseMemStorage2 (upval)
+		return (SafeAppStorageService.getItem("AXSlotBasedEditorCustomizeFtux", AXSlotBasedEditorCustomizeFtuxUseMemStorage2))
 	end, {})
-	local var13 = reactModule.useCallback(function(p2)
-		-- upvalues: safeAppStorageService (copy), AXSlotBasedEditorCustomizeFtuxUseMemStorage2 (copy)
-		safeAppStorageService.setItem("AXSlotBasedEditorCustomizeFtux", p2, AXSlotBasedEditorCustomizeFtuxUseMemStorage2)
-		safeAppStorageService.flush()
+	local UseResult1 = ReactModule.useCallback(function(p1) --[[ Line: 76 ]]
+		-- upvalues: SafeAppStorageService (upval), AXSlotBasedEditorCustomizeFtuxUseMemStorage2 (upval)
+		SafeAppStorageService.setItem("AXSlotBasedEditorCustomizeFtux", p1, AXSlotBasedEditorCustomizeFtuxUseMemStorage2)
+		SafeAppStorageService.flush()
 	end, {})
-	reactModule.useEffect(function()
-		-- upvalues: var12 (ref), var9 (ref), avatarScreen (copy), var8 (ref), var11 (ref), screenLayout (ref), screenLayoutModule (copy), var1 (copy), var4 (ref), var7 (ref), var13 (ref), slotBasedEditorAnalytics (copy), var2 (copy)
-		local var14 = var12()
-		local delayedThread = nil
+	ReactModule.useEffect(function() --[[ Line: 81 ]]
+		-- upvalues: UseResult (copy), UseMemoResult (copy), AvatarScreen (upval), Inverted (copy), UseMemoResult1 (copy), ScreenLayout (copy), ScreenLayoutModule (upval), AXSlotBasedEditorCustomizeFtuxDelayRatio (upval), UseNavigationResult (copy), UseSelectorResult (copy), UseResult1 (copy), SlotBasedEditorAnalytics (upval), AXSlotBasedEditorAvatarSwitcherFtuxDelayRatio (upval)
+		local UseResultResult = UseResult()
+		local DelayedThread = if UseResultResult == "" and UseMemoResult == AvatarScreen.AvatarEditor and Inverted and UseMemoResult1 and (ScreenLayout == ScreenLayoutModule.LandscapeSplit or ScreenLayout == ScreenLayoutModule.PortraitSlots) then task.delay(AXSlotBasedEditorCustomizeFtuxDelayRatio, function() --[[ Line: 99 ]]
+			-- upvalues: UseNavigationResult (upval), AvatarScreen (upval), UseSelectorResult (upval), UseResult1 (upval), SlotBasedEditorAnalytics (upval)
+			UseNavigationResult.navigate(AvatarScreen.SlotsCustomizeFtuxPrompt, {
+				screenSize = UseSelectorResult,
+				onConfirm = function() --[[ Line: 102 ]]
+					-- upvalues: UseResult1 (upval), SlotBasedEditorAnalytics (upval)
+					UseResult1("AVATAR_FOCUS_ICON")
+					SlotBasedEditorAnalytics.trackSlotsCustomizeFtuxPrompt()
+				end
+			})
+		end) elseif UseResultResult == "AVATAR_FOCUS_ICON" and UseMemoResult == AvatarScreen.AvatarSwitcher and Inverted and UseMemoResult1 then task.delay(AXSlotBasedEditorAvatarSwitcherFtuxDelayRatio, function() --[[ Line: 122 ]]
+			-- upvalues: UseResult1 (upval), UseNavigationResult (upval), AvatarScreen (upval), UseSelectorResult (upval), SlotBasedEditorAnalytics (upval)
+			UseResult1("PROFILE_REDIRECT")
+			UseNavigationResult.navigate(AvatarScreen.SlotsAvatarSwitcherFtuxPrompt, {
+				screenSize = UseSelectorResult,
+				onConfirm = function() --[[ Line: 126 ]]
+					-- upvalues: UseResult1 (upval), SlotBasedEditorAnalytics (upval)
+					UseResult1("FINISHED")
+					SlotBasedEditorAnalytics.trackSlotsAvatarSwitcherFtuxPrompt()
+				end
+			})
+		end) else nil
 		
-		if var14 == "" and var9 == avatarScreen.AvatarEditor and (var8 and var11) and (screenLayout == screenLayoutModule.LandscapeSplit or screenLayout == screenLayoutModule.PortraitSlots) then
-			delayedThread = task.delay(var1, function()
-				-- upvalues: var4 (copy), avatarScreen (copy), var7 (copy), var13 (copy), slotBasedEditorAnalytics (copy)
-				var4.navigate(avatarScreen.SlotsCustomizeFtuxPrompt, {
-					screenSize = var7,
-					onConfirm = function()
-						-- upvalues: var13 (copy), slotBasedEditorAnalytics (copy)
-						var13("AVATAR_FOCUS_ICON")
-						slotBasedEditorAnalytics.trackSlotsCustomizeFtuxPrompt()
-					end
-				})
-			end)
-		elseif var14 == "AVATAR_FOCUS_ICON" and var9 == avatarScreen.AvatarSwitcher and (var8 and var11) then
-			delayedThread = task.delay(var2, function()
-				-- upvalues: var13 (copy), var4 (copy), avatarScreen (copy), var7 (copy), slotBasedEditorAnalytics (copy)
-				var13("PROFILE_REDIRECT")
-				var4.navigate(avatarScreen.SlotsAvatarSwitcherFtuxPrompt, {
-					screenSize = var7,
-					onConfirm = function()
-						-- upvalues: var13 (copy), slotBasedEditorAnalytics (copy)
-						var13("FINISHED")
-						slotBasedEditorAnalytics.trackSlotsAvatarSwitcherFtuxPrompt()
-					end
-				})
-			end)
-		end
-		return function()
-			-- upvalues: delayedThread (write)
-			if delayedThread then
-				task.cancel(delayedThread)
+		return function() --[[ Line: 134 ]]
+			-- upvalues: DelayedThread (ref)
+			if DelayedThread then
+				task.cancel(DelayedThread)
 			end
 		end
 	end, {
-		var12,
-		var13,
-		var9,
-		var11,
-		screenLayout
+		UseResult,
+		UseResult1,
+		UseMemoResult,
+		UseMemoResult1,
+		ScreenLayout
 	})
 	
 	return {
-		enabled = var12() == "AVATAR_FOCUS_ICON" and var9 == avatarScreen.AvatarEditor,
-		menuItemId = menuItemEnum.Main.AvatarSwitcher
+		enabled = UseResult() == "AVATAR_FOCUS_ICON" and UseMemoResult == AvatarScreen.AvatarEditor,
+		menuItemId = MenuItemEnum.Main.AvatarSwitcher
 	}
 end

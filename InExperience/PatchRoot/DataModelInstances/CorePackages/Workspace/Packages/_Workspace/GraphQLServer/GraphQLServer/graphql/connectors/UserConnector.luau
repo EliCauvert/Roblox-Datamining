@@ -1,52 +1,52 @@
-﻿local playersService = game:GetService("Players")
-local parent = script:FindFirstAncestor("GraphQLServer").Parent
-local _ = require(parent.LuauPolyfill)
-local urlBuilder = require(parent.UrlBuilder).UrlBuilder
-local urlBase = require(parent.UrlBuilder).UrlBase
+﻿local Players = game:GetService("Players")
+local Parent = script:FindFirstAncestor("GraphQLServer").Parent
+local _ = require(Parent.LuauPolyfill)
 local _ = require(script.Parent.Parent.generatedTypes)
-local promiseModule = require(parent.Promise)
-local graphQLError = require(parent.GraphQL).GraphQLError
-local fetch = require(parent.Fetch).fetch
-local response = require(parent.Fetch).Response
-local t = {}
-local var1 = urlBuilder.new({ path = "users/{id}", base = urlBase.new("users", 1) })
+local PromiseModule = require(Parent.Promise)
+local GraphQLError = require(Parent.GraphQL).GraphQLError
+local Fetch = require(Parent.Fetch).fetch
+local Response = require(Parent.Fetch).Response
+local NewResult = require(Parent.UrlBuilder).UrlBuilder.new({
+	path = "users/{id}",
+	base = require(Parent.UrlBuilder).UrlBase.new("users", 1)
+})
 
-local function findUserById(p1, p2)
-	-- upvalues: fetch (ref), promiseModule (ref), var1 (ref), response (ref), graphQLError (ref)
-	local var2 = p2 or fetch
+local function findUserById(Id, p1) --[[ Line: 23 ]]
+	-- upvalues: Fetch (copy), PromiseModule (copy), NewResult (copy), Response (copy), GraphQLError (copy)
+	local Fetch1 = if p1 then p1 else Fetch
 	
-	return promiseModule.new(function(p3, p4)
-		-- upvalues: var1 (copy), p1 (ref), var2 (ref), response (copy), graphQLError (copy)
-		local var3 = var2(var1({ id = p1 }), { method = "GET" }):catch(function()
-			-- upvalues: response (copy)
-			return response.error()
+	return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ()) --[[ Line: 25 ]]
+		-- upvalues: NewResult (upval), Id (copy), Fetch1 (copy), Response (upval), GraphQLError (upval)
+		local v1 = Fetch1(NewResult({ id = Id }), { method = "GET" }):catch(function() --[[ Line: 33 ]]
+			-- upvalues: Response (upval)
+			return Response.error()
 		end):expect()
 		
-		if not var3.ok then
-			p4(graphQLError.new(string.format("Failed to find user matching id: %s.", p1)))
+		if not v1.ok then
+			Callback(GraphQLError.new(string.format("Failed to find user matching id: %s.", Id)))
 			
 			return
 		end
-		local var4 = var3:json():catch(function()
+		local v2 = v1:json():catch(function() --[[ Line: 45 ]]
 			return nil
 		end):expect()
 		
-		if var4 then
-			p3({ id = tostring(var4.id), displayName = var4.displayName })
+		if v2 then
+			Callback1({ id = tostring(v2.id), displayName = v2.displayName })
 			
 			return
+		else
+			Callback(GraphQLError.new(string.format("Failed to decode HTTP response as JSON for user matching id: %s.", Id)))
 		end
-		p4(graphQLError.new(string.format("Failed to decode HTTP response as JSON for user matching id: %s.", p1)))
 	end)
 end
 
-t.findUserById = findUserById
-
-function t.findMe(p1, p2)
-	-- upvalues: playersService (ref), promiseModule (ref), graphQLError (ref), findUserById (ref)
-	local var2 = p2 or playersService.LocalPlayer
-	
-	return if var2 then findUserById(tostring(var2.UserId), p1) else promiseModule.reject(graphQLError.new("LocalPlayer not found"))
-end
-
-return t
+return {
+	findUserById = findUserById,
+	findMe = function(p1, p2) --[[ Line: 66 ]]
+		-- upvalues: Players (copy), PromiseModule (copy), GraphQLError (copy), findUserById (copy)
+		local LocalPlayer = if p2 then p2 else Players.LocalPlayer
+		
+		return if LocalPlayer then findUserById(tostring(LocalPlayer.UserId), p1) else PromiseModule.reject(GraphQLError.new("LocalPlayer not found"))
+	end
+}

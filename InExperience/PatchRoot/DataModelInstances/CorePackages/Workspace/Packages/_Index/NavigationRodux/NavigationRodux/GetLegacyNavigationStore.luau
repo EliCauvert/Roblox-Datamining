@@ -1,10 +1,9 @@
-﻿local navigationRodux = script:FindFirstAncestor("NavigationRodux")
-local parent = navigationRodux.Parent
-local signalsModule = require(parent.Signals)
-local robloxAppNavigationModule = require(parent.RobloxAppNavigation)
-local createLegacyNavigationStoreModule = require(navigationRodux.createLegacyNavigationStore)
+﻿local NavigationRodux = script:FindFirstAncestor("NavigationRodux")
+local Parent = NavigationRodux.Parent
+local RobloxAppNavigationModule = require(Parent.RobloxAppNavigation)
+local CreateLegacyNavigationStoreModule = require(NavigationRodux.createLegacyNavigationStore)
 
-return signalsModule.createComputed(function()
-	-- upvalues: createLegacyNavigationStoreModule (ref), robloxAppNavigationModule (ref)
-	return createLegacyNavigationStoreModule(robloxAppNavigationModule.AppNavigationRegistry.get())
+return require(Parent.Signals).createComputed(function() --[[ Line: 8 ]]
+	-- upvalues: CreateLegacyNavigationStoreModule (copy), RobloxAppNavigationModule (copy)
+	return CreateLegacyNavigationStoreModule(RobloxAppNavigationModule.AppNavigationRegistry.get())
 end)

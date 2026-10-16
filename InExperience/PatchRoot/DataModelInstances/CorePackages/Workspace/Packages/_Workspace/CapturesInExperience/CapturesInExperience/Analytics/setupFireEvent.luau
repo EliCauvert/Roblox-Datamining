@@ -1,38 +1,38 @@
-﻿local socialLuaAnalyticsModule = require(script.Parent.Parent.Parent.SocialLuaAnalytics)
-local fireDiagCounter = socialLuaAnalyticsModule.Analytics.FireEvent.fireDiagCounter
-local fireEventStream = socialLuaAnalyticsModule.Analytics.FireEvent.fireEventStream
-local fireTelemetry = socialLuaAnalyticsModule.Analytics.FireEvent.fireTelemetry
-local diagActionListModule = require(script.Parent.DiagActionList)
+﻿local SocialLuaAnalyticsModule = require(script.Parent.Parent.Parent.SocialLuaAnalytics)
+local FireDiagCounterFunction = SocialLuaAnalyticsModule.Analytics.FireEvent.fireDiagCounter
+local FireEventStreamFunction = SocialLuaAnalyticsModule.Analytics.FireEvent.fireEventStream
+local FireTelemetryFunction = SocialLuaAnalyticsModule.Analytics.FireEvent.fireTelemetry
+local DiagActionListModule = require(script.Parent.DiagActionList)
 local _ = require(script.Parent.EventNames)
-local eventStreamActionListModule = require(script.Parent.EventStreamActionList)
-local telemetryActionListModule = require(script.Parent.TelemetryActionList)
+local EventStreamActionListModule = require(script.Parent.EventStreamActionList)
+local TelemetryActionListModule = require(script.Parent.TelemetryActionList)
 
-return function(p1)
-	-- upvalues: fireEventStream (ref), eventStreamActionListModule (ref), fireDiagCounter (ref), diagActionListModule (ref), fireTelemetry (ref), telemetryActionListModule (ref)
-	local var1 = fireEventStream({
+return function(p1) --[[ Line: 15 ]]
+	-- upvalues: FireEventStreamFunction (copy), EventStreamActionListModule (copy), FireDiagCounterFunction (copy), DiagActionListModule (copy), FireTelemetryFunction (copy), TelemetryActionListModule (copy)
+	local FireEventStreamResult = FireEventStreamFunction({
 		eventStreamImpl = p1.analytics.EventStream,
-		eventList = eventStreamActionListModule,
+		eventList = EventStreamActionListModule,
 		infoForAllEvents = p1.infoForAllEvents
 	})
-	local var2 = fireDiagCounter({
+	local FireDiagCounterResult = FireDiagCounterFunction({
 		diagImpl = p1.analytics.Diag,
-		eventList = diagActionListModule
+		eventList = DiagActionListModule
 	})
-	local var3 = fireTelemetry({
+	local FireTelemetryResult = FireTelemetryFunction({
 		telemetryImpl = p1.analytics.Telemetry,
-		eventList = telemetryActionListModule
+		eventList = TelemetryActionListModule
 	})
 	
-	return function(p2, p3)
-		-- upvalues: diagActionListModule (copy), var2 (ref), telemetryActionListModule (copy), var3 (ref), eventStreamActionListModule (copy), var1 (ref)
-		if diagActionListModule[p2] then
-			var2(p2)
+	return function(p2, p3) --[[ Line: 35 ]]
+		-- upvalues: DiagActionListModule (upval), FireDiagCounterResult (copy), TelemetryActionListModule (upval), FireTelemetryResult (copy), EventStreamActionListModule (upval), FireEventStreamResult (copy)
+		if DiagActionListModule[p2] then
+			FireDiagCounterResult(p2)
 		end
-		if telemetryActionListModule[p2] then
-			var3(p2, p3)
+		if TelemetryActionListModule[p2] then
+			FireTelemetryResult(p2, p3)
 		end
-		if eventStreamActionListModule[p2] then
-			var1(p2, p3)
+		if EventStreamActionListModule[p2] then
+			FireEventStreamResult(p2, p3)
 		end
 	end
 end

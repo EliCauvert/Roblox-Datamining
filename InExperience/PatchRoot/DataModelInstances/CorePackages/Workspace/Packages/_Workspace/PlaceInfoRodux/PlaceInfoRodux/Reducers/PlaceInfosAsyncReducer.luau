@@ -1,34 +1,36 @@
-﻿local placeInfoRodux = script:FindFirstAncestor("PlaceInfoRodux")
-local immutable = require(placeInfoRodux.Parent.AppCommonLib).Immutable
-local requestMultiplePlaceInfos = require(placeInfoRodux.Actions).RequestMultiplePlaceInfos
-local failedToFetchMultiplePlaceInfos = require(placeInfoRodux.Actions).FailedToFetchMultiplePlaceInfos
-local receivedMultiplePlaceInfos = require(placeInfoRodux.Actions).ReceivedMultiplePlaceInfos
+﻿local PlaceInfoRodux = script:FindFirstAncestor("PlaceInfoRodux")
+local Immutable = require(PlaceInfoRodux.Parent.AppCommonLib).Immutable
+local RequestMultiplePlaceInfos = require(PlaceInfoRodux.Actions).RequestMultiplePlaceInfos
+local FailedToFetchMultiplePlaceInfos = require(PlaceInfoRodux.Actions).FailedToFetchMultiplePlaceInfos
+local ReceivedMultiplePlaceInfos = require(PlaceInfoRodux.Actions).ReceivedMultiplePlaceInfos
 
-return function(p1, p2)
-	-- upvalues: requestMultiplePlaceInfos (ref), immutable (ref), receivedMultiplePlaceInfos (ref), failedToFetchMultiplePlaceInfos (ref)
-	p1 = p1 or {}
+return function(p1, p2) --[[ Line: 10 ]]
+	-- upvalues: RequestMultiplePlaceInfos (copy), Immutable (copy), ReceivedMultiplePlaceInfos (copy), FailedToFetchMultiplePlaceInfos (copy)
+	local P0 = p1 or {}
 	
-	if p2.type == requestMultiplePlaceInfos.name then
+	if p2.type == RequestMultiplePlaceInfos.name then
 		local t = {}
 		
-		for i, v in ipairs(p2.placeIds) do
-			t[v] = true
+		for _, placeId in ipairs(p2.placeIds) do
+			t[placeId] = true
 		end
-		return immutable.JoinDictionaries(p1, t)
-	elseif p2.type == receivedMultiplePlaceInfos.name then
+		return Immutable.JoinDictionaries(P0, t)
+	elseif p2.type == ReceivedMultiplePlaceInfos.name then
 		local t = {}
 		
-		for i, v in ipairs(p2.placeInfos) do
-			t[v.placeId] = false
+		for _, placeInfo in ipairs(p2.placeInfos) do
+			t[placeInfo.placeId] = false
 		end
-		return immutable.JoinDictionaries(p1, t)
-	elseif p2.type ~= failedToFetchMultiplePlaceInfos.name then
-		return p1
+		return Immutable.JoinDictionaries(P0, t)
+	else
+		if p2.type ~= FailedToFetchMultiplePlaceInfos.name then
+			return P0
+		end
+		local t = {}
+		
+		for _, placeId1 in ipairs(p2.placeIds) do
+			t[placeId1] = false
+		end
+		return Immutable.JoinDictionaries(P0, t)
 	end
-	local t = {}
-	
-	for i, v in ipairs(p2.placeIds) do
-		t[v] = false
-	end
-	return immutable.JoinDictionaries(p1, t)
 end

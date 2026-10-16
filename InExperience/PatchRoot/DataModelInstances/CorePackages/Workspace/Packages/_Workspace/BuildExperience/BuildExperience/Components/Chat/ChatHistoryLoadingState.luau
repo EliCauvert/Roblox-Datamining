@@ -1,57 +1,57 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local skeleton = foundationModule.Skeleton
-local view = foundationModule.View
-local radius = foundationModule.Enums.Radius
-local useTokens = foundationModule.Hooks.useTokens
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local Skeleton = FoundationModule.Skeleton
+local View = FoundationModule.View
+local Radius = FoundationModule.Enums.Radius
+local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return function()
-	-- upvalues: useTokens (ref), reactModule (ref), view (ref), skeleton (ref), radius (ref)
-	local var1 = useTokens()
+return function() --[[ Line: 15 | Named "ChatHistoryLoadingState" ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Skeleton (copy), Radius (copy)
+	local UseTokensResult = UseTokensFunction()
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "col gap-xlarge",
 		testId = "ChatHistoryLoadingState",
 		Size = UDim2.fromScale(1, 1)
 	}, {
-		UserMessage = reactModule.createElement(view, { LayoutOrder = 1, tag = "row size-full-0 auto-y" }, {
-			Spacer = reactModule.createElement(view, { LayoutOrder = 1, tag = "fill" }),
-			Bubble = reactModule.createElement(skeleton, {
+		UserMessage = ReactModule.createElement(View, { LayoutOrder = 1, tag = "row size-full-0 auto-y" }, {
+			Spacer = ReactModule.createElement(View, { LayoutOrder = 1, tag = "fill" }),
+			Bubble = ReactModule.createElement(Skeleton, {
 				LayoutOrder = 2,
 				testId = "ChatHistoryLoadingState.UserMessage",
-				Size = UDim2.new(0.68, 0, 0, var1.Size.Size_1200),
-				radius = radius.Large
+				Size = UDim2.new(0.68, 0, 0, UseTokensResult.Size.Size_1200),
+				radius = Radius.Large
 			})
 		}),
-		AgentResponse = reactModule.createElement(view, {
+		AgentResponse = ReactModule.createElement(View, {
 			LayoutOrder = 2,
 			tag = "col gap-small size-full-0 auto-y"
 		}, {
-			Line1 = reactModule.createElement(skeleton, {
+			Line1 = ReactModule.createElement(Skeleton, {
 				LayoutOrder = 1,
 				testId = "ChatHistoryLoadingState.AgentLine1",
-				Size = UDim2.new(0.92, 0, 0, var1.Size.Size_300),
-				radius = radius.Small
+				Size = UDim2.new(0.92, 0, 0, UseTokensResult.Size.Size_300),
+				radius = Radius.Small
 			}),
-			Line2 = reactModule.createElement(skeleton, {
+			Line2 = ReactModule.createElement(Skeleton, {
 				LayoutOrder = 2,
 				testId = "ChatHistoryLoadingState.AgentLine2",
-				Size = UDim2.new(0.78, 0, 0, var1.Size.Size_300),
-				radius = radius.Small
+				Size = UDim2.new(0.78, 0, 0, UseTokensResult.Size.Size_300),
+				radius = Radius.Small
 			}),
-			Line3 = reactModule.createElement(skeleton, {
+			Line3 = ReactModule.createElement(Skeleton, {
 				LayoutOrder = 3,
 				testId = "ChatHistoryLoadingState.AgentLine3",
-				Size = UDim2.new(0.54, 0, 0, var1.Size.Size_300),
-				radius = radius.Small
+				Size = UDim2.new(0.54, 0, 0, UseTokensResult.Size.Size_300),
+				radius = Radius.Small
 			})
 		}),
-		PlaytestCard = reactModule.createElement(skeleton, {
+		PlaytestCard = ReactModule.createElement(Skeleton, {
 			LayoutOrder = 3,
 			testId = "ChatHistoryLoadingState.PlaytestCard",
-			Size = UDim2.new(1, 0, 0, var1.Size.Size_2400 + var1.Size.Size_800),
-			radius = radius.Medium
+			Size = UDim2.new(1, 0, 0, UseTokensResult.Size.Size_2400 + UseTokensResult.Size.Size_800),
+			radius = Radius.Medium
 		})
 	})
 end

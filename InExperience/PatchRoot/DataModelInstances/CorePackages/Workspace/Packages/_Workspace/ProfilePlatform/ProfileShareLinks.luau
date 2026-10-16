@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.ProfileShareLinks.ProfileShareLinks)
+﻿return (require(script.Parent.Parent.Parent._Index.ProfileShareLinks.ProfileShareLinks))

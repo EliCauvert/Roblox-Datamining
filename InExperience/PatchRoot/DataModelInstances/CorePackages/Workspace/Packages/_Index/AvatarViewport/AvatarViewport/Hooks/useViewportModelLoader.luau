@@ -1,107 +1,113 @@
-﻿local avatarViewport = script:FindFirstAncestor("AvatarViewport")
-local reactModule = require(avatarViewport.Parent.React)
-local _ = require(avatarViewport.Types)
+﻿local AvatarViewport = script:FindFirstAncestor("AvatarViewport")
+local ReactModule = require(AvatarViewport.Parent.React)
+local _ = require(AvatarViewport.Types)
 
-local function _(p1)
-	local current = p1.current
+local function _(p1) --[[ Line: 25 | Named "destroyLoadedModel" ]]
+	local Current = p1.current
 	
-	if current then
-		current:Destroy()
+	if Current then
+		Current:Destroy()
 		p1.current = nil
 	end
 end
 
-return function(p1)
-	-- upvalues: reactModule (ref)
-	local var1, var2 = reactModule.useState(true)
-	local var3, var4 = reactModule.useState(false)
-	local var5, var6 = reactModule.useState(nil)
-	local var7 = reactModule.useRef(0)
-	local var8 = reactModule.useRef(nil)
-	local var9 = reactModule.useRef(p1.onModelReady)
-	local var10 = reactModule.useRef(p1.onLoadFailed)
-	var9.current = p1.onModelReady
-	var10.current = p1.onLoadFailed
-	local var11 = reactModule.useCallback(function(p2)
-		-- upvalues: p1 (ref), var7 (ref), var2 (ref), var4 (ref), var6 (ref), var8 (ref), var10 (ref), var9 (ref)
-		local modelSource = p1.modelSource
-		var7.current += 1
-		local current = var7.current
+return function(p1) --[[ Line: 33 | Named "useViewportModelLoader" ]]
+	-- upvalues: ReactModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(true)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(nil)
+	local UseRefResult = ReactModule.useRef(0)
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseRefResult2 = ReactModule.useRef(p1.onModelReady)
+	local UseRefResult3 = ReactModule.useRef(p1.onLoadFailed)
+	UseRefResult2.current = p1.onModelReady
+	UseRefResult3.current = p1.onLoadFailed
+	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 45 ]]
+		-- upvalues: p1 (copy), UseRefResult (copy), UseStateResult2 (copy), UseStateResult2_1 (copy), UseStateResult2_2 (copy), UseRefResult1 (copy), UseRefResult3 (copy), UseRefResult2 (copy)
+		local ModelSourceFunction = p1.modelSource
+		UseRefResult.current += 1
+		local Current = UseRefResult.current
 		
 		if p2 then
-			var2(true)
+			UseStateResult2(true)
 		end
-		var4(false)
-		var6(nil)
-		local current_1 = var8.current
+		UseStateResult2_1(false)
+		UseStateResult2_2(nil)
+		local Current1 = UseRefResult1.current
 		
-		if current_1 then
-			current_1:Destroy()
-			var8.current = nil
+		if Current1 then
+			Current1:Destroy()
+			UseRefResult1.current = nil
 		end
-		task.spawn(function()
-			-- upvalues: var7 (copy), current (ref), modelSource (ref), p2 (ref), var2 (copy), var10 (copy), p1 (copy), var8 (copy), var6 (copy), var4 (copy), var9 (copy)
-			local var12 = modelSource({
-				isCancelled = function()
-					-- upvalues: var7 (copy), current (copy)
-					return var7.current ~= current
+		task.spawn(function() --[[ Line: 57 ]]
+			-- upvalues: UseRefResult (upval), Current (copy), ModelSourceFunction (copy), p2 (copy), UseStateResult2 (upval), UseRefResult3 (upval), p1 (upval), UseRefResult1 (upval), UseStateResult2_2 (upval), UseStateResult2_1 (upval), UseRefResult2 (upval)
+			local ModelSourceResult = ModelSourceFunction({
+				isCancelled = function(): boolean --[[ Line: 58 ]]
+					-- upvalues: UseRefResult (upval), Current (upval)
+					return UseRefResult.current ~= Current
 				end
 			})
 			
-			if var7.current ~= current then
-				if var12 and var12.model then
-					var12.model:Destroy()
-				end
-				return
-			elseif var12 then
-				local current_1 = p1.worldModelRef.current
-				
-				if current_1 then
-					var12.model.Parent = current_1
-					var8.current = var12.model
-					var6(var12.model)
-					var4(true)
+			if UseRefResult.current == Current then
+				if ModelSourceResult then
+					local Current1 = p1.worldModelRef.current
 					
-					if p2 then
-						var2(false)
+					if Current1 then
+						ModelSourceResult.model.Parent = Current1
+						UseRefResult1.current = ModelSourceResult.model
+						UseStateResult2_2(ModelSourceResult.model)
+						UseStateResult2_1(true)
+						
+						if p2 then
+							UseStateResult2(false)
+						end
+						if UseRefResult2.current then
+							UseRefResult2.current(ModelSourceResult)
+						end
+						return
+					else
+						ModelSourceResult.model:Destroy()
+						
+						if p2 then
+							UseStateResult2(false)
+						end
+						return
 					end
-					if var9.current then
-						var9.current(var12)
-					end
-					return
 				else
-					var12.model:Destroy()
-					
 					if p2 then
-						var2(false)
+						UseStateResult2(false)
+					end
+					if UseRefResult3.current then
+						UseRefResult3.current()
 					end
 					return
 				end
-			elseif p2 then
-				var2(false)
-			end
-			if var10.current then
-				var10.current()
+			elseif ModelSourceResult and ModelSourceResult.model then
+				ModelSourceResult.model:Destroy()
 			end
 		end)
 	end, { p1.modelSource, p1.worldModelRef })
-	reactModule.useLayoutEffect(function()
-		-- upvalues: var11 (ref), var7 (ref), var4 (ref), var6 (ref), var8 (ref)
-		var11(true)
+	ReactModule.useLayoutEffect(function() --[[ Line: 104 ]]
+		-- upvalues: UseResult (copy), UseRefResult (copy), UseStateResult2_1 (copy), UseStateResult2_2 (copy), UseRefResult1 (copy)
+		UseResult(true)
 		
-		return function()
-			-- upvalues: var7 (copy), var4 (copy), var6 (copy), var8 (copy)
-			var7.current += 1
-			var4(false)
-			var6(nil)
-			local current = var8.current
+		return function() --[[ Line: 106 ]]
+			-- upvalues: UseRefResult (upval), UseStateResult2_1 (upval), UseStateResult2_2 (upval), UseRefResult1 (upval)
+			UseRefResult.current += 1
+			UseStateResult2_1(false)
+			UseStateResult2_2(nil)
+			local Current = UseRefResult1.current
 			
-			if current then
-				current:Destroy()
-				var8.current = nil
+			if Current then
+				Current:Destroy()
+				UseRefResult1.current = nil
 			end
 		end
-	end, { var11 })
+	end, { UseResult })
 	
-	return { isLoading = var1, isReady = var3, model = var5 }
+	return {
+		isLoading = UseStateResult,
+		isReady = UseStateResult1,
+		model = UseStateResult3
+	}
 end

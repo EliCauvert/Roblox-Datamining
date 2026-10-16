@@ -1,67 +1,64 @@
 ﻿local _ = require(script.Parent.Types)
-local presets = require(script.Parent.Utility.TimingConfigs).presets
-local default = presets[require(script.Parent.Enums.TransitionPreset).Default]
+local Presets = require(script.Parent.Utility.TimingConfigs).presets
+local Preset = Presets[require(script.Parent.Enums.TransitionPreset).Default]
 
-local function _(p1)
-	-- upvalues: default (ref)
-	return p1.transition or { default = default }
+local function _(p1) --[[ Line: 12 | Named "getTransition" ]]
+	-- upvalues: Preset (copy)
+	return p1.transition or { default = Preset }
 end
 
 return {
-	createState = function(p1, p2)
-		-- upvalues: default (ref)
-		local t = {
-			transition = { default = if p2 then p2.default else default }
-		}
+	createState = function(List, p1) --[[ Line: 18 ]]
+		-- upvalues: Preset (copy)
+		local config = { transition = { default = p1 and p1.default or Preset } }
 		
-		for i, v in p1 do
-			t[i] = v
+		for i, value in List do
+			config[i] = value
 			
-			if p2 and p2[i] then
-				(t.transition or { default = default })[i] = p2[i]
+			if p1 and p1[i] then
+				(config.transition or { default = Preset })[i] = p1[i]
 			end
 		end
-		return t
+		return config
 	end,
-	transition = function(p3, p4)
-		-- upvalues: presets (ref), default (ref)
-		local var1 = if type(p3) == "string" then presets[p3] or default else p3
-		local t = {
-			duration = if var1 then var1.duration else default.duration,
-			easingStyle = if var1 then var1.easingStyle else default.easingStyle,
-			delay = if var1 then var1.delay else default.delay
+	transition = function(p2, p3) --[[ Line: 40 ]]
+		-- upvalues: Presets (copy), Preset (copy)
+		local Preset1 = if type(p2) == "string" then Presets[p2] or Preset else p2
+		local config = {
+			duration = Preset1 and Preset1.duration or Preset.duration,
+			easingStyle = Preset1 and Preset1.easingStyle or Preset.easingStyle,
+			delay = Preset1 and Preset1.delay or Preset.delay
 		}
 		
-		if p4 then
-			if p4.duration then
-				t.duration = p4.duration
+		if p3 then
+			if p3.duration then
+				config.duration = p3.duration
 			end
-			if p4.easingStyle then
-				t.easingStyle = p4.easingStyle
+			if p3.easingStyle then
+				config.easingStyle = p3.easingStyle
 			end
-			if p4.delay then
-				t.delay = p4.delay
+			if p3.delay then
+				config.delay = p3.delay
 			end
 		end
-		return t
+		return config
 	end,
-	animate = function(p3, p4)
-		-- upvalues: default (ref)
-		if not p3 then return end
-		local transition = p3.transition or { default = default }
-		
-		for i, v in p4 do
-			local var1 = transition[i]
-			local var2 = if var1 ~= nil then transition.default else var1
+	animate = function(p2, List) --[[ Line: 69 ]]
+		-- upvalues: Preset (copy)
+		if not p2 then return end
+		local Transition = p2.transition or { default = Preset }
+		for i, value in List do
+			local TransitionEntry = Transition[i]
+			local Default = if TransitionEntry == nil then Transition.default else TransitionEntry
 			
-			if var2.delay and var2.delay > 0 then
-				local cloned = table.clone(var2)
-				task.delay(var2.delay, function()
-					-- upvalues: v (ref), p3 (ref), i (ref), cloned (ref)
-					v(p3[i], cloned)
+			if Default.delay and Default.delay > 0 then
+				local Copy = table.clone(Default)
+				task.delay(Default.delay, function() --[[ Line: 88 ]]
+					-- upvalues: value (copy), p2 (copy), i (copy), Copy (copy)
+					value(p2[i], Copy)
 				end)
 			else
-				v(p3[i], var2)
+				value(p2[i], Default)
 			end
 		end
 	end

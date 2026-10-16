@@ -1,15 +1,15 @@
-﻿local function populateListFromIds(p1, p2)
-	-- upvalues: populateListFromIds (ref)
-	local t = {}
+﻿local function populateListFromIds(List, p1) --[[ Line: 5 ]]
+	-- upvalues: populateListFromIds (copy)
+	local List1 = {}
 	
-	for i, v in ipairs(p1) do
-		if type(v) == "table" then
-			table.insert(t, populateListFromIds(v, p2))
+	for _, value in ipairs(List) do
+		if type(value) == "table" then
+			table.insert(List1, populateListFromIds(value, p1))
 		else
-			table.insert(t, p2[v])
+			table.insert(List1, p1[value])
 		end
 	end
-	return t
+	return List1
 end
 
 return populateListFromIds

@@ -1,28 +1,27 @@
-﻿local expChat = script:FindFirstAncestor("ExpChat")
-local parent = expChat.Parent
-local roduxModule = require(parent.Rodux)
-local dictionary = require(parent.llama).Dictionary
-local configModule = require(expChat.Config)
-local actions = expChat.Actions
+﻿local ExpChat = script:FindFirstAncestor("ExpChat")
+local Parent = ExpChat.Parent
+local Dictionary = require(Parent.llama).Dictionary
+local ConfigModule = require(ExpChat.Config)
+local Actions = ExpChat.Actions
 
-return roduxModule.createReducer({
+return require(Parent.Rodux).createReducer({
 	HeightScale = 1,
 	WidthScale = 1,
-	Font = configModule.ChatWindowFont,
-	TextColor3 = configModule.ChatWindowTextColor3,
-	TextSize = configModule.ChatWindowTextSize,
-	TextStrokeColor3 = configModule.ChatWindowTextStrokeColor,
-	TextStrokeTransparency = configModule.ChatWindowTextStrokeTransparency,
-	BackgroundColor3 = configModule.ChatWindowBackgroundColor3,
-	BackgroundTransparency = configModule.ChatWindowBackgroundTransparency,
-	SpatialPanelTextSize = configModule.ChatWindowSpatialPanelTextSize
+	Font = ConfigModule.ChatWindowFont,
+	TextColor3 = ConfigModule.ChatWindowTextColor3,
+	TextSize = ConfigModule.ChatWindowTextSize,
+	TextStrokeColor3 = ConfigModule.ChatWindowTextStrokeColor,
+	TextStrokeTransparency = ConfigModule.ChatWindowTextStrokeTransparency,
+	BackgroundColor3 = ConfigModule.ChatWindowBackgroundColor3,
+	BackgroundTransparency = ConfigModule.ChatWindowBackgroundTransparency,
+	SpatialPanelTextSize = ConfigModule.ChatWindowSpatialPanelTextSize
 }, {
-	[require(actions.ConfigurationObjectsLoaded).name] = function(p1, p2)
-		-- upvalues: dictionary (ref)
-		return dictionary.join(p1, p2.chatWindowSettings)
+	[require(Actions.ConfigurationObjectsLoaded).name] = function(p1, p2) --[[ Line: 26 ]]
+		-- upvalues: Dictionary (copy)
+		return Dictionary.join(p1, p2.chatWindowSettings)
 	end,
-	[require(actions.ChatWindowSettingsChanged).name] = function(p1, p2)
-		-- upvalues: dictionary (ref)
-		return if p1[p2.property] then dictionary.join(p1, { [p2.property] = p2.value }) else p1
+	[require(Actions.ChatWindowSettingsChanged).name] = function(p1, p2) --[[ Line: 30 ]]
+		-- upvalues: Dictionary (copy)
+		return if p1[p2.property] then Dictionary.join(p1, { [p2.property] = p2.value }) else p1
 	end
 })

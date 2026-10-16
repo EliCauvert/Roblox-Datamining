@@ -1,3 +1,3 @@
-﻿return function(p1, p2)
-	return p1.AbsoluteWindowSize.Y + (if p2 ~= nil then 1 else p2) < p1.AbsoluteCanvasSize.Y
+﻿return function(ScrollFrame, p1): boolean --[[ Line: 1 | Named "isScrollingFrameOverflowingY" ]]
+	return ScrollFrame.AbsoluteWindowSize.Y + (if p1 == nil then 1 else p1) < ScrollFrame.AbsoluteCanvasSize.Y
 end

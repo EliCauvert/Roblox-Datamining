@@ -1,12 +1,12 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local textModule = require(foundation.Components.Text)
-local _ = require(foundation.Components.Types)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local TextModule = require(Foundation.Components.Text)
+local _ = require(Foundation.Components.Types)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: reactModule (ref), textModule (ref), withCommonPropsModule (ref)
-	return reactModule.createElement(textModule, withCommonPropsModule(p1, {
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 20 | Named "HintText" ]]
+	-- upvalues: ReactModule (copy), TextModule (copy), WithCommonPropsModule (copy)
+	return ReactModule.createElement(TextModule, WithCommonPropsModule(p1, {
 		Text = p1.text,
 		tag = {
 			["size-full-0 auto-y text-caption-small text-align-x-left text-align-y-top text-wrap"] = true,
@@ -14,6 +14,6 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 			["content-muted"] = p1.isDisabled and not p1.hasError,
 			["content-default"] = not p1.isDisabled and not p1.hasError
 		},
-		ref = p2
+		ref = Ref
 	}))
 end))

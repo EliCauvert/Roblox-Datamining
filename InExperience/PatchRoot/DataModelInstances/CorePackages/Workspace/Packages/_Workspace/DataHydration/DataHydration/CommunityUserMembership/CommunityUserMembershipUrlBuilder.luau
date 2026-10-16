@@ -1,13 +1,13 @@
-﻿local parent = script:FindFirstAncestor("DataHydration").Parent
-local urlBuilder = require(parent.UrlBuilder).UrlBuilder
-local url = require(parent.Http).Url
+﻿local Parent = script:FindFirstAncestor("DataHydration").Parent
+local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
+local Url = require(Parent.Http).Url
 
 return {
-	buildJoinCommunityUrl = function(p1)
-		-- upvalues: urlBuilder (ref), url (ref)
-		return urlBuilder.new({
+	buildJoinCommunityUrl = function(CommunityId) --[[ Line: 9 ]]
+		-- upvalues: UrlBuilder (copy), Url (copy)
+		return UrlBuilder.new({
 			path = "v1/groups/{communityId}/users",
-			base = url.GROUPS_URL
-		})({ communityId = p1 })
+			base = Url.GROUPS_URL
+		})({ communityId = CommunityId })
 	end
 }

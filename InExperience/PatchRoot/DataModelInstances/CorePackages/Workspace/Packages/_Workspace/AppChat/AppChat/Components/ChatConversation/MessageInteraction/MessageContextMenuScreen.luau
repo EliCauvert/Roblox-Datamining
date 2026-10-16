@@ -1,16 +1,16 @@
-﻿local parent = script:FindFirstAncestor("AppChat").Parent
-local reactModule = require(parent.React)
-local useNavigation = require(parent.Navigation).useNavigation
-local messageContextMenuContainerModule = require(script.Parent.MessageContextMenuContainer)
+﻿local Parent = script:FindFirstAncestor("AppChat").Parent
+local ReactModule = require(Parent.React)
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local MessageContextMenuContainerModule = require(script.Parent.MessageContextMenuContainer)
 
-function MessageContextMenuScreen()
-	-- upvalues: useNavigation (ref), reactModule (ref), messageContextMenuContainerModule (ref)
-	local var1 = useNavigation()
+function MessageContextMenuScreen() --[[ Line: 12 ]]
+	-- upvalues: UseNavigationFunction (copy), ReactModule (copy), MessageContextMenuContainerModule (copy)
+	local UseNavigationResult = UseNavigationFunction()
 	
-	return reactModule.createElement(messageContextMenuContainerModule, {
-		messageId = var1.getParam("messageId"),
-		conversationId = var1.getParam("conversationId"),
-		inputBoxRef = var1.getParam("inputBoxRef")
+	return ReactModule.createElement(MessageContextMenuContainerModule, {
+		messageId = UseNavigationResult.getParam("messageId"),
+		conversationId = UseNavigationResult.getParam("conversationId"),
+		inputBoxRef = UseNavigationResult.getParam("inputBoxRef")
 	})
 end
 

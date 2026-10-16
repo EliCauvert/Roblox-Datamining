@@ -14,7 +14,7 @@ return {
 					{
 						id = "2711abed-243e-4e13-adf5-074be99adbef",
 						name = "heart",
-						unicode = "\226\157\164",
+						unicode = "❤",
 						asset_source = {
 							roblox_asset = nil,
 							custom = nil,
@@ -24,7 +24,7 @@ return {
 					{
 						id = "333bf3a4-1cf6-436b-af78-1bdc655dfa07",
 						name = "fire",
-						unicode = "\240\159\148\165",
+						unicode = "🔥",
 						asset_source = {
 							roblox_asset = nil,
 							custom = nil,
@@ -34,7 +34,7 @@ return {
 					{
 						id = "415966eb-33de-452b-bd8f-cd6c266691c7",
 						name = "wow",
-						unicode = "\240\159\152\174",
+						unicode = "😮",
 						asset_source = {
 							roblox_asset = nil,
 							custom = nil,
@@ -44,7 +44,7 @@ return {
 					{
 						id = "4d89ecf7-fa63-4e60-bbd1-24855df35423",
 						name = "skull",
-						unicode = "\240\159\146\128",
+						unicode = "💀",
 						asset_source = {
 							roblox_asset = nil,
 							custom = nil,
@@ -54,7 +54,7 @@ return {
 					{
 						id = "b0d312db-8283-4223-b954-72a6fedf5216",
 						name = "thumbsUp",
-						unicode = "\240\159\145\141",
+						unicode = "👍",
 						asset_source = {
 							roblox_asset = nil,
 							custom = nil,
@@ -64,7 +64,7 @@ return {
 					{
 						id = "b1e983eb-5c23-4fca-b985-8d1077851f43",
 						name = "laughJoy",
-						unicode = "\240\159\152\130",
+						unicode = "😂",
 						asset_source = {
 							roblox_asset = nil,
 							custom = nil,
@@ -74,7 +74,7 @@ return {
 					{
 						id = "ef706c63-4253-4903-8c80-45548efc65a6",
 						name = "crying",
-						unicode = "\240\159\152\173",
+						unicode = "😭",
 						asset_source = {
 							roblox_asset = nil,
 							custom = nil,

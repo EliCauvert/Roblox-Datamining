@@ -1,51 +1,54 @@
-﻿local profileQRCode = script:FindFirstAncestor("ProfileQRCode")
-local parent = profileQRCode.Parent
-local reactModule = require(parent.React)
-local UIBloxModule = require(parent.UIBlox)
-local foundationModule = require(parent.Foundation)
-local localizationModule = require(parent.Localization)
-local userTile = require(parent.UserTile).UserTile
-local layoutMode = require(parent.UserTile).LayoutMode
-local styledTextLabel = UIBloxModule.App.Text.StyledTextLabel
-local useStyle = UIBloxModule.Core.Style.useStyle
-local button = foundationModule.Button
-local view = foundationModule.View
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local fillBehavior = foundationModule.Enums.FillBehavior
-local inputSize = foundationModule.Enums.InputSize
-local textKeysModule = require(profileQRCode.Common.TextKeys)
-local useLocalization = localizationModule.Hooks.useLocalization
-local useLocalUserInfoModule = require(profileQRCode.Utils.useLocalUserInfo)
-local useCombinedUserNameModule = require(profileQRCode.Utils.useCombinedUserName)
-local useAnalyticsModule = require(profileQRCode.Analytics.useAnalytics)
-local eventNamesModule = require(profileQRCode.Analytics.EventNames)
-local useTokens = foundationModule.Hooks.useTokens
-local fFlagProfileQrCodeDeprecateUserReduxModule = require(profileQRCode.Flags.FFlagProfileQrCodeDeprecateUserRedux)
+﻿local ProfileQRCode = script:FindFirstAncestor("ProfileQRCode")
+local Parent = ProfileQRCode.Parent
+local ReactModule = require(Parent.React)
+local UIBloxModule = require(Parent.UIBlox)
+local FoundationModule = require(Parent.Foundation)
+local UserTile = require(Parent.UserTile).UserTile
+local LayoutMode = require(Parent.UserTile).LayoutMode
+local StyledTextLabel = UIBloxModule.App.Text.StyledTextLabel
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local Button = FoundationModule.Button
+local View = FoundationModule.View
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local FillBehavior = FoundationModule.Enums.FillBehavior
+local InputSize = FoundationModule.Enums.InputSize
+local TextKeysModule = require(ProfileQRCode.Common.TextKeys)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseLocalUserInfoModule = require(ProfileQRCode.Utils.useLocalUserInfo)
+local UseCombinedUserNameModule = require(ProfileQRCode.Utils.useCombinedUserName)
+local UseAnalyticsModule = require(ProfileQRCode.Analytics.useAnalytics)
+local EventNamesModule = require(ProfileQRCode.Analytics.EventNames)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local FFlagProfileQrCodeDeprecateUserReduxModule = require(ProfileQRCode.Flags.FFlagProfileQrCodeDeprecateUserRedux)
 
-return function(p1)
-	-- upvalues: useTokens (ref), useLocalization (ref), textKeysModule (ref), useStyle (ref), useLocalUserInfoModule (ref), useCombinedUserNameModule (ref), fFlagProfileQrCodeDeprecateUserReduxModule (ref), useAnalyticsModule (ref), reactModule (ref), eventNamesModule (ref), view (ref), userTile (ref), layoutMode (ref), foundationModule (ref), styledTextLabel (ref), button (ref), buttonVariant (ref), inputSize (ref), fillBehavior (ref)
-	local var1 = useTokens()
-	local var2 = useLocalization({
+return function(p1) --[[ Line: 39 ]]
+	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), TextKeysModule (copy), UseStyleFunction (copy), UseLocalUserInfoModule (copy), UseCombinedUserNameModule (copy), FFlagProfileQrCodeDeprecateUserReduxModule (copy), UseAnalyticsModule (copy), ReactModule (copy), EventNamesModule (copy), View (copy), UserTile (copy), LayoutMode (copy), FoundationModule (copy), StyledTextLabel (copy), Button (copy), ButtonVariant (copy), InputSize (copy), FillBehavior (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseLocalizationResult = UseLocalizationFunction({
 		accept = "CommonUI.Controls.Action.Accept",
 		dismiss = "CommonUI.Messages.Action.Dismiss",
-		notificationRequest = textKeysModule.NotificationRequestText
+		notificationRequest = TextKeysModule.NotificationRequestText
 	})
-	local var3 = useStyle()
-	local var4 = useLocalUserInfoModule(p1.userId)
-	local var5 = useCombinedUserNameModule(p1.userId)
-	local var6 = if var5 == "" then if var4 then var4.displayName or (var4.username or "") else "" else var5 .. " @" .. (var4.username or (if fFlagProfileQrCodeDeprecateUserReduxModule then "" else nil))
-	local var7 = useAnalyticsModule()
-	local var8, var9 = reactModule.useState(false)
-	reactModule.useEffect(function()
-		-- upvalues: var9 (ref)
-		var9(false)
+	local UseStyleResult = UseStyleFunction()
+	local UseLocalUserInfoModuleResult = UseLocalUserInfoModule(p1.userId)
+	local UseCombinedUserNameModuleResult = UseCombinedUserNameModule(p1.userId)
+	local DisplayName = if UseCombinedUserNameModuleResult == "" then UseLocalUserInfoModuleResult and (UseLocalUserInfoModuleResult.displayName or UseLocalUserInfoModuleResult.username) or "" else UseCombinedUserNameModuleResult .. " @" .. (UseLocalUserInfoModuleResult.username or (if FFlagProfileQrCodeDeprecateUserReduxModule then "" else nil))
+	local UseAnalyticsModuleResult = UseAnalyticsModule()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	ReactModule.useEffect(function() --[[ Line: 57 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(false)
 	end, { p1.userId })
-	reactModule.useEffect(function()
-		-- upvalues: var7 (ref), eventNamesModule (copy), p1 (ref)
-		var7.fireEvent(eventNamesModule.QRPageFriendRequestBannerShown, { qrCodeBannerQueueSize = p1.notificationQueueSize })
-	end, { p1.userId, var7.fireEvent, p1.notificationQueueSize })
+	ReactModule.useEffect(function() --[[ Line: 61 ]]
+		-- upvalues: UseAnalyticsModuleResult (copy), EventNamesModule (upval), p1 (copy)
+		UseAnalyticsModuleResult.fireEvent(EventNamesModule.QRPageFriendRequestBannerShown, { qrCodeBannerQueueSize = p1.notificationQueueSize })
+	end, {
+		p1.userId,
+		UseAnalyticsModuleResult.fireEvent,
+		p1.notificationQueueSize
+	})
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		ZIndex = 2,
 		tag = "col gap-medium size-full-0 auto-y padding-medium stroke-standard stroke-default radius-medium bg-surface-0",
 		sizeConstraint = {
@@ -53,66 +56,66 @@ return function(p1)
 			MinSize = Vector2.new(0, 0)
 		}
 	}, {
-		HeaderRow = reactModule.createElement(view, {
+		HeaderRow = ReactModule.createElement(View, {
 			tag = "row align-y-top gap-medium size-full-0 auto-y",
 			LayoutOrder = 1
 		}, {
-			AvatarSlot = reactModule.createElement(view, { tag = "no-flex auto-xy", LayoutOrder = 1 }, {
-				UserTile = reactModule.createElement(userTile, {
+			AvatarSlot = ReactModule.createElement(View, { tag = "no-flex auto-xy", LayoutOrder = 1 }, {
+				UserTile = ReactModule.createElement(UserTile, {
 					userId = p1.userId,
-					layoutMode = layoutMode.compact,
-					userPresenceType = foundationModule.Enums.UserPresence.None,
-					avatarSize = UDim2.new(0, var1.Size.Size_1000, 0, var1.Size.Size_1000)
+					layoutMode = LayoutMode.compact,
+					userPresenceType = FoundationModule.Enums.UserPresence.None,
+					avatarSize = UDim2.new(0, UseTokensResult.Size.Size_1000, 0, UseTokensResult.Size.Size_1000)
 				})
 			}),
-			ContentColumn = reactModule.createElement(view, { tag = "col fill gap-xsmall auto-y", LayoutOrder = 2 }, {
-				Username = reactModule.createElement(styledTextLabel, {
+			ContentColumn = ReactModule.createElement(View, { tag = "col fill gap-xsmall auto-y", LayoutOrder = 2 }, {
+				Username = ReactModule.createElement(StyledTextLabel, {
 					layoutOrder = 1,
 					textWrapped = true,
-					text = var6,
-					fontStyle = var3.Font.Header2,
-					colorStyle = var3.Theme.TextDefault,
-					size = UDim2.new(1, 0, 0, var1.Size.Size_500),
+					text = DisplayName,
+					fontStyle = UseStyleResult.Font.Header2,
+					colorStyle = UseStyleResult.Theme.TextDefault,
+					size = UDim2.new(1, 0, 0, UseTokensResult.Size.Size_500),
 					automaticSize = Enum.AutomaticSize.Y,
 					textXAlignment = Enum.TextXAlignment.Left,
 					textYAlignment = Enum.TextYAlignment.Center
 				}),
-				Description = reactModule.createElement(styledTextLabel, {
+				Description = ReactModule.createElement(StyledTextLabel, {
 					layoutOrder = 2,
 					textWrapped = true,
 					lineHeight = 1,
-					text = var2.notificationRequest,
-					fontStyle = var3.Font.Body,
-					colorStyle = var3.Theme.TextDefault,
-					size = UDim2.new(1, 0, 0, var1.Size.Size_700),
+					text = UseLocalizationResult.notificationRequest,
+					fontStyle = UseStyleResult.Font.Body,
+					colorStyle = UseStyleResult.Theme.TextDefault,
+					size = UDim2.new(1, 0, 0, UseTokensResult.Size.Size_700),
 					automaticSize = Enum.AutomaticSize.Y,
 					textXAlignment = Enum.TextXAlignment.Left,
 					textYAlignment = Enum.TextYAlignment.Center
 				}),
-				ButtonRow = reactModule.createElement(view, {
+				ButtonRow = ReactModule.createElement(View, {
 					tag = "row gap-small size-full-0 auto-y padding-top-large",
 					LayoutOrder = 3
 				}, {
-					AcceptSlot = reactModule.createElement(view, { tag = "fill auto-xy", LayoutOrder = 1 }, {
-						AcceptButton = reactModule.createElement(button, {
-							text = var2.accept,
-							variant = buttonVariant.Emphasis,
-							size = inputSize.Small,
-							fillBehavior = fillBehavior.Fill,
-							isDisabled = var8,
-							onActivated = function()
-								-- upvalues: var9 (ref), p1 (ref)
-								var9(true)
+					AcceptSlot = ReactModule.createElement(View, { tag = "fill auto-xy", LayoutOrder = 1 }, {
+						AcceptButton = ReactModule.createElement(Button, {
+							text = UseLocalizationResult.accept,
+							variant = ButtonVariant.Emphasis,
+							size = InputSize.Small,
+							fillBehavior = FillBehavior.Fill,
+							isDisabled = UseStateResult,
+							onActivated = function() --[[ Line: 131 ]]
+								-- upvalues: UseStateResult2 (copy), p1 (copy)
+								UseStateResult2(true)
 								p1.onAccept(p1.userId)
 							end
 						})
 					}),
-					DismissSlot = reactModule.createElement(view, { tag = "fill auto-xy", LayoutOrder = 2 }, {
-						DismissButton = reactModule.createElement(button, {
-							text = var2.dismiss,
-							variant = buttonVariant.Standard,
-							size = inputSize.Small,
-							fillBehavior = fillBehavior.Fill,
+					DismissSlot = ReactModule.createElement(View, { tag = "fill auto-xy", LayoutOrder = 2 }, {
+						DismissButton = ReactModule.createElement(Button, {
+							text = UseLocalizationResult.dismiss,
+							variant = ButtonVariant.Standard,
+							size = InputSize.Small,
+							fillBehavior = FillBehavior.Fill,
 							onActivated = p1.onClose
 						})
 					})

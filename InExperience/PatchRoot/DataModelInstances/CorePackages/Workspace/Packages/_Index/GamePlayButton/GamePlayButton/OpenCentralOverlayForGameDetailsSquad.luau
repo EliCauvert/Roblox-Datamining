@@ -1,17 +1,17 @@
-﻿local parent = script:FindFirstAncestor("GamePlayButton").Parent
-local centralOverlayType = require(parent.RobloxAppEnums).CentralOverlayType
-local setCentralOverlay = require(parent.CentralOverlay).Actions.SetCentralOverlay
+﻿local Parent = script:FindFirstAncestor("GamePlayButton").Parent
+local CentralOverlayType = require(Parent.RobloxAppEnums).CentralOverlayType
+local SetCentralOverlayFunction = require(Parent.CentralOverlay).Actions.SetCentralOverlay
 
-return function(p1, p2, p3, p4, p5)
-	-- upvalues: setCentralOverlay (ref), centralOverlayType (ref)
-	return function(p6)
-		-- upvalues: setCentralOverlay (copy), centralOverlayType (copy), p1 (ref), p2 (ref), p3 (ref), p4 (ref), p5 (ref)
-		p6:dispatch(setCentralOverlay(centralOverlayType.GameDetailsSquad, {
-			landscapeMenuDirection = p1,
-			menuAnchorPosition = p2,
-			menuAnchorSize = p3,
-			referralSource = p4,
-			universeId = p5
+return function(LandscapeMenuDirection, MenuAnchorPosition, MenuAnchorSize, ReferralSource, UniverseId) --[[ Line: 6 ]]
+	-- upvalues: SetCentralOverlayFunction (copy), CentralOverlayType (copy)
+	return function(p1) --[[ Line: 7 ]]
+		-- upvalues: SetCentralOverlayFunction (upval), CentralOverlayType (upval), LandscapeMenuDirection (copy), MenuAnchorPosition (copy), MenuAnchorSize (copy), ReferralSource (copy), UniverseId (copy)
+		p1:dispatch(SetCentralOverlayFunction(CentralOverlayType.GameDetailsSquad, {
+			landscapeMenuDirection = LandscapeMenuDirection,
+			menuAnchorPosition = MenuAnchorPosition,
+			menuAnchorSize = MenuAnchorSize,
+			referralSource = ReferralSource,
+			universeId = UniverseId
 		}))
 	end
 end

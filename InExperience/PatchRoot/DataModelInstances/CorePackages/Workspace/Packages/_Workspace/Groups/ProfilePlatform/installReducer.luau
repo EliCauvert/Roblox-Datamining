@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent.Parent._Workspace.ProfilePlatform.ProfilePlatform.Rodux.installReducer)
+﻿return (require(script.Parent.Parent.Parent.Parent._Workspace.ProfilePlatform.ProfilePlatform.Rodux.installReducer))

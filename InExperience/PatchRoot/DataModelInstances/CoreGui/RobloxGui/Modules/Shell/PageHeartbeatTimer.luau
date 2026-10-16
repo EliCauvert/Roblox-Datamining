@@ -1,58 +1,57 @@
-﻿local analyticsModule = require(script.Parent.Analytics)
-local list = { 2, 10 }
+﻿local AnalyticsModule = require(script.Parent.Analytics)
+local Delays = { 2, 10 }
 local t = {}
-local t_1 = {}
 
-local function _(p1, p2, p3)
-	local var1 = false
-	task.delay(p1, function()
-		-- upvalues: var1 (write), p3 (ref), p2 (ref)
-		if not var1 then
-			p3(p2)
+local function _(Delay, p1, p2) --[[ Line: 11 | Named "createDelayedTask" ]]
+	local v1 = false
+	task.delay(Delay, function() --[[ Line: 14 ]]
+		-- upvalues: v1 (ref), p2 (copy), p1 (copy)
+		if not v1 then
+			p2(p1)
 		end
 	end)
 	
-	return function()
-		-- upvalues: var1 (write)
-		var1 = true
+	return function() --[[ Line: 19 ]]
+		-- upvalues: v1 (ref)
+		v1 = true
 	end
 end
 
-local function cancelTasks()
-	-- upvalues: t (write)
-	for i, v in ipairs(t) do
-		if v ~= nil then
-			v()
+local function cancelTasks() --[[ Line: 24 ]]
+	-- upvalues: t (ref)
+	for _, value in ipairs(t) do
+		if value ~= nil then
+			value()
 		end
 	end
 	t = {}
 end
 
-function t_1.onPageChanged(p1)
-	-- upvalues: cancelTasks (ref), list (ref), t (write), analyticsModule (ref)
-	cancelTasks()
-	
-	for i, v in ipairs(list) do
-		local var1 = t
+return {
+	onPageChanged = function(p1) --[[ Line: 33 ]]
+		-- upvalues: cancelTasks (copy), Delays (copy), t (ref), AnalyticsModule (copy)
+		cancelTasks()
 		
-		local var2 = function(p2)
-			-- upvalues: analyticsModule (copy), p1 (ref)
-			analyticsModule.reportPageHeartbeat(p2, p1)
-		end
-		
-		local var3 = false
-		task.delay(v, function()
-			-- upvalues: var3 (write), var2 (ref), i (ref)
-			if not var3 then
-				var2(i)
+		for i, delay in ipairs(Delays) do
+			local t1 = t
+			
+			local function v7(p2) --[[ Line: 39 ]]
+				-- upvalues: AnalyticsModule (upval), p1 (copy)
+				AnalyticsModule.reportPageHeartbeat(p2, p1)
 			end
-		end)
-		
-		var1[i] = function()
-			-- upvalues: var3 (write)
-			var5 = true
+			
+			local v1 = false
+			task.delay(delay, function() --[[ Line: 14 ]]
+				-- upvalues: v1 (ref), v7 (copy), i (copy)
+				if not v1 then
+					v7(i)
+				end
+			end)
+			
+			t1[i] = function() --[[ Line: 19 ]]
+				-- upvalues: v1 (ref)
+				v1 = true
+			end
 		end
 	end
-end
-
-return t_1
+}

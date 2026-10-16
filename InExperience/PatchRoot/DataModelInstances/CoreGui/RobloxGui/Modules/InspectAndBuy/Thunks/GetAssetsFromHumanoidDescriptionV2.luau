@@ -1,63 +1,64 @@
-﻿local parent = script.Parent.Parent
-local thunkModule = require(parent.Thunk)
-local assetInfoModule = require(parent.Models.AssetInfo)
-local setEquippedAssetsModule = require(parent.Actions.SetEquippedAssets)
-local constantsModule = require(parent.Constants)
-local getAvatarPreviewModule = require(parent.Thunks.GetAvatarPreview)
-local fFlagAXInspectAndBuyMakeupSupport = require(game:GetService("CorePackages").Workspace.Packages.AvatarExperienceFlags).FFlagAXInspectAndBuyMakeupSupport
+﻿local Parent = script.Parent.Parent
+local ThunkModule = require(Parent.Thunk)
+local AssetInfoModule = require(Parent.Models.AssetInfo)
+local SetEquippedAssetsModule = require(Parent.Actions.SetEquippedAssets)
+local ConstantsModule = require(Parent.Constants)
+local GetAvatarPreviewModule = require(Parent.Thunks.GetAvatarPreview)
+local FFlagAXInspectAndBuyMakeupSupport = require(game:GetService("CorePackages").Workspace.Packages.AvatarExperienceFlags).FFlagAXInspectAndBuyMakeupSupport
 local t = {}
 
-local function getAssetIds(value)
-	-- upvalues: constantsModule (ref), assetInfoModule (ref), fFlagAXInspectAndBuyMakeupSupport (ref)
-	local t = {}
-	local var1 = false
+local function getAssetIds(Humanoid: Humanoid) --[[ Line: 19 ]]
+	-- upvalues: ConstantsModule (copy), AssetInfoModule (copy), FFlagAXInspectAndBuyMakeupSupport (copy)
+	local FromHumanoidDescriptionResults = {}
+	local Flag = false
 	
-	for i, v in constantsModule.AssetTypeIdStringToHumanoidDescriptionProp do
-		if constantsModule.AssetTypeIdToAccessoryTypeEnum[i] == nil then
-			local var2 = value[v] or ""
-			local var3 = if i ~= tostring(Enum.AssetType.Head.Value) then i == tostring(Enum.AssetType.DynamicHead.Value) else true
+	for i, value in ConstantsModule.AssetTypeIdStringToHumanoidDescriptionProp do
+		if ConstantsModule.AssetTypeIdToAccessoryTypeEnum[i] == nil then
+			local Text = Humanoid[value] or ""
+			local IsIMatch: boolean = i == tostring(Enum.AssetType.Head.Value) or i == tostring(Enum.AssetType.DynamicHead.Value)
 			
-			if not var1 or not var3 then
-				if var3 then
-					var1 = true
+			if not Flag or not IsIMatch then
+				if IsIMatch then
+					Flag = true
 				end
-				for i_3, v_1 in string.split(var2) do
-					if tonumber(v_1) and v_1 ~= "0" then
-						table.insert(t, assetInfoModule.fromHumanoidDescription(v_1))
+				for _, value1 in string.split(Text) do
+					if tonumber(value1) and value1 ~= "0" then
+						table.insert(FromHumanoidDescriptionResults, AssetInfoModule.fromHumanoidDescription(value1))
 					end
 				end
 			end
 		end
 	end
-	for i_1, v_1 in value:GetAccessories(true) do
-		t[#t + 1] = assetInfoModule.fromHumanoidDescriptionAccessory(v_1)
+	for _, accessory in Humanoid:GetAccessories(true) do
+		FromHumanoidDescriptionResults[#FromHumanoidDescriptionResults + 1] = AssetInfoModule.fromHumanoidDescriptionAccessory(accessory)
 	end
-	for i_2, v_2 in value:GetEmotes() do
-		for i_3, v_3 in v_2 do
-			t[#t + 1] = assetInfoModule.fromHumanoidDescription(v_3)
+	for _, emote in Humanoid:GetEmotes() do
+		for _, value2 in emote do
+			FromHumanoidDescriptionResults[#FromHumanoidDescriptionResults + 1] = AssetInfoModule.fromHumanoidDescription(value2)
 		end
 	end
-	if fFlagAXInspectAndBuyMakeupSupport then
-		for i_3, v_3 in value:GetChildren() do
-			if v_3:IsA("MakeupDescription") and v_3.AssetId > 0 then
-				t[#t + 1] = assetInfoModule.fromHumanoidDescription(v_3.AssetId)
+	if FFlagAXInspectAndBuyMakeupSupport then
+		for _, MakeupDescription in Humanoid:GetChildren() do
+			if MakeupDescription:IsA("MakeupDescription") and MakeupDescription.AssetId > 0 then
+				FromHumanoidDescriptionResults[#FromHumanoidDescriptionResults + 1] = AssetInfoModule.fromHumanoidDescription(MakeupDescription.AssetId)
 			end
 		end
 	end
-	return t
+	return FromHumanoidDescriptionResults
 end
 
-return function(value, p1)
-	-- upvalues: thunkModule (ref), t (ref), getAssetIds (ref), getAvatarPreviewModule (ref), setEquippedAssetsModule (ref)
-	return thunkModule.new(script.Name, t, function(p2, _)
-		-- upvalues: getAssetIds (copy), value (ref), p1 (ref), getAvatarPreviewModule (copy), setEquippedAssetsModule (copy)
-		local var4 = getAssetIds(value)
+return function(Humanoid, p1) --[[ Line: 83 | Named "GetAssetsFromHumanoidDescriptionV2" ]]
+	-- upvalues: ThunkModule (copy), t (copy), getAssetIds (copy), GetAvatarPreviewModule (copy), SetEquippedAssetsModule (copy)
+	return ThunkModule.new(script.Name, t, function(p2, _) --[[ Line: 84 ]]
+		-- upvalues: getAssetIds (upval), Humanoid (copy), p1 (copy), GetAvatarPreviewModule (upval), SetEquippedAssetsModule (upval)
+		local AssetIds = getAssetIds(Humanoid)
 		
 		if p1 then
-			p2:dispatch(setEquippedAssetsModule(var4))
+			p2:dispatch(SetEquippedAssetsModule(AssetIds))
 			
 			return
+		else
+			p2:dispatch(GetAvatarPreviewModule(AssetIds))
 		end
-		p2:dispatch(getAvatarPreviewModule(var4))
 	end)
 end

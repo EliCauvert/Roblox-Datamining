@@ -1,81 +1,81 @@
-﻿local t = {}
+﻿local ArraySetModule = {}
 
-function t:__index(p1)
-	-- upvalues: t (ref)
-	return if type(p1) == "number" then self:at(p1) else t[p1]
+function ArraySetModule.__index(p1, p2) --[[ Line: 55 ]]
+	-- upvalues: ArraySetModule (copy)
+	return if type(p2) == "number" then p1:at(p2) else ArraySetModule[p2]
 end
 
-function t:__len()
+function ArraySetModule:__len() --[[ Line: 63 ]]
 	return self:size()
 end
 
-function t:__newindex(p1, p2)
+function ArraySetModule:__newindex(p1, p2) --[[ Line: 67 ]]
 	self._indexToValue[p1] = p2
 end
 
-function t:__iter()
-	local var1 = 0
+function ArraySetModule.__iter(p1) --[[ Line: 71 ]]
+	local Count = 0
 	
-	return function()
-		-- upvalues: var1 (write), self (ref)
-		var1 += 1
+	return function() --[[ Line: 73 ]]
+		-- upvalues: Count (ref), p1 (copy)
+		Count += 1
 		
-		return if var1 <= self._size then self._indexToValue[var1] else nil
+		return if Count <= p1._size then p1._indexToValue[Count] else nil
 	end
 end
 
-function t:add(p1)
+function ArraySetModule:add(p1): boolean --[[ Line: 83 ]]
 	if self._valueToIndex[p1] then
 		return false
+	else
+		local NewSize = self._size + 1
+		self._valueToIndex[p1] = NewSize
+		self._indexToValue[NewSize] = p1
+		self._size = NewSize
+		
+		return true
 	end
-	local var1 = self._size + 1
-	self._valueToIndex[p1] = var1
-	self._indexToValue[var1] = p1
-	self._size = var1
-	
-	return true
 end
 
-function t:prependAll(p1)
+function ArraySetModule:prependAll(List): boolean --[[ Line: 101 ]]
+	local List1 = {}
 	local t = {}
-	local t_1 = {}
 	
-	for i, v in p1 do
-		if not self._valueToIndex[v] and not t_1[v] then
-			t_1[v] = true
-			table.insert(t, v)
+	for _, value in List do
+		if not self._valueToIndex[value] and not t[value] then
+			t[value] = true
+			table.insert(List1, value)
 		end
 	end
-	if #t == 0 then
+	if #List1 == 0 then
 		return false
 	end
-	local tCount = #t
+	local CountList1 = #List1
 	
-	for i_1 = self._size, 1, -1 do
-		local var1 = self._indexToValue[i_1]
-		self._indexToValue[i_1 + tCount] = var1
-		self._valueToIndex[var1] = i_1 + tCount
+	for i = self._size, 1, -1 do
+		local IndexToValueEntry = self._indexToValue[i]
+		self._indexToValue[i + CountList1] = IndexToValueEntry
+		self._valueToIndex[IndexToValueEntry] = i + CountList1
 	end
-	for i_2, v_1 in t do
-		self._indexToValue[i_2] = v_1
-		self._valueToIndex[v_1] = i_2
+	for i1, value1 in List1 do
+		self._indexToValue[i1] = value1
+		self._valueToIndex[value1] = i1
 	end
-	self._size += tCount
+	self._size += CountList1
 	
 	return true
 end
 
-function t:remove(p2)
-	if not self._valueToIndex[p2] then
+function ArraySetModule:remove(p1): boolean --[[ Line: 136 ]]
+	if not self._valueToIndex[p1] then
 		return false
 	end
-	local var2 = self._valueToIndex[p2]
-	self._valueToIndex[p2] = nil
+	self._valueToIndex[p1] = nil
 	
-	for i = var2 + 1, self._size do
-		local var3 = self._indexToValue[i]
-		self._indexToValue[i - 1] = var3
-		self._valueToIndex[var3] = i - 1
+	for i = self._valueToIndex[p1] + 1, self._size do
+		local IndexToValueEntry = self._indexToValue[i]
+		self._indexToValue[i - 1] = IndexToValueEntry
+		self._valueToIndex[IndexToValueEntry] = i - 1
 	end
 	self._indexToValue[self._size] = nil
 	self._size -= 1
@@ -83,51 +83,51 @@ function t:remove(p2)
 	return true
 end
 
-function t:has(p3)
-	return self._valueToIndex[p3] ~= nil
+function ArraySetModule:has(p2): boolean --[[ Line: 159 ]]
+	return self._valueToIndex[p2] ~= nil
 end
 
-function t:clear()
+function ArraySetModule:clear() --[[ Line: 163 ]]
 	self._valueToIndex = {}
 	self._indexToValue = {}
 	self._size = 0
 end
 
-function t:size()
+function ArraySetModule:size() --[[ Line: 169 ]]
 	return self._size
 end
 
-function t:at(p3)
-	return if p3 < 1 or self._size < p3 then nil else self._indexToValue[p3]
+function ArraySetModule.at(p2, p3: number) --[[ Line: 174 ]]
+	return if p3 < 1 or p2._size < p3 then nil else p2._indexToValue[p3]
 end
 
-function t:indexOf(p3)
-	return self._valueToIndex[p3]
+function ArraySetModule:indexOf(p2) --[[ Line: 183 ]]
+	return self._valueToIndex[p2]
 end
 
-function t:toArray()
+function ArraySetModule:toArray() --[[ Line: 188 ]]
 	return table.clone(self._indexToValue)
 end
 
-function t:values()
+function ArraySetModule:values() --[[ Line: 194 ]]
 	return self._indexToValue
 end
 
-function t:clone()
-	-- upvalues: t (ref)
-	return t.new(self._indexToValue)
+function ArraySetModule:clone() --[[ Line: 199 ]]
+	-- upvalues: ArraySetModule (copy)
+	return ArraySetModule.new(self._indexToValue)
 end
 
-function t.new(p3)
-	-- upvalues: t (ref)
-	local tbl = setmetatable({ _size = 0, _valueToIndex = {}, _indexToValue = {} }, t)
+function ArraySetModule.new(IndexToValue) --[[ Line: 203 ]]
+	-- upvalues: ArraySetModule (copy)
+	local self = setmetatable({ _size = 0, _valueToIndex = {}, _indexToValue = {} }, ArraySetModule)
 	
-	if p3 then
-		for i, v in p3 do
-			tbl:add(v)
+	if IndexToValue then
+		for _, value in IndexToValue do
+			self:add(value)
 		end
 	end
-	return tbl
+	return self
 end
 
-return t
+return ArraySetModule

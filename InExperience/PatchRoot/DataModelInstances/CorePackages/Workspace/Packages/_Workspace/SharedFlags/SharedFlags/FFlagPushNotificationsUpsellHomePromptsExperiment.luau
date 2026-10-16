@@ -1,1 +1,3 @@
-﻿return game:DefineFastFlag("PushNotificationsUpsellHomePromptsExperiment", false) and require(script.Parent.FFlagPushNotificationsUpsellPassClientAttributesToPrompts)
+﻿local FFlagPushNotificationsUpsellPassClientAttributesToPromptsModule = require(script.Parent.FFlagPushNotificationsUpsellPassClientAttributesToPrompts)
+
+return game:DefineFastFlag("PushNotificationsUpsellHomePromptsExperiment", false) and FFlagPushNotificationsUpsellPassClientAttributesToPromptsModule

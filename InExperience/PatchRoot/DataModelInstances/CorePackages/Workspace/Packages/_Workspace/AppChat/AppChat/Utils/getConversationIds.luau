@@ -1,8 +1,8 @@
-﻿return function(p1)
+﻿return function(List) --[[ Line: 2 | Named "getConversationIds" ]]
 	local t = {}
 	
-	for i, v in p1 do
-		t[i] = tostring(v.id)
+	for i, value in List do
+		t[i] = tostring(value.id)
 	end
 	return t
 end

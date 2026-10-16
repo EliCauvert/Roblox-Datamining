@@ -1,37 +1,37 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant)
-local _ = require(foundation.Providers.Style.Tokens)
-local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
-local inputSizeModule = require(foundation.Enums.InputSize)
-local iconSizeModule = require(foundation.Enums.IconSize)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ComposeStyleVariantModule = require(Foundation.Utility.composeStyleVariant)
+local _ = require(Foundation.Providers.Style.Tokens)
+local VariantsContextModule = require(Foundation.Providers.Style.VariantsContext)
+local InputSizeModule = require(Foundation.Enums.InputSize)
+local IconSizeModule = require(Foundation.Enums.IconSize)
 
-local function variantsFactory(_)
-	-- upvalues: inputSizeModule (ref), iconSizeModule (ref)
+local function variantsFactory(_) --[[ Line: 33 ]]
+	-- upvalues: InputSizeModule (copy), IconSizeModule (copy)
 	return {
 		common = {
 			text = { tag = "auto-x" },
 			content = { tag = "row align-x-center align-y-center gap-small" }
 		},
 		sizes = {
-			[inputSizeModule.XSmall] = {
+			[InputSizeModule.XSmall] = {
 				text = { tag = "size-0-400 text-label-small" },
 				content = { tag = "padding-y-small" },
-				icon = { size = iconSizeModule.XSmall }
+				icon = { size = IconSizeModule.XSmall }
 			},
-			[inputSizeModule.Small] = {
+			[InputSizeModule.Small] = {
 				text = { tag = "size-0-600 text-label-medium" },
 				content = { tag = "padding-y-small" },
-				icon = { size = iconSizeModule.Medium }
+				icon = { size = IconSizeModule.Medium }
 			},
-			[inputSizeModule.Medium] = {
+			[InputSizeModule.Medium] = {
 				text = { tag = "size-0-600 text-label-medium" },
 				content = { tag = "padding-y-medium" },
-				icon = { size = iconSizeModule.Medium }
+				icon = { size = IconSizeModule.Medium }
 			},
-			[inputSizeModule.Large] = {
+			[InputSizeModule.Large] = {
 				text = { tag = "size-0-600 text-label-medium" },
 				content = { tag = "padding-y-xlarge" },
-				icon = { size = iconSizeModule.Medium }
+				icon = { size = IconSizeModule.Medium }
 			}
 		},
 		isFill = {
@@ -45,17 +45,17 @@ local function variantsFactory(_)
 			}
 		},
 		paddings = {
-			[inputSizeModule.XSmall] = { content = { tag = "padding-x-xsmall" } },
-			[inputSizeModule.Small] = { content = { tag = "padding-x-small" } },
-			[inputSizeModule.Medium] = { content = { tag = "padding-x-medium" } },
-			[inputSizeModule.Large] = { content = { tag = "padding-x-large" } }
+			[InputSizeModule.XSmall] = { content = { tag = "padding-x-xsmall" } },
+			[InputSizeModule.Small] = { content = { tag = "padding-x-small" } },
+			[InputSizeModule.Medium] = { content = { tag = "padding-x-medium" } },
+			[InputSizeModule.Large] = { content = { tag = "padding-x-large" } }
 		}
 	}
 end
 
-return function(p1, p2, p3)
-	-- upvalues: variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref)
-	local tab = variantsContextModule.useVariants("Tab", variantsFactory, p1)
+return function(p1, p2, p3) --[[ Line: 82 ]]
+	-- upvalues: VariantsContextModule (copy), variantsFactory (copy), ComposeStyleVariantModule (copy)
+	local Tab = VariantsContextModule.useVariants("Tab", variantsFactory, p1)
 	
-	return composeStyleVariantModule(tab.common, tab.sizes[p2], tab.isFill[p3], tab.paddings[p2])
+	return ComposeStyleVariantModule(Tab.common, Tab.sizes[p2], Tab.isFill[p3], Tab.paddings[p2])
 end

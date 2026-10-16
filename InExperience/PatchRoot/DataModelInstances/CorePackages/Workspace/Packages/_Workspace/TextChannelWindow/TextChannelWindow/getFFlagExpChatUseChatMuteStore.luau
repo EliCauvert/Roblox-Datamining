@@ -1,6 +1,6 @@
-﻿local sharedFlagsModule = require(script:FindFirstAncestor("TextChannelWindow").Parent.SharedFlags)
+﻿local SharedFlagsModule = require(script:FindFirstAncestor("TextChannelWindow").Parent.SharedFlags)
 
-return function()
-	-- upvalues: sharedFlagsModule (ref)
-	return sharedFlagsModule.FFlagExpChatUseChatMuteStore
+return function() --[[ Line: 5 ]]
+	-- upvalues: SharedFlagsModule (copy)
+	return SharedFlagsModule.FFlagExpChatUseChatMuteStore
 end

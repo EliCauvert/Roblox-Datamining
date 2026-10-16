@@ -1,22 +1,22 @@
-﻿local viewRecyclerReact = script:FindFirstAncestor("ViewRecyclerReact")
-local compositionPlacementModule = require(viewRecyclerReact.ReactAdapter.Private.CompositionPlacement)
-local _ = require(viewRecyclerReact.Parent.ViewRecycler)
-local reactModule = require(viewRecyclerReact.Parent.React)
+﻿local ViewRecyclerReact = script:FindFirstAncestor("ViewRecyclerReact")
+local CompositionPlacementModule = require(ViewRecyclerReact.ReactAdapter.Private.CompositionPlacement)
+local _ = require(ViewRecyclerReact.Parent.ViewRecycler)
+local ReactModule = require(ViewRecyclerReact.Parent.React)
 local _ = require(script.Parent.RecyclingRoot)
 
-return function(p1, p2, p3)
-	-- upvalues: reactModule (ref), compositionPlacementModule (ref)
-	local var1 = reactModule.useState(function()
-		-- upvalues: p1 (ref), p2 (ref), p3 (ref), compositionPlacementModule (copy)
-		return compositionPlacementModule.new(p1.getScope({ maxPoolSize = p2, diagnostics = p3 }))
+return function(p1, MaxPoolSize, Diagnostics) --[[ Line: 8 | Named "useCompositionPlacement" ]]
+	-- upvalues: ReactModule (copy), CompositionPlacementModule (copy)
+	local UseStateResult = ReactModule.useState(function() --[[ Line: 13 ]]
+		-- upvalues: p1 (copy), MaxPoolSize (copy), Diagnostics (copy), CompositionPlacementModule (upval)
+		return CompositionPlacementModule.new((p1.getScope({ maxPoolSize = MaxPoolSize, diagnostics = Diagnostics })))
 	end)
-	reactModule.useLayoutEffect(function()
-		-- upvalues: var1 (ref)
-		return function()
-			-- upvalues: var1 (copy)
-			var1.destroy()
+	ReactModule.useLayoutEffect(function() --[[ Line: 21 ]]
+		-- upvalues: UseStateResult (copy)
+		return function() --[[ Line: 22 ]]
+			-- upvalues: UseStateResult (upval)
+			UseStateResult.destroy()
 		end
-	end, { var1 })
+	end, { UseStateResult })
 	
-	return var1
+	return UseStateResult
 end

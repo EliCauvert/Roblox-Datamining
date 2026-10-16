@@ -1,16 +1,16 @@
-﻿local parent = script:FindFirstAncestor("Moments").Parent
-local _ = require(parent.Foundation)
-local _ = require(parent.MomentsTypes)
-local reactModule = require(parent.React)
-local var1 = reactModule.createContext(nil)
+﻿local Parent = script:FindFirstAncestor("Moments").Parent
+local _ = require(Parent.Foundation)
+local _ = require(Parent.MomentsTypes)
+local ReactModule = require(Parent.React)
+local Context = ReactModule.createContext(nil)
 
 return {
-	CommentsListRowContext = var1,
-	useCommentsListRow = function()
-		-- upvalues: reactModule (ref), var1 (ref)
-		local var2 = reactModule.useContext(var1)
-		assert(var2 ~= nil, "Comments list rows must render inside CommentsListRowContext")
+	CommentsListRowContext = Context,
+	useCommentsListRow = function() --[[ Line: 34 ]]
+		-- upvalues: ReactModule (copy), Context (copy)
+		local UseContextResult = ReactModule.useContext(Context)
+		assert(UseContextResult ~= nil, "Comments list rows must render inside CommentsListRowContext")
 		
-		return var2
+		return UseContextResult
 	end
 }

@@ -1,28 +1,28 @@
-﻿local socialLuaAnalyticsModule = require(script:FindFirstAncestor("MomentsCommon").Parent.SocialLuaAnalytics)
-local supportedTelemetryBackends = socialLuaAnalyticsModule.Analytics.Enums.SupportedTelemetryBackends
-local realtimeEventNamesModule = require(script.Parent.RealtimeEventNames)
-local telemetry = socialLuaAnalyticsModule.Telemetry
-local t = {
+﻿local SocialLuaAnalyticsModule = require(script:FindFirstAncestor("MomentsCommon").Parent.SocialLuaAnalytics)
+local SupportedTelemetryBackends = SocialLuaAnalyticsModule.Analytics.Enums.SupportedTelemetryBackends
+local RealtimeEventNamesModule = require(script.Parent.RealtimeEventNames)
+local Telemetry = SocialLuaAnalyticsModule.Telemetry
+local config = {
 	watch_tab = "watch_tab",
 	deeplink = "deeplink",
 	profile = "profile",
 	flyout_menu = "flyout_menu"
 }
 
-local function _(p1)
-	-- upvalues: t (ref)
-	return t[p1] or "unknown"
+local function _(p1) --[[ Line: 167 | Named "normalizeViewSource" ]]
+	-- upvalues: config (copy)
+	return config[p1] or "unknown"
 end
 
-local function normalizeRequestFailureReason(p1)
+local function normalizeRequestFailureReason(p1) --[[ Line: 171 ]]
 	return if p1 == nil or p1 == "" then "unknown" elseif p1 == "requestFailed" or p1 == "malformedResponse" then p1 else "unknown"
 end
 
-local function normalizeMediaFailureReason(p1)
-	return if p1 == nil or p1 == "" then "unknown" elseif string.find(p1, "video load errored:", 1, true) == 1 then "videoLoadErrored" elseif string.find(p1, "video load failed:", 1, true) == 1 then "videoLoadFailed" elseif string.find(p1, "screenshot load failed:", 1, true) == 1 then "screenshotLoadFailed" else "unknown"
+local function normalizeMediaFailureReason(Text: string): string --[[ Line: 178 ]]
+	return if Text == nil or Text == "" then "unknown" elseif string.find(Text, "video load errored:", 1, true) == 1 then "videoLoadErrored" elseif string.find(Text, "video load failed:", 1, true) == 1 then "videoLoadFailed" elseif string.find(Text, "screenshot load failed:", 1, true) == 1 then "screenshotLoadFailed" else "unknown"
 end
 
-local t_1 = {
+local config1 = {
 	reaction_add = "reaction_add",
 	reaction_remove = "reaction_remove",
 	share = "share",
@@ -31,28 +31,28 @@ local t_1 = {
 	report_click = "report_click"
 }
 
-local _ = function(p1)
-	-- upvalues: t_1 (ref)
-	return t_1[p1] or "unknown"
+local _ = function(p1) --[[ Line: 201 | Named "normalizeEngagementAction" ]]
+	-- upvalues: config1 (copy)
+	return config1[p1] or "unknown"
 end
 
-local t_2 = {
+local config2 = {
 	create_intent = "create_intent",
 	gallery_selected = "gallery_selected",
 	published = "published",
 	upload = "upload"
 }
 
-local _ = function(p1)
-	-- upvalues: t_2 (ref)
-	return t_2[p1] or "unknown"
+local _ = function(p1) --[[ Line: 212 | Named "normalizeCreationStep" ]]
+	-- upvalues: config2 (copy)
+	return config2[p1] or "unknown"
 end
 
-local _ = function(p1)
+local _ = function(p1) --[[ Line: 216 | Named "normalizeCreationStatus" ]]
 	return if p1 == "success" or p1 == "failed" then p1 else "unknown"
 end
 
-local t_3 = {
+local config3 = {
 	Moderated = "moderated",
 	CaptureModerated = "moderated",
 	UploadQuotaReached = "quota",
@@ -63,24 +63,24 @@ local t_3 = {
 	GenericFailure = "generic"
 }
 
-local _ = function(p1)
-	-- upvalues: t_3 (ref)
-	return t_3[p1] or "unknown"
+local _ = function(p1) --[[ Line: 234 | Named "normalizeUploadFailureReason" ]]
+	-- upvalues: config3 (copy)
+	return config3[p1] or "unknown"
 end
 
-local t_4 = {
+local config4 = {
 	malformed = "malformed",
 	duplicate = "duplicate",
 	moderated = "moderated",
 	deleted = "deleted"
 }
 
-local _ = function(p1)
-	-- upvalues: t_4 (ref)
-	return t_4[p1] or "unknown"
+local _ = function(p1) --[[ Line: 245 | Named "normalizeFilterReason" ]]
+	-- upvalues: config4 (copy)
+	return config4[p1] or "unknown"
 end
 
-local t_5 = {
+local config5 = {
 	music = "music",
 	trim = "trim",
 	text_overlay = "text_overlay",
@@ -89,12 +89,12 @@ local t_5 = {
 	tts = "tts"
 }
 
-local _ = function(p1)
-	-- upvalues: t_5 (ref)
-	return t_5[p1] or "unknown"
+local _ = function(p1) --[[ Line: 258 | Named "normalizePublishedEditType" ]]
+	-- upvalues: config5 (copy)
+	return config5[p1] or "unknown"
 end
 
-local t_6 = {
+local config6 = {
 	music = "music",
 	trim = "trim",
 	text = "text",
@@ -103,46 +103,46 @@ local t_6 = {
 	voice = "voice"
 }
 
-local _ = function(p1)
-	-- upvalues: t_6 (ref)
-	return t_6[p1] or "unknown"
+local _ = function(p1) --[[ Line: 271 | Named "normalizeEditTool" ]]
+	-- upvalues: config6 (copy)
+	return config6[p1] or "unknown"
 end
 
-local _ = function(p1)
+local _ = function(p1) --[[ Line: 275 | Named "normalizeCaptureType" ]]
 	return if p1 == "screenshot" or p1 == "video" then p1 else "unknown"
 end
 
-local _ = function(p1)
+local _ = function(p1) --[[ Line: 279 | Named "normalizeGenerateTextStatus" ]]
 	return if p1 == "succeeded" or p1 == "failed" or p1 == "filtered" then p1 else "unknown"
 end
 
-local _ = function(p1)
+local _ = function(p1) --[[ Line: 283 | Named "normalizeCommentsSurface" ]]
 	return if p1 == "watch_tab" or p1 == "profile" then p1 else "unknown"
 end
 
-local t_7 = {
+local config7 = {
 	attempted = "attempted",
 	succeeded = "succeeded",
 	failed = "failed"
 }
 
-local _ = function(p1)
-	-- upvalues: t_7 (ref)
-	return t_7[p1] or "unknown"
+local _ = function(p1) --[[ Line: 293 | Named "normalizeCommentsListLoadStatus" ]]
+	-- upvalues: config7 (copy)
+	return config7[p1] or "unknown"
 end
 
-local t_8 = {
+local config8 = {
 	initial = "initial",
 	pagination = "pagination",
 	refresh = "refresh"
 }
 
-local _ = function(p1)
-	-- upvalues: t_8 (ref)
-	return t_8[p1] or "unknown"
+local _ = function(p1) --[[ Line: 303 | Named "normalizeCommentsLoadType" ]]
+	-- upvalues: config8 (copy)
+	return config8[p1] or "unknown"
 end
 
-local t_9 = {
+local config9 = {
 	attempted = "attempted",
 	success = "success",
 	rejected = "rejected",
@@ -151,527 +151,535 @@ local t_9 = {
 	cancelled = "cancelled"
 }
 
-local _ = function(p1)
-	-- upvalues: t_9 (ref)
-	return t_9[p1] or "unknown"
+local _ = function(p1) --[[ Line: 316 | Named "normalizeCommentPostStatus" ]]
+	-- upvalues: config9 (copy)
+	return config9[p1] or "unknown"
 end
 
-local _ = function(p1)
-	return if p1 == nil or string.find(p1, "^unknown_") ~= nil then "unknown" else p1
+local _ = function(Text: string): string --[[ Line: 322 | Named "normalizeCommentsFailureReason" ]]
+	return if Text == nil or string.find(Text, "^unknown_") ~= nil then "unknown" else Text
 end
 
-local t_10 = { rejected = true, failed = true, unknown = true }
-local t_11 = {
+local config10 = { rejected = true, failed = true, unknown = true }
+local config11 = {
 	attempted = "attempted",
 	succeeded = "succeeded",
 	failed = "failed"
 }
 
-local _ = function(p1)
-	-- upvalues: t_11 (ref)
-	return t_11[p1] or "unknown"
+local _ = function(p1) --[[ Line: 338 | Named "normalizeCommentRequestStatus" ]]
+	-- upvalues: config11 (copy)
+	return config11[p1] or "unknown"
 end
 
-local _ = function(p1)
+local _ = function(p1) --[[ Line: 342 | Named "normalizeCommentReactionAction" ]]
 	return if p1 == "add" or p1 == "remove" then p1 else "unknown"
 end
 
-local _ = function(p1)
-	-- upvalues: t_11 (ref)
-	return if p1 == "already_deleted" then p1 else t_11[p1] or "unknown"
+local _ = function(p1) --[[ Line: 346 | Named "normalizeCommentDeleteStatus" ]]
+	-- upvalues: config11 (copy)
+	return if p1 == "already_deleted" then p1 else config11[p1] or "unknown"
 end
 
-local _ = function(p1)
+local _ = function(p1) --[[ Line: 350 | Named "normalizeCommentReportStatus" ]]
 	return if p1 == "clicked" then p1 else "unknown"
 end
 
-local _ = function(p1, p2)
-	local t = { status = p1.status, feedType = p1.feedType }
+local _ = function(p1, Callback) --[[ Line: 354 | Named "formatFeedOperationInfo" ]]
+	local config = { status = p1.status, feedType = p1.feedType }
 	
 	if p1.status == "failed" then
-		t.failureReason = p2(p1.failureReason)
+		config.failureReason = Callback(p1.failureReason)
 	end
-	return t
+	return config
 end
 
 return {
-	[realtimeEventNamesModule.MomentsFeedLoadAttempt] = telemetry.new({
+	[RealtimeEventNamesModule.MomentsFeedLoadAttempt] = Telemetry.new({
 		description = "Counts Moments feed load attempts in real time, providing the denominator for feed outcome rates.",
 		throttlingThousandths = 10000,
-		name = realtimeEventNamesModule.MomentsFeedLoadAttempt,
+		name = RealtimeEventNamesModule.MomentsFeedLoadAttempt,
 		lastUpdated = { 2026, 7, 30 },
 		backendsList = {
 			{
 				incrementValue = 1,
-				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p1)
+				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
+				format = function(p1) --[[ Line: 375 ]]
 					return { feedType = p1.feedType }
 				end
 			}
 		}
 	}),
-	[realtimeEventNamesModule.MomentsFeedState] = telemetry.new({
+	[RealtimeEventNamesModule.MomentsFeedState] = Telemetry.new({
 		description = "Counts completed Moments top-of-feed outcomes in real time, dimensioned by status, feed type, and bounded failure reason.",
 		throttlingThousandths = 10000,
-		name = realtimeEventNamesModule.MomentsFeedState,
+		name = RealtimeEventNamesModule.MomentsFeedState,
 		lastUpdated = { 2026, 7, 30 },
 		backendsList = {
 			{
 				incrementValue = 1,
-				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p1)
-					local t = { status = p1.status, feedType = p1.feedType }
+				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
+				format = function(p1) --[[ Line: 392 ]]
+					local config = { status = p1.status, feedType = p1.feedType }
 					
 					if p1.status == "failed" then
-						local failureReason = p1.failureReason
-						t.failureReason = if failureReason == nil or failureReason == "" then "unknown" elseif failureReason == "requestFailed" or failureReason == "malformedResponse" then failureReason else "unknown"
+						local FailureReason = p1.failureReason
+						config.failureReason = if FailureReason == nil or FailureReason == "" then "unknown" elseif FailureReason == "requestFailed" or FailureReason == "malformedResponse" then FailureReason else "unknown"
 					end
-					return t
+					return config
 				end
 			}
 		}
 	}),
-	[realtimeEventNamesModule.MomentsFeedLoadMore] = telemetry.new({
+	[RealtimeEventNamesModule.MomentsFeedLoadMore] = Telemetry.new({
 		description = "Counts attempted and failed Moments pagination requests in real time.",
 		throttlingThousandths = 10000,
-		name = realtimeEventNamesModule.MomentsFeedLoadMore,
+		name = RealtimeEventNamesModule.MomentsFeedLoadMore,
 		lastUpdated = { 2026, 7, 30 },
 		backendsList = {
 			{
 				incrementValue = 1,
-				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p1)
-					-- upvalues: normalizeRequestFailureReason (ref)
-					local t = { status = p1.status, feedType = p1.feedType }
+				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
+				format = function(p1) --[[ Line: 414 ]]
+					-- upvalues: normalizeRequestFailureReason (copy)
+					local config = { status = p1.status, feedType = p1.feedType }
 					
 					if p1.status == "failed" then
-						local failureReason = p1.failureReason
-						t.failureReason = if failureReason == nil or failureReason == "" then "unknown" elseif failureReason == "requestFailed" or failureReason == "malformedResponse" then failureReason else "unknown"
+						local FailureReason = p1.failureReason
+						config.failureReason = if FailureReason == nil or FailureReason == "" then "unknown" elseif FailureReason == "requestFailed" or FailureReason == "malformedResponse" then FailureReason else "unknown"
 					end
-					return t
+					return config
 				end
 			}
 		}
 	}),
-	[realtimeEventNamesModule.MomentsFeedMediaLoad] = telemetry.new({
+	[RealtimeEventNamesModule.MomentsFeedMediaLoad] = Telemetry.new({
 		description = "Counts attempted and failed unique Moments media loads in the coordinator download window.",
 		throttlingThousandths = 10000,
-		name = realtimeEventNamesModule.MomentsFeedMediaLoad,
+		name = RealtimeEventNamesModule.MomentsFeedMediaLoad,
 		lastUpdated = { 2026, 7, 30 },
 		backendsList = {
 			{
 				incrementValue = 1,
-				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p1)
-					-- upvalues: normalizeMediaFailureReason (ref)
-					local t = { status = p1.status, feedType = p1.feedType }
+				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
+				format = function(p1) --[[ Line: 429 ]]
+					-- upvalues: normalizeMediaFailureReason (copy)
+					local config = { status = p1.status, feedType = p1.feedType }
 					
 					if p1.status == "failed" then
-						t.failureReason = normalizeMediaFailureReason(p1.failureReason)
+						config.failureReason = normalizeMediaFailureReason(p1.failureReason)
 					end
-					return t
+					return config
 				end
 			}
 		}
 	}),
-	[realtimeEventNamesModule.MomentsSurfaceLoadAbort] = telemetry.new({
+	[RealtimeEventNamesModule.MomentsSurfaceLoadAbort] = Telemetry.new({
 		description = "Counts Moments surface loads that end before the first frame, dimensioned by bounded abort reason.",
 		throttlingThousandths = 10000,
-		name = realtimeEventNamesModule.MomentsSurfaceLoadAbort,
+		name = RealtimeEventNamesModule.MomentsSurfaceLoadAbort,
 		lastUpdated = { 2026, 7, 30 },
 		backendsList = {
 			{
 				incrementValue = 1,
-				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p1)
+				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
+				format = function(p1) --[[ Line: 444 ]]
 					return { reason = p1.reason }
 				end
 			}
 		}
 	}),
-	[realtimeEventNamesModule.MomentsViewBegan] = telemetry.new({
+	[RealtimeEventNamesModule.MomentsViewBegan] = Telemetry.new({
 		description = "Counts Moments views in real time, dimensioned by a bounded source.",
 		throttlingThousandths = 10000,
-		name = realtimeEventNamesModule.MomentsViewBegan,
+		name = RealtimeEventNamesModule.MomentsViewBegan,
 		lastUpdated = { 2026, 7, 30 },
 		backendsList = {
 			{
 				incrementValue = 1,
-				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p1)
-					-- upvalues: t (ref)
-					return { source = t[p1.source] or "unknown" }
+				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
+				format = function(p1) --[[ Line: 459 ]]
+					-- upvalues: config (copy)
+					return { source = config[p1.source] or "unknown" }
 				end
 			}
 		}
 	}),
-	[realtimeEventNamesModule.MomentsSessionStarted] = telemetry.new({
+	[RealtimeEventNamesModule.MomentsSessionStarted] = Telemetry.new({
 		description = "Counts Moments session starts in real time, dimensioned by a bounded entry source.",
 		throttlingThousandths = 10000,
-		name = realtimeEventNamesModule.MomentsSessionStarted,
+		name = RealtimeEventNamesModule.MomentsSessionStarted,
 		lastUpdated = { 2026, 8, 1 },
 		backendsList = {
 			{
 				incrementValue = 1,
-				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p1)
-					-- upvalues: t (ref)
-					return { source = t[p1.source] or "unknown" }
+				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
+				format = function(p1) --[[ Line: 476 ]]
+					-- upvalues: config (copy)
+					return { source = config[p1.source] or "unknown" }
 				end
 			}
 		}
 	}),
-	[realtimeEventNamesModule.MomentsSessionEnded] = telemetry.new({
+	[RealtimeEventNamesModule.MomentsSessionEnded] = Telemetry.new({
 		description = "Counts Moments session ends in real time, dimensioned by a bounded entry source.",
 		throttlingThousandths = 10000,
-		name = realtimeEventNamesModule.MomentsSessionEnded,
+		name = RealtimeEventNamesModule.MomentsSessionEnded,
 		lastUpdated = { 2026, 8, 1 },
 		backendsList = {
 			{
 				incrementValue = 1,
-				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p1)
-					-- upvalues: t (ref)
-					return { source = t[p1.source] or "unknown" }
+				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
+				format = function(p1) --[[ Line: 493 ]]
+					-- upvalues: config (copy)
+					return { source = config[p1.source] or "unknown" }
 				end
 			}
 		}
 	}),
-	[realtimeEventNamesModule.MomentsSessionHeartbeat] = telemetry.new({
+	[RealtimeEventNamesModule.MomentsSessionHeartbeat] = Telemetry.new({
 		description = "Counts periodic heartbeats emitted while a Moments session is active; multiply the per-second rate by the heartbeat interval to estimate concurrent sessions (CCU).",
 		throttlingThousandths = 10000,
-		name = realtimeEventNamesModule.MomentsSessionHeartbeat,
+		name = RealtimeEventNamesModule.MomentsSessionHeartbeat,
 		lastUpdated = { 2026, 8, 1 },
 		backendsList = {
 			{
 				incrementValue = 1,
-				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p1)
-					-- upvalues: t (ref)
-					return { source = t[p1.source] or "unknown" }
+				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
+				format = function(p1) --[[ Line: 510 ]]
+					-- upvalues: config (copy)
+					return { source = config[p1.source] or "unknown" }
 				end
 			}
 		}
 	}),
-	[realtimeEventNamesModule.MomentsEngagement] = telemetry.new({
+	[RealtimeEventNamesModule.MomentsEngagement] = Telemetry.new({
 		description = "Counts Moments engagement actions (reactions, shares, joins, report submissions, report clicks, experience-detail opens) in real time, dimensioned by a bounded action.",
 		throttlingThousandths = 10000,
-		name = realtimeEventNamesModule.MomentsEngagement,
+		name = RealtimeEventNamesModule.MomentsEngagement,
 		lastUpdated = { 2026, 10, 2 },
 		backendsList = {
 			{
 				incrementValue = 1,
-				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p1)
-					-- upvalues: t_1 (ref)
-					return { action = t_1[p1.action] or "unknown" }
+				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
+				format = function(p1) --[[ Line: 527 ]]
+					-- upvalues: config1 (copy)
+					return { action = config1[p1.action] or "unknown" }
 				end
 			}
 		}
 	}),
-	[realtimeEventNamesModule.MomentsCreationStep] = telemetry.new({
+	[RealtimeEventNamesModule.MomentsCreationStep] = Telemetry.new({
 		description = "Counts Moments creation-flow steps in real time, dimensioned by bounded step and (for upload) status.",
 		throttlingThousandths = 10000,
-		name = realtimeEventNamesModule.MomentsCreationStep,
+		name = RealtimeEventNamesModule.MomentsCreationStep,
 		lastUpdated = { 2026, 8, 1 },
 		backendsList = {
 			{
 				incrementValue = 1,
-				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p1)
-					-- upvalues: t_2 (ref), t_3 (ref)
-					local t = { step = t_2[p1.step] or "unknown" }
+				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
+				format = function(p1) --[[ Line: 544 ]]
+					-- upvalues: config2 (copy), config3 (copy)
+					local config = { step = config2[p1.step] or "unknown" }
 					
 					if p1.status ~= nil then
-						local status = p1.status
-						t.status = if status == "success" or status == "failed" then status else "unknown"
+						local Status = p1.status
+						config.status = if Status == "success" or Status == "failed" then Status else "unknown"
 					end
 					if p1.reason ~= nil then
-						t.reason = t_3[p1.reason] or "unknown"
+						config.reason = config3[p1.reason] or "unknown"
 					end
-					return t
+					return config
 				end
 			}
 		}
 	}),
-	[realtimeEventNamesModule.MomentsFeedItemsReceived] = telemetry.new({
+	[RealtimeEventNamesModule.MomentsFeedItemsReceived] = Telemetry.new({
 		description = "Counts feed items received from the backend before client-side filtering; the denominator for the filtered-item rate.",
 		throttlingThousandths = 10000,
-		name = realtimeEventNamesModule.MomentsFeedItemsReceived,
+		name = RealtimeEventNamesModule.MomentsFeedItemsReceived,
 		lastUpdated = { 2026, 8, 5 },
 		backendsList = {
 			{
 				incrementValue = 1,
-				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p1)
+				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
+				format = function(p1) --[[ Line: 570 ]]
 					return { feedType = p1.feedType }
 				end
 			}
 		}
 	}),
-	[realtimeEventNamesModule.MomentsFeedItemFiltered] = telemetry.new({
+	[RealtimeEventNamesModule.MomentsFeedItemFiltered] = Telemetry.new({
 		description = "Counts feed items the client dropped, dimensioned by bounded reason. deleted/moderated are dropped by the feed source's availability filter; malformed/duplicate are dropped by the feed store's dedupe. Denominator is MomentsFeedItemsReceived.",
 		throttlingThousandths = 10000,
-		name = realtimeEventNamesModule.MomentsFeedItemFiltered,
+		name = RealtimeEventNamesModule.MomentsFeedItemFiltered,
 		lastUpdated = { 2026, 8, 5 },
 		backendsList = {
 			{
 				incrementValue = 1,
-				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p1)
-					-- upvalues: t_4 (ref)
+				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
+				format = function(p1) --[[ Line: 587 ]]
+					-- upvalues: config4 (copy)
 					return {
-						reason = t_4[p1.reason] or "unknown",
+						reason = config4[p1.reason] or "unknown",
 						feedType = p1.feedType
 					}
 				end
 			}
 		}
 	}),
-	[realtimeEventNamesModule.MomentsPublishedWithEdit] = telemetry.new({
+	[RealtimeEventNamesModule.MomentsPublishedWithEdit] = Telemetry.new({
 		description = "Counts published moments carrying each edit type (one increment per edit type present), dimensioned by bounded editType.",
 		throttlingThousandths = 10000,
-		name = realtimeEventNamesModule.MomentsPublishedWithEdit,
+		name = RealtimeEventNamesModule.MomentsPublishedWithEdit,
 		lastUpdated = { 2026, 8, 5 },
 		backendsList = {
 			{
 				incrementValue = 1,
-				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p1)
-					-- upvalues: t_5 (ref)
-					return { editType = t_5[p1.editType] or "unknown" }
+				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
+				format = function(p1) --[[ Line: 605 ]]
+					-- upvalues: config5 (copy)
+					return { editType = config5[p1.editType] or "unknown" }
 				end
 			}
 		}
 	}),
-	[realtimeEventNamesModule.MomentsPublishedEditCount] = telemetry.new({
+	[RealtimeEventNamesModule.MomentsPublishedEditCount] = Telemetry.new({
 		description = "Counts published moments by how many edit types they carry, dimensioned by a bounded bucket (0/1/2/3plus).",
 		throttlingThousandths = 10000,
-		name = realtimeEventNamesModule.MomentsPublishedEditCount,
+		name = RealtimeEventNamesModule.MomentsPublishedEditCount,
 		lastUpdated = { 2026, 8, 5 },
 		backendsList = {
 			{
 				incrementValue = 1,
-				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p1)
+				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
+				format = function(p1) --[[ Line: 622 ]]
 					return { bucket = p1.bucket }
 				end
 			}
 		}
 	}),
-	[realtimeEventNamesModule.MomentsPublishedByCaptureType] = telemetry.new({
+	[RealtimeEventNamesModule.MomentsPublishedByCaptureType] = Telemetry.new({
 		description = "Counts published moments by bounded capture type (screenshot/video).",
 		throttlingThousandths = 10000,
-		name = realtimeEventNamesModule.MomentsPublishedByCaptureType,
+		name = RealtimeEventNamesModule.MomentsPublishedByCaptureType,
 		lastUpdated = { 2026, 8, 5 },
 		backendsList = {
 			{
 				incrementValue = 1,
-				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p1)
-					local t = {}
-					local captureType = p1.captureType
-					t.captureType = if captureType == "screenshot" or captureType == "video" then captureType else "unknown"
+				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
+				format = function(p1) --[[ Line: 639 ]]
+					local CaptureType = p1.captureType
 					
-					return t
+					return {
+						captureType = if CaptureType == "screenshot" or CaptureType == "video" then CaptureType else "unknown"
+					}
 				end
 			}
 		}
 	}),
-	[realtimeEventNamesModule.MomentsEditToolOpened] = telemetry.new({
+	[RealtimeEventNamesModule.MomentsEditToolOpened] = Telemetry.new({
 		description = "Counts creation edit-tool opens, dimensioned by bounded tool (music/trim/text/sticker/generateText/voice).",
 		throttlingThousandths = 10000,
-		name = realtimeEventNamesModule.MomentsEditToolOpened,
+		name = RealtimeEventNamesModule.MomentsEditToolOpened,
 		lastUpdated = { 2026, 8, 5 },
 		backendsList = {
 			{
 				incrementValue = 1,
-				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p1)
-					-- upvalues: t_6 (ref)
-					return { tool = t_6[p1.tool] or "unknown" }
+				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
+				format = function(p1) --[[ Line: 656 ]]
+					-- upvalues: config6 (copy)
+					return { tool = config6[p1.tool] or "unknown" }
 				end
 			}
 		}
 	}),
-	[realtimeEventNamesModule.MomentsEditToolAbandoned] = telemetry.new({
-		description = "Counts creation edit-tool cancels (Back without applying), dimensioned by bounded tool. Pairs with MomentsEditToolOpened for an open\226\134\146apply conversion.",
+	[RealtimeEventNamesModule.MomentsEditToolAbandoned] = Telemetry.new({
+		description = "Counts creation edit-tool cancels (Back without applying), dimensioned by bounded tool. Pairs with MomentsEditToolOpened for an open→apply conversion.",
 		throttlingThousandths = 10000,
-		name = realtimeEventNamesModule.MomentsEditToolAbandoned,
+		name = RealtimeEventNamesModule.MomentsEditToolAbandoned,
 		lastUpdated = { 2026, 8, 5 },
 		backendsList = {
 			{
 				incrementValue = 1,
-				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p1)
-					-- upvalues: t_6 (ref)
-					return { tool = t_6[p1.tool] or "unknown" }
+				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
+				format = function(p1) --[[ Line: 673 ]]
+					-- upvalues: config6 (copy)
+					return { tool = config6[p1.tool] or "unknown" }
 				end
 			}
 		}
 	}),
-	[realtimeEventNamesModule.MomentsGenerateText] = telemetry.new({
+	[RealtimeEventNamesModule.MomentsGenerateText] = Telemetry.new({
 		description = "Counts AI generate-text attempts by bounded status (succeeded/failed/filtered).",
 		throttlingThousandths = 10000,
-		name = realtimeEventNamesModule.MomentsGenerateText,
+		name = RealtimeEventNamesModule.MomentsGenerateText,
 		lastUpdated = { 2026, 8, 17 },
 		backendsList = {
 			{
 				incrementValue = 1,
-				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p1)
-					local t = {}
-					local status = p1.status
-					t.status = if status == "succeeded" or status == "failed" or status == "filtered" then status else "unknown"
+				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
+				format = function(p1) --[[ Line: 690 ]]
+					local Status = p1.status
 					
-					return t
+					return {
+						status = if Status == "succeeded" or Status == "failed" or Status == "filtered" then Status else "unknown"
+					}
 				end
 			}
 		}
 	}),
-	[realtimeEventNamesModule.MomentsCommentsListLoad] = telemetry.new({
+	[RealtimeEventNamesModule.MomentsCommentsListLoad] = Telemetry.new({
 		description = "Counts Moments comment list requests in real time by bounded status, load type, surface and (failed only) failure reason. Mirrors the product list-load events.",
 		throttlingThousandths = 10000,
-		name = realtimeEventNamesModule.MomentsCommentsListLoad,
+		name = RealtimeEventNamesModule.MomentsCommentsListLoad,
 		lastUpdated = { 2026, 9, 29 },
 		backendsList = {
 			{
 				incrementValue = 1,
-				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p1)
-					-- upvalues: t_7 (ref), t_8 (ref)
-					local status = t_7[p1.status] or "unknown"
-					local t = {
-						status = status,
-						loadType = t_8[p1.loadType] or "unknown"
+				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
+				format = function(p1) --[[ Line: 707 ]]
+					-- upvalues: config7 (copy), config8 (copy)
+					local Entry = config7[p1.status] or "unknown"
+					local Surface = p1.surface
+					local config = {
+						status = Entry,
+						loadType = config8[p1.loadType] or "unknown",
+						surface = if Surface == "watch_tab" or Surface == "profile" then Surface else "unknown"
 					}
-					local surface = p1.surface
-					t.surface = if surface == "watch_tab" or surface == "profile" then surface else "unknown"
 					
-					if status == "failed" then
-						surface = p1.failureReason
-						t.failureReason = if surface == nil or string.find(surface, "^unknown_") ~= nil then "unknown" else surface
+					if Entry == "failed" then
+						local FailureReason: string = p1.failureReason
+						config.failureReason = if FailureReason == nil or string.find(FailureReason, "^unknown_") ~= nil then "unknown" else FailureReason
 					end
-					return t
+					return config
 				end
 			}
 		}
 	}),
-	[realtimeEventNamesModule.MomentsCommentPost] = telemetry.new({
+	[RealtimeEventNamesModule.MomentsCommentPost] = Telemetry.new({
 		description = "Counts Moments comment post requests and outcomes in real time by bounded status, surface and (rejected/failed/unknown only) failure reason. Mirrors the product post events.",
 		throttlingThousandths = 10000,
-		name = realtimeEventNamesModule.MomentsCommentPost,
+		name = RealtimeEventNamesModule.MomentsCommentPost,
 		lastUpdated = { 2026, 9, 29 },
 		backendsList = {
 			{
 				incrementValue = 1,
-				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p1)
-					-- upvalues: t_9 (ref), t_10 (ref)
-					local status = t_9[p1.status] or "unknown"
-					local t = { status = status }
-					local surface = p1.surface
-					t.surface = if surface == "watch_tab" or surface == "profile" then surface else "unknown"
+				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
+				format = function(p1) --[[ Line: 731 ]]
+					-- upvalues: config9 (copy), config10 (copy)
+					local Entry = config9[p1.status] or "unknown"
+					local Surface = p1.surface
+					local config = {
+						status = Entry,
+						surface = if Surface == "watch_tab" or Surface == "profile" then Surface else "unknown"
+					}
 					
-					if t_10[status] then
-						surface = p1.failureReason
-						t.failureReason = if surface == nil or string.find(surface, "^unknown_") ~= nil then "unknown" else surface
+					if config10[Entry] then
+						local FailureReason: string = p1.failureReason
+						config.failureReason = if FailureReason == nil or string.find(FailureReason, "^unknown_") ~= nil then "unknown" else FailureReason
 					end
-					return t
+					return config
 				end
 			}
 		}
 	}),
-	[realtimeEventNamesModule.MomentsCommentReaction] = telemetry.new({
+	[RealtimeEventNamesModule.MomentsCommentReaction] = Telemetry.new({
 		description = "Counts Moments comment reaction requests in real time, one attempt per network request including retries, by bounded status, action (add/remove), surface and (failed only) failure reason.",
 		throttlingThousandths = 10000,
-		name = realtimeEventNamesModule.MomentsCommentReaction,
+		name = RealtimeEventNamesModule.MomentsCommentReaction,
 		lastUpdated = { 2026, 10, 1 },
 		backendsList = {
 			{
 				incrementValue = 1,
-				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p1)
-					-- upvalues: t_11 (ref)
-					local status = t_11[p1.status] or "unknown"
-					local t = { status = status }
-					local action = p1.action
-					t.action = if action == "add" or action == "remove" then action else "unknown"
-					action = p1.surface
-					t.surface = if action == "watch_tab" or action == "profile" then action else "unknown"
+				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
+				format = function(p1) --[[ Line: 754 ]]
+					-- upvalues: config11 (copy)
+					local Entry = config11[p1.status] or "unknown"
+					local Action = p1.action
+					local Action1 = if Action == "add" or Action == "remove" then Action else "unknown"
+					local Surface = p1.surface
+					local config = {
+						status = Entry,
+						action = Action1,
+						surface = if Surface == "watch_tab" or Surface == "profile" then Surface else "unknown"
+					}
 					
-					if status == "failed" then
-						action = p1.failureReason
-						t.failureReason = if action == nil or string.find(action, "^unknown_") ~= nil then "unknown" else action
+					if Entry == "failed" then
+						local FailureReason: string = p1.failureReason
+						config.failureReason = if FailureReason == nil or string.find(FailureReason, "^unknown_") ~= nil then "unknown" else FailureReason
 					end
-					return t
+					return config
 				end
 			}
 		}
 	}),
-	[realtimeEventNamesModule.MomentsCommentDelete] = telemetry.new({
+	[RealtimeEventNamesModule.MomentsCommentDelete] = Telemetry.new({
 		description = "Counts Moments comment delete requests and outcomes in real time by bounded status (already_deleted = the server reported the comment gone), surface and (failed only) failure reason.",
 		throttlingThousandths = 10000,
-		name = realtimeEventNamesModule.MomentsCommentDelete,
+		name = RealtimeEventNamesModule.MomentsCommentDelete,
 		lastUpdated = { 2026, 10, 1 },
 		backendsList = {
 			{
 				incrementValue = 1,
-				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p1)
-					-- upvalues: t_11 (ref)
-					local status = p1.status
-					local var1 = if status == "already_deleted" then status else t_11[status] or "unknown"
-					local t = { status = var1 }
-					local surface = p1.surface
-					t.surface = if surface == "watch_tab" or surface == "profile" then surface else "unknown"
+				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
+				format = function(p1) --[[ Line: 778 ]]
+					-- upvalues: config11 (copy)
+					local Status = p1.status
+					local Status1 = if Status == "already_deleted" then Status else config11[Status] or "unknown"
+					local Surface = p1.surface
+					local config = {
+						status = Status1,
+						surface = if Surface == "watch_tab" or Surface == "profile" then Surface else "unknown"
+					}
 					
-					if var1 == "failed" then
-						surface = p1.failureReason
-						t.failureReason = if surface == nil or string.find(surface, "^unknown_") ~= nil then "unknown" else surface
+					if Status1 == "failed" then
+						local FailureReason: string = p1.failureReason
+						config.failureReason = if FailureReason == nil or string.find(FailureReason, "^unknown_") ~= nil then "unknown" else FailureReason
 					end
-					return t
+					return config
 				end
 			}
 		}
 	}),
-	[realtimeEventNamesModule.MomentsCommentReport] = telemetry.new({
+	[RealtimeEventNamesModule.MomentsCommentReport] = Telemetry.new({
 		description = "Counts Moments comment report flow opens in real time by surface, including Block and Report. Counted at the same point as the product report-click event; submission happens in the host abuse-report flow.",
 		throttlingThousandths = 10000,
-		name = realtimeEventNamesModule.MomentsCommentReport,
+		name = RealtimeEventNamesModule.MomentsCommentReport,
 		lastUpdated = { 2026, 10, 1 },
 		backendsList = {
 			{
 				incrementValue = 1,
-				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p1)
-					local t = {}
-					local status = p1.status
-					t.status = if status == "clicked" then status else "unknown"
-					local surface = p1.surface
-					t.surface = if surface == "watch_tab" or surface == "profile" then surface else "unknown"
+				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
+				format = function(p1) --[[ Line: 801 ]]
+					local Status = p1.status
+					local Surface = p1.surface
 					
-					return t
+					return {
+						status = if Status == "clicked" then Status else "unknown",
+						surface = if Surface == "watch_tab" or Surface == "profile" then Surface else "unknown"
+					}
 				end
 			}
 		}
 	}),
-	[realtimeEventNamesModule.MomentsCommentAuthorBlock] = telemetry.new({
+	[RealtimeEventNamesModule.MomentsCommentAuthorBlock] = Telemetry.new({
 		description = "Counts blocks of a comment author started from a Moments comment in real time by bounded status (attempted on confirm, then succeeded/failed) and surface.",
 		throttlingThousandths = 10000,
-		name = realtimeEventNamesModule.MomentsCommentAuthorBlock,
+		name = RealtimeEventNamesModule.MomentsCommentAuthorBlock,
 		lastUpdated = { 2026, 10, 1 },
 		backendsList = {
 			{
 				incrementValue = 1,
-				type = supportedTelemetryBackends.RobloxTelemetryCounter,
-				format = function(p1)
-					-- upvalues: t_11 (ref)
-					local t = { status = t_11[p1.status] or "unknown" }
-					local surface = p1.surface
-					t.surface = if surface == "watch_tab" or surface == "profile" then surface else "unknown"
+				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
+				format = function(p1) --[[ Line: 819 ]]
+					-- upvalues: config11 (copy)
+					local Surface = p1.surface
 					
-					return t
+					return {
+						status = config11[p1.status] or "unknown",
+						surface = if Surface == "watch_tab" or Surface == "profile" then Surface else "unknown"
+					}
 				end
 			}
 		}

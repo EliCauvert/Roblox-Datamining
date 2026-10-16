@@ -1,209 +1,213 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local localizationService = game:GetService("LocalizationService")
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local analyticsKeysModule = require(buildExperience.Analytics.AnalyticsKeys)
-local _ = require(parent.DataHydration.ExperienceAnalytics)
-local _ = require(buildExperience.Analytics.AnalyticsMetric)
-local analyticsUnitModule = require(buildExperience.Analytics.AnalyticsUnit)
-local _ = require(buildExperience.Analytics.AnalyticsWindow)
-local deriveChartAxesModule = require(buildExperience.Analytics.deriveChartAxes)
-local fillMetricSeriesGapsModule = require(buildExperience.Analytics.fillMetricSeriesGaps)
-local formatMetricValueModule = require(buildExperience.Analytics.formatMetricValue)
-local formatMetricTimestampModule = require(buildExperience.Analytics.formatMetricTimestamp)
-local metricValueRoundsToZeroModule = require(buildExperience.Analytics.metricValueRoundsToZero)
-local _ = require(buildExperience.Analytics.metricUnitTemplate)
-local scaleValueToUnitModule = require(buildExperience.Analytics.scaleValueToUnit)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local LocalizationService = game:GetService("LocalizationService")
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local AnalyticsKeysModule = require(BuildExperience.Analytics.AnalyticsKeys)
+local _ = require(Parent.DataHydration.ExperienceAnalytics)
+local _ = require(BuildExperience.Analytics.AnalyticsMetric)
+local AnalyticsUnitModule = require(BuildExperience.Analytics.AnalyticsUnit)
+local _ = require(BuildExperience.Analytics.AnalyticsWindow)
+local DeriveChartAxesModule = require(BuildExperience.Analytics.deriveChartAxes)
+local FillMetricSeriesGapsModule = require(BuildExperience.Analytics.fillMetricSeriesGaps)
+local FormatMetricValueModule = require(BuildExperience.Analytics.formatMetricValue)
+local FormatMetricTimestampModule = require(BuildExperience.Analytics.formatMetricTimestamp)
+local MetricValueRoundsToZeroModule = require(BuildExperience.Analytics.metricValueRoundsToZero)
+local _ = require(BuildExperience.Analytics.metricUnitTemplate)
+local ScaleValueToUnitModule = require(BuildExperience.Analytics.scaleValueToUnit)
 local _ = require(script.Parent.MetricChartView)
-local noDataPlaceholderModule = require(buildExperience.Components.Analytics.noDataPlaceholder)
+local FFlagBuildAnalyticsGoalsModule = require(BuildExperience.Flags.FFlagBuildAnalyticsGoals)
+local NoDataPlaceholderModule = require(BuildExperience.Components.Analytics.noDataPlaceholder)
 local list = {
-	analyticsKeysModule.ANALYTICS_MONTH_JAN,
-	analyticsKeysModule.ANALYTICS_MONTH_FEB,
-	analyticsKeysModule.ANALYTICS_MONTH_MAR,
-	analyticsKeysModule.ANALYTICS_MONTH_APR,
-	analyticsKeysModule.ANALYTICS_MONTH_MAY,
-	analyticsKeysModule.ANALYTICS_MONTH_JUN,
-	analyticsKeysModule.ANALYTICS_MONTH_JUL,
-	analyticsKeysModule.ANALYTICS_MONTH_AUG,
-	analyticsKeysModule.ANALYTICS_MONTH_SEP,
-	analyticsKeysModule.ANALYTICS_MONTH_OCT,
-	analyticsKeysModule.ANALYTICS_MONTH_NOV,
-	analyticsKeysModule.ANALYTICS_MONTH_DEC
+	AnalyticsKeysModule.ANALYTICS_MONTH_JAN,
+	AnalyticsKeysModule.ANALYTICS_MONTH_FEB,
+	AnalyticsKeysModule.ANALYTICS_MONTH_MAR,
+	AnalyticsKeysModule.ANALYTICS_MONTH_APR,
+	AnalyticsKeysModule.ANALYTICS_MONTH_MAY,
+	AnalyticsKeysModule.ANALYTICS_MONTH_JUN,
+	AnalyticsKeysModule.ANALYTICS_MONTH_JUL,
+	AnalyticsKeysModule.ANALYTICS_MONTH_AUG,
+	AnalyticsKeysModule.ANALYTICS_MONTH_SEP,
+	AnalyticsKeysModule.ANALYTICS_MONTH_OCT,
+	AnalyticsKeysModule.ANALYTICS_MONTH_NOV,
+	AnalyticsKeysModule.ANALYTICS_MONTH_DEC
 }
 
-return function(p1)
-	-- upvalues: foundationModule (ref), localizationService (ref), foundationFontFaceMigration (ref), reactModule (ref), analyticsKeysModule (ref), list (ref), useLocalization (ref), fillMetricSeriesGapsModule (ref), deriveChartAxesModule (ref), formatMetricValueModule (ref), scaleValueToUnitModule (ref), formatMetricTimestampModule (ref), noDataPlaceholderModule (ref), metricValueRoundsToZeroModule (ref), analyticsUnitModule (ref)
-	local var1 = foundationModule.Hooks.useTokens()
-	local var2 = foundationModule.Hooks.useTextSizeOffset()
-	local robloxLocaleId = localizationService.RobloxLocaleId
-	local metric = p1.metric
-	local unit = metric.unit
-	local bodySmall = var1.Typography.BodySmall
-	local font = bodySmall.Font
-	local var3 = if foundationFontFaceMigration then font elseif typeof(font) == "EnumItem" then font else Enum.Font.BuilderSans
-	local var4 = bodySmall.FontSize + (var2 or 0)
-	local var5, var6 = reactModule.useState(nil)
-	local var7, var8 = reactModule.useState(false)
-	local t = {
-		title = metric.titleKey,
-		percent = analyticsKeysModule.ANALYTICS_PERCENT_TEMPLATE,
-		duration = analyticsKeysModule.ANALYTICS_DURATION_TEMPLATE
+return function(p1) --[[ Line: 86 | Named "useMetricChartViewModel" ]]
+	-- upvalues: FoundationModule (copy), LocalizationService (copy), FoundationFontFaceMigration (copy), ReactModule (copy), AnalyticsKeysModule (copy), FFlagBuildAnalyticsGoalsModule (copy), AnalyticsUnitModule (copy), list (copy), UseLocalizationFunction (copy), FillMetricSeriesGapsModule (copy), DeriveChartAxesModule (copy), FormatMetricValueModule (copy), ScaleValueToUnitModule (copy), FormatMetricTimestampModule (copy), NoDataPlaceholderModule (copy), MetricValueRoundsToZeroModule (copy)
+	local UseTokensResult = FoundationModule.Hooks.useTokens()
+	local RobloxLocaleId = LocalizationService.RobloxLocaleId
+	local Metric = p1.metric
+	local Unit = Metric.unit
+	local BodySmall = UseTokensResult.Typography.BodySmall
+	local BodySmallFont = BodySmall.Font
+	local BodySmallFont1 = if FoundationFontFaceMigration then BodySmallFont elseif typeof(BodySmallFont) == "EnumItem" then BodySmallFont else Enum.Font.BuilderSans
+	local NewFontSize = BodySmall.FontSize + (FoundationModule.Hooks.useTextSizeOffset() or 0)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
+	local config = {
+		title = Metric.titleKey,
+		percent = AnalyticsKeysModule.ANALYTICS_PERCENT_TEMPLATE,
+		duration = if FFlagBuildAnalyticsGoalsModule and Unit == AnalyticsUnitModule.Minutes then AnalyticsKeysModule.ANALYTICS_DURATION_MINUTES_TEMPLATE else AnalyticsKeysModule.ANALYTICS_DURATION_TEMPLATE
 	}
 	
-	for i, v in list do
-		t["month" .. i] = v
+	for i, value in list do
+		config["month" .. i] = value
 	end
-	local var9 = useLocalization(t)
-	local title = var9.title
-	local t_1 = {}
+	local UseLocalizationResult = UseLocalizationFunction(config)
+	local Title = UseLocalizationResult.title
+	local t = {}
 	
-	for i_1, v_1 in list do
-		t_1[i_1] = var9["month" .. i_1]
+	for i1, _ in list do
+		t[i1] = UseLocalizationResult["month" .. i1]
 	end
-	local t_2 = { percent = var9.percent, duration = var9.duration }
-	local var10 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref), fillMetricSeriesGapsModule (copy)
-		local t = nil
+	local config1 = {
+		percent = UseLocalizationResult.percent,
+		duration = UseLocalizationResult.duration
+	}
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 139 ]]
+		-- upvalues: p1 (copy), FillMetricSeriesGapsModule (upval)
+		local v1 = nil
 		
 		if p1.window ~= nil and p1.latestAvailableTime ~= nil then
-			local dateTime = DateTime.fromIsoDate(p1.latestAvailableTime)
+			local _DateTime = DateTime.fromIsoDate(p1.latestAvailableTime)
 			
-			if dateTime ~= nil then
-				t = {
+			if _DateTime ~= nil then
+				v1 = {
 					lookbackSeconds = p1.window.lookbackSeconds,
-					endUnix = dateTime.UnixTimestamp
+					endUnix = _DateTime.UnixTimestamp
 				}
 			end
 		end
-		return fillMetricSeriesGapsModule(p1.series, t)
+		return FillMetricSeriesGapsModule(p1.series, v1)
 	end, { p1.series, p1.window, p1.latestAvailableTime })
-	local var11 = reactModule.useMemo(function()
-		-- upvalues: deriveChartAxesModule (copy), var10 (ref)
-		return deriveChartAxesModule(var10)
-	end, { var10 })
-	local pointsCount = #var11.points
-	local var12 = reactModule.useCallback(function(p2)
-		-- upvalues: pointsCount (ref), var6 (ref)
-		if pointsCount == 0 then
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 149 ]]
+		-- upvalues: DeriveChartAxesModule (upval), UseMemoResult (copy)
+		return DeriveChartAxesModule(UseMemoResult)
+	end, { UseMemoResult })
+	local CountPoints = #UseMemoResult1.points
+	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 154 ]]
+		-- upvalues: CountPoints (copy), UseStateResult2 (copy)
+		if CountPoints ~= 0 then
+			UseStateResult2((math.clamp(math.round(p2.X) + 1, 1, CountPoints)))
+			
 			return
 		end
-		var6(math.clamp(math.round(p2.X) + 1, 1, pointsCount))
-	end, { pointsCount })
-	local var13 = reactModule.useCallback(function()
-		-- upvalues: var7 (ref), var6 (ref)
-		if not var7 then
-			var6(nil)
+	end, { CountPoints })
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 161 ]]
+		-- upvalues: UseStateResult1 (copy), UseStateResult2 (copy)
+		if not UseStateResult1 then
+			UseStateResult2(nil)
 		end
-	end, { var7 })
-	local var14 = reactModule.useCallback(function(p2)
-		-- upvalues: var8 (ref), var12 (ref)
-		var8(true)
-		var12(p2)
-	end, { var12 })
-	local var15 = reactModule.useCallback(function()
-		-- upvalues: var8 (ref), var6 (ref)
-		var8(false)
-		var6(nil)
+	end, { UseStateResult1 })
+	local UseResult2 = ReactModule.useCallback(function(p2) --[[ Line: 167 ]]
+		-- upvalues: UseStateResult2_1 (copy), UseResult (copy)
+		UseStateResult2_1(true)
+		UseResult(p2)
+	end, { UseResult })
+	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 174 ]]
+		-- upvalues: UseStateResult2_1 (copy), UseStateResult2 (copy)
+		UseStateResult2_1(false)
+		UseStateResult2(nil)
 	end, {})
-	local var16 = if var10 ~= nil then nil else var10.dataPoints
-	local var17 = if var10 ~= nil then "None" else var10.granularity
-	local list_1 = { metric.id }
+	local DataPoints = if UseMemoResult == nil then nil else UseMemoResult.dataPoints
+	local None = if UseMemoResult == nil then "None" else UseMemoResult.granularity
+	local List = { Metric.id }
 	
-	if var16 ~= nil then
-		for i_2, v_2 in var16 do
-			table.insert(list_1, `{v_2.time}:{v_2.value}`)
+	if DataPoints ~= nil then
+		for _, dataPoint in DataPoints do
+			table.insert(List, `{dataPoint.time}:{dataPoint.value}`)
 		end
 	end
-	local joined = table.concat(list_1, "|")
-	local t_3 = {}
+	local Joined = table.concat(List, "|")
+	local YTicks = {}
 	
-	for i_2, v_2 in var11.yTicks do
-		t_3[i_2] = {
-			position = v_2,
-			label = formatMetricValueModule(scaleValueToUnitModule(v_2, unit), unit, robloxLocaleId, t_2)
+	for i2, yTick in UseMemoResult1.yTicks do
+		YTicks[i2] = {
+			position = yTick,
+			label = FormatMetricValueModule(ScaleValueToUnitModule(yTick, Unit), Unit, RobloxLocaleId, config1)
 		}
 	end
-	local t_4 = {}
+	local XAxisLabels = {}
 	
-	if var16 ~= nil then
-		for i_3, v_3 in var16 do
-			t_4[i_3] = formatMetricTimestampModule(v_3.time, var17, t_1)
+	if DataPoints ~= nil then
+		for i3, dataPoint1 in DataPoints do
+			XAxisLabels[i3] = FormatMetricTimestampModule(dataPoint1.time, None, t)
 		end
 	end
-	local var18 = scaleValueToUnitModule(p1.latest or 0, unit)
-	local var19 = if p1.hasData and p1.latest ~= nil then formatMetricValueModule(var18, unit, robloxLocaleId, t_2) else noDataPlaceholderModule
-	local var20 = if p1.priorValue ~= nil then nil else scaleValueToUnitModule(p1.priorValue, unit)
-	local var21 = if var20 ~= nil then not metricValueRoundsToZeroModule(var20, unit, nil, robloxLocaleId) else true
-	local var22 = nil
-	local var23 = false
+	local ScaleValueToUnitModuleResult: number = ScaleValueToUnitModule(p1.latest or 0, Unit)
+	local FormatMetricValueModuleResult = if p1.hasData and p1.latest ~= nil then FormatMetricValueModule(ScaleValueToUnitModuleResult, Unit, RobloxLocaleId, config1) else NoDataPlaceholderModule
+	local ScaleValueToUnitModuleResult1 = if p1.priorValue == nil then nil else ScaleValueToUnitModule(p1.priorValue, Unit)
+	local NoScaleValueToUnitModuleResult: boolean = ScaleValueToUnitModuleResult1 == nil or not MetricValueRoundsToZeroModule(ScaleValueToUnitModuleResult1, Unit, nil, RobloxLocaleId)
+	local DeltaText = nil
+	local IsTrendPctAbove = false
 	
 	if p1.hasData then
-		if var21 then
-			if not metricValueRoundsToZeroModule(p1.trendPct, analyticsUnitModule.Percent, nil, robloxLocaleId) then
-				var22 = formatMetricValueModule(math.abs(p1.trendPct), analyticsUnitModule.Percent, robloxLocaleId, t_2)
-				local _ = p1.trendPct > 0
+		if NoScaleValueToUnitModuleResult then
+			if not MetricValueRoundsToZeroModule(p1.trendPct, AnalyticsUnitModule.Percent, nil, RobloxLocaleId) then
+				DeltaText = FormatMetricValueModule(math.abs(p1.trendPct), AnalyticsUnitModule.Percent, RobloxLocaleId, config1)
+				IsTrendPctAbove = p1.trendPct > 0
 			end
-		elseif not metricValueRoundsToZeroModule(var18, unit, nil, robloxLocaleId) then
-			var22 = formatMetricValueModule(var18, unit, robloxLocaleId, t_2)
-			var23 = var18 > 0
+		elseif not MetricValueRoundsToZeroModule(ScaleValueToUnitModuleResult, Unit, nil, RobloxLocaleId) then
+			DeltaText = FormatMetricValueModule(ScaleValueToUnitModuleResult, Unit, RobloxLocaleId, config1)
+			IsTrendPctAbove = ScaleValueToUnitModuleResult > 0
 		end
 	end
-	local t_5 = nil
+	local Tooltip = nil
 	
-	if var5 ~= nil and var16 ~= nil and (var5 >= 1 and var5 <= #var16) then
-		local var24 = var16[var5]
-		t_5 = {
-			date = formatMetricTimestampModule(var24.time, var17, t_1),
-			valueText = formatMetricValueModule(scaleValueToUnitModule(var24.value, unit), unit, robloxLocaleId, t_2, "Full")
+	if UseStateResult ~= nil and DataPoints ~= nil and UseStateResult >= 1 and UseStateResult <= #DataPoints then
+		local DataPoint = DataPoints[UseStateResult]
+		Tooltip = {
+			date = FormatMetricTimestampModule(DataPoint.time, None, t),
+			valueText = FormatMetricValueModule(ScaleValueToUnitModule(DataPoint.value, Unit), Unit, RobloxLocaleId, config1, "Full")
 		}
 	end
-	local success = var1.Color.System.Success
+	local Success = UseTokensResult.Color.System.Success
 	
 	return {
 		layoutOrder = p1.layoutOrder,
-		plotKey = joined,
-		title = title,
+		plotKey = Joined,
+		title = Title,
 		summary = p1.summary,
-		valueText = var19,
-		icon = if p1.hideIcon then nil else metric.chartIcon or metric.icon,
-		deltaText = var22,
-		isDeltaPositive = var23,
+		valueText = FormatMetricValueModuleResult,
+		icon = if p1.hideIcon then nil else Metric.chartIcon or Metric.icon,
+		deltaText = DeltaText,
+		isDeltaPositive = IsTrendPctAbove,
 		hasData = p1.hasData,
-		points = var11.points,
-		minX = var11.minX,
-		maxX = var11.maxX,
-		minY = var11.minY,
-		maxY = var11.maxY,
-		yTicks = t_3,
-		xAxisLabels = t_4,
-		labelFont = var3,
-		labelFontSize = var4,
-		inspectedIndex = var5,
-		tooltip = t_5,
-		onHoverStart = var12,
-		onHoverMoved = var12,
-		onHoverEnded = var13,
-		onPress = var12,
-		onDragStart = var14,
-		onDragMoved = var12,
-		onDragEnded = var15,
+		points = UseMemoResult1.points,
+		minX = UseMemoResult1.minX,
+		maxX = UseMemoResult1.maxX,
+		minY = UseMemoResult1.minY,
+		maxY = UseMemoResult1.maxY,
+		yTicks = YTicks,
+		xAxisLabels = XAxisLabels,
+		labelFont = BodySmallFont1,
+		labelFontSize = NewFontSize,
+		inspectedIndex = UseStateResult,
+		tooltip = Tooltip,
+		onHoverStart = UseResult,
+		onHoverMoved = UseResult,
+		onHoverEnded = UseResult1,
+		onPress = UseResult,
+		onDragStart = UseResult2,
+		onDragMoved = UseResult,
+		onDragEnded = UseResult3,
 		colors = {
-			line = var1.Color.System.Emphasis,
-			grid = var1.Color.Stroke.Default,
-			axisLabel = var1.Color.Content.Default,
-			muted = var1.Color.Content.Muted,
-			emphasis = var1.Color.Content.Emphasis,
-			surface = var1.Color.Surface.Surface_100,
-			positive = success,
+			line = UseTokensResult.Color.System.Emphasis,
+			grid = UseTokensResult.Color.Stroke.Default,
+			axisLabel = UseTokensResult.Color.Content.Default,
+			muted = UseTokensResult.Color.Content.Muted,
+			emphasis = UseTokensResult.Color.Content.Emphasis,
+			surface = UseTokensResult.Color.Surface.Surface_100,
+			positive = Success,
 			positiveBackground = {
-				Color3 = success.Color3,
-				Transparency = var1.Color.Shift.Shift_300.Transparency
+				Color3 = Success.Color3,
+				Transparency = UseTokensResult.Color.Shift.Shift_300.Transparency
 			},
-			tooltipBackground = var1.Color.System.Contrast,
-			tooltipContent = var1.Inverse.Content.Emphasis
+			tooltipBackground = UseTokensResult.Color.System.Contrast,
+			tooltipContent = UseTokensResult.Inverse.Content.Emphasis
 		}
 	}
 end

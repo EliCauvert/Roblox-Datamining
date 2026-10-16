@@ -1,18 +1,19 @@
-﻿local squadsCore = script:FindFirstAncestor("SquadsCore")
-local parent = squadsCore.Parent
-local networkingSquadsModule = require(squadsCore.Http.NetworkingSquads)
-local promiseModule = require(parent.Promise)
-local squadsCore_1 = require(parent.Loggers).Logger:new("SquadsCore")
+﻿local SquadsCore = script:FindFirstAncestor("SquadsCore")
+local Parent = SquadsCore.Parent
+local NetworkingSquadsModule = require(SquadsCore.Http.NetworkingSquads)
+local Logger = require(Parent.Loggers).Logger
+local PromiseModule = require(Parent.Promise)
+local SquadsCore1 = Logger.new(Logger, "SquadsCore")
 
-return function()
-	-- upvalues: networkingSquadsModule (ref), squadsCore_1 (ref), promiseModule (ref)
-	return function(p1)
-		-- upvalues: networkingSquadsModule (copy), squadsCore_1 (copy), promiseModule (copy)
-		return p1:dispatch(networkingSquadsModule.GetSquadActive.API({})):catch(function(p2)
-			-- upvalues: squadsCore_1 (copy), promiseModule (copy)
-			squadsCore_1:warning("Error fetching active squad: {}", if p2.StatusCode then p2.StatusCode else -1)
+return function() --[[ Line: 11 ]]
+	-- upvalues: NetworkingSquadsModule (copy), SquadsCore1 (copy), PromiseModule (copy)
+	return function(p1) --[[ Line: 12 ]]
+		-- upvalues: NetworkingSquadsModule (upval), SquadsCore1 (upval), PromiseModule (upval)
+		return p1:dispatch(NetworkingSquadsModule.GetSquadActive.API({})):catch(function(Err) --[[ Line: 13 ]]
+			-- upvalues: SquadsCore1 (upval), PromiseModule (upval)
+			SquadsCore1:warning("Error fetching active squad: {}", if Err.StatusCode then Err.StatusCode else -1)
 			
-			return promiseModule.reject(p2)
+			return PromiseModule.reject(Err)
 		end)
 	end
 end

@@ -1,75 +1,77 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local promiseModule = require(dataHydration.Parent.Promise)
-local createDataCacheModule = require(dataHydration.createDataCache)
-local _ = require(dataHydration.DataHydrationTypes)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local PromiseModule = require(DataHydration.Parent.Promise)
+local CreateDataCacheModule = require(DataHydration.createDataCache)
+local _ = require(DataHydration.DataHydrationTypes)
 local _ = require(script.Parent.MarketplaceAssetStoreTypes)
-local createDataResolverModule = require(dataHydration.createDataResolver)
+local CreateDataResolverModule = require(DataHydration.createDataResolver)
 
-local function normalizeTaxonomy(p1)
-	if not p1 then
+local function normalizeTaxonomy(Taxonomy) --[[ Line: 26 ]]
+	if not Taxonomy then
 		return nil
 	end
-	local list = table.create(#p1)
+	local Buffer = table.create(#Taxonomy)
 	
-	for i, v in p1 do
-		table.insert(list, {
-			taxonomyId = if v.taxonomyId ~= nil then v.taxonomy_id else v.taxonomyId,
-			taxonomyName = if v.taxonomyName ~= nil then v.taxonomy_name else v.taxonomyName
+	for _, value in Taxonomy do
+		table.insert(Buffer, {
+			taxonomyId = if value.taxonomyId == nil then value.taxonomy_id else value.taxonomyId,
+			taxonomyName = if value.taxonomyName == nil then value.taxonomy_name else value.taxonomyName
 		})
 	end
-	return list
+	return Buffer
 end
 
-local function _(value)
-	-- upvalues: normalizeTaxonomy (ref)
-	if value.taxonomy then
-		local cloned = table.clone(value)
-		cloned.taxonomy = normalizeTaxonomy(value.taxonomy)
+local function _(Tbl) --[[ Line: 42 | Named "normalizeAsset" ]]
+	-- upvalues: normalizeTaxonomy (copy)
+	if Tbl.taxonomy then
+		local Copy = table.clone(Tbl)
+		Copy.taxonomy = normalizeTaxonomy(Tbl.taxonomy)
 		
-		return cloned
+		return Copy
+	else
+		return Tbl
 	end
-	return value
 end
 
-return function()
-	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), promiseModule (ref), normalizeTaxonomy (ref)
-	local var1 = createDataCacheModule()
-	local var2 = createDataResolverModule({
-		cache = var1,
-		fetchFn = function(_)
-			-- upvalues: promiseModule (copy)
-			return promiseModule.resolve({})
+return function() --[[ Line: 51 | Named "createMarketplaceAssetStore" ]]
+	-- upvalues: CreateDataCacheModule (copy), CreateDataResolverModule (copy), PromiseModule (copy), normalizeTaxonomy (copy)
+	local DataCacheModule = CreateDataCacheModule()
+	local DataResolverModule = CreateDataResolverModule({
+		cache = DataCacheModule,
+		fetchFn = function(_) --[[ Line: 55 ]]
+			-- upvalues: PromiseModule (upval)
+			return PromiseModule.resolve({})
 		end
 	})
 	
 	return {
-		getMarketplaceAssetInfo = var2.getCachedItem,
-		getMarketplaceAssetInfos = var2.getCachedItems,
-		getNormalizedMarketplaceAssetInfo = function(value)
-			-- upvalues: var2 (ref), normalizeTaxonomy (copy)
-			local cachedItem = var2.getCachedItem(value)
+		getMarketplaceAssetInfo = DataResolverModule.getCachedItem,
+		getMarketplaceAssetInfos = DataResolverModule.getCachedItems,
+		getNormalizedMarketplaceAssetInfo = function(p1) --[[ Line: 63 ]]
+			-- upvalues: DataResolverModule (copy), normalizeTaxonomy (upval)
+			local CachedItem = DataResolverModule.getCachedItem(p1)
 			
 			return {
-				data = function(p2)
-					-- upvalues: cachedItem (ref), normalizeTaxonomy (copy)
-					local var3 = cachedItem.data(p2)
+				data = function(p2) --[[ Line: 66 ]]
+					-- upvalues: CachedItem (copy), normalizeTaxonomy (upval)
+					local DataResult = CachedItem.data(p2)
 					
-					if not var3 then
+					if not DataResult then
 						return nil
-					elseif var3.taxonomy then
-						local cloned = table.clone(var3)
-						cloned.taxonomy = normalizeTaxonomy(var3.taxonomy)
+					elseif DataResult.taxonomy then
+						local Copy = table.clone(DataResult)
+						Copy.taxonomy = normalizeTaxonomy(DataResult.taxonomy)
 						
-						return cloned
+						return Copy
+					else
+						return DataResult
 					end
-					return var3
 				end,
-				status = cachedItem.status
+				status = CachedItem.status
 			}
 		end,
-		updateMarketplaceAssetInfo = var1.updateItem,
-		updateMarketplaceAssetInfos = var1.updateItems,
-		clear = var1.clear,
-		dispose = var1.dispose
+		updateMarketplaceAssetInfo = DataCacheModule.updateItem,
+		updateMarketplaceAssetInfos = DataCacheModule.updateItems,
+		clear = DataCacheModule.clear,
+		dispose = DataCacheModule.dispose
 	}
 end

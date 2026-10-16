@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent.Signals).createComputed(require(script.createInputModeStore))
+﻿return require(script.Parent.Parent.Parent.Signals).createComputed((require(script.createInputModeStore)))

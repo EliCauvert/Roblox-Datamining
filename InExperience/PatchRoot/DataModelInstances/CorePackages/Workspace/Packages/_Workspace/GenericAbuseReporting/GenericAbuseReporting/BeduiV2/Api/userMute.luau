@@ -1,62 +1,65 @@
-﻿local parent = script:FindFirstAncestor("GenericAbuseReporting").Parent
-local chatMuteModule = require(parent.ChatMute)
-local expChatSharedModule = require(parent.ExpChatShared)
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagExpChatUseChatMuteStore = sharedFlagsModule.FFlagExpChatUseChatMuteStore
-local fFlagAbuseReportVoiceMute = sharedFlagsModule.FFlagAbuseReportVoiceMute
+﻿local Parent = script:FindFirstAncestor("GenericAbuseReporting").Parent
+local ChatMuteModule = require(Parent.ChatMute)
+local ExpChatSharedModule = require(Parent.ExpChatShared)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagExpChatUseChatMuteStore = SharedFlagsModule.FFlagExpChatUseChatMuteStore
+local FFlagAbuseReportVoiceMute = SharedFlagsModule.FFlagAbuseReportVoiceMute
 
-local function _(p1, p2)
-	-- upvalues: fFlagAbuseReportVoiceMute (ref)
-	if not fFlagAbuseReportVoiceMute or not p2 then return end
-	local participants = p2.participants
+local function _(p1, p2) --[[ Line: 14 | Named "voiceMutePlayer" ]]
+	-- upvalues: FFlagAbuseReportVoiceMute (copy)
+	if not FFlagAbuseReportVoiceMute or not p2 then return end
+	local Participants = p2.participants
 	
-	if not participants then return end
-	local var1 = participants[tostring(p1)]
+	if not Participants then return end
+	local Participant = Participants[tostring(p1)]
 	
-	if var1 and not var1.isMutedLocally then
+	if Participant and not Participant.isMutedLocally then
 		p2:ToggleMutePlayer(p1, "igm-report-v2")
 	end
 end
 
-function muteUser(p1, p2, p3)
-	-- upvalues: fFlagExpChatUseChatMuteStore (ref), chatMuteModule (ref), fFlagAbuseReportVoiceMute (ref), expChatSharedModule (ref)
-	if not p1 or not p2 then
+function muteUser(UserId, Player, p1): boolean --[[ Line: 29 ]]
+	-- upvalues: FFlagExpChatUseChatMuteStore (copy), ChatMuteModule (copy), FFlagAbuseReportVoiceMute (copy), ExpChatSharedModule (copy)
+	if not UserId or not Player then
 		return false
-	elseif p1 == p2.UserId then
+	end
+	if UserId == Player.UserId then
 		return false
-	elseif fFlagExpChatUseChatMuteStore then
-		chatMuteModule.mutePlayer({ userId = tostring(p1) })
+	end
+	if FFlagExpChatUseChatMuteStore then
+		ChatMuteModule.mutePlayer({ userId = tostring(UserId) })
 		
-		if fFlagAbuseReportVoiceMute and fFlagAbuseReportVoiceMute and p3 then
-			local participants = p3.participants
+		if FFlagAbuseReportVoiceMute and FFlagAbuseReportVoiceMute and p1 then
+			local Participants = p1.participants
 			
-			if participants then
-				local var1 = participants[tostring(p1)]
+			if Participants then
+				local Participant = Participants[tostring(UserId)]
 				
-				if var1 and not var1.isMutedLocally then
-					p3:ToggleMutePlayer(p1, "igm-report-v2")
+				if Participant and not Participant.isMutedLocally then
+					p1:ToggleMutePlayer(UserId, "igm-report-v2")
 				end
 			end
 		end
 		return true
 	else
-		local context = expChatSharedModule.context
+		local Context = ExpChatSharedModule.context
 		
-		if not context.store then
-			return false
-		elseif not context.messagesStore then
+		if not Context.store then
 			return false
 		end
-		context.messagesStore.muteUser(p1)
+		if not Context.messagesStore then
+			return false
+		end
+		Context.messagesStore.muteUser(UserId)
 		
-		if fFlagAbuseReportVoiceMute and fFlagAbuseReportVoiceMute and p3 then
-			local participants = p3.participants
+		if FFlagAbuseReportVoiceMute and FFlagAbuseReportVoiceMute and p1 then
+			local Participants = p1.participants
 			
-			if participants then
-				local var2 = participants[tostring(p1)]
+			if Participants then
+				local Participant = Participants[tostring(UserId)]
 				
-				if var2 and not var2.isMutedLocally then
-					p3:ToggleMutePlayer(p1, "igm-report-v2")
+				if Participant and not Participant.isMutedLocally then
+					p1:ToggleMutePlayer(UserId, "igm-report-v2")
 				end
 			end
 		end
@@ -64,16 +67,17 @@ function muteUser(p1, p2, p3)
 	end
 end
 
-function isUserMuted(p1)
-	-- upvalues: fFlagExpChatUseChatMuteStore (ref), chatMuteModule (ref), expChatSharedModule (ref)
+function isUserMuted(p1) --[[ Line: 60 ]]
+	-- upvalues: FFlagExpChatUseChatMuteStore (copy), ChatMuteModule (copy), ExpChatSharedModule (copy)
 	if not p1 then
 		return false
-	elseif fFlagExpChatUseChatMuteStore then
-		return chatMuteModule.isUserIdMuted(tostring(p1))
+	elseif FFlagExpChatUseChatMuteStore then
+		return ChatMuteModule.isUserIdMuted((tostring(p1)))
+	else
+		local Context = ExpChatSharedModule.context
+		
+		return if Context.store and Context.messagesStore then Context.messagesStore.getMutedUserIds(false)[tostring(p1)] == true else false
 	end
-	local context = expChatSharedModule.context
-	
-	return if context.store then if context.messagesStore then context.messagesStore.getMutedUserIds(false)[tostring(p1)] == true else false else false
 end
 
 return { isUserMuted = isUserMuted, muteUser = muteUser }

@@ -1,6 +1,6 @@
-﻿local t = { [Enum.KeyCode.Up] = true, [Enum.KeyCode.DPadUp] = true }
+﻿local config = { [Enum.KeyCode.Up] = true, [Enum.KeyCode.DPadUp] = true }
 
-return function(p1, p2, p3)
-	-- upvalues: t (ref)
-	return if t[p1] then if p2 then if p3 ~= nil then p3 == "" else true else false else false
+return function(p1, p2, p3): boolean --[[ Line: 14 | Named "shouldFocusBackButtonOnKey" ]]
+	-- upvalues: config (copy)
+	return if config[p1] and p2 then p3 == nil or p3 == "" else false
 end

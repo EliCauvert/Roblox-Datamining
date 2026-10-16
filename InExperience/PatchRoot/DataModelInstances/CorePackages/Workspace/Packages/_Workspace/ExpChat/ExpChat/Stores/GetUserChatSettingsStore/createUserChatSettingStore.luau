@@ -1,29 +1,30 @@
-﻿local signalsModule = require(script:FindFirstAncestor("ExpChat").Parent.Signals)
-local createSignal = signalsModule.createSignal
-local createComputed = signalsModule.createComputed
-local getChatStatusStoreModule = require(script.Parent.Parent.GetChatStatusStore)
+﻿local SignalsModule = require(script:FindFirstAncestor("ExpChat").Parent.Signals)
+local CreateSignalFunction = SignalsModule.createSignal
+local CreateComputedFunction = SignalsModule.createComputed
+local GetChatStatusStoreModule = require(script.Parent.Parent.GetChatStatusStore)
 
-return function(p1)
-	-- upvalues: createSignal (ref), getChatStatusStoreModule (ref), createComputed (ref)
-	local var1, var2 = createSignal(false)
-	local var3, var4 = createSignal(false)
-	local var5 = if p1.requiresChatEnabled ~= nil then false else p1.requiresChatEnabled
-	local var6 = getChatStatusStoreModule(false)
-	local _ = nil
-	local _ = nil
+return function(p1) --[[ Line: 49 ]]
+	-- upvalues: CreateSignalFunction (copy), GetChatStatusStoreModule (copy), CreateComputedFunction (copy)
+	local Signal, Signal2 = CreateSignalFunction(false)
+	local Signal1, Signal2_1 = CreateSignalFunction(false)
+	local RequiresChatEnabled = p1.requiresChatEnabled ~= nil and p1.requiresChatEnabled
+	local ChatStatusStoreModule = GetChatStatusStoreModule(false)
 	
 	return {
-		getIsSettingVisible = createComputed(function(p2)
-			-- upvalues: var5 (ref), var1 (ref), var6 (ref)
-			return if var5 then var1(p2) and var6.getChatStatus(p2) == "Enabled" else var1(p2)
+		getIsSettingVisible = CreateComputedFunction(function(p2) --[[ Line: 58 ]]
+			-- upvalues: RequiresChatEnabled (copy), Signal (copy), ChatStatusStoreModule (copy)
+			return if RequiresChatEnabled then Signal(p2) and ChatStatusStoreModule.getChatStatus(p2) == "Enabled" else Signal(p2)
 		end),
-		getIsSettingEnabled = u88,
-		setIsSettingVisible = if p1.buildFeatureValueHandler then p1.buildFeatureValueHandler(var2, var4) else function(_, _) end,
-		setIsSettingEnabled = function(value)
-			-- upvalues: p1 (ref), var4 (ref)
-			p1.onSetEnabled(value, var4)
+		getIsSettingEnabled = CreateComputedFunction(function(p2) --[[ Line: 65 ]]
+			-- upvalues: RequiresChatEnabled (copy), Signal1 (copy), ChatStatusStoreModule (copy)
+			return if RequiresChatEnabled then Signal1(p2) and ChatStatusStoreModule.getChatStatus(p2) == "Enabled" else Signal1(p2)
+		end),
+		setIsSettingVisible = if p1.buildFeatureValueHandler then p1.buildFeatureValueHandler(Signal2, Signal2_1) else function(_, _) --[[ Line: 74 ]] end,
+		setIsSettingEnabled = function(p2) --[[ Line: 82 ]]
+			-- upvalues: p1 (copy), Signal2_1 (copy)
+			p1.onSetEnabled(p2, Signal2_1)
 		end,
-		initialize = p1.onInitialize or function() end,
-		cleanup = p1.setupListener(var2, var4)
+		initialize = p1.onInitialize or function() --[[ Line: 85 ]] end,
+		cleanup = p1.setupListener(Signal2, Signal2_1)
 	}
 end

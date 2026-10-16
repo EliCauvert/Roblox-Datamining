@@ -1,78 +1,79 @@
-﻿local httpService = game:GetService("HttpService")
-local parent = script.Parent.Parent
-local promiseModule = require(parent.Promise)
-local _ = require(parent.LuauPolyfill)
-local t = {}
-t.__index = t
+﻿local HttpService = game:GetService("HttpService")
+local Parent = script.Parent.Parent
+local PromiseModule = require(Parent.Promise)
+local _ = require(Parent.LuauPolyfill)
+local Module = {}
+Module.__index = Module
 
-function t.new(p1)
-	-- upvalues: t (ref)
-	local t_1 = {}
+function Module.new(Body) --[[ Line: 37 ]]
+	-- upvalues: Module (copy)
+	local t = {}
 	
-	if type(p1) == "string" then
-		t_1.body = p1
-	elseif p1 == nil then
-		t_1.body = nil
+	if type(Body) == "string" then
+		t.body = Body
+	elseif Body == nil then
+		t.body = nil
 	else
-		error(string.format("Expected string or nil as the first argument to Body.new(), but got: %s", type(p1)))
+		error(string.format("Expected string or nil as the first argument to Body.new(), but got: %s", (type(Body))))
 	end
-	t_1.bodyUsed = false
-	setmetatable(t_1, t)
+	t.bodyUsed = false
+	setmetatable(t, Module)
 	
-	return t_1
+	return t
 end
 
-function t.arrayBuffer(_)
-	-- upvalues: promiseModule (ref)
-	return promiseModule.new(function(_, p1)
-		p1("arrayBuffer not implemented")
+function Module:arrayBuffer() --[[ Line: 53 ]]
+	-- upvalues: PromiseModule (copy)
+	return PromiseModule.new(function(_, Callback: (any) -> ()) --[[ Line: 54 ]]
+		Callback("arrayBuffer not implemented")
 	end)
 end
 
-function t.blob(_)
-	-- upvalues: promiseModule (ref)
-	return promiseModule.new(function(_, p1)
-		p1("blob not implemented")
+function Module:blob() --[[ Line: 60 ]]
+	-- upvalues: PromiseModule (copy)
+	return PromiseModule.new(function(_, Callback: (any) -> ()) --[[ Line: 61 ]]
+		Callback("blob not implemented")
 	end)
 end
 
-function t.formData(_)
-	-- upvalues: promiseModule (ref)
-	return promiseModule.new(function(_, p1)
-		p1("formData not implemented")
+function Module:formData() --[[ Line: 67 ]]
+	-- upvalues: PromiseModule (copy)
+	return PromiseModule.new(function(_, Callback: (any) -> ()) --[[ Line: 68 ]]
+		Callback("formData not implemented")
 	end)
 end
 
-function t.json(p1)
-	-- upvalues: promiseModule (ref), httpService (ref)
-	return promiseModule.new(function(p2, p3)
-		-- upvalues: p1 (ref), httpService (copy)
+function Module.json(p1) --[[ Line: 74 ]]
+	-- upvalues: PromiseModule (copy), HttpService (copy)
+	return PromiseModule.new(function(Callback: (any) -> (), Callback1: (any) -> ()) --[[ Line: 75 ]]
+		-- upvalues: p1 (copy), HttpService (upval)
 		if p1._json then
-			p2(p1._json)
+			Callback(p1._json)
 			
 			return
 		end
-		local ok, status = pcall(function()
-			-- upvalues: httpService (copy), p1 (copy)
-			return httpService:JSONDecode(p1.body)
+		local Success, Result = pcall(function() --[[ Line: 81 ]]
+			-- upvalues: HttpService (upval), p1 (upval)
+			return HttpService:JSONDecode(p1.body)
 		end)
 		
-		if ok then
-			p1._json = status
-			p2(status)
+		if Success then
+			p1._json = Result
+			Callback(Result)
 			
 			return
+		else
+			Callback1("Failed to decode response body as JSON. JSON decoding is only supported for Content-Type = application/json")
 		end
-		p3("Failed to decode response body as JSON. JSON decoding is only supported for Content-Type = application/json")
 	end)
 end
 
-function t.text(p1)
-	-- upvalues: promiseModule (ref)
-	return promiseModule.new(function(p2, _)
-		-- upvalues: p1 (ref)
-		p2(p1.body or "")
+function Module.text(p1) --[[ Line: 97 ]]
+	-- upvalues: PromiseModule (copy)
+	return PromiseModule.new(function(Callback: (any) -> (), _) --[[ Line: 98 ]]
+		-- upvalues: p1 (copy)
+		Callback(p1.body or "")
 	end)
 end
 
-return { Body = t }
+return { Body = Module }

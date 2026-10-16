@@ -1,37 +1,37 @@
-﻿return function(p1, p2)
-	if p1 == p2 then
+﻿return function(List, List1): boolean --[[ Line: 1 | Named "inputBindingsEqual" ]]
+	if List == List1 then
 		return true
 	end
-	for i, v in pairs(p1) do
-		local var1 = p2[i]
+	for i, value in pairs(List) do
+		local Entry = List1[i]
 		
-		if var1 ~= nil then
-			if v.kind == var1.kind and v.keyCode == var1.keyCode and v.action == var1.action then
-				local meta = v.meta
-				local meta_1 = var1.meta
-				
-				if meta ~= meta_1 then
-					if typeof(meta) == "table" and typeof(meta_1) == "table" then
-						for i_1, v_1 in pairs(meta) do
-							if v_1 ~= meta_1[i_1] then
-								return false
-							end
-						end
-						for i_1 in pairs(meta_1) do
-							if meta[i_1] == nil then
-								return false
-							end
-						end
-					end
+		if Entry == nil then
+			return false
+		end
+		if value.kind ~= Entry.kind or value.keyCode ~= Entry.keyCode or value.action ~= Entry.action then
+			return false
+		end
+		local Meta = value.meta
+		local Meta1 = Entry.meta
+		
+		if Meta ~= Meta1 then
+			if typeof(Meta) ~= "table" or typeof(Meta1) ~= "table" then
+				return false
+			end
+			for i1, value1 in pairs(Meta) do
+				if value1 ~= Meta1[i1] then
 					return false
 				end
 			end
-			return false
+			for i2 in pairs(Meta1) do
+				if Meta[i2] == nil then
+					return false
+				end
+			end
 		end
-		return false
 	end
-	for i_1 in pairs(p2) do
-		if p1[i_1] == nil then
+	for i3 in pairs(List1) do
+		if List[i3] == nil then
 			return false
 		end
 	end

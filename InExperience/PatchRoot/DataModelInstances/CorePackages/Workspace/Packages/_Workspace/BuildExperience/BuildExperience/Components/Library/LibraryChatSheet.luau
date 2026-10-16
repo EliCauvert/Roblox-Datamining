@@ -1,65 +1,64 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local roactUtilsModule = require(parent.RoactUtils)
-local signalsModule = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local chatSheetViewModule = require(buildExperience.Components.ChatSheet.ChatSheetView)
-local _ = require(buildExperience.Components.ChatSheet.useChatSheetViewModel)
-local getLibraryStoreModule = require(buildExperience.Stores.GetLibraryStore)
-local libraryChatSheetOverlayModule = require(script.Parent.LibraryChatSheetOverlay)
-local useLibraryChatSheetViewModelModule = require(script.Parent.useLibraryChatSheetViewModel)
-local t = { ["Color.Common.Backdrop"] = "Color.None" }
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local RoactUtilsModule = require(Parent.RoactUtils)
+local SignalsReactModule = require(Parent.SignalsReact)
+local ChatSheetViewModule = require(BuildExperience.Components.ChatSheet.ChatSheetView)
+local _ = require(BuildExperience.Components.ChatSheet.useChatSheetViewModel)
+local GetLibraryStoreModule = require(BuildExperience.Stores.GetLibraryStore)
+local LibraryChatSheetOverlayModule = require(script.Parent.LibraryChatSheetOverlay)
+local UseLibraryChatSheetViewModelModule = require(script.Parent.useLibraryChatSheetViewModel)
+local TokenOverrides = { ["Color.Common.Backdrop"] = "Color.None" }
 
-local function onBoundsChanged(p1, p2)
-	-- upvalues: getLibraryStoreModule (ref)
-	local var1 = getLibraryStoreModule()
-	var1.setWorldChatTop(p1)
-	var1.setWorldChatLeft(p2)
+local function onBoundsChanged(p1, p2) --[[ Line: 17 ]]
+	-- upvalues: GetLibraryStoreModule (copy)
+	local LibraryStoreModule = GetLibraryStoreModule()
+	LibraryStoreModule.setWorldChatTop(p1)
+	LibraryStoreModule.setWorldChatLeft(p2)
 end
 
-local var1 = signalsModule.createComputed(function(p1)
-	-- upvalues: getLibraryStoreModule (ref)
-	local worldViewportRect = getLibraryStoreModule().getWorldViewportRect(p1)
+local Computed = require(Parent.Signals).createComputed(function(p1) --[[ Line: 23 ]]
+	-- upvalues: GetLibraryStoreModule (copy)
+	local WorldViewportRect = GetLibraryStoreModule().getWorldViewportRect(p1)
 	
-	return if worldViewportRect == nil then nil else worldViewportRect.Min.Y
+	return if WorldViewportRect == nil then nil else WorldViewportRect.Min.Y
 end)
 
-local function ViewportTopOverlay(p1)
-	-- upvalues: signalsReactModule (ref), var1 (ref), reactModule (ref), libraryChatSheetOverlayModule (ref)
-	local cloned = table.clone(p1)
-	cloned.top = signalsReactModule.useSignalState(var1)
+local function ViewportTopOverlay(Tbl) --[[ Line: 30 ]]
+	-- upvalues: SignalsReactModule (copy), Computed (copy), ReactModule (copy), LibraryChatSheetOverlayModule (copy)
+	local Copy = table.clone(Tbl)
+	Copy.top = SignalsReactModule.useSignalState(Computed)
 	
-	return reactModule.createElement(libraryChatSheetOverlayModule, cloned)
+	return ReactModule.createElement(LibraryChatSheetOverlayModule, Copy)
 end
 
-return function(p1)
-	-- upvalues: roactUtilsModule (ref), foundationModule (ref), useLibraryChatSheetViewModelModule (ref), reactModule (ref), t (ref), ViewportTopOverlay (ref), onBoundsChanged (ref), chatSheetViewModule (ref)
-	local var2 = roactUtilsModule.Hooks.useSelectedTheme()
-	local var3 = foundationModule.Hooks.useOverlay()
-	local var4 = if var3 ~= nil then nil else var3:FindFirstAncestorWhichIsA("ScreenGui")
-	local var5 = useLibraryChatSheetViewModelModule(p1)
+return function(p1) --[[ Line: 37 | Named "LibraryChatSheet" ]]
+	-- upvalues: RoactUtilsModule (copy), FoundationModule (copy), UseLibraryChatSheetViewModelModule (copy), ReactModule (copy), TokenOverrides (copy), ViewportTopOverlay (copy), onBoundsChanged (copy), ChatSheetViewModule (copy)
+	local UseSelectedThemeResult = RoactUtilsModule.Hooks.useSelectedTheme()
+	local UseOverlayResult = FoundationModule.Hooks.useOverlay()
+	local ScreenGui = if UseOverlayResult == nil then nil else UseOverlayResult:FindFirstAncestorWhichIsA("ScreenGui")
+	local UseLibraryChatSheetViewModelModuleResult = UseLibraryChatSheetViewModelModule(p1)
 	
-	return reactModule.createElement(foundationModule.FoundationProvider, {
-		colorMode = if var2 == "light" then foundationModule.Enums.ColorMode.Light else foundationModule.Enums.ColorMode.Dark,
+	return ReactModule.createElement(FoundationModule.FoundationProvider, {
+		colorMode = if UseSelectedThemeResult == "light" then FoundationModule.Enums.ColorMode.Light else FoundationModule.Enums.ColorMode.Dark,
 		overlayGui = {
-			DisplayOrder = if var4 ~= nil then nil else var4.DisplayOrder
+			DisplayOrder = if ScreenGui == nil then nil else ScreenGui.DisplayOrder
 		},
-		tokenOverrides = t
+		tokenOverrides = TokenOverrides
 	}, {
-		Overlay = reactModule.createElement(ViewportTopOverlay, {
-			isOpen = var5.isOpen,
-			snapPoints = var5.snapPoints,
+		Overlay = ReactModule.createElement(ViewportTopOverlay, {
+			isOpen = UseLibraryChatSheetViewModelModuleResult.isOpen,
+			snapPoints = UseLibraryChatSheetViewModelModuleResult.snapPoints,
 			onBoundsChanged = onBoundsChanged,
-			renderSheet = function(p2, p3, p4)
-				-- upvalues: var5 (ref), reactModule (copy), chatSheetViewModule (copy)
-				local cloned = table.clone(var5)
-				cloned.snapPoints = p2
-				cloned.onFramesChanged = p3
-				cloned.onSnapPointChanged = p4
+			renderSheet = function(SnapPoints, OnFramesChanged, OnSnapPointChanged) --[[ Line: 53 ]]
+				-- upvalues: UseLibraryChatSheetViewModelModuleResult (copy), ReactModule (upval), ChatSheetViewModule (upval)
+				local Copy = table.clone(UseLibraryChatSheetViewModelModuleResult)
+				Copy.snapPoints = SnapPoints
+				Copy.onFramesChanged = OnFramesChanged
+				Copy.onSnapPointChanged = OnSnapPointChanged
 				
-				return reactModule.createElement(chatSheetViewModule, cloned)
+				return ReactModule.createElement(ChatSheetViewModule, Copy)
 			end
 		})
 	})

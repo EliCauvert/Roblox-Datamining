@@ -1,73 +1,72 @@
-﻿local inExperienceShop = script:FindFirstAncestor("InExperienceShop")
-local parent = inExperienceShop.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local view = foundationModule.View
-local scrollView = foundationModule.ScrollView
-local itemGridModule = require(inExperienceShop.Components.ItemGrid)
-local _ = require(inExperienceShop.Components.ItemRow)
-local fFlagEnableInExperienceShopUnifiedLoggingModule = require(inExperienceShop.Flags.FFlagEnableInExperienceShopUnifiedLogging)
-local var1 = if require(inExperienceShop.Flags.FFlagShopRobuxTermsDisclosure) then require(inExperienceShop.Components.RobuxTermsDisclosure) else nil
-local isSubjectToDesktopPolicies = require(parent.SharedFlags).isSubjectToDesktopPolicies
-local var2 = if fFlagEnableInExperienceShopUnifiedLoggingModule then require(inExperienceShop.Analytics) else nil
-local var3 = if var2 then var2.Constants.ShopPageType else nil
-local useShopImpressionsDetectorModule = require(inExperienceShop.Hooks.useShopImpressionsDetector)
-local _ = require(inExperienceShop.Types)
+﻿local InExperienceShop = script:FindFirstAncestor("InExperienceShop")
+local Parent = InExperienceShop.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local ScrollView = FoundationModule.ScrollView
+local ItemGridModule = require(InExperienceShop.Components.ItemGrid)
+local _ = require(InExperienceShop.Components.ItemRow)
+local FFlagEnableInExperienceShopUnifiedLoggingModule = require(InExperienceShop.Flags.FFlagEnableInExperienceShopUnifiedLogging)
+local RobuxTermsDisclosureModule = if require(InExperienceShop.Flags.FFlagShopRobuxTermsDisclosure) then require(InExperienceShop.Components.RobuxTermsDisclosure) else nil
+local IsSubjectToDesktopPoliciesFunction = require(Parent.SharedFlags).isSubjectToDesktopPolicies
+local AnalyticsModule = if FFlagEnableInExperienceShopUnifiedLoggingModule then require(InExperienceShop.Analytics) else nil
+local ShopPageType = if AnalyticsModule then AnalyticsModule.Constants.ShopPageType else nil
+local UseShopImpressionsDetectorModule = require(InExperienceShop.Hooks.useShopImpressionsDetector)
+local _ = require(InExperienceShop.Types)
 
-return function(p1)
-	-- upvalues: isSubjectToDesktopPolicies (ref), useShopImpressionsDetectorModule (ref), var3 (ref), reactModule (ref), fFlagEnableInExperienceShopUnifiedLoggingModule (ref), view (ref), scrollView (ref), foundationModule (ref), var1 (ref), itemGridModule (ref)
-	local var4 = p1.showRobuxTermsDisclosure == true
-	local var5 = useShopImpressionsDetectorModule({
+return function(Frame) --[[ Line: 40 | Named "CategoryPageView" ]]
+	-- upvalues: IsSubjectToDesktopPoliciesFunction (copy), UseShopImpressionsDetectorModule (copy), ShopPageType (copy), ReactModule (copy), FFlagEnableInExperienceShopUnifiedLoggingModule (copy), View (copy), ScrollView (copy), FoundationModule (copy), RobuxTermsDisclosureModule (copy), ItemGridModule (copy)
+	local IsShowRobuxTermsDisclosure = Frame.showRobuxTermsDisclosure == true
+	local Inverted = not IsSubjectToDesktopPoliciesFunction()
+	local UseShopImpressionsDetectorModuleResult = UseShopImpressionsDetectorModule({
 		isPageActive = true,
 		externalScrollSignal = nil,
-		pageType = if var3 then var3.Category else ""
+		pageType = if ShopPageType then ShopPageType.Category else ""
 	})
+	local UseResult = ReactModule.useCallback(function(_) --[[ Line: 50 ]]
+		-- upvalues: FFlagEnableInExperienceShopUnifiedLoggingModule (upval), UseShopImpressionsDetectorModuleResult (copy)
+		if FFlagEnableInExperienceShopUnifiedLoggingModule then
+			UseShopImpressionsDetectorModuleResult.onLayoutChange()
+		end
+	end, { UseShopImpressionsDetectorModuleResult.onLayoutChange })
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "fill size-full-0",
 		testId = "CategoryPageView",
-		LayoutOrder = p1.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		Scroll = reactModule.createElement(scrollView, {
+		Scroll = ReactModule.createElement(ScrollView, {
 			Size = UDim2.fromScale(1, 1),
-			onCanvasPositionChanged = if fFlagEnableInExperienceShopUnifiedLoggingModule then reactModule.useCallback(function(_)
-				-- upvalues: fFlagEnableInExperienceShopUnifiedLoggingModule (copy), var5 (ref)
-				if fFlagEnableInExperienceShopUnifiedLoggingModule then
-					var5.onLayoutChange()
-				end
-			end, { var5.onLayoutChange }) else nil,
+			onCanvasPositionChanged = if FFlagEnableInExperienceShopUnifiedLoggingModule then UseResult else nil,
 			scroll = {
 				AutomaticCanvasSize = Enum.AutomaticSize.Y,
 				CanvasSize = UDim2.fromScale(1, 0),
 				ScrollingDirection = Enum.ScrollingDirection.Y,
-				scrollBarVisibility = foundationModule.Enums.Visibility.None
+				scrollBarVisibility = FoundationModule.Enums.Visibility.None
 			}
 		}, {
-			Content = reactModule.createElement(view, {
-				tag = if var4 then "col gap-medium size-full-0 auto-y padding-x-xlarge padding-bottom-xlarge" else "size-full-0 auto-y padding-x-xlarge padding-bottom-xlarge padding-top-medium",
-				ref = if fFlagEnableInExperienceShopUnifiedLoggingModule then var5.gridRef else nil,
-				onAbsoluteSizeChanged = if fFlagEnableInExperienceShopUnifiedLoggingModule then function(_)
-					-- upvalues: var5 (ref)
-					var5.onLayoutChange()
+			Content = ReactModule.createElement(View, {
+				tag = if IsShowRobuxTermsDisclosure then "col gap-medium size-full-0 auto-y padding-x-xlarge padding-bottom-xlarge" else "size-full-0 auto-y padding-x-xlarge padding-bottom-xlarge padding-top-medium",
+				ref = if FFlagEnableInExperienceShopUnifiedLoggingModule then UseShopImpressionsDetectorModuleResult.gridRef else nil,
+				onAbsoluteSizeChanged = if FFlagEnableInExperienceShopUnifiedLoggingModule then function(_) --[[ Line: 83 ]]
+					-- upvalues: UseShopImpressionsDetectorModuleResult (copy)
+					UseShopImpressionsDetectorModuleResult.onLayoutChange()
 				end else nil
 			}, {
-				Disclosure = if var4 and var1 then reactModule.createElement(var1, {
-					LayoutOrder = 1,
-					isMobile = not isSubjectToDesktopPolicies()
-				}) else nil,
-				Grid = reactModule.createElement(itemGridModule, {
+				Disclosure = if IsShowRobuxTermsDisclosure and RobuxTermsDisclosureModule then ReactModule.createElement(RobuxTermsDisclosureModule, { LayoutOrder = 1, isMobile = Inverted }) else nil,
+				Grid = ReactModule.createElement(ItemGridModule, {
 					gap = "gap-large",
-					LayoutOrder = if var4 then 2 else nil,
-					items = p1.items,
-					itemsPerRow = p1.itemsPerRow,
-					sectionId = p1.sectionId,
-					onItemActivated = p1.onItemActivated,
-					renderTile = p1.renderTile,
-					isFeaturedDoubleWidthRobux = p1.isFeaturedDoubleWidthRobux,
-					onGridLayoutChange = if fFlagEnableInExperienceShopUnifiedLoggingModule then var5.onLayoutChange else nil
+					LayoutOrder = if IsShowRobuxTermsDisclosure then 2 else nil,
+					items = Frame.items,
+					itemsPerRow = Frame.itemsPerRow,
+					sectionId = Frame.sectionId,
+					onItemActivated = Frame.onItemActivated,
+					renderTile = Frame.renderTile,
+					isFeaturedDoubleWidthRobux = Frame.isFeaturedDoubleWidthRobux,
+					onGridLayoutChange = if FFlagEnableInExperienceShopUnifiedLoggingModule then UseShopImpressionsDetectorModuleResult.onLayoutChange else nil
 				})
 			})
 		}),
-		ImpressionsDetector = if fFlagEnableInExperienceShopUnifiedLoggingModule then var5.impressionsDetector else nil
+		ImpressionsDetector = if FFlagEnableInExperienceShopUnifiedLoggingModule then UseShopImpressionsDetectorModuleResult.impressionsDetector else nil
 	})
 end

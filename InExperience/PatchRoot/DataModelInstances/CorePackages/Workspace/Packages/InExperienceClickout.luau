@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.InExperienceClickout.InExperienceClickout)
+﻿return (require(script.Parent._Workspace.InExperienceClickout.InExperienceClickout))

@@ -1,26 +1,25 @@
-﻿local parent = script:FindFirstAncestor("RobloxApolloClient").Parent
-local apolloClientModule = require(parent.ApolloClient)
-local apolloLocalStateModule = require(parent.ApolloLocalState)
-local graphQLServer = require(parent.GraphQLServer).GraphQLServer
-local apolloClient = apolloClientModule.ApolloClient
-local httpLink = apolloClientModule.HttpLink
-local inMemoryCache = apolloClientModule.InMemoryCache
-local typePolicies = apolloLocalStateModule.typePolicies
+﻿local Parent = script:FindFirstAncestor("RobloxApolloClient").Parent
+local ApolloClientModule = require(Parent.ApolloClient)
+local GraphQLServer = require(Parent.GraphQLServer).GraphQLServer
+local ApolloClient = ApolloClientModule.ApolloClient
+local HttpLink = ApolloClientModule.HttpLink
+local InMemoryCache = ApolloClientModule.InMemoryCache
+local TypePolicies = require(Parent.ApolloLocalState).typePolicies
 
-function initalizeApolloClient(p1)
-	-- upvalues: graphQLServer (ref), httpLink (ref), inMemoryCache (ref), typePolicies (ref), apolloClient (ref)
-	local var1 = graphQLServer.new(p1)
+function initalizeApolloClient(p1) --[[ Line: 14 ]]
+	-- upvalues: GraphQLServer (copy), HttpLink (copy), InMemoryCache (copy), TypePolicies (copy), ApolloClient (copy)
+	local NewGraphQLServer = GraphQLServer.new(p1)
 	
-	return apolloClient.new({
-		link = httpLink.new({
+	return (ApolloClient.new({
+		link = HttpLink.new({
 			uri = "/api",
-			fetch = function(_, p2)
-				-- upvalues: var1 (ref)
-				return var1:fetchLocal(p2)
+			fetch = function(_, p2) --[[ Line: 18 ]]
+				-- upvalues: NewGraphQLServer (copy)
+				return NewGraphQLServer:fetchLocal(p2)
 			end
 		}),
-		cache = inMemoryCache.new({ typePolicies = typePolicies })
-	})
+		cache = InMemoryCache.new({ typePolicies = TypePolicies })
+	}))
 end
 
 return initalizeApolloClient

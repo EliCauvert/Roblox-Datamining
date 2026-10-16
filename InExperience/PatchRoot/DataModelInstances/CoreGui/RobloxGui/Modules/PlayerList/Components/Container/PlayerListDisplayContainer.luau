@@ -1,24 +1,25 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local parent = script.Parent.Parent.Parent
-local reactModule = require(corePackagesService.Packages.React)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local signalsReactModule = require(corePackagesService.Packages.SignalsReact)
-local playerListModule = require(corePackagesService.Workspace.Packages.PlayerList)
-local _ = require(corePackagesService.Workspace.Packages.LeaderboardStore)
-local useLeaderboardStore = playerListModule.Hooks.useLeaderboardStore
-local playerListDisplayViewModule = require(parent.Components.PresentationCommon.PlayerListDisplayView)
-local setPlayerListVisibilityModule = require(parent.Actions.SetPlayerListVisibility)
-local fFlagAddNewPlayerListFocusNav = playerListModule.Flags.FFlagAddNewPlayerListFocusNav
+﻿local CorePackages = game:GetService("CorePackages")
+local Parent = script.Parent.Parent.Parent
+local ReactModule = require(CorePackages.Packages.React)
+local SignalsReactModule = require(CorePackages.Packages.SignalsReact)
+local PlayerListModule = require(CorePackages.Workspace.Packages.PlayerList)
+local _ = require(CorePackages.Workspace.Packages.LeaderboardStore)
+local UseLeaderboardStoreFunction = PlayerListModule.Hooks.useLeaderboardStore
+local PlayerListDisplayViewModule = require(Parent.Components.PresentationCommon.PlayerListDisplayView)
+local SetPlayerListVisibilityModule = require(Parent.Actions.SetPlayerListVisibility)
+local FFlagAddNewPlayerListFocusNav = PlayerListModule.Flags.FFlagAddNewPlayerListFocusNav
 
-local function PlayerListDisplayContainer(p1)
-	-- upvalues: useLeaderboardStore (ref), signalsReactModule (ref), reactModule (ref), playerListDisplayViewModule (ref)
-	local var1 = useLeaderboardStore()
-	local teamList = var1.getTeamList()
+local function PlayerListDisplayContainer(p1) --[[ Line: 46 ]]
+	-- upvalues: UseLeaderboardStoreFunction (copy), SignalsReactModule (copy), ReactModule (copy), PlayerListDisplayViewModule (copy)
+	local UseLeaderboardStoreResult = UseLeaderboardStoreFunction()
+	local TeamList = UseLeaderboardStoreResult.getTeamList()
+	local UseSignalStateResult = SignalsReactModule.useSignalState(UseLeaderboardStoreResult.getGameStatsList().getCount)
+	local UseSignalStateResult1 = SignalsReactModule.useSignalState(TeamList.getCount)
 	
-	return if var1 then reactModule.createElement(reactModule.Fragment, nil, reactModule.createElement(playerListDisplayViewModule, {
-		teamList = teamList,
-		teamListCount = signalsReactModule.useSignalState(teamList.getCount),
-		gameStatsCount = signalsReactModule.useSignalState(var1.getGameStatsList().getCount),
+	return if UseLeaderboardStoreResult then ReactModule.createElement(ReactModule.Fragment, nil, ReactModule.createElement(PlayerListDisplayViewModule, {
+		teamList = TeamList,
+		teamListCount = UseSignalStateResult1,
+		gameStatsCount = UseSignalStateResult,
 		entrySizeX = p1.entrySize,
 		screenSizeY = p1.screenSizeY,
 		playerIconInfo = p1.playerIconInfo,
@@ -34,10 +35,10 @@ local function PlayerListDisplayContainer(p1)
 	})) else nil
 end
 
-return reactModule.memo(roactRoduxModule.connect(function(p1)
-	-- upvalues: fFlagAddNewPlayerListFocusNav (ref)
+return ReactModule.memo(require(CorePackages.Packages.RoactRodux).connect(function(p1) --[[ Line: 93 | Named "mapStateToProps" ]]
+	-- upvalues: FFlagAddNewPlayerListFocusNav (copy)
 	return {
-		isVisible = if fFlagAddNewPlayerListFocusNav then nil else p1.displayOptions.isVisible,
+		isVisible = if FFlagAddNewPlayerListFocusNav then nil else p1.displayOptions.isVisible,
 		isMinimized = p1.displayOptions.isMinimized,
 		isDirectionalPreferred = p1.displayOptions.isTenFootInterface,
 		isUsingGamepad = p1.displayOptions.isUsingGamepad,
@@ -47,15 +48,15 @@ return reactModule.memo(roactRoduxModule.connect(function(p1)
 		dropDownPlayer = p1.playerDropDown.selectedPlayer,
 		dropDownVisible = p1.playerDropDown.isVisible
 	}
-end, function(p1)
-	-- upvalues: setPlayerListVisibilityModule (ref)
+end, function(Callback) --[[ Line: 85 | Named "mapDispatchToProps" ]]
+	-- upvalues: SetPlayerListVisibilityModule (copy)
 	return {
-		dismissPlayerList = function()
-			-- upvalues: p1 (ref), setPlayerListVisibilityModule (copy)
-			return p1(setPlayerListVisibilityModule(false))
+		dismissPlayerList = function() --[[ Line: 87 ]]
+			-- upvalues: Callback (copy), SetPlayerListVisibilityModule (upval)
+			return Callback(SetPlayerListVisibilityModule(false))
 		end
 	}
-end)(function(p1)
-	-- upvalues: useLeaderboardStore (ref), PlayerListDisplayContainer (ref)
-	return if useLeaderboardStore() then PlayerListDisplayContainer(p1) else nil
+end)(function(p1) --[[ Line: 77 | Named "PlayerListDisplayContainerWithLeaderboardStore" ]]
+	-- upvalues: UseLeaderboardStoreFunction (copy), PlayerListDisplayContainer (copy)
+	return if UseLeaderboardStoreFunction() then PlayerListDisplayContainer(p1) else nil
 end))

@@ -1,114 +1,109 @@
-﻿local playersService = game:GetService("Players")
-local socialService = game:GetService("SocialService")
-local contextActionService = game:GetService("ContextActionService")
-local gameInvite = script:FindFirstAncestor("GameInvite")
-local parent = gameInvite.Parent
-local utils = gameInvite.utils
-local _ = require(gameInvite.gameInviteModalType)
-local cryoModule = require(parent.Cryo)
-local gameInviteAnalyticsManagerModule = require(gameInvite.analytics.GameInviteAnalyticsManager)
-local getCustomizedInvitePromptParamsModule = require(utils.getCustomizedInvitePromptParams)
-local getCanSendAndCanCustomizeInvitesModule = require(utils.getCanSendAndCanCustomizeInvites)
-local isTriggerDDI = require(utils.gameInviteModalHelper).isTriggerDDI
+﻿local Players = game:GetService("Players")
+local SocialService = game:GetService("SocialService")
+local ContextActionService = game:GetService("ContextActionService")
+local GameInvite = script:FindFirstAncestor("GameInvite")
+local Parent = GameInvite.Parent
+local Utils = GameInvite.utils
+local _ = require(GameInvite.gameInviteModalType)
+local CryoModule = require(Parent.Cryo)
+local GameInviteAnalyticsManagerModule = require(GameInvite.analytics.GameInviteAnalyticsManager)
+local GetCustomizedInvitePromptParamsModule = require(Utils.getCustomizedInvitePromptParams)
+local GetCanSendAndCanCustomizeInvitesModule = require(Utils.getCanSendAndCanCustomizeInvites)
+local IsTriggerDDIFunction = require(Utils.gameInviteModalHelper).isTriggerDDI
 game:DefineFastFlag("GameInviteModalAnalyticsEmptyEventContextFix", false)
-local fFlagGameInviteOpenModalWithoutBlockingOnCanPrompt = require(parent.SharedFlags).FFlagGameInviteOpenModalWithoutBlockingOnCanPrompt
-local t = {}
-t.__index = t
+local FFlagGameInviteOpenModalWithoutBlockingOnCanPrompt = require(Parent.SharedFlags).FFlagGameInviteOpenModalWithoutBlockingOnCanPrompt
+local Module = {}
+Module.__index = Module
 
-function t.new()
-	-- upvalues: t (ref)
-	return setmetatable({}, t)
+function Module.new() --[[ Line: 25 ]]
+	-- upvalues: Module (copy)
+	return (setmetatable({}, Module))
 end
 
-t.ToggleGameInviteModalEvent = Instance.new("BindableEvent")
-t.isModalOpen = false
-t.openTrigger = nil
-t.customParams = nil
-t.placeId = nil
-t.openSession = 0
+Module.ToggleGameInviteModalEvent = Instance.new("BindableEvent")
+Module.isModalOpen = false
+Module.openTrigger = nil
+Module.customParams = nil
+Module.placeId = nil
+Module.openSession = 0
 
-local function openDeveloperInviteModalNonBlocking(p1, p2, p3)
-	-- upvalues: contextActionService (ref), getCustomizedInvitePromptParamsModule (ref), getCanSendAndCanCustomizeInvitesModule (ref), cryoModule (ref), gameInviteAnalyticsManagerModule (ref)
-	local openSession = p1.openSession
+local function openDeveloperInviteModalNonBlocking(p1, p2, p3) --[[ Line: 43 ]]
+	-- upvalues: ContextActionService (copy), GetCustomizedInvitePromptParamsModule (copy), GetCanSendAndCanCustomizeInvitesModule (copy), CryoModule (copy), GameInviteAnalyticsManagerModule (copy)
+	local OpenSession = p1.openSession
 	p1.customParams = nil
 	p1.ToggleGameInviteModalEvent:Fire(true, false, p2)
-	contextActionService:BindCoreAction("hideGameInviteModal", function(_, p4)
-		-- upvalues: p1 (ref)
-		if p4 == Enum.UserInputState.Begin then
+	ContextActionService:BindCoreAction("hideGameInviteModal", function(_, UserInputState) --[[ Line: 48 ]]
+		-- upvalues: p1 (copy)
+		if UserInputState == Enum.UserInputState.Begin then
 			p1:closeModal()
 		end
 	end, false, Enum.KeyCode.ButtonB, Enum.KeyCode.Backspace)
-	task.spawn(function()
-		-- upvalues: getCustomizedInvitePromptParamsModule (copy), p3 (ref), p2 (ref), getCanSendAndCanCustomizeInvitesModule (copy), p1 (ref), openSession (ref), cryoModule (copy), gameInviteAnalyticsManagerModule (copy)
-		local var1 = getCustomizedInvitePromptParamsModule(p3, p2.trigger, getCanSendAndCanCustomizeInvitesModule)
+	task.spawn(function() --[[ Line: 54 ]]
+		-- upvalues: GetCustomizedInvitePromptParamsModule (upval), p3 (copy), p2 (copy), GetCanSendAndCanCustomizeInvitesModule (upval), p1 (copy), OpenSession (copy), CryoModule (upval), GameInviteAnalyticsManagerModule (upval)
+		local CustomizedInvitePromptParamsModule = GetCustomizedInvitePromptParamsModule(p3, p2.trigger, GetCanSendAndCanCustomizeInvitesModule)
 		
-		if not p1.isModalOpen or p1.openSession ~= openSession then return end
-		p1.customParams = var1
+		if not p1.isModalOpen or p1.openSession ~= OpenSession then return end
+		p1.customParams = CustomizedInvitePromptParamsModule
 		
-		if not var1 then
+		if not CustomizedInvitePromptParamsModule then
 			p1:closeModal()
 			
 			return
 		end
-		local var2 = var1.launchData ~= nil and var1.launchData ~= ""
-		local var3 = var1.promptMessage ~= nil and var1.promptMessage ~= ""
-		local var4 = var1.inviteMessageId ~= nil and var1.inviteMessageId ~= ""
+		local IsNotLaunchDataMatch: boolean = CustomizedInvitePromptParamsModule.launchData ~= nil and CustomizedInvitePromptParamsModule.launchData ~= ""
+		local IsNotPromptMessageMatch: boolean = CustomizedInvitePromptParamsModule.promptMessage ~= nil and CustomizedInvitePromptParamsModule.promptMessage ~= ""
+		local IsNotInviteMessageIdMatch: boolean = CustomizedInvitePromptParamsModule.inviteMessageId ~= nil and CustomizedInvitePromptParamsModule.inviteMessageId ~= ""
 		
-		if var2 or var3 or var4 then
-			p1.ToggleGameInviteModalEvent:Fire(true, false, cryoModule.Dictionary.join(p2, var1))
+		if IsNotLaunchDataMatch or IsNotPromptMessageMatch or IsNotInviteMessageIdMatch then
+			p1.ToggleGameInviteModalEvent:Fire(true, false, CryoModule.Dictionary.join(p2, CustomizedInvitePromptParamsModule))
 		end
-		gameInviteAnalyticsManagerModule:sendGameInviteModalEvent(p2.trigger, {
-			action_type = gameInviteAnalyticsManagerModule.ActionType.ModalOpen,
-			is_launch_data_provided = var2,
-			is_prompt_customized = var3,
-			is_invite_message_id_provided = var4,
+		GameInviteAnalyticsManagerModule:sendGameInviteModalEvent(p2.trigger, {
+			action_type = GameInviteAnalyticsManagerModule.ActionType.ModalOpen,
+			is_launch_data_provided = IsNotLaunchDataMatch,
+			is_prompt_customized = IsNotPromptMessageMatch,
+			is_invite_message_id_provided = IsNotInviteMessageIdMatch,
 			place_id = p2.rootPlaceId
 		})
 	end)
 end
 
-function t:openModal(p1, p2)
-	-- upvalues: fFlagGameInviteOpenModalWithoutBlockingOnCanPrompt (ref), isTriggerDDI (ref), openDeveloperInviteModalNonBlocking (ref), getCustomizedInvitePromptParamsModule (ref), getCanSendAndCanCustomizeInvitesModule (ref), cryoModule (ref), gameInviteAnalyticsManagerModule (ref), contextActionService (ref)
-	if self.isModalOpen then
-		if isTriggerDDI(p1.trigger) then
-			self:invokeGameInvitePromptClosed()
-		end
-		return
-	else
+function Module:openModal(p1, p2) --[[ Line: 90 ]]
+	-- upvalues: FFlagGameInviteOpenModalWithoutBlockingOnCanPrompt (copy), IsTriggerDDIFunction (copy), openDeveloperInviteModalNonBlocking (copy), GetCustomizedInvitePromptParamsModule (copy), GetCanSendAndCanCustomizeInvitesModule (copy), CryoModule (copy), GameInviteAnalyticsManagerModule (copy), ContextActionService (copy)
+	if not self.isModalOpen then
 		self.isModalOpen = true
 		
-		if fFlagGameInviteOpenModalWithoutBlockingOnCanPrompt then
+		if FFlagGameInviteOpenModalWithoutBlockingOnCanPrompt then
 			self.openSession += 1
 		end
 		self.openTrigger = p1.trigger
 		self.placeId = p1.rootPlaceId or tostring(game.PlaceId)
 		
-		if isTriggerDDI(p1.trigger) and fFlagGameInviteOpenModalWithoutBlockingOnCanPrompt then
+		if IsTriggerDDIFunction(p1.trigger) and FFlagGameInviteOpenModalWithoutBlockingOnCanPrompt then
 			openDeveloperInviteModalNonBlocking(self, p1, p2)
 			
 			return
 		end
-		local var1 = false
-		local var2 = false
-		local var3 = false
+		local Is_launch_data_provided = false
+		local Is_prompt_customized = false
+		local Is_invite_message_id_provided = false
 		
-		if isTriggerDDI(p1.trigger) then
+		if IsTriggerDDIFunction(p1.trigger) then
 			self.ToggleGameInviteModalEvent:Fire(true, true, p1)
-			local var4 = getCustomizedInvitePromptParamsModule(p2, p1.trigger, getCanSendAndCanCustomizeInvitesModule)
-			self.customParams = var4
+			local CustomizedInvitePromptParamsModule = GetCustomizedInvitePromptParamsModule(p2, p1.trigger, GetCanSendAndCanCustomizeInvitesModule)
+			self.customParams = CustomizedInvitePromptParamsModule
 			
-			if var4 then
-				var1 = var4.launchData ~= nil and var4.launchData ~= ""
-				var2 = var4.promptMessage ~= nil and var4.promptMessage ~= ""
-				var3 = var4.inviteMessageId ~= nil and var4.inviteMessageId ~= ""
-				self.ToggleGameInviteModalEvent:Fire(true, false, cryoModule.Dictionary.join(p1, var4))
+			if CustomizedInvitePromptParamsModule then
+				Is_launch_data_provided = CustomizedInvitePromptParamsModule.launchData ~= nil and CustomizedInvitePromptParamsModule.launchData ~= ""
+				Is_prompt_customized = CustomizedInvitePromptParamsModule.promptMessage ~= nil and CustomizedInvitePromptParamsModule.promptMessage ~= ""
+				Is_invite_message_id_provided = CustomizedInvitePromptParamsModule.inviteMessageId ~= nil and CustomizedInvitePromptParamsModule.inviteMessageId ~= ""
+				self.ToggleGameInviteModalEvent:Fire(true, false, CryoModule.Dictionary.join(p1, CustomizedInvitePromptParamsModule))
 				
 				if game:GetFastFlag("GameInviteModalAnalyticsEmptyEventContextFix") then
-					gameInviteAnalyticsManagerModule:sendGameInviteModalEvent(p1.trigger, {
-						action_type = gameInviteAnalyticsManagerModule.ActionType.ModalOpen,
-						is_launch_data_provided = var1,
-						is_prompt_customized = var2,
-						is_invite_message_id_provided = var3,
+					GameInviteAnalyticsManagerModule:sendGameInviteModalEvent(p1.trigger, {
+						action_type = GameInviteAnalyticsManagerModule.ActionType.ModalOpen,
+						is_launch_data_provided = Is_launch_data_provided,
+						is_prompt_customized = Is_prompt_customized,
+						is_invite_message_id_provided = Is_invite_message_id_provided,
 						place_id = p1.rootPlaceId,
 						hideCloseButton = p1.hideCloseButton
 					})
@@ -120,60 +115,64 @@ function t:openModal(p1, p2)
 			self.ToggleGameInviteModalEvent:Fire(true, false, p1)
 			
 			if game:GetFastFlag("GameInviteModalAnalyticsEmptyEventContextFix") then
-				gameInviteAnalyticsManagerModule:sendGameInviteModalEvent(p1.trigger, {
-					action_type = gameInviteAnalyticsManagerModule.ActionType.ModalOpen,
-					is_launch_data_provided = var1,
-					is_prompt_customized = var2,
-					is_invite_message_id_provided = var3,
+				GameInviteAnalyticsManagerModule:sendGameInviteModalEvent(p1.trigger, {
+					action_type = GameInviteAnalyticsManagerModule.ActionType.ModalOpen,
+					is_launch_data_provided = Is_launch_data_provided,
+					is_prompt_customized = Is_prompt_customized,
+					is_invite_message_id_provided = Is_invite_message_id_provided,
 					place_id = p1.rootPlaceId
 				})
 			end
 		end
 		if not game:GetFastFlag("GameInviteModalAnalyticsEmptyEventContextFix") then
-			gameInviteAnalyticsManagerModule:sendGameInviteModalEvent(p1.trigger, {
-				action_type = gameInviteAnalyticsManagerModule.ActionType.ModalOpen,
-				is_launch_data_provided = var1,
-				is_prompt_customized = var2,
-				is_invite_message_id_provided = var3,
+			GameInviteAnalyticsManagerModule:sendGameInviteModalEvent(p1.trigger, {
+				action_type = GameInviteAnalyticsManagerModule.ActionType.ModalOpen,
+				is_launch_data_provided = Is_launch_data_provided,
+				is_prompt_customized = Is_prompt_customized,
+				is_invite_message_id_provided = Is_invite_message_id_provided,
 				place_id = p1.rootPlaceId
 			})
 		end
-		contextActionService:BindCoreAction("hideGameInviteModal", function(_, p3)
-			-- upvalues: self (ref)
-			if p3 == Enum.UserInputState.Begin then
+		ContextActionService:BindCoreAction("hideGameInviteModal", function(_, UserInputState) --[[ Line: 157 ]]
+			-- upvalues: self (copy)
+			if UserInputState == Enum.UserInputState.Begin then
 				self:closeModal()
 			end
 		end, false, Enum.KeyCode.ButtonB, Enum.KeyCode.Backspace)
+		
+		return
+	elseif IsTriggerDDIFunction(p1.trigger) then
+		self:invokeGameInvitePromptClosed()
 	end
 end
 
-function t:closeModal(p1)
-	-- upvalues: isTriggerDDI (ref), gameInviteAnalyticsManagerModule (ref), contextActionService (ref), fFlagGameInviteOpenModalWithoutBlockingOnCanPrompt (ref)
+function Module:closeModal(Max_recipient_row_number) --[[ Line: 170 ]]
+	-- upvalues: IsTriggerDDIFunction (copy), GameInviteAnalyticsManagerModule (copy), ContextActionService (copy), FFlagGameInviteOpenModalWithoutBlockingOnCanPrompt (copy)
 	if self.isModalOpen then
-		local var1 = false
-		local var2 = false
-		local var3 = false
+		local IsNotLaunchDataMatch = false
+		local IsNotPromptMessageMatch = false
+		local IsNotInviteMessageIdMatch = false
 		
-		if isTriggerDDI(self.openTrigger) then
+		if IsTriggerDDIFunction(self.openTrigger) then
 			if self.customParams then
-				var1 = self.customParams.launchData ~= nil and self.customParams.launchData ~= ""
-				var2 = self.customParams.promptMessage ~= nil and self.customParams.promptMessage ~= ""
-				var3 = self.customParams.inviteMessageId ~= nil and self.customParams.inviteMessageId ~= ""
+				IsNotLaunchDataMatch = self.customParams.launchData ~= nil and self.customParams.launchData ~= ""
+				IsNotPromptMessageMatch = self.customParams.promptMessage ~= nil and self.customParams.promptMessage ~= ""
+				IsNotInviteMessageIdMatch = self.customParams.inviteMessageId ~= nil and self.customParams.inviteMessageId ~= ""
 			end
 			self:invokeGameInvitePromptClosed()
 		end
-		gameInviteAnalyticsManagerModule:sendGameInviteModalEvent(self.openTrigger, {
-			action_type = gameInviteAnalyticsManagerModule.ActionType.ModalClose,
-			is_launch_data_provided = var1,
-			is_prompt_customized = var2,
-			is_invite_message_id_provided = var3,
-			max_recipient_row_number = p1,
+		GameInviteAnalyticsManagerModule:sendGameInviteModalEvent(self.openTrigger, {
+			action_type = GameInviteAnalyticsManagerModule.ActionType.ModalClose,
+			is_launch_data_provided = IsNotLaunchDataMatch,
+			is_prompt_customized = IsNotPromptMessageMatch,
+			is_invite_message_id_provided = IsNotInviteMessageIdMatch,
+			max_recipient_row_number = Max_recipient_row_number,
 			place_id = self.placeId
 		})
-		contextActionService:UnbindCoreAction("hideGameInviteModal")
+		ContextActionService:UnbindCoreAction("hideGameInviteModal")
 		self.isModalOpen = false
 		
-		if fFlagGameInviteOpenModalWithoutBlockingOnCanPrompt then
+		if FFlagGameInviteOpenModalWithoutBlockingOnCanPrompt then
 			self.openSession += 1
 		end
 		self.openTrigger = nil
@@ -182,15 +181,15 @@ function t:closeModal(p1)
 	self.ToggleGameInviteModalEvent:Fire(false)
 end
 
-function t:isGameModalOpen()
+function Module:isGameModalOpen() --[[ Line: 207 ]]
 	return self.isModalOpen
 end
 
-function t.invokeGameInvitePromptClosed(_)
-	-- upvalues: socialService (ref), playersService (ref)
-	if socialService and playersService.LocalPlayer then
-		socialService:InvokeGameInvitePromptClosed(playersService.LocalPlayer, {})
+function Module:invokeGameInvitePromptClosed() --[[ Line: 211 ]]
+	-- upvalues: SocialService (copy), Players (copy)
+	if SocialService and Players.LocalPlayer then
+		SocialService:InvokeGameInvitePromptClosed(Players.LocalPlayer, {})
 	end
 end
 
-return t.new()
+return Module.new()

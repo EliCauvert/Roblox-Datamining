@@ -1,86 +1,86 @@
-﻿local changeHistoryService = game:GetService("ChangeHistoryService")
-local reactUtils = script:FindFirstAncestor("ReactUtils")
-local reactModule = require(reactUtils.Parent.React)
-local LUAU_ANALYZE_ERRORModule = require(reactUtils.LUAU_ANALYZE_ERROR)
+﻿local ChangeHistoryService = game:GetService("ChangeHistoryService")
+local ReactUtils = script:FindFirstAncestor("ReactUtils")
+local ReactModule = require(ReactUtils.Parent.React)
+local LUAUANALYZEERRORModule = require(ReactUtils.LUAU_ANALYZE_ERROR)
 
-return function(p1, p2, p3)
-	-- upvalues: reactModule (ref), changeHistoryService (ref), LUAU_ANALYZE_ERRORModule (ref)
-	local var1 = reactModule.useRef(p1)
-	local var2 = reactModule.useRef({})
-	local var3 = reactModule.useRef({})
-	reactModule.useEffect(function()
-		-- upvalues: changeHistoryService (copy), var2 (ref), var3 (ref), LUAU_ANALYZE_ERRORModule (copy), var1 (ref), p2 (ref)
-		local onUndoConnection = changeHistoryService.OnUndo:Connect(function(p4)
-			-- upvalues: var2 (copy), var3 (copy), LUAU_ANALYZE_ERRORModule (copy), var1 (copy), p2 (copy)
-			local current = var2.current
-			local current_1 = var3.current
-			assert(current ~= nil, LUAU_ANALYZE_ERRORModule)
-			assert(current_1 ~= nil, LUAU_ANALYZE_ERRORModule)
+return function(p1, Callback, p2) --[[ Line: 11 | Named "useHistory" ]]
+	-- upvalues: ReactModule (copy), ChangeHistoryService (copy), LUAUANALYZEERRORModule (copy)
+	local UseRefResult = ReactModule.useRef(p1)
+	local UseRefResult1 = ReactModule.useRef({})
+	local UseRefResult2 = ReactModule.useRef({})
+	ReactModule.useEffect(function() --[[ Line: 16 ]]
+		-- upvalues: ChangeHistoryService (upval), UseRefResult1 (copy), UseRefResult2 (copy), LUAUANALYZEERRORModule (upval), UseRefResult (copy), Callback (copy)
+		local OnUndoConnection = ChangeHistoryService.OnUndo:Connect(function(Waypoint) --[[ Line: 17 ]]
+			-- upvalues: UseRefResult1 (upval), UseRefResult2 (upval), LUAUANALYZEERRORModule (upval), UseRefResult (upval), Callback (upval)
+			local Current = UseRefResult1.current
+			local Current1 = UseRefResult2.current
+			assert(Current ~= nil, LUAUANALYZEERRORModule)
+			assert(Current1 ~= nil, LUAUANALYZEERRORModule)
 			
-			if not current[p4] or #current[p4] == 0 then return end
-			if not current_1[p4] then
-				current_1[p4] = {}
+			if not Current[Waypoint] or #Current[Waypoint] == 0 then return end
+			if not Current1[Waypoint] then
+				Current1[Waypoint] = {}
 			end
-			local count = #current[p4]
-			local var4 = current[p4][count]
-			table.insert(current_1[p4], var1.current)
-			table.remove(current[p4], count)
-			var1.current = var4
-			p2(var4)
-			var2.current = current
-			var3.current = current_1
+			local Count = #Current[Waypoint]
+			local CurrentEntry = Current[Waypoint][Count]
+			table.insert(Current1[Waypoint], UseRefResult.current)
+			table.remove(Current[Waypoint], Count)
+			UseRefResult.current = CurrentEntry
+			Callback(CurrentEntry)
+			UseRefResult1.current = Current
+			UseRefResult2.current = Current1
 		end)
-		local onRedoConnection = changeHistoryService.OnRedo:Connect(function(p4)
-			-- upvalues: var2 (copy), var3 (copy), LUAU_ANALYZE_ERRORModule (copy), var1 (copy), p2 (copy)
-			local current = var2.current
-			local current_1 = var3.current
-			assert(current ~= nil, LUAU_ANALYZE_ERRORModule)
-			assert(current_1 ~= nil, LUAU_ANALYZE_ERRORModule)
+		local OnRedoConnection = ChangeHistoryService.OnRedo:Connect(function(Waypoint) --[[ Line: 48 ]]
+			-- upvalues: UseRefResult1 (upval), UseRefResult2 (upval), LUAUANALYZEERRORModule (upval), UseRefResult (upval), Callback (upval)
+			local Current = UseRefResult1.current
+			local Current1 = UseRefResult2.current
+			assert(Current ~= nil, LUAUANALYZEERRORModule)
+			assert(Current1 ~= nil, LUAUANALYZEERRORModule)
 			
-			if current_1[p4] and #current_1[p4] ~= 0 then
-				local count = #current_1[p4]
-				local var4 = current_1[p4][count]
-				table.insert(current[p4], var1.current)
-				table.remove(current_1[p4], count)
-				assert(var4 ~= nil, LUAU_ANALYZE_ERRORModule)
-				var1.current = var4
-				p2(var4)
-				var2.current = current
-				var3.current = current_1
+			if Current1[Waypoint] and #Current1[Waypoint] ~= 0 then
+				local Count = #Current1[Waypoint]
+				local CurrentEntry = Current1[Waypoint][Count]
+				table.insert(Current[Waypoint], UseRefResult.current)
+				table.remove(Current1[Waypoint], Count)
+				assert(CurrentEntry ~= nil, LUAUANALYZEERRORModule)
+				UseRefResult.current = CurrentEntry
+				Callback(CurrentEntry)
+				UseRefResult1.current = Current
+				UseRefResult2.current = Current1
 				
 				return
 			end
 		end)
 		
-		return function()
-			-- upvalues: onUndoConnection (ref), onRedoConnection (ref)
-			onUndoConnection:Disconnect()
-			onRedoConnection:Disconnect()
+		return function() --[[ Line: 76 ]]
+			-- upvalues: OnUndoConnection (copy), OnRedoConnection (copy)
+			OnUndoConnection:Disconnect()
+			OnRedoConnection:Disconnect()
 		end
-	end, p3)
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), var3 (ref)
-		var2.current = {}
-		var3.current = {}
-	end, p3)
+	end, p2)
+	ReactModule.useEffect(function() --[[ Line: 82 ]]
+		-- upvalues: UseRefResult1 (copy), UseRefResult2 (copy)
+		UseRefResult1.current = {}
+		UseRefResult2.current = {}
+	end, p2)
 	
-	return reactModule.useCallback(function(p4, p5)
-		-- upvalues: var2 (ref), LUAU_ANALYZE_ERRORModule (copy), var3 (ref), changeHistoryService (copy), var1 (ref)
-		local current = var2.current
-		assert(current ~= nil, LUAU_ANALYZE_ERRORModule)
+	return (ReactModule.useCallback(function(Key, Current) --[[ Line: 87 ]]
+		-- upvalues: UseRefResult1 (copy), LUAUANALYZEERRORModule (upval), UseRefResult2 (copy), ChangeHistoryService (upval), UseRefResult (copy)
+		local Current1 = UseRefResult1.current
+		assert(Current1 ~= nil, LUAUANALYZEERRORModule)
 		
-		if not current[p4] then
-			current[p4] = {}
+		if not Current1[Key] then
+			Current1[Key] = {}
 		end
-		var3.current = {}
-		changeHistoryService:SetWaypoint(p4)
+		UseRefResult2.current = {}
+		ChangeHistoryService:SetWaypoint(Key)
 		
-		if typeof(var1.current) == "table" then
-			table.insert(current[p4], table.clone(var1.current))
+		if typeof(UseRefResult.current) == "table" then
+			table.insert(Current1[Key], table.clone(UseRefResult.current))
 		else
-			table.insert(current[p4], var1.current)
+			table.insert(Current1[Key], UseRefResult.current)
 		end
-		var1.current = p5
-		var2.current = current
-	end, p3)
+		UseRefResult.current = Current
+		UseRefResult1.current = Current1
+	end, p2))
 end

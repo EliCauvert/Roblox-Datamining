@@ -1,56 +1,50 @@
-﻿local parent = script:FindFirstAncestor("MomentsCreation").Parent
-local _ = require(parent.MomentsTypes)
-local getFFlagMomentsStickerButton = require(parent.MomentsCommon).Flags.GetFFlagMomentsStickerButton
-local _ = {
-	PrimaryAsset = "PrimaryAsset",
-	Music = "Music",
-	Sticker = "Sticker"
-}
+﻿local Parent = script:FindFirstAncestor("MomentsCreation").Parent
+local _ = require(Parent.MomentsTypes)
+local GetFFlagMomentsStickerButtonFunction = require(Parent.MomentsCommon).Flags.GetFFlagMomentsStickerButton
 
-return function(p1, p2)
-	-- upvalues: getFFlagMomentsStickerButton (ref)
-	local assetTotalDuration
-	local edits = p2.edits
-	local t = {}
-	local _ = 0
+return function(p1, p2, p3) --[[ Line: 38 | Named "makeRegistrationInfo" ]]
+	-- upvalues: GetFFlagMomentsStickerButtonFunction (copy)
+	local Edits = p2.edits
+	local List = {}
+	local AssetTotalDuration = nil
 	
-	if edits and edits.trim then
-		table.insert(t, {
+	if Edits and Edits.trim then
+		table.insert(List, {
 			AssetId = 0,
 			Description = "PrimaryAsset",
-			TrimStartTime = edits.trim.startTime
+			TrimStartTime = Edits.trim.startTime
 		})
-		assetTotalDuration = edits.trim.endTime - edits.trim.startTime
+		AssetTotalDuration = Edits.trim.endTime - Edits.trim.startTime
 	else
-		table.insert(t, {
+		table.insert(List, {
 			AssetId = 0,
 			Description = "PrimaryAsset",
 			TrimStartTime = 0
 		})
-		assetTotalDuration = p2.assetTotalDuration
+		AssetTotalDuration = p2.assetTotalDuration
 	end
-	if edits and edits.music then
-		table.insert(t, {
+	if Edits and Edits.music then
+		table.insert(List, {
 			Description = "Music",
-			AssetId = edits.music.assetId,
-			TrimStartTime = edits.music.startTime
+			AssetId = Edits.music.assetId,
+			TrimStartTime = Edits.music.startTime
 		})
 	end
-	if getFFlagMomentsStickerButton() and edits and edits.stickerOverlays then
-		for i, v in edits.stickerOverlays do
-			if v.stickerURI then
-				table.insert(t, {
+	if GetFFlagMomentsStickerButtonFunction() and Edits and Edits.stickerOverlays then
+		for _, stickerOverlay in Edits.stickerOverlays do
+			if stickerOverlay.stickerURI then
+				table.insert(List, {
 					AssetId = 0,
 					Description = "Sticker",
-					Text = v.stickerURI
+					Text = stickerOverlay.stickerURI
 				})
 			end
 		end
 	end
 	return {
-		attributes = t,
+		attributes = List,
 		contentType = if p1.CaptureType == Enum.CaptureType.Screenshot then Enum.RecommendationItemContentType.Static else Enum.RecommendationItemContentType.Dynamic,
-		customTags = {},
-		duration = assetTotalDuration
+		customTags = p3 or {},
+		duration = AssetTotalDuration
 	}
 end

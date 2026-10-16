@@ -1,28 +1,30 @@
-﻿local parent = script.Parent.Parent.Parent
-local constantsModule = require(parent.Constants)
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
+﻿local Parent = script.Parent.Parent.Parent
+local ConstantsModule = require(Parent.Constants)
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
 
 return {
 	categories = {
-		validationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
-		validationEnumsModule.UploadCategory.DYNAMIC_HEAD,
-		validationEnumsModule.UploadCategory.LAYERED_CLOTHING,
-		validationEnumsModule.UploadCategory.EYEBROW_EYELASH,
-		validationEnumsModule.UploadCategory.RIGID_ACCESSORY
+		ValidationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
+		ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD,
+		ValidationEnumsModule.UploadCategory.LAYERED_CLOTHING,
+		ValidationEnumsModule.UploadCategory.EYEBROW_EYELASH,
+		ValidationEnumsModule.UploadCategory.RIGID_ACCESSORY
 	},
-	requiredData = { validationEnumsModule.SharedDataMember.rootInstance },
+	requiredData = { ValidationEnumsModule.SharedDataMember.rootInstance },
 	expectedFailures = {},
-	run = function(p1, p2)
-		-- upvalues: constantsModule (ref), errorSourceStringsModule (ref)
-		local rootInstance = p2.rootInstance
-		local descendants = rootInstance:GetDescendants()
-		table.insert(descendants, rootInstance)
+	run = function(p1, p2) --[[ Line: 22 ]]
+		-- upvalues: ConstantsModule (copy), ErrorSourceStringsModule (copy)
+		local RootInstance = p2.rootInstance
+		local Descendants = RootInstance:GetDescendants()
+		table.insert(Descendants, RootInstance)
 		
-		for i, v in descendants do
-			if v:IsA("StringValue") and v.Name == "AvatarPartScaleType" and not constantsModule.AvatarPartScaleTypes[v.Value] then
-				p1:fail(errorSourceStringsModule.Keys.ScaleTypeInvalid, { ParentName = if v.Parent then v.Parent.Name else v.Name })
+		for _, StringValue in Descendants do
+			if StringValue:IsA("StringValue") and StringValue.Name == "AvatarPartScaleType" and not ConstantsModule.AvatarPartScaleTypes[StringValue.Value] then
+				p1:fail(ErrorSourceStringsModule.Keys.ScaleTypeInvalid, {
+					ParentName = if StringValue.Parent then StringValue.Parent.Name else StringValue.Name
+				})
 			end
 		end
 	end

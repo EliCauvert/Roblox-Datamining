@@ -1,45 +1,45 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local parent = dataHydration.Parent
-local httpModule = require(parent.Http)
-local httpClientModule = require(parent.HttpClient)
-local momentsTypesModule = require(parent.MomentsTypes)
-local sharedFlagsModule = require(parent.SharedFlags)
-local _ = require(dataHydration.Moments.MomentsStoreTypes)
-local convertApiMomentsToMomentItemsModule = require(dataHydration.Moments.Util.convertApiMomentsToMomentItems)
-local extractCommentsByFeedItemIdModule = require(dataHydration.Moments.Util.extractCommentsByFeedItemId)
-local extractReactionsByMomentIdModule = require(dataHydration.Moments.Util.extractReactionsByMomentId)
-local extractShareInfoByMomentIdModule = require(dataHydration.Moments.Util.extractShareInfoByMomentId)
-local constructApiUrlModule = require(dataHydration.Moments.Util.constructApiUrl)
-local momentsFixBatchedGetMomentsQueryParams = game:DefineFastFlag("MomentsFixBatchedGetMomentsQueryParams", false)
-local fFlagMomentsComments = sharedFlagsModule.FFlagMomentsComments
-local fFlagMomentsPassFeedItemIdToBackendApis = sharedFlagsModule.FFlagMomentsPassFeedItemIdToBackendApis
-local momentGetIdType = momentsTypesModule.Enums.MomentGetIdType
-local shareLinkTargetIdType = momentsTypesModule.Enums.ShareLinkTargetIdType
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local Parent = DataHydration.Parent
+local HttpModule = require(Parent.Http)
+local HttpClientModule = require(Parent.HttpClient)
+local MomentsTypesModule = require(Parent.MomentsTypes)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local _ = require(DataHydration.Moments.MomentsStoreTypes)
+local ConvertApiMomentsToMomentItemsModule = require(DataHydration.Moments.Util.convertApiMomentsToMomentItems)
+local ExtractCommentsByFeedItemIdModule = require(DataHydration.Moments.Util.extractCommentsByFeedItemId)
+local ExtractReactionsByMomentIdModule = require(DataHydration.Moments.Util.extractReactionsByMomentId)
+local ExtractShareInfoByMomentIdModule = require(DataHydration.Moments.Util.extractShareInfoByMomentId)
+local ConstructApiUrlModule = require(DataHydration.Moments.Util.constructApiUrl)
+local MomentsFixBatchedGetMomentsQueryParams = game:DefineFastFlag("MomentsFixBatchedGetMomentsQueryParams", false)
+local FFlagMomentsComments = SharedFlagsModule.FFlagMomentsComments
+local FFlagMomentsPassFeedItemIdToBackendApis = SharedFlagsModule.FFlagMomentsPassFeedItemIdToBackendApis
+local MomentGetIdType = MomentsTypesModule.Enums.MomentGetIdType
+local ShareLinkTargetIdType = MomentsTypesModule.Enums.ShareLinkTargetIdType
 
-return function(p1, p2, p3)
-	-- upvalues: constructApiUrlModule (ref), momentsFixBatchedGetMomentsQueryParams (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), shareLinkTargetIdType (ref), momentGetIdType (ref), httpModule (ref), httpClientModule (ref), convertApiMomentsToMomentItemsModule (ref), extractReactionsByMomentIdModule (ref), extractShareInfoByMomentIdModule (ref), fFlagMomentsComments (ref), extractCommentsByFeedItemIdModule (ref)
-	local var1, var2 = constructApiUrlModule("content-captures-api/v2/moments/get-moments")
-	local t = { Ids = table.concat(p1, ",") }
+return function(List, Network, FeedItemId) --[[ Line: 30 | Named "fetchMomentsByIds" ]]
+	-- upvalues: ConstructApiUrlModule (copy), MomentsFixBatchedGetMomentsQueryParams (copy), FFlagMomentsPassFeedItemIdToBackendApis (copy), ShareLinkTargetIdType (copy), MomentGetIdType (copy), HttpModule (copy), HttpClientModule (copy), ConvertApiMomentsToMomentItemsModule (copy), ExtractReactionsByMomentIdModule (copy), ExtractShareInfoByMomentIdModule (copy), FFlagMomentsComments (copy), ExtractCommentsByFeedItemIdModule (copy)
+	local GetMoments, GetMoments2 = ConstructApiUrlModule("content-captures-api/v2/moments/get-moments")
+	local config = { Ids = table.concat(List, ",") }
 	
-	if momentsFixBatchedGetMomentsQueryParams then
-		t.Ids = p1
+	if MomentsFixBatchedGetMomentsQueryParams then
+		config.Ids = List
 	end
-	if fFlagMomentsPassFeedItemIdToBackendApis then
-		t.type = if p3 == shareLinkTargetIdType.FeedItemId then momentGetIdType.FeedItemId else momentGetIdType.MomentId
+	if FFlagMomentsPassFeedItemIdToBackendApis then
+		config.type = if FeedItemId == ShareLinkTargetIdType.FeedItemId then MomentGetIdType.FeedItemId else MomentGetIdType.MomentId
 	end
-	return httpClientModule.fetch({
+	return HttpClientModule.fetch({
 		method = "GET",
 		analyticsKey = "moments.get-moments",
-		url = `{var1}?{httpModule.Url:makeQueryString(t)}`,
-		headers = var2,
-		network = p2,
-		decode = function(p4)
-			-- upvalues: convertApiMomentsToMomentItemsModule (copy), extractReactionsByMomentIdModule (copy), extractShareInfoByMomentIdModule (copy), fFlagMomentsComments (copy), extractCommentsByFeedItemIdModule (copy)
+		url = `{GetMoments}?{HttpModule.Url:makeQueryString(config)}`,
+		headers = GetMoments2,
+		network = Network,
+		decode = function(p1) --[[ Line: 54 ]]
+			-- upvalues: ConvertApiMomentsToMomentItemsModule (upval), ExtractReactionsByMomentIdModule (upval), ExtractShareInfoByMomentIdModule (upval), FFlagMomentsComments (upval), ExtractCommentsByFeedItemIdModule (upval)
 			return {
-				moments = convertApiMomentsToMomentItemsModule(p4.items),
-				reactionsByMomentId = extractReactionsByMomentIdModule(p4.items),
-				shareInfoByMomentId = extractShareInfoByMomentIdModule(p4.items),
-				commentsByFeedItemId = if fFlagMomentsComments then extractCommentsByFeedItemIdModule(p4.items) else nil
+				moments = ConvertApiMomentsToMomentItemsModule(p1.items),
+				reactionsByMomentId = ExtractReactionsByMomentIdModule(p1.items),
+				shareInfoByMomentId = ExtractShareInfoByMomentIdModule(p1.items),
+				commentsByFeedItemId = if FFlagMomentsComments then ExtractCommentsByFeedItemIdModule(p1.items) else nil
 			}
 		end
 	})

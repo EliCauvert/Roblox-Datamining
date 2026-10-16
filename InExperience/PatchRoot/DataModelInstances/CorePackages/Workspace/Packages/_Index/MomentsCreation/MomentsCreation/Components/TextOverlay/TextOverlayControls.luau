@@ -1,105 +1,108 @@
-﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
-local parent = momentsCreation.Parent
-local dashModule = require(parent.Dash)
-local foundationModule = require(parent.Foundation)
-local momentsCommonModule = require(parent.MomentsCommon)
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local button = foundationModule.Button
-local knob = foundationModule.Knob
-local slider = foundationModule.Slider
-local view = foundationModule.View
-local useCallback = reactModule.useCallback
-local useMemo = reactModule.useMemo
-local useDeviceInsets = momentsCommonModule.Hooks.useDeviceInsets
-local useTokens = foundationModule.Hooks.useTokens
-local useSignalState = signalsReactModule.useSignalState
-local constantsModule = require(momentsCreation.Constants)
-local useCreationFlowStringsModule = require(momentsCreation.Hooks.useCreationFlowStrings)
-local _ = require(momentsCreation.Types.CreationFlowTypes)
-local _ = require(parent.MomentsTypes)
-local fFlagMomentsTextOverlayV2Redesign = momentsCommonModule.Flags.FFlagMomentsTextOverlayV2Redesign
+﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
+local Parent = MomentsCreation.Parent
+local DashModule = require(Parent.Dash)
+local FoundationModule = require(Parent.Foundation)
+local MomentsCommonModule = require(Parent.MomentsCommon)
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local Button = FoundationModule.Button
+local Knob = FoundationModule.Knob
+local Slider = FoundationModule.Slider
+local View = FoundationModule.View
+local UseCallbackFunction = ReactModule.useCallback
+local UseMemoFunction = ReactModule.useMemo
+local UseDeviceInsetsFunction = MomentsCommonModule.Hooks.useDeviceInsets
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local ConstantsModule = require(MomentsCreation.Constants)
+local UseCreationFlowStringsModule = require(MomentsCreation.Hooks.useCreationFlowStrings)
+local _ = require(MomentsCreation.Types.CreationFlowTypes)
+local _ = require(Parent.MomentsTypes)
+local FFlagMomentsTextOverlayV2Redesign = MomentsCommonModule.Flags.FFlagMomentsTextOverlayV2Redesign
 
-return function(p1)
-	-- upvalues: useDeviceInsets (ref), useTokens (ref), useCreationFlowStringsModule (ref), fFlagMomentsTextOverlayV2Redesign (ref), useMemo (ref), signalsModule (ref), constantsModule (ref), useSignalState (ref), useCallback (ref), dashModule (ref), reactModule (ref), view (ref), slider (ref), knob (ref), foundationModule (ref), button (ref)
-	local controller = p1.controller
-	local var1 = useDeviceInsets()
-	local var2 = useTokens()
-	local var3 = useCreationFlowStringsModule()
+return function(p1) --[[ Line: 46 | Named "TextOverlayControls" ]]
+	-- upvalues: UseDeviceInsetsFunction (copy), UseTokensFunction (copy), UseCreationFlowStringsModule (copy), FFlagMomentsTextOverlayV2Redesign (copy), UseMemoFunction (copy), SignalsModule (copy), ConstantsModule (copy), UseSignalStateFunction (copy), UseCallbackFunction (copy), DashModule (copy), ReactModule (copy), View (copy), Slider (copy), Knob (copy), FoundationModule (copy), Button (copy)
+	local Controller = p1.controller
+	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
+	local UseTokensResult = UseTokensFunction()
+	local UseCreationFlowStringsModuleResult = UseCreationFlowStringsModule()
+	local UseSignalStateResult: number = UseSignalStateFunction((UseMemoFunction(function() --[[ Line: 57 ]]
+		-- upvalues: SignalsModule (upval), FFlagMomentsTextOverlayV2Redesign (copy), ConstantsModule (upval), Controller (copy)
+		return SignalsModule.createComputed(function(p2) --[[ Line: 58 ]]
+			-- upvalues: FFlagMomentsTextOverlayV2Redesign (upval), ConstantsModule (upval), Controller (upval)
+			if FFlagMomentsTextOverlayV2Redesign then
+				return ConstantsModule.TextOverlay.DefaultFontSize
+			else
+				local ActiveSession = Controller.getActiveSession(p2)
+				local Draft = if ActiveSession == nil then nil else ActiveSession.getDraft(p2)
+				local DraftEntry = Draft and Draft[1]
+				
+				return if DraftEntry == nil then ConstantsModule.TextOverlay.DefaultFontSize else DraftEntry.textOverlayStyle.fontSize
+			end
+		end)
+	end, { Controller, FFlagMomentsTextOverlayV2Redesign })))
+	local UseCallbackResult = UseCallbackFunction(function(FontSize) --[[ Line: 70 ]]
+		-- upvalues: Controller (copy), DashModule (upval)
+		local ActiveSession = Controller.getActiveSession(false)
+		
+		if ActiveSession == nil then return end
+		local Draft = ActiveSession.getDraft(false)
+		local DraftEntry = Draft and Draft[1]
+		
+		if DraftEntry ~= nil then
+			ActiveSession.update({
+				DashModule.joinDeep(DraftEntry, { textOverlayStyle = { fontSize = FontSize } })
+			})
+			
+			return
+		end
+	end, { Controller })
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "col align-x-center align-y-bottom gap-large position-bottom-center anchor-bottom-center size-full-0 auto-y",
 		LayoutOrder = p1.layoutOrder,
 		padding = {
-			top = UDim.new(0, var2.Padding.Small),
-			bottom = UDim.new(0, math.max(var1.bottom, var2.Padding.Small)),
-			left = UDim.new(0, math.max(var1.left, var2.Padding.XLarge)),
-			right = UDim.new(0, math.max(var1.right, var2.Padding.XLarge))
+			top = UDim.new(0, UseTokensResult.Padding.Small),
+			bottom = UDim.new(0, (math.max(UseDeviceInsetsResult.bottom, UseTokensResult.Padding.Small))),
+			left = UDim.new(0, (math.max(UseDeviceInsetsResult.left, UseTokensResult.Padding.XLarge))),
+			right = UDim.new(0, (math.max(UseDeviceInsetsResult.right, UseTokensResult.Padding.XLarge)))
 		}
 	}, {
-		FontSizeSlider = if fFlagMomentsTextOverlayV2Redesign then nil else reactModule.createElement(slider, {
+		FontSizeSlider = if FFlagMomentsTextOverlayV2Redesign then nil else ReactModule.createElement(Slider, {
 			LayoutOrder = 1,
-			knob = reactModule.createElement(knob, { size = foundationModule.Enums.InputSize.Large }),
-			knobVisibility = foundationModule.Enums.Visibility.Always,
-			onValueChanged = useCallback(function(p2)
-				-- upvalues: controller (ref), dashModule (copy)
-				local activeSession = controller.getActiveSession(false)
-				
-				if activeSession == nil then return end
-				local draft = activeSession.getDraft(false)
-				local var4 = draft and draft[1]
-				
-				if var4 == nil then
-					return
-				end
-				activeSession.update({
-					dashModule.joinDeep(var4, { textOverlayStyle = { fontSize = p2 } })
-				})
-			end, { controller }),
-			size = foundationModule.Enums.InputSize.XSmall,
-			range = NumberRange.new(constantsModule.TextOverlay.MinFontSize, constantsModule.TextOverlay.MaxFontSize),
-			value = math.clamp(useSignalState(useMemo(function()
-				-- upvalues: signalsModule (copy), fFlagMomentsTextOverlayV2Redesign (ref), constantsModule (copy), controller (ref)
-				return signalsModule.createComputed(function(p2)
-					-- upvalues: fFlagMomentsTextOverlayV2Redesign (copy), constantsModule (copy), controller (copy)
-					if fFlagMomentsTextOverlayV2Redesign then
-						return constantsModule.TextOverlay.DefaultFontSize
-					end
-					local activeSession = controller.getActiveSession(p2)
-					local var4 = if activeSession ~= nil then nil else activeSession.getDraft(p2)
-					local var5 = var4 and var4[1]
-					
-					return if var5 == nil then constantsModule.TextOverlay.DefaultFontSize else var5.textOverlayStyle.fontSize
-				end)
-			end, { controller, fFlagMomentsTextOverlayV2Redesign })), constantsModule.TextOverlay.MinFontSize, constantsModule.TextOverlay.MaxFontSize),
-			variant = foundationModule.Enums.SliderVariant.Standard
+			knob = ReactModule.createElement(Knob, { size = FoundationModule.Enums.InputSize.Large }),
+			knobVisibility = FoundationModule.Enums.Visibility.Always,
+			onValueChanged = UseCallbackResult,
+			size = FoundationModule.Enums.InputSize.XSmall,
+			range = NumberRange.new(ConstantsModule.TextOverlay.MinFontSize, ConstantsModule.TextOverlay.MaxFontSize),
+			value = math.clamp(UseSignalStateResult, ConstantsModule.TextOverlay.MinFontSize, ConstantsModule.TextOverlay.MaxFontSize),
+			variant = FoundationModule.Enums.SliderVariant.Standard
 		}),
-		Nav = reactModule.createElement(view, {
+		Nav = ReactModule.createElement(View, {
 			LayoutOrder = 2,
 			tag = "row flex-x-between align-x-center align-y-center gap-small size-full-0 auto-y"
 		}, {
-			BackButton = reactModule.createElement(button, {
+			BackButton = ReactModule.createElement(Button, {
 				LayoutOrder = 1,
-				fillBehavior = foundationModule.Enums.FillBehavior.Fit,
-				text = var3.GeneralCtaBack,
-				variant = foundationModule.Enums.ButtonVariant.Text,
-				onActivated = useCallback(function()
-					-- upvalues: controller (ref)
-					controller.discardActiveTool()
-				end, { controller }),
-				size = foundationModule.Enums.InputSize.Medium
+				fillBehavior = FoundationModule.Enums.FillBehavior.Fit,
+				text = UseCreationFlowStringsModuleResult.GeneralCtaBack,
+				variant = FoundationModule.Enums.ButtonVariant.Text,
+				onActivated = UseCallbackFunction(function() --[[ Line: 83 ]]
+					-- upvalues: Controller (copy)
+					Controller.discardActiveTool()
+				end, { Controller }),
+				size = FoundationModule.Enums.InputSize.Medium
 			}),
-			DoneButton = reactModule.createElement(button, {
+			DoneButton = ReactModule.createElement(Button, {
 				LayoutOrder = 2,
-				fillBehavior = foundationModule.Enums.FillBehavior.Fit,
-				text = var3.GeneralCtaDone,
-				variant = foundationModule.Enums.ButtonVariant.Text,
-				onActivated = useCallback(function()
-					-- upvalues: controller (ref)
-					controller.commitActiveTool()
-				end, { controller }),
-				size = foundationModule.Enums.InputSize.Medium
+				fillBehavior = FoundationModule.Enums.FillBehavior.Fit,
+				text = UseCreationFlowStringsModuleResult.GeneralCtaDone,
+				variant = FoundationModule.Enums.ButtonVariant.Text,
+				onActivated = UseCallbackFunction(function() --[[ Line: 87 ]]
+					-- upvalues: Controller (copy)
+					Controller.commitActiveTool()
+				end, { Controller }),
+				size = FoundationModule.Enums.InputSize.Medium
 			})
 		})
 	})

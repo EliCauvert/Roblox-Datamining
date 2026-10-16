@@ -1,3 +1,3 @@
-﻿local logger = require(script:FindFirstAncestor("ExpChat").Parent.ExpChatShared).Logger
+﻿local Logger = require(script:FindFirstAncestor("ExpChat").Parent.ExpChatShared).Logger
 
-return logger:new(logger.name .. "/AppContainer")
+return Logger:new(Logger.name .. "/AppContainer")

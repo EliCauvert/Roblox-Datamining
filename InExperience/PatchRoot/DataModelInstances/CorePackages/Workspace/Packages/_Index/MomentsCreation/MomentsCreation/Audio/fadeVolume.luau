@@ -1,24 +1,25 @@
-﻿local tweenService = game:GetService("TweenService")
-local audioDuckingFastInts = require(script:FindFirstAncestor("MomentsCreation").Parent.MomentsCommon).Media.audioDuckingFastInts
-local tbl = setmetatable({}, { __mode = "k" })
+﻿local TweenService = game:GetService("TweenService")
+local AudioDuckingFastInts = require(script:FindFirstAncestor("MomentsCreation").Parent.MomentsCommon).Media.audioDuckingFastInts
+local self = setmetatable({}, { __mode = "k" })
 
-return function(p1, p2, p3)
-	-- upvalues: tbl (ref), audioDuckingFastInts (ref), tweenService (ref)
-	local var1 = tbl[p1]
+return function(Target, Volume, p1) --[[ Line: 22 | Named "fadeVolume" ]]
+	-- upvalues: self (copy), AudioDuckingFastInts (copy), TweenService (copy)
+	local SelfEntry = self[Target]
 	
-	if var1 ~= nil then
-		var1:Cancel()
-		tbl[p1] = nil
+	if SelfEntry ~= nil then
+		SelfEntry:Cancel()
+		self[Target] = nil
 	end
-	local compressorParams = audioDuckingFastInts.getCompressorParams()
-	local var2 = if p3 then 0 elseif p2 < p1.Volume then compressorParams.attack else compressorParams.release
+	local CompressorParams = AudioDuckingFastInts.getCompressorParams()
+	local Attack = if p1 then 0 elseif Volume < Target.Volume then CompressorParams.attack else CompressorParams.release
 	
-	if var2 <= 0 then
-		p1.Volume = p2
+	if Attack <= 0 then
+		Target.Volume = Volume
 		
 		return
+	else
+		local Tween = TweenService:Create(Target, TweenInfo.new(Attack, Enum.EasingStyle.Linear), { Volume = Volume })
+		self[Target] = Tween
+		Tween:Play()
 	end
-	local var3 = tweenService:Create(p1, TweenInfo.new(var2, Enum.EasingStyle.Linear), { Volume = p2 })
-	tbl[p1] = var3
-	var3:Play()
 end

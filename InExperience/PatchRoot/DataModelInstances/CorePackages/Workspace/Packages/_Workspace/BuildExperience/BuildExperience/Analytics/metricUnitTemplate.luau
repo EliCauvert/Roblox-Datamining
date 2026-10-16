@@ -1,16 +1,16 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local analyticsKeysModule = require(buildExperience.Analytics.AnalyticsKeys)
-local analyticsUnitModule = require(buildExperience.Analytics.AnalyticsUnit)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local AnalyticsKeysModule = require(BuildExperience.Analytics.AnalyticsKeys)
+local AnalyticsUnitModule = require(BuildExperience.Analytics.AnalyticsUnit)
 
 return {
-	templateFor = function(p1)
-		-- upvalues: analyticsUnitModule (ref), analyticsKeysModule (ref)
-		return if p1 == analyticsUnitModule.Percent then analyticsKeysModule.ANALYTICS_PERCENT_TEMPLATE elseif p1 == analyticsUnitModule.Temporal then analyticsKeysModule.ANALYTICS_DURATION_TEMPLATE else nil
+	templateFor = function(Minutes) --[[ Line: 13 ]]
+		-- upvalues: AnalyticsUnitModule (copy), AnalyticsKeysModule (copy)
+		return if Minutes == AnalyticsUnitModule.Percent then AnalyticsKeysModule.ANALYTICS_PERCENT_TEMPLATE elseif Minutes == AnalyticsUnitModule.Minutes then AnalyticsKeysModule.ANALYTICS_DURATION_MINUTES_TEMPLATE elseif Minutes == AnalyticsUnitModule.Temporal then AnalyticsKeysModule.ANALYTICS_DURATION_TEMPLATE else nil
 	end,
-	fillTemplate = function(p1, p2)
-		return string.gsub(p1, "{number}", function()
-			-- upvalues: p2 (ref)
-			return p2
-		end)
+	fillTemplate = function(Text: string, p1): string --[[ Line: 24 ]]
+		return (string.gsub(Text, "{number}", function() --[[ Line: 25 ]]
+			-- upvalues: p1 (copy)
+			return p1
+		end))
 	end
 }

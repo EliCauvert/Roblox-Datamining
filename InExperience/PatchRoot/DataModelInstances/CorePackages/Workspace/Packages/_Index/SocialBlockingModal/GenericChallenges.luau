@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Workspace.GenericChallenges.GenericChallenges)
+﻿return (require(script.Parent.Parent.Parent._Workspace.GenericChallenges.GenericChallenges))

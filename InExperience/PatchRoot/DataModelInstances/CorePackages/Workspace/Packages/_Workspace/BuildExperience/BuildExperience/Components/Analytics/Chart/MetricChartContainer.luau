@@ -1,82 +1,90 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local view = foundationModule.View
-local text = foundationModule.Text
-local skeleton = foundationModule.Skeleton
-local radius = foundationModule.Enums.Radius
-local analyticsKeysModule = require(buildExperience.Analytics.AnalyticsKeys)
-local dataStatus = require(parent.DataHydration.ExperienceAnalytics).DataStatus
-local _ = require(buildExperience.Analytics.AnalyticsMetric)
-local _ = require(buildExperience.Analytics.AnalyticsWindow)
-local useExperienceMetricSeriesModule = require(buildExperience.Analytics.useExperienceMetricSeries)
-local fFlagBuildAnalyticsCreatorHubWindowFixModule = require(buildExperience.Flags.FFlagBuildAnalyticsCreatorHubWindowFix)
-local metricChartModule = require(script.Parent.MetricChart)
-local PLOT_HEIGHT = require(script.Parent.chartLayout).PLOT_HEIGHT
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local Skeleton = FoundationModule.Skeleton
+local Radius = FoundationModule.Enums.Radius
+local AnalyticsKeysModule = require(BuildExperience.Analytics.AnalyticsKeys)
+local DataStatus = require(Parent.DataHydration.ExperienceAnalytics).DataStatus
+local _ = require(BuildExperience.Analytics.AnalyticsMetric)
+local _ = require(BuildExperience.Analytics.AnalyticsWindow)
+local UseExperienceMetricSeriesModule = require(BuildExperience.Analytics.useExperienceMetricSeries)
+local FFlagBuildAnalyticsCreatorHubWindowFixModule = require(BuildExperience.Flags.FFlagBuildAnalyticsCreatorHubWindowFix)
+local MetricChartModule = require(script.Parent.MetricChart)
+local PLOTHEIGHT = require(script.Parent.chartLayout).PLOT_HEIGHT
 
-local function MetricChartSkeleton(p1)
-	-- upvalues: reactModule (ref), view (ref), skeleton (ref), radius (ref), PLOT_HEIGHT (ref)
-	return reactModule.createElement(view, {
+local function MetricChartSkeleton(p1) --[[ Line: 47 ]]
+	-- upvalues: ReactModule (copy), View (copy), Skeleton (copy), Radius (copy), PLOTHEIGHT (copy)
+	return ReactModule.createElement(View, {
 		tag = "col gap-xsmall size-full-0 auto-y",
 		testId = "MetricChart.Skeleton",
 		LayoutOrder = p1.layoutOrder
 	}, {
-		Title = reactModule.createElement(skeleton, {
+		Title = ReactModule.createElement(Skeleton, {
 			LayoutOrder = 1,
-			radius = radius.Small,
+			radius = Radius.Small,
 			Size = UDim2.new(0.4, 0, 0, 22)
 		}),
-		Summary = reactModule.createElement(skeleton, {
+		Summary = ReactModule.createElement(Skeleton, {
 			LayoutOrder = 2,
-			radius = radius.Small,
+			radius = Radius.Small,
 			Size = UDim2.new(0.6, 0, 0, 16)
 		}),
-		Value = reactModule.createElement(skeleton, {
+		Value = ReactModule.createElement(Skeleton, {
 			LayoutOrder = 3,
-			radius = radius.Small,
+			radius = Radius.Small,
 			Size = UDim2.new(0.25, 0, 0, 32)
 		}),
-		Plot = reactModule.createElement(skeleton, {
+		Plot = ReactModule.createElement(Skeleton, {
 			LayoutOrder = 4,
-			radius = radius.Medium,
-			Size = UDim2.new(1, 0, 0, PLOT_HEIGHT)
+			radius = Radius.Medium,
+			Size = UDim2.new(1, 0, 0, PLOTHEIGHT)
 		})
 	})
 end
 
-local function MetricChartEmpty(p1)
-	-- upvalues: reactModule (ref), view (ref), text (ref)
-	return reactModule.createElement(view, {
+local function MetricChartEmpty(p1) --[[ Line: 76 ]]
+	-- upvalues: ReactModule (copy), View (copy), Text (copy)
+	return ReactModule.createElement(View, {
 		tag = "col gap-xsmall size-full-0 auto-y",
 		testId = "MetricChart.Empty",
 		LayoutOrder = p1.layoutOrder
 	}, {
-		Message = reactModule.createElement(text, {
+		Message = ReactModule.createElement(Text, {
 			tag = "size-full-0 auto-y text-body-medium text-align-x-left content-muted",
 			Text = p1.message
 		})
 	})
 end
 
-return function(p1)
-	-- upvalues: dataStatus (ref), useExperienceMetricSeriesModule (ref), useLocalization (ref), analyticsKeysModule (ref), reactModule (ref), MetricChartEmpty (ref), MetricChartSkeleton (ref), fFlagBuildAnalyticsCreatorHubWindowFixModule (ref), metricChartModule (ref)
-	local var1 = if p1.metadataStatus == dataStatus.Failed then nil else p1.latestAvailableTime
-	local var2 = useExperienceMetricSeriesModule(p1.universeId, p1.metric, p1.window, var1)
-	local noData = useLocalization({ noData = analyticsKeysModule.ANALYTICS_NO_DATA }).noData
+return function(p1) --[[ Line: 89 | Named "MetricChartContainer" ]]
+	-- upvalues: DataStatus (copy), UseExperienceMetricSeriesModule (copy), UseLocalizationFunction (copy), AnalyticsKeysModule (copy), ReactModule (copy), MetricChartEmpty (copy), MetricChartSkeleton (copy), FFlagBuildAnalyticsCreatorHubWindowFixModule (copy), MetricChartModule (copy)
+	local LatestAvailableTime = if p1.metadataStatus == DataStatus.Failed then nil else p1.latestAvailableTime
+	local UseExperienceMetricSeriesModuleResult = UseExperienceMetricSeriesModule(p1.universeId, p1.metric, p1.window, LatestAvailableTime)
+	local NoData = UseLocalizationFunction({ noData = AnalyticsKeysModule.ANALYTICS_NO_DATA }).noData
 	
-	return if if p1.metadataStatus ~= dataStatus.Failed then p1.metadataStatus == dataStatus.Ready and p1.latestAvailableTime == nil else true then reactModule.createElement(MetricChartEmpty, { layoutOrder = p1.layoutOrder, message = noData }) elseif var2.status == dataStatus.NotReady then reactModule.createElement(MetricChartSkeleton, { layoutOrder = p1.layoutOrder }) elseif if fFlagBuildAnalyticsCreatorHubWindowFixModule then not var2.hasData elseif var2.status ~= dataStatus.Failed then not var2.hasData else true then reactModule.createElement(MetricChartEmpty, { layoutOrder = p1.layoutOrder, message = noData }) else reactModule.createElement(metricChartModule, {
-		series = var2.series,
-		hasData = var2.hasData,
-		latest = var2.latest,
-		trendPct = var2.trendPct,
-		priorValue = var2.priorValue,
-		metric = p1.metric,
-		window = p1.window,
-		latestAvailableTime = var1,
-		hideIcon = p1.hideIcon,
-		summary = p1.summary,
-		layoutOrder = p1.layoutOrder
-	})
+	if p1.metadataStatus == DataStatus.Failed or p1.metadataStatus == DataStatus.Ready and p1.latestAvailableTime == nil then
+		return ReactModule.createElement(MetricChartEmpty, { layoutOrder = p1.layoutOrder, message = NoData })
+	elseif UseExperienceMetricSeriesModuleResult.status == DataStatus.NotReady then
+		return ReactModule.createElement(MetricChartSkeleton, { layoutOrder = p1.layoutOrder })
+	else
+		local NoHasData: boolean = if FFlagBuildAnalyticsCreatorHubWindowFixModule then not UseExperienceMetricSeriesModuleResult.hasData else UseExperienceMetricSeriesModuleResult.status == DataStatus.Failed or not UseExperienceMetricSeriesModuleResult.hasData
+		
+		return if NoHasData then ReactModule.createElement(MetricChartEmpty, { layoutOrder = p1.layoutOrder, message = NoData }) else ReactModule.createElement(MetricChartModule, {
+			series = UseExperienceMetricSeriesModuleResult.series,
+			hasData = UseExperienceMetricSeriesModuleResult.hasData,
+			latest = UseExperienceMetricSeriesModuleResult.latest,
+			trendPct = UseExperienceMetricSeriesModuleResult.trendPct,
+			priorValue = UseExperienceMetricSeriesModuleResult.priorValue,
+			metric = p1.metric,
+			window = p1.window,
+			latestAvailableTime = LatestAvailableTime,
+			hideIcon = p1.hideIcon,
+			summary = p1.summary,
+			layoutOrder = p1.layoutOrder
+		})
+	end
 end

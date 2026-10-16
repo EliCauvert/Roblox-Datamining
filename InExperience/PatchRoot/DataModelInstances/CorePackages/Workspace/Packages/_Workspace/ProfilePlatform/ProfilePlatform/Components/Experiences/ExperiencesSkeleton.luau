@@ -1,73 +1,74 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local squareCollectionGridViewModule = require(profilePlatform.BaseComponents.CollectionGridViews.SquareCollectionGridView)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local textKeysModule = require(profilePlatform.Common.TextKeys)
-local foundationModule = require(parent.Foundation)
-local skeleton = foundationModule.Skeleton
-local radius = foundationModule.Enums.Radius
-local view = foundationModule.View
-local useTextSizeOffset = foundationModule.Hooks.useTextSizeOffset
-local t = { numColumns = 3 }
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local SquareCollectionGridViewModule = require(ProfilePlatform.BaseComponents.CollectionGridViews.SquareCollectionGridView)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local TextKeysModule = require(ProfilePlatform.Common.TextKeys)
+local FoundationModule = require(Parent.Foundation)
+local Skeleton = FoundationModule.Skeleton
+local Radius = FoundationModule.Enums.Radius
+local View = FoundationModule.View
+local UseTextSizeOffsetFunction = FoundationModule.Hooks.useTextSizeOffset
+local Overrides = { numColumns = 3 }
 
-local function _(p1)
-	return function(p2)
-		-- upvalues: p1 (ref)
+local function _(p1) --[[ Line: 23 | Named "getTextSizeAdjustedSquareExperienceTileHeight" ]]
+	return function(p2: number): number --[[ Line: 24 ]]
+		-- upvalues: p1 (copy)
 		return p2 + 80 + p1 * 3
 	end
 end
 
-return function(p1)
-	-- upvalues: useLocalization (ref), textKeysModule (ref), useTextSizeOffset (ref), reactModule (ref), view (ref), skeleton (ref), radius (ref), squareCollectionGridViewModule (ref), t (ref)
-	local var1 = useLocalization({ experiences = textKeysModule.Experiences })
-	local _ = nil
-	local _ = nil
-	local var2 = useTextSizeOffset()
+return function(p1) --[[ Line: 29 | Named "ExperiencesSkeleton" ]]
+	-- upvalues: UseLocalizationFunction (copy), TextKeysModule (copy), UseTextSizeOffsetFunction (copy), ReactModule (copy), View (copy), Skeleton (copy), Radius (copy), SquareCollectionGridViewModule (copy), Overrides (copy)
+	local UseLocalizationResult = UseLocalizationFunction({ experiences = TextKeysModule.Experiences })
+	local UseTextSizeOffsetResult = nil
+	UseTextSizeOffsetResult = UseTextSizeOffsetFunction()
 	
-	return reactModule.createElement(squareCollectionGridViewModule, {
+	return ReactModule.createElement(SquareCollectionGridViewModule, {
 		layoutOrder = p1.layoutOrder,
-		items = reactModule.useMemo(function()
-			-- upvalues: p1 (ref)
-			local t = {}
+		items = ReactModule.useMemo(function() --[[ Line: 65 ]]
+			-- upvalues: p1 (copy)
+			local List = {}
 			
 			for i = 1, p1.numSkeletons do
-				table.insert(t, i)
+				table.insert(List, i)
 			end
-			return t
+			return List
 		end, { p1.numSkeletons }),
-		renderItem = reactModule.useCallback(function(_, p2, p3)
-			-- upvalues: reactModule (copy), view (copy), skeleton (copy), radius (copy)
-			return reactModule.createElement(view, {
+		renderItem = ReactModule.useCallback(function(_, LayoutOrder, Size) --[[ Line: 40 ]]
+			-- upvalues: ReactModule (upval), View (upval), Skeleton (upval), Radius (upval)
+			return ReactModule.createElement(View, {
 				tag = "col gap-small radius-medium",
-				LayoutOrder = p2,
-				Size = p3
+				LayoutOrder = LayoutOrder,
+				Size = Size
 			}, {
-				ThumbnailSkeleton = reactModule.createElement(skeleton, {
+				ThumbnailSkeleton = ReactModule.createElement(Skeleton, {
 					LayoutOrder = 1,
 					Size = UDim2.fromScale(1, 0.6),
-					radius = radius.Medium
+					radius = Radius.Medium
 				}),
-				NameSkeleton = reactModule.createElement(skeleton, {
+				NameSkeleton = ReactModule.createElement(Skeleton, {
 					LayoutOrder = 2,
 					Size = UDim2.fromScale(0.8, 0.18),
-					radius = radius.Medium
+					radius = Radius.Medium
 				}),
-				ButtonSkeleton = reactModule.createElement(skeleton, {
+				ButtonSkeleton = ReactModule.createElement(Skeleton, {
 					LayoutOrder = 3,
 					Size = UDim2.fromScale(0.6, 0.08),
-					radius = radius.Medium
+					radius = Radius.Medium
 				})
-			}), "Skeleton_" .. p3
+			}), "Skeleton_" .. LayoutOrder
 		end, {}),
-		getItemHeight = reactModule.useMemo(function()
-			-- upvalues: var2 (write)
-			return function(p2)
-				-- upvalues: var2 (ref)
-				return p2 + 80 + var2 * 3
+		getItemHeight = ReactModule.useMemo(function() --[[ Line: 36 ]]
+			-- upvalues: UseTextSizeOffsetResult (ref)
+			local UseTextSizeOffsetResult1 = UseTextSizeOffsetResult
+			
+			return function(p2: number): number --[[ Line: 24 ]]
+				-- upvalues: UseTextSizeOffsetResult1 (copy)
+				return p2 + 80 + UseTextSizeOffsetResult1 * 3
 			end
-		end, { var2 }),
-		title = var1.experiences,
-		overrides = t
+		end, { UseTextSizeOffsetResult }),
+		title = UseLocalizationResult.experiences,
+		overrides = Overrides
 	})
 end

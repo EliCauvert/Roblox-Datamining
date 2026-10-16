@@ -1,32 +1,35 @@
-﻿local guiService = game:GetService("GuiService")
-local userInputService = game:GetService("UserInputService")
-local parent = script:FindFirstAncestor("AvatarExperienceCommon").Parent
-local reactModule = require(parent.React)
-local responsiveModule = require(parent.Responsive)
-local useFocusGuiObject = require(parent.ReactFocusNavigation).useFocusGuiObject
-local inputModeStore = responsiveModule.GetInputModeStore(false)
-local fFlagLuaSupportMicroGamepadPreferredInput = require(parent.SharedFlags).FFlagLuaSupportMicroGamepadPreferredInput
+﻿local GuiService = game:GetService("GuiService")
+local UserInputService = game:GetService("UserInputService")
+local Parent = script:FindFirstAncestor("AvatarExperienceCommon").Parent
+local ReactModule = require(Parent.React)
+local ResponsiveModule = require(Parent.Responsive)
+local UseFocusGuiObjectFunction = require(Parent.ReactFocusNavigation).useFocusGuiObject
+local InputModeStore = ResponsiveModule.GetInputModeStore(false)
+local FFlagLuaSupportMicroGamepadPreferredInput = require(Parent.SharedFlags).FFlagLuaSupportMicroGamepadPreferredInput
 
-return function(p1, p2)
-	-- upvalues: useFocusGuiObject (ref), responsiveModule (ref), reactModule (ref), inputModeStore (ref), userInputService (ref), fFlagLuaSupportMicroGamepadPreferredInput (ref), guiService (ref)
-	local var1 = useFocusGuiObject()
-	local var2 = responsiveModule.useIsSpatial()
-	reactModule.useEffect(function()
-		-- upvalues: p2 (ref), inputModeStore (copy), responsiveModule (copy), userInputService (copy), fFlagLuaSupportMicroGamepadPreferredInput (copy), p1 (ref), var1 (ref), var2 (ref), guiService (copy)
-		local delayedThread = task.delay(p2 or 0, function()
-			-- upvalues: inputModeStore (copy), responsiveModule (copy), userInputService (copy), fFlagLuaSupportMicroGamepadPreferredInput (copy), p1 (copy), var1 (copy), var2 (copy), guiService (copy)
-			if p1.current and ((if userInputService.PreferredInput ~= Enum.PreferredInput.Gamepad then fFlagLuaSupportMicroGamepadPreferredInput and userInputService.PreferredInput == Enum.PreferredInput.MicroGamepad else true) or inputModeStore.getLastInputType(false) == responsiveModule.Input.Directional) and (var1 and not var2) then
-				local selectedCoreObject = guiService.SelectedCoreObject
+return function(p1, p2) --[[ Line: 22 | Named "useFocusOnMountEffect" ]]
+	-- upvalues: UseFocusGuiObjectFunction (copy), ResponsiveModule (copy), ReactModule (copy), InputModeStore (copy), UserInputService (copy), FFlagLuaSupportMicroGamepadPreferredInput (copy), GuiService (copy)
+	local UseFocusGuiObjectResult = UseFocusGuiObjectFunction()
+	local UseIsSpatialResult = ResponsiveModule.useIsSpatial()
+	ReactModule.useEffect(function() --[[ Line: 26 ]]
+		-- upvalues: p2 (copy), InputModeStore (upval), ResponsiveModule (upval), UserInputService (upval), FFlagLuaSupportMicroGamepadPreferredInput (upval), p1 (copy), UseFocusGuiObjectResult (copy), UseIsSpatialResult (copy), GuiService (upval)
+		local DelayedThread = task.delay(if p2 then p2 else 0, function() --[[ Line: 28 ]]
+			-- upvalues: InputModeStore (upval), ResponsiveModule (upval), UserInputService (upval), FFlagLuaSupportMicroGamepadPreferredInput (upval), p1 (upval), UseFocusGuiObjectResult (upval), UseIsSpatialResult (upval), GuiService (upval)
+			local IsLastInputTypeMatch = InputModeStore.getLastInputType(false) == ResponsiveModule.Input.Directional
+			local IsPreferredInputMatch: boolean = UserInputService.PreferredInput == Enum.PreferredInput.Gamepad or FFlagLuaSupportMicroGamepadPreferredInput and UserInputService.PreferredInput == Enum.PreferredInput.MicroGamepad
+			
+			if p1.current and (IsPreferredInputMatch or IsLastInputTypeMatch) and UseFocusGuiObjectResult and not UseIsSpatialResult then
+				local SelectedCoreObject = GuiService.SelectedCoreObject
 				
-				if not (if selectedCoreObject ~= p1.current then selectedCoreObject and selectedCoreObject:IsDescendantOf(p1.current) else true) and p1.current:IsDescendantOf(game) then
-					var1(p1.current)
+				if SelectedCoreObject ~= p1.current and (not SelectedCoreObject or not SelectedCoreObject:IsDescendantOf(p1.current)) and p1.current:IsDescendantOf(game) then
+					UseFocusGuiObjectResult(p1.current)
 				end
 			end
 		end)
 		
-		return function()
-			-- upvalues: delayedThread (ref)
-			task.cancel(delayedThread)
+		return function() --[[ Line: 48 ]]
+			-- upvalues: DelayedThread (copy)
+			task.cancel(DelayedThread)
 		end
 	end, {})
 end

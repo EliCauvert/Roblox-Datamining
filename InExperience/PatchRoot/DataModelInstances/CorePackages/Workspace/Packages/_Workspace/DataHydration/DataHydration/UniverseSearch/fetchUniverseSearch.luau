@@ -1,15 +1,43 @@
-﻿local parent = script:FindFirstAncestor("DataHydration").Parent
-local httpClientModule = require(parent.HttpClient)
-local urlBuilderModule = require(parent.UrlBuilder)
-local urlBase = urlBuilderModule.UrlBase
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local Parent = DataHydration.Parent
+local HttpClientModule = require(Parent.HttpClient)
+local UrlBuilderModule = require(Parent.UrlBuilder)
+local UrlBase = UrlBuilderModule.UrlBase
+local WithCsrfRetryModule = require(DataHydration.withCsrfRetry)
+local FFlagBuildWithGroups = require(Parent.SharedFlags).FFlagBuildWithGroups
 local _ = require(script.Parent.UniverseSearchStoreTypes)
-local fetch = httpClientModule.fetch
-local asPromise = httpClientModule.asPromise
+local FetchFunction = HttpClientModule.fetch
+local AsPromiseFunction = HttpClientModule.asPromise
 
-return function(p1, p2)
-	-- upvalues: urlBase (ref), fetch (ref), urlBuilderModule (ref), asPromise (ref)
-	p2 = p2 or {}
-	local baseUrl = p2.baseUrl or urlBase.APIS
+return function(p1, p2) --[[ Line: 22 | Named "fetchUniverseSearch" ]]
+	-- upvalues: UrlBase (copy), FFlagBuildWithGroups (copy), FetchFunction (copy), WithCsrfRetryModule (copy), HttpClientModule (copy), AsPromiseFunction (copy), UrlBuilderModule (copy)
+	local P1 = p2 or {}
+	local BaseUrl = P1.baseUrl or UrlBase.APIS
+	
+	if FFlagBuildWithGroups and p1.creators ~= nil then
+		return AsPromiseFunction((FetchFunction({
+			method = "POST",
+			analyticsKey = "universes-search.multi-creator-search",
+			network = WithCsrfRetryModule(P1.network or HttpClientModule.createRequestInternalNetwork()),
+			url = BaseUrl .. "/universes/v1/search",
+			body = {
+				creators = p1.creators,
+				surface = p1.surface,
+				search = p1.search,
+				isArchived = p1.isArchived,
+				isPublic = p1.isPublic,
+				isTeamCreateEnabled = p1.isTeamCreateEnabled,
+				sortParam = p1.sortParam,
+				sortOrder = p1.sortOrder,
+				needsAssetOptions = p1.needsAssetOptions,
+				limit = p1.pageSize,
+				cursor = p1.cursor
+			},
+			decode = function(p3) --[[ Line: 48 ]]
+				return p3
+			end
+		})))
+	end
 	local t = {}
 	
 	if p1.creatorType ~= nil then
@@ -51,13 +79,13 @@ return function(p1, p2)
 	if p1.pageSize ~= nil then
 		t.PageSize = p1.pageSize
 	end
-	return asPromise(fetch({
+	return AsPromiseFunction((FetchFunction({
 		method = "GET",
 		analyticsKey = "universes-search.search",
-		network = p2.network,
-		url = urlBuilderModule.UrlBuilder.addQueryString(baseUrl .. "/universes/v1/search", t),
-		decode = function(p3)
+		network = P1.network,
+		url = UrlBuilderModule.UrlBuilder.addQueryString(BaseUrl .. "/universes/v1/search", t),
+		decode = function(p3) --[[ Line: 102 ]]
 			return p3
 		end
-	}))
+	})))
 end

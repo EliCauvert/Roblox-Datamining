@@ -1,4 +1,4 @@
-﻿return require(script.Parent.Parent.ActionCreator)("SetSettings", function(p1)
+﻿return require(script.Parent.Parent.ActionCreator)("SetSettings", function(p1) --[[ Line: 4 ]]
 	return {
 		preferredTransparency = p1.preferredTransparency,
 		reducedMotion = p1.reducedMotion

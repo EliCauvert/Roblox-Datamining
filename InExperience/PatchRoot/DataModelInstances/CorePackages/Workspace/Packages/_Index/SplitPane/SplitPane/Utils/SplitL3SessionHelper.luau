@@ -1,338 +1,342 @@
-﻿local splitPane = script:FindFirstAncestor("SplitPane")
-local parent = splitPane.Parent
-local appSplitViewModule = require(parent.AppSplitView)
-local navigationRoduxModule = require(parent.NavigationRodux)
-local sessionType = require(parent.RobloxAppSessionization).SessionType
-local signalsModule = require(parent.Signals)
-local sessionTypeModule = require(splitPane.SessionType)
-local splitL3StoreModule = require(splitPane.Stores.SplitL3Store)
-local splitPaneStoreModule = require(splitPane.Stores.SplitPaneStore)
-local appPage = require(parent.RobloxAppEnums).AppPage
-local splitPaneSlot = appSplitViewModule.Enums.SplitPaneSlot
-local tempRnSwitchNavigatorName = navigationRoduxModule.Constants.TempRnSwitchNavigatorName
+﻿local SplitPane = script:FindFirstAncestor("SplitPane")
+local Parent = SplitPane.Parent
+local SessionType = require(Parent.RobloxAppSessionization).SessionType
+local SignalsModule = require(Parent.Signals)
+local SessionTypeModule = require(SplitPane.SessionType)
+local SplitL3StoreModule = require(SplitPane.Stores.SplitL3Store)
+local SplitPaneStoreModule = require(SplitPane.Stores.SplitPaneStore)
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local SplitPaneSlot = require(Parent.AppSplitView).Enums.SplitPaneSlot
+local TempRnSwitchNavigatorName = require(Parent.NavigationRodux).Constants.TempRnSwitchNavigatorName
 
-local function routeHasSupportAboveContent(p1, p2)
-	-- upvalues: splitPaneSlot (ref)
+local function routeHasSupportAboveContent(p1, p2): boolean --[[ Line: 19 ]]
+	-- upvalues: SplitPaneSlot (copy)
 	if p2 == nil then
 		return false
 	end
-	local var1 = false
+	local Flag = false
 	
 	for i = #p1, 1, -1 do
-		local name = p2[p1[i].name]
+		local Content = p2[p1[i].name]
 		
-		if name == splitPaneSlot.Support then
-			var1 = true
-		elseif not var1 or name ~= splitPaneSlot.Content then
-			continue
+		if Content == SplitPaneSlot.Support then
+			Flag = true
+		elseif Flag and Content == SplitPaneSlot.Content then
+			return true
 		end
-		return true
 	end
 	return false
 end
 
-local function createResolveEligibility(p3)
-	-- upvalues: tempRnSwitchNavigatorName (ref)
-	return if p3 == nil then nil else function(p4)
-		-- upvalues: p3 (ref), tempRnSwitchNavigatorName (copy)
-		local t = { state = { routeName = p4 } }
-		local ok, status = pcall(function()
-			-- upvalues: p3 (copy), t (ref)
-			return p3.getScreenOptions(t, {})
-		end)
-		
-		if ok and status ~= nil and status.splitPaneEligibility ~= nil then
-			return status.splitPaneEligibility
-		end
-		local var2 = if p3.childRouters then p3.childRouters[tempRnSwitchNavigatorName] else nil
-		
-		if var2 ~= nil then
-			local ok_1, status_1 = pcall(function()
-				-- upvalues: var2 (ref), t (ref)
-				return var2.getScreenOptions(t, {})
-			end)
-			local var3 = status_1
-			
-			return if ok_1 and var3 ~= nil and var3.splitPaneEligibility ~= nil then var3.splitPaneEligibility else nil
-		end
-	end
-end
+local v1 = nil
 
-local var2 = nil
-
-local function getLevel2RouteAndExclusions(p3, p4)
-	-- upvalues: routeHasSupportAboveContent (ref), var2 (write), splitPaneSlot (ref)
-	if not routeHasSupportAboveContent(p3, p4) then
-		var2 = nil
+local function getLevel2RouteAndExclusions(List, p3) --[[ Line: 64 ]]
+	-- upvalues: routeHasSupportAboveContent (copy), v1 (ref), SplitPaneSlot (copy)
+	if not routeHasSupportAboveContent(List, p3) then
+		v1 = nil
 		
-		return p3, nil
+		return List, nil
 	end
+	local List1 = {}
 	local t = {}
-	local t_1 = {}
-	local var3 = false
-	local var4 = var2 == nil
-	local var5 = var2 or {}
-	
-	for i, v in p3 do
-		local name = p4[v.name]
+	local Flag = false
+	local Flag1 = v1 == nil
+	local V11 = v1 or {}
+	for _, value in List do
+		local Content = p3[value.name]
 		
-		if name == splitPaneSlot.Support then
-			var3 = true
-			t_1[v.name] = true
+		if Content == SplitPaneSlot.Support then
+			Flag = true
+			t[value.name] = true
 			
-			if not var4 and var5[v.name] == nil then
-				var4 = true
+			if not Flag1 and V11[value.name] == nil then
+				Flag1 = true
 			end
-		elseif name == splitPaneSlot.Content or not var3 then
-			table.insert(t, v)
+		elseif Content == SplitPaneSlot.Content or not Flag then
+			table.insert(List1, value)
 		else
-			t_1[v.name] = true
+			t[value.name] = true
 			
-			if not var4 and var5[v.name] == nil then
-				var4 = true
+			if not Flag1 and V11[value.name] == nil then
+				Flag1 = true
 			end
 		end
 	end
-	if not var4 then
-		for i_1 in var5 do
-			if t_1[i_1] == nil then
-				var4 = true
+	if not Flag1 then
+		for i in V11 do
+			if t[i] == nil then
+				Flag1 = true
 				break
 			end
 		end
 	end
-	if var4 then
-		var2 = t_1
+	if Flag1 then
+		v1 = t
 	end
-	return t, var2
+	return List1, v1
 end
 
-local function _(p5)
-	-- upvalues: appPage (ref)
-	return if p5 == nil then false else appPage[p5] ~= nil
+local function _(p4): boolean --[[ Line: 110 | Named "isAppPageName" ]]
+	-- upvalues: AppPage (copy)
+	return p4 ~= nil and AppPage[p4] ~= nil
 end
 
-local function resolveL3Page(p5, p6)
-	-- upvalues: splitPaneSlot (ref), appPage (ref)
-	local var6 = nil
+local function resolveL3Page(p4, p5) --[[ Line: 117 ]]
+	-- upvalues: SplitPaneSlot (copy), AppPage (copy)
+	local v2 = nil
+	local v3 = nil
 	
-	for i = #p5, 1, -1 do
-		local var7 = p5[i]
-		local name = p6[var7.name]
+	for i = #p4, 1, -1 do
+		v3 = p4[i]
+		local Content = p5[v3.name]
 		
-		if name == splitPaneSlot.Content then
-			continue
-		end
-		if name ~= splitPaneSlot.Support then
-			if var6 == nil then
-				local name_1 = var7.name
+		if Content ~= SplitPaneSlot.Content then
+			if Content == SplitPaneSlot.Support then
+				if v2 == nil then
+					return v3, v3
+				else
+					return v2, v3
+				end
+			end
+			if v2 == nil then
+				local Name = v3.name
 				
-				if not (if name_1 == nil then false else appPage[name_1] ~= nil) then
-					var6 = var7
+				if Name == nil or AppPage[Name] == nil then
+					v2 = v3
 				end
 			end
 		end
-		if var6 == nil then
-			return var7, var7
-		end
-		return var6, var7
 	end
 	return nil, nil
 end
 
-local _ = function(p7, p8)
-	-- upvalues: resolveL3Page (ref), sessionTypeModule (ref)
-	local var8 = resolveL3Page(p7, p8)
+local _ = function(p6, p7) --[[ Line: 138 | Named "getSplitSubPaneTagFromRoute" ]]
+	-- upvalues: resolveL3Page (copy), SessionTypeModule (copy)
+	local ResolveL3PageResult = resolveL3Page(p6, p7)
 	
-	return if var8 == nil then nil else sessionTypeModule.Tag.SplitSubPane[var8.name] or var8.name
+	return if ResolveL3PageResult == nil then nil else SessionTypeModule.Tag.SplitSubPane[ResolveL3PageResult.name] or ResolveL3PageResult.name
 end
 
-local _ = function(p7, p8)
-	-- upvalues: resolveL3Page (ref)
-	local var8, var9 = resolveL3Page(p7, p8)
+local _ = function(p6, p7) --[[ Line: 146 | Named "getSplitSubPaneDetailFromRoute" ]]
+	-- upvalues: resolveL3Page (copy)
+	local ResolveL3PageResult, ResolveL3PageResult2 = resolveL3Page(p6, p7)
 	
-	return if var8 == nil then nil elseif var8.detail == nil then if var9 == nil then nil else var9.detail else var8.detail
+	return if ResolveL3PageResult == nil then nil elseif ResolveL3PageResult.detail == nil then if ResolveL3PageResult2 == nil then nil else ResolveL3PageResult2.detail else ResolveL3PageResult.detail
 end
 
-local function getIsSplitL3Enabled(p7)
-	-- upvalues: splitPaneStoreModule (ref)
-	return splitPaneStoreModule.getStore().getIsBreakpointEnabled(p7)
+local function getIsSplitL3Enabled(p6) --[[ Line: 160 ]]
+	-- upvalues: SplitPaneStoreModule (copy)
+	return SplitPaneStoreModule.getStore().getIsBreakpointEnabled(p6)
 end
 
-local function resolveEligibilityMap(p7, p8)
+local function resolveEligibilityMap(p6, Callback) --[[ Line: 164 ]]
 	local t = {}
 	
-	for i = #p7, 1, -1 do
-		local var8 = p7[i]
+	for i = #p6, 1, -1 do
+		local v4 = p6[i]
+		local NoCallback = Callback == nil
+		local CallbackResult = nil
 		
-		if p8 ~= nil then
-			local var9 = p8(var8.name)
-			
-			if var9 ~= nil then
-				t[var8.name] = var9
-			end
+		if not NoCallback then
+			CallbackResult = Callback(v4.name)
+			NoCallback = CallbackResult == nil
+		end
+		if not NoCallback then
+			t[v4.name] = CallbackResult
 		end
 	end
 	return t
 end
 
 return {
-	createGetL2Exclusions = function(p9)
-		-- upvalues: tempRnSwitchNavigatorName (ref), splitPaneStoreModule (ref), resolveEligibilityMap (ref), getLevel2RouteAndExclusions (ref)
-		local var10 = if p9 == nil then nil else function(p10)
-			-- upvalues: p9 (ref), tempRnSwitchNavigatorName (copy)
-			local t = { state = { routeName = p10 } }
-			local ok, status = pcall(function()
-				-- upvalues: p9 (copy), t (ref)
-				return p9.getScreenOptions(t, {})
+	createGetL2Exclusions = function(p7) --[[ Line: 178 ]]
+		-- upvalues: TempRnSwitchNavigatorName (copy), SplitPaneStoreModule (copy), resolveEligibilityMap (copy), getLevel2RouteAndExclusions (copy)
+		local v5 = if p7 == nil then nil else function(RouteName) --[[ Line: 39 ]]
+			-- upvalues: p7 (copy), TempRnSwitchNavigatorName (upval)
+			local config = { state = { routeName = RouteName } }
+			local Success, Result = pcall(function() --[[ Line: 41 ]]
+				-- upvalues: p7 (upval), config (copy)
+				return p7.getScreenOptions(config, {})
 			end)
 			
-			if ok and status ~= nil and status.splitPaneEligibility ~= nil then
-				return status.splitPaneEligibility
+			if Success and Result ~= nil and Result.splitPaneEligibility ~= nil then
+				return Result.splitPaneEligibility
 			end
-			local var11 = if p9.childRouters then p9.childRouters[tempRnSwitchNavigatorName] else nil
+			local ChildRouter = if p7.childRouters then p7.childRouters[TempRnSwitchNavigatorName] else nil
 			
-			if var11 ~= nil then
-				local ok_1, status_1 = pcall(function()
-					-- upvalues: var11 (ref), t (ref)
-					return var11.getScreenOptions(t, {})
+			if ChildRouter ~= nil then
+				local Success1, Result1 = pcall(function() --[[ Line: 51 ]]
+					-- upvalues: ChildRouter (copy), config (copy)
+					return ChildRouter.getScreenOptions(config, {})
 				end)
 				
-				return if ok_1 and status_1 ~= nil and status_1.splitPaneEligibility ~= nil then status_1.splitPaneEligibility else nil
+				if Success1 and Result1 ~= nil and Result1.splitPaneEligibility ~= nil then
+					return Result1.splitPaneEligibility
+				end
 			end
+			return nil
 		end
 		
-		return function(p10, p11)
-			-- upvalues: splitPaneStoreModule (copy), resolveEligibilityMap (copy), var10 (ref), getLevel2RouteAndExclusions (copy)
-			if splitPaneStoreModule.getStore().getIsBreakpointEnabled(p10) and p11 ~= nil then
-				local _, var11 = getLevel2RouteAndExclusions(p11, resolveEligibilityMap(p11, var10))
+		return function(p8, p9) --[[ Line: 180 ]]
+			-- upvalues: SplitPaneStoreModule (upval), resolveEligibilityMap (upval), v5 (copy), getLevel2RouteAndExclusions (upval)
+			if SplitPaneStoreModule.getStore().getIsBreakpointEnabled(p8) and p9 ~= nil then
+				local _, Level2RouteAndExclusions2 = getLevel2RouteAndExclusions(p9, (resolveEligibilityMap(p9, v5)))
 				
-				return var11
+				return Level2RouteAndExclusions2
+			else
+				return nil
+			end
+		end
+	end,
+	createResolveEligibility = function(p7) --[[ Line: 35 ]]
+		-- upvalues: TempRnSwitchNavigatorName (copy)
+		return if p7 == nil then nil else function(RouteName) --[[ Line: 39 ]]
+			-- upvalues: p7 (copy), TempRnSwitchNavigatorName (upval)
+			local config = { state = { routeName = RouteName } }
+			local Success, Result = pcall(function() --[[ Line: 41 ]]
+				-- upvalues: p7 (upval), config (copy)
+				return p7.getScreenOptions(config, {})
+			end)
+			
+			if Success and Result ~= nil and Result.splitPaneEligibility ~= nil then
+				return Result.splitPaneEligibility
+			end
+			local ChildRouter = if p7.childRouters then p7.childRouters[TempRnSwitchNavigatorName] else nil
+			
+			if ChildRouter ~= nil then
+				local Success1, Result1 = pcall(function() --[[ Line: 51 ]]
+					-- upvalues: ChildRouter (copy), config (copy)
+					return ChildRouter.getScreenOptions(config, {})
+				end)
+				
+				if Success1 and Result1 ~= nil and Result1.splitPaneEligibility ~= nil then
+					return Result1.splitPaneEligibility
+				end
 			end
 			return nil
 		end
 	end,
-	createResolveEligibility = createResolveEligibility,
-	subscribeToRouteSignal = function(value, p9)
-		-- upvalues: splitL3StoreModule (ref), resolveEligibilityMap (ref), routeHasSupportAboveContent (ref), resolveL3Page (ref), sessionTypeModule (ref), getIsSplitL3Enabled (ref), signalsModule (ref), splitPaneStoreModule (ref)
-		local var10 = nil
-		local store = splitL3StoreModule.getStore()
+	subscribeToRouteSignal = function(Callback, p7) --[[ Line: 191 ]]
+		-- upvalues: SplitL3StoreModule (copy), resolveEligibilityMap (copy), routeHasSupportAboveContent (copy), resolveL3Page (copy), SessionTypeModule (copy), getIsSplitL3Enabled (copy), SignalsModule (copy), SplitPaneStoreModule (copy)
+		local v5 = nil
+		local Store = SplitL3StoreModule.getStore()
 		
-		local function handleRouteChange(p10, p11)
-			-- upvalues: p9 (ref), store (ref), resolveEligibilityMap (copy), routeHasSupportAboveContent (copy), resolveL3Page (copy), sessionTypeModule (copy)
-			if not p11 or p9 == nil then
-				store.setPendingSplitSubPaneTag(nil)
-				store.setPendingSplitSubPaneDetail(nil)
+		local function handleRouteChange(p8, IsBreakpointEnabled) --[[ Line: 197 ]]
+			-- upvalues: p7 (copy), Store (copy), resolveEligibilityMap (upval), routeHasSupportAboveContent (upval), resolveL3Page (upval), SessionTypeModule (upval)
+			if not IsBreakpointEnabled or p7 == nil then
+				Store.setPendingSplitSubPaneTag(nil)
+				Store.setPendingSplitSubPaneDetail(nil)
 				
 				return
 			end
-			local var11
-			local var12 = resolveEligibilityMap(p10, p9)
-			local var13 = routeHasSupportAboveContent(p10, var12)
-			local setPendingSplitSubPaneTag = store.setPendingSplitSubPaneTag
+			local ResolveEligibilityMapResult = resolveEligibilityMap(p8, p7)
+			local RouteHasSupportAboveContentResult = routeHasSupportAboveContent(p8, ResolveEligibilityMapResult)
+			local SetPendingSplitSubPaneTagFunction: (any) -> () = Store.setPendingSplitSubPaneTag
+			local SplitSubPaneEntry = nil
 			
-			if var13 then
-				local var14 = resolveL3Page(p10, var12)
-				var11 = if var14 == nil then nil else sessionTypeModule.Tag.SplitSubPane[var14.name] or var14.name
+			if RouteHasSupportAboveContentResult then
+				local ResolveL3PageResult = resolveL3Page(p8, ResolveEligibilityMapResult)
+				SplitSubPaneEntry = if ResolveL3PageResult == nil then nil else SessionTypeModule.Tag.SplitSubPane[ResolveL3PageResult.name] or ResolveL3PageResult.name
 			else
-				var11 = nil
+				SplitSubPaneEntry = nil
 			end
-			local var15
-			setPendingSplitSubPaneTag(var11)
-			local setPendingSplitSubPaneDetail = store.setPendingSplitSubPaneDetail
+			SetPendingSplitSubPaneTagFunction(SplitSubPaneEntry)
+			local SetPendingSplitSubPaneDetailFunction: (any) -> () = Store.setPendingSplitSubPaneDetail
+			local Detail = nil
 			
-			if var13 then
-				local var16, var17 = resolveL3Page(p10, var12)
-				var15 = if var16 == nil then nil elseif var16.detail ~= nil then if var17 ~= nil then nil else var17.detail else var16.detail
+			if RouteHasSupportAboveContentResult then
+				local ResolveL3PageResult, ResolveL3PageResult2 = resolveL3Page(p8, ResolveEligibilityMapResult)
+				Detail = if ResolveL3PageResult == nil then nil elseif ResolveL3PageResult.detail == nil then if ResolveL3PageResult2 == nil then nil else ResolveL3PageResult2.detail else ResolveL3PageResult.detail
 			else
-				var15 = nil
+				Detail = nil
 			end
-			setPendingSplitSubPaneDetail(var15)
+			SetPendingSplitSubPaneDetailFunction(Detail)
 		end
 		
-		local var11 = value(function(p10)
-			-- upvalues: var10 (write), handleRouteChange (ref), getIsSplitL3Enabled (copy)
-			var10 = p10
-			handleRouteChange(p10, getIsSplitL3Enabled(false))
+		local CallbackResult = Callback(function(p8) --[[ Line: 208 ]]
+			-- upvalues: v5 (ref), handleRouteChange (copy), getIsSplitL3Enabled (upval)
+			v5 = p8
+			handleRouteChange(p8, getIsSplitL3Enabled(false))
 		end)
-		local var12 = signalsModule.createEffect(function(p10)
-			-- upvalues: splitPaneStoreModule (copy), var10 (write), handleRouteChange (ref)
-			local isBreakpointEnabled = splitPaneStoreModule.getStore().getIsBreakpointEnabled(p10)
+		local Effect = SignalsModule.createEffect(function(p8) --[[ Line: 212 ]]
+			-- upvalues: SplitPaneStoreModule (upval), v5 (ref), handleRouteChange (copy)
+			local IsBreakpointEnabled = SplitPaneStoreModule.getStore().getIsBreakpointEnabled(p8)
 			
-			if var10 ~= nil then
-				handleRouteChange(var10, isBreakpointEnabled)
+			if v5 ~= nil then
+				handleRouteChange(v5, IsBreakpointEnabled)
 			end
 		end)
 		
-		return function()
-			-- upvalues: var11 (ref), var12 (ref)
-			if var11 ~= nil and var11.disconnect ~= nil then
-				var11:disconnect()
+		return function() --[[ Line: 218 ]]
+			-- upvalues: CallbackResult (copy), Effect (copy)
+			if CallbackResult ~= nil and CallbackResult.disconnect ~= nil then
+				CallbackResult:disconnect()
 			end
-			var12()
+			Effect()
 		end
 	end,
-	onSessionsUpdated = function()
-		-- upvalues: splitPaneStoreModule (ref), splitL3StoreModule (ref)
-		if splitPaneStoreModule.getStore().getIsBreakpointEnabled(false) then
-			local store = splitL3StoreModule.getStore()
-			store.setSplitL2SessionVersion(store.getSplitL2SessionVersion(false) + 1)
+	onSessionsUpdated = function() --[[ Line: 226 ]]
+		-- upvalues: SplitPaneStoreModule (copy), SplitL3StoreModule (copy)
+		if SplitPaneStoreModule.getStore().getIsBreakpointEnabled(false) then
+			local Store = SplitL3StoreModule.getStore()
+			Store.setSplitL2SessionVersion(Store.getSplitL2SessionVersion(false) + 1)
 			
 			return
 		end
 	end,
-	applySplitSubPaneSession = function(p9, p10, ...)
-		-- upvalues: splitPaneStoreModule (ref), splitL3StoreModule (ref), sessionType (ref), sessionTypeModule (ref)
-		local var10 = select("#", ...) > 0
-		local var11 = if var10 then ... else nil
+	applySplitSubPaneSession = function(SessionService, SessionTag, ...) --[[ Line: 234 ]]
+		-- upvalues: SplitPaneStoreModule (copy), SplitL3StoreModule (copy), SessionType (copy), SessionTypeModule (copy)
+		local IsSelectedAbove = select("#", ...) > 0
+		local SplitL3AppliedDetail = if IsSelectedAbove then (...) else nil
 		
-		if not splitPaneStoreModule.getStore().getIsBreakpointEnabled(false) then
-			p10 = nil
-			var10 = true
-			var11 = nil
+		if not SplitPaneStoreModule.getStore().getIsBreakpointEnabled(false) then
+			SessionTag = nil
+			IsSelectedAbove = true
+			SplitL3AppliedDetail = nil
 		end
-		local store = splitL3StoreModule.getStore()
-		local splitL3AppliedDetail = store.getSplitL3AppliedDetail(false)
-		local level2b = sessionType.StructuralIdentifier.Level2b
-		local splitSubPane = sessionTypeModule.StructuralIdentifier.SplitSubPane
-		local var12 = p9:SessionExists(splitSubPane)
-		local var13 = if var12 then p9:GetSessionTag(splitSubPane) else nil
+		local Store = SplitL3StoreModule.getStore()
+		local SplitL3AppliedDetail1 = Store.getSplitL3AppliedDetail(false)
+		local Level2b = SessionType.StructuralIdentifier.Level2b
+		local SplitSubPane = SessionTypeModule.StructuralIdentifier.SplitSubPane
+		local SessionExistsResult = SessionService:SessionExists(SplitSubPane)
+		local SessionTag1 = if SessionExistsResult then SessionService:GetSessionTag(SplitSubPane) else nil
 		
-		local function _()
-			-- upvalues: var10 (write), store (ref), var11 (write)
-			if var10 then
-				store.setSplitL3AppliedDetail(var11)
+		local function _() --[[ Line: 249 | Named "writeAppliedDetail" ]]
+			-- upvalues: IsSelectedAbove (ref), Store (copy), SplitL3AppliedDetail (ref)
+			if IsSelectedAbove then
+				Store.setSplitL3AppliedDetail(SplitL3AppliedDetail)
 				
 				return
+			else
+				Store.setSplitL3AppliedDetail(nil)
 			end
-			store.setSplitL3AppliedDetail(nil)
 		end
 		
-		if p10 == nil then
-			if var12 then
-				p9:RemoveSession(splitSubPane)
+		if SessionTag == nil then
+			if SessionExistsResult then
+				SessionService:RemoveSession(SplitSubPane)
 			end
-			store.setSplitL3AppliedDetail(nil)
+			Store.setSplitL3AppliedDetail(nil)
 			
 			return
-		elseif not p9:SessionExists(level2b) then return end
-		local var14 = var10 and splitL3AppliedDetail ~= var11
+		elseif not SessionService:SessionExists(Level2b) then return end
+		local IsNotSplitL3AppliedDetailMatch: boolean = IsSelectedAbove and SplitL3AppliedDetail1 ~= SplitL3AppliedDetail
 		
-		if not p9:SessionExists(splitSubPane) then
-			p9:SetSession(level2b, splitSubPane, p10)
+		if not SessionService:SessionExists(SplitSubPane) then
+			SessionService:SetSession(Level2b, SplitSubPane, SessionTag)
 			
-			if var10 then
-				store.setSplitL3AppliedDetail(var11)
+			if IsSelectedAbove then
+				Store.setSplitL3AppliedDetail(SplitL3AppliedDetail)
 			else
-				store.setSplitL3AppliedDetail(nil)
+				Store.setSplitL3AppliedDetail(nil)
 			end
-		elseif var13 ~= p10 or var14 then
-			p9:ReplaceSession(splitSubPane, p10)
+		elseif SessionTag1 ~= SessionTag or IsNotSplitL3AppliedDetailMatch then
+			SessionService:ReplaceSession(SplitSubPane, SessionTag)
 			
-			if var10 then
-				store.setSplitL3AppliedDetail(var11)
+			if IsSelectedAbove then
+				Store.setSplitL3AppliedDetail(SplitL3AppliedDetail)
 			else
-				store.setSplitL3AppliedDetail(nil)
+				Store.setSplitL3AppliedDetail(nil)
 			end
 		end
 	end

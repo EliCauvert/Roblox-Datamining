@@ -1,32 +1,32 @@
-﻿local parent = script:FindFirstAncestor("GameInfosRodux").Parent
-local addGamesModule = require(script.Parent.AddGames)
-local cryoModule = require(parent.Cryo)
-local _ = require(parent.DiscoveryTypes)
+﻿local Parent = script:FindFirstAncestor("GameInfosRodux").Parent
+local AddGamesModule = require(script.Parent.AddGames)
+local CryoModule = require(Parent.Cryo)
+local _ = require(Parent.DiscoveryTypes)
 
-local function getMergedState(p1, p2)
-	-- upvalues: cryoModule (ref)
-	local t = {}
+local function getMergedState(p1, Games) --[[ Line: 12 ]]
+	-- upvalues: CryoModule (copy)
+	local JoinResults = {}
 	
-	for i, v in pairs(p2) do
+	for i, _ in pairs(Games) do
 		if p1[i] then
-			t[i] = cryoModule.Dictionary.join(p1[i], p2[i])
+			JoinResults[i] = CryoModule.Dictionary.join(p1[i], Games[i])
 		else
-			t[i] = p2[i]
+			JoinResults[i] = Games[i]
 		end
 	end
-	return cryoModule.Dictionary.join(p1, t)
+	return (CryoModule.Dictionary.join(p1, JoinResults))
 end
 
 return {
 	key = "GameInfosKey",
-	reducer = function(p3, p4)
-		-- upvalues: addGamesModule (ref), getMergedState (ref)
-		p3 = p3 or {}
-		assert(p3, "")
+	reducer = function(p2, p3) --[[ Line: 26 ]]
+		-- upvalues: AddGamesModule (copy), getMergedState (copy)
+		local P2 = p2 or {}
+		assert(P2, "")
 		
-		if p4.type == addGamesModule.name then
-			p3 = getMergedState(p3, p4.games)
+		if p3.type == AddGamesModule.name then
+			P2 = getMergedState(P2, p3.games)
 		end
-		return p3
+		return P2
 	end
 }

@@ -1,13 +1,13 @@
-﻿local appChatNetworking = script:FindFirstAncestor("AppChatNetworking")
-local luauPolyfillModule = require(appChatNetworking.Parent.LuauPolyfill)
-local CHAT_PLATFORM_BASE_URLModule = require(appChatNetworking.url.CHAT_PLATFORM_BASE_URL)
+﻿local AppChatNetworking = script:FindFirstAncestor("AppChatNetworking")
+local LuauPolyfillModule = require(AppChatNetworking.Parent.LuauPolyfill)
+local CHATPLATFORMBASEURLModule = require(AppChatNetworking.url.CHAT_PLATFORM_BASE_URL)
 
-return require(script.Parent.RoduxNetworking).POST(script.Name, function(p1, p2, p3)
-	-- upvalues: luauPolyfillModule (ref), CHAT_PLATFORM_BASE_URLModule (ref)
-	return p1(CHAT_PLATFORM_BASE_URLModule):path("v1"):path("add-users"):body({
-		conversation_id = p2,
-		user_ids = luauPolyfillModule.Array.map(p3, function(p4)
-			return tonumber(p4)
+return require(script.Parent.RoduxNetworking).POST(script.Name, function(Callback, Conversation_id, p1) --[[ Line: 11 ]]
+	-- upvalues: LuauPolyfillModule (copy), CHATPLATFORMBASEURLModule (copy)
+	return Callback(CHATPLATFORMBASEURLModule):path("v1"):path("add-users"):body({
+		conversation_id = Conversation_id,
+		user_ids = LuauPolyfillModule.Array.map(p1, function(p2): number --[[ Line: 12 ]]
+			return (tonumber(p2))
 		end)
 	})
 end)

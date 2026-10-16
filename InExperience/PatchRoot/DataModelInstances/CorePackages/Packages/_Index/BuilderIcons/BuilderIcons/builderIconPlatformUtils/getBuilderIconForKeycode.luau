@@ -1,16 +1,17 @@
-﻿local keycodeMappingsModule = require(script.Parent.KeycodeMappings)
-local platformModule = require(script.Parent.Platform)
-local getInputPlatformModule = require(script.Parent.getInputPlatform)
+﻿local KeycodeMappingsModule = require(script.Parent.KeycodeMappings)
+local PlatformModule = require(script.Parent.Platform)
+local GetInputPlatformModule = require(script.Parent.getInputPlatform)
 
-return function(p1)
-	-- upvalues: getInputPlatformModule (ref), keycodeMappingsModule (ref), platformModule (ref)
-	local name = p1.Name
-	local var1 = keycodeMappingsModule[getInputPlatformModule()][name]
+return function(p1) --[[ Line: 5 | Named "getBuilderIconForKeycode" ]]
+	-- upvalues: GetInputPlatformModule (copy), KeycodeMappingsModule (copy), PlatformModule (copy)
+	local Name = p1.Name
+	local KeycodeMappingsModuleEntry = KeycodeMappingsModule[GetInputPlatformModule()][Name]
 	
-	if var1 then
-		return var1
+	if KeycodeMappingsModuleEntry then
+		return KeycodeMappingsModuleEntry
+	else
+		assert(KeycodeMappingsModule[PlatformModule.Default][Name], `{Name} has no associated BuilderIcon`)
+		
+		return KeycodeMappingsModule[PlatformModule.Default][Name]
 	end
-	assert(keycodeMappingsModule[platformModule.Default][name], `{name} has no associated BuilderIcon`)
-	
-	return keycodeMappingsModule[platformModule.Default][name]
 end

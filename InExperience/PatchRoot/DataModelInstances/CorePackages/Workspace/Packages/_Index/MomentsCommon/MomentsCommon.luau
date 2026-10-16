@@ -2,7 +2,7 @@
 
 return {
 	Analytics = require(script.Analytics),
-	canRenderNativeMoments = function(p1)
+	canRenderNativeMoments = function(p1) --[[ Line: 119 ]]
 		return p1.isTabEnabled or p1.isFlyoutEntryEnabled and p1.platformIntegrationEnabled
 	end,
 	Flags = {
@@ -11,11 +11,9 @@ return {
 		GetFFlagMomentsNonInfiniteScroll = require(script.Flags.GetFFlagMomentsNonInfiniteScroll),
 		GetFFlagMomentsStickerButton = require(script.Flags.GetFFlagMomentsStickerButton),
 		FFlagMomentsFeedMediaLoadAttemptedEvent = require(script.Flags.FFlagMomentsFeedMediaLoadAttemptedEvent),
-		FFlagMomentsFeedHealthAnalytics = require(script.Flags.FFlagMomentsFeedHealthAnalytics),
 		FFlagMomentsVideoPermissionContextFix = require(script.Flags.FFlagMomentsVideoPermissionContextFix),
 		FFlagMomentsEngagementMetricsFeature = require(script.Flags.FFlagMomentsEngagementMetricsFeature),
 		FFlagMomentsMediaSmoothnessTelemetry = require(script.Flags.FFlagMomentsMediaSmoothnessTelemetry),
-		FFlagMomentsProfileGridInfiniteLoad = require(script.Flags.FFlagMomentsProfileGridInfiniteLoad),
 		FFlagMomentsRealtimeSessionTelemetry = require(script.Flags.FFlagMomentsRealtimeSessionTelemetry),
 		FFlagMomentsSessionHeartbeat = require(script.Flags.FFlagMomentsSessionHeartbeat),
 		FFlagMomentsUploadOutcomeTelemetry = require(script.Flags.FFlagMomentsUploadOutcomeTelemetry),
@@ -24,7 +22,9 @@ return {
 		FFlagMomentsCreationBackCta = require(script.Flags.FFlagMomentsCreationBackCta),
 		FFlagMomentsTextOverlayV2Redesign = require(script.Flags.FFlagMomentsTextOverlayV2Redesign),
 		FFlagMomentsSmartVideoFill = require(script.Flags.FFlagMomentsSmartVideoFill),
+		FFlagMomentsAudioSaveButton = require(script.Flags.FFlagMomentsAudioSaveButton),
 		FFlagMomentsTextOverlayChipGrowAboveKeyboard = require(script.Flags.FFlagMomentsTextOverlayChipGrowAboveKeyboard),
+		FFlagMomentsTextOverlayEdgeClipFix = require(script.Flags.FFlagMomentsTextOverlayEdgeClipFix),
 		GetFFlagMomentsUseUploadPostAsync = require(script.Flags.GetFFlagMomentsUseUploadPostAsync),
 		GetFFlagMomentsUseMomentsServiceForUpload = require(script.Flags.GetFFlagMomentsUseMomentsServiceForUpload),
 		GetFFlagMomentsCoachmarkPersistence = require(script.Flags.GetFFlagMomentsCoachmarkPersistence),
@@ -54,7 +54,7 @@ return {
 		useFormFactor = require(script.Hooks.useFormFactor),
 		useImageLoadingState = require(script.Hooks.useImageLoadingState),
 		useIsMultiTouchActive = require(script.Hooks.useIsMultiTouchActive),
-		useMomentsGating = function(...)
+		useMomentsGating = function(...) --[[ Line: 123 ]]
 			return require(script.Hooks.useMomentsGating)(...)
 		end,
 		useScreenSize = require(script.Hooks.useScreenSize),

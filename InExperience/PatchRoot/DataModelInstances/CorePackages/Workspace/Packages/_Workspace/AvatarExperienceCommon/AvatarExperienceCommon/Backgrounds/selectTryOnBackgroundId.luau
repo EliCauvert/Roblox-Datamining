@@ -1,22 +1,23 @@
-﻿local avatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
-local itemTypeEnum = require(avatarExperienceCommon.Parent.AvatarExperienceModel).Enums.ItemTypeEnum
-local avatarBackground = require(avatarExperienceCommon.Constants).ASSET_TYPE_NAME_TO_ID_STRING.AvatarBackground
+﻿local AvatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
+local ItemTypeEnum = require(AvatarExperienceCommon.Parent.AvatarExperienceModel).Enums.ItemTypeEnum
+local AvatarBackground = require(AvatarExperienceCommon.Constants).ASSET_TYPE_NAME_TO_ID_STRING.AvatarBackground
 
-return function(value)
-	-- upvalues: itemTypeEnum (ref), avatarBackground (ref)
-	local var1 = value and value.AvatarExperience
-	local avatarScene = var1 and var1.AvatarScene
-	local tryOnItems = avatarScene and (avatarScene.OutfitTryOn and avatarScene.OutfitTryOn.TryOnItems)
+return function(p1): number? --[[ Line: 15 | Named "selectTryOnBackgroundId" ]]
+	-- upvalues: ItemTypeEnum (copy), AvatarBackground (copy)
+	local AvatarExperience = p1 and p1.AvatarExperience or p1
+	local AvatarScene = AvatarExperience and AvatarExperience.AvatarScene
+	local TryOnItems = AvatarScene and (AvatarScene.OutfitTryOn and AvatarScene.OutfitTryOn.TryOnItems)
 	
-	if not tryOnItems then
+	if not TryOnItems then
 		return nil
 	end
-	for i, v in tryOnItems do
-		if not v.isUnequipped and v.itemType == itemTypeEnum.Asset and v.itemSubType == avatarBackground then
-			local var2 = tonumber(v.itemId)
+	local Number = nil
+	for _, tryOnItem in TryOnItems do
+		if not tryOnItem.isUnequipped and tryOnItem.itemType == ItemTypeEnum.Asset and tryOnItem.itemSubType == AvatarBackground then
+			Number = tonumber(tryOnItem.itemId)
 			
-			if var2 then
-				return var2
+			if Number then
+				return Number
 			end
 		end
 	end

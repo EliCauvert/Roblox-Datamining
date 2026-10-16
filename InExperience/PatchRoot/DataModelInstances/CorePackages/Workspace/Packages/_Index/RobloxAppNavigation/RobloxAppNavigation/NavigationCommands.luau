@@ -1,91 +1,91 @@
-﻿local parent = script:FindFirstAncestor("RobloxAppNavigation").Parent
-local roactNavigationModule = require(parent.RoactNavigation)
-local appNavigationRegistryModule = require(script.Parent.AppNavigationRegistry)
-local trackStart = require(parent.TimeToInteractiveTracker).TimeToInteractiveTracker.trackStart
+﻿local Parent = script:FindFirstAncestor("RobloxAppNavigation").Parent
+local RoactNavigationModule = require(Parent.RoactNavigation)
+local AppNavigationRegistryModule = require(script.Parent.AppNavigationRegistry)
+local TrackStartFunction = require(Parent.TimeToInteractiveTracker).TimeToInteractiveTracker.trackStart
 
-local function _(p1)
-	-- upvalues: appNavigationRegistryModule (ref)
-	return not p1 and appNavigationRegistryModule.get().getIsNavigating(false)
+local function _(p1) --[[ Line: 33 | Named "isNavigationLocked" ]]
+	-- upvalues: AppNavigationRegistryModule (copy)
+	return not p1 and AppNavigationRegistryModule.get().getIsNavigating(false)
 end
 
 return {
-	back = function(p1)
-		-- upvalues: appNavigationRegistryModule (ref), roactNavigationModule (ref)
-		if not p1 and appNavigationRegistryModule.get().getIsNavigating(false) then
+	back = function(p1) --[[ Line: 65 ]]
+		-- upvalues: AppNavigationRegistryModule (copy), RoactNavigationModule (copy)
+		if p1 or not AppNavigationRegistryModule.get().getIsNavigating(false) then
+			AppNavigationRegistryModule.get().dispatch(RoactNavigationModule.Actions.back())
+			
 			return
 		end
-		appNavigationRegistryModule.get().dispatch(roactNavigationModule.Actions.back())
 	end,
-	down = function(p1, p2)
-		-- upvalues: appNavigationRegistryModule (ref), trackStart (ref), roactNavigationModule (ref)
-		if not p2 and appNavigationRegistryModule.get().getIsNavigating(false) then return end
-		if trackStart then
-			trackStart("NavigateTo_" .. p2.routeName, true)
+	down = function(p1, p2) --[[ Line: 72 ]]
+		-- upvalues: AppNavigationRegistryModule (copy), TrackStartFunction (copy), RoactNavigationModule (copy)
+		if not p2 and AppNavigationRegistryModule.get().getIsNavigating(false) then return end
+		if TrackStartFunction then
+			TrackStartFunction("NavigateTo_" .. p1.routeName, true)
 		end
-		appNavigationRegistryModule.get().dispatch(roactNavigationModule.StackActions.push(p1))
+		AppNavigationRegistryModule.get().dispatch(RoactNavigationModule.StackActions.push(p1))
 	end,
-	to = function(p1, p2)
-		-- upvalues: appNavigationRegistryModule (ref), trackStart (ref), roactNavigationModule (ref)
-		if not p2 and appNavigationRegistryModule.get().getIsNavigating(false) then return end
-		if trackStart then
-			trackStart("NavigateTo_" .. p4.routeName, true)
+	to = function(p1, p2) --[[ Line: 82 ]]
+		-- upvalues: AppNavigationRegistryModule (copy), TrackStartFunction (copy), RoactNavigationModule (copy)
+		if not p2 and AppNavigationRegistryModule.get().getIsNavigating(false) then return end
+		if TrackStartFunction then
+			TrackStartFunction("NavigateTo_" .. p1.routeName, true)
 		end
-		appNavigationRegistryModule.get().dispatch(roactNavigationModule.Actions.navigate(p1))
+		AppNavigationRegistryModule.get().dispatch(RoactNavigationModule.Actions.navigate(p1))
 	end,
-	sideways = function(p1, p2)
-		-- upvalues: appNavigationRegistryModule (ref), trackStart (ref), roactNavigationModule (ref)
-		if not p2 and appNavigationRegistryModule.get().getIsNavigating(false) then return end
-		if trackStart then
-			trackStart("NavigateTo_" .. p6.routeName, true)
+	sideways = function(p1, p2) --[[ Line: 92 ]]
+		-- upvalues: AppNavigationRegistryModule (copy), TrackStartFunction (copy), RoactNavigationModule (copy)
+		if not p2 and AppNavigationRegistryModule.get().getIsNavigating(false) then return end
+		if TrackStartFunction then
+			TrackStartFunction("NavigateTo_" .. p1.routeName, true)
 		end
-		appNavigationRegistryModule.get().dispatch(roactNavigationModule.Actions.navigate(p1))
+		AppNavigationRegistryModule.get().dispatch(RoactNavigationModule.Actions.navigate(p1))
 	end,
-	fromWebView = function(p1, p2)
-		-- upvalues: appNavigationRegistryModule (ref), trackStart (ref), roactNavigationModule (ref)
-		if not p2 and appNavigationRegistryModule.get().getIsNavigating(false) then return end
-		if trackStart then
-			trackStart("NavigateTo_" .. p8.routeName, true)
+	fromWebView = function(p1, p2) --[[ Line: 102 ]]
+		-- upvalues: AppNavigationRegistryModule (copy), TrackStartFunction (copy), RoactNavigationModule (copy)
+		if not p2 and AppNavigationRegistryModule.get().getIsNavigating(false) then return end
+		if TrackStartFunction then
+			TrackStartFunction("NavigateTo_" .. p1.routeName, true)
 		end
-		appNavigationRegistryModule.get().dispatch(roactNavigationModule.StackActions.replace(p1))
+		AppNavigationRegistryModule.get().dispatch(RoactNavigationModule.StackActions.replace(p1))
 	end,
-	resetStack = function(value, p1, p2)
-		-- upvalues: appNavigationRegistryModule (ref), roactNavigationModule (ref), trackStart (ref)
-		if not p2 and appNavigationRegistryModule.get().getIsNavigating(false) then return end
-		local t = {}
-		local var1 = if p1 then p1.wrapAction else nil
-		
-		for i, v in value do
-			local var2 = roactNavigationModule.Actions.navigate(v)
+	resetStack = function(List, p1, p2) --[[ Line: 116 ]]
+		-- upvalues: AppNavigationRegistryModule (copy), RoactNavigationModule (copy), TrackStartFunction (copy)
+		if not p2 and AppNavigationRegistryModule.get().getIsNavigating(false) then return end
+		local Actions = {}
+		local WrapAction = if p1 then p1.wrapAction else nil
+		for _, value in List do
+			local NavigateResult = RoactNavigationModule.Actions.navigate(value)
 			
-			if var1 then
-				var2 = var1(var2, v) or var2
+			if WrapAction then
+				NavigateResult = WrapAction(NavigateResult, value) or NavigateResult
 			end
-			table.insert(t, var2)
+			table.insert(Actions, NavigateResult)
 		end
-		if trackStart then
-			local var3 = value[#value]
+		if TrackStartFunction then
+			local Entry = List[#List]
 			
-			if var3 then
-				trackStart("NavigateTo_" .. var4.routeName, true)
+			if Entry then
+				TrackStartFunction("NavigateTo_" .. Entry.routeName, true)
 			end
 		end
-		appNavigationRegistryModule.get().dispatch(roactNavigationModule.StackActions.reset({ index = #t, actions = t }))
+		AppNavigationRegistryModule.get().dispatch(RoactNavigationModule.StackActions.reset({ index = #Actions, actions = Actions }))
 	end,
-	fromLegacyPage = function(p3)
-		local t = nil
+	fromLegacyPage = function(List) --[[ Line: 48 ]]
+		local Params = nil
 		
-		for i, v in p3 do
+		for i, value in List do
 			if i ~= "name" and i ~= "rnKey" and i ~= "key" then
-				if t == nil then
-					t = {}
+				if Params == nil then
+					Params = {}
 				end
-				t[i] = v
+				Params[i] = value
 			end
 		end
 		return {
-			routeName = p3.name,
-			params = t,
-			key = p3.rnKey or p3.key
+			routeName = List.name,
+			params = Params,
+			key = List.rnKey or List.key
 		}
 	end
 }

@@ -1,8 +1,8 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local useProfileWrapperContextModule = require(profilePlatform.Contexts.useProfileWrapperContext)
-local enumsModule = require(profilePlatform.Common.Enums)
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local UseProfileWrapperContextModule = require(ProfilePlatform.Contexts.useProfileWrapperContext)
+local EnumsModule = require(ProfilePlatform.Common.Enums)
 
-return function()
-	-- upvalues: useProfileWrapperContextModule (ref), enumsModule (ref)
-	return useProfileWrapperContextModule().headerVariant == enumsModule.ProfileTabVariants.MeTab
+return function(): boolean --[[ Line: 10 | Named "useIsMeTab" ]]
+	-- upvalues: UseProfileWrapperContextModule (copy), EnumsModule (copy)
+	return UseProfileWrapperContextModule().headerVariant == EnumsModule.ProfileTabVariants.MeTab
 end

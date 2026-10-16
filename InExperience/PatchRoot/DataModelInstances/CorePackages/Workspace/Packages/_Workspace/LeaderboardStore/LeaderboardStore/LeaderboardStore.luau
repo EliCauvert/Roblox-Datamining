@@ -1,59 +1,56 @@
-﻿local robloxReplicatedStorageService = game:GetService("RobloxReplicatedStorage")
-local parent = script.Parent.Parent
-local sharedFlagsModule = require(parent.SharedFlags)
-local signalsModule = require(parent.Signals)
-local coreScriptsRoactCommonModule = require(parent.CoreScriptsRoactCommon)
-local createSignalMap = coreScriptsRoactCommonModule.Utilities.createSignalMap
-local sortTableByValue = coreScriptsRoactCommonModule.Utilities.sortTableByValue
-local createPlayerStoreModule = require(script.Parent.createPlayerStore)
-local createTeamStoreModule = require(script.Parent.createTeamStore)
+﻿local RobloxReplicatedStorage = game:GetService("RobloxReplicatedStorage")
+local Parent = script.Parent.Parent
+local SignalsModule = require(Parent.Signals)
+local CoreScriptsRoactCommonModule = require(Parent.CoreScriptsRoactCommon)
+local CreateSignalMapFunction = CoreScriptsRoactCommonModule.Utilities.createSignalMap
+local SortTableByValueFunction = CoreScriptsRoactCommonModule.Utilities.sortTableByValue
+local CreatePlayerStoreModule = require(script.Parent.createPlayerStore)
+local CreateTeamStoreModule = require(script.Parent.createTeamStore)
 local _ = require(script.Parent.LeaderboardStoreTypes)
-local filterNewPlayerListValueStat = game:DefineFastFlag("FilterNewPlayerListValueStat", false)
-local playerListHideUnusedStats = game:DefineFastFlag("PlayerListHideUnusedStats", false)
-local fFlagPlayerListFixLeaderstatsStacking = sharedFlagsModule.FFlagPlayerListFixLeaderstatsStacking
-local playerListSortByLowercaseUsername = game:DefineFastFlag("PlayerListSortByLowercaseUsername", false)
-local t = {}
-t.__index = t
+local FilterNewPlayerListValueStat = game:DefineFastFlag("FilterNewPlayerListValueStat", false)
+local PlayerListHideUnusedStats = game:DefineFastFlag("PlayerListHideUnusedStats", false)
+local FFlagPlayerListFixLeaderstatsStacking = require(Parent.SharedFlags).FFlagPlayerListFixLeaderstatsStacking
+local PlayerListSortByLowercaseUsername = game:DefineFastFlag("PlayerListSortByLowercaseUsername", false)
+local LeaderboardStore = {}
+LeaderboardStore.__index = LeaderboardStore
 
-function t.new(p1, p2)
-	-- upvalues: t (ref), signalsModule (ref), createSignalMap (ref), createTeamStoreModule (ref)
-	local tbl = setmetatable({ _leaderboardConnections = {} }, t)
-	tbl._teamStores = {}
-	tbl._playerStores = {}
-	tbl._teamsService = p1
-	tbl._playersService = p2
-	local var1, var2 = signalsModule.createSignal({})
-	tbl._getServerAddOrder = var1
-	tbl._setServerAddOrder = var2
-	tbl._serverAddOrderConnection = {}
-	tbl._serverInstanceAddedConnection = nil
-	tbl._serverAddOrderEffectCleanup = nil
-	tbl._gameStatMetadata = {}
-	tbl._topGameStatsOrder = createSignalMap()
-	tbl._topGameStatsOrderSetter = {}
-	tbl._topGameStatSortOrder = {}
-	tbl._gameStatsUsage = {}
-	tbl._virtualTeamList = createSignalMap()
-	tbl._teamStores.Neutral = createTeamStoreModule("Neutral", p1)
-	local neutral = tbl._teamStores.Neutral
-	tbl._virtualTeamList.setData("Neutral", {
-		name = neutral.getName,
-		color = neutral.getColor,
-		order = neutral.getOrder,
-		stats = neutral.getStats,
-		players = neutral.getPlayers
+function LeaderboardStore.new(_teamsService, _playersService) --[[ Line: 54 ]]
+	-- upvalues: LeaderboardStore (copy), SignalsModule (copy), CreateSignalMapFunction (copy), CreateTeamStoreModule (copy)
+	local self = setmetatable({ _leaderboardConnections = {} }, LeaderboardStore)
+	self._teamStores = {}
+	self._playerStores = {}
+	self._teamsService = _teamsService
+	self._playersService = _playersService
+	self._getServerAddOrder, self._setServerAddOrder = SignalsModule.createSignal({})
+	self._serverAddOrderConnection = {}
+	self._serverInstanceAddedConnection = nil
+	self._serverAddOrderEffectCleanup = nil
+	self._gameStatMetadata = {}
+	self._topGameStatsOrder = CreateSignalMapFunction()
+	self._topGameStatsOrderSetter = {}
+	self._topGameStatSortOrder = {}
+	self._gameStatsUsage = {}
+	self._virtualTeamList = CreateSignalMapFunction()
+	self._teamStores.Neutral = CreateTeamStoreModule("Neutral", _teamsService)
+	local Neutral = self._teamStores.Neutral
+	self._virtualTeamList.setData("Neutral", {
+		name = Neutral.getName,
+		color = Neutral.getColor,
+		order = Neutral.getOrder,
+		stats = Neutral.getStats,
+		players = Neutral.getPlayers
 	}, false)
-	tbl:_connectPlayers()
-	tbl:_connectTeams()
-	tbl:_updateServerAddOrder()
+	self:_connectPlayers()
+	self:_connectTeams()
+	self:_updateServerAddOrder()
 	
-	return tbl
+	return self
 end
 
-function t:destroy()
-	for i, v in pairs(self._serverAddOrderConnection) do
-		if v.Disconnect then
-			v:Disconnect()
+function LeaderboardStore:destroy() --[[ Line: 105 ]]
+	for _, Connection in pairs(self._serverAddOrderConnection) do
+		if Connection.Disconnect then
+			Connection:Disconnect()
 		end
 	end
 	self._serverAddOrderConnection = {}
@@ -66,507 +63,528 @@ function t:destroy()
 	end
 	self._serverInstanceAddedConnection = nil
 	
-	for i, v_1 in pairs(self._leaderboardConnections) do
-		if v_1.Disconnect then
-			v_1:Disconnect()
+	for _, leaderboardConnection in pairs(self._leaderboardConnections) do
+		if leaderboardConnection.Disconnect then
+			leaderboardConnection:Disconnect()
 		end
 	end
 	self._leaderboardConnections = {}
 	
-	for i, v_2 in pairs(self._teamStores) do
-		v_2.destroy()
+	for _, teamStore in pairs(self._teamStores) do
+		teamStore.destroy()
 	end
 	self._teamStores = {}
 	
-	for i, v_3 in pairs(self._playerStores) do
-		v_3.destroy()
+	for _, playerStore in pairs(self._playerStores) do
+		playerStore.destroy()
 	end
 	self._playerStores = {}
 end
 
-function t:getGameStatsList()
+function LeaderboardStore:getGameStatsList() --[[ Line: 140 ]]
 	return self._topGameStatsOrder
 end
 
-function t:getTeamList()
+function LeaderboardStore:getTeamList() --[[ Line: 144 ]]
 	return self._virtualTeamList
 end
 
-function t:getTeamPlayerList(p1, _)
-	-- upvalues: createSignalMap (ref)
-	local var1 = self._teamStores[p1]
+function LeaderboardStore:getTeamPlayerList(p1, _) --[[ Line: 148 ]]
+	-- upvalues: CreateSignalMapFunction (copy)
+	local TeamStore = self._teamStores[p1]
 	
-	return if var1 then var1.getPlayers else createSignalMap()
+	return if TeamStore then TeamStore.getPlayers else CreateSignalMapFunction()
 end
 
-function t:getPlayerEntry(p1, _)
-	local var1 = self._playerStores[p1]
+function LeaderboardStore:getPlayerEntry(p1, _) --[[ Line: 159 ]]
+	local PlayerStore = self._playerStores[p1]
 	
-	return if var1 then var1.getPlayerEntry() else nil
+	return if PlayerStore then PlayerStore.getPlayerEntry() else nil
 end
 
-function t:_updateTeamStats(p1, p2)
-	local var1 = self._teamStores[p1]
+function LeaderboardStore:_updateTeamStats(p1, p2) --[[ Line: 170 ]]
+	local TeamStore = self._teamStores[p1]
 	
-	if var1 then
-		var1.updateStat(p2, function(p3, p4, p5)
-			-- upvalues: self (ref)
-			local var2 = self._playerStores[p3]
+	if TeamStore then
+		TeamStore.updateStat(p2, function(p3, p4, p5) --[[ Line: 173 ]]
+			-- upvalues: self (copy)
+			local PlayerStore = self._playerStores[p3]
 			
-			return if var2 then var2.getStatValue(p4, p5) else nil
+			return if PlayerStore then PlayerStore.getStatValue(p4, p5) else nil
 		end)
 	end
 end
 
-function t:_removeTeamStats(p1, p2)
-	local var1 = self._teamStores[p1]
+function LeaderboardStore:_removeTeamStats(p1, p2) --[[ Line: 183 ]]
+	local TeamStore = self._teamStores[p1]
 	
-	if var1 then
-		var1.removeStat(p2)
+	if TeamStore then
+		TeamStore.removeStat(p2)
 	end
 end
 
-function t:_updateAllTeamStats(p1)
-	for i, v in pairs(self._teamStores) do
-		self:_updateTeamStats(i, p1)
+function LeaderboardStore:_updateAllTeamStats(Name) --[[ Line: 190 ]]
+	for i, _ in pairs(self._teamStores) do
+		self:_updateTeamStats(i, Name)
 	end
 end
 
-function t:_removeAllTeamStats(p2)
-	for i, v in pairs(self._teamStores) do
-		self:_removeTeamStats(i, p2)
+function LeaderboardStore:_removeAllTeamStats(p1) --[[ Line: 197 ]]
+	for i, _ in pairs(self._teamStores) do
+		self:_removeTeamStats(i, p1)
 	end
 end
 
-function t:_shouldSortPlayers(_, p3)
-	return if p3 then if p3 == self._topGameStatSortOrder[1] and self._gameStatMetadata[p3] and self._gameStatMetadata[p3].isNumber then true elseif self._gameStatMetadata[p3] and self._gameStatMetadata[p3].priority == 1e999 then true else self._topGameStatSortOrder[1] or not self._gameStatMetadata[p3] or not self._gameStatMetadata[p3].isNumber else true
+function LeaderboardStore:_shouldSortPlayers(_, TopGameStatSortOrderEntry): boolean --[[ Line: 204 ]]
+	if not TopGameStatSortOrderEntry then
+		return true
+	elseif TopGameStatSortOrderEntry == self._topGameStatSortOrder[1] and self._gameStatMetadata[TopGameStatSortOrderEntry] and self._gameStatMetadata[TopGameStatSortOrderEntry].isNumber then
+		return true
+	elseif self._gameStatMetadata[TopGameStatSortOrderEntry] and self._gameStatMetadata[TopGameStatSortOrderEntry].priority == 1e999 then
+		return true
+	elseif self._topGameStatSortOrder[1] or not self._gameStatMetadata[TopGameStatSortOrderEntry] or not self._gameStatMetadata[TopGameStatSortOrderEntry].isNumber then
+		return false
+	else
+		return true
+	end
 end
 
-function t:_sortPlayers(p3, p4)
-	-- upvalues: sortTableByValue (ref)
-	if not self:_shouldSortPlayers(p3, p4) then return end
-	local var1 = self._teamStores[p3]
+function LeaderboardStore:_sortPlayers(Team, p2) --[[ Line: 233 ]]
+	-- upvalues: SortTableByValueFunction (copy)
+	if not self:_shouldSortPlayers(Team, p2) then return end
+	local TeamStore = self._teamStores[Team]
 	
-	if not var1 then return end
-	for i, v in ipairs(sortTableByValue(var1.getPlayers.getAllData(false), self:_compareStatsValue(self._topGameStatSortOrder))) do
-		local key = self._playerStores[v.key]
+	if not TeamStore then return end
+	for i, value in ipairs((SortTableByValueFunction(TeamStore.getPlayers.getAllData(false), self:_compareStatsValue(self._topGameStatSortOrder)))) do
+		local PlayerStore = self._playerStores[value.key]
 		
-		if key then
-			key.setOrder(i)
+		if PlayerStore then
+			PlayerStore.setOrder(i)
 		end
 	end
 end
 
-function t._compareStatsValue(p5, p6)
-	-- upvalues: playerListSortByLowercaseUsername (ref)
-	return function(p7, p8)
-		-- upvalues: p6 (ref), p5 (ref), playerListSortByLowercaseUsername (copy)
-		local var2 = p6[1]
+function LeaderboardStore._compareStatsValue(p3, Entry) --[[ Line: 266 ]]
+	-- upvalues: PlayerListSortByLowercaseUsername (copy)
+	return function(p4, p5) --[[ Line: 267 ]]
+		-- upvalues: Entry (copy), p3 (copy), PlayerListSortByLowercaseUsername (upval)
+		local Entry1 = Entry[1]
 		
-		if var2 then
-			local key = p5._playerStores[p7.key]
-			local key_1 = p5._playerStores[p8.key]
+		if Entry1 then
+			local PlayerStore = p3._playerStores[p4.key]
+			local PlayerStore1 = p3._playerStores[p5.key]
 			
-			if not key then
-				return false
-			elseif not key_1 then
-				return true
-			end
-			local data = key.getPlayerEntry().stats.getData(var2, false)
-			
-			if data == nil then
+			if not PlayerStore then
 				return false
 			end
-			local data_1 = key_1.getPlayerEntry().stats.getData(var2, false)
-			
-			if data_1 == nil then
+			if not PlayerStore1 then
 				return true
 			end
-			local var3 = data(false)
-			local var4 = data_1(false)
+			local Data = PlayerStore.getPlayerEntry().stats.getData(Entry1, false)
 			
-			return if typeof(var3) == typeof(var4) and var3 ~= var4 then p5:_compareRawStatsValue(var3, var4) elseif playerListSortByLowercaseUsername then p7.key.DisplayName:lower() < p8.key.DisplayName:lower() else p7.key.Name < p8.key.Name
+			if Data == nil then
+				return false
+			end
+			local Data1 = PlayerStore1.getPlayerEntry().stats.getData(Entry1, false)
+			
+			if Data1 == nil then
+				return true
+			end
+			local DataResult = Data(false)
+			local DataResult1 = Data1(false)
+			
+			if typeof(DataResult) == typeof(DataResult1) and DataResult ~= DataResult1 then
+				return p3:_compareRawStatsValue(DataResult, DataResult1)
+			elseif not PlayerListSortByLowercaseUsername then
+				return p4.key.Name < p5.key.Name
+			end
 		end
+		return p4.key.DisplayName:lower() < p5.key.DisplayName:lower()
 	end
 end
 
-function t._compareRawStatsValue(_, p5, p6)
-	return if p5 == nil or p6 == nil then p6 ~= nil else p6 < p5
+function LeaderboardStore:_compareRawStatsValue(p3, p4): boolean --[[ Line: 306 ]]
+	return if p3 == nil or p4 == nil then p4 ~= nil else p4 < p3
 end
 
-local function _(p5)
-	return p5:IsA("NumberValue") or (p5:IsA("IntValue") or (p5:IsA("DoubleConstrainedValue") or p5:IsA("IntConstrainedValue")))
+local function _(Object) --[[ Line: 315 | Named "isGameStatValidNumber" ]]
+	return Object:IsA("NumberValue") or (Object:IsA("IntValue") or (Object:IsA("DoubleConstrainedValue") or Object:IsA("IntConstrainedValue")))
 end
 
-local function compareGameStats(p5, p6)
-	return p5.value.priority == nil and p6.value.priority == nil or (if p5.value.priority == nil then p6.value.priority < 0 elseif p6.value.priority == nil then p5.value.priority > 0 else p6.value.priority < p5.value.priority)
+local function compareGameStats(p3, p4): boolean --[[ Line: 322 ]]
+	return p3.value.priority == nil and p4.value.priority == nil or (if p3.value.priority == nil then p4.value.priority < 0 elseif p4.value.priority == nil then p3.value.priority > 0 else p4.value.priority < p3.value.priority)
 end
 
-function t:_updateGameStatsToShow()
-	-- upvalues: sortTableByValue (ref), compareGameStats (ref), playerListHideUnusedStats (ref), signalsModule (ref)
+function LeaderboardStore:_updateGameStatsToShow() --[[ Line: 335 ]]
+	-- upvalues: SortTableByValueFunction (copy), compareGameStats (copy), PlayerListHideUnusedStats (copy), SignalsModule (copy)
 	local t = {}
-	local var2 = sortTableByValue(self._gameStatMetadata, compareGameStats)
+	local SortTableByValueResult = SortTableByValueFunction(self._gameStatMetadata, compareGameStats)
 	self._topGameStatSortOrder = {}
-	local var3 = 0
+	local Count = 0
 	
-	for i, v in ipairs(var2) do
-		if var3 >= 4 then break end
-		if not playerListHideUnusedStats or self._gameStatMetadata[v.key].isUsed then
-			local key = v.key
-			t[key] = i
+	for i, value in ipairs(SortTableByValueResult) do
+		if Count >= 4 then break end
+		if not PlayerListHideUnusedStats or self._gameStatMetadata[value.key].isUsed then
+			local Key = value.key
+			t[Key] = i
 			
-			if self._topGameStatsOrder.getData(key, false) == nil then
-				local var4, var5 = signalsModule.createSignal(i)
-				self._topGameStatsOrder.setData(key, { order = var4 }, false)
-				self._topGameStatsOrderSetter[key] = var5
+			if self._topGameStatsOrder.getData(Key, false) == nil then
+				local Signal, Signal2 = SignalsModule.createSignal(i)
+				self._topGameStatsOrder.setData(Key, { order = Signal }, false)
+				self._topGameStatsOrderSetter[Key] = Signal2
 			else
-				self._topGameStatsOrderSetter[key](i)
+				self._topGameStatsOrderSetter[Key](i)
 			end
-			table.insert(self._topGameStatSortOrder, key)
-			var3 += 1
+			table.insert(self._topGameStatSortOrder, Key)
+			Count += 1
 		end
 	end
-	for i_1, v_1 in pairs(self._topGameStatsOrder.getAllData(false)) do
-		if not t[i_1] then
-			self._topGameStatsOrder.removeData(i_1, false)
-			self._topGameStatsOrderSetter[i_1] = nil
+	for i1, _ in pairs(self._topGameStatsOrder.getAllData(false)) do
+		if not t[i1] then
+			self._topGameStatsOrder.removeData(i1, false)
+			self._topGameStatsOrderSetter[i1] = nil
 		end
 	end
 end
 
-function t:_updateGameStatOrder(p5, p6)
-	local name = self._gameStatMetadata[p5.Name]
-	p6 = p6 or 0
+function LeaderboardStore:_updateGameStatOrder(p3, p4) --[[ Line: 382 ]]
+	local GameStatMeta = self._gameStatMetadata[p3.Name]
+	local P42 = p4 or 0
 	
-	if name then
-		if p6 == nil then
-			self._gameStatMetadata[p5.Name].hasPriority = false
+	if GameStatMeta then
+		if p4 == nil then
+			self._gameStatMetadata[p3.Name].hasPriority = false
 		else
-			self._gameStatMetadata[p5.Name].hasPriority = true
+			self._gameStatMetadata[p3.Name].hasPriority = true
 		end
 	end
-	if name.priority ~= p6 then
-		self._gameStatMetadata[p5.Name].priority = p6
+	if GameStatMeta.priority ~= P42 then
+		self._gameStatMetadata[p3.Name].priority = P42
 		self:_updateGameStatsToShow()
 	end
 end
 
-function t:_updateServerAddOrder()
-	-- upvalues: robloxReplicatedStorageService (ref), signalsModule (ref), filterNewPlayerListValueStat (ref), playerListHideUnusedStats (ref)
-	local _ = {}
-	local leaderstatsOrder = robloxReplicatedStorageService:GetAttribute("LeaderstatsOrder") or {}
-	robloxReplicatedStorageService:GetAttributeChangedSignal("LeaderstatsOrder"):Connect(function()
-		-- upvalues: leaderstatsOrder (write), robloxReplicatedStorageService (copy), self (ref)
-		leaderstatsOrder = robloxReplicatedStorageService:GetAttribute("LeaderstatsOrder") or {}
-		self._setServerAddOrder(leaderstatsOrder)
+function LeaderboardStore:_updateServerAddOrder() --[[ Line: 399 ]]
+	-- upvalues: RobloxReplicatedStorage (copy), SignalsModule (copy), FilterNewPlayerListValueStat (copy), PlayerListHideUnusedStats (copy)
+	local LeaderstatsOrderAttribute = {}
+	LeaderstatsOrderAttribute = RobloxReplicatedStorage:GetAttribute("LeaderstatsOrder") or {}
+	RobloxReplicatedStorage:GetAttributeChangedSignal("LeaderstatsOrder"):Connect(function() --[[ Line: 405 ]]
+		-- upvalues: LeaderstatsOrderAttribute (ref), RobloxReplicatedStorage (upval), self (copy)
+		LeaderstatsOrderAttribute = RobloxReplicatedStorage:GetAttribute("LeaderstatsOrder") or {}
+		self._setServerAddOrder(LeaderstatsOrderAttribute)
 	end)
-	local httpService = game:GetService("HttpService")
+	local HttpService = game:GetService("HttpService")
 	
-	local function decodeJSON(p5)
-		-- upvalues: httpService (ref)
-		return httpService:JSONDecode(p5)
+	local function decodeJSON(Input) --[[ Line: 414 ]]
+		-- upvalues: HttpService (copy)
+		return HttpService:JSONDecode(Input)
 	end
 	
-	local function _(p5)
-		-- upvalues: decodeJSON (ref)
-		local ok, status = pcall(decodeJSON, p5)
+	local function _(p3) --[[ Line: 418 | Named "decodeAddOrder" ]]
+		-- upvalues: decodeJSON (copy)
+		local Success, Result = pcall(decodeJSON, p3)
 		
-		return if ok then status else {}
+		return Success and Result or {}
 	end
 	
 	self._serverInstanceAddedConnection = nil
 	
-	local function childAdded(p5)
-		-- upvalues: self (ref), leaderstatsOrder (write), decodeJSON (ref)
-		if p5.Name ~= "LeaderstatsOrder" then return end
+	local function childAdded(Child) --[[ Line: 425 ]]
+		-- upvalues: self (copy), LeaderstatsOrderAttribute (ref), decodeJSON (copy)
+		if Child.Name ~= "LeaderstatsOrder" then return end
 		if self._serverInstanceAddedConnection then
 			self._serverInstanceAddedConnection:Disconnect()
 		end
-		local ok, status = pcall(decodeJSON, p5.Value)
-		leaderstatsOrder = if ok then status else {}
-		self._serverAddOrderConnection[p5] = p5.Changed:Connect(function(p6)
-			-- upvalues: leaderstatsOrder (copy), decodeJSON (copy), self (copy)
-			local ok, status = pcall(decodeJSON, p6)
-			leaderstatsOrder = if ok then status else {}
-			self._setServerAddOrder(leaderstatsOrder)
+		local Success, Result = pcall(decodeJSON, Child.Value)
+		LeaderstatsOrderAttribute = Success and Result or {}
+		self._serverAddOrderConnection[Child] = Child.Changed:Connect(function(p3) --[[ Line: 433 ]]
+			-- upvalues: LeaderstatsOrderAttribute (upval), decodeJSON (upval), self (upval)
+			local Success, Result = pcall(decodeJSON, p3)
+			LeaderstatsOrderAttribute = Success and Result or {}
+			self._setServerAddOrder(LeaderstatsOrderAttribute)
 		end)
 	end
 	
-	self._serverInstanceAddedConnection = robloxReplicatedStorageService.ChildAdded:Connect(childAdded)
+	self._serverInstanceAddedConnection = RobloxReplicatedStorage.ChildAdded:Connect(childAdded)
 	
-	for i, v in ipairs(robloxReplicatedStorageService:GetChildren()) do
-		childAdded(v)
+	for _, child in ipairs(RobloxReplicatedStorage:GetChildren()) do
+		childAdded(child)
 	end
-	self._serverAddOrderEffectCleanup = signalsModule.createEffect(function(p5)
-		-- upvalues: self (ref), filterNewPlayerListValueStat (copy), playerListHideUnusedStats (copy)
-		local var6 = false
+	self._serverAddOrderEffectCleanup = SignalsModule.createEffect(function(p3) --[[ Line: 446 ]]
+		-- upvalues: self (copy), FilterNewPlayerListValueStat (upval), PlayerListHideUnusedStats (upval)
+		local Flag = false
 		
-		for i, v in pairs(self._getServerAddOrder(p5)) do
-			if not filterNewPlayerListValueStat or v ~= 0 then
+		for i, value in pairs((self._getServerAddOrder(p3))) do
+			if not FilterNewPlayerListValueStat or value ~= 0 then
 				if self._gameStatMetadata[i] then
 					if self._gameStatMetadata[i].hasPriority ~= true then
-						self._gameStatMetadata[i].priority = v * -1
-						var6 = true
+						self._gameStatMetadata[i].priority = value * -1
+						Flag = true
 					end
-				elseif not playerListHideUnusedStats then
-					self._gameStatMetadata[i] = { hasPriority = false, priority = v * -1 }
+				elseif not PlayerListHideUnusedStats then
+					self._gameStatMetadata[i] = { hasPriority = false, priority = value * -1 }
 				end
 			end
 		end
-		if var6 then
+		if Flag then
 			self:_updateGameStatsToShow()
 		end
 	end)
 end
 
-function t:_updateGameStatPriority(p5)
-	local var6 = nil
-	local priority = p5:FindFirstChild("Priority")
+function LeaderboardStore:_updateGameStatPriority(Object) --[[ Line: 479 ]]
+	local v1 = nil
+	local Priority = Object:FindFirstChild("Priority")
 	
-	if priority and (priority:IsA("IntValue") or priority:IsA("NumberValue")) then
-		var6 = priority.Value
+	if Priority and (Priority:IsA("IntValue") or Priority:IsA("NumberValue")) then
+		v1 = Priority.Value
 	end
-	local isPrimary = p5:FindFirstChild("IsPrimary")
+	local IsPrimary = Object:FindFirstChild("IsPrimary")
 	
-	if isPrimary then
-		if not isPrimary:IsA("BoolValue") then
-			var6 = 1e999
-		elseif isPrimary.Value then
-			var6 = 1e999
+	if IsPrimary then
+		if IsPrimary:IsA("BoolValue") then
+			if IsPrimary.Value then
+				v1 = 1e999
+			end
+		else
+			v1 = 1e999
 		end
 	end
-	self:_updateGameStatOrder(p5, var6)
+	self:_updateGameStatOrder(Object, v1)
 end
 
-function t:_addGameStat(p5)
-	-- upvalues: playerListHideUnusedStats (ref)
-	if self._gameStatMetadata[p5.Name] == nil then
-		self._gameStatMetadata[p5.Name] = {}
+function LeaderboardStore:_addGameStat(Object) --[[ Line: 499 ]]
+	-- upvalues: PlayerListHideUnusedStats (copy)
+	if self._gameStatMetadata[Object.Name] == nil then
+		self._gameStatMetadata[Object.Name] = {}
 	end
-	self._gameStatMetadata[p5.Name].isNumber = p5:IsA("NumberValue") or (p5:IsA("IntValue") or (p5:IsA("DoubleConstrainedValue") or p5:IsA("IntConstrainedValue")))
-	self:_updateGameStatPriority(p5)
+	self._gameStatMetadata[Object.Name].isNumber = Object:IsA("NumberValue") or (Object:IsA("IntValue") or (Object:IsA("DoubleConstrainedValue") or Object:IsA("IntConstrainedValue")))
+	self:_updateGameStatPriority(Object)
 	
-	if playerListHideUnusedStats and not self._gameStatMetadata[p5.Name].isUsed then
-		self._gameStatMetadata[p5.Name].isUsed = true
+	if PlayerListHideUnusedStats and not self._gameStatMetadata[Object.Name].isUsed then
+		self._gameStatMetadata[Object.Name].isUsed = true
 		self:_updateGameStatsToShow()
 	end
-	self._gameStatsUsage[p5.Name] = if self._gameStatsUsage[p5.Name] then self._gameStatsUsage[p5.Name] + 1 else 1
-	self:_updateAllTeamStats(p5.Name)
+	self._gameStatsUsage[Object.Name] = if self._gameStatsUsage[Object.Name] then self._gameStatsUsage[Object.Name] + 1 else 1
+	self:_updateAllTeamStats(Object.Name)
 end
 
-function t:_removeGameStat(p5)
-	self._gameStatsUsage[p5.Name] = if self._gameStatsUsage[p5.Name] then self._gameStatsUsage[p5.Name] - 1 else 0
+function LeaderboardStore:_removeGameStat(p3) --[[ Line: 518 ]]
+	self._gameStatsUsage[p3.Name] = if self._gameStatsUsage[p3.Name] then self._gameStatsUsage[p3.Name] - 1 else 0
 	
-	if self._gameStatsUsage[p5.Name] <= 0 then
-		self._gameStatsUsage[p5.Name] = nil
-		self._topGameStatsOrder.removeData(p5.Name, false)
-		self._topGameStatsOrderSetter[p5.Name] = nil
-		self._gameStatMetadata[p5.Name] = nil
+	if self._gameStatsUsage[p3.Name] <= 0 then
+		self._gameStatsUsage[p3.Name] = nil
+		self._topGameStatsOrder.removeData(p3.Name, false)
+		self._topGameStatsOrderSetter[p3.Name] = nil
+		self._gameStatMetadata[p3.Name] = nil
 		self:_updateGameStatsToShow()
-		self:_updateAllTeamStats(p5.Name)
+		self:_updateAllTeamStats(p3.Name)
 		
 		return
+	else
+		self:_updateGameStatPriority(p3)
 	end
-	self:_updateGameStatPriority(p5)
 end
 
-if fFlagPlayerListFixLeaderstatsStacking then
-	function t:_checkGameStatsExist()
+if FFlagPlayerListFixLeaderstatsStacking then
+	function LeaderboardStore:_checkGameStatsExist() --[[ Line: 539 ]]
 		local t = {}
 		
-		for i, v in self._gameStatMetadata do
+		for i, _ in self._gameStatMetadata do
 			t[i] = false
 		end
-		for i_1, v_1 in self._playerStores do
-			local leaderstats = i_1:FindFirstChild("leaderstats")
+		for i1, _ in self._playerStores do
+			local Leaderstats = i1:FindFirstChild("leaderstats")
 			
-			if leaderstats then
-				for i_2, v_2 in t do
-					if leaderstats:FindFirstChild(i_2) then
-						t[i_2] = true
+			if Leaderstats then
+				for ChildName, _ in t do
+					if Leaderstats:FindFirstChild(ChildName) then
+						t[ChildName] = true
 					end
 				end
 			end
 		end
-		for i_2, v_2 in t do
-			if not v_2 then
-				self._gameStatsUsage[i_2] = nil
-				self._topGameStatsOrder.removeData(i_2, false)
-				self._topGameStatsOrderSetter[i_2] = nil
-				self._gameStatMetadata[i_2] = nil
+		for i2, value in t do
+			if not value then
+				self._gameStatsUsage[i2] = nil
+				self._topGameStatsOrder.removeData(i2, false)
+				self._topGameStatsOrderSetter[i2] = nil
+				self._gameStatMetadata[i2] = nil
 				self:_updateGameStatsToShow()
-				self:_updateAllTeamStats(i_2)
+				self:_updateAllTeamStats(i2)
 			end
 		end
 	end
 end
-function t._createPlayerStore(p5, p6)
-	-- upvalues: createPlayerStoreModule (ref), fFlagPlayerListFixLeaderstatsStacking (ref)
-	return createPlayerStoreModule(p6, function(p7)
-		-- upvalues: p5 (ref)
-		p5:_addGameStat(p7)
-	end, function(p7)
-		-- upvalues: p5 (ref)
-		p5:_removeGameStat(p7)
-	end, function(p7, p8)
-		-- upvalues: p5 (ref)
-		p5:_updateTeamStats(p7, p8)
-	end, function(p7, p8)
-		-- upvalues: p5 (ref)
-		p5:_sortPlayers(p7, p8)
-	end, if fFlagPlayerListFixLeaderstatsStacking then function()
-		-- upvalues: p5 (ref)
-		p5:_checkGameStatsExist()
+function LeaderboardStore._createPlayerStore(p3, Player) --[[ Line: 569 ]]
+	-- upvalues: CreatePlayerStoreModule (copy), FFlagPlayerListFixLeaderstatsStacking (copy)
+	return CreatePlayerStoreModule(Player, function(p4) --[[ Line: 572 ]]
+		-- upvalues: p3 (copy)
+		p3:_addGameStat(p4)
+	end, function(p4) --[[ Line: 575 ]]
+		-- upvalues: p3 (copy)
+		p3:_removeGameStat(p4)
+	end, function(p4, p5) --[[ Line: 578 ]]
+		-- upvalues: p3 (copy)
+		p3:_updateTeamStats(p4, p5)
+	end, function(p4, p5) --[[ Line: 581 ]]
+		-- upvalues: p3 (copy)
+		p3:_sortPlayers(p4, p5)
+	end, if FFlagPlayerListFixLeaderstatsStacking then function() --[[ Line: 585 ]]
+		-- upvalues: p3 (copy)
+		p3:_checkGameStatsExist()
 	end else nil)
 end
 
-function t:_createTeamStore(p5)
-	-- upvalues: createTeamStoreModule (ref)
-	return createTeamStoreModule(p5, self._teamsService)
+function LeaderboardStore:_createTeamStore(p3) --[[ Line: 592 ]]
+	-- upvalues: CreateTeamStoreModule (copy)
+	return CreateTeamStoreModule(p3, self._teamsService)
 end
 
-function t:_getOrCreateTeamStore(p5)
-	local var6 = self._teamStores[p5]
+function LeaderboardStore:_getOrCreateTeamStore(Team) --[[ Line: 596 ]]
+	local TeamStore = self._teamStores[Team]
 	
-	if not var6 then
-		var6 = self:_createTeamStore(p5)
-		self._teamStores[p5] = var6
+	if not TeamStore then
+		TeamStore = self:_createTeamStore(Team)
+		self._teamStores[Team] = TeamStore
 		
-		if p5 ~= "Neutral" then
-			self._virtualTeamList.setData(p5, {
-				name = var6.getName,
-				color = var6.getColor,
-				order = var6.getOrder,
-				stats = var6.getStats,
-				players = var6.getPlayers
+		if Team ~= "Neutral" then
+			self._virtualTeamList.setData(Team, {
+				name = TeamStore.getName,
+				color = TeamStore.getColor,
+				order = TeamStore.getOrder,
+				stats = TeamStore.getStats,
+				players = TeamStore.getPlayers
 			}, false)
 		end
 	end
-	return var6
+	return TeamStore
 end
 
-function t:_addPlayerStore(p5)
-	if self._playerStores[p5] then
-		return
-	end
-	local var6 = if p5.Team then p5.Team else "Neutral"
-	self:_getOrCreateTeamStore(var6).addPlayer(p5)
-	self._playerStores[p5] = self:_createPlayerStore(p5)
-	self:_connectPlayerTeamChange(p5)
-	self:_sortPlayers(var6)
-end
-
-function t:_removePlayerStore(p5)
-	local var6 = self._playerStores[p5]
-	
-	if not var6 then return end
-	local team = var6.getTeam()
-	local var7 = self._teamStores[team]
-	
-	if var7 then
-		var7.removePlayer(p5)
-	end
-	local text = "PlayerTeamChanged_" .. p46.Name
-	local var8 = self._leaderboardConnections[text]
-	
-	if var8 and var8.Disconnect then
-		var8:Disconnect()
-		self._leaderboardConnections[text] = nil
-	end
-	var6.destroy()
-	self._playerStores[p5] = nil
-	self:_sortPlayers(team)
-end
-
-function t:_connectPlayerTeamChange(p5)
-	self._leaderboardConnections["PlayerTeamChanged_" .. p47.Name] = p5.Changed:Connect(function(p6)
-		-- upvalues: self (ref), p5 (ref)
-		if p6 == "Team" then
-			local var6 = self._playerStores[p5]
-			
-			if not var6 then return end
-			local team = var6.getTeam()
-			local var7 = if p5.Team then p5.Team else "Neutral"
-			local var8 = self._teamStores[team]
-			
-			if var8 then
-				var8.removePlayer(p5)
-			end
-			self:_getOrCreateTeamStore(var7).addPlayer(p5)
-			var6.setTeam(var7)
-			self:_sortPlayers(team)
-			self:_sortPlayers(var7)
-		end
-	end)
-end
-
-function t:_addTeamStore(p5)
-	if self._teamStores[p5] then
-		return
-	end
-	local var6 = self:_createTeamStore(p5)
-	self._teamStores[p5] = var6
-	self._virtualTeamList.setData(p5, {
-		name = var6.getName,
-		color = var6.getColor,
-		order = var6.getOrder,
-		stats = var6.getStats,
-		players = var6.getPlayers
-	}, false)
-end
-
-function t:_removeTeamStore(p5)
-	local var6 = self._teamStores[p5]
-	
-	if not var6 then return end
-	local neutralTOrCreateTeamStore = self:_getOrCreateTeamStore("Neutral")
-	
-	for i, v in pairs(var6.getPlayers.getAllData(false)) do
-		var6.removePlayer(i)
-		neutralTOrCreateTeamStore.addPlayer(i)
-		local var7 = self._playerStores[i]
+function LeaderboardStore:_addPlayerStore(Player: Player) --[[ Line: 616 ]]
+	if not self._playerStores[Player] then
+		local Team = if Player.Team then Player.Team else "Neutral"
+		self:_getOrCreateTeamStore(Team).addPlayer(Player)
+		self._playerStores[Player] = self:_createPlayerStore(Player)
+		self:_connectPlayerTeamChange(Player)
+		self:_sortPlayers(Team)
 		
-		if var7 then
-			var7.setTeam("Neutral")
-		end
+		return
 	end
-	var6.destroy()
-	self._teamStores[p5] = nil
-	self._virtualTeamList.removeData(p5, false)
 end
 
-function t:_connectTeams()
-	self._leaderboardConnections.TeamAdded = self._teamsService.ChildAdded:Connect(function(p6)
-		-- upvalues: self (ref)
-		if p6:IsA("Team") then
-			self:_addTeamStore(p6)
+function LeaderboardStore:_removePlayerStore(p3) --[[ Line: 637 ]]
+	local PlayerStore = self._playerStores[p3]
+	
+	if not PlayerStore then return end
+	local Team = PlayerStore.getTeam()
+	local TeamStore = self._teamStores[Team]
+	
+	if TeamStore then
+		TeamStore.removePlayer(p3)
+	end
+	local Text = "PlayerTeamChanged_" .. p3.Name
+	local LeaderboardConnection = self._leaderboardConnections[Text]
+	
+	if LeaderboardConnection and LeaderboardConnection.Disconnect then
+		LeaderboardConnection:Disconnect()
+		self._leaderboardConnections[Text] = nil
+	end
+	PlayerStore.destroy()
+	self._playerStores[p3] = nil
+	self:_sortPlayers(Team)
+end
+
+function LeaderboardStore:_connectPlayerTeamChange(Player: Player) --[[ Line: 666 ]]
+	self._leaderboardConnections["PlayerTeamChanged_" .. Player.Name] = Player.Changed:Connect(function(p3) --[[ Line: 667 ]]
+		-- upvalues: self (copy), Player (copy)
+		if p3 == "Team" then
+			local PlayerStore = self._playerStores[Player]
+			
+			if not PlayerStore then return end
+			local Team = PlayerStore.getTeam()
+			local Team1 = if Player.Team then Player.Team else "Neutral"
+			local TeamStore = self._teamStores[Team]
+			
+			if TeamStore then
+				TeamStore.removePlayer(Player)
+			end
+			self:_getOrCreateTeamStore(Team1).addPlayer(Player)
+			PlayerStore.setTeam(Team1)
+			self:_sortPlayers(Team)
+			self:_sortPlayers(Team1)
 		end
 	end)
-	self._leaderboardConnections.TeamRemoved = self._teamsService.ChildRemoved:Connect(function(p6)
-		-- upvalues: self (ref)
-		if p6:IsA("Team") then
-			self:_removeTeamStore(p6)
+end
+
+function LeaderboardStore:_addTeamStore(Team) --[[ Line: 699 ]]
+	if not self._teamStores[Team] then
+		local TeamStore = self:_createTeamStore(Team)
+		self._teamStores[Team] = TeamStore
+		self._virtualTeamList.setData(Team, {
+			name = TeamStore.getName,
+			color = TeamStore.getColor,
+			order = TeamStore.getOrder,
+			stats = TeamStore.getStats,
+			players = TeamStore.getPlayers
+		}, false)
+		
+		return
+	end
+end
+
+function LeaderboardStore:_removeTeamStore(Team) --[[ Line: 717 ]]
+	local TeamStore = self._teamStores[Team]
+	
+	if not TeamStore then return end
+	local Neutral = self:_getOrCreateTeamStore("Neutral")
+	
+	for i, _ in pairs((TeamStore.getPlayers.getAllData(false))) do
+		TeamStore.removePlayer(i)
+		Neutral.addPlayer(i)
+		local PlayerStore = self._playerStores[i]
+		
+		if PlayerStore then
+			PlayerStore.setTeam("Neutral")
+		end
+	end
+	TeamStore.destroy()
+	self._teamStores[Team] = nil
+	self._virtualTeamList.removeData(Team, false)
+end
+
+function LeaderboardStore:_connectTeams() --[[ Line: 749 ]]
+	self._leaderboardConnections.TeamAdded = self._teamsService.ChildAdded:Connect(function(Child) --[[ Line: 750 ]]
+		-- upvalues: self (copy)
+		if Child:IsA("Team") then
+			self:_addTeamStore(Child)
+		end
+	end)
+	self._leaderboardConnections.TeamRemoved = self._teamsService.ChildRemoved:Connect(function(Child) --[[ Line: 757 ]]
+		-- upvalues: self (copy)
+		if Child:IsA("Team") then
+			self:_removeTeamStore(Child)
 		end
 	end)
 	
-	for i, v in pairs(self._teamsService:GetTeams()) do
-		self:_addTeamStore(v)
+	for _, team in pairs(self._teamsService:GetTeams()) do
+		self:_addTeamStore(team)
 	end
 end
 
-function t:_connectPlayers()
-	self._leaderboardConnections.PlayerAdded = self._playersService.PlayerAdded:Connect(function(p6)
-		-- upvalues: self (ref)
-		self:_addPlayerStore(p6)
+function LeaderboardStore:_connectPlayers() --[[ Line: 772 ]]
+	self._leaderboardConnections.PlayerAdded = self._playersService.PlayerAdded:Connect(function(Player) --[[ Line: 773 ]]
+		-- upvalues: self (copy)
+		self:_addPlayerStore(Player)
 	end)
-	self._leaderboardConnections.PlayerRemoving = self._playersService.PlayerRemoving:Connect(function(p6)
-		-- upvalues: self (ref)
-		self:_removePlayerStore(p6)
+	self._leaderboardConnections.PlayerRemoving = self._playersService.PlayerRemoving:Connect(function(Player) --[[ Line: 778 ]]
+		-- upvalues: self (copy)
+		self:_removePlayerStore(Player)
 	end)
 	
-	for i, v in pairs(self._playersService:GetPlayers()) do
-		self:_addPlayerStore(v)
+	for _, player in pairs(self._playersService:GetPlayers()) do
+		self:_addPlayerStore(player)
 	end
 end
 
-return t
+return LeaderboardStore

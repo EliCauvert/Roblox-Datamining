@@ -1,103 +1,104 @@
-﻿local avatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
-local parent = avatarExperienceCatalog.Parent
-local _ = require(parent.AvatarExperienceRodux)
-local dataHydrationModule = require(parent.DataHydration)
-local promiseModule = require(parent.Promise)
-local logging = require(parent.AppCommonLib).Logging
-local _ = require(parent.Http)
-local _ = require(avatarExperienceCatalog.Components.ResultsList.WidgetListInfoViewModel)
-local collectDedupedHydrationContentModule = require(avatarExperienceCatalog.Sdui.Utils.collectDedupedHydrationContent)
-local buildHydrationReduxPayloadModule = require(avatarExperienceCatalog.Sdui.Utils.buildHydrationReduxPayload)
+﻿local AvatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
+local Parent = AvatarExperienceCatalog.Parent
+local _ = require(Parent.AvatarExperienceRodux)
+local DataHydrationModule = require(Parent.DataHydration)
+local PromiseModule = require(Parent.Promise)
+local Logging = require(Parent.AppCommonLib).Logging
+local _ = require(Parent.Http)
+local _ = require(AvatarExperienceCatalog.Components.ResultsList.WidgetListInfoViewModel)
+local CollectDedupedHydrationContentModule = require(AvatarExperienceCatalog.Sdui.Utils.collectDedupedHydrationContent)
+local BuildHydrationReduxPayloadModule = require(AvatarExperienceCatalog.Sdui.Utils.buildHydrationReduxPayload)
 
-local function getSortedEntries(p1)
-	-- upvalues: dataHydrationModule (ref)
-	local getLastReceivedSorts = dataHydrationModule.MarketplaceCatalogSort.getMarketplaceCatalogSortStore(false).getLastReceivedSorts
+local function getSortedEntries(p1: number) --[[ Line: 36 ]]
+	-- upvalues: DataHydrationModule (copy)
+	local GetLastReceivedSortsFunction = DataHydrationModule.MarketplaceCatalogSort.getMarketplaceCatalogSortStore(false).getLastReceivedSorts
 	
-	if not getLastReceivedSorts then
+	if not GetLastReceivedSortsFunction then
 		return nil
 	end
-	local var1 = getLastReceivedSorts(false)
+	local LastReceivedSorts = GetLastReceivedSortsFunction(false)
 	
-	if not var1 or not next(var1) then
+	if not LastReceivedSorts or not next(LastReceivedSorts) then
 		return nil
 	end
-	local t = {}
+	local List = {}
 	
-	for i, v in var1 do
-		table.insert(t, { id = i, data = v })
+	for Id, lastReceivedSort in LastReceivedSorts do
+		table.insert(List, { id = Id, data = lastReceivedSort })
 	end
-	table.sort(t, function(p2, p3)
-		return (p2.data.hydrationPriority or 0) < (p3.data.hydrationPriority or 0)
+	table.sort(List, function(A, B): boolean --[[ Line: 54 ]]
+		return (A.data.hydrationPriority or 0) < (B.data.hydrationPriority or 0)
 	end)
 	
 	if p1 then
-		local t_1 = {}
+		local List1 = {}
 		
-		for i_1 = 1, math.min(#t, p1) do
-			table.insert(t_1, t[i_1])
+		for i = 1, math.min(#List, p1) do
+			table.insert(List1, List[i])
 		end
-		t = t_1
+		List = List1
+	end
+	return List
+end
+
+local function collectContent(List) --[[ Line: 76 ]]
+	-- upvalues: CollectDedupedHydrationContentModule (copy)
+	local t = {}
+	local t1 = {}
+	
+	for _, value in List do
+		local Content = value.data.content
+		
+		if Content then
+			CollectDedupedHydrationContentModule(Content, t, t1, value.data.hydrationCount)
+		end
 	end
 	return t
 end
 
-local function collectContent(p2)
-	-- upvalues: collectDedupedHydrationContentModule (ref)
+local function groupContentByType(List) --[[ Line: 95 ]]
 	local t = {}
-	local t_1 = {}
 	
-	for i, v in p2 do
-		local content = v.data.content
+	for _, value in List do
+		local Text = tostring(value.type)
 		
-		if content then
-			collectDedupedHydrationContentModule(content, t, t_1, v.data.hydrationCount)
+		if not t[Text] then
+			t[Text] = {}
 		end
+		table.insert(t[Text], value)
 	end
 	return t
 end
 
-local function groupContentByType(p3)
-	local t = {}
+return function(Callback1, p2, Callback, p3, p4) --[[ Line: 107 | Named "hydrateCatalogSortEntities" ]]
+	-- upvalues: getSortedEntries (copy), PromiseModule (copy), collectContent (copy), groupContentByType (copy), BuildHydrationReduxPayloadModule (copy), Logging (copy)
+	local SortedEntries = getSortedEntries(p4)
 	
-	for i, v in p3 do
-		local var2 = tostring(v.type)
-		
-		if not t[var2] then
-			t[var2] = {}
-		end
-		table.insert(t[var2], v)
+	if not SortedEntries then
+		return PromiseModule.resolve()
 	end
-	return t
-end
-
-return function(p4, p5, p6, p7, p8)
-	-- upvalues: getSortedEntries (ref), promiseModule (ref), collectContent (ref), groupContentByType (ref), buildHydrationReduxPayloadModule (ref), logging (ref)
-	local var3 = getSortedEntries(p8)
+	local CollectContentResult = collectContent(SortedEntries)
 	
-	if not var3 then
-		return promiseModule.resolve()
+	if #CollectContentResult == 0 then
+		return PromiseModule.resolve()
 	end
-	local var4 = collectContent(var3)
+	local List = {}
 	
-	if #var4 == 0 then
-		return promiseModule.resolve()
-	end
-	local t = {}
-	
-	for i, v in groupContentByType(var4) do
-		table.insert(t, p7.HydrateWidgetContent(p5, v):andThen(function(p9)
-			-- upvalues: buildHydrationReduxPayloadModule (copy), v (ref), p4 (ref), p6 (ref)
-			local var5 = if p9 then p9.responseBody else nil
-			local var6 = if var5 then var5.hydratedContent else nil
+	for _, value in groupContentByType(CollectContentResult) do
+		table.insert(List, (p3.HydrateWidgetContent(p2, value):andThen(function(Result) --[[ Line: 134 ]]
+			-- upvalues: BuildHydrationReduxPayloadModule (upval), value (copy), Callback1 (copy), Callback (copy)
+			local ResponseBody = if Result then Result.responseBody else nil
+			local HydratedContent = if ResponseBody then ResponseBody.hydratedContent else nil
 			
-			if var6 == nil then
+			if HydratedContent ~= nil then
+				Callback1(Callback((BuildHydrationReduxPayloadModule(HydratedContent, value))))
+				
 				return
 			end
-			p4(p6(buildHydrationReduxPayloadModule(var6, v)))
-		end):catch(function(p9)
-			-- upvalues: logging (copy)
-			logging.warn("hydrateCatalogSortEntities: HydrateWidgetContent failed: " .. tostring(p9))
-		end))
+		end):catch(function(Err) --[[ Line: 144 ]]
+			-- upvalues: Logging (upval)
+			Logging.warn("hydrateCatalogSortEntities: HydrateWidgetContent failed: " .. tostring(Err))
+		end)))
 	end
-	return promiseModule.allSettled(t)
+	return PromiseModule.allSettled(List)
 end

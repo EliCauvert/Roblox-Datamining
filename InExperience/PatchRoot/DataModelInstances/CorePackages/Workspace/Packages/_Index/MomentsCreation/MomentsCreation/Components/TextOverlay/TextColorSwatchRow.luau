@@ -1,24 +1,23 @@
-﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
-local parent = momentsCreation.Parent
-local dashModule = require(parent.Dash)
-local foundationModule = require(parent.Foundation)
-local momentsCommonModule = require(parent.MomentsCommon)
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local view = foundationModule.View
-local useMemo = reactModule.useMemo
-local useSignalState = signalsReactModule.useSignalState
-local useTokens = foundationModule.Hooks.useTokens
-local useFormFactor = momentsCommonModule.Hooks.useFormFactor
-local formFactor = momentsCommonModule.Enums.FormFactor
-local eventNames = momentsCommonModule.Analytics.EventNames
-local fireAnalyticsEventModule = require(momentsCreation.Analytics.fireAnalyticsEvent)
-local makeCreationEventFieldsModule = require(momentsCreation.Analytics.makeCreationEventFields)
-local fFlagMomentsTextOverlayV2Redesign = momentsCommonModule.Flags.FFlagMomentsTextOverlayV2Redesign
-local constantsModule = require(momentsCreation.Constants)
-local _ = require(momentsCreation.Types.CreationFlowTypes)
-local _ = require(parent.MomentsTypes)
+﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
+local Parent = MomentsCreation.Parent
+local DashModule = require(Parent.Dash)
+local FoundationModule = require(Parent.Foundation)
+local MomentsCommonModule = require(Parent.MomentsCommon)
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local View = FoundationModule.View
+local UseMemoFunction = ReactModule.useMemo
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UseFormFactorFunction = MomentsCommonModule.Hooks.useFormFactor
+local FormFactor = MomentsCommonModule.Enums.FormFactor
+local EventNames = MomentsCommonModule.Analytics.EventNames
+local FireAnalyticsEventModule = require(MomentsCreation.Analytics.fireAnalyticsEvent)
+local MakeCreationEventFieldsModule = require(MomentsCreation.Analytics.makeCreationEventFields)
+local FFlagMomentsTextOverlayV2Redesign = MomentsCommonModule.Flags.FFlagMomentsTextOverlayV2Redesign
+local ConstantsModule = require(MomentsCreation.Constants)
+local _ = require(MomentsCreation.Types.CreationFlowTypes)
+local _ = require(Parent.MomentsTypes)
 local list = {
 	Color3.fromHex("000000"), Color3.fromHex("E75750"), Color3.fromHex("F57630"),
 	Color3.fromHex("DBA61F"), Color3.fromHex("0C9B5A"), Color3.fromHex("16A9C7"),
@@ -26,74 +25,78 @@ local list = {
 	Color3.fromHex("E74E90")
 }
 
-return function(p1)
-	-- upvalues: useTokens (ref), useFormFactor (ref), formFactor (ref), useMemo (ref), signalsModule (ref), useSignalState (ref), dashModule (ref), fFlagMomentsTextOverlayV2Redesign (ref), fireAnalyticsEventModule (ref), eventNames (ref), makeCreationEventFieldsModule (ref), list (ref), reactModule (ref), view (ref), foundationModule (ref), constantsModule (ref)
-	local controller = p1.controller
-	local var1 = useTokens()
-	local var2 = useFormFactor() == formFactor.Wide
-	local var3 = useSignalState(useMemo(function()
-		-- upvalues: signalsModule (copy), controller (ref)
-		return signalsModule.createComputed(function(p2)
-			-- upvalues: controller (copy)
-			local activeSession = controller.getActiveSession(p2)
-			local var4 = if activeSession ~= nil then nil else activeSession.getDraft(p2)
-			local var5 = var4 and var4[1]
+return function(Frame) --[[ Line: 69 | Named "TextColorSwatchRow" ]]
+	-- upvalues: UseTokensFunction (copy), UseFormFactorFunction (copy), FormFactor (copy), UseMemoFunction (copy), SignalsModule (copy), UseSignalStateFunction (copy), DashModule (copy), FFlagMomentsTextOverlayV2Redesign (copy), FireAnalyticsEventModule (copy), EventNames (copy), MakeCreationEventFieldsModule (copy), list (copy), ReactModule (copy), View (copy), FoundationModule (copy), ConstantsModule (copy)
+	local Controller = Frame.controller
+	local UseTokensResult = UseTokensFunction()
+	local IsUseFormFactorResultMatch = UseFormFactorFunction() == FormFactor.Wide
+	local UseSignalStateResult = UseSignalStateFunction((UseMemoFunction(function() --[[ Line: 75 ]]
+		-- upvalues: SignalsModule (upval), Controller (copy)
+		return SignalsModule.createComputed(function(p1) --[[ Line: 76 ]]
+			-- upvalues: Controller (upval)
+			local ActiveSession = Controller.getActiveSession(p1)
+			local Draft = if ActiveSession == nil then nil else ActiveSession.getDraft(p1)
+			local DraftEntry = Draft and Draft[1]
 			
-			return if var5 == nil then Color3.new(0, 0, 0) else var5.textOverlayStyle.fontColor
+			return if DraftEntry == nil then Color3.new(0, 0, 0) else DraftEntry.textOverlayStyle.fontColor
 		end)
-	end, { controller }))
+	end, { Controller })))
 	
-	local function onSwatchActivated(p2, p3)
-		-- upvalues: controller (ref), dashModule (copy), fFlagMomentsTextOverlayV2Redesign (copy), fireAnalyticsEventModule (copy), eventNames (copy), makeCreationEventFieldsModule (copy)
-		local activeSession = controller.getActiveSession(false)
+	local function onSwatchActivated(FontColor, LayoutOrder) --[[ Line: 85 ]]
+		-- upvalues: Controller (copy), DashModule (upval), FFlagMomentsTextOverlayV2Redesign (upval), FireAnalyticsEventModule (upval), EventNames (upval), MakeCreationEventFieldsModule (upval)
+		local ActiveSession = Controller.getActiveSession(false)
 		
-		if activeSession == nil then return end
-		local draft = activeSession.getDraft(false)
-		local var4 = draft and draft[1]
+		if ActiveSession == nil then return end
+		local Draft = ActiveSession.getDraft(false)
+		local DraftEntry = Draft and Draft[1]
 		
-		if var4 == nil then return end
-		activeSession.update({
-			dashModule.joinDeep(var4, { textOverlayStyle = { fontColor = p2 } })
+		if DraftEntry == nil then return end
+		ActiveSession.update({
+			DashModule.joinDeep(DraftEntry, { textOverlayStyle = { fontColor = FontColor } })
 		})
 		
-		if fFlagMomentsTextOverlayV2Redesign then
-			fireAnalyticsEventModule(eventNames.EditingFlowTextOverlayColorSelected, makeCreationEventFieldsModule.makeTextOverlayEventFields({ buttonIndex = tostring(p3), color = "#" .. p2:ToHex() }))
+		if FFlagMomentsTextOverlayV2Redesign then
+			FireAnalyticsEventModule(EventNames.EditingFlowTextOverlayColorSelected, MakeCreationEventFieldsModule.makeTextOverlayEventFields({
+				buttonIndex = tostring(LayoutOrder),
+				color = "#" .. FontColor:ToHex()
+			}))
 		end
 	end
 	
-	local t = {}
+	local Elements = {}
 	
-	for i, v in list do
-		t["Swatch" .. i] = reactModule.createElement(view, {
+	for LayoutOrder, value in list do
+		local IsUseSignalStateResultMatch = UseSignalStateResult == value
+		Elements["Swatch" .. LayoutOrder] = ReactModule.createElement(View, {
 			tag = "radius-circle",
-			LayoutOrder = i,
+			LayoutOrder = LayoutOrder,
 			Size = UDim2.fromOffset(32, 32),
-			backgroundStyle = { Color3 = v },
-			onActivated = function()
-				-- upvalues: onSwatchActivated (ref), v (ref), i (ref)
-				onSwatchActivated(v, i)
+			backgroundStyle = { Color3 = value },
+			onActivated = function() --[[ Line: 119 ]]
+				-- upvalues: onSwatchActivated (copy), value (copy), LayoutOrder (copy)
+				onSwatchActivated(value, LayoutOrder)
 			end,
 			stroke = {
 				Thickness = 3,
-				Color = var1.Color.System.Contrast.Color3,
-				Transparency = if var3 == v then 0 else 0.8
+				Color = UseTokensResult.Color.System.Contrast.Color3,
+				Transparency = if IsUseSignalStateResultMatch then 0 else 0.8
 			}
 		})
 	end
-	return reactModule.createElement(foundationModule.ScrollView, {
-		LayoutOrder = p1.LayoutOrder,
-		Size = UDim2.new(1, 0, 0, constantsModule.TextOverlay.PickerRowHeight),
+	return ReactModule.createElement(FoundationModule.ScrollView, {
+		LayoutOrder = Frame.LayoutOrder,
+		Size = UDim2.new(1, 0, 0, ConstantsModule.TextOverlay.PickerRowHeight),
 		scroll = {
-			scrollBarVisibility = foundationModule.Enums.Visibility.None,
+			scrollBarVisibility = FoundationModule.Enums.Visibility.None,
 			ScrollingDirection = Enum.ScrollingDirection.X,
 			AutomaticCanvasSize = Enum.AutomaticSize.X
 		}
 	}, {
-		Row = reactModule.createElement(view, {
+		Row = ReactModule.createElement(View, {
 			tag = {
 				["row align-y-center gap-medium size-0-full auto-x padding-x-large"] = true,
-				["position-top-center anchor-top-center"] = var2
+				["position-top-center anchor-top-center"] = IsUseFormFactorResultMatch
 			}
-		}, t)
+		}, Elements)
 	})
 end

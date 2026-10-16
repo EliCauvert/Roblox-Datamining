@@ -1,53 +1,55 @@
-﻿local avatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
-local fFlagEditProfileFramesEnabled = require(avatarExperienceProfilePictureEditor.Parent.SharedFlags).FFlagEditProfileFramesEnabled
-local constantsModule = require(avatarExperienceProfilePictureEditor.Constants)
-local enumsModule = require(avatarExperienceProfilePictureEditor.Common.Enums)
+﻿local AvatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
+local FFlagEditProfileFramesEnabled = require(AvatarExperienceProfilePictureEditor.Parent.SharedFlags).FFlagEditProfileFramesEnabled
+local ConstantsModule = require(AvatarExperienceProfilePictureEditor.Constants)
+local EnumsModule = require(AvatarExperienceProfilePictureEditor.Common.Enums)
 
-local function _(value)
-	-- upvalues: constantsModule (ref)
-	return if value == nil then nil elseif value == constantsModule.ProfileFrameNoneId then 0 else tonumber(value)
+local function _(ProfileFrameNoneId) --[[ Line: 27 | Named "toProfileFrameAssetId" ]]
+	-- upvalues: ConstantsModule (copy)
+	return if ProfileFrameNoneId == nil then nil elseif ProfileFrameNoneId == ConstantsModule.ProfileFrameNoneId then 0 else tonumber(ProfileFrameNoneId)
 end
 
 return {
-	buildSavePayloadForActiveView = function(p1, p2)
-		-- upvalues: constantsModule (ref)
+	buildSavePayloadForActiveView = function(p1, p2) --[[ Line: 37 ]]
+		-- upvalues: ConstantsModule (copy)
 		if p1 == "frames" then
-			local t = { emoteAssetId = p2.savedEmoteAssetId }
-			local selectedFrameId = p2.selectedFrameId
-			t.profileFrameAssetId = if selectedFrameId == nil then nil elseif selectedFrameId == constantsModule.ProfileFrameNoneId then 0 else tonumber(selectedFrameId)
+			local SelectedFrameId = p2.selectedFrameId
 			
-			return t
-		elseif p1 == "emotes" then
+			return {
+				emoteAssetId = p2.savedEmoteAssetId,
+				profileFrameAssetId = if SelectedFrameId == nil then nil elseif SelectedFrameId == ConstantsModule.ProfileFrameNoneId then 0 else tonumber(SelectedFrameId)
+			}
+		end
+		if p1 == "emotes" then
 			return {
 				profileFrameAssetId = nil,
 				emoteAssetId = p2.selectedEmoteId
 			}
 		end
-		local var1
-		local t = { emoteAssetId = p2.selectedEmoteId }
+		local config = { emoteAssetId = p2.selectedEmoteId }
+		local Number = nil
 		
 		if p2.showFrames then
-			local selectedFrameId = p2.selectedFrameId
-			var1 = if selectedFrameId == nil then nil elseif selectedFrameId == constantsModule.ProfileFrameNoneId then 0 else tonumber(selectedFrameId)
+			local SelectedFrameId = p2.selectedFrameId
+			Number = if SelectedFrameId == nil then nil elseif SelectedFrameId == ConstantsModule.ProfileFrameNoneId then 0 else tonumber(SelectedFrameId)
 		else
-			var1 = nil
+			Number = nil
 		end
-		t.profileFrameAssetId = var1
+		config.profileFrameAssetId = Number
 		
-		return t
+		return config
 	end,
-	getInitialActiveView = function(p1)
-		-- upvalues: fFlagEditProfileFramesEnabled (ref), enumsModule (ref)
-		return if fFlagEditProfileFramesEnabled and p1 == enumsModule.EditProfileImageMode.FramesOnly then "frames" elseif fFlagEditProfileFramesEnabled then "combined" else "emotes"
+	getInitialActiveView = function(FramesOnly): string --[[ Line: 56 ]]
+		-- upvalues: FFlagEditProfileFramesEnabled (copy), EnumsModule (copy)
+		return if FFlagEditProfileFramesEnabled and FramesOnly == EnumsModule.EditProfileImageMode.FramesOnly then "frames" elseif FFlagEditProfileFramesEnabled then "combined" else "emotes"
 	end,
-	hasOnTitleBack = function(p1, p2)
-		-- upvalues: enumsModule (ref), fFlagEditProfileFramesEnabled (ref)
-		return if p1 == "combined" then false elseif p1 == "frames" and p2 == enumsModule.EditProfileImageMode.FramesOnly then false else fFlagEditProfileFramesEnabled
+	hasOnTitleBack = function(p1, FramesOnly): boolean --[[ Line: 66 ]]
+		-- upvalues: EnumsModule (copy), FFlagEditProfileFramesEnabled (copy)
+		return p1 ~= "combined" and ((p1 ~= "frames" or FramesOnly ~= EnumsModule.EditProfileImageMode.FramesOnly) and (if FFlagEditProfileFramesEnabled then true else false))
 	end,
-	resolvePostSaveAction = function(p1)
+	resolvePostSaveAction = function(p1): string --[[ Line: 79 ]]
 		return if p1.framesFeatureEnabled and p1.hasOnTitleBack then "returnToCombined" elseif p1.hasOnSaveSuccess then "exitWithSuccessCallback" else "exit"
 	end,
-	resolveFooterCta = function(p1)
-		return if not (not p1.isFramesOnlyEntry and p1.isRecommendedEmoteSelected) then if p1.isEquipRestrictedFrameSelected then "subscribePlus" else "save" else "purchaseEmote"
+	resolveFooterCta = function(p1): string --[[ Line: 93 ]]
+		return if p1.isFramesOnlyEntry or not p1.isRecommendedEmoteSelected then if p1.isEquipRestrictedFrameSelected then "subscribePlus" else "save" else "purchaseEmote"
 	end
 }

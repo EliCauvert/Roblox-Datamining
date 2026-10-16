@@ -1,249 +1,259 @@
-﻿local userInputService = game:GetService("UserInputService")
-local runService = game:GetService("RunService")
-local appPageShell = script:FindFirstAncestor("AppPageShell")
-local parent = appPageShell.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local otterModule = require(parent.Otter)
-local robloxAppEventsModule = require(parent.RobloxAppEvents)
-local scrollToTopModule = require(appPageShell.scrollToTop)
-local view = foundationModule.View
-local icon = foundationModule.Icon
-local fFlagAppPageShellScrollToTopFocus = require(parent.SharedFlags).FFlagAppPageShellScrollToTopFocus
+﻿local UserInputService = game:GetService("UserInputService")
+local RunService = game:GetService("RunService")
+local AppPageShell = script:FindFirstAncestor("AppPageShell")
+local Parent = AppPageShell.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local OtterModule = require(Parent.Otter)
+local RobloxAppEventsModule = require(Parent.RobloxAppEvents)
+local ScrollToTopModule = require(AppPageShell.scrollToTop)
+local View = FoundationModule.View
+local Icon = FoundationModule.Icon
+local FFlagAppPageShellScrollToTopFocus = require(Parent.SharedFlags).FFlagAppPageShellScrollToTopFocus
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), otterModule (ref), robloxAppEventsModule (ref), fFlagAppPageShellScrollToTopFocus (ref), scrollToTopModule (ref), userInputService (ref), runService (ref), view (ref), icon (ref)
-	local var1, var2 = reactModule.useBinding(0)
-	local var3, var4 = reactModule.useBinding(0)
-	local var5, var6 = reactModule.useBinding(0)
-	local var7, var8 = reactModule.useBinding(0)
-	local idle, idle_1 = reactModule.useState("idle")
-	local idle_2 = reactModule.useRef("idle")
-	local var9 = reactModule.useRef(0)
-	local var10 = reactModule.useRef(0)
-	local var11 = reactModule.useRef(nil)
+return ReactModule.memo(function(Frame) --[[ Line: 41 | Named "PullToRefreshSpinner" ]]
+	-- upvalues: ReactModule (copy), OtterModule (copy), RobloxAppEventsModule (copy), FFlagAppPageShellScrollToTopFocus (copy), ScrollToTopModule (copy), UserInputService (copy), RunService (copy), View (copy), Icon (copy)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
+	local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(0)
+	local UseBindingResult3, UseBindingResult2_2 = ReactModule.useBinding(0)
+	local UseBindingResult4, UseBindingResult2_3 = ReactModule.useBinding(0)
+	local Idle, Idle2 = ReactModule.useState("idle")
+	local Idle1 = ReactModule.useRef("idle")
+	local UseRefResult = ReactModule.useRef(0)
+	local UseRefResult1 = ReactModule.useRef(0)
+	local UseRefResult2 = ReactModule.useRef(nil)
 	
-	if var11.current == nil then
-		var11.current = otterModule.createSingleMotor(0)
+	if UseRefResult2.current == nil then
+		UseRefResult2.current = OtterModule.createSingleMotor(0)
 	end
-	reactModule.useEffect(function()
-		-- upvalues: var11 (ref), var4 (ref), idle_2 (ref), idle_1 (ref)
-		local current = var11.current
-		local var12 = current:onStep(function(p2)
-			-- upvalues: var4 (copy)
-			var4(p2)
+	ReactModule.useEffect(function() --[[ Line: 64 ]]
+		-- upvalues: UseRefResult2 (copy), UseBindingResult2_1 (copy), Idle1 (copy), Idle2 (copy)
+		local Current = UseRefResult2.current
+		local OnStepResult = Current:onStep(function(p1) --[[ Line: 67 ]]
+			-- upvalues: UseBindingResult2_1 (upval)
+			UseBindingResult2_1(p1)
 		end)
-		local var13 = current:onComplete(function()
-			-- upvalues: idle_2 (copy), idle_1 (copy), var4 (copy)
-			if idle_2.current == "tweenBack" then
-				idle_2.current = "idle"
-				idle_1("idle")
-				var4(0)
+		local OnCompleteResult = Current:onComplete(function() --[[ Line: 70 ]]
+			-- upvalues: Idle1 (upval), Idle2 (upval), UseBindingResult2_1 (upval)
+			if Idle1.current == "tweenBack" then
+				Idle1.current = "idle"
+				Idle2("idle")
+				UseBindingResult2_1(0)
 				
 				return
 			end
 		end)
 		
-		return function()
-			-- upvalues: var12 (ref), var13 (ref), current (ref)
-			var12()
-			var13()
-			current:destroy()
+		return function() --[[ Line: 79 ]]
+			-- upvalues: OnStepResult (copy), OnCompleteResult (copy), Current (copy)
+			OnStepResult()
+			OnCompleteResult()
+			Current:destroy()
 		end
 	end, {})
-	local var12 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref), idle_2 (ref), idle_1 (ref), var10 (ref), var11 (ref), otterModule (copy), var4 (ref), var8 (ref)
-		if not p1.onRefresh or idle_2.current ~= "idle" then return end
-		idle_2.current = "refreshing"
-		idle_1("refreshing")
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 87 ]]
+		-- upvalues: Frame (copy), Idle1 (copy), Idle2 (copy), UseRefResult1 (copy), UseRefResult2 (copy), OtterModule (upval), UseBindingResult2_1 (copy), UseBindingResult2_3 (copy)
+		if not Frame.onRefresh or Idle1.current ~= "idle" then return end
+		Idle1.current = "refreshing"
+		Idle2("refreshing")
 		
-		if var10.current >= -52 then
-			var11.current:setGoal(otterModule.spring(52, { dampingRatio = 0.735, frequency = 1.95 }))
+		if UseRefResult1.current >= -52 then
+			UseRefResult2.current:setGoal(OtterModule.spring(52, { dampingRatio = 0.735, frequency = 1.95 }))
 		else
-			var4(52)
+			UseBindingResult2_1(52)
 		end
-		local function onSettled()
-			-- upvalues: idle_2 (copy), idle_1 (copy), var8 (copy), var11 (copy), otterModule (copy)
-			idle_2.current = "tweenBack"
-			idle_1("tweenBack")
-			var8(0)
-			var11.current:setGoal(otterModule.spring(0, {
+		local function onSettled() --[[ Line: 108 ]]
+			-- upvalues: Idle1 (upval), Idle2 (upval), UseBindingResult2_3 (upval), UseRefResult2 (upval), OtterModule (upval)
+			Idle1.current = "tweenBack"
+			Idle2("tweenBack")
+			UseBindingResult2_3(0)
+			UseRefResult2.current:setGoal(OtterModule.spring(0, {
 				dampingRatio = 0.735,
 				frequency = 1.95,
 				startingValue = 52
 			}))
 		end
 		
-		local ok, status = pcall(p1.onRefresh)
+		local Success, Result = pcall(Frame.onRefresh)
 		
-		if not ok then
+		if not Success then
 			onSettled()
 			
 			return
-		elseif status and typeof(status) == "table" and status.andThen then
-			status:finally(onSettled)
+		end
+		if Result and typeof(Result) == "table" and Result.andThen then
+			Result:finally(onSettled)
 			
 			return
+		else
+			onSettled()
 		end
-		onSettled()
-	end, { p1.onRefresh })
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), robloxAppEventsModule (copy), fFlagAppPageShellScrollToTopFocus (copy), scrollToTopModule (copy), var12 (ref)
-		if p1.appEventName then
-			local reloadPageConnection = robloxAppEventsModule.ReloadPage:connect(function(p2)
-				-- upvalues: p1 (copy), fFlagAppPageShellScrollToTopFocus (copy), scrollToTopModule (copy), var12 (copy)
-				if p2 ~= p1.appEventName then return end
-				local current = p1.scrollingFrameRef.current
+	end, { Frame.onRefresh })
+	ReactModule.useEffect(function() --[[ Line: 134 ]]
+		-- upvalues: Frame (copy), RobloxAppEventsModule (upval), FFlagAppPageShellScrollToTopFocus (upval), ScrollToTopModule (upval), UseResult (copy)
+		if Frame.appEventName then
+			local ReloadPageConnection = RobloxAppEventsModule.ReloadPage:connect(function(AppEventName) --[[ Line: 139 ]]
+				-- upvalues: Frame (upval), FFlagAppPageShellScrollToTopFocus (upval), ScrollToTopModule (upval), UseResult (upval)
+				if AppEventName ~= Frame.appEventName then return end
+				local Current = Frame.scrollingFrameRef.current
 				
-				if not current then return end
-				if current.CanvasPosition.Y == 0 then
-					var12()
-					
-					return
-				elseif fFlagAppPageShellScrollToTopFocus then
-					scrollToTopModule(current)
+				if not Current then return end
+				if Current.CanvasPosition.Y == 0 then
+					UseResult()
 					
 					return
 				end
-				current:ScrollToTop()
-			end)
-			
-			return function()
-				-- upvalues: reloadPageConnection (ref)
-				reloadPageConnection:disconnect()
-			end
-		end
-		return nil
-	end, { var12, p1.appEventName, p1.scrollingFrameRef })
-	
-	if fFlagAppPageShellScrollToTopFocus then
-		reactModule.useEffect(function()
-			-- upvalues: userInputService (copy), p1 (ref), scrollToTopModule (copy)
-			local statusBarTappedConnection = userInputService.StatusBarTapped:Connect(function()
-				-- upvalues: p1 (copy), scrollToTopModule (copy)
-				local current = p1.scrollingFrameRef.current
-				
-				if current then
-					scrollToTopModule(current)
-				end
-			end)
-			
-			return function()
-				-- upvalues: statusBarTappedConnection (ref)
-				statusBarTappedConnection:Disconnect()
-			end
-		end, { p1.scrollingFrameRef })
-	end
-	reactModule.useEffect(function()
-		-- upvalues: userInputService (copy), var9 (ref), var10 (ref), idle_2 (ref), var12 (ref)
-		local inputBeganConnection = userInputService.InputBegan:Connect(function(p2)
-			-- upvalues: var9 (copy)
-			if p2.UserInputType == Enum.UserInputType.Touch then
-				var9.current += 1
-				
-				return
-			end
-		end)
-		local inputEndedConnection = userInputService.InputEnded:Connect(function(p2)
-			-- upvalues: var9 (copy), var10 (copy), idle_2 (copy), var12 (copy)
-			if p2.UserInputType ~= Enum.UserInputType.Touch then return end
-			if var9.current > 0 then
-				var9.current -= 1
-			end
-			if var9.current > 0 then return end
-			if var10.current < -52 and idle_2.current == "idle" then
-				var12()
-			end
-		end)
-		
-		return function()
-			-- upvalues: inputBeganConnection (ref), inputEndedConnection (ref)
-			inputBeganConnection:Disconnect()
-			inputEndedConnection:Disconnect()
-		end
-	end, { var12 })
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var10 (ref), var2 (ref)
-		local current = p1.scrollingFrameRef and p1.scrollingFrameRef.current
-		
-		if current then
-			local var13 = current:GetPropertyChangedSignal("CanvasPosition"):Connect(function()
-				-- upvalues: p1 (copy), current (ref), var10 (copy), var2 (copy)
-				if p1.onRefresh then
-					local y = current.CanvasPosition.Y
-					var10.current = y
-					var2(if y < 0 then y else 0)
+				if FFlagAppPageShellScrollToTopFocus then
+					ScrollToTopModule(Current)
 					
 					return
+				else
+					Current:ScrollToTop()
 				end
 			end)
 			
-			return function()
-				-- upvalues: var13 (ref)
-				var13:Disconnect()
+			return function() --[[ Line: 158 ]]
+				-- upvalues: ReloadPageConnection (copy)
+				ReloadPageConnection:disconnect()
 			end
-		end
-		return nil
-	end, { p1.scrollingFrameRef, p1.onRefresh })
-	reactModule.useEffect(function()
-		-- upvalues: idle (ref), runService (copy), idle_2 (ref), var6 (ref), var8 (ref)
-		if idle == "idle" then
+		else
 			return nil
 		end
-		local var13 = 0
-		local renderSteppedConnection = runService.RenderStepped:Connect(function(p2)
-			-- upvalues: var13 (write), idle_2 (copy), var6 (copy), var8 (copy)
-			var13 += p2
+	end, { UseResult, Frame.appEventName, Frame.scrollingFrameRef })
+	
+	if FFlagAppPageShellScrollToTopFocus then
+		ReactModule.useEffect(function() --[[ Line: 164 ]]
+			-- upvalues: UserInputService (upval), Frame (copy), ScrollToTopModule (upval)
+			local StatusBarTappedConnection = UserInputService.StatusBarTapped:Connect(function() --[[ Line: 165 ]]
+				-- upvalues: Frame (upval), ScrollToTopModule (upval)
+				local Current = Frame.scrollingFrameRef.current
+				
+				if Current then
+					ScrollToTopModule(Current)
+				end
+			end)
 			
-			if idle_2.current == "refreshing" then
-				var6(var13 * 540)
+			return function() --[[ Line: 172 ]]
+				-- upvalues: StatusBarTappedConnection (copy)
+				StatusBarTappedConnection:Disconnect()
+			end
+		end, { Frame.scrollingFrameRef })
+	end
+	ReactModule.useEffect(function() --[[ Line: 179 ]]
+		-- upvalues: UserInputService (upval), UseRefResult (copy), UseRefResult1 (copy), Idle1 (copy), UseResult (copy)
+		local InputBeganConnection = UserInputService.InputBegan:Connect(function(Input) --[[ Line: 180 ]]
+			-- upvalues: UseRefResult (upval)
+			if Input.UserInputType == Enum.UserInputType.Touch then
+				UseRefResult.current += 1
 				
 				return
-			elseif idle_2.current == "tweenBack" then
-				var8(var13)
+			end
+		end)
+		local InputEndedConnection = UserInputService.InputEnded:Connect(function(Input) --[[ Line: 187 ]]
+			-- upvalues: UseRefResult (upval), UseRefResult1 (upval), Idle1 (upval), UseResult (upval)
+			if Input.UserInputType ~= Enum.UserInputType.Touch then return end
+			if UseRefResult.current > 0 then
+				UseRefResult.current -= 1
+			end
+			if UseRefResult.current > 0 then return end
+			if UseRefResult1.current < -52 and Idle1.current == "idle" then
+				UseResult()
 			end
 		end)
 		
-		return function()
-			-- upvalues: renderSteppedConnection (ref)
-			renderSteppedConnection:Disconnect()
+		return function() --[[ Line: 206 ]]
+			-- upvalues: InputBeganConnection (copy), InputEndedConnection (copy)
+			InputBeganConnection:Disconnect()
+			InputEndedConnection:Disconnect()
 		end
-	end, { idle })
+	end, { UseResult })
+	ReactModule.useEffect(function() --[[ Line: 213 ]]
+		-- upvalues: Frame (copy), UseRefResult1 (copy), UseBindingResult2 (copy)
+		local Current = Frame.scrollingFrameRef and Frame.scrollingFrameRef.current
+		
+		if Current then
+			local Connection = Current:GetPropertyChangedSignal("CanvasPosition"):Connect(function() --[[ Line: 219 ]]
+				-- upvalues: Frame (upval), Current (copy), UseRefResult1 (upval), UseBindingResult2 (upval)
+				if Frame.onRefresh then
+					local Y: number = Current.CanvasPosition.Y
+					UseRefResult1.current = Y
+					UseBindingResult2(if Y < 0 then Y else 0)
+					
+					return
+				end
+			end)
+			
+			return function() --[[ Line: 228 ]]
+				-- upvalues: Connection (copy)
+				Connection:Disconnect()
+			end
+		else
+			return nil
+		end
+	end, { Frame.scrollingFrameRef, Frame.onRefresh })
+	ReactModule.useEffect(function() --[[ Line: 234 ]]
+		-- upvalues: Idle (copy), RunService (upval), Idle1 (copy), UseBindingResult2_2 (copy), UseBindingResult2_3 (copy)
+		if Idle == "idle" then
+			return nil
+		else
+			local Total = 0
+			local RenderSteppedConnection = RunService.RenderStepped:Connect(function(DeltaTime: number) --[[ Line: 240 ]]
+				-- upvalues: Total (ref), Idle1 (upval), UseBindingResult2_2 (upval), UseBindingResult2_3 (upval)
+				Total += DeltaTime
+				
+				if Idle1.current == "refreshing" then
+					UseBindingResult2_2(Total * 540)
+					
+					return
+				end
+				if Idle1.current == "tweenBack" then
+					UseBindingResult2_3(Total)
+				end
+			end)
+			
+			return function() --[[ Line: 249 ]]
+				-- upvalues: RenderSteppedConnection (copy)
+				RenderSteppedConnection:Disconnect()
+			end
+		end
+	end, { Idle })
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		BackgroundTransparency = 1,
 		ZIndex = 2,
-		Size = reactModule.useMemo(function()
-			-- upvalues: reactModule (copy), var1 (ref), var3 (ref), idle_2 (ref), var9 (ref)
-			return reactModule.joinBindings({ var1, var3 }):map(function(p2)
-				-- upvalues: idle_2 (copy), var9 (copy)
-				local var13 = p2[1]
-				local var14 = p2[2]
+		Size = ReactModule.useMemo(function() --[[ Line: 255 ]]
+			-- upvalues: ReactModule (upval), UseBindingResult (copy), UseBindingResult1 (copy), Idle1 (copy), UseRefResult (copy)
+			return ReactModule.joinBindings({ UseBindingResult, UseBindingResult1 }):map(function(Entry): UDim2 --[[ Line: 256 ]]
+				-- upvalues: Idle1 (upval), UseRefResult (upval)
+				local Entry1: number = Entry[1]
+				local Entry2: number = Entry[2]
 				
-				return if idle_2.current == "idle" then if var9.current == 0 or var13 >= 0 then UDim2.new(1, 0, 0, 0) else UDim2.new(1, 0, 0, math.min(52, math.abs(var13))) elseif idle_2.current == "refreshing" then UDim2.new(1, 0, 0, math.max(var14, 0)) else UDim2.new(1, 0, 0, var14)
+				return if Idle1.current == "idle" then if UseRefResult.current == 0 or Entry1 >= 0 then UDim2.new(1, 0, 0, 0) else UDim2.new(1, 0, 0, (math.min(52, (math.abs(Entry1))))) elseif Idle1.current == "refreshing" then UDim2.new(1, 0, 0, (math.max(Entry2, 0))) else UDim2.new(1, 0, 0, Entry2)
 			end)
 		end, {}),
-		GroupTransparency = reactModule.useMemo(function()
-			-- upvalues: reactModule (copy), var1 (ref), var3 (ref), var7 (ref), idle_2 (ref), var9 (ref)
-			return reactModule.joinBindings({ var1, var3, var7 }):map(function(p2)
-				-- upvalues: idle_2 (copy), var9 (copy)
-				local var13 = p2[1]
-				local var14 = p2[2]
+		GroupTransparency = ReactModule.useMemo(function() --[[ Line: 291 ]]
+			-- upvalues: ReactModule (upval), UseBindingResult (copy), UseBindingResult1 (copy), UseBindingResult4 (copy), Idle1 (copy), UseRefResult (copy)
+			return ReactModule.joinBindings({ UseBindingResult, UseBindingResult1, UseBindingResult4 }):map(function(Entry): number --[[ Line: 292 ]]
+				-- upvalues: Idle1 (upval), UseRefResult (upval)
+				local Entry1: number = Entry[1]
+				local Entry2: number = Entry[2]
+				local Entry3: number = Entry[3]
 				
-				return if idle_2.current == "idle" then if var9.current == 0 or var13 >= 0 then 1 elseif var13 <= -52 then 0 else 1 - math.abs(var13) * 0.04 elseif idle_2.current == "refreshing" then if var14 < 52 then math.max(0, 1 - var14 / 52) else 0 else math.min(1, 2 * p2[3])
+				return if Idle1.current == "idle" then if UseRefResult.current == 0 or Entry1 >= 0 then 1 elseif Entry1 <= -52 then 0 else 1 - math.abs(Entry1) * 0.04 elseif Idle1.current == "refreshing" then if Entry2 < 52 then math.max(0, 1 - Entry2 / 52) else 0 else math.min(1, 2 * Entry3)
 			end)
 		end, {}),
-		LayoutOrder = p1.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		Spinner = reactModule.createElement(icon, {
+		Spinner = ReactModule.createElement(Icon, {
 			name = "two-arrows-spin-clockwise",
-			Rotation = reactModule.useMemo(function()
-				-- upvalues: reactModule (copy), var1 (ref), var5 (ref), idle_2 (ref)
-				return reactModule.joinBindings({ var1, var5 }):map(function(p2)
-					-- upvalues: idle_2 (copy)
-					local var13 = p2[1]
+			Rotation = ReactModule.useMemo(function() --[[ Line: 273 ]]
+				-- upvalues: ReactModule (upval), UseBindingResult (copy), UseBindingResult3 (copy), Idle1 (copy)
+				return ReactModule.joinBindings({ UseBindingResult, UseBindingResult3 }):map(function(Entry) --[[ Line: 274 ]]
+					-- upvalues: Idle1 (upval)
+					local Entry1: number = Entry[1]
+					local Entry2 = Entry[2]
 					
-					return if idle_2.current == "idle" then if var13 >= 0 or var13 <= -52 then 0 else math.abs(var13) * 9.6 - 240 elseif idle_2.current == "refreshing" then p2[2] else 0
+					return if Idle1.current == "idle" then if Entry1 >= 0 or Entry1 <= -52 then 0 else math.abs(Entry1) * 9.6 - 240 elseif Idle1.current == "refreshing" then Entry2 else 0
 				end)
 			end, {}),
 			AnchorPoint = Vector2.new(0.5, 0.5),

@@ -1,90 +1,90 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local corePackagesService = game:GetService("CorePackages")
-local guiService = game:GetService("GuiService")
-local _ = require(corePackagesService.Workspace.Packages.SharedFlags)
-local robloxGui = coreGuiService:WaitForChild("RobloxGui")
-local reactModule = require(corePackagesService.Packages.React)
-local roactModule = require(corePackagesService.Packages.Roact)
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local utilityModule = require(robloxGui.Modules.Settings.Utility)
-local withTooltip = UIBloxModule.App.Dialog.TooltipV2.withTooltip
-local tooltipOrientation = UIBloxModule.App.Dialog.Enum.TooltipOrientation
-local styledTextLabel = UIBloxModule.App.Text.StyledTextLabel
-local useStyle = UIBloxModule.Core.Style.useStyle
-local fIntVoiceChatTooltipDelayModule = require(robloxGui.Modules.Flags.FIntVoiceChatTooltipDelay)
-local constantsModule = require(robloxGui.Modules.TopBar.Constants)
-local topBarHeight = constantsModule.TopBarHeight
+﻿local CoreGui = game:GetService("CoreGui")
+local CorePackages = game:GetService("CorePackages")
+local GuiService = game:GetService("GuiService")
+local _ = require(CorePackages.Workspace.Packages.SharedFlags)
+local RobloxGui = CoreGui:WaitForChild("RobloxGui")
+local ReactModule = require(CorePackages.Packages.React)
+local RoactModule = require(CorePackages.Packages.Roact)
+local UIBloxModule = require(CorePackages.Packages.UIBlox)
+local UtilityModule = require(RobloxGui.Modules.Settings.Utility)
+local WithTooltipFunction = UIBloxModule.App.Dialog.TooltipV2.withTooltip
+local TooltipOrientation = UIBloxModule.App.Dialog.Enum.TooltipOrientation
+local StyledTextLabel = UIBloxModule.App.Text.StyledTextLabel
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local FIntVoiceChatTooltipDelayModule = require(RobloxGui.Modules.Flags.FIntVoiceChatTooltipDelay)
+local ConstantsModule = require(RobloxGui.Modules.TopBar.Constants)
+local TopBarHeight = ConstantsModule.TopBarHeight
 
-return function(p1)
-	-- upvalues: useStyle (ref), reactModule (ref), guiService (ref), fIntVoiceChatTooltipDelayModule (ref), utilityModule (ref), topBarHeight (ref), constantsModule (ref), roactModule (ref), styledTextLabel (ref), coreGuiService (ref), tooltipOrientation (ref), withTooltip (ref)
-	local var1 = useStyle()
-	local var2 = reactModule.useRef(nil)
-	local onClose = p1.onClose
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var2 (ref), guiService (copy), onClose (ref), fIntVoiceChatTooltipDelayModule (copy)
+return function(p1) --[[ Line: 33 | Named "VoiceChatTooltip" ]]
+	-- upvalues: UseStyleFunction (copy), ReactModule (copy), GuiService (copy), FIntVoiceChatTooltipDelayModule (copy), UtilityModule (copy), TopBarHeight (copy), ConstantsModule (copy), RoactModule (copy), StyledTextLabel (copy), CoreGui (copy), TooltipOrientation (copy), WithTooltipFunction (copy)
+	local UseStyleResult = UseStyleFunction()
+	local UseRefResult = ReactModule.useRef(nil)
+	local OnCloseFunction = p1.onClose
+	ReactModule.useEffect(function() --[[ Line: 39 ]]
+		-- upvalues: p1 (copy), UseRefResult (copy), GuiService (upval), OnCloseFunction (copy), FIntVoiceChatTooltipDelayModule (upval)
 		if p1.showPrompt then
-			var2.current = guiService.MenuOpened:Connect(function()
-				-- upvalues: var2 (copy), onClose (copy)
-				if var2.current then
-					var2.current:Disconnect()
-					var2.current = nil
-					onClose()
+			UseRefResult.current = GuiService.MenuOpened:Connect(function() --[[ Line: 41 ]]
+				-- upvalues: UseRefResult (upval), OnCloseFunction (upval)
+				if UseRefResult.current then
+					UseRefResult.current:Disconnect()
+					UseRefResult.current = nil
+					OnCloseFunction()
 				end
 			end)
-			task.delay(fIntVoiceChatTooltipDelayModule, function()
-				-- upvalues: var2 (copy), p1 (copy), onClose (copy)
-				if var2.current then
-					var2.current:Disconnect()
-					var2.current = nil
+			task.delay(FIntVoiceChatTooltipDelayModule, function() --[[ Line: 48 ]]
+				-- upvalues: UseRefResult (upval), p1 (upval), OnCloseFunction (upval)
+				if UseRefResult.current then
+					UseRefResult.current:Disconnect()
+					UseRefResult.current = nil
 				end
 				if p1.showPrompt then
-					onClose()
+					OnCloseFunction()
 				end
 			end)
 		end
-		return function()
-			-- upvalues: var2 (copy)
-			if var2.current then
-				var2.current:Disconnect()
-				var2.current = nil
+		return function() --[[ Line: 59 ]]
+			-- upvalues: UseRefResult (upval)
+			if UseRefResult.current then
+				UseRefResult.current:Disconnect()
+				UseRefResult.current = nil
 			end
 		end
 	end, { p1.showPrompt })
-	local _ = 38
-	local var3 = if utilityModule:IsSmallTouchScreen() then 64 else 64
-	local _ = topBarHeight
-	local var4 = constantsModule.useDisplayScaleState(topBarHeight)
+	local UseDisplayScaleStateResult = 38
+	local XOffset: number = if UtilityModule:IsSmallTouchScreen() then 64 else 64
+	UseDisplayScaleStateResult = TopBarHeight
+	UseDisplayScaleStateResult = ConstantsModule.useDisplayScaleState(TopBarHeight)
 	
-	return withTooltip({
+	return WithTooltipFunction({
 		minContentWidth = 240,
 		headerText = p1.titleText,
-		renderCustomComponents = function(_)
-			-- upvalues: roactModule (copy), styledTextLabel (copy), p1 (ref), var1 (ref)
-			return roactModule.createElement(styledTextLabel, {
+		renderCustomComponents = function(_) --[[ Line: 78 ]]
+			-- upvalues: RoactModule (upval), StyledTextLabel (upval), p1 (copy), UseStyleResult (copy)
+			return RoactModule.createElement(StyledTextLabel, {
 				layoutOrder = 0,
 				text = p1.subtitleText,
 				textTruncate = Enum.TextTruncate.None,
 				textXAlignment = Enum.TextXAlignment.Left,
-				fontStyle = var1.Font.CaptionSmall,
-				colorStyle = var1.Theme.TextDefault,
+				fontStyle = UseStyleResult.Font.CaptionSmall,
+				colorStyle = UseStyleResult.Theme.TextDefault,
 				automaticSize = Enum.AutomaticSize.XY
 			})
 		end,
-		onClose = onClose,
-		backgroundColor = var1.Theme.BackgroundUIDefault.Color,
-		backgroundTransparency = var1.Theme.BackgroundUIDefault.Transparency
+		onClose = OnCloseFunction,
+		backgroundColor = UseStyleResult.Theme.BackgroundUIDefault.Color,
+		backgroundTransparency = UseStyleResult.Theme.BackgroundUIDefault.Transparency
 	}, {
 		DisplayOrder = 10,
-		guiTarget = coreGuiService,
+		guiTarget = CoreGui,
 		active = p1.showPrompt,
-		preferredOrientation = tooltipOrientation.Bottom
-	}, function(p2)
-		-- upvalues: roactModule (copy), var3 (ref), var4 (write), reactModule (copy)
-		return roactModule.createElement("Frame", {
+		preferredOrientation = TooltipOrientation.Bottom
+	}, function(p2) --[[ Line: 101 ]]
+		-- upvalues: RoactModule (upval), XOffset (copy), UseDisplayScaleStateResult (ref), ReactModule (upval)
+		return RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
-			Size = UDim2.new(0, var3, 0, var4),
-			[reactModule.Change.AbsoluteSize] = p2,
-			[reactModule.Change.AbsolutePosition] = p2
+			Size = UDim2.new(0, XOffset, 0, UseDisplayScaleStateResult),
+			[ReactModule.Change.AbsoluteSize] = p2,
+			[ReactModule.Change.AbsolutePosition] = p2
 		})
 	end)
 end

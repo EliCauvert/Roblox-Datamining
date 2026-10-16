@@ -1,119 +1,120 @@
-﻿local cameraUtilityModule = require(script.Parent.CameraUtility)
-local cFrameUtilityModule = require(script.Parent.CFrameUtility)
-local characterUtilityModule = require(script.Parent.CharacterUtility)
-local mannequinUtilityModule = require(script.Parent.MannequinUtility)
-local cameraPresetHeadshotExtentScaleHundredths = game:DefineFastInt("CameraPresetHeadshotExtentScaleHundredths", 130)
-local t = {
+﻿local CameraUtilityModule = require(script.Parent.CameraUtility)
+local CFrameUtilityModule = require(script.Parent.CFrameUtility)
+local CharacterUtilityModule = require(script.Parent.CharacterUtility)
+local MannequinUtilityModule = require(script.Parent.MannequinUtility)
+local CameraPresetHeadshotExtentScaleHundredths = game:DefineFastInt("CameraPresetHeadshotExtentScaleHundredths", 130)
+
+local function _(Object) --[[ Line: 18 | Named "getTorsoOrUpperTorso" ]]
+	return Object:FindFirstChild("Torso") or Object:FindFirstChild("UpperTorso")
+end
+
+local function getMannequinBodyParts(Object, Humanoid: Humanoid) --[[ Line: 22 ]]
+	-- upvalues: MannequinUtilityModule (copy)
+	local List = {}
+	
+	if Humanoid.RigType == Enum.HumanoidRigType.R6 then
+		for ChildName, _ in MannequinUtilityModule.CharacterPartNames.R6 do
+			if ChildName ~= "CharacterMesh" and ChildName ~= "HumanoidRootPart" then
+				table.insert(List, (Object:FindFirstChild(ChildName)))
+			end
+		end
+		return List
+	else
+		if Humanoid.RigType == Enum.HumanoidRigType.R15 then
+			for ChildName1, _ in MannequinUtilityModule.CharacterPartNames.R15 do
+				if ChildName1 ~= "HumanoidRootPart" then
+					table.insert(List, (Object:FindFirstChild(ChildName1)))
+				end
+			end
+		end
+		return List
+	end
+end
+
+local CameraPresetsUtilityModule = {
 	GOLDEN_RATIO = game:DefineFastInt("AvatarGoldenRatio", 618) / 1000,
 	UPVECTOR_ORENTATION_TRESHOLD = game:DefineFastInt("UpVectorOrentationThreshold1", -60) / 100,
 	AVATAR_ROTATION_DEGREE = game:DefineFastInt("LookAvatarRotationDegree1", 23),
-	GetCharacterTorsoCFrame = function(p1)
-		return (p1:FindFirstChild("Torso") or p1:FindFirstChild("UpperTorso")).CFrame
+	GetCharacterTorsoCFrame = function(Object) --[[ Line: 43 ]]
+		return (Object:FindFirstChild("Torso") or Object:FindFirstChild("UpperTorso")).CFrame
 	end
 }
 
-local function _(p1)
-	return p1:FindFirstChild("Torso") or p1:FindFirstChild("UpperTorso")
+function CameraPresetsUtilityModule.GetFullBodyCameraCFrame(Object, Callback: () -> (), p1, p2, p3) --[[ Line: 61 ]]
+	-- upvalues: CameraPresetsUtilityModule (copy), getMannequinBodyParts (copy), CharacterUtilityModule (copy), CameraUtilityModule (copy)
+	local P6 = p2 or 56
+	local P7 = p3 or CameraPresetsUtilityModule.GetCharacterTorsoCFrame(Object)
+	local LookVector = P7.LookVector
+	
+	if type(Callback) == "function" then
+		Callback()
+	end
+	local Humanoid = Object:FindFirstChildOfClass("Humanoid")
+	
+	if not Humanoid then return end
+	local MannequinBodyParts = getMannequinBodyParts(Object, Humanoid)
+	local _CFrame = (Object:FindFirstChild("Torso") or Object:FindFirstChild("UpperTorso")).CFrame
+	local UpVector = _CFrame.UpVector
+	local Rx, Ry, Rz = Object:FindFirstChild("Head").CFrame:ToEulerAnglesXYZ()
+	
+	if p1 then
+		Object:PivotTo(P7 * CFrame.Angles(0, math.rad(CameraPresetsUtilityModule.AVATAR_ROTATION_DEGREE * -1), 0))
+	end
+	local BodyPartsExtents, BodyPartsExtents2 = CharacterUtilityModule.CalculateBodyPartsExtents(_CFrame, MannequinBodyParts)
+	local Tangent = math.tan((math.rad(P6 / 2)))
+	local Interpolated = BodyPartsExtents:Lerp(BodyPartsExtents2, 0.5)
+	local _Vector3 = Vector3.new(Interpolated.X, BodyPartsExtents:Lerp(BodyPartsExtents2, CameraPresetsUtilityModule.GOLDEN_RATIO).Y, Interpolated.Z)
+	local v1 = _CFrame:PointToWorldSpace(_Vector3)
+	local NewPosition = _CFrame - _CFrame.Position + v1
+	
+	if not p1 then
+		local _CFrame1 = CFrame.fromEulerAnglesXYZ(Rx, Ry, Rz)
+		NewPosition = _CFrame1 - _CFrame1.Position + v1
+	end
+	local LargestRatio = math.max(_Vector3.X - BodyPartsExtents.X, _Vector3.Y - BodyPartsExtents.Y) * CameraUtilityModule.DefaultBodyMarginScale / Tangent
+	local LargestRatio1 = math.max(BodyPartsExtents2.X - _Vector3.X, BodyPartsExtents2.Y - _Vector3.Y) * CameraUtilityModule.DefaultBodyMarginScale / Tangent
+	local Largest: number = LargestRatio
+	local IsXBelow = UpVector.X < CameraPresetsUtilityModule.UPVECTOR_ORENTATION_TRESHOLD
+	
+	if UpVector.Y < CameraPresetsUtilityModule.UPVECTOR_ORENTATION_TRESHOLD or IsXBelow then
+		Largest = math.max(LargestRatio, LargestRatio1)
+	end
+	return CameraUtilityModule.GetCameraCFrame(NewPosition, Largest * CameraUtilityModule.DistanceScaleForFullBody * LookVector)
 end
 
-local function getMannequinBodyParts(p1, p2)
-	-- upvalues: mannequinUtilityModule (ref)
-	local t = {}
-	
-	if p2.RigType == Enum.HumanoidRigType.R6 then
-		for i, v in mannequinUtilityModule.CharacterPartNames.R6 do
-			if i ~= "CharacterMesh" and i ~= "HumanoidRootPart" then
-				table.insert(t, p1:FindFirstChild(i))
-			end
-		end
-		return t
-	elseif p2.RigType == Enum.HumanoidRigType.R15 then
-		for i, v in mannequinUtilityModule.CharacterPartNames.R15 do
-			if i ~= "HumanoidRootPart" then
-				table.insert(t, p1:FindFirstChild(i))
-			end
-		end
-	end
-	return t
-end
+CameraPresetsUtilityModule.GetCameraCFrame_ForAvatarR15Action_LookAtGoldenRatioOfTheHumanoid = CameraPresetsUtilityModule.GetFullBodyCameraCFrame
 
-function t.GetFullBodyCameraCFrame(p3, p4, p5, p6, p7)
-	-- upvalues: t (ref), getMannequinBodyParts (ref), characterUtilityModule (ref), cameraUtilityModule (ref)
-	p6 = p6 or 56
-	p7 = p7 or t.GetCharacterTorsoCFrame(p3)
-	local lookVector = p7.LookVector
+function CameraPresetsUtilityModule.GetHeadshotCameraCFrame(Object, Callback: () -> (), p1, p2) --[[ Line: 163 ]]
+	-- upvalues: CameraPresetsUtilityModule (copy), CFrameUtilityModule (copy), CharacterUtilityModule (copy), CameraUtilityModule (copy), CameraPresetHeadshotExtentScaleHundredths (copy)
+	local P10 = p2 or 30
 	
-	if type(p4) == "function" then
-		p4()
+	if type(Callback) == "function" then
+		Callback()
 	end
-	local humanoid = p3:FindFirstChildOfClass("Humanoid")
-	
-	if not humanoid then return end
-	local var1 = getMannequinBodyParts(p3, humanoid)
-	local cFrame = (p3:FindFirstChild("Torso") or p3:FindFirstChild("UpperTorso")).CFrame
-	local upVector = cFrame.UpVector
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local var2, var3, var4 = p3:FindFirstChild("Head").CFrame:ToEulerAnglesXYZ()
-	
-	if p5 then
-		p3:PivotTo(p7 * CFrame.Angles(0, math.rad(t.AVATAR_ROTATION_DEGREE * -1), 0))
+	if p1 then
+		Object:PivotTo(CameraPresetsUtilityModule.GetCharacterTorsoCFrame(Object) * CFrame.Angles(0, math.rad(CameraPresetsUtilityModule.AVATAR_ROTATION_DEGREE * -1), 0))
 	end
-	local var5, var6 = characterUtilityModule.CalculateBodyPartsExtents(cFrame, var1)
-	local var7 = math.tan(math.rad(p6 / 2))
-	local var8 = var5:Lerp(var6, 0.5)
-	local vector3 = Vector3.new(var8.X, var5:Lerp(var6, t.GOLDEN_RATIO).Y, var8.Z)
-	local var9 = cFrame:PointToWorldSpace(vector3)
-	local var10 = cFrame - cFrame.Position + var9
+	local Head = Object:FindFirstChild("Head")
 	
-	if not p5 then
-		local cFrame_1 = CFrame.fromEulerAnglesXYZ(var2, var3, var4)
-		var10 = cFrame_1 - cFrame_1.Position + var9
-	end
-	local var11 = math.max(vector3.X - var5.X, vector3.Y - var5.Y) * cameraUtilityModule.DefaultBodyMarginScale / var7
-	local var12 = math.max(var6.X - vector3.X, var6.Y - vector3.Y) * cameraUtilityModule.DefaultBodyMarginScale / var7
-	local var13 = var11
-	
-	if upVector.Y < t.UPVECTOR_ORENTATION_TRESHOLD or upVector.X < t.UPVECTOR_ORENTATION_TRESHOLD then
-		var13 = math.max(var11, var12)
-	end
-	return cameraUtilityModule.GetCameraCFrame(var10, var13 * cameraUtilityModule.DistanceScaleForFullBody * lookVector)
-end
-
-t.GetCameraCFrame_ForAvatarR15Action_LookAtGoldenRatioOfTheHumanoid = t.GetFullBodyCameraCFrame
-
-function t.GetHeadshotCameraCFrame(p3, p4, p5, p6)
-	-- upvalues: t (ref), cFrameUtilityModule (ref), characterUtilityModule (ref), cameraUtilityModule (ref), cameraPresetHeadshotExtentScaleHundredths (ref)
-	p6 = p6 or 30
-	
-	if type(p4) == "function" then
-		p4()
-	end
-	if p5 then
-		p3:PivotTo(t.GetCharacterTorsoCFrame(p3) * CFrame.Angles(0, math.rad(t.AVATAR_ROTATION_DEGREE * -1), 0))
-	end
-	local head = p3:FindFirstChild("Head")
-	
-	if not head then
+	if not Head then
 		error("Character is missing a Head, cannot apply upper body camera preset.")
 	end
-	local cFrame = head.CFrame
-	local faceFrontAttachment = head:FindFirstChild("FaceFrontAttachment")
+	local HeadCFrame = Head.CFrame
+	local FaceFrontAttachment = Head:FindFirstChild("FaceFrontAttachment")
 	
-	if faceFrontAttachment then
-		cFrame = faceFrontAttachment.WorldCFrame
+	if FaceFrontAttachment then
+		HeadCFrame = FaceFrontAttachment.WorldCFrame
 	end
-	local var1 = cFrameUtilityModule.CalculateTargetCFrame(cFrame)
-	local var2, var3 = characterUtilityModule.CalculateHeadExtents(p3, var1)
-	cameraUtilityModule.SetupCamera(cameraUtilityModule.CreateThumbnailCamera(), {
-		extentScale = cameraPresetHeadshotExtentScaleHundredths / 100,
-		maxExtent = var3,
-		minExtent = var2,
-		optCameraXRot = cameraUtilityModule.XRotForCloseup,
-		optFieldOfView = p6,
-		targetCFrame = var1
+	local TargetCFrame = CFrameUtilityModule.CalculateTargetCFrame(HeadCFrame)
+	local HeadExtents, HeadExtents2 = CharacterUtilityModule.CalculateHeadExtents(Object, TargetCFrame)
+	CameraUtilityModule.SetupCamera(CameraUtilityModule.CreateThumbnailCamera(), {
+		extentScale = CameraPresetHeadshotExtentScaleHundredths / 100,
+		maxExtent = HeadExtents2,
+		minExtent = HeadExtents,
+		optCameraXRot = CameraUtilityModule.XRotForCloseup,
+		optFieldOfView = P10,
+		targetCFrame = TargetCFrame
 	})
 end
 
-return t
+return CameraPresetsUtilityModule

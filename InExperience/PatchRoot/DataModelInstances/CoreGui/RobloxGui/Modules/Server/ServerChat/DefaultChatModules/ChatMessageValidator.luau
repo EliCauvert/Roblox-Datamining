@@ -1,23 +1,23 @@
-﻿local chatService = game:GetService("Chat")
-local runService = game:GetService("RunService")
-local clientChatModules = chatService:WaitForChild("ClientChatModules")
-local chatSettingsModule = require(clientChatModules:WaitForChild("ChatSettings"))
-local chatConstantsModule = require(clientChatModules:WaitForChild("ChatConstants"))
-local t = nil
-pcall(function()
-	-- upvalues: t (write)
-	t = require(game:GetService("Chat").ClientChatModules.ChatLocalization)
+﻿local Chat = game:GetService("Chat")
+local RunService = game:GetService("RunService")
+local ClientChatModules = Chat:WaitForChild("ClientChatModules")
+local ChatSettingsModule = require(ClientChatModules:WaitForChild("ChatSettings"))
+local ChatConstantsModule = require(ClientChatModules:WaitForChild("ChatConstants"))
+local ChatLocalizationModule = nil
+pcall(function() --[[ Line: 14 ]]
+	-- upvalues: ChatLocalizationModule (ref)
+	ChatLocalizationModule = require(game:GetService("Chat").ClientChatModules.ChatLocalization)
 end)
 
-if t == nil then
-	t = {}
+if ChatLocalizationModule == nil then
+	ChatLocalizationModule = {}
 end
-if not t.FormatMessageToSend or not t.LocalizeFormattedMessage then
-	function t.FormatMessageToSend(_, _, p1)
+if not ChatLocalizationModule.FormatMessageToSend or not ChatLocalizationModule.LocalizeFormattedMessage then
+	function ChatLocalizationModule:FormatMessageToSend(_, p1) --[[ Line: 17 ]]
 		return p1
 	end
 end
-local var1 = if chatSettingsModule.DisallowedWhiteSpace then chatSettingsModule.DisallowedWhiteSpace else {
+local DisallowedWhiteSpace = if ChatSettingsModule.DisallowedWhiteSpace then ChatSettingsModule.DisallowedWhiteSpace else {
 	"\n",
 	"\r",
 	"\t",
@@ -25,63 +25,68 @@ local var1 = if chatSettingsModule.DisallowedWhiteSpace then chatSettingsModule.
 	"\f"
 }
 
-local function isMessageValidServer(p1)
-	-- upvalues: chatSettingsModule (ref)
-	return if chatSettingsModule.MaximumMessageLength * 6 < p1:len() then false elseif utf8.len(p1) == nil then false else chatSettingsModule.MaximumMessageLength >= utf8.len(utf8.nfcnormalize(p1))
+local function isMessageValidServer(Text): boolean --[[ Line: 27 ]]
+	-- upvalues: ChatSettingsModule (copy)
+	return ChatSettingsModule.MaximumMessageLength * 6 >= Text:len() and (utf8.len(Text) ~= nil and ChatSettingsModule.MaximumMessageLength >= utf8.len(utf8.nfcnormalize(Text)))
 end
 
-local function _(p1)
-	-- upvalues: runService (ref), chatService (ref)
-	if runService:IsStudio() then
+local function _(Player: Player) --[[ Line: 47 | Named "CanUserChat" ]]
+	-- upvalues: RunService (copy), Chat (copy)
+	if RunService:IsStudio() then
 		return true
+	else
+		local Success, Result = pcall(function() --[[ Line: 51 ]]
+			-- upvalues: Chat (upval), Player (copy)
+			return Chat:CanUserChatAsync(Player.UserId)
+		end)
+		
+		return Success and Result
 	end
-	local ok, status = pcall(function()
-		-- upvalues: chatService (copy), p1 (ref)
-		return chatService:CanUserChatAsync(p1.UserId)
-	end)
-	
-	return ok and status
 end
 
-return function(p1)
-	-- upvalues: runService (ref), chatService (ref), t (write), isMessageValidServer (ref), var1 (write), chatConstantsModule (ref)
-	p1:RegisterProcessCommandsFunction("message_validation", function(p2, p3, p4)
-		-- upvalues: p1 (ref), runService (copy), chatService (copy), t (copy), isMessageValidServer (copy), var1 (copy)
-		local var2
-		local var3 = p1:GetSpeaker(p2)
-		local player = var3:GetPlayer()
+return function(p1) --[[ Line: 57 | Named "Run" ]]
+	-- upvalues: RunService (copy), Chat (copy), ChatLocalizationModule (ref), isMessageValidServer (copy), DisallowedWhiteSpace (ref), ChatConstantsModule (copy)
+	p1:RegisterProcessCommandsFunction("message_validation", function(p2, p3: string, p4): boolean --[[ Line: 58 | Named "ValidateChatFunction" ]]
+		-- upvalues: p1 (copy), RunService (upval), Chat (upval), ChatLocalizationModule (upval), isMessageValidServer (upval), DisallowedWhiteSpace (upval)
+		local Speaker = p1:GetSpeaker(p2)
+		local Player = Speaker:GetPlayer()
 		
-		if not var3 then
+		if not Speaker then
 			return false
-		elseif not player then
+		end
+		if not Player then
 			return false
-		elseif not runService:IsStudio() and player.UserId < 1 then
+		end
+		if not RunService:IsStudio() and Player.UserId < 1 then
 			return true
-		elseif runService:IsStudio() then
-			var2 = true
+		end
+		local v1 = nil
+		if RunService:IsStudio() then
+			v1 = true
 		else
-			local ok, status = pcall(function()
-				-- upvalues: chatService (copy), player (ref)
-				return chatService:CanUserChatAsync(player.UserId)
+			local Success, Result = pcall(function() --[[ Line: 51 ]]
+				-- upvalues: Chat (upval), Player (copy)
+				return Chat:CanUserChatAsync(Player.UserId)
 			end)
-			var2 = ok and status
+			v1 = Success and Result
 		end
-		if not var2 then
-			var3:SendSystemMessage(t:FormatMessageToSend("GameChat_ChatMessageValidator_SettingsError", "Your chat settings prevent you from sending messages."), p4)
-			
-			return true
-		elseif not isMessageValidServer(p3) then
-			var3:SendSystemMessage(t:FormatMessageToSend("GameChat_ChatMessageValidator_MaxLengthError", "Your message exceeds the maximum message length."), p4)
+		if not v1 then
+			Speaker:SendSystemMessage(ChatLocalizationModule:FormatMessageToSend("GameChat_ChatMessageValidator_SettingsError", "Your chat settings prevent you from sending messages."), p4)
 			
 			return true
 		end
-		for i, v in pairs(var1) do
-			if p3:find(v) then
-				var3:SendSystemMessage(t:FormatMessageToSend("GameChat_ChatMessageValidator_WhitespaceError", "Your message contains whitespace that is not allowed."), p4)
+		if not isMessageValidServer(p3) then
+			Speaker:SendSystemMessage(ChatLocalizationModule:FormatMessageToSend("GameChat_ChatMessageValidator_MaxLengthError", "Your message exceeds the maximum message length."), p4)
+			
+			return true
+		end
+		for _, value in pairs(DisallowedWhiteSpace) do
+			if p3:find(value) then
+				Speaker:SendSystemMessage(ChatLocalizationModule:FormatMessageToSend("GameChat_ChatMessageValidator_WhitespaceError", "Your message contains whitespace that is not allowed."), p4)
 				
 				return true
 			end
 		end
 		return false
-	end, chatConstantsModule.VeryHighPriority)
+	end, ChatConstantsModule.VeryHighPriority)
 end

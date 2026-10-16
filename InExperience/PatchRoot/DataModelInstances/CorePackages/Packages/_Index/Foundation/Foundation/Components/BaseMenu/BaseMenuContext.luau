@@ -1,7 +1,7 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local _ = require(foundation.Components.Types)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local _ = require(Foundation.Components.Types)
 
-return require(foundation.Parent.React).createContext({
+return (require(Foundation.Parent.React).createContext({
 	onActivated = nil,
 	onNestedLeafActivated = nil,
 	hasLeading = nil,
@@ -11,6 +11,6 @@ return require(foundation.Parent.React).createContext({
 	hoverReset = nil,
 	depth = 1,
 	maxHeight = nil,
-	size = require(foundation.Enums.InputSize).Medium,
+	size = require(Foundation.Enums.InputSize).Medium,
 	hoverOpenPath = {}
-})
+}))

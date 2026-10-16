@@ -1,52 +1,51 @@
 ﻿local _ = require(script.Parent.types)
 
-local function _(p1)
-	local sequenceId = p1.sequenceId
+local function _(p1) --[[ Line: 7 | Named "getSequenceId" ]]
+	local SequenceId: number = p1.sequenceId
 	
-	return if typeof(sequenceId) == "number" and sequenceId >= 0 then sequenceId else nil
+	return if typeof(SequenceId) == "number" and SequenceId >= 0 then SequenceId else nil
 end
 
 return {
-	mergeHistoryIntoMap = function(p1, p2, p3)
-		for i, v in p2 do
-			local sequenceId = v.sequenceId
-			local var1 = if typeof(sequenceId) == "number" and sequenceId >= 0 then sequenceId else nil
+	mergeHistoryIntoMap = function(p1, List, p2) --[[ Line: 12 ]]
+		for _, value in List do
+			local SequenceId: number = value.sequenceId
+			local SequenceId1 = if typeof(SequenceId) == "number" and SequenceId >= 0 then SequenceId else nil
 			
-			if var1 ~= nil and p3[var1] == nil then
-				p1[var1] = v
+			if SequenceId1 ~= nil and p2[SequenceId1] == nil then
+				p1[SequenceId1] = value
 			end
 		end
 	end,
-	orderMergedHistoryItems = function(p4, p5)
-		local cloned = table.clone(p4)
+	orderMergedHistoryItems = function(Tbl, List) --[[ Line: 25 ]]
+		local Copy = table.clone(Tbl)
 		
-		for i, v in p5 do
-			cloned[i] = v
+		for i, value in List do
+			Copy[i] = value
 		end
-		local t = {}
+		local List1 = {}
 		
-		for i_1, v_1 in cloned do
-			table.insert(t, v_1)
+		for _, value1 in Copy do
+			table.insert(List1, value1)
 		end
-		table.sort(t, function(p6, p7)
-			local sequenceId = p6.sequenceId
-			local var2 = (if typeof(sequenceId) == "number" and sequenceId >= 0 then sequenceId else nil) or -1
-			local sequenceId_1 = p7.sequenceId
-			sequenceId = if typeof(sequenceId_1) == "number" and sequenceId_1 >= 0 then sequenceId_1 else nil
+		table.sort(List1, function(A, B): boolean --[[ Line: 39 ]]
+			local SequenceId: number = A.sequenceId
+			local SequenceId1: number = B.sequenceId
 			
-			return var2 < (sequenceId or -1)
+			return ((if typeof(SequenceId) == "number" and SequenceId >= 0 then SequenceId else nil) or -1) < ((if typeof(SequenceId1) == "number" and SequenceId1 >= 0 then SequenceId1 else nil) or -1)
 		end)
 		
-		return t
+		return List1
 	end,
-	ingestOverlayUpdate = function(p6, _, p7, p8)
-		if typeof(p8) == "number" and p8 >= 0 then
-			local cloned = table.clone(p7)
-			cloned.sequenceId = p8
-			p6[p8] = cloned
+	ingestOverlayUpdate = function(p3, _, Tbl, SequenceId: number): boolean --[[ Line: 48 ]]
+		if typeof(SequenceId) == "number" and SequenceId >= 0 then
+			local Copy = table.clone(Tbl)
+			Copy.sequenceId = SequenceId
+			p3[SequenceId] = Copy
 			
 			return true
+		else
+			return false
 		end
-		return false
 	end
 }

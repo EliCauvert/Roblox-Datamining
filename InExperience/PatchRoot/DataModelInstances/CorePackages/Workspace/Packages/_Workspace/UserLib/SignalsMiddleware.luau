@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.SignalsMiddleware.SignalsMiddleware)
+﻿return (require(script.Parent.Parent.Parent._Index.SignalsMiddleware.SignalsMiddleware))

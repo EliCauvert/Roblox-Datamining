@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.UserBlockingNetworking.UserBlockingNetworking)
+﻿return (require(script.Parent.Parent.Parent._Index.UserBlockingNetworking.UserBlockingNetworking))

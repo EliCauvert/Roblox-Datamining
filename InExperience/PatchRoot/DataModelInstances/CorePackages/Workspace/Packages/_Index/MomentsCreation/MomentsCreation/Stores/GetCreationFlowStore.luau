@@ -1,1 +1,1 @@
-﻿return require(script:FindFirstAncestor("MomentsCreation").Parent.Signals).createComputed(require(script.createCreationFlowStore))
+﻿return require(script:FindFirstAncestor("MomentsCreation").Parent.Signals).createComputed((require(script.createCreationFlowStore)))

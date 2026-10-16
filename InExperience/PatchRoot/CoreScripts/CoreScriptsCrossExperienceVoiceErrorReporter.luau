@@ -1,16 +1,16 @@
-﻿local contentProviderService = game:GetService("ContentProvider")
-local coreGuiService = game:GetService("CoreGui")
-local corePackagesService = game:GetService("CorePackages")
-local httpService = game:GetService("HttpService")
-local playersService = game:GetService("Players")
-local robloxReplicatedStorageService = game:GetService("RobloxReplicatedStorage")
-local runService = game:GetService("RunService")
-local scriptContextService = game:GetService("ScriptContext")
-local userInputService = game:GetService("UserInputService")
-local robloxGui = coreGuiService.RobloxGui
-local rateLimiterModule = require(robloxGui.Modules.ErrorReporting.RateLimiter)
-local piiFilterModule = require(robloxGui.Modules.ErrorReporting.PiiFilter)
-local backtraceReporter = require(corePackagesService.Workspace.Packages.ErrorReporters).BacktraceReporter
+﻿local ContentProvider = game:GetService("ContentProvider")
+local CoreGui = game:GetService("CoreGui")
+local CorePackages = game:GetService("CorePackages")
+local HttpService = game:GetService("HttpService")
+local Players = game:GetService("Players")
+local RobloxReplicatedStorage = game:GetService("RobloxReplicatedStorage")
+local RunService = game:GetService("RunService")
+local ScriptContext = game:GetService("ScriptContext")
+local UserInputService = game:GetService("UserInputService")
+local RobloxGui = CoreGui.RobloxGui
+local RateLimiterModule = require(RobloxGui.Modules.ErrorReporting.RateLimiter)
+local PiiFilterModule = require(RobloxGui.Modules.ErrorReporting.PiiFilter)
+local BacktraceReporter = require(CorePackages.Workspace.Packages.ErrorReporters).BacktraceReporter
 game:DefineFastFlag("DisableCEVBacktraceReporting", false)
 game:DefineFastString("CoreScriptBacktraceErrorUploadToken", "")
 game:DefineFastInt("CEVBacktracePIIFilterEraseTimeoutSeconds", 300)
@@ -20,70 +20,70 @@ game:DefineFastInt("CEVBacktraceRepeatedErrorRateLimitPeriod", 60)
 game:DefineFastInt("CEVBacktraceRepeatedErrorRateLimitProcessIntervalTenths", 10)
 game:DefineFastInt("CEVBacktraceErrorReportPercentage", 100)
 
-local function _()
+local function _(): boolean --[[ Line: 41 | Named "CanReportCEVBacktrace" ]]
 	return math.random(1, 100) <= math.clamp(game:GetFastInt("CEVBacktraceErrorReportPercentage"), 0, 100)
 end
 
 if not game:GetFastFlag("DisableCEVBacktraceReporting") and game:GetFastString("CoreScriptBacktraceErrorUploadToken") ~= "" and math.random(1, 100) <= math.clamp(game:GetFastInt("CEVBacktraceErrorReportPercentage"), 0, 100) then
-	local t = {
+	local config = {
 		AppName = "CrossExperienceVoice",
-		LocalVersion = runService:GetRobloxVersion(),
-		BaseUrl = contentProviderService.BaseUrl,
+		LocalVersion = RunService:GetRobloxVersion(),
+		BaseUrl = ContentProvider.BaseUrl,
 		PlaceId = game.PlaceId,
-		Platform = userInputService:GetPlatform().Name,
-		UserAgent = httpService:GetUserAgent(),
-		CoreScriptVersion = runService:GetCoreScriptVersion()
+		Platform = UserInputService:GetPlatform().Name,
+		UserAgent = HttpService:GetUserAgent(),
+		CoreScriptVersion = RunService:GetCoreScriptVersion()
 	}
-	local var1 = piiFilterModule.new({
+	local NewPiiFilter = PiiFilterModule.new({
 		eraseTimeout = game:GetFastInt("CEVBacktracePIIFilterEraseTimeoutSeconds")
 	})
 	local CEVBacktraceRepeatedErrorRateLimitingFastFlag = game:GetFastFlag("CEVBacktraceRepeatedErrorRateLimiting")
-	local var2 = if CEVBacktraceRepeatedErrorRateLimitingFastFlag then rateLimiterModule.new({
+	local NewRateLimiter = if CEVBacktraceRepeatedErrorRateLimitingFastFlag then RateLimiterModule.new({
 		period = game:GetFastInt("CEVBacktraceRepeatedErrorRateLimitPeriod"),
 		threshold = game:GetFastInt("CEVBacktraceRepeatedErrorRateLimitCount"),
 		processInterval = game:GetFastInt("CEVBacktraceRepeatedErrorRateLimitProcessIntervalTenths") / 10
 	}) else nil
-	local var3 = backtraceReporter.new({
-		httpService = httpService,
+	local NewBacktraceReporter = BacktraceReporter.new({
+		httpService = HttpService,
 		token = game:GetFastString("CoreScriptBacktraceErrorUploadToken"),
-		processErrorReportMethod = function(p1)
-			-- upvalues: t (ref), playersService (ref), runService (ref)
-			p1:addAttributes(t)
+		processErrorReportMethod = function(p1) --[[ Line: 76 ]]
+			-- upvalues: config (copy), Players (copy), RunService (copy)
+			p1:addAttributes(config)
 			p1:addAttributes({
-				PlayerCount = #playersService:GetPlayers(),
-				RobloxChannel = runService:GetRobloxClientChannel()
+				PlayerCount = #Players:GetPlayers(),
+				RobloxChannel = RunService:GetRobloxClientChannel()
 			})
 			
 			return p1
 		end
 	})
 	
-	local function handleErrorDetailed(p1, p2, p3, p4)
-		-- upvalues: coreGuiService (ref), corePackagesService (ref), var1 (ref), CEVBacktraceRepeatedErrorRateLimitingFastFlag (ref), var2 (write), var3 (ref)
-		if p3 ~= nil and (p3:IsDescendantOf(coreGuiService) or p3:IsDescendantOf(corePackagesService)) then
-			local var4 = var1:cleanPii(p1)
-			local var5 = var1:cleanPii(p2)
+	local function handleErrorDetailed(p1, p2, Object, p3) --[[ Line: 94 ]]
+		-- upvalues: CoreGui (copy), CorePackages (copy), NewPiiFilter (copy), CEVBacktraceRepeatedErrorRateLimitingFastFlag (copy), NewRateLimiter (ref), NewBacktraceReporter (copy)
+		if Object ~= nil and (Object:IsDescendantOf(CoreGui) or Object:IsDescendantOf(CorePackages)) then
+			local CleanPiiResult = NewPiiFilter:cleanPii(p1)
+			local CleanPiiResult1 = NewPiiFilter:cleanPii(p2)
 			
-			if p4 ~= nil then
-				p4 = var1:cleanPii(p4)
+			if p3 ~= nil then
+				p3 = NewPiiFilter:cleanPii(p3)
 			end
 			if CEVBacktraceRepeatedErrorRateLimitingFastFlag then
-				local text = var4 .. var18
+				local Text = CleanPiiResult .. CleanPiiResult1
 				
-				if var2:isRateLimited(text) then return end
-				var2:increment(text)
+				if NewRateLimiter:isRateLimited(Text) then return end
+				NewRateLimiter:increment(Text)
 			end
-			var3:reportErrorDeferred(var4, var5, p4)
+			NewBacktraceReporter:reportErrorDeferred(CleanPiiResult, CleanPiiResult1, p3)
 		end
 	end
 	
-	scriptContextService.ErrorDetailed:Connect(function(...)
-		-- upvalues: handleErrorDetailed (ref)
-		local ok, status = pcall(handleErrorDetailed, ...)
+	ScriptContext.ErrorDetailed:Connect(function(...) --[[ Line: 121 ]]
+		-- upvalues: handleErrorDetailed (copy)
+		local Success, Result = pcall(handleErrorDetailed, ...)
 		
-		if not ok then
-			warn(("CEV error reporter failed to handle an error:\n%s"):format(status))
+		if not Success then
+			warn(("CEV error reporter failed to handle an error:\n%s"):format(Result))
 		end
 	end)
-	t.ServerVersion = robloxReplicatedStorageService:WaitForChild("GetServerVersion", 1e999):InvokeServer()
+	config.ServerVersion = RobloxReplicatedStorage:WaitForChild("GetServerVersion", 1e999):InvokeServer()
 end

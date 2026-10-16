@@ -1,41 +1,46 @@
-﻿local parent = script:FindFirstAncestor("AppBlox").Parent
-local reactModule = require(parent.React)
-local cryoModule = require(parent.Cryo)
-local displayModule = require(parent.Display)
-local useSignalState = require(parent.SignalsReact).useSignalState
-local useTokens = require(parent.Foundation).Hooks.useTokens
+﻿local Parent = script:FindFirstAncestor("AppBlox").Parent
+local ReactModule = require(Parent.React)
+local CryoModule = require(Parent.Cryo)
+local DisplayModule = require(Parent.Display)
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
 
-return function(value)
-	-- upvalues: useSignalState (ref), displayModule (ref), useTokens (ref), cryoModule (ref), reactModule (ref)
-	local var1 = if value.excludeGlobalGuiInset then { left = 0, top = 0, right = 0, bottom = 0 } else useSignalState(displayModule.GetDisplayStore().getGuiInset)
-	local var2 = useSignalState(displayModule.GetDisplayStore().getDeviceSafePadding)
-	local var3 = useTokens()
-	local var4 = cryoModule.Dictionary.join({
+return function(p1) --[[ Line: 30 | Named "InsetBackground" ]]
+	-- upvalues: UseSignalStateFunction (copy), DisplayModule (copy), UseTokensFunction (copy), CryoModule (copy), ReactModule (copy)
+	local UseSignalStateResult = UseSignalStateFunction(DisplayModule.GetDisplayStore().getGuiInset)
+	local Config = if p1.excludeGlobalGuiInset then { left = 0, top = 0, right = 0, bottom = 0 } else UseSignalStateResult
+	local UseSignalStateResult1 = UseSignalStateFunction(DisplayModule.GetDisplayStore().getDeviceSafePadding)
+	local UseTokensResult = UseTokensFunction()
+	local JoinResult = CryoModule.Dictionary.join({
 		BorderSizePixel = 0,
-		BackgroundTransparency = var3.Color.Surface.Surface_0.Transparency,
-		BackgroundColor3 = var3.Color.Surface.Surface_0.Color3
-	}, value.frameProps or {})
-	local var5 = var1.left + var2.left
-	local var6 = var1.right + var2.right
-	local var7 = var1.top + var2.top
-	local var8 = var1.bottom + var2.bottom
+		BackgroundTransparency = UseTokensResult.Color.Surface.Surface_0.Transparency,
+		BackgroundColor3 = UseTokensResult.Color.Surface.Surface_0.Color3
+	}, p1.frameProps or {})
+	local NewLeft = Config.left + UseSignalStateResult1.left
+	local NewRight = Config.right + UseSignalStateResult1.right
+	local NewTop = Config.top + UseSignalStateResult1.top
+	local NewBottom = Config.bottom + UseSignalStateResult1.bottom
+	local JoinResult1 = CryoModule.Dictionary.join({
+		Position = UDim2.new(0, if p1.directions.left then -NewLeft else 0, 0, -NewTop),
+		Size = UDim2.new(1, (if p1.directions.left then NewLeft else 0) + (if p1.directions.right then NewRight else 0), 0, NewTop)
+	}, CryoModule.Dictionary.join(JoinResult, p1.topFrameProps or {}))
+	local JoinResult2 = CryoModule.Dictionary.join({
+		Position = UDim2.new(0, if p1.directions.left then -NewLeft else 0, 1, 0),
+		Size = UDim2.new(1, (if p1.directions.left then NewLeft else 0) + (if p1.directions.right then NewRight else 0), 0, NewBottom)
+	}, CryoModule.Dictionary.join(JoinResult, p1.bottomFrameProps or {}))
+	local JoinResult3 = CryoModule.Dictionary.join({
+		Position = UDim2.new(0, -NewLeft, 0, if p1.directions.top then -NewTop else 0),
+		Size = UDim2.new(0, NewLeft, 1, (if p1.directions.top then NewTop else 0) + (if p1.directions.bottom then NewBottom else 0))
+	}, CryoModule.Dictionary.join(JoinResult, p1.leftFrameProps or {}))
+	local JoinResult4 = CryoModule.Dictionary.join({
+		Position = UDim2.new(1, 0, 0, if p1.directions.top then -NewTop else 0),
+		Size = UDim2.new(0, NewRight, 1, (if p1.directions.top then NewTop else 0) + (if p1.directions.bottom then NewBottom else 0))
+	}, CryoModule.Dictionary.join(JoinResult, p1.rightFrameProps or {}))
 	
-	return reactModule.createElement(reactModule.Fragment, nil, {
-		InsetBackgroundTop = if value.directions.top and var7 > 0 then reactModule.createElement("Frame", cryoModule.Dictionary.join({
-			Position = UDim2.new(0, if value.directions.left then -var5 else 0, 0, -var7),
-			Size = UDim2.new(1, (if value.directions.left then var5 else 0) + (if value.directions.right then var6 else 0), 0, var7)
-		}, cryoModule.Dictionary.join(var4, value.topFrameProps or {}))) else nil,
-		InsetBackgroundBottom = if value.directions.bottom and var8 > 0 then reactModule.createElement("Frame", cryoModule.Dictionary.join({
-			Position = UDim2.new(0, if value.directions.left then -var5 else 0, 1, 0),
-			Size = UDim2.new(1, (if value.directions.left then var5 else 0) + (if value.directions.right then var6 else 0), 0, var8)
-		}, cryoModule.Dictionary.join(var4, value.bottomFrameProps or {}))) else nil,
-		InsetBackgroundLeft = if value.directions.left and var5 > 0 then reactModule.createElement("Frame", cryoModule.Dictionary.join({
-			Position = UDim2.new(0, -var5, 0, if value.directions.top then -var7 else 0),
-			Size = UDim2.new(0, var5, 1, (if value.directions.top then var7 else 0) + (if value.directions.bottom then var8 else 0))
-		}, cryoModule.Dictionary.join(var4, value.leftFrameProps or {}))) else nil,
-		InsetBackgroundRight = if value.directions.right and var6 > 0 then reactModule.createElement("Frame", cryoModule.Dictionary.join({
-			Position = UDim2.new(1, 0, 0, if value.directions.top then -var7 else 0),
-			Size = UDim2.new(0, var6, 1, (if value.directions.top then var7 else 0) + (if value.directions.bottom then var8 else 0))
-		}, cryoModule.Dictionary.join(var4, value.rightFrameProps or {}))) else nil
+	return ReactModule.createElement(ReactModule.Fragment, nil, {
+		InsetBackgroundTop = if p1.directions.top and NewTop > 0 then ReactModule.createElement("Frame", JoinResult1) else nil,
+		InsetBackgroundBottom = if p1.directions.bottom and NewBottom > 0 then ReactModule.createElement("Frame", JoinResult2) else nil,
+		InsetBackgroundLeft = if p1.directions.left and NewLeft > 0 then ReactModule.createElement("Frame", JoinResult3) else nil,
+		InsetBackgroundRight = if p1.directions.right and NewRight > 0 then ReactModule.createElement("Frame", JoinResult4) else nil
 	})
 end

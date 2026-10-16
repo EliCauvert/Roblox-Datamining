@@ -1,46 +1,46 @@
-﻿local collectionViews = script:FindFirstAncestor("CollectionViews")
-local parent = collectionViews.Parent
-local reactModule = require(parent.React)
-local calculateItemWidthModule = require(collectionViews.calculateItemWidth)
-local useStore = require(parent.RoactUtils).Hooks.RoactRodux.useStore
+﻿local CollectionViews = script:FindFirstAncestor("CollectionViews")
+local Parent = CollectionViews.Parent
+local ReactModule = require(Parent.React)
+local CalculateItemWidthModule = require(CollectionViews.calculateItemWidth)
+local UseStoreFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useStore
 
-local function getItemSize(p1, p2, p3, p4, p5, p6, p7)
-	-- upvalues: calculateItemWidthModule (ref)
-	local var1 = calculateItemWidthModule(p1, p2, p3, p4, p5, p7)
+local function getItemSize(p1, p2, p3, X, p4, Callback, p5): Vector2 --[[ Line: 10 ]]
+	-- upvalues: CalculateItemWidthModule (copy)
+	local ItemWidthModule = CalculateItemWidthModule(p1, p2, p3, X, p4, p5)
 	
-	return Vector2.new(var1, p6(var1))
+	return Vector2.new(ItemWidthModule, (Callback(ItemWidthModule)))
 end
 
-return function(p1, p2, p3, p4, p5, p6, p7)
-	-- upvalues: useStore (ref), reactModule (ref), getItemSize (ref), calculateItemWidthModule (ref)
-	local var1 = useStore()
-	local var2, var3 = reactModule.useBinding(Vector2.zero)
+return function(p1, p2, p3, p4, Callback1, Callback, p5) --[[ Line: 29 | Named "useCollectionSizeBindings" ]]
+	-- upvalues: UseStoreFunction (copy), ReactModule (copy), getItemSize (copy), CalculateItemWidthModule (copy)
+	local UseStoreResult = UseStoreFunction()
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(Vector2.zero)
 	
-	if var2:getValue() == Vector2.zero then
-		var3(var1:getState().ScreenSize)
+	if UseBindingResult:getValue() == Vector2.zero then
+		UseBindingResult2(UseStoreResult:getState().ScreenSize)
 	end
-	local var4, var5 = reactModule.useBinding(getItemSize(p1, p2, p3, var2:getValue() and var2:getValue().X or 0, p4, p5, p7))
-	local var6, var7 = reactModule.useState(nil)
-	local var8 = reactModule.useCallback(function(p8)
-		-- upvalues: p6 (ref), var3 (ref), p1 (ref), p2 (ref), p3 (ref), p4 (ref), p5 (ref), p7 (ref), calculateItemWidthModule (copy), var5 (ref)
-		local absoluteSize = p8.AbsoluteSize
+	local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(getItemSize(p1, p2, p3, UseBindingResult:getValue() and UseBindingResult:getValue().X or 0, p4, Callback1, p5))
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 58 ]]
+		-- upvalues: Callback (copy), UseBindingResult2 (copy), p1 (copy), p2 (copy), p3 (copy), p4 (copy), Callback1 (copy), p5 (copy), CalculateItemWidthModule (upval), UseBindingResult2_1 (copy)
+		local AbsoluteSize = Frame.AbsoluteSize
 		
-		if absoluteSize.X == 0 then return end
-		if p6 then
-			p6(absoluteSize)
+		if AbsoluteSize.X == 0 then return end
+		if Callback then
+			Callback(AbsoluteSize)
 		end
-		var3(absoluteSize)
-		local var9 = calculateItemWidthModule(p1, p2, p3, if absoluteSize then absoluteSize.X else 0, p4, p7)
-		var5(Vector2.new(var9, p5(var9)))
+		UseBindingResult2(AbsoluteSize)
+		local ItemWidthModule = CalculateItemWidthModule(p1, p2, p3, AbsoluteSize and AbsoluteSize.X or 0, p4, p5)
+		UseBindingResult2_1((Vector2.new(ItemWidthModule, (Callback1(ItemWidthModule)))))
 	end, {
-		p1, p2, p3, p4, p5, p6, p7
+		p1, p2, p3, p4, Callback1, Callback, p5
 	})
-	reactModule.useEffect(function()
-		-- upvalues: var6 (ref), var8 (ref)
-		if var6 then
-			var8(var6)
+	ReactModule.useEffect(function() --[[ Line: 91 ]]
+		-- upvalues: UseStateResult (copy), UseResult (copy)
+		if UseStateResult then
+			UseResult(UseStateResult)
 		end
-	end, { var8, var6 })
+	end, { UseResult, UseStateResult })
 	
-	return var4, var2, var8, var7
+	return UseBindingResult1, UseBindingResult, UseResult, UseStateResult2
 end

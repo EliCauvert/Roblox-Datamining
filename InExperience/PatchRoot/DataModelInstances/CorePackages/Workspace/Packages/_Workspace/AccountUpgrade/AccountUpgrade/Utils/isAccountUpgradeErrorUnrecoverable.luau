@@ -1,14 +1,14 @@
-﻿local accountUpgradeErrorModule = require(script:FindFirstAncestor("AccountUpgrade").AccountUpgradeError)
-local t = {
-	[accountUpgradeErrorModule.AccountUpgradeDisabled] = true,
-	[accountUpgradeErrorModule.NotEligible] = true,
-	[accountUpgradeErrorModule.InvalidUpgradeType] = true,
-	[accountUpgradeErrorModule.FieldNotAllowedForUpgradeType] = true,
-	[accountUpgradeErrorModule.BirthdayRequired] = true,
-	[accountUpgradeErrorModule.AccountAlreadyUpgraded] = true
+﻿local AccountUpgradeErrorModule = require(script:FindFirstAncestor("AccountUpgrade").AccountUpgradeError)
+local config = {
+	[AccountUpgradeErrorModule.AccountUpgradeDisabled] = true,
+	[AccountUpgradeErrorModule.NotEligible] = true,
+	[AccountUpgradeErrorModule.InvalidUpgradeType] = true,
+	[AccountUpgradeErrorModule.FieldNotAllowedForUpgradeType] = true,
+	[AccountUpgradeErrorModule.BirthdayRequired] = true,
+	[AccountUpgradeErrorModule.AccountAlreadyUpgraded] = true
 }
 
-return function(p1)
-	-- upvalues: t (ref)
-	return p1 ~= nil and t[p1] == true
+return function(p1): boolean --[[ Line: 16 | Named "isAccountUpgradeErrorUnrecoverable" ]]
+	-- upvalues: config (copy)
+	return p1 ~= nil and config[p1] == true
 end

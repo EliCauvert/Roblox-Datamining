@@ -1,44 +1,46 @@
 ﻿local _ = require(script:FindFirstAncestor("InExperienceShop").Types)
 
-local function findItemById(p1, p2, p3)
-	if p2 == nil or p3 == nil then
+local function findItemById(List, Id, ItemType) --[[ Line: 10 ]]
+	if Id == nil or ItemType == nil then
 		return nil
 	end
-	for i, v in p1 do
-		for i_1, v_1 in v.items do
-			if v_1.id == p2 and v_1.itemType == p3 then
-				return v_1
+	for _, value in List do
+		for _, item in value.items do
+			if item.id == Id and item.itemType == ItemType then
+				return item
 			end
 		end
 	end
 	return nil
 end
 
-local function findBonusItemById(p4, p5, p6)
-	if p5 == nil or p6 == nil then
+local function findBonusItemById(List, Id, ItemType) --[[ Line: 24 ]]
+	if Id == nil or ItemType == nil then
 		return nil
 	end
-	for i, v in p4 do
-		local bonusItemDetails
-		local featuredRobuxPackage = v.featuredRobuxPackage
+	local BonusItemDetails = nil
+	local BonusItemDetails1 = nil
+	for _, value in List do
+		local FeaturedRobuxPackage = value.featuredRobuxPackage
+		local NoFeaturedRobuxPackage = FeaturedRobuxPackage == nil
 		
-		if featuredRobuxPackage ~= nil then
-			bonusItemDetails = featuredRobuxPackage.bonusItemDetails
-			
-			if bonusItemDetails == nil or bonusItemDetails.id ~= p5 or bonusItemDetails.itemType ~= p6 then
-				bonusItemDetails = v.robuxPackages
+		if not NoFeaturedRobuxPackage then
+			BonusItemDetails = FeaturedRobuxPackage.bonusItemDetails
+			NoFeaturedRobuxPackage = BonusItemDetails == nil or BonusItemDetails.id ~= Id or BonusItemDetails.itemType ~= ItemType
+		end
+		if not NoFeaturedRobuxPackage then
+			return BonusItemDetails
+		end
+		local RobuxPackages = value.robuxPackages
+		
+		if RobuxPackages ~= nil then
+			for _, robuxPackage in RobuxPackages do
+				BonusItemDetails1 = robuxPackage.bonusItemDetails
 				
-				if bonusItemDetails ~= nil then
-					for i_1, v_1 in bonusItemDetails do
-						local bonusItemDetails_1 = v_1.bonusItemDetails
-						
-						if bonusItemDetails_1 ~= nil and bonusItemDetails_1.id == p5 and bonusItemDetails_1.itemType == p6 then
-							return bonusItemDetails_1
-						end
-					end
+				if BonusItemDetails1 ~= nil and BonusItemDetails1.id == Id and BonusItemDetails1.itemType == ItemType then
+					return BonusItemDetails1
 				end
 			end
-			return bonusItemDetails
 		end
 	end
 	return nil
@@ -47,14 +49,14 @@ end
 return {
 	findItemById = findItemById,
 	findBonusItemById = findBonusItemById,
-	resolveItemForSelection = function(p7, p8, p9, p10)
-		-- upvalues: findItemById (ref), findBonusItemById (ref)
-		local var1 = findItemById(p7, p8, p9)
+	resolveItemForSelection = function(p1, Id, ItemType, p2) --[[ Line: 53 ]]
+		-- upvalues: findItemById (copy), findBonusItemById (copy)
+		local ItemById = findItemById(p1, Id, ItemType)
 		
-		return if var1 == nil then if p10 then findBonusItemById(p7, p8, p9) else nil else var1
+		return if ItemById == nil then if p2 then findBonusItemById(p1, Id, ItemType) else nil else ItemById
 	end,
-	isRobuxBonusOnlySelection = function(p7, p8, p9, p10)
-		-- upvalues: findItemById (ref), findBonusItemById (ref)
-		return not (not p10 or p8 == nil or p9 == nil) and (findItemById(p7, p8, p9) == nil and findBonusItemById(p7, p8, p9) ~= nil)
+	isRobuxBonusOnlySelection = function(p1, Id, ItemType, p2): boolean --[[ Line: 71 ]]
+		-- upvalues: findItemById (copy), findBonusItemById (copy)
+		return if p2 and Id ~= nil and ItemType ~= nil and findItemById(p1, Id, ItemType) == nil then findBonusItemById(p1, Id, ItemType) ~= nil else false
 	end
 }

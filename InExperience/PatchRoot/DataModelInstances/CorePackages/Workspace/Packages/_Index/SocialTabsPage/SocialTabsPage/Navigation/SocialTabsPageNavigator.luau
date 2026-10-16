@@ -1,49 +1,49 @@
-﻿local socialTabsPage = script:FindFirstAncestor("SocialTabsPage")
-local parent = socialTabsPage.Parent
-local reactModule = require(parent.React)
-local roactNavigationModule = require(parent.RoactNavigation)
-local useNavigationProps = require(parent.RobloxAppNavigation).useNavigationProps
-local socialTabsPageModule = require(socialTabsPage.Components.SocialTabsPage)
-local useProfileDockedPanelWidth = require(parent.ProfilePlatformCommon).Hooks.useProfileDockedPanelWidth
-local var1 = roactNavigationModule.createRobloxSwitchNavigator(require(script.Parent.SocialTabsPageRouter), {
+﻿local SocialTabsPage = script:FindFirstAncestor("SocialTabsPage")
+local Parent = SocialTabsPage.Parent
+local ReactModule = require(Parent.React)
+local RoactNavigationModule = require(Parent.RoactNavigation)
+local UseNavigationPropsFunction = require(Parent.RobloxAppNavigation).useNavigationProps
+local SocialTabsPageModule = require(SocialTabsPage.Components.SocialTabsPage)
+local UseProfileDockedPanelWidthFunction = require(Parent.ProfilePlatformCommon).Hooks.useProfileDockedPanelWidth
+local RobloxSwitchNavigator = RoactNavigationModule.createRobloxSwitchNavigator(require(script.Parent.SocialTabsPageRouter), {
 	resetOnBlur = false,
 	keepVisitedScreensMounted = true,
-	backBehavior = roactNavigationModule.BackBehavior.None
+	backBehavior = RoactNavigationModule.BackBehavior.None
 })
 
-local function SocialTabsPageNavigatorComponent(value)
-	-- upvalues: useNavigationProps (ref), useProfileDockedPanelWidth (ref), reactModule (ref), var1 (ref), socialTabsPageModule (ref)
-	local navigation = value.navigation
-	local var2 = useNavigationProps(function(_, p1)
+local function SocialTabsPageNavigatorComponent(p1) --[[ Line: 23 ]]
+	-- upvalues: UseNavigationPropsFunction (copy), UseProfileDockedPanelWidthFunction (copy), ReactModule (copy), RobloxSwitchNavigator (copy), SocialTabsPageModule (copy)
+	local Navigation = p1.navigation
+	local UseNavigationPropsResult = UseNavigationPropsFunction(function(_, p2) --[[ Line: 26 ]]
 		return {
-			profileId = p1.profileId,
-			title = p1.title,
-			initialTabId = p1.initialTabId,
-			tabConfig = p1.tabConfig,
-			dockToProfilePanel = p1.dockToProfilePanel
+			profileId = p2.profileId,
+			title = p2.title,
+			initialTabId = p2.initialTabId,
+			tabConfig = p2.tabConfig,
+			dockToProfilePanel = p2.dockToProfilePanel
 		}
 	end)
 	
-	return reactModule.createElement(socialTabsPageModule, {
-		renderNavigator = reactModule.useCallback(function()
-			-- upvalues: reactModule (copy), var1 (copy), navigation (ref)
-			return reactModule.createElement(var1, { navigation = navigation })
-		end, { navigation }),
-		tabConfig = var2.tabConfig,
-		profileId = var2.profileId,
-		title = var2.title,
-		initialTabId = var2.initialTabId,
-		pageWidth = useProfileDockedPanelWidth(var2.dockToProfilePanel)
+	return ReactModule.createElement(SocialTabsPageModule, {
+		renderNavigator = ReactModule.useCallback(function() --[[ Line: 38 ]]
+			-- upvalues: ReactModule (upval), RobloxSwitchNavigator (upval), Navigation (copy)
+			return ReactModule.createElement(RobloxSwitchNavigator, { navigation = Navigation })
+		end, { Navigation }),
+		tabConfig = UseNavigationPropsResult.tabConfig,
+		profileId = UseNavigationPropsResult.profileId,
+		title = UseNavigationPropsResult.title,
+		initialTabId = UseNavigationPropsResult.initialTabId,
+		pageWidth = UseProfileDockedPanelWidthFunction(UseNavigationPropsResult.dockToProfilePanel)
 	})
 end
 
-local socialTabsPageNavigatorClassWrapper = reactModule.PureComponent:extend("SocialTabsPageNavigatorClassWrapper")
+local SocialTabsPageNavigatorClassWrapper = ReactModule.PureComponent:extend("SocialTabsPageNavigatorClassWrapper")
 
-function socialTabsPageNavigatorClassWrapper.render(p1)
-	-- upvalues: reactModule (ref), SocialTabsPageNavigatorComponent (ref)
-	return reactModule.createElement(SocialTabsPageNavigatorComponent, p1.props)
+function SocialTabsPageNavigatorClassWrapper.render(p1) --[[ Line: 56 ]]
+	-- upvalues: ReactModule (copy), SocialTabsPageNavigatorComponent (copy)
+	return ReactModule.createElement(SocialTabsPageNavigatorComponent, p1.props)
 end
 
-socialTabsPageNavigatorClassWrapper.router = var1.router
+SocialTabsPageNavigatorClassWrapper.router = RobloxSwitchNavigator.router
 
-return socialTabsPageNavigatorClassWrapper
+return SocialTabsPageNavigatorClassWrapper

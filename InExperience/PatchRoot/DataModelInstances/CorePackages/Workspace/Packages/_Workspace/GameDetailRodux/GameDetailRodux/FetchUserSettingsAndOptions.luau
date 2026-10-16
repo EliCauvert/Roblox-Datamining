@@ -1,19 +1,19 @@
-﻿local gameDetailRodux = script:FindFirstAncestor("GameDetailRodux")
-local getUserSettingsAndOptionsModule = require(gameDetailRodux.GameDetails.GetUserSettingsAndOptions)
-local promiseModule = require(gameDetailRodux.Parent.Promise)
+﻿local GameDetailRodux = script:FindFirstAncestor("GameDetailRodux")
+local GetUserSettingsAndOptionsModule = require(GameDetailRodux.GameDetails.GetUserSettingsAndOptions)
+local PromiseModule = require(GameDetailRodux.Parent.Promise)
 
-return function(p1)
-	-- upvalues: getUserSettingsAndOptionsModule (ref), promiseModule (ref)
-	return getUserSettingsAndOptionsModule(p1):andThen(function(p2)
-		-- upvalues: promiseModule (copy)
-		local responseBody = p2.responseBody
+return function(p1) --[[ Line: 7 ]]
+	-- upvalues: GetUserSettingsAndOptionsModule (copy), PromiseModule (copy)
+	return GetUserSettingsAndOptionsModule(p1):andThen(function(Result) --[[ Line: 8 ]]
+		-- upvalues: PromiseModule (upval)
+		local ResponseBody = Result.responseBody
 		
-		if not responseBody then
-			promiseModule.reject("Unexpected response when fetching user settings and options")
+		if not ResponseBody then
+			PromiseModule.reject("Unexpected response when fetching user settings and options")
 		end
-		return promiseModule.resolve(responseBody)
-	end, function(p2)
-		-- upvalues: promiseModule (copy)
-		return promiseModule.reject(p2)
+		return PromiseModule.resolve(ResponseBody)
+	end, function(p2) --[[ Line: 16 ]]
+		-- upvalues: PromiseModule (upval)
+		return PromiseModule.reject(p2)
 	end)
 end

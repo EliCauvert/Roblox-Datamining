@@ -1,26 +1,25 @@
-﻿local t = {}
-local boolean = require(script.Parent.Parent.Parent.Parent.LuauPolyfill).Boolean
+﻿local Boolean = require(script.Parent.Parent.Parent.Parent.LuauPolyfill).Boolean
 local _ = require(script.Parent.Parent.core.types)
-local getOperationName = require(script.Parent.Parent.Parent.utilities).getOperationName
+local GetOperationNameFunction = require(script.Parent.Parent.Parent.utilities).getOperationName
 
-function t.transformOperation(p1)
-	-- upvalues: boolean (ref), getOperationName (ref)
-	local t = {
-		variables = if boolean.toJSBoolean(p1.variables) then p1.variables else {},
-		extensions = if boolean.toJSBoolean(p1.extensions) then p1.extensions else {},
-		operationName = p1.operationName,
-		query = p1.query
-	}
-	
-	if not boolean.toJSBoolean(t.operationName) then
-		if typeof(t.query) ~= "string" then
-			t.operationName = boolean.toJSBoolean(getOperationName(t.query)) and getOperationName(t.query) or nil
-			
-			return t
+return {
+	transformOperation = function(p1) --[[ Line: 20 ]]
+		-- upvalues: Boolean (copy), GetOperationNameFunction (copy)
+		local config = {
+			variables = Boolean.toJSBoolean(p1.variables) and p1.variables or {},
+			extensions = Boolean.toJSBoolean(p1.extensions) and p1.extensions or {},
+			operationName = p1.operationName,
+			query = p1.query
+		}
+		
+		if not Boolean.toJSBoolean(config.operationName) then
+			if typeof(config.query) ~= "string" then
+				config.operationName = Boolean.toJSBoolean(GetOperationNameFunction(config.query)) and GetOperationNameFunction(config.query) or nil
+				
+				return config
+			end
+			config.operationName = ""
 		end
-		t.operationName = ""
+		return config
 	end
-	return t
-end
-
-return t
+}

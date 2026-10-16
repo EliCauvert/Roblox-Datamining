@@ -1,9 +1,9 @@
-﻿local parent = script:FindFirstAncestor("DataHydration").Parent
-local httpClientModule = require(parent.HttpClient)
-local creatorAgentChatModule = require(parent.DataHydration.CreatorAgentChat)
+﻿local Parent = script:FindFirstAncestor("DataHydration").Parent
+local HttpClientModule = require(Parent.HttpClient)
+local CreatorAgentChatModule = require(Parent.DataHydration.CreatorAgentChat)
 local _ = require(script.Parent.AdCampaignToolCallStatusStoreTypes)
 
-return function(p1, _)
-	-- upvalues: creatorAgentChatModule (ref), httpClientModule (ref)
-	return httpClientModule.asPromise(creatorAgentChatModule.getCreatorAgentChatStore(false).adCampaignToolCallStatus({ toolCallId = p1 }))
+return function(ToolCallId, _) --[[ Line: 10 | Named "fetchAdCampaignToolCallStatus" ]]
+	-- upvalues: CreatorAgentChatModule (copy), HttpClientModule (copy)
+	return HttpClientModule.asPromise(CreatorAgentChatModule.getCreatorAgentChatStore(false).adCampaignToolCallStatus({ toolCallId = ToolCallId }))
 end

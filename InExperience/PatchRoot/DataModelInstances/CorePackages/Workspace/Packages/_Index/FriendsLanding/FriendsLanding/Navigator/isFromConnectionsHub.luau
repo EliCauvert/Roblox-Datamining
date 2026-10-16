@@ -1,12 +1,15 @@
-﻿local appPage = require(script:FindFirstAncestor("FriendsLanding").Parent.RobloxAppEnums).AppPage
+﻿local AppPage = require(script:FindFirstAncestor("FriendsLanding").Parent.RobloxAppEnums).AppPage
 
-return function(p1)
-	-- upvalues: appPage (ref)
-	local var1 = p1._dangerouslyGetParent()
+return function(p1): boolean --[[ Line: 7 | Named "getLuaAppsNavigator" ]]
+	-- upvalues: AppPage (copy)
+	local DangerouslyGetParentResult = p1._dangerouslyGetParent()
 	
-	if var1 then
-		local var2 = var1._dangerouslyGetParent()
+	if DangerouslyGetParentResult then
+		local DangerouslyGetParentResult1 = DangerouslyGetParentResult._dangerouslyGetParent()
 		
-		return if var2 then var2.state.routeName == appPage.CoHubMyConnections else false
+		if DangerouslyGetParentResult1 then
+			return DangerouslyGetParentResult1.state.routeName == AppPage.CoHubMyConnections
+		end
 	end
+	return false
 end

@@ -1,16 +1,16 @@
-﻿local parent = script:FindFirstAncestor("RobloxAppNavigation").Parent
-local reactModule = require(parent.React)
-local cryoModule = require(parent.Cryo)
-local useNavigationPropsModule = require(script.Parent.useNavigationProps)
+﻿local Parent = script:FindFirstAncestor("RobloxAppNavigation").Parent
+local ReactModule = require(Parent.React)
+local CryoModule = require(Parent.Cryo)
+local UseNavigationPropsModule = require(script.Parent.useNavigationProps)
 local _ = require(script.Parent.types)
 
-return function(p1)
-	-- upvalues: reactModule (ref), cryoModule (ref), useNavigationPropsModule (ref)
-	return function(p2)
-		-- upvalues: reactModule (copy), cryoModule (copy), useNavigationPropsModule (copy), p1 (ref)
-		return function(p3)
-			-- upvalues: reactModule (copy), p2 (ref), cryoModule (copy), useNavigationPropsModule (copy), p1 (copy)
-			return reactModule.createElement(p2, cryoModule.Dictionary.join(p3, useNavigationPropsModule(p1)))
+return function(p1) --[[ Line: 12 | Named "withNavigationProps" ]]
+	-- upvalues: ReactModule (copy), CryoModule (copy), UseNavigationPropsModule (copy)
+	return function(p2) --[[ Line: 13 ]]
+		-- upvalues: ReactModule (upval), CryoModule (upval), UseNavigationPropsModule (upval), p1 (copy)
+		return function(p3) --[[ Line: 14 ]]
+			-- upvalues: ReactModule (upval), p2 (copy), CryoModule (upval), UseNavigationPropsModule (upval), p1 (upval)
+			return ReactModule.createElement(p2, CryoModule.Dictionary.join(p3, UseNavigationPropsModule(p1)))
 		end
 	end
 end

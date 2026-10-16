@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("CheckUniversePlaceBeforeSuspending", false)
 
-return function()
+return function() --[[ Line: 3 ]]
 	return game:GetFastFlag("CheckUniversePlaceBeforeSuspending")
 end

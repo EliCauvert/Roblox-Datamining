@@ -1,22 +1,22 @@
-﻿local focusNavigationUtils = script:FindFirstAncestor("FocusNavigationUtils")
-local parent = focusNavigationUtils.Parent
-local _ = require(parent.ReactFocusNavigation)
-local cryoModule = require(parent.Cryo)
-local navigationModule = require(parent.Navigation)
-local useFocusRootModule = require(focusNavigationUtils.useFocusRoot)
-local useDefaultAppEventHandlersModule = require(focusNavigationUtils.useDefaultAppEventHandlers)
-local focusNavigationDefaultEventMapModule = require(focusNavigationUtils.FocusNavigationDefaultEventMap)
+﻿local FocusNavigationUtils = script:FindFirstAncestor("FocusNavigationUtils")
+local Parent = FocusNavigationUtils.Parent
+local _ = require(Parent.ReactFocusNavigation)
+local CryoModule = require(Parent.Cryo)
+local NavigationModule = require(Parent.Navigation)
+local UseFocusRootModule = require(FocusNavigationUtils.useFocusRoot)
+local UseDefaultAppEventHandlersModule = require(FocusNavigationUtils.useDefaultAppEventHandlers)
+local FocusNavigationDefaultEventMapModule = require(FocusNavigationUtils.FocusNavigationDefaultEventMap)
 local t = {}
 
-return function(p1)
-	-- upvalues: t (ref), navigationModule (ref), useDefaultAppEventHandlersModule (ref), cryoModule (ref), focusNavigationDefaultEventMapModule (ref), useFocusRootModule (ref)
-	local var1 = navigationModule.useNavigationFocus()
+return function(p1) --[[ Line: 23 | Named "useAppFocusRoot" ]]
+	-- upvalues: t (copy), NavigationModule (copy), UseDefaultAppEventHandlersModule (copy), CryoModule (copy), FocusNavigationDefaultEventMapModule (copy), UseFocusRootModule (copy)
+	local UseNavigationFocusResult = NavigationModule.useNavigationFocus()
 	
-	return useFocusRootModule(cryoModule.Dictionary.union(p1, {
-		customEventHandlers = cryoModule.None,
-		eventHandlers = cryoModule.Dictionary.union(useDefaultAppEventHandlersModule(), p1.customEventHandlers or t),
-		eventMap = cryoModule.Dictionary.union(focusNavigationDefaultEventMapModule, p1.customEventMap or t),
-		isFocusable = (p1.isFocusable == nil or p1.isFocusable) and (var1 == nil or var1),
-		isAutoFocusRoot = if p1.isAutoFocusRoot == nil then false else p1.isAutoFocusRoot
-	}))
+	return UseFocusRootModule((CryoModule.Dictionary.union(p1, {
+		customEventHandlers = CryoModule.None,
+		eventHandlers = CryoModule.Dictionary.union(UseDefaultAppEventHandlersModule(), p1.customEventHandlers or t),
+		eventMap = CryoModule.Dictionary.union(FocusNavigationDefaultEventMapModule, p1.customEventMap or t),
+		isFocusable = (p1.isFocusable == nil or p1.isFocusable) and (UseNavigationFocusResult == nil or UseNavigationFocusResult),
+		isAutoFocusRoot = p1.isAutoFocusRoot ~= nil and p1.isAutoFocusRoot
+	})))
 end

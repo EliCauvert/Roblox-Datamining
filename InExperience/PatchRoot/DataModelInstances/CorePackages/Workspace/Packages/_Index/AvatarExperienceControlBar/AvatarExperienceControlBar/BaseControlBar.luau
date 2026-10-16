@@ -1,42 +1,42 @@
-﻿local avatarExperienceControlBar = script:FindFirstAncestor("AvatarExperienceControlBar")
-local userInputService = game:GetService("UserInputService")
-local parent = avatarExperienceControlBar.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local iconOnlyMenuModule = require(avatarExperienceControlBar.Components.IconOnlyMenu)
-local iconTextMenuModule = require(avatarExperienceControlBar.Components.IconTextMenu)
-local externalEventConnection = require(parent.RoactUtils).ExternalEventConnection
-local _ = require(avatarExperienceControlBar.ControlBarTypes)
+﻿local AvatarExperienceControlBar = script:FindFirstAncestor("AvatarExperienceControlBar")
+local UserInputService = game:GetService("UserInputService")
+local Parent = AvatarExperienceControlBar.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local IconOnlyMenuModule = require(AvatarExperienceControlBar.Components.IconOnlyMenu)
+local IconTextMenuModule = require(AvatarExperienceControlBar.Components.IconTextMenu)
+local ExternalEventConnection = require(Parent.RoactUtils).ExternalEventConnection
+local _ = require(AvatarExperienceControlBar.ControlBarTypes)
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), foundationModule (ref), iconOnlyMenuModule (ref), iconTextMenuModule (ref), externalEventConnection (ref), userInputService (ref)
-	local var1, var2 = reactModule.useBinding(UDim2.new(0, 0, 0, 0))
+return ReactModule.memo(function(Frame) --[[ Line: 14 | Named "BaseControlBar" ]]
+	-- upvalues: ReactModule (copy), FoundationModule (copy), IconOnlyMenuModule (copy), IconTextMenuModule (copy), ExternalEventConnection (copy), UserInputService (copy)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(UDim2.new(0, 0, 0, 0))
 	
-	return reactModule.createElement(foundationModule.View, {
+	return ReactModule.createElement(FoundationModule.View, {
 		tag = "no-clip",
-		Size = var1,
-		ref = p1.containerRef,
-		LayoutOrder = p1.LayoutOrder
+		Size = UseBindingResult,
+		ref = Frame.containerRef,
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		MainMenu = reactModule.createElement(iconOnlyMenuModule, {
-			items = p1.menus,
-			activeItemId = p1.activeMenuItemId,
-			onItemActivated = p1.onMenuItemActivated,
-			ref = p1.iconMenuRef,
-			onAbsoluteSizeChanged = function(value)
-				-- upvalues: var2 (ref)
-				var2(UDim2.fromOffset(value.AbsoluteSize.X, value.AbsoluteSize.Y))
+		MainMenu = ReactModule.createElement(IconOnlyMenuModule, {
+			items = Frame.menus,
+			activeItemId = Frame.activeMenuItemId,
+			onItemActivated = Frame.onMenuItemActivated,
+			ref = Frame.iconMenuRef,
+			onAbsoluteSizeChanged = function(Frame: Frame) --[[ Line: 27 ]]
+				-- upvalues: UseBindingResult2 (copy)
+				UseBindingResult2(UDim2.fromOffset(Frame.AbsoluteSize.X, Frame.AbsoluteSize.Y))
 			end
 		}),
-		Submenu = if p1.submenuItems then reactModule.createElement(iconTextMenuModule, {
-			key = p1.activeMenuItemId,
-			items = p1.submenuItems,
-			onItemActivated = p1.onSubmenuItemActivated,
-			Position = p1.submenuPosition
+		Submenu = if Frame.submenuItems then ReactModule.createElement(IconTextMenuModule, {
+			key = Frame.activeMenuItemId,
+			items = Frame.submenuItems,
+			onItemActivated = Frame.onSubmenuItemActivated,
+			Position = Frame.submenuPosition
 		}) else nil,
-		OnInputEnded = reactModule.createElement(externalEventConnection, {
-			event = userInputService.InputEnded,
-			callback = p1.onInputEnded
+		OnInputEnded = ReactModule.createElement(ExternalEventConnection, {
+			event = UserInputService.InputEnded,
+			callback = Frame.onInputEnded
 		})
 	})
 end)

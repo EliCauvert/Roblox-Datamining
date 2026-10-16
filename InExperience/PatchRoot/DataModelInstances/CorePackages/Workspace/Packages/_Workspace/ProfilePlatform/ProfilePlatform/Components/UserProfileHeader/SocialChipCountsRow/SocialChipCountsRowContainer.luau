@@ -1,96 +1,100 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local robloxAppHooksModule = require(parent.RobloxAppHooks)
-local _ = require(profilePlatform.Common.Types)
-local foundationModule = require(parent.Foundation)
-local apolloProfileInsightsModule = require(parent.ApolloProfileInsights)
-local enumsModule = require(profilePlatform.Common.Enums)
-local useProfileAnalyticsContextModule = require(profilePlatform.Contexts.useProfileAnalyticsContext)
-local useProfileWrapperContextModule = require(profilePlatform.Contexts.useProfileWrapperContext)
-local useAreWebViewsSupportedModule = require(profilePlatform.Hooks.useAreWebViewsSupported)
-local chipGroup = require(profilePlatform.Components.ChipGroup).ChipGroup
-local useLocalUserId = robloxAppHooksModule.useLocalUserId
-local useProfileInsightsByUserIds = apolloProfileInsightsModule.Hooks.useProfileInsightsByUserIds
-local getProfileInsightsByUserIdFromData = apolloProfileInsightsModule.Selectors.getProfileInsightsByUserIdFromData
-local useSignalProfileInsightsByUserId = require(parent.ProfileInsights).useSignalProfileInsightsByUserId
-local getFFlagEnableProfileInsightsApolloMigration = require(parent.SharedFlags).GetFFlagEnableProfileInsightsApolloMigration
-local parent_1 = script.Parent
-local useSocialCountsDataModule = require(parent_1.hooks.useSocialCountsData)
-local useSocialCountsActionsModule = require(parent_1.hooks.useSocialCountsActions)
-local useSchoolChipModule = require(parent_1.hooks.useSchoolChip)
-local useDynamicSizeMarginModule = require(profilePlatform.Hooks.useDynamicSizeMargin)
-local chipSize = foundationModule.Enums.ChipSize
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagAddIEMProfilePage = sharedFlagsModule.FFlagAddIEMProfilePage
-local fFlagEnableSocialTabsPage = sharedFlagsModule.FFlagEnableSocialTabsPage
-local fFlagProfilePlatformEnableSchoolChip = sharedFlagsModule.FFlagProfilePlatformEnableSchoolChip
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local _ = require(ProfilePlatform.Common.Types)
+local ApolloProfileInsightsModule = require(Parent.ApolloProfileInsights)
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local UseProfileAnalyticsContextModule = require(ProfilePlatform.Contexts.useProfileAnalyticsContext)
+local UseProfileWrapperContextModule = require(ProfilePlatform.Contexts.useProfileWrapperContext)
+local UseAreWebViewsSupportedModule = require(ProfilePlatform.Hooks.useAreWebViewsSupported)
+local ChipGroup = require(ProfilePlatform.Components.ChipGroup).ChipGroup
+local UseLocalUserIdFunction = require(Parent.RobloxAppHooks).useLocalUserId
+local UseProfileInsightsByUserIdsFunction = ApolloProfileInsightsModule.Hooks.useProfileInsightsByUserIds
+local GetProfileInsightsByUserIdFromDataFunction = ApolloProfileInsightsModule.Selectors.getProfileInsightsByUserIdFromData
+local UseSignalProfileInsightsByUserIdFunction = require(Parent.ProfileInsights).useSignalProfileInsightsByUserId
+local GetFFlagEnableProfileInsightsApolloMigrationFunction = require(Parent.SharedFlags).GetFFlagEnableProfileInsightsApolloMigration
+local Parent1 = script.Parent
+local UseSocialCountsDataModule = require(Parent1.hooks.useSocialCountsData)
+local UseSocialCountsActionsModule = require(Parent1.hooks.useSocialCountsActions)
+local UseSchoolChipModule = require(Parent1.hooks.useSchoolChip)
+local UseDynamicSizeMarginModule = require(ProfilePlatform.Hooks.useDynamicSizeMargin)
+local ChipSize = require(Parent.Foundation).Enums.ChipSize
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagAddIEMProfilePage = SharedFlagsModule.FFlagAddIEMProfilePage
+local FFlagEnableSocialTabsPage = SharedFlagsModule.FFlagEnableSocialTabsPage
+local FFlagProfilePlatformEnableSchoolChip = SharedFlagsModule.FFlagProfilePlatformEnableSchoolChip
 
-return function(p1)
-	-- upvalues: useProfileWrapperContextModule (ref), useProfileAnalyticsContextModule (ref), useAreWebViewsSupportedModule (ref), useLocalUserId (ref), useDynamicSizeMarginModule (ref), fFlagAddIEMProfilePage (ref), getFFlagEnableProfileInsightsApolloMigration (ref), useSignalProfileInsightsByUserId (ref), useProfileInsightsByUserIds (ref), getProfileInsightsByUserIdFromData (ref), useSocialCountsDataModule (ref), useSocialCountsActionsModule (ref), fFlagEnableSocialTabsPage (ref), fFlagProfilePlatformEnableSchoolChip (ref), useSchoolChipModule (ref), reactModule (ref), enumsModule (ref), chipSize (ref), chipGroup (ref)
-	local var1 = useProfileWrapperContextModule()
-	local var2 = useProfileAnalyticsContextModule()
-	local var3 = useAreWebViewsSupportedModule()
-	local var4 = useLocalUserId()
-	local var5, var6 = useDynamicSizeMarginModule()
-	local profileId = var1.profileId
-	local var7 = if fFlagAddIEMProfilePage then var1.sourceInfo.source else nil
-	local var8 = profileId == tostring(var4)
-	local var9 = nil
+return function(p1) --[[ Line: 46 | Named "SocialCountsChipRowContainer" ]]
+	-- upvalues: UseProfileWrapperContextModule (copy), UseProfileAnalyticsContextModule (copy), UseAreWebViewsSupportedModule (copy), UseLocalUserIdFunction (copy), UseDynamicSizeMarginModule (copy), FFlagAddIEMProfilePage (copy), GetFFlagEnableProfileInsightsApolloMigrationFunction (copy), UseSignalProfileInsightsByUserIdFunction (copy), UseProfileInsightsByUserIdsFunction (copy), GetProfileInsightsByUserIdFromDataFunction (copy), UseSocialCountsDataModule (copy), UseSocialCountsActionsModule (copy), FFlagEnableSocialTabsPage (copy), FFlagProfilePlatformEnableSchoolChip (copy), UseSchoolChipModule (copy), ReactModule (copy), EnumsModule (copy), ChipSize (copy), ChipGroup (copy)
+	local UseProfileWrapperContextModuleResult = UseProfileWrapperContextModule()
+	local UseProfileAnalyticsContextModuleResult = UseProfileAnalyticsContextModule()
+	local UseAreWebViewsSupportedModuleResult = UseAreWebViewsSupportedModule()
+	local UseLocalUserIdResult = UseLocalUserIdFunction()
+	local UseDynamicSizeMarginModuleResult, UseDynamicSizeMarginModuleResult2 = UseDynamicSizeMarginModule()
+	local ProfileId = UseProfileWrapperContextModuleResult.profileId
+	local Source = if FFlagAddIEMProfilePage then UseProfileWrapperContextModuleResult.sourceInfo.source else nil
+	local IsProfileIdMatch = ProfileId == tostring(UseLocalUserIdResult)
+	local v1 = nil
 	
-	if getFFlagEnableProfileInsightsApolloMigration() then
-		var9 = useSignalProfileInsightsByUserId({ rankingStrategy = "tc_info_boost", userId = profileId })
+	if GetFFlagEnableProfileInsightsApolloMigrationFunction() then
+		v1 = UseSignalProfileInsightsByUserIdFunction({ rankingStrategy = "tc_info_boost", userId = ProfileId })
 	else
-		local var10 = useProfileInsightsByUserIds({ userIds = { profileId } })
+		local UseProfileInsightsByUserIdsResult = UseProfileInsightsByUserIdsFunction({ userIds = { ProfileId } })
 		
-		if var10 and var10.data and not var10.loading then
-			var9 = getProfileInsightsByUserIdFromData(var10.data, profileId)
+		if UseProfileInsightsByUserIdsResult and UseProfileInsightsByUserIdsResult.data and not UseProfileInsightsByUserIdsResult.loading then
+			v1 = GetProfileInsightsByUserIdFromDataFunction(UseProfileInsightsByUserIdsResult.data, ProfileId)
 		end
 	end
-	local t = {}
+	local Ids = {}
 	
-	for i, v in ipairs(if var9 and var9.mutualFriends then var9.mutualFriends else {}) do
-		table.insert(t, v.id)
+	for _, value in ipairs(if v1 and v1.mutualFriends then v1.mutualFriends else {}) do
+		table.insert(Ids, value.id)
 	end
-	local var11 = useSocialCountsDataModule(profileId, var8, var3, t)
-	local var12 = useSocialCountsActionsModule(profileId, var8, var2, t, if fFlagEnableSocialTabsPage then p1.title else nil)
-	local var13 = if fFlagProfilePlatformEnableSchoolChip then useSchoolChipModule(var2) else nil
+	local UseSocialCountsDataModuleResult = UseSocialCountsDataModule(ProfileId, IsProfileIdMatch, UseAreWebViewsSupportedModuleResult, Ids)
+	local UseSocialCountsActionsModuleResult = UseSocialCountsActionsModule(ProfileId, IsProfileIdMatch, UseProfileAnalyticsContextModuleResult, Ids, if FFlagEnableSocialTabsPage then p1.title else nil)
+	local UseSchoolChipModuleResult = if FFlagProfilePlatformEnableSchoolChip then UseSchoolChipModule(UseProfileAnalyticsContextModuleResult) else nil
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		LayoutOrder = p1.layoutOrder,
 		Size = p1.size,
 		BackgroundTransparency = 1,
-		[reactModule.Change.AbsoluteSize] = var6,
+		[ReactModule.Change.AbsoluteSize] = UseDynamicSizeMarginModuleResult2,
 		AutomaticSize = Enum.AutomaticSize.Y
 	}, {
-		UIPadding = reactModule.createElement("UIPadding", {
-			PaddingLeft = UDim.new(0, var5),
-			PaddingRight = UDim.new(0, var5)
+		UIPadding = ReactModule.createElement("UIPadding", {
+			PaddingLeft = UDim.new(0, UseDynamicSizeMarginModuleResult),
+			PaddingRight = UDim.new(0, UseDynamicSizeMarginModuleResult)
 		}),
-		ChipGroup = reactModule.createElement(chipGroup, {
+		ChipGroup = ReactModule.createElement(ChipGroup, {
 			scrollingEnabledOverride = true,
-			chips = reactModule.useMemo(function()
-				-- upvalues: fFlagAddIEMProfilePage (copy), var7 (ref), enumsModule (copy), fFlagProfilePlatformEnableSchoolChip (copy), var13 (write), var11 (ref), var12 (ref), chipSize (copy)
-				local t = {}
+			chips = ReactModule.useMemo(function() --[[ Line: 99 ]]
+				-- upvalues: FFlagAddIEMProfilePage (upval), Source (copy), EnumsModule (upval), FFlagProfilePlatformEnableSchoolChip (upval), UseSchoolChipModuleResult (ref), UseSocialCountsDataModuleResult (copy), UseSocialCountsActionsModuleResult (copy), ChipSize (upval)
+				local List = {}
+				local IsSourceMatch: boolean = FFlagAddIEMProfilePage and Source == EnumsModule.Sources.InExperienceProfile
 				
-				if fFlagProfilePlatformEnableSchoolChip and var13 and not (fFlagAddIEMProfilePage and var7 == enumsModule.Sources.InExperienceProfile) then
-					table.insert(t, var13)
+				if FFlagProfilePlatformEnableSchoolChip and UseSchoolChipModuleResult and not IsSourceMatch then
+					table.insert(List, UseSchoolChipModuleResult)
 				end
-				for i, v in ipairs(var11) do
-					if v.fieldName ~= "mutualFriendsCount" or tonumber(v.count) ~= 0 then
-						table.insert(t, {
-							count = v.count,
-							text = v.text,
-							layoutOrder = v.layoutOrder,
-							onActivated = if fFlagAddIEMProfilePage and var7 == enumsModule.Sources.InExperienceProfile then nil else var12[v.fieldName],
-							isDisabled = v.isDisabled,
-							size = chipSize.Medium,
-							leading = v.leading
+				for _, value in ipairs(UseSocialCountsDataModuleResult) do
+					if value.fieldName ~= "mutualFriendsCount" or tonumber(value.count) ~= 0 then
+						table.insert(List, {
+							count = value.count,
+							text = value.text,
+							layoutOrder = value.layoutOrder,
+							onActivated = if FFlagAddIEMProfilePage and Source == EnumsModule.Sources.InExperienceProfile then nil else UseSocialCountsActionsModuleResult[value.fieldName],
+							isDisabled = value.isDisabled,
+							size = ChipSize.Medium,
+							leading = value.leading
 						})
 					end
 				end
-				return t
-			end, { var11, var12, var13, var7 }),
+				return List
+			end, {
+				UseSocialCountsDataModuleResult,
+				UseSocialCountsActionsModuleResult,
+				UseSchoolChipModuleResult,
+				Source
+			}),
 			automaticSize = Enum.AutomaticSize.Y,
 			size = UDim2.new(1, 0, 0, 32),
 			layoutOrder = p1.layoutOrder

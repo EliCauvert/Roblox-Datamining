@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.AppObservability.AppObservability)
+﻿return (require(script.Parent._Workspace.AppObservability.AppObservability))

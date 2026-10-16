@@ -1,60 +1,61 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
-local builderIconsModule = require(parent.BuilderIcons)
-local foundationModule = require(parent.Foundation)
-local momentsCommonModule = require(parent.MomentsCommon)
-local reactModule = require(parent.React)
-local chevronLargeUp = builderIconsModule.Icon.ChevronLargeUp
-local chevronLargeDown = builderIconsModule.Icon.ChevronLargeDown
-local iconButton = foundationModule.IconButton
-local view = foundationModule.View
-local useDeviceInsets = momentsCommonModule.Hooks.useDeviceInsets
-local useFormFactor = momentsCommonModule.Hooks.useFormFactor
-local usePreferredInputModule = require(moments.Hooks.usePreferredInput)
-local useTokens = foundationModule.Hooks.useTokens
-local fFlagLuaSupportMicroGamepadPreferredInput = require(parent.SharedFlags).FFlagLuaSupportMicroGamepadPreferredInput
-local formFactor = momentsCommonModule.Enums.FormFactor
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
+local BuilderIconsModule = require(Parent.BuilderIcons)
+local FoundationModule = require(Parent.Foundation)
+local MomentsCommonModule = require(Parent.MomentsCommon)
+local ReactModule = require(Parent.React)
+local ChevronLargeUp = BuilderIconsModule.Icon.ChevronLargeUp
+local ChevronLargeDown = BuilderIconsModule.Icon.ChevronLargeDown
+local IconButton = FoundationModule.IconButton
+local View = FoundationModule.View
+local UseDeviceInsetsFunction = MomentsCommonModule.Hooks.useDeviceInsets
+local UseFormFactorFunction = MomentsCommonModule.Hooks.useFormFactor
+local UsePreferredInputModule = require(Moments.Hooks.usePreferredInput)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local FFlagLuaSupportMicroGamepadPreferredInput = require(Parent.SharedFlags).FFlagLuaSupportMicroGamepadPreferredInput
+local FormFactor = MomentsCommonModule.Enums.FormFactor
 
-return function(p1)
-	-- upvalues: useDeviceInsets (ref), useFormFactor (ref), usePreferredInputModule (ref), useTokens (ref), moments (ref), parent (ref), formFactor (ref), fFlagLuaSupportMicroGamepadPreferredInput (ref), reactModule (ref), view (ref), iconButton (ref), chevronLargeUp (ref), foundationModule (ref), chevronLargeDown (ref)
-	local var1 = useDeviceInsets()
-	local var2 = useFormFactor()
-	local var3 = usePreferredInputModule()
-	local var4 = useTokens()
-	local fFlagMomentsAlignFeedNavArrowsWithHeaderModule = require(moments.Flags.FFlagMomentsAlignFeedNavArrowsWithHeader)
-	local var5 = nil
+return function(p1) --[[ Line: 41 | Named "NavigationBar" ]]
+	-- upvalues: UseDeviceInsetsFunction (copy), UseFormFactorFunction (copy), UsePreferredInputModule (copy), UseTokensFunction (copy), Moments (copy), Parent (copy), FormFactor (copy), FFlagLuaSupportMicroGamepadPreferredInput (copy), ReactModule (copy), View (copy), IconButton (copy), ChevronLargeUp (copy), FoundationModule (copy), ChevronLargeDown (copy)
+	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
+	local UseFormFactorResult = UseFormFactorFunction()
+	local UsePreferredInputModuleResult = UsePreferredInputModule()
+	local UseTokensResult = UseTokensFunction()
+	local FFlagMomentsAlignFeedNavArrowsWithHeaderModule = require(Moments.Flags.FFlagMomentsAlignFeedNavArrowsWithHeader)
+	local UseCompositionLayoutResult = if FFlagMomentsAlignFeedNavArrowsWithHeaderModule then require(Parent.AppComposition).useCompositionLayout() else nil
 	
-	if fFlagMomentsAlignFeedNavArrowsWithHeaderModule then
-		if require(moments.Flags.FFlagMomentsUseCompositionLibrary) and require(moments.Flags.FFlagMomentsUseFoundationHeaderBar) then
-			var5 = require(parent.AppComposition).useCompositionLayout()
-		end
-	end
-	return if var2 == formFactor.MobileLandscape then nil elseif not (var3 ~= Enum.PreferredInput.KeyboardAndMouse and not (if var3 ~= Enum.PreferredInput.Gamepad then fFlagLuaSupportMicroGamepadPreferredInput and var3 == Enum.PreferredInput.MicroGamepad else true)) then if p1.active then reactModule.createElement(view, {
-		tag = "size-full",
-		padding = {
-			right = UDim.new(0, if fFlagMomentsAlignFeedNavArrowsWithHeaderModule then require(script.Parent.resolveFeedRightChromeInset)(var1, if var5 ~= nil then nil else var5.margin, var4.Padding.XLarge) else math.max(var1.right, var4.Padding.XLarge))
-		},
-		ZIndex = p1.zIndex
-	}, {
-		NavControls = reactModule.createElement(view, {
-			tag = "col align-x-center align-y-center position-center-right anchor-center-right auto-xy radius-circle clip bg-over-media-0"
+	if UseFormFactorResult == FormFactor.MobileLandscape then
+		return nil
+	else
+		local IsUsePreferredInputModuleResultMatch: boolean = UsePreferredInputModuleResult == Enum.PreferredInput.Gamepad or FFlagLuaSupportMicroGamepadPreferredInput and UsePreferredInputModuleResult == Enum.PreferredInput.MicroGamepad
+		
+		return if (UsePreferredInputModuleResult == Enum.PreferredInput.KeyboardAndMouse or IsUsePreferredInputModuleResultMatch) and p1.active then ReactModule.createElement(View, {
+			tag = "size-full",
+			padding = {
+				right = UDim.new(0, if FFlagMomentsAlignFeedNavArrowsWithHeaderModule then require(script.Parent.resolveFeedRightChromeInset)(UseDeviceInsetsResult, if UseCompositionLayoutResult == nil then nil else UseCompositionLayoutResult.margin, UseTokensResult.Padding.XLarge) else math.max(UseDeviceInsetsResult.right, UseTokensResult.Padding.XLarge))
+			},
+			ZIndex = p1.zIndex
 		}, {
-			PreviousButton = reactModule.createElement(iconButton, {
-				isCircular = true,
-				LayoutOrder = 1,
-				icon = chevronLargeUp,
-				isDisabled = p1.currentIndex == 1,
-				onActivated = p1.onScrollToPrevious,
-				size = foundationModule.Enums.IconSize.Medium
-			}),
-			NextButton = reactModule.createElement(iconButton, {
-				isCircular = true,
-				LayoutOrder = 2,
-				icon = chevronLargeDown,
-				isDisabled = p1.currentIndex == p1.numItems,
-				onActivated = p1.onScrollToNext,
-				size = foundationModule.Enums.IconSize.Medium
+			NavControls = ReactModule.createElement(View, {
+				tag = "col align-x-center align-y-center position-center-right anchor-center-right auto-xy radius-circle clip bg-over-media-0"
+			}, {
+				PreviousButton = ReactModule.createElement(IconButton, {
+					isCircular = true,
+					LayoutOrder = 1,
+					icon = ChevronLargeUp,
+					isDisabled = p1.currentIndex == 1,
+					onActivated = p1.onScrollToPrevious,
+					size = FoundationModule.Enums.IconSize.Medium
+				}),
+				NextButton = ReactModule.createElement(IconButton, {
+					isCircular = true,
+					LayoutOrder = 2,
+					icon = ChevronLargeDown,
+					isDisabled = p1.currentIndex == p1.numItems,
+					onActivated = p1.onScrollToNext,
+					size = FoundationModule.Enums.IconSize.Medium
+				})
 			})
-		})
-	}) else nil else nil
+		}) else nil
+	end
 end

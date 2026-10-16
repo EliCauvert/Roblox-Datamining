@@ -1,47 +1,80 @@
-﻿local parent = script.Parent
-local constantsModule = require(parent.Constants)
-local getFFlagIBEnableCollectiblesSystemSupportModule = require(parent.Flags.GetFFlagIBEnableCollectiblesSystemSupport)
-local t = {
-	getBundleId = function(p1)
+﻿local Parent = script.Parent
+local ConstantsModule = require(Parent.Constants)
+local GetFFlagIBEnableCollectiblesSystemSupportModule = require(Parent.Flags.GetFFlagIBEnableCollectiblesSystemSupport)
+local UtilityFunctionsModule = {
+	getBundleId = function(p1) --[[ Line: 9 ]]
 		return if p1.parentBundleId == nil then nil else p1.parentBundleId
 	end,
-	isCollectibles = function(p1)
-		-- upvalues: constantsModule (ref)
-		return p1 and (p1.productType and p1.productType == constantsModule.ProductType.CollectibleItem)
+	isCollectibles = function(p1): boolean --[[ Line: 17 ]]
+		-- upvalues: ConstantsModule (copy)
+		return p1 and (p1.productType and p1.productType == ConstantsModule.ProductType.CollectibleItem)
 	end,
-	hasLimitedQuantity = function(p1)
-		-- upvalues: getFFlagIBEnableCollectiblesSystemSupportModule (ref)
-		return if p1 then p1.isLimited or ((if getFFlagIBEnableCollectiblesSystemSupportModule() then p1.isLimitedUnique else nil) or p1.collectibleIsLimited) else nil
+	hasLimitedQuantity = function(p1) --[[ Line: 21 ]]
+		-- upvalues: GetFFlagIBEnableCollectiblesSystemSupportModule (copy)
+		if p1 then
+			local IsLimitedUnique = if GetFFlagIBEnableCollectiblesSystemSupportModule() then p1.isLimitedUnique else nil
+			local CollectibleIsLimited = p1.collectibleIsLimited
+			
+			return p1.isLimited or (IsLimitedUnique or CollectibleIsLimited)
+		else
+			return nil
+		end
 	end,
-	isLimited1Point0 = function(p1)
+	isLimited1Point0 = function(p1) --[[ Line: 34 ]]
 		return if p1 then p1.isLimited or p1.isLimitedUnique else nil
 	end,
-	isLimited1Point0_LimitedUnique = function(p1)
+	isLimited1Point0_LimitedUnique = function(p1) --[[ Line: 43 ]]
 		return if p1 then p1.isLimitedUnique else nil
 	end,
-	isLimited2Point0_Or_LimitedCollectible = function(p1)
+	isLimited2Point0_Or_LimitedCollectible = function(p1) --[[ Line: 52 ]]
 		return if p1 then p1.collectibleIsLimited else nil
 	end
 }
 
-function t.isUnlimitedCollectibleAsset(value, p1)
-	-- upvalues: t (ref), constantsModule (ref)
-	return if value and p1 then not t.hasLimitedQuantity(p1) and (p1.productType == constantsModule.ProductType.CollectibleItem and value == constantsModule.ItemType.Asset) else nil
+function UtilityFunctionsModule.isUnlimitedCollectibleAsset(Asset, p1): boolean? --[[ Line: 61 ]]
+	-- upvalues: UtilityFunctionsModule (copy), ConstantsModule (copy)
+	if Asset and p1 then
+		local IsProductTypeMatch = p1.productType == ConstantsModule.ProductType.CollectibleItem
+		local IsAssetMatch = Asset == ConstantsModule.ItemType.Asset
+		
+		return not UtilityFunctionsModule.hasLimitedQuantity(p1) and (IsProductTypeMatch and IsAssetMatch)
+	else
+		return nil
+	end
 end
 
-function t.isLimitedBundle(p1, p2)
-	-- upvalues: constantsModule (ref)
-	return if p1 and p2 then p2.collectibleIsLimited and p1 == constantsModule.ItemType.Bundle else nil
+function UtilityFunctionsModule.isLimitedBundle(Bundle, p1): boolean? --[[ Line: 73 ]]
+	-- upvalues: ConstantsModule (copy)
+	if Bundle and p1 then
+		local IsBundleMatch = Bundle == ConstantsModule.ItemType.Bundle
+		
+		return p1.collectibleIsLimited and IsBundleMatch
+	else
+		return nil
+	end
 end
 
-function t.isUnlimitedCollectibleBundle(p1, p2)
-	-- upvalues: constantsModule (ref)
-	return if p1 and p2 then not p2.collectibleIsLimited and (p2.productType == constantsModule.ProductType.CollectibleItem and p1 == constantsModule.ItemType.Bundle) else nil
+function UtilityFunctionsModule.isUnlimitedCollectibleBundle(Bundle, p1): boolean? --[[ Line: 84 ]]
+	-- upvalues: ConstantsModule (copy)
+	if Bundle and p1 then
+		local IsProductTypeMatch = p1.productType == ConstantsModule.ProductType.CollectibleItem
+		local IsBundleMatch = Bundle == ConstantsModule.ItemType.Bundle
+		
+		return not p1.collectibleIsLimited and (IsProductTypeMatch and IsBundleMatch)
+	else
+		return nil
+	end
 end
 
-function t.isLimitedCollectible(p1)
-	-- upvalues: t (ref), constantsModule (ref)
-	return if p1 then t.hasLimitedQuantity(p1) and p1.productType == constantsModule.ProductType.CollectibleItem else nil
+function UtilityFunctionsModule.isLimitedCollectible(p1): boolean? --[[ Line: 96 ]]
+	-- upvalues: UtilityFunctionsModule (copy), ConstantsModule (copy)
+	if p1 then
+		local IsProductTypeMatch = p1.productType == ConstantsModule.ProductType.CollectibleItem
+		
+		return UtilityFunctionsModule.hasLimitedQuantity(p1) and IsProductTypeMatch
+	else
+		return nil
+	end
 end
 
-return t
+return UtilityFunctionsModule

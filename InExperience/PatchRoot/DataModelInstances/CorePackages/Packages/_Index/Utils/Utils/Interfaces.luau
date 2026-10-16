@@ -1,6 +1,6 @@
-﻿local parent = script.Parent.Parent
-local _ = require(parent.LuauPolyfill)
-local _ = require(parent.GraphQL)
+﻿local Parent = script.Parent.Parent
+local _ = require(Parent.LuauPolyfill)
+local _ = require(Parent.GraphQL)
 
 return {
 	MapperKind = {

@@ -1,64 +1,64 @@
-﻿local httpService = game:GetService("HttpService")
-local mrRouterEnvName = game:DefineFastString("MrRouterEnvName", "")
-local t = {
-	generateTraceparent = function()
-		-- upvalues: httpService (ref)
-		return string.format("00-%s-%s-01", httpService:GenerateGUID(false):gsub("-", ""):lower(), httpService:GenerateGUID(false):gsub("-", ""):sub(1, 16):lower())
+﻿local HttpService = game:GetService("HttpService")
+local MrRouterEnvName = game:DefineFastString("MrRouterEnvName", "")
+local MrRouterHeadersModule = {
+	generateTraceparent = function(): string --[[ Line: 17 ]]
+		-- upvalues: HttpService (copy)
+		return string.format("00-%s-%s-01", HttpService:GenerateGUID(false):gsub("-", ""):lower(), (HttpService:GenerateGUID(false):gsub("-", ""):sub(1, 16):lower()))
 	end,
-	mergeMrRouterInTracestate = function(p1, p2)
-		local text = "mrrouter-env=" .. p1
-		local t = {}
+	mergeMrRouterInTracestate = function(Text: string, MrRouterEnvName): string --[[ Line: 23 ]]
+		local Text1 = "mrrouter-env=" .. MrRouterEnvName
+		local List = {}
 		
-		if p1 and #p1 > 0 then
-			for i in p1:gmatch(" *([^,]+)") do
-				table.insert(t, i)
+		if Text and #Text > 0 then
+			for i in Text:gmatch(" *([^,]+)") do
+				table.insert(List, i)
 			end
 		end
-		local function _(p3)
-			return p3:sub(1, 13) == "mrrouter-env="
+		local function _(Text: string): boolean --[[ Line: 33 | Named "isMrRouterEntry" ]]
+			return Text:sub(1, 13) == "mrrouter-env="
 		end
 		
-		local var1 = nil
+		local v1 = nil
 		
-		for i, v in ipairs(t) do
-			if v:sub(1, 13) == "mrrouter-env=" then
-				var1 = i
+		for i1, Text2 in ipairs(List) do
+			if Text2:sub(1, 13) == "mrrouter-env=" then
+				v1 = i1
 				break
 			end
 		end
-		if var1 == nil then
-			table.insert(t, text)
+		if v1 == nil then
+			table.insert(List, Text1)
 			
-			return table.concat(t, ",")
+			return table.concat(List, ",")
 		end
-		local t_1 = {}
+		local List1 = {}
 		
-		for v, v_1 in ipairs(t) do
-			if v_1:sub(1, 13) ~= "mrrouter-env=" then
-				table.insert(t_1, v_1)
+		for _, Text3 in ipairs(List) do
+			if Text3:sub(1, 13) ~= "mrrouter-env=" then
+				table.insert(List1, Text3)
 			end
 		end
-		table.insert(t_1, var1, text)
+		table.insert(List1, v1, Text1)
 		
-		return table.concat(t_1, ",")
+		return table.concat(List1, ",")
 	end
 }
 
-function t.injectMrRouterHeaders(p3)
-	-- upvalues: mrRouterEnvName (ref), t (ref)
-	if #mrRouterEnvName == 0 then
-		return p3
+function MrRouterHeadersModule.injectMrRouterHeaders(Tbl) --[[ Line: 64 ]]
+	-- upvalues: MrRouterEnvName (copy), MrRouterHeadersModule (copy)
+	if #MrRouterEnvName == 0 then
+		return Tbl
 	end
-	local var2 = if p3 then table.clone(p3) else {}
+	local Copy = if Tbl then table.clone(Tbl) else {}
 	
-	if not var2.Traceparent then
-		var2.Traceparent = t.generateTraceparent()
+	if not Copy.Traceparent then
+		Copy.Traceparent = MrRouterHeadersModule.generateTraceparent()
 	end
-	var2.Tracestate = t.mergeMrRouterInTracestate(var2.Tracestate, mrRouterEnvName)
+	Copy.Tracestate = MrRouterHeadersModule.mergeMrRouterInTracestate(Copy.Tracestate, MrRouterEnvName)
 	
-	return var2
+	return Copy
 end
 
-t["jest.config"] = script["jest.config"]
+MrRouterHeadersModule["jest.config"] = script["jest.config"]
 
-return t
+return MrRouterHeadersModule

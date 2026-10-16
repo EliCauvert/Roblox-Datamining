@@ -1,181 +1,159 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local default = require(parent.ExternalContentSharingProtocol).ExternalContentSharingProtocol.default
-local _ = require(buildExperience.Chat.chatTypes)
-local fFlagBuildExperienceCopyChatMessagesModule = require(buildExperience.Flags.FFlagBuildExperienceCopyChatMessages)
-local fFlagBuildExperienceRichTextUserMessagesModule = require(buildExperience.Flags.FFlagBuildExperienceRichTextUserMessages)
-local fFlagBuildExperienceUserMessageHapticFeedbackModule = require(buildExperience.Flags.FFlagBuildExperienceUserMessageHapticFeedback)
-local fFlagBuildExperienceChatImageAttachmentsModule = require(buildExperience.Flags.FFlagBuildExperienceChatImageAttachments)
-local fFlagBuildExperienceChatResourceAttachments = require(parent.SharedFlags).FFlagBuildExperienceChatResourceAttachments
-local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local var1 = if fFlagBuildExperienceChatImageAttachmentsModule then require(script.Parent.ChatImagePreviewList) else nil
-local var2 = if fFlagBuildExperienceChatResourceAttachments then require(script.Parent.ChatResourceAttachmentList) else nil
-local var3 = if fFlagBuildExperienceUserMessageHapticFeedbackModule then require(parent.InteractionFeedback).useTriggerFeedback else nil
-local menu = foundationModule.Menu
-local text = foundationModule.Text
-local view = foundationModule.View
-local iconName = foundationModule.Enums.IconName
-local inputSize = foundationModule.Enums.InputSize
-local popoverAlign = foundationModule.Enums.PopoverAlign
-local popoverSide = foundationModule.Enums.PopoverSide
-local useTokens = foundationModule.Hooks.useTokens
-local t = {
-	affordance = foundationModule.Enums.StateLayerAffordance.None
-}
-local t_1 = {
-	["&"] = "&amp;",
-	["<"] = "&lt;",
-	[">"] = "&gt;",
-	["\""] = "&quot;",
-	["'"] = "&apos;"
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local Default = require(Parent.ExternalContentSharingProtocol).ExternalContentSharingProtocol.default
+local _ = require(BuildExperience.Chat.chatTypes)
+local FFlagBuildExperienceCopyChatMessagesModule = require(BuildExperience.Flags.FFlagBuildExperienceCopyChatMessages)
+local FFlagBuildExperienceRichTextUserMessagesModule = require(BuildExperience.Flags.FFlagBuildExperienceRichTextUserMessages)
+local FFlagBuildExperienceUserMessageHapticFeedbackModule = require(BuildExperience.Flags.FFlagBuildExperienceUserMessageHapticFeedback)
+local FFlagBuildExperienceChatImageAttachmentsModule = require(BuildExperience.Flags.FFlagBuildExperienceChatImageAttachments)
+local FFlagBuildExperienceChatResourceAttachments = require(Parent.SharedFlags).FFlagBuildExperienceChatResourceAttachments
+local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
+local EscapeRichTextModule = require(BuildExperience.utils.escapeRichText)
+local ChatImagePreviewListModule = if FFlagBuildExperienceChatImageAttachmentsModule then require(script.Parent.ChatImagePreviewList) else nil
+local ChatResourceAttachmentListModule = if FFlagBuildExperienceChatResourceAttachments then require(script.Parent.ChatResourceAttachmentList) else nil
+local UseTriggerFeedback = if FFlagBuildExperienceUserMessageHapticFeedbackModule then require(Parent.InteractionFeedback).useTriggerFeedback else nil
+local Menu = FoundationModule.Menu
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local IconName = FoundationModule.Enums.IconName
+local InputSize = FoundationModule.Enums.InputSize
+local PopoverAlign = FoundationModule.Enums.PopoverAlign
+local PopoverSide = FoundationModule.Enums.PopoverSide
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local config = {
+	affordance = FoundationModule.Enums.StateLayerAffordance.None
 }
 
-local function _(p1)
-	-- upvalues: reactModule (ref), t_1 (ref)
-	return reactModule.useMemo(function()
-		-- upvalues: p1 (ref), t_1 (copy)
-		return string.gsub(p1, "[&<>\"']", t_1)
+local function _(p1) --[[ Line: 58 | Named "useEscapedRichText" ]]
+	-- upvalues: ReactModule (copy), EscapeRichTextModule (copy)
+	return ReactModule.useMemo(function() --[[ Line: 59 ]]
+		-- upvalues: EscapeRichTextModule (upval), p1 (copy)
+		return EscapeRichTextModule(p1)
 	end, { p1 })
 end
 
-local function UserMessageBubble(p1)
-	-- upvalues: useTokens (ref), fFlagBuildExperienceRichTextUserMessagesModule (ref), reactModule (ref), t_1 (ref), text (ref), t (ref), view (ref)
-	local var4 = useTokens()
+local function UserMessageBubble(Frame: Frame) --[[ Line: 64 ]]
+	-- upvalues: UseTokensFunction (copy), FFlagBuildExperienceRichTextUserMessagesModule (copy), ReactModule (copy), EscapeRichTextModule (copy), Text (copy), config (copy), View (copy)
+	local UseTokensResult = UseTokensFunction()
 	
-	if fFlagBuildExperienceRichTextUserMessagesModule then
-		local messageText = p1.messageText
+	if FFlagBuildExperienceRichTextUserMessagesModule then
+		local MessageText = Frame.messageText
 		
-		return reactModule.createElement(text, {
+		return ReactModule.createElement(Text, {
 			RichText = true,
 			tag = "auto-xy padding-medium text-body-medium text-wrap text-align-x-left bg-shift-200 content-emphasis",
-			LayoutOrder = p1.LayoutOrder,
-			cornerRadius = UDim.new(0, var4.Size.Size_500),
-			onSecondaryActivated = p1.onSecondaryActivated,
-			stateLayer = if p1.onSecondaryActivated ~= nil then nil else t,
-			Text = reactModule.useMemo(function()
-				-- upvalues: messageText (ref), t_1 (copy)
-				return string.gsub(messageText, "[&<>\"']", t_1)
-			end, { messageText }),
-			testId = p1.testId
+			LayoutOrder = Frame.LayoutOrder,
+			cornerRadius = UDim.new(0, UseTokensResult.Size.Size_500),
+			onSecondaryActivated = Frame.onSecondaryActivated,
+			stateLayer = if Frame.onSecondaryActivated == nil then nil else config,
+			Text = ReactModule.useMemo(function() --[[ Line: 59 ]]
+				-- upvalues: EscapeRichTextModule (upval), MessageText (copy)
+				return EscapeRichTextModule(MessageText)
+			end, { MessageText }),
+			testId = Frame.testId
+		})
+	else
+		return ReactModule.createElement(View, {
+			tag = "auto-xy padding-medium bg-shift-200",
+			LayoutOrder = Frame.LayoutOrder,
+			cornerRadius = UDim.new(0, UseTokensResult.Size.Size_500),
+			onSecondaryActivated = Frame.onSecondaryActivated,
+			stateLayer = if Frame.onSecondaryActivated == nil then nil else config,
+			testId = Frame.testId
+		}, {
+			Text = ReactModule.createElement(Text, {
+				tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-emphasis",
+				Text = Frame.messageText
+			})
 		})
 	end
-	return reactModule.createElement(view, {
-		tag = "auto-xy padding-medium bg-shift-200",
-		LayoutOrder = p1.LayoutOrder,
-		cornerRadius = UDim.new(0, var4.Size.Size_500),
-		onSecondaryActivated = p1.onSecondaryActivated,
-		stateLayer = if p1.onSecondaryActivated ~= nil then nil else t,
-		testId = p1.testId
-	}, {
-		Text = reactModule.createElement(text, {
-			tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-emphasis",
-			Text = p1.messageText
-		})
-	})
 end
 
-local function CopyableUserMessageBubble(p1)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), reactModule (ref), fFlagBuildExperienceUserMessageHapticFeedbackModule (ref), var3 (ref), iconName (ref), menu (ref), popoverAlign (ref), default (ref), popoverSide (ref), inputSize (ref), UserMessageBubble (ref)
-	local var4 = useLocalization({ copyText = localizationStringsModule.CHAT_COPY_TEXT })
-	local var5, var6 = reactModule.useState(false)
-	local var7 = if fFlagBuildExperienceUserMessageHapticFeedbackModule then var3() else nil
+local function CopyableUserMessageBubble(Frame) --[[ Line: 102 ]]
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), FFlagBuildExperienceUserMessageHapticFeedbackModule (copy), UseTriggerFeedback (copy), IconName (copy), Menu (copy), PopoverAlign (copy), Default (copy), PopoverSide (copy), InputSize (copy), UserMessageBubble (copy)
+	local UseLocalizationResult = UseLocalizationFunction({ copyText = LocalizationStringsModule.CHAT_COPY_TEXT })
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseTriggerFeedbackResult = if FFlagBuildExperienceUserMessageHapticFeedbackModule then UseTriggerFeedback() else nil
 	
-	return reactModule.createElement(menu, {
-		LayoutOrder = p1.LayoutOrder,
-		align = popoverAlign.End,
-		isOpen = var5,
+	return ReactModule.createElement(Menu, {
+		LayoutOrder = Frame.LayoutOrder,
+		align = PopoverAlign.End,
+		isOpen = UseStateResult,
 		items = {
 			{
 				id = "copy-text",
-				icon = iconName.TwoStackedSquares,
-				text = var4.copyText
+				icon = IconName.TwoStackedSquares,
+				text = UseLocalizationResult.copyText
 			}
 		},
-		onActivated = function(p2)
-			-- upvalues: default (copy), p1 (ref), var6 (ref)
-			if p2 == "copy-text" then
-				default:setClipboardText({ context = "Build-UserMessage", text = p1.messageText })
+		onActivated = function(p1) --[[ Line: 121 ]]
+			-- upvalues: Default (upval), Frame (copy), UseStateResult2 (copy)
+			if p1 == "copy-text" then
+				Default:setClipboardText({ context = "Build-UserMessage", text = Frame.messageText })
 			end
-			var6(false)
+			UseStateResult2(false)
 		end,
-		onPressedOutside = function()
-			-- upvalues: var6 (ref)
-			var6(false)
+		onPressedOutside = function() --[[ Line: 130 ]]
+			-- upvalues: UseStateResult2 (copy)
+			UseStateResult2(false)
 		end,
-		side = popoverSide.Bottom,
-		size = inputSize.Medium
+		side = PopoverSide.Bottom,
+		size = InputSize.Medium
 	}, {
-		Bubble = reactModule.createElement(UserMessageBubble, {
+		Bubble = ReactModule.createElement(UserMessageBubble, {
 			LayoutOrder = 1,
 			testId = "ChatUserMessage.Bubble",
-			messageText = p1.messageText,
-			onSecondaryActivated = function()
-				-- upvalues: fFlagBuildExperienceUserMessageHapticFeedbackModule (copy), var7 (ref), var6 (ref)
-				if fFlagBuildExperienceUserMessageHapticFeedbackModule then
-					var7("Default", "SecondaryActivated")
+			messageText = Frame.messageText,
+			onSecondaryActivated = function() --[[ Line: 139 ]]
+				-- upvalues: FFlagBuildExperienceUserMessageHapticFeedbackModule (upval), UseTriggerFeedbackResult (copy), UseStateResult2 (copy)
+				if FFlagBuildExperienceUserMessageHapticFeedbackModule then
+					UseTriggerFeedbackResult("Default", "SecondaryActivated")
 				end
-				var6(true)
+				UseStateResult2(true)
 			end
 		})
 	})
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: fFlagBuildExperienceChatImageAttachmentsModule (ref), fFlagBuildExperienceChatResourceAttachments (ref), reactModule (ref), view (ref), var2 (ref), var1 (ref), fFlagBuildExperienceCopyChatMessagesModule (ref), CopyableUserMessageBubble (ref), UserMessageBubble (ref)
-	local var4
-	local text = p1.message.text
-	local resourceAttachments = p1.message.resourceAttachments or {}
-	local var5 = fFlagBuildExperienceChatImageAttachmentsModule and (p1.message.images ~= nil and #p1.message.images > 0)
-	local var6 = fFlagBuildExperienceChatResourceAttachments and #resourceAttachments > 0
-	local createElement = reactModule.createElement
-	local t = {
+return ReactModule.memo(function(Frame) --[[ Line: 150 | Named "ChatUserMessage" ]]
+	-- upvalues: FFlagBuildExperienceChatImageAttachmentsModule (copy), FFlagBuildExperienceChatResourceAttachments (copy), ReactModule (copy), View (copy), ChatResourceAttachmentListModule (copy), ChatImagePreviewListModule (copy), FFlagBuildExperienceCopyChatMessagesModule (copy), CopyableUserMessageBubble (copy), UserMessageBubble (copy)
+	local Text = Frame.message.text
+	local ResourceAttachments = Frame.message.resourceAttachments or {}
+	local v1: boolean = FFlagBuildExperienceChatImageAttachmentsModule and (Frame.message.images ~= nil and #Frame.message.images > 0)
+	local v2: boolean = FFlagBuildExperienceChatResourceAttachments and #ResourceAttachments > 0
+	
+	return ReactModule.createElement(View, {
 		tag = "row gap-small size-full-0 auto-y",
-		LayoutOrder = p1.LayoutOrder
-	}
-	local t_1 = {
-		Spacer = reactModule.createElement(view, { LayoutOrder = 1, tag = "fill" })
-	}
-	local createElement_1 = reactModule.createElement
-	local t_2 = {
-		LayoutOrder = 2,
-		tag = "col align-x-right gap-xsmall auto-y",
-		Size = UDim2.new(0.78, 0, 0, 0)
-	}
-	local t_3 = {
-		ResourceAttachments = if var6 then reactModule.createElement(var2, {
-			alignRight = true,
-			LayoutOrder = 1,
-			testId = "ChatUserMessage.ResourceAttachments",
-			attachments = resourceAttachments
-		}) else nil,
-		Images = if var5 then reactModule.createElement(var1, {
-			alignRight = true,
-			testId = "ChatUserMessage.Images",
-			LayoutOrder = if var6 then 2 else 1,
-			images = p1.message.images
-		}) else nil
-	}
-	
-	if text == "" then
-		var4 = nil
-	elseif fFlagBuildExperienceCopyChatMessagesModule then
-		var4 = reactModule.createElement
-		var4 = var4(CopyableUserMessageBubble, {
-			LayoutOrder = if var6 and var5 then 3 else 2,
-			messageText = text
+		LayoutOrder = Frame.LayoutOrder
+	}, {
+		Spacer = ReactModule.createElement(View, { LayoutOrder = 1, tag = "fill" }),
+		Message = ReactModule.createElement(View, {
+			LayoutOrder = 2,
+			tag = "col align-x-right gap-xsmall auto-y",
+			Size = UDim2.new(0.78, 0, 0, 0)
+		}, {
+			ResourceAttachments = if v2 then ReactModule.createElement(ChatResourceAttachmentListModule, {
+				alignRight = true,
+				LayoutOrder = 1,
+				testId = "ChatUserMessage.ResourceAttachments",
+				attachments = ResourceAttachments
+			}) else nil,
+			Images = if v1 then ReactModule.createElement(ChatImagePreviewListModule, {
+				alignRight = true,
+				testId = "ChatUserMessage.Images",
+				LayoutOrder = if v2 then 2 else 1,
+				images = Frame.message.images
+			}) else nil,
+			Bubble = if Text == "" then nil elseif FFlagBuildExperienceCopyChatMessagesModule then ReactModule.createElement(CopyableUserMessageBubble, {
+				LayoutOrder = if v2 and v1 then 3 else 2,
+				messageText = Text
+			}) else ReactModule.createElement(UserMessageBubble, {
+				LayoutOrder = if v2 and v1 then 3 else 2,
+				messageText = Text
+			})
 		})
-	else
-		var4 = reactModule.createElement
-		var4 = var4(UserMessageBubble, {
-			LayoutOrder = if var6 and var5 then 3 else 2,
-			messageText = text
-		})
-	end
-	t_3.Bubble = var4
-	t_1.Message = createElement_1(view, t_2, t_3)
-	
-	return createElement(view, t, t_1)
+	})
 end)

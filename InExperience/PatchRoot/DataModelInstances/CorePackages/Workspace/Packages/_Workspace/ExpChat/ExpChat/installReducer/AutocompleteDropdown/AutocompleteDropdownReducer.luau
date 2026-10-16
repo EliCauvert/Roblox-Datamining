@@ -1,39 +1,38 @@
-﻿local expChat = script:FindFirstAncestor("ExpChat")
-local parent = expChat.Parent
-local roduxModule = require(parent.Rodux)
-local dictionary = require(parent.llama).Dictionary
-local actions = expChat.Actions
+﻿local ExpChat = script:FindFirstAncestor("ExpChat")
+local Parent = ExpChat.Parent
+local Dictionary = require(Parent.llama).Dictionary
+local Actions = ExpChat.Actions
 
-return roduxModule.createReducer({
+return require(Parent.Rodux).createReducer({
 	activated = false,
 	selectedIndex = 1,
 	autocompleteType = "none",
 	results = {}
 }, {
-	[require(actions.AutocompleteDropdownActivated).name] = function(p1, p2)
-		-- upvalues: dictionary (ref)
-		return dictionary.join(p1, { activated = p2.activated })
+	[require(Actions.AutocompleteDropdownActivated).name] = function(p1, p2) --[[ Line: 28 ]]
+		-- upvalues: Dictionary (copy)
+		return Dictionary.join(p1, { activated = p2.activated })
 	end,
-	[require(actions.AutocompleteDropdownResultsChanged).name] = function(p1, p2)
-		-- upvalues: dictionary (ref)
-		return dictionary.join(p1, { selectedIndex = 1, results = p2.results })
+	[require(Actions.AutocompleteDropdownResultsChanged).name] = function(p1, p2) --[[ Line: 31 ]]
+		-- upvalues: Dictionary (copy)
+		return Dictionary.join(p1, { selectedIndex = 1, results = p2.results })
 	end,
-	[require(actions.AutocompleteDropdownSelectionChanged).name] = function(p1, p2)
-		-- upvalues: dictionary (ref)
-		return dictionary.join(p1, { selectedIndex = p2.selectedIndex })
+	[require(Actions.AutocompleteDropdownSelectionChanged).name] = function(p1, p2) --[[ Line: 40 ]]
+		-- upvalues: Dictionary (copy)
+		return Dictionary.join(p1, { selectedIndex = p2.selectedIndex })
 	end,
-	[require(actions.AutocompleteDropdownTypeChanged).name] = function(p1, p2)
-		-- upvalues: dictionary (ref)
-		return if p2.autocompleteType == p1.autocompleteType then p1 else dictionary.join(p1, {
+	[require(Actions.AutocompleteDropdownTypeChanged).name] = function(p1, p2) --[[ Line: 46 ]]
+		-- upvalues: Dictionary (copy)
+		return if p2.autocompleteType == p1.autocompleteType then p1 else Dictionary.join(p1, {
 			activated = false,
 			selectedIndex = 1,
 			autocompleteType = p2.autocompleteType,
 			results = {}
 		})
 	end,
-	[require(actions.AutocompleteDropdownDeactivated).name] = function(p1, _)
-		-- upvalues: dictionary (ref)
-		return dictionary.join(p1, {
+	[require(Actions.AutocompleteDropdownDeactivated).name] = function(p1, _) --[[ Line: 57 ]]
+		-- upvalues: Dictionary (copy)
+		return Dictionary.join(p1, {
 			autocompleteType = "none",
 			activated = false,
 			selectedIndex = 1,

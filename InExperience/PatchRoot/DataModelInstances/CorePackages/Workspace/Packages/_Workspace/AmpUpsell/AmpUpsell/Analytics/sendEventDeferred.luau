@@ -1,9 +1,9 @@
-﻿local getPlatformTarget = require(script:FindFirstAncestor("AmpUpsell").Parent.Analytics).getPlatformTarget
+﻿local GetPlatformTargetFunction = require(script:FindFirstAncestor("AmpUpsell").Parent.Analytics).getPlatformTarget
 
-return function(p1)
-	-- upvalues: getPlatformTarget (ref)
-	return function(p2, p3, p4)
-		-- upvalues: p1 (ref), getPlatformTarget (copy)
-		p1:SendEventDeferred(getPlatformTarget(), p2, p3, p4)
+return function(p1) --[[ Line: 5 ]]
+	-- upvalues: GetPlatformTargetFunction (copy)
+	return function(EventContext, EventName, AdditionalArgs) --[[ Line: 6 ]]
+		-- upvalues: p1 (copy), GetPlatformTargetFunction (upval)
+		p1:SendEventDeferred(GetPlatformTargetFunction(), EventContext, EventName, AdditionalArgs)
 	end
 end

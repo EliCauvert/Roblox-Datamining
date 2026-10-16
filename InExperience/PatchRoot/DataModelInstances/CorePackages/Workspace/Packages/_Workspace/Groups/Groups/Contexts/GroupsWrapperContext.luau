@@ -4,9 +4,9 @@
 	groupDetailPaneSource = nil,
 	navigateTo = {
 		previousView = nil,
-		webView = function() end,
-		groupDetails = function() end,
-		seeAllGroups = function() end,
-		createGroup = function() end
+		webView = function() --[[ Line: 27 ]] end,
+		groupDetails = function() --[[ Line: 28 ]] end,
+		seeAllGroups = function() --[[ Line: 29 ]] end,
+		createGroup = function() --[[ Line: 30 ]] end
 	}
 })

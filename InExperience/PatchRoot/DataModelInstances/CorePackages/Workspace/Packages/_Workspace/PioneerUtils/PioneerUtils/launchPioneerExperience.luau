@@ -1,47 +1,49 @@
-﻿local parent = script:FindFirstAncestor("PioneerUtils").Parent
-local logger = require(parent.Loggers).Logger
-local experienceService = require(parent.ExperienceService).ExperienceService
-local gameParams = require(parent.ExperienceService).GameParams
-local pioneerInfoModule = require(script.Parent.PioneerInfo)
+﻿local Parent = script:FindFirstAncestor("PioneerUtils").Parent
+local Logger = require(Parent.Loggers).Logger
+local ExperienceService = require(Parent.ExperienceService).ExperienceService
+local GameParams = require(Parent.ExperienceService).GameParams
+local PioneerInfoModule = require(script.Parent.PioneerInfo)
 
-local function _(p1)
-	-- upvalues: experienceService (ref)
-	local ok, status = pcall(function()
-		-- upvalues: experienceService (copy)
-		return experienceService:GetPendingJoinAttempt()
+local function _(Number): boolean --[[ Line: 11 | Named "pendingJoinTargetsPlace" ]]
+	-- upvalues: ExperienceService (copy)
+	local Success, Result = pcall(function() --[[ Line: 12 ]]
+		-- upvalues: ExperienceService (upval)
+		return ExperienceService:GetPendingJoinAttempt()
 	end)
 	
-	if not ok or type(status) ~= "table" then
+	if Success and type(Result) == "table" then
+		local Number1: number? = tonumber(Result.placeId)
+		
+		return Number1 ~= nil and Number1 == Number
+	else
 		return false
 	end
-	local var1 = tonumber(status.placeId)
-	
-	return var1 ~= nil and var1 == p1
 end
 
-return function()
-	-- upvalues: pioneerInfoModule (ref), logger (ref), experienceService (ref), gameParams (ref)
-	local pioneerRootPlaceId = pioneerInfoModule.getPioneerRootPlaceId()
+return function() --[[ Line: 22 | Named "launchPioneerExperience" ]]
+	-- upvalues: PioneerInfoModule (copy), Logger (copy), ExperienceService (copy), GameParams (copy)
+	local PioneerRootPlaceId = PioneerInfoModule.getPioneerRootPlaceId()
 	
-	if not pioneerRootPlaceId then
-		logger:warning("launchPioneerExperience: could not resolve a valid Pioneer root place id")
+	if not PioneerRootPlaceId then
+		Logger:warning("launchPioneerExperience: could not resolve a valid Pioneer root place id")
 		
 		return
 	end
-	local var1
-	local ok, status = pcall(function()
-		-- upvalues: experienceService (copy)
-		return experienceService:GetPendingJoinAttempt()
+	local Success, Result = pcall(function() --[[ Line: 12 ]]
+		-- upvalues: ExperienceService (upval)
+		return ExperienceService:GetPendingJoinAttempt()
 	end)
+	local v1 = nil
 	
-	if ok and type(status) == "table" then
-		local var2 = tonumber(status.placeId)
-		var1 = var2 ~= nil and var2 == pioneerRootPlaceId
+	if Success and type(Result) == "table" then
+		local Number: number? = tonumber(Result.placeId)
+		v1 = Number ~= nil and Number == PioneerRootPlaceId
 	else
-		var1 = false
+		v1 = false
 	end
-	if var1 then
+	if not v1 then
+		ExperienceService:LaunchExperience(GameParams.fromPlaceId(PioneerRootPlaceId), "PioneerLaunch")
+		
 		return
 	end
-	experienceService:LaunchExperience(gameParams.fromPlaceId(pioneerRootPlaceId), "PioneerLaunch")
 end

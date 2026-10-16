@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.Charts.Charts)
+﻿return (require(script.Parent.Parent.Parent._Index.Charts.Charts))

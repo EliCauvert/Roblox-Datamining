@@ -1,35 +1,33 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local localizationModule = require(parent.Localization)
-local textKeysModule = require(profilePlatform.Common.TextKeys)
-local text = foundationModule.Text
-local view = foundationModule.View
-local useLocalization = localizationModule.Hooks.useLocalization
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local TextKeysModule = require(ProfilePlatform.Common.TextKeys)
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 
-return function(p1)
-	-- upvalues: useLocalization (ref), textKeysModule (ref), reactModule (ref), view (ref), text (ref)
-	local var1 = useLocalization({
-		previousNames = textKeysModule.PreviousNames,
-		noPreviousName = textKeysModule.NoPreviousName
+return function(p1) --[[ Line: 18 | Named "NameHistory" ]]
+	-- upvalues: UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), View (copy), Text (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
+		previousNames = TextKeysModule.PreviousNames,
+		noPreviousName = TextKeysModule.NoPreviousName
 	})
-	local _ = ""
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "col size-full-0 auto-y gap-small align-x-left",
 		LayoutOrder = p1.layoutOrder
 	}, {
-		Title = reactModule.createElement(text, {
+		Title = ReactModule.createElement(Text, {
 			LayoutOrder = 1,
 			tag = "auto-y size-full-0 text-align-x-left text-heading-small",
-			Text = var1.previousNames
+			Text = UseLocalizationResult.previousNames
 		}),
-		Content = reactModule.createElement(text, {
+		Content = ReactModule.createElement(Text, {
 			LayoutOrder = 2,
 			tag = "auto-y size-full-0 text-align-x-left text-body-medium text-wrap",
 			RichText = true,
-			Text = if p1.nameHistory and #p1.nameHistory ~= 0 then table.concat(p1.nameHistory, ", ") else var1.noPreviousName
+			Text = if p1.nameHistory and #p1.nameHistory ~= 0 then table.concat(p1.nameHistory, ", ") else UseLocalizationResult.noPreviousName
 		})
 	})
 end

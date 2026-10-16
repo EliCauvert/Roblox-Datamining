@@ -1,125 +1,137 @@
-﻿local http = script:FindFirstAncestor("Http")
-local parent = http.Parent
-local thumbnail = require(http.Models).Thumbnail
-local performFetchModule = require(http.PerformFetch)
-local argCheckModule = require(parent.ArgCheck)
-local promiseModule = require(parent.Promise)
-local resultModule = require(parent.Result)
-local tutilsModule = require(parent.tutils)
-local maxValue = math.max(0, tonumber(settings():GetFVariable("LuaAppNonFinalThumbnailMaxRetries")) or 0)
-local maxValue_1 = math.max(0, tonumber(settings():GetFVariable("LuaAppThumbnailsApiRetryTimeMultiplier")) or 0)
-local t = {
-	_fetchIcons = function(p1, p2, p3, p4, p5, p6, p7, p8)
-		-- upvalues: resultModule (ref), thumbnail (ref), promiseModule (ref)
-		local function _(p9)
-			-- upvalues: p5 (ref), p6 (ref), p4 (ref)
-			return p5({ targetId = p9, requestName = p6, iconSize = p4 })
+﻿local Http = script:FindFirstAncestor("Http")
+local Parent = Http.Parent
+local Thumbnail = require(Http.Models).Thumbnail
+local PerformFetchModule = require(Http.PerformFetch)
+local ArgCheckModule = require(Parent.ArgCheck)
+local PromiseModule = require(Parent.Promise)
+local ResultModule = require(Parent.Result)
+local TutilsModule = require(Parent.tutils)
+local Largest = math.max(0, tonumber(settings():GetFVariable("LuaAppNonFinalThumbnailMaxRetries")) or 0)
+local Largest1 = math.max(0, tonumber(settings():GetFVariable("LuaAppThumbnailsApiRetryTimeMultiplier")) or 0)
+local FetchSubdividedThumbnailsModule = {
+	_fetchIcons = function(p1, p2, p3, IconSize, Callback1, RequestName, Callback, Callback2) --[[ Line: 20 ]]
+		-- upvalues: ResultModule (copy), Thumbnail (copy), PromiseModule (copy)
+		local function _(TargetId) --[[ Line: 30 | Named "keyMapperForCurrentRequestNameAndSize" ]]
+			-- upvalues: Callback1 (copy), RequestName (copy), IconSize (copy)
+			return Callback1({
+				targetId = TargetId,
+				requestName = RequestName,
+				iconSize = IconSize
+			})
 		end
 		
-		local function getTableOfFailedResults(p9)
-			-- upvalues: p5 (ref), p6 (ref), p4 (ref), resultModule (copy)
-			local t = {}
+		local function getTableOfFailedResults(List) --[[ Line: 38 ]]
+			-- upvalues: Callback1 (copy), RequestName (copy), IconSize (copy), ResultModule (upval)
+			local NewResults = {}
 			
-			for i, v in pairs(p9) do
-				t[p5({ targetId = v, requestName = p6, iconSize = p4 })] = resultModule.new(false, { targetId = v })
+			for _, TargetId in pairs(List) do
+				NewResults[Callback1({
+					targetId = TargetId,
+					requestName = RequestName,
+					iconSize = IconSize
+				})] = ResultModule.new(false, { targetId = TargetId })
 			end
-			return t
+			return NewResults
 		end
 		
-		return p7(p2, p3, p4):andThen(function(p10)
-			-- upvalues: getTableOfFailedResults (ref), p3 (ref), thumbnail (copy), p4 (ref), p5 (ref), p6 (ref), resultModule (copy), p1 (ref), p8 (ref), promiseModule (copy)
-			local var1 = getTableOfFailedResults(p3)
-			local t = {}
-			local data = p10 and (p10.responseBody and p10.responseBody.data)
+		return Callback(p2, p3, IconSize):andThen(function(Result) --[[ Line: 49 ]]
+			-- upvalues: getTableOfFailedResults (copy), p3 (copy), Thumbnail (upval), IconSize (copy), Callback1 (copy), RequestName (copy), ResultModule (upval), p1 (copy), Callback2 (copy), PromiseModule (upval)
+			local TableOfFailedResults = getTableOfFailedResults(p3)
+			local FromThumbnailDataResults = {}
+			local Data = Result and (Result.responseBody and Result.responseBody.data)
 			
-			if typeof(data) == "table" then
-				for i, v in pairs(data) do
-					if thumbnail.isCompleteThumbnailData(v) then
-						local var2 = tostring(v.targetId)
-						local var3 = false
+			if typeof(Data) == "table" then
+				for _, entry in pairs(Data) do
+					if Thumbnail.isCompleteThumbnailData(entry) then
+						local Text = tostring(entry.targetId)
+						local Flag = false
 						
-						if thumbnail.checkStateIsFinal(v.state) then
-							t[var2] = thumbnail.fromThumbnailData(v, p4)
-							var3 = true
+						if Thumbnail.checkStateIsFinal(entry.state) then
+							FromThumbnailDataResults[Text] = Thumbnail.fromThumbnailData(entry, IconSize)
+							Flag = true
 						end
-						var1[p5({ targetId = var2, requestName = p6, iconSize = p4 })] = resultModule.new(var3, v)
+						TableOfFailedResults[Callback1({
+							targetId = Text,
+							requestName = RequestName,
+							iconSize = IconSize
+						})] = ResultModule.new(Flag, entry)
 					end
 				end
 			end
-			p1:dispatch(p8(t))
+			p1:dispatch(Callback2(FromThumbnailDataResults))
 			
-			return promiseModule.resolve(var1)
-		end, function(_)
-			-- upvalues: getTableOfFailedResults (ref), p3 (ref), promiseModule (copy)
-			return promiseModule.resolve(getTableOfFailedResults(p3))
+			return PromiseModule.resolve(TableOfFailedResults)
+		end, function(_) --[[ Line: 69 ]]
+			-- upvalues: getTableOfFailedResults (copy), p3 (copy), PromiseModule (upval)
+			return PromiseModule.resolve((getTableOfFailedResults(p3)))
 		end)
 	end
 }
 
-function t._fetch(p10, p11, p12, p13, p14, p15, p16, p17)
-	-- upvalues: t (ref), maxValue (write), maxValue_1 (write), thumbnail (ref), tutilsModule (ref), promiseModule (ref)
-	return t._fetchIcons(p10, p11, p12, p13, p14, p15, p16, p17):andThen(function(p18)
-		-- upvalues: maxValue (copy), maxValue_1 (copy), thumbnail (copy), tutilsModule (copy), promiseModule (copy), t (copy), p10 (ref), p11 (ref), p12 (ref), p13 (ref), p14 (ref), p15 (ref), p16 (ref), p17 (ref)
-		local t_1 = {}
-		local var1 = p18
+function FetchSubdividedThumbnailsModule._fetch(p4, p5, p6, IconSize, KeyMapper, RequestName, p7, p8) --[[ Line: 75 ]]
+	-- upvalues: FetchSubdividedThumbnailsModule (copy), Largest (ref), Largest1 (ref), Thumbnail (copy), TutilsModule (copy), PromiseModule (copy)
+	return FetchSubdividedThumbnailsModule._fetchIcons(p4, p5, p6, IconSize, KeyMapper, RequestName, p7, p8):andThen(function(Result) --[[ Line: 95 ]]
+		-- upvalues: Largest (upval), Largest1 (upval), Thumbnail (upval), TutilsModule (upval), PromiseModule (upval), FetchSubdividedThumbnailsModule (upval), p4 (copy), p5 (copy), p6 (copy), IconSize (copy), KeyMapper (copy), RequestName (copy), p7 (copy), p8 (copy)
+		local t = {}
+		local Result1 = Result
 		
 		if _G.__TESTEZ_RUNNING_TEST__ then
-			maxValue = 1
-			maxValue_1 = 0.001
+			Largest = 1
+			Largest1 = 0.001
 		end
-		local function retry(p19)
-			-- upvalues: var1 (write), thumbnail (copy), t_1 (ref), tutilsModule (copy), promiseModule (copy), maxValue_1 (copy), t (copy), p10 (copy), p11 (copy), p12 (copy), p13 (copy), p14 (copy), p15 (copy), p16 (copy), p17 (copy), retry (ref)
-			local t_2 = {}
+		local function retry(Largest) --[[ Line: 104 ]]
+			-- upvalues: Result1 (ref), Thumbnail (upval), t (copy), TutilsModule (upval), PromiseModule (upval), Largest1 (upval), FetchSubdividedThumbnailsModule (upval), p4 (upval), p5 (upval), p6 (upval), IconSize (upval), KeyMapper (upval), RequestName (upval), p7 (upval), p8 (upval), retry (copy)
+			local List = {}
 			
-			for i, v in pairs(var1) do
-				local var2, var3 = v:unwrap()
+			for i, value in pairs(Result1) do
+				local UnwrapResult, UnwrapResult2 = value:unwrap()
 				
-				if var2 and thumbnail.checkStateIsFinal(var3.state) then
-					t_1[i] = v
+				if UnwrapResult and Thumbnail.checkStateIsFinal(UnwrapResult2.state) then
+					t[i] = value
 				else
-					table.insert(t_2, var3)
+					table.insert(List, UnwrapResult2)
 				end
 			end
-			return if tutilsModule.fieldCount(t_2) == 0 then promiseModule.resolve(t_1) else promiseModule.new(function(p20, _)
-				-- upvalues: maxValue_1 (copy), p19 (ref)
-				coroutine.wrap(function()
-					-- upvalues: maxValue_1 (copy), p19 (copy), p20 (ref)
-					wait(maxValue_1 * math.pow(2, p19 - 1))
-					p20()
+			return if TutilsModule.fieldCount(List) == 0 then PromiseModule.resolve(t) else PromiseModule.new(function(Callback, _) --[[ Line: 122 ]]
+				-- upvalues: Largest1 (upval), Largest (copy)
+				coroutine.wrap(function() --[[ Line: 123 ]]
+					-- upvalues: Largest1 (upval), Largest (upval), Callback (copy)
+					wait(Largest1 * math.pow(2, Largest - 1))
+					Callback()
 				end)()
-			end):andThen(function()
-				-- upvalues: t (copy), p10 (copy), p11 (copy), p12 (copy), p13 (copy), p14 (copy), p15 (copy), p16 (copy), p17 (copy)
-				return t._fetchIcons(p10, p11, p12, p13, p14, p15, p16, p17)
-			end):andThen(function(p20)
-				-- upvalues: var1 (copy), p19 (ref), retry (copy), promiseModule (copy), t_1 (copy)
-				var1 = p20
+			end):andThen(function() --[[ Line: 130 ]]
+				-- upvalues: FetchSubdividedThumbnailsModule (upval), p4 (upval), p5 (upval), p6 (upval), IconSize (upval), KeyMapper (upval), RequestName (upval), p7 (upval), p8 (upval)
+				return FetchSubdividedThumbnailsModule._fetchIcons(p4, p5, p6, IconSize, KeyMapper, RequestName, p7, p8)
+			end):andThen(function(Result) --[[ Line: 142 ]]
+				-- upvalues: Result1 (upval), Largest (copy), retry (upval), PromiseModule (upval), t (upval)
+				Result1 = Result
 				
-				return if p19 > 1 then retry(p19 - 1) else promiseModule.resolve(t_1)
+				return if Largest > 1 then retry(Largest - 1) else PromiseModule.resolve(t)
 			end)
 		end
 		
-		return retry(maxValue)
+		return retry(Largest)
 	end)
 end
 
-function t.Fetch(p18, p19, p20, p21, p22, p23)
-	-- upvalues: argCheckModule (ref), t (ref), performFetchModule (ref)
-	argCheckModule.isType(p19, "table", "requests")
-	argCheckModule.isType(p21, "string", "requestName")
-	argCheckModule.isNonNegativeNumber(#p19, "requests count")
-	t.KeyMapper = p20
+function FetchSubdividedThumbnailsModule.Fetch(p9, p10, KeyMapper, RequestName, p11, p12) --[[ Line: 156 ]]
+	-- upvalues: ArgCheckModule (copy), FetchSubdividedThumbnailsModule (copy), PerformFetchModule (copy)
+	ArgCheckModule.isType(p10, "table", "requests")
+	ArgCheckModule.isType(RequestName, "string", "requestName")
+	ArgCheckModule.isNonNegativeNumber(#p10, "requests count")
+	FetchSubdividedThumbnailsModule.KeyMapper = KeyMapper
 	
-	return performFetchModule.Batch(p19, p20, function(p24, p25)
-		-- upvalues: t (copy), p18 (ref), p20 (ref), p21 (ref), p22 (ref), p23 (ref)
-		local t_1 = {}
-		local iconSize = nil
+	return PerformFetchModule.Batch(p10, KeyMapper, function(p13, List) --[[ Line: 162 ]]
+		-- upvalues: FetchSubdividedThumbnailsModule (upval), p9 (copy), KeyMapper (copy), RequestName (copy), p11 (copy), p12 (copy)
+		local List1 = {}
+		local IconSize = nil
 		
-		for i, v in ipairs(p25) do
-			iconSize = v.iconSize
-			table.insert(t_1, v.targetId)
+		for _, value in ipairs(List) do
+			IconSize = value.iconSize
+			table.insert(List1, value.targetId)
 		end
-		return t._fetch(p24, p18, t_1, iconSize, p20, p21, p22, p23)
+		return FetchSubdividedThumbnailsModule._fetch(p13, p9, List1, IconSize, KeyMapper, RequestName, p11, p12)
 	end)
 end
 
-return t
+return FetchSubdividedThumbnailsModule

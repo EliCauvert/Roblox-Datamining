@@ -1,6 +1,6 @@
-﻿local guiService = game:GetService("GuiService")
+﻿local GuiService = game:GetService("GuiService")
 
-return function()
-	-- upvalues: guiService (ref)
-	return guiService:IsTenFootInterface()
+return function() --[[ Line: 4 | Named "isTenFootInterface" ]]
+	-- upvalues: GuiService (copy)
+	return GuiService:IsTenFootInterface()
 end

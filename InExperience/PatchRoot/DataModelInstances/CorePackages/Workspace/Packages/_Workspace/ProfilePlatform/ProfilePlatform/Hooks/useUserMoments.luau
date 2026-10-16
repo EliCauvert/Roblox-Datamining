@@ -1,207 +1,211 @@
-﻿local parent = script:FindFirstAncestor("ProfilePlatform").Parent
-local var1 = nil
-pcall(function()
-	-- upvalues: var1 (write)
-	var1 = game:GetService("AppLifecycleObserverService")
+﻿local Parent = script:FindFirstAncestor("ProfilePlatform").Parent
+local AppLifecycleObserverService = nil
+pcall(function() --[[ Line: 5 ]]
+	-- upvalues: AppLifecycleObserverService (ref)
+	AppLifecycleObserverService = game:GetService("AppLifecycleObserverService")
 end)
-local reactModule = require(parent.React)
-local cryoModule = require(parent.Cryo)
-local signalsReactModule = require(parent.SignalsReact)
-local sharedFlagsModule = require(parent.SharedFlags)
-local useLocalUserId = require(parent.RobloxAppHooks).useLocalUserId
-local momentsGetMomentsUserStoreModule = require(parent.DataHydration.MomentsGetMomentsUserStore)
-local _ = require(parent.DataHydration.MomentsStoreTypes)
-local getDeletedMomentsStoreModule = require(parent.Moments.GetDeletedMomentsStore)
-local fFlagMomentsRemoveDeletedFromProfile = sharedFlagsModule.FFlagMomentsRemoveDeletedFromProfile
-local fFlagMomentsRefreshOwnMomentsAfterPublish = sharedFlagsModule.FFlagMomentsRefreshOwnMomentsAfterPublish
-local fFlagMomentsOptimisticProfilePending = sharedFlagsModule.FFlagMomentsOptimisticProfilePending
-local fFlagMomentsRefreshProfileOnPostStatus = sharedFlagsModule.FFlagMomentsRefreshProfileOnPostStatus
+local ReactModule = require(Parent.React)
+local CryoModule = require(Parent.Cryo)
+local SignalsReactModule = require(Parent.SignalsReact)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local UseLocalUserIdFunction = require(Parent.RobloxAppHooks).useLocalUserId
+local MomentsGetMomentsUserStoreModule = require(Parent.DataHydration.MomentsGetMomentsUserStore)
+local _ = require(Parent.DataHydration.MomentsStoreTypes)
+local GetDeletedMomentsStoreModule = require(Parent.Moments.GetDeletedMomentsStore)
+local FFlagMomentsRemoveDeletedFromProfile = SharedFlagsModule.FFlagMomentsRemoveDeletedFromProfile
+local FFlagMomentsRefreshOwnMomentsAfterPublish = SharedFlagsModule.FFlagMomentsRefreshOwnMomentsAfterPublish
+local FFlagMomentsOptimisticProfilePending = SharedFlagsModule.FFlagMomentsOptimisticProfilePending
+local FFlagMomentsRefreshProfileOnPostStatus = SharedFlagsModule.FFlagMomentsRefreshProfileOnPostStatus
 
-return function(p1, p2)
-	-- upvalues: reactModule (ref), fFlagMomentsRefreshProfileOnPostStatus (ref), fFlagMomentsOptimisticProfilePending (ref), useLocalUserId (ref), fFlagMomentsRefreshOwnMomentsAfterPublish (ref), signalsReactModule (ref), momentsGetMomentsUserStoreModule (ref), var1 (write), cryoModule (ref), fFlagMomentsRemoveDeletedFromProfile (ref), getDeletedMomentsStoreModule (ref)
-	local var2, var3 = reactModule.useState({})
-	local var4, var5 = reactModule.useState(nil)
-	local var6, var7 = reactModule.useState(false)
-	local var8, var9 = reactModule.useState(false)
-	local var10, var11 = reactModule.useState(false)
-	local var12 = reactModule.useRef(nil)
-	local var13 = if fFlagMomentsRefreshProfileOnPostStatus or fFlagMomentsOptimisticProfilePending then useLocalUserId() else nil
-	local var14 = var13 ~= nil and tostring(var13) == p1
-	local var15 = if fFlagMomentsOptimisticProfilePending then signalsReactModule.useSignalState(momentsGetMomentsUserStoreModule(false).getPendingUserMoments) else {}
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), momentsGetMomentsUserStoreModule (copy), fFlagMomentsRefreshProfileOnPostStatus (copy), fFlagMomentsOptimisticProfilePending (copy), var12 (ref), var14 (ref), var9 (ref), var3 (ref), var5 (ref), var7 (ref)
-		local var16 = if p1 ~= nil then nil else tonumber(p1)
+return function(Current, p1) --[[ Line: 40 | Named "useUserMoments" ]]
+	-- upvalues: ReactModule (copy), FFlagMomentsRefreshProfileOnPostStatus (copy), FFlagMomentsOptimisticProfilePending (copy), UseLocalUserIdFunction (copy), FFlagMomentsRefreshOwnMomentsAfterPublish (copy), SignalsReactModule (copy), MomentsGetMomentsUserStoreModule (copy), AppLifecycleObserverService (ref), CryoModule (copy), FFlagMomentsRemoveDeletedFromProfile (copy), GetDeletedMomentsStoreModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState({})
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(false)
+	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(false)
+	local UseStateResult5, UseStateResult2_4 = ReactModule.useState(false)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseLocalUserIdResult = if FFlagMomentsRefreshProfileOnPostStatus or FFlagMomentsOptimisticProfilePending then UseLocalUserIdFunction() else nil
+	local IsTextMatch: boolean = UseLocalUserIdResult ~= nil and tostring(UseLocalUserIdResult) == Current
+	local UseSignalStateResult = if FFlagMomentsOptimisticProfilePending then SignalsReactModule.useSignalState(MomentsGetMomentsUserStoreModule(false).getPendingUserMoments) else {}
+	ReactModule.useEffect(function() --[[ Line: 63 ]]
+		-- upvalues: Current (copy), MomentsGetMomentsUserStoreModule (upval), FFlagMomentsRefreshProfileOnPostStatus (upval), FFlagMomentsOptimisticProfilePending (upval), UseRefResult (copy), IsTextMatch (copy), UseStateResult2_3 (copy), UseStateResult2 (copy), UseStateResult2_1 (copy), UseStateResult2_2 (copy)
+		local Number = if Current == nil then nil else tonumber(Current)
 		
-		if var16 == nil then return end
-		local var17 = momentsGetMomentsUserStoreModule(false)
+		if Number == nil then return end
+		local MomentsGetMomentsUserStoreModuleResult = MomentsGetMomentsUserStoreModule(false)
 		
-		if (fFlagMomentsRefreshProfileOnPostStatus or fFlagMomentsOptimisticProfilePending) and var12.current ~= p1 then
-			var12.current = p1
+		if (FFlagMomentsRefreshProfileOnPostStatus or FFlagMomentsOptimisticProfilePending) and UseRefResult.current ~= Current then
+			UseRefResult.current = Current
 			
-			if var14 then
-				var17.evictUserMoments(var16)
+			if IsTextMatch then
+				MomentsGetMomentsUserStoreModuleResult.evictUserMoments(Number)
 			end
 		end
-		local var18 = false
-		var17.getUserMoments(var16):andThen(function(p3)
-			-- upvalues: var18 (write), var9 (copy), var3 (copy), var5 (copy), var7 (copy)
-			if not var18 then
-				var9(false)
-				var3(p3.moments)
-				var5(p3.nextCursor)
-				var7(p3.nextCursor ~= nil)
+		local Flag = false
+		MomentsGetMomentsUserStoreModuleResult.getUserMoments(Number):andThen(function(Result) --[[ Line: 83 ]]
+			-- upvalues: Flag (ref), UseStateResult2_3 (upval), UseStateResult2 (upval), UseStateResult2_1 (upval), UseStateResult2_2 (upval)
+			if not Flag then
+				UseStateResult2_3(false)
+				UseStateResult2(Result.moments)
+				UseStateResult2_1(Result.nextCursor)
+				UseStateResult2_2(Result.nextCursor ~= nil)
 			end
-		end):catch(function()
-			-- upvalues: var18 (write), var9 (copy)
-			if not var18 then
-				var9(true)
+		end):catch(function() --[[ Line: 91 ]]
+			-- upvalues: Flag (ref), UseStateResult2_3 (upval)
+			if not Flag then
+				UseStateResult2_3(true)
 			end
 		end)
 		
-		return function()
-			-- upvalues: var18 (write)
-			var18 = true
+		return function() --[[ Line: 96 ]]
+			-- upvalues: Flag (ref)
+			Flag = true
 		end
 	end, {
-		p1,
-		if fFlagMomentsRefreshOwnMomentsAfterPublish or fFlagMomentsRefreshProfileOnPostStatus or fFlagMomentsOptimisticProfilePending then signalsReactModule.useSignalState(momentsGetMomentsUserStoreModule(false).getUserMomentsVersion) else 0,
-		var14
+		Current,
+		if FFlagMomentsRefreshOwnMomentsAfterPublish or FFlagMomentsRefreshProfileOnPostStatus or FFlagMomentsOptimisticProfilePending then SignalsReactModule.useSignalState(MomentsGetMomentsUserStoreModule(false).getUserMomentsVersion) else 0,
+		IsTextMatch
 	})
 	
-	if fFlagMomentsRefreshProfileOnPostStatus or fFlagMomentsOptimisticProfilePending then
-		reactModule.useEffect(function()
-			-- upvalues: var14 (ref), p2 (ref), var1 (copy), p1 (ref), momentsGetMomentsUserStoreModule (copy)
-			if not var14 then return end
-			local p3 = p2 or var1
+	if FFlagMomentsRefreshProfileOnPostStatus or FFlagMomentsOptimisticProfilePending then
+		ReactModule.useEffect(function() --[[ Line: 102 ]]
+			-- upvalues: IsTextMatch (copy), p1 (copy), AppLifecycleObserverService (upval), Current (copy), MomentsGetMomentsUserStoreModule (upval)
+			if not IsTextMatch then return end
+			local P1 = p1 or AppLifecycleObserverService
 			
-			if p3 == nil then
-				return
-			end
-			local onUnhideConnection = p3.OnUnhide:Connect(function()
-				-- upvalues: p1 (copy), momentsGetMomentsUserStoreModule (copy)
-				local var16 = if p1 ~= nil then nil else tonumber(p1)
+			if P1 == nil then return end
+			local OnUnhideConnection = P1.OnUnhide:Connect(function() --[[ Line: 110 ]]
+				-- upvalues: Current (upval), MomentsGetMomentsUserStoreModule (upval)
+				local Number = if Current == nil then nil else tonumber(Current)
 				
-				if var16 ~= nil then
-					momentsGetMomentsUserStoreModule(false).invalidateUser(var16)
+				if Number ~= nil then
+					MomentsGetMomentsUserStoreModule(false).invalidateUser(Number)
 				end
 			end)
 			
-			return function()
-				-- upvalues: onUnhideConnection (ref)
-				onUnhideConnection:Disconnect()
+			return function() --[[ Line: 116 ]]
+				-- upvalues: OnUnhideConnection (copy)
+				OnUnhideConnection:Disconnect()
 			end
-		end, { p1, p2, var14 })
+		end, { Current, p1, IsTextMatch })
 	end
-	local var16 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref), var4 (ref), var6 (ref), var10 (ref), var11 (ref), momentsGetMomentsUserStoreModule (copy), var3 (ref), cryoModule (copy), var7 (ref), var5 (ref)
-		local var17 = if p1 ~= nil then nil else tonumber(p1)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 122 ]]
+		-- upvalues: Current (copy), UseStateResult1 (copy), UseStateResult3 (copy), UseStateResult5 (copy), UseStateResult2_4 (copy), MomentsGetMomentsUserStoreModule (upval), UseStateResult2 (copy), CryoModule (upval), UseStateResult2_2 (copy), UseStateResult2_1 (copy)
+		local Number = if Current == nil then nil else tonumber(Current)
 		
-		if var17 == nil or var4 == nil or (not var6 or var10) then
+		if Number ~= nil and UseStateResult1 ~= nil and UseStateResult3 and not UseStateResult5 then
+			UseStateResult2_4(true)
+			MomentsGetMomentsUserStoreModule(false).getUserMoments(Number, UseStateResult1):andThen(function(Result) --[[ Line: 130 ]]
+				-- upvalues: UseStateResult2 (upval), CryoModule (upval), UseStateResult2_2 (upval), UseStateResult1 (upval), UseStateResult2_1 (upval)
+				UseStateResult2(function(p2) --[[ Line: 131 ]]
+					-- upvalues: CryoModule (upval), Result (copy)
+					return CryoModule.List.join(p2, Result.moments)
+				end)
+				UseStateResult2_2(Result.nextCursor ~= nil and Result.nextCursor ~= UseStateResult1)
+				UseStateResult2_1(Result.nextCursor)
+			end):catch(function() --[[ Line: 138 ]] end):finally(function() --[[ Line: 139 ]]
+				-- upvalues: UseStateResult2_4 (upval)
+				UseStateResult2_4(false)
+			end)
+			
 			return
 		end
-		var11(true)
-		momentsGetMomentsUserStoreModule(false).getUserMoments(var17, var4):andThen(function(p3)
-			-- upvalues: var3 (copy), cryoModule (copy), var7 (copy), var4 (copy), var5 (copy)
-			var3(function(p4)
-				-- upvalues: cryoModule (copy), p3 (ref)
-				return cryoModule.List.join(p4, p3.moments)
-			end)
-			var7(p3.nextCursor ~= nil and p3.nextCursor ~= var4)
-			var5(p3.nextCursor)
-		end):catch(function() end):finally(function()
-			-- upvalues: var11 (copy)
-			var11(false)
-		end)
-	end, { p1, var4, var6, var10 })
-	local var17 = var2
-	local var18 = nil
+	end, {
+		Current,
+		UseStateResult1,
+		UseStateResult3,
+		UseStateResult5
+	})
+	local JoinResult = UseStateResult
+	local List1 = nil
 	
-	if fFlagMomentsRemoveDeletedFromProfile or fFlagMomentsOptimisticProfilePending then
-		var18 = signalsReactModule.useSignalState(getDeletedMomentsStoreModule(false).getDeletedIds)
-		local var19 = var18
-		var17 = reactModule.useMemo(function()
-			-- upvalues: var19 (ref), var2 (ref)
-			if #var19 == 0 then
-				return var2
+	if FFlagMomentsRemoveDeletedFromProfile or FFlagMomentsOptimisticProfilePending then
+		List1 = SignalsReactModule.useSignalState(GetDeletedMomentsStoreModule(false).getDeletedIds)
+		local List = List1
+		JoinResult = ReactModule.useMemo(function() --[[ Line: 156 ]]
+			-- upvalues: List (copy), UseStateResult (copy)
+			if #List == 0 then
+				return UseStateResult
 			end
-			local t = {}
+			local List1 = {}
 			
-			for i, v in var2 do
-				if not table.find(var19, v.momentId) then
-					table.insert(t, v)
+			for _, value in UseStateResult do
+				if not table.find(List, value.momentId) then
+					table.insert(List1, value)
 				end
 			end
-			return t
-		end, { var2, var19 })
+			return List1
+		end, { UseStateResult, List })
 	end
-	if fFlagMomentsOptimisticProfilePending then
-		local var20 = if p1 ~= nil then nil else tonumber(p1)
-		local var21, var22 = reactModule.useState({})
-		local var23 = reactModule.useMemo(function()
-			-- upvalues: var20 (ref), var15 (ref), var2 (ref), var18 (write)
-			local var24 = if var20 ~= nil then {} else var15[var20] or {}
+	if FFlagMomentsOptimisticProfilePending then
+		local Number = if Current == nil then nil else tonumber(Current)
+		local UseStateResult6, UseStateResult2_5 = ReactModule.useState({})
+		local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 172 ]]
+			-- upvalues: Number (copy), UseSignalStateResult (copy), UseStateResult (copy), List1 (ref)
+			local T = if Number == nil then {} else UseSignalStateResult[Number] or {}
 			local t = {}
-			local t_1 = {}
+			local t1 = {}
 			
-			for i, v in var2 do
-				t_1[v.momentId] = true
-				local feedItemId = v.recommendationMetadata.feedItemId
+			for _, value in UseStateResult do
+				t1[value.momentId] = true
+				local FeedItemId = value.recommendationMetadata.feedItemId
 				
-				if feedItemId ~= nil and feedItemId ~= "" then
-					t_1[feedItemId] = true
+				if FeedItemId ~= nil and FeedItemId ~= "" then
+					t1[FeedItemId] = true
 				end
 			end
-			for i, v_1 in var24 do
-				local publishedMoment = v_1.publishedMoment
+			for _, value1 in T do
+				local PublishedMoment = value1.publishedMoment
 				
-				if publishedMoment ~= nil then
-					local feedItemId = publishedMoment.recommendationMetadata.feedItemId
+				if PublishedMoment ~= nil then
+					local FeedItemId = PublishedMoment.recommendationMetadata.feedItemId
 					
-					if t_1[publishedMoment.momentId] or feedItemId ~= nil and t_1[feedItemId] or var18 ~= nil and table.find(var18, publishedMoment.momentId) ~= nil then
-						t[v_1.moment.momentId] = true
+					if t1[PublishedMoment.momentId] or FeedItemId ~= nil and t1[FeedItemId] or List1 ~= nil and table.find(List1, PublishedMoment.momentId) ~= nil then
+						t[value1.moment.momentId] = true
 					end
 				end
 			end
 			return t
-		end, { var20, var2, var15, var18 })
-		reactModule.useEffect(function()
-			-- upvalues: var22 (ref), var23 (ref)
-			var22(function(p3)
-				-- upvalues: var23 (copy)
-				local cloned = table.clone(p3)
-				local var25 = false
+		end, { Number, UseStateResult, UseSignalStateResult, List1 })
+		ReactModule.useEffect(function() --[[ Line: 201 ]]
+			-- upvalues: UseStateResult2_5 (copy), UseMemoResult (copy)
+			UseStateResult2_5(function(Tbl) --[[ Line: 204 ]]
+				-- upvalues: UseMemoResult (upval)
+				local Copy = table.clone(Tbl)
+				local Flag = false
 				
-				for i in var23 do
-					if not cloned[i] then
-						cloned[i] = true
-						var25 = true
+				for i in UseMemoResult do
+					if not Copy[i] then
+						Copy[i] = true
+						Flag = true
 					end
 				end
-				return if var25 then cloned else p3
+				return if Flag then Copy else Tbl
 			end)
-		end, { var23 })
-		local var25 = if var20 ~= nil then nil else var15[var20]
+		end, { UseMemoResult })
+		local UseSignalStateResultEntry = if Number == nil then nil else UseSignalStateResult[Number]
 		
-		if var25 ~= nil and #var25 > 0 then
-			local t = {}
+		if UseSignalStateResultEntry ~= nil and #UseSignalStateResultEntry > 0 then
+			local List2 = {}
 			
-			for i, v in var25 do
-				local moment = v.moment
+			for _, value in UseSignalStateResultEntry do
+				local Moment = value.moment
 				
-				if not var23[moment.momentId] and not var21[moment.momentId] then
-					table.insert(t, moment)
+				if not UseMemoResult[Moment.momentId] and not UseStateResult6[Moment.momentId] then
+					table.insert(List2, Moment)
 				end
 			end
-			if #t > 0 then
-				var17 = cryoModule.List.join(t, var17)
+			if #List2 > 0 then
+				JoinResult = CryoModule.List.join(List2, JoinResult)
 			end
 		end
 	end
 	return {
-		moments = var17,
-		hasMore = var6,
-		hasFailed = var8,
-		isLoadingMore = var10,
-		loadMore = var16
+		moments = JoinResult,
+		hasMore = UseStateResult3,
+		hasFailed = UseStateResult4,
+		isLoadingMore = UseStateResult5,
+		loadMore = UseResult
 	}
 end

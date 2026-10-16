@@ -1,73 +1,73 @@
-﻿local parent = script.Parent.Parent
-local messageBus = require(parent.MessageBus).MessageBus
-local promiseModule = require(parent.Promise)
-local tModule = require(parent.t)
+﻿local Parent = script.Parent.Parent
+local MessageBus = require(Parent.MessageBus).MessageBus
+local PromiseModule = require(Parent.Promise)
+local TModule = require(Parent.t)
 local _ = require(script.Parent.ContactsProtocolTypes)
-local t = {
+local ContactsProtocolModule = {
 	GET_CONTACTS_PROTOCOL_METHOD_REQUEST_DESCRIPTOR = {
 		protocolName = "ContactsProtocol",
 		methodName = "getContacts",
-		validateParams = tModule.table
+		validateParams = TModule.table
 	},
 	GET_CONTACTS_REQUEST_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR = {
 		protocolName = "ContactsProtocol",
 		methodName = "getContacts",
-		validateParams = tModule.strictInterface({
-			firstName = tModule.optional(tModule.string),
-			lastName = tModule.optional(tModule.string),
-			phoneNumbers = tModule.optional(tModule.table)
+		validateParams = TModule.strictInterface({
+			firstName = TModule.optional(TModule.string),
+			lastName = TModule.optional(TModule.string),
+			phoneNumbers = TModule.optional(TModule.table)
 		})
 	},
 	SUPPORTS_CONTACTS_PROTOCOL_METHOD_REQUEST_DESCRIPTOR = {
 		protocolName = "ContactsProtocol",
 		methodName = "SupportsContacts",
-		validateParams = tModule.table
+		validateParams = TModule.table
 	},
 	SUPPORTS_CONTACTS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR = {
 		protocolName = "ContactsProtocol",
 		methodName = "SupportsContacts",
-		validateParams = tModule.table
+		validateParams = TModule.table
 	}
 }
-t.__index = t
+ContactsProtocolModule.__index = ContactsProtocolModule
 
-function t.new()
-	-- upvalues: messageBus (ref), t (ref)
-	return setmetatable({ subscriber = messageBus.Subscriber.new() }, t)
+function ContactsProtocolModule.new() --[[ Line: 55 ]]
+	-- upvalues: MessageBus (copy), ContactsProtocolModule (copy)
+	return (setmetatable({ subscriber = MessageBus.Subscriber.new() }, ContactsProtocolModule))
 end
 
-function t:getContacts()
-	-- upvalues: promiseModule (ref), messageBus (ref)
-	local var1 = promiseModule.new(function(p1, _)
-		-- upvalues: self (ref)
-		local GET_CONTACTS_REQUEST_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR = self.GET_CONTACTS_REQUEST_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR
-		self.subscriber:subscribeProtocolMethodResponse(GET_CONTACTS_REQUEST_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR, function(p2)
-			-- upvalues: self (copy), GET_CONTACTS_REQUEST_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR (ref), p1 (ref)
-			self.subscriber:unsubscribeToProtocolMethodResponse(GET_CONTACTS_REQUEST_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR)
-			p1(p2)
+function ContactsProtocolModule:getContacts() --[[ Line: 68 ]]
+	-- upvalues: PromiseModule (copy), MessageBus (copy)
+	local NewPromise = PromiseModule.new(function(Callback, _) --[[ Line: 69 ]]
+		-- upvalues: self (copy)
+		local GETCONTACTSREQUESTPROTOCOLMETHODRESPONSEDESCRIPTOR = self.GET_CONTACTS_REQUEST_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR
+		self.subscriber:subscribeProtocolMethodResponse(GETCONTACTSREQUESTPROTOCOLMETHODRESPONSEDESCRIPTOR, function(p1) --[[ Line: 71 ]]
+			-- upvalues: self (upval), GETCONTACTSREQUESTPROTOCOLMETHODRESPONSEDESCRIPTOR (copy), Callback (copy)
+			self.subscriber:unsubscribeToProtocolMethodResponse(GETCONTACTSREQUESTPROTOCOLMETHODRESPONSEDESCRIPTOR)
+			Callback(p1)
 		end)
 	end)
-	messageBus.publishProtocolMethodRequest(self.GET_CONTACTS_PROTOCOL_METHOD_REQUEST_DESCRIPTOR, { includeVariable = false }, {})
+	MessageBus.publishProtocolMethodRequest(self.GET_CONTACTS_PROTOCOL_METHOD_REQUEST_DESCRIPTOR, { includeVariable = false }, {})
 	
-	return var1
+	return NewPromise
 end
 
-function t:supportsContacts()
-	-- upvalues: promiseModule (ref), messageBus (ref)
-	local var1 = promiseModule.new(function(p1, _)
-		-- upvalues: self (ref)
-		local SUPPORTS_CONTACTS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR = self.SUPPORTS_CONTACTS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR
-		self.subscriber:subscribeProtocolMethodResponse(SUPPORTS_CONTACTS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR, function(p2)
-			-- upvalues: self (copy), SUPPORTS_CONTACTS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR (ref), p1 (ref)
-			self.subscriber:unsubscribeToProtocolMethodResponse(SUPPORTS_CONTACTS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR)
-			p1(p2.support)
+function ContactsProtocolModule:supportsContacts() --[[ Line: 96 ]]
+	-- upvalues: PromiseModule (copy), MessageBus (copy)
+	local NewPromise = PromiseModule.new(function(Callback, _) --[[ Line: 97 ]]
+		-- upvalues: self (copy)
+		local SUPPORTSCONTACTSPROTOCOLMETHODRESPONSEDESCRIPTOR = self.SUPPORTS_CONTACTS_PROTOCOL_METHOD_RESPONSE_DESCRIPTOR
+		self.subscriber:subscribeProtocolMethodResponse(SUPPORTSCONTACTSPROTOCOLMETHODRESPONSEDESCRIPTOR, function(p1) --[[ Line: 99 ]]
+			-- upvalues: self (upval), SUPPORTSCONTACTSPROTOCOLMETHODRESPONSEDESCRIPTOR (copy), Callback (copy)
+			self.subscriber:unsubscribeToProtocolMethodResponse(SUPPORTSCONTACTSPROTOCOLMETHODRESPONSEDESCRIPTOR)
+			Callback(p1.support)
 		end)
 	end)
-	messageBus.publishProtocolMethodRequest(self.SUPPORTS_CONTACTS_PROTOCOL_METHOD_REQUEST_DESCRIPTOR, { includeStatus = false }, {})
+	MessageBus.publishProtocolMethodRequest(self.SUPPORTS_CONTACTS_PROTOCOL_METHOD_REQUEST_DESCRIPTOR, { includeStatus = false }, {})
 	
-	return var1
+	return NewPromise
 end
 
-t.default = t.new()
+ContactsProtocolModule.default = ContactsProtocolModule.new()
 
-return t
+return ContactsProtocolModule

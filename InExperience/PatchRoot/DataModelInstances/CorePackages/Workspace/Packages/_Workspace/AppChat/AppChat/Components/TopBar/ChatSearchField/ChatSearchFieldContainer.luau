@@ -1,8 +1,8 @@
-﻿local reactModule = require(script:FindFirstAncestor("AppChat").Parent.React)
-local chatSearchFieldViewModule = require(script.Parent.ChatSearchFieldView)
-local useChatSearchFieldViewModelModule = require(script.Parent.useChatSearchFieldViewModel)
+﻿local ReactModule = require(script:FindFirstAncestor("AppChat").Parent.React)
+local ChatSearchFieldViewModule = require(script.Parent.ChatSearchFieldView)
+local UseChatSearchFieldViewModelModule = require(script.Parent.useChatSearchFieldViewModel)
 
-return function(p1)
-	-- upvalues: useChatSearchFieldViewModelModule (ref), reactModule (ref), chatSearchFieldViewModule (ref)
-	return reactModule.createElement(chatSearchFieldViewModule, useChatSearchFieldViewModelModule(p1))
+return function(p1) --[[ Line: 10 | Named "ChatSearchFieldContainer" ]]
+	-- upvalues: UseChatSearchFieldViewModelModule (copy), ReactModule (copy), ChatSearchFieldViewModule (copy)
+	return ReactModule.createElement(ChatSearchFieldViewModule, (UseChatSearchFieldViewModelModule(p1)))
 end

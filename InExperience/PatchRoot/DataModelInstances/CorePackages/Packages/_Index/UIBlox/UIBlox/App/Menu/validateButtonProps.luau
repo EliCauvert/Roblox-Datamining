@@ -1,34 +1,34 @@
-﻿local parent = script.Parent.Parent.Parent
-local tModule = require(parent.Parent.t)
+﻿local Parent = script.Parent.Parent.Parent
+local TModule = require(Parent.Parent.t)
 
-return tModule.array(tModule.strictInterface({
-	icon = tModule.optional(tModule.union(tModule.table, tModule.string)),
-	text = tModule.string,
-	onActivated = tModule.callback,
-	disabled = tModule.optional(tModule.boolean),
-	inputBindingKey = tModule.optional(tModule.string),
-	keyCodeLabel = tModule.optional(tModule.union(tModule.enum(Enum.KeyCode), tModule.strictInterface({
-		key = tModule.enum(Enum.KeyCode),
-		axis = tModule.optional(tModule.string)
+return TModule.array(TModule.strictInterface({
+	icon = TModule.optional(TModule.union(TModule.table, TModule.string)),
+	text = TModule.string,
+	onActivated = TModule.callback,
+	disabled = TModule.optional(TModule.boolean),
+	inputBindingKey = TModule.optional(TModule.string),
+	keyCodeLabel = TModule.optional(TModule.union(TModule.enum(Enum.KeyCode), TModule.strictInterface({
+		key = TModule.enum(Enum.KeyCode),
+		axis = TModule.optional(TModule.string)
 	}))),
-	selected = tModule.optional(tModule.boolean),
-	stayOnActivated = tModule.optional(tModule.boolean),
-	renderRightSideGadget = tModule.optional(tModule.callback),
-	rightSideGadgetSize = tModule.optional(tModule.Vector2),
-	iconColorOverride = tModule.optional(tModule.Color3),
-	textColorOverride = tModule.optional(tModule.Color3),
-	dividerOffset = tModule.optional(tModule.number),
-	dividerSize = tModule.optional(tModule.number),
-	leftPaddingOffset = tModule.optional(tModule.number),
-	fontStyle = tModule.optional(tModule.union(tModule.string, require(parent.Core.Style.Validator.validateFontInfo), require(parent.Core.Style.Validator.validateTypographyInfo))),
-	iconSize = tModule.optional(tModule.integer),
-	selectedIconSize = tModule.optional(tModule.integer),
-	iconPaddingLeft = tModule.optional(tModule.integer),
-	textPadding = tModule.optional(tModule.strictInterface({ left = tModule.integer, right = tModule.integer })),
-	selectedIconPaddingRight = tModule.optional(tModule.integer),
-	keyLabelPaddingRight = tModule.optional(tModule.integer),
-	textOnlyPadding = tModule.optional(tModule.integer),
-	buttonTextOverride = tModule.optional(tModule.table),
-	borderCornerRadius = tModule.optional(tModule.integer),
-	background = tModule.optional(require(parent.Core.Style.Validator.validateColorInfo))
+	selected = TModule.optional(TModule.boolean),
+	stayOnActivated = TModule.optional(TModule.boolean),
+	renderRightSideGadget = TModule.optional(TModule.callback),
+	rightSideGadgetSize = TModule.optional(TModule.Vector2),
+	iconColorOverride = TModule.optional(TModule.Color3),
+	textColorOverride = TModule.optional(TModule.Color3),
+	dividerOffset = TModule.optional(TModule.number),
+	dividerSize = TModule.optional(TModule.number),
+	leftPaddingOffset = TModule.optional(TModule.number),
+	fontStyle = TModule.optional(TModule.union(TModule.string, require(Parent.Core.Style.Validator.validateFontInfo), (require(Parent.Core.Style.Validator.validateTypographyInfo)))),
+	iconSize = TModule.optional(TModule.integer),
+	selectedIconSize = TModule.optional(TModule.integer),
+	iconPaddingLeft = TModule.optional(TModule.integer),
+	textPadding = TModule.optional(TModule.strictInterface({ left = TModule.integer, right = TModule.integer })),
+	selectedIconPaddingRight = TModule.optional(TModule.integer),
+	keyLabelPaddingRight = TModule.optional(TModule.integer),
+	textOnlyPadding = TModule.optional(TModule.integer),
+	buttonTextOverride = TModule.optional(TModule.table),
+	borderCornerRadius = TModule.optional(TModule.integer),
+	background = TModule.optional((require(Parent.Core.Style.Validator.validateColorInfo)))
 }))

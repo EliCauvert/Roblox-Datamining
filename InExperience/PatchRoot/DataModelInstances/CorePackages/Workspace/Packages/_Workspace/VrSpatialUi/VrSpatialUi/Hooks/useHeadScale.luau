@@ -1,59 +1,55 @@
-﻿local vrSpatialUi = script:FindFirstAncestor("VrSpatialUi")
-local parent = vrSpatialUi.Parent
-local reactModule = require(parent.React)
-local UIManagerModule = require(vrSpatialUi.UIManager)
-local inExperienceUIVRIXP = require(parent.SharedExperimentDefinition).InExperienceUIVRIXP
+﻿local VrSpatialUi = script:FindFirstAncestor("VrSpatialUi")
+local Parent = VrSpatialUi.Parent
+local ReactModule = require(Parent.React)
+local UIManagerModule = require(VrSpatialUi.UIManager)
+local InExperienceUIVRIXP = require(Parent.SharedExperimentDefinition).InExperienceUIVRIXP
 
-local function _(p1, p2)
-	-- upvalues: UIManagerModule (ref)
-	local additionalCameraScaleIfNeeded = UIManagerModule.getInstance():getAdditionalCameraScaleIfNeeded()
+local function _(p1, Vector) --[[ Line: 7 | Named "checkAndScalePart" ]]
+	-- upvalues: UIManagerModule (copy)
+	local AdditionalCameraScaleIfNeeded = UIManagerModule.getInstance():getAdditionalCameraScaleIfNeeded()
 	
 	if p1 and p1.current then
-		p1.current.Size = Vector3.new(p2.X * additionalCameraScaleIfNeeded, p2.Y * additionalCameraScaleIfNeeded, p1.current.Size.Z)
+		p1.current.Size = Vector3.new(Vector.X * AdditionalCameraScaleIfNeeded, Vector.Y * AdditionalCameraScaleIfNeeded, p1.current.Size.Z)
 	end
 end
 
-return function(p1, p2)
-	-- upvalues: reactModule (ref), UIManagerModule (ref), inExperienceUIVRIXP (ref)
-	local var1, var2 = reactModule.useState(function()
-		-- upvalues: UIManagerModule (copy)
+return function(p1, Vector) --[[ Line: 15 | Named "useHeadScale" ]]
+	-- upvalues: ReactModule (copy), UIManagerModule (copy), InExperienceUIVRIXP (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(function() --[[ Line: 16 ]]
+		-- upvalues: UIManagerModule (upval)
 		return UIManagerModule.getInstance():getAdditionalCameraScaleIfNeeded()
 	end)
-	reactModule.useEffect(function()
-		-- upvalues: inExperienceUIVRIXP (copy), p1 (ref), p2 (ref), UIManagerModule (copy), var2 (ref)
-		if inExperienceUIVRIXP:isSpatialUIScalingFixEnabled() then
-			local var3 = p1
-			local var4 = p2
-			local additionalCameraScaleIfNeeded = UIManagerModule.getInstance():getAdditionalCameraScaleIfNeeded()
+	ReactModule.useEffect(function() --[[ Line: 19 ]]
+		-- upvalues: InExperienceUIVRIXP (upval), p1 (copy), Vector (copy), UIManagerModule (upval), UseStateResult2 (copy)
+		if InExperienceUIVRIXP:isSpatialUIScalingFixEnabled() then
+			local AdditionalCameraScaleIfNeeded = UIManagerModule.getInstance():getAdditionalCameraScaleIfNeeded()
 			
-			if var3 and var3.current then
-				var3.current.Size = Vector3.new(var4.X * additionalCameraScaleIfNeeded, var4.Y * additionalCameraScaleIfNeeded, var3.current.Size.Z)
+			if p1 and p1.current then
+				p1.current.Size = Vector3.new(Vector.X * AdditionalCameraScaleIfNeeded, Vector.Y * AdditionalCameraScaleIfNeeded, p1.current.Size.Z)
 			end
 		else
-			var2(UIManagerModule.getInstance():getAdditionalCameraScaleIfNeeded())
+			UseStateResult2(UIManagerModule.getInstance():getAdditionalCameraScaleIfNeeded())
 		end
-		local var5 = workspace.CurrentCamera:GetPropertyChangedSignal("HeadScale"):Connect(function()
-			-- upvalues: inExperienceUIVRIXP (copy), p1 (copy), p2 (copy), UIManagerModule (copy), var2 (copy)
-			if inExperienceUIVRIXP:isSpatialUIScalingFixEnabled() then
-				local var6 = p1
-				local var7 = p2
-				local additionalCameraScaleIfNeeded = UIManagerModule.getInstance():getAdditionalCameraScaleIfNeeded()
+		local Connection = workspace.CurrentCamera:GetPropertyChangedSignal("HeadScale"):Connect(function() --[[ Line: 26 ]]
+			-- upvalues: InExperienceUIVRIXP (upval), p1 (upval), Vector (upval), UIManagerModule (upval), UseStateResult2 (upval)
+			if InExperienceUIVRIXP:isSpatialUIScalingFixEnabled() then
+				local AdditionalCameraScaleIfNeeded = UIManagerModule.getInstance():getAdditionalCameraScaleIfNeeded()
 				
-				if var6 and var6.current then
-					var6.current.Size = Vector3.new(var7.X * additionalCameraScaleIfNeeded, var7.Y * additionalCameraScaleIfNeeded, var6.current.Size.Z)
+				if p1 and p1.current then
+					p1.current.Size = Vector3.new(Vector.X * AdditionalCameraScaleIfNeeded, Vector.Y * AdditionalCameraScaleIfNeeded, p1.current.Size.Z)
 					
 					return
 				end
 			else
-				var2(UIManagerModule.getInstance():getAdditionalCameraScaleIfNeeded())
+				UseStateResult2(UIManagerModule.getInstance():getAdditionalCameraScaleIfNeeded())
 			end
 		end)
 		
-		return function()
-			-- upvalues: var5 (ref)
-			var5:Disconnect()
+		return function() --[[ Line: 33 ]]
+			-- upvalues: Connection (copy)
+			Connection:Disconnect()
 		end
-	end, if inExperienceUIVRIXP:isSpatialUIScalingFixEnabled() then { p1, p2 } else {})
+	end, if InExperienceUIVRIXP:isSpatialUIScalingFixEnabled() then { p1, Vector } else {})
 	
-	return var1, var2
+	return UseStateResult, UseStateResult2
 end

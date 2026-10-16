@@ -1,36 +1,37 @@
-﻿local parent = script:FindFirstAncestor("GamePlayButton").Parent
-local appPage = require(parent.RobloxAppEnums).AppPage
-local selectors = require(parent.NavigationRodux).Selectors
-local navigateBack = require(parent.NavigationRodux).Thunks.NavigateBack
-local accessResponseEnum = require(parent.AmpUpsell).AmpEnums.AccessResponseEnum
-local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
-local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
-local var2 = if fFlagSignalsNavP3Dispatch then require(parent.NavigationRodux).GetLegacyNavigationStore else nil
+﻿local Parent = script:FindFirstAncestor("GamePlayButton").Parent
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local Selectors = require(Parent.NavigationRodux).Selectors
+local NavigateBackFunction = require(Parent.NavigationRodux).Thunks.NavigateBack
+local AccessResponseEnum = require(Parent.AmpUpsell).AmpEnums.AccessResponseEnum
+local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3Dispatch
+local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
+local GetLegacyNavigationStore = if FFlagSignalsNavP3Dispatch then require(Parent.NavigationRodux).GetLegacyNavigationStore else nil
 
-return function(p1, p2)
-	-- upvalues: accessResponseEnum (ref), fFlagSignalsNavP3Dispatch (ref), var2 (ref), selectors (ref), appPage (ref), var1 (ref), navigateBack (ref)
-	return if p2 and p2 > 0 then function(p3, p4, p5)
-		-- upvalues: accessResponseEnum (copy), p2 (ref), fFlagSignalsNavP3Dispatch (copy), var2 (copy), selectors (copy), appPage (copy), var1 (copy), navigateBack (copy), p1 (ref)
-		if not p3 or not p3.getState or not p3.dispatch then return end
-		if p4 == accessResponseEnum.Granted then
-			task.delay(p2 / 1000, function()
-				-- upvalues: fFlagSignalsNavP3Dispatch (copy), var2 (copy), selectors (copy), p3 (ref), appPage (copy), var1 (copy), navigateBack (copy), p1 (copy), p4 (ref), p5 (ref)
-				if (if fFlagSignalsNavP3Dispatch then var2(false).getCurrentPageName(false) else selectors.selectCurrentPageName(p3:getState())) == appPage.AmpWizardContainer then
-					if fFlagSignalsNavP3Dispatch then
-						var1.back(true)
+return function(Callback, p1: number) --[[ Line: 16 ]]
+	-- upvalues: AccessResponseEnum (copy), FFlagSignalsNavP3Dispatch (copy), GetLegacyNavigationStore (copy), Selectors (copy), AppPage (copy), NavigationCommands (copy), NavigateBackFunction (copy)
+	return if p1 and p1 > 0 then function(p2, Granted, p3) --[[ Line: 24 ]]
+		-- upvalues: AccessResponseEnum (upval), p1 (copy), FFlagSignalsNavP3Dispatch (upval), GetLegacyNavigationStore (upval), Selectors (upval), AppPage (upval), NavigationCommands (upval), NavigateBackFunction (upval), Callback (copy)
+		if not p2 or not p2.getState or not p2.dispatch then return end
+		if Granted == AccessResponseEnum.Granted then
+			task.delay(p1 / 1000, function() --[[ Line: 30 ]]
+				-- upvalues: FFlagSignalsNavP3Dispatch (upval), GetLegacyNavigationStore (upval), Selectors (upval), p2 (copy), AppPage (upval), NavigationCommands (upval), NavigateBackFunction (upval), Callback (upval), Granted (copy), p3 (copy)
+				if (if FFlagSignalsNavP3Dispatch then GetLegacyNavigationStore(false).getCurrentPageName(false) else Selectors.selectCurrentPageName(p2:getState())) == AppPage.AmpWizardContainer then
+					if FFlagSignalsNavP3Dispatch then
+						NavigationCommands.back(true)
 					else
-						p3:dispatch(navigateBack(true))
+						p2:dispatch(NavigateBackFunction(true))
 					end
 				end
-				p1(p4, p5)
+				Callback(Granted, p3)
 			end)
 			
 			return
-		elseif fFlagSignalsNavP3Dispatch then
-			var1.back(true)
-		else
-			p3:dispatch(navigateBack(true))
 		end
-		p1(p4, p5)
+		if FFlagSignalsNavP3Dispatch then
+			NavigationCommands.back(true)
+		else
+			p2:dispatch(NavigateBackFunction(true))
+		end
+		Callback(Granted, p3)
 	end else nil
 end

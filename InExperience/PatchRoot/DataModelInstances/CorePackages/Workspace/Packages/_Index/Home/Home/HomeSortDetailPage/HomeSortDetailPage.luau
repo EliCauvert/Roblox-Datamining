@@ -1,144 +1,150 @@
-﻿local home = script:FindFirstAncestor("Home")
-local parent = home.Parent
-local appPage = require(parent.RobloxAppEnums).AppPage
-local loggingProtocolModule = require(parent.LoggingProtocol)
-local _ = require(parent.Navigation)
-local reactModule = require(parent.React)
-local sduiSharedUtilitiesModule = require(parent.SduiSharedUtilities)
-local sortDeeplinkFailureCounter = require(parent.DiscoveryAnalytics).Events.sortDeeplinkFailureCounter
-local buildHomeSortDetailPageEntryModule = require(home.HomeSortDetailPage.buildHomeSortDetailPageEntry)
-local fetchHomeSortDetailModule = require(home.HomeSortDetailPage.fetchHomeSortDetail)
-local getHomeSortDetailPageKeyModule = require(home.HomeSortDetailPage.getHomeSortDetailPageKey)
-local homeConstantsModule = require(home.HomeConstants)
-local homeSortDetailConstantsModule = require(home.HomeSortDetailPage.HomeSortDetailConstants)
-local homeSortDetailScopeFieldsModule = require(home.HomeSortDetailPage.HomeSortDetailScopeFields)
-local fetchHomePageModule = require(home.fetchHomePage)
-local refreshHomePageModule = require(home.refreshHomePage)
-local sduiPageWrapperEntryPoint = sduiSharedUtilitiesModule.SduiPageWrapperEntryPoint
-local sduiSurfaceLoadTimeTracker = sduiSharedUtilitiesModule.SduiSurfaceLoadTimeTracker
-local uiStatus = sduiSharedUtilitiesModule.UiStatus
-local useInputData = sduiSharedUtilitiesModule.useInputData
-local usePageScopeRef = sduiSharedUtilitiesModule.usePageScopeRef
-local useUiStatus = sduiSharedUtilitiesModule.useUiStatus
-local _ = {
-	InvalidSort = "InvalidSort",
-	SortTokenFetchFailed = "SortTokenFetchFailed"
-}
+﻿local Home = script:FindFirstAncestor("Home")
+local Parent = Home.Parent
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local LoggingProtocolModule = require(Parent.LoggingProtocol)
+local _ = require(Parent.Navigation)
+local ReactModule = require(Parent.React)
+local SduiSharedUtilitiesModule = require(Parent.SduiSharedUtilities)
+local SortDeeplinkFailureCounter = require(Parent.DiscoveryAnalytics).Events.sortDeeplinkFailureCounter
+local BuildHomeSortDetailPageEntryModule = require(Home.HomeSortDetailPage.buildHomeSortDetailPageEntry)
+local FetchHomeSortDetailModule = require(Home.HomeSortDetailPage.fetchHomeSortDetail)
+local GetHomeSortDetailPageKeyModule = require(Home.HomeSortDetailPage.getHomeSortDetailPageKey)
+local HomeConstantsModule = require(Home.HomeConstants)
+local HomeSortDetailConstantsModule = require(Home.HomeSortDetailPage.HomeSortDetailConstants)
+local HomeSortDetailScopeFieldsModule = require(Home.HomeSortDetailPage.HomeSortDetailScopeFields)
+local FetchHomePageModule = require(Home.fetchHomePage)
+local RefreshHomePageModule = require(Home.refreshHomePage)
+local SduiPageWrapperEntryPoint = SduiSharedUtilitiesModule.SduiPageWrapperEntryPoint
+local SduiSurfaceLoadTimeTracker = SduiSharedUtilitiesModule.SduiSurfaceLoadTimeTracker
+local UiStatus = SduiSharedUtilitiesModule.UiStatus
+local UseInputDataFunction = SduiSharedUtilitiesModule.useInputData
+local UsePageScopeRefFunction = SduiSharedUtilitiesModule.usePageScopeRef
+local UseUiStatusFunction = SduiSharedUtilitiesModule.useUiStatus
 
-local function _(p1, p2)
+local function _(p1, p2) --[[ Line: 45 | Named "getFromPropsOrNavigationParams" ]]
 	return p1[p2] or p1.navigation and p1.navigation.getParam(p2)
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: getHomeSortDetailPageKeyModule (ref), useInputData (ref), homeConstantsModule (ref), useUiStatus (ref), reactModule (ref), usePageScopeRef (ref), sduiSharedUtilitiesModule (ref), homeSortDetailScopeFieldsModule (ref), sduiSurfaceLoadTimeTracker (ref), homeSortDetailConstantsModule (ref), loggingProtocolModule (ref), sortDeeplinkFailureCounter (ref), fetchHomePageModule (ref), uiStatus (ref), buildHomeSortDetailPageEntryModule (ref), fetchHomeSortDetailModule (ref), refreshHomePageModule (ref), sduiPageWrapperEntryPoint (ref), appPage (ref)
-	local sortId = p1.sortId or p1.navigation and p1.navigation.getParam("sortId")
-	local sortIndex = p1.sortIndex or p1.navigation and p1.navigation.getParam("sortIndex")
-	local var1 = getHomeSortDetailPageKeyModule(sortId, sortIndex)
-	local pageTimer = p1.pageTimer or p1.navigation and p1.navigation.getParam("pageTimer")
-	local var2 = useInputData(homeConstantsModule.ConfigKey, homeConstantsModule.ContentIdentifier)
-	local var3 = useUiStatus(homeConstantsModule.ConfigKey)
-	local var4 = useUiStatus(var1)
-	local var5 = reactModule.useRef(nil)
-	local var6 = reactModule.useRef(false)
-	usePageScopeRef(var1)
-	reactModule.useMemo(function()
-		-- upvalues: sduiSharedUtilitiesModule (copy), var1 (ref), homeSortDetailScopeFieldsModule (copy), sortId (ref), sortIndex (ref)
-		local sduiClientPageScope = sduiSharedUtilitiesModule.getSduiClientPageScope(var1)
-		sduiClientPageScope.set(homeSortDetailScopeFieldsModule.SelectedSortId, sortId)
-		sduiClientPageScope.set(homeSortDetailScopeFieldsModule.SelectedSortIndex, sortIndex)
-	end, { var1, sortId, sortIndex })
-	local var7 = reactModule.useMemo(function()
-		-- upvalues: pageTimer (ref), sduiSurfaceLoadTimeTracker (copy), homeSortDetailConstantsModule (copy), sduiSharedUtilitiesModule (copy), var1 (ref)
-		local pageTimer_1 = pageTimer or sduiSurfaceLoadTimeTracker.createLoadTimerWithSurfaceLoadTime(homeSortDetailConstantsModule.SurfaceKey, {
-			eventName = homeSortDetailConstantsModule.SurfaceLoadTimeEventName,
+return ReactModule.memo(function(p1) --[[ Line: 49 | Named "HomeSortDetailPage" ]]
+	-- upvalues: GetHomeSortDetailPageKeyModule (copy), UseInputDataFunction (copy), HomeConstantsModule (copy), UseUiStatusFunction (copy), ReactModule (copy), UsePageScopeRefFunction (copy), SduiSharedUtilitiesModule (copy), HomeSortDetailScopeFieldsModule (copy), SduiSurfaceLoadTimeTracker (copy), HomeSortDetailConstantsModule (copy), LoggingProtocolModule (copy), SortDeeplinkFailureCounter (copy), FetchHomePageModule (copy), UiStatus (copy), BuildHomeSortDetailPageEntryModule (copy), FetchHomeSortDetailModule (copy), RefreshHomePageModule (copy), SduiPageWrapperEntryPoint (copy), AppPage (copy)
+	local SortId = p1.sortId or p1.navigation and p1.navigation.getParam("sortId")
+	local SortIndex = p1.sortIndex or p1.navigation and p1.navigation.getParam("sortIndex")
+	local HomeSortDetailPageKeyModule = GetHomeSortDetailPageKeyModule(SortId, SortIndex)
+	local PageTimer = p1.pageTimer or p1.navigation and p1.navigation.getParam("pageTimer")
+	local UseInputDataResult = UseInputDataFunction(HomeConstantsModule.ConfigKey, HomeConstantsModule.ContentIdentifier)
+	local UseUiStatusResult = UseUiStatusFunction(HomeConstantsModule.ConfigKey)
+	local UseUiStatusResult1 = UseUiStatusFunction(HomeSortDetailPageKeyModule)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(false)
+	UsePageScopeRefFunction(HomeSortDetailPageKeyModule)
+	ReactModule.useMemo(function() --[[ Line: 62 ]]
+		-- upvalues: SduiSharedUtilitiesModule (upval), HomeSortDetailPageKeyModule (copy), HomeSortDetailScopeFieldsModule (upval), SortId (copy), SortIndex (copy)
+		local SduiClientPageScope = SduiSharedUtilitiesModule.getSduiClientPageScope(HomeSortDetailPageKeyModule)
+		SduiClientPageScope.set(HomeSortDetailScopeFieldsModule.SelectedSortId, SortId)
+		SduiClientPageScope.set(HomeSortDetailScopeFieldsModule.SelectedSortIndex, SortIndex)
+	end, { HomeSortDetailPageKeyModule, SortId, SortIndex })
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 68 ]]
+		-- upvalues: PageTimer (copy), SduiSurfaceLoadTimeTracker (upval), HomeSortDetailConstantsModule (upval), SduiSharedUtilitiesModule (upval), HomeSortDetailPageKeyModule (copy)
+		local PageTimer1 = PageTimer or SduiSurfaceLoadTimeTracker.createLoadTimerWithSurfaceLoadTime(HomeSortDetailConstantsModule.SurfaceKey, {
+			eventName = HomeSortDetailConstantsModule.SurfaceLoadTimeEventName,
 			metadata = { page = "mount" }
 		})
-		sduiSharedUtilitiesModule.getSduiClientPageScope(var1).set(sduiSurfaceLoadTimeTracker.SURFACE_LOAD_TIME_PAGE_SCOPE_KEY, pageTimer_1)
+		SduiSharedUtilitiesModule.getSduiClientPageScope(HomeSortDetailPageKeyModule).set(SduiSurfaceLoadTimeTracker.SURFACE_LOAD_TIME_PAGE_SCOPE_KEY, PageTimer1)
 		
-		return pageTimer_1
-	end, { var1, pageTimer })
-	local var8 = reactModule.useCallback(function(p2)
-		-- upvalues: var6 (ref), loggingProtocolModule (copy), sortDeeplinkFailureCounter (copy), sortId (ref), p1 (ref)
-		if var6.current then return end
-		var6.current = true
-		loggingProtocolModule.default:logRobloxTelemetryCounter(sortDeeplinkFailureCounter, 1, { isOmni = true, reason = p2, sortName = sortId })
+		return PageTimer1
+	end, { HomeSortDetailPageKeyModule, PageTimer })
+	local UseResult = ReactModule.useCallback(function(Reason) --[[ Line: 81 ]]
+		-- upvalues: UseRefResult1 (copy), LoggingProtocolModule (upval), SortDeeplinkFailureCounter (upval), SortId (copy), p1 (copy)
+		if UseRefResult1.current then return end
+		UseRefResult1.current = true
+		LoggingProtocolModule.default:logRobloxTelemetryCounter(SortDeeplinkFailureCounter, 1, { isOmni = true, reason = Reason, sortName = SortId })
 		
 		if p1.onSortUnavailable then
 			p1.onSortUnavailable()
 		end
-	end, { p1.onSortUnavailable, sortId })
-	reactModule.useEffect(function()
-		-- upvalues: fetchHomePageModule (copy), sduiSharedUtilitiesModule (copy), homeConstantsModule (copy)
-		fetchHomePageModule(sduiSharedUtilitiesModule.SduiLoadTimer.createLoadTimer(homeConstantsModule.ConfigKey))
+	end, { p1.onSortUnavailable, SortId })
+	ReactModule.useEffect(function() --[[ Line: 96 ]]
+		-- upvalues: FetchHomePageModule (upval), SduiSharedUtilitiesModule (upval), HomeConstantsModule (upval)
+		FetchHomePageModule(SduiSharedUtilitiesModule.SduiLoadTimer.createLoadTimer(HomeConstantsModule.ConfigKey))
 	end, {})
-	reactModule.useEffect(function()
-		-- upvalues: sortId (ref), var8 (ref), var3 (ref), uiStatus (copy), var2 (ref), buildHomeSortDetailPageEntryModule (copy), sortIndex (ref), var5 (ref), var1 (ref), fetchHomeSortDetailModule (copy), var7 (ref)
-		if sortId == nil then
-			var8("InvalidSort")
+	ReactModule.useEffect(function() --[[ Line: 101 ]]
+		-- upvalues: SortId (copy), UseResult (copy), UseUiStatusResult (copy), UiStatus (upval), UseInputDataResult (copy), BuildHomeSortDetailPageEntryModule (upval), SortIndex (copy), UseRefResult (copy), HomeSortDetailPageKeyModule (copy), FetchHomeSortDetailModule (upval), UseMemoResult (copy)
+		if SortId == nil then
+			UseResult("InvalidSort")
 			
 			return
-		elseif var3 == uiStatus.Error then
-			var8("SortTokenFetchFailed")
+		end
+		if UseUiStatusResult == UiStatus.Error then
+			UseResult("SortTokenFetchFailed")
 			
 			return
-		elseif var3 ~= uiStatus.Resolved or var2 == nil then return end
-		if buildHomeSortDetailPageEntryModule(sortId, sortIndex) == nil then
-			var8("InvalidSort")
+		end
+		if UseUiStatusResult ~= UiStatus.Resolved or UseInputDataResult == nil then return end
+		if BuildHomeSortDetailPageEntryModule(SortId, SortIndex) == nil then
+			UseResult("InvalidSort")
 			
 			return
-		elseif var5.current ~= var1 then
-			var5.current = var1
+		end
+		if UseRefResult.current ~= HomeSortDetailPageKeyModule then
+			UseRefResult.current = HomeSortDetailPageKeyModule
 			
-			if fetchHomeSortDetailModule(sortId, sortIndex, var7) == nil then
-				var8("SortTokenFetchFailed")
+			if FetchHomeSortDetailModule(SortId, SortIndex, UseMemoResult) == nil then
+				UseResult("SortTokenFetchFailed")
 			end
 		end
 	end, {
-		var1, var2, var3, var7, var8, sortId, sortIndex
+		HomeSortDetailPageKeyModule, UseInputDataResult, UseUiStatusResult,
+		UseMemoResult, UseResult, SortId, SortIndex
 	})
-	reactModule.useEffect(function()
-		-- upvalues: var4 (ref), uiStatus (copy), var8 (ref), var3 (ref), var2 (ref), sortId (ref), buildHomeSortDetailPageEntryModule (copy), sortIndex (ref), sduiSharedUtilitiesModule (copy), var1 (ref)
-		if var4 == uiStatus.Error then
-			var8("SortTokenFetchFailed")
+	ReactModule.useEffect(function() --[[ Line: 139 ]]
+		-- upvalues: UseUiStatusResult1 (copy), UiStatus (upval), UseResult (copy), UseUiStatusResult (copy), UseInputDataResult (copy), SortId (copy), BuildHomeSortDetailPageEntryModule (upval), SortIndex (copy), SduiSharedUtilitiesModule (upval), HomeSortDetailPageKeyModule (copy)
+		if UseUiStatusResult1 == UiStatus.Error then
+			UseResult("SortTokenFetchFailed")
 			
 			return
-		elseif var4 ~= uiStatus.Resolved or var3 ~= uiStatus.Resolved or (var2 == nil or sortId == nil) then return end
-		if buildHomeSortDetailPageEntryModule(sortId, sortIndex) == nil or not (sduiSharedUtilitiesModule.getSduiApiStore().getRootConfig(var1, false) ~= nil) then
-			var8("InvalidSort")
+		end
+		if UseUiStatusResult1 ~= UiStatus.Resolved or UseUiStatusResult ~= UiStatus.Resolved or UseInputDataResult == nil or SortId == nil then return end
+		local HasRootConfig = SduiSharedUtilitiesModule.getSduiApiStore().getRootConfig(HomeSortDetailPageKeyModule, false) ~= nil
+		
+		if BuildHomeSortDetailPageEntryModule(SortId, SortIndex) == nil or not HasRootConfig then
+			UseResult("InvalidSort")
 		end
 	end, {
-		var1, var4, var2, var3, var8, sortId, sortIndex
+		HomeSortDetailPageKeyModule, UseUiStatusResult1, UseInputDataResult,
+		UseUiStatusResult, UseResult, SortId, SortIndex
 	})
-	
-	return if sortId == nil then nil else reactModule.createElement(sduiPageWrapperEntryPoint, {
-		appPage = appPage.Home,
-		routeName = appPage.GamesList,
-		configKey = var1,
-		contentIdentifier = homeSortDetailConstantsModule.Identifier,
-		pageTimer = var7,
-		refresh = reactModule.useCallback(function()
-			-- upvalues: sortId (ref), sduiSurfaceLoadTimeTracker (copy), homeSortDetailConstantsModule (copy), refreshHomePageModule (copy)
-			if sortId == nil then
-				return nil
-			end
-			local var9 = sduiSurfaceLoadTimeTracker.createLoadTimerWithSurfaceLoadTime(homeSortDetailConstantsModule.SurfaceKey, {
-				eventName = homeSortDetailConstantsModule.SurfaceLoadTimeEventName,
-				metadata = { page = "refresh" }
-			})
-			var9.start("refresh")
-			local var10 = refreshHomePageModule()
-			
-			if var10 then
-				return var10:finally(function()
-					-- upvalues: var9 (ref)
-					var9.logRefreshComplete()
-				end)
-			end
-			var9.logRefreshComplete()
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 171 ]]
+		-- upvalues: SortId (copy), SduiSurfaceLoadTimeTracker (upval), HomeSortDetailConstantsModule (upval), RefreshHomePageModule (upval)
+		if SortId == nil then
+			return nil
+		end
+		local LoadTimerWithSurfaceLoadTime = SduiSurfaceLoadTimeTracker.createLoadTimerWithSurfaceLoadTime(HomeSortDetailConstantsModule.SurfaceKey, {
+			eventName = HomeSortDetailConstantsModule.SurfaceLoadTimeEventName,
+			metadata = { page = "refresh" }
+		})
+		LoadTimerWithSurfaceLoadTime.start("refresh")
+		local RefreshHomePageModuleResult = RefreshHomePageModule()
+		
+		if RefreshHomePageModuleResult then
+			return RefreshHomePageModuleResult:finally(function() --[[ Line: 186 ]]
+				-- upvalues: LoadTimerWithSurfaceLoadTime (copy)
+				LoadTimerWithSurfaceLoadTime.logRefreshComplete()
+			end)
+		else
+			LoadTimerWithSurfaceLoadTime.logRefreshComplete()
 			
 			return nil
-		end, { sortId }),
-		additionalAnalyticsData = { pageContext = p1.pageContext or appPage.Home },
+		end
+	end, { SortId })
+	
+	return if SortId == nil then nil else ReactModule.createElement(SduiPageWrapperEntryPoint, {
+		appPage = AppPage.Home,
+		routeName = AppPage.GamesList,
+		configKey = HomeSortDetailPageKeyModule,
+		contentIdentifier = HomeSortDetailConstantsModule.Identifier,
+		pageTimer = UseMemoResult,
+		refresh = UseResult1,
+		additionalAnalyticsData = { pageContext = p1.pageContext or AppPage.Home },
 		pageTopPadding = p1.pageTopPadding
 	})
 end)

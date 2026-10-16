@@ -1,9 +1,9 @@
-﻿local _script = script
+﻿local v1 = script
 
 return {
-	ShareGameAnalytics = require(_script.ShareGameAnalytics),
-	Enums = require(_script.Enums),
-	FireEvent = require(_script.FireEvent),
-	Navigation = require(_script.Navigation),
-	Formatters = require(_script.Formatters)
+	ShareGameAnalytics = require(v1.ShareGameAnalytics),
+	Enums = require(v1.Enums),
+	FireEvent = require(v1.FireEvent),
+	Navigation = require(v1.Navigation),
+	Formatters = require(v1.Formatters)
 }

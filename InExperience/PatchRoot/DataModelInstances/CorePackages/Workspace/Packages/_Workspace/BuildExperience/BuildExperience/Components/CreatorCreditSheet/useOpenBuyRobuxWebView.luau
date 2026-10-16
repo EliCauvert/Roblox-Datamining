@@ -1,51 +1,52 @@
-﻿local appLifecycleObserverService = game:GetService("AppLifecycleObserverService")
-local contentProviderService = game:GetService("ContentProvider")
-local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useOpenWebView = require(parent.WebViewUtils).useOpenWebView
-local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local fFlagBuildExperienceBuyRobuxContextModule = require(buildExperience.Flags.FFlagBuildExperienceBuyRobuxContext)
+﻿local AppLifecycleObserverService = game:GetService("AppLifecycleObserverService")
+local ContentProvider = game:GetService("ContentProvider")
+local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseOpenWebViewFunction = require(Parent.WebViewUtils).useOpenWebView
+local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
+local FFlagBuildExperienceBuyRobuxContextModule = require(BuildExperience.Flags.FFlagBuildExperienceBuyRobuxContext)
 
-local function _()
-	-- upvalues: contentProviderService (ref), fFlagBuildExperienceBuyRobuxContextModule (ref)
-	return `{u115}upgrades/robux?ctx={if fFlagBuildExperienceBuyRobuxContextModule then "build-uapp" else "navpopover"}`
+local function _(): string --[[ Line: 18 | Named "getPurchaseRobuxUrl" ]]
+	-- upvalues: ContentProvider (copy), FFlagBuildExperienceBuyRobuxContextModule (copy)
+	return `{string.gsub(string.gsub(ContentProvider.BaseUrl:lower(), "/m.", "/www."), "http:", "https:")}upgrades/robux?ctx={if FFlagBuildExperienceBuyRobuxContextModule then "build-uapp" else "navpopover"}`
 end
 
-return function(p1, p2)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), useOpenWebView (ref), reactModule (ref), appLifecycleObserverService (ref), contentProviderService (ref), fFlagBuildExperienceBuyRobuxContextModule (ref)
-	local title = useLocalization({
-		title = localizationStringsModule.CREATOR_CREDIT_BUY_ROBUX_SHEET_TITLE
+return function(Callback, p1) --[[ Line: 25 | Named "useOpenBuyRobuxWebView" ]]
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseOpenWebViewFunction (copy), ReactModule (copy), AppLifecycleObserverService (copy), ContentProvider (copy), FFlagBuildExperienceBuyRobuxContextModule (copy)
+	local Title = UseLocalizationFunction({
+		title = LocalizationStringsModule.CREATOR_CREDIT_BUY_ROBUX_SHEET_TITLE
 	}).title
-	local var1 = useOpenWebView()
-	local var2 = reactModule.useRef(false)
-	local var3 = reactModule.useCallback(function()
-		-- upvalues: var2 (ref), p1 (ref)
-		if not var2.current then return end
-		var2.current = false
+	local UseOpenWebViewResult = UseOpenWebViewFunction()
+	local UseRefResult = ReactModule.useRef(false)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 35 ]]
+		-- upvalues: UseRefResult (copy), Callback (copy)
+		if not UseRefResult.current then return end
+		UseRefResult.current = false
 		
-		if p1 then
-			p1()
+		if Callback then
+			Callback()
 		end
-	end, { p1 })
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), p2 (ref), appLifecycleObserverService (copy), var3 (ref), var2 (ref)
-		if p1 == nil then
-			return function() end
+	end, { Callback })
+	ReactModule.useEffect(function() --[[ Line: 45 ]]
+		-- upvalues: Callback (copy), p1 (copy), AppLifecycleObserverService (upval), UseResult (copy), UseRefResult (copy)
+		if Callback == nil then
+			return function() --[[ Line: 47 ]] end
+		else
+			local OnUnhideConnection = (p1 or AppLifecycleObserverService).OnUnhide:Connect(UseResult)
+			
+			return function() --[[ Line: 51 ]]
+				-- upvalues: UseRefResult (upval), OnUnhideConnection (copy)
+				UseRefResult.current = false
+				OnUnhideConnection:Disconnect()
+			end
 		end
-		local onUnhideConnection = (p2 or appLifecycleObserverService).OnUnhide:Connect(var3)
-		
-		return function()
-			-- upvalues: var2 (copy), onUnhideConnection (ref)
-			var2.current = false
-			onUnhideConnection:Disconnect()
-		end
-	end, { p2, var3, p1 })
+	end, { p1, UseResult, Callback })
 	
-	return reactModule.useCallback(function()
-		-- upvalues: var2 (ref), p1 (ref), var1 (ref), contentProviderService (copy), fFlagBuildExperienceBuyRobuxContextModule (copy), title (ref), var3 (ref)
-		var2.current = p1 ~= nil
-		var1(`{u196}upgrades/robux?ctx={if fFlagBuildExperienceBuyRobuxContextModule then "build-uapp" else "navpopover"}`, title, if p1 ~= nil then nil else var3)
-	end, { var3, p1, var1, title })
+	return ReactModule.useCallback(function() --[[ Line: 57 ]]
+		-- upvalues: UseRefResult (copy), Callback (copy), UseOpenWebViewResult (copy), ContentProvider (upval), FFlagBuildExperienceBuyRobuxContextModule (upval), Title (copy), UseResult (copy)
+		UseRefResult.current = Callback ~= nil
+		UseOpenWebViewResult(`{string.gsub(string.gsub(ContentProvider.BaseUrl:lower(), "/m.", "/www."), "http:", "https:")}upgrades/robux?ctx={if FFlagBuildExperienceBuyRobuxContextModule then "build-uapp" else "navpopover"}`, Title, if Callback == nil then nil else UseResult)
+	end, { UseResult, Callback, UseOpenWebViewResult, Title })
 end

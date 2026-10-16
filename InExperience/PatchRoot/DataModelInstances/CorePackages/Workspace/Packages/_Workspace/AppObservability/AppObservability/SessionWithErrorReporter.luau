@@ -1,47 +1,47 @@
-﻿local telemetryService = game:GetService("TelemetryService")
-local t = {}
-t.__index = t
+﻿local TelemetryService = game:GetService("TelemetryService")
+local SessionWithErrorReporterModule = {}
+SessionWithErrorReporterModule.__index = SessionWithErrorReporterModule
 
-function t.new(p1, p2)
-	-- upvalues: t (ref)
-	local tbl = setmetatable({
-		_eventConfig = p1,
+function SessionWithErrorReporterModule.new(_eventConfig, p1) --[[ Line: 43 ]]
+	-- upvalues: SessionWithErrorReporterModule (copy)
+	local self = setmetatable({
+		_eventConfig = _eventConfig,
 		_lastReportedTimestampBySeverity = {},
-		_reportingInterval = p2 or 300,
+		_reportingInterval = p1 or 300,
 		_lastReportedEventBySeverity = {}
-	}, t)
-	tbl._lastReportedTimestampBySeverity.NO_SEVERITY = nil
-	tbl._lastReportedEventBySeverity.NO_SEVERITY = nil
+	}, SessionWithErrorReporterModule)
+	self._lastReportedTimestampBySeverity.NO_SEVERITY = nil
+	self._lastReportedEventBySeverity.NO_SEVERITY = nil
 	
-	return tbl
+	return self
 end
 
-function t.getCurrentTimeStamp(_)
+function SessionWithErrorReporterModule:getCurrentTimeStamp(): number --[[ Line: 67 ]]
 	return os.time()
 end
 
-function t:reportEvent(p1, p2, p3)
-	-- upvalues: telemetryService (ref)
-	local var1 = false
-	local currentTimeStamp = self:getCurrentTimeStamp()
-	p3 = p3 or "NO_SEVERITY"
-	local var2 = self._lastReportedTimestampBySeverity[p3]
+function SessionWithErrorReporterModule:reportEvent(Count, CustomFields, Tag_severity) --[[ Line: 80 ]]
+	-- upvalues: TelemetryService (copy)
+	local Flag = false
+	local CurrentTimeStamp = self:getCurrentTimeStamp()
+	local Tag_severity1 = Tag_severity or "NO_SEVERITY"
+	local LastReportedTimestampBySeverityEntry = self._lastReportedTimestampBySeverity[Tag_severity1]
 	
-	if var2 == nil or self._reportingInterval <= currentTimeStamp - var2 then
-		var1 = true
+	if LastReportedTimestampBySeverityEntry == nil or self._reportingInterval <= CurrentTimeStamp - LastReportedTimestampBySeverityEntry then
+		Flag = true
 	end
-	if var1 then
-		if p3 ~= nil then
-			if p2 == nil then
-				p2 = { tag_severity = p3 }
-			elseif type(p2) == "table" then
-				p2.tag_severity = p3
+	if Flag then
+		if Tag_severity ~= nil then
+			if CustomFields == nil then
+				CustomFields = { tag_severity = Tag_severity }
+			elseif type(CustomFields) == "table" then
+				CustomFields.tag_severity = Tag_severity
 			end
 		end
-		telemetryService:LogCounter(self._eventConfig, { customFields = p2 }, p1 or 1)
-		self._lastReportedTimestampBySeverity[p3] = currentTimeStamp
-		self._lastReportedEventBySeverity[p3] = { count = p1, customFields = p2 }
+		TelemetryService:LogCounter(self._eventConfig, { customFields = CustomFields }, Count or 1)
+		self._lastReportedTimestampBySeverity[Tag_severity1] = CurrentTimeStamp
+		self._lastReportedEventBySeverity[Tag_severity1] = { count = Count, customFields = CustomFields }
 	end
 end
 
-return t
+return SessionWithErrorReporterModule

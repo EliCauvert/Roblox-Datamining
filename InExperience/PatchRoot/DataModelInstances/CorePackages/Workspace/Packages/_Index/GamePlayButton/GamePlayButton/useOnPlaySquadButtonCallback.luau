@@ -1,25 +1,25 @@
-﻿local gamePlayButton = script:FindFirstAncestor("GamePlayButton")
-local openCentralOverlayForGameDetailsSquadModule = require(gamePlayButton.OpenCentralOverlayForGameDetailsSquad)
-local playButtonStatesModule = require(gamePlayButton.PlayButtonStates)
-local parent = gamePlayButton.Parent
-local reactModule = require(parent.React)
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local getFFlagIsSquadEnabled = require(parent.SharedFlags).GetFFlagIsSquadEnabled
+﻿local GamePlayButton = script:FindFirstAncestor("GamePlayButton")
+local OpenCentralOverlayForGameDetailsSquadModule = require(GamePlayButton.OpenCentralOverlayForGameDetailsSquad)
+local PlayButtonStatesModule = require(GamePlayButton.PlayButtonStates)
+local Parent = GamePlayButton.Parent
+local ReactModule = require(Parent.React)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local GetFFlagIsSquadEnabledFunction = require(Parent.SharedFlags).GetFFlagIsSquadEnabled
 
-return function(p1, p2, p3, p4)
-	-- upvalues: useDispatch (ref), reactModule (ref), getFFlagIsSquadEnabled (ref), playButtonStatesModule (ref), openCentralOverlayForGameDetailsSquadModule (ref)
-	local var1 = useDispatch()
+return function(p1, PlayableWithParty, p2, p3) --[[ Line: 12 ]]
+	-- upvalues: UseDispatchFunction (copy), ReactModule (copy), GetFFlagIsSquadEnabledFunction (copy), PlayButtonStatesModule (copy), OpenCentralOverlayForGameDetailsSquadModule (copy)
+	local UseDispatchResult = UseDispatchFunction()
 	
-	return reactModule.useCallback(function(p5)
-		-- upvalues: getFFlagIsSquadEnabled (copy), p2 (ref), playButtonStatesModule (copy), var1 (ref), openCentralOverlayForGameDetailsSquadModule (copy), p1 (ref), p3 (ref), p4 (ref)
-		if getFFlagIsSquadEnabled() and p2 == playButtonStatesModule.PlayableWithParty then
-			var1(openCentralOverlayForGameDetailsSquadModule(p1, p5.AbsolutePosition, p5.AbsoluteSize, p3, p4))
+	return ReactModule.useCallback(function(Frame: Frame) --[[ Line: 15 ]]
+		-- upvalues: GetFFlagIsSquadEnabledFunction (upval), PlayableWithParty (copy), PlayButtonStatesModule (upval), UseDispatchResult (copy), OpenCentralOverlayForGameDetailsSquadModule (upval), p1 (copy), p2 (copy), p3 (copy)
+		if GetFFlagIsSquadEnabledFunction() and PlayableWithParty == PlayButtonStatesModule.PlayableWithParty then
+			UseDispatchResult(OpenCentralOverlayForGameDetailsSquadModule(p1, Frame.AbsolutePosition, Frame.AbsoluteSize, p2, p3))
 		end
 	end, {
-		var1,
+		UseDispatchResult,
 		p1,
-		p3,
 		p2,
-		p4
+		PlayableWithParty,
+		p3
 	})
 end

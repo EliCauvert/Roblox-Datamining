@@ -1,8 +1,8 @@
 ﻿local _ = require(script:FindFirstAncestor("GraphQLServer").graphql.generatedTypes)
 
-return function(p1)
-	local currentDateTime = DateTime.now()
-	local dateTime = DateTime.fromUnixTimestamp(currentDateTime.UnixTimestamp + 86400)
+return function(Id) --[[ Line: 5 | Named "createMockVirtualEvent" ]]
+	local _DateTime = DateTime.now()
+	local _DateTime1 = DateTime.fromUnixTimestamp(_DateTime.UnixTimestamp + 86400)
 	
 	return {
 		title = "Event Name",
@@ -10,7 +10,7 @@ return function(p1)
 		universeId = "3531439676",
 		eventStatus = "active",
 		userRsvpStatus = "none",
-		id = p1,
+		id = Id,
 		host = {
 			hostType = "user",
 			hostId = "1",
@@ -18,13 +18,13 @@ return function(p1)
 			hasVerifiedBadge = true
 		},
 		eventTime = {
-			startUtc = currentDateTime:ToIsoDate(),
-			endUtc = dateTime:ToIsoDate(),
-			startTime = currentDateTime,
-			endTime = dateTime
+			startUtc = _DateTime:ToIsoDate(),
+			endUtc = _DateTime1:ToIsoDate(),
+			startTime = _DateTime,
+			endTime = _DateTime1
 		},
-		createdTime = currentDateTime,
-		updatedTime = currentDateTime,
+		createdTime = _DateTime,
+		updatedTime = _DateTime,
 		eventCategories = {
 			{ category = "challenge", rank = 0 },
 			{ category = "newContent", rank = 1 }

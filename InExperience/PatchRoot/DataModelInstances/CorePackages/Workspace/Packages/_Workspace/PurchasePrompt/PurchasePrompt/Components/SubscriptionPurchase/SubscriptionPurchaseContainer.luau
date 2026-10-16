@@ -1,146 +1,148 @@
-﻿local guiService = game:GetService("GuiService")
-local purchasePrompt = script:FindFirstAncestor("PurchasePrompt")
-local parent = purchasePrompt.Parent
-local roact = require(parent.PurchasePromptDeps).Roact
-local reactModule = require(parent.React)
-local toastRoduxModule = require(parent.ToastRodux)
-local coreGuiService = game:GetService("CoreGui")
-local _ = coreGuiService:WaitForChild("RobloxGui")
-local coreScriptsRootProvider = require(parent.CoreScriptsRoactCommon).CoreScriptsRootProvider
-local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-local focusRoot = focusNavigationUtilsModule.FocusRoot
-local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
-local requestTypeModule = require(purchasePrompt.Enums.RequestType)
-local completeRequestModule = require(purchasePrompt.Thunks.completeRequest)
-local launchSubscriptionPurchaseModule = require(purchasePrompt.Thunks.launchSubscriptionPurchase)
-local sendEventModule = require(purchasePrompt.Thunks.sendEvent)
-local connectToStoreModule = require(purchasePrompt.connectToStore)
-local externalEventConnectionModule = require(purchasePrompt.Components.Connection.ExternalEventConnection)
-local subscriptionPurchaseOverlayModule = require(script.Parent.SubscriptionPurchaseOverlay)
-local setCurrentToastMessage = toastRoduxModule.Actions.SetCurrentToastMessage
-local name = roact.Component:extend(script.Name)
-local getFFlagEnableSubscriptionPurchaseToastModule = require(purchasePrompt.Flags.GetFFlagEnableSubscriptionPurchaseToast)
-local fFlagSetMenuOnPurchasePromptModule = require(purchasePrompt.Flags.FFlagSetMenuOnPurchasePrompt)
+﻿local GuiService = game:GetService("GuiService")
+local PurchasePrompt = script:FindFirstAncestor("PurchasePrompt")
+local Parent = PurchasePrompt.Parent
+local Roact = require(Parent.PurchasePromptDeps).Roact
+local ReactModule = require(Parent.React)
+local CoreGui = game:GetService("CoreGui")
+local _ = CoreGui:WaitForChild("RobloxGui")
+local CoreScriptsRootProvider = require(Parent.CoreScriptsRoactCommon).CoreScriptsRootProvider
+local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
+local FocusRoot = FocusNavigationUtilsModule.FocusRoot
+local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
+local RequestTypeModule = require(PurchasePrompt.Enums.RequestType)
+local CompleteRequestModule = require(PurchasePrompt.Thunks.completeRequest)
+local LaunchSubscriptionPurchaseModule = require(PurchasePrompt.Thunks.launchSubscriptionPurchase)
+local SendEventModule = require(PurchasePrompt.Thunks.sendEvent)
+local ConnectToStoreModule = require(PurchasePrompt.connectToStore)
+local ExternalEventConnectionModule = require(PurchasePrompt.Components.Connection.ExternalEventConnection)
+local SubscriptionPurchaseOverlayModule = require(script.Parent.SubscriptionPurchaseOverlay)
+local SetCurrentToastMessageFunction = require(Parent.ToastRodux).Actions.SetCurrentToastMessage
+local ExtendResult = Roact.Component:extend(script.Name)
+local GetFFlagEnableSubscriptionPurchaseToastModule = require(PurchasePrompt.Flags.GetFFlagEnableSubscriptionPurchaseToast)
+local FFlagSetMenuOnPurchasePromptModule = require(PurchasePrompt.Flags.FFlagSetMenuOnPurchasePrompt)
 
-function name.init(p1)
+function ExtendResult.init(p1) --[[ Line: 34 ]]
 	p1.state = { screenSize = Vector2.new(0, 0) }
 	
-	function p0.changeScreenSize(p2)
-		-- upvalues: p1 (ref)
-		if p1.state.screenSize ~= p2.AbsoluteSize then
-			p1:setState({ screenSize = p2.AbsoluteSize })
+	function p1.changeScreenSize(Frame: Frame) --[[ Line: 39 ]]
+		-- upvalues: p1 (copy)
+		if p1.state.screenSize ~= Frame.AbsoluteSize then
+			p1:setState({ screenSize = Frame.AbsoluteSize })
 		end
 	end
 	
 	p1.savedSelectedCoreObject = nil
 	
-	function p0.endPurchase()
-		-- upvalues: p1 (ref)
+	function p1.endPurchase() --[[ Line: 47 ]]
+		-- upvalues: p1 (copy)
 		p1:restoreSelectedObject()
 		p1.props.completeRequest()
 	end
 end
 
-function name.saveSelectedObject(p1)
-	-- upvalues: guiService (ref)
-	p1.savedSelectedCoreObject = guiService.SelectedCoreObject
-	guiService.SelectedCoreObject = nil
+function ExtendResult.saveSelectedObject(p1) --[[ Line: 53 ]]
+	-- upvalues: GuiService (copy)
+	p1.savedSelectedCoreObject = GuiService.SelectedCoreObject
+	GuiService.SelectedCoreObject = nil
 end
 
-function name.restoreSelectedObject(p1)
-	-- upvalues: coreGuiService (ref), guiService (ref)
-	if p1.savedSelectedCoreObject == nil or p1.savedSelectedCoreObject:IsDescendantOf(coreGuiService) then
-		guiService.SelectedCoreObject = p1.savedSelectedCoreObject
+function ExtendResult.restoreSelectedObject(p1) --[[ Line: 58 ]]
+	-- upvalues: CoreGui (copy), GuiService (copy)
+	if p1.savedSelectedCoreObject == nil or p1.savedSelectedCoreObject:IsDescendantOf(CoreGui) then
+		GuiService.SelectedCoreObject = p1.savedSelectedCoreObject
 	end
 end
 
-function name.createElement(p1)
-	-- upvalues: roact (ref), subscriptionPurchaseOverlayModule (ref), externalEventConnectionModule (ref), guiService (ref), fFlagSetMenuOnPurchasePromptModule (ref)
-	local props = p1.props
-	local state = p1.state
-	p1:saveSelectedObject()
-	local primaryPaymentProviderType = nil
-	local var1 = nil
-	local subscriptionPurchaseInfo = props.subscriptionPurchaseInfo
+function ExtendResult.createElement(CoreScriptsRootProvider) --[[ Line: 65 ]]
+	-- upvalues: Roact (copy), SubscriptionPurchaseOverlayModule (copy), ExternalEventConnectionModule (copy), GuiService (copy), FFlagSetMenuOnPurchasePromptModule (copy)
+	local Props = CoreScriptsRootProvider.props
+	local State = CoreScriptsRootProvider.state
+	CoreScriptsRootProvider:saveSelectedObject()
+	local PrimaryPaymentProviderType = nil
+	local AllPaymentProviderType = nil
+	local SubscriptionPurchaseInfo = Props.subscriptionPurchaseInfo
 	
-	if subscriptionPurchaseInfo ~= nil then
-		primaryPaymentProviderType = subscriptionPurchaseInfo.PrimaryPaymentProviderType
-		var1 = if subscriptionPurchaseInfo.AllPaymentProviderTypes then subscriptionPurchaseInfo.AllPaymentProviderTypes[2] else nil
+	if SubscriptionPurchaseInfo ~= nil then
+		PrimaryPaymentProviderType = SubscriptionPurchaseInfo.PrimaryPaymentProviderType
+		AllPaymentProviderType = if SubscriptionPurchaseInfo.AllPaymentProviderTypes then SubscriptionPurchaseInfo.AllPaymentProviderTypes[2] else nil
 	end
-	return roact.createElement("Frame", {
+	return Roact.createElement("Frame", {
 		Size = UDim2.new(1, 0, 1, 0),
-		[roact.Change.AbsoluteSize] = p1.changeScreenSize,
+		[Roact.Change.AbsoluteSize] = CoreScriptsRootProvider.changeScreenSize,
 		BackgroundTransparency = 1
 	}, {
-		Prompt = roact.createElement(subscriptionPurchaseOverlayModule, {
-			screenSize = state.screenSize,
-			promptState = props.promptState,
-			purchaseError = props.purchaseError,
-			economicRestrictionError = props.economicRestrictionError,
-			subscriptionId = props.subscriptionId,
-			name = props.subscriptionPurchaseInfo.Name,
-			subscriptionProviderId = props.subscriptionPurchaseInfo.SubscriptionProviderId,
-			subscriptionProviderName = props.subscriptionPurchaseInfo.SubscriptionProviderName,
-			priceTier = props.subscriptionPurchaseInfo.PriceTier,
-			displayPrice = props.subscriptionPurchaseInfo.DisplayPrice,
-			period = props.subscriptionPurchaseInfo.DisplaySubscriptionPeriod,
-			disclaimerText = props.subscriptionPurchaseInfo.DisclaimerText,
-			description = props.subscriptionPurchaseInfo.Description,
-			itemIcon = props.subscriptionPurchaseInfo.ImageUrl,
-			primaryPaymentMethod = primaryPaymentProviderType,
-			secondaryPaymentMethod = var1,
-			isGamepadEnabled = props.isGamepadEnabled,
-			isTestingMode = props.subscriptionPurchaseInfo.IsTestingMode,
-			promptSubscriptionPurchase = props.promptSubscriptionPurchase,
-			endPurchase = p1.endPurchase,
-			onAnalyticEvent = props.onAnalyticEvent,
-			setCurrentToastMessage = props.setCurrentToastMessage
+		Prompt = Roact.createElement(SubscriptionPurchaseOverlayModule, {
+			screenSize = State.screenSize,
+			promptState = Props.promptState,
+			purchaseError = Props.purchaseError,
+			economicRestrictionError = Props.economicRestrictionError,
+			subscriptionId = Props.subscriptionId,
+			name = Props.subscriptionPurchaseInfo.Name,
+			subscriptionProviderId = Props.subscriptionPurchaseInfo.SubscriptionProviderId,
+			subscriptionProviderName = Props.subscriptionPurchaseInfo.SubscriptionProviderName,
+			priceTier = Props.subscriptionPurchaseInfo.PriceTier,
+			displayPrice = Props.subscriptionPurchaseInfo.DisplayPrice,
+			period = Props.subscriptionPurchaseInfo.DisplaySubscriptionPeriod,
+			disclaimerText = Props.subscriptionPurchaseInfo.DisclaimerText,
+			description = Props.subscriptionPurchaseInfo.Description,
+			itemIcon = Props.subscriptionPurchaseInfo.ImageUrl,
+			primaryPaymentMethod = PrimaryPaymentProviderType,
+			secondaryPaymentMethod = AllPaymentProviderType,
+			isGamepadEnabled = Props.isGamepadEnabled,
+			isTestingMode = Props.subscriptionPurchaseInfo.IsTestingMode,
+			promptSubscriptionPurchase = Props.promptSubscriptionPurchase,
+			endPurchase = CoreScriptsRootProvider.endPurchase,
+			onAnalyticEvent = Props.onAnalyticEvent,
+			setCurrentToastMessage = Props.setCurrentToastMessage
 		}),
-		ModalFix = roact.createElement("ImageButton", {
+		ModalFix = Roact.createElement("ImageButton", {
 			BackgroundTransparency = 0,
 			Modal = true,
 			Size = UDim2.new(0, 0, 0, 0)
 		}),
-		OnCoreGuiMenuOpened = roact.createElement(externalEventConnectionModule, {
-			event = guiService.MenuOpened,
-			callback = function()
-				-- upvalues: fFlagSetMenuOnPurchasePromptModule (copy), p1 (ref), props (ref)
-				if fFlagSetMenuOnPurchasePromptModule and p1.menuOpenedBySelf then
-					p1.menuOpenedBySelf = false
+		OnCoreGuiMenuOpened = Roact.createElement(ExternalEventConnectionModule, {
+			event = GuiService.MenuOpened,
+			callback = function() --[[ Line: 121 ]]
+				-- upvalues: FFlagSetMenuOnPurchasePromptModule (upval), CoreScriptsRootProvider (copy), Props (copy)
+				if FFlagSetMenuOnPurchasePromptModule and CoreScriptsRootProvider.menuOpenedBySelf then
+					CoreScriptsRootProvider.menuOpenedBySelf = false
 					
 					return
+				else
+					Props.completeRequest()
 				end
-				props.completeRequest()
 			end
 		})
 	})
 end
 
-function name.render(p1)
-	-- upvalues: requestTypeModule (ref), fFlagSetMenuOnPurchasePromptModule (ref), guiService (ref), roact (ref), coreScriptsRootProvider (ref), reactModule (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref)
-	if p1.props.requestType == requestTypeModule.Subscription then
-		local var1 = p1:createElement()
+function ExtendResult.render(p1) --[[ Line: 132 ]]
+	-- upvalues: RequestTypeModule (copy), FFlagSetMenuOnPurchasePromptModule (copy), GuiService (copy), Roact (copy), CoreScriptsRootProvider (copy), ReactModule (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy)
+	if p1.props.requestType == RequestTypeModule.Subscription then
+		local Element = p1:createElement()
 		
-		if fFlagSetMenuOnPurchasePromptModule then
-			if var1 ~= nil then
+		if FFlagSetMenuOnPurchasePromptModule then
+			if Element ~= nil then
 				p1.menuOpenedBySelf = true
 			end
-			guiService:SetMenuIsOpen(var1 ~= nil, "SubscriptionUpsellContainer")
+			GuiService:SetMenuIsOpen(Element ~= nil, "SubscriptionUpsellContainer")
 		end
-		return roact.createElement(coreScriptsRootProvider, {}, {
-			FocusNavigationCoreScriptsWrapper = reactModule.createElement(focusRoot, {
+		return Roact.createElement(CoreScriptsRootProvider, {}, {
+			FocusNavigationCoreScriptsWrapper = ReactModule.createElement(FocusRoot, {
 				isIsolated = true,
 				isAutoFocusRoot = true,
-				surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.CentralOverlay
-			}, { SubscriptionPurchaseContainer = var1 })
+				surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.CentralOverlay
+			}, { SubscriptionPurchaseContainer = Element })
 		})
-	elseif fFlagSetMenuOnPurchasePromptModule then
-		guiService:SetMenuIsOpen(false, "SubscriptionUpsellContainer")
+	else
+		if FFlagSetMenuOnPurchasePromptModule then
+			GuiService:SetMenuIsOpen(false, "SubscriptionUpsellContainer")
+		end
+		return nil
 	end
-	return nil
 end
 
-return connectToStoreModule(function(p1)
+return (ConnectToStoreModule(function(p1) --[[ Line: 159 ]]
 	return {
 		requestType = p1.promptRequest.requestType,
 		promptState = p1.promptState,
@@ -150,24 +152,24 @@ return connectToStoreModule(function(p1)
 		subscriptionId = p1.promptRequest.id,
 		isGamepadEnabled = p1.gamepadEnabled
 	}
-end, function(p1)
-	-- upvalues: launchSubscriptionPurchaseModule (ref), completeRequestModule (ref), sendEventModule (ref), getFFlagEnableSubscriptionPurchaseToastModule (ref), setCurrentToastMessage (ref)
+end, function(Callback) --[[ Line: 171 ]]
+	-- upvalues: LaunchSubscriptionPurchaseModule (copy), CompleteRequestModule (copy), SendEventModule (copy), GetFFlagEnableSubscriptionPurchaseToastModule (copy), SetCurrentToastMessageFunction (copy)
 	return {
-		promptSubscriptionPurchase = function(p2)
-			-- upvalues: p1 (ref), launchSubscriptionPurchaseModule (copy)
-			return p1(launchSubscriptionPurchaseModule(p2))
+		promptSubscriptionPurchase = function(p1) --[[ Line: 173 ]]
+			-- upvalues: Callback (copy), LaunchSubscriptionPurchaseModule (upval)
+			return Callback(LaunchSubscriptionPurchaseModule(p1))
 		end,
-		completeRequest = function()
-			-- upvalues: p1 (ref), completeRequestModule (copy)
-			return p1(completeRequestModule())
+		completeRequest = function() --[[ Line: 176 ]]
+			-- upvalues: Callback (copy), CompleteRequestModule (upval)
+			return Callback(CompleteRequestModule())
 		end,
-		onAnalyticEvent = function(p2, p3)
-			-- upvalues: p1 (ref), sendEventModule (copy)
-			return p1(sendEventModule(p2, p3))
+		onAnalyticEvent = function(p1, p2) --[[ Line: 179 ]]
+			-- upvalues: Callback (copy), SendEventModule (upval)
+			return Callback(SendEventModule(p1, p2))
 		end,
-		setCurrentToastMessage = if getFFlagEnableSubscriptionPurchaseToastModule() then function(p2)
-			-- upvalues: p1 (ref), setCurrentToastMessage (copy)
-			p1(setCurrentToastMessage(p2))
+		setCurrentToastMessage = if GetFFlagEnableSubscriptionPurchaseToastModule() then function(p1) --[[ Line: 183 ]]
+			-- upvalues: Callback (copy), SetCurrentToastMessageFunction (upval)
+			Callback(SetCurrentToastMessageFunction(p1))
 		end else nil
 	}
-end)(name)
+end)(ExtendResult))

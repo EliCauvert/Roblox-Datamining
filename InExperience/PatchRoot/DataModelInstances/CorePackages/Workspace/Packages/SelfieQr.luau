@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.SelfieQr.SelfieQr)
+﻿return (require(script.Parent._Workspace.SelfieQr.SelfieQr))

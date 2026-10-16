@@ -1,25 +1,24 @@
-﻿local avatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
-local parent = avatarExperienceCatalog.Parent
-local url = require(parent.Http).Url
-local _ = require(parent.LuauPolyfill)
-local normalizeWidgetListInfoResponseToWidgetListInfoModule = require(script.Parent.normalizeWidgetListInfoResponseToWidgetListInfo)
-local constantsModule = require(script.Parent.constants)
-local _ = require(avatarExperienceCatalog.Models.WidgetListInfo)
-local makeAXResponseHandlerModule = require(avatarExperienceCatalog.Utils.makeAXResponseHandler)
-local _ = require(parent.AvatarExperienceCommon)
-local fFlagAXAvatarTabLooksYouMayAlsoLike = require(parent.AvatarExperienceFlags).FFlagAXAvatarTabLooksYouMayAlsoLike
+﻿local AvatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
+local Parent = AvatarExperienceCatalog.Parent
+local Url = require(Parent.Http).Url
+local _ = require(Parent.LuauPolyfill)
+local NormalizeWidgetListInfoResponseToWidgetListInfoModule = require(script.Parent.normalizeWidgetListInfoResponseToWidgetListInfo)
+local ConstantsModule = require(script.Parent.constants)
+local _ = require(AvatarExperienceCatalog.Models.WidgetListInfo)
+local MakeAXResponseHandlerModule = require(AvatarExperienceCatalog.Utils.makeAXResponseHandler)
+local _ = require(Parent.AvatarExperienceCommon)
+local FFlagAXAvatarTabLooksYouMayAlsoLike = require(Parent.AvatarExperienceFlags).FFlagAXAvatarTabLooksYouMayAlsoLike
 
-return function(p1, p2, p3, p4, p5)
-	-- upvalues: fFlagAXAvatarTabLooksYouMayAlsoLike (ref), url (ref), makeAXResponseHandlerModule (ref), normalizeWidgetListInfoResponseToWidgetListInfoModule (ref), constantsModule (ref)
-	local var1 = if p4 and p4.LooksWidgetContextForOrganicContent then p4.LooksWidgetContextForOrganicContent else "avatarTab"
+return function(Callback, RequestId, Query, p1, p2) --[[ Line: 22 | Named "getLooksFromWidgetListInfo" ]]
+	-- upvalues: FFlagAXAvatarTabLooksYouMayAlsoLike (copy), Url (copy), MakeAXResponseHandlerModule (copy), NormalizeWidgetListInfoResponseToWidgetListInfoModule (copy), ConstantsModule (copy)
+	local GET, GET2 = Callback(`{Url.APIS_URL}marketplace-widgets/v1/widgets?{Url:makeQueryString({
+		query = Query,
+		context = if p1 and p1.LooksWidgetContextForOrganicContent then if FFlagAXAvatarTabLooksYouMayAlsoLike and p2 then p2 else p1.LooksWidgetContextForOrganicContent elseif FFlagAXAvatarTabLooksYouMayAlsoLike and p2 then p2 else "avatarTab",
+		requestId = RequestId
+	})}`, "GET")
 	
-	if fFlagAXAvatarTabLooksYouMayAlsoLike and p5 then
-		var1 = p5
-	end
-	local var2, var3 = p1(`{url.APIS_URL}marketplace-widgets/v1/widgets?{url:makeQueryString({ query = p3, context = var1, requestId = p2 })}`, "GET")
-	
-	return makeAXResponseHandlerModule(var2, normalizeWidgetListInfoResponseToWidgetListInfoModule, {
-		modelMismatchCounter = constantsModule.FETCH_WIDGET_INFO_MODEL_MISMATCH_COUNTER_NAME,
-		latencyCounter = constantsModule.FETCH_WIDGET_INFO_LATENCY_COUNTER_NAME
-	}), var3
+	return MakeAXResponseHandlerModule(GET, NormalizeWidgetListInfoResponseToWidgetListInfoModule, {
+		modelMismatchCounter = ConstantsModule.FETCH_WIDGET_INFO_MODEL_MISMATCH_COUNTER_NAME,
+		latencyCounter = ConstantsModule.FETCH_WIDGET_INFO_LATENCY_COUNTER_NAME
+	}), GET2
 end

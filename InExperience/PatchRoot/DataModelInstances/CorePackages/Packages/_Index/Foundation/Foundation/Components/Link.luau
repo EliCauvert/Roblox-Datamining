@@ -1,1 +1,1 @@
-﻿return require(script.Link)
+﻿return (require(script.Link))

@@ -1,8 +1,18 @@
-﻿local viewRecyclerRoblox = script:FindFirstAncestor("ViewRecyclerRoblox")
-local _ = require(viewRecyclerRoblox.Parent.ViewRecycler)
-local slotGeometryModule = require(viewRecyclerRoblox.RobloxAdapter.SlotGeometry)
-local t = {
-	createState = function()
+﻿local ViewRecyclerRoblox = script:FindFirstAncestor("ViewRecyclerRoblox")
+local _ = require(ViewRecyclerRoblox.Parent.ViewRecycler)
+local SlotGeometryModule = require(ViewRecyclerRoblox.RobloxAdapter.SlotGeometry)
+
+local function _(State) --[[ Line: 39 | Named "resetAppliedState" ]]
+	State.anchorPointInitialized = false
+	State.position = nil
+	State.size = nil
+	State.automaticSize = nil
+	State.visible = nil
+	State.zIndex = nil
+end
+
+local CanvasItemPlacerModule = {
+	createState = function() --[[ Line: 26 ]]
 		return {
 			unpinnedZIndex = nil,
 			parent = nil,
@@ -14,8 +24,8 @@ local t = {
 			zIndex = nil
 		}
 	end,
-	getGeometry = function(p1, p2, p3, p4, p5, p6)
-		-- upvalues: slotGeometryModule (ref)
+	getGeometry = function(p1, p2, p3, p4, p5: number, p6) --[[ Line: 48 ]]
+		-- upvalues: SlotGeometryModule (copy)
 		if p2.mainAxisOffset ~= nil then
 			p1 = {
 				startOffset = p2.mainAxisOffset,
@@ -23,143 +33,136 @@ local t = {
 			}
 			p5 = 0
 		end
-		local var1, var2 = slotGeometryModule.get(p1, p3, p4, p5)
-		p6 = p6 or {}
-		p6.position = var1
-		p6.size = var2
-		p6.automaticSize = slotGeometryModule.getAutomaticSize(p3, p4)
-		p6.zIndexOffset = p2.zIndex
+		local GetResult, GetResult2 = SlotGeometryModule.get(p1, p3, p4, p5)
+		local P6 = p6 or {}
+		P6.position = GetResult
+		P6.size = GetResult2
+		P6.automaticSize = SlotGeometryModule.getAutomaticSize(p3, p4)
+		P6.zIndexOffset = p2.zIndex
 		
-		return p6
+		return P6
 	end,
-	place = function(p1, p2, p3, p4, p5)
-		local var1 = 0
+	place = function(p1, Parent, State, State1, Visible): number --[[ Line: 72 ]]
+		local Count = 0
 		
-		if p1.Parent ~= p2 or p4.parent ~= p2 then
-			if p1.Parent ~= p2 then
-				p1.Parent = p2
-				var1 += 1
+		if p1.Parent ~= Parent or State1.parent ~= Parent then
+			if p1.Parent ~= Parent then
+				p1.Parent = Parent
+				Count += 1
 			end
-			p4.parent = p2
-			p4.anchorPointInitialized = false
-			p4.position = nil
-			p4.size = nil
-			p4.automaticSize = nil
-			p4.visible = nil
-			p4.zIndex = nil
+			State1.parent = Parent
+			State1.anchorPointInitialized = false
+			State1.position = nil
+			State1.size = nil
+			State1.automaticSize = nil
+			State1.visible = nil
+			State1.zIndex = nil
 		end
-		if not p4.anchorPointInitialized then
+		if not State1.anchorPointInitialized then
 			p1.AnchorPoint = Vector2.zero
-			p4.anchorPointInitialized = true
-			var1 += 1
+			State1.anchorPointInitialized = true
+			Count += 1
 		end
-		if p4.position ~= p3.position then
-			p1.Position = p3.position
-			p4.position = p3.position
-			var1 += 1
+		if State1.position ~= State.position then
+			p1.Position = State.position
+			State1.position = State.position
+			Count += 1
 		end
-		if p4.size ~= p3.size then
-			p1.Size = p3.size
-			p4.size = p3.size
-			var1 += 1
+		if State1.size ~= State.size then
+			p1.Size = State.size
+			State1.size = State.size
+			Count += 1
 		end
-		if p4.automaticSize ~= p3.automaticSize then
-			p1.AutomaticSize = p3.automaticSize
-			p4.automaticSize = p3.automaticSize
-			var1 += 1
+		if State1.automaticSize ~= State.automaticSize then
+			p1.AutomaticSize = State.automaticSize
+			State1.automaticSize = State.automaticSize
+			Count += 1
 		end
-		if p4.visible ~= p5 then
-			p1.Visible = p5
-			p4.visible = p5
-			var1 += 1
+		if State1.visible ~= Visible then
+			p1.Visible = Visible
+			State1.visible = Visible
+			Count += 1
 		end
-		local unpinnedZIndex = nil
-		local zIndexOffset = p3.zIndexOffset
+		local ZIndex = nil
+		local ZIndexOffset = State.zIndexOffset
 		
-		if zIndexOffset ~= nil then
-			if p4.unpinnedZIndex == nil then
-				p4.unpinnedZIndex = p1.ZIndex
+		if ZIndexOffset == nil then
+			if State1.unpinnedZIndex ~= nil then
+				ZIndex = State1.unpinnedZIndex
+				State1.unpinnedZIndex = nil
 			end
-			unpinnedZIndex = p4.unpinnedZIndex + zIndexOffset
-		elseif p4.unpinnedZIndex ~= nil then
-			unpinnedZIndex = p4.unpinnedZIndex
-			p4.unpinnedZIndex = nil
-		end
-		if unpinnedZIndex == nil or p4.zIndex == unpinnedZIndex then
-			if unpinnedZIndex == nil then
-				p4.zIndex = p1.ZIndex
-			end
-			return var1
 		else
-			p1.ZIndex = unpinnedZIndex
-			p4.zIndex = unpinnedZIndex
-			var1 += 1
+			if State1.unpinnedZIndex == nil then
+				State1.unpinnedZIndex = p1.ZIndex
+			end
+			ZIndex = State1.unpinnedZIndex + ZIndexOffset
+		end
+		if ZIndex == nil or State1.zIndex == ZIndex then
+			if ZIndex == nil then
+				State1.zIndex = p1.ZIndex
+			end
+			return Count
+		else
+			p1.ZIndex = ZIndex
+			State1.zIndex = ZIndex
+			Count += 1
 			
-			return var1
+			return Count
 		end
 	end,
-	hide = function(p1, p2)
+	hide = function(p1, p2) --[[ Line: 135 ]]
 		if p2.visible ~= false then
 			p1.Visible = false
 			p2.visible = false
 		end
 	end,
-	detach = function(p1, p2)
-		local var1 = 0
+	detach = function(Frame, State): number --[[ Line: 142 ]]
+		local Count = 0
 		
-		if p2.unpinnedZIndex ~= nil then
-			if p1.ZIndex ~= p2.unpinnedZIndex then
-				p1.ZIndex = p2.unpinnedZIndex
-				var1 += 1
+		if State.unpinnedZIndex ~= nil then
+			if Frame.ZIndex ~= State.unpinnedZIndex then
+				Frame.ZIndex = State.unpinnedZIndex
+				Count += 1
 			end
-			p2.unpinnedZIndex = nil
+			State.unpinnedZIndex = nil
 		end
-		if p1.Visible then
-			p1.Visible = false
-			var1 += 1
+		if Frame.Visible then
+			Frame.Visible = false
+			Count += 1
 		end
-		if p1.Parent ~= nil then
-			p1.Parent = nil
-			var1 += 1
+		if Frame.Parent ~= nil then
+			Frame.Parent = nil
+			Count += 1
 		end
-		p2.parent = nil
-		p2.anchorPointInitialized = false
-		p2.position = nil
-		p2.size = nil
-		p2.automaticSize = nil
-		p2.visible = nil
-		p2.zIndex = nil
+		State.parent = nil
+		State.anchorPointInitialized = false
+		State.position = nil
+		State.size = nil
+		State.automaticSize = nil
+		State.visible = nil
+		State.zIndex = nil
 		
-		return var1
+		return Count
 	end
 }
 
-local function _(value)
-	value.anchorPointInitialized = false
-	value.position = nil
-	value.size = nil
-	value.automaticSize = nil
-	value.visible = nil
-	value.zIndex = nil
-end
-
-function t.detachForTransfer(p1, p2)
-	-- upvalues: t (ref)
-	local var1 = t.detach(p1, p2)
+function CanvasItemPlacerModule.detachForTransfer(Frame, p1) --[[ Line: 164 ]]
+	-- upvalues: CanvasItemPlacerModule (copy)
+	local DetachResult = CanvasItemPlacerModule.detach(Frame, p1)
 	
-	if p1.Position ~= UDim2.new() then
-		p1.Position = UDim2.new()
-		var1 += 1
+	if Frame.Position ~= UDim2.new() then
+		Frame.Position = UDim2.new()
+		DetachResult += 1
 	end
-	if p1.Size ~= UDim2.new() then
-		p1.Size = UDim2.new()
-		var1 += 1
+	if Frame.Size ~= UDim2.new() then
+		Frame.Size = UDim2.new()
+		DetachResult += 1
 	end
-	if p1.AutomaticSize ~= Enum.AutomaticSize.None then
-		p1.AutomaticSize = Enum.AutomaticSize.None
-		var1 += 1
+	if Frame.AutomaticSize ~= Enum.AutomaticSize.None then
+		Frame.AutomaticSize = Enum.AutomaticSize.None
+		DetachResult += 1
 	end
-	return var1
+	return DetachResult
 end
 
-return t
+return CanvasItemPlacerModule

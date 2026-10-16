@@ -2,21 +2,21 @@
 local _ = require(script.Parent.LibraryTypes)
 
 return {
-	fromItems = function(p1, p2)
-		local t = {}
+	fromItems = function(List, p1) --[[ Line: 13 ]]
+		local List1 = {}
 		
-		for i, v in { "Model", "Image", "Sound" } do
-			for i_1, v_1 in p1 do
-				if v_1.kind == v then
-					table.insert(t, {
-						key = if v == "Model" then "Models" elseif v == "Image" then "Images" else "Sounds",
-						title = if v == "Model" then p2.model elseif v == "Image" then p2.image else p2.sound,
-						itemKind = v_1.kind
+		for _, value in { "Model", "Image", "Sound" } do
+			for _, value1 in List do
+				if value1.kind == value then
+					table.insert(List1, {
+						key = if value == "Model" then "Models" elseif value == "Image" then "Images" else "Sounds",
+						title = if value == "Model" then p1.model elseif value == "Image" then p1.image else p1.sound,
+						itemKind = value1.kind
 					})
-					continue
+					break
 				end
 			end
 		end
-		return t
+		return List1
 	end
 }

@@ -1,29 +1,29 @@
-﻿local itemKeyRegistryModule = require(script.Parent.ItemKeyRegistry)
+﻿local ItemKeyRegistryModule = require(script.Parent.ItemKeyRegistry)
 
-local function validateUnique(p1, p2)
+local function validateUnique(DKeys, p1) --[[ Line: 5 ]]
 	local t = {}
-	local var1 = `{p2}: keys must be strings`
+	local Message: string = `{p1}: keys must be strings`
 	
-	for i, v in p1 do
-		assert(type(v) == "string", var1)
+	for _, dKey in DKeys do
+		assert(type(dKey) == "string", Message)
 		
-		if t[v] ~= nil then
-			assert(false, `{p2}: duplicate key "{v}"`)
+		if t[dKey] ~= nil then
+			assert(false, `{p1}: duplicate key "{dKey}"`)
 		end
-		t[v] = true
+		t[dKey] = true
 	end
 	return t
 end
 
 return {
 	validateUnique = validateUnique,
-	keysFor = function(p3, p4)
-		-- upvalues: itemKeyRegistryModule (ref), validateUnique (ref)
-		local list = table.create(#p3)
+	keysFor = function(List, Callback) --[[ Line: 18 ]]
+		-- upvalues: ItemKeyRegistryModule (copy), validateUnique (copy)
+		local Buffer = table.create(#List)
 		
-		for i, v in p3 do
-			list[i] = if p4 ~= nil then itemKeyRegistryModule.generatedKey() else p4(v, i)
+		for i, value in List do
+			Buffer[i] = if Callback == nil then ItemKeyRegistryModule.generatedKey() else Callback(value, i)
 		end
-		return list, validateUnique(list, "DataSource")
+		return Buffer, (validateUnique(Buffer, "DataSource"))
 	end
 }

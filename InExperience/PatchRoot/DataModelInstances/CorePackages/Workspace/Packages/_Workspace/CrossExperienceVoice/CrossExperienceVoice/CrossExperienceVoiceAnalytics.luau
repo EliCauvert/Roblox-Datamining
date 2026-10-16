@@ -1,86 +1,88 @@
-﻿local crossExperienceVoice = script:FindFirstAncestor("CrossExperienceVoice")
-local dependenciesModule = require(crossExperienceVoice.dependencies)
-local playersService = game:GetService("Players")
-local analyticsModule = require(crossExperienceVoice.Analytics)
-local flagsModule = require(crossExperienceVoice.Flags)
-local loggingProtocol = dependenciesModule.LoggingProtocol
-local crossExperience = dependenciesModule.CrossExperience
-local getMemStorageKey = crossExperience.Utils.getMemStorageKey
-local t = {}
-t.__index = t
-local CEV_JOIN_ATTEMPT_ID_KEY = crossExperience.Constants.CEV_JOIN_ATTEMPT_ID_KEY
+﻿local CrossExperienceVoice = script:FindFirstAncestor("CrossExperienceVoice")
+local DependenciesModule = require(CrossExperienceVoice.dependencies)
+local Players = game:GetService("Players")
+local AnalyticsModule = require(CrossExperienceVoice.Analytics)
+local FlagsModule = require(CrossExperienceVoice.Flags)
+local LoggingProtocol = DependenciesModule.LoggingProtocol
+local CrossExperience = DependenciesModule.CrossExperience
+local GetMemStorageKeyFunction = CrossExperience.Utils.getMemStorageKey
+local CrossExperienceVoiceAnalyticsModule = {}
+CrossExperienceVoiceAnalyticsModule.__index = CrossExperienceVoiceAnalyticsModule
+local CEVJOINATTEMPTIDKEY = CrossExperience.Constants.CEV_JOIN_ATTEMPT_ID_KEY
 
-function t.new()
-	-- upvalues: analyticsModule (ref), t (ref)
-	local t_1 = {
+function CrossExperienceVoiceAnalyticsModule.new() --[[ Line: 82 ]]
+	-- upvalues: AnalyticsModule (copy), CrossExperienceVoiceAnalyticsModule (copy)
+	local config = {
 		previousStatus = nil,
 		isInitialized = false,
 		eventManager = nil,
 		connections = {},
-		analytics = analyticsModule.Analytics()
+		analytics = AnalyticsModule.Analytics()
 	}
-	setmetatable(t_1, t)
+	setmetatable(config, CrossExperienceVoiceAnalyticsModule)
 	
-	return t_1
+	return config
 end
 
-function t:initialize(p1)
-	self.eventManager = p1
+function CrossExperienceVoiceAnalyticsModule:initialize(EventManager) --[[ Line: 94 ]]
+	self.eventManager = EventManager
 	self.isInitialized = true
 end
 
-function t:fireCEVAnalyticsEvent(p1, p2)
-	-- upvalues: getMemStorageKey (ref), CEV_JOIN_ATTEMPT_ID_KEY (ref)
-	p2 = p2 or {}
-	p2.cevJoinAttemptId = getMemStorageKey(CEV_JOIN_ATTEMPT_ID_KEY)
-	p2.clientTimeStamp = os.time()
-	self.analytics.fireAnalyticsEvent(p1, p2)
+function CrossExperienceVoiceAnalyticsModule:fireCEVAnalyticsEvent(PartyVoiceStateChanged, p1) --[[ Line: 99 ]]
+	-- upvalues: GetMemStorageKeyFunction (copy), CEVJOINATTEMPTIDKEY (copy)
+	local P4 = p1 or {}
+	P4.cevJoinAttemptId = GetMemStorageKeyFunction(CEVJOINATTEMPTIDKEY)
+	P4.clientTimeStamp = os.time()
+	self.analytics.fireAnalyticsEvent(PartyVoiceStateChanged, P4)
 end
 
-function t:logPartyVoiceTimeout(p1)
-	-- upvalues: analyticsModule (ref), crossExperience (ref), playersService (ref)
+function CrossExperienceVoiceAnalyticsModule:logPartyVoiceTimeout(p1) --[[ Line: 106 ]]
+	-- upvalues: AnalyticsModule (copy), CrossExperience (copy), Players (copy)
 	if self.isInitialized then
-		self:fireCEVAnalyticsEvent(analyticsModule.EventNames.PartyVoiceStateChanged, {
+		self:fireCEVAnalyticsEvent(AnalyticsModule.EventNames.PartyVoiceStateChanged, {
 			partyId = p1 or "",
-			status = crossExperience.Constants.VOICE_STATUS.ERROR_RCC_TIMEOUT,
+			status = CrossExperience.Constants.VOICE_STATUS.ERROR_RCC_TIMEOUT,
 			previousStatus = self.previousStatus or "",
-			userId = if playersService.LocalPlayer then playersService.LocalPlayer.UserId else 0
+			userId = if Players.LocalPlayer then Players.LocalPlayer.UserId else 0
 		})
 		
 		return
 	end
 end
 
-function t:logPartyVoiceStatusChanged(p1, p2, p3)
-	-- upvalues: flagsModule (ref), analyticsModule (ref)
+function CrossExperienceVoiceAnalyticsModule:logPartyVoiceStatusChanged(p1, p2, p3) --[[ Line: 119 ]]
+	-- upvalues: FlagsModule (copy), AnalyticsModule (copy)
 	if not self.isInitialized then return end
 	if self.previousStatus ~= p1.status then
-		if not flagsModule.FFlagEnablePartyVoiceStatusChangedDetailAnalytics then
-			self:fireCEVAnalyticsEvent(analyticsModule.EventNames.PartyVoiceStateChanged, {
-				partyId = p2 or "",
-				status = p1.status,
-				previousStatus = self.previousStatus or "",
-				voiceChannelId = p1.voiceChannelId,
-				voiceSessionId = p1.voiceSessionId,
-				userId = p1.userId
-			})
-		elseif flagsModule.FFlagPartyVoiceLogActiveDM then
-			self:fireCEVAnalyticsEvent(analyticsModule.EventNames.PartyVoiceStateChanged, {
-				partyId = p2 or "",
-				status = p1.status,
-				detail = p1.detail or "",
-				previousStatus = self.previousStatus or "",
-				voiceChannelId = p1.voiceChannelId,
-				voiceSessionId = p1.voiceSessionId,
-				userId = p1.userId,
-				activeDm = p3 or ""
-			})
+		if FlagsModule.FFlagEnablePartyVoiceStatusChangedDetailAnalytics then
+			if FlagsModule.FFlagPartyVoiceLogActiveDM then
+				self:fireCEVAnalyticsEvent(AnalyticsModule.EventNames.PartyVoiceStateChanged, {
+					partyId = p2 or "",
+					status = p1.status,
+					detail = p1.detail or "",
+					previousStatus = self.previousStatus or "",
+					voiceChannelId = p1.voiceChannelId,
+					voiceSessionId = p1.voiceSessionId,
+					userId = p1.userId,
+					activeDm = p3 or ""
+				})
+			else
+				self:fireCEVAnalyticsEvent(AnalyticsModule.EventNames.PartyVoiceStateChanged, {
+					activeDm = "",
+					partyId = p2 or "",
+					status = p1.status,
+					detail = p1.detail or "",
+					previousStatus = self.previousStatus or "",
+					voiceChannelId = p1.voiceChannelId,
+					voiceSessionId = p1.voiceSessionId,
+					userId = p1.userId
+				})
+			end
 		else
-			self:fireCEVAnalyticsEvent(analyticsModule.EventNames.PartyVoiceStateChanged, {
-				activeDm = "",
+			self:fireCEVAnalyticsEvent(AnalyticsModule.EventNames.PartyVoiceStateChanged, {
 				partyId = p2 or "",
 				status = p1.status,
-				detail = p1.detail or "",
 				previousStatus = self.previousStatus or "",
 				voiceChannelId = p1.voiceChannelId,
 				voiceSessionId = p1.voiceSessionId,
@@ -91,11 +93,11 @@ function t:logPartyVoiceStatusChanged(p1, p2, p3)
 	self.previousStatus = p1.status
 end
 
-function t:logPartyVoiceConnectedState(p1, p2, p3)
-	-- upvalues: flagsModule (ref), analyticsModule (ref)
+function CrossExperienceVoiceAnalyticsModule:logPartyVoiceConnectedState(p1, p2, p3) --[[ Line: 171 ]]
+	-- upvalues: FlagsModule (copy), AnalyticsModule (copy)
 	if not self.isInitialized then return end
-	if flagsModule.FFlagPartyVoiceLogActiveDM then
-		self:fireCEVAnalyticsEvent(analyticsModule.EventNames.PartyVoiceConnectedParticipantsOnJoin, {
+	if FlagsModule.FFlagPartyVoiceLogActiveDM then
+		self:fireCEVAnalyticsEvent(AnalyticsModule.EventNames.PartyVoiceConnectedParticipantsOnJoin, {
 			userId = if p1.userId then p1.userId else 0,
 			partyId = p2 or "",
 			status = if p1.status then p1.status else "",
@@ -107,7 +109,7 @@ function t:logPartyVoiceConnectedState(p1, p2, p3)
 			activeDm = p3 or ""
 		})
 	else
-		self:fireCEVAnalyticsEvent(analyticsModule.EventNames.PartyVoiceConnectedParticipantsOnJoin, {
+		self:fireCEVAnalyticsEvent(AnalyticsModule.EventNames.PartyVoiceConnectedParticipantsOnJoin, {
 			activeDm = "",
 			userId = if p1.userId then p1.userId else 0,
 			partyId = p2 or "",
@@ -122,11 +124,11 @@ function t:logPartyVoiceConnectedState(p1, p2, p3)
 	self:logLaunchFlowEndEvent()
 end
 
-function t:logPartyVoiceJoinAttempt(p1)
-	-- upvalues: flagsModule (ref), analyticsModule (ref)
+function CrossExperienceVoiceAnalyticsModule:logPartyVoiceJoinAttempt(p1) --[[ Line: 209 ]]
+	-- upvalues: FlagsModule (copy), AnalyticsModule (copy)
 	if not self.isInitialized then return end
-	if flagsModule.FFlagPartyVoiceLogActiveDM then
-		self:fireCEVAnalyticsEvent(analyticsModule.EventNames.PartyVoiceJoinAttempt, {
+	if FlagsModule.FFlagPartyVoiceLogActiveDM then
+		self:fireCEVAnalyticsEvent(AnalyticsModule.EventNames.PartyVoiceJoinAttempt, {
 			userId = if p1.userId then p1.userId else 0,
 			partyId = if p1.partyId then p1.partyId else "",
 			targetPlaceId = if p1.targetPlaceId then p1.targetPlaceId else 0,
@@ -134,7 +136,7 @@ function t:logPartyVoiceJoinAttempt(p1)
 			activeDm = if p1.activeDm then p1.activeDm else ""
 		})
 	else
-		self:fireCEVAnalyticsEvent(analyticsModule.EventNames.PartyVoiceJoinAttempt, {
+		self:fireCEVAnalyticsEvent(AnalyticsModule.EventNames.PartyVoiceJoinAttempt, {
 			activeDm = "",
 			userId = if p1.userId then p1.userId else 0,
 			partyId = if p1.partyId then p1.partyId else "",
@@ -145,91 +147,94 @@ function t:logPartyVoiceJoinAttempt(p1)
 	self:logLaunchFlowBeginEvent()
 end
 
-function t.logLaunchFlowBeginEvent(_)
-	-- upvalues: loggingProtocol (ref)
-	loggingProtocol.default:logEvent("party_voice_launch_flow_begin")
+function CrossExperienceVoiceAnalyticsModule:logLaunchFlowBeginEvent() --[[ Line: 234 ]]
+	-- upvalues: LoggingProtocol (copy)
+	LoggingProtocol.default:logEvent("party_voice_launch_flow_begin")
 end
 
-function t.logLaunchFlowEndEvent(_)
-	-- upvalues: loggingProtocol (ref)
-	loggingProtocol.default:logEvent("party_voice_launch_flow_end")
+function CrossExperienceVoiceAnalyticsModule:logLaunchFlowEndEvent() --[[ Line: 238 ]]
+	-- upvalues: LoggingProtocol (copy)
+	LoggingProtocol.default:logEvent("party_voice_launch_flow_end")
 end
 
-function t:logPartyVoiceJoinFailure(p1, p2, p3)
-	-- upvalues: analyticsModule (ref)
+function CrossExperienceVoiceAnalyticsModule:logPartyVoiceJoinFailure(PartyId, p1, p2) --[[ Line: 242 ]]
+	-- upvalues: AnalyticsModule (copy)
 	if self.isInitialized then
-		self:fireCEVAnalyticsEvent(analyticsModule.EventNames.PartyVoiceJoinFailure, {
-			partyId = p1,
-			errorMessage = p2 or "",
-			userId = p3 or 0
+		self:fireCEVAnalyticsEvent(AnalyticsModule.EventNames.PartyVoiceJoinFailure, {
+			partyId = PartyId,
+			errorMessage = p1 or "",
+			userId = p2 or 0
 		})
 		
 		return
 	end
 end
 
-function t:logPartyVoiceUnmuteParticipant(p1, p2)
-	-- upvalues: analyticsModule (ref)
+function CrossExperienceVoiceAnalyticsModule:logPartyVoiceUnmuteParticipant(PartyId, p1) --[[ Line: 254 ]]
+	-- upvalues: AnalyticsModule (copy)
 	if self.isInitialized then
-		self:fireCEVAnalyticsEvent(analyticsModule.EventNames.PartyVoiceUnmuteParticipant, { partyId = p1, userId = p2 or 0 })
+		self:fireCEVAnalyticsEvent(AnalyticsModule.EventNames.PartyVoiceUnmuteParticipant, { partyId = PartyId, userId = p1 or 0 })
 		
 		return
 	end
 end
 
-function t:logPartyVoiceMuteParticipant(p1, p2)
-	-- upvalues: analyticsModule (ref)
+function CrossExperienceVoiceAnalyticsModule:logPartyVoiceMuteParticipant(PartyId, p1) --[[ Line: 265 ]]
+	-- upvalues: AnalyticsModule (copy)
 	if self.isInitialized then
-		self:fireCEVAnalyticsEvent(analyticsModule.EventNames.PartyVoiceMuteParticipant, { partyId = p1, userId = p2 or 0 })
+		self:fireCEVAnalyticsEvent(AnalyticsModule.EventNames.PartyVoiceMuteParticipant, { partyId = PartyId, userId = p1 or 0 })
 		
 		return
 	end
 end
 
-function t:logPartyVoiceBlockParticipant(p1, p2)
-	-- upvalues: analyticsModule (ref)
+function CrossExperienceVoiceAnalyticsModule:logPartyVoiceBlockParticipant(PartyId, p1) --[[ Line: 276 ]]
+	-- upvalues: AnalyticsModule (copy)
 	if self.isInitialized then
-		self:fireCEVAnalyticsEvent(analyticsModule.EventNames.PartyVoiceBlockParticipant, { partyId = p1, userId = p2 or 0 })
+		self:fireCEVAnalyticsEvent(AnalyticsModule.EventNames.PartyVoiceBlockParticipant, { partyId = PartyId, userId = p1 or 0 })
 		
 		return
 	end
 end
 
-function t:logPartyVoiceUnblockParticipant(p1, p2)
-	-- upvalues: analyticsModule (ref)
+function CrossExperienceVoiceAnalyticsModule:logPartyVoiceUnblockParticipant(PartyId, p1) --[[ Line: 287 ]]
+	-- upvalues: AnalyticsModule (copy)
 	if self.isInitialized then
-		self:fireCEVAnalyticsEvent(analyticsModule.EventNames.PartyVoiceUnblockParticipant, { partyId = p1, userId = p2 or 0 })
+		self:fireCEVAnalyticsEvent(AnalyticsModule.EventNames.PartyVoiceUnblockParticipant, { partyId = PartyId, userId = p1 or 0 })
 		
 		return
 	end
 end
 
-function t:logPartyVoiceOnCrossExperienceStartedSignalReceived(p1, p2)
-	-- upvalues: analyticsModule (ref)
+function CrossExperienceVoiceAnalyticsModule:logPartyVoiceOnCrossExperienceStartedSignalReceived(HasExperienceStarted, IsActiveDM) --[[ Line: 298 ]]
+	-- upvalues: AnalyticsModule (copy)
 	if self.isInitialized then
-		self:fireCEVAnalyticsEvent(analyticsModule.EventNames.PartyVoiceOnCrossExperienceStartedSignalReceived, { hasExperienceStarted = p1, isActiveDM = p2 })
-		
-		return
-	end
-end
-
-function t:logPartyVoiceStateChangeHandlerRun(p1, p2)
-	-- upvalues: analyticsModule (ref)
-	if self.isInitialized then
-		self:fireCEVAnalyticsEvent(analyticsModule.EventNames.PartyVoiceStateChangeHandlerRun, {
-			isActiveDM = p1,
-			status = p2.status,
-			detail = p2.detail or ""
+		self:fireCEVAnalyticsEvent(AnalyticsModule.EventNames.PartyVoiceOnCrossExperienceStartedSignalReceived, {
+			hasExperienceStarted = HasExperienceStarted,
+			isActiveDM = IsActiveDM
 		})
 		
 		return
 	end
 end
 
-function t:reset()
+function CrossExperienceVoiceAnalyticsModule:logPartyVoiceStateChangeHandlerRun(IsActiveDM, p1) --[[ Line: 311 ]]
+	-- upvalues: AnalyticsModule (copy)
+	if self.isInitialized then
+		self:fireCEVAnalyticsEvent(AnalyticsModule.EventNames.PartyVoiceStateChangeHandlerRun, {
+			isActiveDM = IsActiveDM,
+			status = p1.status,
+			detail = p1.detail or ""
+		})
+		
+		return
+	end
+end
+
+function CrossExperienceVoiceAnalyticsModule:reset() --[[ Line: 325 ]]
 	self.previousStatus = nil
 end
 
-t.default = t.new()
+CrossExperienceVoiceAnalyticsModule.default = CrossExperienceVoiceAnalyticsModule.new()
 
-return t
+return CrossExperienceVoiceAnalyticsModule

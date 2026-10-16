@@ -1,51 +1,57 @@
-﻿local abuseReportMenu = script:FindFirstAncestor("AbuseReportMenu")
-local corePackagesService = game:GetService("CorePackages")
-local cryoModule = require(corePackagesService.Packages.Cryo)
-local verifiedBadgesModule = require(corePackagesService.Workspace.Packages.VerifiedBadges)
-local userLibModule = require(corePackagesService.Workspace.Packages.UserLib)
-local _ = require(abuseReportMenu.Components.Types)
-local constantsModule = require(abuseReportMenu.Components.Constants)
-local inExperienceCapabilities = require(corePackagesService.Workspace.Packages.InExperienceCapabilities).InExperienceCapabilities
+﻿local AbuseReportMenu = script:FindFirstAncestor("AbuseReportMenu")
+local CorePackages = game:GetService("CorePackages")
+local CryoModule = require(CorePackages.Packages.Cryo)
+local VerifiedBadgesModule = require(CorePackages.Workspace.Packages.VerifiedBadges)
+local UserLibModule = require(CorePackages.Workspace.Packages.UserLib)
+local _ = require(AbuseReportMenu.Components.Types)
+local ConstantsModule = require(AbuseReportMenu.Components.Constants)
+local InExperienceCapabilities = require(CorePackages.Workspace.Packages.InExperienceCapabilities).InExperienceCapabilities
 
 return {
 	componentType = "modalSelector",
 	fieldLabel = "WhichPerson",
 	componentName = "PlayerSelector",
-	getIsVisible = function(_)
+	getIsVisible = function(_): boolean --[[ Line: 13 ]]
 		return true
 	end,
-	getMenuItems = function(p1)
-		-- upvalues: cryoModule (ref), userLibModule (ref), verifiedBadgesModule (ref), inExperienceCapabilities (ref)
-		return cryoModule.List.map(p1.playerObjects, function(p2)
-			-- upvalues: userLibModule (copy), verifiedBadgesModule (copy), inExperienceCapabilities (copy)
+	getMenuItems = function(p1) --[[ Line: 16 ]]
+		-- upvalues: CryoModule (copy), UserLibModule (copy), VerifiedBadgesModule (copy), InExperienceCapabilities (copy)
+		return (CryoModule.List.map(p1.playerObjects, function(Player) --[[ Line: 17 ]]
+			-- upvalues: UserLibModule (upval), VerifiedBadgesModule (upval), InExperienceCapabilities (upval)
 			return {
-				label = p2.DisplayName .. (if userLibModule.Utils.isPlayerVerified(p2) then verifiedBadgesModule.emoji.verified else ""),
-				subLabel = if inExperienceCapabilities.canDisplayPeoplesUsernames then "[@" .. p1.Name .. "]" else nil,
-				identifier = p2.Name
+				label = Player.DisplayName .. (if UserLibModule.Utils.isPlayerVerified(Player) then VerifiedBadgesModule.emoji.verified else ""),
+				subLabel = if InExperienceCapabilities.canDisplayPeoplesUsernames then "[@" .. Player.Name .. "]" else nil,
+				identifier = Player.Name
 			}
-		end)
+		end))
 	end,
-	getSelectedValue = function(p1)
-		-- upvalues: inExperienceCapabilities (ref)
-		local allegedAbuser = p1.allegedAbuser
+	getSelectedValue = function(p1): string? --[[ Line: 31 ]]
+		-- upvalues: InExperienceCapabilities (copy)
+		local AllegedAbuser = p1.allegedAbuser
 		
-		return if allegedAbuser then allegedAbuser.DisplayName .. (if inExperienceCapabilities.canDisplayPeoplesUsernames then "[@" .. allegedAbuser.Name .. "]" else "") else nil
-	end,
-	onUpdateSelectedOption = function(p1, p2, p3, p4)
-		-- upvalues: constantsModule (ref)
-		if p1.identifier then
-			local identifier = p1.identifier
+		if AllegedAbuser then
+			local Name = AllegedAbuser.Name
 			
-			for i, v in p2.playerObjects do
-				if identifier == v.Name then
-					local userId = v.UserId
-					p4.analyticsDispatch({
-						type = constantsModule.AnalyticsActions.IncrementPersonChanged
+			return AllegedAbuser.DisplayName .. (if InExperienceCapabilities.canDisplayPeoplesUsernames then "[@" .. Name .. "]" else "")
+		else
+			return nil
+		end
+	end,
+	onUpdateSelectedOption = function(p1, p2, Callback: (any) -> (), p3) --[[ Line: 42 ]]
+		-- upvalues: ConstantsModule (copy)
+		if p1.identifier then
+			local Identifier = p1.identifier
+			
+			for _, playerObject in p2.playerObjects do
+				if Identifier == playerObject.Name then
+					local UserId = playerObject.UserId
+					p3.analyticsDispatch({
+						type = ConstantsModule.AnalyticsActions.IncrementPersonChanged
 					})
-					p3({
-						type = constantsModule.PlayerMenuActions.UpdateAbuser,
-						abuseId = userId,
-						abuser = v
+					Callback({
+						type = ConstantsModule.PlayerMenuActions.UpdateAbuser,
+						abuseId = UserId,
+						abuser = playerObject
 					})
 				end
 			end

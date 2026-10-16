@@ -1,37 +1,38 @@
-﻿local parent = script:FindFirstAncestor("ExperienceStoreServerDrivenUi").Parent
-local dataHydrationModule = require(parent.DataHydration)
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
-local sduiActionType = sduiCoreSystemModule.SduiActionType
-local playersService = game:GetService("Players")
+﻿local Parent = script:FindFirstAncestor("ExperienceStoreServerDrivenUi").Parent
+local DataHydrationModule = require(Parent.DataHydration)
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
+local SduiActionType = SduiCoreSystemModule.SduiActionType
+local Players = game:GetService("Players")
 
-return function(p1, _, p2)
-	-- upvalues: sduiErrorType (ref), sduiActionType (ref), playersService (ref), dataHydrationModule (ref)
-	local actionParams = p1 and p1.actionParams
+return function(p1, _, p2) --[[ Line: 16 | Named "SduiRefreshDeveloperProductsAction" ]]
+	-- upvalues: SduiErrorType (copy), SduiActionType (copy), Players (copy), DataHydrationModule (copy)
+	local ActionParams = p1 and p1.actionParams
 	
-	if actionParams == nil then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if ActionParams == nil then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			message = "Missing actionParams",
-			name = sduiActionType.RefreshDeveloperProducts
+			name = SduiActionType.RefreshDeveloperProducts
 		}, p2.appPage)
 		
 		return
 	end
-	local placeId = actionParams.placeId
+	local PlaceId = ActionParams.placeId
 	
-	if placeId == nil then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if PlaceId == nil then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			message = "Missing placeId",
-			name = sduiActionType.RefreshDeveloperProducts
+			name = SduiActionType.RefreshDeveloperProducts
 		}, p2.appPage)
 		
 		return
 	end
-	local localPlayer = playersService.LocalPlayer
-	local userId = localPlayer and localPlayer.UserId
+	local LocalPlayer = Players.LocalPlayer
+	local UserId = LocalPlayer and LocalPlayer.UserId
 	
-	if userId == nil then
+	if UserId ~= nil then
+		DataHydrationModule.Game.getGameDeveloperProductStore(false).fetchStatuses(tostring(UserId), (tostring(PlaceId)))
+		
 		return
 	end
-	dataHydrationModule.Game.getGameDeveloperProductStore(false).fetchStatuses(tostring(userId), tostring(placeId))
 end

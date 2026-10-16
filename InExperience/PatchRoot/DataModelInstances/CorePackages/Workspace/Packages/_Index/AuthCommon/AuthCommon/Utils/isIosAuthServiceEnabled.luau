@@ -1,7 +1,7 @@
-﻿local authLocalStorageKeysModule = require(script:FindFirstAncestor("AuthCommon").Enums.AuthLocalStorageKeys)
-local appStorageService = game:GetService("AppStorageService")
+﻿local AuthLocalStorageKeysModule = require(script:FindFirstAncestor("AuthCommon").Enums.AuthLocalStorageKeys)
+local AppStorageService = game:GetService("AppStorageService")
 
-return function()
-	-- upvalues: appStorageService (ref), authLocalStorageKeysModule (ref)
-	return appStorageService:GetItem(authLocalStorageKeysModule.IosAuthServiceEnabled) == "true"
+return function(): boolean --[[ Line: 7 | Named "isIosAuthServiceEnabled" ]]
+	-- upvalues: AppStorageService (copy), AuthLocalStorageKeysModule (copy)
+	return AppStorageService:GetItem(AuthLocalStorageKeysModule.IosAuthServiceEnabled) == "true"
 end

@@ -1,7 +1,7 @@
-﻿local socialCarousel = script:FindFirstAncestor("SocialCarousel")
-local _ = require(socialCarousel.Analytics.AnalyticsTypes)
+﻿local SocialCarousel = script:FindFirstAncestor("SocialCarousel")
+local _ = require(SocialCarousel.Analytics.AnalyticsTypes)
 
-return require(socialCarousel.Parent.React).createContext({
+return require(SocialCarousel.Parent.React).createContext({
 	hideCarouselHeader = false,
 	openGameJoinCardUserId = nil,
 	setOpenGameJoinCardUserId = nil,
@@ -14,8 +14,8 @@ return require(socialCarousel.Parent.React).createContext({
 	source = nil,
 	navigateToQRCodePage = nil,
 	isLoading = false,
-	eventIngest = function() end,
-	appAnalytics = function() end,
+	eventIngest = function() --[[ Line: 32 ]] end,
+	appAnalytics = function() --[[ Line: 33 ]] end,
 	tiles = {},
-	onSuccessfulRender = function() end
+	onSuccessfulRender = function() --[[ Line: 43 ]] end
 })

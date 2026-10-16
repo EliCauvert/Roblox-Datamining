@@ -1,48 +1,51 @@
-﻿local expChat = script:FindFirstAncestor("ExpChat")
-local parent = expChat.Parent
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local getPresetChatStoreModule = require(expChat.Stores.GetPresetChatStore)
-local presetCooldownContextModule = require(script.Parent.PresetCooldownContext)
+﻿local ExpChat = script:FindFirstAncestor("ExpChat")
+local Parent = ExpChat.Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local GetPresetChatStoreModule = require(ExpChat.Stores.GetPresetChatStore)
+local PresetCooldownContextModule = require(script.Parent.PresetCooldownContext)
 
-return function(value)
-	-- upvalues: getPresetChatStoreModule (ref), signalsReactModule (ref), reactModule (ref), presetCooldownContextModule (ref)
-	local var1 = getPresetChatStoreModule(false)
-	local var2 = signalsReactModule.useSignalState(var1.getPresetCooldownEndsAt)
-	local var3 = var2 ~= nil and os.clock() < var2
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), var1 (ref)
-		if var2 == nil then return end
-		local var4 = var2 - os.clock()
+return function(p1) --[[ Line: 13 | Named "PresetCooldownProvider" ]]
+	-- upvalues: GetPresetChatStoreModule (copy), SignalsReactModule (copy), ReactModule (copy), PresetCooldownContextModule (copy)
+	local PresetChatStoreModule = GetPresetChatStoreModule(false)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(PresetChatStoreModule.getPresetCooldownEndsAt)
+	local IsClockTimeBelow: boolean = UseSignalStateResult ~= nil and os.clock() < UseSignalStateResult
+	ReactModule.useEffect(function() --[[ Line: 18 ]]
+		-- upvalues: UseSignalStateResult (copy), PresetChatStoreModule (copy)
+		if UseSignalStateResult == nil then return end
+		local UseSignalStateResultDelta = UseSignalStateResult - os.clock()
 		
-		if var4 <= 0 then
-			var1.setPresetCooldownEndsAt(nil)
+		if UseSignalStateResultDelta <= 0 then
+			PresetChatStoreModule.setPresetCooldownEndsAt(nil)
 			
 			return
 		end
-		local var5 = false
-		task.delay(var4, function()
-			-- upvalues: var5 (write), var1 (copy), var2 (copy)
-			if var5 then return end
-			if var1.getPresetCooldownEndsAt(false) == var2 then
-				var1.setPresetCooldownEndsAt(nil)
+		local Flag = false
+		task.delay(UseSignalStateResultDelta, function() --[[ Line: 28 ]]
+			-- upvalues: Flag (ref), PresetChatStoreModule (upval), UseSignalStateResult (upval)
+			if Flag then return end
+			if PresetChatStoreModule.getPresetCooldownEndsAt(false) == UseSignalStateResult then
+				PresetChatStoreModule.setPresetCooldownEndsAt(nil)
 			end
 		end)
 		
-		return function()
-			-- upvalues: var5 (write)
-			var5 = true
+		return function() --[[ Line: 36 ]]
+			-- upvalues: Flag (ref)
+			Flag = true
 		end
 	end, {
-		var2,
-		var1.setPresetCooldownEndsAt,
-		var1.getPresetCooldownEndsAt
+		UseSignalStateResult,
+		PresetChatStoreModule.setPresetCooldownEndsAt,
+		PresetChatStoreModule.getPresetCooldownEndsAt
 	})
 	
-	return reactModule.createElement(presetCooldownContextModule.Provider, {
-		value = reactModule.useMemo(function()
-			-- upvalues: var2 (ref), var3 (ref)
-			return { endsAt = var2, isCooldownActive = var3 }
-		end, { var2, var3 })
-	}, value.children)
+	return ReactModule.createElement(PresetCooldownContextModule.Provider, {
+		value = ReactModule.useMemo(function() --[[ Line: 41 ]]
+			-- upvalues: UseSignalStateResult (copy), IsClockTimeBelow (copy)
+			return {
+				endsAt = UseSignalStateResult,
+				isCooldownActive = IsClockTimeBelow
+			}
+		end, { UseSignalStateResult, IsClockTimeBelow })
+	}, p1.children)
 end

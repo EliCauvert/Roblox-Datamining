@@ -1,232 +1,238 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local name = require(appChat.Logger):new(script.Name)
-local _ = require(appChat.types)
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local UIBloxModule = require(parent.UIBlox)
-local useStyle = UIBloxModule.Core.Style.useStyle
-local buttonStack = UIBloxModule.App.Button.ButtonStack
-local enum = UIBloxModule.App.Button.Enum
-local labelModule = require(appChat.Components.Label.Label)
-local useChatPagePaddingModule = require(appChat.Contexts.ChatPagePadding.useChatPagePadding)
-local appChatNetworkingModule = require(parent.AppChatNetworking)
-local foundationModule = require(parent.Foundation)
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local favoriteOn = UIBloxModule.App.ImageSet.Images["icons/actions/favoriteOn"]
-local x = foundationModule.Enums.IconName.X
-local t = {
-	[appChatNetworkingModule.Constants.ModalContentType.Link] = function(p1)
-		-- upvalues: useStyle (ref), reactModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
-		local var1 = useStyle()
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local NewResult = require(AppChat.Logger):new(script.Name)
+local _ = require(AppChat.types)
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local UIBloxModule = require(Parent.UIBlox)
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local ButtonStack = UIBloxModule.App.Button.ButtonStack
+local LabelModule = require(AppChat.Components.Label.Label)
+local UseChatPagePaddingModule = require(AppChat.Contexts.ChatPagePadding.useChatPagePadding)
+local AppChatNetworkingModule = require(Parent.AppChatNetworking)
+local FoundationModule = require(Parent.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local FFlagAppChatLandingModalThemedBackgroundModule = require(AppChat.Flags.FFlagAppChatLandingModalThemedBackground)
+local IconsActionsFavoriteOn = UIBloxModule.App.ImageSet.Images["icons/actions/favoriteOn"]
+local X = FoundationModule.Enums.IconName.X
+local config = {
+	[AppChatNetworkingModule.Constants.ModalContentType.Link] = function(p1) --[[ Line: 35 ]]
+		-- upvalues: UseStyleFunction (copy), ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+		local UseStyleResult = UseStyleFunction()
 		
-		return reactModule.createElement("TextButton", {
+		return ReactModule.createElement("TextButton", {
 			Size = UDim2.new(1, 0, 0, 0),
 			LayoutOrder = p1.layoutOrder,
-			Font = if foundationFontFaceMigration then nil else var1.Font.Body.Font,
-			FontFace = if foundationFontFaceMigration then normalizeFontFace(var1.Tokens.Typography.BodyLarge.Font) else nil,
+			Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.Body.Font,
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font) else nil,
 			BorderSizePixel = 0,
 			Text = `<u>{p1.content.text}</u>`,
 			RichText = true,
-			TextColor3 = var1.Theme.TextDefault.Color,
-			TextSize = var1.Font.CaptionBody.RelativeSize * var1.Font.BaseSize,
+			TextColor3 = UseStyleResult.Theme.TextDefault.Color,
+			TextSize = UseStyleResult.Font.CaptionBody.RelativeSize * UseStyleResult.Font.BaseSize,
 			TextWrapped = true,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			BackgroundTransparency = 1,
 			AutomaticSize = Enum.AutomaticSize.Y,
-			[reactModule.Event.Activated] = p1.content.onActivated
+			[ReactModule.Event.Activated] = p1.content.onActivated
 		})
 	end,
-	[appChatNetworkingModule.Constants.ModalContentType.Text] = function(p1)
-		-- upvalues: useStyle (ref), reactModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
-		local var1 = useStyle()
+	[AppChatNetworkingModule.Constants.ModalContentType.Text] = function(p1) --[[ Line: 56 ]]
+		-- upvalues: UseStyleFunction (copy), ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+		local UseStyleResult = UseStyleFunction()
 		
-		return reactModule.createElement("TextLabel", {
+		return ReactModule.createElement("TextLabel", {
 			BorderSizePixel = 0,
 			TextWrapped = true,
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 0, 0),
 			LayoutOrder = p1.layoutOrder,
-			Font = if foundationFontFaceMigration then nil else var1.Font.Body.Font,
-			FontFace = if foundationFontFaceMigration then normalizeFontFace(var1.Tokens.Typography.BodyLarge.Font) else nil,
+			Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.Body.Font,
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font) else nil,
 			Text = p1.content.text,
-			TextColor3 = var1.Theme.TextDefault.Color,
-			TextSize = var1.Font.CaptionBody.RelativeSize * var1.Font.BaseSize,
+			TextColor3 = UseStyleResult.Theme.TextDefault.Color,
+			TextSize = UseStyleResult.Font.CaptionBody.RelativeSize * UseStyleResult.Font.BaseSize,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			AutomaticSize = Enum.AutomaticSize.Y
 		})
 	end
 }
-local t_1 = {
+local config1 = {
 	titleText = "",
 	bodyText = "",
 	actionText = "",
 	paddingX = 12,
 	hideActionButton = false,
 	additionalContent = {},
-	buttonType = enum.ButtonType.PrimarySystem,
-	onActivated = function() end,
-	onDismissed = function() end
+	buttonType = UIBloxModule.App.Button.Enum.ButtonType.PrimarySystem,
+	onActivated = function() --[[ Line: 108 ]] end,
+	onDismissed = function() --[[ Line: 109 ]] end
 }
 
-return reactModule.forwardRef(function(p1, p2)
-	-- upvalues: cryoModule (ref), t_1 (ref), useStyle (ref), useChatPagePaddingModule (ref), foundationModule (ref), reactModule (ref), t (ref), name (ref), labelModule (ref), favoriteOn (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), x (ref), buttonStack (ref)
-	local var1 = cryoModule.Dictionary.join(t_1, p1)
-	local style = var1.style or useStyle()
-	local var2 = useChatPagePaddingModule()
-	local size200 = style.Tokens.Size.Size_200
-	local size1000 = style.Tokens.Size.Size_1000
-	local var3 = foundationModule.Hooks.useTokens()
-	local size600 = var3.Size.Size_600
-	local var4, var5 = reactModule.useMemo(function()
-		-- upvalues: cryoModule (copy), var1 (ref), t (copy), reactModule (copy), name (copy)
-		local var6 = cryoModule.Dictionary.map(var1.additionalContent, function(p3, p4)
-			-- upvalues: t (copy), reactModule (copy), name (copy)
-			local type = t[p3.type]
-			local var7 = if type then reactModule.createElement(type, { layoutOrder = p4 + 2, content = p3 }) else nil
+return ReactModule.forwardRef(function(p1, Ref) --[[ Line: 112 ]]
+	-- upvalues: CryoModule (copy), config1 (copy), UseStyleFunction (copy), UseChatPagePaddingModule (copy), FoundationModule (copy), ReactModule (copy), config (copy), NewResult (copy), FFlagAppChatLandingModalThemedBackgroundModule (copy), LabelModule (copy), IconsActionsFavoriteOn (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), X (copy), ButtonStack (copy)
+	local JoinResult = CryoModule.Dictionary.join(config1, p1)
+	local UseStyleResult = UseStyleFunction()
+	local Style = JoinResult.style or UseStyleResult
+	local UseChatPagePaddingModuleResult = UseChatPagePaddingModule()
+	local Size200: number = Style.Tokens.Size.Size_200
+	local Size1000 = Style.Tokens.Size.Size_1000
+	local UseTokensResult = FoundationModule.Hooks.useTokens()
+	local Size600 = UseTokensResult.Size.Size_600
+	local UseMemoResult, UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 123 ]]
+		-- upvalues: CryoModule (upval), JoinResult (copy), config (upval), ReactModule (upval), NewResult (upval)
+		local MapResult = CryoModule.Dictionary.map(JoinResult.additionalContent, function(Content, p2: number) --[[ Line: 124 ]]
+			-- upvalues: config (upval), ReactModule (upval), NewResult (upval)
+			local Entry = config[Content.type]
+			local LayoutOrder = p2 + 2
+			local Element = if Entry then ReactModule.createElement(Entry, { layoutOrder = LayoutOrder, content = Content }) else nil
 			
-			if var7 then
-				return var7, `additionalContent_{p4}`
+			if Element then
+				return Element, `additionalContent_{p2}`
+			else
+				NewResult:warning(`Unsupported additional content type: {Content.type}`)
+				
+				return nil, nil
 			end
-			name:warning(`Unsupported additional content type: {p3.type}`)
-			
-			return nil, nil
 		end)
 		
-		return var6, not cryoModule.isEmpty(var6)
-	end, { var1.additionalContent })
+		return MapResult, not CryoModule.isEmpty(MapResult)
+	end, { JoinResult.additionalContent })
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		LayoutOrder = var1.LayoutOrder,
+		LayoutOrder = JoinResult.LayoutOrder,
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
-		ref = p2
+		ref = Ref
 	}, {
-		ContentPadding = reactModule.createElement("UIPadding", {
-			PaddingTop = UDim.new(0, size200),
-			PaddingBottom = UDim.new(0, size200),
-			PaddingLeft = UDim.new(0, var2.left),
-			PaddingRight = UDim.new(0, var2.right)
+		ContentPadding = ReactModule.createElement("UIPadding", {
+			PaddingTop = UDim.new(0, Size200),
+			PaddingBottom = UDim.new(0, Size200),
+			PaddingLeft = UDim.new(0, UseChatPagePaddingModuleResult.left),
+			PaddingRight = UDim.new(0, UseChatPagePaddingModuleResult.right)
 		}),
-		Content = reactModule.createElement("Frame", {
-			BackgroundTransparency = style.Theme.SystemPrimaryContent.Transparency,
-			BackgroundColor3 = style.Theme.SystemPrimaryContent.Color,
+		Content = ReactModule.createElement("Frame", {
+			BackgroundTransparency = if FFlagAppChatLandingModalThemedBackgroundModule then Style.Theme.BackgroundUIDefault.Transparency else Style.Theme.SystemPrimaryContent.Transparency,
+			BackgroundColor3 = if FFlagAppChatLandingModalThemedBackgroundModule then Style.Theme.BackgroundUIDefault.Color else Style.Theme.SystemPrimaryContent.Color,
 			Size = UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y
 		}, {
-			Layout = reactModule.createElement("UIListLayout", {
+			Layout = ReactModule.createElement("UIListLayout", {
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				FillDirection = Enum.FillDirection.Vertical,
 				VerticalAlignment = Enum.VerticalAlignment.Center,
-				Padding = UDim.new(0, size200 * 2)
+				Padding = UDim.new(0, Size200 * 2)
 			}),
-			UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, style.Tokens.Radius.Medium) }),
-			UIStroke = reactModule.createElement("UIStroke", {
-				Thickness = style.Tokens.Stroke.Standard,
-				Color = style.Theme.Divider.Color,
-				Transparency = style.Theme.Divider.Transparency
+			UICorner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0, Style.Tokens.Radius.Medium) }),
+			UIStroke = ReactModule.createElement("UIStroke", {
+				Thickness = Style.Tokens.Stroke.Standard,
+				Color = Style.Theme.Divider.Color,
+				Transparency = Style.Theme.Divider.Transparency
 			}),
-			ContentPadding = reactModule.createElement("UIPadding", {
-				PaddingTop = UDim.new(0, size200),
-				PaddingBottom = UDim.new(0, size200),
-				PaddingLeft = UDim.new(0, size200),
-				PaddingRight = UDim.new(0, size200)
+			ContentPadding = ReactModule.createElement("UIPadding", {
+				PaddingTop = UDim.new(0, Size200),
+				PaddingBottom = UDim.new(0, Size200),
+				PaddingLeft = UDim.new(0, Size200),
+				PaddingRight = UDim.new(0, Size200)
 			}),
-			IconAndTextFrame = reactModule.createElement("Frame", {
+			IconAndTextFrame = ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 1,
 				Size = UDim2.new(1, 0, 0, 0),
 				AutomaticSize = Enum.AutomaticSize.Y
 			}, {
-				HorizontalLayout = reactModule.createElement("UIListLayout", {
+				HorizontalLayout = ReactModule.createElement("UIListLayout", {
 					SortOrder = Enum.SortOrder.LayoutOrder,
 					FillDirection = Enum.FillDirection.Horizontal,
 					VerticalAlignment = Enum.VerticalAlignment.Top,
-					Padding = UDim.new(0, size200)
+					Padding = UDim.new(0, Size200)
 				}),
-				TextFrame = reactModule.createElement("Frame", {
+				TextFrame = ReactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 1,
-					Size = UDim2.new(1, (-size600) - size200, 0, 0),
+					Size = UDim2.new(1, -Size600 - Size200, 0, 0),
 					AutomaticSize = Enum.AutomaticSize.Y
 				}, {
-					Layout = reactModule.createElement("UIListLayout", {
+					Layout = ReactModule.createElement("UIListLayout", {
 						SortOrder = Enum.SortOrder.LayoutOrder,
 						FillDirection = Enum.FillDirection.Vertical,
 						VerticalAlignment = Enum.VerticalAlignment.Center,
-						Padding = UDim.new(0, size200)
+						Padding = UDim.new(0, Size200)
 					}),
-					LabelAndTextFrame = reactModule.createElement("Frame", {
+					LabelAndTextFrame = ReactModule.createElement("Frame", {
 						BackgroundTransparency = 1,
 						LayoutOrder = 1,
 						Size = UDim2.new(1, 0, 0, 0),
 						AutomaticSize = Enum.AutomaticSize.Y
 					}, {
-						Layout = reactModule.createElement("UIListLayout", {
+						Layout = ReactModule.createElement("UIListLayout", {
 							SortOrder = Enum.SortOrder.LayoutOrder,
 							FillDirection = Enum.FillDirection.Horizontal,
 							VerticalAlignment = Enum.VerticalAlignment.Center,
-							Padding = UDim.new(0, size200)
+							Padding = UDim.new(0, Size200)
 						}),
-						TitleLabelWithIcon = if not var1.titleLabelText then nil else reactModule.createElement(labelModule, {
+						TitleLabelWithIcon = if JoinResult.titleLabelText then ReactModule.createElement(LabelModule, {
 							layoutOrder = 1,
-							bodyText = var1.titleLabelText,
-							iconImage = favoriteOn
-						}),
-						TitleTextLabel = reactModule.createElement("TextLabel", {
+							bodyText = JoinResult.titleLabelText,
+							iconImage = IconsActionsFavoriteOn
+						}) else nil,
+						TitleTextLabel = ReactModule.createElement("TextLabel", {
 							LayoutOrder = 2,
 							BorderSizePixel = 0,
 							TextWrapped = true,
 							BackgroundTransparency = 1,
 							Size = UDim2.new(1, 0, 0, 0),
-							Font = if foundationFontFaceMigration then nil else style.Font.Title.Font,
-							FontFace = if foundationFontFaceMigration then normalizeFontFace(var3.Typography.HeadingLarge.Font) else nil,
-							Text = var1.titleText,
-							TextColor3 = style.Theme.TextEmphasis.Color,
-							TextSize = style.Font.Header2.RelativeSize * style.Font.BaseSize,
+							Font = if FoundationFontFaceMigration then nil else Style.Font.Title.Font,
+							FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.HeadingLarge.Font) else nil,
+							Text = JoinResult.titleText,
+							TextColor3 = Style.Theme.TextEmphasis.Color,
+							TextSize = Style.Font.Header2.RelativeSize * Style.Font.BaseSize,
 							TextXAlignment = Enum.TextXAlignment.Left,
 							AutomaticSize = Enum.AutomaticSize.Y
 						}, {
-							UIFlexItem = reactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.Fill })
+							UIFlexItem = ReactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.Fill })
 						})
 					}),
-					BodyTextLabel = reactModule.createElement("TextLabel", {
+					BodyTextLabel = ReactModule.createElement("TextLabel", {
 						LayoutOrder = 2,
 						BorderSizePixel = 0,
 						TextWrapped = true,
 						BackgroundTransparency = 1,
 						Size = UDim2.new(1, 0, 0, 0),
-						Font = if foundationFontFaceMigration then nil else style.Font.Body.Font,
-						FontFace = if foundationFontFaceMigration then normalizeFontFace(var3.Typography.BodyLarge.Font) else nil,
-						Text = var1.bodyText,
-						TextColor3 = style.Theme.TextDefault.Color,
-						TextSize = style.Font.CaptionBody.RelativeSize * style.Font.BaseSize,
+						Font = if FoundationFontFaceMigration then nil else Style.Font.Body.Font,
+						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.BodyLarge.Font) else nil,
+						Text = JoinResult.bodyText,
+						TextColor3 = Style.Theme.TextDefault.Color,
+						TextSize = Style.Font.CaptionBody.RelativeSize * Style.Font.BaseSize,
 						TextXAlignment = Enum.TextXAlignment.Left,
 						AutomaticSize = Enum.AutomaticSize.Y
 					}),
-					AdditionalContent = if var5 then reactModule.createElement(reactModule.Fragment, {}, var4) else nil
+					AdditionalContent = if UseMemoResult2 then ReactModule.createElement(ReactModule.Fragment, {}, UseMemoResult) else nil
 				}),
-				ImageIcon = reactModule.createElement(foundationModule.View, {
+				ImageIcon = ReactModule.createElement(FoundationModule.View, {
 					LayoutOrder = 2,
 					tag = "auto-xy x-default-transparent radius-xsmall",
-					onActivated = var1.onDismissed
+					onActivated = JoinResult.onDismissed
 				}, {
-					Icon = reactModule.createElement(foundationModule.Icon, { size = size600, name = x })
+					Icon = ReactModule.createElement(FoundationModule.Icon, { size = Size600, name = X })
 				})
 			}),
-			Buttons = if var1.hideActionButton then nil else reactModule.createElement("Frame", {
+			Buttons = if JoinResult.hideActionButton then nil else ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 2,
-				Size = UDim2.new(1, 0, 0, size1000)
+				Size = UDim2.new(1, 0, 0, Size1000)
 			}, {
-				ButtonStack = reactModule.createElement(buttonStack, {
+				ButtonStack = ReactModule.createElement(ButtonStack, {
 					forcedFillDirection = Enum.FillDirection.Horizontal,
 					buttons = {
 						{
-							buttonType = var1.buttonType,
-							props = { onActivated = var1.onActivated, text = var1.actionText }
+							buttonType = JoinResult.buttonType,
+							props = {
+								onActivated = JoinResult.onActivated,
+								text = JoinResult.actionText
+							}
 						}
 					}
 				})

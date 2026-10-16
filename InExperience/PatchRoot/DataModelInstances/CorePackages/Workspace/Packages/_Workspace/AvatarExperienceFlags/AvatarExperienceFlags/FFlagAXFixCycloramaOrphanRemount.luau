@@ -1,1 +1,3 @@
-﻿return game:DefineFastFlag("AXFixCycloramaOrphanRemount", false) and require(script.Parent.FFlagAXBackgroundCycloramaRendering)
+﻿local FFlagAXBackgroundCycloramaRenderingModule = require(script.Parent.FFlagAXBackgroundCycloramaRendering)
+
+return game:DefineFastFlag("AXFixCycloramaOrphanRemount", false) and FFlagAXBackgroundCycloramaRenderingModule

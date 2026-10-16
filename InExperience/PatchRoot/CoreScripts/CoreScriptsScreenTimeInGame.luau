@@ -1,225 +1,233 @@
-﻿local guiService = game:GetService("GuiService")
-local corePackagesService = game:GetService("CorePackages")
-local robloxGui = game:GetService("CoreGui").RobloxGui
-local notificationService = game:GetService("NotificationService")
-local httpService = game:GetService("HttpService")
-local screenTimeModule = require(corePackagesService.Workspace.Packages.ScreenTime)
-local httpRequests = screenTimeModule.HttpRequests
-local constants = screenTimeModule.Constants
-local getFFlagScreenTimeSignalR = screenTimeModule.GetFFlagScreenTimeSignalR
-local logging = require(corePackagesService.Workspace.Packages.AppCommonLib).Logging
-local errorPromptModule = require(robloxGui.Modules.ErrorPrompt)
+﻿local GuiService = game:GetService("GuiService")
+local CorePackages = game:GetService("CorePackages")
+local RobloxGui = game:GetService("CoreGui").RobloxGui
+local NotificationService = game:GetService("NotificationService")
+local HttpService = game:GetService("HttpService")
+local ScreenTimeModule = require(CorePackages.Workspace.Packages.ScreenTime)
+local Constants = ScreenTimeModule.Constants
+local GetFFlagScreenTimeSignalRFunction = ScreenTimeModule.GetFFlagScreenTimeSignalR
+local Logging = require(CorePackages.Workspace.Packages.AppCommonLib).Logging
 
-local function _()
-	-- upvalues: guiService (ref)
-	guiService.SelectedCoreObject = nil
+local function _() --[[ Line: 16 | Named "leaveGame" ]]
+	-- upvalues: GuiService (copy)
+	GuiService.SelectedCoreObject = nil
 	game:Shutdown()
 end
 
-local _ = { Warning = 1, Lockout = 2, OpenWebView = 3 }
-local var1 = httpRequests:new(httpService)
-local robloxEventReceivedConnection = nil
+local NewResult = ScreenTimeModule.HttpRequests:new(HttpService)
+local Connection = nil
 
-local _ = function()
-	-- upvalues: robloxEventReceivedConnection (write), guiService (ref)
-	if robloxEventReceivedConnection then
-		robloxEventReceivedConnection:Disconnect()
-		robloxEventReceivedConnection = nil
+local _ = function() --[[ Line: 32 | Named "disconnectAndLeaveGame" ]]
+	-- upvalues: Connection (ref), GuiService (copy)
+	if Connection then
+		Connection:Disconnect()
+		Connection = nil
 	end
-	guiService.SelectedCoreObject = nil
+	GuiService.SelectedCoreObject = nil
 	game:Shutdown()
 end
 
-local t = {
+local config = {
 	displaying = nil,
 	displayMessageCallback = nil,
 	pendingResolveMessage = {},
 	resolvedMessage = {},
-	update = function(p1, p2)
-		for i, v in pairs(p2) do
+	update = function(p1, List) --[[ Line: 53 ]]
+		for _, value in pairs(List) do
 			table.insert(p1.pendingResolveMessage, {
-				id = v.serialId,
-				instructionName = v.instructionName,
-				message = v.message,
-				type = v.type
+				id = value.serialId,
+				instructionName = value.instructionName,
+				message = value.message,
+				type = value.type
 			})
 		end
 		p1:processNext()
 	end,
-	processNext = function(p3)
-		if p3.displaying then return end
-		local removed = table.remove(p3.pendingResolveMessage, 1)
+	processNext = function(p2) --[[ Line: 66 ]]
+		if p2.displaying then return end
+		local Removed = table.remove(p2.pendingResolveMessage, 1)
 		
-		if not removed then return end
-		if p3.resolvedMessage[removed.id] then
-			p3:processNext()
+		if not Removed then return end
+		if p2.resolvedMessage[Removed.id] then
+			p2:processNext()
 			
 			return
 		end
-		p3.displaying = removed
+		p2.displaying = Removed
 		
-		if p3.displayMessageCallback then
-			p3.displayMessageCallback(removed.message)
+		if p2.displayMessageCallback then
+			p2.displayMessageCallback(Removed.message)
 		end
 	end,
-	resolve = function(p3)
-		-- upvalues: var1 (ref)
-		p3.resolvedMessage[p3.displaying.id] = p3.displaying.message
-		var1:reportExecution(p3.displaying.instructionName, p3.displaying.id)
-		p3.displaying = nil
-		p3:processNext()
+	resolve = function(p2) --[[ Line: 88 ]]
+		-- upvalues: NewResult (copy)
+		p2.resolvedMessage[p2.displaying.id] = p2.displaying.message
+		NewResult:reportExecution(p2.displaying.instructionName, p2.displaying.id)
+		p2.displaying = nil
+		p2:processNext()
 	end
 }
-local default = errorPromptModule.new("Default", {
+local Default = require(RobloxGui.Modules.ErrorPrompt).new("Default", {
 	MessageTextScaled = true,
 	HideErrorCode = true,
 	MenuIsOpenKey = "ScreenTimePrompt"
 })
-default:setParent(robloxGui)
+Default:setParent(RobloxGui)
 local list = {
 	{
 		Text = "OK",
 		LocalizationKey = "InGame.CommonUI.Button.Ok",
 		LayoutOrder = 1,
 		Primary = true,
-		Callback = function()
-			-- upvalues: default (ref), t (ref)
-			default:_close()
-			t:resolve()
+		Callback = function() --[[ Line: 112 ]]
+			-- upvalues: Default (copy), config (copy)
+			Default:_close()
+			config:resolve()
 		end
 	}
 }
 
-function t.displayMessage(p3)
-	-- upvalues: default (ref)
-	default:_open(p3)
+function config.displayMessageCallback(Message) --[[ Line: 108 ]]
+	-- upvalues: Default (copy)
+	Default:_open(Message)
 end
 
-default:updateButtons(list)
-default:setErrorTitle("Warning", "InGame.CommonUI.Title.Warning")
-local x = robloxGui.AbsoluteSize.X
-local y = robloxGui.AbsoluteSize.Y
-robloxGui:GetPropertyChangedSignal("AbsoluteSize"):connect(function()
-	-- upvalues: default (ref), robloxGui (ref), x (write), y (write)
-	if not default then return end
-	local x_1 = robloxGui.AbsoluteSize.X
-	local y_1 = robloxGui.AbsoluteSize.Y
+Default:updateButtons(list)
+Default:setErrorTitle("Warning", "InGame.CommonUI.Title.Warning")
+local X = RobloxGui.AbsoluteSize.X
+local Y = RobloxGui.AbsoluteSize.Y
+RobloxGui:GetPropertyChangedSignal("AbsoluteSize"):connect(function() --[[ Line: 135 | Named "onScreenSizeChanged" ]]
+	-- upvalues: Default (copy), RobloxGui (copy), X (ref), Y (ref)
+	if not Default then return end
+	local X1 = RobloxGui.AbsoluteSize.X
+	local Y1 = RobloxGui.AbsoluteSize.Y
 	
-	if x ~= x_1 or y ~= y_1 then
-		x = x_1
-		y = y_1
-		default:resizeWidthAndHeight(x, y)
+	if X ~= X1 or Y ~= Y1 then
+		X = X1
+		Y = Y1
+		Default:resizeWidthAndHeight(X, Y)
 	end
 end)
 
-if default then
-	local x_1 = robloxGui.AbsoluteSize.X
-	local y_1 = robloxGui.AbsoluteSize.Y
+if Default then
+	local X1 = RobloxGui.AbsoluteSize.X
+	local Y1 = RobloxGui.AbsoluteSize.Y
 	
-	if x ~= x_1 or y ~= y_1 then
-		default:resizeWidthAndHeight(x_1, y_1)
+	if X ~= X1 or Y ~= Y1 then
+		X = X1
+		Y = Y1
+		Default:resizeWidthAndHeight(X, Y)
 	end
 end
-local function x_1(p3)
-	-- upvalues: robloxEventReceivedConnection (write), guiService (ref), t (ref)
-	local t_1 = {}
+local function screenTimeStatesUpdated(List) --[[ Line: 151 ]]
+	-- upvalues: Connection (ref), GuiService (copy), config (copy)
+	local List1 = {}
 	
-	for i, v in ipairs(p3) do
-		if v.type == 1 then
-			table.insert(t_1, v)
-		elseif v.type ~= 2 then
-		end
-		if robloxEventReceivedConnection then
-			robloxEventReceivedConnection:Disconnect()
-			robloxEventReceivedConnection = nil
-		end
-		guiService.SelectedCoreObject = nil
-		game:Shutdown()
-		
-		return
-	end
-	t:update(t_1)
-end
-
-local _ = function()
-	-- upvalues: var1 (ref), x_1 (ref), logging (ref)
-	var1:getInstructions(function(p4, p5, p6)
-		-- upvalues: x_1 (copy), logging (copy)
-		if p4 then
-			x_1(p6)
-			
-			return
-		elseif p5 then
-			logging.warn("ScreenTimeInGame requestInstructions failed: unauthorized")
-			
-			return
-		end
-		logging.warn("ScreenTimeInGame requestInstructions failed: error")
-	end)
-end
-
-robloxEventReceivedConnection = notificationService.RobloxEventReceived:Connect(function(p4)
-	-- upvalues: getFFlagScreenTimeSignalR (ref), constants (ref), var1 (ref), x_1 (ref), logging (ref), robloxEventReceivedConnection (write), guiService (ref), httpService (ref)
-	if getFFlagScreenTimeSignalR() then
-		if p4.namespace == constants.SIGNALR_NAMESPACE and p4.detailType == constants.SIGNALR_TYPE_NEW_INSTRUCTION then
-			var1:getInstructions(function(p5, p6, p7)
-				-- upvalues: x_1 (copy), logging (copy)
-				if p5 then
-					x_1(p7)
-					
-					return
-				elseif p6 then
-					logging.warn("ScreenTimeInGame requestInstructions failed: unauthorized")
-					
-					return
-				end
-				logging.warn("ScreenTimeInGame requestInstructions failed: error")
-			end)
-			
-			return
-		end
-	elseif p4.namespace == constants.HEARTBEAT_NOTIFICATIONS_NAMESPACE then
-		if p4.detailType == constants.HEARTBEAT_CONSECUTIVE_FAILURE then
-			if robloxEventReceivedConnection then
-				robloxEventReceivedConnection:Disconnect()
-				robloxEventReceivedConnection = nil
+	for _, value in ipairs(List) do
+		if value.type == 1 then
+			table.insert(List1, value)
+		elseif value.type == 2 then
+			if Connection then
+				Connection:Disconnect()
+				Connection = nil
 			end
-			guiService.SelectedCoreObject = nil
+			GuiService.SelectedCoreObject = nil
 			game:Shutdown()
 			
 			return
 		else
-			local ok, status = pcall(function()
-				-- upvalues: httpService (copy), p4 (ref)
-				return httpService:JSONDecode(p4.detail)
-			end)
+			local _ = value.type
+		end
+	end
+	config:update(List1)
+end
+
+local _ = function() --[[ Line: 170 | Named "requestInstructions" ]]
+	-- upvalues: NewResult (copy), screenTimeStatesUpdated (copy), Logging (copy)
+	NewResult:getInstructions(function(p2, p3, p4) --[[ Line: 171 ]]
+		-- upvalues: screenTimeStatesUpdated (upval), Logging (upval)
+		if p2 then
+			screenTimeStatesUpdated(p4)
 			
-			if not ok then
-				logging.warn("ScreenTimeInGame json decoding failed")
+			return
+		end
+		if p3 then
+			Logging.warn("ScreenTimeInGame requestInstructions failed: unauthorized")
+			
+			return
+		else
+			Logging.warn("ScreenTimeInGame requestInstructions failed: error")
+		end
+	end)
+end
+
+Connection = NotificationService.RobloxEventReceived:Connect(function(EventData) --[[ Line: 183 ]]
+	-- upvalues: GetFFlagScreenTimeSignalRFunction (copy), Constants (copy), NewResult (copy), screenTimeStatesUpdated (copy), Logging (copy), Connection (ref), GuiService (copy), HttpService (copy)
+	if not GetFFlagScreenTimeSignalRFunction() then
+		if EventData.namespace == Constants.HEARTBEAT_NOTIFICATIONS_NAMESPACE then
+			if EventData.detailType == Constants.HEARTBEAT_CONSECUTIVE_FAILURE then
+				if Connection then
+					Connection:Disconnect()
+					Connection = nil
+				end
+				GuiService.SelectedCoreObject = nil
+				game:Shutdown()
 				
 				return
-			elseif status.notifications == nil then
-				logging.warn("ScreenTimeInGame empty heartbeat notifications")
+			else
+				local Success, Result = pcall(function() --[[ Line: 198 ]]
+					-- upvalues: HttpService (upval), EventData (copy)
+					return HttpService:JSONDecode(EventData.detail)
+				end)
 				
-				return
-			end
-			for i, v in ipairs(status.notifications) do
-				if v.type == constants.HEARTBEAT_NOTIFICATION_TYPE_NEW_INSTRUCTION then
-					var1:getInstructions(function(p5, p6, p7)
-						-- upvalues: x_1 (copy), logging (copy)
-						if p5 then
-							x_1(p7)
-							
-							return
-						elseif p6 then
-							logging.warn("ScreenTimeInGame requestInstructions failed: unauthorized")
-							
-							return
-						end
-						logging.warn("ScreenTimeInGame requestInstructions failed: error")
-					end)
+				if not Success then
+					Logging.warn("ScreenTimeInGame json decoding failed")
+					
+					return
+				end
+				if Result.notifications == nil then
+					Logging.warn("ScreenTimeInGame empty heartbeat notifications")
+					
+					return
+				end
+				for _, notification in ipairs(Result.notifications) do
+					if notification.type == Constants.HEARTBEAT_NOTIFICATION_TYPE_NEW_INSTRUCTION then
+						NewResult:getInstructions(function(p2, p3, p4) --[[ Line: 171 ]]
+							-- upvalues: screenTimeStatesUpdated (upval), Logging (upval)
+							if p2 then
+								screenTimeStatesUpdated(p4)
+								
+								return
+							end
+							if p3 then
+								Logging.warn("ScreenTimeInGame requestInstructions failed: unauthorized")
+								
+								return
+							else
+								Logging.warn("ScreenTimeInGame requestInstructions failed: error")
+							end
+						end)
+					end
 				end
 			end
 		end
+	elseif EventData.namespace == Constants.SIGNALR_NAMESPACE and EventData.detailType == Constants.SIGNALR_TYPE_NEW_INSTRUCTION then
+		NewResult:getInstructions(function(p2, p3, p4) --[[ Line: 171 ]]
+			-- upvalues: screenTimeStatesUpdated (upval), Logging (upval)
+			if p2 then
+				screenTimeStatesUpdated(p4)
+				
+				return
+			end
+			if p3 then
+				Logging.warn("ScreenTimeInGame requestInstructions failed: unauthorized")
+				
+				return
+			else
+				Logging.warn("ScreenTimeInGame requestInstructions failed: error")
+			end
+		end)
+		
+		return
 	end
 end)

@@ -1,16 +1,16 @@
 ﻿local QRCodeDisplay = script:FindFirstAncestor("QRCodeDisplay")
-local parent = QRCodeDisplay.Parent
-local reactModule = require(parent.React)
-local QRCodeModule = require(parent.QRCode)
-local ecToNumberModule = require(script.Parent.ecToNumber)
+local Parent = QRCodeDisplay.Parent
+local ReactModule = require(Parent.React)
+local QRCodeModule = require(Parent.QRCode)
+local EcToNumberModule = require(script.Parent.ecToNumber)
 local _ = require(QRCodeDisplay.Common.ECLevels)
 
-return function(p1)
-	-- upvalues: reactModule (ref), QRCodeModule (ref), ecToNumberModule (ref)
-	return reactModule.useMemo(function()
-		-- upvalues: QRCodeModule (copy), p1 (ref), ecToNumberModule (copy)
-		local _, var1 = QRCodeModule.qrcode(p1.toEncode, ecToNumberModule(p1.ecLevel))
+return function(p1) --[[ Line: 8 ]]
+	-- upvalues: ReactModule (copy), QRCodeModule (copy), EcToNumberModule (copy)
+	return ReactModule.useMemo(function() --[[ Line: 9 ]]
+		-- upvalues: QRCodeModule (upval), p1 (copy), EcToNumberModule (upval)
+		local _, QrcodeResult2 = QRCodeModule.qrcode(p1.toEncode, EcToNumberModule(p1.ecLevel))
 		
-		return var1
+		return QrcodeResult2
 	end, { p1.toEncode, p1.ecLevel })
 end

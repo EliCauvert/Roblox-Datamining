@@ -1,173 +1,171 @@
-﻿local gameFilters = script:FindFirstAncestor("GameFilters")
-local parent = gameFilters.Parent
-local _ = require(parent.DiscoveryTypes)
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local useTokens = foundationModule.Hooks.useTokens
-local filterClickButtonNameModule = require(gameFilters.Analytics.FilterClickButtonName)
-local filterMenuActionBarModule = require(gameFilters.Components.Menu.FilterMenuActionBar)
-local filterMenuHeaderModule = require(gameFilters.Components.Menu.FilterMenuHeader)
-local filterMenuOptionsModule = require(gameFilters.Components.Menu.FilterMenuOptions)
-local getOptionContextTagModule = require(gameFilters.Analytics.getOptionContextTag)
-local fFlagLuaAppChartsFilterOptionTextTag = require(parent.SharedFlags).FFlagLuaAppChartsFilterOptionTextTag
-local fFlagLuaAppChartsActiveFilterChips = require(parent.SharedFlags).FFlagLuaAppChartsActiveFilterChips
-local var1 = if fFlagLuaAppChartsFilterOptionTextTag then nil else 10000
+﻿local GameFilters = script:FindFirstAncestor("GameFilters")
+local Parent = GameFilters.Parent
+local _ = require(Parent.DiscoveryTypes)
+local ReactModule = require(Parent.React)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
+local FilterClickButtonNameModule = require(GameFilters.Analytics.FilterClickButtonName)
+local FilterMenuActionBarModule = require(GameFilters.Components.Menu.FilterMenuActionBar)
+local FilterMenuHeaderModule = require(GameFilters.Components.Menu.FilterMenuHeader)
+local FilterMenuOptionsModule = require(GameFilters.Components.Menu.FilterMenuOptions)
+local GetOptionContextTagModule = require(GameFilters.Analytics.getOptionContextTag)
+local FFlagLuaAppChartsFilterOptionTextTag = require(Parent.SharedFlags).FFlagLuaAppChartsFilterOptionTextTag
+local X = if FFlagLuaAppChartsFilterOptionTextTag then nil else 10000
 
-local function _(p1, p2)
+local function _(p1, p2) --[[ Line: 38 | Named "applyTokenScaling" ]]
 	return p1 * p2.Config.UI.Scale
 end
 
-return function(p1)
-	-- upvalues: useTokens (ref), useDispatch (ref), reactModule (ref), fFlagLuaAppChartsFilterOptionTextTag (ref), var1 (ref), filterClickButtonNameModule (ref), getOptionContextTagModule (ref), fFlagLuaAppChartsActiveFilterChips (ref), filterMenuHeaderModule (ref), filterMenuOptionsModule (ref), filterMenuActionBarModule (ref)
-	local uDim2, vector2
-	local var2 = useTokens()
-	local var3 = useDispatch()
-	local var4 = 260 * var2.Config.UI.Scale
-	local var5 = 84 * var2.Config.UI.Scale
-	local var6, var7 = reactModule.useState(p1.filter.selectedOptionId)
-	local scrim = var2.Color.Common.Scrim
-	local surface100 = var2.Color.Surface.Surface_100
-	local border = var2.Color.ActionStandard.Border
-	local _ = nil
-	local _ = nil
+return function(p1) --[[ Line: 43 | Named "FilterMenuDropdown" ]]
+	-- upvalues: UseTokensFunction (copy), UseDispatchFunction (copy), ReactModule (copy), FFlagLuaAppChartsFilterOptionTextTag (copy), X (copy), FilterClickButtonNameModule (copy), GetOptionContextTagModule (copy), FilterMenuHeaderModule (copy), FilterMenuOptionsModule (copy), FilterMenuActionBarModule (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseDispatchResult = UseDispatchFunction()
+	local ScaledScale = 260 * UseTokensResult.Config.UI.Scale
+	local ScaledScale1 = 84 * UseTokensResult.Config.UI.Scale
+	local UseStateResult, UseStateResult2 = ReactModule.useState(p1.filter.selectedOptionId)
+	local Scrim = UseTokensResult.Color.Common.Scrim
+	local Surface100 = UseTokensResult.Color.Surface.Surface_100
+	local Border = UseTokensResult.Color.ActionStandard.Border
+	local _UDim2 = nil
+	local _Vector2 = nil
 	
 	if p1.openPosition then
-		uDim2 = UDim2.fromOffset(p1.openPosition.X, p1.openPosition.Y)
-		vector2 = Vector2.new(0, 0)
+		_UDim2 = UDim2.fromOffset(p1.openPosition.X, p1.openPosition.Y)
+		_Vector2 = Vector2.new(0, 0)
 	else
-		uDim2 = UDim2.fromScale(0.5, 0.5)
-		vector2 = Vector2.new(0.5, 0.5)
+		_UDim2 = UDim2.fromScale(0.5, 0.5)
+		_Vector2 = Vector2.new(0.5, 0.5)
 	end
-	local var8, var9 = reactModule.useBinding(Vector2.new(0, 0))
-	local var10, var11 = reactModule.useBinding(0)
-	local var12 = nil
-	local var13 = nil
-	local var14 = nil
-	local _ = nil
-	local var15 = nil
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(Vector2.new(0, 0))
+	local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(0)
+	local v1 = nil
+	local v2 = nil
+	local v3 = nil
+	local UseBindingResult2_2 = nil
+	local UseResult = nil
 	
-	if fFlagLuaAppChartsFilterOptionTextTag then
-		local var16, var17 = reactModule.useBinding(0)
-		var14 = var16
-		local var18 = var17
-		var15 = reactModule.useCallback(function(p2)
-			-- upvalues: var18 (write)
-			var18(p2.AbsoluteCanvasSize.Y)
+	if FFlagLuaAppChartsFilterOptionTextTag then
+		v3, UseBindingResult2_2 = ReactModule.useBinding(0)
+		UseResult = ReactModule.useCallback(function(ScrollFrame) --[[ Line: 73 ]]
+			-- upvalues: UseBindingResult2_2 (ref)
+			UseBindingResult2_2(ScrollFrame.AbsoluteCanvasSize.Y)
 		end, {})
 	else
-		local var19, var20 = reactModule.useBinding(Vector2.new(var1, 0))
-		var12 = var19
-		var13 = var20
+		v1, v27 = ReactModule.useBinding(Vector2.new(X, 0))
 	end
-	local var21 = var8:map(function(p2)
-		-- upvalues: p1 (ref), var4 (ref)
-		local maxValue, maxValue_1
-		local _ = nil
-		local _ = nil
-		
+	local MapResult = UseBindingResult:map(function(Vector): Vector2 --[[ Line: 80 ]]
+		-- upvalues: p1 (copy), ScaledScale (copy)
+		local Largest = nil
+		local Largest1 = nil
 		if p1.openPosition then
-			maxValue = math.max(p2.X - p1.openPosition.X - 24, var4)
-			maxValue_1 = math.max(p2.Y - p1.openPosition.Y - 24, 0)
+			Largest = math.max(Vector.X - p1.openPosition.X - 24, ScaledScale)
+			Largest1 = math.max(Vector.Y - p1.openPosition.Y - 24, 0)
 		else
-			maxValue = p2.X - 48
-			maxValue_1 = p2.Y - 48
+			Largest = Vector.X - 48
+			Largest1 = Vector.Y - 48
 		end
-		return Vector2.new(maxValue, maxValue_1)
+		return Vector2.new(Largest, Largest1)
 	end)
-	local var22 = reactModule.useCallback(function()
-		-- upvalues: var3 (ref), p1 (ref), filterClickButtonNameModule (copy), var6 (ref), fFlagLuaAppChartsFilterOptionTextTag (copy), getOptionContextTagModule (copy), fFlagLuaAppChartsActiveFilterChips (copy)
-		var3(p1.closeCentralOverlayThunk())
+	local MapResult1 = if FFlagLuaAppChartsFilterOptionTextTag then nil else MapResult:map(function(p2) --[[ Line: 97 ]]
+		return p2.X
+	end)
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 121 ]]
+		-- upvalues: UseDispatchResult (copy), p1 (copy), FilterClickButtonNameModule (upval), UseStateResult (copy), FFlagLuaAppChartsFilterOptionTextTag (upval), GetOptionContextTagModule (upval)
+		UseDispatchResult(p1.closeCentralOverlayThunk())
 		p1.onFilterMenuClosed()
-		p1.sendFilterClick(filterClickButtonNameModule.CloseDropdown, p1.filter.selectedOptionId, var6, if fFlagLuaAppChartsFilterOptionTextTag then getOptionContextTagModule(p1.filter, p1.filter.selectedOptionId) else nil, if fFlagLuaAppChartsFilterOptionTextTag then getOptionContextTagModule(p1.filter, var6) else nil, if fFlagLuaAppChartsActiveFilterChips then true else nil)
+		p1.sendFilterClick(FilterClickButtonNameModule.CloseDropdown, p1.filter.selectedOptionId, UseStateResult, if FFlagLuaAppChartsFilterOptionTextTag then GetOptionContextTagModule(p1.filter, p1.filter.selectedOptionId) else nil, if FFlagLuaAppChartsFilterOptionTextTag then GetOptionContextTagModule(p1.filter, UseStateResult) else nil, true)
 	end, {
 		p1.filter,
-		var6,
+		UseStateResult,
 		p1.closeCentralOverlayThunk,
 		p1.onFilterMenuClosed,
 		p1.sendFilterClick
 	})
 	
-	return reactModule.createElement("TextButton", {
-		BackgroundColor3 = scrim.Color3,
-		BackgroundTransparency = scrim.Transparency,
+	return ReactModule.createElement("TextButton", {
+		BackgroundColor3 = Scrim.Color3,
+		BackgroundTransparency = Scrim.Transparency,
 		Size = UDim2.fromScale(1, 1),
 		ClipsDescendants = false,
 		Text = "",
 		AutoButtonColor = false,
-		[reactModule.Event.Activated] = var22,
-		[reactModule.Change.AbsoluteSize] = function(p2)
-			-- upvalues: var9 (ref)
-			var9(p2.AbsoluteSize)
+		[ReactModule.Event.Activated] = UseResult1,
+		[ReactModule.Change.AbsoluteSize] = function(Frame) --[[ Line: 176 ]]
+			-- upvalues: UseBindingResult2 (copy)
+			UseBindingResult2(Frame.AbsoluteSize)
 		end,
 		Selectable = false
 	}, {
-		Dropdown = reactModule.createElement("TextButton", {
+		Dropdown = ReactModule.createElement("TextButton", {
 			ClipsDescendants = true,
 			Text = "",
 			AutoButtonColor = false,
 			Selectable = false,
-			BackgroundColor3 = surface100.Color3,
-			BackgroundTransparency = surface100.Transparency,
-			BorderColor3 = border.Color3,
-			Position = uDim2,
-			AnchorPoint = vector2,
-			Size = reactModule.joinBindings({
-				var10,
-				if fFlagLuaAppChartsFilterOptionTextTag then var14 else var12
-			}):map(function(p2)
-				-- upvalues: fFlagLuaAppChartsFilterOptionTextTag (copy), var5 (ref)
-				local var23 = p2[1]
+			BackgroundColor3 = Surface100.Color3,
+			BackgroundTransparency = Surface100.Transparency,
+			BorderColor3 = Border.Color3,
+			Position = _UDim2,
+			AnchorPoint = _Vector2,
+			Size = ReactModule.joinBindings({
+				UseBindingResult1,
+				if FFlagLuaAppChartsFilterOptionTextTag then v3 else v1
+			}):map(function(Entry): UDim2 --[[ Line: 104 ]]
+				-- upvalues: FFlagLuaAppChartsFilterOptionTextTag (upval), ScaledScale1 (copy)
+				local Entry1 = Entry[1]
 				
-				if fFlagLuaAppChartsFilterOptionTextTag then
-					return UDim2.fromOffset(0, var23 + p2[2] + var5)
+				if FFlagLuaAppChartsFilterOptionTextTag then
+					return UDim2.fromOffset(0, Entry1 + Entry[2] + ScaledScale1)
+				else
+					local Entry2 = Entry[2]
+					
+					return UDim2.fromOffset(Entry2.X, Entry1 + Entry2.Y + ScaledScale1)
 				end
-				local var24 = p2[2]
-				
-				return UDim2.fromOffset(var24.X, var23 + var24.Y + var5)
 			end),
-			AutomaticSize = if fFlagLuaAppChartsFilterOptionTextTag then Enum.AutomaticSize.X else nil
+			AutomaticSize = if FFlagLuaAppChartsFilterOptionTextTag then Enum.AutomaticSize.X else nil
 		}, {
-			Corner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, var2.Radius.Medium) }),
-			SizeConstraint = reactModule.createElement("UISizeConstraint", { MinSize = Vector2.new(var4, 0), MaxSize = var21 }),
-			Layout = reactModule.createElement("UIListLayout", {
+			Corner = ReactModule.createElement("UICorner", {
+				CornerRadius = UDim.new(0, UseTokensResult.Radius.Medium)
+			}),
+			SizeConstraint = ReactModule.createElement("UISizeConstraint", {
+				MinSize = Vector2.new(ScaledScale, 0),
+				MaxSize = MapResult
+			}),
+			Layout = ReactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Vertical,
 				HorizontalAlignment = Enum.HorizontalAlignment.Left,
 				SortOrder = Enum.SortOrder.LayoutOrder,
-				HorizontalFlex = if fFlagLuaAppChartsFilterOptionTextTag then Enum.UIFlexAlignment.Fill else nil
+				HorizontalFlex = if FFlagLuaAppChartsFilterOptionTextTag then Enum.UIFlexAlignment.Fill else nil
 			}),
-			Header = reactModule.createElement(filterMenuHeaderModule, {
+			Header = ReactModule.createElement(FilterMenuHeaderModule, {
 				LayoutOrder = 1,
 				title = p1.filter.filterDisplayName,
-				onCloseButtonActivated = var22,
-				onHeightChanged = var11
+				onCloseButtonActivated = UseResult1,
+				onHeightChanged = UseBindingResult2_1
 			}),
-			Options = reactModule.createElement(filterMenuOptionsModule, {
+			Options = ReactModule.createElement(FilterMenuOptionsModule, {
 				LayoutOrder = 2,
-				Size = var10:map(function(p2)
-					-- upvalues: fFlagLuaAppChartsFilterOptionTextTag (copy), var5 (ref)
-					return UDim2.new(if fFlagLuaAppChartsFilterOptionTextTag then 0 else 1, 0, 1, (-p2) - var5)
+				Size = UseBindingResult1:map(function(p2): UDim2 --[[ Line: 117 ]]
+					-- upvalues: FFlagLuaAppChartsFilterOptionTextTag (upval), ScaledScale1 (copy)
+					return UDim2.new(if FFlagLuaAppChartsFilterOptionTextTag then 0 else 1, 0, 1, -p2 - ScaledScale1)
 				end),
-				containerMaxWidthBinding = if fFlagLuaAppChartsFilterOptionTextTag then nil elseif fFlagLuaAppChartsFilterOptionTextTag then nil else var21:map(function(p2)
-					return p2.X
-				end),
+				containerMaxWidthBinding = if FFlagLuaAppChartsFilterOptionTextTag then nil else MapResult1,
 				options = p1.filter.filterOptions,
-				selectedOptionId = var6,
-				onSelectedOptionChanged = var7,
-				onCanvasSizeChanged = if fFlagLuaAppChartsFilterOptionTextTag then var15 else var13
+				selectedOptionId = UseStateResult,
+				onSelectedOptionChanged = UseStateResult2,
+				onCanvasSizeChanged = if FFlagLuaAppChartsFilterOptionTextTag then UseResult else v2
 			}),
-			ActionBar = reactModule.createElement(filterMenuActionBarModule, {
+			ActionBar = ReactModule.createElement(FilterMenuActionBarModule, {
 				LayoutOrder = 3,
-				Size = UDim2.new(if fFlagLuaAppChartsFilterOptionTextTag then 0 else 1, 0, 0, var5),
-				applyEnabled = var6 ~= p1.filter.selectedOptionId,
-				onApply = reactModule.useCallback(function()
-					-- upvalues: p1 (ref), var6 (ref), var3 (ref), filterClickButtonNameModule (copy), fFlagLuaAppChartsFilterOptionTextTag (copy), getOptionContextTagModule (copy), fFlagLuaAppChartsActiveFilterChips (copy)
-					p1.onFilterApplied(p1.filter.filterType, var6)
-					var3(p1.closeCentralOverlayThunk())
+				Size = UDim2.new(if FFlagLuaAppChartsFilterOptionTextTag then 0 else 1, 0, 0, ScaledScale1),
+				applyEnabled = UseStateResult ~= p1.filter.selectedOptionId,
+				onApply = ReactModule.useCallback(function() --[[ Line: 144 ]]
+					-- upvalues: p1 (copy), UseStateResult (copy), UseDispatchResult (copy), FilterClickButtonNameModule (upval), FFlagLuaAppChartsFilterOptionTextTag (upval), GetOptionContextTagModule (upval)
+					p1.onFilterApplied(p1.filter.filterType, UseStateResult)
+					UseDispatchResult(p1.closeCentralOverlayThunk())
 					p1.onFilterMenuClosed()
-					p1.sendFilterClick(filterClickButtonNameModule.Apply, var6, p1.filter.selectedOptionId, if fFlagLuaAppChartsFilterOptionTextTag then getOptionContextTagModule(p1.filter, var6) else nil, if fFlagLuaAppChartsFilterOptionTextTag then getOptionContextTagModule(p1.filter, p1.filter.selectedOptionId) else nil, if fFlagLuaAppChartsActiveFilterChips then true else nil)
+					p1.sendFilterClick(FilterClickButtonNameModule.Apply, UseStateResult, p1.filter.selectedOptionId, if FFlagLuaAppChartsFilterOptionTextTag then GetOptionContextTagModule(p1.filter, UseStateResult) else nil, if FFlagLuaAppChartsFilterOptionTextTag then GetOptionContextTagModule(p1.filter, p1.filter.selectedOptionId) else nil, true)
 				end, {
-					p1.filter, var6, p1.onFilterApplied, p1.closeCentralOverlayThunk,
+					p1.filter, UseStateResult, p1.onFilterApplied, p1.closeCentralOverlayThunk,
 					p1.onFilterMenuClosed, p1.sendFilterClick
 				})
 			})

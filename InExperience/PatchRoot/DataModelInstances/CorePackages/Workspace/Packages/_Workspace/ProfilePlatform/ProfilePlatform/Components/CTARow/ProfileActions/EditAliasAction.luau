@@ -1,25 +1,25 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local setAliasModule = require(parent.SetAlias)
-local socialStopwatchModule = require(parent.SocialStopwatch)
-local enumsModule = require(profilePlatform.Common.Enums)
-local _ = require(profilePlatform.Components.CTARow.Types)
-local eventNamesModule = require(profilePlatform.Analytics.EventNames)
-local profileTypes = enumsModule.ProfileTypes
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local SetAliasModule = require(Parent.SetAlias)
+local SocialStopwatchModule = require(Parent.SocialStopwatch)
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local _ = require(ProfilePlatform.Components.CTARow.Types)
+local EventNamesModule = require(ProfilePlatform.Analytics.EventNames)
+local ProfileTypes = EnumsModule.ProfileTypes
 
 return {
-	[enumsModule.ProfileActions.EditAlias] = function(p1)
-		-- upvalues: enumsModule (ref), profileTypes (ref), socialStopwatchModule (ref), eventNamesModule (ref), setAliasModule (ref)
+	[EnumsModule.ProfileActions.EditAlias] = function(p1) --[[ Line: 13 ]]
+		-- upvalues: EnumsModule (copy), ProfileTypes (copy), SocialStopwatchModule (copy), EventNamesModule (copy), SetAliasModule (copy)
 		return {
-			text = p1.localized[enumsModule.ProfileActions.EditAlias],
+			text = p1.localized[EnumsModule.ProfileActions.EditAlias],
 			onActivated = {
-				[profileTypes.User] = function()
-					-- upvalues: socialStopwatchModule (copy), p1 (ref), eventNamesModule (copy), enumsModule (copy), setAliasModule (copy)
-					socialStopwatchModule.Stopwatch.start(socialStopwatchModule.Events.CustomizeNameOpened)
-					p1.analytics.fireAnalyticsEvent(eventNamesModule.ContextualMenuButtonSetAlias, { buttonSurface = p1.buttonSurface })
-					p1.navigation.navigate(enumsModule.Screens.SetAliasModal, {
+				[ProfileTypes.User] = function() --[[ Line: 17 ]]
+					-- upvalues: SocialStopwatchModule (upval), p1 (copy), EventNamesModule (upval), EnumsModule (upval), SetAliasModule (upval)
+					SocialStopwatchModule.Stopwatch.start(SocialStopwatchModule.Events.CustomizeNameOpened)
+					p1.analytics.fireAnalyticsEvent(EventNamesModule.ContextualMenuButtonSetAlias, { buttonSurface = p1.buttonSurface })
+					p1.navigation.navigate(EnumsModule.Screens.SetAliasModal, {
 						profileUserId = p1.profileId,
-						origin = setAliasModule.Analytics.EntryPoints.ContextualMenu
+						origin = SetAliasModule.Analytics.EntryPoints.ContextualMenu
 					})
 				end
 			}

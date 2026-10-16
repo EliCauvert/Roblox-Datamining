@@ -1,314 +1,314 @@
-﻿local playersService = game:GetService("Players")
-local parent = script.Parent.Parent
-local reactModule = require(parent.Parent.React)
-local bindingConfigsModule = require(parent.Configs.BindingConfigs)
-local _ = require(parent.Configs.ConfigTypes)
-local constantsModule = require(parent.Constants)
-local var1 = (function()
-	-- upvalues: bindingConfigsModule (ref)
-	local var2 = 0
+﻿local Players = game:GetService("Players")
+local Parent = script.Parent.Parent
+local ReactModule = require(Parent.Parent.React)
+local BindingConfigsModule = require(Parent.Configs.BindingConfigs)
+local _ = require(Parent.Configs.ConfigTypes)
+local ConstantsModule = require(Parent.Constants)
+local v1 = (function(): number --[[ Line: 21 | Named "getStaticCharacterMovementControlCount" ]]
+	-- upvalues: BindingConfigsModule (copy)
+	local Count = 0
 	
-	for i, v in bindingConfigsModule.Controls do
-		if v.keyboardInput ~= nil and v.keyboardInput.group.id == bindingConfigsModule.ControlGroups.CharacterMovement.id then
-			var2 += 1
+	for _, control in BindingConfigsModule.Controls do
+		if control.keyboardInput ~= nil and control.keyboardInput.group.id == BindingConfigsModule.ControlGroups.CharacterMovement.id then
+			Count += 1
 		end
 	end
-	return var2
+	return Count
 end)()
 
-local function _(p1)
-	-- upvalues: var1 (ref)
-	local var3 = tonumber(string.sub(p1, 14))
+local function _(Text: string) --[[ Line: 36 | Named "getAbilityLayoutOrder" ]]
+	-- upvalues: v1 (copy)
+	local Number: number? = tonumber((string.sub(Text, 14)))
 	
-	return if var3 == nil then nil else var1 + var3
+	return if Number == nil then nil else v1 + Number
 end
 
-local _ = function(p1)
-	if p1 == nil then
+local _ = function(Object) --[[ Line: 45 | Named "getCharacterContext" ]]
+	if Object == nil then
 		return nil
 	end
-	local inputContexts = p1:FindFirstChild("InputContexts")
+	local InputContexts = Object:FindFirstChild("InputContexts")
 	
-	if inputContexts == nil then
+	if InputContexts == nil then
 		return nil
+	else
+		local CharacterContext = InputContexts:FindFirstChild("CharacterContext")
+		
+		return if CharacterContext == nil or not CharacterContext:IsA("InputContext") then nil else CharacterContext
 	end
-	local characterContext = inputContexts:FindFirstChild("CharacterContext")
-	
-	return if characterContext == nil or not characterContext:IsA("InputContext") then nil else characterContext
 end
 
-local function getKeyboardCombo(p1)
-	local t = {}
-	local primaryModifier = p1.PrimaryModifier
-	local secondaryModifier = p1.SecondaryModifier
-	local keyCode = p1.KeyCode
+local function getKeyboardCombo(Input) --[[ Line: 63 ]]
+	local List = {}
+	local PrimaryModifier = Input.PrimaryModifier
+	local SecondaryModifier = Input.SecondaryModifier
+	local KeyCode = Input.KeyCode
 	
-	if primaryModifier ~= Enum.KeyCode.None then
-		table.insert(t, primaryModifier)
+	if PrimaryModifier ~= Enum.KeyCode.None then
+		table.insert(List, PrimaryModifier)
 	end
-	if secondaryModifier ~= Enum.KeyCode.None then
-		table.insert(t, secondaryModifier)
+	if SecondaryModifier ~= Enum.KeyCode.None then
+		table.insert(List, SecondaryModifier)
 	end
-	if keyCode ~= Enum.KeyCode.None then
-		table.insert(t, keyCode)
+	if KeyCode ~= Enum.KeyCode.None then
+		table.insert(List, KeyCode)
 	end
-	return if #t == 0 then nil else t
+	return if #List == 0 then nil else List
 end
 
-local function readAction(p1)
-	-- upvalues: var1 (ref), constantsModule (ref), getKeyboardCombo (ref), bindingConfigsModule (ref)
-	local var3 = tonumber(string.sub(p1.Name, 14))
-	local var4 = if var3 == nil then nil else var1 + var3
+local function readAction(InputAction) --[[ Line: 84 ]]
+	-- upvalues: v1 (copy), ConstantsModule (copy), getKeyboardCombo (copy), BindingConfigsModule (copy)
+	local Number: number? = tonumber((string.sub(InputAction.Name, 14)))
+	local NewNumber = if Number == nil then nil else v1 + Number
 	
-	if var4 == nil then
+	if NewNumber == nil then
 		return nil
 	end
-	local t = {}
-	local t_1 = {}
+	local Input = {}
+	local Input1 = {}
 	
-	for i, v in p1:GetChildren() do
-		if v:IsA("InputBinding") then
-			local keyCode = v.KeyCode
+	for _, InputBinding in InputAction:GetChildren() do
+		if InputBinding:IsA("InputBinding") then
+			local KeyCode = InputBinding.KeyCode
 			
-			if keyCode ~= nil then
-				if constantsModule.HELP_PAGE.GAMEPAD_LAYOUT_ORDER[keyCode] == nil then
-					local var5 = getKeyboardCombo(v)
+			if KeyCode ~= nil then
+				if ConstantsModule.HELP_PAGE.GAMEPAD_LAYOUT_ORDER[KeyCode] == nil then
+					local KeyboardCombo = getKeyboardCombo(InputBinding)
 					
-					if var5 ~= nil then
-						table.insert(t, var5)
+					if KeyboardCombo ~= nil then
+						table.insert(Input, KeyboardCombo)
 					end
 				else
-					table.insert(t_1, keyCode)
+					table.insert(Input1, KeyCode)
 				end
 			end
 		end
 	end
-	if #t == 0 and #t_1 == 0 then
+	if #Input == 0 and #Input1 == 0 then
 		return nil
 	end
-	local t_2 = {
+	local config = {
 		label = "CoreScripts.InGameMenu.GameSettings.Default",
-		disabled = not p1.Enabled
+		disabled = not InputAction.Enabled
 	}
 	
-	if #t > 0 then
-		t_2.keyboardInput = {
-			input = t,
-			group = bindingConfigsModule.ControlGroups.CharacterMovement,
-			layoutOrder = var4
+	if #Input > 0 then
+		config.keyboardInput = {
+			input = Input,
+			group = BindingConfigsModule.ControlGroups.CharacterMovement,
+			layoutOrder = NewNumber
 		}
 	end
-	if #t_1 > 0 then
-		t_2.gamepadInput = { input = t_1 }
+	if #Input1 > 0 then
+		config.gamepadInput = { input = Input1 }
 	end
-	return t_2
+	return config
 end
 
-local function readAbilities(p2)
-	-- upvalues: readAction (ref)
-	local var6
-	if p2 == nil then
-		var6 = nil
+local function readAbilities(Object) --[[ Line: 139 ]]
+	-- upvalues: readAction (copy)
+	local Object1 = nil
+	if Object == nil then
+		Object1 = nil
 	else
-		local inputContexts = p2:FindFirstChild("InputContexts")
+		local InputContexts = Object:FindFirstChild("InputContexts")
 		
-		if inputContexts == nil then
-			var6 = nil
+		if InputContexts == nil then
+			Object1 = nil
 		else
-			local characterContext = inputContexts:FindFirstChild("CharacterContext")
-			var6 = if characterContext == nil or not characterContext:IsA("InputContext") then nil else characterContext
+			local CharacterContext = InputContexts:FindFirstChild("CharacterContext")
+			Object1 = if CharacterContext == nil or not CharacterContext:IsA("InputContext") then nil else CharacterContext
 		end
 	end
-	if var6 == nil or not var6.Enabled then
+	if Object1 == nil or not Object1.Enabled then
 		return nil
 	end
 	local t = {}
 	
-	for i, v in var6:GetChildren() do
-		if v:IsA("InputAction") then
-			local var7 = readAction(v)
+	for _, InputAction in Object1:GetChildren() do
+		if InputAction:IsA("InputAction") then
+			local Action = readAction(InputAction)
 			
-			if var7 ~= nil then
-				t[v.Name] = var7
+			if Action ~= nil then
+				t[InputAction.Name] = Action
 			end
 		end
 	end
 	return if next(t) == nil then nil else t
 end
 
-local _ = function(p3)
-	for i, v in p3 do
-		v:Disconnect()
+local _ = function(Tbl) --[[ Line: 161 | Named "disconnectAll" ]]
+	for _, Connection in Tbl do
+		Connection:Disconnect()
 	end
-	table.clear(p3)
+	table.clear(Tbl)
 end
 
-return function(p4)
-	-- upvalues: playersService (ref), reactModule (ref), readAbilities (ref)
-	p4 = p4 or playersService.LocalPlayer
-	local var8, var9 = reactModule.useState(readAbilities(p4))
-	reactModule.useEffect(function()
-		-- upvalues: p4 (ref), var9 (ref), readAbilities (copy)
-		if p4 == nil then
-			return
-		end
-		local t = {}
-		local t_1 = {}
-		local t_2 = {}
-		local t_3 = {}
+return function(p1) --[[ Line: 168 | Named "useAbilities" ]]
+	-- upvalues: Players (copy), ReactModule (copy), readAbilities (copy)
+	local P4 = p1 or Players.LocalPlayer
+	local UseStateResult, UseStateResult2 = ReactModule.useState((readAbilities(P4)))
+	ReactModule.useEffect(function() --[[ Line: 172 ]]
+		-- upvalues: P4 (copy), UseStateResult2 (copy), readAbilities (upval)
+		if P4 == nil then return end
+		local List = {}
+		local List1 = {}
+		local List2 = {}
+		local List3 = {}
 		
-		local function refresh()
-			-- upvalues: var9 (copy), readAbilities (copy), p4 (copy)
-			var9(readAbilities(p4))
+		local function refresh() --[[ Line: 182 ]]
+			-- upvalues: UseStateResult2 (upval), readAbilities (upval), P4 (upval)
+			UseStateResult2((readAbilities(P4)))
 		end
 		
 		local _ = nil
 		local _ = nil
 		
-		local var10 = function()
-			-- upvalues: t_3 (ref), p4 (copy), refresh (ref), var10 (write), var9 (copy), readAbilities (copy)
-			for i, v in t_3 do
-				v:Disconnect()
+		local function v43() --[[ Line: 189 ]]
+			-- upvalues: List3 (copy), P4 (upval), refresh (copy), v43 (ref), UseStateResult2 (upval), readAbilities (upval)
+			for _, Connection in List3 do
+				Connection:Disconnect()
 			end
-			local var11
-			table.clear(t_3)
+			table.clear(List3)
+			local Object = nil
 			
-			if p4 == nil then
-				var11 = nil
+			if P4 == nil then
+				Object = nil
 			else
-				local inputContexts = p4:FindFirstChild("InputContexts")
+				local InputContexts = P4:FindFirstChild("InputContexts")
 				
-				if inputContexts == nil then
-					var11 = nil
+				if InputContexts == nil then
+					Object = nil
 				else
-					local characterContext = inputContexts:FindFirstChild("CharacterContext")
-					var11 = if characterContext == nil or not characterContext:IsA("InputContext") then nil else characterContext
+					local CharacterContext = InputContexts:FindFirstChild("CharacterContext")
+					Object = if CharacterContext == nil or not CharacterContext:IsA("InputContext") then nil else CharacterContext
 				end
 			end
-			if var11 == nil then return end
-			for i, v_1 in var11:GetChildren() do
-				if v_1:IsA("InputAction") and string.match(v_1.Name, "^AbilityAction%d+$") then
-					table.insert(t_3, v_1.Changed:Connect(refresh))
-					table.insert(t_3, v_1.ChildAdded:Connect(function()
-						-- upvalues: var10 (copy), var9 (copy), readAbilities (copy), p4 (copy)
-						var10()
-						var9(readAbilities(p4))
+			if Object == nil then return end
+			for _, InputAction in Object:GetChildren() do
+				if InputAction:IsA("InputAction") and string.match(InputAction.Name, "^AbilityAction%d+$") then
+					table.insert(List3, InputAction.Changed:Connect(refresh))
+					table.insert(List3, InputAction.ChildAdded:Connect(function() --[[ Line: 206 ]]
+						-- upvalues: v43 (upval), UseStateResult2 (upval), readAbilities (upval), P4 (upval)
+						v43()
+						UseStateResult2((readAbilities(P4)))
 					end))
-					table.insert(t_3, v_1.ChildRemoved:Connect(function()
-						-- upvalues: var10 (copy), var9 (copy), readAbilities (copy), p4 (copy)
-						var10()
-						var9(readAbilities(p4))
+					table.insert(List3, InputAction.ChildRemoved:Connect(function() --[[ Line: 213 ]]
+						-- upvalues: v43 (upval), UseStateResult2 (upval), readAbilities (upval), P4 (upval)
+						v43()
+						UseStateResult2((readAbilities(P4)))
 					end))
 					
-					for i_2, v_2 in v_1:GetChildren() do
-						if v_2:IsA("InputBinding") then
-							table.insert(t_3, v_2.Changed:Connect(refresh))
+					for _, InputBinding in InputAction:GetChildren() do
+						if InputBinding:IsA("InputBinding") then
+							table.insert(List3, InputBinding.Changed:Connect(refresh))
 						end
 					end
 				end
 			end
 		end
 		
-		local var12 = function()
-			-- upvalues: t_1 (ref), t_2 (ref), t_3 (ref), p4 (copy), var12 (write), var9 (copy), readAbilities (copy), refresh (ref), var10 (write)
-			for i, v in t_1 do
-				v:Disconnect()
+		local function v44() --[[ Line: 227 ]]
+			-- upvalues: List1 (copy), List2 (copy), List3 (copy), P4 (upval), v44 (ref), UseStateResult2 (upval), readAbilities (upval), refresh (copy), v43 (ref)
+			for _, Connection in List1 do
+				Connection:Disconnect()
 			end
-			table.clear(t_1)
+			table.clear(List1)
 			
-			for i_1, v_1 in t_2 do
-				v_1:Disconnect()
+			for _, Connection1 in List2 do
+				Connection1:Disconnect()
 			end
-			table.clear(t_2)
+			table.clear(List2)
 			
-			for i_2, v_2 in t_3 do
-				v_2:Disconnect()
+			for _, Connection2 in List3 do
+				Connection2:Disconnect()
 			end
-			table.clear(t_3)
-			local inputContexts = p4:FindFirstChild("InputContexts")
+			table.clear(List3)
+			local InputContexts = P4:FindFirstChild("InputContexts")
 			
-			if inputContexts == nil then return end
-			local var13
-			table.insert(t_1, inputContexts.ChildAdded:Connect(function()
-				-- upvalues: var12 (copy), var9 (copy), readAbilities (copy), p4 (copy)
-				var12()
-				var9(readAbilities(p4))
+			if InputContexts == nil then return end
+			table.insert(List1, InputContexts.ChildAdded:Connect(function() --[[ Line: 239 ]]
+				-- upvalues: v44 (upval), UseStateResult2 (upval), readAbilities (upval), P4 (upval)
+				v44()
+				UseStateResult2((readAbilities(P4)))
 			end))
-			table.insert(t_1, inputContexts.ChildRemoved:Connect(function()
-				-- upvalues: var12 (copy), var9 (copy), readAbilities (copy), p4 (copy)
-				var12()
-				var9(readAbilities(p4))
+			table.insert(List1, InputContexts.ChildRemoved:Connect(function() --[[ Line: 246 ]]
+				-- upvalues: v44 (upval), UseStateResult2 (upval), readAbilities (upval), P4 (upval)
+				v44()
+				UseStateResult2((readAbilities(P4)))
 			end))
+			local v2 = nil
 			
-			if p4 == nil then
-				var13 = nil
+			if P4 == nil then
+				v2 = nil
 			else
-				local inputContexts_1 = p4:FindFirstChild("InputContexts")
+				local InputContexts1 = P4:FindFirstChild("InputContexts")
 				
-				if inputContexts_1 == nil then
-					var13 = nil
+				if InputContexts1 == nil then
+					v2 = nil
 				else
-					local characterContext = inputContexts_1:FindFirstChild("CharacterContext")
-					var13 = if characterContext == nil or not characterContext:IsA("InputContext") then nil else characterContext
+					local CharacterContext = InputContexts1:FindFirstChild("CharacterContext")
+					v2 = if CharacterContext == nil or not CharacterContext:IsA("InputContext") then nil else CharacterContext
 				end
 			end
-			if var13 == nil then
+			if v2 ~= nil then
+				table.insert(List2, v2.Changed:Connect(refresh))
+				table.insert(List2, v2.ChildAdded:Connect(function() --[[ Line: 260 ]]
+					-- upvalues: v43 (upval), UseStateResult2 (upval), readAbilities (upval), P4 (upval)
+					v43()
+					UseStateResult2((readAbilities(P4)))
+				end))
+				table.insert(List2, v2.ChildRemoved:Connect(function() --[[ Line: 267 ]]
+					-- upvalues: v43 (upval), UseStateResult2 (upval), readAbilities (upval), P4 (upval)
+					v43()
+					UseStateResult2((readAbilities(P4)))
+				end))
+				v43()
+				
 				return
 			end
-			table.insert(t_2, var13.Changed:Connect(refresh))
-			table.insert(t_2, var13.ChildAdded:Connect(function()
-				-- upvalues: var10 (copy), var9 (copy), readAbilities (copy), p4 (copy)
-				var10()
-				var9(readAbilities(p4))
-			end))
-			table.insert(t_2, var13.ChildRemoved:Connect(function()
-				-- upvalues: var10 (copy), var9 (copy), readAbilities (copy), p4 (copy)
-				var10()
-				var9(readAbilities(p4))
-			end))
-			var10()
 		end
 		
-		table.insert(t, p4.ChildAdded:Connect(function(p5)
-			-- upvalues: var12 (write), var9 (copy), readAbilities (copy), p4 (copy)
-			if p5.Name == "InputContexts" then
-				var12()
-				var9(readAbilities(p4))
+		table.insert(List, P4.ChildAdded:Connect(function(Child) --[[ Line: 277 ]]
+			-- upvalues: v44 (ref), UseStateResult2 (upval), readAbilities (upval), P4 (upval)
+			if Child.Name == "InputContexts" then
+				v44()
+				UseStateResult2((readAbilities(P4)))
 			end
 		end))
-		table.insert(t, p4.ChildRemoved:Connect(function(p5)
-			-- upvalues: var12 (write), var9 (copy), readAbilities (copy), p4 (copy)
-			if p5.Name == "InputContexts" then
-				var12()
-				var9(readAbilities(p4))
+		table.insert(List, P4.ChildRemoved:Connect(function(Child) --[[ Line: 286 ]]
+			-- upvalues: v44 (ref), UseStateResult2 (upval), readAbilities (upval), P4 (upval)
+			if Child.Name == "InputContexts" then
+				v44()
+				UseStateResult2((readAbilities(P4)))
 			end
 		end))
-		var12()
-		var9(readAbilities(p4))
+		v44()
+		UseStateResult2((readAbilities(P4)))
 		
-		return function()
-			-- upvalues: t (ref), t_1 (ref), t_2 (ref), t_3 (ref)
-			for i, v in t do
-				v:Disconnect()
+		return function() --[[ Line: 297 ]]
+			-- upvalues: List (copy), List1 (copy), List2 (copy), List3 (copy)
+			for _, Connection in List do
+				Connection:Disconnect()
 			end
-			table.clear(t)
+			table.clear(List)
 			
-			for i, v_1 in t_1 do
-				v_1:Disconnect()
+			for _, Connection1 in List1 do
+				Connection1:Disconnect()
 			end
-			table.clear(t_1)
+			table.clear(List1)
 			
-			for i, v_2 in t_2 do
-				v_2:Disconnect()
+			for _, Connection2 in List2 do
+				Connection2:Disconnect()
 			end
-			table.clear(t_2)
+			table.clear(List2)
 			
-			for i, v_3 in t_3 do
-				v_3:Disconnect()
+			for _, Connection3 in List3 do
+				Connection3:Disconnect()
 			end
-			table.clear(t_3)
+			table.clear(List3)
 		end
-	end, { p4 })
+	end, { P4 })
 	
-	return var8
+	return UseStateResult
 end

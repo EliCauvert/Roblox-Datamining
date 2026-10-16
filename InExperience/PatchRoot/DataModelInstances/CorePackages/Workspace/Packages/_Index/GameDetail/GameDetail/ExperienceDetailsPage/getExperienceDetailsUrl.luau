@@ -1,21 +1,22 @@
-﻿local parent = script:FindFirstAncestor("GameDetail").Parent
-local urlBuilder = require(parent.UrlBuilder).UrlBuilder
-local url = require(parent.Http).Url
-local sduiCapabilities = require(parent.SduiSharedUtilities).SduiCapabilities
-local fFlagSduiCapabilityBindings = require(parent.SharedFlags).FFlagSduiCapabilityBindings
-local fFlagSduiEdpClientTemplateCache = require(parent.SharedFlags).FFlagSduiEdpClientTemplateCache
-local fFlagInfoTableStableItemKeys = require(parent.SharedFlags).FFlagInfoTableStableItemKeys
+﻿local Parent = script:FindFirstAncestor("GameDetail").Parent
+local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
+local Url = require(Parent.Http).Url
+local SduiCapabilities = require(Parent.SduiSharedUtilities).SduiCapabilities
+local FFlagSduiCapabilityBindings = require(Parent.SharedFlags).FFlagSduiCapabilityBindings
+local FFlagSduiEdpClientTemplateCache = require(Parent.SharedFlags).FFlagSduiEdpClientTemplateCache
+local FFlagInfoTableStableItemKeys = require(Parent.SharedFlags).FFlagInfoTableStableItemKeys
+local FFlagLuaAppEdpMomentVideo = require(Parent.SharedFlags).FFlagLuaAppEdpMomentVideo
 
-return function(p1)
-	-- upvalues: urlBuilder (ref), url (ref), fFlagSduiCapabilityBindings (ref), fFlagSduiEdpClientTemplateCache (ref), parent (ref), fFlagInfoTableStableItemKeys (ref), sduiCapabilities (ref)
-	local var1 = urlBuilder.new({
+return function(UniverseId) --[[ Line: 12 | Named "getExperienceDetailsUrl" ]]
+	-- upvalues: UrlBuilder (copy), Url (copy), FFlagSduiCapabilityBindings (copy), FFlagSduiEdpClientTemplateCache (copy), Parent (copy), FFlagLuaAppEdpMomentVideo (copy), FFlagInfoTableStableItemKeys (copy), SduiCapabilities (copy)
+	local AddQueryStringResult = UrlBuilder.new({
 		path = "experience-details-api/v2/universes/{universeId}/experience-details",
-		base = url.APIS_URL
-	})({ universeId = p1 })
+		base = Url.APIS_URL
+	})({ universeId = UniverseId })
 	
-	if fFlagSduiCapabilityBindings and not fFlagSduiEdpClientTemplateCache then
-		local _ = require(parent.ServiceContractsProto)
-		local list = {
+	if FFlagSduiCapabilityBindings and not FFlagSduiEdpClientTemplateCache then
+		local _ = require(Parent.ServiceContractsProto)
+		local List = {
 			"CAPABILITY_SUPPORTS_EDP_PERSISTENT_ACTION_BAR_PLAY_BUTTON",
 			"CAPABILITY_SUPPORTS_EDP_COMMUNITY_SECTION",
 			"CAPABILITY_SUPPORTS_EDP_BUILD_TAG",
@@ -23,18 +24,19 @@ return function(p1)
 			"CAPABILITY_SUPPORTS_PIN_SHORTCUT_ACTION",
 			"CAPABILITY_SUPPORTS_SCALED_PLAY_BUTTON_AND_IMAGE_SIZES",
 			"CAPABILITY_SUPPORTS_CONTAINER_QUERIES",
-			"CAPABILITY_SUPPORTS_EDP_EARLY_ACCESS_UPSELL"
+			"CAPABILITY_SUPPORTS_EDP_EARLY_ACCESS_UPSELL",
+			if FFlagLuaAppEdpMomentVideo then "CAPABILITY_SUPPORTS_EDP_MEDIA_GALLERY_MOMENT_VIDEO" else nil
 		}
 		
-		if fFlagInfoTableStableItemKeys then
-			table.insert(list, "CAPABILITY_SUPPORTS_EDP_INFO_TABLE_STABLE_ITEM_KEYS")
+		if FFlagInfoTableStableItemKeys then
+			table.insert(List, "CAPABILITY_SUPPORTS_EDP_INFO_TABLE_STABLE_ITEM_KEYS")
 		end
 		local t = {}
-		sduiCapabilities.addToQueryParams(t, list)
+		SduiCapabilities.addToQueryParams(t, List)
 		
 		if next(t) ~= nil then
-			var1 = urlBuilder.addQueryString(var1, t)
+			AddQueryStringResult = UrlBuilder.addQueryString(AddQueryStringResult, t)
 		end
 	end
-	return var1
+	return AddQueryStringResult
 end

@@ -1,85 +1,84 @@
-﻿local parent = script.Parent.Parent
-local guiService = game:GetService("GuiService")
-local gamepadService = game:GetService("GamepadService")
-local playersService = game:GetService("Players")
-local coreGuiService = game:GetService("CoreGui")
-local sharedFlagsModule = require(script:FindFirstAncestor("VirtualCursorModular").Parent.SharedFlags)
-local fFlagEnableVirtualCursorMoveAssist = sharedFlagsModule.FFlagEnableVirtualCursorMoveAssist
-local fIntVirtualCursorMoveAssistLevel = sharedFlagsModule.FIntVirtualCursorMoveAssistLevel
-local fIntVirtualCursorMoveAssistHoverSpeed = sharedFlagsModule.FIntVirtualCursorMoveAssistHoverSpeed
-local propertiesModule = require(parent.Properties)
-local utilModule = require(parent.Util)
-local getMaxSpeed = utilModule.GetMaxSpeed
-local isCircleContainedInGuiObject = utilModule.IsCircleContainedInGuiObject
-local isSelectableGuiObject = utilModule.IsSelectableGuiObject
-local isSinkingGuiObject = utilModule.IsSinkingGuiObject
-local getPointRotatedAroundObject = utilModule.GetPointRotatedAroundObject
-local cos = math.cos
-local sin = math.sin
-local abs = math.abs
-local max = math.max
-local min = math.min
-local sign = math.sign
-local t = {}
-t.__index = t
+﻿local Parent = script.Parent.Parent
+local GuiService = game:GetService("GuiService")
+local GamepadService = game:GetService("GamepadService")
+local Players = game:GetService("Players")
+local CoreGui = game:GetService("CoreGui")
+local SharedFlagsModule = require(script:FindFirstAncestor("VirtualCursorModular").Parent.SharedFlags)
+local FFlagEnableVirtualCursorMoveAssist = SharedFlagsModule.FFlagEnableVirtualCursorMoveAssist
+local FIntVirtualCursorMoveAssistLevel = SharedFlagsModule.FIntVirtualCursorMoveAssistLevel
+local FIntVirtualCursorMoveAssistHoverSpeed = SharedFlagsModule.FIntVirtualCursorMoveAssistHoverSpeed
+local PropertiesModule = require(Parent.Properties)
+local UtilModule = require(Parent.Util)
+local GetMaxSpeedFunction = UtilModule.GetMaxSpeed
+local IsCircleContainedInGuiObjectFunction = UtilModule.IsCircleContainedInGuiObject
+local IsSelectableGuiObjectFunction = UtilModule.IsSelectableGuiObject
+local IsSinkingGuiObjectFunction = UtilModule.IsSinkingGuiObject
+local GetPointRotatedAroundObjectFunction = UtilModule.GetPointRotatedAroundObject
+local CosFunction = math.cos
+local SinFunction = math.sin
+local AbsFunction = math.abs
+local MaxFunction = math.max
+local MinFunction = math.min
+local SignFunction = math.sign
+local SelectionController = {}
+SelectionController.__index = SelectionController
 
-function t.new(p1, p2, p3)
-	-- upvalues: propertiesModule (ref), t (ref)
-	return setmetatable({
+function SelectionController.new(_inputController, _cursorController, _moveAssistController) --[[ Line: 57 ]]
+	-- upvalues: PropertiesModule (copy), SelectionController (copy)
+	return (setmetatable({
 		_isScrolling = false,
 		_selectedObject = nil,
-		_inputController = p1,
-		_cursorController = p2,
-		_moveAssistController = p3,
-		_targetingRadius = propertiesModule.MoveAssistRadius,
-		_selectionRadius = propertiesModule.SelectionRadius,
+		_inputController = _inputController,
+		_cursorController = _cursorController,
+		_moveAssistController = _moveAssistController,
+		_selectionRadius = PropertiesModule.SelectionRadius,
 		_scrolled = {}
-	}, t)
+	}, SelectionController))
 end
 
-function t:processScrolling(p1, p2, p3)
-	-- upvalues: propertiesModule (ref), abs (ref), cos (ref), sin (ref), max (ref), min (ref), sign (ref)
-	if not p1:IsA("ScrollingFrame") then
-		return false
-	elseif not p1.ScrollingEnabled then
-		return false
-	elseif self._scrolled[p1] then
+function SelectionController:processScrolling(ScrollFrame, Vector, p1): boolean --[[ Line: 75 ]]
+	-- upvalues: PropertiesModule (copy), AbsFunction (copy), CosFunction (copy), SinFunction (copy), MaxFunction (copy), MinFunction (copy), SignFunction (copy)
+	if not ScrollFrame:IsA("ScrollingFrame") then
 		return false
 	end
-	self._scrolled[p1] = true
-	local scrollVector = self._inputController:GetScrollVector()
-	local var1 = propertiesModule.ScrollingSpeed * p3
-	local scrollingRadius = propertiesModule.ScrollingRadius
-	local absoluteCanvasSize = p1.AbsoluteCanvasSize
-	local absoluteSize = p1.AbsoluteSize
-	local scrollingDirection = p1.ScrollingDirection
-	local var2 = absoluteSize.X < absoluteCanvasSize.X and (if scrollingDirection ~= Enum.ScrollingDirection.XY then scrollingDirection == Enum.ScrollingDirection.X else true)
-	local var3 = absoluteSize.Y < absoluteCanvasSize.Y and (if scrollingDirection ~= Enum.ScrollingDirection.XY then scrollingDirection == Enum.ScrollingDirection.Y else true)
-	local absolutePosition = p1.AbsolutePosition
-	local var4 = p1.Rotation / 180 * 3.14159265359
+	if not ScrollFrame.ScrollingEnabled then
+		return false
+	end
+	if self._scrolled[ScrollFrame] then
+		return false
+	end
+	self._scrolled[ScrollFrame] = true
+	local ScrollVector = self._inputController:GetScrollVector()
+	local ScaledScrollingSpeed = PropertiesModule.ScrollingSpeed * p1
+	local ScrollingRadius = PropertiesModule.ScrollingRadius
+	local AbsoluteCanvasSize = ScrollFrame.AbsoluteCanvasSize
+	local AbsoluteSize: number = ScrollFrame.AbsoluteSize
+	local ScrollingDirection = ScrollFrame.ScrollingDirection
+	local IsScrollingDirectionMatch: boolean = AbsoluteSize.X < AbsoluteCanvasSize.X and (ScrollingDirection == Enum.ScrollingDirection.XY or ScrollingDirection == Enum.ScrollingDirection.X)
+	local IsScrollingDirectionMatch1: boolean = AbsoluteSize.Y < AbsoluteCanvasSize.Y and (ScrollingDirection == Enum.ScrollingDirection.XY or ScrollingDirection == Enum.ScrollingDirection.Y)
+	local AbsolutePosition = ScrollFrame.AbsolutePosition
+	local ScaledRotation = ScrollFrame.Rotation / 180 * 3.141592653589793
 	
-	if propertiesModule.ThumbstickDeadzone < abs(scrollVector.x) and var2 then
-		p1.CanvasPosition += Vector2.new(scrollVector.x * var1, 0)
+	if PropertiesModule.ThumbstickDeadzone < AbsFunction(ScrollVector.x) and IsScrollingDirectionMatch then
+		ScrollFrame.CanvasPosition += Vector2.new(ScrollVector.x * ScaledScrollingSpeed, 0)
 	end
-	if propertiesModule.ThumbstickDeadzone < abs(scrollVector.y) and var3 then
-		p1.CanvasPosition += Vector2.new(0, scrollVector.y * var1)
+	if PropertiesModule.ThumbstickDeadzone < AbsFunction(ScrollVector.y) and IsScrollingDirectionMatch1 then
+		ScrollFrame.CanvasPosition += Vector2.new(0, ScrollVector.y * ScaledScrollingSpeed)
 	end
-	local vector2 = Vector2.new(cos(var4), sin(var4))
-	local vector2_1 = Vector2.new(-sin(var4), cos(var4))
-	local var5 = Vector2.new(p2.X, p2.Y) - absolutePosition
-	local var6 = var5:Dot(vector2) - absoluteSize.X / 2
-	local var7 = var5:Dot(vector2_1) - absoluteSize.Y / 2
-	local var8 = Vector2.new(abs(var6), abs(var7)) - absoluteSize / 2
+	local VectorDelta = Vector2.new(Vector.X, Vector.Y) - AbsolutePosition
+	local DotProductDelta = VectorDelta:Dot((Vector2.new(CosFunction(ScaledRotation), (SinFunction(ScaledRotation))))) - AbsoluteSize.X / 2
+	local DotProductDelta1 = VectorDelta:Dot((Vector2.new(-SinFunction(ScaledRotation), (CosFunction(ScaledRotation))))) - AbsoluteSize.Y / 2
+	local VectorDelta1 = Vector2.new(AbsFunction(DotProductDelta), (AbsFunction(DotProductDelta1))) - AbsoluteSize / 2
 	
-	if abs(min(max(var8.X, var8.Y), 0) + Vector2.new(max(var8.X, 0), max(var8.Y, 0)).Magnitude) < scrollingRadius then
-		if abs(var8.X) < abs(var8.Y) and var2 then
-			p1.CanvasPosition += Vector2.new(sign(var6) * var1, 0)
-			self._cursorController:SetArrow(sign(var6), 0)
+	if AbsFunction(MinFunction(MaxFunction(VectorDelta1.X, VectorDelta1.Y), 0) + Vector2.new(MaxFunction(VectorDelta1.X, 0), (MaxFunction(VectorDelta1.Y, 0))).Magnitude) < ScrollingRadius then
+		if AbsFunction(VectorDelta1.X) < AbsFunction(VectorDelta1.Y) and IsScrollingDirectionMatch then
+			ScrollFrame.CanvasPosition += Vector2.new(SignFunction(DotProductDelta) * ScaledScrollingSpeed, 0)
+			self._cursorController:SetArrow(SignFunction(DotProductDelta), 0)
 			
 			return true
-		elseif abs(var8.Y) <= abs(var8.X) and var3 then
-			p1.CanvasPosition += Vector2.new(0, sign(var7) * var1)
-			self._cursorController:SetArrow(0, sign(var7))
+		elseif AbsFunction(VectorDelta1.Y) <= AbsFunction(VectorDelta1.X) and IsScrollingDirectionMatch1 then
+			ScrollFrame.CanvasPosition += Vector2.new(0, SignFunction(DotProductDelta1) * ScaledScrollingSpeed)
+			self._cursorController:SetArrow(0, (SignFunction(DotProductDelta1)))
 			
 			return true
 		end
@@ -87,186 +86,179 @@ function t:processScrolling(p1, p2, p3)
 	return false
 end
 
-function t:getClosestCandidate(p1, p2, _, p3, p4)
-	-- upvalues: isSelectableGuiObject (ref), getPointRotatedAroundObject (ref), isSinkingGuiObject (ref), isCircleContainedInGuiObject (ref), propertiesModule (ref)
-	local var1 = nil
-	local var2 = nil
-	local var3 = 1e999
+function SelectionController:getClosestCandidate(Frames, p1, _, p2, p3) --[[ Line: 140 ]]
+	-- upvalues: IsSelectableGuiObjectFunction (copy), GetPointRotatedAroundObjectFunction (copy), IsSinkingGuiObjectFunction (copy), IsCircleContainedInGuiObjectFunction (copy), PropertiesModule (copy)
+	local ClosestCandidate = nil
+	local OccludingCandidate = nil
+	local ClosestDistance = 1e999
 	
-	if p4 then
-		var1 = p4.closestCandidate
-		var2 = p4.occludingCandidate
-		var3 = p4.closestDistance
+	if p3 then
+		ClosestCandidate = p3.closestCandidate
+		OccludingCandidate = p3.occludingCandidate
+		ClosestDistance = p3.closestDistance
 	end
-	for i, v in ipairs(p1) do
-		if not self:processScrolling(v, p2, p3) then
-			if isSelectableGuiObject(v) then
-				local absolutePosition = v.AbsolutePosition
-				local var4 = v.AbsolutePosition + v.AbsoluteSize
-				local var5 = 0
-				local var6 = if v.AbsoluteRotation ~= 0 then p2 else getPointRotatedAroundObject(p2, v)
-				
-				if var6.X < absolutePosition.X or var6.Y < absolutePosition.Y or (var4.X < var6.X or var4.Y < var6.Y) then
-					var5 = math.sqrt(math.pow(if var6.X < absolutePosition.X then absolutePosition.X - var6.X elseif var4.X < var6.X then var6.X - var4.X else 0, 2) + math.pow(if var6.Y < absolutePosition.Y then absolutePosition.Y - var6.Y elseif var4.Y < var6.Y then var6.Y - var4.Y else 0, 2))
-				end
-				if var5 < var3 or var1 == nil then
-					var1 = v
-					var3 = var5
-				end
+	for _, frame in ipairs(Frames) do
+		if self:processScrolling(frame, p1, p2) then
+			self._isScrolling = true
+			
+			return ClosestCandidate, OccludingCandidate, ClosestDistance
+		end
+		if IsSelectableGuiObjectFunction(frame) then
+			local AbsolutePosition = frame.AbsolutePosition
+			local NewAbsolutePosition = frame.AbsolutePosition + frame.AbsoluteSize
+			local SquareRoot = 0
+			local PointRotatedAroundObject = if frame.AbsoluteRotation == 0 then p1 else GetPointRotatedAroundObjectFunction(p1, frame)
+			
+			if PointRotatedAroundObject.X < AbsolutePosition.X or PointRotatedAroundObject.Y < AbsolutePosition.Y or NewAbsolutePosition.X < PointRotatedAroundObject.X or NewAbsolutePosition.Y < PointRotatedAroundObject.Y then
+				SquareRoot = math.sqrt(math.pow(if PointRotatedAroundObject.X < AbsolutePosition.X then AbsolutePosition.X - PointRotatedAroundObject.X elseif NewAbsolutePosition.X < PointRotatedAroundObject.X then PointRotatedAroundObject.X - NewAbsolutePosition.X else 0, 2) + math.pow(if PointRotatedAroundObject.Y < AbsolutePosition.Y then AbsolutePosition.Y - PointRotatedAroundObject.Y elseif NewAbsolutePosition.Y < PointRotatedAroundObject.Y then PointRotatedAroundObject.Y - NewAbsolutePosition.Y else 0, 2))
 			end
-			if isSinkingGuiObject(v) and isCircleContainedInGuiObject(p2, propertiesModule.CursorRadius * propertiesModule.OcclusionRadiusScale, v) then
-				var2 = v
-				
-				return var1, var2, var3
+			if SquareRoot < ClosestDistance or ClosestCandidate == nil then
+				ClosestCandidate = frame
+				ClosestDistance = SquareRoot
 			end
 		end
-		self._isScrolling = true
-		
-		return var1, var2, var3
+		if IsSinkingGuiObjectFunction(frame) and IsCircleContainedInGuiObjectFunction(p1, PropertiesModule.CursorRadius * PropertiesModule.OcclusionRadiusScale, frame) then
+			OccludingCandidate = frame
+			
+			return ClosestCandidate, OccludingCandidate, ClosestDistance
+		end
 	end
-	return var1, var2, var3
+	return ClosestCandidate, OccludingCandidate, ClosestDistance
 end
 
-function t:processMoving(p5)
-	-- upvalues: guiService (ref), gamepadService (ref), fFlagEnableVirtualCursorMoveAssist (ref), fIntVirtualCursorMoveAssistLevel (ref), propertiesModule (ref), getMaxSpeed (ref), fIntVirtualCursorMoveAssistHoverSpeed (ref)
-	local var7 = guiService:GetScreenResolution() + guiService:GetGuiInset()
-	local moveVector = self._inputController:GetMoveVector()
-	local gamepadCursorPosition = gamepadService:GetGamepadCursorPosition()
+function SelectionController:processMoving(p4) --[[ Line: 210 ]]
+	-- upvalues: GuiService (copy), GamepadService (copy), FFlagEnableVirtualCursorMoveAssist (copy), FIntVirtualCursorMoveAssistLevel (copy), PropertiesModule (copy), GetMaxSpeedFunction (copy), FIntVirtualCursorMoveAssistHoverSpeed (copy)
+	local NewScreenResolution = GuiService:GetScreenResolution() + GuiService:GetGuiInset()
+	local MoveVector = self._inputController:GetMoveVector()
+	local GamepadCursorPosition = GamepadService:GetGamepadCursorPosition()
 	
-	if fFlagEnableVirtualCursorMoveAssist and not self._isScrolling and (fIntVirtualCursorMoveAssistLevel > 0 and propertiesModule.MoveAssistMinInputMagnitude <= moveVector.Magnitude) then
-		moveVector = self._moveAssistController:applyMoveAssist(moveVector, {
-			cursorPosition = gamepadCursorPosition + self._cursorController:GetCursorScreenGuiOffset(),
-			strengthMultiplier = fIntVirtualCursorMoveAssistLevel / 100,
-			candidates = self:getAssistCandidateList(gamepadCursorPosition, propertiesModule.MoveAssistRadius)
+	if FFlagEnableVirtualCursorMoveAssist and not self._isScrolling and FIntVirtualCursorMoveAssistLevel > 0 and PropertiesModule.MoveAssistMinInputMagnitude <= MoveVector.Magnitude then
+		MoveVector = self._moveAssistController:applyMoveAssist(MoveVector, {
+			cursorPosition = GamepadCursorPosition + self._cursorController:GetCursorScreenGuiOffset(),
+			strengthMultiplier = FIntVirtualCursorMoveAssistLevel / 100,
+			candidates = self:getAssistCandidateList(GamepadCursorPosition, PropertiesModule.MoveAssistRadius)
 		})
-	elseif fFlagEnableVirtualCursorMoveAssist then
+	elseif FFlagEnableVirtualCursorMoveAssist then
 		self._moveAssistController:clearDebugSnapshot()
 	end
-	local var8 = moveVector * getMaxSpeed() * (if self._selectedObject == nil then 1 elseif self._isScrolling then propertiesModule.ScrollingSlowDown elseif fFlagEnableVirtualCursorMoveAssist and fIntVirtualCursorMoveAssistLevel > 0 and fIntVirtualCursorMoveAssistHoverSpeed > 0 then fIntVirtualCursorMoveAssistHoverSpeed / 100 else propertiesModule.SpeedAdjustmentTarget)
+	local FIntVirtualCursorMoveAssistHoverSpeedRatio = if FFlagEnableVirtualCursorMoveAssist and FIntVirtualCursorMoveAssistLevel > 0 and FIntVirtualCursorMoveAssistHoverSpeed > 0 then FIntVirtualCursorMoveAssistHoverSpeed / 100 else PropertiesModule.SpeedAdjustmentTarget
+	local ScaledMoveVector = MoveVector * GetMaxSpeedFunction() * (if self._selectedObject == nil then 1 elseif self._isScrolling then PropertiesModule.ScrollingSlowDown else FIntVirtualCursorMoveAssistHoverSpeedRatio)
 	
-	if var8.Magnitude > 0 then
-		local var9 = gamepadCursorPosition + var8 * p5
-		gamepadCursorPosition = Vector2.new(math.clamp(var9.X, 0, var7.X), math.clamp(var9.Y, 0, var7.Y))
+	if ScaledMoveVector.Magnitude > 0 then
+		local NewGamepadCursorPosition: Vector2 = GamepadCursorPosition + ScaledMoveVector * p4
+		GamepadCursorPosition = Vector2.new(math.clamp(NewGamepadCursorPosition.X, 0, NewScreenResolution.X), (math.clamp(NewGamepadCursorPosition.Y, 0, NewScreenResolution.Y)))
 	end
-	self._cursorController:SetPosition(gamepadCursorPosition)
-	gamepadService:SetGamepadCursorPosition(gamepadCursorPosition)
+	self._cursorController:SetPosition(GamepadCursorPosition)
+	GamepadService:SetGamepadCursorPosition(GamepadCursorPosition)
 end
 
-function t.getCandidates(_, p5, p6)
-	-- upvalues: playersService (ref), coreGuiService (ref)
-	local localPlayer = playersService.LocalPlayer
-	local var7 = if localPlayer then localPlayer:FindFirstChildOfClass("PlayerGui") else nil
+function SelectionController:getCandidates(Position, Radius) --[[ Line: 264 ]]
+	-- upvalues: Players (copy), CoreGui (copy)
+	local LocalPlayer = Players.LocalPlayer
+	local PlayerGui = if LocalPlayer then LocalPlayer:FindFirstChildOfClass("PlayerGui") else nil
 	
 	return {
 		{
-			coreGuiService,
-			coreGuiService:GetGuiObjectsInCircle(p5, p6)
+			CoreGui,
+			(CoreGui:GetGuiObjectsInCircle(Position, Radius))
 		},
 		{
-			var7,
-			if var7 then var7:GetGuiObjectsInCircle(p5, p6) else {}
+			PlayerGui,
+			if PlayerGui then PlayerGui:GetGuiObjectsInCircle(Position, Radius) else {}
 		}
 	}
 end
 
-function t:processAncestors(p5, p6, p7, p8)
-	local parent = p5.Parent
-	while parent and parent ~= p6 do
-		if not self:processScrolling(parent, p7, p8) then
-			parent = parent.Parent
-			continue
+function SelectionController:processAncestors(ClosestCandidate, Parent, p4, p5) --[[ Line: 273 ]]
+	local Parent1 = ClosestCandidate.Parent
+	while Parent1 and Parent1 ~= Parent do
+		if self:processScrolling(Parent1, p4, p5) then
+			self._isScrolling = true
+			break
 		end
-		self._isScrolling = true
-		
-		return
+		Parent1 = Parent1.Parent
 	end
 end
 
-function t:processCandidates(p9, p10, p11)
-	-- upvalues: guiService (ref)
-	p9 -= guiService:GetGuiInset()
-	local var7 = self:getCandidates(p9, p10)
-	local var8 = nil
-	local var9 = nil
-	local var10 = 1e999
+function SelectionController:processCandidates(GamepadCursorPosition, SelectionRadius, p6) --[[ Line: 284 ]]
+	-- upvalues: GuiService (copy)
+	local GamepadCursorPositionDelta = GamepadCursorPosition - GuiService:GetGuiInset()
+	local Candidates = self:getCandidates(GamepadCursorPositionDelta, SelectionRadius)
+	local ClosestCandidate = nil
+	local OccludingCandidate = nil
+	local ClosestDistance = 1e999
 	self._scrolled = {}
 	self._isScrolling = false
 	
-	for i, v in ipairs(var7) do
-		local var11 = v[1]
-		local var12, var13, var14 = self:getClosestCandidate(v[2], p9, p10, p11, {
-			closestCandidate = var8,
-			occludingCandidate = var9,
-			closestDistance = var10
+	for _, candidate in ipairs(Candidates) do
+		local v1 = candidate[1]
+		ClosestCandidate, OccludingCandidate, ClosestDistance = self:getClosestCandidate(candidate[2], GamepadCursorPositionDelta, SelectionRadius, p6, {
+			closestCandidate = ClosestCandidate,
+			occludingCandidate = OccludingCandidate,
+			closestDistance = ClosestDistance
 		})
-		var8 = var12
-		var9 = var13
-		var10 = var14
 		
-		if not self._isScrolling then
-			if var8 then
-				self:processAncestors(var8, var11, p9, p11)
-			end
-			if not self._isScrolling then
-				if var9 and var9 ~= var8 then
-					self:processAncestors(var9, var11, p9, p11)
-				end
-				if not self._isScrolling then
-					if var9 then
-						return var8, var10
-					end
-				end
-				return nil, 1e999
-			end
+		if self._isScrolling then
 			return nil, 1e999
 		end
-		return nil, 1e999
+		if ClosestCandidate then
+			self:processAncestors(ClosestCandidate, v1, GamepadCursorPositionDelta, p6)
+		end
+		if self._isScrolling then
+			return nil, 1e999
+		end
+		if OccludingCandidate and OccludingCandidate ~= ClosestCandidate then
+			self:processAncestors(OccludingCandidate, v1, GamepadCursorPositionDelta, p6)
+		end
+		if self._isScrolling then
+			return nil, 1e999
+		elseif OccludingCandidate then
+			return ClosestCandidate, ClosestDistance
+		end
 	end
-	return var8, var10
+	return ClosestCandidate, ClosestDistance
 end
 
-function t:getAssistCandidateList(p12, p13)
-	-- upvalues: guiService (ref), isSelectableGuiObject (ref)
-	local t = {}
+function SelectionController.getAssistCandidateList(p7, GamepadCursorPosition, MoveAssistRadius) --[[ Line: 331 ]]
+	-- upvalues: GuiService (copy), IsSelectableGuiObjectFunction (copy)
+	local Guis = {}
 	
-	for i, v in self:getCandidates(p12 - guiService:GetGuiInset(), p13) do
-		for i_1, v_1 in v[2] do
-			if v_1:IsA("GuiObject") and isSelectableGuiObject(v_1) then
-				table.insert(t, v_1)
+	for _, candidate in p7:getCandidates(GamepadCursorPosition - GuiService:GetGuiInset(), MoveAssistRadius) do
+		for _, Gui in candidate[2] do
+			if Gui:IsA("GuiObject") and IsSelectableGuiObjectFunction(Gui) then
+				table.insert(Guis, Gui)
 			end
 		end
 	end
-	return t
+	return Guis
 end
 
-function t:onRenderStep(p14)
-	-- upvalues: gamepadService (ref), playersService (ref), coreGuiService (ref), guiService (ref)
-	self:processMoving(p14)
-	local var15, var16 = self:processCandidates(gamepadService:GetGamepadCursorPosition(), self._targetingRadius, p14)
+function SelectionController:onRenderStep(p8) --[[ Line: 350 ]]
+	-- upvalues: GamepadService (copy), Players (copy), CoreGui (copy), GuiService (copy)
+	self:processMoving(p8)
+	local ProcessCandidatesResult = self:processCandidates(GamepadService:GetGamepadCursorPosition(), self._selectionRadius, p8)
 	
-	if self._selectionRadius < var16 then
-		var15 = nil
-	end
-	if var15 ~= self._selectedObject then
-		local playerGui = playersService.LocalPlayer:FindFirstChildOfClass("PlayerGui")
+	if ProcessCandidatesResult ~= self._selectedObject then
+		local LocalPlayer = Players.LocalPlayer
+		local PlayerGui = if LocalPlayer then LocalPlayer:FindFirstChildOfClass("PlayerGui") else nil
 		
-		if var15 then
+		if ProcessCandidatesResult then
 			self._cursorController:SetHighlight(true)
 			
-			if var15:IsDescendantOf(coreGuiService) then
-				guiService.SelectedCoreObject = var15
-				guiService.SelectedObject = nil
-			elseif playerGui and var15:IsDescendantOf(playerGui) then
-				guiService.SelectedObject = var15
-				guiService.SelectedCoreObject = nil
+			if ProcessCandidatesResult:IsDescendantOf(CoreGui) then
+				GuiService.SelectedCoreObject = ProcessCandidatesResult
+				GuiService.SelectedObject = nil
+			elseif PlayerGui and ProcessCandidatesResult:IsDescendantOf(PlayerGui) then
+				GuiService.SelectedObject = ProcessCandidatesResult
+				GuiService.SelectedCoreObject = nil
 			end
 		else
 			self._cursorController:SetHighlight(false)
-			guiService.SelectedObject = nil
-			guiService.SelectedCoreObject = nil
+			GuiService.SelectedObject = nil
+			GuiService.SelectedCoreObject = nil
 		end
-		self._selectedObject = var15
+		self._selectedObject = ProcessCandidatesResult
 	end
 end
 
-return t
+return SelectionController

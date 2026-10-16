@@ -1,19 +1,21 @@
-﻿local coreScriptsPlayerFeedback = script:FindFirstAncestor("CoreScriptsPlayerFeedback")
-local parent = coreScriptsPlayerFeedback.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local dialog = foundationModule.Dialog
-local icon = foundationModule.Icon
-local text = foundationModule.Text
-local view = foundationModule.View
-local iconSize = foundationModule.Enums.IconSize
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local useTokens = foundationModule.Hooks.useTokens
-local builderIconsModule = require(parent.BuilderIcons)
-local iconVariant = builderIconsModule.IconVariant
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useEscapeDismissModule = require(coreScriptsPlayerFeedback.Hooks.useEscapeDismiss)
-local t = {
+﻿local CoreScriptsPlayerFeedback = script:FindFirstAncestor("CoreScriptsPlayerFeedback")
+local Parent = CoreScriptsPlayerFeedback.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local Dialog = FoundationModule.Dialog
+local Icon = FoundationModule.Icon
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local IconSize = FoundationModule.Enums.IconSize
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local BuilderIconsModule = require(Parent.BuilderIcons)
+local IconVariant = BuilderIconsModule.IconVariant
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseEscapeDismissModule = require(CoreScriptsPlayerFeedback.Hooks.useEscapeDismiss)
+local FFlagPlayerSupportPromptEventIngestModule = require(CoreScriptsPlayerFeedback.Flags.FFlagPlayerSupportPromptEventIngest)
+local PlayerSupportPromptTelemetryModule = require(CoreScriptsPlayerFeedback.Telemetry.PlayerSupportPromptTelemetry)
+local config = {
 	TICKET_CREATION_TEXT_FILTER_ERROR = {
 		titleKey = "TextFilterTitle",
 		bodyKey = "TextFilterBody",
@@ -34,28 +36,28 @@ local t = {
 		bodyKey = "RateLimitedBody"
 	}
 }
-local t_1 = { titleKey = "DefaultTitle", bodyKey = "DefaultBody" }
+local config1 = { titleKey = "DefaultTitle", bodyKey = "DefaultBody" }
 
-local function _()
-	pcall(function()
-		local robloxGui = game:GetService("CoreGui"):FindFirstChild("RobloxGui")
-		local modules = robloxGui and robloxGui:FindFirstChild("Modules") or nil
-		local settings = modules and modules:FindFirstChild("Settings") or nil
-		local settingsHub = settings and settings:FindFirstChild("SettingsHub") or nil
+local function _() --[[ Line: 105 | Named "openAbuseReportPage" ]]
+	pcall(function() --[[ Line: 106 ]]
+		local RobloxGui = game:GetService("CoreGui"):FindFirstChild("RobloxGui")
+		local Modules = RobloxGui and RobloxGui:FindFirstChild("Modules") or nil
+		local Settings = Modules and Modules:FindFirstChild("Settings") or nil
+		local SettingsHub = Settings and Settings:FindFirstChild("SettingsHub") or nil
 		
-		if settingsHub then
-			local unknownModule = require(settingsHub)
-			unknownModule:SetVisibility(true, false, unknownModule.Instance.ReportAbusePage)
+		if SettingsHub then
+			local Module = require(SettingsHub)
+			Module:SetVisibility(true, false, Module.Instance.ReportAbusePage)
 			
 			return
 		end
 	end)
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), useLocalization (ref), t (ref), t_1 (ref), reactModule (ref), useEscapeDismissModule (ref), dialog (ref), view (ref), icon (ref), builderIconsModule (ref), iconSize (ref), iconVariant (ref), text (ref), buttonVariant (ref)
-	local var1 = useTokens()
-	local var2 = useLocalization({
+return (ReactModule.memo(function(p1) --[[ Line: 120 ]]
+	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), config (copy), config1 (copy), FFlagPlayerSupportPromptEventIngestModule (copy), ReactModule (copy), PlayerSupportPromptTelemetryModule (copy), UseEscapeDismissModule (copy), Dialog (copy), View (copy), Icon (copy), BuilderIconsModule (copy), IconSize (copy), IconVariant (copy), Text (copy), ButtonVariant (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseLocalizationResult = UseLocalizationFunction({
 		BackButton = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.BackButton",
 		Under13Title = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Under13.Title",
 		Under13Body = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Under13.Body",
@@ -72,90 +74,110 @@ return reactModule.memo(function(p1)
 		GibberishBody = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Unavailable.Gibberish.Body",
 		TextFilterLink = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link"
 	})
-	local var3 = t[p1.reason or ""] or t_1
-	local t_2 = {
-		title = var2[var3.titleKey],
-		body = var2[var3.bodyKey],
-		hasReportLink = var3.hasReportLink
+	local Entry = config[p1.reason or ""] or config1
+	local config2 = {
+		title = UseLocalizationResult[Entry.titleKey],
+		body = UseLocalizationResult[Entry.bodyKey],
+		hasReportLink = Entry.hasReportLink
 	}
-	local var4 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref)
+	local Reason = p1.reason or ""
+	
+	if FFlagPlayerSupportPromptEventIngestModule then
+		ReactModule.useEffect(function() --[[ Line: 151 ]]
+			-- upvalues: PlayerSupportPromptTelemetryModule (upval), Reason (copy)
+			PlayerSupportPromptTelemetryModule.logUnavailableShown(Reason)
+		end, { Reason })
+	end
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 159 ]]
+		-- upvalues: FFlagPlayerSupportPromptEventIngestModule (upval), p1 (copy), PlayerSupportPromptTelemetryModule (upval), Reason (copy)
+		if FFlagPlayerSupportPromptEventIngestModule and p1.openPlayerSupportPrompt then
+			PlayerSupportPromptTelemetryModule.log({
+				action = PlayerSupportPromptTelemetryModule.Action.RejectionRetry,
+				reason = Reason
+			})
+		end
 		p1.closePrompt()
 		
 		if p1.openPlayerSupportPrompt then
 			p1.openPlayerSupportPrompt()
 		end
-	end, { p1.closePrompt, p1.openPlayerSupportPrompt })
-	local var5 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref)
+	end, if FFlagPlayerSupportPromptEventIngestModule then { p1.closePrompt, p1.openPlayerSupportPrompt, Reason } else { p1.closePrompt, p1.openPlayerSupportPrompt })
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 179 ]]
+		-- upvalues: FFlagPlayerSupportPromptEventIngestModule (upval), PlayerSupportPromptTelemetryModule (upval), Reason (copy), p1 (copy)
+		if FFlagPlayerSupportPromptEventIngestModule then
+			PlayerSupportPromptTelemetryModule.log({
+				action = PlayerSupportPromptTelemetryModule.Action.ReportAbuseClicked,
+				reason = Reason
+			})
+		end
 		p1.closePrompt()
-		pcall(function()
-			local robloxGui = game:GetService("CoreGui"):FindFirstChild("RobloxGui")
-			local modules = robloxGui and robloxGui:FindFirstChild("Modules") or nil
-			local settings = modules and modules:FindFirstChild("Settings") or nil
-			local settingsHub = settings and settings:FindFirstChild("SettingsHub") or nil
+		pcall(function() --[[ Line: 106 ]]
+			local RobloxGui = game:GetService("CoreGui"):FindFirstChild("RobloxGui")
+			local Modules = RobloxGui and RobloxGui:FindFirstChild("Modules") or nil
+			local Settings = Modules and Modules:FindFirstChild("Settings") or nil
+			local SettingsHub = Settings and Settings:FindFirstChild("SettingsHub") or nil
 			
-			if settingsHub then
-				local unknownModule = require(settingsHub)
-				unknownModule:SetVisibility(true, false, unknownModule.Instance.ReportAbusePage)
+			if SettingsHub then
+				local Module = require(SettingsHub)
+				Module:SetVisibility(true, false, Module.Instance.ReportAbusePage)
 				
 				return
 			end
 		end)
-	end, { p1.closePrompt })
-	useEscapeDismissModule("PlayerSupportUnavailableCancel", var4)
+	end, if FFlagPlayerSupportPromptEventIngestModule then { p1.closePrompt, Reason } else { p1.closePrompt })
+	UseEscapeDismissModule("PlayerSupportUnavailableCancel", UseResult)
 	
-	return reactModule.createElement(dialog.Root, { hasBackdrop = true }, {
-		Content = reactModule.createElement(dialog.Content, { LayoutOrder = 1 }, {
-			Body = reactModule.createElement(view, {
+	return ReactModule.createElement(Dialog.Root, { hasBackdrop = true }, {
+		Content = ReactModule.createElement(Dialog.Content, { LayoutOrder = 1 }, {
+			Body = ReactModule.createElement(View, {
 				tag = "col gap-large size-full-0 auto-y",
-				padding = { top = UDim.new(0, var1.Size.Size_500) }
+				padding = { top = UDim.new(0, UseTokensResult.Size.Size_500) }
 			}, {
-				TitleRow = reactModule.createElement(view, {
+				TitleRow = ReactModule.createElement(View, {
 					tag = "row items-center gap-small auto-y",
 					LayoutOrder = 1
 				}, {
-					AlertIcon = reactModule.createElement(icon, {
+					AlertIcon = ReactModule.createElement(Icon, {
 						LayoutOrder = 1,
-						name = builderIconsModule.Icon.TriangleExclamation,
-						size = iconSize.Large,
-						variant = iconVariant.Filled,
-						style = var1.Color.System.Alert
+						name = BuilderIconsModule.Icon.TriangleExclamation,
+						size = IconSize.Large,
+						variant = IconVariant.Filled,
+						style = UseTokensResult.Color.System.Alert
 					}),
-					TitleText = reactModule.createElement(text, {
+					TitleText = ReactModule.createElement(Text, {
 						tag = "auto-xy text-heading-small text-align-x-left",
 						LayoutOrder = 2,
-						Text = t_2.title,
+						Text = config2.title,
 						TextYAlignment = Enum.TextYAlignment.Center,
-						textStyle = var1.Color.Content.Emphasis
+						textStyle = UseTokensResult.Color.Content.Emphasis
 					})
 				}),
-				Paragraph = reactModule.createElement(text, {
+				Paragraph = ReactModule.createElement(Text, {
 					tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left",
 					LayoutOrder = 2,
-					Text = t_2.body,
-					textStyle = var1.Color.Content.Default
+					Text = config2.body,
+					textStyle = UseTokensResult.Color.Content.Default
 				}),
-				LinkRow = if t_2.hasReportLink then reactModule.createElement(text, {
+				LinkRow = if config2.hasReportLink then ReactModule.createElement(Text, {
 					RichText = true,
 					tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left",
 					LayoutOrder = 3,
-					Text = var2.TextFilterLink,
-					onActivated = var5,
+					Text = UseLocalizationResult.TextFilterLink,
+					onActivated = UseResult1,
 					selection = { Selectable = true },
-					textStyle = var1.Color.Content.Default
+					textStyle = UseTokensResult.Color.Content.Default
 				}) else nil
 			})
 		}),
-		Actions = reactModule.createElement(dialog.Actions, {
+		Actions = ReactModule.createElement(Dialog.Actions, {
 			LayoutOrder = 2,
 			actions = {
 				{
-					text = var2.BackButton,
-					variant = buttonVariant.Emphasis,
-					onActivated = var4
+					text = UseLocalizationResult.BackButton,
+					variant = ButtonVariant.Emphasis,
+					onActivated = UseResult
 				}
 			}
 		})
 	})
-end)
+end))

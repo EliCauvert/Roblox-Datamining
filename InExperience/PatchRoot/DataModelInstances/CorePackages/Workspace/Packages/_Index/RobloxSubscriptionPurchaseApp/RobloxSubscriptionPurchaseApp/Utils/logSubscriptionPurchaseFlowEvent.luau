@@ -1,15 +1,15 @@
-﻿local robloxSubscriptionPurchaseApp = script:FindFirstAncestor("RobloxSubscriptionPurchaseApp")
-local buildSubscriptionPurchaseFlowPayloadModule = require(robloxSubscriptionPurchaseApp.Utils.buildSubscriptionPurchaseFlowPayload)
-local sendSubscriptionPurchaseFlowEventModule = require(robloxSubscriptionPurchaseApp.Utils.sendSubscriptionPurchaseFlowEvent)
+﻿local RobloxSubscriptionPurchaseApp = script:FindFirstAncestor("RobloxSubscriptionPurchaseApp")
+local BuildSubscriptionPurchaseFlowPayloadModule = require(RobloxSubscriptionPurchaseApp.Utils.buildSubscriptionPurchaseFlowPayload)
+local SendSubscriptionPurchaseFlowEventModule = require(RobloxSubscriptionPurchaseApp.Utils.sendSubscriptionPurchaseFlowEvent)
 
-return function(p1, p2)
-	-- upvalues: buildSubscriptionPurchaseFlowPayloadModule (ref), sendSubscriptionPurchaseFlowEventModule (ref)
-	local var1 = buildSubscriptionPurchaseFlowPayloadModule(p1)
+return function(p1, List) --[[ Line: 11 | Named "logSubscriptionPurchaseFlowEvent" ]]
+	-- upvalues: BuildSubscriptionPurchaseFlowPayloadModule (copy), SendSubscriptionPurchaseFlowEventModule (copy)
+	local SubscriptionPurchaseFlowPayloadModule = BuildSubscriptionPurchaseFlowPayloadModule(p1)
 	
-	if p2 then
-		for i, v in pairs(p2) do
-			var1[i] = v
+	if List then
+		for i, value in pairs(List) do
+			SubscriptionPurchaseFlowPayloadModule[i] = value
 		end
 	end
-	sendSubscriptionPurchaseFlowEventModule(var1)
+	SendSubscriptionPurchaseFlowEventModule(SubscriptionPurchaseFlowPayloadModule)
 end

@@ -1,33 +1,33 @@
-﻿local avatarSwitcher = script:FindFirstAncestor("AvatarSwitcher")
-local parent = avatarSwitcher.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useSignalState = require(parent.SignalsReact).useSignalState
-local messageCardModule = require(avatarSwitcher.Components.Messages.MessageCard)
-local getAvatarSwitcherStoreModule = require(avatarSwitcher.Stores.getAvatarSwitcherStore)
+﻿local AvatarSwitcher = script:FindFirstAncestor("AvatarSwitcher")
+local Parent = AvatarSwitcher.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local MessageCardModule = require(AvatarSwitcher.Components.Messages.MessageCard)
+local GetAvatarSwitcherStoreModule = require(AvatarSwitcher.Stores.getAvatarSwitcherStore)
 
-return function(p1)
-	-- upvalues: useSignalState (ref), getAvatarSwitcherStoreModule (ref), useLocalization (ref), reactModule (ref), foundationModule (ref), messageCardModule (ref)
-	local var1 = useSignalState(getAvatarSwitcherStoreModule)
-	local var2 = useSignalState(var1.getPendingAvatarName)
-	local var3 = useLocalization({
+return function(Frame) --[[ Line: 18 | Named "PendingAvatarSwitchMessage" ]]
+	-- upvalues: UseSignalStateFunction (copy), GetAvatarSwitcherStoreModule (copy), UseLocalizationFunction (copy), ReactModule (copy), FoundationModule (copy), MessageCardModule (copy)
+	local UseSignalStateResult = UseSignalStateFunction(GetAvatarSwitcherStoreModule)
+	local UseSignalStateResult1 = UseSignalStateFunction(UseSignalStateResult.getPendingAvatarName)
+	local UseLocalizationResult = UseLocalizationFunction({
 		messageContent = "Feature.AvatarSwitcher.Message.SwitchingDeferred",
 		messageHeader = {
 			"Feature.AvatarSwitcher.Heading.AvatarSwitchedConfirmation",
-			avatarName = var2
+			avatarName = UseSignalStateResult1
 		}
 	})
 	
-	return if var2 == nil then nil else reactModule.createElement(foundationModule.View, { tag = "size-full-0 auto-y" }, {
-		WarningMessage = reactModule.createElement(messageCardModule, {
+	return if UseSignalStateResult1 == nil then nil else ReactModule.createElement(FoundationModule.View, { tag = "size-full-0 auto-y" }, {
+		WarningMessage = ReactModule.createElement(MessageCardModule, {
 			icon = "Info",
-			headerText = var3.messageHeader,
-			contentText = var3.messageContent,
-			onClose = var1.clearPendingAvatarName,
+			headerText = UseLocalizationResult.messageHeader,
+			contentText = UseLocalizationResult.messageContent,
+			onClose = UseSignalStateResult.clearPendingAvatarName,
 			Size = UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y,
-			LayoutOrder = p1.LayoutOrder
+			LayoutOrder = Frame.LayoutOrder
 		})
 	})
 end

@@ -1,34 +1,39 @@
-﻿local parent = script:FindFirstAncestor("FriendsChat").Parent
-local reactModule = require(parent.React)
-local chatUIPrimitivesModule = require(parent.ChatUIPrimitives)
-local useFocusGuiObject = require(parent.ReactFocusNavigation).useFocusGuiObject
-local getFirstFocusableDescendant = require(parent.FocusNavigationUtils).getFirstFocusableDescendant
-local fFlagFriendsChatConversationListFocusNav = require(parent.SharedFlags).FFlagFriendsChatConversationListFocusNav
+﻿local Parent = script:FindFirstAncestor("FriendsChat").Parent
+local ReactModule = require(Parent.React)
+local ChatUIPrimitivesModule = require(Parent.ChatUIPrimitives)
+local UseFocusGuiObjectFunction = require(Parent.ReactFocusNavigation).useFocusGuiObject
+local GetFirstFocusableDescendantFunction = require(Parent.FocusNavigationUtils).getFirstFocusableDescendant
+local FFlagFriendsChatConversationListFocusNav = require(Parent.SharedFlags).FFlagFriendsChatConversationListFocusNav
 
-return function(p1, p2)
-	-- upvalues: chatUIPrimitivesModule (ref), fFlagFriendsChatConversationListFocusNav (ref), useFocusGuiObject (ref), reactModule (ref), getFirstFocusableDescendant (ref)
-	local var1 = chatUIPrimitivesModule.Hooks.useFocusInputBar()
-	local focus = var1.focus
+return function(p1, p2) --[[ Line: 27 | Named "useFocusConversationInput" ]]
+	-- upvalues: ChatUIPrimitivesModule (copy), FFlagFriendsChatConversationListFocusNav (copy), UseFocusGuiObjectFunction (copy), ReactModule (copy), GetFirstFocusableDescendantFunction (copy)
+	local UseFocusInputBarResult = ChatUIPrimitivesModule.Hooks.useFocusInputBar()
+	local Focus = UseFocusInputBarResult.focus
 	
-	if fFlagFriendsChatConversationListFocusNav then
-		local var2 = useFocusGuiObject()
-		focus = reactModule.useCallback(function()
-			-- upvalues: p2 (ref), p1 (ref), getFirstFocusableDescendant (copy), var2 (ref), var1 (ref)
+	if FFlagFriendsChatConversationListFocusNav then
+		local UseFocusGuiObjectResult = UseFocusGuiObjectFunction()
+		Focus = ReactModule.useCallback(function() --[[ Line: 37 ]]
+			-- upvalues: p2 (copy), p1 (copy), GetFirstFocusableDescendantFunction (upval), UseFocusGuiObjectResult (copy), UseFocusInputBarResult (copy)
 			if p2 then
-				var1.focus()
+				UseFocusInputBarResult.focus()
 				
 				return
 			end
-			local var3 = if p1 ~= nil then nil else p1.current
+			local Current = if p1 == nil then nil else p1.current
 			
-			if var3 ~= nil then
-				local var4 = getFirstFocusableDescendant(var3)
+			if Current ~= nil then
+				local FirstFocusableDescendant = GetFirstFocusableDescendantFunction(Current)
 				
-				if var4 ~= nil then
-					var2(var4)
+				if FirstFocusableDescendant ~= nil then
+					UseFocusGuiObjectResult(FirstFocusableDescendant)
 				end
 			end
-		end, { p2, var1.focus, var2, p1 })
+		end, {
+			p2,
+			UseFocusInputBarResult.focus,
+			UseFocusGuiObjectResult,
+			p1
+		})
 	end
-	return { ref = var1.ref, focus = focus }
+	return { ref = UseFocusInputBarResult.ref, focus = Focus }
 end

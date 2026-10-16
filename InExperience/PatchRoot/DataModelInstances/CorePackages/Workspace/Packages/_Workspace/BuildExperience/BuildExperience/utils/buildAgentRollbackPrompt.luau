@@ -1,28 +1,28 @@
-﻿local buildAgentRollbackVersionPrompt = game:DefineFastString("BuildAgentRollbackVersionPrompt", "<system_reminder>The user reverted the game to version {versionNumber}. Call restore_version.")
-local buildAgentRollbackNotePrompt = game:DefineFastString("BuildAgentRollbackNotePrompt", " Add note title {title} and description {description}")
+﻿local BuildAgentRollbackVersionPrompt = game:DefineFastString("BuildAgentRollbackVersionPrompt", "<system_reminder>The user reverted the game to version {versionNumber}. Call restore_version.")
+local BuildAgentRollbackNotePrompt = game:DefineFastString("BuildAgentRollbackNotePrompt", " Add note title {title} and description {description}")
 
-local function _(p1, p2)
-	return p1:gsub("{(%w+)}", function(p3)
-		-- upvalues: p2 (ref)
-		return tostring(p2[p3])
-	end)
+local function _(Text: string, p1): string --[[ Line: 8 | Named "fill" ]]
+	return (Text:gsub("{(%w+)}", function(p2): string --[[ Line: 9 ]]
+		-- upvalues: p1 (copy)
+		return (tostring(p1[p2]))
+	end))
 end
 
-return function(p1, p2, p3)
-	-- upvalues: buildAgentRollbackVersionPrompt (ref), buildAgentRollbackNotePrompt (ref)
-	local t = { versionNumber = p1 }
-	local var1 = buildAgentRollbackVersionPrompt:gsub("{(%w+)}", function(p4)
-		-- upvalues: t (ref)
-		return tostring(t[p4])
+return function(VersionNumber, Title, Description): string --[[ Line: 14 | Named "buildAgentRollbackPrompt" ]]
+	-- upvalues: BuildAgentRollbackVersionPrompt (copy), BuildAgentRollbackNotePrompt (copy)
+	local config = { versionNumber = VersionNumber }
+	local W = BuildAgentRollbackVersionPrompt:gsub("{(%w+)}", function(p1): string --[[ Line: 9 ]]
+		-- upvalues: config (copy)
+		return (tostring(config[p1]))
 	end)
-	local var2 = ""
+	local W1 = ""
 	
-	if p2 ~= nil and p2 ~= "" and (p3 ~= nil and p3 ~= "") then
-		local t_1 = { title = p2, description = p3 }
-		var2 = buildAgentRollbackNotePrompt:gsub("{(%w+)}", function(p4)
-			-- upvalues: t_1 (ref)
-			return tostring(t_1[p4])
+	if Title ~= nil and Title ~= "" and Description ~= nil and Description ~= "" then
+		local config1 = { title = Title, description = Description }
+		W1 = BuildAgentRollbackNotePrompt:gsub("{(%w+)}", function(p1): string --[[ Line: 9 ]]
+			-- upvalues: config1 (copy)
+			return (tostring(config1[p1]))
 		end)
 	end
-	return var1 .. var4 .. "</system_reminder>"
+	return W .. W1 .. "</system_reminder>"
 end

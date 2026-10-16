@@ -1,21 +1,21 @@
-﻿local guiService = game:GetService("GuiService")
-local reactModule = require(script.Parent.Parent.Parent.React)
+﻿local GuiService = game:GetService("GuiService")
+local ReactModule = require(script.Parent.Parent.Parent.React)
 
-return function()
-	-- upvalues: reactModule (ref), guiService (ref)
-	local var1, var2 = reactModule.useState(guiService.TopbarInset.Height)
-	reactModule.useEffect(function()
-		-- upvalues: guiService (copy), var2 (ref)
-		local var3 = guiService:GetPropertyChangedSignal("TopbarInset"):Connect(function()
-			-- upvalues: var2 (copy), guiService (copy)
-			var2(guiService.TopbarInset.Height)
+return function() --[[ Line: 8 ]]
+	-- upvalues: ReactModule (copy), GuiService (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(GuiService.TopbarInset.Height)
+	ReactModule.useEffect(function() --[[ Line: 11 ]]
+		-- upvalues: GuiService (upval), UseStateResult2 (copy)
+		local Connection = GuiService:GetPropertyChangedSignal("TopbarInset"):Connect(function() --[[ Line: 13 ]]
+			-- upvalues: UseStateResult2 (upval), GuiService (upval)
+			UseStateResult2(GuiService.TopbarInset.Height)
 		end)
 		
-		return function()
-			-- upvalues: var3 (ref)
-			var3:Disconnect()
+		return function() --[[ Line: 17 ]]
+			-- upvalues: Connection (copy)
+			Connection:Disconnect()
 		end
 	end, {})
 	
-	return var1
+	return UseStateResult
 end

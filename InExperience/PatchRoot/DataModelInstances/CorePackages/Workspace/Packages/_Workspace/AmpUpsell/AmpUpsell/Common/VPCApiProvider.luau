@@ -1,81 +1,86 @@
-﻿local ampUpsell = script:FindFirstAncestor("AmpUpsell")
-local parent = ampUpsell.Parent
-local urlBuilder = require(parent.UrlBuilder).UrlBuilder
-local urlBase = require(parent.UrlBuilder).UrlBase
-local httpService = game:GetService("HttpService")
-local VPCRequestTypeEnum = require(ampUpsell.Common.Enums).VPCRequestTypeEnum
-local var1 = urlBuilder.new({
+﻿local AmpUpsell = script:FindFirstAncestor("AmpUpsell")
+local Parent = AmpUpsell.Parent
+local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
+local UrlBase = require(Parent.UrlBuilder).UrlBase
+local HttpService = game:GetService("HttpService")
+local VPCRequestTypeEnum = require(AmpUpsell.Common.Enums).VPCRequestTypeEnum
+local NewUrlBuilder = UrlBuilder.new({
 	path = "child-requests-api/v1/send-request-to-new-parent",
-	base = urlBase.APIS
+	base = UrlBase.APIS
 })
-local var2 = urlBuilder.new({
+local NewUrlBuilder1 = UrlBuilder.new({
 	path = "child-requests-api/v1/send-request-to-all-parents",
-	base = urlBase.APIS
+	base = UrlBase.APIS
 })
-local var3 = urlBuilder.new({
+local NewUrlBuilder2 = UrlBuilder.new({
 	path = "user-settings-api/v1/account-insights/parent-emails",
-	base = urlBase.APIS
+	base = UrlBase.APIS
 })
 
 return {
-	sendRequestToNewParent = function(p1, p2, p3, p4)
-		-- upvalues: var1 (ref), VPCRequestTypeEnum (ref), httpService (ref)
-		return p1(var1(), "POST", {
-			postBody = httpService:JSONEncode({
-				email = p2,
-				requestType = if p3 == nil then VPCRequestTypeEnum.LinkToChild else p3[1],
-				requestDetails = p4
+	sendRequestToNewParent = function(Callback, Email, Entry, RequestDetails, p1) --[[ Line: 29 ]]
+		-- upvalues: NewUrlBuilder (copy), VPCRequestTypeEnum (copy), HttpService (copy)
+		return Callback(NewUrlBuilder(), "POST", {
+			postBody = HttpService:JSONEncode({
+				email = Email,
+				requestType = Entry == nil and VPCRequestTypeEnum.LinkToChild or Entry[1],
+				requestDetails = RequestDetails,
+				analyticsSessionId = if p1 == "" then nil else p1
 			}),
 			headers = {
 				["Content-Type"] = "application/json",
 				Accept = "application/json"
 			}
-		}):andThen(function(p5)
+		}):andThen(function(Result) --[[ Line: 52 ]]
 			return {
-				sessionId = p5.responseBody.sessionId,
-				lockedUntil = p5.responseBody.lockedUntil
+				sessionId = Result.responseBody.sessionId,
+				lockedUntil = Result.responseBody.lockedUntil
 			}
-		end):catch(function(p5)
-			-- upvalues: httpService (copy)
-			local _, status = pcall(function()
-				-- upvalues: httpService (copy), p5 (ref)
-				return httpService:JSONDecode(p5.Body)
+		end):catch(function(Err) --[[ Line: 58 ]]
+			-- upvalues: HttpService (upval)
+			local _, Result = pcall(function() --[[ Line: 59 ]]
+				-- upvalues: HttpService (upval), Err (copy)
+				return HttpService:JSONDecode(Err.Body)
 			end)
-			error({ code = status.code, message = status.message })
+			error({ code = Result.code, message = Result.message })
 		end)
 	end,
-	sendRequestToAllParents = function(p1, p2, p3)
-		-- upvalues: var2 (ref), httpService (ref)
-		return p1(var2(), "POST", {
-			postBody = httpService:JSONEncode({ requestType = p2[1], requestDetails = p3 }),
+	sendRequestToAllParents = function(Callback, Entry, RequestDetails, p1) --[[ Line: 74 ]]
+		-- upvalues: NewUrlBuilder1 (copy), HttpService (copy)
+		return Callback(NewUrlBuilder1(), "POST", {
+			postBody = HttpService:JSONEncode({
+				requestType = Entry[1],
+				requestDetails = RequestDetails,
+				analyticsSessionId = if p1 == "" then nil else p1
+			}),
 			headers = {
 				["Content-Type"] = "application/json",
 				Accept = "application/json"
 			}
-		}):andThen(function(p4)
+		}):andThen(function(Result) --[[ Line: 94 ]]
 			return {
-				sessionId = p4.responseBody.sessionId,
-				lockedUntil = p4.responseBody.lockedUntil
+				sessionId = Result.responseBody.sessionId,
+				lockedUntil = Result.responseBody.lockedUntil
 			}
-		end):catch(function(p4)
-			-- upvalues: httpService (copy)
-			local _, status = pcall(function()
-				-- upvalues: httpService (copy), p4 (ref)
-				return httpService:JSONDecode(p4.Body)
+		end):catch(function(Err) --[[ Line: 100 ]]
+			-- upvalues: HttpService (upval)
+			local _, Result = pcall(function() --[[ Line: 101 ]]
+				-- upvalues: HttpService (upval), Err (copy)
+				return HttpService:JSONDecode(Err.Body)
 			end)
-			error({ code = status.code, message = status.message })
+			error({ code = Result.code, message = Result.message })
 		end)
 	end,
-	getLinkedParentEmails = function(p1)
-		-- upvalues: var3 (ref)
-		return p1(var3(), "GET", {
+	getLinkedParentEmails = function(Callback) --[[ Line: 114 ]]
+		-- upvalues: NewUrlBuilder2 (copy)
+		return Callback(NewUrlBuilder2(), "GET", {
 			headers = {
 				["Content-Type"] = "application/json",
 				Accept = "application/json"
 			}
-		}):andThen(function(p2)
-			return { parentEmails = p2.responseBody.parentEmails }
-		end):catch(function(_)
+		}):andThen(function(Result) --[[ Line: 122 ]]
+			return { parentEmails = Result.responseBody.parentEmails }
+		end):catch(function(_) --[[ Line: 127 ]]
 			error({})
 		end)
 	end

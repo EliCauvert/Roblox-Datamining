@@ -1,37 +1,35 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local getUsersStoreModule = require(moments.Stores.GetUsersStore)
-local playersService = game:GetService("Players")
-local useSignalState = signalsReactModule.useSignalState
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
+local ReactModule = require(Parent.React)
+local GetUsersStoreModule = require(Moments.Stores.GetUsersStore)
+local Players = game:GetService("Players")
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 
-return function(p1)
-	-- upvalues: getUsersStoreModule (ref), useSignalState (ref), reactModule (ref), playersService (ref)
-	local var1 = getUsersStoreModule(false)
-	local username = useSignalState(var1.getUserProfile(tostring(p1))).username
-	reactModule.useEffect(function()
-		-- upvalues: username (ref), playersService (copy), p1 (ref), var1 (ref)
-		if username == nil then
-			local var2 = false
-			task.spawn(function()
-				-- upvalues: playersService (copy), p1 (copy), var2 (write), var1 (copy)
-				local ok, status = pcall(function()
-					-- upvalues: playersService (copy), p1 (copy)
-					return playersService:GetNameFromUserIdAsync(p1)
-				end)
-				
-				if ok and not var2 then
-					var1.updateUsername(p1, status)
-				end
+return function(UserId) --[[ Line: 18 ]]
+	-- upvalues: GetUsersStoreModule (copy), UseSignalStateFunction (copy), ReactModule (copy), Players (copy)
+	local UsersStoreModule = GetUsersStoreModule(false)
+	local Username = UseSignalStateFunction(UsersStoreModule.getUserProfile((tostring(UserId)))).username
+	ReactModule.useEffect(function() --[[ Line: 23 ]]
+		-- upvalues: Username (copy), Players (upval), UserId (copy), UsersStoreModule (copy)
+		if Username ~= nil then return end
+		local Flag = false
+		task.spawn(function() --[[ Line: 30 ]]
+			-- upvalues: Players (upval), UserId (upval), Flag (ref), UsersStoreModule (upval)
+			local Success, Result = pcall(function() --[[ Line: 31 ]]
+				-- upvalues: Players (upval), UserId (upval)
+				return Players:GetNameFromUserIdAsync(UserId)
 			end)
 			
-			return function()
-				-- upvalues: var2 (write)
-				var2 = true
+			if Success and not Flag then
+				UsersStoreModule.updateUsername(UserId, Result)
 			end
+		end)
+		
+		return function() --[[ Line: 39 ]]
+			-- upvalues: Flag (ref)
+			Flag = true
 		end
-	end, { p1, username, var1.updateUsername })
+	end, { UserId, Username, UsersStoreModule.updateUsername })
 	
-	return username
+	return Username
 end

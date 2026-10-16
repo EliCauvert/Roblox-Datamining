@@ -1,3 +1,3 @@
-﻿return function(p1)
-	return p1:IsA("StringValue") or (p1:IsA("IntValue") or (p1:IsA("BoolValue") or (p1:IsA("NumberValue") or (p1:IsA("DoubleConstrainedValue") or p1:IsA("IntConstrainedValue")))))
+﻿return function(Object) --[[ Line: 1 | Named "isValidStat" ]]
+	return Object:IsA("StringValue") or (Object:IsA("IntValue") or (Object:IsA("BoolValue") or (Object:IsA("NumberValue") or (Object:IsA("DoubleConstrainedValue") or Object:IsA("IntConstrainedValue")))))
 end

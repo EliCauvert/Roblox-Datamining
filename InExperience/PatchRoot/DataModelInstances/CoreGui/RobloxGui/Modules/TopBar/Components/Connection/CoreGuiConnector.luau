@@ -1,59 +1,55 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local starterGuiService = game:GetService("StarterGui")
-local modules = game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local tModule = require(corePackagesService.Packages.t)
-local parent = script.Parent.Parent.Parent
-local updateCoreGuiEnabledModule = require(parent.Actions.UpdateCoreGuiEnabled)
-local eventConnectionModule = require(parent.Parent.Common.EventConnection)
-local fFlagMountCoreGuiBackpackModule = require(modules.Flags.FFlagMountCoreGuiBackpack)
+﻿local CorePackages = game:GetService("CorePackages")
+local StarterGui = game:GetService("StarterGui")
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local TModule = require(CorePackages.Packages.t)
+local Parent = script.Parent.Parent.Parent
+local UpdateCoreGuiEnabledModule = require(Parent.Actions.UpdateCoreGuiEnabled)
+local EventConnectionModule = require(Parent.Parent.Common.EventConnection)
+local FFlagMountCoreGuiBackpackModule = require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.Flags.FFlagMountCoreGuiBackpack)
 
-if require(parent.Flags.FFlagTopBarDeprecateCoreGuiRodux) then
+if require(Parent.Flags.FFlagTopBarDeprecateCoreGuiRodux) then
 	return nil
-end
-local fFlagTopBarSignalizeHealthBar = require(corePackagesService.Workspace.Packages.CoreGuiCommon).Flags.FFlagTopBarSignalizeHealthBar
-local coreGuiConnector = roactModule.PureComponent:extend("CoreGuiConnector")
-coreGuiConnector.validateProps = tModule.strictInterface({ updateCoreGuiEnabled = tModule.callback })
-
-function coreGuiConnector.didMount(p1)
-	-- upvalues: fFlagMountCoreGuiBackpackModule (ref), fFlagTopBarSignalizeHealthBar (ref), starterGuiService (ref)
-	for i, v in ipairs(Enum.CoreGuiType:GetEnumItems()) do
-		if (not fFlagMountCoreGuiBackpackModule or v ~= Enum.CoreGuiType.Backpack) and (not fFlagTopBarSignalizeHealthBar or v ~= Enum.CoreGuiType.Health) and v ~= Enum.CoreGuiType.All then
-			p1.props.updateCoreGuiEnabled(v, starterGuiService:GetCoreGuiEnabled(v))
+else
+	local FFlagTopBarSignalizeHealthBar = require(CorePackages.Workspace.Packages.CoreGuiCommon).Flags.FFlagTopBarSignalizeHealthBar
+	local CoreGuiConnector = RoactModule.PureComponent:extend("CoreGuiConnector")
+	CoreGuiConnector.validateProps = TModule.strictInterface({ updateCoreGuiEnabled = TModule.callback })
+	
+	function CoreGuiConnector.didMount(p1) --[[ Line: 37 ]]
+		-- upvalues: FFlagMountCoreGuiBackpackModule (copy), FFlagTopBarSignalizeHealthBar (copy), StarterGui (copy)
+		for _, enumItem in ipairs((Enum.CoreGuiType:GetEnumItems())) do
+			if (not FFlagMountCoreGuiBackpackModule or enumItem ~= Enum.CoreGuiType.Backpack) and (not FFlagTopBarSignalizeHealthBar or enumItem ~= Enum.CoreGuiType.Health) and enumItem ~= Enum.CoreGuiType.All then
+				p1.props.updateCoreGuiEnabled(enumItem, StarterGui:GetCoreGuiEnabled(enumItem))
+			end
 		end
 	end
-end
-
-function coreGuiConnector.render(p2)
-	-- upvalues: roactModule (ref), eventConnectionModule (ref), starterGuiService (ref), fFlagMountCoreGuiBackpackModule (ref)
-	return roactModule.createFragment({
-		CoreGuiChangedConnection = roactModule.createElement(eventConnectionModule, {
-			event = starterGuiService.CoreGuiChangedSignal,
-			callback = function(p3, p4)
-				-- upvalues: fFlagMountCoreGuiBackpackModule (copy), p2 (ref)
-				if fFlagMountCoreGuiBackpackModule then
-					if p3 == Enum.CoreGuiType.Backpack then
-						return
-					else
-						p2.props.updateCoreGuiEnabled(p3, p4)
+	
+	function CoreGuiConnector.render(p2) --[[ Line: 50 ]]
+		-- upvalues: RoactModule (copy), EventConnectionModule (copy), StarterGui (copy), FFlagMountCoreGuiBackpackModule (copy)
+		return RoactModule.createFragment({
+			CoreGuiChangedConnection = RoactModule.createElement(EventConnectionModule, {
+				event = StarterGui.CoreGuiChangedSignal,
+				callback = function(CoreGuiType, p3) --[[ Line: 54 ]]
+					-- upvalues: FFlagMountCoreGuiBackpackModule (upval), p2 (copy)
+					if not FFlagMountCoreGuiBackpackModule then
+						p2.props.updateCoreGuiEnabled(CoreGuiType, p3)
+					elseif CoreGuiType ~= Enum.CoreGuiType.Backpack then
+						p2.props.updateCoreGuiEnabled(CoreGuiType, p3)
 						
 						return
 					end
-				else
-					p2.props.updateCoreGuiEnabled(p3, p4)
 				end
-			end
+			})
 		})
-	})
+	end
+	
+	return RoactRoduxModule.UNSTABLE_connect2(nil, function(Callback) --[[ Line: 68 | Named "mapDispatchToProps" ]]
+		-- upvalues: UpdateCoreGuiEnabledModule (copy)
+		return {
+			updateCoreGuiEnabled = function(p2, p3) --[[ Line: 70 ]]
+				-- upvalues: Callback (copy), UpdateCoreGuiEnabledModule (upval)
+				return Callback(UpdateCoreGuiEnabledModule(p2, p3))
+			end
+		}
+	end)(CoreGuiConnector)
 end
-
-return roactRoduxModule.UNSTABLE_connect2(nil, function(p2)
-	-- upvalues: updateCoreGuiEnabledModule (ref)
-	return {
-		updateCoreGuiEnabled = function(p3, p4)
-			-- upvalues: p2 (ref), updateCoreGuiEnabledModule (copy)
-			return p2(updateCoreGuiEnabledModule(p3, p4))
-		end
-	}
-end)(coreGuiConnector)

@@ -1,12 +1,12 @@
-﻿local roactModule = require(game:GetService("CorePackages").Packages.Roact)
-local components = script.Parent.Parent.Parent.Components
-local dataConsumerModule = require(components.DataConsumer)
-local memoryViewModule = require(components.Memory.MemoryView)
-local serverMemory = roactModule.Component:extend("ServerMemory")
+﻿local RoactModule = require(game:GetService("CorePackages").Packages.Roact)
+local Components = script.Parent.Parent.Parent.Components
+local DataConsumerModule = require(Components.DataConsumer)
+local MemoryViewModule = require(Components.Memory.MemoryView)
+local ServerMemory = RoactModule.Component:extend("ServerMemory")
 
-function serverMemory.render(p1)
-	-- upvalues: roactModule (ref), memoryViewModule (ref)
-	return roactModule.createElement(memoryViewModule, {
+function ServerMemory.render(p1) --[[ Line: 10 ]]
+	-- upvalues: RoactModule (copy), MemoryViewModule (copy)
+	return RoactModule.createElement(MemoryViewModule, {
 		layoutOrder = p1.props.layoutOrder,
 		size = p1.props.size,
 		searchTerm = p1.props.searchTerm,
@@ -14,4 +14,4 @@ function serverMemory.render(p1)
 	})
 end
 
-return dataConsumerModule(serverMemory, "ServerMemoryData")
+return DataConsumerModule(ServerMemory, "ServerMemoryData")

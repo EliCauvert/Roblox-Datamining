@@ -1,29 +1,29 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local roduxModule = require(parent.Rodux)
-local fFlagAppChatPresenceStoreMigrationModule = require(appChat.Flags.FFlagAppChatPresenceStoreMigration)
-local fFlagAppChatUnreadMessageCountStoreModule = require(appChat.Flags.FFlagAppChatUnreadMessageCountStore)
-local fFlagAppChatRemoveToggleChatPaused = require(parent.SharedFlags).FFlagAppChatRemoveToggleChatPaused
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local RoduxModule = require(Parent.Rodux)
+local FFlagAppChatPresenceStoreMigrationModule = require(AppChat.Flags.FFlagAppChatPresenceStoreMigration)
+local FFlagAppChatUnreadMessageCountStoreModule = require(AppChat.Flags.FFlagAppChatUnreadMessageCountStore)
+local FFlagAppChatRemoveToggleChatPaused = require(Parent.SharedFlags).FFlagAppChatRemoveToggleChatPaused
 
-return function()
-	-- upvalues: roduxModule (ref), parent (ref), appChat (ref), fFlagAppChatPresenceStoreMigrationModule (ref), fFlagAppChatRemoveToggleChatPaused (ref), fFlagAppChatUnreadMessageCountStoreModule (ref)
-	return roduxModule.combineReducers({
-		PlaceInfos = require(parent.PlaceInfoRodux).Reducers.PlaceInfosReducer,
-		PlaceInfosAsync = require(parent.PlaceInfoRodux).Reducers.PlaceInfosAsyncReducer,
+return function() --[[ Line: 9 ]]
+	-- upvalues: RoduxModule (copy), Parent (copy), AppChat (copy), FFlagAppChatPresenceStoreMigrationModule (copy), FFlagAppChatRemoveToggleChatPaused (copy), FFlagAppChatUnreadMessageCountStoreModule (copy)
+	return RoduxModule.combineReducers({
+		PlaceInfos = require(Parent.PlaceInfoRodux).Reducers.PlaceInfosReducer,
+		PlaceInfosAsync = require(Parent.PlaceInfoRodux).Reducers.PlaceInfosAsyncReducer,
 		Aliases = require(script.Aliases),
-		AppLoaded = require(appChat.installReducer.AppLoaded),
-		ChatSettings = require(appChat.installReducer.ChatSettings),
-		ChatTimeouts = require(appChat.installReducer.ChatTimeouts),
-		Conversations = require(appChat.installReducer.Conversations),
-		ConversationsAsync = require(appChat.installReducer.ConversationsAsync),
+		AppLoaded = require(AppChat.installReducer.AppLoaded),
+		ChatSettings = require(AppChat.installReducer.ChatSettings),
+		ChatTimeouts = require(AppChat.installReducer.ChatTimeouts),
+		Conversations = require(AppChat.installReducer.Conversations),
+		ConversationsAsync = require(AppChat.installReducer.ConversationsAsync),
 		Friends = require(script.Friends),
-		ExternalNavigationRequest = require(appChat.installReducer.ExternalNavigationRequest),
+		ExternalNavigationRequest = require(AppChat.installReducer.ExternalNavigationRequest),
 		LastEntryPoint = require(script.LastEntryPoint),
 		Modals = require(script.Modals),
 		ParticipantMetadata = require(script.ParticipantMetadata),
-		Presence = if fFlagAppChatPresenceStoreMigrationModule then nil else require(script.Presence),
-		ToggleChatPaused = if fFlagAppChatRemoveToggleChatPaused then nil else require(appChat.installReducer.ToggleChatPaused),
-		networkStatus = require(appChat.Http.RoduxNetworking).installReducer(),
-		unreadMessageCount = if fFlagAppChatUnreadMessageCountStoreModule then nil else require(script.UnreadMessageCount)
+		Presence = if FFlagAppChatPresenceStoreMigrationModule then nil else require(script.Presence),
+		ToggleChatPaused = if FFlagAppChatRemoveToggleChatPaused then nil else require(AppChat.installReducer.ToggleChatPaused),
+		networkStatus = require(AppChat.Http.RoduxNetworking).installReducer(),
+		unreadMessageCount = if FFlagAppChatUnreadMessageCountStoreModule then nil else require(script.UnreadMessageCount)
 	})
 end

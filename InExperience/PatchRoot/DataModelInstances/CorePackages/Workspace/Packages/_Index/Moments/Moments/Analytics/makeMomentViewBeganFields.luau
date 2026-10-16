@@ -1,30 +1,33 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
-local momentsCommonModule = require(parent.MomentsCommon)
-local _ = require(parent.MomentsTypes)
-local fFlagMomentsImpressionDestinationUniverseIdModule = require(moments.Flags.FFlagMomentsImpressionDestinationUniverseId)
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
+local MomentsCommonModule = require(Parent.MomentsCommon)
+local _ = require(Parent.MomentsTypes)
+local FFlagMomentsImpressionDestinationUniverseIdModule = require(Moments.Flags.FFlagMomentsImpressionDestinationUniverseId)
 
-return function(p1, p2)
-	-- upvalues: momentsCommonModule (ref), fFlagMomentsImpressionDestinationUniverseIdModule (ref)
-	local recommendationMetadata = p1.recommendationMetadata
-	local feedItemId = recommendationMetadata.feedItemId
+return function(p1, Entry, ViewId) --[[ Line: 29 | Named "makeMomentViewBeganFields" ]]
+	-- upvalues: MomentsCommonModule (copy), FFlagMomentsImpressionDestinationUniverseIdModule (copy)
+	local RecommendationMetadata = p1.recommendationMetadata
+	local FeedItemId = RecommendationMetadata.feedItemId
 	
-	if feedItemId == nil or feedItemId == "" then
-		momentsCommonModule.Analytics.reportMomentSkip("impression", if feedItemId == nil then "nil" else "empty", { entry = p2 })
+	if FeedItemId == nil or FeedItemId == "" then
+		MomentsCommonModule.Analytics.reportMomentSkip("impression", if FeedItemId == nil then "nil" else "empty", { entry = Entry })
 		
 		return nil
 	end
-	local t = {
+	local config = {
 		viewMode = "vertical",
 		momentId = p1.momentId,
-		feedItemId = feedItemId,
-		feedSessionId = recommendationMetadata.tracingId or "",
-		source = p2
+		feedItemId = FeedItemId,
+		feedSessionId = RecommendationMetadata.tracingId or "",
+		source = Entry
 	}
-	local universeId = p1.metadata.universeId
+	local UniverseId: number = p1.metadata.universeId
 	
-	if fFlagMomentsImpressionDestinationUniverseIdModule and universeId ~= nil and universeId > 0 then
-		t.destinationUniverseId = tostring(universeId)
+	if FFlagMomentsImpressionDestinationUniverseIdModule and UniverseId ~= nil and UniverseId > 0 then
+		config.destinationUniverseId = tostring(UniverseId)
 	end
-	return t
+	if ViewId ~= nil then
+		config.viewId = ViewId
+	end
+	return config
 end

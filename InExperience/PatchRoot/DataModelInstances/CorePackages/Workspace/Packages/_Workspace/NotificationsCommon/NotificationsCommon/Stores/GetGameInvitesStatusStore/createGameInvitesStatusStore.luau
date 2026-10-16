@@ -1,27 +1,27 @@
-﻿local parent = script:FindFirstAncestor("NotificationsCommon").Parent
-local _ = require(parent.Signals)
-local createSessionScopedSignal = require(parent.SignalsUtils).createSessionScopedSignal
+﻿local Parent = script:FindFirstAncestor("NotificationsCommon").Parent
+local _ = require(Parent.Signals)
+local CreateSessionScopedSignalFunction = require(Parent.SignalsUtils).createSessionScopedSignal
 
-return function()
-	-- upvalues: createSessionScopedSignal (ref)
-	local var1, var2 = createSessionScopedSignal({})
+return function() --[[ Line: 15 ]]
+	-- upvalues: CreateSessionScopedSignalFunction (copy)
+	local SessionScopedSignal, SessionScopedSignal2 = CreateSessionScopedSignalFunction({})
 	
 	return {
-		getGameInvitesStatus = var1,
-		receivedUserInviteStatus = function(p1, p2)
-			-- upvalues: var2 (ref)
-			local var3 = tostring(p1)
-			var2(function(p3)
-				-- upvalues: var3 (ref), p2 (ref)
-				local cloned = table.clone(p3)
-				cloned[var3] = p2
+		getGameInvitesStatus = SessionScopedSignal,
+		receivedUserInviteStatus = function(p1, p2) --[[ Line: 18 ]]
+			-- upvalues: SessionScopedSignal2 (copy)
+			local Text = tostring(p1)
+			SessionScopedSignal2(function(Tbl) --[[ Line: 20 ]]
+				-- upvalues: Text (copy), p2 (copy)
+				local Copy = table.clone(Tbl)
+				Copy[Text] = p2
 				
-				return cloned
+				return Copy
 			end)
 		end,
-		reset = function()
-			-- upvalues: var2 (ref)
-			var2({})
+		reset = function() --[[ Line: 27 ]]
+			-- upvalues: SessionScopedSignal2 (copy)
+			SessionScopedSignal2({})
 		end
 	}
 end

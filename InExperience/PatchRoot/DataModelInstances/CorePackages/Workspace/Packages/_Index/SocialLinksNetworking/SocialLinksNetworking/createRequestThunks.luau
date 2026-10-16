@@ -1,13 +1,13 @@
-﻿local networkRequests = script.Parent.networkRequests
-local createGetSocialLinksModule = require(networkRequests.createGetSocialLinks)
-local createGetSelfSocialLinksModule = require(networkRequests.createGetSelfSocialLinks)
-local createSetSocialLinksModule = require(networkRequests.createSetSocialLinks)
+﻿local NetworkRequests = script.Parent.networkRequests
+local CreateGetSocialLinksModule = require(NetworkRequests.createGetSocialLinks)
+local CreateGetSelfSocialLinksModule = require(NetworkRequests.createGetSelfSocialLinks)
+local CreateSetSocialLinksModule = require(NetworkRequests.createSetSocialLinks)
 
-return function(p1)
-	-- upvalues: createGetSocialLinksModule (ref), createGetSelfSocialLinksModule (ref), createSetSocialLinksModule (ref)
+return function(p1) --[[ Line: 7 ]]
+	-- upvalues: CreateGetSocialLinksModule (copy), CreateGetSelfSocialLinksModule (copy), CreateSetSocialLinksModule (copy)
 	return {
-		GetSocialLinks = createGetSocialLinksModule(p1),
-		GetSelfSocialLinks = createGetSelfSocialLinksModule(p1),
-		SetSocialLinks = createSetSocialLinksModule(p1)
+		GetSocialLinks = CreateGetSocialLinksModule(p1),
+		GetSelfSocialLinks = CreateGetSelfSocialLinksModule(p1),
+		SetSocialLinks = CreateSetSocialLinksModule(p1)
 	}
 end

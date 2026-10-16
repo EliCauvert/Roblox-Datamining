@@ -1,3 +1,3 @@
-﻿return require(script.Parent.Parent.Parent.Parent.Action)("ScriptProfiler" .. script.Name, function(p1, p2)
-	return { isClient = p1, frequency = p2 }
+﻿return require(script.Parent.Parent.Parent.Parent.Action)("ScriptProfiler" .. script.Name, function(IsClient, Frequency) --[[ Line: 4 ]]
+	return { isClient = IsClient, frequency = Frequency }
 end)

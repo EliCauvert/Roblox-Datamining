@@ -1,80 +1,81 @@
-﻿local expChat = script:FindFirstAncestor("ExpChat")
-local parent = expChat.Parent
-local expChatSharedModule = require(parent.ExpChatShared)
-local roactModule = require(parent.Roact)
-local reactModule = require(parent.React)
-local roactRoduxModule = require(parent.RoactRodux)
-local list = require(parent.llama).List
-local otterModule = require(parent.Otter)
-local tutilsModule = require(parent.tutils)
-local sharedFlagsModule = require(parent.SharedFlags)
-local playersService = game:GetService("Players")
-local runService = game:GetService("RunService")
-local starterGuiService = game:GetService("StarterGui")
+﻿local ExpChat = script:FindFirstAncestor("ExpChat")
+local Parent = ExpChat.Parent
+local ExpChatSharedModule = require(Parent.ExpChatShared)
+local RoactModule = require(Parent.Roact)
+local ReactModule = require(Parent.React)
+local RoactRoduxModule = require(Parent.RoactRodux)
+local List = require(Parent.llama).List
+local OtterModule = require(Parent.Otter)
+local TutilsModule = require(Parent.tutils)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local StarterGui = game:GetService("StarterGui")
 local VRService = game:GetService("VRService")
-local createEffect = require(parent.Signals).createEffect
-local var1 = expChatSharedModule.Logger:new("ExpChat/" .. script.Name)
-local bubbleChat = script:FindFirstAncestor("BubbleChat")
-local voiceIndicatorModule = require(bubbleChat.VoiceIndicator)
-local blankBubbleModule = require(bubbleChat.BlankBubble)
-local bubbleChatListModule = require(bubbleChat.BubbleChatList)
-local chatBubbleDistantModule = require(bubbleChat.ChatBubbleDistant)
-local globalFlagsModule = require(expChat.GlobalFlags)
-local helpers = bubbleChat.Helpers
-local getMessagesStoreModule = require(expChat.Stores.GetMessagesStore)
-local getChatConfigurationStoreModule = require(expChat.Stores.GetChatConfigurationStore)
-local getSettingsForMessageModule = require(helpers.getSettingsForMessage)
-local selfViewNoApi = game:DefineFastFlag("SelfViewNoApi", false)
-local playerButtonsModule = require(bubbleChat.PlayerButtons)
-local fFlagEasierUnmutingModule = require(expChat.Flags.FFlagEasierUnmuting)
-local expChatMemoBillboardGui = game:DefineFastFlag("ExpChatMemoBillboardGui", false)
-local stopBubbleChatReactWarning = game:DefineFastFlag("StopBubbleChatReactWarning", false)
-local experienceChatHeartbeatIncrement = game:DefineFastInt("ExperienceChatHeartbeatIncrement", 5)
-local fFlagExpChatUseAdorneeStore = sharedFlagsModule.FFlagExpChatUseAdorneeStore
-local fFlagExpChatUseProximityStore = sharedFlagsModule.FFlagExpChatUseProximityStore
-local expChatProximityStoreExtraRendersBeforeUnmount = game:DefineFastInt("ExpChatProximityStoreExtraRendersBeforeUnmount", 10)
-local fFlagExpChatUseChatConfigStore = sharedFlagsModule.FFlagExpChatUseChatConfigStore
-local vector2 = Vector2.new(28, 28)
+local UserGameSettings = UserSettings():GetService("UserGameSettings")
+local CreateEffectFunction = require(Parent.Signals).createEffect
+local NewResult = ExpChatSharedModule.Logger:new("ExpChat/" .. script.Name)
+local BubbleChat = script:FindFirstAncestor("BubbleChat")
+local VoiceIndicatorModule = require(BubbleChat.VoiceIndicator)
+local BlankBubbleModule = require(BubbleChat.BlankBubble)
+local BubbleChatListModule = require(BubbleChat.BubbleChatList)
+local ChatBubbleDistantModule = require(BubbleChat.ChatBubbleDistant)
+local GlobalFlagsModule = require(ExpChat.GlobalFlags)
+local Helpers = BubbleChat.Helpers
+local GetMessagesStoreModule = require(ExpChat.Stores.GetMessagesStore)
+local GetChatConfigurationStoreModule = require(ExpChat.Stores.GetChatConfigurationStore)
+local GetSettingsForMessageModule = require(Helpers.getSettingsForMessage)
+local GetDisplayedBubbleMessagesModule = require(Helpers.getDisplayedBubbleMessages)
+local GetBubbleChatStartTimeMillisModule = require(Helpers.getBubbleChatStartTimeMillis)
+local GetServerTimeNowMillisModule = require(Helpers.getServerTimeNowMillis)
+local GetBubbleDurationInMillisModule = require(Helpers.getBubbleDurationInMillis)
+local GetBorderlessBubbleChatRenderDistanceModule = require(Helpers.getBorderlessBubbleChatRenderDistance)
+local IsBorderlessBubbleChatMessageModule = require(Helpers.isBorderlessBubbleChatMessage)
+local SelfViewNoApi = game:DefineFastFlag("SelfViewNoApi", false)
+local PlayerButtonsModule = require(BubbleChat.PlayerButtons)
+local FFlagEasierUnmutingModule = require(ExpChat.Flags.FFlagEasierUnmuting)
+local ExpChatMemoBillboardGui = game:DefineFastFlag("ExpChatMemoBillboardGui", false)
+local ExperienceChatHeartbeatIncrement = game:DefineFastInt("ExperienceChatHeartbeatIncrement", 5)
+local FFlagExpChatUseAdorneeStore = SharedFlagsModule.FFlagExpChatUseAdorneeStore
+local FFlagExpChatUseProximityStore = SharedFlagsModule.FFlagExpChatUseProximityStore
+local ExpChatProximityStoreExtraRendersBeforeUnmount = game:DefineFastInt("ExpChatProximityStoreExtraRendersBeforeUnmount", 10)
+local FFlagExpChatUseChatConfigStore = SharedFlagsModule.FFlagExpChatUseChatConfigStore
+local IsBorderlessBubbleChatEnabledModule = require(ExpChat.isBorderlessBubbleChatEnabled)
+local _Vector2 = Vector2.new(28, 28)
 
-local function getRecentMessages(p1, p2, p3)
-	-- upvalues: list (ref)
-	local var2 = workspace:GetServerTimeNow() * 1000
+local function getRecentMessages(p1, ScaledBubbleDuration, MaxBubbles) --[[ Line: 61 ]]
+	-- upvalues: List (copy)
+	local ScaledServerTimeNow = workspace:GetServerTimeNow() * 1000
 	
-	return list.filter(p1 or {}, function(p4, p5)
-		-- upvalues: p1 (ref), p3 (ref), var2 (ref), p2 (ref)
-		return if p4.isVisibleInBubbleChat then #p1 - p3 < p5 and var2 - p4.timestamp.UnixTimestampMillis < p2 else false
+	return List.filter(p1 or {}, function(p2, p3): boolean --[[ Line: 65 ]]
+		-- upvalues: p1 (copy), MaxBubbles (copy), ScaledServerTimeNow (copy), ScaledBubbleDuration (copy)
+		return if p2.isVisibleInBubbleChat then #p1 - MaxBubbles < p3 and ScaledServerTimeNow - p2.timestamp.UnixTimestampMillis < ScaledBubbleDuration else false
 	end)
 end
 
-local bubbleChatBillboard = (if stopBubbleChatReactWarning then roactModule.Component else roactModule.PureComponent):extend("BubbleChatBillboard")
-local t = { dampingRatio = 1, frequency = 4 }
-local currentCamera = workspace.CurrentCamera
-workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function()
-	-- upvalues: currentCamera (write)
-	currentCamera = workspace.CurrentCamera
+local BubbleChatBillboard = (if game:DefineFastFlag("StopBubbleChatReactWarning", false) then RoactModule.Component else RoactModule.PureComponent):extend("BubbleChatBillboard")
+local config = { dampingRatio = 1, frequency = 4 }
+local CurrentCamera = workspace.CurrentCamera
+workspace:GetPropertyChangedSignal("CurrentCamera"):Connect(function() --[[ Line: 86 ]]
+	-- upvalues: CurrentCamera (ref)
+	CurrentCamera = workspace.CurrentCamera
 end)
 
-function bubbleChatBillboard.init(p1)
-	-- upvalues: globalFlagsModule (ref), selfViewNoApi (ref), starterGuiService (ref), fFlagExpChatUseProximityStore (ref), expChatSharedModule (ref), roactModule (ref), otterModule (ref), playersService (ref), voiceIndicatorModule (ref), getMessagesStoreModule (ref), fFlagExpChatUseChatConfigStore (ref), getChatConfigurationStoreModule (ref)
-	local selfViewVisibility = nil
-	local var2 = nil
+function BubbleChatBillboard.init(p1) --[[ Line: 90 ]]
+	-- upvalues: GlobalFlagsModule (copy), SelfViewNoApi (copy), StarterGui (copy), FFlagExpChatUseProximityStore (copy), ExpChatSharedModule (copy), RoactModule (copy), OtterModule (copy), IsBorderlessBubbleChatEnabledModule (copy), GetBorderlessBubbleChatRenderDistanceModule (copy), Players (copy), VoiceIndicatorModule (copy), GetMessagesStoreModule (copy), FFlagExpChatUseChatConfigStore (copy), GetChatConfigurationStoreModule (copy)
+	local SelfViewVisibility = nil
+	local SelfViewEnabled = nil
 	
-	if globalFlagsModule.AvatarChatEnabled then
-		selfViewVisibility = p1.props.selfViewListenerChanged.getSelfViewVisibility()
-		var2 = selfViewNoApi or (starterGuiService:GetCoreGuiEnabled(Enum.CoreGuiType.All) or starterGuiService:GetCoreGuiEnabled(Enum.CoreGuiType.SelfView))
+	if GlobalFlagsModule.AvatarChatEnabled then
+		SelfViewVisibility = p1.props.selfViewListenerChanged.getSelfViewVisibility()
+		SelfViewEnabled = SelfViewNoApi or (StarterGui:GetCoreGuiEnabled(Enum.CoreGuiType.All) or StarterGui:GetCoreGuiEnabled(Enum.CoreGuiType.SelfView))
 	end
-	if fFlagExpChatUseProximityStore then
-		local context = expChatSharedModule.context
-		p1.ProximityStore = context and context.proximityStore
-		local var3, var4 = roactModule.createBinding(100)
-		p1.invisibleCount = var3
-		p1.setInvisibleCount = var4
-		local var5, var6 = roactModule.createBinding(false)
-		p1.renderDistanceBinding = var5
-		p1.updateRenderDistanceBinding = var6
-		local var7, var8 = roactModule.createBinding(false)
-		p1.maximizeDistanceBinding = var7
-		p1.updateMaximizeDistanceBinding = var8
+	if FFlagExpChatUseProximityStore then
+		local Context = ExpChatSharedModule.context
+		p1.ProximityStore = Context and Context.proximityStore
+		p1.invisibleCount, p1.setInvisibleCount = RoactModule.createBinding(100)
+		p1.renderDistanceBinding, p1.updateRenderDistanceBinding = RoactModule.createBinding(false)
+		p1.maximizeDistanceBinding, p1.updateMaximizeDistanceBinding = RoactModule.createBinding(false)
 	end
 	p1:setState({
 		isInsideRenderDistance = false,
@@ -83,83 +84,85 @@ function bubbleChatBillboard.init(p1)
 		voiceStateCounter = 0,
 		lastVoiceState = nil,
 		savedChatSettings = p1.props.chatSettings,
-		selfViewOpen = selfViewVisibility,
-		selfViewEnabled = var2,
+		selfViewOpen = SelfViewVisibility,
+		selfViewEnabled = SelfViewEnabled,
 		filteredMessages = {}
 	})
 	p1.isMounted = false
-	local var9, var10 = roactModule.createBinding(Vector3.new())
-	p1.offset = var9
-	p1.updateOffset = var10
-	p1.offsetMotor = otterModule.createSingleMotor(0)
-	p1.offsetMotor:onStep(function(p2)
-		-- upvalues: p1 (ref)
-		p1.updateOffset(Vector3.new(0, p2, 0))
+	p1.offset, p1.updateOffset = RoactModule.createBinding((Vector3.new()))
+	p1.offsetMotor = OtterModule.createSingleMotor(0)
+	p1.offsetMotor:onStep(function(Y) --[[ Line: 125 ]]
+		-- upvalues: p1 (copy)
+		p1.updateOffset((Vector3.new(0, Y, 0)))
 	end)
 	p1.offsetGoal = 0
-	local var11, var12 = roactModule.createBinding(nil)
-	p1.adorneeBinding = var11
-	p1.updateAdorneeBinding = var12
-	local var13, var14 = roactModule.createBinding(nil)
-	p1.localAdorneeBinding = var13
-	p1.updateLocalAdorneeBinding = var14
 	
-	if fFlagExpChatUseProximityStore then
-		local var15, var16 = roactModule.createBinding(false)
-		p1.voiceTimedOutBinding = var15
-		p1.setVoiceTimedOutBinding = var16
+	if IsBorderlessBubbleChatEnabledModule() then
+		p1.borderlessDistanceTransparency, p1.updateBorderlessDistanceTransparency = RoactModule.createBinding(0)
+		p1.borderlessBillboardMaxDistance, p1.updateBorderlessBillboardMaxDistance = RoactModule.createBinding(GetBorderlessBubbleChatRenderDistanceModule(p1.props.chatSettings))
+		p1.isInsideBorderlessRenderDistance = nil
+		p1.borderlessDistanceFadeConnection = nil
+	end
+	p1.adorneeBinding, p1.updateAdorneeBinding = RoactModule.createBinding(nil)
+	p1.localAdorneeBinding, p1.updateLocalAdorneeBinding = RoactModule.createBinding(nil)
+	
+	if FFlagExpChatUseProximityStore then
+		p1.voiceTimedOutBinding, p1.setVoiceTimedOutBinding = RoactModule.createBinding(false)
 	end
 	p1.heartbeatCount = 0
 	p1.lastDistanceUpdate = 0
 	
-	function p1.onLastBubbleFadeOut()
-		-- upvalues: p1 (ref)
+	function p1.onLastBubbleFadeOut() --[[ Line: 150 ]]
+		-- upvalues: IsBorderlessBubbleChatEnabledModule (upval), p1 (copy)
+		if IsBorderlessBubbleChatEnabledModule() and p1.isMounted and p1.state.isShowingBorderlessBubbleChat then
+			p1:setState({ isShowingBorderlessBubbleChat = false })
+		end
 		if p1.props.onFadeOut and not p1.isFadingOut then
 			p1.isFadingOut = true
 			p1.props.onFadeOut(p1.props.userId)
 		end
 	end
 	
-	function p1.wrappedOnClickVoiceIndicator(p2, p3)
-		-- upvalues: p1 (ref)
+	function p1.wrappedOnClickVoiceIndicator(p2, p3) --[[ Line: 164 ]]
+		-- upvalues: p1 (copy)
 		return p1.props.onClickedVoiceIndicator(p2, p3, "bubblechat")
 	end
 	
-	local localPlayer = playersService.LocalPlayer
-	local var17 = if localPlayer then if p1.props.userId ~= tostring(localPlayer.UserId) then "MicDark" else "SpeakerDark" else "SpeakerDark"
+	local LocalPlayer = Players.LocalPlayer
+	local MicDark: string = if LocalPlayer and p1.props.userId == tostring(LocalPlayer.UserId) then "MicDark" else "SpeakerDark"
 	
-	function p1.renderInsert()
-		-- upvalues: roactModule (copy), voiceIndicatorModule (copy), p1 (ref), var17 (ref)
-		return roactModule.createElement(voiceIndicatorModule, {
+	function p1.renderInsert() --[[ Line: 172 ]]
+		-- upvalues: RoactModule (upval), VoiceIndicatorModule (upval), p1 (copy), MicDark (copy)
+		return RoactModule.createElement(VoiceIndicatorModule, {
 			userId = p1.props.userId,
 			getIcon = p1.props.getIconVoiceIndicator,
 			onClicked = p1.wrappedOnClickVoiceIndicator,
-			iconStyle = var17
+			iconStyle = MicDark
 		})
 	end
 	
-	if globalFlagsModule.AvatarChatEnabled then
-		local getSelfViewVisibility = p1.props.selfViewListenerChanged.getSelfViewVisibility
-		p1.selfViewConnection = p1.props.selfViewListenerChanged.selfViewVisibilityUpdatedSignal:connect(function()
-			-- upvalues: p1 (ref), getSelfViewVisibility (ref)
-			p1:setState({ selfViewOpen = getSelfViewVisibility() })
+	if GlobalFlagsModule.AvatarChatEnabled then
+		local GetSelfViewVisibilityFunction = p1.props.selfViewListenerChanged.getSelfViewVisibility
+		p1.selfViewConnection = p1.props.selfViewListenerChanged.selfViewVisibilityUpdatedSignal:connect(function() --[[ Line: 185 | Named "callback" ]]
+			-- upvalues: p1 (copy), GetSelfViewVisibilityFunction (copy)
+			p1:setState({ selfViewOpen = GetSelfViewVisibilityFunction() })
 		end)
 	end
-	p1.MessagesStore = getMessagesStoreModule(false)
+	p1.MessagesStore = GetMessagesStoreModule(false)
 	
-	if fFlagExpChatUseChatConfigStore then
-		p1.ChatConfigurationStore = getChatConfigurationStoreModule(false)
+	if FFlagExpChatUseChatConfigStore then
+		p1.ChatConfigurationStore = GetChatConfigurationStoreModule(false)
 	end
 end
 
-function bubbleChatBillboard.checkCounterForTimeout(p1, p2)
-	-- upvalues: playersService (ref), fFlagExpChatUseProximityStore (ref)
-	if playersService.LocalPlayer and p1.props.userId ~= tostring(playersService.LocalPlayer.UserId) and (p1.state.lastVoiceState ~= "Talking" and p1.state.voiceStateCounter ~= p2) then
-		local voiceStateCounter = p1.state.voiceStateCounter
-		delay(1, function()
-			-- upvalues: p1 (ref), voiceStateCounter (ref), fFlagExpChatUseProximityStore (copy)
-			if p1.state.voiceStateCounter == voiceStateCounter and p1.isMounted then
-				if fFlagExpChatUseProximityStore then
+function BubbleChatBillboard.checkCounterForTimeout(p1, VoiceStateCounter) --[[ Line: 200 ]]
+	-- upvalues: Players (copy), FFlagExpChatUseProximityStore (copy)
+	if Players.LocalPlayer and p1.props.userId ~= tostring(Players.LocalPlayer.UserId) and p1.state.lastVoiceState ~= "Talking" and p1.state.voiceStateCounter ~= VoiceStateCounter then
+		local VoiceStateCounter1 = p1.state.voiceStateCounter
+		delay(1, function() --[[ Line: 210 ]]
+			-- upvalues: p1 (copy), VoiceStateCounter1 (copy), FFlagExpChatUseProximityStore (upval)
+			if p1.state.voiceStateCounter == VoiceStateCounter1 and p1.isMounted then
+				if FFlagExpChatUseProximityStore then
 					p1.setVoiceTimedOutBinding(true)
 					
 					return
@@ -170,603 +173,676 @@ function bubbleChatBillboard.checkCounterForTimeout(p1, p2)
 	end
 end
 
-function bubbleChatBillboard.getVerticalOffset(value)
-	local var2 = value:getEffectiveAdornee(false)
+function BubbleChatBillboard.getVerticalOffset(p1) --[[ Line: 225 ]]
+	local EffectiveAdornee = p1:getEffectiveAdornee(false)
 	
-	if var2 and var2:IsA("Model") then
-		local boundingBox, boundingBox_1 = var2:GetBoundingBox()
-		local var3 = getAdorneeInstance(var2, value.state.savedChatSettings.AdorneeName)
+	if EffectiveAdornee and EffectiveAdornee:IsA("Model") then
+		local BoundingCFrame, BoundingSize = EffectiveAdornee:GetBoundingBox()
+		local AdorneeInstance = getAdorneeInstance(EffectiveAdornee, p1.state.savedChatSettings.AdorneeName)
 		
-		return if var3 then if var3:IsA("BasePart") then boundingBox_1.Y / 2 - boundingBox:PointToObjectSpace(var3.Position).Y else 0 else boundingBox_1.Y / 2
-	end
-	return if var2 and var2:IsA("BasePart") then var2.Size.Y / 2 else 0
-end
-
-function getAdorneeInstance(p1, p2)
-	if not p1 then
-		return nil
-	elseif p1:IsA("Model") then
-		local var2 = p1:FindFirstChild(p2, true) or p1.PrimaryPart
-		
-		if var2 and not var2:IsA("BasePart") and not var2:IsA("Attachment") then
-		else
-			return var2
-		end
+		return if AdorneeInstance then if AdorneeInstance:IsA("BasePart") then BoundingSize.Y / 2 - BoundingCFrame:PointToObjectSpace(AdorneeInstance.Position).Y else 0 else BoundingSize.Y / 2
 	else
-		return if p1:IsA("BasePart") or p1:IsA("Attachment") then p1 else nil
+		return if EffectiveAdornee and EffectiveAdornee:IsA("BasePart") then EffectiveAdornee.Size.Y / 2 else 0
 	end
 end
 
-function bubbleChatBillboard.getEffectiveAdornee(p1, p2)
-	-- upvalues: fFlagExpChatUseAdorneeStore (ref), expChatSharedModule (ref)
-	if not fFlagExpChatUseAdorneeStore then
+function getAdorneeInstance(Object, ChildName) --[[ Line: 249 ]]
+	if not Object then
+		return nil
+	end
+	if Object:IsA("Model") then
+		local ChildName1 = Object:FindFirstChild(ChildName, true) or Object.PrimaryPart
+		
+		if not ChildName1 or ChildName1:IsA("BasePart") or ChildName1:IsA("Attachment") then
+			return ChildName1
+		end
+	elseif Object:IsA("BasePart") or Object:IsA("Attachment") then
+		return Object
+	end
+	return nil
+end
+
+function BubbleChatBillboard.getEffectiveAdornee(p1, p2) --[[ Line: 265 ]]
+	-- upvalues: FFlagExpChatUseAdorneeStore (copy), ExpChatSharedModule (copy)
+	if not FFlagExpChatUseAdorneeStore then
 		return p1.props.adornee
 	end
-	local context = expChatSharedModule.context
-	local adorneeStore = context and context.adorneeStore
+	local Context = ExpChatSharedModule.context
+	local AdorneeStore = Context and Context.adorneeStore
 	
-	if adorneeStore and p1.props.userId then
-		local adornee = adorneeStore.getAdornee(p1.props.userId)
+	if AdorneeStore and p1.props.userId then
+		local Adornee = AdorneeStore.getAdornee(p1.props.userId)
 		
-		if adornee then
-			local var2 = adornee(p2 or false)
+		if Adornee then
+			local AdorneeResult = Adornee(p2 or false)
 			
-			return var2 or p1.props.partOrModel
+			if AdorneeResult then
+				return AdorneeResult
+			end
 		end
 	end
+	return p1.props.partOrModel
 end
 
-function bubbleChatBillboard.shouldRenderCaret(p1)
-	-- upvalues: fFlagExpChatUseChatConfigStore (ref)
-	return (if fFlagExpChatUseChatConfigStore then p1.ChatConfigurationStore.getBubbleChatSettings(false) else p1.state.savedChatSettings).TailVisible and not p1:shouldRenderPlayerButtons()
+function BubbleChatBillboard.shouldRenderCaret(p1): boolean --[[ Line: 286 ]]
+	-- upvalues: FFlagExpChatUseChatConfigStore (copy)
+	return (if FFlagExpChatUseChatConfigStore then p1.ChatConfigurationStore.getBubbleChatSettings(false) else p1.state.savedChatSettings).TailVisible and not p1:shouldRenderPlayerButtons()
 end
 
-function bubbleChatBillboard.shouldRenderCaretNew(p1, p2)
+function BubbleChatBillboard.shouldRenderCaretNew(p1, p2): boolean --[[ Line: 294 ]]
 	return p1.state.savedChatSettings.TailVisible and not p1:shouldRenderPlayerButtonsNew(p2)
 end
 
-function bubbleChatBillboard.shouldRenderPlayerButtons(p1)
-	-- upvalues: playersService (ref), fFlagExpChatUseProximityStore (ref), VRService (ref), globalFlagsModule (ref)
-	local var2
+function BubbleChatBillboard.shouldRenderPlayerButtons(p1): boolean --[[ Line: 300 ]]
+	-- upvalues: Players (copy), FFlagExpChatUseProximityStore (copy), VRService (copy), GlobalFlagsModule (copy)
 	if not p1.props.voiceEnabled or not p1.props.isVoiceUIVisible then
 		return false
-	elseif playersService.LocalPlayer then
-		var2 = p1.props.userId == tostring(playersService.LocalPlayer.UserId)
-		var2 = nil
-	else
-		var2 = false
 	end
-	if fFlagExpChatUseProximityStore then
-		if not var2 or p1.props.testMode then
-		end
-		return if VRService.VREnabled or globalFlagsModule.ChromeEnabled then false else p1.state.selfViewOpen
-	else
-		return if var2 then if VRService.VREnabled or globalFlagsModule.ChromeEnabled then false else p1.state.selfViewOpen else p1.props.voiceEnabled and not p1.state.voiceTimedOut
-	end
-end
-
-function bubbleChatBillboard.shouldRenderPlayerButtonsNew(p1, p2)
-	-- upvalues: playersService (ref), VRService (ref), globalFlagsModule (ref)
-	local var2
-	if not p1.props.voiceEnabled or not p1.props.isVoiceUIVisible then
-		return false
-	elseif playersService.LocalPlayer then
-		var2 = p1.props.userId == tostring(playersService.LocalPlayer.UserId)
-		var2 = nil
-	else
-		var2 = false
-	end
-	return if var2 then if VRService.VREnabled or globalFlagsModule.ChromeEnabled then false else p1.state.selfViewOpen elseif p2 == nil then p1.props.voiceEnabled and not p1.state.voiceTimedOut else p1.props.voiceEnabled and not p2
-end
-
-local function messagesHaveChanged(p1, p2)
-	local p21Count = #p1
-	local p22Count = #p2
+	local IsUserIdMatch: boolean = if Players.LocalPlayer then p1.props.userId == tostring(Players.LocalPlayer.UserId) else false
 	
-	if p21Count == 0 and p22Count == 0 then
+	if FFlagExpChatUseProximityStore then
+		if IsUserIdMatch and not p1.props.testMode then
+			return not VRService.VREnabled and not GlobalFlagsModule.ChromeEnabled and not p1.state.selfViewOpen
+		end
+	elseif IsUserIdMatch then
+		return not VRService.VREnabled and not GlobalFlagsModule.ChromeEnabled and not p1.state.selfViewOpen
+	end
+	return p1.props.voiceEnabled and not p1.state.voiceTimedOut
+end
+
+function BubbleChatBillboard.shouldRenderPlayerButtonsNew(p1, p2): boolean --[[ Line: 344 ]]
+	-- upvalues: Players (copy), VRService (copy), GlobalFlagsModule (copy)
+	return if p1.props.voiceEnabled and p1.props.isVoiceUIVisible then if if Players.LocalPlayer then p1.props.userId == tostring(Players.LocalPlayer.UserId) else false then not VRService.VREnabled and not GlobalFlagsModule.ChromeEnabled and not p1.state.selfViewOpen elseif p2 == nil then p1.props.voiceEnabled and not p1.state.voiceTimedOut else p1.props.voiceEnabled and not p2 else false
+end
+
+local function messagesHaveChanged(FilteredMessages, FilteredMessages1): boolean --[[ Line: 375 ]]
+	local CountFilteredMessages = #FilteredMessages
+	local CountFilteredMessages1 = #FilteredMessages1
+	
+	if CountFilteredMessages == 0 and CountFilteredMessages1 == 0 then
 		return false
-	elseif p21Count ~= p22Count then
+	end
+	if CountFilteredMessages ~= CountFilteredMessages1 then
 		return true
 	end
-	for i, v in p1 do
-		if v.messageId == p2[i].messageId then
-			if v.text ~= p2[i].text then
-				return true
-			end
+	for i, filteredMessage in FilteredMessages do
+		if filteredMessage.messageId ~= FilteredMessages1[i].messageId then
+			return true
+		elseif filteredMessage.text ~= FilteredMessages1[i].text then
+			return true
 		end
-		return true
 	end
 	return false
 end
 
-local t_1 = { filteredMessages = true }
+local config1 = { filteredMessages = true }
 
-function bubbleChatBillboard.shouldComponentUpdate(p3, p4, p5)
-	-- upvalues: fFlagExpChatUseProximityStore (ref), messagesHaveChanged (ref), tutilsModule (ref), t_1 (ref)
-	return not (not fFlagExpChatUseProximityStore and p3.state.isInsideRenderDistance ~= p5.isInsideRenderDistance and not p5.isInsideRenderDistance) and (if messagesHaveChanged(p3.state.filteredMessages, p5.filteredMessages) then true else not tutilsModule.shallowEqual(p4, p3.props, t_1) or not tutilsModule.shallowEqual(p5, p3.state, t_1))
+function BubbleChatBillboard.shouldComponentUpdate(p1, p2, p3): boolean --[[ Line: 396 ]]
+	-- upvalues: FFlagExpChatUseProximityStore (copy), messagesHaveChanged (copy), TutilsModule (copy), config1 (copy)
+	return if FFlagExpChatUseProximityStore or p1.state.isInsideRenderDistance == p3.isInsideRenderDistance or p3.isInsideRenderDistance then if messagesHaveChanged(p1.state.filteredMessages, p3.filteredMessages) then true else not TutilsModule.shallowEqual(p2, p1.props, config1) or not TutilsModule.shallowEqual(p3, p1.state, config1) else false
 end
 
-function bubbleChatBillboard.render(p3)
-	-- upvalues: fFlagExpChatUseChatConfigStore (ref), fFlagExpChatUseAdorneeStore (ref), playersService (ref), var1 (ref), fFlagExpChatUseProximityStore (ref), expChatProximityStoreExtraRendersBeforeUnmount (ref), roactModule (ref), globalFlagsModule (ref), vector2 (ref), playerButtonsModule (ref), blankBubbleModule (ref), bubbleChatListModule (ref), chatBubbleDistantModule (ref)
-	local var2
-	local var3 = if fFlagExpChatUseChatConfigStore then p3.ChatConfigurationStore.getBubbleChatSettings(false) else p3.state.savedChatSettings
-	local var4 = if fFlagExpChatUseAdorneeStore then p3.adorneeBinding:map(function(p4)
-		-- upvalues: p3 (ref)
-		return getAdorneeInstance(p4, p3.state.savedChatSettings.AdorneeName)
-	end) else getAdorneeInstance(if fFlagExpChatUseAdorneeStore then p3.adorneeBinding else p3.props.adornee or p3.props.partOrModel, p3.state.savedChatSettings.AdorneeName)
-	
-	if playersService.LocalPlayer then
-		var2 = p3.props.userId == tostring(playersService.LocalPlayer.UserId)
-		var2 = nil
-	else
-		var2 = false
+function BubbleChatBillboard.cancelBorderlessDistanceFade(p1) --[[ Line: 415 ]]
+	if p1.borderlessDistanceFadeConnection then
+		p1.borderlessDistanceFadeConnection:Disconnect()
+		p1.borderlessDistanceFadeConnection = nil
 	end
-	if not fFlagExpChatUseAdorneeStore and not var4 then
-		var1:trace("No adornee for {}", p3.state.shortId)
+end
+
+function BubbleChatBillboard.setBorderlessDistanceVisible(p1, IsInsideBorderlessRenderDistance) --[[ Line: 422 ]]
+	-- upvalues: UserGameSettings (copy), RunService (copy)
+	if p1.isInsideBorderlessRenderDistance == IsInsideBorderlessRenderDistance then return end
+	p1.isInsideBorderlessRenderDistance = IsInsideBorderlessRenderDistance
+	p1:cancelBorderlessDistanceFade()
+	local v1: number = if IsInsideBorderlessRenderDistance then 0 else 1
+	
+	if p1.borderlessBillboardMaxDistance:getValue() ~= 1e999 then
+		p1.updateBorderlessDistanceTransparency(v1)
+		p1.updateBorderlessBillboardMaxDistance(1e999)
 		
 		return
-	elseif not fFlagExpChatUseProximityStore then
-		if not p3.state.isInsideRenderDistance then return end
-	elseif p3.renderDistanceBinding:getValue() or p3.props.testMode then
-		p3.setInvisibleCount(0)
-	elseif expChatProximityStoreExtraRendersBeforeUnmount < p3.invisibleCount:getValue() then return end
-	p3.setInvisibleCount(p3.invisibleCount:getValue() + 1)
-	local var5 = if fFlagExpChatUseProximityStore then roactModule.joinBindings({
-		renderDistance = p3.renderDistanceBinding,
-		maximizeDistance = p3.maximizeDistanceBinding
-	}):map(function(p4)
+	end
+	local Value = p1.borderlessDistanceTransparency:getValue()
+	
+	if Value == v1 then return end
+	if p1.state.isShowingBorderlessBubbleChat and not UserGameSettings.ReducedMotion then
+		local Total = 0
+		p1.borderlessDistanceFadeConnection = RunService.RenderStepped:Connect(function(DeltaTime: number) --[[ Line: 448 ]]
+			-- upvalues: Total (ref), p1 (copy), Value (copy), v1 (copy)
+			Total += DeltaTime
+			local Smallest = math.min(Total / 0.25, 1)
+			p1.updateBorderlessDistanceTransparency(Value + (v1 - Value) * Smallest)
+			
+			if Smallest == 1 then
+				p1:cancelBorderlessDistanceFade()
+			end
+		end)
+		
+		return
+	else
+		p1.updateBorderlessDistanceTransparency(v1)
+	end
+end
+
+function BubbleChatBillboard.render(p1) --[[ Line: 460 ]]
+	-- upvalues: FFlagExpChatUseChatConfigStore (copy), FFlagExpChatUseAdorneeStore (copy), Players (copy), NewResult (copy), IsBorderlessBubbleChatEnabledModule (copy), FFlagExpChatUseProximityStore (copy), ExpChatProximityStoreExtraRendersBeforeUnmount (copy), RoactModule (copy), GlobalFlagsModule (copy), _Vector2 (copy), PlayerButtonsModule (copy), BlankBubbleModule (copy), BubbleChatListModule (copy), ChatBubbleDistantModule (copy)
+	local BubbleChatSettings = if FFlagExpChatUseChatConfigStore then p1.ChatConfigurationStore.getBubbleChatSettings(false) else p1.state.savedChatSettings
+	local AdorneeBinding = if FFlagExpChatUseAdorneeStore then p1.adorneeBinding else p1.props.adornee or p1.props.partOrModel
+	local MapResult = if FFlagExpChatUseAdorneeStore then p1.adorneeBinding:map(function(p2) --[[ Line: 470 ]]
+		-- upvalues: p1 (copy)
+		return getAdorneeInstance(p2, p1.state.savedChatSettings.AdorneeName)
+	end) else getAdorneeInstance(AdorneeBinding, p1.state.savedChatSettings.AdorneeName)
+	local IsUserIdMatch: boolean = if Players.LocalPlayer then p1.props.userId == tostring(Players.LocalPlayer.UserId) else false
+	
+	if not FFlagExpChatUseAdorneeStore and not MapResult then
+		NewResult:trace("No adornee for {}", p1.state.shortId)
+		
+		return
+	end
+	local IsIsShowingBorderlessBubbleChat: boolean = IsBorderlessBubbleChatEnabledModule() and p1.state.isShowingBorderlessBubbleChat == true
+	local IsValueBelow: boolean = IsIsShowingBorderlessBubbleChat and p1.borderlessDistanceTransparency:getValue() < 1
+	
+	if FFlagExpChatUseProximityStore then
+		if p1.renderDistanceBinding:getValue() or p1.props.testMode or IsValueBelow then
+			p1.setInvisibleCount(0)
+		else
+			if ExpChatProximityStoreExtraRendersBeforeUnmount < p1.invisibleCount:getValue() then return end
+			p1.setInvisibleCount(p1.invisibleCount:getValue() + 1)
+		end
+	elseif not p1.state.isInsideRenderDistance and not IsValueBelow then return end
+	local MapResult1 = if FFlagExpChatUseProximityStore then RoactModule.joinBindings({
+		renderDistance = p1.renderDistanceBinding,
+		maximizeDistance = p1.maximizeDistanceBinding
+	}):map(function(p2) --[[ Line: 523 ]]
 		return {
-			isInsideMaximizeDistance = p4.maximizeDistance,
-			isDistant = not p4.maximizeDistance
+			isInsideMaximizeDistance = p2.maximizeDistance,
+			isDistant = not p2.maximizeDistance
 		}
 	end) else nil
 	local t = {}
-	local var6 = p3.state.filteredMessages and #p3.state.filteredMessages > 0
-	local var7 = p3.props.voiceEnabled and not p3.state.voiceTimedOut
+	local v1: boolean = p1.state.filteredMessages and #p1.state.filteredMessages > 0
+	local NoVoiceTimedOut: boolean = p1.props.voiceEnabled and not p1.state.voiceTimedOut
 	
-	if globalFlagsModule.AvatarChatEnabled and var2 then
-		var7 = var7 and not p3.state.selfViewOpen
+	if GlobalFlagsModule.AvatarChatEnabled and IsUserIdMatch then
+		NoVoiceTimedOut = NoVoiceTimedOut and not p1.state.selfViewOpen
 	end
-	if globalFlagsModule.ChromeEnabled and var2 then
-		var7 = false
+	if GlobalFlagsModule.ChromeEnabled and IsUserIdMatch then
+		NoVoiceTimedOut = false
 	end
-	local var8 = var7 and (not globalFlagsModule.AvatarChatEnabled and not globalFlagsModule.ChromeEnabled)
-	local var9 = if var7 then p3.renderInsert else nil
-	local var10 = if fFlagExpChatUseProximityStore then p3.voiceTimedOutBinding:map(function(p4)
-		-- upvalues: p3 (ref), globalFlagsModule (copy), var2 (ref)
-		local var11 = p3.props.voiceEnabled and not p4
+	local NoChromeEnabled: boolean = NoVoiceTimedOut and (not GlobalFlagsModule.AvatarChatEnabled and not GlobalFlagsModule.ChromeEnabled)
+	local RenderInsert = if NoVoiceTimedOut then p1.renderInsert else nil
+	local MapResult2 = if FFlagExpChatUseProximityStore then p1.voiceTimedOutBinding:map(function(p2): boolean --[[ Line: 554 ]]
+		-- upvalues: p1 (copy), GlobalFlagsModule (upval), IsUserIdMatch (copy)
+		local NoP33: boolean = p1.props.voiceEnabled and not p2
 		
-		if globalFlagsModule.AvatarChatEnabled and var2 then
-			var11 = var11 and not p3.state.selfViewOpen
+		if GlobalFlagsModule.AvatarChatEnabled and IsUserIdMatch then
+			NoP33 = NoP33 and not p1.state.selfViewOpen
 		end
-		if globalFlagsModule.ChromeEnabled and var2 then
-			var11 = false
+		if GlobalFlagsModule.ChromeEnabled and IsUserIdMatch then
+			NoP33 = false
 		end
-		return var11
+		return NoP33
 	end) else nil
-	local clientSettings = p3.props.clientSettings
+	local ClientSettings = p1.props.clientSettings
 	
-	if fFlagExpChatUseProximityStore then
-		if p3.props.testMode or globalFlagsModule.AvatarChatEnabled or globalFlagsModule.ChromeEnabled then
-			t.PlayerButtons = roactModule.createElement(playerButtonsModule, {
+	if FFlagExpChatUseProximityStore then
+		if p1.props.testMode or GlobalFlagsModule.AvatarChatEnabled or GlobalFlagsModule.ChromeEnabled then
+			t.PlayerButtons = RoactModule.createElement(PlayerButtonsModule, {
 				LayoutOrder = 2,
-				Visible = if fFlagExpChatUseProximityStore and not p3.props.testMode then p3.voiceTimedOutBinding:map(function(p4)
-					-- upvalues: p3 (ref)
-					return p3:shouldRenderPlayerButtonsNew(p4)
-				end) else p3:shouldRenderPlayerButtons(),
-				chatSettings = p3.props.chatSettings,
-				isInsideMaximizeDistance = var5:map(function(p4)
-					return p4.isInsideMaximizeDistance
+				Visible = if FFlagExpChatUseProximityStore and not p1.props.testMode then p1.voiceTimedOutBinding:map(function(p2) --[[ Line: 572 ]]
+					-- upvalues: p1 (copy)
+					return p1:shouldRenderPlayerButtonsNew(p2)
+				end) else p1:shouldRenderPlayerButtons(),
+				chatSettings = p1.props.chatSettings,
+				isInsideMaximizeDistance = MapResult1:map(function(p2) --[[ Line: 577 ]]
+					return p2.isInsideMaximizeDistance
 				end),
-				isLocalPlayer = var2,
-				userId = p3.props.userId,
-				getIcon = p3.props.getIconVoiceIndicator,
-				hasCameraPermissions = p3.props.hasCameraPermissions,
-				hasMicPermissions = p3.props.hasMicPermissions,
-				onClickedVoiceIndicator = p3.wrappedOnClickVoiceIndicator,
-				onClickedCameraIndicator = p3.props.onClickedCameraIndicator,
-				voiceEnabled = p3.props.voiceEnabled,
-				displayCameraDeniedToast = p3.props.displayCameraDeniedToast,
-				isCamEnabledForUserAndPlace = p3.props.isCamEnabledForUserAndPlace,
-				setCameraPermissionStateFromControl = p3.props.setCameraPermissionStateFromControl,
-				getPermissions = p3.props.getPermissions,
-				isCameraOnlyUser = p3.props.isCameraOnlyUser,
-				isVoiceServiceInitialized = p3.props.isVoiceServiceInitialized
+				isLocalPlayer = IsUserIdMatch,
+				userId = p1.props.userId,
+				getIcon = p1.props.getIconVoiceIndicator,
+				hasCameraPermissions = p1.props.hasCameraPermissions,
+				hasMicPermissions = p1.props.hasMicPermissions,
+				onClickedVoiceIndicator = p1.wrappedOnClickVoiceIndicator,
+				onClickedCameraIndicator = p1.props.onClickedCameraIndicator,
+				voiceEnabled = p1.props.voiceEnabled,
+				displayCameraDeniedToast = p1.props.displayCameraDeniedToast,
+				isCamEnabledForUserAndPlace = p1.props.isCamEnabledForUserAndPlace,
+				setCameraPermissionStateFromControl = p1.props.setCameraPermissionStateFromControl,
+				getPermissions = p1.props.getPermissions,
+				isCameraOnlyUser = p1.props.isCameraOnlyUser,
+				isVoiceServiceInitialized = p1.props.isVoiceServiceInitialized
 			})
-			t.listLayout = roactModule.createElement("UIListLayout", {
+			t.listLayout = RoactModule.createElement("UIListLayout", {
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				HorizontalAlignment = Enum.HorizontalAlignment.Center,
 				VerticalAlignment = Enum.VerticalAlignment.Bottom,
 				Padding = UDim.new(0, 8)
 			})
-			t.padding = roactModule.createElement("UIPadding", { PaddingBottom = UDim.new(0, 8) })
-		elseif var7 and var6 == false then
-			t.VoiceBubble = roactModule.createElement(blankBubbleModule, {
-				chatSettings = var3,
-				userId = p3.props.userId,
-				renderInsert = var9,
-				insertSize = vector2,
-				isDistant = not p3.state.isInsideMaximizeDistance,
-				clientSettings = clientSettings
+			t.padding = RoactModule.createElement("UIPadding", { PaddingBottom = UDim.new(0, 8) })
+		elseif NoVoiceTimedOut and v1 == false then
+			t.VoiceBubble = RoactModule.createElement(BlankBubbleModule, {
+				chatSettings = BubbleChatSettings,
+				userId = p1.props.userId,
+				renderInsert = RenderInsert,
+				insertSize = _Vector2,
+				isDistant = not p1.state.isInsideMaximizeDistance,
+				clientSettings = ClientSettings
 			})
 		end
-	elseif globalFlagsModule.AvatarChatEnabled or globalFlagsModule.ChromeEnabled then
-		if p3:shouldRenderPlayerButtons() then
-			t.PlayerButtons = roactModule.createElement(playerButtonsModule, {
+	elseif GlobalFlagsModule.AvatarChatEnabled or GlobalFlagsModule.ChromeEnabled then
+		if p1:shouldRenderPlayerButtons() then
+			t.PlayerButtons = RoactModule.createElement(PlayerButtonsModule, {
 				LayoutOrder = 2,
-				chatSettings = p3.props.chatSettings,
-				isInsideMaximizeDistance = p3.state.isInsideMaximizeDistance,
-				isLocalPlayer = var2,
-				userId = p3.props.userId,
-				getIcon = p3.props.getIconVoiceIndicator,
-				hasCameraPermissions = p3.props.hasCameraPermissions,
-				hasMicPermissions = p3.props.hasMicPermissions,
-				onClickedVoiceIndicator = p3.wrappedOnClickVoiceIndicator,
-				onClickedCameraIndicator = p3.props.onClickedCameraIndicator,
-				voiceEnabled = p3.props.voiceEnabled,
-				displayCameraDeniedToast = p3.props.displayCameraDeniedToast,
-				isCamEnabledForUserAndPlace = p3.props.isCamEnabledForUserAndPlace,
-				setCameraPermissionStateFromControl = p3.props.setCameraPermissionStateFromControl,
-				getPermissions = p3.props.getPermissions,
-				isCameraOnlyUser = p3.props.isCameraOnlyUser,
-				isVoiceServiceInitialized = p3.props.isVoiceServiceInitialized
+				chatSettings = p1.props.chatSettings,
+				isInsideMaximizeDistance = p1.state.isInsideMaximizeDistance,
+				isLocalPlayer = IsUserIdMatch,
+				userId = p1.props.userId,
+				getIcon = p1.props.getIconVoiceIndicator,
+				hasCameraPermissions = p1.props.hasCameraPermissions,
+				hasMicPermissions = p1.props.hasMicPermissions,
+				onClickedVoiceIndicator = p1.wrappedOnClickVoiceIndicator,
+				onClickedCameraIndicator = p1.props.onClickedCameraIndicator,
+				voiceEnabled = p1.props.voiceEnabled,
+				displayCameraDeniedToast = p1.props.displayCameraDeniedToast,
+				isCamEnabledForUserAndPlace = p1.props.isCamEnabledForUserAndPlace,
+				setCameraPermissionStateFromControl = p1.props.setCameraPermissionStateFromControl,
+				getPermissions = p1.props.getPermissions,
+				isCameraOnlyUser = p1.props.isCameraOnlyUser,
+				isVoiceServiceInitialized = p1.props.isVoiceServiceInitialized
 			})
-			t.listLayout = roactModule.createElement("UIListLayout", {
+			t.listLayout = RoactModule.createElement("UIListLayout", {
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				HorizontalAlignment = Enum.HorizontalAlignment.Center,
 				VerticalAlignment = Enum.VerticalAlignment.Bottom,
 				Padding = UDim.new(0, 8)
 			})
-			t.padding = roactModule.createElement("UIPadding", { PaddingBottom = UDim.new(0, 8) })
+			t.padding = RoactModule.createElement("UIPadding", { PaddingBottom = UDim.new(0, 8) })
 		end
-	elseif var7 and var6 == false then
-		t.VoiceBubble = roactModule.createElement(blankBubbleModule, {
-			chatSettings = var3,
-			userId = p3.props.userId,
-			renderInsert = var9,
-			insertSize = vector2,
-			isDistant = not p3.state.isInsideMaximizeDistance,
-			clientSettings = clientSettings
+	elseif NoVoiceTimedOut and v1 == false then
+		t.VoiceBubble = RoactModule.createElement(BlankBubbleModule, {
+			chatSettings = BubbleChatSettings,
+			userId = p1.props.userId,
+			renderInsert = RenderInsert,
+			insertSize = _Vector2,
+			isDistant = not p1.state.isInsideMaximizeDistance,
+			clientSettings = ClientSettings
 		})
 	end
-	local var11 = p3:shouldRenderCaret()
+	if IsIsShowingBorderlessBubbleChat then
+		t.PlayerButtons = nil
+	end
+	local ShouldRenderCaret = p1:shouldRenderCaret()
 	
-	if fFlagExpChatUseProximityStore then
-		t.BubbleChatListContainer = roactModule.createElement("Frame", {
+	if FFlagExpChatUseProximityStore then
+		t.BubbleChatListContainer = RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.fromScale(1, 1),
-			Visible = var5:map(function(p4)
-				return p4.isInsideMaximizeDistance
+			Visible = MapResult1:map(function(p2) --[[ Line: 685 ]]
+				-- upvalues: IsIsShowingBorderlessBubbleChat (copy)
+				return p2.isInsideMaximizeDistance or IsIsShowingBorderlessBubbleChat
 			end)
 		}, {
-			BubbleChatList = roactModule.createElement(bubbleChatListModule, {
-				userId = p3.props.userId,
-				isVisible = var5:map(function(p4)
-					return p4.isInsideMaximizeDistance
+			BubbleChatList = RoactModule.createElement(BubbleChatListModule, {
+				userId = p1.props.userId,
+				isVisible = MapResult1:map(function(p2) --[[ Line: 691 ]]
+					-- upvalues: IsIsShowingBorderlessBubbleChat (copy)
+					return p2.isInsideMaximizeDistance or IsIsShowingBorderlessBubbleChat
 				end),
-				onLastBubbleFadeOut = p3.onLastBubbleFadeOut,
-				chatSettings = var3,
-				renderFirstInsert = if var8 then var9 else nil,
-				insertSize = vector2,
-				messages = p3.state.filteredMessages,
-				clientSettings = clientSettings,
-				isTextChatServiceOn = p3.props.isTextChatServiceOn,
-				showCaret = p3.voiceTimedOutBinding:map(function(p4)
-					-- upvalues: p3 (ref)
-					return p3:shouldRenderCaretNew(p4)
-				end)
+				onLastBubbleFadeOut = p1.onLastBubbleFadeOut,
+				chatSettings = BubbleChatSettings,
+				renderFirstInsert = if NoChromeEnabled then RenderInsert else nil,
+				insertSize = _Vector2,
+				messages = p1.state.filteredMessages,
+				clientSettings = ClientSettings,
+				isTextChatServiceOn = p1.props.isTextChatServiceOn,
+				showCaret = p1.voiceTimedOutBinding:map(function(p2) --[[ Line: 701 ]]
+					-- upvalues: p1 (copy)
+					return p1:shouldRenderCaretNew(p2)
+				end),
+				isDistant = if IsBorderlessBubbleChatEnabledModule() then MapResult1:map(function(p2) --[[ Line: 705 ]]
+					return p2.isDistant
+				end) else nil,
+				borderlessDistanceTransparency = if IsBorderlessBubbleChatEnabledModule() then p1.borderlessDistanceTransparency else nil
 			})
 		})
 		
-		if var6 then
-			t.DistantBubbleContainer = roactModule.createElement("Frame", {
+		if v1 and not IsIsShowingBorderlessBubbleChat then
+			t.DistantBubbleContainer = RoactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				Size = UDim2.fromScale(1, 1),
-				Visible = var5:map(function(p4)
-					return not p4.isInsideMaximizeDistance
+				Visible = MapResult1:map(function(p2): boolean --[[ Line: 719 ]]
+					return not p2.isInsideMaximizeDistance
 				end)
 			}, {
-				DistantBubble = roactModule.createElement(chatBubbleDistantModule, {
-					fadingOut = not p3.state.filteredMessages or #p3.state.filteredMessages == 0,
-					onFadeOut = p3.onLastBubbleFadeOut,
-					chatSettings = var3,
-					renderInsert = if var8 then var9 else nil,
-					insertSize = vector2,
-					clientSettings = clientSettings,
-					showCaret = p3.voiceTimedOutBinding:map(function(p4)
-						-- upvalues: p3 (ref)
-						return p3:shouldRenderCaretNew(p4)
+				DistantBubble = RoactModule.createElement(ChatBubbleDistantModule, {
+					fadingOut = not p1.state.filteredMessages or #p1.state.filteredMessages == 0,
+					onFadeOut = p1.onLastBubbleFadeOut,
+					chatSettings = BubbleChatSettings,
+					renderInsert = if NoChromeEnabled then RenderInsert else nil,
+					insertSize = _Vector2,
+					clientSettings = ClientSettings,
+					showCaret = p1.voiceTimedOutBinding:map(function(p2) --[[ Line: 730 ]]
+						-- upvalues: p1 (copy)
+						return p1:shouldRenderCaretNew(p2)
 					end)
 				})
 			})
 		end
-	elseif p3.state.isInsideMaximizeDistance then
-		t.BubbleChatList = roactModule.createElement(bubbleChatListModule, {
-			userId = p3.props.userId,
-			isVisible = p3.state.isInsideMaximizeDistance,
-			onLastBubbleFadeOut = p3.onLastBubbleFadeOut,
-			chatSettings = var3,
-			renderFirstInsert = if var8 then var9 else nil,
-			insertSize = vector2,
-			messages = p3.state.filteredMessages,
-			clientSettings = clientSettings,
-			isTextChatServiceOn = p3.props.isTextChatServiceOn,
-			showCaret = var11
+	elseif p1.state.isInsideMaximizeDistance or IsIsShowingBorderlessBubbleChat then
+		t.BubbleChatList = RoactModule.createElement(BubbleChatListModule, {
+			userId = p1.props.userId,
+			isVisible = p1.state.isInsideMaximizeDistance or IsIsShowingBorderlessBubbleChat,
+			onLastBubbleFadeOut = p1.onLastBubbleFadeOut,
+			chatSettings = BubbleChatSettings,
+			renderFirstInsert = if NoChromeEnabled then RenderInsert else nil,
+			insertSize = _Vector2,
+			messages = p1.state.filteredMessages,
+			clientSettings = ClientSettings,
+			isTextChatServiceOn = p1.props.isTextChatServiceOn,
+			showCaret = ShouldRenderCaret,
+			isDistant = if IsBorderlessBubbleChatEnabledModule() then not p1.state.isInsideMaximizeDistance else nil,
+			borderlessDistanceTransparency = if IsBorderlessBubbleChatEnabledModule() then p1.borderlessDistanceTransparency else nil
 		})
-	elseif var6 then
-		t.DistantBubble = roactModule.createElement(chatBubbleDistantModule, {
-			fadingOut = not p3.state.filteredMessages or #p3.state.filteredMessages == 0,
-			onFadeOut = p3.onLastBubbleFadeOut,
-			chatSettings = var3,
-			renderInsert = if var8 then var9 else nil,
-			insertSize = vector2,
-			clientSettings = clientSettings,
-			showCaret = var11
+	elseif v1 then
+		t.DistantBubble = RoactModule.createElement(ChatBubbleDistantModule, {
+			fadingOut = not p1.state.filteredMessages or #p1.state.filteredMessages == 0,
+			onFadeOut = p1.onLastBubbleFadeOut,
+			chatSettings = BubbleChatSettings,
+			renderInsert = if NoChromeEnabled then RenderInsert else nil,
+			insertSize = _Vector2,
+			clientSettings = ClientSettings,
+			showCaret = ShouldRenderCaret
 		})
 	end
-	local var12 = if var2 then var3.LocalPlayerStudsOffset else Vector3.new(0, 1, 0.10000000149)
+	local LocalPlayerStudsOffset = IsUserIdMatch and BubbleChatSettings.LocalPlayerStudsOffset or vector.create(0, 1, 0.10000000149011612)
 	
-	return if fFlagExpChatUseProximityStore then roactModule.createElement("BillboardGui", {
+	return if FFlagExpChatUseProximityStore then RoactModule.createElement("BillboardGui", {
 		ResetOnSpawn = false,
-		Adornee = var4,
-		Active = if globalFlagsModule.AvatarChatEnabled then p3.voiceTimedOutBinding:map(function(p4)
-			-- upvalues: p3 (ref)
-			return p3:shouldRenderPlayerButtonsNew(p4)
-		end) else var10:map(function(p4)
-			return p4
+		Adornee = MapResult,
+		Active = if GlobalFlagsModule.AvatarChatEnabled then p1.voiceTimedOutBinding:map(function(p2) --[[ Line: 777 ]]
+			-- upvalues: p1 (copy)
+			return p1:shouldRenderPlayerButtonsNew(p2)
+		end) else MapResult2:map(function(p2) --[[ Line: 780 ]]
+			return p2
 		end),
 		Size = UDim2.fromOffset(500, 200),
 		SizeOffset = Vector2.new(0, 0.5),
-		StudsOffset = var12 + Vector3.new(0, var3.VerticalStudsOffset, 0),
-		StudsOffsetWorldSpace = p3.offset,
-		MaxDistance = p3.renderDistanceBinding:map(function(p4)
-			return if p4 then 1e999 else 0
+		StudsOffset = LocalPlayerStudsOffset + Vector3.new(0, BubbleChatSettings.VerticalStudsOffset, 0),
+		StudsOffsetWorldSpace = p1.offset,
+		MaxDistance = if IsIsShowingBorderlessBubbleChat then RoactModule.joinBindings({
+			renderDistance = p1.renderDistanceBinding,
+			borderlessDistanceTransparency = p1.borderlessDistanceTransparency,
+			borderlessBillboardMaxDistance = p1.borderlessBillboardMaxDistance
+		}):map(function(p2) --[[ Line: 793 ]]
+			return if p2.renderDistance or p2.borderlessDistanceTransparency < 1 then p2.borderlessBillboardMaxDistance else 0
+		end) else p1.renderDistanceBinding:map(function(p2): number --[[ Line: 798 ]]
+			return if p2 then 1e999 else 0
 		end)
-	}, t) else roactModule.createElement("BillboardGui", {
+	}, t) else RoactModule.createElement("BillboardGui", {
 		ResetOnSpawn = false,
-		Adornee = var4,
-		Active = if globalFlagsModule.AvatarChatEnabled then p3:shouldRenderPlayerButtons() else var7,
+		Adornee = MapResult,
+		Active = if GlobalFlagsModule.AvatarChatEnabled then p1:shouldRenderPlayerButtons() else NoVoiceTimedOut,
 		Size = UDim2.fromOffset(500, 200),
 		SizeOffset = Vector2.new(0, 0.5),
-		StudsOffset = var12 + Vector3.new(0, var3.VerticalStudsOffset, 0),
-		StudsOffsetWorldSpace = p3.offset
+		StudsOffset = LocalPlayerStudsOffset + Vector3.new(0, BubbleChatSettings.VerticalStudsOffset, 0),
+		StudsOffsetWorldSpace = p1.offset,
+		MaxDistance = if IsIsShowingBorderlessBubbleChat then p1.borderlessBillboardMaxDistance else nil
 	}, t)
 end
 
-function bubbleChatBillboard.didUpdate(p3, _, p4)
-	-- upvalues: fFlagExpChatUseProximityStore (ref)
-	if fFlagExpChatUseProximityStore then
-		if (not p3.state.filteredMessages or #p3.state.filteredMessages == 0) and not p3.renderDistanceBinding:getValue() then
-			p3.onLastBubbleFadeOut()
+function BubbleChatBillboard.didUpdate(p1, _, p2) --[[ Line: 816 ]]
+	-- upvalues: FFlagExpChatUseProximityStore (copy)
+	if FFlagExpChatUseProximityStore then
+		if (not p1.state.filteredMessages or #p1.state.filteredMessages == 0) and not p1.renderDistanceBinding:getValue() then
+			p1.onLastBubbleFadeOut()
 		end
-	elseif (not p3.state.filteredMessages or #p3.state.filteredMessages == 0) and not p3.state.isInsideRenderDistance then
-		p3.onLastBubbleFadeOut()
+	elseif (not p1.state.filteredMessages or #p1.state.filteredMessages == 0) and not p1.state.isInsideRenderDistance then
+		p1.onLastBubbleFadeOut()
 	end
-	if p3.state.filteredMessages and #p3.state.filteredMessages > 0 then
-		p3.isFadingOut = false
+	if p1.state.filteredMessages and #p1.state.filteredMessages > 0 then
+		p1.isFadingOut = false
 	end
-	if fFlagExpChatUseProximityStore and p3.state.voiceStateCounter ~= p4.voiceStateCounter then
-		p3.setVoiceTimedOutBinding(false)
+	if FFlagExpChatUseProximityStore and p1.state.voiceStateCounter ~= p2.voiceStateCounter then
+		p1.setVoiceTimedOutBinding(false)
 	end
-	p3:checkCounterForTimeout(p4.voiceStateCounter)
+	p1:checkCounterForTimeout(p2.voiceStateCounter)
 end
 
-function bubbleChatBillboard.didMount(p3)
-	-- upvalues: createEffect (ref), fFlagExpChatUseChatConfigStore (ref), getChatConfigurationStoreModule (ref), getRecentMessages (ref), otterModule (ref), fFlagExpChatUseAdorneeStore (ref), expChatSharedModule (ref), playersService (ref), fFlagEasierUnmutingModule (ref), fFlagExpChatUseProximityStore (ref), runService (ref), experienceChatHeartbeatIncrement (ref), currentCamera (write), t (ref)
-	p3.isMounted = true
+function BubbleChatBillboard.didMount(p1) --[[ Line: 847 ]]
+	-- upvalues: CreateEffectFunction (copy), FFlagExpChatUseChatConfigStore (copy), GetChatConfigurationStoreModule (copy), IsBorderlessBubbleChatEnabledModule (copy), GetDisplayedBubbleMessagesModule (copy), GetServerTimeNowMillisModule (copy), getRecentMessages (copy), OtterModule (copy), FFlagExpChatUseAdorneeStore (copy), ExpChatSharedModule (copy), Players (copy), FFlagEasierUnmutingModule (copy), FFlagExpChatUseProximityStore (copy), RunService (copy), ExperienceChatHeartbeatIncrement (copy), CurrentCamera (ref), GetBorderlessBubbleChatRenderDistanceModule (copy), config (copy), GetBubbleDurationInMillisModule (copy), GetBubbleChatStartTimeMillisModule (copy)
+	p1.isMounted = true
 	
-	if p3.MessagesStore then
-		p3.messagesEffect = createEffect(function(p4)
-			-- upvalues: p3 (ref), fFlagExpChatUseChatConfigStore (copy), getChatConfigurationStoreModule (copy), getRecentMessages (copy)
-			local userId = p3.props.userId
+	if p1.MessagesStore then
+		p1.messagesEffect = CreateEffectFunction(function(p2) --[[ Line: 852 ]]
+			-- upvalues: p1 (copy), FFlagExpChatUseChatConfigStore (upval), GetChatConfigurationStoreModule (upval), IsBorderlessBubbleChatEnabledModule (upval), GetDisplayedBubbleMessagesModule (upval), GetServerTimeNowMillisModule (upval), getRecentMessages (upval)
+			local UserId = p1.props.userId
 			
-			if not userId and p3.props.partOrModel then
-				userId = p3.MessagesStore.getPartOrModelToMockUserId(p4)[p3.props.partOrModel]
+			if not UserId and p1.props.partOrModel then
+				UserId = p1.MessagesStore.getPartOrModelToMockUserId(p2)[p1.props.partOrModel]
 			end
-			if userId then
-				local var2 = if fFlagExpChatUseChatConfigStore then getChatConfigurationStoreModule(false).getBubbleChatSettings(p4) else p3.props.chatSettings
-				p3:setState({
-					filteredMessages = getRecentMessages(p3.MessagesStore.getUserBubbleMessages(userId)(p4), var2.BubbleDuration * 1000, var2.MaxBubbles)
+			if UserId then
+				local v1 = p1.MessagesStore.getUserBubbleMessages(UserId)(p2)
+				local BubbleChatSettings = if FFlagExpChatUseChatConfigStore then GetChatConfigurationStoreModule(false).getBubbleChatSettings(p2) else p1.props.chatSettings
+				local MaxBubbles = BubbleChatSettings.MaxBubbles
+				local ScaledBubbleDuration = BubbleChatSettings.BubbleDuration * 1000
+				p1:setState({
+					filteredMessages = if IsBorderlessBubbleChatEnabledModule() then GetDisplayedBubbleMessagesModule(v1, ScaledBubbleDuration, MaxBubbles, GetServerTimeNowMillisModule()) else getRecentMessages(v1, ScaledBubbleDuration, MaxBubbles)
 				})
 				
 				return
+			else
+				p1:setState({ filteredMessages = {} })
 			end
-			p3:setState({ filteredMessages = {} })
 		end)
 	end
-	if fFlagExpChatUseChatConfigStore then
-		p3.chatConfigEffect = createEffect(function(p4)
-			-- upvalues: getChatConfigurationStoreModule (copy), p3 (ref)
-			p3:setState({
-				savedChatSettings = getChatConfigurationStoreModule(false).getBubbleChatSettings(p4)
+	if FFlagExpChatUseChatConfigStore then
+		p1.chatConfigEffect = CreateEffectFunction(function(p2) --[[ Line: 891 ]]
+			-- upvalues: GetChatConfigurationStoreModule (upval), p1 (copy)
+			p1:setState({
+				savedChatSettings = GetChatConfigurationStoreModule(false).getBubbleChatSettings(p2)
 			})
 		end)
 	end
-	local verticalOffset = p3:getVerticalOffset()
-	p3.offsetGoal = verticalOffset
-	p3.offsetMotor:setGoal(otterModule.instant(verticalOffset))
+	local VerticalOffset = p1:getVerticalOffset()
+	p1.offsetGoal = VerticalOffset
+	p1.offsetMotor:setGoal(OtterModule.instant(VerticalOffset))
 	
-	if fFlagExpChatUseAdorneeStore then
-		local context = expChatSharedModule.context
-		local adorneeStore = context and context.adorneeStore
-		local var2 = if playersService.LocalPlayer then playersService.LocalPlayer.UserId else -1
+	if FFlagExpChatUseAdorneeStore then
+		local Context = ExpChatSharedModule.context
+		local AdorneeStore = Context and Context.adorneeStore
+		local UserId = if Players.LocalPlayer then Players.LocalPlayer.UserId else -1
 		
-		if adorneeStore and p3.props.userId and createEffect then
-			p3.adorneeEffect = createEffect(function(p4)
-				-- upvalues: p3 (ref)
-				p3.updateAdorneeBinding(p3:getEffectiveAdornee(p4))
+		if AdorneeStore and p1.props.userId and CreateEffectFunction then
+			p1.adorneeEffect = CreateEffectFunction(function(p2) --[[ Line: 908 ]]
+				-- upvalues: p1 (copy)
+				p1.updateAdorneeBinding((p1:getEffectiveAdornee(p2)))
 			end)
 			
-			if fFlagEasierUnmutingModule then
-				local adornee = adorneeStore.getAdornee(var2)
+			if FFlagEasierUnmutingModule then
+				local Adornee = AdorneeStore.getAdornee(UserId)
 				
-				if adornee then
-					p3.localAdorneeEffect = createEffect(function(p4)
-						-- upvalues: adornee (ref), p3 (ref)
-						p3.updateLocalAdorneeBinding(adornee(p4))
+				if Adornee then
+					p1.localAdorneeEffect = CreateEffectFunction(function(p2) --[[ Line: 916 ]]
+						-- upvalues: Adornee (copy), p1 (copy)
+						p1.updateLocalAdorneeBinding((Adornee(p2)))
 					end)
 				end
 			end
 		end
 	end
-	if fFlagExpChatUseProximityStore and p3.ProximityStore and p3.props.userId then
-		p3.proximityEffect = createEffect(function(p4)
-			-- upvalues: p3 (ref)
-			local var3 = p3.ProximityStore.getUserProximityState(p3.props.userId)(p4)
-			p3.updateRenderDistanceBinding(var3.isInsideRenderDistance)
-			p3.updateMaximizeDistanceBinding(var3.isInsideMaximizeDistance)
+	if FFlagExpChatUseProximityStore and p1.ProximityStore and p1.props.userId then
+		p1.proximityEffect = CreateEffectFunction(function(p2) --[[ Line: 928 ]]
+			-- upvalues: p1 (copy)
+			local _lastProximityState = p1.ProximityStore.getUserProximityState(p1.props.userId)(p2)
+			p1.updateRenderDistanceBinding(_lastProximityState.isInsideRenderDistance)
+			p1.updateMaximizeDistanceBinding(_lastProximityState.isInsideMaximizeDistance)
 		end)
 	end
-	p3.heartbeatConn = runService.Heartbeat:Connect(function(p4)
-		-- upvalues: p3 (ref), experienceChatHeartbeatIncrement (copy), fFlagExpChatUseAdorneeStore (copy), currentCamera (copy), fFlagExpChatUseProximityStore (copy), otterModule (copy), t (copy)
-		if p3.props.billboardUpdateFrequency > 0 then
-			p3.lastDistanceUpdate += p4
+	p1.heartbeatConn = RunService.Heartbeat:Connect(function(DeltaTime) --[[ Line: 939 ]]
+		-- upvalues: p1 (copy), ExperienceChatHeartbeatIncrement (upval), FFlagExpChatUseAdorneeStore (upval), CurrentCamera (upval), FFlagExpChatUseProximityStore (upval), IsBorderlessBubbleChatEnabledModule (upval), GetBorderlessBubbleChatRenderDistanceModule (upval), OtterModule (upval), config (upval), GetServerTimeNowMillisModule (upval), GetBubbleDurationInMillisModule (upval), GetBubbleChatStartTimeMillisModule (upval)
+		if p1.props.billboardUpdateFrequency > 0 then
+			p1.lastDistanceUpdate += DeltaTime
 			
-			if p3.lastDistanceUpdate < p3.props.billboardUpdateFrequency then return end
-			p3.lastDistanceUpdate = 0
-		elseif not p3.props.tests_skipHeartbeatCheck then
-			if p3.heartbeatCount < experienceChatHeartbeatIncrement then
-				p3.heartbeatCount += 1
+			if p1.lastDistanceUpdate < p1.props.billboardUpdateFrequency then return end
+			p1.lastDistanceUpdate = 0
+		elseif not p1.props.tests_skipHeartbeatCheck then
+			if p1.heartbeatCount < ExperienceChatHeartbeatIncrement then
+				p1.heartbeatCount += 1
 				
 				return
 			end
-			p3.heartbeatCount = 0
+			p1.heartbeatCount = 0
 		end
-		local var3
-		local _ = nil
-		local var4 = if fFlagExpChatUseAdorneeStore then getAdorneeInstance(p3.adorneeBinding:getValue(), p3.state.savedChatSettings.AdorneeName) else getAdorneeInstance(p3.props.adornee or p3.props.partOrModel, p3.state.savedChatSettings.AdorneeName)
+		local AdorneeInstance = if FFlagExpChatUseAdorneeStore then getAdorneeInstance(p1.adorneeBinding:getValue(), p1.state.savedChatSettings.AdorneeName) else getAdorneeInstance(p1.props.adornee or p1.props.partOrModel, p1.state.savedChatSettings.AdorneeName)
 		
-		if currentCamera and var4 then
-			local magnitude = (currentCamera.CFrame.Position - (if var4:IsA("Attachment") then var4.WorldPosition else var4.Position)).Magnitude
-			var3 = magnitude < p3.state.savedChatSettings.MaxDistance
-			local var5 = magnitude < p3.state.savedChatSettings.MinimizeDistance
+		if CurrentCamera and AdorneeInstance then
+			local Distance = (CurrentCamera.CFrame.Position - (if AdorneeInstance:IsA("Attachment") then AdorneeInstance.WorldPosition else AdorneeInstance.Position)).Magnitude
+			local IsDistanceBelow = Distance < p1.state.savedChatSettings.MaxDistance
+			local IsDistanceBelow1 = Distance < p1.state.savedChatSettings.MinimizeDistance
 			
-			if fFlagExpChatUseProximityStore and p3.ProximityStore then
-				if not p3._lastProximityState or p3._lastProximityState.isInsideRenderDistance ~= var3 or p3._lastProximityState.isInsideMaximizeDistance ~= var5 then
-					p3.ProximityStore.updateProximity(p3.props.userId, var3, var5)
-					p3._lastProximityState = {
-						isInsideRenderDistance = var3,
-						isInsideMaximizeDistance = var5
+			if FFlagExpChatUseProximityStore and p1.ProximityStore then
+				if not p1._lastProximityState or p1._lastProximityState.isInsideRenderDistance ~= IsDistanceBelow or p1._lastProximityState.isInsideMaximizeDistance ~= IsDistanceBelow1 then
+					p1.ProximityStore.updateProximity(p1.props.userId, IsDistanceBelow, IsDistanceBelow1)
+					p1._lastProximityState = {
+						isInsideRenderDistance = IsDistanceBelow,
+						isInsideMaximizeDistance = IsDistanceBelow1
 					}
 				end
-			elseif var5 ~= p3.state.isInsideMaximizeDistance or var3 ~= p3.state.isInsideRenderDistance then
-				p3:setState({
-					isInsideRenderDistance = var3,
-					isInsideMaximizeDistance = var5
+			elseif IsDistanceBelow1 ~= p1.state.isInsideMaximizeDistance or IsDistanceBelow ~= p1.state.isInsideRenderDistance then
+				p1:setState({
+					isInsideRenderDistance = IsDistanceBelow,
+					isInsideMaximizeDistance = IsDistanceBelow1
 				})
 			end
+			if IsBorderlessBubbleChatEnabledModule() then
+				p1:setBorderlessDistanceVisible(Distance < GetBorderlessBubbleChatRenderDistanceModule(p1.state.savedChatSettings))
+			end
 		end
-		local verticalOffset = p3:getVerticalOffset()
+		local VerticalOffset = p1:getVerticalOffset()
 		
-		if math.abs(verticalOffset - p3.offsetGoal) > 0.5 then
-			p3.offsetGoal = verticalOffset
-			p3.offsetMotor:setGoal(otterModule.spring(verticalOffset, t))
+		if math.abs(VerticalOffset - p1.offsetGoal) > 0.5 then
+			p1.offsetGoal = VerticalOffset
+			p1.offsetMotor:setGoal(OtterModule.spring(VerticalOffset, config))
 		end
-		local var6 = workspace:GetServerTimeNow() * 1000
-		var3 = p3.state.savedChatSettings.BubbleDuration * 1000
+		local ServerTimeNowMillisModule = if IsBorderlessBubbleChatEnabledModule() then GetServerTimeNowMillisModule() else workspace:GetServerTimeNow() * 1000
+		local ScaledBubbleDuration = p1.state.savedChatSettings.BubbleDuration * 1000
 		
-		for i, v in p3.state.filteredMessages do
-			if var3 <= var6 - v.timestamp.UnixTimestampMillis then
-				p3:setState(function(p5)
-					-- upvalues: var6 (ref), var3 (ref)
-					local t = {}
+		for _, filteredMessage in p1.state.filteredMessages do
+			if (if IsBorderlessBubbleChatEnabledModule() then GetBubbleDurationInMillisModule(filteredMessage, ScaledBubbleDuration) else ScaledBubbleDuration) <= ServerTimeNowMillisModule - (if IsBorderlessBubbleChatEnabledModule() then GetBubbleChatStartTimeMillisModule(filteredMessage) else filteredMessage.timestamp.UnixTimestampMillis) then
+				p1:setState(function(p2) --[[ Line: 1034 ]]
+					-- upvalues: IsBorderlessBubbleChatEnabledModule (upval), GetBubbleDurationInMillisModule (upval), ScaledBubbleDuration (copy), GetBubbleChatStartTimeMillisModule (upval), ServerTimeNowMillisModule (copy)
+					local FilteredMessages = {}
 					
-					for i, v in ipairs(p5.filteredMessages) do
-						if var6 - v.timestamp.UnixTimestampMillis < var3 then
-							table.insert(t, v)
+					for _, filteredMessage in ipairs(p2.filteredMessages) do
+						if ServerTimeNowMillisModule - (if IsBorderlessBubbleChatEnabledModule() then GetBubbleChatStartTimeMillisModule(filteredMessage) else filteredMessage.timestamp.UnixTimestampMillis) < (if IsBorderlessBubbleChatEnabledModule() then GetBubbleDurationInMillisModule(filteredMessage, ScaledBubbleDuration) else ScaledBubbleDuration) then
+							table.insert(FilteredMessages, filteredMessage)
 						end
 					end
-					return { filteredMessages = t }
+					return { filteredMessages = FilteredMessages }
 				end)
-				
-				return
+				break
 			end
 		end
 	end)
-	p3:checkCounterForTimeout(nil)
+	p1:checkCounterForTimeout(nil)
 end
 
-function bubbleChatBillboard.willUnmount(p5)
-	-- upvalues: var1 (ref), fFlagExpChatUseProximityStore (ref), fFlagExpChatUseChatConfigStore (ref)
-	var1:trace("Unmounting billboards for {}", p5.state.shortId)
-	p5.isMounted = false
+function BubbleChatBillboard.willUnmount(p2) --[[ Line: 1059 ]]
+	-- upvalues: NewResult (copy), FFlagExpChatUseProximityStore (copy), FFlagExpChatUseChatConfigStore (copy), IsBorderlessBubbleChatEnabledModule (copy)
+	NewResult:trace("Unmounting billboards for {}", p2.state.shortId)
+	p2.isMounted = false
 	
-	if p5.characterConn then
-		p5.characterConn:Disconnect()
-		p5.characterConn = nil
+	if p2.characterConn then
+		p2.characterConn:Disconnect()
+		p2.characterConn = nil
 	end
-	if p5.heartbeatConn then
-		p5.heartbeatConn:Disconnect()
-		p5.heartbeatConn = nil
+	if p2.heartbeatConn then
+		p2.heartbeatConn:Disconnect()
+		p2.heartbeatConn = nil
 	end
-	if p5.humanoidDiedConn then
-		p5.humanoidDiedConn:Disconnect()
-		p5.humanoidDiedConn = nil
+	if p2.humanoidDiedConn then
+		p2.humanoidDiedConn:Disconnect()
+		p2.humanoidDiedConn = nil
 	end
-	if p5.selfViewConnection then
-		p5.selfViewConnection:disconnect()
-		p5.selfViewConnection = nil
+	if p2.selfViewConnection then
+		p2.selfViewConnection:disconnect()
+		p2.selfViewConnection = nil
 	end
-	if p5.adorneeEffect then
-		p5.adorneeEffect()
-		p5.adorneeEffect = nil
+	if p2.adorneeEffect then
+		p2.adorneeEffect()
+		p2.adorneeEffect = nil
 	end
-	if p5.localAdorneeEffect then
-		p5.localAdorneeEffect()
-		p5.localAdorneeEffect = nil
+	if p2.localAdorneeEffect then
+		p2.localAdorneeEffect()
+		p2.localAdorneeEffect = nil
 	end
-	if fFlagExpChatUseProximityStore and p5.proximityEffect then
-		p5.proximityEffect()
-		p5.proximityEffect = nil
+	if FFlagExpChatUseProximityStore and p2.proximityEffect then
+		p2.proximityEffect()
+		p2.proximityEffect = nil
 	end
-	if p5.messagesEffect then
-		p5.messagesEffect()
-		p5.messagesEffect = nil
+	if p2.messagesEffect then
+		p2.messagesEffect()
+		p2.messagesEffect = nil
 	end
-	if fFlagExpChatUseChatConfigStore and p5.chatConfigEffect then
-		p5.chatConfigEffect()
-		p5.chatConfigEffect = nil
+	if FFlagExpChatUseChatConfigStore and p2.chatConfigEffect then
+		p2.chatConfigEffect()
+		p2.chatConfigEffect = nil
 	end
-	p5.offsetMotor:destroy()
+	if IsBorderlessBubbleChatEnabledModule() then
+		p2:cancelBorderlessDistanceFade()
+	end
+	p2.offsetMotor:destroy()
 end
 
-function bubbleChatBillboard.getDerivedStateFromProps(p5, p6)
-	local text = "..." .. string.sub(tostring(p5.userId), -4)
-	local voiceState = nil
-	local var7 = nil
-	local var8 = nil
+function BubbleChatBillboard.getDerivedStateFromProps(p2, DerivedStateFromProps) --[[ Line: 1111 ]]
+	-- upvalues: IsBorderlessBubbleChatEnabledModule (copy), IsBorderlessBubbleChatMessageModule (copy)
+	local Text = "..." .. string.sub(tostring(p2.userId), -4)
+	local VoiceState = nil
+	local VoiceStateCounter: number? = nil
+	local VoiceTimedOut: boolean? = nil
 	
-	if p6.lastVoiceState ~= p5.voiceState then
-		var7 = (p6.voiceStateCounter or 0) + 1
-		var8 = false
-		voiceState = p5.voiceState
+	if DerivedStateFromProps.lastVoiceState ~= p2.voiceState then
+		VoiceStateCounter = (DerivedStateFromProps.voiceStateCounter or 0) + 1
+		VoiceTimedOut = false
+		VoiceState = p2.voiceState
+	end
+	local FilteredMessages = DerivedStateFromProps.filteredMessages
+	local IsIsShowingBorderlessBubbleChat = nil
+	
+	if IsBorderlessBubbleChatEnabledModule() then
+		local FilteredMessage = FilteredMessages[#FilteredMessages]
+		IsIsShowingBorderlessBubbleChat = if FilteredMessage then IsBorderlessBubbleChatMessageModule(FilteredMessage) else DerivedStateFromProps.isShowingBorderlessBubbleChat == true
 	end
 	return {
-		savedChatSettings = p5.chatSettings,
-		shortId = text,
-		filteredMessages = p6.filteredMessages,
-		voiceStateCounter = var7,
-		voiceTimedOut = var8,
-		lastVoiceState = voiceState
+		savedChatSettings = p2.chatSettings,
+		shortId = Text,
+		filteredMessages = FilteredMessages,
+		voiceStateCounter = VoiceStateCounter,
+		voiceTimedOut = VoiceTimedOut,
+		lastVoiceState = VoiceState,
+		isShowingBorderlessBubbleChat = IsIsShowingBorderlessBubbleChat
 	}
 end
 
-local function mapStateToProps(p5, p6)
-	-- upvalues: playersService (ref), fFlagExpChatUseChatConfigStore (ref), getChatConfigurationStoreModule (ref), getSettingsForMessageModule (ref), fFlagExpChatUseAdorneeStore (ref), fFlagEasierUnmutingModule (ref)
-	local userId = p5.Messages.messagesBySenderId[p6.userId]
+local function mapStateToProps(p2, p3) --[[ Line: 1154 ]]
+	-- upvalues: Players (copy), FFlagExpChatUseChatConfigStore (copy), GetChatConfigurationStoreModule (copy), GetSettingsForMessageModule (copy), FFlagExpChatUseAdorneeStore (copy), FFlagEasierUnmutingModule (copy)
+	local MessagesBySenderIdEntry = p2.Messages.messagesBySenderId[p3.userId]
+	local MessagesBySenderIdEntry1 = if MessagesBySenderIdEntry == nil then nil else MessagesBySenderIdEntry[#MessagesBySenderIdEntry]
+	local Text: string = if Players.LocalPlayer then tostring(Players.LocalPlayer.UserId) else ""
 	
 	return {
-		chatSettings = if p6.isTextChatServiceOn then if fFlagExpChatUseChatConfigStore then getChatConfigurationStoreModule(false).getBubbleChatSettings(false) else p5.BubbleChatSettings else getSettingsForMessageModule(p5.LegacyBubbleChatSettings, if userId ~= nil then nil else userId[#userId]),
-		adornee = if fFlagExpChatUseAdorneeStore then nil else p5.Adornees[p6.userId] or p6.partOrModel,
-		localAdornee = if fFlagExpChatUseAdorneeStore then nil elseif fFlagEasierUnmutingModule then p5.Adornees[if playersService.LocalPlayer then tostring(playersService.LocalPlayer.UserId) else ""] else nil,
-		clientSettings = p5.ClientSettings,
-		isVoiceUIVisible = p5.Voice.isVoiceUIVisible
+		chatSettings = if p3.isTextChatServiceOn then if FFlagExpChatUseChatConfigStore then GetChatConfigurationStoreModule(false).getBubbleChatSettings(false) else p2.BubbleChatSettings else GetSettingsForMessageModule(p2.LegacyBubbleChatSettings, MessagesBySenderIdEntry1),
+		adornee = if FFlagExpChatUseAdorneeStore then nil else p2.Adornees[p3.userId] or p3.partOrModel,
+		localAdornee = if FFlagExpChatUseAdorneeStore then nil elseif FFlagEasierUnmutingModule then p2.Adornees[Text] else nil,
+		clientSettings = p2.ClientSettings,
+		isVoiceUIVisible = p2.Voice.isVoiceUIVisible
 	}
 end
 
-if fFlagExpChatUseAdorneeStore then
-	local var7 = roactRoduxModule.connect(mapStateToProps)(bubbleChatBillboard)
+if FFlagExpChatUseAdorneeStore then
+	local v1 = RoactRoduxModule.connect(mapStateToProps)(BubbleChatBillboard)
 	
-	return if expChatMemoBillboardGui then reactModule.memo(var7) else var7
+	return if ExpChatMemoBillboardGui then ReactModule.memo(v1) else v1
+else
+	return if ExpChatMemoBillboardGui then ReactModule.memo(RoactRoduxModule.connect(mapStateToProps)(BubbleChatBillboard)) else RoactRoduxModule.connect(mapStateToProps)(BubbleChatBillboard)
 end
-return if expChatMemoBillboardGui then reactModule.memo(roactRoduxModule.connect(mapStateToProps)(bubbleChatBillboard)) else roactRoduxModule.connect(mapStateToProps)(bubbleChatBillboard)

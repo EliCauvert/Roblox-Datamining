@@ -1,31 +1,31 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local coreGuiService = game:GetService("CoreGui")
-local gameTranslatorModule = require(coreGuiService:WaitForChild("RobloxGui").Modules.GameTranslator)
-local reactModule = require(corePackagesService.Packages.React)
-local cryoModule = require(corePackagesService.Packages.Cryo)
-local signalsModule = require(corePackagesService.Packages.Signals)
-local signalsReactModule = require(corePackagesService.Packages.SignalsReact)
-local playerListModule = require(corePackagesService.Workspace.Packages.PlayerList)
-local _ = require(corePackagesService.Workspace.Packages.LeaderboardStore)
-local useLeaderboardStore = playerListModule.Hooks.useLeaderboardStore
-local statEntryView = playerListModule.Presentation.StatEntryView
+﻿local CorePackages = game:GetService("CorePackages")
+local CoreGui = game:GetService("CoreGui")
+local GameTranslatorModule = require(CoreGui:WaitForChild("RobloxGui").Modules.GameTranslator)
+local ReactModule = require(CorePackages.Packages.React)
+local CryoModule = require(CorePackages.Packages.Cryo)
+local SignalsModule = require(CorePackages.Packages.Signals)
+local SignalsReactModule = require(CorePackages.Packages.SignalsReact)
+local PlayerListModule = require(CorePackages.Workspace.Packages.PlayerList)
+local _ = require(CorePackages.Workspace.Packages.LeaderboardStore)
+local UseLeaderboardStoreFunction = PlayerListModule.Hooks.useLeaderboardStore
+local StatEntryView = PlayerListModule.Presentation.StatEntryView
 
-return reactModule.memo(function(p1)
-	-- upvalues: useLeaderboardStore (ref), reactModule (ref), gameTranslatorModule (ref), coreGuiService (ref), signalsReactModule (ref), signalsModule (ref), cryoModule (ref), statEntryView (ref)
-	local data = useLeaderboardStore().getGameStatsList().getData(p1.statName, false)
+return ReactModule.memo(function(p1) --[[ Line: 43 | Named "StatEntryContainer" ]]
+	-- upvalues: UseLeaderboardStoreFunction (copy), ReactModule (copy), GameTranslatorModule (copy), CoreGui (copy), SignalsReactModule (copy), SignalsModule (copy), CryoModule (copy), StatEntryView (copy)
+	local Data = UseLeaderboardStoreFunction().getGameStatsList().getData(p1.statName, false)
 	
-	return reactModule.createElement(statEntryView, cryoModule.Dictionary.join({
-		statName = reactModule.useMemo(function()
-			-- upvalues: gameTranslatorModule (copy), coreGuiService (copy), p1 (ref)
-			return gameTranslatorModule:TranslateGameText(coreGuiService, p1.statName)
+	return ReactModule.createElement(StatEntryView, (CryoModule.Dictionary.join({
+		statName = ReactModule.useMemo(function() --[[ Line: 48 ]]
+			-- upvalues: GameTranslatorModule (upval), CoreGui (upval), p1 (copy)
+			return GameTranslatorModule:TranslateGameText(CoreGui, p1.statName)
 		end, { p1.statName }),
-		statValue = signalsReactModule.useSignalBinding(signalsModule.createComputed(function(p2)
-			-- upvalues: p1 (ref)
+		statValue = SignalsReactModule.useSignalBinding(SignalsModule.createComputed(function(p2) --[[ Line: 52 ]]
+			-- upvalues: p1 (copy)
 			return if p1.stat then p1.stat(p2) else "-"
 		end)),
-		layoutOrder = signalsReactModule.useSignalBinding(signalsModule.createComputed(function(p2)
-			-- upvalues: data (ref)
-			return if data then data.order(p2) else 1e999
+		layoutOrder = SignalsReactModule.useSignalBinding(SignalsModule.createComputed(function(p2) --[[ Line: 55 ]]
+			-- upvalues: Data (copy)
+			return if Data then Data.order(p2) else 1e999
 		end))
-	}, p1))
+	}, p1)))
 end)

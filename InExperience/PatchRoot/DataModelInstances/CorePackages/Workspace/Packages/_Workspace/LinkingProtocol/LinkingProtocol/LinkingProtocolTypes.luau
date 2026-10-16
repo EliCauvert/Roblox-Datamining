@@ -1,5 +1,6 @@
-﻿local parent = script.Parent
-local _ = require(parent.Parent.MessageBus)
-local _ = require(parent.Enums.SettingsRoute)
+﻿local Parent = script.Parent
+local _ = require(Parent.Parent.MessageBus)
+local _ = require(Parent.Enums.DeepLinkSource)
+local _ = require(Parent.Enums.SettingsRoute)
 
 return nil

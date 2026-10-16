@@ -1,0 +1,3 @@
+﻿local FFlagAXAvatarPreviewPhotoboothMomentsButtonModule = require(script.Parent.FFlagAXAvatarPreviewPhotoboothMomentsButton)
+
+return game:DefineFastFlag("AXPhotoboothMomentsButtonUnderRobuxBalance", false) and FFlagAXAvatarPreviewPhotoboothMomentsButtonModule

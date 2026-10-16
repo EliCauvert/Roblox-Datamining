@@ -1,43 +1,45 @@
-﻿local httpService = game:GetService("HttpService")
-local serverTriggeredModals = script:FindFirstAncestor("ServerTriggeredModals")
-local parent = serverTriggeredModals.Parent
-local urlBuilder = require(parent.UrlBuilder).UrlBuilder
-local urlBase = require(parent.UrlBuilder).UrlBase
-local loggerModule = require(serverTriggeredModals.Logger)
-local logResponseStatusModule = require(serverTriggeredModals.logResponseStatus)
-local logResponseLatencyModule = require(serverTriggeredModals.logResponseLatency)
-local var1 = urlBuilder.new({ path = "modals-api/v1/impression", base = urlBase.APIS })
+﻿local HttpService = game:GetService("HttpService")
+local ServerTriggeredModals = script:FindFirstAncestor("ServerTriggeredModals")
+local Parent = ServerTriggeredModals.Parent
+local LoggerModule = require(ServerTriggeredModals.Logger)
+local LogResponseStatusModule = require(ServerTriggeredModals.logResponseStatus)
+local LogResponseLatencyModule = require(ServerTriggeredModals.logResponseLatency)
+local NewResult = require(Parent.UrlBuilder).UrlBuilder.new({
+	path = "modals-api/v1/impression",
+	base = require(Parent.UrlBuilder).UrlBase.APIS
+})
 
-return function(p1, p2, p3)
-	-- upvalues: loggerModule (ref), var1 (ref), httpService (ref), logResponseLatencyModule (ref), logResponseStatusModule (ref)
-	if not p1 then
-		loggerModule:error("Missing networking implementation")
+return function(Callback, ModalId, ModalType) --[[ Line: 20 ]]
+	-- upvalues: LoggerModule (copy), NewResult (copy), HttpService (copy), LogResponseLatencyModule (copy), LogResponseStatusModule (copy)
+	if not Callback then
+		LoggerModule:error("Missing networking implementation")
 		
 		return
 	end
-	local ok, status = pcall(function()
-		-- upvalues: var1 (copy), httpService (copy), p2 (ref), p3 (ref), p1 (ref)
-		return p1(var1(), "POST", {
-			postBody = httpService:JSONEncode({ modalId = p2, modalType = p3 })
+	local Success, Result = pcall(function() --[[ Line: 26 ]]
+		-- upvalues: NewResult (upval), HttpService (upval), ModalId (copy), ModalType (copy), Callback (copy)
+		return Callback(NewResult(), "POST", {
+			postBody = HttpService:JSONEncode({ modalId = ModalId, modalType = ModalType })
 		})
 	end)
 	
-	if ok then
-		status:andThen(function(p4)
-			-- upvalues: logResponseLatencyModule (copy), loggerModule (copy)
-			local var2 = if p4 then p4.responseCode else nil
-			logResponseLatencyModule("modals-api/v1/impression", p4.responseTimeMs, var2)
+	if Success then
+		Result:andThen(function(Result) --[[ Line: 38 ]]
+			-- upvalues: LogResponseLatencyModule (upval), LoggerModule (upval)
+			local ResponseCode = Result and Result.responseCode or nil
+			LogResponseLatencyModule("modals-api/v1/impression", Result.responseTimeMs, ResponseCode)
 			
-			if var2 ~= nil and var2 ~= 200 then
-				loggerModule:error(`Unexpected responseCode when reporting impression: {var2}`)
+			if ResponseCode ~= nil and ResponseCode ~= 200 then
+				LoggerModule:error(`Unexpected responseCode when reporting impression: {ResponseCode}`)
 			end
-		end):catch(function(p4)
-			-- upvalues: logResponseStatusModule (copy), loggerModule (copy)
-			logResponseStatusModule("modals-api/v1/impression", p4.StatusCode)
-			loggerModule:error(`Report Impression request error: {p4}`)
+		end):catch(function(Err) --[[ Line: 45 ]]
+			-- upvalues: LogResponseStatusModule (upval), LoggerModule (upval)
+			LogResponseStatusModule("modals-api/v1/impression", Err.StatusCode)
+			LoggerModule:error(`Report Impression request error: {Err}`)
 		end)
 		
 		return
+	else
+		LoggerModule:error(`Report impression request failed to start: {Result}`)
 	end
-	loggerModule:error(`Report impression request failed to start: {status}`)
 end

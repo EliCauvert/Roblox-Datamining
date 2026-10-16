@@ -1,42 +1,42 @@
-﻿local signal = require(script.Parent.Parent.AppCommonLib).Signal
-local t = {}
-t.__index = t
+﻿local Signal = require(script.Parent.Parent.AppCommonLib).Signal
+local ObservableValueModule = {}
+ObservableValueModule.__index = ObservableValueModule
 
-local function defaultCompareFn(p1, p2)
+local function defaultCompareFn(p1, p2): boolean --[[ Line: 44 ]]
 	return p1 == p2
 end
 
-function t.new(p1, p2)
-	-- upvalues: defaultCompareFn (ref), signal (ref), t (ref)
-	return setmetatable({
-		_isEqual = p2 or defaultCompareFn,
-		_value = p1,
-		_changeSignal = signal.new()
-	}, t)
+function ObservableValueModule.new(_value, p1) --[[ Line: 48 ]]
+	-- upvalues: defaultCompareFn (copy), Signal (copy), ObservableValueModule (copy)
+	return (setmetatable({
+		_isEqual = if p1 then p1 else defaultCompareFn,
+		_value = _value,
+		_changeSignal = Signal.new()
+	}, ObservableValueModule))
 end
 
-function t:get()
+function ObservableValueModule:get() --[[ Line: 57 ]]
 	return self._value
 end
 
-function t:set(p1)
-	if not self._isEqual(self._value, p1) then
-		self._value = p1
-		self._changeSignal:fire(p1)
+function ObservableValueModule:set(_value) --[[ Line: 61 ]]
+	if not self._isEqual(self._value, _value) then
+		self._value = _value
+		self._changeSignal:fire(_value)
 	end
 end
 
-function t:connect(p1, p2)
-	local changeSignalConnection = self._changeSignal:connect(p1)
+function ObservableValueModule:connect(Callback: (any) -> (), Enabled) --[[ Line: 68 ]]
+	local ChangeSignalConnection = self._changeSignal:connect(Callback)
 	
-	if p2 == true then
-		p1(self._value)
+	if Enabled == true then
+		Callback(self._value)
 	end
-	return changeSignalConnection
+	return ChangeSignalConnection
 end
 
-function t:__tostring()
+function ObservableValueModule:__tostring(): string --[[ Line: 77 ]]
 	return "ObservableValue(" .. tostring(self._value) .. ")"
 end
 
-return t
+return ObservableValueModule

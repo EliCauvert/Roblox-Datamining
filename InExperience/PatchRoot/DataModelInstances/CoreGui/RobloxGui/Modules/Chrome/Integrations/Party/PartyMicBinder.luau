@@ -1,32 +1,36 @@
-﻿local chrome = script:FindFirstAncestor("Chrome")
-local corePackagesService = game:GetService("CorePackages")
-local reactModule = require(corePackagesService.Packages.React)
-local audioFocusManagementEngineFeature = game:GetEngineFeature("AudioFocusManagement")
-local crossExperienceVoiceModule = require(corePackagesService.Workspace.Packages.CrossExperienceVoice)
-local var1 = if require(corePackagesService.Workspace.Packages.Chrome).Enabled() then require(chrome.Service) else nil
-local constantsModule = require(chrome.Integrations.Party.Constants)
-local useIsVoiceFocused = crossExperienceVoiceModule.Hooks.useIsVoiceFocused
-local useIsVoiceConnected = crossExperienceVoiceModule.Hooks.useIsVoiceConnected
+﻿local Chrome = script:FindFirstAncestor("Chrome")
+local CorePackages = game:GetService("CorePackages")
+local ReactModule = require(CorePackages.Packages.React)
+local AudioFocusManagementEngineFeature = game:GetEngineFeature("AudioFocusManagement")
+local CrossExperienceVoiceModule = require(CorePackages.Workspace.Packages.CrossExperienceVoice)
+local ServiceModule = if require(CorePackages.Workspace.Packages.Chrome).Enabled() then require(Chrome.Service) else nil
+local ConstantsModule = require(Chrome.Integrations.Party.Constants)
+local UseIsVoiceFocusedFunction = CrossExperienceVoiceModule.Hooks.useIsVoiceFocused
+local UseIsVoiceConnectedFunction = CrossExperienceVoiceModule.Hooks.useIsVoiceConnected
 
-return function()
-	-- upvalues: useIsVoiceFocused (ref), useIsVoiceConnected (ref), reactModule (ref), var1 (ref), constantsModule (ref), audioFocusManagementEngineFeature (ref)
-	local var2 = useIsVoiceFocused()
-	local var3 = useIsVoiceConnected()
-	local var4 = reactModule.useMemo(function()
-		-- upvalues: var1 (copy), constantsModule (copy)
-		return if var1 then var1:integrations()[constantsModule.TOGGLE_MIC_INTEGRATION_ID] else nil
+return function() --[[ Line: 15 | Named "PartyMicBinder" ]]
+	-- upvalues: UseIsVoiceFocusedFunction (copy), UseIsVoiceConnectedFunction (copy), ReactModule (copy), ServiceModule (copy), ConstantsModule (copy), AudioFocusManagementEngineFeature (copy)
+	local UseIsVoiceFocusedResult = UseIsVoiceFocusedFunction()
+	local UseIsVoiceConnectedResult = UseIsVoiceConnectedFunction()
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 18 ]]
+		-- upvalues: ServiceModule (upval), ConstantsModule (upval)
+		return if ServiceModule then ServiceModule:integrations()[ConstantsModule.TOGGLE_MIC_INTEGRATION_ID] else nil
 	end, {})
-	reactModule.useEffect(function()
-		-- upvalues: var4 (ref), var3 (ref), var2 (ref), audioFocusManagementEngineFeature (copy)
-		if var4 then
-			if var3 and (var2 or not audioFocusManagementEngineFeature) then
-				var4.availability:available()
+	ReactModule.useEffect(function() --[[ Line: 25 ]]
+		-- upvalues: UseMemoResult (copy), UseIsVoiceConnectedResult (copy), UseIsVoiceFocusedResult (copy), AudioFocusManagementEngineFeature (upval)
+		if UseMemoResult then
+			if UseIsVoiceConnectedResult and (UseIsVoiceFocusedResult or not AudioFocusManagementEngineFeature) then
+				UseMemoResult.availability:available()
 				
 				return
 			end
-			var4.availability:unavailable()
+			UseMemoResult.availability:unavailable()
 		end
-	end, { var3, var2, var4 })
+	end, {
+		UseIsVoiceConnectedResult,
+		UseIsVoiceFocusedResult,
+		UseMemoResult
+	})
 	
 	return nil
 end

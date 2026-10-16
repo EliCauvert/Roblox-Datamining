@@ -1,8 +1,8 @@
-﻿local avatarEditorService = game:GetService("AvatarEditorService")
-local closeOpenPromptModule = require(script.Parent.Parent.Actions.CloseOpenPrompt)
+﻿local AvatarEditorService = game:GetService("AvatarEditorService")
+local CloseOpenPromptModule = require(script.Parent.Parent.Actions.CloseOpenPrompt)
 
-return function(p1)
-	-- upvalues: avatarEditorService (ref), closeOpenPromptModule (ref)
-	avatarEditorService:SignalSaveAvatarPermissionDenied()
-	p1:dispatch(closeOpenPromptModule())
+return function(p1) --[[ Line: 6 ]]
+	-- upvalues: AvatarEditorService (copy), CloseOpenPromptModule (copy)
+	AvatarEditorService:SignalSaveAvatarPermissionDenied()
+	p1:dispatch(CloseOpenPromptModule())
 end

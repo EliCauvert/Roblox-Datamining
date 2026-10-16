@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.AvatarExperienceSlotBasedEditor.AvatarExperienceSlotBasedEditor)
+﻿return (require(script.Parent.Parent.Parent._Index.AvatarExperienceSlotBasedEditor.AvatarExperienceSlotBasedEditor))

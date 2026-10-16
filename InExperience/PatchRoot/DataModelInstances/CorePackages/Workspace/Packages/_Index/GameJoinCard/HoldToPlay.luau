@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.HoldToPlay.HoldToPlay)
+﻿return (require(script.Parent.Parent.Parent._Index.HoldToPlay.HoldToPlay))

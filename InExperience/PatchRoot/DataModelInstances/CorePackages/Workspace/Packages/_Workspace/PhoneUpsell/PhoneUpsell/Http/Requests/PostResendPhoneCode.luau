@@ -1,6 +1,6 @@
-﻿local urlBuilder = require(script:FindFirstAncestor("PhoneUpsell").Parent.UrlBuilder).UrlBuilder
+﻿local UrlBuilder = require(script:FindFirstAncestor("PhoneUpsell").Parent.UrlBuilder).UrlBuilder
 
-return function(p1)
-	-- upvalues: urlBuilder (ref)
-	return p1(urlBuilder.fromString("accountinformation:phone/resend")(), "POST", { postBody = "" })
+return function(Callback) --[[ Line: 18 ]]
+	-- upvalues: UrlBuilder (copy)
+	return Callback(UrlBuilder.fromString("accountinformation:phone/resend")(), "POST", { postBody = "" })
 end

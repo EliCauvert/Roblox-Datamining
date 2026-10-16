@@ -1,106 +1,102 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local buildMaturityBannerModule = require(buildExperience.Components.GameConfigurations.BuildMaturityBanner.BuildMaturityBanner)
-local gameConfigurationListModule = require(buildExperience.Components.GameConfigurations.GameConfigurationList.GameConfigurationList)
-local view = foundationModule.View
-local iconName = foundationModule.Enums.IconName
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
+local BuildMaturityBannerModule = require(BuildExperience.Components.GameConfigurations.BuildMaturityBanner.BuildMaturityBanner)
+local GameConfigurationListModule = require(BuildExperience.Components.GameConfigurations.GameConfigurationList.GameConfigurationList)
+local View = FoundationModule.View
+local IconName = FoundationModule.Enums.IconName
 
-return function(p1)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), iconName (ref), reactModule (ref), view (ref), gameConfigurationListModule (ref), buildMaturityBannerModule (ref)
-	local testId = p1.testId or "game-configuration-content"
-	local var1 = useLocalization({
-		contentBody = localizationStringsModule.PUBLISH_CONTENT_BODY,
-		contentMaturity = localizationStringsModule.PUBLISH_CONTENT_MATURITY,
-		contentTitle = localizationStringsModule.PUBLISH_CONTENT_TITLE,
-		gameDetails = localizationStringsModule.GAME_CONFIGURATION_GAME_DETAILS,
-		gameDetailsBody = localizationStringsModule.GAME_CONFIGURATION_GAME_DETAILS_BODY,
-		iconAndThumbnails = localizationStringsModule.GAME_CONFIGURATION_ICON_AND_THUMBNAILS,
-		titleAndDescription = localizationStringsModule.GAME_CONFIGURATION_TITLE_AND_DESCRIPTION,
-		versionInformationBody = localizationStringsModule.PUBLISH_VERSION_INFORMATION_BODY,
-		versionInformationTitle = localizationStringsModule.PUBLISH_VERSION_INFORMATION_TITLE,
-		versionHistory = localizationStringsModule.VERSION_HISTORY_TITLE,
-		versionTitleDescription = localizationStringsModule.PUBLISH_VERSION_TITLE_DESCRIPTION
+return function(p1) --[[ Line: 30 | Named "PublishConfigurationContentView" ]]
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), IconName (copy), ReactModule (copy), View (copy), GameConfigurationListModule (copy), BuildMaturityBannerModule (copy)
+	local TestId = p1.testId or "game-configuration-content"
+	local UseLocalizationResult = UseLocalizationFunction({
+		contentBody = LocalizationStringsModule.PUBLISH_CONTENT_BODY,
+		contentMaturity = LocalizationStringsModule.PUBLISH_CONTENT_MATURITY,
+		contentTitle = LocalizationStringsModule.PUBLISH_CONTENT_TITLE,
+		gameDetails = LocalizationStringsModule.GAME_CONFIGURATION_GAME_DETAILS,
+		gameDetailsBody = LocalizationStringsModule.GAME_CONFIGURATION_GAME_DETAILS_BODY,
+		iconAndThumbnails = LocalizationStringsModule.GAME_CONFIGURATION_ICON_AND_THUMBNAILS,
+		titleAndDescription = LocalizationStringsModule.GAME_CONFIGURATION_TITLE_AND_DESCRIPTION,
+		versionInformationBody = LocalizationStringsModule.PUBLISH_VERSION_INFORMATION_BODY,
+		versionInformationTitle = LocalizationStringsModule.PUBLISH_VERSION_INFORMATION_TITLE,
+		versionHistory = LocalizationStringsModule.VERSION_HISTORY_TITLE,
+		versionTitleDescription = LocalizationStringsModule.PUBLISH_VERSION_TITLE_DESCRIPTION
 	})
-	local contentBody = var1.contentBody
-	local contentMaturity = var1.contentMaturity
-	local contentTitle = var1.contentTitle
-	local gameDetails = var1.gameDetails
-	local gameDetailsBody = var1.gameDetailsBody
-	local iconAndThumbnails = var1.iconAndThumbnails
-	local titleAndDescription = var1.titleAndDescription
-	local versionInformationBody = var1.versionInformationBody
-	local versionInformationTitle = var1.versionInformationTitle
-	local versionHistory = var1.versionHistory
-	local versionTitleDescription = var1.versionTitleDescription
-	local list = {
+	local ContentBody = UseLocalizationResult.contentBody
+	local ContentTitle = UseLocalizationResult.contentTitle
+	local GameDetails = UseLocalizationResult.gameDetails
+	local GameDetailsBody = UseLocalizationResult.gameDetailsBody
+	local VersionInformationBody = UseLocalizationResult.versionInformationBody
+	local VersionInformationTitle = UseLocalizationResult.versionInformationTitle
+	local VersionHistory = UseLocalizationResult.versionHistory
+	local Rows = {
 		{
 			id = "icon-thumbnails",
-			title = iconAndThumbnails,
+			title = UseLocalizationResult.iconAndThumbnails,
 			onActivated = p1.onOpenIconAndThumbnails
 		},
 		{
 			id = "title-description",
-			title = titleAndDescription,
+			title = UseLocalizationResult.titleAndDescription,
 			onActivated = p1.onOpenTitleDescriptionPage
 		}
 	}
-	local list_1 = {
+	local Rows1 = {
 		{
 			id = "content-rating",
-			title = contentMaturity,
+			title = UseLocalizationResult.contentMaturity,
 			description = p1.contentMaturityText,
-			trailingIcon = iconName.ArrowUpRightFromSquare,
+			trailingIcon = IconName.ArrowUpRightFromSquare,
 			onActivated = p1.onOpenContentMaturity
 		}
 	}
-	local t = {}
-	table.insert(t, {
+	local List = {}
+	table.insert(List, {
 		id = "version-title-description",
-		title = versionTitleDescription,
+		title = UseLocalizationResult.versionTitleDescription,
 		onActivated = p1.onOpenVersionTitleDescriptionPage
 	})
-	table.insert(t, {
+	table.insert(List, {
 		id = "version-history",
-		title = versionHistory,
+		title = VersionHistory,
 		onActivated = p1.onOpenVersionHistory
 	})
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "col gap-large size-full-0 auto-y",
 		LayoutOrder = p1.layoutOrder,
-		testId = testId
+		testId = TestId
 	}, {
-		VersionInformation = reactModule.createElement(gameConfigurationListModule, {
+		VersionInformation = ReactModule.createElement(GameConfigurationListModule, {
 			layoutOrder = 1,
-			title = versionInformationTitle,
-			body = versionInformationBody,
-			rows = t,
-			testId = `{testId}-version-information`
+			title = VersionInformationTitle,
+			body = VersionInformationBody,
+			rows = List,
+			testId = `{TestId}-version-information`
 		}),
-		GameDetails = reactModule.createElement(gameConfigurationListModule, {
+		GameDetails = ReactModule.createElement(GameConfigurationListModule, {
 			layoutOrder = 2,
-			title = gameDetails,
-			body = gameDetailsBody,
-			rows = list,
-			testId = `{testId}-game-details`
+			title = GameDetails,
+			body = GameDetailsBody,
+			rows = Rows,
+			testId = `{TestId}-game-details`
 		}),
-		Content = reactModule.createElement(view, {
+		Content = ReactModule.createElement(View, {
 			LayoutOrder = 3,
 			tag = "col gap-medium size-full-0 auto-y",
-			testId = `{testId}-content-section`
+			testId = `{TestId}-content-section`
 		}, {
-			Configuration = reactModule.createElement(gameConfigurationListModule, {
+			Configuration = ReactModule.createElement(GameConfigurationListModule, {
 				layoutOrder = 1,
-				title = contentTitle,
-				body = contentBody,
-				rows = list_1,
-				testId = `{testId}-content`
+				title = ContentTitle,
+				body = ContentBody,
+				rows = Rows1,
+				testId = `{TestId}-content`
 			}),
-			BuildMaturityBanner = if p1.buildMaturityBannerText ~= nil then nil else reactModule.createElement(buildMaturityBannerModule, { text = p1.buildMaturityBannerText })
+			BuildMaturityBanner = if p1.buildMaturityBannerText == nil then nil else ReactModule.createElement(BuildMaturityBannerModule, { text = p1.buildMaturityBannerText })
 		})
 	})
 end

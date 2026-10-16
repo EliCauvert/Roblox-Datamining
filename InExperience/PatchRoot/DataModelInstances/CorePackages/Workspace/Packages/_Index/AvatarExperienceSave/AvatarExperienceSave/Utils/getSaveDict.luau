@@ -1,52 +1,45 @@
-﻿local avatarExperienceSave = script:FindFirstAncestor("AvatarExperienceSave")
-local parent = avatarExperienceSave.Parent
-local tutilsModule = require(parent.tutils)
-local _ = require(avatarExperienceSave.Context.AvatarSaveContext)
-local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
-local fFlagAXBackgroundsPersistence = avatarExperienceFlagsModule.FFlagAXBackgroundsPersistence
-local AXFixEmptyDictionaryKeysForSaveDict2 = avatarExperienceFlagsModule.FFlagAXRootSlotBasedEditorFlag and game:DefineFastFlag("AXFixEmptyDictionaryKeysForSaveDict2", false)
+﻿local AvatarExperienceSave = script:FindFirstAncestor("AvatarExperienceSave")
+local Parent = AvatarExperienceSave.Parent
+local TutilsModule = require(Parent.tutils)
+local _ = require(AvatarExperienceSave.Context.AvatarSaveContext)
+local FFlagAXBackgroundsPersistence = require(Parent.AvatarExperienceFlags).FFlagAXBackgroundsPersistence
+local AXFixEmptyDictionaryKeysForSaveDict2 = game:DefineFastFlag("AXFixEmptyDictionaryKeysForSaveDict2", false)
 
-local function filterEmptyDicts(p1)
-	local cloned = table.clone(p1)
+local function filterEmptyDicts(Tbl) --[[ Line: 21 ]]
+	local Copy = table.clone(Tbl)
 	
-	for i, v in cloned do
-		if type(v) == "table" and next(v) == nil then
-			cloned[i] = nil
+	for i, value in Copy do
+		if type(value) == "table" and next(value) == nil then
+			Copy[i] = nil
 		end
 	end
-	return cloned
+	return Copy
 end
 
-local function _(p2, p3)
-	-- upvalues: filterEmptyDicts (ref), tutilsModule (ref)
-	return tutilsModule.deepEqual(filterEmptyDicts(p2), filterEmptyDicts(p3))
+local function _(p1, p2) --[[ Line: 31 | Named "deepEqualWithoutEmptyDicts" ]]
+	-- upvalues: filterEmptyDicts (copy), TutilsModule (copy)
+	return TutilsModule.deepEqual(filterEmptyDicts(p1), (filterEmptyDicts(p2)))
 end
 
-return function(p2, p3)
-	-- upvalues: fFlagAXBackgroundsPersistence (ref), AXFixEmptyDictionaryKeysForSaveDict2 (ref), filterEmptyDicts (ref), tutilsModule (ref)
-	local var1
-	local equipped = p2.equipped
-	local equipped_1 = p3.equipped
+return function(p1, p2) --[[ Line: 41 | Named "getSaveDict" ]]
+	-- upvalues: FFlagAXBackgroundsPersistence (copy), AXFixEmptyDictionaryKeysForSaveDict2 (copy), filterEmptyDicts (copy), TutilsModule (copy)
+	local Equipped = p1.equipped
+	local Equipped1 = p2.equipped
+	local IsNotBackgroundAssetIdMatch = if FFlagAXBackgroundsPersistence then Equipped.BackgroundAssetId ~= Equipped1.BackgroundAssetId else nil
 	
-	if fFlagAXBackgroundsPersistence then
-		var1 = equipped.BackgroundAssetId ~= equipped_1.BackgroundAssetId
-		var1 = nil
-	else
-		var1 = nil
-	end
 	return if AXFixEmptyDictionaryKeysForSaveDict2 then {
-		BodyColors = not tutilsModule.deepEqual(filterEmptyDicts(equipped.BodyColor3s), filterEmptyDicts(equipped_1.BodyColor3s)),
-		AvatarType = equipped.AvatarType ~= equipped_1.AvatarType,
-		Scales = not tutilsModule.deepEqual(filterEmptyDicts(equipped.AvatarScales), filterEmptyDicts(equipped_1.AvatarScales)),
-		Assets = equipped.EquippedAssets and not tutilsModule.deepEqual(filterEmptyDicts(equipped.EquippedAssets), filterEmptyDicts(equipped_1.EquippedAssets)),
-		Emotes = not tutilsModule.deepEqual(filterEmptyDicts(equipped.EquippedEmotes.slotInfo), filterEmptyDicts(equipped_1.EquippedEmotes.slotInfo)),
-		Background = var1
+		BodyColors = not TutilsModule.deepEqual(filterEmptyDicts(Equipped.BodyColor3s), (filterEmptyDicts(Equipped1.BodyColor3s))),
+		AvatarType = Equipped.AvatarType ~= Equipped1.AvatarType,
+		Scales = not TutilsModule.deepEqual(filterEmptyDicts(Equipped.AvatarScales), (filterEmptyDicts(Equipped1.AvatarScales))),
+		Assets = Equipped.EquippedAssets and not TutilsModule.deepEqual(filterEmptyDicts(Equipped.EquippedAssets), (filterEmptyDicts(Equipped1.EquippedAssets))),
+		Emotes = not TutilsModule.deepEqual(filterEmptyDicts(Equipped.EquippedEmotes.slotInfo), (filterEmptyDicts(Equipped1.EquippedEmotes.slotInfo))),
+		Background = IsNotBackgroundAssetIdMatch
 	} else {
-		BodyColors = not tutilsModule.deepEqual(equipped.BodyColor3s, equipped_1.BodyColor3s),
-		AvatarType = equipped.AvatarType ~= equipped_1.AvatarType,
-		Scales = not tutilsModule.deepEqual(equipped.AvatarScales, equipped_1.AvatarScales),
-		Assets = equipped.EquippedAssets and not tutilsModule.deepEqual(equipped.EquippedAssets, equipped_1.EquippedAssets),
-		Emotes = not tutilsModule.deepEqual(equipped.EquippedEmotes.slotInfo, equipped_1.EquippedEmotes.slotInfo),
-		Background = var1
+		BodyColors = not TutilsModule.deepEqual(Equipped.BodyColor3s, Equipped1.BodyColor3s),
+		AvatarType = Equipped.AvatarType ~= Equipped1.AvatarType,
+		Scales = not TutilsModule.deepEqual(Equipped.AvatarScales, Equipped1.AvatarScales),
+		Assets = Equipped.EquippedAssets and not TutilsModule.deepEqual(Equipped.EquippedAssets, Equipped1.EquippedAssets),
+		Emotes = not TutilsModule.deepEqual(Equipped.EquippedEmotes.slotInfo, Equipped1.EquippedEmotes.slotInfo),
+		Background = IsNotBackgroundAssetIdMatch
 	}
 end

@@ -1,40 +1,42 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local reactModule = require(corePackagesService.Packages.React)
-local view = require(corePackagesService.Packages.Foundation).View
-local enumsModule = require(corePackagesService.Workspace.Packages.ProfilePlatform.Enums)
-local useProfileJsonComponentModule = require(corePackagesService.Workspace.Packages.ProfilePlatform.useProfileJsonComponent)
-local profileWrapperContextModule = require(corePackagesService.Workspace.Packages.ProfilePlatform.ProfileWrapperContext)
-local avatarHeadshotComponentModule = require(corePackagesService.Workspace.Packages.ProfilePlatform.AvatarHeadshotComponent)
-local socialChipCountsRowModule = require(corePackagesService.Workspace.Packages.ProfilePlatform.SocialChipCountsRow)
+﻿local CorePackages = game:GetService("CorePackages")
+local ReactModule = require(CorePackages.Packages.React)
+local View = require(CorePackages.Packages.Foundation).View
+local EnumsModule = require(CorePackages.Workspace.Packages.ProfilePlatform.Enums)
+local UseProfileJsonComponentModule = require(CorePackages.Workspace.Packages.ProfilePlatform.useProfileJsonComponent)
+local ProfileWrapperContextModule = require(CorePackages.Workspace.Packages.ProfilePlatform.ProfileWrapperContext)
+local AvatarHeadshotComponentModule = require(CorePackages.Workspace.Packages.ProfilePlatform.AvatarHeadshotComponent)
+local SocialChipCountsRowModule = require(CorePackages.Workspace.Packages.ProfilePlatform.SocialChipCountsRow)
 
-local _ = function(p1, p2, p3)
-	local primaryName = p1.names.primaryName or ""
+local function _(p1, p2, p3) --[[ Line: 15 ]]
+	local PrimaryName = p1.names.primaryName or ""
 	
-	return if p2.profileUserNickname and p3 and p2.profileUserNickname ~= "" then p2.profileUserNickname .. " (" .. primaryName .. ")" else primaryName
+	return if p2.profileUserNickname and p3 and p2.profileUserNickname ~= "" then p2.profileUserNickname .. " (" .. PrimaryName .. ")" else PrimaryName
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), profileWrapperContextModule (ref), useProfileJsonComponentModule (ref), enumsModule (ref), view (ref), avatarHeadshotComponentModule (ref), socialChipCountsRowModule (ref)
-	local _ = reactModule.useContext(profileWrapperContextModule)
-	local var1 = useProfileJsonComponentModule(enumsModule.Components.UserProfileHeader)
-	local var2 = var1.counts ~= nil
-	local createElement = reactModule.createElement
-	local t = {
+return ReactModule.memo(function(p1) --[[ Line: 37 | Named "ProfileHeader" ]]
+	-- upvalues: ReactModule (copy), ProfileWrapperContextModule (copy), UseProfileJsonComponentModule (copy), EnumsModule (copy), View (copy), AvatarHeadshotComponentModule (copy), SocialChipCountsRowModule (copy)
+	local UseContextResult = ReactModule.useContext(ProfileWrapperContextModule)
+	local UseProfileJsonComponentModuleResult = UseProfileJsonComponentModule(EnumsModule.Components.UserProfileHeader)
+	local HasCounts = UseProfileJsonComponentModuleResult.counts ~= nil
+	local CreateElementFunction1 = ReactModule.createElement
+	local config = {
 		tag = "size-full-0 auto-y col gap-large",
 		LayoutOrder = p1.layoutOrder
 	}
-	local t_1 = {}
-	local createElement_1 = reactModule.createElement
-	local var3 = avatarHeadshotComponentModule
-	local t_2 = { layoutOrder = 1, userId = p1.profileId }
-	local primaryName = var1.names.primaryName or ""
-	t_2.primaryName = primaryName
-	t_2.username = var1.names.username
-	t_2.isPremium = var1.isPremium
-	t_2.isVerified = var1.isVerified
-	t_2.isRobloxAdmin = var1.isRobloxAdmin
-	t_1.AvatarHeadshotComponent = createElement_1(var3, t_2)
-	t_1.SocialCountsRow = if var2 then reactModule.createElement(socialChipCountsRowModule, { layoutOrder = 2, size = UDim2.fromScale(1, 0) }) else nil
+	local t = {}
+	local CreateElementFunction = ReactModule.createElement
+	local config1 = { layoutOrder = 1, userId = p1.profileId }
+	local PrimaryName = UseProfileJsonComponentModuleResult.names.primaryName or ""
 	
-	return createElement(view, t, t_1)
+	if UseContextResult.profileUserNickname then
+	end
+	config1.primaryName = PrimaryName
+	config1.username = UseProfileJsonComponentModuleResult.names.username
+	config1.isPremium = UseProfileJsonComponentModuleResult.isPremium
+	config1.isVerified = UseProfileJsonComponentModuleResult.isVerified
+	config1.isRobloxAdmin = UseProfileJsonComponentModuleResult.isRobloxAdmin
+	t.AvatarHeadshotComponent = CreateElementFunction(AvatarHeadshotComponentModule, config1)
+	t.SocialCountsRow = if HasCounts then ReactModule.createElement(SocialChipCountsRowModule, { layoutOrder = 2, size = UDim2.fromScale(1, 0) }) else nil
+	
+	return CreateElementFunction1(View, config, t)
 end)

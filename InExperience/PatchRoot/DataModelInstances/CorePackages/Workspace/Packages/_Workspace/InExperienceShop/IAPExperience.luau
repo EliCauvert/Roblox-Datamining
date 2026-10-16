@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.IAPExperience.IAPExperience)
+﻿return (require(script.Parent.Parent.Parent._Index.IAPExperience.IAPExperience))

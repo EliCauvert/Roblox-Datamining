@@ -1,35 +1,35 @@
-﻿local currencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
-local parent = currencyTransfers.Parent
-local reactModule = require(parent.React)
-local sharedFlagsModule = require(parent.SharedFlags)
-local inExperienceTransferFlowModule = require(currencyTransfers.Flows.InExperienceTransferFlow)
-local inExperienceTransferUpsellAppModule = require(currencyTransfers.Components.InExperienceTransferUpsellApp)
-local useInExperienceTransferListenerEffectModule = require(currencyTransfers.Hooks.useInExperienceTransferListenerEffect)
+﻿local CurrencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
+local Parent = CurrencyTransfers.Parent
+local ReactModule = require(Parent.React)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local InExperienceTransferFlowModule = require(CurrencyTransfers.Flows.InExperienceTransferFlow)
+local InExperienceTransferUpsellAppModule = require(CurrencyTransfers.Components.InExperienceTransferUpsellApp)
+local UseInExperienceTransferListenerEffectModule = require(CurrencyTransfers.Hooks.useInExperienceTransferListenerEffect)
 
-return function()
-	-- upvalues: reactModule (ref), useInExperienceTransferListenerEffectModule (ref), inExperienceTransferFlowModule (ref), sharedFlagsModule (ref), inExperienceTransferUpsellAppModule (ref)
-	local var1, var2 = reactModule.useState(nil)
-	local var3 = reactModule.useCallback(function()
-		-- upvalues: var2 (ref)
-		var2(nil)
+return function() --[[ Line: 10 | Named "InExperienceTransferApp" ]]
+	-- upvalues: ReactModule (copy), UseInExperienceTransferListenerEffectModule (copy), InExperienceTransferFlowModule (copy), SharedFlagsModule (copy), InExperienceTransferUpsellAppModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 24 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(nil)
 	end, {})
-	useInExperienceTransferListenerEffectModule(reactModule.useCallback(function(p1)
-		-- upvalues: var2 (ref)
-		var2(function(p2)
-			-- upvalues: p1 (ref)
+	UseInExperienceTransferListenerEffectModule((ReactModule.useCallback(function(p1) --[[ Line: 13 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(function(p2) --[[ Line: 16 ]]
+			-- upvalues: p1 (copy)
 			return if p2 == nil then p1 else p2
 		end)
-	end, {}))
-	local var4 = reactModule.useMemo(function()
-		-- upvalues: var1 (ref), inExperienceTransferFlowModule (copy), var3 (ref)
-		return if var1 == nil then nil else inExperienceTransferFlowModule({ initiateResponse = var1, onClose = var3 })
-	end, { var1, var3 })
-	local var5 = if sharedFlagsModule.GetEngineFeatureEnablePromptRobuxTransferDedicatedUpsellEvent() then reactModule.createElement(inExperienceTransferUpsellAppModule) else nil
-	local var6 = if var4 then reactModule.createElement("ScreenGui", {
+	end, {})))
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 33 ]]
+		-- upvalues: UseStateResult (copy), InExperienceTransferFlowModule (upval), UseResult (copy)
+		return if UseStateResult == nil then nil else InExperienceTransferFlowModule({ initiateResponse = UseStateResult, onClose = UseResult })
+	end, { UseStateResult, UseResult })
+	local Element = if SharedFlagsModule.GetEngineFeatureEnablePromptRobuxTransferDedicatedUpsellEvent() then ReactModule.createElement(InExperienceTransferUpsellAppModule) else nil
+	local ScreenGui = if UseMemoResult then ReactModule.createElement("ScreenGui", {
 		DisplayOrder = 8,
 		ScreenInsets = Enum.ScreenInsets.None,
 		ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-	}, { InExperienceTransferFlow = var4 }) else nil
+	}, { InExperienceTransferFlow = UseMemoResult }) else nil
 	
-	return if not (not var6 and not var5) then if var5 then reactModule.createElement(reactModule.Fragment, nil, { FlowScreen = var6, UpsellApp = var5 }) else var6 else nil
+	return if ScreenGui or Element then if Element then ReactModule.createElement(ReactModule.Fragment, nil, { FlowScreen = ScreenGui, UpsellApp = Element }) else ScreenGui else nil
 end

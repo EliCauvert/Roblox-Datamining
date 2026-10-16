@@ -1,57 +1,57 @@
-﻿local avatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
-local parent = avatarExperienceCatalog.Parent
-local signalsModule = require(parent.Signals)
-local promiseModule = require(parent.Promise)
-local _ = require(parent.LuauPolyfill)
-local getFaeStatus = require(avatarExperienceCatalog.Api.GetFaeStatus.getFaeStatus).getFaeStatus
+﻿local AvatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
+local Parent = AvatarExperienceCatalog.Parent
+local SignalsModule = require(Parent.Signals)
+local PromiseModule = require(Parent.Promise)
+local _ = require(Parent.LuauPolyfill)
+local GetFaeStatusFunction = require(AvatarExperienceCatalog.Api.GetFaeStatus.getFaeStatus).getFaeStatus
 
-return function()
-	-- upvalues: signalsModule (ref), getFaeStatus (ref), promiseModule (ref)
-	local var1, var2 = signalsModule.createSignal(false)
-	local var3, var4 = signalsModule.createSignal(false)
-	local idle, idle_1 = signalsModule.createSignal("idle")
+return function() --[[ Line: 22 | Named "createFaeFeatureAccessStore" ]]
+	-- upvalues: SignalsModule (copy), GetFaeStatusFunction (copy), PromiseModule (copy)
+	local Signal, Signal2 = SignalsModule.createSignal(false)
+	local Signal1, Signal2_1 = SignalsModule.createSignal(false)
+	local Idle, Idle2 = SignalsModule.createSignal("idle")
 	
 	return {
-		getCanClaimFaeItem = var1,
-		getShowFaeUpsell = var3,
-		getFetchStatus = idle,
-		fetch = function(p1)
-			-- upvalues: idle_1 (ref), getFaeStatus (copy), promiseModule (copy), var2 (ref), var4 (ref)
-			idle_1("pending")
-			local var5, _ = getFaeStatus(p1)
+		getCanClaimFaeItem = Signal,
+		getShowFaeUpsell = Signal1,
+		getFetchStatus = Idle,
+		fetch = function(p1) --[[ Line: 28 ]]
+			-- upvalues: Idle2 (copy), GetFaeStatusFunction (upval), PromiseModule (upval), Signal2 (copy), Signal2_1 (copy)
+			Idle2("pending")
+			local FaeStatus, _ = GetFaeStatusFunction(p1)
 			
-			return promiseModule.resolve(var5):andThen(function(p2)
-				-- upvalues: promiseModule (copy), var2 (copy), var4 (copy), idle_1 (copy)
-				if not p2 then
-					return promiseModule.reject()
+			return PromiseModule.resolve(FaeStatus):andThen(function(Result) --[[ Line: 32 ]]
+				-- upvalues: PromiseModule (upval), Signal2 (upval), Signal2_1 (upval), Idle2 (upval)
+				if not Result then
+					return PromiseModule.reject()
 				end
-				local var6 = false
-				local isGranted = false
+				local IsGranted = false
+				local IsGranted1 = false
 				
-				for i, v in p2.features do
-					if v.featureName == "AllowFaeItemToBeClaimed" then
-						local _ = v.access == "Granted"
-					elseif v.featureName == "ShowFaeUpsellInMarketplace" then
-						isGranted = v.access == "Granted"
+				for _, feature in Result.features do
+					if feature.featureName == "AllowFaeItemToBeClaimed" then
+						IsGranted = feature.access == "Granted"
+					elseif feature.featureName == "ShowFaeUpsellInMarketplace" then
+						IsGranted1 = feature.access == "Granted"
 					end
 				end
-				var2(var6)
-				var4(isGranted)
-				idle_1("success")
+				Signal2(IsGranted)
+				Signal2_1(IsGranted1)
+				Idle2("success")
 				
-				return promiseModule.resolve()
-			end):catch(function(p3)
-				-- upvalues: idle_1 (copy), promiseModule (copy)
-				idle_1("idle")
+				return PromiseModule.resolve()
+			end):catch(function(Err) --[[ Line: 49 ]]
+				-- upvalues: Idle2 (upval), PromiseModule (upval)
+				Idle2("idle")
 				
-				return promiseModule.reject(p3)
+				return PromiseModule.reject(Err)
 			end)
 		end,
-		reset = function()
-			-- upvalues: var2 (ref), var4 (ref), idle_1 (ref)
-			var2(false)
-			var4(false)
-			idle_1("idle")
+		reset = function() --[[ Line: 55 ]]
+			-- upvalues: Signal2 (copy), Signal2_1 (copy), Idle2 (copy)
+			Signal2(false)
+			Signal2_1(false)
+			Idle2("idle")
 		end
 	}
 end

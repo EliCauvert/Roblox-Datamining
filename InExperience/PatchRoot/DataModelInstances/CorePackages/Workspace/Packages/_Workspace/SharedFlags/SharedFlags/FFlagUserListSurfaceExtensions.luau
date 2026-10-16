@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("UserListSurfaceExtensions", false)
+﻿return game:DefineFastFlag("UserListSurfaceExtensions_DEV", false)

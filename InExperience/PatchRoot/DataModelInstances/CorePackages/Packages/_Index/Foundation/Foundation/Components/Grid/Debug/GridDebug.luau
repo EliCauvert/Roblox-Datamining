@@ -1,111 +1,115 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local breakpointModule = require(foundation.Enums.Breakpoint)
-local gridDebugStyleSheetModule = require(script.Parent.GridDebugStyleSheet)
-local reactModule = require(parent.React)
-local styleSheetContextModule = require(foundation.Providers.Style.StyleSheetContext)
-local textModule = require(foundation.Components.Text)
-local viewModule = require(foundation.Components.View)
-local getGridMetricsModule = require(foundation.Utility.getGridMetrics)
-local useBreakpointModule = require(foundation.Providers.Responsive.Hooks.useBreakpoint)
-local useResponsiveModule = require(foundation.Providers.Responsive.useResponsive)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local BreakpointModule = require(Foundation.Enums.Breakpoint)
+local GridDebugStyleSheetModule = require(script.Parent.GridDebugStyleSheet)
+local ReactModule = require(Foundation.Parent.React)
+local StyleSheetContextModule = require(Foundation.Providers.Style.StyleSheetContext)
+local TextModule = require(Foundation.Components.Text)
+local ViewModule = require(Foundation.Components.View)
+local GetGridMetricsModule = require(Foundation.Utility.getGridMetrics)
+local UseBreakpointModule = require(Foundation.Providers.Responsive.Hooks.useBreakpoint)
+local UseResponsiveModule = require(Foundation.Providers.Responsive.useResponsive)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
 
-local function DebugCol(p1)
-	-- upvalues: reactModule (ref), viewModule (ref)
-	return reactModule.createElement(viewModule, {
-		Size = p1.size or UDim2.new(0, p1.width or 0, 1, 0),
-		backgroundStyle = p1.backgroundStyle,
-		LayoutOrder = p1.LayoutOrder,
-		tag = p1.tag
+local function DebugCol(Frame) --[[ Line: 29 ]]
+	-- upvalues: ReactModule (copy), ViewModule (copy)
+	return ReactModule.createElement(ViewModule, {
+		Size = Frame.size or UDim2.new(0, Frame.width or 0, 1, 0),
+		backgroundStyle = Frame.backgroundStyle,
+		LayoutOrder = Frame.LayoutOrder,
+		tag = Frame.tag
 	})
 end
 
-local t = { debugTransparency = 0.7 }
+local config = { debugTransparency = 0.7 }
 
-return function(p1)
-	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), reactModule (ref), useResponsiveModule (ref), useBreakpointModule (ref), getGridMetricsModule (ref), breakpointModule (ref), DebugCol (ref), viewModule (ref), gridDebugStyleSheetModule (ref), textModule (ref), styleSheetContextModule (ref)
-	local var1 = withDefaultsModule(p1, t)
-	local var2 = useTokensModule()
-	local var3, var4 = reactModule.useState(nil)
-	local var5 = useResponsiveModule()
-	local var6, var7 = reactModule.useState(nil)
-	local var8, var9 = useBreakpointModule(var6)
-	local var10 = getGridMetricsModule(var5.config, var8, var9.X)
-	local xLarge = var5.config.breakpoint.widths[breakpointModule.XLarge]
-	local t_1 = {}
-	local align = ({
+return function(p1) --[[ Line: 48 | Named "GridDebug" ]]
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), ReactModule (copy), UseResponsiveModule (copy), UseBreakpointModule (copy), GetGridMetricsModule (copy), BreakpointModule (copy), DebugCol (copy), ViewModule (copy), GridDebugStyleSheetModule (copy), TextModule (copy), StyleSheetContextModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
+	local UseTokensModuleResult = UseTokensModule()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	local UseResponsiveModuleResult = UseResponsiveModule()
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
+	local UseBreakpointModuleResult, UseBreakpointModuleResult2 = UseBreakpointModule(UseStateResult1)
+	local GridMetricsModule = GetGridMetricsModule(UseResponsiveModuleResult.config, UseBreakpointModuleResult, UseBreakpointModuleResult2.X)
+	local Width = UseResponsiveModuleResult.config.breakpoint.widths[BreakpointModule.XLarge]
+	local Elements = {}
+	local Entry = ({
 		[Enum.ItemLineAlignment.Start] = "position-top-left anchor-top-left",
 		[Enum.ItemLineAlignment.Center] = "position-top-center anchor-top-center",
 		[Enum.ItemLineAlignment.End] = "position-top-right anchor-top-right"
-	})[var1.align]
+	})[WithDefaultsModuleResult.align]
 	
-	for i = 1, var10.full.colCount - 1 do
-		if i < var10.full.colCount then
-			table.insert(t_1, reactModule.createElement(DebugCol, {
+	for i = 1, GridMetricsModule.full.colCount - 1 do
+		if i < GridMetricsModule.full.colCount then
+			table.insert(Elements, ReactModule.createElement(DebugCol, {
 				key = `DebugCol{i}`,
-				width = var10.gutterWidth,
+				width = GridMetricsModule.gutterWidth,
 				backgroundStyle = {
 					Transparency = 0.5,
-					Color3 = var2.Color.System.Alert.Color3
+					Color3 = UseTokensModuleResult.Color.System.Alert.Color3
 				},
 				LayoutOrder = i
 			}))
 		end
 	end
-	return reactModule.createElement(viewModule, { tag = `size-full-full {align}` }, {
-		GridDebugStyleSheet = reactModule.createElement(gridDebugStyleSheetModule, { breakpoint = var8, ref = var4 }),
-		GridDebugMeasureWrapper = reactModule.createElement(viewModule, { tag = "size-full-0", ref = var7 }, {
-			GridMeasureSizeConstraint = reactModule.createElement("UISizeConstraint", { MaxSize = Vector2.new(xLarge, 1e999) })
+	return ReactModule.createElement(ViewModule, { tag = `size-full-full {Entry}` }, {
+		GridDebugStyleSheet = ReactModule.createElement(GridDebugStyleSheetModule, {
+			breakpoint = UseBreakpointModuleResult,
+			ref = UseStateResult2
 		}),
-		GridDebugMeasure = reactModule.createElement(viewModule, {
+		GridDebugMeasureWrapper = ReactModule.createElement(ViewModule, { tag = "size-full-0", ref = UseStateResult2_1 }, {
+			GridMeasureSizeConstraint = ReactModule.createElement("UISizeConstraint", { MaxSize = Vector2.new(Width, 1e999) })
+		}),
+		GridDebugMeasure = ReactModule.createElement(ViewModule, {
 			Size = UDim2.new(1, 0, 0, 4),
 			backgroundStyle = {
 				Color3 = Color3.fromRGB(255, 0, 0),
-				Transparency = var1.debugTransparency
+				Transparency = WithDefaultsModuleResult.debugTransparency
 			}
 		}),
-		GridDebugSizeConstraint = reactModule.createElement("UISizeConstraint", { MaxSize = Vector2.new(xLarge, 1e999) }),
-		GridDebugSizeLabel = reactModule.createElement(textModule, {
+		GridDebugSizeConstraint = ReactModule.createElement("UISizeConstraint", { MaxSize = Vector2.new(Width, 1e999) }),
+		GridDebugSizeLabel = ReactModule.createElement(TextModule, {
 			tag = "position-top-center anchor-top-center auto-xy padding-xxsmall text-label-small text-truncate-end bg-over-media-300",
-			Text = `breakpoint: {var5.config.breakpoint.shortNames[var8]}, width: {var9.X}, columns: {var10.full.colCount}, maxWidth: {xLarge}, margin: {var10.margin}, gapWidth: {var10.gutterWidth}`
+			Text = `breakpoint: {UseResponsiveModuleResult.config.breakpoint.shortNames[UseBreakpointModuleResult]}, width: {UseBreakpointModuleResult2.X}, columns: {GridMetricsModule.full.colCount}, maxWidth: {Width}, margin: {GridMetricsModule.margin}, gapWidth: {GridMetricsModule.gutterWidth}`
 		}),
-		GridDebug = reactModule.createElement(viewModule, {
+		GridDebug = ReactModule.createElement(ViewModule, {
 			tag = "row size-full-full",
 			backgroundStyle = {
-				Color3 = var2.Color.System.Emphasis.Color3,
-				Transparency = var1.debugTransparency
+				Color3 = UseTokensModuleResult.Color.System.Emphasis.Color3,
+				Transparency = WithDefaultsModuleResult.debugTransparency
 			}
 		}, {
-			LeftMargin = reactModule.createElement(DebugCol, {
+			LeftMargin = ReactModule.createElement(DebugCol, {
 				LayoutOrder = 0,
-				width = var10.margin,
+				width = GridMetricsModule.margin,
 				backgroundStyle = {
-					Color3 = var2.Color.System.Warning.Color3,
-					Transparency = var1.debugTransparency
+					Color3 = UseTokensModuleResult.Color.System.Warning.Color3,
+					Transparency = WithDefaultsModuleResult.debugTransparency
 				}
 			}),
-			Columns = reactModule.createElement(viewModule, {
+			Columns = ReactModule.createElement(ViewModule, {
 				tag = "row flex-x-evenly fill size-0-full",
 				LayoutOrder = 1,
 				backgroundStyle = {
-					Color3 = var2.Color.System.Emphasis.Color3,
-					Transparency = var1.debugTransparency
+					Color3 = UseTokensModuleResult.Color.System.Emphasis.Color3,
+					Transparency = WithDefaultsModuleResult.debugTransparency
 				}
-			}, t_1),
-			RightMargin = reactModule.createElement(DebugCol, {
+			}, Elements),
+			RightMargin = ReactModule.createElement(DebugCol, {
 				LayoutOrder = 2,
-				width = var10.margin,
+				width = GridMetricsModule.margin,
 				backgroundStyle = {
-					Color3 = var2.Color.System.Warning.Color3,
-					Transparency = var1.debugTransparency
+					Color3 = UseTokensModuleResult.Color.System.Warning.Color3,
+					Transparency = WithDefaultsModuleResult.debugTransparency
 				}
 			})
 		}),
-		GridDebugContent = if var3 then reactModule.createElement(styleSheetContextModule.Provider, { value = var3 }, reactModule.createElement(viewModule, { tag = "size-full-full" }, {
-			GridDebugPadding = reactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, var10.gapHeight * 2) }),
-			GridDebugChildren = reactModule.createElement(reactModule.Fragment, nil, p1.children)
+		GridDebugContent = if UseStateResult then ReactModule.createElement(StyleSheetContextModule.Provider, { value = UseStateResult }, ReactModule.createElement(ViewModule, { tag = "size-full-full" }, {
+			GridDebugPadding = ReactModule.createElement("UIPadding", {
+				PaddingTop = UDim.new(0, GridMetricsModule.gapHeight * 2)
+			}),
+			GridDebugChildren = ReactModule.createElement(ReactModule.Fragment, nil, p1.children)
 		})) else nil
 	})
 end

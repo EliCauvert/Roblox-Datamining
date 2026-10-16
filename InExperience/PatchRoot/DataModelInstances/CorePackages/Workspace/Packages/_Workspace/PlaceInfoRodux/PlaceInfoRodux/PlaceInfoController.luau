@@ -1,97 +1,95 @@
-﻿local parent = script:FindFirstAncestor("PlaceInfoRodux").Parent
-local promiseModule = require(parent.Promise)
-local httpModule = require(parent.Http)
-local httpRequestModule = require(parent.HttpRequest)
-local _ = require(parent.LuauPolyfill)
-local url = httpModule.Url
-local t = {}
-t.__index = t
+﻿local Parent = script:FindFirstAncestor("PlaceInfoRodux").Parent
+local PromiseModule = require(Parent.Promise)
+local HttpRequestModule = require(Parent.HttpRequest)
+local _ = require(Parent.LuauPolyfill)
+local Url = require(Parent.Http).Url
+local PlaceInfoController = {}
+PlaceInfoController.__index = PlaceInfoController
 
-function t.new(p1)
-	-- upvalues: httpRequestModule (ref), t (ref)
-	return setmetatable({
-		_placeInfo = {},
-		_requestImpl = p1 or httpRequestModule.config({
-			requestFunction = function(p2, p3, p4)
-				-- upvalues: httpRequestModule (copy)
-				return httpRequestModule.requestFunctions.HttpRbxApi(p2, p3, p4)
-			end
-		})
-	}, t)
+function PlaceInfoController.new(p1) --[[ Line: 59 ]]
+	-- upvalues: HttpRequestModule (copy), PlaceInfoController (copy)
+	local ConfigResult = HttpRequestModule.config({
+		requestFunction = function(p2, p3, p4) --[[ Line: 63 ]]
+			-- upvalues: HttpRequestModule (upval)
+			return HttpRequestModule.requestFunctions.HttpRbxApi(p2, p3, p4)
+		end
+	})
+	
+	return (setmetatable({ _placeInfo = {}, _requestImpl = p1 or ConfigResult }, PlaceInfoController))
 end
 
-function t:name(p1)
+function PlaceInfoController:name(p1) --[[ Line: 74 ]]
 	return self:_getInfo(p1, "name")
 end
 
-function t:description(p1)
+function PlaceInfoController:description(p1) --[[ Line: 78 ]]
 	return self:_getInfo(p1, "description")
 end
 
-function t:universeId(p1)
+function PlaceInfoController:universeId(p1) --[[ Line: 82 ]]
 	return self:_getInfo(p1, "universeId")
 end
 
-function t:_fetchPlacesInfo(p1)
-	-- upvalues: url (ref)
-	return self._requestImpl(string.format("%sv1/games/multiget-place-details?%s", url.GAME_URL, url:makeQueryString({ placeIds = p1 })), "GET")
+function PlaceInfoController:_fetchPlacesInfo(PlaceIds) --[[ Line: 88 ]]
+	-- upvalues: Url (copy)
+	return self._requestImpl(string.format("%sv1/games/multiget-place-details?%s", Url.GAME_URL, (Url:makeQueryString({ placeIds = PlaceIds }))), "GET")
 end
 
-function t:getPlacesInfo(p1)
-	-- upvalues: promiseModule (ref)
-	local var1 = promiseModule.new(function(p2, p3)
-		-- upvalues: self (ref), p1 (ref)
-		self:_fetchPlacesInfo(p1):andThen(function(p4)
-			-- upvalues: p2 (ref), self (copy)
-			if not p4 or not p4.responseBody then
-				p2(nil)
+function PlaceInfoController:getPlacesInfo(PlaceIds) --[[ Line: 101 ]]
+	-- upvalues: PromiseModule (copy)
+	local NewPromise = PromiseModule.new(function(Callback, Callback1) --[[ Line: 102 ]]
+		-- upvalues: self (copy), PlaceIds (copy)
+		self:_fetchPlacesInfo(PlaceIds):andThen(function(Result) --[[ Line: 104 ]]
+			-- upvalues: Callback (copy), self (upval)
+			if not Result or not Result.responseBody then
+				Callback(nil)
 				
 				return
 			end
 			local t = {}
 			
-			for i, v in p4.responseBody do
-				local t_1 = {
-					universeId = v.universeId,
-					name = v.name,
-					description = v.description
+			for _, value in Result.responseBody do
+				local config = {
+					universeId = value.universeId,
+					name = value.name,
+					description = value.description
 				}
-				t[v.placeId] = t_1
-				self._placeInfo[v.placeId] = t_1
+				t[value.placeId] = config
+				self._placeInfo[value.placeId] = config
 			end
-			p2(t)
-		end):catch(function(p5)
-			-- upvalues: p3 (ref)
-			p3(p5)
+			Callback(t)
+		end):catch(function(Err) --[[ Line: 124 ]]
+			-- upvalues: Callback1 (copy)
+			Callback1(Err)
 		end)
 	end)
-	local t = {}
+	local Places = {}
 	
-	for i, v in p1 do
-		if self._placeInfo[v] then
-			t[v] = promiseModule.resolve(self._placeInfo[v])
+	for _, placeId in PlaceIds do
+		if self._placeInfo[placeId] then
+			Places[placeId] = PromiseModule.resolve(self._placeInfo[placeId])
 		else
-			self._placeInfo[v] = var1:andThen(function(p4)
-				-- upvalues: v (ref)
-				return p4[v]
+			self._placeInfo[placeId] = NewPromise:andThen(function(Result) --[[ Line: 135 ]]
+				-- upvalues: placeId (copy)
+				return Result[placeId]
 			end)
-			t[v] = self._placeInfo[v]
+			Places[placeId] = self._placeInfo[placeId]
 		end
 	end
-	return t
+	return Places
 end
 
-function t:_getInfo(p4, p5)
-	-- upvalues: promiseModule (ref)
-	return if self._placeInfo[p4] and self._placeInfo[p4][p5] then promiseModule.resolve(self._placeInfo[p4][p5]) elseif self._placeInfo[p4] then self._placeInfo[p4]:andThen(function(_)
-		-- upvalues: self (ref), p4 (ref), p5 (ref)
-		return self._placeInfo[p4][p5]
-	end) else self:getPlacesInfo({ p4 })[p4]:andThen(function(p6)
-		-- upvalues: p5 (ref)
-		return p6[p5]
+function PlaceInfoController._getInfo(p1, p2, p3) --[[ Line: 144 ]]
+	-- upvalues: PromiseModule (copy)
+	return if p1._placeInfo[p2] and p1._placeInfo[p2][p3] then PromiseModule.resolve(p1._placeInfo[p2][p3]) elseif p1._placeInfo[p2] then p1._placeInfo[p2]:andThen(function(_) --[[ Line: 151 ]]
+		-- upvalues: p1 (copy), p2 (copy), p3 (copy)
+		return p1._placeInfo[p2][p3]
+	end) else p1:getPlacesInfo({ p2 })[p2]:andThen(function(Result) --[[ Line: 156 ]]
+		-- upvalues: p3 (copy)
+		return Result[p3]
 	end)
 end
 
-t.default = t.new()
+PlaceInfoController.default = PlaceInfoController.new()
 
-return t
+return PlaceInfoController

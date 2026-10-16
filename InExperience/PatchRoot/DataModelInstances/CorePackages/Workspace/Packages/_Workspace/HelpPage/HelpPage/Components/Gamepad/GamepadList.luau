@@ -1,205 +1,207 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local reactModule = require(parent_1.React)
-local foundationModule = require(parent_1.Foundation)
-local _ = require(parent.Configs.ConfigTypes)
-local constantsModule = require(parent.Constants)
-local _ = require(parent.Components.Common.ActionText)
-local useLocalization = require(parent_1.Localization).Hooks.useLocalization
-local controlActionRowModule = require(parent.Components.Common.ControlActionRow)
-local view = foundationModule.View
-local text = foundationModule.Text
-local icon = foundationModule.Icon
-local enums = foundationModule.Enums
-local useTokens = foundationModule.Hooks.useTokens
-local extraKeysEnumModule = require(parent.Enums.ExtraKeysEnum)
-local fFlagHelpPageCCLModule = require(parent.Flags.FFlagHelpPageCCL)
-local var1 = reactModule.memo(function(p1)
-	-- upvalues: useLocalization (ref), reactModule (ref), text (ref)
-	return reactModule.createElement(text, {
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
+local FoundationModule = require(Parent1.Foundation)
+local _ = require(Parent.Configs.ConfigTypes)
+local ConstantsModule = require(Parent.Constants)
+local _ = require(Parent.Components.Common.ActionText)
+local UseLocalizationFunction = require(Parent1.Localization).Hooks.useLocalization
+local ControlActionRowModule = require(Parent.Components.Common.ControlActionRow)
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local Icon = FoundationModule.Icon
+local Enums = FoundationModule.Enums
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local ExtraKeysEnumModule = require(Parent.Enums.ExtraKeysEnum)
+local FFlagHelpPageCCLModule = require(Parent.Flags.FFlagHelpPageCCL)
+local MemoResult = ReactModule.memo(function(p1) --[[ Line: 69 ]]
+	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), Text (copy)
+	return ReactModule.createElement(Text, {
 		tag = "auto-xy text-title-large text-align-x-center text-align-y-center",
-		Text = useLocalization({ action = p1.action }).action
+		Text = UseLocalizationFunction({ action = p1.action }).action
 	})
 end)
-local var2 = reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), extraKeysEnumModule (ref), constantsModule (ref), view (ref), icon (ref), enums (ref), fFlagHelpPageCCLModule (ref)
-	local var3 = useTokens()
-	local var4 = if p1.isDisabled then {
+local MemoResult1 = ReactModule.memo(function(Frame) --[[ Line: 80 ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), ExtraKeysEnumModule (copy), ConstantsModule (copy), View (copy), Icon (copy), Enums (copy), FFlagHelpPageCCLModule (copy)
+	local UseTokensResult = UseTokensFunction()
+	local Config = if Frame.isDisabled then {
 		Transparency = 0.5,
-		Color3 = var3.Color.Content.Default.Color3
+		Color3 = UseTokensResult.Color.Content.Default.Color3
 	} else nil
-	local var5 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref), extraKeysEnumModule (copy), constantsModule (copy)
-		local t = {}
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 90 ]]
+		-- upvalues: Frame (copy), ExtraKeysEnumModule (upval), ConstantsModule (upval)
+		local GAMEPADICONMAPPLAYSTATIONEntries = {}
 		
-		for i, v in ipairs(p1.buttons) do
-			if v == extraKeysEnumModule.TouchPad then
-				if constantsModule.HELP_PAGE.GAMEPAD_PLAYSTATION_PLATFORMS[p1.platform] then
-					if p1.platform == Enum.Platform.PS5 and constantsModule.HELP_PAGE.GAMEPAD_ICON_MAP_PLAYSTATION_5[v] ~= nil then
-						t[v] = constantsModule.HELP_PAGE.GAMEPAD_ICON_MAP_PLAYSTATION_5[v]
-					else
-						t[v] = constantsModule.HELP_PAGE.GAMEPAD_ICON_MAP_PLAYSTATION[v]
-					end
+		for _, button in ipairs(Frame.buttons) do
+			if button ~= ExtraKeysEnumModule.TouchPad then
+				GAMEPADICONMAPPLAYSTATIONEntries[button] = if Frame.isSpatial then ConstantsModule.HELP_PAGE.GAMEPAD_ICON_MAP_SPATIAL[button] elseif ConstantsModule.HELP_PAGE.GAMEPAD_PLAYSTATION_PLATFORMS[Frame.platform] then if Frame.platform == Enum.Platform.PS5 and ConstantsModule.HELP_PAGE.GAMEPAD_ICON_MAP_PLAYSTATION_5[button] ~= nil then ConstantsModule.HELP_PAGE.GAMEPAD_ICON_MAP_PLAYSTATION_5[button] else ConstantsModule.HELP_PAGE.GAMEPAD_ICON_MAP_PLAYSTATION[button] else ConstantsModule.HELP_PAGE.GAMEPAD_ICON_MAP_XBOX[button]
+			elseif ConstantsModule.HELP_PAGE.GAMEPAD_PLAYSTATION_PLATFORMS[Frame.platform] then
+				if Frame.platform == Enum.Platform.PS5 and ConstantsModule.HELP_PAGE.GAMEPAD_ICON_MAP_PLAYSTATION_5[button] ~= nil then
+					GAMEPADICONMAPPLAYSTATIONEntries[button] = ConstantsModule.HELP_PAGE.GAMEPAD_ICON_MAP_PLAYSTATION_5[button]
+				else
+					GAMEPADICONMAPPLAYSTATIONEntries[button] = ConstantsModule.HELP_PAGE.GAMEPAD_ICON_MAP_PLAYSTATION[button]
 				end
 			end
-			local _ = nil
-			t[v] = if p1.isSpatial then constantsModule.HELP_PAGE.GAMEPAD_ICON_MAP_SPATIAL[v] elseif not constantsModule.HELP_PAGE.GAMEPAD_PLAYSTATION_PLATFORMS[p1.platform] then if p1.platform == Enum.Platform.PS5 and constantsModule.HELP_PAGE.GAMEPAD_ICON_MAP_PLAYSTATION_5[v] ~= nil then constantsModule.HELP_PAGE.GAMEPAD_ICON_MAP_PLAYSTATION_5[v] else constantsModule.HELP_PAGE.GAMEPAD_ICON_MAP_PLAYSTATION[v] else constantsModule.HELP_PAGE.GAMEPAD_ICON_MAP_XBOX[v]
 		end
-		return t
-	end, { p1.buttons, p1.isSpatial, p1.platform })
-	local var6 = #p1.buttons + (if p1.addBlankIcon and p1.layoutOrderReversed then 1 else 0)
+		return GAMEPADICONMAPPLAYSTATIONEntries
+	end, { Frame.buttons, Frame.isSpatial, Frame.platform })
+	local v1 = #Frame.buttons + (if Frame.addBlankIcon and Frame.layoutOrderReversed then 1 else 0)
+	local NewSize = UseTokensResult.Size.Size_600 * v1 + UseTokensResult.Gap.XSmall * (v1 - 1)
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = {
-			["row align-x-center align-y-center gap-xsmall auto-xy"] = not fFlagHelpPageCCLModule,
-			["row align-x-right align-y-center gap-xsmall auto-y"] = fFlagHelpPageCCLModule and not p1.layoutOrderReversed,
-			["row align-x-left align-y-center gap-xsmall auto-y"] = fFlagHelpPageCCLModule and p1.layoutOrderReversed
+			["row align-x-center align-y-center gap-xsmall auto-xy"] = not FFlagHelpPageCCLModule,
+			["row align-x-right align-y-center gap-xsmall auto-y"] = FFlagHelpPageCCLModule and not Frame.layoutOrderReversed,
+			["row align-x-left align-y-center gap-xsmall auto-y"] = FFlagHelpPageCCLModule and Frame.layoutOrderReversed
 		},
-		Size = if fFlagHelpPageCCLModule then UDim2.fromOffset(var3.Size.Size_600 * var6 + var3.Gap.XSmall * (var6 - 1), 0) else nil,
-		LayoutOrder = p1.LayoutOrder,
-		testId = p1.testId .. "Container"
-	}, reactModule.useMemo(function()
-		-- upvalues: p1 (ref), reactModule (copy), view (copy), var3 (ref), var5 (ref), constantsModule (copy), icon (copy), enums (copy), var4 (ref)
-		local t = {}
+		Size = if FFlagHelpPageCCLModule then UDim2.fromOffset(NewSize, 0) else nil,
+		LayoutOrder = Frame.LayoutOrder,
+		testId = Frame.testId .. "Container"
+	}, (ReactModule.useMemo(function() --[[ Line: 132 ]]
+		-- upvalues: Frame (copy), ReactModule (upval), View (upval), UseTokensResult (copy), UseMemoResult (copy), ConstantsModule (upval), Icon (upval), Enums (upval), Config (copy)
+		local Elements = {}
 		
-		if p1.addBlankIcon and p1.layoutOrderReversed then
-			table.insert(t, reactModule.createElement(view, {
+		if Frame.addBlankIcon and Frame.layoutOrderReversed then
+			table.insert(Elements, ReactModule.createElement(View, {
 				BackgroundTransparency = 1,
 				LayoutOrder = -1,
 				key = "BlankIconBefore",
-				Size = UDim2.fromOffset(var3.Size.Size_600, var3.Size.Size_600)
+				Size = UDim2.fromOffset(UseTokensResult.Size.Size_600, UseTokensResult.Size.Size_600)
 			}))
 		end
-		for i, v in var5 do
-			table.insert(t, reactModule.createElement(view, {
+		for i, Name in UseMemoResult do
+			table.insert(Elements, ReactModule.createElement(View, {
 				tag = "align-x-center align-y-center auto-xy",
-				LayoutOrder = constantsModule.HELP_PAGE.GAMEPAD_LAYOUT_ORDER[i],
-				key = constantsModule.HELP_PAGE.GAMEPAD_LAYOUT_ORDER[i]
+				LayoutOrder = ConstantsModule.HELP_PAGE.GAMEPAD_LAYOUT_ORDER[i],
+				key = ConstantsModule.HELP_PAGE.GAMEPAD_LAYOUT_ORDER[i]
 			}, {
-				Icon = reactModule.createElement(icon, {
-					name = v,
-					size = enums.IconSize.Large,
-					style = var4,
-					testId = p1.testId
+				Icon = ReactModule.createElement(Icon, {
+					name = Name,
+					size = Enums.IconSize.Large,
+					style = Config,
+					testId = Frame.testId
 				})
 			}))
 		end
-		return t
+		return Elements
 	end, {
-		var5, p1.addBlankIcon, p1.layoutOrderReversed, var4, p1.testId,
-		var3.Size.Size_600
-	}))
+		UseMemoResult, Frame.addBlankIcon, Frame.layoutOrderReversed, Config,
+		Frame.testId, UseTokensResult.Size.Size_600
+	})))
 end)
-local var7 = reactModule.memo(function(p2)
-	-- upvalues: useTokens (ref), reactModule (ref), controlActionRowModule (ref), var2 (ref)
-	local var8 = useTokens()
-	local var9 = if p2.layoutOrderReversed then 1 else 2
-	local var10 = #p2.buttons + (if p2.addBlankIcon and p2.layoutOrderReversed then 1 else 0)
-	local var11 = var8.Size.Size_600 * var10 + var8.Gap.XSmall * (var10 - 1)
-	local var12 = true
+local MemoResult2 = ReactModule.memo(function(p1) --[[ Line: 189 ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), ControlActionRowModule (copy), MemoResult1 (copy)
+	local UseTokensResult = UseTokensFunction()
+	local LayoutOrder: number = if p1.layoutOrderReversed then 1 else 2
+	local v2 = #p1.buttons + (if p1.addBlankIcon and p1.layoutOrderReversed then 1 else 0)
+	local NewSize = UseTokensResult.Size.Size_600 * v2 + UseTokensResult.Gap.XSmall * (v2 - 1)
+	local IsDisabled = true
 	
-	for i, v in ipairs(p2.actionLabels) do
-		if not v.disabled then
-			var12 = false
+	for _, actionLabel in ipairs(p1.actionLabels) do
+		if not actionLabel.disabled then
+			IsDisabled = false
 			break
 		end
 	end
-	return reactModule.createElement(controlActionRowModule, {
-		actionLabels = p2.actionLabels,
-		layoutOrderReversed = p2.layoutOrderReversed,
-		layoutOrder = p2.layoutOrder,
-		iconWidth = var11,
-		testId = "GamepadActionText-" .. p2.testId,
-		icon = reactModule.createElement(var2, {
-			buttons = p2.buttons,
-			platform = p2.platform,
-			addBlankIcon = p2.addBlankIcon,
-			layoutOrderReversed = p2.layoutOrderReversed,
-			isSpatial = p2.isSpatial,
-			isDisabled = var12,
-			testId = "GamepadActionIcon-" .. p2.testId,
-			LayoutOrder = var9
+	return ReactModule.createElement(ControlActionRowModule, {
+		actionLabels = p1.actionLabels,
+		layoutOrderReversed = p1.layoutOrderReversed,
+		layoutOrder = p1.layoutOrder,
+		iconWidth = NewSize,
+		testId = "GamepadActionText-" .. p1.testId,
+		icon = ReactModule.createElement(MemoResult1, {
+			buttons = p1.buttons,
+			platform = p1.platform,
+			addBlankIcon = p1.addBlankIcon,
+			layoutOrderReversed = p1.layoutOrderReversed,
+			isSpatial = p1.isSpatial,
+			isDisabled = IsDisabled,
+			testId = "GamepadActionIcon-" .. p1.testId,
+			LayoutOrder = LayoutOrder
 		})
 	})
 end)
 
-return reactModule.memo(reactModule.memo(function(p3)
-	-- upvalues: reactModule (ref), constantsModule (ref), fFlagHelpPageCCLModule (ref), var7 (ref), view (ref), var1 (ref), var2 (ref)
-	local var13, var14, var15 = reactModule.useMemo(function()
-		-- upvalues: p3 (ref), constantsModule (copy), fFlagHelpPageCCLModule (copy), reactModule (copy), var7 (copy), view (copy), var1 (copy), var2 (copy)
-		local t = {}
-		local t_1 = {}
-		local t_2 = {}
+return ReactModule.memo((ReactModule.memo(function(p2) --[[ Line: 221 ]]
+	-- upvalues: ReactModule (copy), ConstantsModule (copy), FFlagHelpPageCCLModule (copy), MemoResult2 (copy), View (copy), MemoResult (copy), MemoResult1 (copy)
+	local UseMemoResult, UseMemoResult2, UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 223 ]]
+		-- upvalues: p2 (copy), ConstantsModule (upval), FFlagHelpPageCCLModule (upval), ReactModule (upval), MemoResult2 (upval), View (upval), MemoResult (upval), MemoResult1 (upval)
+		local Elements = {}
+		local Elements1 = {}
+		local Elements2 = {}
 		
-		for i, v in p3.controls do
-			if v.gamepadInput then
-				local gamepadInput = v.gamepadInput
-				local input = gamepadInput.input
+		for TestId, control in p2.controls do
+			if control.gamepadInput then
+				local GamepadInput = control.gamepadInput
+				local Input = GamepadInput.input
 				
-				if input == nil then
-					input = if p3.isSpatial then gamepadInput.spatialGamepadInput elseif constantsModule.HELP_PAGE.GAMEPAD_PLAYSTATION_PLATFORMS[p3.platform] then gamepadInput.playstationInput else gamepadInput.xboxInput
+				if Input == nil then
+					Input = if p2.isSpatial then GamepadInput.spatialGamepadInput elseif ConstantsModule.HELP_PAGE.GAMEPAD_PLAYSTATION_PLATFORMS[p2.platform] then GamepadInput.playstationInput else GamepadInput.xboxInput
 				end
-				if input ~= nil and #input > 0 then
-					local var16 = constantsModule.HELP_PAGE.GAMEPAD_LAYOUT_ORDER[input[1]]
+				if Input ~= nil and #Input > 0 then
+					local GAMEPADLAYOUTORDEREntry = ConstantsModule.HELP_PAGE.GAMEPAD_LAYOUT_ORDER[Input[1]]
 					
-					if p3.layoutOrderReversed then
-						var16 = -var16
+					if p2.layoutOrderReversed then
+						GAMEPADLAYOUTORDEREntry = -GAMEPADLAYOUTORDEREntry
 					end
-					if fFlagHelpPageCCLModule then
-						table.insert(t_2, reactModule.createElement(var7, {
-							actionLabels = v.actionLabels or { { label = v.label } },
-							buttons = input,
-							platform = p3.platform,
-							layoutOrder = var16,
-							layoutOrderReversed = p3.layoutOrderReversed,
-							addBlankIcon = p3.addBlankIcon,
-							isSpatial = p3.isSpatial,
-							testId = i,
-							key = "ActionRow-" .. i
+					if FFlagHelpPageCCLModule then
+						table.insert(Elements2, ReactModule.createElement(MemoResult2, {
+							actionLabels = control.actionLabels or { { label = control.label } },
+							buttons = Input,
+							platform = p2.platform,
+							layoutOrder = GAMEPADLAYOUTORDEREntry,
+							layoutOrderReversed = p2.layoutOrderReversed,
+							addBlankIcon = p2.addBlankIcon,
+							isSpatial = p2.isSpatial,
+							testId = TestId,
+							key = "ActionRow-" .. TestId
 						}))
 					else
-						table.insert(t, reactModule.createElement(view, {
+						table.insert(Elements, ReactModule.createElement(View, {
 							tag = "col align-y-center size-0-1000 auto-x",
-							LayoutOrder = var16,
-							key = "Text-" .. i
+							LayoutOrder = GAMEPADLAYOUTORDEREntry,
+							key = "Text-" .. TestId
 						}, {
-							ActionText = reactModule.createElement(var1, { action = v.label, testId = "GamepadActionText-" .. i })
+							ActionText = ReactModule.createElement(MemoResult, {
+								action = control.label,
+								testId = "GamepadActionText-" .. TestId
+							})
 						}))
-						table.insert(t_1, reactModule.createElement(view, {
+						table.insert(Elements1, ReactModule.createElement(View, {
 							tag = "col align-y-center size-0-1000 auto-x",
-							LayoutOrder = var16,
-							key = "Icon-" .. i
+							LayoutOrder = GAMEPADLAYOUTORDEREntry,
+							key = "Icon-" .. TestId
 						}, {
-							IconContainer = reactModule.createElement(var2, {
-								buttons = input,
-								platform = p3.platform,
-								addBlankIcon = p3.addBlankIcon,
-								layoutOrderReversed = p3.layoutOrderReversed,
-								isSpatial = p3.isSpatial,
-								testId = "GamepadActionIcon-" .. i
+							IconContainer = ReactModule.createElement(MemoResult1, {
+								buttons = Input,
+								platform = p2.platform,
+								addBlankIcon = p2.addBlankIcon,
+								layoutOrderReversed = p2.layoutOrderReversed,
+								isSpatial = p2.isSpatial,
+								testId = "GamepadActionIcon-" .. TestId
 							})
 						}))
 					end
 				end
 			end
 		end
-		return t, t_1, t_2
+		return Elements, Elements1, Elements2
 	end, {
-		p3.controls,
-		p3.platform,
-		p3.addBlankIcon,
-		p3.layoutOrderReversed,
-		p3.isSpatial
+		p2.controls,
+		p2.platform,
+		p2.addBlankIcon,
+		p2.layoutOrderReversed,
+		p2.isSpatial
 	})
 	
-	return if fFlagHelpPageCCLModule then reactModule.createElement(view, { tag = "col gap-small size-full-0 auto-y" }, var15) else reactModule.createElement(view, { tag = "row gap-small auto-xy" }, {
-		TextCol = reactModule.createElement(view, {
+	return if FFlagHelpPageCCLModule then ReactModule.createElement(View, { tag = "col gap-small size-full-0 auto-y" }, UseMemoResult3) else ReactModule.createElement(View, { tag = "row gap-small auto-xy" }, {
+		TextCol = ReactModule.createElement(View, {
 			tag = {
-				["col align-x-right auto-xy"] = not p3.layoutOrderReversed,
-				["col align-x-left auto-xy"] = p3.layoutOrderReversed
+				["col align-x-right auto-xy"] = not p2.layoutOrderReversed,
+				["col align-x-left auto-xy"] = p2.layoutOrderReversed
 			},
-			LayoutOrder = if p3.layoutOrderReversed then 3 else 1
-		}, var13),
-		IconCol = reactModule.createElement(view, { tag = "col auto-xy", LayoutOrder = 2 }, var14)
+			LayoutOrder = if p2.layoutOrderReversed then 3 else 1
+		}, UseMemoResult),
+		IconCol = ReactModule.createElement(View, { tag = "col auto-xy", LayoutOrder = 2 }, UseMemoResult2)
 	})
-end))
+end)))

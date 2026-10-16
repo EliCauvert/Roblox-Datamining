@@ -1,44 +1,43 @@
-﻿local performFetch = require(game:GetService("CorePackages").Workspace.Packages.Http).PerformFetch
-local parent = script.Parent.Parent
-local thunkModule = require(parent.Thunk)
-local networkModule = require(parent.Services.Network)
-local assetInfoModule = require(parent.Models.AssetInfo)
-local setAssetsModule = require(parent.Actions.SetAssets)
-local createInspectAndBuyKeyMapperModule = require(parent.createInspectAndBuyKeyMapper)
-local getExperiencePlayabilityModule = require(parent.Thunks.GetExperiencePlayability)
-local getExperienceInfoModule = require(parent.Thunks.GetExperienceInfo)
-local sendCounterModule = require(parent.Thunks.SendCounter)
-local constantsModule = require(parent.Constants)
-local list = { networkModule }
-local var1 = createInspectAndBuyKeyMapperModule("getVersionInfo")
+﻿local PerformFetch = require(game:GetService("CorePackages").Workspace.Packages.Http).PerformFetch
+local Parent = script.Parent.Parent
+local ThunkModule = require(Parent.Thunk)
+local NetworkModule = require(Parent.Services.Network)
+local AssetInfoModule = require(Parent.Models.AssetInfo)
+local SetAssetsModule = require(Parent.Actions.SetAssets)
+local GetExperiencePlayabilityModule = require(Parent.Thunks.GetExperiencePlayability)
+local GetExperienceInfoModule = require(Parent.Thunks.GetExperienceInfo)
+local SendCounterModule = require(Parent.Thunks.SendCounter)
+local ConstantsModule = require(Parent.Constants)
+local list = { NetworkModule }
+local GetVersionInfo = require(Parent.createInspectAndBuyKeyMapper)("getVersionInfo")
 
-return function(p1)
-	-- upvalues: thunkModule (ref), list (ref), networkModule (ref), var1 (ref), performFetch (ref), assetInfoModule (ref), setAssetsModule (ref), getExperiencePlayabilityModule (ref), getExperienceInfoModule (ref), sendCounterModule (ref), constantsModule (ref)
-	return thunkModule.new(script.Name, list, function(p2, p3)
-		-- upvalues: networkModule (copy), var1 (copy), p1 (ref), performFetch (copy), assetInfoModule (copy), setAssetsModule (copy), getExperiencePlayabilityModule (copy), getExperienceInfoModule (copy), sendCounterModule (copy), constantsModule (copy)
-		local var2 = p3[networkModule]
+return function(p1) --[[ Line: 29 | Named "GetVersionInfo" ]]
+	-- upvalues: ThunkModule (copy), list (copy), NetworkModule (copy), GetVersionInfo (copy), PerformFetch (copy), AssetInfoModule (copy), SetAssetsModule (copy), GetExperiencePlayabilityModule (copy), GetExperienceInfoModule (copy), SendCounterModule (copy), ConstantsModule (copy)
+	return ThunkModule.new(script.Name, list, function(p2, p3) --[[ Line: 30 ]]
+		-- upvalues: NetworkModule (upval), GetVersionInfo (upval), p1 (copy), PerformFetch (upval), AssetInfoModule (upval), SetAssetsModule (upval), GetExperiencePlayabilityModule (upval), GetExperienceInfoModule (upval), SendCounterModule (upval), ConstantsModule (upval)
+		local v1 = p3[NetworkModule]
 		
-		return performFetch.Single(var1(p2:getState().storeId, p1), function()
-			-- upvalues: var2 (ref), p1 (copy), assetInfoModule (copy), p2 (ref), setAssetsModule (copy), getExperiencePlayabilityModule (copy), getExperienceInfoModule (copy), sendCounterModule (copy), constantsModule (copy)
-			return var2.getVersionInfo(p1):andThen(function(p4)
-				-- upvalues: assetInfoModule (copy), p1 (copy), p2 (copy), setAssetsModule (copy), getExperiencePlayabilityModule (copy), getExperienceInfoModule (copy), sendCounterModule (copy), constantsModule (copy)
-				local var3 = p4.data[1]
-				local var4 = if var3 then var3.creatingUniverseId else nil
+		return PerformFetch.Single(GetVersionInfo(p2:getState().storeId, p1), function() --[[ Line: 35 ]]
+			-- upvalues: v1 (copy), p1 (upval), AssetInfoModule (upval), p2 (copy), SetAssetsModule (upval), GetExperiencePlayabilityModule (upval), GetExperienceInfoModule (upval), SendCounterModule (upval), ConstantsModule (upval)
+			return v1.getVersionInfo(p1):andThen(function(Result) --[[ Line: 36 ]]
+				-- upvalues: AssetInfoModule (upval), p1 (upval), p2 (upval), SetAssetsModule (upval), GetExperiencePlayabilityModule (upval), GetExperienceInfoModule (upval), SendCounterModule (upval), ConstantsModule (upval)
+				local Entry = Result.data[1]
+				local CreatingUniverseId = if Entry then Entry.creatingUniverseId else nil
 				
-				if var4 then
-					var4 = tostring(var4)
-					p2:dispatch(setAssetsModule({ assetInfoModule.fromGetVersionInfo(p1, var3) }))
-					p2:dispatch(getExperiencePlayabilityModule(var4))
-					p2:dispatch(getExperienceInfoModule(var4))
+				if CreatingUniverseId then
+					local Text = tostring(CreatingUniverseId)
+					p2:dispatch(SetAssetsModule({ (AssetInfoModule.fromGetVersionInfo(p1, Entry)) }))
+					p2:dispatch(GetExperiencePlayabilityModule(Text))
+					p2:dispatch(GetExperienceInfoModule(Text))
 				end
-				p2:dispatch(sendCounterModule(constantsModule.Counters.GetVersionInfo .. constantsModule.CounterSuffix.RequestSucceeded))
-			end, function(_)
-				-- upvalues: p2 (copy), sendCounterModule (copy), constantsModule (copy)
-				p2:dispatch(sendCounterModule(constantsModule.Counters.GetVersionInfo .. constantsModule.CounterSuffix.RequestRejected))
+				p2:dispatch(SendCounterModule(ConstantsModule.Counters.GetVersionInfo .. ConstantsModule.CounterSuffix.RequestSucceeded))
+			end, function(_) --[[ Line: 55 ]]
+				-- upvalues: p2 (upval), SendCounterModule (upval), ConstantsModule (upval)
+				p2:dispatch(SendCounterModule(ConstantsModule.Counters.GetVersionInfo .. ConstantsModule.CounterSuffix.RequestRejected))
 			end)
-		end)(p2):catch(function(_)
-			-- upvalues: p2 (ref), sendCounterModule (copy), constantsModule (copy)
-			p2:dispatch(sendCounterModule(constantsModule.Counters.GetVersionInfo .. constantsModule.CounterSuffix.RequestFailed))
+		end)(p2):catch(function(_) --[[ Line: 60 ]]
+			-- upvalues: p2 (copy), SendCounterModule (upval), ConstantsModule (upval)
+			p2:dispatch(SendCounterModule(ConstantsModule.Counters.GetVersionInfo .. ConstantsModule.CounterSuffix.RequestFailed))
 		end)
 	end)
 end

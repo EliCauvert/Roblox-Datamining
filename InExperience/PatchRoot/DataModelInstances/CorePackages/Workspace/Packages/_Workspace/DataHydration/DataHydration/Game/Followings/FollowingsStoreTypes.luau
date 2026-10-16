@@ -1,16 +1,16 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local parent = dataHydration.Parent
-local _ = require(dataHydration.DataHydrationTypes)
-local _ = require(parent.Signals)
-local tModule = require(parent.t)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local Parent = DataHydration.Parent
+local _ = require(DataHydration.DataHydrationTypes)
+local _ = require(Parent.Signals)
+local TModule = require(Parent.t)
 
 return {
-	followingResponseValidator = tModule.interface({
-		UniverseId = tModule.number,
-		UserId = tModule.number,
-		CanFollow = tModule.boolean,
-		IsFollowing = tModule.boolean,
-		FollowingCountByType = tModule.optional(tModule.number),
-		FollowingLimitByType = tModule.optional(tModule.number)
+	followingResponseValidator = TModule.interface({
+		UniverseId = TModule.number,
+		UserId = TModule.number,
+		CanFollow = TModule.boolean,
+		IsFollowing = TModule.boolean,
+		FollowingCountByType = TModule.optional(TModule.number),
+		FollowingLimitByType = TModule.optional(TModule.number)
 	})
 }

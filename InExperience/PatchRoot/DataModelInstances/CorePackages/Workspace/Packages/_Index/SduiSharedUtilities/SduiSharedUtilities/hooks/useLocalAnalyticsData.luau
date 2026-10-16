@@ -1,13 +1,13 @@
-﻿local reactModule = require(script:FindFirstAncestor("SduiSharedUtilities").Parent.React)
+﻿local ReactModule = require(script:FindFirstAncestor("SduiSharedUtilities").Parent.React)
 
-return function(p1, p2, p3)
-	-- upvalues: reactModule (ref)
-	return reactModule.useMemo(function()
-		-- upvalues: p3 (ref), p1 (ref), p2 (ref)
-		local var1 = p3 or {}
-		var1.configKey = p1
-		var1.appPage = p2
+return function(ConfigKey, AppPage, p1) --[[ Line: 5 | Named "useLocalAnalyticsData" ]]
+	-- upvalues: ReactModule (copy)
+	return ReactModule.useMemo(function() --[[ Line: 6 ]]
+		-- upvalues: p1 (copy), ConfigKey (copy), AppPage (copy)
+		local T = if p1 then p1 else {}
+		T.configKey = ConfigKey
+		T.appPage = AppPage
 		
-		return var1
-	end, { p1, p2, p3 })
+		return T
+	end, { ConfigKey, AppPage, p1 })
 end

@@ -1,36 +1,36 @@
-﻿local guiService = game:GetService("GuiService")
-local signalsModule = require(script:FindFirstAncestor("InExperienceSideSheet").Parent.Signals)
-local maxIGMBackgroundTransparencyPercent = game:DefineFastInt("MaxIGMBackgroundTransparencyPercent", 30)
+﻿local GuiService = game:GetService("GuiService")
+local SignalsModule = require(script:FindFirstAncestor("InExperienceSideSheet").Parent.Signals)
+local MaxIGMBackgroundTransparencyPercent = game:DefineFastInt("MaxIGMBackgroundTransparencyPercent", 30)
 
-return function()
-	-- upvalues: signalsModule (ref), guiService (ref), maxIGMBackgroundTransparencyPercent (ref)
-	local var1, var2 = signalsModule.createSignal(0)
-	local var3, var4 = signalsModule.createSignal(0)
-	local var5, var6 = signalsModule.createSignal(false)
-	local var7, var8 = signalsModule.createSignal(false)
+return function() --[[ Line: 25 | Named "createSideSheetConfigStore" ]]
+	-- upvalues: SignalsModule (copy), GuiService (copy), MaxIGMBackgroundTransparencyPercent (copy)
+	local Signal, Signal2 = SignalsModule.createSignal(0)
+	local Signal1, Signal2_1 = SignalsModule.createSignal(0)
+	local Signal3, Signal2_2 = SignalsModule.createSignal(false)
+	local Signal4, Signal2_3 = SignalsModule.createSignal(false)
 	
-	local function _()
-		-- upvalues: var2 (ref), guiService (copy), maxIGMBackgroundTransparencyPercent (copy)
-		return var2(guiService.PreferredTransparency * maxIGMBackgroundTransparencyPercent / 100)
+	local function _() --[[ Line: 31 | Named "updateBackgroundTransparency" ]]
+		-- upvalues: Signal2 (copy), GuiService (upval), MaxIGMBackgroundTransparencyPercent (upval)
+		return Signal2(GuiService.PreferredTransparency * MaxIGMBackgroundTransparencyPercent / 100)
 	end
 	
-	local _ = var2(guiService.PreferredTransparency * maxIGMBackgroundTransparencyPercent / 100)
-	local var9 = guiService:GetPropertyChangedSignal("PreferredTransparency"):Connect(function()
-		-- upvalues: var2 (ref), guiService (copy), maxIGMBackgroundTransparencyPercent (copy)
-		local _ = var2(guiService.PreferredTransparency * maxIGMBackgroundTransparencyPercent / 100)
+	local _ = Signal2(GuiService.PreferredTransparency * MaxIGMBackgroundTransparencyPercent / 100)
+	local Connection = GuiService:GetPropertyChangedSignal("PreferredTransparency"):Connect(function() --[[ Line: 40 ]]
+		-- upvalues: Signal2 (copy), GuiService (upval), MaxIGMBackgroundTransparencyPercent (upval)
+		local _ = Signal2(GuiService.PreferredTransparency * MaxIGMBackgroundTransparencyPercent / 100)
 	end)
 	
 	return {
-		getBackgroundTransparency = var1,
-		getSideSheetDrawerWidth = var3,
-		setSideSheetDrawerWidth = var4,
-		getIsPeoplePageOpen = var5,
-		setIsPeoplePageOpen = var6,
-		getDidSideSheetOpenWithPeoplePage = var7,
-		setDidSideSheetOpenWithPeoplePage = var8,
-		cleanUp = function()
-			-- upvalues: var9 (ref)
-			var9:Disconnect()
+		getBackgroundTransparency = Signal,
+		getSideSheetDrawerWidth = Signal1,
+		setSideSheetDrawerWidth = Signal2_1,
+		getIsPeoplePageOpen = Signal3,
+		setIsPeoplePageOpen = Signal2_2,
+		getDidSideSheetOpenWithPeoplePage = Signal4,
+		setDidSideSheetOpenWithPeoplePage = Signal2_3,
+		cleanUp = function() --[[ Line: 44 ]]
+			-- upvalues: Connection (copy)
+			Connection:Disconnect()
 		end
 	}
 end

@@ -1,6 +1,6 @@
-﻿local parent = script.Parent.Parent
-local _ = require(parent.Signals)
-local _ = require(parent.HttpSignals)
+﻿local Parent = script.Parent.Parent
+local _ = require(Parent.Signals)
+local _ = require(Parent.HttpSignals)
 
 return {
 	HttpResponseStatus = table.freeze({

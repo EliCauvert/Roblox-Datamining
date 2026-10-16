@@ -1,134 +1,136 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local robloxGui = game:GetService("CoreGui").RobloxGui
-local roactModule = require(corePackagesService.Packages.Roact)
-local externalEventConnection = require(corePackagesService.Workspace.Packages.RoactUtils).ExternalEventConnection
-local constantsModule = require(script.Parent.Parent.Constants)
-local dropDownEntryHeight = constantsModule.GeneralFormatting.DropDownEntryHeight
-local dropDownArrowHeight = constantsModule.GeneralFormatting.DropDownArrowHeight
-local var1 = dropDownArrowHeight / 2
-local downArrow = constantsModule.Image.DownArrow
-local fullScreenDropDownButton = roactModule.Component:extend("FullScreenDropDownButton")
+﻿local CorePackages = game:GetService("CorePackages")
+local RobloxGui = game:GetService("CoreGui").RobloxGui
+local RoactModule = require(CorePackages.Packages.Roact)
+local ExternalEventConnection = require(CorePackages.Workspace.Packages.RoactUtils).ExternalEventConnection
+local ConstantsModule = require(script.Parent.Parent.Constants)
+local DropDownEntryHeight = ConstantsModule.GeneralFormatting.DropDownEntryHeight
+local DropDownArrowHeight: number = ConstantsModule.GeneralFormatting.DropDownArrowHeight
+local DropDownArrowHeightRatio = DropDownArrowHeight / 2
+local DownArrow = ConstantsModule.Image.DownArrow
+local FullScreenDropDownButton = RoactModule.Component:extend("FullScreenDropDownButton")
 
-function fullScreenDropDownButton.init(p1)
-	-- upvalues: robloxGui (ref)
-	function p0.startDropDownView()
-		-- upvalues: p1 (ref)
+function FullScreenDropDownButton.init(p1) --[[ Line: 19 ]]
+	-- upvalues: RobloxGui (copy)
+	function p1.startDropDownView() --[[ Line: 20 ]]
+		-- upvalues: p1 (copy)
 		p1:setState({ selectionScreenExpanded = true })
 	end
 	
-	function p0.noSelection(_, p2)
-		-- upvalues: p1 (ref)
-		if p2.UserInputType == Enum.UserInputType.MouseButton1 or p2.UserInputType == Enum.UserInputType.Touch and p2.UserInputState == Enum.UserInputState.End then
+	function p1:noSelection(Input) --[[ Line: 26 ]]
+		-- upvalues: p1 (copy)
+		if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch and Input.UserInputState == Enum.UserInputState.End then
 			p1:setState({ selectionScreenExpanded = false })
 		end
 	end
 	
 	p1.state = {
 		selectionScreenExpanded = false,
-		guiSizeY = robloxGui.AbsoluteSize.Y
+		guiSizeY = RobloxGui.AbsoluteSize.Y
 	}
 end
 
-function fullScreenDropDownButton.render(p1)
-	-- upvalues: roactModule (ref), constantsModule (ref), dropDownEntryHeight (ref), externalEventConnection (ref), robloxGui (ref), dropDownArrowHeight (ref), var1 (ref), downArrow (ref)
-	local buttonSize = p1.props.buttonSize
-	local dropDownList = p1.props.dropDownList
-	local selectedIndex = p1.props.selectedIndex
-	local onSelection = p1.props.onSelection
-	local layoutOrder = p1.props.layoutOrder
-	local selectionScreenExpanded = p1.state.selectionScreenExpanded
-	local portalTarget = p1.props.portalTarget
-	local t = {}
-	local var2 = 16
+function FullScreenDropDownButton.render(p1) --[[ Line: 43 ]]
+	-- upvalues: RoactModule (copy), ConstantsModule (copy), DropDownEntryHeight (copy), ExternalEventConnection (copy), RobloxGui (copy), DropDownArrowHeight (copy), DropDownArrowHeightRatio (copy), DownArrow (copy)
+	local ButtonSize = p1.props.buttonSize
+	local DropDownList = p1.props.dropDownList
+	local SelectedIndex = p1.props.selectedIndex
+	local OnSelectionFunction = p1.props.onSelection
+	local LayoutOrder = p1.props.layoutOrder
+	local SelectionScreenExpanded = p1.state.selectionScreenExpanded
+	local PortalTarget = p1.props.portalTarget
+	local TextButtons = {}
+	local YOffset = 16
 	
-	if selectionScreenExpanded then
-		t.UIListLayout = roactModule.createElement("UIListLayout", {
+	if SelectionScreenExpanded then
+		TextButtons.UIListLayout = RoactModule.createElement("UIListLayout", {
 			HorizontalAlignment = Enum.HorizontalAlignment.Center,
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			VerticalAlignment = Enum.VerticalAlignment.Top,
 			FillDirection = Enum.FillDirection.Vertical
 		})
 		
-		if dropDownList then
-			for i, v in ipairs(dropDownList) do
-				t[i] = roactModule.createElement("TextButton", {
-					Text = v,
-					Font = constantsModule.Font.TabBar,
-					TextSize = constantsModule.DefaultFontSize.DropDownTabBar,
-					TextColor3 = constantsModule.Color.Text,
+		if DropDownList then
+			for LayoutOrder1, Text in ipairs(DropDownList) do
+				TextButtons[LayoutOrder1] = RoactModule.createElement("TextButton", {
+					Text = Text,
+					Font = ConstantsModule.Font.TabBar,
+					TextSize = ConstantsModule.DefaultFontSize.DropDownTabBar,
+					TextColor3 = ConstantsModule.Color.Text,
 					AutoButtonColor = false,
-					Size = UDim2.new(1, 0, 0, dropDownEntryHeight),
-					BackgroundColor3 = if i == selectedIndex then constantsModule.Color.SelectedGray else constantsModule.Color.UnselectedGray,
-					LayoutOrder = i,
+					Size = UDim2.new(1, 0, 0, DropDownEntryHeight),
+					BackgroundColor3 = LayoutOrder1 == SelectedIndex and ConstantsModule.Color.SelectedGray or ConstantsModule.Color.UnselectedGray,
+					LayoutOrder = LayoutOrder1,
 					BorderSizePixel = 0,
-					[roactModule.Event.Activated] = function(_)
-						-- upvalues: p1 (ref), onSelection (ref), i (ref)
+					[RoactModule.Event.Activated] = function(_) --[[ Line: 80 ]]
+						-- upvalues: p1 (copy), OnSelectionFunction (copy), LayoutOrder1 (copy)
 						p1:setState({ selectionScreenExpanded = false })
-						onSelection(i)
+						OnSelectionFunction(LayoutOrder1)
 					end
 				})
-				var2 += dropDownEntryHeight
+				YOffset += DropDownEntryHeight
 			end
 		end
 	end
-	return roactModule.createElement("TextButton", {
-		Size = buttonSize,
-		BackgroundColor3 = constantsModule.Color.UnselectedGray,
+	local YOffsetDelta = YOffset - 16 - p1.state.guiSizeY
+	
+	return RoactModule.createElement("TextButton", {
+		Size = ButtonSize,
+		BackgroundColor3 = ConstantsModule.Color.UnselectedGray,
 		Text = "",
 		AutoButtonColor = false,
-		LayoutOrder = layoutOrder,
-		[roactModule.Event.Activated] = p1.startDropDownView
+		LayoutOrder = LayoutOrder,
+		[RoactModule.Event.Activated] = p1.startDropDownView
 	}, {
-		SizeChangeEvent = roactModule.createElement(externalEventConnection, {
-			event = robloxGui:GetPropertyChangedSignal("AbsoluteSize"),
-			callback = function()
-				-- upvalues: p1 (ref), robloxGui (copy)
-				p1:setState({ guiSizeY = robloxGui.AbsoluteSize.Y })
+		SizeChangeEvent = RoactModule.createElement(ExternalEventConnection, {
+			event = RobloxGui:GetPropertyChangedSignal("AbsoluteSize"),
+			callback = function() --[[ Line: 106 ]]
+				-- upvalues: p1 (copy), RobloxGui (upval)
+				p1:setState({ guiSizeY = RobloxGui.AbsoluteSize.Y })
 			end
 		}),
-		text = roactModule.createElement("TextLabel", {
+		text = RoactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
-			Size = UDim2.new(1, (-dropDownArrowHeight) - var1, 1, 0),
-			Text = dropDownList[selectedIndex],
-			Font = constantsModule.Font.TabBar,
-			TextSize = constantsModule.DefaultFontSize.DropDownTabBar,
+			Size = UDim2.new(1, -DropDownArrowHeight - DropDownArrowHeightRatio, 1, 0),
+			Text = DropDownList[SelectedIndex],
+			Font = ConstantsModule.Font.TabBar,
+			TextSize = ConstantsModule.DefaultFontSize.DropDownTabBar,
 			TextXAlignment = Enum.TextXAlignment.Center,
-			TextColor3 = constantsModule.Color.Text
+			TextColor3 = ConstantsModule.Color.Text
 		}),
-		arrow = roactModule.createElement("ImageLabel", {
+		arrow = RoactModule.createElement("ImageLabel", {
 			BackgroundTransparency = 1,
-			Image = downArrow,
-			Size = UDim2.new(0, dropDownArrowHeight, 0, dropDownArrowHeight),
-			Position = UDim2.new(1, (-dropDownArrowHeight) - var1, 0.5, -var1)
+			Image = DownArrow,
+			Size = UDim2.new(0, DropDownArrowHeight, 0, DropDownArrowHeight),
+			Position = UDim2.new(1, -DropDownArrowHeight - DropDownArrowHeightRatio, 0.5, -DropDownArrowHeightRatio)
 		}),
-		selectionView = selectionScreenExpanded and roactModule.createElement(roactModule.Portal, {
-			target = if portalTarget ~= nil then portalTarget else game:GetService("CoreGui").DevConsoleMaster
+		selectionView = SelectionScreenExpanded and RoactModule.createElement(RoactModule.Portal, {
+			target = if PortalTarget == nil then game:GetService("CoreGui").DevConsoleMaster else PortalTarget or game:GetService("CoreGui").DevConsoleMaster
 		}, {
-			GreyOutFrame = roactModule.createElement("Frame", {
+			GreyOutFrame = RoactModule.createElement("Frame", {
 				Size = UDim2.new(1, 0, 1, 0),
-				BackgroundColor3 = constantsModule.Color.Black,
+				BackgroundColor3 = ConstantsModule.Color.Black,
 				BackgroundTransparency = 0.36,
 				Active = true,
-				[roactModule.Event.InputEnded] = p1.noSelection
+				[RoactModule.Event.InputEnded] = p1.noSelection
 			}, {
-				BorderFrame = roactModule.createElement("Frame", {
+				BorderFrame = RoactModule.createElement("Frame", {
 					BorderSizePixel = 0,
-					Size = UDim2.new(0, 375, 0, var2),
+					Size = UDim2.new(0, 375, 0, YOffset),
 					Position = UDim2.new(0.5, -187.5, 0, 0),
-					BackgroundColor3 = constantsModule.Color.UnselectedGray
+					BackgroundColor3 = ConstantsModule.Color.UnselectedGray
 				}, {
-					SelectionFrame = roactModule.createElement("ScrollingFrame", {
+					SelectionFrame = RoactModule.createElement("ScrollingFrame", {
 						BackgroundTransparency = 1,
 						BorderSizePixel = 0,
 						ScrollBarThickness = 0,
 						Size = UDim2.new(1, -30, 1, -16),
 						Position = UDim2.new(0, 15, 0, 8),
-						CanvasSize = UDim2.new(1, -30, 1, var2 - 16 - p1.state.guiSizeY)
-					}, t)
+						CanvasSize = UDim2.new(1, -30, 1, YOffsetDelta)
+					}, TextButtons)
 				})
 			})
 		})
 	})
 end
 
-return fullScreenDropDownButton
+return FullScreenDropDownButton

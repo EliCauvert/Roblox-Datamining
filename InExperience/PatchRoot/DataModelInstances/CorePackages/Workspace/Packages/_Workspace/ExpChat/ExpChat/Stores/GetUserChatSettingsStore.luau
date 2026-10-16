@@ -1,85 +1,84 @@
-﻿local parent = script:FindFirstAncestor("ExpChat").Parent
-local signalsModule = require(parent.Signals)
-local sharedFlagsModule = require(parent.SharedFlags)
-local createUserChatSettingStoreModule = require(script.createUserChatSettingStore)
-local fFlagAIRephraseSettingEnabled = sharedFlagsModule.FFlagAIRephraseSettingEnabled
-local fFlagChatSummariesSettingEnabled = sharedFlagsModule.FFlagChatSummariesSettingEnabled
+﻿local Parent = script:FindFirstAncestor("ExpChat").Parent
+local SignalsModule = require(Parent.Signals)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local CreateUserChatSettingStoreModule = require(script.createUserChatSettingStore)
+local FFlagChatSummariesSettingEnabled = SharedFlagsModule.FFlagChatSummariesSettingEnabled
 
-local function _(p1, p2, p3, p4)
+local function _(p1, p2, Callback: (any) -> (), Callback1: (any) -> ()) --[[ Line: 15 | Named "applyAIRephraseFeatureValue" ]]
 	if p1 == "AIRephraseSettingStatus" then
-		p3(if p2 ~= "Enabled" then p2 == "Disabled" else true)
-		p4(p2 == "Enabled")
+		Callback(p2 == "Enabled" or p2 == "Disabled")
+		Callback1(p2 == "Enabled")
 	end
 end
 
-local function buildAIRephraseConfig()
+local function buildAIRephraseConfig() --[[ Line: 27 ]]
 	return {
 		requiresChatEnabled = true,
-		setupListener = function(_, _)
-			return function() end
+		setupListener = function(_, _) --[[ Line: 29 ]]
+			return function() --[[ Line: 30 ]] end
 		end,
-		buildFeatureValueHandler = function(p1, p2)
-			return function(p3, p4)
-				-- upvalues: p1 (ref), p2 (ref)
-				if p3 == "AIRephraseSettingStatus" then
-					p1(if p4 ~= "Enabled" then p4 == "Disabled" else true)
-					p2(p4 == "Enabled")
+		buildFeatureValueHandler = function(Callback, Callback1) --[[ Line: 32 ]]
+			return function(p1, p2) --[[ Line: 33 ]]
+				-- upvalues: Callback (copy), Callback1 (copy)
+				if p1 == "AIRephraseSettingStatus" then
+					Callback(p2 == "Enabled" or p2 == "Disabled")
+					Callback1(p2 == "Enabled")
 				end
 			end
 		end,
-		onSetEnabled = function(value, p1)
-			p1(value)
+		onSetEnabled = function(p1, Callback: (any) -> ()) --[[ Line: 37 ]]
+			Callback(p1)
 		end
 	}
 end
 
-local _ = function(p1, p2, p3, p4)
+local _ = function(p1, p2, Callback: (any) -> (), Callback1: (any) -> ()) --[[ Line: 44 | Named "applyChatSummariesFeatureValue" ]]
 	if p1 == "AllowThirdPartySummary" then
-		p3(if p2 ~= "Enabled" then p2 == "Disabled" else true)
-		p4(p2 == "Enabled")
+		Callback(p2 == "Enabled" or p2 == "Disabled")
+		Callback1(p2 == "Enabled")
 	end
 end
 
-local function buildChatSummariesConfig()
+local function buildChatSummariesConfig() --[[ Line: 56 ]]
 	return {
 		requiresChatEnabled = false,
-		setupListener = function(_, _)
-			return function() end
+		setupListener = function(_, _) --[[ Line: 58 ]]
+			return function() --[[ Line: 59 ]] end
 		end,
-		buildFeatureValueHandler = function(p1, p2)
-			return function(p3, p4)
-				-- upvalues: p1 (ref), p2 (ref)
-				if p3 == "AllowThirdPartySummary" then
-					p1(if p4 ~= "Enabled" then p4 == "Disabled" else true)
-					p2(p4 == "Enabled")
+		buildFeatureValueHandler = function(Callback, Callback1) --[[ Line: 61 ]]
+			return function(p1, p2) --[[ Line: 62 ]]
+				-- upvalues: Callback (copy), Callback1 (copy)
+				if p1 == "AllowThirdPartySummary" then
+					Callback(p2 == "Enabled" or p2 == "Disabled")
+					Callback1(p2 == "Enabled")
 				end
 			end
 		end,
-		onSetEnabled = function(value, p1)
-			p1(value)
+		onSetEnabled = function(p1, Callback: (any) -> ()) --[[ Line: 66 ]]
+			Callback(p1)
 		end
 	}
 end
 
-local var1 = if fFlagAIRephraseSettingEnabled then signalsModule.createComputed(function()
-	-- upvalues: createUserChatSettingStoreModule (ref), buildAIRephraseConfig (ref)
-	return createUserChatSettingStoreModule(buildAIRephraseConfig())
+local Computed = if SharedFlagsModule.FFlagAIRephraseSettingEnabled then SignalsModule.createComputed(function() --[[ Line: 74 ]]
+	-- upvalues: CreateUserChatSettingStoreModule (copy), buildAIRephraseConfig (copy)
+	return CreateUserChatSettingStoreModule((buildAIRephraseConfig()))
 end) else nil
-local var2 = if fFlagChatSummariesSettingEnabled then signalsModule.createComputed(function()
-	-- upvalues: createUserChatSettingStoreModule (ref), buildChatSummariesConfig (ref)
-	return createUserChatSettingStoreModule(buildChatSummariesConfig())
+local Computed1 = if FFlagChatSummariesSettingEnabled then SignalsModule.createComputed(function() --[[ Line: 80 ]]
+	-- upvalues: CreateUserChatSettingStoreModule (copy), buildChatSummariesConfig (copy)
+	return CreateUserChatSettingStoreModule((buildChatSummariesConfig()))
 end) else nil
 
 return {
-	getAIRephraseSettingStore = var1,
-	getChatSummariesSettingStore = var2,
-	updateExpChatFeatureValue = function(p1, p2)
-		-- upvalues: var1 (ref), var2 (ref)
-		if var1 then
-			var1(false).setIsSettingVisible(p1, p2)
+	getAIRephraseSettingStore = Computed,
+	getChatSummariesSettingStore = Computed1,
+	updateExpChatFeatureValue = function(p1, p2) --[[ Line: 88 ]]
+		-- upvalues: Computed (copy), Computed1 (copy)
+		if Computed then
+			Computed(false).setIsSettingVisible(p1, p2)
 		end
-		if var2 then
-			var2(false).setIsSettingVisible(p1, p2)
+		if Computed1 then
+			Computed1(false).setIsSettingVisible(p1, p2)
 		end
 	end
 }

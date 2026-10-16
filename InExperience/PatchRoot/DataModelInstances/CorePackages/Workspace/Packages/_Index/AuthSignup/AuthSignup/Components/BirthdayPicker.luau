@@ -1,58 +1,53 @@
-﻿local parent = script:FindFirstAncestor("AuthSignup").Parent
-local localizationService = game:GetService("LocalizationService")
-local cryoModule = require(parent.Cryo)
-local roactModule = require(parent.Roact)
-local reactModule = require(parent.React)
-local fitChildren = require(parent.AuthCommon).Components.FitChildren
-local argCheckModule = require(parent.ArgCheck)
-local timeUnit = require(parent.Time).TimeUnit
-local dateTime = require(parent.Time).DateTime
-local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
-local focusNavigationEventNameEnum = require(parent.FocusNavigationUtils).FocusNavigationEventNameEnum
-local inputHandlersModule = require(parent.InputHandlers)
-local withStyle = require(parent.UIBlox).Style.withStyle
-local withLocalization = require(parent.Localization).withLocalization
-local scrollingPicker = require(parent.AuthCommon).Components.ScrollingPicker
-local dateHelper = require(parent.Time).DateHelper
-local getFFlagSignUpBirthdayRefactorNestedDefinition = require(parent.SharedFlags).GetFFlagSignUpBirthdayRefactorNestedDefinition
-local getFFlagSignUpBirthdayPickerRequireManualSelection = require(parent.SharedFlags).GetFFlagSignUpBirthdayPickerRequireManualSelection
-local _ = {
-	Default = "Default",
-	Emphasized = "Emphasized",
-	Muted = "Muted"
-}
-local t = {}
+﻿local Parent = script:FindFirstAncestor("AuthSignup").Parent
+local LocalizationService = game:GetService("LocalizationService")
+local CryoModule = require(Parent.Cryo)
+local RoactModule = require(Parent.Roact)
+local ReactModule = require(Parent.React)
+local FitChildren = require(Parent.AuthCommon).Components.FitChildren
+local ArgCheckModule = require(Parent.ArgCheck)
+local TimeUnit = require(Parent.Time).TimeUnit
+local _DateTime = require(Parent.Time).DateTime
+local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
+local FocusNavigationEventNameEnum = require(Parent.FocusNavigationUtils).FocusNavigationEventNameEnum
+local InputHandlersModule = require(Parent.InputHandlers)
+local WithStyleFunction = require(Parent.UIBlox).Style.withStyle
+local WithLocalizationFunction = require(Parent.Localization).withLocalization
+local ScrollingPicker = require(Parent.AuthCommon).Components.ScrollingPicker
+local DateHelper = require(Parent.Time).DateHelper
+local GetFFlagSignUpBirthdayRefactorNestedDefinitionFunction = require(Parent.SharedFlags).GetFFlagSignUpBirthdayRefactorNestedDefinition
+local GetFFlagSignUpBirthdayPickerRequireManualSelectionFunction = require(Parent.SharedFlags).GetFFlagSignUpBirthdayPickerRequireManualSelection
+local List = {}
 
 for i = 1, 31 do
-	table.insert(t, i)
+	table.insert(List, i)
 end
-local t_1 = {
-	[Enum.KeyCode.ButtonA] = focusNavigationEventNameEnum.Confirm,
-	[Enum.KeyCode.Return] = focusNavigationEventNameEnum.Confirm
+local config = {
+	[Enum.KeyCode.ButtonA] = FocusNavigationEventNameEnum.Confirm,
+	[Enum.KeyCode.Return] = FocusNavigationEventNameEnum.Confirm
 }
-local reasonDateInvalid = dateHelper.ReasonDateInvalid
-local monthsLocalizationKeys = dateHelper.MonthsLocalizationKeys
-local dateTypeOrder = dateHelper.DateTypeOrder
+local ReasonDateInvalid = DateHelper.ReasonDateInvalid
+local MonthsLocalizationKeys = DateHelper.MonthsLocalizationKeys
+local DateTypeOrder = DateHelper.DateTypeOrder
 
-local function renderWheelContainer(p1, p2, p3)
-	-- upvalues: roactModule (ref)
-	return roactModule.createElement("Frame", {
+local function renderWheelContainer(p1, ShouldExpandTapTarget, FocusNavigationRef) --[[ Line: 71 ]]
+	-- upvalues: RoactModule (copy)
+	return RoactModule.createElement("Frame", {
 		LayoutOrder = 2,
 		Size = UDim2.new(1, 0, 0, 200),
 		BorderSizePixel = 0,
 		BackgroundTransparency = 1,
-		ClipsDescendants = not p2,
-		[roactModule.Ref] = p3
+		ClipsDescendants = not ShouldExpandTapTarget,
+		[RoactModule.Ref] = FocusNavigationRef
 	}, p1)
 end
 
-local function _(p1, p2, p3)
-	-- upvalues: cryoModule (ref)
-	return if p2 then cryoModule.List.join({ p3 }, p1) else p1
+local function _(p1, p2, p3) --[[ Line: 83 | Named "buildEntries" ]]
+	-- upvalues: CryoModule (copy)
+	return if p2 then CryoModule.List.join({ p3 }, p1) else p1
 end
 
-local birthdayPicker = roactModule.PureComponent:extend("BirthdayPicker")
-birthdayPicker.defaultProps = {
+local BirthdayPicker = RoactModule.PureComponent:extend("BirthdayPicker")
+BirthdayPicker.defaultProps = {
 	minAgeAllowed = 0,
 	maxAgeAllowed = 99,
 	NextSelectionUp = nil,
@@ -66,142 +61,144 @@ birthdayPicker.defaultProps = {
 	placeholderTextYear = "----"
 }
 
-local function useFocusNavigationBindings(p1)
-	-- upvalues: reactFocusNavigationModule (ref), t_1 (ref), reactModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref)
-	return reactFocusNavigationModule.useEventHandlerMap(reactModule.useMemo(function()
-		-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy)
+local function useFocusNavigationBindings(p1) --[[ Line: 106 ]]
+	-- upvalues: ReactFocusNavigationModule (copy), config (copy), ReactModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy)
+	return ReactFocusNavigationModule.useEventHandlerMap(ReactModule.useMemo(function() --[[ Line: 108 ]]
+		-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval)
 		return {
-			[focusNavigationEventNameEnum.Confirm] = {
-				handler = inputHandlersModule.onRelease(function() end)
+			[FocusNavigationEventNameEnum.Confirm] = {
+				handler = InputHandlersModule.onRelease(function() --[[ Line: 111 ]] end)
 			}
 		}
-	end, {}), reactFocusNavigationModule.useEventMap(t_1, p1))
+	end, {}), (ReactFocusNavigationModule.useEventMap(config, p1)))
 end
 
-function birthdayPicker.init(p1)
-	-- upvalues: dateTime (ref), timeUnit (ref), argCheckModule (ref), getFFlagSignUpBirthdayPickerRequireManualSelection (ref), roactModule (ref), withStyle (ref), getFFlagSignUpBirthdayRefactorNestedDefinition (ref), renderWheelContainer (ref)
+function BirthdayPicker.init(p1) --[[ Line: 118 ]]
+	-- upvalues: _DateTime (copy), TimeUnit (copy), ArgCheckModule (copy), GetFFlagSignUpBirthdayPickerRequireManualSelectionFunction (copy), RoactModule (copy), WithStyleFunction (copy), GetFFlagSignUpBirthdayRefactorNestedDefinitionFunction (copy), renderWheelContainer (copy)
 	p1.isMounted = false
-	local values = dateTime.now():GetValues()
+	local Values = _DateTime.now():GetValues()
 	p1.currentDate = {
-		[timeUnit.Months] = argCheckModule.isNonNegativeNumber(values.Month, "current month in BirthdayPicker"),
-		[timeUnit.Days] = argCheckModule.isNonNegativeNumber(values.Day, "current day in BirthdayPicker"),
-		[timeUnit.Years] = argCheckModule.isNonNegativeNumber(values.Year, "current year in BirthdayPicker")
+		[TimeUnit.Months] = ArgCheckModule.isNonNegativeNumber(Values.Month, "current month in BirthdayPicker"),
+		[TimeUnit.Days] = ArgCheckModule.isNonNegativeNumber(Values.Day, "current day in BirthdayPicker"),
+		[TimeUnit.Years] = ArgCheckModule.isNonNegativeNumber(Values.Year, "current year in BirthdayPicker")
 	}
-	local years = p1.currentDate[timeUnit.Years]
-	local var1 = years - p1.props.maxAgeAllowed
-	local var2 = years - p1.props.minAgeAllowed
-	local var3 = p1.props.requireManualSelection and getFFlagSignUpBirthdayPickerRequireManualSelection()
+	local CurrentDateEntry = p1.currentDate[TimeUnit.Years]
+	local MinValue = CurrentDateEntry - p1.props.maxAgeAllowed
+	local MaxValue = CurrentDateEntry - p1.props.minAgeAllowed
+	local FFlagSignUpBirthdayPickerRequireManualSelection = p1.props.requireManualSelection and GetFFlagSignUpBirthdayPickerRequireManualSelectionFunction()
 	p1.dummyYears = {}
 	
-	if var3 then
-		for i_1 = var2, var1, -1 do
-			table.insert(p1.dummyYears, i_1)
-		end
-	else
-		for i = var1, var2 do
+	if FFlagSignUpBirthdayPickerRequireManualSelection then
+		for i = MaxValue, MinValue, -1 do
 			table.insert(p1.dummyYears, i)
 		end
+	else
+		for i1 = MinValue, MaxValue do
+			table.insert(p1.dummyYears, i1)
+		end
 	end
-	p1.minYear = var1
-	p1.maxYear = var2
-	p1.placeholderOffset = if var3 then 1 else 0
-	local initialMonth = p1.props.initialMonth
-	local initialDay = p1.props.initialDay
-	local initialYear = p1.props.initialYear
-	local var4 = not var3 or (initialMonth ~= nil and (initialDay ~= nil and initialYear ~= nil))
-	local var5 = if var3 then 2 else #p1.dummyYears + -1
-	local var6 = if var4 then 1 + p1.placeholderOffset else 1
-	local var7 = if var4 then 1 + p1.placeholderOffset else 1
-	local var8 = if var4 then var5 + p1.placeholderOffset else 1
-	local var9 = if initialMonth then initialMonth + p1.placeholderOffset else nil
-	local var10 = if initialDay then initialDay + p1.placeholderOffset else nil
-	local var11 = nil
+	p1.minYear = MinValue
+	p1.maxYear = MaxValue
+	p1.placeholderOffset = if FFlagSignUpBirthdayPickerRequireManualSelection then 1 else 0
+	local InitialMonth = p1.props.initialMonth
+	local InitialDay = p1.props.initialDay
+	local InitialYear: number = p1.props.initialYear
+	local NoFFlagSignUpBirthdayPickerRequireManualSelection: boolean = not FFlagSignUpBirthdayPickerRequireManualSelection or InitialMonth ~= nil and (InitialDay ~= nil and InitialYear ~= nil)
+	local v1: number = if FFlagSignUpBirthdayPickerRequireManualSelection then 2 else #p1.dummyYears + -1
+	local NewPlaceholderOffset: number = if NoFFlagSignUpBirthdayPickerRequireManualSelection then 1 + p1.placeholderOffset else 1
+	local NewPlaceholderOffset1: number = if NoFFlagSignUpBirthdayPickerRequireManualSelection then 1 + p1.placeholderOffset else 1
+	local NewPlaceholderOffset2: number = if NoFFlagSignUpBirthdayPickerRequireManualSelection then v1 + p1.placeholderOffset else 1
+	local NewInitialMonth = if InitialMonth then InitialMonth + p1.placeholderOffset else nil
+	local NewInitialDay = if InitialDay then InitialDay + p1.placeholderOffset else nil
+	local NewPlaceholderOffset3 = nil
 	
-	if initialYear then
-		local clampedValue = math.clamp(initialYear, var1, var2)
-		var11 = (if var3 then var2 - clampedValue + 1 else clampedValue - var1 + 1) + p1.placeholderOffset
+	if InitialYear then
+		local ClampedValue = math.clamp(InitialYear, MinValue, MaxValue)
+		NewPlaceholderOffset3 = (if FFlagSignUpBirthdayPickerRequireManualSelection then MaxValue - ClampedValue + 1 else ClampedValue - MinValue + 1) + p1.placeholderOffset
 	end
 	p1.state = {
-		selectedMonthIndex = var9 or var6,
-		selectedDayIndex = var10 or var7,
-		selectedYearIndex = var11 or var8,
-		continueButtonEnabled = var4,
-		hasUserPickedMonth = var4,
-		hasUserPickedDay = var4,
-		hasUserPickedYear = var4
+		selectedMonthIndex = NewInitialMonth or NewPlaceholderOffset,
+		selectedDayIndex = NewInitialDay or NewPlaceholderOffset1,
+		selectedYearIndex = NewPlaceholderOffset3 or NewPlaceholderOffset2,
+		continueButtonEnabled = NoFFlagSignUpBirthdayPickerRequireManualSelection,
+		hasUserPickedMonth = NoFFlagSignUpBirthdayPickerRequireManualSelection,
+		hasUserPickedDay = NoFFlagSignUpBirthdayPickerRequireManualSelection,
+		hasUserPickedYear = NoFFlagSignUpBirthdayPickerRequireManualSelection
 	}
-	p1.datePickerRef = roactModule.createRef()
-	p1.defaultRef = roactModule.createRef()
+	p1.datePickerRef = RoactModule.createRef()
+	p1.defaultRef = RoactModule.createRef()
 	p1.shouldExpandTapTarget = p1.props.shouldExpandTapTarget
 	p1.tapTargetExpansionSize = p1.props.tapTargetExpansionSize
 	
-	function p7.renderEntryTextfunction(p2, p3)
-		-- upvalues: withStyle (copy), roactModule (copy)
-		return withStyle(function(p4)
-			-- upvalues: p3 (ref), roactModule (copy), p2 (ref)
-			local font = p4.Font.Body.Font
-			local var12 = p4.Font.BaseSize * p4.Font.Body.RelativeSize
-			local color = p4.Theme.TextDefault.Color
-			local transparency = p4.Theme.TextDefault.Transparency
+	function p1.renderEntryTextfunction(FormattedDayString, Emphasized) --[[ Line: 205 ]]
+		-- upvalues: WithStyleFunction (upval), RoactModule (upval)
+		return WithStyleFunction(function(p2) --[[ Line: 206 ]]
+			-- upvalues: Emphasized (copy), RoactModule (upval), FormattedDayString (copy)
+			local BodyFont = p2.Font.Body.Font
+			local ScaledBaseSize = p2.Font.BaseSize * p2.Font.Body.RelativeSize
+			local Color = p2.Theme.TextDefault.Color
+			local Transparency = p2.Theme.TextDefault.Transparency
 			
-			if p3 == "Muted" then
-				color = p4.Theme.TextMuted.Color
-				transparency = p4.Theme.TextMuted.Transparency
-			elseif p3 == "Emphasized" then
-				font = p4.Font.Header1.Font
-				var12 = p4.Font.BaseSize * p4.Font.Header1.RelativeSize
-				color = p4.Theme.TextEmphasis.Color
-				transparency = p4.Theme.TextEmphasis.Transparency
+			if Emphasized == "Muted" then
+				Color = p2.Theme.TextMuted.Color
+				Transparency = p2.Theme.TextMuted.Transparency
+			elseif Emphasized == "Emphasized" then
+				BodyFont = p2.Font.Header1.Font
+				ScaledBaseSize = p2.Font.BaseSize * p2.Font.Header1.RelativeSize
+				Color = p2.Theme.TextEmphasis.Color
+				Transparency = p2.Theme.TextEmphasis.Transparency
 			end
-			return roactModule.createElement("TextLabel", {
+			return RoactModule.createElement("TextLabel", {
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
 				Size = UDim2.new(1, 0, 1, 0),
-				Text = tostring(p2),
-				Font = font,
-				TextSize = var12,
-				TextColor3 = color,
-				TextTransparency = transparency
+				Text = tostring(FormattedDayString),
+				Font = BodyFont,
+				TextSize = ScaledBaseSize,
+				TextColor3 = Color,
+				TextTransparency = Transparency
 			})
 		end)
 	end
 	
-	function p7.renderWheelContainerFunction(p2)
-		-- upvalues: roactModule (copy), p1 (ref)
-		return roactModule.createElement("Frame", {
+	function p1.renderWheelContainerFunction(p2) --[[ Line: 236 ]]
+		-- upvalues: RoactModule (upval), p1 (copy)
+		return RoactModule.createElement("Frame", {
 			LayoutOrder = 2,
 			Size = UDim2.new(1, 0, 0, 200),
 			BorderSizePixel = 0,
 			BackgroundTransparency = 1,
 			ClipsDescendants = not p1.shouldExpandTapTarget,
-			[roactModule.Ref] = p1.props.focusNavigationRef
+			[RoactModule.Ref] = p1.props.focusNavigationRef
 		}, p2)
 	end
 	
-	if getFFlagSignUpBirthdayRefactorNestedDefinition() then
-		function p7.renderWheelContainerFunction(p2)
-			-- upvalues: renderWheelContainer (copy), p1 (ref)
+	if GetFFlagSignUpBirthdayRefactorNestedDefinitionFunction() then
+		function p1.renderWheelContainerFunction(p2) --[[ Line: 248 ]]
+			-- upvalues: renderWheelContainer (upval), p1 (copy)
 			return renderWheelContainer(p2, p1.shouldExpandTapTarget, p1.props.focusNavigationRef)
 		end
 	end
-	local function _(p2, p3)
-		-- upvalues: p1 (ref)
-		return function(p4, p5)
-			-- upvalues: p1 (copy), p2 (ref), p3 (ref)
-			if p1.state[p2] ~= p4 or p5 and (not p1.state[p3] and p1.placeholderOffset < p4) then
-				spawn(function()
-					-- upvalues: p1 (copy), p2 (copy), p4 (ref), p5 (ref), p3 (copy)
+	local function _(p2, p3) --[[ Line: 255 | Named "makeChangeHandler" ]]
+		-- upvalues: p1 (copy)
+		return function(StateEntry, p4) --[[ Line: 256 ]]
+			-- upvalues: p1 (upval), p2 (copy), p3 (copy)
+			local IsStateEntryAbove: boolean = p4 and (not p1.state[p3] and StateEntry > p1.placeholderOffset)
+			
+			if p1.state[p2] ~= StateEntry or IsStateEntryAbove then
+				spawn(function() --[[ Line: 266 ]]
+					-- upvalues: p1 (upval), p2 (upval), StateEntry (copy), p4 (copy), p3 (upval)
 					if not p1.isMounted then return end
-					local t = {}
+					local StateEntries = {}
 					
-					if p1.state[p2] ~= p4 then
-						t[p2] = p4
+					if p1.state[p2] ~= StateEntry then
+						StateEntries[p2] = StateEntry
 					end
-					if p5 and not p1.state[p3] and p1.placeholderOffset < p4 then
-						t[p3] = true
+					if p4 and not p1.state[p3] and p1.placeholderOffset < StateEntry then
+						StateEntries[p3] = true
 					end
-					if next(t) ~= nil then
-						p1:setState(t)
+					if next(StateEntries) ~= nil then
+						p1:setState(StateEntries)
 					end
 				end)
 				
@@ -210,25 +207,27 @@ function birthdayPicker.init(p1)
 		end
 	end
 	
-	local var12 = "selectedMonthIndex"
-	local var13 = "hasUserPickedMonth"
+	local v2 = "selectedMonthIndex"
+	local v3 = "hasUserPickedMonth"
 	
-	function p7.onSelectedIndexChangedForMonth(p2, p3)
-		-- upvalues: p1 (ref), var12 (ref), var13 (ref)
-		if p1.state[var12] ~= p2 or p3 and (not p1.state[var13] and p1.placeholderOffset < p2) then
-			spawn(function()
-				-- upvalues: p1 (copy), var12 (copy), p2 (ref), p3 (ref), var13 (copy)
+	function p1.onSelectedIndexChangedForMonth(StateEntry, p2) --[[ Line: 256 ]]
+		-- upvalues: p1 (copy), v2 (copy), v3 (copy)
+		local IsStateEntryAbove: boolean = p2 and (not p1.state[v3] and StateEntry > p1.placeholderOffset)
+		
+		if p1.state[v2] ~= StateEntry or IsStateEntryAbove then
+			spawn(function() --[[ Line: 266 ]]
+				-- upvalues: p1 (upval), v2 (upval), StateEntry (copy), p2 (copy), v3 (upval)
 				if not p1.isMounted then return end
-				local t = {}
+				local StateEntries = {}
 				
-				if p1.state[var12] ~= p2 then
-					t[var12] = p2
+				if p1.state[v2] ~= StateEntry then
+					StateEntries[v2] = StateEntry
 				end
-				if p3 and not p1.state[var13] and p1.placeholderOffset < p2 then
-					t[var13] = true
+				if p2 and not p1.state[v3] and p1.placeholderOffset < StateEntry then
+					StateEntries[v3] = true
 				end
-				if next(t) ~= nil then
-					p1:setState(t)
+				if next(StateEntries) ~= nil then
+					p1:setState(StateEntries)
 				end
 			end)
 			
@@ -236,25 +235,27 @@ function birthdayPicker.init(p1)
 		end
 	end
 	
-	local var14 = "selectedDayIndex"
-	local var15 = "hasUserPickedDay"
+	local v4 = "selectedDayIndex"
+	local v5 = "hasUserPickedDay"
 	
-	function p7.onSelectedIndexChangedForDay(p2, p3)
-		-- upvalues: p1 (ref), var14 (ref), var15 (ref)
-		if p1.state[var14] ~= p2 or p3 and (not p1.state[var15] and p1.placeholderOffset < p2) then
-			spawn(function()
-				-- upvalues: p1 (copy), var14 (copy), p2 (ref), p3 (ref), var15 (copy)
+	function p1.onSelectedIndexChangedForDay(StateEntry, p2) --[[ Line: 256 ]]
+		-- upvalues: p1 (copy), v4 (copy), v5 (copy)
+		local IsStateEntryAbove: boolean = p2 and (not p1.state[v5] and StateEntry > p1.placeholderOffset)
+		
+		if p1.state[v4] ~= StateEntry or IsStateEntryAbove then
+			spawn(function() --[[ Line: 266 ]]
+				-- upvalues: p1 (upval), v4 (upval), StateEntry (copy), p2 (copy), v5 (upval)
 				if not p1.isMounted then return end
-				local t = {}
+				local StateEntries = {}
 				
-				if p1.state[var14] ~= p2 then
-					t[var14] = p2
+				if p1.state[v4] ~= StateEntry then
+					StateEntries[v4] = StateEntry
 				end
-				if p3 and not p1.state[var15] and p1.placeholderOffset < p2 then
-					t[var15] = true
+				if p2 and not p1.state[v5] and p1.placeholderOffset < StateEntry then
+					StateEntries[v5] = true
 				end
-				if next(t) ~= nil then
-					p1:setState(t)
+				if next(StateEntries) ~= nil then
+					p1:setState(StateEntries)
 				end
 			end)
 			
@@ -262,25 +263,27 @@ function birthdayPicker.init(p1)
 		end
 	end
 	
-	local var16 = "selectedYearIndex"
-	local var17 = "hasUserPickedYear"
+	local v6 = "selectedYearIndex"
+	local v7 = "hasUserPickedYear"
 	
-	function p7.onSelectedIndexChangedForYear(p2, p3)
-		-- upvalues: p1 (ref), var16 (ref), var17 (ref)
-		if p1.state[var16] ~= p2 or p3 and (not p1.state[var17] and p1.placeholderOffset < p2) then
-			spawn(function()
-				-- upvalues: p1 (copy), var16 (copy), p2 (ref), p3 (ref), var17 (copy)
+	function p1.onSelectedIndexChangedForYear(StateEntry, p2) --[[ Line: 256 ]]
+		-- upvalues: p1 (copy), v6 (copy), v7 (copy)
+		local IsStateEntryAbove: boolean = p2 and (not p1.state[v7] and StateEntry > p1.placeholderOffset)
+		
+		if p1.state[v6] ~= StateEntry or IsStateEntryAbove then
+			spawn(function() --[[ Line: 266 ]]
+				-- upvalues: p1 (upval), v6 (upval), StateEntry (copy), p2 (copy), v7 (upval)
 				if not p1.isMounted then return end
-				local t = {}
+				local StateEntries = {}
 				
-				if p1.state[var16] ~= p2 then
-					t[var16] = p2
+				if p1.state[v6] ~= StateEntry then
+					StateEntries[v6] = StateEntry
 				end
-				if p3 and not p1.state[var17] and p1.placeholderOffset < p2 then
-					t[var17] = true
+				if p2 and not p1.state[v7] and p1.placeholderOffset < StateEntry then
+					StateEntries[v7] = true
 				end
-				if next(t) ~= nil then
-					p1:setState(t)
+				if next(StateEntries) ~= nil then
+					p1:setState(StateEntries)
 				end
 			end)
 			
@@ -288,51 +291,52 @@ function birthdayPicker.init(p1)
 		end
 	end
 	
-	function p7.onActivated(_)
-		-- upvalues: p1 (ref)
+	function p1:onActivated() --[[ Line: 288 ]]
+		-- upvalues: p1 (copy)
 		if p1.props.focusedGuiObject and p1.datePickerRef and p1.defaultRef.current then
 			p1.props.focusGuiObject(p1.defaultRef.current, true)
 		end
 	end
 	
-	function p7.onEntryActivated()
-		-- upvalues: p1 (ref)
+	function p1.onEntryActivated() --[[ Line: 294 ]]
+		-- upvalues: p1 (copy)
 		if p1.props.focusedGuiObject and p1.datePickerRef and p1.datePickerRef.current then
 			p1.props.focusGuiObject(p1.datePickerRef.current, true)
 		end
 	end
 end
 
-function birthdayPicker.getActualIndex(p2, p3, p4, p5)
-	if not p2.state[p3] then
+function BirthdayPicker.getActualIndex(p2, p3, p4, Count) --[[ Line: 303 ]]
+	if p2.state[p3] then
+		local StateEntryDelta = p2.state[p4] - p2.placeholderOffset
+		
+		return if StateEntryDelta < 1 or Count < StateEntryDelta then nil else StateEntryDelta
+	else
 		return nil
 	end
-	local var18 = p2.state[p4] - p2.placeholderOffset
+end
+
+function BirthdayPicker.getActualMonth(p2) --[[ Line: 314 ]]
+	-- upvalues: MonthsLocalizationKeys (copy)
+	return p2:getActualIndex("hasUserPickedMonth", "selectedMonthIndex", #MonthsLocalizationKeys)
+end
+
+function BirthdayPicker.getActualDay(p2) --[[ Line: 318 ]]
+	-- upvalues: List (copy)
+	return p2:getActualIndex("hasUserPickedDay", "selectedDayIndex", #List)
+end
+
+function BirthdayPicker.getActualYear(p2) --[[ Line: 322 ]]
+	local HasUserPickedYearActualIndex = p2:getActualIndex("hasUserPickedYear", "selectedYearIndex", #p2.dummyYears)
 	
-	return if var18 < 1 or p5 < var18 then nil else var18
+	return if HasUserPickedYearActualIndex then p2.dummyYears[HasUserPickedYearActualIndex] else nil
 end
 
-function birthdayPicker.getActualMonth(p2)
-	-- upvalues: monthsLocalizationKeys (ref)
-	return p2:getActualIndex("hasUserPickedMonth", "selectedMonthIndex", #monthsLocalizationKeys)
-end
-
-function birthdayPicker.getActualDay(p2)
-	-- upvalues: t (ref)
-	return p2:getActualIndex("hasUserPickedDay", "selectedDayIndex", #t)
-end
-
-function birthdayPicker.getActualYear(p2)
-	local hasUserPickedYearActualIndex = p2:getActualIndex("hasUserPickedYear", "selectedYearIndex", #p2.dummyYears)
+function BirthdayPicker.didMount(p2) --[[ Line: 327 ]]
+	local UpdateBirthdayFunction: (any, any, any) -> () = p2.props.updateBirthday
 	
-	return if hasUserPickedYearActualIndex then p2.dummyYears[hasUserPickedYearActualIndex] else nil
-end
-
-function birthdayPicker.didMount(p2)
-	local updateBirthday = p2.props.updateBirthday
-	
-	if updateBirthday and not p2.props.skipUpdateOnMount then
-		updateBirthday(p2:getActualMonth(), p2:getActualDay(), p2:getActualYear())
+	if UpdateBirthdayFunction and not p2.props.skipUpdateOnMount then
+		UpdateBirthdayFunction(p2:getActualMonth(), p2:getActualDay(), p2:getActualYear())
 	end
 	if p2.props.focusedGuiObject and p2.datePickerRef and p2.datePickerRef.current then
 		p2.props.focusGuiObject(p2.datePickerRef.current, true)
@@ -340,115 +344,113 @@ function birthdayPicker.didMount(p2)
 	p2.isMounted = true
 end
 
-function birthdayPicker.willUnmount(p2)
+function BirthdayPicker.willUnmount(p2) --[[ Line: 341 ]]
 	p2.isMounted = false
 end
 
-function birthdayPicker.updatePickerState(p2)
-	-- upvalues: dateHelper (ref), reasonDateInvalid (ref)
-	local actualMonth = p2:getActualMonth()
-	local actualDay = p2:getActualDay()
-	local actualYear = p2:getActualYear()
-	local var18 = actualMonth ~= nil and (actualDay ~= nil and actualYear ~= nil)
-	local var19 = false
-	local var20 = nil
-	local var21 = false
+function BirthdayPicker.updatePickerState(p2) --[[ Line: 345 ]]
+	-- upvalues: DateHelper (copy), ReasonDateInvalid (copy)
+	local ActualMonth = p2:getActualMonth()
+	local ActualDay = p2:getActualDay()
+	local ActualYear = p2:getActualYear()
+	local HasActualYear: boolean = ActualMonth ~= nil and (ActualDay ~= nil and ActualYear ~= nil)
+	local Flag = false
+	local NewLastDayOfTheMonthInYear = nil
+	local v8 = false
 	
-	if var18 then
-		local _ = nil
-		local var22, var23 = dateHelper:isValidDate(actualMonth, actualDay, actualYear)
-		var21 = var22
+	if HasActualYear then
+		local IsValidDate2
+		v8, IsValidDate2 = DateHelper:isValidDate(ActualMonth, ActualDay, ActualYear)
 		
-		if not var21 and var23 == reasonDateInvalid.IsInvalidDayOfMonth then
-			var19 = true
-			var20 = dateHelper:getLastDayOfTheMonthInYear(actualMonth, actualYear) + p2.placeholderOffset
+		if not v8 and IsValidDate2 == ReasonDateInvalid.IsInvalidDayOfMonth then
+			Flag = true
+			NewLastDayOfTheMonthInYear = DateHelper:getLastDayOfTheMonthInYear(ActualMonth, ActualYear) + p2.placeholderOffset
 		end
 	end
-	spawn(function()
-		-- upvalues: p2 (ref), var19 (write), var20 (write), var18 (ref), var21 (write)
+	spawn(function() --[[ Line: 365 ]]
+		-- upvalues: p2 (copy), Flag (ref), NewLastDayOfTheMonthInYear (ref), HasActualYear (copy), v8 (ref)
 		if p2.isMounted then
 			p2:setState({
-				selectedDayIndex = if var19 then var20 else nil,
-				continueButtonEnabled = var18 and var21
+				selectedDayIndex = Flag and NewLastDayOfTheMonthInYear or nil,
+				continueButtonEnabled = HasActualYear and v8
 			})
 		end
 	end)
 end
 
-function birthdayPicker.didUpdate(p2)
-	-- upvalues: dateHelper (ref), reasonDateInvalid (ref)
-	local updateBirthday = p2.props.updateBirthday
-	local actualMonth = p2:getActualMonth()
-	local actualDay = p2:getActualDay()
-	local actualYear = p2:getActualYear()
-	local continueButtonEnabled = p2.state.continueButtonEnabled
-	local var18 = actualMonth ~= nil and (actualDay ~= nil and actualYear ~= nil)
-	local var19 = false
-	local var20 = nil
+function BirthdayPicker.didUpdate(p2) --[[ Line: 375 ]]
+	-- upvalues: DateHelper (copy), ReasonDateInvalid (copy)
+	local UpdateBirthdayFunction: (any, any, any) -> () = p2.props.updateBirthday
+	local ActualMonth = p2:getActualMonth()
+	local ActualDay = p2:getActualDay()
+	local ActualYear = p2:getActualYear()
+	local ContinueButtonEnabled = p2.state.continueButtonEnabled
+	local ContinueButtonEnabled1 = false
+	local IsInvalidDayOfMonth = nil
 	
-	if var18 then
-		local var21, var22 = dateHelper:isValidDate(actualMonth, actualDay, actualYear)
-		var19 = var21
-		var20 = var22
+	if ActualMonth ~= nil and (ActualDay ~= nil and ActualYear ~= nil) then
+		ContinueButtonEnabled1, IsInvalidDayOfMonth = DateHelper:isValidDate(ActualMonth, ActualDay, ActualYear)
 	end
-	if var19 ~= continueButtonEnabled or not var19 and var20 == reasonDateInvalid.IsInvalidDayOfMonth then
+	local IsIsInvalidDayOfMonthMatch: boolean = not ContinueButtonEnabled1 and IsInvalidDayOfMonth == ReasonDateInvalid.IsInvalidDayOfMonth
+	
+	if ContinueButtonEnabled1 ~= ContinueButtonEnabled or IsIsInvalidDayOfMonthMatch then
 		p2:updatePickerState()
 	end
-	if updateBirthday then
-		updateBirthday(actualMonth, actualDay, actualYear)
+	if UpdateBirthdayFunction then
+		UpdateBirthdayFunction(ActualMonth, ActualDay, ActualYear)
 	end
 end
 
-function birthdayPicker.render(p2)
-	-- upvalues: localizationService (ref), dateTypeOrder (ref), getFFlagSignUpBirthdayPickerRequireManualSelection (ref), monthsLocalizationKeys (ref), cryoModule (ref), t (ref), withStyle (ref), withLocalization (ref), roactModule (ref), fitChildren (ref), scrollingPicker (ref), timeUnit (ref), dateHelper (ref)
-	local robloxLocaleId = localizationService.RobloxLocaleId
-	local var18 = dateTypeOrder[robloxLocaleId]
-	local var19 = not p2.shouldExpandTapTarget or p2.tapTargetExpansionSize <= 0
-	local layoutOrder = p2.props.layoutOrder
-	local var20 = p2.props.requireManualSelection and getFFlagSignUpBirthdayPickerRequireManualSelection()
-	local placeholderTextMonth = p2.props.placeholderTextMonth
-	local placeholderTextDay = p2.props.placeholderTextDay
-	local placeholderTextYear = p2.props.placeholderTextYear
-	local var21 = if var20 then cryoModule.List.join({ placeholderTextMonth }, monthsLocalizationKeys) else monthsLocalizationKeys
-	local var22 = if var20 then cryoModule.List.join({ placeholderTextDay }, t) else t
-	local dummyYears = p2.dummyYears
-	local var23 = if var20 then cryoModule.List.join({ placeholderTextYear }, dummyYears) else dummyYears
-	local selectedMonthIndex = p2.state.selectedMonthIndex
-	local selectedDayIndex = p2.state.selectedDayIndex
-	local selectedYearIndex = p2.state.selectedYearIndex
-	local var24 = if var20 and p2.state.hasUserPickedMonth then 2 else 1
-	local var25 = if var20 and p2.state.hasUserPickedDay then 2 else 1
-	local var26 = if var20 and p2.state.hasUserPickedYear then 2 else 1
-	local actualMonth = p2:getActualMonth()
-	local actualYear = p2:getActualYear()
-	local hasUserPickedMonth = p2.state.hasUserPickedMonth
-	local hasUserPickedDay = p2.state.hasUserPickedDay
-	local hasUserPickedYear = p2.state.hasUserPickedYear
+function BirthdayPicker.render(p2) --[[ Line: 402 ]]
+	-- upvalues: LocalizationService (copy), DateTypeOrder (copy), GetFFlagSignUpBirthdayPickerRequireManualSelectionFunction (copy), MonthsLocalizationKeys (copy), CryoModule (copy), List (copy), WithStyleFunction (copy), WithLocalizationFunction (copy), RoactModule (copy), FitChildren (copy), ScrollingPicker (copy), TimeUnit (copy), DateHelper (copy)
+	local RobloxLocaleId = LocalizationService.RobloxLocaleId
+	local DateTypeOrderEntry = DateTypeOrder[RobloxLocaleId]
+	local NoShouldExpandTapTarget: boolean = not p2.shouldExpandTapTarget or p2.tapTargetExpansionSize <= 0
+	local LayoutOrder = p2.props.layoutOrder
+	local FFlagSignUpBirthdayPickerRequireManualSelection = p2.props.requireManualSelection and GetFFlagSignUpBirthdayPickerRequireManualSelectionFunction()
+	local PlaceholderTextMonth = p2.props.placeholderTextMonth
+	local PlaceholderTextDay = p2.props.placeholderTextDay
+	local PlaceholderTextYear = p2.props.placeholderTextYear
+	local JoinResult = if FFlagSignUpBirthdayPickerRequireManualSelection then CryoModule.List.join({ PlaceholderTextMonth }, MonthsLocalizationKeys) else MonthsLocalizationKeys
+	local JoinResult1 = if FFlagSignUpBirthdayPickerRequireManualSelection then CryoModule.List.join({ PlaceholderTextDay }, List) else List
+	local DummyYears = p2.dummyYears
+	local JoinResult2 = if FFlagSignUpBirthdayPickerRequireManualSelection then CryoModule.List.join({ PlaceholderTextYear }, DummyYears) else DummyYears
+	local SelectedMonthIndex = p2.state.selectedMonthIndex
+	local SelectedDayIndex = p2.state.selectedDayIndex
+	local SelectedYearIndex = p2.state.selectedYearIndex
+	local MinTargetIndex: number = if FFlagSignUpBirthdayPickerRequireManualSelection and p2.state.hasUserPickedMonth then 2 else 1
+	local MinTargetIndex1: number = if FFlagSignUpBirthdayPickerRequireManualSelection and p2.state.hasUserPickedDay then 2 else 1
+	local MinTargetIndex2: number = if FFlagSignUpBirthdayPickerRequireManualSelection and p2.state.hasUserPickedYear then 2 else 1
+	local ActualMonth = p2:getActualMonth()
+	local ActualYear = p2:getActualYear()
+	local HasUserPickedMonth = p2.state.hasUserPickedMonth
+	local HasUserPickedDay = p2.state.hasUserPickedDay
+	local HasUserPickedYear = p2.state.hasUserPickedYear
 	
-	return withStyle(function(_)
-		-- upvalues: withLocalization (copy), roactModule (copy), fitChildren (copy), layoutOrder (ref), p2 (ref), var19 (ref), scrollingPicker (copy), var18 (ref), timeUnit (copy), placeholderTextMonth (ref), hasUserPickedMonth (ref), withStyle (copy), var21 (ref), selectedMonthIndex (ref), var24 (ref), hasUserPickedDay (ref), placeholderTextDay (ref), dateHelper (copy), var22 (ref), selectedDayIndex (ref), robloxLocaleId (ref), actualMonth (ref), actualYear (ref), var25 (ref), hasUserPickedYear (ref), placeholderTextYear (ref), var23 (ref), selectedYearIndex (ref), var26 (ref)
-		return withLocalization({ continueText = "Authentication.SignUp.Label.Continue" })(function(_)
-			-- upvalues: roactModule (copy), fitChildren (copy), layoutOrder (copy), p2 (copy), var19 (copy), scrollingPicker (copy), var18 (copy), timeUnit (copy), placeholderTextMonth (copy), hasUserPickedMonth (copy), withStyle (copy), withLocalization (copy), var21 (copy), selectedMonthIndex (copy), var24 (copy), hasUserPickedDay (copy), placeholderTextDay (copy), dateHelper (copy), var22 (copy), selectedDayIndex (copy), robloxLocaleId (copy), actualMonth (copy), actualYear (copy), var25 (copy), hasUserPickedYear (copy), placeholderTextYear (copy), var23 (copy), selectedYearIndex (copy), var26 (copy)
-			return roactModule.createElement(fitChildren.FitFrame, {
+	return WithStyleFunction(function(_) --[[ Line: 435 ]]
+		-- upvalues: WithLocalizationFunction (upval), RoactModule (upval), FitChildren (upval), LayoutOrder (copy), p2 (copy), NoShouldExpandTapTarget (copy), ScrollingPicker (upval), DateTypeOrderEntry (copy), TimeUnit (upval), PlaceholderTextMonth (copy), HasUserPickedMonth (copy), WithStyleFunction (upval), JoinResult (copy), SelectedMonthIndex (copy), MinTargetIndex (copy), HasUserPickedDay (copy), PlaceholderTextDay (copy), DateHelper (upval), JoinResult1 (copy), SelectedDayIndex (copy), RobloxLocaleId (copy), ActualMonth (copy), ActualYear (copy), MinTargetIndex1 (copy), HasUserPickedYear (copy), PlaceholderTextYear (copy), JoinResult2 (copy), SelectedYearIndex (copy), MinTargetIndex2 (copy)
+		return WithLocalizationFunction({ continueText = "Authentication.SignUp.Label.Continue" })(function(_) --[[ Line: 438 ]]
+			-- upvalues: RoactModule (upval), FitChildren (upval), LayoutOrder (upval), p2 (upval), NoShouldExpandTapTarget (upval), ScrollingPicker (upval), DateTypeOrderEntry (upval), TimeUnit (upval), PlaceholderTextMonth (upval), HasUserPickedMonth (upval), WithStyleFunction (upval), WithLocalizationFunction (upval), JoinResult (upval), SelectedMonthIndex (upval), MinTargetIndex (upval), HasUserPickedDay (upval), PlaceholderTextDay (upval), DateHelper (upval), JoinResult1 (upval), SelectedDayIndex (upval), RobloxLocaleId (upval), ActualMonth (upval), ActualYear (upval), MinTargetIndex1 (upval), HasUserPickedYear (upval), PlaceholderTextYear (upval), JoinResult2 (upval), SelectedYearIndex (upval), MinTargetIndex2 (upval)
+			return RoactModule.createElement(FitChildren.FitFrame, {
 				BorderSizePixel = 0,
 				BackgroundTransparency = 1,
-				LayoutOrder = layoutOrder,
+				LayoutOrder = LayoutOrder,
 				Size = UDim2.new(1, 0, 0, 0),
-				fitAxis = fitChildren.FitAxis.Height
+				fitAxis = FitChildren.FitAxis.Height
 			}, {
-				ListLayout = roactModule.createElement("UIListLayout", {
+				ListLayout = RoactModule.createElement("UIListLayout", {
 					FillDirection = Enum.FillDirection.Vertical,
 					SortOrder = Enum.SortOrder.LayoutOrder,
 					Padding = UDim.new(0, 14)
 				}),
-				DatePickerWrap = roactModule.createElement(fitChildren.FitFrame, {
+				DatePickerWrap = RoactModule.createElement(FitChildren.FitFrame, {
 					LayoutOrder = 1,
 					BorderSizePixel = 0,
 					BackgroundTransparency = 1,
 					Size = UDim2.new(1, 0, 0, 0),
-					fitAxis = fitChildren.FitAxis.Height
+					fitAxis = FitChildren.FitAxis.Height
 				}, {
-					CenterFrame = roactModule.createElement("ImageLabel", {
+					CenterFrame = RoactModule.createElement("ImageLabel", {
 						Image = "rbxasset://textures/ui/LuaApp/graphic/Auth/DatePickerDivider.png",
 						BackgroundTransparency = 1,
 						ZIndex = 2,
@@ -458,9 +460,9 @@ function birthdayPicker.render(p2)
 						Position = UDim2.new(0, 0, 0.5, 0),
 						AnchorPoint = Vector2.new(0, 0.5)
 					}),
-					DatePicker = roactModule.createElement(fitChildren.FitTextButton, {
+					DatePicker = RoactModule.createElement(FitChildren.FitTextButton, {
 						Size = UDim2.new(1, 0, 0, 0),
-						fitAxis = fitChildren.FitAxis.Height,
+						fitAxis = FitChildren.FitAxis.Height,
 						BorderSizePixel = 0,
 						BackgroundTransparency = 1,
 						Selectable = true,
@@ -469,96 +471,89 @@ function birthdayPicker.render(p2)
 						NextSelectionLeft = p2.datePickerRef.current,
 						NextSelectionRight = p2.datePickerRef.current,
 						Text = "",
-						[roactModule.Ref] = p2.datePickerRef,
-						[roactModule.Event.Activated] = p2.onActivated
+						[RoactModule.Ref] = p2.datePickerRef,
+						[RoactModule.Event.Activated] = p2.onActivated
 					}, {
-						ListLayout = roactModule.createElement("UIListLayout", {
+						ListLayout = RoactModule.createElement("UIListLayout", {
 							FillDirection = Enum.FillDirection.Vertical,
 							SortOrder = Enum.SortOrder.LayoutOrder
 						}),
 						WheelContainer = p2.renderWheelContainerFunction({
-							ListLayout = roactModule.createElement("UIListLayout", {
+							ListLayout = RoactModule.createElement("UIListLayout", {
 								FillDirection = Enum.FillDirection.Horizontal,
 								SortOrder = Enum.SortOrder.LayoutOrder,
-								VerticalAlignment = if var19 then Enum.VerticalAlignment.Center else nil
+								VerticalAlignment = if NoShouldExpandTapTarget then Enum.VerticalAlignment.Center else nil
 							}),
-							Padding = roactModule.createElement("UIPadding", {
+							Padding = RoactModule.createElement("UIPadding", {
 								PaddingLeft = UDim.new(0, 5),
 								PaddingRight = UDim.new(0, 5),
 								PaddingTop = UDim.new(0, 5),
 								PaddingBottom = UDim.new(0, 5)
 							}),
-							MonthWheel = roactModule.createElement(scrollingPicker, {
+							MonthWheel = RoactModule.createElement(ScrollingPicker, {
 								entrySizeOnScrollingAxis = 50,
-								layoutOrder = var18[timeUnit.Months],
+								layoutOrder = DateTypeOrderEntry[TimeUnit.Months],
 								size = UDim2.new(0.45, 0, 0, 200),
-								renderEntry = function(p3)
-									-- upvalues: placeholderTextMonth (copy), hasUserPickedMonth (copy), p2 (copy), withStyle (copy), withLocalization (copy), var21 (copy), selectedMonthIndex (copy)
-									return if p3 == placeholderTextMonth then if hasUserPickedMonth then p2.renderEntryTextfunction("", "Default") else p2.renderEntryTextfunction(placeholderTextMonth, "Muted") else withStyle(function(_)
-										-- upvalues: withLocalization (copy), p3 (ref), var21 (copy), selectedMonthIndex (copy), hasUserPickedMonth (copy), p2 (copy)
-										return withLocalization({ monthText = p3 })(function(p4)
-											-- upvalues: var21 (copy), selectedMonthIndex (copy), p3 (copy), hasUserPickedMonth (copy), p2 (copy)
-											return p2.renderEntryTextfunction(p4.monthText, if p3 == var21[selectedMonthIndex] and hasUserPickedMonth then "Emphasized" else "Default")
+								renderEntry = function(MonthText) --[[ Line: 503 ]]
+									-- upvalues: PlaceholderTextMonth (upval), HasUserPickedMonth (upval), p2 (upval), WithStyleFunction (upval), WithLocalizationFunction (upval), JoinResult (upval), SelectedMonthIndex (upval)
+									return if MonthText == PlaceholderTextMonth then if HasUserPickedMonth then p2.renderEntryTextfunction("", "Default") else p2.renderEntryTextfunction(PlaceholderTextMonth, "Muted") else WithStyleFunction(function(_) --[[ Line: 512 ]]
+										-- upvalues: WithLocalizationFunction (upval), MonthText (copy), JoinResult (upval), SelectedMonthIndex (upval), HasUserPickedMonth (upval), p2 (upval)
+										return WithLocalizationFunction({ monthText = MonthText })(function(p3) --[[ Line: 515 ]]
+											-- upvalues: JoinResult (upval), SelectedMonthIndex (upval), MonthText (upval), HasUserPickedMonth (upval), p2 (upval)
+											return p2.renderEntryTextfunction(p3.monthText, if MonthText == JoinResult[SelectedMonthIndex] and HasUserPickedMonth then "Emphasized" else "Default")
 										end)
 									end)
 								end,
-								getEntryWrapperProps = function(p3)
-									-- upvalues: var21 (copy), selectedMonthIndex (copy), roactModule (copy), p2 (copy)
+								getEntryWrapperProps = function(p3) --[[ Line: 531 ]]
+									-- upvalues: JoinResult (upval), SelectedMonthIndex (upval), RoactModule (upval), p2 (upval)
 									return {
-										[roactModule.Ref] = if p3 == var21[selectedMonthIndex] then p2.defaultRef else nil
+										[RoactModule.Ref] = if p3 == JoinResult[SelectedMonthIndex] then p2.defaultRef else nil
 									}
 								end,
-								entries = var21,
+								entries = JoinResult,
 								onSelectedIndexChanged = p2.onSelectedIndexChangedForMonth,
-								parentSpecifiedTarget = selectedMonthIndex,
-								minTargetIndex = var24,
+								parentSpecifiedTarget = SelectedMonthIndex,
+								minTargetIndex = MinTargetIndex,
 								onEntryActivated = p2.onEntryActivated,
 								shouldExpandTapTarget = p2.shouldExpandTapTarget,
 								tapTargetExpansionSize = p2.tapTargetExpansionSize
 							}),
-							DayWheel = roactModule.createElement(scrollingPicker, {
+							DayWheel = RoactModule.createElement(ScrollingPicker, {
 								entrySizeOnScrollingAxis = 50,
-								layoutOrder = var18[timeUnit.Days],
+								layoutOrder = DateTypeOrderEntry[TimeUnit.Days],
 								size = UDim2.new(0.2, 0, 0, 200),
-								renderEntry = function(p3)
-									-- upvalues: hasUserPickedDay (copy), p2 (copy), placeholderTextDay (copy), withLocalization (copy), dateHelper (copy), var22 (copy), selectedDayIndex (copy), robloxLocaleId (copy), actualMonth (copy), actualYear (copy)
-									return if type(p3) == "number" then withLocalization({ dayAffix = dateHelper.DayAffixLocalizationKey })(function(p4)
-										-- upvalues: var22 (copy), selectedDayIndex (copy), p3 (ref), dateHelper (copy), robloxLocaleId (copy), actualMonth (copy), actualYear (copy), hasUserPickedDay (copy), p2 (copy)
-										local var27 = p3 == var22[selectedDayIndex]
-										local var28 = dateHelper:GetFormattedDayString(p3, p4.dayAffix, robloxLocaleId)
-										local var29 = "Default"
+								renderEntry = function(p3) --[[ Line: 549 ]]
+									-- upvalues: HasUserPickedDay (upval), p2 (upval), PlaceholderTextDay (upval), WithLocalizationFunction (upval), DateHelper (upval), JoinResult1 (upval), SelectedDayIndex (upval), RobloxLocaleId (upval), ActualMonth (upval), ActualYear (upval)
+									return if type(p3) == "number" then WithLocalizationFunction({ dayAffix = DateHelper.DayAffixLocalizationKey })(function(p4) --[[ Line: 558 ]]
+										-- upvalues: JoinResult1 (upval), SelectedDayIndex (upval), p3 (copy), DateHelper (upval), RobloxLocaleId (upval), ActualMonth (upval), ActualYear (upval), HasUserPickedDay (upval), p2 (upval)
+										local IsJoinResultEntryMatch = p3 == JoinResult1[SelectedDayIndex]
 										
-										if actualMonth and actualYear and dateHelper:isInvalidDayOfTheMonth(actualMonth, p3, actualYear) then
-											var29 = "Muted"
-										elseif var27 and hasUserPickedDay then
-											var29 = "Emphasized"
-										end
-										return p2.renderEntryTextfunction(var28, var29)
-									end) elseif hasUserPickedDay then p2.renderEntryTextfunction("", "Default") else p2.renderEntryTextfunction(placeholderTextDay, "Muted")
+										return p2.renderEntryTextfunction(DateHelper:GetFormattedDayString(p3, p4.dayAffix, RobloxLocaleId), if ActualMonth and ActualYear and DateHelper:isInvalidDayOfTheMonth(ActualMonth, p3, ActualYear) then "Muted" elseif IsJoinResultEntryMatch and HasUserPickedDay then "Emphasized" else "Default")
+									end) elseif HasUserPickedDay then p2.renderEntryTextfunction("", "Default") else p2.renderEntryTextfunction(PlaceholderTextDay, "Muted")
 								end,
-								entries = var22,
+								entries = JoinResult1,
 								onSelectedIndexChanged = p2.onSelectedIndexChangedForDay,
-								parentSpecifiedTarget = selectedDayIndex,
-								minTargetIndex = var25,
+								parentSpecifiedTarget = SelectedDayIndex,
+								minTargetIndex = MinTargetIndex1,
 								onEntryActivated = p2.onEntryActivated,
 								shouldExpandTapTarget = p2.shouldExpandTapTarget,
 								tapTargetExpansionSize = p2.tapTargetExpansionSize
 							}),
-							YearWheel = roactModule.createElement(scrollingPicker, {
+							YearWheel = RoactModule.createElement(ScrollingPicker, {
 								entrySizeOnScrollingAxis = 50,
-								layoutOrder = var18[timeUnit.Years],
+								layoutOrder = DateTypeOrderEntry[TimeUnit.Years],
 								size = UDim2.new(0.35, 0, 0, 200),
-								renderEntry = function(p3)
-									-- upvalues: hasUserPickedYear (copy), p2 (copy), placeholderTextYear (copy), withLocalization (copy), dateHelper (copy), var23 (copy), selectedYearIndex (copy), robloxLocaleId (copy)
-									return if type(p3) == "number" then withLocalization({ yearAffix = dateHelper.YearAffixLocalizationKey })(function(p4)
-										-- upvalues: var23 (copy), selectedYearIndex (copy), p3 (ref), dateHelper (copy), robloxLocaleId (copy), hasUserPickedYear (copy), p2 (copy)
-										return p2.renderEntryTextfunction(dateHelper:GetFormattedYearString(p3, p4.yearAffix, robloxLocaleId), if p3 == var23[selectedYearIndex] and hasUserPickedYear then "Emphasized" else "Default")
-									end) elseif hasUserPickedYear then p2.renderEntryTextfunction("", "Default") else p2.renderEntryTextfunction(placeholderTextYear, "Muted")
+								renderEntry = function(p3) --[[ Line: 593 ]]
+									-- upvalues: HasUserPickedYear (upval), p2 (upval), PlaceholderTextYear (upval), WithLocalizationFunction (upval), DateHelper (upval), JoinResult2 (upval), SelectedYearIndex (upval), RobloxLocaleId (upval)
+									return if type(p3) == "number" then WithLocalizationFunction({ yearAffix = DateHelper.YearAffixLocalizationKey })(function(p4) --[[ Line: 602 ]]
+										-- upvalues: JoinResult2 (upval), SelectedYearIndex (upval), p3 (copy), DateHelper (upval), RobloxLocaleId (upval), HasUserPickedYear (upval), p2 (upval)
+										return p2.renderEntryTextfunction(DateHelper:GetFormattedYearString(p3, p4.yearAffix, RobloxLocaleId), if p3 == JoinResult2[SelectedYearIndex] and HasUserPickedYear then "Emphasized" else "Default")
+									end) elseif HasUserPickedYear then p2.renderEntryTextfunction("", "Default") else p2.renderEntryTextfunction(PlaceholderTextYear, "Muted")
 								end,
-								entries = var23,
+								entries = JoinResult2,
 								onSelectedIndexChanged = p2.onSelectedIndexChangedForYear,
-								parentSpecifiedTarget = selectedYearIndex,
-								minTargetIndex = var26,
+								parentSpecifiedTarget = SelectedYearIndex,
+								minTargetIndex = MinTargetIndex2,
 								onEntryActivated = p2.onEntryActivated,
 								shouldExpandTapTarget = p2.shouldExpandTapTarget,
 								tapTargetExpansionSize = p2.tapTargetExpansionSize
@@ -571,11 +566,11 @@ function birthdayPicker.render(p2)
 	end)
 end
 
-return function(p2)
-	-- upvalues: reactFocusNavigationModule (ref), useFocusNavigationBindings (ref), roactModule (ref), birthdayPicker (ref), cryoModule (ref)
-	return roactModule.createElement(birthdayPicker, cryoModule.Dictionary.join(p2, {
-		focusedGuiObject = reactFocusNavigationModule.useFocusedGuiObject(),
-		focusGuiObject = reactFocusNavigationModule.useFocusGuiObject(),
+return function(p2) --[[ Line: 635 ]]
+	-- upvalues: ReactFocusNavigationModule (copy), useFocusNavigationBindings (copy), RoactModule (copy), BirthdayPicker (copy), CryoModule (copy)
+	return RoactModule.createElement(BirthdayPicker, CryoModule.Dictionary.join(p2, {
+		focusedGuiObject = ReactFocusNavigationModule.useFocusedGuiObject(),
+		focusGuiObject = ReactFocusNavigationModule.useFocusGuiObject(),
 		focusNavigationRef = useFocusNavigationBindings(nil)
 	}))
 end

@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.Home.Home)
+﻿return (require(script.Parent.Parent.Parent._Index.Home.Home))

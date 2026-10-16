@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("SoundTelemetryOsClock", false)
 
-return function()
+return function() --[[ Line: 3 ]]
 	return game:GetFastFlag("SoundTelemetryOsClock")
 end

@@ -1,12 +1,12 @@
-﻿local parent = script.Parent
-local _ = require(parent.Types)
-local valueChangedSignalModule = require(parent.ValueChangedSignal)
-local t = {}
-t.__index = t
+﻿local Parent = script.Parent
+local _ = require(Parent.Types)
+local ValueChangedSignalModule = require(Parent.ValueChangedSignal)
+local VisibilitySignalModule = {}
+VisibilitySignalModule.__index = VisibilitySignalModule
 
-function t.new(p1)
-	-- upvalues: valueChangedSignalModule (ref)
-	return valueChangedSignalModule.new(p1)
+function VisibilitySignalModule.new(p1) --[[ Line: 18 ]]
+	-- upvalues: ValueChangedSignalModule (copy)
+	return ValueChangedSignalModule.new(p1)
 end
 
-return t
+return VisibilitySignalModule

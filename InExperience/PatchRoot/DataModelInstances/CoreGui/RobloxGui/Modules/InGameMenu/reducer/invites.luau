@@ -1,9 +1,9 @@
-﻿local inGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
-local cryo = inGameMenuDependenciesModule.Cryo
+﻿local InGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
+local Cryo = InGameMenuDependenciesModule.Cryo
 
-return inGameMenuDependenciesModule.Rodux.createReducer({}, {
-	[require(script.Parent.Parent.Actions.ReceivedUserInviteStatus).name] = function(p1, p2)
-		-- upvalues: cryo (ref)
-		return cryo.Dictionary.join(p1, { [p2.userId] = p2.inviteStatus })
+return InGameMenuDependenciesModule.Rodux.createReducer({}, {
+	[require(script.Parent.Parent.Actions.ReceivedUserInviteStatus).name] = function(p1, p2) --[[ Line: 12 ]]
+		-- upvalues: Cryo (copy)
+		return Cryo.Dictionary.join(p1, { [p2.userId] = p2.inviteStatus })
 	end
 })

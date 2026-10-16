@@ -1,15 +1,15 @@
-﻿local localizationService = game:GetService("LocalizationService")
-local parent = script:FindFirstAncestor("ChatUIPrimitives").Parent
-local reactModule = require(parent.React)
-local useEventConnection = require(parent.ReactUtils).useEventConnection
+﻿local LocalizationService = game:GetService("LocalizationService")
+local Parent = script:FindFirstAncestor("ChatUIPrimitives").Parent
+local ReactModule = require(Parent.React)
+local UseEventConnectionFunction = require(Parent.ReactUtils).useEventConnection
 
-return function()
-	-- upvalues: reactModule (ref), localizationService (ref), useEventConnection (ref)
-	local var1, var2 = reactModule.useState(localizationService.RobloxLocaleId)
-	useEventConnection(localizationService:GetPropertyChangedSignal("RobloxLocaleId"), function()
-		-- upvalues: var2 (ref), localizationService (copy)
-		var2(localizationService.RobloxLocaleId)
+return function() --[[ Line: 8 | Named "useRobloxLocale" ]]
+	-- upvalues: ReactModule (copy), LocalizationService (copy), UseEventConnectionFunction (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(LocalizationService.RobloxLocaleId)
+	UseEventConnectionFunction(LocalizationService:GetPropertyChangedSignal("RobloxLocaleId"), function() --[[ Line: 11 ]]
+		-- upvalues: UseStateResult2 (copy), LocalizationService (upval)
+		UseStateResult2(LocalizationService.RobloxLocaleId)
 	end, {})
 	
-	return var1
+	return UseStateResult
 end

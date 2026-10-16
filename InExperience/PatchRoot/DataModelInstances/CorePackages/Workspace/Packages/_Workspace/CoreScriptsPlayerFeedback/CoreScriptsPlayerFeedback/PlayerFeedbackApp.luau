@@ -1,45 +1,44 @@
-﻿local coreScriptsPlayerFeedback = script:FindFirstAncestor("CoreScriptsPlayerFeedback")
-local parent = coreScriptsPlayerFeedback.Parent
-local reactModule = require(parent.React)
-local reactRobloxModule = require(parent.ReactRoblox)
-local localizationProvider = require(parent.Localization).LocalizationProvider
-local localization = require(parent.InExperienceLocales).Localization
-local playerFeedbackPromptsModule = require(coreScriptsPlayerFeedback.Components.PlayerFeedbackPrompts)
-local getFFlagEnablePlayerSupportPromptModule = require(coreScriptsPlayerFeedback.Flags.GetFFlagEnablePlayerSupportPrompt)
-local coreGuiService = game:GetService("CoreGui")
-local robloxGui = coreGuiService:FindFirstChild("RobloxGui") or coreGuiService:WaitForChild("RobloxGui")
-local var1 = getFFlagEnablePlayerSupportPromptModule()
-local _ = nil
-local ok, status = pcall(function()
-	-- upvalues: robloxGui (ref)
-	return if robloxGui then require(robloxGui.Modules.Common.renderWithCoreScriptsStyleProvider) else nil
+﻿local CoreScriptsPlayerFeedback = script:FindFirstAncestor("CoreScriptsPlayerFeedback")
+local Parent = CoreScriptsPlayerFeedback.Parent
+local ReactModule = require(Parent.React)
+local ReactRobloxModule = require(Parent.ReactRoblox)
+local LocalizationProvider = require(Parent.Localization).LocalizationProvider
+local Localization = require(Parent.InExperienceLocales).Localization
+local PlayerFeedbackPromptsModule = require(CoreScriptsPlayerFeedback.Components.PlayerFeedbackPrompts)
+local CoreGui = game:GetService("CoreGui")
+local RobloxGui = CoreGui:FindFirstChild("RobloxGui") or CoreGui:WaitForChild("RobloxGui")
+local v1 = require(CoreScriptsPlayerFeedback.Flags.GetFFlagEnablePlayerSupportPrompt)()
+local Result1 = nil
+local Success, Result = pcall(function() --[[ Line: 21 ]]
+	-- upvalues: RobloxGui (copy)
+	return if RobloxGui then require(RobloxGui.Modules.Common.renderWithCoreScriptsStyleProvider) else nil
 end)
-local var2 = if ok and status then status else function(p1)
+Result1 = if Success and Result then Result else function(p1) --[[ Line: 31 ]]
 	return p1.App
 end
 
-return function(p1)
-	-- upvalues: var2 (write), var1 (ref), reactRobloxModule (ref), reactModule (ref), localizationProvider (ref), localization (ref), playerFeedbackPromptsModule (ref)
-	p1 = p1 or var2
-	local screenGui = Instance.new("ScreenGui")
-	screenGui.IgnoreGuiInset = if var1 then false else true
-	screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-	screenGui.AutoLocalize = false
-	screenGui.DisplayOrder = -1
-	local var3 = reactRobloxModule.createRoot(screenGui)
-	var3:render(p1({
-		App = reactModule.createElement(localizationProvider, {
-			localization = localization.new(game:GetService("LocalizationService").RobloxLocaleId)
+return function(p1) --[[ Line: 37 | Named "createApp" ]]
+	-- upvalues: Result1 (ref), v1 (copy), ReactRobloxModule (copy), ReactModule (copy), LocalizationProvider (copy), Localization (copy), PlayerFeedbackPromptsModule (copy)
+	local Callback = p1 or Result1
+	local ScreenGui = Instance.new("ScreenGui")
+	ScreenGui.IgnoreGuiInset = not v1
+	ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+	ScreenGui.AutoLocalize = false
+	ScreenGui.DisplayOrder = -1
+	local Root = ReactRobloxModule.createRoot(ScreenGui)
+	Root:render((Callback({
+		App = ReactModule.createElement(LocalizationProvider, {
+			localization = Localization.new(game:GetService("LocalizationService").RobloxLocaleId)
 		}, {
-			PlayerFeedbackPrompts = reactModule.createElement(playerFeedbackPromptsModule, { enableInputDelayed = true })
+			PlayerFeedbackPrompts = ReactModule.createElement(PlayerFeedbackPromptsModule, { enableInputDelayed = true })
 		})
-	}))
+	})))
 	
 	return {
-		instance = screenGui,
-		unmount = function()
-			-- upvalues: var3 (ref)
-			var3:unmount()
+		instance = ScreenGui,
+		unmount = function() --[[ Line: 67 ]]
+			-- upvalues: Root (copy)
+			Root:unmount()
 		end
 	}
 end

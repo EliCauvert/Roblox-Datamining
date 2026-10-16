@@ -1,97 +1,100 @@
-﻿local bulkPurchaseApp = script:FindFirstAncestor("BulkPurchaseApp")
-local parent = bulkPurchaseApp.Parent
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useDesignTokens = require(parent.Style).useDesignTokens
-local styledTextLabel = require(parent.UIBlox).App.Text.StyledTextLabel
-local IAPExperienceModule = require(parent.IAPExperience)
-local formatEconomicRestrictionText = IAPExperienceModule.Utility.formatEconomicRestrictionText
-local addEconomicRestrictionKeysToLocalization = IAPExperienceModule.Utility.addEconomicRestrictionKeysToLocalization
-local alertPromptModule = require(bulkPurchaseApp.Components.AlertPrompt)
-local errorCodeEnumModule = require(bulkPurchaseApp.Enums.ErrorCodeEnum)
+﻿local BulkPurchaseApp = script:FindFirstAncestor("BulkPurchaseApp")
+local Parent = BulkPurchaseApp.Parent
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseDesignTokensFunction = require(Parent.Style).useDesignTokens
+local StyledTextLabel = require(Parent.UIBlox).App.Text.StyledTextLabel
+local IAPExperienceModule = require(Parent.IAPExperience)
+local FormatEconomicRestrictionTextFunction = IAPExperienceModule.Utility.formatEconomicRestrictionText
+local AddEconomicRestrictionKeysToLocalizationFunction = IAPExperienceModule.Utility.addEconomicRestrictionKeysToLocalization
+local AlertPromptModule = require(BulkPurchaseApp.Components.AlertPrompt)
+local ErrorCodeEnumModule = require(BulkPurchaseApp.Enums.ErrorCodeEnum)
 
-local function BulkPurchaseErrorText(p1)
-	-- upvalues: useDesignTokens (ref), reactModule (ref), styledTextLabel (ref)
-	local var1 = useDesignTokens()
+local function BulkPurchaseErrorText(p1) --[[ Line: 22 ]]
+	-- upvalues: UseDesignTokensFunction (copy), ReactModule (copy), StyledTextLabel (copy)
+	local UseDesignTokensResult = UseDesignTokensFunction()
 	
-	return reactModule.createElement(styledTextLabel, {
+	return ReactModule.createElement(StyledTextLabel, {
 		size = UDim2.fromScale(1, 0),
 		automaticSize = Enum.AutomaticSize.Y,
-		fontStyle = var1.Typography.BodyLarge,
-		colorStyle = var1.Color.Content.Default,
+		fontStyle = UseDesignTokensResult.Typography.BodyLarge,
+		colorStyle = UseDesignTokensResult.Color.Content.Default,
 		textXAlignment = Enum.TextXAlignment.Center,
 		text = p1.text,
 		layoutOrder = p1.layoutOrder
 	})
 end
 
-local t = {
-	[errorCodeEnumModule.InsufficientRobux] = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorPrompt.ErrorReasonInsufficientRobux",
-	[errorCodeEnumModule.QuotaExceeded] = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorPrompt.ErrorReasonQuotaExceeded",
-	[errorCodeEnumModule.NotForSale] = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorPrompt.ErrorReasonNotForSale",
-	[errorCodeEnumModule.AlreadyOwned] = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorPrompt.ErrorReasonAlreadyOwned",
-	[errorCodeEnumModule.PurchaserIsSeller] = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorPrompt.ErrorReasonPurchaserIsSeller",
-	[errorCodeEnumModule.NotAvailableForPurchaser] = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorPrompt.ErrorReasonNotAvailableForPurchaser",
-	[errorCodeEnumModule.PriceMismatch] = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorPrompt.ErrorReasonPriceMismatch",
-	[errorCodeEnumModule.QuantityLimitExceeded] = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorPrompt.ErrorReasonQuantityLimitExceeded",
-	[errorCodeEnumModule.InsufficientMembership] = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorPrompt.ErrorReasonInsufficientMembership",
-	[errorCodeEnumModule.Generic] = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorPrompt.ErrorReasonGeneric",
-	[errorCodeEnumModule.SoldOut] = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorPrompt.ErrorReasonSoldOut",
-	[errorCodeEnumModule.TwoStepVerificationRequired] = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorPrompt.ErrorReason2SV",
-	[errorCodeEnumModule.PlaceInvalid] = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorPrompt.ErrorReasonNotAvailableInExperience"
+local config = {
+	[ErrorCodeEnumModule.InsufficientRobux] = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorPrompt.ErrorReasonInsufficientRobux",
+	[ErrorCodeEnumModule.QuotaExceeded] = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorPrompt.ErrorReasonQuotaExceeded",
+	[ErrorCodeEnumModule.NotForSale] = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorPrompt.ErrorReasonNotForSale",
+	[ErrorCodeEnumModule.AlreadyOwned] = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorPrompt.ErrorReasonAlreadyOwned",
+	[ErrorCodeEnumModule.PurchaserIsSeller] = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorPrompt.ErrorReasonPurchaserIsSeller",
+	[ErrorCodeEnumModule.NotAvailableForPurchaser] = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorPrompt.ErrorReasonNotAvailableForPurchaser",
+	[ErrorCodeEnumModule.PriceMismatch] = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorPrompt.ErrorReasonPriceMismatch",
+	[ErrorCodeEnumModule.QuantityLimitExceeded] = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorPrompt.ErrorReasonQuantityLimitExceeded",
+	[ErrorCodeEnumModule.InsufficientMembership] = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorPrompt.ErrorReasonInsufficientMembership",
+	[ErrorCodeEnumModule.Generic] = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorPrompt.ErrorReasonGeneric",
+	[ErrorCodeEnumModule.SoldOut] = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorPrompt.ErrorReasonSoldOut",
+	[ErrorCodeEnumModule.TwoStepVerificationRequired] = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorPrompt.ErrorReason2SV",
+	[ErrorCodeEnumModule.PlaceInvalid] = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorPrompt.ErrorReasonNotAvailableInExperience"
 }
-local t_1 = {
-	[errorCodeEnumModule.InsufficientRobux] = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorPrompt.TryAgainMoreRobux",
-	[errorCodeEnumModule.QuotaExceeded] = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorPrompt.TryAgainWait",
-	[errorCodeEnumModule.NotForSale] = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorPrompt.TryAgainOtherItems",
-	[errorCodeEnumModule.AlreadyOwned] = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorPrompt.TryAgainOtherItems",
-	[errorCodeEnumModule.PurchaserIsSeller] = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorPrompt.TryAgainOtherItems",
-	[errorCodeEnumModule.NotAvailableForPurchaser] = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorPrompt.TryAgainOtherItems",
-	[errorCodeEnumModule.PriceMismatch] = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorPrompt.TryAgainNow",
-	[errorCodeEnumModule.QuantityLimitExceeded] = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorPrompt.TryAgainOtherItems",
-	[errorCodeEnumModule.InsufficientMembership] = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorPrompt.TryAgainOtherItems",
-	[errorCodeEnumModule.Generic] = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorPrompt.TryAgainLater",
-	[errorCodeEnumModule.SoldOut] = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorPrompt.TryAgainNow",
-	[errorCodeEnumModule.TwoStepVerificationRequired] = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorPrompt.TryAgainOtherItems",
-	[errorCodeEnumModule.PlaceInvalid] = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorPrompt.TryAgainOtherItems"
+local config1 = {
+	[ErrorCodeEnumModule.InsufficientRobux] = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorPrompt.TryAgainMoreRobux",
+	[ErrorCodeEnumModule.QuotaExceeded] = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorPrompt.TryAgainWait",
+	[ErrorCodeEnumModule.NotForSale] = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorPrompt.TryAgainOtherItems",
+	[ErrorCodeEnumModule.AlreadyOwned] = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorPrompt.TryAgainOtherItems",
+	[ErrorCodeEnumModule.PurchaserIsSeller] = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorPrompt.TryAgainOtherItems",
+	[ErrorCodeEnumModule.NotAvailableForPurchaser] = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorPrompt.TryAgainOtherItems",
+	[ErrorCodeEnumModule.PriceMismatch] = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorPrompt.TryAgainNow",
+	[ErrorCodeEnumModule.QuantityLimitExceeded] = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorPrompt.TryAgainOtherItems",
+	[ErrorCodeEnumModule.InsufficientMembership] = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorPrompt.TryAgainOtherItems",
+	[ErrorCodeEnumModule.Generic] = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorPrompt.TryAgainLater",
+	[ErrorCodeEnumModule.SoldOut] = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorPrompt.TryAgainNow",
+	[ErrorCodeEnumModule.TwoStepVerificationRequired] = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorPrompt.TryAgainOtherItems",
+	[ErrorCodeEnumModule.PlaceInvalid] = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorPrompt.TryAgainOtherItems"
 }
 
-return function(p1)
-	-- upvalues: useDesignTokens (ref), t (ref), t_1 (ref), addEconomicRestrictionKeysToLocalization (ref), useLocalization (ref), errorCodeEnumModule (ref), formatEconomicRestrictionText (ref), reactModule (ref), BulkPurchaseErrorText (ref), alertPromptModule (ref)
-	local var1 = useDesignTokens()
-	local _ = nil
-	local t_2 = {
+return function(p1) --[[ Line: 74 | Named "BulkPurchaseError" ]]
+	-- upvalues: UseDesignTokensFunction (copy), config (copy), config1 (copy), AddEconomicRestrictionKeysToLocalizationFunction (copy), UseLocalizationFunction (copy), ErrorCodeEnumModule (copy), FormatEconomicRestrictionTextFunction (copy), ReactModule (copy), BulkPurchaseErrorText (copy), AlertPromptModule (copy)
+	local UseDesignTokensResult = UseDesignTokensFunction()
+	local UseLocalizationResult = nil
+	local config2 = {
 		title = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.ErrorHeading",
 		dismissCTA = "CoreScripts.BulkPurchasePrompt.CompletedPrompt.DismissCTA",
-		errorReason = t[p1.errorCode],
-		tryAgain = t_1[p1.errorCode]
+		errorReason = config[p1.errorCode],
+		tryAgain = config1[p1.errorCode]
 	}
-	addEconomicRestrictionKeysToLocalization(t_2)
-	local var2 = useLocalization(t_2)
+	AddEconomicRestrictionKeysToLocalizationFunction(config2)
+	UseLocalizationResult = UseLocalizationFunction(config2)
 	
-	if p1.errorCode == errorCodeEnumModule.EconomicRestriction and p1.errorMetadata then
-		var2.errorReason = formatEconomicRestrictionText(var2, p1.errorMetadata, true)
+	if p1.errorCode == ErrorCodeEnumModule.EconomicRestriction and p1.errorMetadata then
+		UseLocalizationResult.errorReason = FormatEconomicRestrictionTextFunction(UseLocalizationResult, p1.errorMetadata, true)
 	end
-	return reactModule.createElement(alertPromptModule, {
-		title = var2.title,
-		dismissCTA = var2.dismissCTA,
+	return ReactModule.createElement(AlertPromptModule, {
+		title = UseLocalizationResult.title,
+		dismissCTA = UseLocalizationResult.dismissCTA,
 		onDismiss = p1.onDismiss,
-		middleContent = function()
-			-- upvalues: reactModule (copy), var1 (ref), BulkPurchaseErrorText (copy), var2 (write)
-			return reactModule.createElement("Frame", {
+		middleContent = function() --[[ Line: 89 ]]
+			-- upvalues: ReactModule (upval), UseDesignTokensResult (copy), BulkPurchaseErrorText (upval), UseLocalizationResult (ref)
+			return ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
 				Size = UDim2.new(1, 0, 0, 1),
 				AutomaticSize = Enum.AutomaticSize.Y
 			}, {
-				Layout = reactModule.createElement("UIListLayout", {
+				Layout = ReactModule.createElement("UIListLayout", {
 					SortOrder = Enum.SortOrder.LayoutOrder,
 					HorizontalAlignment = Enum.HorizontalAlignment.Center,
 					VerticalAlignment = Enum.VerticalAlignment.Top,
-					Padding = UDim.new(0, var1.Size.Size_400)
+					Padding = UDim.new(0, UseDesignTokensResult.Size.Size_400)
 				}),
-				ErrorReason = reactModule.createElement(BulkPurchaseErrorText, { layoutOrder = 1, text = var2.errorReason }),
-				TryAgain = if var2.tryAgain then reactModule.createElement(BulkPurchaseErrorText, { layoutOrder = 2, text = var2.tryAgain }) else nil
+				ErrorReason = ReactModule.createElement(BulkPurchaseErrorText, {
+					layoutOrder = 1,
+					text = UseLocalizationResult.errorReason
+				}),
+				TryAgain = if UseLocalizationResult.tryAgain then ReactModule.createElement(BulkPurchaseErrorText, { layoutOrder = 2, text = UseLocalizationResult.tryAgain }) else nil
 			})
 		end
 	})

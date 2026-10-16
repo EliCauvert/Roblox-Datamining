@@ -1,1 +1,1 @@
-﻿return require(game:GetService("CorePackages").Packages.UrlBuilder)
+﻿return (require(game:GetService("CorePackages").Packages.UrlBuilder))

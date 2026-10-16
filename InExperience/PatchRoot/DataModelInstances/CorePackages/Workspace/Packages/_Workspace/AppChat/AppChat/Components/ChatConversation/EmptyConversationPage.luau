@@ -1,20 +1,20 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local useTokens = foundationModule.Hooks.useTokens
-local useIsChatUserMessagesEnabledModule = require(appChat.Hooks.useIsChatUserMessagesEnabled)
-local loadFoundationCloudAssetModule = require(appChat.Utils.loadFoundationCloudAsset)
-local var1, _ = loadFoundationCloudAssetModule("pictograms/chat")
-local var2, _ = loadFoundationCloudAssetModule("pictograms/voice_chat")
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UseIsChatUserMessagesEnabledModule = require(AppChat.Hooks.useIsChatUserMessagesEnabled)
+local LoadFoundationCloudAssetModule = require(AppChat.Utils.loadFoundationCloudAsset)
+local Chat, _ = LoadFoundationCloudAssetModule("pictograms/chat")
+local VoiceChat, _ = LoadFoundationCloudAssetModule("pictograms/voice_chat")
 
-return reactModule.memo(function()
-	-- upvalues: useTokens (ref), useIsChatUserMessagesEnabledModule (ref), reactModule (ref), foundationModule (ref), var2 (ref), var1 (ref)
-	return reactModule.createElement(foundationModule.View, { tag = "size-full" }, {
-		ChatIcon = reactModule.createElement(foundationModule.Image, {
+return ReactModule.memo(function() --[[ Line: 15 | Named "EmptyConversationPage" ]]
+	-- upvalues: UseTokensFunction (copy), UseIsChatUserMessagesEnabledModule (copy), ReactModule (copy), FoundationModule (copy), VoiceChat (copy), Chat (copy)
+	return ReactModule.createElement(FoundationModule.View, { tag = "size-full" }, {
+		ChatIcon = ReactModule.createElement(FoundationModule.Image, {
 			tag = "position-center-center anchor-center-center",
-			Image = if useIsChatUserMessagesEnabledModule() then var2 else var1,
-			imageStyle = useTokens().Color.Content.Emphasis,
+			Image = if UseIsChatUserMessagesEnabledModule() then VoiceChat else Chat,
+			imageStyle = UseTokensFunction().Color.Content.Emphasis,
 			ScaleType = Enum.ScaleType.Fit,
 			Size = UDim2.new(0, 320, 0, 320)
 		})

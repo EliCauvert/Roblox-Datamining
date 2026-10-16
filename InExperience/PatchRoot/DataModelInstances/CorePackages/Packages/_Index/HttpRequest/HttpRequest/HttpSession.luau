@@ -1,14 +1,12 @@
-﻿local t = {}
-local var1 = 0
+﻿local Count = 0
 
-function t.currentSession()
-	-- upvalues: var1 (write)
-	return var1
-end
-
-function t.startNewSession()
-	-- upvalues: var1 (write)
-	var1 += 1
-end
-
-return t
+return {
+	currentSession = function() --[[ Line: 5 ]]
+		-- upvalues: Count (ref)
+		return Count
+	end,
+	startNewSession = function() --[[ Line: 9 ]]
+		-- upvalues: Count (ref)
+		Count += 1
+	end
+}

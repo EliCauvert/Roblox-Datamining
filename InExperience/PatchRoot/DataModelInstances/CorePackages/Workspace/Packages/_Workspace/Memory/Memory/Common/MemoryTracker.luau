@@ -1,58 +1,57 @@
-﻿local corescriptMemoryPeriodSeconds = game:DefineFastInt("CorescriptMemoryPeriodSeconds", 30)
-local fFlagEnableCorescriptMemoryTrackerModule = require(script.Parent.Parent.Flags.FFlagEnableCorescriptMemoryTracker)
-local enableMemorySnapshotCategories = game:DefineFastFlag("EnableMemorySnapshotCategories", false)
-local statsService = game:GetService("Stats")
-local telemetryService = game:GetService("TelemetryService")
-local deviceTier = require(script:FindFirstAncestor("Memory").Parent.Devices).DeviceTier
-local memoryScopeModule = require(script.Parent.MemoryScope)
+﻿local CorescriptMemoryPeriodSeconds = game:DefineFastInt("CorescriptMemoryPeriodSeconds", 30)
+local FFlagEnableCorescriptMemoryTrackerModule = require(script.Parent.Parent.Flags.FFlagEnableCorescriptMemoryTracker)
+local EnableMemorySnapshotCategories = game:DefineFastFlag("EnableMemorySnapshotCategories", false)
+local StatsService = game:GetService("Stats")
+local TelemetryService = game:GetService("TelemetryService")
+local DeviceTier = require(script:FindFirstAncestor("Memory").Parent.Devices).DeviceTier
+local MemoryScopeModule = require(script.Parent.MemoryScope)
 
-local function _()
-	-- upvalues: statsService (ref)
-	local performanceStats = statsService and statsService:FindFirstChild("PerformanceStats")
+local function _() --[[ Line: 20 | Named "GetMemoryPerformanceStatsItem" ]]
+	-- upvalues: StatsService (copy)
+	local PerformanceStats = StatsService and StatsService:FindFirstChild("PerformanceStats")
 	
-	return if performanceStats then performanceStats:FindFirstChild("Memory") else nil
+	return if PerformanceStats then PerformanceStats:FindFirstChild("Memory") else nil
 end
 
-local function GetChildValue(p1, p2)
-	if p2 == nil then
-		return tostring(p1:GetValue())
+local function GetChildValue(Memory, Text: string): string --[[ Line: 29 ]]
+	if Text == nil then
+		return (tostring(Memory:GetValue()))
 	end
-	local var1 = p1
+	local Object = Memory
 	
-	for i, v in ipairs(string.split(p2, "#")) do
-		local var2 = var1:FindFirstChild(v)
+	for _, ChildName in ipairs(string.split(Text, "#")) do
+		local Child = Object:FindFirstChild(ChildName)
 		
-		if var2 and var2:IsA("StatsItem") then
-			var1 = var2
-			continue
+		if not Child or not Child:IsA("StatsItem") then
+			return "-1"
 		end
-		return "-1"
+		Object = Child
 	end
-	return tostring(var1:GetValue())
+	return (tostring(Object:GetValue()))
 end
 
-local _ = function()
-	local ok, status = pcall(gcinfo)
+local _ = function(): string --[[ Line: 44 | Named "GetLuaHeapMb" ]]
+	local Success, Result = pcall(gcinfo)
 	
-	return if ok and status then string.format("%.2f", status / 1024) else "-1"
+	return if Success and Result then string.format("%.2f", Result / 1024) else "-1"
 end
 
-local function GetCorescriptMemory()
-	-- upvalues: statsService (ref)
-	local performanceStats = statsService and statsService:FindFirstChild("PerformanceStats")
-	local var3 = if not performanceStats then nil else performanceStats:FindFirstChild("Memory")
+local function GetCorescriptMemory() --[[ Line: 52 ]]
+	-- upvalues: StatsService (copy)
+	local PerformanceStats = StatsService and StatsService:FindFirstChild("PerformanceStats")
+	local Memory = if PerformanceStats then PerformanceStats:FindFirstChild("Memory") else nil
 	
-	if var3 then
-		for i, v in var3:GetChildren() do
-			if v:IsA("StatsItem") and v.DisplayName == "CoreScriptMemory" then
-				return v:GetValue()
+	if Memory then
+		for _, StatsItem in Memory:GetChildren() do
+			if StatsItem:IsA("StatsItem") and StatsItem.DisplayName == "CoreScriptMemory" then
+				return StatsItem:GetValue()
 			end
 		end
 	end
 	return nil
 end
 
-local t = {
+local config = {
 	eventName = "CorescriptMemory",
 	throttlingPercentage = 10000,
 	description = "Memory consumption for corescript, in MB",
@@ -60,7 +59,7 @@ local t = {
 	backends = { "RobloxTelemetryStat" },
 	lastUpdated = { 2025, 7, 16 }
 }
-local t_1 = {
+local config1 = {
 	eventName = "CorescriptSessionMaxMemory",
 	throttlingPercentage = 10000,
 	description = "Maximum memory consumption for corescript in the session, in MB",
@@ -68,7 +67,7 @@ local t_1 = {
 	backends = { "RobloxTelemetryStat" },
 	lastUpdated = { 2025, 7, 16 }
 }
-local t_2 = {
+local config2 = {
 	eventName = "CorescriptSessionAvgMemory",
 	throttlingPercentage = 10000,
 	description = "Average memory consumption for corescript in the session, in MB",
@@ -76,36 +75,35 @@ local t_2 = {
 	backends = { "RobloxTelemetryStat" },
 	lastUpdated = { 2026, 3, 4 }
 }
-local _ = { ACTIVE = 1, PAUSED = 2, STOPPED = 3 }
-local t_3 = {}
-t_3.__index = t_3
+local Module = {}
+Module.__index = Module
 
-function t_3.new(p3, p4)
-	-- upvalues: t_3 (ref)
-	return setmetatable({
+function Module.new(Context, MemoryScope) --[[ Line: 120 ]]
+	-- upvalues: Module (copy)
+	return (setmetatable({
 		memoryMb = 0,
 		maxMemoryMb = 0,
 		avgMemoryMb = 0,
 		sampleCount = 0,
 		status = 2,
 		loggingTask = nil,
-		context = p3,
-		memoryScope = p4
-	}, t_3)
+		context = Context,
+		memoryScope = MemoryScope
+	}, Module))
 end
 
-function t_3:start()
-	-- upvalues: corescriptMemoryPeriodSeconds (ref), GetCorescriptMemory (ref)
+function Module:start() --[[ Line: 135 ]]
+	-- upvalues: CorescriptMemoryPeriodSeconds (copy), GetCorescriptMemory (copy)
 	self.status = 1
-	self.loggingTask = task.delay(corescriptMemoryPeriodSeconds, function()
-		-- upvalues: GetCorescriptMemory (copy), self (ref)
-		local var4 = GetCorescriptMemory()
+	self.loggingTask = task.delay(CorescriptMemoryPeriodSeconds, function() --[[ Line: 137 ]]
+		-- upvalues: GetCorescriptMemory (upval), self (copy)
+		local CorescriptMemory: number = GetCorescriptMemory()
 		
-		if var4 then
-			self.maxMemoryMb = math.max(var4, self.maxMemoryMb)
+		if CorescriptMemory then
+			self.maxMemoryMb = math.max(CorescriptMemory, self.maxMemoryMb)
 			self.sampleCount += 1
-			self.avgMemoryMb += (var4 - self.avgMemoryMb) / self.sampleCount
-			self:report(self.context, var4)
+			self.avgMemoryMb += (CorescriptMemory - self.avgMemoryMb) / self.sampleCount
+			self:report(self.context, CorescriptMemory)
 		end
 		if self.status == 1 then
 			self:start()
@@ -113,7 +111,7 @@ function t_3:start()
 	end)
 end
 
-function t_3:pause()
+function Module:pause() --[[ Line: 151 ]]
 	if self.loggingTask then
 		task.cancel(self.loggingTask)
 		self.loggingTask = nil
@@ -121,13 +119,13 @@ function t_3:pause()
 	self.status = 2
 end
 
-function t_3:resume()
+function Module:resume() --[[ Line: 159 ]]
 	if self.status == 2 then
 		self:start()
 	end
 end
 
-function t_3:destroy()
+function Module:destroy() --[[ Line: 165 ]]
 	if self.loggingTask then
 		task.cancel(self.loggingTask)
 		self.loggingTask = nil
@@ -142,107 +140,109 @@ function t_3:destroy()
 	end
 end
 
-function t_3:_buildCustomFields(p3)
-	-- upvalues: deviceTier (ref)
+function Module:_buildCustomFields(Context) --[[ Line: 179 ]]
+	-- upvalues: DeviceTier (copy)
 	return {
-		deviceTier = deviceTier.GetDeviceMemoryTier(),
-		context = p3,
+		deviceTier = DeviceTier.GetDeviceMemoryTier(),
+		context = Context,
 		memoryScope = self.memoryScope
 	}
 end
 
-function t_3:report(p3, p4)
-	-- upvalues: telemetryService (ref), t (ref)
-	telemetryService:LogStat(t, { customFields = self:_buildCustomFields(p3) }, p4)
+function Module:report(Context, Value) --[[ Line: 187 ]]
+	-- upvalues: TelemetryService (copy), config (copy)
+	TelemetryService:LogStat(config, { customFields = self:_buildCustomFields(Context) }, Value)
 end
 
-function t_3:reportMaxMemoryUsed(b, p3)
-	-- upvalues: memoryScopeModule (ref), telemetryService (ref), t_1 (ref)
-	if self.memoryScope == memoryScopeModule.UniversalApp then
+function Module:reportMaxMemoryUsed(Context, MaxMemoryMb) --[[ Line: 191 ]]
+	-- upvalues: MemoryScopeModule (copy), TelemetryService (copy), config1 (copy)
+	if self.memoryScope ~= MemoryScopeModule.UniversalApp then
+		TelemetryService:LogStat(config1, { customFields = self:_buildCustomFields(Context) }, MaxMemoryMb)
+		
 		return
 	end
-	telemetryService:LogStat(t_1, { customFields = self:_buildCustomFields(b) }, p3)
 end
 
-function t_3:reportAvgMemoryUsed(p3, p4)
-	-- upvalues: memoryScopeModule (ref), telemetryService (ref), t_2 (ref)
-	if self.memoryScope == memoryScopeModule.UniversalApp then
+function Module:reportAvgMemoryUsed(Context, AvgMemoryMb) --[[ Line: 202 ]]
+	-- upvalues: MemoryScopeModule (copy), TelemetryService (copy), config2 (copy)
+	if self.memoryScope ~= MemoryScopeModule.UniversalApp then
+		TelemetryService:LogStat(config2, { customFields = self:_buildCustomFields(Context) }, AvgMemoryMb)
+		
 		return
 	end
-	telemetryService:LogStat(t_2, { customFields = self:_buildCustomFields(p3) }, p4)
 end
 
-function t_3.getSnapshot()
-	-- upvalues: statsService (ref), GetChildValue (ref), enableMemorySnapshotCategories (ref)
-	local ok
-	local performanceStats = statsService and statsService:FindFirstChild("PerformanceStats")
-	local var4 = if not performanceStats then nil else performanceStats:FindFirstChild("Memory")
+function Module.getSnapshot() --[[ Line: 213 ]]
+	-- upvalues: StatsService (copy), GetChildValue (copy), EnableMemorySnapshotCategories (copy)
+	local PerformanceStats = StatsService and StatsService:FindFirstChild("PerformanceStats")
+	local Memory = if PerformanceStats then PerformanceStats:FindFirstChild("Memory") else nil
 	
-	if var4 then
-		local t = {}
-		ok, status = pcall(gcinfo)
-		t.luaHeapMb = if ok and status then string.format("%.2f", status / 1024) else "-1"
-		t.totalMemory = tostring(var4:GetValue())
-		t.coreMemory = GetChildValue(var4, "CoreMemory")
-		t.placeMemory = GetChildValue(var4, "PlaceMemory")
-		t.placeLuaHeap = GetChildValue(var4, "PlaceMemory#LuaHeap")
-		t.coreScriptMemory = GetChildValue(var4, "CoreScriptMemory")
-		t.untrackedMemory = GetChildValue(var4, "UntrackedMemory")
+	if not Memory then
+		local Success, Result = pcall(gcinfo)
 		
-		if enableMemorySnapshotCategories then
-			t.placeInstances = GetChildValue(var4, "PlaceMemory#Instances")
-			t.placeSignals = GetChildValue(var4, "PlaceMemory#Signals")
-			t.placeScript = GetChildValue(var4, "PlaceMemory#Script")
-			t.placePhysicsCollision = GetChildValue(var4, "PlaceMemory#PhysicsCollision")
-			t.placeGraphicsSolidModels = GetChildValue(var4, "PlaceMemory#GraphicsSolidModels")
-			t.placeGraphicsMeshParts = GetChildValue(var4, "PlaceMemory#GraphicsMeshParts")
-			t.placeGraphicsParticles = GetChildValue(var4, "PlaceMemory#GraphicsParticles")
-			t.placeGraphicsTerrain = GetChildValue(var4, "PlaceMemory#GraphicsTerrain")
-			t.placeGraphicsTexture = GetChildValue(var4, "PlaceMemory#GraphicsTexture")
-			t.placeGraphicsTextureCharacter = GetChildValue(var4, "PlaceMemory#GraphicsTextureCharacter")
-			t.placeSounds = GetChildValue(var4, "PlaceMemory#Sounds")
-			t.placeTerrainVoxels = GetChildValue(var4, "PlaceMemory#TerrainVoxels")
-			t.placeGui = GetChildValue(var4, "PlaceMemory#Gui")
-			t.placeAnimation = GetChildValue(var4, "PlaceMemory#Animation")
-			t.placeNavigation = GetChildValue(var4, "PlaceMemory#Navigation")
-			t.coreRenderTarget = GetChildValue(var4, "CoreMemory#render/target")
-			t.coreRenderGpuGeomMgr = GetChildValue(var4, "CoreMemory#render/gpu_geom_mgr")
-			t.coreRenderTextureLocal = GetChildValue(var4, "CoreMemory#render/texture/local")
-			t.coreRenderFonts = GetChildValue(var4, "CoreMemory#render/fonts")
-			t.coreRenderLightgrid = GetChildValue(var4, "CoreMemory#render/lightgrid")
-			t.coreGuiFontData = GetChildValue(var4, "CoreMemory#gui/FontData")
-			t.coreRenderEnvmap = GetChildValue(var4, "CoreMemory#render/envmap")
-			t.coreRenderShader = GetChildValue(var4, "CoreMemory#render/shader")
-			t.coreRenderSystem = GetChildValue(var4, "CoreMemory#render/system")
-			t.coreDynamicTexture = GetChildValue(var4, "CoreMemory#dynamic/texture")
-			t.coreDynamicMesh = GetChildValue(var4, "CoreMemory#dynamic/mesh")
-		end
-		return t
-	else
-		local t = {}
-		ok, status = pcall(gcinfo)
-		t.luaHeapMb = if ok and status then string.format("%.2f", status / 1024) else "-1"
-		
-		return t
+		return {
+			luaHeapMb = if Success and Result then string.format("%.2f", Result / 1024) else "-1"
+		}
 	end
-end
-
-function t_3.getLuaHeapOnly()
-	local t = {}
-	local ok, status = pcall(gcinfo)
-	t.luaHeapMb = if ok and status then string.format("%.2f", status / 1024) else "-1"
+	local Success1, Result1 = pcall(gcinfo)
+	local config = {
+		luaHeapMb = if Success1 and Result1 then string.format("%.2f", Result1 / 1024) else "-1",
+		totalMemory = tostring(Memory:GetValue()),
+		coreMemory = GetChildValue(Memory, "CoreMemory"),
+		placeMemory = GetChildValue(Memory, "PlaceMemory"),
+		placeLuaHeap = GetChildValue(Memory, "PlaceMemory#LuaHeap"),
+		coreScriptMemory = GetChildValue(Memory, "CoreScriptMemory"),
+		untrackedMemory = GetChildValue(Memory, "UntrackedMemory")
+	}
 	
-	return t
+	if EnableMemorySnapshotCategories then
+		config.placeInstances = GetChildValue(Memory, "PlaceMemory#Instances")
+		config.placeSignals = GetChildValue(Memory, "PlaceMemory#Signals")
+		config.placeScript = GetChildValue(Memory, "PlaceMemory#Script")
+		config.placePhysicsCollision = GetChildValue(Memory, "PlaceMemory#PhysicsCollision")
+		config.placeGraphicsSolidModels = GetChildValue(Memory, "PlaceMemory#GraphicsSolidModels")
+		config.placeGraphicsMeshParts = GetChildValue(Memory, "PlaceMemory#GraphicsMeshParts")
+		config.placeGraphicsParticles = GetChildValue(Memory, "PlaceMemory#GraphicsParticles")
+		config.placeGraphicsTerrain = GetChildValue(Memory, "PlaceMemory#GraphicsTerrain")
+		config.placeGraphicsTexture = GetChildValue(Memory, "PlaceMemory#GraphicsTexture")
+		config.placeGraphicsTextureCharacter = GetChildValue(Memory, "PlaceMemory#GraphicsTextureCharacter")
+		config.placeSounds = GetChildValue(Memory, "PlaceMemory#Sounds")
+		config.placeTerrainVoxels = GetChildValue(Memory, "PlaceMemory#TerrainVoxels")
+		config.placeGui = GetChildValue(Memory, "PlaceMemory#Gui")
+		config.placeAnimation = GetChildValue(Memory, "PlaceMemory#Animation")
+		config.placeNavigation = GetChildValue(Memory, "PlaceMemory#Navigation")
+		config.coreRenderTarget = GetChildValue(Memory, "CoreMemory#render/target")
+		config.coreRenderGpuGeomMgr = GetChildValue(Memory, "CoreMemory#render/gpu_geom_mgr")
+		config.coreRenderTextureLocal = GetChildValue(Memory, "CoreMemory#render/texture/local")
+		config.coreRenderFonts = GetChildValue(Memory, "CoreMemory#render/fonts")
+		config.coreRenderLightgrid = GetChildValue(Memory, "CoreMemory#render/lightgrid")
+		config.coreGuiFontData = GetChildValue(Memory, "CoreMemory#gui/FontData")
+		config.coreRenderEnvmap = GetChildValue(Memory, "CoreMemory#render/envmap")
+		config.coreRenderShader = GetChildValue(Memory, "CoreMemory#render/shader")
+		config.coreRenderSystem = GetChildValue(Memory, "CoreMemory#render/system")
+		config.coreDynamicTexture = GetChildValue(Memory, "CoreMemory#dynamic/texture")
+		config.coreDynamicMesh = GetChildValue(Memory, "CoreMemory#dynamic/mesh")
+	end
+	return config
 end
 
-local var4 = nil
+function Module.getLuaHeapOnly() --[[ Line: 296 ]]
+	local Success, Result = pcall(gcinfo)
+	
+	return {
+		luaHeapMb = if Success and Result then string.format("%.2f", Result / 1024) else "-1"
+	}
+end
 
-return function(p3, p4)
-	-- upvalues: fFlagEnableCorescriptMemoryTrackerModule (ref), var4 (write), t_3 (ref)
-	if not fFlagEnableCorescriptMemoryTrackerModule then
+local NewResult = nil
+
+return function(Context, MemoryScope) --[[ Line: 302 ]]
+	-- upvalues: FFlagEnableCorescriptMemoryTrackerModule (copy), NewResult (ref), Module (copy)
+	if not FFlagEnableCorescriptMemoryTrackerModule then
 		return nil
-	elseif not var4 then
-		var4 = t_3.new(p3, p4)
 	end
-	return var4
+	if not NewResult then
+		NewResult = Module.new(Context, MemoryScope)
+	end
+	return NewResult
 end

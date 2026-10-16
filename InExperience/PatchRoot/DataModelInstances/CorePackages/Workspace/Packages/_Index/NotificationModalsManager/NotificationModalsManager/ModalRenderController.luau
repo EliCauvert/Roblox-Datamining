@@ -1,64 +1,64 @@
-﻿local parent = script.Parent.Parent
-local reactRobloxModule = require(parent.ReactRoblox)
-local reactModule = require(parent.React)
-local notificationModalBaseModule = require(script.Parent.Components.NotificationModalBase)
-local var1 = nil
+﻿local Parent = script.Parent.Parent
+local ReactRobloxModule = require(Parent.ReactRoblox)
+local ReactModule = require(Parent.React)
+local NotificationModalBaseModule = require(script.Parent.Components.NotificationModalBase)
+local Root = nil
 local t = {}
 
-local function _(p1)
-	-- upvalues: t (write), var1 (write), reactModule (ref), notificationModalBaseModule (ref)
-	if t and t.ModalKey ~= p1.ModalKey and (t.Params and t.Params.CloseCallback) then
+local function _(p1) --[[ Line: 13 | Named "UpdateRoot" ]]
+	-- upvalues: t (ref), Root (ref), ReactModule (copy), NotificationModalBaseModule (copy)
+	if t and t.ModalKey ~= p1.ModalKey and t.Params and t.Params.CloseCallback then
 		t.Params.CloseCallback()
 	end
 	t = p1
-	var1:render(reactModule.createElement(notificationModalBaseModule, p1))
+	Root:render(ReactModule.createElement(NotificationModalBaseModule, p1))
 end
 
 return {
-	OpenModal = function(p1, p2, p3)
-		-- upvalues: var1 (write), reactRobloxModule (ref), t (write), reactModule (ref), notificationModalBaseModule (ref)
-		if not var1 then
-			local notificationModals = Instance.new("Folder")
-			notificationModals.Name = "NotificationModals"
-			notificationModals.Parent = game:GetService("CoreGui")
-			var1 = reactRobloxModule.createRoot(notificationModals)
+	OpenModal = function(ModalKey, Component, Params): boolean --[[ Line: 28 ]]
+		-- upvalues: Root (ref), ReactRobloxModule (copy), t (ref), ReactModule (copy), NotificationModalBaseModule (copy)
+		if not Root then
+			local NotificationModals = Instance.new("Folder")
+			NotificationModals.Name = "NotificationModals"
+			NotificationModals.Parent = game:GetService("CoreGui")
+			Root = ReactRobloxModule.createRoot(NotificationModals)
 		end
-		local t_1 = {
-			ModalKey = p1,
-			Component = p2,
-			Params = p3,
-			CloseModal = function()
-				-- upvalues: p1 (ref), var1 (copy), t (copy), reactModule (copy), notificationModalBaseModule (copy)
-				if var1 and p1 == t.ModalKey then
-					local t_1 = {}
+		local config = {
+			ModalKey = ModalKey,
+			Component = Component,
+			Params = Params,
+			CloseModal = function() --[[ Line: 40 ]]
+				-- upvalues: ModalKey (copy), Root (upval), t (upval), ReactModule (upval), NotificationModalBaseModule (upval)
+				if Root and ModalKey == t.ModalKey then
+					local t1 = {}
 					
-					if t and t.ModalKey ~= t_1.ModalKey and (t.Params and t.Params.CloseCallback) then
+					if t and t.ModalKey ~= t1.ModalKey and t.Params and t.Params.CloseCallback then
 						t.Params.CloseCallback()
 					end
-					t = t_1
-					var1:render(reactModule.createElement(notificationModalBaseModule, t_1))
+					t = t1
+					Root:render(ReactModule.createElement(NotificationModalBaseModule, t1))
 				end
 			end
 		}
 		
-		if t and t.ModalKey ~= t_1.ModalKey and (t.Params and t.Params.CloseCallback) then
+		if t and t.ModalKey ~= config.ModalKey and t.Params and t.Params.CloseCallback then
 			t.Params.CloseCallback()
 		end
-		t = t_1
-		var1:render(reactModule.createElement(notificationModalBaseModule, t_1))
+		t = config
+		Root:render(ReactModule.createElement(NotificationModalBaseModule, config))
 		
 		return true
 	end,
-	CloseModal = function(p1)
-		-- upvalues: var1 (write), t (write), reactModule (ref), notificationModalBaseModule (ref)
-		if var1 and p1 == t.ModalKey then
-			local t_1 = {}
+	CloseModal = function(ModalKey) --[[ Line: 22 ]]
+		-- upvalues: Root (ref), t (ref), ReactModule (copy), NotificationModalBaseModule (copy)
+		if Root and ModalKey == t.ModalKey then
+			local t1 = {}
 			
-			if t and t.ModalKey ~= t_1.ModalKey and (t.Params and t.Params.CloseCallback) then
+			if t and t.ModalKey ~= t1.ModalKey and t.Params and t.Params.CloseCallback then
 				t.Params.CloseCallback()
 			end
-			t = t_1
-			var1:render(reactModule.createElement(notificationModalBaseModule, t_1))
+			t = t1
+			Root:render(ReactModule.createElement(NotificationModalBaseModule, t1))
 		end
 	end
 }

@@ -1,68 +1,68 @@
-﻿local parent = script:FindFirstAncestor("ProgressLoading").Parent
-local reactModule = require(parent.React)
-local motionModule = require(parent.Motion)
-local foundationModule = require(parent.Foundation)
-local view = foundationModule.View
-local progress = foundationModule.Progress
-local progressShape = foundationModule.Enums.ProgressShape
-local useTokens = foundationModule.Hooks.useTokens
-local computeSpanModule = require(script.Parent.computeSpan)
-local constantsModule = require(script.Parent.Constants)
-local t = {
-	visible = motionModule.createState({ groupTransparency = 0, barScale = 1 }),
-	hidden = motionModule.createState({ groupTransparency = 1, barScale = 0 }, { default = motionModule.transition({ duration = 0.1 }) })
+﻿local Parent = script:FindFirstAncestor("ProgressLoading").Parent
+local ReactModule = require(Parent.React)
+local MotionModule = require(Parent.Motion)
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local Progress = FoundationModule.Progress
+local ProgressShape = FoundationModule.Enums.ProgressShape
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local ComputeSpanModule = require(script.Parent.computeSpan)
+local ConstantsModule = require(script.Parent.Constants)
+local config = {
+	visible = MotionModule.createState({ groupTransparency = 0, barScale = 1 }),
+	hidden = MotionModule.createState({ groupTransparency = 1, barScale = 0 }, { default = MotionModule.transition({ duration = 0.1 }) })
 }
 
-return reactModule.memo(function(value)
-	-- upvalues: useTokens (ref), motionModule (ref), t (ref), reactModule (ref), computeSpanModule (ref), constantsModule (ref), view (ref), progress (ref), progressShape (ref)
-	local scale = useTokens().Config.UI.Scale
-	local var1, var2 = motionModule.useMotion(t.visible)
-	reactModule.useEffect(function()
-		-- upvalues: value (ref), var2 (ref), t (copy)
-		local var3 = false
+return ReactModule.memo(function(p1) --[[ Line: 34 | Named "ProgressLoadingAssets" ]]
+	-- upvalues: UseTokensFunction (copy), MotionModule (copy), config (copy), ReactModule (copy), ComputeSpanModule (copy), ConstantsModule (copy), View (copy), Progress (copy), ProgressShape (copy)
+	local Scale = UseTokensFunction().Config.UI.Scale
+	local UseMotionResult, UseMotionResult2 = MotionModule.useMotion(config.visible)
+	ReactModule.useEffect(function() --[[ Line: 40 ]]
+		-- upvalues: p1 (copy), UseMotionResult2 (copy), config (upval)
+		local Flag = false
 		
-		if value.isVisible == false then
-			var2(t.hidden, {
-				onAnimationComplete = function(p1)
-					-- upvalues: var3 (write), value (copy)
-					if not var3 and p1 == true and value.onHideComplete then
-						value.onHideComplete()
+		if p1.isVisible == false then
+			UseMotionResult2(config.hidden, {
+				onAnimationComplete = function(Enabled) --[[ Line: 44 ]]
+					-- upvalues: Flag (ref), p1 (upval)
+					if not Flag and Enabled == true and p1.onHideComplete then
+						p1.onHideComplete()
 					end
 				end
 			})
 		else
-			var2(t.visible)
+			UseMotionResult2(config.visible)
 		end
-		return function()
-			-- upvalues: var3 (write)
-			var3 = true
+		return function() --[[ Line: 53 ]]
+			-- upvalues: Flag (ref)
+			Flag = true
 		end
-	end, { value.isVisible, value.onHideComplete })
-	local var3, var4 = reactModule.useBinding(0)
+	end, { p1.isVisible, p1.onHideComplete })
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "size-full col align-x-center align-y-center bg-surface-0",
-		GroupTransparency = var1.groupTransparency,
-		onAbsoluteSizeChanged = reactModule.useCallback(function(p1)
-			-- upvalues: var4 (ref)
-			var4(p1.AbsoluteSize.X)
+		GroupTransparency = UseMotionResult.groupTransparency,
+		onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame) --[[ Line: 69 ]]
+			-- upvalues: UseBindingResult2 (copy)
+			UseBindingResult2(Frame.AbsoluteSize.X)
 		end, {})
 	}, {
-		ProgressBarContainer = reactModule.createElement(view, {
+		ProgressBarContainer = ReactModule.createElement(View, {
 			tag = "auto-y",
-			Size = reactModule.joinBindings({
-				width = var3:map(function(p1)
-					-- upvalues: computeSpanModule (copy), scale (ref), constantsModule (copy)
-					return computeSpanModule(p1, scale, constantsModule.PROGRESS_BAR_MARGIN, constantsModule.PROGRESS_BAR_MAX_WIDTH)
+			Size = ReactModule.joinBindings({
+				width = UseBindingResult:map(function(p2) --[[ Line: 59 ]]
+					-- upvalues: ComputeSpanModule (upval), Scale (copy), ConstantsModule (upval)
+					return ComputeSpanModule(p2, Scale, ConstantsModule.PROGRESS_BAR_MARGIN, ConstantsModule.PROGRESS_BAR_MAX_WIDTH)
 				end),
-				barScale = var1.barScale
-			}):map(function(p1)
-				return UDim2.fromOffset(p1.width * p1.barScale, 0)
+				barScale = UseMotionResult.barScale
+			}):map(function(p2): UDim2 --[[ Line: 65 ]]
+				return UDim2.fromOffset(p2.width * p2.barScale, 0)
 			end)
 		}, {
-			ProgressBar = reactModule.createElement(progress, {
+			ProgressBar = ReactModule.createElement(Progress, {
 				testId = "progress-loading-assets-bar",
-				shape = progressShape.Bar
+				shape = ProgressShape.Bar
 			})
 		})
 	})

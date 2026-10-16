@@ -1,43 +1,43 @@
-﻿local expChat = script:FindFirstAncestor("ExpChat")
-local parent = expChat.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local expChatSharedModule = require(parent.ExpChatShared)
-local configModule = require(expChat.Config)
-local fFlagExpChatPresetChatEnabled = expChatSharedModule.Flags.FFlagExpChatPresetChatEnabled
-local fFlagExpChatFixBackspaceNilTargetChannel = expChatSharedModule.Flags.FFlagExpChatFixBackspaceNilTargetChannel
-local fFlagExpChatDictationFTUXModule = require(expChat.Flags.FFlagExpChatDictationFTUX)
-local fFlagExpChatInputBarV2CornerAndTruncationFixModule = require(expChat.Flags.FFlagExpChatInputBarV2CornerAndTruncationFix)
-local fFlagExpChatComposerInputBarFigmaParityModule = require(expChat.Flags.FFlagExpChatComposerInputBarFigmaParity)
-local fFlagExpChatDictationStopReplacesSendModule = require(expChat.Flags.FFlagExpChatDictationStopReplacesSend)
-local fFlagEnableConsoleExpControls = require(parent.SharedFlags).FFlagEnableConsoleExpControls
-local channelChipModule = require(script.Parent.ChannelChip)
-local stopCountdownModule = require(script.Parent.StopCountdown)
-local dictationFTUXModule = require(script.Parent.Dictation.DictationFTUX)
-local dictationWaveformModule = require(script.Parent.Dictation.DictationWaveform)
-local useDictationInputBarModule = require(script.Parent.Dictation.useDictationInputBar)
-local useDictationTextAreaModule = require(script.Parent.Dictation.useDictationTextArea)
-local dictationAffordancesModule = require(script.Parent.Dictation.DictationAffordances)
+﻿local ExpChat = script:FindFirstAncestor("ExpChat")
+local Parent = ExpChat.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local ExpChatSharedModule = require(Parent.ExpChatShared)
+local ConfigModule = require(ExpChat.Config)
+local FFlagExpChatPresetChatEnabled = ExpChatSharedModule.Flags.FFlagExpChatPresetChatEnabled
+local FFlagExpChatFixBackspaceNilTargetChannel = ExpChatSharedModule.Flags.FFlagExpChatFixBackspaceNilTargetChannel
+local FFlagExpChatDictationFTUXModule = require(ExpChat.Flags.FFlagExpChatDictationFTUX)
+local FFlagExpChatInputBarV2CornerAndTruncationFixModule = require(ExpChat.Flags.FFlagExpChatInputBarV2CornerAndTruncationFix)
+local FFlagExpChatComposerInputBarFigmaParityModule = require(ExpChat.Flags.FFlagExpChatComposerInputBarFigmaParity)
+local FFlagExpChatDictationStopReplacesSendModule = require(ExpChat.Flags.FFlagExpChatDictationStopReplacesSend)
+local FFlagEnableConsoleExpControls = require(Parent.SharedFlags).FFlagEnableConsoleExpControls
+local ChannelChipModule = require(script.Parent.ChannelChip)
+local StopCountdownModule = require(script.Parent.StopCountdown)
+local DictationFTUXModule = require(script.Parent.Dictation.DictationFTUX)
+local DictationWaveformModule = require(script.Parent.Dictation.DictationWaveform)
+local UseDictationInputBarModule = require(script.Parent.Dictation.useDictationInputBar)
+local UseDictationTextAreaModule = require(script.Parent.Dictation.useDictationTextArea)
+local DictationAffordancesModule = require(script.Parent.Dictation.DictationAffordances)
 
-local function _(startValue, endValue, alpha)
-	return startValue + (endValue - startValue) * alpha
+local function _(p1, p2, p3) --[[ Line: 45 | Named "lerp" ]]
+	return p1 + (p2 - p1) * p3
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: foundationModule (ref), useDictationInputBarModule (ref), dictationAffordancesModule (ref), reactModule (ref), useDictationTextAreaModule (ref), fFlagExpChatDictationStopReplacesSendModule (ref), fFlagExpChatInputBarV2CornerAndTruncationFixModule (ref), stopCountdownModule (ref), channelChipModule (ref), fFlagExpChatFixBackspaceNilTargetChannel (ref), configModule (ref), fFlagExpChatPresetChatEnabled (ref), fFlagEnableConsoleExpControls (ref), fFlagExpChatComposerInputBarFigmaParityModule (ref), dictationWaveformModule (ref), fFlagExpChatDictationFTUXModule (ref), dictationFTUXModule (ref)
-	local var1 = foundationModule.Hooks.useTokens()
-	local setTransparency = p1.setTransparency
-	local chatInputBarSettings = p1.chatInputBarSettings
-	local isSpatialUIEnabled = p1.isSpatialUIEnabled
-	local canLocalUserChatDerived = p1.canLocalUserChatDerived
-	local targetChannelWidth = p1.targetChannelWidth
-	local showPlaceholderText = p1.showPlaceholderText
-	local var2 = p1.hasEmptyInputText == true
-	local cursor = p1.cursor
-	local var3 = useDictationInputBarModule({
+return ReactModule.memo(function(p1) --[[ Line: 90 | Named "ChatInputBarV2Dictation" ]]
+	-- upvalues: FoundationModule (copy), UseDictationInputBarModule (copy), DictationAffordancesModule (copy), ReactModule (copy), UseDictationTextAreaModule (copy), FFlagExpChatDictationStopReplacesSendModule (copy), FFlagExpChatInputBarV2CornerAndTruncationFixModule (copy), StopCountdownModule (copy), ChannelChipModule (copy), FFlagExpChatFixBackspaceNilTargetChannel (copy), ConfigModule (copy), FFlagExpChatPresetChatEnabled (copy), FFlagEnableConsoleExpControls (copy), FFlagExpChatComposerInputBarFigmaParityModule (copy), DictationWaveformModule (copy), FFlagExpChatDictationFTUXModule (copy), DictationFTUXModule (copy)
+	local UseTokensResult = FoundationModule.Hooks.useTokens()
+	local SetTransparencyFunction = p1.setTransparency
+	local ChatInputBarSettings = p1.chatInputBarSettings
+	local IsSpatialUIEnabled = p1.isSpatialUIEnabled
+	local CanLocalUserChatDerived = p1.canLocalUserChatDerived
+	local TargetChannelWidth = p1.targetChannelWidth
+	local ShowPlaceholderText = p1.showPlaceholderText
+	local IsHasEmptyInputText = p1.hasEmptyInputText == true
+	local Cursor = p1.cursor
+	local UseDictationInputBarModuleResult = UseDictationInputBarModule({
 		inputText = p1.inputText,
 		setInputText = p1.setInputText,
-		chatInputBarSettings = chatInputBarSettings,
+		chatInputBarSettings = ChatInputBarSettings,
 		customTextBoxRef = p1.customTextBoxRef,
 		textBoxRef = p1.textBoxRef,
 		targetTextChannel = p1.targetTextChannel,
@@ -47,252 +47,219 @@ return reactModule.memo(function(p1)
 		onSendRecordingTap = p1.onSendRecordingTap,
 		onTranscriptionStaged = p1.onTranscriptionStaged
 	})
-	local var4 = dictationAffordancesModule.deriveMicSendButton(var3, {
-		hasEmptyInputText = var2,
-		idleSendIcon = foundationModule.Enums.IconName.ArrowMediumUp,
-		idleSendVariant = if var2 then foundationModule.Enums.ButtonVariant.Standard else foundationModule.Enums.ButtonVariant.Emphasis,
+	local DeriveMicSendButtonResult = DictationAffordancesModule.deriveMicSendButton(UseDictationInputBarModuleResult, {
+		hasEmptyInputText = IsHasEmptyInputText,
+		idleSendIcon = FoundationModule.Enums.IconName.ArrowMediumUp,
+		idleSendVariant = if IsHasEmptyInputText then FoundationModule.Enums.ButtonVariant.Standard else FoundationModule.Enums.ButtonVariant.Emphasis,
 		idleSendActivated = p1.onSendActivated,
-		idleSendDisabled = var2
+		idleSendDisabled = IsHasEmptyInputText
 	})
-	local var5 = dictationAffordancesModule.deriveBackgroundColors(var3, {
-		defaultColor3 = chatInputBarSettings.BackgroundColor3,
+	local DeriveBackgroundColorsResult = DictationAffordancesModule.deriveBackgroundColors(UseDictationInputBarModuleResult, {
+		defaultColor3 = ChatInputBarSettings.BackgroundColor3,
 		defaultTransparency = p1.chatInputBarBackgroundTransparency,
-		listeningColor3 = var1.Color.Shift.Shift_200.Color3,
-		listeningTransparency = var1.Color.Shift.Shift_200.Transparency
+		listeningColor3 = UseTokensResult.Color.Shift.Shift_200.Color3,
+		listeningTransparency = UseTokensResult.Color.Shift.Shift_200.Transparency
 	})
-	local var6 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref), var5 (ref)
-		return p1.transparencyValue:map(function(p2)
-			-- upvalues: var5 (copy)
-			local t = { Color3 = var5.color3 }
-			local baseTransparency = var5.baseTransparency
-			t.Transparency = baseTransparency + (1 - baseTransparency) * p2
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 133 ]]
+		-- upvalues: p1 (copy), DeriveBackgroundColorsResult (copy)
+		return p1.transparencyValue:map(function(p2) --[[ Line: 134 ]]
+			-- upvalues: DeriveBackgroundColorsResult (upval)
+			local BaseTransparency: number = DeriveBackgroundColorsResult.baseTransparency
 			
-			return t
+			return {
+				Color3 = DeriveBackgroundColorsResult.color3,
+				Transparency = BaseTransparency + (1 - BaseTransparency) * p2
+			}
 		end)
 	end, {
 		p1.transparencyValue,
-		var5.color3,
-		var5.baseTransparency
+		DeriveBackgroundColorsResult.color3,
+		DeriveBackgroundColorsResult.baseTransparency
 	})
-	local var7 = dictationAffordancesModule.shouldPreventFade(var3)
-	local var8 = reactModule.useMemo(function()
-		-- upvalues: var7 (ref), p1 (ref)
-		return if var7 then p1.transparencyValue:map(function(_)
+	local ShouldPreventFade = DictationAffordancesModule.shouldPreventFade(UseDictationInputBarModuleResult)
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 143 ]]
+		-- upvalues: ShouldPreventFade (copy), p1 (copy)
+		return if ShouldPreventFade then p1.transparencyValue:map(function(_): number --[[ Line: 145 ]]
 			return 0
 		end) else p1.transparencyValue
-	end, { var7, p1.transparencyValue })
-	local var9 = useDictationTextAreaModule(var3, {
+	end, { ShouldPreventFade, p1.transparencyValue })
+	local UseDictationTextAreaModuleResult = UseDictationTextAreaModule(UseDictationInputBarModuleResult, {
 		transparencyValue = p1.transparencyValue,
-		showPlaceholderText = showPlaceholderText
+		showPlaceholderText = ShowPlaceholderText
 	})
-	local useLongPressOverlay = var4.useLongPressOverlay
-	local micGestureHandlers = var3.micGestureHandlers
-	local isRecording = fFlagExpChatDictationStopReplacesSendModule and var3.isRecording
-	local createElement = reactModule.createElement
-	local var10 = "Frame"
-	local t = {
+	local UseLongPressOverlay = DeriveMicSendButtonResult.useLongPressOverlay
+	local MicGestureHandlers = UseDictationInputBarModuleResult.micGestureHandlers
+	local IsRecording = FFlagExpChatDictationStopReplacesSendModule and UseDictationInputBarModuleResult.isRecording
+	
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		AutomaticSize = Enum.AutomaticSize.XY,
 		Size = UDim2.new(1, 0, 0, 0)
-	}
-	local t_1 = {}
-	local createElement_1 = reactModule.createElement
-	local var11 = "Frame"
-	local t_2 = {
-		BackgroundTransparency = 1,
-		AutomaticSize = Enum.AutomaticSize.Y,
-		Size = UDim2.fromScale(1, 0)
-	}
-	local t_3 = {}
-	local createElement_2 = reactModule.createElement
-	local view = foundationModule.View
-	local t_4 = {
-		LayoutOrder = 1,
-		tag = {
-			["row align-y-center auto-y padding-x-xxsmall"] = true,
-			["radius-circle"] = not fFlagExpChatInputBarV2CornerAndTruncationFixModule
-		},
-		cornerRadius = if fFlagExpChatInputBarV2CornerAndTruncationFixModule then UDim.new(0, 20) else nil,
-		backgroundStyle = var6,
-		stroke = {
-			Color = var1.Color.Stroke.Default.Color3,
-			Transparency = setTransparency(var1.Color.Stroke.Default.Transparency, p1.transparencyValue)
-		},
-		Position = UDim2.fromScale(0, 0),
-		Size = UDim2.fromScale(1, 0)
-	}
-	local t_5 = {
-		StopCountdown = if fFlagExpChatDictationStopReplacesSendModule then nil else reactModule.createElement(stopCountdownModule, {
-			LayoutOrder = 1,
-			countdownProgress = var3.dictation.bindings.countdownProgress,
-			onActivated = var3.dictation.stopDictation,
-			Visible = var3.dictation.bindings.isRecording
-		})
-	}
-	local createElement_3 = reactModule.createElement
-	local var12 = "Frame"
-	local t_6 = {
-		BackgroundTransparency = 1,
-		LayoutOrder = 2,
-		AutomaticSize = Enum.AutomaticSize.Y,
-		Size = UDim2.fromScale(0, 0)
-	}
-	local t_7 = {
-		TargetChannelChip = reactModule.createElement(channelChipModule, {
-			transparency = setTransparency(0, p1.transparencyValue),
-			onAbsoluteSizeChanged = p1.onAbsoluteSizeChanged,
-			onChannelChipActivated = if fFlagExpChatFixBackspaceNilTargetChannel then function()
-				-- upvalues: p1 (ref)
-				p1.resetTargetChannel(p1.isGlobalChatTabActive)
-			end else p1.resetTargetChannel,
-			targetTextChannelDisplayName = p1.targetTextChannelDisplayName or "",
-			isChannelBarVisible = p1.isChannelBarVisible,
-			developerChannelTabsEnabled = p1.developerChannelTabsEnabled
-		})
-	}
-	local var13 = not canLocalUserChatDerived
-	
-	if var13 then
-		var13 = reactModule.createElement
-		var13 = var13("TextLabel", {
+	}, {
+		Container = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
-			Selectable = true,
-			AnchorPoint = Vector2.new(1, 0),
 			AutomaticSize = Enum.AutomaticSize.Y,
-			Font = configModule.ChatInputBarFont,
-			Text = p1.disabledChatPlaceholderText,
-			Position = UDim2.fromScale(1, 0),
-			Size = targetChannelWidth:map(function(p2)
-				return UDim2.new(1, -(p2 + 8), 0, 0)
-			end),
-			TextColor3 = if showPlaceholderText then chatInputBarSettings.PlaceholderColor3 else chatInputBarSettings.TextColor3,
-			TextSize = if isSpatialUIEnabled then chatInputBarSettings.SpatialPanelTextSize else chatInputBarSettings.TextSize,
-			TextTransparency = setTransparency(if showPlaceholderText then 0.5 else 0, p1.transparencyValue),
-			SelectionImageObject = cursor,
-			TextWrapped = if fFlagExpChatInputBarV2CornerAndTruncationFixModule then not showPlaceholderText else not (fFlagExpChatPresetChatEnabled and (showPlaceholderText and p1.shouldTruncatePlaceholder)),
-			TextTruncate = if fFlagExpChatInputBarV2CornerAndTruncationFixModule and showPlaceholderText then Enum.TextTruncate.AtEnd elseif fFlagExpChatPresetChatEnabled and showPlaceholderText then Enum.TextTruncate.AtEnd else nil,
-			TextXAlignment = Enum.TextXAlignment.Left,
-			TextYAlignment = Enum.TextYAlignment.Top,
-			ref = p1.placeholderRef
-		})
-	end
-	t_7.DisabledPlaceholderLabel = var13
-	local var14 = canLocalUserChatDerived
-	
-	if var14 then
-		var14 = reactModule.createElement
-		local var15 = "Frame"
-		local t_8 = {
-			BackgroundTransparency = 1,
-			AnchorPoint = Vector2.new(1, 0),
-			AutomaticSize = Enum.AutomaticSize.Y,
-			Position = UDim2.fromScale(1, 0),
-			Size = targetChannelWidth:map(function(p2)
-				return UDim2.new(1, -(p2 + 8), 0, 0)
-			end)
-		}
-		local t_9 = {}
-		local var16 = canLocalUserChatDerived
-		
-		if var16 then
-			var16 = reactModule.createElement
-			var16 = var16("TextBox", {
-				AnchorPoint = Vector2.new(0, 0),
-				AutomaticSize = Enum.AutomaticSize.XY,
-				BackgroundTransparency = 1,
-				ClearTextOnFocus = false,
-				FontFace = chatInputBarSettings.FontFace,
-				PlaceholderText = if showPlaceholderText then p1.placeholderText else "",
-				Selectable = if fFlagEnableConsoleExpControls then true else nil,
-				SelectionImageObject = cursor,
-				Size = UDim2.fromScale(1, 0),
-				Text = "",
-				PlaceholderColor3 = if fFlagExpChatComposerInputBarFigmaParityModule and chatInputBarSettings.PlaceholderColor3 == configModule.ChatInputBarPlaceholderColor then var1.DarkMode.Content.Default.Color3 else chatInputBarSettings.PlaceholderColor3,
-				TextColor3 = chatInputBarSettings.TextColor3,
-				TextSize = if isSpatialUIEnabled then chatInputBarSettings.SpatialPanelTextSize else chatInputBarSettings.TextSize,
-				TextTransparency = var9.textTransparency,
-				TextStrokeTransparency = var9.textStrokeTransparency,
-				TextStrokeColor3 = chatInputBarSettings.TextStrokeColor3,
-				TextWrapped = if fFlagExpChatInputBarV2CornerAndTruncationFixModule then not showPlaceholderText else true,
-				TextTruncate = if fFlagExpChatInputBarV2CornerAndTruncationFixModule and showPlaceholderText then Enum.TextTruncate.AtEnd else nil,
-				TextXAlignment = Enum.TextXAlignment.Left,
-				TextYAlignment = Enum.TextYAlignment.Top,
-				ZIndex = 2,
-				[reactModule.Event.Focused] = p1.onFocused,
-				[reactModule.Event.FocusLost] = p1.onFocusLost,
-				[reactModule.Change.Text] = p1.onTextChanged,
-				[reactModule.Event.ReturnPressedFromOnScreenKeyboard] = p1.onReturnPressedFromOnScreenKeyboard,
-				ref = if chatInputBarSettings.TextBox then p1.customTextBoxRef else p1.textBoxRef
+			Size = UDim2.fromScale(1, 0)
+		}, {
+			InputGroup = ReactModule.createElement(FoundationModule.View, {
+				LayoutOrder = 1,
+				tag = {
+					["row align-y-center auto-y padding-x-xxsmall"] = true,
+					["radius-circle"] = not FFlagExpChatInputBarV2CornerAndTruncationFixModule
+				},
+				cornerRadius = if FFlagExpChatInputBarV2CornerAndTruncationFixModule then UDim.new(0, 20) else nil,
+				backgroundStyle = UseMemoResult,
+				stroke = {
+					Color = UseTokensResult.Color.Stroke.Default.Color3,
+					Transparency = SetTransparencyFunction(UseTokensResult.Color.Stroke.Default.Transparency, p1.transparencyValue)
+				},
+				Position = UDim2.fromScale(0, 0),
+				Size = UDim2.fromScale(1, 0)
+			}, {
+				StopCountdown = if FFlagExpChatDictationStopReplacesSendModule then nil else ReactModule.createElement(StopCountdownModule, {
+					LayoutOrder = 1,
+					countdownProgress = UseDictationInputBarModuleResult.dictation.bindings.countdownProgress,
+					onActivated = UseDictationInputBarModuleResult.dictation.stopDictation,
+					Visible = UseDictationInputBarModuleResult.dictation.bindings.isRecording
+				}),
+				TextContainer = ReactModule.createElement("Frame", {
+					BackgroundTransparency = 1,
+					LayoutOrder = 2,
+					AutomaticSize = Enum.AutomaticSize.Y,
+					Size = UDim2.fromScale(0, 0)
+				}, {
+					TargetChannelChip = ReactModule.createElement(ChannelChipModule, {
+						transparency = SetTransparencyFunction(0, p1.transparencyValue),
+						onAbsoluteSizeChanged = p1.onAbsoluteSizeChanged,
+						onChannelChipActivated = if FFlagExpChatFixBackspaceNilTargetChannel then function() --[[ Line: 206 ]]
+							-- upvalues: p1 (copy)
+							p1.resetTargetChannel(p1.isGlobalChatTabActive)
+						end else p1.resetTargetChannel,
+						targetTextChannelDisplayName = p1.targetTextChannelDisplayName or "",
+						isChannelBarVisible = p1.isChannelBarVisible,
+						developerChannelTabsEnabled = p1.developerChannelTabsEnabled
+					}),
+					DisabledPlaceholderLabel = not CanLocalUserChatDerived and ReactModule.createElement("TextLabel", {
+						BackgroundTransparency = 1,
+						Selectable = true,
+						AnchorPoint = Vector2.new(1, 0),
+						AutomaticSize = Enum.AutomaticSize.Y,
+						Font = ConfigModule.ChatInputBarFont,
+						Text = p1.disabledChatPlaceholderText,
+						Position = UDim2.fromScale(1, 0),
+						Size = TargetChannelWidth:map(function(p2: number): UDim2 --[[ Line: 221 ]]
+							return UDim2.new(1, -(p2 + 8), 0, 0)
+						end),
+						TextColor3 = ShowPlaceholderText and ChatInputBarSettings.PlaceholderColor3 or ChatInputBarSettings.TextColor3,
+						TextSize = if IsSpatialUIEnabled then ChatInputBarSettings.SpatialPanelTextSize else ChatInputBarSettings.TextSize,
+						TextTransparency = SetTransparencyFunction(if ShowPlaceholderText then 0.5 else 0, p1.transparencyValue),
+						SelectionImageObject = Cursor,
+						TextWrapped = if FFlagExpChatInputBarV2CornerAndTruncationFixModule then not ShowPlaceholderText else not (FFlagExpChatPresetChatEnabled and (ShowPlaceholderText and p1.shouldTruncatePlaceholder)),
+						TextTruncate = if FFlagExpChatInputBarV2CornerAndTruncationFixModule and ShowPlaceholderText then Enum.TextTruncate.AtEnd elseif FFlagExpChatPresetChatEnabled and ShowPlaceholderText then Enum.TextTruncate.AtEnd else nil,
+						TextXAlignment = Enum.TextXAlignment.Left,
+						TextYAlignment = Enum.TextYAlignment.Top,
+						ref = p1.placeholderRef
+					}),
+					TextBoxContainer = CanLocalUserChatDerived and ReactModule.createElement("Frame", {
+						BackgroundTransparency = 1,
+						AnchorPoint = Vector2.new(1, 0),
+						AutomaticSize = Enum.AutomaticSize.Y,
+						Position = UDim2.fromScale(1, 0),
+						Size = TargetChannelWidth:map(function(p2: number): UDim2 --[[ Line: 256 ]]
+							return UDim2.new(1, -(p2 + 8), 0, 0)
+						end)
+					}, {
+						TextBox = CanLocalUserChatDerived and ReactModule.createElement("TextBox", {
+							AnchorPoint = Vector2.new(0, 0),
+							AutomaticSize = Enum.AutomaticSize.XY,
+							BackgroundTransparency = 1,
+							ClearTextOnFocus = false,
+							FontFace = ChatInputBarSettings.FontFace,
+							PlaceholderText = ShowPlaceholderText and p1.placeholderText or "",
+							Selectable = if FFlagEnableConsoleExpControls then true else nil,
+							SelectionImageObject = Cursor,
+							Size = UDim2.fromScale(1, 0),
+							Text = "",
+							PlaceholderColor3 = if FFlagExpChatComposerInputBarFigmaParityModule and ChatInputBarSettings.PlaceholderColor3 == ConfigModule.ChatInputBarPlaceholderColor then UseTokensResult.DarkMode.Content.Default.Color3 else ChatInputBarSettings.PlaceholderColor3,
+							TextColor3 = ChatInputBarSettings.TextColor3,
+							TextSize = if IsSpatialUIEnabled then ChatInputBarSettings.SpatialPanelTextSize else ChatInputBarSettings.TextSize,
+							TextTransparency = UseDictationTextAreaModuleResult.textTransparency,
+							TextStrokeTransparency = UseDictationTextAreaModuleResult.textStrokeTransparency,
+							TextStrokeColor3 = ChatInputBarSettings.TextStrokeColor3,
+							TextWrapped = not FFlagExpChatInputBarV2CornerAndTruncationFixModule or not ShowPlaceholderText,
+							TextTruncate = if FFlagExpChatInputBarV2CornerAndTruncationFixModule and ShowPlaceholderText then Enum.TextTruncate.AtEnd else nil,
+							TextXAlignment = Enum.TextXAlignment.Left,
+							TextYAlignment = Enum.TextYAlignment.Top,
+							ZIndex = 2,
+							[ReactModule.Event.Focused] = p1.onFocused,
+							[ReactModule.Event.FocusLost] = p1.onFocusLost,
+							[ReactModule.Change.Text] = p1.onTextChanged,
+							[ReactModule.Event.ReturnPressedFromOnScreenKeyboard] = p1.onReturnPressedFromOnScreenKeyboard,
+							ref = if ChatInputBarSettings.TextBox then p1.customTextBoxRef else p1.textBoxRef
+						})
+					}),
+					WaveformOverlay = ReactModule.createElement("Frame", {
+						BackgroundTransparency = 1,
+						ClipsDescendants = true,
+						ZIndex = 3,
+						AnchorPoint = Vector2.new(0, 0.5),
+						Position = UDim2.fromScale(0, 0.5),
+						Size = UDim2.new(1, 0, 0, if IsSpatialUIEnabled then ChatInputBarSettings.SpatialPanelTextSize else ChatInputBarSettings.TextSize),
+						Visible = UseDictationInputBarModuleResult.dictation.bindings.isAudioActive
+					}, {
+						List = ReactModule.createElement(DictationWaveformModule, {
+							isActive = UseDictationInputBarModuleResult.isRecording or UseDictationInputBarModuleResult.isListening,
+							audioDeviceInput = UseDictationInputBarModuleResult.dictation.audioDeviceInput,
+							transcribedSamplesBinding = UseDictationInputBarModuleResult.transcribedSamplesBinding,
+							onSample = UseDictationInputBarModuleResult.onWaveformSample
+						})
+					}),
+					UIFlexItem = ReactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.Fill }),
+					UIPadding = ReactModule.createElement("UIPadding", {
+						PaddingBottom = UDim.new(0, 10),
+						PaddingLeft = UDim.new(0, UseTokensResult.Padding.Medium),
+						PaddingRight = UDim.new(0, UseTokensResult.Padding.Medium),
+						PaddingTop = UDim.new(0, 10)
+					})
+				}),
+				SendButtonContainer = ReactModule.createElement(FoundationModule.View, {
+					tag = "auto-xy padding-xxsmall",
+					LayoutOrder = 3,
+					ref = UseDictationInputBarModuleResult.micButtonSlotRef,
+					GroupTransparency = UseMemoResult1
+				}, {
+					TrailingStopCountdown = if IsRecording then ReactModule.createElement(StopCountdownModule, {
+						countdownProgress = UseDictationInputBarModuleResult.dictation.bindings.countdownProgress,
+						onActivated = UseDictationInputBarModuleResult.dictation.stopDictation
+					}) else nil,
+					SendButton = ReactModule.createElement(FoundationModule.IconButton, {
+						isCircular = true,
+						icon = DeriveMicSendButtonResult.icon,
+						variant = DeriveMicSendButtonResult.variant,
+						size = FoundationModule.Enums.InputSize.Small,
+						isDisabled = DeriveMicSendButtonResult.isDisabled,
+						Selectable = not UseLongPressOverlay and nil,
+						onActivated = if UseLongPressOverlay then function() --[[ Line: 366 ]] end else DeriveMicSendButtonResult.onActivated,
+						Visible = not IsRecording and nil
+					}),
+					InputTarget = if UseLongPressOverlay and MicGestureHandlers ~= nil then ReactModule.createElement("TextButton", {
+						Active = true,
+						BackgroundTransparency = 1,
+						Size = UDim2.fromScale(1, 1),
+						Text = "",
+						ZIndex = 2,
+						Selectable = true,
+						SelectionImageObject = UseDictationInputBarModuleResult.micCursor,
+						[ReactModule.Event.Activated] = MicGestureHandlers[ReactModule.Event.Activated],
+						[ReactModule.Event.InputBegan] = MicGestureHandlers[ReactModule.Event.InputBegan],
+						[ReactModule.Event.InputEnded] = MicGestureHandlers[ReactModule.Event.InputEnded]
+					}) else nil
+				}),
+				FTUX = if FFlagExpChatDictationFTUXModule and UseDictationInputBarModuleResult.ftux and UseDictationInputBarModuleResult.ftux.shouldShow then ReactModule.createElement(DictationFTUXModule, {
+					anchorRef = UseDictationInputBarModuleResult.micButtonSlotRef,
+					onDismiss = if FFlagExpChatDictationFTUXModule then UseDictationInputBarModuleResult.ftux.dismiss else nil
+				}) else nil
 			})
-		end
-		t_9.TextBox = var16
-		var14 = var14(var15, t_8, t_9)
-	end
-	t_7.TextBoxContainer = var14
-	t_7.WaveformOverlay = reactModule.createElement("Frame", {
-		BackgroundTransparency = 1,
-		ClipsDescendants = true,
-		ZIndex = 3,
-		AnchorPoint = Vector2.new(0, 0.5),
-		Position = UDim2.fromScale(0, 0.5),
-		Size = UDim2.new(1, 0, 0, if isSpatialUIEnabled then chatInputBarSettings.SpatialPanelTextSize else chatInputBarSettings.TextSize),
-		Visible = var3.dictation.bindings.isAudioActive
-	}, {
-		List = reactModule.createElement(dictationWaveformModule, {
-			isActive = var3.isRecording or var3.isListening,
-			audioDeviceInput = var3.dictation.audioDeviceInput,
-			transcribedSamplesBinding = var3.transcribedSamplesBinding,
-			onSample = var3.onWaveformSample
 		})
 	})
-	t_7.UIFlexItem = reactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.Fill })
-	t_7.UIPadding = reactModule.createElement("UIPadding", {
-		PaddingBottom = UDim.new(0, 10),
-		PaddingLeft = UDim.new(0, var1.Padding.Medium),
-		PaddingRight = UDim.new(0, var1.Padding.Medium),
-		PaddingTop = UDim.new(0, 10)
-	})
-	t_5.TextContainer = createElement_3(var12, t_6, t_7)
-	t_5.SendButtonContainer = reactModule.createElement(foundationModule.View, {
-		tag = "auto-xy padding-xxsmall",
-		LayoutOrder = 3,
-		ref = var3.micButtonSlotRef,
-		GroupTransparency = var8
-	}, {
-		TrailingStopCountdown = if isRecording then reactModule.createElement(stopCountdownModule, {
-			countdownProgress = var3.dictation.bindings.countdownProgress,
-			onActivated = var3.dictation.stopDictation
-		}) else nil,
-		SendButton = reactModule.createElement(foundationModule.IconButton, {
-			isCircular = true,
-			icon = var4.icon,
-			variant = var4.variant,
-			size = foundationModule.Enums.InputSize.Small,
-			isDisabled = var4.isDisabled,
-			Selectable = if useLongPressOverlay then false else nil,
-			onActivated = if useLongPressOverlay then function() end else var4.onActivated,
-			Visible = if isRecording then false else nil
-		}),
-		InputTarget = if useLongPressOverlay and micGestureHandlers ~= nil then reactModule.createElement("TextButton", {
-			Active = true,
-			BackgroundTransparency = 1,
-			Size = UDim2.fromScale(1, 1),
-			Text = "",
-			ZIndex = 2,
-			Selectable = true,
-			SelectionImageObject = var3.micCursor,
-			[reactModule.Event.Activated] = micGestureHandlers[reactModule.Event.Activated],
-			[reactModule.Event.InputBegan] = micGestureHandlers[reactModule.Event.InputBegan],
-			[reactModule.Event.InputEnded] = micGestureHandlers[reactModule.Event.InputEnded]
-		}) else nil
-	})
-	t_5.FTUX = if fFlagExpChatDictationFTUXModule and var3.ftux and var3.ftux.shouldShow then reactModule.createElement(dictationFTUXModule, {
-		anchorRef = var3.micButtonSlotRef,
-		onDismiss = if fFlagExpChatDictationFTUXModule then var3.ftux.dismiss else nil
-	}) else nil
-	t_3.InputGroup = createElement_2(view, t_4, t_5)
-	t_1.Container = createElement_1(var11, t_2, t_3)
-	
-	return createElement(var10, t, t_1)
 end)

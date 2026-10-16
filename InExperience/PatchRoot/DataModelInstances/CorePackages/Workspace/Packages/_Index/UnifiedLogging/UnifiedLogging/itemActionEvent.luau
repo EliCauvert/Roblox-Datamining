@@ -1,103 +1,114 @@
-﻿local httpService = game:GetService("HttpService")
-local telemetryService = game:GetService("TelemetryService")
-local unifiedLogging = script:FindFirstAncestor("UnifiedLogging")
-local parent = unifiedLogging.Parent
-local _ = require(parent.Cryo)
-local getPlatformTarget = require(parent.Analytics).getPlatformTarget
-local tModule = require(parent.t)
-local discoveryEventErrorLogger = require(parent.DiscoveryUtils).DiscoveryEventErrorLogger
-local contentTypeModule = require(unifiedLogging.ContentType)
-local fFlagLuaAppLoosenCollectionIdTypeInterface = require(parent.SharedFlags).FFlagLuaAppLoosenCollectionIdTypeInterface
-local fFlagLuaAppUnifiedLoggingDialogContentTypeModule = require(script.Parent.FFlagLuaAppUnifiedLoggingDialogContentType)
-local fFlagLuaAppMigrateItemEventsTelemetryService = require(parent.SharedFlags).FFlagLuaAppMigrateItemEventsTelemetryService
-local fFlagLuaAppItemEventsTelemetryServiceShadowTraffic = require(parent.SharedFlags).FFlagLuaAppItemEventsTelemetryServiceShadowTraffic
-local var1 = if fFlagLuaAppMigrateItemEventsTelemetryService then {
+﻿local HttpService = game:GetService("HttpService")
+local TelemetryService = game:GetService("TelemetryService")
+local UnifiedLogging = script:FindFirstAncestor("UnifiedLogging")
+local Parent = UnifiedLogging.Parent
+local GetPlatformTargetFunction = require(Parent.Analytics).getPlatformTarget
+local TModule = require(Parent.t)
+local DiscoveryEventErrorLogger = require(Parent.DiscoveryUtils).DiscoveryEventErrorLogger
+local ContentTypeModule = require(UnifiedLogging.ContentType)
+local FFlagLuaAppLoosenCollectionIdTypeInterface = require(Parent.SharedFlags).FFlagLuaAppLoosenCollectionIdTypeInterface
+local FFlagLuaAppUnifiedLoggingDialogContentTypeModule = require(script.Parent.FFlagLuaAppUnifiedLoggingDialogContentType)
+local FFlagLuaAppMigrateItemEventsTelemetryService = require(Parent.SharedFlags).FFlagLuaAppMigrateItemEventsTelemetryService
+local FFlagLuaAppItemEventsTelemetryServiceShadowTraffic = require(Parent.SharedFlags).FFlagLuaAppItemEventsTelemetryServiceShadowTraffic
+local LuaAppItemActionEventThrottlingHundredthsPercent = game:DefineFastInt("LuaAppItemActionEventThrottlingHundredthsPercent", 10000)
+local LuaAppItemActionShadowThrottlingHundredthsPercent = game:DefineFastInt("LuaAppItemActionShadowThrottlingHundredthsPercent", 10000)
+local Config = if FFlagLuaAppMigrateItemEventsTelemetryService then {
 	eventName = "itemAction",
 	description = "Fires for default user actions, primarily through SDUI",
 	backends = { "EventIngest" },
-	throttlingPercentage = game:DefineFastInt("LuaAppItemActionEventThrottlingHundredthsPercent", 10000),
+	throttlingPercentage = LuaAppItemActionEventThrottlingHundredthsPercent,
 	lastUpdated = { 26, 2, 4 }
 } else nil
-local var2 = if fFlagLuaAppItemEventsTelemetryServiceShadowTraffic then {
+local Config1 = if FFlagLuaAppItemEventsTelemetryServiceShadowTraffic then {
 	eventName = "itemActionShadow",
 	description = "Shadow traffic for itemAction event recovery percentage",
 	backends = { "EventIngest" },
-	throttlingPercentage = game:DefineFastInt("LuaAppItemActionShadowThrottlingHundredthsPercent", 10000),
+	throttlingPercentage = LuaAppItemActionShadowThrottlingHundredthsPercent,
 	lastUpdated = { 26, 3, 4 }
 } else nil
-local _ = nil
-local _ = nil
-local var3 = tModule.intersection(tModule.union(tModule.interface({
-	collectionId = if fFlagLuaAppLoosenCollectionIdTypeInterface then tModule.union(tModule.string, tModule.number) else tModule.number,
-	collectionIdStr = tModule.optional(tModule.string)
-}), tModule.interface({
-	collectionId = tModule.optional(if fFlagLuaAppLoosenCollectionIdTypeInterface then tModule.union(tModule.string, tModule.number) else tModule.number),
-	collectionIdStr = tModule.string
-})), tModule.interface({
-	collectionPosition = tModule.number,
-	totalNumberOfItems = tModule.number,
-	contentType = tModule.string,
-	itemId = tModule.optional(tModule.string),
-	itemPosition = tModule.optional(tModule.number),
-	positionInRow = tModule.optional(tModule.number),
-	rowNumber = tModule.optional(tModule.number),
-	feedRowNumber = tModule.optional(tModule.number),
-	positionInTopic = tModule.optional(tModule.number),
-	actionType = tModule.string,
-	interactionUuid = tModule.optional(tModule.string)
+local IntersectionResult = nil
+local UnionResult = TModule.union(TModule.interface({
+	collectionId = if FFlagLuaAppLoosenCollectionIdTypeInterface then TModule.union(TModule.string, TModule.number) else TModule.number,
+	collectionIdStr = TModule.optional(TModule.string)
+}), TModule.interface({
+	collectionId = TModule.optional(if FFlagLuaAppLoosenCollectionIdTypeInterface then TModule.union(TModule.string, TModule.number) else TModule.number),
+	collectionIdStr = TModule.string
 }))
-local var4 = if fFlagLuaAppUnifiedLoggingDialogContentTypeModule then tModule.interface({
-	contentType = tModule.string,
-	actionType = tModule.string,
-	interactionUuid = tModule.optional(tModule.string)
+local config = {
+	collectionPosition = TModule.number,
+	totalNumberOfItems = TModule.number,
+	contentType = TModule.string,
+	itemId = TModule.optional(TModule.string),
+	itemPosition = TModule.optional(TModule.number),
+	positionInRow = TModule.optional(TModule.number),
+	rowNumber = TModule.optional(TModule.number),
+	feedRowNumber = TModule.optional(TModule.number),
+	positionInTopic = TModule.optional(TModule.number),
+	actionType = TModule.string,
+	interactionUuid = TModule.optional(TModule.string)
+}
+IntersectionResult = TModule.intersection(UnionResult, TModule.interface(config))
+local InterfaceResult = if FFlagLuaAppUnifiedLoggingDialogContentTypeModule then TModule.interface({
+	contentType = TModule.string,
+	actionType = TModule.string,
+	interactionUuid = TModule.optional(TModule.string)
 }) else nil
-local t = { [contentTypeModule.User] = u215 }
+local config1 = {
+	[ContentTypeModule.User] = TModule.intersection(UnionResult, TModule.interface(require(Parent.Cryo).Dictionary.join(config, {
+		itemId = TModule.string,
+		itemPosition = TModule.number,
+		sourceCarousel = TModule.string,
+		friendStatus = TModule.string,
+		presence = TModule.string,
+		presenceUniverseId = TModule.string
+	})))
+}
 
-if fFlagLuaAppUnifiedLoggingDialogContentTypeModule then
-	t[contentTypeModule.Dialog] = var4
+if FFlagLuaAppUnifiedLoggingDialogContentTypeModule then
+	config1[ContentTypeModule.Dialog] = InterfaceResult
 end
-return function(p1, p2, p3, p4)
-	-- upvalues: t (ref), var3 (write), discoveryEventErrorLogger (ref), httpService (ref), fFlagLuaAppMigrateItemEventsTelemetryService (ref), telemetryService (ref), var1 (write), getPlatformTarget (ref), fFlagLuaAppItemEventsTelemetryServiceShadowTraffic (ref), var2 (write)
-	local var5 = t[p3] or var3
+return function(p1, EventContext, p2, Tbl) --[[ Line: 115 ]]
+	-- upvalues: config1 (copy), IntersectionResult (ref), DiscoveryEventErrorLogger (copy), HttpService (copy), FFlagLuaAppMigrateItemEventsTelemetryService (copy), TelemetryService (copy), Config (ref), GetPlatformTargetFunction (copy), FFlagLuaAppItemEventsTelemetryServiceShadowTraffic (copy), Config1 (ref)
+	local Entry = config1[p2] or IntersectionResult
 	
-	if var5 then
-		local var6, var7 = var5(p4)
+	if Entry then
+		local EntryResult, EntryResult2 = Entry(Tbl)
 		
-		if not var6 then
-			discoveryEventErrorLogger.reportError("ItemActionEventInvalidInterface", var7)
+		if not EntryResult then
+			DiscoveryEventErrorLogger.reportError("ItemActionEventInvalidInterface", EntryResult2)
 		end
 	end
-	if not p4.interactionUuid then
-		p4.interactionUuid = httpService:GenerateGUID(false)
+	if not Tbl.interactionUuid then
+		Tbl.interactionUuid = HttpService:GenerateGUID(false)
 	end
-	if fFlagLuaAppMigrateItemEventsTelemetryService then
-		for i, v in p4 do
-			if type(v) == "boolean" then
-				p4[i] = if v == true then "true" elseif v == false then "false" else nil
+	if FFlagLuaAppMigrateItemEventsTelemetryService then
+		for i, value in Tbl do
+			if type(value) == "boolean" then
+				Tbl[i] = if value == true then "true" elseif value == false then "false" else nil
 			end
 		end
-		telemetryService:LogEvent(var1, {
-			eventContext = p2,
+		TelemetryService:LogEvent(Config, {
+			eventContext = EventContext,
 			standardizedFields = { "addSessionInfo", "addSessionId", "addOSInfo" },
-			customFields = p4,
-			legacyOverrideTargetForEventIngest = getPlatformTarget()
+			customFields = Tbl,
+			legacyOverrideTargetForEventIngest = GetPlatformTargetFunction()
 		})
 	else
-		p1:sendEventDeferred(p2, "itemAction", p4)
+		p1:sendEventDeferred(EventContext, "itemAction", Tbl)
 	end
-	if fFlagLuaAppItemEventsTelemetryServiceShadowTraffic then
-		local cloned = table.clone(p4)
+	if FFlagLuaAppItemEventsTelemetryServiceShadowTraffic then
+		local Copy = table.clone(Tbl)
 		
-		for i, v in cloned do
-			if type(v) == "boolean" then
-				cloned[i] = if v == true then "true" elseif v == false then "false" else nil
+		for i1, value1 in Copy do
+			if type(value1) == "boolean" then
+				Copy[i1] = if value1 == true then "true" elseif value1 == false then "false" else nil
 			end
 		end
-		telemetryService:LogEvent(var2, {
-			eventContext = p2,
+		TelemetryService:LogEvent(Config1, {
+			eventContext = EventContext,
 			standardizedFields = { "addSessionInfo", "addSessionId", "addOSInfo" },
-			customFields = cloned,
-			legacyOverrideTargetForEventIngest = getPlatformTarget()
+			customFields = Copy,
+			legacyOverrideTargetForEventIngest = GetPlatformTargetFunction()
 		})
 	end
 end

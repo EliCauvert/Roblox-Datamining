@@ -1,1 +1,3 @@
-﻿return game:DefineFastFlag("EdpGameLeavePromptsHandlerEnabled", false) and require(script.Parent.FFlagPromptsHandlerEnabled)
+﻿local FFlagPromptsHandlerEnabledModule = require(script.Parent.FFlagPromptsHandlerEnabled)
+
+return game:DefineFastFlag("EdpGameLeavePromptsHandlerEnabled", false) and FFlagPromptsHandlerEnabledModule

@@ -1,0 +1,1 @@
+﻿return { Dialog = "dialog", FullPage = "fullPage" }

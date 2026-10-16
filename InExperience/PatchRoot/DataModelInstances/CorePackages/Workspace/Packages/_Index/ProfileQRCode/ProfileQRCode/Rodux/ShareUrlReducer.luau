@@ -1,7 +1,7 @@
-﻿local profileQRCode = script:FindFirstAncestor("ProfileQRCode")
+﻿local ProfileQRCode = script:FindFirstAncestor("ProfileQRCode")
 
-return require(profileQRCode.Parent.Rodux).createReducer({}, {
-	[require(profileQRCode.Networking.createOrGetProfileShareUrl).Succeeded.name] = function(_, p1)
+return require(ProfileQRCode.Parent.Rodux).createReducer({}, {
+	[require(ProfileQRCode.Networking.createOrGetProfileShareUrl).Succeeded.name] = function(_, p1) --[[ Line: 14 ]]
 		return p1.responseBody
 	end
 })

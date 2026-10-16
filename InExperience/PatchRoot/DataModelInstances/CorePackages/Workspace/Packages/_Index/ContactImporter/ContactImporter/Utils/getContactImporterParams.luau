@@ -1,8 +1,8 @@
-﻿local parent = script.Parent.Parent
-local getDeepValue = require(parent.dependencies).SocialLibraries.Dictionary.getDeepValue
-local RODUX_KEY = require(parent.Common.Constants).RODUX_KEY
+﻿local Parent = script.Parent.Parent
+local GetDeepValueFunction = require(Parent.dependencies).SocialLibraries.Dictionary.getDeepValue
+local RODUXKEY = require(Parent.Common.Constants).RODUX_KEY
 
-return function(p1)
-	-- upvalues: getDeepValue (ref), RODUX_KEY (ref)
-	return getDeepValue(p1, RODUX_KEY .. "." .. "ShowContactImporterParams") or {}
+return function(p1) --[[ Line: 6 ]]
+	-- upvalues: GetDeepValueFunction (copy), RODUXKEY (copy)
+	return GetDeepValueFunction(p1, RODUXKEY .. "." .. "ShowContactImporterParams") or {}
 end

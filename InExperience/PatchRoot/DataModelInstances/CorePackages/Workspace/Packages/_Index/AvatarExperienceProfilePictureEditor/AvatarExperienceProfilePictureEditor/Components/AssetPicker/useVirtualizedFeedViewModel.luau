@@ -1,78 +1,78 @@
-﻿local avatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
-local reactModule = require(avatarExperienceProfilePictureEditor.Parent.React)
+﻿local AvatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
+local ReactModule = require(AvatarExperienceProfilePictureEditor.Parent.React)
 local _ = require(script.Parent.VirtualizedFeedView)
 local _ = require(script.Parent.AssetPickerTile)
-local getGridMetricsModule = require(avatarExperienceProfilePictureEditor.Utils.getGridMetrics)
+local GetGridMetricsModule = require(AvatarExperienceProfilePictureEditor.Utils.getGridMetrics)
 
-return function(value)
-	-- upvalues: reactModule (ref), getGridMetricsModule (ref)
-	local var1, var2 = reactModule.useState(value.initialContainerWidth)
-	local var3 = reactModule.useMemo(function()
-		-- upvalues: getGridMetricsModule (copy), var1 (ref), value (ref)
-		return getGridMetricsModule({
-			containerWidth = var1,
-			minTileSize = value.minTileSize,
-			gap = value.gap,
-			horizontalPadding = value.horizontalPadding,
-			strokeInset = value.strokeInset
+return function(Frame) --[[ Line: 33 | Named "useAssetPickerVirtualizedFeedViewModel" ]]
+	-- upvalues: ReactModule (copy), GetGridMetricsModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(Frame.initialContainerWidth)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 36 ]]
+		-- upvalues: GetGridMetricsModule (upval), UseStateResult (copy), Frame (copy)
+		return GetGridMetricsModule({
+			containerWidth = UseStateResult,
+			minTileSize = Frame.minTileSize,
+			gap = Frame.gap,
+			horizontalPadding = Frame.horizontalPadding,
+			strokeInset = Frame.strokeInset
 		})
 	end, {
-		var1,
-		value.minTileSize,
-		value.gap,
-		value.horizontalPadding,
-		value.strokeInset
+		UseStateResult,
+		Frame.minTileSize,
+		Frame.gap,
+		Frame.horizontalPadding,
+		Frame.strokeInset
 	})
-	local var4 = reactModule.useRef(nil)
+	local UseRefResult = ReactModule.useRef(nil)
 	
 	return {
-		rows = reactModule.useMemo(function()
-			-- upvalues: value (ref), var3 (ref)
+		rows = ReactModule.useMemo(function() --[[ Line: 54 ]]
+			-- upvalues: Frame (copy), UseMemoResult (copy)
 			local t = {}
 			
-			for i, v in value.items do
-				local var5 = math.floor((i - 1) / var3.itemsPerRow) + 1
-				local var6 = t[var5]
+			for i, item in Frame.items do
+				local NewFloored = math.floor((i - 1) / UseMemoResult.itemsPerRow) + 1
+				local List = t[NewFloored]
 				
-				if var6 == nil then
-					var6 = {}
-					t[var5] = var6
+				if List == nil then
+					List = {}
+					t[NewFloored] = List
 				end
-				table.insert(var6, v)
+				table.insert(List, item)
 			end
 			return t
-		end, { value.items, var3.itemsPerRow }),
-		itemsPerRow = var3.itemsPerRow,
-		gap = value.gap,
-		selectedId = value.selectedId,
-		onSelect = value.onSelect,
-		onDetailsActivated = value.onDetailsActivated,
-		labels = value.labels,
-		onContainerWidthChanged = reactModule.useCallback(function(p1)
-			-- upvalues: var2 (ref)
-			var2(p1)
+		end, { Frame.items, UseMemoResult.itemsPerRow }),
+		itemsPerRow = UseMemoResult.itemsPerRow,
+		gap = Frame.gap,
+		selectedId = Frame.selectedId,
+		onSelect = Frame.onSelect,
+		onDetailsActivated = Frame.onDetailsActivated,
+		labels = Frame.labels,
+		onContainerWidthChanged = ReactModule.useCallback(function(p1) --[[ Line: 68 ]]
+			-- upvalues: UseStateResult2 (copy)
+			UseStateResult2(p1)
 		end, {}),
-		onEndReached = reactModule.useCallback(function()
-			-- upvalues: value (ref), var4 (ref)
-			if value.hasMoreItems and not value.isLoadingMore and (not value.hasLoadMoreError and var4.current ~= value.items) then
-				var4.current = value.items
-				value.onMoreItems()
+		onEndReached = ReactModule.useCallback(function() --[[ Line: 74 ]]
+			-- upvalues: Frame (copy), UseRefResult (copy)
+			if Frame.hasMoreItems and not Frame.isLoadingMore and not Frame.hasLoadMoreError and UseRefResult.current ~= Frame.items then
+				UseRefResult.current = Frame.items
+				Frame.onMoreItems()
 				
 				return
 			end
 		end, {
-			value.items,
-			value.hasMoreItems,
-			value.isLoadingMore,
-			value.hasLoadMoreError,
-			value.onMoreItems
+			Frame.items,
+			Frame.hasMoreItems,
+			Frame.isLoadingMore,
+			Frame.hasLoadMoreError,
+			Frame.onMoreItems
 		}),
-		isLoadingMore = value.isLoadingMore,
-		hasLoadMoreError = value.hasLoadMoreError,
-		onRetryLoadMore = value.onRetryLoadMore,
-		listHeaderComponent = value.listHeaderComponent,
-		listFooterComponent = value.listFooterComponent,
-		horizontalPadding = value.horizontalPadding + value.strokeInset,
-		LayoutOrder = value.LayoutOrder
+		isLoadingMore = Frame.isLoadingMore,
+		hasLoadMoreError = Frame.hasLoadMoreError,
+		onRetryLoadMore = Frame.onRetryLoadMore,
+		listHeaderComponent = Frame.listHeaderComponent,
+		listFooterComponent = Frame.listFooterComponent,
+		horizontalPadding = Frame.horizontalPadding + Frame.strokeInset,
+		LayoutOrder = Frame.LayoutOrder
 	}
 end

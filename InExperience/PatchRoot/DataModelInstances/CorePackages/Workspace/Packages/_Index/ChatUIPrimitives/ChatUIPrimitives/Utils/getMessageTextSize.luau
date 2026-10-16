@@ -1,3 +1,3 @@
-﻿return function(p1, p2)
-	return if p1 == nil then nil elseif p2 then p1.SpatialPanelTextSize else p1.TextSize
+﻿return function(Label, p1) --[[ Line: 13 | Named "getMessageTextSize" ]]
+	return if Label == nil then nil elseif p1 then Label.SpatialPanelTextSize else Label.TextSize
 end

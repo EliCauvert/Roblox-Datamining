@@ -1,26 +1,26 @@
-﻿local guiService = game:GetService("GuiService")
-local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
-local reactModule = require(parent.React)
-local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
-local _ = require(parent.SduiCoreSystem)
+﻿local GuiService = game:GetService("GuiService")
+local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
+local ReactModule = require(Parent.React)
+local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
+local _ = require(Parent.SduiCoreSystem)
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), guiService (ref), reactFocusNavigationModule (ref)
-	local var1 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref), guiService (copy)
-		return if p1.guiObject then p1.guiObject else guiService.SelectedCoreObject
+return ReactModule.memo(function(p1) --[[ Line: 21 | Named "SduiFocusNavActions" ]]
+	-- upvalues: ReactModule (copy), GuiService (copy), ReactFocusNavigationModule (copy)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 24 ]]
+		-- upvalues: p1 (copy), GuiService (upval)
+		return if p1.guiObject then p1.guiObject else GuiService.SelectedCoreObject
 	end, { p1.guiObject })
-	local var2 = reactFocusNavigationModule.useEventHandlerMap(p1.focusNavActions.events, reactFocusNavigationModule.useEventMap(p1.focusNavActions.keys))
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), var1 (ref)
-		if var2 then
-			var2(var1)
+	local UseEventHandlerMapResult = ReactFocusNavigationModule.useEventHandlerMap(p1.focusNavActions.events, (ReactFocusNavigationModule.useEventMap(p1.focusNavActions.keys)))
+	ReactModule.useEffect(function() --[[ Line: 35 ]]
+		-- upvalues: UseEventHandlerMapResult (copy), UseMemoResult (copy)
+		if UseEventHandlerMapResult then
+			UseEventHandlerMapResult(UseMemoResult)
 		end
-		return function()
-			-- upvalues: var2 (copy)
-			var2(nil)
+		return function() --[[ Line: 39 ]]
+			-- upvalues: UseEventHandlerMapResult (upval)
+			UseEventHandlerMapResult(nil)
 		end
-	end, { var2, var1 })
+	end, { UseEventHandlerMapResult, UseMemoResult })
 	
 	return nil
 end)

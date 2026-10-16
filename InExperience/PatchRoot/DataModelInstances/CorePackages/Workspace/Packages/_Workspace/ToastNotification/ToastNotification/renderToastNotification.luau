@@ -1,50 +1,50 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local localizationService = game:GetService("LocalizationService")
-local parent = script.Parent
-local parent_1 = parent.Parent
-local dependenciesModule = require(parent.dependencies)
-local toastNotificationWrapperModule = require(parent.ToastNotificationWrapper)
-local react = dependenciesModule.React
-local reactRoblox = dependenciesModule.ReactRoblox
-local _ = require(parent.type)
-local styleProviderWithDefaultTheme = require(parent_1.Style).StyleProviderWithDefaultTheme
-local foundationModule = require(parent_1.Foundation)
-local foundationProvider = foundationModule.FoundationProvider
-local localization = require(parent_1.RobloxAppLocales).Localization
-local localizationProvider = require(parent_1.Localization).LocalizationProvider
-local reactFocusNavigationModule = require(parent_1.ReactFocusNavigation)
-local var1 = reactFocusNavigationModule.FocusNavigationService.new(reactFocusNavigationModule.EngineInterface.CoreGui)
-local provider = require(parent_1.FocusNavigationUtils).FocusNavigableSurfaceRegistry.Provider
-local inGameToastNotificationActionEventReceiverModule = require(script.Parent.InGameToastNotificationActionEventReceiver)
-local securityAlertEventReceiverModule = require(script.Parent.receivers.SecurityAlertEventReceiver)
-local clientToastNotificationsEnabledEngineFeature = game:GetEngineFeature("ClientToastNotificationsEnabled")
-local getFFlagEnableSecurityAlertToastCallback = require(parent_1.SharedFlags).GetFFlagEnableSecurityAlertToastCallback
+﻿local CoreGui = game:GetService("CoreGui")
+local LocalizationService = game:GetService("LocalizationService")
+local Parent = script.Parent
+local Parent1 = Parent.Parent
+local DependenciesModule = require(Parent.dependencies)
+local ToastNotificationWrapperModule = require(Parent.ToastNotificationWrapper)
+local React = DependenciesModule.React
+local ReactRoblox = DependenciesModule.ReactRoblox
+local _ = require(Parent.type)
+local StyleProviderWithDefaultTheme = require(Parent1.Style).StyleProviderWithDefaultTheme
+local FoundationModule = require(Parent1.Foundation)
+local FoundationProvider = FoundationModule.FoundationProvider
+local Localization = require(Parent1.RobloxAppLocales).Localization
+local LocalizationProvider = require(Parent1.Localization).LocalizationProvider
+local ReactFocusNavigationModule = require(Parent1.ReactFocusNavigation)
+local NewResult = ReactFocusNavigationModule.FocusNavigationService.new(ReactFocusNavigationModule.EngineInterface.CoreGui)
+local Provider = require(Parent1.FocusNavigationUtils).FocusNavigableSurfaceRegistry.Provider
+local InGameToastNotificationActionEventReceiverModule = require(script.Parent.InGameToastNotificationActionEventReceiver)
+local SecurityAlertEventReceiverModule = require(script.Parent.receivers.SecurityAlertEventReceiver)
+local ClientToastNotificationsEnabledEngineFeature = game:GetEngineFeature("ClientToastNotificationsEnabled")
+local GetFFlagEnableSecurityAlertToastCallbackFunction = require(Parent1.SharedFlags).GetFFlagEnableSecurityAlertToastCallback
 
-return function(p1)
-	-- upvalues: coreGuiService (ref), clientToastNotificationsEnabledEngineFeature (ref), react (ref), foundationProvider (ref), foundationModule (ref), styleProviderWithDefaultTheme (ref), localizationProvider (ref), localization (ref), localizationService (ref), reactFocusNavigationModule (ref), var1 (ref), provider (ref), inGameToastNotificationActionEventReceiverModule (ref), getFFlagEnableSecurityAlertToastCallback (ref), securityAlertEventReceiverModule (ref), toastNotificationWrapperModule (ref), reactRoblox (ref)
-	local toastNotification = Instance.new("Folder")
-	toastNotification.Name = "ToastNotification"
-	toastNotification.Parent = coreGuiService
-	reactRoblox.createRoot(toastNotification):render(if clientToastNotificationsEnabledEngineFeature then react.createElement(foundationProvider, { colorMode = foundationModule.Enums.ColorMode.Dark }, {
-		StyleProvider = react.createElement(styleProviderWithDefaultTheme, { withUiModeSupport = false, withDarkTheme = true }, {
-			LocalizationProvider = react.createElement(localizationProvider, {
-				localization = localization.new(localizationService.RobloxLocaleId)
+return function(p1) --[[ Line: 34 ]]
+	-- upvalues: CoreGui (copy), ClientToastNotificationsEnabledEngineFeature (copy), React (copy), FoundationProvider (copy), FoundationModule (copy), StyleProviderWithDefaultTheme (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), ReactFocusNavigationModule (copy), NewResult (copy), Provider (copy), InGameToastNotificationActionEventReceiverModule (copy), GetFFlagEnableSecurityAlertToastCallbackFunction (copy), SecurityAlertEventReceiverModule (copy), ToastNotificationWrapperModule (copy), ReactRoblox (copy)
+	local ToastNotification = Instance.new("Folder")
+	ToastNotification.Name = "ToastNotification"
+	ToastNotification.Parent = CoreGui
+	ReactRoblox.createRoot(ToastNotification):render(if ClientToastNotificationsEnabledEngineFeature then React.createElement(FoundationProvider, { colorMode = FoundationModule.Enums.ColorMode.Dark }, {
+		StyleProvider = React.createElement(StyleProviderWithDefaultTheme, { withUiModeSupport = false, withDarkTheme = true }, {
+			LocalizationProvider = React.createElement(LocalizationProvider, {
+				localization = Localization.new(LocalizationService.RobloxLocaleId)
 			}, {
-				FocusNavigationProvider = react.createElement(reactFocusNavigationModule.FocusNavigationContext.Provider, { value = var1 }, {
-					FocusNavigationRegistryProvider = react.createElement(provider, nil, {
-						react.createElement(inGameToastNotificationActionEventReceiverModule),
-						SecurityAlertEventReceiver = if getFFlagEnableSecurityAlertToastCallback() then react.createElement(securityAlertEventReceiverModule) else nil,
-						ToastNotificationWrapper = react.createElement(toastNotificationWrapperModule, { displayOrder = 13, renderLocation = p1.renderLocation })
+				FocusNavigationProvider = React.createElement(ReactFocusNavigationModule.FocusNavigationContext.Provider, { value = NewResult }, {
+					FocusNavigationRegistryProvider = React.createElement(Provider, nil, {
+						React.createElement(InGameToastNotificationActionEventReceiverModule),
+						SecurityAlertEventReceiver = if GetFFlagEnableSecurityAlertToastCallbackFunction() then React.createElement(SecurityAlertEventReceiverModule) else nil,
+						ToastNotificationWrapper = React.createElement(ToastNotificationWrapperModule, { displayOrder = 13, renderLocation = p1.renderLocation })
 					})
 				})
 			})
 		})
-	}) else react.createElement(styleProviderWithDefaultTheme, { withUiModeSupport = false, withDarkTheme = true }, {
-		LocalizationProvider = react.createElement(localizationProvider, {
-			localization = localization.new(localizationService.RobloxLocaleId)
+	}) else React.createElement(StyleProviderWithDefaultTheme, { withUiModeSupport = false, withDarkTheme = true }, {
+		LocalizationProvider = React.createElement(LocalizationProvider, {
+			localization = Localization.new(LocalizationService.RobloxLocaleId)
 		}, {
-			ToastNotificationWrapper = react.createElement(toastNotificationWrapperModule, { displayOrder = 13, renderLocation = p1.renderLocation }),
-			InGameToastNotificationActionEventReceiver = react.createElement(inGameToastNotificationActionEventReceiverModule)
+			ToastNotificationWrapper = React.createElement(ToastNotificationWrapperModule, { displayOrder = 13, renderLocation = p1.renderLocation }),
+			InGameToastNotificationActionEventReceiver = React.createElement(InGameToastNotificationActionEventReceiverModule)
 		})
 	}))
 end

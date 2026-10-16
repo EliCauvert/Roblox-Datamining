@@ -1,34 +1,34 @@
-﻿local parent = script:FindFirstAncestor("GameHydrationReact").Parent
-local signalsModule = require(parent.Signals)
-local dataHydrationModule = require(parent.DataHydration)
+﻿local Parent = script:FindFirstAncestor("GameHydrationReact").Parent
+local SignalsModule = require(Parent.Signals)
+local DataHydrationModule = require(Parent.DataHydration)
 
-local function _(p1)
+local function _(p1) --[[ Line: 32 | Named "toId" ]]
 	return if p1 == nil then nil else tostring(p1)
 end
 
-return function(p1)
-	-- upvalues: dataHydrationModule (ref), signalsModule (ref)
-	local gameInfoStore = dataHydrationModule.Game.getGameInfoStore(false)
-	local votesStore = dataHydrationModule.Game.getVotesStore(false)
-	local universeId = p1.universeId
-	local var1, var2 = signalsModule.createSignal(if universeId ~= nil then nil else tostring(universeId))
+return function(p1) --[[ Line: 47 | Named "subscribeGameInfo" ]]
+	-- upvalues: DataHydrationModule (copy), SignalsModule (copy)
+	local GameInfoStore = DataHydrationModule.Game.getGameInfoStore(false)
+	local VotesStore = DataHydrationModule.Game.getVotesStore(false)
+	local UniverseId = p1.universeId
+	local Signal, Signal2 = SignalsModule.createSignal(if UniverseId == nil then nil else tostring(UniverseId))
 	local t = {}
 	
 	return {
-		getCurrent = function()
-			-- upvalues: t (write)
+		getCurrent = function() --[[ Line: 70 ]]
+			-- upvalues: t (ref)
 			return t
 		end,
-		update = function(p2)
-			-- upvalues: var2 (ref)
-			var2(if p2 ~= nil then nil else tostring(p2))
+		update = function(p2) --[[ Line: 73 ]]
+			-- upvalues: Signal2 (copy)
+			Signal2(if p2 == nil then nil else tostring(p2))
 		end,
-		dispose = signalsModule.createEffect(function(p2)
-			-- upvalues: var1 (ref), t (write), gameInfoStore (ref), votesStore (ref), p1 (ref)
-			local var3 = var1(p2)
-			t = if var3 == nil then {} else {
-				gameInfo = gameInfoStore.getGameInfo(var3).data(p2),
-				votes = votesStore.getVote(var3).data(p2)
+		dispose = SignalsModule.createEffect(function(p2) --[[ Line: 55 ]]
+			-- upvalues: Signal (copy), t (ref), GameInfoStore (copy), VotesStore (copy), p1 (copy)
+			local SignalResult = Signal(p2)
+			t = if SignalResult == nil then {} else {
+				gameInfo = GameInfoStore.getGameInfo(SignalResult).data(p2),
+				votes = VotesStore.getVote(SignalResult).data(p2)
 			}
 			p1.onChange(t)
 		end)

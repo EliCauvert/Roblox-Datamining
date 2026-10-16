@@ -1,15 +1,14 @@
-﻿local userList = script:FindFirstAncestor("UserList")
-local reactModule = require(userList.Parent.React)
-local verticalUserListSection = require(userList.Components.VerticalUserList).VerticalUserListSection
-local horizontalUserList = require(userList.Components.HorizontalUserList).HorizontalUserList
-local enumsModule = require(userList.Common.Enums)
-local _ = require(userList.Common.Types)
+﻿local UserList = script:FindFirstAncestor("UserList")
+local ReactModule = require(UserList.Parent.React)
+local VerticalUserListSection = require(UserList.Components.VerticalUserList).VerticalUserListSection
+local HorizontalUserList = require(UserList.Components.HorizontalUserList).HorizontalUserList
+local EnumsModule = require(UserList.Common.Enums)
+local _ = require(UserList.Common.Types)
 
-return reactModule.memo(function(p1)
-	-- upvalues: enumsModule (ref), verticalUserListSection (ref), horizontalUserList (ref), reactModule (ref)
-	local var1 = if p1.layoutMode == enumsModule.LayoutMode.Vertical then verticalUserListSection else horizontalUserList
-	local cloned = table.clone(p1)
-	cloned.layoutMode = nil
+return ReactModule.memo(function(Tbl) --[[ Line: 39 | Named "UserListLayoutAdaptor" ]]
+	-- upvalues: EnumsModule (copy), VerticalUserListSection (copy), HorizontalUserList (copy), ReactModule (copy)
+	local Copy = table.clone(Tbl)
+	Copy.layoutMode = nil
 	
-	return reactModule.createElement(var1, cloned)
+	return ReactModule.createElement(if Tbl.layoutMode == EnumsModule.LayoutMode.Vertical then VerticalUserListSection else HorizontalUserList, Copy)
 end)

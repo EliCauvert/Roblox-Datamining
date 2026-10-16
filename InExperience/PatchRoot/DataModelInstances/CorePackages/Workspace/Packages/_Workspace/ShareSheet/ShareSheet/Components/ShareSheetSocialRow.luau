@@ -1,138 +1,133 @@
-﻿local shareSheet = script:FindFirstAncestor("ShareSheet")
-local parent = shareSheet.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local skeleton = foundationModule.Skeleton
-local view = foundationModule.View
-local iconName = foundationModule.Enums.IconName
-local radius = foundationModule.Enums.Radius
-local fFlagShareSheetPeoplePickerEnabledModule = require(shareSheet.Flags.FFlagShareSheetPeoplePickerEnabled)
-local shareSheetConstantsModule = require(shareSheet.ShareSheetConstants)
-local shareSheetRowModule = require(script.Parent.ShareSheetRow)
-local shareSheetItemContainerModule = require(script.Parent.ShareSheetItemContainer)
-local var1 = if fFlagShareSheetPeoplePickerEnabledModule then require(shareSheet.Utils.ConversationUtils) else nil
-local playersService = game:GetService("Players")
-local _ = require(parent.AppChat.GetConversationListStore)
+﻿local ShareSheet = script:FindFirstAncestor("ShareSheet")
+local Parent = ShareSheet.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local Skeleton = FoundationModule.Skeleton
+local View = FoundationModule.View
+local IconName = FoundationModule.Enums.IconName
+local Radius = FoundationModule.Enums.Radius
+local FFlagShareSheetPeoplePickerEnabledModule = require(ShareSheet.Flags.FFlagShareSheetPeoplePickerEnabled)
+local ShareSheetConstantsModule = require(ShareSheet.ShareSheetConstants)
+local ShareSheetRowModule = require(script.Parent.ShareSheetRow)
+local ShareSheetItemContainerModule = require(script.Parent.ShareSheetItemContainer)
+local ConversationUtilsModule = if FFlagShareSheetPeoplePickerEnabledModule then require(ShareSheet.Utils.ConversationUtils) else nil
+local Players = game:GetService("Players")
+local _ = require(ShareSheet.Types)
 
-local function _(p1, p2)
-	local t = {}
+local function _(List, p1) --[[ Line: 37 | Named "getOtherParticipants" ]]
+	local List1 = {}
 	
-	for i, v in p1 do
-		if v ~= p2 then
-			table.insert(t, v)
+	for _, value in List do
+		if value ~= p1 then
+			table.insert(List1, value)
 		end
 	end
-	return t
+	return List1
 end
 
-local function createSkeletonItems()
-	-- upvalues: shareSheetConstantsModule (ref), reactModule (ref), view (ref), skeleton (ref), radius (ref)
-	local t = {}
+local function createSkeletonItems() --[[ Line: 47 ]]
+	-- upvalues: ShareSheetConstantsModule (copy), ReactModule (copy), View (copy), Skeleton (copy), Radius (copy)
+	local Elements = {}
 	
-	for i = 1, shareSheetConstantsModule.FIntShareSheetNumAvatarSkeletons do
-		t[`Skeleton{i}`] = reactModule.createElement(view, {
+	for i = 1, ShareSheetConstantsModule.FIntShareSheetNumAvatarSkeletons do
+		Elements[`Skeleton{i}`] = ReactModule.createElement(View, {
 			tag = "col align-x-center gap-small size-1700-0 auto-y",
 			LayoutOrder = i
 		}, {
-			Avatar = reactModule.createElement(view, {
+			Avatar = ReactModule.createElement(View, {
 				LayoutOrder = 1,
 				tag = "size-full-1700",
 				testId = "share-sheet-avatar-skeleton-container"
 			}, {
-				Skeleton = reactModule.createElement(skeleton, {
+				Skeleton = ReactModule.createElement(Skeleton, {
 					testId = "share-sheet-avatar-skeleton",
-					radius = radius.Circle
+					radius = Radius.Circle
 				})
 			}),
-			Text = reactModule.createElement(view, {
+			Text = ReactModule.createElement(View, {
 				LayoutOrder = 2,
 				tag = "size-full-400",
 				testId = "share-sheet-text-skeleton-container"
 			}, {
-				Skeleton = reactModule.createElement(skeleton, {
+				Skeleton = ReactModule.createElement(Skeleton, {
 					testId = "share-sheet-text-skeleton",
-					radius = radius.Medium
+					radius = Radius.Medium
 				})
 			})
 		})
 	end
-	return t
+	return Elements
 end
 
-local function ShareSheetConversationItem(p3)
-	-- upvalues: reactModule (ref), fFlagShareSheetPeoplePickerEnabledModule (ref), var1 (ref), shareSheetItemContainerModule (ref)
-	local var2, var3, displayName
-	local conversation = p3.conversation
-	local id = conversation.id
-	local var4 = reactModule.useCallback(function()
-		-- upvalues: p3 (ref), id (ref)
-		p3.onConversationActivated(id)
-	end, { id, p3.onConversationActivated })
-	local _ = nil
-	local _ = nil
-	local _ = nil
+local function ShareSheetConversationItem(Frame) --[[ Line: 89 ]]
+	-- upvalues: ReactModule (copy), FFlagShareSheetPeoplePickerEnabledModule (copy), ConversationUtilsModule (copy), ShareSheetItemContainerModule (copy)
+	local Conversation = Frame.conversation
+	local Id = Conversation.id
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 92 ]]
+		-- upvalues: Frame (copy), Id (copy)
+		Frame.onConversationActivated(Id)
+	end, { Id, Frame.onConversationActivated })
+	local DisplayName = nil
+	local ParticipantUserIds = nil
+	local ParticipantUserIds2 = nil
 	
-	if fFlagShareSheetPeoplePickerEnabledModule then
-		local participantUserIds, participantUserIds_1 = var1.getParticipantUserIds(conversation, p3.localUserId)
-		var2 = participantUserIds
-		var3 = participantUserIds_1
-		displayName = var1.getDisplayName(conversation)
+	if FFlagShareSheetPeoplePickerEnabledModule then
+		ParticipantUserIds, ParticipantUserIds2 = ConversationUtilsModule.getParticipantUserIds(Conversation, Frame.localUserId)
+		DisplayName = ConversationUtilsModule.getDisplayName(Conversation)
 	else
-		local participants = conversation.participants or {}
-		local localUserId = p3.localUserId
-		local t = {}
+		local LocalUserId = Frame.localUserId
+		local List = {}
 		
-		for i, v in participants do
-			if v ~= localUserId then
-				table.insert(t, v)
+		for _, value in Conversation.participants or {} do
+			if value ~= LocalUserId then
+				table.insert(List, value)
 			end
 		end
-		local var5 = t
-		var2 = var5[1] or p3.localUserId
-		var3 = if #var5 >= 2 then var5[2] else nil
-		local titleForViewer = conversation.titleForViewer
-		displayName = if titleForViewer and titleForViewer ~= "" then titleForViewer else conversation.title or ""
+		ParticipantUserIds = List[1] or Frame.localUserId
+		ParticipantUserIds2 = if #List >= 2 then List[2] else nil
+		local TitleForViewer = Conversation.titleForViewer
+		DisplayName = if TitleForViewer and TitleForViewer ~= "" then TitleForViewer else Conversation.title or ""
 	end
-	return reactModule.createElement(shareSheetItemContainerModule, {
-		primaryUserId = var2,
-		secondUserId = var3,
-		isSelected = p3.isSelected,
-		label = displayName,
-		onActivated = var4,
-		LayoutOrder = p3.LayoutOrder
+	return ReactModule.createElement(ShareSheetItemContainerModule, {
+		primaryUserId = ParticipantUserIds,
+		secondUserId = ParticipantUserIds2,
+		isSelected = Frame.isSelected,
+		label = DisplayName,
+		onActivated = UseResult,
+		LayoutOrder = Frame.LayoutOrder
 	})
 end
 
-return function(p4)
-	-- upvalues: playersService (ref), fFlagShareSheetPeoplePickerEnabledModule (ref), useLocalization (ref), createSkeletonItems (ref), reactModule (ref), ShareSheetConversationItem (ref), shareSheetItemContainerModule (ref), iconName (ref), shareSheetRowModule (ref)
-	local var6 = tostring(if playersService.LocalPlayer then playersService.LocalPlayer.UserId else 0)
-	local var7 = if fFlagShareSheetPeoplePickerEnabledModule then useLocalization({ more = "CommonUI.Features.Label.More" }) else nil
-	local t = {}
+return function(Frame) --[[ Line: 120 | Named "ShareSheetSocialRow" ]]
+	-- upvalues: Players (copy), FFlagShareSheetPeoplePickerEnabledModule (copy), UseLocalizationFunction (copy), createSkeletonItems (copy), ReactModule (copy), ShareSheetConversationItem (copy), ShareSheetItemContainerModule (copy), IconName (copy), ShareSheetRowModule (copy)
+	local Text = tostring(Players.LocalPlayer and Players.LocalPlayer.UserId or 0)
+	local UseLocalizationResult = if FFlagShareSheetPeoplePickerEnabledModule then UseLocalizationFunction({ more = "CommonUI.Features.Label.More" }) else nil
+	local Elements = {}
 	
-	if p4.isLoading or p4.conversationEligibility.isLoading then
-		t = createSkeletonItems()
+	if Frame.isLoading or Frame.conversationEligibility.isLoading then
+		Elements = createSkeletonItems()
 	else
-		local eligibleConversations = p4.conversationEligibility.eligibleConversations
+		local EligibleConversations = Frame.conversationEligibility.eligibleConversations
 		
-		for i, v in eligibleConversations do
-			local id = v.id
-			t[id] = reactModule.createElement(ShareSheetConversationItem, {
-				conversation = v,
-				isSelected = p4.selectedConversationIds[id] == true,
-				localUserId = var6,
-				onConversationActivated = p4.onConversationActivated,
-				LayoutOrder = i
+		for LayoutOrder, eligibleConversation in EligibleConversations do
+			local Id = eligibleConversation.id
+			Elements[Id] = ReactModule.createElement(ShareSheetConversationItem, {
+				conversation = eligibleConversation,
+				isSelected = Frame.selectedConversationIds[Id] == true,
+				localUserId = Text,
+				onConversationActivated = Frame.onConversationActivated,
+				LayoutOrder = LayoutOrder
 			})
 		end
-		if fFlagShareSheetPeoplePickerEnabledModule then
-			t.More = reactModule.createElement(shareSheetItemContainerModule, {
-				icon = iconName.ThreeDotsHorizontal,
-				label = var7.more,
-				onActivated = p4.onMoreActivated,
-				LayoutOrder = #eligibleConversations + 1
+		if FFlagShareSheetPeoplePickerEnabledModule then
+			Elements.More = ReactModule.createElement(ShareSheetItemContainerModule, {
+				icon = IconName.ThreeDotsHorizontal,
+				label = UseLocalizationResult.more,
+				onActivated = Frame.onMoreActivated,
+				LayoutOrder = #EligibleConversations + 1
 			})
 		end
 	end
-	return reactModule.createElement(shareSheetRowModule, { LayoutOrder = p4.LayoutOrder }, t)
+	return ReactModule.createElement(ShareSheetRowModule, { LayoutOrder = Frame.LayoutOrder }, Elements)
 end

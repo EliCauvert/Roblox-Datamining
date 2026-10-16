@@ -1,3 +1,3 @@
-﻿return function(p1, p2)
-	return p1:sub(1, p2:len()) == p2
+﻿return function(Text: string, Text1): boolean --[[ Line: 16 | Named "startsWith" ]]
+	return Text:sub(1, Text1:len()) == Text1
 end

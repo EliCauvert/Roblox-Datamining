@@ -1,34 +1,34 @@
-﻿local t = {}
+﻿local ValidationEnumsModule = {}
 
-local function createEnumMetatable(p1)
+local function createEnumMetatable(p1) --[[ Line: 8 ]]
 	return {
 		__metatable = "This metatable is protected",
-		__index = function(_, p2)
-			-- upvalues: p1 (ref)
+		__index = function(_, p2) --[[ Line: 10 ]]
+			-- upvalues: p1 (copy)
 			error("Invalid ValidationEnums." .. p1 .. " enum value: " .. tostring(p2))
 		end,
-		__newindex = function(_, _, _)
+		__newindex = function(_, _, _) --[[ Line: 13 ]]
 			error("Cannot add new keys to ValidationEnums")
 		end
 	}
 end
 
-local function finalizeEnumTable(p1)
-	-- upvalues: t (ref), createEnumMetatable (ref)
-	if t[p1] == nil then
-		error(p1 .. " enum table is not found")
+local function finalizeEnumTable(Text) --[[ Line: 20 ]]
+	-- upvalues: ValidationEnumsModule (copy), createEnumMetatable (copy)
+	if ValidationEnumsModule[Text] == nil then
+		error(Text .. " enum table is not found")
 	end
-	for i, v in t[p1] do
+	for i, value in ValidationEnumsModule[Text] do
 		if typeof(i) ~= "string" then
-			error(p1 .. " enum table has non string key " .. tostring(i))
-		elseif i ~= v then
-			error(p1 .. " enum table has non-matching key and value for key " .. tostring(i))
+			error(Text .. " enum table has non string key " .. tostring(i))
+		elseif i ~= value then
+			error(Text .. " enum table has non-matching key and value for key " .. tostring(i))
 		end
 	end
-	setmetatable(t[p1], createEnumMetatable(p1))
+	setmetatable(ValidationEnumsModule[Text], (createEnumMetatable(Text)))
 end
 
-t.ValidationModule = {
+ValidationEnumsModule.ValidationModule = {
 	ExpectedRootSchema = "ExpectedRootSchema",
 	SingleInstanceSelected = "SingleInstanceSelected",
 	SerializedAssetSizeBounded = "SerializedAssetSizeBounded",
@@ -40,6 +40,7 @@ t.ValidationModule = {
 	PropertiesSensible = "PropertiesSensible",
 	InstanceTreeMatchesSchema = "InstanceTreeMatchesSchema",
 	DescendantIdsAllowed = "DescendantIdsAllowed",
+	DescendantIdsPublished = "DescendantIdsPublished",
 	ScaleTypeValid = "ScaleTypeValid",
 	CollisionFidelityCorrect = "CollisionFidelityCorrect",
 	AttachmentBoundsValid = "AttachmentBoundsValid",
@@ -54,6 +55,7 @@ t.ValidationModule = {
 	DynamicHeadFacsPresent = "DynamicHeadFacsPresent",
 	DynamicHeadControlsActive = "DynamicHeadControlsActive",
 	FacsJointBoundsValid = "FacsJointBoundsValid",
+	FacsJointCountBounded = "FacsJointCountBounded",
 	HrdBonesFollowSchema = "HrdBonesFollowSchema",
 	HrdPropertiesSensible = "HrdPropertiesSensible",
 	TposeAdjustmentSensible = "TposeAdjustmentSensible",
@@ -130,7 +132,7 @@ t.ValidationModule = {
 	EmissiveMapAllowed = "EmissiveMapAllowed",
 	EmissiveAreaChecks = "EmissiveAreaChecks"
 }
-t.SharedDataMember = {
+ValidationEnumsModule.SharedDataMember = {
 	jobId = "jobId",
 	entrypointInput = "entrypointInput",
 	rootInstance = "rootInstance",
@@ -152,7 +154,7 @@ t.SharedDataMember = {
 	fullBodyPartsMetrics = "fullBodyPartsMetrics"
 }
 finalizeEnumTable("SharedDataMember")
-t.ValidationConfig = {
+ValidationEnumsModule.ValidationConfig = {
 	categories = "categories",
 	fflag = "fflag",
 	shadowFlag = "shadowFlag",
@@ -164,18 +166,18 @@ t.ValidationConfig = {
 	run = "run"
 }
 finalizeEnumTable("ValidationConfig")
-t.AssetQualityFetchStatus = {
+ValidationEnumsModule.AssetQualityFetchStatus = {
 	assetQualityFetchNA = "assetQualityFetchNA",
 	assetQualityFetchInProgress = "assetQualityFetchInProgress",
 	assetQualityFetchSuccess = "assetQualityFetchSuccess",
 	assetQualityFetchFailure = "assetQualityFetchFailure"
 }
 finalizeEnumTable("AssetQualityFetchStatus")
-t.ConsumerEnv = { Studio = "Studio", Backend = "Backend", IEC = "IEC" }
+ValidationEnumsModule.ConsumerEnv = { Studio = "Studio", Backend = "Backend", IEC = "IEC" }
 finalizeEnumTable("ConsumerEnv")
-t.ValidationEnv = { Studio = "Studio", Backend = "Backend", IEC = "IEC" }
+ValidationEnumsModule.ValidationEnv = { Studio = "Studio", Backend = "Backend", IEC = "IEC" }
 finalizeEnumTable("ValidationEnv")
-t.Status = {
+ValidationEnumsModule.Status = {
 	CANNOT_START = "CANNOT_START",
 	TIMEOUT = "TIMEOUT",
 	ERROR = "ERROR",
@@ -184,7 +186,7 @@ t.Status = {
 	IN_PROGRESS = "IN_PROGRESS"
 }
 finalizeEnumTable("Status")
-t.AssetQualityCheck = {
+ValidationEnumsModule.AssetQualityCheck = {
 	Measure_Dynamic_Head = "Measure_Dynamic_Head",
 	Measure_Cage_Distance_Head = "Measure_Cage_Distance_Head",
 	Measure_Cage_Mesh_Distance = "Measure_Cage_Mesh_Distance",
@@ -209,7 +211,7 @@ t.AssetQualityCheck = {
 }
 finalizeEnumTable("AssetQualityCheck")
 finalizeEnumTable("ValidationModule")
-t.UploadCategory = {
+ValidationEnumsModule.UploadCategory = {
 	TORSO_AND_LIMBS = "TORSO_AND_LIMBS",
 	DYNAMIC_HEAD = "DYNAMIC_HEAD",
 	LAYERED_CLOTHING = "LAYERED_CLOTHING",
@@ -224,4 +226,4 @@ t.UploadCategory = {
 }
 finalizeEnumTable("UploadCategory")
 
-return t
+return ValidationEnumsModule

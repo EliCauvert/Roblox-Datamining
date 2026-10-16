@@ -1,10 +1,10 @@
-﻿local virtualEvents = script:FindFirstAncestor("VirtualEvents")
-local _ = require(virtualEvents.Parent.GraphQLServer)
-local getVirtualEventDatesModule = require(virtualEvents.Common.getVirtualEventDates)
+﻿local VirtualEvents = script:FindFirstAncestor("VirtualEvents")
+local _ = require(VirtualEvents.Parent.GraphQLServer)
+local GetVirtualEventDatesModule = require(VirtualEvents.Common.getVirtualEventDates)
 
-return function(p1, p2)
-	-- upvalues: getVirtualEventDatesModule (ref)
-	local var1 = getVirtualEventDatesModule(p1)
+return function(p1, p2) --[[ Line: 6 | Named "getSecondsLeftInEvent" ]]
+	-- upvalues: GetVirtualEventDatesModule (copy)
+	local VirtualEventDatesModule = GetVirtualEventDatesModule(p1)
 	
-	return if p2.UnixTimestamp < var1.startDate.UnixTimestamp then 1e999 elseif var1.endDate.UnixTimestamp < p2.UnixTimestamp then 0 else var1.endDate.UnixTimestamp - var1.startDate.UnixTimestamp - (p2.UnixTimestamp - var1.startDate.UnixTimestamp)
+	return if p2.UnixTimestamp < VirtualEventDatesModule.startDate.UnixTimestamp then 1e999 elseif VirtualEventDatesModule.endDate.UnixTimestamp < p2.UnixTimestamp then 0 else VirtualEventDatesModule.endDate.UnixTimestamp - VirtualEventDatesModule.startDate.UnixTimestamp - (p2.UnixTimestamp - VirtualEventDatesModule.startDate.UnixTimestamp)
 end

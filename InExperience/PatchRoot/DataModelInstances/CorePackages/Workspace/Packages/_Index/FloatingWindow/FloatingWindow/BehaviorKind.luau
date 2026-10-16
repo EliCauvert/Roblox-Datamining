@@ -1,1 +1,1 @@
-﻿return table.freeze({ Contained = "Contained" })
+﻿return (table.freeze({ Contained = "Contained" }))

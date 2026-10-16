@@ -1,35 +1,36 @@
-﻿local function serializeTable(p1, p2, p3, p4)
-	-- upvalues: serializeTable (ref)
-	p3 = p3 or false
-	p4 = p4 or 0
-	local repeated = string.rep(" ", p4)
+﻿local function serializeTable(List, Text, p1, p2): string --[[ Line: 3 ]]
+	-- upvalues: serializeTable (copy)
+	local P2 = p1 or false
+	local Count = p2 or 0
+	local Repeated = string.rep(" ", Count)
 	
-	if p2 then
-		repeated ..= p2 .. " = "
+	if Text then
+		Repeated ..= Text .. " = "
 	end
-	if type(p1) == "table" then
-		repeated ..= "{" .. if not p3 then "\n" else ""
+	if type(List) == "table" then
+		local Text1 = Repeated .. "{" .. (if P2 then "" else "\n")
 		
-		for i, v in pairs(p1) do
-			repeated ..= serializeTable(v, i, p3, p4 + 1) .. "," .. if not p3 then "\n" else ""
+		for i, value in pairs(List) do
+			Text1 ..= serializeTable(value, i, P2, Count + 1) .. "," .. if P2 then "" else "\n"
 		end
-		repeated ..= string.rep(" ", p4) .. "}"
+		Repeated = Text1 .. string.rep(" ", Count) .. "}"
 		
-		return repeated
-	elseif type(p1) == "number" then
-		repeated ..= tostring(p1)
+		return Repeated
+	elseif type(List) == "number" then
+		Repeated ..= tostring(List)
 		
-		return repeated
-	elseif type(p1) == "string" then
-		repeated ..= string.format("%q", p1)
+		return Repeated
+	elseif type(List) == "string" then
+		Repeated ..= string.format("%q", List)
 		
-		return repeated
-	elseif type(p1) == "boolean" then
-		repeated ..= if p1 then "true" else "false"
+		return Repeated
+	elseif type(List) == "boolean" then
+		Repeated ..= if List then "true" else "false"
 		
-		return repeated
+		return Repeated
+	else
+		return Repeated .. "\"[inserializeable datatype:" .. type(List) .. "]\""
 	end
-	return repeated .. "\"[inserializeable datatype:" .. type(p1) .. "]\""
 end
 
 return serializeTable

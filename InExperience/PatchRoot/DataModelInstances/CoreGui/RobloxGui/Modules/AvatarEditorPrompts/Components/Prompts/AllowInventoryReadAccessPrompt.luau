@@ -1,42 +1,41 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local coreGuiService = game:GetService("CoreGui")
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local tModule = require(corePackagesService.Packages.t)
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
-local buttonType = UIBloxModule.App.Button.Enum.ButtonType
-local _ = coreGuiService:WaitForChild("RobloxGui")
-local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
-local setAllowInventoryReadAccessModule = require(script.Parent.Parent.Parent.Thunks.SetAllowInventoryReadAccess)
-local allowInventoryReadAccessPrompt = roactModule.PureComponent:extend("AllowInventoryReadAccessPrompt")
-allowInventoryReadAccessPrompt.validateProps = tModule.strictInterface({
-	gameName = tModule.string,
-	screenSize = tModule.Vector2,
-	setAvatarReadAccessAllowed = tModule.callback,
-	setAvatarReadAccessDenied = tModule.callback
+﻿local CorePackages = game:GetService("CorePackages")
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local TModule = require(CorePackages.Packages.t)
+local UIBloxModule = require(CorePackages.Packages.UIBlox)
+local InteractiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
+local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
+local _ = game:GetService("CoreGui"):WaitForChild("RobloxGui")
+local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
+local SetAllowInventoryReadAccessModule = require(script.Parent.Parent.Parent.Thunks.SetAllowInventoryReadAccess)
+local AllowInventoryReadAccessPrompt = RoactModule.PureComponent:extend("AllowInventoryReadAccessPrompt")
+AllowInventoryReadAccessPrompt.validateProps = TModule.strictInterface({
+	gameName = TModule.string,
+	screenSize = TModule.Vector2,
+	setAvatarReadAccessAllowed = TModule.callback,
+	setAvatarReadAccessDenied = TModule.callback
 })
 
-function allowInventoryReadAccessPrompt.render(p1)
-	-- upvalues: roactModule (ref), interactiveAlert (ref), robloxTranslatorModule (ref), buttonType (ref)
-	return roactModule.createElement(interactiveAlert, {
-		title = robloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.InventoryReadAccessPromptTitle"),
-		bodyText = robloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.InventoryReadAccessPromptText", { RBX_NAME = p1.props.gameName }),
+function AllowInventoryReadAccessPrompt.render(p1) --[[ Line: 31 ]]
+	-- upvalues: RoactModule (copy), InteractiveAlert (copy), RobloxTranslatorModule (copy), ButtonType (copy)
+	return RoactModule.createElement(InteractiveAlert, {
+		title = RobloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.InventoryReadAccessPromptTitle"),
+		bodyText = RobloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.InventoryReadAccessPromptText", { RBX_NAME = p1.props.gameName }),
 		buttonStackInfo = {
 			buttons = {
 				{
 					isDefaultChild = true,
 					props = {
 						onActivated = p1.props.setAvatarReadAccessDenied,
-						text = robloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.InventoryReadAccessPromptNo")
+						text = RobloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.InventoryReadAccessPromptNo")
 					}
 				},
 				{
 					isDefaultChild = false,
-					buttonType = buttonType.PrimarySystem,
+					buttonType = ButtonType.PrimarySystem,
 					props = {
 						onActivated = p1.props.setAvatarReadAccessAllowed,
-						text = robloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.InventoryReadAccessPromptYes")
+						text = RobloxTranslatorModule:FormatByKey("CoreScripts.AvatarEditorPrompts.InventoryReadAccessPromptYes")
 					}
 				}
 			}
@@ -46,18 +45,18 @@ function allowInventoryReadAccessPrompt.render(p1)
 	})
 end
 
-return roactRoduxModule.connect(function(p1)
+return RoactRoduxModule.connect(function(p1) --[[ Line: 65 | Named "mapStateToProps" ]]
 	return { gameName = p1.gameName, screenSize = p1.screenSize }
-end, function(p1)
-	-- upvalues: setAllowInventoryReadAccessModule (ref)
+end, function(Callback) --[[ Line: 72 | Named "mapDispatchToProps" ]]
+	-- upvalues: SetAllowInventoryReadAccessModule (copy)
 	return {
-		setAvatarReadAccessDenied = function()
-			-- upvalues: p1 (ref), setAllowInventoryReadAccessModule (copy)
-			return p1(setAllowInventoryReadAccessModule(false))
+		setAvatarReadAccessDenied = function() --[[ Line: 74 ]]
+			-- upvalues: Callback (copy), SetAllowInventoryReadAccessModule (upval)
+			return Callback(SetAllowInventoryReadAccessModule(false))
 		end,
-		setAvatarReadAccessAllowed = function()
-			-- upvalues: p1 (ref), setAllowInventoryReadAccessModule (copy)
-			return p1(setAllowInventoryReadAccessModule(true))
+		setAvatarReadAccessAllowed = function() --[[ Line: 78 ]]
+			-- upvalues: Callback (copy), SetAllowInventoryReadAccessModule (upval)
+			return Callback(SetAllowInventoryReadAccessModule(true))
 		end
 	}
-end)(allowInventoryReadAccessPrompt)
+end)(AllowInventoryReadAccessPrompt)

@@ -1,43 +1,44 @@
-﻿local marketplaceService = game:GetService("MarketplaceService")
-local inExperienceShop = script:FindFirstAncestor("InExperienceShop")
-local promiseModule = require(inExperienceShop.Parent.Promise)
-local errorsModule = require(script.Parent.Errors)
-local shopDebugLoggerModule = require(inExperienceShop.Internal.ShopDebugLogger)
+﻿local MarketplaceService = game:GetService("MarketplaceService")
+local InExperienceShop = script:FindFirstAncestor("InExperienceShop")
+local PromiseModule = require(InExperienceShop.Parent.Promise)
+local ErrorsModule = require(script.Parent.Errors)
+local ShopDebugLoggerModule = require(InExperienceShop.Internal.ShopDebugLogger)
 
-return function(p1, p2)
-	-- upvalues: promiseModule (ref), shopDebugLoggerModule (ref), marketplaceService (ref), errorsModule (ref)
-	return promiseModule.new(function(p3, p4)
-		-- upvalues: shopDebugLoggerModule (copy), p1 (ref), p2 (ref), marketplaceService (copy), errorsModule (copy)
-		task.spawn(function()
-			-- upvalues: shopDebugLoggerModule (copy), p1 (copy), p2 (copy), marketplaceService (copy), p3 (ref), p4 (ref), errorsModule (copy)
-			shopDebugLoggerModule.logLazy(function()
-				-- upvalues: p1 (copy), p2 (copy)
-				return "getProductInfo: call id=" .. p0 .. " infoType=" .. tostring(p2)
+return function(AssetId, InfoType) --[[ Line: 18 | Named "getProductInfo" ]]
+	-- upvalues: PromiseModule (copy), ShopDebugLoggerModule (copy), MarketplaceService (copy), ErrorsModule (copy)
+	return PromiseModule.new(function(Callback, Callback1) --[[ Line: 19 ]]
+		-- upvalues: ShopDebugLoggerModule (upval), AssetId (copy), InfoType (copy), MarketplaceService (upval), ErrorsModule (upval)
+		task.spawn(function() --[[ Line: 20 ]]
+			-- upvalues: ShopDebugLoggerModule (upval), AssetId (upval), InfoType (upval), MarketplaceService (upval), Callback (copy), Callback1 (copy), ErrorsModule (upval)
+			ShopDebugLoggerModule.logLazy(function(): string --[[ Line: 21 ]]
+				-- upvalues: AssetId (upval), InfoType (upval)
+				return "getProductInfo: call id=" .. AssetId .. " infoType=" .. tostring(InfoType)
 			end)
-			local var1 = shopDebugLoggerModule.startTimer()
-			local ok, status = pcall(function()
-				-- upvalues: marketplaceService (copy), p1 (copy), p2 (copy)
-				return marketplaceService:GetProductInfoAsync(p1, p2)
+			local StartTimerResult = ShopDebugLoggerModule.startTimer()
+			local Success, Result = pcall(function() --[[ Line: 25 ]]
+				-- upvalues: MarketplaceService (upval), AssetId (upval), InfoType (upval)
+				return MarketplaceService:GetProductInfoAsync(AssetId, InfoType)
 			end)
 			
-			if ok then
-				shopDebugLoggerModule.logElapsedLazy(function()
-					-- upvalues: p1 (copy)
-					return "getProductInfo: success id=" .. p0
-				end, var1)
-				p3(status)
+			if Success then
+				ShopDebugLoggerModule.logElapsedLazy(function(): string --[[ Line: 29 ]]
+					-- upvalues: AssetId (upval)
+					return "getProductInfo: success id=" .. AssetId
+				end, StartTimerResult)
+				Callback(Result)
 				
 				return
+			else
+				ShopDebugLoggerModule.logElapsedLazy(function(): string --[[ Line: 34 ]]
+					-- upvalues: AssetId (upval)
+					return "getProductInfo: error id=" .. AssetId
+				end, StartTimerResult)
+				ShopDebugLoggerModule.logLazy(function(): string --[[ Line: 37 ]]
+					-- upvalues: Result (copy)
+					return "getProductInfo: error detail=" .. tostring(Result)
+				end)
+				Callback1(ErrorsModule.engineError("getProductInfo: GetProductInfoAsync raised", Result))
 			end
-			shopDebugLoggerModule.logElapsedLazy(function()
-				-- upvalues: p1 (copy)
-				return "getProductInfo: error id=" .. p0
-			end, var1)
-			shopDebugLoggerModule.logLazy(function()
-				-- upvalues: status (ref)
-				return "getProductInfo: error detail=" .. tostring(status)
-			end)
-			p4(errorsModule.engineError("getProductInfo: GetProductInfoAsync raised", status))
 		end)
 	end)
 end

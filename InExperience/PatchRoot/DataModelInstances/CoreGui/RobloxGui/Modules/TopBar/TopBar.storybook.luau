@@ -1,22 +1,22 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local roactModule = require(corePackagesService.Packages.Roact)
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-UIBloxModule.init(require(corePackagesService.Workspace.Packages.RobloxAppUIBloxConfig))
-local appStyleProvider = UIBloxModule.App.Style.AppStyleProvider
-roactModule.setGlobalConfig({ elementTracing = true, propValidation = true })
-local t = {
+﻿local CorePackages = game:GetService("CorePackages")
+local RoactModule = require(CorePackages.Packages.Roact)
+local UIBloxModule = require(CorePackages.Packages.UIBlox)
+UIBloxModule.init(require(CorePackages.Workspace.Packages.RobloxAppUIBloxConfig))
+local AppStyleProvider = UIBloxModule.App.Style.AppStyleProvider
+RoactModule.setGlobalConfig({ elementTracing = true, propValidation = true })
+local config = {
 	Default = { themeName = "Light", fontName = "Gotham" },
 	Light = { themeName = "Light", fontName = "Gotham" },
 	Dark = { themeName = "Dark", fontName = "Gotham" }
 }
 
 return {
-	roact = roactModule,
-	mapStory = function(p1)
-		-- upvalues: roactModule (ref), appStyleProvider (ref), t (ref)
-		return function(p2)
-			-- upvalues: roactModule (copy), appStyleProvider (copy), t (copy), p1 (ref)
-			return roactModule.createElement(appStyleProvider, { style = if p2 then t[p2.theme] else t.Default }, { Child = roactModule.createElement(p1, p2) })
+	roact = RoactModule,
+	mapStory = function(p1) --[[ Line: 30 ]]
+		-- upvalues: RoactModule (copy), AppStyleProvider (copy), config (copy)
+		return function(p2) --[[ Line: 31 ]]
+			-- upvalues: RoactModule (upval), AppStyleProvider (upval), config (upval), p1 (copy)
+			return RoactModule.createElement(AppStyleProvider, { style = p2 and config[p2.theme] or config.Default }, { Child = RoactModule.createElement(p1, p2) })
 		end
 	end
 }

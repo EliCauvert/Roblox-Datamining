@@ -1,8 +1,8 @@
-﻿local reactModule = require(script:FindFirstAncestor("CancelSubscriptionApp").Parent.React)
-local cancelUserSubscriptionRequestPromptModule = require(script.Parent.CancelUserSubscriptionRequestPrompt)
-local useCancelUserSubscriptionRequestPromptPropsModule = require(script.Parent.useCancelUserSubscriptionRequestPromptProps)
+﻿local ReactModule = require(script:FindFirstAncestor("CancelSubscriptionApp").Parent.React)
+local CancelUserSubscriptionRequestPromptModule = require(script.Parent.CancelUserSubscriptionRequestPrompt)
+local UseCancelUserSubscriptionRequestPromptPropsModule = require(script.Parent.useCancelUserSubscriptionRequestPromptProps)
 
-return function()
-	-- upvalues: useCancelUserSubscriptionRequestPromptPropsModule (ref), reactModule (ref), cancelUserSubscriptionRequestPromptModule (ref)
-	return reactModule.createElement(cancelUserSubscriptionRequestPromptModule, useCancelUserSubscriptionRequestPromptPropsModule())
+return function() --[[ Line: 8 | Named "CancelUserSubscriptionRequestContainer" ]]
+	-- upvalues: UseCancelUserSubscriptionRequestPromptPropsModule (copy), ReactModule (copy), CancelUserSubscriptionRequestPromptModule (copy)
+	return ReactModule.createElement(CancelUserSubscriptionRequestPromptModule, (UseCancelUserSubscriptionRequestPromptPropsModule()))
 end

@@ -1,39 +1,39 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceInspectAndBuy").Parent
-local signalsModule = require(parent.Signals)
-local _ = require(parent.AXCommon)
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceInspectAndBuy").Parent
+local SignalsModule = require(Parent.Signals)
+local _ = require(Parent.AXCommon)
 
-return function()
-	-- upvalues: signalsModule (ref)
-	local var1, var2 = signalsModule.createSignal({})
+return function() --[[ Line: 38 | Named "createItemSelectionStore" ]]
+	-- upvalues: SignalsModule (copy)
+	local Signal, Signal2 = SignalsModule.createSignal({})
 	local t = {}
 	
 	return {
-		getItemDataMap = var1,
-		getItemData = function(p1)
-			-- upvalues: t (ref), signalsModule (copy), var1 (ref)
-			if t[p1] == nil then
-				t[p1] = signalsModule.createComputed(function(p2)
-					-- upvalues: var1 (copy), p1 (ref)
-					return var1(p2)[p1]
+		getItemDataMap = Signal,
+		getItemData = function(Key) --[[ Line: 44 ]]
+			-- upvalues: t (copy), SignalsModule (upval), Signal (copy)
+			if t[Key] == nil then
+				t[Key] = SignalsModule.createComputed(function(p1) --[[ Line: 46 ]]
+					-- upvalues: Signal (upval), Key (copy)
+					return Signal(p1)[Key]
 				end)
 			end
-			return t[p1]
+			return t[Key]
 		end,
-		setItemData = function(value, p1)
-			-- upvalues: var1 (ref), var2 (ref)
-			local cloned = table.clone(var1(false))
-			cloned[value] = p1
-			var2(cloned)
+		setItemData = function(Key, p1) --[[ Line: 54 ]]
+			-- upvalues: Signal (copy), Signal2 (copy)
+			local Copy = table.clone(Signal(false))
+			Copy[Key] = p1
+			Signal2(Copy)
 		end,
-		clearItemData = function(p1)
-			-- upvalues: var1 (ref), var2 (ref)
-			local cloned = table.clone(var1(false))
-			cloned[p1] = nil
-			var2(cloned)
+		clearItemData = function(Key) --[[ Line: 60 ]]
+			-- upvalues: Signal (copy), Signal2 (copy)
+			local Copy = table.clone(Signal(false))
+			Copy[Key] = nil
+			Signal2(Copy)
 		end,
-		clearAll = function()
-			-- upvalues: var2 (ref)
-			var2({})
+		clearAll = function() --[[ Line: 66 ]]
+			-- upvalues: Signal2 (copy)
+			Signal2({})
 		end
 	}
 end

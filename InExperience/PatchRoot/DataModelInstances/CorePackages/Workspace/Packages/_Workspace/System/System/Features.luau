@@ -1,37 +1,37 @@
-﻿local starterGuiService = game:GetService("StarterGui")
-local lifecycleModule = require(script.Parent.Lifecycle)
-local featureNameModule = require(script.Parent.FeatureName)
-local t = {}
-t.__index = t
+﻿local StarterGui = game:GetService("StarterGui")
+local LifecycleModule = require(script.Parent.Lifecycle)
+local FeatureNameModule = require(script.Parent.FeatureName)
+local Module = {}
+Module.__index = Module
 
-function t.new(p1)
-	-- upvalues: t (ref), starterGuiService (ref), lifecycleModule (ref)
-	local tbl = setmetatable({}, t)
-	local t_1 = nil
-	local coreGuiType = nil
+function Module.new(p1) --[[ Line: 27 ]]
+	-- upvalues: Module (copy), StarterGui (copy), LifecycleModule (copy)
+	local self = setmetatable({}, Module)
+	local v1 = nil
+	local CoreGuiType = nil
 	
 	if p1 then
-		coreGuiType = p1.coreGuiType
-		t_1 = {
+		CoreGuiType = p1.coreGuiType
+		v1 = {
 			defaultVisible = p1.defaultVisible or false,
-			defaultEnabled = if coreGuiType then starterGuiService:GetCoreGuiEnabled(coreGuiType) else p1.defaultEnabled or false
+			defaultEnabled = if CoreGuiType then StarterGui:GetCoreGuiEnabled(CoreGuiType) else p1.defaultEnabled or false
 		}
 	end
-	local var1 = lifecycleModule.new(t_1)
-	tbl.lifecycle = var1
+	local NewLifecycle = LifecycleModule.new(v1)
+	self.lifecycle = NewLifecycle
 	
-	if coreGuiType then
-		tbl._coreGuiConnection = starterGuiService.CoreGuiChangedSignal:Connect(function(p2, p3)
-			-- upvalues: coreGuiType (write), var1 (ref)
-			if p2 == coreGuiType or p2 == Enum.CoreGuiType.All then
-				var1.setEnabled(p3)
+	if CoreGuiType then
+		self._coreGuiConnection = StarterGui.CoreGuiChangedSignal:Connect(function(CoreGuiType1, Enabled) --[[ Line: 51 ]]
+			-- upvalues: CoreGuiType (ref), NewLifecycle (copy)
+			if CoreGuiType1 == CoreGuiType or CoreGuiType1 == Enum.CoreGuiType.All then
+				NewLifecycle.setEnabled(Enabled)
 			end
 		end)
 	end
-	return tbl
+	return self
 end
 
-function t:dispose()
+function Module:dispose() --[[ Line: 61 ]]
 	if self._coreGuiConnection then
 		self._coreGuiConnection:Disconnect()
 		self._coreGuiConnection = nil
@@ -39,62 +39,62 @@ function t:dispose()
 	self.lifecycle:dispose()
 end
 
-local t_1 = {}
+local NewResults = {}
 
 return {
-	FeatureName = featureNameModule,
-	registerLifecycle = function(p1, p2)
-		-- upvalues: t_1 (ref), t (ref)
-		assert(not t_1[p1], `Feature "{p3}" already has a registered lifecycle`)
-		local var1 = t.new(p2)
-		t_1[p1] = var1
+	FeatureName = FeatureNameModule,
+	registerLifecycle = function(Key, p1) --[[ Line: 75 ]]
+		-- upvalues: NewResults (copy), Module (copy)
+		assert(not NewResults[Key], `Feature "{Key}" already has a registered lifecycle`)
+		local NewModule = Module.new(p1)
+		NewResults[Key] = NewModule
 		
-		return var1
+		return NewModule
 	end,
-	getFeature = function(p1)
-		-- upvalues: t_1 (ref)
-		return t_1[p1]
+	getFeature = function(p1) --[[ Line: 83 ]]
+		-- upvalues: NewResults (copy)
+		return NewResults[p1]
 	end,
-	getVisibility = function(p1)
-		-- upvalues: t_1 (ref)
-		local var1 = t_1[p1]
+	getVisibility = function(p1) --[[ Line: 87 ]]
+		-- upvalues: NewResults (copy)
+		local NewResult = NewResults[p1]
 		
-		return if var1 then var1.lifecycle.getVisible(false) else false
+		return if NewResult then NewResult.lifecycle.getVisible(false) else false
 	end,
-	setVisibility = function(value, p1)
-		-- upvalues: t_1 (ref)
-		local var1 = t_1[value]
+	setVisibility = function(p1, p2) --[[ Line: 95 ]]
+		-- upvalues: NewResults (copy)
+		local NewResult = NewResults[p1]
 		
-		if var1 then
-			var1.lifecycle.setVisible(p1)
+		if NewResult then
+			NewResult.lifecycle.setVisible(p2)
 		end
 	end,
-	toggleVisibility = function(p1)
-		-- upvalues: t_1 (ref)
-		local var1 = t_1[p1]
+	toggleVisibility = function(p1) --[[ Line: 102 ]]
+		-- upvalues: NewResults (copy)
+		local NewResult = NewResults[p1]
 		
-		if var1 then
-			var1.lifecycle.setVisible(not var1.lifecycle.getVisible(false))
+		if NewResult then
+			NewResult.lifecycle.setVisible(not NewResult.lifecycle.getVisible(false))
 		end
 	end,
-	setEnabled = function(value, p1)
-		-- upvalues: t_1 (ref)
-		local var1 = t_1[value]
+	setEnabled = function(p1, p2) --[[ Line: 109 ]]
+		-- upvalues: NewResults (copy)
+		local NewResult = NewResults[p1]
 		
-		if var1 then
-			var1.lifecycle.setEnabled(p1)
+		if NewResult then
+			NewResult.lifecycle.setEnabled(p2)
 		end
 	end,
-	onVisibilityChanged = function(p1, p2)
-		-- upvalues: t_1 (ref)
-		local var1 = t_1[p1]
+	onVisibilityChanged = function(p1, p2) --[[ Line: 116 ]]
+		-- upvalues: NewResults (copy)
+		local NewResult = NewResults[p1]
 		
-		return if var1 then var1.lifecycle:onVisibilityChanged(p2) else function() end
+		return if NewResult then NewResult.lifecycle:onVisibilityChanged(p2) else function() --[[ Line: 121 ]] end
 	end,
-	onEnabledChanged = function(p1, p2)
-		-- upvalues: t_1 (ref)
-		local var1 = t_1[p1]
+	onEnabledChanged = function(p1, p2) --[[ Line: 124 ]]
+		-- upvalues: NewResults (copy)
+		local NewResult = NewResults[p1]
 		
-		return if var1 then var1.lifecycle:onEnabledChanged(p2) else function() end
+		return if NewResult then NewResult.lifecycle:onEnabledChanged(p2) else function() --[[ Line: 129 ]] end
 	end
 }

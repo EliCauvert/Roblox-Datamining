@@ -1,54 +1,53 @@
-﻿local contactImporter = script:FindFirstAncestor("ContactImporter")
-local dependenciesModule = require(contactImporter.dependencies)
-local constantsModule = require(contactImporter.Common.Constants)
-local getFIntContactImporterUploadContactsMaxModule = require(contactImporter.Flags.getFIntContactImporterUploadContactsMax)
-local getFIntContactImporterUploadContactsMinModule = require(contactImporter.Flags.getFIntContactImporterUploadContactsMin)
-local deviceContact = dependenciesModule.RoduxContacts.Models.DeviceContact
+﻿local ContactImporter = script:FindFirstAncestor("ContactImporter")
+local ConstantsModule = require(ContactImporter.Common.Constants)
+local GetFIntContactImporterUploadContactsMaxModule = require(ContactImporter.Flags.getFIntContactImporterUploadContactsMax)
+local GetFIntContactImporterUploadContactsMinModule = require(ContactImporter.Flags.getFIntContactImporterUploadContactsMin)
+local DeviceContact = require(ContactImporter.dependencies).RoduxContacts.Models.DeviceContact
 
-return function(p1)
-	-- upvalues: getFIntContactImporterUploadContactsMaxModule (ref), getFIntContactImporterUploadContactsMinModule (ref), deviceContact (ref), constantsModule (ref)
-	local t = {}
-	local var1 = getFIntContactImporterUploadContactsMaxModule()
-	local var2 = getFIntContactImporterUploadContactsMinModule()
+return function(p1) --[[ Line: 12 ]]
+	-- upvalues: GetFIntContactImporterUploadContactsMaxModule (copy), GetFIntContactImporterUploadContactsMinModule (copy), DeviceContact (copy), ConstantsModule (copy)
+	local Contacts = {}
+	local FIntContactImporterUploadContactsMaxModule = GetFIntContactImporterUploadContactsMaxModule()
+	local FIntContactImporterUploadContactsMinModule = GetFIntContactImporterUploadContactsMinModule()
 	
-	for i, v in pairs(p1.contacts) do
-		for i_1, v_1 in pairs(v.phonenumber) do
-			if var1 <= #t then break end
-			table.insert(t, {
-				idAssignedByFE = deviceContact.generateId(v),
+	for _, contact in pairs(p1.contacts) do
+		for _, value in pairs(contact.phonenumber) do
+			if FIntContactImporterUploadContactsMaxModule <= #Contacts then break end
+			table.insert(Contacts, {
+				idAssignedByFE = DeviceContact.generateId(contact),
 				fields = {
 					{
-						name = constantsModule.LAST_NAME,
-						value = if v.lastname == nil then "" else tostring(v.lastname)
+						name = ConstantsModule.LAST_NAME,
+						value = if contact.lastname == nil then "" else tostring(contact.lastname)
 					},
 					{
-						name = constantsModule.FIRST_NAME,
-						value = if v.firstname == nil then "" else tostring(v.firstname)
+						name = ConstantsModule.FIRST_NAME,
+						value = if contact.firstname == nil then "" else tostring(contact.firstname)
 					},
 					{
-						name = constantsModule.PHONE_NUMBER,
-						value = tostring(v_1):gsub("%s+", "")
+						name = ConstantsModule.PHONE_NUMBER,
+						value = tostring(value):gsub("%s+", "")
 					}
 				}
 			})
 		end
 	end
-	local tCount = #t
+	local CountContacts = #Contacts
 	
-	return if var2 <= tCount then {
+	return if FIntContactImporterUploadContactsMinModule <= CountContacts then {
 		countryCode = p1.countryCode,
-		contacts = t,
-		contactsCount = tCount,
+		contacts = Contacts,
+		contactsCount = CountContacts,
 		source = p1.source
-	} elseif tCount < var2 then {
+	} elseif CountContacts < FIntContactImporterUploadContactsMinModule then {
 		countryCode = p1.countryCode,
 		contacts = {},
-		contactsCount = tCount,
+		contactsCount = CountContacts,
 		source = p1.source
 	} else {
 		countryCode = p1.countryCode,
-		contacts = t,
-		contactsCount = tCount,
+		contacts = Contacts,
+		contactsCount = CountContacts,
 		source = p1.source
 	}
 end

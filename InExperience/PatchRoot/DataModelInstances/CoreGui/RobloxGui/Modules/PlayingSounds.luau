@@ -1,23 +1,23 @@
-﻿local getFFlagSoundTelemetryOsClockModule = require(game:GetService("CoreGui").RobloxGui.Modules.Flags.GetFFlagSoundTelemetryOsClock)
-local t = {}
-t.__index = t
+﻿local GetFFlagSoundTelemetryOsClockModule = require(game:GetService("CoreGui").RobloxGui.Modules.Flags.GetFFlagSoundTelemetryOsClock)
+local PlayingSoundsModule = {}
+PlayingSoundsModule.__index = PlayingSoundsModule
 
-function t.new(p1)
-	-- upvalues: t (ref)
-	local t_1 = {}
-	setmetatable(t_1, t)
-	t_1.aggregatedData = p1
-	t_1.sounds = {}
+function PlayingSoundsModule.new(AggregatedData) --[[ Line: 9 ]]
+	-- upvalues: PlayingSoundsModule (copy)
+	local t = {}
+	setmetatable(t, PlayingSoundsModule)
+	t.aggregatedData = AggregatedData
+	t.sounds = {}
 	
-	return t_1
+	return t
 end
 
-function t:addSound(p1, p2)
-	-- upvalues: getFFlagSoundTelemetryOsClockModule (ref)
-	local var1 = self.sounds[p1]
+function PlayingSoundsModule:addSound(p1, p2) --[[ Line: 17 ]]
+	-- upvalues: GetFFlagSoundTelemetryOsClockModule (copy)
+	local Sound = self.sounds[p1]
 	
-	if var1 == nil then
-		if getFFlagSoundTelemetryOsClockModule() then
+	if Sound == nil then
+		if GetFFlagSoundTelemetryOsClockModule() then
 			self.sounds[p1] = {
 				count = 0,
 				maxLoopCount = 1,
@@ -32,41 +32,43 @@ function t:addSound(p1, p2)
 				instances = {}
 			}
 		end
-		var1 = self.sounds[p1]
+		Sound = self.sounds[p1]
 	end
-	if var1.instances[p2] == nil then
-		var1.instances[p2] = 1
-		var1.count += 1
+	if Sound.instances[p2] == nil then
+		Sound.instances[p2] = 1
+		Sound.count += 1
 	end
 end
 
-function t:removeSound(p1, p2)
-	-- upvalues: getFFlagSoundTelemetryOsClockModule (ref)
-	local var1 = self.sounds[p1]
+function PlayingSoundsModule:removeSound(p1, p2) --[[ Line: 37 ]]
+	-- upvalues: GetFFlagSoundTelemetryOsClockModule (copy)
+	local Sound = self.sounds[p1]
 	
-	if var1 == nil then return end
-	if var1.instances[p2] then
-		var1.instances[p2] = nil
-		var1.count -= 1
+	if Sound == nil then return end
+	if Sound.instances[p2] then
+		Sound.instances[p2] = nil
+		Sound.count -= 1
 	end
-	if var1.count == 0 then
-		if getFFlagSoundTelemetryOsClockModule() then
-			self.aggregatedData:addPlay(p1, math.round(os.clock() - var1.starttime), var1.maxLoopCount)
+	if Sound.count == 0 then
+		if GetFFlagSoundTelemetryOsClockModule() then
+			self.aggregatedData:addPlay(p1, math.round(os.clock() - Sound.starttime), Sound.maxLoopCount)
 		else
-			self.aggregatedData:addPlay(p1, os.time() - var1.starttime, var1.maxLoopCount)
+			self.aggregatedData:addPlay(p1, os.time() - Sound.starttime, Sound.maxLoopCount)
 		end
 		self.sounds[p1] = nil
 	end
 end
 
-function t:loopSound(p1, p2)
-	local var1 = self.sounds[p1]
+function PlayingSoundsModule:loopSound(p1, Key) --[[ Line: 66 ]]
+	local Sound = self.sounds[p1]
 	
-	if var1 == nil or var1.instances[p2] == nil then
+	if Sound ~= nil and Sound.instances[Key] ~= nil then
+		local Instances = Sound.instances
+		Instances[Key] += 1
+		Sound.maxLoopCount = math.max(Sound.maxLoopCount, Sound.instances[Key])
+		
 		return
 	end
-	var1.instances[p2] += 1
-	var1.maxLoopCount = math.max(var1.maxLoopCount, var1.instances[p2])
 end
 
-return t
+return PlayingSoundsModule

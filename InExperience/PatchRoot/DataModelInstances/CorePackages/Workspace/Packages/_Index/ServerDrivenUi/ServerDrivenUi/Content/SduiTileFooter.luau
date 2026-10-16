@@ -1,133 +1,137 @@
-﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
-local reactModule = require(parent.React)
-local UIBloxModule = require(parent.UIBlox)
-local foundationModule = require(parent.Foundation)
-local useTokens = foundationModule.Hooks.useTokens
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
-local textSizeModule = require(parent.TextSize)
+﻿local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local ImageSetLabel = require(Parent.UIBlox).Core.ImageSet.ImageSetLabel
+local TextSizeModule = require(Parent.TextSize)
 
-return reactModule.memo(function(p1)
-	-- upvalues: textSizeModule (ref), useTokens (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), reactModule (ref), imageSetLabel (ref)
-	local layoutOrder = p1.layoutOrder
-	local anchorPoint = p1.anchorPoint
-	local automaticSize = p1.automaticSize
-	local size = p1.size
-	local zIndex = p1.zIndex
-	local position = p1.position
-	local selectable = p1.selectable
-	local textSizeOffset = textSizeModule.getTextSizeStore(false).getTextSizeOffset(false)
-	local var1 = useTokens()
-	local fontStyle = p1.fontStyle or var1.Typography.BodyMedium
-	local var2 = if foundationFontFaceMigration then nil else fontStyle.Font
-	local var3 = if foundationFontFaceMigration then normalizeFontFace(fontStyle.Font) else nil
-	local textColor = p1.textColor or var1.Color.Content.Default.Color3
-	local var4 = if p1.iconWidth then UDim2.new(0, p1.iconWidth, 0, p1.iconWidth) else UDim2.new(0, var1.Size.Size_350, 0, var1.Size.Size_350)
-	local iconColor = p1.iconColor or textColor
-	local ceiled = math.ceil(fontStyle.LineHeight * fontStyle.FontSize + textSizeOffset)
-	local textIconGap = p1.textIconGap or var1.Gap.XSmall
-	local var5 = p1.onActivated ~= nil
+return ReactModule.memo(function(p1) --[[ Line: 61 | Named "SduiTileFooter" ]]
+	-- upvalues: TextSizeModule (copy), UseTokensFunction (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), ReactModule (copy), ImageSetLabel (copy)
+	local LayoutOrder = p1.layoutOrder
+	local AnchorPoint = p1.anchorPoint
+	local AutomaticSize = p1.automaticSize
+	local Size = p1.size
+	local ZIndex = p1.zIndex
+	local Position = p1.position
+	local Selectable = p1.selectable
+	local TextSizeOffset = TextSizeModule.getTextSizeStore(false).getTextSizeOffset(false)
+	local UseTokensResult = UseTokensFunction()
+	local FontStyle = p1.fontStyle or UseTokensResult.Typography.BodyMedium
+	local FontStyleFont = if FoundationFontFaceMigration then nil else FontStyle.Font
+	local NormalizeFontFaceResult = if FoundationFontFaceMigration then NormalizeFontFaceFunction(FontStyle.Font) else nil
+	local TextColor = p1.textColor or UseTokensResult.Color.Content.Default.Color3
+	local _UDim2: UDim2 = if p1.iconWidth then UDim2.new(0, p1.iconWidth, 0, p1.iconWidth) else UDim2.new(0, UseTokensResult.Size.Size_350, 0, UseTokensResult.Size.Size_350)
+	local IconColor = p1.iconColor or TextColor
+	local Ceiled = math.ceil(FontStyle.LineHeight * FontStyle.FontSize + TextSizeOffset)
+	local TextIconGap = p1.textIconGap or UseTokensResult.Gap.XSmall
+	local SectionGap = p1.sectionGap or UseTokensResult.Gap.Small
+	local HasOnActivated = p1.onActivated ~= nil
 	
-	return if not p1.leftIcon and (not p1.leftIconComponent and (not p1.rightIcon and (not p1.rightIconComponent and not p1.rightText))) and not var5 then reactModule.createElement("TextLabel", {
-		[reactModule.Tag] = if p1.testId then `data-testid={p1.testId}` else nil,
-		Position = position,
-		AnchorPoint = anchorPoint,
-		AutomaticSize = automaticSize or Enum.AutomaticSize.X,
-		Size = size or UDim2.new(0, 0, 0, ceiled),
-		BackgroundTransparency = 1,
-		BorderSizePixel = 0,
-		LayoutOrder = layoutOrder,
-		ZIndex = zIndex,
-		Text = p1.leftText or "",
-		Font = var2,
-		FontFace = var3,
-		TextSize = fontStyle.FontSize,
-		TextTransparency = 0,
-		TextColor3 = textColor,
-		TextWrapped = false,
-		TextTruncate = Enum.TextTruncate.SplitWord,
-		TextXAlignment = Enum.TextXAlignment.Left
-	}, {
-		UIFlexItem = p1.leftTextFlexMode and reactModule.createElement("UIFlexItem", { FlexMode = p1.leftTextFlexMode }) or nil
-	}) else reactModule.createElement(if var5 then "TextButton" else "Frame", {
-		[reactModule.Tag] = if p1.testId then `data-testid={p1.testId}` else nil,
-		Position = position,
-		AnchorPoint = anchorPoint,
-		AutomaticSize = automaticSize or Enum.AutomaticSize.X,
-		Size = size or UDim2.new(0, 0, 0, ceiled),
-		BackgroundTransparency = 1,
-		BorderSizePixel = 0,
-		LayoutOrder = layoutOrder,
-		ZIndex = zIndex,
-		Text = if var5 then "" else nil,
-		TextTransparency = if var5 then 1 else nil,
-		AutoButtonColor = if var5 then false else nil,
-		[reactModule.Event.Activated] = if var5 then p1.onActivated else nil,
-		Active = var5,
-		Selectable = if selectable ~= nil then false else selectable
-	}, {
-		UIListLayout = reactModule.createElement("UIListLayout", {
-			SortOrder = Enum.SortOrder.Name,
-			FillDirection = Enum.FillDirection.Horizontal,
-			Padding = UDim.new(0, textIconGap),
-			HorizontalAlignment = Enum.HorizontalAlignment.Left,
-			VerticalAlignment = Enum.VerticalAlignment.Center
-		}),
-		["1_LeftIcon"] = p1.leftIconComponent or (p1.leftIcon and reactModule.createElement(imageSetLabel, {
-			LayoutOrder = 1,
+	if not p1.leftIcon and (not p1.leftIconComponent and (not p1.rightIcon and (not p1.rightIconComponent and not p1.rightText))) and not HasOnActivated then
+		return ReactModule.createElement("TextLabel", {
+			[ReactModule.Tag] = if p1.testId then `data-testid={p1.testId}` else nil,
+			Position = Position,
+			AnchorPoint = AnchorPoint,
+			AutomaticSize = AutomaticSize or Enum.AutomaticSize.X,
+			Size = Size or UDim2.new(0, 0, 0, Ceiled),
 			BackgroundTransparency = 1,
-			ImageTransparency = 0,
-			Size = var4,
-			ImageColor3 = iconColor,
-			Image = p1.leftIcon
-		}) or nil),
-		["2_LeftText"] = reactModule.createElement("TextLabel", {
-			BackgroundTransparency = 1,
-			TextTransparency = 0,
-			TextWrapped = false,
-			LayoutOrder = 2,
+			BorderSizePixel = 0,
+			LayoutOrder = LayoutOrder,
+			ZIndex = ZIndex,
 			Text = p1.leftText or "",
-			AutomaticSize = Enum.AutomaticSize.X,
-			Size = UDim2.new(0, 0, 0, ceiled),
-			Font = var2,
-			FontFace = var3,
-			TextSize = fontStyle.FontSize,
-			TextColor3 = textColor,
-			TextTruncate = Enum.TextTruncate.SplitWord,
-			TextXAlignment = Enum.TextXAlignment.Left
-		}, {
-			UIFlexItem = p1.leftTextFlexMode and reactModule.createElement("UIFlexItem", { FlexMode = p1.leftTextFlexMode }) or nil,
-			UIPadding = if if p1.rightIcon == nil then if p1.rightIconComponent == nil then p1.rightText ~= nil else true else true then reactModule.createElement("UIPadding", {
-				PaddingRight = UDim.new(0, (p1.sectionGap or var1.Gap.Small) - textIconGap)
-			}) else nil
-		}),
-		["3_RightIcon"] = p1.rightIconComponent or (p1.rightIcon and reactModule.createElement(imageSetLabel, {
-			LayoutOrder = 3,
-			BackgroundTransparency = 1,
-			ImageTransparency = 0,
-			Size = var4,
-			ImageColor3 = iconColor,
-			Image = p1.rightIcon
-		}) or nil),
-		["4_RightText"] = p1.rightText and (reactModule.createElement("TextLabel", {
-			BackgroundTransparency = 1,
+			Font = FontStyleFont,
+			FontFace = NormalizeFontFaceResult,
+			TextSize = FontStyle.FontSize,
 			TextTransparency = 0,
+			TextColor3 = TextColor,
 			TextWrapped = false,
-			LayoutOrder = 4,
-			Text = p1.rightText or "",
-			AutomaticSize = Enum.AutomaticSize.X,
-			Size = UDim2.new(0, 0, 0, ceiled),
-			Font = var2,
-			FontFace = var3,
-			TextSize = fontStyle.FontSize,
-			TextColor3 = textColor,
 			TextTruncate = Enum.TextTruncate.SplitWord,
 			TextXAlignment = Enum.TextXAlignment.Left
 		}, {
-			UIFlexItem = reactModule.createElement("UIFlexItem", {
-				FlexMode = p1.rightTextFlexMode or Enum.UIFlexMode.Shrink
-			})
-		}) or nil)
-	})
+			UIFlexItem = p1.leftTextFlexMode and ReactModule.createElement("UIFlexItem", { FlexMode = p1.leftTextFlexMode }) or nil
+		})
+	else
+		local HasRightIcon: boolean = p1.rightIcon ~= nil or p1.rightIconComponent ~= nil or p1.rightText ~= nil
+		
+		return ReactModule.createElement(if HasOnActivated then "TextButton" else "Frame", {
+			[ReactModule.Tag] = if p1.testId then `data-testid={p1.testId}` else nil,
+			Position = Position,
+			AnchorPoint = AnchorPoint,
+			AutomaticSize = AutomaticSize or Enum.AutomaticSize.X,
+			Size = Size or UDim2.new(0, 0, 0, Ceiled),
+			BackgroundTransparency = 1,
+			BorderSizePixel = 0,
+			LayoutOrder = LayoutOrder,
+			ZIndex = ZIndex,
+			Text = if HasOnActivated then "" else nil,
+			TextTransparency = if HasOnActivated then 1 else nil,
+			AutoButtonColor = not HasOnActivated and nil,
+			[ReactModule.Event.Activated] = if HasOnActivated then p1.onActivated else nil,
+			Active = HasOnActivated,
+			Selectable = Selectable ~= nil and Selectable
+		}, {
+			UIListLayout = ReactModule.createElement("UIListLayout", {
+				SortOrder = Enum.SortOrder.Name,
+				FillDirection = Enum.FillDirection.Horizontal,
+				Padding = UDim.new(0, TextIconGap),
+				HorizontalAlignment = Enum.HorizontalAlignment.Left,
+				VerticalAlignment = Enum.VerticalAlignment.Center
+			}),
+			["1_LeftIcon"] = p1.leftIconComponent or (p1.leftIcon and ReactModule.createElement(ImageSetLabel, {
+				LayoutOrder = 1,
+				BackgroundTransparency = 1,
+				ImageTransparency = 0,
+				Size = _UDim2,
+				ImageColor3 = IconColor,
+				Image = p1.leftIcon
+			}) or nil),
+			["2_LeftText"] = ReactModule.createElement("TextLabel", {
+				BackgroundTransparency = 1,
+				TextTransparency = 0,
+				TextWrapped = false,
+				LayoutOrder = 2,
+				Text = p1.leftText or "",
+				AutomaticSize = Enum.AutomaticSize.X,
+				Size = UDim2.new(0, 0, 0, Ceiled),
+				Font = FontStyleFont,
+				FontFace = NormalizeFontFaceResult,
+				TextSize = FontStyle.FontSize,
+				TextColor3 = TextColor,
+				TextTruncate = Enum.TextTruncate.SplitWord,
+				TextXAlignment = Enum.TextXAlignment.Left
+			}, {
+				UIFlexItem = p1.leftTextFlexMode and ReactModule.createElement("UIFlexItem", { FlexMode = p1.leftTextFlexMode }) or nil,
+				UIPadding = if HasRightIcon then ReactModule.createElement("UIPadding", { PaddingRight = UDim.new(0, SectionGap - TextIconGap) }) else nil
+			}),
+			["3_RightIcon"] = p1.rightIconComponent or (p1.rightIcon and ReactModule.createElement(ImageSetLabel, {
+				LayoutOrder = 3,
+				BackgroundTransparency = 1,
+				ImageTransparency = 0,
+				Size = _UDim2,
+				ImageColor3 = IconColor,
+				Image = p1.rightIcon
+			}) or nil),
+			["4_RightText"] = p1.rightText and ReactModule.createElement("TextLabel", {
+				BackgroundTransparency = 1,
+				TextTransparency = 0,
+				TextWrapped = false,
+				LayoutOrder = 4,
+				Text = p1.rightText or "",
+				AutomaticSize = Enum.AutomaticSize.X,
+				Size = UDim2.new(0, 0, 0, Ceiled),
+				Font = FontStyleFont,
+				FontFace = NormalizeFontFaceResult,
+				TextSize = FontStyle.FontSize,
+				TextColor3 = TextColor,
+				TextTruncate = Enum.TextTruncate.SplitWord,
+				TextXAlignment = Enum.TextXAlignment.Left
+			}, {
+				UIFlexItem = ReactModule.createElement("UIFlexItem", {
+					FlexMode = p1.rightTextFlexMode or Enum.UIFlexMode.Shrink
+				})
+			}) or nil
+		})
+	end
 end)

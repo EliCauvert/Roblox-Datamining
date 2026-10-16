@@ -1,19 +1,19 @@
-﻿local insert = table.insert
+﻿local InsertFunction = table.insert
 
-return function(p1, p2, p3)
-	-- upvalues: insert (ref)
+return function(p1, p2, p3) --[[ Line: 19 | Named "slice" ]]
+	-- upvalues: InsertFunction (copy)
 	local t = {}
-	p2 = p2 or 1
-	local var1 = p3 or #p1
+	local P1 = p2 or 1
+	local P2 = p3 or #p1
 	
-	if p2 < 0 then
-		p2 = #p1 + p2
+	if P1 < 0 then
+		P1 = #p1 + P1
 	end
-	if var1 and var1 < 0 then
-		var1 = #p1 + var1
+	if P2 and P2 < 0 then
+		P2 = #p1 + P2
 	end
-	for i = p2, var1 do
-		insert(t, p1[i])
+	for i = P1, P2 do
+		InsertFunction(t, p1[i])
 	end
 	return t
 end

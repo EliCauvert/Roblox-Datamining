@@ -1,40 +1,41 @@
-﻿local genericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
-local parent = genericAbuseReporting.Parent
-local reactModule = require(parent.React)
-local _ = require(genericAbuseReporting.Bedui.Provider.AbuseReportBeduiTypes)
-local abuseReportFormDataContextModule = require(genericAbuseReporting.Bedui.Provider.AbuseReportFormDataContext)
-local fFlagAddThumbnailSelectorReport = require(parent.SharedFlags).FFlagAddThumbnailSelectorReport
+﻿local GenericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
+local Parent = GenericAbuseReporting.Parent
+local ReactModule = require(Parent.React)
+local _ = require(GenericAbuseReporting.Bedui.Provider.AbuseReportBeduiTypes)
+local AbuseReportFormDataContextModule = require(GenericAbuseReporting.Bedui.Provider.AbuseReportFormDataContext)
+local FFlagAddThumbnailSelectorReport = require(Parent.SharedFlags).FFlagAddThumbnailSelectorReport
 
-return function(p1)
-	-- upvalues: reactModule (ref), abuseReportFormDataContextModule (ref), fFlagAddThumbnailSelectorReport (ref)
-	local var1, var2 = reactModule.useState({})
-	local var3, var4 = reactModule.useState({})
+return function(p1) --[[ Line: 19 | Named "AbuseReportFormDataProvider" ]]
+	-- upvalues: ReactModule (copy), AbuseReportFormDataContextModule (copy), FFlagAddThumbnailSelectorReport (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState({})
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState({})
+	local UseResult = ReactModule.useCallback(function(p2, p3) --[[ Line: 31 ]]
+		-- upvalues: UseStateResult2_1 (copy)
+		UseStateResult2_1(function(Tbl) --[[ Line: 32 ]]
+			-- upvalues: p2 (copy), p3 (copy)
+			local Copy = table.clone(Tbl)
+			Copy[p2] = p3
+			
+			return Copy
+		end)
+	end, {})
 	
-	return reactModule.createElement(abuseReportFormDataContextModule.Provider, {
+	return ReactModule.createElement(AbuseReportFormDataContextModule.Provider, {
 		value = {
-			formData = var1,
-			updateForm = reactModule.useCallback(function(p2, p3)
-				-- upvalues: var2 (ref)
-				var2(function(p4)
-					-- upvalues: p2 (ref), p3 (ref)
-					local cloned = table.clone(p4)
-					cloned[p2] = p3
+			formData = UseStateResult,
+			updateForm = ReactModule.useCallback(function(p2, p3) --[[ Line: 23 ]]
+				-- upvalues: UseStateResult2 (copy)
+				UseStateResult2(function(Tbl) --[[ Line: 24 ]]
+					-- upvalues: p2 (copy), p3 (copy)
+					local Copy = table.clone(Tbl)
+					Copy[p2] = p3
 					
-					return cloned
+					return Copy
 				end)
 			end, {}),
 			custom = p1.custom,
-			additionalReportTags = if fFlagAddThumbnailSelectorReport then var3 else nil,
-			updateAdditionalReportTags = if fFlagAddThumbnailSelectorReport then reactModule.useCallback(function(p2, p3)
-				-- upvalues: var4 (ref)
-				var4(function(p4)
-					-- upvalues: p2 (ref), p3 (ref)
-					local cloned = table.clone(p4)
-					cloned[p2] = p3
-					
-					return cloned
-				end)
-			end, {}) else nil
+			additionalReportTags = if FFlagAddThumbnailSelectorReport then UseStateResult1 else nil,
+			updateAdditionalReportTags = if FFlagAddThumbnailSelectorReport then UseResult else nil
 		}
 	}, p1.children)
 end

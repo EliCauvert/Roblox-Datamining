@@ -1,48 +1,47 @@
-﻿local inExperienceSideSheet = script:FindFirstAncestor("InExperienceSideSheet")
-local parent = inExperienceSideSheet.Parent
-local reactModule = require(parent.React)
-local tweenDuration = require(inExperienceSideSheet.Common.Constants).TweenDuration
-local getDrawerVisibleStore = require(parent.Drawer).Stores.GetDrawerVisibleStore
-local animateScrollViewToSelectionHelper = require(parent.AppBlox).AnimateScrollViewToSelectionHelper
+﻿local InExperienceSideSheet = script:FindFirstAncestor("InExperienceSideSheet")
+local Parent = InExperienceSideSheet.Parent
+local ReactModule = require(Parent.React)
+local TweenDuration = require(InExperienceSideSheet.Common.Constants).TweenDuration
+local GetDrawerVisibleStoreFunction = require(Parent.Drawer).Stores.GetDrawerVisibleStore
+local AnimateScrollViewToSelectionHelperFunction = require(Parent.AppBlox).AnimateScrollViewToSelectionHelper
 
-return function()
-	-- upvalues: reactModule (ref), getDrawerVisibleStore (ref), animateScrollViewToSelectionHelper (ref), tweenDuration (ref)
-	local var1 = reactModule.useRef({})
-	local var2 = reactModule.useRef(nil)
-	local var3 = reactModule.useRef(nil)
-	local getDrawerAnimating = getDrawerVisibleStore(false).getDrawerAnimating
-	local var4 = reactModule.useCallback(function()
-		-- upvalues: var1 (ref), var2 (ref)
-		if var1.current then
-			for i, v in var1.current do
-				v:Disconnect()
+return function() --[[ Line: 13 | Named "useSideSheetFocusNavScrollViewAnimation" ]]
+	-- upvalues: ReactModule (copy), GetDrawerVisibleStoreFunction (copy), AnimateScrollViewToSelectionHelperFunction (copy), TweenDuration (copy)
+	local UseRefResult = ReactModule.useRef({})
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseRefResult2 = ReactModule.useRef(nil)
+	local GetDrawerAnimating = GetDrawerVisibleStoreFunction(false).getDrawerAnimating
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 19 ]]
+		-- upvalues: UseRefResult (copy), UseRefResult1 (copy)
+		if UseRefResult.current then
+			for _, Connection in UseRefResult.current do
+				Connection:Disconnect()
 			end
-			var1.current = {}
+			UseRefResult.current = {}
 		end
-		if var2.current then
-			var2.current:Cancel()
-			var2.current = nil
+		if UseRefResult1.current then
+			UseRefResult1.current:Cancel()
+			UseRefResult1.current = nil
 		end
 	end, {})
-	local var5 = reactModule.useCallback(function(p1)
-		-- upvalues: var3 (ref), var4 (ref), var1 (ref), var2 (ref), animateScrollViewToSelectionHelper (copy), tweenDuration (copy), getDrawerAnimating (ref)
-		if var3.current == p1 then return end
-		if p1 then
-			var4()
-			var3.current = p1
-			local var6, var7 = animateScrollViewToSelectionHelper(p1, tweenDuration, getDrawerAnimating)
-			var1.current = var6
-			var2.current = var7
+	local UseResult1 = ReactModule.useCallback(function(Current) --[[ Line: 32 ]]
+		-- upvalues: UseRefResult2 (copy), UseResult (copy), UseRefResult (copy), UseRefResult1 (copy), AnimateScrollViewToSelectionHelperFunction (upval), TweenDuration (upval), GetDrawerAnimating (copy)
+		if UseRefResult2.current == Current then return end
+		if Current then
+			UseResult()
+			UseRefResult2.current = Current
+			UseRefResult.current, UseRefResult1.current = AnimateScrollViewToSelectionHelperFunction(Current, TweenDuration, GetDrawerAnimating)
 			
 			return
+		else
+			UseRefResult2.current = nil
+			UseResult()
 		end
-		var3.current = nil
-		var4()
-	end, { var1, var4, getDrawerAnimating })
-	reactModule.useEffect(function()
-		-- upvalues: var4 (ref)
-		return var4
-	end, { var4 })
+	end, { UseRefResult, UseResult, GetDrawerAnimating })
+	ReactModule.useEffect(function() --[[ Line: 52 ]]
+		-- upvalues: UseResult (copy)
+		return UseResult
+	end, { UseResult })
 	
-	return var5
+	return UseResult1
 end

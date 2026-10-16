@@ -1,85 +1,88 @@
-﻿local virtualEvents = script:FindFirstAncestor("VirtualEvents")
-local reactModule = require(virtualEvents.Parent.React)
-local UIBloxModule = require(virtualEvents.Parent.UIBlox)
-local useSelector = require(virtualEvents.Parent.RoactUtils).Hooks.RoactRodux.useSelector
-local useNavigation = require(virtualEvents.Parent.Navigation).useNavigation
-local useLocalization = require(virtualEvents.Parent.Localization).Hooks.useLocalization
-local useStyle = UIBloxModule.Core.Style.useStyle
-local buttonType = UIBloxModule.App.Button.Enum.ButtonType
-local partialPageModal = UIBloxModule.App.Dialog.Modal.PartialPageModal
-local styledTextLabel = UIBloxModule.App.Text.StyledTextLabel
-local uDim = UDim.new(0, 24)
-local uDim_1 = UDim.new(0, 12)
+﻿local VirtualEvents = script:FindFirstAncestor("VirtualEvents")
+local ReactModule = require(VirtualEvents.Parent.React)
+local UIBloxModule = require(VirtualEvents.Parent.UIBlox)
+local UseSelectorFunction = require(VirtualEvents.Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local UseNavigationFunction = require(VirtualEvents.Parent.Navigation).useNavigation
+local UseLocalizationFunction = require(VirtualEvents.Parent.Localization).Hooks.useLocalization
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
+local PartialPageModal = UIBloxModule.App.Dialog.Modal.PartialPageModal
+local StyledTextLabel = UIBloxModule.App.Text.StyledTextLabel
+local _UDim = UDim.new(0, 24)
+local _UDim1 = UDim.new(0, 12)
 
-local function selectScreenSize(p1)
+local function selectScreenSize(p1) --[[ Line: 17 ]]
 	return p1.ScreenSize
 end
 
-return function(p1)
-	-- upvalues: useStyle (ref), useNavigation (ref), useSelector (ref), selectScreenSize (ref), useLocalization (ref), reactModule (ref), partialPageModal (ref), buttonType (ref), uDim (ref), uDim_1 (ref), styledTextLabel (ref)
-	local var1 = useStyle()
-	local var2 = useNavigation()
-	local var3 = useSelector(selectScreenSize)
-	local var4 = useLocalization({
+return function(p1) --[[ Line: 26 | Named "EventNotificationsModal" ]]
+	-- upvalues: UseStyleFunction (copy), UseNavigationFunction (copy), UseSelectorFunction (copy), selectScreenSize (copy), UseLocalizationFunction (copy), ReactModule (copy), PartialPageModal (copy), ButtonType (copy), _UDim (copy), _UDim1 (copy), StyledTextLabel (copy)
+	local UseStyleResult = UseStyleFunction()
+	local UseNavigationResult = UseNavigationFunction()
+	local UseSelectorResult = UseSelectorFunction(selectScreenSize)
+	local UseLocalizationResult = UseLocalizationFunction({
 		title = "Feature.VirtualEvents.EnableNotificationsModalTitle",
 		body = "Feature.VirtualEvents.EnableNotificationsModalBody",
 		notNow = "Feature.VirtualEvents.NotNowButton",
 		getNotified = "Feature.VirtualEvents.GetNotifiedButton"
 	})
-	local var5 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref), var2 (ref)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 38 ]]
+		-- upvalues: p1 (copy), UseNavigationResult (copy)
 		if p1.onClose then
 			p1.onClose()
 		end
-		var2.goBack()
-	end, { p1.onClose, var2 })
+		UseNavigationResult.goBack()
+	end, { p1.onClose, UseNavigationResult })
 	
-	return reactModule.createElement(partialPageModal, {
+	return ReactModule.createElement(PartialPageModal, {
 		position = UDim2.fromScale(0.5, 0.5),
 		anchorPoint = Vector2.new(0.5, 0.5),
-		title = var4.title,
-		screenSize = var3,
+		title = UseLocalizationResult.title,
+		screenSize = UseSelectorResult,
 		buttonStackProps = {
 			buttons = {
 				{
-					buttonType = buttonType.Secondary,
-					props = { onActivated = var5, text = var4.notNow }
+					buttonType = ButtonType.Secondary,
+					props = {
+						onActivated = UseResult,
+						text = UseLocalizationResult.notNow
+					}
 				},
 				{
-					buttonType = buttonType.PrimarySystem,
+					buttonType = ButtonType.PrimarySystem,
 					props = {
-						onActivated = reactModule.useCallback(function()
-							-- upvalues: p1 (ref), var5 (ref)
+						onActivated = ReactModule.useCallback(function() --[[ Line: 46 ]]
+							-- upvalues: p1 (copy), UseResult (copy)
 							if p1.onConfirm then
 								p1.onConfirm()
 							end
-							var5()
-						end, { p1.onConfirm, var5 }),
-						text = var4.getNotified
+							UseResult()
+						end, { p1.onConfirm, UseResult }),
+						text = UseLocalizationResult.getNotified
 					}
 				}
 			}
 		},
-		contentPadding = uDim,
-		onCloseClicked = var5
+		contentPadding = _UDim,
+		onCloseClicked = UseResult
 	}, {
-		Wrapper = reactModule.createElement("Frame", {
+		Wrapper = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.fromScale(1, 0),
 			AutomaticSize = Enum.AutomaticSize.Y
 		}, {
-			Layout = reactModule.createElement("UIListLayout", {
+			Layout = ReactModule.createElement("UIListLayout", {
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				HorizontalAlignment = Enum.HorizontalAlignment.Center,
-				Padding = uDim_1
+				Padding = _UDim1
 			}),
-			Padding = reactModule.createElement("UIPadding", { PaddingTop = uDim_1 + uDim_1, PaddingBottom = uDim_1 }),
-			Body = reactModule.createElement(styledTextLabel, {
+			Padding = ReactModule.createElement("UIPadding", { PaddingTop = _UDim1 + _UDim1, PaddingBottom = _UDim1 }),
+			Body = ReactModule.createElement(StyledTextLabel, {
 				fluidSizing = false,
-				text = var4.body,
+				text = UseLocalizationResult.body,
 				textXAlignment = Enum.TextXAlignment.Center,
-				fontStyle = var1.Font.Body,
-				colorStyle = var1.Theme.TextMuted,
+				fontStyle = UseStyleResult.Font.Body,
+				colorStyle = UseStyleResult.Theme.TextMuted,
 				size = UDim2.fromScale(1, 0),
 				automaticSize = Enum.AutomaticSize.Y
 			})

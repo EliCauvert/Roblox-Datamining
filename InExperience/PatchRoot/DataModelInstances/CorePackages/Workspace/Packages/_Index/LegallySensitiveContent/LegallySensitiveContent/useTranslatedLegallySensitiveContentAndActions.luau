@@ -1,63 +1,63 @@
-﻿local legallySensitiveContent = script:FindFirstAncestor("LegallySensitiveContent")
-local _ = require(legallySensitiveContent.Parent.React)
-local updateUserSetting = require(legallySensitiveContent.Services.userSettingsService).updateUserSetting
-local grantOneTimeUserConsent = require(legallySensitiveContent.Services.usersConsentsService).grantOneTimeUserConsent
-local useLocalization = require(legallySensitiveContent.dependencies).Localization.Hooks.useLocalization
-local legallySensitiveContentConstantsModule = require(legallySensitiveContent.Constants.LegallySensitiveContentConstants)
-local getEncodedAuditHeader = require(legallySensitiveContent.Utils.AuditUtils).getEncodedAuditHeader
-local consentNameModule = require(legallySensitiveContent.Enums.ConsentName)
-local _ = require(legallySensitiveContent.Types.LegallySensitiveContentTypes)
+﻿local LegallySensitiveContent = script:FindFirstAncestor("LegallySensitiveContent")
+local _ = require(LegallySensitiveContent.Parent.React)
+local UpdateUserSettingFunction = require(LegallySensitiveContent.Services.userSettingsService).updateUserSetting
+local GrantOneTimeUserConsentFunction = require(LegallySensitiveContent.Services.usersConsentsService).grantOneTimeUserConsent
+local UseLocalizationFunction = require(LegallySensitiveContent.dependencies).Localization.Hooks.useLocalization
+local LegallySensitiveContentConstantsModule = require(LegallySensitiveContent.Constants.LegallySensitiveContentConstants)
+local GetEncodedAuditHeaderFunction = require(LegallySensitiveContent.Utils.AuditUtils).getEncodedAuditHeader
+local ConsentNameModule = require(LegallySensitiveContent.Enums.ConsentName)
+local _ = require(LegallySensitiveContent.Types.LegallySensitiveContentTypes)
 
-return function(value, p1)
-	-- upvalues: useLocalization (ref), legallySensitiveContentConstantsModule (ref), consentNameModule (ref), getEncodedAuditHeader (ref), updateUserSetting (ref), grantOneTimeUserConsent (ref)
-	local var1 = useLocalization({
-		phoneNumberDiscoverabilityUpsellNotNow = legallySensitiveContentConstantsModule.phoneNumberDiscoverabilityUpsell.notNow,
-		phoneNumberDiscoverabilityUpsellTurnOn = legallySensitiveContentConstantsModule.phoneNumberDiscoverabilityUpsell.turnOn,
-		phoneNumberDiscoverabilityUpsellTitle = legallySensitiveContentConstantsModule.phoneNumberDiscoverabilityUpsell.title,
-		phoneNumberDiscoverabilityUpsellContent = legallySensitiveContentConstantsModule.phoneNumberDiscoverabilityUpsell.content,
-		photoToAvatarTitle = legallySensitiveContentConstantsModule.photoToAvatar.title,
-		photoToAvatarBodyText = legallySensitiveContentConstantsModule.photoToAvatar.bodyText,
-		photoToAvatarPrivacyLinkText = legallySensitiveContentConstantsModule.photoToAvatar.privacyLinkText,
-		photoToAvatarAgreeButton = legallySensitiveContentConstantsModule.photoToAvatar.agreeButton,
-		photoToAvatarCancelButton = legallySensitiveContentConstantsModule.photoToAvatar.cancelButton
+return function(p1, p2) --[[ Line: 31 | Named "useTranslatedLegallySensitiveContentAndActions" ]]
+	-- upvalues: UseLocalizationFunction (copy), LegallySensitiveContentConstantsModule (copy), ConsentNameModule (copy), GetEncodedAuditHeaderFunction (copy), UpdateUserSettingFunction (copy), GrantOneTimeUserConsentFunction (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
+		phoneNumberDiscoverabilityUpsellNotNow = LegallySensitiveContentConstantsModule.phoneNumberDiscoverabilityUpsell.notNow,
+		phoneNumberDiscoverabilityUpsellTurnOn = LegallySensitiveContentConstantsModule.phoneNumberDiscoverabilityUpsell.turnOn,
+		phoneNumberDiscoverabilityUpsellTitle = LegallySensitiveContentConstantsModule.phoneNumberDiscoverabilityUpsell.title,
+		phoneNumberDiscoverabilityUpsellContent = LegallySensitiveContentConstantsModule.phoneNumberDiscoverabilityUpsell.content,
+		photoToAvatarTitle = LegallySensitiveContentConstantsModule.photoToAvatar.title,
+		photoToAvatarBodyText = LegallySensitiveContentConstantsModule.photoToAvatar.bodyText,
+		photoToAvatarPrivacyLinkText = LegallySensitiveContentConstantsModule.photoToAvatar.privacyLinkText,
+		photoToAvatarAgreeButton = LegallySensitiveContentConstantsModule.photoToAvatar.agreeButton,
+		photoToAvatarCancelButton = LegallySensitiveContentConstantsModule.photoToAvatar.cancelButton
 	})
 	
 	return ({
-		[consentNameModule.phoneNumberDiscoverabilityUpsell] = {
+		[ConsentNameModule.phoneNumberDiscoverabilityUpsell] = {
 			wordsOfConsent = {
-				notNow = var1.phoneNumberDiscoverabilityUpsellNotNow,
-				turnOn = var1.phoneNumberDiscoverabilityUpsellTurnOn,
-				title = var1.phoneNumberDiscoverabilityUpsellTitle,
-				content = var1.phoneNumberDiscoverabilityUpsellContent
+				notNow = UseLocalizationResult.phoneNumberDiscoverabilityUpsellNotNow,
+				turnOn = UseLocalizationResult.phoneNumberDiscoverabilityUpsellTurnOn,
+				title = UseLocalizationResult.phoneNumberDiscoverabilityUpsellTitle,
+				content = UseLocalizationResult.phoneNumberDiscoverabilityUpsellContent
 			}
 		}
-	})[value], {
-		getBase64EncodedAuditHeader = function(p2)
-			-- upvalues: getEncodedAuditHeader (copy), value (ref), var1 (ref), p1 (ref)
-			return getEncodedAuditHeader(value, var1, p1, p2)
+	})[p1], {
+		getBase64EncodedAuditHeader = function(p3) --[[ Line: 101 ]]
+			-- upvalues: GetEncodedAuditHeaderFunction (upval), p1 (copy), UseLocalizationResult (copy), p2 (copy)
+			return GetEncodedAuditHeaderFunction(p1, UseLocalizationResult, p2, p3)
 		end,
-		updateSettingWithAuditing = function(value_1, p2, p3)
-			-- upvalues: getEncodedAuditHeader (copy), value (ref), var1 (ref), p1 (ref), updateUserSetting (copy)
-			local var2 = getEncodedAuditHeader(value, var1, p1, p3)
-			local ok, status = pcall(function()
-				-- upvalues: updateUserSetting (copy), value_1 (ref), p2 (ref), var2 (ref)
-				updateUserSetting(value_1, p2, var2)
+		updateSettingWithAuditing = function(p3, p4, p5) --[[ Line: 85 ]]
+			-- upvalues: GetEncodedAuditHeaderFunction (upval), p1 (copy), UseLocalizationResult (copy), p2 (copy), UpdateUserSettingFunction (upval)
+			local EncodedAuditHeader = GetEncodedAuditHeaderFunction(p1, UseLocalizationResult, p2, p5)
+			local Success, Result = pcall(function() --[[ Line: 92 ]]
+				-- upvalues: UpdateUserSettingFunction (upval), p3 (copy), p4 (copy), EncodedAuditHeader (copy)
+				UpdateUserSettingFunction(p3, p4, EncodedAuditHeader)
 			end)
 			
-			if not ok then
-				warn("Failed to update setting with auditing:", status)
+			if not Success then
+				warn("Failed to update setting with auditing:", Result)
 			end
 		end,
-		grantOneTimeUserConsentWithAuditing = function(p2, p3)
-			-- upvalues: getEncodedAuditHeader (copy), value (ref), var1 (ref), p1 (ref), grantOneTimeUserConsent (copy)
-			local var2 = getEncodedAuditHeader(value, var1, p1, p3)
-			local ok, status = pcall(function()
-				-- upvalues: grantOneTimeUserConsent (copy), value (copy), p2 (ref), var2 (ref)
-				grantOneTimeUserConsent(value, p2, var2)
+		grantOneTimeUserConsentWithAuditing = function(p3, p4) --[[ Line: 105 ]]
+			-- upvalues: GetEncodedAuditHeaderFunction (upval), p1 (copy), UseLocalizationResult (copy), p2 (copy), GrantOneTimeUserConsentFunction (upval)
+			local EncodedAuditHeader = GetEncodedAuditHeaderFunction(p1, UseLocalizationResult, p2, p4)
+			local Success, Result = pcall(function() --[[ Line: 111 ]]
+				-- upvalues: GrantOneTimeUserConsentFunction (upval), p1 (upval), p3 (copy), EncodedAuditHeader (copy)
+				GrantOneTimeUserConsentFunction(p1, p3, EncodedAuditHeader)
 			end)
 			
-			if not ok then
-				warn("Failed to grant one time user consent with auditing:", status)
+			if not Success then
+				warn("Failed to grant one time user consent with auditing:", Result)
 			end
 		end
 	}

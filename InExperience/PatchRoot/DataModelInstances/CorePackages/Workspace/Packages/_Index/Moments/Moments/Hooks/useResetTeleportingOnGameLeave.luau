@@ -1,27 +1,30 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
-local reactModule = require(parent.React)
-local messageBus = require(parent.MessageBus).MessageBus
-local getMomentsPreferencesStoreModule = require(moments.Stores.GetMomentsPreferencesStore)
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
+local ReactModule = require(Parent.React)
+local MessageBus = require(Parent.MessageBus).MessageBus
+local GetMomentsPreferencesStoreModule = require(Moments.Stores.GetMomentsPreferencesStore)
 
-local function gameLeaveMessageValidator(p1)
+local function gameLeaveMessageValidator(p1): boolean --[[ Line: 27 ]]
 	return typeof(p1) == "table"
 end
 
-return function()
-	-- upvalues: reactModule (ref), messageBus (ref), gameLeaveMessageValidator (ref), getMomentsPreferencesStoreModule (ref)
-	reactModule.useEffect(function()
-		-- upvalues: messageBus (copy), gameLeaveMessageValidator (copy), getMomentsPreferencesStoreModule (copy)
-		local var1 = messageBus.Subscriber.new()
-		local game = messageBus.getMessageId("Game", "onGameLeave")
-		var1:subscribe({ mid = game, validateParams = gameLeaveMessageValidator }, function(_)
-			-- upvalues: getMomentsPreferencesStoreModule (copy)
-			getMomentsPreferencesStoreModule(false).setTeleporting(false)
+return function() --[[ Line: 31 | Named "useResetTeleportingOnGameLeave" ]]
+	-- upvalues: ReactModule (copy), MessageBus (copy), gameLeaveMessageValidator (copy), GetMomentsPreferencesStoreModule (copy)
+	ReactModule.useEffect(function() --[[ Line: 32 ]]
+		-- upvalues: MessageBus (upval), gameLeaveMessageValidator (upval), GetMomentsPreferencesStoreModule (upval)
+		local NewResult = MessageBus.Subscriber.new()
+		local GameMessageId = MessageBus.getMessageId("Game", "onGameLeave")
+		NewResult:subscribe({
+			mid = GameMessageId,
+			validateParams = gameLeaveMessageValidator
+		}, function(_) --[[ Line: 38 ]]
+			-- upvalues: GetMomentsPreferencesStoreModule (upval)
+			GetMomentsPreferencesStoreModule(false).setTeleporting(false)
 		end)
 		
-		return function()
-			-- upvalues: var1 (ref), game (ref)
-			var1:unsubscribeWithMsgId(game)
+		return function() --[[ Line: 44 ]]
+			-- upvalues: NewResult (copy), GameMessageId (copy)
+			NewResult:unsubscribeWithMsgId(GameMessageId)
 		end
 	end, {})
 end

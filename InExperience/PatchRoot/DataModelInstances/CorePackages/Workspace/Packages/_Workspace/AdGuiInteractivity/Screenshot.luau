@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Workspace.TnSScreenshot.TnSScreenshot)
+﻿return (require(script.Parent.Parent.Parent._Workspace.TnSScreenshot.TnSScreenshot))

@@ -1,36 +1,36 @@
-﻿local playersService = game:GetService("Players")
-local parent = script:FindFirstAncestor("GameDetail").Parent
-local fFlagLuaAppDismissUnlockUpsell = require(parent.SharedFlags).FFlagLuaAppDismissUnlockUpsell
-local var1, var2 = require(parent.Signals).createSignal(false)
+﻿local Players = game:GetService("Players")
+local Parent = script:FindFirstAncestor("GameDetail").Parent
+local FFlagLuaAppDismissUnlockUpsell = require(Parent.SharedFlags).FFlagLuaAppDismissUnlockUpsell
+local Signal, Signal2 = require(Parent.Signals).createSignal(false)
 
-local function getIsAgeCheckUpsellDismissed(p1)
-	-- upvalues: var1 (ref)
-	return var1(p1)
+local function getIsAgeCheckUpsellDismissed(p1) --[[ Line: 15 ]]
+	-- upvalues: Signal (copy)
+	return Signal(p1)
 end
 
-local function setAgeCheckUpsellDismissed()
-	-- upvalues: var2 (ref)
-	var2(true)
+local function setAgeCheckUpsellDismissed() --[[ Line: 19 ]]
+	-- upvalues: Signal2 (copy)
+	Signal2(true)
 end
 
-local function _()
-	-- upvalues: playersService (ref)
-	local var3 = if playersService.LocalPlayer then playersService.LocalPlayer.UserId else nil
+local function _() --[[ Line: 23 | Named "getLocalPlayerUserId" ]]
+	-- upvalues: Players (copy)
+	local UserId = Players.LocalPlayer and Players.LocalPlayer.UserId or nil
 	
-	return if var3 == nil or var3 <= 0 then nil else var3
+	return if UserId == nil or UserId <= 0 then nil else UserId
 end
 
-if fFlagLuaAppDismissUnlockUpsell then
-	local var3 = if playersService.LocalPlayer then playersService.LocalPlayer.UserId else nil
-	local var4 = if var3 == nil or var3 <= 0 then nil else var3
-	playersService:GetPropertyChangedSignal("LocalPlayer"):Connect(function()
-		-- upvalues: playersService (ref), var4 (write), var2 (ref)
-		local var5 = if playersService.LocalPlayer then playersService.LocalPlayer.UserId else nil
-		local var6 = if var5 == nil or var5 <= 0 then nil else var5
+if FFlagLuaAppDismissUnlockUpsell then
+	local UserId = Players.LocalPlayer and Players.LocalPlayer.UserId or nil
+	local UserId1 = if UserId == nil or UserId <= 0 then nil else UserId
+	Players:GetPropertyChangedSignal("LocalPlayer"):Connect(function() --[[ Line: 35 ]]
+		-- upvalues: Players (copy), UserId1 (ref), Signal2 (copy)
+		local UserId = Players.LocalPlayer and Players.LocalPlayer.UserId or nil
+		local UserId2 = if UserId == nil or UserId <= 0 then nil else UserId
 		
-		if var6 ~= var4 then
-			var4 = var6
-			var2(false)
+		if UserId2 ~= UserId1 then
+			UserId1 = UserId2
+			Signal2(false)
 		end
 	end)
 end

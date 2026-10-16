@@ -1,74 +1,78 @@
-﻿local t = {}
-t.__index = t
-t.ButtonName = {
+﻿local ShareGameAnalyticsModule = {}
+ShareGameAnalyticsModule.__index = ShareGameAnalyticsModule
+ShareGameAnalyticsModule.ButtonName = {
 	LuaChatInputBar = "luaChatInputBar",
 	LuaGameDetails = "luaGameDetails"
 }
-t.EventName = {
+ShareGameAnalyticsModule.EventName = {
 	InviteSent = "inputShareGameInviteSent",
 	EntryPoint = "inputShareGameEntryPoint"
 }
-t.DiagCounters = {
+ShareGameAnalyticsModule.DiagCounters = {
 	EntryPoint = {
-		[t.ButtonName.LuaChatInputBar] = game:DefineFastString("LuaShareGameLuaChatInputBarEntryCounter", "LuaShareGameLuaChatInputBarEntryCounter"),
-		[t.ButtonName.LuaGameDetails] = game:DefineFastString("LuaShareGameLuaGameDetailsEntryCounter", "LuaShareGameLuaGameDetailsEntryCounter")
+		[ShareGameAnalyticsModule.ButtonName.LuaChatInputBar] = game:DefineFastString("LuaShareGameLuaChatInputBarEntryCounter", "LuaShareGameLuaChatInputBarEntryCounter"),
+		[ShareGameAnalyticsModule.ButtonName.LuaGameDetails] = game:DefineFastString("LuaShareGameLuaGameDetailsEntryCounter", "LuaShareGameLuaGameDetailsEntryCounter")
 	},
 	InviteSent = {
-		[t.ButtonName.LuaChatInputBar] = game:DefineFastString("LuaShareGameLuaChatInputBarInviteCounter", "LuaShareGameLuaChatInputBarInviteCounter"),
-		[t.ButtonName.LuaGameDetails] = game:DefineFastString("LuaShareGameLuaGameDetailsInviteCounter", "LuaShareGameLuaGameDetailsInviteCounter")
+		[ShareGameAnalyticsModule.ButtonName.LuaChatInputBar] = game:DefineFastString("LuaShareGameLuaChatInputBarInviteCounter", "LuaShareGameLuaChatInputBarInviteCounter"),
+		[ShareGameAnalyticsModule.ButtonName.LuaGameDetails] = game:DefineFastString("LuaShareGameLuaGameDetailsInviteCounter", "LuaShareGameLuaGameDetailsInviteCounter")
 	}
 }
 
-function t.new(p1, p2, p3)
-	-- upvalues: t (ref)
-	assert(p1, "EventStream implementation not found.")
-	assert(p2, "Diag implementation not found.")
-	assert(p3, "ButtonName not found.")
+function ShareGameAnalyticsModule.new(_eventStreamImpl, _diagImpl, _buttonName) --[[ Line: 38 ]]
+	-- upvalues: ShareGameAnalyticsModule (copy)
+	assert(_eventStreamImpl, "EventStream implementation not found.")
+	assert(_diagImpl, "Diag implementation not found.")
+	assert(_buttonName, "ButtonName not found.")
 	
-	return setmetatable({ _eventStreamImpl = p1, _diagImpl = p2, _buttonName = p3 }, t)
+	return (setmetatable({
+		_eventStreamImpl = _eventStreamImpl,
+		_diagImpl = _diagImpl,
+		_buttonName = _buttonName
+	}, ShareGameAnalyticsModule))
 end
 
-function t:onActivatedInviteSent(p1, p2, p3, p4, p5)
-	-- upvalues: t (ref)
-	self:_getEventStream():setRBXEventStream("touch", t.EventName.InviteSent, {
+function ShareGameAnalyticsModule:onActivatedInviteSent(p1, p2, SenderId, p3, List) --[[ Line: 50 ]]
+	-- upvalues: ShareGameAnalyticsModule (copy)
+	self:_getEventStream():setRBXEventStream("touch", ShareGameAnalyticsModule.EventName.InviteSent, {
 		btn = self:_getButtonName(),
 		placeId = tostring(p1),
 		gameId = tostring(p2),
-		senderId = p3,
-		conversationId = tostring(p4),
-		participants = table.concat(p5, ",")
+		senderId = SenderId,
+		conversationId = tostring(p3),
+		participants = table.concat(List, ",")
 	})
-	local var1 = t.DiagCounters.InviteSent[self:_getButtonName()]
+	local InviteSentEntry = ShareGameAnalyticsModule.DiagCounters.InviteSent[self:_getButtonName()]
 	
-	if var1 then
-		self:_getDiag():reportCounter(var1, 1)
+	if InviteSentEntry then
+		self:_getDiag():reportCounter(InviteSentEntry, 1)
 	end
 end
 
-function t:inputShareGameEntryPoint(p1, p2)
-	-- upvalues: t (ref)
-	self:_getEventStream():setRBXEventStream("touch", t.EventName.EntryPoint, {
+function ShareGameAnalyticsModule:inputShareGameEntryPoint(p1, p2) --[[ Line: 71 ]]
+	-- upvalues: ShareGameAnalyticsModule (copy)
+	self:_getEventStream():setRBXEventStream("touch", ShareGameAnalyticsModule.EventName.EntryPoint, {
 		btn = self:_getButtonName(),
 		placeId = p1 and tostring(p1),
 		gameId = p2 and tostring(p2)
 	})
-	local var1 = t.DiagCounters.EntryPoint[self:_getButtonName()]
+	local EntryPointEntry = ShareGameAnalyticsModule.DiagCounters.EntryPoint[self:_getButtonName()]
 	
-	if var1 then
-		self:_getDiag():reportCounter(var1, 1)
+	if EntryPointEntry then
+		self:_getDiag():reportCounter(EntryPointEntry, 1)
 	end
 end
 
-function t:_getEventStream()
+function ShareGameAnalyticsModule:_getEventStream() --[[ Line: 89 ]]
 	return self._eventStreamImpl
 end
 
-function t:_getDiag()
+function ShareGameAnalyticsModule:_getDiag() --[[ Line: 93 ]]
 	return self._diagImpl
 end
 
-function t:_getButtonName()
+function ShareGameAnalyticsModule:_getButtonName() --[[ Line: 97 ]]
 	return self._buttonName
 end
 
-return t
+return ShareGameAnalyticsModule

@@ -1,16 +1,15 @@
-﻿local expChatShared = script:FindFirstAncestor("ExpChatShared")
-local parent = expChatShared.Parent
-local roduxModule = require(parent.Rodux)
-local set = require(parent.llama).Set
-local actions = expChatShared.Actions
+﻿local ExpChatShared = script:FindFirstAncestor("ExpChatShared")
+local Parent = ExpChatShared.Parent
+local Set = require(Parent.llama).Set
+local Actions = ExpChatShared.Actions
 
-return roduxModule.createReducer({}, {
-	[require(actions.UserMuted).name] = function(p1, p2)
-		-- upvalues: set (ref)
-		return set.add(p1, p2.userId)
+return require(Parent.Rodux).createReducer({}, {
+	[require(Actions.UserMuted).name] = function(p1, p2) --[[ Line: 16 ]]
+		-- upvalues: Set (copy)
+		return Set.add(p1, p2.userId)
 	end,
-	[require(actions.UserUnmuted).name] = function(p1, p2)
-		-- upvalues: set (ref)
-		return set.subtract(p1, p2.userId)
+	[require(Actions.UserUnmuted).name] = function(p1, p2) --[[ Line: 20 ]]
+		-- upvalues: Set (copy)
+		return Set.subtract(p1, p2.userId)
 	end
 })

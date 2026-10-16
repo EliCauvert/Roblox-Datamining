@@ -1,19 +1,19 @@
-﻿local function normalizeParticipants(p1)
-	if type(p1) ~= "table" then
-		return p1
+﻿local function normalizeParticipants(Participants) --[[ Line: 1 ]]
+	if type(Participants) ~= "table" then
+		return Participants
 	end
 	local t = {}
 	
-	for i, v in p1 do
-		t[i] = if type(v) == "table" then v else { id = tostring(v) }
+	for i, participant in Participants do
+		t[i] = if type(participant) == "table" then participant else { id = tostring(participant) }
 	end
 	return t
 end
 
-return function(p2)
-	-- upvalues: normalizeParticipants (ref)
-	local cloned = table.clone(p2)
-	cloned.participants = normalizeParticipants(p2.participants)
+return function(Tbl) --[[ Line: 18 | Named "normalizeConversationForTelemetry" ]]
+	-- upvalues: normalizeParticipants (copy)
+	local Copy = table.clone(Tbl)
+	Copy.participants = normalizeParticipants(Tbl.participants)
 	
-	return cloned
+	return Copy
 end

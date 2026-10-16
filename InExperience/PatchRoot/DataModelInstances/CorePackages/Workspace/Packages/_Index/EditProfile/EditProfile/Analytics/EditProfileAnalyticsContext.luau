@@ -1,3 +1,3 @@
-﻿local parent = script:FindFirstAncestor("EditProfile").Parent
+﻿local Parent = script:FindFirstAncestor("EditProfile").Parent
 
-return require(parent.React).createContext({ fireAnalyticsEvent = require(parent.Dash).noop })
+return require(Parent.React).createContext({ fireAnalyticsEvent = require(Parent.Dash).noop })

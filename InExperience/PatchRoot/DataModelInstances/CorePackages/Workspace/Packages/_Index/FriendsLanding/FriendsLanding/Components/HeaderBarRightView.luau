@@ -1,115 +1,114 @@
-﻿local friendsLanding = script:FindFirstAncestor("FriendsLanding")
-local parent = friendsLanding.Parent
-local dependenciesModule = require(friendsLanding.dependencies)
-local socialLibraries = dependenciesModule.SocialLibraries
-local roact = dependenciesModule.Roact
-local UIBlox = dependenciesModule.UIBlox
-local friendsLandingContextModule = require(friendsLanding.FriendsLandingContext)
-local enumScreensModule = require(friendsLanding.EnumScreens)
-local friendsLandingAnalyticsModule = require(friendsLanding.FriendsLandingAnalytics)
-local addFriendsIconModule = require(friendsLanding.Components.AddFriendsIcon)
-local memoize = dependenciesModule.memoize
-local iconButton = UIBlox.App.Button.IconButton
-local images = UIBlox.App.ImageSet.Images
-local buttonClickEventsModule = require(friendsLanding.FriendsLandingAnalytics.ButtonClickEvents)
-local compose = socialLibraries.RoduxTools.compose
-local sources = require(parent.SocialLuaAnalytics).Analytics.Enums.Sources
-local appPage = require(parent.RobloxAppEnums).AppPage
-local fFlagConnectionManagementChips = require(parent.SharedFlags).FFlagConnectionManagementChips
+﻿local FriendsLanding = script:FindFirstAncestor("FriendsLanding")
+local Parent = FriendsLanding.Parent
+local DependenciesModule = require(FriendsLanding.dependencies)
+local Roact = DependenciesModule.Roact
+local UIBlox = DependenciesModule.UIBlox
+local FriendsLandingContextModule = require(FriendsLanding.FriendsLandingContext)
+local EnumScreensModule = require(FriendsLanding.EnumScreens)
+local FriendsLandingAnalyticsModule = require(FriendsLanding.FriendsLandingAnalytics)
+local AddFriendsIconModule = require(FriendsLanding.Components.AddFriendsIcon)
+local MemoizeFunction = DependenciesModule.memoize
+local IconButton = UIBlox.App.Button.IconButton
+local Images = UIBlox.App.ImageSet.Images
+local ButtonClickEventsModule = require(FriendsLanding.FriendsLandingAnalytics.ButtonClickEvents)
+local ComposeFunction = DependenciesModule.SocialLibraries.RoduxTools.compose
+local Sources = require(Parent.SocialLuaAnalytics).Analytics.Enums.Sources
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local FFlagConnectionManagementChips = require(Parent.SharedFlags).FFlagConnectionManagementChips
 
-local var1 = function(p1)
-	-- upvalues: roact (ref), iconButton (ref), images (ref)
-	return roact.createElement(iconButton, {
+local function v15(p1) --[[ Line: 27 ]]
+	-- upvalues: Roact (copy), IconButton (copy), Images (copy)
+	return Roact.createElement(IconButton, {
 		size = UDim2.fromOffset(0, 0),
-		icon = images["icons/common/search"],
+		icon = Images["icons/common/search"],
 		layoutOrder = p1.layoutOrder,
 		onActivated = p1.goToSearchFriendsPage
 	})
 end
 
-local t = {
+local config = {
 	SHOW_ADDFRIENDS_ICON = {
-		[enumScreensModule.FriendsLanding] = true,
-		[enumScreensModule.SearchFriends] = true
+		[EnumScreensModule.FriendsLanding] = true,
+		[EnumScreensModule.SearchFriends] = true
 	},
 	SHOW_SEARCHFRIENDS_ICON = {
-		[enumScreensModule.FriendsLanding] = true,
-		[enumScreensModule.SearchFriends] = true,
-		[enumScreensModule.AddFriends] = true
+		[EnumScreensModule.FriendsLanding] = true,
+		[EnumScreensModule.SearchFriends] = true,
+		[EnumScreensModule.AddFriends] = true
 	}
 }
-local headerBarRightView = roact.PureComponent:extend("HeaderBarRightView")
-headerBarRightView.defaultProps = { layoutOrder = 1, onActivated = nil }
+local HeaderBarRightView = Roact.PureComponent:extend("HeaderBarRightView")
+HeaderBarRightView.defaultProps = { layoutOrder = 1, onActivated = nil }
 
-function headerBarRightView.init(p1)
-	-- upvalues: memoize (ref), buttonClickEventsModule (ref), enumScreensModule (ref), appPage (ref), sources (ref)
-	p1.goToFriendRequestsPage = memoize(function(_, p2)
-		-- upvalues: buttonClickEventsModule (copy), p1 (ref), enumScreensModule (copy), appPage (copy)
-		return function()
-			-- upvalues: p2 (ref), buttonClickEventsModule (copy), p1 (copy), enumScreensModule (copy), appPage (copy)
-			p1.props.analytics:buttonClick(if p2 == 0 then buttonClickEventsModule.AddFriendsNoFriends else buttonClickEventsModule.AddFriends)
-			p1.props.analytics:navigate(enumScreensModule.AddFriends)
+function HeaderBarRightView.init(p1) --[[ Line: 55 ]]
+	-- upvalues: MemoizeFunction (copy), ButtonClickEventsModule (copy), EnumScreensModule (copy), AppPage (copy), Sources (copy)
+	p1.goToFriendRequestsPage = MemoizeFunction(function(_, p2) --[[ Line: 57 ]]
+		-- upvalues: ButtonClickEventsModule (upval), p1 (copy), EnumScreensModule (upval), AppPage (upval)
+		return function() --[[ Line: 58 ]]
+			-- upvalues: p2 (copy), ButtonClickEventsModule (upval), p1 (upval), EnumScreensModule (upval), AppPage (upval)
+			p1.props.analytics:buttonClick(p2 == 0 and ButtonClickEventsModule.AddFriendsNoFriends or ButtonClickEventsModule.AddFriends)
+			p1.props.analytics:navigate(EnumScreensModule.AddFriends)
 			
-			return p1.props.navigation.navigate(appPage.AddFriendsPage)
+			return p1.props.navigation.navigate(AppPage.AddFriendsPage)
 		end
 	end)
-	p1.goToSearchFriendsPage = memoize(function()
-		-- upvalues: p1 (ref), appPage (copy), sources (copy)
-		return function()
-			-- upvalues: p1 (copy), appPage (copy), sources (copy)
-			p1.props.navigation.navigate(appPage.UserSearch, {
+	p1.goToSearchFriendsPage = MemoizeFunction(function() --[[ Line: 68 ]]
+		-- upvalues: p1 (copy), AppPage (upval), Sources (upval)
+		return function() --[[ Line: 69 ]]
+			-- upvalues: p1 (upval), AppPage (upval), Sources (upval)
+			p1.props.navigation.navigate(AppPage.UserSearch, {
 				shouldShowUserSearchLandingPage = true,
-				entryPoint = sources.FriendsLanding
+				entryPoint = Sources.FriendsLanding
 			})
 		end
 	end)
 end
 
-function headerBarRightView.render(p1)
-	-- upvalues: t (ref), enumScreensModule (ref), roact (ref), var1 (ref), addFriendsIconModule (ref), fFlagConnectionManagementChips (ref)
-	local navigation = p1.props.navigation
-	local var2 = nil
-	local var3 = nil
+function HeaderBarRightView.render(p1) --[[ Line: 78 ]]
+	-- upvalues: config (copy), EnumScreensModule (copy), Roact (copy), v15 (copy), AddFriendsIconModule (copy), FFlagConnectionManagementChips (copy)
+	local Navigation = p1.props.navigation
+	local SHOWSEARCHFRIENDSICONEntry = nil
+	local SHOWADDFRIENDSICONEntry = nil
 	
 	if p1.props.addFriendsPageSearchbarEnabled then
-		t.SHOW_ADDFRIENDS_ICON[enumScreensModule.SearchFriends] = false
+		config.SHOW_ADDFRIENDS_ICON[EnumScreensModule.SearchFriends] = false
 	end
-	if navigation and navigation.state then
-		local routeName = navigation.state.routeName
-		var2 = t.SHOW_SEARCHFRIENDS_ICON[routeName]
-		var3 = t.SHOW_ADDFRIENDS_ICON[routeName]
+	if Navigation and Navigation.state then
+		local RouteName = Navigation.state.routeName
+		SHOWSEARCHFRIENDSICONEntry = config.SHOW_SEARCHFRIENDS_ICON[RouteName]
+		SHOWADDFRIENDSICONEntry = config.SHOW_ADDFRIENDS_ICON[RouteName]
 	end
-	return roact.createElement("Frame", {
+	return Roact.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.new(0, 72, 0, 36)
 	}, {
-		UIListLayout = roact.createElement("UIListLayout", {
+		UIListLayout = Roact.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Horizontal,
 			VerticalAlignment = Enum.VerticalAlignment.Center,
 			HorizontalAlignment = Enum.HorizontalAlignment.Right,
 			SortOrder = Enum.SortOrder.LayoutOrder
 		}),
-		SearchFriendsIcon = var2 and var1({
+		SearchFriendsIcon = SHOWSEARCHFRIENDSICONEntry and v15({
 			layoutOrder = 1,
 			goToSearchFriendsPage = p1.goToSearchFriendsPage()
 		}),
-		Padding = roact.createElement("Frame", {
+		Padding = Roact.createElement("Frame", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 2,
 			Size = UDim2.new(0, 0, 0, 0)
 		}),
-		AddFriendsIcon = var3 and roact.createElement(addFriendsIconModule, {
+		AddFriendsIcon = SHOWADDFRIENDSICONEntry and Roact.createElement(AddFriendsIconModule, {
 			layoutOrder = 3,
 			onActivated = p1.goToFriendRequestsPage(p1.props.navigateToLuaAppPages, p1.props.totalFriendCount),
 			friendRequestCount = p1.props.friendRequestCount,
-			showTooltip = if fFlagConnectionManagementChips then false else p1.props.totalFriendCount == 0
+			showTooltip = not FFlagConnectionManagementChips and p1.props.totalFriendCount == 0
 		})
 	})
 end
 
-return compose(friendsLandingAnalyticsModule.connect(function(p1)
-	return { analytics = p1 }
-end), friendsLandingContextModule.connect(function(p1, _)
+return ComposeFunction(FriendsLandingAnalyticsModule.connect(function(Analytics) --[[ Line: 121 ]]
+	return { analytics = Analytics }
+end), FriendsLandingContextModule.connect(function(p1, _) --[[ Line: 126 ]]
 	return {
 		navigateToLuaAppPages = p1.navigateToLuaAppPages,
 		friendRequestCount = p1.friendRequestCount,
@@ -117,4 +116,4 @@ end), friendsLandingContextModule.connect(function(p1, _)
 		luaAddFriendsPageEnabled = p1.luaAddFriendsPageEnabled,
 		addFriendsPageSearchbarEnabled = p1.addFriendsPageSearchbarEnabled
 	}
-end))(headerBarRightView)
+end))(HeaderBarRightView)

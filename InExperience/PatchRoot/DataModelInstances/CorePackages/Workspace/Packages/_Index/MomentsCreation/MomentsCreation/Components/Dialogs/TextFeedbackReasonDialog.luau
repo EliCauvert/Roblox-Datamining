@@ -1,49 +1,49 @@
-﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
-local parent = momentsCreation.Parent
-local foundationModule = require(parent.Foundation)
-local localizationModule = require(parent.Localization)
-local reactModule = require(parent.React)
-local dialog = foundationModule.Dialog
-local text = foundationModule.Text
-local useLocalization = localizationModule.Hooks.useLocalization
-local useCreationFlowStringsModule = require(momentsCreation.Hooks.useCreationFlowStrings)
-local t = {
+﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
+local Parent = MomentsCreation.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local Dialog = FoundationModule.Dialog
+local Text = FoundationModule.Text
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseCreationFlowStringsModule = require(MomentsCreation.Hooks.useCreationFlowStrings)
+local config = {
 	title = "Feature.Moments.Title.GenerateTextFeedbackReason",
 	notHelpful = "Feature.Moments.Action.GenerateTextFeedbackNotHelpful",
 	policy = "Feature.Moments.Action.GenerateTextFeedbackPolicy"
 }
 
-return function(p1)
-	-- upvalues: useCreationFlowStringsModule (ref), useLocalization (ref), t (ref), reactModule (ref), dialog (ref), foundationModule (ref), text (ref)
-	local var1 = useLocalization(t)
+return function(p1) --[[ Line: 33 | Named "TextFeedbackReasonDialog" ]]
+	-- upvalues: UseCreationFlowStringsModule (copy), UseLocalizationFunction (copy), config (copy), ReactModule (copy), Dialog (copy), FoundationModule (copy), Text (copy)
+	local UseCreationFlowStringsModuleResult = UseCreationFlowStringsModule()
+	local UseLocalizationResult = UseLocalizationFunction(config)
 	
-	return reactModule.createElement(dialog.Root, {
+	return ReactModule.createElement(Dialog.Root, {
 		hasBackdrop = true,
 		disablePortal = false,
-		size = foundationModule.Enums.DialogSize.Small
+		size = FoundationModule.Enums.DialogSize.Small
 	}, {
-		DialogTitle = reactModule.createElement(text, {
+		DialogTitle = ReactModule.createElement(Text, {
 			LayoutOrder = 1,
 			tag = "size-full-0 auto-y text-heading-small text-wrap text-align-x-center content-emphasis",
-			Text = var1.title
+			Text = UseLocalizationResult.title
 		}),
-		DialogActions = reactModule.createElement(dialog.Actions, {
+		DialogActions = ReactModule.createElement(Dialog.Actions, {
 			LayoutOrder = 2,
-			orientation = foundationModule.Enums.Orientation.Vertical,
+			orientation = FoundationModule.Enums.Orientation.Vertical,
 			actions = {
 				{
-					text = var1.notHelpful,
-					variant = foundationModule.Enums.ButtonVariant.Standard,
+					text = UseLocalizationResult.notHelpful,
+					variant = FoundationModule.Enums.ButtonVariant.Standard,
 					onActivated = p1.onNotHelpful
 				},
 				{
-					text = var1.policy,
-					variant = foundationModule.Enums.ButtonVariant.Standard,
+					text = UseLocalizationResult.policy,
+					variant = FoundationModule.Enums.ButtonVariant.Standard,
 					onActivated = p1.onPolicyViolation
 				},
 				{
-					text = useCreationFlowStringsModule().GeneralCtaCancel,
-					variant = foundationModule.Enums.ButtonVariant.Standard,
+					text = UseCreationFlowStringsModuleResult.GeneralCtaCancel,
+					variant = FoundationModule.Enums.ButtonVariant.Standard,
 					onActivated = p1.onDismiss
 				}
 			}

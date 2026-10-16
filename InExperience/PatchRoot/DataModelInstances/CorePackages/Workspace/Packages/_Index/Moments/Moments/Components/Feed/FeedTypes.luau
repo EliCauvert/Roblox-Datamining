@@ -1,10 +1,11 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
-local _ = require(parent.React)
-local _ = require(parent.Signals)
-local _ = require(parent.DataHydration.MomentsStoreTypes)
-local _ = require(parent.MomentsTypes)
-local _ = require(moments.Components.VerticalPager)
-local _ = require(moments.Enums.SignalActionType)
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
+local _ = require(Parent.React)
+local _ = require(Parent.Signals)
+local _ = require(Parent.DataHydration.MomentsStoreTypes)
+local _ = require(Parent.MomentsTypes)
+local _ = require(Moments.Components.VerticalPager)
+local _ = require(Moments.Enums.SignalActionType)
+local _ = require(Moments.Enums.NavigationDestinationType)
 
 return {}

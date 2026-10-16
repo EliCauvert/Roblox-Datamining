@@ -1,12 +1,12 @@
-﻿local currencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
-local reactModule = require(currencyTransfers.Parent.React)
-local registerCurrencyTransferSduiActionsModule = require(currencyTransfers.Actions.registerCurrencyTransferSduiActions)
+﻿local CurrencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
+local ReactModule = require(CurrencyTransfers.Parent.React)
+local RegisterCurrencyTransferSduiActionsModule = require(CurrencyTransfers.Actions.registerCurrencyTransferSduiActions)
 
-return reactModule.memo(function()
-	-- upvalues: reactModule (ref), registerCurrencyTransferSduiActionsModule (ref)
-	reactModule.useEffect(function()
-		-- upvalues: registerCurrencyTransferSduiActionsModule (copy)
-		registerCurrencyTransferSduiActionsModule()
+return ReactModule.memo(function() --[[ Line: 9 | Named "SduiEconomyRegister" ]]
+	-- upvalues: ReactModule (copy), RegisterCurrencyTransferSduiActionsModule (copy)
+	ReactModule.useEffect(function() --[[ Line: 10 ]]
+		-- upvalues: RegisterCurrencyTransferSduiActionsModule (upval)
+		RegisterCurrencyTransferSduiActionsModule()
 	end, {})
 	
 	return nil

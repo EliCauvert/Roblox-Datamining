@@ -1,1 +1,3 @@
-﻿return game:DefineFastFlag("AXModeratedItemIconUpdates2", false) and require(script.Parent.FFlagAXModeratedItemsFlow)
+﻿local FFlagAXModeratedItemsFlowModule = require(script.Parent.FFlagAXModeratedItemsFlow)
+
+return game:DefineFastFlag("AXModeratedItemIconUpdates2", false) and FFlagAXModeratedItemsFlowModule

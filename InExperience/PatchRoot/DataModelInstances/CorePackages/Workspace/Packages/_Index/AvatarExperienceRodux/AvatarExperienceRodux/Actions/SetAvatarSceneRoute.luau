@@ -1,11 +1,10 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceRodux").Parent
-local roduxModule = require(parent.Rodux)
-local argCheckModule = require(parent.ArgCheck)
-local _ = require(parent.AvatarExperienceNavigation)
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceRodux").Parent
+local ArgCheckModule = require(Parent.ArgCheck)
+local _ = require(Parent.AvatarExperienceNavigation)
 
-return roduxModule.makeActionCreator(script.Name, function(p1)
-	-- upvalues: argCheckModule (ref)
-	argCheckModule.isType(p1, "table", "avatarRoute")
+return require(Parent.Rodux).makeActionCreator(script.Name, function(AvatarRoute) --[[ Line: 9 ]]
+	-- upvalues: ArgCheckModule (copy)
+	ArgCheckModule.isType(AvatarRoute, "table", "avatarRoute")
 	
-	return { avatarRoute = p1 }
+	return { avatarRoute = AvatarRoute }
 end)

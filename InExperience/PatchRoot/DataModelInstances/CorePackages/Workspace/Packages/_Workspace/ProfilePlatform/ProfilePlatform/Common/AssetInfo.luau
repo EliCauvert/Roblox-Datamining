@@ -1,61 +1,61 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local enumsModule = require(profilePlatform.Common.Enums)
-local fFlagSocialEnableProfileInspectAndBuy = require(parent.SharedFlags).FFlagSocialEnableProfileInspectAndBuy
-local fFlagProfilePlatformEnableBundlesInAssetsCarousel = require(parent.SharedFlags).FFlagProfilePlatformEnableBundlesInAssetsCarousel
-local fFlagProfileStoreShowLimitedResalePriceModule = require(profilePlatform.Flags.FFlagProfileStoreShowLimitedResalePrice)
-local var1 = 0
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local FFlagSocialEnableProfileInspectAndBuy = require(Parent.SharedFlags).FFlagSocialEnableProfileInspectAndBuy
+local FFlagProfilePlatformEnableBundlesInAssetsCarousel = require(Parent.SharedFlags).FFlagProfilePlatformEnableBundlesInAssetsCarousel
+local FFlagProfileStoreShowLimitedResalePriceModule = require(ProfilePlatform.Flags.FFlagProfileStoreShowLimitedResalePrice)
+local Count = 0
 
-local _ = function()
-	-- upvalues: var1 (write)
-	var1 += 1
+local function _(): string --[[ Line: 15 ]]
+	-- upvalues: Count (ref)
+	Count += 1
 	
-	return tostring(var1)
+	return (tostring(Count))
 end
 
 return {
-	mock = function(p1, p2)
-		-- upvalues: var1 (write), enumsModule (ref)
+	mock = function(p1, p2) --[[ Line: 54 ]]
+		-- upvalues: Count (ref), EnumsModule (copy)
 		local t = {}
-		local var2 = tostring(p1)
+		local Text = tostring(p1)
 		
-		if not var2 then
-			var1 += 1
-			var2 = tostring(var1)
+		if not Text then
+			Count += 1
+			Text = tostring(Count)
 		end
-		t.id = var2
+		t.id = Text
 		t.assetType = "0"
-		t.itemType = p2 or enumsModule.ItemTypes.Asset
+		t.itemType = p2 or EnumsModule.ItemTypes.Asset
 		t.name = ""
 		
 		return t
 	end,
-	fromAsset = function(value)
-		-- upvalues: fFlagProfilePlatformEnableBundlesInAssetsCarousel (ref), fFlagSocialEnableProfileInspectAndBuy (ref), fFlagProfileStoreShowLimitedResalePriceModule (ref)
-		local t = {
-			id = tostring(value.id),
-			assetType = tostring(value.assetType or (if fFlagProfilePlatformEnableBundlesInAssetsCarousel then value.bundleType else nil)),
-			itemType = value.itemType,
-			name = value.name,
-			price = value.price,
-			lowestResalePrice = value.lowestResalePrice,
-			isOffSale = value.isOffSale,
-			favoriteCount = value.favoriteCount
+	fromAsset = function(p1) --[[ Line: 69 ]]
+		-- upvalues: FFlagProfilePlatformEnableBundlesInAssetsCarousel (copy), FFlagSocialEnableProfileInspectAndBuy (copy), FFlagProfileStoreShowLimitedResalePriceModule (copy)
+		local config = {
+			id = tostring(p1.id),
+			assetType = tostring(p1.assetType or (if FFlagProfilePlatformEnableBundlesInAssetsCarousel then p1.bundleType else nil)),
+			itemType = p1.itemType,
+			name = p1.name,
+			price = p1.price,
+			lowestResalePrice = p1.lowestResalePrice,
+			isOffSale = p1.isOffSale,
+			favoriteCount = p1.favoriteCount
 		}
 		
-		if fFlagSocialEnableProfileInspectAndBuy then
-			t.creatorName = value.creatorName
-			t.creatorHasVerifiedBadge = value.creatorHasVerifiedBadge
-			t.collectibleItemId = value.collectibleItemId
-			t.owned = value.owned
-			t.bundledItems = value.bundledItems
-			t.taxonomyName = if value.taxonomy and #value.taxonomy > 0 then value.taxonomy[1].taxonomyName else nil
+		if FFlagSocialEnableProfileInspectAndBuy then
+			config.creatorName = p1.creatorName
+			config.creatorHasVerifiedBadge = p1.creatorHasVerifiedBadge
+			config.collectibleItemId = p1.collectibleItemId
+			config.owned = p1.owned
+			config.bundledItems = p1.bundledItems
+			config.taxonomyName = if p1.taxonomy and #p1.taxonomy > 0 then p1.taxonomy[1].taxonomyName else nil
 		end
-		if fFlagProfileStoreShowLimitedResalePriceModule then
-			t.hasResellers = value.hasResellers
-			t.unitsAvailableForConsumption = value.unitsAvailableForConsumption
-			t.itemRestrictions = value.itemRestrictions
+		if FFlagProfileStoreShowLimitedResalePriceModule then
+			config.hasResellers = p1.hasResellers
+			config.unitsAvailableForConsumption = p1.unitsAvailableForConsumption
+			config.itemRestrictions = p1.itemRestrictions
 		end
-		return t
+		return config
 	end
 }

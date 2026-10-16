@@ -1,25 +1,22 @@
-﻿local localizationService = game:GetService("LocalizationService")
-local parent = script.Parent
-local parent_1 = parent.Parent
-local reactModule = require(parent_1.React)
-local reactRobloxModule = require(parent_1.ReactRoblox)
-local foundationModule = require(parent_1.Foundation)
-local localization = require(parent_1.InExperienceLocales).Localization
-local localizationProvider = require(parent_1.Localization).LocalizationProvider
-local foundationProvider = foundationModule.FoundationProvider
-local var1 = localization.new(localizationService.RobloxLocaleId)
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
+local FoundationModule = require(Parent1.Foundation)
+local LocalizationProvider = require(Parent1.Localization).LocalizationProvider
+local FoundationProvider = FoundationModule.FoundationProvider
+local NewResult = require(Parent1.InExperienceLocales).Localization.new(game:GetService("LocalizationService").RobloxLocaleId)
 
 return {
-	name = parent.Name,
-	storyRoot = parent,
-	roact = reactModule,
-	reactRoblox = reactRobloxModule,
-	mapStory = function(p1)
-		-- upvalues: reactModule (ref), localizationProvider (ref), var1 (ref), foundationProvider (ref), foundationModule (ref)
-		return function(p2)
-			-- upvalues: reactModule (copy), localizationProvider (copy), var1 (copy), foundationProvider (copy), foundationModule (copy), p1 (ref)
-			return reactModule.createElement(localizationProvider, { localization = var1 }, {
-				FoundationProvider = reactModule.createElement(foundationProvider, { colorMode = foundationModule.Enums.ColorMode.Dark }, { Child = reactModule.createElement(p1, p2) })
+	name = Parent.Name,
+	storyRoot = Parent,
+	roact = ReactModule,
+	reactRoblox = require(Parent1.ReactRoblox),
+	mapStory = function(p1) --[[ Line: 16 ]]
+		-- upvalues: ReactModule (copy), LocalizationProvider (copy), NewResult (copy), FoundationProvider (copy), FoundationModule (copy)
+		return function(p2) --[[ Line: 17 ]]
+			-- upvalues: ReactModule (upval), LocalizationProvider (upval), NewResult (upval), FoundationProvider (upval), FoundationModule (upval), p1 (copy)
+			return ReactModule.createElement(LocalizationProvider, { localization = NewResult }, {
+				FoundationProvider = ReactModule.createElement(FoundationProvider, { colorMode = FoundationModule.Enums.ColorMode.Dark }, { Child = ReactModule.createElement(p1, p2) })
 			})
 		end
 	end

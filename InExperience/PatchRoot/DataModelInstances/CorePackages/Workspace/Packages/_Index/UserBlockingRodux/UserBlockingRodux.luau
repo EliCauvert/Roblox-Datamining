@@ -1,22 +1,22 @@
-﻿local _script = script
-local parent = _script.Parent
-local cryoModule = require(parent.Cryo)
-local roduxNetworkingModule = require(parent.RoduxNetworking)
-local userBlockingNetworkingModule = require(parent.UserBlockingNetworking)
-local userBlockingReducerModule = require(_script.Reducers.UserBlockingReducer)
+﻿local v1 = script
+local Parent = v1.Parent
+local CryoModule = require(Parent.Cryo)
+local RoduxNetworkingModule = require(Parent.RoduxNetworking)
+local UserBlockingNetworkingModule = require(Parent.UserBlockingNetworking)
+local UserBlockingReducerModule = require(v1.Reducers.UserBlockingReducer)
 
 return {
 	["jest.config"] = script["jest.config"],
-	config = function(p1)
-		-- upvalues: cryoModule (ref), userBlockingNetworkingModule (ref), roduxNetworkingModule (ref), userBlockingReducerModule (ref)
-		p1 = cryoModule.Dictionary.join(p1, {
-			userBlockingNetworking = userBlockingNetworkingModule.config({ roduxNetworking = roduxNetworkingModule.mock() })
+	config = function(p1) --[[ Line: 11 ]]
+		-- upvalues: CryoModule (copy), UserBlockingNetworkingModule (copy), RoduxNetworkingModule (copy), UserBlockingReducerModule (copy)
+		local JoinResult = CryoModule.Dictionary.join(p1, {
+			userBlockingNetworking = UserBlockingNetworkingModule.config({ roduxNetworking = RoduxNetworkingModule.mock() })
 		})
 		
 		return {
-			installReducer = function()
-				-- upvalues: userBlockingReducerModule (copy), p1 (write)
-				return userBlockingReducerModule(p1)
+			installReducer = function() --[[ Line: 19 ]]
+				-- upvalues: UserBlockingReducerModule (upval), JoinResult (ref)
+				return UserBlockingReducerModule(JoinResult)
 			end
 		}
 	end

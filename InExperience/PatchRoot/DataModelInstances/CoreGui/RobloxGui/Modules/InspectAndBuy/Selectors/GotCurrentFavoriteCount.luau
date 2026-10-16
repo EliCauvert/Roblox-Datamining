@@ -1,33 +1,34 @@
-﻿local retrievalStatus = require(game:GetService("CorePackages").Workspace.Packages.Http).Enum.RetrievalStatus
-local parent = script.Parent.Parent
-local isDetailsItemPartOfBundleAndOffsaleModule = require(parent.Selectors.IsDetailsItemPartOfBundleAndOffsale)
-local utilityFunctionsModule = require(parent.UtilityFunctions)
-local createInspectAndBuyKeyMapperModule = require(parent.createInspectAndBuyKeyMapper)
-local var1 = createInspectAndBuyKeyMapperModule("getAssetFavoriteCount")
-local var2 = createInspectAndBuyKeyMapperModule("getBundleFavoriteCount")
+﻿local RetrievalStatus = require(game:GetService("CorePackages").Workspace.Packages.Http).Enum.RetrievalStatus
+local Parent = script.Parent.Parent
+local IsDetailsItemPartOfBundleAndOffsaleModule = require(Parent.Selectors.IsDetailsItemPartOfBundleAndOffsale)
+local UtilityFunctionsModule = require(Parent.UtilityFunctions)
+local CreateInspectAndBuyKeyMapperModule = require(Parent.createInspectAndBuyKeyMapper)
+local GetAssetFavoriteCount = CreateInspectAndBuyKeyMapperModule("getAssetFavoriteCount")
+local GetBundleFavoriteCount = CreateInspectAndBuyKeyMapperModule("getBundleFavoriteCount")
 
-return function(p1)
-	-- upvalues: isDetailsItemPartOfBundleAndOffsaleModule (ref), utilityFunctionsModule (ref), var2 (ref), retrievalStatus (ref), var1 (ref)
-	local assetId = p1.detailsInformation.assetId
+return function(p1): boolean --[[ Line: 14 ]]
+	-- upvalues: IsDetailsItemPartOfBundleAndOffsaleModule (copy), UtilityFunctionsModule (copy), GetBundleFavoriteCount (copy), RetrievalStatus (copy), GetAssetFavoriteCount (copy)
+	local AssetId = p1.detailsInformation.assetId
 	
-	if not assetId then
+	if not AssetId then
 		return false
 	end
-	local var3 = isDetailsItemPartOfBundleAndOffsaleModule(p1)
+	local IsDetailsItemPartOfBundleAndOffsaleModule1 = IsDetailsItemPartOfBundleAndOffsaleModule(p1)
 	
-	if var3 == nil then
+	if IsDetailsItemPartOfBundleAndOffsaleModule1 == nil then
 		return false
 	end
-	local var4 = p1.assets[assetId]
+	local Asset = p1.assets[AssetId]
 	
-	if not var4 then
+	if not Asset then
 		return false
-	elseif var3 then
-		local var5 = var2(p1.storeId, utilityFunctionsModule.getBundleId(var4))
+	elseif IsDetailsItemPartOfBundleAndOffsaleModule1 then
+		local BundleFavoriteCount = GetBundleFavoriteCount(p1.storeId, (UtilityFunctionsModule.getBundleId(Asset)))
 		
-		return if p1.FetchingStatus[var5] ~= retrievalStatus.Fetching then p1.FetchingStatus[var5] == retrievalStatus.Done else true
+		return p1.FetchingStatus[BundleFavoriteCount] == RetrievalStatus.Fetching or p1.FetchingStatus[BundleFavoriteCount] == RetrievalStatus.Done
+	else
+		local AssetFavoriteCount = GetAssetFavoriteCount(p1.storeId, AssetId)
+		
+		return p1.FetchingStatus[AssetFavoriteCount] == RetrievalStatus.Fetching or p1.FetchingStatus[AssetFavoriteCount] == RetrievalStatus.Done
 	end
-	local var6 = var1(p1.storeId, assetId)
-	
-	return if p1.FetchingStatus[var6] ~= retrievalStatus.Fetching then p1.FetchingStatus[var6] == retrievalStatus.Done else true
 end

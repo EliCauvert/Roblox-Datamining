@@ -1,24 +1,25 @@
-﻿local parent = script:FindFirstAncestor("SocialCarousel").Parent
-local reactModule = require(parent.React)
-local cryoModule = require(parent.Cryo)
-local useLoadingTimers = require(parent.SocialLuaAnalytics).Analytics.Timing.useLoadingTimers
+﻿local Parent = script:FindFirstAncestor("SocialCarousel").Parent
+local ReactModule = require(Parent.React)
+local CryoModule = require(Parent.Cryo)
+local UseLoadingTimersFunction = require(Parent.SocialLuaAnalytics).Analytics.Timing.useLoadingTimers
 
-return function(p1)
-	-- upvalues: useLoadingTimers (ref), reactModule (ref), cryoModule (ref)
-	local var1 = useLoadingTimers({})
-	local var2 = reactModule.useRef({})
-	local var3 = reactModule.useCallback(function(p2)
-		-- upvalues: var2 (ref), cryoModule (copy), var1 (ref), p1 (ref)
-		if var2.current[p2] then
+return function(Callback) --[[ Line: 10 ]]
+	-- upvalues: UseLoadingTimersFunction (copy), ReactModule (copy), CryoModule (copy)
+	local UseLoadingTimersResult = UseLoadingTimersFunction({})
+	local UseRefResult = ReactModule.useRef({})
+	local UseResult = ReactModule.useCallback(function(p1) --[[ Line: 16 ]]
+		-- upvalues: UseRefResult (copy), CryoModule (upval), UseLoadingTimersResult (copy), Callback (copy)
+		if not UseRefResult.current[p1] then
+			UseRefResult.current = CryoModule.Dictionary.join(UseRefResult.current, { [p1] = true })
+			Callback(p1, (UseLoadingTimersResult.getTime("carouselLoadingTime")))
+			
 			return
 		end
-		var2.current = cryoModule.Dictionary.join(var2.current, { [p2] = true })
-		p1(p2, var1.getTime("carouselLoadingTime"))
 	end, {})
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref)
-		var1.start("carouselLoadingTime")
+	ReactModule.useEffect(function() --[[ Line: 29 ]]
+		-- upvalues: UseLoadingTimersResult (copy)
+		UseLoadingTimersResult.start("carouselLoadingTime")
 	end, {})
 	
-	return { onSuccessfulRender = var3 }
+	return { onSuccessfulRender = UseResult }
 end

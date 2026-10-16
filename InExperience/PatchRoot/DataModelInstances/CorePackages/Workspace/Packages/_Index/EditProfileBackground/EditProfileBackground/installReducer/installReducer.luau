@@ -1,10 +1,10 @@
-﻿local editProfileBackground = script:FindFirstAncestor("EditProfileBackground")
-local roduxModule = require(editProfileBackground.Parent.Rodux)
-local profileRoduxNetworkingModule = require(editProfileBackground.Networking.ProfileRoduxNetworking)
+﻿local EditProfileBackground = script:FindFirstAncestor("EditProfileBackground")
+local RoduxModule = require(EditProfileBackground.Parent.Rodux)
+local ProfileRoduxNetworkingModule = require(EditProfileBackground.Networking.ProfileRoduxNetworking)
 
-return function()
-	-- upvalues: roduxModule (ref), profileRoduxNetworkingModule (ref)
-	return roduxModule.combineReducers({
-		NetworkStatus = profileRoduxNetworkingModule.installReducer()
+return function() --[[ Line: 6 ]]
+	-- upvalues: RoduxModule (copy), ProfileRoduxNetworkingModule (copy)
+	return RoduxModule.combineReducers({
+		NetworkStatus = ProfileRoduxNetworkingModule.installReducer()
 	})
 end

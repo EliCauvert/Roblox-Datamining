@@ -1,5 +1,5 @@
-﻿return table.freeze({
+﻿return (table.freeze({
 	Forward = "forward",
 	Backward = "backward",
 	None = "none"
-})
+}))

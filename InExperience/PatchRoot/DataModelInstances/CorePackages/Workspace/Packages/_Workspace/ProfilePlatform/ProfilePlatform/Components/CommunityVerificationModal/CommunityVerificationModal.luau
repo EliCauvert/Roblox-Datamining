@@ -1,69 +1,69 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local enumsModule = require(profilePlatform.Common.Enums)
-local appPage = require(parent.RobloxAppEnums).AppPage
-local UIBloxModule = require(parent.UIBlox)
-local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
-local buttonType = UIBloxModule.App.Button.Enum.ButtonType
-local useStyle = UIBloxModule.Core.Style.useStyle
-local styledTextLabel = UIBloxModule.App.Text.StyledTextLabel
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local robloxAppNavigationModule = require(parent.RobloxAppNavigation)
-local useNavigationProps = robloxAppNavigationModule.useNavigationProps
-local useScreenSize = require(parent.RobloxAppHooks).useScreenSize
-local urlBuilder = require(parent.UrlBuilder).UrlBuilder
-local textKeysModule = require(profilePlatform.Common.TextKeys)
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local navigateDown = require(parent.NavigationRodux).Thunks.NavigateDown
-local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
-local var1 = if fFlagSignalsNavP3Dispatch then robloxAppNavigationModule.NavigationCommands else nil
-local useNavigation = require(parent.Navigation).useNavigation
-local getProfilePlatformModule = require(profilePlatform.Networking.getProfilePlatform)
-local useProfileWrapperContextModule = require(profilePlatform.Contexts.useProfileWrapperContext)
-local getAvailableCommunityComponentsModule = require(profilePlatform.Hooks.getAvailableCommunityComponents)
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local UIBloxModule = require(Parent.UIBlox)
+local InteractiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
+local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local StyledTextLabel = UIBloxModule.App.Text.StyledTextLabel
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local RobloxAppNavigationModule = require(Parent.RobloxAppNavigation)
+local UseNavigationPropsFunction = RobloxAppNavigationModule.useNavigationProps
+local UseScreenSizeFunction = require(Parent.RobloxAppHooks).useScreenSize
+local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
+local TextKeysModule = require(ProfilePlatform.Common.TextKeys)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local NavigateDownFunction = require(Parent.NavigationRodux).Thunks.NavigateDown
+local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3Dispatch
+local NavigationCommands = if FFlagSignalsNavP3Dispatch then RobloxAppNavigationModule.NavigationCommands else nil
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local GetProfilePlatformModule = require(ProfilePlatform.Networking.getProfilePlatform)
+local UseProfileWrapperContextModule = require(ProfilePlatform.Contexts.useProfileWrapperContext)
+local GetAvailableCommunityComponentsModule = require(ProfilePlatform.Hooks.getAvailableCommunityComponents)
 
-return function()
-	-- upvalues: useStyle (ref), useDispatch (ref), useNavigation (ref), useProfileWrapperContextModule (ref), useScreenSize (ref), useLocalization (ref), textKeysModule (ref), useNavigationProps (ref), reactModule (ref), appPage (ref), urlBuilder (ref), getProfilePlatformModule (ref), getAvailableCommunityComponentsModule (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), enumsModule (ref), interactiveAlert (ref), styledTextLabel (ref), buttonType (ref)
-	local var2 = useStyle()
-	local var3 = useDispatch()
-	local var4 = useNavigation()
-	local var5 = useProfileWrapperContextModule()
-	local var6 = useScreenSize()
-	local profileType = var5.profileType
-	local profileId = var5.profileId
-	local var7 = useLocalization({
-		["continue"] = textKeysModule.Continue,
-		cancel = textKeysModule.Cancel,
-		verificationRequired = textKeysModule.VerificationRequired,
-		contentTextHigh = textKeysModule.ContentTextHigh,
-		contentTextMedium = textKeysModule.ContentTextMedium,
-		contentTextLow = textKeysModule.ContentTextLow
+return function() --[[ Line: 31 ]]
+	-- upvalues: UseStyleFunction (copy), UseDispatchFunction (copy), UseNavigationFunction (copy), UseProfileWrapperContextModule (copy), UseScreenSizeFunction (copy), UseLocalizationFunction (copy), TextKeysModule (copy), UseNavigationPropsFunction (copy), ReactModule (copy), AppPage (copy), UrlBuilder (copy), GetProfilePlatformModule (copy), GetAvailableCommunityComponentsModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), EnumsModule (copy), InteractiveAlert (copy), StyledTextLabel (copy), ButtonType (copy)
+	local UseStyleResult = UseStyleFunction()
+	local UseDispatchResult = UseDispatchFunction()
+	local UseNavigationResult = UseNavigationFunction()
+	local UseProfileWrapperContextModuleResult = UseProfileWrapperContextModule()
+	local UseScreenSizeResult = UseScreenSizeFunction()
+	local ProfileType = UseProfileWrapperContextModuleResult.profileType
+	local ProfileId = UseProfileWrapperContextModuleResult.profileId
+	local UseLocalizationResult = UseLocalizationFunction({
+		["continue"] = TextKeysModule.Continue,
+		cancel = TextKeysModule.Cancel,
+		verificationRequired = TextKeysModule.VerificationRequired,
+		contentTextHigh = TextKeysModule.ContentTextHigh,
+		contentTextMedium = TextKeysModule.ContentTextMedium,
+		contentTextLow = TextKeysModule.ContentTextLow
 	})
-	local var8 = useNavigationProps(function(_, p1)
+	local UseNavigationPropsResult = UseNavigationPropsFunction(function(_, p1) --[[ Line: 50 ]]
 		return { disabledReason = p1.disabledReason }
 	end)
-	local t = {
-		[enumsModule.DisabledReasons.InsufficientVerificationLevelHigh] = var7.contentTextHigh,
-		[enumsModule.DisabledReasons.InsufficientVerificationLevelMedium] = var7.contentTextMedium,
-		[enumsModule.DisabledReasons.InsufficientVerificationLevelLow] = var7.contentTextLow
+	local config = {
+		[EnumsModule.DisabledReasons.InsufficientVerificationLevelHigh] = UseLocalizationResult.contentTextHigh,
+		[EnumsModule.DisabledReasons.InsufficientVerificationLevelMedium] = UseLocalizationResult.contentTextMedium,
+		[EnumsModule.DisabledReasons.InsufficientVerificationLevelLow] = UseLocalizationResult.contentTextLow
 	}
 	
-	return reactModule.createElement(interactiveAlert, {
-		title = var7.verificationRequired,
-		screenSize = var6,
-		middleContent = function()
-			-- upvalues: reactModule (copy), styledTextLabel (copy), t (ref), var8 (ref), var2 (ref)
-			return reactModule.createElement("Frame", {
+	return ReactModule.createElement(InteractiveAlert, {
+		title = UseLocalizationResult.verificationRequired,
+		screenSize = UseScreenSizeResult,
+		middleContent = function() --[[ Line: 94 ]]
+			-- upvalues: ReactModule (upval), StyledTextLabel (upval), config (copy), UseNavigationPropsResult (copy), UseStyleResult (copy)
+			return ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				AutomaticSize = Enum.AutomaticSize.XY
 			}, {
-				Content = reactModule.createElement(styledTextLabel, {
+				Content = ReactModule.createElement(StyledTextLabel, {
 					layoutOrder = 1,
 					fluidSizing = false,
-					text = t[var8.disabledReason],
-					fontStyle = var2.Font.Body,
-					colorStyle = var2.Theme.TextDefault,
+					text = config[UseNavigationPropsResult.disabledReason],
+					fontStyle = UseStyleResult.Font.Body,
+					colorStyle = UseStyleResult.Theme.TextDefault,
 					size = UDim2.fromScale(1, 0),
 					automaticSize = Enum.AutomaticSize.Y
 				})
@@ -72,46 +72,51 @@ return function()
 		buttonStackInfo = {
 			buttons = {
 				{
-					buttonType = buttonType.Secondary,
+					buttonType = ButtonType.Secondary,
 					props = {
-						onActivated = reactModule.useCallback(function()
-							-- upvalues: var4 (ref)
-							var4.goBack()
-						end, { var4 }),
-						text = var7.cancel
+						onActivated = ReactModule.useCallback(function() --[[ Line: 80 ]]
+							-- upvalues: UseNavigationResult (copy)
+							UseNavigationResult.goBack()
+						end, { UseNavigationResult }),
+						text = UseLocalizationResult.cancel
 					}
 				},
 				{
-					buttonType = buttonType.PrimarySystem,
+					buttonType = ButtonType.PrimarySystem,
 					props = {
-						onActivated = reactModule.useCallback(function()
-							-- upvalues: appPage (copy), urlBuilder (copy), var7 (ref), var4 (ref), var3 (ref), getProfilePlatformModule (copy), profileType (ref), profileId (ref), getAvailableCommunityComponentsModule (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), navigateDown (copy)
-							local t = {
-								name = appPage.GenericWebPage,
-								detail = urlBuilder.static.settings.account(),
+						onActivated = ReactModule.useCallback(function() --[[ Line: 56 ]]
+							-- upvalues: AppPage (upval), UrlBuilder (upval), UseLocalizationResult (copy), UseNavigationResult (copy), UseDispatchResult (copy), GetProfilePlatformModule (upval), ProfileType (copy), ProfileId (copy), GetAvailableCommunityComponentsModule (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), NavigateDownFunction (upval)
+							local config = {
+								name = AppPage.GenericWebPage,
+								detail = UrlBuilder.static.settings.account(),
 								extraProps = {
-									title = var7.verificationRequired,
-									onClose = function()
-										-- upvalues: var4 (copy), var3 (copy), getProfilePlatformModule (copy), profileType (copy), profileId (copy), getAvailableCommunityComponentsModule (copy)
-										var4.goBack()
-										var3(getProfilePlatformModule.API({
+									title = UseLocalizationResult.verificationRequired,
+									onClose = function() --[[ Line: 62 ]]
+										-- upvalues: UseNavigationResult (upval), UseDispatchResult (upval), GetProfilePlatformModule (upval), ProfileType (upval), ProfileId (upval), GetAvailableCommunityComponentsModule (upval)
+										UseNavigationResult.goBack()
+										UseDispatchResult(GetProfilePlatformModule.API({
 											includeComponentOrdering = true,
-											profileType = profileType,
-											profileId = profileId,
-											components = getAvailableCommunityComponentsModule()
+											profileType = ProfileType,
+											profileId = ProfileId,
+											components = GetAvailableCommunityComponentsModule()
 										}))
 									end
 								}
 							}
 							
-							if fFlagSignalsNavP3Dispatch then
-								var1.down(var1.fromLegacyPage(t))
+							if FFlagSignalsNavP3Dispatch then
+								NavigationCommands.down(NavigationCommands.fromLegacyPage(config))
 								
 								return
+							else
+								UseDispatchResult(NavigateDownFunction(config))
 							end
-							var3(navigateDown(t))
-						end, { var3, var7, var4 }),
-						text = var7["continue"]
+						end, {
+							UseDispatchResult,
+							UseLocalizationResult,
+							UseNavigationResult
+						}),
+						text = UseLocalizationResult["continue"]
 					}
 				}
 			},

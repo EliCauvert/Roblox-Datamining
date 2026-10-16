@@ -1,16 +1,15 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local memo = reactModule.memo
-local imageSetLabel = require(parent.UIBlox).Core.ImageSet.ImageSetLabel
-local foundationModule = require(parent.Foundation)
-local useTokens = foundationModule.Hooks.useTokens
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local baseCellModule = require(script.Parent.BaseCell)
-local _ = require(appChat.types)
-local t = {
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local ImageSetLabel = require(Parent.UIBlox).Core.ImageSet.ImageSetLabel
+local FoundationModule = require(Parent.Foundation)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local BaseCellModule = require(script.Parent.BaseCell)
+local _ = require(AppChat.types)
+local config = {
 	Text = "titleText",
 	primaryIconSize = 32,
 	isDisabled = false,
@@ -24,117 +23,117 @@ local t = {
 	LayoutOrder = 0,
 	BackgroundTransparency = nil,
 	showDivider = true,
-	onActivated = function()
+	onActivated = function() --[[ Line: 57 ]]
 		print("FlexIconWithTextCell onActivated")
 	end,
-	style = require(appChat.SocialLibraries).Components.TestStyle
+	style = require(AppChat.SocialLibraries).Components.TestStyle
 }
 
-return memo(function(p1)
-	-- upvalues: cryoModule (ref), t (ref), foundationFontFaceMigration (ref), useTokens (ref), reactModule (ref), baseCellModule (ref), imageSetLabel (ref), normalizeFontFace (ref)
-	local var1 = cryoModule.Dictionary.union(t, p1)
-	local style = var1.style
-	local theme = style.Theme
-	local font = style.Font
-	local var2 = if foundationFontFaceMigration then useTokens() else nil
-	local var3 = var1.primaryIcon == nil
+return ReactModule.memo(function(p1) --[[ Line: 73 | Named "FlexIconWithTextCell" ]]
+	-- upvalues: CryoModule (copy), config (copy), FoundationFontFaceMigration (copy), UseTokensFunction (copy), ReactModule (copy), BaseCellModule (copy), ImageSetLabel (copy), NormalizeFontFaceFunction (copy)
+	local UnionResult = CryoModule.Dictionary.union(config, p1)
+	local Style = UnionResult.style
+	local Theme = Style.Theme
+	local StyleFont = Style.Font
+	local UseTokensResult = if FoundationFontFaceMigration then UseTokensFunction() else nil
+	local NoPrimaryIcon = UnionResult.primaryIcon == nil
 	
-	return reactModule.createElement(baseCellModule, {
-		Size = UDim2.new(1, var1.widthOffset, 0, 0),
+	return ReactModule.createElement(BaseCellModule, {
+		Size = UDim2.new(1, UnionResult.widthOffset, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
-		BackgroundColor3 = theme.BackgroundDefault.Color,
-		BackgroundTransparency = var1.BackgroundTransparency or theme.BackgroundDefault.Transparency,
-		onPressedBackgroundColor3 = theme.BackgroundOnPress.Color,
-		onPressedBackgroundTransparency = theme.BackgroundOnPress.Transparency,
-		LayoutOrder = var1.LayoutOrder,
-		onActivated = var1.onActivated,
-		showDivider = var1.showDivider,
-		dividerColor3 = theme.Divider.Color,
-		dividerTransparency = theme.Divider.Transparency,
-		isDisabled = var1.isDisabled,
-		avatarCircleCellWidth = var1.iconCellWidth
+		BackgroundColor3 = Theme.BackgroundDefault.Color,
+		BackgroundTransparency = UnionResult.BackgroundTransparency or Theme.BackgroundDefault.Transparency,
+		onPressedBackgroundColor3 = Theme.BackgroundOnPress.Color,
+		onPressedBackgroundTransparency = Theme.BackgroundOnPress.Transparency,
+		LayoutOrder = UnionResult.LayoutOrder,
+		onActivated = UnionResult.onActivated,
+		showDivider = UnionResult.showDivider,
+		dividerColor3 = Theme.Divider.Color,
+		dividerTransparency = Theme.Divider.Transparency,
+		isDisabled = UnionResult.isDisabled,
+		avatarCircleCellWidth = UnionResult.iconCellWidth
 	}, {
-		leftFrame = reactModule.createElement("Frame", {
+		leftFrame = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 1,
-			Size = UDim2.new(1, -var1.iconCellWidth, 0, 0),
+			Size = UDim2.new(1, -UnionResult.iconCellWidth, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y
 		}, {
-			leftListLayout = reactModule.createElement("UIListLayout", {
+			leftListLayout = ReactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Horizontal,
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				VerticalAlignment = Enum.VerticalAlignment.Center
 			}),
-			leftFramePadding = reactModule.createElement("UIPadding", {
-				PaddingTop = UDim.new(0, var1.topPadding),
-				PaddingBottom = UDim.new(0, var1.bottomPadding)
+			leftFramePadding = ReactModule.createElement("UIPadding", {
+				PaddingTop = UDim.new(0, UnionResult.topPadding),
+				PaddingBottom = UDim.new(0, UnionResult.bottomPadding)
 			}),
-			imageFrame = if not var3 then reactModule.createElement("Frame", {
+			imageFrame = if NoPrimaryIcon then nil else ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 1,
-				Size = UDim2.new(0, var1.iconCellWidth, 0, var1.primaryIconSize)
+				Size = UDim2.new(0, UnionResult.iconCellWidth, 0, UnionResult.primaryIconSize)
 			}, {
-				primaryIcon = reactModule.createElement(imageSetLabel, {
+				primaryIcon = ReactModule.createElement(ImageSetLabel, {
 					BorderSizePixel = 0,
 					BackgroundTransparency = 1,
 					Position = UDim2.fromScale(0.5, 0.5),
 					AnchorPoint = Vector2.new(0.5, 0.5),
-					Image = var1.primaryIcon,
-					Size = UDim2.new(0, var1.primaryIconSize, 0, var1.primaryIconSize),
-					ImageColor3 = theme.IconEmphasis.Color
+					Image = UnionResult.primaryIcon,
+					Size = UDim2.new(0, UnionResult.primaryIconSize, 0, UnionResult.primaryIconSize),
+					ImageColor3 = Theme.IconEmphasis.Color
 				})
-			}) else nil,
-			textFrame = reactModule.createElement("Frame", {
+			}),
+			textFrame = ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 2,
 				Size = UDim2.new(1, 0, 0, 0),
 				AutomaticSize = Enum.AutomaticSize.Y
 			}, {
-				uiListLayout = reactModule.createElement("UIListLayout", {
+				uiListLayout = ReactModule.createElement("UIListLayout", {
 					FillDirection = Enum.FillDirection.Vertical,
 					SortOrder = Enum.SortOrder.LayoutOrder,
 					VerticalAlignment = Enum.VerticalAlignment.Center
 				}),
-				titleText = reactModule.createElement("TextLabel", {
+				titleText = ReactModule.createElement("TextLabel", {
 					TextWrapped = true,
 					BackgroundTransparency = 1,
 					LayoutOrder = 2,
-					Size = UDim2.new(1, if var3 then 0 else -var1.iconCellWidth, 0, 0),
+					Size = UDim2.new(1, if NoPrimaryIcon then 0 else -UnionResult.iconCellWidth, 0, 0),
 					AutomaticSize = Enum.AutomaticSize.Y,
-					Text = var1.Text,
-					TextSize = font.Header2.RelativeSize * font.BaseSize,
-					Font = if foundationFontFaceMigration then nil else font.Header2.Font,
-					FontFace = if foundationFontFaceMigration then normalizeFontFace(var2.Typography.TitleLarge.Font) else nil,
-					TextColor3 = theme.TextEmphasis.Color,
+					Text = UnionResult.Text,
+					TextSize = StyleFont.Header2.RelativeSize * StyleFont.BaseSize,
+					Font = if FoundationFontFaceMigration then nil else StyleFont.Header2.Font,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.TitleLarge.Font) else nil,
+					TextColor3 = Theme.TextEmphasis.Color,
 					TextXAlignment = Enum.TextXAlignment.Left,
 					TextTruncate = Enum.TextTruncate.AtEnd
 				}),
-				subTitleText = if var1.SubTitleText then reactModule.createElement("TextLabel", {
+				subTitleText = if UnionResult.SubTitleText then ReactModule.createElement("TextLabel", {
 					TextWrapped = true,
 					BackgroundTransparency = 1,
 					LayoutOrder = 3,
-					Size = UDim2.new(1, if var3 then 0 else -var1.iconCellWidth, 0, 0),
+					Size = UDim2.new(1, if NoPrimaryIcon then 0 else -UnionResult.iconCellWidth, 0, 0),
 					AutomaticSize = Enum.AutomaticSize.Y,
-					Text = var1.SubTitleText,
-					TextSize = font.BodySmall.RelativeSize * font.BaseSize,
-					Font = if foundationFontFaceMigration then nil else font.BodySmall.Font,
-					FontFace = if foundationFontFaceMigration then normalizeFontFace(var2.Typography.BodySmall.Font) else nil,
-					TextColor3 = theme.TextDefault.Color,
+					Text = UnionResult.SubTitleText,
+					TextSize = StyleFont.BodySmall.RelativeSize * StyleFont.BaseSize,
+					Font = if FoundationFontFaceMigration then nil else StyleFont.BodySmall.Font,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.BodySmall.Font) else nil,
+					TextColor3 = Theme.TextDefault.Color,
 					TextXAlignment = Enum.TextXAlignment.Left
 				}) else nil
 			})
 		}),
-		rightFrame = if var1.secondaryIcon then reactModule.createElement("Frame", {
+		rightFrame = if UnionResult.secondaryIcon then ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 1,
-			Size = UDim2.fromOffset(var1.iconCellWidth, var1.iconCellWidth)
+			Size = UDim2.fromOffset(UnionResult.iconCellWidth, UnionResult.iconCellWidth)
 		}, {
-			secondaryIcon = reactModule.createElement("ImageLabel", {
+			secondaryIcon = ReactModule.createElement("ImageLabel", {
 				BackgroundTransparency = 1,
 				Position = UDim2.fromScale(0.5, 0.5),
 				AnchorPoint = Vector2.new(0.5, 0.5),
-				Image = var1.secondaryIcon,
-				Size = UDim2.fromOffset(var1.secondaryIconSize, var1.secondaryIconSize)
+				Image = UnionResult.secondaryIcon,
+				Size = UDim2.fromOffset(UnionResult.secondaryIconSize, UnionResult.secondaryIconSize)
 			})
 		}) else nil
 	})

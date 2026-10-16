@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent._Workspace.AppChat.AppChat.Conversations.Thunks.NavigateIntoSquadLobbyIfExists)
+﻿return (require(script.Parent.Parent._Workspace.AppChat.AppChat.Conversations.Thunks.NavigateIntoSquadLobbyIfExists))

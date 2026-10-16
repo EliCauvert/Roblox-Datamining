@@ -1,22 +1,22 @@
-﻿local parent = script:FindFirstAncestor("SignalsUtils").Parent
-local signalsModule = require(parent.Signals)
-local getCurrentUserId = require(parent.LocalUserIdStore).LocalUserIdStore.getCurrentUserId
+﻿local Parent = script:FindFirstAncestor("SignalsUtils").Parent
+local SignalsModule = require(Parent.Signals)
+local GetCurrentUserIdFunction = require(Parent.LocalUserIdStore).LocalUserIdStore.getCurrentUserId
 
-return function(value, p1)
-	-- upvalues: signalsModule (ref), getCurrentUserId (ref)
-	local var1 = signalsModule.createComputed(function(p2)
-		-- upvalues: getCurrentUserId (copy), signalsModule (copy), value (ref), p1 (ref)
-		getCurrentUserId(p2)
-		local var2, var3 = signalsModule.createSignal(value, p1)
+return function(p1, p2) --[[ Line: 19 | Named "createSessionScopedSignal" ]]
+	-- upvalues: SignalsModule (copy), GetCurrentUserIdFunction (copy)
+	local Computed = SignalsModule.createComputed(function(p3) --[[ Line: 23 ]]
+		-- upvalues: GetCurrentUserIdFunction (upval), SignalsModule (upval), p1 (copy), p2 (copy)
+		GetCurrentUserIdFunction(p3)
+		local Signal, Signal2 = SignalsModule.createSignal(p1, p2)
 		
-		return { getter = var2, setter = var3 }
+		return { getter = Signal, setter = Signal2 }
 	end)
 	
-	return function(p2)
-		-- upvalues: var1 (ref)
-		return var1(p2).getter(p2)
-	end, function(value)
-		-- upvalues: var1 (ref)
-		var1().setter(value)
+	return function(p3) --[[ Line: 30 | Named "getter" ]]
+		-- upvalues: Computed (copy)
+		return Computed(p3).getter(p3)
+	end, function(p3) --[[ Line: 33 | Named "setter" ]]
+		-- upvalues: Computed (copy)
+		Computed().setter(p3)
 	end
 end

@@ -1,143 +1,126 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local immutable = require(parent.AppCommonLib).Immutable
-local sendMessagePolicyModule = require(script.Parent.SendMessagePolicy)
-local messageModelModule = require(appChat.Models.MessageModel)
-local dateTime = require(parent.Time).DateTime
-local receivedChatResponseModule = require(appChat.Conversations.Thunks.ReceivedChatResponse)
-local sendingMessageModule = require(appChat.Conversations.Actions.SendingMessage)
-local sentMessageModule = require(appChat.Conversations.Actions.SentMessage)
-local statusCodes = require(parent.Http).StatusCodes
-local messageFailedToSendModule = require(appChat.Conversations.Actions.MessageFailedToSend)
-local messageModeratedModule = require(appChat.Conversations.Actions.MessageModerated)
-local responseStatus = require(parent.AppChatNetworking).Constants.ResponseStatus
-local navigateIntoChatModule = require(appChat.Actions.NavigateIntoChat)
-local receivedChannelsMigrationConflictModule = require(appChat.Conversations.Actions.ReceivedChannelsMigrationConflict)
-local enumScreensModule = require(appChat.EnumScreens)
-local getDeepValue2Module = require(appChat.Utils.getDeepValue2)
-local _ = require(appChat.Models.ConversationChannels)
-local fFlagAppChatPerfTrackingModule = require(appChat.Flags.FFlagAppChatPerfTracking)
-local fFlagAppChatMessageTTIMilestonesModule = require(appChat.Flags.FFlagAppChatMessageTTIMilestones)
-local appChatPerfTrackerModule = require(appChat.Telemetry.AppChatPerfTracker)
-local var1 = 0
-local name = require(appChat.Logger):new(script.Name)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local Immutable = require(Parent.AppCommonLib).Immutable
+local MessageModelModule = require(AppChat.Models.MessageModel)
+local _DateTime = require(Parent.Time).DateTime
+local ReceivedChatResponseModule = require(AppChat.Conversations.Thunks.ReceivedChatResponse)
+local SendingMessageModule = require(AppChat.Conversations.Actions.SendingMessage)
+local SentMessageModule = require(AppChat.Conversations.Actions.SentMessage)
+local StatusCodes = require(Parent.Http).StatusCodes
+local MessageFailedToSendModule = require(AppChat.Conversations.Actions.MessageFailedToSend)
+local MessageModeratedModule = require(AppChat.Conversations.Actions.MessageModerated)
+local ResponseStatus = require(Parent.AppChatNetworking).Constants.ResponseStatus
+local NavigateIntoChatModule = require(AppChat.Actions.NavigateIntoChat)
+local ReceivedChannelsMigrationConflictModule = require(AppChat.Conversations.Actions.ReceivedChannelsMigrationConflict)
+local EnumScreensModule = require(AppChat.EnumScreens)
+local GetDeepValue2Module = require(AppChat.Utils.getDeepValue2)
+local _ = require(AppChat.Models.ConversationChannels)
+local FFlagAppChatPerfTrackingModule = require(AppChat.Flags.FFlagAppChatPerfTracking)
+local FFlagAppChatMessageTTIMilestonesModule = require(AppChat.Flags.FFlagAppChatMessageTTIMilestones)
+local AppChatPerfTrackerModule = require(AppChat.Telemetry.AppChatPerfTracker)
+local Count = 0
+local NewResult = require(AppChat.Logger):new(script.Name)
 
-local function _()
-	-- upvalues: var1 (write)
-	var1 += 1
+local function _(): number --[[ Line: 31 | Named "getAscendingNumber" ]]
+	-- upvalues: Count (ref)
+	Count += 1
 	
-	return var1
+	return Count
 end
 
-local tbl = setmetatable({}, sendMessagePolicyModule)
-tbl.__index = tbl
+local self = setmetatable({}, (require(script.Parent.SendMessagePolicy)))
+self.__index = self
 
-function tbl.new(p1, p2, p3)
-	-- upvalues: messageModelModule (ref)
-	return setmetatable({
-		messageSendingId = messageModelModule.newSendingId(),
-		conversationId = p2,
-		replyingToMessage = p3
-	}, p1)
+function self.new(p1, ConversationId, ReplyingToMessage) --[[ Line: 39 ]]
+	-- upvalues: MessageModelModule (copy)
+	return (setmetatable({
+		messageSendingId = MessageModelModule.newSendingId(),
+		conversationId = ConversationId,
+		replyingToMessage = ReplyingToMessage
+	}, p1))
 end
 
-function tbl:onBeforeSendingMessage(p1)
-	-- upvalues: name (ref), getDeepValue2Module (ref), messageModelModule (ref), immutable (ref), var1 (write), dateTime (ref), sendingMessageModule (ref)
-	name:trace("onBeforeSendingMessage conversationId: {} messageSendingId: {}, replyingToId: {}", self.conversationId, self.messageSendingId, if self.replyingToMessage then self.replyingToMessage.id else nil)
-	local _ = nil
-	local var2 = getDeepValue2Module(p1:getState(), `ChatAppReducer.Conversations.{self.conversationId}`)
-	local moderationType = var2 and var2.moderationType
-	local newSending = messageModelModule.newSending
-	local joinDictionaries = immutable.JoinDictionaries
-	local t = {
+function self:onBeforeSendingMessage(p1) --[[ Line: 47 ]]
+	-- upvalues: NewResult (copy), GetDeepValue2Module (copy), MessageModelModule (copy), Immutable (copy), Count (ref), _DateTime (copy), SendingMessageModule (copy)
+	NewResult:trace("onBeforeSendingMessage conversationId: {} messageSendingId: {}, replyingToId: {}", self.conversationId, self.messageSendingId, if self.replyingToMessage then self.replyingToMessage.id else nil)
+	local DeepValue2Module = GetDeepValue2Module(p1:getState(), `ChatAppReducer.Conversations.{self.conversationId}`)
+	Count += 1
+	local Sending = MessageModelModule.newSending(Immutable.JoinDictionaries({
 		id = self.messageSendingId,
-		order = var1,
+		order = Count,
 		conversationId = self.conversationId,
 		repliesTo = self.replyingToMessage,
-		sent = dateTime.now(),
-		moderationType = moderationType
-	}
-	var1 += 1
-	newSending = newSending(joinDictionaries(t, self:sendingMessagePayload()))
-	self.sendingMessageStableKey = newSending.stableKey
-	assert(newSending, "Failed to create sending message placeholder")
-	p1:dispatch(sendingMessageModule(self.conversationId, newSending))
+		sent = _DateTime.now(),
+		moderationType = DeepValue2Module and DeepValue2Module.moderationType
+	}, self:sendingMessagePayload()))
+	self.sendingMessageStableKey = Sending.stableKey
+	assert(Sending, "Failed to create sending message placeholder")
+	p1:dispatch(SendingMessageModule(self.conversationId, Sending))
 end
 
-function tbl.sendingMessagePayload(_)
+function self:sendingMessagePayload() --[[ Line: 74 ]]
 	error("Override me")
 end
 
-function tbl:onSuccess(p1, p2)
-	-- upvalues: name (ref), fFlagAppChatPerfTrackingModule (ref), fFlagAppChatMessageTTIMilestonesModule (ref), appChatPerfTrackerModule (ref), sentMessageModule (ref), receivedChatResponseModule (ref)
-	name:debug("Message sent successfully. conversationId: {} messageSendingId: {} replyingToId: {}", self.conversationId, self.messageSendingId, if self.replyingToMessage then self.replyingToMessage.id else nil)
+function self:onSuccess(p1, p2) --[[ Line: 78 ]]
+	-- upvalues: NewResult (copy), FFlagAppChatPerfTrackingModule (copy), FFlagAppChatMessageTTIMilestonesModule (copy), AppChatPerfTrackerModule (copy), SentMessageModule (copy), ReceivedChatResponseModule (copy)
+	NewResult:debug("Message sent successfully. conversationId: {} messageSendingId: {} replyingToId: {}", self.conversationId, self.messageSendingId, if self.replyingToMessage then self.replyingToMessage.id else nil)
 	
-	if fFlagAppChatPerfTrackingModule then
-		if fFlagAppChatMessageTTIMilestonesModule then
-			local t = { conversationId = self.conversationId }
-			appChatPerfTrackerModule.trackMilestone(appChatPerfTrackerModule.Events.MessageSendTTI, appChatPerfTrackerModule.Milestone.PrimaryDataReady.Name, t)
-			appChatPerfTrackerModule.trackSubphase(appChatPerfTrackerModule.Events.MessageSendTTI, appChatPerfTrackerModule.Milestone.PrimaryDataReady.Name, appChatPerfTrackerModule.Milestone.PrimaryDataReady.Subphase.ResponseReceived, t)
+	if FFlagAppChatPerfTrackingModule then
+		if FFlagAppChatMessageTTIMilestonesModule then
+			local config = { conversationId = self.conversationId }
+			AppChatPerfTrackerModule.trackMilestone(AppChatPerfTrackerModule.Events.MessageSendTTI, AppChatPerfTrackerModule.Milestone.PrimaryDataReady.Name, config)
+			AppChatPerfTrackerModule.trackSubphase(AppChatPerfTrackerModule.Events.MessageSendTTI, AppChatPerfTrackerModule.Milestone.PrimaryDataReady.Name, AppChatPerfTrackerModule.Milestone.PrimaryDataReady.Subphase.ResponseReceived, config)
 		else
-			appChatPerfTrackerModule.start(appChatPerfTrackerModule.Events.MessageSendResponseToFinalRender, { conversationId = self.conversationId })
+			AppChatPerfTrackerModule.start(AppChatPerfTrackerModule.Events.MessageSendResponseToFinalRender, { conversationId = self.conversationId })
 		end
 	end
-	p1:dispatch(sentMessageModule(self.conversationId, self.messageSendingId))
-	p1:dispatch(receivedChatResponseModule(self.conversationId, p2.responseBody, self.sendingMessageStableKey))
+	p1:dispatch(SentMessageModule(self.conversationId, self.messageSendingId))
+	p1:dispatch(ReceivedChatResponseModule(self.conversationId, p2.responseBody, self.sendingMessageStableKey))
 	
 	return p2
 end
 
-function tbl:onFailure(p1, p2)
-	-- upvalues: name (ref), fFlagAppChatPerfTrackingModule (ref), fFlagAppChatMessageTTIMilestonesModule (ref), appChatPerfTrackerModule (ref), statusCodes (ref), receivedChannelsMigrationConflictModule (ref), navigateIntoChatModule (ref), enumScreensModule (ref), messageFailedToSendModule (ref), responseStatus (ref), messageModeratedModule (ref)
-	name:error("Failed to send message. conversationId: {}, messageSendingId: {}, responseCode: {}", self.conversationId, self.messageSendingId, p2.responseCode)
+function self:onFailure(p1, p2) --[[ Line: 112 ]]
+	-- upvalues: NewResult (copy), FFlagAppChatPerfTrackingModule (copy), FFlagAppChatMessageTTIMilestonesModule (copy), AppChatPerfTrackerModule (copy), StatusCodes (copy), ReceivedChannelsMigrationConflictModule (copy), NavigateIntoChatModule (copy), EnumScreensModule (copy), MessageFailedToSendModule (copy), ResponseStatus (copy), MessageModeratedModule (copy)
+	NewResult:error("Failed to send message. conversationId: {}, messageSendingId: {}, responseCode: {}", self.conversationId, self.messageSendingId, p2.responseCode)
 	
-	if fFlagAppChatPerfTrackingModule then
-		if fFlagAppChatMessageTTIMilestonesModule then
-			local t = { conversationId = self.conversationId }
-			appChatPerfTrackerModule.trackMilestone(appChatPerfTrackerModule.Events.MessageSendTTI, appChatPerfTrackerModule.Milestone.PrimaryDataReady.Name, t)
-			appChatPerfTrackerModule.trackSubphase(appChatPerfTrackerModule.Events.MessageSendTTI, appChatPerfTrackerModule.Milestone.PrimaryDataReady.Name, appChatPerfTrackerModule.Milestone.PrimaryDataReady.Subphase.ResponseReceived, t)
+	if FFlagAppChatPerfTrackingModule then
+		if FFlagAppChatMessageTTIMilestonesModule then
+			local config = { conversationId = self.conversationId }
+			AppChatPerfTrackerModule.trackMilestone(AppChatPerfTrackerModule.Events.MessageSendTTI, AppChatPerfTrackerModule.Milestone.PrimaryDataReady.Name, config)
+			AppChatPerfTrackerModule.trackSubphase(AppChatPerfTrackerModule.Events.MessageSendTTI, AppChatPerfTrackerModule.Milestone.PrimaryDataReady.Name, AppChatPerfTrackerModule.Milestone.PrimaryDataReady.Subphase.ResponseReceived, config)
 		else
-			appChatPerfTrackerModule.start(appChatPerfTrackerModule.Events.MessageSendResponseToFinalRender, { conversationId = self.conversationId })
+			AppChatPerfTrackerModule.start(AppChatPerfTrackerModule.Events.MessageSendResponseToFinalRender, { conversationId = self.conversationId })
 		end
 	end
-	local var2 = not p2
-	
-	if not var2 then
-		if p2.responseCode ~= nil then
-			var2 = true
-			
-			if p2.responseCode == statusCodes.OK then
-				if p2.StatusCode ~= nil then
-					var2 = if p2.StatusCode == statusCodes.OK then not p2.responseBody or (not p2.responseBody.messages or #p2.responseBody.messages == 0) else true
-				end
-			end
-		end
-	end
-	if var2 then
-		if p2.StatusCode == statusCodes.CONFLICT then
-			name:error("Message sent conflicting system (409). Reloading messages...")
-			p1:dispatch(receivedChannelsMigrationConflictModule())
-			p1:dispatch(navigateIntoChatModule({
-				screen = enumScreensModule.ChatLanding,
+	if not p2 or ((if p2.responseCode == nil then if p2.StatusCode == nil then not p2.responseBody else p2.StatusCode ~= StatusCodes.OK or not p2.responseBody else p2.responseCode ~= StatusCodes.OK or (if p2.StatusCode == nil then not p2.responseBody else p2.StatusCode ~= StatusCodes.OK or not p2.responseBody)) or (not p2.responseBody.messages or #p2.responseBody.messages == 0)) then
+		if p2.StatusCode == StatusCodes.CONFLICT then
+			NewResult:error("Message sent conflicting system (409). Reloading messages...")
+			p1:dispatch(ReceivedChannelsMigrationConflictModule())
+			p1:dispatch(NavigateIntoChatModule({
+				screen = EnumScreensModule.ChatLanding,
 				params = { key = tostring(os.clock()) }
 			}))
 			
 			return p2
+		else
+			p1:dispatch(MessageFailedToSendModule(self.conversationId, self.messageSendingId))
+			NewResult:error("Message could not be sent, no response body or no messages in response body")
+			
+			return p2
 		end
-		p1:dispatch(messageFailedToSendModule(self.conversationId, self.messageSendingId))
-		name:error("Message could not be sent, no response body or no messages in response body")
+	elseif p2.responseBody.messages[1].status and p2.responseBody.messages[1].status == ResponseStatus.MODERATED then
+		p1:dispatch(MessageModeratedModule(self.conversationId, self.messageSendingId))
+		NewResult:error("Message was moderated.")
 		
 		return p2
-	elseif p2.responseBody.messages[1].status and p2.responseBody.messages[1].status == responseStatus.MODERATED then
-		p1:dispatch(messageModeratedModule(self.conversationId, self.messageSendingId))
-		name:error("Message was moderated.")
+	else
+		p1:dispatch(MessageFailedToSendModule(self.conversationId, self.messageSendingId))
+		NewResult:error("Message could not be sent, no response body or no messages in response body")
 		
 		return p2
 	end
-	p1:dispatch(messageFailedToSendModule(self.conversationId, self.messageSendingId))
-	name:error("Message could not be sent, no response body or no messages in response body")
-	
-	return p2
 end
 
-return tbl
+return self

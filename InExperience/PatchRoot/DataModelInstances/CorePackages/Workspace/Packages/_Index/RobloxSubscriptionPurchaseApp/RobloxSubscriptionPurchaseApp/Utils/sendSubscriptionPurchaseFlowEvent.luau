@@ -1,12 +1,12 @@
-﻿local robloxSubscriptionPurchaseApp = script:FindFirstAncestor("RobloxSubscriptionPurchaseApp")
-local default = require(robloxSubscriptionPurchaseApp.Parent.LoggingProtocol).default
-local subscriptionPurchaseFlowTelemetryModule = require(robloxSubscriptionPurchaseApp.Events.SubscriptionPurchaseFlowTelemetry)
+﻿local RobloxSubscriptionPurchaseApp = script:FindFirstAncestor("RobloxSubscriptionPurchaseApp")
+local Default = require(RobloxSubscriptionPurchaseApp.Parent.LoggingProtocol).default
+local SubscriptionPurchaseFlowTelemetryModule = require(RobloxSubscriptionPurchaseApp.Events.SubscriptionPurchaseFlowTelemetry)
 
-function sendSubscriptionPurchaseFlowEvent(p1)
-	-- upvalues: default (ref), subscriptionPurchaseFlowTelemetryModule (ref)
-	default:logRobloxTelemetryEvent(subscriptionPurchaseFlowTelemetryModule.SubscriptionPurchaseFlowEvent, {
-		default.StandardizedFields.addOsInfo,
-		default.StandardizedFields.addSessionId,
+function sendSubscriptionPurchaseFlowEvent(p1) --[[ Line: 7 ]]
+	-- upvalues: Default (copy), SubscriptionPurchaseFlowTelemetryModule (copy)
+	Default:logRobloxTelemetryEvent(SubscriptionPurchaseFlowTelemetryModule.SubscriptionPurchaseFlowEvent, {
+		Default.StandardizedFields.addOsInfo,
+		Default.StandardizedFields.addSessionId,
 		"addSessionInfo"
 	}, p1)
 end

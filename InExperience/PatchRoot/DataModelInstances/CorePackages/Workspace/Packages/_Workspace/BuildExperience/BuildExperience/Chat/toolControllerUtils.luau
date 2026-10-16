@@ -1,32 +1,31 @@
 ﻿local _ = require(script:FindFirstAncestor("BuildExperience").Parent.DataHydration.CreatorAgentChat)
 
 return {
-	awaitRequestState = function(p1, p2)
-		while p1(false).status == "pending" do
-			if p2 > os.clock() then
-				task.wait()
-				continue
+	awaitRequestState = function(Callback, p1) --[[ Line: 14 ]]
+		while Callback(false).status == "pending" do
+			if p1 <= os.clock() then
+				return Callback(false)
 			end
-			return p1(false)
+			task.wait()
 		end
-		return p1(false)
+		return Callback(false)
 	end,
-	getToolCallOrder = function(p3, p4)
-		for i, v in p3.activityItems do
-			if v.kind == "tool_call" and v.toolCallId == p4 then
+	getToolCallOrder = function(p2, ToolCallId) --[[ Line: 25 ]]
+		for i, activityItem in p2.activityItems do
+			if activityItem.kind == "tool_call" and activityItem.toolCallId == ToolCallId then
 				return i
 			end
 		end
-		local t = {}
+		local List = {}
 		
-		for v in p3.toolCalls do
-			table.insert(t, v)
+		for toolCall in p2.toolCalls do
+			table.insert(List, toolCall)
 		end
-		table.sort(t)
+		table.sort(List)
 		
-		for v, v_1 in t do
-			if v_1 == p4 then
-				return v
+		for i1, value in List do
+			if value == ToolCallId then
+				return i1
 			end
 		end
 		return 0

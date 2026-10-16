@@ -1,29 +1,29 @@
-﻿local parent = script:FindFirstAncestor("AppChat").Parent
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local userProfilesModule = require(parent.UserProfiles)
-local useLocalUserId = require(parent.RobloxAppHooks).useLocalUserId
-local useFriendsListOrderedByPresence = require(parent.FriendsCommon).Hooks.useFriendsListOrderedByPresence
+﻿local Parent = script:FindFirstAncestor("AppChat").Parent
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local UserProfilesModule = require(Parent.UserProfiles)
+local UseLocalUserIdFunction = require(Parent.RobloxAppHooks).useLocalUserId
+local UseFriendsListOrderedByPresenceFunction = require(Parent.FriendsCommon).Hooks.useFriendsListOrderedByPresence
 
-function useFetchPaginatedFriendIds()
-	-- upvalues: useLocalUserId (ref), reactModule (ref), useFriendsListOrderedByPresence (ref), cryoModule (ref), userProfilesModule (ref)
-	local var1 = reactModule.useRef({})
-	local var2 = useFriendsListOrderedByPresence({ pageSize = 50, userId = useLocalUserId() })
-	local var3 = cryoModule.List.map(cryoModule.List.join(var2.onlineFriends, var2.offlineFriends), function(p1)
+function useFetchPaginatedFriendIds() --[[ Line: 14 ]]
+	-- upvalues: UseLocalUserIdFunction (copy), ReactModule (copy), UseFriendsListOrderedByPresenceFunction (copy), CryoModule (copy), UserProfilesModule (copy)
+	local UseRefResult = ReactModule.useRef({})
+	local UseFriendsListOrderedByPresenceResult = UseFriendsListOrderedByPresenceFunction({ pageSize = 50, userId = UseLocalUserIdFunction() })
+	local MapResult = CryoModule.List.map(CryoModule.List.join(UseFriendsListOrderedByPresenceResult.onlineFriends, UseFriendsListOrderedByPresenceResult.offlineFriends), function(p1) --[[ Line: 23 ]]
 		return p1.id
 	end)
-	local var4 = cryoModule.List.toSet(var1.current)
-	local var5 = cryoModule.List.filter(var3, function(p1)
-		-- upvalues: var4 (ref)
-		return not var4[p1]
+	local Set = CryoModule.List.toSet(UseRefResult.current)
+	local FilterResult = CryoModule.List.filter(MapResult, function(p1): boolean --[[ Line: 27 ]]
+		-- upvalues: Set (copy)
+		return not Set[p1]
 	end)
 	
-	if #var5 > 0 then
-		userProfilesModule.Stores.UserProfileStore.get().fetchNamesByUserIds(var5)
+	if #FilterResult > 0 then
+		UserProfilesModule.Stores.UserProfileStore.get().fetchNamesByUserIds(FilterResult)
 	end
-	var1.current = var3
+	UseRefResult.current = MapResult
 	
-	return var1.current, var2.fetchMoreFriends, var2.isEndOfList, var2
+	return UseRefResult.current, UseFriendsListOrderedByPresenceResult.fetchMoreFriends, UseFriendsListOrderedByPresenceResult.isEndOfList, UseFriendsListOrderedByPresenceResult
 end
 
 return useFetchPaginatedFriendIds

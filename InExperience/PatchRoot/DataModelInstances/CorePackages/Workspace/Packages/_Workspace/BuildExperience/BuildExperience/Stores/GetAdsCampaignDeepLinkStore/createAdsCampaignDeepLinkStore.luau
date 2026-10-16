@@ -1,249 +1,295 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local signalsModule = require(parent.Signals)
-local createSessionScopedSignal = require(parent.SignalsUtils).createSessionScopedSignal
-local _ = require(parent.DataHydration.AdCampaignEligibility)
-local canCreateCampaign = require(buildExperience.Components.Ads.adCampaignEligibilityUtils).canCreateCampaign
-local _ = require(buildExperience.Telemetry.sendBuildExperienceEvent)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local SignalsModule = require(Parent.Signals)
+local CreateSessionScopedSignalFunction = require(Parent.SignalsUtils).createSessionScopedSignal
+local _ = require(Parent.DataHydration.AdCampaignEligibility)
+local CanCreateCampaignFunction = require(BuildExperience.Components.Ads.adCampaignEligibilityUtils).canCreateCampaign
+local _ = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
+local FFlagBuildAdsNotificationRouting = require(Parent.SharedFlags).FFlagBuildAdsNotificationRouting
 
-return function()
-	-- upvalues: createSessionScopedSignal (ref), signalsModule (ref), canCreateCampaign (ref)
-	local var1, var2 = createSessionScopedSignal(nil)
-	local var3, var4 = createSessionScopedSignal("idle")
-	local var5, var6 = createSessionScopedSignal(function()
+return function() --[[ Line: 45 | Named "createAdsCampaignDeepLinkStore" ]]
+	-- upvalues: CreateSessionScopedSignalFunction (copy), SignalsModule (copy), FFlagBuildAdsNotificationRouting (copy), CanCreateCampaignFunction (copy)
+	local t = {}
+	local SessionScopedSignal, SessionScopedSignal2 = CreateSessionScopedSignalFunction(nil)
+	local Idle, Idle2 = CreateSessionScopedSignalFunction("idle")
+	local SessionScopedSignal1, SessionScopedSignal2_1 = CreateSessionScopedSignalFunction(function() --[[ Line: 51 ]]
 		return {}
 	end)
-	local var7, var8 = createSessionScopedSignal(nil)
+	local SessionScopedSignal3, SessionScopedSignal2_2 = CreateSessionScopedSignalFunction(nil)
 	
 	return {
-		getRequest = var1,
-		getStatus = var3,
-		begin = function(p1, p2)
-			-- upvalues: var5 (ref), var6 (ref), var4 (ref), var2 (ref)
-			local var9 = var5(false)
-			
-			if var9[p1] then
-				return false
-			end
-			local cloned = table.clone(var9)
-			cloned[p1] = true
-			var6(cloned)
-			var4(if p2 ~= nil then "idle" else "pending")
-			var2(if p2 ~= nil then nil else { id = p1, universeId = p2, expiresAt = os.clock() + 10 })
-			
-			return true
-		end,
-		claim = function(p1)
-			-- upvalues: var1 (ref), var7 (ref), var8 (ref)
-			local var9 = var1(false)
-			
-			if var9 == nil or var9.id ~= p1 or var7(false) == p1 then
-				return false
-			end
-			var8(p1)
-			
-			return true
-		end,
-		finish = function(p1)
-			-- upvalues: var1 (ref), var3 (ref), var4 (ref), var2 (ref)
-			local var9 = var1(false)
-			
-			if var9 ~= nil and var9.id == p1 then
-				local var10 = var3(false)
+		getRequest = SessionScopedSignal,
+		getStatus = Idle,
+		hasVisibleChat = function(UniverseId): boolean --[[ Line: 298 ]]
+			-- upvalues: t (copy)
+			for i in t do
+				local v1 = i(false)
 				
-				if var10 == "pending" or var10 == "refreshing" then
-					var4("cancelled")
+				if v1 ~= nil and v1.isPageVisible and v1.universeId == UniverseId then
+					return true
 				end
-				var2(nil)
+			end
+			return false
+		end,
+		begin = function(Id, UniverseId): boolean --[[ Line: 307 ]]
+			-- upvalues: SessionScopedSignal1 (copy), SessionScopedSignal2_1 (copy), Idle2 (copy), SessionScopedSignal2 (copy)
+			local SessionScopedSignalResult = SessionScopedSignal1(false)
+			
+			if SessionScopedSignalResult[Id] then
+				return false
+			else
+				local Copy = table.clone(SessionScopedSignalResult)
+				Copy[Id] = true
+				SessionScopedSignal2_1(Copy)
+				Idle2(if UniverseId == nil then "idle" else "pending")
+				SessionScopedSignal2(if UniverseId == nil then nil else {
+					id = Id,
+					universeId = UniverseId,
+					expiresAt = os.clock() + 10
+				})
+				
+				return true
 			end
 		end,
-		createChat = function()
-			-- upvalues: createSessionScopedSignal (copy), signalsModule (copy), var1 (ref), var4 (ref), var3 (ref), var2 (ref), var7 (ref), var8 (ref), canCreateCampaign (copy)
-			local var9, var10 = createSessionScopedSignal(nil)
-			local var11, var12 = signalsModule.createSignal(0)
-			local var13, var14 = createSessionScopedSignal(nil)
-			local var15, var16 = createSessionScopedSignal(nil)
+		claim = function(Id): boolean --[[ Line: 57 ]]
+			-- upvalues: SessionScopedSignal (copy), SessionScopedSignal3 (copy), SessionScopedSignal2_2 (copy)
+			local SessionScopedSignalResult = SessionScopedSignal(false)
+			
+			if SessionScopedSignalResult == nil or SessionScopedSignalResult.id ~= Id or SessionScopedSignal3(false) == Id then
+				return false
+			else
+				SessionScopedSignal2_2(Id)
+				
+				return true
+			end
+		end,
+		finish = function(Id) --[[ Line: 66 ]]
+			-- upvalues: SessionScopedSignal (copy), Idle (copy), Idle2 (copy), SessionScopedSignal2 (copy)
+			local SessionScopedSignalResult = SessionScopedSignal(false)
+			
+			if SessionScopedSignalResult ~= nil and SessionScopedSignalResult.id == Id then
+				local IdleResult = Idle(false)
+				
+				if IdleResult == "pending" or IdleResult == "refreshing" then
+					Idle2("cancelled")
+				end
+				SessionScopedSignal2(nil)
+			end
+		end,
+		createChat = function() --[[ Line: 77 ]]
+			-- upvalues: CreateSessionScopedSignalFunction (upval), SignalsModule (upval), FFlagBuildAdsNotificationRouting (upval), t (copy), SessionScopedSignal (copy), Idle2 (copy), Idle (copy), SessionScopedSignal2 (copy), SessionScopedSignal3 (copy), SessionScopedSignal2_2 (copy), CanCreateCampaignFunction (upval)
+			local SessionScopedSignal1, SessionScopedSignal2_1 = CreateSessionScopedSignalFunction(nil)
+			local Signal, Signal2 = SignalsModule.createSignal(0)
+			local SessionScopedSignal4, SessionScopedSignal2_3 = CreateSessionScopedSignalFunction(nil)
+			local SessionScopedSignal5, SessionScopedSignal2_4 = CreateSessionScopedSignalFunction(nil)
 			
 			return {
-				getScopeRevision = var11,
-				updateScope = function(p1, p2, p3)
-					-- upvalues: var9 (ref), var13 (ref), var15 (ref), var16 (ref), var14 (ref), var12 (ref), var10 (ref)
-					local var17 = var9(false)
-					local t = { universeId = p1, sessionId = p2, isPageVisible = p3 }
+				getScopeRevision = Signal,
+				updateScope = function(UniverseId, SessionId, IsPageVisible, CanPresent) --[[ Line: 86 ]]
+					-- upvalues: SessionScopedSignal1 (copy), SessionScopedSignal4 (copy), SessionScopedSignal5 (copy), SessionScopedSignal2_4 (copy), SessionScopedSignal2_3 (copy), Signal2 (copy), SessionScopedSignal2_1 (copy)
+					local SessionScopedSignalResult = SessionScopedSignal1(false)
+					local config = {
+						universeId = UniverseId,
+						sessionId = SessionId,
+						isPageVisible = IsPageVisible,
+						canPresent = CanPresent
+					}
 					
-					if var17 ~= nil then
-						local var18 = if var17.universeId == p1 then var17.sessionId ~= p2 else true
+					if SessionScopedSignalResult ~= nil then
+						local IsNotUniverseIdMatch: boolean = SessionScopedSignalResult.universeId ~= UniverseId or SessionScopedSignalResult.sessionId ~= SessionId
 						
-						if not var18 and var17.isPageVisible == p3 then return end
-						if var18 then
-							local var19 = false
-							
-							if var17.universeId == p1 then
-								if var17.sessionId ~= nil then
-									var19 = false
-									
-									if var17.sessionId == "" then
-										var19 = p2 ~= nil and (p2 ~= "" and var13(false) ~= nil)
-									end
-								end
-							end
-							if var19 then
-								local var20 = var15(false)
+						if not IsNotUniverseIdMatch and SessionScopedSignalResult.isPageVisible == IsPageVisible and SessionScopedSignalResult.canPresent == CanPresent then return end
+						if IsNotUniverseIdMatch then
+							if SessionScopedSignalResult.universeId == UniverseId and (if SessionScopedSignalResult.sessionId == nil then SessionId ~= nil and (SessionId ~= "" and SessionScopedSignal4(false) ~= nil) else SessionScopedSignalResult.sessionId == "" and (SessionId ~= nil and (SessionId ~= "" and SessionScopedSignal4(false) ~= nil))) then
+								local SessionScopedSignalResult1 = SessionScopedSignal5(false)
 								
-								if var20 ~= nil and var20.universeId == p1 and var20.sessionId == var17.sessionId then
-									var16(t)
+								if SessionScopedSignalResult1 ~= nil and SessionScopedSignalResult1.universeId == UniverseId and SessionScopedSignalResult1.sessionId == SessionScopedSignalResult.sessionId then
+									SessionScopedSignal2_4(config)
 								end
 							else
-								var14(nil)
-								var12(function(p4)
-									return p4 + 1
+								SessionScopedSignal2_3(nil)
+								Signal2(function(p1: number): number --[[ Line: 126 ]]
+									return p1 + 1
 								end)
 							end
 						end
 					end
-					var10(t)
+					SessionScopedSignal2_1(config)
 				end,
-				connect = function(p1, p2, p3)
-					-- upvalues: var1 (copy), var4 (copy), var3 (copy), var2 (copy), signalsModule (copy), var9 (ref), var7 (copy), var8 (copy), canCreateCampaign (copy), var14 (ref)
-					local var17 = nil
-					local var18 = nil
-					local var19 = nil
-					local var20 = false
-					local var21 = nil
+				connect = function(p1, Callback1, Callback) --[[ Line: 135 ]]
+					-- upvalues: FFlagBuildAdsNotificationRouting (upval), t (upval), SessionScopedSignal1 (copy), SessionScopedSignal (upval), Idle2 (upval), Idle (upval), SessionScopedSignal2 (upval), SignalsModule (upval), SessionScopedSignal3 (upval), SessionScopedSignal2_2 (upval), CanCreateCampaignFunction (upval), SessionScopedSignal2_3 (copy)
+					if FFlagBuildAdsNotificationRouting then
+						t[SessionScopedSignal1] = true
+					end
+					local v2 = nil
+					local v3 = nil
+					local v4 = nil
+					local IsNotReady = false
+					local DelayedThread = nil
+					local DeferredThread = nil
 					
-					local function complete(p4)
-						-- upvalues: var17 (write), var21 (write), var1 (copy), var4 (copy), var3 (copy), var2 (copy), p2 (ref)
-						if var17 == nil then
+					local function complete(Outcome: string): boolean --[[ Line: 150 ]]
+						-- upvalues: v2 (ref), DeferredThread (ref), DelayedThread (ref), SessionScopedSignal (upval), Idle2 (upval), Idle (upval), SessionScopedSignal2 (upval), Callback1 (copy)
+						local v5 = v2
+						
+						if v5 == nil then
 							return false
 						end
-						var17 = nil
+						v2 = nil
 						
-						if var21 ~= nil then
-							task.cancel(var21)
-							var21 = nil
+						if DeferredThread ~= nil then
+							task.cancel(DeferredThread)
+							DeferredThread = nil
 						end
-						local var22 = var1(false)
+						if DelayedThread ~= nil then
+							task.cancel(DelayedThread)
+							DelayedThread = nil
+						end
+						local SessionScopedSignalResult = SessionScopedSignal(false)
 						
-						if var22 == nil or var22.id ~= var17.id then
-							p4 = "cancelled"
-						elseif p4 == "eligible" and var17.expiresAt <= os.clock() then
-							p4 = "timeout"
+						if SessionScopedSignalResult == nil or SessionScopedSignalResult.id ~= v5.id then
+							Outcome = "cancelled"
+						elseif Outcome == "eligible" and v5.expiresAt <= os.clock() then
+							Outcome = "timeout"
 						end
-						if var22 ~= nil and var22.id == var17.id then
-							var4(p4)
-							local var23 = var1(false)
+						if SessionScopedSignalResult ~= nil and SessionScopedSignalResult.id == v5.id then
+							Idle2(Outcome)
+							local Id = v5.id
+							local SessionScopedSignalResult1 = SessionScopedSignal(false)
 							
-							if var23 ~= nil and var23.id == var17.id then
-								local var24 = var3(false)
+							if SessionScopedSignalResult1 ~= nil and SessionScopedSignalResult1.id == Id then
+								local IdleResult = Idle(false)
 								
-								if var24 == "pending" or var24 == "refreshing" then
-									var4("cancelled")
+								if IdleResult == "pending" or IdleResult == "refreshing" then
+									Idle2("cancelled")
 								end
-								var2(nil)
+								SessionScopedSignal2(nil)
 							end
 						end
-						p2("AD_CAMPAIGN_DEEP_LINK_ELIGIBILITY", { universeId = var17.universeId }, { requestId = var17.id, outcome = p4 })
+						Callback1("AD_CAMPAIGN_DEEP_LINK_ELIGIBILITY", { universeId = v5.universeId }, { requestId = v5.id, outcome = Outcome })
 						
-						return p4 == "eligible"
+						return Outcome == "eligible"
 					end
 					
-					local var22 = signalsModule.createEffect(function(p4)
-						-- upvalues: var1 (copy), var9 (copy), var17 (write), complete (ref), p1 (ref), var7 (copy), var8 (copy), var18 (write), var19 (write), var20 (write), var4 (copy), var21 (write), canCreateCampaign (copy), p3 (ref), var14 (copy), p2 (ref)
-						local var23 = var1(p4)
-						local var24 = var9(p4)
-						local var25 = var24 ~= nil and (var24.isPageVisible and (var23 ~= nil and var24.universeId == var23.universeId))
+					local Effect = SignalsModule.createEffect(function(p2) --[[ Line: 181 ]]
+						-- upvalues: SessionScopedSignal (upval), SessionScopedSignal1 (upval), v2 (ref), complete (copy), p1 (copy), SessionScopedSignal3 (upval), SessionScopedSignal2_2 (upval), v3 (ref), v4 (ref), IsNotReady (ref), Idle2 (upval), DelayedThread (ref), FFlagBuildAdsNotificationRouting (upval), DeferredThread (ref), CanCreateCampaignFunction (upval), Callback (copy), SessionScopedSignal2_3 (upval), Callback1 (copy)
+						local SessionScopedSignalResult = SessionScopedSignal(p2)
+						local SessionScopedSignalResult1 = SessionScopedSignal1(p2)
+						local IsUniverseIdMatch: boolean = SessionScopedSignalResult1 ~= nil and (SessionScopedSignalResult1.isPageVisible and (SessionScopedSignalResult ~= nil and SessionScopedSignalResult1.universeId == SessionScopedSignalResult.universeId))
 						
-						if var17 ~= nil and (not var25 or var23 == nil or var23.id ~= var17.id) then
+						if v2 ~= nil and (not IsUniverseIdMatch or SessionScopedSignalResult == nil or SessionScopedSignalResult.id ~= v2.id) then
 							complete("cancelled")
 						end
-						if not var25 or var23 == nil then return end
-						local eligibility = p1.getEligibility(var23.universeId)
-						local var26 = eligibility.data(p4)
-						local var27 = eligibility.status(p4)
+						if not IsUniverseIdMatch or SessionScopedSignalResult == nil then return end
+						local Eligibility = p1.getEligibility(SessionScopedSignalResult.universeId)
+						local DataResult = Eligibility.data(p2)
+						local StatusResult = Eligibility.status(p2)
 						
-						if var17 == nil then
-							local var28
-							local id = var23.id
-							local var29 = var1(false)
+						if v2 == nil then
+							local Id = SessionScopedSignalResult.id
+							local SessionScopedSignalResult2 = SessionScopedSignal(false)
+							local Flag = nil
 							
-							if var29 == nil or var29.id ~= id or var7(false) == id then
-								var28 = false
+							if SessionScopedSignalResult2 == nil or SessionScopedSignalResult2.id ~= Id or SessionScopedSignal3(false) == Id then
+								Flag = false
 							else
-								var8(id)
-								var28 = true
+								SessionScopedSignal2_2(Id)
+								Flag = true
 							end
-							if not var28 then return end
-							var17 = var23
-							var18 = var26
-							var19 = var27
-							var20 = var27 == "NotReady"
-							local var30 = var23.expiresAt - os.clock()
+							if not Flag then return end
+							v2 = SessionScopedSignalResult
+							v3 = DataResult
+							v4 = StatusResult
+							IsNotReady = StatusResult == "NotReady"
+							local ExpiresAtDelta = SessionScopedSignalResult.expiresAt - os.clock()
 							
-							if var30 <= 0 then
+							if ExpiresAtDelta <= 0 then
 								complete("timeout")
 								
 								return
 							end
-							var4("refreshing")
-							var21 = task.delay(var30, function()
-								-- upvalues: var21 (copy), complete (copy)
-								var21 = nil
+							Idle2("refreshing")
+							DelayedThread = task.delay(ExpiresAtDelta, function() --[[ Line: 212 ]]
+								-- upvalues: DelayedThread (upval), complete (upval)
+								DelayedThread = nil
 								complete("timeout")
 							end)
-							var20 = var20 or p1.fetchEligibility(var23.universeId).status(false) == "NotReady"
 							
-							return
-						elseif var27 == "NotReady" then
-							var20 = true
-							
-							return
-						elseif var27 == "Ready" then
-							if var19 == "Ready" and var26 == var18 then return end
-							if complete(if canCreateCampaign(var26) then "eligible" else "ineligible") and p3(var26) then
-								var14(var23.id)
-								p2("AD_CAMPAIGN_DEEP_LINK_PRESENTED", { universeId = var23.universeId }, { requestId = var23.id })
+							if FFlagBuildAdsNotificationRouting then
+								DeferredThread = task.defer(function() --[[ Line: 218 ]]
+									-- upvalues: DeferredThread (upval), v2 (upval), SessionScopedSignalResult (copy), p1 (upval), IsNotReady (upval)
+									DeferredThread = nil
+									
+									if v2 ~= nil and v2.id == SessionScopedSignalResult.id then
+										local Eligibility = p1.fetchEligibility(SessionScopedSignalResult.universeId)
+										IsNotReady = IsNotReady or Eligibility.status(false) == "NotReady"
+										
+										return
+									end
+								end)
+								
+								return
+							else
+								local Eligibility1 = p1.fetchEligibility(SessionScopedSignalResult.universeId)
+								IsNotReady = IsNotReady or Eligibility1.status(false) == "NotReady"
 								
 								return
 							end
-						elseif var27 == "Failed" and (var19 ~= "Failed" or var20) then
-							complete("failed")
+						elseif StatusResult == "NotReady" then
+							IsNotReady = true
+							
+							return
+						else
+							if StatusResult == "Ready" then
+								if v4 == "Ready" and DataResult == v3 then return end
+								if FFlagBuildAdsNotificationRouting and SessionScopedSignalResult1 ~= nil and SessionScopedSignalResult1.canPresent == false and CanCreateCampaignFunction(DataResult) then return end
+								if complete(if CanCreateCampaignFunction(DataResult) then "eligible" else "ineligible") and Callback(DataResult) then
+									SessionScopedSignal2_3(SessionScopedSignalResult.id)
+									Callback1("AD_CAMPAIGN_DEEP_LINK_PRESENTED", { universeId = SessionScopedSignalResult.universeId }, { requestId = SessionScopedSignalResult.id })
+									
+									return
+								end
+							elseif StatusResult == "Failed" and (v4 ~= "Failed" or IsNotReady) then
+								complete("failed")
+							end
 						end
 					end)
 					
-					return function()
-						-- upvalues: var22 (ref), complete (ref)
-						var22()
+					return function() --[[ Line: 263 ]]
+						-- upvalues: t (upval), SessionScopedSignal1 (upval), Effect (copy), complete (copy)
+						t[SessionScopedSignal1] = nil
+						Effect()
 						complete("cancelled")
 					end
 				end,
-				clearPresentedRequest = function()
-					-- upvalues: var14 (ref)
-					var14(nil)
+				clearPresentedRequest = function() --[[ Line: 274 ]]
+					-- upvalues: SessionScopedSignal2_3 (copy)
+					SessionScopedSignal2_3(nil)
 				end,
-				getPresentedRequestId = function()
-					-- upvalues: var13 (ref)
-					return var13(false)
+				getPresentedRequestId = function() --[[ Line: 277 ]]
+					-- upvalues: SessionScopedSignal4 (copy)
+					return SessionScopedSignal4(false)
 				end,
-				startCreate = function()
-					-- upvalues: var16 (ref), var9 (ref)
-					var16(var9(false))
+				startCreate = function() --[[ Line: 280 ]]
+					-- upvalues: SessionScopedSignal2_4 (copy), SessionScopedSignal1 (copy)
+					SessionScopedSignal2_4(SessionScopedSignal1(false))
 				end,
-				finishCreate = function()
-					-- upvalues: var15 (ref), var9 (ref), var16 (ref)
-					local var17 = var15(false)
-					local var18 = var9(false)
-					var16(nil)
+				finishCreate = function(): boolean --[[ Line: 283 ]]
+					-- upvalues: SessionScopedSignal5 (copy), SessionScopedSignal1 (copy), SessionScopedSignal2_4 (copy)
+					local SessionScopedSignalResult = SessionScopedSignal5(false)
+					local SessionScopedSignalResult1 = SessionScopedSignal1(false)
+					SessionScopedSignal2_4(nil)
 					
-					return var17 ~= nil and (var18 ~= nil and (var17.universeId == var18.universeId and var17.sessionId == var18.sessionId))
+					return SessionScopedSignalResult ~= nil and (SessionScopedSignalResult1 ~= nil and (SessionScopedSignalResult.universeId == SessionScopedSignalResult1.universeId and SessionScopedSignalResult.sessionId == SessionScopedSignalResult1.sessionId))
 				end
 			}
 		end,
-		reset = function()
-			-- upvalues: var2 (ref), var4 (ref), var6 (ref), var8 (ref)
-			var2(nil)
-			var4("idle")
-			var6({})
-			var8(nil)
+		reset = function() --[[ Line: 325 ]]
+			-- upvalues: SessionScopedSignal2 (copy), Idle2 (copy), SessionScopedSignal2_1 (copy), SessionScopedSignal2_2 (copy)
+			SessionScopedSignal2(nil)
+			Idle2("idle")
+			SessionScopedSignal2_1({})
+			SessionScopedSignal2_2(nil)
 		end
 	}
 end

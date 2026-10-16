@@ -1,66 +1,65 @@
-﻿local parent = script:FindFirstAncestor("Moments").Parent
-local playersService = game:GetService("Players")
-local _ = require(parent.DataHydration.MomentsStoreTypes)
-local momentsGetMomentsUserStoreModule = require(parent.DataHydration.MomentsGetMomentsUserStore)
+﻿local Parent = script:FindFirstAncestor("Moments").Parent
+local Players = game:GetService("Players")
+local _ = require(Parent.DataHydration.MomentsStoreTypes)
+local MomentsGetMomentsUserStoreModule = require(Parent.DataHydration.MomentsGetMomentsUserStore)
 
-local function _(value, p1)
-	if value == nil then
+local function _(List, AssetId) --[[ Line: 33 | Named "findByAssetId" ]]
+	if List == nil then
 		return nil
 	end
-	for i, v in value do
-		if v.assetId == p1 then
-			return v
+	for _, value in List do
+		if value.assetId == AssetId then
+			return value
 		end
 	end
 	return nil
 end
 
-return function(p2, p3)
-	-- upvalues: momentsGetMomentsUserStoreModule (ref), playersService (ref)
-	local localUserId
-	p3 = p3 or {}
-	local var1 = if p3.userStore ~= nil then momentsGetMomentsUserStoreModule(false) else p3.userStore
-	local wait = p3.wait or function(p4)
-		task.wait(p4)
+return function(AssetId, p1) --[[ Line: 45 | Named "refreshOwnMomentsAfterPublish" ]]
+	-- upvalues: MomentsGetMomentsUserStoreModule (copy), Players (copy)
+	local P3 = p1 or {}
+	local MomentsGetMomentsUserStoreModuleResult = if P3.userStore == nil then MomentsGetMomentsUserStoreModule(false) else P3.userStore
+	local Wait: (any) -> () = P3.wait or function(Duration) --[[ Line: 50 ]]
+		task.wait(Duration)
 	end
-	local _ = nil
+	local LocalUserId = nil
 	
-	if p3.getLocalUserId == nil then
-		local localPlayer = playersService.LocalPlayer
-		localUserId = if localPlayer ~= nil then nil else localPlayer.UserId
+	if P3.getLocalUserId == nil then
+		local LocalPlayer = Players.LocalPlayer
+		LocalUserId = if LocalPlayer == nil then nil else LocalPlayer.UserId
 	else
-		localUserId = p3.getLocalUserId()
+		LocalUserId = P3.getLocalUserId()
 	end
-	if localUserId == nil then
+	if LocalUserId == nil then
 		return nil
 	end
+	local v1 = nil
 	for i = 1, 6 do
 		if i > 1 then
-			wait(2)
+			Wait(2)
 		end
-		var1.invalidateUser(localUserId)
-		local var2, var3 = var1.getUserMoments(localUserId, nil):await()
+		MomentsGetMomentsUserStoreModuleResult.invalidateUser(LocalUserId)
+		local v2, v3 = MomentsGetMomentsUserStoreModuleResult.getUserMoments(LocalUserId, nil):await()
 		
-		if not var2 then
-			continue
-		end
-		local var4
-		local moments = var3.moments
-		
-		if moments == nil then
-			var4 = nil
-		else
-			for i, v in moments do
-				if v.assetId == p2 then
-					var4 = v
+		if v2 then
+			local Moments = v3.moments
+			
+			if Moments == nil then
+				v1 = nil
+			else
+				v1 = nil
+				
+				for _, moment in Moments do
+					if moment.assetId == AssetId then
+						v1 = moment
+						break
+					end
 				end
 			end
-			var4 = nil
+			if v1 ~= nil then
+				return v1
+			end
 		end
-		if var4 == nil then
-			continue
-		end
-		return var4
 	end
 	return nil
 end

@@ -1,46 +1,47 @@
-﻿local trustedContacts = script:FindFirstAncestor("TrustedContacts")
-local parent = trustedContacts.Parent
-local reactModule = require(parent.React)
-local roactNavigationModule = require(parent.RoactNavigation)
-local trustedFriendsModalNavigatorModule = require(script.Parent.TrustedFriendsModalNavigator)
-local useExternalNavigationSetUpModule = require(script.Parent.useExternalNavigationSetUp)
-local _ = require(trustedContacts.Common.Types)
+﻿local TrustedContacts = script:FindFirstAncestor("TrustedContacts")
+local Parent = TrustedContacts.Parent
+local ReactModule = require(Parent.React)
+local RoactNavigationModule = require(Parent.RoactNavigation)
+local TrustedFriendsModalNavigatorModule = require(script.Parent.TrustedFriendsModalNavigator)
+local UseExternalNavigationSetUpModule = require(script.Parent.useExternalNavigationSetUp)
+local _ = require(TrustedContacts.Common.Types)
 
-local function TrustedFriendsModalEntry(p1)
-	-- upvalues: reactModule (ref), roactNavigationModule (ref), trustedFriendsModalNavigatorModule (ref), useExternalNavigationSetUpModule (ref)
-	local navigation = p1.navigation
-	local var1 = if navigation then navigation.getParam("props") else p1
+local function TrustedFriendsModalEntry(p1) --[[ Line: 19 ]]
+	-- upvalues: ReactModule (copy), RoactNavigationModule (copy), TrustedFriendsModalNavigatorModule (copy), UseExternalNavigationSetUpModule (copy)
+	local Navigation = p1.navigation
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 22 ]]
+		-- upvalues: RoactNavigationModule (upval), TrustedFriendsModalNavigatorModule (upval)
+		return RoactNavigationModule.createAppContainer(TrustedFriendsModalNavigatorModule)
+	end, {})
+	local PropsParam = if Navigation then Navigation.getParam("props") else p1
 	
-	return reactModule.createElement(if navigation then trustedFriendsModalNavigatorModule else reactModule.useMemo(function()
-		-- upvalues: roactNavigationModule (copy), trustedFriendsModalNavigatorModule (copy)
-		return roactNavigationModule.createAppContainer(trustedFriendsModalNavigatorModule)
-	end, {}), {
-		navigation = navigation,
+	return ReactModule.createElement(if Navigation then TrustedFriendsModalNavigatorModule else UseMemoResult, {
+		navigation = Navigation,
 		screenProps = {
 			modalProps = {
 				onClosed = nil,
-				userId = var1.userId,
-				source = var1.source,
-				isVerticallyConstrained = var1.isVerticallyConstrained,
-				onRequestAccepted = var1.onRequestAccepted,
-				onRequestSent = var1.onRequestSent,
-				onAcknowledged = var1.onAcknowledged,
-				modalVariantOverride = var1.modalVariantOverride,
-				tokens = var1.tokens,
-				sentFromQrCode = var1.sentFromQrCode
+				userId = PropsParam.userId,
+				source = PropsParam.source,
+				isVerticallyConstrained = PropsParam.isVerticallyConstrained,
+				onRequestAccepted = PropsParam.onRequestAccepted,
+				onRequestSent = PropsParam.onRequestSent,
+				onAcknowledged = PropsParam.onAcknowledged,
+				modalVariantOverride = PropsParam.modalVariantOverride,
+				tokens = PropsParam.tokens,
+				sentFromQrCode = PropsParam.sentFromQrCode
 			},
-			externalNavigation = useExternalNavigationSetUpModule({ navigation = navigation, onClosed = var1.onClosed })
+			externalNavigation = UseExternalNavigationSetUpModule({ navigation = Navigation, onClosed = PropsParam.onClosed })
 		}
 	})
 end
 
-local classWrapper = reactModule.PureComponent:extend("classWrapper")
+local ClassWrapper = ReactModule.PureComponent:extend("classWrapper")
 
-function classWrapper.render(p1)
-	-- upvalues: reactModule (ref), TrustedFriendsModalEntry (ref)
-	return reactModule.createElement(TrustedFriendsModalEntry, p1.props)
+function ClassWrapper.render(p1) --[[ Line: 59 ]]
+	-- upvalues: ReactModule (copy), TrustedFriendsModalEntry (copy)
+	return ReactModule.createElement(TrustedFriendsModalEntry, p1.props)
 end
 
-classWrapper.router = trustedFriendsModalNavigatorModule.router
+ClassWrapper.router = TrustedFriendsModalNavigatorModule.router
 
-return classWrapper
+return ClassWrapper

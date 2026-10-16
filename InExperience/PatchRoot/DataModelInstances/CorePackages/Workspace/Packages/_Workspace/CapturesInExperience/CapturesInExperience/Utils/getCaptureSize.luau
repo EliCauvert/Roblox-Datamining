@@ -1,11 +1,11 @@
-﻿local captureService = game:GetService("CaptureService")
+﻿local CaptureService = game:GetService("CaptureService")
 
-return function(p1)
-	-- upvalues: captureService (ref)
-	local ok, status = pcall(function()
-		-- upvalues: captureService (copy), p1 (ref)
-		return captureService:GetCaptureSizeAsync(p1)
+return function(CaptureContent) --[[ Line: 3 | Named "getCaptureSize" ]]
+	-- upvalues: CaptureService (copy)
+	local Success, Result = pcall(function() --[[ Line: 4 ]]
+		-- upvalues: CaptureService (upval), CaptureContent (copy)
+		return CaptureService:GetCaptureSizeAsync(CaptureContent)
 	end)
 	
-	return if ok and status ~= Vector2.new(0, 0) then status else nil
+	return if Success and Result ~= Vector2.new(0, 0) then Result else nil
 end

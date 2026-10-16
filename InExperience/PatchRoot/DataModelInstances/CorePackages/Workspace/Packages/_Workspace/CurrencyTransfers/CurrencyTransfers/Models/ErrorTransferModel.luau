@@ -1,60 +1,62 @@
-﻿local currencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
-local tModule = require(currencyTransfers.Parent.t)
-local failureReasonModule = require(currencyTransfers.Enums.FailureReason)
-local getFFlagEnableLimitHit2SVUpsellModule = require(currencyTransfers.Flags.GetFFlagEnableLimitHit2SVUpsell)
-local t = {}
+﻿local CurrencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
+local TModule = require(CurrencyTransfers.Parent.t)
+local FailureReasonModule = require(CurrencyTransfers.Enums.FailureReason)
+local GetFFlagEnableLimitHit2SVUpsellModule = require(CurrencyTransfers.Flags.GetFFlagEnableLimitHit2SVUpsell)
+local ErrorTransferModelModule = {}
 
-function t.new(p1)
-	-- upvalues: t (ref)
-	assert(t.isValid(p1))
-	t.__index = t
-	setmetatable(p1, t)
+function ErrorTransferModelModule.new(p1) --[[ Line: 20 ]]
+	-- upvalues: ErrorTransferModelModule (copy)
+	assert(ErrorTransferModelModule.isValid(p1))
+	ErrorTransferModelModule.__index = ErrorTransferModelModule
+	setmetatable(p1, ErrorTransferModelModule)
 	
 	return p1
 end
 
-function t.mock(p1)
-	-- upvalues: t (ref)
-	p1 = p1 or {}
+function ErrorTransferModelModule.mock(p1) --[[ Line: 32 ]]
+	-- upvalues: ErrorTransferModelModule (copy)
+	local P1 = p1 or {}
 	
-	return t.new({
-		failureReason = p1.failureReason,
-		errorMessage = p1.errorMessage or "",
-		ampRecourseActions = p1.ampRecourseActions,
-		ampFeatureCheck = p1.ampFeatureCheck
-	})
+	return (ErrorTransferModelModule.new({
+		failureReason = P1.failureReason,
+		errorMessage = P1.errorMessage or "",
+		ampRecourseActions = P1.ampRecourseActions,
+		ampFeatureCheck = P1.ampFeatureCheck
+	}))
 end
 
-function t.format(p1)
-	-- upvalues: getFFlagEnableLimitHit2SVUpsellModule (ref), failureReasonModule (ref), t (ref)
-	local failureReason = p1.FailureReason or p1.failureReason
-	local errorMessage = p1.ErrorMessage or (p1.errorMessage or "")
-	local ampRecourseActions = p1.AmpRecourseActions or p1.ampRecourseActions
-	local ampFeatureCheck = p1.AmpFeatureCheck or p1.ampFeatureCheck
-	local isEligibleForElevatedLimitUpsell = nil
+function ErrorTransferModelModule.format(p1) --[[ Line: 45 ]]
+	-- upvalues: GetFFlagEnableLimitHit2SVUpsellModule (copy), FailureReasonModule (copy), ErrorTransferModelModule (copy)
+	local FailureReason = p1.FailureReason or p1.failureReason
+	local ErrorMessage = p1.ErrorMessage or (p1.errorMessage or "")
+	local AmpRecourseActions = p1.AmpRecourseActions or p1.ampRecourseActions
+	local AmpFeatureCheck = p1.AmpFeatureCheck or p1.ampFeatureCheck
+	local IsEligibleForElevatedLimitUpsell = nil
 	
-	if getFFlagEnableLimitHit2SVUpsellModule() then
-		if p1.IsEligibleForElevatedLimitUpsell ~= nil then
-			isEligibleForElevatedLimitUpsell = p1.IsEligibleForElevatedLimitUpsell
-		elseif p1.isEligibleForElevatedLimitUpsell ~= nil then
-			isEligibleForElevatedLimitUpsell = p1.isEligibleForElevatedLimitUpsell
+	if GetFFlagEnableLimitHit2SVUpsellModule() then
+		if p1.IsEligibleForElevatedLimitUpsell == nil then
+			if p1.isEligibleForElevatedLimitUpsell ~= nil then
+				IsEligibleForElevatedLimitUpsell = p1.isEligibleForElevatedLimitUpsell
+			end
+		else
+			IsEligibleForElevatedLimitUpsell = p1.IsEligibleForElevatedLimitUpsell
 		end
 	end
-	return t.new({
-		failureReason = failureReasonModule.fromValue(failureReason),
-		errorMessage = errorMessage,
-		ampRecourseActions = ampRecourseActions,
-		ampFeatureCheck = ampFeatureCheck,
-		isEligibleForElevatedLimitUpsell = isEligibleForElevatedLimitUpsell
-	})
+	return (ErrorTransferModelModule.new({
+		failureReason = FailureReasonModule.fromValue(FailureReason),
+		errorMessage = ErrorMessage,
+		ampRecourseActions = AmpRecourseActions,
+		ampFeatureCheck = AmpFeatureCheck,
+		isEligibleForElevatedLimitUpsell = IsEligibleForElevatedLimitUpsell
+	}))
 end
 
-t.isValid = tModule.strictInterface({
-	failureReason = tModule.optional(tModule.string),
-	errorMessage = tModule.string,
-	ampRecourseActions = tModule.optional(tModule.array(tModule.string)),
-	ampFeatureCheck = tModule.optional(tModule.string),
-	isEligibleForElevatedLimitUpsell = tModule.optional(tModule.boolean)
+ErrorTransferModelModule.isValid = TModule.strictInterface({
+	failureReason = TModule.optional(TModule.string),
+	errorMessage = TModule.string,
+	ampRecourseActions = TModule.optional(TModule.array(TModule.string)),
+	ampFeatureCheck = TModule.optional(TModule.string),
+	isEligibleForElevatedLimitUpsell = TModule.optional(TModule.boolean)
 })
 
-return t
+return ErrorTransferModelModule

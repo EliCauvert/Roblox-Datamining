@@ -1,71 +1,69 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local controlStateModule = require(foundation.Enums.ControlState)
-local inputSizeModule = require(foundation.Enums.InputSize)
-local linkVariantModule = require(foundation.Enums.LinkVariant)
-local stateLayerAffordanceModule = require(foundation.Enums.StateLayerAffordance)
-local textModule = require(foundation.Components.Text)
-local _ = require(foundation.Components.Types)
-local viewModule = require(foundation.Components.View)
-local escapeRichTextModule = require(foundation.Utility.escapeRichText)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local useLinkVariantsModule = require(script.Parent.useLinkVariants)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local t = {
-	[controlStateModule.Hover] = true,
-	[controlStateModule.Pressed] = true,
-	[controlStateModule.Selected] = true,
-	[controlStateModule.SelectedPressed] = true
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local ControlStateModule = require(Foundation.Enums.ControlState)
+local StateLayerAffordanceModule = require(Foundation.Enums.StateLayerAffordance)
+local TextModule = require(Foundation.Components.Text)
+local _ = require(Foundation.Components.Types)
+local ViewModule = require(Foundation.Components.View)
+local EscapeRichTextModule = require(Foundation.Utility.escapeRichText)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local UseLinkVariantsModule = require(script.Parent.useLinkVariants)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local config = {
+	[ControlStateModule.Hover] = true,
+	[ControlStateModule.Pressed] = true,
+	[ControlStateModule.Selected] = true,
+	[ControlStateModule.SelectedPressed] = true
 }
-local t_1 = {
+local config1 = {
 	hasUnderline = false,
 	testId = "--foundation-link",
-	variant = linkVariantModule.Standard,
-	size = inputSizeModule.Medium
+	variant = require(Foundation.Enums.LinkVariant).Standard,
+	size = require(Foundation.Enums.InputSize).Medium
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t_1 (ref), useTokensModule (ref), useLinkVariantsModule (ref), reactModule (ref), t (ref), viewModule (ref), withCommonPropsModule (ref), stateLayerAffordanceModule (ref), textModule (ref), escapeRichTextModule (ref)
-	local var1 = withDefaultsModule(p1, t_1)
-	local var2 = useTokensModule()
-	local var3 = useLinkVariantsModule(var2, var1.size, var1.variant)
-	local style = var3.content.style
-	local var4, var5 = reactModule.useState(false)
-	local hasUnderline = var1.hasUnderline or var4
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 52 | Named "Link" ]]
+	-- upvalues: WithDefaultsModule (copy), config1 (copy), UseTokensModule (copy), UseLinkVariantsModule (copy), ReactModule (copy), config (copy), ViewModule (copy), WithCommonPropsModule (copy), StateLayerAffordanceModule (copy), TextModule (copy), EscapeRichTextModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config1)
+	local UseTokensModuleResult = UseTokensModule()
+	local UseLinkVariantsModuleResult = UseLinkVariantsModule(UseTokensModuleResult, WithDefaultsModuleResult.size, WithDefaultsModuleResult.variant)
+	local Style = UseLinkVariantsModuleResult.content.style
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local HasUnderline = WithDefaultsModuleResult.hasUnderline or UseStateResult
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var1, {
-		tag = var3.container.tag,
-		cursor = reactModule.useMemo(function()
-			-- upvalues: var2 (ref)
+	return ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, {
+		tag = UseLinkVariantsModuleResult.container.tag,
+		cursor = ReactModule.useMemo(function() --[[ Line: 64 ]]
+			-- upvalues: UseTokensModuleResult (copy)
 			return {
-				radius = UDim.new(0, var2.Radius.XSmall),
-				offset = var2.Size.Size_50,
-				borderWidth = var2.Stroke.Standard
+				radius = UDim.new(0, UseTokensModuleResult.Radius.XSmall),
+				offset = UseTokensModuleResult.Size.Size_50,
+				borderWidth = UseTokensModuleResult.Stroke.Standard
 			}
-		end, { var2 }),
-		stateLayer = { affordance = stateLayerAffordanceModule.None },
-		onActivated = var1.onActivated,
-		onStateChanged = reactModule.useCallback(function(p3)
-			-- upvalues: var5 (ref), t (copy)
-			var5(t[p3] == true)
+		end, { UseTokensModuleResult }),
+		stateLayer = { affordance = StateLayerAffordanceModule.None },
+		onActivated = WithDefaultsModuleResult.onActivated,
+		onStateChanged = ReactModule.useCallback(function(p2) --[[ Line: 60 ]]
+			-- upvalues: UseStateResult2 (copy), config (upval)
+			UseStateResult2(config[p2] == true)
 		end, {}),
 		selection = {
-			Selectable = var1.Selectable,
-			NextSelectionUp = var1.NextSelectionUp,
-			NextSelectionDown = var1.NextSelectionDown,
-			NextSelectionLeft = var1.NextSelectionLeft,
-			NextSelectionRight = var1.NextSelectionRight
+			Selectable = WithDefaultsModuleResult.Selectable,
+			NextSelectionUp = WithDefaultsModuleResult.NextSelectionUp,
+			NextSelectionDown = WithDefaultsModuleResult.NextSelectionDown,
+			NextSelectionLeft = WithDefaultsModuleResult.NextSelectionLeft,
+			NextSelectionRight = WithDefaultsModuleResult.NextSelectionRight
 		},
-		ref = p2
+		ref = Ref
 	}), {
-		Text = reactModule.createElement(textModule, {
+		Text = ReactModule.createElement(TextModule, {
 			LayoutOrder = 1,
-			Text = if hasUnderline then `<u>{escapeRichTextModule(var1.text)}</u>` else var1.text,
-			RichText = hasUnderline,
-			tag = var3.text.tag,
-			textStyle = { Color3 = style.Color3, Transparency = style.Transparency },
-			testId = `{var1.testId}--text`
+			Text = if HasUnderline then `<u>{EscapeRichTextModule(WithDefaultsModuleResult.text)}</u>` else WithDefaultsModuleResult.text,
+			RichText = HasUnderline,
+			tag = UseLinkVariantsModuleResult.text.tag,
+			textStyle = { Color3 = Style.Color3, Transparency = Style.Transparency },
+			testId = `{WithDefaultsModuleResult.testId}--text`
 		})
 	})
 end))

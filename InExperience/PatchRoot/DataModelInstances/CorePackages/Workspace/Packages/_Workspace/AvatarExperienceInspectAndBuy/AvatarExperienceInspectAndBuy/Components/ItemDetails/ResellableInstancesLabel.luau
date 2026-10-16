@@ -1,38 +1,38 @@
-﻿local avatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
-local parent = avatarExperienceInspectAndBuy.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local useTokens = foundationModule.Hooks.useTokens
-local enums = foundationModule.Enums
-local iconSize = enums.IconSize
-local _ = require(avatarExperienceInspectAndBuy.Types)
+﻿local AvatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
+local Parent = AvatarExperienceInspectAndBuy.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local Enums = FoundationModule.Enums
+local IconSize = Enums.IconSize
+local _ = require(AvatarExperienceInspectAndBuy.Types)
 
-return function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), foundationModule (ref), enums (ref), iconSize (ref)
-	return reactModule.createElement(foundationModule.View, {
+return function(Frame) --[[ Line: 26 | Named "ResellableInstancesLabel" ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), FoundationModule (copy), Enums (copy), IconSize (copy)
+	return ReactModule.createElement(FoundationModule.View, {
 		tag = "auto-xy size-full-0",
-		LayoutOrder = p1.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		UIPadding = if p1.padding then reactModule.createElement("UIPadding", {
-			PaddingLeft = p1.padding.left,
-			PaddingRight = p1.padding.right,
-			PaddingTop = p1.padding.top,
-			PaddingBottom = p1.padding.bottom
+		UIPadding = if Frame.padding then ReactModule.createElement("UIPadding", {
+			PaddingLeft = Frame.padding.left,
+			PaddingRight = Frame.padding.right,
+			PaddingTop = Frame.padding.top,
+			PaddingBottom = Frame.padding.bottom
 		}) else nil,
-		Inner = reactModule.createElement(foundationModule.View, {
+		Inner = ReactModule.createElement(FoundationModule.View, {
 			tag = "auto-y padding-medium size-full-0 row align-x-left align-y-center gap-small radius-medium",
-			backgroundStyle = useTokens().Color.Surface.Surface_300
+			backgroundStyle = UseTokensFunction().Color.Surface.Surface_300
 		}, {
-			Icon = reactModule.createElement(foundationModule.Icon, {
+			Icon = ReactModule.createElement(FoundationModule.Icon, {
 				LayoutOrder = 1,
-				name = enums.IconName.ShoppingBasketCheck,
-				variant = enums.IconVariant.Filled,
-				size = iconSize.Medium
+				name = Enums.IconName.ShoppingBasketCheck,
+				variant = Enums.IconVariant.Filled,
+				size = IconSize.Medium
 			}),
-			Text = reactModule.createElement(foundationModule.Text, {
+			Text = ReactModule.createElement(FoundationModule.Text, {
 				LayoutOrder = 2,
 				tag = "auto-xy text-body-medium content-emphasis text-truncate-end",
-				Text = p1.ownedItemsLabel
+				Text = Frame.ownedItemsLabel
 			})
 		})
 	})

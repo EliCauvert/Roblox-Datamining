@@ -1,88 +1,86 @@
-﻿local serverDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
-local parent = serverDrivenUi.Parent
-local reactModule = require(parent.React)
-local tutilsModule = require(parent.tutils)
-local roactUtilsModule = require(parent.RoactUtils)
-local collectionViewsModule = require(parent.CollectionViews)
-local gameTileModule = require(parent.GameTile)
-local gameTileLayoutType = gameTileModule.GameTileTypes.GameTileLayoutType
-local topicContentsReducer = require(parent.TopicContentsRodux).TopicContentsReducer
-local discoveryTypesModule = require(parent.DiscoveryTypes)
-local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
-local getGameTileCollectionItemSize = gameTileModule.getGameTileCollectionItemSize
-local omniFeedTypes = discoveryTypesModule.OmniFeedTypes
-local omniFeedConstants = discoveryTypesModule.OmniFeedConstants
-local getSduiFeedStoreModule = require(serverDrivenUi.DataStore.getSduiFeedStore)
-local apportioningPreprocessingHelpersModule = require(serverDrivenUi.DataStore.ApportioningPreprocessingHelpers)
-local fFlagLuaAppUseEffectInSignalPreprocessing = require(parent.SharedFlags).FFlagLuaAppUseEffectInSignalPreprocessing
-local fFlagLuaAppAddRequestIdToRfySignalApportioning = require(parent.SharedFlags).FFlagLuaAppAddRequestIdToRfySignalApportioning
-local fFlagLuaAppCompositionAlways = require(parent.SharedFlags).FFlagLuaAppCompositionAlways
-local getMainCollectionLayoutStore = collectionViewsModule.getMainCollectionLayoutStore
+﻿local ServerDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
+local Parent = ServerDrivenUi.Parent
+local ReactModule = require(Parent.React)
+local TutilsModule = require(Parent.tutils)
+local GameTileModule = require(Parent.GameTile)
+local GameTileLayoutType = GameTileModule.GameTileTypes.GameTileLayoutType
+local TopicContentsReducer = require(Parent.TopicContentsRodux).TopicContentsReducer
+local DiscoveryTypesModule = require(Parent.DiscoveryTypes)
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local GetGameTileCollectionItemSizeFunction = GameTileModule.getGameTileCollectionItemSize
+local OmniFeedTypes = DiscoveryTypesModule.OmniFeedTypes
+local OmniFeedConstants = DiscoveryTypesModule.OmniFeedConstants
+local GetSduiFeedStoreModule = require(ServerDrivenUi.DataStore.getSduiFeedStore)
+local ApportioningPreprocessingHelpersModule = require(ServerDrivenUi.DataStore.ApportioningPreprocessingHelpers)
+local FFlagLuaAppUseEffectInSignalPreprocessing = require(Parent.SharedFlags).FFlagLuaAppUseEffectInSignalPreprocessing
+local FFlagLuaAppAddRequestIdToRfySignalApportioning = require(Parent.SharedFlags).FFlagLuaAppAddRequestIdToRfySignalApportioning
+local FFlagLuaAppCompositionAlways = require(Parent.SharedFlags).FFlagLuaAppCompositionAlways
+local GetMainCollectionLayoutStoreFunction = require(Parent.CollectionViews).getMainCollectionLayoutStore
 
-return function(p1, p2, p3)
-	-- upvalues: fFlagLuaAppCompositionAlways (ref), useSelector (ref), tutilsModule (ref), fFlagLuaAppAddRequestIdToRfySignalApportioning (ref), topicContentsReducer (ref), fFlagLuaAppUseEffectInSignalPreprocessing (ref), reactModule (ref), getSduiFeedStoreModule (ref), getMainCollectionLayoutStore (ref), omniFeedTypes (ref), gameTileLayoutType (ref), omniFeedConstants (ref), getGameTileCollectionItemSize (ref), apportioningPreprocessingHelpersModule (ref)
-	local fFlagLuaAppCompositionAlways_1 = fFlagLuaAppCompositionAlways or p3
-	local var1 = useSelector(function(p4)
-		-- upvalues: p1 (ref)
-		local var2 = p4.OmniRecommendations[p1]
+return function(p1, p2, p3) --[[ Line: 39 | Named "useApportioningPreprocessingFromOmniRecommendations" ]]
+	-- upvalues: FFlagLuaAppCompositionAlways (copy), UseSelectorFunction (copy), TutilsModule (copy), FFlagLuaAppAddRequestIdToRfySignalApportioning (copy), TopicContentsReducer (copy), FFlagLuaAppUseEffectInSignalPreprocessing (copy), ReactModule (copy), GetSduiFeedStoreModule (copy), GetMainCollectionLayoutStoreFunction (copy), OmniFeedTypes (copy), GameTileLayoutType (copy), OmniFeedConstants (copy), GetGameTileCollectionItemSizeFunction (copy), ApportioningPreprocessingHelpersModule (copy)
+	local FFlagLuaAppCompositionAlways1 = FFlagLuaAppCompositionAlways or p3
+	local UseSelectorResult = UseSelectorFunction(function(p4) --[[ Line: 46 ]]
+		-- upvalues: p1 (copy)
+		local OmniRecommendation = p4.OmniRecommendations[p1]
 		
-		return if var2 then var2.sorts else {}
-	end, tutilsModule.shallowEqual)
-	local var2 = if fFlagLuaAppAddRequestIdToRfySignalApportioning then useSelector(function(p4)
-		-- upvalues: p1 (ref)
-		local var3 = p4.OmniRecommendations[p1]
+		return if OmniRecommendation then OmniRecommendation.sorts else {}
+	end, TutilsModule.shallowEqual)
+	local UseSelectorResult1 = if FFlagLuaAppAddRequestIdToRfySignalApportioning then UseSelectorFunction(function(p4) --[[ Line: 56 ]]
+		-- upvalues: p1 (copy)
+		local OmniRecommendation = p4.OmniRecommendations[p1]
 		
-		return if var3 then var3.recommendationsId else nil
+		return if OmniRecommendation then OmniRecommendation.recommendationsId else nil
 	end) else nil
-	local var3 = useSelector(function(p4)
-		-- upvalues: topicContentsReducer (copy)
-		return p4.Personalization[topicContentsReducer.key]
+	local UseSelectorResult2 = UseSelectorFunction(function(p4) --[[ Line: 65 ]]
+		-- upvalues: TopicContentsReducer (upval)
+		return p4.Personalization[TopicContentsReducer.key]
 	end)
-	;(if fFlagLuaAppUseEffectInSignalPreprocessing then reactModule.useEffect else reactModule.useLayoutEffect)(function()
-		-- upvalues: getSduiFeedStoreModule (copy), p1 (ref), fFlagLuaAppCompositionAlways_1 (ref), getMainCollectionLayoutStore (copy), var1 (ref), omniFeedTypes (copy), gameTileLayoutType (copy), omniFeedConstants (copy), getGameTileCollectionItemSize (copy), p2 (ref), apportioningPreprocessingHelpersModule (copy), var3 (ref), fFlagLuaAppAddRequestIdToRfySignalApportioning (copy), var2 (write)
-		local var4 = getSduiFeedStoreModule(p1)
-		local t = {}
-		local var5 = if fFlagLuaAppCompositionAlways_1 then getMainCollectionLayoutStore(false).getNumItemsForAllCategories(false) else nil
-		
-		for i, v in var1 do
-			local topicId = v.topicId
+	;(if FFlagLuaAppUseEffectInSignalPreprocessing then ReactModule.useEffect else ReactModule.useLayoutEffect)(function() --[[ Line: 73 ]]
+		-- upvalues: GetSduiFeedStoreModule (upval), p1 (copy), FFlagLuaAppCompositionAlways1 (copy), GetMainCollectionLayoutStoreFunction (upval), UseSelectorResult (copy), OmniFeedTypes (upval), GameTileLayoutType (upval), OmniFeedConstants (upval), GetGameTileCollectionItemSizeFunction (upval), p2 (copy), ApportioningPreprocessingHelpersModule (upval), UseSelectorResult2 (copy), FFlagLuaAppAddRequestIdToRfySignalApportioning (upval), UseSelectorResult1 (ref)
+		local SduiFeedStoreModule = GetSduiFeedStoreModule(p1)
+		local ApportioningData = {}
+		local NumItemsForAllCategories = if FFlagLuaAppCompositionAlways1 then GetMainCollectionLayoutStoreFunction(false).getNumItemsForAllCategories(false) else nil
+		for i, value in UseSelectorResult do
+			local TopicId = value.topicId
 			
-			if topicId and v.treatmentType == omniFeedTypes.HomeGameGrid then
-				local narrow = gameTileLayoutType.Narrow
+			if TopicId and value.treatmentType == OmniFeedTypes.HomeGameGrid then
+				local Narrow = GameTileLayoutType.Narrow
 				
-				if v.topicLayoutData then
-					local componentType = v.topicLayoutData[omniFeedConstants.TopicLayoutDataKeys.ComponentType]
+				if value.topicLayoutData then
+					local TopicLayout = value.topicLayoutData[OmniFeedConstants.TopicLayoutDataKeys.ComponentType]
 					
-					if componentType then
-						if componentType == omniFeedConstants.ComponentTypeDataKeys.EventTile then
-							narrow = gameTileLayoutType.Event
-						elseif componentType == omniFeedConstants.ComponentTypeDataKeys.GridTile then
-							narrow = gameTileLayoutType.Wide
+					if TopicLayout then
+						if TopicLayout == OmniFeedConstants.ComponentTypeDataKeys.EventTile then
+							Narrow = GameTileLayoutType.Event
+						elseif TopicLayout == OmniFeedConstants.ComponentTypeDataKeys.GridTile then
+							Narrow = GameTileLayoutType.Wide
 						end
 					end
 				end
-				local var6 = getGameTileCollectionItemSize(narrow)
-				local var7 = if fFlagLuaAppCompositionAlways_1 then var5[var6] else p2[var6](false).numColumns
-				local numberOfRows = v.numberOfRows or 99999
+				local GameTileCollectionItemSize = GetGameTileCollectionItemSizeFunction(Narrow)
+				local NumItemsForAllCategory = if FFlagLuaAppCompositionAlways1 then NumItemsForAllCategories[GameTileCollectionItemSize] else p2[GameTileCollectionItemSize](false).numColumns
+				local NumberOfRows = value.numberOfRows or 99999
 				
-				if numberOfRows == -1 then
-					numberOfRows = 99999
+				if NumberOfRows == -1 then
+					NumberOfRows = 99999
 				end
-				apportioningPreprocessingHelpersModule.addToApportioningData(t, topicId, var7 * numberOfRows, i)
+				ApportioningPreprocessingHelpersModule.addToApportioningData(ApportioningData, TopicId, NumItemsForAllCategory * NumberOfRows, i)
 			end
 		end
-		apportioningPreprocessingHelpersModule.populateStartingItemIndices(t)
+		ApportioningPreprocessingHelpersModule.populateStartingItemIndices(ApportioningData)
 		
-		for i_1, v_1 in t do
-			local var8 = if i_1 then if var3 then var3[i_1] else nil else nil
-			v_1.items = if var8 then var8.entries else {}
+		for i1, value1 in ApportioningData do
+			local UseSelectorResultEntry = i1 and (UseSelectorResult2 and UseSelectorResult2[i1]) or nil
+			value1.items = UseSelectorResultEntry and UseSelectorResultEntry.entries or {}
 		end
-		var4.updateData({ apportioningData = t }, if fFlagLuaAppAddRequestIdToRfySignalApportioning then var2 else nil)
+		SduiFeedStoreModule.updateData({ apportioningData = ApportioningData }, if FFlagLuaAppAddRequestIdToRfySignalApportioning then UseSelectorResult1 else nil)
 		
-		return function() end
+		return function() --[[ Line: 140 ]] end
 	end, {
-		var1, var3, if not fFlagLuaAppCompositionAlways then p2 else nil, p1,
-		if fFlagLuaAppAddRequestIdToRfySignalApportioning then var2 else nil,
-		fFlagLuaAppCompositionAlways_1
+		UseSelectorResult, UseSelectorResult2,
+		if FFlagLuaAppCompositionAlways then nil else p2, p1,
+		if FFlagLuaAppAddRequestIdToRfySignalApportioning then UseSelectorResult1 else nil,
+		FFlagLuaAppCompositionAlways1
 	})
 end

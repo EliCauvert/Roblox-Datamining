@@ -1,17 +1,17 @@
-﻿local parent = script:FindFirstAncestor("InExperienceShop").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local feedbackAlert = foundationModule.FeedbackAlert
-local alertSeverity = foundationModule.Enums.AlertSeverity
-local t = { message = "Feature.InExperienceShop.Label.PreviewBanner" }
+﻿local Parent = script:FindFirstAncestor("InExperienceShop").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local FeedbackAlert = FoundationModule.FeedbackAlert
+local AlertSeverity = FoundationModule.Enums.AlertSeverity
+local config = { message = "Feature.InExperienceShop.Label.PreviewBanner" }
 
-return function(p1)
-	-- upvalues: useLocalization (ref), t (ref), reactModule (ref), feedbackAlert (ref), alertSeverity (ref)
-	return reactModule.createElement(feedbackAlert, {
+return function(Frame) --[[ Line: 19 | Named "CreatorEarlyAccessBanner" ]]
+	-- upvalues: UseLocalizationFunction (copy), config (copy), ReactModule (copy), FeedbackAlert (copy), AlertSeverity (copy)
+	return ReactModule.createElement(FeedbackAlert, {
 		testId = "CreatorEarlyAccessBanner",
-		severity = alertSeverity.Info,
-		title = useLocalization(t).message,
-		LayoutOrder = p1.LayoutOrder
+		severity = AlertSeverity.Info,
+		title = UseLocalizationFunction(config).message,
+		LayoutOrder = Frame.LayoutOrder
 	})
 end

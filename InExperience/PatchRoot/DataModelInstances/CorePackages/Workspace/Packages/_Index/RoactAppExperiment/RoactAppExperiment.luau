@@ -1,1 +1,1 @@
-﻿return require(game:GetService("CorePackages").Packages.RoactAppExperiment)
+﻿return (require(game:GetService("CorePackages").Packages.RoactAppExperiment))

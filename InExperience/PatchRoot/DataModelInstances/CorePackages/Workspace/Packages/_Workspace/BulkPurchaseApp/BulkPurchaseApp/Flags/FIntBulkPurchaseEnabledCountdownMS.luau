@@ -1,1 +1,1 @@
-﻿return game:DefineFastInt("BulkPurchaseEnabledCountdownMS", 3000)
+﻿return (game:DefineFastInt("BulkPurchaseEnabledCountdownMS", 3000))

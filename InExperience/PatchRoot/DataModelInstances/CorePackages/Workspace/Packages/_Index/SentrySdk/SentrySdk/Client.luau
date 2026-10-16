@@ -1,337 +1,334 @@
-﻿local robloxTransportModule = require(script.Parent.RobloxTransport)
-local versionModule = require(script.Parent.Version)
-local var1 = game:GetService("RunService"):IsStudio()
+﻿local RobloxTransportModule = require(script.Parent.RobloxTransport)
+local VersionModule = require(script.Parent.Version)
+local IsStudio = game:GetService("RunService"):IsStudio()
 
-local function _()
+local function _(): boolean --[[ Line: 8 | Named "isBundled" ]]
 	return type(_G.LUAUFORGE_BUNDLED_FILE_PATH) == "string"
 end
 
-local _ = function(p1)
+local _ = function(p1): boolean --[[ Line: 13 | Named "isTableEmpty" ]]
 	return next(p1) == nil
 end
 
-local _ = function(p1, p2)
+local _ = function(p1, p2) --[[ Line: 18 | Named "parseJSON" ]]
 	if type(p2) ~= "string" then
 		return nil, "Input is not a string"
 	end
-	local ok, status = pcall(function()
-		-- upvalues: p1 (ref), p2 (ref)
+	local Success, Result = pcall(function() --[[ Line: 23 ]]
+		-- upvalues: p1 (copy), p2 (copy)
 		return p1:JSONDecode(p2)
 	end)
 	
-	if ok then
-		return status, nil
+	if Success then
+		return Result, nil
+	else
+		return nil, (tostring(Result))
 	end
-	return nil, tostring(status)
 end
 
-local _ = function(p1, p2)
-	return if p2 then function(p3, p4)
-		-- upvalues: p1 (ref), p2 (ref)
-		local id = nil
-		local var2 = nil
+local _ = function(HttpService, p1) --[[ Line: 35 | Named "createCallbackWithEventId" ]]
+	return if p1 then function(p2, p3) --[[ Line: 46 ]]
+		-- upvalues: HttpService (copy), p1 (copy)
+		local Id = nil
+		local v1 = nil
 		
-		if p3 and p4 and p4.body then
-			if type(p4.body) == "table" and p4.body.Body then
-				local var3, var4
-				local var5 = p1
-				local body = p4.body.Body
+		if p2 and p3 and p3.body then
+			if type(p3.body) == "table" and p3.body.Body then
+				local Body = p3.body.Body
+				local v2 = nil
 				
-				if type(body) == "string" then
-					local ok, status = pcall(function()
-						-- upvalues: var5 (ref), body (ref)
-						return var5:JSONDecode(body)
+				if type(Body) == "string" then
+					local Success, Result = pcall(function() --[[ Line: 23 ]]
+						-- upvalues: HttpService (copy), Body (copy)
+						return HttpService:JSONDecode(Body)
 					end)
 					
-					if ok then
-						var3 = status
-						var4 = nil
+					if Success then
+						v2 = Result
 					else
-						var3 = nil
-						var4 = tostring(status)
+						v2 = nil
+						local _ = tostring(Result)
 					end
 				else
-					var3 = nil
-					var4 = "Input is not a string"
+					v2 = nil
 				end
-				if var3 and var3.id then
-					id = var3.id
+				if v2 and v2.id then
+					Id = v2.id
 				end
 			end
-			var2 = p4
-		elseif p4 then
-			var2 = p4
+			v1 = p3
+		elseif p3 then
+			v1 = p3
 		end
-		p2(p3, var2, id)
+		p1(p2, v1, Id)
 	end else nil
 end
 
-local t = {}
-t.__index = t
+local ClientModule = {}
+ClientModule.__index = ClientModule
 
-function t.new(_, p1, p2)
-	-- upvalues: robloxTransportModule (ref), t (ref)
-	if not p1.dsn then
+function ClientModule:new(Config, HttpService) --[[ Line: 152 ]]
+	-- upvalues: RobloxTransportModule (copy), ClientModule (copy)
+	if not Config.dsn then
 		error("DSN is required")
 	end
-	return setmetatable({
+	return (setmetatable({
 		user = nil,
-		transport = robloxTransportModule:new(p1.dsn, p2),
-		httpService = p2,
+		transport = RobloxTransportModule:new(Config.dsn, HttpService),
+		httpService = HttpService,
 		tags = {},
 		extra = {},
 		breadcrumbs = {},
-		config = p1
-	}, t)
+		config = Config
+	}, ClientModule))
 end
 
-function t._buildDebugMeta(_)
-	local LUAUFORGE_SENTRY_DEBUG_IDS = _G.LUAUFORGE_SENTRY_DEBUG_IDS
+function ClientModule:_buildDebugMeta() --[[ Line: 183 ]]
+	local LUAUFORGESENTRYDEBUGIDS = _G.LUAUFORGE_SENTRY_DEBUG_IDS
 	
-	if type(LUAUFORGE_SENTRY_DEBUG_IDS) ~= "table" then
+	if type(LUAUFORGESENTRYDEBUGIDS) ~= "table" then
 		return nil
 	end
-	local t = {}
+	local Images = {}
 	
-	for i, v in LUAUFORGE_SENTRY_DEBUG_IDS do
-		table.insert(t, { type = "sourcemap", code_file = i, debug_id = v })
+	for Code_file, lUAUFORGESENTRYDEBUGID in LUAUFORGESENTRYDEBUGIDS do
+		table.insert(Images, {
+			type = "sourcemap",
+			code_file = Code_file,
+			debug_id = lUAUFORGESENTRYDEBUGID
+		})
 	end
-	return if #t == 0 then nil else { images = t }
+	return if #Images == 0 then nil else { images = Images }
 end
 
-function t:capture_message(p1, p2, p3, p4)
-	-- upvalues: versionModule (ref)
-	local httpService = self.httpService
-	self.transport:send({
+function ClientModule:capture_message(Message, p1, p2, p3) --[[ Line: 209 ]]
+	-- upvalues: VersionModule (copy)
+	local NoNextEntry = next(self.extra) == nil
+	local config = {
 		platform = "roblox",
 		server_name = "roblox-server",
-		message = { message = p1 },
-		level = p2 or "info",
+		message = { message = Message },
+		level = p1 or "info",
 		timestamp = os.time(),
 		environment = self.config.environment or "production",
 		release = self.config.release or "unknown",
-		sdk = { name = "sentry.lua", version = versionModule.SDK_VERSION },
+		sdk = { name = "sentry.lua", version = VersionModule.SDK_VERSION },
 		user = self.user,
 		tags = self.tags,
-		extra = if next(self.extra) == nil then nil else self.extra,
-		breadcrumbs = p4 or self.breadcrumbs,
+		extra = if NoNextEntry then nil else self.extra,
+		breadcrumbs = p3 or self.breadcrumbs,
 		contexts = {
 			roblox = {
-				version = versionModule.SDK_VERSION,
+				version = VersionModule.SDK_VERSION,
 				place_id = tostring(game.PlaceId),
 				job_id = game.JobId or "unknown"
 			}
 		}
-	}, if not p3 then nil else function(p5, p6)
-		-- upvalues: httpService (ref), p3 (ref)
-		local id = nil
-		local var2 = nil
+	}
+	local HttpService = self.httpService
+	self.transport:send(config, if p2 then function(p4, p5) --[[ Line: 46 ]]
+		-- upvalues: HttpService (copy), p2 (copy)
+		local Id = nil
+		local v1 = nil
 		
-		if p5 and p6 and p6.body then
-			if type(p6.body) == "table" and p6.body.Body then
-				local var3, var4
-				local var5 = httpService
-				local body = p6.body.Body
+		if p4 and p5 and p5.body then
+			if type(p5.body) == "table" and p5.body.Body then
+				local Body = p5.body.Body
+				local v2 = nil
 				
-				if type(body) == "string" then
-					local ok, status = pcall(function()
-						-- upvalues: var5 (ref), body (ref)
-						return var5:JSONDecode(body)
+				if type(Body) == "string" then
+					local Success, Result = pcall(function() --[[ Line: 23 ]]
+						-- upvalues: HttpService (copy), Body (copy)
+						return HttpService:JSONDecode(Body)
 					end)
 					
-					if ok then
-						var3 = status
-						var4 = nil
+					if Success then
+						v2 = Result
 					else
-						var3 = nil
-						var4 = tostring(status)
+						v2 = nil
+						local _ = tostring(Result)
 					end
 				else
-					var3 = nil
-					var4 = "Input is not a string"
+					v2 = nil
 				end
-				if var3 and var3.id then
-					id = var3.id
+				if v2 and v2.id then
+					Id = v2.id
 				end
 			end
-			var2 = p6
-		elseif p6 then
-			var2 = p6
+			v1 = p5
+		elseif p5 then
+			v1 = p5
 		end
-		p3(p5, var2, id)
-	end)
+		p2(p4, v1, Id)
+	end else nil)
 end
 
-function t:capture_exception(p1, p2, p3, p4, p5, p6, p7, p8)
-	-- upvalues: versionModule (ref), var1 (ref)
-	p2 = p2 or "error"
-	local t = {
+function ClientModule:capture_exception(p1, p2, List, Threads, p3, p4, p5, List1) --[[ Line: 253 ]]
+	-- upvalues: VersionModule (copy), IsStudio (copy)
+	local P18 = p2 or "error"
+	local Contexts = {
 		roblox = {
-			version = versionModule.SDK_VERSION,
+			version = VersionModule.SDK_VERSION,
 			place_id = tostring(game.PlaceId),
 			job_id = game.JobId or "unknown"
 		}
 	}
 	
-	if p3 then
-		for i, v in pairs(p3) do
-			t[i] = v
+	if List then
+		for i, value in pairs(List) do
+			Contexts[i] = value
 		end
 	end
-	local t_1 = {
+	local config = {
 		type = p1.type or "RobloxError",
 		value = p1.message or tostring(p1)
 	}
 	
 	if p1.stacktrace and p1.stacktrace.frames and #p1.stacktrace.frames > 0 then
-		t_1.stacktrace = p1.stacktrace
+		config.stacktrace = p1.stacktrace
 		
 		if type(_G.LUAUFORGE_BUNDLED_FILE_PATH) == "string" then
-			for i, v in p1.stacktrace.frames do
-				v.platform = "javascript"
+			for _, frame in p1.stacktrace.frames do
+				frame.platform = "javascript"
 			end
 		end
 	end
-	local t_2 = { values = { t_1 } }
+	local Exception = { values = { config } }
 	
-	if var1 then
-		print("\240\159\148\141 Exception structure:", t_2)
+	if IsStudio then
+		print("🔍 Exception structure:", Exception)
 	end
-	local t_3 = {
+	local NoNextEntry = next(self.extra) == nil
+	local config1 = {
 		platform = "roblox",
 		server_name = "roblox-server",
-		exception = t_2,
-		level = p2,
-		timestamp = p7 or os.time(),
+		exception = Exception,
+		level = P18,
+		timestamp = p5 or os.time(),
 		environment = self.config.environment or "production",
 		release = self.config.release or "unknown",
-		sdk = { name = "sentry.lua", version = versionModule.SDK_VERSION },
+		sdk = { name = "sentry.lua", version = VersionModule.SDK_VERSION },
 		user = self.user,
 		tags = self.tags,
-		extra = if next(self.extra) == nil then nil else self.extra,
-		breadcrumbs = p6 or self.breadcrumbs,
-		contexts = t
+		extra = if NoNextEntry then nil else self.extra,
+		breadcrumbs = p4 or self.breadcrumbs,
+		contexts = Contexts
 	}
 	
-	if p8 then
-		t_3.tags = table.clone(self.tags)
+	if List1 then
+		config1.tags = table.clone(self.tags)
 		
-		for i, v in p8 do
-			t_3.tags[i] = v
+		for i1, value1 in List1 do
+			config1.tags[i1] = value1
 		end
 	end
-	if p4 then
-		t_3.threads = p4
+	if Threads then
+		config1.threads = Threads
 	end
-	t_3.debug_meta = self:_buildDebugMeta()
-	local httpService = self.httpService
-	self.transport:send(t_3, if not p5 then nil else function(p9, p10)
-		-- upvalues: httpService (ref), p5 (ref)
-		local id = nil
-		local var2 = nil
+	config1.debug_meta = self:_buildDebugMeta()
+	local HttpService = self.httpService
+	self.transport:send(config1, if p3 then function(p6, p7) --[[ Line: 46 ]]
+		-- upvalues: HttpService (copy), p3 (copy)
+		local Id = nil
+		local v1 = nil
 		
-		if p9 and p10 and p10.body then
-			if type(p10.body) == "table" and p10.body.Body then
-				local var3, var4
-				local var5 = httpService
-				local body = p10.body.Body
+		if p6 and p7 and p7.body then
+			if type(p7.body) == "table" and p7.body.Body then
+				local Body = p7.body.Body
+				local v2 = nil
 				
-				if type(body) == "string" then
-					local ok, status = pcall(function()
-						-- upvalues: var5 (ref), body (ref)
-						return var5:JSONDecode(body)
+				if type(Body) == "string" then
+					local Success, Result = pcall(function() --[[ Line: 23 ]]
+						-- upvalues: HttpService (copy), Body (copy)
+						return HttpService:JSONDecode(Body)
 					end)
 					
-					if ok then
-						var3 = status
-						var4 = nil
+					if Success then
+						v2 = Result
 					else
-						var3 = nil
-						var4 = tostring(status)
+						v2 = nil
+						local _ = tostring(Result)
 					end
 				else
-					var3 = nil
-					var4 = "Input is not a string"
+					v2 = nil
 				end
-				if var3 and var3.id then
-					id = var3.id
+				if v2 and v2.id then
+					Id = v2.id
 				end
 			end
-			var2 = p10
-		elseif p10 then
-			var2 = p10
+			v1 = p7
+		elseif p7 then
+			v1 = p7
 		end
-		p5(p9, var2, id)
-	end)
+		p3(p6, v1, Id)
+	end else nil)
 end
 
-function t:send_event_with_attachments(p9, p10, p11)
-	if p9 and #p10 ~= 0 then
-		local httpService = self.httpService
-		self.transport:send_attachments(p9, p10, if not p11 then nil else function(p12, p13)
-			-- upvalues: httpService (ref), p11 (ref)
-			local id = nil
-			local var2 = nil
+function ClientModule:send_event_with_attachments(p6, p7, Callback: (any, any, any) -> ()) --[[ Line: 354 ]]
+	if p6 and #p7 ~= 0 then
+		local HttpService = self.httpService
+		self.transport:send_attachments(p6, p7, if Callback then function(p8, p9) --[[ Line: 46 ]]
+			-- upvalues: HttpService (copy), Callback (copy)
+			local Id = nil
+			local v1 = nil
 			
-			if p12 and p13 and p13.body then
-				if type(p13.body) == "table" and p13.body.Body then
-					local var3, var4
-					local var5 = httpService
-					local body = p13.body.Body
+			if p8 and p9 and p9.body then
+				if type(p9.body) == "table" and p9.body.Body then
+					local Body = p9.body.Body
+					local v2 = nil
 					
-					if type(body) == "string" then
-						local ok, status = pcall(function()
-							-- upvalues: var5 (ref), body (ref)
-							return var5:JSONDecode(body)
+					if type(Body) == "string" then
+						local Success, Result = pcall(function() --[[ Line: 23 ]]
+							-- upvalues: HttpService (copy), Body (copy)
+							return HttpService:JSONDecode(Body)
 						end)
 						
-						if ok then
-							var3 = status
-							var4 = nil
+						if Success then
+							v2 = Result
 						else
-							var3 = nil
-							var4 = tostring(status)
+							v2 = nil
+							local _ = tostring(Result)
 						end
 					else
-						var3 = nil
-						var4 = "Input is not a string"
+						v2 = nil
 					end
-					if var3 and var3.id then
-						id = var3.id
+					if v2 and v2.id then
+						Id = v2.id
 					end
 				end
-				var2 = p13
-			elseif p13 then
-				var2 = p13
+				v1 = p9
+			elseif p9 then
+				v1 = p9
 			end
-			p11(p12, var2, id)
-		end)
+			Callback(p8, v1, Id)
+		end else nil)
 		
 		return
-	elseif p11 then
-		p11(false, { error = "eventId and attachments are required" }, nil)
+	end
+	if Callback then
+		Callback(false, { error = "eventId and attachments are required" }, nil)
 	end
 end
 
-function t:set_user(p9)
-	self.user = p9
+function ClientModule:set_user(User) --[[ Line: 376 ]]
+	self.user = User
 end
 
-function t:set_tag(p9, p10)
-	self.tags[p9] = tostring(p10)
+function ClientModule:set_tag(p6, p7) --[[ Line: 381 ]]
+	self.tags[p6] = tostring(p7)
 end
 
-function t:set_extra(p9, p10)
-	self.extra[p9] = p10
+function ClientModule:set_extra(p6, p7) --[[ Line: 386 ]]
+	self.extra[p6] = p7
 end
 
-function t:add_breadcrumb(p9)
-	p9.timestamp = os.time()
-	table.insert(self.breadcrumbs, p9)
+function ClientModule:add_breadcrumb(p6) --[[ Line: 391 ]]
+	p6.timestamp = os.time()
+	table.insert(self.breadcrumbs, p6)
 	
 	if #self.breadcrumbs > 50 then
 		table.remove(self.breadcrumbs, 1)
 	end
 end
 
-return t
+return ClientModule

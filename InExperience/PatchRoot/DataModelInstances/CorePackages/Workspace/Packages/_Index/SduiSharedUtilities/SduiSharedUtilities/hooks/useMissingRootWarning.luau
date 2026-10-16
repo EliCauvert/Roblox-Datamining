@@ -1,36 +1,34 @@
-﻿local sduiSharedUtilities = script:FindFirstAncestor("SduiSharedUtilities")
-local reactModule = require(sduiSharedUtilities.Parent.React)
-local getSduiApiStoreModule = require(sduiSharedUtilities.getSduiApiStore)
-local sduiPageAnalyticsModule = require(sduiSharedUtilities.SduiPageAnalytics)
-local sduiRetryPolicyModule = require(sduiSharedUtilities.SduiRetryPolicy)
+﻿local SduiSharedUtilities = script:FindFirstAncestor("SduiSharedUtilities")
+local ReactModule = require(SduiSharedUtilities.Parent.React)
+local GetSduiApiStoreModule = require(SduiSharedUtilities.getSduiApiStore)
+local SduiPageAnalyticsModule = require(SduiSharedUtilities.SduiPageAnalytics)
+local SduiRetryPolicyModule = require(SduiSharedUtilities.SduiRetryPolicy)
 
-return function(p1, p2)
-	-- upvalues: reactModule (ref), sduiRetryPolicyModule (ref), getSduiApiStoreModule (ref), sduiPageAnalyticsModule (ref)
-	local var1 = reactModule.useRef(p2)
-	var1.current = p2
-	local var2 = p2 ~= nil
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), sduiRetryPolicyModule (copy), var1 (ref), getSduiApiStoreModule (copy), sduiPageAnalyticsModule (copy), p1 (ref)
-		if var2 then
-			return
-		end
-		local delayedThread = nil
-		delayedThread = task.delay(sduiRetryPolicyModule.getFetchTimeoutSec() + 2, function()
-			-- upvalues: delayedThread (write), var1 (copy), getSduiApiStoreModule (copy), sduiPageAnalyticsModule (copy), p1 (copy)
-			delayedThread = nil
+return function(p1, Current) --[[ Line: 9 | Named "useMissingRootWarning" ]]
+	-- upvalues: ReactModule (copy), SduiRetryPolicyModule (copy), GetSduiApiStoreModule (copy), SduiPageAnalyticsModule (copy)
+	local UseRefResult = ReactModule.useRef(Current)
+	UseRefResult.current = Current
+	local HasCurrent = Current ~= nil
+	ReactModule.useEffect(function() --[[ Line: 13 ]]
+		-- upvalues: HasCurrent (copy), SduiRetryPolicyModule (upval), UseRefResult (copy), GetSduiApiStoreModule (upval), SduiPageAnalyticsModule (upval), p1 (copy)
+		if HasCurrent then return end
+		local DelayedThread = nil
+		DelayedThread = task.delay(SduiRetryPolicyModule.getFetchTimeoutSec() + 2, function() --[[ Line: 18 ]]
+			-- upvalues: DelayedThread (ref), UseRefResult (upval), GetSduiApiStoreModule (upval), SduiPageAnalyticsModule (upval), p1 (upval)
+			DelayedThread = nil
 			
-			if var1.current == nil then
-				local var3 = getSduiApiStoreModule()
-				sduiPageAnalyticsModule.sendMissingRoot(p1, var3.getData(p1).status(false), var3.isInFlight(p1))
+			if UseRefResult.current == nil then
+				local SduiApiStoreModule = GetSduiApiStoreModule()
+				SduiPageAnalyticsModule.sendMissingRoot(p1, SduiApiStoreModule.getData(p1).status(false), SduiApiStoreModule.isInFlight(p1))
 			end
 		end)
 		
-		return function()
-			-- upvalues: delayedThread (write)
-			if delayedThread then
-				task.cancel(delayedThread)
-				delayedThread = nil
+		return function() --[[ Line: 29 ]]
+			-- upvalues: DelayedThread (ref)
+			if DelayedThread then
+				task.cancel(DelayedThread)
+				DelayedThread = nil
 			end
 		end
-	end, { p1, var2 })
+	end, { p1, HasCurrent })
 end

@@ -1,24 +1,25 @@
-﻿local graphQLError = require(script.Parent.Parent.Parent.error.GraphQLError).GraphQLError
+﻿local GraphQLError = require(script.Parent.Parent.Parent.error.GraphQLError).GraphQLError
 
 return {
-	UniqueDirectiveNamesRule = function(p1)
-		-- upvalues: graphQLError (ref)
-		local t = {}
-		local schema = p1:getSchema()
+	UniqueDirectiveNamesRule = function(p1) --[[ Line: 19 ]]
+		-- upvalues: GraphQLError (copy)
+		local Names = {}
+		local Schema = p1:getSchema()
 		
 		return {
-			DirectiveDefinition = function(_, p2)
-				-- upvalues: schema (ref), p1 (ref), graphQLError (copy), t (ref)
-				local value = p2.name.value
+			DirectiveDefinition = function(_, p2): boolean? --[[ Line: 24 ]]
+				-- upvalues: Schema (copy), p1 (copy), GraphQLError (upval), Names (copy)
+				local Value = p2.name.value
 				
-				if schema and schema:getDirective(value) then
-					p1:reportError(graphQLError.new(("Directive \"@%s\" already exists in the schema. It cannot be redefined."):format(value), p2.name))
+				if Schema and Schema:getDirective(Value) then
+					p1:reportError(GraphQLError.new(("Directive \"@%s\" already exists in the schema. It cannot be redefined."):format(Value), p2.name))
 					
 					return
-				elseif t[value] then
-					p1:reportError(graphQLError.new(("There can be only one directive named \"@%s\"."):format(value), { t[value], p2.name }))
+				end
+				if Names[Value] then
+					p1:reportError(GraphQLError.new(("There can be only one directive named \"@%s\"."):format(Value), { Names[Value], p2.name }))
 				else
-					t[value] = p2.name
+					Names[Value] = p2.name
 				end
 				return false
 			end

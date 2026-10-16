@@ -1,13 +1,13 @@
-﻿local parent = script.Parent.Parent
-local inspect = require(parent.Parent.LuauPolyfill).util.inspect
-local arrayContainsModule = require(parent.luaUtils.arrayContains)
+﻿local Parent = script.Parent.Parent
+local InspectFunction = require(Parent.Parent.LuauPolyfill).util.inspect
+local ArrayContainsModule = require(Parent.luaUtils.arrayContains)
 
-return function(p1, p2, p3)
-	-- upvalues: arrayContainsModule (ref), inspect (ref)
-	local var1 = arrayContainsModule(p1, p2, p3)
+return function(p1, p2, p3) --[[ Line: 20 | Named "toArrayContains" ]]
+	-- upvalues: ArrayContainsModule (copy), InspectFunction (copy)
+	local ArrayContainsModuleResult = ArrayContainsModule(p1, p2, p3)
 	
 	return {
-		pass = var1,
-		message = if not var1 then "received tbl: " .. inspect(p2) .. " expected item to be in table: " .. inspect(p1) else ""
+		pass = ArrayContainsModuleResult,
+		message = if ArrayContainsModuleResult then "" else "received tbl: " .. InspectFunction(p2) .. " expected item to be in table: " .. InspectFunction(p1)
 	}
 end

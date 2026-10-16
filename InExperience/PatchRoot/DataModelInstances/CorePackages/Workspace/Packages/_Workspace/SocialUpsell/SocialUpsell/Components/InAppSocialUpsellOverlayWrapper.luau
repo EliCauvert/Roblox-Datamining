@@ -1,31 +1,30 @@
-﻿local socialUpsell = script:FindFirstAncestor("SocialUpsell")
-local parent = socialUpsell.Parent
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local socialUpsellTypeModule = require(socialUpsell.Enum.SocialUpsellType)
-local upsellEntrySurfaceTypeModule = require(socialUpsell.Analytics.Enum.UpsellEntrySurfaceType)
-local FAEUpsellOverlayModule = require(socialUpsell.Components.FAEUpsellOverlay)
-local fFlagEnableAEGIS2CommsFAEUpsell = require(parent.SharedFlags).FFlagEnableAEGIS2CommsFAEUpsell
-local t = {
+﻿local SocialUpsell = script:FindFirstAncestor("SocialUpsell")
+local Parent = SocialUpsell.Parent
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local SocialUpsellTypeModule = require(SocialUpsell.Enum.SocialUpsellType)
+local FAEUpsellOverlayModule = require(SocialUpsell.Components.FAEUpsellOverlay)
+local FFlagEnableAEGIS2CommsFAEUpsell = require(Parent.SharedFlags).FFlagEnableAEGIS2CommsFAEUpsell
+local config = {
 	isInExperience = false,
-	upsellEntrySurface = upsellEntrySurfaceTypeModule.Unknown,
-	upsellType = socialUpsellTypeModule.Unknown
+	upsellEntrySurface = require(SocialUpsell.Analytics.Enum.UpsellEntrySurfaceType).Unknown,
+	upsellType = SocialUpsellTypeModule.Unknown
 }
 
-return function(p1)
-	-- upvalues: reactModule (ref), cryoModule (ref), t (ref), fFlagEnableAEGIS2CommsFAEUpsell (ref), socialUpsellTypeModule (ref), FAEUpsellOverlayModule (ref)
-	return reactModule.useMemo(function()
-		-- upvalues: cryoModule (copy), t (copy), p1 (ref), fFlagEnableAEGIS2CommsFAEUpsell (copy), socialUpsellTypeModule (copy), reactModule (copy), FAEUpsellOverlayModule (copy)
-		local var1 = nil
-		local var2 = cryoModule.Dictionary.union(t, p1.data or {})
-		var2.containerRef = p1.containerRef
+return function(p1) --[[ Line: 27 ]]
+	-- upvalues: ReactModule (copy), CryoModule (copy), config (copy), FFlagEnableAEGIS2CommsFAEUpsell (copy), SocialUpsellTypeModule (copy), FAEUpsellOverlayModule (copy)
+	return (ReactModule.useMemo(function() --[[ Line: 28 ]]
+		-- upvalues: CryoModule (upval), config (upval), p1 (copy), FFlagEnableAEGIS2CommsFAEUpsell (upval), SocialUpsellTypeModule (upval), ReactModule (upval), FAEUpsellOverlayModule (upval)
+		local Element = nil
+		local UnionResult = CryoModule.Dictionary.union(config, p1.data or {})
+		UnionResult.containerRef = p1.containerRef
 		
-		if not fFlagEnableAEGIS2CommsFAEUpsell then
-			var2.isInExperience = false
+		if not FFlagEnableAEGIS2CommsFAEUpsell then
+			UnionResult.isInExperience = false
 		end
-		if p1.upsellType == socialUpsellTypeModule.FacialAgeEstimation then
-			var1 = reactModule.createElement(FAEUpsellOverlayModule, var2)
+		if p1.upsellType == SocialUpsellTypeModule.FacialAgeEstimation then
+			Element = ReactModule.createElement(FAEUpsellOverlayModule, UnionResult)
 		end
-		return var1
-	end, { p1.upsellType, p1.data })
+		return Element
+	end, { p1.upsellType, p1.data }))
 end

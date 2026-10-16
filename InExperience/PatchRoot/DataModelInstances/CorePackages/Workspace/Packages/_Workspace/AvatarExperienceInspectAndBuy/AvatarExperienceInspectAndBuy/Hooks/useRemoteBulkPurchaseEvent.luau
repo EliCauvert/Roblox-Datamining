@@ -1,73 +1,77 @@
-﻿local robloxReplicatedStorageService = game:GetService("RobloxReplicatedStorage")
-local avatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
-local parent = avatarExperienceInspectAndBuy.Parent
-local reactModule = require(parent.React)
-local _ = require(avatarExperienceInspectAndBuy.Types)
-local fIntBulkPurchaseRequestLimit = require(parent.SharedFlags).FIntBulkPurchaseRequestLimit
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local bulkPurchaseUtilsModule = require(avatarExperienceInspectAndBuy.Utils.bulkPurchaseUtils)
-local buildBulkPurchaseAnalyticsPayloadModule = require(avatarExperienceInspectAndBuy.Utils.buildBulkPurchaseAnalyticsPayload)
-local tutilsModule = require(parent.tutils)
-local itemTypeEnum = require(parent.AvatarExperienceModel).Enums.ItemTypeEnum
-local useSignalState = require(parent.SignalsReact).useSignalState
-local useItemSelectionStore = require(avatarExperienceInspectAndBuy.Contexts.ItemSelectionStoreContext).useItemSelectionStore
-local _ = require(avatarExperienceInspectAndBuy.Stores.createItemSelectionStore)
+﻿local RobloxReplicatedStorage = game:GetService("RobloxReplicatedStorage")
+local AvatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
+local Parent = AvatarExperienceInspectAndBuy.Parent
+local ReactModule = require(Parent.React)
+local _ = require(AvatarExperienceInspectAndBuy.Types)
+local FIntBulkPurchaseRequestLimit = require(Parent.SharedFlags).FIntBulkPurchaseRequestLimit
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local BulkPurchaseUtilsModule = require(AvatarExperienceInspectAndBuy.Utils.bulkPurchaseUtils)
+local BuildBulkPurchaseAnalyticsPayloadModule = require(AvatarExperienceInspectAndBuy.Utils.buildBulkPurchaseAnalyticsPayload)
+local TutilsModule = require(Parent.tutils)
+local ItemTypeEnum = require(Parent.AvatarExperienceModel).Enums.ItemTypeEnum
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local UseItemSelectionStoreFunction = require(AvatarExperienceInspectAndBuy.Contexts.ItemSelectionStoreContext).useItemSelectionStore
+local _ = require(AvatarExperienceInspectAndBuy.Stores.createItemSelectionStore)
 
-local var1 = function(p1)
+local function v11(p1) --[[ Line: 43 ]]
 	return { assets = p1.assets, bundles = p1.bundles }
 end
 
-local var2 = function(p1)
+local function v12(p1) --[[ Line: 50 ]]
 	return p1.collectibleResellableInstances
 end
 
-return function(p1, p2)
-	-- upvalues: useSelector (ref), var1 (ref), tutilsModule (ref), var2 (ref), useItemSelectionStore (ref), useSignalState (ref), reactModule (ref), bulkPurchaseUtilsModule (ref), robloxReplicatedStorageService (ref), itemTypeEnum (ref), buildBulkPurchaseAnalyticsPayloadModule (ref), fIntBulkPurchaseRequestLimit (ref)
-	local var3 = useSelector(var1, tutilsModule.deepEqual)
-	local var4 = useSelector(var2, tutilsModule.deepEqual)
-	local var5 = useSignalState(useItemSelectionStore().getItemDataMap)
-	local var6 = reactModule.useMemo(function()
-		-- upvalues: bulkPurchaseUtilsModule (copy), p1 (ref), var3 (ref), var5 (ref)
-		return bulkPurchaseUtilsModule.getBulkPurchaseEligibleItems(p1, var3, var5)
-	end, { p1, var3, var5 })
+return function(p1, p2) --[[ Line: 54 ]]
+	-- upvalues: UseSelectorFunction (copy), v11 (copy), TutilsModule (copy), v12 (copy), UseItemSelectionStoreFunction (copy), UseSignalStateFunction (copy), ReactModule (copy), BulkPurchaseUtilsModule (copy), RobloxReplicatedStorage (copy), ItemTypeEnum (copy), BuildBulkPurchaseAnalyticsPayloadModule (copy), FIntBulkPurchaseRequestLimit (copy)
+	local UseSelectorResult = UseSelectorFunction(v11, TutilsModule.deepEqual)
+	local UseSelectorResult1 = UseSelectorFunction(v12, TutilsModule.deepEqual)
+	local UseSignalStateResult = UseSignalStateFunction(UseItemSelectionStoreFunction().getItemDataMap)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 61 ]]
+		-- upvalues: BulkPurchaseUtilsModule (upval), p1 (copy), UseSelectorResult (copy), UseSignalStateResult (copy)
+		return BulkPurchaseUtilsModule.getBulkPurchaseEligibleItems(p1, UseSelectorResult, UseSignalStateResult)
+	end, { p1, UseSelectorResult, UseSignalStateResult })
 	
-	return reactModule.useCallback(function()
-		-- upvalues: robloxReplicatedStorageService (copy), var6 (ref), itemTypeEnum (copy), var5 (ref), buildBulkPurchaseAnalyticsPayloadModule (copy), var3 (ref), var4 (ref), p2 (ref)
-		coroutine.wrap(function()
-			-- upvalues: robloxReplicatedStorageService (copy), var6 (copy), itemTypeEnum (copy), var5 (copy), buildBulkPurchaseAnalyticsPayloadModule (copy), var3 (copy), var4 (copy), p2 (copy)
-			robloxReplicatedStorageService:WaitForChild("ServerSideBulkPurchaseEvent", 1e999):FireServer(var6.requestedItems)
+	return ReactModule.useCallback(function() --[[ Line: 67 ]]
+		-- upvalues: RobloxReplicatedStorage (upval), UseMemoResult (copy), ItemTypeEnum (upval), UseSignalStateResult (copy), BuildBulkPurchaseAnalyticsPayloadModule (upval), UseSelectorResult (copy), UseSelectorResult1 (copy), p2 (copy)
+		coroutine.wrap(function() --[[ Line: 68 ]]
+			-- upvalues: RobloxReplicatedStorage (upval), UseMemoResult (upval), ItemTypeEnum (upval), UseSignalStateResult (upval), BuildBulkPurchaseAnalyticsPayloadModule (upval), UseSelectorResult (upval), UseSelectorResult1 (upval), p2 (upval)
+			RobloxReplicatedStorage:WaitForChild("ServerSideBulkPurchaseEvent", 1e999):FireServer(UseMemoResult.requestedItems)
 			
-			for i, v in var6.requestedItems do
-				local var7 = if v.itemType == Enum.AvatarItemType.Asset.Value then itemTypeEnum.Asset else itemTypeEnum.Bundle
-				local var8 = tostring(v.id)
-				local var9 = buildBulkPurchaseAnalyticsPayloadModule({
-					itemId = var8,
-					itemType = var7,
-					assetsMap = var3.assets,
-					bundlesMap = var3.bundles,
-					collectibleResellableInstances = var4,
-					storedData = var5 and var5[var8]
+			for _, requestedItem in UseMemoResult.requestedItems do
+				local Asset = if requestedItem.itemType == Enum.AvatarItemType.Asset.Value then ItemTypeEnum.Asset else ItemTypeEnum.Bundle
+				local Text = tostring(requestedItem.id)
+				local BulkPurchaseAnalyticsPayloadModule = BuildBulkPurchaseAnalyticsPayloadModule({
+					itemId = Text,
+					itemType = Asset,
+					assetsMap = UseSelectorResult.assets,
+					bundlesMap = UseSelectorResult.bundles,
+					collectibleResellableInstances = UseSelectorResult1,
+					storedData = UseSignalStateResult and UseSignalStateResult[Text]
 				})
 				
-				if var9 then
-					p2.reportPurchaseAttemptUnifiedEvent(var7, var8, var9)
+				if BulkPurchaseAnalyticsPayloadModule then
+					p2.reportPurchaseAttemptUnifiedEvent(Asset, Text, BulkPurchaseAnalyticsPayloadModule)
 				end
 			end
 		end)()
 	end, {
-		var6,
-		var5,
-		var3,
-		var4,
+		UseMemoResult,
+		UseSignalStateResult,
+		UseSelectorResult,
+		UseSelectorResult1,
 		p2.reportPurchaseAttemptUnifiedEvent
-	}), reactModule.useMemo(function()
-		-- upvalues: var6 (ref), fIntBulkPurchaseRequestLimit (copy)
-		local var7
-		if var6.requestedItems then
-			var7 = false
+	}), ReactModule.useMemo(function(): boolean --[[ Line: 106 ]]
+		-- upvalues: UseMemoResult (copy), FIntBulkPurchaseRequestLimit (upval)
+		local Flag = nil
+		if UseMemoResult.requestedItems then
+			Flag = false
 			
-			return if #var6.requestedItems <= fIntBulkPurchaseRequestLimit then #var6.requestedItems > 0 else var7
+			if #UseMemoResult.requestedItems <= FIntBulkPurchaseRequestLimit then
+				return #UseMemoResult.requestedItems > 0
+			end
+		else
+			Flag = false
 		end
-		var7 = false
-	end, { var6 }), var6.totalPrice or 0
+		return Flag
+	end, { UseMemoResult }), UseMemoResult.totalPrice or 0
 end

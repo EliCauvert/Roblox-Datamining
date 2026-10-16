@@ -1,25 +1,24 @@
-﻿local serverDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
-local parent = serverDrivenUi.Parent
-local _ = require(parent.RobloxAppEnums)
-local _ = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local reactModule = require(parent.React)
-local getSduiFeedStoreModule = require(serverDrivenUi.DataStore.getSduiFeedStore)
-local getItemCollectionKeyModule = require(serverDrivenUi.DataStore.getItemCollectionKey)
-local _ = require(serverDrivenUi.DataStore.SduiFeedStoreTypes)
-local fFlagLuaAppFixInlineSignalsReactPattern = require(parent.SharedFlags).FFlagLuaAppFixInlineSignalsReactPattern
+﻿local ServerDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
+local Parent = ServerDrivenUi.Parent
+local _ = require(Parent.RobloxAppEnums)
+local _ = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
+local ReactModule = require(Parent.React)
+local GetSduiFeedStoreModule = require(ServerDrivenUi.DataStore.getSduiFeedStore)
+local GetItemCollectionKeyModule = require(ServerDrivenUi.DataStore.getItemCollectionKey)
+local _ = require(ServerDrivenUi.DataStore.SduiFeedStoreTypes)
+local FFlagLuaAppFixInlineSignalsReactPattern = require(Parent.SharedFlags).FFlagLuaAppFixInlineSignalsReactPattern
 
-return function(value, p1, p2, p3)
-	-- upvalues: getItemCollectionKeyModule (ref), fFlagLuaAppFixInlineSignalsReactPattern (ref), reactModule (ref), getSduiFeedStoreModule (ref), signalsReactModule (ref)
-	local var1 = getItemCollectionKeyModule(p1, p2)
-	p3 = p3 or value
-	local _ = nil
+return function(p1, p2, p3, p4) --[[ Line: 19 | Named "useSduiItemCollectionSignal" ]]
+	-- upvalues: GetItemCollectionKeyModule (copy), FFlagLuaAppFixInlineSignalsReactPattern (copy), ReactModule (copy), GetSduiFeedStoreModule (copy), SignalsReactModule (copy)
+	local ItemCollectionKeyModule = GetItemCollectionKeyModule(p2, p3)
+	local P3 = p4 or p1
 	
-	return if fFlagLuaAppFixInlineSignalsReactPattern then signalsReactModule.useSignalState(reactModule.useCallback(function(p4)
-		-- upvalues: getSduiFeedStoreModule (copy), p3 (ref), var1 (ref)
-		return getSduiFeedStoreModule(p3).getItemCollection(var1, true)(p4)
-	end, { var1, p3 })) else signalsReactModule.useSignalState(function(p4)
-		-- upvalues: getSduiFeedStoreModule (copy), p3 (ref), var1 (ref)
-		return getSduiFeedStoreModule(p3).getItemCollection(var1, true)(p4)
+	return if FFlagLuaAppFixInlineSignalsReactPattern then SignalsReactModule.useSignalState((ReactModule.useCallback(function(p5) --[[ Line: 31 ]]
+		-- upvalues: GetSduiFeedStoreModule (upval), P3 (copy), ItemCollectionKeyModule (copy)
+		return GetSduiFeedStoreModule(P3).getItemCollection(ItemCollectionKeyModule, true)(p5)
+	end, { ItemCollectionKeyModule, P3 }))) else SignalsReactModule.useSignalState(function(p5) --[[ Line: 44 ]]
+		-- upvalues: GetSduiFeedStoreModule (upval), P3 (copy), ItemCollectionKeyModule (copy)
+		return GetSduiFeedStoreModule(P3).getItemCollection(ItemCollectionKeyModule, true)(p5)
 	end)
 end

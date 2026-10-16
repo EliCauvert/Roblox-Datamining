@@ -1,41 +1,41 @@
-﻿local ampUpsell = script:FindFirstAncestor("AmpUpsell")
-local parent = ampUpsell.Parent
-local playersService = game:GetService("Players")
-local appLinking = require(parent.RoactServiceTags).AppLinking
-local reactModule = require(parent.React)
-local promiseModule = require(parent.Promise)
-local IDVApiProvider = require(parent.IdentityVerification).IDVApiProvider
-local usePollIDVStatus = require(parent.IdentityVerification).usePollIDVStatus
-local foundationModule = require(parent.Foundation)
-local iconSize = foundationModule.Enums.IconSize
-local loading = foundationModule.Loading
-local useNavigation = require(parent.Navigation).useNavigation
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local useAppPolicy = require(parent.UniversalAppPolicy).useAppPolicy
-local navigateDown = require(parent.NavigationRodux).Thunks.NavigateDown
-local appPage = require(parent.RobloxAppEnums).AppPage
-local urlUtilsModule = require(ampUpsell.Common.UrlUtils)
-local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
-local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
-local facialAgeEstimationServiceWrapperModule = require(script.Parent.FacialAgeEstimationServiceWrapper)
+﻿local AmpUpsell = script:FindFirstAncestor("AmpUpsell")
+local Parent = AmpUpsell.Parent
+local Players = game:GetService("Players")
+local AppLinking = require(Parent.RoactServiceTags).AppLinking
+local ReactModule = require(Parent.React)
+local PromiseModule = require(Parent.Promise)
+local IDVApiProvider = require(Parent.IdentityVerification).IDVApiProvider
+local UsePollIDVStatusFunction = require(Parent.IdentityVerification).usePollIDVStatus
+local FoundationModule = require(Parent.Foundation)
+local IconSize = FoundationModule.Enums.IconSize
+local Loading = FoundationModule.Loading
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
+local NavigateDownFunction = require(Parent.NavigationRodux).Thunks.NavigateDown
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local UrlUtilsModule = require(AmpUpsell.Common.UrlUtils)
+local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3Dispatch
+local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
+local FacialAgeEstimationServiceWrapperModule = require(script.Parent.FacialAgeEstimationServiceWrapper)
 local FAEDirectLinkUpsellModule = require(script.Parent.FAEDirectLinkUpsell)
 local FAEWithQRCodeUpsellModule = require(script.Parent.FAEWithQRCodeUpsell)
 local FAEFailedModalModule = require(script.Parent.FAEFailedModal)
 local FAELoadingModalModule = require(script.Parent.FAELoadingModal)
-local authAnalyticsModule = require(parent.AuthAnalytics)
-local authMsgShown = authAnalyticsModule.Events.authMsgShown
-local authModalShown = authAnalyticsModule.Events.authModalShown
-local authFormInteraction = authAnalyticsModule.Events.authFormInteraction
-local useRoactService = require(parent.RobloxAppHooks).useRoactService
-local roactNetworking = require(parent.RoactServiceTags).RoactNetworking
-local getFFlagEnableRoactNetworkingForChallengeInteceptionModule = require(ampUpsell.Flags.GetFFlagEnableRoactNetworkingForChallengeInteception)
-local getFFlagShowFAELoadingModalModule = require(ampUpsell.Flags.GetFFlagShowFAELoadingModal)
-local enableFAECancellationAnalytics = game:DefineFastFlag("EnableFAECancellationAnalytics", false)
-local enableValidateFAEVerificationLink = game:DefineFastFlag("EnableValidateFAEVerificationLink", false)
-local getFFlagMoveAmpUpsellOffNavigateDown = require(parent.SharedFlags).GetFFlagMoveAmpUpsellOffNavigateDown
-local getFFlagEnableWebAmpWizardForFAEHandoffModule = require(ampUpsell.Flags.GetFFlagEnableWebAmpWizardForFAEHandoff)
-local getFFlagEnableFAEQRCodeHandoffModule = require(ampUpsell.Flags.GetFFlagEnableFAEQRCodeHandoff)
-local logEventOnceIfEnabled = require(ampUpsell.Common.LoggingUtils).logEventOnceIfEnabled
+local AuthAnalyticsModule = require(Parent.AuthAnalytics)
+local AuthMsgShownFunction = AuthAnalyticsModule.Events.authMsgShown
+local AuthModalShownFunction = AuthAnalyticsModule.Events.authModalShown
+local AuthFormInteractionFunction = AuthAnalyticsModule.Events.authFormInteraction
+local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
+local RoactNetworking = require(Parent.RoactServiceTags).RoactNetworking
+local GetFFlagEnableRoactNetworkingForChallengeInteceptionModule = require(AmpUpsell.Flags.GetFFlagEnableRoactNetworkingForChallengeInteception)
+local GetFFlagShowFAELoadingModalModule = require(AmpUpsell.Flags.GetFFlagShowFAELoadingModal)
+local EnableFAECancellationAnalytics = game:DefineFastFlag("EnableFAECancellationAnalytics", false)
+local EnableValidateFAEVerificationLink = game:DefineFastFlag("EnableValidateFAEVerificationLink", false)
+local GetFFlagMoveAmpUpsellOffNavigateDownFunction = require(Parent.SharedFlags).GetFFlagMoveAmpUpsellOffNavigateDown
+local GetFFlagEnableWebAmpWizardForFAEHandoffModule = require(AmpUpsell.Flags.GetFFlagEnableWebAmpWizardForFAEHandoff)
+local GetFFlagEnableFAEQRCodeHandoffModule = require(AmpUpsell.Flags.GetFFlagEnableFAEQRCodeHandoff)
+local LogEventOnceIfEnabledFunction = require(AmpUpsell.Common.LoggingUtils).logEventOnceIfEnabled
 local FAEWithCallbackPollDelay = game:DefineFastInt("FAEWithCallbackPollDelay", 2)
 local FAEWithCallbackPollMaxRetries = game:DefineFastInt("FAEWithCallbackPollMaxRetries", 5)
 local FAEBackgroundOnlyPollDelay = game:DefineFastInt("FAEBackgroundOnlyPollDelay", 15)
@@ -43,249 +43,261 @@ local FAEBackgroundOnlyPollMaxRetries = game:DefineFastInt("FAEBackgroundOnlyPol
 local FAEWithWebViewCallbackPollDelay = game:DefineFastInt("FAEWithWebViewCallbackPollDelay", 2)
 local FAEWithWebViewCallbackPollMaxRetries = game:DefineFastInt("FAEWithWebViewCallbackPollMaxRetries", 15)
 
-return function()
-	-- upvalues: useNavigation (ref), useDispatch (ref), useRoactService (ref), roactNetworking (ref), useAppPolicy (ref), appLinking (ref), getFFlagEnableFAEQRCodeHandoffModule (ref), reactModule (ref), authModalShown (ref), authFormInteraction (ref), authMsgShown (ref), getFFlagMoveAmpUpsellOffNavigateDown (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), facialAgeEstimationServiceWrapperModule (ref), FAEWithCallbackPollDelay (ref), FAEWithCallbackPollMaxRetries (ref), FAEBackgroundOnlyPollDelay (ref), FAEBackgroundOnlyPollMaxRetries (ref), getFFlagEnableWebAmpWizardForFAEHandoffModule (ref), FAEWithWebViewCallbackPollDelay (ref), FAEWithWebViewCallbackPollMaxRetries (ref), usePollIDVStatus (ref), playersService (ref), promiseModule (ref), urlUtilsModule (ref), enableValidateFAEVerificationLink (ref), getFFlagEnableRoactNetworkingForChallengeInteceptionModule (ref), logEventOnceIfEnabled (ref), IDVApiProvider (ref), enableFAECancellationAnalytics (ref), FAEFailedModalModule (ref), FAEWithQRCodeUpsellModule (ref), FAEDirectLinkUpsellModule (ref), getFFlagShowFAELoadingModalModule (ref), FAELoadingModalModule (ref), loading (ref), iconSize (ref)
-	local var2 = useNavigation()
-	local var3 = useDispatch()
-	local var4 = useRoactService(roactNetworking)
-	local var5 = useAppPolicy(function(p1)
+return function() --[[ Line: 76 | Named "FAEUpsellContainer" ]]
+	-- upvalues: UseNavigationFunction (copy), UseDispatchFunction (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), UseAppPolicyFunction (copy), AppLinking (copy), GetFFlagEnableFAEQRCodeHandoffModule (copy), ReactModule (copy), AuthModalShownFunction (copy), AuthFormInteractionFunction (copy), AuthMsgShownFunction (copy), GetFFlagMoveAmpUpsellOffNavigateDownFunction (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), FacialAgeEstimationServiceWrapperModule (copy), FAEWithCallbackPollDelay (copy), FAEWithCallbackPollMaxRetries (copy), FAEBackgroundOnlyPollDelay (copy), FAEBackgroundOnlyPollMaxRetries (copy), GetFFlagEnableWebAmpWizardForFAEHandoffModule (copy), FAEWithWebViewCallbackPollDelay (copy), FAEWithWebViewCallbackPollMaxRetries (copy), UsePollIDVStatusFunction (copy), Players (copy), PromiseModule (copy), UrlUtilsModule (copy), EnableValidateFAEVerificationLink (copy), GetFFlagEnableRoactNetworkingForChallengeInteceptionModule (copy), LogEventOnceIfEnabledFunction (copy), IDVApiProvider (copy), EnableFAECancellationAnalytics (copy), FAEFailedModalModule (copy), FAEWithQRCodeUpsellModule (copy), FAEDirectLinkUpsellModule (copy), GetFFlagShowFAELoadingModalModule (copy), FAELoadingModalModule (copy), Loading (copy), IconSize (copy)
+	local UseNavigationResult = UseNavigationFunction()
+	local UseDispatchResult = UseDispatchFunction()
+	local UseRoactServiceResult = UseRoactServiceFunction(RoactNetworking)
+	local UseAppPolicyResult = UseAppPolicyFunction(function(p1) --[[ Line: 81 ]]
 		return p1.getHasWebViewSupportForFAE()
 	end)
-	local extraProps = var2.getParam("extraProps")
-	local entryPointEventCtx = extraProps.entryPointEventCtx
-	local metadata = extraProps.metadata
-	local skipFacialAgeEstimationWebLinkModal = extraProps.skipFacialAgeEstimationWebLinkModal
-	local var6 = useRoactService(appLinking)
-	local onSuccess = extraProps.onSuccess
-	local onCancel = extraProps.onCancel
-	local onFailure = extraProps.onFailure
-	local onRetry = extraProps.onRetry
-	local var7 = var5 and getFFlagEnableFAEQRCodeHandoffModule()
-	local var8, var9 = reactModule.useState(false)
-	local var10, var11 = reactModule.useState(nil)
-	local var12, var13 = reactModule.useState(nil)
-	local var14, var15 = reactModule.useState(false)
-	local var16, var17 = reactModule.useState(false)
-	local var18 = if metadata then metadata.sessionId else ""
-	local var19, var20 = reactModule.useState(var18)
-	local var21 = reactModule.useCallback(function(p1)
-		-- upvalues: authModalShown (copy), entryPointEventCtx (ref), var9 (ref)
-		authModalShown(entryPointEventCtx, p1, "faeFailed")
-		var9(true)
-	end, { entryPointEventCtx })
-	local var22 = reactModule.useCallback(function(p1)
-		-- upvalues: authFormInteraction (copy), entryPointEventCtx (ref), onCancel (ref)
-		authFormInteraction(entryPointEventCtx, p1, "faeCancelled")
-		onCancel()
-	end, { onCancel, entryPointEventCtx })
-	local var23 = reactModule.useCallback(function(p1)
-		-- upvalues: authMsgShown (copy), entryPointEventCtx (ref), onSuccess (ref)
-		authMsgShown(entryPointEventCtx, p1, "faeSuccess")
-		onSuccess()
-	end, { onSuccess, entryPointEventCtx })
-	local var24 = reactModule.useCallback(function(p1, p2)
-		-- upvalues: getFFlagMoveAmpUpsellOffNavigateDown (copy), var2 (ref), appPage (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var3 (ref), navigateDown (copy)
-		if getFFlagMoveAmpUpsellOffNavigateDown() then
-			var2.push(appPage.GenericWebPage, {
-				detail = p1,
+	local ExtraPropsParam = UseNavigationResult.getParam("extraProps")
+	local EntryPointEventCtx = ExtraPropsParam.entryPointEventCtx
+	local Metadata = ExtraPropsParam.metadata
+	local SkipFacialAgeEstimationWebLinkModal = ExtraPropsParam.skipFacialAgeEstimationWebLinkModal
+	local UseRoactServiceResult1 = UseRoactServiceFunction(AppLinking)
+	local OnSuccessFunction = ExtraPropsParam.onSuccess
+	local OnCancelFunction = ExtraPropsParam.onCancel
+	local OnFailure = ExtraPropsParam.onFailure
+	local OnRetry = ExtraPropsParam.onRetry
+	local FFlagEnableFAEQRCodeHandoffModule = UseAppPolicyResult and GetFFlagEnableFAEQRCodeHandoffModule()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(nil)
+	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(false)
+	local UseStateResult5, UseStateResult2_4 = ReactModule.useState(false)
+	local SessionId = Metadata and Metadata.sessionId or ""
+	local UseStateResult6, UseStateResult2_5 = ReactModule.useState(SessionId)
+	local UseResult = ReactModule.useCallback(function(p1) --[[ Line: 108 ]]
+		-- upvalues: AuthModalShownFunction (upval), EntryPointEventCtx (copy), UseStateResult2 (copy)
+		AuthModalShownFunction(EntryPointEventCtx, p1, "faeFailed")
+		UseStateResult2(true)
+	end, { EntryPointEventCtx })
+	local UseResult1 = ReactModule.useCallback(function(p1) --[[ Line: 113 ]]
+		-- upvalues: AuthFormInteractionFunction (upval), EntryPointEventCtx (copy), OnCancelFunction (copy)
+		AuthFormInteractionFunction(EntryPointEventCtx, p1, "faeCancelled")
+		OnCancelFunction()
+	end, { OnCancelFunction, EntryPointEventCtx })
+	local UseResult2 = ReactModule.useCallback(function(p1) --[[ Line: 118 ]]
+		-- upvalues: AuthMsgShownFunction (upval), EntryPointEventCtx (copy), OnSuccessFunction (copy)
+		AuthMsgShownFunction(EntryPointEventCtx, p1, "faeSuccess")
+		OnSuccessFunction()
+	end, { OnSuccessFunction, EntryPointEventCtx })
+	local UseResult3 = ReactModule.useCallback(function(Detail, Callback) --[[ Line: 123 ]]
+		-- upvalues: GetFFlagMoveAmpUpsellOffNavigateDownFunction (upval), UseNavigationResult (copy), AppPage (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval)
+		if GetFFlagMoveAmpUpsellOffNavigateDownFunction() then
+			UseNavigationResult.push(AppPage.GenericWebPage, {
+				detail = Detail,
 				extraProps = {
 					title = "",
-					onClose = function()
-						-- upvalues: p2 (ref)
-						p2()
+					onClose = function() --[[ Line: 129 ]]
+						-- upvalues: Callback (copy)
+						Callback()
 					end
 				}
 			})
 			
 			return
 		end
-		local t = {
-			name = appPage.GenericWebPage,
-			detail = p1,
+		local config = {
+			name = AppPage.GenericWebPage,
+			detail = Detail,
 			extraProps = {
 				title = "",
-				onClose = function()
-					-- upvalues: p2 (ref)
-					p2()
+				onClose = function() --[[ Line: 140 ]]
+					-- upvalues: Callback (copy)
+					Callback()
 				end
 			}
 		}
 		
-		if fFlagSignalsNavP3Dispatch then
-			var1.down(var1.fromLegacyPage(t))
+		if FFlagSignalsNavP3Dispatch then
+			NavigationCommands.down(NavigationCommands.fromLegacyPage(config))
 			
 			return
+		else
+			UseDispatchResult(NavigateDownFunction(config))
 		end
-		var3(navigateDown(t))
 	end, {
-		if getFFlagMoveAmpUpsellOffNavigateDown() then var2 else var3
+		GetFFlagMoveAmpUpsellOffNavigateDownFunction() and UseNavigationResult or UseDispatchResult
 	})
-	local var25 = reactModule.useMemo(function()
-		-- upvalues: facialAgeEstimationServiceWrapperModule (copy), FAEWithCallbackPollDelay (copy), FAEWithCallbackPollMaxRetries (copy), var7 (ref), FAEBackgroundOnlyPollDelay (copy), FAEBackgroundOnlyPollMaxRetries (copy), var5 (ref), getFFlagEnableWebAmpWizardForFAEHandoffModule (copy), FAEWithWebViewCallbackPollDelay (copy), FAEWithWebViewCallbackPollMaxRetries (copy)
-		return if facialAgeEstimationServiceWrapperModule.isAvailable() then {
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 153 ]]
+		-- upvalues: FacialAgeEstimationServiceWrapperModule (upval), FAEWithCallbackPollDelay (upval), FAEWithCallbackPollMaxRetries (upval), FFlagEnableFAEQRCodeHandoffModule (copy), FAEBackgroundOnlyPollDelay (upval), FAEBackgroundOnlyPollMaxRetries (upval), UseAppPolicyResult (copy), GetFFlagEnableWebAmpWizardForFAEHandoffModule (upval), FAEWithWebViewCallbackPollDelay (upval), FAEWithWebViewCallbackPollMaxRetries (upval)
+		return if FacialAgeEstimationServiceWrapperModule.isAvailable() then {
 			delay = FAEWithCallbackPollDelay,
 			retries = FAEWithCallbackPollMaxRetries
-		} elseif var7 then {
+		} elseif FFlagEnableFAEQRCodeHandoffModule then {
 			delay = FAEBackgroundOnlyPollDelay,
 			retries = FAEBackgroundOnlyPollMaxRetries
-		} elseif var5 and not getFFlagEnableWebAmpWizardForFAEHandoffModule() then {
+		} elseif UseAppPolicyResult and not GetFFlagEnableWebAmpWizardForFAEHandoffModule() then {
 			delay = FAEWithWebViewCallbackPollDelay,
 			retries = FAEWithWebViewCallbackPollMaxRetries
 		} else {
 			delay = FAEBackgroundOnlyPollDelay,
 			retries = FAEBackgroundOnlyPollMaxRetries
 		}
-	end, { var5, var7 })
-	local var26, var27 = usePollIDVStatus({ delay = var25.delay, retries = var25.retries })
-	local var28 = reactModule.useCallback(function(p1, p2)
-		-- upvalues: facialAgeEstimationServiceWrapperModule (copy), authModalShown (copy), entryPointEventCtx (ref), var15 (ref), var7 (ref), playersService (copy), var13 (ref), promiseModule (copy), getFFlagEnableWebAmpWizardForFAEHandoffModule (copy), var11 (ref), urlUtilsModule (copy), enableValidateFAEVerificationLink (copy), var5 (ref), var24 (ref), skipFacialAgeEstimationWebLinkModal (ref), var6 (ref)
-		local sessionIdentifier = p1.sessionIdentifier
-		local verificationLink = p1.verificationLink
-		local sessionToken = p1.sessionToken
+	end, { UseAppPolicyResult, FFlagEnableFAEQRCodeHandoffModule })
+	local UsePollIDVStatusResult, UsePollIDVStatusResult2 = UsePollIDVStatusFunction({
+		delay = UseMemoResult.delay,
+		retries = UseMemoResult.retries
+	})
+	local UseResult4 = ReactModule.useCallback(function(p1, p2) --[[ Line: 179 ]]
+		-- upvalues: FacialAgeEstimationServiceWrapperModule (upval), AuthModalShownFunction (upval), EntryPointEventCtx (copy), UseStateResult2_3 (copy), FFlagEnableFAEQRCodeHandoffModule (copy), Players (upval), UseStateResult2_2 (copy), PromiseModule (upval), GetFFlagEnableWebAmpWizardForFAEHandoffModule (upval), UseStateResult2_1 (copy), UrlUtilsModule (upval), EnableValidateFAEVerificationLink (upval), UseAppPolicyResult (copy), UseResult3 (copy), SkipFacialAgeEstimationWebLinkModal (copy), UseRoactServiceResult1 (copy)
+		local SessionIdentifier = p1.sessionIdentifier
+		local VerificationLink = p1.verificationLink
+		local SessionToken = p1.sessionToken
 		
-		if facialAgeEstimationServiceWrapperModule.isAvailable() then
-			authModalShown(entryPointEventCtx, p2, "nativeFae")
-			var15(true)
+		if FacialAgeEstimationServiceWrapperModule.isAvailable() then
+			AuthModalShownFunction(EntryPointEventCtx, p2, "nativeFae")
+			UseStateResult2_3(true)
 			
-			return facialAgeEstimationServiceWrapperModule.startFlow(sessionIdentifier, sessionToken)
-		elseif var7 then
-			var15(false)
-			authModalShown(entryPointEventCtx, p2, "faeQRCodeHandoff")
-			local text = "roblox%3A%2F%2Fnavigation%2Famp_wizard%3Ffeature_name=TriggerFacialAgeEstimationRecourse%26namespace=account_identity%252FAgeCheck%26entry_point=" .. entryPointEventCtx .. "%26user_id=" .. tostring(if playersService.LocalPlayer then playersService.LocalPlayer.UserId else 0)
-			var13("https://ro.blox.com/Ebh5" .. "?pid=QR_code&c=fae_onelink" .. "&is_retargeting=false" .. "&af_dp=" .. text .. "&deep_link_value=" .. text)
-			
-			return promiseModule.resolve(sessionIdentifier)
-		elseif getFFlagEnableWebAmpWizardForFAEHandoffModule() then
-			authModalShown(entryPointEventCtx, p2, "webHandoffFAE")
-			var15(false)
-			var11(urlUtilsModule.buildAmpWizardUrl("TriggerAgeVerifyRecourse", "social%2FUpsells", entryPointEventCtx, "my%2Faccount"))
-			
-			return promiseModule.resolve(sessionIdentifier)
-		elseif enableValidateFAEVerificationLink and (not verificationLink or verificationLink == "") then
-			return promiseModule.reject("Invalid verification link")
+			return FacialAgeEstimationServiceWrapperModule.startFlow(SessionIdentifier, SessionToken)
 		end
-		authModalShown(entryPointEventCtx, p2, "noNativeFae")
-		var15(false)
+		if FFlagEnableFAEQRCodeHandoffModule then
+			UseStateResult2_3(false)
+			AuthModalShownFunction(EntryPointEventCtx, p2, "faeQRCodeHandoff")
+			local Text = "roblox%3A%2F%2Fnavigation%2Famp_wizard%3Ffeature_name=TriggerFacialAgeEstimationRecourse%26namespace=account_identity%252FAgeCheck%26entry_point=" .. EntryPointEventCtx .. "%26user_id=" .. tostring(Players.LocalPlayer and Players.LocalPlayer.UserId or 0)
+			UseStateResult2_2("https://ro.blox.com/Ebh5" .. "?pid=QR_code&c=fae_onelink" .. "&is_retargeting=false" .. "&af_dp=" .. Text .. "&deep_link_value=" .. Text)
+			
+			return PromiseModule.resolve(SessionIdentifier)
+		end
+		if GetFFlagEnableWebAmpWizardForFAEHandoffModule() then
+			AuthModalShownFunction(EntryPointEventCtx, p2, "webHandoffFAE")
+			UseStateResult2_3(false)
+			UseStateResult2_1(UrlUtilsModule.buildAmpWizardUrl("TriggerAgeVerifyRecourse", "social%2FUpsells", EntryPointEventCtx, "my%2Faccount"))
+			
+			return PromiseModule.resolve(SessionIdentifier)
+		end
+		if EnableValidateFAEVerificationLink and (not VerificationLink or VerificationLink == "") then
+			return PromiseModule.reject("Invalid verification link")
+		end
+		AuthModalShownFunction(EntryPointEventCtx, p2, "noNativeFae")
+		UseStateResult2_3(false)
 		
-		if var5 then
-			return promiseModule.new(function(p3)
-				-- upvalues: sessionIdentifier (ref), var24 (copy), verificationLink (ref)
-				var24(verificationLink, function()
-					-- upvalues: p3 (ref), sessionIdentifier (copy)
-					p3(sessionIdentifier)
+		if UseAppPolicyResult then
+			return PromiseModule.new(function(Callback) --[[ Line: 232 ]]
+				-- upvalues: SessionIdentifier (copy), UseResult3 (upval), VerificationLink (copy)
+				UseResult3(VerificationLink, function() --[[ Line: 233 ]]
+					-- upvalues: Callback (copy), SessionIdentifier (upval)
+					Callback(SessionIdentifier)
 				end)
 			end)
-		elseif skipFacialAgeEstimationWebLinkModal then
-			var6:openURL(verificationLink)
-		else
-			var11(verificationLink)
 		end
-		return promiseModule.resolve(sessionIdentifier)
+		if SkipFacialAgeEstimationWebLinkModal then
+			UseRoactServiceResult1:openURL(VerificationLink)
+		else
+			UseStateResult2_1(VerificationLink)
+		end
+		return PromiseModule.resolve(SessionIdentifier)
 	end, {
-		entryPointEventCtx, var5, var24, var15, skipFacialAgeEstimationWebLinkModal,
-		var6, var7
+		EntryPointEventCtx, UseAppPolicyResult, UseResult3, UseStateResult2_3,
+		SkipFacialAgeEstimationWebLinkModal, UseRoactServiceResult1,
+		FFlagEnableFAEQRCodeHandoffModule
 	})
-	reactModule.useEffect(function()
-		-- upvalues: var18 (ref), getFFlagEnableRoactNetworkingForChallengeInteceptionModule (copy), logEventOnceIfEnabled (copy), IDVApiProvider (copy), var4 (ref), var20 (ref), var28 (ref), var17 (ref), var26 (ref), var23 (ref), enableFAECancellationAnalytics (copy), var22 (ref), var21 (ref), var27 (ref)
-		local var29 = var18
+	ReactModule.useEffect(function() --[[ Line: 260 ]]
+		-- upvalues: SessionId (copy), GetFFlagEnableRoactNetworkingForChallengeInteceptionModule (upval), LogEventOnceIfEnabledFunction (upval), IDVApiProvider (upval), UseRoactServiceResult (copy), UseStateResult2_5 (copy), UseResult4 (copy), UseStateResult2_4 (copy), UsePollIDVStatusResult (copy), UseResult2 (copy), EnableFAECancellationAnalytics (upval), UseResult1 (copy), UseResult (copy), UsePollIDVStatusResult2 (copy)
+		local Text = SessionId
 		
-		if getFFlagEnableRoactNetworkingForChallengeInteceptionModule() then
-			logEventOnceIfEnabled("start_verification_init")
-			IDVApiProvider.startVerificationWithWrappedNetworking(var4, { ageEstimation = true }):andThen(function(p1)
-				-- upvalues: var29 (write), var20 (copy), logEventOnceIfEnabled (copy)
-				var29 = `{var29}_{p1.sessionIdentifier}`
-				var20(var29)
-				logEventOnceIfEnabled("start_verification_end")
+		if GetFFlagEnableRoactNetworkingForChallengeInteceptionModule() then
+			LogEventOnceIfEnabledFunction("start_verification_init")
+			IDVApiProvider.startVerificationWithWrappedNetworking(UseRoactServiceResult, { ageEstimation = true }):andThen(function(Result) --[[ Line: 265 ]]
+				-- upvalues: Text (ref), UseStateResult2_5 (upval), LogEventOnceIfEnabledFunction (upval)
+				Text = `{Text}_{Result.sessionIdentifier}`
+				UseStateResult2_5(Text)
+				LogEventOnceIfEnabledFunction("start_verification_end")
 				
-				return p1
-			end):andThen(function(p1)
-				-- upvalues: logEventOnceIfEnabled (copy), var28 (copy), var29 (write)
-				logEventOnceIfEnabled("persona_flow_init")
+				return Result
+			end):andThen(function(Result) --[[ Line: 271 ]]
+				-- upvalues: LogEventOnceIfEnabledFunction (upval), UseResult4 (upval), Text (ref)
+				LogEventOnceIfEnabledFunction("persona_flow_init")
 				
-				return var28(p1, var29)
-			end):andThen(function(p1)
-				-- upvalues: logEventOnceIfEnabled (copy), var17 (copy), var26 (copy)
-				logEventOnceIfEnabled("persona_flow_end")
-				var17(true)
-				logEventOnceIfEnabled("status_polling_init")
+				return UseResult4(Result, Text)
+			end):andThen(function(Result) --[[ Line: 275 ]]
+				-- upvalues: LogEventOnceIfEnabledFunction (upval), UseStateResult2_4 (upval), UsePollIDVStatusResult (upval)
+				LogEventOnceIfEnabledFunction("persona_flow_end")
+				UseStateResult2_4(true)
+				LogEventOnceIfEnabledFunction("status_polling_init")
 				
-				return var26(p1)
-			end):andThen(function()
-				-- upvalues: logEventOnceIfEnabled (copy), var23 (copy), var29 (write)
-				logEventOnceIfEnabled("status_polling_end")
+				return UsePollIDVStatusResult(Result)
+			end):andThen(function() --[[ Line: 281 ]]
+				-- upvalues: LogEventOnceIfEnabledFunction (upval), UseResult2 (upval), Text (ref)
+				LogEventOnceIfEnabledFunction("status_polling_end")
 				
-				return var23(var29)
-			end):catch(function(p1)
-				-- upvalues: logEventOnceIfEnabled (copy), enableFAECancellationAnalytics (copy), var22 (copy), var29 (write), var21 (copy)
-				logEventOnceIfEnabled("status_polling_end")
+				return UseResult2(Text)
+			end):catch(function(Err) --[[ Line: 285 ]]
+				-- upvalues: LogEventOnceIfEnabledFunction (upval), EnableFAECancellationAnalytics (upval), UseResult1 (upval), Text (ref), UseResult (upval)
+				LogEventOnceIfEnabledFunction("status_polling_end")
 				
-				if enableFAECancellationAnalytics and p1 and p1.resultType == Enum.FacialAgeEstimationResultType.Cancel then
-					var22(var29)
+				if EnableFAECancellationAnalytics and Err and Err.resultType == Enum.FacialAgeEstimationResultType.Cancel then
+					UseResult1(Text)
 					
 					return
+				else
+					UseResult(Text)
 				end
-				var21(var29)
 			end)
 			
-			return function()
-				-- upvalues: var27 (copy)
-				var27()
+			return function() --[[ Line: 298 ]]
+				-- upvalues: UsePollIDVStatusResult2 (upval)
+				UsePollIDVStatusResult2()
 			end
-		end
-		IDVApiProvider.startVerification({ ageEstimation = true }):andThen(function(p1)
-			-- upvalues: var29 (write), var20 (copy)
-			var29 = `{var29}_{p1.sessionIdentifier}`
-			var20(var29)
-			
-			return p1
-		end):andThen(function(p1)
-			-- upvalues: var28 (copy), var29 (write)
-			return var28(p1, var29)
-		end):andThen(function(p1)
-			-- upvalues: var17 (copy), var26 (copy)
-			var17(true)
-			
-			return var26(p1)
-		end):andThen(function()
-			-- upvalues: var23 (copy), var29 (write)
-			return var23(var29)
-		end):catch(function(p1)
-			-- upvalues: enableFAECancellationAnalytics (copy), var22 (copy), var29 (write), var21 (copy)
-			if enableFAECancellationAnalytics and p1 and p1.resultType == Enum.FacialAgeEstimationResultType.Cancel then
-				var22(var29)
+		else
+			IDVApiProvider.startVerification({ ageEstimation = true }):andThen(function(Result) --[[ Line: 303 ]]
+				-- upvalues: Text (ref), UseStateResult2_5 (upval)
+				Text = `{Text}_{Result.sessionIdentifier}`
+				UseStateResult2_5(Text)
 				
-				return
+				return Result
+			end):andThen(function(Result) --[[ Line: 308 ]]
+				-- upvalues: UseResult4 (upval), Text (ref)
+				return UseResult4(Result, Text)
+			end):andThen(function(Result) --[[ Line: 311 ]]
+				-- upvalues: UseStateResult2_4 (upval), UsePollIDVStatusResult (upval)
+				UseStateResult2_4(true)
+				
+				return UsePollIDVStatusResult(Result)
+			end):andThen(function() --[[ Line: 315 ]]
+				-- upvalues: UseResult2 (upval), Text (ref)
+				return UseResult2(Text)
+			end):catch(function(Err) --[[ Line: 318 ]]
+				-- upvalues: EnableFAECancellationAnalytics (upval), UseResult1 (upval), Text (ref), UseResult (upval)
+				if EnableFAECancellationAnalytics and Err and Err.resultType == Enum.FacialAgeEstimationResultType.Cancel then
+					UseResult1(Text)
+					
+					return
+				else
+					UseResult(Text)
+				end
+			end)
+			
+			return function() --[[ Line: 330 ]]
+				-- upvalues: UsePollIDVStatusResult2 (upval)
+				UsePollIDVStatusResult2()
 			end
-			var21(var29)
-		end)
-		
-		return function()
-			-- upvalues: var27 (copy)
-			var27()
 		end
 	end, {})
 	
-	return if var8 then reactModule.createElement(FAEFailedModalModule, {
-		sessionId = var19,
-		entryPointEventCtx = entryPointEventCtx,
-		onClose = onFailure,
-		onRetry = onRetry
-	}) elseif var12 then reactModule.createElement(FAEWithQRCodeUpsellModule, {
-		appsFlyerLink = var12,
-		sessionId = var19,
-		entryPointEventCtx = entryPointEventCtx,
-		onCancel = onCancel
-	}) elseif var10 then reactModule.createElement(FAEDirectLinkUpsellModule, {
-		sessionId = var19,
-		entryPointEventCtx = entryPointEventCtx,
-		webLink = var10,
-		onCancel = onCancel
-	}) elseif getFFlagShowFAELoadingModalModule() and var16 and not var14 then reactModule.createElement(FAELoadingModalModule, {
-		sessionId = var19,
-		entryPointEventCtx = entryPointEventCtx,
-		onCancel = onCancel
-	}) else reactModule.createElement(loading, {
-		size = iconSize.Medium,
+	return if UseStateResult then ReactModule.createElement(FAEFailedModalModule, {
+		sessionId = UseStateResult6,
+		entryPointEventCtx = EntryPointEventCtx,
+		onClose = OnFailure,
+		onRetry = OnRetry
+	}) elseif UseStateResult3 then ReactModule.createElement(FAEWithQRCodeUpsellModule, {
+		appsFlyerLink = UseStateResult3,
+		sessionId = UseStateResult6,
+		entryPointEventCtx = EntryPointEventCtx,
+		onCancel = OnCancelFunction
+	}) elseif UseStateResult1 then ReactModule.createElement(FAEDirectLinkUpsellModule, {
+		sessionId = UseStateResult6,
+		entryPointEventCtx = EntryPointEventCtx,
+		webLink = UseStateResult1,
+		onCancel = OnCancelFunction
+	}) elseif GetFFlagShowFAELoadingModalModule() and (UseStateResult5 and not UseStateResult4) then ReactModule.createElement(FAELoadingModalModule, {
+		sessionId = UseStateResult6,
+		entryPointEventCtx = EntryPointEventCtx,
+		onCancel = OnCancelFunction
+	}) else ReactModule.createElement(Loading, {
+		size = IconSize.Medium,
 		Position = UDim2.fromScale(0.5, 0.5),
 		AnchorPoint = Vector2.new(0.5, 0.5)
 	})

@@ -1,8 +1,8 @@
-﻿local groups = script:FindFirstAncestor("Groups")
-local reactModule = require(groups.Parent.React)
-local groupsAnalyticsContextModule = require(groups.Analytics.GroupsAnalyticsContext)
+﻿local Groups = script:FindFirstAncestor("Groups")
+local ReactModule = require(Groups.Parent.React)
+local GroupsAnalyticsContextModule = require(Groups.Analytics.GroupsAnalyticsContext)
 
-return function()
-	-- upvalues: reactModule (ref), groupsAnalyticsContextModule (ref)
-	return reactModule.useContext(groupsAnalyticsContextModule)
+return function() --[[ Line: 13 | Named "useGroupsAnalytics" ]]
+	-- upvalues: ReactModule (copy), GroupsAnalyticsContextModule (copy)
+	return ReactModule.useContext(GroupsAnalyticsContextModule)
 end

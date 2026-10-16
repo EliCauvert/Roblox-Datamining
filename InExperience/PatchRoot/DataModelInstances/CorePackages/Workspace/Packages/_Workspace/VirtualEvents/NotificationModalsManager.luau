@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.NotificationModalsManager.NotificationModalsManager)
+﻿return (require(script.Parent.Parent.Parent._Index.NotificationModalsManager.NotificationModalsManager))

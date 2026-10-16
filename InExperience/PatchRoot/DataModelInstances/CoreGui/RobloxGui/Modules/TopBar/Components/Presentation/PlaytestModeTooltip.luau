@@ -1,113 +1,114 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local robloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
-local reactModule = require(corePackagesService.Packages.React)
-local foundationModule = require(corePackagesService.Packages.Foundation)
-local linkingProtocol = require(corePackagesService.Workspace.Packages.LinkingProtocol).LinkingProtocol
-local useLocalization = require(corePackagesService.Workspace.Packages.Localization).Hooks.useLocalization
-local buildModeLaunchModule = require(corePackagesService.Workspace.Packages.BuildExperiencePlaytestLaunch.BuildModeLaunch)
-local settingsShowSignal = require(corePackagesService.Workspace.Packages.CoreScriptsCommon).SettingsShowSignal
-local observableValue = require(robloxGui.Modules.Chrome.ChromeShared.Service.ChromeUtils).ObservableValue
-local useIsPlaytestModeModule = require(robloxGui.Modules.Chrome.ChromeShared.Hooks.useIsPlaytestMode)
-local useObservableValueModule = require(robloxGui.Modules.Chrome.ChromeShared.Hooks.useObservableValue)
-local educationalTooltip = foundationModule.EducationalTooltip
-local overlayProvider = foundationModule.OverlayProvider
-local popoverSide = foundationModule.Enums.PopoverSide
-local popoverAlign = foundationModule.Enums.PopoverAlign
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local playtestModeDismissTooltip = game:DefineFastFlag("PlaytestModeDismissTooltip", false)
-local var1 = if playtestModeDismissTooltip and require(corePackagesService.Workspace.Packages.SharedFlags).FFlagEnableConsoleExpControls and (if playtestModeDismissTooltip then require(corePackagesService.Workspace.Packages.Chrome).Enabled() else nil) then require(script.Parent.Parent.GamepadConnector) else nil
-local playtestModeTooltipExcludeBuildMode = game:DefineFastFlag("PlaytestModeTooltipExcludeBuildMode", false)
-local playtestModeTooltipLearnMoreUrl = game:DefineFastString("PlaytestModeTooltipLearnMoreUrl", "https://about.roblox.com/community-standards")
-local playtestModeTooltipDisplayOrder = game:DefineFastInt("PlaytestModeTooltipDisplayOrder", -1)
-local var2 = false
-local var3 = if playtestModeDismissTooltip then observableValue.new(false) else nil
+﻿local CorePackages = game:GetService("CorePackages")
+local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
+local ReactModule = require(CorePackages.Packages.React)
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local LinkingProtocol = require(CorePackages.Workspace.Packages.LinkingProtocol).LinkingProtocol
+local UseLocalizationFunction = require(CorePackages.Workspace.Packages.Localization).Hooks.useLocalization
+local BuildModeLaunchModule = require(CorePackages.Workspace.Packages.BuildExperiencePlaytestLaunch.BuildModeLaunch)
+local SettingsShowSignal = require(CorePackages.Workspace.Packages.CoreScriptsCommon).SettingsShowSignal
+local ObservableValue = require(RobloxGui.Modules.Chrome.ChromeShared.Service.ChromeUtils).ObservableValue
+local UseIsPlaytestModeModule = require(RobloxGui.Modules.Chrome.ChromeShared.Hooks.useIsPlaytestMode)
+local UseObservableValueModule = require(RobloxGui.Modules.Chrome.ChromeShared.Hooks.useObservableValue)
+local EducationalTooltip = FoundationModule.EducationalTooltip
+local OverlayProvider = FoundationModule.OverlayProvider
+local PopoverSide = FoundationModule.Enums.PopoverSide
+local PopoverAlign = FoundationModule.Enums.PopoverAlign
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local PlaytestModeDismissTooltip = game:DefineFastFlag("PlaytestModeDismissTooltip", false)
+local FFlagEnableConsoleExpControls = require(CorePackages.Workspace.Packages.SharedFlags).FFlagEnableConsoleExpControls
+local EnabledResult = if PlaytestModeDismissTooltip then require(CorePackages.Workspace.Packages.Chrome).Enabled() else nil
+local GamepadConnectorModule = if PlaytestModeDismissTooltip and FFlagEnableConsoleExpControls and EnabledResult then require(script.Parent.Parent.GamepadConnector) else nil
+local PlaytestModeTooltipExcludeBuildMode = game:DefineFastFlag("PlaytestModeTooltipExcludeBuildMode", false)
+local PlaytestModeTooltipLearnMoreUrl = game:DefineFastString("PlaytestModeTooltipLearnMoreUrl", "https://about.roblox.com/community-standards")
+local PlaytestModeTooltipDisplayOrder = game:DefineFastInt("PlaytestModeTooltipDisplayOrder", -1)
+local Flag = false
+local NewObservableValue = if PlaytestModeDismissTooltip then ObservableValue.new(false) else nil
 
-local function _(p1, p2)
-	-- upvalues: playtestModeTooltipExcludeBuildMode (ref), buildModeLaunchModule (ref), var2 (write), playtestModeDismissTooltip (ref)
-	return if playtestModeTooltipExcludeBuildMode and buildModeLaunchModule:hasBuildMode() then false else not var2 and (p1 ~= nil and (p1.current ~= nil and (not playtestModeDismissTooltip or p2 ~= false)))
+local function _(p1, Enabled): boolean --[[ Line: 49 | Named "getCanShow" ]]
+	-- upvalues: PlaytestModeTooltipExcludeBuildMode (copy), BuildModeLaunchModule (copy), Flag (ref), PlaytestModeDismissTooltip (copy)
+	return (not PlaytestModeTooltipExcludeBuildMode or not BuildModeLaunchModule:hasBuildMode()) and (not Flag and (p1 ~= nil and (p1.current ~= nil and (not PlaytestModeDismissTooltip or Enabled ~= false))))
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: useLocalization (ref), useIsPlaytestModeModule (ref), playtestModeDismissTooltip (ref), useObservableValueModule (ref), var1 (ref), var3 (ref), reactModule (ref), playtestModeTooltipExcludeBuildMode (ref), buildModeLaunchModule (ref), var2 (write), linkingProtocol (ref), playtestModeTooltipLearnMoreUrl (ref), settingsShowSignal (ref), overlayProvider (ref), playtestModeTooltipDisplayOrder (ref), educationalTooltip (ref), popoverSide (ref), popoverAlign (ref), buttonVariant (ref)
-	local var4 = useLocalization({
+return ReactModule.memo(function(p1) --[[ Line: 57 | Named "PlaytestModeTooltip" ]]
+	-- upvalues: UseLocalizationFunction (copy), UseIsPlaytestModeModule (copy), PlaytestModeDismissTooltip (copy), UseObservableValueModule (copy), GamepadConnectorModule (copy), NewObservableValue (copy), ReactModule (copy), PlaytestModeTooltipExcludeBuildMode (copy), BuildModeLaunchModule (copy), Flag (ref), LinkingProtocol (copy), PlaytestModeTooltipLearnMoreUrl (copy), SettingsShowSignal (copy), OverlayProvider (copy), PlaytestModeTooltipDisplayOrder (copy), EducationalTooltip (copy), PopoverSide (copy), PopoverAlign (copy), ButtonVariant (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
 		title = "CoreScripts.FTUX.Heading.ReadyToPlaytest",
 		text = "CoreScripts.FTUX.Description.WhiteMenuPlaytestMode",
 		continueText = "CommonUI.Features.Action.Continue",
 		learnMoreText = "CommonUI.Features.Action.LearnMore"
 	})
-	local var5 = useIsPlaytestModeModule()
-	local var6 = if playtestModeDismissTooltip then useObservableValueModule(if var1 == nil then var3 else var1:getShowTopBar()) else nil
-	local useState = reactModule.useState
-	local anchorRef = p1.anchorRef
-	local var7 = if playtestModeTooltipExcludeBuildMode and buildModeLaunchModule:hasBuildMode() then false else not var2 and (anchorRef ~= nil and (anchorRef.current ~= nil and (not playtestModeDismissTooltip or (if playtestModeDismissTooltip then var6 else nil) ~= false)))
-	useState, var17 = useState(var7)
-	local var8 = reactModule.useCallback(function()
-		-- upvalues: var2 (copy), var7 (ref)
-		var2 = true
-		var7(false)
+	local UseIsPlaytestModeModuleResult = UseIsPlaytestModeModule()
+	local UseObservableValueModuleResult = if PlaytestModeDismissTooltip then UseObservableValueModule(if GamepadConnectorModule == nil then NewObservableValue else GamepadConnectorModule:getShowTopBar()) else nil
+	local AnchorRef = p1.anchorRef
+	local UseStateResult, UseStateResult2 = ReactModule.useState((not PlaytestModeTooltipExcludeBuildMode or not BuildModeLaunchModule:hasBuildMode()) and (not Flag and (AnchorRef ~= nil and (AnchorRef.current ~= nil and (not PlaytestModeDismissTooltip or (if PlaytestModeDismissTooltip then UseObservableValueModuleResult else nil) ~= false)))))
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 78 ]]
+		-- upvalues: Flag (upval), UseStateResult2 (copy)
+		Flag = true
+		UseStateResult2(false)
 	end, {})
-	local var9 = reactModule.useCallback(function()
-		-- upvalues: linkingProtocol (copy), playtestModeTooltipLearnMoreUrl (copy), playtestModeDismissTooltip (copy), var8 (ref), var2 (copy), var7 (ref)
-		linkingProtocol.default:openURL(playtestModeTooltipLearnMoreUrl)
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 83 ]]
+		-- upvalues: LinkingProtocol (upval), PlaytestModeTooltipLearnMoreUrl (upval), PlaytestModeDismissTooltip (upval), UseResult (copy), Flag (upval), UseStateResult2 (copy)
+		LinkingProtocol.default:openURL(PlaytestModeTooltipLearnMoreUrl)
 		
-		if playtestModeDismissTooltip then
-			var8()
+		if PlaytestModeDismissTooltip then
+			UseResult()
 			
 			return
+		else
+			Flag = true
+			UseStateResult2(false)
 		end
-		var2 = true
-		var7(false)
-	end, { if playtestModeDismissTooltip then var8 else nil })
-	reactModule.useEffect(function()
-		-- upvalues: var7 (ref), p1 (ref), playtestModeDismissTooltip (copy), var6 (write), playtestModeTooltipExcludeBuildMode (copy), buildModeLaunchModule (copy), var2 (copy)
-		local anchorRef = p1.anchorRef
-		var7(if playtestModeTooltipExcludeBuildMode and buildModeLaunchModule:hasBuildMode() then false else not var2 and (anchorRef ~= nil and (anchorRef.current ~= nil and (not playtestModeDismissTooltip or (if playtestModeDismissTooltip then var6 else nil) ~= false))))
+	end, { if PlaytestModeDismissTooltip then UseResult else nil })
+	ReactModule.useEffect(function() --[[ Line: 93 ]]
+		-- upvalues: UseStateResult2 (copy), p1 (copy), PlaytestModeDismissTooltip (upval), UseObservableValueModuleResult (ref), PlaytestModeTooltipExcludeBuildMode (upval), BuildModeLaunchModule (upval), Flag (upval)
+		local AnchorRef = p1.anchorRef
+		UseStateResult2((not PlaytestModeTooltipExcludeBuildMode or not BuildModeLaunchModule:hasBuildMode()) and (not Flag and (AnchorRef ~= nil and (AnchorRef.current ~= nil and (not PlaytestModeDismissTooltip or (if PlaytestModeDismissTooltip then UseObservableValueModuleResult else nil) ~= false)))))
 	end, {
 		p1.anchorRef,
-		if playtestModeDismissTooltip then var6 else nil
+		if PlaytestModeDismissTooltip then UseObservableValueModuleResult else nil
 	})
 	
-	if playtestModeDismissTooltip then
-		reactModule.useEffect(function()
-			-- upvalues: useState (ref), var6 (write), var8 (ref)
-			if useState and not var6 then
-				var8()
+	if PlaytestModeDismissTooltip then
+		ReactModule.useEffect(function() --[[ Line: 98 ]]
+			-- upvalues: UseStateResult (copy), UseObservableValueModuleResult (ref), UseResult (copy)
+			if UseStateResult and not UseObservableValueModuleResult then
+				UseResult()
 			end
-		end, { useState, var6 })
-		reactModule.useEffect(function()
-			-- upvalues: settingsShowSignal (copy), var8 (ref)
-			local var10 = settingsShowSignal:connect(function(p2)
-				-- upvalues: var8 (copy)
+		end, { UseStateResult, UseObservableValueModuleResult })
+		ReactModule.useEffect(function() --[[ Line: 104 ]]
+			-- upvalues: SettingsShowSignal (upval), UseResult (copy)
+			local Connection = SettingsShowSignal:connect(function(p2) --[[ Line: 105 ]]
+				-- upvalues: UseResult (upval)
 				if p2 then
-					var8()
+					UseResult()
 				end
 			end)
 			
-			return function()
-				-- upvalues: var10 (ref)
-				var10:Disconnect()
+			return function() --[[ Line: 111 ]]
+				-- upvalues: Connection (copy)
+				Connection:Disconnect()
 			end
-		end, { var8 })
+		end, { UseResult })
 	end
-	return if var2 or not var5 or not useState then nil else reactModule.createElement(overlayProvider, { DisplayOrder = playtestModeTooltipDisplayOrder }, {
-		Tooltip = reactModule.createElement(educationalTooltip, {
+	return if Flag or not UseIsPlaytestModeModuleResult or not UseStateResult then nil else ReactModule.createElement(OverlayProvider, { DisplayOrder = PlaytestModeTooltipDisplayOrder }, {
+		Tooltip = ReactModule.createElement(EducationalTooltip, {
 			isOpen = true,
 			anchorRef = p1.anchorRef,
-			title = var4.title,
-			text = var4.text,
-			side = popoverSide.Bottom,
-			align = popoverAlign.Start,
-			onClose = var8,
+			title = UseLocalizationResult.title,
+			text = UseLocalizationResult.text,
+			side = PopoverSide.Bottom,
+			align = PopoverAlign.Start,
+			onClose = UseResult,
 			actions = {
 				{
-					text = var4.continueText,
-					variant = buttonVariant.Emphasis,
-					onActivated = var8
+					text = UseLocalizationResult.continueText,
+					variant = ButtonVariant.Emphasis,
+					onActivated = UseResult
 				},
 				{
-					text = var4.learnMoreText,
-					variant = buttonVariant.Standard,
-					onActivated = var9
+					text = UseLocalizationResult.learnMoreText,
+					variant = ButtonVariant.Standard,
+					onActivated = UseResult1
 				}
 			}
 		})

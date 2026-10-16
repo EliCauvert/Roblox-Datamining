@@ -1,7 +1,7 @@
-﻿local useLayerCollector = require(script:FindFirstAncestor("AppChat").Parent.UIBlox).Core.Layout.LayerCollector.useLayerCollector
-local appChatVerticalConstraintThreshold = game:DefineFastInt("AppChatVerticalConstraintThreshold", 300)
+﻿local UseLayerCollectorFunction = require(script:FindFirstAncestor("AppChat").Parent.UIBlox).Core.Layout.LayerCollector.useLayerCollector
+local AppChatVerticalConstraintThreshold = game:DefineFastInt("AppChatVerticalConstraintThreshold", 300)
 
-return function()
-	-- upvalues: useLayerCollector (ref), appChatVerticalConstraintThreshold (ref)
-	return useLayerCollector().absoluteSize.Y <= appChatVerticalConstraintThreshold
+return function(): boolean --[[ Line: 10 ]]
+	-- upvalues: UseLayerCollectorFunction (copy), AppChatVerticalConstraintThreshold (copy)
+	return UseLayerCollectorFunction().absoluteSize.Y <= AppChatVerticalConstraintThreshold
 end

@@ -1,100 +1,100 @@
-﻿local parent = script:FindFirstAncestor("GraphQLServer").Parent
-local httpService = game:GetService("HttpService")
-local urlBuilder = require(parent.UrlBuilder).UrlBuilder
-local urlBase = require(parent.UrlBuilder).UrlBase
-local promiseModule = require(parent.Promise)
-local graphQLError = require(parent.GraphQL).GraphQLError
-local response = require(parent.Fetch).Response
-local fetch = require(parent.Fetch).fetch
-local _ = require(parent.LuauPolyfill)
+﻿local Parent = script:FindFirstAncestor("GraphQLServer").Parent
+local HttpService = game:GetService("HttpService")
+local PromiseModule = require(Parent.Promise)
+local GraphQLError = require(Parent.GraphQL).GraphQLError
+local Response = require(Parent.Fetch).Response
+local Fetch = require(Parent.Fetch).fetch
+local _ = require(Parent.LuauPolyfill)
 local _ = require(script.Parent.Parent.generatedTypes)
-local fFlagPlayerSearchEnableOnlineFrequents = require(parent.SharedFlags).FFlagPlayerSearchEnableOnlineFrequents
-local var1 = urlBuilder.new({
+local FFlagPlayerSearchEnableOnlineFrequents = require(Parent.SharedFlags).FFlagPlayerSearchEnableOnlineFrequents
+local NewResult = require(Parent.UrlBuilder).UrlBuilder.new({
 	path = "profile-insights-api/v1/multiProfileInsights",
-	base = urlBase.APIS
+	base = require(Parent.UrlBuilder).UrlBase.APIS
 })
 
 return {
-	findProfileInsightsByUserIds = function(p1, p2, p3, p4)
-		-- upvalues: fetch (ref), promiseModule (ref), var1 (ref), httpService (ref), response (ref), graphQLError (ref)
-		local var2 = p4 or fetch
+	findProfileInsightsByUserIds = function(UserIds, p1, RankingStrategy, p2) --[[ Line: 113 ]]
+		-- upvalues: Fetch (copy), PromiseModule (copy), NewResult (copy), HttpService (copy), Response (copy), GraphQLError (copy)
+		local Fetch1 = if p2 then p2 else Fetch
 		
-		return promiseModule.new(function(p5, p6)
-			-- upvalues: var2 (ref), var1 (copy), httpService (copy), p1 (ref), p3 (ref), p2 (ref), response (copy), graphQLError (copy)
-			local var3 = var2(var1(), {
+		return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ()) --[[ Line: 121 ]]
+			-- upvalues: Fetch1 (copy), NewResult (upval), HttpService (upval), UserIds (copy), RankingStrategy (copy), p1 (copy), Response (upval), GraphQLError (upval)
+			local v1 = Fetch1(NewResult(), {
 				method = "POST",
-				body = httpService:JSONEncode({
-					userIds = p1,
-					count = if p3 then nil else p2 or 2,
-					rankingStrategy = p3
+				body = HttpService:JSONEncode({
+					userIds = UserIds,
+					count = if RankingStrategy then nil else p1 or 2,
+					rankingStrategy = RankingStrategy
 				}),
 				headers = {
 					["Content-Type"] = "application/json",
 					Accept = "application/json"
 				}
-			}):catch(function()
-				-- upvalues: response (copy)
-				return response.error()
+			}):catch(function() --[[ Line: 135 ]]
+				-- upvalues: Response (upval)
+				return Response.error()
 			end):expect()
 			
-			if not var3.ok then
-				p6(graphQLError.new(string.format("Failed to fetch profile insights. Error code: %d", var3.status)))
+			if not v1.ok then
+				Callback(GraphQLError.new(string.format("Failed to fetch profile insights. Error code: %d", v1.status)))
 				
 				return
 			end
-			local var4 = var3:json():catch(function()
+			local v2 = v1:json():catch(function() --[[ Line: 151 ]]
 				return nil
 			end):expect()
 			
-			if var4 then
-				p5(var4.userInsights)
+			if v2 then
+				Callback1(v2.userInsights)
 				
 				return
+			else
+				Callback(GraphQLError.new(string.format("Failed to decode HTTP response as JSON for profile insights: %s.", HttpService:JSONEncode(UserIds))))
 			end
-			p6(graphQLError.new(string.format("Failed to decode HTTP response as JSON for profile insights: %s.", httpService:JSONEncode(p1))))
 		end)
 	end,
-	findProfileInsightsByUserIdsFeed = function(p1, p2, p3, p4, p5)
-		-- upvalues: fFlagPlayerSearchEnableOnlineFrequents (ref), fetch (ref), promiseModule (ref), var1 (ref), httpService (ref), response (ref), graphQLError (ref)
-		local var2 = if fFlagPlayerSearchEnableOnlineFrequents then p4 else nil
-		local var3 = p5 or fetch
+	findProfileInsightsByUserIdsFeed = function(UserIds, p1, PageId, p2, p3) --[[ Line: 173 ]]
+		-- upvalues: FFlagPlayerSearchEnableOnlineFrequents (copy), Fetch (copy), PromiseModule (copy), NewResult (copy), HttpService (copy), Response (copy), GraphQLError (copy)
+		local RankingStrategy = if FFlagPlayerSearchEnableOnlineFrequents then p2 else nil
+		local Fetch1 = if p3 then p3 else Fetch
 		
-		return promiseModule.new(function(p6, p7)
-			-- upvalues: var3 (ref), var1 (copy), httpService (copy), p1 (ref), var2 (ref), p2 (ref), response (copy), graphQLError (copy)
-			local var4 = var3(var1(), {
+		return (PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ()) --[[ Line: 121 ]]
+			-- upvalues: Fetch1 (copy), NewResult (upval), HttpService (upval), UserIds (copy), RankingStrategy (copy), p1 (copy), Response (upval), GraphQLError (upval)
+			local v1 = Fetch1(NewResult(), {
 				method = "POST",
-				body = httpService:JSONEncode({
-					userIds = p1,
-					count = if var2 then nil else p2 or 2,
-					rankingStrategy = var2
+				body = HttpService:JSONEncode({
+					userIds = UserIds,
+					count = if RankingStrategy then nil else p1 or 2,
+					rankingStrategy = RankingStrategy
 				}),
 				headers = {
 					["Content-Type"] = "application/json",
 					Accept = "application/json"
 				}
-			}):catch(function()
-				-- upvalues: response (copy)
-				return response.error()
+			}):catch(function() --[[ Line: 135 ]]
+				-- upvalues: Response (upval)
+				return Response.error()
 			end):expect()
 			
-			if not var4.ok then
-				p7(graphQLError.new(string.format("Failed to fetch profile insights. Error code: %d", var4.status)))
+			if not v1.ok then
+				Callback(GraphQLError.new(string.format("Failed to fetch profile insights. Error code: %d", v1.status)))
 				
 				return
 			end
-			local var5 = var4:json():catch(function()
+			local v2 = v1:json():catch(function() --[[ Line: 151 ]]
 				return nil
 			end):expect()
 			
-			if var5 then
-				p6(var5.userInsights)
+			if v2 then
+				Callback1(v2.userInsights)
 				
 				return
+			else
+				Callback(GraphQLError.new(string.format("Failed to decode HTTP response as JSON for profile insights: %s.", HttpService:JSONEncode(UserIds))))
 			end
-			p7(graphQLError.new(string.format("Failed to decode HTTP response as JSON for profile insights: %s.", httpService:JSONEncode(p1))))
-		end):andThen(function(p6)
-			-- upvalues: p3 (ref)
-			return { pageId = p3, profileInsights = p6 }
-		end)
+		end):andThen(function(Result) --[[ Line: 185 ]]
+			-- upvalues: PageId (copy)
+			return { pageId = PageId, profileInsights = Result }
+		end))
 	end
 }

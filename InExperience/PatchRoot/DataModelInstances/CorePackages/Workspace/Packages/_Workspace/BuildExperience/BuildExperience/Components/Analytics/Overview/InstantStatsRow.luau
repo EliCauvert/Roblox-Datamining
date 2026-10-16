@@ -1,26 +1,26 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local reactModule = require(parent.React)
-local view = require(parent.Foundation).View
-local instantStatCardModule = require(script.Parent.InstantStatCard)
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local ReactModule = require(Parent.React)
+local View = require(Parent.Foundation).View
+local InstantStatCardModule = require(script.Parent.InstantStatCard)
 
-return function(p1)
-	-- upvalues: reactModule (ref), view (ref), instantStatCardModule (ref)
-	local t = {}
+return function(p1) --[[ Line: 17 | Named "InstantStatsRow" ]]
+	-- upvalues: ReactModule (copy), View (copy), InstantStatCardModule (copy)
+	local Elements = {}
 	
-	for i, v in p1.stats do
-		t[`Cell{i}`] = reactModule.createElement(view, { tag = "fill auto-y", LayoutOrder = i }, {
-			Card = reactModule.createElement(instantStatCardModule, {
-				label = v.label,
-				valueText = v.valueText,
-				icon = v.icon,
-				isLoading = v.isLoading,
-				testId = v.testId
+	for LayoutOrder, stat in p1.stats do
+		Elements[`Cell{LayoutOrder}`] = ReactModule.createElement(View, { tag = "fill auto-y", LayoutOrder = LayoutOrder }, {
+			Card = ReactModule.createElement(InstantStatCardModule, {
+				label = stat.label,
+				valueText = stat.valueText,
+				icon = stat.icon,
+				isLoading = stat.isLoading,
+				testId = stat.testId
 			})
 		})
 	end
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "row gap-medium size-full-0 auto-y",
 		LayoutOrder = p1.layoutOrder,
 		testId = p1.testId or "InstantStatsRow"
-	}, t)
+	}, Elements)
 end

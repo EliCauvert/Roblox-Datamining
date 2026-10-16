@@ -1,8 +1,8 @@
-﻿local reactModule = require(script:FindFirstAncestor("BulkPurchaseApp").Parent.React)
-local bulkPurchaseRequestModule = require(script.Parent.BulkPurchaseRequest)
-local useBulkPurchaseRequestPropsModule = require(script.Parent.useBulkPurchaseRequestProps)
+﻿local ReactModule = require(script:FindFirstAncestor("BulkPurchaseApp").Parent.React)
+local BulkPurchaseRequestModule = require(script.Parent.BulkPurchaseRequest)
+local UseBulkPurchaseRequestPropsModule = require(script.Parent.useBulkPurchaseRequestProps)
 
-return function()
-	-- upvalues: useBulkPurchaseRequestPropsModule (ref), reactModule (ref), bulkPurchaseRequestModule (ref)
-	return reactModule.createElement(bulkPurchaseRequestModule, useBulkPurchaseRequestPropsModule())
+return function() --[[ Line: 8 | Named "BulkPurchaseRequestContainer" ]]
+	-- upvalues: UseBulkPurchaseRequestPropsModule (copy), ReactModule (copy), BulkPurchaseRequestModule (copy)
+	return ReactModule.createElement(BulkPurchaseRequestModule, (UseBulkPurchaseRequestPropsModule()))
 end

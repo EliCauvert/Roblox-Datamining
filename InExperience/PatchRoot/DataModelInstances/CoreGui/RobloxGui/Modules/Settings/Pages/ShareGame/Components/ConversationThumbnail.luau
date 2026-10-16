@@ -1,11 +1,11 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local roactModule = require(corePackagesService.Packages.Roact)
-local constantsModule = require(game:GetService("CoreGui").RobloxGui.Modules.Settings.Pages.ShareGame.Constants)
-local constants = require(corePackagesService.Workspace.Packages.UserLib).Utils.Constants
-local getRbxthumbWithTypeSizeAndOptions = require(corePackagesService.Workspace.Packages.UserLib).Utils.getRbxthumbWithTypeSizeAndOptions
-local GRAY3 = constantsModule.Color.GRAY3
-local inviteAvatarThumbnailSize = constantsModule.InviteAvatarThumbnailSize
-local t = {
+﻿local CorePackages = game:GetService("CorePackages")
+local RoactModule = require(CorePackages.Packages.Roact)
+local ConstantsModule = require(game:GetService("CoreGui").RobloxGui.Modules.Settings.Pages.ShareGame.Constants)
+local Constants = require(CorePackages.Workspace.Packages.UserLib).Utils.Constants
+local GetRbxthumbWithTypeSizeAndOptionsFunction = require(CorePackages.Workspace.Packages.UserLib).Utils.getRbxthumbWithTypeSizeAndOptions
+local GRAY3 = ConstantsModule.Color.GRAY3
+local InviteAvatarThumbnailSize = ConstantsModule.InviteAvatarThumbnailSize
+local config = {
 	[1] = {
 		{
 			Size = UDim2.new(1, 0, 1, 0),
@@ -95,62 +95,62 @@ local t = {
 		}
 	}
 }
-local conversationThumbnail = roactModule.PureComponent:extend("ConversationThumbnail")
+local ConversationThumbnail = RoactModule.PureComponent:extend("ConversationThumbnail")
 
-function conversationThumbnail.render(p1)
-	-- upvalues: t (ref), constants (ref), inviteAvatarThumbnailSize (ref), getRbxthumbWithTypeSizeAndOptions (ref), constantsModule (ref), roactModule (ref), GRAY3 (ref)
-	local size = p1.props.size
-	local layoutOrder = p1.props.layoutOrder
-	local zIndex = p1.props.zIndex
-	local users = p1.props.users
-	local usersCount = #users
-	local t_1 = {}
+function ConversationThumbnail.render(p1) --[[ Line: 113 ]]
+	-- upvalues: config (copy), Constants (copy), InviteAvatarThumbnailSize (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (copy), ConstantsModule (copy), RoactModule (copy), GRAY3 (copy)
+	local Size = p1.props.size
+	local LayoutOrder = p1.props.layoutOrder
+	local ZIndex = p1.props.zIndex
+	local Users = p1.props.users
+	local CountUsers = #Users
+	local Frames = {}
 	
-	for i, v in ipairs(users) do
-		local var1 = t[usersCount][i]
-		t_1["AvatarHolder-" .. i] = roactModule.createElement("Frame", {
+	for i, user in ipairs(Users) do
+		local Entry = config[CountUsers][i]
+		Frames["AvatarHolder-" .. i] = RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			ClipsDescendants = true,
-			Size = var1.FrameSize,
-			Position = var1.FramePosition,
-			ZIndex = zIndex
+			Size = Entry.FrameSize,
+			Position = Entry.FramePosition,
+			ZIndex = ZIndex
 		}, {
-			Avatar = roactModule.createElement("ImageLabel", {
+			Avatar = RoactModule.createElement("ImageLabel", {
 				BackgroundTransparency = 1,
-				Size = var1.Size,
-				Position = var1.Position,
-				Image = (if v then getRbxthumbWithTypeSizeAndOptions(v.id, constantsModule.InviteAvatarRbxthumbType, constants.RbxThumbnailSizeToNumberSize[inviteAvatarThumbnailSize]) else nil) or "rbxasset://textures/ui/LuaApp/graphic/ph-avatar-portrait.png",
-				ZIndex = zIndex
+				Size = Entry.Size,
+				Position = Entry.Position,
+				Image = (if user then GetRbxthumbWithTypeSizeAndOptionsFunction(user.id, ConstantsModule.InviteAvatarRbxthumbType, Constants.RbxThumbnailSizeToNumberSize[InviteAvatarThumbnailSize]) else nil) or "rbxasset://textures/ui/LuaApp/graphic/ph-avatar-portrait.png",
+				ZIndex = ZIndex
 			})
 		})
 		
-		if var1.Border then
-			t_1["Border-" .. i] = roactModule.createElement("Frame", {
+		if Entry.Border then
+			Frames["Border-" .. i] = RoactModule.createElement("Frame", {
 				BorderSizePixel = 0,
-				Size = var1.Border.BorderSize,
-				Position = var1.Border.BorderPosition,
+				Size = Entry.Border.BorderSize,
+				Position = Entry.Border.BorderPosition,
 				BackgroundColor3 = GRAY3,
-				ZIndex = zIndex
+				ZIndex = ZIndex
 			})
 		end
 	end
-	return roactModule.createElement("Frame", {
+	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		Size = size,
-		LayoutOrder = layoutOrder,
-		ZIndex = zIndex
+		Size = Size,
+		LayoutOrder = LayoutOrder,
+		ZIndex = ZIndex
 	}, {
-		ContentsContainer = roactModule.createElement("Frame", {
+		ContentsContainer = RoactModule.createElement("Frame", {
 			BackgroundTransparency = 0,
 			BorderSizePixel = 1,
 			Size = UDim2.new(1, -1, 1, -1),
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			Position = UDim2.new(0.5, 0, 0.5, 0),
-			BackgroundColor3 = constantsModule.Color.WHITE,
+			BackgroundColor3 = ConstantsModule.Color.WHITE,
 			BorderColor3 = GRAY3,
-			ZIndex = zIndex
-		}, t_1)
+			ZIndex = ZIndex
+		}, Frames)
 	})
 end
 
-return conversationThumbnail
+return ConversationThumbnail

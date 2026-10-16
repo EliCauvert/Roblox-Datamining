@@ -1,31 +1,31 @@
-﻿local appCommonLibModule = require(script:FindFirstAncestor("SduiSharedUtilities").Parent.AppCommonLib)
+﻿local AppCommonLibModule = require(script:FindFirstAncestor("SduiSharedUtilities").Parent.AppCommonLib)
 
-return function()
-	-- upvalues: appCommonLibModule (ref)
-	local tbl = setmetatable({}, { __mode = "v" })
+return function() --[[ Line: 26 | Named "createSduiFocusActivationStore" ]]
+	-- upvalues: AppCommonLibModule (copy)
+	local self = setmetatable({}, { __mode = "v" })
 	
 	return {
-		register = function(p1, p2)
-			-- upvalues: tbl (ref), appCommonLibModule (copy)
-			local var1 = tbl[p1]
+		register = function(Key, p1) --[[ Line: 34 ]]
+			-- upvalues: self (copy), AppCommonLibModule (upval)
+			local SelfEntry = self[Key]
 			
-			if var1 == nil then
-				var1 = appCommonLibModule.Signal.new()
-				tbl[p1] = var1
+			if SelfEntry == nil then
+				SelfEntry = AppCommonLibModule.Signal.new()
+				self[Key] = SelfEntry
 			end
-			local var2 = var1:connect(p2)
+			local Connection = SelfEntry:connect(p1)
 			
-			return function()
-				-- upvalues: var2 (ref)
-				var2.disconnect()
+			return function() --[[ Line: 41 ]]
+				-- upvalues: Connection (copy)
+				Connection.disconnect()
 			end
 		end,
-		activate = function(p1)
-			-- upvalues: tbl (ref)
-			local var1 = tbl[p1]
+		activate = function(p1) --[[ Line: 46 ]]
+			-- upvalues: self (copy)
+			local SelfEntry = self[p1]
 			
-			if var1 then
-				var1:fire()
+			if SelfEntry then
+				SelfEntry:fire()
 			end
 		end
 	}

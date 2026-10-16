@@ -1,38 +1,26 @@
-﻿local parent = script:FindFirstAncestor("GameCollections").Parent
-local useUserExperiment = require(parent.RoactAppExperiment).useUserExperiment
-local appUserLayers = require(parent.ExperimentLayers).AppUserLayers
-local useUiModeInfo = require(parent.RobloxAppHooks).useUiModeInfo
-local uiMode = require(parent.RobloxAppEnums).UiMode
-local responsiveModule = require(parent.Responsive)
-local fFlagLuaAppResponsiveEnginePreferredInput = require(parent.SharedFlags).FFlagLuaAppResponsiveEnginePreferredInput
-local useAppPolicy = require(parent.UniversalAppPolicy).useAppPolicy
+﻿local Parent = script:FindFirstAncestor("GameCollections").Parent
+local UseUserExperimentFunction = require(Parent.RoactAppExperiment).useUserExperiment
+local AppUserLayers = require(Parent.ExperimentLayers).AppUserLayers
+local UseUiModeInfoFunction = require(Parent.RobloxAppHooks).useUiModeInfo
+local UiMode = require(Parent.RobloxAppEnums).UiMode
+local ResponsiveModule = require(Parent.Responsive)
+local FFlagLuaAppResponsiveEnginePreferredInput = require(Parent.SharedFlags).FFlagLuaAppResponsiveEnginePreferredInput
+local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
 
-return function()
-	-- upvalues: useUserExperiment (ref), appUserLayers (ref), responsiveModule (ref), useUiModeInfo (ref), useAppPolicy (ref), fFlagLuaAppResponsiveEnginePreferredInput (ref), uiMode (ref)
-	local var1 = useUserExperiment({
-		appUserLayers.PlatformExcellenceQualityImprovementConsoles
-	}, function(p1)
-		-- upvalues: appUserLayers (copy)
-		return (p1[appUserLayers.PlatformExcellenceQualityImprovementConsoles] or {}).enableHoldToPlay
+return function() --[[ Line: 14 | Named "useIsHoldToPlayEnabledForGames" ]]
+	-- upvalues: UseUserExperimentFunction (copy), AppUserLayers (copy), ResponsiveModule (copy), UseUiModeInfoFunction (copy), UseAppPolicyFunction (copy), FFlagLuaAppResponsiveEnginePreferredInput (copy), UiMode (copy)
+	local UseUserExperimentResult = UseUserExperimentFunction({
+		AppUserLayers.PlatformExcellenceQualityImprovementConsoles
+	}, function(p1) --[[ Line: 17 ]]
+		-- upvalues: AppUserLayers (upval)
+		return (p1[AppUserLayers.PlatformExcellenceQualityImprovementConsoles] or {}).enableHoldToPlay
 	end)
-	local var2 = responsiveModule.useLastInput()
-	local var3 = useUiModeInfo()
-	local var4 = useAppPolicy(function(p1)
+	local UseLastInputResult = ResponsiveModule.useLastInput()
+	local UseUiModeInfoResult = UseUiModeInfoFunction()
+	local UseAppPolicyResult = UseAppPolicyFunction(function(p1) --[[ Line: 28 ]]
 		return p1.getStickyShortcutBarEnabled()
 	end)
-	local var5 = if fFlagLuaAppResponsiveEnginePreferredInput then responsiveModule.usePreferredInput() else nil
-	local var6 = var1
+	local UsePreferredInputResult = if FFlagLuaAppResponsiveEnginePreferredInput then ResponsiveModule.usePreferredInput() else nil
 	
-	if var6 then
-		if fFlagLuaAppResponsiveEnginePreferredInput then
-			var6 = var5 == responsiveModule.Input.Directional
-			var6 = nil
-		else
-			var6 = var2 == responsiveModule.Input.Directional
-		end
-		if var6 then
-			var6 = if var3.uiMode ~= uiMode.TenFoot then var4 else true
-		end
-	end
-	return var6
+	return UseUserExperimentResult and (if FFlagLuaAppResponsiveEnginePreferredInput then UsePreferredInputResult == ResponsiveModule.Input.Directional and (UseUiModeInfoResult.uiMode == UiMode.TenFoot or UseAppPolicyResult) else UseLastInputResult == ResponsiveModule.Input.Directional and (UseUiModeInfoResult.uiMode == UiMode.TenFoot or UseAppPolicyResult))
 end

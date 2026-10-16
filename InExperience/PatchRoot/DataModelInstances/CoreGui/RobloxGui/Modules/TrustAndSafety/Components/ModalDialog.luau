@@ -1,95 +1,95 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local contextActionService = game:GetService("ContextActionService")
-local roactModule = require(corePackagesService.Packages.Roact)
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local tModule = require(corePackagesService.Packages.t)
-local parent = script.Parent.Parent
-local virtualKeyboardMonitorModule = require(parent.Components.VirtualKeyboardMonitor)
-local assetsModule = require(parent.Resources.Assets)
-local dividerModule = require(require(parent.Dependencies).Divider)
-local imageSetButton = UIBloxModule.Core.ImageSet.ImageSetButton
-local withStyle = UIBloxModule.Core.Style.withStyle
-local iconButton = UIBloxModule.App.Button.IconButton
-local headerBar = UIBloxModule.App.Bar.HeaderBar
-local iconSize = UIBloxModule.App.ImageSet.Enum.IconSize
-local images = UIBloxModule.App.ImageSet.Images
-local makeBackButton = require(corePackagesService.Workspace.Packages.AppHeaderBar).makeBackButton
-local modalDialog = roactModule.Component:extend("ModalDialog")
-modalDialog.validateProps = tModule.strictInterface({
-	visible = tModule.boolean,
-	screenSize = tModule.Vector2,
-	titleText = tModule.optional(tModule.string),
-	showCloseButton = tModule.optional(tModule.boolean),
-	headerBar = tModule.optional(tModule.table),
-	contents = tModule.optional(tModule.table),
-	actionButtons = tModule.optional(tModule.table),
-	onDismiss = tModule.optional(tModule.callback),
-	onBackButtonActivated = tModule.optional(tModule.callback)
+﻿local CorePackages = game:GetService("CorePackages")
+local ContextActionService = game:GetService("ContextActionService")
+local RoactModule = require(CorePackages.Packages.Roact)
+local UIBloxModule = require(CorePackages.Packages.UIBlox)
+local TModule = require(CorePackages.Packages.t)
+local Parent = script.Parent.Parent
+local VirtualKeyboardMonitorModule = require(Parent.Components.VirtualKeyboardMonitor)
+local AssetsModule = require(Parent.Resources.Assets)
+local DividerModule = require(require(Parent.Dependencies).Divider)
+local ImageSetButton = UIBloxModule.Core.ImageSet.ImageSetButton
+local WithStyleFunction = UIBloxModule.Core.Style.withStyle
+local IconButton = UIBloxModule.App.Button.IconButton
+local HeaderBar = UIBloxModule.App.Bar.HeaderBar
+local IconSize = UIBloxModule.App.ImageSet.Enum.IconSize
+local Images = UIBloxModule.App.ImageSet.Images
+local MakeBackButtonFunction = require(CorePackages.Workspace.Packages.AppHeaderBar).makeBackButton
+local ModalDialog = RoactModule.Component:extend("ModalDialog")
+ModalDialog.validateProps = TModule.strictInterface({
+	visible = TModule.boolean,
+	screenSize = TModule.Vector2,
+	titleText = TModule.optional(TModule.string),
+	showCloseButton = TModule.optional(TModule.boolean),
+	headerBar = TModule.optional(TModule.table),
+	contents = TModule.optional(TModule.table),
+	actionButtons = TModule.optional(TModule.table),
+	onDismiss = TModule.optional(TModule.callback),
+	onBackButtonActivated = TModule.optional(TModule.callback)
 })
 
-function modalDialog.init(p1)
-	-- upvalues: virtualKeyboardMonitorModule (ref)
-	p1.virtualKeyboardMonitor = virtualKeyboardMonitorModule.getInstance()
+function ModalDialog.init(p1) --[[ Line: 44 ]]
+	-- upvalues: VirtualKeyboardMonitorModule (copy)
+	p1.virtualKeyboardMonitor = VirtualKeyboardMonitorModule.getInstance()
 	
-	function p0.onOverlayActivated()
-		-- upvalues: p1 (ref)
-		if p1.virtualKeyboardMonitor:isKeyboardJustOff() then
+	function p1.onOverlayActivated() --[[ Line: 46 ]]
+		-- upvalues: p1 (copy)
+		if not p1.virtualKeyboardMonitor:isKeyboardJustOff() then
+			p1.props.onDismiss()
+			
 			return
 		end
-		p1.props.onDismiss()
 	end
 end
 
-function modalDialog.renderHeaderBarLeft(p1)
-	-- upvalues: roactModule (ref), iconButton (ref), iconSize (ref), images (ref), makeBackButton (ref)
-	local props = p1.props
+function ModalDialog.renderHeaderBarLeft(p1) --[[ Line: 55 ]]
+	-- upvalues: RoactModule (copy), IconButton (copy), IconSize (copy), Images (copy), MakeBackButtonFunction (copy)
+	local Props = p1.props
 	
-	return if props.showCloseButton then function()
-		-- upvalues: roactModule (copy), iconButton (copy), iconSize (copy), images (copy), props (ref)
-		return roactModule.createElement(iconButton, {
-			iconSize = iconSize.Medium,
-			icon = images["icons/navigation/close"],
-			onActivated = props.onDismiss
+	return if Props.showCloseButton then function() --[[ Line: 59 ]]
+		-- upvalues: RoactModule (upval), IconButton (upval), IconSize (upval), Images (upval), Props (copy)
+		return RoactModule.createElement(IconButton, {
+			iconSize = IconSize.Medium,
+			icon = Images["icons/navigation/close"],
+			onActivated = Props.onDismiss
 		})
-	end elseif props.onBackButtonActivated == nil then function()
+	end elseif Props.onBackButtonActivated == nil then function() --[[ Line: 71 ]]
 		return nil
-	end else makeBackButton(props.onBackButtonActivated)
+	end else MakeBackButtonFunction(Props.onBackButtonActivated)
 end
 
-function modalDialog.renderHeaderBarRight(_)
-	return function()
+function ModalDialog:renderHeaderBarRight() --[[ Line: 77 ]]
+	return function() --[[ Line: 79 ]]
 		return nil
 	end
 end
 
-function modalDialog.render(p1)
-	-- upvalues: withStyle (ref), roactModule (ref), imageSetButton (ref), assetsModule (ref), headerBar (ref), dividerModule (ref)
-	local vector2_1, uDim2
-	local props = p1.props
-	local vector2 = Vector2.new(math.min(props.screenSize.X, 540), math.min(props.screenSize.Y, 375))
-	local _ = nil
-	local _ = nil
+function ModalDialog.render(p1) --[[ Line: 84 ]]
+	-- upvalues: WithStyleFunction (copy), RoactModule (copy), ImageSetButton (copy), AssetsModule (copy), HeaderBar (copy), DividerModule (copy)
+	local Props = p1.props
+	local _Vector2 = Vector2.new(math.min(Props.screenSize.X, 540), (math.min(Props.screenSize.Y, 375)))
+	local _Vector2_1 = nil
+	local _UDim2 = nil
 	
-	if props.screenSize.X < 540 then
-		vector2_1 = Vector2.new(0.5, 1)
-		uDim2 = UDim2.fromScale(0.5, 1)
+	if Props.screenSize.X < 540 then
+		_Vector2_1 = Vector2.new(0.5, 1)
+		_UDim2 = UDim2.fromScale(0.5, 1)
 	else
-		vector2_1 = Vector2.new(0.5, 0.5)
-		uDim2 = UDim2.fromScale(0.5, 0.5)
+		_Vector2_1 = Vector2.new(0.5, 0.5)
+		_UDim2 = UDim2.fromScale(0.5, 0.5)
 	end
-	local minValue = math.min(230, vector2.Y - 49 - 96)
+	local Smallest = math.min(230, _Vector2.Y - 49 - 96)
 	
-	if not props.actionButtons then
-		minValue += 96
+	if not Props.actionButtons then
+		Smallest += 96
 	end
-	return withStyle(function(p2)
-		-- upvalues: roactModule (copy), props (ref), p1 (ref), imageSetButton (copy), vector2_1 (write), assetsModule (copy), uDim2 (write), vector2 (ref), headerBar (copy), dividerModule (copy), minValue (write)
-		return roactModule.createElement("Frame", {
+	return WithStyleFunction(function(p2) --[[ Line: 106 ]]
+		-- upvalues: RoactModule (upval), Props (copy), p1 (copy), ImageSetButton (upval), _Vector2_1 (ref), AssetsModule (upval), _UDim2 (ref), _Vector2 (copy), HeaderBar (upval), DividerModule (upval), Smallest (ref)
+		return RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.fromScale(1, 1),
-			Visible = props.visible
+			Visible = Props.visible
 		}, {
-			Overlay = roactModule.createElement("TextButton", {
+			Overlay = RoactModule.createElement("TextButton", {
 				AutoButtonColor = false,
 				BackgroundColor3 = p2.Theme.Overlay.Color,
 				BackgroundTransparency = p2.Theme.Overlay.Transparency,
@@ -97,95 +97,96 @@ function modalDialog.render(p1)
 				Size = UDim2.fromScale(1, 1),
 				Text = "",
 				ZIndex = -10,
-				[roactModule.Event.Activated] = p1.onOverlayActivated
+				[RoactModule.Event.Activated] = p1.onOverlayActivated
 			}),
-			Dialog = roactModule.createElement(imageSetButton, {
+			Dialog = RoactModule.createElement(ImageSetButton, {
 				Active = true,
 				BackgroundTransparency = 1,
-				AnchorPoint = vector2_1,
-				Image = assetsModule.Images.RoundedRect.Image,
+				AnchorPoint = _Vector2_1,
+				Image = AssetsModule.Images.RoundedRect.Image,
 				ImageColor3 = p2.Theme.BackgroundUIDefault.Color,
 				ImageTransparency = p2.Theme.BackgroundUIDefault.Transparency,
-				Position = uDim2,
-				ScaleType = assetsModule.Images.RoundedRect.ScaleType,
-				Size = UDim2.fromOffset(vector2.X, vector2.Y),
-				SliceCenter = assetsModule.Images.RoundedRect.SliceCenter
+				Position = _UDim2,
+				ScaleType = AssetsModule.Images.RoundedRect.ScaleType,
+				Size = UDim2.fromOffset(_Vector2.X, _Vector2.Y),
+				SliceCenter = AssetsModule.Images.RoundedRect.SliceCenter
 			}, {
-				Layout = roactModule.createElement("UIListLayout", {
+				Layout = RoactModule.createElement("UIListLayout", {
 					FillDirection = Enum.FillDirection.Vertical,
 					HorizontalAlignment = Enum.HorizontalAlignment.Center,
 					SortOrder = Enum.SortOrder.LayoutOrder
 				}),
-				HeaderBar = roactModule.createElement("Frame", {
+				HeaderBar = RoactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 1,
 					Size = UDim2.new(1, 0, 0, 48)
 				}, {
-					Bar = props.headerBar or (roactModule.createElement(headerBar, {
+					Bar = Props.headerBar or (RoactModule.createElement(HeaderBar, {
 						backgroundTransparency = 1,
 						barHeight = 48,
 						renderLeft = p1:renderHeaderBarLeft(),
 						renderRight = p1:renderHeaderBarRight(),
-						title = props.titleText
+						title = Props.titleText
 					}) or nil)
 				}),
-				Divider = roactModule.createElement(dividerModule, { LayoutOrder = 2 }),
-				Content = roactModule.createElement("Frame", {
+				Divider = RoactModule.createElement(DividerModule, { LayoutOrder = 2 }),
+				Content = RoactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 3,
 					ZIndex = 10,
-					Size = UDim2.new(1, 0, 0, minValue)
-				}, { Contents = props.contents }),
-				ActionBar = props.actionButtons and roactModule.createElement("Frame", {
+					Size = UDim2.new(1, 0, 0, Smallest)
+				}, { Contents = Props.contents }),
+				ActionBar = Props.actionButtons and RoactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 4,
 					Size = UDim2.new(1, 0, 0, 96)
 				}, {
-					Padding = roactModule.createElement("UIPadding", {
+					Padding = RoactModule.createElement("UIPadding", {
 						PaddingTop = UDim.new(0, 24),
 						PaddingBottom = UDim.new(0, 24),
 						PaddingLeft = UDim.new(0, 24),
 						PaddingRight = UDim.new(0, 24)
 					}),
-					ActionButtons = props.actionButtons
+					ActionButtons = Props.actionButtons
 				}) or nil
 			})
 		})
 	end)
 end
 
-function modalDialog.bindActions(p1)
-	-- upvalues: contextActionService (ref)
-	contextActionService:BindCoreAction("ModalDialogDismiss", function(_, p2, _)
-		-- upvalues: p1 (ref)
-		if p2 == Enum.UserInputState.Begin then
+function ModalDialog.bindActions(p1) --[[ Line: 181 ]]
+	-- upvalues: ContextActionService (copy)
+	ContextActionService:BindCoreAction("ModalDialogDismiss", function(_, UserInputState, _) --[[ Line: 182 | Named "dismissFunc" ]]
+		-- upvalues: p1 (copy)
+		if UserInputState == Enum.UserInputState.Begin then
 			p1.props.onDismiss()
 		end
 	end, false, Enum.KeyCode.Escape)
 end
 
-function modalDialog.unbindActions(_)
-	-- upvalues: contextActionService (ref)
-	contextActionService:UnbindCoreAction("ModalDialogDismiss")
+function ModalDialog:unbindActions() --[[ Line: 190 ]]
+	-- upvalues: ContextActionService (copy)
+	ContextActionService:UnbindCoreAction("ModalDialogDismiss")
 end
 
-function modalDialog.didMount(p1)
+function ModalDialog.didMount(p1) --[[ Line: 194 ]]
 	if p1.props.visible then
 		p1:bindActions()
 	end
 end
 
-function modalDialog.didUpdate(p1)
+function ModalDialog.didUpdate(p1) --[[ Line: 200 ]]
 	if p1.props.visible then
 		p1:bindActions()
 		
 		return
+	else
+		p1:unbindActions()
 	end
+end
+
+function ModalDialog.willUnmount(p1) --[[ Line: 208 ]]
 	p1:unbindActions()
 end
 
-function modalDialog.willUnmount(p1)
-	p1:unbindActions()
-end
-
-return modalDialog
+return ModalDialog

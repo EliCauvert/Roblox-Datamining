@@ -1,7 +1,7 @@
-﻿local getEngineUGCValidateAssetTextureLimitsModule = require(script.Parent.Parent.flags.getEngineUGCValidateAssetTextureLimits)
+﻿local GetEngineUGCValidateAssetTextureLimitsModule = require(script.Parent.Parent.flags.getEngineUGCValidateAssetTextureLimits)
 game:DefineFastFlag("UGCValidateDecalTextureLimits", false)
 
-return function()
-	-- upvalues: getEngineUGCValidateAssetTextureLimitsModule (ref)
-	return getEngineUGCValidateAssetTextureLimitsModule() and game:GetFastFlag("UGCValidateDecalTextureLimits")
+return function() --[[ Line: 7 ]]
+	-- upvalues: GetEngineUGCValidateAssetTextureLimitsModule (copy)
+	return GetEngineUGCValidateAssetTextureLimitsModule() and game:GetFastFlag("UGCValidateDecalTextureLimits")
 end

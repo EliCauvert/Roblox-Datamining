@@ -1,35 +1,36 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local runService = game:GetService("RunService")
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local robloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
-local shareGame = robloxGui.Modules.Settings.Pages.ShareGame
-local constantsModule = require(shareGame.Constants)
-local stoppedToastTimerModule = require(shareGame.Actions.StoppedToastTimer)
-local themeModule = require(robloxGui.Modules.Settings.Theme)
-local inviteStatus = constantsModule.InviteStatus
-local var1 = require(shareGame.getTranslator)()
-local errorToaster = roactModule.PureComponent:extend("ErrorToaster")
+﻿local CorePackages = game:GetService("CorePackages")
+local RunService = game:GetService("RunService")
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
+local ShareGame = RobloxGui.Modules.Settings.Pages.ShareGame
+local ConstantsModule = require(ShareGame.Constants)
+local StoppedToastTimerModule = require(ShareGame.Actions.StoppedToastTimer)
+local ThemeModule = require(RobloxGui.Modules.Settings.Theme)
+local InviteStatus = ConstantsModule.InviteStatus
+local Translator = require(ShareGame.getTranslator)()
+local ErrorToaster = RoactModule.PureComponent:extend("ErrorToaster")
 
-function errorToaster.restartTimer(p1)
-	-- upvalues: runService (ref)
+function ErrorToaster.restartTimer(p1) --[[ Line: 26 ]]
+	-- upvalues: RunService (copy)
 	if not p1.timerConnection then
-		p1.timerConnection = runService.RenderStepped:Connect(function()
-			-- upvalues: p1 (ref)
-			local failedInvites = p1.props.failedInvites
+		p1.timerConnection = RunService.RenderStepped:Connect(function() --[[ Line: 28 ]]
+			-- upvalues: p1 (copy)
+			local FailedInvites = p1.props.failedInvites
 			
-			if #failedInvites == 0 then
+			if #FailedInvites == 0 then
 				p1:stopTimer()
 				
 				return
-			elseif failedInvites[#failedInvites].timeStamp + 4 < tick() then
+			end
+			if FailedInvites[#FailedInvites].timeStamp + 4 < tick() then
 				p1:stopTimer()
 			end
 		end)
 	end
 end
 
-function errorToaster.stopTimer(p1)
+function ErrorToaster.stopTimer(p1) --[[ Line: 47 ]]
 	if p1.timerConnection then
 		p1.timerConnection:Disconnect()
 		p1.timerConnection = nil
@@ -37,67 +38,66 @@ function errorToaster.stopTimer(p1)
 	p1.props.stoppedTimerDispatch()
 end
 
-function errorToaster.didUpdate(p1)
+function ErrorToaster.didUpdate(p1) --[[ Line: 56 ]]
 	if #p1.props.failedInvites ~= 0 then
 		p1:restartTimer()
 	end
 end
 
-function errorToaster.render(p1)
-	-- upvalues: constantsModule (ref), inviteStatus (ref), roactModule (ref), themeModule (ref), var1 (ref)
-	local failedInvites = p1.props.failedInvites
-	local TOAST_HEIGHT = constantsModule.LayoutSpecific[p1.props.deviceLayout].TOAST_HEIGHT
+function ErrorToaster.render(p1) --[[ Line: 64 ]]
+	-- upvalues: ConstantsModule (copy), InviteStatus (copy), RoactModule (copy), ThemeModule (copy), Translator (copy)
+	local FailedInvites = p1.props.failedInvites
+	local TOASTHEIGHT = ConstantsModule.LayoutSpecific[p1.props.deviceLayout].TOAST_HEIGHT
 	
-	if #failedInvites == 0 then return end
-	local var2 = nil
-	local status = failedInvites[#failedInvites].status
+	if #FailedInvites == 0 then return end
+	local v1: string? = nil
+	local Status = FailedInvites[#FailedInvites].status
 	
-	if status == inviteStatus.Moderated then
-		var2 = "Feature.SettingsHub.Label.ModeratedInviteError"
-	elseif status == inviteStatus.Failed then
-		var2 = "Feature.SettingsHub.Label.GameInviteError"
+	if Status == InviteStatus.Moderated then
+		v1 = "Feature.SettingsHub.Label.ModeratedInviteError"
 	else
-		return
+		if Status ~= InviteStatus.Failed then return end
+		v1 = "Feature.SettingsHub.Label.GameInviteError"
 	end
-	return roactModule.createElement("ScreenGui", {
+	return RoactModule.createElement("ScreenGui", {
 		DisplayOrder = 2,
 		ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 	}, {
-		ToastFrame = roactModule.createElement("Frame", {
+		ToastFrame = RoactModule.createElement("Frame", {
 			BorderSizePixel = 0,
 			AnchorPoint = Vector2.new(0.5, 0),
-			BackgroundColor3 = constantsModule.Color.RED,
+			BackgroundColor3 = ConstantsModule.Color.RED,
 			Position = UDim2.new(0.5, 0, 0, 0),
-			Size = UDim2.new(0.5, 0, 0, TOAST_HEIGHT)
+			Size = UDim2.new(0.5, 0, 0, TOASTHEIGHT)
 		}, {
-			InnerTextPadding = roactModule.createElement("UIPadding", {
+			InnerTextPadding = RoactModule.createElement("UIPadding", {
 				PaddingLeft = UDim.new(0, 6),
 				PaddingRight = UDim.new(0, 6)
 			}),
-			ToastText = roactModule.createElement("TextLabel", {
+			ToastText = RoactModule.createElement("TextLabel", {
 				BackgroundTransparency = 1,
 				TextWrapped = true,
-				Font = themeModule.font(Enum.Font.SourceSansSemibold, "Semibold"),
+				Font = ThemeModule.font(Enum.Font.SourceSansSemibold, "Semibold"),
 				Size = UDim2.new(1, 0, 1, 0),
-				Text = var1:FormatByKey(var2),
-				TextColor3 = constantsModule.Color.WHITE,
-				TextSize = themeModule.textSize(16)
+				Text = Translator:FormatByKey(v1),
+				TextColor3 = ConstantsModule.Color.WHITE,
+				TextSize = ThemeModule.textSize(16)
 			})
 		})
 	})
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p1)
+return RoactRoduxModule.UNSTABLE_connect2(function(p1) --[[ Line: 113 | Named "mapStateToProps" ]]
 	return {
 		deviceLayout = p1.DeviceInfo.DeviceLayout,
 		failedInvites = p1.Toasts.failedInvites
 	}
-end, function(p1)
-	-- upvalues: stoppedToastTimerModule (ref)
+end, function(Callback) --[[ Line: 120 | Named "mapDispatchToProps" ]]
+	-- upvalues: StoppedToastTimerModule (copy)
 	return {
-		stoppedTimerDispatch = function()
-			-- upvalues: p1 (ref), stoppedToastTimerModule (copy)
-			p1(stoppedToastTimerModule())
+		stoppedTimerDispatch = function() --[[ Line: 122 ]]
+			-- upvalues: Callback (copy), StoppedToastTimerModule (upval)
+			Callback(StoppedToastTimerModule())
 		end
 	}
-end)(errorToaster)
+end)(ErrorToaster)

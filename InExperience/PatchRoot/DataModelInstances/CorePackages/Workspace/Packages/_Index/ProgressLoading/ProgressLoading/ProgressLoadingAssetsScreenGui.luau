@@ -1,44 +1,45 @@
-﻿local parent = script:FindFirstAncestor("ProgressLoading").Parent
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local progressLoadingAssetsModule = require(script.Parent.ProgressLoadingAssets)
-local progressLoadingTelemetryModule = require(script.Parent.ProgressLoadingTelemetry)
-local getDeferredAssetStoreModule = require(script.Parent.Stores.GetDeferredAssetStore)
-local constantsModule = require(script.Parent.Constants)
+﻿local Parent = script:FindFirstAncestor("ProgressLoading").Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local ProgressLoadingAssetsModule = require(script.Parent.ProgressLoadingAssets)
+local ProgressLoadingTelemetryModule = require(script.Parent.ProgressLoadingTelemetry)
+local GetDeferredAssetStoreModule = require(script.Parent.Stores.GetDeferredAssetStore)
+local ConstantsModule = require(script.Parent.Constants)
 
-local function getIsLoadingAssets(value)
-	-- upvalues: getDeferredAssetStoreModule (ref)
-	local var1 = getDeferredAssetStoreModule(value)
+local function getIsLoadingAssets(p1): boolean --[[ Line: 14 ]]
+	-- upvalues: GetDeferredAssetStoreModule (copy)
+	local DeferredAssetStoreModule = GetDeferredAssetStoreModule(p1)
 	
-	return if var1 then var1.getDownloadStatus(value) == Enum.PrefetchDownloadStatus.InProgress else false
+	return if DeferredAssetStoreModule then DeferredAssetStoreModule.getDownloadStatus(p1) == Enum.PrefetchDownloadStatus.InProgress else false
 end
 
-return reactModule.memo(function(value)
-	-- upvalues: signalsReactModule (ref), getIsLoadingAssets (ref), reactModule (ref), progressLoadingTelemetryModule (ref), constantsModule (ref), progressLoadingAssetsModule (ref)
-	local var1 = signalsReactModule.useSignalState(getIsLoadingAssets)
-	local var2, var3 = reactModule.useState(var1)
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), progressLoadingTelemetryModule (copy), var3 (ref)
-		if var1 then
-			progressLoadingTelemetryModule.logLoadingAssetsActivated()
-			var3(true)
+return ReactModule.memo(function(p1) --[[ Line: 28 | Named "ProgressLoadingAssetsScreenGui" ]]
+	-- upvalues: SignalsReactModule (copy), getIsLoadingAssets (copy), ReactModule (copy), ProgressLoadingTelemetryModule (copy), ConstantsModule (copy), ProgressLoadingAssetsModule (copy)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(getIsLoadingAssets)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(UseSignalStateResult)
+	ReactModule.useEffect(function() --[[ Line: 32 ]]
+		-- upvalues: UseSignalStateResult (copy), ProgressLoadingTelemetryModule (upval), UseStateResult2 (copy)
+		if UseSignalStateResult then
+			ProgressLoadingTelemetryModule.logLoadingAssetsActivated()
+			UseStateResult2(true)
 		end
-	end, { var1 })
+	end, { UseSignalStateResult })
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 39 ]]
+		-- upvalues: ProgressLoadingTelemetryModule (upval), UseStateResult2 (copy)
+		ProgressLoadingTelemetryModule.logLoadingAssetsDeactivated()
+		UseStateResult2(false)
+	end, {})
 	
-	return if var2 then reactModule.createElement("ScreenGui", {
+	return if UseStateResult then ReactModule.createElement("ScreenGui", {
 		Enabled = true,
 		ClipToDeviceSafeArea = false,
 		ZIndexBehavior = Enum.ZIndexBehavior.Sibling,
-		DisplayOrder = value.displayOrder or constantsModule.DISPLAY_ORDER,
+		DisplayOrder = p1.displayOrder or ConstantsModule.DISPLAY_ORDER,
 		ScreenInsets = Enum.ScreenInsets.None
 	}, {
-		ProgressLoadingAssets = reactModule.createElement(progressLoadingAssetsModule, {
-			isVisible = var1,
-			onHideComplete = reactModule.useCallback(function()
-				-- upvalues: progressLoadingTelemetryModule (copy), var3 (ref)
-				progressLoadingTelemetryModule.logLoadingAssetsDeactivated()
-				var3(false)
-			end, {})
+		ProgressLoadingAssets = ReactModule.createElement(ProgressLoadingAssetsModule, {
+			isVisible = UseSignalStateResult,
+			onHideComplete = UseResult
 		})
 	}) else nil
 end)

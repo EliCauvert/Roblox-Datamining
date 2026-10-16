@@ -1,39 +1,39 @@
-﻿local parent = script:FindFirstAncestor("ProfilePlatform").Parent
-local momentsCommonModule = require(parent.MomentsCommon)
-local _ = require(parent.DataHydration.MomentsStoreTypes)
+﻿local Parent = script:FindFirstAncestor("ProfilePlatform").Parent
+local MomentsCommonModule = require(Parent.MomentsCommon)
+local _ = require(Parent.DataHydration.MomentsStoreTypes)
 
-local function buildTileFields(p1, p2, p3, p4, p5)
-	-- upvalues: momentsCommonModule (ref)
-	local recommendationMetadata = p1.recommendationMetadata
-	local var1 = if recommendationMetadata ~= nil then nil else recommendationMetadata.feedItemId
+local function buildTileFields(p1, SurfaceId, ParentEntity, p2, InteractionType) --[[ Line: 50 ]]
+	-- upvalues: MomentsCommonModule (copy)
+	local RecommendationMetadata = p1.recommendationMetadata
+	local FeedItemId = if RecommendationMetadata == nil then nil else RecommendationMetadata.feedItemId
 	
-	if var1 == nil or var1 == "" then
-		momentsCommonModule.Analytics.reportMomentSkip("tile", if var1 == nil then "nil" else "empty", { entry = "profile", parentEntity = p3 })
+	if FeedItemId == nil or FeedItemId == "" then
+		MomentsCommonModule.Analytics.reportMomentSkip("tile", if FeedItemId == nil then "nil" else "empty", { entry = "profile", parentEntity = ParentEntity })
 		
 		return nil
 	end
-	local t = {
+	local config = {
 		surface = "profile",
-		parentEntity = p3,
-		surfaceId = p2,
-		feedItemId = var1,
-		tileIndex = tostring(p4)
+		parentEntity = ParentEntity,
+		surfaceId = SurfaceId,
+		feedItemId = FeedItemId,
+		tileIndex = tostring(p2)
 	}
 	
-	if p5 ~= nil then
-		t.interactionType = p5
+	if InteractionType ~= nil then
+		config.interactionType = InteractionType
 	end
-	return t
+	return config
 end
 
 return {
 	INTERACTION_OPEN = "open",
-	makeProfileTileImpressionFields = function(p1, p2, p3, p4)
-		-- upvalues: buildTileFields (ref)
-		return buildTileFields(p1, p2, p3, p4, nil)
+	makeProfileTileImpressionFields = function(p1, SurfaceId, ParentEntity, p2) --[[ Line: 85 ]]
+		-- upvalues: buildTileFields (copy)
+		return (buildTileFields(p1, SurfaceId, ParentEntity, p2, nil))
 	end,
-	makeProfileTileInteractionFields = function(p1, p2, p3, p4)
-		-- upvalues: buildTileFields (ref)
-		return buildTileFields(p1, p2, p3, p4, "open")
+	makeProfileTileInteractionFields = function(p1, SurfaceId, ParentEntity, p2) --[[ Line: 96 ]]
+		-- upvalues: buildTileFields (copy)
+		return (buildTileFields(p1, SurfaceId, ParentEntity, p2, "open"))
 	end
 }

@@ -1,29 +1,29 @@
-﻿local checkAndSendEventModule = require(script.Parent.Parent.Utils.checkAndSendEvent)
+﻿local CheckAndSendEventModule = require(script.Parent.Parent.Utils.checkAndSendEvent)
 
-return function(p1, p2, p3, p4, p5, p6, p7, p8)
-	-- upvalues: checkAndSendEventModule (ref)
+return function(p1, Btn, State, Url, Is_alt_attempt, Origin, Ctype, AssociatedText) --[[ Line: 4 ]]
+	-- upvalues: CheckAndSendEventModule (copy)
 	local t = {}
 	
-	if p2 then
-		t.btn = p2
+	if Btn then
+		t.btn = Btn
 	end
-	if p3 then
-		t.state = p3
+	if State then
+		t.state = State
 	end
-	if p4 then
-		t.url = p4
+	if Url then
+		t.url = Url
 	end
-	if p5 ~= nil then
-		t.is_alt_attempt = p5
+	if Is_alt_attempt ~= nil then
+		t.is_alt_attempt = Is_alt_attempt
 	end
-	if p6 then
-		t.origin = p6
+	if Origin then
+		t.origin = Origin
 	end
-	if p7 then
-		t.ctype = p7
+	if Ctype then
+		t.ctype = Ctype
 	end
-	if p8 then
-		t.associatedText = p8
+	if AssociatedText then
+		t.associatedText = AssociatedText
 	end
-	checkAndSendEventModule(p1, "authButtonClick", t)
+	CheckAndSendEventModule(p1, "authButtonClick", t)
 end

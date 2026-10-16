@@ -1,17 +1,17 @@
-﻿local parent = script:FindFirstAncestor("SplitPane").Parent
-local reactModule = require(parent.React)
-local onScreenContext = require(parent.RobloxAppNavigation).OnScreenContext
+﻿local Parent = script:FindFirstAncestor("SplitPane").Parent
+local ReactModule = require(Parent.React)
+local OnScreenContext = require(Parent.RobloxAppNavigation).OnScreenContext
 
-return function(p1)
-	-- upvalues: reactModule (ref), onScreenContext (ref)
-	local value = p1.value
-	local var1 = reactModule.useRef(nil)
-	local current = var1.current
+return function(p1) --[[ Line: 16 | Named "OnScreenCardProvider" ]]
+	-- upvalues: ReactModule (copy), OnScreenContext (copy)
+	local Value = p1.value
+	local UseRefResult = ReactModule.useRef(nil)
+	local Current = UseRefResult.current
 	
-	if current == nil or current.isOnScreen ~= value.isOnScreen or current.currentRouteKey ~= value.currentRouteKey then
-		var1.current = value
+	if Current == nil or Current.isOnScreen ~= Value.isOnScreen or Current.currentRouteKey ~= Value.currentRouteKey then
+		UseRefResult.current = Value
 	else
-		value = current
+		Value = Current
 	end
-	return reactModule.createElement(onScreenContext.Provider, { value = value }, p1.children)
+	return ReactModule.createElement(OnScreenContext.Provider, { value = Value }, p1.children)
 end

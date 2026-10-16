@@ -1,59 +1,59 @@
-﻿local avatarExperienceControlBar = script:FindFirstAncestor("AvatarExperienceControlBar")
-local parent = avatarExperienceControlBar.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local usePulseAnimationBinding = require(parent.AvatarExperienceCommon).Hooks.usePulseAnimationBinding
-local useSemanticTokensModule = require(avatarExperienceControlBar.Hooks.useSemanticTokens)
-local useHoverBindingModule = require(avatarExperienceControlBar.Hooks.useHoverBinding)
+﻿local AvatarExperienceControlBar = script:FindFirstAncestor("AvatarExperienceControlBar")
+local Parent = AvatarExperienceControlBar.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UsePulseAnimationBindingFunction = require(Parent.AvatarExperienceCommon).Hooks.usePulseAnimationBinding
+local UseSemanticTokensModule = require(AvatarExperienceControlBar.Hooks.useSemanticTokens)
+local UseHoverBindingModule = require(AvatarExperienceControlBar.Hooks.useHoverBinding)
 
-return reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useSemanticTokensModule (ref), useHoverBindingModule (ref), reactModule (ref), usePulseAnimationBinding (ref), foundationModule (ref)
-	local var1 = useSemanticTokensModule()
-	local var2, var3 = useHoverBindingModule()
-	local var4 = reactModule.useRef(nil)
-	local var5 = if p1.size then p1.size else var1.defaultIconContainerSize
-	local var6 = usePulseAnimationBinding(p1.enableFocusAnimation)
+return ReactModule.forwardRef(function(Frame, Ref) --[[ Line: 25 | Named "ImageItem" ]]
+	-- upvalues: UseSemanticTokensModule (copy), UseHoverBindingModule (copy), ReactModule (copy), UsePulseAnimationBindingFunction (copy), FoundationModule (copy)
+	local UseSemanticTokensModuleResult = UseSemanticTokensModule()
+	local UseHoverBindingModuleResult, UseHoverBindingModuleResult2 = UseHoverBindingModule()
+	local UseRefResult = ReactModule.useRef(nil)
+	local Size = if Frame.size then Frame.size else UseSemanticTokensModuleResult.defaultIconContainerSize
+	local UsePulseAnimationBindingResult = UsePulseAnimationBindingFunction(Frame.enableFocusAnimation)
 	
-	return reactModule.createElement(foundationModule.View, {
+	return ReactModule.createElement(FoundationModule.View, {
 		tag = "auto-xy radius-circle",
-		ref = p2,
-		LayoutOrder = p1.LayoutOrder,
+		ref = Ref,
+		LayoutOrder = Frame.LayoutOrder,
 		stateLayer = {
-			affordance = foundationModule.Enums.StateLayerAffordance.None
+			affordance = FoundationModule.Enums.StateLayerAffordance.None
 		},
-		onStateChanged = var3,
-		onActivated = p1.onActivated,
-		disabled = p1.disabled,
-		Visible = p1.Visible
+		onStateChanged = UseHoverBindingModuleResult2,
+		onActivated = Frame.onActivated,
+		disabled = Frame.disabled,
+		Visible = Frame.Visible
 	}, {
-		Thumbnail = reactModule.createElement(foundationModule.Image, {
+		Thumbnail = ReactModule.createElement(FoundationModule.Image, {
 			tag = "radius-circle",
-			Image = p1.thumbnailUrl,
-			Size = UDim2.fromOffset(var5, var5),
-			backgroundStyle = var2:map(function(p3)
-				-- upvalues: var1 (ref)
-				return if p3 then var1.hoverThumbnailBackgroundStyle else var1.thumbnailBackgroundStyle
+			Image = Frame.thumbnailUrl,
+			Size = UDim2.fromOffset(Size, Size),
+			backgroundStyle = UseHoverBindingModuleResult:map(function(p1) --[[ Line: 49 ]]
+				-- upvalues: UseSemanticTokensModuleResult (copy)
+				return if p1 then UseSemanticTokensModuleResult.hoverThumbnailBackgroundStyle else UseSemanticTokensModuleResult.thumbnailBackgroundStyle
 			end)
 		}),
-		Indicator = if not p1.hideIndicator then reactModule.createElement(foundationModule.View, {
+		Indicator = if Frame.hideIndicator then nil else ReactModule.createElement(FoundationModule.View, {
 			tag = "auto-xy position-bottom-right anchor-bottom-right bg-surface-300 radius-circle size-400-400",
 			ZIndex = 2
 		}, {
-			IndicatorImage = reactModule.createElement(foundationModule.Image, {
+			IndicatorImage = ReactModule.createElement(FoundationModule.Image, {
 				Image = "icons/actions/truncationExpand_small",
 				tag = "radius-circle position-center-center anchor-center-center size-250-250",
-				imageStyle = var1.contentForegroundStyle
+				imageStyle = UseSemanticTokensModuleResult.contentForegroundStyle
 			})
-		}) else nil,
-		UIStroke = if p1.enableFocusAnimation then reactModule.createElement("UIStroke", {
-			Color = var1.imageBorderFocusStyle,
-			Thickness = var6:map(function(p3)
-				return p3.thickness
+		}),
+		UIStroke = if Frame.enableFocusAnimation then ReactModule.createElement("UIStroke", {
+			Color = UseSemanticTokensModuleResult.imageBorderFocusStyle,
+			Thickness = UsePulseAnimationBindingResult:map(function(p1) --[[ Line: 71 ]]
+				return p1.thickness
 			end),
-			Transparency = var6:map(function(p3)
-				return p3.transparency
+			Transparency = UsePulseAnimationBindingResult:map(function(p1) --[[ Line: 74 ]]
+				return p1.transparency
 			end),
-			ref = var4
+			ref = UseRefResult
 		}) else nil
 	})
 end)

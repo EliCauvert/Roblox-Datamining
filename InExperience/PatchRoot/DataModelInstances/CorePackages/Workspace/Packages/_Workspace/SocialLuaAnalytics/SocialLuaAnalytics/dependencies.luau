@@ -1,13 +1,13 @@
-﻿local parent = script:FindFirstAncestor("SocialLuaAnalytics").Parent
-local luaSocialLibrariesDepsModule = require(parent.LuaSocialLibrariesDeps)
+﻿local Parent = script:FindFirstAncestor("SocialLuaAnalytics").Parent
+local LuaSocialLibrariesDepsModule = require(Parent.LuaSocialLibrariesDeps)
 
 return {
-	t = require(parent.t),
-	tutils = require(parent.tutils),
-	RoduxPresence = luaSocialLibrariesDepsModule.RoduxPresence.config({ keyPath = "SocialLuaAnalytics.Presence" }),
-	llama = luaSocialLibrariesDepsModule.llama,
-	enumerate = require(parent.enumerate),
-	LuauPolyfill = require(parent.LuauPolyfill),
-	Rodux = require(parent.Rodux),
-	Dash = require(parent.Dash)
+	t = require(Parent.t),
+	tutils = require(Parent.tutils),
+	RoduxPresence = LuaSocialLibrariesDepsModule.RoduxPresence.config({ keyPath = "SocialLuaAnalytics.Presence" }),
+	llama = LuaSocialLibrariesDepsModule.llama,
+	enumerate = require(Parent.enumerate),
+	LuauPolyfill = require(Parent.LuauPolyfill),
+	Rodux = require(Parent.Rodux),
+	Dash = require(Parent.Dash)
 }

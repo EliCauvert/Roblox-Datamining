@@ -1,24 +1,25 @@
-﻿return function(p1)
-	if typeof(p1) ~= "table" then
-		return false
-	elseif next(p1) == nil then
-		return true
-	elseif #p1 == 0 then
+﻿return function(Amounts): boolean --[[ Line: 16 ]]
+	if typeof(Amounts) ~= "table" then
 		return false
 	end
-	local var1 = 0
-	local var2 = 0
+	if next(Amounts) == nil then
+		return true
+	end
+	if #Amounts == 0 then
+		return false
+	end
+	local Count = 0
+	local Total = 0
 	
-	for i in pairs(p1) do
-		if typeof(i) == "number" then
-			if i % 1 == 0 and i >= 1 then
-				var1 += 1
-				var2 += i
-				continue
-			end
+	for amount in pairs(Amounts) do
+		if typeof(amount) ~= "number" then
 			return false
 		end
-		return false
+		if amount % 1 ~= 0 or amount < 1 then
+			return false
+		end
+		Count += 1
+		Total += amount
 	end
-	return var2 == var1 * (var1 + 1) / 2
+	return Total == Count * (Count + 1) / 2
 end

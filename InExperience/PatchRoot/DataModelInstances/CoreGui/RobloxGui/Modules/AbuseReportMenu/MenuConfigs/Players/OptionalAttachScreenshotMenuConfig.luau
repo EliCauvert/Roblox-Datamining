@@ -1,32 +1,32 @@
-﻿local abuseReportMenu = script:FindFirstAncestor("AbuseReportMenu")
-local _ = require(abuseReportMenu.Components.Types)
-local constantsModule = require(abuseReportMenu.Components.Constants)
-local tnSIXPWrapperModule = require(abuseReportMenu.IXP.TnSIXPWrapper)
-local annotationModalModule = require(abuseReportMenu.ReportAnything.Components.AnnotationModal)
+﻿local AbuseReportMenu = script:FindFirstAncestor("AbuseReportMenu")
+local _ = require(AbuseReportMenu.Components.Types)
+local ConstantsModule = require(AbuseReportMenu.Components.Constants)
+local TnSIXPWrapperModule = require(AbuseReportMenu.IXP.TnSIXPWrapper)
+local AnnotationModalModule = require(AbuseReportMenu.ReportAnything.Components.AnnotationModal)
 
 return {
 	componentType = "button",
 	variant = "secondary",
 	fieldLabel = "AttachScreenshot",
 	componentName = "OptionalScreenshot",
-	getIsVisible = function(p1)
-		-- upvalues: tnSIXPWrapperModule (ref), constantsModule (ref)
-		return tnSIXPWrapperModule.getReportAnythingAvatarEnabled() and (if p1.methodOfAbuse ~= constantsModule.AbuseMethods.Other then p1.methodOfAbuse == constantsModule.AbuseMethods.Avatar else true)
+	getIsVisible = function(p1): boolean --[[ Line: 11 ]]
+		-- upvalues: TnSIXPWrapperModule (copy), ConstantsModule (copy)
+		return TnSIXPWrapperModule.getReportAnythingAvatarEnabled() and (p1.methodOfAbuse == ConstantsModule.AbuseMethods.Other or p1.methodOfAbuse == ConstantsModule.AbuseMethods.Avatar)
 	end,
-	getIsDisabled = function(_, p1)
+	getIsDisabled = function(_, p1) --[[ Line: 18 ]]
 		return p1.reportAnythingState.attachCompleted
 	end,
-	getIconSrc = function(p1)
+	getIconSrc = function(p1): string --[[ Line: 22 ]]
 		return if p1.reportAnythingState.attachCompleted then "icons/actions/accept" else "icons/controls/screenshot"
 	end,
-	getButtonLabel = function(p1)
+	getButtonLabel = function(p1): string --[[ Line: 27 ]]
 		return if p1.reportAnythingState.attachCompleted then "SceneCaptured" else "CaptureScene"
 	end,
-	onClick = function(_, _, p1)
-		-- upvalues: constantsModule (ref), annotationModalModule (ref)
+	onClick = function(_, _, p1) --[[ Line: 30 ]]
+		-- upvalues: ConstantsModule (copy), AnnotationModalModule (copy)
 		p1.analyticsDispatch({
-			type = constantsModule.AnalyticsActions.IncrementCaptureScene
+			type = ConstantsModule.AnalyticsActions.IncrementCaptureScene
 		})
-		annotationModalModule.mountAnnotationPage(constantsModule.ReportTypes.Person, p1.hideReportTab, p1.reportAnythingAnalytics, p1.reportAnythingState, p1.reportAnythingDispatch)
+		AnnotationModalModule.mountAnnotationPage(ConstantsModule.ReportTypes.Person, p1.hideReportTab, p1.reportAnythingAnalytics, p1.reportAnythingState, p1.reportAnythingDispatch)
 	end
 }

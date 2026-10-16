@@ -1,99 +1,100 @@
-﻿local httpService = game:GetService("HttpService")
-local parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
-local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
-local safeAppStorageService = require(parent.AvatarExperienceCommon).Lib.SafeAppStorageService
-local fFlagAXMakeupReleaseFTUX = avatarExperienceFlagsModule.FFlagAXMakeupReleaseFTUX
+﻿local HttpService = game:GetService("HttpService")
+local Parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
+local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
+local SafeAppStorageService = require(Parent.AvatarExperienceCommon).Lib.SafeAppStorageService
+local FFlagAXMakeupReleaseFTUX = AvatarExperienceFlagsModule.FFlagAXMakeupReleaseFTUX
 local AXCatalogMakeupFtuxUseMemStorage = game:DefineFastFlag("AXCatalogMakeupFtuxUseMemStorage", false)
-local fFlagAXMakeupLayeringTooltipFTUX = avatarExperienceFlagsModule.FFlagAXMakeupLayeringTooltipFTUX
-local fFlagAXSkipMakeupFTUX = avatarExperienceFlagsModule.FFlagAXSkipMakeupFTUX
+local FFlagAXMakeupLayeringTooltipFTUX = AvatarExperienceFlagsModule.FFlagAXMakeupLayeringTooltipFTUX
+local FFlagAXSkipMakeupFTUX = AvatarExperienceFlagsModule.FFlagAXSkipMakeupFTUX
 local AXMakeupLayeringTooltipMaxSeenCount = game:DefineFastInt("AXMakeupLayeringTooltipMaxSeenCount", 2)
 local AXMakeupMax6LayersPromptMaxSeenCount = game:DefineFastInt("AXMakeupMax6LayersPromptMaxSeenCount", 3)
-local var1 = if fFlagAXMakeupLayeringTooltipFTUX then false else nil
+local Flag = not FFlagAXMakeupLayeringTooltipFTUX and nil
 
-local function getStorage()
-	-- upvalues: safeAppStorageService (ref), AXCatalogMakeupFtuxUseMemStorage (ref), httpService (ref)
-	local AXCatalogMakeupFTUX = safeAppStorageService.getItem("AXCatalogMakeupFTUX", AXCatalogMakeupFtuxUseMemStorage)
+local function getStorage() --[[ Line: 29 ]]
+	-- upvalues: SafeAppStorageService (copy), AXCatalogMakeupFtuxUseMemStorage (copy), HttpService (copy)
+	local AXCatalogMakeupFTUXItem = SafeAppStorageService.getItem("AXCatalogMakeupFTUX", AXCatalogMakeupFtuxUseMemStorage)
 	
-	if not AXCatalogMakeupFTUX or AXCatalogMakeupFTUX == "" then
-		AXCatalogMakeupFTUX = "{}"
+	if not AXCatalogMakeupFTUXItem or AXCatalogMakeupFTUXItem == "" then
+		AXCatalogMakeupFTUXItem = "{}"
 	end
 	local t = {}
-	pcall(function()
-		-- upvalues: t (write), httpService (copy), AXCatalogMakeupFTUX (write)
-		t = httpService:JSONDecode(AXCatalogMakeupFTUX)
+	pcall(function() --[[ Line: 36 ]]
+		-- upvalues: t (ref), HttpService (upval), AXCatalogMakeupFTUXItem (ref)
+		t = HttpService:JSONDecode(AXCatalogMakeupFTUXItem)
 	end)
 	
 	return t
 end
 
-local function _(value)
-	-- upvalues: httpService (ref), safeAppStorageService (ref), AXCatalogMakeupFtuxUseMemStorage (ref)
-	pcall(function()
-		-- upvalues: httpService (copy), value (ref), safeAppStorageService (copy), AXCatalogMakeupFtuxUseMemStorage (copy)
-		safeAppStorageService.setItem("AXCatalogMakeupFTUX", httpService:JSONEncode(value), AXCatalogMakeupFtuxUseMemStorage)
-		safeAppStorageService.flush()
+local function _(p1) --[[ Line: 44 | Named "setStorage" ]]
+	-- upvalues: HttpService (copy), SafeAppStorageService (copy), AXCatalogMakeupFtuxUseMemStorage (copy)
+	pcall(function() --[[ Line: 45 ]]
+		-- upvalues: HttpService (upval), p1 (copy), SafeAppStorageService (upval), AXCatalogMakeupFtuxUseMemStorage (upval)
+		SafeAppStorageService.setItem("AXCatalogMakeupFTUX", HttpService:JSONEncode(p1), AXCatalogMakeupFtuxUseMemStorage)
+		SafeAppStorageService.flush()
 	end)
 end
 
-return function()
-	-- upvalues: getStorage (ref), httpService (ref), safeAppStorageService (ref), AXCatalogMakeupFtuxUseMemStorage (ref), fFlagAXSkipMakeupFTUX (ref), AXMakeupMax6LayersPromptMaxSeenCount (ref), fFlagAXMakeupLayeringTooltipFTUX (ref), var1 (write), AXMakeupLayeringTooltipMaxSeenCount (ref), fFlagAXMakeupReleaseFTUX (ref)
+return function() --[[ Line: 52 | Named "useMakeupFtux" ]]
+	-- upvalues: getStorage (copy), HttpService (copy), SafeAppStorageService (copy), AXCatalogMakeupFtuxUseMemStorage (copy), FFlagAXSkipMakeupFTUX (copy), AXMakeupMax6LayersPromptMaxSeenCount (copy), FFlagAXMakeupLayeringTooltipFTUX (copy), Flag (ref), AXMakeupLayeringTooltipMaxSeenCount (copy), FFlagAXMakeupReleaseFTUX (copy)
 	return {
-		shouldShowMakeupMax6LayersPrompt = function()
-			-- upvalues: fFlagAXSkipMakeupFTUX (copy), getStorage (copy), AXMakeupMax6LayersPromptMaxSeenCount (copy)
-			if fFlagAXSkipMakeupFTUX then
+		shouldShowMakeupMax6LayersPrompt = function(): boolean --[[ Line: 62 ]]
+			-- upvalues: FFlagAXSkipMakeupFTUX (upval), getStorage (upval), AXMakeupMax6LayersPromptMaxSeenCount (upval)
+			if FFlagAXSkipMakeupFTUX then
 				return false
+			else
+				local Storage = getStorage()
+				
+				return not Storage.hideMakeupMax6LayersPrompt and (Storage.seenMakeupMax6LayersCount == nil or Storage.seenMakeupMax6LayersCount < AXMakeupMax6LayersPromptMaxSeenCount)
 			end
-			local var2 = getStorage()
-			
-			return not var2.hideMakeupMax6LayersPrompt and (if var2.seenMakeupMax6LayersCount ~= nil then var2.seenMakeupMax6LayersCount < AXMakeupMax6LayersPromptMaxSeenCount else true)
 		end,
-		hideMakeupMax6LayersPrompt = function()
-			-- upvalues: getStorage (copy), httpService (copy), safeAppStorageService (copy), AXCatalogMakeupFtuxUseMemStorage (copy)
-			local var2 = getStorage()
-			var2.hideMakeupMax6LayersPrompt = true
-			pcall(function()
-				-- upvalues: httpService (copy), var2 (ref), safeAppStorageService (copy), AXCatalogMakeupFtuxUseMemStorage (copy)
-				safeAppStorageService.setItem("AXCatalogMakeupFTUX", httpService:JSONEncode(var2), AXCatalogMakeupFtuxUseMemStorage)
-				safeAppStorageService.flush()
+		hideMakeupMax6LayersPrompt = function() --[[ Line: 75 ]]
+			-- upvalues: getStorage (upval), HttpService (upval), SafeAppStorageService (upval), AXCatalogMakeupFtuxUseMemStorage (upval)
+			local Storage = getStorage()
+			Storage.hideMakeupMax6LayersPrompt = true
+			pcall(function() --[[ Line: 45 ]]
+				-- upvalues: HttpService (upval), Storage (copy), SafeAppStorageService (upval), AXCatalogMakeupFtuxUseMemStorage (upval)
+				SafeAppStorageService.setItem("AXCatalogMakeupFTUX", HttpService:JSONEncode(Storage), AXCatalogMakeupFtuxUseMemStorage)
+				SafeAppStorageService.flush()
 			end)
 		end,
-		shouldShowMakeupLayeringTooltip = if fFlagAXMakeupLayeringTooltipFTUX then function()
-			-- upvalues: fFlagAXSkipMakeupFTUX (copy), var1 (copy), getStorage (copy), AXMakeupLayeringTooltipMaxSeenCount (copy)
-			return if fFlagAXSkipMakeupFTUX then false elseif var1 then false else (getStorage().makeupLayeringTooltipSeenCount or 0) < AXMakeupLayeringTooltipMaxSeenCount
+		shouldShowMakeupLayeringTooltip = if FFlagAXMakeupLayeringTooltipFTUX then function(): boolean --[[ Line: 83 ]]
+			-- upvalues: FFlagAXSkipMakeupFTUX (upval), Flag (upval), getStorage (upval), AXMakeupLayeringTooltipMaxSeenCount (upval)
+			return not FFlagAXSkipMakeupFTUX and (not Flag and (getStorage().makeupLayeringTooltipSeenCount or 0) < AXMakeupLayeringTooltipMaxSeenCount)
 		end else nil,
-		markMakeupLayeringTooltipSeen = if fFlagAXMakeupLayeringTooltipFTUX then function()
-			-- upvalues: var1 (copy), getStorage (copy), httpService (copy), safeAppStorageService (copy), AXCatalogMakeupFtuxUseMemStorage (copy)
-			var1 = true
-			local var2 = getStorage()
-			var2.makeupLayeringTooltipSeenCount = (var2.makeupLayeringTooltipSeenCount or 0) + 1
-			pcall(function()
-				-- upvalues: httpService (copy), var2 (ref), safeAppStorageService (copy), AXCatalogMakeupFtuxUseMemStorage (copy)
-				safeAppStorageService.setItem("AXCatalogMakeupFTUX", httpService:JSONEncode(var2), AXCatalogMakeupFtuxUseMemStorage)
-				safeAppStorageService.flush()
+		markMakeupLayeringTooltipSeen = if FFlagAXMakeupLayeringTooltipFTUX then function() --[[ Line: 99 ]]
+			-- upvalues: Flag (upval), getStorage (upval), HttpService (upval), SafeAppStorageService (upval), AXCatalogMakeupFtuxUseMemStorage (upval)
+			Flag = true
+			local Storage = getStorage()
+			Storage.makeupLayeringTooltipSeenCount = (Storage.makeupLayeringTooltipSeenCount or 0) + 1
+			pcall(function() --[[ Line: 45 ]]
+				-- upvalues: HttpService (upval), Storage (copy), SafeAppStorageService (upval), AXCatalogMakeupFtuxUseMemStorage (upval)
+				SafeAppStorageService.setItem("AXCatalogMakeupFTUX", HttpService:JSONEncode(Storage), AXCatalogMakeupFtuxUseMemStorage)
+				SafeAppStorageService.flush()
 			end)
 		end else nil,
-		shouldShowMakeupReleasePrompt = if fFlagAXMakeupReleaseFTUX then function()
-			-- upvalues: fFlagAXSkipMakeupFTUX (copy), getStorage (copy)
-			return if fFlagAXSkipMakeupFTUX then false else not getStorage().shownMakeupReleasePrompt
+		shouldShowMakeupReleasePrompt = if FFlagAXMakeupReleaseFTUX then function(): boolean --[[ Line: 110 ]]
+			-- upvalues: FFlagAXSkipMakeupFTUX (upval), getStorage (upval)
+			return not FFlagAXSkipMakeupFTUX and not getStorage().shownMakeupReleasePrompt
 		end else nil,
-		setShownMakeupReleasePrompt = if fFlagAXMakeupReleaseFTUX then function()
-			-- upvalues: getStorage (copy), httpService (copy), safeAppStorageService (copy), AXCatalogMakeupFtuxUseMemStorage (copy)
-			local var2 = getStorage()
-			var2.shownMakeupReleasePrompt = true
-			pcall(function()
-				-- upvalues: httpService (copy), var2 (ref), safeAppStorageService (copy), AXCatalogMakeupFtuxUseMemStorage (copy)
-				safeAppStorageService.setItem("AXCatalogMakeupFTUX", httpService:JSONEncode(var2), AXCatalogMakeupFtuxUseMemStorage)
-				safeAppStorageService.flush()
+		setShownMakeupReleasePrompt = if FFlagAXMakeupReleaseFTUX then function() --[[ Line: 121 ]]
+			-- upvalues: getStorage (upval), HttpService (upval), SafeAppStorageService (upval), AXCatalogMakeupFtuxUseMemStorage (upval)
+			local Storage = getStorage()
+			Storage.shownMakeupReleasePrompt = true
+			pcall(function() --[[ Line: 45 ]]
+				-- upvalues: HttpService (upval), Storage (copy), SafeAppStorageService (upval), AXCatalogMakeupFtuxUseMemStorage (upval)
+				SafeAppStorageService.setItem("AXCatalogMakeupFTUX", HttpService:JSONEncode(Storage), AXCatalogMakeupFtuxUseMemStorage)
+				SafeAppStorageService.flush()
 			end)
 		end else nil,
-		incrementSeenMakeupMax6LayersPrompt = function()
-			-- upvalues: getStorage (copy), httpService (copy), safeAppStorageService (copy), AXCatalogMakeupFtuxUseMemStorage (copy)
-			local var2 = getStorage()
-			var2.seenMakeupMax6LayersCount = if var2.seenMakeupMax6LayersCount == nil then 1 else var2.seenMakeupMax6LayersCount + 1
-			pcall(function()
-				-- upvalues: httpService (copy), var2 (ref), safeAppStorageService (copy), AXCatalogMakeupFtuxUseMemStorage (copy)
-				safeAppStorageService.setItem("AXCatalogMakeupFTUX", httpService:JSONEncode(var2), AXCatalogMakeupFtuxUseMemStorage)
-				safeAppStorageService.flush()
+		incrementSeenMakeupMax6LayersPrompt = function() --[[ Line: 53 ]]
+			-- upvalues: getStorage (upval), HttpService (upval), SafeAppStorageService (upval), AXCatalogMakeupFtuxUseMemStorage (upval)
+			local Storage = getStorage()
+			Storage.seenMakeupMax6LayersCount = if Storage.seenMakeupMax6LayersCount == nil then 1 else Storage.seenMakeupMax6LayersCount + 1
+			pcall(function() --[[ Line: 45 ]]
+				-- upvalues: HttpService (upval), Storage (copy), SafeAppStorageService (upval), AXCatalogMakeupFtuxUseMemStorage (upval)
+				SafeAppStorageService.setItem("AXCatalogMakeupFTUX", HttpService:JSONEncode(Storage), AXCatalogMakeupFtuxUseMemStorage)
+				SafeAppStorageService.flush()
 			end)
 		end
 	}

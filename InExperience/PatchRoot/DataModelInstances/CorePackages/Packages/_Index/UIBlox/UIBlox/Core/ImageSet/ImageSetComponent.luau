@@ -1,15 +1,12 @@
-﻿local createImageSetComponentModule = require(script.Parent.createImageSetComponent)
-local guiService = game:GetService("GuiService")
-local corePackages = script:FindFirstAncestor("CorePackages")
-local imagesModule = require(script.Parent.Parent.Parent.App.ImageSet.Images)
-local ok, _ = pcall(guiService.GetResolutionScale, guiService)
+﻿local CreateImageSetComponentModule = require(script.Parent.createImageSetComponent)
+local GuiService = game:GetService("GuiService")
+local CorePackages = script:FindFirstAncestor("CorePackages")
+local ImagesModule = require(script.Parent.Parent.Parent.App.ImageSet.Images)
+local Success, _ = pcall(GuiService.GetResolutionScale, GuiService)
 
-if not ok or not corePackages then
-	local _ = 1
-end
-local imagesResolutionScale = imagesModule.ImagesResolutionScale
+local ImagesResolutionScale = ImagesModule.ImagesResolutionScale
 
 return {
-	Button = createImageSetComponentModule("ImageButton", imagesResolutionScale),
-	Label = createImageSetComponentModule("ImageLabel", imagesResolutionScale)
+	Button = CreateImageSetComponentModule("ImageButton", ImagesResolutionScale),
+	Label = CreateImageSetComponentModule("ImageLabel", ImagesResolutionScale)
 }

@@ -1,7 +1,7 @@
-﻿local parent = script:FindFirstAncestor("AppChat").Parent
-local cryoModule = require(parent.Cryo)
-local createProxy = require(parent.SignalsExperimental).createProxy
-local t = {
+﻿local Parent = script:FindFirstAncestor("AppChat").Parent
+local CryoModule = require(Parent.Cryo)
+local CreateProxyFunction = require(Parent.SignalsExperimental).createProxy
+local config = {
 	oldestConversationIsFetched = false,
 	isFetchingConversations = false,
 	isFetchingNextPage = false,
@@ -14,12 +14,12 @@ local list = {
 	"oldestConversationIsFetched", "isFetchingConversations", "isFetchingNextPage",
 	"hasFetchedInitialPage", "isExhausted", "nextCursor", "error"
 }
-local t_1 = {}
+local t = {}
 
-for i, v in list do
-	t_1[v] = true
+for _, value in list do
+	t[value] = true
 end
-local function normalizeConversation(p1)
+local function normalizeConversation(p1) --[[ Line: 97 ]]
 	return if p1 == nil or p1.id == nil then nil else {
 		id = tostring(p1.id),
 		source = p1.source,
@@ -51,138 +51,139 @@ local function normalizeConversation(p1)
 	}
 end
 
-local function _(p1, p2)
-	-- upvalues: cryoModule (ref)
-	return if p1 == nil then p2 else cryoModule.Dictionary.join(p2, {
+local function _(p1, p2) --[[ Line: 133 | Named "mergePreservedLocalFields" ]]
+	-- upvalues: CryoModule (copy)
+	return if p1 == nil then p2 else CryoModule.Dictionary.join(p2, {
 		usersTyping = p1.usersTyping,
 		isUserLeaving = p1.isUserLeaving,
 		pinnedGame = p1.pinnedGame
 	})
 end
 
-local _ = function(p1, p2)
-	-- upvalues: list (ref)
+local _ = function(Callback, p1) --[[ Line: 145 | Named "copyListStatus" ]]
+	-- upvalues: list (copy)
 	local t = {}
-	local var1 = p1(p2)
+	local CallbackResult = Callback(p1)
 	
-	for i, v in list do
-		t[v] = var1[v]
+	for _, value in list do
+		t[value] = CallbackResult[value]
 	end
 	return t
 end
 
-i = function(p3)
-	for i in p3 do
-		p3[i] = nil
+local _ = function(List) --[[ Line: 154 | Named "clearProxy" ]]
+	for i in List do
+		List[i] = nil
 	end
 end
 
-return function()
-	-- upvalues: createProxy (ref), t (ref), list (ref), normalizeConversation (ref), cryoModule (ref), t_1 (ref)
-	local var2 = createProxy({})
-	local var3 = createProxy({})
-	local var4 = createProxy(table.clone(t))
-	local t_2 = {}
+return function() --[[ Line: 160 | Named "createConversationStore" ]]
+	-- upvalues: CreateProxyFunction (copy), config (copy), list (copy), normalizeConversation (copy), CryoModule (copy), t (copy)
+	local Proxy = CreateProxyFunction({})
+	local Proxy1 = CreateProxyFunction({})
+	local Proxy2 = CreateProxyFunction(table.clone(config))
+	local List = {}
 	
 	return {
-		getConversation = function(p4, p5)
-			-- upvalues: var2 (ref)
-			return var2(p5)[p4]
+		getConversation = function(p2, p3) --[[ Line: 168 ]]
+			-- upvalues: Proxy (copy)
+			return Proxy(p3)[p2]
 		end,
-		getConversations = function(p4)
-			-- upvalues: var2 (ref)
-			local t = {}
+		getConversations = function(p2) --[[ Line: 172 ]]
+			-- upvalues: Proxy (copy)
+			local List = {}
 			
-			for i, v in var2(p4) do
-				if v ~= nil then
-					table.insert(t, v)
+			for _, value in Proxy(p2) do
+				if value ~= nil then
+					table.insert(List, value)
 				end
 			end
-			return t
+			return List
 		end,
-		getParticipantMetadata = function(p5, p6)
-			-- upvalues: var3 (ref)
-			return var3(p6)[p5]
+		getParticipantMetadata = function(p3, p4) --[[ Line: 182 ]]
+			-- upvalues: Proxy1 (copy)
+			return Proxy1(p4)[p3]
 		end,
-		getListStatus = function(p5)
-			-- upvalues: var4 (ref), list (copy)
+		getListStatus = function(p3) --[[ Line: 186 ]]
+			-- upvalues: Proxy2 (copy), list (upval)
 			local t = {}
-			local var5 = var4(p5)
+			local ProxyResult = Proxy2(p3)
 			
-			for i, v in list do
-				t[v] = var5[v]
+			for _, value in list do
+				t[value] = ProxyResult[value]
 			end
 			return t
 		end,
-		listStatus = var4,
-		addClearListener = function(p6)
-			-- upvalues: t_2 (ref)
-			table.insert(t_2, p6)
+		listStatus = Proxy2,
+		addClearListener = function(p4) --[[ Line: 229 ]]
+			-- upvalues: List (copy)
+			table.insert(List, p4)
 		end,
-		upsertConversation = function(p6, p7)
-			-- upvalues: normalizeConversation (copy), var2 (ref), cryoModule (copy)
-			local var6 = normalizeConversation(p6)
+		upsertConversation = function(p4, Enabled) --[[ Line: 190 ]]
+			-- upvalues: normalizeConversation (upval), Proxy (copy), CryoModule (upval)
+			local NormalizeConversationResult = normalizeConversation(p4)
 			
-			if var6 == nil then return end
-			local var7
-			local id = var6.id
+			if NormalizeConversationResult == nil then return end
+			local Id = NormalizeConversationResult.id
+			local JoinResult = nil
 			
-			if p7 == false then
-				var7 = var6
+			if Enabled == false then
+				JoinResult = NormalizeConversationResult
 			else
-				local var8 = var2[id]
-				var7 = if var8 == nil then var6 else cryoModule.Dictionary.join(var6, {
-					usersTyping = var8.usersTyping,
-					isUserLeaving = var8.isUserLeaving,
-					pinnedGame = var8.pinnedGame
+				local ProxyEntry = Proxy[Id]
+				JoinResult = if ProxyEntry == nil then NormalizeConversationResult else CryoModule.Dictionary.join(NormalizeConversationResult, {
+					usersTyping = ProxyEntry.usersTyping,
+					isUserLeaving = ProxyEntry.isUserLeaving,
+					pinnedGame = ProxyEntry.pinnedGame
 				})
 			end
-			var2[id] = var7
+			Proxy[Id] = JoinResult
 		end,
-		removeConversation = function(p6)
-			-- upvalues: var2 (ref), var3 (ref)
-			var2[p6] = nil
-			var3[p6] = nil
+		removeConversation = function(Key) --[[ Line: 202 ]]
+			-- upvalues: Proxy (copy), Proxy1 (copy)
+			Proxy[Key] = nil
+			Proxy1[Key] = nil
 		end,
-		setParticipantMetadata = function(value, p6)
-			-- upvalues: var3 (ref)
-			var3[value] = p6
+		setParticipantMetadata = function(Key, p4) --[[ Line: 207 ]]
+			-- upvalues: Proxy1 (copy)
+			Proxy1[Key] = p4
 		end,
-		setUsersTyping = function(value, p6)
-			-- upvalues: var2 (ref), cryoModule (copy)
-			local var6 = var2[value]
+		setUsersTyping = function(Key, UsersTyping) --[[ Line: 211 ]]
+			-- upvalues: Proxy (copy), CryoModule (upval)
+			local ProxyEntry = Proxy[Key]
 			
-			if var6 == nil then
+			if ProxyEntry ~= nil then
+				Proxy[Key] = CryoModule.Dictionary.join(ProxyEntry, { usersTyping = UsersTyping })
+				
 				return
 			end
-			var2[value] = cryoModule.Dictionary.join(var6, { usersTyping = p6 })
 		end,
-		setListStatus = function(value)
-			-- upvalues: t_1 (copy), var4 (ref), cryoModule (copy)
-			for i, v in value do
-				if t_1[i] == true then
-					var4[i] = if v == cryoModule.None then nil else v
+		setListStatus = function(List) --[[ Line: 221 ]]
+			-- upvalues: t (upval), Proxy2 (copy), CryoModule (upval)
+			for i, value in List do
+				if t[i] == true then
+					Proxy2[i] = if value == CryoModule.None then nil else value
 				end
 			end
 		end,
-		clear = function()
-			-- upvalues: var2 (ref), var3 (ref), var4 (ref), t (copy), t_1 (copy), cryoModule (copy), t_2 (ref)
-			for i in var2 do
-				var2[i] = nil
+		clear = function() --[[ Line: 233 ]]
+			-- upvalues: Proxy (copy), Proxy1 (copy), Proxy2 (copy), config (upval), t (upval), CryoModule (upval), List (copy)
+			for i in Proxy do
+				Proxy[i] = nil
 			end
-			for i_1 in var3 do
-				var3[i_1] = nil
+			for i1 in Proxy1 do
+				Proxy1[i1] = nil
 			end
-			for i_2 in var4 do
-				var4[i_2] = nil
+			for i2 in Proxy2 do
+				Proxy2[i2] = nil
 			end
-			for i_3, v in t do
-				if t_1[i_3] == true then
-					var4[i_3] = if v == cryoModule.None then nil else v
+			for i3, value in config do
+				if t[i3] == true then
+					Proxy2[i3] = if value == CryoModule.None then nil else value
 				end
 			end
-			for i_4, v_1 in t_2 do
-				v_1()
+			for _, value1 in List do
+				value1()
 			end
 		end
 	}

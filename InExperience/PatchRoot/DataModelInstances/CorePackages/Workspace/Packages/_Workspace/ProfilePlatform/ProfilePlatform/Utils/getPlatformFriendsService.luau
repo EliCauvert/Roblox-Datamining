@@ -1,1 +1,1 @@
-﻿return game:GetService("PlatformFriendsService")
+﻿return (game:GetService("PlatformFriendsService"))

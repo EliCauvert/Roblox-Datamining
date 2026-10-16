@@ -1,1 +1,1 @@
-﻿return require(script:FindFirstAncestor("Localization").Parent.Signals).createComputed(require(script.createLocalizationServiceStore))
+﻿return require(script:FindFirstAncestor("Localization").Parent.Signals).createComputed((require(script.createLocalizationServiceStore)))

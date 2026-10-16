@@ -1,36 +1,37 @@
-﻿local parent = script:FindFirstAncestor("FriendsChat").Parent
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local conversationChannelsModule = require(parent.AppChat.ConversationChannels)
-local expChatConversationListAdapterModule = require(script.Parent.Parent.ConversationList.ExpChatConversationListAdapter)
+﻿local Parent = script:FindFirstAncestor("FriendsChat").Parent
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
+local ConversationChannelsModule = require(Parent.AppChat.ConversationChannels)
+local ExpChatConversationListAdapterModule = require(script.Parent.Parent.ConversationList.ExpChatConversationListAdapter)
 
-local function _(p1)
-	-- upvalues: conversationChannelsModule (ref)
-	return if p1 == conversationChannelsModule.ModerationType.TrustedComms or p1 == conversationChannelsModule.ModerationType.Moderated or (p1 == conversationChannelsModule.ModerationType.Invalid or p1 == conversationChannelsModule.ModerationType.UnknownType) then p1 else nil
+local function _(Invalid) --[[ Line: 29 | Named "toConversationModerationType" ]]
+	-- upvalues: ConversationChannelsModule (copy)
+	return if Invalid == ConversationChannelsModule.ModerationType.TrustedComms or Invalid == ConversationChannelsModule.ModerationType.Moderated or Invalid == ConversationChannelsModule.ModerationType.Invalid or Invalid == ConversationChannelsModule.ModerationType.UnknownType then Invalid else nil
 end
 
-return function(p1)
-	-- upvalues: expChatConversationListAdapterModule (ref), reactModule (ref), signalsModule (ref), conversationChannelsModule (ref), signalsReactModule (ref)
-	local conversationId = p1.conversationId
-	local hasConversationId = p1.hasConversationId
-	local conversationStore = expChatConversationListAdapterModule.getConversationStore()
+return function(p1) --[[ Line: 41 | Named "useConversationModerationType" ]]
+	-- upvalues: ExpChatConversationListAdapterModule (copy), ReactModule (copy), SignalsModule (copy), ConversationChannelsModule (copy), SignalsReactModule (copy)
+	local ConversationId = p1.conversationId
+	local HasConversationId = p1.hasConversationId
+	local ConversationStore = ExpChatConversationListAdapterModule.getConversationStore()
 	
-	return signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), hasConversationId (ref), conversationStore (ref), conversationId (ref), conversationChannelsModule (copy)
-		return signalsModule.createComputed(function(p2)
-			-- upvalues: hasConversationId (copy), conversationStore (copy), conversationId (copy), conversationChannelsModule (copy)
-			if not hasConversationId then
+	return (SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 46 ]]
+		-- upvalues: SignalsModule (upval), HasConversationId (copy), ConversationStore (copy), ConversationId (copy), ConversationChannelsModule (upval)
+		return SignalsModule.createComputed(function(p2) --[[ Line: 47 ]]
+			-- upvalues: HasConversationId (upval), ConversationStore (upval), ConversationId (upval), ConversationChannelsModule (upval)
+			if not HasConversationId then
 				return nil
 			end
-			local conversation = conversationStore.getConversation(conversationId, p2)
+			local Conversation = ConversationStore.getConversation(ConversationId, p2)
 			
-			if conversation == nil then
+			if Conversation == nil then
 				return nil
+			else
+				local ModerationType = Conversation.moderationType
+				
+				return if ModerationType == ConversationChannelsModule.ModerationType.TrustedComms or ModerationType == ConversationChannelsModule.ModerationType.Moderated or ModerationType == ConversationChannelsModule.ModerationType.Invalid or ModerationType == ConversationChannelsModule.ModerationType.UnknownType then ModerationType else nil
 			end
-			local moderationType = conversation.moderationType
-			
-			return if moderationType == conversationChannelsModule.ModerationType.TrustedComms or moderationType == conversationChannelsModule.ModerationType.Moderated or (moderationType == conversationChannelsModule.ModerationType.Invalid or moderationType == conversationChannelsModule.ModerationType.UnknownType) then moderationType else nil
 		end)
-	end, { conversationStore, conversationId, hasConversationId }))
+	end, { ConversationStore, ConversationId, HasConversationId }))))
 end

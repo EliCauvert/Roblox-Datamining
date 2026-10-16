@@ -1,271 +1,271 @@
-﻿local robloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
-local corePackagesService = game:GetService("CorePackages")
-local gamepadService = game:GetService("GamepadService")
-local gameSettings = UserSettings().GameSettings
-local chrome = script:FindFirstAncestor("Chrome")
-local chromeShared = script:FindFirstAncestor("ChromeShared")
-local focusSelectExpChatModule = require(chromeShared.Utility.FocusSelectExpChat)
-local serviceModule = require(chromeShared.Service)
-local guiService = game:GetService("GuiService")
-local constantsModule = require(chromeShared.Unibar.Constants)
-local respawnUtilsModule = require(chrome.Integrations.RespawnUtils)
-local focusUtils = require(corePackagesService.Workspace.Packages.Chrome).FocusUtils
-local focusNavigationStore = require(corePackagesService.Workspace.Packages.ExpChat).Stores.GetFocusNavigationStore(false)
-local sharedFlagsModule = require(corePackagesService.Workspace.Packages.SharedFlags)
-local fFlagEnableConsoleExpControls = sharedFlagsModule.FFlagEnableConsoleExpControls
-local fFlagChromeShortcutAddRespawnLeaveToIEM = sharedFlagsModule.FFlagChromeShortcutAddRespawnLeaveToIEM
-local fFlagChromeShortcutRemoveLeaveOnRespawnPage = sharedFlagsModule.FFlagChromeShortcutRemoveLeaveOnRespawnPage
-local fFlagChromeShortcutRemoveRespawnOnLeavePage = sharedFlagsModule.FFlagChromeShortcutRemoveRespawnOnLeavePage
-local fFlagConsoleChatUseChromeFocusUtils = sharedFlagsModule.FFlagConsoleChatUseChromeFocusUtils
-local fFlagChromeShortcutChatOpenKeyboard = sharedFlagsModule.FFlagChromeShortcutChatOpenKeyboard
-local fFlagAddSwitchTabHintsToIEM = sharedFlagsModule.FFlagAddSwitchTabHintsToIEM
-local isSideSheetEnabledModule = require(corePackagesService.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
-local fFlagSideSheetFocusNav = sharedFlagsModule.FFlagSideSheetFocusNav
-local flags = chrome.Flags
-local fFlagRespawnChromeShortcutTelemetryModule = require(flags.FFlagRespawnChromeShortcutTelemetry)
-local fFlagLeaveActionChromeShortcutTelemetryModule = require(flags.FFlagLeaveActionChromeShortcutTelemetry)
-local fFlagLeaveChromeShortcutTelemetryModule = require(flags.FFlagLeaveChromeShortcutTelemetry)
-local fFlagRespawnActionChromeShortcutTelemetryModule = require(flags.FFlagRespawnActionChromeShortcutTelemetry)
-local flagsModule = require(chromeShared.Flags)
-local fFlagRemoveLeaveShortcutFromLeaveConfirm = flagsModule.FFlagRemoveLeaveShortcutFromLeaveConfirm
-local fFlagRemoveRespawnShortcutFromRespawnConfirmation = flagsModule.FFlagRemoveRespawnShortcutFromRespawnConfirmation
-local var1 = if fFlagEnableConsoleExpControls then require(robloxGui.Modules.ChatSelector) else nil
-local leaveGameModule = require(robloxGui.Modules.Settings.leaveGame)
-local inExperienceSideSheetModule = require(corePackagesService.Workspace.Packages.InExperienceSideSheet)
-local getSideSheetVisibility = inExperienceSideSheetModule.getSideSheetVisibility
-local toggleSideSheet = inExperienceSideSheetModule.toggleSideSheet
-local fFlagShowUnibarOnVirtualCursor = sharedFlagsModule.FFlagShowUnibarOnVirtualCursor
-local t = {
+﻿local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
+local CorePackages = game:GetService("CorePackages")
+local GamepadService = game:GetService("GamepadService")
+local GameSettings = UserSettings().GameSettings
+local Chrome = script:FindFirstAncestor("Chrome")
+local ChromeShared = script:FindFirstAncestor("ChromeShared")
+local FocusSelectExpChatModule = require(ChromeShared.Utility.FocusSelectExpChat)
+local ServiceModule = require(ChromeShared.Service)
+local GuiService = game:GetService("GuiService")
+local ConstantsModule = require(ChromeShared.Unibar.Constants)
+local RespawnUtilsModule = require(Chrome.Integrations.RespawnUtils)
+local FocusUtils = require(CorePackages.Workspace.Packages.Chrome).FocusUtils
+local FocusNavigationStore = require(CorePackages.Workspace.Packages.ExpChat).Stores.GetFocusNavigationStore(false)
+local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
+local FFlagEnableConsoleExpControls = SharedFlagsModule.FFlagEnableConsoleExpControls
+local FFlagChromeShortcutAddRespawnLeaveToIEM = SharedFlagsModule.FFlagChromeShortcutAddRespawnLeaveToIEM
+local FFlagChromeShortcutRemoveLeaveOnRespawnPage = SharedFlagsModule.FFlagChromeShortcutRemoveLeaveOnRespawnPage
+local FFlagChromeShortcutRemoveRespawnOnLeavePage = SharedFlagsModule.FFlagChromeShortcutRemoveRespawnOnLeavePage
+local FFlagConsoleChatUseChromeFocusUtils = SharedFlagsModule.FFlagConsoleChatUseChromeFocusUtils
+local FFlagChromeShortcutChatOpenKeyboard = SharedFlagsModule.FFlagChromeShortcutChatOpenKeyboard
+local FFlagAddSwitchTabHintsToIEM = SharedFlagsModule.FFlagAddSwitchTabHintsToIEM
+local IsSideSheetEnabledModule = require(CorePackages.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
+local FFlagSideSheetFocusNav = SharedFlagsModule.FFlagSideSheetFocusNav
+local Flags = Chrome.Flags
+local FFlagRespawnChromeShortcutTelemetryModule = require(Flags.FFlagRespawnChromeShortcutTelemetry)
+local FFlagLeaveActionChromeShortcutTelemetryModule = require(Flags.FFlagLeaveActionChromeShortcutTelemetry)
+local FFlagLeaveChromeShortcutTelemetryModule = require(Flags.FFlagLeaveChromeShortcutTelemetry)
+local FFlagRespawnActionChromeShortcutTelemetryModule = require(Flags.FFlagRespawnActionChromeShortcutTelemetry)
+local FlagsModule = require(ChromeShared.Flags)
+local FFlagRemoveLeaveShortcutFromLeaveConfirm = FlagsModule.FFlagRemoveLeaveShortcutFromLeaveConfirm
+local FFlagRemoveRespawnShortcutFromRespawnConfirmation = FlagsModule.FFlagRemoveRespawnShortcutFromRespawnConfirmation
+local ChatSelectorModule = if FFlagEnableConsoleExpControls then require(RobloxGui.Modules.ChatSelector) else nil
+local LeaveGameModule = require(RobloxGui.Modules.Settings.leaveGame)
+local InExperienceSideSheetModule = require(CorePackages.Workspace.Packages.InExperienceSideSheet)
+local GetSideSheetVisibilityFunction = InExperienceSideSheetModule.getSideSheetVisibility
+local ToggleSideSheetFunction = InExperienceSideSheetModule.toggleSideSheet
+local FFlagShowUnibarOnVirtualCursor = SharedFlagsModule.FFlagShowUnibarOnVirtualCursor
+local config = {
 	keyCode = Enum.KeyCode.ButtonX,
-	activated = function()
-		-- upvalues: robloxGui (ref), fFlagLeaveActionChromeShortcutTelemetryModule (ref), leaveGameModule (ref), fFlagLeaveChromeShortcutTelemetryModule (ref), fFlagConsoleChatUseChromeFocusUtils (ref), focusNavigationStore (ref), fFlagRespawnChromeShortcutTelemetryModule (ref)
-		local settingsHubModule = require(robloxGui.Modules.Settings.SettingsHub)
-		local leaveGamePage = settingsHubModule.Instance.LeaveGamePage
+	activated = function() --[[ Line: 51 ]]
+		-- upvalues: RobloxGui (copy), FFlagLeaveActionChromeShortcutTelemetryModule (copy), LeaveGameModule (copy), FFlagLeaveChromeShortcutTelemetryModule (copy), FFlagConsoleChatUseChromeFocusUtils (copy), FocusNavigationStore (copy), FFlagRespawnChromeShortcutTelemetryModule (copy)
+		local SettingsHubModule = require(RobloxGui.Modules.Settings.SettingsHub)
+		local LeaveGamePage = SettingsHubModule.Instance.LeaveGamePage
 		
-		local function _()
-			-- upvalues: settingsHubModule (ref), leaveGamePage (ref)
-			settingsHubModule.Instance:SwitchToPage(leaveGamePage, true, nil, nil, nil, { used_shortcut = true })
+		local function _() --[[ Line: 54 | Named "switchToLeavePage" ]]
+			-- upvalues: SettingsHubModule (copy), LeaveGamePage (copy)
+			SettingsHubModule.Instance:SwitchToPage(LeaveGamePage, true, nil, nil, nil, { used_shortcut = true })
 		end
 		
-		if settingsHubModule:GetVisibility() then
-			if settingsHubModule.Instance.Pages.CurrentPage == leaveGamePage then
-				if fFlagLeaveActionChromeShortcutTelemetryModule then
-					leaveGameModule(true, { telemetryFields = { used_shortcut = true } })
-					
-					return
-				end
-				leaveGameModule(true)
+		if not SettingsHubModule:GetVisibility() then
+			if FFlagConsoleChatUseChromeFocusUtils and FocusNavigationStore.getChatInputBarFocused(false) then
+				FocusNavigationStore.unfocusChatInputBar()
+			end
+			if FFlagRespawnChromeShortcutTelemetryModule then
+				SettingsHubModule:SetVisibility(true)
+				SettingsHubModule.Instance:SwitchToPage(LeaveGamePage, true, nil, nil, nil, { used_shortcut = true })
 				
 				return
-			elseif fFlagLeaveChromeShortcutTelemetryModule then
-				settingsHubModule.Instance:SwitchToPage(leaveGamePage, true, nil, nil, nil, { used_shortcut = true })
+			else
+				SettingsHubModule:SetVisibility(true, false, LeaveGamePage)
 				
 				return
 			end
-			settingsHubModule:SwitchToPage(leaveGamePage, true)
+		elseif SettingsHubModule.Instance.Pages.CurrentPage == LeaveGamePage then
+			if FFlagLeaveActionChromeShortcutTelemetryModule then
+				LeaveGameModule(true, { telemetryFields = { used_shortcut = true } })
+				
+				return
+			else
+				LeaveGameModule(true)
+				
+				return
+			end
+		elseif FFlagLeaveChromeShortcutTelemetryModule then
+			SettingsHubModule.Instance:SwitchToPage(LeaveGamePage, true, nil, nil, nil, { used_shortcut = true })
 			
 			return
-		elseif fFlagConsoleChatUseChromeFocusUtils and focusNavigationStore.getChatInputBarFocused(false) then
-			focusNavigationStore.unfocusChatInputBar()
+		else
+			SettingsHubModule:SwitchToPage(LeaveGamePage, true)
 		end
-		if fFlagRespawnChromeShortcutTelemetryModule then
-			settingsHubModule:SetVisibility(true)
-			settingsHubModule.Instance:SwitchToPage(leaveGamePage, true, nil, nil, nil, { used_shortcut = true })
-			
-			return
-		end
-		settingsHubModule:SetVisibility(true, false, leaveGamePage)
 	end
 }
-local t_1 = {
+local config1 = {
 	integration = "respawn",
 	keyCode = Enum.KeyCode.ButtonY,
-	activated = function()
-		-- upvalues: robloxGui (ref), fFlagRespawnActionChromeShortcutTelemetryModule (ref), fFlagConsoleChatUseChromeFocusUtils (ref), focusNavigationStore (ref), fFlagRespawnChromeShortcutTelemetryModule (ref), respawnUtilsModule (ref), serviceModule (ref)
-		local settingsHubModule = require(robloxGui.Modules.Settings.SettingsHub)
+	activated = function() --[[ Line: 98 ]]
+		-- upvalues: RobloxGui (copy), FFlagRespawnActionChromeShortcutTelemetryModule (copy), FFlagConsoleChatUseChromeFocusUtils (copy), FocusNavigationStore (copy), FFlagRespawnChromeShortcutTelemetryModule (copy), RespawnUtilsModule (copy), ServiceModule (copy)
+		local SettingsHubModule = require(RobloxGui.Modules.Settings.SettingsHub)
 		
-		if settingsHubModule:GetVisibility() and settingsHubModule.Instance.Pages.CurrentPage == settingsHubModule.Instance.ResetCharacterPage then
-			if fFlagRespawnActionChromeShortcutTelemetryModule then
-				settingsHubModule.Instance.ResetCharacterPage.ResetFunction({ resetTelemetryFields = { used_shortcut = true } })
+		if not SettingsHubModule:GetVisibility() or SettingsHubModule.Instance.Pages.CurrentPage ~= SettingsHubModule.Instance.ResetCharacterPage then
+			if FFlagConsoleChatUseChromeFocusUtils and FocusNavigationStore.getChatInputBarFocused(false) then
+				FocusNavigationStore.unfocusChatInputBar()
+			end
+			if FFlagRespawnChromeShortcutTelemetryModule then
+				RespawnUtilsModule.respawnPage({ usedShortcut = true })
+				
+				return
+			else
+				ServiceModule:activate("respawn")
 				
 				return
 			end
-			settingsHubModule.Instance.ResetCharacterPage.ResetFunction()
+		elseif FFlagRespawnActionChromeShortcutTelemetryModule then
+			SettingsHubModule.Instance.ResetCharacterPage.ResetFunction({ resetTelemetryFields = { used_shortcut = true } })
 			
 			return
-		elseif fFlagConsoleChatUseChromeFocusUtils and focusNavigationStore.getChatInputBarFocused(false) then
-			focusNavigationStore.unfocusChatInputBar()
+		else
+			SettingsHubModule.Instance.ResetCharacterPage.ResetFunction()
 		end
-		if fFlagRespawnChromeShortcutTelemetryModule then
-			respawnUtilsModule.respawnPage({ usedShortcut = true })
-			
-			return
-		end
-		serviceModule:activate("respawn")
 	end
 }
 
-local function activateBack()
-	-- upvalues: fFlagEnableConsoleExpControls (ref), focusUtils (ref), fFlagConsoleChatUseChromeFocusUtils (ref), serviceModule (ref), robloxGui (ref), guiService (ref), focusNavigationStore (ref)
-	local var2 = fFlagEnableConsoleExpControls and focusUtils.MenuIconSelectedSignal:get()
-	local var3 = not fFlagConsoleChatUseChromeFocusUtils or serviceModule:inFocusNav():get()
-	local settingsHubModule = require(robloxGui.Modules.Settings.SettingsHub)
+local function activateBack() --[[ Line: 130 ]]
+	-- upvalues: FFlagEnableConsoleExpControls (copy), FocusUtils (copy), FFlagConsoleChatUseChromeFocusUtils (copy), ServiceModule (copy), RobloxGui (copy), GuiService (copy), FocusNavigationStore (copy)
+	local GetResult = FFlagEnableConsoleExpControls and FocusUtils.MenuIconSelectedSignal:get()
+	local NoFFlagConsoleChatUseChromeFocusUtils = not FFlagConsoleChatUseChromeFocusUtils or ServiceModule:inFocusNav():get()
+	local SettingsHubModule = require(RobloxGui.Modules.Settings.SettingsHub)
 	
-	if settingsHubModule:GetVisibility() then
-		settingsHubModule.Instance:PopMenu(false, true)
+	if SettingsHubModule:GetVisibility() then
+		SettingsHubModule.Instance:PopMenu(false, true)
 		
-		if not settingsHubModule:GetVisibility() then
-			serviceModule:selectMenuIcon()
+		if not SettingsHubModule:GetVisibility() then
+			ServiceModule:selectMenuIcon()
 		end
 		return Enum.ContextActionResult.Sink
-	elseif var3 or var2 then
-		local var4 = serviceModule:currentSubMenu():get()
+	elseif NoFFlagConsoleChatUseChromeFocusUtils or GetResult then
+		local GetResult1 = ServiceModule:currentSubMenu():get()
 		
-		if var4 then
-			serviceModule:toggleSubMenu(var4)
-			serviceModule:setSelected(var4)
+		if GetResult1 then
+			ServiceModule:toggleSubMenu(GetResult1)
+			ServiceModule:setSelected(GetResult1)
 		else
-			serviceModule:disableFocusNav()
-			serviceModule:setShortcutBar(nil)
-			guiService.SelectedCoreObject = nil
+			ServiceModule:disableFocusNav()
+			ServiceModule:setShortcutBar(nil)
+			GuiService.SelectedCoreObject = nil
 			
-			if fFlagEnableConsoleExpControls then
-				focusUtils.MenuIconSelectedSignal:set(false)
+			if FFlagEnableConsoleExpControls then
+				FocusUtils.MenuIconSelectedSignal:set(false)
 			end
 		end
 		return Enum.ContextActionResult.Sink
-	elseif fFlagConsoleChatUseChromeFocusUtils and focusNavigationStore.getChatInputBarFocused(false) then
-		focusUtils.FocusOnChrome(function()
-			-- upvalues: focusNavigationStore (copy)
-			focusNavigationStore.unfocusChatInputBar()
-		end, "chat")
-		
-		return Enum.ContextActionResult.Sink
-	end
+	elseif not FFlagConsoleChatUseChromeFocusUtils or not FocusNavigationStore.getChatInputBarFocused(false) then return end
+	FocusUtils.FocusOnChrome(function() --[[ Line: 155 ]]
+		-- upvalues: FocusNavigationStore (upval)
+		FocusNavigationStore.unfocusChatInputBar()
+	end, "chat")
+	
+	return Enum.ContextActionResult.Sink
 end
 
-function registerShortcuts()
-	-- upvalues: serviceModule (ref), t (ref), t_1 (ref), fFlagChromeShortcutAddRespawnLeaveToIEM (ref), fFlagChromeShortcutChatOpenKeyboard (ref), fFlagEnableConsoleExpControls (ref), var1 (ref), fFlagConsoleChatUseChromeFocusUtils (ref), focusNavigationStore (ref), focusUtils (ref), gameSettings (ref), focusSelectExpChatModule (ref), robloxGui (ref), isSideSheetEnabledModule (ref), fFlagSideSheetFocusNav (ref), getSideSheetVisibility (ref), toggleSideSheet (ref), activateBack (ref), fFlagRemoveLeaveShortcutFromLeaveConfirm (ref), fFlagRemoveRespawnShortcutFromRespawnConfirmation (ref), guiService (ref), gamepadService (ref)
-	serviceModule:registerShortcut({
+function registerShortcuts() --[[ Line: 163 ]]
+	-- upvalues: ServiceModule (copy), config (copy), config1 (copy), FFlagChromeShortcutAddRespawnLeaveToIEM (copy), FFlagChromeShortcutChatOpenKeyboard (copy), FFlagEnableConsoleExpControls (copy), ChatSelectorModule (copy), FFlagConsoleChatUseChromeFocusUtils (copy), FocusNavigationStore (copy), FocusUtils (copy), GameSettings (copy), FocusSelectExpChatModule (copy), RobloxGui (copy), IsSideSheetEnabledModule (copy), FFlagSideSheetFocusNav (copy), GetSideSheetVisibilityFunction (copy), ToggleSideSheetFunction (copy), activateBack (copy), FFlagRemoveLeaveShortcutFromLeaveConfirm (copy), FFlagRemoveRespawnShortcutFromRespawnConfirmation (copy), GuiService (copy), GamepadService (copy)
+	ServiceModule:registerShortcut({
 		id = "leave",
 		label = "CoreScripts.TopBar.Leave",
 		integration = nil,
 		actionName = "UnibarGamepadLeaveGame",
-		keyCode = t.keyCode,
-		activated = t.activated
+		keyCode = config.keyCode,
+		activated = config.activated
 	})
-	serviceModule:registerShortcut({
+	ServiceModule:registerShortcut({
 		id = "respawn",
 		label = "CoreScripts.InGameMenu.QuickActions.Respawn",
 		actionName = "UnibarGamepadRespawn",
-		keyCode = t_1.keyCode,
-		integration = t_1.integration,
-		activated = t_1.activated
+		keyCode = config1.keyCode,
+		integration = config1.integration,
+		activated = config1.activated
 	})
 	
-	if fFlagChromeShortcutAddRespawnLeaveToIEM then
-		serviceModule:registerShortcut({
+	if FFlagChromeShortcutAddRespawnLeaveToIEM then
+		ServiceModule:registerShortcut({
 			id = "leave_in_experience_menu",
 			label = nil,
 			integration = nil,
 			actionName = "IEMGamepadLeaveGame",
-			keyCode = t.keyCode,
-			activated = t.activated
+			keyCode = config.keyCode,
+			activated = config.activated
 		})
-		serviceModule:registerShortcut({
+		ServiceModule:registerShortcut({
 			id = "respawn_in_experience_menu",
 			label = nil,
 			actionName = "IEMGamepadRespawn",
-			keyCode = t_1.keyCode,
-			integration = t_1.integration,
-			activated = t_1.activated
+			keyCode = config1.keyCode,
+			integration = config1.integration,
+			activated = config1.activated
 		})
 	end
-	serviceModule:registerShortcut({
+	ServiceModule:registerShortcut({
 		id = "chat",
 		label = "CoreScripts.TopBar.Chat",
 		integration = "chat",
 		actionName = "UnibarGamepadChat",
-		keyCode = if fFlagChromeShortcutChatOpenKeyboard then Enum.KeyCode.ButtonL2 else Enum.KeyCode.ButtonR1,
-		activated = if fFlagEnableConsoleExpControls then function()
-			-- upvalues: var1 (copy), fFlagChromeShortcutChatOpenKeyboard (copy), fFlagConsoleChatUseChromeFocusUtils (copy), focusNavigationStore (copy), focusUtils (copy), gameSettings (copy), focusSelectExpChatModule (copy)
-			local visibility = var1:GetVisibility()
+		keyCode = if FFlagChromeShortcutChatOpenKeyboard then Enum.KeyCode.ButtonL2 else Enum.KeyCode.ButtonR1,
+		activated = if FFlagEnableConsoleExpControls then function() --[[ Line: 209 ]]
+			-- upvalues: ChatSelectorModule (upval), FFlagChromeShortcutChatOpenKeyboard (upval), FFlagConsoleChatUseChromeFocusUtils (upval), FocusNavigationStore (upval), FocusUtils (upval), GameSettings (upval), FocusSelectExpChatModule (upval)
+			local Visibility = ChatSelectorModule:GetVisibility()
 			
-			if fFlagChromeShortcutChatOpenKeyboard then
-				if fFlagConsoleChatUseChromeFocusUtils and focusNavigationStore.getChatInputBarFocused(false) then
-					focusUtils.FocusOnChrome(function()
-						-- upvalues: focusNavigationStore (copy)
-						focusNavigationStore.unfocusChatInputBar()
-					end, "chat")
-					var1:SetVisible(false)
-					gameSettings.ChatVisible = false
+			if not FFlagChromeShortcutChatOpenKeyboard then
+				ChatSelectorModule:SetVisible(not Visibility)
+				
+				if not Visibility then
+					FocusSelectExpChatModule("chat")
 					
 					return
 				end
-				var1:SetVisible(true)
-				gameSettings.ChatVisible = true
-				var1:FocusChatBar()
-				focusSelectExpChatModule("chat")
+				if FFlagConsoleChatUseChromeFocusUtils and FocusNavigationStore.getChatInputBarFocused(false) then
+					FocusUtils.FocusOnChrome(function() --[[ Line: 235 ]]
+						-- upvalues: FocusNavigationStore (upval)
+						FocusNavigationStore.unfocusChatInputBar()
+					end, "chat")
+				end
+				return
+			elseif FFlagConsoleChatUseChromeFocusUtils and FocusNavigationStore.getChatInputBarFocused(false) then
+				FocusUtils.FocusOnChrome(function() --[[ Line: 216 ]]
+					-- upvalues: FocusNavigationStore (upval)
+					FocusNavigationStore.unfocusChatInputBar()
+				end, "chat")
+				ChatSelectorModule:SetVisible(false)
+				GameSettings.ChatVisible = false
 				
 				return
 			else
-				var1:SetVisible(not visibility)
-				
-				if not visibility then
-					focusSelectExpChatModule("chat")
-					
-					return
-				elseif fFlagConsoleChatUseChromeFocusUtils and focusNavigationStore.getChatInputBarFocused(false) then
-					focusUtils.FocusOnChrome(function()
-						-- upvalues: focusNavigationStore (copy)
-						focusNavigationStore.unfocusChatInputBar()
-					end, "chat")
-				end
+				ChatSelectorModule:SetVisible(true)
+				GameSettings.ChatVisible = true
+				ChatSelectorModule:FocusChatBar()
+				FocusSelectExpChatModule("chat")
 			end
 		end else nil
 	})
-	serviceModule:registerShortcut({
+	ServiceModule:registerShortcut({
 		id = "tiltMenu",
 		label = "CoreScripts.TopBar.Menu",
 		integration = nil,
 		actionName = "UnibarGamepadMenu",
 		keyCode = Enum.KeyCode.ButtonR2,
-		activated = function()
-			-- upvalues: robloxGui (copy), fFlagConsoleChatUseChromeFocusUtils (copy), focusNavigationStore (copy), isSideSheetEnabledModule (copy), fFlagSideSheetFocusNav (copy), getSideSheetVisibility (copy), toggleSideSheet (copy)
-			local settingsHubModule = require(robloxGui.Modules.Settings.SettingsHub)
+		activated = function() --[[ Line: 251 ]]
+			-- upvalues: RobloxGui (upval), FFlagConsoleChatUseChromeFocusUtils (upval), FocusNavigationStore (upval), IsSideSheetEnabledModule (upval), FFlagSideSheetFocusNav (upval), GetSideSheetVisibilityFunction (upval), ToggleSideSheetFunction (upval)
+			local SettingsHubModule = require(RobloxGui.Modules.Settings.SettingsHub)
 			
-			if settingsHubModule:GetVisibility() then
-				settingsHubModule:SetVisibility(false)
+			if SettingsHubModule:GetVisibility() then
+				SettingsHubModule:SetVisibility(false)
 				
 				return
-			elseif fFlagConsoleChatUseChromeFocusUtils and focusNavigationStore.getChatInputBarFocused(false) then
-				focusNavigationStore.unfocusChatInputBar()
 			end
-			if isSideSheetEnabledModule and fFlagSideSheetFocusNav then
-				if getSideSheetVisibility() then
-					return
-				else
-					toggleSideSheet(true)
-					
-					return
-				end
-			else
-				settingsHubModule:SetVisibility(true)
+			if FFlagConsoleChatUseChromeFocusUtils and FocusNavigationStore.getChatInputBarFocused(false) then
+				FocusNavigationStore.unfocusChatInputBar()
+			end
+			if not IsSideSheetEnabledModule or not FFlagSideSheetFocusNav then
+				SettingsHubModule:SetVisibility(true)
+			elseif not GetSideSheetVisibilityFunction() then
+				ToggleSideSheetFunction(true)
+				
+				return
 			end
 		end
 	})
-	serviceModule:registerShortcut({
+	ServiceModule:registerShortcut({
 		id = "back",
 		label = "CoreScripts.TopBar.Back",
 		integration = nil,
 		actionName = "UnibarGamepadBack",
 		keyCode = Enum.KeyCode.ButtonB,
-		displayPriority = if fFlagEnableConsoleExpControls then -10 else nil,
+		displayPriority = if FFlagEnableConsoleExpControls then -10 else nil,
 		activated = activateBack
 	})
 	
-	if fFlagRemoveLeaveShortcutFromLeaveConfirm or fFlagRemoveRespawnShortcutFromRespawnConfirmation then
-		serviceModule:registerShortcut({
+	if FFlagRemoveLeaveShortcutFromLeaveConfirm or FFlagRemoveRespawnShortcutFromRespawnConfirmation then
+		ServiceModule:registerShortcut({
 			id = "back-invisible",
 			label = nil,
 			actionName = "UnibarGamepadBackInvisible",
@@ -273,33 +273,33 @@ function registerShortcuts()
 			activated = activateBack
 		})
 	end
-	serviceModule:registerShortcut({
+	ServiceModule:registerShortcut({
 		id = "close",
 		label = nil,
 		actionName = "UnibarGamepadClose",
 		keyCode = Enum.KeyCode.ButtonStart,
-		activated = function()
-			-- upvalues: robloxGui (copy), serviceModule (copy), guiService (copy)
-			require(robloxGui.Modules.Settings.SettingsHub):SetVisibility(false)
-			serviceModule:disableFocusNav()
-			serviceModule:setShortcutBar(nil)
-			guiService.SelectedCoreObject = nil
+		activated = function() --[[ Line: 299 ]]
+			-- upvalues: RobloxGui (upval), ServiceModule (upval), GuiService (upval)
+			require(RobloxGui.Modules.Settings.SettingsHub):SetVisibility(false)
+			ServiceModule:disableFocusNav()
+			ServiceModule:setShortcutBar(nil)
+			GuiService.SelectedCoreObject = nil
 		end
 	})
-	serviceModule:registerShortcut({
+	ServiceModule:registerShortcut({
 		id = "virtualCursor",
 		label = nil,
 		actionName = "VirtualCursorShortcut",
 		keyCode = Enum.KeyCode.ButtonSelect,
-		activated = function()
-			-- upvalues: serviceModule (copy), guiService (copy), gamepadService (copy)
-			serviceModule:disableFocusNav()
-			serviceModule:setShortcutBar(nil)
-			guiService.SelectedCoreObject = nil
-			gamepadService.GamepadCursorEnabled = true
+		activated = function() --[[ Line: 315 ]]
+			-- upvalues: ServiceModule (upval), GuiService (upval), GamepadService (upval)
+			ServiceModule:disableFocusNav()
+			ServiceModule:setShortcutBar(nil)
+			GuiService.SelectedCoreObject = nil
+			GamepadService.GamepadCursorEnabled = true
 		end
 	})
-	serviceModule:registerShortcut({
+	ServiceModule:registerShortcut({
 		id = "tiltMenuPreviousTab",
 		label = "CoreScripts.InGameMenu.Controls.PreviousTab",
 		integration = nil,
@@ -307,7 +307,7 @@ function registerShortcuts()
 		activated = nil,
 		keyCode = Enum.KeyCode.ButtonL1
 	})
-	serviceModule:registerShortcut({
+	ServiceModule:registerShortcut({
 		id = "tiltMenuNextTab",
 		label = "CoreScripts.InGameMenu.Controls.NextTab",
 		integration = nil,
@@ -317,9 +317,9 @@ function registerShortcuts()
 	})
 end
 
-function configureShortcutBars()
-	-- upvalues: serviceModule (ref), constantsModule (ref), fFlagShowUnibarOnVirtualCursor (ref), fFlagAddSwitchTabHintsToIEM (ref), fFlagChromeShortcutAddRespawnLeaveToIEM (ref), fFlagChromeShortcutRemoveRespawnOnLeavePage (ref), fFlagChromeShortcutRemoveLeaveOnRespawnPage (ref), fFlagRemoveLeaveShortcutFromLeaveConfirm (ref), fFlagRemoveRespawnShortcutFromRespawnConfirmation (ref)
-	serviceModule:configureShortcutBar(constantsModule.UNIBAR_SHORTCUTBAR_ID, if fFlagShowUnibarOnVirtualCursor then {
+function configureShortcutBars() --[[ Line: 345 ]]
+	-- upvalues: ServiceModule (copy), ConstantsModule (copy), FFlagShowUnibarOnVirtualCursor (copy), FFlagAddSwitchTabHintsToIEM (copy), FFlagChromeShortcutAddRespawnLeaveToIEM (copy), FFlagChromeShortcutRemoveRespawnOnLeavePage (copy), FFlagChromeShortcutRemoveLeaveOnRespawnPage (copy), FFlagRemoveLeaveShortcutFromLeaveConfirm (copy), FFlagRemoveRespawnShortcutFromRespawnConfirmation (copy)
+	ServiceModule:configureShortcutBar(ConstantsModule.UNIBAR_SHORTCUTBAR_ID, if FFlagShowUnibarOnVirtualCursor then {
 		"leave", "respawn", "chat", "tiltMenu", "back", "virtualCursor"
 	} else {
 		"leave",
@@ -328,12 +328,12 @@ function configureShortcutBars()
 		"tiltMenu",
 		"back"
 	})
-	serviceModule:configureShortcutBar(constantsModule.TILTMENU_SHORTCUTBAR_ID, if fFlagAddSwitchTabHintsToIEM then {
+	ServiceModule:configureShortcutBar(ConstantsModule.TILTMENU_SHORTCUTBAR_ID, if FFlagAddSwitchTabHintsToIEM then {
 		"leave_in_experience_menu",
 		"respawn_in_experience_menu",
 		"back-invisible",
 		"close"
-	} elseif fFlagChromeShortcutAddRespawnLeaveToIEM then {
+	} elseif FFlagChromeShortcutAddRespawnLeaveToIEM then {
 		"leave_in_experience_menu", "respawn_in_experience_menu",
 		"tiltMenuPreviousTab", "tiltMenuNextTab", "back", "close"
 	} else {
@@ -343,24 +343,25 @@ function configureShortcutBars()
 		"close"
 	})
 	
-	if not fFlagChromeShortcutRemoveRespawnOnLeavePage or not fFlagChromeShortcutRemoveLeaveOnRespawnPage then
-		serviceModule:configureShortcutBar(constantsModule.TILTMENU_DIALOG_SHORTCUTBAR_ID, { "leave", "respawn", "back", "close" })
+	if not FFlagChromeShortcutRemoveRespawnOnLeavePage or not FFlagChromeShortcutRemoveLeaveOnRespawnPage then
+		ServiceModule:configureShortcutBar(ConstantsModule.TILTMENU_DIALOG_SHORTCUTBAR_ID, { "leave", "respawn", "back", "close" })
 	end
-	if fFlagRemoveLeaveShortcutFromLeaveConfirm then
-		serviceModule:configureShortcutBar(constantsModule.TILTMENU_LEAVE_DIALOG_SHORTCUTBAR_ID, { "back-invisible", "close" })
-	elseif fFlagChromeShortcutRemoveRespawnOnLeavePage then
-		serviceModule:configureShortcutBar(constantsModule.TILTMENU_LEAVE_DIALOG_SHORTCUTBAR_ID, { "leave", "back", "close" })
+	if FFlagRemoveLeaveShortcutFromLeaveConfirm then
+		ServiceModule:configureShortcutBar(ConstantsModule.TILTMENU_LEAVE_DIALOG_SHORTCUTBAR_ID, { "back-invisible", "close" })
+	elseif FFlagChromeShortcutRemoveRespawnOnLeavePage then
+		ServiceModule:configureShortcutBar(ConstantsModule.TILTMENU_LEAVE_DIALOG_SHORTCUTBAR_ID, { "leave", "back", "close" })
 	end
-	if fFlagRemoveRespawnShortcutFromRespawnConfirmation then
-		serviceModule:configureShortcutBar(constantsModule.TILTMENU_RESPAWN_DIALOG_SHORTCUTBAR_ID, { "back-invisible", "close" })
+	if FFlagRemoveRespawnShortcutFromRespawnConfirmation then
+		ServiceModule:configureShortcutBar(ConstantsModule.TILTMENU_RESPAWN_DIALOG_SHORTCUTBAR_ID, { "back-invisible", "close" })
 		
 		return
-	elseif fFlagChromeShortcutRemoveLeaveOnRespawnPage then
-		serviceModule:configureShortcutBar(constantsModule.TILTMENU_RESPAWN_DIALOG_SHORTCUTBAR_ID, { "respawn", "back", "close" })
+	end
+	if FFlagChromeShortcutRemoveLeaveOnRespawnPage then
+		ServiceModule:configureShortcutBar(ConstantsModule.TILTMENU_RESPAWN_DIALOG_SHORTCUTBAR_ID, { "respawn", "back", "close" })
 	end
 end
 
-return function()
+return function() --[[ Line: 403 ]]
 	registerShortcuts()
 	configureShortcutBars()
 end

@@ -1,5 +1,5 @@
-﻿return function(p1)
-	assert(p1, "attachmentName cannot be nil")
+﻿return function(Name) --[[ Line: 2 | Named "createEyebrowEyelashSchema" ]]
+	assert(Name, "attachmentName cannot be nil")
 	
 	return {
 		ClassName = "Accessory",
@@ -14,7 +14,7 @@
 				Name = "Handle",
 				ClassName = "MeshPart",
 				_children = {
-					{ ClassName = "Attachment", Name = p1 },
+					{ ClassName = "Attachment", Name = Name },
 					{ ClassName = "WrapLayer" },
 					{ ClassName = "SurfaceAppearance", _optional = true },
 					{

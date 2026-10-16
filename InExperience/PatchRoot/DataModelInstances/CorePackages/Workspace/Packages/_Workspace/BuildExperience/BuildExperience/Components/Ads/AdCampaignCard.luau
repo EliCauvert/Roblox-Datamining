@@ -1,45 +1,45 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local useAdCampaignCardViewModelModule = require(script.Parent.useAdCampaignCardViewModel)
-local button = foundationModule.Button
-local text = foundationModule.Text
-local view = foundationModule.View
-local inputSize = foundationModule.Enums.InputSize
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local UseAdCampaignCardViewModelModule = require(script.Parent.useAdCampaignCardViewModel)
+local Button = FoundationModule.Button
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local InputSize = FoundationModule.Enums.InputSize
 
-return function(p1)
-	-- upvalues: useAdCampaignCardViewModelModule (ref), reactModule (ref), view (ref), text (ref), button (ref), inputSize (ref)
-	local var1 = useAdCampaignCardViewModelModule(p1)
+return function(Frame) --[[ Line: 21 | Named "AdCampaignCard" ]]
+	-- upvalues: UseAdCampaignCardViewModelModule (copy), ReactModule (copy), View (copy), Text (copy), Button (copy), InputSize (copy)
+	local UseAdCampaignCardViewModelModuleResult = UseAdCampaignCardViewModelModule(Frame)
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "col gap-large size-full-0 auto-y padding-large stroke-standard stroke-default radius-large",
 		testId = "AdCampaignCard",
-		LayoutOrder = p1.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		Content = reactModule.createElement(view, {
+		Content = ReactModule.createElement(View, {
 			LayoutOrder = 1,
 			tag = "col gap-xxsmall size-full-0 auto-y"
 		}, {
-			Title = reactModule.createElement(text, {
+			Title = ReactModule.createElement(Text, {
 				LayoutOrder = 1,
 				tag = "size-full-0 auto-y text-title-medium text-wrap text-align-x-left content-emphasis",
-				Text = var1.title
+				Text = UseAdCampaignCardViewModelModuleResult.title
 			}),
-			Description = reactModule.createElement(text, {
+			Description = ReactModule.createElement(Text, {
 				LayoutOrder = 2,
 				tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-emphasis",
-				Text = var1.description
+				Text = UseAdCampaignCardViewModelModuleResult.description
 			})
 		}),
-		Action = reactModule.createElement(button, {
+		Action = ReactModule.createElement(Button, {
 			LayoutOrder = 2,
 			testId = "AdCampaignCard.Primary",
-			text = var1.actionText,
-			size = inputSize.Small,
-			variant = var1.buttonVariant,
+			text = UseAdCampaignCardViewModelModuleResult.actionText,
+			size = InputSize.Small,
+			variant = UseAdCampaignCardViewModelModuleResult.buttonVariant,
 			width = UDim.new(1, 0),
-			isLoading = var1.isLoading,
-			onActivated = var1.onActivated
+			isLoading = UseAdCampaignCardViewModelModuleResult.isLoading,
+			onActivated = UseAdCampaignCardViewModelModuleResult.onActivated
 		})
 	})
 end

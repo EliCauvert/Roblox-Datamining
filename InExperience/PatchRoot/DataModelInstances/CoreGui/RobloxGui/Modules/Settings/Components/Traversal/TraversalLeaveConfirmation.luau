@@ -1,83 +1,80 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local contextActionService = game:GetService("ContextActionService")
-local guiService = game:GetService("GuiService")
-local userInputService = game:GetService("UserInputService")
-local foundationModule = require(corePackagesService.Packages.Foundation)
-local reactModule = require(corePackagesService.Packages.React)
-local signalsModule = require(corePackagesService.Packages.Signals)
-local signalsReactModule = require(corePackagesService.Packages.SignalsReact)
-local dataHydrationModule = require(corePackagesService.Workspace.Packages.DataHydration)
-local coreScriptsRoactCommonModule = require(corePackagesService.Workspace.Packages.CoreScriptsRoactCommon)
-local localizationModule = require(corePackagesService.Workspace.Packages.Localization)
-local responsiveModule = require(corePackagesService.Workspace.Packages.Responsive)
-local view = foundationModule.View
-local getGameInfoStore = dataHydrationModule.Game.getGameInfoStore
-local traversal = coreScriptsRoactCommonModule.Traversal
-local constants = traversal.Constants
-local teleportLeaveConfirmation = traversal.TeleportLeaveConfirmation
-local useLocalization = localizationModule.Hooks.useLocalization
-local getInputModeStore = responsiveModule.GetInputModeStore
-local input = responsiveModule.Input
+﻿local CorePackages = game:GetService("CorePackages")
+local ContextActionService = game:GetService("ContextActionService")
+local GuiService = game:GetService("GuiService")
+local UserInputService = game:GetService("UserInputService")
+local ReactModule = require(CorePackages.Packages.React)
+local SignalsModule = require(CorePackages.Packages.Signals)
+local SignalsReactModule = require(CorePackages.Packages.SignalsReact)
+local ResponsiveModule = require(CorePackages.Workspace.Packages.Responsive)
+local View = require(CorePackages.Packages.Foundation).View
+local GetGameInfoStoreFunction = require(CorePackages.Workspace.Packages.DataHydration).Game.getGameInfoStore
+local Traversal = require(CorePackages.Workspace.Packages.CoreScriptsRoactCommon).Traversal
+local Constants = Traversal.Constants
+local TeleportLeaveConfirmation = Traversal.TeleportLeaveConfirmation
+local UseLocalizationFunction = require(CorePackages.Workspace.Packages.Localization).Hooks.useLocalization
+local GetInputModeStoreFunction = ResponsiveModule.GetInputModeStore
+local Input = ResponsiveModule.Input
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), useLocalization (ref), signalsReactModule (ref), getGameInfoStore (ref), signalsModule (ref), userInputService (ref), getInputModeStore (ref), input (ref), constants (ref), contextActionService (ref), guiService (ref), view (ref), teleportLeaveConfirmation (ref)
-	local name
-	local var1 = reactModule.useRef(nil)
-	local var2 = useLocalization({
+return ReactModule.memo(function(p1) --[[ Line: 36 | Named "TraversalLeaveConfirmation" ]]
+	-- upvalues: ReactModule (copy), UseLocalizationFunction (copy), SignalsReactModule (copy), GetGameInfoStoreFunction (copy), SignalsModule (copy), UserInputService (copy), GetInputModeStoreFunction (copy), Input (copy), Constants (copy), ContextActionService (copy), GuiService (copy), View (copy), TeleportLeaveConfirmation (copy)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseLocalizationResult = UseLocalizationFunction({
 		previous = "CoreScripts.TopBar.Traversal.BackButtonDefault"
 	})
-	local var3 = signalsReactModule.useSignalState(getGameInfoStore(false).getAndFetchGameInfo(tostring(p1.universeId)).data)
-	local _ = nil
-	local var4 = nil
+	local UseSignalStateResult = SignalsReactModule.useSignalState(GetGameInfoStoreFunction(false).getAndFetchGameInfo((tostring(p1.universeId))).data)
+	local Number: number? = nil
+	local Name = nil
 	
-	if typeof(var3) == "table" then
-		name = var3.name
-		var4 = tonumber(var3.rootPlaceId)
+	if typeof(UseSignalStateResult) == "table" then
+		Name = UseSignalStateResult.name
+		Number = tonumber(UseSignalStateResult.rootPlaceId)
 	else
-		name = var2.previous
+		Name = UseLocalizationResult.previous
 	end
-	local var5 = reactModule.useCallback(function(_, p2)
-		-- upvalues: p1 (ref)
-		if p2 == Enum.UserInputState.End then
+	local UseResult = ReactModule.useCallback(function(_, UserInputState) --[[ Line: 53 ]]
+		-- upvalues: p1 (copy)
+		if UserInputState == Enum.UserInputState.End then
 			p1.onCancel()
 			
 			return Enum.ContextActionResult.Sink
+		else
+			return Enum.ContextActionResult.Pass
 		end
-		return Enum.ContextActionResult.Pass
 	end, { p1.onCancel })
-	reactModule.useEffect(function()
-		-- upvalues: signalsModule (copy), userInputService (copy), getInputModeStore (copy), input (copy), var4 (write), constants (copy), contextActionService (copy), var5 (ref), guiService (copy), var1 (ref)
-		local var6 = signalsModule.createEffect(function(p2)
-			-- upvalues: userInputService (copy), getInputModeStore (copy), input (copy), var4 (copy), constants (copy), contextActionService (copy), var5 (copy), guiService (copy), var1 (copy)
-			local lastInputType = getInputModeStore(p2).getLastInputType(p2)
-			local var7 = if lastInputType ~= input.Directional then lastInputType == input.Pointer and userInputService:GetLastInputType() == Enum.UserInputType.Keyboard else true
+	ReactModule.useEffect(function() --[[ Line: 61 ]]
+		-- upvalues: SignalsModule (upval), UserInputService (upval), GetInputModeStoreFunction (upval), Input (upval), Number (ref), Constants (upval), ContextActionService (upval), UseResult (copy), GuiService (upval), UseRefResult (copy)
+		local Effect = SignalsModule.createEffect(function(p2) --[[ Line: 62 ]]
+			-- upvalues: UserInputService (upval), GetInputModeStoreFunction (upval), Input (upval), Number (upval), Constants (upval), ContextActionService (upval), UseResult (upval), GuiService (upval), UseRefResult (upval)
+			local LastInputType = UserInputService:GetLastInputType()
+			local LastInputType1 = GetInputModeStoreFunction(p2).getLastInputType(p2)
+			local IsLastInputTypeMatch: boolean = LastInputType1 == Input.Directional or LastInputType1 == Input.Pointer and LastInputType == Enum.UserInputType.Keyboard
 			
-			if var4 ~= nil and constants.NO_PLACE_ID < var4 then
-				if var7 then
-					contextActionService:BindCoreAction("FREEZE_CONTROLLER", function() end, false, Enum.UserInputType.Gamepad1)
-					contextActionService:BindCoreAction("EXIT_DIALOG", var5, false, Enum.KeyCode.ButtonB)
-					guiService.SelectedCoreObject = var1.current
-					
-					return
+			if Number == nil or Constants.NO_PLACE_ID >= Number then
+				if IsLastInputTypeMatch then
+					ContextActionService:UnbindCoreAction("FREEZE_CONTROLLER")
+					ContextActionService:UnbindCoreAction("EXIT_DIALOG")
 				end
-			elseif var7 then
-				contextActionService:UnbindCoreAction("FREEZE_CONTROLLER")
-				contextActionService:UnbindCoreAction("EXIT_DIALOG")
+			elseif IsLastInputTypeMatch then
+				ContextActionService:BindCoreAction("FREEZE_CONTROLLER", function() --[[ Line: 68 ]] end, false, Enum.UserInputType.Gamepad1)
+				ContextActionService:BindCoreAction("EXIT_DIALOG", UseResult, false, Enum.KeyCode.ButtonB)
+				GuiService.SelectedCoreObject = UseRefResult.current
+				
+				return
 			end
 		end)
 		
-		return function()
-			-- upvalues: var6 (ref)
-			var6()
+		return function() --[[ Line: 79 ]]
+			-- upvalues: Effect (copy)
+			Effect()
 		end
-	end, { var4 })
+	end, { Number })
 	
-	return p1.isDialogOpen and (var4 and reactModule.createElement("ScreenGui", {
+	return p1.isDialogOpen and (Number and ReactModule.createElement("ScreenGui", {
 		DisplayOrder = 10,
 		IgnoreGuiInset = true,
 		ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 	}, {
-		NoEscapeZone = reactModule.createElement(view, {
+		NoEscapeZone = ReactModule.createElement(View, {
 			tag = "auto-xy size-full",
 			selectionGroup = {
 				SelectionBehaviorUp = Enum.SelectionBehavior.Stop,
@@ -86,13 +83,13 @@ return reactModule.memo(function(p1)
 				SelectionBehaviorRight = Enum.SelectionBehavior.Stop
 			}
 		}, {
-			Dialog = reactModule.createElement(teleportLeaveConfirmation, {
+			Dialog = ReactModule.createElement(TeleportLeaveConfirmation, {
 				onCancel = p1.onCancel,
 				onClose = p1.onClose,
-				placeId = var4,
-				teleportName = name,
+				placeId = Number,
+				teleportName = Name,
 				source = p1.source,
-				ref = var1
+				ref = UseRefResult
 			})
 		})
 	}))

@@ -1,40 +1,39 @@
-﻿local parent = script.Parent.Parent
-local reactGlobalsModule = require(parent.ReactGlobals)
-local object = require(parent.LuauPolyfill).Object
-local console = require(parent.Shared).console
-local _ = require(parent.Shared)
-local reactNoopUpdateQueueModule = require(script.Parent.ReactNoopUpdateQueue)
+﻿local Parent = script.Parent.Parent
+local ReactGlobalsModule = require(Parent.ReactGlobals)
+local Object = require(Parent.LuauPolyfill).Object
+local Console = require(Parent.Shared).console
+local EnableAllocationTrims = require(Parent.Shared).ReactFeatureFlags.enableAllocationTrims
+local ReactNoopUpdateQueueModule = require(script.Parent.ReactNoopUpdateQueue)
 local t = {}
-local dEV = reactGlobalsModule.__DEV__
-local cOMPATWARNINGS = reactGlobalsModule.__COMPAT_WARNINGS__
+local DEV = ReactGlobalsModule.__DEV__
+local COMPATWARNINGS = ReactGlobalsModule.__COMPAT_WARNINGS__
 
-if dEV then
-	object.freeze(t)
+if DEV then
+	Object.freeze(t)
 end
-local uninitializedState = require(parent.Shared).UninitializedState
-local t_1 = { isReactComponent = true }
+local UninitializedState = require(Parent.Shared).UninitializedState
 
-local function _(p1)
-	local match = string.match(p1, "%.%u[%.%w]-$")
+local function _(Text: string): string --[[ Line: 52 | Named "trimPath" ]]
+	local Match: string? = string.match(Text, "%.%u[%.%w]-$")
 	
-	return if match then string.gsub(match, "^%.", "") else p1
+	return if Match then string.gsub(Match, "^%.", "") else Text
 end
 
-local _ = function(p1, p2, p3)
-	-- upvalues: console (ref)
-	console.warn("%s already defined '%s', but it also defining the deprecated Roact method '%s'. %s should only implement one of these methods, preferably using the non-deprecated name.", p1, p3, p2, p1)
+local _ = function(p1, p2, p3) --[[ Line: 66 | Named "warnAboutExistingLifecycle" ]]
+	-- upvalues: Console (copy)
+	Console.warn("%s already defined '%s', but it also defining the deprecated Roact method '%s'. %s should only implement one of these methods, preferably using the non-deprecated name.", p1, p3, p2, p1)
 end
 
-local _ = function(p1, p2, p3)
-	-- upvalues: dEV (ref), cOMPATWARNINGS (ref), console (ref)
-	if dEV and cOMPATWARNINGS then
-		local debugInfo, debugInfo_1 = debug.info(3, "sln")
-		local match = string.match(debugInfo, "%.%u[%.%w]-$")
-		console.warn("%s is using method '%s', which is no longer supported and should be updated to '%s'\nFile: %s:%s", p1, p2, p3, if match then string.gsub(match, "^%.", "") else debugInfo, tostring(debugInfo_1))
+local _ = function(p1, p2, p3) --[[ Line: 76 | Named "warnAboutDeprecatedLifecycleName" ]]
+	-- upvalues: DEV (copy), COMPATWARNINGS (copy), Console (copy)
+	if DEV and COMPATWARNINGS then
+		local DebugInfo, DebugInfo2 = debug.info(3, "sln")
+		local Match: string? = string.match(DebugInfo, "%.%u[%.%w]-$")
+		Console.warn("%s is using method '%s', which is no longer supported and should be updated to '%s'\nFile: %s:%s", p1, p2, p3, if Match then string.gsub(Match, "^%.", "") else DebugInfo, (tostring(DebugInfo2)))
 	end
 end
 
-local t_2 = {
+local config = {
 	didMount = "componentDidMount",
 	shouldUpdate = "shouldComponentUpdate",
 	willUpdate = "UNSAFE_componentWillUpdate",
@@ -42,131 +41,139 @@ local t_2 = {
 	willUnmount = "componentWillUnmount"
 }
 
-local function handleNewLifecycle(p1, p2, p3)
-	-- upvalues: t_2 (ref), console (ref), dEV (ref), cOMPATWARNINGS (ref)
-	if t_2[p2] ~= nil then
-		if p1[t_2[p2]] ~= nil then
-			local componentName = p1.__componentName
-			console.warn("%s already defined '%s', but it also defining the deprecated Roact method '%s'. %s should only implement one of these methods, preferably using the non-deprecated name.", componentName, t_2[p2], p2, componentName)
-		elseif p2 == "willUpdate" and p1.componentWillUpdate then
-			local componentName = p1.__componentName
-			console.warn("%s already defined '%s', but it also defining the deprecated Roact method '%s'. %s should only implement one of these methods, preferably using the non-deprecated name.", componentName, "UNSAFE_componentWillUpdate", p2, componentName)
-		else
-			local componentName = p1.__componentName
-			local var1 = p2
-			local var2 = t_2[p2]
-			
-			if dEV and cOMPATWARNINGS then
-				local debugInfo, debugInfo_1 = debug.info(3, "sln")
-				local match = string.match(debugInfo, "%.%u[%.%w]-$")
-				console.warn("%s is using method '%s', which is no longer supported and should be updated to '%s'\nFile: %s:%s", componentName, var1, var2, if match then string.gsub(match, "^%.", "") else debugInfo, tostring(debugInfo_1))
+local function handleNewLifecycle(p1, p2, p3) --[[ Line: 98 ]]
+	-- upvalues: config (copy), Console (copy), DEV (copy), COMPATWARNINGS (copy)
+	if config[p2] ~= nil then
+		if p1[config[p2]] == nil then
+			if p2 == "willUpdate" and p1.componentWillUpdate then
+				local ComponentName1 = p1.__componentName
+				Console.warn("%s already defined '%s', but it also defining the deprecated Roact method '%s'. %s should only implement one of these methods, preferably using the non-deprecated name.", ComponentName1, "UNSAFE_componentWillUpdate", p2, ComponentName1)
+			else
+				local ComponentName = p1.__componentName
+				local v1 = p2
+				local Entry = config[p2]
+				
+				if DEV and COMPATWARNINGS then
+					local DebugInfo, DebugInfo2 = debug.info(3, "sln")
+					local Match: string? = string.match(DebugInfo, "%.%u[%.%w]-$")
+					Console.warn("%s is using method '%s', which is no longer supported and should be updated to '%s'\nFile: %s:%s", ComponentName, v1, Entry, if Match then string.gsub(Match, "^%.", "") else DebugInfo, (tostring(DebugInfo2)))
+				end
 			end
+		else
+			local ComponentName = p1.__componentName
+			Console.warn("%s already defined '%s', but it also defining the deprecated Roact method '%s'. %s should only implement one of these methods, preferably using the non-deprecated name.", ComponentName, config[p2], p2, ComponentName)
 		end
-		p2 = t_2[p2]
+		p2 = config[p2]
 	end
 	rawset(p1, p2, p3)
 end
 
-local tbl = setmetatable({ __componentName = "Component" }, {
+local self = setmetatable({ __componentName = "Component" }, {
 	__newindex = handleNewLifecycle,
-	__index = t_1,
-	__tostring = function(p1)
+	__index = { isReactComponent = true },
+	__tostring = function(p1) --[[ Line: 128 ]]
 		return p1.__componentName
 	end
 })
-local var1 = if not reactGlobalsModule.__TESTEZ_RUNNING_TEST__ then 900 else 0
-local var2 = 1
-local list = table.create(var1)
+local v1: number = if ReactGlobalsModule.__TESTEZ_RUNNING_TEST__ then 0 else 900
+local Count = 1
+local Buffer = table.create(v1)
 
-for i = 1, var1 do
-	table.insert(list, {
+for _ = 1, v1 do
+	table.insert(Buffer, {
 		props = nil,
 		context = nil,
-		state = uninitializedState,
+		state = UninitializedState,
 		__refs = t,
-		__updater = reactNoopUpdateQueueModule
+		__updater = ReactNoopUpdateQueueModule
 	})
 end
-local function setStateInInit(value, p1, p2)
-	-- upvalues: dEV (ref), console (ref), object (ref)
-	if dEV and p2 ~= nil then
-		console.warn("Received a `callback` argument to `setState` during initialization of \"%s\". The callback behavior is not supported when using `setState` in `init`.\n\nConsider defining similar behavior in a `compontentDidMount` method instead.", value.__componentName)
+local function setStateInInit(p1, Callback, p2) --[[ Line: 164 ]]
+	-- upvalues: DEV (copy), Console (copy), EnableAllocationTrims (copy), Object (copy)
+	if DEV and p2 ~= nil then
+		Console.warn("Received a `callback` argument to `setState` during initialization of \"%s\". The callback behavior is not supported when using `setState` in `init`.\n\nConsider defining similar behavior in a `compontentDidMount` method instead.", p1.__componentName)
 	end
-	local var3 = p1 and type(p1)
+	local ValueType = Callback and type(Callback)
 	
-	if p1 == nil or var3 ~= "table" and var3 ~= "function" then
+	if Callback == nil or ValueType ~= "table" and ValueType ~= "function" then
 		error("setState(...): takes an object of state variables to update or a function which returns an object of state variables.")
 	end
-	local state = value.state
-	value.state = object.assign({}, state, if var3 == "function" then p1(state, value.props) else p1)
+	local State = p1.state
+	local CallbackResult = if ValueType == "function" then Callback(State, p1.props) else Callback
+	
+	if EnableAllocationTrims then
+		p1.state = if type(State) == "table" and getmetatable(State) == nil then Object.assign(table.clone(State), CallbackResult) else Object.assign({}, State, CallbackResult)
+		
+		return
+	else
+		p1.state = Object.assign({}, State, CallbackResult)
+	end
 end
 
-function tbl.extend(p1, p2)
-	-- upvalues: cOMPATWARNINGS (ref), console (ref), var2 (write), var1 (ref), list (ref), uninitializedState (ref), t (ref), reactNoopUpdateQueueModule (ref), setStateInInit (ref)
+function self.extend(p1, p2: string) --[[ Line: 213 ]]
+	-- upvalues: COMPATWARNINGS (copy), Console (copy), Count (ref), v1 (copy), Buffer (copy), UninitializedState (copy), t (copy), ReactNoopUpdateQueueModule (copy), setStateInInit (copy)
 	if p2 == nil then
-		if cOMPATWARNINGS then
-			console.warn("Component:extend() accepting no arguments is deprecated, and will not be supported in a future version of Roact. Please provide an explicit name.")
+		if COMPATWARNINGS then
+			Console.warn("Component:extend() accepting no arguments is deprecated, and will not be supported in a future version of Roact. Please provide an explicit name.")
 		end
 		p2 = ""
 	elseif type(p2) ~= "string" then
 		error("Component class name must be a string")
 	end
-	local t_1 = {
+	local Module = {
 		init = nil,
 		__componentName = p2,
 		setState = p1.setState,
 		forceUpdate = p1.forceUpdate
 	}
-	t_1.__index = t_1
+	Module.__index = Module
 	
-	function t_1.__ctor(p3, p4, p5)
-		-- upvalues: var2 (copy), var1 (copy), list (copy), uninitializedState (copy), t (copy), reactNoopUpdateQueueModule (copy), t_1 (ref), setStateInInit (copy)
-		local var3
-		local _ = nil
-		
-		if var2 <= var1 then
-			var3 = list[var2]
-			var3.props = p3
-			var3.context = p4
-			list[var2] = nil
-			var2 += 1
+	function Module.__ctor(Props, Context, p3) --[[ Line: 247 ]]
+		-- upvalues: Count (upval), v1 (upval), Buffer (upval), UninitializedState (upval), t (upval), ReactNoopUpdateQueueModule (upval), Module (copy), setStateInInit (upval)
+		local BufferEntry = nil
+		if Count <= v1 then
+			BufferEntry = Buffer[Count]
+			BufferEntry.props = Props
+			BufferEntry.context = Context
+			Buffer[Count] = nil
+			Count += 1
 		else
-			var3 = {
-				props = p3,
-				context = p4,
-				state = uninitializedState,
+			BufferEntry = {
+				props = Props,
+				context = Context,
+				state = UninitializedState,
 				__refs = t,
-				__updater = p5 or reactNoopUpdateQueueModule
+				__updater = p3 or ReactNoopUpdateQueueModule
 			}
 		end
-		local tbl = setmetatable(var3, t_1)
+		local self = setmetatable(BufferEntry, Module)
 		
-		if t_1.init and type(t_1.init) == "function" then
-			tbl.setState = setStateInInit
-			t_1.init(tbl, p3, p4)
-			tbl.setState = nil
+		if Module.init and type(Module.init) == "function" then
+			self.setState = setStateInInit
+			Module.init(self, Props, Context)
+			self.setState = nil
 		end
-		return tbl
+		return self
 	end
 	
-	setmetatable(t_1, getmetatable(p1))
+	setmetatable(Module, (getmetatable(p1)))
 	
-	return t_1
+	return Module
 end
 
-function tbl.setState(value, p1, p2)
-	if p1 ~= nil and type(p1) ~= "table" and type(p1) ~= "function" then
+function self.setState(p1, Callback, p2) --[[ Line: 339 ]]
+	if Callback ~= nil and type(Callback) ~= "table" and type(Callback) ~= "function" then
 		error("setState(...): takes an object of state variables to update or a function which returns an object of state variables.")
 	end
-	value.__updater.enqueueSetState(value, p1, p2, "setState")
+	p1.__updater.enqueueSetState(p1, Callback, p2, "setState")
 end
 
-function tbl.forceUpdate(p1, p2)
+function self.forceUpdate(p1, p2) --[[ Line: 368 ]]
 	p1.__updater.enqueueForceUpdate(p1, p2, "forceUpdate")
 end
 
-if dEV then
-	local t_3 = {
+if DEV then
+	local config1 = {
 		isMounted = {
 			"isMounted",
 			"Instead, make sure to clean up subscriptions and pending requests in componentWillUnmount to prevent memory leaks."
@@ -177,37 +184,37 @@ if dEV then
 		}
 	}
 	
-	i = function(p1, p2)
-		-- upvalues: tbl (ref), console (ref)
-		tbl[p1] = function()
-			-- upvalues: console (copy), p2 (ref)
-			console.warn("%s(...) is deprecated in plain JavaScript React classes. %s", p2[1], p2[2])
+	local _ = function(Key, Entry) --[[ Line: 392 ]]
+		-- upvalues: self (copy), Console (copy)
+		self[Key] = function() --[[ Line: 393 ]]
+			-- upvalues: Console (upval), Entry (copy)
+			Console.warn("%s(...) is deprecated in plain JavaScript React classes. %s", Entry[1], Entry[2])
 			
 			return nil
 		end
 	end
 	
-	for i_1, v in t_3 do
-		if t_3[i_1] ~= nil then
-			local var3 = t_3[i_1]
+	for i, _ in config1 do
+		if config1[i] ~= nil then
+			local Entry = config1[i]
 			
-			tbl[i_1] = function()
-				-- upvalues: console (ref), var3 (ref)
-				console.warn("%s(...) is deprecated in plain JavaScript React classes. %s", var3[1], var3[2])
+			self[i] = function() --[[ Line: 393 ]]
+				-- upvalues: Console (copy), Entry (copy)
+				Console.warn("%s(...) is deprecated in plain JavaScript React classes. %s", Entry[1], Entry[2])
 				
 				return nil
 			end
 		end
 	end
 end
-local pureComponent = tbl:extend("PureComponent")
-pureComponent.extend = tbl.extend
-setmetatable(pureComponent, {
+local PureComponent = self:extend("PureComponent")
+PureComponent.extend = self.extend
+setmetatable(PureComponent, {
 	__newindex = handleNewLifecycle,
 	__index = { isReactComponent = true, isPureReactComponent = true },
-	__tostring = function(p1)
+	__tostring = function(p1) --[[ Line: 440 ]]
 		return p1.__componentName
 	end
 })
 
-return { Component = tbl, PureComponent = pureComponent }
+return { Component = self, PureComponent = PureComponent }

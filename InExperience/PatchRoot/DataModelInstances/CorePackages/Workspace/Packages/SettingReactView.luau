@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.SettingReactView.SettingReactView)
+﻿return (require(script.Parent._Workspace.SettingReactView.SettingReactView))

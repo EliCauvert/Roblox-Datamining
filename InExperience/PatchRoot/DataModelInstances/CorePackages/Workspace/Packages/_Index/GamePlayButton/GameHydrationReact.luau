@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.GameHydrationReact.GameHydrationReact)
+﻿return (require(script.Parent.Parent.Parent._Index.GameHydrationReact.GameHydrationReact))

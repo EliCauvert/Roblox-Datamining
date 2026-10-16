@@ -1,35 +1,35 @@
-﻿local parent = script:FindFirstAncestor("Moments").Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local sharedFlagsModule = require(parent.SharedFlags)
-local viewRecyclerModule = require(parent.ViewRecycler)
-local commentsListItemsModule = require(script.Parent.CommentsListItems)
-local commentsListRowContextModule = require(script.Parent.CommentsListRowContext)
+﻿local Parent = script:FindFirstAncestor("Moments").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local ViewRecyclerModule = require(Parent.ViewRecycler)
+local CommentsListItemsModule = require(script.Parent.CommentsListItems)
+local CommentsListRowContextModule = require(script.Parent.CommentsListRowContext)
 local _ = require(script.Parent.Parent.Rows.CommentRowTypes)
-local fFlagViewRecyclerReact06 = sharedFlagsModule.FFlagViewRecyclerReact06
+local FFlagViewRecyclerReact06 = require(Parent.SharedFlags).FFlagViewRecyclerReact06
 
-return function(p1)
-	-- upvalues: reactModule (ref), foundationModule (ref), commentsListRowContextModule (ref), viewRecyclerModule (ref), commentsListItemsModule (ref), fFlagViewRecyclerReact06 (ref)
-	local uDim = UDim.new(0, p1.rowBleed * -2)
+return function(p1) --[[ Line: 38 | Named "CommentsListView" ]]
+	-- upvalues: ReactModule (copy), FoundationModule (copy), CommentsListRowContextModule (copy), ViewRecyclerModule (copy), CommentsListItemsModule (copy), FFlagViewRecyclerReact06 (copy)
+	local _UDim = UDim.new(0, p1.rowBleed * -2)
 	
-	return reactModule.createElement(foundationModule.View, {
+	return ReactModule.createElement(FoundationModule.View, {
 		testId = "moments-comments-list",
 		Size = UDim2.fromScale(1, 1),
-		padding = { left = uDim, right = uDim }
+		padding = { left = _UDim, right = _UDim }
 	}, {
-		Rows = reactModule.createElement(commentsListRowContextModule.CommentsListRowContext.Provider, { value = p1.row }, {
-			List = reactModule.createElement(viewRecyclerModule.VirtualList, {
+		Rows = ReactModule.createElement(CommentsListRowContextModule.CommentsListRowContext.Provider, { value = p1.row }, {
+			List = ReactModule.createElement(ViewRecyclerModule.VirtualList, {
 				overscan = 2,
 				endReachedThreshold = 240,
 				data = p1.data,
 				layout = p1.layout,
-				axis = viewRecyclerModule.Axis.Y,
-				itemType = commentsListItemsModule.getItemType,
+				axis = ViewRecyclerModule.Axis.Y,
+				itemType = CommentsListItemsModule.getItemType,
 				onEndReached = p1.onEndReached,
 				onViewportChanged = p1.onViewportChanged,
 				onContentLengthChanged = p1.onContentLengthChanged,
-				autoScrollOnChange = if fFlagViewRecyclerReact06 then viewRecyclerModule.AutoScrollPolicy.WhenAtStart else p1.autoScrollOnChange,
-				autoScrollThreshold = if fFlagViewRecyclerReact06 then 33 else nil,
+				onVisibleRangeChanged = p1.onVisibleRangeChanged,
+				autoScrollOnChange = if FFlagViewRecyclerReact06 then ViewRecyclerModule.AutoScrollPolicy.WhenAtStart else p1.autoScrollOnChange,
+				autoScrollThreshold = if FFlagViewRecyclerReact06 then 33 else nil,
 				scrollingFrameRef = p1.listScrollingFrameRef,
 				scrollingFrameProps = {
 					Name = "MomentsCommentsListScrollingFrame",

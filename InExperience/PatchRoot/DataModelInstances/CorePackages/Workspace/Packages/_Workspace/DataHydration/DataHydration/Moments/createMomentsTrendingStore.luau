@@ -1,101 +1,101 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local parent = dataHydration.Parent
-local httpService = game:GetService("HttpService")
-local promiseModule = require(parent.Promise)
-local httpClientModule = require(parent.HttpClient)
-local createDataCacheModule = require(dataHydration.createDataCache)
-local createDataResolverModule = require(dataHydration.createDataResolver)
-local _ = require(dataHydration.DataHydrationTypes)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local Parent = DataHydration.Parent
+local HttpService = game:GetService("HttpService")
+local PromiseModule = require(Parent.Promise)
+local HttpClientModule = require(Parent.HttpClient)
+local CreateDataCacheModule = require(DataHydration.createDataCache)
+local CreateDataResolverModule = require(DataHydration.createDataResolver)
+local _ = require(DataHydration.DataHydrationTypes)
 local _ = require(script.Parent.MomentsStoreTypes)
-local fetchTrendingMomentsModule = require(script.Parent.Requests.fetchTrendingMoments)
+local FetchTrendingMomentsModule = require(script.Parent.Requests.fetchTrendingMoments)
 
-local function _(p1, p2)
-	-- upvalues: httpService (ref)
-	return httpService:JSONEncode({
-		momentsSessionId = p1,
-		hasCursor = p2 ~= nil,
-		cursor = p2 or ""
+local function _(MomentsSessionId, p1) --[[ Line: 26 | Named "paramsKey" ]]
+	-- upvalues: HttpService (copy)
+	return HttpService:JSONEncode({
+		momentsSessionId = MomentsSessionId,
+		hasCursor = p1 ~= nil,
+		cursor = p1 or ""
 	})
 end
 
-return function(p1)
-	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), promiseModule (ref), httpClientModule (ref), fetchTrendingMomentsModule (ref), httpService (ref)
-	p1 = p1 or {}
-	local t = {}
-	local var1 = createDataResolverModule({
+return function(p1) --[[ Line: 34 | Named "createMomentsTrendingStore" ]]
+	-- upvalues: CreateDataCacheModule (copy), CreateDataResolverModule (copy), PromiseModule (copy), HttpClientModule (copy), FetchTrendingMomentsModule (copy), HttpService (copy)
+	local P2 = p1 or {}
+	local T = {}
+	local DataResolverModule = CreateDataResolverModule({
 		supportsMultiGet = false,
 		replaceItems = true,
-		cache = createDataCacheModule(),
-		fetchFn = function(p2, _)
-			-- upvalues: t (write), promiseModule (copy), httpClientModule (copy), fetchTrendingMomentsModule (copy), p1 (ref)
-			local var2 = t[p2]
+		cache = CreateDataCacheModule(),
+		fetchFn = function(p2, _) --[[ Line: 42 ]]
+			-- upvalues: T (ref), PromiseModule (upval), HttpClientModule (upval), FetchTrendingMomentsModule (upval), P2 (copy)
+			local Entry = T[p2]
 			
-			return if var2 == nil then promiseModule.reject(`Missing trending moments request params for {p2}`) else httpClientModule.asPromise(fetchTrendingMomentsModule(var2.momentsSessionId, var2.cursor, p1.network))
+			return if Entry == nil then PromiseModule.reject(`Missing trending moments request params for {p2}`) else HttpClientModule.asPromise(FetchTrendingMomentsModule(Entry.momentsSessionId, Entry.cursor, P2.network))
 		end
 	})
 	
-	local function _(value, p3)
-		-- upvalues: httpService (copy), t (write)
-		local var3 = httpService:JSONEncode({
-			momentsSessionId = value,
-			hasCursor = p3 ~= nil,
-			cursor = p3 or ""
+	local function _(MomentsSessionId, Cursor) --[[ Line: 56 | Named "setParams" ]]
+		-- upvalues: HttpService (upval), T (ref)
+		local Json = HttpService:JSONEncode({
+			momentsSessionId = MomentsSessionId,
+			hasCursor = Cursor ~= nil,
+			cursor = Cursor or ""
 		})
-		t[var3] = { momentsSessionId = value, cursor = p3 }
+		T[Json] = { momentsSessionId = MomentsSessionId, cursor = Cursor }
 		
-		return var3
+		return Json
 	end
 	
 	return {
-		getTrending = function(p3, p4, p5)
-			-- upvalues: httpClientModule (copy), fetchTrendingMomentsModule (copy), p1 (ref)
-			return httpClientModule.asPromise(fetchTrendingMomentsModule(p3, p4, p1.network, p5))
+		getTrending = function(p3, p4, p5) --[[ Line: 86 ]]
+			-- upvalues: HttpClientModule (upval), FetchTrendingMomentsModule (upval), P2 (copy)
+			return HttpClientModule.asPromise(FetchTrendingMomentsModule(p3, p4, P2.network, p5))
 		end,
-		getCachedTrending = function(p3, p4)
-			-- upvalues: var1 (ref), httpService (copy), t (write)
-			local getCachedItem = var1.getCachedItem
-			local var3 = httpService:JSONEncode({
-				momentsSessionId = p3,
-				hasCursor = p4 ~= nil,
-				cursor = p4 or ""
+		getCachedTrending = function(MomentsSessionId, Cursor) --[[ Line: 65 ]]
+			-- upvalues: DataResolverModule (copy), HttpService (upval), T (ref)
+			local GetCachedItemFunction = DataResolverModule.getCachedItem
+			local Json = HttpService:JSONEncode({
+				momentsSessionId = MomentsSessionId,
+				hasCursor = Cursor ~= nil,
+				cursor = Cursor or ""
 			})
-			t[var3] = { momentsSessionId = p3, cursor = p4 }
+			T[Json] = { momentsSessionId = MomentsSessionId, cursor = Cursor }
 			
-			return getCachedItem(var3)
+			return GetCachedItemFunction(Json)
 		end,
-		fetchTrending = function(p3, p4)
-			-- upvalues: var1 (ref), httpService (copy), t (write)
-			local fetchItem = var1.fetchItem
-			local var3 = httpService:JSONEncode({
-				momentsSessionId = p3,
-				hasCursor = p4 ~= nil,
-				cursor = p4 or ""
+		fetchTrending = function(MomentsSessionId, Cursor) --[[ Line: 72 ]]
+			-- upvalues: DataResolverModule (copy), HttpService (upval), T (ref)
+			local FetchItemFunction = DataResolverModule.fetchItem
+			local Json = HttpService:JSONEncode({
+				momentsSessionId = MomentsSessionId,
+				hasCursor = Cursor ~= nil,
+				cursor = Cursor or ""
 			})
-			t[var3] = { momentsSessionId = p3, cursor = p4 }
+			T[Json] = { momentsSessionId = MomentsSessionId, cursor = Cursor }
 			
-			return fetchItem(var3)
+			return FetchItemFunction(Json)
 		end,
-		getAndFetchTrending = function(p3, p4)
-			-- upvalues: var1 (ref), httpService (copy), t (write)
-			local getAndFetchItem = var1.getAndFetchItem
-			local var3 = httpService:JSONEncode({
-				momentsSessionId = p3,
-				hasCursor = p4 ~= nil,
-				cursor = p4 or ""
+		getAndFetchTrending = function(MomentsSessionId, Cursor) --[[ Line: 79 ]]
+			-- upvalues: DataResolverModule (copy), HttpService (upval), T (ref)
+			local GetAndFetchItemFunction = DataResolverModule.getAndFetchItem
+			local Json = HttpService:JSONEncode({
+				momentsSessionId = MomentsSessionId,
+				hasCursor = Cursor ~= nil,
+				cursor = Cursor or ""
 			})
-			t[var3] = { momentsSessionId = p3, cursor = p4 }
+			T[Json] = { momentsSessionId = MomentsSessionId, cursor = Cursor }
 			
-			return getAndFetchItem(var3)
+			return GetAndFetchItemFunction(Json)
 		end,
-		clear = function()
-			-- upvalues: t (write), var1 (ref)
-			t = {}
-			var1.clear()
+		clear = function() --[[ Line: 90 ]]
+			-- upvalues: T (ref), DataResolverModule (copy)
+			T = {}
+			DataResolverModule.clear()
 		end,
-		dispose = function()
-			-- upvalues: t (write), var1 (ref)
-			t = {}
-			var1.dispose()
+		dispose = function() --[[ Line: 95 ]]
+			-- upvalues: T (ref), DataResolverModule (copy)
+			T = {}
+			DataResolverModule.dispose()
 		end
 	}
 end

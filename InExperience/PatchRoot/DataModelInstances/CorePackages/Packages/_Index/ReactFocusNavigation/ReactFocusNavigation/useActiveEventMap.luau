@@ -1,28 +1,29 @@
-﻿local parent = script.Parent.Parent
-local reactModule = require(parent.React)
-local _ = require(parent.FocusNavigation)
-local focusNavigationContextModule = require(script.Parent.FocusNavigationContext)
+﻿local Parent = script.Parent.Parent
+local ReactModule = require(Parent.React)
+local _ = require(Parent.FocusNavigation)
+local FocusNavigationContextModule = require(script.Parent.FocusNavigationContext)
 
-return function()
-	-- upvalues: reactModule (ref), focusNavigationContextModule (ref)
-	local var1 = reactModule.useContext(focusNavigationContextModule)
-	local var2 = if var1 then var1.activeEventMap:getValue() else {}
-	local var3, var4 = reactModule.useState(var2)
-	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), var2 (ref), var4 (ref), var1 (ref)
-		if var3 ~= var2 then
-			var4(var2)
+return function() --[[ Line: 13 | Named "useActiveEventMap" ]]
+	-- upvalues: ReactModule (copy), FocusNavigationContextModule (copy)
+	local UseContextResult = ReactModule.useContext(FocusNavigationContextModule)
+	local Value = if UseContextResult then UseContextResult.activeEventMap:getValue() else {}
+	local UseStateResult, UseStateResult2 = ReactModule.useState(Value)
+	ReactModule.useEffect(function() --[[ Line: 18 ]]
+		-- upvalues: UseStateResult (copy), Value (copy), UseStateResult2 (copy), UseContextResult (copy)
+		if UseStateResult ~= Value then
+			UseStateResult2(Value)
 		end
-		if var1 then
-			local var5 = var1.activeEventMap:subscribe(var4)
+		if UseContextResult then
+			local SubscribeResult = UseContextResult.activeEventMap:subscribe(UseStateResult2)
 			
-			return function()
-				-- upvalues: var5 (ref)
-				var5:unsubscribe()
+			return function() --[[ Line: 27 ]]
+				-- upvalues: SubscribeResult (copy)
+				SubscribeResult:unsubscribe()
 			end
+		else
+			return nil
 		end
-		return nil
-	end, { var1 })
+	end, { UseContextResult })
 	
-	return var3
+	return UseStateResult
 end

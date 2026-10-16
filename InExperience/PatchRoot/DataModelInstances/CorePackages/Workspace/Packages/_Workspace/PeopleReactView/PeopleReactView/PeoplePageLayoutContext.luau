@@ -1,1 +1,1 @@
-﻿return require(script:FindFirstAncestor("PeopleReactView").Parent.React).createContext({ isCompact = false })
+﻿return (require(script:FindFirstAncestor("PeopleReactView").Parent.React).createContext({ isCompact = false }))

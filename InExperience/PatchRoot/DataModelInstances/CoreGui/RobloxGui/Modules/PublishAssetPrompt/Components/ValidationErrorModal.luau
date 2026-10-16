@@ -1,46 +1,47 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local buttonType = UIBloxModule.App.Button.Enum.ButtonType
-local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
-local overlay = UIBloxModule.App.Dialog.Overlay
-local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
-local xboxA = UIBloxModule.App.ImageSet.Images["icons/controls/keys/xboxA"]
-local roactUtilsModule = require(corePackagesService.Workspace.Packages.RoactUtils)
-local useIsGamepad = roactUtilsModule.Hooks.useIsGamepad
-local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
-local reactModule = require(corePackagesService.Packages.React)
-local closeOpenPromptModule = require(script.Parent.Parent.Actions.CloseOpenPrompt)
+﻿local CorePackages = game:GetService("CorePackages")
+local UIBloxModule = require(CorePackages.Packages.UIBlox)
+local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
+local InteractiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
+local Overlay = UIBloxModule.App.Dialog.Overlay
+local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
+local IconsControlsKeysXboxA = UIBloxModule.App.ImageSet.Images["icons/controls/keys/xboxA"]
+local RoactUtilsModule = require(CorePackages.Workspace.Packages.RoactUtils)
+local UseIsGamepadFunction = RoactUtilsModule.Hooks.useIsGamepad
+local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
+local ReactModule = require(CorePackages.Packages.React)
+local CloseOpenPromptModule = require(script.Parent.Parent.Actions.CloseOpenPrompt)
 
-return function(p1)
-	-- upvalues: useIsGamepad (ref), useDispatch (ref), closeOpenPromptModule (ref), reactModule (ref), overlay (ref), interactiveAlert (ref), buttonType (ref), robloxTranslatorModule (ref), xboxA (ref)
-	local var1 = useDispatch()
+return function(p1) --[[ Line: 29 ]]
+	-- upvalues: UseIsGamepadFunction (copy), UseDispatchFunction (copy), CloseOpenPromptModule (copy), ReactModule (copy), Overlay (copy), InteractiveAlert (copy), ButtonType (copy), RobloxTranslatorModule (copy), IconsControlsKeysXboxA (copy)
+	local UseIsGamepadResult = UseIsGamepadFunction()
+	local UseDispatchResult = UseDispatchFunction()
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		ZIndex = 3,
 		Size = UDim2.fromScale(1, 1)
 	}, {
-		Overlay = reactModule.createElement(overlay, { showGradient = false, ZIndex = 3 }),
-		InteractiveAlertWrapper = reactModule.createElement("Frame", {
+		Overlay = ReactModule.createElement(Overlay, { showGradient = false, ZIndex = 3 }),
+		InteractiveAlertWrapper = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			ZIndex = 4,
 			Size = UDim2.fromScale(1, 1)
 		}, {
-			InteractiveAlert = reactModule.createElement(interactiveAlert, {
+			InteractiveAlert = ReactModule.createElement(InteractiveAlert, {
 				title = "Something Went Wrong",
 				bodyText = "Your creation could not be created due to an error. A report has been sent to the developer of this experience.",
 				screenSize = p1.screenSize,
 				buttonStackInfo = {
 					buttons = {
 						{
-							buttonType = buttonType.PrimarySystem,
+							buttonType = ButtonType.PrimarySystem,
 							props = {
-								onActivated = function()
-									-- upvalues: var1 (ref), closeOpenPromptModule (copy)
-									var1(closeOpenPromptModule())
+								onActivated = function() --[[ Line: 33 ]]
+									-- upvalues: UseDispatchResult (copy), CloseOpenPromptModule (upval)
+									UseDispatchResult(CloseOpenPromptModule())
 								end,
-								text = robloxTranslatorModule:FormatByKey("InGame.CommonUI.Button.Ok"),
-								inputIcon = if useIsGamepad() then xboxA else nil
+								text = RobloxTranslatorModule:FormatByKey("InGame.CommonUI.Button.Ok"),
+								inputIcon = UseIsGamepadResult and IconsControlsKeysXboxA or nil
 							}
 						}
 					}

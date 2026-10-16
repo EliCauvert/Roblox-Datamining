@@ -1,6 +1,6 @@
-﻿local useStyle = require(script.Parent.Parent.Parent.UIBlox).Core.Style.useStyle
+﻿local UseStyleFunction = require(script.Parent.Parent.Parent.UIBlox).Core.Style.useStyle
 
-return function()
-	-- upvalues: useStyle (ref)
-	return useStyle().Tokens.Size.Size_1600
+return function() --[[ Line: 8 | Named "useNavBarSize" ]]
+	-- upvalues: UseStyleFunction (copy)
+	return UseStyleFunction().Tokens.Size.Size_1600
 end

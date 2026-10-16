@@ -1,149 +1,150 @@
-﻿local friendsLanding = script:FindFirstAncestor("FriendsLanding")
-local parent = friendsLanding.Parent
-local dependenciesModule = require(friendsLanding.dependencies)
-local react = dependenciesModule.React
-local roact = dependenciesModule.Roact
-local t = dependenciesModule.t
-local withStyle = dependenciesModule.UIBlox.Style.withStyle
-local withLocalization = dependenciesModule.withLocalization
-local userProfilesModule = require(parent.UserProfiles)
-local userPresenceTextModule = require(friendsLanding.Friends.userPresenceText)
-local userPresenceIconModule = require(friendsLanding.Friends.userPresenceIcon)
-local getCorrectUserPresenceModule = require(friendsLanding.Friends.getCorrectUserPresence)
-local memoize = dependenciesModule.memoize
-local createRelevancyInfoModule = require(script.Parent.createRelevancyInfo)
-local socialCommonModule = require(parent.SocialCommon)
-local buttonTypes = require(parent.UserList).Enums.ButtonTypes
-local buttonVariant = require(parent.Foundation).Enums.ButtonVariant
-local friendTileWithTrustedIndicatorModule = require(script.Parent.FriendTileWithTrustedIndicator)
-local fFlagFriendsPageUserListEnabled = require(parent.SharedFlags).FFlagFriendsPageUserListEnabled
-local fFlagFriendsPageViewBtnEnabled = require(parent.SharedFlags).FFlagFriendsPageViewBtnEnabled
-local fFlagEnableBlackbirdCheck = require(parent.SharedFlags).FFlagEnableBlackbirdCheck
-local friendTile = roact.PureComponent:extend("FriendTile")
-friendTile.validateProps = t.strictInterface({
-	user = t.table,
-	index = t.number,
-	openPlayerProfileHandle = t.callback,
-	pageLoadingTimeReport = t.optional(t.callback),
-	createRow = t.optional(t.callback),
-	selected = t.optional(t.boolean),
-	focusGuiObject = t.optional(t.callback),
-	userProfile = t.optional(t.table),
-	trustedConnection = t.optional(t.boolean),
-	isRobloxSubscriber = t.optional(t.boolean),
-	isLuobu = t.optional(t.boolean),
-	buttons = t.optional(t.array(t.strictInterface({
-		icon = t.optional(t.string),
-		onActivated = t.optional(t.callback),
-		isSecondary = t.optional(t.boolean),
-		isDisabled = t.optional(t.boolean)
+﻿local FriendsLanding = script:FindFirstAncestor("FriendsLanding")
+local Parent = FriendsLanding.Parent
+local DependenciesModule = require(FriendsLanding.dependencies)
+local React = DependenciesModule.React
+local Roact = DependenciesModule.Roact
+local T = DependenciesModule.t
+local WithStyleFunction = DependenciesModule.UIBlox.Style.withStyle
+local WithLocalizationFunction = DependenciesModule.withLocalization
+local UserProfilesModule = require(Parent.UserProfiles)
+local UserPresenceTextModule = require(FriendsLanding.Friends.userPresenceText)
+local UserPresenceIconModule = require(FriendsLanding.Friends.userPresenceIcon)
+local GetCorrectUserPresenceModule = require(FriendsLanding.Friends.getCorrectUserPresence)
+local MemoizeFunction = DependenciesModule.memoize
+local CreateRelevancyInfoModule = require(script.Parent.createRelevancyInfo)
+local SocialCommonModule = require(Parent.SocialCommon)
+local ButtonTypes = require(Parent.UserList).Enums.ButtonTypes
+local ButtonVariant = require(Parent.Foundation).Enums.ButtonVariant
+local FriendTileWithTrustedIndicatorModule = require(script.Parent.FriendTileWithTrustedIndicator)
+local FFlagFriendsPageUserListEnabled = require(Parent.SharedFlags).FFlagFriendsPageUserListEnabled
+local FFlagFriendsPageViewBtnEnabled = require(Parent.SharedFlags).FFlagFriendsPageViewBtnEnabled
+local FFlagEnableBlackbirdCheck = require(Parent.SharedFlags).FFlagEnableBlackbirdCheck
+local FFlagFriendsPageUserListCtaEnabledModule = require(FriendsLanding.Flags.FFlagFriendsPageUserListCtaEnabled)
+local FriendTile = Roact.PureComponent:extend("FriendTile")
+FriendTile.validateProps = T.strictInterface({
+	user = T.table,
+	index = T.number,
+	openPlayerProfileHandle = T.callback,
+	pageLoadingTimeReport = T.optional(T.callback),
+	createRow = T.optional(T.callback),
+	selected = T.optional(T.boolean),
+	focusGuiObject = T.optional(T.callback),
+	userProfile = T.optional(T.table),
+	trustedConnection = T.optional(T.boolean),
+	isRobloxSubscriber = T.optional(T.boolean),
+	isLuobu = T.optional(T.boolean),
+	buttons = T.optional(T.array(T.strictInterface({
+		icon = T.optional(T.string),
+		onActivated = T.optional(T.callback),
+		isSecondary = T.optional(T.boolean),
+		isDisabled = T.optional(T.boolean)
 	})))
 })
-friendTile.defaultProps = {
+FriendTile.defaultProps = {
 	isLuobu = false,
 	index = 1,
 	buttons = nil,
 	trustedConnection = false,
 	user = { username = "" },
-	openPlayerProfileHandle = function() end
+	openPlayerProfileHandle = function() --[[ Line: 65 ]] end
 }
 
-function friendTile.init(p1)
-	-- upvalues: memoize (ref), createRelevancyInfoModule (ref), roact (ref), fFlagFriendsPageUserListEnabled (ref), socialCommonModule (ref)
+function FriendTile.init(p1) --[[ Line: 72 ]]
+	-- upvalues: MemoizeFunction (copy), CreateRelevancyInfoModule (copy), Roact (copy), FFlagFriendsPageUserListEnabled (copy), SocialCommonModule (copy)
 	p1.state = { isFirstRender = true }
-	p1.makeRelevancyInfo = memoize(createRelevancyInfoModule)
-	p1.playerTileRef = roact.createRef()
+	p1.makeRelevancyInfo = MemoizeFunction(CreateRelevancyInfoModule)
+	p1.playerTileRef = Roact.createRef()
 	
-	function p1.checkAndSetSelected()
-		-- upvalues: p1 (ref)
+	function p1.checkAndSetSelected() --[[ Line: 77 ]]
+		-- upvalues: p1 (copy)
 		if p1.props.selected and p1.props.focusGuiObject then
-			local value = p1.playerTileRef:getValue()
+			local Value = p1.playerTileRef:getValue()
 			
-			if value then
-				p1.props.focusGuiObject(value)
+			if Value then
+				p1.props.focusGuiObject(Value)
 			end
 		end
 	end
 	
-	p1.getPresenceType = if fFlagFriendsPageUserListEnabled then function(p2)
-		-- upvalues: socialCommonModule (copy)
-		return string.gsub(tostring(p2 or ""), "PresenceType%.", "") or socialCommonModule.Enums.PresenceTypes.Offline
+	p1.getPresenceType = if FFlagFriendsPageUserListEnabled then function(p2): string --[[ Line: 87 ]]
+		-- upvalues: SocialCommonModule (upval)
+		return string.gsub(tostring(p2 or ""), "PresenceType%.", "") or SocialCommonModule.Enums.PresenceTypes.Offline
 	end else nil
 	
-	function p1.openProfilePeekViewHandle()
-		-- upvalues: p1 (ref)
+	function p1.openProfilePeekViewHandle() --[[ Line: 93 ]]
+		-- upvalues: p1 (copy)
 		return p1.props.openPlayerProfileHandle(p1.props.user.id, p1.props.index, p1.props.user)
 	end
 end
 
-function friendTile.didMount(p1)
+function FriendTile.didMount(p1) --[[ Line: 98 ]]
 	if p1.props.pageLoadingTimeReport then
 		p1.props.pageLoadingTimeReport()
 	end
 	p1.checkAndSetSelected()
 end
 
-function friendTile.render(p1)
-	-- upvalues: getCorrectUserPresenceModule (ref), userPresenceTextModule (ref), userPresenceIconModule (ref), withStyle (ref), withLocalization (ref), fFlagFriendsPageUserListEnabled (ref), fFlagFriendsPageViewBtnEnabled (ref), buttonTypes (ref), buttonVariant (ref), userProfilesModule (ref), react (ref), friendTileWithTrustedIndicatorModule (ref), fFlagEnableBlackbirdCheck (ref)
-	local user = p1.props.user
-	local var1 = getCorrectUserPresenceModule(user)
-	local var2 = userPresenceTextModule[var1]
-	local var3 = userPresenceIconModule[var1]
+function FriendTile.render(p1) --[[ Line: 106 ]]
+	-- upvalues: GetCorrectUserPresenceModule (copy), UserPresenceTextModule (copy), UserPresenceIconModule (copy), WithStyleFunction (copy), WithLocalizationFunction (copy), FFlagFriendsPageUserListEnabled (copy), FFlagFriendsPageUserListCtaEnabledModule (copy), FFlagFriendsPageViewBtnEnabled (copy), ButtonTypes (copy), ButtonVariant (copy), UserProfilesModule (copy), React (copy), FriendTileWithTrustedIndicatorModule (copy), FFlagEnableBlackbirdCheck (copy)
+	local User = p1.props.user
+	local CorrectUserPresenceModule = GetCorrectUserPresenceModule(User)
+	local UserPresenceTextModuleEntry = UserPresenceTextModule[CorrectUserPresenceModule]
+	local UserPresenceIconModuleEntry = UserPresenceIconModule[CorrectUserPresenceModule]
 	
 	if not p1.playerTileRef:getValue() then
 		p1:setState({ isFirstRender = false })
 	end
-	return withStyle(function(p2)
-		-- upvalues: withLocalization (copy), var2 (ref), fFlagFriendsPageUserListEnabled (copy), p1 (ref), user (ref), var3 (ref), var1 (ref), fFlagFriendsPageViewBtnEnabled (copy), buttonTypes (copy), buttonVariant (copy), userProfilesModule (copy), react (copy), friendTileWithTrustedIndicatorModule (copy), fFlagEnableBlackbirdCheck (copy)
-		return withLocalization({
+	return WithStyleFunction(function(p2) --[[ Line: 121 ]]
+		-- upvalues: WithLocalizationFunction (upval), UserPresenceTextModuleEntry (copy), FFlagFriendsPageUserListEnabled (upval), p1 (copy), User (copy), UserPresenceIconModuleEntry (copy), CorrectUserPresenceModule (copy), FFlagFriendsPageUserListCtaEnabledModule (upval), FFlagFriendsPageViewBtnEnabled (upval), ButtonTypes (upval), ButtonVariant (upval), UserProfilesModule (upval), React (upval), FriendTileWithTrustedIndicatorModule (upval), FFlagEnableBlackbirdCheck (upval)
+		return WithLocalizationFunction({
 			accountDeletedText = "Feature.Friends.Action.AccountDeleted",
 			trustedText = "Feature.Friends.TrustedConnection.Label.Trusted",
-			presenceText = var2
-		})(function(p3)
-			-- upvalues: fFlagFriendsPageUserListEnabled (copy), p1 (copy), user (copy), var3 (copy), p2 (ref), var1 (copy), fFlagFriendsPageViewBtnEnabled (copy), buttonTypes (copy), buttonVariant (copy), userProfilesModule (copy), react (copy), friendTileWithTrustedIndicatorModule (copy), fFlagEnableBlackbirdCheck (copy)
-			local presenceText = p3.presenceText or nil
-			local accountDeletedText = p3.accountDeletedText
+			presenceText = UserPresenceTextModuleEntry
+		})(function(p3) --[[ Line: 126 ]]
+			-- upvalues: FFlagFriendsPageUserListEnabled (upval), p1 (upval), User (upval), UserPresenceIconModuleEntry (upval), p2 (copy), CorrectUserPresenceModule (upval), FFlagFriendsPageUserListCtaEnabledModule (upval), FFlagFriendsPageViewBtnEnabled (upval), ButtonTypes (upval), ButtonVariant (upval), UserProfilesModule (upval), React (upval), FriendTileWithTrustedIndicatorModule (upval), FFlagEnableBlackbirdCheck (upval)
+			local PresenceText = p3.presenceText or nil
+			local AccountDeletedText = p3.accountDeletedText
 			
-			if fFlagFriendsPageUserListEnabled then
-				local var4 = p1.makeRelevancyInfo(user, presenceText, var3, nil, p2.Theme, p1.props.index, p1.props.isLuobu, p2.Font, accountDeletedText, true)
+			if FFlagFriendsPageUserListEnabled then
+				local RelevancyInfo = p1.makeRelevancyInfo(User, PresenceText, UserPresenceIconModuleEntry, nil, p2.Theme, p1.props.index, p1.props.isLuobu, p2.Font, AccountDeletedText, true)
 				
 				return p1.props.createRow({
 					onRowActivated = p1.openProfilePeekViewHandle,
-					contextualInfo = var4 and { text = var4.text, icon = var4.icon },
-					presence = p1.getPresenceType(var1),
-					primaryCta = if fFlagFriendsPageViewBtnEnabled then {
+					contextualInfo = RelevancyInfo and { text = RelevancyInfo.text, icon = RelevancyInfo.icon },
+					presence = p1.getPresenceType(CorrectUserPresenceModule),
+					primaryCta = if FFlagFriendsPageUserListCtaEnabledModule then nil elseif FFlagFriendsPageViewBtnEnabled then {
 						minWidth = 64,
 						maxWidth = 90,
-						type = buttonTypes.View,
+						type = ButtonTypes.View,
 						onActivated = p1.openProfilePeekViewHandle,
-						variant = buttonVariant.Standard
+						variant = ButtonVariant.Standard
 					} else nil
 				})
 			end
-			local combinedName = nil
-			local var5 = nil
+			local CombinedName = nil
+			local FormatUsernameResult = nil
 			
 			if p1.props.userProfile then
-				combinedName = p1.props.userProfile.names.combinedName
-				var5 = userProfilesModule.Formatters.formatUsername(p1.props.userProfile.names.username)
-				user.isDeleted = p1.props.userProfile.isDeleted
+				CombinedName = p1.props.userProfile.names.combinedName
+				FormatUsernameResult = UserProfilesModule.Formatters.formatUsername(p1.props.userProfile.names.username)
+				User.isDeleted = p1.props.userProfile.isDeleted
 			end
-			return react.createElement(friendTileWithTrustedIndicatorModule, {
-				user = user,
-				userPresence = var1,
-				title = combinedName or user.displayName,
-				subtitle = var5 or "@" .. user.username,
-				relevancyInfo = if not combinedName then nil else p1.makeRelevancyInfo(user, presenceText, var3, nil, p2.Theme, p1.props.index, p1.props.isLuobu, p2.Font, accountDeletedText, true),
+			return React.createElement(FriendTileWithTrustedIndicatorModule, {
+				user = User,
+				userPresence = CorrectUserPresenceModule,
+				title = if CombinedName then CombinedName else User.displayName,
+				subtitle = if FormatUsernameResult then FormatUsernameResult else "@" .. User.username,
+				relevancyInfo = if CombinedName then p1.makeRelevancyInfo(User, PresenceText, UserPresenceIconModuleEntry, nil, p2.Theme, p1.props.index, p1.props.isLuobu, p2.Font, AccountDeletedText, true) else nil,
 				index = p1.props.index,
 				openPlayerProfile = p1.openProfilePeekViewHandle,
 				playerTileRef = p1.playerTileRef,
 				buttons = p1.props.buttons,
 				isTrustedConnection = p1.props.trustedConnection,
 				isVerified = p1.props.userProfile and p1.props.userProfile.isVerified,
-				isRobloxSubscriber = if fFlagEnableBlackbirdCheck then p1.props.isRobloxSubscriber else nil
+				isRobloxSubscriber = if FFlagEnableBlackbirdCheck then p1.props.isRobloxSubscriber else nil
 			})
 		end)
 	end)
 end
 
-return friendTile
+return FriendTile

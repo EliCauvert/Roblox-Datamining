@@ -1,12 +1,12 @@
-﻿local default = require(game:GetService("CorePackages").Workspace.Packages.TrustAndSafetyIxp).TrustAndSafetyIXPManager.default
+﻿local Default = require(game:GetService("CorePackages").Workspace.Packages.TrustAndSafetyIxp).TrustAndSafetyIXPManager.default
 
 return {
-	getReportAnythingAvatarEnabled = function()
-		-- upvalues: default (ref)
-		return default:getReportAnythingAvatarEnabled()
+	getReportAnythingAvatarEnabled = function() --[[ Line: 9 ]]
+		-- upvalues: Default (copy)
+		return Default:getReportAnythingAvatarEnabled()
 	end,
-	getReportAnythingExperienceEnabled = function()
-		-- upvalues: default (ref)
-		return default:getReportAnythingExperienceEnabled()
+	getReportAnythingExperienceEnabled = function() --[[ Line: 12 ]]
+		-- upvalues: Default (copy)
+		return Default:getReportAnythingExperienceEnabled()
 	end
 }

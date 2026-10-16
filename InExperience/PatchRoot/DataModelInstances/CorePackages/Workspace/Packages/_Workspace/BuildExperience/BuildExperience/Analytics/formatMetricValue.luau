@@ -1,17 +1,17 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local numberLocalization = require(buildExperience.Parent.Localization).NumberLocalization
-local analyticsUnitModule = require(buildExperience.Analytics.AnalyticsUnit)
-local formatStatNumberModule = require(buildExperience.Analytics.formatStatNumber)
-local fillTemplate = require(buildExperience.Analytics.metricUnitTemplate).fillTemplate
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local NumberLocalization = require(BuildExperience.Parent.Localization).NumberLocalization
+local AnalyticsUnitModule = require(BuildExperience.Analytics.AnalyticsUnit)
+local FormatStatNumberModule = require(BuildExperience.Analytics.formatStatNumber)
+local FillTemplateFunction = require(BuildExperience.Analytics.metricUnitTemplate).fillTemplate
 
-local function formatNumber(p1, p2, p3, p4)
-	-- upvalues: formatStatNumberModule (ref), analyticsUnitModule (ref), numberLocalization (ref)
-	return if p4 == "Full" then if p2 == analyticsUnitModule.Percent then numberLocalization.localizeDecimal(p1 * 100, p3, 2) elseif p2 == analyticsUnitModule.Temporal then numberLocalization.localizeDecimal(p1 / 60, p3, 2) else numberLocalization.localizeDecimal(p1, p3, if p1 == math.floor(p1) then 0 else 2) else formatStatNumberModule(p1, p2, "Abbreviated", p3)
+local function formatNumber(Value: number, Minutes, p1, p2) --[[ Line: 24 ]]
+	-- upvalues: FormatStatNumberModule (copy), AnalyticsUnitModule (copy), NumberLocalization (copy)
+	return if p2 == "Full" then if Minutes == AnalyticsUnitModule.Percent then NumberLocalization.localizeDecimal(Value * 100, p1, 2) elseif Minutes == AnalyticsUnitModule.Temporal then NumberLocalization.localizeDecimal(Value / 60, p1, 2) else NumberLocalization.localizeDecimal(Value, p1, if Value == math.floor(Value) then 0 else 2) else FormatStatNumberModule(Value, Minutes, "Abbreviated", p1)
 end
 
-return function(p1, p2, p3, p4, p5)
-	-- upvalues: formatNumber (ref), analyticsUnitModule (ref), fillTemplate (ref)
-	local var1 = formatNumber(p1, p2, p3, p5)
+return function(p1, Minutes, p2, p3, p4) --[[ Line: 40 | Named "formatMetricValue" ]]
+	-- upvalues: formatNumber (copy), AnalyticsUnitModule (copy), FillTemplateFunction (copy)
+	local FormatNumberResult = formatNumber(p1, Minutes, p2, p4)
 	
-	return if p2 == analyticsUnitModule.Percent then fillTemplate(p4.percent, var1) elseif p2 == analyticsUnitModule.Temporal then fillTemplate(p4.duration, var1) else var1
+	return if Minutes == AnalyticsUnitModule.Percent then FillTemplateFunction(p3.percent, FormatNumberResult) elseif Minutes == AnalyticsUnitModule.Temporal or Minutes == AnalyticsUnitModule.Minutes then FillTemplateFunction(p3.duration, FormatNumberResult) else FormatNumberResult
 end

@@ -1,5 +1,5 @@
-﻿local parent = script.Parent.Parent
+﻿local Parent = script.Parent.Parent
 
 return {
-	[require(parent.Enums.Overlay).AttributionTraversal] = require(parent.Components.AttributionTraversal)
+	[require(Parent.Enums.Overlay).AttributionTraversal] = require(Parent.Components.AttributionTraversal)
 }

@@ -25,7 +25,7 @@ return {
 	Create = require(script.Create),
 	Logging = require(script.Logging),
 	GenerateStringId = require(script.GenerateStringId),
-	isPlatformSingleSignOnSupported = function(value)
-		return not not (value and (value.IsSingleSignOnSupported and value:IsSingleSignOnSupported()))
+	isPlatformSingleSignOnSupported = function(ThirdPartyUserService): boolean --[[ Line: 26 ]]
+		return not not (ThirdPartyUserService and (ThirdPartyUserService.IsSingleSignOnSupported and ThirdPartyUserService:IsSingleSignOnSupported()))
 	end
 }

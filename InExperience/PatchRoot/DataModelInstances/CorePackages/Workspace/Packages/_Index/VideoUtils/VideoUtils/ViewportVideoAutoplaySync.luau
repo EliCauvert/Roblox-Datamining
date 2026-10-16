@@ -1,45 +1,44 @@
-﻿local videoUtils = script:FindFirstAncestor("VideoUtils")
-local parent = videoUtils.Parent
-local reactModule = require(parent.React)
-local useViewportBounds = require(parent.ViewportUtils).useViewportBounds
-local _ = require(videoUtils.ViewportVideoAutoplayController)
-local videoEndReason = require(videoUtils.Analytics.Enums).VideoEndReason
-local fFlagLuaAppOneByTwoHoverIdleAutoplay = require(parent.SharedFlags).FFlagLuaAppOneByTwoHoverIdleAutoplay
-local luaAppVideoAutoplayWinnerLineOffsetFromTopBarPx = game:DefineFastInt("LuaAppVideoAutoplayWinnerLineOffsetFromTopBarPx", 240)
+﻿local VideoUtils = script:FindFirstAncestor("VideoUtils")
+local Parent = VideoUtils.Parent
+local ReactModule = require(Parent.React)
+local UseViewportBoundsFunction = require(Parent.ViewportUtils).useViewportBounds
+local _ = require(VideoUtils.ViewportVideoAutoplayController)
+local VideoEndReason = require(VideoUtils.Analytics.Enums).VideoEndReason
+local FFlagLuaAppOneByTwoHoverIdleAutoplay = require(Parent.SharedFlags).FFlagLuaAppOneByTwoHoverIdleAutoplay
+local LuaAppVideoAutoplayWinnerLineOffsetFromTopBarPx = game:DefineFastInt("LuaAppVideoAutoplayWinnerLineOffsetFromTopBarPx", 240)
 
-return function(p1)
-	-- upvalues: useViewportBounds (ref), reactModule (ref), luaAppVideoAutoplayWinnerLineOffsetFromTopBarPx (ref), fFlagLuaAppOneByTwoHoverIdleAutoplay (ref), videoEndReason (ref)
-	local var1 = useViewportBounds(p1.scrollingFrameRef)
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), luaAppVideoAutoplayWinnerLineOffsetFromTopBarPx (copy), var1 (ref)
-		local viewportAutoplayController = p1.viewportAutoplayController
+return function(p1) --[[ Line: 21 | Named "ViewportVideoAutoplaySync" ]]
+	-- upvalues: UseViewportBoundsFunction (copy), ReactModule (copy), LuaAppVideoAutoplayWinnerLineOffsetFromTopBarPx (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), VideoEndReason (copy)
+	local UseViewportBoundsResult = UseViewportBoundsFunction(p1.scrollingFrameRef)
+	ReactModule.useEffect(function() --[[ Line: 26 ]]
+		-- upvalues: p1 (copy), LuaAppVideoAutoplayWinnerLineOffsetFromTopBarPx (upval), UseViewportBoundsResult (copy)
+		local ViewportAutoplayController = p1.viewportAutoplayController
 		
-		if viewportAutoplayController then
-			viewportAutoplayController:setWinnerLineOffsetFromTopBarPx(luaAppVideoAutoplayWinnerLineOffsetFromTopBarPx)
-			viewportAutoplayController:setFeedScopeRef(p1.scrollingFrameRef)
-			viewportAutoplayController:setViewPortBounds(var1)
+		if ViewportAutoplayController then
+			ViewportAutoplayController:setWinnerLineOffsetFromTopBarPx(LuaAppVideoAutoplayWinnerLineOffsetFromTopBarPx)
+			ViewportAutoplayController:setFeedScopeRef(p1.scrollingFrameRef)
+			ViewportAutoplayController:setViewPortBounds(UseViewportBoundsResult)
 			
 			return
 		end
 	end, {
 		p1.viewportAutoplayController,
 		p1.scrollingFrameRef,
-		var1
+		UseViewportBoundsResult
 	})
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), fFlagLuaAppOneByTwoHoverIdleAutoplay (copy), videoEndReason (copy)
-		local viewportAutoplayController = p1.viewportAutoplayController
+	ReactModule.useEffect(function() --[[ Line: 46 ]]
+		-- upvalues: p1 (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (upval), VideoEndReason (upval)
+		local ViewportAutoplayController = p1.viewportAutoplayController
 		
-		if viewportAutoplayController then
-			return function()
-				-- upvalues: viewportAutoplayController (ref), fFlagLuaAppOneByTwoHoverIdleAutoplay (copy), videoEndReason (copy)
-				viewportAutoplayController:setFeedScopeRef({ current = nil })
-				
-				if fFlagLuaAppOneByTwoHoverIdleAutoplay then
-					viewportAutoplayController:clearUserIntentCandidate()
-				end
-				viewportAutoplayController:reset(videoEndReason.Unmounted)
+		if not ViewportAutoplayController then return end
+		return function() --[[ Line: 52 ]]
+			-- upvalues: ViewportAutoplayController (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (upval), VideoEndReason (upval)
+			ViewportAutoplayController:setFeedScopeRef({ current = nil })
+			
+			if FFlagLuaAppOneByTwoHoverIdleAutoplay then
+				ViewportAutoplayController:clearUserIntentCandidate()
 			end
+			ViewportAutoplayController:reset(VideoEndReason.Unmounted)
 		end
 	end, { p1.viewportAutoplayController })
 	

@@ -1,8 +1,8 @@
-﻿local collectionService = game:GetService("CollectionService")
-local runService = game:GetService("RunService")
-local cryoModule = require(script:FindFirstAncestor("Impressions").Parent.Cryo)
-local constantsModule = require(script.Parent.Constants)
-local debugEnableImpressionsVisualizer = game:DefineFastFlag("DebugEnableImpressionsVisualizer", false)
+﻿local CollectionService = game:GetService("CollectionService")
+local RunService = game:GetService("RunService")
+local CryoModule = require(script:FindFirstAncestor("Impressions").Parent.Cryo)
+local ConstantsModule = require(script.Parent.Constants)
+local DebugEnableImpressionsVisualizer = game:DefineFastFlag("DebugEnableImpressionsVisualizer", false)
 local list = {
 	Color3.new(0.941176, 0.941176, 0.015686),
 	Color3.new(0.890196, 0.058823, 0.058823),
@@ -12,13 +12,8 @@ local list = {
 	Color3.new(0.882352, 0.556862, 0.035294),
 	Color3.new(0.729411, 0.043137, 0.835294)
 }
-local var1 = 1
-local _ = {
-	None = "None",
-	Highlight = "Highlight",
-	FadeOut = "FadeOut"
-}
-local t = {
+local Count = 1
+local config = {
 	BackgroundTransparency = 0,
 	BorderSizePixel = 15,
 	ZIndex = 100,
@@ -26,172 +21,174 @@ local t = {
 	BorderColor3 = Color3.new(1, 1, 1),
 	BorderMode = Enum.BorderMode.Outline
 }
-local t_1 = { BackgroundTransparency = 0.65, BorderSizePixel = 8 }
-local t_2 = {}
-t_2.__index = t_2
+local config1 = { BackgroundTransparency = 0.65, BorderSizePixel = 8 }
+local ImpressionsVisualizerModule = {}
+ImpressionsVisualizerModule.__index = ImpressionsVisualizerModule
 
-local function getTaggedInstances(p1)
-	-- upvalues: collectionService (ref), constantsModule (ref)
-	local t = {}
+local function getTaggedInstances(Tag) --[[ Line: 82 ]]
+	-- upvalues: CollectionService (copy), ConstantsModule (copy)
+	local Guis = {}
 	
-	for i, v in ipairs(collectionService:GetTagged(p1)) do
-		local itemIndexAttribute = v:GetAttribute(constantsModule.ItemIndex)
+	for _, Gui in ipairs((CollectionService:GetTagged(Tag))) do
+		local Attribute = Gui:GetAttribute(ConstantsModule.ItemIndex)
 		
-		if itemIndexAttribute and v:IsA("GuiObject") then
-			t[itemIndexAttribute] = v
+		if Attribute and Gui:IsA("GuiObject") then
+			Guis[Attribute] = Gui
 		end
 	end
-	return t
+	return Guis
 end
 
-function t_2.new(p2, p3)
-	-- upvalues: list (ref), var1 (write), t_2 (ref), debugEnableImpressionsVisualizer (ref), runService (ref)
-	local t = {
-		impressionsTag = p2,
+function ImpressionsVisualizerModule.new(ImpressionsTag, p1) --[[ Line: 95 ]]
+	-- upvalues: list (copy), Count (ref), ImpressionsVisualizerModule (copy), DebugEnableImpressionsVisualizer (copy), RunService (copy)
+	local config = {
+		impressionsTag = ImpressionsTag,
 		highlightedInstances = {},
 		originalInstances = {},
-		highlightColor = list[var1],
-		customKeyMapper = p3 or function(p4)
-			return p4
+		highlightColor = list[Count],
+		customKeyMapper = p1 or function(p2) --[[ Line: 101 ]]
+			return p2
 		end
 	}
-	setmetatable(t, t_2)
+	setmetatable(config, ImpressionsVisualizerModule)
 	
-	if debugEnableImpressionsVisualizer then
-		var1 += 1
+	if DebugEnableImpressionsVisualizer then
+		Count += 1
 		
-		if #list < var1 then
-			var1 %= #list
+		if #list < Count then
+			Count %= #list
 		end
-		if p2 then
-			local var2 = nil
-			t.renderConnection = runService.RenderStepped:Connect(function(p4)
-				-- upvalues: t (ref), var2 (write)
-				if t then
-					t:_step(p4)
+		if ImpressionsTag then
+			local Connection = nil
+			Connection = RunService.RenderStepped:Connect(function(DeltaTime) --[[ Line: 115 ]]
+				-- upvalues: config (copy), Connection (ref)
+				if config then
+					config:_step(DeltaTime)
 					
 					return
-				elseif var2 then
-					var2:Disconnect()
+				end
+				if Connection then
+					Connection:Disconnect()
 				end
 			end)
+			config.renderConnection = Connection
 		end
 	end
-	return t
+	return config
 end
 
-function t_2:destroy()
+function ImpressionsVisualizerModule:destroy() --[[ Line: 131 ]]
 	if self.renderConnection then
 		self.renderConnection:Disconnect()
 	end
 end
 
-function t_2:_startHighlightState(p2, p3, p4, p5, p6)
-	local var2 = self.highlightedInstances[p2]
+function ImpressionsVisualizerModule:_startHighlightState(p1, HighlightState, Duration, List, DoLerp) --[[ Line: 137 ]]
+	local HighlightedInstance = self.highlightedInstances[p1]
 	
-	if var2 == nil then
-		self.highlightedInstances[p2] = { highlightState = p3, currentFields = {} }
-		var2 = self.highlightedInstances[p2]
+	if HighlightedInstance == nil then
+		self.highlightedInstances[p1] = { highlightState = HighlightState, currentFields = {} }
+		HighlightedInstance = self.highlightedInstances[p1]
 	else
-		var2.highlightState = p3
+		HighlightedInstance.highlightState = HighlightState
 	end
-	var2.totalDuration = p4
-	var2.duration = p4
-	var2.doLerp = p6
+	HighlightedInstance.totalDuration = Duration
+	HighlightedInstance.duration = Duration
+	HighlightedInstance.doLerp = DoLerp
 	
-	if p6 then
-		local t = {}
-		local t_1 = {}
+	if DoLerp then
+		local StartFields = {}
+		local TargetFields = {}
 		
-		for i, v in pairs(p5) do
-			t[i] = var2.currentFields[i]
-			t_1[i] = v
+		for i, value in pairs(List) do
+			StartFields[i] = HighlightedInstance.currentFields[i]
+			TargetFields[i] = value
 		end
-		var2.startFields = t
-		var2.targetFields = t_1
+		HighlightedInstance.startFields = StartFields
+		HighlightedInstance.targetFields = TargetFields
 	else
-		var2.startFields = nil
-		var2.targetFields = nil
+		HighlightedInstance.startFields = nil
+		HighlightedInstance.targetFields = nil
 		
-		for i, v in pairs(p5) do
-			var2.currentFields[i] = v
+		for i1, value1 in pairs(List) do
+			HighlightedInstance.currentFields[i1] = value1
 		end
 	end
-	self.highlightedInstances[p2] = var2
+	self.highlightedInstances[p1] = HighlightedInstance
 end
 
-function t_2:_step(p7)
-	-- upvalues: t_1 (ref), getTaggedInstances (ref), t (ref)
+function ImpressionsVisualizerModule:_step(p2) --[[ Line: 172 ]]
+	-- upvalues: config1 (copy), getTaggedInstances (copy), config (copy)
 	assert(self.impressionsTag, "impressionsTag is nil")
 	
-	for i, v in pairs(self.highlightedInstances) do
-		if v.doLerp and v.duration ~= nil and v.totalDuration ~= nil then
-			assert(v.startFields, "startFields is nil")
-			assert(v.targetFields, "targetFields is nil")
+	for i, highlightedInstance in pairs(self.highlightedInstances) do
+		if highlightedInstance.doLerp and highlightedInstance.duration ~= nil and highlightedInstance.totalDuration ~= nil then
+			assert(highlightedInstance.startFields, "startFields is nil")
+			assert(highlightedInstance.targetFields, "targetFields is nil")
 			
-			if v.duration <= 0 then
-				v.doLerp = nil
-				v.duration = nil
+			if highlightedInstance.duration <= 0 then
+				highlightedInstance.doLerp = nil
+				highlightedInstance.duration = nil
 				
-				for i_1, v_1 in pairs(v.targetFields) do
-					v.currentFields[i_1] = v_1
+				for i1, targetField in pairs(highlightedInstance.targetFields) do
+					highlightedInstance.currentFields[i1] = targetField
 				end
 			else
-				local clampedValue = math.clamp((v.totalDuration - v.duration) / v.totalDuration, 0, 1)
+				local ClampedValue = math.clamp((highlightedInstance.totalDuration - highlightedInstance.duration) / highlightedInstance.totalDuration, 0, 1)
 				
-				for v_1, v_4 in pairs(v.targetFields) do
-					local var3 = v.startFields[v_1]
-					v.currentFields[v_1] = var3 + (v_4 - var3) * clampedValue
+				for i2, targetField1 in pairs(highlightedInstance.targetFields) do
+					local StartField = highlightedInstance.startFields[i2]
+					highlightedInstance.currentFields[i2] = StartField + (targetField1 - StartField) * ClampedValue
 				end
 			end
 		end
-		if v.highlightState == "Highlight" then
-			assert(v.duration ~= nil, "duration is nil")
+		if highlightedInstance.highlightState == "Highlight" then
+			assert(highlightedInstance.duration ~= nil, "duration is nil")
 			
-			if v.duration <= 0 then
-				self:_startHighlightState(i, "FadeOut", 2.5, t_1, true)
+			if highlightedInstance.duration <= 0 then
+				self:_startHighlightState(i, "FadeOut", 2.5, config1, true)
 			end
 		end
-		if v.duration then
-			v.duration -= p7
+		if highlightedInstance.duration then
+			highlightedInstance.duration -= p2
 		end
 	end
-	for i_1, v_1 in pairs(getTaggedInstances(self.impressionsTag)) do
-		if v_1 ~= nil then
-			if self.originalInstances[v_1] == nil then
-				self.originalInstances[v_1] = {}
+	for i3, value in pairs((getTaggedInstances(self.impressionsTag))) do
+		if value ~= nil then
+			if self.originalInstances[value] == nil then
+				self.originalInstances[value] = {}
 				
-				for i_2, v_2 in pairs(t) do
-					self.originalInstances[v_1][i_2] = v_1[i_2]
+				for i4, _ in pairs(config) do
+					self.originalInstances[value][i4] = value[i4]
 				end
 			end
-			local var4 = self.customKeyMapper(i_1)
-			local var5 = self.highlightedInstances[var4]
+			local CustomKeyMapperResult = self.customKeyMapper(i3)
+			local HighlightedInstance = self.highlightedInstances[CustomKeyMapperResult]
 			
-			if var5 == nil then
-				var5 = { highlightState = "None", currentFields = {} }
-				assert(self.originalInstances[v_1], "self.originalInstances[instance] is nil")
+			if HighlightedInstance == nil then
+				HighlightedInstance = { highlightState = "None", currentFields = {} }
+				assert(self.originalInstances[value], "self.originalInstances[instance] is nil")
 				
-				for i_2, v_2 in pairs(self.originalInstances[v_1]) do
-					var5.currentFields[i_2] = v_2
+				for i5, value1 in pairs(self.originalInstances[value]) do
+					HighlightedInstance.currentFields[i5] = value1
 				end
-				self.highlightedInstances[var4] = var5
+				self.highlightedInstances[CustomKeyMapperResult] = HighlightedInstance
 			end
-			assert(var5 ~= nil, "stateData is nil")
+			assert(HighlightedInstance ~= nil, "stateData is nil")
 			
-			if var5.currentFields then
-				for i_2, v_2 in pairs(var5.currentFields) do
-					v_1[i_2] = v_2
+			if HighlightedInstance.currentFields then
+				for i6, currentField in pairs(HighlightedInstance.currentFields) do
+					value[i6] = currentField
 				end
 			end
 		end
 	end
 end
 
-function t_2:_highlightImpression(p8)
-	-- upvalues: cryoModule (ref), t (ref)
-	if self.highlightedInstances[p8] == nil or self.highlightedInstances[p8].highlightState == "None" then
-		self:_startHighlightState(p8, "Highlight", 1, cryoModule.Dictionary.join(t, {
+function ImpressionsVisualizerModule:_highlightImpression(CustomKeyMapperResult) --[[ Line: 260 ]]
+	-- upvalues: CryoModule (copy), config (copy)
+	if self.highlightedInstances[CustomKeyMapperResult] == nil or self.highlightedInstances[CustomKeyMapperResult].highlightState == "None" then
+		self:_startHighlightState(CustomKeyMapperResult, "Highlight", 1, CryoModule.Dictionary.join(config, {
 			BackgroundColor3 = self.highlightColor,
 			BorderColor3 = self.highlightColor
 		}), false)
@@ -200,49 +197,49 @@ function t_2:_highlightImpression(p8)
 	end
 end
 
-function t_2:_clearImpression(p8)
-	self.highlightedInstances[p8] = nil
+function ImpressionsVisualizerModule:_clearImpression(CustomKeyMapperResult) --[[ Line: 275 ]]
+	self.highlightedInstances[CustomKeyMapperResult] = nil
 end
 
-function t_2:onSendImpressions(p8)
-	-- upvalues: debugEnableImpressionsVisualizer (ref)
-	if not debugEnableImpressionsVisualizer then return end
-	if not self.impressionsTag or p8 == nil or #p8 <= 0 then return end
-	for i, v in ipairs(p8) do
-		self:_highlightImpression(self.customKeyMapper(v))
+function ImpressionsVisualizerModule:onSendImpressions(List) --[[ Line: 279 ]]
+	-- upvalues: DebugEnableImpressionsVisualizer (copy)
+	if not DebugEnableImpressionsVisualizer then return end
+	if not self.impressionsTag or List == nil or #List <= 0 then return end
+	for _, value in ipairs(List) do
+		self:_highlightImpression((self.customKeyMapper(value)))
 	end
 end
 
-function t_2:onClearImpressions(p9)
-	-- upvalues: debugEnableImpressionsVisualizer (ref)
-	if not debugEnableImpressionsVisualizer then return end
-	if not self.impressionsTag or p9 == nil or #p9 <= 0 then return end
-	for i, v in ipairs(p9) do
-		self:_clearImpression(self.customKeyMapper(v))
+function ImpressionsVisualizerModule:onClearImpressions(List) --[[ Line: 294 ]]
+	-- upvalues: DebugEnableImpressionsVisualizer (copy)
+	if not DebugEnableImpressionsVisualizer then return end
+	if not self.impressionsTag or List == nil or #List <= 0 then return end
+	for _, value in ipairs(List) do
+		self:_clearImpression((self.customKeyMapper(value)))
 	end
 end
 
-function t_2:onClearAllImpressions()
-	-- upvalues: debugEnableImpressionsVisualizer (ref)
-	if not debugEnableImpressionsVisualizer then return end
+function ImpressionsVisualizerModule:onClearAllImpressions() --[[ Line: 309 ]]
+	-- upvalues: DebugEnableImpressionsVisualizer (copy)
+	if not DebugEnableImpressionsVisualizer then return end
 	if not self.impressionsTag then return end
-	for i, v in pairs(self.originalInstances) do
-		for i_1, v_1 in pairs(v) do
-			i[i_1] = v_1
+	for i, originalInstance in pairs(self.originalInstances) do
+		for i1, value in pairs(originalInstance) do
+			i[i1] = value
 		end
 	end
 	self.highlightedInstances = {}
 	self.originalInstances = {}
 end
 
-function t_2:setCustomKeyMapper(p10)
-	self.customKeyMapper = p10 or function(p11)
-		return p11
+function ImpressionsVisualizerModule:setCustomKeyMapper(p3) --[[ Line: 329 ]]
+	self.customKeyMapper = p3 or function(p4) --[[ Line: 330 ]]
+		return p4
 	end
 end
 
-function t_2:setImpressionsTag(p10)
-	self.impressionsTag = p10
+function ImpressionsVisualizerModule:setImpressionsTag(ImpressionsTag) --[[ Line: 335 ]]
+	self.impressionsTag = ImpressionsTag
 end
 
-return t_2
+return ImpressionsVisualizerModule

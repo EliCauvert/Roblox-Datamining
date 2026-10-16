@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent._Workspace.DataHydration.DataHydration.Moments.getOutfitLookStore)
+﻿return (require(script.Parent.Parent._Workspace.DataHydration.DataHydration.Moments.getOutfitLookStore))

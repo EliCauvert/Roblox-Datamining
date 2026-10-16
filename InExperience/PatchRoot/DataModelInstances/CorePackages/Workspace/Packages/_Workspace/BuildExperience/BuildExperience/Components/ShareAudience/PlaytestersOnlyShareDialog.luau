@@ -1,45 +1,45 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local dialog = foundationModule.Dialog
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local dialogSize = foundationModule.Enums.DialogSize
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
+local Dialog = FoundationModule.Dialog
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local DialogSize = FoundationModule.Enums.DialogSize
 
-return function(p1)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), buttonVariant (ref), reactModule (ref), dialog (ref), dialogSize (ref)
-	local var1 = useLocalization({
-		cancel = localizationStringsModule.SHARE_AUDIENCE_CANCEL,
-		description = localizationStringsModule.SHARE_AUDIENCE_PLAYTESTERS_ONLY_DESCRIPTION,
-		share = localizationStringsModule.SHARE_AUDIENCE_SHARE,
-		title = localizationStringsModule.SHARE_AUDIENCE_PLAYTESTERS_ONLY_TITLE
+return function(p1) --[[ Line: 25 | Named "PlaytestersOnlyShareDialog" ]]
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ButtonVariant (copy), ReactModule (copy), Dialog (copy), DialogSize (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
+		cancel = LocalizationStringsModule.SHARE_AUDIENCE_CANCEL,
+		description = LocalizationStringsModule.SHARE_AUDIENCE_PLAYTESTERS_ONLY_DESCRIPTION,
+		share = LocalizationStringsModule.SHARE_AUDIENCE_SHARE,
+		title = LocalizationStringsModule.SHARE_AUDIENCE_PLAYTESTERS_ONLY_TITLE
 	})
 	
-	return reactModule.createElement(dialog.Root, {
+	return ReactModule.createElement(Dialog.Root, {
 		testId = "build-playtesters-only-share-dialog",
 		disablePortal = p1.disablePortal == true,
 		hasBackdrop = p1.hasBackdrop == nil or p1.hasBackdrop,
 		onClose = p1.onCancel,
-		size = dialogSize.Small
+		size = DialogSize.Small
 	}, {
-		Title = reactModule.createElement(dialog.Title, { LayoutOrder = 1, text = var1.title }),
-		Content = reactModule.createElement(dialog.Content, { LayoutOrder = 2 }, {
-			Description = reactModule.createElement(dialog.Text, { Text = var1.description }),
-			Error = if p1.errorText ~= nil then nil else reactModule.createElement(dialog.Text, { Text = p1.errorText })
+		Title = ReactModule.createElement(Dialog.Title, { LayoutOrder = 1, text = UseLocalizationResult.title }),
+		Content = ReactModule.createElement(Dialog.Content, { LayoutOrder = 2 }, {
+			Description = ReactModule.createElement(Dialog.Text, { Text = UseLocalizationResult.description }),
+			Error = if p1.errorText == nil then nil else ReactModule.createElement(Dialog.Text, { Text = p1.errorText })
 		}),
-		Actions = reactModule.createElement(dialog.Actions, {
+		Actions = ReactModule.createElement(Dialog.Actions, {
 			LayoutOrder = 3,
 			actions = {
 				{
-					text = var1.share,
-					variant = buttonVariant.Emphasis,
+					text = UseLocalizationResult.share,
+					variant = ButtonVariant.Emphasis,
 					onActivated = p1.onShare
 				},
 				{
-					text = var1.cancel,
-					variant = buttonVariant.Standard,
+					text = UseLocalizationResult.cancel,
+					variant = ButtonVariant.Standard,
 					onActivated = p1.onCancel
 				}
 			}

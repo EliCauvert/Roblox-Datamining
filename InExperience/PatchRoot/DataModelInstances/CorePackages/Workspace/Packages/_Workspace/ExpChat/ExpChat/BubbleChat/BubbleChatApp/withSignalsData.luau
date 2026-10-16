@@ -1,45 +1,41 @@
-﻿local expChat = script:FindFirstAncestor("ExpChat")
-local parent = expChat.Parent
-local useSignalState = require(parent.SignalsReact).useSignalState
-local reactModule = require(parent.React)
-local sharedFlagsModule = require(parent.SharedFlags)
-local expChatSharedModule = require(parent.ExpChatShared)
-local getFFlagUseCharacterStore = expChatSharedModule.Flags.getFFlagUseCharacterStore
-local getFFlagExpChatUseVoiceParticipantsStore = sharedFlagsModule.GetFFlagExpChatUseVoiceParticipantsStore
-local getCharacterStoreModule = require(expChat.Stores.GetCharacterStore)
-local _ = require(expChat.Stores.GetCharacterStore.createCharacterStore)
-local getVoiceStoreModule = require(expChat.Stores.GetVoiceStore)
-local _ = require(expChat.Stores.GetVoiceStore.createVoiceStore)
-local var1 = if getFFlagUseCharacterStore() then getCharacterStoreModule(false) else nil
-local var2 = if getFFlagExpChatUseVoiceParticipantsStore() then getVoiceStoreModule(false) else nil
+﻿local ExpChat = script:FindFirstAncestor("ExpChat")
+local Parent = ExpChat.Parent
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local ReactModule = require(Parent.React)
+local ExpChatSharedModule = require(Parent.ExpChatShared)
+local GetFFlagUseCharacterStoreFunction = ExpChatSharedModule.Flags.getFFlagUseCharacterStore
+local GetFFlagExpChatUseVoiceParticipantsStoreFunction = require(Parent.SharedFlags).GetFFlagExpChatUseVoiceParticipantsStore
+local GetCharacterStoreModule = require(ExpChat.Stores.GetCharacterStore)
+local _ = require(ExpChat.Stores.GetCharacterStore.createCharacterStore)
+local GetVoiceStoreModule = require(ExpChat.Stores.GetVoiceStore)
+local _ = require(ExpChat.Stores.GetVoiceStore.createVoiceStore)
+local CharacterStoreModule = if GetFFlagUseCharacterStoreFunction() then GetCharacterStoreModule(false) else nil
+local VoiceStoreModule = if GetFFlagExpChatUseVoiceParticipantsStoreFunction() then GetVoiceStoreModule(false) else nil
 
-return function(value)
-	-- upvalues: getFFlagUseCharacterStore (ref), var1 (ref), useSignalState (ref), getFFlagExpChatUseVoiceParticipantsStore (ref), var2 (ref), expChatSharedModule (ref), reactModule (ref)
-	return function(p1)
-		-- upvalues: getFFlagUseCharacterStore (copy), var1 (copy), useSignalState (copy), getFFlagExpChatUseVoiceParticipantsStore (copy), var2 (copy), expChatSharedModule (copy), reactModule (copy), value (ref)
-		local _ = nil
-		local var3 = if getFFlagUseCharacterStore() and var1 then useSignalState(var1.getCharacters) else nil
-		local _ = nil
-		local var4 = if getFFlagExpChatUseVoiceParticipantsStore() and var2 then useSignalState(var2.getVoiceParticipants) else nil
-		local _ = nil
-		local var5 = nil
-		local context = expChatSharedModule.context
-		local messagesStore = context and context.messagesStore
+return function(p1) --[[ Line: 28 | Named "withSignalsData" ]]
+	-- upvalues: GetFFlagUseCharacterStoreFunction (copy), CharacterStoreModule (copy), UseSignalStateFunction (copy), GetFFlagExpChatUseVoiceParticipantsStoreFunction (copy), VoiceStoreModule (copy), ExpChatSharedModule (copy), ReactModule (copy)
+	return function(Tbl) --[[ Line: 29 ]]
+		-- upvalues: GetFFlagUseCharacterStoreFunction (upval), CharacterStoreModule (upval), UseSignalStateFunction (upval), GetFFlagExpChatUseVoiceParticipantsStoreFunction (upval), VoiceStoreModule (upval), ExpChatSharedModule (upval), ReactModule (upval), p1 (copy)
+		local UseSignalStateResult = if GetFFlagUseCharacterStoreFunction() and CharacterStoreModule then UseSignalStateFunction(CharacterStoreModule.getCharacters) else nil
+		local UseSignalStateResult1 = if GetFFlagExpChatUseVoiceParticipantsStoreFunction() and VoiceStoreModule then UseSignalStateFunction(VoiceStoreModule.getVoiceParticipants) else nil
+		local MockUserIdToPartOrModel = nil
+		local Context = ExpChatSharedModule.context
+		local MessagesStore = Context and Context.messagesStore
 		
-		if messagesStore then
-			var5 = useSignalState(messagesStore.getMockUserIdToPartOrModel)
+		if MessagesStore then
+			MockUserIdToPartOrModel = UseSignalStateFunction(MessagesStore.getMockUserIdToPartOrModel)
 		end
-		local cloned = table.clone(p1)
+		local Copy = table.clone(Tbl)
 		
-		if getFFlagUseCharacterStore() then
-			cloned.characters = var3
+		if GetFFlagUseCharacterStoreFunction() then
+			Copy.characters = UseSignalStateResult
 		end
-		if getFFlagExpChatUseVoiceParticipantsStore() then
-			cloned.voiceParticipants = var4
+		if GetFFlagExpChatUseVoiceParticipantsStoreFunction() then
+			Copy.voiceParticipants = UseSignalStateResult1
 		end
-		if var5 then
-			cloned.mockUserIdToPartOrModel = var5
+		if MockUserIdToPartOrModel then
+			Copy.mockUserIdToPartOrModel = MockUserIdToPartOrModel
 		end
-		return reactModule.createElement(value, cloned)
+		return ReactModule.createElement(p1, Copy)
 	end
 end

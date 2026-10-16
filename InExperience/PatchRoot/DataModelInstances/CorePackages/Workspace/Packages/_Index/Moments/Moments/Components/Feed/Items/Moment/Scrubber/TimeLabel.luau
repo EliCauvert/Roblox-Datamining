@@ -1,34 +1,34 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
 local _ = require(script.Parent.Parent.Hooks.useMomentProgress)
-local getColorStyleWithTransparencyModule = require(moments.Utils.getColorStyleWithTransparency)
-local text = foundationModule.Text
-local useTokens = foundationModule.Hooks.useTokens
+local GetColorStyleWithTransparencyModule = require(Moments.Utils.getColorStyleWithTransparency)
+local Text = FoundationModule.Text
+local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-local function formatTime(p1)
-	local maxValue = math.max(0, p1)
+local function formatTime(Duration: number): string --[[ Line: 13 ]]
+	local Largest = math.max(0, Duration)
 	
-	return string.format("%d:%02d", math.floor(maxValue / 60), math.floor(maxValue % 60))
+	return string.format("%d:%02d", math.floor(Largest / 60), (math.floor(Largest % 60)))
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), formatTime (ref), getColorStyleWithTransparencyModule (ref), reactModule (ref), text (ref)
-	local var1 = useTokens()
+return ReactModule.memo(function(Frame) --[[ Line: 28 | Named "TimeLabel" ]]
+	-- upvalues: UseTokensFunction (copy), formatTime (copy), GetColorStyleWithTransparencyModule (copy), ReactModule (copy), Text (copy)
+	local UseTokensResult = UseTokensFunction()
 	
-	return reactModule.createElement(text, {
+	return ReactModule.createElement(Text, {
 		tag = "auto-xy text-label-medium content-emphasis",
-		Text = p1.progress:map(function(p2)
-			-- upvalues: formatTime (copy)
-			local maxValue = math.max(0, p2.time)
+		Text = Frame.progress:map(function(p1): string --[[ Line: 31 ]]
+			-- upvalues: formatTime (upval)
+			local Largest = math.max(0, p1.time)
 			
-			return string.format("%s / %s", string.format("%d:%02d", math.floor(maxValue / 60), math.floor(maxValue % 60)), formatTime(p2.duration))
+			return string.format("%s / %s", string.format("%d:%02d", math.floor(Largest / 60), (math.floor(Largest % 60))), formatTime(p1.duration))
 		end),
-		textStyle = p1.animationRatio:map(function(p2)
-			-- upvalues: getColorStyleWithTransparencyModule (copy), var1 (ref)
-			return getColorStyleWithTransparencyModule(var1.Color.Content.Emphasis, 1 - p2)
+		textStyle = Frame.animationRatio:map(function(p1: number) --[[ Line: 35 ]]
+			-- upvalues: GetColorStyleWithTransparencyModule (upval), UseTokensResult (copy)
+			return GetColorStyleWithTransparencyModule(UseTokensResult.Color.Content.Emphasis, 1 - p1)
 		end),
-		LayoutOrder = p1.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder
 	})
 end)

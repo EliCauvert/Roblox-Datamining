@@ -1,39 +1,37 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local loggerModule = require(appChat.Logger)
-require(parent.UIBlox).init(require(parent.Dev.RobloxAppUIBloxConfig))
-local roactModule = require(parent.Roact)
-local cryoModule = require(parent.Cryo)
-local mockProvidersModule = require(appChat.Components.MockProviders)
-local t = {
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local LoggerModule = require(AppChat.Logger)
+require(Parent.UIBlox).init((require(Parent.Dev.RobloxAppUIBloxConfig)))
+local RoactModule = require(Parent.Roact)
+local CryoModule = require(Parent.Cryo)
+local MockProvidersModule = require(AppChat.Components.MockProviders)
+local config = {
 	Default = { themeName = "Light", fontName = "Gotham" },
 	Light = { themeName = "Light", fontName = "Gotham" },
 	Dark = { themeName = "Dark", fontName = "Gotham" }
 }
-local logger = require(parent.Loggers).Logger
-logger:addSink({
-	maxLevel = logger.Levels.fromString("trace"),
-	log = function(_, p1, _)
+local Logger = require(Parent.Loggers).Logger
+Logger:addSink({
+	maxLevel = Logger.Levels.fromString("trace"),
+	log = function(_, p1, _) --[[ Line: 38 ]]
 		print(p1)
 	end
 })
-loggerModule:setParent(logger)
+LoggerModule:setParent(Logger)
 
 return {
-	roact = roactModule,
-	mapStory = function(p1)
-		-- upvalues: t (ref), roactModule (ref), mockProvidersModule (ref), cryoModule (ref)
-		return function(p2)
-			-- upvalues: t (copy), roactModule (copy), mockProvidersModule (copy), p1 (ref), cryoModule (copy)
-			local props
-			if p2 then
-				props = p2.definition and (p2.definition.props or {})
-			end
-			return roactModule.createElement(mockProvidersModule, {
-				rodux = props.rodux,
-				themeName = (if p2 then t[p2.theme] else t.Default).themeName
+	roact = RoactModule,
+	mapStory = function(p1) --[[ Line: 47 ]]
+		-- upvalues: config (copy), RoactModule (copy), MockProvidersModule (copy), CryoModule (copy)
+		return function(p2) --[[ Line: 48 ]]
+			-- upvalues: config (upval), RoactModule (upval), MockProvidersModule (upval), p1 (copy), CryoModule (upval)
+			local Props = p2 and p2.definition and p2.definition.props or {}
+			
+			return RoactModule.createElement(MockProvidersModule, {
+				rodux = Props.rodux,
+				themeName = (p2 and config[p2.theme] or config.Default).themeName
 			}, {
-				story = roactModule.createElement(p1, cryoModule.Dictionary.union(props, p2))
+				story = RoactModule.createElement(p1, CryoModule.Dictionary.union(Props, p2))
 			})
 		end
 	end

@@ -1,12 +1,12 @@
-﻿local parent = script:FindFirstAncestor("SduiSharedUtilities").Parent
-local signalsReactModule = require(parent.SignalsReact)
-local getSduiClientPageScope = require(parent.SduiCoreSystem).getSduiClientPageScope
+﻿local Parent = script:FindFirstAncestor("SduiSharedUtilities").Parent
+local SignalsReactModule = require(Parent.SignalsReact)
+local GetSduiClientPageScopeFunction = require(Parent.SduiCoreSystem).getSduiClientPageScope
 
-local var1 = function()
+local function v2() --[[ Line: 7 ]]
 	return nil
 end
 
-return function(p1, p2)
-	-- upvalues: getSduiClientPageScope (ref), var1 (ref), signalsReactModule (ref)
-	return signalsReactModule.useSignalState(if p1 and p1.configKey then getSduiClientPageScope(p1.configKey).getSignal(p2) else var1)
+return function(p1, p2) --[[ Line: 11 | Named "useSduiPageScopeField" ]]
+	-- upvalues: GetSduiClientPageScopeFunction (copy), v2 (copy), SignalsReactModule (copy)
+	return SignalsReactModule.useSignalState(if p1 and p1.configKey then GetSduiClientPageScopeFunction(p1.configKey).getSignal(p2) else v2)
 end

@@ -1,8 +1,12 @@
-﻿local parent = script.Parent.Parent.Parent.Parent
-local _ = require(parent.React)
-local useCursor = require(parent.Foundation).Hooks.useCursor
+﻿local Parent = script.Parent.Parent.Parent.Parent
+local _ = require(Parent.React)
+local UseCursorFunction = require(Parent.Foundation).Hooks.useCursor
 
-return function(p1, p2, p3)
-	-- upvalues: useCursor (ref)
-	return useCursor({ radius = p1, offset = p2, borderWidth = p3 })
+return function(Radius, Offset, BorderWidth) --[[ Line: 7 | Named "useCursor" ]]
+	-- upvalues: UseCursorFunction (copy)
+	return UseCursorFunction({
+		radius = Radius,
+		offset = Offset,
+		borderWidth = BorderWidth
+	})
 end

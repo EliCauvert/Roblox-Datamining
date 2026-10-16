@@ -1,18 +1,22 @@
-﻿local appChatNetworkingModule = require(script:FindFirstAncestor("AppChat").Parent.AppChatNetworking)
-local constantsModule = require(script.Parent.Constants)
+﻿local AppChatNetworkingModule = require(script:FindFirstAncestor("AppChat").Parent.AppChatNetworking)
+local ConstantsModule = require(script.Parent.Constants)
 local _ = require(script.Parent.Types)
 
-return function(p1)
-	-- upvalues: appChatNetworkingModule (ref), constantsModule (ref)
-	return appChatNetworkingModule.http.GetSuggestions(nil, p1, constantsModule.SUGGESTION_TYPES, constantsModule.MAX_SUGGESTIONS):andThen(function(p2)
-		local t
-		local responseBody = p2 and p2.responseBody
+return function(p1) --[[ Line: 11 | Named "fetchSmartSuggestions" ]]
+	-- upvalues: AppChatNetworkingModule (copy), ConstantsModule (copy)
+	return AppChatNetworkingModule.http.GetSuggestions(nil, p1, ConstantsModule.SUGGESTION_TYPES, ConstantsModule.MAX_SUGGESTIONS):andThen(function(Result) --[[ Line: 14 ]]
+		local ResponseBody = Result and Result.responseBody
+		local Suggestions = nil
 		
-		if responseBody then
-			t = responseBody.suggestions
+		if ResponseBody then
+			Suggestions = ResponseBody.suggestions
 			
-			return t or {}
+			if not Suggestions then
+				return {}
+			end
+		else
+			Suggestions = {}
 		end
-		t = {}
+		return Suggestions
 	end)
 end

@@ -1,23 +1,23 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceUIKit").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local text = foundationModule.Text
-local useTokens = foundationModule.Hooks.useTokens
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceUIKit").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local Text = FoundationModule.Text
+local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), text (ref)
-	local var1 = useTokens()
+return function(Frame) --[[ Line: 13 | Named "ItemCardStatus" ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), Text (copy)
+	local UseTokensResult = UseTokensFunction()
 	
-	return reactModule.createElement(text, {
-		textStyle = var1.Inverse.Content.Emphasis,
-		fontStyle = var1.Typography.LabelSmall,
-		LayoutOrder = p1.LayoutOrder,
-		Text = p1.text,
+	return ReactModule.createElement(Text, {
+		textStyle = UseTokensResult.Inverse.Content.Emphasis,
+		fontStyle = UseTokensResult.Typography.LabelSmall,
+		LayoutOrder = Frame.LayoutOrder,
+		Text = Frame.text,
 		TextXAlignment = Enum.TextXAlignment.Left,
 		Size = UDim2.fromScale(0, 0),
 		AutomaticSize = Enum.AutomaticSize.XY,
-		backgroundStyle = var1.Color.System.Contrast,
-		padding = var1.Padding.Small,
+		backgroundStyle = UseTokensResult.Color.System.Contrast,
+		padding = UseTokensResult.Padding.Small,
 		cornerRadius = UDim.new(0.5, 0)
 	})
 end

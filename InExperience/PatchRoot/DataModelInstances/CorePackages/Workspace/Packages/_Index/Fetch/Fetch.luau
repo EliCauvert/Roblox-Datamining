@@ -1,12 +1,12 @@
 ﻿local _ = require(script.Parent.LuauPolyfill)
-local fetchModule = require(script.fetch)
+local FetchModule = require(script.fetch)
 
 return {
 	Headers = require(script.Headers).Headers,
 	Request = require(script.Request).Request,
 	Response = require(script.Response).Response,
 	Body = require(script.Body).Body,
-	fetch = fetchModule(game:GetService("HttpService")),
-	buildFetch = fetchModule,
+	fetch = FetchModule(game:GetService("HttpService")),
+	buildFetch = FetchModule,
 	AbortSignal = require(script.AbortSignal).AbortSignal
 }

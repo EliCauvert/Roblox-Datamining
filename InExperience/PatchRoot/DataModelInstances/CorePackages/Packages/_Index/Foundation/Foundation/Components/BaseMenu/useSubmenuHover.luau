@@ -1,9 +1,9 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local _ = require(foundation.Components.Types)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local _ = require(Foundation.Components.Types)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
 
-local function _(p1, p2)
+local function _(p1, p2) --[[ Line: 36 | Named "truncatePath" ]]
 	local t = {}
 	
 	for i = 1, p2 do
@@ -14,128 +14,130 @@ local function _(p1, p2)
 	return t
 end
 
-local _ = function(p3, p4, p5)
+local _ = function(p3, Key: number, p4) --[[ Line: 46 | Named "buildPath" ]]
 	local t = {}
 	
-	for i = 1, p4 - 1 do
+	for i = 1, Key - 1 do
 		if p3[i] then
 			t[i] = p3[i]
 		end
 	end
-	t[p4] = p5
+	t[Key] = p4
 	
 	return t
 end
 
-return function()
-	-- upvalues: useTokensModule (ref), reactModule (ref)
-	local var1 = useTokensModule()
-	local time100 = var1.Time.Time_100
-	local time300 = var1.Time.Time_300
-	local var2, var3 = reactModule.useState({})
-	local var4 = reactModule.useRef({})
-	local var5 = reactModule.useRef(nil)
-	local var6 = reactModule.useRef(nil)
-	var4.current = var2
-	local var7 = reactModule.useCallback(function()
-		-- upvalues: var5 (ref), var6 (ref)
-		if var5.current then
-			task.cancel(var5.current)
-			var5.current = nil
+return function() --[[ Line: 52 | Named "useSubmenuHover" ]]
+	-- upvalues: UseTokensModule (copy), ReactModule (copy)
+	local UseTokensModuleResult = UseTokensModule()
+	local Time100 = UseTokensModuleResult.Time.Time_100
+	local Time300 = UseTokensModuleResult.Time.Time_300
+	local UseStateResult, UseStateResult2 = ReactModule.useState({})
+	local UseRefResult = ReactModule.useRef({})
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseRefResult2 = ReactModule.useRef(nil)
+	UseRefResult.current = UseStateResult
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 64 ]]
+		-- upvalues: UseRefResult1 (copy), UseRefResult2 (copy)
+		if UseRefResult1.current then
+			task.cancel(UseRefResult1.current)
+			UseRefResult1.current = nil
 		end
-		if var6.current then
-			task.cancel(var6.current)
-			var6.current = nil
+		if UseRefResult2.current then
+			task.cancel(UseRefResult2.current)
+			UseRefResult2.current = nil
 		end
 	end, {})
-	local var8 = reactModule.useCallback(function(p6, p7, p8)
-		-- upvalues: var7 (ref), var4 (ref), var3 (ref), var5 (ref), time100 (ref)
-		var7()
+	local UseResult1 = ReactModule.useCallback(function(p5, CurrentEntry, p6) --[[ Line: 75 ]]
+		-- upvalues: UseResult (copy), UseRefResult (copy), UseStateResult2 (copy), UseRefResult1 (copy), Time100 (copy)
+		UseResult()
 		
-		if var4.current[p6] == p7 then return end
-		if p8 then
-			var3(function(p9)
-				-- upvalues: p6 (ref), p7 (ref)
-				local t = {}
+		if UseRefResult.current[p5] == CurrentEntry then return end
+		if p6 then
+			UseStateResult2(function(p7) --[[ Line: 83 ]]
+				-- upvalues: p5 (copy), CurrentEntry (copy)
+				local CurrentEntries = {}
 				
-				for i = 1, p6 - 1 do
-					if p9[i] then
-						t[i] = p9[i]
+				for i = 1, p5 - 1 do
+					if p7[i] then
+						CurrentEntries[i] = p7[i]
 					end
 				end
-				t[p6] = p7
+				CurrentEntries[p5] = CurrentEntry
 				
-				return t
+				return CurrentEntries
+			end)
+			
+			return
+		else
+			UseRefResult1.current = task.delay(Time100, function() --[[ Line: 89 ]]
+				-- upvalues: UseStateResult2 (upval), p5 (copy), CurrentEntry (copy), UseRefResult1 (upval)
+				UseStateResult2(function(p8) --[[ Line: 90 ]]
+					-- upvalues: p5 (upval), CurrentEntry (upval)
+					local CurrentEntries = {}
+					
+					for i = 1, p5 - 1 do
+						if p8[i] then
+							CurrentEntries[i] = p8[i]
+						end
+					end
+					CurrentEntries[p5] = CurrentEntry
+					
+					return CurrentEntries
+				end)
+				UseRefResult1.current = nil
+			end)
+		end
+	end, { UseResult, Time100 })
+	local UseResult2 = ReactModule.useCallback(function(p7) --[[ Line: 97 ]]
+		-- upvalues: UseResult (copy), UseRefResult (copy), UseRefResult2 (copy), Time300 (copy), UseStateResult2 (copy)
+		UseResult()
+		
+		if #UseRefResult.current >= p7 then
+			UseRefResult2.current = task.delay(Time300, function() --[[ Line: 104 ]]
+				-- upvalues: UseStateResult2 (upval), p7 (copy), UseRefResult2 (upval)
+				UseStateResult2(function(p8) --[[ Line: 105 ]]
+					-- upvalues: p7 (upval)
+					if #p8 < p7 then
+						return p8
+					end
+					local t = {}
+					
+					for i = 1, p7 - 1 do
+						if p8[i] then
+							t[i] = p8[i]
+						end
+					end
+					return t
+				end)
+				UseRefResult2.current = nil
 			end)
 			
 			return
 		end
-		var5.current = task.delay(time100, function()
-			-- upvalues: var3 (copy), p6 (ref), p7 (ref), var5 (copy)
-			var3(function(p9)
-				-- upvalues: p6 (copy), p7 (copy)
-				local t = {}
-				
-				for i = 1, p6 - 1 do
-					if p9[i] then
-						t[i] = p9[i]
-					end
-				end
-				t[p6] = p7
-				
-				return t
-			end)
-			var5.current = nil
-		end)
-	end, { var7, time100 })
-	local var9 = reactModule.useCallback(function(p9)
-		-- upvalues: var7 (ref), var4 (ref), var6 (ref), time300 (ref), var3 (ref)
-		var7()
-		
-		if #var4.current < p9 then
-			return
-		end
-		var6.current = task.delay(time300, function()
-			-- upvalues: var3 (copy), p9 (ref), var6 (copy)
-			var3(function(p10)
-				-- upvalues: p9 (copy)
-				if #p10 < p9 then
-					return p10
-				end
-				local t = {}
-				
-				for i = 1, p9 - 1 do
-					if p10[i] then
-						t[i] = p10[i]
-					end
-				end
-				return t
-			end)
-			var6.current = nil
-		end)
-	end, { var7, time300 })
-	local var10 = reactModule.useCallback(function()
-		-- upvalues: var7 (ref), var3 (ref)
-		var7()
-		var3({})
-	end, { var7 })
-	reactModule.useEffect(function()
-		-- upvalues: var5 (ref), var6 (ref)
-		return function()
-			-- upvalues: var5 (copy), var6 (copy)
-			if var5.current then
-				task.cancel(var5.current)
+	end, { UseResult, Time300 })
+	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 117 ]]
+		-- upvalues: UseResult (copy), UseStateResult2 (copy)
+		UseResult()
+		UseStateResult2({})
+	end, { UseResult })
+	ReactModule.useEffect(function() --[[ Line: 123 ]]
+		-- upvalues: UseRefResult1 (copy), UseRefResult2 (copy)
+		return function() --[[ Line: 124 ]]
+			-- upvalues: UseRefResult1 (upval), UseRefResult2 (upval)
+			if UseRefResult1.current then
+				task.cancel(UseRefResult1.current)
 			end
-			if var6.current then
-				task.cancel(var6.current)
+			if UseRefResult2.current then
+				task.cancel(UseRefResult2.current)
 			end
 		end
 	end, {})
 	
 	return {
-		openPath = var2,
-		openAtDepth = var8,
-		closeAtDepth = var9,
-		reset = var10
+		openPath = UseStateResult,
+		openAtDepth = UseResult1,
+		closeAtDepth = UseResult2,
+		reset = UseResult3
 	}
 end

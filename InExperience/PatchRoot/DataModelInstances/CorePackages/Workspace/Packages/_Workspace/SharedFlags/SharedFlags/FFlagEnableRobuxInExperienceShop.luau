@@ -1,1 +1,3 @@
-﻿return game:DefineFastFlag("EnableRobuxInExperienceShop3", false) and require(script.Parent.FFlagEnableInExperienceShop)
+﻿local FFlagEnableInExperienceShopModule = require(script.Parent.FFlagEnableInExperienceShop)
+
+return game:DefineFastFlag("EnableRobuxInExperienceShop3", false) and FFlagEnableInExperienceShopModule

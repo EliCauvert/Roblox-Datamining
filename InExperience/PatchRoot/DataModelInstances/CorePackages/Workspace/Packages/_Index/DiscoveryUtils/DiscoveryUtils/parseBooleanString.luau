@@ -1,3 +1,3 @@
-﻿return function(p1)
-	return if p1 == nil then nil elseif p1 ~= "true" then if p1 ~= "True" then p1 == "1" else true else true
+﻿return function(p1) --[[ Line: 1 | Named "parseBooleanString" ]]
+	return if p1 == nil then nil else p1 == "true" or (p1 == "True" or p1 == "1")
 end

@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Workspace.TelemetryService.TelemetryService)
+﻿return (require(script.Parent.Parent.Parent._Workspace.TelemetryService.TelemetryService))

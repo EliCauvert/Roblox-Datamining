@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("LuaAppPlatformRestrictionVPC", false)
 
-return function()
+return function() --[[ Line: 3 ]]
 	return game:GetFastFlag("LuaAppPlatformRestrictionVPC")
 end

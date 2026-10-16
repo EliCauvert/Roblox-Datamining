@@ -1,69 +1,69 @@
-﻿local t = {
+﻿local SpatialUIType = {
 	ScreenUI = "ScreenUI",
 	SpatialUI = "SpatialUI",
 	SpatialUIPartOnly = "SpatialUIPartOnly",
 	SpatialUIRoact = "SpatialUIRoact"
 }
-local t_1 = {
+local PanelType = {
 	Chat = "Chat",
 	RobloxGui = "RobloxGui",
 	BottomBar = "BottomBar",
 	MoreMenu = "MoreMenu"
 }
-local t_2 = {
+local SpatialUIGroupType = {
 	MainUIGroup = "MainUIGroup",
 	WristUIGroup = "WristUIGroup"
 }
-local var1 = Vector2.new(0.1365, 0.1995) * 3.333333333333
-local var2 = Vector2.new(0.532, 0.3395) * 3.333333333333
+local ScaledVector = Vector2.new(0.1365, 0.1995) * 3.3333333333333335
+local ScaledVector1 = Vector2.new(0.532, 0.3395) * 3.3333333333333335
 
 return {
 	VR_PANEL_RESOLUTION_MULTIPLIER = 800,
 	BOTTOM_BAR_BASE_PART_SIZE = 0.15,
-	SpatialUIType = t,
-	SpatialUIGroupType = t_2,
-	PanelType = t_1,
+	SpatialUIType = SpatialUIType,
+	SpatialUIGroupType = SpatialUIGroupType,
+	PanelType = PanelType,
 	DEFAULT_VR_PANEL_SIZE = Vector2.new(10, 10),
 	COMPAT_PANEL_PROPS_MAP = {
-		[t_1.Chat] = {
-			type = t.SpatialUI,
+		[PanelType.Chat] = {
+			type = SpatialUIType.SpatialUI,
 			spatialPanelProps = {
 				name = "ExperienceChat",
 				faceCamera = true,
 				lerp = true,
-				partSize = var1,
-				virtualScreenSize = var1 * 800
+				partSize = ScaledVector,
+				virtualScreenSize = ScaledVector * 800
 			}
 		},
-		[t_1.RobloxGui] = {
-			type = t.SpatialUIPartOnly,
+		[PanelType.RobloxGui] = {
+			type = SpatialUIType.SpatialUIPartOnly,
 			spatialPanelProps = {
 				name = "RobloxGuiPanel-PartOnly",
 				faceCamera = true,
 				lerp = true,
 				transparency = 0.5,
-				partSize = var2
+				partSize = ScaledVector1
 			}
 		}
 	},
 	SPATIAL_PANEL_POSITION_PROPS_MAP = {
-		[t_1.Chat] = {
-			uiGroup = t_2.MainUIGroup,
+		[PanelType.Chat] = {
+			uiGroup = SpatialUIGroupType.MainUIGroup,
 			cameraFixedPanelProp = {
-				uiGroupElementOffset = CFrame.new(var2.X * 0.5 + var1.X * 0.5 + 0.066666666667, (var2.Y - var1.Y) / 2, 0)
+				uiGroupElementOffset = CFrame.new(ScaledVector1.X * 0.5 + ScaledVector.X * 0.5 + 0.06666666666666667, (ScaledVector1.Y - ScaledVector.Y) / 2, 0)
 			}
 		},
-		[t_1.RobloxGui] = {
-			uiGroup = t_2.MainUIGroup,
+		[PanelType.RobloxGui] = {
+			uiGroup = SpatialUIGroupType.MainUIGroup,
 			cameraFixedPanelProp = { uiGroupElementOffset = CFrame.new(0, 0, 0) }
 		}
 	},
 	ROACT_PANEL_UIGROUP_MAP = {
-		[t_1.BottomBar] = t_2.MainUIGroup,
-		[t_1.MoreMenu] = t_2.MainUIGroup
+		[PanelType.BottomBar] = SpatialUIGroupType.MainUIGroup,
+		[PanelType.MoreMenu] = SpatialUIGroupType.MainUIGroup
 	},
 	ROACT_PANEL_UIGROUP_ELEMENT_OFFSET_MAP = {
-		[t_1.BottomBar] = CFrame.new(0, -var2.Y * 0.5 - 0.075 - 0.033333333333, 0) * CFrame.Angles(0, 3.14159265359, 0),
-		[t_1.MoreMenu] = CFrame.new(0.4, -0.36, 0) * CFrame.Angles(0, 3.14159265359, 0)
+		[PanelType.BottomBar] = CFrame.new(0, -ScaledVector1.Y * 0.5 - 0.075 - 0.03333333333333333, 0) * CFrame.Angles(0, 3.141592653589793, 0),
+		[PanelType.MoreMenu] = CFrame.new(0.4, -0.36, 0) * CFrame.Angles(0, 3.141592653589793, 0)
 	}
 }

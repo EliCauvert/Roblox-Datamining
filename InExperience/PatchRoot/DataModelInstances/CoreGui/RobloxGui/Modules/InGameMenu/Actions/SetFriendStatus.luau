@@ -1,3 +1,3 @@
-﻿return require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator("SET_FRIEND_STATUS", function(p1, p2)
-	return { userId = p1, friendStatus = p2 }
+﻿return require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator("SET_FRIEND_STATUS", function(UserId, FriendStatus) --[[ Line: 5 ]]
+	return { userId = UserId, friendStatus = FriendStatus }
 end)

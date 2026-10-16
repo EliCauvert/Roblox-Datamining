@@ -1,30 +1,30 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local enumScreensModule = require(appChat.EnumScreens)
-local networkingFriendsModule = require(appChat.Http.NetworkingFriends)
-local _ = require(appChat.types)
-local useAppPolicyModule = require(appChat.Hooks.useAppPolicy)
-local useIsExternalNavigationAvailableModule = require(appChat.Hooks.useIsExternalNavigationAvailable)
-local conversationModule = require(appChat.Models.Conversation)
-local cryoModule = require(parent.Cryo)
-local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-local inputHandlersModule = require(parent.InputHandlers)
-local reactModule = require(parent.React)
-local _ = require(parent.ReactFocusNavigation)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
-local focusNavigableSurfaceWrapper = focusNavigationUtilsModule.FocusNavigableSurfaceWrapper
-local appFocusRoot = focusNavigationUtilsModule.AppFocusRoot
-local focusNavigationEventNameEnum = focusNavigationUtilsModule.FocusNavigationEventNameEnum
-local fFlagEnableChatDetailsOpenChatModule = require(appChat.Flags.FFlagEnableChatDetailsOpenChat)
-local fFlagAppChatMigrateFriendshipStatusesModule = require(appChat.Flags.FFlagAppChatMigrateFriendshipStatuses)
-local useGetFriendshipStatus = require(parent.FriendsHydrationReact).useGetFriendshipStatus
-local memo = reactModule.memo
-local participantDialogDeprecatedModule = require(script.Parent.ParticipantDialogDeprecated)
-local playerContextualMenuWrapperModule = require(script.Parent.PlayerContextualMenuWrapper)
-local t = {
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local EnumScreensModule = require(AppChat.EnumScreens)
+local NetworkingFriendsModule = require(AppChat.Http.NetworkingFriends)
+local _ = require(AppChat.types)
+local UseAppPolicyModule = require(AppChat.Hooks.useAppPolicy)
+local UseIsExternalNavigationAvailableModule = require(AppChat.Hooks.useIsExternalNavigationAvailable)
+local ConversationModule = require(AppChat.Models.Conversation)
+local CryoModule = require(Parent.Cryo)
+local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
+local InputHandlersModule = require(Parent.InputHandlers)
+local ReactModule = require(Parent.React)
+local _ = require(Parent.ReactFocusNavigation)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
+local FocusNavigableSurfaceWrapper = FocusNavigationUtilsModule.FocusNavigableSurfaceWrapper
+local AppFocusRoot = FocusNavigationUtilsModule.AppFocusRoot
+local FocusNavigationEventNameEnum = FocusNavigationUtilsModule.FocusNavigationEventNameEnum
+local FFlagEnableChatDetailsOpenChatModule = require(AppChat.Flags.FFlagEnableChatDetailsOpenChat)
+local FFlagAppChatMigrateFriendshipStatusesModule = require(AppChat.Flags.FFlagAppChatMigrateFriendshipStatuses)
+local UseGetFriendshipStatusFunction = require(Parent.FriendsHydrationReact).useGetFriendshipStatus
+local MemoFunction = ReactModule.memo
+local ParticipantDialogDeprecatedModule = require(script.Parent.ParticipantDialogDeprecated)
+local PlayerContextualMenuWrapperModule = require(script.Parent.PlayerContextualMenuWrapper)
+local config = {
 	conversationId = nil,
 	participantId = nil,
 	showRemoveUserButton = false,
@@ -38,102 +38,106 @@ local t = {
 	openChat = nil,
 	openReportUser = nil,
 	openRemoveUserDialog = nil,
-	onDismiss = function() end
+	onDismiss = function() --[[ Line: 71 ]] end
 }
-local t_1 = { skipFetch = true }
+local config1 = { skipFetch = true }
 
-function ParticipantDialogContainerDeprecated(p1)
-	-- upvalues: cryoModule (ref), t (ref), useAppPolicyModule (ref), fFlagEnableChatDetailsOpenChatModule (ref), useSelector (ref), conversationModule (ref), useDispatch (ref), fFlagAppChatMigrateFriendshipStatusesModule (ref), useGetFriendshipStatus (ref), t_1 (ref), reactModule (ref), networkingFriendsModule (ref), useLocalization (ref), useIsExternalNavigationAvailableModule (ref), enumScreensModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), appFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), playerContextualMenuWrapperModule (ref), focusNavigableSurfaceWrapper (ref), participantDialogDeprecatedModule (ref)
-	local var1 = cryoModule.Dictionary.join(t, p1)
-	local var2 = useAppPolicyModule(function(p2)
+function ParticipantDialogContainerDeprecated(p1) --[[ Line: 77 ]]
+	-- upvalues: CryoModule (copy), config (copy), UseAppPolicyModule (copy), FFlagEnableChatDetailsOpenChatModule (copy), UseSelectorFunction (copy), ConversationModule (copy), UseDispatchFunction (copy), FFlagAppChatMigrateFriendshipStatusesModule (copy), UseGetFriendshipStatusFunction (copy), config1 (copy), ReactModule (copy), NetworkingFriendsModule (copy), UseLocalizationFunction (copy), UseIsExternalNavigationAvailableModule (copy), EnumScreensModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), AppFocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), PlayerContextualMenuWrapperModule (copy), FocusNavigableSurfaceWrapper (copy), ParticipantDialogDeprecatedModule (copy)
+	local JoinResult = CryoModule.Dictionary.join(config, p1)
+	local UseAppPolicyModuleResult = UseAppPolicyModule(function(p2) --[[ Line: 79 ]]
 		return p2.getChatViewProfileOption()
 	end)
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local var3 = false
+	local UseSelectorResult = nil
+	local UseDispatchResult = nil
+	local ShowChatButton = false
 	
-	if fFlagEnableChatDetailsOpenChatModule then
-		local var4
-		local var5 = useSelector(function(p2)
-			-- upvalues: var1 (ref), conversationModule (copy)
-			local conversations = p2.ChatAppReducer and p2.ChatAppReducer.Conversations
-			local conversationId = conversations and conversations[var1.conversationId]
+	if FFlagEnableChatDetailsOpenChatModule then
+		UseSelectorResult = UseSelectorFunction(function(p2): boolean --[[ Line: 89 ]]
+			-- upvalues: JoinResult (copy), ConversationModule (upval)
+			local Conversations = p2.ChatAppReducer and p2.ChatAppReducer.Conversations
+			local Conversation = Conversations and Conversations[JoinResult.conversationId]
 			
-			return conversationId and conversationId.conversationType == conversationModule.Type.MULTI_USER_CONVERSATION
+			return Conversation and Conversation.conversationType == ConversationModule.Type.MULTI_USER_CONVERSATION
 		end)
-		local var6 = useDispatch()
+		UseDispatchResult = UseDispatchFunction()
+		local IsUseGetFriendshipStatusResultMatch = nil
 		
-		if fFlagAppChatMigrateFriendshipStatusesModule then
-			local _ = useGetFriendshipStatus(var1.participantId, if var5 then nil else t_1) == Enum.FriendStatus.Friend
+		if FFlagAppChatMigrateFriendshipStatusesModule then
+			IsUseGetFriendshipStatusResultMatch = UseGetFriendshipStatusFunction(JoinResult.participantId, if UseSelectorResult then nil else config1) == Enum.FriendStatus.Friend
 		else
-			var4 = useSelector(function(p2)
-				-- upvalues: var1 (ref)
-				local friends = p2.ChatAppReducer and p2.ChatAppReducer.Friends
-				local friendshipStatus = friends and friends.friendshipStatus
+			IsUseGetFriendshipStatusResultMatch = UseSelectorFunction(function(p2): boolean --[[ Line: 104 ]]
+				-- upvalues: JoinResult (copy)
+				local Friends = p2.ChatAppReducer and p2.ChatAppReducer.Friends
+				local FriendshipStatus = Friends and Friends.friendshipStatus
 				
-				return friendshipStatus and friendshipStatus[var1.participantId] == Enum.FriendStatus.Friend
+				return FriendshipStatus and FriendshipStatus[JoinResult.participantId] == Enum.FriendStatus.Friend
 			end)
-			reactModule.useEffect(function()
-				-- upvalues: var5 (write), var6 (write), networkingFriendsModule (copy), var1 (ref)
-				if var5 then
-					var6(networkingFriendsModule.GetExtendedFriendshipStatus.API({ targetUserId = var1.participantId }))
+			ReactModule.useEffect(function() --[[ Line: 110 ]]
+				-- upvalues: UseSelectorResult (ref), UseDispatchResult (ref), NetworkingFriendsModule (upval), JoinResult (copy)
+				if UseSelectorResult then
+					UseDispatchResult(NetworkingFriendsModule.GetExtendedFriendshipStatus.API({ targetUserId = JoinResult.participantId }))
 				end
-			end, { var1.participantId, var6, var5 })
+			end, {
+				JoinResult.participantId,
+				UseDispatchResult,
+				UseSelectorResult
+			})
 		end
-		var3 = if var5 and var4 then true else false
+		ShowChatButton = if UseSelectorResult and IsUseGetFriendshipStatusResultMatch then true else false
 	end
-	local var7 = useLocalization({
-		viewProfileText = var1.viewProfileText,
-		chatText = if fFlagEnableChatDetailsOpenChatModule then var1.chatText else nil,
-		reportUserText = var1.reportUserText,
-		removeFromGroupText = var1.removeFromGroupText,
-		cancelText = var1.cancelText
+	local UseLocalizationResult = UseLocalizationFunction({
+		viewProfileText = JoinResult.viewProfileText,
+		chatText = if FFlagEnableChatDetailsOpenChatModule then JoinResult.chatText else nil,
+		reportUserText = JoinResult.reportUserText,
+		removeFromGroupText = JoinResult.removeFromGroupText,
+		cancelText = JoinResult.cancelText
 	})
-	local var8 = reactModule.useMemo(function()
-		-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), var1 (ref)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 134 ]]
+		-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), JoinResult (copy)
 		return {
-			[focusNavigationEventNameEnum.NavigateBack] = {
-				handler = inputHandlersModule.onRelease(function(p2)
-					-- upvalues: var1 (copy)
-					var1.onDismiss()
+			[FocusNavigationEventNameEnum.NavigateBack] = {
+				handler = InputHandlersModule.onRelease(function(p2) --[[ Line: 137 ]]
+					-- upvalues: JoinResult (upval)
+					JoinResult.onDismiss()
 					p2:cancel()
 				end)
 			}
 		}
-	end, { var1.onDismiss })
+	end, { JoinResult.onDismiss })
+	local JoinResult1 = CryoModule.Dictionary.join(JoinResult, UseLocalizationResult, {
+		showViewProfileButton = UseAppPolicyModuleResult,
+		showChatButton = ShowChatButton,
+		isWideMode = JoinResult.isWideMode
+	})
 	
-	return if useIsExternalNavigationAvailableModule({ enumScreensModule.ViewUserProfile })[enumScreensModule.ViewUserProfile] then reactModule.createElement(focusNavigableSurfaceWrapper, {
+	return if UseIsExternalNavigationAvailableModule({ EnumScreensModule.ViewUserProfile })[EnumScreensModule.ViewUserProfile] then ReactModule.createElement(FocusNavigableSurfaceWrapper, {
 		isAutoFocusRoot = true,
 		isFocusable = true,
 		isIsolated = true,
-		customEventHandlers = var8,
-		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.PopUp
+		customEventHandlers = UseMemoResult,
+		surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.PopUp
 	}, {
-		reactModule.createElement(participantDialogDeprecatedModule, cryoModule.Dictionary.join(var1, var7, {
-			showViewProfileButton = var2,
-			showChatButton = var3,
-			isWideMode = var1.isWideMode
-		}))
-	}) else reactModule.createElement(appFocusRoot, {
+		ReactModule.createElement(ParticipantDialogDeprecatedModule, JoinResult1)
+	}) else ReactModule.createElement(AppFocusRoot, {
 		isAutoFocusRoot = true,
 		isFocusable = true,
 		isIsolated = true,
 		shouldRestoreFocus = false,
-		customEventHandlers = var8,
-		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.PopUp
+		customEventHandlers = UseMemoResult,
+		surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.PopUp
 	}, {
-		reactModule.createElement(playerContextualMenuWrapperModule, {
-			conversationId = var1.conversationId,
-			participantId = var1.participantId,
-			onDismiss = var1.onDismiss,
-			openRemoveUserDialog = var1.openRemoveUserDialog,
-			removeFromGroupText = var7.removeFromGroupText,
-			openReportUser = var1.openReportUser,
-			showRemoveUserButton = var1.showRemoveUserButton,
-			openBlockingModal = var1.openBlockingModal
+		ReactModule.createElement(PlayerContextualMenuWrapperModule, {
+			conversationId = JoinResult.conversationId,
+			participantId = JoinResult.participantId,
+			onDismiss = JoinResult.onDismiss,
+			openRemoveUserDialog = JoinResult.openRemoveUserDialog,
+			removeFromGroupText = UseLocalizationResult.removeFromGroupText,
+			openReportUser = JoinResult.openReportUser,
+			showRemoveUserButton = JoinResult.showRemoveUserButton,
+			openBlockingModal = JoinResult.openBlockingModal
 		})
 	})
 end
 
-return memo(ParticipantDialogContainerDeprecated)
+return MemoFunction(ParticipantDialogContainerDeprecated)

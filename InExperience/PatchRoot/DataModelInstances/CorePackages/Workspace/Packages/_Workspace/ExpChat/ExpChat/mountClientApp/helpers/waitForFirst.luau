@@ -1,17 +1,17 @@
-﻿return function(...)
-	local bindableEvent = Instance.new("BindableEvent")
-	local list = { ... }
+﻿return function(...) --[[ Line: 1 | Named "waitForFirst" ]]
+	local BindableEvent = Instance.new("BindableEvent")
+	local Connections = { ... }
 	
-	local function fire(...)
-		-- upvalues: list (ref), bindableEvent (ref)
-		for i = 1, #list do
-			list[i]:Disconnect()
+	local function fire(...) --[[ Line: 5 ]]
+		-- upvalues: Connections (copy), BindableEvent (copy)
+		for i = 1, #Connections do
+			Connections[i]:Disconnect()
 		end
-		return bindableEvent:Fire(...)
+		return BindableEvent:Fire(...)
 	end
 	
-	for i = 1, #list do
-		list[i] = list[i]:Connect(fire)
+	for i = 1, #Connections do
+		Connections[i] = Connections[i]:Connect(fire)
 	end
-	return bindableEvent.Event:Wait()
+	return BindableEvent.Event:Wait()
 end

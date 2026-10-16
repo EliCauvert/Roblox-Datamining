@@ -1,32 +1,32 @@
-﻿local avatarExperienceSave = script:FindFirstAncestor("AvatarExperienceSave")
-local parent = avatarExperienceSave.Parent
-local dashModule = require(parent.Dash)
-local _ = require(avatarExperienceSave.Context.AvatarSaveContext)
-local fFlagAXBackgroundsPersistence = require(parent.AvatarExperienceFlags).FFlagAXBackgroundsPersistence
+﻿local AvatarExperienceSave = script:FindFirstAncestor("AvatarExperienceSave")
+local Parent = AvatarExperienceSave.Parent
+local DashModule = require(Parent.Dash)
+local _ = require(AvatarExperienceSave.Context.AvatarSaveContext)
+local FFlagAXBackgroundsPersistence = require(Parent.AvatarExperienceFlags).FFlagAXBackgroundsPersistence
 
-return function(p1, p2)
-	-- upvalues: dashModule (ref), fFlagAXBackgroundsPersistence (ref)
-	local t = {}
+return function(p1, p2) --[[ Line: 25 | Named "getSubstateToTrackForChanges" ]]
+	-- upvalues: DashModule (copy), FFlagAXBackgroundsPersistence (copy)
+	local TryOnItems = {}
 	
 	if p1.tryOn.OutfitTryOn.TryOnItems then
-		for i, v in p1.tryOn.OutfitTryOn.TryOnItems do
-			t[i] = if p2 then dashModule.omit(v, { "order" }) else v
+		for i, tryOnItem in p1.tryOn.OutfitTryOn.TryOnItems do
+			TryOnItems[i] = if p2 then DashModule.omit(tryOnItem, { "order" }) else tryOnItem
 		end
 	end
-	local t_1 = {}
+	local EquippedAssets = {}
 	
 	if p1.equipped.EquippedAssets then
-		for i, v in p1.equipped.EquippedAssets do
-			t_1[i] = {}
+		for i1, equippedAsset in p1.equipped.EquippedAssets do
+			EquippedAssets[i1] = {}
 			
-			for i_1, v_1 in v do
-				t_1[i][i_1] = if p2 then dashModule.omit(v_1, { "order" }) else v_1
+			for i2, value in equippedAsset do
+				EquippedAssets[i1][i2] = if p2 then DashModule.omit(value, { "order" }) else value
 			end
 		end
 	end
 	return {
 		OutfitTryOn = {
-			TryOnItems = t,
+			TryOnItems = TryOnItems,
 			LookId = p1.tryOn.OutfitTryOn.LookId,
 			LookType = p1.tryOn.OutfitTryOn.LookType,
 			BodyColor3s = p1.tryOn.OutfitTryOn.BodyColor3s,
@@ -38,8 +38,8 @@ return function(p1, p2)
 		AvatarScales = p1.equipped.AvatarScales,
 		BodyColor3s = p1.equipped.BodyColor3s,
 		BodyPartRangeIds = p1.equipped.BodyPartRangeIds,
-		EquippedAssets = t_1,
+		EquippedAssets = EquippedAssets,
 		EquippedEmotes = { slotInfo = p1.equipped.EquippedEmotes.slotInfo },
-		BackgroundAssetId = if fFlagAXBackgroundsPersistence then p1.equipped.BackgroundAssetId else nil
+		BackgroundAssetId = if FFlagAXBackgroundsPersistence then p1.equipped.BackgroundAssetId else nil
 	}
 end

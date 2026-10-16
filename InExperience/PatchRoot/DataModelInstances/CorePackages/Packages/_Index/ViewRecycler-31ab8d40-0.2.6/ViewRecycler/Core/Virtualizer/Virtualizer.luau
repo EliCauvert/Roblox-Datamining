@@ -1,27 +1,28 @@
-﻿local viewRecycler = script:FindFirstAncestor("ViewRecycler")
-local _ = require(viewRecycler.Core.DataPrefetch)
-local _ = require(viewRecycler.Core.DataSource)
-local _ = require(viewRecycler.Core.Diagnostics)
-local _ = require(viewRecycler.Core.Layout)
-local _ = require(viewRecycler.Core.OverscanPolicy)
-local _ = require(viewRecycler.Core.PinnedItems)
-local _ = require(viewRecycler.Core.Placement.PlacementTypes)
-local _ = require(viewRecycler.Core.Enums.ScrollAlignment)
-local signalsModule = require(viewRecycler.Parent.Signals)
-local _ = require(viewRecycler.Core.Types)
-local virtualizerCommandTypeModule = require(viewRecycler.Core.Enums.VirtualizerCommandType)
-local external = virtualizerCommandTypeModule.External
-local internal = virtualizerCommandTypeModule.Internal
-local virtualizerEffectTypeModule = require(viewRecycler.Core.Enums.VirtualizerEffectType)
-local virtualizerQueryTypeModule = require(viewRecycler.Core.Enums.VirtualizerQueryType)
-local _ = require(viewRecycler.Core.Virtualizer.VirtualizerSnapshot)
-local listPresentationModule = require(viewRecycler.Core.Virtualizer.ListPresentation)
-local _ = require(viewRecycler.Core.RecyclingScope)
-local virtualizerEngineModule = require(viewRecycler.Core.Virtualizer.VirtualizerEngine)
+﻿local ViewRecycler = script:FindFirstAncestor("ViewRecycler")
+local _ = require(ViewRecycler.Core.DataPrefetch)
+local _ = require(ViewRecycler.Core.DataSource)
+local _ = require(ViewRecycler.Core.Diagnostics)
+local _ = require(ViewRecycler.Core.Layout)
+local _ = require(ViewRecycler.Core.OverscanPolicy)
+local _ = require(ViewRecycler.Core.PinnedItems)
+local _ = require(ViewRecycler.Core.Placement.PlacementTypes)
+local _ = require(ViewRecycler.Core.Enums.ScrollAlignment)
+local SignalsModule = require(ViewRecycler.Parent.Signals)
+local _ = require(ViewRecycler.Core.Types)
+local VirtualizerCommandTypeModule = require(ViewRecycler.Core.Enums.VirtualizerCommandType)
+local External = VirtualizerCommandTypeModule.External
+local Internal = VirtualizerCommandTypeModule.Internal
+local VirtualizerEffectTypeModule = require(ViewRecycler.Core.Enums.VirtualizerEffectType)
+local VirtualizerQueryTypeModule = require(ViewRecycler.Core.Enums.VirtualizerQueryType)
+local _ = require(ViewRecycler.Core.Virtualizer.VirtualizerSnapshot)
+local ListPresentationModule = require(ViewRecycler.Core.Virtualizer.ListPresentation)
+local _ = require(ViewRecycler.Core.RecyclingScope)
+local VirtualizerEngineModule = require(ViewRecycler.Core.Virtualizer.VirtualizerEngine)
 
-return function(p1)
-	-- upvalues: virtualizerEngineModule (ref), listPresentationModule (ref), internal (ref), external (ref), virtualizerEffectTypeModule (ref), signalsModule (ref), virtualizerQueryTypeModule (ref)
-	local var1 = virtualizerEngineModule({
+return function(p1) --[[ Line: 75 | Named "createVirtualizer" ]]
+	-- upvalues: VirtualizerEngineModule (copy), ListPresentationModule (copy), Internal (copy), External (copy), VirtualizerEffectTypeModule (copy), SignalsModule (copy), VirtualizerQueryTypeModule (copy)
+	local RecyclingScope = p1.recyclingScope
+	local VirtualizerEngineModuleResult = VirtualizerEngineModule({
 		dataSource = p1.dataSource,
 		layout = p1.layout,
 		getRecyclableViewType = p1.getItemViewType,
@@ -36,177 +37,190 @@ return function(p1)
 		pinnedStartItem = p1.pinnedStartItem,
 		pinnedEndItem = p1.pinnedEndItem
 	})
-	local var2 = listPresentationModule({
-		recyclingScope = p1.recyclingScope,
+	local ListPresentationModuleResult = ListPresentationModule({
+		recyclingScope = RecyclingScope,
 		prepareDesiredAssignment = p1.prepareDesiredAssignment,
 		prepareAssignment = p1.prepareAssignment,
 		postCommitAssignment = p1.postCommitAssignment,
 		presentAssignment = p1.presentAssignment,
 		applyPlacementIntent = p1.applyPlacementIntent
 	})
-	local dataSource = p1.dataSource
-	local var3 = nil
-	local var4 = false
-	local var5 = p1.active == nil
-	local var6 = false
-	local var7 = false
-	local var8 = false
-	local t = {
+	local DataSource = p1.dataSource
+	local SubscribeResult: (() -> ())? = nil
+	local Flag = false
+	local NoActive = p1.active == nil
+	local Flag1 = false
+	local Flag2 = false
+	local Flag3 = false
+	local config = {
 		boundaryDropped = 0,
 		trusted = true,
-		type = internal.SubmitLogicalMeasurements,
+		type = Internal.SubmitLogicalMeasurements,
 		measurements = {}
 	}
-	local var9 = nil
-	local var10 = nil
+	local Callback = nil
+	local Callback1: (() -> ())? = nil
 	
-	local function _()
-		-- upvalues: var3 (write), var4 (write), var7 (write), dataSource (write), var9 (write), internal (copy)
-		if var3 == nil and var4 and not var7 then
-			var3 = dataSource.subscribe(function(p2)
-				-- upvalues: var9 (copy), internal (copy)
-				var9(nil, { type = internal.ApplyDataSourceChange, changeBatch = p2 })
+	local function _() --[[ Line: 120 | Named "subscribe" ]]
+		-- upvalues: SubscribeResult (ref), Flag (ref), Flag2 (ref), DataSource (ref), Callback (ref), Internal (upval)
+		if SubscribeResult == nil and Flag and not Flag2 then
+			SubscribeResult = DataSource.subscribe(function(ChangeBatch) --[[ Line: 124 ]]
+				-- upvalues: Callback (upval), Internal (upval)
+				Callback(nil, {
+					type = Internal.ApplyDataSourceChange,
+					changeBatch = ChangeBatch
+				})
 			end)
 			
 			return
 		end
 	end
 	
-	local _ = function()
-		-- upvalues: var3 (write)
-		if var3 ~= nil then
-			var3()
-			var3 = nil
+	local _ = function() --[[ Line: 132 | Named "unsubscribe" ]]
+		-- upvalues: SubscribeResult (ref)
+		if SubscribeResult ~= nil then
+			SubscribeResult()
+			SubscribeResult = nil
 		end
 	end
 	
-	local function executeDispatch(p2, p3, p4)
-		-- upvalues: external (copy), dataSource (write), var3 (write), var1 (ref), var4 (write), var7 (write), var9 (write), internal (copy), var5 (write), var2 (ref), var6 (write), virtualizerEffectTypeModule (copy)
-		if p2 ~= nil and (p2.type == external.SetDataSource or p2.type == external.SetDataSourceAndLayout) then
-			local dataSource_1 = p2.dataSource
+	local function executeDispatch(p2, Snapshot, p3) --[[ Line: 139 ]]
+		-- upvalues: External (upval), DataSource (ref), SubscribeResult (ref), VirtualizerEngineModuleResult (copy), Flag (ref), Flag2 (ref), Callback (ref), Internal (upval), NoActive (ref), ListPresentationModuleResult (copy), Flag1 (ref), VirtualizerEffectTypeModule (upval)
+		if p2 ~= nil and (p2.type == External.SetDataSource or p2.type == External.SetDataSourceAndLayout) then
+			local DataSource1 = p2.dataSource
 			
-			if dataSource_1 ~= dataSource then
-				if var3 ~= nil then
-					var3()
-					var3 = nil
+			if DataSource1 ~= DataSource then
+				if SubscribeResult ~= nil then
+					SubscribeResult()
+					SubscribeResult = nil
 				end
-				dataSource = dataSource_1
+				DataSource = DataSource1
 			end
 		end
-		local var11 = if p4 == nil then {
+		local Config = if p3 == nil then {
 			result = nil,
-			snapshot = p3,
+			snapshot = Snapshot,
 			presentation = { assignmentsChanged = false, placementChanged = false },
 			effects = {}
-		} else var1.dispatch(p4)
+		} else VirtualizerEngineModuleResult.dispatch(p3)
 		
-		if p2 ~= nil and p2.type == external.Activate then
-			var4 = true
+		if p2 == nil or p2.type ~= External.Activate then
+			if p2 == nil or p2.type ~= External.SetActive then
+				if p2 ~= nil and p2.type == External.Destroy then
+					if SubscribeResult ~= nil then
+						SubscribeResult()
+						SubscribeResult = nil
+					end
+					ListPresentationModuleResult.destroy()
+					Flag2 = true
+					
+					return Config
+				end
+			else
+				NoActive = p2.active
+			end
+		else
+			Flag = true
 			
-			if var3 == nil and not var7 then
-				var3 = dataSource.subscribe(function(p5)
-					-- upvalues: var9 (copy), internal (copy)
-					var9(nil, { type = internal.ApplyDataSourceChange, changeBatch = p5 })
+			if SubscribeResult == nil and Flag and not Flag2 then
+				SubscribeResult = DataSource.subscribe(function(ChangeBatch) --[[ Line: 124 ]]
+					-- upvalues: Callback (upval), Internal (upval)
+					Callback(nil, {
+						type = Internal.ApplyDataSourceChange,
+						changeBatch = ChangeBatch
+					})
 				end)
 			end
-		elseif p2 == nil or p2.type ~= external.SetActive then
-			if p2 == nil or p2.type ~= external.Destroy then
-				local var12 = nil
-				
-				if var5 then
-					local presentation = var11.presentation
-					local snapshot = var11.snapshot
-					
-					if not var6 or presentation.assignmentsChanged or (presentation.placementChanged or p3.entries ~= snapshot.entries) or p3.contentStartOffset ~= snapshot.contentStartOffset then
-						var12 = var2.apply(p3, snapshot, presentation)
-						var6 = true
-					end
-				else
-					var12 = var2.apply(p3, nil, { assignmentsChanged = true, placementChanged = true })
-					var6 = false
-				end
-				if var12 ~= nil then
-					for i, v in var12 do
-						table.insert(var11.effects, { type = virtualizerEffectTypeModule.Diagnostic, event = v })
-					end
-				end
-				if var3 == nil and var3 == nil and var4 then
-					if var7 then
-						return var11
-					end
-					var3 = dataSource.subscribe(function(p5)
-						-- upvalues: var9 (copy), internal (copy)
-						var9(nil, { type = internal.ApplyDataSourceChange, changeBatch = p5 })
-					end)
-				end
-				return var11
-			elseif var3 ~= nil then
-				var3()
-				var3 = nil
-			end
-			var2.destroy()
-			var7 = true
-			
-			return var11
-		else
-			var5 = p2.active
 		end
+		local ApplyResult = nil
+		
+		if NoActive then
+			local Presentation = Config.presentation
+			local Snapshot1 = Config.snapshot
+			
+			if not Flag1 or Presentation.assignmentsChanged or Presentation.placementChanged or Snapshot.entries ~= Snapshot1.entries or Snapshot.contentStartOffset ~= Snapshot1.contentStartOffset then
+				ApplyResult = ListPresentationModuleResult.apply(Snapshot, Snapshot1, Presentation)
+				Flag1 = true
+			end
+		else
+			ApplyResult = ListPresentationModuleResult.apply(Snapshot, nil, { assignmentsChanged = true, placementChanged = true })
+			Flag1 = false
+		end
+		if ApplyResult ~= nil then
+			for _, Event in ApplyResult do
+				table.insert(Config.effects, {
+					type = VirtualizerEffectTypeModule.Diagnostic,
+					event = Event
+				})
+			end
+		end
+		if SubscribeResult == nil and SubscribeResult == nil and Flag then
+			if Flag2 then
+				return Config
+			end
+			SubscribeResult = DataSource.subscribe(function(ChangeBatch) --[[ Line: 124 ]]
+				-- upvalues: Callback (upval), Internal (upval)
+				Callback(nil, {
+					type = Internal.ApplyDataSourceChange,
+					changeBatch = ChangeBatch
+				})
+			end)
+		end
+		return Config
 	end
 	
-	var9 = function(p5, p6)
-		-- upvalues: external (copy), var2 (ref), t (ref), var10 (write), var8 (write), var7 (write), var1 (ref), executeDispatch (ref), p1 (ref), virtualizerEffectTypeModule (copy)
-		if p6 == nil and p5 ~= nil then
-			if p5.type == external.SubmitMeasurements then
-				local var13, var14 = var2.validateMeasurements(p5.measurements)
-				t.measurements = var13
-				t.boundaryDropped = var14
-				p6 = t
-			elseif p5.type ~= external.SetActive then
-				p6 = p5
+	Callback = function(p4, p5) --[[ Line: 211 ]]
+		-- upvalues: External (upval), ListPresentationModuleResult (copy), config (copy), Callback1 (ref), Flag3 (ref), Flag2 (ref), VirtualizerEngineModuleResult (copy), executeDispatch (copy), p1 (copy), VirtualizerEffectTypeModule (upval)
+		if p5 == nil and p4 ~= nil then
+			if p4.type == External.SubmitMeasurements then
+				config.measurements, config.boundaryDropped = ListPresentationModuleResult.validateMeasurements(p4.measurements)
+				p5 = config
+			elseif p4.type ~= External.SetActive then
+				p5 = p4
 			end
 		end
-		if p5 ~= nil and p5.type == external.Destroy and var10 ~= nil then
-			var10()
-			var10 = nil
+		if p4 ~= nil and p4.type == External.Destroy and Callback1 ~= nil then
+			Callback1()
+			Callback1 = nil
 		end
-		assert(not var8, "Virtualizer: cannot mutate during a transaction")
+		assert(not Flag3, "Virtualizer: cannot mutate during a transaction")
 		
-		if var7 then
-			assert(p5 ~= nil and p5.type == external.Destroy, "Virtualizer: cannot dispatch after destruction")
+		if Flag2 then
+			assert(p4 ~= nil and p4.type == External.Destroy, "Virtualizer: cannot dispatch after destruction")
 		end
-		var8 = true
-		local snapshot = var1.getSnapshot()
-		local ok, status = pcall(executeDispatch, p5, snapshot, p6)
-		var8 = false
+		Flag3 = true
+		local Snapshot = VirtualizerEngineModuleResult.getSnapshot()
+		local Success, Result = pcall(executeDispatch, p4, Snapshot, p5)
+		Flag3 = false
 		
-		if not ok then
-			error(status, 0)
+		if not Success then
+			error(Result, 0)
 		end
 		if p1.diagnostics ~= nil then
-			for i, v in status.effects do
-				if v.type == virtualizerEffectTypeModule.Diagnostic then
-					p1.diagnostics(v.event)
+			for _, effect in Result.effects do
+				if effect.type == VirtualizerEffectTypeModule.Diagnostic then
+					p1.diagnostics(effect.event)
 				end
 			end
 		end
 		if p1.onUpdate ~= nil then
-			p1.onUpdate(snapshot, status)
+			p1.onUpdate(Snapshot, Result)
 		end
-		return status
+		return Result
 	end
 	
 	if p1.active ~= nil then
-		var10 = signalsModule.createEffect(function(p7)
-			-- upvalues: var9 (write), external (copy), p1 (ref)
-			var9({ type = external.SetActive, active = p1.active(p7) })
+		Callback1 = SignalsModule.createEffect(function(p6) --[[ Line: 255 ]]
+			-- upvalues: Callback (ref), External (upval), p1 (copy)
+			Callback({ type = External.SetActive, active = p1.active(p6) })
 		end)
 	end
 	return {
-		dispatch = var9,
-		getSnapshot = var1.getSnapshot,
-		query = function(p7)
-			-- upvalues: virtualizerQueryTypeModule (copy), var2 (ref), var1 (ref)
-			return if p7.type == virtualizerQueryTypeModule.GetItemViews then var2.getItemViews() elseif p7.type == virtualizerQueryTypeModule.GetPlacementIntent then var2.resolvePlacementIntent(p7.itemView) else var1.query(p7)
+		dispatch = Callback,
+		getSnapshot = VirtualizerEngineModuleResult.getSnapshot,
+		query = function(p6) --[[ Line: 263 ]]
+			-- upvalues: VirtualizerQueryTypeModule (upval), ListPresentationModuleResult (copy), VirtualizerEngineModuleResult (copy)
+			return if p6.type == VirtualizerQueryTypeModule.GetItemViews then ListPresentationModuleResult.getItemViews() elseif p6.type == VirtualizerQueryTypeModule.GetPlacementIntent then ListPresentationModuleResult.resolvePlacementIntent(p6.itemView) else VirtualizerEngineModuleResult.query(p6)
 		end
 	}
 end

@@ -1,38 +1,38 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local setAppLoadedModule = require(appChat.Actions.SetAppLoaded)
-local roactChatAnalyticsModule = require(appChat.LegacyAnalytics.RoactChatAnalytics)
-local name = require(appChat.Logger):new(script.Name)
-local var1 = require(parent.Analytics).Analytics.new(game:GetService("RbxAnalyticsService"))
-local appChatNetworkingModule = require(parent.AppChatNetworking)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local SetAppLoadedModule = require(AppChat.Actions.SetAppLoaded)
+local RoactChatAnalyticsModule = require(AppChat.LegacyAnalytics.RoactChatAnalytics)
+local NewResult = require(AppChat.Logger):new(script.Name)
+local NewResult1 = require(Parent.Analytics).Analytics.new((game:GetService("RbxAnalyticsService")))
+local AppChatNetworkingModule = require(Parent.AppChatNetworking)
 
-return function()
-	-- upvalues: name (ref), appChatNetworkingModule (ref), roactChatAnalyticsModule (ref), var1 (ref), setAppLoadedModule (ref)
-	name:info("Fetching chat metadata...")
+return function() --[[ Line: 13 ]]
+	-- upvalues: NewResult (copy), AppChatNetworkingModule (copy), RoactChatAnalyticsModule (copy), NewResult1 (copy), SetAppLoadedModule (copy)
+	NewResult:info("Fetching chat metadata...")
 	
-	return function(p1)
-		-- upvalues: appChatNetworkingModule (copy), name (copy), roactChatAnalyticsModule (copy), var1 (copy), setAppLoadedModule (copy)
-		local localUserId = p1:getState().LocalUserId
+	return function(p1) --[[ Line: 16 ]]
+		-- upvalues: AppChatNetworkingModule (upval), NewResult (upval), RoactChatAnalyticsModule (upval), NewResult1 (upval), SetAppLoadedModule (upval)
+		local LocalUserId = p1:getState().LocalUserId
 		
-		return p1:dispatch(appChatNetworkingModule.rodux.GetMetadata.API()):andThen(function(p2)
-			-- upvalues: name (copy), localUserId (ref), roactChatAnalyticsModule (copy), var1 (copy), p1 (ref), setAppLoadedModule (copy)
-			local isChatEnabled = p2.responseBody.isChatEnabled
+		return p1:dispatch(AppChatNetworkingModule.rodux.GetMetadata.API()):andThen(function(Result) --[[ Line: 20 ]]
+			-- upvalues: NewResult (upval), LocalUserId (copy), RoactChatAnalyticsModule (upval), NewResult1 (upval), p1 (copy), SetAppLoadedModule (upval)
+			local IsChatEnabled = Result.responseBody.isChatEnabled
 			
-			if isChatEnabled then
-				name:info("Chat is enabled and privacy settings allow chat")
+			if IsChatEnabled then
+				NewResult:info("Chat is enabled and privacy settings allow chat")
 				
-				if localUserId then
-					roactChatAnalyticsModule.new(var1, localUserId):userLoadedChat()
+				if LocalUserId then
+					RoactChatAnalyticsModule.new(NewResult1, LocalUserId):userLoadedChat()
 				end
 			else
-				name:info("Chat is disabled or privacy settings do not allow chat")
+				NewResult:info("Chat is disabled or privacy settings do not allow chat")
 			end
-			p1:dispatch(setAppLoadedModule(isChatEnabled))
+			p1:dispatch(SetAppLoadedModule(IsChatEnabled))
 			
-			return isChatEnabled
-		end):catch(function(p2)
-			-- upvalues: name (copy)
-			name:warning("FetchChatData failed with error: {}", tostring(p2))
+			return IsChatEnabled
+		end):catch(function(Err) --[[ Line: 37 ]]
+			-- upvalues: NewResult (upval)
+			NewResult:warning("FetchChatData failed with error: {}", (tostring(Err)))
 		end)
 	end
 end

@@ -1,20 +1,21 @@
-﻿local httpService = game:GetService("HttpService")
-local appStorageService = game:GetService("AppStorageService")
+﻿local HttpService = game:GetService("HttpService")
+local AppStorageService = game:GetService("AppStorageService")
 
-return function(p1)
-	-- upvalues: httpService (ref), appStorageService (ref)
-	local var1 = httpService:JSONEncode({ clientCapabilities = p1:jsonEncode() })
-	local ok, status = pcall(function()
-		-- upvalues: appStorageService (copy)
-		return appStorageService:GetItem("HomePageSduiCapabilities")
+return function(p1) --[[ Line: 9 | Named "writeHomePageSduiPrefetchClientCapabilities" ]]
+	-- upvalues: HttpService (copy), AppStorageService (copy)
+	local Json = HttpService:JSONEncode({ clientCapabilities = p1:jsonEncode() })
+	local Success, Result = pcall(function() --[[ Line: 15 ]]
+		-- upvalues: AppStorageService (upval)
+		return AppStorageService:GetItem("HomePageSduiCapabilities")
 	end)
 	
-	if ok and status == var1 then
+	if not Success or Result ~= Json then
+		pcall(function() --[[ Line: 23 ]]
+			-- upvalues: AppStorageService (upval), Json (copy)
+			AppStorageService:SetItem("HomePageSduiCapabilities", Json)
+			AppStorageService:Flush()
+		end)
+		
 		return
 	end
-	pcall(function()
-		-- upvalues: appStorageService (copy), var1 (ref)
-		appStorageService:SetItem("HomePageSduiCapabilities", var1)
-		appStorageService:Flush()
-	end)
 end

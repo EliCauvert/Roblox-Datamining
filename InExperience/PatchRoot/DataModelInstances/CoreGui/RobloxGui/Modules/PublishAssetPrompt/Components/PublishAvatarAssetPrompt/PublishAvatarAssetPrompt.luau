@@ -1,222 +1,242 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local playersService = game:GetService("Players")
-local reactModule = require(corePackagesService.Packages.React)
-local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
-local mutedError = require(corePackagesService.Workspace.Packages.Loggers).mutedError
-local parent = script.Parent.Parent
-local basePublishPromptModule = require(parent.BasePublishPrompt)
-local objectViewportModule = require(parent.Common.ObjectViewport)
-local labeledTextBoxModule = require(parent.Common.LabeledTextBox)
-local publishInfoListModule = require(parent.Common.PublishInfoList)
-local purchasePromptModule = require(corePackagesService.Workspace.Packages.PurchasePrompt)
-local publishAssetAnalytics = purchasePromptModule.PublishAssetAnalytics
-local parent_1 = parent.Parent
-local setPromptVisibilityModule = require(parent_1.Actions.SetPromptVisibility)
-local roactUtilsModule = require(corePackagesService.Workspace.Packages.RoactUtils)
-local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
-local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
-local constantsModule = require(parent_1.Constants)
-local makeupPreviewUtilsModule = require(parent_1.MakeupPreviewUtils)
-local makeupPartGridModule = require(parent.Common.MakeupPartGrid)
-local getFFlagSingleUploadMakeupSupportModule = require(parent_1.Flags.GetFFlagSingleUploadMakeupSupport)
-local uDim = UDim.new(0, 20)
+﻿local CorePackages = game:GetService("CorePackages")
+local Players = game:GetService("Players")
+local ReactModule = require(CorePackages.Packages.React)
+local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
+local MutedErrorFunction = require(CorePackages.Workspace.Packages.Loggers).mutedError
+local Parent = script.Parent.Parent
+local BasePublishPromptModule = require(Parent.BasePublishPrompt)
+local ObjectViewportModule = require(Parent.Common.ObjectViewport)
+local LabeledTextBoxModule = require(Parent.Common.LabeledTextBox)
+local PublishInfoListModule = require(Parent.Common.PublishInfoList)
+local PurchasePromptModule = require(CorePackages.Workspace.Packages.PurchasePrompt)
+local PublishAssetAnalytics = PurchasePromptModule.PublishAssetAnalytics
+local Parent1 = Parent.Parent
+local SetPromptVisibilityModule = require(Parent1.Actions.SetPromptVisibility)
+local RoactUtilsModule = require(CorePackages.Workspace.Packages.RoactUtils)
+local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
+local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
+local ConstantsModule = require(Parent1.Constants)
+local MakeupPreviewUtilsModule = require(Parent1.MakeupPreviewUtils)
+local MakeupPartGridModule = require(Parent.Common.MakeupPartGrid)
+local GetFFlagSingleUploadMakeupSupportModule = require(Parent1.Flags.GetFFlagSingleUploadMakeupSupport)
+local _UDim = UDim.new(0, 20)
 
-return function(value)
-	-- upvalues: playersService (ref), useSelector (ref), useDispatch (ref), constantsModule (ref), reactModule (ref), getFFlagSingleUploadMakeupSupportModule (ref), makeupPreviewUtilsModule (ref), publishAssetAnalytics (ref), purchasePromptModule (ref), mutedError (ref), setPromptVisibilityModule (ref), robloxTranslatorModule (ref), uDim (ref), objectViewportModule (ref), labeledTextBoxModule (ref), publishInfoListModule (ref), makeupPartGridModule (ref), basePublishPromptModule (ref)
-	local localPlayer = playersService.LocalPlayer
-	assert(localPlayer, "LocalPlayer must not be nil")
-	local var1 = useSelector(function(p1)
-		return p1.promptRequest.promptInfo
+return function(p1) --[[ Line: 47 | Named "PublishAvatarAssetPrompt" ]]
+	-- upvalues: Players (copy), UseSelectorFunction (copy), UseDispatchFunction (copy), ConstantsModule (copy), ReactModule (copy), GetFFlagSingleUploadMakeupSupportModule (copy), MakeupPreviewUtilsModule (copy), PublishAssetAnalytics (copy), PurchasePromptModule (copy), MutedErrorFunction (copy), SetPromptVisibilityModule (copy), RobloxTranslatorModule (copy), _UDim (copy), ObjectViewportModule (copy), LabeledTextBoxModule (copy), PublishInfoListModule (copy), MakeupPartGridModule (copy), BasePublishPromptModule (copy)
+	local LocalPlayer = Players.LocalPlayer
+	assert(LocalPlayer, "LocalPlayer must not be nil")
+	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 52 ]]
+		return p2.promptRequest.promptInfo
 	end)
-	local var2 = useDispatch()
-	local text = localPlayer.Name .. "'s " .. constantsModule.AvatarAssetTypeDefaultName[var1.accessoryType]
-	local var3, var4 = reactModule.useState(false)
-	local var5, var6 = reactModule.useState(text)
-	local var7, var8 = reactModule.useState(true)
-	local var9, var10 = reactModule.useState(text)
-	local var11, var12 = reactModule.useState(true)
-	local var13, var14 = reactModule.useState(false)
-	local var15, var16 = reactModule.useState(true)
-	local var17 = if getFFlagSingleUploadMakeupSupportModule() then makeupPreviewUtilsModule.isMakeupAssetType(var1.accessoryType) else false
-	local var18, var19 = reactModule.useState(nil)
-	reactModule.useEffect(function()
-		-- upvalues: var17 (ref), var1 (ref), makeupPreviewUtilsModule (copy), var19 (ref)
-		if var17 and var1.accessoryInstance then
-			local var20 = makeupPreviewUtilsModule.createMakeupHeadPreview(var1.accessoryInstance, var1.accessoryType)
-			var19(var20)
+	local UseDispatchResult = UseDispatchFunction()
+	local Text = LocalPlayer.Name .. "'s " .. ConstantsModule.AvatarAssetTypeDefaultName[UseSelectorResult.accessoryType]
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(Text)
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(true)
+	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(Text)
+	local UseStateResult5, UseStateResult2_4 = ReactModule.useState(true)
+	local UseStateResult6, UseStateResult2_5 = ReactModule.useState(false)
+	local UseStateResult7, UseStateResult2_6 = ReactModule.useState(true)
+	local IsMakeupAssetType = if GetFFlagSingleUploadMakeupSupportModule() then MakeupPreviewUtilsModule.isMakeupAssetType(UseSelectorResult.accessoryType) else false
+	local UseStateResult8, UseStateResult2_7 = ReactModule.useState(nil)
+	ReactModule.useEffect(function() --[[ Line: 77 ]]
+		-- upvalues: IsMakeupAssetType (copy), UseSelectorResult (copy), MakeupPreviewUtilsModule (upval), UseStateResult2_7 (copy)
+		if IsMakeupAssetType and UseSelectorResult.accessoryInstance then
+			local MakeupHeadPreview = MakeupPreviewUtilsModule.createMakeupHeadPreview(UseSelectorResult.accessoryInstance, UseSelectorResult.accessoryType)
+			UseStateResult2_7(MakeupHeadPreview)
 			
-			return function()
-				-- upvalues: var20 (ref)
-				if var20 then
-					var20:Destroy()
+			return function() --[[ Line: 86 ]]
+				-- upvalues: MakeupHeadPreview (copy)
+				if MakeupHeadPreview then
+					MakeupHeadPreview:Destroy()
 				end
 			end
-		end
-		return function() end
-	end, { var1.accessoryInstance, var17, var1.accessoryType })
-	local var20 = if var17 then var18 else var1.accessoryInstance
-	local var21 = reactModule.useRef(false)
-	local var22 = reactModule.useRef(false)
-	local var23 = reactModule.useRef(nil)
-	local var24 = reactModule.useRef(nil)
-	local var25 = reactModule.useCallback(function()
-		-- upvalues: publishAssetAnalytics (copy), var4 (ref)
-		publishAssetAnalytics.sendButtonClicked(publishAssetAnalytics.Section.BuyCreationPage, publishAssetAnalytics.Element.Expand)
-		var4(true)
-	end, {})
-	local var26 = reactModule.useCallback(function()
-		-- upvalues: var4 (ref)
-		var4(false)
-	end, {})
-	local var27 = reactModule.useCallback(function()
-		-- upvalues: var7 (ref), var11 (ref), var1 (ref), var15 (ref)
-		return var7 and (var11 and (var1.accessoryInstance ~= nil and var15))
-	end, { var7, var11, var1.accessoryInstance, var15 })
-	local var28 = reactModule.useCallback(function()
-		-- upvalues: publishAssetAnalytics (copy), var5 (ref), var9 (ref), purchasePromptModule (copy), var1 (ref), var20 (ref), mutedError (copy)
-		publishAssetAnalytics.sendButtonClicked(publishAssetAnalytics.Section.BuyCreationPage, publishAssetAnalytics.Element.Buy)
-		local t = { name = var5, description = var9 }
-		
-		if purchasePromptModule.initiateAvatarCreationFeePurchase then
-			purchasePromptModule.initiateAvatarCreationFeePurchase(t, var1.guid, var20, var1.priceInRobux)
-			
-			return
-		end
-		mutedError("PurchasePrompt.initiateAvatarCreationFeePurchase is not available")
-	end, {
-		var5, var9, var1.guid, var1.accessoryInstance, var1.priceInRobux, var20
-	})
-	local var29 = reactModule.useCallback(function(p1, p2)
-		-- upvalues: var6 (ref), var8 (ref), var21 (ref), publishAssetAnalytics (copy)
-		var6(p1)
-		var8(p2)
-		
-		if not var21.current then
-			var21.current = true
-			publishAssetAnalytics.sendFieldTouched(publishAssetAnalytics.Section.BuyCreationPage, publishAssetAnalytics.Element.Name)
-		end
-	end, {})
-	local var30 = reactModule.useCallback(function(p1, p2)
-		-- upvalues: var10 (ref), var12 (ref), var22 (ref), publishAssetAnalytics (copy)
-		var10(p1)
-		var12(p2)
-		
-		if not var22.current then
-			var22.current = true
-			publishAssetAnalytics.sendFieldTouched(publishAssetAnalytics.Section.BuyCreationPage, publishAssetAnalytics.Element.Description)
-		end
-	end, {})
-	
-	local var31 = function(p1)
-		-- upvalues: var2 (ref), setPromptVisibilityModule (copy), var14 (ref), var16 (ref)
-		local isShown = p1.isShown
-		
-		if p1.hasCompletedPurchase and not isShown then
-			var2(setPromptVisibilityModule(false))
-			
-			return
-		end
-		var14(isShown)
-		
-		if isShown then
-			var16(false)
-		end
-	end
-	
-	local var32 = function()
-		-- upvalues: var16 (ref)
-		var16(true)
-	end
-	
-	reactModule.useEffect(function()
-		-- upvalues: purchasePromptModule (copy), var23 (ref), var31 (ref), var24 (ref), var32 (ref), mutedError (copy), publishAssetAnalytics (copy)
-		local windowStateChangedEvent = purchasePromptModule.windowStateChangedEvent
-		local promptStateSetToNoneEvent = purchasePromptModule.promptStateSetToNoneEvent
-		
-		if windowStateChangedEvent and promptStateSetToNoneEvent then
-			var23.current = windowStateChangedEvent:Connect(var31)
-			var24.current = promptStateSetToNoneEvent:Connect(var32)
 		else
-			mutedError("PurchasePrompt.windowStateChangedEvent or PurchasePrompt.promptStateSetToNoneEvent is not available")
+			return function() --[[ Line: 79 ]] end
 		end
-		publishAssetAnalytics.sendPageLoad(publishAssetAnalytics.Section.BuyCreationPage)
+	end, {
+		UseSelectorResult.accessoryInstance,
+		IsMakeupAssetType,
+		UseSelectorResult.accessoryType
+	})
+	local UseStateResult9 = if IsMakeupAssetType then UseStateResult8 else UseSelectorResult.accessoryInstance
+	local UseRefResult = ReactModule.useRef(false)
+	local UseRefResult1 = ReactModule.useRef(false)
+	local UseRefResult2 = ReactModule.useRef(nil)
+	local UseRefResult3 = ReactModule.useRef(nil)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 102 ]]
+		-- upvalues: PublishAssetAnalytics (upval), UseStateResult2 (copy)
+		PublishAssetAnalytics.sendButtonClicked(PublishAssetAnalytics.Section.BuyCreationPage, PublishAssetAnalytics.Element.Expand)
+		UseStateResult2(true)
+	end, {})
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 107 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(false)
+	end, {})
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 111 ]]
+		-- upvalues: UseStateResult3 (copy), UseStateResult5 (copy), UseSelectorResult (copy), UseStateResult7 (copy)
+		return UseStateResult3 and (UseStateResult5 and (UseSelectorResult.accessoryInstance ~= nil and UseStateResult7))
+	end, {
+		UseStateResult3,
+		UseStateResult5,
+		UseSelectorResult.accessoryInstance,
+		UseStateResult7
+	})
+	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 116 ]]
+		-- upvalues: PublishAssetAnalytics (upval), UseStateResult1 (copy), UseStateResult4 (copy), PurchasePromptModule (upval), UseSelectorResult (copy), UseStateResult9 (copy), MutedErrorFunction (upval)
+		PublishAssetAnalytics.sendButtonClicked(PublishAssetAnalytics.Section.BuyCreationPage, PublishAssetAnalytics.Element.Buy)
+		local config = { name = UseStateResult1, description = UseStateResult4 }
 		
-		return function()
-			-- upvalues: var23 (copy), mutedError (copy), var24 (copy)
-			if var23.current then
-				var23.current:Disconnect()
-				var23.current = nil
+		if PurchasePromptModule.initiateAvatarCreationFeePurchase then
+			PurchasePromptModule.initiateAvatarCreationFeePurchase(config, UseSelectorResult.guid, UseStateResult9, UseSelectorResult.priceInRobux)
+			
+			return
+		else
+			MutedErrorFunction("PurchasePrompt.initiateAvatarCreationFeePurchase is not available")
+		end
+	end, {
+		UseStateResult1, UseStateResult4, UseSelectorResult.guid,
+		UseSelectorResult.accessoryInstance, UseSelectorResult.priceInRobux,
+		UseStateResult9
+	})
+	local UseResult4 = ReactModule.useCallback(function(p2, p3) --[[ Line: 138 ]]
+		-- upvalues: UseStateResult2_1 (copy), UseStateResult2_2 (copy), UseRefResult (copy), PublishAssetAnalytics (upval)
+		UseStateResult2_1(p2)
+		UseStateResult2_2(p3)
+		
+		if not UseRefResult.current then
+			UseRefResult.current = true
+			PublishAssetAnalytics.sendFieldTouched(PublishAssetAnalytics.Section.BuyCreationPage, PublishAssetAnalytics.Element.Name)
+		end
+	end, {})
+	local UseResult5 = ReactModule.useCallback(function(p2, p3) --[[ Line: 148 ]]
+		-- upvalues: UseStateResult2_3 (copy), UseStateResult2_4 (copy), UseRefResult1 (copy), PublishAssetAnalytics (upval)
+		UseStateResult2_3(p2)
+		UseStateResult2_4(p3)
+		
+		if not UseRefResult1.current then
+			UseRefResult1.current = true
+			PublishAssetAnalytics.sendFieldTouched(PublishAssetAnalytics.Section.BuyCreationPage, PublishAssetAnalytics.Element.Description)
+		end
+	end, {})
+	
+	local function Callback(p2) --[[ Line: 158 ]]
+		-- upvalues: UseDispatchResult (copy), SetPromptVisibilityModule (upval), UseStateResult2_5 (copy), UseStateResult2_6 (copy)
+		local IsShown = p2.isShown
+		
+		if p2.hasCompletedPurchase and not IsShown then
+			UseDispatchResult(SetPromptVisibilityModule(false))
+			
+			return
+		end
+		UseStateResult2_5(IsShown)
+		
+		if IsShown then
+			UseStateResult2_6(false)
+		end
+	end
+	
+	local function Callback1() --[[ Line: 172 ]]
+		-- upvalues: UseStateResult2_6 (copy)
+		UseStateResult2_6(true)
+	end
+	
+	ReactModule.useEffect(function() --[[ Line: 177 ]]
+		-- upvalues: PurchasePromptModule (upval), UseRefResult2 (copy), Callback (copy), UseRefResult3 (copy), Callback1 (copy), MutedErrorFunction (upval), PublishAssetAnalytics (upval)
+		local WindowStateChangedEvent = PurchasePromptModule.windowStateChangedEvent
+		local PromptStateSetToNoneEvent = PurchasePromptModule.promptStateSetToNoneEvent
+		
+		if WindowStateChangedEvent and PromptStateSetToNoneEvent then
+			UseRefResult2.current = WindowStateChangedEvent:Connect(Callback)
+			UseRefResult3.current = PromptStateSetToNoneEvent:Connect(Callback1)
+		else
+			MutedErrorFunction("PurchasePrompt.windowStateChangedEvent or PurchasePrompt.promptStateSetToNoneEvent is not available")
+		end
+		PublishAssetAnalytics.sendPageLoad(PublishAssetAnalytics.Section.BuyCreationPage)
+		
+		return function() --[[ Line: 191 ]]
+			-- upvalues: UseRefResult2 (upval), MutedErrorFunction (upval), UseRefResult3 (upval)
+			if UseRefResult2.current then
+				UseRefResult2.current:Disconnect()
+				UseRefResult2.current = nil
 			else
-				mutedError("windowStateChangedConnection was not established")
+				MutedErrorFunction("windowStateChangedConnection was not established")
 			end
-			if var24.current then
-				var24.current:Disconnect()
-				var24.current = nil
+			if UseRefResult3.current then
+				UseRefResult3.current:Disconnect()
+				UseRefResult3.current = nil
 				
 				return
+			else
+				MutedErrorFunction("promptStateSetToNoneConnection was not established")
 			end
-			mutedError("promptStateSetToNoneConnection was not established")
 		end
 	end, {})
-	local text_1 = (if var17 then robloxTranslatorModule:FormatByKey("Feature.Catalog.Label.Makeup") else robloxTranslatorModule:FormatByKey("Feature.Avatar.Label.Accessory")) .. " | " .. robloxTranslatorModule:FormatByKey(constantsModule.AvatarAssetTypeLocalized[var1.accessoryType])
+	local Text1 = (if IsMakeupAssetType then RobloxTranslatorModule:FormatByKey("Feature.Catalog.Label.Makeup") else RobloxTranslatorModule:FormatByKey("Feature.Avatar.Label.Accessory")) .. " | " .. RobloxTranslatorModule:FormatByKey(ConstantsModule.AvatarAssetTypeLocalized[UseSelectorResult.accessoryType])
 	
-	return reactModule.createElement(basePublishPromptModule, {
+	return ReactModule.createElement(BasePublishPromptModule, {
 		delayInputSeconds = 3,
-		promptBody = reactModule.useCallback(function()
-			-- upvalues: var20 (ref), reactModule (copy), uDim (copy), objectViewportModule (copy), var25 (ref), getFFlagSingleUploadMakeupSupportModule (copy), var17 (ref), labeledTextBoxModule (copy), robloxTranslatorModule (copy), var9 (ref), var30 (ref), publishInfoListModule (copy), text_1 (ref), makeupPartGridModule (copy), var1 (ref), var5 (ref), value (ref)
-			return reactModule.createElement(reactModule.Fragment, nil, {
-				UIListLayout = reactModule.createElement("UIListLayout", {
-					Padding = uDim,
+		promptBody = ReactModule.useCallback(function() --[[ Line: 215 ]]
+			-- upvalues: UseStateResult9 (copy), ReactModule (upval), _UDim (upval), ObjectViewportModule (upval), UseResult (copy), GetFFlagSingleUploadMakeupSupportModule (upval), IsMakeupAssetType (copy), LabeledTextBoxModule (upval), RobloxTranslatorModule (upval), UseStateResult4 (copy), UseResult5 (copy), PublishInfoListModule (upval), Text1 (copy), MakeupPartGridModule (upval), UseSelectorResult (copy), UseStateResult1 (copy), p1 (copy)
+			return ReactModule.createElement(ReactModule.Fragment, nil, {
+				UIListLayout = ReactModule.createElement("UIListLayout", {
+					Padding = _UDim,
 					HorizontalAlignment = Enum.HorizontalAlignment.Center,
 					SortOrder = Enum.SortOrder.LayoutOrder,
 					FillDirection = Enum.FillDirection.Vertical
 				}),
-				UIPadding = reactModule.createElement("UIPadding", { PaddingBottom = uDim, PaddingTop = uDim }),
-				EmbeddedPreview = reactModule.createElement(objectViewportModule, {
+				UIPadding = ReactModule.createElement("UIPadding", { PaddingBottom = _UDim, PaddingTop = _UDim }),
+				EmbeddedPreview = ReactModule.createElement(ObjectViewportModule, {
 					fieldOfView = 30,
 					LayoutOrder = 1,
-					openPreviewView = var25,
-					model = var20,
-					isLoading = var20 == nil,
-					useFullBodyCameraSettings = if getFFlagSingleUploadMakeupSupportModule() then not var17 else true,
-					isMakeupPreview = var17
+					openPreviewView = UseResult,
+					model = UseStateResult9,
+					isLoading = UseStateResult9 == nil,
+					useFullBodyCameraSettings = not GetFFlagSingleUploadMakeupSupportModule() or not IsMakeupAssetType,
+					isMakeupPreview = IsMakeupAssetType
 				}),
-				DescriptionInput = reactModule.createElement(labeledTextBoxModule, {
+				DescriptionInput = ReactModule.createElement(LabeledTextBoxModule, {
 					LayoutOrder = 2,
 					centerText = false,
 					maxLength = 1000,
 					textBoxHeight = 104,
-					labelText = robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.Description"),
-					defaultText = var9,
-					onTextUpdated = var30,
-					invalidInputText = robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.InvalidDescription")
+					labelText = RobloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.Description"),
+					defaultText = UseStateResult4,
+					onTextUpdated = UseResult5,
+					invalidInputText = RobloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.InvalidDescription")
 				}),
-				InfoList = reactModule.createElement(publishInfoListModule, { LayoutOrder = 3, typeName = text_1 }),
-				MakeupGrid = var17 and reactModule.createElement(makeupPartGridModule, {
+				InfoList = ReactModule.createElement(PublishInfoListModule, { LayoutOrder = 3, typeName = Text1 }),
+				MakeupGrid = IsMakeupAssetType and ReactModule.createElement(MakeupPartGridModule, {
 					showAssetTypeInLabel = false,
 					LayoutOrder = 4,
-					singleDecal = var1.accessoryInstance,
-					singleAssetType = var1.accessoryType,
-					makeupEntries = { { sortOrder = 1, assetType = var1.accessoryType } },
-					name = var5,
-					screenSize = value.screenSize
+					singleDecal = UseSelectorResult.accessoryInstance,
+					singleAssetType = UseSelectorResult.accessoryType,
+					makeupEntries = {
+						{
+							sortOrder = 1,
+							assetType = UseSelectorResult.accessoryType
+						}
+					},
+					name = UseStateResult1,
+					screenSize = p1.screenSize
 				}) or nil
 			})
 		end, {
-			var20, var1.accessoryType, var9, if var17 then var5 else nil, var17, text_1
+			UseStateResult9, UseSelectorResult.accessoryType, UseStateResult4,
+			if IsMakeupAssetType then UseStateResult1 else nil, IsMakeupAssetType, Text1
 		})(),
-		screenSize = value.screenSize,
-		showingPreviewView = var3,
-		closePreviewView = var26,
-		isMakeupPreview = var17,
-		asset = var20,
-		nameLabel = robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.Name"),
-		defaultName = var5,
-		titleText = robloxTranslatorModule:FormatByKey("CoreScripts.PublishAvatarPrompt.BuyCreation"),
-		onNameUpdated = var29,
-		canSubmit = var27,
-		onSubmit = var28,
-		priceInRobux = var1.priceInRobux,
-		showTopScrim = var13
+		screenSize = p1.screenSize,
+		showingPreviewView = UseStateResult,
+		closePreviewView = UseResult1,
+		isMakeupPreview = IsMakeupAssetType,
+		asset = UseStateResult9,
+		nameLabel = RobloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.Name"),
+		defaultName = UseStateResult1,
+		titleText = RobloxTranslatorModule:FormatByKey("CoreScripts.PublishAvatarPrompt.BuyCreation"),
+		onNameUpdated = UseResult4,
+		canSubmit = UseResult2,
+		onSubmit = UseResult3,
+		priceInRobux = UseSelectorResult.priceInRobux,
+		showTopScrim = UseStateResult6
 	})
 end

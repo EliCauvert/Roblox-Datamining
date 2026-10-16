@@ -1,13 +1,12 @@
-﻿local localizationService = game:GetService("LocalizationService")
-local parent = script:FindFirstAncestor("AdPlayer").Parent
-local reactModule = require(parent.React)
-local foundationProvider = require(parent.Foundation).FoundationProvider
-local localizationProvider = require(parent.Localization).LocalizationProvider
-local var1 = require(parent.InExperienceLocales).Localization.new(localizationService.RobloxLocaleId)
+﻿local Parent = script:FindFirstAncestor("AdPlayer").Parent
+local ReactModule = require(Parent.React)
+local FoundationProvider = require(Parent.Foundation).FoundationProvider
+local LocalizationProvider = require(Parent.Localization).LocalizationProvider
+local NewResult = require(Parent.InExperienceLocales).Localization.new(game:GetService("LocalizationService").RobloxLocaleId)
 
-return function(p1)
-	-- upvalues: reactModule (ref), localizationProvider (ref), var1 (ref), foundationProvider (ref)
-	return reactModule.createElement(localizationProvider, { localization = var1 }, {
-		foundationProvider = reactModule.createElement(foundationProvider, {}, p1.children)
+return function(p1) --[[ Line: 14 ]]
+	-- upvalues: ReactModule (copy), LocalizationProvider (copy), NewResult (copy), FoundationProvider (copy)
+	return ReactModule.createElement(LocalizationProvider, { localization = NewResult }, {
+		foundationProvider = ReactModule.createElement(FoundationProvider, {}, p1.children)
 	})
 end

@@ -1,13 +1,13 @@
 ﻿local _ = require(script:FindFirstAncestor("Groups").Parent.SocialLuaAnalytics)
-local eventNamesModule = require(script.Parent.EventNames)
+local EventNamesModule = require(script.Parent.EventNames)
 
 return {
-	[eventNamesModule.GroupsListCreateGroupClicked] = {
+	[EventNamesModule.GroupsListCreateGroupClicked] = {
 		context = "myGroups",
 		eventType = "groupPageClickEvent",
 		additionalInfo = { clickTargetType = "createGroup" }
 	},
-	[eventNamesModule.GroupsListPageExposure] = {
+	[EventNamesModule.GroupsListPageExposure] = {
 		context = "myGroups",
 		eventType = "groupPageExposureEvent",
 		additionalInfo = { exposureType = "myGroups" }

@@ -1,39 +1,38 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local settingsShowSignal = require(corePackagesService.Workspace.Packages.CoreScriptsCommon).SettingsShowSignal
-local reactModule = require(corePackagesService.Packages.React)
-local signalsReactModule = require(corePackagesService.Packages.SignalsReact)
-local parent = script.Parent.Parent
-local enumReactPageModule = require(parent.EnumReactPage)
-local portalWithFoundationStylelinkModule = require(parent.Components.PortalWithFoundationStylelink)
-local reactPageSignalModule = require(parent.ReactPageSignal)
-local traversalHistoryPage = require(parent.Components.Traversal).TraversalHistoryPage
+﻿local CorePackages = game:GetService("CorePackages")
+local SettingsShowSignal = require(CorePackages.Workspace.Packages.CoreScriptsCommon).SettingsShowSignal
+local ReactModule = require(CorePackages.Packages.React)
+local SignalsReactModule = require(CorePackages.Packages.SignalsReact)
+local Parent = script.Parent.Parent
+local EnumReactPageModule = require(Parent.EnumReactPage)
+local PortalWithFoundationStylelinkModule = require(Parent.Components.PortalWithFoundationStylelink)
+local ReactPageSignalModule = require(Parent.ReactPageSignal)
+local TraversalHistoryPage = require(Parent.Components.Traversal).TraversalHistoryPage
 
-return reactModule.memo(reactModule.forwardRef(function(p1, _)
-	-- upvalues: reactPageSignalModule (ref), signalsReactModule (ref), enumReactPageModule (ref), reactModule (ref), traversalHistoryPage (ref), settingsShowSignal (ref), portalWithFoundationStylelinkModule (ref)
-	local var1 = signalsReactModule.useSignalState(reactPageSignalModule(false).currentReactPage)
-	local var2 = if var1 == enumReactPageModule.TraversalHistory then reactModule.createElement(traversalHistoryPage) else nil
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), p1 (ref)
-		if var1 then
-			p1.onMount()
-			
-			return p1.onUnmount
-		end
-	end, { var1 })
-	reactModule.useEffect(function()
-		-- upvalues: settingsShowSignal (copy), p1 (ref)
-		local var3 = settingsShowSignal:connect(function(p2)
-			-- upvalues: p1 (copy)
+return ReactModule.memo(ReactModule.forwardRef(function(p1, _) --[[ Line: 25 | Named "InExperienceMenuReactPage" ]]
+	-- upvalues: ReactPageSignalModule (copy), SignalsReactModule (copy), EnumReactPageModule (copy), ReactModule (copy), TraversalHistoryPage (copy), SettingsShowSignal (copy), PortalWithFoundationStylelinkModule (copy)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(ReactPageSignalModule(false).currentReactPage)
+	local Element = if UseSignalStateResult == EnumReactPageModule.TraversalHistory then ReactModule.createElement(TraversalHistoryPage) else nil
+	ReactModule.useEffect(function() --[[ Line: 34 ]]
+		-- upvalues: UseSignalStateResult (copy), p1 (copy)
+		if not UseSignalStateResult then return end
+		p1.onMount()
+		
+		return p1.onUnmount
+	end, { UseSignalStateResult })
+	ReactModule.useEffect(function() --[[ Line: 42 ]]
+		-- upvalues: SettingsShowSignal (upval), p1 (copy)
+		local Connection = SettingsShowSignal:connect(function(p2) --[[ Line: 43 ]]
+			-- upvalues: p1 (upval)
 			if not p2 then
 				p1.onUnmount()
 			end
 		end)
 		
-		return function()
-			-- upvalues: var3 (ref)
-			var3:Disconnect()
+		return function() --[[ Line: 48 ]]
+			-- upvalues: Connection (copy)
+			Connection:Disconnect()
 		end
 	end, {})
 	
-	return reactModule.createElement(portalWithFoundationStylelinkModule, { parent = p1.mountTo }, { Page = var2 })
+	return ReactModule.createElement(PortalWithFoundationStylelinkModule, { parent = p1.mountTo }, { Page = Element })
 end))

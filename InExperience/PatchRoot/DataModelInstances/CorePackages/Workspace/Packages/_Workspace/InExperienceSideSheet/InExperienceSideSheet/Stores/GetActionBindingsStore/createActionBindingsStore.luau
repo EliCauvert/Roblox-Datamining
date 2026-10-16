@@ -1,99 +1,99 @@
-﻿local contextActionService = game:GetService("ContextActionService")
-local inExperienceSideSheet = script:FindFirstAncestor("InExperienceSideSheet")
-local parent = inExperienceSideSheet.Parent
-local signalsModule = require(parent.Signals)
-local analyticsConstantsModule = require(inExperienceSideSheet.Analytics.AnalyticsConstants)
-local sidesheetAnalyticsModule = require(inExperienceSideSheet.Analytics.SidesheetAnalytics)
-local enumsModule = require(inExperienceSideSheet.Common.Enums)
-local getIntegrationsStoreModule = require(inExperienceSideSheet.Stores.GetIntegrationsStore)
-local closePeoplePageOpenedWithSideSheetModule = require(inExperienceSideSheet.Utils.closePeoplePageOpenedWithSideSheet)
-local getSideSheetVisibilityModule = require(inExperienceSideSheet.Utils.getSideSheetVisibility)
-local toggleSideSheetModule = require(inExperienceSideSheet.Utils.toggleSideSheet)
-local fFlagSideSheetOpenPeoplePage = require(inExperienceSideSheet.Flags).FFlagSideSheetOpenPeoplePage
-local fFlagShowSwitchServerButton = require(parent.SharedFlags).FFlagShowSwitchServerButton
-local isPioneerLaunch = require(parent.PioneerUtils).isPioneerLaunch
+﻿local ContextActionService = game:GetService("ContextActionService")
+local InExperienceSideSheet = script:FindFirstAncestor("InExperienceSideSheet")
+local Parent = InExperienceSideSheet.Parent
+local SignalsModule = require(Parent.Signals)
+local AnalyticsConstantsModule = require(InExperienceSideSheet.Analytics.AnalyticsConstants)
+local SidesheetAnalyticsModule = require(InExperienceSideSheet.Analytics.SidesheetAnalytics)
+local EnumsModule = require(InExperienceSideSheet.Common.Enums)
+local GetIntegrationsStoreModule = require(InExperienceSideSheet.Stores.GetIntegrationsStore)
+local ClosePeoplePageOpenedWithSideSheetModule = require(InExperienceSideSheet.Utils.closePeoplePageOpenedWithSideSheet)
+local GetSideSheetVisibilityModule = require(InExperienceSideSheet.Utils.getSideSheetVisibility)
+local ToggleSideSheetModule = require(InExperienceSideSheet.Utils.toggleSideSheet)
+local FFlagSideSheetOpenPeoplePage = require(InExperienceSideSheet.Flags).FFlagSideSheetOpenPeoplePage
+local FFlagShowSwitchServerButton = require(Parent.SharedFlags).FFlagShowSwitchServerButton
+local IsPioneerLaunchFunction = require(Parent.PioneerUtils).isPioneerLaunch
 
-local function createActionBinding(p1)
-	-- upvalues: signalsModule (ref)
-	local var1, var2 = signalsModule.createSignal(true)
-	local var3, var4 = signalsModule.createSignal(function()
-		return function() end
+local function createActionBinding(KeyCodes) --[[ Line: 38 ]]
+	-- upvalues: SignalsModule (copy)
+	local Signal, Signal2 = SignalsModule.createSignal(true)
+	local Signal1, Signal2_1 = SignalsModule.createSignal(function() --[[ Line: 40 ]]
+		return function() --[[ Line: 41 ]] end
 	end)
 	
 	return {
-		keyCodes = p1,
-		getOnActivated = var3,
-		setOnActivated = var4,
-		getIsEnabled = var1,
-		setIsEnabled = var2
+		keyCodes = KeyCodes,
+		getOnActivated = Signal1,
+		setOnActivated = Signal2_1,
+		getIsEnabled = Signal,
+		setIsEnabled = Signal2
 	}
 end
 
-return function()
-	-- upvalues: enumsModule (ref), createActionBinding (ref), fFlagShowSwitchServerButton (ref), isPioneerLaunch (ref), signalsModule (ref), getIntegrationsStoreModule (ref), fFlagSideSheetOpenPeoplePage (ref), closePeoplePageOpenedWithSideSheetModule (ref), toggleSideSheetModule (ref), sidesheetAnalyticsModule (ref), analyticsConstantsModule (ref), getSideSheetVisibilityModule (ref), contextActionService (ref)
-	local t = {
-		[enumsModule.ActionBinding.Leave] = createActionBinding({ Enum.KeyCode.L, Enum.KeyCode.ButtonX }),
-		[enumsModule.ActionBinding.Respawn] = createActionBinding({ Enum.KeyCode.R, Enum.KeyCode.ButtonY })
+return function() --[[ Line: 53 | Named "createActionBindingsStore" ]]
+	-- upvalues: EnumsModule (copy), createActionBinding (copy), FFlagShowSwitchServerButton (copy), IsPioneerLaunchFunction (copy), SignalsModule (copy), GetIntegrationsStoreModule (copy), FFlagSideSheetOpenPeoplePage (copy), ClosePeoplePageOpenedWithSideSheetModule (copy), ToggleSideSheetModule (copy), SidesheetAnalyticsModule (copy), AnalyticsConstantsModule (copy), GetSideSheetVisibilityModule (copy), ContextActionService (copy)
+	local SessionActionBindings = {
+		[EnumsModule.ActionBinding.Leave] = createActionBinding({ Enum.KeyCode.L, Enum.KeyCode.ButtonX }),
+		[EnumsModule.ActionBinding.Respawn] = createActionBinding({ Enum.KeyCode.R, Enum.KeyCode.ButtonY })
 	}
 	
-	if fFlagShowSwitchServerButton or isPioneerLaunch() then
-		t[enumsModule.ActionBinding.SwitchServer] = createActionBinding(nil)
+	if FFlagShowSwitchServerButton or IsPioneerLaunchFunction() then
+		SessionActionBindings[EnumsModule.ActionBinding.SwitchServer] = createActionBinding(nil)
 	end
-	local var1 = signalsModule.createEffect(function(p1)
-		-- upvalues: getIntegrationsStoreModule (copy), t (ref), fFlagSideSheetOpenPeoplePage (copy), closePeoplePageOpenedWithSideSheetModule (copy), toggleSideSheetModule (copy), sidesheetAnalyticsModule (copy), analyticsConstantsModule (copy)
-		for i, v in getIntegrationsStoreModule(p1).getSessionActionIntegrations(p1) do
-			local id = t[v.id]
+	local Effect = SignalsModule.createEffect(function(p1) --[[ Line: 63 ]]
+		-- upvalues: GetIntegrationsStoreModule (upval), SessionActionBindings (copy), FFlagSideSheetOpenPeoplePage (upval), ClosePeoplePageOpenedWithSideSheetModule (upval), ToggleSideSheetModule (upval), SidesheetAnalyticsModule (upval), AnalyticsConstantsModule (upval)
+		for _, value in GetIntegrationsStoreModule(p1).getSessionActionIntegrations(p1) do
+			local SessionActionBinding = SessionActionBindings[value.id]
 			
-			if id then
-				id.setOnActivated(function()
-					-- upvalues: v (ref), fFlagSideSheetOpenPeoplePage (copy), closePeoplePageOpenedWithSideSheetModule (copy), toggleSideSheetModule (copy), sidesheetAnalyticsModule (copy), analyticsConstantsModule (copy)
-					return function()
-						-- upvalues: v (copy), fFlagSideSheetOpenPeoplePage (copy), closePeoplePageOpenedWithSideSheetModule (copy), toggleSideSheetModule (copy), sidesheetAnalyticsModule (copy), analyticsConstantsModule (copy)
-						v.activated()
+			if SessionActionBinding then
+				SessionActionBinding.setOnActivated(function() --[[ Line: 71 ]]
+					-- upvalues: value (copy), FFlagSideSheetOpenPeoplePage (upval), ClosePeoplePageOpenedWithSideSheetModule (upval), ToggleSideSheetModule (upval), SidesheetAnalyticsModule (upval), AnalyticsConstantsModule (upval)
+					return function() --[[ Line: 72 ]]
+						-- upvalues: value (upval), FFlagSideSheetOpenPeoplePage (upval), ClosePeoplePageOpenedWithSideSheetModule (upval), ToggleSideSheetModule (upval), SidesheetAnalyticsModule (upval), AnalyticsConstantsModule (upval)
+						value.activated()
 						
-						if fFlagSideSheetOpenPeoplePage then
-							closePeoplePageOpenedWithSideSheetModule()
+						if FFlagSideSheetOpenPeoplePage then
+							ClosePeoplePageOpenedWithSideSheetModule()
 						end
-						toggleSideSheetModule(false)
-						sidesheetAnalyticsModule.logSidesheetClosed(analyticsConstantsModule.Source.ItemSelected)
+						ToggleSideSheetModule(false)
+						SidesheetAnalyticsModule.logSidesheetClosed(AnalyticsConstantsModule.Source.ItemSelected)
 					end
 				end)
 			end
 		end
 	end)
-	local var2 = signalsModule.createEffect(function(p2)
-		-- upvalues: getSideSheetVisibilityModule (copy), t (ref), isPioneerLaunch (copy), fFlagShowSwitchServerButton (copy), contextActionService (copy)
-		if getSideSheetVisibilityModule(p2) then
-			for i, v in t do
-				if not isPioneerLaunch() and not fFlagShowSwitchServerButton or v.keyCodes ~= nil then
-					local var3 = function(_, p3, _)
-						-- upvalues: v (ref)
-						if p3 == Enum.UserInputState.Begin then
-							v.getOnActivated()()
+	local Effect1 = SignalsModule.createEffect(function(p2) --[[ Line: 86 ]]
+		-- upvalues: GetSideSheetVisibilityModule (upval), SessionActionBindings (copy), IsPioneerLaunchFunction (upval), FFlagShowSwitchServerButton (upval), ContextActionService (upval)
+		if GetSideSheetVisibilityModule(p2) then
+			for i, sessionActionBinding in SessionActionBindings do
+				if not IsPioneerLaunchFunction() and not FFlagShowSwitchServerButton or sessionActionBinding.keyCodes ~= nil then
+					local function FunctionToBind(_, UserInputState, _) --[[ Line: 93 ]]
+						-- upvalues: sessionActionBinding (copy)
+						if UserInputState == Enum.UserInputState.Begin then
+							sessionActionBinding.getOnActivated()()
 						end
 					end
 					
-					if v.getIsEnabled(p2) then
-						contextActionService:BindCoreAction(i, var3, false, unpack(v.keyCodes))
+					if sessionActionBinding.getIsEnabled(p2) then
+						ContextActionService:BindCoreAction(i, FunctionToBind, false, unpack(sessionActionBinding.keyCodes))
 					else
-						contextActionService:UnbindCoreAction(i)
+						ContextActionService:UnbindCoreAction(i)
 					end
 				end
 			end
 			return
 		else
-			for i in t do
-				contextActionService:UnbindCoreAction(i)
+			for sessionActionBinding1 in SessionActionBindings do
+				ContextActionService:UnbindCoreAction(sessionActionBinding1)
 			end
 		end
 	end)
 	
 	return {
-		sessionActionBindings = t,
-		cleanUp = function()
-			-- upvalues: var2 (ref), var1 (ref)
-			var2()
-			var1()
+		sessionActionBindings = SessionActionBindings,
+		cleanUp = function() --[[ Line: 113 ]]
+			-- upvalues: Effect1 (copy), Effect (copy)
+			Effect1()
+			Effect()
 		end
 	}
 end

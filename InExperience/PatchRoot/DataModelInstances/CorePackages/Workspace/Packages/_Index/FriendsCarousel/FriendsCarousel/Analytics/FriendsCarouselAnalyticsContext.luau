@@ -1,3 +1,3 @@
-﻿local dependenciesModule = require(script:FindFirstAncestor("FriendsCarousel").dependencies)
+﻿local DependenciesModule = require(script:FindFirstAncestor("FriendsCarousel").dependencies)
 
-return dependenciesModule.Roact.createContext({ fireEvent = dependenciesModule.Dash.noop })
+return DependenciesModule.Roact.createContext({ fireEvent = DependenciesModule.Dash.noop })

@@ -1,32 +1,34 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local UIBloxModule = require(parent.UIBlox)
-local images = UIBloxModule.App.ImageSet.Images
-local playerContext = UIBloxModule.App.Indicator.PlayerContext
-local textKeysModule = require(profilePlatform.Common.TextKeys)
-local enumsModule = require(profilePlatform.Common.Enums)
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UIBloxModule = require(Parent.UIBlox)
+local Images = UIBloxModule.App.ImageSet.Images
+local PlayerContext = UIBloxModule.App.Indicator.PlayerContext
+local TextKeysModule = require(ProfilePlatform.Common.TextKeys)
+local EnumsModule = require(ProfilePlatform.Common.Enums)
 
-return function(p1)
-	-- upvalues: useLocalization (ref), enumsModule (ref), textKeysModule (ref), images (ref), reactModule (ref), playerContext (ref)
-	local contextualType = p1.contextualType
+return function(p1) --[[ Line: 21 | Named "ContextualInformation" ]]
+	-- upvalues: UseLocalizationFunction (copy), EnumsModule (copy), TextKeysModule (copy), Images (copy), ReactModule (copy), PlayerContext (copy)
+	local ContextualType = p1.contextualType
+	local UseLocalizationResultEntry = UseLocalizationFunction({
+		[EnumsModule.ContextualTypes.AccountDeleted] = TextKeysModule.AccountDeleted,
+		[EnumsModule.ContextualTypes.IsYourself] = TextKeysModule.ThisIsYou,
+		[EnumsModule.ContextualTypes.PreviousUsername] = TextKeysModule.Previously,
+		[EnumsModule.ContextualTypes.YouAreFollowing] = TextKeysModule.YouAreFollowing,
+		[EnumsModule.ContextualTypes.FollowsYou] = TextKeysModule.FollowsYou,
+		[EnumsModule.ContextualTypes.PlayedTogether] = TextKeysModule.PlayedTogether,
+		[EnumsModule.ContextualTypes.OffNetworkFriendRequest] = TextKeysModule.FriendInvite,
+		[EnumsModule.ContextualTypes.SentFromQrCode] = TextKeysModule.FromQRCode,
+		[EnumsModule.ContextualTypes.SentFromExperience] = {
+			TextKeysModule.SentFromWithContext,
+			gameName = p1.experienceName
+		}
+	})[ContextualType]
+	local IconsStatusPlayerFollowing = if ContextualType == EnumsModule.ContextualTypes.YouAreFollowing or ContextualType == EnumsModule.ContextualTypes.FollowsYou then Images["icons/status/player/following"] else nil
 	
-	return reactModule.createElement(playerContext, {
-		text = p1.textOverride or useLocalization({
-			[enumsModule.ContextualTypes.AccountDeleted] = textKeysModule.AccountDeleted,
-			[enumsModule.ContextualTypes.IsYourself] = textKeysModule.ThisIsYou,
-			[enumsModule.ContextualTypes.PreviousUsername] = textKeysModule.Previously,
-			[enumsModule.ContextualTypes.YouAreFollowing] = textKeysModule.YouAreFollowing,
-			[enumsModule.ContextualTypes.FollowsYou] = textKeysModule.FollowsYou,
-			[enumsModule.ContextualTypes.PlayedTogether] = textKeysModule.PlayedTogether,
-			[enumsModule.ContextualTypes.OffNetworkFriendRequest] = textKeysModule.FriendInvite,
-			[enumsModule.ContextualTypes.SentFromQrCode] = textKeysModule.FromQRCode,
-			[enumsModule.ContextualTypes.SentFromExperience] = {
-				textKeysModule.SentFromWithContext,
-				gameName = p1.experienceName
-			}
-		})[contextualType],
-		icon = p1.iconOverride or (if contextualType == enumsModule.ContextualTypes.YouAreFollowing or contextualType == enumsModule.ContextualTypes.FollowsYou then images["icons/status/player/following"] else nil)
+	return ReactModule.createElement(PlayerContext, {
+		text = p1.textOverride or UseLocalizationResultEntry,
+		icon = p1.iconOverride or IconsStatusPlayerFollowing
 	})
 end

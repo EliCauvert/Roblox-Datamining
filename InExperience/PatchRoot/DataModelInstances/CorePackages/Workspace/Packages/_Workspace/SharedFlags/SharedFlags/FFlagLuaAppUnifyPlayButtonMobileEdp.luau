@@ -1,1 +1,3 @@
-﻿return game:DefineFastFlag("LuaAppUnifyPlayButtonMobileEdp3", false) or require(script.Parent.FFlagLuaAppUnifyPlayButtonAllSurfacesIxp)
+﻿local FFlagLuaAppUnifyPlayButtonAllSurfacesIxpModule = require(script.Parent.FFlagLuaAppUnifyPlayButtonAllSurfacesIxp)
+
+return game:DefineFastFlag("LuaAppUnifyPlayButtonMobileEdp3", false) or FFlagLuaAppUnifyPlayButtonAllSurfacesIxpModule

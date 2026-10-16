@@ -1,15 +1,16 @@
 ﻿local _ = require(script.Parent.Parent.Types)
-local var1 = nil
+local v1 = nil
 
 return {
-	set = function(value)
-		-- upvalues: var1 (write)
-		var1 = value
+	set = function(p1) --[[ Line: 8 ]]
+		-- upvalues: v1 (ref)
+		v1 = p1
 	end,
-	consume = function()
-		-- upvalues: var1 (write)
-		var1 = nil
+	consume = function() --[[ Line: 12 ]]
+		-- upvalues: v1 (ref)
+		local v2 = v1
+		v1 = nil
 		
-		return var1
+		return v2
 	end
 }

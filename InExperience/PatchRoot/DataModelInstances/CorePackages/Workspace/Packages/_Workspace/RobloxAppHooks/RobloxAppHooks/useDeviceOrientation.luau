@@ -1,12 +1,12 @@
-﻿local robloxAppHooks = script:FindFirstAncestor("RobloxAppHooks")
-local parent = robloxAppHooks.Parent
-local useCurrentCameraModule = require(robloxAppHooks.useCurrentCamera)
-local useProperty = require(parent.GuiObjectUtils).useProperty
-local deviceOrientationMode = require(parent.RobloxAppEnums).DeviceOrientationMode
+﻿local RobloxAppHooks = script:FindFirstAncestor("RobloxAppHooks")
+local Parent = RobloxAppHooks.Parent
+local UseCurrentCameraModule = require(RobloxAppHooks.useCurrentCamera)
+local UsePropertyFunction = require(Parent.GuiObjectUtils).useProperty
+local DeviceOrientationMode = require(Parent.RobloxAppEnums).DeviceOrientationMode
 
-return function()
-	-- upvalues: useCurrentCameraModule (ref), useProperty (ref), deviceOrientationMode (ref)
-	local var1 = useProperty(useCurrentCameraModule(), "ViewportSize")
+return function() --[[ Line: 10 | Named "useDeviceOrientation" ]]
+	-- upvalues: UseCurrentCameraModule (copy), UsePropertyFunction (copy), DeviceOrientationMode (copy)
+	local ViewportSize = UsePropertyFunction(UseCurrentCameraModule(), "ViewportSize")
 	
-	return if var1 and var1.X > 1 and var1.Y > 1 then if var1.Y < var1.X then deviceOrientationMode.Landscape else deviceOrientationMode.Portrait else nil
+	return if ViewportSize and ViewportSize.X > 1 and ViewportSize.Y > 1 then ViewportSize.Y < ViewportSize.X and DeviceOrientationMode.Landscape or DeviceOrientationMode.Portrait else nil
 end

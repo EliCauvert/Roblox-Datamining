@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent._Workspace.AccountUpgrade.AccountUpgrade.AccountUpgradeFlow)
+﻿return (require(script.Parent.Parent._Workspace.AccountUpgrade.AccountUpgrade.AccountUpgradeFlow))

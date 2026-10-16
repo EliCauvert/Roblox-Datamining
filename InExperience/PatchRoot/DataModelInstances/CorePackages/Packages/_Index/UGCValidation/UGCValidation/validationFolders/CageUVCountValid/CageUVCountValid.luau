@@ -1,32 +1,32 @@
 ﻿local UGCValidationService = game:GetService("UGCValidationService")
-local parent = script.Parent.Parent.Parent
-local constantsModule = require(parent.Constants)
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local getFIntUniqueUVToleranceModule = require(parent.flags.getFIntUniqueUVTolerance)
+local Parent = script.Parent.Parent.Parent
+local ConstantsModule = require(Parent.Constants)
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
+local GetFIntUniqueUVToleranceModule = require(Parent.flags.getFIntUniqueUVTolerance)
 
 return {
 	categories = {
-		validationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
-		validationEnumsModule.UploadCategory.DYNAMIC_HEAD
+		ValidationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
+		ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD
 	},
-	requiredData = { validationEnumsModule.SharedDataMember.outerCagesData },
+	requiredData = { ValidationEnumsModule.SharedDataMember.outerCagesData },
 	conditionalData = {},
 	expectedFailures = {},
-	run = function(p1, p2)
-		-- upvalues: constantsModule (ref), UGCValidationService (ref), getFIntUniqueUVToleranceModule (ref), errorSourceStringsModule (ref)
-		for i, v in p2.outerCagesData do
-			local var1 = constantsModule.WRAP_TARGET_CAGE_MESH_UV_COUNTS[i]
+	run = function(p1, p2) --[[ Line: 35 ]]
+		-- upvalues: ConstantsModule (copy), UGCValidationService (copy), GetFIntUniqueUVToleranceModule (copy), ErrorSourceStringsModule (copy)
+		for PartName, value in p2.outerCagesData do
+			local WRAPTARGETCAGEMESHUVCOUNT = ConstantsModule.WRAP_TARGET_CAGE_MESH_UV_COUNTS[PartName]
 			
-			if var1 then
-				local editable = UGCValidationService:CalculateEditableMeshUniqueUVCount(v.editable)
+			if WRAPTARGETCAGEMESHUVCOUNT then
+				local EditableMeshUniqueUVCount = UGCValidationService:CalculateEditableMeshUniqueUVCount(value.editable)
 				
-				if getFIntUniqueUVToleranceModule() < math.abs(editable - var1) then
-					p1:fail(errorSourceStringsModule.Keys.CageUV_IncorrectUVCount, {
-						partName = i,
-						requiredUVCount = tostring(var1),
-						actualUVCount = tostring(editable)
+				if GetFIntUniqueUVToleranceModule() < math.abs(EditableMeshUniqueUVCount - WRAPTARGETCAGEMESHUVCOUNT) then
+					p1:fail(ErrorSourceStringsModule.Keys.CageUV_IncorrectUVCount, {
+						partName = PartName,
+						requiredUVCount = tostring(WRAPTARGETCAGEMESHUVCOUNT),
+						actualUVCount = tostring(EditableMeshUniqueUVCount)
 					})
 				end
 			end

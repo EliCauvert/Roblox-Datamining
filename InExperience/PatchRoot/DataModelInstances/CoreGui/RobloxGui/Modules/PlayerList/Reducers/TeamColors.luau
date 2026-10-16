@@ -1,19 +1,18 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local roduxModule = require(corePackagesService.Packages.Rodux)
-local cryoModule = require(corePackagesService.Packages.Cryo)
-local actions = script.Parent.Parent.Actions
+﻿local CorePackages = game:GetService("CorePackages")
+local CryoModule = require(CorePackages.Packages.Cryo)
+local Actions = script.Parent.Parent.Actions
 
-return roduxModule.createReducer({}, {
-	[require(actions.AddTeam).name] = function(p1, p2)
-		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p1, { [p2.team] = p2.team.TeamColor })
+return (require(CorePackages.Packages.Rodux).createReducer({}, {
+	[require(Actions.AddTeam).name] = function(p1, p2) --[[ Line: 13 ]]
+		-- upvalues: CryoModule (copy)
+		return CryoModule.Dictionary.join(p1, { [p2.team] = p2.team.TeamColor })
 	end,
-	[require(actions.RemoveTeam).name] = function(p1, p2)
-		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p1, { [p2.team] = cryoModule.None })
+	[require(Actions.RemoveTeam).name] = function(p1, p2) --[[ Line: 19 ]]
+		-- upvalues: CryoModule (copy)
+		return CryoModule.Dictionary.join(p1, { [p2.team] = CryoModule.None })
 	end,
-	[require(actions.SetTeamColor).name] = function(p1, p2)
-		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p1, { [p2.team] = p2.teamColor })
+	[require(Actions.SetTeamColor).name] = function(p1, p2) --[[ Line: 25 ]]
+		-- upvalues: CryoModule (copy)
+		return CryoModule.Dictionary.join(p1, { [p2.team] = p2.teamColor })
 	end
-})
+}))

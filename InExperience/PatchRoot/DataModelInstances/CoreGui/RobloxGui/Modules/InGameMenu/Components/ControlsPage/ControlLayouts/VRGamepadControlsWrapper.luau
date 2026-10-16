@@ -1,30 +1,27 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local corePackagesService = game:GetService("CorePackages")
-local localizationService = game:GetService("LocalizationService")
-local modules = coreGuiService:WaitForChild("RobloxGui").Modules
+﻿local CorePackages = game:GetService("CorePackages")
+local Modules = game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules
 local VRGamepadControls = script.Parent.VRGamepadControls
-local helpPageModule = require(corePackagesService.Workspace.Packages.HelpPage)
-local foundationModule = require(corePackagesService.Packages.Foundation)
-local foundationProvider = foundationModule.FoundationProvider
-local localizationProvider = require(corePackagesService.Workspace.Packages.Localization).LocalizationProvider
-local reactModule = require(corePackagesService.Packages.React)
-local var1 = require(corePackagesService.Workspace.Packages.InExperienceLocales).Localization.new(localizationService.RobloxLocaleId)
-local controlLayoutContainerModule = require(script.Parent.Parent.ControlLayoutContainer)
-local helpReactView = helpPageModule.HelpReactView
-local fFlagHelpPageMountVR = helpPageModule.Flags.FFlagHelpPageMountVR
-local _ = nil
-local var2 = if fFlagHelpPageMountVR then require(modules.Settings.Integrations).Utils else nil
+local HelpPageModule = require(CorePackages.Workspace.Packages.HelpPage)
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local FoundationProvider = FoundationModule.FoundationProvider
+local LocalizationProvider = require(CorePackages.Workspace.Packages.Localization).LocalizationProvider
+local ReactModule = require(CorePackages.Packages.React)
+local NewResult = require(CorePackages.Workspace.Packages.InExperienceLocales).Localization.new(game:GetService("LocalizationService").RobloxLocaleId)
+local ControlLayoutContainerModule = require(script.Parent.Parent.ControlLayoutContainer)
+local HelpReactView = HelpPageModule.HelpReactView
+local FFlagHelpPageMountVR = HelpPageModule.Flags.FFlagHelpPageMountVR
+local Utils = if FFlagHelpPageMountVR then require(Modules.Settings.Integrations).Utils else nil
 
-return if fFlagHelpPageMountVR then reactModule.memo(function()
-	-- upvalues: reactModule (ref), controlLayoutContainerModule (ref), localizationProvider (ref), var1 (ref), foundationProvider (ref), foundationModule (ref), var2 (write), helpReactView (ref)
-	return reactModule.createElement(controlLayoutContainerModule, {
+return if FFlagHelpPageMountVR then ReactModule.memo(function() --[[ Line: 30 | Named "VRGamepadControlsWrapper" ]]
+	-- upvalues: ReactModule (copy), ControlLayoutContainerModule (copy), LocalizationProvider (copy), NewResult (copy), FoundationProvider (copy), FoundationModule (copy), Utils (ref), HelpReactView (copy)
+	return ReactModule.createElement(ControlLayoutContainerModule, {
 		titleText = "CoreScripts.InGameMenu.Controls.VrControllerTitle"
 	}, {
-		Inner = reactModule.createElement(localizationProvider, { localization = var1 }, {
-			FoundationProvider = reactModule.createElement(foundationProvider, {
-				colorMode = foundationModule.Enums.ColorMode.Dark,
-				device = var2.getDeviceType()
-			}, { HelpReactView = reactModule.createElement(helpReactView) })
+		Inner = ReactModule.createElement(LocalizationProvider, { localization = NewResult }, {
+			FoundationProvider = ReactModule.createElement(FoundationProvider, {
+				colorMode = FoundationModule.Enums.ColorMode.Dark,
+				device = Utils.getDeviceType()
+			}, { HelpReactView = ReactModule.createElement(HelpReactView) })
 		})
 	})
 end) else require(VRGamepadControls)

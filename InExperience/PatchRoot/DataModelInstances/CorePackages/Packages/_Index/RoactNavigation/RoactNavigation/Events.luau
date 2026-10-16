@@ -1,10 +1,10 @@
-﻿local navigationSymbolModule = require(script.Parent.NavigationSymbol)
+﻿local NavigationSymbolModule = require(script.Parent.NavigationSymbol)
 
 return {
-	WillFocus = navigationSymbolModule("WILL_FOCUS"),
-	DidFocus = navigationSymbolModule("DID_FOCUS"),
-	WillBlur = navigationSymbolModule("WILL_BLUR"),
-	DidBlur = navigationSymbolModule("DID_BLUR"),
-	Action = navigationSymbolModule("ACTION"),
-	Refocus = navigationSymbolModule("REFOCUS")
+	WillFocus = NavigationSymbolModule("WILL_FOCUS"),
+	DidFocus = NavigationSymbolModule("DID_FOCUS"),
+	WillBlur = NavigationSymbolModule("WILL_BLUR"),
+	DidBlur = NavigationSymbolModule("DID_BLUR"),
+	Action = NavigationSymbolModule("ACTION"),
+	Refocus = NavigationSymbolModule("REFOCUS")
 }

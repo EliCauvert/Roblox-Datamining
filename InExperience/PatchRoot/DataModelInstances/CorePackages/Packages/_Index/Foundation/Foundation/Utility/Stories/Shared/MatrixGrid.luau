@@ -1,159 +1,155 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local dashModule = require(parent.Dash)
-local reactModule = require(parent.React)
-local textModule = require(foundation.Components.Text)
-local _ = require(foundation.Components.Types)
-local viewModule = require(foundation.Components.View)
-local t = {
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local DashModule = require(Parent.Dash)
+local ReactModule = require(Parent.React)
+local TextModule = require(Foundation.Components.Text)
+local _ = require(Foundation.Components.Types)
+local ViewModule = require(Foundation.Components.View)
+local config = {
 	left = "text-align-x-left",
 	center = "text-align-x-center"
 }
-local t_1 = { left = "align-x-left", center = "align-x-center" }
-local t_2 = { top = "align-y-top", center = "align-y-center" }
+local config1 = { left = "align-x-left", center = "align-x-center" }
+local config2 = { top = "align-y-top", center = "align-y-center" }
 
-local function enumHeaders(p1)
-	-- upvalues: dashModule (ref)
-	return dashModule.map(p1, function(p2)
-		return tostring(p2)
-	end)
-end
-
-local function matrixLabel(p1)
-	-- upvalues: reactModule (ref), textModule (ref)
-	return reactModule.createElement(textModule, {
-		tag = "auto-xy text-caption-small text-align-x-left content-default",
-		Text = p1
-	})
-end
-
-local function matrixInfoLabel(p1, p2)
-	-- upvalues: reactModule (ref), viewModule (ref), textModule (ref)
-	return reactModule.createElement(viewModule, { tag = "col gap-xsmall size-full-0 auto-y" }, {
-		Title = reactModule.createElement(textModule, {
-			tag = "size-full-0 auto-y text-caption-small text-wrap text-align-x-left content-default",
-			LayoutOrder = 1,
-			Text = p1
-		}),
-		Subtitle = reactModule.createElement(textModule, {
-			tag = "size-full-0 auto-y text-caption-small text-wrap text-align-x-left content-muted",
-			LayoutOrder = 2,
-			Text = p2
-		})
-	})
-end
-
-local function _(p1, p2)
+local function _(p1, p2) --[[ Line: 84 | Named "getCellColumnWidth" ]]
 	return if p1.cellColumnWidths then p1.cellColumnWidths[p2] else p1.cellColumnWidth
 end
 
-local function renderCells(p1, p2, p3)
-	-- upvalues: reactModule (ref), viewModule (ref)
-	local t = {}
+local function renderCells(p1, Cells, p2) --[[ Line: 91 ]]
+	-- upvalues: ReactModule (copy), ViewModule (copy)
+	local Elements = {}
 	
-	for i, v in p2 do
-		local var1 = if p1.cellColumnWidths then p1.cellColumnWidths[i] else p1.cellColumnWidth
-		t[`Cell-{i}`] = reactModule.createElement(viewModule, {
-			tag = `col auto-xy {p3}`,
-			Size = if var1 then UDim2.fromOffset(var1, 0) else nil,
-			LayoutOrder = i
-		}, { Content = v })
+	for LayoutOrder, cell in Cells do
+		local CellColumnWidth = if p1.cellColumnWidths then p1.cellColumnWidths[LayoutOrder] else p1.cellColumnWidth
+		Elements[`Cell-{LayoutOrder}`] = ReactModule.createElement(ViewModule, {
+			tag = `col auto-xy {p2}`,
+			Size = if CellColumnWidth then UDim2.fromOffset(CellColumnWidth, 0) else nil,
+			LayoutOrder = LayoutOrder
+		}, { Content = cell })
 	end
-	return t
+	return Elements
 end
 
-local function renderHeaderRow(p4, p5, p6, p7, p8, p9, p10)
-	-- upvalues: dashModule (ref), reactModule (ref), textModule (ref), viewModule (ref)
-	local var2 = dashModule.map(p4.columnHeaders, function(p11, p12)
-		-- upvalues: p4 (ref), reactModule (copy), textModule (copy), p5 (ref)
-		local var3 = if p4.cellColumnWidths then p4.cellColumnWidths[p12] else p4.cellColumnWidth
+local function renderHeaderRow(p3, p4, XOffset, NoShowLabelColumn, Message, Tag, LayoutOrder) --[[ Line: 111 ]]
+	-- upvalues: DashModule (copy), ReactModule (copy), TextModule (copy), ViewModule (copy)
+	local MapResult = DashModule.map(p3.columnHeaders, function(Text, LayoutOrder) --[[ Line: 120 ]]
+		-- upvalues: p3 (copy), ReactModule (upval), TextModule (upval), p4 (copy)
+		local CellColumnWidth = if p3.cellColumnWidths then p3.cellColumnWidths[LayoutOrder] else p3.cellColumnWidth
 		
-		return reactModule.createElement(textModule, {
-			Text = p11,
-			tag = `auto-xy text-caption-small content-muted {p5}`,
-			Size = if var3 then UDim2.fromOffset(var3, 0) else nil,
-			LayoutOrder = p12
+		return ReactModule.createElement(TextModule, {
+			Text = Text,
+			tag = `auto-xy text-caption-small content-muted {p4}`,
+			Size = if CellColumnWidth then UDim2.fromOffset(CellColumnWidth, 0) else nil,
+			LayoutOrder = LayoutOrder
 		})
 	end)
 	
-	return if p7 then reactModule.createElement(viewModule, { tag = `padding-y-small {p8}`, LayoutOrder = p10 }, {
-		Corner = reactModule.createElement(viewModule, {
+	return if NoShowLabelColumn then ReactModule.createElement(ViewModule, {
+		tag = `padding-y-small {Message}`,
+		LayoutOrder = LayoutOrder
+	}, {
+		Corner = ReactModule.createElement(ViewModule, {
 			tag = "col auto-y",
 			LayoutOrder = 1,
-			Size = UDim2.fromOffset(p6, 0)
+			Size = UDim2.fromOffset(XOffset, 0)
 		}, {
-			Content = if p4.labelColumnHeader ~= nil then nil else reactModule.createElement(textModule, {
-				Text = p4.labelColumnHeader,
-				tag = `auto-xy text-caption-small content-muted {p5}`,
-				Size = UDim2.fromOffset(p6, 0)
+			Content = if p3.labelColumnHeader == nil then nil else ReactModule.createElement(TextModule, {
+				Text = p3.labelColumnHeader,
+				tag = `auto-xy text-caption-small content-muted {p4}`,
+				Size = UDim2.fromOffset(XOffset, 0)
 			})
 		}),
-		Cells = reactModule.createElement(viewModule, { LayoutOrder = 2, tag = p9 }, var2)
-	}) else reactModule.createElement(viewModule, { tag = `padding-y-small {p8}`, LayoutOrder = p10 }, var2)
+		Cells = ReactModule.createElement(ViewModule, { LayoutOrder = 2, tag = Tag }, MapResult)
+	}) else ReactModule.createElement(ViewModule, {
+		tag = `padding-y-small {Message}`,
+		LayoutOrder = LayoutOrder
+	}, MapResult)
 end
 
-local function rowView(p4)
-	-- upvalues: reactModule (ref), viewModule (ref)
-	return reactModule.createElement(viewModule, {
-		tag = p4.tag,
-		backgroundStyle = p4.row.backgroundStyle,
-		stroke = if p4.row.stroke then {
-			Color = p4.row.stroke.Color,
-			Transparency = p4.row.stroke.Transparency,
-			Thickness = p4.row.stroke.Thickness
+local function rowView(Frame) --[[ Line: 162 ]]
+	-- upvalues: ReactModule (copy), ViewModule (copy)
+	return ReactModule.createElement(ViewModule, {
+		tag = Frame.tag,
+		backgroundStyle = Frame.row.backgroundStyle,
+		stroke = if Frame.row.stroke then {
+			Color = Frame.row.stroke.Color,
+			Transparency = Frame.row.stroke.Transparency,
+			Thickness = Frame.row.stroke.Thickness
 		} else nil,
-		LayoutOrder = p4.LayoutOrder
-	}, p4.children)
+		LayoutOrder = Frame.LayoutOrder
+	}, Frame.children)
 end
 
 return {
-	MatrixGrid = function(p4)
-		-- upvalues: t (ref), t_1 (ref), t_2 (ref), renderHeaderRow (ref), reactModule (ref), viewModule (ref), renderCells (ref), rowView (ref)
-		local var2 = p4.showLabelColumn == nil or p4.showLabelColumn
-		local var3 = p4.showHeader == nil or p4.showHeader
-		local labelColumnWidth = p4.labelColumnWidth or 80
-		local headerTextAlign = p4.headerTextAlign or "center"
-		local cellAlign = p4.cellAlign or "center"
-		local rowAlign = p4.rowAlign or "top"
-		local rowGap = p4.rowGap or "large"
-		local var4 = t[headerTextAlign]
-		local var5 = t_1[cellAlign]
-		local var6 = t_2[rowAlign]
-		local var7 = `row {var6} gap-{rowGap} auto-xy`
-		local var8 = `row {var6} gap-{rowGap} auto-xy`
-		local var9 = 1
-		local t_3 = {}
+	MatrixGrid = function(p3) --[[ Line: 184 ]]
+		-- upvalues: config (copy), config1 (copy), config2 (copy), renderHeaderRow (copy), ReactModule (copy), ViewModule (copy), renderCells (copy), rowView (copy)
+		local NoShowLabelColumn = p3.showLabelColumn == nil or p3.showLabelColumn
+		local LabelColumnWidth = p3.labelColumnWidth or 80
+		local RowGap = p3.rowGap or "large"
+		local Entry = config[p3.headerTextAlign or "center"]
+		local Entry1 = config1[p3.cellAlign or "center"]
+		local Entry2 = config2[p3.rowAlign or "top"]
+		local Message: string = `row {Entry2} gap-{RowGap} auto-xy`
+		local Message1: string = `row {Entry2} gap-{RowGap} auto-xy`
+		local LayoutOrder = 1
+		local Elements = {}
 		
-		if var3 then
-			t_3.HeaderRow = renderHeaderRow(p4, var4, labelColumnWidth, var2, var7, var8, var9)
-			var9 += 1
+		if p3.showHeader == nil or p3.showHeader then
+			Elements.HeaderRow = renderHeaderRow(p3, Entry, LabelColumnWidth, NoShowLabelColumn, Message, Message1, LayoutOrder)
+			LayoutOrder += 1
 		end
-		for i, v in p4.rows do
-			local t_4 = {}
+		for i, row in p3.rows do
+			local Children = {}
 			
-			if var2 then
-				t_4.Label = reactModule.createElement(viewModule, {
+			if NoShowLabelColumn then
+				Children.Label = ReactModule.createElement(ViewModule, {
 					LayoutOrder = 1,
-					tag = `col size-full-0 auto-y clip {var6}`,
-					Size = UDim2.fromOffset(labelColumnWidth, 0)
-				}, { Content = v.label })
-				t_4.Cells = reactModule.createElement(viewModule, { LayoutOrder = 2, tag = var8 }, renderCells(p4, v.cells, var5))
+					tag = `col size-full-0 auto-y clip {Entry2}`,
+					Size = UDim2.fromOffset(LabelColumnWidth, 0)
+				}, { Content = row.label })
+				Children.Cells = ReactModule.createElement(ViewModule, { LayoutOrder = 2, tag = Message1 }, (renderCells(p3, row.cells, Entry1)))
 			else
-				for i_1, v_1 in renderCells(p4, v.cells, var5) do
-					t_4[i_1] = v_1
+				for i1, value in renderCells(p3, row.cells, Entry1) do
+					Children[i1] = value
 				end
 			end
-			t_3[`Row-{i}`] = reactModule.createElement(rowView, {
-				tag = "padding-y-small " .. (if v.rowTag then var7 .. " " .. v.rowTag else var7),
-				LayoutOrder = var9,
-				row = v,
-				children = t_4
+			Elements[`Row-{i}`] = ReactModule.createElement(rowView, {
+				tag = "padding-y-small " .. (if row.rowTag then Message .. " " .. row.rowTag else Message),
+				LayoutOrder = LayoutOrder,
+				row = row,
+				children = Children
 			})
-			var9 += 1
+			LayoutOrder += 1
 		end
-		return reactModule.createElement(viewModule, { tag = "col auto-xy" }, t_3)
+		return ReactModule.createElement(ViewModule, { tag = "col auto-xy" }, Elements)
 	end,
-	enumHeaders = enumHeaders,
-	matrixLabel = matrixLabel,
-	matrixInfoLabel = matrixInfoLabel
+	enumHeaders = function(p4) --[[ Line: 54 ]]
+		-- upvalues: DashModule (copy)
+		return DashModule.map(p4, function(p5): string --[[ Line: 55 ]]
+			return (tostring(p5))
+		end)
+	end,
+	matrixLabel = function(Text) --[[ Line: 60 ]]
+		-- upvalues: ReactModule (copy), TextModule (copy)
+		return ReactModule.createElement(TextModule, {
+			tag = "auto-xy text-caption-small text-align-x-left content-default",
+			Text = Text
+		})
+	end,
+	matrixInfoLabel = function(Text, Text1) --[[ Line: 67 ]]
+		-- upvalues: ReactModule (copy), ViewModule (copy), TextModule (copy)
+		return ReactModule.createElement(ViewModule, { tag = "col gap-xsmall size-full-0 auto-y" }, {
+			Title = ReactModule.createElement(TextModule, {
+				tag = "size-full-0 auto-y text-caption-small text-wrap text-align-x-left content-default",
+				LayoutOrder = 1,
+				Text = Text
+			}),
+			Subtitle = ReactModule.createElement(TextModule, {
+				tag = "size-full-0 auto-y text-caption-small text-wrap text-align-x-left content-muted",
+				LayoutOrder = 2,
+				Text = Text1
+			})
+		})
+	end
 }

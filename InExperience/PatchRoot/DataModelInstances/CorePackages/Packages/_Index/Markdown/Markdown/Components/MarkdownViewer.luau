@@ -1,76 +1,78 @@
-﻿local parent = script:FindFirstAncestor("Components").Parent
-local parent_1 = parent.Parent
-local reactModule = require(parent_1.React)
-local dashModule = require(parent_1.Dash)
-local foundationModule = require(parent_1.Foundation)
-local text = foundationModule.Text
-local view = foundationModule.View
-local useTokens = foundationModule.Hooks.useTokens
-local markdownCoreModule = require(parent_1.MarkdownCore)
-local commonMarkComplianceParserModule = require(parent.Parsers.CommonMarkComplianceParser)
-local _ = require(parent.Types)
-local markdownRendererModule = require(script.MarkdownRenderer)
-local flags = markdownCoreModule.Flags
+﻿local Parent = script:FindFirstAncestor("Components").Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
+local DashModule = require(Parent1.Dash)
+local FoundationModule = require(Parent1.Foundation)
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local CommonMarkComplianceParserModule = require(Parent.Parsers.CommonMarkComplianceParser)
+local _ = require(Parent.Types)
+local MarkdownRendererModule = require(script.MarkdownRenderer)
+local Flags = require(Parent1.MarkdownCore).Flags
 
-return function(p1)
-	-- upvalues: useTokens (ref), flags (ref), reactModule (ref), dashModule (ref), markdownRendererModule (ref), commonMarkComplianceParserModule (ref), view (ref), text (ref)
-	local var1 = useTokens()
+return function(p1) --[[ Line: 47 | Named "MarkdownViewer" ]]
+	-- upvalues: UseTokensFunction (copy), Flags (copy), ReactModule (copy), DashModule (copy), MarkdownRendererModule (copy), CommonMarkComplianceParserModule (copy), View (copy), Text (copy)
+	local UseTokensResult = UseTokensFunction()
 	
-	if not flags.FFlagMarkdownAssistantParity and not p1.Markdown and not p1.Ast then
+	if not Flags.FFlagMarkdownAssistantParity and not p1.Markdown and not p1.Ast then
 		warn("MarkdownViewer requires either a Markdown string or an Ast in props")
 		
 		return nil
 	end
-	local var2 = reactModule.useMemo(function()
-		-- upvalues: dashModule (copy), markdownRendererModule (copy), p1 (ref)
-		return dashModule.join(markdownRendererModule.defaultRenderers, p1.Renderers or {}, p1.AdditionalFeatureRenderers or {})
-	end, if flags.FFlagMarkdownAssistantParity then { p1.Renderers, p1.AdditionalFeatureRenderers } else { p1.Renderers })
-	local var3, var4 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref), commonMarkComplianceParserModule (copy)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 56 ]]
+		-- upvalues: DashModule (upval), MarkdownRendererModule (upval), p1 (copy)
+		return DashModule.join(MarkdownRendererModule.defaultRenderers, p1.Renderers or {}, p1.AdditionalFeatureRenderers or {})
+	end, if Flags.FFlagMarkdownAssistantParity then { p1.Renderers, p1.AdditionalFeatureRenderers } else { p1.Renderers })
+	local UseMemoResult1, UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 68 ]]
+		-- upvalues: p1 (copy), CommonMarkComplianceParserModule (upval)
 		if p1.Ast then
 			return true, p1.Ast
-		elseif not p1.Markdown then
+		end
+		if not p1.Markdown then
 			return true, nil
 		end
-		local var5, var6 = commonMarkComplianceParserModule.safeParse(p1.Markdown)
+		local SafeParseResult, SafeParseResult2 = CommonMarkComplianceParserModule.safeParse(p1.Markdown)
 		
-		if not var5 then
+		if not SafeParseResult then
 			if p1.OnError then
-				p1.OnError(var6)
+				p1.OnError(SafeParseResult2)
 				
-				return var5, var6
+				return SafeParseResult, SafeParseResult2
 			end
-			warn("MarkdownViewer: Error parsing markdown.", var6)
+			warn("MarkdownViewer: Error parsing markdown.", SafeParseResult2)
 		end
-		return var5, var6
+		return SafeParseResult, SafeParseResult2
 	end, { p1.Markdown, p1.Ast })
-	local var5 = reactModule.useMemo(function()
-		-- upvalues: var3 (ref), markdownRendererModule (copy), var4 (ref), var2 (ref), p1 (ref), var1 (ref)
-		return if var3 then markdownRendererModule.render(var4, {
-			userRenderers = var2,
+	local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 89 ]]
+		-- upvalues: UseMemoResult1 (copy), MarkdownRendererModule (upval), UseMemoResult2 (copy), UseMemoResult (copy), p1 (copy), UseTokensResult (copy)
+		return if UseMemoResult1 then MarkdownRendererModule.render(UseMemoResult2, {
+			userRenderers = UseMemoResult,
 			linkCallback = p1.LinkCallback,
 			markdownRendererProps = p1.MarkdownRendererProps,
 			colorScheme = p1.ColorScheme,
-			tokens = var1
+			tokens = UseTokensResult
 		}) else nil
-	end, if flags.FFlagMarkdownAssistantParity then {
-		var3, var4, p1.LinkCallback, p1.MarkdownRendererProps, p1.ColorScheme, var2,
-		var1
+	end, if Flags.FFlagMarkdownAssistantParity then {
+		UseMemoResult1, UseMemoResult2, p1.LinkCallback, p1.MarkdownRendererProps,
+		p1.ColorScheme, UseMemoResult, UseTokensResult
 	} else {
-		var3, var4, p1.LinkCallback, p1.MarkdownRendererProps, p1.ColorScheme, var2
+		UseMemoResult1, UseMemoResult2, p1.LinkCallback, p1.MarkdownRendererProps,
+		p1.ColorScheme, UseMemoResult
 	})
 	
-	if flags.FFlagMarkdownAssistantParity and not p1.Markdown and not p1.Ast then
+	if Flags.FFlagMarkdownAssistantParity and not p1.Markdown and not p1.Ast then
 		warn("MarkdownViewer requires either a Markdown string or an Ast in props")
 		
 		return nil
+	else
+		return if UseMemoResult1 then ReactModule.createElement(View, DashModule.join({
+			tag = "col size-full-0 auto-y",
+			BorderSizePixel = 0,
+			backgroundStyle = { Transparency = 1 }
+		}, p1.WrapperProps or {}), UseMemoResult3) else p1.Fallback or ReactModule.createElement(View, DashModule.join({
+			tag = "size-full-0 auto-y",
+			backgroundStyle = { Transparency = 1 }
+		}, p1.WrapperProps or {}), ReactModule.createElement(Text, { Text = "Failed to parse the provided markdown" }))
 	end
-	return if var3 then reactModule.createElement(view, dashModule.join({
-		tag = "col size-full-0 auto-y",
-		BorderSizePixel = 0,
-		backgroundStyle = { Transparency = 1 }
-	}, p1.WrapperProps or {}), var5) else p1.Fallback or reactModule.createElement(view, dashModule.join({
-		tag = "size-full-0 auto-y",
-		backgroundStyle = { Transparency = 1 }
-	}, p1.WrapperProps or {}), reactModule.createElement(text, { Text = "Failed to parse the provided markdown" }))
 end

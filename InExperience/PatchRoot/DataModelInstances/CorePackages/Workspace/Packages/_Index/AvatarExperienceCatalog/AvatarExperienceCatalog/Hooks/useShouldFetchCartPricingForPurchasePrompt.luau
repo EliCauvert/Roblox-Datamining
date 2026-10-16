@@ -1,42 +1,44 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
-local avatarExperienceCommonModule = require(parent.AvatarExperienceCommon)
-local avatarExperienceNavigationModule = require(parent.AvatarExperienceNavigation)
-local useNavigation = require(parent.Navigation).useNavigation
-local itemRestrictions = avatarExperienceCommonModule.Enums.ItemRestrictions
-local avatarScreen = avatarExperienceNavigationModule.Enums.AvatarScreen
-local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
-local useHasAtLeastOneCatalogOfferModule = require(script.Parent.useHasAtLeastOneCatalogOffer)
-local AXEnableOffersOnHomeProfileItems = game:DefineFastFlag("AXEnableOffersOnHomeProfileItems", false)
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local ItemRestrictions = require(Parent.AvatarExperienceCommon).Enums.ItemRestrictions
+local AvatarScreen = require(Parent.AvatarExperienceNavigation).Enums.AvatarScreen
+local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
+local UseHasAtLeastOneCatalogOfferModule = require(script.Parent.useHasAtLeastOneCatalogOffer)
 
-local function _(p1)
-	local priceInRobux = p1.priceInRobux
+local function _(p1): boolean --[[ Line: 55 | Named "isFree" ]]
+	local PriceInRobux: number = p1.priceInRobux
 	
-	return if priceInRobux ~= nil then priceInRobux <= 0 else true
+	return PriceInRobux == nil or PriceInRobux <= 0
 end
 
-local _ = function(p1)
-	-- upvalues: itemRestrictions (ref)
-	local itemRestrictions_1 = p1.itemRestrictions
+local _ = function(p1): boolean --[[ Line: 60 | Named "isLimitedCollectible" ]]
+	-- upvalues: ItemRestrictions (copy)
+	local ItemRestrictions1 = p1.itemRestrictions
 	
-	return if itemRestrictions_1 == nil then false elseif itemRestrictions_1[itemRestrictions.Limited] ~= true then if itemRestrictions_1[itemRestrictions.LimitedUnique] ~= true then itemRestrictions_1[itemRestrictions.Collectible] == true else true else true
+	return ItemRestrictions1 ~= nil and (ItemRestrictions1[ItemRestrictions.Limited] == true or (ItemRestrictions1[ItemRestrictions.LimitedUnique] == true or ItemRestrictions1[ItemRestrictions.Collectible] == true))
 end
 
-return function(p1)
-	-- upvalues: useHasAtLeastOneCatalogOfferModule (ref), AXEnableOffersOnHomeProfileItems (ref), useNavigation (ref), avatarExperienceFlagsModule (ref), itemRestrictions (ref), avatarScreen (ref)
-	local var1 = useHasAtLeastOneCatalogOfferModule()
-	local var2 = if AXEnableOffersOnHomeProfileItems then useNavigation() else nil
+return function(p1) --[[ Line: 70 | Named "useShouldFetchCartPricingForPurchasePrompt" ]]
+	-- upvalues: UseHasAtLeastOneCatalogOfferModule (copy), UseNavigationFunction (copy), AvatarExperienceFlagsModule (copy), ItemRestrictions (copy), AvatarScreen (copy)
+	local UseHasAtLeastOneCatalogOfferModuleResult = UseHasAtLeastOneCatalogOfferModule()
+	local UseNavigationResult = UseNavigationFunction()
 	
 	if p1 == nil then
 		return false
-	elseif avatarExperienceFlagsModule.FFlagPurchasePromptCartPricingSkipFreeItems then
-		local priceInRobux = p1.priceInRobux
+	end
+	if AvatarExperienceFlagsModule.FFlagPurchasePromptCartPricingSkipFreeItems then
+		local PriceInRobux: number = p1.priceInRobux
 		
-		if if priceInRobux ~= nil then priceInRobux <= 0 else true then
+		if PriceInRobux == nil or PriceInRobux <= 0 then
 			return false
-		elseif avatarExperienceFlagsModule.FFlagPurchasePromptCartPricingSkipLimitedCollectibles then
-			local itemRestrictions_1 = p1.itemRestrictions
-			
-			return if if itemRestrictions_1 == nil then false elseif itemRestrictions_1[itemRestrictions.Limited] ~= true then if itemRestrictions_1[itemRestrictions.LimitedUnique] ~= true then itemRestrictions_1[itemRestrictions.Collectible] == true else true else true then false elseif AXEnableOffersOnHomeProfileItems and var2 and var2.state and (var2.state.routeName == avatarScreen.TryOnItem or var2.state.params and var2.state.params.fromProfile) then true else avatarExperienceFlagsModule.FFlagPurchasePromptCartPricingRequireOffer and not var1
 		end
 	end
+	if AvatarExperienceFlagsModule.FFlagPurchasePromptCartPricingSkipLimitedCollectibles then
+		local ItemRestrictions1 = p1.itemRestrictions
+		
+		if ItemRestrictions1 ~= nil and (ItemRestrictions1[ItemRestrictions.Limited] == true or (ItemRestrictions1[ItemRestrictions.LimitedUnique] == true or ItemRestrictions1[ItemRestrictions.Collectible] == true)) then
+			return false
+		end
+	end
+	return if UseNavigationResult and UseNavigationResult.state and (UseNavigationResult.state.routeName == AvatarScreen.TryOnItem or UseNavigationResult.state.params and UseNavigationResult.state.params.fromProfile) then true else not AvatarExperienceFlagsModule.FFlagPurchasePromptCartPricingRequireOffer or UseHasAtLeastOneCatalogOfferModuleResult
 end

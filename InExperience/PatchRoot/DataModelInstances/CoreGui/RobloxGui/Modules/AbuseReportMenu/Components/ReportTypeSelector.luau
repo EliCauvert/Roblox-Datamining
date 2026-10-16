@@ -1,94 +1,94 @@
-﻿local abuseReportMenu = script:FindFirstAncestor("AbuseReportMenu")
-local corePackagesService = game:GetService("CorePackages")
-local appFonts = require(corePackagesService.Workspace.Packages.Style).AppFonts
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local reactModule = require(corePackagesService.Packages.React)
-local images = UIBloxModule.App.ImageSet.Images
-local useStyle = UIBloxModule.Core.Style.useStyle
-local constantsModule = require(abuseReportMenu.Components.Constants)
-local getMenuItemDimensionsModule = require(abuseReportMenu.Components.getMenuItemDimensions)
-local getMenuItemSizingsModule = require(abuseReportMenu.Utility.getMenuItemSizings)
-local textButton = UIBloxModule.App.Button.TextButton
-local iconButton = UIBloxModule.App.Button.IconButton
-local iconSize = UIBloxModule.App.ImageSet.Enum.IconSize
+﻿local AbuseReportMenu = script:FindFirstAncestor("AbuseReportMenu")
+local CorePackages = game:GetService("CorePackages")
+local AppFonts = require(CorePackages.Workspace.Packages.Style).AppFonts
+local UIBloxModule = require(CorePackages.Packages.UIBlox)
+local ReactModule = require(CorePackages.Packages.React)
+local Images = UIBloxModule.App.ImageSet.Images
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local ConstantsModule = require(AbuseReportMenu.Components.Constants)
+local GetMenuItemDimensionsModule = require(AbuseReportMenu.Components.getMenuItemDimensions)
+local GetMenuItemSizingsModule = require(AbuseReportMenu.Utility.getMenuItemSizings)
+local TextButton = UIBloxModule.App.Button.TextButton
+local IconButton = UIBloxModule.App.Button.IconButton
+local IconSize = UIBloxModule.App.ImageSet.Enum.IconSize
 
-return function(p1)
-	-- upvalues: useStyle (ref), getMenuItemDimensionsModule (ref), getMenuItemSizingsModule (ref), constantsModule (ref), reactModule (ref), appFonts (ref), iconButton (ref), iconSize (ref), images (ref), textButton (ref)
-	local size200 = useStyle().Tokens.Size.Size_200
-	local var1 = getMenuItemDimensionsModule(p1.menuWidth)
-	local var2 = getMenuItemSizingsModule()
-	local menuItemHeightTight = constantsModule.MenuItemHeightTight
-	local maxValue = math.max(p1.menuWidth - constantsModule.MenuItemDynamicWidthOffset, var1.LeftWidth + var1.RightWidth)
-	local isSmallPortraitViewport = p1.isSmallPortraitViewport
+return function(p1) --[[ Line: 29 ]]
+	-- upvalues: UseStyleFunction (copy), GetMenuItemDimensionsModule (copy), GetMenuItemSizingsModule (copy), ConstantsModule (copy), ReactModule (copy), AppFonts (copy), IconButton (copy), IconSize (copy), Images (copy), TextButton (copy)
+	local Size200 = UseStyleFunction().Tokens.Size.Size_200
+	local MenuItemDimensionsModule = GetMenuItemDimensionsModule(p1.menuWidth)
+	local MenuItemSizingsModule = GetMenuItemSizingsModule()
+	local MenuItemHeightTight = ConstantsModule.MenuItemHeightTight
+	local Largest = math.max(p1.menuWidth - ConstantsModule.MenuItemDynamicWidthOffset, MenuItemDimensionsModule.LeftWidth + MenuItemDimensionsModule.RightWidth)
+	local IsSmallPortraitViewport = p1.isSmallPortraitViewport
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y
 	}, {
-		Layout = reactModule.createElement("UIListLayout", {
-			FillDirection = if isSmallPortraitViewport then Enum.FillDirection.Vertical else Enum.FillDirection.Horizontal,
+		Layout = ReactModule.createElement("UIListLayout", {
+			FillDirection = if IsSmallPortraitViewport then Enum.FillDirection.Vertical else Enum.FillDirection.Horizontal,
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			HorizontalAlignment = Enum.HorizontalAlignment.Center,
-			Padding = if isSmallPortraitViewport then UDim.new(0, size200) else UDim.new(0, 0)
+			Padding = if IsSmallPortraitViewport then UDim.new(0, Size200) else UDim.new(0, 0)
 		}),
-		Label = reactModule.createElement("TextLabel", {
+		Label = ReactModule.createElement("TextLabel", {
 			LayoutOrder = 1,
 			TextTransparency = 0,
 			TextWrapped = true,
 			BackgroundTransparency = 1,
 			Text = p1.label,
-			Font = appFonts.default:getMedium(),
+			Font = AppFonts.default:getMedium(),
 			TextColor3 = Color3.new(1, 1, 1),
-			TextSize = var1.TextSize,
+			TextSize = MenuItemDimensionsModule.TextSize,
 			AutomaticSize = Enum.AutomaticSize.Y,
 			TextXAlignment = Enum.TextXAlignment.Left,
-			Size = if isSmallPortraitViewport then UDim2.fromOffset(maxValue, 0) else UDim2.new(0, var1.LeftWidth, 0, constantsModule.MenuItemHeight)
+			Size = if IsSmallPortraitViewport then UDim2.fromOffset(Largest, 0) else UDim2.new(0, MenuItemDimensionsModule.LeftWidth, 0, ConstantsModule.MenuItemHeight)
 		}),
-		MiddleWidthHolder = if isSmallPortraitViewport then nil else reactModule.createElement("Frame", {
+		MiddleWidthHolder = if IsSmallPortraitViewport then nil else ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 2,
-			Size = UDim2.new(0, math.max(0, p1.menuWidth - var1.LeftWidth - var1.RightWidth - 100), 0, constantsModule.MenuItemHeight)
+			Size = UDim2.new(0, math.max(0, p1.menuWidth - MenuItemDimensionsModule.LeftWidth - MenuItemDimensionsModule.RightWidth - 100), 0, ConstantsModule.MenuItemHeight)
 		}),
-		Container = reactModule.createElement("Frame", {
+		Container = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 3,
-			Size = if isSmallPortraitViewport then UDim2.fromOffset(maxValue, menuItemHeightTight) else UDim2.new(0, var1.RightWidth, 1, 0)
+			Size = if IsSmallPortraitViewport then UDim2.fromOffset(Largest, MenuItemHeightTight) else UDim2.new(0, MenuItemDimensionsModule.RightWidth, 1, 0)
 		}, {
-			Layout = reactModule.createElement("UIListLayout", {
+			Layout = ReactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Horizontal,
 				SortOrder = Enum.SortOrder.LayoutOrder,
-				HorizontalAlignment = if isSmallPortraitViewport then Enum.HorizontalAlignment.Left else Enum.HorizontalAlignment.Center,
+				HorizontalAlignment = if IsSmallPortraitViewport then Enum.HorizontalAlignment.Left else Enum.HorizontalAlignment.Center,
 				VerticalAlignment = Enum.VerticalAlignment.Center
 			}),
-			LeftChevron = if p1.isSelectionDisabled then nil else reactModule.createElement(iconButton, {
+			LeftChevron = if p1.isSelectionDisabled then nil else ReactModule.createElement(IconButton, {
 				layoutOrder = 1,
 				size = UDim2.fromOffset(32, 32),
-				iconSize = iconSize.Medium,
-				icon = images["icons/actions/cycleLeft"],
+				iconSize = IconSize.Medium,
+				icon = Images["icons/actions/cycleLeft"],
 				onActivated = p1.onClickLeft
 			}),
-			ButtonContainer = reactModule.createElement("Frame", {
+			ButtonContainer = ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 2,
 				AutomaticSize = Enum.AutomaticSize.XY,
-				Size = UDim2.new(0, var1.RightWidth - 64, 0, 0)
+				Size = UDim2.new(0, MenuItemDimensionsModule.RightWidth - 64, 0, 0)
 			}, {
-				ToggleButton = reactModule.createElement(textButton, {
+				ToggleButton = ReactModule.createElement(TextButton, {
 					layoutOrder = 2,
 					size = UDim2.new(1, 0, 1, 0),
 					text = p1.abuseType,
 					onActivated = p1.onClickRight,
 					isDisabled = p1.isSelectionDisabled,
-					fontStyle = var2.FontStyle,
-					verticalPadding = var2.ButtonInsideVerticalPadding
+					fontStyle = MenuItemSizingsModule.FontStyle,
+					verticalPadding = MenuItemSizingsModule.ButtonInsideVerticalPadding
 				})
 			}),
-			RightChevron = if p1.isSelectionDisabled then nil else reactModule.createElement(iconButton, {
+			RightChevron = if p1.isSelectionDisabled then nil else ReactModule.createElement(IconButton, {
 				layoutOrder = 3,
 				size = UDim2.fromOffset(32, 32),
-				iconSize = iconSize.Medium,
-				icon = images["icons/actions/cycleRight"],
+				iconSize = IconSize.Medium,
+				icon = Images["icons/actions/cycleRight"],
 				onActivated = p1.onClickRight
 			})
 		})

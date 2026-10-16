@@ -1,6 +1,6 @@
-﻿local avatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
-local _ = require(avatarExperienceCommon.Enums.CatalogSubcategories)
-local _ = require(avatarExperienceCommon.Parent.AvatarExperienceModel).Enums.CatalogCategories
+﻿local AvatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
+local _ = require(AvatarExperienceCommon.Enums.CatalogSubcategories)
+local _ = require(AvatarExperienceCommon.Parent.AvatarExperienceModel).Enums.CatalogCategories
 local _ = require(script.Parent.CategoryTypes)
 
 return {}

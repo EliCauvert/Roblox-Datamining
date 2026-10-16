@@ -1,25 +1,25 @@
-﻿local parent = script:FindFirstAncestor("SquadsCore").Parent
-local reactModule = require(parent.React)
-local cryoModule = require(parent.Cryo)
-local useCurrentSquadSelector = require(parent.RoduxSquads).Hooks.useCurrentSquadSelector
+﻿local Parent = script:FindFirstAncestor("SquadsCore").Parent
+local ReactModule = require(Parent.React)
+local CryoModule = require(Parent.Cryo)
+local UseCurrentSquadSelectorFunction = require(Parent.RoduxSquads).Hooks.useCurrentSquadSelector
 
-function useCurrentSquadMember(p1)
-	-- upvalues: useCurrentSquadSelector (ref), reactModule (ref), cryoModule (ref)
-	local var1 = useCurrentSquadSelector()
-	local var2 = reactModule.useMemo(function()
-		-- upvalues: var1 (ref)
-		return if var1 then var1.members else {}
-	end, { var1 })
+function useCurrentSquadMember(UserId) --[[ Line: 12 ]]
+	-- upvalues: UseCurrentSquadSelectorFunction (copy), ReactModule (copy), CryoModule (copy)
+	local UseCurrentSquadSelectorResult = UseCurrentSquadSelectorFunction()
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 14 ]]
+		-- upvalues: UseCurrentSquadSelectorResult (copy)
+		return if UseCurrentSquadSelectorResult then UseCurrentSquadSelectorResult.members else {}
+	end, { UseCurrentSquadSelectorResult })
 	
-	return reactModule.useMemo(function()
-		-- upvalues: cryoModule (copy), var2 (ref), p1 (ref)
-		local var3 = cryoModule.List.findWhere(var2, function(p2)
-			-- upvalues: p1 (copy)
-			return p2.userId == p1
+	return (ReactModule.useMemo(function() --[[ Line: 21 ]]
+		-- upvalues: CryoModule (upval), UseMemoResult (copy), UserId (copy)
+		local Where = CryoModule.List.findWhere(UseMemoResult, function(p1): boolean --[[ Line: 22 ]]
+			-- upvalues: UserId (upval)
+			return p1.userId == UserId
 		end)
 		
-		return if var3 then var2[var3] else nil
-	end, { var2, p1 })
+		return if Where then UseMemoResult[Where] else nil
+	end, { UseMemoResult, UserId }))
 end
 
 return useCurrentSquadMember

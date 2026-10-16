@@ -1,98 +1,98 @@
-﻿local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
-local telemetryService = game:GetService("TelemetryService")
-local textChatService = game:GetService("TextChatService")
-local expChatShared = script:FindFirstAncestor("ExpChatShared")
-local dictionary = require(expChatShared.Parent.llama).Dictionary
-local var1 = require(expChatShared.Logger):new("ExpChat/" .. script.Name)
-local t = {}
-local var2 = rbxAnalyticsService
+﻿local RbxAnalyticsService = game:GetService("RbxAnalyticsService")
+local TelemetryService = game:GetService("TelemetryService")
+local TextChatService = game:GetService("TextChatService")
+local ExpChatShared = script:FindFirstAncestor("ExpChatShared")
+local Dictionary = require(ExpChatShared.Parent.llama).Dictionary
+local NewResult = require(ExpChatShared.Logger):new("ExpChat/" .. script.Name)
+local RbxAnalyticsService1 = RbxAnalyticsService
 
-local function withDefaultArgs(p1)
-	-- upvalues: dictionary (ref)
-	return dictionary.join(p1, {
+local function withDefaultArgs(p1) --[[ Line: 17 ]]
+	-- upvalues: Dictionary (copy)
+	return Dictionary.join(p1, {
 		gameId = tostring(game.GameId),
 		placeId = tostring(game.PlaceId)
 	})
 end
 
-local function setRbxEventStream(value, p1, p2, p3)
-	-- upvalues: var2 (write), var1 (ref), withDefaultArgs (ref)
-	if var2 then
-		var1:debug("Event: {}", p2)
-		var2:SetRBXEventStream(value, p1, p2, withDefaultArgs(p3 or {}))
+local function setRbxEventStream(Target, EventContext, EventName, p1) --[[ Line: 24 ]]
+	-- upvalues: RbxAnalyticsService1 (ref), NewResult (copy), withDefaultArgs (copy)
+	if RbxAnalyticsService1 then
+		NewResult:debug("Event: {}", EventName)
+		RbxAnalyticsService1:SetRBXEventStream(Target, EventContext, EventName, withDefaultArgs(p1 or {}))
 	end
 end
 
-local function sendEventDeferred(p1, p2, p3, p4)
-	-- upvalues: var2 (write), var1 (ref), withDefaultArgs (ref)
-	if var2 then
-		var1:debug("SendEventDeferred: {}", p3)
-		var2:SendEventDeferred(p1, p2, p3, withDefaultArgs(p4 or {}))
+local function sendEventDeferred(Target, EventContext, EventName, p1) --[[ Line: 31 ]]
+	-- upvalues: RbxAnalyticsService1 (ref), NewResult (copy), withDefaultArgs (copy)
+	if RbxAnalyticsService1 then
+		NewResult:debug("SendEventDeferred: {}", EventName)
+		RbxAnalyticsService1:SendEventDeferred(Target, EventContext, EventName, withDefaultArgs(p1 or {}))
 	end
 end
 
-function t.with(p1)
-	-- upvalues: var2 (write), rbxAnalyticsService (ref)
-	var2 = p1 or rbxAnalyticsService
-end
-
-function t.FireRccAnalyticsWithEventName(p1, p2)
-	-- upvalues: setRbxEventStream (ref)
-	setRbxEventStream("rcc", "experienceChat", p1, p2)
-end
-
-function t.FireClientAnalyticsWithEventName(p1, p2)
-	-- upvalues: setRbxEventStream (ref)
-	setRbxEventStream("client", "experienceChat", p1, p2)
-end
-
-function t.reportCounter(p1, p2)
-	-- upvalues: var2 (write), var1 (ref)
-	if var2 then
-		var1:debug("Counter: {}", p1)
-		var2:ReportCounter(p1, p2 or 1)
-	end
-end
-
-t.ExpChatChatEnabledUserCountFetchConfig = {
-	eventName = "ExpChatChatEnabledUserCountFetch",
-	description = "Counts successful and failed attempts to fetch the local chat-enabled system message user count.",
-	links = "",
-	backends = { "RobloxTelemetryCounter" },
-	lastUpdated = { 2026, 7, 22 }
+local AnalyticsModule = {
+	with = function(p1) --[[ Line: 38 ]]
+		-- upvalues: RbxAnalyticsService1 (ref), RbxAnalyticsService (copy)
+		RbxAnalyticsService1 = p1 or RbxAnalyticsService
+	end,
+	FireRccAnalyticsWithEventName = function(p1, p2) --[[ Line: 42 ]]
+		-- upvalues: setRbxEventStream (copy)
+		setRbxEventStream("rcc", "experienceChat", p1, p2)
+	end,
+	FireClientAnalyticsWithEventName = function(p1, p2) --[[ Line: 46 ]]
+		-- upvalues: setRbxEventStream (copy)
+		setRbxEventStream("client", "experienceChat", p1, p2)
+	end,
+	reportCounter = function(CounterName, p1) --[[ Line: 50 ]]
+		-- upvalues: RbxAnalyticsService1 (ref), NewResult (copy)
+		if RbxAnalyticsService1 then
+			NewResult:debug("Counter: {}", CounterName)
+			RbxAnalyticsService1:ReportCounter(CounterName, p1 or 1)
+		end
+	end,
+	ExpChatChatEnabledUserCountFetchConfig = {
+		eventName = "ExpChatChatEnabledUserCountFetch",
+		description = "Counts successful and failed attempts to fetch the local chat-enabled system message user count.",
+		links = "",
+		backends = { "RobloxTelemetryCounter" },
+		lastUpdated = { 2026, 7, 22 }
+	}
 }
 
-function t.reportChatEnabledUserCountFetchResult(p1)
-	-- upvalues: telemetryService (ref), t (ref)
-	telemetryService:LogCounter(t.ExpChatChatEnabledUserCountFetchConfig, {
+function AnalyticsModule.reportChatEnabledUserCountFetchResult(p1) --[[ Line: 65 ]]
+	-- upvalues: TelemetryService (copy), AnalyticsModule (copy)
+	TelemetryService:LogCounter(AnalyticsModule.ExpChatChatEnabledUserCountFetchConfig, {
 		customFields = { result = if p1 then "success" else "failure" }
 	}, 1)
 end
 
-function t.FireRccAnalyticsDeferred(p1, p2)
-	-- upvalues: sendEventDeferred (ref)
+function AnalyticsModule.FireRccAnalyticsDeferred(p1, p2) --[[ Line: 73 ]]
+	-- upvalues: sendEventDeferred (copy)
 	sendEventDeferred("RCC", "experienceChat", p1, p2)
 end
 
-function t.TelemetryLogEvent(_, p1, p2, p3)
-	-- upvalues: telemetryService (ref)
-	telemetryService:LogEvent(p1, { customFields = p2, standardizedFields = p3 })
+function AnalyticsModule:TelemetryLogEvent(Config, CustomFields, StandardizedFields) --[[ Line: 77 ]]
+	-- upvalues: TelemetryService (copy)
+	TelemetryService:LogEvent(Config, {
+		customFields = CustomFields,
+		standardizedFields = StandardizedFields
+	})
 end
 
-t.DefaultStandardizedFields = {
+AnalyticsModule.DefaultStandardizedFields = {
 	"addOSInfo",
 	"addSessionInfo",
 	"addUniverseId",
 	"addPlaceId"
 }
 
-function t.reportTextChatCommandClientSent(p1, p2)
-	-- upvalues: textChatService (ref)
-	textChatService:SendTextChatCommandClientSent(p2)
-	p1.FireClientAnalyticsWithEventName("CommandSent", { commandName = p2 })
+function AnalyticsModule.reportTextChatCommandClientSent(p1, CommandName) --[[ Line: 83 ]]
+	-- upvalues: TextChatService (copy)
+	TextChatService:SendTextChatCommandClientSent(CommandName)
+	p1.FireClientAnalyticsWithEventName("CommandSent", { commandName = CommandName })
 end
 
-t.RewriteDropdownToggledConfig = {
+AnalyticsModule.RewriteDropdownToggledConfig = {
 	eventName = "RewriteDropdownToggled",
 	description = "When a user activates the AI rewrite dropdown toggle on a rewritten chat message.",
 	links = "",
@@ -100,7 +100,7 @@ t.RewriteDropdownToggledConfig = {
 	throttlingPercentage = game:DefineFastInt("ExpChatRewriteDropdownToggledThrottlePerMyriad", 10000),
 	lastUpdated = { 26, 4, 21 }
 }
-t.ExpChatGlobalChatTabClickedConfig = {
+AnalyticsModule.ExpChatGlobalChatTabClickedConfig = {
 	eventName = "ExpChatGlobalChatTabClicked",
 	description = "When a user selects the Global channel tab in the experience chat channel bar.",
 	links = "",
@@ -108,7 +108,7 @@ t.ExpChatGlobalChatTabClickedConfig = {
 	throttlingPercentage = game:DefineFastInt("ExpChatGlobalChatTabClickedThrottlePerMyriad", 0),
 	lastUpdated = { 26, 5, 13 }
 }
-t.ExpChatTabClickedConfig = {
+AnalyticsModule.ExpChatTabClickedConfig = {
 	eventName = "ExpChatTabClicked",
 	description = "When a user clicks any tab in the experience chat channel bar.",
 	links = "https://roblox.atlassian.net/wiki/spaces/SOCIAL/pages/4777640083/Friends+Chat+In+Exp+Tech+Spec#Experience-Chat-Tab-Events-Proposal",
@@ -116,7 +116,7 @@ t.ExpChatTabClickedConfig = {
 	throttlingPercentage = game:DefineFastInt("ExpChatTabClickedThrottlePerMyriad", 10000),
 	lastUpdated = { 26, 8, 12 }
 }
-t.ExpChatTabImpressionConfig = {
+AnalyticsModule.ExpChatTabImpressionConfig = {
 	eventName = "ExpChatTabImpression",
 	description = "When an experience chat tab is rendered or a tracked field (index, overflow, visibility, badge count) changes.",
 	links = "https://roblox.atlassian.net/wiki/spaces/SOCIAL/pages/4777640083/Friends+Chat+In+Exp+Tech+Spec#Experience-Chat-Tab-Events-Proposal",
@@ -124,7 +124,7 @@ t.ExpChatTabImpressionConfig = {
 	throttlingPercentage = game:DefineFastInt("ExpChatTabImpressionThrottlePerMyriad", 10000),
 	lastUpdated = { 26, 7, 27 }
 }
-t.ExpChatPresetActionConfig = {
+AnalyticsModule.ExpChatPresetActionConfig = {
 	eventName = "ExpChatPresetAction",
 	description = "When a user interacts with the preset chat UI.",
 	links = "https://roblox.atlassian.net/browse/EXPCHAT-1243",
@@ -133,4 +133,4 @@ t.ExpChatPresetActionConfig = {
 	lastUpdated = { 26, 6, 1 }
 }
 
-return t
+return AnalyticsModule

@@ -1,53 +1,50 @@
-﻿local avatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
-local parent = avatarExperienceCatalog.Parent
-local normalize = require(parent.AvatarExperienceCommon).Utils.normalize
-local normalizeBoolean = normalize.normalizeBoolean
-local normalizeString = normalize.normalizeString
-local normalizeNumber = normalize.normalizeNumber
-local makeNormalizeTableFn = normalize.makeNormalizeTableFn
-local normalizeNotEmptyString = normalize.normalizeNotEmptyString
-local httpService = game:GetService("HttpService")
-local _ = require(avatarExperienceCatalog.Models.CatalogCategories)
-local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
-local fFlagAXCatalogCategoriesSDUITaxonomy = avatarExperienceFlagsModule.FFlagAXCatalogCategoriesSDUITaxonomy
-local fFlagAXCatalogCategoriesSDUIPillTitleNormalization = avatarExperienceFlagsModule.FFlagAXCatalogCategoriesSDUIPillTitleNormalization
+﻿local AvatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
+local Parent = AvatarExperienceCatalog.Parent
+local Normalize = require(Parent.AvatarExperienceCommon).Utils.normalize
+local NormalizeBooleanFunction = Normalize.normalizeBoolean
+local NormalizeStringFunction = Normalize.normalizeString
+local NormalizeNumberFunction = Normalize.normalizeNumber
+local NormalizeNotEmptyStringFunction = Normalize.normalizeNotEmptyString
+local HttpService = game:GetService("HttpService")
+local _ = require(AvatarExperienceCatalog.Models.CatalogCategories)
+local FFlagAXCatalogCategoriesSDUI = require(Parent.AvatarExperienceFlags).FFlagAXCatalogCategoriesSDUI
 
-local function _()
-	-- upvalues: httpService (ref)
-	return httpService:GenerateGUID(true)
+local function _() --[[ Line: 19 | Named "SearchUuid" ]]
+	-- upvalues: HttpService (copy)
+	return HttpService:GenerateGUID(true)
 end
 
-local function extractShowCatalogContentActionRequestParams(p1)
-	local requestParams = nil
+local function extractShowCatalogContentActionRequestParams(p1) --[[ Line: 37 ]]
+	local RequestParams = nil
 	
 	if p1.props and p1.props.OnActivated then
-		for i, v in p1.props.OnActivated do
-			if v.componentType == "ShowCatalogContentAction" then
-				requestParams = v.props and v.props.requestParams
+		for _, value in p1.props.OnActivated do
+			if value.componentType == "ShowCatalogContentAction" then
+				RequestParams = value.props and value.props.requestParams
 				
-				return requestParams
+				return RequestParams
 			end
 		end
 	end
-	return requestParams
+	return RequestParams
 end
 
-local function extractWidgetContext(p2)
-	local context = nil
+local function extractWidgetContext(p2) --[[ Line: 51 ]]
+	local Context = nil
 	
 	if p2.props and p2.props.OnActivated then
-		for i, v in p2.props.OnActivated do
-			if v.componentType == "ShowWidgetContentAction" then
-				context = v.props and (v.props.requestParams and v.props.requestParams.context)
+		for _, value in p2.props.OnActivated do
+			if value.componentType == "ShowWidgetContentAction" then
+				Context = value.props and (value.props.requestParams and value.props.requestParams.context)
 				
-				return context
+				return Context
 			end
 		end
 	end
-	return context
+	return Context
 end
 
-local _ = function(p3)
+local _ = function(p3) --[[ Line: 67 | Named "stringToBoolean" ]]
 	if type(p3) == "boolean" then
 		return p3, nil
 	elseif type(p3) ~= "string" then
@@ -56,641 +53,667 @@ local _ = function(p3)
 		return true, nil
 	elseif p3 == "False" then
 		return false, nil
+	else
+		return nil, "Invalid boolean string value, expected \"True\" or \"False\""
 	end
-	return nil, "Invalid boolean string value, expected \"True\" or \"False\""
 end
 
-local function splitCommaSeparatedString(p3)
-	if not p3 or p3 == "" then
+local function splitCommaSeparatedString(Text: string) --[[ Line: 86 ]]
+	if not Text or Text == "" then
 		return nil
 	end
-	local t = {}
+	local List = {}
 	
-	for i, v in string.split(p3, ",") do
-		if v ~= "" then
-			table.insert(t, v)
+	for _, value in string.split(Text, ",") do
+		if value ~= "" then
+			table.insert(List, value)
 		end
 	end
-	return if #t > 0 then t else nil
+	return #List > 0 and List or nil
 end
 
-local _ = function(value)
-	-- upvalues: extractShowCatalogContentActionRequestParams (ref), normalizeString (ref), splitCommaSeparatedString (ref)
-	local var1 = extractShowCatalogContentActionRequestParams(value)
-	local assetTypeIds = var1 and var1.assetTypeIds
+local _ = function(p3) --[[ Line: 103 | Named "normalizeAssetTypeIdStrings" ]]
+	-- upvalues: extractShowCatalogContentActionRequestParams (copy), NormalizeStringFunction (copy), splitCommaSeparatedString (copy)
+	local ExtractShowCatalogContentActionRequestParamsResult = extractShowCatalogContentActionRequestParams(p3)
+	local AssetTypeIds = ExtractShowCatalogContentActionRequestParamsResult and ExtractShowCatalogContentActionRequestParamsResult.assetTypeIds
 	
-	if assetTypeIds == nil or assetTypeIds == "" then
+	if AssetTypeIds == nil or AssetTypeIds == "" then
 		return nil, nil
 	end
-	local var2, var3 = normalizeString(assetTypeIds)
+	local NormalizeStringResult, NormalizeStringResult2 = NormalizeStringFunction(AssetTypeIds)
 	
-	if var3 then
-		return nil, var3
-	end
-	return splitCommaSeparatedString(var2), nil
-end
-
-local _ = function(p4)
-	-- upvalues: extractShowCatalogContentActionRequestParams (ref), normalizeString (ref), splitCommaSeparatedString (ref)
-	local var1 = extractShowCatalogContentActionRequestParams(p4)
-	local bundleTypeIds = var1 and var1.bundleTypeIds
-	
-	if bundleTypeIds == nil or bundleTypeIds == "" then
-		return nil, nil
-	end
-	local var2, var3 = normalizeString(bundleTypeIds)
-	
-	if var3 then
-		return nil, var3
-	end
-	return splitCommaSeparatedString(var2), nil
-end
-
-local _ = function(p4)
-	-- upvalues: extractShowCatalogContentActionRequestParams (ref), normalizeNotEmptyString (ref)
-	local var1 = extractShowCatalogContentActionRequestParams(p4)
-	local var2, var3 = normalizeNotEmptyString(var1 and var1.taxonomyId)
-	
-	return var2, var3
-end
-
-local _ = function(p4)
-	-- upvalues: extractWidgetContext (ref)
-	return extractWidgetContext(p4), nil
-end
-
-local _ = function()
-	-- upvalues: httpService (ref)
-	return httpService:GenerateGUID(true), nil
-end
-
-local _ = function(p4)
-	-- upvalues: fFlagAXCatalogCategoriesSDUIPillTitleNormalization (ref), normalizeNotEmptyString (ref), normalizeString (ref)
-	local pillTitle = p4.props and p4.props.pillTitle
-	local _ = nil
-	local _ = nil
-	
-	if fFlagAXCatalogCategoriesSDUIPillTitleNormalization then
-		local var1, var2 = normalizeNotEmptyString(pillTitle)
-		
-		return var1, var2
-	end
-	local var3, var4 = normalizeString(pillTitle)
-	
-	return var3, var4
-end
-
-local _ = function(p4)
-	-- upvalues: fFlagAXCatalogCategoriesSDUIPillTitleNormalization (ref), normalizeNotEmptyString (ref), normalizeString (ref)
-	local pillId = p4.props and p4.props.pillId
-	local _ = nil
-	local _ = nil
-	
-	if fFlagAXCatalogCategoriesSDUIPillTitleNormalization then
-		local var1, var2 = normalizeNotEmptyString(pillId)
-		
-		return var1, var2
-	end
-	local var3, var4 = normalizeString(pillId)
-	
-	return var3, var4
-end
-
-local _ = function(p4)
-	-- upvalues: normalizeNumber (ref)
-	local timeToRefresh = p4.props and p4.props.timeToRefresh
-	
-	if timeToRefresh == nil or timeToRefresh == "" then
-		return nil, nil
-	elseif type(timeToRefresh) == "string" then
-		timeToRefresh = tonumber(timeToRefresh)
-	end
-	if timeToRefresh == nil then
-		return nil, nil
-	end
-	local var1, var2 = normalizeNumber(timeToRefresh)
-	
-	return var1, var2
-end
-
-local _ = function(p4)
-	-- upvalues: normalizeNotEmptyString (ref)
-	local var1, var2 = normalizeNotEmptyString(p4.props and p4.props.cameraFocus)
-	
-	return var1, var2
-end
-
-local _ = function(p4)
-	-- upvalues: normalizeNumber (ref)
-	local cameraZoomRadius = p4.props and p4.props.cameraZoomRadius
-	
-	if cameraZoomRadius == nil or cameraZoomRadius == "" then
-		return nil, nil
-	elseif type(cameraZoomRadius) == "string" then
-		cameraZoomRadius = tonumber(cameraZoomRadius)
-	end
-	if cameraZoomRadius == nil then
-		return nil, nil
-	end
-	local var1, var2 = normalizeNumber(cameraZoomRadius)
-	
-	return var1, var2
-end
-
-local _ = function(p4)
-	-- upvalues: normalizeBoolean (ref)
-	local var1, var2
-	local canAnimateCameraBasedMood = p4.props and p4.props.canAnimateCameraBasedMood
-	
-	if canAnimateCameraBasedMood == nil or canAnimateCameraBasedMood == "" then
-		return nil, nil
-	elseif type(canAnimateCameraBasedMood) == "boolean" then
-		var1 = canAnimateCameraBasedMood
-		var2 = nil
-	elseif type(canAnimateCameraBasedMood) ~= "string" then
-		var1 = nil
-		var2 = "Expected boolean or string"
-	elseif canAnimateCameraBasedMood == "True" then
-		var1 = true
-		var2 = nil
-	elseif canAnimateCameraBasedMood == "False" then
-		var1 = false
-		var2 = nil
+	if NormalizeStringResult2 then
+		return nil, NormalizeStringResult2
 	else
-		var1 = nil
-		var2 = "Invalid boolean string value, expected \"True\" or \"False\""
+		return splitCommaSeparatedString(NormalizeStringResult), nil
 	end
-	if var2 then
-		return nil, var2
-	end
-	local var3, var4 = normalizeBoolean(var1)
-	
-	return var3, var4
 end
 
-local _ = function(p4)
-	-- upvalues: normalizeBoolean (ref)
-	local var1, var2
-	local disableFilters = p4.props and p4.props.disableFilters
+local _ = function(p3) --[[ Line: 121 | Named "normalizeBundleTypes" ]]
+	-- upvalues: extractShowCatalogContentActionRequestParams (copy), NormalizeStringFunction (copy), splitCommaSeparatedString (copy)
+	local ExtractShowCatalogContentActionRequestParamsResult = extractShowCatalogContentActionRequestParams(p3)
+	local BundleTypeIds = ExtractShowCatalogContentActionRequestParamsResult and ExtractShowCatalogContentActionRequestParamsResult.bundleTypeIds
 	
-	if disableFilters == nil or disableFilters == "" then
+	if BundleTypeIds == nil or BundleTypeIds == "" then
 		return nil, nil
-	elseif type(disableFilters) == "boolean" then
-		var1 = disableFilters
-		var2 = nil
-	elseif type(disableFilters) ~= "string" then
-		var1 = nil
-		var2 = "Expected boolean or string"
-	elseif disableFilters == "True" then
-		var1 = true
-		var2 = nil
-	elseif disableFilters == "False" then
-		var1 = false
-		var2 = nil
+	end
+	local NormalizeStringResult, NormalizeStringResult2 = NormalizeStringFunction(BundleTypeIds)
+	
+	if NormalizeStringResult2 then
+		return nil, NormalizeStringResult2
 	else
-		var1 = nil
-		var2 = "Invalid boolean string value, expected \"True\" or \"False\""
+		return splitCommaSeparatedString(NormalizeStringResult), nil
 	end
-	if var2 then
-		return nil, var2
-	end
-	local var3, var4 = normalizeBoolean(var1)
-	
-	return var3, var4
 end
 
-local _ = function(p4)
-	-- upvalues: normalizeNotEmptyString (ref)
-	local var1, var2 = normalizeNotEmptyString(p4.props and p4.props.pageType)
+local _ = function(p3) --[[ Line: 139 | Named "normalizeTaxonomy" ]]
+	-- upvalues: extractShowCatalogContentActionRequestParams (copy), NormalizeNotEmptyStringFunction (copy)
+	local ExtractShowCatalogContentActionRequestParamsResult = extractShowCatalogContentActionRequestParams(p3)
+	local NormalizeNotEmptyStringResult, NormalizeNotEmptyStringResult2 = NormalizeNotEmptyStringFunction(ExtractShowCatalogContentActionRequestParamsResult and ExtractShowCatalogContentActionRequestParamsResult.taxonomyId)
 	
-	return var1, var2
+	return NormalizeNotEmptyStringResult, NormalizeNotEmptyStringResult2
 end
 
-local _ = function(p4)
-	-- upvalues: extractShowCatalogContentActionRequestParams (ref), normalizeString (ref)
-	local var1 = extractShowCatalogContentActionRequestParams(p4)
-	local context = var1 and var1.context
-	
-	if context == nil or context == "" then
-		return nil, nil
-	end
-	local var2, var3 = normalizeString(context)
-	
-	return var2, var3
+local _ = function(p3) --[[ Line: 148 | Named "normalizeWidgetContext" ]]
+	-- upvalues: extractWidgetContext (copy)
+	return extractWidgetContext(p3), nil
 end
 
-local _ = function(p4)
-	-- upvalues: normalizeNotEmptyString (ref)
-	local var1, var2 = normalizeNotEmptyString(p4.props and p4.props.tooltipKey)
-	
-	return var1, var2
+local _ = function() --[[ Line: 154 | Named "normalizeSearchUuid" ]]
+	-- upvalues: HttpService (copy)
+	return HttpService:GenerateGUID(true), nil
 end
 
-local _ = function(p4)
-	-- upvalues: normalizeNotEmptyString (ref)
-	local var1, var2 = normalizeNotEmptyString(p4.props and p4.props.tooltipBody)
+local _ = function(p3) --[[ Line: 160 | Named "normalizePillTitle" ]]
+	-- upvalues: FFlagAXCatalogCategoriesSDUI (copy), NormalizeNotEmptyStringFunction (copy), NormalizeStringFunction (copy)
+	local PillTitle = p3.props and p3.props.pillTitle
 	
-	return var1, var2
-end
-
-local _ = function(p4)
-	-- upvalues: normalizeNotEmptyString (ref)
-	local var1, var2 = normalizeNotEmptyString(p4.props and p4.props.tileType)
-	
-	return var1, var2
-end
-
-local var1 = nil
-local _ = nil
-
-local var2 = function(p4)
-	-- upvalues: var1 (write)
-	if not p4.props or not p4.props.Configs or type(p4.props.Configs) ~= "table" then
-		return nil, nil
-	end
-	local t = {}
-	local t_1 = {}
-	
-	for i, v in p4.props.Configs do
-		local var3, var4 = var1(v)
+	if FFlagAXCatalogCategoriesSDUI then
+		local NormalizeNotEmptyStringResult, NormalizeNotEmptyStringResult2 = NormalizeNotEmptyStringFunction(PillTitle)
 		
-		if var4 then
-			table.insert(t_1, var4)
-		end
-		if var3 and not var4 then
-			table.insert(t, var3)
-		end
+		return NormalizeNotEmptyStringResult, NormalizeNotEmptyStringResult2
+	else
+		local NormalizeStringResult, NormalizeStringResult2 = NormalizeStringFunction(PillTitle)
+		
+		return NormalizeStringResult, NormalizeStringResult2
 	end
-	return t, if next(t_1) then table.concat(t_1, " ") else nil
 end
 
-local function normalizeCategoryOrSubcategory(p5, p6)
-	-- upvalues: fFlagAXCatalogCategoriesSDUIPillTitleNormalization (ref), normalizeNotEmptyString (ref), normalizeString (ref), httpService (ref), extractShowCatalogContentActionRequestParams (ref), splitCommaSeparatedString (ref), fFlagAXCatalogCategoriesSDUITaxonomy (ref), extractWidgetContext (ref), normalizeNumber (ref), var2 (write), normalizeBoolean (ref)
-	if type(p5) ~= "table" then
+local _ = function(p3) --[[ Line: 172 | Named "normalizePillId" ]]
+	-- upvalues: FFlagAXCatalogCategoriesSDUI (copy), NormalizeNotEmptyStringFunction (copy), NormalizeStringFunction (copy)
+	local PillId = p3.props and p3.props.pillId
+	
+	if FFlagAXCatalogCategoriesSDUI then
+		local NormalizeNotEmptyStringResult, NormalizeNotEmptyStringResult2 = NormalizeNotEmptyStringFunction(PillId)
+		
+		return NormalizeNotEmptyStringResult, NormalizeNotEmptyStringResult2
+	else
+		local NormalizeStringResult, NormalizeStringResult2 = NormalizeStringFunction(PillId)
+		
+		return NormalizeStringResult, NormalizeStringResult2
+	end
+end
+
+local _ = function(p3) --[[ Line: 184 | Named "normalizeTimeToRefresh" ]]
+	-- upvalues: NormalizeNumberFunction (copy)
+	local TimeToRefresh = p3.props and p3.props.timeToRefresh
+	
+	if TimeToRefresh == nil or TimeToRefresh == "" then
+		return nil, nil
+	end
+	if type(TimeToRefresh) == "string" then
+		TimeToRefresh = tonumber(TimeToRefresh)
+	end
+	if TimeToRefresh == nil then
+		return nil, nil
+	else
+		local NormalizeNumberResult, NormalizeNumberResult2 = NormalizeNumberFunction(TimeToRefresh)
+		
+		return NormalizeNumberResult, NormalizeNumberResult2
+	end
+end
+
+local _ = function(p3) --[[ Line: 202 | Named "normalizeCameraFocus" ]]
+	-- upvalues: NormalizeNotEmptyStringFunction (copy)
+	local NormalizeNotEmptyStringResult, NormalizeNotEmptyStringResult2 = NormalizeNotEmptyStringFunction(p3.props and p3.props.cameraFocus)
+	
+	return NormalizeNotEmptyStringResult, NormalizeNotEmptyStringResult2
+end
+
+local _ = function(p3) --[[ Line: 209 | Named "normalizeCameraZoomRadius" ]]
+	-- upvalues: NormalizeNumberFunction (copy)
+	local CameraZoomRadius = p3.props and p3.props.cameraZoomRadius
+	
+	if CameraZoomRadius == nil or CameraZoomRadius == "" then
+		return nil, nil
+	end
+	if type(CameraZoomRadius) == "string" then
+		CameraZoomRadius = tonumber(CameraZoomRadius)
+	end
+	if CameraZoomRadius == nil then
+		return nil, nil
+	else
+		local NormalizeNumberResult, NormalizeNumberResult2 = NormalizeNumberFunction(CameraZoomRadius)
+		
+		return NormalizeNumberResult, NormalizeNumberResult2
+	end
+end
+
+local _ = function(p3) --[[ Line: 227 | Named "normalizeCanAnimateCameraBasedMood" ]]
+	-- upvalues: NormalizeBooleanFunction (copy)
+	local CanAnimateCameraBasedMood = p3.props and p3.props.canAnimateCameraBasedMood
+	
+	if CanAnimateCameraBasedMood == nil or CanAnimateCameraBasedMood == "" then
+		return nil, nil
+	end
+	local Flag = nil
+	local v1 = nil
+	if type(CanAnimateCameraBasedMood) == "boolean" then
+		Flag = CanAnimateCameraBasedMood
+		v1 = nil
+	elseif type(CanAnimateCameraBasedMood) == "string" then
+		if CanAnimateCameraBasedMood == "True" then
+			Flag = true
+			v1 = nil
+		elseif CanAnimateCameraBasedMood == "False" then
+			Flag = false
+			v1 = nil
+		else
+			Flag = nil
+			v1 = "Invalid boolean string value, expected \"True\" or \"False\""
+		end
+	else
+		Flag = nil
+		v1 = "Expected boolean or string"
+	end
+	if v1 then
+		return nil, v1
+	else
+		local NormalizeBooleanResult, NormalizeBooleanResult2 = NormalizeBooleanFunction(Flag)
+		
+		return NormalizeBooleanResult, NormalizeBooleanResult2
+	end
+end
+
+local _ = function(p3) --[[ Line: 243 | Named "normalizeDisableFilters" ]]
+	-- upvalues: NormalizeBooleanFunction (copy)
+	local DisableFilters = p3.props and p3.props.disableFilters
+	
+	if DisableFilters == nil or DisableFilters == "" then
+		return nil, nil
+	end
+	local Flag = nil
+	local v1 = nil
+	if type(DisableFilters) == "boolean" then
+		Flag = DisableFilters
+		v1 = nil
+	elseif type(DisableFilters) == "string" then
+		if DisableFilters == "True" then
+			Flag = true
+			v1 = nil
+		elseif DisableFilters == "False" then
+			Flag = false
+			v1 = nil
+		else
+			Flag = nil
+			v1 = "Invalid boolean string value, expected \"True\" or \"False\""
+		end
+	else
+		Flag = nil
+		v1 = "Expected boolean or string"
+	end
+	if v1 then
+		return nil, v1
+	else
+		local NormalizeBooleanResult, NormalizeBooleanResult2 = NormalizeBooleanFunction(Flag)
+		
+		return NormalizeBooleanResult, NormalizeBooleanResult2
+	end
+end
+
+local _ = function(p3) --[[ Line: 259 | Named "normalizePageType" ]]
+	-- upvalues: NormalizeNotEmptyStringFunction (copy)
+	local NormalizeNotEmptyStringResult, NormalizeNotEmptyStringResult2 = NormalizeNotEmptyStringFunction(p3.props and p3.props.pageType)
+	
+	return NormalizeNotEmptyStringResult, NormalizeNotEmptyStringResult2
+end
+
+local _ = function(p3) --[[ Line: 266 | Named "normalizeLooksWidgetContextForOrganicContent" ]]
+	-- upvalues: extractShowCatalogContentActionRequestParams (copy), NormalizeStringFunction (copy)
+	local ExtractShowCatalogContentActionRequestParamsResult = extractShowCatalogContentActionRequestParams(p3)
+	local Context = ExtractShowCatalogContentActionRequestParamsResult and ExtractShowCatalogContentActionRequestParamsResult.context
+	
+	if Context == nil or Context == "" then
+		return nil, nil
+	else
+		local NormalizeStringResult, NormalizeStringResult2 = NormalizeStringFunction(Context)
+		
+		return NormalizeStringResult, NormalizeStringResult2
+	end
+end
+
+local _ = function(p3) --[[ Line: 279 | Named "normalizeTooltipKey" ]]
+	-- upvalues: NormalizeNotEmptyStringFunction (copy)
+	local NormalizeNotEmptyStringResult, NormalizeNotEmptyStringResult2 = NormalizeNotEmptyStringFunction(p3.props and p3.props.tooltipKey)
+	
+	return NormalizeNotEmptyStringResult, NormalizeNotEmptyStringResult2
+end
+
+local _ = function(p3) --[[ Line: 286 | Named "normalizeTooltipBody" ]]
+	-- upvalues: NormalizeNotEmptyStringFunction (copy)
+	local NormalizeNotEmptyStringResult, NormalizeNotEmptyStringResult2 = NormalizeNotEmptyStringFunction(p3.props and p3.props.tooltipBody)
+	
+	return NormalizeNotEmptyStringResult, NormalizeNotEmptyStringResult2
+end
+
+local _ = function(p3) --[[ Line: 293 | Named "normalizeTileType" ]]
+	-- upvalues: NormalizeNotEmptyStringFunction (copy)
+	local NormalizeNotEmptyStringResult, NormalizeNotEmptyStringResult2 = NormalizeNotEmptyStringFunction(p3.props and p3.props.tileType)
+	
+	return NormalizeNotEmptyStringResult, NormalizeNotEmptyStringResult2
+end
+
+local Callback = nil
+local v1 = nil
+
+v1 = function(p3) --[[ Line: 304 ]]
+	-- upvalues: Callback (ref)
+	if not p3.props or not p3.props.Configs or type(p3.props.Configs) ~= "table" then
+		return nil, nil
+	end
+	local List = {}
+	local List1 = {}
+	
+	for _, config in p3.props.Configs do
+		local CallbackResult, CallbackResult2 = Callback(config)
+		
+		if CallbackResult2 then
+			table.insert(List1, CallbackResult2)
+		end
+		if CallbackResult and not CallbackResult2 then
+			table.insert(List, CallbackResult)
+		end
+	end
+	return List, if next(List1) then table.concat(List1, " ") else nil
+end
+
+local function normalizeCategoryOrSubcategory(p4, p5) --[[ Line: 332 ]]
+	-- upvalues: FFlagAXCatalogCategoriesSDUI (copy), NormalizeNotEmptyStringFunction (copy), NormalizeStringFunction (copy), HttpService (copy), extractShowCatalogContentActionRequestParams (copy), splitCommaSeparatedString (copy), extractWidgetContext (copy), NormalizeNumberFunction (copy), v1 (ref), NormalizeBooleanFunction (copy)
+	if type(p4) ~= "table" then
 		return nil, "Config must be a table"
 	end
-	local var5, var6
-	local t = {}
-	local pillId = p5.props and p5.props.pillId
-	local _ = nil
-	local _ = nil
+	local List = {}
+	local PillId = p4.props and p4.props.pillId
+	local NormalizeNotEmptyStringResult = nil
+	local NormalizeNotEmptyStringResult2 = nil
 	
-	if fFlagAXCatalogCategoriesSDUIPillTitleNormalization then
-		local var7, var8 = normalizeNotEmptyString(pillId)
-		var5 = var7
-		var6 = var8
+	if FFlagAXCatalogCategoriesSDUI then
+		NormalizeNotEmptyStringResult, NormalizeNotEmptyStringResult2 = NormalizeNotEmptyStringFunction(PillId)
 	else
-		local var9, var10 = normalizeString(pillId)
-		var5 = var9
-		var6 = var10
+		NormalizeNotEmptyStringResult, NormalizeNotEmptyStringResult2 = NormalizeStringFunction(PillId)
 	end
-	if var6 then
-		table.insert(t, "Id: " .. var6)
-	end
-	local var11, var12
-	local pillTitle = p5.props and p5.props.pillTitle
-	local _ = nil
-	local _ = nil
+	local Id = NormalizeNotEmptyStringResult
+	local NormalizeNotEmptyStringResult1 = NormalizeNotEmptyStringResult2
 	
-	if fFlagAXCatalogCategoriesSDUIPillTitleNormalization then
-		local var13, var14 = normalizeNotEmptyString(pillTitle)
-		var11 = var13
-		var12 = var14
-	else
-		local var15, var16 = normalizeString(pillTitle)
-		var11 = var15
-		var12 = var16
+	if NormalizeNotEmptyStringResult1 then
+		table.insert(List, "Id: " .. NormalizeNotEmptyStringResult1)
 	end
-	if var12 then
-		table.insert(t, "Name: " .. var12)
-	end
-	local var17, var18
-	local pillTitle_1 = p5.props and p5.props.pillTitle
-	local _ = nil
-	local _ = nil
+	local PillTitle = p4.props and p4.props.pillTitle
+	local NormalizeNotEmptyStringResult3 = nil
+	local NormalizeNotEmptyStringResult2_1 = nil
 	
-	if fFlagAXCatalogCategoriesSDUIPillTitleNormalization then
-		local var19, var20 = normalizeNotEmptyString(pillTitle_1)
-		var17 = var19
-		var18 = var20
+	if FFlagAXCatalogCategoriesSDUI then
+		NormalizeNotEmptyStringResult3, NormalizeNotEmptyStringResult2_1 = NormalizeNotEmptyStringFunction(PillTitle)
 	else
-		local var21, var22 = normalizeString(pillTitle_1)
-		var17 = var21
-		var18 = var22
+		NormalizeNotEmptyStringResult3, NormalizeNotEmptyStringResult2_1 = NormalizeStringFunction(PillTitle)
 	end
-	if var18 then
-		table.insert(t, "LocalizedTitle: " .. var18)
-	end
-	local var23, var24
-	local pillTitle_2 = p5.props and p5.props.pillTitle
-	local _ = nil
-	local _ = nil
+	local Name = NormalizeNotEmptyStringResult3
+	local NormalizeNotEmptyStringResult4 = NormalizeNotEmptyStringResult2_1
 	
-	if fFlagAXCatalogCategoriesSDUIPillTitleNormalization then
-		local var25, var26 = normalizeNotEmptyString(pillTitle_2)
-		var23 = var25
-		var24 = var26
-	else
-		local var27, var28 = normalizeString(pillTitle_2)
-		var23 = var27
-		var24 = var28
+	if NormalizeNotEmptyStringResult4 then
+		table.insert(List, "Name: " .. NormalizeNotEmptyStringResult4)
 	end
-	if var24 then
-		table.insert(t, "Title: " .. var24)
-	end
-	local var29 = httpService:GenerateGUID(true)
-	local var30 = nil
-	local var31, var32
-	local var33 = extractShowCatalogContentActionRequestParams(p5)
-	local assetTypeIds = var33 and var33.assetTypeIds
+	local PillTitle1 = p4.props and p4.props.pillTitle
+	local NormalizeNotEmptyStringResult5 = nil
+	local NormalizeNotEmptyStringResult2_2 = nil
 	
-	if assetTypeIds == nil or assetTypeIds == "" then
-		var31 = nil
-		var32 = nil
+	if FFlagAXCatalogCategoriesSDUI then
+		NormalizeNotEmptyStringResult5, NormalizeNotEmptyStringResult2_2 = NormalizeNotEmptyStringFunction(PillTitle1)
 	else
-		local var34, var35 = normalizeString(assetTypeIds)
+		NormalizeNotEmptyStringResult5, NormalizeNotEmptyStringResult2_2 = NormalizeStringFunction(PillTitle1)
+	end
+	local LocalizedTitle = NormalizeNotEmptyStringResult5
+	local NormalizeNotEmptyStringResult6 = NormalizeNotEmptyStringResult2_2
+	
+	if NormalizeNotEmptyStringResult6 then
+		table.insert(List, "LocalizedTitle: " .. NormalizeNotEmptyStringResult6)
+	end
+	local PillTitle2 = p4.props and p4.props.pillTitle
+	local NormalizeNotEmptyStringResult7 = nil
+	local NormalizeNotEmptyStringResult2_3 = nil
+	
+	if FFlagAXCatalogCategoriesSDUI then
+		NormalizeNotEmptyStringResult7, NormalizeNotEmptyStringResult2_3 = NormalizeNotEmptyStringFunction(PillTitle2)
+	else
+		NormalizeNotEmptyStringResult7, NormalizeNotEmptyStringResult2_3 = NormalizeStringFunction(PillTitle2)
+	end
+	local Title = NormalizeNotEmptyStringResult7
+	local NormalizeNotEmptyStringResult8 = NormalizeNotEmptyStringResult2_3
+	
+	if NormalizeNotEmptyStringResult8 then
+		table.insert(List, "Title: " .. NormalizeNotEmptyStringResult8)
+	end
+	local Guid = HttpService:GenerateGUID(true)
+	local v2 = nil
+	
+	if v2 then
+		table.insert(List, "SearchUuid: " .. v2)
+	end
+	local ExtractShowCatalogContentActionRequestParamsResult = extractShowCatalogContentActionRequestParams(p4)
+	local AssetTypeIds = ExtractShowCatalogContentActionRequestParamsResult and ExtractShowCatalogContentActionRequestParamsResult.assetTypeIds
+	local v3 = nil
+	local AssetTypeIdStrings = nil
+	
+	if AssetTypeIds == nil or AssetTypeIds == "" then
+		AssetTypeIdStrings = nil
+		v3 = nil
+	else
+		local NormalizeStringResult, NormalizeStringResult2 = NormalizeStringFunction(AssetTypeIds)
 		
-		if var35 then
-			var31 = nil
-			var32 = var35
+		if NormalizeStringResult2 then
+			AssetTypeIdStrings = nil
+			v3 = NormalizeStringResult2
 		else
-			var31 = splitCommaSeparatedString(var34)
-			var32 = nil
+			AssetTypeIdStrings = splitCommaSeparatedString(NormalizeStringResult)
+			v3 = nil
 		end
 	end
-	if var32 then
-		table.insert(t, "AssetTypeIdStrings: " .. var32)
+	if v3 then
+		table.insert(List, "AssetTypeIdStrings: " .. v3)
 	end
-	local var36
-	local var37 = extractShowCatalogContentActionRequestParams(p5)
-	local bundleTypeIds = var37 and var37.bundleTypeIds
+	local ExtractShowCatalogContentActionRequestParamsResult1 = extractShowCatalogContentActionRequestParams(p4)
+	local BundleTypeIds = ExtractShowCatalogContentActionRequestParamsResult1 and ExtractShowCatalogContentActionRequestParamsResult1.bundleTypeIds
+	local v4 = nil
+	local BundleTypes = nil
 	
-	if bundleTypeIds == nil or bundleTypeIds == "" then
-		var36 = nil
-		assetTypeIds = nil
+	if BundleTypeIds == nil or BundleTypeIds == "" then
+		BundleTypes = nil
+		v4 = nil
 	else
-		local var38, var39 = normalizeString(bundleTypeIds)
+		local NormalizeStringResult1, NormalizeStringResult2_1 = NormalizeStringFunction(BundleTypeIds)
 		
-		if var39 then
-			var36 = nil
-			assetTypeIds = var39
+		if NormalizeStringResult2_1 then
+			BundleTypes = nil
+			v4 = NormalizeStringResult2_1
 		else
-			var36 = splitCommaSeparatedString(var38)
-			assetTypeIds = nil
+			BundleTypes = splitCommaSeparatedString(NormalizeStringResult1)
+			v4 = nil
 		end
 	end
-	if assetTypeIds then
-		table.insert(t, "BundleTypes: " .. assetTypeIds)
+	if v4 then
+		table.insert(List, "BundleTypes: " .. v4)
 	end
-	local var40 = nil
-	bundleTypeIds = nil
+	local v5 = nil
 	
-	if fFlagAXCatalogCategoriesSDUITaxonomy then
-		local var41 = extractShowCatalogContentActionRequestParams(p5)
-		local var42, var43 = normalizeNotEmptyString(var41 and var41.taxonomyId)
-		var40 = var42
-		bundleTypeIds = var43
+	if FFlagAXCatalogCategoriesSDUI then
+		local ExtractShowCatalogContentActionRequestParamsResult2 = extractShowCatalogContentActionRequestParams(p4)
+		local NormalizeNotEmptyStringResult2_4
+		v5, NormalizeNotEmptyStringResult2_4 = NormalizeNotEmptyStringFunction(ExtractShowCatalogContentActionRequestParamsResult2 and ExtractShowCatalogContentActionRequestParamsResult2.taxonomyId)
 		
-		if bundleTypeIds then
-			table.insert(t, "Taxonomy: " .. bundleTypeIds)
+		if NormalizeNotEmptyStringResult2_4 then
+			table.insert(List, "Taxonomy: " .. NormalizeNotEmptyStringResult2_4)
 		end
 	end
-	local var44 = extractWidgetContext(p5)
-	local var45 = nil
-	local var46, var47
-	local timeToRefresh = p5.props and p5.props.timeToRefresh
+	local ExtractWidgetContextResult = extractWidgetContext(p4)
+	local v6 = nil
 	
-	if timeToRefresh == nil or timeToRefresh == "" then
-		var46 = nil
-		var47 = nil
-	elseif type(timeToRefresh) == "string" then
-		timeToRefresh = tonumber(timeToRefresh)
+	if v6 then
+		table.insert(List, "WidgetContext: " .. v6)
 	end
-	if timeToRefresh == nil then
-		var46 = nil
-		var47 = nil
+	local TimeToRefresh = p4.props and p4.props.timeToRefresh
+	local v7 = nil
+	local TimeToRefresh1 = nil
+	
+	if TimeToRefresh == nil or TimeToRefresh == "" then
+		TimeToRefresh1 = nil
+		v7 = nil
 	else
-		local var48, var49 = normalizeNumber(timeToRefresh)
-		var46 = var48
-		var47 = var49
+		if type(TimeToRefresh) == "string" then
+			TimeToRefresh = tonumber(TimeToRefresh)
+		end
+		if TimeToRefresh == nil then
+			TimeToRefresh1 = nil
+			v7 = nil
+		else
+			TimeToRefresh1, v134 = NormalizeNumberFunction(TimeToRefresh)
+		end
 	end
-	if var47 then
-		table.insert(t, "TimeToRefresh: " .. var47)
+	if v7 then
+		table.insert(List, "TimeToRefresh: " .. v7)
 	end
-	local var50, var51 = normalizeNotEmptyString(p5.props and p5.props.cameraFocus)
+	local NormalizeNotEmptyStringResult9, NormalizeNotEmptyStringResult2_5 = NormalizeNotEmptyStringFunction(p4.props and p4.props.cameraFocus)
 	
-	if var51 then
-		table.insert(t, "CameraFocus: " .. var51)
+	if NormalizeNotEmptyStringResult2_5 then
+		table.insert(List, "CameraFocus: " .. NormalizeNotEmptyStringResult2_5)
 	end
-	local var52, var53
-	local cameraZoomRadius = p5.props and p5.props.cameraZoomRadius
+	local CameraZoomRadius = p4.props and p4.props.cameraZoomRadius
+	local v8 = nil
+	local CameraZoomRadius1 = nil
 	
-	if cameraZoomRadius == nil or cameraZoomRadius == "" then
-		var52 = nil
-		var53 = nil
-	elseif type(cameraZoomRadius) == "string" then
-		cameraZoomRadius = tonumber(cameraZoomRadius)
-	end
-	if cameraZoomRadius == nil then
-		var52 = nil
-		var53 = nil
+	if CameraZoomRadius == nil or CameraZoomRadius == "" then
+		CameraZoomRadius1 = nil
+		v8 = nil
 	else
-		local var54, var55 = normalizeNumber(cameraZoomRadius)
-		var52 = var54
-		var53 = var55
+		if type(CameraZoomRadius) == "string" then
+			CameraZoomRadius = tonumber(CameraZoomRadius)
+		end
+		if CameraZoomRadius == nil then
+			CameraZoomRadius1 = nil
+			v8 = nil
+		else
+			CameraZoomRadius1, v139 = NormalizeNumberFunction(CameraZoomRadius)
+		end
 	end
-	if var53 then
-		table.insert(t, "CameraZoomRadius: " .. var53)
+	if v8 then
+		table.insert(List, "CameraZoomRadius: " .. v8)
 	end
-	cameraZoomRadius = nil
-	local _ = nil
+	local Subcategories = nil
 	
-	if not p6.isSubcategory then
-		local var56, var57 = var2(p5)
-		cameraZoomRadius = var56
-		local var58 = var57
+	if not p5.isSubcategory then
+		local v9
+		Subcategories, v141 = v1(p4)
 		
-		if var58 then
-			table.insert(t, "Subcategories: " .. var58)
+		if v9 then
+			table.insert(List, "Subcategories: " .. v9)
 		end
 	end
-	local var59, var60, var61, var62
-	local canAnimateCameraBasedMood = p5.props and p5.props.canAnimateCameraBasedMood
+	local CanAnimateCameraBasedMood = p4.props and p4.props.canAnimateCameraBasedMood
+	local CanAnimateCameraBasedMood1 = nil
+	local v10 = nil
 	
-	if canAnimateCameraBasedMood == nil or canAnimateCameraBasedMood == "" then
-		var59 = nil
-		var60 = nil
-	elseif type(canAnimateCameraBasedMood) == "boolean" then
-		var61 = canAnimateCameraBasedMood
-		var62 = nil
-	elseif type(canAnimateCameraBasedMood) ~= "string" then
-		var61 = nil
-		var62 = "Expected boolean or string"
-	elseif canAnimateCameraBasedMood == "True" then
-		var61 = true
-		var62 = nil
-	elseif canAnimateCameraBasedMood == "False" then
-		var61 = false
-		var62 = nil
+	if CanAnimateCameraBasedMood == nil or CanAnimateCameraBasedMood == "" then
+		CanAnimateCameraBasedMood1 = nil
+		v10 = nil
 	else
-		var61 = nil
-		var62 = "Invalid boolean string value, expected \"True\" or \"False\""
+		local v11 = nil
+		local Flag = nil
+		if type(CanAnimateCameraBasedMood) == "boolean" then
+			Flag = CanAnimateCameraBasedMood
+			v11 = nil
+		elseif type(CanAnimateCameraBasedMood) == "string" then
+			if CanAnimateCameraBasedMood == "True" then
+				Flag = true
+				v11 = nil
+			elseif CanAnimateCameraBasedMood == "False" then
+				Flag = false
+				v11 = nil
+			else
+				Flag = nil
+				v11 = "Invalid boolean string value, expected \"True\" or \"False\""
+			end
+		else
+			Flag = nil
+			v11 = "Expected boolean or string"
+		end
+		if v11 then
+			CanAnimateCameraBasedMood1 = nil
+			v10 = v11
+		else
+			CanAnimateCameraBasedMood1, v146 = NormalizeBooleanFunction(Flag)
+		end
 	end
-	if var62 then
-		var59 = nil
-		var60 = var62
+	if v10 then
+		table.insert(List, "CanAnimateCameraBasedMood: " .. v10)
+	end
+	local DisableFilters = p4.props and p4.props.disableFilters
+	local DisableFilters1 = nil
+	local v12 = nil
+	
+	if DisableFilters == nil or DisableFilters == "" then
+		DisableFilters1 = nil
+		v12 = nil
 	else
-		local var63, var64 = normalizeBoolean(var61)
-		var59 = var63
-		var60 = var64
+		local v13 = nil
+		local Flag1 = nil
+		if type(DisableFilters) == "boolean" then
+			Flag1 = DisableFilters
+			v13 = nil
+		elseif type(DisableFilters) == "string" then
+			if DisableFilters == "True" then
+				Flag1 = true
+				v13 = nil
+			elseif DisableFilters == "False" then
+				Flag1 = false
+				v13 = nil
+			else
+				Flag1 = nil
+				v13 = "Invalid boolean string value, expected \"True\" or \"False\""
+			end
+		else
+			Flag1 = nil
+			v13 = "Expected boolean or string"
+		end
+		if v13 then
+			DisableFilters1 = nil
+			v12 = v13
+		else
+			DisableFilters1, v153 = NormalizeBooleanFunction(Flag1)
+		end
 	end
-	if var60 then
-		table.insert(t, "CanAnimateCameraBasedMood: " .. var60)
+	if v12 then
+		table.insert(List, "DisableFilters: " .. v12)
 	end
-	local var65, var66, var67
-	local disableFilters = p5.props and p5.props.disableFilters
+	local NormalizeNotEmptyStringResult11, NormalizeNotEmptyStringResult2_7 = NormalizeNotEmptyStringFunction(p4.props and p4.props.pageType)
 	
-	if disableFilters == nil or disableFilters == "" then
-		canAnimateCameraBasedMood = nil
-		var65 = nil
-	elseif type(disableFilters) == "boolean" then
-		var66 = disableFilters
-		var67 = nil
-	elseif type(disableFilters) ~= "string" then
-		var66 = nil
-		var67 = "Expected boolean or string"
-	elseif disableFilters == "True" then
-		var66 = true
-		var67 = nil
-	elseif disableFilters == "False" then
-		var66 = false
-		var67 = nil
+	if NormalizeNotEmptyStringResult2_7 then
+		table.insert(List, "PageType: " .. NormalizeNotEmptyStringResult2_7)
+	end
+	local ExtractShowCatalogContentActionRequestParamsResult3 = extractShowCatalogContentActionRequestParams(p4)
+	local Context = ExtractShowCatalogContentActionRequestParamsResult3 and ExtractShowCatalogContentActionRequestParamsResult3.context
+	local LooksWidgetContextForOrganicContent = nil
+	local v14 = nil
+	
+	if Context == nil or Context == "" then
+		LooksWidgetContextForOrganicContent = nil
+		v14 = nil
 	else
-		var66 = nil
-		var67 = "Invalid boolean string value, expected \"True\" or \"False\""
+		LooksWidgetContextForOrganicContent, v155 = NormalizeStringFunction(Context)
 	end
-	if var67 then
-		canAnimateCameraBasedMood = nil
-		var65 = var67
-	else
-		local var68, var69 = normalizeBoolean(var66)
-		canAnimateCameraBasedMood = var68
-		var65 = var69
+	if v14 then
+		table.insert(List, "LooksWidgetContextForOrganicContent: " .. v14)
 	end
-	if var65 then
-		table.insert(t, "DisableFilters: " .. var65)
-	end
-	local var70, var71 = normalizeNotEmptyString(p5.props and p5.props.pageType)
+	local NormalizeNotEmptyStringResult12, NormalizeNotEmptyStringResult2_8 = NormalizeNotEmptyStringFunction(p4.props and p4.props.tooltipKey)
 	
-	if var71 then
-		table.insert(t, "PageType: " .. var71)
+	if NormalizeNotEmptyStringResult2_8 then
+		table.insert(List, "TooltipKey: " .. NormalizeNotEmptyStringResult2_8)
 	end
-	local var72, var73
-	local var74 = extractShowCatalogContentActionRequestParams(p5)
-	local context = var74 and var74.context
+	local NormalizeNotEmptyStringResult10, NormalizeNotEmptyStringResult2_6 = NormalizeNotEmptyStringFunction(p4.props and p4.props.tooltipBody)
 	
-	if context == nil or context == "" then
-		var72 = nil
-		var73 = nil
-	else
-		local var75, var76 = normalizeString(context)
-		var72 = var75
-		var73 = var76
+	if NormalizeNotEmptyStringResult2_6 then
+		table.insert(List, "TooltipBody: " .. NormalizeNotEmptyStringResult2_6)
 	end
-	if var73 then
-		table.insert(t, "LooksWidgetContextForOrganicContent: " .. var73)
-	end
-	local var77, var78 = normalizeNotEmptyString(p5.props and p5.props.tooltipKey)
+	local NormalizeNotEmptyStringResult13, NormalizeNotEmptyStringResult2_9 = NormalizeNotEmptyStringFunction(p4.props and p4.props.tileType)
 	
-	if var78 then
-		table.insert(t, "TooltipKey: " .. var78)
+	if NormalizeNotEmptyStringResult2_9 then
+		table.insert(List, "TileType: " .. NormalizeNotEmptyStringResult2_9)
 	end
-	local var79, var80 = normalizeNotEmptyString(p5.props and p5.props.tooltipBody)
-	
-	if var80 then
-		table.insert(t, "TooltipBody: " .. var80)
+	if #List > 0 then
+		return nil, (if p5.isSubcategory then "Subcategory" else "Category") .. " normalization failed: " .. table.concat(List, "; ")
 	end
-	local var81, var82 = normalizeNotEmptyString(p5.props and p5.props.tileType)
-	
-	if var82 then
-		table.insert(t, "TileType: " .. var82)
-	end
-	if #t > 0 then
-		return nil, (if p6.isSubcategory then "Subcategory" else "Category") .. " normalization failed: " .. table.concat(t, "; ")
-	end
-	local t_1 = {
-		Id = var5,
-		Name = var11,
-		LocalizedTitle = var17,
-		Title = var23,
-		SearchUuid = var29,
-		AssetTypeIdStrings = var31,
-		BundleTypes = var36,
-		TaxonomyUuid = if fFlagAXCatalogCategoriesSDUITaxonomy then var40 else nil,
-		WidgetContext = var44,
-		TimeToRefresh = var46,
-		CameraFocus = var50,
-		CameraZoomRadius = var52,
-		CanAnimateCameraBasedMood = var59,
-		DisableFilters = canAnimateCameraBasedMood,
-		PageType = var70,
-		LooksWidgetContextForOrganicContent = var72,
-		TooltipKey = var77,
-		TooltipBody = var79,
-		TileType = var81
+	local config = {
+		Id = Id,
+		Name = Name,
+		LocalizedTitle = LocalizedTitle,
+		Title = Title,
+		SearchUuid = Guid,
+		AssetTypeIdStrings = AssetTypeIdStrings,
+		BundleTypes = BundleTypes,
+		TaxonomyUuid = if FFlagAXCatalogCategoriesSDUI then v5 else nil,
+		WidgetContext = ExtractWidgetContextResult,
+		TimeToRefresh = TimeToRefresh1,
+		CameraFocus = NormalizeNotEmptyStringResult9,
+		CameraZoomRadius = CameraZoomRadius1,
+		CanAnimateCameraBasedMood = CanAnimateCameraBasedMood1,
+		DisableFilters = DisableFilters1,
+		PageType = NormalizeNotEmptyStringResult11,
+		LooksWidgetContextForOrganicContent = LooksWidgetContextForOrganicContent,
+		TooltipKey = NormalizeNotEmptyStringResult12,
+		TooltipBody = NormalizeNotEmptyStringResult10,
+		TileType = NormalizeNotEmptyStringResult13
 	}
 	
-	if p6.isSubcategory then
-		t_1.isSubcategory = true
-	elseif cameraZoomRadius and #cameraZoomRadius > 0 then
-		t_1.Subcategories = cameraZoomRadius
+	if p5.isSubcategory then
+		config.isSubcategory = true
+	elseif Subcategories and #Subcategories > 0 then
+		config.Subcategories = Subcategories
 	end
-	return t_1, nil
+	return config, nil
 end
 
-var1 = function(p5)
-	-- upvalues: normalizeCategoryOrSubcategory (ref)
-	return normalizeCategoryOrSubcategory(p5, { isSubcategory = true })
+Callback = function(p4) --[[ Line: 489 ]]
+	-- upvalues: normalizeCategoryOrSubcategory (copy)
+	return normalizeCategoryOrSubcategory(p4, { isSubcategory = true })
 end
 
-local _ = nil
+local v2 = nil
 
-local var5 = function(p5)
-	-- upvalues: normalizeCategoryOrSubcategory (ref)
-	return normalizeCategoryOrSubcategory(p5, { isSubcategory = false })
+v2 = function(p4) --[[ Line: 495 ]]
+	-- upvalues: normalizeCategoryOrSubcategory (copy)
+	return normalizeCategoryOrSubcategory(p4, { isSubcategory = false })
 end
 
-local var6 = makeNormalizeTableFn({
+local NormalizeTableFn = Normalize.makeNormalizeTableFn({
 	Configs = {
-		fn = function(p5)
-			-- upvalues: var5 (write)
-			if type(p5) ~= "table" then
+		fn = function(List) --[[ Line: 500 ]]
+			-- upvalues: v2 (ref)
+			if type(List) ~= "table" then
 				return {}, "Configs field must be a table"
 			end
-			local t = {}
-			local t_1 = {}
+			local List1 = {}
+			local List2 = {}
 			
-			for i, v in p5 do
-				local var7, var8 = var5(v)
+			for _, value in List do
+				local v3, v4 = v2(value)
 				
-				if var8 then
-					table.insert(t_1, var8)
+				if v4 then
+					table.insert(List2, v4)
 				end
-				if var7 and not var8 then
-					table.insert(t, var7)
+				if v3 and not v4 then
+					table.insert(List1, v3)
 				end
 			end
-			return t, if next(t_1) then table.concat(t_1, " ") else nil
+			return List1, if next(List2) then table.concat(List2, " ") else nil
 		end
 	}
 })
 
-return function(p6)
-	-- upvalues: var6 (ref)
-	if p6 and type(p6.Configs) == "table" then
-		local var9, var10 = var6(p6)
+return function(p4) --[[ Line: 533 ]]
+	-- upvalues: NormalizeTableFn (copy)
+	if p4 and type(p4.Configs) == "table" then
+		local NormalizeTableFnResult, NormalizeTableFnResult2 = NormalizeTableFn(p4)
 		
-		return if var9 then var9.Configs else {}, var10
+		return NormalizeTableFnResult and NormalizeTableFnResult.Configs or {}, NormalizeTableFnResult2
+	else
+		return {}, "Configs field is required and must be a table"
 	end
-	return {}, "Configs field is required and must be a table"
 end

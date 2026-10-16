@@ -1,16 +1,16 @@
-﻿local inExperienceShop = script:FindFirstAncestor("InExperienceShop")
-local parent = inExperienceShop.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local useTokens = foundationModule.Hooks.useTokens
-local view = foundationModule.View
-local shopItemTileModule = require(inExperienceShop.Components.ShopItemTile)
-local _ = require(inExperienceShop.Types)
-local computeShopRowTileWidths = require(inExperienceShop.Components.computeShopRowTileWidths).computeShopRowTileWidths
+﻿local InExperienceShop = script:FindFirstAncestor("InExperienceShop")
+local Parent = InExperienceShop.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local View = FoundationModule.View
+local ShopItemTileModule = require(InExperienceShop.Components.ShopItemTile)
+local _ = require(InExperienceShop.Types)
+local ComputeShopRowTileWidthsFunction = require(InExperienceShop.Components.computeShopRowTileWidths).computeShopRowTileWidths
 
-local function defaultRenderTile(p1, p2, _, p3, p4, p5, p6)
-	-- upvalues: reactModule (ref), shopItemTileModule (ref)
-	return reactModule.createElement(shopItemTileModule, {
+local function defaultRenderTile(p1, GridPositionColumn, _, UseMemoResult, OnItemActivated, CategoryId, ShopPageType) --[[ Line: 40 ]]
+	-- upvalues: ReactModule (copy), ShopItemTileModule (copy)
+	return ReactModule.createElement(ShopItemTileModule, {
 		itemId = p1.id,
 		itemType = p1.itemType,
 		name = p1.name,
@@ -18,84 +18,85 @@ local function defaultRenderTile(p1, p2, _, p3, p4, p5, p6)
 		price = p1.price,
 		userBasePriceInRobux = p1.userBasePriceInRobux,
 		universeId = p1.universeId,
-		categoryId = p5,
-		gridPositionRow = if p3 then p3.gridPositionRow else nil,
-		gridPositionColumn = p2,
-		onItemActivated = p4,
-		shopPageType = p6,
-		LayoutOrder = p2
+		categoryId = CategoryId,
+		gridPositionRow = if UseMemoResult then UseMemoResult.gridPositionRow else nil,
+		gridPositionColumn = GridPositionColumn,
+		onItemActivated = OnItemActivated,
+		shopPageType = ShopPageType,
+		LayoutOrder = GridPositionColumn
 	})
 end
 
-local function buildTileLayoutContext(p1, p2, p3, p4, p5, p6)
-	-- upvalues: computeShopRowTileWidths (ref)
-	local var1 = false
+local function buildTileLayoutContext(Items, ColumnCount, RowWidth, Gap, GridPositionRow, Callback) --[[ Line: 68 ]]
+	-- upvalues: ComputeShopRowTileWidthsFunction (copy)
+	local Flag = false
 	
-	for i, v in p1 do
-		if p6(v, i) then
-			var1 = true
+	for i, item in Items do
+		if Callback(item, i) then
+			Flag = true
 			break
 		end
 	end
-	local var2 = computeShopRowTileWidths(p3, p4, p2, var1)
+	local ShopRowTileWidths = ComputeShopRowTileWidthsFunction(RowWidth, Gap, ColumnCount, Flag)
 	
 	return {
-		rowWidth = p3,
-		gap = p4,
-		shopWidth = var2.shopWidth,
-		featuredRobuxWidth = var2.featuredRobuxWidth,
-		gridPositionRow = p5,
-		isFeaturedDoubleWidthRobux = p6
+		rowWidth = RowWidth,
+		gap = Gap,
+		shopWidth = ShopRowTileWidths.shopWidth,
+		featuredRobuxWidth = ShopRowTileWidths.featuredRobuxWidth,
+		gridPositionRow = GridPositionRow,
+		isFeaturedDoubleWidthRobux = Callback
 	}
 end
 
-local function _(p7)
-	return "Item:" .. tostring(p7.itemType) .. ":" .. p12.id
+local function _(p1): string --[[ Line: 102 | Named "makeChildKey" ]]
+	return "Item:" .. tostring(p1.itemType) .. ":" .. p1.id
 end
 
-return reactModule.memo(function(p7)
-	-- upvalues: useTokens (ref), reactModule (ref), buildTileLayoutContext (ref), defaultRenderTile (ref), view (ref)
-	local medium = useTokens().Gap.Medium
-	local var3, var4 = reactModule.useState(0)
-	local var5 = reactModule.useCallback(function(p8)
-		-- upvalues: var4 (ref)
-		local x = p8.AbsoluteSize.X
+return ReactModule.memo(function(Frame) --[[ Line: 106 | Named "ItemRow" ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), buildTileLayoutContext (copy), defaultRenderTile (copy), View (copy)
+	local Medium = UseTokensFunction().Gap.Medium
+	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
+	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 111 ]]
+		-- upvalues: UseStateResult2 (copy)
+		local X = Frame.AbsoluteSize.X
 		
-		if x == 0 then
+		if X ~= 0 then
+			UseStateResult2(X)
+			
 			return
 		end
-		var4(x)
 	end, {})
-	local isFeaturedDoubleWidthRobux = p7.isFeaturedDoubleWidthRobux or function(_, _)
+	local IsFeaturedDoubleWidthRobux = Frame.isFeaturedDoubleWidthRobux or function(_, _): boolean --[[ Line: 120 ]]
 		return false
 	end
-	local var6 = reactModule.useMemo(function()
-		-- upvalues: buildTileLayoutContext (copy), p7 (ref), var3 (ref), medium (ref), isFeaturedDoubleWidthRobux (ref)
-		return buildTileLayoutContext(p7.items, p7.columnCount, var3, medium, p7.rowIndex, isFeaturedDoubleWidthRobux)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 124 ]]
+		-- upvalues: buildTileLayoutContext (upval), Frame (copy), UseStateResult (copy), Medium (copy), IsFeaturedDoubleWidthRobux (copy)
+		return (buildTileLayoutContext(Frame.items, Frame.columnCount, UseStateResult, Medium, Frame.rowIndex, IsFeaturedDoubleWidthRobux))
 	end, {
-		p7.items, p7.columnCount, var3, medium, p7.rowIndex,
-		isFeaturedDoubleWidthRobux
+		Frame.items, Frame.columnCount, UseStateResult, Medium, Frame.rowIndex,
+		IsFeaturedDoubleWidthRobux
 	})
-	local var7 = p7.renderTile ~= nil and var3 > 0
-	local t = {}
+	local IsUseStateResultAbove: boolean = Frame.renderTile ~= nil and UseStateResult > 0
+	local Elements = {}
 	
-	for i, v in p7.items do
-		local text = "Item:" .. tostring(v.itemType) .. ":" .. v.id
+	for i, item in Frame.items do
+		local Text = "Item:" .. tostring(item.itemType) .. ":" .. item.id
 		
-		if p7.renderTile then
-			t[text] = p7.renderTile(v, i, var6)
+		if Frame.renderTile then
+			Elements[Text] = Frame.renderTile(item, i, UseMemoResult)
 		else
-			t[text] = defaultRenderTile(v, i, p7.columnCount, var6, p7.onItemActivated, p7.sectionId, p7.shopPageType)
+			Elements[Text] = defaultRenderTile(item, i, Frame.columnCount, UseMemoResult, Frame.onItemActivated, Frame.sectionId, Frame.shopPageType)
 		end
 	end
-	if not var7 then
-		for i_1 = #p7.items + 1, p7.columnCount do
-			t["Filler" .. i_1] = reactModule.createElement(view, { tag = "size-full-0", LayoutOrder = i_1 })
+	if not IsUseStateResultAbove then
+		for i1 = #Frame.items + 1, Frame.columnCount do
+			Elements["Filler" .. i1] = ReactModule.createElement(View, { tag = "size-full-0", LayoutOrder = i1 })
 		end
 	end
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "row flex-x-fill gap-medium size-full-0 auto-y",
-		LayoutOrder = p7.LayoutOrder,
-		onAbsoluteSizeChanged = var5
-	}, t)
+		LayoutOrder = Frame.LayoutOrder,
+		onAbsoluteSizeChanged = UseResult
+	}, Elements)
 end)

@@ -1,234 +1,232 @@
 ﻿local IXPService = game:GetService("IXPService")
-local parent = script.Parent.Parent
-local argCheckModule = require(parent.ArgCheck)
-local symbol = require(parent.AppCommonLib).Symbol
-local dashModule = require(parent.Dash)
-local reactModule = require(parent.React)
-local roactAppExperimentModule = require(parent.RoactAppExperiment)
-local useUserExperiment = roactAppExperimentModule.useUserExperiment
-local experimentCacheManager = require(parent.ExperimentCacheManager).ExperimentCacheManager
-local fFlagAXLegacyIXPExposureLogging = require(parent.SharedFlags).FFlagAXLegacyIXPExposureLogging
-local var1 = require(parent.AppDebug).LogTree.logger("ax.ixp")
-local nOVALUE = symbol.named("NO_VALUE")
-local var2 = IXPService
-local connectUserLayer = roactAppExperimentModule.connectUserLayer
-local default = experimentCacheManager.default
-local t = {
-	defineIXPTest = function(p1)
-		-- upvalues: fFlagAXLegacyIXPExposureLogging (ref), var1 (ref), nOVALUE (ref)
-		local t = {
-			name = p1.name,
-			layer = p1.layer,
-			recordExposure = if p1.recordExposure then p1.recordExposure else false,
-			logExposureEnabled = if fFlagAXLegacyIXPExposureLogging then p1.logExposureEnabled else nil,
-			getIsUserInExperiment = p1.getIsUserInExperiment,
-			isEnabled = function()
-				-- upvalues: p1 (ref)
-				return p1.getDependentFlagsEnabled() and (p1.getEnabledFlag() or p1.getEnabledForAllFlag())
-			end,
-			isEnabledForAll = function()
-				-- upvalues: p1 (ref)
-				return p1.getDependentFlagsEnabled() and p1.getEnabledForAllFlag()
-			end
-		}
-		var1:info("[Define IXP Test] {}, layer: {}, isEnabled: {}, isEnabledForAll: {}", t.name, t.layer, t.isEnabled(), t.isEnabledForAll())
+local Parent = script.Parent.Parent
+local ArgCheckModule = require(Parent.ArgCheck)
+local DashModule = require(Parent.Dash)
+local ReactModule = require(Parent.React)
+local RoactAppExperimentModule = require(Parent.RoactAppExperiment)
+local UseUserExperimentFunction = RoactAppExperimentModule.useUserExperiment
+local ExperimentCacheManager = require(Parent.ExperimentCacheManager).ExperimentCacheManager
+local FFlagAXLegacyIXPExposureLogging = require(Parent.SharedFlags).FFlagAXLegacyIXPExposureLogging
+local AxIxp = require(Parent.AppDebug).LogTree.logger("ax.ixp")
+local NOVALUE = require(Parent.AppCommonLib).Symbol.named("NO_VALUE")
+local IXPService1 = IXPService
+local ConnectUserLayerFunction = RoactAppExperimentModule.connectUserLayer
+local Default = ExperimentCacheManager.default
+
+local function readLayerVariablesForTest(IxpTest) --[[ Line: 254 ]]
+	-- upvalues: IXPService1 (ref), Default (ref)
+	IxpTest.usedExperimentCacheManager = IxpTest.usedExperimentCacheManager or IXPService1:GetUserStatusForLayer(IxpTest.layer) ~= Enum.IXPLoadingStatus.Initialized
+	
+	return (if IxpTest.usedExperimentCacheManager then Default:getLayerVariables(IxpTest.layer) else IXPService1:GetUserLayerVariables(IxpTest.layer)) or {}
+end
+
+local function mapTestVariable(IxpTest, p1) --[[ Line: 265 ]]
+	-- upvalues: readLayerVariablesForTest (copy), AxIxp (copy)
+	local IxpTest1 = IxpTest.ixpTest
+	
+	if not p1 then
+		p1 = readLayerVariablesForTest(IxpTest1)
+	end
+	local MapLayerToValueResult = IxpTest.mapLayerToValue(p1, IxpTest1.isEnabledForAll())
+	
+	if MapLayerToValueResult ~= IxpTest.lastValue then
+		AxIxp:info("[Read IXP Variable] {} {} = {}", IxpTest1.name, IxpTest.name, MapLayerToValueResult)
+		IxpTest.lastValue = MapLayerToValueResult
+	end
+	return MapLayerToValueResult
+end
+
+local function _(IxpTest, p1) --[[ Line: 278 | Named "accessLayer" ]]
+	return if IxpTest.usedExperimentCacheManager then nil else p1[IxpTest.layer]
+end
+
+local function doConnectTestVariables(p1, KeysResult, p2) --[[ Line: 286 ]]
+	-- upvalues: ConnectUserLayerFunction (ref), mapTestVariable (copy)
+	return ConnectUserLayerFunction(KeysResult, function(p3) --[[ Line: 291 ]]
+		-- upvalues: p1 (copy), mapTestVariable (upval)
+		local t = {}
 		
-		for i, v in p1.variables do
-			t[i] = {
-				name = i,
-				ixpTest = t,
-				mapLayerToValue = v,
-				lastValue = nOVALUE
-			}
+		for i, value in p1 do
+			local IxpTest = value.ixpTest
+			
+			if IxpTest.isEnabled() then
+				t[i] = mapTestVariable(value, if IxpTest.usedExperimentCacheManager then nil else p3[IxpTest.layer])
+			end
 		end
 		return t
+	end, p2)
+end
+
+local _ = function(p3, p4) --[[ Line: 388 | Named "readTestVariableImpl" ]]
+	-- upvalues: mapTestVariable (copy)
+	local IxpTest = p3.ixpTest
+	
+	return if IxpTest.isEnabled() then mapTestVariable(p3, if p4 then p4[IxpTest.layer] else nil) else nil
+end
+
+local IXPUtils = {
+	defineIXPTest = function(IxpTest) --[[ Line: 210 ]]
+		-- upvalues: FFlagAXLegacyIXPExposureLogging (copy), AxIxp (copy), NOVALUE (copy)
+		local IxpTest1 = {
+			name = IxpTest.name,
+			layer = IxpTest.layer,
+			recordExposure = if IxpTest.recordExposure then IxpTest.recordExposure else false,
+			logExposureEnabled = if FFlagAXLegacyIXPExposureLogging then IxpTest.logExposureEnabled else nil,
+			getIsUserInExperiment = IxpTest.getIsUserInExperiment,
+			isEnabled = function() --[[ Line: 222 ]]
+				-- upvalues: IxpTest (copy)
+				return IxpTest.getDependentFlagsEnabled() and (IxpTest.getEnabledFlag() or IxpTest.getEnabledForAllFlag())
+			end,
+			isEnabledForAll = function() --[[ Line: 227 ]]
+				-- upvalues: IxpTest (copy)
+				return IxpTest.getDependentFlagsEnabled() and IxpTest.getEnabledForAllFlag()
+			end
+		}
+		AxIxp:info("[Define IXP Test] {}, layer: {}, isEnabled: {}, isEnabledForAll: {}", IxpTest1.name, IxpTest1.layer, IxpTest1.isEnabled(), IxpTest1.isEnabledForAll())
+		
+		for Name, variable in IxpTest.variables do
+			IxpTest1[Name] = {
+				name = Name,
+				ixpTest = IxpTest1,
+				mapLayerToValue = variable,
+				lastValue = NOVALUE
+			}
+		end
+		return IxpTest1
+	end,
+	connectTestVariables = function(List) --[[ Line: 318 ]]
+		-- upvalues: DashModule (copy), doConnectTestVariables (copy)
+		local t = {}
+		local t1 = {}
+		local t2 = {}
+		local t3 = {}
+		
+		for i, value in List do
+			local IxpTest = value.ixpTest
+			
+			if IxpTest.recordExposure then
+				t1[IxpTest.layer] = true
+				t3[i] = value
+			else
+				t[IxpTest.layer] = true
+				t2[i] = value
+			end
+		end
+		local List1 = {}
+		local KeysResult = DashModule.keys(t)
+		
+		if #KeysResult > 0 then
+			table.sort(KeysResult)
+			table.insert(List1, doConnectTestVariables(t2, KeysResult, false))
+		end
+		local KeysResult1 = DashModule.keys(t1)
+		
+		if #KeysResult1 > 0 then
+			table.sort(KeysResult1)
+			table.insert(List1, doConnectTestVariables(t3, KeysResult1, true))
+		end
+		return DashModule.pipe(table.unpack(List1))
+	end,
+	useTestVariables = function(...) --[[ Line: 360 ]]
+		-- upvalues: ArgCheckModule (copy), UseUserExperimentFunction (copy), mapTestVariable (copy)
+		local list = { ... }
+		local IxpTest = nil
+		
+		for _, value in list do
+			if IxpTest then
+				ArgCheckModule.assert(value.ixpTest == IxpTest, "All test variables passed to IXPUtils.useTestVariables must belong to same IXP test.")
+			else
+				IxpTest = value.ixpTest
+			end
+		end
+		return UseUserExperimentFunction({ IxpTest.layer }, function(p3) --[[ Line: 374 ]]
+			-- upvalues: IxpTest (ref), list (copy), mapTestVariable (upval)
+			local IxpTest1 = IxpTest
+			local v1 = if IxpTest1.usedExperimentCacheManager then nil else p3[IxpTest1.layer]
+			local t = {}
+			
+			for i, value in list do
+				if IxpTest.isEnabled() then
+					t[i] = mapTestVariable(value, v1)
+				end
+			end
+			return table.unpack(t)
+		end, IxpTest.recordExposure)
+	end,
+	readTestVariable = function(IxpTest) --[[ Line: 403 ]]
+		-- upvalues: readLayerVariablesForTest (copy), AxIxp (copy)
+		if not IxpTest.ixpTest.isEnabled() then
+			return nil
+		end
+		local v1 = nil
+		local IxpTest1 = IxpTest.ixpTest
+		
+		if not v1 then
+			v1 = readLayerVariablesForTest(IxpTest1)
+		end
+		local MapLayerToValueResult = IxpTest.mapLayerToValue(v1, IxpTest1.isEnabledForAll())
+		
+		if MapLayerToValueResult ~= IxpTest.lastValue then
+			AxIxp:info("[Read IXP Variable] {} {} = {}", IxpTest1.name, IxpTest.name, MapLayerToValueResult)
+			IxpTest.lastValue = MapLayerToValueResult
+		end
+		return MapLayerToValueResult
+	end,
+	getFromLayers = function(p3, p4) --[[ Line: 413 ]]
+		-- upvalues: mapTestVariable (copy)
+		local IxpTest = p4.ixpTest
+		
+		return if IxpTest.isEnabled() then mapTestVariable(p4, if p3 then p3[IxpTest.layer] else nil) else nil
+	end,
+	logExposure = function(p3) --[[ Line: 417 ]]
+		-- upvalues: AxIxp (copy), IXPService1 (ref)
+		AxIxp:debug("LogUserLayerExposure: {}", p3.layer)
+		IXPService1:LogUserLayerExposure(p3.layer)
+	end,
+	logLayerExposure = function(LayerName) --[[ Line: 422 ]]
+		-- upvalues: AxIxp (copy), IXPService1 (ref)
+		AxIxp:debug("LogLayerExposure: {}", LayerName)
+		IXPService1:LogUserLayerExposure(LayerName)
+	end,
+	logExperimentExposure = function(IxpTest): boolean --[[ Line: 431 ]]
+		-- upvalues: AxIxp (copy), readLayerVariablesForTest (copy), IXPService1 (ref)
+		AxIxp:debug("LogExperimentExposure: {}", IxpTest.layer)
+		
+		if IxpTest.isEnabled() and IxpTest.getIsUserInExperiment and IxpTest.getIsUserInExperiment((readLayerVariablesForTest(IxpTest))) then
+			IXPService1:LogUserLayerExposure(IxpTest.layer)
+			
+			return true
+		else
+			return false
+		end
 	end
 }
 
-local function readLayerVariablesForTest(p2)
-	-- upvalues: var2 (write), default (write)
-	p2.usedExperimentCacheManager = p2.usedExperimentCacheManager or var2:GetUserStatusForLayer(p2.layer) ~= Enum.IXPLoadingStatus.Initialized
+function IXPUtils.useLogExposureOnce(p3) --[[ Line: 449 ]]
+	-- upvalues: ReactModule (copy), IXPUtils (copy)
+	local UseRefResult = ReactModule.useRef(false)
 	
-	return (if p2.usedExperimentCacheManager then default:getLayerVariables(p2.layer) else var2:GetUserLayerVariables(p2.layer)) or {}
-end
-
-local function mapTestVariable(p2, p3)
-	-- upvalues: readLayerVariablesForTest (ref), var1 (ref)
-	local ixpTest = p2.ixpTest
-	
-	if not p3 then
-		p3 = readLayerVariablesForTest(ixpTest)
-	end
-	local var3 = p2.mapLayerToValue(p3, ixpTest.isEnabledForAll())
-	
-	if var3 ~= p2.lastValue then
-		var1:info("[Read IXP Variable] {} {} = {}", ixpTest.name, p2.name, var3)
-		p2.lastValue = var3
-	end
-	return var3
-end
-
-local function _(p2, p3)
-	return if p2.usedExperimentCacheManager then nil else p3[p2.layer]
-end
-
-local function doConnectTestVariables(p2, p3, p4)
-	-- upvalues: connectUserLayer (write), mapTestVariable (ref)
-	return connectUserLayer(p3, function(p5)
-		-- upvalues: p2 (ref), mapTestVariable (copy)
-		local t = {}
-		
-		for i, v in p2 do
-			local ixpTest = v.ixpTest
-			
-			if ixpTest.isEnabled() then
-				t[i] = mapTestVariable(v, if ixpTest.usedExperimentCacheManager then nil else p5[ixpTest.layer])
-			end
+	return ReactModule.useCallback(function() --[[ Line: 452 ]]
+		-- upvalues: UseRefResult (copy), IXPUtils (upval), p3 (copy)
+		if not UseRefResult.current then
+			IXPUtils.logExposure(p3)
+			UseRefResult.current = true
 		end
-		return t
-	end, p4)
+	end, { p3.layer })
 end
 
-function t.connectTestVariables(p5)
-	-- upvalues: dashModule (ref), doConnectTestVariables (ref)
-	local t = {}
-	local t_1 = {}
-	local t_2 = {}
-	local t_3 = {}
-	
-	for i, v in p5 do
-		local ixpTest = v.ixpTest
-		
-		if ixpTest.recordExposure then
-			t_1[ixpTest.layer] = true
-			t_3[i] = v
-		else
-			t[ixpTest.layer] = true
-			t_2[i] = v
-		end
-	end
-	local t_4 = {}
-	local var3 = dashModule.keys(t)
-	
-	if #var3 > 0 then
-		table.sort(var3)
-		table.insert(t_4, doConnectTestVariables(t_2, var3, false))
-	end
-	local var4 = dashModule.keys(t_1)
-	
-	if #var4 > 0 then
-		table.sort(var4)
-		table.insert(t_4, doConnectTestVariables(t_3, var4, true))
-	end
-	return dashModule.pipe(table.unpack(t_4))
+function IXPUtils.setMocksForTesting(p3, p4, p5) --[[ Line: 460 ]]
+	-- upvalues: IXPService1 (ref), ConnectUserLayerFunction (ref), Default (ref)
+	IXPService1 = p3 or IXPService1
+	ConnectUserLayerFunction = p4 or ConnectUserLayerFunction
+	Default = p5 or Default
 end
 
-function t.useTestVariables(...)
-	-- upvalues: argCheckModule (ref), useUserExperiment (ref), mapTestVariable (ref)
-	local list = { ... }
-	local ixpTest = nil
-	
-	for i, v in list do
-		if ixpTest then
-			argCheckModule.assert(v.ixpTest == ixpTest, "All test variables passed to IXPUtils.useTestVariables must belong to same IXP test.")
-		else
-			ixpTest = v.ixpTest
-		end
-	end
-	return useUserExperiment({ ixpTest.layer }, function(p6)
-		-- upvalues: ixpTest (write), list (ref), mapTestVariable (copy)
-		local var5 = if ixpTest.usedExperimentCacheManager then nil else p6[ixpTest.layer]
-		local t = {}
-		
-		for i, v in list do
-			if ixpTest.isEnabled() then
-				t[i] = mapTestVariable(v, var5)
-			end
-		end
-		return table.unpack(t)
-	end, ixpTest.recordExposure)
+function IXPUtils.restoreDefaultsAfterTesting() --[[ Line: 466 ]]
+	-- upvalues: IXPService1 (ref), IXPService (copy), ConnectUserLayerFunction (ref), RoactAppExperimentModule (copy), Default (ref), ExperimentCacheManager (copy)
+	IXPService1 = IXPService
+	ConnectUserLayerFunction = RoactAppExperimentModule.connectUserLayer
+	Default = ExperimentCacheManager.default
 end
 
-local _ = function(p6, p7)
-	-- upvalues: mapTestVariable (ref)
-	local ixpTest = p6.ixpTest
-	
-	return if ixpTest.isEnabled() then mapTestVariable(p6, if p7 then p7[ixpTest.layer] else nil) else nil
-end
-
-function t.readTestVariable(p6)
-	-- upvalues: readLayerVariablesForTest (ref), var1 (ref)
-	if not p6.ixpTest.isEnabled() then
-		return nil
-	end
-	local _ = nil
-	local ixpTest = p6.ixpTest
-	local _ = readLayerVariablesForTest(ixpTest)
-	local var5 = p6.mapLayerToValue(u531, ixpTest.isEnabledForAll())
-	
-	if var5 ~= p6.lastValue then
-		var1:info("[Read IXP Variable] {} {} = {}", ixpTest.name, p6.name, var5)
-		p6.lastValue = var5
-	end
-	return var5
-end
-
-function t.getFromLayers(p6, p7)
-	-- upvalues: mapTestVariable (ref)
-	local ixpTest = p7.ixpTest
-	
-	return if ixpTest.isEnabled() then mapTestVariable(p7, if p6 then p6[ixpTest.layer] else nil) else nil
-end
-
-function t.logExposure(p6)
-	-- upvalues: var1 (ref), var2 (write)
-	var1:debug("LogUserLayerExposure: {}", p6.layer)
-	var2:LogUserLayerExposure(p6.layer)
-end
-
-function t.logLayerExposure(p6)
-	-- upvalues: var1 (ref), var2 (write)
-	var1:debug("LogLayerExposure: {}", p6)
-	var2:LogUserLayerExposure(p6)
-end
-
-function t.logExperimentExposure(p6)
-	-- upvalues: var1 (ref), readLayerVariablesForTest (ref), var2 (write)
-	var1:debug("LogExperimentExposure: {}", p6.layer)
-	
-	if p6.isEnabled() and p6.getIsUserInExperiment and p6.getIsUserInExperiment(readLayerVariablesForTest(p6)) then
-		var2:LogUserLayerExposure(p6.layer)
-		
-		return true
-	end
-	return false
-end
-
-function t.useLogExposureOnce(p6)
-	-- upvalues: reactModule (ref), t (ref)
-	local var5 = reactModule.useRef(false)
-	
-	return reactModule.useCallback(function()
-		-- upvalues: var5 (ref), t (copy), p6 (ref)
-		if not var5.current then
-			t.logExposure(p6)
-			var5.current = true
-		end
-	end, { p6.layer })
-end
-
-function t.setMocksForTesting(value, p6, p7)
-	-- upvalues: var2 (write), connectUserLayer (write), default (write)
-	var2 = value or var2
-	connectUserLayer = p6 or connectUserLayer
-	default = p7 or default
-end
-
-function t.restoreDefaultsAfterTesting()
-	-- upvalues: var2 (write), IXPService (ref), connectUserLayer (write), roactAppExperimentModule (ref), default (write), experimentCacheManager (ref)
-	var2 = IXPService
-	connectUserLayer = roactAppExperimentModule.connectUserLayer
-	default = experimentCacheManager.default
-end
-
-return t
+return IXPUtils

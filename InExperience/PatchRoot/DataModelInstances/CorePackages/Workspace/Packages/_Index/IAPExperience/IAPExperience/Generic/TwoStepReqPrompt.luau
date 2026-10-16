@@ -1,20 +1,20 @@
-﻿local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local roactModule = require(parent_1.Roact)
-local UIBloxModule = require(parent_1.UIBlox)
-local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
-local buttonType = UIBloxModule.App.Button.Enum.ButtonType
-local images = UIBloxModule.App.ImageSet.Images
-local multiTextLocalizerModule = require(parent.Locale.MultiTextLocalizer)
-local name = roactModule.Component:extend(script.Name)
-name.defaultProps = {
+﻿local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local RoactModule = require(Parent1.Roact)
+local UIBloxModule = require(Parent1.UIBlox)
+local InteractiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
+local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
+local Images = UIBloxModule.App.ImageSet.Images
+local MultiTextLocalizerModule = require(Parent.Locale.MultiTextLocalizer)
+local ExtendResult = RoactModule.Component:extend(script.Name)
+ExtendResult.defaultProps = {
 	anchorPoint = Vector2.new(0.5, 0.5),
 	position = UDim2.new(0.5, 0, 0.5, 0)
 }
 
-function name.render(p1)
-	-- upvalues: roactModule (ref), multiTextLocalizerModule (ref)
-	return roactModule.createElement(multiTextLocalizerModule, {
+function ExtendResult.render(p1) --[[ Line: 35 ]]
+	-- upvalues: RoactModule (copy), MultiTextLocalizerModule (copy)
+	return RoactModule.createElement(MultiTextLocalizerModule, {
 		keys = {
 			title = {
 				key = "Authentication.TwoStepVerification.Title.VerificationRequired"
@@ -28,50 +28,50 @@ function name.render(p1)
 				key = "Authentication.TwoStepVerification.Action.GoToSecurity"
 			}
 		},
-		render = function(p2)
-			-- upvalues: p1 (ref)
+		render = function(p2) --[[ Line: 54 ]]
+			-- upvalues: p1 (copy)
 			return p1:renderAlert(p2)
 		end
 	})
 end
 
-function name.renderAlert(p1, p2)
-	-- upvalues: buttonType (ref), roactModule (ref), interactiveAlert (ref), images (ref)
-	local props = p1.props
+function ExtendResult.renderAlert(p1, p2) --[[ Line: 60 ]]
+	-- upvalues: ButtonType (copy), RoactModule (copy), InteractiveAlert (copy), Images (copy)
+	local Props = p1.props
 	
-	return roactModule.createElement(interactiveAlert, {
-		anchorPoint = props.anchorPoint,
-		position = props.position,
-		screenSize = props.screenSize,
+	return RoactModule.createElement(InteractiveAlert, {
+		anchorPoint = Props.anchorPoint,
+		position = Props.position,
+		screenSize = Props.screenSize,
 		title = p2.title,
-		titleIcon = images["icons/status/error_large"],
+		titleIcon = Images["icons/status/error_large"],
 		bodyText = p2.message,
-		buttonStackInfo = if props.openSecuritySettings then {
+		buttonStackInfo = if Props.openSecuritySettings then {
 			buttons = {
 				{
 					props = {
-						onActivated = props.closePrompt,
+						onActivated = Props.closePrompt,
 						text = p2.cancel,
-						inputIcon = props.cancelControllerIcon
+						inputIcon = Props.cancelControllerIcon
 					}
 				},
 				{
-					buttonType = buttonType.PrimarySystem,
+					buttonType = ButtonType.PrimarySystem,
 					props = {
-						onActivated = props.openSecuritySettings,
+						onActivated = Props.openSecuritySettings,
 						text = p2.gotoSecurity,
-						inputIcon = props.doneControllerIcon
+						inputIcon = Props.doneControllerIcon
 					}
 				}
 			}
 		} else {
 			buttons = {
 				{
-					buttonType = buttonType.PrimarySystem,
+					buttonType = ButtonType.PrimarySystem,
 					props = {
-						onActivated = props.closePrompt,
+						onActivated = Props.closePrompt,
 						text = p2.backToGame,
-						inputIcon = props.doneControllerIcon
+						inputIcon = Props.doneControllerIcon
 					}
 				}
 			}
@@ -79,4 +79,4 @@ function name.renderAlert(p1, p2)
 	})
 end
 
-return name
+return ExtendResult

@@ -1,10 +1,10 @@
-﻿local sharedFlagsModule = require(script:FindFirstAncestor("SplitPane").Parent.SharedFlags)
-local splitPaneVariantModule = require(script.Parent.SplitPaneVariant)
-local fFlagEnableSplitPane = sharedFlagsModule.FFlagEnableSplitPane
-local fFlagEnableSplitPaneAvatarOverlay = sharedFlagsModule.FFlagEnableSplitPaneAvatarOverlay
-local fFlagSplitPaneEducationalTour = sharedFlagsModule.FFlagSplitPaneEducationalTour
+﻿local SharedFlagsModule = require(script:FindFirstAncestor("SplitPane").Parent.SharedFlags)
+local SplitPaneVariantModule = require(script.Parent.SplitPaneVariant)
+local FFlagEnableSplitPane = SharedFlagsModule.FFlagEnableSplitPane
+local FFlagEnableSplitPaneAvatarOverlay = SharedFlagsModule.FFlagEnableSplitPaneAvatarOverlay
+local FFlagSplitPaneEducationalTour = SharedFlagsModule.FFlagSplitPaneEducationalTour
 
-return function()
-	-- upvalues: fFlagEnableSplitPane (ref), fFlagEnableSplitPaneAvatarOverlay (ref), fFlagSplitPaneEducationalTour (ref), splitPaneVariantModule (ref)
-	return fFlagEnableSplitPane and (fFlagEnableSplitPaneAvatarOverlay and (fFlagSplitPaneEducationalTour and splitPaneVariantModule.isEducationModalEnabled()))
+return function() --[[ Line: 16 | Named "isSplitPaneTourSupported" ]]
+	-- upvalues: FFlagEnableSplitPane (copy), FFlagEnableSplitPaneAvatarOverlay (copy), FFlagSplitPaneEducationalTour (copy), SplitPaneVariantModule (copy)
+	return FFlagEnableSplitPane and (FFlagEnableSplitPaneAvatarOverlay and (FFlagSplitPaneEducationalTour and SplitPaneVariantModule.isEducationModalEnabled()))
 end

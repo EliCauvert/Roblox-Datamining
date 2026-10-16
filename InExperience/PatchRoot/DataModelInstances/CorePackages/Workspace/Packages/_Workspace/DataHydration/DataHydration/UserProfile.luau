@@ -1,7 +1,7 @@
-﻿local userProfileDataHydrationModule = require(script.UserProfileDataHydration)
+﻿local UserProfileDataHydrationModule = require(script.UserProfileDataHydration)
 
 return {
-	resolveField = userProfileDataHydrationModule.resolveField,
-	updateFromHydration = userProfileDataHydrationModule.updateFromHydration,
-	getAndFetchUserInfo = userProfileDataHydrationModule.getAndFetchUserInfo
+	resolveField = UserProfileDataHydrationModule.resolveField,
+	updateFromHydration = UserProfileDataHydrationModule.updateFromHydration,
+	getAndFetchUserInfo = UserProfileDataHydrationModule.getAndFetchUserInfo
 }

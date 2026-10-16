@@ -1,113 +1,111 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local contextActionService = game:GetService("ContextActionService")
-local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local appFonts = require(corePackagesService.Workspace.Packages.Style).AppFonts
-local parent = script.Parent.Parent
-local colorsModule = require(parent.Colors)
-local constantsModule = require(parent.Constants)
-local setTryingOnInfoModule = require(parent.Actions.SetTryingOnInfo)
-local tryOnItemModule = require(parent.Thunks.TryOnItem)
-local getSelectionImageObjectRoundedModule = require(parent.getSelectionImageObjectRounded)
-local tryOn = require(script.Parent.Common.ControllerShortcutKeycodes).TryOn
-local tryOnButton = roactModule.PureComponent:extend("TryOnButton")
+﻿local CorePackages = game:GetService("CorePackages")
+local ContextActionService = game:GetService("ContextActionService")
+local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local AppFonts = require(CorePackages.Workspace.Packages.Style).AppFonts
+local Parent = script.Parent.Parent
+local ColorsModule = require(Parent.Colors)
+local ConstantsModule = require(Parent.Constants)
+local SetTryingOnInfoModule = require(Parent.Actions.SetTryingOnInfo)
+local TryOnItemModule = require(Parent.Thunks.TryOnItem)
+local GetSelectionImageObjectRoundedModule = require(Parent.getSelectionImageObjectRounded)
+local TryOn = require(script.Parent.Common.ControllerShortcutKeycodes).TryOn
+local TryOnButton = RoactModule.PureComponent:extend("TryOnButton")
 
-function tryOnButton.init(p1)
-	-- upvalues: getSelectionImageObjectRoundedModule (ref), contextActionService (ref), tryOn (ref)
-	p1.selectedImage = getSelectionImageObjectRoundedModule()
-	contextActionService:BindCoreAction("TryOnGamepadShortcut", function(_, p2, _)
-		-- upvalues: p1 (ref)
-		if p2 == Enum.UserInputState.End then
+function TryOnButton.init(p1) --[[ Line: 22 ]]
+	-- upvalues: GetSelectionImageObjectRoundedModule (copy), ContextActionService (copy), TryOn (copy)
+	p1.selectedImage = GetSelectionImageObjectRoundedModule()
+	ContextActionService:BindCoreAction("TryOnGamepadShortcut", function(_, UserInputState, _) --[[ Line: 25 ]]
+		-- upvalues: p1 (copy)
+		if UserInputState == Enum.UserInputState.End then
 			p1:activateButton()
 			
 			return Enum.ContextActionResult.Sink
+		else
+			return Enum.ContextActionResult.Pass
 		end
-		return Enum.ContextActionResult.Pass
-	end, false, tryOn)
+	end, false, TryOn)
 end
 
-function tryOnButton.activateButton(p1)
-	-- upvalues: constantsModule (ref)
+function TryOnButton.activateButton(p1) --[[ Line: 34 ]]
+	-- upvalues: ConstantsModule (copy)
 	if not p1.props.showTryOn then return end
-	local assetInfo = p1.props.assetInfo
-	local tryOnItem = p1.props.tryOnItem
-	local takeOffItem = p1.props.takeOffItem
-	local tryingOn = p1.props.tryingOnInfo.tryingOn
-	local partOfBundleAndOffsale = p1.props.partOfBundleAndOffsale
-	local bundleId = p1.props.bundleId
+	local AssetInfo = p1.props.assetInfo
+	local TryOnItemFunction: (any, any, any, any, any) -> () = p1.props.tryOnItem
+	local TakeOffItemFunction: () -> () = p1.props.takeOffItem
+	local TryingOn = p1.props.tryingOnInfo.tryingOn
+	local PartOfBundleAndOffsale = p1.props.partOfBundleAndOffsale
+	local BundleId = p1.props.bundleId
 	
-	if not (assetInfo and (p1.props.localPlayerModel and (constantsModule.LayeredAssetTypes[assetInfo.assetTypeId] ~= nil and p1.props.localPlayerModel.Humanoid.RigType == Enum.HumanoidRigType.R6))) then
-		if tryingOn then
-			takeOffItem()
+	if not AssetInfo or (not p1.props.localPlayerModel or (ConstantsModule.LayeredAssetTypes[AssetInfo.assetTypeId] == nil or p1.props.localPlayerModel.Humanoid.RigType ~= Enum.HumanoidRigType.R6)) then
+		if TryingOn then
+			TakeOffItemFunction()
 			
 			return
 		end
-		tryOnItem(true, assetInfo.assetId, assetInfo.assetTypeId, partOfBundleAndOffsale, bundleId)
+		TryOnItemFunction(true, AssetInfo.assetId, AssetInfo.assetTypeId, PartOfBundleAndOffsale, BundleId)
 	end
 end
 
-function tryOnButton.willUnmount(_)
-	-- upvalues: contextActionService (ref)
-	contextActionService:UnbindCoreAction("TryOnGamepadShortcut")
+function TryOnButton:willUnmount() --[[ Line: 61 ]]
+	-- upvalues: ContextActionService (copy)
+	ContextActionService:UnbindCoreAction("TryOnGamepadShortcut")
 end
 
-function tryOnButton.render(p1)
-	-- upvalues: constantsModule (ref), roactModule (ref), colorsModule (ref), robloxTranslatorModule (ref), appFonts (ref)
-	local tryingOn = p1.props.tryingOnInfo.tryingOn
-	local showTryOn = p1.props.showTryOn
-	local locale = p1.props.locale
-	local assetInfo = p1.props.assetInfo
-	local var1 = assetInfo and (p1.props.localPlayerModel and (constantsModule.LayeredAssetTypes[assetInfo.assetTypeId] ~= nil and p1.props.localPlayerModel.Humanoid.RigType == Enum.HumanoidRigType.R6))
+function TryOnButton.render(p1) --[[ Line: 65 ]]
+	-- upvalues: ConstantsModule (copy), RoactModule (copy), ColorsModule (copy), RobloxTranslatorModule (copy), AppFonts (copy)
+	local AssetInfo = p1.props.assetInfo
+	local IsRigTypeMatch: boolean = AssetInfo and (p1.props.localPlayerModel and (ConstantsModule.LayeredAssetTypes[AssetInfo.assetTypeId] ~= nil and p1.props.localPlayerModel.Humanoid.RigType == Enum.HumanoidRigType.R6))
 	
-	return roactModule.createElement("ImageLabel", {
+	return RoactModule.createElement("ImageLabel", {
 		BackgroundTransparency = 1,
 		LayoutOrder = 2,
 		Image = "rbxasset://textures/ui/InspectMenu/Button_outline.png",
 		AnchorPoint = Vector2.new(0.5, 0),
 		Size = UDim2.new(0.5, -32, 0, 44),
-		Visible = showTryOn,
-		ImageTransparency = if var1 then 0.5 else 0,
+		Visible = p1.props.showTryOn,
+		ImageTransparency = if IsRigTypeMatch then 0.5 else 0,
 		ScaleType = Enum.ScaleType.Slice,
 		SliceCenter = Rect.new(5, 5, 120, 20)
 	}, {
-		SelectionGainedImage = roactModule.createElement("ImageLabel", {
+		SelectionGainedImage = RoactModule.createElement("ImageLabel", {
 			BackgroundTransparency = 1,
 			Visible = false,
 			Image = "rbxasset://textures/ui/InspectMenu/Button_white.png",
 			Size = UDim2.new(1, 0, 1, 0),
-			ImageColor3 = colorsModule.Pumice
+			ImageColor3 = ColorsModule.Pumice
 		}),
-		TryOnTextKey = roactModule.createElement("TextButton", {
+		TryOnTextKey = RoactModule.createElement("TextButton", {
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 1, 0),
-			Text = robloxTranslatorModule:FormatByKeyForLocale(if tryingOn then "InGame.InspectMenu.Action.TakeOff" else "InGame.InspectMenu.Action.TryOn", locale),
-			Font = appFonts.default:getDefault(),
+			Text = RobloxTranslatorModule:FormatByKeyForLocale(if p1.props.tryingOnInfo.tryingOn then "InGame.InspectMenu.Action.TakeOff" else "InGame.InspectMenu.Action.TryOn", p1.props.locale),
+			Font = AppFonts.default:getDefault(),
 			TextSize = 16,
-			TextColor3 = colorsModule.White,
-			TextTransparency = if var1 then 0.5 else 0,
+			TextColor3 = ColorsModule.White,
+			TextTransparency = if IsRigTypeMatch then 0.5 else 0,
 			SelectionImageObject = p1.selectedImage,
 			ZIndex = 2,
-			[roactModule.Event.SelectionGained] = function(p2)
-				-- upvalues: colorsModule (copy)
-				p2.Parent.SelectionGainedImage.Visible = true
-				p2.TextColor3 = colorsModule.Carbon
+			[RoactModule.Event.SelectionGained] = function(Label) --[[ Line: 114 ]]
+				-- upvalues: ColorsModule (upval)
+				Label.Parent.SelectionGainedImage.Visible = true
+				Label.TextColor3 = ColorsModule.Carbon
 			end,
-			[roactModule.Event.SelectionLost] = function(p2)
-				-- upvalues: colorsModule (copy)
-				p2.Parent.SelectionGainedImage.Visible = false
-				p2.TextColor3 = colorsModule.White
+			[RoactModule.Event.SelectionLost] = function(Label) --[[ Line: 118 ]]
+				-- upvalues: ColorsModule (upval)
+				Label.Parent.SelectionGainedImage.Visible = false
+				Label.TextColor3 = ColorsModule.White
 			end,
-			[roactModule.Ref] = p1.props.tryOnButtonRef,
-			[roactModule.Event.Activated] = function()
-				-- upvalues: p1 (ref)
+			[RoactModule.Ref] = p1.props.tryOnButtonRef,
+			[RoactModule.Event.Activated] = function() --[[ Line: 123 ]]
+				-- upvalues: p1 (copy)
 				p1:activateButton()
 			end
 		})
 	})
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p1, _)
+return RoactRoduxModule.UNSTABLE_connect2(function(p1, _) --[[ Line: 130 ]]
 	return {
 		locale = p1.locale,
 		view = p1.view,
@@ -115,16 +113,16 @@ return roactRoduxModule.UNSTABLE_connect2(function(p1, _)
 		bundleInfo = p1.bundles,
 		tryingOnInfo = p1.tryingOnInfo
 	}
-end, function(p1)
-	-- upvalues: tryOnItemModule (ref), setTryingOnInfoModule (ref)
+end, function(Callback) --[[ Line: 140 ]]
+	-- upvalues: TryOnItemModule (copy), SetTryingOnInfoModule (copy)
 	return {
-		tryOnItem = function(p2, p3, p4, p5, p6)
-			-- upvalues: p1 (ref), tryOnItemModule (copy)
-			p1(tryOnItemModule(p2, p3, p4, p5, p6))
+		tryOnItem = function(p1, p2, p3, p4, p5) --[[ Line: 142 ]]
+			-- upvalues: Callback (copy), TryOnItemModule (upval)
+			Callback(TryOnItemModule(p1, p2, p3, p4, p5))
 		end,
-		takeOffItem = function()
-			-- upvalues: p1 (ref), setTryingOnInfoModule (copy)
-			p1(setTryingOnInfoModule(false, nil, nil))
+		takeOffItem = function() --[[ Line: 145 ]]
+			-- upvalues: Callback (copy), SetTryingOnInfoModule (upval)
+			Callback(SetTryingOnInfoModule(false, nil, nil))
 		end
 	}
-end)(tryOnButton)
+end)(TryOnButton)

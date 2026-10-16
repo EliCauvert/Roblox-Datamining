@@ -1,111 +1,111 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local optionSelectorModule = require(script.Parent.OptionSelector)
-local button = foundationModule.Button
-local view = foundationModule.View
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local inputSize = foundationModule.Enums.InputSize
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
+local OptionSelectorModule = require(script.Parent.OptionSelector)
+local Button = FoundationModule.Button
+local View = FoundationModule.View
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local InputSize = FoundationModule.Enums.InputSize
 
-local function _(p1, p2)
-	if typeof(p1) == "string" then
-		return p1 == p2
-	elseif typeof(p1) ~= "table" then
+local function _(List, p1): boolean --[[ Line: 37 | Named "isOptionSelected" ]]
+	if typeof(List) == "string" then
+		return List == p1
+	end
+	if typeof(List) ~= "table" then
 		return false
 	end
-	for i, v in p1 do
-		if v == p2 then
+	for _, value in List do
+		if value == p1 then
 			return true
 		end
 	end
 	return false
 end
 
-local _ = function(p3)
-	return if typeof(p3) == "string" then p3 elseif typeof(p3) == "table" then p3[1] else nil
+local _ = function(Entry) --[[ Line: 52 | Named "getFirstSelectedOptionId" ]]
+	return if typeof(Entry) == "string" then Entry elseif typeof(Entry) == "table" then Entry[1] else nil
 end
 
-return function(p3)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), reactModule (ref), optionSelectorModule (ref), view (ref), button (ref), inputSize (ref), buttonVariant (ref)
-	local var1 = useLocalization({
-		selectAnOption = localizationStringsModule.ANSWER_STACK_SELECT_AN_OPTION,
-		submit = localizationStringsModule.ANSWER_STACK_SUBMIT
+return function(Frame) --[[ Line: 62 | Named "AnswerStack" ]]
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), OptionSelectorModule (copy), View (copy), Button (copy), InputSize (copy), ButtonVariant (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
+		selectAnOption = LocalizationStringsModule.ANSWER_STACK_SELECT_AN_OPTION,
+		submit = LocalizationStringsModule.ANSWER_STACK_SUBMIT
 	})
-	local onOptionSelected = p3.onOptionSelected
-	local options = p3.options
-	local isMulti = (p3.selectionMode or "single") == "multi"
-	local selectedOptionId = p3.selectedOptionId
-	local onConfirm = p3.onConfirm
-	local var2 = isMulti and onConfirm ~= nil
-	local var3 = if var2 or selectedOptionId == nil then nil elseif typeof(selectedOptionId) == "string" then selectedOptionId elseif typeof(selectedOptionId) == "table" then selectedOptionId[1] else nil
+	local OnOptionSelectedFunction = Frame.onOptionSelected
+	local SelectedOptionId = Frame.selectedOptionId
+	local OnConfirm = Frame.onConfirm
+	local HasOnConfirm: boolean = (Frame.selectionMode or "single") == "multi" and OnConfirm ~= nil
+	local SelectedOptionId1 = if HasOnConfirm or SelectedOptionId == nil then nil elseif typeof(SelectedOptionId) == "string" then SelectedOptionId elseif typeof(SelectedOptionId) == "table" then SelectedOptionId[1] else nil
 	local t = {}
+	local IsSelectedOptionIdMatch = nil
 	
-	for i, v in options do
-		if var3 == nil or v.id == var3 then
-			local var4
-			local id = v.id
-			local createElement = reactModule.createElement
-			local var5 = optionSelectorModule
-			local t_1 = {
-				LayoutOrder = i,
-				title = v.title,
-				description = v.description
+	for LayoutOrder, option in Frame.options do
+		if SelectedOptionId1 == nil or option.id == SelectedOptionId1 then
+			local Id = option.id
+			local CreateElementFunction = ReactModule.createElement
+			local config = {
+				LayoutOrder = LayoutOrder,
+				title = option.title,
+				description = option.description
 			}
-			local id_1 = v.id
+			local Id1 = option.id
 			
-			if typeof(selectedOptionId) == "string" then
-				local _ = selectedOptionId == id_1
-			elseif typeof(selectedOptionId) == "table" then
-				for i_1, v_1 in selectedOptionId do
-					if v_1 == id_1 then
-						var4 = true
+			if typeof(SelectedOptionId) == "string" then
+				IsSelectedOptionIdMatch = SelectedOptionId == Id1
+			elseif typeof(SelectedOptionId) == "table" then
+				IsSelectedOptionIdMatch = false
+				
+				for _, value in SelectedOptionId do
+					if value == Id1 then
+						IsSelectedOptionIdMatch = true
+						break
 					end
 				end
-				var4 = false
 			else
-				var4 = false
+				IsSelectedOptionIdMatch = false
 			end
-			t_1.isSelected = var4
-			t_1.selectionStyle = if not var2 then "committed" else "intermediate"
-			t_1.testId = `AnswerStack.Option.{v.id}`
+			config.isSelected = IsSelectedOptionIdMatch
+			config.selectionStyle = if HasOnConfirm then "intermediate" else "committed"
+			config.testId = `AnswerStack.Option.{option.id}`
 			
-			function t_1.onActivated()
-				-- upvalues: onOptionSelected (ref), v (ref)
-				onOptionSelected(v)
+			function config.onActivated() --[[ Line: 92 ]]
+				-- upvalues: OnOptionSelectedFunction (copy), option (copy)
+				OnOptionSelectedFunction(option)
 			end
 			
-			t[id] = createElement(var5, t_1)
+			t[Id] = CreateElementFunction(OptionSelectorModule, config)
 		end
 	end
-	local t_1 = {
-		Options = reactModule.createElement(view, {
+	local config = {
+		Options = ReactModule.createElement(View, {
 			LayoutOrder = 1,
 			tag = "col gap-medium size-full-0 auto-y"
 		}, t)
 	}
 	
-	if var2 and onConfirm ~= nil then
-		local var6 = p3.isConfirmDisabled == true
-		t_1.Confirm = reactModule.createElement(view, {
+	if HasOnConfirm and OnConfirm ~= nil then
+		local IsIsConfirmDisabled = Frame.isConfirmDisabled == true
+		config.Confirm = ReactModule.createElement(View, {
 			LayoutOrder = 2,
 			tag = "row align-x-right size-full-0 auto-y"
 		}, {
-			Button = reactModule.createElement(button, {
-				text = if var6 then var1.selectAnOption else p3.confirmLabel or var1.submit,
-				size = inputSize.Medium,
-				variant = buttonVariant.Standard,
-				isDisabled = var6,
-				onActivated = onConfirm,
-				testId = `{p3.testId or "AnswerStack"}.Confirm`
+			Button = ReactModule.createElement(Button, {
+				text = if IsIsConfirmDisabled then UseLocalizationResult.selectAnOption else Frame.confirmLabel or UseLocalizationResult.submit,
+				size = InputSize.Medium,
+				variant = ButtonVariant.Standard,
+				isDisabled = IsIsConfirmDisabled,
+				onActivated = OnConfirm,
+				testId = `{Frame.testId or "AnswerStack"}.Confirm`
 			})
 		})
 	end
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "col gap-medium size-full-0 auto-y padding-top-small",
-		LayoutOrder = p3.LayoutOrder,
-		testId = p3.testId or "AnswerStack"
-	}, t_1)
+		LayoutOrder = Frame.LayoutOrder,
+		testId = Frame.testId or "AnswerStack"
+	}, config)
 end

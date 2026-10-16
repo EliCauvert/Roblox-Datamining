@@ -1,7 +1,7 @@
-﻿local groupsWrapperContextModule = require(script.Parent.GroupsWrapperContext)
-local reactModule = require(script:FindFirstAncestor("Groups").Parent.React)
+﻿local GroupsWrapperContextModule = require(script.Parent.GroupsWrapperContext)
+local ReactModule = require(script:FindFirstAncestor("Groups").Parent.React)
 
-return function()
-	-- upvalues: reactModule (ref), groupsWrapperContextModule (ref)
-	return reactModule.useContext(groupsWrapperContextModule)
+return function() --[[ Line: 6 ]]
+	-- upvalues: ReactModule (copy), GroupsWrapperContextModule (copy)
+	return ReactModule.useContext(GroupsWrapperContextModule)
 end

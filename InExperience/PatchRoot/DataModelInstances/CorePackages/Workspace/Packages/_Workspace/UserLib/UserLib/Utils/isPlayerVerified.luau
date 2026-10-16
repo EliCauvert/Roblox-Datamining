@@ -1,8 +1,8 @@
-﻿local sharedFlagsModule = require(script:FindFirstAncestor("UserLib").Parent.SharedFlags)
-local getFFlagOverridePlayerVerifiedBadge = sharedFlagsModule.getFFlagOverridePlayerVerifiedBadge
-local getFStringWhitelistVerifiedUserId = sharedFlagsModule.getFStringWhitelistVerifiedUserId
+﻿local SharedFlagsModule = require(script:FindFirstAncestor("UserLib").Parent.SharedFlags)
+local GetFFlagOverridePlayerVerifiedBadgeFunction = SharedFlagsModule.getFFlagOverridePlayerVerifiedBadge
+local GetFStringWhitelistVerifiedUserIdFunction = SharedFlagsModule.getFStringWhitelistVerifiedUserId
 
-return function(p1)
-	-- upvalues: getFFlagOverridePlayerVerifiedBadge (ref), getFStringWhitelistVerifiedUserId (ref)
-	return if getFFlagOverridePlayerVerifiedBadge() then true else tostring(p1.UserId) == getFStringWhitelistVerifiedUserId() or (if p1.HasVerifiedBadge == nil then false else p1.HasVerifiedBadge)
+return function(Player) --[[ Line: 27 | Named "isPlayerVerified" ]]
+	-- upvalues: GetFFlagOverridePlayerVerifiedBadgeFunction (copy), GetFStringWhitelistVerifiedUserIdFunction (copy)
+	return if GetFFlagOverridePlayerVerifiedBadgeFunction() then true else tostring(Player.UserId) == GetFStringWhitelistVerifiedUserIdFunction() or Player.HasVerifiedBadge ~= nil and Player.HasVerifiedBadge
 end

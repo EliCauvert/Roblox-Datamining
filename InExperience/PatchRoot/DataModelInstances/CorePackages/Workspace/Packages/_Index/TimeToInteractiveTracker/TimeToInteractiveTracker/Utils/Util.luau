@@ -1,174 +1,172 @@
-﻿local httpService = game:GetService("HttpService")
-local timeToInteractiveTracker = script:FindFirstAncestor("TimeToInteractiveTracker")
-local _ = require(timeToInteractiveTracker.Stores.types)
-local _ = require(timeToInteractiveTracker.Milestones.types)
-local fFlagTTITrackerMemoryTrackingModule = require(script.Parent.FFlagTTITrackerMemoryTracking)
-local constantsModule = require(timeToInteractiveTracker.Milestones.constants)
+﻿local HttpService = game:GetService("HttpService")
+local TimeToInteractiveTracker = script:FindFirstAncestor("TimeToInteractiveTracker")
+local _ = require(TimeToInteractiveTracker.Stores.types)
+local _ = require(TimeToInteractiveTracker.Milestones.types)
+local FFlagTTITrackerMemoryTrackingModule = require(script.Parent.FFlagTTITrackerMemoryTracking)
 local t = {}
-local t_1 = {}
+local t1 = {}
 
-for i, v in constantsModule do
-	if type(v) == "string" then
-		t[v] = true
+for _, value in require(TimeToInteractiveTracker.Milestones.constants) do
+	if type(value) == "string" then
+		t[value] = true
 	else
-		t[v.Name] = true
+		t[value.Name] = true
 		
-		for i_1, v_1 in v.Subphase do
-			t_1[v_1] = true
+		for _, value1 in value.Subphase do
+			t1[value1] = true
 		end
 	end
 end
-local function _(p1)
-	return p1:gsub("[^%w_%-]", "_"):sub(1, 40)
+local function _(Text: string) --[[ Line: 35 | Named "sanitizeIdSegment" ]]
+	return Text:gsub("[^%w_%-]", "_"):sub(1, 40)
 end
 
 return {
-	findLastMilestoneIndex = function(p1, p2)
+	findLastMilestoneIndex = function(p1, Name): number? --[[ Line: 55 ]]
 		for i = #p1, 1, -1 do
-			if p1[i].name ~= p2 then
-				continue
+			if p1[i].name == Name then
+				return i
 			end
-			return i
 		end
 		return nil
 	end,
-	deepCloneMilestones = function(p3)
-		local cloned = table.clone(p3)
+	deepCloneMilestones = function(Tbl) --[[ Line: 64 ]]
+		local Copy = table.clone(Tbl)
 		
-		for i, v in cloned do
-			local cloned_1 = table.clone(v)
+		for i, value in Copy do
+			local Copy1 = table.clone(value)
 			
-			if cloned_1.subphases then
-				local cloned_2 = table.clone(cloned_1.subphases)
+			if Copy1.subphases then
+				local Copy2 = table.clone(Copy1.subphases)
 				
-				for i_1, v_1 in cloned_2 do
-					cloned_2[i_1] = table.clone(v_1)
+				for i1, value1 in Copy2 do
+					Copy2[i1] = table.clone(value1)
 				end
-				cloned_1.subphases = cloned_2
+				Copy1.subphases = Copy2
 			end
-			if cloned_1.requests then
-				local cloned_2 = table.clone(cloned_1.requests)
+			if Copy1.requests then
+				local Copy3 = table.clone(Copy1.requests)
 				
-				for i_1, v_1 in cloned_2 do
-					cloned_2[i_1] = table.clone(v_1)
+				for i2, value2 in Copy3 do
+					Copy3[i2] = table.clone(value2)
 				end
-				cloned_1.requests = cloned_2
+				Copy1.requests = Copy3
 			end
-			cloned[i] = cloned_1
+			Copy[i] = Copy1
 		end
-		return cloned
+		return Copy
 	end,
-	encodeMilestonesJSON = function(p4)
-		-- upvalues: httpService (ref)
-		local ok, status = pcall(function()
-			-- upvalues: httpService (copy), p4 (ref)
-			return httpService:JSONEncode(p4)
+	encodeMilestonesJSON = function(Input) --[[ Line: 87 ]]
+		-- upvalues: HttpService (copy)
+		local Success, Result = pcall(function() --[[ Line: 88 ]]
+			-- upvalues: HttpService (upval), Input (copy)
+			return HttpService:JSONEncode(Input)
 		end)
 		
-		return if ok then status else nil
+		return if Success then Result else nil
 	end,
-	milestonesToProto = function(p4)
-		local t = {}
+	milestonesToProto = function(List) --[[ Line: 103 ]]
+		local List1 = {}
 		
-		for i, v in p4 do
-			local t_1 = {
-				name = v.name,
-				timestamp_seconds = v.timestamp,
-				delta_ms = v.deltaMs,
-				total_memory_mb = v.totalMemoryMB,
-				lua_heap_mb = v.luaHeapMB
+		for _, value in List do
+			local config = {
+				name = value.name,
+				timestamp_seconds = value.timestamp,
+				delta_ms = value.deltaMs,
+				total_memory_mb = value.totalMemoryMB,
+				lua_heap_mb = value.luaHeapMB
 			}
 			
-			if v.id then
-				t_1.id = v.id
+			if value.id then
+				config.id = value.id
 			end
-			if v.subphases then
-				local t_2 = {}
+			if value.subphases then
+				local Subphases = {}
 				
-				for i_1, v_1 in v.subphases do
-					table.insert(t_2, {
-						name = v_1.name,
-						timestamp_seconds = v_1.timestamp,
-						delta_ms = v_1.deltaMs or 0
+				for _, subphas in value.subphases do
+					table.insert(Subphases, {
+						name = subphas.name,
+						timestamp_seconds = subphas.timestamp,
+						delta_ms = subphas.deltaMs or 0
 					})
 				end
-				t_1.subphases = t_2
+				config.subphases = Subphases
 			end
-			if v.requests then
-				local t_2 = {}
+			if value.requests then
+				local Requests = {}
 				
-				for i_1, v_1 in v.requests do
-					table.insert(t_2, {
-						name = v_1.name,
-						timestamp_seconds = v_1.timestamp,
-						delta_ms = v_1.deltaMs or 0
+				for _, request in value.requests do
+					table.insert(Requests, {
+						name = request.name,
+						timestamp_seconds = request.timestamp,
+						delta_ms = request.deltaMs or 0
 					})
 				end
-				t_1.requests = t_2
+				config.requests = Requests
 			end
-			table.insert(t, t_1)
+			table.insert(List1, config)
 		end
-		return t
+		return List1
 	end,
-	generateMilestoneStats = function(p5, p6)
-		-- upvalues: fFlagTTITrackerMemoryTrackingModule (ref)
-		local t = {}
+	generateMilestoneStats = function(Text, List) --[[ Line: 172 ]]
+		-- upvalues: FFlagTTITrackerMemoryTrackingModule (copy)
+		local List1 = {}
 		
-		for i, v in p6 do
-			local text = p5 .. "_" .. (if v.id then v.name .. "__" .. v.id else v.name)
-			local t_1 = { eventName = text, deltaMs = v.deltaMs }
+		for _, value in List do
+			local Text1 = Text .. "_" .. (if value.id then value.name .. "__" .. value.id else value.name)
+			local config = { eventName = Text1, deltaMs = value.deltaMs }
 			
-			if fFlagTTITrackerMemoryTrackingModule then
-				t_1.totalMemoryMB = v.totalMemoryMB
-				t_1.luaHeapMB = v.luaHeapMB
+			if FFlagTTITrackerMemoryTrackingModule then
+				config.totalMemoryMB = value.totalMemoryMB
+				config.luaHeapMB = value.luaHeapMB
 			end
-			table.insert(t, t_1)
+			table.insert(List1, config)
 			
-			if v.subphases then
-				for i_1, v_1 in v.subphases do
-					table.insert(t, {
-						eventName = text .. "_sp_" .. v_1.name,
-						deltaMs = v_1.deltaMs or 0
+			if value.subphases then
+				for _, subphas in value.subphases do
+					table.insert(List1, {
+						eventName = Text1 .. "_sp_" .. subphas.name,
+						deltaMs = subphas.deltaMs or 0
 					})
 				end
 			end
-			if v.requests then
-				for i_1, v_1 in v.requests do
-					table.insert(t, {
-						eventName = text .. "_rq_" .. v_1.name,
-						deltaMs = v_1.deltaMs or 0
+			if value.requests then
+				for _, request in value.requests do
+					table.insert(List1, {
+						eventName = Text1 .. "_rq_" .. request.name,
+						deltaMs = request.deltaMs or 0
 					})
 				end
 			end
 		end
-		return t
+		return List1
 	end,
-	milestonesToPointsFields = function(p7)
-		-- upvalues: t (ref), fFlagTTITrackerMemoryTrackingModule (ref), t_1 (ref)
-		local t_2 = {}
+	milestonesToPointsFields = function(List) --[[ Line: 240 ]]
+		-- upvalues: t (copy), FFlagTTITrackerMemoryTrackingModule (copy), t1 (copy)
+		local LuaHeapMBs = {}
 		
-		for i, v in p7 do
-			if t[v.name] then
-				local text = "ms_" .. v.name .. (if v.id == nil or v.id == "" then "" else "__" .. v.id:gsub("[^%w_%-]", "_"):sub(1, 40))
-				t_2[text] = v.deltaMs
+		for _, value in List do
+			if t[value.name] then
+				local Text = "ms_" .. value.name .. (if value.id == nil or value.id == "" then "" else "__" .. value.id:gsub("[^%w_%-]", "_"):sub(1, 40))
+				LuaHeapMBs[Text] = value.deltaMs
 				
-				if fFlagTTITrackerMemoryTrackingModule then
-					if v.totalMemoryMB then
-						t_2[text .. "_total_memory_mb"] = v.totalMemoryMB
+				if FFlagTTITrackerMemoryTrackingModule then
+					if value.totalMemoryMB then
+						LuaHeapMBs[Text .. "_total_memory_mb"] = value.totalMemoryMB
 					end
-					if v.luaHeapMB then
-						t_2[text .. "_lua_heap_mb"] = v.luaHeapMB
+					if value.luaHeapMB then
+						LuaHeapMBs[Text .. "_lua_heap_mb"] = value.luaHeapMB
 					end
 				end
-				if v.subphases then
-					for i_1, v_1 in v.subphases do
-						if t_1[v_1.name] then
-							t_2[text .. "_sp_" .. v_1.name] = v_1.deltaMs or 0
+				if value.subphases then
+					for _, subphas in value.subphases do
+						if t1[subphas.name] then
+							LuaHeapMBs[Text .. "_sp_" .. subphas.name] = subphas.deltaMs or 0
 						end
 					end
 				end
 			end
 		end
-		return t_2
+		return LuaHeapMBs
 	end
 }

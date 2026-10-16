@@ -1,116 +1,116 @@
-﻿local parent = script:FindFirstAncestor("MomentsCreationFlow").Parent
-local builderIconsModule = require(parent.BuilderIcons)
-local foundationModule = require(parent.Foundation)
-local momentsCommonModule = require(parent.MomentsCommon)
-local reactModule = require(parent.React)
-local iconButton = foundationModule.IconButton
-local slider = foundationModule.Slider
-local text = foundationModule.Text
-local view = foundationModule.View
-local playLarge = builderIconsModule.Icon.PlayLarge
-local pauseLarge = builderIconsModule.Icon.PauseLarge
-local speaker = builderIconsModule.Icon.Speaker
-local speakerSlash = builderIconsModule.Icon.SpeakerSlash
-local twoArrowsFromCenter = builderIconsModule.Icon.TwoArrowsFromCenter
-local twoArrowsToCenter = builderIconsModule.Icon.TwoArrowsToCenter
-local gradientBackdrop = momentsCommonModule.GradientBackdrop
-local useCallback = reactModule.useCallback
-local useDeviceInsets = momentsCommonModule.Hooks.useDeviceInsets
-local useTokens = foundationModule.Hooks.useTokens
-local getFormatTime = momentsCommonModule.Utils.getFormatTime
+﻿local Parent = script:FindFirstAncestor("MomentsCreationFlow").Parent
+local BuilderIconsModule = require(Parent.BuilderIcons)
+local FoundationModule = require(Parent.Foundation)
+local MomentsCommonModule = require(Parent.MomentsCommon)
+local ReactModule = require(Parent.React)
+local IconButton = FoundationModule.IconButton
+local Slider = FoundationModule.Slider
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local PlayLarge = BuilderIconsModule.Icon.PlayLarge
+local PauseLarge = BuilderIconsModule.Icon.PauseLarge
+local Speaker = BuilderIconsModule.Icon.Speaker
+local SpeakerSlash = BuilderIconsModule.Icon.SpeakerSlash
+local TwoArrowsFromCenter = BuilderIconsModule.Icon.TwoArrowsFromCenter
+local TwoArrowsToCenter = BuilderIconsModule.Icon.TwoArrowsToCenter
+local GradientBackdrop = MomentsCommonModule.GradientBackdrop
+local UseCallbackFunction = ReactModule.useCallback
+local UseDeviceInsetsFunction = MomentsCommonModule.Hooks.useDeviceInsets
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local GetFormatTimeFunction = MomentsCommonModule.Utils.getFormatTime
 
-return function(p1)
-	-- upvalues: useDeviceInsets (ref), useTokens (ref), reactModule (ref), useCallback (ref), view (ref), gradientBackdrop (ref), slider (ref), foundationModule (ref), iconButton (ref), pauseLarge (ref), playLarge (ref), speakerSlash (ref), speaker (ref), text (ref), getFormatTime (ref), twoArrowsFromCenter (ref), twoArrowsToCenter (ref)
-	local var1 = useDeviceInsets()
-	local var2 = useTokens()
-	local var3, var4 = reactModule.useBinding(UDim2.fromScale(1, 0))
-	local var5 = reactModule.useRef(false)
+return function(p1) --[[ Line: 40 | Named "PlaybackControls" ]]
+	-- upvalues: UseDeviceInsetsFunction (copy), UseTokensFunction (copy), ReactModule (copy), UseCallbackFunction (copy), View (copy), GradientBackdrop (copy), Slider (copy), FoundationModule (copy), IconButton (copy), PauseLarge (copy), PlayLarge (copy), SpeakerSlash (copy), Speaker (copy), Text (copy), GetFormatTimeFunction (copy), TwoArrowsFromCenter (copy), TwoArrowsToCenter (copy)
+	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
+	local UseTokensResult = UseTokensFunction()
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(UDim2.fromScale(1, 0))
+	local UseRefResult = ReactModule.useRef(false)
 	
-	return reactModule.createElement(view, { tag = "auto-y size-full-0", LayoutOrder = p1.layoutOrder }, {
-		GradientBackdrop = reactModule.createElement(gradientBackdrop, {
+	return ReactModule.createElement(View, { tag = "auto-y size-full-0", LayoutOrder = p1.layoutOrder }, {
+		GradientBackdrop = ReactModule.createElement(GradientBackdrop, {
 			rotation = 270,
-			color3 = var2.Color.Common.Scrim.Color3,
-			size = var3
+			color3 = UseTokensResult.Color.Common.Scrim.Color3,
+			size = UseBindingResult
 		}),
-		Controls = reactModule.createElement(view, {
+		Controls = ReactModule.createElement(View, {
 			LayoutOrder = 1,
 			tag = "auto-y col gap-xxsmall size-full-0",
-			onAbsoluteSizeChanged = reactModule.useCallback(function(p2)
-				-- upvalues: var4 (ref)
-				var4(UDim2.new(0, p2.AbsoluteSize.X, 1, 0))
+			onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame) --[[ Line: 65 ]]
+				-- upvalues: UseBindingResult2 (copy)
+				UseBindingResult2(UDim2.new(0, Frame.AbsoluteSize.X, 1, 0))
 			end, {})
 		}, {
-			Padding = reactModule.createElement("UIPadding", {
-				PaddingBottom = UDim.new(0, var2.Padding.Medium),
-				PaddingLeft = UDim.new(0, math.max(var1.left, var2.Padding.Large)),
-				PaddingRight = UDim.new(0, math.max(var1.right, var2.Padding.Large))
+			Padding = ReactModule.createElement("UIPadding", {
+				PaddingBottom = UDim.new(0, UseTokensResult.Padding.Medium),
+				PaddingLeft = UDim.new(0, (math.max(UseDeviceInsetsResult.left, UseTokensResult.Padding.Large))),
+				PaddingRight = UDim.new(0, (math.max(UseDeviceInsetsResult.right, UseTokensResult.Padding.Large)))
 			}),
-			Slider = reactModule.createElement(slider, {
+			Slider = ReactModule.createElement(Slider, {
 				LayoutOrder = 1,
 				value = p1.playbackController.timeline.elapsed / p1.playbackController.timeline.duration,
-				size = foundationModule.Enums.InputSize.XSmall,
-				knobVisibility = foundationModule.Enums.Visibility.None,
-				variant = foundationModule.Enums.SliderVariant.Standard,
-				onValueChanged = reactModule.useCallback(function(p2)
-					-- upvalues: p1 (ref)
+				size = FoundationModule.Enums.InputSize.XSmall,
+				knobVisibility = FoundationModule.Enums.Visibility.None,
+				variant = FoundationModule.Enums.SliderVariant.Standard,
+				onValueChanged = ReactModule.useCallback(function(p2) --[[ Line: 61 ]]
+					-- upvalues: p1 (copy)
 					p1.playbackController.timeline.seek(p2 * p1.playbackController.timeline.duration)
 				end, {
 					p1.playbackController.timeline.duration,
 					p1.playbackController.timeline.seek
 				}),
-				onDragStarted = reactModule.useCallback(function()
-					-- upvalues: p1 (ref), var5 (ref)
+				onDragStarted = ReactModule.useCallback(function() --[[ Line: 47 ]]
+					-- upvalues: p1 (copy), UseRefResult (copy)
 					if p1.playbackController.playback.isPlaying then
-						var5.current = true
+						UseRefResult.current = true
 					end
 					p1.playbackController.playback.pause()
 				end, { p1.playbackController.playback.isPlaying }),
-				onDragEnded = reactModule.useCallback(function()
-					-- upvalues: var5 (ref), p1 (ref)
-					if var5.current then
+				onDragEnded = ReactModule.useCallback(function() --[[ Line: 54 ]]
+					-- upvalues: UseRefResult (copy), p1 (copy)
+					if UseRefResult.current then
 						p1.playbackController.playback.play()
 					end
-					var5.current = false
+					UseRefResult.current = false
 				end, {})
 			}),
-			ControlBar = reactModule.createElement(view, { tag = "auto-y size-full-0", LayoutOrder = 2 }, {
-				LeftControlButtons = reactModule.createElement(view, {
+			ControlBar = ReactModule.createElement(View, { tag = "auto-y size-full-0", LayoutOrder = 2 }, {
+				LeftControlButtons = ReactModule.createElement(View, {
 					tag = "auto-xy row gap-xsmall anchor-top-left position-top-left",
 					LayoutOrder = 1
 				}, {
-					PlaybackToggle = reactModule.createElement(iconButton, {
+					PlaybackToggle = ReactModule.createElement(IconButton, {
 						LayoutOrder = 1,
-						icon = if p1.playbackController.playback.isPlaying then pauseLarge else playLarge,
-						onActivated = useCallback(function()
-							-- upvalues: p1 (ref)
+						icon = p1.playbackController.playback.isPlaying and PauseLarge or PlayLarge,
+						onActivated = UseCallbackFunction(function() --[[ Line: 69 ]]
+							-- upvalues: p1 (copy)
 							p1.playbackController.playback.toggle()
 						end, { p1.playbackController }),
-						size = foundationModule.Enums.InputSize.Small
+						size = FoundationModule.Enums.InputSize.Small
 					}),
-					MuteToggle = reactModule.createElement(iconButton, {
+					MuteToggle = ReactModule.createElement(IconButton, {
 						LayoutOrder = 2,
-						icon = if p1.playbackController.volume.isMuted then speakerSlash else speaker,
-						onActivated = useCallback(function()
-							-- upvalues: p1 (ref)
+						icon = p1.playbackController.volume.isMuted and SpeakerSlash or Speaker,
+						onActivated = UseCallbackFunction(function() --[[ Line: 73 ]]
+							-- upvalues: p1 (copy)
 							p1.playbackController.volume.toggle()
 						end, { p1.playbackController }),
-						size = foundationModule.Enums.InputSize.Small
+						size = FoundationModule.Enums.InputSize.Small
 					})
 				}),
-				DurationDisplay = reactModule.createElement(text, {
+				DurationDisplay = ReactModule.createElement(Text, {
 					LayoutOrder = 2,
 					tag = "auto-xy anchor-center-center position-center-center text-body-medium content-emphasis",
-					Text = `{getFormatTime(p1.playbackController.timeline.elapsed)} / {getFormatTime(p1.playbackController.timeline.duration)}`
+					Text = `{GetFormatTimeFunction(p1.playbackController.timeline.elapsed)} / {GetFormatTimeFunction(p1.playbackController.timeline.duration)}`
 				}),
-				RightControlButtons = reactModule.createElement(view, {
+				RightControlButtons = ReactModule.createElement(View, {
 					tag = "auto-xy row gap-xsmall anchor-top-right position-top-right",
 					LayoutOrder = 3
 				}, {
-					FitModeToggle = reactModule.createElement(iconButton, {
+					FitModeToggle = ReactModule.createElement(IconButton, {
 						LayoutOrder = 1,
-						icon = if p1.isFitMode then twoArrowsFromCenter else twoArrowsToCenter,
+						icon = if p1.isFitMode then TwoArrowsFromCenter else TwoArrowsToCenter,
 						onActivated = p1.toggleFitMode,
-						size = foundationModule.Enums.InputSize.Small
+						size = FoundationModule.Enums.InputSize.Small
 					})
 				})
 			})

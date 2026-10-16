@@ -1,29 +1,28 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local enumsModule = require(profilePlatform.Common.Enums)
-local getProfilePlatformModule = require(profilePlatform.Networking.getProfilePlatform)
-local _ = require(profilePlatform.Types.Component)
-local fFlagProfilePlatformAddCurrentlyPlayingModule = require(profilePlatform.Flags.FFlagProfilePlatformAddCurrentlyPlaying)
-local fFlagProfilePlatformCTAsRefactorModule = require(profilePlatform.Flags.FFlagProfilePlatformCTAsRefactor)
-local fFlagProfilePlatformRefreshActionsRespectPoliciesModule = require(profilePlatform.Flags.FFlagProfilePlatformRefreshActionsRespectPolicies)
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local GetProfilePlatformModule = require(ProfilePlatform.Networking.getProfilePlatform)
+local _ = require(ProfilePlatform.Types.Component)
+local FFlagProfilePlatformAddCurrentlyPlayingModule = require(ProfilePlatform.Flags.FFlagProfilePlatformAddCurrentlyPlaying)
+local FFlagProfilePlatformRefreshActionsRespectPoliciesModule = require(ProfilePlatform.Flags.FFlagProfilePlatformRefreshActionsRespectPolicies)
 
-function GetProfilePlatform(p1, p2)
-	-- upvalues: fFlagProfilePlatformRefreshActionsRespectPoliciesModule (ref), enumsModule (ref), fFlagProfilePlatformCTAsRefactorModule (ref), fFlagProfilePlatformAddCurrentlyPlayingModule (ref), getProfilePlatformModule (ref)
-	local list = {
-		{ component = enumsModule.Components.UserProfileHeader },
-		if fFlagProfilePlatformRefreshActionsRespectPoliciesModule and p2 ~= nil then p2 else {
-			component = enumsModule.Components.Actions,
-			isActionsV2Supported = if fFlagProfilePlatformCTAsRefactorModule then true else nil
+function GetProfilePlatform(ProfileId, p1) --[[ Line: 15 ]]
+	-- upvalues: FFlagProfilePlatformRefreshActionsRespectPoliciesModule (copy), EnumsModule (copy), FFlagProfilePlatformAddCurrentlyPlayingModule (copy), GetProfilePlatformModule (copy)
+	local Components = {
+		{ component = EnumsModule.Components.UserProfileHeader },
+		if FFlagProfilePlatformRefreshActionsRespectPoliciesModule and p1 ~= nil then p1 else {
+			isActionsV2Supported = true,
+			component = EnumsModule.Components.Actions
 		}
 	}
 	
-	if fFlagProfilePlatformAddCurrentlyPlayingModule then
-		table.insert(list, { component = enumsModule.Components.CurrentlyPlaying })
+	if FFlagProfilePlatformAddCurrentlyPlayingModule then
+		table.insert(Components, { component = EnumsModule.Components.CurrentlyPlaying })
 	end
-	return getProfilePlatformModule.API({
+	return GetProfilePlatformModule.API({
 		includeComponentOrdering = false,
-		profileId = p1,
-		profileType = enumsModule.ProfileTypes.User,
-		components = list
+		profileId = ProfileId,
+		profileType = EnumsModule.ProfileTypes.User,
+		components = Components
 	})
 end
 

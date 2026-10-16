@@ -1,22 +1,22 @@
-﻿local userGameSettingsService = UserSettings():GetService("UserGameSettings")
-local reactModule = require(script.Parent.Parent.Parent.React)
+﻿local UserGameSettings = UserSettings():GetService("UserGameSettings")
+local ReactModule = require(script.Parent.Parent.Parent.React)
 
-return function()
-	-- upvalues: reactModule (ref), userGameSettingsService (ref)
-	local var1, var2 = reactModule.useBinding(userGameSettingsService.PreferredTransparency)
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), userGameSettingsService (copy)
-		var2(userGameSettingsService.PreferredTransparency)
-		local var3 = userGameSettingsService:GetPropertyChangedSignal("PreferredTransparency"):Connect(function()
-			-- upvalues: var2 (copy), userGameSettingsService (copy)
-			var2(userGameSettingsService.PreferredTransparency)
+return function() --[[ Line: 13 | Named "usePreferredTransparencyBinding" ]]
+	-- upvalues: ReactModule (copy), UserGameSettings (copy)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(UserGameSettings.PreferredTransparency)
+	ReactModule.useEffect(function() --[[ Line: 16 ]]
+		-- upvalues: UseBindingResult2 (copy), UserGameSettings (upval)
+		UseBindingResult2(UserGameSettings.PreferredTransparency)
+		local Connection = UserGameSettings:GetPropertyChangedSignal("PreferredTransparency"):Connect(function() --[[ Line: 18 ]]
+			-- upvalues: UseBindingResult2 (upval), UserGameSettings (upval)
+			UseBindingResult2(UserGameSettings.PreferredTransparency)
 		end)
 		
-		return function()
-			-- upvalues: var3 (ref)
-			var3:Disconnect()
+		return function() --[[ Line: 21 ]]
+			-- upvalues: Connection (copy)
+			Connection:Disconnect()
 		end
 	end, {})
 	
-	return var1
+	return UseBindingResult
 end

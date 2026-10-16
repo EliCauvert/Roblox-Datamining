@@ -1,174 +1,166 @@
-﻿local parent = script.Parent.Parent
-local roactModule = require(parent.Roact)
-local UIBloxModule = require(parent.UIBlox)
-local images = UIBloxModule.App.ImageSet.Images
-local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
-local interactable = UIBloxModule.Core.Control.Interactable
-local robloxTranslatorModule = require(parent.RobloxTranslator)
-local var1 = robloxTranslatorModule:FormatByKey("CoreScripts.Ads.Label.WhyThisAd")
-local var2 = robloxTranslatorModule:FormatByKey("CoreScripts.Ads.Label.ReportAd")
-local info = images["icons/actions/info"]
-local feedback = images["icons/actions/feedback"]
-local var3 = require(script.Parent.Flags).GetAdGuiInteractivityPixelsPerStud() / 50
+﻿local Parent = script.Parent.Parent
+local RoactModule = require(Parent.Roact)
+local UIBloxModule = require(Parent.UIBlox)
+local Images = UIBloxModule.App.ImageSet.Images
+local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
+local Interactable = UIBloxModule.Core.Control.Interactable
+local RobloxTranslatorModule = require(Parent.RobloxTranslator)
+local CoreScriptsAdsLabelWhyThisAd = RobloxTranslatorModule:FormatByKey("CoreScripts.Ads.Label.WhyThisAd")
+local CoreScriptsAdsLabelReportAd = RobloxTranslatorModule:FormatByKey("CoreScripts.Ads.Label.ReportAd")
+local IconsActionsInfo = Images["icons/actions/info"]
+local IconsActionsFeedback = Images["icons/actions/feedback"]
+local AdGuiInteractivityPixelsPerStudRatio = require(script.Parent.Flags).GetAdGuiInteractivityPixelsPerStud() / 50
 
-local function _(p1)
-	-- upvalues: var3 (ref)
-	return UDim.new(p1.Scale, p1.Offset * var3)
+local function _(p1): UDim --[[ Line: 20 | Named "applyScalingUDim" ]]
+	-- upvalues: AdGuiInteractivityPixelsPerStudRatio (copy)
+	return UDim.new(p1.Scale, p1.Offset * AdGuiInteractivityPixelsPerStudRatio)
 end
 
-local _ = function(p1)
-	-- upvalues: var3 (ref)
-	return UDim2.new(p1.X.Scale, p1.X.Offset * var3, p1.Y.Scale, p1.Y.Offset * var3)
+local _ = function(Vector): UDim2 --[[ Line: 24 | Named "applyScalingUDim2" ]]
+	-- upvalues: AdGuiInteractivityPixelsPerStudRatio (copy)
+	return UDim2.new(Vector.X.Scale, Vector.X.Offset * AdGuiInteractivityPixelsPerStudRatio, Vector.Y.Scale, Vector.Y.Offset * AdGuiInteractivityPixelsPerStudRatio)
 end
 
-local _ = function(p1)
-	-- upvalues: var3 (ref)
-	return p1 * var3
+local _ = function(p1) --[[ Line: 28 | Named "applyScalingNumber" ]]
+	-- upvalues: AdGuiInteractivityPixelsPerStudRatio (copy)
+	return p1 * AdGuiInteractivityPixelsPerStudRatio
 end
 
-local function WhyThisAdRow(p1)
-	-- upvalues: roactModule (ref), interactable (ref), var3 (ref), imageSetLabel (ref), info (ref), var1 (ref)
-	local createElement = roactModule.createElement
-	local t = {
-		AutomaticSize = Enum.AutomaticSize.XY,
-		BackgroundTransparency = 1,
-		[roactModule.Event.Activated] = p1.onWhyThisAdActivated,
-		onStateChanged = function() end
+local function WhyThisAdRow(Frame) --[[ Line: 41 ]]
+	-- upvalues: RoactModule (copy), Interactable (copy), AdGuiInteractivityPixelsPerStudRatio (copy), ImageSetLabel (copy), IconsActionsInfo (copy), CoreScriptsAdsLabelWhyThisAd (copy)
+	local _UDim = UDim.new(0, 10)
+	local config = {
+		CornerRadius = UDim.new(_UDim.Scale, _UDim.Offset * AdGuiInteractivityPixelsPerStudRatio)
 	}
-	local t_1 = {}
-	local createElement_1 = roactModule.createElement
-	local var4 = "UICorner"
-	local t_2 = {}
-	local uDim = UDim.new(0, 10)
-	t_2.CornerRadius = UDim.new(uDim.Scale, uDim.Offset * var3)
-	t_1.UICorner = createElement_1(var4, t_2)
-	local createElement_2 = roactModule.createElement
-	local var5 = "UIPadding"
-	local t_3 = {}
-	local uDim_1 = UDim.new(0, 16)
-	t_3.PaddingTop = UDim.new(uDim_1.Scale, uDim_1.Offset * var3)
-	local uDim_2 = UDim.new(0, 8)
-	t_3.PaddingBottom = UDim.new(uDim_2.Scale, uDim_2.Offset * var3)
-	local uDim_3 = UDim.new(0, 16)
-	t_3.PaddingLeft = UDim.new(uDim_3.Scale, uDim_3.Offset * var3)
-	local uDim_4 = UDim.new(0, 48)
-	t_3.PaddingRight = UDim.new(uDim_4.Scale, uDim_4.Offset * var3)
-	t_1.UIPadding = createElement_2(var5, t_3)
-	local createElement_3 = roactModule.createElement
-	local var6 = "UIListLayout"
-	local t_4 = {
+	local _UDim1 = UDim.new(0, 16)
+	local _UDim11 = UDim.new(_UDim1.Scale, _UDim1.Offset * AdGuiInteractivityPixelsPerStudRatio)
+	local _UDim2 = UDim.new(0, 8)
+	local _UDim21 = UDim.new(_UDim2.Scale, _UDim2.Offset * AdGuiInteractivityPixelsPerStudRatio)
+	local _UDim3 = UDim.new(0, 16)
+	local _UDim31 = UDim.new(_UDim3.Scale, _UDim3.Offset * AdGuiInteractivityPixelsPerStudRatio)
+	local _UDim4 = UDim.new(0, 48)
+	local config1 = {
+		PaddingTop = _UDim11,
+		PaddingBottom = _UDim21,
+		PaddingLeft = _UDim31,
+		PaddingRight = UDim.new(_UDim4.Scale, _UDim4.Offset * AdGuiInteractivityPixelsPerStudRatio)
+	}
+	local _UDim5 = UDim.new(0, 16)
+	local config2 = {
 		FillDirection = Enum.FillDirection.Horizontal,
 		HorizontalAlignment = Enum.HorizontalAlignment.Left,
-		VerticalAlignment = Enum.VerticalAlignment.Center
+		VerticalAlignment = Enum.VerticalAlignment.Center,
+		Padding = UDim.new(_UDim5.Scale, _UDim5.Offset * AdGuiInteractivityPixelsPerStudRatio)
 	}
-	local uDim_5 = UDim.new(0, 16)
-	t_4.Padding = UDim.new(uDim_5.Scale, uDim_5.Offset * var3)
-	t_1.UIListLayout = createElement_3(var6, t_4)
-	local createElement_4 = roactModule.createElement
-	local t_5 = { BackgroundTransparency = 1, Image = info }
-	local uDim2 = UDim2.fromOffset(24, 24)
-	t_5.Size = UDim2.new(uDim2.X.Scale, uDim2.X.Offset * var3, uDim2.Y.Scale, uDim2.Y.Offset * var3)
-	t_1.Icon = createElement_4(imageSetLabel, t_5)
-	t_1.TextLabel = roactModule.createElement("TextLabel", {
-		BackgroundTransparency = 1,
-		TextScaled = false,
-		TextWrapped = true,
-		Text = var1,
-		TextColor3 = Color3.new(1, 1, 1),
-		Font = Enum.Font.GothamMedium,
-		TextSize = 24 * var3,
-		AutomaticSize = Enum.AutomaticSize.XY
-	})
+	local _UDim22 = UDim2.fromOffset(24, 24)
 	
-	return createElement(interactable, t, t_1)
-end
-
-local function ReportAdRow(p1)
-	-- upvalues: roactModule (ref), interactable (ref), var3 (ref), imageSetLabel (ref), feedback (ref), var2 (ref)
-	local createElement = roactModule.createElement
-	local t = {
+	return RoactModule.createElement(Interactable, {
 		AutomaticSize = Enum.AutomaticSize.XY,
 		BackgroundTransparency = 1,
-		[roactModule.Event.Activated] = p1.onReportAdActivated,
-		onStateChanged = function() end
-	}
-	local t_1 = {}
-	local createElement_1 = roactModule.createElement
-	local var4 = "UICorner"
-	local t_2 = {}
-	local uDim = UDim.new(0, 10)
-	t_2.CornerRadius = UDim.new(uDim.Scale, uDim.Offset * var3)
-	t_1.UICorner = createElement_1(var4, t_2)
-	local createElement_2 = roactModule.createElement
-	local var5 = "UIPadding"
-	local t_3 = {}
-	local uDim_1 = UDim.new(0, 8)
-	t_3.PaddingTop = UDim.new(uDim_1.Scale, uDim_1.Offset * var3)
-	local uDim_2 = UDim.new(0, 16)
-	t_3.PaddingBottom = UDim.new(uDim_2.Scale, uDim_2.Offset * var3)
-	local uDim_3 = UDim.new(0, 16)
-	t_3.PaddingLeft = UDim.new(uDim_3.Scale, uDim_3.Offset * var3)
-	local uDim_4 = UDim.new(0, 48)
-	t_3.PaddingRight = UDim.new(uDim_4.Scale, uDim_4.Offset * var3)
-	t_1.UIPadding = createElement_2(var5, t_3)
-	local createElement_3 = roactModule.createElement
-	local var6 = "UIListLayout"
-	local t_4 = {
-		FillDirection = Enum.FillDirection.Horizontal,
-		HorizontalAlignment = Enum.HorizontalAlignment.Left,
-		VerticalAlignment = Enum.VerticalAlignment.Center
-	}
-	local uDim_5 = UDim.new(0, 16)
-	t_4.Padding = UDim.new(uDim_5.Scale, uDim_5.Offset * var3)
-	t_1.UIListLayout = createElement_3(var6, t_4)
-	local createElement_4 = roactModule.createElement
-	local t_5 = { BackgroundTransparency = 1, Image = feedback }
-	local uDim2 = UDim2.fromOffset(24, 24)
-	t_5.Size = UDim2.new(uDim2.X.Scale, uDim2.X.Offset * var3, uDim2.Y.Scale, uDim2.Y.Offset * var3)
-	t_1.Icon = createElement_4(imageSetLabel, t_5)
-	t_1.TextLabel = roactModule.createElement("TextLabel", {
-		BackgroundTransparency = 1,
-		TextScaled = false,
-		TextWrapped = true,
-		Text = var2,
-		TextColor3 = Color3.new(1, 1, 1),
-		Font = Enum.Font.GothamMedium,
-		TextSize = 24 * var3,
-		AutomaticSize = Enum.AutomaticSize.XY
+		[RoactModule.Event.Activated] = Frame.onWhyThisAdActivated,
+		onStateChanged = function() --[[ Line: 46 ]] end
+	}, {
+		UICorner = RoactModule.createElement("UICorner", config),
+		UIPadding = RoactModule.createElement("UIPadding", config1),
+		UIListLayout = RoactModule.createElement("UIListLayout", config2),
+		Icon = RoactModule.createElement(ImageSetLabel, {
+			BackgroundTransparency = 1,
+			Image = IconsActionsInfo,
+			Size = UDim2.new(_UDim22.X.Scale, _UDim22.X.Offset * AdGuiInteractivityPixelsPerStudRatio, _UDim22.Y.Scale, _UDim22.Y.Offset * AdGuiInteractivityPixelsPerStudRatio)
+		}),
+		TextLabel = RoactModule.createElement("TextLabel", {
+			BackgroundTransparency = 1,
+			TextScaled = false,
+			TextWrapped = true,
+			Text = CoreScriptsAdsLabelWhyThisAd,
+			TextColor3 = Color3.new(1, 1, 1),
+			Font = Enum.Font.GothamMedium,
+			TextSize = 24 * AdGuiInteractivityPixelsPerStudRatio,
+			AutomaticSize = Enum.AutomaticSize.XY
+		})
 	})
-	
-	return createElement(interactable, t, t_1)
 end
 
-function AdDropdownMenu(p1)
-	-- upvalues: roactModule (ref), var3 (ref), WhyThisAdRow (ref), ReportAdRow (ref)
-	local createElement = roactModule.createElement
-	local var4 = "Frame"
-	local t = {
-		Visible = p1.showDropDownMenu,
-		Position = p1.Position or UDim2.new(0.5, 0, 0.5, 0),
+local function ReportAdRow(Frame) --[[ Line: 81 ]]
+	-- upvalues: RoactModule (copy), Interactable (copy), AdGuiInteractivityPixelsPerStudRatio (copy), ImageSetLabel (copy), IconsActionsFeedback (copy), CoreScriptsAdsLabelReportAd (copy)
+	local _UDim = UDim.new(0, 10)
+	local config = {
+		CornerRadius = UDim.new(_UDim.Scale, _UDim.Offset * AdGuiInteractivityPixelsPerStudRatio)
+	}
+	local _UDim1 = UDim.new(0, 8)
+	local _UDim11 = UDim.new(_UDim1.Scale, _UDim1.Offset * AdGuiInteractivityPixelsPerStudRatio)
+	local _UDim2 = UDim.new(0, 16)
+	local _UDim21 = UDim.new(_UDim2.Scale, _UDim2.Offset * AdGuiInteractivityPixelsPerStudRatio)
+	local _UDim3 = UDim.new(0, 16)
+	local _UDim31 = UDim.new(_UDim3.Scale, _UDim3.Offset * AdGuiInteractivityPixelsPerStudRatio)
+	local _UDim4 = UDim.new(0, 48)
+	local config1 = {
+		PaddingTop = _UDim11,
+		PaddingBottom = _UDim21,
+		PaddingLeft = _UDim31,
+		PaddingRight = UDim.new(_UDim4.Scale, _UDim4.Offset * AdGuiInteractivityPixelsPerStudRatio)
+	}
+	local _UDim5 = UDim.new(0, 16)
+	local config2 = {
+		FillDirection = Enum.FillDirection.Horizontal,
+		HorizontalAlignment = Enum.HorizontalAlignment.Left,
+		VerticalAlignment = Enum.VerticalAlignment.Center,
+		Padding = UDim.new(_UDim5.Scale, _UDim5.Offset * AdGuiInteractivityPixelsPerStudRatio)
+	}
+	local _UDim22 = UDim2.fromOffset(24, 24)
+	
+	return RoactModule.createElement(Interactable, {
+		AutomaticSize = Enum.AutomaticSize.XY,
+		BackgroundTransparency = 1,
+		[RoactModule.Event.Activated] = Frame.onReportAdActivated,
+		onStateChanged = function() --[[ Line: 86 ]] end
+	}, {
+		UICorner = RoactModule.createElement("UICorner", config),
+		UIPadding = RoactModule.createElement("UIPadding", config1),
+		UIListLayout = RoactModule.createElement("UIListLayout", config2),
+		Icon = RoactModule.createElement(ImageSetLabel, {
+			BackgroundTransparency = 1,
+			Image = IconsActionsFeedback,
+			Size = UDim2.new(_UDim22.X.Scale, _UDim22.X.Offset * AdGuiInteractivityPixelsPerStudRatio, _UDim22.Y.Scale, _UDim22.Y.Offset * AdGuiInteractivityPixelsPerStudRatio)
+		}),
+		TextLabel = RoactModule.createElement("TextLabel", {
+			BackgroundTransparency = 1,
+			TextScaled = false,
+			TextWrapped = true,
+			Text = CoreScriptsAdsLabelReportAd,
+			TextColor3 = Color3.new(1, 1, 1),
+			Font = Enum.Font.GothamMedium,
+			TextSize = 24 * AdGuiInteractivityPixelsPerStudRatio,
+			AutomaticSize = Enum.AutomaticSize.XY
+		})
+	})
+end
+
+function AdDropdownMenu(Frame) --[[ Line: 121 ]]
+	-- upvalues: RoactModule (copy), AdGuiInteractivityPixelsPerStudRatio (copy), WhyThisAdRow (copy), ReportAdRow (copy)
+	local _UDim2 = UDim2.new(0.24, 0, 0.12, 0)
+	local _UDim = UDim.new(0, 10)
+	
+	return RoactModule.createElement("Frame", {
+		Visible = Frame.showDropDownMenu,
+		Position = Frame.Position or UDim2.new(0.5, 0, 0.5, 0),
 		BackgroundColor3 = Color3.new(0, 0, 0),
-		BackgroundTransparency = p1.transparency,
-		AnchorPoint = p1.AnchorPoint or Vector2.new(0.5, 0.5)
-	}
-	local uDim2 = UDim2.new(0.24, 0, 0.12, 0)
-	t.Size = UDim2.new(uDim2.X.Scale, uDim2.X.Offset * var3, uDim2.Y.Scale, uDim2.Y.Offset * var3)
-	t.AutomaticSize = Enum.AutomaticSize.XY
-	local t_1 = {}
-	local createElement_1 = roactModule.createElement
-	local var5 = "UICorner"
-	local t_2 = {}
-	local uDim = UDim.new(0, 10)
-	t_2.CornerRadius = UDim.new(uDim.Scale, uDim.Offset * var3)
-	t_1.UICorner = createElement_1(var5, t_2)
-	t_1.UIListLayout = roactModule.createElement("UIListLayout", {
-		FillDirection = Enum.FillDirection.Vertical,
-		HorizontalAlignment = Enum.HorizontalAlignment.Left,
-		VerticalAlignment = Enum.VerticalAlignment.Center
+		BackgroundTransparency = Frame.transparency,
+		AnchorPoint = Frame.AnchorPoint or Vector2.new(0.5, 0.5),
+		Size = UDim2.new(_UDim2.X.Scale, _UDim2.X.Offset * AdGuiInteractivityPixelsPerStudRatio, _UDim2.Y.Scale, _UDim2.Y.Offset * AdGuiInteractivityPixelsPerStudRatio),
+		AutomaticSize = Enum.AutomaticSize.XY
+	}, {
+		UICorner = RoactModule.createElement("UICorner", {
+			CornerRadius = UDim.new(_UDim.Scale, _UDim.Offset * AdGuiInteractivityPixelsPerStudRatio)
+		}),
+		UIListLayout = RoactModule.createElement("UIListLayout", {
+			FillDirection = Enum.FillDirection.Vertical,
+			HorizontalAlignment = Enum.HorizontalAlignment.Left,
+			VerticalAlignment = Enum.VerticalAlignment.Center
+		}),
+		WhyThisAdRow(Frame),
+		ReportAdRow(Frame)
 	})
-	-- Unknown statement at pc 14: <SetList>
-	
-	return createElement(var4, t, t_1)
 end
 
 return AdDropdownMenu

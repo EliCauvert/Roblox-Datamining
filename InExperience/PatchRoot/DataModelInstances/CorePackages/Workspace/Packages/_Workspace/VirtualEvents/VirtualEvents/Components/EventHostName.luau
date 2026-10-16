@@ -1,51 +1,51 @@
-﻿local virtualEvents = script:FindFirstAncestor("VirtualEvents")
-local reactModule = require(virtualEvents.Parent.React)
-local UIBloxModule = require(virtualEvents.Parent.UIBlox)
-local _ = require(virtualEvents.Parent.VirtualEventsState)
-local useStyle = UIBloxModule.Core.Style.useStyle
-local emojiTextLabel = UIBloxModule.Core.Text.EmojiTextLabel
-local emoji = UIBloxModule.App.Emoji.Enum.Emoji
+﻿local VirtualEvents = script:FindFirstAncestor("VirtualEvents")
+local ReactModule = require(VirtualEvents.Parent.React)
+local UIBloxModule = require(VirtualEvents.Parent.UIBlox)
+local _ = require(VirtualEvents.Parent.VirtualEventsState)
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local EmojiTextLabel = UIBloxModule.Core.Text.EmojiTextLabel
+local Emoji = UIBloxModule.App.Emoji.Enum.Emoji
 
-return function(p1)
-	-- upvalues: useStyle (ref), emoji (ref), reactModule (ref), emojiTextLabel (ref)
-	local var1 = useStyle()
-	local var2 = if p1.host.hasVerifiedBadge then emoji.Verified else nil
-	local var3, var4 = reactModule.useState(0)
+return function(p1) --[[ Line: 19 | Named "EventHostName" ]]
+	-- upvalues: UseStyleFunction (copy), Emoji (copy), ReactModule (copy), EmojiTextLabel (copy)
+	local UseStyleResult = UseStyleFunction()
+	local Verified = if p1.host.hasVerifiedBadge then Emoji.Verified else nil
+	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		AutomaticSize = Enum.AutomaticSize.XY
 	}, {
-		Layout = reactModule.createElement("UIListLayout", {
+		Layout = ReactModule.createElement("UIListLayout", {
 			Padding = UDim.new(0, 4),
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			FillDirection = Enum.FillDirection.Horizontal,
 			VerticalAlignment = Enum.VerticalAlignment.Center
 		}),
-		UserImage = reactModule.createElement("ImageLabel", {
+		UserImage = ReactModule.createElement("ImageLabel", {
 			LayoutOrder = 1,
-			BackgroundColor3 = var1.Theme.Badge.Color,
-			BackgroundTransparency = var1.Theme.Badge.Transparency,
+			BackgroundColor3 = UseStyleResult.Theme.Badge.Color,
+			BackgroundTransparency = UseStyleResult.Theme.Badge.Transparency,
 			Image = string.format("rbxthumb://type=%s&id=%i&w=150&h=150", if p1.host.hostType == "group" then "GroupIcon" else "AvatarHeadShot", p1.host.hostId),
-			Size = if p1.changeHostImageSize then UDim2.fromOffset(32, 32) else UDim2.fromOffset(var3, var3)
+			Size = if p1.changeHostImageSize then UDim2.fromOffset(32, 32) else UDim2.fromOffset(UseStateResult, UseStateResult)
 		}, {
-			Corner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) })
+			Corner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) })
 		}),
-		EmojiName = reactModule.createElement(emojiTextLabel, {
+		EmojiName = ReactModule.createElement(EmojiTextLabel, {
 			Text = p1.host.hostName,
 			LayoutOrder = 2,
-			emoji = var2,
-			fontStyle = var1.Font.Header2,
-			colorStyle = var1.Theme.TextEmphasis,
-			[reactModule.Change.AbsoluteSize] = reactModule.useCallback(function(p2)
-				-- upvalues: var4 (ref)
-				var4(p2.TextSize)
-			end, { var4 })
+			emoji = Verified,
+			fontStyle = UseStyleResult.Font.Header2,
+			colorStyle = UseStyleResult.Theme.TextEmphasis,
+			[ReactModule.Change.AbsoluteSize] = ReactModule.useCallback(function(Label) --[[ Line: 25 ]]
+				-- upvalues: UseStateResult2 (copy)
+				UseStateResult2(Label.TextSize)
+			end, { UseStateResult2 })
 		}),
-		EmojiToArrowMargin = if var2 then reactModule.createElement("Frame", {
+		EmojiToArrowMargin = if Verified then ReactModule.createElement("Frame", {
 			LayoutOrder = 3,
 			BackgroundTransparency = 1,
-			Size = UDim2.fromOffset(var3 - 4, 0)
+			Size = UDim2.fromOffset(UseStateResult - 4, 0)
 		}) else nil
 	})
 end

@@ -1,6 +1,6 @@
-﻿local getFFlagEnableCrossExpVoiceModule = require(script.Parent.GetFFlagEnableCrossExpVoice)
+﻿local GetFFlagEnableCrossExpVoiceModule = require(script.Parent.GetFFlagEnableCrossExpVoice)
 
-return function()
-	-- upvalues: getFFlagEnableCrossExpVoiceModule (ref)
-	return getFFlagEnableCrossExpVoiceModule() and game:GetEngineFeature("CrossExperienceVoiceMuteAll")
+return function() --[[ Line: 3 ]]
+	-- upvalues: GetFFlagEnableCrossExpVoiceModule (copy)
+	return GetFFlagEnableCrossExpVoiceModule() and game:GetEngineFeature("CrossExperienceVoiceMuteAll")
 end

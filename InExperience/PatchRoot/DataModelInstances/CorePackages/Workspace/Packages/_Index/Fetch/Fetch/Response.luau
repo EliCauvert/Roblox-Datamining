@@ -1,48 +1,48 @@
 ﻿local _ = require(script.Parent.Parent.LuauPolyfill)
-local headers = require(script.Parent.Headers).Headers
-local body = require(script.Parent.Body).Body
-local tbl = setmetatable({}, { __index = body })
-tbl.__index = tbl
+local Headers = require(script.Parent.Headers).Headers
+local Body = require(script.Parent.Body).Body
+local self = setmetatable({}, { __index = Body })
+self.__index = self
 
-function tbl.new(p1, p2)
-	-- upvalues: body (ref), tbl (ref), headers (ref)
-	p2 = p2 or {}
-	local tbl_1 = setmetatable(body.new(p1), tbl)
-	tbl_1.status = p2.status or 200
-	tbl_1.statusText = p2.statusText or ""
-	tbl_1.headers = headers.new(p2.headers or {})
-	tbl_1.headers.guard = "response"
-	tbl_1.type = "text"
-	tbl_1.url = ""
-	tbl_1.redirected = false
-	tbl_1.ok = tbl_1.status >= 200 and tbl_1.status < 300
+function self.new(Body1, p1) --[[ Line: 44 ]]
+	-- upvalues: Body (copy), self (copy), Headers (copy)
+	local P1 = p1 or {}
+	local self1 = setmetatable(Body.new(Body1), self)
+	self1.status = P1.status or 200
+	self1.statusText = P1.statusText or ""
+	self1.headers = Headers.new(P1.headers or {})
+	self1.headers.guard = "response"
+	self1.type = "text"
+	self1.url = ""
+	self1.redirected = false
+	self1.ok = self1.status >= 200 and self1.status < 300
 	
-	return tbl_1
+	return self1
 end
 
-function tbl.error()
-	-- upvalues: tbl (ref)
-	local var1 = tbl.new(nil, { status = 0 })
-	var1.type = "error"
+function self.error() --[[ Line: 59 ]]
+	-- upvalues: self (copy)
+	local NewResult = self.new(nil, { status = 0 })
+	NewResult.type = "error"
 	
-	return var1
+	return NewResult
 end
 
-function tbl.redirect(_, _)
+function self:redirect(_) --[[ Line: 67 ]]
 	error("Response.redirect not implemented")
 end
 
-function tbl.STATIC_json(_, _)
+function self:STATIC_json(_) --[[ Line: 75 ]]
 	error("Response.json static method not implemented")
 end
 
-function tbl:clone()
-	-- upvalues: tbl (ref)
-	return tbl.new(self.body, {
+function self:clone() --[[ Line: 79 ]]
+	-- upvalues: self (copy)
+	return self.new(self.body, {
 		status = self.status,
 		statusText = self.statusText,
 		headers = self.headers.headerList
 	})
 end
 
-return { Response = tbl }
+return { Response = self }

@@ -1,24 +1,26 @@
-﻿return function(p1, p2)
-	if p2 < 1 then
-		local charCount = utf8.len(p1)
-		local text = p1 .. "\n"
+﻿return function(Text: string, p1: number) --[[ Line: 1 | Named "insertNewlineAtCursor" ]]
+	if p1 < 1 then
+		local Length = utf8.len(Text)
+		local Text1 = Text .. "\n"
 		
-		if charCount then
-			return text, charCount + 1
+		if Length then
+			return Text1, Length + 1
+		else
+			return Text1, 1
 		end
-		return text, 1
 	else
-		local byteOffset = utf8.offset(p1, p2)
+		local OffsetResult = utf8.offset(Text, p1)
 		
-		if byteOffset ~= nil then
-			return string.sub(p1, 1, byteOffset - 1) .. "\n" .. string.sub(p1, byteOffset), p2 + 1
+		if OffsetResult ~= nil then
+			return string.sub(Text, 1, OffsetResult - 1) .. "\n" .. string.sub(Text, OffsetResult), p1 + 1
 		end
-		local charCount = utf8.len(p1)
-		local text = p1 .. "\n"
+		local Length = utf8.len(Text)
+		local Text2 = Text .. "\n"
 		
-		if charCount then
-			return text, charCount + 1
+		if Length then
+			return Text2, Length + 1
+		else
+			return Text2, 1
 		end
-		return text, 1
 	end
 end

@@ -1,6 +1,6 @@
-﻿local createUniverseSearchStoreModule = require(script.Parent.createUniverseSearchStore)
+﻿local CreateUniverseSearchStoreModule = require(script.Parent.createUniverseSearchStore)
 
-return require(script:FindFirstAncestor("DataHydration").Parent.Signals).createComputed(function()
-	-- upvalues: createUniverseSearchStoreModule (ref)
-	return createUniverseSearchStoreModule()
+return require(script:FindFirstAncestor("DataHydration").Parent.Signals).createComputed(function() --[[ Line: 8 ]]
+	-- upvalues: CreateUniverseSearchStoreModule (copy)
+	return CreateUniverseSearchStoreModule()
 end)

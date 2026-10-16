@@ -1,65 +1,19 @@
-﻿local parent = script:FindFirstAncestor("ProfilePlatform").Parent
-local reactModule = require(parent.React)
-local roduxModule = require(parent.Rodux)
-local t = {
+﻿local Parent = script:FindFirstAncestor("ProfilePlatform").Parent
+local ReactModule = require(Parent.React)
+local RoduxModule = require(Parent.Rodux)
+local Captured = {
 	sheetRootProps = nil,
 	dialogRootProps = nil,
 	dialogTitleProps = nil,
 	dialogActionsProps = nil
 }
 
-local function resetCaptured()
-	-- upvalues: t (ref)
-	t.sheetRootProps = nil
-	t.dialogRootProps = nil
-	t.dialogTitleProps = nil
-	t.dialogActionsProps = nil
+local function renderChildren(DialogRootProps) --[[ Line: 31 ]]
+	-- upvalues: ReactModule (copy)
+	return ReactModule.createElement("Frame", nil, DialogRootProps.children or DialogRootProps[ReactModule.Children])
 end
 
-local function renderChildren(p1)
-	-- upvalues: reactModule (ref)
-	return reactModule.createElement("Frame", nil, p1.children or p1[reactModule.Children])
-end
-
-local function createFoundationMock(p1)
-	-- upvalues: t (ref), renderChildren (ref), reactModule (ref)
-	return setmetatable({
-		Sheet = {
-			Root = function(p2)
-				-- upvalues: t (copy), renderChildren (copy)
-				t.sheetRootProps = p2
-				
-				return renderChildren(p2)
-			end,
-			Header = renderChildren,
-			Content = renderChildren,
-			Actions = renderChildren
-		},
-		Dialog = {
-			Root = function(p2)
-				-- upvalues: t (copy), renderChildren (copy)
-				t.dialogRootProps = p2
-				
-				return renderChildren(p2)
-			end,
-			Title = function(p2)
-				-- upvalues: t (copy), reactModule (copy)
-				t.dialogTitleProps = p2
-				
-				return reactModule.createElement("Frame")
-			end,
-			Content = renderChildren,
-			Actions = function(p2)
-				-- upvalues: t (copy), reactModule (copy)
-				t.dialogActionsProps = p2
-				
-				return reactModule.createElement("Frame")
-			end
-		}
-	}, { __index = p1 })
-end
-
-local t_1 = {
+local config = {
 	["Feature.Catalog.Label.BuyItems"] = "Buy Items",
 	["Feature.Profile.Header.BuyWholeLook"] = "Buy whole look",
 	["IAPExperience.PurchasePrompt.Header.BuyAvatar"] = "Buy avatar",
@@ -70,31 +24,7 @@ local t_1 = {
 	["IAPExperience.InsufficientRobux.Text.MissingRobux"] = "You need",
 	["IAPExperience.InsufficientRobux.Action.BuyRobux"] = "Buy Robux"
 }
-
-local function createLocalizationMock()
-	-- upvalues: t_1 (ref)
-	return {
-		Hooks = {
-			useLocalization = function(p1)
-				-- upvalues: t_1 (copy)
-				local t = {}
-				
-				for i, v in p1 do
-					local var1 = if type(v) == "table" then v[1] else v
-					t[i] = t_1[var1] or var1
-				end
-				return t
-			end
-		},
-		NumberLocalization = {
-			localize = function(p2, _)
-				return tostring(p2)
-			end
-		}
-	}
-end
-
-local t_2 = {
+local PriceStatus = {
 	Owned = "Owned",
 	Free = "Free",
 	PurchaseFromRoblox = "PurchaseFromRoblox",
@@ -106,27 +36,90 @@ local t_2 = {
 	QuantityLimitReached = "QuantityLimitReached"
 }
 
-local function getPriceStatusInShop(p1)
-	-- upvalues: t_2 (ref)
-	return if p1 then if p1.isOwned then t_2.Owned elseif p1.isOffSale then t_2.OffSale elseif p1.collectibleItemDetails then t_2.PurchaseFromResale elseif p1.priceInRobux == 0 then t_2.Free elseif p1.priceInRobux then t_2.PurchaseFromRoblox else t_2.Unavailable else t_2.Unavailable
+local function getPriceStatusInShop(p1) --[[ Line: 118 ]]
+	-- upvalues: PriceStatus (copy)
+	return if p1 then if p1.isOwned then PriceStatus.Owned elseif p1.isOffSale then PriceStatus.OffSale elseif p1.collectibleItemDetails then PriceStatus.PurchaseFromResale elseif p1.priceInRobux == 0 then PriceStatus.Free elseif p1.priceInRobux then PriceStatus.PurchaseFromRoblox else PriceStatus.Unavailable else PriceStatus.Unavailable
 end
 
 return {
-	captured = t,
-	resetCaptured = resetCaptured,
-	createFoundationMock = createFoundationMock,
-	createLocalizationMock = createLocalizationMock,
-	createInspectAndBuyMock = function(p1)
-		-- upvalues: getPriceStatusInShop (ref), t_2 (ref)
+	captured = Captured,
+	resetCaptured = function() --[[ Line: 24 ]]
+		-- upvalues: Captured (copy)
+		Captured.sheetRootProps = nil
+		Captured.dialogRootProps = nil
+		Captured.dialogTitleProps = nil
+		Captured.dialogActionsProps = nil
+	end,
+	createFoundationMock = function(p1) --[[ Line: 35 ]]
+		-- upvalues: Captured (copy), renderChildren (copy), ReactModule (copy)
+		return (setmetatable({
+			Sheet = {
+				Root = function(SheetRootProps) --[[ Line: 36 ]]
+					-- upvalues: Captured (upval), renderChildren (upval)
+					Captured.sheetRootProps = SheetRootProps
+					
+					return renderChildren(SheetRootProps)
+				end,
+				Header = renderChildren,
+				Content = renderChildren,
+				Actions = renderChildren
+			},
+			Dialog = {
+				Root = function(DialogRootProps) --[[ Line: 41 ]]
+					-- upvalues: Captured (upval), renderChildren (upval)
+					Captured.dialogRootProps = DialogRootProps
+					
+					return renderChildren(DialogRootProps)
+				end,
+				Title = function(DialogTitleProps) --[[ Line: 46 ]]
+					-- upvalues: Captured (upval), ReactModule (upval)
+					Captured.dialogTitleProps = DialogTitleProps
+					
+					return ReactModule.createElement("Frame")
+				end,
+				Content = renderChildren,
+				Actions = function(DialogActionsProps) --[[ Line: 51 ]]
+					-- upvalues: Captured (upval), ReactModule (upval)
+					Captured.dialogActionsProps = DialogActionsProps
+					
+					return ReactModule.createElement("Frame")
+				end
+			}
+		}, { __index = p1 }))
+	end,
+	createLocalizationMock = function() --[[ Line: 86 ]]
+		-- upvalues: config (copy)
+		return {
+			Hooks = {
+				useLocalization = function(List) --[[ Line: 89 ]]
+					-- upvalues: config (upval)
+					local t = {}
+					
+					for i, value in List do
+						local v1 = if type(value) == "table" then value[1] else value
+						t[i] = config[v1] or v1
+					end
+					return t
+				end
+			},
+			NumberLocalization = {
+				localize = function(p1, _): string --[[ Line: 99 ]]
+					return (tostring(p1))
+				end
+			}
+		}
+	end,
+	createInspectAndBuyMock = function(p1) --[[ Line: 140 ]]
+		-- upvalues: getPriceStatusInShop (copy), PriceStatus (copy)
 		return {
 			Components = p1 or {},
 			Utils = {
 				getPriceStatusInShop = getPriceStatusInShop,
-				getPriceLineContent = function(_, _, _)
+				getPriceLineContent = function(_, _, _) --[[ Line: 145 ]]
 					return {}
 				end
 			},
-			Enums = { PriceStatus = t_2 },
+			Enums = { PriceStatus = PriceStatus },
 			Constants = {
 				AssetLocalizationKeys = {},
 				BundleLocalizationKeys = {},
@@ -134,17 +127,17 @@ return {
 			}
 		}
 	end,
-	createMockStore = function()
-		-- upvalues: roduxModule (ref)
-		return roduxModule.Store.new(function()
+	createMockStore = function() --[[ Line: 160 ]]
+		-- upvalues: RoduxModule (copy)
+		return RoduxModule.Store.new(function() --[[ Line: 161 ]]
 			return {
 				ScreenSize = Vector2.new(800, 600),
 				TopBar = { statusBarHeight = 0 }
 			}
-		end, {}, { roduxModule.thunkMiddleware })
+		end, {}, { RoduxModule.thunkMiddleware })
 	end,
-	makeDisplayItem = function(p1)
-		local t = {
+	makeDisplayItem = function(List) --[[ Line: 169 ]]
+		local config = {
 			id = "1",
 			name = "Test Item",
 			priceInRobux = 100,
@@ -159,12 +152,12 @@ return {
 			bundleAssetIds = {}
 		}
 		
-		if p1 then
-			for i, v in p1 do
-				t[i] = v
+		if List then
+			for i, value in List do
+				config[i] = value
 			end
 		end
-		return t
+		return config
 	end,
-	PriceStatus = t_2
+	PriceStatus = PriceStatus
 }

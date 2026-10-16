@@ -1,23 +1,23 @@
-﻿local robloxSubscriptionPurchaseApp = script:FindFirstAncestor("RobloxSubscriptionPurchaseApp")
-local reactModule = require(robloxSubscriptionPurchaseApp.Parent.React)
-local robloxPlusUnifiedBuyModalBannerImpressionModule = require(robloxSubscriptionPurchaseApp.Storage.RobloxPlusUnifiedBuyModalBannerImpression)
-local fIntNewBadgeMaximumImpressionCountModule = require(robloxSubscriptionPurchaseApp.Flags.FIntNewBadgeMaximumImpressionCount)
+﻿local RobloxSubscriptionPurchaseApp = script:FindFirstAncestor("RobloxSubscriptionPurchaseApp")
+local ReactModule = require(RobloxSubscriptionPurchaseApp.Parent.React)
+local RobloxPlusUnifiedBuyModalBannerImpressionModule = require(RobloxSubscriptionPurchaseApp.Storage.RobloxPlusUnifiedBuyModalBannerImpression)
+local FIntNewBadgeMaximumImpressionCountModule = require(RobloxSubscriptionPurchaseApp.Flags.FIntNewBadgeMaximumImpressionCount)
 
-return function(p1)
-	-- upvalues: reactModule (ref), robloxPlusUnifiedBuyModalBannerImpressionModule (ref), fIntNewBadgeMaximumImpressionCountModule (ref)
-	local var1 = reactModule.useState(function()
-		-- upvalues: robloxPlusUnifiedBuyModalBannerImpressionModule (copy)
-		return robloxPlusUnifiedBuyModalBannerImpressionModule.getImpressionCount()
-	end) < fIntNewBadgeMaximumImpressionCountModule
+return function(Callback) --[[ Line: 24 | Named "useRobloxPlusUpsellBannerNewBadgeInteraction" ]]
+	-- upvalues: ReactModule (copy), RobloxPlusUnifiedBuyModalBannerImpressionModule (copy), FIntNewBadgeMaximumImpressionCountModule (copy)
+	local IsUseStateResultBelow = ReactModule.useState(function() --[[ Line: 27 ]]
+		-- upvalues: RobloxPlusUnifiedBuyModalBannerImpressionModule (upval)
+		return RobloxPlusUnifiedBuyModalBannerImpressionModule.getImpressionCount()
+	end) < FIntNewBadgeMaximumImpressionCountModule
 	
 	return {
-		shouldShowNewBadge = var1,
-		onActivated = reactModule.useCallback(function()
-			-- upvalues: var1 (ref), robloxPlusUnifiedBuyModalBannerImpressionModule (copy), p1 (ref)
-			if var1 then
-				robloxPlusUnifiedBuyModalBannerImpressionModule.incrementImpressionCount()
+		shouldShowNewBadge = IsUseStateResultBelow,
+		onActivated = ReactModule.useCallback(function() --[[ Line: 33 ]]
+			-- upvalues: IsUseStateResultBelow (copy), RobloxPlusUnifiedBuyModalBannerImpressionModule (upval), Callback (copy)
+			if IsUseStateResultBelow then
+				RobloxPlusUnifiedBuyModalBannerImpressionModule.incrementImpressionCount()
 			end
-			p1()
-		end, { var1, p1 })
+			Callback()
+		end, { IsUseStateResultBelow, Callback })
 	}
 end

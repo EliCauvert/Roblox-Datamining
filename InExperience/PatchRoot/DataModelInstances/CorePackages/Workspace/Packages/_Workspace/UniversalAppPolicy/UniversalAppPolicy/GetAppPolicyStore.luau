@@ -1,1 +1,1 @@
-﻿return require(script:FindFirstAncestor("UniversalAppPolicy").Parent.Signals).createComputed(require(script.createAppPolicyStore))
+﻿return require(script:FindFirstAncestor("UniversalAppPolicy").Parent.Signals).createComputed((require(script.createAppPolicyStore)))

@@ -1,91 +1,94 @@
-﻿local editProfile = script:FindFirstAncestor("EditProfile")
-local parent = editProfile.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local iconName = foundationModule.Enums.IconName
-local iconSize = foundationModule.Enums.IconSize
-local iconButton = foundationModule.IconButton
-local view = foundationModule.View
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useProfileCardWidth = require(parent.ProfilePlatformCommon).Hooks.useProfileCardWidth
-local userTileModule = require(parent.UserTile)
-local editComponentRowModule = require(editProfile.BaseComponents.EditComponentRow)
-local editProfileHeaderBarModule = require(editProfile.BaseComponents.EditProfileHeaderBar)
-local textKeysModule = require(editProfile.Common.TextKeys)
-local fFlagAXEnableProfileTab = require(parent.SharedFlags).FFlagAXEnableProfileTab
+﻿local EditProfile = script:FindFirstAncestor("EditProfile")
+local Parent = EditProfile.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local IconName = FoundationModule.Enums.IconName
+local IconSize = FoundationModule.Enums.IconSize
+local IconButton = FoundationModule.IconButton
+local View = FoundationModule.View
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseProfileCardWidthFunction = require(Parent.ProfilePlatformCommon).Hooks.useProfileCardWidth
+local UserTileModule = require(Parent.UserTile)
+local EditComponentRowModule = require(EditProfile.BaseComponents.EditComponentRow)
+local EditProfileHeaderBarModule = require(EditProfile.BaseComponents.EditProfileHeaderBar)
+local TextKeysModule = require(EditProfile.Common.TextKeys)
+local FFlagAXEnableProfileTab = require(Parent.SharedFlags).FFlagAXEnableProfileTab
 
-return function(p1)
-	-- upvalues: useProfileCardWidth (ref), fFlagAXEnableProfileTab (ref), textKeysModule (ref), useLocalization (ref), reactModule (ref), view (ref), editProfileHeaderBarModule (ref), userTileModule (ref), iconButton (ref), iconName (ref), iconSize (ref), buttonVariant (ref), editComponentRowModule (ref)
-	local var1 = useProfileCardWidth()
-	local var2 = fFlagAXEnableProfileTab and p1.fullBleed == true
-	local var3 = useLocalization({
-		TopBarTitle = textKeysModule.Title,
-		UsernameLabel = textKeysModule.Username,
-		DisplayNameLabel = if p1.isPolicyEnabled then textKeysModule.AgedUpDisplayName else textKeysModule.DisplayName,
-		BioLabel = textKeysModule.About,
-		BioPlaceholder = textKeysModule.AboutPlaceholder
+return function(p1) --[[ Line: 42 | Named "EditProfileLanding" ]]
+	-- upvalues: UseProfileCardWidthFunction (copy), FFlagAXEnableProfileTab (copy), TextKeysModule (copy), UseLocalizationFunction (copy), ReactModule (copy), View (copy), EditProfileHeaderBarModule (copy), UserTileModule (copy), IconButton (copy), IconName (copy), IconSize (copy), ButtonVariant (copy), EditComponentRowModule (copy)
+	local UseProfileCardWidthResult = UseProfileCardWidthFunction()
+	local IsFullBleed: boolean = FFlagAXEnableProfileTab and p1.fullBleed == true
+	local UseLocalizationResult = UseLocalizationFunction({
+		TopBarTitle = TextKeysModule.Title,
+		UsernameLabel = TextKeysModule.Username,
+		DisplayNameLabel = if p1.isPolicyEnabled then TextKeysModule.AgedUpDisplayName else TextKeysModule.DisplayName,
+		BioLabel = TextKeysModule.About,
+		BioPlaceholder = TextKeysModule.AboutPlaceholder
 	})
 	
-	return reactModule.createElement(view, {
-		tag = if fFlagAXEnableProfileTab then {
+	return ReactModule.createElement(View, {
+		tag = if FFlagAXEnableProfileTab then {
 			["col items-start bg-surface-0"] = true,
-			["position-top-right anchor-top-right"] = not var2,
-			["size-full-full"] = var2
+			["position-top-right anchor-top-right"] = not IsFullBleed,
+			["size-full-full"] = IsFullBleed
 		} else "col items-start position-top-right anchor-top-right bg-surface-0",
-		Size = if var2 then nil else UDim2.new(0, var1, 1, 0)
+		Size = if IsFullBleed then nil else UDim2.new(0, UseProfileCardWidthResult, 1, 0)
 	}, {
-		TopBar = reactModule.createElement(editProfileHeaderBarModule, { onClose = p1.onClose, headerText = var3.TopBarTitle }),
-		EditableComponents = reactModule.createElement(view, {
+		TopBar = ReactModule.createElement(EditProfileHeaderBarModule, {
+			onClose = p1.onClose,
+			headerText = UseLocalizationResult.TopBarTitle
+		}),
+		EditableComponents = ReactModule.createElement(View, {
 			tag = "col padding-xlarge gap-xxlarge size-full-0 auto-y"
 		}, {
-			AvatarEditRow = reactModule.createElement(view, { tag = "size-full-2400", LayoutOrder = 1 }, {
-				AvatarContainer = reactModule.createElement(view, {
+			AvatarEditRow = ReactModule.createElement(View, { tag = "size-full-2400", LayoutOrder = 1 }, {
+				AvatarContainer = ReactModule.createElement(View, {
 					tag = "size-2400-2400 position-center-center anchor-center-center"
 				}, {
-					AvatarHeadshot = reactModule.createElement(view, { tag = "size-full-full" }, {
-						UserTile = reactModule.createElement(userTileModule.UserTile, {
+					AvatarHeadshot = ReactModule.createElement(View, { tag = "size-full-full" }, {
+						UserTile = ReactModule.createElement(UserTileModule.UserTile, {
 							userId = p1.userId,
-							layoutMode = userTileModule.LayoutMode.compact,
+							layoutMode = UserTileModule.LayoutMode.compact,
 							onActivated = p1.settingButtonOnActivated.avatar
 						})
 					}),
-					EditAvatarIconButton = reactModule.createElement(view, {
+					EditAvatarIconButton = ReactModule.createElement(View, {
 						tag = "position-bottom-right anchor-bottom-right auto-xy bg-over-media-0 radius-circle"
 					}, {
-						IconButton = reactModule.createElement(iconButton, {
+						IconButton = ReactModule.createElement(IconButton, {
 							isCircular = true,
-							icon = iconName.PhotoCamera,
-							size = iconSize.Small,
+							icon = IconName.PhotoCamera,
+							size = IconSize.Small,
 							onActivated = p1.settingButtonOnActivated.avatar,
-							variant = buttonVariant.Standard
+							variant = ButtonVariant.Standard
 						})
 					})
 				})
 			}),
-			TextComponentsList = reactModule.createElement(view, {
+			TextComponentsList = ReactModule.createElement(View, {
 				tag = "col size-full-0 auto-y bg-surface-100 radius-medium",
 				LayoutOrder = 2
 			}, {
-				EditDisplayNameRow = reactModule.createElement(editComponentRowModule, {
+				EditDisplayNameRow = ReactModule.createElement(EditComponentRowModule, {
 					layoutOrder = 1,
-					label = var3.DisplayNameLabel,
+					label = UseLocalizationResult.DisplayNameLabel,
 					currentValue = p1.displayName,
-					onActivated = if p1.areNamesLoading then function() end else p1.settingButtonOnActivated.displayName,
+					onActivated = if p1.areNamesLoading then function() --[[ Line: 115 ]] end else p1.settingButtonOnActivated.displayName,
 					shouldShimmer = p1.areNamesLoading,
 					forwardRef = p1.firstItemRef
 				}),
-				UsernameEditRow = reactModule.createElement(editComponentRowModule, {
+				UsernameEditRow = ReactModule.createElement(EditComponentRowModule, {
 					layoutOrder = 2,
-					label = var3.UsernameLabel,
+					label = UseLocalizationResult.UsernameLabel,
 					currentValue = p1.username,
 					onActivated = p1.settingButtonOnActivated.username,
 					shouldShimmer = p1.areNamesLoading
 				}),
-				BioEditRow = reactModule.createElement(editComponentRowModule, {
+				BioEditRow = ReactModule.createElement(EditComponentRowModule, {
 					layoutOrder = 3,
-					label = var3.BioLabel,
-					currentValue = if p1.bioText == "" or p1.bioText == nil then var3.BioPlaceholder else p1.bioText,
+					label = UseLocalizationResult.BioLabel,
+					currentValue = if p1.bioText == "" or p1.bioText == nil then UseLocalizationResult.BioPlaceholder else p1.bioText,
 					onActivated = p1.settingButtonOnActivated.bio,
 					shouldShimmer = p1.isBioLoading
 				})

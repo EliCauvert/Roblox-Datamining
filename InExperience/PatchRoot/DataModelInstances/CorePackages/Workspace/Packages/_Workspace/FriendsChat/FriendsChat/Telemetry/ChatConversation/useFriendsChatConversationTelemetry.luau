@@ -1,35 +1,35 @@
-﻿local parent = script:FindFirstAncestor("FriendsChat").Parent
-local reactModule = require(parent.React)
-local chatConversationTelemetryEventsModule = require(parent.AppChat.ChatConversationTelemetryEvents)
-local chatConversationTelemetryLayerModule = require(parent.AppChat.ChatConversationTelemetryLayer)
-local conversationExitTypeModule = require(parent.AppChat.ConversationExitType)
-local useTelemetryModule = require(parent.AppChat.useTelemetry)
+﻿local Parent = script:FindFirstAncestor("FriendsChat").Parent
+local ReactModule = require(Parent.React)
+local ChatConversationTelemetryEventsModule = require(Parent.AppChat.ChatConversationTelemetryEvents)
+local ChatConversationTelemetryLayerModule = require(Parent.AppChat.ChatConversationTelemetryLayer)
+local ConversationExitTypeModule = require(Parent.AppChat.ConversationExitType)
+local UseTelemetryModule = require(Parent.AppChat.useTelemetry)
 
-return function(p1)
-	-- upvalues: useTelemetryModule (ref), chatConversationTelemetryLayerModule (ref), reactModule (ref), chatConversationTelemetryEventsModule (ref), conversationExitTypeModule (ref)
-	local emit = useTelemetryModule(chatConversationTelemetryLayerModule.Context).emit
-	local var1 = reactModule.useRef(emit)
-	var1.current = emit
-	local var2 = reactModule.useRef(p1.getLoadedMessageCount)
-	var2.current = p1.getLoadedMessageCount
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), chatConversationTelemetryEventsModule (copy), var2 (ref)
-		var1.current(chatConversationTelemetryEventsModule.ScreenRendered, { loadedMessageCount = var2.current() })
+return function(p1) --[[ Line: 33 | Named "useFriendsChatConversationTelemetry" ]]
+	-- upvalues: UseTelemetryModule (copy), ChatConversationTelemetryLayerModule (copy), ReactModule (copy), ChatConversationTelemetryEventsModule (copy), ConversationExitTypeModule (copy)
+	local Emit = UseTelemetryModule(ChatConversationTelemetryLayerModule.Context).emit
+	local UseRefResult = ReactModule.useRef(Emit)
+	UseRefResult.current = Emit
+	local UseRefResult1 = ReactModule.useRef(p1.getLoadedMessageCount)
+	UseRefResult1.current = p1.getLoadedMessageCount
+	ReactModule.useEffect(function() --[[ Line: 50 ]]
+		-- upvalues: UseRefResult (copy), ChatConversationTelemetryEventsModule (upval), UseRefResult1 (copy)
+		UseRefResult.current(ChatConversationTelemetryEventsModule.ScreenRendered, { loadedMessageCount = UseRefResult1.current() })
 	end, { p1.conversationId })
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), chatConversationTelemetryEventsModule (copy), conversationExitTypeModule (copy)
-		return function()
-			-- upvalues: var1 (copy), chatConversationTelemetryEventsModule (copy), conversationExitTypeModule (copy)
-			var1.current(chatConversationTelemetryEventsModule.ScreenExit, {
-				conversationExitType = conversationExitTypeModule.Default
+	ReactModule.useEffect(function() --[[ Line: 60 ]]
+		-- upvalues: UseRefResult (copy), ChatConversationTelemetryEventsModule (upval), ConversationExitTypeModule (upval)
+		return function() --[[ Line: 61 ]]
+			-- upvalues: UseRefResult (upval), ChatConversationTelemetryEventsModule (upval), ConversationExitTypeModule (upval)
+			UseRefResult.current(ChatConversationTelemetryEventsModule.ScreenExit, {
+				conversationExitType = ConversationExitTypeModule.Default
 			})
 		end
 	end, {})
 	
 	return {
-		fireInfoButtonClicked = reactModule.useCallback(function()
-			-- upvalues: var1 (ref), chatConversationTelemetryEventsModule (copy)
-			var1.current(chatConversationTelemetryEventsModule.ConversationInfoBtnClicked, {})
+		fireInfoButtonClicked = ReactModule.useCallback(function() --[[ Line: 71 ]]
+			-- upvalues: UseRefResult (copy), ChatConversationTelemetryEventsModule (upval)
+			UseRefResult.current(ChatConversationTelemetryEventsModule.ConversationInfoBtnClicked, {})
 		end, {})
 	}
 end

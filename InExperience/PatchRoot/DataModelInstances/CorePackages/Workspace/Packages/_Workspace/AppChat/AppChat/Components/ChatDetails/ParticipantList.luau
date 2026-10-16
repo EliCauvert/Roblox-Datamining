@@ -1,170 +1,174 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local socialLibrariesModule = require(appChat.SocialLibraries)
-local cryoModule = require(parent.Cryo)
-local dataHydrationModule = require(parent.DataHydration)
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local userModel = require(parent.UserLib).Models.UserModel
-local memo = reactModule.memo
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local loggerModule = require(script.Parent.Logger)
-local presenceSortComparator = socialLibrariesModule.Utils.presenceSortComparator
-local sortedList = socialLibrariesModule.Components.SortedList
-local participantEntryRightFrameModule = require(script.Parent.ParticipantEntryRightFrame)
-local participantEntryModule = require(script.Parent.ParticipantEntry)
-local fFlagAppChatParticipantDialogGamepadFocusModule = require(appChat.Flags.FFlagAppChatParticipantDialogGamepadFocus)
-local fFlagAppChatPresenceStoreMigrationModule = require(appChat.Flags.FFlagAppChatPresenceStoreMigration)
-local fFlagDebugAppChatEnableDomLocatorsModule = require(appChat.Flags.FFlagDebugAppChatEnableDomLocators)
-local domLocatorsModule = require(appChat.Utils.DomLocators)
-local getFFlagAppChatParticipantDialogFoundationMenuModule = require(appChat.Flags.getFFlagAppChatParticipantDialogFoundationMenu)
-local var1 = if fFlagAppChatPresenceStoreMigrationModule then dataHydrationModule.Presence.PresenceEnums.PresenceType else nil
-local var2 = if fFlagAppChatPresenceStoreMigrationModule then dataHydrationModule.Presence.PresenceStore.get() else nil
-local var3 = if fFlagAppChatPresenceStoreMigrationModule then {
-	[var1.Offline] = userModel.PresenceType.OFFLINE,
-	[var1.Online] = userModel.PresenceType.ONLINE,
-	[var1.InGame] = userModel.PresenceType.IN_GAME,
-	[var1.InStudio] = userModel.PresenceType.IN_STUDIO
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local SocialLibrariesModule = require(AppChat.SocialLibraries)
+local CryoModule = require(Parent.Cryo)
+local DataHydrationModule = require(Parent.DataHydration)
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
+local UserModel = require(Parent.UserLib).Models.UserModel
+local MemoFunction = ReactModule.memo
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local LoggerModule = require(script.Parent.Logger)
+local SortedList = SocialLibrariesModule.Components.SortedList
+local ParticipantEntryRightFrameModule = require(script.Parent.ParticipantEntryRightFrame)
+local ParticipantEntryModule = require(script.Parent.ParticipantEntry)
+local FFlagAppChatParticipantDialogGamepadFocusModule = require(AppChat.Flags.FFlagAppChatParticipantDialogGamepadFocus)
+local FFlagAppChatPresenceStoreMigrationModule = require(AppChat.Flags.FFlagAppChatPresenceStoreMigration)
+local FFlagDebugAppChatEnableDomLocatorsModule = require(AppChat.Flags.FFlagDebugAppChatEnableDomLocators)
+local DomLocatorsModule = require(AppChat.Utils.DomLocators)
+local GetFFlagAppChatParticipantDialogFoundationMenuModule = require(AppChat.Flags.getFFlagAppChatParticipantDialogFoundationMenu)
+local PresenceType = if FFlagAppChatPresenceStoreMigrationModule then DataHydrationModule.Presence.PresenceEnums.PresenceType else nil
+local GetResult = if FFlagAppChatPresenceStoreMigrationModule then DataHydrationModule.Presence.PresenceStore.get() else nil
+local Config = if FFlagAppChatPresenceStoreMigrationModule then {
+	[PresenceType.Offline] = UserModel.PresenceType.OFFLINE,
+	[PresenceType.Online] = UserModel.PresenceType.ONLINE,
+	[PresenceType.InGame] = UserModel.PresenceType.IN_GAME,
+	[PresenceType.InStudio] = UserModel.PresenceType.IN_STUDIO
 } else nil
-local t = {
+local config = {
 	entryHeight = 64,
 	pendingKey = "Feature.Chat.Label.Pending",
 	invitedKey = "Feature.SettingsHub.Label.Invited",
 	LayoutOrder = 0,
 	entries = {},
-	onEntryActivated = function(_, _)
-		-- upvalues: loggerModule (ref)
-		loggerModule:warning("onEntryActivated was not passed to ParticipantList")
+	onEntryActivated = function(_, _) --[[ Line: 62 ]]
+		-- upvalues: LoggerModule (copy)
+		LoggerModule:warning("onEntryActivated was not passed to ParticipantList")
 	end,
-	sortComparator = presenceSortComparator
+	sortComparator = SocialLibrariesModule.Utils.presenceSortComparator
 }
 
-function ParticipantList(p1)
-	-- upvalues: cryoModule (ref), t (ref), getFFlagAppChatParticipantDialogFoundationMenuModule (ref), reactModule (ref), useLocalization (ref), fFlagAppChatPresenceStoreMigrationModule (ref), signalsModule (ref), var2 (ref), var3 (ref), signalsReactModule (ref), fFlagAppChatParticipantDialogGamepadFocusModule (ref), participantEntryModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref), participantEntryRightFrameModule (ref), sortedList (ref)
-	local var4 = cryoModule.Dictionary.join(t, p1)
-	local onEntryActivated = var4.onEntryActivated or t.onEntryActivated
-	local var5 = getFFlagAppChatParticipantDialogFoundationMenuModule()
-	local var6 = if var5 then reactModule.useRef({}) else nil
-	local var7 = useLocalization({
-		pendingLabelText = var4.pendingKey,
-		invitedLabelText = var4.invitedKey
+function ParticipantList(p1) --[[ Line: 75 ]]
+	-- upvalues: CryoModule (copy), config (copy), GetFFlagAppChatParticipantDialogFoundationMenuModule (copy), ReactModule (copy), UseLocalizationFunction (copy), FFlagAppChatPresenceStoreMigrationModule (copy), SignalsModule (copy), GetResult (copy), Config (copy), SignalsReactModule (copy), FFlagAppChatParticipantDialogGamepadFocusModule (copy), ParticipantEntryModule (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), DomLocatorsModule (copy), ParticipantEntryRightFrameModule (copy), SortedList (copy)
+	local JoinResult = CryoModule.Dictionary.join(config, p1)
+	local OnEntryActivated = JoinResult.onEntryActivated or config.onEntryActivated
+	local FFlagAppChatParticipantDialogFoundationMenuModule = GetFFlagAppChatParticipantDialogFoundationMenuModule()
+	local UseRefResult = if FFlagAppChatParticipantDialogFoundationMenuModule then ReactModule.useRef({}) else nil
+	local UseLocalizationResult = UseLocalizationFunction({
+		pendingLabelText = JoinResult.pendingKey,
+		invitedLabelText = JoinResult.invitedKey
 	})
-	local var8 = if fFlagAppChatPresenceStoreMigrationModule then signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), var4 (ref), var2 (copy), var3 (copy)
-		return signalsModule.createComputed(function(p2)
-			-- upvalues: var4 (copy), var2 (copy), var3 (copy)
+	local UseSignalStateResult = if FFlagAppChatPresenceStoreMigrationModule then SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 92 ]]
+		-- upvalues: SignalsModule (upval), JoinResult (copy), GetResult (upval), Config (upval)
+		return SignalsModule.createComputed(function(p2) --[[ Line: 93 ]]
+			-- upvalues: JoinResult (upval), GetResult (upval), Config (upval)
 			local t = {}
 			
-			for i, v in pairs(var4.entries) do
-				local var9 = tostring(v.id)
-				local var10 = var2.GetPresenceByUserId(var9).data(p2)
+			for _, entry in pairs(JoinResult.entries) do
+				local Text = tostring(entry.id)
+				local DataResult = GetResult.GetPresenceByUserId(Text).data(p2)
 				
-				if var10 then
-					t[var9] = var3[var10.userPresenceType]
+				if DataResult then
+					t[Text] = Config[DataResult.userPresenceType]
 				end
 			end
 			return t
 		end)
-	end, { var4.entries })) else nil
+	end, { JoinResult.entries }))) else nil
 	
-	local _ = function(p2)
-		-- upvalues: var6 (write), reactModule (copy)
-		if var6 == nil then
+	local function _(p2) --[[ Line: 110 ]]
+		-- upvalues: UseRefResult (ref), ReactModule (upval)
+		if UseRefResult == nil then
 			return nil
-		elseif var6.current[p2] == nil then
-			var6.current[p2] = reactModule.createRef()
 		end
-		return var6.current[p2]
+		if UseRefResult.current[p2] == nil then
+			UseRefResult.current[p2] = ReactModule.createRef()
+		end
+		return UseRefResult.current[p2]
 	end
 	
-	local var9 = function(p2, _)
-		-- upvalues: var7 (ref), var5 (ref), var6 (write), reactModule (copy), var4 (ref), fFlagAppChatParticipantDialogGamepadFocusModule (copy), onEntryActivated (ref), participantEntryModule (copy)
-		local var10 = tostring(p2.id)
-		local t = {
+	local function RenderEntry(p2, _) --[[ Line: 122 ]]
+		-- upvalues: UseLocalizationResult (copy), FFlagAppChatParticipantDialogFoundationMenuModule (copy), UseRefResult (ref), ReactModule (upval), JoinResult (copy), FFlagAppChatParticipantDialogGamepadFocusModule (upval), OnEntryActivated (copy), ParticipantEntryModule (upval)
+		local IsInvited = p2.metadata and p2.metadata.isInvited
+		local Text = tostring(p2.id)
+		local config = {
 			userId = p2.id,
-			statusText = if p2.metadata and p2.metadata.isInvited then var7.invitedLabelText else nil
+			statusText = if IsInvited then UseLocalizationResult.invitedLabelText else nil
 		}
 		
-		if var5 then
-			local var11
-			if var6 == nil then
-				var11 = nil
-			elseif var6.current[var10] == nil then
-				var6.current[var10] = reactModule.createRef()
-			end
-			var11 = var6.current[var10]
-			local var12 = var4.activeParticipantId == var10
-			t.onActivated = if fFlagAppChatParticipantDialogGamepadFocusModule then function()
-				-- upvalues: var12 (ref), onEntryActivated (copy), p2 (ref), var11 (ref)
-				if not var12 then
-					onEntryActivated(p2, var11)
+		if FFlagAppChatParticipantDialogFoundationMenuModule then
+			local CurrentEntry = nil
+			if UseRefResult == nil then
+				CurrentEntry = nil
+			else
+				if UseRefResult.current[Text] == nil then
+					UseRefResult.current[Text] = ReactModule.createRef()
 				end
-			end elseif var12 then nil else function()
-				-- upvalues: onEntryActivated (copy), p2 (ref), var11 (ref)
-				onEntryActivated(p2, var11)
+				CurrentEntry = UseRefResult.current[Text]
+			end
+			local IsActiveParticipantIdMatch = JoinResult.activeParticipantId == Text
+			config.onActivated = if FFlagAppChatParticipantDialogGamepadFocusModule then function() --[[ Line: 134 ]]
+				-- upvalues: IsActiveParticipantIdMatch (copy), OnEntryActivated (upval), p2 (copy), CurrentEntry (copy)
+				if not IsActiveParticipantIdMatch then
+					OnEntryActivated(p2, CurrentEntry)
+				end
+			end elseif IsActiveParticipantIdMatch then nil else function() --[[ Line: 140 ]]
+				-- upvalues: OnEntryActivated (upval), p2 (copy), CurrentEntry (copy)
+				OnEntryActivated(p2, CurrentEntry)
 			end
 		else
-			function t.onActivated()
-				-- upvalues: onEntryActivated (copy), p2 (ref)
-				onEntryActivated(p2, nil)
+			function config.onActivated() --[[ Line: 144 ]]
+				-- upvalues: OnEntryActivated (upval), p2 (copy)
+				OnEntryActivated(p2, nil)
 			end
 		end
-		return reactModule.createElement(participantEntryModule, t, p2.children)
+		return ReactModule.createElement(ParticipantEntryModule, config, p2.children)
 	end
 	
-	local t_1 = {}
+	local Entries = {}
 	
-	for i, v in pairs(var4.entries) do
-		local t_2 = {}
+	for _, entry in pairs(JoinResult.entries) do
+		local t = {}
 		
-		if fFlagAppChatPresenceStoreMigrationModule then
-			t_2.presence = if var8 then var8[tostring(v.id)] else nil
+		if FFlagAppChatPresenceStoreMigrationModule then
+			t.presence = UseSignalStateResult and UseSignalStateResult[tostring(entry.id)] or nil
 		end
-		local var10 = not v.isLocalUser
-		local isPending = v.metadata and v.metadata.isPending
+		local NoIsLocalUser = not entry.isLocalUser
+		local IsPending = entry.metadata and entry.metadata.isPending
 		
-		if not var10 and not isPending then
-			table.insert(t_1, cryoModule.Dictionary.join(t_2, v))
-			continue
-		end
-		local t_3 = {
-			labelText = if isPending then var7.pendingLabelText else nil,
-			shouldShowDots = var10,
-			testId = if fFlagDebugAppChatEnableDomLocatorsModule and var10 then domLocatorsModule.chatDetailsParticipantMoreButton(v.displayName) else nil
-		}
-		
-		if var5 and var10 then
-			local var11
-			local var12 = tostring(v.id)
+		if NoIsLocalUser or IsPending then
+			local config1 = {
+				labelText = if IsPending then UseLocalizationResult.pendingLabelText else nil,
+				shouldShowDots = NoIsLocalUser,
+				testId = if FFlagDebugAppChatEnableDomLocatorsModule and NoIsLocalUser then DomLocatorsModule.chatDetailsParticipantMoreButton(entry.displayName) else nil
+			}
 			
-			if var6 == nil then
-				var11 = nil
-			elseif var6.current[var12] == nil then
-				var6.current[var12] = reactModule.createRef()
+			if FFlagAppChatParticipantDialogFoundationMenuModule and NoIsLocalUser then
+				local Text = tostring(entry.id)
+				local CurrentEntry = nil
+				
+				if UseRefResult == nil then
+					CurrentEntry = nil
+				else
+					if UseRefResult.current[Text] == nil then
+						UseRefResult.current[Text] = ReactModule.createRef()
+					end
+					CurrentEntry = UseRefResult.current[Text]
+				end
+				config1.dotsRef = CurrentEntry
+				
+				function config1.onDotsActivated() --[[ Line: 173 ]]
+					-- upvalues: OnEntryActivated (copy), entry (copy), CurrentEntry (copy)
+					OnEntryActivated(entry, CurrentEntry)
+				end
+			else
+				config1.dotsRef = nil
+				config1.onDotsActivated = nil
 			end
-			var11 = var6.current[var12]
-			t_3.dotsRef = var11
-			
-			function t_3.onDotsActivated()
-				-- upvalues: onEntryActivated (ref), v (ref), var11 (ref)
-				onEntryActivated(v, var11)
-			end
-		else
-			t_3.dotsRef = nil
-			t_3.onDotsActivated = nil
+			t.children = {
+				rightFrame = ReactModule.createElement(ParticipantEntryRightFrameModule, config1)
+			}
 		end
-		t_2.children = {
-			rightFrame = reactModule.createElement(participantEntryRightFrameModule, t_3)
-		}
+		table.insert(Entries, CryoModule.Dictionary.join(t, entry))
 	end
-	return reactModule.createElement(sortedList, {
-		entries = t_1,
-		entryHeight = var4.entryHeight,
-		renderEntry = var9,
-		sortComparator = var4.sortComparator,
-		LayoutOrder = var4.LayoutOrder
+	return ReactModule.createElement(SortedList, {
+		entries = Entries,
+		entryHeight = JoinResult.entryHeight,
+		renderEntry = RenderEntry,
+		sortComparator = JoinResult.sortComparator,
+		LayoutOrder = JoinResult.LayoutOrder
 	})
 end
 
-return memo(ParticipantList)
+return MemoFunction(ParticipantList)

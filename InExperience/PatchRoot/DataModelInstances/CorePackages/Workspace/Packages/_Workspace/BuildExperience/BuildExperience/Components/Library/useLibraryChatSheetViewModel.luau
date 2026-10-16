@@ -1,118 +1,140 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local useChatPlaytestFooterModule = require(buildExperience.Chat.useChatPlaytestFooter)
-local useChatSessionCoreModule = require(buildExperience.Chat.useChatSessionCore)
-local _ = require(buildExperience.Components.ChatSheet.ChatSheetView)
-local _ = require(buildExperience.Components.ChatSheet.useChatSheetViewModel)
-local getAssistantBuildStoreModule = require(buildExperience.Stores.GetAssistantBuildStore)
-local getCreatorAgentResumeStoreModule = require(buildExperience.Stores.GetCreatorAgentResumeStore)
-local getLibraryStoreModule = require(buildExperience.Stores.GetLibraryStore)
-local getCurrentExperienceProjectModule = require(buildExperience.utils.getCurrentExperienceProject)
-local useLibraryChatComposerModule = require(script.Parent.useLibraryChatComposer)
-local chatTypesModule = require(buildExperience.Chat.chatTypes)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local UseChatPlaytestFooterModule = require(BuildExperience.Chat.useChatPlaytestFooter)
+local UseChatSessionCoreModule = require(BuildExperience.Chat.useChatSessionCore)
+local _ = require(BuildExperience.Components.ChatSheet.ChatSheetView)
+local _ = require(BuildExperience.Components.ChatSheet.useChatSheetViewModel)
+local GetAssistantBuildStoreModule = require(BuildExperience.Stores.GetAssistantBuildStore)
+local GetCreatorAgentResumeStoreModule = require(BuildExperience.Stores.GetCreatorAgentResumeStore)
+local GetLibraryStoreModule = require(BuildExperience.Stores.GetLibraryStore)
+local GetCurrentExperienceProjectModule = require(BuildExperience.utils.getCurrentExperienceProject)
+local UseLibraryChatComposerModule = require(script.Parent.useLibraryChatComposer)
+local ChatTypesModule = require(BuildExperience.Chat.chatTypes)
+local FFlagBuildExperienceAnswerFormModule = require(BuildExperience.Flags.FFlagBuildExperienceAnswerForm)
 
-local function noop() end
+local function noop() --[[ Line: 20 ]] end
 
-return function(p1)
-	-- upvalues: noop (ref), signalsReactModule (ref), getAssistantBuildStoreModule (ref), getCreatorAgentResumeStoreModule (ref), getCurrentExperienceProjectModule (ref), useChatSessionCoreModule (ref), getLibraryStoreModule (ref), useChatPlaytestFooterModule (ref), useLibraryChatComposerModule (ref), reactModule (ref), chatTypesModule (ref), foundationModule (ref)
-	local onClose = p1.onClose or noop
-	local var1 = p1.isOpen == nil or p1.isOpen
-	local var2 = signalsReactModule.useSignalState(getAssistantBuildStoreModule().getIsDisabled)
-	local var3 = getCreatorAgentResumeStoreModule()
-	local var4 = getCurrentExperienceProjectModule()
-	local universeId = p1.universeId or var4.universeId
-	local var5 = useChatSessionCoreModule({
+return function(p1) --[[ Line: 22 | Named "useLibraryChatSheetViewModel" ]]
+	-- upvalues: noop (copy), SignalsReactModule (copy), GetAssistantBuildStoreModule (copy), GetCreatorAgentResumeStoreModule (copy), GetCurrentExperienceProjectModule (copy), UseChatSessionCoreModule (copy), GetLibraryStoreModule (copy), UseChatPlaytestFooterModule (copy), UseLibraryChatComposerModule (copy), ReactModule (copy), ChatTypesModule (copy), FoundationModule (copy), FFlagBuildExperienceAnswerFormModule (copy)
+	local OnClose = p1.onClose or noop
+	local NoIsOpen = p1.isOpen == nil or p1.isOpen
+	local UseSignalStateResult = SignalsReactModule.useSignalState(GetAssistantBuildStoreModule().getIsDisabled)
+	local CreatorAgentResumeStoreModule = GetCreatorAgentResumeStoreModule()
+	local CurrentExperienceProjectModule = GetCurrentExperienceProjectModule()
+	local UniverseId = p1.universeId or CurrentExperienceProjectModule.universeId
+	local UseChatSessionCoreModuleResult = UseChatSessionCoreModule({
 		autoFocusComposer = false,
 		isLibraryChat = true,
-		universeId = universeId,
-		placeId = p1.placeId or var4.placeId,
+		universeId = UniverseId,
+		placeId = p1.placeId or CurrentExperienceProjectModule.placeId,
 		sessionId = p1.sessionId,
-		hydrateHistoryWhen = var1,
-		onPromptFailure = getLibraryStoreModule().reportPromptFailure
+		hydrateHistoryWhen = NoIsOpen,
+		onPromptFailure = GetLibraryStoreModule().reportPromptFailure
 	})
-	local var6 = useChatPlaytestFooterModule(var5, "ChatSheetPlaytestCta")
-	local var7 = useLibraryChatComposerModule(var5, var1)
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), var2 (ref), onClose (ref)
-		if var1 and var2 then
-			onClose()
+	local ChatSheetPlaytestCta = UseChatPlaytestFooterModule(UseChatSessionCoreModuleResult, "ChatSheetPlaytestCta")
+	local UseLibraryChatComposerModuleResult = UseLibraryChatComposerModule(UseChatSessionCoreModuleResult, NoIsOpen)
+	ReactModule.useEffect(function() --[[ Line: 42 ]]
+		-- upvalues: NoIsOpen (copy), UseSignalStateResult (copy), OnClose (copy)
+		if NoIsOpen and UseSignalStateResult then
+			OnClose()
 		end
-	end, { var1, var2, onClose })
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), var3 (ref), universeId (ref), p1 (ref)
-		if var1 then
-			var3.setActiveTarget({ universeId = universeId, sessionId = p1.sessionId })
+	end, { NoIsOpen, UseSignalStateResult, OnClose })
+	ReactModule.useEffect(function() --[[ Line: 48 ]]
+		-- upvalues: NoIsOpen (copy), CreatorAgentResumeStoreModule (copy), UniverseId (copy), p1 (copy)
+		if not NoIsOpen then
+			CreatorAgentResumeStoreModule.setActiveTarget(nil)
 			
-			return function()
-				-- upvalues: var3 (copy)
-				var3.setActiveTarget(nil)
-			end
+			return
 		end
-		var3.setActiveTarget(nil)
-	end, { var3, var1, universeId, p1.sessionId })
-	local composerResourceAttachments = var5.composerResourceAttachments
-	local removeComposerResourceAttachmentAtIndex = var5.removeComposerResourceAttachmentAtIndex
-	local sendMessage = var5.sendMessage
+		CreatorAgentResumeStoreModule.setActiveTarget({ universeId = UniverseId, sessionId = p1.sessionId })
+		
+		return function() --[[ Line: 57 ]]
+			-- upvalues: CreatorAgentResumeStoreModule (upval)
+			CreatorAgentResumeStoreModule.setActiveTarget(nil)
+		end
+	end, {
+		CreatorAgentResumeStoreModule,
+		NoIsOpen,
+		UniverseId,
+		p1.sessionId
+	})
+	local ComposerResourceAttachments = UseChatSessionCoreModuleResult.composerResourceAttachments
+	local RemoveComposerResourceAttachmentAtIndexFunction = UseChatSessionCoreModuleResult.removeComposerResourceAttachmentAtIndex
+	local SendMessageFunction = UseChatSessionCoreModuleResult.sendMessage
 	
 	return {
-		tracksExternalComposerText = true,
-		allowsComposerTypingWhileResponding = true,
-		reservesHandleSpace = true,
-		isOpen = var1,
-		onClose = onClose,
-		sheetComponent = foundationModule.Sheet,
+		isOpen = NoIsOpen,
+		onClose = OnClose,
+		sheetComponent = FoundationModule.Sheet,
 		snapPoints = p1.snapPoints,
 		defaultSnapPointIndex = p1.defaultSnapPointIndex,
-		messages = var5.messages,
-		localToolActions = var5.localToolActions,
-		clockBinding = var5.clockBinding,
-		onPlaytest = var6.onPlaytest,
-		isPlaytestLoading = var6.isPlaytestLoading,
-		isHistoryLoading = var5.isHistoryLoading,
-		scrollingFrameRef = var5.setScrollingFrame,
-		anchorScrollToInstance = var5.anchorScrollToInstance,
-		composerText = var5.composerText,
-		composerErrorText = var5.composerErrorText,
-		onComposerChanged = var5.setComposerText,
-		composerImages = var5.composerImages,
-		onComposerImagesChanged = var5.setComposerImages,
-		onRetryComposerImage = var5.retryComposerImage,
-		composerResourceAttachments = var5.composerResourceAttachments,
-		onRemoveComposerResourceAttachment = reactModule.useCallback(function(p2)
-			-- upvalues: composerResourceAttachments (ref), removeComposerResourceAttachmentAtIndex (ref), getLibraryStoreModule (copy), chatTypesModule (copy)
-			local var8 = composerResourceAttachments[p2]
-			removeComposerResourceAttachmentAtIndex(p2)
+		messages = UseChatSessionCoreModuleResult.messages,
+		localToolActions = UseChatSessionCoreModuleResult.localToolActions,
+		answerForm = if FFlagBuildExperienceAnswerFormModule then UseChatSessionCoreModuleResult.answerForm else nil,
+		onSubmitAnswerText = if FFlagBuildExperienceAnswerFormModule then UseChatSessionCoreModuleResult.submitAnswerText else nil,
+		clockBinding = UseChatSessionCoreModuleResult.clockBinding,
+		onPlaytest = ChatSheetPlaytestCta.onPlaytest,
+		isPlaytestLoading = ChatSheetPlaytestCta.isPlaytestLoading,
+		isHistoryLoading = UseChatSessionCoreModuleResult.isHistoryLoading,
+		scrollingFrameRef = UseChatSessionCoreModuleResult.setScrollingFrame,
+		anchorScrollToInstance = UseChatSessionCoreModuleResult.anchorScrollToInstance,
+		composerText = UseChatSessionCoreModuleResult.composerText,
+		composerErrorText = UseChatSessionCoreModuleResult.composerErrorText,
+		onComposerChanged = UseChatSessionCoreModuleResult.setComposerText,
+		composerImages = UseChatSessionCoreModuleResult.composerImages,
+		onComposerImagesChanged = UseChatSessionCoreModuleResult.setComposerImages,
+		onRetryComposerImage = UseChatSessionCoreModuleResult.retryComposerImage,
+		composerResourceAttachments = UseChatSessionCoreModuleResult.composerResourceAttachments,
+		onRemoveComposerResourceAttachment = ReactModule.useCallback(function(p2) --[[ Line: 64 ]]
+			-- upvalues: ComposerResourceAttachments (copy), RemoveComposerResourceAttachmentAtIndexFunction (copy), GetLibraryStoreModule (upval), ChatTypesModule (upval)
+			local ComposerResourceAttachment = ComposerResourceAttachments[p2]
+			RemoveComposerResourceAttachmentAtIndexFunction(p2)
 			
-			if var8 ~= nil then
-				getLibraryStoreModule().reportChipEvent("Removed", { chatTypesModule.getResourceAttachmentUri(var8) })
+			if ComposerResourceAttachment ~= nil then
+				GetLibraryStoreModule().reportChipEvent("Removed", {
+					ChatTypesModule.getResourceAttachmentUri(ComposerResourceAttachment)
+				})
 			end
 		end, {
-			composerResourceAttachments,
-			removeComposerResourceAttachmentAtIndex
+			ComposerResourceAttachments,
+			RemoveComposerResourceAttachmentAtIndexFunction
 		}),
-		isComposerSendBlocked = var7,
-		textBoxRef = var5.textBoxRef,
-		isAssistantResponding = var5.isAssistantResponding,
-		canStopAssistantResponse = var5.canStopAssistantResponse,
-		canSendWhileResponding = var5.canSendWhileResponding,
-		onSend = reactModule.useCallback(function(p2)
-			-- upvalues: composerResourceAttachments (ref), chatTypesModule (copy), sendMessage (ref), getLibraryStoreModule (copy)
-			local t = {}
+		onActivateComposerResourceAttachment = ReactModule.useCallback(function(p2) --[[ Line: 71 ]]
+			-- upvalues: ComposerResourceAttachments (copy), GetLibraryStoreModule (upval), ChatTypesModule (upval)
+			local ComposerResourceAttachment = ComposerResourceAttachments[p2]
 			
-			for i, v in composerResourceAttachments do
-				table.insert(t, chatTypesModule.getResourceAttachmentUri(v))
+			if ComposerResourceAttachment ~= nil then
+				GetLibraryStoreModule().reportChipEvent("Activated", {
+					ChatTypesModule.getResourceAttachmentUri(ComposerResourceAttachment)
+				})
 			end
-			local var8 = sendMessage(p2)
+		end, { ComposerResourceAttachments }),
+		isComposerSendBlocked = UseLibraryChatComposerModuleResult,
+		tracksExternalComposerText = true,
+		textBoxRef = UseChatSessionCoreModuleResult.textBoxRef,
+		isAssistantResponding = UseChatSessionCoreModuleResult.isAssistantResponding,
+		canStopAssistantResponse = UseChatSessionCoreModuleResult.canStopAssistantResponse,
+		canSendWhileResponding = UseChatSessionCoreModuleResult.canSendWhileResponding,
+		allowsComposerTypingWhileResponding = true,
+		reservesHandleSpace = true,
+		onSend = ReactModule.useCallback(function(p2) --[[ Line: 78 ]]
+			-- upvalues: ComposerResourceAttachments (copy), ChatTypesModule (upval), SendMessageFunction (copy), GetLibraryStoreModule (upval)
+			local List = {}
 			
-			if var8 and #t > 0 then
-				getLibraryStoreModule().reportChipEvent("Sent", t)
+			for _, composerResourceAttachment in ComposerResourceAttachments do
+				table.insert(List, ChatTypesModule.getResourceAttachmentUri(composerResourceAttachment))
 			end
-			return var8
-		end, { composerResourceAttachments, sendMessage }),
-		onStop = var5.stopAssistantResponse,
+			local SendMessageResult = SendMessageFunction(p2)
+			
+			if SendMessageResult and #List > 0 then
+				GetLibraryStoreModule().reportChipEvent("Sent", List)
+			end
+			return SendMessageResult
+		end, { ComposerResourceAttachments, SendMessageFunction }),
+		onStop = UseChatSessionCoreModuleResult.stopAssistantResponse,
 		onOpenChat = noop
 	}
 end

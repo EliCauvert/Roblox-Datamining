@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.BlockingUtility.BlockingUtility)
+﻿return (require(script.Parent._Workspace.BlockingUtility.BlockingUtility))

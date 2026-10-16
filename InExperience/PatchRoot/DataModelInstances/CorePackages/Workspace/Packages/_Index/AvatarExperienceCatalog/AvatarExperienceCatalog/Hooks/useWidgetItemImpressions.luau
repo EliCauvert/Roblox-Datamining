@@ -1,49 +1,48 @@
-﻿local avatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
-local parent = avatarExperienceCatalog.Parent
-local reactModule = require(parent.React)
-local cryoModule = require(parent.Cryo)
-local _ = require(parent.AppCommonLib)
-local _ = require(parent.AvatarExperienceCommon)
-local seenImpressionsStore = require(parent.AvatarExperienceAnalytics).Store.SeenImpressionsStore
-local category = seenImpressionsStore.Category
-local useOnRequestImpressionsSignalModule = require(avatarExperienceCatalog.Components.Hooks.useOnRequestImpressionsSignal)
+﻿local AvatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
+local Parent = AvatarExperienceCatalog.Parent
+local ReactModule = require(Parent.React)
+local CryoModule = require(Parent.Cryo)
+local _ = require(Parent.AppCommonLib)
+local _ = require(Parent.AvatarExperienceCommon)
+local SeenImpressionsStore = require(Parent.AvatarExperienceAnalytics).Store.SeenImpressionsStore
+local Category = SeenImpressionsStore.Category
+local UseOnRequestImpressionsSignalModule = require(AvatarExperienceCatalog.Components.Hooks.useOnRequestImpressionsSignal)
 
-return function(p1)
-	-- upvalues: useOnRequestImpressionsSignalModule (ref), reactModule (ref), seenImpressionsStore (ref), category (ref), cryoModule (ref)
-	local var1 = useOnRequestImpressionsSignalModule()
-	local widgetId = p1.widgetId
-	local content = p1.content
-	local widgetRow = p1.widgetRow
-	local itemsPerRow = p1.itemsPerRow
-	local widgetAnalyticsInfo = p1.widgetAnalyticsInfo
-	local uiTreatmentType = p1.uiTreatmentType
-	local reportItemImpression = p1.reportItemImpression
-	local buildItemImpressionInfo = p1.buildItemImpressionInfo
+return function(p1) --[[ Line: 61 | Named "useWidgetItemImpressions" ]]
+	-- upvalues: UseOnRequestImpressionsSignalModule (copy), ReactModule (copy), SeenImpressionsStore (copy), Category (copy), CryoModule (copy)
+	local WidgetId = p1.widgetId
+	local Content = p1.content
+	local WidgetRow = p1.widgetRow
+	local ItemsPerRow = p1.itemsPerRow
+	local WidgetAnalyticsInfo = p1.widgetAnalyticsInfo
+	local UiTreatmentType = p1.uiTreatmentType
+	local ReportItemImpressionFunction = p1.reportItemImpression
+	local BuildItemImpressionInfoFunction = p1.buildItemImpressionInfo
 	
 	return {
-		onRequestImpressionsSignal = var1,
-		onImpressionsDetected = reactModule.useCallback(function(p2)
-			-- upvalues: widgetId (ref), seenImpressionsStore (copy), category (copy), content (ref), buildItemImpressionInfo (ref), cryoModule (copy), widgetAnalyticsInfo (ref), widgetRow (ref), itemsPerRow (ref), uiTreatmentType (ref), reportItemImpression (ref)
-			for i, v in p2 do
-				local text = widgetId .. "_" .. v
+		onRequestImpressionsSignal = UseOnRequestImpressionsSignalModule(),
+		onImpressionsDetected = ReactModule.useCallback(function(ItemPositions) --[[ Line: 74 ]]
+			-- upvalues: WidgetId (copy), SeenImpressionsStore (upval), Category (upval), Content (copy), BuildItemImpressionInfoFunction (copy), CryoModule (upval), WidgetAnalyticsInfo (copy), WidgetRow (copy), ItemsPerRow (copy), UiTreatmentType (copy), ReportItemImpressionFunction (copy)
+			for _, itemPosition in ItemPositions do
+				local Text = WidgetId .. "_" .. itemPosition
 				
-				if not seenImpressionsStore.hasSeen(category.WidgetItems, text) then
-					local var2 = content[v] or {}
-					reportItemImpression(if buildItemImpressionInfo then buildItemImpressionInfo(var2, v) else cryoModule.Dictionary.join(widgetAnalyticsInfo, {
-						widgetPosition = widgetRow,
-						widgetId = widgetId,
-						itemPosition = v,
-						itemId = if var2.id ~= nil then nil else tostring(var2.id),
-						itemType = var2.type,
-						widgetAbsPosition = (widgetRow - 1) * itemsPerRow,
-						uiTreatmentType = uiTreatmentType
+				if not SeenImpressionsStore.hasSeen(Category.WidgetItems, Text) then
+					local ContentEntry = Content[itemPosition] or {}
+					ReportItemImpressionFunction(if BuildItemImpressionInfoFunction then BuildItemImpressionInfoFunction(ContentEntry, itemPosition) else CryoModule.Dictionary.join(WidgetAnalyticsInfo, {
+						widgetPosition = WidgetRow,
+						widgetId = WidgetId,
+						itemPosition = itemPosition,
+						itemId = if ContentEntry.id == nil then nil else tostring(ContentEntry.id),
+						itemType = ContentEntry.type,
+						widgetAbsPosition = (WidgetRow - 1) * ItemsPerRow,
+						uiTreatmentType = UiTreatmentType
 					}))
-					seenImpressionsStore.markSeen(category.WidgetItems, text)
+					SeenImpressionsStore.markSeen(Category.WidgetItems, Text)
 				end
 			end
 		end, {
-			widgetId, content, widgetRow, itemsPerRow, widgetAnalyticsInfo,
-			uiTreatmentType, reportItemImpression, buildItemImpressionInfo
+			WidgetId, Content, WidgetRow, ItemsPerRow, WidgetAnalyticsInfo,
+			UiTreatmentType, ReportItemImpressionFunction, BuildItemImpressionInfoFunction
 		})
 	}
 end

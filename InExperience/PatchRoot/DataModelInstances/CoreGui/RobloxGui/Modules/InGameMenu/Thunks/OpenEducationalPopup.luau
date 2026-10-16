@@ -1,31 +1,32 @@
-﻿local openNativeClosePromptModule = require(script.Parent.Parent.Actions.OpenNativeClosePrompt)
+﻿local OpenNativeClosePromptModule = require(script.Parent.Parent.Actions.OpenNativeClosePrompt)
 
-return function(p1, p2, p3)
-	-- upvalues: openNativeClosePromptModule (ref)
-	local function _()
-		-- upvalues: p2 (ref)
-		return tonumber(p2:GetItem("NativeCloseLuaPromptDisplayCount")) or 0
+return function(GuiService, p1, p2) --[[ Line: 6 ]]
+	-- upvalues: OpenNativeClosePromptModule (copy)
+	local function _(): number --[[ Line: 7 | Named "getDisplayCount" ]]
+		-- upvalues: p1 (copy)
+		return tonumber(p1:GetItem("NativeCloseLuaPromptDisplayCount")) or 0
 	end
 	
-	local _ = function(value)
-		-- upvalues: p2 (ref)
-		p2:SetItem("NativeCloseLuaPromptDisplayCount", tostring(value))
-		p2:flush()
+	local _ = function(p3) --[[ Line: 11 | Named "setDisplayCount" ]]
+		-- upvalues: p1 (copy)
+		p1:SetItem("NativeCloseLuaPromptDisplayCount", (tostring(p3)))
+		p1:flush()
 	end
 	
-	local notificationTypeList = p1:GetNotificationTypeList()
+	local NotificationTypeList = GuiService:GetNotificationTypeList()
 	
-	return function(p4)
-		-- upvalues: p2 (ref), p3 (ref), p1 (ref), notificationTypeList (ref), openNativeClosePromptModule (copy)
-		local nativeCloseLuaPromptDisplayCount = tonumber(p2:GetItem("NativeCloseLuaPromptDisplayCount")) or 0
+	return function(p3) --[[ Line: 18 ]]
+		-- upvalues: p1 (copy), p2 (copy), GuiService (copy), NotificationTypeList (copy), OpenNativeClosePromptModule (upval)
+		local Number: number = tonumber(p1:GetItem("NativeCloseLuaPromptDisplayCount")) or 0
 		
-		if p4:getState().nativeClosePrompt.closingApp or p3 <= nativeCloseLuaPromptDisplayCount then
-			p1:BroadcastNotification("", notificationTypeList.NATIVE_EXIT)
+		if p3:getState().nativeClosePrompt.closingApp or p2 <= Number then
+			GuiService:BroadcastNotification("", NotificationTypeList.NATIVE_EXIT)
 			
 			return
+		else
+			p3:dispatch(OpenNativeClosePromptModule())
+			p1:SetItem("NativeCloseLuaPromptDisplayCount", (tostring(Number + 1)))
+			p1:flush()
 		end
-		p4:dispatch(openNativeClosePromptModule())
-		p2:SetItem("NativeCloseLuaPromptDisplayCount", tostring(nativeCloseLuaPromptDisplayCount + 1))
-		p2:flush()
 	end
 end

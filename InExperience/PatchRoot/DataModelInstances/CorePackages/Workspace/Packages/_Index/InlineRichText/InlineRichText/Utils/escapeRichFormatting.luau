@@ -1,5 +1,5 @@
-﻿return function(p1)
-	return p1:gsub("[&<>\"']", {
+﻿return function(Text: string) --[[ Line: 2 | Named "escapeRichFormatting" ]]
+	return (Text:gsub("[&<>\"']", {
 		["&"] = "&amp;",
 		["<"] = "&lt;",
 		[">"] = "&gt;",
@@ -11,5 +11,5 @@
 		["&amp;quot;"] = "&quot;",
 		["&amp;apos;"] = "&apos;",
 		["&amp;amp;"] = "&amp;"
-	})
+	}))
 end

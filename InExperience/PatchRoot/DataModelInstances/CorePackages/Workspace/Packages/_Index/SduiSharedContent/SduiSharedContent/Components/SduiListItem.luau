@@ -1,43 +1,44 @@
-﻿local parent = script:FindFirstAncestor("SduiSharedContent").Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local iconName = foundationModule.Enums.IconName
-local list = foundationModule.List
+﻿local Parent = script:FindFirstAncestor("SduiSharedContent").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local IconName = FoundationModule.Enums.IconName
+local List = FoundationModule.List
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), iconName (ref), list (ref)
-	return reactModule.createElement(list.Item, {
-		leading = reactModule.useMemo(function()
-			-- upvalues: p1 (ref), iconName (copy)
-			return if p1.leadingIcon then iconName[p1.leadingIcon] or { iconName = p1.leadingIcon } else nil
+return ReactModule.memo(function(p1) --[[ Line: 31 | Named "SduiListItem" ]]
+	-- upvalues: ReactModule (copy), IconName (copy), List (copy)
+	return ReactModule.createElement(List.Item, {
+		leading = ReactModule.useMemo(function() --[[ Line: 32 ]]
+			-- upvalues: p1 (copy), IconName (upval)
+			return if p1.leadingIcon then IconName[p1.leadingIcon] or { iconName = p1.leadingIcon } else nil
 		end, { p1.leadingIcon }),
-		title = reactModule.useMemo(function()
-			-- upvalues: p1 (ref)
+		title = ReactModule.useMemo(function() --[[ Line: 41 ]]
+			-- upvalues: p1 (copy)
 			return if p1.titleMetadata then { title = p1.title or "", metadata = p1.titleMetadata } else p1.title or ""
 		end, { p1.title, p1.titleMetadata }),
 		description = p1.description,
 		trailing = p1.trailing,
 		onActivated = p1.onActivated,
-		input = reactModule.useMemo(function()
-			-- upvalues: p1 (ref)
-			local input = p1.input
+		input = ReactModule.useMemo(function() --[[ Line: 54 ]]
+			-- upvalues: p1 (copy)
+			local Input = p1.input
 			
-			if typeof(input) ~= "table" then
-				return input
+			if typeof(Input) ~= "table" then
+				return Input
 			end
-			local onActivated = input.onActivated
+			local OnActivatedFunction = Input.onActivated
 			
-			if typeof(onActivated) == "function" then
-				local cloned = table.clone(input)
+			if typeof(OnActivatedFunction) == "function" then
+				local Copy = table.clone(Input)
 				
-				function cloned.onActivated(p2)
-					-- upvalues: onActivated (ref)
-					onActivated(nil, nil, { isChecked = p2 })
+				function Copy.onActivated(IsChecked) --[[ Line: 67 ]]
+					-- upvalues: OnActivatedFunction (copy)
+					OnActivatedFunction(nil, nil, { isChecked = IsChecked })
 				end
 				
-				return cloned
+				return Copy
+			else
+				return Input
 			end
-			return input
 		end, { p1.input }),
 		LayoutOrder = p1.layoutOrder,
 		testId = p1.testId

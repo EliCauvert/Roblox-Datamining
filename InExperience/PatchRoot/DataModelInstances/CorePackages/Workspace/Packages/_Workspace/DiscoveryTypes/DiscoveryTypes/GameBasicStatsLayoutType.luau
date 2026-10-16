@@ -1,8 +1,8 @@
-﻿local gameCardLayoutTypeModule = require(script.Parent.GameCardLayoutType)
+﻿local GameCardLayoutTypeModule = require(script.Parent.GameCardLayoutType)
 
 return {
-	[gameCardLayoutTypeModule.Small] = "SmallGameCard",
-	[gameCardLayoutTypeModule.Medium] = "MediumGameCard",
-	[gameCardLayoutTypeModule.Large] = "LargeGameCard",
+	[GameCardLayoutTypeModule.Small] = "SmallGameCard",
+	[GameCardLayoutTypeModule.Medium] = "MediumGameCard",
+	[GameCardLayoutTypeModule.Large] = "LargeGameCard",
 	GameDetails = "GameDetails"
 }

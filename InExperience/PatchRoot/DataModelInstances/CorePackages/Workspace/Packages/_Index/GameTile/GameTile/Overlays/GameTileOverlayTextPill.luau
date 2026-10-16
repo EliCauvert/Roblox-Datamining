@@ -1,64 +1,65 @@
-﻿local parent = script:FindFirstAncestor("GameTile").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local styleModule = require(parent.Style)
-local colors = styleModule.Colors
-local lightTheme = styleModule.Themes.LightTheme
-local getTextSize = styleModule.GetTextSize
-local useDesignTokens = styleModule.useDesignTokens
+﻿local Parent = script:FindFirstAncestor("GameTile").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local StyleModule = require(Parent.Style)
+local Colors = StyleModule.Colors
+local LightTheme = StyleModule.Themes.LightTheme
+local GetTextSizeFunction = StyleModule.GetTextSize
+local UseDesignTokensFunction = StyleModule.useDesignTokens
 
-return function(p1)
-	-- upvalues: useDesignTokens (ref), reactModule (ref), getTextSize (ref), colors (ref), lightTheme (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
-	if p1.text and string.len(p1.text) ~= 0 then
-		local var1 = useDesignTokens()
-		local size200 = var1.Size.Size_200
-		local size150 = var1.Size.Size_150
-		local font = var1.Typography.HeadingLarge.Font
-		local fontSize300 = var1.FontSize.FontSize_300
-		local var2 = reactModule.useMemo(function()
-			-- upvalues: getTextSize (copy), p1 (ref), fontSize300 (ref), font (ref)
-			return getTextSize(p1.text, fontSize300, font, Vector2.new(1e999, 1e999))
-		end, { p1.text, fontSize300, font })
+return function(Frame) --[[ Line: 22 | Named "GameTileOverlayTextPill" ]]
+	-- upvalues: UseDesignTokensFunction (copy), ReactModule (copy), GetTextSizeFunction (copy), Colors (copy), LightTheme (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	if Frame.text and string.len(Frame.text) ~= 0 then
+		local UseDesignTokensResult = UseDesignTokensFunction()
+		local Size200 = UseDesignTokensResult.Size.Size_200
+		local Size150 = UseDesignTokensResult.Size.Size_150
+		local HeadingLargeFont = UseDesignTokensResult.Typography.HeadingLarge.Font
+		local FontSize300 = UseDesignTokensResult.FontSize.FontSize_300
+		local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 35 ]]
+			-- upvalues: GetTextSizeFunction (upval), Frame (copy), FontSize300 (copy), HeadingLargeFont (copy)
+			return GetTextSizeFunction(Frame.text, FontSize300, HeadingLargeFont, Vector2.new(1e999, 1e999))
+		end, { Frame.text, FontSize300, HeadingLargeFont })
 		
-		return reactModule.createElement("Frame", {
+		return ReactModule.createElement("Frame", {
 			BackgroundTransparency = 0.1,
-			BackgroundColor3 = colors.White,
-			Position = p1.Position,
-			AnchorPoint = p1.AnchorPoint,
+			BackgroundColor3 = Colors.White,
+			Position = Frame.Position,
+			AnchorPoint = Frame.AnchorPoint,
 			AutomaticSize = Enum.AutomaticSize.XY
 		}, {
-			Corner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) }),
-			UIPadding = reactModule.createElement("UIPadding", {
-				PaddingTop = UDim.new(0, size150),
-				PaddingLeft = UDim.new(0, size200),
-				PaddingBottom = UDim.new(0, size150),
-				PaddingRight = UDim.new(0, size200)
+			Corner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) }),
+			UIPadding = ReactModule.createElement("UIPadding", {
+				PaddingTop = UDim.new(0, Size150),
+				PaddingLeft = UDim.new(0, Size200),
+				PaddingBottom = UDim.new(0, Size150),
+				PaddingRight = UDim.new(0, Size200)
 			}),
-			TextLabel = reactModule.createElement("TextLabel", {
+			TextLabel = ReactModule.createElement("TextLabel", {
 				BackgroundTransparency = 1,
 				TextWrapped = false,
-				Size = UDim2.fromOffset(var2.X, var2.Y),
-				Text = p1.text,
-				TextColor3 = lightTheme.TextEmphasis.Color3,
-				Font = if foundationFontFaceMigration then nil else font,
-				FontFace = if foundationFontFaceMigration then normalizeFontFace(font) else nil,
-				TextSize = fontSize300,
+				Size = UDim2.fromOffset(UseMemoResult.X, UseMemoResult.Y),
+				Text = Frame.text,
+				TextColor3 = LightTheme.TextEmphasis.Color3,
+				Font = if FoundationFontFaceMigration then nil else HeadingLargeFont,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(HeadingLargeFont) else nil,
+				TextSize = FontSize300,
 				TextXAlignment = Enum.TextXAlignment.Center,
 				TextYAlignment = Enum.TextYAlignment.Center,
 				TextTruncate = Enum.TextTruncate.AtEnd
 			}, {
-				UISizeConstraint = reactModule.createElement("UISizeConstraint", {
-					MaxSize = p1.maxWidthBinding:map(function(p2)
-						-- upvalues: size200 (ref), var2 (ref)
-						local var3 = p2 - size200 * 2
+				UISizeConstraint = ReactModule.createElement("UISizeConstraint", {
+					MaxSize = Frame.maxWidthBinding:map(function(p1) --[[ Line: 69 ]]
+						-- upvalues: Size200 (copy), UseMemoResult (copy)
+						local X = p1 - Size200 * 2
 						
-						return if var3 > 0 then Vector2.new(var3, var2.Y) else nil
+						return if X > 0 then Vector2.new(X, UseMemoResult.Y) else nil
 					end)
 				})
 			})
 		})
+	else
+		return nil
 	end
-	return nil
 end

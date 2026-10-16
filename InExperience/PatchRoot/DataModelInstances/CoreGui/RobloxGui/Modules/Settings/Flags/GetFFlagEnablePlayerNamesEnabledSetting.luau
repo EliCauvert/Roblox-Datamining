@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("EnablePlayerNamesEnabledSetting", false)
 
-return function()
+return function() --[[ Line: 3 ]]
 	return game:GetEngineFeature("EnablePlayerNamesEnabledSettingEngineFeature") and game:GetFastFlag("EnablePlayerNamesEnabledSetting")
 end

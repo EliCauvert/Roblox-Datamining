@@ -1,15 +1,15 @@
-﻿local pageSessionRodux = script:FindFirstAncestor("PageSessionRodux")
-local parent = pageSessionRodux.Parent
-local cryoModule = require(parent.Cryo)
-local _ = require(parent.DiscoveryTypes)
-local setPageSessionTimestampModule = require(pageSessionRodux.SetPageSessionTimestamp)
+﻿local PageSessionRodux = script:FindFirstAncestor("PageSessionRodux")
+local Parent = PageSessionRodux.Parent
+local CryoModule = require(Parent.Cryo)
+local _ = require(Parent.DiscoveryTypes)
+local SetPageSessionTimestampModule = require(PageSessionRodux.SetPageSessionTimestamp)
 
-return function(p1, p2)
-	-- upvalues: setPageSessionTimestampModule (ref), cryoModule (ref)
-	p1 = p1 or {}
+return function(p1, p2) --[[ Line: 9 ]]
+	-- upvalues: SetPageSessionTimestampModule (copy), CryoModule (copy)
+	local P0 = p1 or {}
 	
-	if p2.type == setPageSessionTimestampModule.name then
-		p1 = cryoModule.Dictionary.join(p1, { [p2.page] = p2.timestamp })
+	if p2.type == SetPageSessionTimestampModule.name then
+		P0 = CryoModule.Dictionary.join(P0, { [p2.page] = p2.timestamp })
 	end
-	return p1
+	return P0
 end

@@ -1,31 +1,31 @@
-﻿local parent = script.Parent.Parent.Parent
-local roactModule = require(parent.Roact)
-local tModule = require(parent.t)
-local localeRoactContextModule = require(script.Parent.LocaleRoactContext)
-local var1 = tModule.strictInterface({ keys = tModule.table, render = tModule.callback })
-local var2 = tModule.strictInterface({
-	key = tModule.string,
-	params = tModule.optional(tModule.table)
+﻿local Parent = script.Parent.Parent.Parent
+local RoactModule = require(Parent.Roact)
+local TModule = require(Parent.t)
+local LocaleRoactContextModule = require(script.Parent.LocaleRoactContext)
+local StrictInterfaceResult = TModule.strictInterface({ keys = TModule.table, render = TModule.callback })
+local StrictInterfaceResult1 = TModule.strictInterface({
+	key = TModule.string,
+	params = TModule.optional(TModule.table)
 })
 
-return function(p1)
-	-- upvalues: var1 (ref), var2 (ref), roactModule (ref), localeRoactContextModule (ref)
-	assert(var1(p1))
+return function(p1) --[[ Line: 19 | Named "MultiTextLocalizer" ]]
+	-- upvalues: StrictInterfaceResult (copy), StrictInterfaceResult1 (copy), RoactModule (copy), LocaleRoactContextModule (copy)
+	assert(StrictInterfaceResult(p1))
 	
-	for i, v in pairs(p1.keys) do
-		assert(var2(v))
+	for _, key in pairs(p1.keys) do
+		assert(StrictInterfaceResult1(key))
 	end
-	local render = p1.render
+	local RenderFunction = p1.render
 	
-	return roactModule.createElement(localeRoactContextModule.Consumer, {
-		render = function(p2)
-			-- upvalues: p1 (ref), render (ref)
-			local t = {}
+	return RoactModule.createElement(LocaleRoactContextModule.Consumer, {
+		render = function(p2) --[[ Line: 28 ]]
+			-- upvalues: p1 (copy), RenderFunction (copy)
+			local FormatResults = {}
 			
-			for i, v in pairs(p1.keys) do
-				t[i] = p2:Format(v.key, v.params)
+			for i, key in pairs(p1.keys) do
+				FormatResults[i] = p2:Format(key.key, key.params)
 			end
-			return render(t)
+			return RenderFunction(FormatResults)
 		end
 	})
 end

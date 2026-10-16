@@ -1,383 +1,350 @@
 ﻿local IXPService = game:GetService("IXPService")
-local socialCarousel = script:FindFirstAncestor("SocialCarousel")
-local parent = socialCarousel.Parent
-local cryoModule = require(parent.Cryo)
-local foundationModule = require(parent.Foundation)
-local gameJoinCardModule = require(parent.GameJoinCard)
-local playerContextualMenuModule = require(parent.PlayerContextualMenu)
-local reactModule = require(parent.React)
-local responsiveModule = require(parent.Responsive)
-local robloxAppEnumsModule = require(parent.RobloxAppEnums)
-local userProfilesModule = require(parent.UserProfiles)
-local socialCommonModule = require(parent.SocialCommon)
-local enums = require(parent.FriendsNetworking).Enums
-local fFlagSocialCarouselUseProfileStore = require(parent.SharedFlags).FFlagSocialCarouselUseProfileStore
-local signalsModule = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local var1 = userProfilesModule.Stores.UserProfileStore.get()
-local presenceTypes = socialCommonModule.Enums.PresenceTypes
-local enums_1 = require(parent.SocialLuaAnalytics).Analytics.Enums
-local enumsModule = require(socialCarousel.Common.Enums)
-local localizationModule = require(parent.Localization)
-local useSocialCarouselAnalyticsModule = require(socialCarousel.Analytics.useSocialCarouselAnalytics)
-local usePreferredInput = responsiveModule.usePreferredInput
-local useAppPolicy = require(parent.UniversalAppPolicy).useAppPolicy
-local useDeviceType = require(parent.RobloxAppHooks).useDeviceType
-local useNavigation = require(parent.Navigation).useNavigation
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local view = foundationModule.View
-local appPage = robloxAppEnumsModule.AppPage
-local useLocalization = localizationModule.Hooks.useLocalization
-local tile = enumsModule.Tile
-local userTileModule = require(script.Parent.UserTile)
-local userTileEventHandlers = require(parent.UserTile).UserTileEventHandlers
-local focusNavigationEventNameEnum = require(parent.FocusNavigationUtils).FocusNavigationEventNameEnum
-local constantsModule = require(socialCarousel.Common.Constants)
-local useSocialCarouselContextModule = require(socialCarousel.Contexts.useSocialCarouselContext)
-local desktopGameJoinCardContainer = gameJoinCardModule.DesktopGameJoinCardContainer
-local useGameJoinCardNavigation = gameJoinCardModule.useGameJoinCardNavigation
-local gameJoinCardTTI = gameJoinCardModule.Telemetry.GameJoinCardTTI
-local socialCarouselVendorImagePath = game:DefineFastString("SocialCarouselVendorImagePath", "rbxasset://textures/ui/Shell/Icons/PlatformLogo.png")
-local fFlagPPVEnabledOnConsole = require(parent.SharedFlags).FFlagPPVEnabledOnConsole
-local fFlagSocialCarouselPressXToViewProfile = require(parent.SharedFlags).FFlagSocialCarouselPressXToViewProfile
-local fFlagEnableSplitPane = require(parent.SharedFlags).FFlagEnableSplitPane
-local fFlagSocialCarouselEnableUserSeenEventsModule = require(socialCarousel.Flags.FFlagSocialCarouselEnableUserSeenEvents)
-local fFlagSocialCarouselFixConsoleCtaForInGameModule = require(socialCarousel.Flags.FFlagSocialCarouselFixConsoleCtaForInGame)
-local fFlagSocialCarouselUseConsolePolicyForCtaModule = require(socialCarousel.Flags.FFlagSocialCarouselUseConsolePolicyForCta)
-local fFlagSocialCarouselFixGameJoinCardDismissModule = require(socialCarousel.Flags.FFlagSocialCarouselFixGameJoinCardDismiss)
-local fFlagEnableMobileGameJoinCard = require(parent.SharedFlags).FFlagEnableMobileGameJoinCard
-local fFlagEnableConsoleGameJoinCard = require(parent.SharedFlags).FFlagEnableConsoleGameJoinCard
-local fFlagMobileGameJoinCardTTITracking = require(parent.SharedFlags).FFlagMobileGameJoinCardTTITracking
-local fFlagMobileGameJoinCardGamepadSupport = require(parent.SharedFlags).FFlagMobileGameJoinCardGamepadSupport
-local enableFriendCarouselInGameFriendExposureLoggingV2 = game:DefineFastFlag("EnableFriendCarouselInGameFriendExposureLogging_v2", false)
-local socialViewFriendSortInGameFriendsLayer = game:DefineFastString("SocialViewFriendSortInGameFriendsLayer", "Social.ViewFriendSortInGameFriends")
+local SocialCarousel = script:FindFirstAncestor("SocialCarousel")
+local Parent = SocialCarousel.Parent
+local CryoModule = require(Parent.Cryo)
+local FoundationModule = require(Parent.Foundation)
+local GameJoinCardModule = require(Parent.GameJoinCard)
+local PlayerContextualMenuModule = require(Parent.PlayerContextualMenu)
+local ReactModule = require(Parent.React)
+local ResponsiveModule = require(Parent.Responsive)
+local RobloxAppEnumsModule = require(Parent.RobloxAppEnums)
+local UserProfilesModule = require(Parent.UserProfiles)
+local Enums = require(Parent.FriendsNetworking).Enums
+local FFlagSocialCarouselUseProfileStore = require(Parent.SharedFlags).FFlagSocialCarouselUseProfileStore
+local FFlagUserProfilePlatformProfile = require(Parent.SharedFlags).FFlagUserProfilePlatformProfile
+local SignalsModule = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
+local GetResult = UserProfilesModule.Stores.UserProfileStore.get()
+local PresenceTypes = require(Parent.SocialCommon).Enums.PresenceTypes
+local Enums1 = require(Parent.SocialLuaAnalytics).Analytics.Enums
+local UseSocialCarouselAnalyticsModule = require(SocialCarousel.Analytics.useSocialCarouselAnalytics)
+local UsePreferredInputFunction = ResponsiveModule.usePreferredInput
+local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
+local UseDeviceTypeFunction = require(Parent.RobloxAppHooks).useDeviceType
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local View = FoundationModule.View
+local AppPage = RobloxAppEnumsModule.AppPage
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local Tile = require(SocialCarousel.Common.Enums).Tile
+local UserTileModule = require(script.Parent.UserTile)
+local UserTileEventHandlers = require(Parent.UserTile).UserTileEventHandlers
+local FocusNavigationEventNameEnum = require(Parent.FocusNavigationUtils).FocusNavigationEventNameEnum
+local ConstantsModule = require(SocialCarousel.Common.Constants)
+local UseSocialCarouselContextModule = require(SocialCarousel.Contexts.useSocialCarouselContext)
+local DesktopGameJoinCardContainer = GameJoinCardModule.DesktopGameJoinCardContainer
+local UseGameJoinCardNavigationFunction = GameJoinCardModule.useGameJoinCardNavigation
+local GameJoinCardTTI = GameJoinCardModule.Telemetry.GameJoinCardTTI
+local SocialCarouselVendorImagePath = game:DefineFastString("SocialCarouselVendorImagePath", "rbxasset://textures/ui/Shell/Icons/PlatformLogo.png")
+local FFlagEnableSplitPane = require(Parent.SharedFlags).FFlagEnableSplitPane
+local FFlagSocialCarouselEnableUserSeenEventsModule = require(SocialCarousel.Flags.FFlagSocialCarouselEnableUserSeenEvents)
+local FFlagSocialCarouselUseConsolePolicyForCtaModule = require(SocialCarousel.Flags.FFlagSocialCarouselUseConsolePolicyForCta)
+local FFlagSocialCarouselFixGameJoinCardDismissModule = require(SocialCarousel.Flags.FFlagSocialCarouselFixGameJoinCardDismiss)
+local FFlagSocialCarouselShowPlusBadgeModule = require(SocialCarousel.Flags.FFlagSocialCarouselShowPlusBadge)
+local FFlagEnableMobileGameJoinCard = require(Parent.SharedFlags).FFlagEnableMobileGameJoinCard
+local FFlagConsoleOpenMobileGameJoinCard = require(Parent.SharedFlags).FFlagConsoleOpenMobileGameJoinCard
+local FFlagMobileGameJoinCardTTITracking = require(Parent.SharedFlags).FFlagMobileGameJoinCardTTITracking
+local FFlagMobileGameJoinCardGamepadSupport = require(Parent.SharedFlags).FFlagMobileGameJoinCardGamepadSupport
+local FFlagDesktopGameJoinCardGamepadSupport = require(Parent.SharedFlags).FFlagDesktopGameJoinCardGamepadSupport
+local EnableFriendCarouselInGameFriendExposureLoggingV2 = game:DefineFastFlag("EnableFriendCarouselInGameFriendExposureLogging_v2", false)
+local SocialViewFriendSortInGameFriendsLayer = game:DefineFastString("SocialViewFriendSortInGameFriendsLayer", "Social.ViewFriendSortInGameFriends")
 
-local _ = function(p1)
-	-- upvalues: tile (ref)
-	return if p1.tileType == tile.Recommendation then if p1.isFriendWithUser then Enum.FriendStatus.Friend elseif p1.hasIncomingFriendRequest then Enum.FriendStatus.FriendRequestReceived elseif p1.hasPendingFriendRequest then Enum.FriendStatus.FriendRequestSent else Enum.FriendStatus.NotFriend else Enum.FriendStatus.Friend
+local function _(p1) --[[ Line: 101 ]]
+	-- upvalues: Tile (copy)
+	return if p1.tileType == Tile.Recommendation then if p1.isFriendWithUser then Enum.FriendStatus.Friend elseif p1.hasIncomingFriendRequest then Enum.FriendStatus.FriendRequestReceived elseif p1.hasPendingFriendRequest then Enum.FriendStatus.FriendRequestSent else Enum.FriendStatus.NotFriend else Enum.FriendStatus.Friend
 end
 
-return function(p1)
-	-- upvalues: reactModule (ref), useDispatch (ref), useNavigation (ref), fFlagMobileGameJoinCardGamepadSupport (ref), useDeviceType (ref), usePreferredInput (ref), fFlagSocialCarouselFixConsoleCtaForInGameModule (ref), fFlagPPVEnabledOnConsole (ref), fFlagEnableConsoleGameJoinCard (ref), responsiveModule (ref), fFlagSocialCarouselUseConsolePolicyForCtaModule (ref), useAppPolicy (ref), fFlagSocialCarouselPressXToViewProfile (ref), robloxAppEnumsModule (ref), fFlagEnableMobileGameJoinCard (ref), useSocialCarouselContextModule (ref), useSocialCarouselAnalyticsModule (ref), useLocalization (ref), fFlagSocialCarouselUseProfileStore (ref), var1 (ref), signalsModule (ref), signalsReactModule (ref), userProfilesModule (ref), presenceTypes (ref), playerContextualMenuModule (ref), tile (ref), enums (ref), enableFriendCarouselInGameFriendExposureLoggingV2 (ref), IXPService (ref), socialViewFriendSortInGameFriendsLayer (ref), fFlagMobileGameJoinCardTTITracking (ref), gameJoinCardTTI (ref), appPage (ref), fFlagEnableSplitPane (ref), enums_1 (ref), focusNavigationEventNameEnum (ref), constantsModule (ref), fFlagSocialCarouselEnableUserSeenEventsModule (ref), fFlagSocialCarouselFixGameJoinCardDismissModule (ref), useGameJoinCardNavigation (ref), userTileModule (ref), cryoModule (ref), socialCarouselVendorImagePath (ref), view (ref), foundationModule (ref), desktopGameJoinCardContainer (ref), userTileEventHandlers (ref)
-	local var2
-	local var3 = reactModule.useRef(nil)
-	local var4 = useDispatch()
-	local var5 = useNavigation()
-	local var6 = if fFlagMobileGameJoinCardGamepadSupport then useDeviceType() else nil
-	local var7 = usePreferredInput()
-	local var8 = if fFlagSocialCarouselFixConsoleCtaForInGameModule or not fFlagPPVEnabledOnConsole or fFlagEnableConsoleGameJoinCard then var7 == responsiveModule.Input.Directional else false
-	local var9 = if fFlagSocialCarouselUseConsolePolicyForCtaModule or fFlagMobileGameJoinCardGamepadSupport then useAppPolicy(function(p2)
+return function(p1) --[[ Line: 117 ]]
+	-- upvalues: ReactModule (copy), UseDispatchFunction (copy), UseNavigationFunction (copy), FFlagMobileGameJoinCardGamepadSupport (copy), FFlagDesktopGameJoinCardGamepadSupport (copy), UseDeviceTypeFunction (copy), UsePreferredInputFunction (copy), ResponsiveModule (copy), FFlagSocialCarouselUseConsolePolicyForCtaModule (copy), UseAppPolicyFunction (copy), RobloxAppEnumsModule (copy), FFlagEnableMobileGameJoinCard (copy), FFlagConsoleOpenMobileGameJoinCard (copy), UseSocialCarouselContextModule (copy), UseSocialCarouselAnalyticsModule (copy), UseLocalizationFunction (copy), FFlagSocialCarouselUseProfileStore (copy), GetResult (copy), FFlagUserProfilePlatformProfile (copy), SignalsModule (copy), SignalsReactModule (copy), UserProfilesModule (copy), FFlagSocialCarouselShowPlusBadgeModule (copy), PresenceTypes (copy), PlayerContextualMenuModule (copy), Tile (copy), Enums (copy), EnableFriendCarouselInGameFriendExposureLoggingV2 (copy), IXPService (copy), SocialViewFriendSortInGameFriendsLayer (copy), FFlagMobileGameJoinCardTTITracking (copy), GameJoinCardTTI (copy), AppPage (copy), FFlagEnableSplitPane (copy), Enums1 (copy), FocusNavigationEventNameEnum (copy), ConstantsModule (copy), FFlagSocialCarouselEnableUserSeenEventsModule (copy), FFlagSocialCarouselFixGameJoinCardDismissModule (copy), UseGameJoinCardNavigationFunction (copy), UserTileModule (copy), CryoModule (copy), SocialCarouselVendorImagePath (copy), View (copy), FoundationModule (copy), DesktopGameJoinCardContainer (copy), UserTileEventHandlers (copy)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseNavigationResult = UseNavigationFunction()
+	local UseDeviceTypeResult = if FFlagMobileGameJoinCardGamepadSupport or FFlagDesktopGameJoinCardGamepadSupport then UseDeviceTypeFunction() else nil
+	local UsePreferredInputResult = UsePreferredInputFunction()
+	local IsUsePreferredInputResultMatch = UsePreferredInputResult == ResponsiveModule.Input.Directional
+	local UseAppPolicyResult = if FFlagSocialCarouselUseConsolePolicyForCtaModule or FFlagMobileGameJoinCardGamepadSupport then (not FFlagDesktopGameJoinCardGamepadSupport or UseDeviceTypeResult ~= RobloxAppEnumsModule.DeviceType.Desktop) and UseAppPolicyFunction(function(p2) --[[ Line: 138 ]]
 		return p2.getUseConsoleGameJoinCard()
-	end) else var8
-	
-	if fFlagSocialCarouselPressXToViewProfile then
-		var2 = var7 == responsiveModule.Input.Directional
-		var2 = nil
-	else
-		var2 = false
-	end
-	local var10 = if var6 ~= robloxAppEnumsModule.DeviceType.Phone then var6 == robloxAppEnumsModule.DeviceType.Tablet else true
-	local var11 = fFlagEnableMobileGameJoinCard
-	
-	if var11 then
-		if fFlagMobileGameJoinCardGamepadSupport then
-			var11 = var10
-			
-			if not var11 then
-				var11 = var7 == responsiveModule.Input.Touch
-				var11 = nil
-			end
-		else
-			var11 = var7 == responsiveModule.Input.Touch
-		end
-	end
-	local var12, var13
-	local var14 = useSocialCarouselContextModule()
-	local var15 = useSocialCarouselAnalyticsModule()
-	local var16 = useLocalization({ suggestedLabel = "Feature.Friends.Label.Suggested" })
-	local var17 = if p1.item.presence then {
+	end) else (not FFlagDesktopGameJoinCardGamepadSupport or UseDeviceTypeResult ~= RobloxAppEnumsModule.DeviceType.Desktop) and IsUsePreferredInputResultMatch
+	local IsUsePreferredInputResultMatch1 = UsePreferredInputResult == ResponsiveModule.Input.Directional
+	local IsUseDeviceTypeResultMatch: boolean = UseDeviceTypeResult == RobloxAppEnumsModule.DeviceType.Phone or UseDeviceTypeResult == RobloxAppEnumsModule.DeviceType.Tablet
+	local IsUseDeviceTypeResultMatch1 = FFlagEnableMobileGameJoinCard and (FFlagMobileGameJoinCardGamepadSupport and IsUseDeviceTypeResultMatch or UsePreferredInputResult == ResponsiveModule.Input.Touch) or FFlagConsoleOpenMobileGameJoinCard and UseAppPolicyResult
+	local UseSocialCarouselContextModuleResult = UseSocialCarouselContextModule()
+	local UseSocialCarouselAnalyticsModuleResult = UseSocialCarouselAnalyticsModule()
+	local UseLocalizationResult = UseLocalizationFunction({ suggestedLabel = "Feature.Friends.Label.Suggested" })
+	local Config = if p1.item.presence then {
 		locationString = p1.item.presence.lastLocation,
 		locationPlaceId = p1.item.presence.placeId,
 		locationRootPlaceId = p1.item.presence.rootPlaceId,
 		locationUniverseId = p1.item.presence.universeId,
 		status = p1.item.presence.userPresenceType
 	} else nil
-	local _ = nil
-	local _ = nil
-	local var18 = nil
+	local UseSignalStateResult = nil
+	local UseSignalStateResult1 = nil
+	local UseSignalStateResult2 = nil
 	
-	if fFlagSocialCarouselUseProfileStore then
-		local var19 = reactModule.useMemo(function()
-			-- upvalues: var1 (copy), p1 (ref)
-			return var1.fetchNamesByUserIds({ p1.item.id })
+	if FFlagSocialCarouselUseProfileStore then
+		local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 180 ]]
+			-- upvalues: GetResult (upval), p1 (copy), FFlagUserProfilePlatformProfile (upval)
+			return GetResult.fetchNamesByUserIds({ p1.item.id }, nil, FFlagUserProfilePlatformProfile)
 		end, { p1.item.id })
-		var12 = signalsReactModule.useSignalState(reactModule.useMemo(function()
-			-- upvalues: signalsModule (copy), var19 (ref)
-			return signalsModule.createComputed(function(p2)
-				-- upvalues: var19 (copy)
-				local var20 = var19(p2)
-				local var21 = var20 and (var20.data and var20.data[1])
+		UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 184 ]]
+			-- upvalues: SignalsModule (upval), UseMemoResult (copy)
+			return SignalsModule.createComputed(function(p2) --[[ Line: 185 ]]
+				-- upvalues: UseMemoResult (upval)
+				local UseMemoResultResult = UseMemoResult(p2)
+				local Entry = UseMemoResultResult and (UseMemoResultResult.data and UseMemoResultResult.data[1])
 				
-				return if var21 and var21.names then var21.names.getCombinedName(p2) else nil
+				return if Entry and Entry.names then Entry.names.getCombinedName(p2) else nil
 			end)
-		end, { var19 }))
-		var13 = signalsReactModule.useSignalState(reactModule.useMemo(function()
-			-- upvalues: signalsModule (copy), var19 (ref)
-			return signalsModule.createComputed(function(p2)
-				-- upvalues: var19 (copy)
-				local var20 = var19(p2)
-				local var21 = var20 and (var20.data and var20.data[1])
+		end, { UseMemoResult })))
+		UseSignalStateResult1 = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 192 ]]
+			-- upvalues: SignalsModule (upval), UseMemoResult (copy)
+			return SignalsModule.createComputed(function(p2) --[[ Line: 193 ]]
+				-- upvalues: UseMemoResult (upval)
+				local UseMemoResultResult = UseMemoResult(p2)
+				local Entry = UseMemoResultResult and (UseMemoResultResult.data and UseMemoResultResult.data[1])
 				
-				return if var21 and var21.names then var21.names.getPlatformName(p2) else nil
+				return if Entry and Entry.names then Entry.names.getPlatformName(p2) else nil
 			end)
-		end, { var19 }))
-		
-		if fFlagEnableConsoleGameJoinCard then
-			var18 = signalsReactModule.useSignalState(reactModule.useMemo(function()
-				-- upvalues: signalsModule (copy), var19 (ref)
-				return signalsModule.createComputed(function(p2)
-					-- upvalues: var19 (copy)
-					local var20 = var19(p2)
-					local var21 = var20 and (var20.data and var20.data[1])
-					
-					return if var21 then var21.getPlatformProfileId(p2) else nil
-				end)
-			end, { var19 }))
-		end
+		end, { UseMemoResult })))
+		UseSignalStateResult2 = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 203 ]]
+			-- upvalues: SignalsModule (upval), UseMemoResult (copy)
+			return SignalsModule.createComputed(function(p2) --[[ Line: 204 ]]
+				-- upvalues: UseMemoResult (upval)
+				local UseMemoResultResult = UseMemoResult(p2)
+				local Entry = UseMemoResultResult and (UseMemoResultResult.data and UseMemoResultResult.data[1])
+				
+				return if Entry then Entry.getPlatformProfileId(p2) else nil
+			end)
+		end, { UseMemoResult })))
 	else
-		local var20 = userProfilesModule.Hooks.useUserProfilesFetch({
+		local UseUserProfilesFetchResult = UserProfilesModule.Hooks.useUserProfilesFetch({
 			userIds = { p1.item.id },
-			query = if fFlagEnableConsoleGameJoinCard then userProfilesModule.Queries.userProfilesDisplayUserPlatformNamesByUserIds else userProfilesModule.Queries.userProfilesCombinedAndPlatformByUserIds
+			query = UserProfilesModule.Queries.userProfilesDisplayUserPlatformNamesByUserIds
 		})
-		var12 = reactModule.useMemo(function()
-			-- upvalues: var20 (ref), userProfilesModule (copy), p1 (ref)
-			return if var20.data then userProfilesModule.Selectors.getCombinedNameFromId(var20.data, p1.item.id) else nil
-		end, { var20.data })
-		var13 = reactModule.useMemo(function()
-			-- upvalues: var20 (ref), userProfilesModule (copy), p1 (ref)
-			return if var20.data then userProfilesModule.Selectors.getPlatformNameFromId(var20.data, p1.item.id) else nil
-		end, { var20.data })
-		
-		if fFlagEnableConsoleGameJoinCard then
-			var18 = reactModule.useMemo(function()
-				-- upvalues: var20 (ref), userProfilesModule (copy), p1 (ref)
-				return if var20.data then userProfilesModule.Selectors.getPlatformProfileIdFromId(var20.data, p1.item.id) else nil
-			end, { var20.data, p1.item.id })
-		end
+		UseSignalStateResult = ReactModule.useMemo(function() --[[ Line: 223 ]]
+			-- upvalues: UseUserProfilesFetchResult (copy), UserProfilesModule (upval), p1 (copy)
+			return if UseUserProfilesFetchResult.data then UserProfilesModule.Selectors.getCombinedNameFromId(UseUserProfilesFetchResult.data, p1.item.id) else nil
+		end, { UseUserProfilesFetchResult.data })
+		UseSignalStateResult1 = ReactModule.useMemo(function() --[[ Line: 231 ]]
+			-- upvalues: UseUserProfilesFetchResult (copy), UserProfilesModule (upval), p1 (copy)
+			return if UseUserProfilesFetchResult.data then UserProfilesModule.Selectors.getPlatformNameFromId(UseUserProfilesFetchResult.data, p1.item.id) else nil
+		end, { UseUserProfilesFetchResult.data })
+		UseSignalStateResult2 = ReactModule.useMemo(function() --[[ Line: 239 ]]
+			-- upvalues: UseUserProfilesFetchResult (copy), UserProfilesModule (upval), p1 (copy)
+			return if UseUserProfilesFetchResult.data then UserProfilesModule.Selectors.getPlatformProfileIdFromId(UseUserProfilesFetchResult.data, p1.item.id) else nil
+		end, { UseUserProfilesFetchResult.data, p1.item.id })
 	end
-	local _ = nil
-	local _ = nil
-	local var21, var22 = reactModule.useState(false)
-	local var23 = var21
-	local var24 = var22
-	local setOpenGameJoinCardUserId = var14.setOpenGameJoinCardUserId
+	local UseIsRobloxSubscriberResult = if FFlagSocialCarouselShowPlusBadgeModule then UserProfilesModule.Hooks.useIsRobloxSubscriber(p1.item.id) else nil
+	local UseStateResult = nil
+	local UseStateResult2 = nil
+	UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local SetOpenGameJoinCardUserIdFunction = UseSocialCarouselContextModuleResult.setOpenGameJoinCardUserId
 	
-	if setOpenGameJoinCardUserId then
-		var23 = var14.openGameJoinCardUserId == p1.item.id
+	if SetOpenGameJoinCardUserIdFunction then
+		UseStateResult = UseSocialCarouselContextModuleResult.openGameJoinCardUserId == p1.item.id
 		
-		var24 = function(p2)
-			-- upvalues: setOpenGameJoinCardUserId (ref), p1 (ref)
+		UseStateResult2 = function(p2) --[[ Line: 259 ]]
+			-- upvalues: SetOpenGameJoinCardUserIdFunction (copy), p1 (copy)
 			if p2 then
-				setOpenGameJoinCardUserId(p1.item.id)
+				SetOpenGameJoinCardUserIdFunction(p1.item.id)
 				
 				return
+			else
+				SetOpenGameJoinCardUserIdFunction(function(Id) --[[ Line: 263 ]]
+					-- upvalues: p1 (upval)
+					return if Id == p1.item.id then nil else Id
+				end)
 			end
-			setOpenGameJoinCardUserId(function(p3)
-				-- upvalues: p1 (copy)
-				return if p3 == p1.item.id then nil else p3
-			end)
 		end
 	end
-	local var25
-	local var26 = reactModule.useCallback(function(_)
-		-- upvalues: p1 (ref), fFlagSocialCarouselFixConsoleCtaForInGameModule (copy), presenceTypes (copy), var9 (write), fFlagPPVEnabledOnConsole (copy), var4 (ref), playerContextualMenuModule (copy), var17 (ref), tile (copy), enums (copy), enableFriendCarouselInGameFriendExposureLoggingV2 (copy), IXPService (copy), socialViewFriendSortInGameFriendsLayer (copy), var11 (ref), fFlagMobileGameJoinCardTTITracking (copy), gameJoinCardTTI (copy), var5 (ref), appPage (copy), var24 (write), var23 (write), fFlagEnableSplitPane (copy), enums_1 (copy), var15 (ref)
+	local UseResult = ReactModule.useCallback(function(_) --[[ Line: 280 ]]
+		-- upvalues: p1 (copy), PresenceTypes (upval), UseAppPolicyResult (ref), FFlagConsoleOpenMobileGameJoinCard (upval), IsUseDeviceTypeResultMatch1 (copy), UseDispatchResult (copy), PlayerContextualMenuModule (upval), Config (copy), Tile (upval), Enums (upval), EnableFriendCarouselInGameFriendExposureLoggingV2 (upval), IXPService (upval), SocialViewFriendSortInGameFriendsLayer (upval), FFlagMobileGameJoinCardTTITracking (upval), GameJoinCardTTI (upval), UseNavigationResult (copy), AppPage (upval), UseStateResult2 (ref), UseStateResult (ref), FFlagEnableSplitPane (upval), Enums1 (upval), UseSocialCarouselAnalyticsModuleResult (copy)
 		if p1.item.onActivated then
 			p1.item.onActivated(p1.item)
 		else
-			local _ = nil
+			local IsUserPresenceTypeMatch: boolean = p1.item.presence ~= nil and p1.item.presence.userPresenceType == PresenceTypes.InGame
 			
-			if if fFlagSocialCarouselFixConsoleCtaForInGameModule then var9 and (not fFlagPPVEnabledOnConsole or (p1.item.presence ~= nil and p1.item.presence.userPresenceType == presenceTypes.InGame)) else not fFlagPPVEnabledOnConsole and var9 then
-				local var27 = var4
-				local openPlayerContextualMenu = playerContextualMenuModule.openPlayerContextualMenu
-				local t = { subjectUserId = p1.item.id, subjectPresence = var17 }
-				local item = p1.item
-				t.robloxFriendshipStatus = if item.tileType ~= tile.Recommendation then if item.isFriendWithUser then Enum.FriendStatus.Friend elseif item.hasIncomingFriendRequest then Enum.FriendStatus.FriendRequestReceived elseif item.hasPendingFriendRequest then Enum.FriendStatus.FriendRequestSent else Enum.FriendStatus.NotFriend else Enum.FriendStatus.Friend
-				t.friendshipOriginSourceType = enums.FriendshipOriginSourceType.FriendRecommendations.rawValue()
-				var27(openPlayerContextualMenu(t))
-			elseif p1.item.presence and p1.item.presence.userPresenceType == presenceTypes.InGame then
-				if enableFriendCarouselInGameFriendExposureLoggingV2 then
-					IXPService:LogFlagLinkedUserLayerExposure(socialViewFriendSortInGameFriendsLayer)
+			if UseAppPolicyResult and IsUserPresenceTypeMatch and (not FFlagConsoleOpenMobileGameJoinCard or not IsUseDeviceTypeResultMatch1 or not IsUserPresenceTypeMatch) then
+				local Item = p1.item
+				UseDispatchResult(PlayerContextualMenuModule.openPlayerContextualMenu({
+					subjectUserId = p1.item.id,
+					subjectPresence = Config,
+					robloxFriendshipStatus = if Item.tileType == Tile.Recommendation then if Item.isFriendWithUser then Enum.FriendStatus.Friend elseif Item.hasIncomingFriendRequest then Enum.FriendStatus.FriendRequestReceived elseif Item.hasPendingFriendRequest then Enum.FriendStatus.FriendRequestSent else Enum.FriendStatus.NotFriend else Enum.FriendStatus.Friend,
+					friendshipOriginSourceType = Enums.FriendshipOriginSourceType.FriendRecommendations.rawValue()
+				}))
+			elseif p1.item.presence and p1.item.presence.userPresenceType == PresenceTypes.InGame then
+				if EnableFriendCarouselInGameFriendExposureLoggingV2 then
+					IXPService:LogFlagLinkedUserLayerExposure(SocialViewFriendSortInGameFriendsLayer)
 				end
-				if var11 then
-					if fFlagMobileGameJoinCardTTITracking then
-						gameJoinCardTTI.trackMobileCardClickStart()
+				if IsUseDeviceTypeResultMatch1 then
+					if FFlagMobileGameJoinCardTTITracking then
+						GameJoinCardTTI.trackMobileCardClickStart()
 					end
-					var5.navigate(appPage.GameJoinCard, {
+					UseNavigationResult.navigate(AppPage.GameJoinCard, {
 						userId = p1.item.id,
 						homepageCarouselAbsolutePosition = p1.index
 					})
 				else
-					var24(not var23)
+					UseStateResult2(not UseStateResult)
 				end
 			else
-				(if fFlagEnableSplitPane then var5.push else var5.navigate)(appPage.ProfilePlatform, {
+				(if FFlagEnableSplitPane then UseNavigationResult.push else UseNavigationResult.navigate)(AppPage.ProfilePlatform, {
 					detail = p1.item.id,
-					extraProps = { source = enums_1.Sources.HomePageFriendsCarousel }
+					extraProps = { source = Enums1.Sources.HomePageFriendsCarousel }
 				})
 			end
 		end
-		var15.userPressed(p1.item, { absolutePosition = p1.index })
+		UseSocialCarouselAnalyticsModuleResult.userPressed(p1.item, { absolutePosition = p1.index })
 	end, {
 		p1.item,
-		var23,
-		if fFlagMobileGameJoinCardGamepadSupport then var11 else nil,
-		if fFlagMobileGameJoinCardGamepadSupport then var9 else nil
+		UseStateResult,
+		if FFlagMobileGameJoinCardGamepadSupport then IsUseDeviceTypeResultMatch1 else nil,
+		if FFlagMobileGameJoinCardGamepadSupport or FFlagDesktopGameJoinCardGamepadSupport then UseAppPolicyResult else nil
 	})
-	local var27 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref), tile (copy), var16 (ref), presenceTypes (copy)
-		return if p1.item.tileType == tile.Recommendation then var16.suggestedLabel elseif p1.item.presence and p1.item.presence.userPresenceType == presenceTypes.InGame then p1.item.presence.lastLocation else nil
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 330 ]]
+		-- upvalues: p1 (copy), Tile (upval), UseLocalizationResult (copy), PresenceTypes (upval)
+		return if p1.item.tileType == Tile.Recommendation then UseLocalizationResult.suggestedLabel elseif p1.item.presence and p1.item.presence.userPresenceType == PresenceTypes.InGame then p1.item.presence.lastLocation else nil
 	end, { p1.item })
-	local _ = nil
-	local _ = nil
-	local var28, var29 = reactModule.useState(nil)
-	local var30 = var29
-	local var31 = if fFlagSocialCarouselPressXToViewProfile then reactModule.useRef(nil) else nil
-	local var32 = if fFlagSocialCarouselPressXToViewProfile then reactModule.useCallback(function()
-		-- upvalues: fFlagEnableSplitPane (copy), var5 (ref), appPage (copy), p1 (ref), enums_1 (copy), var15 (ref)
-		;(if fFlagEnableSplitPane then var5.push else var5.navigate)(appPage.ProfilePlatform, {
+	local UseStateResult2_1 = nil
+	local UseStateResult1
+	UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 345 ]]
+		-- upvalues: FFlagEnableSplitPane (upval), UseNavigationResult (copy), AppPage (upval), p1 (copy), Enums1 (upval), UseSocialCarouselAnalyticsModuleResult (copy)
+		(if FFlagEnableSplitPane then UseNavigationResult.push else UseNavigationResult.navigate)(AppPage.ProfilePlatform, {
 			detail = p1.item.id,
-			extraProps = { source = enums_1.Sources.HomePageFriendsCarousel }
+			extraProps = { source = Enums1.Sources.HomePageFriendsCarousel }
 		})
-		var15.userPressed(p1.item, { absolutePosition = p1.index })
+		UseSocialCarouselAnalyticsModuleResult.userPressed(p1.item, { absolutePosition = p1.index })
 	end, {
 		p1.item,
 		p1.index,
-		var5.navigate,
-		var5.push,
-		var15.userPressed
-	}) else nil
-	local var33 = if fFlagSocialCarouselPressXToViewProfile then reactModule.useMemo(function()
-		-- upvalues: var32 (ref), focusNavigationEventNameEnum (copy)
+		UseNavigationResult.navigate,
+		UseNavigationResult.push,
+		UseSocialCarouselAnalyticsModuleResult.userPressed
+	})
+	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 360 ]]
+		-- upvalues: UseResult1 (copy), FocusNavigationEventNameEnum (upval)
 		return {
 			{
-				onActivated = var32,
-				focusEventName = focusNavigationEventNameEnum.ViewProfile
+				onActivated = UseResult1,
+				focusEventName = FocusNavigationEventNameEnum.ViewProfile
 			},
-			{ onActivated = function() end }
+			{ onActivated = function() --[[ Line: 366 ]] end }
 		}
-	end, { var32 }) else nil
-	local var34 = if fFlagSocialCarouselPressXToViewProfile then reactModule.useCallback(function(p2)
-		-- upvalues: var31 (ref), var30 (write)
-		var31.current = p2
+	end, { UseResult1 })
+	local UseResult2 = ReactModule.useCallback(function(Current) --[[ Line: 370 ]]
+		-- upvalues: UseRefResult1 (copy), UseStateResult2_1 (ref)
+		UseRefResult1.current = Current
 		
-		if var30 then
-			var30(p2)
+		if UseStateResult2_1 then
+			UseStateResult2_1(Current)
 		end
-	end, { var30 }) else nil
-	reactModule.useEffect(function()
-		-- upvalues: var14 (ref), var3 (ref), p1 (ref)
-		if var14.unifiedLogging then
-			var14.unifiedLogging.tagTileForImpressions(var3, p1.index)
+	end, { UseStateResult2_1 })
+	ReactModule.useEffect(function() --[[ Line: 377 ]]
+		-- upvalues: UseSocialCarouselContextModuleResult (copy), UseRefResult (copy), p1 (copy)
+		if UseSocialCarouselContextModuleResult.unifiedLogging then
+			UseSocialCarouselContextModuleResult.unifiedLogging.tagTileForImpressions(UseRefResult, p1.index)
 		end
 	end, { p1.index })
-	reactModule.useEffect(function()
-		-- upvalues: var14 (ref), constantsModule (copy), fFlagSocialCarouselEnableUserSeenEventsModule (copy), var15 (ref), p1 (ref)
-		var14.onSuccessfulRender(constantsModule.ANALYTICS.UI_LOADING_EVENTS.CAROUSEL_FRIEND)
+	ReactModule.useEffect(function() --[[ Line: 383 ]]
+		-- upvalues: UseSocialCarouselContextModuleResult (copy), ConstantsModule (upval), FFlagSocialCarouselEnableUserSeenEventsModule (upval), UseSocialCarouselAnalyticsModuleResult (copy), p1 (copy)
+		UseSocialCarouselContextModuleResult.onSuccessfulRender(ConstantsModule.ANALYTICS.UI_LOADING_EVENTS.CAROUSEL_FRIEND)
 		
-		if fFlagSocialCarouselEnableUserSeenEventsModule then
-			var15.userSeen(p1.item, { absolutePosition = p1.index })
+		if FFlagSocialCarouselEnableUserSeenEventsModule then
+			UseSocialCarouselAnalyticsModuleResult.userSeen(p1.item, { absolutePosition = p1.index })
 		end
 	end, {})
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref)
+	ReactModule.useEffect(function() --[[ Line: 392 ]]
+		-- upvalues: p1 (copy)
 		if p1.onTileContentChanged then
 			p1.onTileContentChanged(p1.item.id, p1.index)
 		end
 	end, { p1.item.id, p1.index })
-	local _ = nil
+	local UseResult3 = nil
 	
-	if fFlagSocialCarouselFixGameJoinCardDismissModule then
-		local id = p1.item.id
-		var25 = reactModule.useCallback(function()
-			-- upvalues: setOpenGameJoinCardUserId (ref), id (ref), var24 (write)
-			if setOpenGameJoinCardUserId then
-				setOpenGameJoinCardUserId(function(p2)
-					-- upvalues: id (copy)
-					return if p2 == id then nil else p2
+	if FFlagSocialCarouselFixGameJoinCardDismissModule then
+		local Id = p1.item.id
+		UseResult3 = ReactModule.useCallback(function() --[[ Line: 406 ]]
+			-- upvalues: SetOpenGameJoinCardUserIdFunction (copy), Id (copy), UseStateResult2 (ref)
+			if SetOpenGameJoinCardUserIdFunction then
+				SetOpenGameJoinCardUserIdFunction(function(Id1) --[[ Line: 408 ]]
+					-- upvalues: Id (upval)
+					return if Id1 == Id then nil else Id1
 				end)
 				
 				return
-			elseif var24 then
-				var24(false)
 			end
-		end, { id, setOpenGameJoinCardUserId })
+			if UseStateResult2 then
+				UseStateResult2(false)
+			end
+		end, { Id, SetOpenGameJoinCardUserIdFunction })
 	else
-		var25 = reactModule.useCallback(function()
-			-- upvalues: var24 (write)
-			if var24 then
-				var24(false)
+		UseResult3 = ReactModule.useCallback(function() --[[ Line: 419 ]]
+			-- upvalues: UseStateResult2 (ref)
+			if UseStateResult2 then
+				UseStateResult2(false)
 			end
 		end, {})
 	end
-	local var35
-	local var36 = if fFlagEnableConsoleGameJoinCard then useGameJoinCardNavigation(var28, var8, var3) else false
-	local presence = p1.item.presence
-	local var37 = presence and presence.userPresenceType == presenceTypes.InGame
-	
-	if not var23 then
-		var35 = var36 and (var37 and var17 ~= nil)
-	end
-	local var38 = fFlagEnableConsoleGameJoinCard and (var37 and (var8 and var35))
-	reactModule.useEffect(function()
-		-- upvalues: enableFriendCarouselInGameFriendExposureLoggingV2 (copy), var35 (ref), IXPService (copy), socialViewFriendSortInGameFriendsLayer (copy)
-		if enableFriendCarouselInGameFriendExposureLoggingV2 and var35 then
-			IXPService:LogFlagLinkedUserLayerExposure(socialViewFriendSortInGameFriendsLayer)
+	local IsNotUseDeviceTypeResultMatch: boolean = if FFlagDesktopGameJoinCardGamepadSupport then IsUsePreferredInputResultMatch and UseDeviceTypeResult ~= RobloxAppEnumsModule.DeviceType.Desktop else IsUsePreferredInputResultMatch
+	local UseGameJoinCardNavigationResult = UseGameJoinCardNavigationFunction(if FFlagDesktopGameJoinCardGamepadSupport and not IsNotUseDeviceTypeResultMatch then nil else UseStateResult1, IsNotUseDeviceTypeResultMatch, UseRefResult)
+	local Presence = p1.item.presence
+	local IsUserPresenceTypeMatch: boolean = Presence and Presence.userPresenceType == PresenceTypes.InGame
+	local HasConfig: boolean = if UseStateResult then IsUserPresenceTypeMatch and Config ~= nil else UseGameJoinCardNavigationResult and (IsUserPresenceTypeMatch and Config ~= nil)
+	local HasConfig1: boolean = IsUserPresenceTypeMatch and (IsNotUseDeviceTypeResultMatch and HasConfig)
+	ReactModule.useEffect(function() --[[ Line: 440 ]]
+		-- upvalues: EnableFriendCarouselInGameFriendExposureLoggingV2 (upval), HasConfig (copy), IXPService (upval), SocialViewFriendSortInGameFriendsLayer (upval)
+		if EnableFriendCarouselInGameFriendExposureLoggingV2 and HasConfig then
+			IXPService:LogFlagLinkedUserLayerExposure(SocialViewFriendSortInGameFriendsLayer)
 		end
-	end, { var35 })
+	end, { HasConfig })
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		BackgroundTransparency = 1,
 		Size = p1.itemSize,
 		LayoutOrder = p1.index,
-		ref = var3,
+		ref = UseRefResult,
 		stateLayer = {
-			affordance = foundationModule.Enums.StateLayerAffordance.None
+			affordance = FoundationModule.Enums.StateLayerAffordance.None
 		}
 	}, {
-		UserTile = reactModule.createElement(userTileModule, cryoModule.Dictionary.join(p1, {
+		UserTile = ReactModule.createElement(UserTileModule, CryoModule.Dictionary.join(p1, {
 			itemSize = UDim2.fromScale(1, 1),
-			onActivated = var26,
-			name = if p1.item.tileType == tile.Recommendation then var13 else var12,
-			contextualText = var27,
-			tileRef = var3,
-			titleIcon = if p1.item.tileType == tile.Recommendation then socialCarouselVendorImagePath else nil
+			onActivated = UseResult,
+			name = if p1.item.tileType == Tile.Recommendation then UseSignalStateResult1 else UseSignalStateResult,
+			contextualText = UseMemoResult1,
+			tileRef = UseRefResult,
+			titleIcon = if p1.item.tileType == Tile.Recommendation then SocialCarouselVendorImagePath else nil,
+			isRobloxSubscriber = if FFlagSocialCarouselShowPlusBadgeModule then UseIsRobloxSubscriberResult else nil
 		})),
-		GameJoinCardPopover = if var17 and presence then reactModule.createElement(desktopGameJoinCardContainer, {
+		GameJoinCardPopover = if Config and Presence then ReactModule.createElement(DesktopGameJoinCardContainer, {
 			layoutOrder = 1,
-			playerName = var12 or "",
-			platformName = var13 or "",
-			platformProfileId = if fFlagEnableConsoleGameJoinCard then var18 else nil,
-			universeId = tostring(presence.universeId),
-			experienceName = presence.lastLocation,
+			playerName = UseSignalStateResult or "",
+			platformName = UseSignalStateResult1 or "",
+			platformProfileId = UseSignalStateResult2,
+			universeId = tostring(Presence.universeId),
+			experienceName = Presence.lastLocation,
 			userId = p1.item.id,
-			presence = presence,
-			anchorRef = var3,
-			isOpen = var35 == true,
-			onClose = var25,
+			presence = Presence,
+			anchorRef = UseRefResult,
+			isOpen = HasConfig == true,
+			onClose = UseResult3,
 			homepageCarouselAbsolutePosition = p1.index,
-			showGamepadJoinFocus = var38 == true,
-			onCardGuiObjectChanged = if fFlagSocialCarouselPressXToViewProfile then var34 else var30,
-			isFocused = var36
+			showGamepadJoinFocus = HasConfig1 == true,
+			onCardGuiObjectChanged = UseResult2,
+			isFocused = UseGameJoinCardNavigationResult
 		}) else nil,
-		TileEventHandlers = if fFlagSocialCarouselPressXToViewProfile then reactModule.createElement(userTileEventHandlers, {
-			tileRef = var3,
-			buttons = if var2 then var33 else nil,
-			onTileActivated = function() end
-		}) else nil,
-		CardEventHandlers = if fFlagSocialCarouselPressXToViewProfile and var2 and var28 then reactModule.createElement(userTileEventHandlers, {
-			tileRef = var31,
-			buttons = var33,
-			onTileActivated = function() end
+		TileEventHandlers = ReactModule.createElement(UserTileEventHandlers, {
+			tileRef = UseRefResult,
+			buttons = if IsUsePreferredInputResultMatch1 then UseMemoResult2 else nil,
+			onTileActivated = function() --[[ Line: 490 ]] end
+		}),
+		CardEventHandlers = if IsUsePreferredInputResultMatch1 and UseStateResult1 then ReactModule.createElement(UserTileEventHandlers, {
+			tileRef = UseRefResult1,
+			buttons = UseMemoResult2,
+			onTileActivated = function() --[[ Line: 496 ]] end
 		}) else nil
 	})
 end

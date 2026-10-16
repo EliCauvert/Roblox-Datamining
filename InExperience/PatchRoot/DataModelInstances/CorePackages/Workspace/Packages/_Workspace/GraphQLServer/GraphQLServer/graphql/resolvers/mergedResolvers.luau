@@ -12,6 +12,6 @@ return {
 		require(script.Parent.AmpUpsellResolver).default,
 		require(script.Parent.UserProfileResolver),
 		require(script.Parent.FriendsResolver),
-		require(script.Parent.ShareLinkResolver)
+		(require(script.Parent.ShareLinkResolver))
 	})
 }

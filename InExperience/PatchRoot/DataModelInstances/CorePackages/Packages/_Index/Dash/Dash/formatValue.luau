@@ -1,22 +1,22 @@
-﻿local parent = script.Parent
+﻿local Parent = script.Parent
 
-return function(p1, p2)
-	-- upvalues: parent (ref)
-	p2 = p2 or ""
-	local var1, var2 = p2:find("[A-Za-z#?]+")
+return function(p1: number, p2): string --[[ Line: 19 | Named "formatValue" ]]
+	-- upvalues: Parent (copy)
+	local P1 = p2 or ""
+	local StartIndex, EndIndex = P1:find("[A-Za-z#?]+")
 	
-	if var1 then
-		local var3 = p2:sub(var1, var2)
-		local text = "%" .. p1:sub(1, var1 - 1) .. p1:sub(var2 + 1) .. "s"
-		local prettyModule = require(parent.pretty)
+	if StartIndex then
+		local Segment: string = P1:sub(StartIndex, EndIndex)
+		local Text = "%" .. P1:sub(1, StartIndex - 1) .. P1:sub(EndIndex + 1) .. "s"
+		local PrettyModule = require(Parent.pretty)
 		
-		return if var3 == "#?" then text:format(prettyModule(p1, { multiline = true })) elseif var3 == "?" then text:format(prettyModule(p1)) else ("%" .. p1):format(p1)
+		return if Segment == "#?" then Text:format(PrettyModule(p1, { multiline = true })) elseif Segment == "?" then Text:format(PrettyModule(p1)) else ("%" .. P1):format(p1)
 	end
-	local var4 = "s"
+	local D = "s"
 	
 	if type(p1) == "number" then
-		local _, var5 = math.modf(p1)
-		var4 = if var5 == 0 then "d" else "f"
+		local _, FractionalPart = math.modf(p1)
+		D = if FractionalPart == 0 then "d" else "f"
 	end
-	return ("%" .. p1 .. var6):format(tostring(p1))
+	return ("%" .. P1 .. D):format((tostring(p1)))
 end

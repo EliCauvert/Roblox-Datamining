@@ -1,54 +1,55 @@
-﻿local serverScriptService = game:GetService("ServerScriptService")
-local starterPlayerService = game:GetService("StarterPlayer")
-local serverUtilModule = require(script.Parent.Parent.ServerUtil)
+﻿local ServerScriptService = game:GetService("ServerScriptService")
+local StarterPlayer = game:GetService("StarterPlayer")
+local ServerUtilModule = require(script.Parent.Parent.ServerUtil)
 
-local function _()
-	-- upvalues: serverScriptService (ref), starterPlayerService (ref)
-	if serverScriptService:FindFirstChild("SoundDispatcher") then
+local function _(): boolean --[[ Line: 11 | Named "HasOldSoundScripts" ]]
+	-- upvalues: ServerScriptService (copy), StarterPlayer (copy)
+	if ServerScriptService:FindFirstChild("SoundDispatcher") then
 		return true
+	else
+		local StarterCharScripts = StarterPlayer:FindFirstChildOfClass("StarterCharacterScripts")
+		
+		return if StarterCharScripts and StarterCharScripts:FindFirstChild("Sound") then true else false
 	end
-	local starterCharacterScripts = starterPlayerService:FindFirstChildOfClass("StarterCharacterScripts")
-	
-	return starterCharacterScripts and starterCharacterScripts:FindFirstChild("Sound")
 end
 
-local function LoadScript(p1, p2)
-	-- upvalues: serverUtilModule (ref)
-	local var1 = script.Parent:WaitForChild(p1)
-	local script = Instance.new("Script")
-	script.Name = p1
+local function LoadScript(ChildName, Parent) --[[ Line: 24 ]]
+	-- upvalues: ServerUtilModule (copy)
+	local ChildName1 = script.Parent:WaitForChild(ChildName)
+	local Script1 = Instance.new("Script")
+	Script1.Name = ChildName
 	
-	if serverUtilModule.getFFlagServerCoreScriptSourceCode() then
-		script.Source = serverUtilModule.getSourceForServerScript(var1)
+	if ServerUtilModule.getFFlagServerCoreScriptSourceCode() then
+		Script1.Source = ServerUtilModule.getSourceForServerScript(ChildName1)
 	else
-		script.Source = var1.Source
+		Script1.Source = ChildName1.Source
 	end
-	script.Parent = p2
+	Script1.Parent = Parent
 	
-	return script
+	return Script1
 end
 
-return function()
-	-- upvalues: serverScriptService (ref), starterPlayerService (ref), LoadScript (ref)
-	local var1, starterCharacterScripts
-	if serverScriptService:FindFirstChild("SoundDispatcher") then
-		var1 = true
+return function() --[[ Line: 37 | Named "TryInstall" ]]
+	-- upvalues: ServerScriptService (copy), StarterPlayer (copy), LoadScript (copy)
+	local v1 = nil
+	if ServerScriptService:FindFirstChild("SoundDispatcher") then
+		v1 = true
 	else
-		starterCharacterScripts = starterPlayerService:FindFirstChildOfClass("StarterCharacterScripts")
-		var1 = if starterCharacterScripts and starterCharacterScripts:FindFirstChild("Sound") then true else false
+		local StarterCharScripts = StarterPlayer:FindFirstChildOfClass("StarterCharacterScripts")
+		v1 = if StarterCharScripts and StarterCharScripts:FindFirstChild("Sound") then true else false
 	end
-	if not var1 then return end
-	local var2 = true
-	starterCharacterScripts = serverScriptService:FindFirstChild("SoundDispatcher")
+	if not v1 then return end
+	local Archivable = true
+	local SoundDispatcher = ServerScriptService:FindFirstChild("SoundDispatcher")
 	
-	if not starterCharacterScripts then
-		var2 = false
-		starterCharacterScripts = LoadScript("SoundDispatcher", serverScriptService)
+	if not SoundDispatcher then
+		Archivable = false
+		SoundDispatcher = LoadScript("SoundDispatcher", ServerScriptService)
 	end
-	if not serverScriptService:FindFirstChild("SoundDispatcher") then
-		local var3 = starterCharacterScripts:Clone()
-		var3.Archivable = false
-		var3.Parent = serverScriptService
+	if not ServerScriptService:FindFirstChild("SoundDispatcher") then
+		local SoundDispatcherClone = SoundDispatcher:Clone()
+		SoundDispatcherClone.Archivable = false
+		SoundDispatcherClone.Parent = ServerScriptService
 	end
-	starterCharacterScripts.Archivable = var2
+	SoundDispatcher.Archivable = Archivable
 end

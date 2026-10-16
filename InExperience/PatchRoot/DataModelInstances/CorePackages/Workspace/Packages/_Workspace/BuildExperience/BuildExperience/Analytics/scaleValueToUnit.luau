@@ -1,6 +1,6 @@
-﻿local analyticsUnitModule = require(script:FindFirstAncestor("BuildExperience").Analytics.AnalyticsUnit)
+﻿local AnalyticsUnitModule = require(script:FindFirstAncestor("BuildExperience").Analytics.AnalyticsUnit)
 
-return function(p1, p2)
-	-- upvalues: analyticsUnitModule (ref)
-	return if p2 == analyticsUnitModule.Temporal then p1 * 60 else p1
+return function(p1: number, Temporal): number --[[ Line: 11 | Named "scaleValueToUnit" ]]
+	-- upvalues: AnalyticsUnitModule (copy)
+	return if Temporal == AnalyticsUnitModule.Temporal then p1 * 60 else p1
 end

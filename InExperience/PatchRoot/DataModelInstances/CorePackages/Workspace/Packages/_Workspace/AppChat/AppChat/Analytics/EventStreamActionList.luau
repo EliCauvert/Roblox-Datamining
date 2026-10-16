@@ -1,541 +1,541 @@
-﻿local parent = script:FindFirstAncestor("AppChat").Parent
-local localizationService = game:GetService("LocalizationService")
-local dashModule = require(parent.Dash)
-local enums = require(parent.SocialLuaAnalytics).Analytics.Enums
-local eventTypes = enums.EventTypes
-local contexts = enums.Contexts
-local eventNamesModule = require(script.Parent.EventNames)
+﻿local Parent = script:FindFirstAncestor("AppChat").Parent
+local LocalizationService = game:GetService("LocalizationService")
+local DashModule = require(Parent.Dash)
+local Enums = require(Parent.SocialLuaAnalytics).Analytics.Enums
+local EventTypes = Enums.EventTypes
+local Contexts = Enums.Contexts
+local EventNamesModule = require(script.Parent.EventNames)
 
 return {
-	[eventNamesModule.AppChatVisible] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.AppChatVisible,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
+	[EventNamesModule.AppChatVisible] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.AppChatVisible,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
 		formatRulesForAdditionalInfo = {
-			isChatEnabled = dashModule.identity,
-			isChatLoading = dashModule.identity,
-			chatLandingListCount = dashModule.identity
+			isChatEnabled = DashModule.identity,
+			isChatLoading = DashModule.identity,
+			chatLandingListCount = DashModule.identity
 		}
 	},
-	[eventNamesModule.AppChatClosed] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.AppChatClosed,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
+	[EventNamesModule.AppChatClosed] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.AppChatClosed,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
 		formatRulesForAdditionalInfo = {
-			isChatEnabled = dashModule.identity,
-			isChatLoading = dashModule.identity,
-			chatLandingListCount = dashModule.identity
+			isChatEnabled = DashModule.identity,
+			isChatLoading = DashModule.identity,
+			chatLandingListCount = DashModule.identity
 		}
 	},
-	[eventNamesModule.ChatLandingScreenRendered] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ChatLandingScreenRendered,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
-		formatRulesForAdditionalInfo = { isChatEnabled = dashModule.identity }
+	[EventNamesModule.ChatLandingScreenRendered] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ChatLandingScreenRendered,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
+		formatRulesForAdditionalInfo = { isChatEnabled = DashModule.identity }
 	},
-	[eventNamesModule.ChatLandingSearchBtnClicked] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ChatLandingSearchBtnClicked,
-		additionalInfo = { locale = localizationService.RobloxLocaleId }
+	[EventNamesModule.ChatLandingSearchBtnClicked] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ChatLandingSearchBtnClicked,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId }
 	},
-	[eventNamesModule.ChatLandingComposeBtnClicked] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ChatLandingComposeBtnClicked,
-		additionalInfo = { locale = localizationService.RobloxLocaleId }
+	[EventNamesModule.ChatLandingComposeBtnClicked] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ChatLandingComposeBtnClicked,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId }
 	},
-	[eventNamesModule.ChatLandingNotifBtnClicked] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ChatLandingNotifBtnClicked,
-		additionalInfo = { locale = localizationService.RobloxLocaleId }
+	[EventNamesModule.ChatLandingNotifBtnClicked] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ChatLandingNotifBtnClicked,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId }
 	},
-	[eventNamesModule.ChatLandingSnoozeBtnClicked] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ChatLandingSnoozeBtnClicked,
+	[EventNamesModule.ChatLandingSnoozeBtnClicked] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ChatLandingSnoozeBtnClicked,
 		additionalInfo = {
-			locale = localizationService.RobloxLocaleId,
-			isChatNotificationsMuted = dashModule.identity
+			locale = LocalizationService.RobloxLocaleId,
+			isChatNotificationsMuted = DashModule.identity
 		}
 	},
-	[eventNamesModule.ChatLandingConversationClicked] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ChatLandingConversationClicked,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
+	[EventNamesModule.ChatLandingConversationClicked] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ChatLandingConversationClicked,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
 		formatRulesForAdditionalInfo = {
-			isFiltered = dashModule.identity,
-			conversationListCount = dashModule.identity,
-			selectedConversationId = dashModule.identity,
-			selectedIndex = dashModule.identity,
-			hasUnreadMessages = dashModule.identity,
-			selectedConversationModerationType = dashModule.identity,
-			selectedConversationUserPendingStatus = dashModule.identity
+			isFiltered = DashModule.identity,
+			conversationListCount = DashModule.identity,
+			selectedConversationId = DashModule.identity,
+			selectedIndex = DashModule.identity,
+			hasUnreadMessages = DashModule.identity,
+			selectedConversationModerationType = DashModule.identity,
+			selectedConversationUserPendingStatus = DashModule.identity
 		}
 	},
-	[eventNamesModule.ChatLandingGroupsBtnClicked] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ChatLandingGroupsBtnClicked,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
+	[EventNamesModule.ChatLandingGroupsBtnClicked] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ChatLandingGroupsBtnClicked,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
 		formatRulesForAdditionalInfo = {}
 	},
-	[eventNamesModule.ChatLandingPartyQuickStartButtonClicked] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ChatLandingPartyQuickStartButtonClicked,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
+	[EventNamesModule.ChatLandingPartyQuickStartButtonClicked] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ChatLandingPartyQuickStartButtonClicked,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
 		formatRulesForAdditionalInfo = {
-			clickLocation = dashModule.identity,
-			partyAttemptId = dashModule.identity,
-			placeId = dashModule.identity,
-			universeId = dashModule.identity
+			clickLocation = DashModule.identity,
+			partyAttemptId = DashModule.identity,
+			placeId = DashModule.identity,
+			universeId = DashModule.identity
 		}
 	},
-	[eventNamesModule.ChatLandingPvUpsellRendered] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ChatLandingPvUpsellRendered,
-		additionalInfo = { locale = localizationService.RobloxLocaleId }
+	[EventNamesModule.ChatLandingPvUpsellRendered] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ChatLandingPvUpsellRendered,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId }
 	},
-	[eventNamesModule.ChatLandingPvUpsellDismissed] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ChatLandingPvUpsellDismissed,
-		additionalInfo = { locale = localizationService.RobloxLocaleId }
+	[EventNamesModule.ChatLandingPvUpsellDismissed] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ChatLandingPvUpsellDismissed,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId }
 	},
-	[eventNamesModule.ChatLandingPvUpsellContinueClicked] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ChatLandingPvUpsellContinueClicked,
-		additionalInfo = { locale = localizationService.RobloxLocaleId }
+	[EventNamesModule.ChatLandingPvUpsellContinueClicked] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ChatLandingPvUpsellContinueClicked,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId }
 	},
-	[eventNamesModule.ChatLandingPvUpsellSucceeded] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ChatLandingPvUpsellSucceeded,
-		additionalInfo = { locale = localizationService.RobloxLocaleId }
+	[EventNamesModule.ChatLandingPvUpsellSucceeded] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ChatLandingPvUpsellSucceeded,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId }
 	},
-	[eventNamesModule.ChatLandingPvUpsellFailed] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ChatLandingPvUpsellFailed,
-		additionalInfo = { locale = localizationService.RobloxLocaleId }
+	[EventNamesModule.ChatLandingPvUpsellFailed] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ChatLandingPvUpsellFailed,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId }
 	},
-	[eventNamesModule.ChatLandingUnfilteredThreadsFtuxRendered] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ChatLandingUnfilteredThreadsFtuxRendered,
-		additionalInfo = { locale = localizationService.RobloxLocaleId }
+	[EventNamesModule.ChatLandingUnfilteredThreadsFtuxRendered] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ChatLandingUnfilteredThreadsFtuxRendered,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId }
 	},
-	[eventNamesModule.ChatLandingUnfilteredThreadsFtuxDismissed] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ChatLandingUnfilteredThreadsFtuxDismissed,
-		additionalInfo = { locale = localizationService.RobloxLocaleId }
+	[EventNamesModule.ChatLandingUnfilteredThreadsFtuxDismissed] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ChatLandingUnfilteredThreadsFtuxDismissed,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId }
 	},
-	[eventNamesModule.ChatLandingUnfilteredThreadsFtuxLearnMoreClicked] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ChatLandingUnfilteredThreadsFtuxLearnMoreClicked,
-		additionalInfo = { locale = localizationService.RobloxLocaleId }
+	[EventNamesModule.ChatLandingUnfilteredThreadsFtuxLearnMoreClicked] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ChatLandingUnfilteredThreadsFtuxLearnMoreClicked,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId }
 	},
-	[eventNamesModule.ConversationScreenRendered] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ConversationScreenRendered,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
+	[EventNamesModule.ConversationScreenRendered] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ConversationScreenRendered,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
 		formatRulesForAdditionalInfo = {
-			conversationId = dashModule.identity,
-			loadedMessageCount = dashModule.identity
+			conversationId = DashModule.identity,
+			loadedMessageCount = DashModule.identity
 		}
 	},
-	[eventNamesModule.ConversationSendBtnClicked] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ConversationSendBtnClicked,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
+	[EventNamesModule.ConversationSendBtnClicked] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ConversationSendBtnClicked,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
 		formatRulesForAdditionalInfo = {
-			conversationId = dashModule.identity,
+			conversationId = DashModule.identity,
 			sendBtnClickResult = require(script.Parent.Enums).SendButtonClickActionResult
 		}
 	},
-	[eventNamesModule.ConversationScreenExit] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ConversationScreenExit,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
+	[EventNamesModule.ConversationScreenExit] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ConversationScreenExit,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
 		formatRulesForAdditionalInfo = {
-			conversationId = dashModule.identity,
+			conversationId = DashModule.identity,
 			conversationExitType = require(script.Parent.Enums).ConversationExitType
 		}
 	},
-	[eventNamesModule.ConversationInfoBtnClicked] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ConversationInfoBtnClicked,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
-		formatRulesForAdditionalInfo = { conversationId = dashModule.identity }
+	[EventNamesModule.ConversationInfoBtnClicked] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ConversationInfoBtnClicked,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
+		formatRulesForAdditionalInfo = { conversationId = DashModule.identity }
 	},
-	[eventNamesModule.NewConversationCreated] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.NewConversationCreated,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
+	[EventNamesModule.NewConversationCreated] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.NewConversationCreated,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
 		formatRulesForAdditionalInfo = {
-			conversationId = dashModule.identity,
-			createConversationResult = dashModule.identity,
-			participantsCount = dashModule.identity,
-			createdReason = dashModule.identity
+			conversationId = DashModule.identity,
+			createConversationResult = DashModule.identity,
+			participantsCount = DashModule.identity,
+			createdReason = DashModule.identity
 		}
 	},
-	[eventNamesModule.ChatMessagePressed] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ChatMessagePressed,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
+	[EventNamesModule.ChatMessagePressed] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ChatMessagePressed,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
 		formatRulesForAdditionalInfo = {
-			conversationId = dashModule.identity,
-			targetMessageSenderId = dashModule.identity,
-			targetMessageId = dashModule.identity,
-			targetMessageSentAt = dashModule.identity,
-			targetMessageLength = dashModule.identity
+			conversationId = DashModule.identity,
+			targetMessageSenderId = DashModule.identity,
+			targetMessageId = DashModule.identity,
+			targetMessageSentAt = DashModule.identity,
+			targetMessageLength = DashModule.identity
 		}
 	},
-	[eventNamesModule.ChatMessageLongPressed] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ChatMessageLongPressed,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
+	[EventNamesModule.ChatMessageLongPressed] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ChatMessageLongPressed,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
 		formatRulesForAdditionalInfo = {
-			conversationId = dashModule.identity,
-			targetMessageSenderId = dashModule.identity,
-			targetMessageId = dashModule.identity,
-			targetMessageSentAt = dashModule.identity,
-			targetMessageLength = dashModule.identity
+			conversationId = DashModule.identity,
+			targetMessageSenderId = DashModule.identity,
+			targetMessageId = DashModule.identity,
+			targetMessageSentAt = DashModule.identity,
+			targetMessageLength = DashModule.identity
 		}
 	},
-	[eventNamesModule.ChatMessageOpenMenuIconClicked] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ChatMessageOpenMenuIconClicked,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
+	[EventNamesModule.ChatMessageOpenMenuIconClicked] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ChatMessageOpenMenuIconClicked,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
 		formatRulesForAdditionalInfo = {
-			conversationId = dashModule.identity,
-			targetMessageSenderId = dashModule.identity,
-			targetMessageId = dashModule.identity,
-			targetMessageSentAt = dashModule.identity,
-			targetMessageLength = dashModule.identity
+			conversationId = DashModule.identity,
+			targetMessageSenderId = DashModule.identity,
+			targetMessageId = DashModule.identity,
+			targetMessageSentAt = DashModule.identity,
+			targetMessageLength = DashModule.identity
 		}
 	},
-	[eventNamesModule.ChatMessageReplyIconClicked] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ChatMessageReplyIconClicked,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
+	[EventNamesModule.ChatMessageReplyIconClicked] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ChatMessageReplyIconClicked,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
 		formatRulesForAdditionalInfo = {
-			conversationId = dashModule.identity,
-			targetMessageSenderId = dashModule.identity,
-			targetMessageId = dashModule.identity,
-			targetMessageSentAt = dashModule.identity,
-			targetMessageLength = dashModule.identity
+			conversationId = DashModule.identity,
+			targetMessageSenderId = DashModule.identity,
+			targetMessageId = DashModule.identity,
+			targetMessageSentAt = DashModule.identity,
+			targetMessageLength = DashModule.identity
 		}
 	},
-	[eventNamesModule.ChatMessageMenuOpened] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ChatMessageMenuOpened,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
+	[EventNamesModule.ChatMessageMenuOpened] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ChatMessageMenuOpened,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
 		formatRulesForAdditionalInfo = {
-			conversationId = dashModule.identity,
-			targetMessageSenderId = dashModule.identity,
-			targetMessageId = dashModule.identity,
-			targetMessageSentAt = dashModule.identity,
-			targetMessageLength = dashModule.identity
+			conversationId = DashModule.identity,
+			targetMessageSenderId = DashModule.identity,
+			targetMessageId = DashModule.identity,
+			targetMessageSentAt = DashModule.identity,
+			targetMessageLength = DashModule.identity
 		}
 	},
-	[eventNamesModule.ChatMessageMenuReplyBtnActivated] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ChatMessageMenuReplyBtnActivated,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
+	[EventNamesModule.ChatMessageMenuReplyBtnActivated] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ChatMessageMenuReplyBtnActivated,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
 		formatRulesForAdditionalInfo = {
-			conversationId = dashModule.identity,
-			targetMessageSenderId = dashModule.identity,
-			targetMessageId = dashModule.identity,
-			targetMessageSentAt = dashModule.identity,
-			targetMessageLength = dashModule.identity
+			conversationId = DashModule.identity,
+			targetMessageSenderId = DashModule.identity,
+			targetMessageId = DashModule.identity,
+			targetMessageSentAt = DashModule.identity,
+			targetMessageLength = DashModule.identity
 		}
 	},
-	[eventNamesModule.ChatMessageMenuCopyBtnActivated] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ChatMessageMenuCopyBtnActivated,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
+	[EventNamesModule.ChatMessageMenuCopyBtnActivated] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ChatMessageMenuCopyBtnActivated,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
 		formatRulesForAdditionalInfo = {
-			conversationId = dashModule.identity,
-			targetMessageSenderId = dashModule.identity,
-			targetMessageId = dashModule.identity,
-			targetMessageSentAt = dashModule.identity,
-			targetMessageLength = dashModule.identity
+			conversationId = DashModule.identity,
+			targetMessageSenderId = DashModule.identity,
+			targetMessageId = DashModule.identity,
+			targetMessageSentAt = DashModule.identity,
+			targetMessageLength = DashModule.identity
 		}
 	},
-	[eventNamesModule.ChatInputBarReplyComposeRendered] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ChatInputBarReplyComposeRendered,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
+	[EventNamesModule.ChatInputBarReplyComposeRendered] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ChatInputBarReplyComposeRendered,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
 		formatRulesForAdditionalInfo = {
-			conversationId = dashModule.identity,
-			targetMessageSenderId = dashModule.identity,
-			targetMessageId = dashModule.identity,
-			targetMessageSentAt = dashModule.identity,
-			targetMessageLength = dashModule.identity
+			conversationId = DashModule.identity,
+			targetMessageSenderId = DashModule.identity,
+			targetMessageId = DashModule.identity,
+			targetMessageSentAt = DashModule.identity,
+			targetMessageLength = DashModule.identity
 		}
 	},
-	[eventNamesModule.ChatInputBarReplyComposeCancelBtnActivated] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ChatInputBarReplyComposeCancelBtnActivated,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
+	[EventNamesModule.ChatInputBarReplyComposeCancelBtnActivated] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ChatInputBarReplyComposeCancelBtnActivated,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
 		formatRulesForAdditionalInfo = {
-			conversationId = dashModule.identity,
-			targetMessageSenderId = dashModule.identity,
-			targetMessageId = dashModule.identity,
-			targetMessageSentAt = dashModule.identity,
-			targetMessageLength = dashModule.identity
+			conversationId = DashModule.identity,
+			targetMessageSenderId = DashModule.identity,
+			targetMessageId = DashModule.identity,
+			targetMessageSentAt = DashModule.identity,
+			targetMessageLength = DashModule.identity
 		}
 	},
-	[eventNamesModule.ChatDetailsRendered] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ChatDetailsRendered,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
+	[EventNamesModule.ChatDetailsRendered] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ChatDetailsRendered,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
 		formatRulesForAdditionalInfo = {
-			conversationId = dashModule.identity,
-			participantsCount = dashModule.identity,
-			isGroupOwner = dashModule.identity,
-			isGroupConversation = dashModule.identity
+			conversationId = DashModule.identity,
+			participantsCount = DashModule.identity,
+			isGroupOwner = DashModule.identity,
+			isGroupConversation = DashModule.identity
 		}
 	},
-	[eventNamesModule.ConversationMessageSent] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ConversationMessageSent,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
+	[EventNamesModule.ConversationMessageSent] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ConversationMessageSent,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
 		formatRulesForAdditionalInfo = {
-			conversationId = dashModule.identity,
-			messageSentResult = dashModule.identity,
-			messageId = dashModule.identity,
-			recipientIds = dashModule.identity,
-			targetMessageId = dashModule.identity,
-			targetMessageSenderId = dashModule.identity,
-			targetMessageSentAt = dashModule.identity,
-			targetMessageLength = dashModule.identity
+			conversationId = DashModule.identity,
+			messageSentResult = DashModule.identity,
+			messageId = DashModule.identity,
+			recipientIds = DashModule.identity,
+			targetMessageId = DashModule.identity,
+			targetMessageSenderId = DashModule.identity,
+			targetMessageSentAt = DashModule.identity,
+			targetMessageLength = DashModule.identity
 		}
 	},
-	[eventNamesModule.ChatEmptyStateScreenRendered] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ChatEmptyStateScreenRendered,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
+	[EventNamesModule.ChatEmptyStateScreenRendered] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ChatEmptyStateScreenRendered,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
 		formatRulesForAdditionalInfo = {
 			emptyStateType = require(script.Parent.Enums).EmptyStateType
 		}
 	},
-	[eventNamesModule.ChatAddFriendsBtnClicked] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ChatAddFriendsBtnClicked,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
+	[EventNamesModule.ChatAddFriendsBtnClicked] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ChatAddFriendsBtnClicked,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
 		formatRulesForAdditionalInfo = {}
 	},
-	[eventNamesModule.ChatDetailsAddFriendsBtnClicked] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ChatDetailsAddFriendsBtnClicked,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
+	[EventNamesModule.ChatDetailsAddFriendsBtnClicked] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ChatDetailsAddFriendsBtnClicked,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
 		formatRulesForAdditionalInfo = {
-			conversationId = dashModule.identity,
-			participantsCount = dashModule.identity,
-			isGroupOwner = dashModule.identity,
-			isGroupConversation = dashModule.identity
+			conversationId = DashModule.identity,
+			participantsCount = DashModule.identity,
+			isGroupOwner = DashModule.identity,
+			isGroupConversation = DashModule.identity
 		}
 	},
-	[eventNamesModule.ChatDetailsLeaveGroupBtnClicked] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ChatDetailsLeaveGroupBtnClicked,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
+	[EventNamesModule.ChatDetailsLeaveGroupBtnClicked] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ChatDetailsLeaveGroupBtnClicked,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
 		formatRulesForAdditionalInfo = {
-			conversationId = dashModule.identity,
-			participantsCount = dashModule.identity,
-			isGroupOwner = dashModule.identity
+			conversationId = DashModule.identity,
+			participantsCount = DashModule.identity,
+			isGroupOwner = DashModule.identity
 		}
 	},
-	[eventNamesModule.ChatDetailsLeaveGroupDialogRendered] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ChatDetailsLeaveGroupDialogRendered,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
-		formatRulesForAdditionalInfo = { conversationId = dashModule.identity }
+	[EventNamesModule.ChatDetailsLeaveGroupDialogRendered] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ChatDetailsLeaveGroupDialogRendered,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
+		formatRulesForAdditionalInfo = { conversationId = DashModule.identity }
 	},
-	[eventNamesModule.ChatDetailsLeaveGroupDialogStayClicked] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ChatDetailsLeaveGroupDialogStayClicked,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
-		formatRulesForAdditionalInfo = { conversationId = dashModule.identity }
+	[EventNamesModule.ChatDetailsLeaveGroupDialogStayClicked] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ChatDetailsLeaveGroupDialogStayClicked,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
+		formatRulesForAdditionalInfo = { conversationId = DashModule.identity }
 	},
-	[eventNamesModule.ChatDetailsLeaveGroupDialogLeaveClicked] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ChatDetailsLeaveGroupDialogLeaveClicked,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
+	[EventNamesModule.ChatDetailsLeaveGroupDialogLeaveClicked] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ChatDetailsLeaveGroupDialogLeaveClicked,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
 		formatRulesForAdditionalInfo = {
-			conversationId = dashModule.identity,
-			selectedConversationHasGroupUp = dashModule.identity
+			conversationId = DashModule.identity,
+			selectedConversationHasGroupUp = DashModule.identity
 		}
 	},
-	[eventNamesModule.ChatDetailsReportUserClicked] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ChatDetailsReportUserClicked,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
-		formatRulesForAdditionalInfo = { conversationId = dashModule.identity }
+	[EventNamesModule.ChatDetailsReportUserClicked] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ChatDetailsReportUserClicked,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
+		formatRulesForAdditionalInfo = { conversationId = DashModule.identity }
 	},
-	[eventNamesModule.ChatDetailsCreateUnfilteredChatCellRendered] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ChatDetailsCreateUnfilteredChatCellRendered,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
-		formatRulesForAdditionalInfo = { conversationId = dashModule.identity }
+	[EventNamesModule.ChatDetailsCreateUnfilteredChatCellRendered] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ChatDetailsCreateUnfilteredChatCellRendered,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
+		formatRulesForAdditionalInfo = { conversationId = DashModule.identity }
 	},
-	[eventNamesModule.ChatDetailsCreateUnfilteredChatCellClicked] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ChatDetailsCreateUnfilteredChatCellClicked,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
+	[EventNamesModule.ChatDetailsCreateUnfilteredChatCellClicked] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ChatDetailsCreateUnfilteredChatCellClicked,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
 		formatRulesForAdditionalInfo = {
-			conversationId = dashModule.identity,
-			participantsCount = dashModule.identity,
-			isGroupOwner = dashModule.identity
+			conversationId = DashModule.identity,
+			participantsCount = DashModule.identity,
+			isGroupOwner = DashModule.identity
 		}
 	},
-	[eventNamesModule.ConversationPvUpsellRendered] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ConversationPvUpsellRendered,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
-		formatRulesForAdditionalInfo = { conversationId = dashModule.identity }
+	[EventNamesModule.ConversationPvUpsellRendered] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ConversationPvUpsellRendered,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
+		formatRulesForAdditionalInfo = { conversationId = DashModule.identity }
 	},
-	[eventNamesModule.ConversationPvUpsellLeftGroup] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ConversationPvUpsellLeftGroup,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
-		formatRulesForAdditionalInfo = { conversationId = dashModule.identity }
+	[EventNamesModule.ConversationPvUpsellLeftGroup] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ConversationPvUpsellLeftGroup,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
+		formatRulesForAdditionalInfo = { conversationId = DashModule.identity }
 	},
-	[eventNamesModule.ConversationPvUpsellContinueClicked] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ConversationPvUpsellContinueClicked,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
-		formatRulesForAdditionalInfo = { conversationId = dashModule.identity }
+	[EventNamesModule.ConversationPvUpsellContinueClicked] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ConversationPvUpsellContinueClicked,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
+		formatRulesForAdditionalInfo = { conversationId = DashModule.identity }
 	},
-	[eventNamesModule.ConversationPvUpsellSucceeded] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ConversationPvUpsellSucceeded,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
-		formatRulesForAdditionalInfo = { conversationId = dashModule.identity }
+	[EventNamesModule.ConversationPvUpsellSucceeded] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ConversationPvUpsellSucceeded,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
+		formatRulesForAdditionalInfo = { conversationId = DashModule.identity }
 	},
-	[eventNamesModule.ConversationPvUpsellFailed] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ConversationPvUpsellFailed,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
-		formatRulesForAdditionalInfo = { conversationId = dashModule.identity }
+	[EventNamesModule.ConversationPvUpsellFailed] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ConversationPvUpsellFailed,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
+		formatRulesForAdditionalInfo = { conversationId = DashModule.identity }
 	},
-	[eventNamesModule.ConversationIneligibleModalRendered] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ConversationIneligibleModalRendered,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
-		formatRulesForAdditionalInfo = { conversationId = dashModule.identity }
+	[EventNamesModule.ConversationIneligibleModalRendered] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ConversationIneligibleModalRendered,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
+		formatRulesForAdditionalInfo = { conversationId = DashModule.identity }
 	},
-	[eventNamesModule.ConversationIneligibleModalLeftGroup] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ConversationIneligibleModalLeftGroup,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
-		formatRulesForAdditionalInfo = { conversationId = dashModule.identity }
+	[EventNamesModule.ConversationIneligibleModalLeftGroup] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ConversationIneligibleModalLeftGroup,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
+		formatRulesForAdditionalInfo = { conversationId = DashModule.identity }
 	},
-	[eventNamesModule.ConversationIneligibleModalLearnMoreClicked] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ConversationIneligibleModalLearnMoreClicked,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
-		formatRulesForAdditionalInfo = { conversationId = dashModule.identity }
+	[EventNamesModule.ConversationIneligibleModalLearnMoreClicked] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ConversationIneligibleModalLearnMoreClicked,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
+		formatRulesForAdditionalInfo = { conversationId = DashModule.identity }
 	},
-	[eventNamesModule.ConversationPvBannerRendered] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ConversationPvBannerRendered,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
-		formatRulesForAdditionalInfo = { conversationId = dashModule.identity }
+	[EventNamesModule.ConversationPvBannerRendered] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ConversationPvBannerRendered,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
+		formatRulesForAdditionalInfo = { conversationId = DashModule.identity }
 	},
-	[eventNamesModule.ConversationPvBannerActionClicked] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ConversationPvBannerActionClicked,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
-		formatRulesForAdditionalInfo = { conversationId = dashModule.identity }
+	[EventNamesModule.ConversationPvBannerActionClicked] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ConversationPvBannerActionClicked,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
+		formatRulesForAdditionalInfo = { conversationId = DashModule.identity }
 	},
-	[eventNamesModule.ConversationUpgradeBannerRendered] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ConversationUpgradeBannerRendered,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
-		formatRulesForAdditionalInfo = { conversationId = dashModule.identity }
+	[EventNamesModule.ConversationUpgradeBannerRendered] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ConversationUpgradeBannerRendered,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
+		formatRulesForAdditionalInfo = { conversationId = DashModule.identity }
 	},
-	[eventNamesModule.ConversationUpgradeBannerActionClicked] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ConversationUpgradeBannerActionClicked,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
-		formatRulesForAdditionalInfo = { conversationId = dashModule.identity }
+	[EventNamesModule.ConversationUpgradeBannerActionClicked] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ConversationUpgradeBannerActionClicked,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
+		formatRulesForAdditionalInfo = { conversationId = DashModule.identity }
 	},
-	[eventNamesModule.ConversationLearnMoreBannerRendered] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ConversationLearnMoreBannerRendered,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
-		formatRulesForAdditionalInfo = { conversationId = dashModule.identity }
+	[EventNamesModule.ConversationLearnMoreBannerRendered] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ConversationLearnMoreBannerRendered,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
+		formatRulesForAdditionalInfo = { conversationId = DashModule.identity }
 	},
-	[eventNamesModule.ConversationLearnMoreBannerActionClicked] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ConversationLearnMoreBannerActionClicked,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
-		formatRulesForAdditionalInfo = { conversationId = dashModule.identity }
+	[EventNamesModule.ConversationLearnMoreBannerActionClicked] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ConversationLearnMoreBannerActionClicked,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
+		formatRulesForAdditionalInfo = { conversationId = DashModule.identity }
 	},
-	[eventNamesModule.ConversationPvDialogRendered] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ConversationPvDialogRendered,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
-		formatRulesForAdditionalInfo = { conversationId = dashModule.identity }
+	[EventNamesModule.ConversationPvDialogRendered] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ConversationPvDialogRendered,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
+		formatRulesForAdditionalInfo = { conversationId = DashModule.identity }
 	},
-	[eventNamesModule.ConversationPvDialogActionClicked] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ConversationPvDialogActionClicked,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
-		formatRulesForAdditionalInfo = { conversationId = dashModule.identity }
+	[EventNamesModule.ConversationPvDialogActionClicked] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ConversationPvDialogActionClicked,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
+		formatRulesForAdditionalInfo = { conversationId = DashModule.identity }
 	},
-	[eventNamesModule.ConversationPvDialogDismissed] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ConversationPvDialogDismissed,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
-		formatRulesForAdditionalInfo = { conversationId = dashModule.identity }
+	[EventNamesModule.ConversationPvDialogDismissed] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ConversationPvDialogDismissed,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
+		formatRulesForAdditionalInfo = { conversationId = DashModule.identity }
 	},
-	[eventNamesModule.ConversationPvDialogSucceeded] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ConversationPvDialogSucceeded,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
-		formatRulesForAdditionalInfo = { conversationId = dashModule.identity }
+	[EventNamesModule.ConversationPvDialogSucceeded] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ConversationPvDialogSucceeded,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
+		formatRulesForAdditionalInfo = { conversationId = DashModule.identity }
 	},
-	[eventNamesModule.ConversationPvDialogFailed] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ConversationPvDialogFailed,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
-		formatRulesForAdditionalInfo = { conversationId = dashModule.identity }
+	[EventNamesModule.ConversationPvDialogFailed] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ConversationPvDialogFailed,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
+		formatRulesForAdditionalInfo = { conversationId = DashModule.identity }
 	},
-	[eventNamesModule.ConversationUpgradeDialogRendered] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ConversationUpgradeDialogRendered,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
-		formatRulesForAdditionalInfo = { conversationId = dashModule.identity }
+	[EventNamesModule.ConversationUpgradeDialogRendered] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ConversationUpgradeDialogRendered,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
+		formatRulesForAdditionalInfo = { conversationId = DashModule.identity }
 	},
-	[eventNamesModule.ConversationUpgradeDialogActionClicked] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ConversationUpgradeDialogActionClicked,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
-		formatRulesForAdditionalInfo = { conversationId = dashModule.identity }
+	[EventNamesModule.ConversationUpgradeDialogActionClicked] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ConversationUpgradeDialogActionClicked,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
+		formatRulesForAdditionalInfo = { conversationId = DashModule.identity }
 	},
-	[eventNamesModule.ConversationUpgradeDialogDismissed] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ConversationUpgradeDialogDismissed,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
-		formatRulesForAdditionalInfo = { conversationId = dashModule.identity }
+	[EventNamesModule.ConversationUpgradeDialogDismissed] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ConversationUpgradeDialogDismissed,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
+		formatRulesForAdditionalInfo = { conversationId = DashModule.identity }
 	},
-	[eventNamesModule.ConversationLearnMoreDialogRendered] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ConversationLearnMoreDialogRendered,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
-		formatRulesForAdditionalInfo = { conversationId = dashModule.identity }
+	[EventNamesModule.ConversationLearnMoreDialogRendered] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ConversationLearnMoreDialogRendered,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
+		formatRulesForAdditionalInfo = { conversationId = DashModule.identity }
 	},
-	[eventNamesModule.ConversationLearnMoreDialogDismissed] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.ConversationLearnMoreDialogDismissed,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
-		formatRulesForAdditionalInfo = { conversationId = dashModule.identity }
+	[EventNamesModule.ConversationLearnMoreDialogDismissed] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.ConversationLearnMoreDialogDismissed,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
+		formatRulesForAdditionalInfo = { conversationId = DashModule.identity }
 	},
-	[eventNamesModule.preloadSocialTabDataEvent] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.preloadSocialTabDataEvent,
-		additionalInfo = { locale = localizationService.RobloxLocaleId },
-		formatRulesForAdditionalInfo = { unreadConversationCount = dashModule.identity }
+	[EventNamesModule.preloadSocialTabDataEvent] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.preloadSocialTabDataEvent,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId },
+		formatRulesForAdditionalInfo = { unreadConversationCount = DashModule.identity }
 	},
-	[eventNamesModule.preloadSocialTabDataFailedEvent] = {
-		context = contexts.PlatformChat,
-		eventType = eventTypes.preloadSocialTabDataFailedEvent,
-		additionalInfo = { locale = localizationService.RobloxLocaleId }
+	[EventNamesModule.preloadSocialTabDataFailedEvent] = {
+		context = Contexts.PlatformChat,
+		eventType = EventTypes.preloadSocialTabDataFailedEvent,
+		additionalInfo = { locale = LocalizationService.RobloxLocaleId }
 	}
 }

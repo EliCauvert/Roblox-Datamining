@@ -1,42 +1,44 @@
-﻿local parent = script:FindFirstAncestor("FlyoutSidePanel").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local view = foundationModule.View
-local text = foundationModule.Text
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local flyoutContentSettingsModule = require(script.Parent.Parent.Config.FlyoutContentSettings)
-local useFlyoutItemNavigationModule = require(script.Parent.Parent.Hooks.useFlyoutItemNavigation)
+﻿local Parent = script:FindFirstAncestor("FlyoutSidePanel").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local FlyoutContentSettingsModule = require(script.Parent.Parent.Config.FlyoutContentSettings)
+local UseFlyoutItemNavigationModule = require(script.Parent.Parent.Hooks.useFlyoutItemNavigation)
 
-return function(p1)
-	-- upvalues: flyoutContentSettingsModule (ref), useFlyoutItemNavigationModule (ref), useLocalization (ref), reactModule (ref), view (ref), text (ref)
-	local terms = flyoutContentSettingsModule.ItemInfo[flyoutContentSettingsModule.ItemType.Terms]
-	local privacy = flyoutContentSettingsModule.ItemInfo[flyoutContentSettingsModule.ItemType.Privacy]
-	local var1 = useLocalization({ termsText = terms.textKey, privacyText = privacy.textKey })
+return function(p1) --[[ Line: 17 | Named "TermsPrivacyFooter" ]]
+	-- upvalues: FlyoutContentSettingsModule (copy), UseFlyoutItemNavigationModule (copy), UseLocalizationFunction (copy), ReactModule (copy), View (copy), Text (copy)
+	local Item = FlyoutContentSettingsModule.ItemInfo[FlyoutContentSettingsModule.ItemType.Terms]
+	local Item1 = FlyoutContentSettingsModule.ItemInfo[FlyoutContentSettingsModule.ItemType.Privacy]
+	local UseFlyoutItemNavigationModuleResult = UseFlyoutItemNavigationModule(Item, p1.closeDrawer)
+	local UseFlyoutItemNavigationModuleResult1 = UseFlyoutItemNavigationModule(Item1, p1.closeDrawer)
+	local UseLocalizationResult = UseLocalizationFunction({ termsText = Item.textKey, privacyText = Item1.textKey })
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "row align-x-center align-y-center gap-xxlarge size-full-500 padding-x-xlarge",
 		LayoutOrder = p1.layoutOrder
 	}, {
-		Terms = reactModule.createElement(view, {
+		Terms = ReactModule.createElement(View, {
 			tag = "auto-xy",
 			testId = "--core-ui-flyout-terms",
 			LayoutOrder = 1,
-			onActivated = useFlyoutItemNavigationModule(terms, p1.closeDrawer)
+			onActivated = UseFlyoutItemNavigationModuleResult
 		}, {
-			Label = reactModule.createElement(text, {
+			Label = ReactModule.createElement(Text, {
 				tag = "auto-xy text-label-medium content-default",
-				Text = var1.termsText
+				Text = UseLocalizationResult.termsText
 			})
 		}),
-		Privacy = reactModule.createElement(view, {
+		Privacy = ReactModule.createElement(View, {
 			tag = "auto-xy",
 			testId = "--core-ui-flyout-privacy",
 			LayoutOrder = 2,
-			onActivated = useFlyoutItemNavigationModule(privacy, p1.closeDrawer)
+			onActivated = UseFlyoutItemNavigationModuleResult1
 		}, {
-			Label = reactModule.createElement(text, {
+			Label = ReactModule.createElement(Text, {
 				tag = "auto-xy text-label-medium content-default",
-				Text = var1.privacyText
+				Text = UseLocalizationResult.privacyText
 			})
 		})
 	})

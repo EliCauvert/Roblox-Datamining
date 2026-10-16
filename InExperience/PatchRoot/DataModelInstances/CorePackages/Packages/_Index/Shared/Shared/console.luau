@@ -1,10 +1,9 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent
-local reactGlobalsModule = require(parent_1.ReactGlobals)
-local console = require(parent_1.LuauPolyfill).console
-local consoleWithStackDevModule = require(parent.consoleWithStackDev)
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent
+local Console = require(Parent1.LuauPolyfill).console
+local ConsoleWithStackDevModule = require(Parent.consoleWithStackDev)
 
-return if reactGlobalsModule.__DEV__ then setmetatable({
-	warn = consoleWithStackDevModule.warn,
-	error = consoleWithStackDevModule.error
-}, { __index = console }) else console
+return if require(Parent1.ReactGlobals).__DEV__ then setmetatable({
+	warn = ConsoleWithStackDevModule.warn,
+	error = ConsoleWithStackDevModule.error
+}, { __index = Console }) else Console

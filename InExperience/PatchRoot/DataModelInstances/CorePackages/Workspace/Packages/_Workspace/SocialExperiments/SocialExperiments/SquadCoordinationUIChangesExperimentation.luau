@@ -1,35 +1,34 @@
-﻿local experimentCacheManager = require(script:FindFirstAncestor("SocialExperiments").Parent.ExperimentCacheManager).ExperimentCacheManager
-local squadCoordinationUiExperimentLayer = game:DefineFastString("SquadCoordinationUiExperimentLayer", "Party.Coordination.UI")
-local squadEnablePartyCoordinationUiVariant = game:DefineFastString("SquadEnablePartyCoordinationUiVariant", "enablePartyCoordinationUi")
-local forceEnablePartyCoordinationUiChanges3 = game:DefineFastFlag("ForceEnablePartyCoordinationUiChanges3", false)
+﻿local ExperimentCacheManager = require(script:FindFirstAncestor("SocialExperiments").Parent.ExperimentCacheManager).ExperimentCacheManager
+local SquadCoordinationUiExperimentLayer = game:DefineFastString("SquadCoordinationUiExperimentLayer", "Party.Coordination.UI")
+local SquadEnablePartyCoordinationUiVariant = game:DefineFastString("SquadEnablePartyCoordinationUiVariant", "enablePartyCoordinationUi")
+local ForceEnablePartyCoordinationUiChanges3 = game:DefineFastFlag("ForceEnablePartyCoordinationUiChanges3", false)
 
-local function _(p1)
-	-- upvalues: experimentCacheManager (ref), squadCoordinationUiExperimentLayer (ref)
-	local var1 = experimentCacheManager.default:getLayerVariables(squadCoordinationUiExperimentLayer)
+local function _(p1) --[[ Line: 12 | Named "getIsUserInTreatment" ]]
+	-- upvalues: ExperimentCacheManager (copy), SquadCoordinationUiExperimentLayer (copy)
+	local LayerVariables = ExperimentCacheManager.default:getLayerVariables(SquadCoordinationUiExperimentLayer)
 	
-	return if var1 and var1[p1] ~= nil then var1[p1] else false
+	return if LayerVariables and LayerVariables[p1] ~= nil then LayerVariables[p1] else false
 end
 
 return {
-	getPartyCoordinationUiChangesEnabled = function()
-		-- upvalues: forceEnablePartyCoordinationUiChanges3 (ref), squadEnablePartyCoordinationUiVariant (ref), experimentCacheManager (ref), squadCoordinationUiExperimentLayer (ref)
-		local var1 = forceEnablePartyCoordinationUiChanges3
+	getPartyCoordinationUiChangesEnabled = function() --[[ Line: 22 ]]
+		-- upvalues: ForceEnablePartyCoordinationUiChanges3 (copy), SquadEnablePartyCoordinationUiVariant (copy), ExperimentCacheManager (copy), SquadCoordinationUiExperimentLayer (copy)
+		local Flag: boolean = ForceEnablePartyCoordinationUiChanges3
 		
-		if not var1 then
-			local var2 = squadEnablePartyCoordinationUiVariant
-			local var3 = experimentCacheManager.default:getLayerVariables(squadCoordinationUiExperimentLayer)
+		if not Flag then
+			local LayerVariables = ExperimentCacheManager.default:getLayerVariables(SquadCoordinationUiExperimentLayer)
 			
-			if var3 and var3[var2] ~= nil then
-				return var3[var2]
+			if LayerVariables and LayerVariables[SquadEnablePartyCoordinationUiVariant] ~= nil then
+				return LayerVariables[SquadEnablePartyCoordinationUiVariant]
 			end
-			var1 = false
+			Flag = false
 		end
-		return var1
+		return Flag
 	end,
-	logExposure = function()
-		-- upvalues: experimentCacheManager (ref), squadCoordinationUiExperimentLayer (ref)
-		if experimentCacheManager.default:getLayerVariables(squadCoordinationUiExperimentLayer) ~= nil then
-			experimentCacheManager.default:logLayerExposure(squadCoordinationUiExperimentLayer)
+	logExposure = function() --[[ Line: 27 ]]
+		-- upvalues: ExperimentCacheManager (copy), SquadCoordinationUiExperimentLayer (copy)
+		if ExperimentCacheManager.default:getLayerVariables(SquadCoordinationUiExperimentLayer) ~= nil then
+			ExperimentCacheManager.default:logLayerExposure(SquadCoordinationUiExperimentLayer)
 		end
 	end
 }

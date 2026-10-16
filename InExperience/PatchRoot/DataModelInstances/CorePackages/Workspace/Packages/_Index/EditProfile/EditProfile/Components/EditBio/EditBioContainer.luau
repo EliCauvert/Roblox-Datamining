@@ -1,55 +1,59 @@
-﻿local editProfile = script:FindFirstAncestor("EditProfile")
-local parent = editProfile.Parent
-local reactModule = require(parent.React)
-local editBioModule = require(script.Parent.EditBio)
-local promiseModule = require(parent.Promise)
-local useLocalUserId = require(parent.RobloxAppHooks).useLocalUserId
-local editProfileStoreModule = require(editProfile.Stores.EditProfileStore)
-local useSignalState = require(parent.SignalsReact).useSignalState
-local analyticsServiceV2Module = require(editProfile.Analytics.AnalyticsServiceV2)
+﻿local EditProfile = script:FindFirstAncestor("EditProfile")
+local Parent = EditProfile.Parent
+local ReactModule = require(Parent.React)
+local EditBioModule = require(script.Parent.EditBio)
+local PromiseModule = require(Parent.Promise)
+local UseLocalUserIdFunction = require(Parent.RobloxAppHooks).useLocalUserId
+local EditProfileStoreModule = require(EditProfile.Stores.EditProfileStore)
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local AnalyticsServiceV2Module = require(EditProfile.Analytics.AnalyticsServiceV2)
 
-return function(p1)
-	-- upvalues: useLocalUserId (ref), editProfileStoreModule (ref), useSignalState (ref), reactModule (ref), analyticsServiceV2Module (ref), promiseModule (ref), editBioModule (ref)
-	local var1 = useLocalUserId()
-	local data = useSignalState(editProfileStoreModule.getDescription(var1).data) or ""
-	local var2, var3 = reactModule.useState(data)
-	local var4, var5 = reactModule.useState(nil)
-	local var6 = reactModule.useCallback(function(p2)
-		-- upvalues: var3 (ref), var5 (ref)
-		var3(p2)
-		var5(nil)
+return function(p1) --[[ Line: 18 ]]
+	-- upvalues: UseLocalUserIdFunction (copy), EditProfileStoreModule (copy), UseSignalStateFunction (copy), ReactModule (copy), AnalyticsServiceV2Module (copy), PromiseModule (copy), EditBioModule (copy)
+	local UseLocalUserIdResult = UseLocalUserIdFunction()
+	local UseSignalStateResult = UseSignalStateFunction(EditProfileStoreModule.getDescription(UseLocalUserIdResult).data) or ""
+	local UseStateResult, UseStateResult2 = ReactModule.useState(UseSignalStateResult)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
+	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 26 ]]
+		-- upvalues: UseStateResult2 (copy), UseStateResult2_1 (copy)
+		UseStateResult2(p2)
+		UseStateResult2_1(nil)
 	end, {})
-	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), data (ref)
-		var3(data)
-	end, { data })
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), editProfileStoreModule (copy), var1 (ref), var2 (ref), var5 (ref), analyticsServiceV2Module (copy), promiseModule (copy)
-		p1.registerSaveHandler(function()
-			-- upvalues: editProfileStoreModule (copy), var1 (copy), var2 (copy), var5 (copy), analyticsServiceV2Module (copy), promiseModule (copy)
-			return editProfileStoreModule.updateDescription(var1, var2):catch(function(p2)
-				-- upvalues: var5 (copy), analyticsServiceV2Module (copy), promiseModule (copy)
-				if not p2 then return end
-				local statusCode = nil
+	ReactModule.useEffect(function() --[[ Line: 31 ]]
+		-- upvalues: UseStateResult2 (copy), UseSignalStateResult (copy)
+		UseStateResult2(UseSignalStateResult)
+	end, { UseSignalStateResult })
+	ReactModule.useEffect(function() --[[ Line: 35 ]]
+		-- upvalues: p1 (copy), EditProfileStoreModule (upval), UseLocalUserIdResult (copy), UseStateResult (copy), UseStateResult2_1 (copy), AnalyticsServiceV2Module (upval), PromiseModule (upval)
+		p1.registerSaveHandler(function() --[[ Line: 36 ]]
+			-- upvalues: EditProfileStoreModule (upval), UseLocalUserIdResult (upval), UseStateResult (upval), UseStateResult2_1 (upval), AnalyticsServiceV2Module (upval), PromiseModule (upval)
+			return EditProfileStoreModule.updateDescription(UseLocalUserIdResult, UseStateResult):catch(function(Err) --[[ Line: 37 ]]
+				-- upvalues: UseStateResult2_1 (upval), AnalyticsServiceV2Module (upval), PromiseModule (upval)
+				if not Err then return end
+				local Code = nil
 				
-				if p2.errors and p2.errors[1] then
-					statusCode = p2.errors[1].code
-				elseif p2.statusCode then
-					statusCode = p2.statusCode
+				if Err.errors and Err.errors[1] then
+					Code = Err.errors[1].code
+				elseif Err.statusCode then
+					Code = Err.statusCode
 				end
-				if statusCode then
-					var5(statusCode)
-					analyticsServiceV2Module.sendError(statusCode)
+				if Code then
+					UseStateResult2_1(Code)
+					AnalyticsServiceV2Module.sendError(Code)
 				end
-				return promiseModule.reject(p2)
+				return PromiseModule.reject(Err)
 			end)
 		end)
-	end, { p1.registerSaveHandler, var1, var2 })
+	end, {
+		p1.registerSaveHandler,
+		UseLocalUserIdResult,
+		UseStateResult
+	})
 	
-	return reactModule.createElement(editBioModule, {
-		bioText = var2,
-		onDataChange = var6,
-		errorCode = var4,
+	return ReactModule.createElement(EditBioModule, {
+		bioText = UseStateResult,
+		onDataChange = UseResult,
+		errorCode = UseStateResult1,
 		textBoxRef = p1.textBoxRef
 	})
 end

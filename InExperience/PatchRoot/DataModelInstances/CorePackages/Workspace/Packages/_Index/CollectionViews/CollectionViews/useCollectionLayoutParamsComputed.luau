@@ -1,111 +1,118 @@
-﻿local collectionViews = script:FindFirstAncestor("CollectionViews")
-local parent = collectionViews.Parent
-local reactModule = require(parent.React)
-local useTokens = require(parent.Foundation).Hooks.useTokens
-local responsiveModule = require(parent.Responsive)
-local usePreferredInput = responsiveModule.usePreferredInput
-local useBreakpointXOrSmaller = responsiveModule.useBreakpointXOrSmaller
-local useAppPolicy = require(parent.UniversalAppPolicy).useAppPolicy
-local signalsModule = require(parent.Signals)
-local displayModule = require(parent.Display)
-local discoveryTypesModule = require(parent.DiscoveryTypes)
-local luaAppFixComputedSideMarginResponsiveBreakpoint = game:DefineFastFlag("LuaAppFixComputedSideMarginResponsiveBreakpoint", false)
-local collectionLayoutCalculatorsModule = require(collectionViews.CollectionLayoutCalculators)
-local _ = require(collectionViews.CollectionViewTypes)
-local GAME_CAROUSEL_SIDE_COMPACT_PADDING = discoveryTypesModule.Constants.GAME_CAROUSEL_SIDE_COMPACT_PADDING
-local GAME_CAROUSEL_SIDE_WIDE_PADDING = discoveryTypesModule.Constants.GAME_CAROUSEL_SIDE_WIDE_PADDING
+﻿local CollectionViews = script:FindFirstAncestor("CollectionViews")
+local Parent = CollectionViews.Parent
+local ReactModule = require(Parent.React)
+local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
+local ResponsiveModule = require(Parent.Responsive)
+local UsePreferredInputFunction = ResponsiveModule.usePreferredInput
+local UseBreakpointXOrSmallerFunction = ResponsiveModule.useBreakpointXOrSmaller
+local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
+local SignalsModule = require(Parent.Signals)
+local DisplayModule = require(Parent.Display)
+local DiscoveryTypesModule = require(Parent.DiscoveryTypes)
+local LuaAppFixComputedSideMarginResponsiveBreakpoint = game:DefineFastFlag("LuaAppFixComputedSideMarginResponsiveBreakpoint", false)
+local CollectionLayoutCalculatorsModule = require(CollectionViews.CollectionLayoutCalculators)
+local _ = require(CollectionViews.CollectionViewTypes)
+local GAMECAROUSELSIDECOMPACTPADDING = DiscoveryTypesModule.Constants.GAME_CAROUSEL_SIDE_COMPACT_PADDING
+local GAMECAROUSELSIDEWIDEPADDING = DiscoveryTypesModule.Constants.GAME_CAROUSEL_SIDE_WIDE_PADDING
 
-return function(p1, p2)
-	-- upvalues: collectionLayoutCalculatorsModule (ref), useTokens (ref), usePreferredInput (ref), useAppPolicy (ref), reactModule (ref), signalsModule (ref), useBreakpointXOrSmaller (ref), luaAppFixComputedSideMarginResponsiveBreakpoint (ref), responsiveModule (ref), displayModule (ref), GAME_CAROUSEL_SIDE_COMPACT_PADDING (ref), GAME_CAROUSEL_SIDE_WIDE_PADDING (ref)
-	local var1 = useTokens()
-	local var2 = usePreferredInput()
-	local var3 = useAppPolicy(function(p3)
-		return p3.useGridPageLayout()
+return function(Frame: Frame, p1) --[[ Line: 28 | Named "useCollectionLayoutParamsComputed" ]]
+	-- upvalues: CollectionLayoutCalculatorsModule (copy), UseTokensFunction (copy), UsePreferredInputFunction (copy), UseAppPolicyFunction (copy), ReactModule (copy), SignalsModule (copy), UseBreakpointXOrSmallerFunction (copy), LuaAppFixComputedSideMarginResponsiveBreakpoint (copy), ResponsiveModule (copy), DisplayModule (copy), GAMECAROUSELSIDECOMPACTPADDING (copy), GAMECAROUSELSIDEWIDEPADDING (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UsePreferredInputResult = UsePreferredInputFunction()
+	local UseAppPolicyResult = UseAppPolicyFunction(function(p2) --[[ Line: 35 ]]
+		return p2.useGridPageLayout()
 	end)
-	local var4, var5 = reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy)
-		return signalsModule.createSignal(false)
+	local UseMemoResult, UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 39 ]]
+		-- upvalues: SignalsModule (upval)
+		return SignalsModule.createSignal(false)
 	end, {})
-	var5(useBreakpointXOrSmaller(if luaAppFixComputedSideMarginResponsiveBreakpoint then responsiveModule.Keys.Small else responsiveModule.Keys.Medium))
-	local var6 = reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), displayModule (copy)
-		return signalsModule.createComputed(function(p3)
-			-- upvalues: displayModule (copy)
-			local viewportSize = displayModule.GetDisplayStore(p3).getViewportSize(p3)
+	UseMemoResult2((UseBreakpointXOrSmallerFunction(if LuaAppFixComputedSideMarginResponsiveBreakpoint then ResponsiveModule.Keys.Small else ResponsiveModule.Keys.Medium)))
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 47 ]]
+		-- upvalues: SignalsModule (upval), DisplayModule (upval)
+		return SignalsModule.createComputed(function(p2) --[[ Line: 48 ]]
+			-- upvalues: DisplayModule (upval)
+			local ViewportSize = DisplayModule.GetDisplayStore(p2).getViewportSize(p2)
 			
-			return if viewportSize then viewportSize.X else 0
+			return ViewportSize and ViewportSize.X or 0
 		end)
 	end, {})
-	local var7, var8 = reactModule.useMemo(function()
-		-- upvalues: var6 (ref), signalsModule (copy)
-		return signalsModule.createSignal(var6(false))
+	local UseMemoResult3, UseMemoResult2_1 = ReactModule.useMemo(function() --[[ Line: 56 ]]
+		-- upvalues: UseMemoResult1 (copy), SignalsModule (upval)
+		return SignalsModule.createSignal((UseMemoResult1(false)))
 	end, {})
-	local var9 = reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), p2 (ref), var3 (ref), var4 (ref), GAME_CAROUSEL_SIDE_COMPACT_PADDING (copy), GAME_CAROUSEL_SIDE_WIDE_PADDING (copy), var6 (ref), var7 (ref), collectionLayoutCalculatorsModule (ref), var1 (ref)
-		return signalsModule.createComputed(function(p3)
-			-- upvalues: p2 (copy), var3 (copy), var4 (copy), GAME_CAROUSEL_SIDE_COMPACT_PADDING (copy), GAME_CAROUSEL_SIDE_WIDE_PADDING (copy), var6 (copy), var7 (copy), collectionLayoutCalculatorsModule (copy), var1 (copy)
-			return p2 or (if var3 then collectionLayoutCalculatorsModule.calculateSideMargin(var7(p3), var1, var6(p3)) elseif var4(p3) then GAME_CAROUSEL_SIDE_COMPACT_PADDING else GAME_CAROUSEL_SIDE_WIDE_PADDING)
+	local UseMemoResult4 = ReactModule.useMemo(function() --[[ Line: 62 ]]
+		-- upvalues: SignalsModule (upval), p1 (copy), UseAppPolicyResult (copy), UseMemoResult (copy), GAMECAROUSELSIDECOMPACTPADDING (upval), GAMECAROUSELSIDEWIDEPADDING (upval), UseMemoResult1 (copy), UseMemoResult3 (copy), CollectionLayoutCalculatorsModule (copy), UseTokensResult (copy)
+		return SignalsModule.createComputed(function(p2) --[[ Line: 63 ]]
+			-- upvalues: p1 (upval), UseAppPolicyResult (upval), UseMemoResult (upval), GAMECAROUSELSIDECOMPACTPADDING (upval), GAMECAROUSELSIDEWIDEPADDING (upval), UseMemoResult1 (upval), UseMemoResult3 (upval), CollectionLayoutCalculatorsModule (upval), UseTokensResult (upval)
+			return if p1 then p1 elseif UseAppPolicyResult then CollectionLayoutCalculatorsModule.calculateSideMargin(UseMemoResult3(p2), UseTokensResult, (UseMemoResult1(p2))) elseif UseMemoResult(p2) then GAMECAROUSELSIDECOMPACTPADDING else GAMECAROUSELSIDEWIDEPADDING
 		end)
 	end, {
-		var6, var7, var4, p2, collectionLayoutCalculatorsModule, var1, var3
+		UseMemoResult1, UseMemoResult3, UseMemoResult, p1,
+		CollectionLayoutCalculatorsModule, UseTokensResult, UseAppPolicyResult
 	})
-	local var10 = reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), var6 (ref), var7 (ref), collectionLayoutCalculatorsModule (ref), var1 (ref)
-		return signalsModule.createComputed(function(p3)
-			-- upvalues: var6 (copy), var7 (copy), collectionLayoutCalculatorsModule (copy), var1 (copy)
-			return collectionLayoutCalculatorsModule.calculateColumnGap(var7(p3), var1, var6(p3))
-		end)
-	end, { var6, var7, collectionLayoutCalculatorsModule, var1 })
-	local var11 = reactModule.useCallback(function(p3)
-		-- upvalues: signalsModule (copy), var7 (ref), var9 (ref), var10 (ref), collectionLayoutCalculatorsModule (ref), var1 (ref)
-		return signalsModule.createComputed(function(p4)
-			-- upvalues: var7 (copy), var9 (copy), var10 (copy), collectionLayoutCalculatorsModule (copy), p3 (ref), var1 (copy)
-			return collectionLayoutCalculatorsModule.calculateNumColumns(var7(p4), var9(p4), var10(p4), p3, var1)
+	local UseMemoResult5 = ReactModule.useMemo(function() --[[ Line: 87 ]]
+		-- upvalues: SignalsModule (upval), UseMemoResult1 (copy), UseMemoResult3 (copy), CollectionLayoutCalculatorsModule (copy), UseTokensResult (copy)
+		return SignalsModule.createComputed(function(p2) --[[ Line: 88 ]]
+			-- upvalues: UseMemoResult1 (upval), UseMemoResult3 (upval), CollectionLayoutCalculatorsModule (upval), UseTokensResult (upval)
+			return CollectionLayoutCalculatorsModule.calculateColumnGap(UseMemoResult3(p2), UseTokensResult, (UseMemoResult1(p2)))
 		end)
 	end, {
-		var7,
-		var9,
-		var10,
-		collectionLayoutCalculatorsModule,
-		var1
+		UseMemoResult1,
+		UseMemoResult3,
+		CollectionLayoutCalculatorsModule,
+		UseTokensResult
 	})
-	local var12 = reactModule.useCallback(function(p3)
-		-- upvalues: var8 (ref)
-		var8(p3.X)
-	end, { var8 })
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var12 (ref)
-		local var13 = nil
+	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 95 ]]
+		-- upvalues: SignalsModule (upval), UseMemoResult3 (copy), UseMemoResult4 (copy), UseMemoResult5 (copy), CollectionLayoutCalculatorsModule (copy), UseTokensResult (copy)
+		return SignalsModule.createComputed(function(p3) --[[ Line: 96 ]]
+			-- upvalues: UseMemoResult3 (upval), UseMemoResult4 (upval), UseMemoResult5 (upval), CollectionLayoutCalculatorsModule (upval), p2 (copy), UseTokensResult (upval)
+			return CollectionLayoutCalculatorsModule.calculateNumColumns(UseMemoResult3(p3), UseMemoResult4(p3), UseMemoResult5(p3), p2, UseTokensResult)
+		end)
+	end, {
+		UseMemoResult3,
+		UseMemoResult4,
+		UseMemoResult5,
+		CollectionLayoutCalculatorsModule,
+		UseTokensResult
+	})
+	local UseResult1 = ReactModule.useCallback(function(p2) --[[ Line: 105 ]]
+		-- upvalues: UseMemoResult2_1 (copy)
+		UseMemoResult2_1(p2.X)
+	end, { UseMemoResult2_1 })
+	ReactModule.useEffect(function() --[[ Line: 113 ]]
+		-- upvalues: Frame (copy), UseResult1 (copy)
+		local Connection = nil
 		
-		if p1 then
-			var12(p1.AbsoluteSize)
-			var13 = p1:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
-				-- upvalues: var12 (copy), p1 (copy)
-				var12(p1.AbsoluteSize)
+		if Frame then
+			UseResult1(Frame.AbsoluteSize)
+			Connection = Frame:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ Line: 117 ]]
+				-- upvalues: UseResult1 (upval), Frame (upval)
+				UseResult1(Frame.AbsoluteSize)
 			end)
 		end
-		return function()
-			-- upvalues: var13 (write)
-			if var13 then
-				var13:Disconnect()
+		return function() --[[ Line: 121 ]]
+			-- upvalues: Connection (ref)
+			if Connection then
+				Connection:Disconnect()
 			end
 		end
-	end, { var12, p1 })
+	end, { UseResult1, Frame })
 	
-	return reactModule.useCallback(function(p3)
-		-- upvalues: signalsModule (copy), var11 (ref), var10 (ref), var9 (ref), collectionLayoutCalculatorsModule (ref), var2 (ref), var1 (ref)
-		return signalsModule.createComputed(function(p4)
-			-- upvalues: var11 (copy), p3 (ref), var10 (copy), var9 (copy), collectionLayoutCalculatorsModule (copy), var2 (copy), var1 (copy)
+	return (ReactModule.useCallback(function(p2) --[[ Line: 129 ]]
+		-- upvalues: SignalsModule (upval), UseResult (copy), UseMemoResult5 (copy), UseMemoResult4 (copy), CollectionLayoutCalculatorsModule (copy), UsePreferredInputResult (copy), UseTokensResult (copy)
+		return SignalsModule.createComputed(function(p3) --[[ Line: 130 ]]
+			-- upvalues: UseResult (upval), p2 (copy), UseMemoResult5 (upval), UseMemoResult4 (upval), CollectionLayoutCalculatorsModule (upval), UsePreferredInputResult (upval), UseTokensResult (upval)
 			return {
-				numColumns = var11(p3)(p4),
-				fractionalItemAmount = collectionLayoutCalculatorsModule.calculateFractionalItemAmount(p3, var2),
-				columnGap = var10(p4),
-				sideMargin = var9(p4),
-				verticalPadding = collectionLayoutCalculatorsModule.calculateVerticalPadding(var1, p3),
-				maxTilesToShow = collectionLayoutCalculatorsModule.calculateMaxTilesToShow(var2)
+				numColumns = UseResult(p2)(p3),
+				fractionalItemAmount = CollectionLayoutCalculatorsModule.calculateFractionalItemAmount(p2, UsePreferredInputResult),
+				columnGap = UseMemoResult5(p3),
+				sideMargin = UseMemoResult4(p3),
+				verticalPadding = CollectionLayoutCalculatorsModule.calculateVerticalPadding(UseTokensResult, p2),
+				maxTilesToShow = CollectionLayoutCalculatorsModule.calculateMaxTilesToShow(UsePreferredInputResult)
 			}
 		end)
 	end, {
-		var11, var10, var9, var2, var1, collectionLayoutCalculatorsModule
-	})
+		UseResult, UseMemoResult5, UseMemoResult4, UsePreferredInputResult,
+		UseTokensResult, CollectionLayoutCalculatorsModule
+	}))
 end

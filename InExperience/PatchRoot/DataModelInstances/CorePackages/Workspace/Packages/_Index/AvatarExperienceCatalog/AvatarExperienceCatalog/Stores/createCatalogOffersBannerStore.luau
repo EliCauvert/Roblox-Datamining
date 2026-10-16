@@ -1,159 +1,171 @@
-﻿local avatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
-local parent = avatarExperienceCatalog.Parent
-local playersService = game:GetService("Players")
-local sendAXCounterV2 = require(parent.AvatarExperienceAnalytics).sendAXCounterV2
-local fFlagAXCatalogOffersBannerMockApi = require(parent.AvatarExperienceFlags).FFlagAXCatalogOffersBannerMockApi
-local fFlagPurchasePromptFetchCartPricing = require(parent.SharedFlags).FFlagPurchasePromptFetchCartPricing
-local purchasePromptLiteModule = require(parent.PurchasePromptLite)
-local signalsModule = require(parent.Signals)
-local _ = require(parent.LuauPolyfill)
-local constantsModule = require(avatarExperienceCatalog.Constants)
-local getMarketplaceOffersBanner = require(avatarExperienceCatalog.Api.GetMarketplaceOffersBanner.getMarketplaceOffersBanner).getMarketplaceOffersBanner
-local mockGetOffersForUser = require(avatarExperienceCatalog.Api.GetMarketplaceOffersBanner.mockGetOffersForUser).mockGetOffersForUser
-local _ = require(avatarExperienceCatalog.Api.GetMarketplaceOffersBanner.MarketplaceOffersBannerTypes)
-local getLocalUserIdModule = require(avatarExperienceCatalog.Utils.getLocalUserId)
+﻿local AvatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
+local Parent = AvatarExperienceCatalog.Parent
+local Players = game:GetService("Players")
+local SendAXCounterV2Function = require(Parent.AvatarExperienceAnalytics).sendAXCounterV2
+local FFlagAXCatalogOffersBannerMockApi = require(Parent.AvatarExperienceFlags).FFlagAXCatalogOffersBannerMockApi
+local FFlagPurchasePromptFetchCartPricing = require(Parent.SharedFlags).FFlagPurchasePromptFetchCartPricing
+local PurchasePromptLiteModule = require(Parent.PurchasePromptLite)
+local SignalsModule = require(Parent.Signals)
+local _ = require(Parent.LuauPolyfill)
+local ConstantsModule = require(AvatarExperienceCatalog.Constants)
+local GetMarketplaceOffersBannerFunction = require(AvatarExperienceCatalog.Api.GetMarketplaceOffersBanner.getMarketplaceOffersBanner).getMarketplaceOffersBanner
+local MockGetOffersForUserFunction = require(AvatarExperienceCatalog.Api.GetMarketplaceOffersBanner.mockGetOffersForUser).mockGetOffersForUser
+local _ = require(AvatarExperienceCatalog.Api.GetMarketplaceOffersBanner.MarketplaceOffersBannerTypes)
+local GetLocalUserIdModule = require(AvatarExperienceCatalog.Utils.getLocalUserId)
 
-return function()
-	-- upvalues: signalsModule (ref), fFlagPurchasePromptFetchCartPricing (ref), fFlagAXCatalogOffersBannerMockApi (ref), mockGetOffersForUser (ref), sendAXCounterV2 (ref), constantsModule (ref), getLocalUserIdModule (ref), playersService (ref), getMarketplaceOffersBanner (ref), purchasePromptLiteModule (ref)
-	local var1, var2 = signalsModule.createSignal(nil)
-	local var3, var4 = signalsModule.createSignal(false)
-	local var5, var6 = signalsModule.createSignal(false)
-	local var7, var8 = signalsModule.createSignal(false)
-	local var9 = nil
+return function() --[[ Line: 55 | Named "createCatalogOffersBannerStore" ]]
+	-- upvalues: SignalsModule (copy), FFlagPurchasePromptFetchCartPricing (copy), FFlagAXCatalogOffersBannerMockApi (copy), MockGetOffersForUserFunction (copy), SendAXCounterV2Function (copy), ConstantsModule (copy), GetLocalUserIdModule (copy), Players (copy), GetMarketplaceOffersBannerFunction (copy), PurchasePromptLiteModule (copy)
+	local Signal, Signal2 = SignalsModule.createSignal(nil)
+	local Signal1, Signal2_1 = SignalsModule.createSignal(false)
+	local Signal3, Signal2_2 = SignalsModule.createSignal(false)
+	local Signal4, Signal2_3 = SignalsModule.createSignal(false)
+	local v1 = nil
 	
-	local function notifyPurchaseCompleted() end
+	local function notifyPurchaseCompleted() --[[ Line: 67 ]] end
 	
-	local function fetchOffers(p1, p2)
-		-- upvalues: fFlagPurchasePromptFetchCartPricing (copy), var9 (write), var6 (ref), var8 (ref), fFlagAXCatalogOffersBannerMockApi (copy), mockGetOffersForUser (copy), sendAXCounterV2 (copy), constantsModule (copy), var2 (ref), getLocalUserIdModule (copy), playersService (copy), getMarketplaceOffersBanner (copy)
-		if fFlagPurchasePromptFetchCartPricing then
-			var9 = p1
+	local function fetchOffers(p1, p2) --[[ Line: 69 ]]
+		-- upvalues: FFlagPurchasePromptFetchCartPricing (upval), v1 (ref), Signal2_2 (copy), Signal2_3 (copy), FFlagAXCatalogOffersBannerMockApi (upval), MockGetOffersForUserFunction (upval), SendAXCounterV2Function (upval), ConstantsModule (upval), Signal2 (copy), GetLocalUserIdModule (upval), Players (upval), GetMarketplaceOffersBannerFunction (upval)
+		if FFlagPurchasePromptFetchCartPricing then
+			v1 = p1
 		end
-		var6(true)
-		local var10 = false
-		local var11 = false
-		local var12 = nil
+		Signal2_2(true)
+		local Flag = false
+		local Flag1 = false
+		local Callback = nil
 		
-		local function _(p3)
-			-- upvalues: var11 (write), var6 (copy), var8 (copy)
-			if var11 then return end
-			var11 = true
-			var6(false)
+		local function _(p3) --[[ Line: 82 | Named "finishOnce" ]]
+			-- upvalues: Flag1 (ref), Signal2_2 (upval), Signal2_3 (upval)
+			if Flag1 then return end
+			Flag1 = true
+			Signal2_2(false)
 			
 			if not p3 then
-				var8(true)
+				Signal2_3(true)
 			end
 		end
 		
-		local function cleanup()
-			-- upvalues: var10 (write), var12 (write), var11 (write), var6 (copy)
-			if var10 then return end
-			var10 = true
+		local function cleanup() --[[ Line: 93 ]]
+			-- upvalues: Flag (ref), Callback (ref), Flag1 (ref), Signal2_2 (upval)
+			if Flag then return end
+			Flag = true
 			
-			if var12 then
-				var12()
+			if Callback then
+				Callback()
 			end
-			if var11 then
+			if not Flag1 then
+				Flag1 = true
+				Signal2_2(false)
+				
 				return
 			end
-			var11 = true
-			var6(false)
 		end
 		
-		if fFlagAXCatalogOffersBannerMockApi then
-			local var13, var14 = mockGetOffersForUser()
-			var12 = var14
-			var13:andThen(function(p3)
-				-- upvalues: var10 (write), sendAXCounterV2 (copy), constantsModule (copy), var2 (copy), var11 (write), var6 (copy), var8 (copy)
-				if not var10 and p3 then
-					sendAXCounterV2(constantsModule.COUNTERS.CatalogOffersBanner.fetchSucceeded)
-					var2(p3)
+		if FFlagAXCatalogOffersBannerMockApi then
+			local MockGetOffersForUserResult, MockGetOffersForUserResult2 = MockGetOffersForUserFunction()
+			Callback = MockGetOffersForUserResult2
+			MockGetOffersForUserResult:andThen(function(Result) --[[ Line: 108 ]]
+				-- upvalues: Flag (ref), SendAXCounterV2Function (upval), ConstantsModule (upval), Signal2 (upval), Flag1 (ref), Signal2_2 (upval), Signal2_3 (upval)
+				if not Flag and Result then
+					SendAXCounterV2Function(ConstantsModule.COUNTERS.CatalogOffersBanner.fetchSucceeded)
+					Signal2(Result)
 				end
-				if var11 then return end
-				var11 = true
-				var6(false)
+				local Flag2 = Flag
 				
-				if not var10 then
-					var8(true)
-				end
-			end):catch(function(p3)
-				-- upvalues: var10 (write), sendAXCounterV2 (copy), constantsModule (copy), var11 (write), var6 (copy), var8 (copy)
-				if not var10 then
-					sendAXCounterV2(constantsModule.COUNTERS.CatalogOffersBanner.fetchFailed)
-					warn("[catalogOffersBannerStore] mock failed:", p3)
-				end
-				if var11 then return end
-				var11 = true
-				var6(false)
+				if Flag1 then return end
+				Flag1 = true
+				Signal2_2(false)
 				
-				if not var10 then
-					var8(true)
+				if not Flag2 then
+					Signal2_3(true)
+				end
+			end):catch(function(Err) --[[ Line: 115 ]]
+				-- upvalues: Flag (ref), SendAXCounterV2Function (upval), ConstantsModule (upval), Flag1 (ref), Signal2_2 (upval), Signal2_3 (upval)
+				if not Flag then
+					SendAXCounterV2Function(ConstantsModule.COUNTERS.CatalogOffersBanner.fetchFailed)
+					warn("[catalogOffersBannerStore] mock failed:", Err)
+				end
+				local Flag2 = Flag
+				
+				if Flag1 then return end
+				Flag1 = true
+				Signal2_2(false)
+				
+				if not Flag2 then
+					Signal2_3(true)
 				end
 			end)
 			
 			return cleanup
 		end
-		local var15 = getLocalUserIdModule(playersService)
+		local LocalUserIdModule = GetLocalUserIdModule(Players)
 		
-		if var15 == nil then
-			warn("[catalogOffersBannerStore] no LocalPlayer; skipping offers fetch")
-			var11 = true
-			var6(false)
-			var8(true)
-			
-			return function() end
-		end
-		local var16, var17 = getMarketplaceOffersBanner(var15, p1, p2)
-		var12 = var17
-		var16:andThen(function(p3)
-			-- upvalues: var10 (write), sendAXCounterV2 (copy), constantsModule (copy), var2 (copy), var11 (write), var6 (copy), var8 (copy)
-			if not var10 then
-				if p3 then
-					sendAXCounterV2(constantsModule.COUNTERS.CatalogOffersBanner.fetchSucceeded)
+		if LocalUserIdModule ~= nil then
+			local MarketplaceOffersBanner, MarketplaceOffersBanner2 = GetMarketplaceOffersBannerFunction(LocalUserIdModule, p1, p2)
+			Callback = MarketplaceOffersBanner2
+			MarketplaceOffersBanner:andThen(function(Result) --[[ Line: 135 ]]
+				-- upvalues: Flag (ref), SendAXCounterV2Function (upval), ConstantsModule (upval), Signal2 (upval), Flag1 (ref), Signal2_2 (upval), Signal2_3 (upval)
+				if not Flag then
+					if Result then
+						SendAXCounterV2Function(ConstantsModule.COUNTERS.CatalogOffersBanner.fetchSucceeded)
+					end
+					Signal2(Result)
 				end
-				var2(p3)
-			end
-			if var11 then return end
-			var11 = true
-			var6(false)
+				local Flag2 = Flag
+				
+				if Flag1 then return end
+				Flag1 = true
+				Signal2_2(false)
+				
+				if not Flag2 then
+					Signal2_3(true)
+				end
+			end):catch(function(Err) --[[ Line: 144 ]]
+				-- upvalues: Flag (ref), SendAXCounterV2Function (upval), ConstantsModule (upval), Flag1 (ref), Signal2_2 (upval), Signal2_3 (upval)
+				if not Flag then
+					SendAXCounterV2Function(ConstantsModule.COUNTERS.CatalogOffersBanner.fetchFailed)
+					warn("[catalogOffersBannerStore] fetch failed:", Err)
+				end
+				local Flag2 = Flag
+				
+				if Flag1 then return end
+				Flag1 = true
+				Signal2_2(false)
+				
+				if not Flag2 then
+					Signal2_3(true)
+				end
+			end)
 			
-			if not var10 then
-				var8(true)
-			end
-		end):catch(function(p3)
-			-- upvalues: var10 (write), sendAXCounterV2 (copy), constantsModule (copy), var11 (write), var6 (copy), var8 (copy)
-			if not var10 then
-				sendAXCounterV2(constantsModule.COUNTERS.CatalogOffersBanner.fetchFailed)
-				warn("[catalogOffersBannerStore] fetch failed:", p3)
-			end
-			if var11 then return end
-			var11 = true
-			var6(false)
-			
-			if not var10 then
-				var8(true)
-			end
-		end)
+			return cleanup
+		end
+		warn("[catalogOffersBannerStore] no LocalPlayer; skipping offers fetch")
 		
-		return cleanup
+		if not Flag1 then
+			Flag1 = true
+			Signal2_2(false)
+			Signal2_3(true)
+		end
+		return function() --[[ Line: 129 ]] end
 	end
 	
-	if fFlagPurchasePromptFetchCartPricing then
-		purchasePromptLiteModule.Events.purchaseCompletedEvent:Connect(function()
-			-- upvalues: var9 (write), var5 (ref), fetchOffers (ref)
-			if not var9 then return end
-			if var5(false) then
+	if FFlagPurchasePromptFetchCartPricing then
+		PurchasePromptLiteModule.Events.purchaseCompletedEvent:Connect(function() --[[ Line: 159 ]]
+			-- upvalues: v1 (ref), Signal3 (copy), fetchOffers (copy)
+			if not v1 then return end
+			if not Signal3(false) then
+				fetchOffers(v1, "cart")
+				
 				return
 			end
-			fetchOffers(var9, "cart")
 		end)
 	end
 	return {
-		getPayload = var1,
-		setPayload = var2,
-		getDismissed = var3,
-		setDismissed = var4,
-		getHasCompletedOffersFetch = var7,
-		getOffersFetchInProgress = var5,
+		getPayload = Signal,
+		setPayload = Signal2,
+		getDismissed = Signal1,
+		setDismissed = Signal2_1,
+		getHasCompletedOffersFetch = Signal4,
+		getOffersFetchInProgress = Signal3,
 		fetchOffers = fetchOffers,
 		notifyPurchaseCompleted = notifyPurchaseCompleted
 	}

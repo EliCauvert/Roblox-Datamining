@@ -1,13 +1,13 @@
-﻿local parent = script:FindFirstAncestor("DataHydration").Parent
-local httpRequestModule = require(parent.HttpRequest)
-local url = require(parent.Http).Url
+﻿local Parent = script:FindFirstAncestor("DataHydration").Parent
+local HttpRequestModule = require(Parent.HttpRequest)
+local Url = require(Parent.Http).Url
 
-return function(p1)
-	-- upvalues: url (ref), httpRequestModule (ref)
-	return httpRequestModule.config({
-		requestFunction = function(p2, p3, p4)
-			-- upvalues: httpRequestModule (copy)
-			return httpRequestModule.requestFunctions.HttpRbxApi(p2, p3, p4)
+return function(List) --[[ Line: 11 | Named "requestVotes" ]]
+	-- upvalues: Url (copy), HttpRequestModule (copy)
+	return HttpRequestModule.config({
+		requestFunction = function(p1, p2, p3) --[[ Line: 17 ]]
+			-- upvalues: HttpRequestModule (upval)
+			return HttpRequestModule.requestFunctions.HttpRbxApi(p1, p2, p3)
 		end
-	})(string.format("%sv1/games/votes?universeIds=%s", url.GAME_URL, table.concat(p1, ",")), "GET")
+	})(string.format("%sv1/games/votes?universeIds=%s", Url.GAME_URL, (table.concat(List, ","))), "GET")
 end

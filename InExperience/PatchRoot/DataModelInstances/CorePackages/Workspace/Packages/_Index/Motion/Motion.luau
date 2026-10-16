@@ -1,1 +1,1 @@
-﻿return require(game:GetService("CorePackages").Packages.Motion)
+﻿return (require(game:GetService("CorePackages").Packages.Motion))

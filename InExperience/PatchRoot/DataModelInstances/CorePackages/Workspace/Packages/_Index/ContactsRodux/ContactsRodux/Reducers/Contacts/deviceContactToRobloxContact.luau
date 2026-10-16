@@ -1,22 +1,22 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local types = parent.Types
-local roduxModule = require(parent_1.Rodux)
-local dashModule = require(parent_1.Dash)
-local _ = require(types.ActionTypes)
-local _ = require(types.ReducerTypes)
-local getDeepValue = require(parent_1.LuaSocialLibrariesDeps).SocialLibraries.config({}).Dictionary.getDeepValue
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local Types = Parent.Types
+local RoduxModule = require(Parent1.Rodux)
+local DashModule = require(Parent1.Dash)
+local _ = require(Types.ActionTypes)
+local _ = require(Types.ReducerTypes)
+local GetDeepValueFunction = require(Parent1.LuaSocialLibrariesDeps).SocialLibraries.config({}).Dictionary.getDeepValue
 local t = {}
 
-return function(p1)
-	-- upvalues: roduxModule (ref), t (ref), getDeepValue (ref), dashModule (ref)
-	return roduxModule.createReducer(t, {
-		[p1.networkingContacts.UploadContactsByUser.Succeeded.name] = function(_, p2)
-			-- upvalues: getDeepValue (copy), dashModule (copy)
-			if getDeepValue(p2, "responseBody.matchedContactFields") then
+return function(p1) --[[ Line: 12 ]]
+	-- upvalues: RoduxModule (copy), t (copy), GetDeepValueFunction (copy), DashModule (copy)
+	return RoduxModule.createReducer(t, {
+		[p1.networkingContacts.UploadContactsByUser.Succeeded.name] = function(_, p2) --[[ Line: 16 ]]
+			-- upvalues: GetDeepValueFunction (upval), DashModule (upval)
+			if GetDeepValueFunction(p2, "responseBody.matchedContactFields") then
 				local t = {}
-				dashModule.forEach(p2.responseBody.matchedContactFields, function(p3)
-					-- upvalues: t (ref)
+				DashModule.forEach(p2.responseBody.matchedContactFields, function(p3) --[[ Line: 27 ]]
+					-- upvalues: t (copy)
 					if not t[p3.idAssignedByFE] then
 						t[p3.idAssignedByFE] = {}
 					end
@@ -24,8 +24,9 @@ return function(p1)
 				end)
 				
 				return t
+			else
+				return {}
 			end
-			return {}
 		end
 	})
 end

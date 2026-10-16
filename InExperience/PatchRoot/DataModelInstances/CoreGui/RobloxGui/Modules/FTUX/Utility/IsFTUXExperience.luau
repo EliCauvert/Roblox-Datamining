@@ -1,11 +1,11 @@
-﻿local parent = script.Parent.Parent
-local isVRAppBuild = require(game:GetService("CorePackages").Workspace.Packages.AppCommonLib).IsVRAppBuild
-local platformEnumModule = require(parent.Enums.PlatformEnum)
-local FTUXConstantsModule = require(parent.Resources.FTUXConstants)
+﻿local Parent = script.Parent.Parent
+local IsVRAppBuildFunction = require(game:GetService("CorePackages").Workspace.Packages.AppCommonLib).IsVRAppBuild
+local PlatformEnumModule = require(Parent.Enums.PlatformEnum)
+local FTUXConstantsModule = require(Parent.Resources.FTUXConstants)
 
-function IsFTUXExperience(p1)
-	-- upvalues: platformEnumModule (ref), isVRAppBuild (ref), FTUXConstantsModule (ref)
-	return p1 == platformEnumModule.QuestVR and (isVRAppBuild() and tostring(game.PlaceId) == FTUXConstantsModule[platformEnumModule.QuestVR].ExperienceIds.PlaceId)
+function IsFTUXExperience(QuestVR): boolean --[[ Line: 10 ]]
+	-- upvalues: PlatformEnumModule (copy), IsVRAppBuildFunction (copy), FTUXConstantsModule (copy)
+	return QuestVR == PlatformEnumModule.QuestVR and (IsVRAppBuildFunction() and tostring(game.PlaceId) == FTUXConstantsModule[PlatformEnumModule.QuestVR].ExperienceIds.PlaceId)
 end
 
 return IsFTUXExperience

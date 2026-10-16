@@ -1,70 +1,70 @@
-﻿local parent = script:FindFirstAncestor("UserList").Parent
-local reactModule = require(parent.React)
-local robloxAppHooksModule = require(parent.RobloxAppHooks)
-local peekViewModule = require(parent.PeekView)
-local peekViewWithTopBar = peekViewModule.PeekViewWithTopBar
-local peekViewState = peekViewModule.PeekViewState
-local roactUtilsModule = require(parent.RoactUtils)
-local navigateBack = require(parent.NavigationRodux).Thunks.NavigateBack
-local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
-local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
-local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
-local userListModule = require(script.Parent.UserList)
-local foundationModule = require(parent.Foundation)
-local button = foundationModule.Button
-local useTopBarHeight = robloxAppHooksModule.useTopBarHeight
-local userListPeekViewTopBarModule = require(script.Parent.UserListPeekViewTopBar)
-local view = foundationModule.View
-local text = foundationModule.Text
-local useLocalization = require(parent.Localization).Hooks.useLocalization
+﻿local Parent = script:FindFirstAncestor("UserList").Parent
+local ReactModule = require(Parent.React)
+local PeekViewModule = require(Parent.PeekView)
+local PeekViewWithTopBar = PeekViewModule.PeekViewWithTopBar
+local PeekViewState = PeekViewModule.PeekViewState
+local NavigateBackFunction = require(Parent.NavigationRodux).Thunks.NavigateBack
+local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3Dispatch
+local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UserListModule = require(script.Parent.UserList)
+local FoundationModule = require(Parent.Foundation)
+local Button = FoundationModule.Button
+local UseTopBarHeightFunction = require(Parent.RobloxAppHooks).useTopBarHeight
+local UserListPeekViewTopBarModule = require(script.Parent.UserListPeekViewTopBar)
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 
-return function(p1)
-	-- upvalues: useTopBarHeight (ref), useDispatch (ref), reactModule (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateBack (ref), peekViewState (ref), useLocalization (ref), peekViewWithTopBar (ref), userListPeekViewTopBarModule (ref), view (ref), text (ref), userListModule (ref), button (ref)
-	local uDim = UDim.new(0.55, 0)
-	local var2 = useTopBarHeight()
-	local var3 = useDispatch()
-	local var4 = reactModule.useCallback(function()
-		-- upvalues: fFlagSignalsNavP3Dispatch (copy), var1 (copy), var3 (ref), navigateBack (copy)
-		if fFlagSignalsNavP3Dispatch then
-			var1.back(true)
+return function(p1) --[[ Line: 34 ]]
+	-- upvalues: UseTopBarHeightFunction (copy), UseDispatchFunction (copy), ReactModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateBackFunction (copy), PeekViewState (copy), UseLocalizationFunction (copy), PeekViewWithTopBar (copy), UserListPeekViewTopBarModule (copy), View (copy), Text (copy), UserListModule (copy), Button (copy)
+	local UseTopBarHeightResult = UseTopBarHeightFunction()
+	local UseDispatchResult = UseDispatchFunction()
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 39 ]]
+		-- upvalues: FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateBackFunction (upval)
+		if FFlagSignalsNavP3Dispatch then
+			NavigationCommands.back(true)
 			
 			return
+		else
+			UseDispatchResult(NavigateBackFunction(true))
 		end
-		var3(navigateBack(true))
-	end, { var3 })
+	end, { UseDispatchResult })
+	local UseResult1 = ReactModule.useCallback(function(Closed, _, _) --[[ Line: 47 ]]
+		-- upvalues: PeekViewState (upval), UseResult (copy)
+		if Closed == PeekViewState.Closed then
+			UseResult()
+		end
+	end, { UseResult })
+	local UseLocalizationResult = UseLocalizationFunction({ showMore = "Feature.Friends.Action.ShowMore" })
 	
-	return reactModule.createElement(peekViewWithTopBar, {
-		briefViewContentHeight = uDim,
-		fullViewContentHeight = UDim.new(1, -var2),
-		onViewStateChanged = reactModule.useCallback(function(p2, _, _)
-			-- upvalues: peekViewState (copy), var4 (ref)
-			if p2 == peekViewState.Closed then
-				var4()
-			end
-		end, { var4 }),
-		topBarHeight = var2,
-		topBarSlot = reactModule.createElement(userListPeekViewTopBarModule, { navigateBack = var4 }),
-		contentSlot = reactModule.createElement(view, {
+	return ReactModule.createElement(PeekViewWithTopBar, {
+		briefViewContentHeight = UDim.new(0.55, 0),
+		fullViewContentHeight = UDim.new(1, -UseTopBarHeightResult),
+		onViewStateChanged = UseResult1,
+		topBarHeight = UseTopBarHeightResult,
+		topBarSlot = ReactModule.createElement(UserListPeekViewTopBarModule, { navigateBack = UseResult }),
+		contentSlot = ReactModule.createElement(View, {
 			tag = "auto-y align-x-center col padding-top-xlarge padding-x-xlarge padding-bottom-large gap-large",
-			Size = UDim2.new(1, 0, 1, -var2)
+			Size = UDim2.new(1, 0, 1, -UseTopBarHeightResult)
 		}, {
-			Title = if p1.title then reactModule.createElement(text, {
+			Title = if p1.title then ReactModule.createElement(Text, {
 				LayoutOrder = 1,
 				tag = "text-heading-small size-full-0 text-align-x-left content-emphasis auto-y",
 				Text = p1.title
 			}) else nil,
-			UserList = reactModule.createElement(userListModule, {
+			UserList = ReactModule.createElement(UserListModule, {
 				layoutOrder = 2,
 				userIds = p1.users,
 				onUserSelected = p1.onUserSelected
 			}),
-			ButtonContainer = reactModule.createElement(view, {
+			ButtonContainer = ReactModule.createElement(View, {
 				LayoutOrder = 3,
 				tag = "size-full-0 auto-y align-x-center col padding-top-xlarge padding-x-xlarge padding-bottom-large gap-large"
 			}, {
-				ShowMoreButton = if p1.hasMore and p1.onLoadMore then reactModule.createElement(button, {
+				ShowMoreButton = if p1.hasMore and p1.onLoadMore then ReactModule.createElement(Button, {
 					onActivated = p1.onLoadMore,
-					text = useLocalization({ showMore = "Feature.Friends.Action.ShowMore" }).showMore
+					text = UseLocalizationResult.showMore
 				}) else nil
 			})
 		})

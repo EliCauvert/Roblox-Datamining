@@ -1,116 +1,132 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local parent = dataHydration.Parent
-local promiseModule = require(parent.Promise)
-local signalsModule = require(parent.Signals)
-local sharedFlagsModule = require(parent.SharedFlags)
-local createDataCacheModule = require(dataHydration.createDataCache)
-local createDataResolverModule = require(dataHydration.createDataResolver)
-local _ = require(dataHydration.DataHydrationTypes)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local Parent = DataHydration.Parent
+local PromiseModule = require(Parent.Promise)
+local SignalsModule = require(Parent.Signals)
+local CreateDataCacheModule = require(DataHydration.createDataCache)
+local CreateDataResolverModule = require(DataHydration.createDataResolver)
+local _ = require(DataHydration.DataHydrationTypes)
 local _ = require(script.Parent.MarketplaceCatalogSortStoreTypes)
-local fFlagMarketplaceCatalogSortTrackLastReceived = sharedFlagsModule.FFlagMarketplaceCatalogSortTrackLastReceived
+local FFlagMarketplaceCatalogSortTrackLastReceived = require(Parent.SharedFlags).FFlagMarketplaceCatalogSortTrackLastReceived
+local FFlagAXSduiNilEmptyTagIdModule = require(DataHydration.Flags.FFlagAXSduiNilEmptyTagId)
 
-local function normalizeCardFooters(p1)
-	if not p1 then
+local function normalizeCardFooters(CardFooters) --[[ Line: 35 ]]
+	if not CardFooters then
 		return nil
 	end
-	local list = table.create(#p1)
+	local Buffer = table.create(#CardFooters)
 	
-	for i, v in p1 do
-		table.insert(list, { contentType = v.contentType or v.content_type })
+	for _, cardFooter in CardFooters do
+		table.insert(Buffer, {
+			contentType = cardFooter.contentType or cardFooter.content_type
+		})
 	end
-	return list
+	return Buffer
 end
 
-local function _(p2)
+local function _(p1) --[[ Line: 48 | Named "normalizeCardStyle" ]]
 	return {
-		thumbnailAspectRatio = p2.thumbnailAspectRatio or p2.thumbnail_aspect_ratio
+		thumbnailAspectRatio = p1.thumbnailAspectRatio or p1.thumbnail_aspect_ratio
 	}
 end
 
-local _ = function(p2)
-	-- upvalues: normalizeCardFooters (ref)
-	if not p2.cardFooters and not p2.cardStyle then
-		return p2
+local _ = function(Tbl) --[[ Line: 54 | Named "normalizeSort" ]]
+	-- upvalues: normalizeCardFooters (copy)
+	if not Tbl.cardFooters and not Tbl.cardStyle then
+		return Tbl
 	end
-	local cloned = table.clone(p2)
+	local Copy = table.clone(Tbl)
 	
-	if p2.cardFooters then
-		cloned.cardFooters = normalizeCardFooters(p2.cardFooters)
+	if Tbl.cardFooters then
+		Copy.cardFooters = normalizeCardFooters(Tbl.cardFooters)
 	end
-	if p2.cardStyle then
-		local cardStyle = p2.cardStyle
-		cloned.cardStyle = {
-			thumbnailAspectRatio = cardStyle.thumbnailAspectRatio or cardStyle.thumbnail_aspect_ratio
+	if Tbl.cardStyle then
+		local CardStyle = Tbl.cardStyle
+		Copy.cardStyle = {
+			thumbnailAspectRatio = CardStyle.thumbnailAspectRatio or CardStyle.thumbnail_aspect_ratio
 		}
 	end
-	return cloned
+	return Copy
 end
 
-return function()
-	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), promiseModule (ref), fFlagMarketplaceCatalogSortTrackLastReceived (ref), signalsModule (ref), normalizeCardFooters (ref)
-	local var1 = createDataCacheModule()
-	local var2 = createDataResolverModule({
-		cache = var1,
-		fetchFn = function(_)
-			-- upvalues: promiseModule (copy)
-			return promiseModule.resolve({})
+local function clearEmptyTagId(Tbl) --[[ Line: 72 ]]
+	if Tbl.tagId == "" then
+		local Copy = table.clone(Tbl)
+		Copy.tagId = nil
+		
+		return Copy
+	else
+		return Tbl
+	end
+end
+
+return function() --[[ Line: 81 | Named "createMarketplaceCatalogSortStore" ]]
+	-- upvalues: FFlagAXSduiNilEmptyTagIdModule (copy), CreateDataCacheModule (copy), clearEmptyTagId (copy), CreateDataResolverModule (copy), PromiseModule (copy), FFlagMarketplaceCatalogSortTrackLastReceived (copy), SignalsModule (copy), normalizeCardFooters (copy)
+	local DataCacheModule = if FFlagAXSduiNilEmptyTagIdModule then CreateDataCacheModule(nil, nil, { sanitizeItem = clearEmptyTagId }) else CreateDataCacheModule()
+	local DataResolverModule = CreateDataResolverModule({
+		cache = DataCacheModule,
+		fetchFn = function(_) --[[ Line: 87 ]]
+			-- upvalues: PromiseModule (upval)
+			return PromiseModule.resolve({})
 		end
 	})
-	local var3 = nil
-	local var4 = nil
+	local GetLastReceivedSorts = nil
+	local Callback = nil
 	
-	if fFlagMarketplaceCatalogSortTrackLastReceived then
-		local var5, var6 = signalsModule.createSignal({})
-		var3 = var5
-		var4 = var6
+	if FFlagMarketplaceCatalogSortTrackLastReceived then
+		GetLastReceivedSorts, Callback = SignalsModule.createSignal({})
 	end
+	local function updateMarketplaceCatalogSorts(p1) --[[ Line: 104 ]]
+		-- upvalues: Callback (ref), DataCacheModule (copy)
+		Callback(p1)
+		DataCacheModule.updateItems(p1)
+	end
+	
+	local function clear() --[[ Line: 128 ]]
+		-- upvalues: Callback (ref), DataResolverModule (copy)
+		if Callback then
+			Callback({})
+		end
+		DataResolverModule.clear()
+	end
+	
 	return {
-		getMarketplaceCatalogSort = var2.getCachedItem,
-		getMarketplaceCatalogSorts = var2.getCachedItems,
-		getNormalizedMarketplaceCatalogSort = function(p2)
-			-- upvalues: var2 (ref), normalizeCardFooters (copy)
-			local cachedItem = var2.getCachedItem(p2)
+		getMarketplaceCatalogSort = DataResolverModule.getCachedItem,
+		getMarketplaceCatalogSorts = DataResolverModule.getCachedItems,
+		getNormalizedMarketplaceCatalogSort = function(p1) --[[ Line: 112 ]]
+			-- upvalues: DataResolverModule (copy), normalizeCardFooters (upval)
+			local CachedItem = DataResolverModule.getCachedItem(p1)
 			
 			return {
-				data = function(p3)
-					-- upvalues: cachedItem (ref), normalizeCardFooters (copy)
-					local var7 = cachedItem.data(p3)
+				data = function(p2) --[[ Line: 115 ]]
+					-- upvalues: CachedItem (copy), normalizeCardFooters (upval)
+					local DataResult = CachedItem.data(p2)
 					
-					if not var7 then
+					if not DataResult then
 						return nil
-					elseif not var7.cardFooters and not var7.cardStyle then
-						return var7
 					end
-					local cloned = table.clone(var7)
+					if not DataResult.cardFooters and not DataResult.cardStyle then
+						return DataResult
+					end
+					local Copy = table.clone(DataResult)
 					
-					if var7.cardFooters then
-						cloned.cardFooters = normalizeCardFooters(var7.cardFooters)
+					if DataResult.cardFooters then
+						Copy.cardFooters = normalizeCardFooters(DataResult.cardFooters)
 					end
-					if var7.cardStyle then
-						local cardStyle = var7.cardStyle
-						cloned.cardStyle = {
-							thumbnailAspectRatio = cardStyle.thumbnailAspectRatio or cardStyle.thumbnail_aspect_ratio
+					if DataResult.cardStyle then
+						local CardStyle = DataResult.cardStyle
+						Copy.cardStyle = {
+							thumbnailAspectRatio = CardStyle.thumbnailAspectRatio or CardStyle.thumbnail_aspect_ratio
 						}
 					end
-					return cloned
+					return Copy
 				end,
-				status = cachedItem.status
+				status = CachedItem.status
 			}
 		end,
-		updateMarketplaceCatalogSorts = if fFlagMarketplaceCatalogSortTrackLastReceived then function(p2)
-			-- upvalues: var4 (write), var1 (ref)
-			var4(p2)
-			var1.updateItems(p2)
-		end else var1.updateItems,
-		updateMarketplaceCatalogSort = var1.updateItem,
-		getLastReceivedSorts = var3,
-		clear = if fFlagMarketplaceCatalogSortTrackLastReceived then function()
-			-- upvalues: var4 (write), var2 (ref)
-			if var4 then
-				var4({})
-			end
-			var2.clear()
-		end else var2.clear,
-		dispose = var2.dispose
+		updateMarketplaceCatalogSorts = if FFlagMarketplaceCatalogSortTrackLastReceived then updateMarketplaceCatalogSorts else DataCacheModule.updateItems,
+		updateMarketplaceCatalogSort = DataCacheModule.updateItem,
+		getLastReceivedSorts = GetLastReceivedSorts,
+		clear = if FFlagMarketplaceCatalogSortTrackLastReceived then clear else DataResolverModule.clear,
+		dispose = DataResolverModule.dispose
 	}
 end

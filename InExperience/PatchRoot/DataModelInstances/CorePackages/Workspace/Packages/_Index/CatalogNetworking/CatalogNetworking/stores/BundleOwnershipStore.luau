@@ -1,53 +1,52 @@
-﻿local catalogNetworking = script:FindFirstAncestor("CatalogNetworking")
-local parent = catalogNetworking.Parent
-local signalsModule = require(parent.Signals)
-local promiseModule = require(parent.Promise)
-local dashModule = require(parent.Dash)
-local fetchBundleOwnershipModule = require(catalogNetworking.networkRequests.fetchBundleOwnership)
-local var1, var2 = signalsModule.createSignal({})
+﻿local CatalogNetworking = script:FindFirstAncestor("CatalogNetworking")
+local Parent = CatalogNetworking.Parent
+local PromiseModule = require(Parent.Promise)
+local DashModule = require(Parent.Dash)
+local FetchBundleOwnershipModule = require(CatalogNetworking.networkRequests.fetchBundleOwnership)
+local Signal, Signal2 = require(Parent.Signals).createSignal({})
 
 return {
-	getCache = var1,
-	fetchAndCache = function(p1, p2)
-		-- upvalues: var1 (ref), promiseModule (ref), dashModule (ref), fetchBundleOwnershipModule (ref), var2 (ref)
-		local var3 = var1(false)
-		local t = {}
+	getCache = Signal,
+	fetchAndCache = function(p1, List) --[[ Line: 12 ]]
+		-- upvalues: Signal (copy), PromiseModule (copy), DashModule (copy), FetchBundleOwnershipModule (copy), Signal2 (copy)
+		local SignalResult = Signal(false)
+		local List1 = {}
 		
-		for i, v in p2 do
-			if var3[tostring(v)] == nil then
-				table.insert(t, v)
+		for _, value in List do
+			if SignalResult[tostring(value)] == nil then
+				table.insert(List1, value)
 			end
 		end
-		return if #t == 0 then promiseModule.resolve() else promiseModule.all(dashModule.map(t, function(p3)
-			-- upvalues: fetchBundleOwnershipModule (copy), p1 (ref)
-			return fetchBundleOwnershipModule(p1, p3)
-		end)):andThen(function(p3)
-			-- upvalues: var1 (copy), var2 (copy)
-			local cloned = table.clone(var1(false))
+		return if #List1 == 0 then PromiseModule.resolve() else PromiseModule.all((DashModule.map(List1, function(p2) --[[ Line: 24 ]]
+			-- upvalues: FetchBundleOwnershipModule (upval), p1 (copy)
+			return FetchBundleOwnershipModule(p1, p2)
+		end))):andThen(function(Result) --[[ Line: 28 ]]
+			-- upvalues: Signal (upval), Signal2 (upval)
+			local Copy = table.clone(Signal(false))
 			
-			for i, v in p3 do
-				if v then
-					cloned[v.id] = v.owned
+			for _, value in Result do
+				if value then
+					Copy[value.id] = value.owned
 				end
 			end
-			var2(cloned)
+			Signal2(Copy)
 		end)
 	end,
-	isOwned = function(p3)
-		-- upvalues: var1 (ref)
-		return var1(false)[p3]
+	isOwned = function(p2) --[[ Line: 39 ]]
+		-- upvalues: Signal (copy)
+		return Signal(false)[p2]
 	end,
-	clear = function()
-		-- upvalues: var2 (ref)
-		var2({})
+	clear = function() --[[ Line: 43 ]]
+		-- upvalues: Signal2 (copy)
+		Signal2({})
 	end,
-	markOwned = function(p3)
-		-- upvalues: var1 (ref), var2 (ref)
-		local cloned = table.clone(var1(false))
+	markOwned = function(List) --[[ Line: 47 ]]
+		-- upvalues: Signal (copy), Signal2 (copy)
+		local Copy = table.clone(Signal(false))
 		
-		for i, v in p3 do
-			cloned[v] = true
+		for _, value in List do
+			Copy[value] = true
 		end
-		var2(cloned)
+		Signal2(Copy)
 	end
 }

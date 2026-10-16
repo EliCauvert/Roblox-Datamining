@@ -1,17 +1,17 @@
 ﻿local _ = require(script:FindFirstAncestor("GenericAbuseReporting").Bedui.Provider.AbuseReportBeduiTypes)
 
-return function(p1, p2)
-	if p2 == nil then
-		return p1
+return function(Text: string, p1): string --[[ Line: 20 ]]
+	if p1 == nil then
+		return Text
 	end
-	local var1 = p1
+	local Text1: string = Text
 	
-	for i in string.gmatch(p1, "{%S+}") do
-		local substring = string.sub(i, 2, #i - 1)
+	for i in string.gmatch(Text, "{%S+}") do
+		local Segment = string.sub(i, 2, #i - 1)
 		
-		if p2[substring] then
-			var1 = string.gsub(var1, i, p2[substring].label)
+		if p1[Segment] then
+			Text1 = string.gsub(Text1, i, p1[Segment].label)
 		end
 	end
-	return var1
+	return Text1
 end

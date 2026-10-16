@@ -1,64 +1,70 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local parent = script.Parent.Parent.Parent
-local reactModule = require(corePackagesService.Packages.React)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local signalsReactModule = require(corePackagesService.Packages.SignalsReact)
-local playerListModule = require(corePackagesService.Workspace.Packages.PlayerList)
-local leaderboardStoreModule = require(corePackagesService.Workspace.Packages.LeaderboardStore)
-local _ = require(corePackagesService.Workspace.Packages.PlayerIconInfoStore)
-local useLeaderboardStore = playerListModule.Hooks.useLeaderboardStore
-local teamListViewModule = require(parent.Components.PresentationCommon.TeamListView)
-local fFlagPlayerListUseFocusNavHook = playerListModule.Flags.FFlagPlayerListUseFocusNavHook
+﻿local CorePackages = game:GetService("CorePackages")
+local ReactModule = require(CorePackages.Packages.React)
+local SignalsReactModule = require(CorePackages.Packages.SignalsReact)
+local PlayerListModule = require(CorePackages.Workspace.Packages.PlayerList)
+local LeaderboardStoreModule = require(CorePackages.Workspace.Packages.LeaderboardStore)
+local _ = require(CorePackages.Workspace.Packages.PlayerIconInfoStore)
+local UseLeaderboardStoreFunction = PlayerListModule.Hooks.useLeaderboardStore
+local TeamListViewModule = require(script.Parent.Parent.Parent.Components.PresentationCommon.TeamListView)
+local FFlagPlayerListUseFocusNavHook = PlayerListModule.Flags.FFlagPlayerListUseFocusNavHook
 
-return reactModule.memo(roactRoduxModule.connect(function(p1)
+return ReactModule.memo(require(CorePackages.Packages.RoactRodux).connect(function(p1) --[[ Line: 127 | Named "mapStateToProps" ]]
 	return {
 		isSmallTouchDevice = p1.displayOptions.isSmallTouchDevice,
 		isDirectionalPreferred = p1.displayOptions.isTenFootInterface,
 		playerIconInfo = p1.playerIconInfo,
 		playerRelationship = p1.playerRelationship
 	}
-end)(function(p1)
-	-- upvalues: useLeaderboardStore (ref), signalsReactModule (ref), reactModule (ref), leaderboardStoreModule (ref), fFlagPlayerListUseFocusNavHook (ref), teamListViewModule (ref)
-	local var1 = signalsReactModule.useSignalState(useLeaderboardStore().getTeamList().getCount)
-	local var2 = signalsReactModule.useSignalState(p1.teamData.players.getCount)
-	local var3 = signalsReactModule.useSignalBinding(p1.teamData.order)
-	local var4 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref), leaderboardStoreModule (copy), var1 (ref), var2 (ref)
-		if p1.teamData.name(false) == leaderboardStoreModule.SpecialNeutralTeamName then
-			return if var1 == 1 then false else var2 ~= 0
-		end
-	end, { var1, var2, p1.teamData.name })
-	local var5 = nil
-	local var6 = nil
-	
-	if fFlagPlayerListUseFocusNavHook then
-		local var7, var8 = reactModule.useMemo(function()
-			-- upvalues: p1 (ref)
-			if p1.registerTeamInstance and p1.teamId then
-				local var9 = p1.registerTeamInstance(p1.teamId, p1.teamData.order)
-				
-				return var9.registerPlayerInstance, var9.unregisterPlayerInstance
+end)(function(p1) --[[ Line: 60 | Named "TeamListContainer" ]]
+	-- upvalues: UseLeaderboardStoreFunction (copy), SignalsReactModule (copy), ReactModule (copy), LeaderboardStoreModule (copy), FFlagPlayerListUseFocusNavHook (copy), TeamListViewModule (copy)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(UseLeaderboardStoreFunction().getTeamList().getCount)
+	local UseSignalStateResult1 = SignalsReactModule.useSignalState(p1.teamData.players.getCount)
+	local UseSignalBindingResult = SignalsReactModule.useSignalBinding(p1.teamData.order)
+	local UseMemoResult = ReactModule.useMemo(function(): boolean --[[ Line: 70 ]]
+		-- upvalues: p1 (copy), LeaderboardStoreModule (upval), UseSignalStateResult (copy), UseSignalStateResult1 (copy)
+		if p1.teamData.name(false) == LeaderboardStoreModule.SpecialNeutralTeamName then
+			if UseSignalStateResult == 1 then
+				return false
+			elseif UseSignalStateResult1 == 0 then
+				return false
 			end
-			return nil, nil
+		end
+		return true
+	end, {
+		UseSignalStateResult,
+		UseSignalStateResult1,
+		p1.teamData.name
+	})
+	local v1 = nil
+	local v2 = nil
+	
+	if FFlagPlayerListUseFocusNavHook then
+		v1, v13 = ReactModule.useMemo(function() --[[ Line: 86 ]]
+			-- upvalues: p1 (copy)
+			if p1.registerTeamInstance and p1.teamId then
+				local RegisterTeamInstanceResult = p1.registerTeamInstance(p1.teamId, p1.teamData.order)
+				
+				return RegisterTeamInstanceResult.registerPlayerInstance, RegisterTeamInstanceResult.unregisterPlayerInstance
+			else
+				return nil, nil
+			end
 		end, { p1.registerTeamInstance, p1.teamId, p1.teamData })
-		var5 = var7
-		var6 = var8
 	end
-	if fFlagPlayerListUseFocusNavHook then
-		reactModule.useEffect(function()
-			-- upvalues: p1 (ref)
-			return function()
-				-- upvalues: p1 (copy)
+	if FFlagPlayerListUseFocusNavHook then
+		ReactModule.useEffect(function() --[[ Line: 97 ]]
+			-- upvalues: p1 (copy)
+			return function() --[[ Line: 98 ]]
+				-- upvalues: p1 (upval)
 				if p1.unregisterTeamInstance and p1.teamId then
 					p1.unregisterTeamInstance(p1.teamId)
 				end
 			end
 		end, { p1.unregisterTeamInstance, p1.teamId })
 	end
-	return reactModule.createElement(teamListViewModule, {
-		layoutOrder = var3,
-		showTeamEntry = var4,
-		teamPlayersCount = var2,
+	return ReactModule.createElement(TeamListViewModule, {
+		layoutOrder = UseSignalBindingResult,
+		showTeamEntry = UseMemoResult,
+		teamPlayersCount = UseSignalStateResult1,
 		entrySizeX = p1.entrySizeX,
 		teamData = p1.teamData,
 		playerIconInfos = p1.playerIconInfos,
@@ -67,9 +73,9 @@ end)(function(p1)
 		setDropDownPlayerDimensionY = p1.setDropDownPlayerDimensionY,
 		prevFocusedEntry = p1.prevFocusedEntry,
 		destroyedFocusedPlayerId = p1.destroyedFocusedPlayerId,
-		registerPlayerInstance = if fFlagPlayerListUseFocusNavHook then var5 else nil,
-		unregisterPlayerInstance = if fFlagPlayerListUseFocusNavHook then var6 else nil,
-		setSelectedPlayerId = if fFlagPlayerListUseFocusNavHook then p1.setSelectedPlayerId else nil,
+		registerPlayerInstance = if FFlagPlayerListUseFocusNavHook then v1 else nil,
+		unregisterPlayerInstance = if FFlagPlayerListUseFocusNavHook then v2 else nil,
+		setSelectedPlayerId = if FFlagPlayerListUseFocusNavHook then p1.setSelectedPlayerId else nil,
 		isSmallTouchDevice = p1.isSmallTouchDevice,
 		isDirectionalPreferred = p1.isDirectionalPreferred
 	})

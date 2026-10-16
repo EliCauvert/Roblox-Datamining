@@ -1,57 +1,54 @@
-﻿local getCallsModule = require(script.Parent.getCalls)
-local cmpLiteralArgsModule = require(script.Parent.cmpLiteralArgs)
-local cmpPredicateArgsModule = require(script.Parent.cmpPredicateArgs)
-local fmtArgsModule = require(script.Parent.fmtArgs)
-local t = {
-	args = function(p1, p2)
-		-- upvalues: getCallsModule (ref), fmtArgsModule (ref)
-		local var1 = getCallsModule(p1)
-		local var5Count = #var1
+﻿local GetCallsModule = require(script.Parent.getCalls)
+local CmpLiteralArgsModule = require(script.Parent.cmpLiteralArgs)
+local CmpPredicateArgsModule = require(script.Parent.cmpPredicateArgs)
+local FmtArgsModule = require(script.Parent.fmtArgs)
+local AnyCallMatchesModule = {
+	args = function(p1, Callback) --[[ Line: 10 ]]
+		-- upvalues: GetCallsModule (copy), FmtArgsModule (copy)
+		local CallsModule = GetCallsModule(p1)
+		local CountCallsModule = #CallsModule
 		
-		if var5Count == 0 then
+		if CountCallsModule == 0 then
 			return false, "mock was not called"
 		end
-		local var2
-		local _ = nil
+		local Text: string? = nil
 		
-		for i = 1, var5Count do
-			local _ = nil
-			local var3, var4 = p2(var1[i].args)
-			var2 = var4
+		for i = 1, CountCallsModule do
+			local CallbackResult
+			CallbackResult, Text = Callback(CallsModule[i].args)
 			
-			if not var3 then
-				continue
+			if CallbackResult then
+				return true
 			end
-			return true
 		end
-		if not var2 then
-			var2 = fmtArgsModule(var1[var5Count].args) .. " did not match"
+		if not Text then
+			Text = FmtArgsModule(CallsModule[CountCallsModule].args) .. " did not match"
 		end
-		if var5Count > 1 then
-			var2 ..= " (+" .. var5Count - 1 .. " other calls)"
+		if CountCallsModule > 1 then
+			Text ..= " (+" .. CountCallsModule - 1 .. " other calls)"
 		end
-		return false, var2
+		return false, Text
 	end
 }
 
-function t.literals(p3, ...)
-	-- upvalues: t (ref), cmpLiteralArgsModule (ref)
-	local packed = table.pack(...)
+function AnyCallMatchesModule.literals(p2, ...) --[[ Line: 36 ]]
+	-- upvalues: AnyCallMatchesModule (copy), CmpLiteralArgsModule (copy)
+	local Packed = table.pack(...)
 	
-	return t.args(p3, function(p4)
-		-- upvalues: cmpLiteralArgsModule (copy), packed (ref)
-		return cmpLiteralArgsModule(packed, p4)
+	return AnyCallMatchesModule.args(p2, function(p3) --[[ Line: 38 ]]
+		-- upvalues: CmpLiteralArgsModule (upval), Packed (copy)
+		return CmpLiteralArgsModule(Packed, p3)
 	end)
 end
 
-function t.predicates(p3, ...)
-	-- upvalues: t (ref), cmpPredicateArgsModule (ref)
-	local packed = table.pack(...)
+function AnyCallMatchesModule.predicates(p2, ...) --[[ Line: 43 ]]
+	-- upvalues: AnyCallMatchesModule (copy), CmpPredicateArgsModule (copy)
+	local Packed = table.pack(...)
 	
-	return t.args(p3, function(p4)
-		-- upvalues: cmpPredicateArgsModule (copy), packed (ref)
-		return cmpPredicateArgsModule(packed, p4)
+	return AnyCallMatchesModule.args(p2, function(p3) --[[ Line: 45 ]]
+		-- upvalues: CmpPredicateArgsModule (upval), Packed (copy)
+		return CmpPredicateArgsModule(Packed, p3)
 	end)
 end
 
-return t
+return AnyCallMatchesModule

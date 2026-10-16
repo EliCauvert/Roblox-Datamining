@@ -2,7 +2,7 @@
 	currentHandlerId = nil,
 	candidateHandlerId = nil,
 	previousSelections = {},
-	requestFocusForHandlerId = function() end,
-	forgetLastSelectionForHandlerId = function() end,
-	blurCurrentFocusHandler = function() end
+	requestFocusForHandlerId = function() --[[ Line: 9 ]] end,
+	forgetLastSelectionForHandlerId = function() --[[ Line: 10 ]] end,
+	blurCurrentFocusHandler = function() --[[ Line: 11 ]] end
 })

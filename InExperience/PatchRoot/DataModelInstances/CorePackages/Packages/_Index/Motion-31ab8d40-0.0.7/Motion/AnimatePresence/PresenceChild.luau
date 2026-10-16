@@ -1,13 +1,13 @@
-﻿local reactModule = require(script.Parent.Parent.Parent.React)
-local useIdFallback = require(script.Parent.utils).useIdFallback
-local presenceContextModule = require(script.Parent.PresenceContext)
+﻿local ReactModule = require(script.Parent.Parent.Parent.React)
+local UseIdFallbackFunction = require(script.Parent.utils).useIdFallback
+local PresenceContextModule = require(script.Parent.PresenceContext)
 
-local function _()
+local function _() --[[ Line: 36 | Named "newChildrenMap" ]]
 	return {}
 end
 
-return function(p1)
-	-- upvalues: reactModule (ref), useIdFallback (ref), presenceContextModule (ref)
+return function(p1) --[[ Line: 40 | Named "PresenceChild" ]]
+	-- upvalues: ReactModule (copy), UseIdFallbackFunction (copy), PresenceContextModule (copy)
 	if not p1.children or typeof(p1.children) == "string" then
 		error("PresenceChild: children must be a React.Element")
 	end
@@ -17,35 +17,35 @@ return function(p1)
 	if p1.onExitComplete and typeof(p1.onExitComplete) ~= "function" and not p1.onExitComplete._isMockFunction then
 		error("PresenceChild: onExitComplete must be a function")
 	end
-	local children = p1.children
-	local isPresent = p1.isPresent
-	local onExitComplete = p1.onExitComplete
-	local current = reactModule.useRef({}).current
-	local t = {
-		id = p1.presenceId or useIdFallback(),
-		isPresent = isPresent ~= false,
+	local Children = p1.children
+	local IsPresent = p1.isPresent
+	local OnExitCompleteFunction = p1.onExitComplete
+	local Current = ReactModule.useRef({}).current
+	local config = {
+		id = p1.presenceId or UseIdFallbackFunction(),
+		isPresent = IsPresent ~= false,
 		passThroughData = p1.passThroughData,
-		onExitComplete = function(p2)
-			-- upvalues: current (ref), onExitComplete (ref)
-			current[p2] = true
-			local var1 = true
+		onExitComplete = function(Key) --[[ Line: 76 ]]
+			-- upvalues: Current (copy), OnExitCompleteFunction (copy)
+			Current[Key] = true
+			local Flag = true
 			
-			for i, v in pairs(current) do
-				if not v then
-					var1 = false
+			for _, value in pairs(Current) do
+				if not value then
+					Flag = false
 					break
 				end
 			end
-			if var1 and onExitComplete then
-				onExitComplete()
+			if Flag and OnExitCompleteFunction then
+				OnExitCompleteFunction()
 			end
 		end
 	}
 	
-	if isPresent ~= nil then
-		for i, v in pairs(current) do
-			current[i] = false
+	if IsPresent ~= nil then
+		for i, _ in pairs(Current) do
+			Current[i] = false
 		end
 	end
-	return reactModule.createElement(presenceContextModule.Provider, { value = t }, children)
+	return ReactModule.createElement(PresenceContextModule.Provider, { value = config }, Children)
 end

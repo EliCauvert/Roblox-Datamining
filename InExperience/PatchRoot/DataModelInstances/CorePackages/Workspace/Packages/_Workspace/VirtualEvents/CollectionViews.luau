@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.CollectionViews.CollectionViews)
+﻿return (require(script.Parent.Parent.Parent._Index.CollectionViews.CollectionViews))

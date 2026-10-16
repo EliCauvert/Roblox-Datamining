@@ -1,36 +1,40 @@
 ﻿local VRUtil = require(script:FindFirstAncestor("VrSpatialUi").Parent.VrCommon).VRUtil
-local var1 = game:DefineFastInt("SpatialUIHeadLookDotNoMovementThreshold", 990) / 1000
-local t = {}
-t.__index = t
+local SpatialUIHeadLookDotNoMovementThresholdRatio = game:DefineFastInt("SpatialUIHeadLookDotNoMovementThreshold", 990) / 1000
+local StableCameraCache = {}
+StableCameraCache.__index = StableCameraCache
 
-function t:getCurrentStableCameraCFrame()
+function StableCameraCache:getCurrentStableCameraCFrame() --[[ Line: 18 ]]
 	return self.lastCameraCFrame
 end
 
-function t:updateAndCheckCameraMoved()
-	-- upvalues: VRUtil (ref), var1 (ref)
-	local userCFrameWorldSpace = VRUtil.GetUserCFrameWorldSpace(Enum.UserCFrame.Head)
+function StableCameraCache:updateAndCheckCameraMoved(): boolean --[[ Line: 22 ]]
+	-- upvalues: VRUtil (copy), SpatialUIHeadLookDotNoMovementThresholdRatio (copy)
+	local UserCFrameWorldSpace = VRUtil.GetUserCFrameWorldSpace(Enum.UserCFrame.Head)
 	
 	if not self.lastUserHeadCFrame then
-		self.lastUserHeadCFrame = userCFrameWorldSpace
+		self.lastUserHeadCFrame = UserCFrameWorldSpace
 		self.lastCameraCFrame = workspace.CurrentCamera.CFrame
 		
 		return true
-	elseif workspace.CurrentCamera.CameraType == Enum.CameraType.Scriptable and not (self.lastUserHeadCFrame.LookVector:Dot(userCFrameWorldSpace.LookVector) < var1) then
-		return false
 	end
-	self.lastUserHeadCFrame = userCFrameWorldSpace
-	self.lastCameraCFrame = workspace.CurrentCamera.CFrame
+	local IsDotProductBelow = self.lastUserHeadCFrame.LookVector:Dot(UserCFrameWorldSpace.LookVector) < SpatialUIHeadLookDotNoMovementThresholdRatio
 	
-	return true
+	if workspace.CurrentCamera.CameraType == Enum.CameraType.Scriptable and not IsDotProductBelow then
+		return false
+	else
+		self.lastUserHeadCFrame = UserCFrameWorldSpace
+		self.lastCameraCFrame = workspace.CurrentCamera.CFrame
+		
+		return true
+	end
 end
 
-function t.new()
-	-- upvalues: t (ref)
-	local t_1 = { lastUserHeadCFrame = nil, lastCameraCFrame = nil }
-	setmetatable(t_1, t)
+function StableCameraCache.new() --[[ Line: 44 ]]
+	-- upvalues: StableCameraCache (copy)
+	local config = { lastUserHeadCFrame = nil, lastCameraCFrame = nil }
+	setmetatable(config, StableCameraCache)
 	
-	return t_1
+	return config
 end
 
-return t
+return StableCameraCache

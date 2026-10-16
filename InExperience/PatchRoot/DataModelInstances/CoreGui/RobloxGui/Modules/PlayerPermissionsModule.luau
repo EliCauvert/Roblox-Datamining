@@ -1,455 +1,534 @@
 ﻿local t = {}
-local playersService = game:GetService("Players")
-local robloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
-local _ = robloxGui:WaitForChild("Modules")
-local corePackagesService = game:GetService("CorePackages")
-local httpRbxApiService = game:GetService("HttpRbxApiService")
-local httpService = game:GetService("HttpService")
+local Players = game:GetService("Players")
+local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
+local _ = RobloxGui:WaitForChild("Modules")
+local CorePackages = game:GetService("CorePackages")
+local HttpRbxApiService = game:GetService("HttpRbxApiService")
+local HttpService = game:GetService("HttpService")
 local _ = UserSettings().GameSettings
-local url = require(corePackagesService.Workspace.Packages.CoreScriptsCommon).Url
-local fFlagInExperienceUserProfileSettingsEnabledModule = require(robloxGui.Modules.Common.Flags.FFlagInExperienceUserProfileSettingsEnabled)
-local fFlagBadgeVisibilitySettingEnabled = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagBadgeVisibilitySettingEnabled
-local fFlagInExperienceRequestProfileSettingsModule = require(robloxGui.Modules.Common.Flags.FFlagInExperienceRequestProfileSettings)
-local verifiedBadgeDisplayStore = require(corePackagesService.Workspace.Packages.UserProfiles).Stores.VerifiedBadgeDisplayStore
-local fFlagEnableVerifiedBadgeStore = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagEnableVerifiedBadgeStore
-local t_1 = {}
-t_1.__index = t_1
+local Url = require(CorePackages.Workspace.Packages.CoreScriptsCommon).Url
+local FFlagInExperienceUserProfileSettingsEnabledModule = require(RobloxGui.Modules.Common.Flags.FFlagInExperienceUserProfileSettingsEnabled)
+local FFlagBadgeVisibilitySettingEnabled = require(CorePackages.Workspace.Packages.SharedFlags).FFlagBadgeVisibilitySettingEnabled
+local FFlagInExperienceRequestProfileSettingsModule = require(RobloxGui.Modules.Common.Flags.FFlagInExperienceRequestProfileSettings)
+local VerifiedBadgeDisplayStore = require(CorePackages.Workspace.Packages.UserProfiles).Stores.VerifiedBadgeDisplayStore
+local FFlagEnableVerifiedBadgeStore = require(CorePackages.Workspace.Packages.SharedFlags).FFlagEnableVerifiedBadgeStore
+local Module = {}
+Module.__index = Module
 
-function t_1.new(p1)
-	-- upvalues: t_1 (ref)
-	local tbl = setmetatable({}, t_1)
-	tbl.player = p1
-	tbl.pendingGroupData = {}
-	tbl.pendingCanManage = {}
-	tbl.pendingProfileSettings = {}
-	tbl.groupData = nil
-	tbl.canManage = nil
-	tbl.profileSettings = nil
+function Module.new(Player) --[[ Line: 27 ]]
+	-- upvalues: Module (copy)
+	local self = setmetatable({}, Module)
+	self.player = Player
+	self.pendingGroupData = {}
+	self.pendingCanManage = {}
+	self.pendingProfileSettings = {}
+	self.groupData = nil
+	self.canManage = nil
+	self.profileSettings = nil
 	
-	return tbl
+	return self
 end
 
-function t_1:getGroupDataAsync()
+function Module:getGroupDataAsync() --[[ Line: 39 ]]
 	if self.groupData then
 		return self.groupData
+	else
+		table.insert(self.pendingGroupData, (coroutine.running()))
+		coroutine.yield()
+		
+		return self.groupData
 	end
-	table.insert(self.pendingGroupData, coroutine.running())
-	coroutine.yield()
-	
-	return self.groupData
 end
 
-function t_1:getCanManageAsync()
+function Module:getCanManageAsync() --[[ Line: 50 ]]
 	if self.canManage == nil then
-		table.insert(self.pendingCanManage, coroutine.running())
+		table.insert(self.pendingCanManage, (coroutine.running()))
 		coroutine.yield()
 		
 		return self.canManage
+	else
+		return self.canManage
 	end
-	return self.canManage
 end
 
-function t_1:getProfileSettingsAsync()
+function Module:getProfileSettingsAsync() --[[ Line: 61 ]]
 	if self.profileSettings == nil then
-		table.insert(self.pendingProfileSettings, coroutine.running())
+		table.insert(self.pendingProfileSettings, (coroutine.running()))
 		coroutine.yield()
 		
 		return self.profileSettings
+	else
+		return self.profileSettings
 	end
-	return self.profileSettings
 end
 
-function t_1:setGroupData(p1)
-	self.groupData = p1
-	local pendingGroupData = self.pendingGroupData
+function Module:setGroupData(GroupData) --[[ Line: 72 ]]
+	self.groupData = GroupData
+	local PendingGroupData = self.pendingGroupData
 	self.pendingGroupData = {}
 	
-	for i, v in pairs(pendingGroupData) do
-		coroutine.resume(v)
+	for _, value in pairs(PendingGroupData) do
+		coroutine.resume(value)
 	end
 end
 
-function t_1:setCanManage(p2)
-	self.canManage = if p2 then true else false
-	local pendingCanManage = self.pendingCanManage
+function Module:setCanManage(p1) --[[ Line: 81 ]]
+	self.canManage = if p1 then true else false
+	local PendingCanManage = self.pendingCanManage
 	self.pendingCanManage = {}
 	
-	for i, v in pairs(pendingCanManage) do
-		coroutine.resume(v)
+	for _, value in pairs(PendingCanManage) do
+		coroutine.resume(value)
 	end
 end
 
-function t_1:setProfileSettings(p3)
-	self.profileSettings = p3
-	local pendingProfileSettings = self.pendingProfileSettings
+function Module:setProfileSettings(ProfileSettings) --[[ Line: 91 ]]
+	self.profileSettings = ProfileSettings
+	local PendingProfileSettings = self.pendingProfileSettings
 	self.pendingProfileSettings = {}
 	
-	for i, v in pairs(pendingProfileSettings) do
-		coroutine.resume(v)
+	for _, pendingProfileSetting in pairs(PendingProfileSettings) do
+		coroutine.resume(pendingProfileSetting)
 	end
 end
 
-function t_1:destroy()
-	-- upvalues: fFlagInExperienceUserProfileSettingsEnabledModule (ref)
-	for i, v in pairs(self.pendingGroupData) do
-		coroutine.resume(v)
+function Module.destroy(p2) --[[ Line: 100 ]]
+	-- upvalues: FFlagInExperienceUserProfileSettingsEnabledModule (copy)
+	for _, value in pairs(p2.pendingGroupData) do
+		coroutine.resume(value)
 	end
-	for i, v_1 in pairs(self.pendingCanManage) do
-		coroutine.resume(v_1)
+	for _, value1 in pairs(p2.pendingCanManage) do
+		coroutine.resume(value1)
 	end
-	if fFlagInExperienceUserProfileSettingsEnabledModule then
-		for i, v_2 in pairs(self.pendingProfileSettings) do
-			coroutine.resume(v_2)
+	if FFlagInExperienceUserProfileSettingsEnabledModule then
+		for _, pendingProfileSetting in pairs(p2.pendingProfileSettings) do
+			coroutine.resume(pendingProfileSetting)
 		end
 	end
 end
 
-local t_2 = {}
+local NewResults = {}
 
-local function _(p4)
-	-- upvalues: t_2 (ref), t_1 (ref)
-	local var1 = t_2[p4]
+local function _(Player) --[[ Line: 118 | Named "getPlayerInfo" ]]
+	-- upvalues: NewResults (copy), Module (copy)
+	local NewResult = NewResults[Player]
 	
-	if not var1 and p4.Parent ~= nil then
-		var1 = t_1.new(p4)
-		t_2[p4] = var1
+	if not NewResult and Player.Parent ~= nil then
+		NewResult = Module.new(Player)
+		NewResults[Player] = NewResult
 	end
-	return var1
+	return NewResult
 end
 
-spawn(function()
-	-- upvalues: playersService (ref), t_2 (ref), t_1 (ref)
-	game:GetService("RobloxReplicatedStorage"):WaitForChild("NewPlayerGroupDetails", 1e999).OnClientEvent:Connect(function(...)
-		-- upvalues: playersService (copy), t_2 (copy), t_1 (copy)
+spawn(function() --[[ Line: 127 ]]
+	-- upvalues: Players (copy), NewResults (copy), Module (copy)
+	game:GetService("RobloxReplicatedStorage"):WaitForChild("NewPlayerGroupDetails", 1e999).OnClientEvent:Connect(function(...) --[[ Line: 131 ]]
+		-- upvalues: Players (upval), NewResults (upval), Module (upval)
 		local list = { ... }
 		
 		if #list == 1 then
-			for i, v in pairs(list[1]) do
-				local var1 = playersService:GetPlayerByUserId(tonumber(i))
+			for i, value in pairs(list[1]) do
+				local Player1 = Players:GetPlayerByUserId((tonumber(i)))
 				
-				if var1 then
-					local var2 = t_2[var1]
+				if Player1 then
+					local NewResult = NewResults[Player1]
 					
-					if not var2 and var1.Parent ~= nil then
-						var2 = t_1.new(var1)
-						t_2[var1] = var2
+					if not NewResult and Player1.Parent ~= nil then
+						NewResult = Module.new(Player1)
+						NewResults[Player1] = NewResult
 					end
-					local var3 = var2
+					local NewResult1 = NewResult
 					
-					if var3 then
-						var3:setGroupData(v)
+					if NewResult1 then
+						NewResult1:setGroupData(value)
 					end
 				end
 			end
 			return
 		else
-			local var4 = list[2]
-			local var5 = playersService:GetPlayerByUserId(tonumber(list[1]))
+			local Entry = list[2]
+			local Player = Players:GetPlayerByUserId((tonumber(list[1])))
 			
-			if var5 then
-				local var6 = t_2[var5]
+			if Player then
+				local NewResult = NewResults[Player]
 				
-				if not var6 and var5.Parent ~= nil then
-					var6 = t_1.new(var5)
-					t_2[var5] = var6
+				if not NewResult and Player.Parent ~= nil then
+					NewResult = Module.new(Player)
+					NewResults[Player] = NewResult
 				end
-				local var7 = var6
+				local NewResult2 = NewResult
 				
-				if var7 then
-					var7:setGroupData(var4)
+				if NewResult2 then
+					NewResult2:setGroupData(Entry)
 				end
 			end
 		end
 	end)
 end)
-coroutine.wrap(function()
-	-- upvalues: playersService (ref), t_2 (ref), t_1 (ref)
-	game:GetService("RobloxReplicatedStorage"):WaitForChild("NewPlayerCanManageDetails", 1e999).OnClientEvent:Connect(function(p4, p5)
-		-- upvalues: playersService (copy), t_2 (copy), t_1 (copy)
-		local var1 = playersService:GetPlayerByUserId(tonumber(p4))
+coroutine.wrap(function() --[[ Line: 162 ]]
+	-- upvalues: Players (copy), NewResults (copy), Module (copy)
+	game:GetService("RobloxReplicatedStorage"):WaitForChild("NewPlayerCanManageDetails", 1e999).OnClientEvent:Connect(function(p3, p4) --[[ Line: 168 ]]
+		-- upvalues: Players (upval), NewResults (upval), Module (upval)
+		local Player = Players:GetPlayerByUserId((tonumber(p3)))
 		
-		if var1 then
-			local var2 = t_2[var1]
+		if Player then
+			local NewResult = NewResults[Player]
 			
-			if not var2 and var1.Parent ~= nil then
-				var2 = t_1.new(var1)
-				t_2[var1] = var2
+			if not NewResult and Player.Parent ~= nil then
+				NewResult = Module.new(Player)
+				NewResults[Player] = NewResult
 			end
-			local var3 = var2
+			local NewResult1 = NewResult
 			
-			if var3 then
-				var3:setCanManage(p5)
+			if NewResult1 then
+				NewResult1:setCanManage(p4)
 			end
 		end
 	end)
 end)()
 
-if fFlagInExperienceUserProfileSettingsEnabledModule then
-	coroutine.wrap(function()
-		-- upvalues: playersService (ref), t_2 (ref), t_1 (ref), fFlagEnableVerifiedBadgeStore (ref), verifiedBadgeDisplayStore (ref), fFlagInExperienceRequestProfileSettingsModule (ref)
-		local robloxReplicatedStorageService = game:GetService("RobloxReplicatedStorage")
-		robloxReplicatedStorageService:WaitForChild("SendPlayerProfileSettings", 1e999).OnClientEvent:Connect(function(p4, p5)
-			-- upvalues: playersService (copy), t_2 (copy), t_1 (copy), fFlagEnableVerifiedBadgeStore (copy), verifiedBadgeDisplayStore (copy)
-			local var1 = playersService:GetPlayerByUserId(tonumber(p4))
+if FFlagInExperienceUserProfileSettingsEnabledModule then
+	coroutine.wrap(function() --[[ Line: 180 ]]
+		-- upvalues: Players (copy), NewResults (copy), Module (copy), FFlagEnableVerifiedBadgeStore (copy), VerifiedBadgeDisplayStore (copy), FFlagInExperienceRequestProfileSettingsModule (copy)
+		local RobloxReplicatedStorage = game:GetService("RobloxReplicatedStorage")
+		RobloxReplicatedStorage:WaitForChild("SendPlayerProfileSettings", 1e999).OnClientEvent:Connect(function(p3, ProfileSettings) --[[ Line: 186 ]]
+			-- upvalues: Players (upval), NewResults (upval), Module (upval), FFlagEnableVerifiedBadgeStore (upval), VerifiedBadgeDisplayStore (upval)
+			local Player = Players:GetPlayerByUserId((tonumber(p3)))
 			
-			if var1 then
-				local var2 = t_2[var1]
+			if Player then
+				local NewResult = NewResults[Player]
 				
-				if not var2 and var1.Parent ~= nil then
-					var2 = t_1.new(var1)
-					t_2[var1] = var2
+				if not NewResult and Player.Parent ~= nil then
+					NewResult = Module.new(Player)
+					NewResults[Player] = NewResult
 				end
-				local var3 = var2
+				local NewResult1 = NewResult
 				
-				if var3 then
-					var3:setProfileSettings(p5)
+				if NewResult1 then
+					NewResult1:setProfileSettings(ProfileSettings)
 				end
-				if fFlagEnableVerifiedBadgeStore and p5.isInExperienceNameEnabled ~= nil then
-					verifiedBadgeDisplayStore.get().setBadgeVisibility(var1.UserId, not p5.isInExperienceNameEnabled)
+				if FFlagEnableVerifiedBadgeStore and ProfileSettings.isInExperienceNameEnabled ~= nil then
+					VerifiedBadgeDisplayStore.get().setBadgeVisibility(Player.UserId, not ProfileSettings.isInExperienceNameEnabled)
 				end
 			end
 		end)
 		
-		if fFlagInExperienceRequestProfileSettingsModule then
-			robloxReplicatedStorageService:WaitForChild("RequestPlayerProfileSettings", 1e999):FireServer()
+		if FFlagInExperienceRequestProfileSettingsModule then
+			RobloxReplicatedStorage:WaitForChild("RequestPlayerProfileSettings", 1e999):FireServer()
 		end
 	end)()
 end
-playersService.PlayerRemoving:Connect(function(p4)
-	-- upvalues: t_2 (ref)
-	if t_2[p4] then
-		local var1 = t_2[p4]
-		t_2[p4] = nil
-		var1:destroy()
+Players.PlayerRemoving:Connect(function(Player) --[[ Line: 212 ]]
+	-- upvalues: NewResults (copy)
+	if NewResults[Player] then
+		NewResults[Player] = nil
+		NewResults[Player]:destroy()
 	end
 end)
 
-local _ = function(p4)
-	-- upvalues: t_2 (ref), t_1 (ref)
-	return function(p5)
-		-- upvalues: t_2 (copy), t_1 (copy), p4 (ref)
-		local var1 = t_2[p5]
+local _ = function(p3) --[[ Line: 220 | Named "NewInGroupFunctionFactory" ]]
+	-- upvalues: NewResults (copy), Module (copy)
+	return function(Player): boolean --[[ Line: 221 ]]
+		-- upvalues: NewResults (upval), Module (upval), p3 (copy)
+		local NewResult = NewResults[Player]
 		
-		if not var1 and p5.Parent ~= nil then
-			var1 = t_1.new(p5)
-			t_2[p5] = var1
+		if not NewResult and Player.Parent ~= nil then
+			NewResult = Module.new(Player)
+			NewResults[Player] = NewResult
 		end
-		if var1 then
-			var1 = var1:getGroupDataAsync()
+		local NewResult1 = NewResult
+		
+		if NewResult1 then
+			local GroupDataAsync = NewResult1:getGroupDataAsync()
 			
-			return var1 and var1[p4]
-		end
-	end
-end
-
-local t_3 = {}
-local var1 = "SpanishLocalizationExpert"
-
-local var2 = function(p4)
-	-- upvalues: t_2 (ref), t_1 (ref), var1 (ref)
-	local var3 = t_2[p4]
-	
-	if not var3 and p4.Parent ~= nil then
-		var3 = t_1.new(p4)
-		t_2[p4] = var3
-	end
-	if var3 then
-		var3 = var3:getGroupDataAsync()
-		
-		return var3 and var3[var1]
-	end
-end
-
-local var3 = "BrazilianLocalizationExpert"
-
-local var4 = function(p4)
-	-- upvalues: t_2 (ref), t_1 (ref), var3 (ref)
-	local var5 = t_2[p4]
-	
-	if not var5 and p4.Parent ~= nil then
-		var5 = t_1.new(p4)
-		t_2[p4] = var5
-	end
-	if var5 then
-		var5 = var5:getGroupDataAsync()
-		
-		return var5 and var5[var3]
-	end
-end
-
-local var5 = "FrenchLocalizationExpert"
-local var6 = "GermanLocalizationExpert"
--- Unknown statement at pc 9: <SetList>
-
-local _ = function()
-	-- upvalues: t_3 (ref)
-	return function(p4)
-		-- upvalues: t_3 (copy)
-		for i = 1, #t_3 do
-			if not t_3[i](p4) then
-				continue
+			if GroupDataAsync and GroupDataAsync[p3] then
+				return true
 			end
-			return true
 		end
 		return false
 	end
 end
 
-local _ = function()
-	-- upvalues: t_2 (ref), t_1 (ref)
-	if game.CreatorType == Enum.CreatorType.Group then
-		local var7 = "PlaceCreator"
+local v1 = "SpanishLocalizationExpert"
+local v2 = "BrazilianLocalizationExpert"
+local v3 = "FrenchLocalizationExpert"
+local v4 = "GermanLocalizationExpert"
+local list = {
+	function(Player): boolean --[[ Line: 221 ]]
+		-- upvalues: NewResults (copy), Module (copy), v1 (copy)
+		local NewResult = NewResults[Player]
 		
-		return function(p4)
-			-- upvalues: t_2 (copy), t_1 (copy), var7 (ref)
-			local var8 = t_2[p4]
+		if not NewResult and Player.Parent ~= nil then
+			NewResult = Module.new(Player)
+			NewResults[Player] = NewResult
+		end
+		local NewResult1 = NewResult
+		
+		if NewResult1 then
+			local GroupDataAsync = NewResult1:getGroupDataAsync()
 			
-			if not var8 and p4.Parent ~= nil then
-				var8 = t_1.new(p4)
-				t_2[p4] = var8
-			end
-			if var8 then
-				var8 = var8:getGroupDataAsync()
-				
-				return var8 and var8[var7]
+			if GroupDataAsync and GroupDataAsync[v1] then
+				return true
 			end
 		end
-	end
-	return function(p4)
-		return p4.UserId == game.CreatorId
-	end
-end
-
-local function CanPlayerManagePlace(p4)
-	-- upvalues: t_2 (ref), t_1 (ref)
-	local var7 = t_2[p4]
-	
-	if not var7 and p4.Parent ~= nil then
-		var7 = t_1.new(p4)
-		t_2[p4] = var7
-	end
-	return if var7 then var7:getCanManageAsync() or false else false
-end
-
-local function IsPlayerInExperienceNameEnabled(p4)
-	-- upvalues: t_2 (ref), t_1 (ref)
-	local var7 = t_2[p4]
-	
-	if not var7 and p4.Parent ~= nil then
-		var7 = t_1.new(p4)
-		t_2[p4] = var7
-	end
-	if var7 then
-		var7 = var7:getProfileSettingsAsync()
+		return false
+	end,
+	function(Player): boolean --[[ Line: 221 ]]
+		-- upvalues: NewResults (copy), Module (copy), v2 (copy)
+		local NewResult = NewResults[Player]
 		
-		return if var7 then var7.isInExperienceNameEnabled else false
+		if not NewResult and Player.Parent ~= nil then
+			NewResult = Module.new(Player)
+			NewResults[Player] = NewResult
+		end
+		local NewResult1 = NewResult
+		
+		if NewResult1 then
+			local GroupDataAsync = NewResult1:getGroupDataAsync()
+			
+			if GroupDataAsync and GroupDataAsync[v2] then
+				return true
+			end
+		end
+		return false
+	end,
+	function(Player): boolean --[[ Line: 221 ]]
+		-- upvalues: NewResults (copy), Module (copy), v3 (copy)
+		local NewResult = NewResults[Player]
+		
+		if not NewResult and Player.Parent ~= nil then
+			NewResult = Module.new(Player)
+			NewResults[Player] = NewResult
+		end
+		local NewResult1 = NewResult
+		
+		if NewResult1 then
+			local GroupDataAsync = NewResult1:getGroupDataAsync()
+			
+			if GroupDataAsync and GroupDataAsync[v3] then
+				return true
+			end
+		end
+		return false
+	end,
+	function(Player): boolean --[[ Line: 221 ]]
+		-- upvalues: NewResults (copy), Module (copy), v4 (copy)
+		local NewResult = NewResults[Player]
+		
+		if not NewResult and Player.Parent ~= nil then
+			NewResult = Module.new(Player)
+			NewResults[Player] = NewResult
+		end
+		local NewResult1 = NewResult
+		
+		if NewResult1 then
+			local GroupDataAsync = NewResult1:getGroupDataAsync()
+			
+			if GroupDataAsync and GroupDataAsync[v4] then
+				return true
+			end
+		end
+		return false
+	end
+}
+
+local _ = function() --[[ Line: 240 | Named "NewIsLocalizationExpertFunctionFactory" ]]
+	-- upvalues: list (copy)
+	return function(p3): boolean --[[ Line: 241 ]]
+		-- upvalues: list (upval)
+		for i = 1, #list do
+			if list[i](p3) then
+				return true
+			end
+		end
+		return false
 	end
 end
 
-local function SetPlayerInExperienceNameEnabled(_, p4)
-	-- upvalues: url (ref), httpService (ref), httpRbxApiService (ref)
-	pcall(function()
-		-- upvalues: url (copy), httpService (copy), p4 (ref), httpRbxApiService (copy)
-		local updatePlayerProfileSettings = game:GetService("RobloxReplicatedStorage"):WaitForChild("UpdatePlayerProfileSettings", 1e999)
-		httpRbxApiService:PostAsyncFullUrl(url.APIS_URL .. "user-profile-api/v1/user/profiles/settings", httpService:JSONEncode({
-			userProfileSettings = { isInExperienceNameEnabled = p4 }
+local _ = function() --[[ Line: 251 | Named "IsPlaceOwnerFunctionFactory" ]]
+	-- upvalues: NewResults (copy), Module (copy)
+	if game.CreatorType == Enum.CreatorType.Group then
+		local v5 = "PlaceCreator"
+		
+		return function(Player): boolean --[[ Line: 221 ]]
+			-- upvalues: NewResults (upval), Module (upval), v5 (copy)
+			local NewResult = NewResults[Player]
+			
+			if not NewResult and Player.Parent ~= nil then
+				NewResult = Module.new(Player)
+				NewResults[Player] = NewResult
+			end
+			local NewResult1 = NewResult
+			
+			if NewResult1 then
+				local GroupDataAsync = NewResult1:getGroupDataAsync()
+				
+				if GroupDataAsync and GroupDataAsync[v5] then
+					return true
+				end
+			end
+			return false
+		end
+	else
+		return function(Player): boolean --[[ Line: 255 ]]
+			return Player.UserId == game.CreatorId
+		end
+	end
+end
+
+local function CanPlayerManagePlace(Player) --[[ Line: 260 ]]
+	-- upvalues: NewResults (copy), Module (copy)
+	local NewResult = NewResults[Player]
+	
+	if not NewResult and Player.Parent ~= nil then
+		NewResult = Module.new(Player)
+		NewResults[Player] = NewResult
+	end
+	return NewResult and NewResult:getCanManageAsync() or false
+end
+
+local function IsPlayerInExperienceNameEnabled(Player) --[[ Line: 269 ]]
+	-- upvalues: NewResults (copy), Module (copy)
+	local NewResult = NewResults[Player]
+	
+	if not NewResult and Player.Parent ~= nil then
+		NewResult = Module.new(Player)
+		NewResults[Player] = NewResult
+	end
+	local NewResult1 = NewResult
+	
+	if NewResult1 then
+		local ProfileSettingsAsync = NewResult1:getProfileSettingsAsync()
+		
+		if ProfileSettingsAsync then
+			return ProfileSettingsAsync.isInExperienceNameEnabled
+		end
+	end
+	return false
+end
+
+local function SetPlayerInExperienceNameEnabled(_, IsInExperienceNameEnabled) --[[ Line: 280 ]]
+	-- upvalues: Url (copy), HttpService (copy), HttpRbxApiService (copy)
+	pcall(function() --[[ Line: 281 ]]
+		-- upvalues: Url (upval), HttpService (upval), IsInExperienceNameEnabled (copy), HttpRbxApiService (upval)
+		local UpdatePlayerProfileSettings = game:GetService("RobloxReplicatedStorage"):WaitForChild("UpdatePlayerProfileSettings", 1e999)
+		HttpRbxApiService:PostAsyncFullUrl(Url.APIS_URL .. "user-profile-api/v1/user/profiles/settings", HttpService:JSONEncode({
+			userProfileSettings = { isInExperienceNameEnabled = IsInExperienceNameEnabled }
 		}), Enum.ThrottlingPriority.Default, Enum.HttpContentType.ApplicationJson, Enum.HttpRequestType.Players)
-		updatePlayerProfileSettings:FireServer({ isInExperienceNameEnabled = p4 })
+		UpdatePlayerProfileSettings:FireServer({ isInExperienceNameEnabled = IsInExperienceNameEnabled })
 	end)
 end
 
-local var7 = "Admin"
+local v5 = "Admin"
 
-function t.IsPlayerAdminAsync(p4)
-	-- upvalues: t_2 (ref), t_1 (ref), var7 (ref)
-	local var8 = t_2[p4]
+function t.IsPlayerAdminAsync(Player): boolean --[[ Line: 221 ]]
+	-- upvalues: NewResults (copy), Module (copy), v5 (copy)
+	local NewResult = NewResults[Player]
 	
-	if not var8 and p4.Parent ~= nil then
-		var8 = t_1.new(p4)
-		t_2[p4] = var8
+	if not NewResult and Player.Parent ~= nil then
+		NewResult = Module.new(Player)
+		NewResults[Player] = NewResult
 	end
-	if var8 then
-		var8 = var8:getGroupDataAsync()
-		
-		return var8 and var8[var7]
-	end
-end
-
-local var8 = "Intern"
-
-function t.IsPlayerInternAsync(p4)
-	-- upvalues: t_2 (ref), t_1 (ref), var8 (ref)
-	local var9 = t_2[p4]
+	local NewResult1 = NewResult
 	
-	if not var9 and p4.Parent ~= nil then
-		var9 = t_1.new(p4)
-		t_2[p4] = var9
-	end
-	if var9 then
-		var9 = var9:getGroupDataAsync()
+	if NewResult1 then
+		local GroupDataAsync = NewResult1:getGroupDataAsync()
 		
-		return var9 and var9[var8]
-	end
-end
-
-local var9 = "Star"
-
-function t.IsPlayerStarAsync(p4)
-	-- upvalues: t_2 (ref), t_1 (ref), var9 (ref)
-	local var10 = t_2[p4]
-	
-	if not var10 and p4.Parent ~= nil then
-		var10 = t_1.new(p4)
-		t_2[p4] = var10
-	end
-	if var10 then
-		var10 = var10:getGroupDataAsync()
-		
-		return var10 and var10[var9]
-	end
-end
-
-function t.IsPlayerLocalizationExpertAsync(p4)
-	-- upvalues: t_3 (ref)
-	for i = 1, #t_3 do
-		if not t_3[i](p4) then
-			continue
-			continue
+		if GroupDataAsync and GroupDataAsync[v5] then
+			return true
 		end
-		return true
+	end
+	return false
+end
+
+local v6 = "Intern"
+
+function t.IsPlayerInternAsync(Player): boolean --[[ Line: 221 ]]
+	-- upvalues: NewResults (copy), Module (copy), v6 (copy)
+	local NewResult = NewResults[Player]
+	
+	if not NewResult and Player.Parent ~= nil then
+		NewResult = Module.new(Player)
+		NewResults[Player] = NewResult
+	end
+	local NewResult1 = NewResult
+	
+	if NewResult1 then
+		local GroupDataAsync = NewResult1:getGroupDataAsync()
+		
+		if GroupDataAsync and GroupDataAsync[v6] then
+			return true
+		end
+	end
+	return false
+end
+
+local v7 = "Star"
+
+function t.IsPlayerStarAsync(Player): boolean --[[ Line: 221 ]]
+	-- upvalues: NewResults (copy), Module (copy), v7 (copy)
+	local NewResult = NewResults[Player]
+	
+	if not NewResult and Player.Parent ~= nil then
+		NewResult = Module.new(Player)
+		NewResults[Player] = NewResult
+	end
+	local NewResult1 = NewResult
+	
+	if NewResult1 then
+		local GroupDataAsync = NewResult1:getGroupDataAsync()
+		
+		if GroupDataAsync and GroupDataAsync[v7] then
+			return true
+		end
+	end
+	return false
+end
+
+function t.IsPlayerLocalizationExpertAsync(p3): boolean --[[ Line: 241 ]]
+	-- upvalues: list (copy)
+	for i = 1, #list do
+		if list[i](p3) then
+			return true
+		end
 	end
 	return false
 end
 
 if game.CreatorType == Enum.CreatorType.Group then
-	local var10 = "PlaceCreator"
+	local v8 = "PlaceCreator"
 	
-	local var11 = function(p5)
-		-- upvalues: t_2 (ref), t_1 (ref), var10 (ref)
-		local var12 = t_2[p5]
+	local function IsPlayerPlaceOwnerAsync(Player): boolean --[[ Line: 221 ]]
+		-- upvalues: NewResults (copy), Module (copy), v8 (copy)
+		local NewResult = NewResults[Player]
 		
-		if not var12 and p5.Parent ~= nil then
-			var12 = t_1.new(p5)
-			t_2[p5] = var12
+		if not NewResult and Player.Parent ~= nil then
+			NewResult = Module.new(Player)
+			NewResults[Player] = NewResult
 		end
-		if var12 then
-			var12 = var12:getGroupDataAsync()
+		local NewResult1 = NewResult
+		
+		if NewResult1 then
+			local GroupDataAsync = NewResult1:getGroupDataAsync()
 			
-			return var12 and var12[var10]
+			if GroupDataAsync and GroupDataAsync[v8] then
+				return true
+			end
 		end
+		return false
 	end
 else
-	local var11 = function(p5)
-		return p5.UserId == game.CreatorId
+	local function IsPlayerPlaceOwnerAsync(Player): boolean --[[ Line: 255 ]]
+		return Player.UserId == game.CreatorId
 	end
 end
-t.IsPlayerPlaceOwnerAsync = var11
+t.IsPlayerPlaceOwnerAsync = IsPlayerPlaceOwnerAsync
 t.CanPlayerManagePlaceAsync = CanPlayerManagePlace
 
-if fFlagInExperienceUserProfileSettingsEnabledModule then
+if FFlagInExperienceUserProfileSettingsEnabledModule then
 	t.IsPlayerInExperienceNameEnabledAsync = IsPlayerInExperienceNameEnabled
 end
-if fFlagBadgeVisibilitySettingEnabled then
+if FFlagBadgeVisibilitySettingEnabled then
 	t.SetPlayerInExperienceNameEnabled = SetPlayerInExperienceNameEnabled
 end
 return t

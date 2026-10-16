@@ -1,13 +1,13 @@
-﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
-local _ = require(momentsCreation.Parent.MomentsCommon)
-local momentsTTSCoachmarkImpressionCacheModule = require(momentsCreation.Storage.MomentsTTSCoachmarkImpressionCache)
+﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
+local _ = require(MomentsCreation.Parent.MomentsCommon)
+local MomentsTTSCoachmarkImpressionCacheModule = require(MomentsCreation.Storage.MomentsTTSCoachmarkImpressionCache)
 
-return function(p1, p2)
-	-- upvalues: momentsTTSCoachmarkImpressionCacheModule (ref)
+return function(p1, p2) --[[ Line: 21 | Named "makeVoiceCoachmarkConfig" ]]
+	-- upvalues: MomentsTTSCoachmarkImpressionCacheModule (copy)
 	return if p1 and p2 then {
 		kind = "voice",
 		titleKey = "Feature.Moments.Label.VoiceCoachmarkTitle",
 		textKey = "Feature.Moments.Label.VoiceCoachmarkBody",
-		impressionCache = momentsTTSCoachmarkImpressionCacheModule
+		impressionCache = MomentsTTSCoachmarkImpressionCacheModule
 	} else nil
 end

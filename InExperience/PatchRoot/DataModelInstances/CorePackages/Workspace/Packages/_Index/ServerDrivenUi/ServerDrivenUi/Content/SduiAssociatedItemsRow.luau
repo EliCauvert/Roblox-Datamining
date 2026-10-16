@@ -1,27 +1,27 @@
-﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
-local reactModule = require(parent.React)
-local view = require(parent.Foundation).View
-local getSduiComponentWrapper = require(parent.SduiCoreSystem).getSduiComponentWrapper
+﻿local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
+local ReactModule = require(Parent.React)
+local View = require(Parent.Foundation).View
+local GetSduiComponentWrapperFunction = require(Parent.SduiCoreSystem).getSduiComponentWrapper
 
-return reactModule.memo(function(p1)
-	-- upvalues: getSduiComponentWrapper (ref), reactModule (ref), view (ref)
-	local layoutOrder = p1.layoutOrder
-	local t = {}
+return ReactModule.memo(function(p1) --[[ Line: 25 | Named "SduiAssociatedItemsRow" ]]
+	-- upvalues: GetSduiComponentWrapperFunction (copy), ReactModule (copy), View (copy)
+	local LayoutOrder = p1.layoutOrder
+	local Elements = {}
 	
-	for i, v in p1.items do
-		t[`Item_${i}`] = reactModule.createElement(getSduiComponentWrapper(v), {
-			componentConfig = v,
+	for Index, item in p1.items do
+		Elements[`Item_${Index}`] = ReactModule.createElement(GetSduiComponentWrapperFunction(item), {
+			componentConfig = item,
 			sduiContext = p1.sduiContext,
 			parentAnalyticsContext = p1.analyticsContext,
-			extraLocalProps = { index = i, layoutOrder = i },
-			debugName = `AssociatedItemsRow-Item-${i}`
+			extraLocalProps = { index = Index, layoutOrder = Index },
+			debugName = `AssociatedItemsRow-Item-${Index}`
 		})
 	end
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "col gap-medium size-full-0 auto-y",
-		LayoutOrder = layoutOrder
+		LayoutOrder = LayoutOrder
 	}, {
-		ItemsScroll = reactModule.createElement("ScrollingFrame", {
+		ItemsScroll = ReactModule.createElement("ScrollingFrame", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 1,
 			ClipsDescendants = false,
@@ -33,7 +33,7 @@ return reactModule.memo(function(p1)
 			ElasticBehavior = Enum.ElasticBehavior.Always,
 			ScrollingDirection = Enum.ScrollingDirection.X
 		}, {
-			ItemsRow = reactModule.createElement(view, { tag = "row gap-small auto-xy size-full-0" }, t)
+			ItemsRow = ReactModule.createElement(View, { tag = "row gap-small auto-xy size-full-0" }, Elements)
 		}),
 		Footer = p1.footerComponent
 	})

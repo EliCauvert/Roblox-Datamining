@@ -1,9 +1,9 @@
-﻿local var1 = require(script:FindFirstAncestor("AppChat").Parent.AppCommonLib).Signal.new()
+﻿local NewResult = require(script:FindFirstAncestor("AppChat").Parent.AppCommonLib).Signal.new()
 
 return {
-	dismissed = var1,
-	dismiss = function()
-		-- upvalues: var1 (ref)
-		var1:fire()
+	dismissed = NewResult,
+	dismiss = function() --[[ Line: 14 ]]
+		-- upvalues: NewResult (copy)
+		NewResult:fire()
 	end
 }

@@ -1,73 +1,76 @@
-﻿local squads = script:FindFirstAncestor("Squads")
-local cryoModule = require(squads.Parent.Cryo)
-local dependenciesModule = require(squads.dependencies)
-local foundation = dependenciesModule.Foundation
-local react = dependenciesModule.React
-local useTokens = foundation.Hooks.useTokens
-local image = foundation.Image
-local view = foundation.View
+﻿local Squads = script:FindFirstAncestor("Squads")
+local CryoModule = require(Squads.Parent.Cryo)
+local DependenciesModule = require(Squads.dependencies)
+local Foundation = DependenciesModule.Foundation
+local React = DependenciesModule.React
+local UseTokensFunction = Foundation.Hooks.useTokens
+local Image = Foundation.Image
+local View = Foundation.View
 
-function HorizontalFacepileGroup(p1)
-	-- upvalues: useTokens (ref), cryoModule (ref), react (ref), image (ref), view (ref)
-	local var1 = useTokens()
-	local _ = p1
-	local var2 = cryoModule.Dictionary.union({
+function HorizontalFacepileGroup(UnionResult) --[[ Line: 26 ]]
+	-- upvalues: UseTokensFunction (copy), CryoModule (copy), React (copy), Image (copy), View (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UnionResult1 = UnionResult
+	UnionResult1 = CryoModule.Dictionary.union({
 		avatarSize = 0,
 		layoutOrder = 1,
 		imageBackgroundStyle = nil,
 		images = {},
 		imageBorderStyle = {
-			Color = var1.Color.Extended.Green.Green_800.Color3,
-			Transparency = var1.Color.Extended.Green.Green_800.Transparency
+			Color = UseTokensResult.Color.Extended.Green.Green_800.Color3,
+			Transparency = UseTokensResult.Color.Extended.Green.Green_800.Transparency
 		}
-	}, p1)
+	}, UnionResult)
 	
-	return react.createElement(view, {
+	return React.createElement(View, {
 		BackgroundTransparency = 1,
-		Size = UDim2.fromOffset(react.useMemo(function()
-			-- upvalues: var2 (write)
-			local imagesCount = #var2.images
+		Size = UDim2.fromOffset(React.useMemo(function() --[[ Line: 44 ]]
+			-- upvalues: UnionResult1 (ref)
+			local CountImages = #UnionResult1.images
 			
-			if imagesCount <= 0 then
+			if CountImages <= 0 then
 				return 0
 			end
-			local avatarSize = var2.avatarSize
+			local AvatarSize = UnionResult1.avatarSize
 			
-			for _ = 2, imagesCount do
-				avatarSize += var2.avatarSize - 4
+			for _ = 2, CountImages do
+				AvatarSize += UnionResult1.avatarSize - 4
 			end
-			return avatarSize
-		end, { #var2.images, var2.avatarSize }), var2.avatarSize),
-		LayoutOrder = if var2.layoutOrder then var2.layoutOrder else nil
+			return AvatarSize
+		end, { #UnionResult1.images, UnionResult1.avatarSize }), UnionResult1.avatarSize),
+		LayoutOrder = if UnionResult1.layoutOrder then UnionResult1.layoutOrder else nil,
+		testId = UnionResult1.testId
 	}, {
-		react.useMemo(function()
-			-- upvalues: var2 (write), react (copy), image (copy), var1 (ref)
-			local imagesCount = #var2.images
-			local t = {}
+		(React.useMemo(function() --[[ Line: 59 ]]
+			-- upvalues: UnionResult1 (ref), React (upval), Image (upval), UseTokensResult (copy)
+			local CountImages = #UnionResult1.images
+			local Elements = {}
 			
-			for i, v in ipairs(var2.images) do
-				table.insert(t, react.createElement(image, {
+			for i, image in ipairs(UnionResult1.images) do
+				table.insert(Elements, React.createElement(Image, {
 					tag = "anchor-center-left bg-surface-100 radius-circle",
-					Image = v,
-					backgroundStyle = if var2.imageBackgroundStyle then var2.imageBackgroundStyle else nil,
-					Size = UDim2.fromOffset(var2.avatarSize, var2.avatarSize),
-					Position = UDim2.new(0, var2.avatarSize * (i - 1) - (if i == 1 then 0 else 4) * (i - 1), 0.5, 0),
-					ZIndex = imagesCount - i + 1
+					Image = image,
+					backgroundStyle = if UnionResult1.imageBackgroundStyle then UnionResult1.imageBackgroundStyle else nil,
+					Size = UDim2.fromOffset(UnionResult1.avatarSize, UnionResult1.avatarSize),
+					Position = UDim2.new(0, UnionResult1.avatarSize * (i - 1) - (if i == 1 then 0 else 4) * (i - 1), 0.5, 0),
+					ZIndex = CountImages - i + 1,
+					testId = if UnionResult1.testId then `{UnionResult1.testId}--image-{i}` else nil
 				}, {
-					UIStroke = react.createElement("UIStroke", {
-						Color = if var2.imageBorderStyle then var2.imageBorderStyle.Color else var1.Color.Extended.Green.Green_800.Color3,
-						Transparency = if var2.imageBorderStyle then var2.imageBorderStyle.Transparency else var1.Color.Extended.Green.Green_800.Transparency,
-						Thickness = var1.Stroke.Thick
+					UIStroke = React.createElement("UIStroke", {
+						Color = if UnionResult1.imageBorderStyle then UnionResult1.imageBorderStyle.Color else UseTokensResult.Color.Extended.Green.Green_800.Color3,
+						Transparency = if UnionResult1.imageBorderStyle then UnionResult1.imageBorderStyle.Transparency else UseTokensResult.Color.Extended.Green.Green_800.Transparency,
+						Thickness = UseTokensResult.Stroke.Thick
 					})
 				}))
 			end
-			return t
+			return Elements
 		end, {
-			var2.avatarSize,
-			var2.images,
-			var2.imageBackgroundStyle,
-			var2.imageBorderStyle
-		})
+			UnionResult1.avatarSize,
+			UnionResult1.images,
+			UnionResult1.imageBackgroundStyle,
+			UnionResult1.imageBorderStyle,
+			UnionResult1.testId
+		}))
 	})
 end
 

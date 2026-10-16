@@ -1,8 +1,8 @@
 ﻿local PYMKCarousel = script:FindFirstAncestor("PYMKCarousel")
-local recommendationContextType = require(PYMKCarousel.dependencies).RoduxFriends.Enums.RecommendationContextType
+local RecommendationContextType = require(PYMKCarousel.dependencies).RoduxFriends.Enums.RecommendationContextType
 local _ = require(PYMKCarousel.Common.OmniTypes)
-local constantsModule = require(PYMKCarousel.Common.Constants)
-local t = {
+local ConstantsModule = require(PYMKCarousel.Common.Constants)
+local RecommendedFriendSort = {
 	topicId = "topicId3",
 	treatmentType = "FriendRecommendationCarousel",
 	topic = "",
@@ -13,7 +13,7 @@ local t = {
 			contentMetadata = {
 				rank = "10",
 				recommendationRequestId = "recommendationSessionId",
-				hasPendingFriendRequest = constantsModule.BE_FALSE_VALUE
+				hasPendingFriendRequest = ConstantsModule.BE_FALSE_VALUE
 			}
 		},
 		[2] = {
@@ -23,8 +23,8 @@ local t = {
 				rank = "5",
 				mutualFriendsCount = "5",
 				recommendationRequestId = "recommendationSessionId",
-				contextType = recommendationContextType.MutualFriends.rawValue(),
-				hasPendingFriendRequest = constantsModule.BE_TRUE_VALUE
+				contextType = RecommendationContextType.MutualFriends.rawValue(),
+				hasPendingFriendRequest = ConstantsModule.BE_TRUE_VALUE
 			}
 		},
 		[3] = {
@@ -33,8 +33,8 @@ local t = {
 			contentMetadata = {
 				rank = "8",
 				recommendationRequestId = "recommendationSessionId",
-				contextType = recommendationContextType.Frequents.rawValue(),
-				hasPendingFriendRequest = constantsModule.BE_FALSE_VALUE
+				contextType = RecommendationContextType.Frequents.rawValue(),
+				hasPendingFriendRequest = ConstantsModule.BE_FALSE_VALUE
 			}
 		},
 		[4] = {
@@ -44,26 +44,26 @@ local t = {
 			contentMetadata = {
 				rank = "1",
 				recommendationRequestId = "recommendationSessionId",
-				contextType = recommendationContextType.Contacts.rawValue(),
-				hasPendingFriendRequest = constantsModule.BE_FALSE_VALUE
+				contextType = RecommendationContextType.Contacts.rawValue(),
+				hasPendingFriendRequest = ConstantsModule.BE_FALSE_VALUE
 			}
 		}
 	}
 }
-local t_1 = {
+local RecommendedFriend = {
 	RecommendedFriend1 = {
 		userName = "userName1",
 		displayName = "displayName1",
 		userId = "RecommendedFriend1",
 		mutualFriendDisplayName = {},
-		contextType = recommendationContextType.Frequents.rawValue()
+		contextType = RecommendationContextType.Frequents.rawValue()
 	},
 	RecommendedFriend2 = {
 		userName = "userName2",
 		displayName = "displayName2",
 		userId = "RecommendedFriend2",
 		mutualFriendDisplayName = {},
-		contextType = recommendationContextType.None.rawValue()
+		contextType = RecommendationContextType.None.rawValue()
 	},
 	RecommendedFriend3 = {
 		userName = "userName3",
@@ -78,11 +78,11 @@ local t_1 = {
 		ContactName = "ContactName",
 		HeadshotThumbnailUrl = "HeadshotImageUrl",
 		userId = "0",
-		contextType = recommendationContextType.Contacts.rawValue(),
+		contextType = RecommendationContextType.Contacts.rawValue(),
 		mutualFriendDisplayName = {}
 	}
 }
-local t_2 = {
+local config = {
 	[1] = {
 		topicId = "topicId1",
 		treatmentType = "Carousel",
@@ -113,7 +113,7 @@ local t_2 = {
 		}
 	}
 }
-local t_3 = {
+local Game = {
 	Game1 = {
 		universeId = "universeId1",
 		name = "name1",
@@ -156,12 +156,16 @@ return {
 		recommendations = {
 			Home = {
 				omniSessionId = "omniSessionId1",
-				sorts = { [1] = t_2[1], [2] = t_2[2], [3] = t },
+				sorts = {
+					[1] = config[1],
+					[2] = config[2],
+					[3] = RecommendedFriendSort
+				},
 				metadata = {
 					CatalogAsset = {},
 					CatalogBundle = {},
-					RecommendedFriend = t_1,
-					Game = t_3
+					RecommendedFriend = RecommendedFriend,
+					Game = Game
 				}
 			}
 		}
@@ -174,12 +178,12 @@ return {
 		recommendations = {
 			Home = {
 				omniSessionId = "omniSessionId1",
-				sorts = { [1] = t_2[1], [2] = t_2[2] },
+				sorts = { [1] = config[1], [2] = config[2] },
 				metadata = {
 					CatalogAsset = {},
 					CatalogBundle = {},
 					RecommendedFriend = {},
-					Game = t_3
+					Game = Game
 				}
 			}
 		}
@@ -193,8 +197,8 @@ return {
 			Home = {
 				omniSessionId = "omniSessionId1",
 				sorts = {
-					[1] = t_2[1],
-					[2] = t_2[2],
+					[1] = config[1],
+					[2] = config[2],
 					[3] = {
 						topicId = "topicId3",
 						treatmentType = "FriendRecommendationCarousel",
@@ -206,11 +210,11 @@ return {
 					CatalogAsset = {},
 					CatalogBundle = {},
 					RecommendedFriend = {},
-					Game = t_3
+					Game = Game
 				}
 			}
 		}
 	},
-	recommendedFriendMetadata = t_1,
-	recommendedFriendSort = t
+	recommendedFriendMetadata = RecommendedFriend,
+	recommendedFriendSort = RecommendedFriendSort
 }

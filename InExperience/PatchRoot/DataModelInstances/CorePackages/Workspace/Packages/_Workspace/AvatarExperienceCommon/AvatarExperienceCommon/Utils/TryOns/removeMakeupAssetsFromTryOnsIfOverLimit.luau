@@ -1,26 +1,26 @@
-﻿local avatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
-local _ = require(avatarExperienceCommon.Parent.AvatarExperienceModel)
-local constantsModule = require(avatarExperienceCommon.Constants)
+﻿local AvatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
+local _ = require(AvatarExperienceCommon.Parent.AvatarExperienceModel)
+local ConstantsModule = require(AvatarExperienceCommon.Constants)
 
-function removeMakeupAssetsFromTryOnsIfOverLimit(value)
-	-- upvalues: constantsModule (ref)
-	local var1 = 0
-	local var2 = 1e999
+function removeMakeupAssetsFromTryOnsIfOverLimit(List) --[[ Line: 6 ]]
+	-- upvalues: ConstantsModule (copy)
+	local Count = 0
+	local Smallest = 1e999
 	
-	for i, v in value do
-		if constantsModule.ASSET_TYPE_ID_STRING_TO_MAKEUP_TYPE[v.itemSubType] then
-			var1 += 1
-			var2 = math.min(v.itemRecency, var2)
+	for i, value in List do
+		if ConstantsModule.ASSET_TYPE_ID_STRING_TO_MAKEUP_TYPE[value.itemSubType] then
+			Count += 1
+			Smallest = math.min(value.itemRecency, Smallest)
 		end
 	end
-	if constantsModule.MAX_MAKEUP_LAYERS < var1 then
-		for i_1, v_1 in value do
-			if v_1.itemRecency == var2 then
-				value[i_1] = nil
+	if ConstantsModule.MAX_MAKEUP_LAYERS < Count then
+		for i, value1 in List do
+			if value1.itemRecency == Smallest then
+				List[i] = nil
 			end
 		end
 	end
-	return value
+	return List
 end
 
 return removeMakeupAssetsFromTryOnsIfOverLimit

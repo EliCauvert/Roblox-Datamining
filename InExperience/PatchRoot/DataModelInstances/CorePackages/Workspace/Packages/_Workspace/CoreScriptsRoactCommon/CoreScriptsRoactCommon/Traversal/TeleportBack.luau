@@ -1,35 +1,32 @@
-﻿local teleportService = game:GetService("TeleportService")
-local useTeleportedPlacesBackHistory2EngineFeature = game:GetEngineFeature("UseTeleportedPlacesBackHistory2")
-local isRunningInStudio = require(script:FindFirstAncestor("CoreScriptsRoactCommon").Parent.AppCommonLib).isRunningInStudio
-local fFlagUseLocalTraversalHistory = require(script.Parent.Flags).FFlagUseLocalTraversalHistory
-local teleportBackAttemptLimit = game:DefineFastInt("TeleportBackAttemptLimit", 5)
-local teleportBackRetryDelay = game:DefineFastInt("TeleportBackRetryDelay", 1)
+﻿local TeleportService = game:GetService("TeleportService")
+local UseTeleportedPlacesBackHistory2EngineFeature = game:GetEngineFeature("UseTeleportedPlacesBackHistory2")
+local IsRunningInStudioFunction = require(script:FindFirstAncestor("CoreScriptsRoactCommon").Parent.AppCommonLib).isRunningInStudio
+local FFlagUseLocalTraversalHistory = require(script.Parent.Flags).FFlagUseLocalTraversalHistory
+local TeleportBackAttemptLimit = game:DefineFastInt("TeleportBackAttemptLimit", 5)
+local TeleportBackRetryDelay = game:DefineFastInt("TeleportBackRetryDelay", 1)
 
-return function(p1)
-	-- upvalues: isRunningInStudio (ref), fFlagUseLocalTraversalHistory (ref), useTeleportedPlacesBackHistory2EngineFeature (ref), teleportService (ref), teleportBackRetryDelay (ref), teleportBackAttemptLimit (ref)
-	if isRunningInStudio() then
+return function(PlaceId) --[[ Line: 17 | Named "TeleportBack" ]]
+	-- upvalues: IsRunningInStudioFunction (copy), FFlagUseLocalTraversalHistory (copy), UseTeleportedPlacesBackHistory2EngineFeature (copy), TeleportService (copy), TeleportBackRetryDelay (copy), TeleportBackAttemptLimit (copy)
+	if IsRunningInStudioFunction() then
 		warn("Teleporting is not supported in Studio")
 		
 		return
 	end
-	local var1, var2
-	local var3 = 0
-	local _ = nil
-	local _ = nil
+	local Count = 0
+	local Success = nil
+	local Result = nil
 	repeat
-		local ok, status = pcall(function()
-			-- upvalues: fFlagUseLocalTraversalHistory (copy), useTeleportedPlacesBackHistory2EngineFeature (copy), p1 (ref), teleportService (copy)
-			return if (fFlagUseLocalTraversalHistory or useTeleportedPlacesBackHistory2EngineFeature) and p1 then teleportService:TeleportTrustedBackHistory(p1) else teleportService:TeleportTrustedBackForth(false)
+		Success, Result = pcall(function() --[[ Line: 27 ]]
+			-- upvalues: FFlagUseLocalTraversalHistory (upval), UseTeleportedPlacesBackHistory2EngineFeature (upval), PlaceId (copy), TeleportService (upval)
+			return if (FFlagUseLocalTraversalHistory or UseTeleportedPlacesBackHistory2EngineFeature) and PlaceId then TeleportService:TeleportTrustedBackHistory(PlaceId) else TeleportService:TeleportTrustedBackForth(false)
 		end)
-		var1 = ok
-		var2 = status
-		var3 += 1
-		if not var1 then
-			task.wait(teleportBackRetryDelay)
+		Count += 1
+		if not Success then
+			task.wait(TeleportBackRetryDelay)
 		end
-	until var1 or var3 == teleportBackAttemptLimit
-	if not var1 then
-		warn(var2)
+	until Success or Count == TeleportBackAttemptLimit
+	if not Success then
+		warn(Result)
 	end
-	return var1, var2
+	return Success, Result
 end

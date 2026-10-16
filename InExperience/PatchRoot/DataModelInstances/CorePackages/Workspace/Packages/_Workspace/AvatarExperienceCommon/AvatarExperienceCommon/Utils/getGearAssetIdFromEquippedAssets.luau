@@ -1,13 +1,13 @@
-﻿return function(value)
-	local var1 = nil
-	local value_1 = value[tostring(Enum.AssetType.Gear.Value)]
+﻿return function(p1): number --[[ Line: 1 | Named "getGearAssetIdFromEquippedAssets" ]]
+	local Number: number? = nil
+	local v1 = p1[tostring(Enum.AssetType.Gear.Value)]
 	
-	if value_1 then
-		local var2, _ = next(value_1)
+	if v1 then
+		local Key, _ = next(v1)
 		
-		if var2 then
-			var1 = tonumber(var2)
+		if Key then
+			Number = tonumber(Key)
 		end
 	end
-	return var1
+	return Number
 end

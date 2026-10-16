@@ -1,53 +1,53 @@
-﻿local createSignal = require(script:FindFirstAncestor("ExpChat").Parent.Signals).createSignal
+﻿local CreateSignalFunction = require(script:FindFirstAncestor("ExpChat").Parent.Signals).createSignal
 
-return function()
-	-- upvalues: createSignal (ref)
+return function() --[[ Line: 26 | Named "createProximityStore" ]]
+	-- upvalues: CreateSignalFunction (copy)
 	local t = {}
-	local t_1 = {
+	local config = {
 		isInsideRenderDistance = false,
 		isInsideMaximizeDistance = false
 	}
 	
-	local function _(p1)
-		return tostring(p1)
+	local function _(p1): string --[[ Line: 38 | Named "getKey" ]]
+		return (tostring(p1))
 	end
 	
 	return {
-		getUserProximityState = function(p1)
-			-- upvalues: t (ref), createSignal (copy), t_1 (ref)
-			local var1 = tostring(p1)
+		getUserProximityState = function(p1) --[[ Line: 42 ]]
+			-- upvalues: t (copy), CreateSignalFunction (upval), config (copy)
+			local Text = tostring(p1)
 			
-			if not t[var1] then
-				local var2, var3 = createSignal(t_1)
-				t[var1] = { getter = var2, setter = var3 }
+			if not t[Text] then
+				local Signal, Signal2 = CreateSignalFunction(config)
+				t[Text] = { getter = Signal, setter = Signal2 }
 			end
-			return t[var1].getter
+			return t[Text].getter
 		end,
-		updateProximity = function(p1, p2, p3)
-			-- upvalues: t (ref), createSignal (copy), t_1 (ref)
-			local var1 = tostring(p1)
+		updateProximity = function(p1, IsInsideRenderDistance, IsInsideMaximizeDistance) --[[ Line: 51 ]]
+			-- upvalues: t (copy), CreateSignalFunction (upval), config (copy)
+			local Text = tostring(p1)
 			
-			if not t[var1] then
-				local var2 = tostring(p1)
+			if not t[Text] then
+				local Text1 = tostring(p1)
 				
-				if not t[var2] then
-					local var3, var4 = createSignal(t_1)
-					t[var2] = { getter = var3, setter = var4 }
+				if not t[Text1] then
+					local Signal, Signal2 = CreateSignalFunction(config)
+					t[Text1] = { getter = Signal, setter = Signal2 }
 				end
-				local _ = t[var2].getter
+				local _ = t[Text1].getter
 			end
-			t[var1].setter({
-				isInsideRenderDistance = p2,
-				isInsideMaximizeDistance = p3
+			t[Text].setter({
+				isInsideRenderDistance = IsInsideRenderDistance,
+				isInsideMaximizeDistance = IsInsideMaximizeDistance
 			})
 		end,
-		removeUser = function(p1)
-			-- upvalues: t (ref), t_1 (ref)
-			local var1 = tostring(p1)
+		removeUser = function(p1) --[[ Line: 67 ]]
+			-- upvalues: t (copy), config (copy)
+			local Text = tostring(p1)
 			
-			if t[var1] then
-				t[var1].setter(t_1)
-				t[var1] = nil
+			if t[Text] then
+				t[Text].setter(config)
+				t[Text] = nil
 			end
 		end
 	}

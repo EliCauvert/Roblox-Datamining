@@ -1,12 +1,12 @@
-﻿local reactModule = require(script.Parent.Parent.React)
-local focusControllerModule = require(script.Parent.FocusController)
+﻿local ReactModule = require(script.Parent.Parent.React)
+local FocusControllerModule = require(script.Parent.FocusController)
 
-return function()
-	-- upvalues: reactModule (ref), focusControllerModule (ref)
-	local var1 = reactModule.useRef(nil)
+return function() --[[ Line: 19 | Named "useRootFocusController" ]]
+	-- upvalues: ReactModule (copy), FocusControllerModule (copy)
+	local UseRefResult = ReactModule.useRef(nil)
 	
-	if var1.current == nil then
-		var1.current = focusControllerModule.createPublicApiWrapper()
+	if UseRefResult.current == nil then
+		UseRefResult.current = FocusControllerModule.createPublicApiWrapper()
 	end
-	return var1.current
+	return UseRefResult.current
 end

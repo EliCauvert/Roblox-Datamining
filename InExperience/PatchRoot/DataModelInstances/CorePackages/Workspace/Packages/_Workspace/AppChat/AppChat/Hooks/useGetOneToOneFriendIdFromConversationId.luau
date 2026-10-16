@@ -1,21 +1,22 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local useLocalUserId = require(appChat.Parent.RobloxAppHooks).useLocalUserId
-local useGetConversationFromIdModule = require(appChat.Hooks.useGetConversationFromId)
-local getOtherParticipantsModule = require(appChat.Conversations.getOtherParticipants)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local UseLocalUserIdFunction = require(AppChat.Parent.RobloxAppHooks).useLocalUserId
+local UseGetConversationFromIdModule = require(AppChat.Hooks.useGetConversationFromId)
+local GetOtherParticipantsModule = require(AppChat.Conversations.getOtherParticipants)
 
-return function(p1)
-	-- upvalues: useLocalUserId (ref), useGetConversationFromIdModule (ref), getOtherParticipantsModule (ref)
-	local var1 = useLocalUserId()
-	local var2 = useGetConversationFromIdModule(p1)
+return function(p1) --[[ Line: 8 ]]
+	-- upvalues: UseLocalUserIdFunction (copy), UseGetConversationFromIdModule (copy), GetOtherParticipantsModule (copy)
+	local UseLocalUserIdResult = UseLocalUserIdFunction()
+	local UseGetConversationFromIdModuleResult = UseGetConversationFromIdModule(p1)
 	
-	if not p1 or not var1 then
+	if not p1 or not UseLocalUserIdResult then
 		return nil
-	elseif not var2 then
+	elseif not UseGetConversationFromIdModuleResult then
 		return nil
-	elseif var2.type ~= "one_to_one" then
+	elseif UseGetConversationFromIdModuleResult.type == "one_to_one" then
+		local OtherParticipantsModule = GetOtherParticipantsModule(UseGetConversationFromIdModuleResult, UseLocalUserIdResult)
+		
+		return if #OtherParticipantsModule == 1 then OtherParticipantsModule[1] else nil
+	else
 		return nil
 	end
-	local var3 = getOtherParticipantsModule(var2, var1)
-	
-	return if #var3 == 1 then var3[1] else nil
 end

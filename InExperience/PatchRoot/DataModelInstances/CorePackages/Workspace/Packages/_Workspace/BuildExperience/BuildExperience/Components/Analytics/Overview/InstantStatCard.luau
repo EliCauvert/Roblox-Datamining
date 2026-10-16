@@ -1,51 +1,51 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local icon = foundationModule.Icon
-local skeleton = foundationModule.Skeleton
-local text = foundationModule.Text
-local view = foundationModule.View
-local iconSize = foundationModule.Enums.IconSize
-local radius = foundationModule.Enums.Radius
-local useTokens = foundationModule.Hooks.useTokens
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local Icon = FoundationModule.Icon
+local Skeleton = FoundationModule.Skeleton
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local IconSize = FoundationModule.Enums.IconSize
+local Radius = FoundationModule.Enums.Radius
+local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), view (ref), text (ref), icon (ref), iconSize (ref), skeleton (ref), radius (ref)
-	local var1 = useTokens()
-	local testId = p1.testId or "InstantStatCard"
+return function(p1) --[[ Line: 28 | Named "InstantStatCard" ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Text (copy), Icon (copy), IconSize (copy), Skeleton (copy), Radius (copy)
+	local UseTokensResult = UseTokensFunction()
+	local TestId = p1.testId or "InstantStatCard"
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "col gap-none size-full-0 auto-y",
 		LayoutOrder = p1.layoutOrder,
-		testId = testId
+		testId = TestId
 	}, {
-		Label = reactModule.createElement(text, {
+		Label = ReactModule.createElement(Text, {
 			LayoutOrder = 1,
 			tag = "size-full-0 auto-y text-body-medium text-align-x-left text-truncate-end content-default",
 			Text = p1.label,
-			testId = `{testId}-label`
+			testId = `{TestId}-label`
 		}),
-		Value = reactModule.createElement(view, {
+		Value = ReactModule.createElement(View, {
 			LayoutOrder = 2,
 			tag = "row align-y-center gap-xsmall auto-xy padding-y-xxsmall"
 		}, {
-			Icon = reactModule.createElement(icon, {
+			Icon = ReactModule.createElement(Icon, {
 				LayoutOrder = 1,
 				tag = "content-emphasis",
 				name = p1.icon,
-				size = iconSize.Large,
-				testId = `{testId}-icon`
+				size = IconSize.Large,
+				testId = `{TestId}-icon`
 			}),
-			Number = if p1.isLoading then reactModule.createElement(skeleton, {
+			Number = if p1.isLoading then ReactModule.createElement(Skeleton, {
 				LayoutOrder = 2,
-				Size = UDim2.fromOffset(var1.Size.Size_1000, var1.Size.Size_500),
-				radius = radius.Small,
-				testId = `{testId}-loading`
-			}) else reactModule.createElement(text, {
+				Size = UDim2.fromOffset(UseTokensResult.Size.Size_1000, UseTokensResult.Size.Size_500),
+				radius = Radius.Small,
+				testId = `{TestId}-loading`
+			}) else ReactModule.createElement(Text, {
 				LayoutOrder = 2,
 				tag = "auto-xy text-heading-small text-align-x-left content-emphasis",
 				Text = p1.valueText,
-				testId = `{testId}-value`
+				testId = `{TestId}-value`
 			})
 		})
 	})

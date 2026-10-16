@@ -1,37 +1,37 @@
-﻿local reactModule = require(script:FindFirstAncestor("Foundation").Parent.React)
+﻿local ReactModule = require(script:FindFirstAncestor("Foundation").Parent.React)
 
-return function()
-	-- upvalues: reactModule (ref)
-	local var1, var2 = reactModule.useState({})
+return function() --[[ Line: 5 | Named "useTagsState" ]]
+	-- upvalues: ReactModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState({})
 	
-	return var1, reactModule.useCallback(function(...)
-		-- upvalues: var2 (ref)
-		local t = {}
+	return UseStateResult, (ReactModule.useCallback(function(...) --[[ Line: 8 ]]
+		-- upvalues: UseStateResult2 (copy)
+		local List = {}
 		
-		for i, v in { ... } do
-			for i_1, v_1 in string.split(v, " ") do
-				table.insert(t, v_1)
+		for _, value in { ... } do
+			for _, value1 in string.split(value, " ") do
+				table.insert(List, value1)
 			end
 		end
-		var2(function(p1)
-			-- upvalues: t (ref)
-			local var3 = false
+		UseStateResult2(function(Tbl) --[[ Line: 20 ]]
+			-- upvalues: List (copy)
+			local Flag = false
 			
-			for i, v in t do
-				if p1[v] ~= true then
-					var3 = true
+			for _, value in List do
+				if Tbl[value] ~= true then
+					Flag = true
 					break
 				end
 			end
-			if not var3 then
-				return p1
+			if not Flag then
+				return Tbl
 			end
-			local cloned = table.clone(p1)
+			local Copy = table.clone(Tbl)
 			
-			for v, v_1 in t do
-				cloned[v_1] = true
+			for _, value1 in List do
+				Copy[value1] = true
 			end
-			return cloned
+			return Copy
 		end)
-	end, { var2 })
+	end, { UseStateResult2 }))
 end

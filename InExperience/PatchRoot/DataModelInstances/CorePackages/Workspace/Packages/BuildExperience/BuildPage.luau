@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent._Workspace.BuildExperience.BuildExperience.BuildPage)
+﻿return (require(script.Parent.Parent._Workspace.BuildExperience.BuildExperience.BuildPage))

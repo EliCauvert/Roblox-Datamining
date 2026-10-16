@@ -1,120 +1,122 @@
-﻿local vrSpatialUi = script:FindFirstAncestor("VrSpatialUi")
-local parent = vrSpatialUi.Parent
-local coreGuiService = game:GetService("CoreGui")
-local curvedSurfaceGuisEnabledEngineFeature = game:GetEngineFeature("CurvedSurfaceGuisEnabled")
-local fFlagSpatialUIHiddenPanelRaycastFixModule = require(vrSpatialUi.Flags.FFlagSpatialUIHiddenPanelRaycastFix)
-local constantsModule = require(vrSpatialUi.Constants)
-local spatialUIType = constantsModule.SpatialUIType
-local object = require(parent.LuauPolyfill).Object
+﻿local VrSpatialUi = script:FindFirstAncestor("VrSpatialUi")
+local CoreGui = game:GetService("CoreGui")
+local CurvedSurfaceGuisEnabledEngineFeature = game:GetEngineFeature("CurvedSurfaceGuisEnabled")
+local FFlagSpatialUIHiddenPanelRaycastFixModule = require(VrSpatialUi.Flags.FFlagSpatialUIHiddenPanelRaycastFix)
+local ConstantsModule = require(VrSpatialUi.Constants)
+local SpatialUIType = ConstantsModule.SpatialUIType
+local Object = require(VrSpatialUi.Parent.LuauPolyfill).Object
 local VRService = game:GetService("VRService")
-local t = {
+local config = {
 	spatialPanelProps = nil,
 	screenGuiProps = nil,
-	type = spatialUIType.ScreenUI
+	type = SpatialUIType.ScreenUI
 }
-local t_1 = {
+local config1 = {
 	Name = "ScreenGui",
 	ResetOnSpawn = false,
 	DisplayOrder = 0,
 	ZIndexBehavior = nil
 }
-local t_2 = {
+local config2 = {
 	name = "",
 	alwaysOnTop = true,
 	hidden = false,
 	curvature = 1,
 	transparency = 1,
-	partSize = constantsModule.DEFAULT_VR_PANEL_SIZE,
-	virtualScreenSize = constantsModule.DEFAULT_VR_PANEL_SIZE * constantsModule.VR_PANEL_RESOLUTION_MULTIPLIER,
+	partSize = ConstantsModule.DEFAULT_VR_PANEL_SIZE,
+	virtualScreenSize = ConstantsModule.DEFAULT_VR_PANEL_SIZE * ConstantsModule.VR_PANEL_RESOLUTION_MULTIPLIER,
 	cframe = CFrame.new(0, 0, 0)
 }
 
-local function createPanelPart(p1)
-	local part = Instance.new("Part")
-	part.Name = p1.name .. "_Part"
-	part.CFrame = p1.cframe
-	part.CastShadow = false
-	part.Size = Vector3.new(p1.partSize.X, p1.partSize.Y, 0.002)
-	part.Transparency = if p1.transparency then p1.transparency else 1
-	part.Color = Color3.new(0, 0, 0)
-	part.CanCollide = false
-	part.CanTouch = false
-	part.Anchored = true
-	part.Parent = workspace
+local function createPanelPart(AssignResult) --[[ Line: 37 ]]
+	local Part = Instance.new("Part")
+	Part.Name = AssignResult.name .. "_Part"
+	Part.CFrame = AssignResult.cframe
+	Part.CastShadow = false
+	Part.Size = Vector3.new(AssignResult.partSize.X, AssignResult.partSize.Y, 0.002)
+	Part.Transparency = if AssignResult.transparency then AssignResult.transparency else 1
+	Part.Color = Color3.new(0, 0, 0)
+	Part.CanCollide = false
+	Part.CanTouch = false
+	Part.Anchored = true
+	Part.Parent = workspace
 	
-	return part
+	return Part
 end
 
-local function createPanel(p1)
-	-- upvalues: object (ref), t (ref), spatialUIType (ref), t_2 (ref), createPanelPart (ref), fFlagSpatialUIHiddenPanelRaycastFixModule (ref), coreGuiService (ref), curvedSurfaceGuisEnabledEngineFeature (ref), t_1 (ref)
-	local var1 = object.assign({}, t, p1)
+local function createPanel(COMPATPANELPROPS) --[[ Line: 52 ]]
+	-- upvalues: Object (copy), config (copy), SpatialUIType (copy), config2 (copy), createPanelPart (copy), FFlagSpatialUIHiddenPanelRaycastFixModule (copy), CoreGui (copy), CurvedSurfaceGuisEnabledEngineFeature (copy), config1 (copy)
+	local AssignResult = Object.assign({}, config, COMPATPANELPROPS)
 	
-	if var1.type == spatialUIType.SpatialUIPartOnly then
-		local var2 = createPanelPart(object.assign({}, t_2, var1.spatialPanelProps))
+	if AssignResult.type == SpatialUIType.SpatialUIPartOnly then
+		local PanelPart = createPanelPart((Object.assign({}, config2, AssignResult.spatialPanelProps)))
 		
-		if fFlagSpatialUIHiddenPanelRaycastFixModule then
-			var2.CanQuery = false
+		if FFlagSpatialUIHiddenPanelRaycastFixModule then
+			PanelPart.CanQuery = false
 		end
-		return { type = var1.type, panelObject = var2 }
-	elseif var1.type == spatialUIType.SpatialUI then
-		local var3 = object.assign({}, t_2, var1.spatialPanelProps)
-		local var4 = createPanelPart(var3)
-		local surfaceGui = Instance.new("SurfaceGui")
-		surfaceGui.Parent = coreGuiService
-		surfaceGui.Name = var3.name .. "_SurfaceGui"
-		surfaceGui.Enabled = not var3.hidden
-		surfaceGui.CanvasSize = var3.virtualScreenSize
-		surfaceGui.AlwaysOnTop = var3.alwaysOnTop
-		surfaceGui.Shape = if curvedSurfaceGuisEnabledEngineFeature and var3.curvature ~= 0 then Enum.SurfaceGuiShape.CurvedHorizontally else Enum.SurfaceGuiShape.Flat
-		surfaceGui.HorizontalCurvature = if curvedSurfaceGuisEnabledEngineFeature then var3.curvature else 0
-		surfaceGui.Active = true
-		surfaceGui.Adornee = var4
-		surfaceGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-		surfaceGui.LightInfluence = 0
-		surfaceGui.ZOffset = 0
-		surfaceGui.Face = Enum.NormalId.Back
+		return { type = AssignResult.type, panelObject = PanelPart }
+	elseif AssignResult.type == SpatialUIType.SpatialUI then
+		local AssignResult1 = Object.assign({}, config2, AssignResult.spatialPanelProps)
+		local PanelPart = createPanelPart(AssignResult1)
+		local SurfaceGui = Instance.new("SurfaceGui")
+		SurfaceGui.Parent = CoreGui
+		SurfaceGui.Name = AssignResult1.name .. "_SurfaceGui"
+		SurfaceGui.Enabled = not AssignResult1.hidden
+		SurfaceGui.CanvasSize = AssignResult1.virtualScreenSize
+		SurfaceGui.AlwaysOnTop = AssignResult1.alwaysOnTop
+		SurfaceGui.Shape = if CurvedSurfaceGuisEnabledEngineFeature and AssignResult1.curvature ~= 0 then Enum.SurfaceGuiShape.CurvedHorizontally else Enum.SurfaceGuiShape.Flat
+		SurfaceGui.HorizontalCurvature = if CurvedSurfaceGuisEnabledEngineFeature then AssignResult1.curvature else 0
+		SurfaceGui.Active = true
+		SurfaceGui.Adornee = PanelPart
+		SurfaceGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+		SurfaceGui.LightInfluence = 0
+		SurfaceGui.ZOffset = 0
+		SurfaceGui.Face = Enum.NormalId.Back
 		
-		return { type = var1.type, panelObject = surfaceGui }
-	elseif var1.type ~= spatialUIType.ScreenUI then
-		print("Invalid panel type: " .. tostring(var1.type))
+		return { type = AssignResult.type, panelObject = SurfaceGui }
+	else
+		if AssignResult.type ~= SpatialUIType.ScreenUI then
+			print("Invalid panel type: " .. tostring(AssignResult.type))
+			
+			return nil
+		end
+		local AssignResult2 = Object.assign({}, config1, AssignResult.screenGuiProps)
+		local ScreenGui = Instance.new("ScreenGui")
+		ScreenGui.Parent = CoreGui
+		ScreenGui.Name = AssignResult2.Name
+		ScreenGui.ResetOnSpawn = AssignResult2.ResetOnSpawn
+		ScreenGui.DisplayOrder = AssignResult2.DisplayOrder
 		
-		return nil
+		if AssignResult2.ZIndexBehavior then
+			ScreenGui.ZIndexBehavior = AssignResult2.ZIndexBehavior
+		end
+		return { type = AssignResult.type, panelObject = ScreenGui }
 	end
-	local var5 = object.assign({}, t_1, var1.screenGuiProps)
-	local screenGui = Instance.new("ScreenGui")
-	screenGui.Parent = coreGuiService
-	screenGui.Name = var5.Name
-	screenGui.ResetOnSpawn = var5.ResetOnSpawn
-	screenGui.DisplayOrder = var5.DisplayOrder
-	
-	if var5.ZIndexBehavior then
-		screenGui.ZIndexBehavior = var5.ZIndexBehavior
-	end
-	return { type = var1.type, panelObject = screenGui }
 end
 
-return function(p1)
-	-- upvalues: VRService (ref), createPanel (ref), constantsModule (ref), spatialUIType (ref)
+return function(p1) --[[ Line: 109 ]]
+	-- upvalues: VRService (copy), createPanel (copy), ConstantsModule (copy), SpatialUIType (copy)
 	if VRService.VREnabled then
-		local var1 = createPanel(constantsModule.COMPAT_PANEL_PROPS_MAP[p1.panelType])
+		local Panel = createPanel(ConstantsModule.COMPAT_PANEL_PROPS_MAP[p1.panelType])
 		
-		return if var1 == nil then nil else {
+		return if Panel == nil then nil else {
 			headScale = 1,
-			panelObject = var1.panelObject,
-			uiType = var1.type,
+			panelObject = Panel.panelObject,
+			uiType = Panel.type,
 			panelType = p1.panelType,
-			panelPositionProps = constantsModule.SPATIAL_PANEL_POSITION_PROPS_MAP[p1.panelType]
+			panelPositionProps = ConstantsModule.SPATIAL_PANEL_POSITION_PROPS_MAP[p1.panelType]
+		}
+	else
+		local Panel = createPanel({
+			type = SpatialUIType.ScreenUI,
+			screenGuiProps = p1.screenGuiProps
+		})
+		
+		return if Panel == nil then nil else {
+			panelPositionProps = nil,
+			panelObject = Panel.panelObject,
+			uiType = Panel.type,
+			panelType = p1.panelType
 		}
 	end
-	local var2 = createPanel({
-		type = spatialUIType.ScreenUI,
-		screenGuiProps = p1.screenGuiProps
-	})
-	
-	return if var2 == nil then nil else {
-		panelPositionProps = nil,
-		panelObject = var2.panelObject,
-		uiType = var2.type,
-		panelType = p1.panelType
-	}
 end

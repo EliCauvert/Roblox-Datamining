@@ -1,44 +1,44 @@
-﻿local parent = script:FindFirstAncestor("ChatLineReporting").Parent
-local fFlagExpChatPresetChatEnabled = require(parent.ExpChatShared).Flags.FFlagExpChatPresetChatEnabled
-local fFlagEnableChatReportingTextChannelTag = require(parent.SharedFlags).FFlagEnableChatReportingTextChannelTag
-local changePresetTagName = game:DefineFastFlag("ChangePresetTagName", false)
-local t = { Variant = { CLRv1 = "CLRv1" } }
+﻿local Parent = script:FindFirstAncestor("ChatLineReporting").Parent
+local FFlagExpChatPresetChatEnabled = require(Parent.ExpChatShared).Flags.FFlagExpChatPresetChatEnabled
+local FFlagEnableChatReportingTextChannelTag = require(Parent.SharedFlags).FFlagEnableChatReportingTextChannelTag
+local ChangePresetTagName = game:DefineFastFlag("ChangePresetTagName", false)
+local config = { Variant = { CLRv1 = "CLRv1" } }
 
-function buildReport(p1, p2, p3, p4, p5, p6, p7, p8)
-	-- upvalues: t (ref), fFlagExpChatPresetChatEnabled (ref), changePresetTagName (ref), fFlagEnableChatReportingTextChannelTag (ref)
-	local t_1 = {
+function buildReport(p1, Data, Data1, Data2, Data3, Data4, Data5, p2) --[[ Line: 15 ]]
+	-- upvalues: config (copy), FFlagExpChatPresetChatEnabled (copy), ChangePresetTagName (copy), FFlagEnableChatReportingTextChannelTag (copy)
+	local config1 = {
 		tags = {
 			ENTRY_POINT = { valueList = { { data = "in-experience" } } },
 			SUBMITTER_USER_ID = { valueList = { { data = tostring(p1) } } },
-			REPORTED_ABUSE_CATEGORY = { valueList = { { data = p3 } } },
-			REPORTER_COMMENT = { valueList = { { data = p4 } } },
+			REPORTED_ABUSE_CATEGORY = { valueList = { { data = Data1 } } },
+			REPORTER_COMMENT = { valueList = { { data = Data2 } } },
 			REPORTED_ABUSE_VECTOR = { valueList = { { data = "chat" } } },
-			REPORT_TARGET_USER_ID = { valueList = { { data = p2 } } },
-			VARIANT = { valueList = { { data = t.Variant.CLRv1 } } }
+			REPORT_TARGET_USER_ID = { valueList = { { data = Data } } },
+			VARIANT = { valueList = { { data = config.Variant.CLRv1 } } }
 		}
 	}
 	
-	if p5 then
-		t_1.tags.REPORT_TARGET_MESSAGE_ID = { valueList = { { data = p5 } } }
+	if Data3 then
+		config1.tags.REPORT_TARGET_MESSAGE_ID = { valueList = { { data = Data3 } } }
 	end
-	if fFlagExpChatPresetChatEnabled and p6 and p6 ~= "" then
-		if changePresetTagName then
-			t_1.tags.PRESET_ID = { valueList = { { data = p6 } } }
+	if FFlagExpChatPresetChatEnabled and Data4 and Data4 ~= "" then
+		if ChangePresetTagName then
+			config1.tags.PRESET_ID = { valueList = { { data = Data4 } } }
 		else
-			t_1.tags.REPORT_TARGET_PRESET_ID = { valueList = { { data = p6 } } }
+			config1.tags.REPORT_TARGET_PRESET_ID = { valueList = { { data = Data4 } } }
 		end
-		if p7 and p7 ~= "" then
-			if changePresetTagName then
-				t_1.tags.PRESET_CHAT_VERSION = { valueList = { { data = p7 } } }
+		if Data5 and Data5 ~= "" then
+			if ChangePresetTagName then
+				config1.tags.PRESET_CHAT_VERSION = { valueList = { { data = Data5 } } }
 			else
-				t_1.tags.REPORT_TARGET_PRESET_VERSION = { valueList = { { data = p7 } } }
+				config1.tags.REPORT_TARGET_PRESET_VERSION = { valueList = { { data = Data5 } } }
 			end
 		end
 	end
-	if fFlagEnableChatReportingTextChannelTag then
-		t_1.tags.IN_GAME_CHAT_TEXT_CHANNEL = { valueList = { { data = p8 or "RBXGlobal" } } }
+	if FFlagEnableChatReportingTextChannelTag then
+		config1.tags.IN_GAME_CHAT_TEXT_CHANNEL = { valueList = { { data = p2 or "RBXGlobal" } } }
 	end
-	return t_1
+	return config1
 end
 
 return buildReport

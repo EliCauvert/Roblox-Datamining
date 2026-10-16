@@ -1,45 +1,44 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local sharedFlagsModule = require(parent.SharedFlags)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local getIconRichText = foundationModule.Utility.getIconRichText
-local fFlagAXMISWithBlackbird = sharedFlagsModule.FFlagAXMISWithBlackbird
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local GetIconRichTextFunction = FoundationModule.Utility.getIconRichText
+local FFlagAXMISWithBlackbird = require(Parent.SharedFlags).FFlagAXMISWithBlackbird
 
-return function(p1)
-	-- upvalues: useLocalization (ref), reactModule (ref), foundationModule (ref), fFlagAXMISWithBlackbird (ref), getIconRichText (ref)
-	return reactModule.createElement(foundationModule.View, {
+return function(Frame) --[[ Line: 21 | Named "CheckoutTotalLines" ]]
+	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), FoundationModule (copy), FFlagAXMISWithBlackbird (copy), GetIconRichTextFunction (copy)
+	return ReactModule.createElement(FoundationModule.View, {
 		tag = "size-full-0 auto-y col gap-small",
-		LayoutOrder = if fFlagAXMISWithBlackbird then p1.LayoutOrder else nil
+		LayoutOrder = if FFlagAXMISWithBlackbird then Frame.LayoutOrder else nil
 	}, {
-		TotalLine = reactModule.createElement(foundationModule.View, {
+		TotalLine = ReactModule.createElement(FoundationModule.View, {
 			tag = "size-full-0 auto-y fill flex-between items-center row gap-small"
 		}, {
-			ItemCount = reactModule.createElement(foundationModule.Text, {
+			ItemCount = ReactModule.createElement(FoundationModule.Text, {
 				tag = "auto-xy text-title-medium content-emphasis",
 				LayoutOrder = 1,
-				Text = useLocalization({
+				Text = UseLocalizationFunction({
 					totalItemsLabel = {
 						"Feature.Catalog.Label.TotalItemsParenthesis",
-						itemCount = p1.itemCount
+						itemCount = Frame.itemCount
 					}
 				}).totalItemsLabel
 			}),
-			TotalPrice = reactModule.createElement(foundationModule.View, {
+			TotalPrice = ReactModule.createElement(FoundationModule.View, {
 				tag = "auto-xy row items-center gap-small",
 				LayoutOrder = 2
 			}, {
-				OriginalPrice = if p1.totalPrice and p1.totalOriginalPrice and p1.totalPrice < p1.totalOriginalPrice then reactModule.createElement(foundationModule.Text, {
+				OriginalPrice = if Frame.totalPrice and Frame.totalOriginalPrice and Frame.totalPrice < Frame.totalOriginalPrice then ReactModule.createElement(FoundationModule.Text, {
 					tag = "auto-xy text-title-small content-muted",
 					LayoutOrder = 1,
 					RichText = true,
-					Text = "<s>" .. `{getIconRichText(foundationModule.Enums.IconName.Robux)} {p1.totalOriginalPrice}` .. "</s>"
+					Text = "<s>" .. `{GetIconRichTextFunction(FoundationModule.Enums.IconName.Robux)} {Frame.totalOriginalPrice}` .. "</s>"
 				}) else nil,
-				TotalPriceText = reactModule.createElement(foundationModule.Text, {
+				TotalPriceText = ReactModule.createElement(FoundationModule.Text, {
 					tag = "auto-xy text-title-medium content-emphasis",
 					LayoutOrder = 2,
 					RichText = true,
-					Text = `{getIconRichText(foundationModule.Enums.IconName.Robux)} {p1.totalPrice}`
+					Text = `{GetIconRichTextFunction(FoundationModule.Enums.IconName.Robux)} {Frame.totalPrice}`
 				})
 			})
 		})

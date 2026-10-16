@@ -1,63 +1,70 @@
-﻿local appBlox = script:FindFirstAncestor("AppBlox")
-local parent = appBlox.Parent
-local builderIconsModule = require(parent.BuilderIcons)
-local cryoModule = require(parent.Cryo)
-local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local sharedFlagsModule = require(parent.SharedFlags)
-local threeDotsHorizontal = builderIconsModule.Icon.ThreeDotsHorizontal
-local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
-local useFocusNavigableSurfaceRegistryConnection = focusNavigationUtilsModule.useFocusNavigableSurfaceRegistryConnection
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local iconButton = foundationModule.IconButton
-local iconSize = foundationModule.Enums.IconSize
-local inputSize = foundationModule.Enums.InputSize
-local popoverAlign = foundationModule.Enums.PopoverAlign
-local popoverSide = foundationModule.Enums.PopoverSide
-local menu = foundationModule.Menu
-local view = foundationModule.View
-local getOverflowMenuSignalStoreModule = require(appBlox.OverflowMenu.getOverflowMenuSignalStore)
-local useOverflowMenuOpenModule = require(appBlox.OverflowMenu.useOverflowMenuOpen)
-local fFlagLuaAppSduiGameTileFeedback = sharedFlagsModule.FFlagLuaAppSduiGameTileFeedback
+﻿local AppBlox = script:FindFirstAncestor("AppBlox")
+local Parent = AppBlox.Parent
+local CryoModule = require(Parent.Cryo)
+local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local ThreeDotsHorizontal = require(Parent.BuilderIcons).Icon.ThreeDotsHorizontal
+local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
+local UseFocusNavigableSurfaceRegistryConnectionFunction = FocusNavigationUtilsModule.useFocusNavigableSurfaceRegistryConnection
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local IconButton = FoundationModule.IconButton
+local IconSize = FoundationModule.Enums.IconSize
+local InputSize = FoundationModule.Enums.InputSize
+local PopoverAlign = FoundationModule.Enums.PopoverAlign
+local PopoverSide = FoundationModule.Enums.PopoverSide
+local Menu = FoundationModule.Menu
+local View = FoundationModule.View
+local GetOverflowMenuSignalStoreModule = require(AppBlox.OverflowMenu.getOverflowMenuSignalStore)
+local UseOverflowMenuOpenModule = require(AppBlox.OverflowMenu.useOverflowMenuOpen)
+local FFlagLuaAppSduiGameTileFeedback = require(Parent.SharedFlags).FFlagLuaAppSduiGameTileFeedback
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), getOverflowMenuSignalStoreModule (ref), useOverflowMenuOpenModule (ref), cryoModule (ref), useFocusNavigableSurfaceRegistryConnection (ref), focusNavigableSurfaceIdentifierEnum (ref), view (ref), fFlagLuaAppSduiGameTileFeedback (ref), iconButton (ref), threeDotsHorizontal (ref), iconSize (ref), buttonVariant (ref), menu (ref), popoverAlign (ref), popoverSide (ref), inputSize (ref)
-	local menuKey = p1.menuKey
-	local var1 = reactModule.useRef(nil)
-	local var2 = getOverflowMenuSignalStoreModule()
-	local var3 = useOverflowMenuOpenModule(menuKey)
-	local var4 = reactModule.useCallback(function()
-		-- upvalues: var3 (ref), var2 (ref), menuKey (ref), p1 (ref)
-		var2.toggleMenu(menuKey)
+return ReactModule.memo(function(p1) --[[ Line: 58 | Named "OverflowMenu" ]]
+	-- upvalues: ReactModule (copy), GetOverflowMenuSignalStoreModule (copy), UseOverflowMenuOpenModule (copy), CryoModule (copy), UseFocusNavigableSurfaceRegistryConnectionFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), View (copy), FFlagLuaAppSduiGameTileFeedback (copy), IconButton (copy), ThreeDotsHorizontal (copy), IconSize (copy), ButtonVariant (copy), Menu (copy), PopoverAlign (copy), PopoverSide (copy), InputSize (copy)
+	local MenuKey = p1.menuKey
+	local UseRefResult = ReactModule.useRef(nil)
+	local OverflowMenuSignalStoreModule = GetOverflowMenuSignalStoreModule()
+	local UseOverflowMenuOpenModuleResult = UseOverflowMenuOpenModule(MenuKey)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 65 ]]
+		-- upvalues: UseOverflowMenuOpenModuleResult (copy), OverflowMenuSignalStoreModule (copy), MenuKey (copy), p1 (copy)
+		OverflowMenuSignalStoreModule.toggleMenu(MenuKey)
 		
 		if p1.onMenuOpenChanged then
-			p1.onMenuOpenChanged(var3)
+			p1.onMenuOpenChanged(UseOverflowMenuOpenModuleResult)
 		end
-	end, { menuKey, var2, var3, p1.onMenuOpenChanged })
-	local var5 = reactModule.useCallback(function()
-		-- upvalues: var2 (ref), menuKey (ref), p1 (ref)
-		var2.closeMenu(menuKey)
+	end, {
+		MenuKey,
+		OverflowMenuSignalStoreModule,
+		UseOverflowMenuOpenModuleResult,
+		p1.onMenuOpenChanged
+	})
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 81 ]]
+		-- upvalues: OverflowMenuSignalStoreModule (copy), MenuKey (copy), p1 (copy)
+		OverflowMenuSignalStoreModule.closeMenu(MenuKey)
 		
 		if p1.onMenuOpenChanged then
 			p1.onMenuOpenChanged(true)
 		end
-	end, { menuKey, var2, p1.onMenuOpenChanged })
-	local var6 = reactModule.useMemo(function()
-		-- upvalues: cryoModule (copy), p1 (ref), var2 (ref), menuKey (ref)
-		return cryoModule.List.map(p1.menuItems, function(p2)
-			-- upvalues: var2 (copy), menuKey (copy), p1 (copy)
+	end, {
+		MenuKey,
+		OverflowMenuSignalStoreModule,
+		p1.onMenuOpenChanged
+	})
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 96 ]]
+		-- upvalues: CryoModule (upval), p1 (copy), OverflowMenuSignalStoreModule (copy), MenuKey (copy)
+		return CryoModule.List.map(p1.menuItems, function(p2) --[[ Line: 97 ]]
+			-- upvalues: OverflowMenuSignalStoreModule (upval), MenuKey (upval), p1 (upval)
 			return {
 				icon = p2.icon,
 				id = p2.id,
 				text = p2.text,
-				onActivated = function()
-					-- upvalues: p2 (ref), var2 (copy), menuKey (copy), p1 (copy)
-					task.spawn(function()
-						-- upvalues: p2 (copy)
+				onActivated = function() --[[ Line: 102 ]]
+					-- upvalues: p2 (copy), OverflowMenuSignalStoreModule (upval), MenuKey (upval), p1 (upval)
+					task.spawn(function() --[[ Line: 103 ]]
+						-- upvalues: p2 (upval)
 						p2.onActivated()
 					end)
-					var2.closeMenu(menuKey)
+					OverflowMenuSignalStoreModule.closeMenu(MenuKey)
 					
 					if p1.onMenuOpenChanged then
 						p1.onMenuOpenChanged(true)
@@ -65,60 +72,65 @@ return reactModule.memo(function(p1)
 				end
 			}
 		end)
-	end, { p1.menuItems, menuKey, var2, p1.onMenuOpenChanged })
-	local var7 = reactModule.useRef(menuKey)
-	reactModule.useEffect(function()
-		-- upvalues: var7 (ref), menuKey (ref), var2 (ref)
-		if var7.current ~= menuKey and var2 then
-			var7.current = menuKey
-			var2.closeMenu(menuKey)
+	end, {
+		p1.menuItems,
+		MenuKey,
+		OverflowMenuSignalStoreModule,
+		p1.onMenuOpenChanged
+	})
+	local UseRefResult1 = ReactModule.useRef(MenuKey)
+	ReactModule.useEffect(function() --[[ Line: 124 ]]
+		-- upvalues: UseRefResult1 (copy), MenuKey (copy), OverflowMenuSignalStoreModule (copy)
+		if UseRefResult1.current ~= MenuKey and OverflowMenuSignalStoreModule then
+			UseRefResult1.current = MenuKey
+			OverflowMenuSignalStoreModule.closeMenu(MenuKey)
 		end
-	end, { menuKey, var2 })
-	local var8, var9 = reactModule.useState(nil)
-	local var10 = reactModule.useCallback(function(p2)
-		-- upvalues: var9 (ref), p1 (ref)
-		var9(p2)
+	end, { MenuKey, OverflowMenuSignalStoreModule })
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	local UseResult2 = ReactModule.useCallback(function(p2) --[[ Line: 132 ]]
+		-- upvalues: UseStateResult2 (copy), p1 (copy)
+		UseStateResult2(p2)
 		
 		if p1.setFocusRef then
 			p1.setFocusRef(p2)
 		end
 	end, { p1.setFocusRef })
-	useFocusNavigableSurfaceRegistryConnection(var8, focusNavigableSurfaceIdentifierEnum.ContextualMenu, true)
+	UseFocusNavigableSurfaceRegistryConnectionFunction(UseStateResult, FocusNavigableSurfaceIdentifierEnum.ContextualMenu, true)
 	
-	return if not (not p1.shouldShowAnchor and not var3) then reactModule.createElement(reactModule.Fragment, nil, {
-		MenuAnchor = if p1.hasOverflowButton and (p1.shouldShowAnchor or var3) then reactModule.createElement(view, {
+	return if p1.shouldShowAnchor or UseOverflowMenuOpenModuleResult then ReactModule.createElement(ReactModule.Fragment, nil, {
+		MenuAnchor = if p1.hasOverflowButton and (p1.shouldShowAnchor or UseOverflowMenuOpenModuleResult) then ReactModule.createElement(View, {
 			AnchorPoint = p1.anchorPoint,
 			Position = p1.anchorPosition,
-			ZIndex = if fFlagLuaAppSduiGameTileFeedback then p1.zIndex else nil,
-			tag = if p1.buttonTag ~= nil then "auto-xy radius-circle" else p1.buttonTag,
+			ZIndex = if FFlagLuaAppSduiGameTileFeedback then p1.zIndex else nil,
+			tag = if p1.buttonTag == nil then "auto-xy radius-circle" else p1.buttonTag,
 			backgroundStyle = p1.buttonIconBackgroundStyle,
-			ref = var1
+			ref = UseRefResult
 		}, {
-			IconButton = reactModule.createElement(iconButton, {
-				icon = p1.buttonIcon or threeDotsHorizontal,
-				isCircular = p1.buttonIsCircular ~= nil or p1.buttonIsCircular,
-				onActivated = var4,
-				size = p1.buttonIconSize or iconSize.Medium,
-				variant = p1.buttonVariant or buttonVariant.Utility
+			IconButton = ReactModule.createElement(IconButton, {
+				icon = p1.buttonIcon or ThreeDotsHorizontal,
+				isCircular = p1.buttonIsCircular == nil or p1.buttonIsCircular,
+				onActivated = UseResult,
+				size = p1.buttonIconSize or IconSize.Medium,
+				variant = p1.buttonVariant or ButtonVariant.Utility
 			})
-		}) else reactModule.createElement("Frame", {
+		}) else ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			AnchorPoint = p1.anchorPoint,
 			Position = p1.anchorPosition,
 			Size = UDim2.fromScale(0, 0),
-			ZIndex = if fFlagLuaAppSduiGameTileFeedback then p1.zIndex else nil,
-			ref = var1
+			ZIndex = if FFlagLuaAppSduiGameTileFeedback then p1.zIndex else nil,
+			ref = UseRefResult
 		}),
-		OverflowMenu = if var3 then reactModule.createElement(menu, {
+		OverflowMenu = if UseOverflowMenuOpenModuleResult then ReactModule.createElement(Menu, {
 			isOpen = true,
-			align = p1.popoverAlign or popoverAlign.End,
-			items = var6,
-			onPressedOutside = var5,
-			side = p1.popoverSide or popoverSide.Bottom,
-			size = p1.menuItemSize or inputSize.Medium,
+			align = p1.popoverAlign or PopoverAlign.End,
+			items = UseMemoResult,
+			onPressedOutside = UseResult1,
+			side = p1.popoverSide or PopoverSide.Bottom,
+			size = p1.menuItemSize or InputSize.Medium,
 			width = p1.menuWidth,
-			anchorRef = var1,
-			ref = var10
+			anchorRef = UseRefResult,
+			ref = UseResult2
 		}) else nil
 	}) else nil
 end)

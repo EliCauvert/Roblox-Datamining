@@ -1,18 +1,18 @@
-﻿local dependenciesModule = require(script:FindFirstAncestor("SocialLibraries").dependencies)
-local llama = dependenciesModule.llama
-local isEnumModule = require(script.Parent.Parent.Utils.isEnum)
-local t = dependenciesModule.t
-local formatKeyValidationErrorModule = require(script.Parent.formatKeyValidationError)
-local var1 = require(script.Parent.formatErrorForIncorrectKey)(t.strictInterface({ name = t.any, counter = t.optional(t.any) }))
+﻿local DependenciesModule = require(script:FindFirstAncestor("SocialLibraries").dependencies)
+local Llama = DependenciesModule.llama
+local IsEnumModule = require(script.Parent.Parent.Utils.isEnum)
+local T = DependenciesModule.t
+local FormatKeyValidationErrorModule = require(script.Parent.formatKeyValidationError)
+local Callback = require(script.Parent.formatErrorForIncorrectKey)(T.strictInterface({ name = T.any, counter = T.optional(T.any) }))
 
-return function(p1)
-	-- upvalues: llama (ref), isEnumModule (ref), formatKeyValidationErrorModule (ref), var1 (ref)
-	llama.Dictionary.map(p1, function(p2, p3)
-		-- upvalues: isEnumModule (copy), formatKeyValidationErrorModule (copy), var1 (copy)
-		local var2 = if isEnumModule(p3) then p3.rawValue() else p3
-		assert(type(p2.name) == "string", formatKeyValidationErrorModule("name", "a string", var2))
-		assert(if type(p2.counter) ~= "number" then p2.counter == nil else true, formatKeyValidationErrorModule("counter", "nil or a number", var2))
-		assert(var1(p2, var2))
+return function(p1): boolean --[[ Line: 14 ]]
+	-- upvalues: Llama (copy), IsEnumModule (copy), FormatKeyValidationErrorModule (copy), Callback (copy)
+	Llama.Dictionary.map(p1, function(p2, p3) --[[ Line: 15 ]]
+		-- upvalues: IsEnumModule (upval), FormatKeyValidationErrorModule (upval), Callback (upval)
+		local RawValueResult = if IsEnumModule(p3) then p3.rawValue() else p3
+		assert(type(p2.name) == "string", FormatKeyValidationErrorModule("name", "a string", RawValueResult))
+		assert(type(p2.counter) == "number" or p2.counter == nil, FormatKeyValidationErrorModule("counter", "nil or a number", RawValueResult))
+		assert(Callback(p2, RawValueResult))
 	end)
 	
 	return true

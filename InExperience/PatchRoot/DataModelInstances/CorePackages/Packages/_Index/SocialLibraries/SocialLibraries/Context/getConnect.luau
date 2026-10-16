@@ -1,26 +1,26 @@
-﻿local dependenciesModule = require(script:FindFirstAncestor("SocialLibraries").dependencies)
-local roact = dependenciesModule.Roact
-local llama = dependenciesModule.llama
+﻿local DependenciesModule = require(script:FindFirstAncestor("SocialLibraries").dependencies)
+local Roact = DependenciesModule.Roact
+local Llama = DependenciesModule.llama
 
-return function(p1)
-	-- upvalues: roact (ref), llama (ref)
-	return function(p2)
-		-- upvalues: roact (copy), p1 (ref), llama (copy)
-		return function(p3)
-			-- upvalues: roact (copy), p1 (copy), llama (copy), p2 (ref)
-			local var1 = roact.Component:extend("Connected-" .. tostring(p3))
+return function(p1) --[[ Line: 6 ]]
+	-- upvalues: Roact (copy), Llama (copy)
+	return function(Callback) --[[ Line: 7 ]]
+		-- upvalues: Roact (upval), p1 (copy), Llama (upval)
+		return function(p2) --[[ Line: 8 ]]
+			-- upvalues: Roact (upval), p1 (upval), Llama (upval), Callback (copy)
+			local ExtendResult = Roact.Component:extend("Connected-" .. tostring(p2))
 			
-			function var1.render(p4)
-				-- upvalues: roact (copy), p1 (copy), p3 (ref), llama (copy), p2 (copy)
-				return roact.createElement(p1.Consumer, {
-					render = function(p5)
-						-- upvalues: roact (copy), p3 (copy), llama (copy), p4 (ref), p2 (copy)
-						return roact.createElement(p3, llama.Dictionary.join(p4.props, p2(p5)))
+			function ExtendResult.render(p3) --[[ Line: 11 ]]
+				-- upvalues: Roact (upval), p1 (upval), p2 (copy), Llama (upval), Callback (upval)
+				return Roact.createElement(p1.Consumer, {
+					render = function(p4) --[[ Line: 13 ]]
+						-- upvalues: Roact (upval), p2 (upval), Llama (upval), p3 (copy), Callback (upval)
+						return Roact.createElement(p2, Llama.Dictionary.join(p3.props, Callback(p4)))
 					end
 				})
 			end
 			
-			return var1
+			return ExtendResult
 		end
 	end
 end

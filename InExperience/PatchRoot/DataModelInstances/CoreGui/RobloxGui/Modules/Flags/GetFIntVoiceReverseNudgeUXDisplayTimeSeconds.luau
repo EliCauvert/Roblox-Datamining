@@ -1,5 +1,5 @@
 ﻿game:DefineFastInt("VoiceReverseNudgeUXDisplayTimeSeconds", 10)
 
-return function()
+return function() --[[ Line: 2 ]]
 	return game:GetFastInt("VoiceReverseNudgeUXDisplayTimeSeconds")
 end

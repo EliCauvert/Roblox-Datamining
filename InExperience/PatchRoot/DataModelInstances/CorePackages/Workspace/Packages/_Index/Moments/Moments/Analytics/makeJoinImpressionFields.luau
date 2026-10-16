@@ -1,27 +1,27 @@
-﻿local parent = script:FindFirstAncestor("Moments").Parent
-local momentsCommonModule = require(parent.MomentsCommon)
-local _ = require(parent.MomentsTypes)
+﻿local Parent = script:FindFirstAncestor("Moments").Parent
+local MomentsCommonModule = require(Parent.MomentsCommon)
+local _ = require(Parent.MomentsTypes)
 
-return function(p1, p2)
-	-- upvalues: momentsCommonModule (ref)
-	local recommendationMetadata = p1.recommendationMetadata
-	local var1 = if recommendationMetadata ~= nil then nil else recommendationMetadata.feedItemId
+return function(p1, Entry) --[[ Line: 33 | Named "makeJoinImpressionFields" ]]
+	-- upvalues: MomentsCommonModule (copy)
+	local RecommendationMetadata = p1.recommendationMetadata
+	local FeedItemId = if RecommendationMetadata == nil then nil else RecommendationMetadata.feedItemId
 	
-	if var1 == nil or var1 == "" then
-		momentsCommonModule.Analytics.reportMomentSkip("join_impression", if var1 == nil then "nil" else "empty", { entry = p2 })
+	if FeedItemId == nil or FeedItemId == "" then
+		MomentsCommonModule.Analytics.reportMomentSkip("join_impression", if FeedItemId == nil then "nil" else "empty", { entry = Entry })
 		
 		return nil
 	end
-	local t = {
+	local config = {
 		surface = "feed_cta",
-		feedItemId = var1,
-		feedSessionId = recommendationMetadata.tracingId or "",
-		source = p2
+		feedItemId = FeedItemId,
+		feedSessionId = RecommendationMetadata.tracingId or "",
+		source = Entry
 	}
-	local universeId = p1.metadata.universeId
+	local UniverseId: number = p1.metadata.universeId
 	
-	if universeId ~= nil and universeId > 0 then
-		t.destinationUniverseId = tostring(universeId)
+	if UniverseId ~= nil and UniverseId > 0 then
+		config.destinationUniverseId = tostring(UniverseId)
 	end
-	return t
+	return config
 end

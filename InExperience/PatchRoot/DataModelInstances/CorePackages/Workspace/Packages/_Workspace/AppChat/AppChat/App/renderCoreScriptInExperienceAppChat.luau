@@ -1,73 +1,76 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-local reactModule = require(parent.React)
-local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
-local reactRobloxModule = require(parent.ReactRoblox)
-local roduxModule = require(parent.Rodux)
-local provider = focusNavigationUtilsModule.FocusNavigableSurfaceRegistry.Provider
-local appChatReducerModule = require(appChat.App.AppChatReducer)
-local inExperienceAppChatModule = require(appChat.App.InExperienceAppChat)
-local inExperienceAppChatProvidersModule = require(appChat.App.InExperienceAppChatProviders)
-local fFlagAppChatSignalsMessageStoreModule = require(appChat.Flags.FFlagAppChatSignalsMessageStore)
-local fFlagAppChatConversationStoreModule = require(appChat.Flags.FFlagAppChatConversationStore)
-local fFlagAppChatFriendsTabIxpEnabledModule = require(appChat.Flags.FFlagAppChatFriendsTabIxpEnabled)
-local fFlagAppChatUnreadMessageCountStoreModule = require(appChat.Flags.FFlagAppChatUnreadMessageCountStore)
-local fFlagExpChatEnableFriendsTab = require(parent.SharedFlags).FFlagExpChatEnableFriendsTab
-local chatModerationStatusHydrationMiddlewareModule = require(appChat.Middleware.ChatModerationStatusHydrationMiddleware)
-local signalsConversationMiddlewareModule = require(appChat.Middleware.SignalsConversationMiddleware)
-local signalsMessageIngestionMiddlewareModule = require(appChat.Middleware.SignalsMessageIngestionMiddleware)
-local fFlagAppChatPerfTrackingModule = require(appChat.Flags.FFlagAppChatPerfTracking)
-local appChatPerfTrackerModule = require(appChat.Telemetry.AppChatPerfTracker)
-local chatPlacementContextModule = require(appChat.Contexts.ChatPlacementContext)
+﻿local CoreGui = game:GetService("CoreGui")
+local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local ReactModule = require(Parent.React)
+local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
+local ReactRobloxModule = require(Parent.ReactRoblox)
+local RoduxModule = require(Parent.Rodux)
+local Provider = require(Parent.FocusNavigationUtils).FocusNavigableSurfaceRegistry.Provider
+local AppChatReducerModule = require(AppChat.App.AppChatReducer)
+local InExperienceAppChatModule = require(AppChat.App.InExperienceAppChat)
+local InExperienceAppChatProvidersModule = require(AppChat.App.InExperienceAppChatProviders)
+local FFlagAppChatSignalsMessageStoreModule = require(AppChat.Flags.FFlagAppChatSignalsMessageStore)
+local FFlagAppChatConversationStoreModule = require(AppChat.Flags.FFlagAppChatConversationStore)
+local FFlagAppChatFriendsTabIxpEnabledModule = require(AppChat.Flags.FFlagAppChatFriendsTabIxpEnabled)
+local FFlagAppChatUnreadMessageCountStoreModule = require(AppChat.Flags.FFlagAppChatUnreadMessageCountStore)
+local FFlagExpChatEnableFriendsTab = require(Parent.SharedFlags).FFlagExpChatEnableFriendsTab
+local FFlagUseSignalsForSquadExperienceInvite = require(Parent.SharedFlags).FFlagUseSignalsForSquadExperienceInvite
+local ChatModerationStatusHydrationMiddlewareModule = require(AppChat.Middleware.ChatModerationStatusHydrationMiddleware)
+local SignalsConversationMiddlewareModule = require(AppChat.Middleware.SignalsConversationMiddleware)
+local SignalsMessageIngestionMiddlewareModule = require(AppChat.Middleware.SignalsMessageIngestionMiddleware)
+local FFlagAppChatPerfTrackingModule = require(AppChat.Flags.FFlagAppChatPerfTracking)
+local AppChatPerfTrackerModule = require(AppChat.Telemetry.AppChatPerfTracker)
+local ChatPlacementContextModule = require(AppChat.Contexts.ChatPlacementContext)
 
-return function(p1, p2, p3)
-	-- upvalues: coreGuiService (ref), fFlagAppChatPerfTrackingModule (ref), appChatPerfTrackerModule (ref), chatPlacementContextModule (ref), reactRobloxModule (ref), roduxModule (ref), fFlagAppChatSignalsMessageStoreModule (ref), signalsMessageIngestionMiddlewareModule (ref), fFlagAppChatConversationStoreModule (ref), signalsConversationMiddlewareModule (ref), fFlagAppChatFriendsTabIxpEnabledModule (ref), fFlagExpChatEnableFriendsTab (ref), appChat (ref), chatModerationStatusHydrationMiddlewareModule (ref), fFlagAppChatUnreadMessageCountStoreModule (ref), appChatReducerModule (ref), reactFocusNavigationModule (ref), reactModule (ref), provider (ref), inExperienceAppChatProvidersModule (ref), inExperienceAppChatModule (ref)
-	local appChat_1 = Instance.new("Folder")
-	appChat_1.Name = "AppChat"
-	appChat_1.Parent = coreGuiService
+return function(ApolloClient, ParentContainerContext, UpdateAppChatUnreadMessagesCount) --[[ Line: 33 ]]
+	-- upvalues: CoreGui (copy), FFlagAppChatPerfTrackingModule (copy), AppChatPerfTrackerModule (copy), ChatPlacementContextModule (copy), ReactRobloxModule (copy), RoduxModule (copy), FFlagAppChatSignalsMessageStoreModule (copy), SignalsMessageIngestionMiddlewareModule (copy), FFlagAppChatConversationStoreModule (copy), SignalsConversationMiddlewareModule (copy), FFlagAppChatFriendsTabIxpEnabledModule (copy), FFlagExpChatEnableFriendsTab (copy), AppChat (copy), ChatModerationStatusHydrationMiddlewareModule (copy), FFlagAppChatUnreadMessageCountStoreModule (copy), FFlagUseSignalsForSquadExperienceInvite (copy), Parent (copy), AppChatReducerModule (copy), ReactFocusNavigationModule (copy), ReactModule (copy), Provider (copy), InExperienceAppChatProvidersModule (copy), InExperienceAppChatModule (copy)
+	local AppChat1 = Instance.new("Folder")
+	AppChat1.Name = "AppChat"
+	AppChat1.Parent = CoreGui
 	
-	if fFlagAppChatPerfTrackingModule then
-		appChatPerfTrackerModule.setSharedContext({
-			placement = chatPlacementContextModule.Enum.InExperienceDefault
+	if FFlagAppChatPerfTrackingModule then
+		AppChatPerfTrackerModule.setSharedContext({
+			placement = ChatPlacementContextModule.Enum.InExperienceDefault
 		})
 	end
-	local var1 = reactRobloxModule.createRoot(appChat_1)
-	local list = { roduxModule.thunkMiddleware }
+	local Root = ReactRobloxModule.createRoot(AppChat1)
+	local List = { RoduxModule.thunkMiddleware }
 	
-	if fFlagAppChatSignalsMessageStoreModule then
-		table.insert(list, signalsMessageIngestionMiddlewareModule)
+	if FFlagAppChatSignalsMessageStoreModule then
+		table.insert(List, SignalsMessageIngestionMiddlewareModule)
 	end
-	if fFlagAppChatConversationStoreModule then
-		table.insert(list, signalsConversationMiddlewareModule)
+	if FFlagAppChatConversationStoreModule then
+		table.insert(List, SignalsConversationMiddlewareModule)
 	end
-	if fFlagAppChatFriendsTabIxpEnabledModule or fFlagExpChatEnableFriendsTab then
-		table.insert(list, require(appChat.Middleware.SignalsFriendsChatSettingsMiddleware))
+	if FFlagAppChatFriendsTabIxpEnabledModule or FFlagExpChatEnableFriendsTab then
+		table.insert(List, require(AppChat.Middleware.SignalsFriendsChatSettingsMiddleware))
 	end
-	if fFlagExpChatEnableFriendsTab then
-		table.insert(list, chatModerationStatusHydrationMiddlewareModule)
+	if FFlagExpChatEnableFriendsTab then
+		table.insert(List, ChatModerationStatusHydrationMiddlewareModule)
 	end
-	if fFlagAppChatUnreadMessageCountStoreModule then
-		table.insert(list, require(appChat.Middleware.SignalsUnreadMessageCountMiddleware))
+	if FFlagAppChatUnreadMessageCountStoreModule then
+		table.insert(List, require(AppChat.Middleware.SignalsUnreadMessageCountMiddleware))
 	end
-	local var2 = roduxModule.Store.new(appChatReducerModule, nil, list)
-	local var3 = reactFocusNavigationModule.FocusNavigationService.new(reactFocusNavigationModule.EngineInterface.CoreGui)
-	var1:render((function()
-		-- upvalues: reactModule (copy), reactFocusNavigationModule (copy), var3 (ref), provider (copy), inExperienceAppChatProvidersModule (copy), var2 (ref), p3 (ref), p2 (ref), p1 (ref), inExperienceAppChatModule (copy)
-		return reactModule.createElement(reactFocusNavigationModule.FocusNavigationContext.Provider, { value = var3 }, {
-			FocusNavigationRegistryProvider = reactModule.createElement(provider, nil, {
-				InExperienceAppChatProviders = reactModule.createElement(inExperienceAppChatProvidersModule, {
-					store = var2,
-					updateAppChatUnreadMessagesCount = p3,
-					parentContainerContext = p2,
-					apolloClient = p1
+	if FFlagUseSignalsForSquadExperienceInvite then
+		table.insert(List, require(Parent.SquadsCore.Middleware).SignalsSquadMiddleware)
+	end
+	local NewResult = RoduxModule.Store.new(AppChatReducerModule, nil, List)
+	local NewResult1 = ReactFocusNavigationModule.FocusNavigationService.new(ReactFocusNavigationModule.EngineInterface.CoreGui)
+	Root:render(((function() --[[ Line: 83 | Named "AppChatMainWithFocusRoot" ]]
+		-- upvalues: ReactModule (upval), ReactFocusNavigationModule (upval), NewResult1 (copy), Provider (upval), InExperienceAppChatProvidersModule (upval), NewResult (copy), UpdateAppChatUnreadMessagesCount (copy), ParentContainerContext (copy), ApolloClient (copy), InExperienceAppChatModule (upval)
+		return ReactModule.createElement(ReactFocusNavigationModule.FocusNavigationContext.Provider, { value = NewResult1 }, {
+			FocusNavigationRegistryProvider = ReactModule.createElement(Provider, nil, {
+				InExperienceAppChatProviders = ReactModule.createElement(InExperienceAppChatProvidersModule, {
+					store = NewResult,
+					updateAppChatUnreadMessagesCount = UpdateAppChatUnreadMessagesCount,
+					parentContainerContext = ParentContainerContext,
+					apolloClient = ApolloClient
 				}, {
-					appChat = reactModule.createElement(inExperienceAppChatModule)
+					appChat = ReactModule.createElement(InExperienceAppChatModule)
 				})
 			})
 		})
-	end)())
+	end)()))
 	
-	return var1
+	return Root
 end

@@ -1,240 +1,240 @@
-﻿local momentsCommon = script:FindFirstAncestor("MomentsCommon")
-local eventNamesModule = require(momentsCommon.Analytics.EventNames)
-local funnelEventNamesModule = require(momentsCommon.Analytics.FunnelEventNames)
-local getFFlagMomentsCreationSaveDraftModule = require(momentsCommon.Flags.GetFFlagMomentsCreationSaveDraft)
-local funnelTypes = funnelEventNamesModule.FunnelTypes
-local creationFlowSteps = funnelEventNamesModule.CreationFlowSteps
-local musicEnhancementSteps = funnelEventNamesModule.MusicEnhancementSteps
-local trimEnhancementSteps = funnelEventNamesModule.TrimEnhancementSteps
-local textOverlayEnhancementSteps = funnelEventNamesModule.TextOverlayEnhancementSteps
-local stickerOverlayEnhancementSteps = funnelEventNamesModule.StickerOverlayEnhancementSteps
-local voiceEnhancementSteps = funnelEventNamesModule.VoiceEnhancementSteps
-local draftRecoverySteps = funnelEventNamesModule.DraftRecoverySteps
+﻿local MomentsCommon = script:FindFirstAncestor("MomentsCommon")
+local EventNamesModule = require(MomentsCommon.Analytics.EventNames)
+local FunnelEventNamesModule = require(MomentsCommon.Analytics.FunnelEventNames)
+local GetFFlagMomentsCreationSaveDraftModule = require(MomentsCommon.Flags.GetFFlagMomentsCreationSaveDraft)
+local FunnelTypes = FunnelEventNamesModule.FunnelTypes
+local CreationFlowSteps = FunnelEventNamesModule.CreationFlowSteps
+local MusicEnhancementSteps = FunnelEventNamesModule.MusicEnhancementSteps
+local TrimEnhancementSteps = FunnelEventNamesModule.TrimEnhancementSteps
+local TextOverlayEnhancementSteps = FunnelEventNamesModule.TextOverlayEnhancementSteps
+local StickerOverlayEnhancementSteps = FunnelEventNamesModule.StickerOverlayEnhancementSteps
+local VoiceEnhancementSteps = FunnelEventNamesModule.VoiceEnhancementSteps
+local DraftRecoverySteps = FunnelEventNamesModule.DraftRecoverySteps
 
 return {
-	[eventNamesModule.EditingFlowGalleryItemSelected] = {
+	[EventNamesModule.EditingFlowGalleryItemSelected] = {
 		{
-			funnelType = funnelTypes.CreationFlow,
-			stepKey = creationFlowSteps.GalleryItemSelected
+			funnelType = FunnelTypes.CreationFlow,
+			stepKey = CreationFlowSteps.GalleryItemSelected
 		}
 	},
-	[eventNamesModule.MomentsEditingFlowContinueToEditButtonPressed] = {
+	[EventNamesModule.MomentsEditingFlowContinueToEditButtonPressed] = {
 		{
-			funnelType = funnelTypes.CreationFlow,
-			stepKey = creationFlowSteps.GalleryItemSelectedContinuePressed
+			funnelType = FunnelTypes.CreationFlow,
+			stepKey = CreationFlowSteps.GalleryItemSelectedContinuePressed
 		}
 	},
-	[eventNamesModule.MomentsEditingFlowContinueToDescriptionButtonPressed] = {
+	[EventNamesModule.MomentsEditingFlowContinueToDescriptionButtonPressed] = {
 		{
-			funnelType = funnelTypes.CreationFlow,
-			stepKey = creationFlowSteps.EditingScreenContinuePressed
+			funnelType = FunnelTypes.CreationFlow,
+			stepKey = CreationFlowSteps.EditingScreenContinuePressed
 		}
 	},
-	[eventNamesModule.MomentsEditingFlowPublished] = if getFFlagMomentsCreationSaveDraftModule() then {
+	[EventNamesModule.MomentsEditingFlowPublished] = if GetFFlagMomentsCreationSaveDraftModule() then {
 		{
 			endSession = true,
-			funnelType = funnelTypes.CreationFlow,
-			stepKey = creationFlowSteps.Published
+			funnelType = FunnelTypes.CreationFlow,
+			stepKey = CreationFlowSteps.Published
 		},
 		{
 			endSession = true,
 			onlyIfSessionOpen = true,
-			funnelType = funnelTypes.DraftRecovery,
-			stepKey = draftRecoverySteps.DraftPublished
+			funnelType = FunnelTypes.DraftRecovery,
+			stepKey = DraftRecoverySteps.DraftPublished
 		}
 	} else {
 		{
 			endSession = true,
-			funnelType = funnelTypes.CreationFlow,
-			stepKey = creationFlowSteps.Published
+			funnelType = FunnelTypes.CreationFlow,
+			stepKey = CreationFlowSteps.Published
 		}
 	},
-	[eventNamesModule.EditingFlowMusicButtonPressed] = {
+	[EventNamesModule.EditingFlowMusicButtonPressed] = {
 		{
-			funnelType = funnelTypes.MusicEnhancement,
-			stepKey = musicEnhancementSteps.MusicButtonPressed
+			funnelType = FunnelTypes.MusicEnhancement,
+			stepKey = MusicEnhancementSteps.MusicButtonPressed
 		}
 	},
-	[eventNamesModule.EditingFlowMusicSelected] = {
+	[EventNamesModule.EditingFlowMusicSelected] = {
 		{
-			funnelType = funnelTypes.MusicEnhancement,
-			stepKey = musicEnhancementSteps.MusicSelected
+			funnelType = FunnelTypes.MusicEnhancement,
+			stepKey = MusicEnhancementSteps.MusicSelected
 		}
 	},
-	[eventNamesModule.EditingFlowMusicDoneButtonPressed] = {
-		{
-			endSession = true,
-			funnelType = funnelTypes.MusicEnhancement,
-			stepKey = musicEnhancementSteps.MusicApplied
-		}
-	},
-	[eventNamesModule.EditingFlowMusicBackButtonPressed] = {
+	[EventNamesModule.EditingFlowMusicDoneButtonPressed] = {
 		{
 			endSession = true,
-			funnelType = funnelTypes.MusicEnhancement
+			funnelType = FunnelTypes.MusicEnhancement,
+			stepKey = MusicEnhancementSteps.MusicApplied
 		}
 	},
-	[eventNamesModule.EditingFlowTextOverlayButtonPressed] = {
-		{
-			funnelType = funnelTypes.TextOverlayEnhancement,
-			stepKey = textOverlayEnhancementSteps.TextOverlayButtonPressed
-		}
-	},
-	[eventNamesModule.EditingFlowTextOverlayDoneButtonPressed] = {
+	[EventNamesModule.EditingFlowMusicBackButtonPressed] = {
 		{
 			endSession = true,
-			funnelType = funnelTypes.TextOverlayEnhancement,
-			stepKey = textOverlayEnhancementSteps.TextOverlayCompleted
+			funnelType = FunnelTypes.MusicEnhancement
 		}
 	},
-	[eventNamesModule.EditingFlowTextOverlayBackButtonPressed] = {
+	[EventNamesModule.EditingFlowTextOverlayButtonPressed] = {
+		{
+			funnelType = FunnelTypes.TextOverlayEnhancement,
+			stepKey = TextOverlayEnhancementSteps.TextOverlayButtonPressed
+		}
+	},
+	[EventNamesModule.EditingFlowTextOverlayDoneButtonPressed] = {
 		{
 			endSession = true,
-			funnelType = funnelTypes.TextOverlayEnhancement
+			funnelType = FunnelTypes.TextOverlayEnhancement,
+			stepKey = TextOverlayEnhancementSteps.TextOverlayCompleted
 		}
 	},
-	[eventNamesModule.EditingFlowStickerOverlayButtonPressed] = {
-		{
-			funnelType = funnelTypes.StickerOverlayEnhancement,
-			stepKey = stickerOverlayEnhancementSteps.StickerOverlayButtonPressed
-		}
-	},
-	[eventNamesModule.EditingFlowStickerSelected] = {
-		{
-			funnelType = funnelTypes.StickerOverlayEnhancement,
-			stepKey = stickerOverlayEnhancementSteps.StickerOverlaySelected
-		}
-	},
-	[eventNamesModule.EditingFlowStickerOverlayDoneButtonPressed] = {
+	[EventNamesModule.EditingFlowTextOverlayBackButtonPressed] = {
 		{
 			endSession = true,
-			funnelType = funnelTypes.StickerOverlayEnhancement,
-			stepKey = stickerOverlayEnhancementSteps.StickerOverlayCompleted
+			funnelType = FunnelTypes.TextOverlayEnhancement
 		}
 	},
-	[eventNamesModule.EditingFlowStickerOverlayBackButtonPressed] = {
+	[EventNamesModule.EditingFlowStickerOverlayButtonPressed] = {
+		{
+			funnelType = FunnelTypes.StickerOverlayEnhancement,
+			stepKey = StickerOverlayEnhancementSteps.StickerOverlayButtonPressed
+		}
+	},
+	[EventNamesModule.EditingFlowStickerSelected] = {
+		{
+			funnelType = FunnelTypes.StickerOverlayEnhancement,
+			stepKey = StickerOverlayEnhancementSteps.StickerOverlaySelected
+		}
+	},
+	[EventNamesModule.EditingFlowStickerOverlayDoneButtonPressed] = {
 		{
 			endSession = true,
-			funnelType = funnelTypes.StickerOverlayEnhancement
+			funnelType = FunnelTypes.StickerOverlayEnhancement,
+			stepKey = StickerOverlayEnhancementSteps.StickerOverlayCompleted
 		}
 	},
-	[eventNamesModule.EditingFlowTrimButtonPressed] = {
-		{
-			funnelType = funnelTypes.TrimEnhancement,
-			stepKey = trimEnhancementSteps.TrimButtonPressed
-		}
-	},
-	[eventNamesModule.EditingFlowTrimDoneButtonPressed] = {
+	[EventNamesModule.EditingFlowStickerOverlayBackButtonPressed] = {
 		{
 			endSession = true,
-			funnelType = funnelTypes.TrimEnhancement,
-			stepKey = trimEnhancementSteps.TrimCompleted
+			funnelType = FunnelTypes.StickerOverlayEnhancement
 		}
 	},
-	[eventNamesModule.EditingFlowTrimBackButtonPressed] = {
+	[EventNamesModule.EditingFlowTrimButtonPressed] = {
+		{
+			funnelType = FunnelTypes.TrimEnhancement,
+			stepKey = TrimEnhancementSteps.TrimButtonPressed
+		}
+	},
+	[EventNamesModule.EditingFlowTrimDoneButtonPressed] = {
 		{
 			endSession = true,
-			funnelType = funnelTypes.TrimEnhancement
+			funnelType = FunnelTypes.TrimEnhancement,
+			stepKey = TrimEnhancementSteps.TrimCompleted
 		}
 	},
-	[eventNamesModule.EditingFlowVoiceButtonPressed] = {
-		{
-			funnelType = funnelTypes.VoiceEnhancement,
-			stepKey = voiceEnhancementSteps.VoiceButtonPressed
-		}
-	},
-	[eventNamesModule.EditingFlowVoiceTextEntered] = {
-		{
-			funnelType = funnelTypes.VoiceEnhancement,
-			stepKey = voiceEnhancementSteps.VoiceTextEntered
-		}
-	},
-	[eventNamesModule.EditingFlowVoiceGeneratePressed] = {
-		{
-			funnelType = funnelTypes.VoiceEnhancement,
-			stepKey = voiceEnhancementSteps.VoiceGeneratePressed
-		}
-	},
-	[eventNamesModule.EditingFlowVoiceGenerateSucceeded] = {
-		{
-			funnelType = funnelTypes.VoiceEnhancement,
-			stepKey = voiceEnhancementSteps.VoiceGenerateSucceeded
-		}
-	},
-	[eventNamesModule.EditingFlowVoiceDoneButtonPressed] = {
+	[EventNamesModule.EditingFlowTrimBackButtonPressed] = {
 		{
 			endSession = true,
-			funnelType = funnelTypes.VoiceEnhancement,
-			stepKey = voiceEnhancementSteps.VoiceApplied
+			funnelType = FunnelTypes.TrimEnhancement
 		}
 	},
-	[eventNamesModule.EditingFlowVoiceDeleteChangePressed] = {
+	[EventNamesModule.EditingFlowVoiceButtonPressed] = {
 		{
-			endSession = true,
-			funnelType = funnelTypes.VoiceEnhancement
+			funnelType = FunnelTypes.VoiceEnhancement,
+			stepKey = VoiceEnhancementSteps.VoiceButtonPressed
 		}
 	},
-	[eventNamesModule.MomentsEditingFlowExited] = if getFFlagMomentsCreationSaveDraftModule() then {
-		{ endSession = true, funnelType = funnelTypes.CreationFlow },
+	[EventNamesModule.EditingFlowVoiceTextEntered] = {
+		{
+			funnelType = FunnelTypes.VoiceEnhancement,
+			stepKey = VoiceEnhancementSteps.VoiceTextEntered
+		}
+	},
+	[EventNamesModule.EditingFlowVoiceGeneratePressed] = {
+		{
+			funnelType = FunnelTypes.VoiceEnhancement,
+			stepKey = VoiceEnhancementSteps.VoiceGeneratePressed
+		}
+	},
+	[EventNamesModule.EditingFlowVoiceGenerateSucceeded] = {
+		{
+			funnelType = FunnelTypes.VoiceEnhancement,
+			stepKey = VoiceEnhancementSteps.VoiceGenerateSucceeded
+		}
+	},
+	[EventNamesModule.EditingFlowVoiceDoneButtonPressed] = {
 		{
 			endSession = true,
-			funnelType = funnelTypes.MusicEnhancement
+			funnelType = FunnelTypes.VoiceEnhancement,
+			stepKey = VoiceEnhancementSteps.VoiceApplied
+		}
+	},
+	[EventNamesModule.EditingFlowVoiceDeleteChangePressed] = {
+		{
+			endSession = true,
+			funnelType = FunnelTypes.VoiceEnhancement
+		}
+	},
+	[EventNamesModule.MomentsEditingFlowExited] = if GetFFlagMomentsCreationSaveDraftModule() then {
+		{ endSession = true, funnelType = FunnelTypes.CreationFlow },
+		{
+			endSession = true,
+			funnelType = FunnelTypes.MusicEnhancement
 		},
 		{
 			endSession = true,
-			funnelType = funnelTypes.TextOverlayEnhancement
+			funnelType = FunnelTypes.TextOverlayEnhancement
 		},
 		{
 			endSession = true,
-			funnelType = funnelTypes.StickerOverlayEnhancement
+			funnelType = FunnelTypes.StickerOverlayEnhancement
 		},
 		{
 			endSession = true,
-			funnelType = funnelTypes.TrimEnhancement
+			funnelType = FunnelTypes.TrimEnhancement
 		},
 		{
 			endSession = true,
-			funnelType = funnelTypes.VoiceEnhancement
+			funnelType = FunnelTypes.VoiceEnhancement
 		},
 		{
 			endSession = true,
 			onlyIfSessionOpen = true,
-			funnelType = funnelTypes.DraftRecovery
+			funnelType = FunnelTypes.DraftRecovery
 		}
 	} else {
-		{ endSession = true, funnelType = funnelTypes.CreationFlow },
+		{ endSession = true, funnelType = FunnelTypes.CreationFlow },
 		{
 			endSession = true,
-			funnelType = funnelTypes.MusicEnhancement
+			funnelType = FunnelTypes.MusicEnhancement
 		},
 		{
 			endSession = true,
-			funnelType = funnelTypes.TextOverlayEnhancement
+			funnelType = FunnelTypes.TextOverlayEnhancement
 		},
 		{
 			endSession = true,
-			funnelType = funnelTypes.StickerOverlayEnhancement
+			funnelType = FunnelTypes.StickerOverlayEnhancement
 		},
 		{
 			endSession = true,
-			funnelType = funnelTypes.TrimEnhancement
+			funnelType = FunnelTypes.TrimEnhancement
 		},
 		{
 			endSession = true,
-			funnelType = funnelTypes.VoiceEnhancement
+			funnelType = FunnelTypes.VoiceEnhancement
 		}
 	},
-	[eventNamesModule.DraftRestoreSucceededEvent] = {
+	[EventNamesModule.DraftRestoreSucceededEvent] = {
 		{
-			funnelType = funnelTypes.DraftRecovery,
-			stepKey = draftRecoverySteps.DraftRestored
+			funnelType = FunnelTypes.DraftRecovery,
+			stepKey = DraftRecoverySteps.DraftRestored
 		}
 	},
-	[eventNamesModule.MomentsReturnToGallery] = if getFFlagMomentsCreationSaveDraftModule() then {
+	[EventNamesModule.MomentsReturnToGallery] = if GetFFlagMomentsCreationSaveDraftModule() then {
 		{
 			endSession = true,
 			onlyIfSessionOpen = true,
-			funnelType = funnelTypes.DraftRecovery
+			funnelType = FunnelTypes.DraftRecovery
 		}
 	} else {}
 }

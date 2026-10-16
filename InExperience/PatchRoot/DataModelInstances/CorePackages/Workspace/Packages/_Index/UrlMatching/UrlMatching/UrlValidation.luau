@@ -1,118 +1,125 @@
-﻿local parent = script.Parent.Parent
-local cryoModule = require(parent.Cryo)
-local regexModule = require(script.Parent.Regex)
-local regExpModule = require(parent.RegExp)
-local stringUtilitiesModule = require(parent.StringUtilities)
-local stringSplit = stringUtilitiesModule.StringSplit
-local stringTrim = stringUtilitiesModule.StringTrim
-local parseQuery = stringUtilitiesModule.ParseQuery
+﻿local Parent = script.Parent.Parent
+local CryoModule = require(Parent.Cryo)
+local RegexModule = require(script.Parent.Regex)
+local RegExpModule = require(Parent.RegExp)
+local StringUtilitiesModule = require(Parent.StringUtilities)
+local StringSplitFunction = StringUtilitiesModule.StringSplit
+local StringTrimFunction = StringUtilitiesModule.StringTrim
+local ParseQueryFunction = StringUtilitiesModule.ParseQuery
 local _ = require(script.Parent.Types)
 
-local function filterParams(p1, p2)
-	-- upvalues: cryoModule (ref)
-	return cryoModule.List.filter(p1, function(p3)
-		-- upvalues: p2 (ref)
-		return if p3.optional ~= p2 then not p2 and p3.optional == nil else true
+local function filterParams(p1, p2) --[[ Line: 19 ]]
+	-- upvalues: CryoModule (copy)
+	return CryoModule.List.filter(p1, function(p3): boolean --[[ Line: 20 ]]
+		-- upvalues: p2 (copy)
+		return p3.optional == p2 or not p2 and p3.optional == nil
 	end)
 end
 
-local function _(p1)
-	-- upvalues: filterParams (ref)
+local function _(p1) --[[ Line: 25 | Named "requiredParams" ]]
+	-- upvalues: filterParams (copy)
 	return filterParams(p1, false)
 end
 
-local _ = function(p1)
-	-- upvalues: filterParams (ref)
+local _ = function(p1) --[[ Line: 29 | Named "optionalParams" ]]
+	-- upvalues: filterParams (copy)
 	return filterParams(p1, true)
 end
 
-local _ = function(p1)
-	-- upvalues: regexModule (ref), regExpModule (ref)
-	return function(p2)
-		-- upvalues: regexModule (copy), p1 (ref), regExpModule (copy)
-		local name = p1[p2.name]
+local _ = function(p1) --[[ Line: 33 | Named "mapValidToArgName" ]]
+	-- upvalues: RegexModule (copy), RegExpModule (copy)
+	return function(p2) --[[ Line: 34 ]]
+		-- upvalues: RegexModule (upval), p1 (copy), RegExpModule (upval)
+		local MatchWholeResult = RegexModule.matchWhole(RegexModule.oneOrMore(p2.pattern))
+		local v1 = p1[p2.name]
 		
-		return if name == nil or not regExpModule(regexModule.matchWhole(regexModule.oneOrMore(p2.pattern))):exec(name) then nil else p2.name
+		return if v1 == nil or not RegExpModule(MatchWholeResult):exec(v1) then nil else p2.name
 	end
 end
 
-local function validateParams(p1, p2)
-	-- upvalues: cryoModule (ref), regexModule (ref), regExpModule (ref)
-	p1 = p1 or {}
-	local var1 = false
-	local var2 = cryoModule.List.filter(p2, function(p3)
-		-- upvalues: var1 (ref)
-		return if p3.optional ~= var1 then not var1 and p3.optional == nil else true
+local function validateParams(MapResult, QueryParams) --[[ Line: 44 ]]
+	-- upvalues: CryoModule (copy), RegexModule (copy), RegExpModule (copy)
+	local MapResult1 = MapResult or {}
+	local v1 = false
+	local FilterResult = CryoModule.List.filter(QueryParams, function(p1): boolean --[[ Line: 20 ]]
+		-- upvalues: v1 (copy)
+		return p1.optional == v1 or not v1 and p1.optional == nil
 	end)
 	
-	local var3 = function(p3)
-		-- upvalues: regexModule (copy), p1 (ref), regExpModule (copy)
-		local name = p1[p3.name]
+	local function v18(p1) --[[ Line: 34 ]]
+		-- upvalues: RegexModule (upval), MapResult1 (copy), RegExpModule (upval)
+		local MatchWholeResult = RegexModule.matchWhole(RegexModule.oneOrMore(p1.pattern))
+		local v2 = MapResult1[p1.name]
 		
-		return if name == nil or not regExpModule(regexModule.matchWhole(regexModule.oneOrMore(p3.pattern))):exec(name) then nil else p3.name
+		return if v2 == nil or not RegExpModule(MatchWholeResult):exec(v2) then nil else p1.name
 	end
 	
-	local var4 = cryoModule.List.filterMap(var2, var3)
+	local FilterMapResult = CryoModule.List.filterMap(FilterResult, v18)
 	
-	if #var4 == #var2 then
-		local var5 = true
-		var5 = cryoModule.List.toSet(cryoModule.List.join(var4, cryoModule.List.filterMap(cryoModule.List.filter(p2, function(p3)
-			-- upvalues: var5 (ref)
-			return if p3.optional ~= var5 then not var5 and p3.optional == nil else true
-		end), var3)))
+	if #FilterMapResult == #FilterResult then
+		local v2 = true
+		local Set = CryoModule.List.toSet((CryoModule.List.join(FilterMapResult, (CryoModule.List.filterMap(CryoModule.List.filter(QueryParams, function(p1): boolean --[[ Line: 20 ]]
+			-- upvalues: v2 (copy)
+			return p1.optional == v2 or not v2 and p1.optional == nil
+		end), v18)))))
 		
-		return true, cryoModule.Dictionary.filter(p1, function(_, p3)
-			-- upvalues: var5 (ref)
-			return var5[p3] ~= nil
-		end)
+		return true, (CryoModule.Dictionary.filter(MapResult1, function(_, p1): boolean --[[ Line: 59 ]]
+			-- upvalues: Set (copy)
+			return Set[p1] ~= nil
+		end))
+	else
+		return false, {}
 	end
-	return false, {}
 end
 
-local function validatePathParams(p1, p2)
-	-- upvalues: cryoModule (ref), validateParams (ref)
-	local var1 = false
+local function validatePathParams(p1, PathParams) --[[ Line: 65 ]]
+	-- upvalues: CryoModule (copy), validateParams (copy)
+	local Optional = false
 	
-	if #p1 < #cryoModule.List.filter(p2, function(p3)
-		-- upvalues: var1 (ref)
-		return if p3.optional ~= var1 then not var1 and p3.optional == nil else true
+	if #p1 < #CryoModule.List.filter(PathParams, function(p2): boolean --[[ Line: 20 ]]
+		-- upvalues: Optional (copy)
+		return p2.optional == Optional or not Optional and p2.optional == nil
 	end) then
 		return false, {}
+	else
+		return validateParams(CryoModule.Dictionary.map(PathParams, function(p2, p3) --[[ Line: 73 ]]
+			-- upvalues: p1 (copy)
+			return p1[p3], p2.name
+		end), PathParams)
 	end
-	return validateParams(cryoModule.Dictionary.map(p2, function(p3, p4)
-		-- upvalues: p1 (ref)
-		return p1[p4], p3.name
-	end), p2)
 end
 
-local function validateUrlParams(p1, p2)
-	-- upvalues: stringTrim (ref), stringSplit (ref), parseQuery (ref), cryoModule (ref), validatePathParams (ref), validateParams (ref)
-	local var1 = if p1.path then stringTrim(p1.path, "/") else ""
-	local var2 = cryoModule.Dictionary.map(parseQuery(p1.query), function(p3)
-		return if #p3 == 1 then p3[1] else p3
+local function validateUrlParams(Url, p1) --[[ Line: 79 ]]
+	-- upvalues: StringTrimFunction (copy), StringSplitFunction (copy), ParseQueryFunction (copy), CryoModule (copy), validatePathParams (copy), validateParams (copy)
+	local StringTrimResult = if Url.path then StringTrimFunction(Url.path, "/") else ""
+	local MapResult = CryoModule.Dictionary.map(ParseQueryFunction(Url.query), function(Entry) --[[ Line: 84 ]]
+		return if #Entry == 1 then Entry[1] else Entry
 	end)
-	local var3, var4 = validatePathParams(if var1 ~= "" then {} else stringSplit(var1, "/"), p2.pathParams or {})
+	local ValidatePathParamsResult, ValidatePathParamsResult2 = validatePathParams(if StringTrimResult == "" then {} else StringSplitFunction(StringTrimResult, "/"), p1.pathParams or {})
 	
-	if not var3 then
+	if not ValidatePathParamsResult then
 		return false, {}
 	end
-	local var5, var6 = validateParams(var2, p2.queryParams or {})
+	local ValidateParamsResult, ValidateParamsResult2 = validateParams(MapResult, p1.queryParams or {})
 	
-	if var5 then
-		return true, cryoModule.Dictionary.union(var4, var6)
+	if ValidateParamsResult then
+		return true, CryoModule.Dictionary.union(ValidatePathParamsResult2, ValidateParamsResult2)
+	else
+		return false, {}
 	end
-	return false, {}
 end
 
 return {
-	validateUrlMatch = function(p1, p2)
-		-- upvalues: regExpModule (ref), validateUrlParams (ref)
-		for i, v in p2 do
-			if regExpModule(i, "i"):test(p1.matchedPath) then
-				local var1, var2 = validateUrlParams(p1.url, v)
+	validateUrlMatch = function(p1, List) --[[ Line: 101 ]]
+		-- upvalues: RegExpModule (copy), validateUrlParams (copy)
+		local ValidateUrlParamsResult = nil
+		local ValidateUrlParamsResult2 = nil
+		for i, value in List do
+			if RegExpModule(i, "i"):test(p1.matchedPath) then
+				ValidateUrlParamsResult, ValidateUrlParamsResult2 = validateUrlParams(p1.url, value)
 				
-				if var1 then
-					return var1, v.paramCallback(var2)
+				if ValidateUrlParamsResult then
+					return ValidateUrlParamsResult, value.paramCallback(ValidateUrlParamsResult2)
 				end
 			end
 		end

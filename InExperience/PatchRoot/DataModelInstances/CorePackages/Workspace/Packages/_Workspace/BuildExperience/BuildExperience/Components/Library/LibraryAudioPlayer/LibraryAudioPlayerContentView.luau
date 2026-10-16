@@ -1,164 +1,166 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local icon = foundationModule.Icon
-local iconButton = foundationModule.IconButton
-local image = foundationModule.Image
-local slider = foundationModule.Slider
-local text = foundationModule.Text
-local view = foundationModule.View
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local iconName = foundationModule.Enums.IconName
-local iconSize = foundationModule.Enums.IconSize
-local inputSize = foundationModule.Enums.InputSize
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local Icon = FoundationModule.Icon
+local IconButton = FoundationModule.IconButton
+local Image = FoundationModule.Image
+local Slider = FoundationModule.Slider
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local IconName = FoundationModule.Enums.IconName
+local IconSize = FoundationModule.Enums.IconSize
+local InputSize = FoundationModule.Enums.InputSize
 
-local function formatTime(p1)
-	local maxValue = math.max(0, math.floor(p1))
+local function formatTime(Value: number): string --[[ Line: 34 ]]
+	local Largest = math.max(0, (math.floor(Value)))
 	
-	return `{math.floor(maxValue / 60)}:{string.format("%02d", maxValue % 60)}`
+	return `{math.floor(Largest / 60)}:{string.format("%02d", Largest % 60)}`
 end
 
-local function _(p1)
-	local ceiled = math.ceil(p1 - 0.001)
+local function _(p1: number): string --[[ Line: 40 | Named "formatRemaining" ]]
+	local Ceiled = math.ceil(p1 - 0.001)
 	
-	if ceiled <= 0 then
+	if Ceiled <= 0 then
 		return `{0}:{string.format("%02d", 0)}`
+	else
+		local Largest = math.max(0, (math.floor(Ceiled)))
+		
+		return `-{`{math.floor(Largest / 60)}:{string.format("%02d", Largest % 60)}`}`
 	end
-	local maxValue = math.max(0, math.floor(ceiled))
-	
-	return `-{`{math.floor(maxValue / 60)}:{string.format("%02d", maxValue % 60)}`}`
 end
 
-return function(p1)
-	-- upvalues: foundationModule (ref), reactModule (ref), view (ref), image (ref), icon (ref), iconName (ref), iconSize (ref), text (ref), slider (ref), inputSize (ref), formatTime (ref), iconButton (ref), buttonVariant (ref)
-	local var1 = foundationModule.Hooks.useTokens()
-	local var2 = foundationModule.Hooks.useScaledValue(168)
-	local var3 = p1.isCompact == true
+return function(Frame) --[[ Line: 45 | Named "LibraryAudioPlayerContentView" ]]
+	-- upvalues: FoundationModule (copy), ReactModule (copy), View (copy), Image (copy), Icon (copy), IconName (copy), IconSize (copy), Text (copy), Slider (copy), InputSize (copy), formatTime (copy), IconButton (copy), ButtonVariant (copy)
+	local UseTokensResult = FoundationModule.Hooks.useTokens()
+	local UseScaledValueResult = FoundationModule.Hooks.useScaledValue(168)
+	local IsIsCompact = Frame.isCompact == true
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		testId = "Library.AudioPlayer",
-		LayoutOrder = p1.LayoutOrder,
+		LayoutOrder = Frame.LayoutOrder,
 		tag = {
 			["col align-x-center size-full-0 auto-y"] = true,
-			["gap-small"] = var3,
-			["gap-xxlarge"] = not var3
+			["gap-small"] = IsIsCompact,
+			["gap-xxlarge"] = not IsIsCompact
 		}
 	}, {
-		Song = reactModule.createElement(view, {
+		Song = ReactModule.createElement(View, {
 			LayoutOrder = 1,
 			tag = {
 				["gap-medium"] = true,
-				["row align-y-center size-full-0 auto-y"] = var3,
-				["col align-x-center auto-xy"] = not var3
+				["row align-y-center size-full-0 auto-y"] = IsIsCompact,
+				["col align-x-center auto-xy"] = not IsIsCompact
 			}
 		}, {
-			Artwork = reactModule.createElement(view, {
+			Artwork = ReactModule.createElement(View, {
 				LayoutOrder = 1,
 				testId = "Library.AudioPlayer.Artwork",
 				tag = "align-x-center align-y-center radius-large clip bg-shift-200",
-				Size = if var3 then UDim2.fromOffset(var1.Size.Size_1600, var1.Size.Size_1600) else UDim2.fromOffset(var2, var2)
+				Size = if IsIsCompact then UDim2.fromOffset(UseTokensResult.Size.Size_1600, UseTokensResult.Size.Size_1600) else UDim2.fromOffset(UseScaledValueResult, UseScaledValueResult)
 			}, {
-				Media = if p1.thumbnail == nil or p1.thumbnail == "" then reactModule.createElement(icon, {
-					name = iconName.MusicNote,
-					size = iconSize.XLarge,
-					style = var1.Color.Content.Emphasis
-				}) else reactModule.createElement(image, {
+				Media = if Frame.thumbnail == nil or Frame.thumbnail == "" then ReactModule.createElement(Icon, {
+					name = IconName.MusicNote,
+					size = IconSize.XLarge,
+					style = UseTokensResult.Color.Content.Emphasis
+				}) else ReactModule.createElement(Image, {
 					tag = "size-full",
-					Image = p1.thumbnail,
+					Image = Frame.thumbnail,
 					ScaleType = Enum.ScaleType.Fit
 				})
 			}),
-			Info = reactModule.createElement(view, {
+			Info = ReactModule.createElement(View, {
 				LayoutOrder = 2,
 				tag = {
 					["col auto-y"] = true,
-					fill = var3,
-					["align-x-center size-full-0"] = not var3
+					fill = IsIsCompact,
+					["align-x-center size-full-0"] = not IsIsCompact
 				}
 			}, {
-				Title = reactModule.createElement(text, {
+				Title = ReactModule.createElement(Text, {
 					LayoutOrder = 1,
-					Text = p1.title,
+					Text = Frame.title,
 					tag = {
 						["size-full-0 auto-y text-heading-small content-emphasis"] = true,
-						["text-align-x-left text-truncate-end"] = var3,
-						["text-wrap text-align-x-center"] = not var3
+						["text-align-x-left text-truncate-end"] = IsIsCompact,
+						["text-wrap text-align-x-center"] = not IsIsCompact
 					}
 				}),
-				Artist = reactModule.createElement(text, {
+				Artist = ReactModule.createElement(Text, {
 					LayoutOrder = 2,
-					Text = p1.artist,
+					Text = Frame.artist,
 					tag = {
 						["size-full-0 auto-y text-body-large text-truncate-end content-default"] = true,
-						["text-align-x-left"] = var3,
-						["text-align-x-center"] = not var3
+						["text-align-x-left"] = IsIsCompact,
+						["text-align-x-center"] = not IsIsCompact
 					}
 				})
 			})
 		}),
-		Controls = reactModule.createElement(view, {
+		Controls = ReactModule.createElement(View, {
 			LayoutOrder = 2,
 			tag = {
 				["col align-x-center size-full-0 auto-y"] = true,
-				["gap-small"] = var3,
-				["gap-medium"] = not var3
+				["gap-small"] = IsIsCompact,
+				["gap-medium"] = not IsIsCompact
 			}
 		}, {
-			Timeline = reactModule.createElement(view, {
+			Timeline = ReactModule.createElement(View, {
 				LayoutOrder = 1,
 				tag = "col gap-xsmall size-full-0 auto-y",
 				testId = "Library.AudioPlayer.Timeline"
 			}, {
-				Slider = reactModule.createElement(slider, {
+				Slider = ReactModule.createElement(Slider, {
 					LayoutOrder = 1,
 					testId = "Library.AudioPlayer.Timeline.Slider",
-					value = p1.elapsed:map(function(p2)
-						-- upvalues: p1 (ref)
-						return if p1.duration <= 0 then 0 else math.clamp(p2 / p1.duration, 0, 1)
+					value = Frame.elapsed:map(function(p1): number --[[ Line: 49 ]]
+						-- upvalues: Frame (copy)
+						return if Frame.duration <= 0 then 0 else math.clamp(p1 / Frame.duration, 0, 1)
 					end),
-					onValueChanged = p1.onSeek,
-					onDragStarted = p1.onSeekStarted,
-					onDragEnded = p1.onSeekEnded,
-					isDisabled = if p1.onSeek ~= nil then p1.duration <= 0 else true,
-					size = inputSize.XSmall,
-					knobVisibility = foundationModule.Enums.Visibility.Always,
-					variant = foundationModule.Enums.SliderVariant.Emphasis
+					onValueChanged = Frame.onSeek,
+					onDragStarted = Frame.onSeekStarted,
+					onDragEnded = Frame.onSeekEnded,
+					isDisabled = Frame.onSeek == nil or Frame.duration <= 0,
+					size = InputSize.XSmall,
+					knobVisibility = FoundationModule.Enums.Visibility.Always,
+					variant = FoundationModule.Enums.SliderVariant.Emphasis
 				}),
-				Times = reactModule.createElement(view, { LayoutOrder = 2, tag = "row size-full-0 auto-y" }, {
-					Elapsed = reactModule.createElement(text, {
+				Times = ReactModule.createElement(View, { LayoutOrder = 2, tag = "row size-full-0 auto-y" }, {
+					Elapsed = ReactModule.createElement(Text, {
 						LayoutOrder = 1,
 						tag = "fill auto-y text-caption-large text-align-x-left content-default",
-						Text = p1.elapsed:map(formatTime)
+						Text = Frame.elapsed:map(formatTime)
 					}),
-					Remaining = reactModule.createElement(text, {
+					Remaining = ReactModule.createElement(Text, {
 						LayoutOrder = 2,
 						tag = "auto-xy text-caption-large content-default",
-						Text = p1.elapsed:map(function(p2)
-							-- upvalues: p1 (ref)
-							local ceiled = math.ceil(p1.duration - p2 - 0.001)
+						Text = Frame.elapsed:map(function(p1): string --[[ Line: 157 ]]
+							-- upvalues: Frame (copy)
+							local Ceiled = math.ceil(Frame.duration - p1 - 0.001)
 							
-							if ceiled <= 0 then
+							if Ceiled <= 0 then
 								return `{0}:{string.format("%02d", 0)}`
+							else
+								local Largest = math.max(0, (math.floor(Ceiled)))
+								
+								return `-{`{math.floor(Largest / 60)}:{string.format("%02d", Largest % 60)}`}`
 							end
-							local maxValue = math.max(0, math.floor(ceiled))
-							
-							return `-{`{math.floor(maxValue / 60)}:{string.format("%02d", maxValue % 60)}`}`
 						end)
 					})
 				})
 			}),
-			PlayerControls = reactModule.createElement(view, {
+			PlayerControls = ReactModule.createElement(View, {
 				LayoutOrder = 2,
 				tag = "row align-x-center align-y-center auto-xy"
 			}, {
-				Playback = reactModule.createElement(iconButton, {
+				Playback = ReactModule.createElement(IconButton, {
 					LayoutOrder = 1,
 					isCircular = true,
 					testId = "Library.AudioPlayer.Playback",
-					icon = if p1.isPlaying then iconName.PauseLarge else iconName.PlayLarge,
-					onActivated = p1.onTogglePlayback,
-					size = inputSize.Large,
-					variant = buttonVariant.Emphasis
+					icon = if Frame.isPlaying then IconName.PauseLarge else IconName.PlayLarge,
+					onActivated = Frame.onTogglePlayback,
+					size = InputSize.Large,
+					variant = ButtonVariant.Emphasis
 				})
 			})
 		})

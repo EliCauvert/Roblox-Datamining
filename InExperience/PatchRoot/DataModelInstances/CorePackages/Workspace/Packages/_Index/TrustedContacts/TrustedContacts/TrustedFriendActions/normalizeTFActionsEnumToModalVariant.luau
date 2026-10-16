@@ -1,20 +1,20 @@
-﻿local trustedConnectionStatus = require(script:FindFirstAncestor("TrustedContacts").Enums).TrustedConnectionStatus
+﻿local TrustedConnectionStatus = require(script:FindFirstAncestor("TrustedContacts").Enums).TrustedConnectionStatus
 local TFActionsEnumModule = require(script.Parent.TFActionsEnum)
-local t = {
-	[TFActionsEnumModule.RemoveTrustedConnection] = trustedConnectionStatus.TrustedFriends,
-	[TFActionsEnumModule.AddTrustedConnectionViaLink] = trustedConnectionStatus.Friends,
-	[TFActionsEnumModule.AddTrustedFriendDoubleOptin] = trustedConnectionStatus.Friends,
-	[TFActionsEnumModule.AddTrustedFriendWithVpc] = trustedConnectionStatus.Friends,
-	[TFActionsEnumModule.PendingTrustedConnection] = trustedConnectionStatus.Friends,
-	[TFActionsEnumModule.AcceptTrustedFriendViaLinkWithVpcRecipient] = trustedConnectionStatus.RequestReceived,
-	[TFActionsEnumModule.AcceptTrustedFriendWithVpcRecipient] = trustedConnectionStatus.RequestReceived,
-	[TFActionsEnumModule.AcceptTrustedFriendViaLink] = trustedConnectionStatus.RequestReceived,
-	[TFActionsEnumModule.AcceptTrustedFriend] = trustedConnectionStatus.RequestReceived,
-	[TFActionsEnumModule.AcceptTrustedFriendInvalid] = trustedConnectionStatus.RequestReceived,
-	[TFActionsEnumModule.PendingIncomingTrustedConnection] = trustedConnectionStatus.RequestReceived
+local config = {
+	[TFActionsEnumModule.RemoveTrustedConnection] = TrustedConnectionStatus.TrustedFriends,
+	[TFActionsEnumModule.AddTrustedConnectionViaLink] = TrustedConnectionStatus.Friends,
+	[TFActionsEnumModule.AddTrustedFriendDoubleOptin] = TrustedConnectionStatus.Friends,
+	[TFActionsEnumModule.AddTrustedFriendWithVpc] = TrustedConnectionStatus.Friends,
+	[TFActionsEnumModule.PendingTrustedConnection] = TrustedConnectionStatus.Friends,
+	[TFActionsEnumModule.AcceptTrustedFriendViaLinkWithVpcRecipient] = TrustedConnectionStatus.RequestReceived,
+	[TFActionsEnumModule.AcceptTrustedFriendWithVpcRecipient] = TrustedConnectionStatus.RequestReceived,
+	[TFActionsEnumModule.AcceptTrustedFriendViaLink] = TrustedConnectionStatus.RequestReceived,
+	[TFActionsEnumModule.AcceptTrustedFriend] = TrustedConnectionStatus.RequestReceived,
+	[TFActionsEnumModule.AcceptTrustedFriendInvalid] = TrustedConnectionStatus.RequestReceived,
+	[TFActionsEnumModule.PendingIncomingTrustedConnection] = TrustedConnectionStatus.RequestReceived
 }
 
-return function(p1)
-	-- upvalues: t (ref)
-	return t[p1]
+return function(p1) --[[ Line: 24 | Named "normalizeTFActionsEnumToModalVariant" ]]
+	-- upvalues: config (copy)
+	return config[p1]
 end

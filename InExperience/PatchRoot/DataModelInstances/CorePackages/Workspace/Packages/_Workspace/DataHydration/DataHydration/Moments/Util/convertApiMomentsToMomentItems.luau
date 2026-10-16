@@ -1,77 +1,85 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local parent = dataHydration.Parent
-local momentsTypesModule = require(parent.MomentsTypes)
-local sharedFlagsModule = require(parent.SharedFlags)
-local getFFlagMomentsRenderPostAssetsModule = require(parent.MomentsCommon.GetFFlagMomentsRenderPostAssets)
-local _ = require(dataHydration.Moments.MomentsStoreTypes)
-local convertApiMomentCommentsModule = require(dataHydration.Moments.Util.convertApiMomentComments)
-local fFlagMomentsStickerOverlayNormalizationModule = require(dataHydration.Moments.FFlagMomentsStickerOverlayNormalization)
-local fFlagMomentsComments = sharedFlagsModule.FFlagMomentsComments
-local fFlagMomentsCommentsIxpEnabled = sharedFlagsModule.FFlagMomentsCommentsIxpEnabled
-local fFlagEnableMomentsCommentReporting = sharedFlagsModule.FFlagEnableMomentsCommentReporting
-local momentStatus = momentsTypesModule.Enums.MomentStatus
-local builderSansMedium = Enum.Font.BuilderSansMedium
-local color3 = Color3.new(0, 0, 0)
-local center = Enum.TextXAlignment.Center
-local uDim2 = UDim2.fromScale(0.5, 0.5)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local Parent = DataHydration.Parent
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagMomentsServeEDPVideos = SharedFlagsModule.FFlagMomentsServeEDPVideos
+local GetFFlagMomentsRenderPostAssetsModule = require(Parent.MomentsCommon.GetFFlagMomentsRenderPostAssets)
+local _ = require(DataHydration.Moments.MomentsStoreTypes)
+local ConvertApiMomentCommentsModule = require(DataHydration.Moments.Util.convertApiMomentComments)
+local FFlagMomentsStickerOverlayNormalizationModule = require(DataHydration.Moments.FFlagMomentsStickerOverlayNormalization)
+local FFlagMomentsComments = SharedFlagsModule.FFlagMomentsComments
+local FFlagMomentsCommentsIxpEnabled = SharedFlagsModule.FFlagMomentsCommentsIxpEnabled
+local FFlagEnableMomentsCommentReporting = SharedFlagsModule.FFlagEnableMomentsCommentReporting
+local MomentStatus = require(Parent.MomentsTypes).Enums.MomentStatus
+local BuilderSansMedium = Enum.Font.BuilderSansMedium
+local _Color3 = Color3.new(0, 0, 0)
+local Center = Enum.TextXAlignment.Center
+local _UDim2 = UDim2.fromScale(0.5, 0.5)
 
-local function _(p1)
+local function _(p1) --[[ Line: 33 | Named "toCaptureType" ]]
 	return if p1 == "Screenshot" then Enum.CaptureType.Screenshot else Enum.CaptureType.Video
 end
 
-local _ = function(p1)
-	-- upvalues: momentStatus (ref)
-	return if p1 == momentStatus.Deleted then momentStatus.Deleted else momentStatus.Public
+local _ = function(Deleted) --[[ Line: 41 | Named "toMomentStatus" ]]
+	-- upvalues: MomentStatus (copy)
+	return if Deleted == MomentStatus.Deleted then MomentStatus.Deleted else MomentStatus.Public
 end
 
-local function toEnumItem(p1, p2, p3)
-	if typeof(p2) == "EnumItem" then
-		return p2
-	elseif type(p2) ~= "string" then
-		return p3
+local _ = function(p1) --[[ Line: 49 | Named "toMomentEntityType" ]]
+	-- upvalues: FFlagMomentsServeEDPVideos (copy)
+	return if p1 == "experience" or p1 == "ad" then p1 elseif FFlagMomentsServeEDPVideos and p1 == "edpVideo" then p1 else nil
+end
+
+local function toEnumItem(TextXAlignment, Text: string, BuilderSansMedium) --[[ Line: 59 ]]
+	if typeof(Text) == "EnumItem" then
+		return Text
+	elseif type(Text) == "string" then
+		local Match: string = string.match(Text, "([^%.]+)$") or Text
+		local Success, Result = pcall(function() --[[ Line: 68 ]]
+			-- upvalues: TextXAlignment (copy), Match (copy)
+			return TextXAlignment[Match]
+		end)
+		
+		return if Success and Result ~= nil then Result else BuilderSansMedium
+	else
+		return BuilderSansMedium
 	end
-	local var1 = string.match(p2, "([^%.]+)$") or p2
-	local ok, status = pcall(function()
-		-- upvalues: p1 (ref), var1 (ref)
-		return p1[var1]
-	end)
-	
-	return if ok and status ~= nil then status else p3
 end
 
-local function toColor3(p1)
-	-- upvalues: color3 (ref)
-	if typeof(p1) == "Color3" then
-		return p1
-	elseif type(p1) ~= "table" then
-		return color3
+local function toColor3(Entry) --[[ Line: 77 ]]
+	-- upvalues: _Color3 (copy)
+	if typeof(Entry) == "Color3" then
+		return Entry
+	elseif type(Entry) == "table" then
+		local R = Entry.R or (Entry.r or (Entry.Red or (Entry.red or Entry[1])))
+		local G = Entry.G or (Entry.g or (Entry.Green or (Entry.green or Entry[2])))
+		local B = Entry.B or (Entry.b or (Entry.Blue or (Entry.blue or Entry[3])))
+		
+		return if type(R) == "number" and type(G) == "number" and type(B) == "number" then if R > 1 or G > 1 or B > 1 then Color3.fromRGB(R, G, B) else Color3.new(R, G, B) else _Color3
+	else
+		return _Color3
 	end
-	local r = p1.R or (p1.r or (p1.Red or (p1.red or p1[1])))
-	local g = p1.G or (p1.g or (p1.Green or (p1.green or p1[2])))
-	local b = p1.B or (p1.b or (p1.Blue or (p1.blue or p1[3])))
-	
-	return if not (type(r) ~= "number" or type(g) ~= "number" or type(b) ~= "number") then if r > 1 or g > 1 or b > 1 then Color3.fromRGB(r, g, b) else Color3.new(r, g, b) else color3
 end
 
-local function toUDim2(p1)
-	-- upvalues: uDim2 (ref)
-	if typeof(p1) == "UDim2" then
-		return p1
-	elseif type(p1) ~= "table" then
-		return uDim2
-	elseif type(p1[1]) == "number" and type(p1[2]) == "number" then
-		return UDim2.fromScale(p1[1], p1[2])
+local function toUDim2(Entry) --[[ Line: 98 ]]
+	-- upvalues: _UDim2 (copy)
+	if typeof(Entry) == "UDim2" then
+		return Entry
+	elseif type(Entry) ~= "table" then
+		return _UDim2
+	elseif type(Entry[1]) == "number" and type(Entry[2]) == "number" then
+		return UDim2.fromScale(Entry[1], Entry[2])
+	else
+		local X = Entry.X or Entry.x
+		local Y = Entry.Y or Entry.y
+		
+		return if type(X) == "table" and type(Y) == "table" then UDim2.new(X.Scale or (X.scale or 0), X.Offset or (X.offset or 0), Y.Scale or (Y.scale or 0), Y.Offset or (Y.offset or 0)) else UDim2.new(Entry.XScale or (Entry.xScale or (Entry.scaleX or (Entry[1] or 0.5))), Entry.XOffset or (Entry.xOffset or (Entry.offsetX or (Entry[2] or 0))), Entry.YScale or (Entry.yScale or (Entry.scaleY or (Entry[3] or 0.5))), Entry.YOffset or (Entry.yOffset or (Entry.offsetY or (Entry[4] or 0))))
 	end
-	local x = p1.X or p1.x
-	local y = p1.Y or p1.y
-	
-	return if type(x) == "table" and type(y) == "table" then UDim2.new(x.Scale or (x.scale or 0), x.Offset or (x.offset or 0), y.Scale or (y.scale or 0), y.Offset or (y.offset or 0)) else UDim2.new(p1.XScale or (p1.xScale or (p1.scaleX or (p1[1] or 0.5))), p1.XOffset or (p1.xOffset or (p1.offsetX or (p1[2] or 0))), p1.YScale or (p1.yScale or (p1.scaleY or (p1[3] or 0.5))), p1.YOffset or (p1.yOffset or (p1.offsetY or (p1[4] or 0))))
 end
 
-local function normalizeTextOverlayEdit(p1)
-	-- upvalues: toUDim2 (ref), toEnumItem (ref), builderSansMedium (ref), toColor3 (ref), center (ref)
+local function normalizeTextOverlayEdit(p1) --[[ Line: 129 ]]
+	-- upvalues: toUDim2 (copy), toEnumItem (copy), BuilderSansMedium (copy), toColor3 (copy), Center (copy)
 	if type(p1) == "table" then
-		local textOverlayStyle = p1.textOverlayStyle or {}
+		local TextOverlayStyle = p1.textOverlayStyle or {}
 		
 		return {
 			position = toUDim2(p1.position),
@@ -79,192 +87,205 @@ local function normalizeTextOverlayEdit(p1)
 			scale = if type(p1.scale) == "number" then p1.scale else 1,
 			text = if type(p1.text) == "string" then p1.text else "",
 			textOverlayStyle = {
-				font = toEnumItem(Enum.Font, textOverlayStyle.font, builderSansMedium),
-				fontColor = toColor3(textOverlayStyle.fontColor),
-				fontSize = if type(textOverlayStyle.fontSize) == "number" then textOverlayStyle.fontSize else 16,
-				textXAlignment = toEnumItem(Enum.TextXAlignment, textOverlayStyle.textXAlignment, center)
+				font = toEnumItem(Enum.Font, TextOverlayStyle.font, BuilderSansMedium),
+				fontColor = toColor3(TextOverlayStyle.fontColor),
+				fontSize = if type(TextOverlayStyle.fontSize) == "number" then TextOverlayStyle.fontSize else 16,
+				textXAlignment = toEnumItem(Enum.TextXAlignment, TextOverlayStyle.textXAlignment, Center)
 			},
 			zIndex = if type(p1.zIndex) == "number" then p1.zIndex else 1
 		}
+	else
+		return nil
 	end
-	return nil
 end
 
-local function normalizeStickerOverlayEdit(p1)
-	-- upvalues: toUDim2 (ref)
-	return if type(p1) == "table" then if type(p1.stickerURI) == "string" and p1.stickerURI ~= "" then {
+local function normalizeStickerOverlayEdit(p1) --[[ Line: 152 ]]
+	-- upvalues: toUDim2 (copy)
+	return if type(p1) == "table" and (type(p1.stickerURI) == "string" and p1.stickerURI ~= "") then {
 		position = toUDim2(p1.position),
 		rotation = if type(p1.rotation) == "number" then p1.rotation else 0,
 		scale = if type(p1.scale) == "number" then p1.scale else 1,
 		stickerSize = if type(p1.stickerSize) == "number" then p1.stickerSize else 1,
 		stickerURI = if type(p1.stickerURI) == "string" then p1.stickerURI else "",
 		zIndex = if type(p1.zIndex) == "number" then p1.zIndex else 1
-	} else nil else nil
+	} else nil
 end
 
-local function normalizeTtsEdit(p1)
-	if type(p1) ~= "table" then
+local function normalizeTtsEdit(p1) --[[ Line: 171 ]]
+	if type(p1) == "table" then
+		local Number: number? = tonumber(p1.assetId)
+		
+		return if Number == nil or Number <= 0 then nil else {
+			text = if type(p1.text) == "string" then p1.text else "",
+			voiceId = if type(p1.voiceId) == "number" then p1.voiceId else 0,
+			startTime = if type(p1.startTime) == "number" then p1.startTime else 0,
+			assetId = Number,
+			assetAccessContext = if type(p1.assetAccessContext) == "string" then p1.assetAccessContext else nil
+		}
+	else
 		return nil
 	end
-	local var1 = tonumber(p1.assetId)
-	
-	return if var1 == nil or var1 <= 0 then nil else {
-		text = if type(p1.text) == "string" then p1.text else "",
-		voiceId = if type(p1.voiceId) == "number" then p1.voiceId else 0,
-		startTime = if type(p1.startTime) == "number" then p1.startTime else 0,
-		assetId = var1,
-		assetAccessContext = if type(p1.assetAccessContext) == "string" then p1.assetAccessContext else nil
-	}
 end
 
-local function normalizeCaptureEdits(p1)
-	-- upvalues: normalizeTextOverlayEdit (ref), fFlagMomentsStickerOverlayNormalizationModule (ref), normalizeStickerOverlayEdit (ref), normalizeTtsEdit (ref)
-	if p1 == nil then
+local function normalizeCaptureEdits(ScreenshotCaptureEdits) --[[ Line: 189 ]]
+	-- upvalues: normalizeTextOverlayEdit (copy), FFlagMomentsStickerOverlayNormalizationModule (copy), normalizeStickerOverlayEdit (copy), normalizeTtsEdit (copy)
+	if ScreenshotCaptureEdits == nil then
 		return nil
 	end
-	local var1 = nil
+	local TextOverlays = nil
 	
-	if type(p1.textOverlays) == "table" then
-		local t = {}
+	if type(ScreenshotCaptureEdits.textOverlays) == "table" then
+		local List = {}
 		
-		for i, v in p1.textOverlays do
-			local var2 = normalizeTextOverlayEdit(v)
+		for _, textOverlay in ScreenshotCaptureEdits.textOverlays do
+			local NormalizeTextOverlayEditResult = normalizeTextOverlayEdit(textOverlay)
 			
-			if var2 ~= nil then
-				table.insert(t, var2)
+			if NormalizeTextOverlayEditResult ~= nil then
+				table.insert(List, NormalizeTextOverlayEditResult)
 			end
 		end
-		if #t > 0 then
-			var1 = t
+		if #List > 0 then
+			TextOverlays = List
 		end
 	end
-	local var3 = nil
+	local StickerOverlays = nil
 	
-	if fFlagMomentsStickerOverlayNormalizationModule() and type(p1.stickerOverlays) == "table" then
-		local t = {}
+	if FFlagMomentsStickerOverlayNormalizationModule() and type(ScreenshotCaptureEdits.stickerOverlays) == "table" then
+		local List = {}
 		
-		for i, v in p1.stickerOverlays do
-			local var4 = normalizeStickerOverlayEdit(v)
+		for _, stickerOverlay in ScreenshotCaptureEdits.stickerOverlays do
+			local NormalizeStickerOverlayEditResult = normalizeStickerOverlayEdit(stickerOverlay)
 			
-			if var4 ~= nil then
-				table.insert(t, var4)
+			if NormalizeStickerOverlayEditResult ~= nil then
+				table.insert(List, NormalizeStickerOverlayEditResult)
 			end
 		end
-		if #t > 0 then
-			var3 = t
+		if #List > 0 then
+			StickerOverlays = List
 		end
 	end
-	local var5 = nil
+	local TtsAudios = nil
 	
-	if type(p1.ttsAudios) == "table" then
-		local t = {}
+	if type(ScreenshotCaptureEdits.ttsAudios) == "table" then
+		local List = {}
 		
-		for i, v in p1.ttsAudios do
-			local var6 = normalizeTtsEdit(v)
+		for _, ttsAudio in ScreenshotCaptureEdits.ttsAudios do
+			local NormalizeTtsEditResult = normalizeTtsEdit(ttsAudio)
 			
-			if var6 ~= nil then
-				table.insert(t, var6)
+			if NormalizeTtsEditResult ~= nil then
+				table.insert(List, NormalizeTtsEditResult)
 			end
 		end
-		if #t > 0 then
-			var5 = t
+		if #List > 0 then
+			TtsAudios = List
 		end
 	end
 	return {
-		trim = p1.trim,
-		music = p1.music,
-		ttsAudios = var5,
-		textOverlays = var1,
-		stickerOverlays = var3
+		trim = ScreenshotCaptureEdits.trim,
+		music = ScreenshotCaptureEdits.music,
+		ttsAudios = TtsAudios,
+		textOverlays = TextOverlays,
+		stickerOverlays = StickerOverlays
 	}
 end
 
-local _ = function(p2)
-	if p2 == nil or p2.counts == nil then
+local _ = function(p1): number? --[[ Line: 246 | Named "reactionTotal" ]]
+	if p1 == nil or p1.counts == nil then
 		return nil
 	end
-	local var7 = 0
+	local Total = 0
 	
-	for i, v in p2.counts do
-		var7 += v
+	for _, count in p1.counts do
+		Total += count
 	end
-	return var7
+	return Total
 end
 
-local function convertApiMomentToMomentItem(p3)
-	-- upvalues: normalizeCaptureEdits (ref), momentStatus (ref), fFlagEnableMomentsCommentReporting (ref), getFFlagMomentsRenderPostAssetsModule (ref), fFlagMomentsComments (ref), fFlagMomentsCommentsIxpEnabled (ref), convertApiMomentCommentsModule (ref)
-	local captionedAssetMoment = p3.captionedAssetMoment
-	local owner = p3.owner
-	local entityId = p3.entityId or p3.id
-	local feedItemId = p3.feedItemId
+local function convertApiMomentToMomentItem(p2) --[[ Line: 259 ]]
+	-- upvalues: FFlagMomentsServeEDPVideos (copy), normalizeCaptureEdits (copy), MomentStatus (copy), FFlagEnableMomentsCommentReporting (copy), GetFFlagMomentsRenderPostAssetsModule (copy), FFlagMomentsComments (copy), FFlagMomentsCommentsIxpEnabled (copy), ConvertApiMomentCommentsModule (copy)
+	local CaptionedAssetMoment = p2.captionedAssetMoment
+	local Owner = p2.owner
+	local IsEdpVideo = if FFlagMomentsServeEDPVideos then p2.entityType == "edpVideo" else nil
+	local Id = if FFlagMomentsServeEDPVideos and IsEdpVideo then p2.id or (if CaptionedAssetMoment == nil or CaptionedAssetMoment.assetId == nil then nil else tostring(CaptionedAssetMoment.assetId)) else p2.entityId or p2.id
+	local FeedItemId = p2.feedItemId
 	
-	if captionedAssetMoment == nil or captionedAssetMoment.assetId == nil or (owner == nil or owner.id == nil) or (entityId == nil or feedItemId == nil or feedItemId == "") then
+	if CaptionedAssetMoment == nil or CaptionedAssetMoment.assetId == nil or (not FFlagMomentsServeEDPVideos or not IsEdpVideo) and (Owner == nil or Owner.id == nil) or (Id == nil or FeedItemId == nil or FeedItemId == "") then
 		return nil
 	end
-	local var8
-	local var9 = if p3.primaryCta ~= nil then nil else p3.primaryCta.experienceCta
-	local var10 = normalizeCaptureEdits(if captionedAssetMoment.captureType == "Screenshot" then captionedAssetMoment.screenshotCaptureEdits else captionedAssetMoment.videoCaptureEdits)
-	local var11 = if (captionedAssetMoment.status or p3.status) == momentStatus.Deleted then momentStatus.Deleted else momentStatus.Public
-	local t = {
-		assetId = captionedAssetMoment.assetId,
-		channelId = if fFlagEnableMomentsCommentReporting and type(p3.channelId) == "string" and p3.channelId ~= "" then p3.channelId else nil,
-		creatorId = owner.id,
-		isModerated = captionedAssetMoment.isModerated
+	local ExperienceCta = if p2.primaryCta == nil then nil else p2.primaryCta.experienceCta
+	local Number = if FFlagMomentsServeEDPVideos then if ExperienceCta == nil then if IsEdpVideo then tonumber(p2.entityId) else nil else ExperienceCta.experienceId else nil
+	local Status = CaptionedAssetMoment.status or p2.status
+	local Deleted = if Status == MomentStatus.Deleted then MomentStatus.Deleted else MomentStatus.Public
+	local config = {
+		assetId = CaptionedAssetMoment.assetId,
+		channelId = if FFlagEnableMomentsCommentReporting and type(p2.channelId) == "string" and p2.channelId ~= "" then p2.channelId else nil,
+		creatorId = if FFlagMomentsServeEDPVideos and (Owner == nil or Owner.id == nil) then 0 else Owner.id,
+		isModerated = CaptionedAssetMoment.isModerated
 	}
-	local t_1 = {
-		assetToken = captionedAssetMoment.assetToken,
-		assetTotalDuration = captionedAssetMoment.assetTotalDuration,
-		assetAccessContext = captionedAssetMoment.assetAccessContext,
-		captureType = if captionedAssetMoment.captureType == "Screenshot" then Enum.CaptureType.Screenshot else Enum.CaptureType.Video,
-		description = captionedAssetMoment.caption,
-		edits = var10,
-		experienceName = if var9 ~= nil then nil else var9.experienceName
+	local Metadata = {
+		assetToken = CaptionedAssetMoment.assetToken,
+		assetTotalDuration = CaptionedAssetMoment.assetTotalDuration,
+		assetAccessContext = CaptionedAssetMoment.assetAccessContext,
+		captureType = if CaptionedAssetMoment.captureType == "Screenshot" then Enum.CaptureType.Screenshot else Enum.CaptureType.Video,
+		description = CaptionedAssetMoment.caption,
+		edits = normalizeCaptureEdits(if CaptionedAssetMoment.captureType == "Screenshot" then CaptionedAssetMoment.screenshotCaptureEdits else CaptionedAssetMoment.videoCaptureEdits),
+		experienceName = if ExperienceCta == nil then nil else ExperienceCta.experienceName
 	}
-	local reactions = p3.reactions
+	local Reactions = p2.reactions
+	local LikeCount = nil
 	
-	if reactions == nil or reactions.counts == nil then
-		var8 = nil
+	if Reactions == nil or Reactions.counts == nil then
+		LikeCount = nil
 	else
-		local var12 = 0
+		local Total = 0
 		
-		for i, v in reactions.counts do
-			var12 += v
+		for _, count in Reactions.counts do
+			Total += count
 		end
-		var8 = var12
+		LikeCount = Total
 	end
-	t_1.likeCount = var8
-	t_1.partnerUploadType = captionedAssetMoment.partnerUploadType
-	t_1.placeId = if var9 ~= nil then nil else var9.placeId
-	t_1.universeId = if var9 ~= nil then nil else var9.experienceId
-	t.metadata = t_1
-	t.momentId = entityId
-	t.postAsset = if getFFlagMomentsRenderPostAssetsModule() and p3.postAsset ~= nil and p3.postAsset.postAssetId ~= nil then { postAssetId = p3.postAsset.postAssetId } else nil
-	t.recommendationMetadata = { feedItemId = feedItemId, tracingId = p3.feedSessionId }
-	t.status = var11
+	Metadata.likeCount = LikeCount
+	Metadata.partnerUploadType = CaptionedAssetMoment.partnerUploadType
+	Metadata.placeId = if ExperienceCta == nil then nil else ExperienceCta.placeId
+	Metadata.universeId = if FFlagMomentsServeEDPVideos then Number elseif ExperienceCta == nil then nil else ExperienceCta.experienceId
+	config.metadata = Metadata
+	local EntityType = nil
 	
-	if fFlagMomentsComments or fFlagMomentsCommentsIxpEnabled then
-		local var13 = convertApiMomentCommentsModule(p3.comments)
+	if FFlagMomentsServeEDPVideos then
+		local EntityType1 = p2.entityType
+		EntityType = if EntityType1 == "experience" or EntityType1 == "ad" then EntityType1 elseif FFlagMomentsServeEDPVideos and EntityType1 == "edpVideo" then EntityType1 else nil
+	else
+		EntityType = nil
+	end
+	config.entityType = EntityType
+	config.momentId = Id
+	config.postAsset = if GetFFlagMomentsRenderPostAssetsModule() and p2.postAsset ~= nil and p2.postAsset.postAssetId ~= nil then { postAssetId = p2.postAsset.postAssetId } else nil
+	config.recommendationMetadata = { feedItemId = FeedItemId, tracingId = p2.feedSessionId }
+	config.status = Deleted
+	
+	if FFlagMomentsComments or FFlagMomentsCommentsIxpEnabled then
+		local ConvertApiMomentCommentsModuleResult = ConvertApiMomentCommentsModule(p2.comments)
 		
-		if var13 ~= nil then
-			t.comments = var13
+		if ConvertApiMomentCommentsModuleResult ~= nil then
+			config.comments = ConvertApiMomentCommentsModuleResult
 		end
 	end
-	return t
+	return config
 end
 
-return function(p4)
-	-- upvalues: convertApiMomentToMomentItem (ref)
-	local t = {}
+return function(List) --[[ Line: 344 | Named "convertApiMomentsToMomentItems" ]]
+	-- upvalues: convertApiMomentToMomentItem (copy)
+	local List1 = {}
 	
-	if p4 == nil then
-		return t
+	if List == nil then
+		return List1
 	end
-	for i, v in ipairs(p4) do
-		local var14 = convertApiMomentToMomentItem(v)
+	for _, value in ipairs(List) do
+		local ConvertApiMomentToMomentItemResult = convertApiMomentToMomentItem(value)
 		
-		if var14 ~= nil then
-			table.insert(t, var14)
+		if ConvertApiMomentToMomentItemResult ~= nil then
+			table.insert(List1, ConvertApiMomentToMomentItemResult)
 		end
 	end
-	return t
+	return List1
 end

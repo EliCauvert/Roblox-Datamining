@@ -1,100 +1,100 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local corePackagesService = game:GetService("CorePackages")
-local localizationService = game:GetService("LocalizationService")
-local roactModule = require(corePackagesService.Packages.Roact)
-local roduxModule = require(corePackagesService.Packages.Rodux)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local tModule = require(corePackagesService.Packages.t)
-local _ = require(corePackagesService.Packages.UIBlox)
-local dependenciesModule = require(script.Dependencies)
-local localization = dependenciesModule.Localization
-local localizationProviderModule = require(dependenciesModule.LocalizationProvider)
-local playerInterfaceModule = require(dependenciesModule.playerInterface)
-local constantsModule = require(script.Resources.Constants)
-local globalConfigModule = require(script.GlobalConfig)
-local reducersModule = require(script.Reducers)
-local trustAndSafetyAppModule = require(script.Components.TrustAndSafetyApp)
-local trustAndSafetyAppPolicyModule = require(script.TrustAndSafetyAppPolicy)
+﻿local CoreGui = game:GetService("CoreGui")
+local CorePackages = game:GetService("CorePackages")
+local LocalizationService = game:GetService("LocalizationService")
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoduxModule = require(CorePackages.Packages.Rodux)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local TModule = require(CorePackages.Packages.t)
+local _ = require(CorePackages.Packages.UIBlox)
+local DependenciesModule = require(script.Dependencies)
+local Localization = DependenciesModule.Localization
+local LocalizationProviderModule = require(DependenciesModule.LocalizationProvider)
+local PlayerInterfaceModule = require(DependenciesModule.playerInterface)
+local ConstantsModule = require(script.Resources.Constants)
+local GlobalConfigModule = require(script.GlobalConfig)
+local ReducersModule = require(script.Reducers)
+local TrustAndSafetyAppModule = require(script.Components.TrustAndSafetyApp)
+local TrustAndSafetyAppPolicyModule = require(script.TrustAndSafetyAppPolicy)
 local _ = require(script.Actions.OpenReportDialog)
 local _ = require(script.Actions.OpenReportMenu)
-local beginReportFlowModule = require(script.Actions.BeginReportFlow)
-local setVoiceReportingFlowModule = require(script.Actions.SetVoiceReportingFlow)
-local sessionUtilityModule = require(script.Utility.SessionUtility)
-local fetchPlaceInfoModule = require(script.Thunks.FetchPlaceInfo)
-local t = {
-	getInstance = function(p1)
+local BeginReportFlowModule = require(script.Actions.BeginReportFlow)
+local SetVoiceReportingFlowModule = require(script.Actions.SetVoiceReportingFlow)
+local SessionUtilityModule = require(script.Utility.SessionUtility)
+local FetchPlaceInfoModule = require(script.Thunks.FetchPlaceInfo)
+local config = {
+	getInstance = function(p1) --[[ Line: 33 ]]
 		if not p1._initialized then
 			p1:initialize()
 			p1._initialized = true
 		end
 		return p1
 	end,
-	initialize = function(p1)
-		-- upvalues: globalConfigModule (ref), roactModule (ref), fetchPlaceInfoModule (ref), roactRoduxModule (ref), trustAndSafetyAppPolicyModule (ref), localizationProviderModule (ref), trustAndSafetyAppModule (ref), coreGuiService (ref)
-		if globalConfigModule.propValidation then
-			roactModule.setGlobalConfig({ propValidation = true })
+	initialize = function(p1) --[[ Line: 42 ]]
+		-- upvalues: GlobalConfigModule (copy), RoactModule (copy), FetchPlaceInfoModule (copy), RoactRoduxModule (copy), TrustAndSafetyAppPolicyModule (copy), LocalizationProviderModule (copy), TrustAndSafetyAppModule (copy), CoreGui (copy)
+		if GlobalConfigModule.propValidation then
+			RoactModule.setGlobalConfig({ propValidation = true })
 		end
-		if globalConfigModule.elementTracing then
-			roactModule.setGlobalConfig({ elementTracing = true })
+		if GlobalConfigModule.elementTracing then
+			RoactModule.setGlobalConfig({ elementTracing = true })
 		end
 		p1.store = p1:createStore()
-		p1.store:dispatch(fetchPlaceInfoModule(game.GameId))
+		p1.store:dispatch(FetchPlaceInfoModule(game.GameId))
 		p1.localization = p1:createLocalization()
-		p1.root = roactModule.createElement(roactRoduxModule.StoreProvider, { store = p1.store }, {
-			PolicyProvider = roactModule.createElement(trustAndSafetyAppPolicyModule.Provider, { policy = { trustAndSafetyAppPolicyModule.Mapper } }, {
-				LocalizationProvider = roactModule.createElement(localizationProviderModule, { localization = p1.localization }, {
-					TrustAndSafety = roactModule.createElement(trustAndSafetyAppModule)
+		p1.root = RoactModule.createElement(RoactRoduxModule.StoreProvider, { store = p1.store }, {
+			PolicyProvider = RoactModule.createElement(TrustAndSafetyAppPolicyModule.Provider, { policy = { TrustAndSafetyAppPolicyModule.Mapper } }, {
+				LocalizationProvider = RoactModule.createElement(LocalizationProviderModule, { localization = p1.localization }, {
+					TrustAndSafety = RoactModule.createElement(TrustAndSafetyAppModule)
 				})
 			})
 		})
-		p1.element = roactModule.mount(p1.root, coreGuiService, "TrustAndSafety")
+		p1.element = RoactModule.mount(p1.root, CoreGui, "TrustAndSafety")
 	end,
-	createStore = function(_)
-		-- upvalues: reducersModule (ref), roduxModule (ref), globalConfigModule (ref)
-		local list = { roduxModule.thunkMiddleware }
+	createStore = function(_) --[[ Line: 76 ]]
+		-- upvalues: ReducersModule (copy), RoduxModule (copy), GlobalConfigModule (copy)
+		local List = { RoduxModule.thunkMiddleware }
 		
-		if globalConfigModule.logStore then
-			table.insert(list, roduxModule.loggerMiddleware)
+		if GlobalConfigModule.logStore then
+			table.insert(List, RoduxModule.loggerMiddleware)
 		end
-		return roduxModule.Store.new(reducersModule, nil, list)
+		return RoduxModule.Store.new(ReducersModule, nil, List)
 	end,
-	createLocalization = function(_)
-		-- upvalues: localizationService (ref), localization (ref)
-		local var1 = localization.new(localizationService.RobloxLocaleId)
-		localizationService:GetPropertyChangedSignal("RobloxLocaleId"):Connect(function()
-			-- upvalues: localizationService (copy), var1 (ref)
-			var1:SetLocale(localizationService.RobloxLocaleId)
+	createLocalization = function(_) --[[ Line: 87 ]]
+		-- upvalues: LocalizationService (copy), Localization (copy)
+		local NewLocalization = Localization.new(LocalizationService.RobloxLocaleId)
+		LocalizationService:GetPropertyChangedSignal("RobloxLocaleId"):Connect(function() --[[ Line: 91 ]]
+			-- upvalues: LocalizationService (upval), NewLocalization (copy)
+			NewLocalization:SetLocale(LocalizationService.RobloxLocaleId)
 		end)
 		
-		return var1
+		return NewLocalization
 	end,
-	openReportDialog = function(p1, p2, p3)
-		-- upvalues: setVoiceReportingFlowModule (ref), beginReportFlowModule (ref)
-		p1.store:dispatch(setVoiceReportingFlowModule(true))
-		p1.store:dispatch(beginReportFlowModule(p2, p3))
+	openReportDialog = function(p1, p2, p3) --[[ Line: 99 ]]
+		-- upvalues: SetVoiceReportingFlowModule (copy), BeginReportFlowModule (copy)
+		p1.store:dispatch(SetVoiceReportingFlowModule(true))
+		p1.store:dispatch(BeginReportFlowModule(p2, p3))
 	end,
-	openReportMenu = function(p1)
-		-- upvalues: setVoiceReportingFlowModule (ref), beginReportFlowModule (ref)
-		p1.store:dispatch(setVoiceReportingFlowModule(true))
-		p1.store:dispatch(beginReportFlowModule())
+	openReportMenu = function(p1) --[[ Line: 104 ]]
+		-- upvalues: SetVoiceReportingFlowModule (copy), BeginReportFlowModule (copy)
+		p1.store:dispatch(SetVoiceReportingFlowModule(true))
+		p1.store:dispatch(BeginReportFlowModule())
 	end
 }
 
 return {
-	openReportDialogForPlayer = function(p1, p2)
-		-- upvalues: playerInterfaceModule (ref), tModule (ref), sessionUtilityModule (ref), t (ref), constantsModule (ref)
-		assert(playerInterfaceModule(p1) and tModule.instanceIsA("Player")(p1))
-		sessionUtilityModule.startAbuseReportSession(p2)
-		t:getInstance():openReportDialog(constantsModule.ReportType.Player, p1)
+	openReportDialogForPlayer = function(p1, p2) --[[ Line: 110 ]]
+		-- upvalues: PlayerInterfaceModule (copy), TModule (copy), SessionUtilityModule (copy), config (copy), ConstantsModule (copy)
+		assert(PlayerInterfaceModule(p1) and TModule.instanceIsA("Player")(p1))
+		SessionUtilityModule.startAbuseReportSession(p2)
+		config:getInstance():openReportDialog(ConstantsModule.ReportType.Player, p1)
 	end,
-	openReportDialogForPlace = function(p1)
-		-- upvalues: sessionUtilityModule (ref), t (ref), constantsModule (ref)
-		sessionUtilityModule.startAbuseReportSession(p1)
-		t:getInstance():openReportDialog(constantsModule.ReportType.Place)
+	openReportDialogForPlace = function(p1) --[[ Line: 115 ]]
+		-- upvalues: SessionUtilityModule (copy), config (copy), ConstantsModule (copy)
+		SessionUtilityModule.startAbuseReportSession(p1)
+		config:getInstance():openReportDialog(ConstantsModule.ReportType.Place)
 	end,
-	openReportMenu = function(p1)
-		-- upvalues: sessionUtilityModule (ref), t (ref)
-		sessionUtilityModule.startAbuseReportSession(p1)
-		t:getInstance():openReportMenu()
+	openReportMenu = function(p1) --[[ Line: 119 ]]
+		-- upvalues: SessionUtilityModule (copy), config (copy)
+		SessionUtilityModule.startAbuseReportSession(p1)
+		config:getInstance():openReportMenu()
 	end
 }

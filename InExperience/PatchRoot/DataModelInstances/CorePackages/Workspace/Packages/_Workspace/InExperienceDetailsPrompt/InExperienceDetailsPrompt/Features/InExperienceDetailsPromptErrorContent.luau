@@ -1,38 +1,39 @@
-﻿local parent = script:FindFirstAncestor("InExperienceDetailsPrompt").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local view = foundationModule.View
-local icon = foundationModule.Icon
-local enums = foundationModule.Enums
-local text = foundationModule.Text
-local useTokens = foundationModule.Hooks.useTokens
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local enumGameDetailErrorTypes = require(parent.DiscoveryTypes).EnumGameDetailErrorTypes
+﻿local Parent = script:FindFirstAncestor("InExperienceDetailsPrompt").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local Icon = FoundationModule.Icon
+local Enums = FoundationModule.Enums
+local Text = FoundationModule.Text
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local EnumGameDetailErrorTypes = require(Parent.DiscoveryTypes).EnumGameDetailErrorTypes
 
-local function _(p1, p2)
-	-- upvalues: enumGameDetailErrorTypes (ref)
-	return if p1 == enumGameDetailErrorTypes.ExperienceUnavailable then p2.experienceUnavailable else p2.noInternet
+local function _(ExperienceUnavailable, p1) --[[ Line: 18 | Named "getErrorDisplayMessage" ]]
+	-- upvalues: EnumGameDetailErrorTypes (copy)
+	return if ExperienceUnavailable == EnumGameDetailErrorTypes.ExperienceUnavailable then p1.experienceUnavailable else p1.noInternet
 end
 
-return function(p1)
-	-- upvalues: useTokens (ref), useLocalization (ref), enumGameDetailErrorTypes (ref), reactModule (ref), view (ref), icon (ref), enums (ref), text (ref)
-	local var1 = useLocalization({
+return function(p1) --[[ Line: 25 | Named "InExperienceDetailsPromptErrorContent" ]]
+	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), EnumGameDetailErrorTypes (copy), ReactModule (copy), View (copy), Icon (copy), Enums (copy), Text (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseLocalizationResult = UseLocalizationFunction({
 		experienceUnavailable = "Feature.GamePage.QuickLaunch.LaunchError.TemporarilyUnavailable",
 		noInternet = "Feature.EmptyStatePage.Message.NoInternet"
 	})
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "col size-full-0 auto-y items-center gap-medium padding-bottom-large padding-top-large"
 	}, {
-		Icon = reactModule.createElement(icon, {
+		Icon = ReactModule.createElement(Icon, {
 			layoutOrder = 1,
-			name = enums.IconName.TriangleExclamation,
-			size = useTokens().Size.Size_1700
+			name = Enums.IconName.TriangleExclamation,
+			size = UseTokensResult.Size.Size_1700
 		}),
-		Message = reactModule.createElement(text, {
+		Message = ReactModule.createElement(Text, {
 			tag = "text-body-large size-full-0 auto-y text-center text-wrap",
 			layoutOrder = 2,
-			Text = if p1.errorType == enumGameDetailErrorTypes.ExperienceUnavailable then var1.experienceUnavailable else var1.noInternet
+			Text = if p1.errorType == EnumGameDetailErrorTypes.ExperienceUnavailable then UseLocalizationResult.experienceUnavailable else UseLocalizationResult.noInternet
 		})
 	})
 end

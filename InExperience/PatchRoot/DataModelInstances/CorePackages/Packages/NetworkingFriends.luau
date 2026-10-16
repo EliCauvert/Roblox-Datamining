@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Index.NetworkingFriends.NetworkingFriends)
+﻿return (require(script.Parent._Index.NetworkingFriends.NetworkingFriends))

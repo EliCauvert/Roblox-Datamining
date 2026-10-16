@@ -1,36 +1,36 @@
-﻿local reactModule = require(script:FindFirstAncestor("GenericAbuseReporting").Parent.React)
-local translateModule = require(script.Parent.translate)
-local translateIntoString = translateModule.translateIntoString
-local translateIntoRichTextString = translateModule.translateIntoRichTextString
-local var1 = reactModule.createContext(nil)
+﻿local ReactModule = require(script:FindFirstAncestor("GenericAbuseReporting").Parent.React)
+local TranslateModule = require(script.Parent.translate)
+local TranslateIntoStringFunction = TranslateModule.translateIntoString
+local TranslateIntoRichTextStringFunction = TranslateModule.translateIntoRichTextString
+local Context = ReactModule.createContext(nil)
 
 return {
-	ArTranslationContext = var1,
-	ArTranslationProvider = function(p1)
-		-- upvalues: reactModule (ref), translateIntoString (ref), translateIntoRichTextString (ref), var1 (ref)
-		return reactModule.createElement(var1.Provider, {
-			value = reactModule.useMemo(function()
-				-- upvalues: translateIntoString (copy), p1 (ref), translateIntoRichTextString (copy)
+	ArTranslationContext = Context,
+	ArTranslationProvider = function(p1) --[[ Line: 25 ]]
+		-- upvalues: ReactModule (copy), TranslateIntoStringFunction (copy), TranslateIntoRichTextStringFunction (copy), Context (copy)
+		return ReactModule.createElement(Context.Provider, {
+			value = ReactModule.useMemo(function() --[[ Line: 26 ]]
+				-- upvalues: TranslateIntoStringFunction (upval), p1 (copy), TranslateIntoRichTextStringFunction (upval)
 				return {
-					translateIntoString = function(p2)
-						-- upvalues: translateIntoString (copy), p1 (copy)
-						return translateIntoString(p1.translations, p2)
+					translateIntoString = function(p2) --[[ Line: 27 ]]
+						-- upvalues: TranslateIntoStringFunction (upval), p1 (upval)
+						return TranslateIntoStringFunction(p1.translations, p2)
 					end,
-					translateIntoRichTextString = function(p2)
-						-- upvalues: translateIntoRichTextString (copy), p1 (copy)
-						return translateIntoRichTextString(p1.translations, p2)
+					translateIntoRichTextString = function(p2) --[[ Line: 31 ]]
+						-- upvalues: TranslateIntoRichTextStringFunction (upval), p1 (upval)
+						return TranslateIntoRichTextStringFunction(p1.translations, p2)
 					end
 				}
 			end, { p1.translations })
 		}, p1.children)
 	end,
-	useArTranslation = function()
-		-- upvalues: reactModule (ref), var1 (ref)
-		local var2 = reactModule.useContext(var1)
+	useArTranslation = function() --[[ Line: 46 ]]
+		-- upvalues: ReactModule (copy), Context (copy)
+		local UseContextResult = ReactModule.useContext(Context)
 		
-		if not var2 then
+		if not UseContextResult then
 			error("Invalid use of `useArTranslation` hook. Ensure your component has an ancestor wrapped in `ArTranslationProvider`")
 		end
-		return var2
+		return UseContextResult
 	end
 }

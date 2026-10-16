@@ -1,22 +1,22 @@
-﻿local unknownModule = require(script.Parent.Parent["Type.roblox"])
-local t = {}
-local t_1 = {
-	__tostring = function(p1)
+﻿local TypeRobloxModule = require(script.Parent.Parent["Type.roblox"])
+local ChangeModule = {}
+local config = {
+	__tostring = function(p1): string --[[ Line: 33 ]]
 		return string.format("RoactHostChangeEvent(%s)", p1.name)
 	end
 }
-setmetatable(t, {
-	__index = function(_, p1)
-		-- upvalues: unknownModule (ref), t_1 (ref), t (ref)
-		local t_2 = {
-			[unknownModule] = unknownModule.HostChangeEvent,
-			name = p1
+setmetatable(ChangeModule, {
+	__index = function(_, Name) --[[ Line: 39 ]]
+		-- upvalues: TypeRobloxModule (copy), config (copy), ChangeModule (copy)
+		local config1 = {
+			[TypeRobloxModule] = TypeRobloxModule.HostChangeEvent,
+			name = Name
 		}
-		setmetatable(t_2, t_1)
-		t[p1] = t_2
+		setmetatable(config1, config)
+		ChangeModule[Name] = config1
 		
-		return t_2
+		return config1
 	end
 })
 
-return t
+return ChangeModule

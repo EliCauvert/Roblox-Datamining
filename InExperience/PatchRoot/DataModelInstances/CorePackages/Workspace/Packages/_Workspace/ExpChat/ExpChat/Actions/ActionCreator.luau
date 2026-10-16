@@ -1,9 +1,9 @@
-﻿local cryoModule = require(script:FindFirstAncestor("ExpChat").Parent.Cryo)
+﻿local CryoModule = require(script:FindFirstAncestor("ExpChat").Parent.Cryo)
 
-return function(p1, p2)
-	-- upvalues: cryoModule (ref)
-	return function(...)
-		-- upvalues: p1 (ref), p2 (ref), cryoModule (copy)
-		return cryoModule.Dictionary.union(p2(...), { type = p1 })
+return function(p1, Callback) --[[ Line: 5 ]]
+	-- upvalues: CryoModule (copy)
+	return function(...) --[[ Line: 9 ]]
+		-- upvalues: p1 (copy), Callback (copy), CryoModule (upval)
+		return (CryoModule.Dictionary.union(Callback(...), { type = p1 }))
 	end
 end

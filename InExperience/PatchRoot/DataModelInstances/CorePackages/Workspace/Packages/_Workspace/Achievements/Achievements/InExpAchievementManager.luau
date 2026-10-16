@@ -1,104 +1,104 @@
-﻿local achievements = script:FindFirstAncestor("Achievements")
-local parent = achievements.Parent
-local signalModule = require(parent.Signal)
-local achievementModule = require(achievements.Achievement.Achievement)
-local loggerModule = require(achievements.Logger)
-local httpRequestModule = require(parent.HttpRequest)
-local getUserRecentExperiencesModule = require(achievements.Requests.GetUserRecentExperiences)
-local dashModule = require(parent.Dash)
-local timeRefresherModule = require(achievements.AchievementDataRefresher.TimeRefresher)
-local friendCountRefresherModule = require(achievements.AchievementDataRefresher.FriendCountRefresher)
-local var1 = httpRequestModule.config({
-	requestFunction = function(p1, p2, p3)
-		-- upvalues: httpRequestModule (ref)
-		return httpRequestModule.requestFunctions.HttpRbxApi(p1, p2, p3)
+﻿local Achievements = script:FindFirstAncestor("Achievements")
+local Parent = Achievements.Parent
+local SignalModule = require(Parent.Signal)
+local AchievementModule = require(Achievements.Achievement.Achievement)
+local LoggerModule = require(Achievements.Logger)
+local HttpRequestModule = require(Parent.HttpRequest)
+local GetUserRecentExperiencesModule = require(Achievements.Requests.GetUserRecentExperiences)
+local DashModule = require(Parent.Dash)
+local TimeRefresherModule = require(Achievements.AchievementDataRefresher.TimeRefresher)
+local FriendCountRefresherModule = require(Achievements.AchievementDataRefresher.FriendCountRefresher)
+local ConfigResult = HttpRequestModule.config({
+	requestFunction = function(p1, p2, p3) --[[ Line: 19 ]]
+		-- upvalues: HttpRequestModule (copy)
+		return HttpRequestModule.requestFunctions.HttpRbxApi(p1, p2, p3)
 	end,
-	maxRetryCount = if require(parent.SharedFlags).FFlagLuaAppDefaultHttpRetry then game:DefineFastInt("InExpAchievementManagerHttpRetryCount", 4) else nil
+	maxRetryCount = if require(Parent.SharedFlags).FFlagLuaAppDefaultHttpRetry then game:DefineFastInt("InExpAchievementManagerHttpRetryCount", 4) else nil
 })
-local var2 = nil
-pcall(function()
-	-- upvalues: var2 (write)
-	var2 = game:GetService("PlatformFriendsService")
+local PlatformFriendsService = nil
+pcall(function() --[[ Line: 29 ]]
+	-- upvalues: PlatformFriendsService (ref)
+	PlatformFriendsService = game:GetService("PlatformFriendsService")
 end)
-local var3 = nil
-pcall(function()
-	-- upvalues: var3 (write)
-	var3 = game:GetService("PlatformCloudStorageService")
+local PlatformCloudStorageService = nil
+pcall(function() --[[ Line: 34 ]]
+	-- upvalues: PlatformCloudStorageService (ref)
+	PlatformCloudStorageService = game:GetService("PlatformCloudStorageService")
 end)
-local var4 = nil
-pcall(function()
-	-- upvalues: var4 (write)
-	var4 = game:GetService("AchievementService")
+local AchievementService = nil
+pcall(function() --[[ Line: 39 ]]
+	-- upvalues: AchievementService (ref)
+	AchievementService = game:GetService("AchievementService")
 end)
-local playersService = game:GetService("Players")
-local var5 = nil
-pcall(function()
-	-- upvalues: var5 (write)
-	var5 = game:GetService("PlatformService")
+local Players = game:GetService("Players")
+local PlatformService = nil
+pcall(function() --[[ Line: 47 ]]
+	-- upvalues: PlatformService (ref)
+	PlatformService = game:GetService("PlatformService")
 end)
-local t = {
-	startUp = function(p1)
-		-- upvalues: signalModule (ref), timeRefresherModule (ref), friendCountRefresherModule (ref), achievementModule (ref)
-		local var6, var7 = signalModule.createReadableSignal(0)
-		local var8, var9 = signalModule.createReadableSignal(0)
-		local var10, var11 = signalModule.createReadableSignal(0)
-		local var12, var13 = signalModule.createReadableSignal(0)
-		timeRefresherModule:init(var7, 3600)
-		friendCountRefresherModule:init(var13, p1.playersService)
-		p1.achievementMarathon = achievementModule.newWithRefresher(achievementModule.NAMES.ACHIEVEMENT_MARATHON, var6, timeRefresherModule, p1.achievementService)
-		p1.achievementFoursCompany = achievementModule.newWithRefresher(achievementModule.NAMES.ACHIEVEMENT_FOURS_COMPANY, var12, friendCountRefresherModule, p1.achievementService)
-		p1.achievementScout = achievementModule.new(achievementModule.NAMES.ACHIEVEMENT_SCOUT, var8, p1.achievementService)
-		p1.achievementExplorer = achievementModule.new(achievementModule.NAMES.ACHIEVEMENT_EXPLORER, var8, p1.achievementService)
-		p1.achievementTrailblazer = achievementModule.new(achievementModule.NAMES.ACHIEVEMENT_TRAILBLAZER, var8, p1.achievementService)
-		p1.achievementStrengthInNumbers = achievementModule.new(achievementModule.NAMES.ACHIEVEMENT_STRENGTH_IN_NUMBERS, var10, p1.achievementService)
-		p1:_checkStrengthInNumbers(var11)
-		p1:_checkJoinExperienceAchievements(var9)
+local InExpAchievementManager = {
+	startUp = function(p1) --[[ Line: 56 ]]
+		-- upvalues: SignalModule (copy), TimeRefresherModule (copy), FriendCountRefresherModule (copy), AchievementModule (copy)
+		local ReadableSignal, ReadableSignal2 = SignalModule.createReadableSignal(0)
+		local ReadableSignal1, ReadableSignal2_1 = SignalModule.createReadableSignal(0)
+		local ReadableSignal3, ReadableSignal2_2 = SignalModule.createReadableSignal(0)
+		local ReadableSignal4, ReadableSignal2_3 = SignalModule.createReadableSignal(0)
+		TimeRefresherModule:init(ReadableSignal2, 3600)
+		FriendCountRefresherModule:init(ReadableSignal2_3, p1.playersService)
+		p1.achievementMarathon = AchievementModule.newWithRefresher(AchievementModule.NAMES.ACHIEVEMENT_MARATHON, ReadableSignal, TimeRefresherModule, p1.achievementService)
+		p1.achievementFoursCompany = AchievementModule.newWithRefresher(AchievementModule.NAMES.ACHIEVEMENT_FOURS_COMPANY, ReadableSignal4, FriendCountRefresherModule, p1.achievementService)
+		p1.achievementScout = AchievementModule.new(AchievementModule.NAMES.ACHIEVEMENT_SCOUT, ReadableSignal1, p1.achievementService)
+		p1.achievementExplorer = AchievementModule.new(AchievementModule.NAMES.ACHIEVEMENT_EXPLORER, ReadableSignal1, p1.achievementService)
+		p1.achievementTrailblazer = AchievementModule.new(AchievementModule.NAMES.ACHIEVEMENT_TRAILBLAZER, ReadableSignal1, p1.achievementService)
+		p1.achievementStrengthInNumbers = AchievementModule.new(AchievementModule.NAMES.ACHIEVEMENT_STRENGTH_IN_NUMBERS, ReadableSignal3, p1.achievementService)
+		p1:_checkStrengthInNumbers(ReadableSignal2_2)
+		p1:_checkJoinExperienceAchievements(ReadableSignal2_1)
 	end,
-	_checkJoinExperienceAchievements = function(p1, p2)
-		-- upvalues: dashModule (ref), getUserRecentExperiencesModule (ref), loggerModule (ref)
+	_checkJoinExperienceAchievements = function(p1, Callback: (any) -> ()) --[[ Line: 98 ]]
+		-- upvalues: DashModule (copy), GetUserRecentExperiencesModule (copy), LoggerModule (copy)
 		if p1.achievementScout.hasAchieved == false or p1.achievementExplorer.hasAchieved == false or p1.achievementTrailblazer.hasAchieved == false then
 			if p1.platformCloudStorageService and p1.platformCloudStorageService:IsUserDataAvailable() then
-				local data = p1.platformCloudStorageService:GetUserDataAsync("ExperiencesPlayed").data or {}
+				local Data = p1.platformCloudStorageService:GetUserDataAsync("ExperiencesPlayed").data or {}
 				
-				if #data < 15 and not dashModule.includes(data, game.GameId) then
-					table.insert(data, game.GameId)
-					p1.platformCloudStorageService:SetUserDataAsync("ExperiencesPlayed", { data = data })
+				if #Data < 15 and not DashModule.includes(Data, game.GameId) then
+					table.insert(Data, game.GameId)
+					p1.platformCloudStorageService:SetUserDataAsync("ExperiencesPlayed", { data = Data })
 				end
-				p2(#data)
+				Callback(#Data)
 				
 				return
 			else
-				getUserRecentExperiencesModule(p1.requestImpl):andThen(function(p3)
-					-- upvalues: p2 (ref)
-					p2(p3)
-				end):catch(function(p3)
-					-- upvalues: loggerModule (copy)
-					loggerModule:warning(p3)
+				GetUserRecentExperiencesModule(p1.requestImpl):andThen(function(Result) --[[ Line: 116 ]]
+					-- upvalues: Callback (copy)
+					Callback(Result)
+				end):catch(function(Err) --[[ Line: 118 ]]
+					-- upvalues: LoggerModule (upval)
+					LoggerModule:warning(Err)
 				end)
 			end
 		end
 	end,
-	_checkStrengthInNumbers = function(p1, p2)
+	_checkStrengthInNumbers = function(p1, Callback: (any) -> ()) --[[ Line: 125 ]]
 		if p1.achievementStrengthInNumbers.hasAchieved == false then
-			local localPlayer = p1.playersService.LocalPlayer
+			local LocalPlayer = p1.playersService.LocalPlayer
 			
-			if localPlayer and localPlayer.FollowUserId ~= 0 and (localPlayer:IsFriendsWithAsync(localPlayer.FollowUserId) and p1.playersService:GetPlayerByUserId(localPlayer.FollowUserId)) then
-				p2(0)
+			if LocalPlayer and LocalPlayer.FollowUserId ~= 0 and LocalPlayer:IsFriendsWithAsync(LocalPlayer.FollowUserId) and p1.playersService:GetPlayerByUserId(LocalPlayer.FollowUserId) then
+				Callback(0)
 			end
 		end
 	end
 }
 
-function t.new(p1, p2, p3, p4, p5, p6)
-	-- upvalues: var1 (ref), var2 (write), var3 (write), var4 (write), playersService (ref), var5 (write), t (ref)
-	return setmetatable({
-		requestImpl = p1 or var1,
-		platformFriendsService = p2 or var2,
-		platformCloudStorageService = p3 or var3,
-		achievementService = p4 or var4,
-		playersService = p5 or playersService,
-		platformService = p6 or var5
-	}, { __index = t })
+function InExpAchievementManager.new(ACHIEVEMENTEXPLORER, p1, AchievementService1, p2, p3, p4) --[[ Line: 140 ]]
+	-- upvalues: ConfigResult (copy), PlatformFriendsService (ref), PlatformCloudStorageService (ref), AchievementService (ref), Players (copy), PlatformService (ref), InExpAchievementManager (copy)
+	return (setmetatable({
+		requestImpl = if ACHIEVEMENTEXPLORER then ACHIEVEMENTEXPLORER else ConfigResult,
+		platformFriendsService = p1 or PlatformFriendsService,
+		platformCloudStorageService = AchievementService1 or PlatformCloudStorageService,
+		achievementService = if p2 then p2 else AchievementService,
+		playersService = if p3 then p3 else Players,
+		platformService = if p4 then p4 else PlatformService
+	}, { __index = InExpAchievementManager }))
 end
 
-return t
+return InExpAchievementManager

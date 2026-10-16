@@ -1,9 +1,9 @@
-﻿return function(p1)
-	local parts = string.split(p1, "/")
-	local partsCount = #parts
+﻿return function(Text: string) --[[ Line: 1 | Named "parseErrorReasonToEconomicRestriction" ]]
+	local Parts = string.split(Text, "/")
+	local CountParts = #Parts
 	
 	return {
-		timeoutMinutes = parts[partsCount],
-		violationType = parts[partsCount - 1]
+		timeoutMinutes = Parts[CountParts],
+		violationType = Parts[CountParts - 1]
 	}
 end

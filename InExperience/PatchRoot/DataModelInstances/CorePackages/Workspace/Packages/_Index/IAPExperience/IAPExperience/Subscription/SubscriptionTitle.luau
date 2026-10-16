@@ -1,72 +1,72 @@
-﻿local parent = script.Parent.Parent.Parent
-local UIBloxModule = require(parent.UIBlox)
-local foundationModule = require(parent.Foundation)
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local reactModule = require(parent.React)
-local withStyle = UIBloxModule.Style.withStyle
-local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
-local tModule = require(parent.t)
-local subscriptionTitle = require(parent.Roact).PureComponent:extend("SubscriptionTitle")
-subscriptionTitle.validateProps = tModule.strictInterface({
-	name = tModule.string,
-	displayPrice = tModule.string,
-	subscriptionProviderName = tModule.string,
-	period = tModule.string,
-	disclaimerText = tModule.string,
-	layoutOrder = tModule.number,
-	contentHeight = tModule.number,
-	itemIcon = tModule.any
+﻿local Parent = script.Parent.Parent.Parent
+local UIBloxModule = require(Parent.UIBlox)
+local FoundationModule = require(Parent.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local ReactModule = require(Parent.React)
+local WithStyleFunction = UIBloxModule.Style.withStyle
+local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
+local TModule = require(Parent.t)
+local SubscriptionTitle = require(Parent.Roact).PureComponent:extend("SubscriptionTitle")
+SubscriptionTitle.validateProps = TModule.strictInterface({
+	name = TModule.string,
+	displayPrice = TModule.string,
+	subscriptionProviderName = TModule.string,
+	period = TModule.string,
+	disclaimerText = TModule.string,
+	layoutOrder = TModule.number,
+	contentHeight = TModule.number,
+	itemIcon = TModule.any
 })
 
-local function _(p1, p2)
-	-- upvalues: withStyle (ref), reactModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
-	return withStyle(function(p3)
-		-- upvalues: reactModule (copy), p1 (ref), p2 (ref), foundationFontFaceMigration (copy), normalizeFontFace (copy)
-		local theme = p3.Theme
-		local font = p3.Font.Body.Font
+local function _(p1, p2) --[[ Line: 56 | Named "createSubscriptionInfo" ]]
+	-- upvalues: WithStyleFunction (copy), ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	return WithStyleFunction(function(p3) --[[ Line: 57 ]]
+		-- upvalues: ReactModule (upval), p1 (copy), p2 (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
+		local Theme = p3.Theme
+		local BodyFont = p3.Font.Body.Font
 		
-		return reactModule.createElement("Frame", {
+		return ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y,
 			LayoutOrder = p1.layoutOrder
 		}, {
-			Layout = reactModule.createElement("UIListLayout", {
+			Layout = ReactModule.createElement("UIListLayout", {
 				SortOrder = Enum.SortOrder.LayoutOrder,
-				HorizontalAlignment = if p2 then Enum.HorizontalAlignment.Left else Enum.HorizontalAlignment.Center,
+				HorizontalAlignment = p2 and Enum.HorizontalAlignment.Left or Enum.HorizontalAlignment.Center,
 				Padding = UDim.new(0, 8)
 			})
 		}, {
-			AppName = reactModule.createElement("TextLabel", {
+			AppName = ReactModule.createElement("TextLabel", {
 				BackgroundTransparency = 1,
 				TextSize = 16,
 				TextWrapped = true,
 				Size = UDim2.new(1, 0, 0, 20),
 				Text = p1.subscriptionProviderName,
-				TextColor3 = theme.TextEmphasis.Color,
-				TextTransparency = theme.TextEmphasis.Transparency,
-				Font = if foundationFontFaceMigration then nil else font,
-				FontFace = if foundationFontFaceMigration then normalizeFontFace(p3.Tokens.Typography.BodyLarge.Font) else nil,
-				TextXAlignment = if p2 then Enum.TextXAlignment.Left else Enum.TextXAlignment.Center,
+				TextColor3 = Theme.TextEmphasis.Color,
+				TextTransparency = Theme.TextEmphasis.Transparency,
+				Font = if FoundationFontFaceMigration then nil else BodyFont,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p3.Tokens.Typography.BodyLarge.Font) else nil,
+				TextXAlignment = p2 and Enum.TextXAlignment.Left or Enum.TextXAlignment.Center,
 				LayoutOrder = p1.layoutOrder
 			})
 		}, {
-			Title = reactModule.createElement("TextLabel", {
+			Title = ReactModule.createElement("TextLabel", {
 				BackgroundTransparency = 1,
 				TextSize = 20,
 				TextWrapped = true,
 				Size = UDim2.new(1, 0, 0, 20),
 				Text = p1.name,
-				TextColor3 = theme.TextEmphasis.Color,
-				TextTransparency = theme.TextEmphasis.Transparency,
-				Font = if foundationFontFaceMigration then nil else font,
-				FontFace = if foundationFontFaceMigration then normalizeFontFace(p3.Tokens.Typography.BodyLarge.Font) else nil,
-				TextXAlignment = if p2 then Enum.TextXAlignment.Left else Enum.TextXAlignment.Center,
+				TextColor3 = Theme.TextEmphasis.Color,
+				TextTransparency = Theme.TextEmphasis.Transparency,
+				Font = if FoundationFontFaceMigration then nil else BodyFont,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p3.Tokens.Typography.BodyLarge.Font) else nil,
+				TextXAlignment = p2 and Enum.TextXAlignment.Left or Enum.TextXAlignment.Center,
 				LayoutOrder = p1.layoutOrder + 1
 			})
 		}, {
-			PriceFrame = reactModule.createElement("Frame", {
+			PriceFrame = ReactModule.createElement("Frame", {
 				BorderSizePixel = 0,
 				BackgroundTransparency = 1,
 				BackgroundColor3 = Color3.fromRGB(255, 0, 0),
@@ -74,336 +74,328 @@ local function _(p1, p2)
 				AutomaticSize = Enum.AutomaticSize.Y,
 				LayoutOrder = p1.layoutOrder + 2
 			}, {
-				Layout = reactModule.createElement("UIListLayout", {
+				Layout = ReactModule.createElement("UIListLayout", {
 					SortOrder = Enum.SortOrder.LayoutOrder,
-					HorizontalAlignment = if p2 then Enum.HorizontalAlignment.Left else Enum.HorizontalAlignment.Center,
+					HorizontalAlignment = p2 and Enum.HorizontalAlignment.Left or Enum.HorizontalAlignment.Center,
 					FillDirection = Enum.FillDirection.Horizontal
 				}),
-				Price = reactModule.createElement("TextLabel", {
+				Price = ReactModule.createElement("TextLabel", {
 					BackgroundTransparency = 1,
 					TextSize = 16,
 					RichText = true,
 					TextWrapped = true,
 					Size = UDim2.new(0, 0, 0, 16),
 					Text = p1.displayPrice,
-					TextColor3 = theme.TextEmphasis.Color,
-					TextTransparency = theme.TextDefault.Transparency,
-					Font = if foundationFontFaceMigration then nil else font,
-					FontFace = if foundationFontFaceMigration then normalizeFontFace(p3.Tokens.Typography.BodyLarge.Font) else nil,
-					TextXAlignment = if p2 then Enum.TextXAlignment.Left else Enum.TextXAlignment.Center,
+					TextColor3 = Theme.TextEmphasis.Color,
+					TextTransparency = Theme.TextDefault.Transparency,
+					Font = if FoundationFontFaceMigration then nil else BodyFont,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p3.Tokens.Typography.BodyLarge.Font) else nil,
+					TextXAlignment = p2 and Enum.TextXAlignment.Left or Enum.TextXAlignment.Center,
 					LayoutOrder = p1.layoutOrder + 1,
 					AutomaticSize = Enum.AutomaticSize.X
 				}),
-				Period = reactModule.createElement("TextLabel", {
+				Period = ReactModule.createElement("TextLabel", {
 					BackgroundTransparency = 1,
 					TextSize = 16,
 					RichText = true,
 					TextWrapped = true,
 					Size = UDim2.new(0, 0, 0, 16),
 					Text = p1.period,
-					TextColor3 = theme.TextDefault.Color,
-					TextTransparency = theme.TextDefault.Transparency,
-					Font = if foundationFontFaceMigration then nil else font,
-					FontFace = if foundationFontFaceMigration then normalizeFontFace(p3.Tokens.Typography.BodyLarge.Font) else nil,
-					TextXAlignment = if p2 then Enum.TextXAlignment.Left else Enum.TextXAlignment.Center,
+					TextColor3 = Theme.TextDefault.Color,
+					TextTransparency = Theme.TextDefault.Transparency,
+					Font = if FoundationFontFaceMigration then nil else BodyFont,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p3.Tokens.Typography.BodyLarge.Font) else nil,
+					TextXAlignment = p2 and Enum.TextXAlignment.Left or Enum.TextXAlignment.Center,
 					LayoutOrder = p1.layoutOrder + 1,
 					AutomaticSize = Enum.AutomaticSize.X
 				})
 			})
 		}, {
-			DisclaimerText = reactModule.createElement("TextLabel", {
+			DisclaimerText = ReactModule.createElement("TextLabel", {
 				BackgroundTransparency = 1,
 				TextSize = 16,
 				TextWrapped = true,
 				Size = UDim2.new(1, 0, 0, 16),
 				Text = p1.disclaimerText,
-				TextColor3 = theme.TextDefault.Color,
-				Font = if foundationFontFaceMigration then nil else font,
-				FontFace = if foundationFontFaceMigration then normalizeFontFace(p3.Tokens.Typography.BodyLarge.Font) else nil,
-				TextXAlignment = if p2 then Enum.TextXAlignment.Left else Enum.TextXAlignment.Center,
+				TextColor3 = Theme.TextDefault.Color,
+				Font = if FoundationFontFaceMigration then nil else BodyFont,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p3.Tokens.Typography.BodyLarge.Font) else nil,
+				TextXAlignment = p2 and Enum.TextXAlignment.Left or Enum.TextXAlignment.Center,
 				LayoutOrder = p1.layoutOrder + 3
 			})
 		})
 	end)
 end
 
-local function createCompactSubscriptionTitle(p1)
-	-- upvalues: reactModule (ref), imageSetLabel (ref), withStyle (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
-	local createElement = reactModule.createElement
-	local var1 = "Frame"
-	local t = {
+local function createCompactSubscriptionTitle(Props) --[[ Line: 175 ]]
+	-- upvalues: ReactModule (copy), ImageSetLabel (copy), WithStyleFunction (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	local v1 = true
+	
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		LayoutOrder = 1,
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y
-	}
-	local t_1 = {
-		Layout = reactModule.createElement("UIListLayout", {
+	}, {
+		Layout = ReactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			HorizontalAlignment = Enum.HorizontalAlignment.Left,
 			FillDirection = Enum.FillDirection.Horizontal,
 			Padding = UDim.new(0, 24)
 		}),
-		Icon = reactModule.createElement(imageSetLabel, {
+		Icon = ReactModule.createElement(ImageSetLabel, {
 			LayoutOrder = 1,
 			BackgroundTransparency = 1,
 			Size = UDim2.new(0, 96, 0, 96),
 			ScaleType = Enum.ScaleType.Fit,
 			AutomaticSize = Enum.AutomaticSize.X,
-			Image = p1.itemIcon
-		})
-	}
-	local var2 = true
-	t_1.SubscriptionInfo = withStyle(function(p2)
-		-- upvalues: reactModule (copy), p1 (ref), var2 (ref), foundationFontFaceMigration (copy), normalizeFontFace (copy)
-		local theme = p2.Theme
-		local font = p2.Font.Body.Font
-		
-		return reactModule.createElement("Frame", {
-			BackgroundTransparency = 1,
-			Size = UDim2.new(1, 0, 0, 0),
-			AutomaticSize = Enum.AutomaticSize.Y,
-			LayoutOrder = p1.layoutOrder
-		}, {
-			Layout = reactModule.createElement("UIListLayout", {
-				SortOrder = Enum.SortOrder.LayoutOrder,
-				HorizontalAlignment = if var2 then Enum.HorizontalAlignment.Left else Enum.HorizontalAlignment.Center,
-				Padding = UDim.new(0, 8)
-			})
-		}, {
-			AppName = reactModule.createElement("TextLabel", {
+			Image = Props.itemIcon
+		}),
+		SubscriptionInfo = WithStyleFunction(function(p1) --[[ Line: 57 ]]
+			-- upvalues: ReactModule (upval), Props (copy), v1 (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
+			local Theme = p1.Theme
+			local BodyFont = p1.Font.Body.Font
+			
+			return ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
-				TextSize = 16,
-				TextWrapped = true,
-				Size = UDim2.new(1, 0, 0, 20),
-				Text = p1.subscriptionProviderName,
-				TextColor3 = theme.TextEmphasis.Color,
-				TextTransparency = theme.TextEmphasis.Transparency,
-				Font = if foundationFontFaceMigration then nil else font,
-				FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.BodyLarge.Font) else nil,
-				TextXAlignment = if var2 then Enum.TextXAlignment.Left else Enum.TextXAlignment.Center,
-				LayoutOrder = p1.layoutOrder
-			})
-		}, {
-			Title = reactModule.createElement("TextLabel", {
-				BackgroundTransparency = 1,
-				TextSize = 20,
-				TextWrapped = true,
-				Size = UDim2.new(1, 0, 0, 20),
-				Text = p1.name,
-				TextColor3 = theme.TextEmphasis.Color,
-				TextTransparency = theme.TextEmphasis.Transparency,
-				Font = if foundationFontFaceMigration then nil else font,
-				FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.BodyLarge.Font) else nil,
-				TextXAlignment = if var2 then Enum.TextXAlignment.Left else Enum.TextXAlignment.Center,
-				LayoutOrder = p1.layoutOrder + 1
-			})
-		}, {
-			PriceFrame = reactModule.createElement("Frame", {
-				BorderSizePixel = 0,
-				BackgroundTransparency = 1,
-				BackgroundColor3 = Color3.fromRGB(255, 0, 0),
 				Size = UDim2.new(1, 0, 0, 0),
 				AutomaticSize = Enum.AutomaticSize.Y,
-				LayoutOrder = p1.layoutOrder + 2
+				LayoutOrder = Props.layoutOrder
 			}, {
-				Layout = reactModule.createElement("UIListLayout", {
+				Layout = ReactModule.createElement("UIListLayout", {
 					SortOrder = Enum.SortOrder.LayoutOrder,
-					HorizontalAlignment = if var2 then Enum.HorizontalAlignment.Left else Enum.HorizontalAlignment.Center,
-					FillDirection = Enum.FillDirection.Horizontal
-				}),
-				Price = reactModule.createElement("TextLabel", {
+					HorizontalAlignment = v1 and Enum.HorizontalAlignment.Left or Enum.HorizontalAlignment.Center,
+					Padding = UDim.new(0, 8)
+				})
+			}, {
+				AppName = ReactModule.createElement("TextLabel", {
 					BackgroundTransparency = 1,
 					TextSize = 16,
-					RichText = true,
 					TextWrapped = true,
-					Size = UDim2.new(0, 0, 0, 16),
-					Text = p1.displayPrice,
-					TextColor3 = theme.TextEmphasis.Color,
-					TextTransparency = theme.TextDefault.Transparency,
-					Font = if foundationFontFaceMigration then nil else font,
-					FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.BodyLarge.Font) else nil,
-					TextXAlignment = if var2 then Enum.TextXAlignment.Left else Enum.TextXAlignment.Center,
-					LayoutOrder = p1.layoutOrder + 1,
-					AutomaticSize = Enum.AutomaticSize.X
-				}),
-				Period = reactModule.createElement("TextLabel", {
+					Size = UDim2.new(1, 0, 0, 20),
+					Text = Props.subscriptionProviderName,
+					TextColor3 = Theme.TextEmphasis.Color,
+					TextTransparency = Theme.TextEmphasis.Transparency,
+					Font = if FoundationFontFaceMigration then nil else BodyFont,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p1.Tokens.Typography.BodyLarge.Font) else nil,
+					TextXAlignment = v1 and Enum.TextXAlignment.Left or Enum.TextXAlignment.Center,
+					LayoutOrder = Props.layoutOrder
+				})
+			}, {
+				Title = ReactModule.createElement("TextLabel", {
+					BackgroundTransparency = 1,
+					TextSize = 20,
+					TextWrapped = true,
+					Size = UDim2.new(1, 0, 0, 20),
+					Text = Props.name,
+					TextColor3 = Theme.TextEmphasis.Color,
+					TextTransparency = Theme.TextEmphasis.Transparency,
+					Font = if FoundationFontFaceMigration then nil else BodyFont,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p1.Tokens.Typography.BodyLarge.Font) else nil,
+					TextXAlignment = v1 and Enum.TextXAlignment.Left or Enum.TextXAlignment.Center,
+					LayoutOrder = Props.layoutOrder + 1
+				})
+			}, {
+				PriceFrame = ReactModule.createElement("Frame", {
+					BorderSizePixel = 0,
+					BackgroundTransparency = 1,
+					BackgroundColor3 = Color3.fromRGB(255, 0, 0),
+					Size = UDim2.new(1, 0, 0, 0),
+					AutomaticSize = Enum.AutomaticSize.Y,
+					LayoutOrder = Props.layoutOrder + 2
+				}, {
+					Layout = ReactModule.createElement("UIListLayout", {
+						SortOrder = Enum.SortOrder.LayoutOrder,
+						HorizontalAlignment = v1 and Enum.HorizontalAlignment.Left or Enum.HorizontalAlignment.Center,
+						FillDirection = Enum.FillDirection.Horizontal
+					}),
+					Price = ReactModule.createElement("TextLabel", {
+						BackgroundTransparency = 1,
+						TextSize = 16,
+						RichText = true,
+						TextWrapped = true,
+						Size = UDim2.new(0, 0, 0, 16),
+						Text = Props.displayPrice,
+						TextColor3 = Theme.TextEmphasis.Color,
+						TextTransparency = Theme.TextDefault.Transparency,
+						Font = if FoundationFontFaceMigration then nil else BodyFont,
+						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p1.Tokens.Typography.BodyLarge.Font) else nil,
+						TextXAlignment = v1 and Enum.TextXAlignment.Left or Enum.TextXAlignment.Center,
+						LayoutOrder = Props.layoutOrder + 1,
+						AutomaticSize = Enum.AutomaticSize.X
+					}),
+					Period = ReactModule.createElement("TextLabel", {
+						BackgroundTransparency = 1,
+						TextSize = 16,
+						RichText = true,
+						TextWrapped = true,
+						Size = UDim2.new(0, 0, 0, 16),
+						Text = Props.period,
+						TextColor3 = Theme.TextDefault.Color,
+						TextTransparency = Theme.TextDefault.Transparency,
+						Font = if FoundationFontFaceMigration then nil else BodyFont,
+						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p1.Tokens.Typography.BodyLarge.Font) else nil,
+						TextXAlignment = v1 and Enum.TextXAlignment.Left or Enum.TextXAlignment.Center,
+						LayoutOrder = Props.layoutOrder + 1,
+						AutomaticSize = Enum.AutomaticSize.X
+					})
+				})
+			}, {
+				DisclaimerText = ReactModule.createElement("TextLabel", {
 					BackgroundTransparency = 1,
 					TextSize = 16,
-					RichText = true,
 					TextWrapped = true,
-					Size = UDim2.new(0, 0, 0, 16),
-					Text = p1.period,
-					TextColor3 = theme.TextDefault.Color,
-					TextTransparency = theme.TextDefault.Transparency,
-					Font = if foundationFontFaceMigration then nil else font,
-					FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.BodyLarge.Font) else nil,
-					TextXAlignment = if var2 then Enum.TextXAlignment.Left else Enum.TextXAlignment.Center,
-					LayoutOrder = p1.layoutOrder + 1,
-					AutomaticSize = Enum.AutomaticSize.X
+					Size = UDim2.new(1, 0, 0, 16),
+					Text = Props.disclaimerText,
+					TextColor3 = Theme.TextDefault.Color,
+					Font = if FoundationFontFaceMigration then nil else BodyFont,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p1.Tokens.Typography.BodyLarge.Font) else nil,
+					TextXAlignment = v1 and Enum.TextXAlignment.Left or Enum.TextXAlignment.Center,
+					LayoutOrder = Props.layoutOrder + 3
 				})
 			})
-		}, {
-			DisclaimerText = reactModule.createElement("TextLabel", {
-				BackgroundTransparency = 1,
-				TextSize = 16,
-				TextWrapped = true,
-				Size = UDim2.new(1, 0, 0, 16),
-				Text = p1.disclaimerText,
-				TextColor3 = theme.TextDefault.Color,
-				Font = if foundationFontFaceMigration then nil else font,
-				FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.BodyLarge.Font) else nil,
-				TextXAlignment = if var2 then Enum.TextXAlignment.Left else Enum.TextXAlignment.Center,
-				LayoutOrder = p1.layoutOrder + 3
-			})
-		})
-	end)
-	
-	return createElement(var1, t, t_1)
+		end)
+	})
 end
 
-local function createNormalSubscriptionTitle(p1)
-	-- upvalues: reactModule (ref), imageSetLabel (ref), withStyle (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
-	local createElement = reactModule.createElement
-	local var1 = "Frame"
-	local t = {
+local function createNormalSubscriptionTitle(Props) --[[ Line: 200 ]]
+	-- upvalues: ReactModule (copy), ImageSetLabel (copy), WithStyleFunction (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	local v1 = false
+	
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		LayoutOrder = 1,
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y
-	}
-	local t_1 = {
-		Layout = reactModule.createElement("UIListLayout", {
+	}, {
+		Layout = ReactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			HorizontalAlignment = Enum.HorizontalAlignment.Center,
 			FillDirection = Enum.FillDirection.Vertical,
 			Padding = UDim.new(0, 24)
 		}),
-		Icon = reactModule.createElement(imageSetLabel, {
+		Icon = ReactModule.createElement(ImageSetLabel, {
 			LayoutOrder = 1,
 			BackgroundTransparency = 1,
 			Size = UDim2.new(0, 96, 0, 96),
 			ScaleType = Enum.ScaleType.Fit,
 			AutomaticSize = Enum.AutomaticSize.X,
-			Image = p1.itemIcon
-		})
-	}
-	local var2 = false
-	t_1.SubscriptionInfo = withStyle(function(p2)
-		-- upvalues: reactModule (copy), p1 (ref), var2 (ref), foundationFontFaceMigration (copy), normalizeFontFace (copy)
-		local theme = p2.Theme
-		local font = p2.Font.Body.Font
-		
-		return reactModule.createElement("Frame", {
-			BackgroundTransparency = 1,
-			Size = UDim2.new(1, 0, 0, 0),
-			AutomaticSize = Enum.AutomaticSize.Y,
-			LayoutOrder = p1.layoutOrder
-		}, {
-			Layout = reactModule.createElement("UIListLayout", {
-				SortOrder = Enum.SortOrder.LayoutOrder,
-				HorizontalAlignment = if var2 then Enum.HorizontalAlignment.Left else Enum.HorizontalAlignment.Center,
-				Padding = UDim.new(0, 8)
-			})
-		}, {
-			AppName = reactModule.createElement("TextLabel", {
+			Image = Props.itemIcon
+		}),
+		SubscriptionInfo = WithStyleFunction(function(p1) --[[ Line: 57 ]]
+			-- upvalues: ReactModule (upval), Props (copy), v1 (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval)
+			local Theme = p1.Theme
+			local BodyFont = p1.Font.Body.Font
+			
+			return ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
-				TextSize = 16,
-				TextWrapped = true,
-				Size = UDim2.new(1, 0, 0, 20),
-				Text = p1.subscriptionProviderName,
-				TextColor3 = theme.TextEmphasis.Color,
-				TextTransparency = theme.TextEmphasis.Transparency,
-				Font = if foundationFontFaceMigration then nil else font,
-				FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.BodyLarge.Font) else nil,
-				TextXAlignment = if var2 then Enum.TextXAlignment.Left else Enum.TextXAlignment.Center,
-				LayoutOrder = p1.layoutOrder
-			})
-		}, {
-			Title = reactModule.createElement("TextLabel", {
-				BackgroundTransparency = 1,
-				TextSize = 20,
-				TextWrapped = true,
-				Size = UDim2.new(1, 0, 0, 20),
-				Text = p1.name,
-				TextColor3 = theme.TextEmphasis.Color,
-				TextTransparency = theme.TextEmphasis.Transparency,
-				Font = if foundationFontFaceMigration then nil else font,
-				FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.BodyLarge.Font) else nil,
-				TextXAlignment = if var2 then Enum.TextXAlignment.Left else Enum.TextXAlignment.Center,
-				LayoutOrder = p1.layoutOrder + 1
-			})
-		}, {
-			PriceFrame = reactModule.createElement("Frame", {
-				BorderSizePixel = 0,
-				BackgroundTransparency = 1,
-				BackgroundColor3 = Color3.fromRGB(255, 0, 0),
 				Size = UDim2.new(1, 0, 0, 0),
 				AutomaticSize = Enum.AutomaticSize.Y,
-				LayoutOrder = p1.layoutOrder + 2
+				LayoutOrder = Props.layoutOrder
 			}, {
-				Layout = reactModule.createElement("UIListLayout", {
+				Layout = ReactModule.createElement("UIListLayout", {
 					SortOrder = Enum.SortOrder.LayoutOrder,
-					HorizontalAlignment = if var2 then Enum.HorizontalAlignment.Left else Enum.HorizontalAlignment.Center,
-					FillDirection = Enum.FillDirection.Horizontal
-				}),
-				Price = reactModule.createElement("TextLabel", {
+					HorizontalAlignment = v1 and Enum.HorizontalAlignment.Left or Enum.HorizontalAlignment.Center,
+					Padding = UDim.new(0, 8)
+				})
+			}, {
+				AppName = ReactModule.createElement("TextLabel", {
 					BackgroundTransparency = 1,
 					TextSize = 16,
-					RichText = true,
 					TextWrapped = true,
-					Size = UDim2.new(0, 0, 0, 16),
-					Text = p1.displayPrice,
-					TextColor3 = theme.TextEmphasis.Color,
-					TextTransparency = theme.TextDefault.Transparency,
-					Font = if foundationFontFaceMigration then nil else font,
-					FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.BodyLarge.Font) else nil,
-					TextXAlignment = if var2 then Enum.TextXAlignment.Left else Enum.TextXAlignment.Center,
-					LayoutOrder = p1.layoutOrder + 1,
-					AutomaticSize = Enum.AutomaticSize.X
-				}),
-				Period = reactModule.createElement("TextLabel", {
+					Size = UDim2.new(1, 0, 0, 20),
+					Text = Props.subscriptionProviderName,
+					TextColor3 = Theme.TextEmphasis.Color,
+					TextTransparency = Theme.TextEmphasis.Transparency,
+					Font = if FoundationFontFaceMigration then nil else BodyFont,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p1.Tokens.Typography.BodyLarge.Font) else nil,
+					TextXAlignment = v1 and Enum.TextXAlignment.Left or Enum.TextXAlignment.Center,
+					LayoutOrder = Props.layoutOrder
+				})
+			}, {
+				Title = ReactModule.createElement("TextLabel", {
+					BackgroundTransparency = 1,
+					TextSize = 20,
+					TextWrapped = true,
+					Size = UDim2.new(1, 0, 0, 20),
+					Text = Props.name,
+					TextColor3 = Theme.TextEmphasis.Color,
+					TextTransparency = Theme.TextEmphasis.Transparency,
+					Font = if FoundationFontFaceMigration then nil else BodyFont,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p1.Tokens.Typography.BodyLarge.Font) else nil,
+					TextXAlignment = v1 and Enum.TextXAlignment.Left or Enum.TextXAlignment.Center,
+					LayoutOrder = Props.layoutOrder + 1
+				})
+			}, {
+				PriceFrame = ReactModule.createElement("Frame", {
+					BorderSizePixel = 0,
+					BackgroundTransparency = 1,
+					BackgroundColor3 = Color3.fromRGB(255, 0, 0),
+					Size = UDim2.new(1, 0, 0, 0),
+					AutomaticSize = Enum.AutomaticSize.Y,
+					LayoutOrder = Props.layoutOrder + 2
+				}, {
+					Layout = ReactModule.createElement("UIListLayout", {
+						SortOrder = Enum.SortOrder.LayoutOrder,
+						HorizontalAlignment = v1 and Enum.HorizontalAlignment.Left or Enum.HorizontalAlignment.Center,
+						FillDirection = Enum.FillDirection.Horizontal
+					}),
+					Price = ReactModule.createElement("TextLabel", {
+						BackgroundTransparency = 1,
+						TextSize = 16,
+						RichText = true,
+						TextWrapped = true,
+						Size = UDim2.new(0, 0, 0, 16),
+						Text = Props.displayPrice,
+						TextColor3 = Theme.TextEmphasis.Color,
+						TextTransparency = Theme.TextDefault.Transparency,
+						Font = if FoundationFontFaceMigration then nil else BodyFont,
+						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p1.Tokens.Typography.BodyLarge.Font) else nil,
+						TextXAlignment = v1 and Enum.TextXAlignment.Left or Enum.TextXAlignment.Center,
+						LayoutOrder = Props.layoutOrder + 1,
+						AutomaticSize = Enum.AutomaticSize.X
+					}),
+					Period = ReactModule.createElement("TextLabel", {
+						BackgroundTransparency = 1,
+						TextSize = 16,
+						RichText = true,
+						TextWrapped = true,
+						Size = UDim2.new(0, 0, 0, 16),
+						Text = Props.period,
+						TextColor3 = Theme.TextDefault.Color,
+						TextTransparency = Theme.TextDefault.Transparency,
+						Font = if FoundationFontFaceMigration then nil else BodyFont,
+						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p1.Tokens.Typography.BodyLarge.Font) else nil,
+						TextXAlignment = v1 and Enum.TextXAlignment.Left or Enum.TextXAlignment.Center,
+						LayoutOrder = Props.layoutOrder + 1,
+						AutomaticSize = Enum.AutomaticSize.X
+					})
+				})
+			}, {
+				DisclaimerText = ReactModule.createElement("TextLabel", {
 					BackgroundTransparency = 1,
 					TextSize = 16,
-					RichText = true,
 					TextWrapped = true,
-					Size = UDim2.new(0, 0, 0, 16),
-					Text = p1.period,
-					TextColor3 = theme.TextDefault.Color,
-					TextTransparency = theme.TextDefault.Transparency,
-					Font = if foundationFontFaceMigration then nil else font,
-					FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.BodyLarge.Font) else nil,
-					TextXAlignment = if var2 then Enum.TextXAlignment.Left else Enum.TextXAlignment.Center,
-					LayoutOrder = p1.layoutOrder + 1,
-					AutomaticSize = Enum.AutomaticSize.X
+					Size = UDim2.new(1, 0, 0, 16),
+					Text = Props.disclaimerText,
+					TextColor3 = Theme.TextDefault.Color,
+					Font = if FoundationFontFaceMigration then nil else BodyFont,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p1.Tokens.Typography.BodyLarge.Font) else nil,
+					TextXAlignment = v1 and Enum.TextXAlignment.Left or Enum.TextXAlignment.Center,
+					LayoutOrder = Props.layoutOrder + 3
 				})
 			})
-		}, {
-			DisclaimerText = reactModule.createElement("TextLabel", {
-				BackgroundTransparency = 1,
-				TextSize = 16,
-				TextWrapped = true,
-				Size = UDim2.new(1, 0, 0, 16),
-				Text = p1.disclaimerText,
-				TextColor3 = theme.TextDefault.Color,
-				Font = if foundationFontFaceMigration then nil else font,
-				FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.BodyLarge.Font) else nil,
-				TextXAlignment = if var2 then Enum.TextXAlignment.Left else Enum.TextXAlignment.Center,
-				LayoutOrder = p1.layoutOrder + 3
-			})
-		})
-	end)
-	
-	return createElement(var1, t, t_1)
+		end)
+	})
 end
 
-function subscriptionTitle.getTitleHeight(_, p1)
+function SubscriptionTitle:getTitleHeight(p1: number): number --[[ Line: 225 ]]
 	return if p1 > 216 then 216 else 96
 end
 
-function subscriptionTitle.render(p1)
-	-- upvalues: createNormalSubscriptionTitle (ref), createCompactSubscriptionTitle (ref)
+function SubscriptionTitle.render(p1) --[[ Line: 233 ]]
+	-- upvalues: createNormalSubscriptionTitle (copy), createCompactSubscriptionTitle (copy)
 	return if p1.props.contentHeight > 216 then createNormalSubscriptionTitle(p1.props) else createCompactSubscriptionTitle(p1.props)
 end
 
-return subscriptionTitle
+return SubscriptionTitle

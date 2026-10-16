@@ -1,50 +1,48 @@
-﻿local runService = game:GetService("RunService")
+﻿local RunService = game:GetService("RunService")
 local VRService = game:GetService("VRService")
-local userGameSettingsService = UserSettings():GetService("UserGameSettings")
-local corePackagesService = game:GetService("CorePackages")
-local workspaceService = game:GetService("Workspace")
-local generateDummyModule = require(script.Parent.Parent.Utility.GenerateDummy)
-local currentCamera = workspace.CurrentCamera
-local fIntSafetyBubbleRadius = require(corePackagesService.Workspace.Packages.VrCommon).FIntSafetyBubbleRadius
-local var1 = require(corePackagesService.Workspace.Packages.VrCommon).FIntSafetyBubbleTransparencyPercent * 0.01
-local var2 = true
-local maxValue = math.max(fIntSafetyBubbleRadius * currentCamera.HeadScale, 0.1)
-local var3 = nil
+local UserGameSettings = UserSettings():GetService("UserGameSettings")
+local CorePackages = game:GetService("CorePackages")
+local Workspace1 = game:GetService("Workspace")
+local GenerateDummyModule = require(script.Parent.Parent.Utility.GenerateDummy)
+local CurrentCamera = workspace.CurrentCamera
+local ScaledFIntSafetyBubbleTransparencyPercent = require(CorePackages.Workspace.Packages.VrCommon).FIntSafetyBubbleTransparencyPercent * 0.01
+local IsNotVRSafetyBubbleModeMatch = true
+local Largest = math.max(require(CorePackages.Workspace.Packages.VrCommon).FIntSafetyBubbleRadius * CurrentCamera.HeadScale, 0.1)
+local Character = nil
 
-function initDummy()
-	-- upvalues: var3 (write), generateDummyModule (ref), workspaceService (ref)
-	var3 = generateDummyModule(Vector3.new(0, 8.800000190735, -50.5), Vector3.new(0, 180, 0))
-	var3.Parent = workspaceService
+function initDummy() --[[ Line: 22 ]]
+	-- upvalues: Character (ref), GenerateDummyModule (copy), Workspace1 (copy)
+	Character = GenerateDummyModule(vector.create(0, 8.800000190734863, -50.5), vector.create(0, 180, 0))
+	Character.Parent = Workspace1
 end
 
-local function calculateTransparency(_, p1)
-	-- upvalues: VRService (ref), currentCamera (ref), var3 (write), maxValue (ref), var1 (ref)
-	if p1 then
-		local magnitude = ((currentCamera.CFrame * VRService:GetUserCFrame(Enum.UserCFrame.Head)).Position - var3.HumanoidRootPart.Position).Magnitude
-		local _ = 0
-		local var4 = maxValue * 0.75
+local function calculateTransparency(_, IsNotVRSafetyBubbleModeMatch): number --[[ Line: 27 ]]
+	-- upvalues: VRService (copy), CurrentCamera (copy), Character (ref), Largest (copy), ScaledFIntSafetyBubbleTransparencyPercent (copy)
+	if IsNotVRSafetyBubbleModeMatch then
+		local Distance: number = ((CurrentCamera.CFrame * VRService:GetUserCFrame(Enum.UserCFrame.Head)).Position - Character.HumanoidRootPart.Position).Magnitude
+		local ScaledLargest = Largest * 0.75
 		
-		return math.clamp(if magnitude < var4 then var1 else (1 - (magnitude - var4) / (maxValue - var4)) * var1, 0, 1)
+		return (math.clamp(if Distance < ScaledLargest then ScaledFIntSafetyBubbleTransparencyPercent else (1 - (Distance - ScaledLargest) / (Largest - ScaledLargest)) * ScaledFIntSafetyBubbleTransparencyPercent, 0, 1))
+	else
+		return 0
 	end
-	return 0
 end
 
-function EnableSafetyBubbleDummy()
-	-- upvalues: var3 (write), userGameSettingsService (ref), var2 (write), calculateTransparency (ref), runService (ref)
+function EnableSafetyBubbleDummy() --[[ Line: 50 ]]
+	-- upvalues: Character (ref), UserGameSettings (copy), IsNotVRSafetyBubbleModeMatch (ref), calculateTransparency (copy), RunService (copy)
 	initDummy()
-	runService.Stepped:Connect(function()
-		-- upvalues: var3 (copy), userGameSettingsService (copy), var2 (copy), calculateTransparency (copy)
-		local children = var3:GetChildren()
-		var2 = userGameSettingsService.VRSafetyBubbleMode ~= Enum.VRSafetyBubbleMode.Anyone
-		
-		for i, v in ipairs(game.Players:GetPlayers()) do
-			if v.Character then
-				local var4 = calculateTransparency(v, var2)
-				var3.Head.Face.Transparency = var4
+	RunService.Stepped:Connect(function() --[[ Line: 53 | Named "onStep" ]]
+		-- upvalues: Character (upval), UserGameSettings (upval), IsNotVRSafetyBubbleModeMatch (upval), calculateTransparency (upval)
+		local Children = Character:GetChildren()
+		IsNotVRSafetyBubbleModeMatch = UserGameSettings.VRSafetyBubbleMode ~= Enum.VRSafetyBubbleMode.Anyone
+		for _, player in ipairs(game.Players:GetPlayers()) do
+			if player.Character then
+				local Transparency = calculateTransparency(player, IsNotVRSafetyBubbleModeMatch)
+				Character.Head.Face.Transparency = Transparency
 				
-				for i_1 = 1, #children do
-					if children[i_1]:IsA("Part") then
-						children[i_1].Transparency = var4
+				for i = 1, #Children do
+					if Children[i]:IsA("Part") then
+						Children[i].Transparency = Transparency
 					end
 				end
 			end

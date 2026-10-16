@@ -1,27 +1,21 @@
-﻿local flyoutSidePanel = script:FindFirstAncestor("FlyoutSidePanel")
-local parent = flyoutSidePanel.Parent
-local foundationModule = require(parent.Foundation)
-local builderIconsModule = require(parent.BuilderIcons)
-local urlBuilder = require(parent.UrlBuilder).UrlBuilder
-local appPage = require(parent.RobloxAppEnums).AppPage
-local constantsModule = require(script.Parent.Parent.Constants)
-local FAVORITES_URI = constantsModule.FAVORITES_URI
-local CONTINUE_PLAYING_URI = constantsModule.CONTINUE_PLAYING_URI
-local sharedFlagsModule = require(parent.SharedFlags)
-local getFStringPlatformEventUrl = sharedFlagsModule.GetFStringPlatformEventUrl
-local flyoutMomentsPlaceURI = game:DefineFastString("FlyoutMomentsPlaceURI", "roblox://experiences/start?placeId=119524072047648")
-local flyoutLearnPlaceURI = game:DefineFastString("FlyoutLearnPlaceURI", "roblox://experiences/start?placeId=92498145666402")
-local fFlagCreateConnectionsHub = sharedFlagsModule.FFlagCreateConnectionsHub
-local fFlagEnableArgus = sharedFlagsModule.FFlagEnableArgus
-local fFlagEnableBlackbird = sharedFlagsModule.FFlagEnableBlackbird
-local fFlagEnableBlackbirdOnFlyoutMenu = sharedFlagsModule.FFlagEnableBlackbirdOnFlyoutMenu
-local fFlagConnectionsToFriendsRename = sharedFlagsModule.FFlagConnectionsToFriendsRename
-local fFlagFlyoutSidePanelTradesEntryModule = require(script.Parent.Parent.Flags.FFlagFlyoutSidePanelTradesEntry)
-local fFlagFlyoutFilterWebViewsAndBrowserLinks = sharedFlagsModule.FFlagFlyoutFilterWebViewsAndBrowserLinks
-local fFlagEnableLuaCommunityList = sharedFlagsModule.FFlagEnableLuaCommunityList
-local fFlagFlyoutResolveItemContextOnActivationModule = require(flyoutSidePanel.Flags.FFlagFlyoutResolveItemContextOnActivation)
-local communityListRouting = require(parent.Groups).CommunityListRouting
-local t = {
+﻿local FlyoutSidePanel = script:FindFirstAncestor("FlyoutSidePanel")
+local Parent = FlyoutSidePanel.Parent
+local FoundationModule = require(Parent.Foundation)
+local BuilderIconsModule = require(Parent.BuilderIcons)
+local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local FlyoutSidePanelIXP = require(Parent.SharedExperimentDefinition).FlyoutSidePanelIXP
+local ConstantsModule = require(script.Parent.Parent.Constants)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local GetFStringPlatformEventUrlFunction = SharedFlagsModule.GetFStringPlatformEventUrl
+local FlyoutMomentsPlaceURI = game:DefineFastString("FlyoutMomentsPlaceURI", "roblox://experiences/start?placeId=119524072047648")
+local FFlagEnableArgus = SharedFlagsModule.FFlagEnableArgus
+local FFlagEnableBlackbirdOnFlyoutMenu = SharedFlagsModule.FFlagEnableBlackbirdOnFlyoutMenu
+local FFlagFlyoutSidePanelTradesEntryModule = require(script.Parent.Parent.Flags.FFlagFlyoutSidePanelTradesEntry)
+local FFlagFlyoutFilterWebViewsAndBrowserLinks = SharedFlagsModule.FFlagFlyoutFilterWebViewsAndBrowserLinks
+local FFlagFlyoutResolveItemContextOnActivationModule = require(FlyoutSidePanel.Flags.FFlagFlyoutResolveItemContextOnActivation)
+local CommunityListRouting = require(Parent.Groups).CommunityListRouting
+local ItemType = {
 	Favorites = "Favorites",
 	ContinuePlaying = "ContinuePlaying",
 	Inventory = "Inventory",
@@ -46,37 +40,37 @@ local t = {
 	Terms = "Terms",
 	Privacy = "Privacy"
 }
-local t_1 = {
-	[t.Premium] = "BuildersClub",
-	[t.Connections] = "Friends",
-	[t.Moments] = "RM",
-	[t.Communities] = "Groups",
-	[t.HelpAndSafety] = "SafetySupport",
-	[t.Events] = "TheHunt",
-	[t.QuickSignin] = "Login Code"
+local EventNameMappings = {
+	[ItemType.Premium] = "BuildersClub",
+	[ItemType.Connections] = "Friends",
+	[ItemType.Moments] = "RM",
+	[ItemType.Communities] = "Groups",
+	[ItemType.HelpAndSafety] = "SafetySupport",
+	[ItemType.Events] = "TheHunt",
+	[ItemType.QuickSignin] = "Login Code"
 }
-local t_2 = {
-	[t.Favorites] = "Feature.Catalog.Label.Favorites",
-	[t.ContinuePlaying] = "Feature.FlyoutSidePanel.Action.ContinuePlaying",
-	[t.Inventory] = "CommonUI.Features.Label.Inventory",
-	[t.Connections] = if fFlagConnectionsToFriendsRename then "CommonUI.Features.Label.Friends" else "CommonUI.Features.Label.Connections",
-	[t.Communities] = "CommonUI.Features.Label.Groups",
-	[t.Messages] = "CommonUI.Features.Label.Messages",
-	[t.Settings] = "CommonUI.Features.Label.Settings",
-	[t.HelpAndSafety] = "CommonUI.Features.Label.HelpAndSafety",
-	[t.Moments] = "CommonUI.Features.Label.RM",
-	[t.Charts] = "CommonUI.Features.Label.Charts",
-	[t.Learn] = "CommonUI.Features.Label.Learn",
-	[t.CreateGames] = "CommonUI.Features.Label.CreateGames",
-	[t.Premium] = "CommonUI.Features.Label.Premium",
-	[t.GiftCards] = "CommonUI.Features.Label.GiftCards",
-	[t.Redeem] = "CommonUI.Features.Label.Redeem",
-	[t.Trades] = "CommonUI.Features.Label.Trades",
-	[t.Events] = "CommonUI.Features.Label.TheHunt",
-	[t.Terms] = "CommonUI.Features.Label.Terms",
-	[t.Privacy] = "CommonUI.Features.Label.Privacy"
+local ItemTextKey = {
+	[ItemType.Favorites] = "Feature.Catalog.Label.Favorites",
+	[ItemType.ContinuePlaying] = "Feature.FlyoutSidePanel.Action.ContinuePlaying",
+	[ItemType.Inventory] = "CommonUI.Features.Label.Inventory",
+	[ItemType.Connections] = "CommonUI.Features.Label.Friends",
+	[ItemType.Communities] = "CommonUI.Features.Label.Groups",
+	[ItemType.Messages] = "CommonUI.Features.Label.Messages",
+	[ItemType.Settings] = "CommonUI.Features.Label.Settings",
+	[ItemType.HelpAndSafety] = "CommonUI.Features.Label.HelpAndSafety",
+	[ItemType.Moments] = "CommonUI.Features.Label.RM",
+	[ItemType.Charts] = "CommonUI.Features.Label.Charts",
+	[ItemType.Learn] = "CommonUI.Features.Label.Learn",
+	[ItemType.CreateGames] = "CommonUI.Features.Label.CreateGames",
+	[ItemType.Premium] = "CommonUI.Features.Label.Premium",
+	[ItemType.GiftCards] = "CommonUI.Features.Label.GiftCards",
+	[ItemType.Redeem] = "CommonUI.Features.Label.Redeem",
+	[ItemType.Trades] = "CommonUI.Features.Label.Trades",
+	[ItemType.Events] = "CommonUI.Features.Label.TheHunt",
+	[ItemType.Terms] = "CommonUI.Features.Label.Terms",
+	[ItemType.Privacy] = "CommonUI.Features.Label.Privacy"
 }
-local t_3 = {
+local DestinationType = {
 	WebView = "WebView",
 	WebLink = "WebLink",
 	AppPage = "AppPage",
@@ -84,257 +78,266 @@ local t_3 = {
 	PlaceLaunch = "PlaceLaunch"
 }
 
-local function getCommunitiesContext()
-	-- upvalues: communityListRouting (ref), appPage (ref), t_3 (ref), urlBuilder (ref)
-	return if communityListRouting.getShouldUseLuaCommunityList() then { appPage = appPage.Groups, destinationType = t_3.AppPage } else {
-		url = urlBuilder.static.groups(),
-		destinationType = t_3.WebView
+local function getCommunitiesContext() --[[ Line: 114 ]]
+	-- upvalues: CommunityListRouting (copy), AppPage (copy), DestinationType (copy), UrlBuilder (copy)
+	return if CommunityListRouting.getShouldUseLuaCommunityList() then {
+		appPage = AppPage.Groups,
+		destinationType = DestinationType.AppPage
+	} else {
+		url = UrlBuilder.static.groups(),
+		destinationType = DestinationType.WebView
 	}
 end
 
-local function _(p1)
-	-- upvalues: fFlagFlyoutResolveItemContextOnActivationModule (ref)
-	return if fFlagFlyoutResolveItemContextOnActivationModule and p1.getContext then p1.getContext() else p1.context
+local function _(p1) --[[ Line: 120 | Named "getResolvedItemContext" ]]
+	-- upvalues: FFlagFlyoutResolveItemContextOnActivationModule (copy)
+	return if FFlagFlyoutResolveItemContextOnActivationModule and p1.getContext then p1.getContext() else p1.context
 end
 
-local _ = function(p1)
-	-- upvalues: fFlagFlyoutResolveItemContextOnActivationModule (ref)
-	local var1 = if fFlagFlyoutResolveItemContextOnActivationModule and p1.getContext then p1.getContext() else p1.context
+local _ = function(p1) --[[ Line: 124 | Named "getDestinationType" ]]
+	-- upvalues: FFlagFlyoutResolveItemContextOnActivationModule (copy)
+	local Context = if FFlagFlyoutResolveItemContextOnActivationModule and p1.getContext then p1.getContext() else p1.context
 	
-	return if var1 then var1.destinationType else nil
+	return if Context then Context.destinationType else nil
 end
 
-local function itemRequiresWebView(p1, p2)
-	-- upvalues: fFlagFlyoutResolveItemContextOnActivationModule (ref), t_3 (ref)
-	local var1 = if fFlagFlyoutResolveItemContextOnActivationModule and p1.getContext then p1.getContext() else p1.context
-	local var2 = if var1 then var1.destinationType else nil
+local function itemRequiresWebView(p1, p2): boolean --[[ Line: 129 ]]
+	-- upvalues: FFlagFlyoutResolveItemContextOnActivationModule (copy), DestinationType (copy)
+	local Context = if FFlagFlyoutResolveItemContextOnActivationModule and p1.getContext then p1.getContext() else p1.context
+	local DestinationType1 = if Context then Context.destinationType else nil
 	
-	return if var2 ~= t_3.WebView then var2 == t_3.WebLink and not p2 else true
+	return DestinationType1 == DestinationType.WebView or DestinationType1 == DestinationType.WebLink and not p2
 end
 
-local function itemIsGameSortDeeplink(p1)
-	-- upvalues: fFlagFlyoutResolveItemContextOnActivationModule (ref), t_3 (ref)
-	local var1 = if fFlagFlyoutResolveItemContextOnActivationModule and p1.getContext then p1.getContext() else p1.context
+local function itemIsGameSortDeeplink(p1): boolean --[[ Line: 135 ]]
+	-- upvalues: FFlagFlyoutResolveItemContextOnActivationModule (copy), DestinationType (copy)
+	local Context = if FFlagFlyoutResolveItemContextOnActivationModule and p1.getContext then p1.getContext() else p1.context
 	
-	return (if var1 then var1.destinationType else nil) == t_3.GameSortDeeplink
+	return (if Context then Context.destinationType else nil) == DestinationType.GameSortDeeplink
 end
 
-local fFlagFlyoutResolveItemContextOnActivationModule_1 = fFlagEnableLuaCommunityList and fFlagFlyoutResolveItemContextOnActivationModule
-local t_4 = {
-	[t.Favorites] = {
-		itemType = t.Favorites,
-		textKey = t_2[t.Favorites],
-		icon = builderIconsModule.Icon.Bookmark,
+local FFlagFlyoutResolveItemContextOnActivationModule1 = SharedFlagsModule.FFlagEnableLuaCommunityList and FFlagFlyoutResolveItemContextOnActivationModule
+local ItemInfo = {
+	[ItemType.Favorites] = {
+		itemType = ItemType.Favorites,
+		textKey = ItemTextKey[ItemType.Favorites],
+		icon = BuilderIconsModule.Icon.Bookmark,
 		context = {
-			appUri = FAVORITES_URI,
-			destinationType = t_3.GameSortDeeplink
+			appUri = ConstantsModule.FAVORITES_URI,
+			destinationType = DestinationType.GameSortDeeplink
 		}
 	},
-	[t.ContinuePlaying] = {
-		itemType = t.ContinuePlaying,
-		textKey = t_2[t.ContinuePlaying],
-		icon = builderIconsModule.Icon.ClockSpinReverse,
+	[ItemType.ContinuePlaying] = {
+		itemType = ItemType.ContinuePlaying,
+		textKey = ItemTextKey[ItemType.ContinuePlaying],
+		icon = BuilderIconsModule.Icon.ClockSpinReverse,
 		context = {
-			appUri = CONTINUE_PLAYING_URI,
-			destinationType = t_3.GameSortDeeplink
+			appUri = ConstantsModule.CONTINUE_PLAYING_URI,
+			destinationType = DestinationType.GameSortDeeplink
 		}
 	},
-	[t.Inventory] = {
-		itemType = t.Inventory,
-		textKey = t_2[t.Inventory],
-		icon = builderIconsModule.Icon.Backpack,
+	[ItemType.Inventory] = {
+		itemType = ItemType.Inventory,
+		textKey = ItemTextKey[ItemType.Inventory],
+		icon = BuilderIconsModule.Icon.Backpack,
 		context = {
-			urlGenerator = function(p1)
-				-- upvalues: urlBuilder (ref)
-				return p1 and urlBuilder.user.inventory({ userId = p1 }) or nil
+			urlGenerator = function(UserId) --[[ Line: 165 ]]
+				-- upvalues: UrlBuilder (copy)
+				return UserId and UrlBuilder.user.inventory({ userId = UserId }) or nil
 			end,
-			destinationType = t_3.WebView
+			destinationType = DestinationType.WebView
 		}
 	},
-	[t.Connections] = {
-		itemType = t.Connections,
-		textKey = t_2[t.Connections],
-		icon = builderIconsModule.Icon.TwoPeople,
+	[ItemType.Connections] = {
+		itemType = ItemType.Connections,
+		textKey = ItemTextKey[ItemType.Connections],
+		icon = BuilderIconsModule.Icon.TwoPeople,
 		context = {
-			appPage = if fFlagCreateConnectionsHub then appPage.CoHubMyConnections else appPage.ViewFriends,
-			destinationType = t_3.AppPage
+			appPage = if SharedFlagsModule.FFlagCreateConnectionsHub then AppPage.CoHubMyConnections else AppPage.ViewFriends,
+			destinationType = DestinationType.AppPage
 		}
 	},
-	[t.Communities] = {
-		itemType = t.Communities,
-		textKey = t_2[t.Communities],
-		icon = builderIconsModule.Icon.ThreePeople,
-		context = if fFlagFlyoutResolveItemContextOnActivationModule_1 then nil else {
-			url = urlBuilder.static.groups(),
-			destinationType = t_3.WebView
+	[ItemType.Communities] = {
+		itemType = ItemType.Communities,
+		textKey = ItemTextKey[ItemType.Communities],
+		icon = BuilderIconsModule.Icon.ThreePeople,
+		context = if FFlagFlyoutResolveItemContextOnActivationModule1 then nil else {
+			url = UrlBuilder.static.groups(),
+			destinationType = DestinationType.WebView
 		},
-		getContext = if fFlagFlyoutResolveItemContextOnActivationModule_1 then getCommunitiesContext else nil
+		getContext = if FFlagFlyoutResolveItemContextOnActivationModule1 then getCommunitiesContext else nil
 	},
-	[t.Messages] = {
-		itemType = t.Messages,
-		textKey = t_2[t.Messages],
-		icon = builderIconsModule.Icon.Envelope,
+	[ItemType.Messages] = {
+		itemType = ItemType.Messages,
+		textKey = ItemTextKey[ItemType.Messages],
+		icon = BuilderIconsModule.Icon.Envelope,
 		context = {
-			url = urlBuilder.static.messages(),
-			destinationType = t_3.WebView
+			url = UrlBuilder.static.messages(),
+			destinationType = DestinationType.WebView
 		}
 	},
-	[t.Settings] = {
-		itemType = t.Settings,
-		textKey = t_2[t.Settings],
-		icon = builderIconsModule.Icon.Gear,
+	[ItemType.Settings] = {
+		itemType = ItemType.Settings,
+		textKey = ItemTextKey[ItemType.Settings],
+		icon = BuilderIconsModule.Icon.Gear,
 		context = {
-			appPage = appPage.Settings,
-			destinationType = t_3.AppPage
+			appPage = AppPage.Settings,
+			destinationType = DestinationType.AppPage
 		}
 	},
-	[t.HelpAndSafety] = {
-		itemType = t.HelpAndSafety,
-		textKey = t_2[t.HelpAndSafety],
-		icon = builderIconsModule.Icon.ShieldLock,
+	[ItemType.HelpAndSafety] = {
+		itemType = ItemType.HelpAndSafety,
+		textKey = ItemTextKey[ItemType.HelpAndSafety],
+		icon = BuilderIconsModule.Icon.ShieldLock,
 		context = {
-			appPage = appPage.SafetySupport,
-			destinationType = t_3.AppPage
+			appPage = AppPage.SafetySupport,
+			destinationType = DestinationType.AppPage
 		}
 	},
-	[t.Moments] = {
-		itemType = t.Moments,
-		textKey = t_2[t.Moments],
-		icon = builderIconsModule.Icon.Moments,
-		context = if fFlagEnableArgus then { appPage = appPage.Moments, destinationType = t_3.AppPage } else {
-			appUri = flyoutMomentsPlaceURI,
-			destinationType = t_3.PlaceLaunch
+	[ItemType.Moments] = {
+		itemType = ItemType.Moments,
+		textKey = ItemTextKey[ItemType.Moments],
+		icon = BuilderIconsModule.Icon.Moments,
+		context = if FFlagEnableArgus then {
+			appPage = AppPage.Moments,
+			destinationType = DestinationType.AppPage
+		} else {
+			appUri = FlyoutMomentsPlaceURI,
+			destinationType = DestinationType.PlaceLaunch
 		}
 	},
-	[t.Charts] = {
-		itemType = t.Charts,
-		textKey = t_2[t.Charts],
-		icon = builderIconsModule.Icon.ChartThreeVerticalBars,
-		context = { destinationType = t_3.AppPage }
-	},
-	[t.Learn] = {
-		itemType = t.Learn,
-		textKey = t_2[t.Learn],
-		icon = builderIconsModule.Icon.PersonGraduate,
+	[ItemType.Charts] = {
+		itemType = ItemType.Charts,
+		textKey = ItemTextKey[ItemType.Charts],
+		icon = BuilderIconsModule.Icon.ChartThreeVerticalBars,
 		context = {
-			appUri = flyoutLearnPlaceURI,
-			destinationType = t_3.PlaceLaunch
+			appPage = if SharedFlagsModule.FFlagEnableChartsInFlyout and FlyoutSidePanelIXP.isChartsInFlyoutEnabled() then AppPage.Games else nil,
+			destinationType = DestinationType.AppPage
 		}
 	},
-	[t.CreateGames] = {
-		itemType = t.CreateGames,
-		textKey = t_2[t.CreateGames],
-		icon = builderIconsModule.Icon.Studio,
+	[ItemType.Learn] = {
+		itemType = ItemType.Learn,
+		textKey = ItemTextKey[ItemType.Learn],
+		icon = BuilderIconsModule.Icon.PersonGraduate,
 		context = {
-			urlGenerator = function(p1)
-				return p1({ utm_content = "side_panel" })
+			appUri = game:DefineFastString("FlyoutLearnPlaceURI", "roblox://experiences/start?placeId=92498145666402"),
+			destinationType = DestinationType.PlaceLaunch
+		}
+	},
+	[ItemType.CreateGames] = {
+		itemType = ItemType.CreateGames,
+		textKey = ItemTextKey[ItemType.CreateGames],
+		icon = BuilderIconsModule.Icon.Studio,
+		context = {
+			urlGenerator = function(Callback) --[[ Line: 249 ]]
+				return Callback({ utm_content = "side_panel" })
 			end,
-			destinationType = if fFlagFlyoutFilterWebViewsAndBrowserLinks then t_3.WebLink else t_3.WebView
+			destinationType = if FFlagFlyoutFilterWebViewsAndBrowserLinks then DestinationType.WebLink else DestinationType.WebView
 		}
 	},
-	[t.Premium] = {
-		itemType = t.Premium,
-		textKey = t_2[t.Premium],
-		icon = builderIconsModule.Icon.Premium,
+	[ItemType.Premium] = {
+		itemType = ItemType.Premium,
+		textKey = ItemTextKey[ItemType.Premium],
+		icon = BuilderIconsModule.Icon.Premium,
 		context = {
-			appPage = appPage.BuildersClub,
-			destinationType = t_3.WebView
+			appPage = AppPage.BuildersClub,
+			destinationType = DestinationType.WebView
 		}
 	},
-	[t.GiftCards] = {
-		itemType = t.GiftCards,
-		textKey = t_2[t.GiftCards],
-		icon = builderIconsModule.Icon.GiftCard,
+	[ItemType.GiftCards] = {
+		itemType = ItemType.GiftCards,
+		textKey = ItemTextKey[ItemType.GiftCards],
+		icon = BuilderIconsModule.Icon.GiftCard,
 		context = {
-			urlGenerator = function(p1)
-				-- upvalues: urlBuilder (ref)
-				return urlBuilder.static.giftCards(p1)
+			urlGenerator = function(p1) --[[ Line: 271 ]]
+				-- upvalues: UrlBuilder (copy)
+				return UrlBuilder.static.giftCards(p1)
 			end,
-			destinationType = if fFlagFlyoutFilterWebViewsAndBrowserLinks then t_3.WebLink else t_3.WebView
+			destinationType = if FFlagFlyoutFilterWebViewsAndBrowserLinks then DestinationType.WebLink else DestinationType.WebView
 		}
 	},
-	[t.Redeem] = {
-		itemType = t.Redeem,
-		textKey = t_2[t.Redeem],
-		icon = builderIconsModule.Icon.Wallet,
+	[ItemType.Redeem] = {
+		itemType = ItemType.Redeem,
+		textKey = ItemTextKey[ItemType.Redeem],
+		icon = BuilderIconsModule.Icon.Wallet,
 		context = {
-			url = urlBuilder.static.redeem(),
-			destinationType = t_3.WebView
+			url = UrlBuilder.static.redeem(),
+			destinationType = DestinationType.WebView
 		}
 	},
-	[t.Trades] = if fFlagFlyoutSidePanelTradesEntryModule then {
-		itemType = t.Trades,
-		textKey = t_2[t.Trades],
-		icon = builderIconsModule.Icon.HandTwoArrowsHorizontal,
+	[ItemType.Trades] = if FFlagFlyoutSidePanelTradesEntryModule then {
+		itemType = ItemType.Trades,
+		textKey = ItemTextKey[ItemType.Trades],
+		icon = BuilderIconsModule.Icon.HandTwoArrowsHorizontal,
 		context = {
-			url = urlBuilder.static.trades(),
-			destinationType = t_3.WebView
+			url = UrlBuilder.static.trades(),
+			destinationType = DestinationType.WebView
 		}
 	} else nil,
-	[t.Events] = {
-		itemType = t.Events,
-		textKey = t_2[t.Events],
-		icon = builderIconsModule.Icon.CalendarStar,
+	[ItemType.Events] = {
+		itemType = ItemType.Events,
+		textKey = ItemTextKey[ItemType.Events],
+		icon = BuilderIconsModule.Icon.CalendarStar,
 		context = {
-			url = if getFStringPlatformEventUrl() ~= "" then urlBuilder.static.help() else urlBuilder.fromString(getFStringPlatformEventUrl())(),
-			destinationType = t_3.WebView
+			url = if GetFStringPlatformEventUrlFunction() == "" then UrlBuilder.static.help() else UrlBuilder.fromString(GetFStringPlatformEventUrlFunction())(),
+			destinationType = DestinationType.WebView
 		}
 	},
-	[t.Terms] = {
-		itemType = t.Terms,
-		textKey = t_2[t.Terms],
+	[ItemType.Terms] = {
+		itemType = ItemType.Terms,
+		textKey = ItemTextKey[ItemType.Terms],
 		context = {
-			urlGenerator = function(_, p1)
-				-- upvalues: urlBuilder (ref)
-				local var1 = if p1 then p1.getTermsOfUseLink() else nil
+			urlGenerator = function(_, p1) --[[ Line: 314 ]]
+				-- upvalues: UrlBuilder (copy)
+				local TermsOfUseLink = if p1 then p1.getTermsOfUseLink() else nil
 				
-				if var1 == nil or var1 == "" then
-					var1 = urlBuilder.static.about.terms({ useGameQQUrls = true })
+				if TermsOfUseLink == nil or TermsOfUseLink == "" then
+					TermsOfUseLink = UrlBuilder.static.about.terms({ useGameQQUrls = true })
 				end
-				return var1
+				return TermsOfUseLink
 			end,
-			destinationType = if fFlagFlyoutFilterWebViewsAndBrowserLinks then t_3.WebLink else t_3.WebView
+			destinationType = if FFlagFlyoutFilterWebViewsAndBrowserLinks then DestinationType.WebLink else DestinationType.WebView
 		}
 	},
-	[t.Privacy] = {
-		itemType = t.Privacy,
-		textKey = t_2[t.Privacy],
+	[ItemType.Privacy] = {
+		itemType = ItemType.Privacy,
+		textKey = ItemTextKey[ItemType.Privacy],
 		context = {
-			urlGenerator = function(_, p1)
-				-- upvalues: urlBuilder (ref)
-				local var1 = if p1 then p1.getPrivacyPolicyLink() else nil
+			urlGenerator = function(_, p1) --[[ Line: 333 ]]
+				-- upvalues: UrlBuilder (copy)
+				local PrivacyPolicyLink = if p1 then p1.getPrivacyPolicyLink() else nil
 				
-				if var1 == nil or var1 == "" then
-					var1 = urlBuilder.static.about.privacy({ useGameQQUrls = true })
+				if PrivacyPolicyLink == nil or PrivacyPolicyLink == "" then
+					PrivacyPolicyLink = UrlBuilder.static.about.privacy({ useGameQQUrls = true })
 				end
-				return var1
+				return PrivacyPolicyLink
 			end,
-			destinationType = if fFlagFlyoutFilterWebViewsAndBrowserLinks then t_3.WebLink else t_3.WebView
+			destinationType = if FFlagFlyoutFilterWebViewsAndBrowserLinks then DestinationType.WebLink else DestinationType.WebView
 		}
 	}
 }
 
-if fFlagEnableBlackbird and fFlagEnableBlackbirdOnFlyoutMenu then
-	t.Blackbird = "Blackbird"
-	t_1[t.Blackbird] = "Blackbird"
-	t_2[t.Blackbird] = "CommonUI.Features.Label.X"
-	t_4[t.Blackbird] = {
-		itemType = t.Blackbird,
-		textKey = t_2[t.Blackbird],
-		icon = foundationModule.Enums.IconName.RobloxPlus,
+if SharedFlagsModule.FFlagEnableBlackbird and FFlagEnableBlackbirdOnFlyoutMenu then
+	ItemType.Blackbird = "Blackbird"
+	EventNameMappings[ItemType.Blackbird] = "Blackbird"
+	ItemTextKey[ItemType.Blackbird] = "CommonUI.Features.Label.X"
+	ItemInfo[ItemType.Blackbird] = {
+		itemType = ItemType.Blackbird,
+		textKey = ItemTextKey[ItemType.Blackbird],
+		icon = FoundationModule.Enums.IconName.RobloxPlus,
 		context = {
-			appPage = appPage.Blackbird,
-			destinationType = t_3.WebView
+			appPage = AppPage.Blackbird,
+			destinationType = DestinationType.WebView
 		}
 	}
 end
 return {
-	ItemType = t,
-	ItemTextKey = t_2,
-	ItemInfo = t_4,
-	EventNameMappings = t_1,
-	MomentsExperienceUri = flyoutMomentsPlaceURI,
-	DestinationType = t_3,
+	ItemType = ItemType,
+	ItemTextKey = ItemTextKey,
+	ItemInfo = ItemInfo,
+	EventNameMappings = EventNameMappings,
+	MomentsExperienceUri = FlyoutMomentsPlaceURI,
+	DestinationType = DestinationType,
 	itemRequiresWebView = itemRequiresWebView,
 	itemIsGameSortDeeplink = itemIsGameSortDeeplink
 }

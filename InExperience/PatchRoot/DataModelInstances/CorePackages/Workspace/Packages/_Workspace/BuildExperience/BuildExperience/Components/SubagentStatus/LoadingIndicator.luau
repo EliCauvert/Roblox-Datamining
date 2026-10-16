@@ -1,49 +1,48 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local creatorAgentChatModule = require(parent.DataHydration.CreatorAgentChat)
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local icon = foundationModule.Icon
-local progress = foundationModule.Progress
-local view = foundationModule.View
-local iconName = foundationModule.Enums.IconName
-local iconSize = foundationModule.Enums.IconSize
-local progressShape = foundationModule.Enums.ProgressShape
-local progressSize = foundationModule.Enums.ProgressSize
-local subagentTaskStatus = creatorAgentChatModule.SubagentTaskStatus
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local Icon = FoundationModule.Icon
+local Progress = FoundationModule.Progress
+local View = FoundationModule.View
+local IconName = FoundationModule.Enums.IconName
+local IconSize = FoundationModule.Enums.IconSize
+local ProgressShape = FoundationModule.Enums.ProgressShape
+local ProgressSize = FoundationModule.Enums.ProgressSize
+local SubagentTaskStatus = require(Parent.DataHydration.CreatorAgentChat).SubagentTaskStatus
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), subagentTaskStatus (ref), view (ref), progress (ref), progressShape (ref), progressSize (ref), icon (ref), iconName (ref), iconSize (ref)
-	local var1 = reactModule.useBinding(0)
-	local testId = p1.testId or "subagent-status-loading-indicator"
-	local layoutOrder = p1.layoutOrder
+return ReactModule.memo(function(p1) --[[ Line: 29 | Named "LoadingIndicator" ]]
+	-- upvalues: ReactModule (copy), SubagentTaskStatus (copy), View (copy), Progress (copy), ProgressShape (copy), ProgressSize (copy), Icon (copy), IconName (copy), IconSize (copy)
+	local UseBindingResult = ReactModule.useBinding(0)
+	local TestId = p1.testId or "subagent-status-loading-indicator"
+	local LayoutOrder = p1.layoutOrder
 	
-	return if p1.status == subagentTaskStatus.InProgress then reactModule.createElement(view, {
+	return if p1.status == SubagentTaskStatus.InProgress then ReactModule.createElement(View, {
 		tag = "auto-xy clip",
-		LayoutOrder = layoutOrder,
-		GroupTransparency = var1
+		LayoutOrder = LayoutOrder,
+		GroupTransparency = UseBindingResult
 	}, {
-		Progress = reactModule.createElement(progress, {
-			shape = progressShape.Circle,
-			size = progressSize.Small,
-			testId = `{testId}-loading`
+		Progress = ReactModule.createElement(Progress, {
+			shape = ProgressShape.Circle,
+			size = ProgressSize.Small,
+			testId = `{TestId}-loading`
 		})
-	}) elseif p1.status == subagentTaskStatus.Done then reactModule.createElement(icon, {
+	}) elseif p1.status == SubagentTaskStatus.Done then ReactModule.createElement(Icon, {
 		tag = "auto-xy content-system-success",
-		LayoutOrder = layoutOrder,
-		name = iconName.CircleCheck,
-		size = iconSize.Small,
-		testId = `{testId}-check-icon`
-	}) elseif p1.status == subagentTaskStatus.Deleted then reactModule.createElement(icon, {
+		LayoutOrder = LayoutOrder,
+		name = IconName.CircleCheck,
+		size = IconSize.Small,
+		testId = `{TestId}-check-icon`
+	}) elseif p1.status == SubagentTaskStatus.Deleted then ReactModule.createElement(Icon, {
 		tag = "auto-xy content-emphasis",
-		LayoutOrder = layoutOrder,
-		name = iconName.CircleSlash,
-		size = iconSize.Small,
-		testId = `{testId}-deleted-icon`
-	}) elseif p1.status == subagentTaskStatus.Error then reactModule.createElement(icon, {
+		LayoutOrder = LayoutOrder,
+		name = IconName.CircleSlash,
+		size = IconSize.Small,
+		testId = `{TestId}-deleted-icon`
+	}) elseif p1.status == SubagentTaskStatus.Error then ReactModule.createElement(Icon, {
 		tag = "auto-xy content-system-alert",
-		LayoutOrder = layoutOrder,
-		name = iconName.TriangleExclamation,
-		size = iconSize.Small,
-		testId = `{testId}-error-icon`
+		LayoutOrder = LayoutOrder,
+		name = IconName.TriangleExclamation,
+		size = IconSize.Small,
+		testId = `{TestId}-error-icon`
 	}) else nil
 end)

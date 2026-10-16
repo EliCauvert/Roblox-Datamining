@@ -1,322 +1,316 @@
 ﻿local _ = game:GetService("CoreGui")
-local corePackagesService = game:GetService("CorePackages")
+local CorePackages = game:GetService("CorePackages")
 local VRService = game:GetService("VRService")
-local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local components = parent.Components
-local presentation = components.Presentation
-local chrome = parent.Parent.Chrome
-local constantsModule = require(parent.Constants)
-local experienceAgeRatingPolicyModule = require(parent.ExperienceAgeRatingPolicy)
-local experienceAgeRatingBadgeModule = require(corePackagesService.Workspace.Packages.InExperienceTopBar.ExperienceAgeRatingBadge)
-local fFlagExperienceAgeRatingBadge = require(corePackagesService.Workspace.Packages.InExperienceTopBar).Flags.FFlagExperienceAgeRatingBadge
-local coreGuiCommonModule = require(corePackagesService.Workspace.Packages.CoreGuiCommon)
-local coreScriptsRoactCommonModule = require(corePackagesService.Workspace.Packages.CoreScriptsRoactCommon)
-local foundationModule = require(corePackagesService.Packages.Foundation)
-local displayModule = require(corePackagesService.Workspace.Packages.Display)
-local reactModule = require(corePackagesService.Packages.React)
-local sharedFlagsModule = require(corePackagesService.Workspace.Packages.SharedFlags)
-local signalsReactModule = require(corePackagesService.Packages.SignalsReact)
-local _ = require(corePackagesService.Workspace.Packages.Songbird)
-local switchServerModule = require(corePackagesService.Workspace.Packages.SwitchServer)
-local traversal = coreScriptsRoactCommonModule.Traversal
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local universalAppPolicyModule = require(corePackagesService.Workspace.Packages.UniversalAppPolicy)
-local fFlagAddMenuNavigationToggleDialog = sharedFlagsModule.FFlagAddMenuNavigationToggleDialog
-local fFlagGamepadNavigationDialogABTestModule = require(parent.Flags.FFlagGamepadNavigationDialogABTest)
-local fFlagEnablePlaytestModeUnibar = sharedFlagsModule.FFlagEnablePlaytestModeUnibar
-local fFlagEnableTeamTestLua = sharedFlagsModule.FFlagEnableTeamTestLua
-local fFlagAddTraversalBackButton = traversal.Flags.FFlagAddTraversalBackButton
-local getFFlagEnableCrossExpVoice = sharedFlagsModule.GetFFlagEnableCrossExpVoice
-local getFFlagFixSeamlessVoiceIntegrationWithPrivateVoice = sharedFlagsModule.GetFFlagFixSeamlessVoiceIntegrationWithPrivateVoice
-local isInExperienceUIVREnabled = require(corePackagesService.Workspace.Packages.SharedExperimentDefinition).isInExperienceUIVREnabled
-local isSpatial = require(corePackagesService.Workspace.Packages.AppCommonLib).isSpatial
-local isSideSheetEnabledModule = require(corePackagesService.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
-local fFlagShowGameAgeRating = sharedFlagsModule.FFlagShowGameAgeRating
-local fFlagShowGameAgeRating_1 = fFlagExperienceAgeRatingBadge and fFlagShowGameAgeRating
-local fFlagAppNavMyStatsTab = sharedFlagsModule.FFlagAppNavMyStatsTab
-local inExperienceShopModule = require(corePackagesService.Workspace.Packages.InExperienceShop)
-local fFlagEnableInExperienceShop = inExperienceShopModule.FFlagEnableExperienceShopGlobalIcon and sharedFlagsModule.FFlagEnableInExperienceShop
-local fFlagCenterInExperienceShopWindow = inExperienceShopModule.FFlagCenterInExperienceShopWindow
-local fFlagExperienceShopNewIconography = inExperienceShopModule.FFlagExperienceShopNewIconography
-local fFlagShowSwitchServerButton = isSideSheetEnabledModule and (sharedFlagsModule.FFlagShowSwitchServerButton or require(corePackagesService.Workspace.Packages.PioneerUtils).isPioneerLaunch())
-local shopGlobalIcon = inExperienceShopModule.ShopGlobalIcon
-local fFlagTopBarShopIconV2Module = require(parent.Flags.FFlagTopBarShopIconV2)
-local var1 = if fFlagTopBarShopIconV2Module then require(components.Presentation.ShopIcon) else nil
-local view = foundationModule.View
-local selectionCursorProvider = UIBloxModule.App.SelectionImage.SelectionCursorProvider
-local gamepadConnectorModule = require(components.GamepadConnector)
-local gamepadNavigationDialogModule = require(presentation.GamepadNavigationDialog)
-local healthBar = coreGuiCommonModule.Components.HealthBar
-local menuIconModule = require(parent.ComponentsV2.MenuIcon)
-local menuIconContextModule = require(components.MenuIconContext)
-local menuNavigationToggleDialogModule = require(presentation.GamepadMenu.MenuNavigationToggleDialog)
-local traversalBackButtonModule = require(components.TraversalBackButton)
-local playtestModeTooltipModule = require(presentation.PlaytestModeTooltip)
-local var2 = if isInExperienceUIVREnabled then require(components.VRBottomUnibar) else require(parent_1.VR.VRBottomBar.VRBottomBar)
-local buildExperienceModule = require(corePackagesService.Workspace.Packages.BuildExperience)
-local buildModeLaunchModule = require(corePackagesService.Workspace.Packages.BuildExperiencePlaytestLaunch.BuildModeLaunch)
-local buildPillMenuPortalHost = buildExperienceModule.BuildPillMenuPortalHost
-local unpublishedPlaytestModeTooltip = buildExperienceModule.UnpublishedPlaytestModeTooltip
-local var3 = if game:GetEngineFeature("InGameChromeSignalAPI") then require(chrome.ChromeShared.Analytics) else nil
-local var4 = if game:GetEngineFeature("VoiceChatSupported") and getFFlagFixSeamlessVoiceIntegrationWithPrivateVoice() then require(chrome.Integrations.JoinVoiceBinder) else nil
-local partyMicBinderModule = require(chrome.Integrations.Party.PartyMicBinder)
-local unibarModule = require(chrome.ChromeShared.Unibar)
-local default = require(parent_1.VoiceChat.VoiceChatServiceManager).default
-local voiceStateContextModule = require(parent_1.VoiceChat.VoiceStateContext)
-local var5 = if fFlagEnableInExperienceShop then require(chrome.Service) else nil
-local var6 = if fFlagEnableInExperienceShop then require(chrome.ChromeShared.Unibar.Constants) else nil
-local var7 = if fFlagEnableInExperienceShop then require(chrome.Integrations.CommonIcon) else nil
-local var8 = if fFlagEnableInExperienceShop then require(corePackagesService.Workspace.Packages.Chrome).Hooks.useMappedSignal else nil
-local var9 = if fFlagEnableInExperienceShop and var5 and var6 then require(chrome.ChromeShared.Service.ChromeUtils).MappedSignal.new(var5:onIntegrationStatusChanged(), function()
-	-- upvalues: var5 (ref), var6 (ref)
-	return var5:isWindowOpen(var6.IN_EXPERIENCE_SHOP_ID)
+local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local Components = Parent.Components
+local Presentation = Components.Presentation
+local Chrome = Parent.Parent.Chrome
+local ConstantsModule = require(Parent.Constants)
+local ExperienceAgeRatingPolicyModule = require(Parent.ExperienceAgeRatingPolicy)
+local ExperienceAgeRatingBadgeModule = require(CorePackages.Workspace.Packages.InExperienceTopBar.ExperienceAgeRatingBadge)
+local FFlagExperienceAgeRatingBadge = require(CorePackages.Workspace.Packages.InExperienceTopBar).Flags.FFlagExperienceAgeRatingBadge
+local CoreGuiCommonModule = require(CorePackages.Workspace.Packages.CoreGuiCommon)
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local DisplayModule = require(CorePackages.Workspace.Packages.Display)
+local ReactModule = require(CorePackages.Packages.React)
+local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
+local SignalsReactModule = require(CorePackages.Packages.SignalsReact)
+local _ = require(CorePackages.Workspace.Packages.Songbird)
+local SwitchServerModule = require(CorePackages.Workspace.Packages.SwitchServer)
+local UIBloxModule = require(CorePackages.Packages.UIBlox)
+local UniversalAppPolicyModule = require(CorePackages.Workspace.Packages.UniversalAppPolicy)
+local FFlagAddMenuNavigationToggleDialog = SharedFlagsModule.FFlagAddMenuNavigationToggleDialog
+local FFlagGamepadNavigationDialogABTestModule = require(Parent.Flags.FFlagGamepadNavigationDialogABTest)
+local FFlagEnablePlaytestModeUnibar = SharedFlagsModule.FFlagEnablePlaytestModeUnibar
+local FFlagEnableTeamTestLua = SharedFlagsModule.FFlagEnableTeamTestLua
+local FFlagAddTraversalBackButton = require(CorePackages.Workspace.Packages.CoreScriptsRoactCommon).Traversal.Flags.FFlagAddTraversalBackButton
+local GetFFlagEnableCrossExpVoiceFunction = SharedFlagsModule.GetFFlagEnableCrossExpVoice
+local GetFFlagFixSeamlessVoiceIntegrationWithPrivateVoiceFunction = SharedFlagsModule.GetFFlagFixSeamlessVoiceIntegrationWithPrivateVoice
+local IsInExperienceUIVREnabled = require(CorePackages.Workspace.Packages.SharedExperimentDefinition).isInExperienceUIVREnabled
+local IsSpatialFunction = require(CorePackages.Workspace.Packages.AppCommonLib).isSpatial
+local IsSideSheetEnabledModule = require(CorePackages.Workspace.Packages.InExperienceSideSheetUtils.isSideSheetEnabled)
+local FFlagShowGameAgeRating = SharedFlagsModule.FFlagShowGameAgeRating
+local FFlagShowGameAgeRating1 = FFlagExperienceAgeRatingBadge and FFlagShowGameAgeRating
+local FFlagAppNavMyStatsTab = SharedFlagsModule.FFlagAppNavMyStatsTab
+local InExperienceShopModule = require(CorePackages.Workspace.Packages.InExperienceShop)
+local FFlagEnableInExperienceShop = SharedFlagsModule.FFlagEnableInExperienceShop
+local FFlagEnableInExperienceShop1 = InExperienceShopModule.FFlagEnableExperienceShopGlobalIcon and FFlagEnableInExperienceShop
+local FFlagCenterInExperienceShopWindow = InExperienceShopModule.FFlagCenterInExperienceShopWindow
+local FFlagExperienceShopNewIconography = InExperienceShopModule.FFlagExperienceShopNewIconography
+local FFlagShowSwitchServerButton = SharedFlagsModule.FFlagShowSwitchServerButton
+local IsPioneerLaunchFunction = require(CorePackages.Workspace.Packages.PioneerUtils).isPioneerLaunch
+local FFlagShowSwitchServerButton1 = IsSideSheetEnabledModule and (FFlagShowSwitchServerButton or IsPioneerLaunchFunction())
+local ShopGlobalIcon = InExperienceShopModule.ShopGlobalIcon
+local FFlagTopBarShopIconV2Module = require(Parent.Flags.FFlagTopBarShopIconV2)
+local ShopIconModule = if FFlagTopBarShopIconV2Module then require(Components.Presentation.ShopIcon) else nil
+local View = FoundationModule.View
+local SelectionCursorProvider = UIBloxModule.App.SelectionImage.SelectionCursorProvider
+local GamepadConnectorModule = require(Components.GamepadConnector)
+local GamepadNavigationDialogModule = require(Presentation.GamepadNavigationDialog)
+local HealthBar = CoreGuiCommonModule.Components.HealthBar
+local MenuIconModule = require(Parent.ComponentsV2.MenuIcon)
+local MenuIconContextModule = require(Components.MenuIconContext)
+local MenuNavigationToggleDialogModule = require(Presentation.GamepadMenu.MenuNavigationToggleDialog)
+local TraversalBackButtonModule = require(Components.TraversalBackButton)
+local PlaytestModeTooltipModule = require(Presentation.PlaytestModeTooltip)
+local VRBottomUnibarModule = if IsInExperienceUIVREnabled then require(Components.VRBottomUnibar) else require(Parent1.VR.VRBottomBar.VRBottomBar)
+local BuildExperienceModule = require(CorePackages.Workspace.Packages.BuildExperience)
+local BuildModeLaunchModule = require(CorePackages.Workspace.Packages.BuildExperiencePlaytestLaunch.BuildModeLaunch)
+local BuildPillMenuPortalHost = BuildExperienceModule.BuildPillMenuPortalHost
+local UnpublishedPlaytestModeTooltip = BuildExperienceModule.UnpublishedPlaytestModeTooltip
+local AnalyticsModule = if game:GetEngineFeature("InGameChromeSignalAPI") then require(Chrome.ChromeShared.Analytics) else nil
+local JoinVoiceBinderModule = if game:GetEngineFeature("VoiceChatSupported") and GetFFlagFixSeamlessVoiceIntegrationWithPrivateVoiceFunction() then require(Chrome.Integrations.JoinVoiceBinder) else nil
+local PartyMicBinderModule = require(Chrome.Integrations.Party.PartyMicBinder)
+local UnibarModule = require(Chrome.ChromeShared.Unibar)
+local Default = require(Parent1.VoiceChat.VoiceChatServiceManager).default
+local VoiceStateContextModule = require(Parent1.VoiceChat.VoiceStateContext)
+local ServiceModule = if FFlagEnableInExperienceShop1 then require(Chrome.Service) else nil
+local ConstantsModule1 = if FFlagEnableInExperienceShop1 then require(Chrome.ChromeShared.Unibar.Constants) else nil
+local CommonIconModule = if FFlagEnableInExperienceShop1 then require(Chrome.Integrations.CommonIcon) else nil
+local UseMappedSignal = if FFlagEnableInExperienceShop1 then require(CorePackages.Workspace.Packages.Chrome).Hooks.useMappedSignal else nil
+local NewResult = if FFlagEnableInExperienceShop1 and ServiceModule and ConstantsModule1 then require(Chrome.ChromeShared.Service.ChromeUtils).MappedSignal.new(ServiceModule:onIntegrationStatusChanged(), function() --[[ Line: 106 ]]
+	-- upvalues: ServiceModule (copy), ConstantsModule1 (copy)
+	return ServiceModule:isWindowOpen(ConstantsModule1.IN_EXPERIENCE_SHOP_ID)
 end) else nil
-local var10 = if fFlagEnableInExperienceShop then require(chrome.Integrations.InExperienceShop.ShopWindowLayout).toggleInExperienceShopWindow else nil
-local switchServerConfirmation = switchServerModule.SwitchServerConfirmation
-local getSwitchServerStore = switchServerModule.GetSwitchServerStore
+local ToggleInExperienceShopWindow = if FFlagEnableInExperienceShop1 then require(Chrome.Integrations.InExperienceShop.ShopWindowLayout).toggleInExperienceShopWindow else nil
+local SwitchServerConfirmation = SwitchServerModule.SwitchServerConfirmation
+local GetSwitchServerStoreFunction = SwitchServerModule.GetSwitchServerStore
 
-local function getShopGlobalIconEnabled(p1)
-	-- upvalues: fFlagEnableInExperienceShop (ref), inExperienceShopModule (ref)
-	if not fFlagEnableInExperienceShop then
+local function getShopGlobalIconEnabled(p1) --[[ Line: 119 ]]
+	-- upvalues: FFlagEnableInExperienceShop1 (copy), InExperienceShopModule (copy)
+	if FFlagEnableInExperienceShop1 then
+		local GetShopGlobalIconStoreFunction = InExperienceShopModule.GetShopGlobalIconStore
+		
+		return if GetShopGlobalIconStoreFunction then GetShopGlobalIconStoreFunction(p1).getEnabled(p1) else false
+	else
 		return false
 	end
-	local getShopGlobalIconStore = inExperienceShopModule.GetShopGlobalIconStore
-	
-	return if getShopGlobalIconStore then getShopGlobalIconStore(p1).getEnabled(p1) else false
 end
 
-local function getShopGlobalStatusIndicatorEnabled(p1)
-	-- upvalues: fFlagEnableInExperienceShop (ref), inExperienceShopModule (ref)
-	if not fFlagEnableInExperienceShop then
+local function getShopGlobalStatusIndicatorEnabled(p1) --[[ Line: 127 ]]
+	-- upvalues: FFlagEnableInExperienceShop1 (copy), InExperienceShopModule (copy)
+	if FFlagEnableInExperienceShop1 then
+		local GetShopGlobalIconStoreFunction = InExperienceShopModule.GetShopGlobalIconStore
+		
+		return if GetShopGlobalIconStoreFunction then GetShopGlobalIconStoreFunction(p1).getStatusIndicatorEnabled(p1) else false
+	else
 		return false
 	end
-	local getShopGlobalIconStore = inExperienceShopModule.GetShopGlobalIconStore
-	
-	return if getShopGlobalIconStore then getShopGlobalIconStore(p1).getStatusIndicatorEnabled(p1) else false
 end
 
-local function handleShopGlobalIconActivated()
-	-- upvalues: fFlagEnableInExperienceShop (ref), fFlagCenterInExperienceShopWindow (ref), var10 (ref), var5 (ref), var6 (ref)
-	if not fFlagEnableInExperienceShop then return end
-	if fFlagCenterInExperienceShopWindow then
-		if var10 then
-			var10()
+local function handleShopGlobalIconActivated() --[[ Line: 135 ]]
+	-- upvalues: FFlagEnableInExperienceShop1 (copy), FFlagCenterInExperienceShopWindow (copy), ToggleInExperienceShopWindow (copy), ServiceModule (copy), ConstantsModule1 (copy)
+	if not FFlagEnableInExperienceShop1 then return end
+	if FFlagCenterInExperienceShopWindow then
+		if ToggleInExperienceShopWindow then
+			ToggleInExperienceShopWindow()
 			
 			return
 		end
-	elseif var5 and var6 then
-		var5:toggleWindow(var6.IN_EXPERIENCE_SHOP_ID)
+	elseif ServiceModule and ConstantsModule1 then
+		ServiceModule:toggleWindow(ConstantsModule1.IN_EXPERIENCE_SHOP_ID)
 	end
 end
 
-local function _()
-	-- upvalues: buildModeLaunchModule (ref), VRService (ref)
-	return buildModeLaunchModule:hasBuildMode() and not VRService.VREnabled
+local function _(): boolean --[[ Line: 150 | Named "canShowAssistantBuild" ]]
+	-- upvalues: BuildModeLaunchModule (copy), VRService (copy)
+	return BuildModeLaunchModule:hasBuildMode() and not VRService.VREnabled
 end
 
-local function getShouldEnableSwitchServer(p1)
-	-- upvalues: fFlagShowSwitchServerButton (ref), getSwitchServerStore (ref)
-	return if fFlagShowSwitchServerButton then if getSwitchServerStore then getSwitchServerStore(p1).shouldEnableSwitchServer(p1) else false else false
+local function getShouldEnableSwitchServer(p1) --[[ Line: 154 ]]
+	-- upvalues: FFlagShowSwitchServerButton1 (copy), GetSwitchServerStoreFunction (copy)
+	return if FFlagShowSwitchServerButton1 and GetSwitchServerStoreFunction then GetSwitchServerStoreFunction(p1).shouldEnableSwitchServer(p1) else false
 end
 
-local function getIsConfirmationOpen(p1)
-	-- upvalues: fFlagShowSwitchServerButton (ref), getSwitchServerStore (ref)
-	return if fFlagShowSwitchServerButton then if getSwitchServerStore then getSwitchServerStore(p1).isConfirmationOpen(p1) else false else false
+local function getIsConfirmationOpen(p1) --[[ Line: 162 ]]
+	-- upvalues: FFlagShowSwitchServerButton1 (copy), GetSwitchServerStoreFunction (copy)
+	return if FFlagShowSwitchServerButton1 and GetSwitchServerStoreFunction then GetSwitchServerStoreFunction(p1).isConfirmationOpen(p1) else false
 end
 
-return function(_)
-	-- upvalues: fFlagShowGameAgeRating (ref), universalAppPolicyModule (ref), signalsReactModule (ref), coreGuiCommonModule (ref), displayModule (ref), fFlagEnableInExperienceShop (ref), fFlagTopBarShopIconV2Module (ref), getShopGlobalIconEnabled (ref), getShopGlobalStatusIndicatorEnabled (ref), handleShopGlobalIconActivated (ref), reactModule (ref), inExperienceShopModule (ref), var8 (ref), var9 (ref), isSpatial (ref), fFlagExperienceAgeRatingBadge (ref), experienceAgeRatingPolicyModule (ref), gamepadConnectorModule (ref), VRService (ref), constantsModule (ref), fFlagShowSwitchServerButton (ref), getShouldEnableSwitchServer (ref), getIsConfirmationOpen (ref), getSwitchServerStore (ref), view (ref), fFlagShowGameAgeRating_1 (ref), isSideSheetEnabledModule (ref), selectionCursorProvider (ref), menuIconModule (ref), fFlagAddTraversalBackButton (ref), traversalBackButtonModule (ref), menuIconContextModule (ref), unibarModule (ref), var1 (write), shopGlobalIcon (ref), fFlagExperienceShopNewIconography (ref), var7 (ref), fFlagAddMenuNavigationToggleDialog (ref), menuNavigationToggleDialogModule (ref), fFlagGamepadNavigationDialogABTestModule (ref), gamepadNavigationDialogModule (ref), switchServerConfirmation (ref), var4 (ref), getFFlagEnableCrossExpVoice (ref), partyMicBinderModule (ref), var3 (ref), fFlagEnablePlaytestModeUnibar (ref), playtestModeTooltipModule (ref), fFlagEnableTeamTestLua (ref), unpublishedPlaytestModeTooltip (ref), experienceAgeRatingBadgeModule (ref), fFlagAppNavMyStatsTab (ref), buildModeLaunchModule (ref), buildPillMenuPortalHost (ref), healthBar (ref), voiceStateContextModule (ref), var2 (ref), default (ref), isInExperienceUIVREnabled (ref)
-	local var11 = if fFlagShowGameAgeRating then universalAppPolicyModule.useAppPolicy(function(p1)
+return function(_) --[[ Line: 170 | Named "TopBarApp" ]]
+	-- upvalues: FFlagShowGameAgeRating (copy), UniversalAppPolicyModule (copy), SignalsReactModule (copy), CoreGuiCommonModule (copy), DisplayModule (copy), FFlagEnableInExperienceShop1 (copy), FFlagTopBarShopIconV2Module (copy), getShopGlobalIconEnabled (copy), getShopGlobalStatusIndicatorEnabled (copy), handleShopGlobalIconActivated (copy), ReactModule (copy), InExperienceShopModule (copy), UseMappedSignal (copy), NewResult (copy), IsSpatialFunction (copy), FFlagExperienceAgeRatingBadge (copy), ExperienceAgeRatingPolicyModule (copy), GamepadConnectorModule (copy), VRService (copy), ConstantsModule (copy), FFlagShowSwitchServerButton1 (copy), getShouldEnableSwitchServer (copy), getIsConfirmationOpen (copy), GetSwitchServerStoreFunction (copy), View (copy), FFlagShowGameAgeRating1 (copy), IsSideSheetEnabledModule (copy), SelectionCursorProvider (copy), MenuIconModule (copy), FFlagAddTraversalBackButton (copy), TraversalBackButtonModule (copy), MenuIconContextModule (copy), UnibarModule (copy), ShopIconModule (ref), ShopGlobalIcon (copy), FFlagExperienceShopNewIconography (copy), CommonIconModule (copy), FFlagAddMenuNavigationToggleDialog (copy), MenuNavigationToggleDialogModule (copy), FFlagGamepadNavigationDialogABTestModule (copy), GamepadNavigationDialogModule (copy), SwitchServerConfirmation (copy), JoinVoiceBinderModule (copy), GetFFlagEnableCrossExpVoiceFunction (copy), PartyMicBinderModule (copy), AnalyticsModule (copy), FFlagEnablePlaytestModeUnibar (copy), PlaytestModeTooltipModule (copy), FFlagEnableTeamTestLua (copy), UnpublishedPlaytestModeTooltip (copy), ExperienceAgeRatingBadgeModule (copy), FFlagAppNavMyStatsTab (copy), BuildModeLaunchModule (copy), BuildPillMenuPortalHost (copy), HealthBar (copy), VoiceStateContextModule (copy), VRBottomUnibarModule (copy), Default (copy), IsInExperienceUIVREnabled (copy)
+	local UseAppPolicyResult = if FFlagShowGameAgeRating then UniversalAppPolicyModule.useAppPolicy(function(p1) --[[ Line: 172 ]]
 		return p1.getShowGameAgeRating()
-	end) else universalAppPolicyModule.useAppPolicy(function(p1)
+	end) else UniversalAppPolicyModule.useAppPolicy(function(p1) --[[ Line: 175 ]]
 		return p1.getShowBadgeOver12()
 	end)
-	local var12 = signalsReactModule.useSignalState(function(p1)
-		-- upvalues: coreGuiCommonModule (copy)
-		return coreGuiCommonModule.Stores.GetKeepOutAreasStore(p1)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(function(p1) --[[ Line: 179 ]]
+		-- upvalues: CoreGuiCommonModule (upval)
+		return CoreGuiCommonModule.Stores.GetKeepOutAreasStore(p1)
 	end)
-	local var13 = signalsReactModule.useSignalState(function(p1)
-		-- upvalues: displayModule (copy)
-		return displayModule.GetDisplayStore(p1).getUIScale(p1)
+	local UseSignalStateResult1 = SignalsReactModule.useSignalState(function(p1) --[[ Line: 182 ]]
+		-- upvalues: DisplayModule (upval)
+		return DisplayModule.GetDisplayStore(p1).getUIScale(p1)
 	end)
-	local var14 = nil
-	local var15 = nil
-	local var16 = nil
-	local var17 = nil
+	local UseSignalStateResult2 = nil
+	local UseSignalStateResult3 = nil
+	local OnActivated = nil
+	local IsActive = nil
 	
-	if fFlagEnableInExperienceShop and not fFlagTopBarShopIconV2Module then
-		var14 = signalsReactModule.useSignalState(getShopGlobalIconEnabled)
-		var15 = signalsReactModule.useSignalState(getShopGlobalStatusIndicatorEnabled)
-		var16 = handleShopGlobalIconActivated
-		reactModule.useEffect(function()
-			-- upvalues: inExperienceShopModule (copy)
-			return inExperienceShopModule.initShopGlobalIcon and inExperienceShopModule.initShopGlobalIcon() or function() end
+	if FFlagEnableInExperienceShop1 and not FFlagTopBarShopIconV2Module then
+		UseSignalStateResult2 = SignalsReactModule.useSignalState(getShopGlobalIconEnabled)
+		UseSignalStateResult3 = SignalsReactModule.useSignalState(getShopGlobalStatusIndicatorEnabled)
+		OnActivated = handleShopGlobalIconActivated
+		ReactModule.useEffect(function() --[[ Line: 194 ]]
+			-- upvalues: InExperienceShopModule (upval)
+			return InExperienceShopModule.initShopGlobalIcon and InExperienceShopModule.initShopGlobalIcon() or function() --[[ Line: 196 ]] end
 		end, {})
-		var17 = (var8 or function() end)(var9)
+		IsActive = (UseMappedSignal or function() --[[ Line: 198 ]] end)(NewResult)
 	end
-	local var18 = reactModule.useRef(nil)
-	local var19 = isSpatial()
-	local var20 = nil
+	local UseRefResult = ReactModule.useRef(nil)
+	local IsSpatial = IsSpatialFunction()
+	local Callback = nil
 	
-	if fFlagExperienceAgeRatingBadge then
-		local var21, var22 = reactModule.useState(var19)
-		var19 = var21
-		var20 = var22
+	if FFlagExperienceAgeRatingBadge then
+		IsSpatial, Callback = ReactModule.useState(IsSpatial)
 	end
-	local var23 = experienceAgeRatingPolicyModule.isEligible(var11, true, true, var19)
-	local var24 = reactModule.useRef(nil)
-	local showTopBar = gamepadConnectorModule:getShowTopBar()
-	local var25, var26 = reactModule.useBinding(showTopBar:get())
-	reactModule.useEffect(function()
-		-- upvalues: isSpatial (copy), gamepadConnectorModule (copy), VRService (copy), fFlagExperienceAgeRatingBadge (copy), var20 (write), showTopBar (ref), var26 (ref), var12 (ref)
-		if not isSpatial() then
-			gamepadConnectorModule:connectToTopbar()
+	local IsEligible = ExperienceAgeRatingPolicyModule.isEligible(UseAppPolicyResult, true, true, IsSpatial)
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local ShowTopBar = GamepadConnectorModule:getShowTopBar()
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(ShowTopBar:get())
+	ReactModule.useEffect(function() --[[ Line: 214 ]]
+		-- upvalues: IsSpatialFunction (upval), GamepadConnectorModule (upval), VRService (upval), FFlagExperienceAgeRatingBadge (upval), Callback (ref), ShowTopBar (copy), UseBindingResult2 (copy), UseSignalStateResult (copy)
+		if not IsSpatialFunction() then
+			GamepadConnectorModule:connectToTopbar()
 		end
-		local var27 = VRService:GetPropertyChangedSignal("VREnabled"):Connect(function()
-			-- upvalues: fFlagExperienceAgeRatingBadge (copy), var20 (copy), isSpatial (copy), gamepadConnectorModule (copy)
-			if fFlagExperienceAgeRatingBadge then
-				var20(isSpatial())
+		local Connection = VRService:GetPropertyChangedSignal("VREnabled"):Connect(function() --[[ Line: 218 ]]
+			-- upvalues: FFlagExperienceAgeRatingBadge (upval), Callback (upval), IsSpatialFunction (upval), GamepadConnectorModule (upval)
+			if FFlagExperienceAgeRatingBadge then
+				Callback(IsSpatialFunction())
 			end
-			if isSpatial() then
-				gamepadConnectorModule:disconnectFromTopbar()
+			if IsSpatialFunction() then
+				GamepadConnectorModule:disconnectFromTopbar()
 				
 				return
+			else
+				GamepadConnectorModule:connectToTopbar()
 			end
-			gamepadConnectorModule:connectToTopbar()
 		end)
-		local var28 = showTopBar:connect(function()
-			-- upvalues: var26 (copy), showTopBar (copy)
-			var26(showTopBar:get())
+		local Connection1 = ShowTopBar:connect(function() --[[ Line: 229 ]]
+			-- upvalues: UseBindingResult2 (upval), ShowTopBar (upval)
+			UseBindingResult2(ShowTopBar:get())
 		end)
 		
-		return function()
-			-- upvalues: var27 (ref), gamepadConnectorModule (copy), var12 (copy), var28 (ref)
-			if var27 then
-				var27:Disconnect()
+		return function() --[[ Line: 232 ]]
+			-- upvalues: Connection (copy), GamepadConnectorModule (upval), UseSignalStateResult (upval), Connection1 (copy)
+			if Connection then
+				Connection:Disconnect()
 			end
-			gamepadConnectorModule:disconnectFromTopbar()
+			GamepadConnectorModule:disconnectFromTopbar()
 			
-			if var12 then
-				var12.cleanup()
+			if UseSignalStateResult then
+				UseSignalStateResult.cleanup()
 			end
-			var28:disconnect()
+			Connection1:disconnect()
 		end
 	end, {})
-	local var27 = reactModule.useCallback(function(p1)
-		-- upvalues: var12 (ref), constantsModule (copy)
-		var12.setKeepOutArea(constantsModule.TopBarKeepOutAreaId, p1.AbsolutePosition, p1.AbsoluteSize)
-	end, { var12 })
-	local var28 = constantsModule.ScreenSideOffset * var13
-	local var29 = constantsModule.TopBarHeight * var13
-	local var30 = constantsModule.TopBarButtonHeight * var13
-	local var31 = constantsModule.TopBarTopMargin * var13
-	local var32 = nil
-	local var33 = nil
-	local setConfirmationOpen = nil
+	local UseResult = ReactModule.useCallback(function(Frame: Frame) --[[ Line: 244 ]]
+		-- upvalues: UseSignalStateResult (copy), ConstantsModule (upval)
+		UseSignalStateResult.setKeepOutArea(ConstantsModule.TopBarKeepOutAreaId, Frame.AbsolutePosition, Frame.AbsoluteSize)
+	end, { UseSignalStateResult })
+	local ScaledScreenSideOffset = ConstantsModule.ScreenSideOffset * UseSignalStateResult1
+	local ScaledTopBarHeight = ConstantsModule.TopBarHeight * UseSignalStateResult1
+	local ScaledTopBarButtonHeight = ConstantsModule.TopBarButtonHeight * UseSignalStateResult1
+	local ScaledTopBarTopMargin = ConstantsModule.TopBarTopMargin * UseSignalStateResult1
+	local UseSignalStateResult4 = nil
+	local UseSignalStateResult5 = nil
+	local SetConfirmationOpen = nil
 	
-	if fFlagShowSwitchServerButton then
-		var32 = signalsReactModule.useSignalState(getShouldEnableSwitchServer)
-		var33 = signalsReactModule.useSignalState(getIsConfirmationOpen)
-		setConfirmationOpen = getSwitchServerStore(false).setConfirmationOpen
+	if FFlagShowSwitchServerButton1 then
+		UseSignalStateResult4 = SignalsReactModule.useSignalState(getShouldEnableSwitchServer)
+		UseSignalStateResult5 = SignalsReactModule.useSignalState(getIsConfirmationOpen)
+		SetConfirmationOpen = GetSwitchServerStoreFunction(false).setConfirmationOpen
 	end
-	local createElement_1
-	local createElement = reactModule.createElement
-	local t = {
+	local Element = ReactModule.createElement(View, {
 		tag = "anchor-top-left auto-x row gap-small",
-		Size = UDim2.fromOffset(0, var30),
-		onAbsoluteSizeChanged = if fFlagShowGameAgeRating_1 then nil else var27,
-		onAbsolutePositionChanged = if fFlagShowGameAgeRating_1 then nil else var27,
-		Position = if fFlagShowGameAgeRating_1 then nil else UDim2.new(0, var28, 0, var31),
-		Visible = var25
-	}
-	local t_1 = {
-		MenuIcon = if not isSideSheetEnabledModule then reactModule.createElement(selectionCursorProvider, {}, {
-			Icon = reactModule.createElement(menuIconModule, {
-				buttonSize = if fFlagShowGameAgeRating_1 then var30 else nil,
-				showBadgeOver12 = var11 and not var23,
-				menuIconRef = var24,
-				unibarMenuRef = var18
-			})
-		}) else nil,
-		TraversalBackButton = if fFlagAddTraversalBackButton then reactModule.createElement(traversalBackButtonModule) else nil,
-		UnibarFrame = reactModule.createElement(menuIconContextModule.Provider, {
-			value = { menuIconRef = var24, replacesAgeRating = var23 }
-		}, {
-			reactModule.createElement(unibarModule, {
-				layoutOrder = 2,
-				onMinWidthChanged = function() end,
-				onAreaChanged = function() end,
-				menuRef = var18
+		Size = UDim2.fromOffset(0, ScaledTopBarButtonHeight),
+		onAbsoluteSizeChanged = if FFlagShowGameAgeRating1 then nil else UseResult,
+		onAbsolutePositionChanged = if FFlagShowGameAgeRating1 then nil else UseResult,
+		Position = if FFlagShowGameAgeRating1 then nil else UDim2.new(0, ScaledScreenSideOffset, 0, ScaledTopBarTopMargin),
+		Visible = UseBindingResult
+	}, {
+		MenuIcon = if IsSideSheetEnabledModule then nil else ReactModule.createElement(SelectionCursorProvider, {}, {
+			Icon = ReactModule.createElement(MenuIconModule, {
+				buttonSize = if FFlagShowGameAgeRating1 then ScaledTopBarButtonHeight else nil,
+				showBadgeOver12 = UseAppPolicyResult and not IsEligible,
+				menuIconRef = UseRefResult1,
+				unibarMenuRef = UseRefResult
 			})
 		}),
-		ShopIcon = if fFlagTopBarShopIconV2Module and fFlagEnableInExperienceShop then reactModule.createElement(var1, { layoutOrder = 3, buttonSize = var30 }) else nil
-	}
-	
-	if fFlagTopBarShopIconV2Module or not fFlagEnableInExperienceShop or (not var14 or shopGlobalIcon == nil) then
-		createElement_1 = nil
-	else
-		createElement_1 = reactModule.createElement
-		createElement_1 = createElement_1(shopGlobalIcon, {
+		TraversalBackButton = if FFlagAddTraversalBackButton then ReactModule.createElement(TraversalBackButtonModule) else nil,
+		UnibarFrame = ReactModule.createElement(MenuIconContextModule.Provider, {
+			value = {
+				menuIconRef = UseRefResult1,
+				replacesAgeRating = IsEligible
+			}
+		}, {
+			ReactModule.createElement(UnibarModule, {
+				layoutOrder = 2,
+				onMinWidthChanged = function() --[[ Line: 286 ]] end,
+				onAreaChanged = function() --[[ Line: 287 ]] end,
+				menuRef = UseRefResult
+			})
+		}),
+		ShopIcon = if FFlagTopBarShopIconV2Module and FFlagEnableInExperienceShop1 then ReactModule.createElement(ShopIconModule, { layoutOrder = 3, buttonSize = ScaledTopBarButtonHeight }) else nil,
+		ShopGlobalIcon = if FFlagTopBarShopIconV2Module or not FFlagEnableInExperienceShop1 or not UseSignalStateResult2 or ShopGlobalIcon == nil then nil else ReactModule.createElement(ShopGlobalIcon, {
 			layoutOrder = 3,
-			buttonSize = var30,
-			showStatusIndicator = var15,
-			onActivated = var16,
-			isActive = var17,
-			icon = if fFlagExperienceShopNewIconography or not var7 or not var9 then nil else var7("BuildingStore", nil, var9)
+			buttonSize = ScaledTopBarButtonHeight,
+			showStatusIndicator = UseSignalStateResult3,
+			onActivated = OnActivated,
+			isActive = IsActive,
+			icon = if FFlagExperienceShopNewIconography or not CommonIconModule or not NewResult then nil else CommonIconModule("BuildingStore", nil, NewResult)
 		})
-	end
-	t_1.ShopGlobalIcon = createElement_1
-	createElement = createElement(view, t, t_1)
+	})
 	
-	return reactModule.createElement("ScreenGui", {
+	return ReactModule.createElement("ScreenGui", {
 		IgnoreGuiInset = true,
 		DisplayOrder = 6,
 		ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 	}, {
-		Popups = reactModule.createElement(view, { tag = "size-full" }, {
-			MenuNavigationToggleDialog = if fFlagAddMenuNavigationToggleDialog then reactModule.createElement(menuNavigationToggleDialogModule, {
+		Popups = ReactModule.createElement(View, { tag = "size-full" }, {
+			MenuNavigationToggleDialog = if FFlagAddMenuNavigationToggleDialog then ReactModule.createElement(MenuNavigationToggleDialogModule, {
 				Position = UDim2.fromScale(0.5, 0.1),
-				GamepadConnector = gamepadConnectorModule
+				GamepadConnector = GamepadConnectorModule
 			}) else nil,
-			GamepadNavigationDialog = if fFlagGamepadNavigationDialogABTestModule then reactModule.createElement(gamepadNavigationDialogModule) else nil,
-			SwitchServerConfirmation = if var32 and var33 then reactModule.createElement(switchServerConfirmation, { setSwitchServerConfirmationOpen = setConfirmationOpen }) else nil
+			GamepadNavigationDialog = if FFlagGamepadNavigationDialogABTestModule then ReactModule.createElement(GamepadNavigationDialogModule) else nil,
+			SwitchServerConfirmation = if UseSignalStateResult4 and UseSignalStateResult5 then ReactModule.createElement(SwitchServerConfirmation, { setSwitchServerConfirmationOpen = SetConfirmationOpen }) else nil
 		}),
-		Binders = reactModule.createElement(reactModule.Fragment, {}, {
-			JoinVoiceBinder = if var4 then reactModule.createElement(var4) else nil,
-			PartyMicBinder = if getFFlagEnableCrossExpVoice() then reactModule.createElement(partyMicBinderModule) else nil,
-			ChromeAnalytics = if var3 then reactModule.createElement(var3) else nil
+		Binders = ReactModule.createElement(ReactModule.Fragment, {}, {
+			JoinVoiceBinder = if JoinVoiceBinderModule then ReactModule.createElement(JoinVoiceBinderModule) else nil,
+			PartyMicBinder = if GetFFlagEnableCrossExpVoiceFunction() then ReactModule.createElement(PartyMicBinderModule) else nil,
+			ChromeAnalytics = if AnalyticsModule then ReactModule.createElement(AnalyticsModule) else nil
 		}),
-		PlaytestTooltip = if fFlagEnablePlaytestModeUnibar then reactModule.createElement(playtestModeTooltipModule, { anchorRef = var18 }) else nil,
-		UnpublishedPlaytestTooltip = if fFlagEnableTeamTestLua then reactModule.createElement(unpublishedPlaytestModeTooltip, { anchorRef = var18, isVisible = var25 }) else nil,
-		TopBarFrame = reactModule.createElement(view, { Size = UDim2.new(1, 0, 0, var29) }, {
-			TopLeftFrame = if fFlagShowGameAgeRating_1 then reactModule.createElement(view, {
+		PlaytestTooltip = if FFlagEnablePlaytestModeUnibar then ReactModule.createElement(PlaytestModeTooltipModule, { anchorRef = UseRefResult }) else nil,
+		UnpublishedPlaytestTooltip = if FFlagEnableTeamTestLua then ReactModule.createElement(UnpublishedPlaytestModeTooltip, { anchorRef = UseRefResult, isVisible = UseBindingResult }) else nil,
+		TopBarFrame = ReactModule.createElement(View, { Size = UDim2.new(1, 0, 0, ScaledTopBarHeight) }, {
+			TopLeftFrame = if FFlagShowGameAgeRating1 then ReactModule.createElement(View, {
 				tag = "row align-y-center gap-small auto-x",
-				Size = UDim2.fromOffset(0, var30),
-				Position = UDim2.new(0, var28, 0, var31),
-				onAbsoluteSizeChanged = var27,
-				onAbsolutePositionChanged = var27
+				Size = UDim2.fromOffset(0, ScaledTopBarButtonHeight),
+				Position = UDim2.new(0, ScaledScreenSideOffset, 0, ScaledTopBarTopMargin),
+				onAbsoluteSizeChanged = UseResult,
+				onAbsolutePositionChanged = UseResult
 			}, {
-				Controls = createElement,
-				AgeRating = if var23 then reactModule.createElement(experienceAgeRatingBadgeModule, { layoutOrder = 1, universeId = tostring(game.GameId) }) else nil
-			}) else createElement,
-			TopRightFrame = reactModule.createElement(view, {
+				Controls = Element,
+				AgeRating = if IsEligible then ReactModule.createElement(ExperienceAgeRatingBadgeModule, { layoutOrder = 1, universeId = tostring(game.GameId) }) else nil
+			}) else Element,
+			TopRightFrame = ReactModule.createElement(View, {
 				tag = "anchor-top-right auto-x",
-				Size = UDim2.fromOffset(0, var30),
-				Position = UDim2.new(1, -var28, 0, var31)
+				Size = UDim2.fromOffset(0, ScaledTopBarButtonHeight),
+				Position = UDim2.new(1, -ScaledScreenSideOffset, 0, ScaledTopBarTopMargin)
 			}, {
-				BuildPillMenu = if fFlagAppNavMyStatsTab and (buildModeLaunchModule:hasBuildMode() and not VRService.VREnabled) then reactModule.createElement(buildPillMenuPortalHost) else nil,
-				HealthBar = reactModule.createElement(healthBar)
+				BuildPillMenu = if FFlagAppNavMyStatsTab and (BuildModeLaunchModule:hasBuildMode() and not VRService.VREnabled) then ReactModule.createElement(BuildPillMenuPortalHost) else nil,
+				HealthBar = ReactModule.createElement(HealthBar)
 			})
 		}),
-		VRBottomBar = if VRService.VREnabled then reactModule.createElement(voiceStateContextModule.Provider, {}, {
-			VRBottomBar = voiceStateContextModule.withVoiceState(function(p1)
-				-- upvalues: reactModule (copy), var2 (copy), default (copy), isInExperienceUIVREnabled (copy), var11 (ref)
-				return reactModule.createElement(var2, {
-					voiceChatServiceManager = default,
+		VRBottomBar = if VRService.VREnabled then ReactModule.createElement(VoiceStateContextModule.Provider, {}, {
+			VRBottomBar = VoiceStateContextModule.withVoiceState(function(p1) --[[ Line: 394 ]]
+				-- upvalues: ReactModule (upval), VRBottomUnibarModule (upval), Default (upval), IsInExperienceUIVREnabled (upval), UseAppPolicyResult (copy)
+				return ReactModule.createElement(VRBottomUnibarModule, {
+					voiceChatServiceManager = Default,
 					voiceEnabled = p1.voiceEnabled,
 					voiceState = p1.voiceState,
-					showBadgeOver12 = if isInExperienceUIVREnabled then var11 else nil
+					showBadgeOver12 = if IsInExperienceUIVREnabled then UseAppPolicyResult else nil
 				})
 			end)
 		}) else nil

@@ -1,3 +1,3 @@
-﻿return function(value)
-	return if value.isTabBarVisible and value.tabCount > 1 then value.isChatFocused else false
+﻿return function(p1) --[[ Line: 21 | Named "shouldNavigateTabs" ]]
+	return if p1.isTabBarVisible and p1.tabCount > 1 then p1.isChatFocused else false
 end

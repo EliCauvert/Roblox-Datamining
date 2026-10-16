@@ -1,1 +1,1 @@
-﻿return require(game:GetService("CorePackages").Packages.GraphQL)
+﻿return (require(game:GetService("CorePackages").Packages.GraphQL))

@@ -1,7 +1,7 @@
-﻿local gamepadService = game:GetService("GamepadService")
-local useProperty = require(script.Parent.Parent.GuiObjectUtils).useProperty
+﻿local GamepadService = game:GetService("GamepadService")
+local UsePropertyFunction = require(script.Parent.Parent.GuiObjectUtils).useProperty
 
-return function()
-	-- upvalues: useProperty (ref), gamepadService (ref)
-	return useProperty(gamepadService, "GamepadCursorEnabled")
+return function() --[[ Line: 9 | Named "useGamepadCursorEnabled" ]]
+	-- upvalues: UsePropertyFunction (copy), GamepadService (copy)
+	return (UsePropertyFunction(GamepadService, "GamepadCursorEnabled"))
 end

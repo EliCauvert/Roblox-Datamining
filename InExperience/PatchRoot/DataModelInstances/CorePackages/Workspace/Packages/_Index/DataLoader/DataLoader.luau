@@ -1,1 +1,1 @@
-﻿return require(game:GetService("CorePackages").Packages.DataLoader)
+﻿return (require(game:GetService("CorePackages").Packages.DataLoader))

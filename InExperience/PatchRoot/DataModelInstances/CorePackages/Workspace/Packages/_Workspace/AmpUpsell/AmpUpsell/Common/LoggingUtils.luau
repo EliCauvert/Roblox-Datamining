@@ -1,11 +1,11 @@
-﻿local default = require(script:FindFirstAncestor("AmpUpsell").Parent.LoggingProtocol).default
-local enableAmpUpsellLogging = game:DefineFastFlag("EnableAmpUpsellLogging", false)
+﻿local Default = require(script:FindFirstAncestor("AmpUpsell").Parent.LoggingProtocol).default
+local EnableAmpUpsellLogging = game:DefineFastFlag("EnableAmpUpsellLogging", false)
 
 return {
-	logEventOnceIfEnabled = function(p1)
-		-- upvalues: enableAmpUpsellLogging (ref), default (ref)
-		if enableAmpUpsellLogging then
-			default:logEventOnce(p1)
+	logEventOnceIfEnabled = function(p1) --[[ Line: 20 ]]
+		-- upvalues: EnableAmpUpsellLogging (copy), Default (copy)
+		if EnableAmpUpsellLogging then
+			Default:logEventOnce(p1)
 		end
 	end
 }

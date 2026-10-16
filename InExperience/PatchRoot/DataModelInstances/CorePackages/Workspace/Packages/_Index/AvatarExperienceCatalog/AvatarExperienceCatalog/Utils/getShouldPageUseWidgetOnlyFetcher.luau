@@ -1,8 +1,8 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
-local _ = require(parent.AvatarExperienceCommon)
-local var1 = require(parent.AvatarExperienceModel).Enums.CatalogCategories.Recommended:rawValue()
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
+local _ = require(Parent.AvatarExperienceCommon)
+local RawValueResult = require(Parent.AvatarExperienceModel).Enums.CatalogCategories.Recommended:rawValue()
 
-return function(p1, p2, p3)
-	-- upvalues: var1 (ref)
-	return if p1 then if p3 then false else p1.Id == var1 and (p2 and p2 > 0) else false
+return function(p1, p2: number, p3): boolean --[[ Line: 26 | Named "getShouldPageUseWidgetOnlyFetcher" ]]
+	-- upvalues: RawValueResult (copy)
+	return if p1 then not p3 and (p1.Id == RawValueResult and (not p2 or p2 <= 0)) else false
 end

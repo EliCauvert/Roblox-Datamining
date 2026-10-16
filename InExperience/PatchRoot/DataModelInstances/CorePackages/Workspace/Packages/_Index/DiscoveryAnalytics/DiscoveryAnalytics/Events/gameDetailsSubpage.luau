@@ -1,33 +1,33 @@
-﻿local telemetryService = game:GetService("TelemetryService")
-local parent = script:FindFirstAncestor("DiscoveryAnalytics").Parent
-local tModule = require(parent.t)
-local discoveryEventErrorLogger = require(parent.DiscoveryUtils).DiscoveryEventErrorLogger
-local gameDetailsSubpageThrottleHundrethsPercent = game:DefineFastInt("GameDetailsSubpageThrottleHundrethsPercent", 10000)
-local var1 = tModule.strictInterface({
-	universeId = tModule.string,
-	placeId = tModule.string,
-	subpage = tModule.string,
-	action = tModule.optional(tModule.string),
-	uid = tModule.string,
-	ctx = tModule.string
+﻿local TelemetryService = game:GetService("TelemetryService")
+local Parent = script:FindFirstAncestor("DiscoveryAnalytics").Parent
+local TModule = require(Parent.t)
+local DiscoveryEventErrorLogger = require(Parent.DiscoveryUtils).DiscoveryEventErrorLogger
+local GameDetailsSubpageThrottleHundrethsPercent = game:DefineFastInt("GameDetailsSubpageThrottleHundrethsPercent", 10000)
+local StrictInterfaceResult = TModule.strictInterface({
+	universeId = TModule.string,
+	placeId = TModule.string,
+	subpage = TModule.string,
+	action = TModule.optional(TModule.string),
+	uid = TModule.string,
+	ctx = TModule.string
 })
 
-return function(p1, p2)
-	-- upvalues: var1 (ref), discoveryEventErrorLogger (ref), gameDetailsSubpageThrottleHundrethsPercent (ref), telemetryService (ref)
-	local var2, var3 = var1(p1)
+return function(CustomFields, EventContext) --[[ Line: 20 ]]
+	-- upvalues: StrictInterfaceResult (copy), DiscoveryEventErrorLogger (copy), GameDetailsSubpageThrottleHundrethsPercent (copy), TelemetryService (copy)
+	local StrictInterfaceResultResult, StrictInterfaceResultResult2 = StrictInterfaceResult(CustomFields)
 	
-	if not var2 then
-		discoveryEventErrorLogger.reportError("GameDetailsSubpageInvalidInterface", var3)
+	if not StrictInterfaceResultResult then
+		DiscoveryEventErrorLogger.reportError("GameDetailsSubpageInvalidInterface", StrictInterfaceResultResult2)
 	end
-	telemetryService:LogEvent({
+	TelemetryService:LogEvent({
 		eventName = "gameDetailsSubpage",
 		description = "User has navigated to a game details subpage",
 		backends = { "EventIngest" },
-		throttlingPercentage = gameDetailsSubpageThrottleHundrethsPercent,
+		throttlingPercentage = GameDetailsSubpageThrottleHundrethsPercent,
 		lastUpdated = { 25, 11, 11 }
 	}, {
-		eventContext = p2,
+		eventContext = EventContext,
 		standardizedFields = { "addSessionInfo" },
-		customFields = p1
+		customFields = CustomFields
 	})
 end

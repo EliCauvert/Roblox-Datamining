@@ -1,46 +1,44 @@
-﻿local parent = script.Parent.Parent.Parent
-local constantsModule = require(parent.Constants)
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local t = {
-	categories = {
-		validationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
-		validationEnumsModule.UploadCategory.DYNAMIC_HEAD,
-		validationEnumsModule.UploadCategory.LAYERED_CLOTHING,
-		validationEnumsModule.UploadCategory.EYEBROW_EYELASH,
-		validationEnumsModule.UploadCategory.RIGID_ACCESSORY
-	},
-	requiredData = { validationEnumsModule.SharedDataMember.rootInstance },
-	expectedFailures = {}
-}
+﻿local Parent = script.Parent.Parent.Parent
+local ConstantsModule = require(Parent.Constants)
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
 
-local function buildAcceptedMaterialList()
-	-- upvalues: constantsModule (ref)
-	local t = {}
+local function buildAcceptedMaterialList(): string --[[ Line: 22 ]]
+	-- upvalues: ConstantsModule (copy)
+	local List = {}
 	
-	for i in pairs(constantsModule.MATERIAL_WHITELIST) do
-		table.insert(t, i.Name)
+	for i in pairs(ConstantsModule.MATERIAL_WHITELIST) do
+		table.insert(List, i.Name)
 	end
-	return table.concat(t, ", ")
+	return table.concat(List, ", ")
 end
 
-function t.run(p1, p2)
-	-- upvalues: constantsModule (ref), buildAcceptedMaterialList (ref), errorSourceStringsModule (ref)
-	local rootInstance = p2.rootInstance
-	local descendants = rootInstance:GetDescendants()
-	table.insert(descendants, rootInstance)
-	local var1 = nil
-	
-	for i, v in descendants do
-		if v:IsA("BasePart") and not constantsModule.MATERIAL_WHITELIST[v.Material] then
-			var1 = var1 or buildAcceptedMaterialList()
-			p1:fail(errorSourceStringsModule.Keys.MaterialNotAllowed, {
-				InstanceNameList = v:GetFullName(),
-				AllowedMaterials = var1
-			})
+return {
+	categories = {
+		ValidationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
+		ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD,
+		ValidationEnumsModule.UploadCategory.LAYERED_CLOTHING,
+		ValidationEnumsModule.UploadCategory.EYEBROW_EYELASH,
+		ValidationEnumsModule.UploadCategory.RIGID_ACCESSORY
+	},
+	requiredData = { ValidationEnumsModule.SharedDataMember.rootInstance },
+	expectedFailures = {},
+	run = function(p1, p2) --[[ Line: 30 ]]
+		-- upvalues: ConstantsModule (copy), buildAcceptedMaterialList (copy), ErrorSourceStringsModule (copy)
+		local RootInstance = p2.rootInstance
+		local Descendants = RootInstance:GetDescendants()
+		table.insert(Descendants, RootInstance)
+		local AllowedMaterials = nil
+		
+		for _, Part in Descendants do
+			if Part:IsA("BasePart") and not ConstantsModule.MATERIAL_WHITELIST[Part.Material] then
+				AllowedMaterials = AllowedMaterials or buildAcceptedMaterialList()
+				p1:fail(ErrorSourceStringsModule.Keys.MaterialNotAllowed, {
+					InstanceNameList = Part:GetFullName(),
+					AllowedMaterials = AllowedMaterials
+				})
+			end
 		end
 	end
-end
-
-return t
+}

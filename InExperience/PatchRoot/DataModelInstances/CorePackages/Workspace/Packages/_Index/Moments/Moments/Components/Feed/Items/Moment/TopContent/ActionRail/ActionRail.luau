@@ -1,123 +1,132 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
-local reactModule = require(parent.React)
-local reactUtilsModule = require(parent.ReactUtils)
-local signalsReactModule = require(parent.SignalsReact)
-local builderIconsModule = require(parent.BuilderIcons)
-local foundationModule = require(parent.Foundation)
-local momentsCommonModule = require(parent.MomentsCommon)
-local _ = require(parent.MomentsTypes)
-local sharedFlagsModule = require(parent.SharedFlags)
-local view = foundationModule.View
-local getMomentsCapabilities = momentsCommonModule.Stores.GetMomentsCapabilities
-local useSignalBinding = signalsReactModule.useSignalBinding
-local useSignalState = signalsReactModule.useSignalState
-local momentContextModule = require(script.Parent.Parent.Parent.MomentContext)
-local railItemModule = require(script.Parent.RailItem)
-local reactionButtonModule = require(script.Parent.ReactionButton)
-local contextualMenuModule = require(moments.Components.Feed.ContextualMenu)
-local useMomentsSession = require(moments.Stores.GetMomentsStore.MomentsSessionContext).useMomentsSession
-local getMomentsPreferencesStoreModule = require(moments.Stores.GetMomentsPreferencesStore)
-local useCommentCapabilitiesModule = require(moments.Components.Comments.useCommentCapabilities)
-local fFlagMomentsActionRailNarrowWidthModule = require(moments.Flags.FFlagMomentsActionRailNarrowWidth)
-local fFlagMomentsActionRailSpacingModule = require(moments.Flags.FFlagMomentsActionRailSpacing)
-local fFlagMomentsOptimisticProfilePending = sharedFlagsModule.FFlagMomentsOptimisticProfilePending
-local fFlagMomentsPassFeedItemIdToBackendApis = sharedFlagsModule.FFlagMomentsPassFeedItemIdToBackendApis
-local fFlagMomentsComments = sharedFlagsModule.FFlagMomentsComments
-local fFlagMomentsCommentsIxpEnabled = sharedFlagsModule.FFlagMomentsCommentsIxpEnabled
-local fFlagMomentsEngagementMetricsFeature = momentsCommonModule.Flags.FFlagMomentsEngagementMetricsFeature
-local useConfigurationModule = require(moments.Hooks.useConfiguration)
-local useShareMomentModule = require(moments.Share.useShareMoment)
-local useCommentActionImpressionModule = require(script.Parent.useCommentActionImpression)
-local arrowThickToRight = builderIconsModule.Icon.ArrowThickToRight
-local speechBubbleAlignLeft = builderIconsModule.Icon.SpeechBubbleAlignLeft
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
+local ReactModule = require(Parent.React)
+local ReactUtilsModule = require(Parent.ReactUtils)
+local SignalsReactModule = require(Parent.SignalsReact)
+local BuilderIconsModule = require(Parent.BuilderIcons)
+local MomentsCommonModule = require(Parent.MomentsCommon)
+local _ = require(Parent.MomentsTypes)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local View = require(Parent.Foundation).View
+local GetMomentsCapabilitiesFunction = MomentsCommonModule.Stores.GetMomentsCapabilities
+local UseSignalBindingFunction = SignalsReactModule.useSignalBinding
+local UseSignalStateFunction = SignalsReactModule.useSignalState
+local MomentContextModule = require(script.Parent.Parent.Parent.MomentContext)
+local RailItemModule = require(script.Parent.RailItem)
+local ReactionButtonModule = require(script.Parent.ReactionButton)
+local ContextualMenuModule = require(Moments.Components.Feed.ContextualMenu)
+local UseMomentsSessionFunction = require(Moments.Stores.GetMomentsStore.MomentsSessionContext).useMomentsSession
+local GetMomentsPreferencesStoreModule = require(Moments.Stores.GetMomentsPreferencesStore)
+local UseCommentCapabilitiesModule = require(Moments.Components.Comments.useCommentCapabilities)
+local FFlagMomentsActionRailNarrowWidthModule = require(Moments.Flags.FFlagMomentsActionRailNarrowWidth)
+local FFlagMomentsActionRailSpacingModule = require(Moments.Flags.FFlagMomentsActionRailSpacing)
+local FFlagMomentsOptimisticProfilePending = SharedFlagsModule.FFlagMomentsOptimisticProfilePending
+local FFlagMomentsPassFeedItemIdToBackendApis = SharedFlagsModule.FFlagMomentsPassFeedItemIdToBackendApis
+local FFlagMomentsComments = SharedFlagsModule.FFlagMomentsComments
+local FFlagMomentsCommentsIxpEnabled = SharedFlagsModule.FFlagMomentsCommentsIxpEnabled
+local FFlagMomentsReactFeatureGate = SharedFlagsModule.FFlagMomentsReactFeatureGate
+local FFlagMomentsEngagementMetricsFeature = MomentsCommonModule.Flags.FFlagMomentsEngagementMetricsFeature
+local UseConfigurationModule = require(Moments.Hooks.useConfiguration)
+local UseShareMomentModule = require(Moments.Share.useShareMoment)
+local UseCommentActionImpressionModule = require(script.Parent.useCommentActionImpression)
+local ArrowThickToRight = BuilderIconsModule.Icon.ArrowThickToRight
+local SpeechBubbleAlignLeft = BuilderIconsModule.Icon.SpeechBubbleAlignLeft
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactUtilsModule (ref), momentContextModule (ref), fFlagMomentsEngagementMetricsFeature (ref), sharedFlagsModule (ref), useSignalState (ref), getMomentsCapabilities (ref), useShareMomentModule (ref), useSignalBinding (ref), fFlagMomentsComments (ref), fFlagMomentsOptimisticProfilePending (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), useConfigurationModule (ref), useMomentsSession (ref), getMomentsPreferencesStoreModule (ref), useCommentCapabilitiesModule (ref), fFlagMomentsCommentsIxpEnabled (ref), useCommentActionImpressionModule (ref), reactModule (ref), reactionButtonModule (ref), railItemModule (ref), speechBubbleAlignLeft (ref), arrowThickToRight (ref), contextualMenuModule (ref), fFlagMomentsActionRailSpacingModule (ref), fFlagMomentsActionRailNarrowWidthModule (ref), view (ref)
-	local var1 = reactUtilsModule.createNextOrder()
-	local var2 = momentContextModule.useMoment()
-	local store = var2.store
-	local data = store.getData(false)
-	local isAd = data.kind == "ad"
-	local var3 = if fFlagMomentsEngagementMetricsFeature and sharedFlagsModule.FFlagGuacMomentsFeatureList then useSignalState(getMomentsCapabilities(false).getIsEngagementMetricsEnabled) else nil
-	local var4 = useShareMomentModule(p1.moment)
-	local animationRatio = var2.animationRatio
-	local var5 = useSignalBinding(store.getShareCount)
-	local var6 = if fFlagMomentsComments then useSignalBinding(store.getCommentCount) else nil
-	local var7 = useSignalState(store.getIsModerated)
-	local var8 = var7 or fFlagMomentsOptimisticProfilePending and data.isPending == true
-	local var9 = if p1.moment == nil or p1.moment.recommendationMetadata == nil then nil else p1.moment.recommendationMetadata.feedItemId
-	local var10 = var8 or (fFlagMomentsPassFeedItemIdToBackendApis and (if var9 ~= nil then var9 == "" else true))
-	local var11 = useConfigurationModule("feed_mute_enabled", false)
-	local var12 = useConfigurationModule("feed_mute_button_analytics_enabled", false)
-	local var13 = getMomentsPreferencesStoreModule(false)
-	local var14 = useSignalState(useMomentsSession().getHideDetails)
-	local var15 = if p1.moment ~= nil then nil else p1.moment.comments
-	local var16 = useCommentCapabilitiesModule().canRead and (not var14 and (not isAd and (if var15 ~= nil then var15.viewerCanRead else true)))
+return ReactModule.memo(function(Frame) --[[ Line: 66 | Named "ActionRail" ]]
+	-- upvalues: ReactUtilsModule (copy), MomentContextModule (copy), FFlagMomentsEngagementMetricsFeature (copy), UseSignalStateFunction (copy), GetMomentsCapabilitiesFunction (copy), FFlagMomentsReactFeatureGate (copy), UseShareMomentModule (copy), UseSignalBindingFunction (copy), FFlagMomentsComments (copy), FFlagMomentsOptimisticProfilePending (copy), FFlagMomentsPassFeedItemIdToBackendApis (copy), UseConfigurationModule (copy), UseMomentsSessionFunction (copy), GetMomentsPreferencesStoreModule (copy), UseCommentCapabilitiesModule (copy), FFlagMomentsCommentsIxpEnabled (copy), UseCommentActionImpressionModule (copy), ReactModule (copy), ReactionButtonModule (copy), RailItemModule (copy), SpeechBubbleAlignLeft (copy), ArrowThickToRight (copy), ContextualMenuModule (copy), FFlagMomentsActionRailSpacingModule (copy), FFlagMomentsActionRailNarrowWidthModule (copy), View (copy)
+	local NextOrder = ReactUtilsModule.createNextOrder()
+	local UseMomentResult = MomentContextModule.useMoment()
+	local Store = UseMomentResult.store
+	local Data = Store.getData(false)
+	local IsAd = Data.kind == "ad"
+	local UseSignalStateResult = if FFlagMomentsEngagementMetricsFeature then UseSignalStateFunction(GetMomentsCapabilitiesFunction(false).getIsEngagementMetricsEnabled) else nil
+	local NoFFlagMomentsReactFeatureGate = not FFlagMomentsReactFeatureGate or UseSignalStateFunction(GetMomentsCapabilitiesFunction(false).getCanReactToMoments)
+	local UseShareMomentModuleResult = UseShareMomentModule(Frame.moment)
+	local AnimationRatio = UseMomentResult.animationRatio
+	local UseSignalBindingResult = UseSignalBindingFunction(Store.getShareCount)
+	local UseSignalBindingResult1 = if FFlagMomentsComments then UseSignalBindingFunction(Store.getCommentCount) else nil
+	local UseSignalStateResult1 = UseSignalStateFunction(Store.getIsModerated)
+	local IsIsPending: boolean = FFlagMomentsOptimisticProfilePending and Data.isPending == true
+	local UseSignalStateResult1_1 = UseSignalStateResult1 or IsIsPending
+	local FeedItemId = if Frame.moment == nil or Frame.moment.recommendationMetadata == nil then nil else Frame.moment.recommendationMetadata.feedItemId
+	local UseSignalStateResult1_1_1 = UseSignalStateResult1_1 or FFlagMomentsPassFeedItemIdToBackendApis and (FeedItemId == nil or FeedItemId == "")
+	local FeedMuteEnabled = UseConfigurationModule("feed_mute_enabled", false)
+	local FeedMuteButtonAnalyticsEnabled = UseConfigurationModule("feed_mute_button_analytics_enabled", false)
+	local UseMomentsSessionResult = UseMomentsSessionFunction()
+	local MomentsPreferencesStoreModule = GetMomentsPreferencesStoreModule(false)
+	local UseSignalStateResult2 = UseSignalStateFunction(UseMomentsSessionResult.getHideDetails)
+	local Comments = if Frame.moment == nil then nil else Frame.moment.comments
+	local NoComments = UseCommentCapabilitiesModule().canRead and (not UseSignalStateResult2 and (not IsAd and (Comments == nil or Comments.viewerCanRead)))
 	
-	if fFlagMomentsComments or fFlagMomentsCommentsIxpEnabled then
-		useCommentActionImpressionModule(var16 and p1.moment ~= nil)
+	if FFlagMomentsComments or FFlagMomentsCommentsIxpEnabled then
+		UseCommentActionImpressionModule(NoComments and Frame.moment ~= nil)
 	end
-	local var17 = useSignalState(var13.getFeedGlobalMute)
-	local var18 = reactModule.useMemo(function()
-		-- upvalues: var17 (ref), var13 (ref)
-		return { isMuted = var17, toggle = var13.toggleFeedGlobalMute }
-	end, { var17, var13.toggleFeedGlobalMute })
+	local UseSignalStateResult3 = UseSignalStateFunction(MomentsPreferencesStoreModule.getFeedGlobalMute)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 129 ]]
+		-- upvalues: UseSignalStateResult3 (copy), MomentsPreferencesStoreModule (copy)
+		return {
+			isMuted = UseSignalStateResult3,
+			toggle = MomentsPreferencesStoreModule.toggleFeedGlobalMute
+		}
+	end, {
+		UseSignalStateResult3,
+		MomentsPreferencesStoreModule.toggleFeedGlobalMute
+	})
 	local t = {}
 	
-	if not var14 and not isAd then
-		t.React = reactModule.createElement(reactionButtonModule, {
-			animationRatio = animationRatio,
-			isDisabled = var8,
-			LayoutOrder = var1()
+	if NoFFlagMomentsReactFeatureGate and not UseSignalStateResult2 and not IsAd then
+		t.React = ReactModule.createElement(ReactionButtonModule, {
+			animationRatio = AnimationRatio,
+			isDisabled = UseSignalStateResult1_1,
+			LayoutOrder = NextOrder()
 		})
 	end
-	if fFlagMomentsComments and var16 then
-		t.Comment = reactModule.createElement(railItemModule, {
+	if FFlagMomentsComments and NoComments then
+		t.Comment = ReactModule.createElement(RailItemModule, {
 			testId = "moments-comment-button",
-			LayoutOrder = var1(),
-			slot = speechBubbleAlignLeft,
-			count = if fFlagMomentsEngagementMetricsFeature and sharedFlagsModule.FFlagGuacMomentsFeatureList and not var3 then nil else var6,
-			countIsCapped = var15 ~= nil and var15.countIsCapped == true,
-			animationRatio = animationRatio,
-			isDisabled = var8,
-			onActivated = function()
-				-- upvalues: var8 (ref), var9 (ref), p1 (ref)
-				if not var8 and var9 ~= nil and (var9 ~= "" and p1.onOpenComments ~= nil) then
-					p1.onOpenComments()
+			LayoutOrder = NextOrder(),
+			slot = SpeechBubbleAlignLeft,
+			count = if FFlagMomentsEngagementMetricsFeature and not UseSignalStateResult then nil else UseSignalBindingResult1,
+			countIsCapped = Comments ~= nil and Comments.countIsCapped == true,
+			animationRatio = AnimationRatio,
+			isDisabled = UseSignalStateResult1_1,
+			onActivated = function() --[[ Line: 156 ]]
+				-- upvalues: UseSignalStateResult1_1 (copy), FeedItemId (copy), Frame (copy)
+				if not UseSignalStateResult1_1 and FeedItemId ~= nil and FeedItemId ~= "" and Frame.onOpenComments ~= nil then
+					Frame.onOpenComments()
 				end
 			end
 		})
 	end
-	if not var14 then
-		t.Share = reactModule.createElement(railItemModule, {
-			LayoutOrder = var1(),
-			slot = arrowThickToRight,
-			count = if fFlagMomentsEngagementMetricsFeature and sharedFlagsModule.FFlagGuacMomentsFeatureList and not var3 then nil else var5,
-			animationRatio = animationRatio,
-			isDisabled = var10,
-			onActivated = var4.onShareActivated
+	if not UseSignalStateResult2 then
+		t.Share = ReactModule.createElement(RailItemModule, {
+			LayoutOrder = NextOrder(),
+			slot = ArrowThickToRight,
+			count = if FFlagMomentsEngagementMetricsFeature and not UseSignalStateResult then nil else UseSignalBindingResult,
+			animationRatio = AnimationRatio,
+			isDisabled = UseSignalStateResult1_1_1,
+			onActivated = UseShareMomentModuleResult.onShareActivated
 		})
-		t.Music = reactModule.createElement(require(script.Parent.MusicButton), {
-			LayoutOrder = var1(),
-			moment = p1.moment,
-			animationRatio = animationRatio,
-			isDisabled = var7
-		})
-	end
-	if p1.moment ~= nil then
-		t.ContextualMenu = reactModule.createElement(contextualMenuModule, {
-			isFeedMuteEnabled = var11,
-			isFeedMuteButtonAnalyticsEnabled = var12,
-			isDisabled = var7,
-			layoutOrder = var1(),
-			moment = p1.moment,
-			playbackVolume = var18
+		t.Music = ReactModule.createElement(require(script.Parent.MusicButton), {
+			LayoutOrder = NextOrder(),
+			moment = Frame.moment,
+			animationRatio = AnimationRatio,
+			isDisabled = UseSignalStateResult1
 		})
 	end
-	return reactModule.createElement(view, {
-		LayoutOrder = p1.LayoutOrder,
-		tag = if fFlagMomentsActionRailNarrowWidthModule then if fFlagMomentsActionRailSpacingModule then "col align-x-center gap-large size-1000-0 auto-y" else "col align-x-center size-1000-0 auto-y" elseif fFlagMomentsActionRailSpacingModule then "col align-x-center gap-large size-1200-0 auto-y" else "col size-1200-0 auto-y",
-		testId = if fFlagMomentsActionRailSpacingModule or fFlagMomentsActionRailNarrowWidthModule then "moments-action-rail" else nil
+	if Frame.moment ~= nil then
+		t.ContextualMenu = ReactModule.createElement(ContextualMenuModule, {
+			isFeedMuteEnabled = FeedMuteEnabled,
+			isFeedMuteButtonAnalyticsEnabled = FeedMuteButtonAnalyticsEnabled,
+			isDisabled = UseSignalStateResult1,
+			layoutOrder = NextOrder(),
+			moment = Frame.moment,
+			playbackVolume = UseMemoResult
+		})
+	end
+	return ReactModule.createElement(View, {
+		LayoutOrder = Frame.LayoutOrder,
+		tag = if FFlagMomentsActionRailNarrowWidthModule then if FFlagMomentsActionRailSpacingModule then "col align-x-center gap-large size-1000-0 auto-y" else "col align-x-center size-1000-0 auto-y" elseif FFlagMomentsActionRailSpacingModule then "col align-x-center gap-large size-1200-0 auto-y" else "col size-1200-0 auto-y",
+		testId = if FFlagMomentsActionRailSpacingModule or FFlagMomentsActionRailNarrowWidthModule then "moments-action-rail" else nil
 	}, t)
 end)

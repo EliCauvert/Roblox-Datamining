@@ -1,16 +1,16 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local roactModule = require(game:GetService("CorePackages").Packages.Roact)
-local watermarkComponentModule = require(script.WatermarkComponent)
-local t = {}
-t.__index = t
+﻿local CoreGui = game:GetService("CoreGui")
+local RoactModule = require(game:GetService("CorePackages").Packages.Roact)
+local WatermarkComponentModule = require(script.WatermarkComponent)
+local Module = {}
+Module.__index = Module
 
-function t.new()
-	-- upvalues: t (ref), roactModule (ref), watermarkComponentModule (ref), coreGuiService (ref)
-	local tbl = setmetatable({}, t)
-	tbl.root = roactModule.createElement(watermarkComponentModule)
-	tbl.element = roactModule.mount(tbl.root, coreGuiService, "Watermark")
+function Module.new() --[[ Line: 11 ]]
+	-- upvalues: Module (copy), RoactModule (copy), WatermarkComponentModule (copy), CoreGui (copy)
+	local self = setmetatable({}, Module)
+	self.root = RoactModule.createElement(WatermarkComponentModule)
+	self.element = RoactModule.mount(self.root, CoreGui, "Watermark")
 	
-	return tbl
+	return self
 end
 
-return t.new()
+return Module.new()

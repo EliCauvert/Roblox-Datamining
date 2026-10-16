@@ -1,36 +1,36 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local dialog = foundationModule.Dialog
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local dialogSize = foundationModule.Enums.DialogSize
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
+local Dialog = FoundationModule.Dialog
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local DialogSize = FoundationModule.Enums.DialogSize
 
-return function(p1)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), reactModule (ref), dialog (ref), dialogSize (ref), buttonVariant (ref)
-	local var1 = useLocalization({
-		action = localizationStringsModule.PRIVATE_INVITES_ADD_ERROR_ACTION,
-		body = localizationStringsModule.PRIVATE_INVITES_ADD_ERROR,
-		title = localizationStringsModule.PRIVATE_INVITES_ADD_ERROR_TITLE
+return function(p1) --[[ Line: 22 | Named "PrivateInviteAddErrorDialog" ]]
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), Dialog (copy), DialogSize (copy), ButtonVariant (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
+		action = LocalizationStringsModule.PRIVATE_INVITES_ADD_ERROR_ACTION,
+		body = LocalizationStringsModule.PRIVATE_INVITES_ADD_ERROR,
+		title = LocalizationStringsModule.PRIVATE_INVITES_ADD_ERROR_TITLE
 	})
 	
-	return reactModule.createElement(dialog.Root, {
+	return ReactModule.createElement(Dialog.Root, {
 		testId = "build-private-invite-add-error-dialog",
 		onClose = p1.onDismiss,
-		size = dialogSize.Small
+		size = DialogSize.Small
 	}, {
-		Title = reactModule.createElement(dialog.Title, { LayoutOrder = 1, text = var1.title }),
-		Content = reactModule.createElement(dialog.Content, { LayoutOrder = 2 }, {
-			Body = reactModule.createElement(dialog.Text, { Text = var1.body })
+		Title = ReactModule.createElement(Dialog.Title, { LayoutOrder = 1, text = UseLocalizationResult.title }),
+		Content = ReactModule.createElement(Dialog.Content, { LayoutOrder = 2 }, {
+			Body = ReactModule.createElement(Dialog.Text, { Text = UseLocalizationResult.body })
 		}),
-		Actions = reactModule.createElement(dialog.Actions, {
+		Actions = ReactModule.createElement(Dialog.Actions, {
 			LayoutOrder = 3,
 			actions = {
 				{
-					text = var1.action,
-					variant = buttonVariant.Emphasis,
+					text = UseLocalizationResult.action,
+					variant = ButtonVariant.Emphasis,
 					onActivated = p1.onDismiss
 				}
 			}

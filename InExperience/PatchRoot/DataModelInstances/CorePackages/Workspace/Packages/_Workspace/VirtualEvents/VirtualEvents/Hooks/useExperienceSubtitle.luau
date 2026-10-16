@@ -1,32 +1,32 @@
-﻿local virtualEvents = script:FindFirstAncestor("VirtualEvents")
-local roactUtilsModule = require(virtualEvents.Parent.RoactUtils)
-local useLocalization = require(virtualEvents.Parent.Localization).Hooks.useLocalization
-local getDeepValue = require(virtualEvents.Parent.LuaSocialLibrariesDeps).SocialLibraries.config({}).Dictionary.getDeepValue
-local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
+﻿local VirtualEvents = script:FindFirstAncestor("VirtualEvents")
+local UseLocalizationFunction = require(VirtualEvents.Parent.Localization).Hooks.useLocalization
+local GetDeepValueFunction = require(VirtualEvents.Parent.LuaSocialLibrariesDeps).SocialLibraries.config({}).Dictionary.getDeepValue
+local UseSelectorFunction = require(VirtualEvents.Parent.RoactUtils).Hooks.RoactRodux.useSelector
 
-return function(p1)
-	-- upvalues: useSelector (ref), getDeepValue (ref), useLocalization (ref)
-	local var1 = useSelector(function(p2)
-		-- upvalues: getDeepValue (copy), p1 (ref)
-		local var2 = getDeepValue(p2, "GameVotes." .. p0 .. ".upVotes")
-		local var3 = getDeepValue(p2, "GameVotes." .. p0 .. ".downVotes")
+return function(p1) --[[ Line: 9 | Named "useExperienceSubtitle" ]]
+	-- upvalues: UseSelectorFunction (copy), GetDeepValueFunction (copy), UseLocalizationFunction (copy)
+	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 10 ]]
+		-- upvalues: GetDeepValueFunction (upval), p1 (copy)
+		local DeepValue: number = GetDeepValueFunction(p2, "GameVotes." .. p1 .. ".upVotes")
+		local DeepValue1: number = GetDeepValueFunction(p2, "GameVotes." .. p1 .. ".downVotes")
 		
-		return if var2 and var3 then math.round(100 * var2 / (var2 + var3)) else nil
+		return if DeepValue and DeepValue1 then math.round(100 * DeepValue / (DeepValue + DeepValue1)) else nil
 	end)
 	
-	if var1 ~= var1 or not var1 then
-		local var2 = useSelector(function(p2)
-			-- upvalues: p1 (ref)
+	if UseSelectorResult ~= UseSelectorResult or not UseSelectorResult then
+		local UseSelectorResult1 = UseSelectorFunction(function(p2) --[[ Line: 24 ]]
+			-- upvalues: p1 (copy)
 			return p2.AgeRecommendations and p2.AgeRecommendations[p1]
 		end)
-		local ageRecommendation = var2 and (var2.summary and var2.summary.ageRecommendation)
+		local AgeRecommendation = UseSelectorResult1 and (UseSelectorResult1.summary and UseSelectorResult1.summary.ageRecommendation)
 		
-		return ageRecommendation and ageRecommendation.displayNameWithHeaderShort
+		return AgeRecommendation and AgeRecommendation.displayNameWithHeaderShort
+	else
+		return UseLocalizationFunction({
+			ratingPercentage = {
+				"Feature.VirtualEvents.Label.Rating",
+				rating = tostring(UseSelectorResult)
+			}
+		}).ratingPercentage
 	end
-	return useLocalization({
-		ratingPercentage = {
-			"Feature.VirtualEvents.Label.Rating",
-			rating = tostring(var1)
-		}
-	}).ratingPercentage
 end

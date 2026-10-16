@@ -1,19 +1,19 @@
-﻿local experienceLoadingScript = script:FindFirstAncestor("ExperienceLoadingScript")
-local roduxModule = require(experienceLoadingScript.Parent.Rodux)
+﻿local ExperienceLoadingScript = script:FindFirstAncestor("ExperienceLoadingScript")
+local RoduxModule = require(ExperienceLoadingScript.Parent.Rodux)
 
-return roduxModule.combineReducers({
-	isSubjectToChinaPolicies = roduxModule.createReducer(nil, {
-		[require(experienceLoadingScript.Actions.SetIsSubjectToChinaPolicies).name] = function(_, p1)
+return RoduxModule.combineReducers({
+	isSubjectToChinaPolicies = RoduxModule.createReducer(nil, {
+		[require(ExperienceLoadingScript.Actions.SetIsSubjectToChinaPolicies).name] = function(_, p1) --[[ Line: 25 ]]
 			return p1.isSubjectToChinaPolicies
 		end
 	}),
-	productInfo = roduxModule.createReducer(nil, {
-		[require(experienceLoadingScript.Actions.SetGameProductInfo).name] = function(_, p1)
+	productInfo = RoduxModule.createReducer(nil, {
+		[require(ExperienceLoadingScript.Actions.SetGameProductInfo).name] = function(_, p1) --[[ Line: 10 ]]
 			return p1.productInfo
 		end
 	}),
-	gameIds = roduxModule.createReducer(nil, {
-		[require(experienceLoadingScript.Actions.SetUniverseId).name] = function(_, p1)
+	gameIds = RoduxModule.createReducer(nil, {
+		[require(ExperienceLoadingScript.Actions.SetUniverseId).name] = function(_, p1) --[[ Line: 16 ]]
 			return { universeId = p1.universeId, placeId = p1.placeId }
 		end
 	})

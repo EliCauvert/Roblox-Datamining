@@ -1,30 +1,30 @@
-﻿local songbird = script:FindFirstAncestor("Songbird")
-local loggingProtocolModule = require(songbird.Parent.LoggingProtocol)
-local _ = require(songbird.Analytics.AnalyticActions)
-local t = {
+﻿local Songbird = script:FindFirstAncestor("Songbird")
+local LoggingProtocolModule = require(Songbird.Parent.LoggingProtocol)
+local _ = require(Songbird.Analytics.AnalyticActions)
+local config = {
 	eventName = "AudioPlayerEvents",
 	description = " Analytics for AudioPlayer component to track playback, favoriting, and reporting flows ",
 	links = "",
-	backends = { loggingProtocolModule.TelemetryBackends.EventIngest },
-	throttlingPercentage = require(songbird.Flags.getFIntSongbirdTelemetryThrottle)(),
+	backends = { LoggingProtocolModule.TelemetryBackends.EventIngest },
+	throttlingPercentage = require(Songbird.Flags.getFIntSongbirdTelemetryThrottle)(),
 	lastUpdated = { 25, 10, 24 }
 }
 
-local function createCounterEventConfig(p1)
-	-- upvalues: t (ref), loggingProtocolModule (ref)
+local function createCounterEventConfig(Action) --[[ Line: 23 ]]
+	-- upvalues: config (copy), LoggingProtocolModule (copy)
 	return {
-		eventName = `{t.eventName}_{p1}`,
-		backends = { loggingProtocolModule.TelemetryBackends.Counter },
-		throttlingPercentage = t.throttlingPercentage,
-		lastUpdated = t.lastUpdated,
-		description = t.description,
-		links = t.links
+		eventName = `{config.eventName}_{Action}`,
+		backends = { LoggingProtocolModule.TelemetryBackends.Counter },
+		throttlingPercentage = config.throttlingPercentage,
+		lastUpdated = config.lastUpdated,
+		description = config.description,
+		links = config.links
 	}
 end
 
-return function(p1)
-	-- upvalues: createCounterEventConfig (ref), loggingProtocolModule (ref), t (ref)
-	local var1 = createCounterEventConfig(p1.action)
-	loggingProtocolModule.default:logRobloxTelemetryEvent(t, nil, p1)
-	loggingProtocolModule.default:logRobloxTelemetryCounter(var1, 1)
+return function(p1) --[[ Line: 45 | Named "sendAudioPlayerAnalytics" ]]
+	-- upvalues: createCounterEventConfig (copy), LoggingProtocolModule (copy), config (copy)
+	local CounterEventConfig = createCounterEventConfig(p1.action)
+	LoggingProtocolModule.default:logRobloxTelemetryEvent(config, nil, p1)
+	LoggingProtocolModule.default:logRobloxTelemetryCounter(CounterEventConfig, 1)
 end

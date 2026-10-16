@@ -1,83 +1,86 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local components = script.Parent.Parent.Parent.Components
-local clientLogModule = require(components.Log.ClientLog)
-local serverLogModule = require(components.Log.ServerLog)
-local utilAndTabModule = require(components.UtilAndTab)
-local dataConsumerModule = require(components.DataConsumer)
-local setActiveTabModule = require(script.Parent.Parent.Parent.Actions.SetActiveTab)
-local constantsModule = require(script.Parent.Parent.Parent.Constants)
-local mainRowPadding = constantsModule.GeneralFormatting.MainRowPadding
-local msgTypeNamesOrdered = constantsModule.MsgTypeNamesOrdered
-local mainViewLog = roactModule.PureComponent:extend("MainViewLog")
+﻿local CorePackages = game:GetService("CorePackages")
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local Components = script.Parent.Parent.Parent.Components
+local ClientLogModule = require(Components.Log.ClientLog)
+local ServerLogModule = require(Components.Log.ServerLog)
+local UtilAndTabModule = require(Components.UtilAndTab)
+local DataConsumerModule = require(Components.DataConsumer)
+local SetActiveTabModule = require(script.Parent.Parent.Parent.Actions.SetActiveTab)
+local ConstantsModule = require(script.Parent.Parent.Parent.Constants)
+local MainRowPadding = ConstantsModule.GeneralFormatting.MainRowPadding
+local MsgTypeNamesOrdered = ConstantsModule.MsgTypeNamesOrdered
+local MainViewLog = RoactModule.PureComponent:extend("MainViewLog")
 
-function mainViewLog.init(p1)
-	-- upvalues: roactModule (ref)
-	function p0.onUtilTabHeightChanged(p2)
-		-- upvalues: p1 (ref)
-		p1:setState({ utilTabHeight = p2 })
+function MainViewLog.init(p1) --[[ Line: 21 ]]
+	-- upvalues: RoactModule (copy)
+	function p1.onUtilTabHeightChanged(UtilTabHeight) --[[ Line: 22 ]]
+		-- upvalues: p1 (copy)
+		p1:setState({ utilTabHeight = UtilTabHeight })
 	end
 	
-	function p0.onClientButton()
-		-- upvalues: p1 (ref)
+	function p1.onClientButton() --[[ Line: 28 ]]
+		-- upvalues: p1 (copy)
 		p1.props.dispatchSetActiveTab("Log", true)
 	end
 	
-	function p0.onServerButton()
-		-- upvalues: p1 (ref)
+	function p1.onServerButton() --[[ Line: 32 ]]
+		-- upvalues: p1 (copy)
 		p1.props.dispatchSetActiveTab("Log", false)
 	end
 	
-	function p0.onCheckboxChanged(p2, p3)
-		-- upvalues: p1 (ref)
+	function p1.onCheckboxChanged(p2, p3) --[[ Line: 36 ]]
+		-- upvalues: p1 (copy)
 		if p1.props.isClientView then
 			p1.props.ClientLogData:setFilter(p2, p3)
 			
 			return
+		else
+			p1.props.ServerLogData:setFilter(p2, p3)
 		end
-		p1.props.ServerLogData:setFilter(p2, p3)
 	end
 	
-	function p0.filterUpdated()
-		-- upvalues: p1 (ref)
+	function p1.filterUpdated() --[[ Line: 44 ]]
+		-- upvalues: p1 (copy)
 		if p1.forceUpdate then
 			p1:forceUpdate()
 			
 			return
+		else
+			p1:setState({})
 		end
-		p1:setState({})
 	end
 	
-	function p0.onSearchTermChanged(p2)
-		-- upvalues: p1 (ref)
+	function p1.onSearchTermChanged(p2) --[[ Line: 52 ]]
+		-- upvalues: p1 (copy)
 		if p1.props.isClientView then
 			p1.props.ClientLogData:setSearchTerm(p2)
 			
 			return
+		else
+			p1.props.ServerLogData:setSearchTerm(p2)
 		end
-		p1.props.ServerLogData:setSearchTerm(p2)
 	end
 	
 	p1.clientFilterConnection = p1.props.ClientLogData:filterUpdatedSignal():Connect(p1.filterUpdated)
 	p1.serverFilterConnection = p1.props.ServerLogData:filterUpdatedSignal():Connect(p1.filterUpdated)
-	p1.utilRef = roactModule.createRef()
+	p1.utilRef = RoactModule.createRef()
 	p1.state = { utilTabHeight = 0 }
 end
 
-function mainViewLog.didMount(p1)
+function MainViewLog.didMount(p1) --[[ Line: 73 ]]
 	p1:setState({ utilTabHeight = p1.utilRef.current.Size.Y.Offset })
 end
 
-function mainViewLog.didUpdate(p1)
-	local size = p1.utilRef.current.Size
+function MainViewLog.didUpdate(p1) --[[ Line: 80 ]]
+	local Size = p1.utilRef.current.Size
 	
-	if size.Y.Offset ~= p1.state.utilTabHeight then
-		p1:setState({ utilTabHeight = size.Y.Offset })
+	if Size.Y.Offset ~= p1.state.utilTabHeight then
+		p1:setState({ utilTabHeight = Size.Y.Offset })
 	end
 end
 
-function mainViewLog.willUnmount(p1)
+function MainViewLog.willUnmount(p1) --[[ Line: 89 ]]
 	if p1.clientFilterConnection then
 		p1.clientFilterConnection:Disconnect()
 		p1.clientFilterConnection = nil
@@ -88,71 +91,71 @@ function mainViewLog.willUnmount(p1)
 	end
 end
 
-function mainViewLog.render(p1)
-	-- upvalues: roactModule (ref), mainRowPadding (ref), msgTypeNamesOrdered (ref), utilAndTabModule (ref), clientLogModule (ref), serverLogModule (ref), constantsModule (ref)
-	local size = p1.props.size
-	local formFactor = p1.props.formFactor
-	local isDeveloperView = p1.props.isDeveloperView
-	local tabList = p1.props.tabList
-	local isClientView = p1.props.isClientView
-	local utilTabHeight = p1.state.utilTabHeight
-	local var1 = if isClientView then p1.props.ClientLogData:getSearchTerm() else p1.props.ServerLogData:getSearchTerm()
-	local t = {
-		UIListLayout = roactModule.createElement("UIListLayout", {
+function MainViewLog.render(p1) --[[ Line: 100 ]]
+	-- upvalues: RoactModule (copy), MainRowPadding (copy), MsgTypeNamesOrdered (copy), UtilAndTabModule (copy), ClientLogModule (copy), ServerLogModule (copy), ConstantsModule (copy)
+	local Size = p1.props.size
+	local FormFactor = p1.props.formFactor
+	local IsDeveloperView = p1.props.isDeveloperView
+	local TabList = p1.props.tabList
+	local IsClientView = p1.props.isClientView
+	local UtilTabHeight: number = p1.state.utilTabHeight
+	local SearchTerm = if IsClientView then p1.props.ClientLogData:getSearchTerm() else p1.props.ServerLogData:getSearchTerm()
+	local config = {
+		UIListLayout = RoactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
-			Padding = UDim.new(0, mainRowPadding)
+			Padding = UDim.new(0, MainRowPadding)
 		})
 	}
-	local var2 = if isClientView then p1.props.ClientLogData:getFilters() else p1.props.ServerLogData:getFilters()
-	local t_1 = {}
+	local Filters = if IsClientView then p1.props.ClientLogData:getFilters() else p1.props.ServerLogData:getFilters()
+	local OrderedCheckboxState = {}
 	
-	for i, v in ipairs(msgTypeNamesOrdered) do
-		t_1[i] = { name = v, state = var2[v] }
+	for i, Name in ipairs(MsgTypeNamesOrdered) do
+		OrderedCheckboxState[i] = { name = Name, state = Filters[Name] }
 	end
-	t.UtilAndTab = roactModule.createElement(utilAndTabModule, {
+	config.UtilAndTab = RoactModule.createElement(UtilAndTabModule, {
 		layoutOrder = 1,
-		windowWidth = size.X.Offset,
-		formFactor = formFactor,
-		tabList = tabList,
-		orderedCheckboxState = t_1,
-		isClientView = isClientView,
-		searchTerm = var1,
+		windowWidth = Size.X.Offset,
+		formFactor = FormFactor,
+		tabList = TabList,
+		orderedCheckboxState = OrderedCheckboxState,
+		isClientView = IsClientView,
+		searchTerm = SearchTerm,
 		refForParent = p1.utilRef,
-		onClientButton = isDeveloperView and p1.onClientButton,
-		onServerButton = isDeveloperView and p1.onServerButton,
+		onClientButton = IsDeveloperView and p1.onClientButton,
+		onServerButton = IsDeveloperView and p1.onServerButton,
 		onCheckboxChanged = p1.onCheckboxChanged,
 		onSearchTermChanged = p1.onSearchTermChanged
 	})
 	
-	if utilTabHeight > 0 then
-		if isClientView then
-			t.ClientLog = roactModule.createElement(clientLogModule, {
+	if UtilTabHeight > 0 then
+		if IsClientView then
+			config.ClientLog = RoactModule.createElement(ClientLogModule, {
 				layoutOrder = 2,
-				size = UDim2.new(1, 0, 1, -utilTabHeight)
+				size = UDim2.new(1, 0, 1, -UtilTabHeight)
 			})
 		else
-			t.ServerLog = roactModule.createElement(serverLogModule, {
+			config.ServerLog = RoactModule.createElement(ServerLogModule, {
 				layoutOrder = 2,
-				size = UDim2.new(1, 0, 1, -utilTabHeight)
+				size = UDim2.new(1, 0, 1, -UtilTabHeight)
 			})
 		end
 	end
-	return roactModule.createElement("Frame", {
+	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		LayoutOrder = 3,
-		Size = size,
-		BackgroundColor3 = constantsModule.Color.BaseGray
-	}, t)
+		Size = Size,
+		BackgroundColor3 = ConstantsModule.Color.BaseGray
+	}, config)
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p2, _)
+return RoactRoduxModule.UNSTABLE_connect2(function(p2, _) --[[ Line: 177 | Named "mapStateToProps" ]]
 	return { isClientView = p2.MainView.isClientView }
-end, function(p2)
-	-- upvalues: setActiveTabModule (ref)
+end, function(Callback) --[[ Line: 183 | Named "mapDispatchToProps" ]]
+	-- upvalues: SetActiveTabModule (copy)
 	return {
-		dispatchSetActiveTab = function(value, p3)
-			-- upvalues: p2 (ref), setActiveTabModule (copy)
-			p2(setActiveTabModule(value, p3))
+		dispatchSetActiveTab = function(p2, p3) --[[ Line: 185 ]]
+			-- upvalues: Callback (copy), SetActiveTabModule (upval)
+			Callback(SetActiveTabModule(p2, p3))
 		end
 	}
-end)(dataConsumerModule(mainViewLog, "ClientLogData", "ServerLogData"))
+end)(DataConsumerModule(MainViewLog, "ClientLogData", "ServerLogData"))

@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.GraphqlToolsUtils.GraphqlToolsUtils)
+﻿return (require(script.Parent.Parent.Parent._Index.GraphqlToolsUtils.GraphqlToolsUtils))

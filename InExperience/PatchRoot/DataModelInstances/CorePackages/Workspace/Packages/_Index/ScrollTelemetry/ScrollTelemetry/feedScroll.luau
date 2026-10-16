@@ -1,55 +1,55 @@
-﻿local parent = script:FindFirstAncestor("ScrollTelemetry").Parent
-local argCheckModule = require(parent.ArgCheck)
-local cryoModule = require(parent.Cryo)
-local tModule = require(parent.t)
-local mutedError = require(parent.Loggers).mutedError
-local var1 = tModule.strictInterface({
-	distance = tModule.number,
-	screenSizeX = tModule.number,
-	screenSizeY = tModule.number,
-	scrollAreaSize = tModule.number,
-	scrollDepth = tModule.optional(tModule.number),
-	startDepth = tModule.optional(tModule.number),
-	startPos = tModule.number,
-	scrollDuration = tModule.number
+﻿local Parent = script:FindFirstAncestor("ScrollTelemetry").Parent
+local ArgCheckModule = require(Parent.ArgCheck)
+local CryoModule = require(Parent.Cryo)
+local TModule = require(Parent.t)
+local MutedErrorFunction = require(Parent.Loggers).mutedError
+local StrictInterfaceResult = TModule.strictInterface({
+	distance = TModule.number,
+	screenSizeX = TModule.number,
+	screenSizeY = TModule.number,
+	scrollAreaSize = TModule.number,
+	scrollDepth = TModule.optional(TModule.number),
+	startDepth = TModule.optional(TModule.number),
+	startPos = TModule.number,
+	scrollDuration = TModule.number
 })
-local var2 = tModule.strictInterface({
-	distance = tModule.number,
-	screenSizeX = tModule.number,
-	screenSizeY = tModule.number,
-	scrollAreaSize = tModule.number,
-	scrollDepth = tModule.optional(tModule.number),
-	startDepth = tModule.optional(tModule.number),
-	startPos = tModule.number,
-	scrollDuration = tModule.number,
-	sortPos = tModule.number,
-	gameSetTypeId = tModule.string,
-	gameSetTargetId = tModule.optional(tModule.number)
+local StrictInterfaceResult1 = TModule.strictInterface({
+	distance = TModule.number,
+	screenSizeX = TModule.number,
+	screenSizeY = TModule.number,
+	scrollAreaSize = TModule.number,
+	scrollDepth = TModule.optional(TModule.number),
+	startDepth = TModule.optional(TModule.number),
+	startPos = TModule.number,
+	scrollDuration = TModule.number,
+	sortPos = TModule.number,
+	gameSetTypeId = TModule.string,
+	gameSetTargetId = TModule.optional(TModule.number)
 })
 
-return function(p1, p2, p3, p4)
-	-- upvalues: argCheckModule (ref), var1 (ref), var2 (ref), mutedError (ref), cryoModule (ref)
-	argCheckModule.isType(p2, "string", "eventContext")
-	local var3 = "unknown"
-	local var4 = nil
+return function(p1, p2, ScrollingDirection, p3) --[[ Line: 33 ]]
+	-- upvalues: ArgCheckModule (copy), StrictInterfaceResult (copy), StrictInterfaceResult1 (copy), MutedErrorFunction (copy), CryoModule (copy)
+	ArgCheckModule.isType(p2, "string", "eventContext")
+	local Direction = "unknown"
+	local Callback = nil
 	
-	if p3 == Enum.ScrollingDirection.Y then
-		var3 = "vertical"
-		var4 = var1
-	elseif p3 == Enum.ScrollingDirection.X then
-		var3 = "horizontal"
-		var4 = var2
-	elseif p3 == Enum.ScrollingDirection.XY then
-		mutedError(`Direction {p3.Name} is an unsupported option for feedScroll event`)
+	if ScrollingDirection == Enum.ScrollingDirection.Y then
+		Direction = "vertical"
+		Callback = StrictInterfaceResult
+	elseif ScrollingDirection == Enum.ScrollingDirection.X then
+		Direction = "horizontal"
+		Callback = StrictInterfaceResult1
+	elseif ScrollingDirection == Enum.ScrollingDirection.XY then
+		MutedErrorFunction(`Direction {ScrollingDirection.Name} is an unsupported option for feedScroll event`)
 	end
-	if var4 then
-		local var5, var6 = var4(p4)
+	if Callback then
+		local CallbackResult, CallbackResult2 = Callback(p3)
 		
-		if not var5 then
-			mutedError(var6)
+		if not CallbackResult then
+			MutedErrorFunction(CallbackResult2)
 		end
 	else
-		mutedError(`Missing interface for unknown direction {p3.Name} to type check feedScroll event parameters`)
+		MutedErrorFunction(`Missing interface for unknown direction {ScrollingDirection.Name} to type check feedScroll event parameters`)
 	end
-	p1:sendEventDeferred(p2, "feedScroll", cryoModule.Dictionary.join(p4, { direction = var3 }))
+	p1:sendEventDeferred(p2, "feedScroll", (CryoModule.Dictionary.join(p3, { direction = Direction })))
 end

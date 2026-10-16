@@ -1,9 +1,8 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceTimedOptions").Parent
-local useWearTimeSelectedOptionViewModelModule = require(script.Parent.useWearTimeSelectedOptionViewModel)
-local wearTimeSelectedOptionViewModule = require(script.Parent.WearTimeSelectedOptionView)
-local _ = require(parent.AvatarExperienceCommon)
+﻿local UseWearTimeSelectedOptionViewModelModule = require(script.Parent.useWearTimeSelectedOptionViewModel)
+local WearTimeSelectedOptionViewModule = require(script.Parent.WearTimeSelectedOptionView)
+local _ = require(script:FindFirstAncestor("AvatarExperienceTimedOptions").Parent.AvatarExperienceCommon)
 
-return function(p1)
-	-- upvalues: useWearTimeSelectedOptionViewModelModule (ref), wearTimeSelectedOptionViewModule (ref)
-	return wearTimeSelectedOptionViewModule(useWearTimeSelectedOptionViewModelModule(p1))
+return function(p1) --[[ Line: 18 | Named "WearTimeSelectedOptionContainer" ]]
+	-- upvalues: UseWearTimeSelectedOptionViewModelModule (copy), WearTimeSelectedOptionViewModule (copy)
+	return WearTimeSelectedOptionViewModule((UseWearTimeSelectedOptionViewModelModule(p1)))
 end

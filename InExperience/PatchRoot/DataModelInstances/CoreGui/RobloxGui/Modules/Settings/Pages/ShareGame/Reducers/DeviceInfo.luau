@@ -1,29 +1,31 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local shareGame = game:GetService("CoreGui").RobloxGui.Modules.Settings.Pages.ShareGame
-local immutable = require(corePackagesService.Workspace.Packages.AppCommonLib).Immutable
-local constantsModule = require(shareGame.Constants)
-local setDeviceLayoutModule = require(shareGame.Actions.SetDeviceLayout)
-local setDeviceOrientation = require(corePackagesService.Workspace.Packages.DeviceOrientationRodux).Actions.SetDeviceOrientation
-local setIsSmallTouchScreenModule = require(shareGame.Actions.SetIsSmallTouchScreen)
+﻿local CorePackages = game:GetService("CorePackages")
+local ShareGame = game:GetService("CoreGui").RobloxGui.Modules.Settings.Pages.ShareGame
+local Immutable = require(CorePackages.Workspace.Packages.AppCommonLib).Immutable
+local ConstantsModule = require(ShareGame.Constants)
+local SetDeviceLayoutModule = require(ShareGame.Actions.SetDeviceLayout)
+local SetDeviceOrientation = require(CorePackages.Workspace.Packages.DeviceOrientationRodux).Actions.SetDeviceOrientation
+local SetIsSmallTouchScreenModule = require(ShareGame.Actions.SetIsSmallTouchScreen)
 
-return function(p1, p2)
-	-- upvalues: constantsModule (ref), setDeviceOrientation (ref), immutable (ref), setDeviceLayoutModule (ref), setIsSmallTouchScreenModule (ref)
-	p1 = p1 or {
+return function(p1, p2) --[[ Line: 14 ]]
+	-- upvalues: ConstantsModule (copy), SetDeviceOrientation (copy), Immutable (copy), SetDeviceLayoutModule (copy), SetIsSmallTouchScreenModule (copy)
+	local P0 = p1 or {
 		IsSmallTouchScreen = false,
-		DeviceLayout = constantsModule.DeviceLayout.DESKTOP,
-		DeviceOrientation = constantsModule.DeviceOrientation.INVALID
+		DeviceLayout = ConstantsModule.DeviceLayout.DESKTOP,
+		DeviceOrientation = ConstantsModule.DeviceOrientation.INVALID
 	}
 	
-	if p2.type == setDeviceOrientation.name then
-		p1 = immutable.Set(p1, "DeviceOrientation", p2.deviceOrientation)
+	if p2.type == SetDeviceOrientation.name then
+		P0 = Immutable.Set(P0, "DeviceOrientation", p2.deviceOrientation)
 		
-		return p1
-	elseif p2.type == setDeviceLayoutModule.name then
-		p1 = immutable.Set(p1, "DeviceLayout", p2.deviceLayout)
-		
-		return p1
-	elseif p2.type == setIsSmallTouchScreenModule.name then
-		p1 = immutable.Set(p1, "IsSmallTouchScreen", p2.isSmallTouchScreen)
+		return P0
 	end
-	return p1
+	if p2.type == SetDeviceLayoutModule.name then
+		P0 = Immutable.Set(P0, "DeviceLayout", p2.deviceLayout)
+		
+		return P0
+	end
+	if p2.type == SetIsSmallTouchScreenModule.name then
+		P0 = Immutable.Set(P0, "IsSmallTouchScreen", p2.isSmallTouchScreen)
+	end
+	return P0
 end

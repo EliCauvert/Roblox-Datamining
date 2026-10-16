@@ -1,141 +1,141 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local parent_2 = parent_1.Parent
-local UIBloxConfigModule = require(parent_1.UIBloxConfig)
-local reactModule = require(parent_2.React)
-local object = require(parent_2.LuauPolyfill).Object
-local foundationModule = require(parent_2.Foundation)
-local useStyleModule = require(parent_1.Core.Style.useStyle)
-local imageSetComponentModule = require(parent_1.Core.ImageSet.ImageSetComponent)
-local iconSizeModule = require(parent.ImageSet.Enum.IconSize)
-local getIconSizeModule = require(parent.ImageSet.getIconSize)
-local genericTextLabelModule = require(parent_1.Core.Text.GenericTextLabel.GenericTextLabel)
-local keyLabelModule = require(parent.Menu.KeyLabel.KeyLabel)
-local progressIconAnimatedModule = require(script.Parent.ProgressIconAnimated)
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local Parent2 = Parent1.Parent
+local UIBloxConfigModule = require(Parent1.UIBloxConfig)
+local ReactModule = require(Parent2.React)
+local Object = require(Parent2.LuauPolyfill).Object
+local FoundationModule = require(Parent2.Foundation)
+local UseStyleModule = require(Parent1.Core.Style.useStyle)
+local ImageSetComponentModule = require(Parent1.Core.ImageSet.ImageSetComponent)
+local IconSizeModule = require(Parent.ImageSet.Enum.IconSize)
+local GetIconSizeModule = require(Parent.ImageSet.getIconSize)
+local GenericTextLabelModule = require(Parent1.Core.Text.GenericTextLabel.GenericTextLabel)
+local KeyLabelModule = require(Parent.Menu.KeyLabel.KeyLabel)
+local ProgressIconAnimatedModule = require(script.Parent.ProgressIconAnimated)
 local _ = require(script.Parent.Types)
-local t = {
+local config = {
 	iconLabelGap = 6,
 	actionTextSpacingLeading = 12,
 	size = UDim2.fromOffset(0, 0),
 	automaticSize = Enum.AutomaticSize.XY
 }
-local t_1 = {
+local config1 = {
 	hasProgress = false,
 	animationTriggerTime = 0.3,
 	animationKeyHoldingTime = 1.5,
 	animationCoolDownTime = 0.75
 }
 
-local function renderIcon(p1, p2)
-	-- upvalues: foundationModule (ref), UIBloxConfigModule (ref), getIconSizeModule (ref), iconSizeModule (ref), reactModule (ref), keyLabelModule (ref), imageSetComponentModule (ref), progressIconAnimatedModule (ref)
-	local layoutOrder = p1.layoutOrder
-	local itemProps = p1.itemProps
-	local var1 = if UIBloxConfigModule.useTokenizedShortcutBar then foundationModule.Hooks.useTokens().Size.Size_600 else getIconSizeModule(iconSizeModule.Medium)
-	local hasProgress = itemProps.hasProgress
-	local var2 = if hasProgress then itemProps else nil
-	local icon = itemProps.icon
-	local x = nil
-	local isEnumItem = typeof(icon) == "EnumItem"
-	local var3 = typeof(icon) == "table" and #icon > 0
+local function renderIcon(p1, p2) --[[ Line: 43 ]]
+	-- upvalues: FoundationModule (copy), UIBloxConfigModule (copy), GetIconSizeModule (copy), IconSizeModule (copy), ReactModule (copy), KeyLabelModule (copy), ImageSetComponentModule (copy), ProgressIconAnimatedModule (copy)
+	local LayoutOrder = p1.layoutOrder
+	local ItemProps = p1.itemProps
+	local UseTokensResult = FoundationModule.Hooks.useTokens()
+	local Size600 = if UIBloxConfigModule.useTokenizedShortcutBar then UseTokensResult.Size.Size_600 else GetIconSizeModule(IconSizeModule.Medium)
+	local HasProgress = ItemProps.hasProgress
+	local ItemProps1 = if HasProgress then ItemProps else nil
+	local Icon = ItemProps.icon
+	local X = nil
+	local IsEnumItem = typeof(Icon) == "EnumItem"
+	local v1: boolean = typeof(Icon) == "table" and #Icon > 0
 	
-	if isEnumItem or var3 then
-		x = Enum.AutomaticSize.X
+	if IsEnumItem or v1 then
+		X = Enum.AutomaticSize.X
 	end
-	local var4
-	local _ = nil
-	
-	if isEnumItem then
-		var4 = reactModule.createElement(keyLabelModule, { iconThemeKey = "IconEmphasis", keyCode = icon })
-	elseif var3 then
-		local t = {
-			Layout = reactModule.createElement("UIListLayout", {
+	local Element = nil
+	if IsEnumItem then
+		Element = ReactModule.createElement(KeyLabelModule, { iconThemeKey = "IconEmphasis", keyCode = Icon })
+	elseif v1 then
+		local config = {
+			Layout = ReactModule.createElement("UIListLayout", {
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				FillDirection = Enum.FillDirection.Horizontal,
 				VerticalAlignment = Enum.VerticalAlignment.Center
 			})
 		}
 		
-		for i, v in icon do
-			t["KeyLabel" .. i] = reactModule.createElement(keyLabelModule, {
+		for LayoutOrder1, KeyCode in Icon do
+			config["KeyLabel" .. LayoutOrder1] = ReactModule.createElement(KeyLabelModule, {
 				iconThemeKey = "IconEmphasis",
-				keyCode = v,
-				LayoutOrder = i
+				keyCode = KeyCode,
+				LayoutOrder = LayoutOrder1
 			})
 		end
-		var4 = reactModule.createElement("Frame", {
+		Element = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.fromScale(0, 0),
 			AutomaticSize = Enum.AutomaticSize.XY
-		}, t)
+		}, config)
 	else
-		var4 = reactModule.createElement(imageSetComponentModule.Label, {
+		Element = ReactModule.createElement(ImageSetComponentModule.Label, {
 			BackgroundTransparency = 1,
 			Size = UDim2.fromScale(1, 1),
-			Image = icon,
+			Image = Icon,
 			ImageColor3 = p2.Theme.TextEmphasis.Color,
 			ImageTransparency = p2.Theme.TextEmphasis.Transparency
 		})
 	end
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BorderSizePixel = 0,
 		BackgroundTransparency = 1,
-		LayoutOrder = layoutOrder,
-		Size = UDim2.fromOffset(var1, var1),
-		AutomaticSize = x
+		LayoutOrder = LayoutOrder,
+		Size = UDim2.fromOffset(Size600, Size600),
+		AutomaticSize = X
 	}, {
-		ProgressIcon = if hasProgress then reactModule.createElement(progressIconAnimatedModule, var2) else nil,
-		Image = if hasProgress then nil else var4
+		ProgressIcon = if HasProgress then ReactModule.createElement(ProgressIconAnimatedModule, ItemProps1) else nil,
+		Image = if HasProgress then nil else Element
 	})
 end
 
-return function(p3)
-	-- upvalues: object (ref), t (ref), t_1 (ref), useStyleModule (ref), foundationModule (ref), reactModule (ref), UIBloxConfigModule (ref), genericTextLabelModule (ref), renderIcon (ref)
-	local var5 = object.assign({}, t, p3)
-	local var6 = object.assign({}, t_1, var5.publicProps)
-	local var7 = useStyleModule()
+return function(p3) --[[ Line: 119 | Named "Shortcut" ]]
+	-- upvalues: Object (copy), config (copy), config1 (copy), UseStyleModule (copy), FoundationModule (copy), ReactModule (copy), UIBloxConfigModule (copy), GenericTextLabelModule (copy), renderIcon (copy)
+	local AssignResult = Object.assign({}, config, p3)
+	local AssignResult1 = Object.assign({}, config1, AssignResult.publicProps)
+	local UseStyleModuleResult = UseStyleModule()
+	local UseTokensResult = FoundationModule.Hooks.useTokens()
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BorderSizePixel = 0,
 		BackgroundTransparency = 1,
-		LayoutOrder = var5.index,
-		Size = if UIBloxConfigModule.enableShortcutCustomization then var5.size else UDim2.fromOffset(0, 0),
-		AutomaticSize = if UIBloxConfigModule.enableShortcutCustomization then var5.automaticSize else Enum.AutomaticSize.XY
+		LayoutOrder = AssignResult.index,
+		Size = if UIBloxConfigModule.enableShortcutCustomization then AssignResult.size else UDim2.fromOffset(0, 0),
+		AutomaticSize = if UIBloxConfigModule.enableShortcutCustomization then AssignResult.automaticSize else Enum.AutomaticSize.XY
 	}, {
-		UIListLayout = reactModule.createElement("UIListLayout", {
+		UIListLayout = ReactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			FillDirection = Enum.FillDirection.Horizontal,
 			VerticalAlignment = Enum.VerticalAlignment.Center,
-			Padding = UDim.new(0, var5.iconLabelGap)
+			Padding = UDim.new(0, AssignResult.iconLabelGap)
 		}),
-		ActionText = if var6.actionText then reactModule.createElement("Frame", {
+		ActionText = if AssignResult1.actionText then ReactModule.createElement("Frame", {
 			LayoutOrder = 1,
 			BorderSizePixel = 0,
 			BackgroundTransparency = 1,
 			Size = UDim2.fromOffset(0, 0),
 			AutomaticSize = Enum.AutomaticSize.XY
 		}, {
-			Padding = reactModule.createElement("UIPadding", {
-				PaddingLeft = UDim.new(0, var5.actionTextSpacingLeading)
+			Padding = ReactModule.createElement("UIPadding", {
+				PaddingLeft = UDim.new(0, AssignResult.actionTextSpacingLeading)
 			}),
-			Label = reactModule.createElement(genericTextLabelModule, {
+			Label = ReactModule.createElement(GenericTextLabelModule, {
 				BackgroundTransparency = 1,
 				Size = UDim2.fromOffset(0, 0),
 				AutomaticSize = Enum.AutomaticSize.XY,
-				Text = var6.actionText,
-				colorStyle = var7.Theme.TextEmphasis,
-				fontStyle = var7.Font.SubHeader1
+				Text = AssignResult1.actionText,
+				colorStyle = UseStyleModuleResult.Theme.TextEmphasis,
+				fontStyle = UseStyleModuleResult.Font.SubHeader1
 			})
 		}) else nil,
-		Icon = if UIBloxConfigModule.enableShortcutCustomization and var5.renderIcon then var5.renderIcon({ layoutOrder = 2 }) else renderIcon({ layoutOrder = 2, itemProps = var6 }, var7),
-		LabelText = reactModule.createElement(genericTextLabelModule, {
+		Icon = if UIBloxConfigModule.enableShortcutCustomization and AssignResult.renderIcon then AssignResult.renderIcon({ layoutOrder = 2 }) else renderIcon({ layoutOrder = 2, itemProps = AssignResult1 }, UseStyleModuleResult),
+		LabelText = ReactModule.createElement(GenericTextLabelModule, {
 			LayoutOrder = 3,
 			BackgroundTransparency = 1,
 			Size = UDim2.fromOffset(0, 0),
 			AutomaticSize = Enum.AutomaticSize.XY,
-			Text = var6.text,
-			TextSize = if UIBloxConfigModule.enableShortcutCustomization and var5.labelTextSize then var5.labelTextSize elseif UIBloxConfigModule.useTokenizedShortcutBar then foundationModule.Hooks.useTokens().FontSize.FontSize_50 else nil,
-			colorStyle = if UIBloxConfigModule.enableShortcutCustomization and var5.labelColorStyle then var5.labelColorStyle else var7.Theme.TextEmphasis,
-			fontStyle = if UIBloxConfigModule.enableShortcutCustomization and var5.labelFontStyle then var5.labelFontStyle else var7.Font.SubHeader1
+			Text = AssignResult1.text,
+			TextSize = if UIBloxConfigModule.enableShortcutCustomization and AssignResult.labelTextSize then AssignResult.labelTextSize elseif UIBloxConfigModule.useTokenizedShortcutBar then UseTokensResult.FontSize.FontSize_50 else nil,
+			colorStyle = if UIBloxConfigModule.enableShortcutCustomization and AssignResult.labelColorStyle then AssignResult.labelColorStyle else UseStyleModuleResult.Theme.TextEmphasis,
+			fontStyle = if UIBloxConfigModule.enableShortcutCustomization and AssignResult.labelFontStyle then AssignResult.labelFontStyle else UseStyleModuleResult.Font.SubHeader1
 		})
 	})
 end

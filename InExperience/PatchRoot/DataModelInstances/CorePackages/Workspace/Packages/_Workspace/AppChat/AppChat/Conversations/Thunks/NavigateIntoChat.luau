@@ -1,26 +1,25 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local navigateIntoChatModule = require(appChat.Actions.NavigateIntoChat)
-local navigateToRoute = require(parent.NavigationRodux).Thunks.NavigateToRoute
-local appPage = require(parent.RobloxAppEnums).AppPage
-local getFFlagEnableStandaloneAppChatModule = require(appChat.Flags.getFFlagEnableStandaloneAppChat)
-local enumScreensModule = require(appChat.EnumScreens)
-local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
-local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
-local list = { { name = appPage.Chat } }
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local NavigateIntoChatModule = require(AppChat.Actions.NavigateIntoChat)
+local NavigateToRouteFunction = require(Parent.NavigationRodux).Thunks.NavigateToRoute
+local GetFFlagEnableStandaloneAppChatModule = require(AppChat.Flags.getFFlagEnableStandaloneAppChat)
+local EnumScreensModule = require(AppChat.EnumScreens)
+local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3Dispatch
+local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
+local list = { { name = require(Parent.RobloxAppEnums).AppPage.Chat } }
 
-return function(p1, p2)
-	-- upvalues: fFlagSignalsNavP3Dispatch (ref), var1 (ref), list (ref), navigateToRoute (ref), navigateIntoChatModule (ref), getFFlagEnableStandaloneAppChatModule (ref), enumScreensModule (ref)
-	return function(p3)
-		-- upvalues: fFlagSignalsNavP3Dispatch (copy), var1 (copy), list (copy), p2 (ref), navigateToRoute (copy), navigateIntoChatModule (copy), getFFlagEnableStandaloneAppChatModule (copy), enumScreensModule (copy), p1 (ref)
-		if fFlagSignalsNavP3Dispatch then
-			var1.to(var1.fromLegacyPage(list[#list]), p2)
+return function(Params, p1) --[[ Line: 25 ]]
+	-- upvalues: FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), list (copy), NavigateToRouteFunction (copy), NavigateIntoChatModule (copy), GetFFlagEnableStandaloneAppChatModule (copy), EnumScreensModule (copy)
+	return function(p2) --[[ Line: 26 ]]
+		-- upvalues: FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), list (upval), p1 (copy), NavigateToRouteFunction (upval), NavigateIntoChatModule (upval), GetFFlagEnableStandaloneAppChatModule (upval), EnumScreensModule (upval), Params (copy)
+		if FFlagSignalsNavP3Dispatch then
+			NavigationCommands.to(NavigationCommands.fromLegacyPage(list[#list]), p1)
 		else
-			p3:dispatch(navigateToRoute(list, p2))
+			p2:dispatch(NavigateToRouteFunction(list, p1))
 		end
-		p3:dispatch(navigateIntoChatModule({
-			screen = if getFFlagEnableStandaloneAppChatModule() then enumScreensModule.ChatConversation else enumScreensModule.RoactChat,
-			params = p1
+		p2:dispatch(NavigateIntoChatModule({
+			screen = if GetFFlagEnableStandaloneAppChatModule() then EnumScreensModule.ChatConversation else EnumScreensModule.RoactChat,
+			params = Params
 		}))
 	end
 end

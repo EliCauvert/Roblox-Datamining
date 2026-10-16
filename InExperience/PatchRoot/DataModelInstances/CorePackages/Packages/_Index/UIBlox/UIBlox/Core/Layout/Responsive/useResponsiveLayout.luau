@@ -1,15 +1,15 @@
-﻿local parent = script.Parent
-local reactModule = require(parent.Parent.Parent.Parent.Parent.React)
-local responsiveLayoutContextModule = require(parent.ResponsiveLayoutContext)
-local responsiveLayoutConfigReaderModule = require(parent.ResponsiveLayoutConfigReader)
+﻿local Parent = script.Parent
+local ReactModule = require(Parent.Parent.Parent.Parent.Parent.React)
+local ResponsiveLayoutContextModule = require(Parent.ResponsiveLayoutContext)
+local ResponsiveLayoutConfigReaderModule = require(Parent.ResponsiveLayoutConfigReader)
 
-return function(p1, p2)
-	-- upvalues: reactModule (ref), responsiveLayoutContextModule (ref), responsiveLayoutConfigReaderModule (ref)
-	local var1 = reactModule.useContext(responsiveLayoutContextModule)
+return function(p1, p2) --[[ Line: 19 ]]
+	-- upvalues: ReactModule (copy), ResponsiveLayoutContextModule (copy), ResponsiveLayoutConfigReaderModule (copy)
+	local UseContextResult = ReactModule.useContext(ResponsiveLayoutContextModule)
 	
-	return responsiveLayoutConfigReaderModule.getValue({
-		config = var1.config,
-		breakpoint = var1.breakpoint,
-		kind = p2 or var1.kind
+	return ResponsiveLayoutConfigReaderModule.getValue({
+		config = UseContextResult.config,
+		breakpoint = UseContextResult.breakpoint,
+		kind = p2 or UseContextResult.kind
 	}, p1)
 end

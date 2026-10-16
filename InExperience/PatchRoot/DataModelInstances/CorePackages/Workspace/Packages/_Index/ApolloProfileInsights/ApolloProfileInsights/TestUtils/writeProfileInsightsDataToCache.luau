@@ -1,38 +1,37 @@
-﻿local parent = script:FindFirstAncestor("ApolloProfileInsights").Parent
-local cryoModule = require(parent.Cryo)
-local _ = require(parent.ApolloClient)
-local queries = require(parent.ApolloLocalState).queries
+﻿local Parent = script:FindFirstAncestor("ApolloProfileInsights").Parent
+local CryoModule = require(Parent.Cryo)
+local _ = require(Parent.ApolloClient)
+local Queries = require(Parent.ApolloLocalState).queries
 
-return function(p1, p2, p3)
-	-- upvalues: queries (ref), cryoModule (ref)
-	local var1 = if p3 and p3.query then p3.query else queries.profilesInsightsByUserIds
-	
-	for i, v in p2 do
-		local t = {}
+return function(p1, List, p2) --[[ Line: 27 ]]
+	-- upvalues: Queries (copy), CryoModule (copy)
+	local Query = if p2 and p2.query then p2.query else Queries.profilesInsightsByUserIds
+	for UserIds, value in List do
+		local MutualFriends = {}
 		
-		for i_1, v_1 in v.mutualFriends or {} do
-			table.insert(t, cryoModule.Dictionary.join({
+		for i, value1 in value.mutualFriends or {} do
+			table.insert(MutualFriends, CryoModule.Dictionary.join({
 				__typename = "MutualFriend",
-				id = v_1.id or tostring(i_1),
-				username = v_1.username or "",
-				displayName = v_1.displayName or ""
-			}, v_1))
+				id = value1.id or tostring(i),
+				username = value1.username or "",
+				displayName = value1.displayName or ""
+			}, value1))
 		end
 		p1:writeQuery({
-			variables = { userIds = i },
-			query = var1,
+			variables = { userIds = UserIds },
+			query = Query,
 			data = {
 				profilesInsightsByUserIds = {
 					{
 						__typename = "ProfileInsights",
-						targetUserId = v.targetUserId or tostring(i),
-						isOfflineFrequents = v.isOfflineFrequents or false,
-						mutualFriends = t,
-						friendshipAgeUnixSeconds = v.friendshipAgeUnixSeconds or 0,
-						friendRequestOriginSource = v.friendRequestOriginSource or 0,
-						accountCreationDateUnixSeconds = v.accountCreationDateUnixSeconds or 0,
-						localizedCountryName = v.localizedCountryName or "",
-						userAgeVerifiedBracket = v.userAgeVerifiedBracket or ""
+						targetUserId = value.targetUserId or tostring(UserIds),
+						isOfflineFrequents = value.isOfflineFrequents or false,
+						mutualFriends = MutualFriends,
+						friendshipAgeUnixSeconds = value.friendshipAgeUnixSeconds or 0,
+						friendRequestOriginSource = value.friendRequestOriginSource or 0,
+						accountCreationDateUnixSeconds = value.accountCreationDateUnixSeconds or 0,
+						localizedCountryName = value.localizedCountryName or "",
+						userAgeVerifiedBracket = value.userAgeVerifiedBracket or ""
 					}
 				}
 			}

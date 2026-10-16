@@ -1,6 +1,6 @@
-﻿local splitPaneSlot = require(script:FindFirstAncestor("SplitPane").Parent.AppSplitView).Enums.SplitPaneSlot
+﻿local SplitPaneSlot = require(script:FindFirstAncestor("SplitPane").Parent.AppSplitView).Enums.SplitPaneSlot
 
-return function(p1)
-	-- upvalues: splitPaneSlot (ref)
-	return p1.descriptor.options.splitPaneEligibility == splitPaneSlot.Support
+return function(p1): boolean --[[ Line: 7 | Named "isSupportPaneScreen" ]]
+	-- upvalues: SplitPaneSlot (copy)
+	return p1.descriptor.options.splitPaneEligibility == SplitPaneSlot.Support
 end

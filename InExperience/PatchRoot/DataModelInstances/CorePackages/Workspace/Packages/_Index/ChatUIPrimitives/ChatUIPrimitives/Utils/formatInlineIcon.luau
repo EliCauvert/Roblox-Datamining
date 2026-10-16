@@ -1,27 +1,27 @@
-﻿local escapeRichTextModule = require(script:FindFirstAncestor("ChatUIPrimitives").Utils.escapeRichText)
+﻿local EscapeRichTextModule = require(script:FindFirstAncestor("ChatUIPrimitives").Utils.escapeRichText)
 
-return function(p1, p2)
-	-- upvalues: escapeRichTextModule (ref)
-	local list = { "family" }
-	local t = {
+return function(p1, List): string --[[ Line: 24 | Named "formatInlineIcon" ]]
+	-- upvalues: EscapeRichTextModule (copy)
+	local List1 = { "family" }
+	local config = {
 		family = "rbxasset://LuaPackages/Packages/_Index/BuilderIcons/BuilderIcons/BuilderIcons.json"
 	}
 	
-	if p2 ~= nil then
-		for i, v in p2 do
+	if List ~= nil then
+		for i, value in List do
 			if i ~= "family" then
-				if t[i] == nil then
-					table.insert(list, i)
+				if config[i] == nil then
+					table.insert(List1, i)
 				end
-				t[i] = v
+				config[i] = value
 			end
 		end
 	end
-	table.sort(list)
-	local list_1 = table.create(#list)
+	table.sort(List1)
+	local Buffer = table.create(#List1)
 	
-	for i, v in list do
-		list_1[i] = `{escapeRichTextModule(v)}='{escapeRichTextModule(t[v])}'`
+	for i1, value1 in List1 do
+		Buffer[i1] = `{EscapeRichTextModule(value1)}='{EscapeRichTextModule(config[value1])}'`
 	end
-	return `<font {table.concat(list_1, " ")}>{escapeRichTextModule(p1)}</font>`
+	return `<font {table.concat(Buffer, " ")}>{EscapeRichTextModule(p1)}</font>`
 end

@@ -1,65 +1,69 @@
-﻿local groups = script:FindFirstAncestor("Groups")
-local parent = groups.Parent
-local reactModule = require(parent.React)
-local groupsPageModule = require(groups.Components.GroupsPage)
-local fFlagEnableGroupDetailPane = require(parent.SharedFlags).FFlagEnableGroupDetailPane
-local var1 = if fFlagEnableGroupDetailPane then require(script.Parent.GroupsNavigator) else nil
-local var2 = if fFlagEnableGroupDetailPane then require(script.Parent.GroupsRoutes) else nil
-local var3 = if fFlagEnableGroupDetailPane then require(groups.Hooks.useIsCompactTouch) else nil
-local useGroupsWrapperContextModule = require(groups.Contexts.useGroupsWrapperContext)
-local initializeGroupsAnalyticsModule = require(groups.Analytics.initializeGroupsAnalytics)
-local groupsAnalyticsContextModule = require(groups.Analytics.GroupsAnalyticsContext)
+﻿local Groups = script:FindFirstAncestor("Groups")
+local Parent = Groups.Parent
+local ReactModule = require(Parent.React)
+local GroupsPageModule = require(Groups.Components.GroupsPage)
+local FFlagEnableGroupDetailPane = require(Parent.SharedFlags).FFlagEnableGroupDetailPane
+local GroupsNavigatorModule = if FFlagEnableGroupDetailPane then require(script.Parent.GroupsNavigator) else nil
+local GroupsRoutesModule = if FFlagEnableGroupDetailPane then require(script.Parent.GroupsRoutes) else nil
+local UseIsCompactTouchModule = if FFlagEnableGroupDetailPane then require(Groups.Hooks.useIsCompactTouch) else nil
+local UseGroupsWrapperContextModule = require(Groups.Contexts.useGroupsWrapperContext)
+local InitializeGroupsAnalyticsModule = require(Groups.Analytics.initializeGroupsAnalytics)
+local GroupsAnalyticsContextModule = require(Groups.Analytics.GroupsAnalyticsContext)
 
-local function GroupsWithContext(p1)
-	-- upvalues: useGroupsWrapperContextModule (ref), fFlagEnableGroupDetailPane (ref), var3 (ref), reactModule (ref), var2 (ref), initializeGroupsAnalyticsModule (ref), var1 (ref), groupsPageModule (ref), groupsAnalyticsContextModule (ref)
-	local var4 = useGroupsWrapperContextModule()
+local function GroupsWithContext(p1) --[[ Line: 23 ]]
+	-- upvalues: UseGroupsWrapperContextModule (copy), FFlagEnableGroupDetailPane (copy), UseIsCompactTouchModule (copy), ReactModule (copy), GroupsRoutesModule (copy), InitializeGroupsAnalyticsModule (copy), GroupsNavigatorModule (copy), GroupsPageModule (copy), GroupsAnalyticsContextModule (copy)
+	local UseGroupsWrapperContextModuleResult = UseGroupsWrapperContextModule()
 	
-	if fFlagEnableGroupDetailPane then
-		local var5 = var3()
-		local var6 = reactModule.useRef(nil)
-		reactModule.useEffect(function()
-			-- upvalues: var4 (ref), var6 (ref), p1 (ref), var5 (ref), var2 (copy)
-			if var4.groupId == nil then
-				var6.current = nil
+	if FFlagEnableGroupDetailPane then
+		local UseIsCompactTouchModuleResult = UseIsCompactTouchModule()
+		local UseRefResult = ReactModule.useRef(nil)
+		ReactModule.useEffect(function() --[[ Line: 28 ]]
+			-- upvalues: UseGroupsWrapperContextModuleResult (copy), UseRefResult (copy), p1 (copy), UseIsCompactTouchModuleResult (copy), GroupsRoutesModule (upval)
+			if UseGroupsWrapperContextModuleResult.groupId == nil then
+				UseRefResult.current = nil
 				
 				return
-			elseif p1.navigation and var5 and var6.current ~= var4.groupId then
-				var6.current = var4.groupId
-				p1.navigation.navigate(var2.GroupDetailPane, {
-					groupId = var4.groupId,
-					source = var4.groupDetailPaneSource
+			end
+			if p1.navigation and UseIsCompactTouchModuleResult and UseRefResult.current ~= UseGroupsWrapperContextModuleResult.groupId then
+				UseRefResult.current = UseGroupsWrapperContextModuleResult.groupId
+				p1.navigation.navigate(GroupsRoutesModule.GroupDetailPane, {
+					groupId = UseGroupsWrapperContextModuleResult.groupId,
+					source = UseGroupsWrapperContextModuleResult.groupDetailPaneSource
 				})
 			end
 		end, {
-			var4.groupId,
-			var4.groupDetailPaneSource,
+			UseGroupsWrapperContextModuleResult.groupId,
+			UseGroupsWrapperContextModuleResult.groupDetailPaneSource,
 			p1.navigation,
-			var5
+			UseIsCompactTouchModuleResult
 		})
 	end
-	return reactModule.createElement(groupsAnalyticsContextModule.Provider, {
-		value = reactModule.useMemo(function()
-			-- upvalues: initializeGroupsAnalyticsModule (copy), var4 (ref)
-			local var7 = initializeGroupsAnalyticsModule()
-			var7.updateInfoForAllEvents({ userId = var4.userId })
+	return ReactModule.createElement(GroupsAnalyticsContextModule.Provider, {
+		value = ReactModule.useMemo(function() --[[ Line: 44 ]]
+			-- upvalues: InitializeGroupsAnalyticsModule (upval), UseGroupsWrapperContextModuleResult (copy)
+			local InitializeGroupsAnalyticsModuleResult = InitializeGroupsAnalyticsModule()
+			InitializeGroupsAnalyticsModuleResult.updateInfoForAllEvents({ userId = UseGroupsWrapperContextModuleResult.userId })
 			
-			return var7
-		end, { var4.userId })
-	}, if fFlagEnableGroupDetailPane then { GroupsContent = reactModule.createElement(var1, p1) } else {
-		GroupsPage = reactModule.createElement(groupsPageModule, p1)
+			return InitializeGroupsAnalyticsModuleResult
+		end, { UseGroupsWrapperContextModuleResult.userId })
+	}, if FFlagEnableGroupDetailPane then {
+		GroupsContent = ReactModule.createElement(GroupsNavigatorModule, p1)
+	} else {
+		GroupsPage = ReactModule.createElement(GroupsPageModule, p1)
 	})
 end
 
-if fFlagEnableGroupDetailPane then
-	local groupsNavigatorWithProviders = reactModule.PureComponent:extend("GroupsNavigatorWithProviders")
+if FFlagEnableGroupDetailPane then
+	local GroupsNavigatorWithProviders = ReactModule.PureComponent:extend("GroupsNavigatorWithProviders")
 	
-	function groupsNavigatorWithProviders.render(p1)
-		-- upvalues: reactModule (ref), GroupsWithContext (ref)
-		return reactModule.createElement(GroupsWithContext, p1.props)
+	function GroupsNavigatorWithProviders.render(p1) --[[ Line: 71 ]]
+		-- upvalues: ReactModule (copy), GroupsWithContext (copy)
+		return ReactModule.createElement(GroupsWithContext, p1.props)
 	end
 	
-	groupsNavigatorWithProviders.router = var1.router
+	GroupsNavigatorWithProviders.router = GroupsNavigatorModule.router
 	
-	return groupsNavigatorWithProviders
+	return GroupsNavigatorWithProviders
+else
+	return GroupsWithContext
 end
-return GroupsWithContext

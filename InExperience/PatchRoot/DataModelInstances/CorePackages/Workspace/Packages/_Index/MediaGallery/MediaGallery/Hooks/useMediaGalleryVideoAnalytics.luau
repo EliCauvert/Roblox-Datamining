@@ -1,101 +1,107 @@
-﻿local parent = script:FindFirstAncestor("MediaGallery").Parent
-local reactModule = require(parent.React)
-local loggingProtocolModule = require(parent.LoggingProtocol)
-local discoveryAnalyticsModule = require(parent.DiscoveryAnalytics)
-local discoveryVideoPlayEvent = discoveryAnalyticsModule.Events.discoveryVideoPlayEvent
-local discoveryVideoEndEvent = discoveryAnalyticsModule.Events.discoveryVideoEndEvent
-local videoUtilsModule = require(parent.VideoUtils)
-local videoActions = videoUtilsModule.AnalyticsEnums.VideoActions
-local videoLogger = videoUtilsModule.VideoLogger
-local reportWarning = discoveryAnalyticsModule.Points.reportWarning
+﻿local Parent = script:FindFirstAncestor("MediaGallery").Parent
+local ReactModule = require(Parent.React)
+local LoggingProtocolModule = require(Parent.LoggingProtocol)
+local DiscoveryAnalyticsModule = require(Parent.DiscoveryAnalytics)
+local DiscoveryVideoPlayEventFunction = DiscoveryAnalyticsModule.Events.discoveryVideoPlayEvent
+local DiscoveryVideoEndEventFunction = DiscoveryAnalyticsModule.Events.discoveryVideoEndEvent
+local VideoUtilsModule = require(Parent.VideoUtils)
+local VideoActions = VideoUtilsModule.AnalyticsEnums.VideoActions
+local VideoLogger = VideoUtilsModule.VideoLogger
+local ReportWarningFunction = DiscoveryAnalyticsModule.Points.reportWarning
+local FFlagLuaAppDiscoveryMomentVideoTelemetry = require(Parent.SharedFlags).FFlagLuaAppDiscoveryMomentVideoTelemetry
 
-return function(p1, p2, p3)
-	-- upvalues: reactModule (ref), reportWarning (ref), loggingProtocolModule (ref), discoveryVideoPlayEvent (ref), videoLogger (ref), videoActions (ref), discoveryVideoEndEvent (ref)
-	local var1 = reactModule.useCallback(function(p4, p5)
-		-- upvalues: p3 (ref), reportWarning (copy), loggingProtocolModule (copy), discoveryVideoPlayEvent (copy), p1 (ref), p2 (ref)
-		if not p4 or not p3 then return end
-		local var2 = p3[p4]
+return function(SourceId, RootPlaceId, p1) --[[ Line: 29 | Named "useMediaGalleryVideoAnalytics" ]]
+	-- upvalues: ReactModule (copy), ReportWarningFunction (copy), LoggingProtocolModule (copy), DiscoveryVideoPlayEventFunction (copy), FFlagLuaAppDiscoveryMomentVideoTelemetry (copy), VideoLogger (copy), VideoActions (copy), DiscoveryVideoEndEventFunction (copy)
+	local UseResult = ReactModule.useCallback(function(p2, p3) --[[ Line: 30 ]]
+		-- upvalues: p1 (copy), ReportWarningFunction (upval), LoggingProtocolModule (upval), DiscoveryVideoPlayEventFunction (upval), SourceId (copy), RootPlaceId (copy), FFlagLuaAppDiscoveryMomentVideoTelemetry (upval)
+		if not p2 or not p1 then return end
+		local v1 = p1[p2]
 		
-		if not var2 then
-			reportWarning(loggingProtocolModule.default, "EventLogging", "reportVideoPlay requires a valid entry")
+		if not v1 then
+			ReportWarningFunction(LoggingProtocolModule.default, "EventLogging", "reportVideoPlay requires a valid entry")
 			
 			return
-		elseif not var2.videoId then
-			reportWarning(loggingProtocolModule.default, "EventLogging", "reportVideoPlay requires a valid videoAssetId")
 		end
-		discoveryVideoPlayEvent("GameDetails", {
-			videoAssetId = var2.videoId,
-			videoPlaybackSessionId = p5 or "INVALID_SESSION_ID",
-			universeId = p1,
-			rootPlaceId = p2
+		if not v1.videoId then
+			ReportWarningFunction(LoggingProtocolModule.default, "EventLogging", "reportVideoPlay requires a valid videoAssetId")
+		end
+		DiscoveryVideoPlayEventFunction("GameDetails", {
+			videoAssetId = v1.videoId,
+			videoPlaybackSessionId = p3 or "INVALID_SESSION_ID",
+			universeId = SourceId,
+			rootPlaceId = RootPlaceId,
+			isMoment = if FFlagLuaAppDiscoveryMomentVideoTelemetry then v1.isMoment == true else nil
 		})
-	end, { p1, p2, p3 })
-	local var2 = reactModule.useCallback(function(p4, p5, _, p6)
-		-- upvalues: p3 (ref), reportWarning (copy), loggingProtocolModule (copy), videoLogger (copy), videoActions (copy), p1 (ref)
-		if not p4 or not p3 then return end
-		local var3 = p3[p4]
+	end, { SourceId, RootPlaceId, p1 })
+	local UseResult1 = ReactModule.useCallback(function(p2, p3, _, LoadTime) --[[ Line: 55 ]]
+		-- upvalues: p1 (copy), ReportWarningFunction (upval), LoggingProtocolModule (upval), VideoLogger (upval), VideoActions (upval), SourceId (copy)
+		if not p2 or not p1 then return end
+		local v1 = p1[p2]
 		
-		if not var3 then
-			reportWarning(loggingProtocolModule.default, "EventLogging", "reportVideoLoad requires a valid entry")
+		if not v1 then
+			ReportWarningFunction(LoggingProtocolModule.default, "EventLogging", "reportVideoLoad requires a valid entry")
 			
 			return
-		elseif not var3.videoId then
-			reportWarning(loggingProtocolModule.default, "EventLogging", "reportVideoLoad requires a valid videoAssetId")
 		end
-		videoLogger.reportVideoAction(videoActions.load, "GameDetails", {
+		if not v1.videoId then
+			ReportWarningFunction(LoggingProtocolModule.default, "EventLogging", "reportVideoLoad requires a valid videoAssetId")
+		end
+		VideoLogger.reportVideoAction(VideoActions.load, "GameDetails", {
 			source = "MediaGallery",
-			videoAssetId = var3.videoId,
-			sourceId = p1,
-			playbackSessionId = p5 or "INVALID_SESSION_ID"
-		}, { loadTime = p6 })
-	end, { p1, p3 })
-	local var3 = reactModule.useCallback(function(p4, p5, p6)
-		-- upvalues: p3 (ref), videoLogger (copy), videoActions (copy), p1 (ref)
-		if not p4 or not p3 then return end
-		local var4 = p3[p4]
+			videoAssetId = v1.videoId,
+			sourceId = SourceId,
+			playbackSessionId = p3 or "INVALID_SESSION_ID"
+		}, { loadTime = LoadTime })
+	end, { SourceId, p1 })
+	local UseResult2 = ReactModule.useCallback(function(p2, p3, p4) --[[ Line: 82 ]]
+		-- upvalues: p1 (copy), VideoLogger (upval), VideoActions (upval), SourceId (copy)
+		if not p2 or not p1 then return end
+		local v1 = p1[p2]
 		
-		if var4 and var4.videoId then
-			videoLogger.reportVideoAction(videoActions.volume, "GameDetails", {
+		if v1 and v1.videoId then
+			VideoLogger.reportVideoAction(VideoActions.volume, "GameDetails", {
 				source = "MediaGallery",
-				videoAssetId = var4.videoId,
-				sourceId = p1,
-				playbackSessionId = p5 or "INVALID_SESSION_ID",
-				volumeLevel = if p6 then 0 else 1
+				videoAssetId = v1.videoId,
+				sourceId = SourceId,
+				playbackSessionId = p3 or "INVALID_SESSION_ID",
+				volumeLevel = if p4 then 0 else 1
 			})
 			
 			return
 		end
-	end, { p1, p3 })
-	local var4 = reactModule.useCallback(function(p4, p5, p6, p7, p8)
-		-- upvalues: p3 (ref), reportWarning (copy), loggingProtocolModule (copy), discoveryVideoEndEvent (copy), p1 (ref), p2 (ref)
-		if not p4 or not p3 then return end
-		local var5 = p3[p4]
+	end, { SourceId, p1 })
+	local UseResult3 = ReactModule.useCallback(function(p2, EndReason, p3, PlaybackTime, TargetUniverseId) --[[ Line: 102 ]]
+		-- upvalues: p1 (copy), ReportWarningFunction (upval), LoggingProtocolModule (upval), DiscoveryVideoEndEventFunction (upval), SourceId (copy), RootPlaceId (copy), FFlagLuaAppDiscoveryMomentVideoTelemetry (upval)
+		if not p2 or not p1 then return end
+		local v1 = p1[p2]
 		
-		if not var5 then
-			reportWarning(loggingProtocolModule.default, "EventLogging", "reportVideoEnd requires a valid entry")
+		if not v1 then
+			ReportWarningFunction(LoggingProtocolModule.default, "EventLogging", "reportVideoEnd requires a valid entry")
 			
 			return
-		elseif not var5.videoId then
-			reportWarning(loggingProtocolModule.default, "EventLogging", "reportVideoEnd requires a valid videoAssetId")
 		end
-		discoveryVideoEndEvent("GameDetails", {
-			videoAssetId = var5.videoId,
-			videoPlaybackSessionId = p6 or "INVALID_SESSION_ID",
-			endReason = p5,
-			playbackTime = p7,
-			universeId = p1,
-			rootPlaceId = p2,
-			targetUniverseId = p8
+		if not v1.videoId then
+			ReportWarningFunction(LoggingProtocolModule.default, "EventLogging", "reportVideoEnd requires a valid videoAssetId")
+		end
+		DiscoveryVideoEndEventFunction("GameDetails", {
+			videoAssetId = v1.videoId,
+			videoPlaybackSessionId = p3 or "INVALID_SESSION_ID",
+			endReason = EndReason,
+			playbackTime = PlaybackTime,
+			universeId = SourceId,
+			rootPlaceId = RootPlaceId,
+			targetUniverseId = TargetUniverseId,
+			isMoment = if FFlagLuaAppDiscoveryMomentVideoTelemetry then v1.isMoment == true else nil
 		})
-	end, { p1, p2, p3 })
+	end, { SourceId, RootPlaceId, p1 })
 	
-	return reactModule.useMemo(function()
-		-- upvalues: var1 (ref), var2 (ref), var3 (ref), var4 (ref)
+	return (ReactModule.useMemo(function() --[[ Line: 137 ]]
+		-- upvalues: UseResult (copy), UseResult1 (copy), UseResult2 (copy), UseResult3 (copy)
 		return {
-			reportVideoPlay = var1,
-			reportVideoLoad = var2,
-			reportVideoMute = var3,
-			reportVideoEnd = var4
+			reportVideoPlay = UseResult,
+			reportVideoLoad = UseResult1,
+			reportVideoMute = UseResult2,
+			reportVideoEnd = UseResult3
 		}
-	end, { var1, var2, var3, var4 })
+	end, { UseResult, UseResult1, UseResult2, UseResult3 }))
 end

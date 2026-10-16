@@ -1,29 +1,29 @@
-﻿local parent = script.Parent
-local cryoModule = require(parent.Cryo)
-local roduxNetworkingModule = require(parent.RoduxNetworking)
-local networkingPresenceModule = require(parent.NetworkingPresence)
-local reducerModule = require(script.Reducer)
-local actionsModule = require(script.Actions)
-local selectorsModule = require(script.Selectors)
-local modelsModule = require(script.Models)
-local enumsModule = require(script.Enums)
+﻿local Parent = script.Parent
+local CryoModule = require(Parent.Cryo)
+local RoduxNetworkingModule = require(Parent.RoduxNetworking)
+local NetworkingPresenceModule = require(Parent.NetworkingPresence)
+local ReducerModule = require(script.Reducer)
+local ActionsModule = require(script.Actions)
+local SelectorsModule = require(script.Selectors)
+local ModelsModule = require(script.Models)
+local EnumsModule = require(script.Enums)
 
 return {
-	config = function(p1)
-		-- upvalues: cryoModule (ref), networkingPresenceModule (ref), roduxNetworkingModule (ref), reducerModule (ref), actionsModule (ref), selectorsModule (ref), modelsModule (ref), enumsModule (ref)
-		p1 = cryoModule.Dictionary.join(p1, {
-			presenceNetworking = networkingPresenceModule.config({ roduxNetworking = roduxNetworkingModule.mock() })
+	config = function(p1) --[[ Line: 13 ]]
+		-- upvalues: CryoModule (copy), NetworkingPresenceModule (copy), RoduxNetworkingModule (copy), ReducerModule (copy), ActionsModule (copy), SelectorsModule (copy), ModelsModule (copy), EnumsModule (copy)
+		local JoinResult = CryoModule.Dictionary.join(p1, {
+			presenceNetworking = NetworkingPresenceModule.config({ roduxNetworking = RoduxNetworkingModule.mock() })
 		})
 		
 		return {
-			installReducer = function()
-				-- upvalues: reducerModule (copy), p1 (write)
-				return reducerModule(p1)
+			installReducer = function() --[[ Line: 21 ]]
+				-- upvalues: ReducerModule (upval), JoinResult (ref)
+				return ReducerModule(JoinResult)
 			end,
-			Actions = actionsModule(p1),
-			Selectors = selectorsModule(p1),
-			Models = modelsModule,
-			Enums = enumsModule
+			Actions = ActionsModule(JoinResult),
+			Selectors = SelectorsModule(JoinResult),
+			Models = ModelsModule,
+			Enums = EnumsModule
 		}
 	end
 }

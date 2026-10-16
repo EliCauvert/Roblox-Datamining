@@ -1,118 +1,113 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local cryoModule = require(corePackagesService.Packages.Cryo)
-local roduxModule = require(corePackagesService.Packages.Rodux)
-local parent = script.Parent.Parent
-local openReportMenuModule = require(parent.Actions.OpenReportMenu)
-local closeReportMenuModule = require(parent.Actions.CloseReportMenu)
-local _ = require(parent.Actions.OpenReportDialog)
-local _ = require(parent.Actions.OpenCategoryMenu)
-local selectReportCategoryModule = require(parent.Actions.SelectReportCategory)
-local openReportSentDialogModule = require(parent.Actions.OpenReportSentDialog)
-local _ = require(parent.Actions.CloseReportSentDialog)
-local constantsModule = require(parent.Resources.Constants)
+﻿local CorePackages = game:GetService("CorePackages")
+local CryoModule = require(CorePackages.Packages.Cryo)
+local Parent = script.Parent.Parent
+local _ = require(Parent.Actions.OpenReportDialog)
+local _ = require(Parent.Actions.OpenCategoryMenu)
+local _ = require(Parent.Actions.CloseReportSentDialog)
+local ConstantsModule = require(Parent.Resources.Constants)
 
-return roduxModule.createReducer({
+return require(CorePackages.Packages.Rodux).createReducer({
 	voiceReportingFlowEnabled = true,
 	targetPlayer = nil,
 	beginningTimestamp = 0,
-	currentPage = constantsModule.Page.None,
+	currentPage = ConstantsModule.Page.None,
 	history = {},
-	reportType = constantsModule.ReportType.Any,
-	beginningReportType = constantsModule.ReportType.Any,
-	reportCategory = constantsModule.Category.None,
+	reportType = ConstantsModule.ReportType.Any,
+	beginningReportType = ConstantsModule.ReportType.Any,
+	reportCategory = ConstantsModule.Category.None,
 	sortedUserIds = {}
 }, {
-	[require(parent.Actions.EndReportFlow).name] = function(p1, _)
-		-- upvalues: cryoModule (ref), constantsModule (ref)
-		return cryoModule.Dictionary.join(p1, {
+	[require(Parent.Actions.EndReportFlow).name] = function(p1, _) --[[ Line: 34 ]]
+		-- upvalues: CryoModule (copy), ConstantsModule (copy)
+		return CryoModule.Dictionary.join(p1, {
 			history = {},
-			currentPage = constantsModule.Page.None,
-			targetPlayer = cryoModule.None,
-			reportType = constantsModule.ReportType.Any
+			currentPage = ConstantsModule.Page.None,
+			targetPlayer = CryoModule.None,
+			reportType = ConstantsModule.ReportType.Any
 		})
 	end,
-	[require(parent.Actions.BeginReportFlow).name] = function(p1, p2)
-		-- upvalues: constantsModule (ref), cryoModule (ref)
-		local t = {
-			reportCategory = constantsModule.Category.None,
+	[require(Parent.Actions.BeginReportFlow).name] = function(p1, p2) --[[ Line: 42 ]]
+		-- upvalues: ConstantsModule (copy), CryoModule (copy)
+		local config = {
+			reportCategory = ConstantsModule.Category.None,
 			beginningTimestamp = workspace:GetServerTimeNow(),
 			sortedUserIds = {},
-			history = { constantsModule.Page.None }
+			history = { ConstantsModule.Page.None }
 		}
 		
-		return if p2.reportType == constantsModule.ReportType.Place then cryoModule.Dictionary.join(p1, t, {
+		return if p2.reportType == ConstantsModule.ReportType.Place then CryoModule.Dictionary.join(p1, config, {
 			reportType = p2.reportType,
 			beginningReportType = p2.reportType,
-			currentPage = constantsModule.Page.ReportForm,
-			targetPlayer = cryoModule.None
-		}) elseif p2.reportType == constantsModule.ReportType.Player then cryoModule.Dictionary.join(p1, t, {
+			currentPage = ConstantsModule.Page.ReportForm,
+			targetPlayer = CryoModule.None
+		}) elseif p2.reportType == ConstantsModule.ReportType.Player then CryoModule.Dictionary.join(p1, config, {
 			reportType = p2.reportType,
 			beginningReportType = p2.reportType,
 			targetPlayer = p2.targetPlayer,
-			currentPage = if p1.voiceReportingFlowEnabled then constantsModule.Page.Category else constantsModule.Page.ReportForm
-		}) else cryoModule.Dictionary.join(p1, t, {
-			reportType = constantsModule.ReportType.Any,
-			beginningReportType = constantsModule.ReportType.Any,
-			targetPlayer = cryoModule.None,
-			currentPage = if p1.voiceReportingFlowEnabled then constantsModule.Page.Category else constantsModule.Page.Listing
+			currentPage = if p1.voiceReportingFlowEnabled then ConstantsModule.Page.Category else ConstantsModule.Page.ReportForm
+		}) else CryoModule.Dictionary.join(p1, config, {
+			reportType = ConstantsModule.ReportType.Any,
+			beginningReportType = ConstantsModule.ReportType.Any,
+			targetPlayer = CryoModule.None,
+			currentPage = if p1.voiceReportingFlowEnabled then ConstantsModule.Page.Category else ConstantsModule.Page.Listing
 		})
 	end,
-	[require(parent.Actions.NavigateBack).name] = function(p1, _)
-		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p1, {
-			history = cryoModule.List.removeIndex(p1.history, #p1.history),
+	[require(Parent.Actions.NavigateBack).name] = function(p1, _) --[[ Line: 76 ]]
+		-- upvalues: CryoModule (copy)
+		return CryoModule.Dictionary.join(p1, {
+			history = CryoModule.List.removeIndex(p1.history, #p1.history),
 			currentPage = p1.history[#p1.history] or p1.currentPage
 		})
 	end,
-	[selectReportCategoryModule.name] = function(p1, p2)
-		-- upvalues: constantsModule (ref), cryoModule (ref)
-		local var1 = p2.reportCategory == constantsModule.Category.Experience
-		local var2 = p1.beginningReportType == constantsModule.ReportType.Player
-		local listing = constantsModule.Page.Listing
-		local reportType = p1.reportType
+	[require(Parent.Actions.SelectReportCategory).name] = function(p1, p2) --[[ Line: 85 ]]
+		-- upvalues: ConstantsModule (copy), CryoModule (copy)
+		local IsReportCategoryMatch = p2.reportCategory == ConstantsModule.Category.Experience
+		local IsBeginningReportTypeMatch = p1.beginningReportType == ConstantsModule.ReportType.Player
+		local Listing = ConstantsModule.Page.Listing
+		local ReportType = p1.reportType
 		
-		if var1 or var2 then
-			listing = constantsModule.Page.ReportForm
+		if IsReportCategoryMatch or IsBeginningReportTypeMatch then
+			Listing = ConstantsModule.Page.ReportForm
 			
-			if var1 then
-				reportType = constantsModule.ReportType.Place
+			if IsReportCategoryMatch then
+				ReportType = ConstantsModule.ReportType.Place
 			end
 		end
-		return cryoModule.Dictionary.join(p1, {
-			history = cryoModule.List.join(p1.history, { p1.currentPage }),
-			currentPage = listing,
-			reportType = reportType,
+		return CryoModule.Dictionary.join(p1, {
+			history = CryoModule.List.join(p1.history, { p1.currentPage }),
+			currentPage = Listing,
+			reportType = ReportType,
 			reportCategory = p2.reportCategory
 		})
 	end,
-	[require(parent.Actions.SelectReportListing).name] = function(p1, p2)
-		-- upvalues: cryoModule (ref), constantsModule (ref)
-		return cryoModule.Dictionary.join(p1, {
-			sortedUserIds = cryoModule.List.join(p2.sortedUserIds or {}, {}),
-			history = cryoModule.List.join(p1.history, { p1.currentPage }),
-			currentPage = constantsModule.Page.ReportForm,
+	[require(Parent.Actions.SelectReportListing).name] = function(p1, p2) --[[ Line: 109 ]]
+		-- upvalues: CryoModule (copy), ConstantsModule (copy)
+		return CryoModule.Dictionary.join(p1, {
+			sortedUserIds = CryoModule.List.join(p2.sortedUserIds or {}, {}),
+			history = CryoModule.List.join(p1.history, { p1.currentPage }),
+			currentPage = ConstantsModule.Page.ReportForm,
 			reportType = p2.reportType,
-			targetPlayer = p2.targetPlayer or cryoModule.None
+			targetPlayer = p2.targetPlayer or CryoModule.None
 		})
 	end,
-	[openReportMenuModule.name] = function(p1, _)
-		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p1, { isReportMenuOpen = true })
+	[require(Parent.Actions.OpenReportMenu).name] = function(p1, _) --[[ Line: 120 ]]
+		-- upvalues: CryoModule (copy)
+		return CryoModule.Dictionary.join(p1, { isReportMenuOpen = true })
 	end,
-	[closeReportMenuModule.name] = function(p1, _)
-		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p1, { isReportMenuOpen = false })
+	[require(Parent.Actions.CloseReportMenu).name] = function(p1, _) --[[ Line: 125 ]]
+		-- upvalues: CryoModule (copy)
+		return CryoModule.Dictionary.join(p1, { isReportMenuOpen = false })
 	end,
-	[openReportSentDialogModule.name] = function(p1, p2)
-		-- upvalues: cryoModule (ref), constantsModule (ref)
-		return cryoModule.Dictionary.join(p1, {
-			currentPage = constantsModule.Page.ReportSent,
+	[require(Parent.Actions.OpenReportSentDialog).name] = function(p1, p2) --[[ Line: 130 ]]
+		-- upvalues: CryoModule (copy), ConstantsModule (copy)
+		return CryoModule.Dictionary.join(p1, {
+			currentPage = ConstantsModule.Page.ReportSent,
 			reportType = p2.reportType,
-			targetPlayer = p2.targetPlayer or cryoModule.None
+			targetPlayer = p2.targetPlayer or CryoModule.None
 		})
 	end,
-	[require(parent.Actions.SetVoiceReportingFlow).name] = function(p1, p2)
-		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p1, { voiceReportingFlowEnabled = p2.enable })
+	[require(Parent.Actions.SetVoiceReportingFlow).name] = function(p1, p2) --[[ Line: 137 ]]
+		-- upvalues: CryoModule (copy)
+		return CryoModule.Dictionary.join(p1, { voiceReportingFlowEnabled = p2.enable })
 	end
 })

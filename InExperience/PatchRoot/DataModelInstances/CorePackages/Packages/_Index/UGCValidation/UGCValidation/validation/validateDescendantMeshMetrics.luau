@@ -1,115 +1,120 @@
 ﻿local UGCValidationService = game:GetService("UGCValidationService")
-local parent = script.Parent.Parent
-local analyticsModule = require(parent.Analytics)
-local constantsModule = require(parent.Constants)
-local _ = require(parent.util.Types)
-local validateSkinningTransferModule = require(parent.validation.validateSkinningTransfer)
-local failureReasonsAccumulatorModule = require(parent.util.FailureReasonsAccumulator)
-local parseContentIdsModule = require(parent.util.ParseContentIds)
-local getMeshMinMaxModule = require(parent.util.getMeshMinMax)
-local getEditableMeshFromContextModule = require(parent.util.getEditableMeshFromContext)
-local getEngineFeatureEngineUGCValidationConsolidateAccessorySkinningModule = require(parent.flags.getEngineFeatureEngineUGCValidationConsolidateAccessorySkinning)
+local Parent = script.Parent.Parent
+local AnalyticsModule = require(Parent.Analytics)
+local ConstantsModule = require(Parent.Constants)
+local _ = require(Parent.util.Types)
+local ValidateSkinningTransferModule = require(Parent.validation.validateSkinningTransfer)
+local FailureReasonsAccumulatorModule = require(Parent.util.FailureReasonsAccumulator)
+local ParseContentIdsModule = require(Parent.util.ParseContentIds)
+local GetMeshMinMaxModule = require(Parent.util.getMeshMinMax)
+local GetEditableMeshFromContextModule = require(Parent.util.getEditableMeshFromContext)
+local GetEngineFeatureEngineUGCValidationConsolidateAccessorySkinningModule = require(Parent.flags.getEngineFeatureEngineUGCValidationConsolidateAccessorySkinning)
 
-local function validateIsSkinned(p1, p2, p3, p4)
-	-- upvalues: constantsModule (ref), analyticsModule (ref), getEditableMeshFromContextModule (ref), UGCValidationService (ref)
-	local alternateMeshIdAttributeNameAttribute = p1:GetAttribute(constantsModule.AlternateMeshIdAttributeName)
+local function validateIsSkinned(Object, IsServer, AllowEditableInstances, p1) --[[ Line: 22 ]]
+	-- upvalues: ConstantsModule (copy), AnalyticsModule (copy), GetEditableMeshFromContextModule (copy), UGCValidationService (copy)
+	local Attribute = Object:GetAttribute(ConstantsModule.AlternateMeshIdAttributeName)
 	
-	if not p1.HasSkinnedMesh and (alternateMeshIdAttributeNameAttribute == nil or alternateMeshIdAttributeNameAttribute == "" or not p3) then
-		analyticsModule.reportFailure(analyticsModule.ErrorType.validateDescendantMeshMetrics_NoSkinningInfo, nil, p4)
+	if not Object.HasSkinnedMesh and (Attribute == nil or Attribute == "" or not AllowEditableInstances) then
+		AnalyticsModule.reportFailure(AnalyticsModule.ErrorType.validateDescendantMeshMetrics_NoSkinningInfo, nil, p1)
 		
 		return false, {
-			`Missing skinning data for {p1.Name}.MeshId. You need to skin your model.`
+			`Missing skinning data for {Object.Name}.MeshId. You need to skin your model.`
 		}
 	end
-	local ok, status = pcall(function()
-		-- upvalues: getEditableMeshFromContextModule (copy), p1 (ref), p4 (ref), UGCValidationService (copy)
-		local var1, var2 = getEditableMeshFromContextModule(p1, "MeshId", p4)
+	local Success, Result = pcall(function() --[[ Line: 40 ]]
+		-- upvalues: GetEditableMeshFromContextModule (upval), Object (copy), p1 (copy), UGCValidationService (upval)
+		local MeshId, MeshId2 = GetEditableMeshFromContextModule(Object, "MeshId", p1)
 		
-		if not var1 then
+		if not MeshId then
 			error("Failed to retrieve MeshContent")
 		end
-		return UGCValidationService:ValidateSkinnedEditableMesh(var2)
+		return UGCValidationService:ValidateSkinnedEditableMesh(MeshId2)
 	end)
 	
-	if ok then
-		if status then
+	if Success then
+		if Result then
 			return true
 		end
-		local name = `Detected mismatch between model and skinned data for {p1.Name}. You need to re-skin your model to fix this issue.`
+		local Message: string = `Detected mismatch between model and skinned data for {Object.Name}. You need to re-skin your model to fix this issue.`
 		
-		if p2 then
-			error(name)
+		if IsServer then
+			error(Message)
 		end
-		analyticsModule.reportFailure(analyticsModule.ErrorType.validateDescendantMeshMetrics_HasSkinnedMeshMismatch, nil, p4)
+		AnalyticsModule.reportFailure(AnalyticsModule.ErrorType.validateDescendantMeshMetrics_HasSkinnedMeshMismatch, nil, p1)
 		
-		return false, { name }
-	elseif p2 then
-		error("Failed to retrieve mesh data to validate skinned mesh")
+		return false, { Message }
+	else
+		if IsServer then
+			error("Failed to retrieve mesh data to validate skinned mesh")
+		end
+		AnalyticsModule.reportFailure(AnalyticsModule.ErrorType.validateDescendantMeshMetrics_FailedToLoadMesh, nil, p1)
+		
+		return false, { "Failed to retrieve mesh data to validate skinned mesh" }
 	end
-	analyticsModule.reportFailure(analyticsModule.ErrorType.validateDescendantMeshMetrics_FailedToLoadMesh, nil, p4)
-	
-	return false, { "Failed to retrieve mesh data to validate skinned mesh" }
 end
 
-local function validateMeshIsAtOrigin(p5, p6, p7, p8)
-	-- upvalues: analyticsModule (ref)
-	if (p6 + (p7 - p6) / 2).Magnitude > 0.001 then
-		analyticsModule.reportFailure(analyticsModule.ErrorType.validateDescendantMeshMetrics_TooFarFromOrigin, nil, p8)
+local function validateMeshIsAtOrigin(p2, p3, p4, p5) --[[ Line: 84 ]]
+	-- upvalues: AnalyticsModule (copy)
+	if (p3 + (p4 - p3) / 2).Magnitude > 0.001 then
+		AnalyticsModule.reportFailure(AnalyticsModule.ErrorType.validateDescendantMeshMetrics_TooFarFromOrigin, nil, p5)
 		
 		return false, {
-			string.format("Bounds for the mesh '%s' are not centered at the origin. The max allowed distance is '%f'", p5.fullName, 0.001)
+			string.format("Bounds for the mesh '%s' are not centered at the origin. The max allowed distance is '%f'", p2.fullName, 0.001)
 		}
+	else
+		return true
 	end
-	return true
 end
 
-return function(p5, p6)
-	-- upvalues: failureReasonsAccumulatorModule (ref), parseContentIdsModule (ref), constantsModule (ref), getEditableMeshFromContextModule (ref), getMeshMinMaxModule (ref), validateMeshIsAtOrigin (ref), analyticsModule (ref), validateIsSkinned (ref), getEngineFeatureEngineUGCValidationConsolidateAccessorySkinningModule (ref), validateSkinningTransferModule (ref)
-	local isServer = p6.isServer
-	assert(p6.assetTypeEnum ~= nil, "assetTypeEnum required in validationContext for validateDescendantMeshMetrics")
-	local allowEditableInstances = p6.allowEditableInstances
-	local var1 = failureReasonsAccumulatorModule.new()
-	local _ = nil
+return function(p2, p3) --[[ Line: 115 | Named "validateDescendantMeshMetrics" ]]
+	-- upvalues: FailureReasonsAccumulatorModule (copy), ParseContentIdsModule (copy), ConstantsModule (copy), GetEditableMeshFromContextModule (copy), GetMeshMinMaxModule (copy), validateMeshIsAtOrigin (copy), AnalyticsModule (copy), validateIsSkinned (copy), GetEngineFeatureEngineUGCValidationConsolidateAccessorySkinningModule (copy), ValidateSkinningTransferModule (copy)
+	local IsServer = p3.isServer
+	assert(p3.assetTypeEnum ~= nil, "assetTypeEnum required in validationContext for validateDescendantMeshMetrics")
+	local AllowEditableInstances = p3.allowEditableInstances
+	local NewFailureReasonsAccumulator = FailureReasonsAccumulatorModule.new()
 	
-	for i, v in parseContentIdsModule.parse(p5, constantsModule.MESH_CONTENT_ID_FIELDS, p6) do
-		local t = {
-			fullName = v.instance:GetFullName(),
-			fieldName = v.fieldName,
-			contentId = v.instance[v.fieldName],
-			context = v.instance.Name
+	for _, value in ParseContentIdsModule.parse(p2, ConstantsModule.MESH_CONTENT_ID_FIELDS, p3) do
+		local config = {
+			fullName = value.instance:GetFullName(),
+			fieldName = value.fieldName,
+			contentId = value.instance[value.fieldName],
+			context = value.instance.Name
 		}
-		local var2, var3 = getEditableMeshFromContextModule(v.instance, v.fieldName, p6)
+		local EditableMeshFromContextModule, EditableMeshFromContextModule2 = GetEditableMeshFromContextModule(value.instance, value.fieldName, p3)
 		
-		if var2 then
-			t.editableMesh = var3
-			
-			if v.instance.ClassName == "MeshPart" then
-				assert(v.fieldName == "MeshId")
-				local var4, var5, var6, var7 = getMeshMinMaxModule(t, p6)
-				
-				if not var4 then
-					var1:updateReasons(false, var5)
-				end
-				if var4 then
-					local currentTime = tick()
-					var1:updateReasons(validateMeshIsAtOrigin(t, var6, var7, p6))
-					analyticsModule.recordScriptTime("validateMeshIsAtOrigin", currentTime, p6)
-				end
-				local currentTime = tick()
-				var1:updateReasons(validateIsSkinned(v.instance, isServer, allowEditableInstances, p6))
-				analyticsModule.recordScriptTime("validateIsSkinned", currentTime, p6)
-				
-				if not getEngineFeatureEngineUGCValidationConsolidateAccessorySkinningModule() then
-					var1:updateReasons(validateSkinningTransferModule(v.instance, p6))
-				end
-			elseif v.instance.ClassName == "WrapTarget" then
-				assert(v.fieldName == "CageMeshId")
-				t.fullName ..= "OuterCage"
+		if not EditableMeshFromContextModule then
+			return false, {
+				string.format("Failed to load mesh for '%s'. Make sure mesh exists and try again.", value.instance.Name)
+			}
+		end
+		config.editableMesh = EditableMeshFromContextModule2
+		
+		if value.instance.ClassName ~= "MeshPart" then
+			if value.instance.ClassName == "WrapTarget" then
+				assert(value.fieldName == "CageMeshId")
+				config.fullName ..= "OuterCage"
+				continue
 			end
+			continue
 		end
-		return false, {
-			string.format("Failed to load mesh for '%s'. Make sure mesh exists and try again.", v.instance.Name)
-		}
+		assert(value.fieldName == "MeshId")
+		local MeshMinMaxModule, MeshMinMaxModule2, MeshMinMaxModule3, MeshMinMaxModule4 = GetMeshMinMaxModule(config, p3)
+		
+		if not MeshMinMaxModule then
+			NewFailureReasonsAccumulator:updateReasons(false, MeshMinMaxModule2)
+		end
+		if MeshMinMaxModule then
+			local CurrentTime = tick()
+			NewFailureReasonsAccumulator:updateReasons(validateMeshIsAtOrigin(config, MeshMinMaxModule3, MeshMinMaxModule4, p3))
+			AnalyticsModule.recordScriptTime("validateMeshIsAtOrigin", CurrentTime, p3)
+		end
+		local CurrentTime = tick()
+		NewFailureReasonsAccumulator:updateReasons(validateIsSkinned(value.instance, IsServer, AllowEditableInstances, p3))
+		AnalyticsModule.recordScriptTime("validateIsSkinned", CurrentTime, p3)
+		
+		if not GetEngineFeatureEngineUGCValidationConsolidateAccessorySkinningModule() then
+			NewFailureReasonsAccumulator:updateReasons(ValidateSkinningTransferModule(value.instance, p3))
+		end
 	end
-	return var1:getFinalResults()
+	return NewFailureReasonsAccumulator:getFinalResults()
 end

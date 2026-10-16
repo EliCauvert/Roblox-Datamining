@@ -1,22 +1,21 @@
-﻿local parent = script:FindFirstAncestor("EditProfileBackground").Parent
-local luaSocialLibrariesDepsModule = require(parent.LuaSocialLibrariesDeps)
-local roduxNetworking = luaSocialLibrariesDepsModule.RoduxNetworking
-local httpRequest = luaSocialLibrariesDepsModule.httpRequest
-local var1 = require(parent.Lumberyak).Logger.new(nil, "EditProfileBackground"):new("EditProfileBackground Networking")
+﻿local Parent = script:FindFirstAncestor("EditProfileBackground").Parent
+local LuaSocialLibrariesDepsModule = require(Parent.LuaSocialLibrariesDeps)
+local HttpRequest = LuaSocialLibrariesDepsModule.httpRequest
+local EditProfileBackgroundNetworking = require(Parent.Lumberyak).Logger.new(nil, "EditProfileBackground"):new("EditProfileBackground Networking")
 
-return roduxNetworking.config({
+return (LuaSocialLibrariesDepsModule.RoduxNetworking.config({
 	keyPath = "EditProfileBackground.networkStatus",
-	networkImpl = httpRequest.config({
-		requestFunction = function(p1, p2, p3)
-			-- upvalues: var1 (ref), httpRequest (ref)
-			var1:info("Fetching: {}", string.format("[ requestMethod = %q, url = %q ]", p2, p1))
+	networkImpl = HttpRequest.config({
+		requestFunction = function(p1, p2, p3) --[[ Line: 13 ]]
+			-- upvalues: EditProfileBackgroundNetworking (copy), HttpRequest (copy)
+			EditProfileBackgroundNetworking:info("Fetching: {}", string.format("[ requestMethod = %q, url = %q ]", p2, p1))
 			
-			return httpRequest.requestFunctions.RequestInternal(p1, p2, p3)
+			return HttpRequest.requestFunctions.RequestInternal(p1, p2, p3)
 		end,
-		postRequestFunction = function(p1, p2)
-			-- upvalues: var1 (ref)
-			var1:debug("Returned: {}", string.format("[ requestMethod = %q, url = %q, statusCode = %s, body = %s ]", p2.requestMethod, p2.url, p1.StatusCode, p1.Body))
+		postRequestFunction = function(p1, p2) --[[ Line: 17 ]]
+			-- upvalues: EditProfileBackgroundNetworking (copy)
+			EditProfileBackgroundNetworking:debug("Returned: {}", string.format("[ requestMethod = %q, url = %q, statusCode = %s, body = %s ]", p2.requestMethod, p2.url, p1.StatusCode, p1.Body))
 		end,
 		maxRetryCount = game:DefineFastInt("EditProfileBackgroundHttpRetryCount", 3)
 	})
-})
+}))

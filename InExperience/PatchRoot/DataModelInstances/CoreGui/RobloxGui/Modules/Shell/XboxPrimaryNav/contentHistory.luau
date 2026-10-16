@@ -1,26 +1,23 @@
-﻿local getFFlagXboxFixPrimaryNavABEventsModule = require(game:GetService("CoreGui"):FindFirstChild("RobloxGui"):FindFirstChild("Modules"):FindFirstChild("Shell").Flags.GetFFlagXboxFixPrimaryNavABEvents)
+﻿local GetFFlagXboxFixPrimaryNavABEventsModule = require(game:GetService("CoreGui"):FindFirstChild("RobloxGui"):FindFirstChild("Modules"):FindFirstChild("Shell").Flags.GetFFlagXboxFixPrimaryNavABEvents)
 
-return (function()
-	-- upvalues: getFFlagXboxFixPrimaryNavABEventsModule (ref)
-	local t = {}
-	local var1 = nil
+return ((function() --[[ Line: 12 | Named "contentHistory" ]]
+	-- upvalues: GetFFlagXboxFixPrimaryNavABEventsModule (copy)
+	local LastSelectedContent = nil
 	
-	function t.setLastSelectedContent(_, p1)
-		-- upvalues: var1 (write)
-		var1 = p1
-	end
-	
-	function t.getLastContentName(_)
-		-- upvalues: getFFlagXboxFixPrimaryNavABEventsModule (copy), var1 (write)
-		local ok, status = pcall(function()
-			-- upvalues: getFFlagXboxFixPrimaryNavABEventsModule (copy), var1 (copy)
-			return if getFFlagXboxFixPrimaryNavABEventsModule() then var1:GetId() else var1:GetName()
-		end)
-		
-		if ok then
-			return status
+	return {
+		setLastSelectedContent = function(_, Value) --[[ Line: 17 ]]
+			-- upvalues: LastSelectedContent (ref)
+			LastSelectedContent = Value
+		end,
+		getLastContentName = function(_) --[[ Line: 21 ]]
+			-- upvalues: GetFFlagXboxFixPrimaryNavABEventsModule (upval), LastSelectedContent (ref)
+			local Success, Result = pcall(function() --[[ Line: 22 ]]
+				-- upvalues: GetFFlagXboxFixPrimaryNavABEventsModule (upval), LastSelectedContent (upval)
+				return if GetFFlagXboxFixPrimaryNavABEventsModule() then LastSelectedContent:GetId() else LastSelectedContent:GetName()
+			end)
+			
+			if not Success then return end
+			return Result
 		end
-	end
-	
-	return t
-end)()
+	}
+end)())

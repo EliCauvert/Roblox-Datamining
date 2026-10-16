@@ -1,15 +1,15 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local _ = require(foundation.Components.InternalInput)
-local inputSizeModule = require(foundation.Enums.InputSize)
-local _ = require(foundation.Enums.ControlState)
-local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant)
-local _ = require(foundation.Providers.Style.Tokens)
-local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
-local getKnobSizeModule = require(foundation.Components.Knob.getKnobSize)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local _ = require(Foundation.Components.InternalInput)
+local InputSizeModule = require(Foundation.Enums.InputSize)
+local _ = require(Foundation.Enums.ControlState)
+local ComposeStyleVariantModule = require(Foundation.Utility.composeStyleVariant)
+local _ = require(Foundation.Providers.Style.Tokens)
+local VariantsContextModule = require(Foundation.Providers.Style.VariantsContext)
+local GetKnobSizeModule = require(Foundation.Components.Knob.getKnobSize)
 
-local function computeProps(p1)
-	local offset = p1.knobSize.X.Offset
-	local var1 = (p1.size.height - offset) / 2
+local function computeProps(p1) --[[ Line: 29 ]]
+	local Offset = p1.knobSize.X.Offset
+	local HeightRatio = (p1.size.height - Offset) / 2
 	
 	return {
 		input = {
@@ -18,14 +18,14 @@ local function computeProps(p1)
 			stroke = { thickness = p1.strokeThickness }
 		},
 		knob = {
-			offPosition = UDim2.new(0, var1, 0.5, 0),
-			onPosition = UDim2.new(0, p1.size.width - offset - var1, 0.5, 0)
+			offPosition = UDim2.new(0, HeightRatio, 0.5, 0),
+			onPosition = UDim2.new(0, p1.size.width - Offset - HeightRatio, 0.5, 0)
 		}
 	}
 end
 
-local function variantsFactory(p1)
-	-- upvalues: inputSizeModule (ref), computeProps (ref), getKnobSizeModule (ref)
+local function variantsFactory(p1) --[[ Line: 53 ]]
+	-- upvalues: InputSizeModule (copy), computeProps (copy), GetKnobSizeModule (copy)
 	return {
 		common = {
 			input = {
@@ -40,37 +40,37 @@ local function variantsFactory(p1)
 			}
 		},
 		sizes = {
-			[inputSizeModule.XSmall] = computeProps({
+			[InputSizeModule.XSmall] = computeProps({
 				tag = "radius-circle",
 				size = { width = p1.Size.Size_700, height = p1.Size.Size_400 },
-				knobSize = getKnobSizeModule(p1, inputSizeModule.XSmall),
+				knobSize = GetKnobSizeModule(p1, InputSizeModule.XSmall),
 				strokeThickness = p1.Stroke.None
 			}),
-			[inputSizeModule.Small] = computeProps({
+			[InputSizeModule.Small] = computeProps({
 				tag = "radius-circle",
 				size = { width = p1.Size.Size_800, height = p1.Size.Size_500 },
-				knobSize = getKnobSizeModule(p1, inputSizeModule.Small),
+				knobSize = GetKnobSizeModule(p1, InputSizeModule.Small),
 				strokeThickness = p1.Stroke.None
 			}),
-			[inputSizeModule.Medium] = computeProps({
+			[InputSizeModule.Medium] = computeProps({
 				tag = "radius-circle",
 				size = { width = p1.Size.Size_1000, height = p1.Size.Size_600 },
-				knobSize = getKnobSizeModule(p1, inputSizeModule.Medium),
+				knobSize = GetKnobSizeModule(p1, InputSizeModule.Medium),
 				strokeThickness = p1.Stroke.None
 			}),
-			[inputSizeModule.Large] = computeProps({
+			[InputSizeModule.Large] = computeProps({
 				tag = "radius-circle",
 				size = { width = p1.Size.Size_1100, height = p1.Size.Size_600 },
-				knobSize = getKnobSizeModule(p1, inputSizeModule.Medium),
+				knobSize = GetKnobSizeModule(p1, InputSizeModule.Medium),
 				strokeThickness = p1.Stroke.None
 			})
 		}
 	}
 end
 
-return function(p1, p2)
-	-- upvalues: variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref)
-	local toggle = variantsContextModule.useVariants("Toggle", variantsFactory, p1)
+return function(p1, p2) --[[ Line: 96 ]]
+	-- upvalues: VariantsContextModule (copy), variantsFactory (copy), ComposeStyleVariantModule (copy)
+	local Toggle = VariantsContextModule.useVariants("Toggle", variantsFactory, p1)
 	
-	return composeStyleVariantModule(toggle.common, toggle.sizes[p2])
+	return ComposeStyleVariantModule(Toggle.common, Toggle.sizes[p2])
 end

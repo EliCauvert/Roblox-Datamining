@@ -1,64 +1,65 @@
 ﻿local _ = require(script.Parent.ReactInternalTypes)
-local unknownModule = require(script.Parent["ReactFiberStack.new"])
-local reactFiberHostConfigModule = require(script.Parent.ReactFiberHostConfig)
-local getChildHostContext = reactFiberHostConfigModule.getChildHostContext
-local getRootHostContext = reactFiberHostConfigModule.getRootHostContext
-local createCursor = unknownModule.createCursor
-local push = unknownModule.push
-local pop = unknownModule.pop
+local ReactFiberStackNewModule = require(script.Parent["ReactFiberStack.new"])
+local ReactFiberHostConfigModule = require(script.Parent.ReactFiberHostConfig)
+local GetChildHostContextFunction = ReactFiberHostConfigModule.getChildHostContext
+local GetRootHostContextFunction = ReactFiberHostConfigModule.getRootHostContext
+local CreateCursorFunction = ReactFiberStackNewModule.createCursor
+local PushFunction = ReactFiberStackNewModule.push
+local PopFunction = ReactFiberStackNewModule.pop
 local t = {}
-local var1 = createCursor(t)
-local var2 = createCursor(t)
-local var3 = createCursor(t)
+local Cursor = CreateCursorFunction(t)
+local Cursor1 = CreateCursorFunction(t)
+local Cursor2 = CreateCursorFunction(t)
 
-function requiredContext(p1)
+function requiredContext(p1) --[[ Line: 42 ]]
 	return p1
 end
 
-function getRootHostContainer()
-	-- upvalues: var3 (ref)
-	return var3.current
+function getRootHostContainer() --[[ Line: 52 ]]
+	-- upvalues: Cursor2 (copy)
+	return Cursor2.current
 end
 
-function pushHostContainer(p1, p2)
-	-- upvalues: push (ref), var3 (ref), var2 (ref), var1 (ref), t (ref), getRootHostContext (ref), pop (ref)
-	push(var3, p2, p1)
-	push(var2, p1, p1)
-	push(var1, t, p1)
-	local var4 = getRootHostContext(p2)
-	pop(var1, p1)
-	push(var1, var4, p1)
+function pushHostContainer(p1, p2) --[[ Line: 59 ]]
+	-- upvalues: PushFunction (copy), Cursor2 (copy), Cursor1 (copy), Cursor (copy), t (copy), GetRootHostContextFunction (copy), PopFunction (copy)
+	PushFunction(Cursor2, p2, p1)
+	PushFunction(Cursor1, p1, p1)
+	PushFunction(Cursor, t, p1)
+	local RootHostContext = GetRootHostContextFunction(p2)
+	PopFunction(Cursor, p1)
+	PushFunction(Cursor, RootHostContext, p1)
 end
 
-function popHostContainer(p1)
-	-- upvalues: pop (ref), var1 (ref), var2 (ref), var3 (ref)
-	pop(var1, p1)
-	pop(var2, p1)
-	pop(var3, p1)
+function popHostContainer(p1) --[[ Line: 79 ]]
+	-- upvalues: PopFunction (copy), Cursor (copy), Cursor1 (copy), Cursor2 (copy)
+	PopFunction(Cursor, p1)
+	PopFunction(Cursor1, p1)
+	PopFunction(Cursor2, p1)
 end
 
-function getHostContext()
-	-- upvalues: var1 (ref)
-	return var1.current
+function getHostContext() --[[ Line: 85 ]]
+	-- upvalues: Cursor (copy)
+	return Cursor.current
 end
 
-function pushHostContext(p1)
-	-- upvalues: var3 (ref), var1 (ref), getChildHostContext (ref), push (ref), var2 (ref)
-	local var4 = requiredContext(var1.current)
-	local var5 = getChildHostContext(var4, p1.type, requiredContext(var3.current))
+function pushHostContext(p1) --[[ Line: 92 ]]
+	-- upvalues: Cursor2 (copy), Cursor (copy), GetChildHostContextFunction (copy), PushFunction (copy), Cursor1 (copy)
+	local RequiredContextResult = requiredContext(Cursor.current)
+	local ChildHostContext = GetChildHostContextFunction(RequiredContextResult, p1.type, (requiredContext(Cursor2.current)))
 	
-	if var4 == var5 then
+	if RequiredContextResult ~= ChildHostContext then
+		PushFunction(Cursor1, p1, p1)
+		PushFunction(Cursor, ChildHostContext, p1)
+		
 		return
 	end
-	push(var2, p1, p1)
-	push(var1, var5, p1)
 end
 
-function popHostContext(p1)
-	-- upvalues: var2 (ref), pop (ref), var1 (ref)
-	if var2.current == p1 then
-		pop(var1, p1)
-		pop(var2, p1)
+function popHostContext(Current) --[[ Line: 108 ]]
+	-- upvalues: Cursor1 (copy), PopFunction (copy), Cursor (copy)
+	if Cursor1.current == Current then
+		PopFunction(Cursor, Current)
+		PopFunction(Cursor1, Current)
 		
 		return
 	end

@@ -1,1 +1,4 @@
-﻿return game:DefineFastFlag("EditProfileImageR15UpgradePrompt", false) and (require(script.Parent.FFlagEditProfileImageRigTypeOverride) and require(script.Parent.FFlagAXSaveManagerOutsideAX))
+﻿local FFlagEditProfileImageRigTypeOverrideModule = require(script.Parent.FFlagEditProfileImageRigTypeOverride)
+local FFlagAXSaveManagerOutsideAXModule = require(script.Parent.FFlagAXSaveManagerOutsideAX)
+
+return game:DefineFastFlag("EditProfileImageR15UpgradePrompt", false) and (FFlagEditProfileImageRigTypeOverrideModule and FFlagAXSaveManagerOutsideAXModule)

@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.AppShortcutBar.AppShortcutBar)
+﻿return (require(script.Parent.Parent.Parent._Index.AppShortcutBar.AppShortcutBar))

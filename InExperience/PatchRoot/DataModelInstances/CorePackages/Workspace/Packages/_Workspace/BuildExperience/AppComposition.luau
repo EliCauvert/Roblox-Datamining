@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.AppComposition.AppComposition)
+﻿return (require(script.Parent.Parent.Parent._Index.AppComposition.AppComposition))

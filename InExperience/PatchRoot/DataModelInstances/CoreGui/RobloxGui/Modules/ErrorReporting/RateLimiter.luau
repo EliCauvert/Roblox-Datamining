@@ -1,57 +1,60 @@
-﻿local runService = game:GetService("RunService")
-local tModule = require(game:GetService("CorePackages").Packages.t)
-local var1 = tModule.strictInterface({
-	period = tModule.number,
-	threshold = tModule.number,
-	processInterval = tModule.number
+﻿local RunService = game:GetService("RunService")
+local TModule = require(game:GetService("CorePackages").Packages.t)
+local StrictInterfaceResult = TModule.strictInterface({
+	period = TModule.number,
+	threshold = TModule.number,
+	processInterval = TModule.number
 })
-local t = {}
-t.__index = t
+local RateLimiterModule = {}
+RateLimiterModule.__index = RateLimiterModule
 
-function t.new(p1)
-	-- upvalues: var1 (ref), t (ref)
-	assert(var1(p1))
+function RateLimiterModule.new(p1) --[[ Line: 16 ]]
+	-- upvalues: StrictInterfaceResult (copy), RateLimiterModule (copy)
+	assert(StrictInterfaceResult(p1))
 	
-	return setmetatable({
+	return (setmetatable({
 		_lastProcessed = 0,
 		_period = p1.period,
 		_threshold = p1.threshold,
 		_processInterval = p1.processInterval,
 		_counts = {},
 		_lastOccurrences = {}
-	}, t)
+	}, RateLimiterModule))
 end
 
-function t:increment(p1, p2)
-	self._lastOccurrences[p1] = p2 or os.clock()
+function RateLimiterModule:increment(Key, p1) --[[ Line: 29 ]]
+	self._lastOccurrences[Key] = p1 or os.clock()
 	
-	if self._counts[p1] == nil then
-		self._counts[p1] = 1
+	if self._counts[Key] == nil then
+		self._counts[Key] = 1
 		
 		return
+	else
+		local Counts = self._counts
+		Counts[Key] += 1
 	end
-	self._counts[p1] += 1
 end
 
-function t:isRateLimited(p1)
-	local var2 = self._counts[p1]
+function RateLimiterModule:isRateLimited(p1): boolean --[[ Line: 40 ]]
+	local Count = self._counts[p1]
 	
-	return var2 ~= nil and self._threshold < var2
+	return Count ~= nil and self._threshold < Count
 end
 
-function t:startDecrementClock()
-	-- upvalues: runService (ref)
-	self._decrementConnection = runService.Heartbeat:Connect(function()
-		-- upvalues: self (ref)
+function RateLimiterModule:startDecrementClock() --[[ Line: 45 ]]
+	-- upvalues: RunService (copy)
+	self._decrementConnection = RunService.Heartbeat:Connect(function() --[[ Line: 46 ]]
+		-- upvalues: self (copy)
 		self:stepDecrementClock(os.clock())
 	end)
 end
 
-function t:stepDecrementClock(p1)
-	if self._processInterval < p1 - self._lastProcessed then
-		for i, v in pairs(self._lastOccurrences) do
-			if self._period < p1 - v then
-				self._counts[i] -= 1
+function RateLimiterModule:stepDecrementClock(_lastProcessed) --[[ Line: 51 ]]
+	if self._processInterval < _lastProcessed - self._lastProcessed then
+		for i, lastOccurrence in pairs(self._lastOccurrences) do
+			if self._period < _lastProcessed - lastOccurrence then
+				local Counts = self._counts
+				Counts[i] -= 1
 				
 				if self._counts[i] <= 0 then
 					self._counts[i] = nil
@@ -59,8 +62,8 @@ function t:stepDecrementClock(p1)
 				end
 			end
 		end
-		self._lastProcessed = p1
+		self._lastProcessed = _lastProcessed
 	end
 end
 
-return t
+return RateLimiterModule

@@ -1,88 +1,88 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local inGameMenuDependenciesModule = require(corePackagesService.Packages.InGameMenuDependencies)
-local roact = inGameMenuDependenciesModule.Roact
-local roactRodux = inGameMenuDependenciesModule.RoactRodux
-local t = inGameMenuDependenciesModule.t
-local withFoundationOrUIBloxStyle = require(corePackagesService.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
-local pageModule = require(script.Parent.Parent.Page)
-local closeMenuModule = require(script.Parent.Parent.Parent.Thunks.CloseMenu)
+﻿local CorePackages = game:GetService("CorePackages")
+local InGameMenuDependenciesModule = require(CorePackages.Packages.InGameMenuDependencies)
+local Roact = InGameMenuDependenciesModule.Roact
+local RoactRodux = InGameMenuDependenciesModule.RoactRodux
+local T = InGameMenuDependenciesModule.t
+local WithFoundationOrUIBloxStyleFunction = require(CorePackages.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
+local PageModule = require(script.Parent.Parent.Page)
+local CloseMenuModule = require(script.Parent.Parent.Parent.Thunks.CloseMenu)
 local VRComfortAutoToggleEntryModule = nil
-local comfortSettingsEntryModule = nil
+local ComfortSettingsEntryModule = nil
 
 if game:GetEngineFeature("VRMoreComfortSettings") then
 	VRComfortAutoToggleEntryModule = require(script.Parent.VRComfortAutoToggleEntry)
-	comfortSettingsEntryModule = require(script.Parent.ComfortSettingsEntry)
+	ComfortSettingsEntryModule = require(script.Parent.ComfortSettingsEntry)
 end
-local VRComfortSettingsPage = roact.PureComponent:extend("VRComfortSettingsPage")
-VRComfortSettingsPage.validateProps = t.strictInterface({ closeMenu = t.callback, pageTitle = t.string })
+local VRComfortSettingsPage = Roact.PureComponent:extend("VRComfortSettingsPage")
+VRComfortSettingsPage.validateProps = T.strictInterface({ closeMenu = T.callback, pageTitle = T.string })
 
-local function _()
-	local var1 = 0
+local function _() --[[ Line: 25 | Named "createLayoutOrderGenerator" ]]
+	local v1 = 0
 	
-	return function()
-		-- upvalues: var1 (write)
-		var1 += 1
+	return function(): number --[[ Line: 27 ]]
+		-- upvalues: v1 (ref)
+		v1 += 1
 		
-		return var1
+		return v1
 	end
 end
 
-function VRComfortSettingsPage.render(p1)
-	-- upvalues: withFoundationOrUIBloxStyle (ref), roact (ref), pageModule (ref), comfortSettingsEntryModule (write), VRComfortAutoToggleEntryModule (write)
-	return withFoundationOrUIBloxStyle(function(_)
+function VRComfortSettingsPage.render(p1) --[[ Line: 33 ]]
+	-- upvalues: WithFoundationOrUIBloxStyleFunction (copy), Roact (copy), PageModule (copy), ComfortSettingsEntryModule (ref), VRComfortAutoToggleEntryModule (ref)
+	return WithFoundationOrUIBloxStyleFunction(function(_) --[[ Line: 34 ]]
 		return {}
-	end, function(_)
-		-- upvalues: roact (copy), pageModule (copy), p1 (ref), comfortSettingsEntryModule (copy), VRComfortAutoToggleEntryModule (copy)
-		local var1 = 0
+	end, function(_) --[[ Line: 36 ]]
+		-- upvalues: Roact (upval), PageModule (upval), p1 (copy), ComfortSettingsEntryModule (upval), VRComfortAutoToggleEntryModule (upval)
+		local v1 = 0
 		
-		local var2 = function()
-			-- upvalues: var1 (write)
-			var1 += 1
+		local function v13(): number --[[ Line: 27 ]]
+			-- upvalues: v1 (ref)
+			v1 += 1
 			
-			return var1
+			return v1
 		end
 		
-		return roact.createElement(pageModule, {
+		return Roact.createElement(PageModule, {
 			zIndex = 2,
 			pageTitle = p1.props.pageTitle,
 			position = p1.props.position
 		}, {
-			Layout = roact.createElement("UIListLayout", {
+			Layout = Roact.createElement("UIListLayout", {
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				HorizontalAlignment = Enum.HorizontalAlignment.Right,
 				VerticalAlignment = Enum.VerticalAlignment.Top
 			}),
-			VRComfortSettings = if game:GetEngineFeature("VRMoreComfortSettings") then roact.createElement(comfortSettingsEntryModule, { LayoutOrder = var2() }) else nil,
-			VignetteEnabled = if game:GetEngineFeature("VRMoreComfortSettings") then roact.createElement(VRComfortAutoToggleEntryModule, {
+			VRComfortSettings = if game:GetEngineFeature("VRMoreComfortSettings") then Roact.createElement(ComfortSettingsEntryModule, { LayoutOrder = v13() }) else nil,
+			VignetteEnabled = if game:GetEngineFeature("VRMoreComfortSettings") then Roact.createElement(VRComfortAutoToggleEntryModule, {
 				labelKey = "CoreScripts.InGameMenu.GameSettings.VignetteEnabled",
 				customValueKey = "VignetteEnabledCustomOption",
 				derivedValueKey = "VignetteEnabled",
-				LayoutOrder = var2()
+				LayoutOrder = v13()
 			}) else nil,
-			VRSteppedRotationEnabled = if game:GetEngineFeature("VRMoreComfortSettings") then roact.createElement(VRComfortAutoToggleEntryModule, {
+			VRSteppedRotationEnabled = if game:GetEngineFeature("VRMoreComfortSettings") then Roact.createElement(VRComfortAutoToggleEntryModule, {
 				labelKey = "CoreScripts.InGameMenu.GameSettings.VRSteppedRotationEnabled",
 				customValueKey = "VRSmoothRotationEnabledCustomOption",
 				derivedValueKey = "VRSmoothRotationEnabled",
 				checkedValue = false,
-				LayoutOrder = var2()
+				LayoutOrder = v13()
 			}) else nil,
-			VRThirdPersonFixedCamEnabled = if game:GetEngineFeature("VRMoreComfortSettings") then roact.createElement(VRComfortAutoToggleEntryModule, {
+			VRThirdPersonFixedCamEnabled = if game:GetEngineFeature("VRMoreComfortSettings") then Roact.createElement(VRComfortAutoToggleEntryModule, {
 				labelKey = "CoreScripts.InGameMenu.GameSettings.VRThirdPersonFixedCamEnabled",
 				customValueKey = "VRThirdPersonFollowCamEnabledCustomOption",
 				derivedValueKey = "VRThirdPersonFollowCamEnabled",
 				checkedValue = false,
-				LayoutOrder = var2()
+				LayoutOrder = v13()
 			}) else nil
 		})
 	end)
 end
 
-return roactRodux.UNSTABLE_connect2(nil, function(p1)
-	-- upvalues: closeMenuModule (ref)
+return RoactRodux.UNSTABLE_connect2(nil, function(Callback) --[[ Line: 84 ]]
+	-- upvalues: CloseMenuModule (copy)
 	return {
-		closeMenu = function()
-			-- upvalues: p1 (ref), closeMenuModule (copy)
-			p1(closeMenuModule)
+		closeMenu = function() --[[ Line: 86 ]]
+			-- upvalues: Callback (copy), CloseMenuModule (upval)
+			Callback(CloseMenuModule)
 		end
 	}
 end)(VRComfortSettingsPage)

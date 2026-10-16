@@ -1,30 +1,30 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceSlotBasedEditor").Parent
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useNavigation = require(parent.Navigation).useNavigation
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceSlotBasedEditor").Parent
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
 local _ = require(script.Parent.OutfitDetailsActionBar)
-local avatarScreen = require(parent.AvatarExperienceNavigation).Enums.AvatarScreen
+local AvatarScreen = require(Parent.AvatarExperienceNavigation).Enums.AvatarScreen
 
-return function(p1)
-	-- upvalues: useNavigation (ref), useLocalization (ref), reactModule (ref), avatarScreen (ref)
-	local var1 = useNavigation()
-	local outfitId = p1.outfitId
-	local var2 = useLocalization({
+return function(Frame) --[[ Line: 17 | Named "useOutfitDetailsActionBarProps" ]]
+	-- upvalues: UseNavigationFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), AvatarScreen (copy)
+	local UseNavigationResult = UseNavigationFunction()
+	local OutfitId = Frame.outfitId
+	local UseLocalizationResult = UseLocalizationFunction({
 		rename = "Feature.Avatar.Action.Rename",
 		delete = "Feature.Avatar.Action.Delete"
 	})
 	
 	return {
-		renameText = var2.rename,
-		deleteText = var2.delete,
-		onRenameOutfit = reactModule.useCallback(function()
-			-- upvalues: var1 (ref), avatarScreen (copy), outfitId (ref)
-			var1.navigate(avatarScreen.RenameOutfitDialog, { outfitId = outfitId })
-		end, { var1, outfitId }),
-		onDeleteOutfit = reactModule.useCallback(function()
-			-- upvalues: var1 (ref), avatarScreen (copy), outfitId (ref)
-			var1.navigate(avatarScreen.DeleteOutfitDialog, { outfitIds = { outfitId } })
-		end, { var1, outfitId }),
-		LayoutOrder = p1.LayoutOrder
+		renameText = UseLocalizationResult.rename,
+		deleteText = UseLocalizationResult.delete,
+		onRenameOutfit = ReactModule.useCallback(function() --[[ Line: 26 ]]
+			-- upvalues: UseNavigationResult (copy), AvatarScreen (upval), OutfitId (copy)
+			UseNavigationResult.navigate(AvatarScreen.RenameOutfitDialog, { outfitId = OutfitId })
+		end, { UseNavigationResult, OutfitId }),
+		onDeleteOutfit = ReactModule.useCallback(function() --[[ Line: 32 ]]
+			-- upvalues: UseNavigationResult (copy), AvatarScreen (upval), OutfitId (copy)
+			UseNavigationResult.navigate(AvatarScreen.DeleteOutfitDialog, { outfitIds = { OutfitId } })
+		end, { UseNavigationResult, OutfitId }),
+		LayoutOrder = Frame.LayoutOrder
 	}
 end

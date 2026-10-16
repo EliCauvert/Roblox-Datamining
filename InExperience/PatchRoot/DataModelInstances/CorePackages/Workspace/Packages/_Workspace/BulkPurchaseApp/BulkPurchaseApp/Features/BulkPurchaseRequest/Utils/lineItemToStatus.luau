@@ -1,4 +1,4 @@
-﻿local t = {
+﻿local config = {
 	INSUFFICIENT_ROBUX = Enum.MarketplaceItemPurchaseStatus.InsufficientRobux,
 	QUOTA_EXCEEDED = Enum.MarketplaceItemPurchaseStatus.QuotaExceeded,
 	NOT_FOR_SALE = Enum.MarketplaceItemPurchaseStatus.NotForSale,
@@ -12,9 +12,9 @@
 	PURCHASE_PLACE_INVALID = Enum.MarketplaceItemPurchaseStatus.PlaceInvalid
 }
 
-return function(p1)
-	-- upvalues: t (ref)
-	local errorReason = t[p1.errorReason]
+return function(p1) --[[ Line: 20 | Named "lineItemToStatus" ]]
+	-- upvalues: config (copy)
+	local Entry = config[p1.errorReason]
 	
-	return if p1.status == "SUCCEEDED" then Enum.MarketplaceItemPurchaseStatus.Success else errorReason or Enum.MarketplaceItemPurchaseStatus.SystemError
+	return if p1.status == "SUCCEEDED" then Enum.MarketplaceItemPurchaseStatus.Success elseif Entry then Entry else Enum.MarketplaceItemPurchaseStatus.SystemError
 end

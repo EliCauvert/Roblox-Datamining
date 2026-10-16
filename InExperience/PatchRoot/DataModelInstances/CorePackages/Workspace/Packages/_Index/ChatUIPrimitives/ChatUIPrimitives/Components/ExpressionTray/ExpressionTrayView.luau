@@ -1,176 +1,172 @@
-﻿local chatUIPrimitives = script:FindFirstAncestor("ChatUIPrimitives")
-local parent = chatUIPrimitives.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local expressionEntryButtonViewModule = require(script.Parent.ExpressionEntryButtonView)
-local expressionFlyOutViewModule = require(script.Parent.ExpressionFlyOutView)
-local expressionTrayFocusRootModule = require(script.Parent.ExpressionTrayFocusRoot)
-local expressionTabBarModule = require(script.Parent.ExpressionTabBar)
-local expressionSheetViewModule = require(script.Parent.ExpressionSheetView)
-local expressionPillViewModule = require(script.Parent.ExpressionPillView)
-local expressionKey = require(script.Parent.expressionKey).expressionKey
-local _ = require(chatUIPrimitives.UniversalMessage.Types)
-local _ = require(chatUIPrimitives.Hooks.useLayoutMode)
-local createNextOrder = require(parent.ReactUtils).createNextOrder
+﻿local ChatUIPrimitives = script:FindFirstAncestor("ChatUIPrimitives")
+local Parent = ChatUIPrimitives.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local ExpressionEntryButtonViewModule = require(script.Parent.ExpressionEntryButtonView)
+local ExpressionFlyOutViewModule = require(script.Parent.ExpressionFlyOutView)
+local ExpressionTrayFocusRootModule = require(script.Parent.ExpressionTrayFocusRoot)
+local ExpressionTabBarModule = require(script.Parent.ExpressionTabBar)
+local ExpressionSheetViewModule = require(script.Parent.ExpressionSheetView)
+local ExpressionPillViewModule = require(script.Parent.ExpressionPillView)
+local ExpressionKeyFunction = require(script.Parent.expressionKey).expressionKey
+local _ = require(ChatUIPrimitives.UniversalMessage.Types)
+local _ = require(ChatUIPrimitives.Hooks.useLayoutMode)
+local CreateNextOrderFunction = require(Parent.ReactUtils).createNextOrder
 
-local function _(p1)
-	return if p1.kind == "plain-text" then p1.text elseif p1.kind == "preset" then p1.text or "" elseif p1.kind == "emoji" then p1.unicode or (p1.name or (p1.altText or "")) else p1.altText or ""
+local function _(p1) --[[ Line: 56 | Named "expressionText" ]]
+	return if p1.kind == "plain-text" then p1.text else (if p1.kind == "preset" then p1.text else p1.kind == "emoji" and (p1.unicode or p1.name) or p1.altText) or ""
 end
 
-local function buildEntryButton(p1, p2)
-	-- upvalues: reactModule (ref), expressionEntryButtonViewModule (ref), foundationModule (ref)
-	return reactModule.createElement(expressionEntryButtonViewModule, {
+local function buildEntryButton(p1, ButtonRef) --[[ Line: 67 ]]
+	-- upvalues: ReactModule (copy), ExpressionEntryButtonViewModule (copy), FoundationModule (copy)
+	return ReactModule.createElement(ExpressionEntryButtonViewModule, {
 		onActivated = p1.onEntryActivated,
 		isActive = p1.isOpen,
-		size = foundationModule.Enums.InputSize.Medium,
-		buttonRef = p2
+		size = FoundationModule.Enums.InputSize.Medium,
+		buttonRef = ButtonRef
 	})
 end
 
-local function buildContent(p1, p2)
-	-- upvalues: createNextOrder (ref), expressionKey (ref), reactModule (ref), expressionPillViewModule (ref), foundationModule (ref), expressionTabBarModule (ref)
-	local v
-	local var1 = nil
+local function buildContent(p1, DefaultFocusRef) --[[ Line: 76 ]]
+	-- upvalues: CreateNextOrderFunction (copy), ExpressionKeyFunction (copy), ReactModule (copy), ExpressionPillViewModule (copy), FoundationModule (copy), ExpressionTabBarModule (copy)
+	local v1 = nil
 	
-	for i, v in p1.categoryGroups do
-		if v.categoryGroupId == p1.activeGroupId then
-			var1 = v
+	for _, categoryGroup in p1.categoryGroups do
+		if categoryGroup.categoryGroupId == p1.activeGroupId then
+			v1 = categoryGroup
 			break
 		end
 	end
-	local t = {}
+	local Tabs = {}
 	
-	for v, v_1 in p1.categoryGroups do
-		table.insert(t, {
-			id = v_1.categoryGroupId,
-			text = v_1.name or v_1.categoryGroupId
+	for _, categoryGroup1 in p1.categoryGroups do
+		table.insert(Tabs, {
+			id = categoryGroup1.categoryGroupId,
+			text = categoryGroup1.name or categoryGroup1.categoryGroupId
 		})
 	end
-	local var2 = createNextOrder()
-	local t_1 = {}
-	local var3 = false
+	local NextOrder = CreateNextOrderFunction()
+	local Elements = {}
+	local Flag = false
 	
-	if var1 then
-		for i_2, v_2 in var1.categories do
-			local t_2 = {}
+	if v1 then
+		for _, category in v1.categories do
+			local Elements1 = {}
 			
-			for i_3, v_3 in v_2.items do
-				local content = v_3.content
-				local var4 = if p1.cooldownKeyForContent ~= nil then content.kind else p1.cooldownKeyForContent(content)
-				local var5 = if var4 == nil or p1.cooldownEndsAtByKey == nil then nil else p1.cooldownEndsAtByKey[var4]
-				local var6 = p2 ~= nil and not var3
+			for LayoutOrder, item in category.items do
+				local Content = item.content
+				local Kind = if p1.cooldownKeyForContent == nil then Content.kind else p1.cooldownKeyForContent(Content)
+				local CooldownEndsAtByKeyEntry = if Kind == nil or p1.cooldownEndsAtByKey == nil then nil else p1.cooldownEndsAtByKey[Kind]
+				local NoFlag: boolean = DefaultFocusRef ~= nil and not Flag
 				
-				if var6 then
-					var3 = true
+				if NoFlag then
+					Flag = true
 				end
-				local var7 = expressionKey(content)
-				local createElement = reactModule.createElement
-				local var8 = expressionPillViewModule
-				local t_3 = {}
-				local var9 = if content.kind == "plain-text" then content.text else content.kind ~= "preset" and ((if content.kind ~= "preset" then content.text else nil) or "")
-				t_3.text = var9
-				t_3.content = content
-				t_3.layoutOrder = i_3
-				t_3.cooldownDurationSeconds = p1.cooldownDurationSeconds
-				t_3.cooldownEndsAt = var5
-				t_3.onActivated = p1.onExpressionActivated
-				t_3.buttonRef = if var6 then p2 else nil
-				t_2[var7] = createElement(var8, t_3)
+				Elements1[ExpressionKeyFunction(Content)] = ReactModule.createElement(ExpressionPillViewModule, {
+					text = if Content.kind == "plain-text" then Content.text else (if Content.kind == "preset" then Content.text else Content.kind == "emoji" and (Content.unicode or Content.name) or Content.altText) or "",
+					content = Content,
+					layoutOrder = LayoutOrder,
+					cooldownDurationSeconds = p1.cooldownDurationSeconds,
+					cooldownEndsAt = CooldownEndsAtByKeyEntry,
+					onActivated = p1.onExpressionActivated,
+					buttonRef = if NoFlag then DefaultFocusRef else nil
+				})
 			end
-			local var10 = createNextOrder()
-			t_1["Category_" .. v_2.categoryId] = reactModule.createElement(foundationModule.View, {
+			local NextOrder1 = CreateNextOrderFunction()
+			Elements["Category_" .. category.categoryId] = ReactModule.createElement(FoundationModule.View, {
 				tag = "col gap-small size-full-0 auto-y",
-				LayoutOrder = var2()
+				LayoutOrder = NextOrder()
 			}, {
-				Header = reactModule.createElement(foundationModule.Text, {
+				Header = ReactModule.createElement(FoundationModule.Text, {
 					tag = "size-full-0 auto-y text-label-medium text-align-x-left content-default",
-					LayoutOrder = var10(),
-					Text = v_2.name or v_2.categoryId
+					LayoutOrder = NextOrder1(),
+					Text = category.name or category.categoryId
 				}),
-				Messages = reactModule.createElement(foundationModule.View, {
+				Messages = ReactModule.createElement(FoundationModule.View, {
 					tag = "size-full-0 auto-y",
-					LayoutOrder = var10(),
+					LayoutOrder = NextOrder1(),
 					layout = {
 						Wraps = true,
 						FillDirection = Enum.FillDirection.Horizontal,
 						SortOrder = Enum.SortOrder.LayoutOrder,
 						Padding = UDim.new(0, 8)
 					}
-				}, t_2)
+				}, Elements1)
 			})
 		end
 	end
 	if p1.footerText then
-		t_1.Footer = reactModule.createElement(foundationModule.Text, {
+		Elements.Footer = ReactModule.createElement(FoundationModule.Text, {
 			TextWrapped = true,
 			tag = "size-full-0 auto-y text-body-small text-align-x-left content-muted",
-			LayoutOrder = var2(),
+			LayoutOrder = NextOrder(),
 			Text = p1.footerText,
 			selection = if p1.focusNavEnabled == true then { Selectable = true } else nil
 		})
 	end
-	v = createNextOrder()
+	local NextOrder2 = CreateNextOrderFunction()
 	
-	return reactModule.createElement(foundationModule.View, { tag = "col size-full" }, {
-		Header = reactModule.createElement(expressionTabBarModule, {
-			LayoutOrder = v(),
-			tabs = t,
+	return ReactModule.createElement(FoundationModule.View, { tag = "col size-full" }, {
+		Header = ReactModule.createElement(ExpressionTabBarModule, {
+			LayoutOrder = NextOrder2(),
+			tabs = Tabs,
 			activeTabId = p1.activeGroupId,
 			onTabActivated = p1.onGroupActivated,
 			onKeyboardActivated = p1.onKeyboardActivated,
 			showKeyboardButton = p1.layoutMode == "Tray" and p1.canLocalUserChat,
 			focusNavEnabled = p1.focusNavEnabled == true
 		}),
-		Divider = reactModule.createElement(foundationModule.Divider, { LayoutOrder = v() }),
-		Scroll = reactModule.createElement(foundationModule.ScrollView, {
+		Divider = ReactModule.createElement(FoundationModule.Divider, { LayoutOrder = NextOrder2() }),
+		Scroll = ReactModule.createElement(FoundationModule.ScrollView, {
 			tag = "grow size-full-0",
-			LayoutOrder = v(),
+			LayoutOrder = NextOrder2(),
 			scroll = {
-				scrollBarVisibility = foundationModule.Enums.ScrollBarVisibility.Always,
+				scrollBarVisibility = FoundationModule.Enums.ScrollBarVisibility.Always,
 				AutomaticCanvasSize = Enum.AutomaticSize.Y,
 				CanvasSize = UDim2.fromScale(0, 0)
 			},
 			selection = if p1.focusNavEnabled then { Selectable = false } else nil
 		}, {
-			Categories = reactModule.createElement(foundationModule.View, { tag = "col gap-large size-full-0 auto-y padding-large" }, t_1)
+			Categories = ReactModule.createElement(FoundationModule.View, { tag = "col gap-large size-full-0 auto-y padding-large" }, Elements)
 		})
 	})
 end
 
-local function buildFlyOut(p3, p4)
-	-- upvalues: reactModule (ref), expressionFlyOutViewModule (ref), expressionEntryButtonViewModule (ref), foundationModule (ref), buildContent (ref)
-	return reactModule.createElement(expressionFlyOutViewModule, {
-		isOpen = p3.isOpen,
-		focusNavEnabled = p3.focusNavEnabled,
-		onPressedOutside = p3.onPressedOutside,
-		anchorContent = reactModule.createElement(expressionEntryButtonViewModule, {
-			onActivated = p3.onEntryActivated,
-			isActive = p3.isOpen,
-			size = foundationModule.Enums.InputSize.Medium,
-			buttonRef = if p4 then p4.entryButtonRef else nil
+local function buildFlyOut(p2, p3) --[[ Line: 193 ]]
+	-- upvalues: ReactModule (copy), ExpressionFlyOutViewModule (copy), ExpressionEntryButtonViewModule (copy), FoundationModule (copy), buildContent (copy)
+	return ReactModule.createElement(ExpressionFlyOutViewModule, {
+		isOpen = p2.isOpen,
+		focusNavEnabled = p2.focusNavEnabled,
+		onPressedOutside = p2.onPressedOutside,
+		anchorContent = ReactModule.createElement(ExpressionEntryButtonViewModule, {
+			onActivated = p2.onEntryActivated,
+			isActive = p2.isOpen,
+			size = FoundationModule.Enums.InputSize.Medium,
+			buttonRef = if p3 then p3.entryButtonRef else nil
 		}),
-		content = buildContent(p3, if p4 then p4.defaultFocusRef else nil),
-		contentRef = if p4 then p4.containerRef else nil
+		content = buildContent(p2, if p3 then p3.defaultFocusRef else nil),
+		contentRef = if p3 then p3.containerRef else nil
 	})
 end
 
-return reactModule.memo(function(p3)
-	-- upvalues: buildEntryButton (ref), reactModule (ref), expressionSheetViewModule (ref), buildContent (ref), expressionTrayFocusRootModule (ref), buildFlyOut (ref)
-	if not p3.isVisible then
+return ReactModule.memo(function(p2) --[[ Line: 204 | Named "ExpressionTrayView" ]]
+	-- upvalues: buildEntryButton (copy), ReactModule (copy), ExpressionSheetViewModule (copy), buildContent (copy), ExpressionTrayFocusRootModule (copy), buildFlyOut (copy)
+	if p2.isVisible then
+		local LayoutMode = p2.layoutMode or "FlyOut"
+		local Variant = p2.variant or "entry"
+		
+		return if Variant == "overlay" and LayoutMode ~= "Tray" then nil elseif Variant == "entry" and LayoutMode == "Tray" then buildEntryButton(p2, nil) elseif Variant == "overlay" then ReactModule.createElement(ExpressionSheetViewModule, {
+			isOpen = p2.isOpen,
+			onPressedOutside = p2.onPressedOutside,
+			content = buildContent(p2, nil)
+		}) elseif p2.focusNavEnabled == true then ReactModule.createElement(ExpressionTrayFocusRootModule, {
+			isOpen = p2.isOpen,
+			render = function(p3) --[[ Line: 231 ]]
+				-- upvalues: buildFlyOut (upval), p2 (copy)
+				return buildFlyOut(p2, p3)
+			end
+		}) else buildFlyOut(p2, nil)
+	else
 		return nil
 	end
-	local layoutMode = p3.layoutMode or "FlyOut"
-	local variant = p3.variant or "entry"
-	
-	return if variant == "overlay" and layoutMode ~= "Tray" then nil elseif variant == "entry" and layoutMode == "Tray" then buildEntryButton(p3, nil) elseif variant == "overlay" then reactModule.createElement(expressionSheetViewModule, {
-		isOpen = p3.isOpen,
-		onPressedOutside = p3.onPressedOutside,
-		content = buildContent(p3, nil)
-	}) elseif p3.focusNavEnabled == true then reactModule.createElement(expressionTrayFocusRootModule, {
-		isOpen = p3.isOpen,
-		render = function(p4)
-			-- upvalues: buildFlyOut (copy), p3 (ref)
-			return buildFlyOut(p3, p4)
-		end
-	}) else buildFlyOut(p3, nil)
 end)

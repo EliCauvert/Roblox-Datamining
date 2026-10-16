@@ -1,6 +1,6 @@
-﻿local getPresetIconSizeModule = require(script.Parent.getPresetIconSize)
+﻿local GetPresetIconSizeModule = require(script.Parent.getPresetIconSize)
 
-return function(value)
-	-- upvalues: getPresetIconSizeModule (ref)
-	return `<font size='{getPresetIconSizeModule(value)}' weight='700' family='rbxasset://LuaPackages/Packages/_Index/BuilderIcons/BuilderIcons/BuilderIcons.json'>lightning-bolt</font>`
+return function(p1): string --[[ Line: 12 | Named "getPresetIconRichText" ]]
+	-- upvalues: GetPresetIconSizeModule (copy)
+	return `<font size='{GetPresetIconSizeModule(p0)}' weight='700' family='rbxasset://LuaPackages/Packages/_Index/BuilderIcons/BuilderIcons/BuilderIcons.json'>lightning-bolt</font>`
 end

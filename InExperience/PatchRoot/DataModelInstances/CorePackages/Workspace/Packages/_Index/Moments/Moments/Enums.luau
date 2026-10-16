@@ -2,6 +2,7 @@
 	DialogType = require(script.DialogType),
 	FTUXType = require(script.FTUXType),
 	MomentUnavailableReason = require(script.MomentUnavailableReason),
+	NavigationDestinationType = require(script.NavigationDestinationType),
 	NavigationRoute = require(script.NavigationRoute),
 	ReactionAction = require(script.ReactionAction),
 	ReactionType = require(script.ReactionType),

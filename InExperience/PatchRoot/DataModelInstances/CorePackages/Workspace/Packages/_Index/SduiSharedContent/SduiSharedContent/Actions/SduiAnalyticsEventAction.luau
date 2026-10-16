@@ -1,68 +1,68 @@
 ﻿local _ = require(script:FindFirstAncestor("SduiSharedContent").Parent.SduiCoreSystem)
 
-local function _(p1)
-	local var1 = typeof(p1)
+local function _(p1): boolean --[[ Line: 11 | Named "isScalar" ]]
+	local ValueType = typeof(p1)
 	
-	return if var1 ~= "string" then if var1 ~= "number" then var1 == "boolean" else true else true
+	return ValueType == "string" or (ValueType == "number" or ValueType == "boolean")
 end
 
-local function mergeScalars(p1, p2, p3)
-	if p2 == nil then return end
-	for i, v in p2 do
-		if not p3 or not p3[i] then
-			local var1 = typeof(v)
+local function mergeScalars(p1, ActionParams, p2) --[[ Line: 16 ]]
+	if ActionParams == nil then return end
+	for i, actionParam in ActionParams do
+		if not p2 or not p2[i] then
+			local ValueType = typeof(actionParam)
 			
-			if if var1 ~= "string" then if var1 ~= "number" then var1 == "boolean" else true else true then
-				p1[i] = v
+			if ValueType == "string" or (ValueType == "number" or ValueType == "boolean") then
+				p1[i] = actionParam
 			end
 		end
 	end
 end
 
-local t = { eventName = true, eventFields = true }
+local config = { eventName = true, eventFields = true }
 
-return function(p4, p5, p6)
-	-- upvalues: mergeScalars (ref), t (ref)
-	local var2 = if p4 then p4.actionParams else nil
+return function(p3, p4, p5) --[[ Line: 32 | Named "SduiAnalyticsEventAction" ]]
+	-- upvalues: mergeScalars (copy), config (copy)
+	local ActionParams = p3 and p3.actionParams or nil
 	
-	if var2 == nil then return end
-	local eventName = var2.eventName
+	if ActionParams == nil then return end
+	local EventName = ActionParams.eventName
 	
-	if typeof(eventName) ~= "string" or eventName == "" then return end
-	local t_1 = {}
-	local ancestorAnalyticsData = p5.ancestorAnalyticsData
+	if typeof(EventName) ~= "string" or EventName == "" then return end
+	local t = {}
+	local AncestorAnalyticsData = p4.ancestorAnalyticsData
 	
-	if ancestorAnalyticsData ~= nil then
-		for i, v in ancestorAnalyticsData do
-			local var3 = typeof(v)
+	if AncestorAnalyticsData ~= nil then
+		for i, value in AncestorAnalyticsData do
+			local ValueType = typeof(value)
 			
-			if if var3 ~= "string" then if var3 ~= "number" then var3 == "boolean" else true else true then
-				t_1[i] = v
+			if ValueType == "string" or (ValueType == "number" or ValueType == "boolean") then
+				t[i] = value
 			end
 		end
 	end
-	local analyticsData = p5.analyticsData
+	local AnalyticsData = p4.analyticsData
 	
-	if analyticsData ~= nil then
-		for i, v in analyticsData do
-			local var4 = typeof(v)
+	if AnalyticsData ~= nil then
+		for i1, value1 in AnalyticsData do
+			local ValueType = typeof(value1)
 			
-			if if var4 ~= "string" then if var4 ~= "number" then var4 == "boolean" else true else true then
-				t_1[i] = v
+			if ValueType == "string" or (ValueType == "number" or ValueType == "boolean") then
+				t[i1] = value1
 			end
 		end
 	end
-	mergeScalars(t_1, var2, t)
-	local eventFields = var2.eventFields
+	mergeScalars(t, ActionParams, config)
+	local EventFields = ActionParams.eventFields
 	
-	if typeof(eventFields) == "table" and eventFields ~= nil then
-		for i, v in eventFields do
-			local var5 = typeof(v)
+	if typeof(EventFields) == "table" and EventFields ~= nil then
+		for i2, eventField in EventFields do
+			local ValueType = typeof(eventField)
 			
-			if if var5 ~= "string" then if var5 ~= "number" then var5 == "boolean" else true else true then
-				t_1[i] = v
+			if ValueType == "string" or (ValueType == "number" or ValueType == "boolean") then
+				t[i2] = eventField
 			end
 		end
 	end
-	p6.dependencies.eventIngest:sendEventDeferred(p6.appPage, eventName, t_1)
+	p5.dependencies.eventIngest:sendEventDeferred(p5.appPage, EventName, t)
 end

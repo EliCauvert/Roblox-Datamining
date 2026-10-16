@@ -1,48 +1,50 @@
-﻿local experienceService = game:GetService("ExperienceService")
+﻿local ExperienceService = game:GetService("ExperienceService")
 
 return {
-	LaunchExperience = function(_, p1, p2, p3)
-		-- upvalues: experienceService (ref)
-		if p2 == nil then
-			if p3 == nil then
-				experienceService:LaunchExperience(p1)
+	LaunchExperience = function(_, p1, Source, Callback) --[[ Line: 9 ]]
+		-- upvalues: ExperienceService (copy)
+		if Source == nil then
+			if Callback == nil then
+				ExperienceService:LaunchExperience(p1)
+				
+				return
+			else
+				ExperienceService:LaunchExperienceFromSourceWithCallback(p1, "", Callback)
 				
 				return
 			end
-			experienceService:LaunchExperienceFromSourceWithCallback(p1, "", p3)
+		elseif Callback == nil then
+			ExperienceService:LaunchExperienceFromSource(p1, Source)
 			
 			return
-		elseif p3 == nil then
-			experienceService:LaunchExperienceFromSource(p1, p2)
-			
-			return
+		else
+			ExperienceService:LaunchExperienceFromSourceWithCallback(p1, Source, Callback)
 		end
-		experienceService:LaunchExperienceFromSourceWithCallback(p1, p2, p3)
 	end,
-	RegisterForExperienceJoin = function(_, p1)
-		-- upvalues: experienceService (ref)
-		return experienceService:RegisterForExperienceJoin(p1)
+	RegisterForExperienceJoin = function(_, Callback) --[[ Line: 24 ]]
+		-- upvalues: ExperienceService (copy)
+		return (ExperienceService:RegisterForExperienceJoin(Callback))
 	end,
-	RegisterForExperienceLeave = function(_, p1)
-		-- upvalues: experienceService (ref)
-		return experienceService:RegisterForExperienceLeave(p1)
+	RegisterForExperienceLeave = function(_, Callback) --[[ Line: 28 ]]
+		-- upvalues: ExperienceService (copy)
+		return (ExperienceService:RegisterForExperienceLeave(Callback))
 	end,
-	LeaveExperienceWithReason = function(_, p1)
-		-- upvalues: experienceService (ref)
+	LeaveExperienceWithReason = function(_, Reason) --[[ Line: 33 ]]
+		-- upvalues: ExperienceService (copy)
 		if game:GetEngineFeature("ExperienceLeaveReasonEnabled") then
-			experienceService:LeaveExperienceWithReason(p1)
+			ExperienceService:LeaveExperienceWithReason(Reason)
 		end
 	end,
-	ConsumePendingExperienceLeaveWithReason = function(_)
-		-- upvalues: experienceService (ref)
-		return if game:GetEngineFeature("ExperienceLeaveReasonEnabled") then experienceService:ConsumePendingExperienceLeaveWithReason() else nil
+	ConsumePendingExperienceLeaveWithReason = function(_) --[[ Line: 39 ]]
+		-- upvalues: ExperienceService (copy)
+		return if game:GetEngineFeature("ExperienceLeaveReasonEnabled") then ExperienceService:ConsumePendingExperienceLeaveWithReason() else nil
 	end,
-	GetPendingJoinAttempt = function(_)
-		-- upvalues: experienceService (ref)
-		return experienceService:GetPendingJoinAttempt()
+	GetPendingJoinAttempt = function(_) --[[ Line: 46 ]]
+		-- upvalues: ExperienceService (copy)
+		return ExperienceService:GetPendingJoinAttempt()
 	end,
-	OnNewJoinAttempt = function(_)
-		-- upvalues: experienceService (ref)
-		return experienceService.OnNewJoinAttempt
+	OnNewJoinAttempt = function(_) --[[ Line: 50 ]]
+		-- upvalues: ExperienceService (copy)
+		return ExperienceService.OnNewJoinAttempt
 	end
 }

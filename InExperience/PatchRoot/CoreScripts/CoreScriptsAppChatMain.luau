@@ -1,92 +1,88 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local coreGuiService = game:GetService("CoreGui")
-local robloxGui = coreGuiService:WaitForChild("RobloxGui")
-local chatEntryPointNames = require(corePackagesService.Workspace.Packages.SocialCommon).Enums.ChatEntryPointNames
-local apolloClientModule = require(coreGuiService.RobloxGui.Modules.ApolloClient)
-local getFFlagFixSettingshubImportOrderModule = require(robloxGui.Modules.Flags.GetFFlagFixSettingshubImportOrder)
-local fFlagRemoveLoadingTimeoutModule = require(robloxGui.Modules.Flags.FFlagRemoveLoadingTimeout)
-local var1 = require(corePackagesService.Workspace.Packages.Chrome).Enabled()
+﻿local CorePackages = game:GetService("CorePackages")
+local CoreGui = game:GetService("CoreGui")
+local RobloxGui = CoreGui:WaitForChild("RobloxGui")
+local ChatEntryPointNames = require(CorePackages.Workspace.Packages.SocialCommon).Enums.ChatEntryPointNames
+local ApolloClientModule = require(CoreGui.RobloxGui.Modules.ApolloClient)
+local FFlagRemoveLoadingTimeoutModule = require(RobloxGui.Modules.Flags.FFlagRemoveLoadingTimeout)
+local EnabledResult = require(CorePackages.Workspace.Packages.Chrome).Enabled()
 
-if getFFlagFixSettingshubImportOrderModule() and (not fFlagRemoveLoadingTimeoutModule or not var1) then
-	coreGuiService:WaitForChild("TopBarApp", if fFlagRemoveLoadingTimeoutModule then 1e999 else nil)
+if require(RobloxGui.Modules.Flags.GetFFlagFixSettingshubImportOrder)() and (not FFlagRemoveLoadingTimeoutModule or not EnabledResult) then
+	CoreGui:WaitForChild("TopBarApp", if FFlagRemoveLoadingTimeoutModule then 1e999 else nil)
 end
-local settingsHubModule = require(robloxGui.Modules.Settings.SettingsHub)
-local parentContainerModule = require(corePackagesService.Workspace.Packages.AppChat.ParentContainer)
-local inExperienceAppChatModalModule = require(corePackagesService.Workspace.Packages.AppChat.InExperienceAppChatModal)
-local renderCoreScriptInExperienceAppChatModule = require(corePackagesService.Workspace.Packages.AppChat.renderCoreScriptInExperienceAppChat)
-local viewportUtilModule = require(robloxGui.Modules.Chrome.ChromeShared.Service.ViewportUtil)
-local chatSelectorModule = require(robloxGui.Modules.ChatSelector)
-local playerListManagerModule = require(robloxGui.Modules.PlayerList.PlayerListManager)
-local constantsModule = require(robloxGui.Modules.TopBar.Constants)
-local sharedFlagsModule = require(corePackagesService.Workspace.Packages.SharedFlags)
-local getFFlagIsSquadEnabled = sharedFlagsModule.GetFFlagIsSquadEnabled
-local var2 = if sharedFlagsModule.FFlagExpChatEnableFriendsTab and var1 then require(robloxGui.Modules.Chrome.Integrations.ExpChat.ChatChromeIntegration) else nil
-local expChatModule = require(corePackagesService.Workspace.Packages.ExpChat)
-local openConversationModule = require(corePackagesService.Workspace.Packages.FriendsChat.openConversation)
-local promiseModule = require(corePackagesService.Packages.Promise)
+local ParentContainerModule = require(CorePackages.Workspace.Packages.AppChat.ParentContainer)
+local InExperienceAppChatModalModule = require(CorePackages.Workspace.Packages.AppChat.InExperienceAppChatModal)
+local RenderCoreScriptInExperienceAppChatModule: (any, any, any) -> () = require(CorePackages.Workspace.Packages.AppChat.renderCoreScriptInExperienceAppChat)
+local ConstantsModule = require(RobloxGui.Modules.TopBar.Constants)
+local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
+local GetFFlagIsSquadEnabledFunction = SharedFlagsModule.GetFFlagIsSquadEnabled
+local ChatChromeIntegrationModule = if SharedFlagsModule.FFlagExpChatEnableFriendsTab and EnabledResult then require(RobloxGui.Modules.Chrome.Integrations.ExpChat.ChatChromeIntegration) else nil
+local ExpChatModule = require(CorePackages.Workspace.Packages.ExpChat)
+local OpenConversationModule = require(CorePackages.Workspace.Packages.FriendsChat.openConversation)
+local PromiseModule = require(CorePackages.Packages.Promise)
 local SSUIMetaLuaEngineFeature = game:GetEngineFeature("SSUIMetaLua")
-inExperienceAppChatModalModule.default:initialize(constantsModule.ApplyDisplayScale(constantsModule.TopBarTopMargin), settingsHubModule, viewportUtilModule, chatSelectorModule, playerListManagerModule)
+InExperienceAppChatModalModule.default:initialize(ConstantsModule.ApplyDisplayScale(ConstantsModule.TopBarTopMargin), require(RobloxGui.Modules.Settings.SettingsHub), require(RobloxGui.Modules.Chrome.ChromeShared.Service.ViewportUtil), require(RobloxGui.Modules.ChatSelector), (require(RobloxGui.Modules.PlayerList.PlayerListManager)))
 
 if SSUIMetaLuaEngineFeature then
-	pcall(function()
-		-- upvalues: inExperienceAppChatModalModule (ref)
-		local safetyService = game:GetService("SafetyService")
-		inExperienceAppChatModalModule.default.visibilitySignal.Event:Connect(function(p1)
-			-- upvalues: safetyService (ref)
+	pcall(function() --[[ Line: 46 ]]
+		-- upvalues: InExperienceAppChatModalModule (copy)
+		local SafetyService = game:GetService("SafetyService")
+		InExperienceAppChatModalModule.default.visibilitySignal.Event:Connect(function(p1) --[[ Line: 48 ]]
+			-- upvalues: SafetyService (copy)
 			if p1 then
-				safetyService:ReportPartyChatWindowOpen()
+				SafetyService:ReportPartyChatWindowOpen()
 				
 				return
+			else
+				SafetyService:ReportPartyChatWindowClose()
 			end
-			safetyService:ReportPartyChatWindowClose()
 		end)
 	end)
 end
-local var3 = if var2 then var2.chatOpenCapability else nil
-renderCoreScriptInExperienceAppChatModule(apolloClientModule, {
-	getParentContainer = function()
-		-- upvalues: inExperienceAppChatModalModule (ref)
-		return inExperienceAppChatModalModule.default.frame
+local ChatOpenCapability = if ChatChromeIntegrationModule then ChatChromeIntegrationModule.chatOpenCapability else nil
+RenderCoreScriptInExperienceAppChatModule(ApolloClientModule, {
+	getParentContainer = function() --[[ Line: 75 ]]
+		-- upvalues: InExperienceAppChatModalModule (copy)
+		return InExperienceAppChatModalModule.default.frame
 	end,
-	visibilitySignal = inExperienceAppChatModalModule.default.visibilitySignal.Event,
-	getRequestedRoute = function()
-		-- upvalues: inExperienceAppChatModalModule (ref)
-		return inExperienceAppChatModalModule.default.requestedRoute
+	visibilitySignal = InExperienceAppChatModalModule.default.visibilitySignal.Event,
+	getRequestedRoute = function() --[[ Line: 79 ]]
+		-- upvalues: InExperienceAppChatModalModule (copy)
+		return InExperienceAppChatModalModule.default.requestedRoute
 	end,
-	requestedRouteSignal = inExperienceAppChatModalModule.default.requestedRouteSignal.Event,
-	clearRequestedRoute = function()
-		-- upvalues: inExperienceAppChatModalModule (ref)
-		inExperienceAppChatModalModule.default:clearRequestedRoute()
+	requestedRouteSignal = InExperienceAppChatModalModule.default.requestedRouteSignal.Event,
+	clearRequestedRoute = function() --[[ Line: 83 ]]
+		-- upvalues: InExperienceAppChatModalModule (copy)
+		InExperienceAppChatModalModule.default:clearRequestedRoute()
 	end,
-	getShouldSetAppChatVisible = function(...)
-		-- upvalues: inExperienceAppChatModalModule (ref)
-		return inExperienceAppChatModalModule:getVisible()
+	getShouldSetAppChatVisible = function(...) --[[ Line: 86 ]]
+		-- upvalues: InExperienceAppChatModalModule (copy)
+		return InExperienceAppChatModalModule:getVisible()
 	end,
-	entryPoint = chatEntryPointNames.ChromeDropdown,
-	hideParentContainer = function()
-		-- upvalues: inExperienceAppChatModalModule (ref)
-		inExperienceAppChatModalModule.default:setVisible(false)
+	entryPoint = ChatEntryPointNames.ChromeDropdown,
+	hideParentContainer = function() --[[ Line: 91 ]]
+		-- upvalues: InExperienceAppChatModalModule (copy)
+		InExperienceAppChatModalModule.default:setVisible(false)
 	end,
-	showParentContainer = function()
-		-- upvalues: inExperienceAppChatModalModule (ref)
-		inExperienceAppChatModalModule.default:setVisible(true)
+	showParentContainer = function() --[[ Line: 94 ]]
+		-- upvalues: InExperienceAppChatModalModule (copy)
+		InExperienceAppChatModalModule.default:setVisible(true)
 	end,
-	updateCurrentSquadId = function(p1)
-		-- upvalues: getFFlagIsSquadEnabled (ref), inExperienceAppChatModalModule (ref)
-		if getFFlagIsSquadEnabled() then
-			inExperienceAppChatModalModule:setCurrentSquadId(p1)
+	updateCurrentSquadId = function(p1) --[[ Line: 97 ]]
+		-- upvalues: GetFFlagIsSquadEnabledFunction (copy), InExperienceAppChatModalModule (copy)
+		if GetFFlagIsSquadEnabledFunction() then
+			InExperienceAppChatModalModule:setCurrentSquadId(p1)
 		end
 	end,
-	openFriendsChatConversation = if var3 then parentContainerModule.createOpenFriendsChatConversation({
-		isChatAvailable = var3.isAvailable,
-		openConversation = openConversationModule,
-		requestSelectFriendsTab = expChatModule.requestSelectFriendsTab,
-		ensureOpenChat = var3.ensureOpenChat
-	}) else function(_)
-		-- upvalues: promiseModule (ref)
-		return promiseModule.resolve(false)
+	openFriendsChatConversation = if ChatOpenCapability then ParentContainerModule.createOpenFriendsChatConversation({
+		isChatAvailable = ChatOpenCapability.isAvailable,
+		openConversation = OpenConversationModule,
+		requestSelectFriendsTab = ExpChatModule.requestSelectFriendsTab,
+		ensureOpenChat = ChatOpenCapability.ensureOpenChat
+	}) else function(_) --[[ Line: 70 ]]
+		-- upvalues: PromiseModule (copy)
+		return PromiseModule.resolve(false)
 	end
-}, function(p1)
-	-- upvalues: inExperienceAppChatModalModule (ref)
-	inExperienceAppChatModalModule:setUnreadCount(p1)
+}, function(p1) --[[ Line: 58 ]]
+	-- upvalues: InExperienceAppChatModalModule (copy)
+	InExperienceAppChatModalModule:setUnreadCount(p1)
 end)

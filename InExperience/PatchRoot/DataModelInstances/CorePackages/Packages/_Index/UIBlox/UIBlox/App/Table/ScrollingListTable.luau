@@ -1,32 +1,31 @@
-﻿local parent = script.Parent.Parent.Parent
-local core = parent.Core
-local parent_1 = parent.Parent
-local reactModule = require(parent_1.React)
-local virtualizedList = require(parent_1.VirtualizedList).VirtualizedList
-local cryoModule = require(parent_1.Cryo)
-local withStyleModule = require(core.Style.withStyle)
-local t = { selectable = true, size = UDim2.fromScale(1, 1) }
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
+local VirtualizedList = require(Parent1.VirtualizedList).VirtualizedList
+local CryoModule = require(Parent1.Cryo)
+local WithStyleModule = require(Parent.Core.Style.withStyle)
+local config = { selectable = true, size = UDim2.fromScale(1, 1) }
 
-return function(p1)
-	-- upvalues: withStyleModule (ref), cryoModule (ref), t (ref), reactModule (ref), virtualizedList (ref)
-	return withStyleModule(function(p2)
-		-- upvalues: cryoModule (copy), t (copy), p1 (ref), reactModule (copy), virtualizedList (copy)
-		local var1 = cryoModule.Dictionary.join(t, p1)
-		local t_1 = {}
-		local cells = var1.cells
+return function(p1) --[[ Line: 39 | Named "ScrollingListTable" ]]
+	-- upvalues: WithStyleModule (copy), CryoModule (copy), config (copy), ReactModule (copy), VirtualizedList (copy)
+	return WithStyleModule(function(p2) --[[ Line: 40 ]]
+		-- upvalues: CryoModule (upval), config (upval), p1 (copy), ReactModule (upval), VirtualizedList (upval)
+		local JoinResult = CryoModule.Dictionary.join(config, p1)
+		local Data = {}
+		local Cells = JoinResult.cells
 		
-		for i, v in ipairs(cells) do
-			local text = "Cell " .. i
-			t_1[text] = reactModule.createElement("Frame", {
+		for LayoutOrder, cell in ipairs(Cells) do
+			local Text = "Cell " .. LayoutOrder
+			Data[Text] = ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
-				LayoutOrder = i,
+				LayoutOrder = LayoutOrder,
 				Size = UDim2.fromScale(1, 0),
 				AutomaticSize = Enum.AutomaticSize.Y,
-				Name = text
+				Name = Text
 			}, {
-				Content = v,
-				Divider = i < #cells and reactModule.createElement("Frame", {
+				Content = cell,
+				Divider = LayoutOrder < #Cells and ReactModule.createElement("Frame", {
 					BorderSizePixel = 0,
 					ZIndex = 100,
 					Size = UDim2.new(1, -24, 0, 1),
@@ -36,30 +35,30 @@ return function(p1)
 				}) or nil
 			})
 		end
-		return reactModule.createElement(virtualizedList, {
-			Size = var1.size,
-			data = t_1,
-			renderItem = function(p3)
+		return ReactModule.createElement(VirtualizedList, {
+			Size = JoinResult.size,
+			data = Data,
+			renderItem = function(p3) --[[ Line: 70 ]]
 				return p3.item
 			end,
-			getItemCount = function(_)
-				-- upvalues: cells (ref)
-				return #cells
+			getItemCount = function(_): number --[[ Line: 73 ]]
+				-- upvalues: Cells (copy)
+				return #Cells
 			end,
-			getItem = function(p3, p4)
+			getItem = function(p3, p4) --[[ Line: 76 ]]
 				return p3["Cell " .. tostring(p4)]
 			end,
-			keyExtractor = function(_, p3)
+			keyExtractor = function(_, p3): string --[[ Line: 80 ]]
 				return "Cell " .. tostring(p3)
 			end,
 			style = {
 				BackgroundTransparency = 1,
 				ScrollBarThickness = 0,
-				AnchorPoint = var1.anchorPoint,
-				Position = var1.position,
-				LayoutOrder = var1.layoutOrder,
-				Name = var1.Name or "ListTable",
-				Selectable = var1.selectable
+				AnchorPoint = JoinResult.anchorPoint,
+				Position = JoinResult.position,
+				LayoutOrder = JoinResult.layoutOrder,
+				Name = JoinResult.Name or "ListTable",
+				Selectable = JoinResult.selectable
 			},
 			contentContainerStyle = { BackgroundTransparency = 1 }
 		})

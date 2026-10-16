@@ -1,59 +1,59 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local parent = script.Parent.Parent
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local playerNameLabelModule = require(parent.Components.PlayerNameLabel)
-local avatarHeadShotModule = require(parent.Components.AvatarHeadShot)
-local assetListModule = require(parent.Components.AssetList)
-local inspectAndBuyContextModule = require(parent.Components.InspectAndBuyContext)
-local initialView = roactModule.PureComponent:extend("InitialView")
+﻿local CorePackages = game:GetService("CorePackages")
+local Parent = script.Parent.Parent
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local PlayerNameLabelModule = require(Parent.Components.PlayerNameLabel)
+local AvatarHeadShotModule = require(Parent.Components.AvatarHeadShot)
+local AssetListModule = require(Parent.Components.AssetList)
+local InspectAndBuyContextModule = require(Parent.Components.InspectAndBuyContext)
+local InitialView = RoactModule.PureComponent:extend("InitialView")
 
-function initialView.render(p1)
-	-- upvalues: roactModule (ref), inspectAndBuyContextModule (ref), avatarHeadShotModule (ref), playerNameLabelModule (ref), assetListModule (ref)
-	local view = p1.props.view
-	local detailsInformation = p1.props.detailsInformation
+function InitialView.render(p1) --[[ Line: 13 ]]
+	-- upvalues: RoactModule (copy), InspectAndBuyContextModule (copy), AvatarHeadShotModule (copy), PlayerNameLabelModule (copy), AssetListModule (copy)
+	local View = p1.props.view
+	local DetailsInformation = p1.props.detailsInformation
 	
-	return roactModule.createElement(inspectAndBuyContextModule.Consumer, {
-		render = function(p2)
-			-- upvalues: view (ref), roactModule (copy), detailsInformation (ref), avatarHeadShotModule (copy), playerNameLabelModule (copy), assetListModule (copy)
-			local var1 = p2[view]
+	return RoactModule.createElement(InspectAndBuyContextModule.Consumer, {
+		render = function(p2) --[[ Line: 18 ]]
+			-- upvalues: View (copy), RoactModule (upval), DetailsInformation (copy), AvatarHeadShotModule (upval), PlayerNameLabelModule (upval), AssetListModule (upval)
+			local v1 = p2[View]
 			
-			return roactModule.createElement("ScrollingFrame", {
+			return RoactModule.createElement("ScrollingFrame", {
 				BackgroundTransparency = 1,
 				ScrollBarThickness = 0,
 				Selectable = false,
-				Position = UDim2.new(0, var1.BorderPaddingSize, 0, 10),
-				Size = UDim2.new(1, -(2 * var1.BorderPaddingSize), 1, -36),
+				Position = UDim2.new(0, v1.BorderPaddingSize, 0, 10),
+				Size = UDim2.new(1, -(2 * v1.BorderPaddingSize), 1, -36),
 				ScrollingDirection = Enum.ScrollingDirection.Y,
-				Visible = not detailsInformation.viewingDetails
+				Visible = not DetailsInformation.viewingDetails
 			}, {
-				UIListLayout = roactModule.createElement("UIListLayout", {
+				UIListLayout = RoactModule.createElement("UIListLayout", {
 					Padding = UDim.new(0, 15),
 					HorizontalAlignment = Enum.HorizontalAlignment.Left,
 					SortOrder = Enum.SortOrder.LayoutOrder
 				}),
-				Top = roactModule.createElement("Frame", {
+				Top = RoactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 2,
-					Size = UDim2.new(1, 0, 0, var1.TopSizeY)
+					Size = UDim2.new(1, 0, 0, v1.TopSizeY)
 				}, {
-					UIListLayout = roactModule.createElement("UIListLayout", {
+					UIListLayout = RoactModule.createElement("UIListLayout", {
 						Padding = UDim.new(0, 10),
 						SortOrder = Enum.SortOrder.LayoutOrder,
 						FillDirection = Enum.FillDirection.Horizontal
 					}),
-					AvatarHeadShot = roactModule.createElement(avatarHeadShotModule),
-					PlayerNameLabel = roactModule.createElement(playerNameLabelModule)
+					AvatarHeadShot = RoactModule.createElement(AvatarHeadShotModule),
+					PlayerNameLabel = RoactModule.createElement(PlayerNameLabelModule)
 				}),
-				AssetList = roactModule.createElement(assetListModule)
+				AssetList = RoactModule.createElement(AssetListModule)
 			})
 		end
 	})
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p1, _)
+return RoactRoduxModule.UNSTABLE_connect2(function(p1, _) --[[ Line: 53 ]]
 	return {
 		view = p1.view,
 		detailsInformation = p1.detailsInformation
 	}
-end)(initialView)
+end)(InitialView)

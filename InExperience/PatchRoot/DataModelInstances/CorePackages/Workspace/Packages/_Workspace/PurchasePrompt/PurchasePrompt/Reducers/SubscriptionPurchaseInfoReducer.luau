@@ -1,14 +1,14 @@
-﻿local purchasePrompt = script:FindFirstAncestor("PurchasePrompt")
-local getPreviewImageUrlModule = require(purchasePrompt.getPreviewImageUrl)
+﻿local PurchasePrompt = script:FindFirstAncestor("PurchasePrompt")
+local GetPreviewImageUrlModule = require(PurchasePrompt.getPreviewImageUrl)
 
-return require(purchasePrompt.Parent.PurchasePromptDeps).Rodux.createReducer({}, {
-	[require(purchasePrompt.Actions.SubscriptionPurchaseInfoReceived).name] = function(_, p1)
-		-- upvalues: getPreviewImageUrlModule (ref)
-		p1.subscriptionPurchaseInfo.ImageUrl = getPreviewImageUrlModule(p1.subscriptionPurchaseInfo)
+return (require(PurchasePrompt.Parent.PurchasePromptDeps).Rodux.createReducer({}, {
+	[require(PurchasePrompt.Actions.SubscriptionPurchaseInfoReceived).name] = function(_, p1) --[[ Line: 12 ]]
+		-- upvalues: GetPreviewImageUrlModule (copy)
+		p1.subscriptionPurchaseInfo.ImageUrl = GetPreviewImageUrlModule(p1.subscriptionPurchaseInfo)
 		
 		return p1.subscriptionPurchaseInfo
 	end,
-	[require(purchasePrompt.Actions.CompleteRequest).name] = function(_, _)
+	[require(PurchasePrompt.Actions.CompleteRequest).name] = function(_, _) --[[ Line: 16 ]]
 		return {}
 	end
-})
+}))

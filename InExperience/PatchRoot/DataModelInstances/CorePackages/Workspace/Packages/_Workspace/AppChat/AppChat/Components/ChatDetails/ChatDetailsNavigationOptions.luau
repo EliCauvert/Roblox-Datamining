@@ -1,49 +1,54 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local cryoModule = require(parent.Cryo)
-local getFFlagIsSquadEnabled = require(parent.SharedFlags).GetFFlagIsSquadEnabled
-local fFlagDebugAppChatEnableDomLocatorsModule = require(appChat.Flags.FFlagDebugAppChatEnableDomLocators)
-local domLocatorsModule = require(appChat.Utils.DomLocators)
-local getFFlagAppChatEnableRootedNavigationModule = require(appChat.Flags.getFFlagAppChatEnableRootedNavigation)
-local t = {
-	getHeaderText = function()
-		-- upvalues: getFFlagIsSquadEnabled (ref)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local CryoModule = require(Parent.Cryo)
+local GetFFlagIsSquadEnabledFunction = require(Parent.SharedFlags).GetFFlagIsSquadEnabled
+local FFlagDebugAppChatEnableDomLocatorsModule = require(AppChat.Flags.FFlagDebugAppChatEnableDomLocators)
+local DomLocatorsModule = require(AppChat.Utils.DomLocators)
+local GetFFlagAppChatEnableRootedNavigationModule = require(AppChat.Flags.getFFlagAppChatEnableRootedNavigation)
+local ChatDetailsNavigationOptionsModule = {
+	getHeaderText = function() --[[ Line: 29 ]]
+		-- upvalues: GetFFlagIsSquadEnabledFunction (copy)
 		return {
 			shouldLocalize = true,
-			raw = if getFFlagIsSquadEnabled() then "Feature.Chat.Label.Details" else "Feature.Chat.Label.ChatDetails"
+			raw = if GetFFlagIsSquadEnabledFunction() then "Feature.Chat.Label.Details" else "Feature.Chat.Label.ChatDetails"
 		}
 	end,
-	getIsRooted = function(p1)
-		-- upvalues: getFFlagAppChatEnableRootedNavigationModule (ref)
-		return getFFlagAppChatEnableRootedNavigationModule() and (p1 and (p1.getParam and (p1.getParam("isRooted", false) or false)))
+	getIsRooted = function(Navigation) --[[ Line: 36 ]]
+		-- upvalues: GetFFlagAppChatEnableRootedNavigationModule (copy)
+		return GetFFlagAppChatEnableRootedNavigationModule() and Navigation and Navigation.getParam and Navigation.getParam("isRooted", false) or false
 	end
 }
 
-function t.getNavigationOptions(p1, p2)
-	-- upvalues: t (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref), getFFlagAppChatEnableRootedNavigationModule (ref), cryoModule (ref)
-	local navigation = p1 and p1.navigation
-	local t_1 = {
-		headerText = t.getHeaderText(),
-		backButtonTestId = if fFlagDebugAppChatEnableDomLocatorsModule then domLocatorsModule.chatDetailsTopBarActionButton("back") else nil
+function ChatDetailsNavigationOptionsModule.getNavigationOptions(p1, p2) --[[ Line: 44 ]]
+	-- upvalues: ChatDetailsNavigationOptionsModule (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), DomLocatorsModule (copy), GetFFlagAppChatEnableRootedNavigationModule (copy), CryoModule (copy)
+	local Navigation = p1 and p1.navigation
+	local JoinResult = {
+		headerText = ChatDetailsNavigationOptionsModule.getHeaderText(),
+		backButtonTestId = if FFlagDebugAppChatEnableDomLocatorsModule then DomLocatorsModule.chatDetailsTopBarActionButton("back") else nil
 	}
 	
-	if getFFlagAppChatEnableRootedNavigationModule() then
-		t_1 = cryoModule.Dictionary.join(t_1, {
+	if GetFFlagAppChatEnableRootedNavigationModule() then
+		JoinResult = CryoModule.Dictionary.join(JoinResult, {
 			backButtonEnabled = true,
-			isRoot = t.getIsRooted(navigation)
+			isRoot = ChatDetailsNavigationOptionsModule.getIsRooted(Navigation)
 		})
 	end
-	return cryoModule.Dictionary.join(t_1, p2 or {})
+	return CryoModule.Dictionary.join(JoinResult, p2 or {})
 end
 
-function t.getTopBarConfig(p1)
-	-- upvalues: t (ref), getFFlagAppChatEnableRootedNavigationModule (ref), cryoModule (ref)
-	local t_1 = { backButtonEnabled = true, headerText = t.getHeaderText() }
+function ChatDetailsNavigationOptionsModule.getTopBarConfig(p1) --[[ Line: 64 ]]
+	-- upvalues: ChatDetailsNavigationOptionsModule (copy), GetFFlagAppChatEnableRootedNavigationModule (copy), CryoModule (copy)
+	local JoinResult = {
+		backButtonEnabled = true,
+		headerText = ChatDetailsNavigationOptionsModule.getHeaderText()
+	}
 	
-	if getFFlagAppChatEnableRootedNavigationModule() then
-		t_1 = cryoModule.Dictionary.join(t_1, { isRoot = t.getIsRooted(p1) })
+	if GetFFlagAppChatEnableRootedNavigationModule() then
+		JoinResult = CryoModule.Dictionary.join(JoinResult, {
+			isRoot = ChatDetailsNavigationOptionsModule.getIsRooted(p1)
+		})
 	end
-	return t_1
+	return JoinResult
 end
 
-return t
+return ChatDetailsNavigationOptionsModule

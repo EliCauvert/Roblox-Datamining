@@ -1,21 +1,21 @@
 ﻿local _ = require(script:FindFirstAncestor("AvatarExperienceCommon").Parent.AvatarExperienceModel)
-local getTryOnItemComparisonDataModule = require(script.Parent.getTryOnItemComparisonData)
-local getShouldReplaceTryOnModule = require(script.Parent.getShouldReplaceTryOn)
+local GetTryOnItemComparisonDataModule = require(script.Parent.getTryOnItemComparisonData)
+local GetShouldReplaceTryOnModule = require(script.Parent.getShouldReplaceTryOn)
 
-function getFilteredTryOnItems(p1, p2)
-	-- upvalues: getTryOnItemComparisonDataModule (ref), getShouldReplaceTryOnModule (ref)
+function getFilteredTryOnItems(List, p1) --[[ Line: 8 ]]
+	-- upvalues: GetTryOnItemComparisonDataModule (copy), GetShouldReplaceTryOnModule (copy)
 	local t = {}
-	local t_1 = {}
-	local var1 = getTryOnItemComparisonDataModule(p2)
+	local t1 = {}
+	local TryOnItemComparisonDataModule = GetTryOnItemComparisonDataModule(p1)
 	
-	for i, v in p1 do
-		if getShouldReplaceTryOnModule(var1, getTryOnItemComparisonDataModule(v)) then
-			t_1[i] = v
+	for i, value in List do
+		if GetShouldReplaceTryOnModule(TryOnItemComparisonDataModule, (GetTryOnItemComparisonDataModule(value))) then
+			t1[i] = value
 		else
-			t[i] = v
+			t[i] = value
 		end
 	end
-	return t, t_1
+	return t, t1
 end
 
 return getFilteredTryOnItems

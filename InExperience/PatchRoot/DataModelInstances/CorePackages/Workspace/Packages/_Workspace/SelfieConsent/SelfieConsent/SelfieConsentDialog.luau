@@ -1,36 +1,37 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent
-local httpService = game:GetService("HttpService")
-local coreScriptsRootProvider = require(parent_1.CoreScriptsRoactCommon).CoreScriptsRootProvider
-local reactModule = require(parent_1.React)
-local roactCompatModule = require(parent_1.RoactCompat)
-local roactNetworking = require(parent_1.RoactServiceTags).RoactNetworking
-local roactServices = require(parent_1.RoactServices).RoactServices
-local selfieConsentConnectionModule = require(parent.SelfieConsentConnection)
-local requestInternalWrapper = require(parent_1.Http).NetworkLayers.requestInternalWrapper
-local t = {}
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent
+local HttpService = game:GetService("HttpService")
+local CoreScriptsRootProvider = require(Parent1.CoreScriptsRoactCommon).CoreScriptsRootProvider
+local ReactModule = require(Parent1.React)
+local RoactCompatModule = require(Parent1.RoactCompat)
+local RoactNetworking = require(Parent1.RoactServiceTags).RoactNetworking
+local RoactServices = require(Parent1.RoactServices).RoactServices
+local SelfieConsentConnectionModule = require(Parent.SelfieConsentConnection)
+local RequestInternalWrapperFunction = require(Parent1.Http).NetworkLayers.requestInternalWrapper
 
-local var1 = function(p1, p2)
-	-- upvalues: reactModule (ref), coreScriptsRootProvider (ref), roactServices (ref), roactNetworking (ref), requestInternalWrapper (ref), httpService (ref), roactCompatModule (ref)
-	return roactCompatModule.mount(reactModule.createElement("Folder", nil, reactModule.createElement(coreScriptsRootProvider, {}, {
-		RoactServicesProvider = reactModule.createElement(roactServices.ServiceProvider, {
-			services = { [roactNetworking] = requestInternalWrapper(httpService) }
+local function v9(p1, p2) --[[ Line: 18 ]]
+	-- upvalues: ReactModule (copy), CoreScriptsRootProvider (copy), RoactServices (copy), RoactNetworking (copy), RequestInternalWrapperFunction (copy), HttpService (copy), RoactCompatModule (copy)
+	return RoactCompatModule.mount(ReactModule.createElement("Folder", nil, (ReactModule.createElement(CoreScriptsRootProvider, {}, {
+		RoactServicesProvider = ReactModule.createElement(RoactServices.ServiceProvider, {
+			services = {
+				[RoactNetworking] = RequestInternalWrapperFunction(HttpService)
+			}
 		}, p2)
-	})), p1, "SelfieConsentRoot")
+	}))), p1, "SelfieConsentRoot")
 end
 
-function t.createDialog()
-	-- upvalues: var1 (ref), reactModule (ref), selfieConsentConnectionModule (ref)
-	local t = {}
-	
-	function t.mountCoreUI(p1)
-		-- upvalues: t (ref), var1 (copy), reactModule (copy), selfieConsentConnectionModule (copy)
-		t._coreUiHandle = var1(p1, {
-			SelfieConsent = reactModule.createElement(selfieConsentConnectionModule, {})
-		})
+return {
+	createDialog = function() --[[ Line: 30 ]]
+		-- upvalues: v9 (copy), ReactModule (copy), SelfieConsentConnectionModule (copy)
+		local t = {}
+		
+		function t.mountCoreUI(p1) --[[ Line: 33 ]]
+			-- upvalues: t (copy), v9 (upval), ReactModule (upval), SelfieConsentConnectionModule (upval)
+			t._coreUiHandle = v9(p1, {
+				SelfieConsent = ReactModule.createElement(SelfieConsentConnectionModule, {})
+			})
+		end
+		
+		return t
 	end
-	
-	return t
-end
-
-return t
+}

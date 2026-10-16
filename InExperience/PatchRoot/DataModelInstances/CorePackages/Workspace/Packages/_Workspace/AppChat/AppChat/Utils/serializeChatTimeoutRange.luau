@@ -1,24 +1,15 @@
-﻿local parent = script:FindFirstAncestor("AppChat").Parent
-local _ = require(parent.AppChatNetworking)
-local fFlagAppChatReactiveFeatureRestrictions = require(parent.SharedFlags).FFlagAppChatReactiveFeatureRestrictions
+﻿local Parent = script:FindFirstAncestor("AppChat").Parent
+local _ = require(Parent.AppChatNetworking)
+local FFlagAppChatReactiveFeatureRestrictions = require(Parent.SharedFlags).FFlagAppChatReactiveFeatureRestrictions
 
-return function(p1, p2)
-	-- upvalues: fFlagAppChatReactiveFeatureRestrictions (ref)
-	local var1
-	local currentDateTime = DateTime.now()
-	local t = {
-		endTimestamp = math.clamp((p2 or currentDateTime.UnixTimestamp) + p1.time_remaining, -17987443200, 253402300799),
+return function(p1, p2) --[[ Line: 18 | Named "serializeChatTimeoutRange" ]]
+	-- upvalues: FFlagAppChatReactiveFeatureRestrictions (copy)
+	local _DateTime = DateTime.now()
+	
+	return {
+		endTimestamp = math.clamp((p2 or _DateTime.UnixTimestamp) + p1.time_remaining, -17987443200, 253402300799),
 		decisionEventId = p1.decision_event_id,
-		duration = math.clamp((DateTime.fromIsoDate(p1.end_time) or currentDateTime).UnixTimestamp - (DateTime.fromIsoDate(p1.start_time) or currentDateTime).UnixTimestamp, 0, 253402300799)
+		duration = math.clamp((DateTime.fromIsoDate(p1.end_time) or _DateTime).UnixTimestamp - (DateTime.fromIsoDate(p1.start_time) or _DateTime).UnixTimestamp, 0, 253402300799),
+		requiresAcknowledgement = if FFlagAppChatReactiveFeatureRestrictions then p1.requires_acknowledgement == true else nil
 	}
-	
-	if fFlagAppChatReactiveFeatureRestrictions then
-		var1 = p1.requires_acknowledgement == true
-		var1 = nil
-	else
-		var1 = nil
-	end
-	t.requiresAcknowledgement = var1
-	
-	return t
 end

@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Workspace.PeopleService.PeopleService)
+﻿return (require(script.Parent.Parent.Parent._Workspace.PeopleService.PeopleService))

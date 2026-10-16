@@ -1,40 +1,40 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceUIKit").Parent
-local reactModule = require(parent.React)
-local useDesignTokens = require(parent.Style).useDesignTokens
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceUIKit").Parent
+local ReactModule = require(Parent.React)
+local UseDesignTokensFunction = require(Parent.Style).useDesignTokens
 
-return function(p1)
-	-- upvalues: useDesignTokens (ref), reactModule (ref)
-	return reactModule.createElement("Frame", {
+return function(Frame) --[[ Line: 19 | Named "WidgetLayout" ]]
+	-- upvalues: UseDesignTokensFunction (copy), ReactModule (copy)
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
 		Size = UDim2.fromScale(1, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
-		LayoutOrder = p1.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		UIPadding = if p1.padding then reactModule.createElement("UIPadding", {
-			PaddingLeft = p1.padding.left,
-			PaddingRight = p1.padding.right,
-			PaddingTop = p1.padding.top,
-			PaddingBottom = p1.padding.bottom
+		UIPadding = if Frame.padding then ReactModule.createElement("UIPadding", {
+			PaddingLeft = Frame.padding.left,
+			PaddingRight = Frame.padding.right,
+			PaddingTop = Frame.padding.top,
+			PaddingBottom = Frame.padding.bottom
 		}) else nil,
-		UIListLayout = reactModule.createElement("UIListLayout", {
+		UIListLayout = ReactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
 			SortOrder = Enum.SortOrder.LayoutOrder,
-			Padding = UDim.new(0, useDesignTokens().Size.Size_300)
+			Padding = UDim.new(0, UseDesignTokensFunction().Size.Size_300)
 		}),
-		TopContent = if p1.headerSlot then reactModule.createElement("Frame", {
+		TopContent = if Frame.headerSlot then ReactModule.createElement("Frame", {
 			LayoutOrder = 1,
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			Size = UDim2.fromScale(1, 0),
 			AutomaticSize = Enum.AutomaticSize.Y
-		}, p1.headerSlot) else nil,
-		ItemGroup = if p1.contentSlot then reactModule.createElement("Frame", {
+		}, Frame.headerSlot) else nil,
+		ItemGroup = if Frame.contentSlot then ReactModule.createElement("Frame", {
 			LayoutOrder = 2,
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			Size = UDim2.fromScale(1, 0),
 			AutomaticSize = Enum.AutomaticSize.Y
-		}, p1.contentSlot) else nil
+		}, Frame.contentSlot) else nil
 	})
 end

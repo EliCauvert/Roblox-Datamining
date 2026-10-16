@@ -1,106 +1,174 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local parent = dataHydration.Parent
-local playersService = game:GetService("Players")
-local createDataCacheModule = require(dataHydration.createDataCache)
-local createDataResolverModule = require(dataHydration.createDataResolver)
-local _ = require(dataHydration.DataHydrationTypes)
-local signalsModule = require(parent.Signals)
-local fetchAdCampaignEligibilityModule = require(script.Parent.fetchAdCampaignEligibility)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local Parent = DataHydration.Parent
+local Players = game:GetService("Players")
+local CreateDataCacheModule = require(DataHydration.createDataCache)
+local CreateDataResolverModule = require(DataHydration.createDataResolver)
+local _ = require(DataHydration.DataHydrationTypes)
+local SignalsModule = require(Parent.Signals)
+local FFlagBuildAgentAdCampaignRefreshEligibility = require(Parent.SharedFlags).FFlagBuildAgentAdCampaignRefreshEligibility
+local FetchAdCampaignEligibilityModule = require(script.Parent.fetchAdCampaignEligibility)
 local _ = require(script.Parent.AdCampaignEligibilityStoreTypes)
 
-return function(p1)
-	-- upvalues: fetchAdCampaignEligibilityModule (ref), createDataCacheModule (ref), createDataResolverModule (ref), signalsModule (ref), playersService (ref)
-	local var1 = if p1 and p1.fetchEligibility then p1.fetchEligibility else fetchAdCampaignEligibilityModule
-	local var2 = createDataResolverModule({
+return function(p1) --[[ Line: 30 | Named "createAdCampaignEligibilityStore" ]]
+	-- upvalues: FetchAdCampaignEligibilityModule (copy), CreateDataCacheModule (copy), CreateDataResolverModule (copy), FFlagBuildAgentAdCampaignRefreshEligibility (copy), SignalsModule (copy), Players (copy)
+	local FetchEligibility = if p1 and p1.fetchEligibility then p1.fetchEligibility else FetchAdCampaignEligibilityModule
+	local Callback = nil
+	local DataResolverModule = CreateDataResolverModule({
 		supportsMultiGet = false,
 		replaceItems = true,
-		cache = createDataCacheModule(),
-		fetchFn = function(p2, _)
-			-- upvalues: var1 (write)
-			return var1(tonumber(p2))
+		cache = CreateDataCacheModule(),
+		ignoreResponsesAfterTimeout = FFlagBuildAgentAdCampaignRefreshEligibility,
+		onClear = if FFlagBuildAgentAdCampaignRefreshEligibility then function() --[[ Line: 45 ]]
+			-- upvalues: Callback (ref)
+			Callback()
+		end else nil,
+		fetchFn = function(p2, _) --[[ Line: 49 ]]
+			-- upvalues: FetchEligibility (ref)
+			return FetchEligibility((tonumber(p2)))
 		end
 	})
-	local t = {}
+	local Effects = {}
+	local T = if FFlagBuildAgentAdCampaignRefreshEligibility then {} else nil
 	
-	local function fetchEligibility(p2)
-		-- upvalues: var2 (ref), t (ref), signalsModule (copy)
-		local var3 = tostring(p2)
-		
-		if not var2.isRequestInQueueOrInFlight(var3) then
-			return var2.fetchItem(var3)
-		end
-		local cachedItem = var2.getCachedItem(var3)
-		
-		if t[var3] == nil then
-			local _ = nil
-			t[var3] = signalsModule.createEffect(function(p3)
-				-- upvalues: cachedItem (ref), var2 (copy), var3 (ref), t (copy)
-				cachedItem.data(p3)
-				cachedItem.status(p3)
+	Callback = function() --[[ Line: 141 ]]
+		-- upvalues: FFlagBuildAgentAdCampaignRefreshEligibility (upval), T (copy), Effects (copy)
+		if FFlagBuildAgentAdCampaignRefreshEligibility then
+			for i, value in T do
+				T[i] = nil
 				
-				if var2.isRequestInQueueOrInFlight(var3) then return end
-				local var4 = t[var3]
-				t[var3] = nil
-				
-				if var4 ~= nil then
-					var4()
+				if value.dispose ~= nil then
+					value.dispose()
 				end
-				var2.fetchItem(var3)
-			end)
-		end
-		return cachedItem
-	end
-	
-	local function _()
-		-- upvalues: t (ref)
-		for i, v in t do
-			t[i] = nil
-			v()
-		end
-	end
-	
-	local localPlayer = playersService.LocalPlayer
-	local var3 = playersService:GetPropertyChangedSignal("LocalPlayer"):Connect(function()
-		-- upvalues: playersService (copy), localPlayer (write), t (ref)
-		if playersService.LocalPlayer ~= localPlayer then
-			localPlayer = playersService.LocalPlayer
-			
-			for i, v in t do
-				t[i] = nil
-				v()
 			end
+			return
+		else
+			for i1, effect in Effects do
+				Effects[i1] = nil
+				effect()
+			end
+		end
+	end
+	
+	local LocalPlayer = Players.LocalPlayer
+	local Connection = Players:GetPropertyChangedSignal("LocalPlayer"):Connect(function() --[[ Line: 157 ]]
+		-- upvalues: Players (upval), LocalPlayer (ref), Callback (ref)
+		if Players.LocalPlayer ~= LocalPlayer then
+			LocalPlayer = Players.LocalPlayer
+			Callback()
 		end
 	end)
 	
 	return {
-		getEligibility = function(p2)
-			-- upvalues: var2 (ref)
-			return var2.getCachedItem(tostring(p2))
+		getEligibility = function(p2) --[[ Line: 165 ]]
+			-- upvalues: DataResolverModule (copy)
+			return DataResolverModule.getCachedItem((tostring(p2)))
 		end,
-		fetchEligibility = fetchEligibility,
-		getAndFetchEligibility = function(p2)
-			-- upvalues: var2 (ref)
-			return var2.getAndFetchItem(tostring(p2))
+		fetchEligibility = function(p2, p3) --[[ Line: 59 ]]
+			-- upvalues: FFlagBuildAgentAdCampaignRefreshEligibility (upval), DataResolverModule (copy), T (copy), SignalsModule (upval), Effects (copy)
+			if FFlagBuildAgentAdCampaignRefreshEligibility then
+				local Text = tostring(p2)
+				local IsRequestInQueueOrInFlight = DataResolverModule.isRequestInQueueOrInFlight(Text)
+				
+				if not IsRequestInQueueOrInFlight and p3 == nil then
+					return DataResolverModule.fetchItem(Text)
+				end
+				local CachedItem = DataResolverModule.getCachedItem(Text)
+				local Entry = T[Text]
+				
+				if Entry == nil then
+					local config = {
+						pending = IsRequestInQueueOrInFlight,
+						callbacks = {},
+						nextCallbacks = {}
+					}
+					
+					if p3 ~= nil then
+						table.insert(if IsRequestInQueueOrInFlight then config.nextCallbacks else config.callbacks, p3)
+					end
+					T[Text] = config
+					
+					if not IsRequestInQueueOrInFlight then
+						DataResolverModule.fetchItem(Text)
+					end
+					config.dispose = SignalsModule.createEffect(function(p4) --[[ Line: 88 ]]
+						-- upvalues: CachedItem (copy), DataResolverModule (upval), Text (copy), config (copy), T (upval)
+						local DataResult = CachedItem.data(p4)
+						local StatusResult = CachedItem.status(p4)
+						
+						if StatusResult == "NotReady" or DataResolverModule.isRequestInQueueOrInFlight(Text) then return end
+						local Callbacks = config.callbacks
+						config.callbacks = config.nextCallbacks
+						config.nextCallbacks = {}
+						
+						if config.pending then
+							config.pending = false
+							DataResolverModule.fetchItem(Text)
+						else
+							T[Text] = nil
+							
+							if config.dispose ~= nil then
+								config.dispose()
+							end
+						end
+						for _, callback in Callbacks do
+							callback(if StatusResult == "Ready" then DataResult else nil)
+						end
+					end)
+					
+					return CachedItem
+				else
+					Entry.pending = true
+					
+					if p3 ~= nil then
+						table.insert(Entry.nextCallbacks, p3)
+					end
+					return CachedItem
+				end
+			else
+				local Text1 = tostring(p2)
+				
+				if not DataResolverModule.isRequestInQueueOrInFlight(Text1) then
+					return DataResolverModule.fetchItem(Text1)
+				end
+				local CachedItem1 = DataResolverModule.getCachedItem(Text1)
+				
+				if Effects[Text1] == nil then
+					Effects[Text1] = SignalsModule.createEffect(function(p4) --[[ Line: 122 ]]
+						-- upvalues: CachedItem1 (copy), DataResolverModule (upval), Text1 (copy), Effects (upval)
+						CachedItem1.data(p4)
+						CachedItem1.status(p4)
+						
+						if DataResolverModule.isRequestInQueueOrInFlight(Text1) then return end
+						local Effect: () -> () = Effects[Text1]
+						Effects[Text1] = nil
+						
+						if Effect ~= nil then
+							Effect()
+						end
+						DataResolverModule.fetchItem(Text1)
+					end)
+				end
+				return CachedItem1
+			end
 		end,
-		clear = function()
-			-- upvalues: t (ref), var2 (ref)
-			for i, v in t do
-				t[i] = nil
-				v()
-			end
-			var2.clear()
+		getAndFetchEligibility = function(p4) --[[ Line: 169 ]]
+			-- upvalues: DataResolverModule (copy)
+			return DataResolverModule.getAndFetchItem((tostring(p4)))
 		end,
-		dispose = function()
-			-- upvalues: t (ref), var3 (write), var2 (ref)
-			for i, v in t do
-				t[i] = nil
-				v()
+		clear = function() --[[ Line: 172 ]]
+			-- upvalues: Callback (ref), DataResolverModule (copy)
+			Callback()
+			DataResolverModule.clear()
+		end,
+		dispose = function() --[[ Line: 176 ]]
+			-- upvalues: Callback (ref), Connection (ref), DataResolverModule (copy)
+			Callback()
+			
+			if Connection ~= nil then
+				Connection:Disconnect()
+				Connection = nil
 			end
-			if var3 ~= nil then
-				var3:Disconnect()
-				var3 = nil
-			end
-			var2.dispose()
+			DataResolverModule.dispose()
 		end
 	}
 end

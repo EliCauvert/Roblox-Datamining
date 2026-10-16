@@ -1,181 +1,163 @@
-﻿local sponsoredTiles = script:FindFirstAncestor("SponsoredTiles")
-local parent = sponsoredTiles.Parent
-local gameTileModule = require(parent.GameTile)
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local responsiveModule = require(parent.Responsive)
-local image = foundationModule.Image
-local buttonSize = foundationModule.Enums.ButtonSize
-local useTokens = foundationModule.Hooks.useTokens
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local playButton = require(parent.GamePlayButton).PlayButton
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local discoveryTypesModule = require(parent.DiscoveryTypes)
-local omniRecommendationsContentType = discoveryTypesModule.OmniRecommendationsContentType
-local gameCollectionItemTypes = discoveryTypesModule.GameCollectionItemTypes
-local gameHydrationReactModule = require(parent.GameHydrationReact)
-local useGameInfosSelector = require(parent.GameInfosRodux).useGameInfosSelector
-local useNavigation = require(parent.Navigation).useNavigation
-local appPage = require(parent.RobloxAppEnums).AppPage
-local useRoactService = require(parent.RobloxAppHooks).useRoactService
-local roactServiceTagsModule = require(parent.RoactServiceTags)
-local roactNetworking = roactServiceTagsModule.RoactNetworking
-local appSessionService = roactServiceTagsModule.AppSessionService
-local robloxAppSessionizationModule = require(parent.RobloxAppSessionization)
-local setGamePlaySession = robloxAppSessionizationModule.SetGamePlaySession
-local sessionType = robloxAppSessionizationModule.SessionType
-local discoveryAnalyticsModule = require(parent.DiscoveryAnalytics)
-local sponsoredGamesRecordClick = discoveryAnalyticsModule.Requests.sponsoredGamesRecordClick
-local discoveryEventErrorLogger = require(parent.DiscoveryUtils).DiscoveryEventErrorLogger
-local oneByTwoTileTelemetry = require(parent.SponsoredTilesTelemetry).OneByTwoTileTelemetry
-local _ = require(sponsoredTiles.types)
-local videoPlayerModule = require(parent.VideoPlayer)
-local videoDisplay = videoPlayerModule.VideoDisplay
-local videoLoadingState = videoPlayerModule.VideoLoadingState
-local videoUtilsModule = require(parent.VideoUtils)
-local videoPlaybackDetector = videoUtilsModule.VideoPlaybackDetector
-local videoPlaybackDetectionMethod = videoUtilsModule.VideoPlaybackDetectionMethod
-local videoPlaybackCoordinator = videoUtilsModule.VideoPlaybackCoordinator
-local useTagAsViewportAutoplayCandidate = videoUtilsModule.useTagAsViewportAutoplayCandidate
-local getPlaybackDetectionMethod = videoUtilsModule.getPlaybackDetectionMethod
-local useCanDevicePlayVideoPreview = videoUtilsModule.useCanDevicePlayVideoPreview
-local videoEndReason = videoUtilsModule.AnalyticsEnums.VideoEndReason
-local useTagAsSponsoredAdViewabilityCandidate = require(parent.SponsoredAdViewability).useTagAsSponsoredAdViewabilityCandidate
-local impressionsTagUtility = require(parent.Impressions).ImpressionsTagUtility
-local useIsHoveredTile = gameTileModule.useIsHoveredTile
-local useValidTileBadges = gameTileModule.useValidTileBadges
-local gameTileThumbnailBadges = gameTileModule.GameTileThumbnailBadges
-local hoverTileCoordinator = gameTileModule.HoverTileCoordinator
-local tileVideoBlockingConfig = gameTileModule.TileVideoBlockingConfig
-local getAvailableGameTileOverflowMenuItems = gameTileModule.getAvailableGameTileOverflowMenuItems
-local spanTileOverflowMenuModule = require(sponsoredTiles.SpanTileOverflowMenu.SpanTileOverflowMenu)
-local appBloxModule = require(parent.AppBlox)
-local getOverflowMenuSignalStore = appBloxModule.getOverflowMenuSignalStore
-local useOverflowMenuOpen = appBloxModule.useOverflowMenuOpen
-local useTriggerFeedback = require(parent.InteractionFeedback).useTriggerFeedback
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagLuaAppDemoModePlayButtonTelemetry = sharedFlagsModule.FFlagLuaAppDemoModePlayButtonTelemetry
-local fFlagLuaAppHapticTriggeredTelemetry = sharedFlagsModule.FFlagLuaAppHapticTriggeredTelemetry
-local fFlagLuaAppSponsoredAdVideoViewabilityEnabled = sharedFlagsModule.FFlagLuaAppSponsoredAdVideoViewabilityEnabled
-local fIntLuaAppGameTileVideoDwellTimeInSec = sharedFlagsModule.FIntLuaAppGameTileVideoDwellTimeInSec
-local fIntLuaAppGameTileVideoVisiblePercent = sharedFlagsModule.FIntLuaAppGameTileVideoVisiblePercent
-local fFlagLuaAppGameTileSelectionVideoPlayback = sharedFlagsModule.FFlagLuaAppGameTileSelectionVideoPlayback
-local fFlagLuaAppNotInterestedReportPlaceId = sharedFlagsModule.FFlagLuaAppNotInterestedReportPlaceId
-local fFlagLuaAppSduiSponsoredOneByTwoTile = sharedFlagsModule.FFlagLuaAppSduiSponsoredOneByTwoTile
-local fFlagMigrateGameInfoToStore = sharedFlagsModule.FFlagMigrateGameInfoToStore
-local luaAppDefaultGameAdTileText = game:DefineFastFlag("LuaAppDefaultGameAdTileText", false)
-local fFlagLuaAppOneByTwoTileGatePlayerOnVideoLoad = sharedFlagsModule.FFlagLuaAppOneByTwoTileGatePlayerOnVideoLoad
-local fFlagLuaAppOneByTwoHoverIdleAutoplay = sharedFlagsModule.FFlagLuaAppOneByTwoHoverIdleAutoplay
-local fFlagLuaAppVideoAutoplayOneByTwoTileCandidatePercentageUpdate = sharedFlagsModule.FFlagLuaAppVideoAutoplayOneByTwoTileCandidatePercentageUpdate
-local fFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor = sharedFlagsModule.FFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor
-local fFlagLuaAppEnableReportExperience = sharedFlagsModule.FFlagLuaAppEnableReportExperience
-local fFlagLuaAppEnableOneByTwoTileFunnelTelemetry = sharedFlagsModule.FFlagLuaAppEnableOneByTwoTileFunnelTelemetry
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local luaAppOneByTwoTileLogoWidthPercentLandscape = game:DefineFastInt("LuaAppOneByTwoTileLogoWidthPercentLandscape", 40)
-local luaAppOneByTwoTileLogoWidthPercentSquare = game:DefineFastInt("LuaAppOneByTwoTileLogoWidthPercentSquare", 25)
-local luaAppOneByTwoTileGradientBottomTransparencyPercent = game:DefineFastInt("LuaAppOneByTwoTileGradientBottomTransparencyPercent", 25)
-local luaAppOneByTwoTileGradientTopTransparencyPercent = game:DefineFastInt("LuaAppOneByTwoTileGradientTopTransparencyPercent", 100)
-local luaAppOneByTwoTileGradientBottomHeightPercent = game:DefineFastInt("LuaAppOneByTwoTileGradientBottomHeightPercent", 50)
-local var1 = luaAppOneByTwoTileLogoWidthPercentLandscape / 100
-local var2 = luaAppOneByTwoTileLogoWidthPercentSquare / 100
-local var3 = luaAppOneByTwoTileGradientBottomTransparencyPercent / 100
-local var4 = luaAppOneByTwoTileGradientTopTransparencyPercent / 100
-local var5 = luaAppOneByTwoTileGradientBottomHeightPercent / 100
+﻿local SponsoredTiles = script:FindFirstAncestor("SponsoredTiles")
+local Parent = SponsoredTiles.Parent
+local GameTileModule = require(Parent.GameTile)
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local ResponsiveModule = require(Parent.Responsive)
+local Image = FoundationModule.Image
+local ButtonSize = FoundationModule.Enums.ButtonSize
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local PlayButton = require(Parent.GamePlayButton).PlayButton
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local DiscoveryTypesModule = require(Parent.DiscoveryTypes)
+local OmniRecommendationsContentType = DiscoveryTypesModule.OmniRecommendationsContentType
+local GameCollectionItemTypes = DiscoveryTypesModule.GameCollectionItemTypes
+local GameHydrationReactModule = require(Parent.GameHydrationReact)
+local UseGameInfosSelectorFunction = require(Parent.GameInfosRodux).useGameInfosSelector
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
+local RoactServiceTagsModule = require(Parent.RoactServiceTags)
+local RoactNetworking = RoactServiceTagsModule.RoactNetworking
+local AppSessionService = RoactServiceTagsModule.AppSessionService
+local RobloxAppSessionizationModule = require(Parent.RobloxAppSessionization)
+local SetGamePlaySessionFunction = RobloxAppSessionizationModule.SetGamePlaySession
+local SessionType = RobloxAppSessionizationModule.SessionType
+local DiscoveryAnalyticsModule = require(Parent.DiscoveryAnalytics)
+local SponsoredGamesRecordClickFunction = DiscoveryAnalyticsModule.Requests.sponsoredGamesRecordClick
+local DiscoveryEventErrorLogger = require(Parent.DiscoveryUtils).DiscoveryEventErrorLogger
+local OneByTwoTileTelemetry = require(Parent.SponsoredTilesTelemetry).OneByTwoTileTelemetry
+local _ = require(SponsoredTiles.types)
+local VideoPlayerModule = require(Parent.VideoPlayer)
+local VideoDisplay = VideoPlayerModule.VideoDisplay
+local VideoLoadingState = VideoPlayerModule.VideoLoadingState
+local VideoUtilsModule = require(Parent.VideoUtils)
+local VideoPlaybackDetector = VideoUtilsModule.VideoPlaybackDetector
+local VideoPlaybackDetectionMethod = VideoUtilsModule.VideoPlaybackDetectionMethod
+local VideoPlaybackCoordinator = VideoUtilsModule.VideoPlaybackCoordinator
+local UseTagAsViewportAutoplayCandidateFunction = VideoUtilsModule.useTagAsViewportAutoplayCandidate
+local AdsViewportAutoplayCandidateTagModule = require(script.Parent.AdsViewportAutoplayCandidateTag)
+local UseTagAsAdsViewportAutoplayCandidateModule = require(script.Parent.useTagAsAdsViewportAutoplayCandidate)
+local GetPlaybackDetectionMethodFunction = VideoUtilsModule.getPlaybackDetectionMethod
+local UseCanDevicePlayVideoPreviewFunction = VideoUtilsModule.useCanDevicePlayVideoPreview
+local VideoEndReason = VideoUtilsModule.AnalyticsEnums.VideoEndReason
+local UseTagAsSponsoredAdViewabilityCandidateFunction = require(Parent.SponsoredAdViewability).useTagAsSponsoredAdViewabilityCandidate
+local ImpressionsTagUtility = require(Parent.Impressions).ImpressionsTagUtility
+local UseIsHoveredTileFunction = GameTileModule.useIsHoveredTile
+local UseValidTileBadgesFunction = GameTileModule.useValidTileBadges
+local GameTileThumbnailBadges = GameTileModule.GameTileThumbnailBadges
+local HoverTileCoordinator = GameTileModule.HoverTileCoordinator
+local TileVideoBlockingConfig = GameTileModule.TileVideoBlockingConfig
+local GetAvailableGameTileOverflowMenuItemsFunction = GameTileModule.getAvailableGameTileOverflowMenuItems
+local SpanTileOverflowMenuModule = require(SponsoredTiles.SpanTileOverflowMenu.SpanTileOverflowMenu)
+local AppBloxModule = require(Parent.AppBlox)
+local GetOverflowMenuSignalStoreFunction = AppBloxModule.getOverflowMenuSignalStore
+local UseOverflowMenuOpenFunction = AppBloxModule.useOverflowMenuOpen
+local UseTriggerFeedbackFunction = require(Parent.InteractionFeedback).useTriggerFeedback
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagLuaAppDemoModePlayButtonTelemetry = SharedFlagsModule.FFlagLuaAppDemoModePlayButtonTelemetry
+local FFlagLuaAppSponsoredAdVideoViewabilityEnabled = SharedFlagsModule.FFlagLuaAppSponsoredAdVideoViewabilityEnabled
+local FIntLuaAppGameTileVideoDwellTimeInSec = SharedFlagsModule.FIntLuaAppGameTileVideoDwellTimeInSec
+local FIntLuaAppGameTileVideoVisiblePercent = SharedFlagsModule.FIntLuaAppGameTileVideoVisiblePercent
+local FFlagLuaAppGameTileSelectionVideoPlayback = SharedFlagsModule.FFlagLuaAppGameTileSelectionVideoPlayback
+local FFlagLuaAppSduiSponsoredOneByTwoTile = SharedFlagsModule.FFlagLuaAppSduiSponsoredOneByTwoTile
+local FFlagMigrateGameInfoToStore = SharedFlagsModule.FFlagMigrateGameInfoToStore
+local LuaAppDefaultGameAdTileText = game:DefineFastFlag("LuaAppDefaultGameAdTileText", false)
+local FFlagLuaAppOneByTwoTileGatePlayerOnVideoLoad = SharedFlagsModule.FFlagLuaAppOneByTwoTileGatePlayerOnVideoLoad
+local FFlagLuaAppOneByTwoHoverIdleAutoplay = SharedFlagsModule.FFlagLuaAppOneByTwoHoverIdleAutoplay
+local FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback = SharedFlagsModule.FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback
+local FFlagLuaAppEnableReportExperience = SharedFlagsModule.FFlagLuaAppEnableReportExperience
+local FFlagLuaAppEnableOneByTwoTileFunnelTelemetry = SharedFlagsModule.FFlagLuaAppEnableOneByTwoTileFunnelTelemetry
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local LuaAppOneByTwoTileLogoWidthPercentLandscapeRatio = game:DefineFastInt("LuaAppOneByTwoTileLogoWidthPercentLandscape", 40) / 100
+local LuaAppOneByTwoTileLogoWidthPercentSquareRatio = game:DefineFastInt("LuaAppOneByTwoTileLogoWidthPercentSquare", 25) / 100
+local TileLongPress: string = if SharedFlagsModule.FFlagLuaAppFeatureTileHapticsFix then "TileLongPress" else "OneByTwoTileLongPress"
+local LuaAppOneByTwoTileGradientBottomTransparencyPercentRatio = game:DefineFastInt("LuaAppOneByTwoTileGradientBottomTransparencyPercent", 25) / 100
+local LuaAppOneByTwoTileGradientTopTransparencyPercentRatio = game:DefineFastInt("LuaAppOneByTwoTileGradientTopTransparencyPercent", 100) / 100
+local LuaAppOneByTwoTileGradientBottomHeightPercentRatio = game:DefineFastInt("LuaAppOneByTwoTileGradientBottomHeightPercent", 50) / 100
 
-local function _(p1, p2)
-	return if not (p1 ~= nil and p1 ~= "") then if p2 == nil or p2 == "" then nil else p2 else p1
+local function _(p1, p2) --[[ Line: 173 | Named "getTextOrDefault" ]]
+	return if p1 == nil or p1 == "" then if p2 == nil or p2 == "" then nil else p2 else p1
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), responsiveModule (ref), reactModule (ref), useIsHoveredTile (ref), omniRecommendationsContentType (ref), luaAppDefaultGameAdTileText (ref), fFlagMigrateGameInfoToStore (ref), gameHydrationReactModule (ref), useGameInfosSelector (ref), useOverflowMenuOpen (ref), useTriggerFeedback (ref), fFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor (ref), discoveryEventErrorLogger (ref), gameCollectionItemTypes (ref), fFlagLuaAppEnableOneByTwoTileFunnelTelemetry (ref), oneByTwoTileTelemetry (ref), fFlagLuaAppOneByTwoHoverIdleAutoplay (ref), fFlagLuaAppSponsoredAdVideoViewabilityEnabled (ref), useTagAsViewportAutoplayCandidate (ref), fFlagLuaAppVideoAutoplayOneByTwoTileCandidatePercentageUpdate (ref), useTagAsSponsoredAdViewabilityCandidate (ref), videoPlaybackCoordinator (ref), getAvailableGameTileOverflowMenuItems (ref), fFlagLuaAppEnableReportExperience (ref), fFlagLuaAppSduiSponsoredOneByTwoTile (ref), fFlagLuaAppHapticTriggeredTelemetry (ref), getOverflowMenuSignalStore (ref), fFlagLuaAppOneByTwoTileGatePlayerOnVideoLoad (ref), videoLoadingState (ref), useCanDevicePlayVideoPreview (ref), tileVideoBlockingConfig (ref), useRoactService (ref), roactNetworking (ref), appSessionService (ref), useNavigation (ref), useLocalization (ref), discoveryAnalyticsModule (ref), sponsoredGamesRecordClick (ref), setGamePlaySession (ref), sessionType (ref), hoverTileCoordinator (ref), fFlagLuaAppDemoModePlayButtonTelemetry (ref), videoEndReason (ref), appPage (ref), impressionsTagUtility (ref), useValidTileBadges (ref), var1 (ref), var2 (ref), buttonSize (ref), videoDisplay (ref), var4 (ref), var5 (ref), var3 (ref), gameTileThumbnailBadges (ref), image (ref), spanTileOverflowMenuModule (ref), fFlagLuaAppNotInterestedReportPlaceId (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), playButton (ref), fFlagLuaAppGameTileSelectionVideoPlayback (ref), getPlaybackDetectionMethod (ref), videoPlaybackDetector (ref), videoPlaybackDetectionMethod (ref), fIntLuaAppGameTileVideoDwellTimeInSec (ref), fIntLuaAppGameTileVideoVisiblePercent (ref)
-	local var6 = useTokens()
-	local var7 = responsiveModule.useResponsive({ responsiveModule.BreakpointConfig.sizes.Small }) == responsiveModule.Keys.Small
-	local var8 = reactModule.useRef(nil)
-	local var9 = reactModule.useRef(nil)
-	local hoverKey = p1.hoverKey
-	local var10 = responsiveModule.useLastInput() ~= responsiveModule.Input.Touch
-	local var11 = useIsHoveredTile(var8, hoverKey, var10)
-	local var12 = responsiveModule.usePreferredInput()
-	local var13 = p1.adId ~= nil and p1.adId ~= ""
-	local var14 = p1.contentType == omniRecommendationsContentType.AdLink
+return ReactModule.memo(function(p1) --[[ Line: 181 | Named "OneByTwoTile" ]]
+	-- upvalues: UseTokensFunction (copy), ResponsiveModule (copy), ReactModule (copy), UseIsHoveredTileFunction (copy), OmniRecommendationsContentType (copy), LuaAppDefaultGameAdTileText (copy), FFlagMigrateGameInfoToStore (copy), GameHydrationReactModule (copy), UseGameInfosSelectorFunction (copy), UseOverflowMenuOpenFunction (copy), UseTriggerFeedbackFunction (copy), DiscoveryEventErrorLogger (copy), GameCollectionItemTypes (copy), FFlagLuaAppEnableOneByTwoTileFunnelTelemetry (copy), OneByTwoTileTelemetry (copy), FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), VideoPlaybackCoordinator (copy), AdsViewportAutoplayCandidateTagModule (copy), UseTagAsAdsViewportAutoplayCandidateModule (copy), FFlagLuaAppSponsoredAdVideoViewabilityEnabled (copy), UseTagAsViewportAutoplayCandidateFunction (copy), UseTagAsSponsoredAdViewabilityCandidateFunction (copy), GetAvailableGameTileOverflowMenuItemsFunction (copy), FFlagLuaAppEnableReportExperience (copy), FFlagLuaAppSduiSponsoredOneByTwoTile (copy), TileLongPress (copy), GetOverflowMenuSignalStoreFunction (copy), FFlagLuaAppOneByTwoTileGatePlayerOnVideoLoad (copy), VideoLoadingState (copy), UseCanDevicePlayVideoPreviewFunction (copy), TileVideoBlockingConfig (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), AppSessionService (copy), UseNavigationFunction (copy), UseLocalizationFunction (copy), DiscoveryAnalyticsModule (copy), SponsoredGamesRecordClickFunction (copy), SetGamePlaySessionFunction (copy), SessionType (copy), HoverTileCoordinator (copy), FFlagLuaAppDemoModePlayButtonTelemetry (copy), VideoEndReason (copy), AppPage (copy), ImpressionsTagUtility (copy), UseValidTileBadgesFunction (copy), LuaAppOneByTwoTileLogoWidthPercentLandscapeRatio (copy), LuaAppOneByTwoTileLogoWidthPercentSquareRatio (copy), ButtonSize (copy), VideoDisplay (copy), LuaAppOneByTwoTileGradientTopTransparencyPercentRatio (copy), LuaAppOneByTwoTileGradientBottomHeightPercentRatio (copy), LuaAppOneByTwoTileGradientBottomTransparencyPercentRatio (copy), GameTileThumbnailBadges (copy), Image (copy), SpanTileOverflowMenuModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), PlayButton (copy), FFlagLuaAppGameTileSelectionVideoPlayback (copy), GetPlaybackDetectionMethodFunction (copy), VideoPlaybackDetector (copy), VideoPlaybackDetectionMethod (copy), FIntLuaAppGameTileVideoDwellTimeInSec (copy), FIntLuaAppGameTileVideoVisiblePercent (copy)
+	local UseTokensResult = UseTokensFunction()
+	local IsUseResponsiveResultMatch = ResponsiveModule.useResponsive({ ResponsiveModule.BreakpointConfig.sizes.Small }) == ResponsiveModule.Keys.Small
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local HoverKey = p1.hoverKey
+	local IsNotUseLastInputResultMatch = ResponsiveModule.useLastInput() ~= ResponsiveModule.Input.Touch
+	local UseIsHoveredTileResult = UseIsHoveredTileFunction(UseRefResult, HoverKey, IsNotUseLastInputResultMatch)
+	local UsePreferredInputResult = ResponsiveModule.usePreferredInput()
+	local IsNotAdIdMatch: boolean = p1.adId ~= nil and p1.adId ~= ""
+	local IsContentTypeMatch = p1.contentType == OmniRecommendationsContentType.AdLink
 	
-	if var14 then
+	if IsContentTypeMatch then
 		assert(p1.clickoutUrl ~= nil and p1.clickoutUrl ~= "", "OneByTwoTile AdLink requires clickoutUrl")
 	else
 		assert(p1.universeId ~= nil and p1.universeId ~= "", "OneByTwoTile Game requires universeId")
 	end
-	local var15, var16
-	local headline = p1.headline
-	local subtitle = p1.subtitle
-	local name = nil
-	local ageRecommendationDisplayName = nil
+	local Headline = p1.headline
+	local Subtitle = p1.subtitle
+	local Name = nil
+	local AgeRecommendationDisplayName = nil
 	
-	if luaAppDefaultGameAdTileText then
-		if fFlagMigrateGameInfoToStore then
-			local var17 = gameHydrationReactModule.useGameInfo(p1.universeId or "")
+	if LuaAppDefaultGameAdTileText then
+		if FFlagMigrateGameInfoToStore then
+			local UseGameInfoResult = GameHydrationReactModule.useGameInfo(p1.universeId or "")
 			
-			if var17 then
-				name = var17.name
-				ageRecommendationDisplayName = var17.gameAgeDisplayName
+			if UseGameInfoResult then
+				Name = UseGameInfoResult.name
+				AgeRecommendationDisplayName = UseGameInfoResult.gameAgeDisplayName
 			end
 		else
-			local var18 = useGameInfosSelector(p1.universeId or "")
+			local UseGameInfosSelectorResult = UseGameInfosSelectorFunction(p1.universeId or "")
 			
-			if var18 then
-				name = var18.name
-				ageRecommendationDisplayName = var18.ageRecommendationDisplayName
+			if UseGameInfosSelectorResult then
+				Name = UseGameInfosSelectorResult.name
+				AgeRecommendationDisplayName = UseGameInfosSelectorResult.ageRecommendationDisplayName
 			end
 		end
-		if p1.contentType == omniRecommendationsContentType.Game then
-			var15 = headline
-			headline = if var15 ~= nil and var15 ~= "" then if name == nil or name == "" then nil else name else var15
-			var15 = subtitle
-			var16 = ageRecommendationDisplayName
-			subtitle = if var15 ~= nil and var15 ~= "" then if var16 == nil or var16 == "" then nil else var16 else var15
+		if p1.contentType == OmniRecommendationsContentType.Game then
+			local Headline1 = Headline
+			Headline = if Headline1 == nil or Headline1 == "" then if Name == nil or Name == "" then nil else Name else Headline1
+			local Subtitle1 = Subtitle
+			Subtitle = if Subtitle1 == nil or Subtitle1 == "" then if AgeRecommendationDisplayName == nil or AgeRecommendationDisplayName == "" then nil else AgeRecommendationDisplayName else Subtitle1
 		end
 	end
-	var15, var38 = reactModule.useState(false)
-	local var19 = useOverflowMenuOpen(hoverKey)
-	local var20 = useTriggerFeedback()
-	local var21 = reactModule.useRef(false)
-	local var22 = nil
-	local _ = nil
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseOverflowMenuOpenResult = UseOverflowMenuOpenFunction(HoverKey)
+	local UseTriggerFeedbackResult = UseTriggerFeedbackFunction()
+	local UseRefResult2 = ReactModule.useRef(false)
+	local OffsetRatio = if p1.cellVerticalPadding == nil then if p1.size == nil or p1.size.Height.Scale <= 1 then nil else p1.size.Height.Offset / (p1.size.Height.Scale - 1) else p1.cellVerticalPadding
+	local NoOffsetRatio = OffsetRatio == nil
+	local OffsetRatio1 = OffsetRatio or UseTokensResult.Gap.Large
+	ReactModule.useEffect(function() --[[ Line: 241 ]]
+		-- upvalues: NoOffsetRatio (copy), DiscoveryEventErrorLogger (upval)
+		if NoOffsetRatio then
+			DiscoveryEventErrorLogger.reportError("SponsoredTiles", "OneByTwoTile: could not resolve cellVerticalPadding for a 1x2 tile")
+		end
+	end, { NoOffsetRatio })
+	ReactModule.useEffect(function() --[[ Line: 250 ]]
+		-- upvalues: p1 (copy), GameCollectionItemTypes (upval), DiscoveryEventErrorLogger (upval)
+		if p1.alignmentType ~= GameCollectionItemTypes.AlignmentType.LeftPin and p1.alignmentType ~= GameCollectionItemTypes.AlignmentType.RightPin then
+			DiscoveryEventErrorLogger.reportError("SponsoredTiles", "OneByTwoTile: 1x2 tile is neither left- nor right-pinned", { alignmentType = tostring(p1.alignmentType) })
+		end
+	end, { p1.alignmentType })
 	
-	if fFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor then
-		local var23 = false
-		
-		if p1.cellVerticalPadding ~= nil then
-			var22 = p1.cellVerticalPadding
-		elseif p1.size == nil or p1.size.Height.Scale <= 1 then
-			var23 = true
-			var22 = var6.Gap.Large
-		else
-			var22 = p1.size.Height.Offset / (p1.size.Height.Scale - 1)
-		end
-		reactModule.useEffect(function()
-			-- upvalues: var23 (write), discoveryEventErrorLogger (copy)
-			if var23 then
-				discoveryEventErrorLogger.reportError("SponsoredTiles", "OneByTwoTile: could not resolve cellVerticalPadding for a 1x2 tile")
-			end
-		end, { var23 })
-		reactModule.useEffect(function()
-			-- upvalues: p1 (ref), gameCollectionItemTypes (copy), discoveryEventErrorLogger (copy)
-			if p1.alignmentType ~= gameCollectionItemTypes.AlignmentType.LeftPin and p1.alignmentType ~= gameCollectionItemTypes.AlignmentType.RightPin then
-				discoveryEventErrorLogger.reportError("SponsoredTiles", "OneByTwoTile: 1x2 tile is neither left- nor right-pinned", { alignmentType = tostring(p1.alignmentType) })
-			end
-		end, { p1.alignmentType })
-	end
-	if fFlagLuaAppEnableOneByTwoTileFunnelTelemetry then
-		reactModule.useEffect(function()
-			-- upvalues: p1 (ref), oneByTwoTileTelemetry (copy), gameCollectionItemTypes (copy)
+	if FFlagLuaAppEnableOneByTwoTileFunnelTelemetry then
+		ReactModule.useEffect(function() --[[ Line: 265 ]]
+			-- upvalues: p1 (copy), OneByTwoTileTelemetry (upval), GameCollectionItemTypes (upval)
 			if p1.oneByTwoTileFlowId then
-				oneByTwoTileTelemetry.logOneByTwoTileRendered({
+				OneByTwoTileTelemetry.logOneByTwoTileRendered({
 					oneByTwoTileFlowId = p1.oneByTwoTileFlowId,
 					recommendationsRequestId = p1.recommendationsRequestId,
 					topicId = p1.topicId,
 					contentType = p1.contentType,
 					adId = p1.adId,
-					componentType = gameCollectionItemTypes.GameCollectionItemType.OneByTwoTile,
+					componentType = GameCollectionItemTypes.GameCollectionItemType.OneByTwoTile,
 					alignmentType = p1.alignmentType,
 					isSdui = p1.isSdui == true
 				})
@@ -185,613 +167,639 @@ return reactModule.memo(function(p1)
 			p1.adId, p1.alignmentType, p1.isSdui
 		})
 	end
-	local var24 = if fFlagLuaAppOneByTwoHoverIdleAutoplay and fFlagLuaAppSponsoredAdVideoViewabilityEnabled and var13 then `{hoverKey}|{p1.adId}` else hoverKey
-	useTagAsViewportAutoplayCandidate(var8, p1.videoPlaybackContext, true, nil, if fFlagLuaAppVideoAutoplayOneByTwoTileCandidatePercentageUpdate or fFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor then 2 else nil, if fFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor then var22 else nil, if fFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor then p1.alignmentType else nil, if fFlagLuaAppOneByTwoHoverIdleAutoplay then {
-		isUserIntentModeAutoplayCandidate = true,
-		videoKey = var24
-	} else nil)
-	local var25 = if fFlagLuaAppSponsoredAdVideoViewabilityEnabled then reactModule.useRef(nil) else nil
+	local ViewportVideoAutoplayController = nil
+	local UseMemoResult = nil
+	local Callback1 = nil
 	
-	if fFlagLuaAppSponsoredAdVideoViewabilityEnabled then
-		useTagAsSponsoredAdViewabilityCandidate(var8, if var13 then {
+	if FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback then
+		ViewportVideoAutoplayController = if p1.videoPlaybackContext then p1.videoPlaybackContext.viewportVideoAutoplayController else nil
+		local IsUserIntentWithSelectiveAutoplay = FFlagLuaAppOneByTwoHoverIdleAutoplay and (ViewportVideoAutoplayController ~= nil and ViewportVideoAutoplayController:isUserIntentWithSelectiveAutoplay())
+		local Text = if IsNotAdIdMatch then `{HoverKey}|{p1.adId}` else HoverKey
+		local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
+		local IsUseStateResultMatch = UseStateResult1 == Text or ViewportVideoAutoplayController ~= nil and ViewportVideoAutoplayController:hasCompletedAdsPlayback(Text)
+		UseMemoResult = ReactModule.useMemo(function() --[[ Line: 309 ]]
+			-- upvalues: ViewportVideoAutoplayController (ref), IsUserIntentWithSelectiveAutoplay (copy), IsUseStateResultMatch (copy), VideoPlaybackCoordinator (upval), AdsViewportAutoplayCandidateTagModule (upval)
+			if not ViewportVideoAutoplayController or IsUserIntentWithSelectiveAutoplay or IsUseStateResultMatch then
+				return nil
+			end
+			local AdsPlaybackCoordinator = ViewportVideoAutoplayController:getAdsPlaybackCoordinator()
+			
+			if AdsPlaybackCoordinator then
+				return AdsPlaybackCoordinator
+			else
+				local NewVideoPlaybackCoordinator = VideoPlaybackCoordinator.new()
+				ViewportVideoAutoplayController:attachAdsPlaybackCoordinator(NewVideoPlaybackCoordinator, AdsViewportAutoplayCandidateTagModule)
+				
+				return NewVideoPlaybackCoordinator
+			end
+		end, {
+			ViewportVideoAutoplayController,
+			IsUserIntentWithSelectiveAutoplay,
+			IsUseStateResultMatch
+		})
+		UseTagAsAdsViewportAutoplayCandidateModule(UseRefResult, if UseMemoResult then ViewportVideoAutoplayController else nil)
+		local HasUseMemoResult = UseMemoResult ~= nil
+		Callback1 = ReactModule.useCallback(function() --[[ Line: 339 ]]
+			-- upvalues: UseRefResult (copy), HasUseMemoResult (copy), ViewportVideoAutoplayController (ref), Text (copy), UseStateResult2_1 (copy)
+			local Current = UseRefResult.current
+			
+			if HasUseMemoResult and ViewportVideoAutoplayController and Current then
+				ViewportVideoAutoplayController:completeAdsPlayback(Current, Text)
+				UseStateResult2_1(Text)
+				
+				return
+			end
+		end, { HasUseMemoResult, ViewportVideoAutoplayController, Text })
+	end
+	local Text1 = if FFlagLuaAppOneByTwoHoverIdleAutoplay and FFlagLuaAppSponsoredAdVideoViewabilityEnabled and IsNotAdIdMatch then `{HoverKey}|{p1.adId}` else HoverKey
+	UseTagAsViewportAutoplayCandidateFunction(UseRefResult, if FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback and UseMemoResult then nil else p1.videoPlaybackContext, true, nil, 2, OffsetRatio1, p1.alignmentType, if FFlagLuaAppOneByTwoHoverIdleAutoplay then {
+		isUserIntentModeAutoplayCandidate = true,
+		videoKey = Text1
+	} else nil)
+	local UseRefResult3 = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then ReactModule.useRef(nil) else nil
+	
+	if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then
+		UseTagAsSponsoredAdViewabilityCandidateFunction(UseRefResult, if IsNotAdIdMatch then {
 			mediaType = "video",
 			encryptedAdTrackingData = p1.adId,
-			tileType = gameCollectionItemTypes.GameCollectionItemType.OneByTwoTile,
-			videoPlaybackStateRef = var25,
+			tileType = GameCollectionItemTypes.GameCollectionItemType.OneByTwoTile,
+			videoPlaybackStateRef = UseRefResult3,
 			videoSource = `rbxassetid://{p1.primaryVideoAssetId}`
 		} else nil)
 	end
-	local var26
-	local var27 = if p1.videoPlaybackContext then p1.videoPlaybackContext.videoPlaybackCoordinator else videoPlaybackCoordinator.default
-	local var28 = if fFlagLuaAppOneByTwoHoverIdleAutoplay and p1.videoPlaybackContext then p1.videoPlaybackContext.viewportVideoAutoplayController else nil
-	local var29 = fFlagLuaAppOneByTwoHoverIdleAutoplay and (var10 and (var28 ~= nil and var28:isUserIntentWithSelectiveAutoplay()))
-	local var30 = reactModule.useMemo(function()
-		-- upvalues: getAvailableGameTileOverflowMenuItems (copy), var13 (ref), p1 (ref), fFlagLuaAppEnableReportExperience (copy), var14 (ref)
-		return getAvailableGameTileOverflowMenuItems({
-			isSponsored = var13,
+	local UseMemoResult1 = if FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback and UseMemoResult then UseMemoResult elseif p1.videoPlaybackContext then p1.videoPlaybackContext.videoPlaybackCoordinator else VideoPlaybackCoordinator.default
+	
+	if not FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback then
+		ViewportVideoAutoplayController = if FFlagLuaAppOneByTwoHoverIdleAutoplay and p1.videoPlaybackContext then p1.videoPlaybackContext.viewportVideoAutoplayController else nil
+	end
+	local IsUserIntentWithSelectiveAutoplay1 = FFlagLuaAppOneByTwoHoverIdleAutoplay and (IsNotUseLastInputResultMatch and (ViewportVideoAutoplayController ~= nil and ViewportVideoAutoplayController:isUserIntentWithSelectiveAutoplay()))
+	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 412 ]]
+		-- upvalues: GetAvailableGameTileOverflowMenuItemsFunction (upval), IsNotAdIdMatch (copy), p1 (copy), FFlagLuaAppEnableReportExperience (upval), IsContentTypeMatch (copy)
+		return GetAvailableGameTileOverflowMenuItemsFunction({
+			isSponsored = IsNotAdIdMatch,
 			enableSponsoredFeedback = p1.enableSponsoredFeedback,
 			enableReportAd = p1.enableReportAd,
-			enableReportExperience = if fFlagLuaAppEnableReportExperience then if var14 then nil else p1.enableReportExperience else nil,
-			enableExplicitFeedback = if var14 then nil else p1.enableExplicitFeedback
+			enableReportExperience = if FFlagLuaAppEnableReportExperience then if IsContentTypeMatch then nil else p1.enableReportExperience else nil,
+			enableExplicitFeedback = if IsContentTypeMatch then nil else p1.enableExplicitFeedback
 		})
 	end, {
-		var13, var14, p1.enableSponsoredFeedback, p1.enableReportAd,
-		if fFlagLuaAppEnableReportExperience then p1.enableReportExperience else nil,
+		IsNotAdIdMatch, IsContentTypeMatch, p1.enableSponsoredFeedback,
+		p1.enableReportAd,
+		if FFlagLuaAppEnableReportExperience then p1.enableReportExperience else nil,
 		p1.enableExplicitFeedback
 	})
-	local var31 = reactModule.useCallback(function()
-		-- upvalues: var21 (ref)
-		var21.current = false
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 433 ]]
+		-- upvalues: UseRefResult2 (copy)
+		UseRefResult2.current = false
 	end, {})
-	local onSelectionGained = p1.onSelectionGained
-	local var32 = reactModule.useCallback(function()
-		-- upvalues: var16 (ref), onSelectionGained (ref)
-		var16(true)
+	local OnSelectionGainedFunction = p1.onSelectionGained
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 438 ]]
+		-- upvalues: UseStateResult2 (copy), OnSelectionGainedFunction (copy)
+		UseStateResult2(true)
 		
-		if onSelectionGained then
-			onSelectionGained()
+		if OnSelectionGainedFunction then
+			OnSelectionGainedFunction()
 		end
-	end, { onSelectionGained })
-	local onSelectionLost = p1.onSelectionLost
-	local var33 = reactModule.useCallback(function()
-		-- upvalues: var16 (ref), onSelectionLost (ref)
-		var16(false)
+	end, { OnSelectionGainedFunction })
+	local OnSelectionLostFunction = p1.onSelectionLost
+	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 446 ]]
+		-- upvalues: UseStateResult2 (copy), OnSelectionLostFunction (copy)
+		UseStateResult2(false)
 		
-		if onSelectionLost then
-			onSelectionLost()
+		if OnSelectionLostFunction then
+			OnSelectionLostFunction()
 		end
-	end, { onSelectionLost })
-	local var34 = reactModule.useCallback(function()
-		-- upvalues: var21 (ref), fFlagLuaAppSduiSponsoredOneByTwoTile (copy), p1 (ref), var30 (ref), var20 (ref), var19 (ref), fFlagLuaAppHapticTriggeredTelemetry (copy), getOverflowMenuSignalStore (copy), hoverKey (ref)
-		local current = var21.current
-		var21.current = true
+	end, { OnSelectionLostFunction })
+	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 454 ]]
+		-- upvalues: UseRefResult2 (copy), FFlagLuaAppSduiSponsoredOneByTwoTile (upval), p1 (copy), UseMemoResult2 (copy), UseTriggerFeedbackResult (copy), UseOverflowMenuOpenResult (copy), TileLongPress (upval), GetOverflowMenuSignalStoreFunction (upval), HoverKey (copy)
+		local Current = UseRefResult2.current
+		UseRefResult2.current = true
 		
-		if fFlagLuaAppSduiSponsoredOneByTwoTile and current == false and p1.onTouchLongPress then
+		if FFlagLuaAppSduiSponsoredOneByTwoTile and Current == false and p1.onTouchLongPress then
 			p1.onTouchLongPress()
 			
 			return
-		elseif current == false and next(var30) ~= nil then
-			if var20 and not var19 then
-				var20("OneByTwoTileLongPress", "Press", if fFlagLuaAppHapticTriggeredTelemetry then p1.appPage or "Unknown" else nil, if fFlagLuaAppHapticTriggeredTelemetry then if fFlagLuaAppHapticTriggeredTelemetry then {
+		end
+		if Current == false and next(UseMemoResult2) ~= nil then
+			if UseTriggerFeedbackResult and not UseOverflowMenuOpenResult then
+				UseTriggerFeedbackResult(TileLongPress, "Press", p1.appPage or "Unknown", {
 					universeId = tostring(p1.universeId or ""),
 					sortId = p1.topicId
-				} else nil else nil)
+				})
 			end
-			getOverflowMenuSignalStore().openMenu(hoverKey)
+			GetOverflowMenuSignalStoreFunction().openMenu(HoverKey)
 		end
 	end, {
-		hoverKey, p1.appPage, p1.topicId, p1.universeId, var20, var19, var30,
-		if fFlagLuaAppSduiSponsoredOneByTwoTile then p1.onTouchLongPress else nil
+		HoverKey, p1.appPage, p1.topicId, p1.universeId, UseTriggerFeedbackResult,
+		UseOverflowMenuOpenResult, UseMemoResult2,
+		if FFlagLuaAppSduiSponsoredOneByTwoTile then p1.onTouchLongPress else nil
 	})
-	local var35 = reactModule.useRef(0)
-	local var36 = nil
-	local var37 = nil
-	local var38 = nil
-	local var39 = nil
+	local UseRefResult4 = ReactModule.useRef(0)
+	local v1 = nil
+	local Callback = nil
+	local Failed = nil
+	local v2: ((any) -> ())? = nil
 	
-	if fFlagLuaAppOneByTwoTileGatePlayerOnVideoLoad then
-		local _ = nil
-		local var40, var41 = reactModule.useState(nil)
-		var36 = var40
-		var37 = var41
-		local var42, var43 = reactModule.useState(videoLoadingState.Idle)
-		var38 = var42
-		var26 = var43
+	if FFlagLuaAppOneByTwoTileGatePlayerOnVideoLoad then
+		local UseStateResult2_3 = nil
+		v1, Callback = ReactModule.useState(nil)
+		Failed, UseStateResult2_3 = ReactModule.useState(VideoLoadingState.Idle)
 		
-		var39 = function(p2)
-			-- upvalues: videoLoadingState (copy), var26 (write)
-			if p2 ~= videoLoadingState.Idle then
-				var26(p2)
+		v2 = function(Idle) --[[ Line: 491 ]]
+			-- upvalues: VideoLoadingState (upval), UseStateResult2_3 (ref)
+			if Idle ~= VideoLoadingState.Idle then
+				UseStateResult2_3(Idle)
 			end
 		end
 	end
-	var26 = reactModule.useCallback(function(p2, p3)
-		-- upvalues: var35 (ref), fFlagLuaAppOneByTwoTileGatePlayerOnVideoLoad (copy), oneByTwoTileTelemetry (copy), p1 (ref), var37 (write), var27 (ref)
-		var35.current = 0
+	local UseResult5 = ReactModule.useCallback(function(Duration, LoadTime) --[[ Line: 498 ]]
+		-- upvalues: UseRefResult4 (copy), FFlagLuaAppOneByTwoTileGatePlayerOnVideoLoad (upval), OneByTwoTileTelemetry (upval), p1 (copy), Callback (ref), UseMemoResult1 (copy)
+		UseRefResult4.current = 0
 		
-		if fFlagLuaAppOneByTwoTileGatePlayerOnVideoLoad then
-			oneByTwoTileTelemetry.logOneByTwoTileVideoLoaded(p2, p3, p1.adId)
-			var37({ duration = p2, loadTime = p3 })
+		if FFlagLuaAppOneByTwoTileGatePlayerOnVideoLoad then
+			OneByTwoTileTelemetry.logOneByTwoTileVideoLoaded(Duration, LoadTime, p1.adId)
+			Callback({ duration = Duration, loadTime = LoadTime })
 			
 			return
-		elseif p1.videoAnalytics then
-			p1.videoAnalytics.reportVideoLoad(p1.index, var27.currentPlaybackSessionId, p2, p3)
+		end
+		if p1.videoAnalytics then
+			p1.videoAnalytics.reportVideoLoad(p1.index, UseMemoResult1.currentPlaybackSessionId, Duration, LoadTime)
 		end
 	end, {
-		if fFlagLuaAppOneByTwoTileGatePlayerOnVideoLoad then nil else p1.videoAnalytics,
-		if fFlagLuaAppOneByTwoTileGatePlayerOnVideoLoad then nil else var27,
-		if fFlagLuaAppOneByTwoTileGatePlayerOnVideoLoad then nil else p1.index,
-		if fFlagLuaAppOneByTwoTileGatePlayerOnVideoLoad then var37 else nil,
-		if fFlagLuaAppOneByTwoTileGatePlayerOnVideoLoad then p1.adId else nil
+		if FFlagLuaAppOneByTwoTileGatePlayerOnVideoLoad then nil else p1.videoAnalytics,
+		if FFlagLuaAppOneByTwoTileGatePlayerOnVideoLoad then nil else UseMemoResult1,
+		if FFlagLuaAppOneByTwoTileGatePlayerOnVideoLoad then nil else p1.index,
+		if FFlagLuaAppOneByTwoTileGatePlayerOnVideoLoad then Callback else nil,
+		if FFlagLuaAppOneByTwoTileGatePlayerOnVideoLoad then p1.adId else nil
 	})
-	local var44 = reactModule.useCallback(function()
-		-- upvalues: var35 (ref), p1 (ref), var27 (ref)
-		var35.current = 0
+	local UseResult6 = ReactModule.useCallback(function() --[[ Line: 527 ]]
+		-- upvalues: UseRefResult4 (copy), p1 (copy), UseMemoResult1 (copy), FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback (upval), Callback1 (ref)
+		UseRefResult4.current = 0
 		
 		if p1.videoAnalytics then
-			p1.videoAnalytics.reportVideoLoop(p1.index, var27.currentPlaybackSessionId)
+			p1.videoAnalytics.reportVideoLoop(p1.index, UseMemoResult1.currentPlaybackSessionId)
 		end
-	end, { p1.videoAnalytics, var27, p1.index })
-	local var45 = if fFlagLuaAppOneByTwoHoverIdleAutoplay then reactModule.useCallback(function()
-		-- upvalues: var8 (ref), discoveryEventErrorLogger (copy), var28 (ref)
-		local current = var8.current
+		if FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback and Callback1 then
+			Callback1()
+		end
+	end, {
+		p1.videoAnalytics,
+		UseMemoResult1,
+		p1.index,
+		if FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback then Callback1 else nil
+	})
+	local UseResult7 = if FFlagLuaAppOneByTwoHoverIdleAutoplay then ReactModule.useCallback(function() --[[ Line: 546 ]]
+		-- upvalues: UseRefResult (copy), DiscoveryEventErrorLogger (upval), ViewportVideoAutoplayController (ref)
+		local Current = UseRefResult.current
 		
-		if current == nil then
-			discoveryEventErrorLogger.reportError("SponsoredTiles", "OneByTwoTile: tile ref missing when reporting video completion")
+		if Current == nil then
+			DiscoveryEventErrorLogger.reportError("SponsoredTiles", "OneByTwoTile: tile ref missing when reporting video completion")
 			
 			return
-		elseif var28 then
-			var28:onVideoCompleted(current)
 		end
-	end, { var28, var8 }) else nil
-	local var46 = reactModule.useCallback(function(p2)
-		-- upvalues: var35 (ref)
-		var35.current = p2
+		if ViewportVideoAutoplayController then
+			ViewportVideoAutoplayController:onVideoCompleted(Current)
+		end
+	end, { ViewportVideoAutoplayController, UseRefResult }) else nil
+	local UseResult8 = ReactModule.useCallback(function(Current) --[[ Line: 562 ]]
+		-- upvalues: UseRefResult4 (copy)
+		UseRefResult4.current = Current
 	end, {})
-	local var47, var48 = reactModule.useState(false)
+	local UseStateResult4, UseStateResult2_4 = ReactModule.useState(false)
 	
-	if fFlagLuaAppOneByTwoTileGatePlayerOnVideoLoad then
-		reactModule.useEffect(function()
-			-- upvalues: var36 (write), var47 (ref), var27 (ref), p1 (ref), var37 (write)
-			if not var47 or var36 == nil then return end
-			local currentPlaybackSessionId = var27.currentPlaybackSessionId
+	if FFlagLuaAppOneByTwoTileGatePlayerOnVideoLoad then
+		ReactModule.useEffect(function() --[[ Line: 569 ]]
+			-- upvalues: v1 (ref), UseStateResult4 (copy), UseMemoResult1 (copy), p1 (copy), Callback (ref)
+			local v3 = v1
 			
-			if currentPlaybackSessionId == nil then return end
+			if not UseStateResult4 or v3 == nil then return end
+			local CurrentPlaybackSessionId = UseMemoResult1.currentPlaybackSessionId
+			
+			if CurrentPlaybackSessionId == nil then return end
 			if p1.videoAnalytics then
-				p1.videoAnalytics.reportVideoLoad(p1.index, currentPlaybackSessionId, var36.duration, var36.loadTime)
-				var37(nil)
+				p1.videoAnalytics.reportVideoLoad(p1.index, CurrentPlaybackSessionId, v3.duration, v3.loadTime)
+				Callback(nil)
 			end
 		end, {
-			var47, var36, var27, p1.videoAnalytics, p1.index, var37
+			UseStateResult4, v1, UseMemoResult1, p1.videoAnalytics, p1.index, Callback
 		})
 	end
-	local var49 = p1.videoPlaybackContext ~= nil and p1.videoPlaybackContext.disablePlayback == true
-	reactModule.useEffect(function()
-		-- upvalues: var49 (ref), var48 (ref)
-		if var49 then
-			var48(false)
+	local IsDisablePlayback: boolean = p1.videoPlaybackContext ~= nil and p1.videoPlaybackContext.disablePlayback == true
+	ReactModule.useEffect(function() --[[ Line: 595 ]]
+		-- upvalues: IsDisablePlayback (copy), UseStateResult2_4 (copy)
+		if IsDisablePlayback then
+			UseStateResult2_4(false)
 		end
-	end, { var49 })
-	local var50, var51 = reactModule.useState(false)
-	local var52 = useCanDevicePlayVideoPreview(tileVideoBlockingConfig, p1.universeId or "", p1.pageContext or "")
-	local var53 = reactModule.useCallback(function()
-		-- upvalues: var51 (ref), var52 (ref)
-		var51(var52())
-	end, { var52 })
+	end, { IsDisablePlayback })
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(false)
+	local UseCanDevicePlayVideoPreviewResult = UseCanDevicePlayVideoPreviewFunction(TileVideoBlockingConfig, p1.universeId or "", p1.pageContext or "")
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 606 ]]
+		-- upvalues: UseStateResult2_2 (copy), UseCanDevicePlayVideoPreviewResult (copy)
+		UseStateResult2_2(UseCanDevicePlayVideoPreviewResult())
+	end, { UseCanDevicePlayVideoPreviewResult })
 	
-	if fFlagLuaAppOneByTwoTileGatePlayerOnVideoLoad then
-		reactModule.useEffect(var53, { var53 })
+	if FFlagLuaAppOneByTwoTileGatePlayerOnVideoLoad then
+		ReactModule.useEffect(UseResult, { UseResult })
 	end
-	local large, headingMedium, bodyMedium, size800, size500, xSmall, medium, size1000, titleMedium
-	local var54 = useRoactService(roactNetworking)
-	local var55 = useRoactService(appSessionService)
-	local var56 = useNavigation()
-	local var57 = if var14 then p1.ctaText elseif p1.ctaText ~= "" then useLocalization({ joinButtonText = "Common.VisitGame.Label.Play" }).joinButtonText else p1.ctaText
-	local var58 = var14 and (p1.clickoutUrl ~= nil and (p1.clickoutUrl ~= "" and var57 ~= ""))
-	local launchExperienceEventContext = p1.launchExperienceEventContext or discoveryAnalyticsModule.Constants.Context.ExperienceTile
-	local var59 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref), sponsoredGamesRecordClick (copy), var54 (ref)
+	local UseRoactServiceResult = UseRoactServiceFunction(RoactNetworking)
+	local UseRoactServiceResult1 = UseRoactServiceFunction(AppSessionService)
+	local UseNavigationResult = UseNavigationFunction()
+	local UseLocalizationResult = UseLocalizationFunction({ joinButtonText = "Common.VisitGame.Label.Play" })
+	local CtaText = if IsContentTypeMatch then p1.ctaText elseif p1.ctaText == "" then UseLocalizationResult.joinButtonText else p1.ctaText
+	local IsNotCtaTextMatch: boolean = IsContentTypeMatch and (p1.clickoutUrl ~= nil and (p1.clickoutUrl ~= "" and CtaText ~= ""))
+	local LaunchExperienceEventContext = p1.launchExperienceEventContext or DiscoveryAnalyticsModule.Constants.Context.ExperienceTile
+	local UseResult9 = ReactModule.useCallback(function() --[[ Line: 627 ]]
+		-- upvalues: p1 (copy), SponsoredGamesRecordClickFunction (upval), UseRoactServiceResult (copy)
 		if p1.adId then
-			sponsoredGamesRecordClick(var54, p1.adId)
+			SponsoredGamesRecordClickFunction(UseRoactServiceResult, p1.adId)
 		end
-	end, { var54, p1.adId })
-	local var60 = reactModule.useCallback(function(p2)
-		-- upvalues: var55 (ref), setGamePlaySession (copy), sessionType (copy), var11 (ref), hoverTileCoordinator (copy), p1 (ref), gameCollectionItemTypes (copy), launchExperienceEventContext (ref), fFlagLuaAppDemoModePlayButtonTelemetry (copy)
-		if var55 then
-			setGamePlaySession(var55, sessionType.StructuralIdentifier.GamePlayFromHoverTile, true)
+	end, { UseRoactServiceResult, p1.adId })
+	local UseResult10 = ReactModule.useCallback(function(p2) --[[ Line: 634 ]]
+		-- upvalues: UseRoactServiceResult1 (copy), SetGamePlaySessionFunction (upval), SessionType (upval), UseIsHoveredTileResult (copy), HoverTileCoordinator (upval), p1 (copy), GameCollectionItemTypes (upval), LaunchExperienceEventContext (copy), FFlagLuaAppDemoModePlayButtonTelemetry (upval)
+		if UseRoactServiceResult1 then
+			SetGamePlaySessionFunction(UseRoactServiceResult1, SessionType.StructuralIdentifier.GamePlayFromHoverTile, true)
 		end
-		if var11 then
-			hoverTileCoordinator.default:reset()
+		if UseIsHoveredTileResult then
+			HoverTileCoordinator.default:reset()
 		end
 		if p1.reportExperienceLaunched then
 			p1.reportExperienceLaunched({
 				placeId = p1.placeId,
 				universeId = p1.universeId,
 				adId = p1.adId,
-				tileType = gameCollectionItemTypes.GameCollectionItemType.OneByTwoTile,
+				tileType = GameCollectionItemTypes.GameCollectionItemType.OneByTwoTile,
 				placeIdOverride = p1.placeIdOverride,
 				launchDataOverride = p1.launchDataOverride
-			}, p1.referralSource, "OneByTwoTile", launchExperienceEventContext, p1.index, if fFlagLuaAppDemoModePlayButtonTelemetry then p2 else nil)
+			}, p1.referralSource, "OneByTwoTile", LaunchExperienceEventContext, p1.index, if FFlagLuaAppDemoModePlayButtonTelemetry then p2 else nil)
 		end
 	end, {
-		var55, p1.reportExperienceLaunched, p1.placeId, p1.universeId, p1.adId,
-		p1.placeIdOverride, p1.launchDataOverride, p1.referralSource,
-		launchExperienceEventContext, p1.index, var11
+		UseRoactServiceResult1, p1.reportExperienceLaunched, p1.placeId, p1.universeId,
+		p1.adId, p1.placeIdOverride, p1.launchDataOverride, p1.referralSource,
+		LaunchExperienceEventContext, p1.index, UseIsHoveredTileResult
 	})
-	local var61 = reactModule.useCallback(function()
-		-- upvalues: var21 (ref), var11 (ref), hoverTileCoordinator (copy), fFlagLuaAppOneByTwoTileGatePlayerOnVideoLoad (copy), var50 (ref), var38 (write), videoLoadingState (copy), oneByTwoTileTelemetry (copy), var35 (ref), var27 (ref), videoEndReason (copy), p1 (ref), var56 (ref), appPage (copy), headline (write), subtitle (write), gameCollectionItemTypes (copy), launchExperienceEventContext (ref), fFlagLuaAppSduiSponsoredOneByTwoTile (copy)
-		if var21.current then
-			var21.current = false
+	local UseResult11 = ReactModule.useCallback(function() --[[ Line: 677 ]]
+		-- upvalues: UseRefResult2 (copy), UseIsHoveredTileResult (copy), HoverTileCoordinator (upval), FFlagLuaAppOneByTwoTileGatePlayerOnVideoLoad (upval), UseStateResult3 (copy), Failed (ref), VideoLoadingState (upval), OneByTwoTileTelemetry (upval), UseRefResult4 (copy), UseMemoResult1 (copy), VideoEndReason (upval), p1 (copy), UseNavigationResult (copy), AppPage (upval), Headline (ref), Subtitle (ref), GameCollectionItemTypes (upval), LaunchExperienceEventContext (copy), FFlagLuaAppSduiSponsoredOneByTwoTile (upval)
+		if UseRefResult2.current then
+			UseRefResult2.current = false
 			
 			return
-		elseif var11 then
-			hoverTileCoordinator.default:reset()
 		end
-		if fFlagLuaAppOneByTwoTileGatePlayerOnVideoLoad and (not var50 or var38 ~= videoLoadingState.Loaded) then
+		if UseIsHoveredTileResult then
+			HoverTileCoordinator.default:reset()
+		end
+		if not FFlagLuaAppOneByTwoTileGatePlayerOnVideoLoad or UseStateResult3 and Failed == VideoLoadingState.Loaded then
+			OneByTwoTileTelemetry.logOneByTwoTileActivated()
+			local Current = UseRefResult4.current
+			UseMemoResult1:reset(VideoEndReason.TileClicked, nil, p1.universeId, nil)
+			UseNavigationResult.navigate(AppPage.FeatureTileAdPlayer, {
+				extraProps = {
+					videoAssetId = p1.primaryVideoAssetId,
+					imageAssetId = p1.primaryImageAssetId,
+					startPlaybackProgress = Current,
+					attributionThumbnailAssetId = p1.attributionThumbnailAssetId,
+					videoPlaybackContext = p1.videoPlaybackContext,
+					title = Headline,
+					subtitle = Subtitle,
+					contentType = p1.contentType,
+					payerName = p1.payerName,
+					sponsoredUserCohort = p1.sponsoredUserCohort,
+					adId = p1.adId,
+					enableReportAd = p1.enableReportAd,
+					clickoutUrl = p1.clickoutUrl,
+					ctaText = p1.ctaText,
+					universeId = p1.universeId,
+					index = p1.index,
+					placeId = p1.placeId,
+					placeIdOverride = p1.placeIdOverride,
+					launchDataOverride = p1.launchDataOverride,
+					referralSource = p1.referralSource,
+					source = GameCollectionItemTypes.GameCollectionItemType.OneByTwoTile,
+					launchExperienceEventContext = LaunchExperienceEventContext,
+					reportGameDetailOpened = p1.reportGameDetailOpened,
+					reportExperienceLaunched = p1.reportExperienceLaunched,
+					onOpenGameDetails = if FFlagLuaAppSduiSponsoredOneByTwoTile then p1.onOpenGameDetails else nil,
+					disableGameLaunchSponsoredClickRecording = if FFlagLuaAppSduiSponsoredOneByTwoTile then p1.disableGameLaunchSponsoredClickRecording else nil
+				}
+			})
+			
 			return
 		end
-		oneByTwoTileTelemetry.logOneByTwoTileActivated()
-		local current = var35.current
-		var27:reset(videoEndReason.TileClicked, nil, p1.universeId, nil)
-		var56.navigate(appPage.FeatureTileAdPlayer, {
-			extraProps = {
-				videoAssetId = p1.primaryVideoAssetId,
-				imageAssetId = p1.primaryImageAssetId,
-				startPlaybackProgress = current,
-				attributionThumbnailAssetId = p1.attributionThumbnailAssetId,
-				videoPlaybackContext = p1.videoPlaybackContext,
-				title = headline,
-				subtitle = subtitle,
-				contentType = p1.contentType,
-				payerName = p1.payerName,
-				sponsoredUserCohort = p1.sponsoredUserCohort,
-				adId = p1.adId,
-				enableReportAd = p1.enableReportAd,
-				clickoutUrl = p1.clickoutUrl,
-				ctaText = p1.ctaText,
-				universeId = p1.universeId,
-				index = p1.index,
-				placeId = p1.placeId,
-				placeIdOverride = p1.placeIdOverride,
-				launchDataOverride = p1.launchDataOverride,
-				referralSource = p1.referralSource,
-				source = gameCollectionItemTypes.GameCollectionItemType.OneByTwoTile,
-				launchExperienceEventContext = launchExperienceEventContext,
-				reportGameDetailOpened = p1.reportGameDetailOpened,
-				reportExperienceLaunched = p1.reportExperienceLaunched,
-				onOpenGameDetails = if fFlagLuaAppSduiSponsoredOneByTwoTile then p1.onOpenGameDetails else nil,
-				disableGameLaunchSponsoredClickRecording = if fFlagLuaAppSduiSponsoredOneByTwoTile then p1.disableGameLaunchSponsoredClickRecording else nil
-			}
-		})
 	end, {
-		var11, var56, var27, p1.universeId, p1.primaryVideoAssetId,
-		p1.primaryImageAssetId, p1.attributionThumbnailAssetId,
-		p1.videoPlaybackContext, headline, subtitle, p1.contentType, p1.payerName,
+		UseIsHoveredTileResult, UseNavigationResult, UseMemoResult1, p1.universeId,
+		p1.primaryVideoAssetId, p1.primaryImageAssetId, p1.attributionThumbnailAssetId,
+		p1.videoPlaybackContext, Headline, Subtitle, p1.contentType, p1.payerName,
 		p1.sponsoredUserCohort, p1.adId, p1.enableReportAd, p1.clickoutUrl, p1.ctaText,
 		p1.placeId, p1.placeIdOverride, p1.launchDataOverride, p1.referralSource,
-		launchExperienceEventContext, p1.index, p1.reportGameDetailOpened,
+		LaunchExperienceEventContext, p1.index, p1.reportGameDetailOpened,
 		p1.reportExperienceLaunched,
-		if fFlagLuaAppSduiSponsoredOneByTwoTile then p1.onOpenGameDetails else nil,
-		if fFlagLuaAppSduiSponsoredOneByTwoTile then p1.disableGameLaunchSponsoredClickRecording else nil,
-		if fFlagLuaAppOneByTwoTileGatePlayerOnVideoLoad then var50 else nil,
-		if fFlagLuaAppOneByTwoTileGatePlayerOnVideoLoad then var38 else nil
+		if FFlagLuaAppSduiSponsoredOneByTwoTile then p1.onOpenGameDetails else nil,
+		if FFlagLuaAppSduiSponsoredOneByTwoTile then p1.disableGameLaunchSponsoredClickRecording else nil,
+		if FFlagLuaAppOneByTwoTileGatePlayerOnVideoLoad then UseStateResult3 else nil,
+		if FFlagLuaAppOneByTwoTileGatePlayerOnVideoLoad then Failed else nil
 	})
-	local var62 = reactModule.useCallback(function()
-		-- upvalues: oneByTwoTileTelemetry (copy), fFlagLuaAppSduiSponsoredOneByTwoTile (copy), p1 (ref), var59 (ref)
-		oneByTwoTileTelemetry.logOneByTwoTileGameJoinInitiated()
-		oneByTwoTileTelemetry.logOneByTwoTileCtaActivated(oneByTwoTileTelemetry.CtaType.GameJoin)
+	local UseResult12 = ReactModule.useCallback(function() --[[ Line: 763 ]]
+		-- upvalues: OneByTwoTileTelemetry (upval), FFlagLuaAppSduiSponsoredOneByTwoTile (upval), p1 (copy), UseResult9 (copy)
+		OneByTwoTileTelemetry.logOneByTwoTileGameJoinInitiated()
+		OneByTwoTileTelemetry.logOneByTwoTileCtaActivated(OneByTwoTileTelemetry.CtaType.GameJoin)
 		
-		if fFlagLuaAppSduiSponsoredOneByTwoTile then
-			if p1.disableGameLaunchSponsoredClickRecording then
-				return
-			else
-				var59()
-				
-				return
-			end
-		else
-			var59()
+		if not FFlagLuaAppSduiSponsoredOneByTwoTile then
+			UseResult9()
+		elseif not p1.disableGameLaunchSponsoredClickRecording then
+			UseResult9()
+			
+			return
 		end
 	end, {
-		var59,
-		if fFlagLuaAppSduiSponsoredOneByTwoTile then p1.disableGameLaunchSponsoredClickRecording else nil
+		UseResult9,
+		if FFlagLuaAppSduiSponsoredOneByTwoTile then p1.disableGameLaunchSponsoredClickRecording else nil
 	})
-	local var63 = reactModule.useCallback(function()
-		-- upvalues: var58 (ref), oneByTwoTileTelemetry (copy), var59 (ref), var56 (ref), appPage (copy), p1 (ref)
-		if var58 then
-			oneByTwoTileTelemetry.logOneByTwoTileCtaActivated(oneByTwoTileTelemetry.CtaType.Clickout)
-			var59()
-			var56.navigate(appPage.GenericWebPage, {
+	local UseResult13 = ReactModule.useCallback(function() --[[ Line: 780 ]]
+		-- upvalues: IsNotCtaTextMatch (copy), OneByTwoTileTelemetry (upval), UseResult9 (copy), UseNavigationResult (copy), AppPage (upval), p1 (copy)
+		if IsNotCtaTextMatch then
+			OneByTwoTileTelemetry.logOneByTwoTileCtaActivated(OneByTwoTileTelemetry.CtaType.Clickout)
+			UseResult9()
+			UseNavigationResult.navigate(AppPage.GenericWebPage, {
 				detail = p1.clickoutUrl,
 				extraProps = { showDomainAsTitle = true }
 			})
 			
 			return
 		end
-	end, { var58, var56, p1.clickoutUrl, var59 })
-	reactModule.useEffect(function()
-		-- upvalues: impressionsTagUtility (copy), var9 (ref), p1 (ref)
-		impressionsTagUtility.AddTag(var9, p1.impressionsTag, p1.index)
+	end, {
+		IsNotCtaTextMatch,
+		UseNavigationResult,
+		p1.clickoutUrl,
+		UseResult9
+	})
+	ReactModule.useEffect(function() --[[ Line: 795 ]]
+		-- upvalues: ImpressionsTagUtility (upval), UseRefResult1 (copy), p1 (copy)
+		ImpressionsTagUtility.AddTag(UseRefResult1, p1.impressionsTag, p1.index)
 		
-		return function()
-			-- upvalues: impressionsTagUtility (copy), var9 (copy), p1 (copy)
-			impressionsTagUtility.RemoveTag(var9, p1.impressionsTag, p1.index)
+		return function() --[[ Line: 797 ]]
+			-- upvalues: ImpressionsTagUtility (upval), UseRefResult1 (upval), p1 (upval)
+			ImpressionsTagUtility.RemoveTag(UseRefResult1, p1.impressionsTag, p1.index)
 		end
 	end, { p1.impressionsTag, p1.index })
-	local var64 = useValidTileBadges(p1.universeId or "", p1.topicId, p1.badgeOverride)
-	local var65 = tonumber(p1.logoAspectRatio)
-	local var66 = if var65 and var65 > 0 then var65 else 1
-	local var67 = if var66 == 3 then var1 else var2
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local _ = nil
+	local UseValidTileBadgesResult = UseValidTileBadgesFunction(p1.universeId or "", p1.topicId, p1.badgeOverride)
+	local Number: number? = tonumber(p1.logoAspectRatio)
+	local Number1: number = if Number and Number > 0 then Number else 1
+	local LuaAppOneByTwoTileLogoWidthPercentLandscapeRatio1 = if Number1 == 3 then LuaAppOneByTwoTileLogoWidthPercentLandscapeRatio else LuaAppOneByTwoTileLogoWidthPercentSquareRatio
+	local Size800 = nil
+	local TitleLarge = nil
+	local Medium = nil
+	local XXSmall = nil
+	local BodySmall = nil
+	local Size600 = nil
+	local Size500 = nil
+	local Small = nil
+	local TitleSmall = nil
 	
-	if var7 then
-		large = var6.Padding.Medium
-		headingMedium = var6.Typography.TitleLarge
-		bodyMedium = var6.Typography.BodySmall
-		size800 = var6.Size.Size_600
-		size500 = var6.Size.Size_500
-		xSmall = var6.Gap.XXSmall
-		medium = buttonSize.Small
-		size1000 = var6.Size.Size_800
-		titleMedium = var6.Typography.TitleSmall
+	if IsUseResponsiveResultMatch then
+		Medium = UseTokensResult.Padding.Medium
+		TitleLarge = UseTokensResult.Typography.TitleLarge
+		BodySmall = UseTokensResult.Typography.BodySmall
+		Size600 = UseTokensResult.Size.Size_600
+		Size500 = UseTokensResult.Size.Size_500
+		XXSmall = UseTokensResult.Gap.XXSmall
+		Small = ButtonSize.Small
+		Size800 = UseTokensResult.Size.Size_800
+		TitleSmall = UseTokensResult.Typography.TitleSmall
 	else
-		large = var6.Padding.Large
-		headingMedium = var6.Typography.HeadingMedium
-		bodyMedium = var6.Typography.BodyMedium
-		size800 = var6.Size.Size_800
-		size500 = var6.Size.Size_500
-		xSmall = var6.Gap.XSmall
-		medium = buttonSize.Medium
-		size1000 = var6.Size.Size_1000
-		titleMedium = var6.Typography.TitleMedium
+		Medium = UseTokensResult.Padding.Large
+		TitleLarge = UseTokensResult.Typography.HeadingMedium
+		BodySmall = UseTokensResult.Typography.BodyMedium
+		Size600 = UseTokensResult.Size.Size_800
+		Size500 = UseTokensResult.Size.Size_500
+		XXSmall = UseTokensResult.Gap.XSmall
+		Small = ButtonSize.Medium
+		Size800 = UseTokensResult.Size.Size_1000
+		TitleSmall = UseTokensResult.Typography.TitleMedium
 	end
-	local var68
-	local createElement = reactModule.createElement
-	local var69 = "Frame"
-	local t = {
-		BackgroundTransparency = 1,
-		BorderSizePixel = 0,
-		Size = if fFlagLuaAppSduiSponsoredOneByTwoTile then p1.rootSize else nil,
-		LayoutOrder = p1.index,
-		ZIndex = p1.zIndex,
-		ref = var9
-	}
-	local t_1 = {}
-	local createElement_1 = reactModule.createElement
-	local var70 = "TextButton"
-	local t_2 = {
-		ref = var8,
-		Size = p1.size or UDim2.fromScale(1, 1),
-		BackgroundColor3 = var6.Color.Surface.Surface_100.Color3,
-		BorderSizePixel = 0,
-		ClipsDescendants = true,
-		Text = "",
-		AutoButtonColor = false,
-		SelectionOrder = p1.SelectionOrder,
-		[reactModule.Event.Activated] = var61,
-		[reactModule.Event.TouchLongPress] = var34,
-		[reactModule.Event.SelectionGained] = var32,
-		[reactModule.Event.SelectionLost] = var33,
-		[reactModule.Change.GuiState] = var31
-	}
-	local t_3 = {
-		UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, var6.Radius.Medium) })
-	}
-	local createElement_2 = reactModule.createElement
-	local t_4 = {
-		muted = true,
-		ZIndex = 0,
-		video = `rbxassetid://{p1.primaryVideoAssetId}`,
-		thumbnail = `rbxassetid://{p1.primaryImageAssetId}`,
-		shouldStartPlayback = var47
-	}
+	local PlaybackDetectionMethod = if FFlagLuaAppOneByTwoHoverIdleAutoplay or FFlagLuaAppGameTileSelectionVideoPlayback then GetPlaybackDetectionMethodFunction(UsePreferredInputResult, IsNotUseLastInputResultMatch) else nil
 	
-	if fFlagLuaAppOneByTwoTileGatePlayerOnVideoLoad then
-		var68 = var50
-		
-		if var68 then
-			var68 = var38 ~= videoLoadingState.Failed
-			var68 = nil
-		end
-	else
-		var68 = nil
-	end
-	local createElement_3
-	t_4.loadImmediately = var68
-	t_4.looped = if fFlagLuaAppOneByTwoHoverIdleAutoplay then not var29 or var11 else true
-	t_4.Size = UDim2.fromScale(1, 1)
-	t_4.ScaleType = Enum.ScaleType.Crop
-	t_4.cornerRadius = var6.Radius.Medium
-	t_4.onVideoLoaded = var26
-	t_4.onLoadingStateChanged = if fFlagLuaAppOneByTwoTileGatePlayerOnVideoLoad then var39 else nil
-	t_4.onVideoEnded = if fFlagLuaAppOneByTwoHoverIdleAutoplay and var29 then var45 else nil
-	t_4.onVideoLooped = var44
-	t_4.onVideoProgressChanged = var46
-	t_4.videoPlaybackStateRef = if fFlagLuaAppSponsoredAdVideoViewabilityEnabled and var13 then var25 else nil
-	t_3.Video = createElement_2(videoDisplay, t_4)
-	t_3.GradientOverlayBottom = reactModule.createElement("Frame", {
-		BackgroundTransparency = 0,
-		BorderSizePixel = 0,
-		ZIndex = 1,
-		AnchorPoint = Vector2.new(0, 1),
-		Position = UDim2.new(0, 0, 1, 0),
-		Size = UDim2.fromScale(1, 1),
-		BackgroundColor3 = var6.Color.Extended.Black.Black_100.Color3
-	}, {
-		UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, var6.Radius.Medium) }),
-		UIGradientBottom = reactModule.createElement("UIGradient", {
-			Rotation = 90,
-			Transparency = NumberSequence.new({
-				NumberSequenceKeypoint.new(0, var4),
-				NumberSequenceKeypoint.new(1 - var5, var4),
-				NumberSequenceKeypoint.new(1, var3)
-			})
-		})
-	})
-	t_3.TileBadge = if var64 then reactModule.createElement("Frame", {
-		BackgroundTransparency = 1,
-		ZIndex = 2,
-		Size = UDim2.fromScale(1, 1)
-	}, {
-		Badge = reactModule.createElement(gameTileThumbnailBadges, { tileBadgesByPosition = var64 })
-	}) else nil
-	t_3.Logo = if p1.logoImageAssetId then reactModule.createElement(image, {
-		tag = "anchor-top-right",
-		ZIndex = 2,
-		Image = `rbxassetid://{p1.logoImageAssetId}`,
-		Position = UDim2.new(1, -var6.Padding.Medium, 0, var6.Padding.Medium),
-		Size = UDim2.new(var67, 0, 1, 0),
-		aspectRatio = var66
-	}) else nil
-	
-	if fFlagLuaAppSduiSponsoredOneByTwoTile and p1.renderOverflowMenu then
-		createElement_3 = p1.renderOverflowMenu({
-			isHovered = var11,
-			isSelected = var15,
-			menuKey = hoverKey,
-			parentRef = var8
-		})
-	else
-		createElement_3 = reactModule.createElement
-		createElement_3 = createElement_3(spanTileOverflowMenuModule, {
-			zIndex = 4,
-			hoverKey = hoverKey,
-			parentRef = var8,
-			universeId = p1.universeId,
-			placeId = if fFlagLuaAppNotInterestedReportPlaceId or fFlagLuaAppEnableReportExperience then p1.placeId else nil,
-			adId = p1.adId,
-			payerName = p1.payerName,
-			sponsoredUserCohort = p1.sponsoredUserCohort,
-			appPage = p1.appPage,
-			topicId = p1.topicId,
-			isSponsored = var13,
-			contentType = p1.contentType,
-			setGameHidden = if fFlagLuaAppSduiSponsoredOneByTwoTile then p1.setGameHidden or function() end else p1.setGameHidden,
-			isHovered = var11,
-			isSelected = var15,
-			availableMenuItems = var30
-		})
-	end
-	local createElement_5
-	t_3.OverflowMenu = createElement_3
-	t_3.BottomStack = reactModule.createElement("Frame", {
-		BackgroundTransparency = 1,
-		BorderSizePixel = 0,
-		ZIndex = 2,
-		Size = UDim2.new(1, -2 * large, 0, 0),
-		AutomaticSize = Enum.AutomaticSize.Y,
-		Position = UDim2.new(0, large, 1, -large),
-		AnchorPoint = Vector2.new(0, 1)
-	}, {
-		UIListLayout = reactModule.createElement("UIListLayout", {
-			FillDirection = Enum.FillDirection.Vertical,
-			SortOrder = Enum.SortOrder.LayoutOrder,
-			HorizontalAlignment = Enum.HorizontalAlignment.Left,
-			Padding = UDim.new(0, large)
-		}),
-		TextStack = reactModule.createElement("Frame", {
-			LayoutOrder = 1,
+	return ReactModule.createElement(ReactModule.Fragment, nil, {
+		Tile = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
-			Size = UDim2.new(1, 0, 0, 0),
-			AutomaticSize = Enum.AutomaticSize.Y
+			Size = if FFlagLuaAppSduiSponsoredOneByTwoTile then p1.rootSize else nil,
+			LayoutOrder = p1.index,
+			ZIndex = p1.zIndex,
+			ref = UseRefResult1
 		}, {
-			UIListLayout = reactModule.createElement("UIListLayout", {
-				FillDirection = Enum.FillDirection.Vertical,
-				SortOrder = Enum.SortOrder.LayoutOrder,
-				HorizontalAlignment = Enum.HorizontalAlignment.Left,
-				Padding = UDim.new(0, xSmall)
-			}),
-			Headline = if headline then reactModule.createElement("TextLabel", {
-				LayoutOrder = 1,
-				BackgroundTransparency = 1,
-				TextWrapped = true,
-				Size = UDim2.new(1, 0, 0, 2 * size800),
-				Text = headline,
-				Font = if foundationFontFaceMigration then nil else headingMedium.Font,
-				FontFace = if foundationFontFaceMigration then normalizeFontFace(headingMedium.Font) else nil,
-				LineHeight = headingMedium.LineHeight,
-				TextSize = headingMedium.FontSize,
-				TextColor3 = var6.LightMode.ActionOverMedia.Foreground.Color3,
-				TextXAlignment = Enum.TextXAlignment.Left,
-				TextYAlignment = Enum.TextYAlignment.Bottom,
-				TextTruncate = Enum.TextTruncate.AtEnd
-			}) else nil,
-			Subtitle = if subtitle then reactModule.createElement("TextLabel", {
-				LayoutOrder = 2,
-				BackgroundTransparency = 1,
-				TextWrapped = false,
-				Size = UDim2.new(1, 0, 0, size500),
-				Text = subtitle,
-				Font = if foundationFontFaceMigration then nil else bodyMedium.Font,
-				FontFace = if foundationFontFaceMigration then normalizeFontFace(bodyMedium.Font) else nil,
-				LineHeight = bodyMedium.LineHeight,
-				TextSize = bodyMedium.FontSize,
-				TextColor3 = var6.LightMode.ActionOverMedia.Foreground.Color3,
-				TextXAlignment = Enum.TextXAlignment.Left,
-				TextYAlignment = Enum.TextYAlignment.Top,
-				TextTruncate = Enum.TextTruncate.AtEnd
-			}) else nil
-		}),
-		CtaButton = if var14 then if var58 then reactModule.createElement("TextButton", {
-			LayoutOrder = 2,
-			Size = UDim2.fromOffset(0, size1000),
-			AutomaticSize = Enum.AutomaticSize.X,
-			BackgroundColor3 = var6.Color.Extended.White.White_20.Color3,
-			BackgroundTransparency = var6.Color.Extended.White.White_20.Transparency,
-			BorderSizePixel = 0,
-			Text = var57,
-			TextColor3 = var6.LightMode.ActionOverMedia.Foreground.Color3,
-			Font = if foundationFontFaceMigration then nil else titleMedium.Font,
-			FontFace = if foundationFontFaceMigration then normalizeFontFace(titleMedium.Font) else nil,
-			TextSize = titleMedium.FontSize,
-			[reactModule.Event.Activated] = var63
-		}, {
-			UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, var6.Radius.Medium) }),
-			UIPadding = reactModule.createElement("UIPadding", {
-				PaddingLeft = UDim.new(0, var6.Padding.Large),
-				PaddingRight = UDim.new(0, var6.Padding.Large)
+			Container = ReactModule.createElement("TextButton", {
+				ref = UseRefResult,
+				Size = p1.size or UDim2.fromScale(1, 1),
+				BackgroundColor3 = UseTokensResult.Color.Surface.Surface_100.Color3,
+				BorderSizePixel = 0,
+				ClipsDescendants = true,
+				Text = "",
+				AutoButtonColor = false,
+				SelectionOrder = p1.SelectionOrder,
+				[ReactModule.Event.Activated] = UseResult11,
+				[ReactModule.Event.TouchLongPress] = UseResult4,
+				[ReactModule.Event.SelectionGained] = UseResult2,
+				[ReactModule.Event.SelectionLost] = UseResult3,
+				[ReactModule.Change.GuiState] = UseResult1
+			}, {
+				UICorner = ReactModule.createElement("UICorner", {
+					CornerRadius = UDim.new(0, UseTokensResult.Radius.Medium)
+				}),
+				Video = ReactModule.createElement(VideoDisplay, {
+					muted = true,
+					ZIndex = 0,
+					video = `rbxassetid://{p1.primaryVideoAssetId}`,
+					thumbnail = `rbxassetid://{p1.primaryImageAssetId}`,
+					shouldStartPlayback = UseStateResult4,
+					loadImmediately = if FFlagLuaAppOneByTwoTileGatePlayerOnVideoLoad then UseStateResult3 and Failed ~= VideoLoadingState.Failed else nil,
+					looped = not FFlagLuaAppOneByTwoHoverIdleAutoplay or (not IsUserIntentWithSelectiveAutoplay1 or UseIsHoveredTileResult),
+					Size = UDim2.fromScale(1, 1),
+					ScaleType = Enum.ScaleType.Crop,
+					cornerRadius = UseTokensResult.Radius.Medium,
+					onVideoLoaded = UseResult5,
+					onLoadingStateChanged = if FFlagLuaAppOneByTwoTileGatePlayerOnVideoLoad then v2 else nil,
+					onVideoEnded = if FFlagLuaAppOneByTwoHoverIdleAutoplay and IsUserIntentWithSelectiveAutoplay1 then UseResult7 else nil,
+					onVideoLooped = UseResult6,
+					onVideoProgressChanged = UseResult8,
+					videoPlaybackStateRef = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled and IsNotAdIdMatch then UseRefResult3 else nil
+				}),
+				GradientOverlayBottom = ReactModule.createElement("Frame", {
+					BackgroundTransparency = 0,
+					BorderSizePixel = 0,
+					ZIndex = 1,
+					AnchorPoint = Vector2.new(0, 1),
+					Position = UDim2.new(0, 0, 1, 0),
+					Size = UDim2.fromScale(1, 1),
+					BackgroundColor3 = UseTokensResult.Color.Extended.Black.Black_100.Color3
+				}, {
+					UICorner = ReactModule.createElement("UICorner", {
+						CornerRadius = UDim.new(0, UseTokensResult.Radius.Medium)
+					}),
+					UIGradientBottom = ReactModule.createElement("UIGradient", {
+						Rotation = 90,
+						Transparency = NumberSequence.new({
+							NumberSequenceKeypoint.new(0, LuaAppOneByTwoTileGradientTopTransparencyPercentRatio),
+							NumberSequenceKeypoint.new(1 - LuaAppOneByTwoTileGradientBottomHeightPercentRatio, LuaAppOneByTwoTileGradientTopTransparencyPercentRatio),
+							NumberSequenceKeypoint.new(1, LuaAppOneByTwoTileGradientBottomTransparencyPercentRatio)
+						})
+					})
+				}),
+				TileBadge = if UseValidTileBadgesResult then ReactModule.createElement("Frame", {
+					BackgroundTransparency = 1,
+					ZIndex = 2,
+					Size = UDim2.fromScale(1, 1)
+				}, {
+					Badge = ReactModule.createElement(GameTileThumbnailBadges, { tileBadgesByPosition = UseValidTileBadgesResult })
+				}) else nil,
+				Logo = if p1.logoImageAssetId then ReactModule.createElement(Image, {
+					tag = "anchor-top-right",
+					ZIndex = 2,
+					Image = `rbxassetid://{p1.logoImageAssetId}`,
+					Position = UDim2.new(1, -UseTokensResult.Padding.Medium, 0, UseTokensResult.Padding.Medium),
+					Size = UDim2.new(LuaAppOneByTwoTileLogoWidthPercentLandscapeRatio1, 0, 1, 0),
+					aspectRatio = Number1
+				}) else nil,
+				OverflowMenu = if FFlagLuaAppSduiSponsoredOneByTwoTile and p1.renderOverflowMenu then p1.renderOverflowMenu({
+					isHovered = UseIsHoveredTileResult,
+					isSelected = UseStateResult,
+					menuKey = HoverKey,
+					parentRef = UseRefResult
+				}) else ReactModule.createElement(SpanTileOverflowMenuModule, {
+					zIndex = 4,
+					hoverKey = HoverKey,
+					parentRef = UseRefResult,
+					universeId = p1.universeId,
+					placeId = p1.placeId,
+					adId = p1.adId,
+					payerName = p1.payerName,
+					sponsoredUserCohort = p1.sponsoredUserCohort,
+					appPage = p1.appPage,
+					topicId = p1.topicId,
+					isSponsored = IsNotAdIdMatch,
+					contentType = p1.contentType,
+					setGameHidden = if FFlagLuaAppSduiSponsoredOneByTwoTile then p1.setGameHidden or function() --[[ Line: 948 ]] end else p1.setGameHidden,
+					isHovered = UseIsHoveredTileResult,
+					isSelected = UseStateResult,
+					availableMenuItems = UseMemoResult2
+				}),
+				BottomStack = ReactModule.createElement("Frame", {
+					BackgroundTransparency = 1,
+					BorderSizePixel = 0,
+					ZIndex = 2,
+					Size = UDim2.new(1, -2 * Medium, 0, 0),
+					AutomaticSize = Enum.AutomaticSize.Y,
+					Position = UDim2.new(0, Medium, 1, -Medium),
+					AnchorPoint = Vector2.new(0, 1)
+				}, {
+					UIListLayout = ReactModule.createElement("UIListLayout", {
+						FillDirection = Enum.FillDirection.Vertical,
+						SortOrder = Enum.SortOrder.LayoutOrder,
+						HorizontalAlignment = Enum.HorizontalAlignment.Left,
+						Padding = UDim.new(0, Medium)
+					}),
+					TextStack = ReactModule.createElement("Frame", {
+						LayoutOrder = 1,
+						BackgroundTransparency = 1,
+						BorderSizePixel = 0,
+						Size = UDim2.new(1, 0, 0, 0),
+						AutomaticSize = Enum.AutomaticSize.Y
+					}, {
+						UIListLayout = ReactModule.createElement("UIListLayout", {
+							FillDirection = Enum.FillDirection.Vertical,
+							SortOrder = Enum.SortOrder.LayoutOrder,
+							HorizontalAlignment = Enum.HorizontalAlignment.Left,
+							Padding = UDim.new(0, XXSmall)
+						}),
+						Headline = if Headline then ReactModule.createElement("TextLabel", {
+							LayoutOrder = 1,
+							BackgroundTransparency = 1,
+							TextWrapped = true,
+							Size = UDim2.new(1, 0, 0, 2 * Size600),
+							Text = Headline,
+							Font = if FoundationFontFaceMigration then nil else TitleLarge.Font,
+							FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(TitleLarge.Font) else nil,
+							LineHeight = TitleLarge.LineHeight,
+							TextSize = TitleLarge.FontSize,
+							TextColor3 = UseTokensResult.LightMode.ActionOverMedia.Foreground.Color3,
+							TextXAlignment = Enum.TextXAlignment.Left,
+							TextYAlignment = Enum.TextYAlignment.Bottom,
+							TextTruncate = Enum.TextTruncate.AtEnd
+						}) else nil,
+						Subtitle = if Subtitle then ReactModule.createElement("TextLabel", {
+							LayoutOrder = 2,
+							BackgroundTransparency = 1,
+							TextWrapped = false,
+							Size = UDim2.new(1, 0, 0, Size500),
+							Text = Subtitle,
+							Font = if FoundationFontFaceMigration then nil else BodySmall.Font,
+							FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(BodySmall.Font) else nil,
+							LineHeight = BodySmall.LineHeight,
+							TextSize = BodySmall.FontSize,
+							TextColor3 = UseTokensResult.LightMode.ActionOverMedia.Foreground.Color3,
+							TextXAlignment = Enum.TextXAlignment.Left,
+							TextYAlignment = Enum.TextYAlignment.Top,
+							TextTruncate = Enum.TextTruncate.AtEnd
+						}) else nil
+					}),
+					CtaButton = if IsContentTypeMatch then if IsNotCtaTextMatch then ReactModule.createElement("TextButton", {
+						LayoutOrder = 2,
+						Size = UDim2.fromOffset(0, Size800),
+						AutomaticSize = Enum.AutomaticSize.X,
+						BackgroundColor3 = UseTokensResult.Color.Extended.White.White_20.Color3,
+						BackgroundTransparency = UseTokensResult.Color.Extended.White.White_20.Transparency,
+						BorderSizePixel = 0,
+						Text = CtaText,
+						TextColor3 = UseTokensResult.LightMode.ActionOverMedia.Foreground.Color3,
+						Font = if FoundationFontFaceMigration then nil else TitleSmall.Font,
+						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(TitleSmall.Font) else nil,
+						TextSize = TitleSmall.FontSize,
+						[ReactModule.Event.Activated] = UseResult13
+					}, {
+						UICorner = ReactModule.createElement("UICorner", {
+							CornerRadius = UDim.new(0, UseTokensResult.Radius.Medium)
+						}),
+						UIPadding = ReactModule.createElement("UIPadding", {
+							PaddingLeft = UDim.new(0, UseTokensResult.Padding.Large),
+							PaddingRight = UDim.new(0, UseTokensResult.Padding.Large)
+						})
+					}) else nil elseif p1.universeId then ReactModule.createElement(PlayButton, {
+						LayoutOrder = 2,
+						launchSource = "OneByTwoTile",
+						hidePlayableIcon = true,
+						preferSecondaryPlayButton = true,
+						universeId = p1.universeId,
+						placeId = if p1.placeIdOverride then p1.placeIdOverride else p1.placeId,
+						referralSource = p1.referralSource,
+						eventContext = LaunchExperienceEventContext,
+						playableText = CtaText,
+						buttonSize = Small,
+						onActivated = UseResult12,
+						reportExperienceLaunched = UseResult10,
+						experienceJoinData = {
+							launchData = p1.launchDataOverride,
+							tileType = GameCollectionItemTypes.GameCollectionItemType.OneByTwoTile,
+							nativeAdData = p1.adId
+						}
+					}) else nil
+				})
 			})
-		}) else nil elseif p1.universeId then reactModule.createElement(playButton, {
-			LayoutOrder = 2,
-			launchSource = "OneByTwoTile",
-			hidePlayableIcon = true,
-			preferSecondaryPlayButton = true,
-			universeId = p1.universeId,
-			placeId = if p1.placeIdOverride then p1.placeIdOverride else p1.placeId,
-			referralSource = p1.referralSource,
-			eventContext = launchExperienceEventContext,
-			playableText = var57,
-			buttonSize = medium,
-			onActivated = var62,
-			reportExperienceLaunched = var60,
-			experienceJoinData = {
-				launchData = p1.launchDataOverride,
-				tileType = gameCollectionItemTypes.GameCollectionItemType.OneByTwoTile,
-				nativeAdData = p1.adId
-			}
-		}) else nil
-	})
-	t_1.Container = createElement_1(var70, t_2, t_3)
-	createElement = createElement(var69, t, t_1)
-	local var71 = if fFlagLuaAppOneByTwoHoverIdleAutoplay or fFlagLuaAppGameTileSelectionVideoPlayback then getPlaybackDetectionMethod(var12, var10) else nil
-	local createElement_4 = reactModule.createElement
-	local fragment = reactModule.Fragment
-	local var72 = nil
-	local t_5 = { Tile = createElement }
-	
-	if var49 then
-		createElement_5 = nil
-	else
-		createElement_5 = reactModule.createElement
-		createElement_5 = createElement_5(videoPlaybackDetector, {
-			videoKey = if fFlagLuaAppOneByTwoHoverIdleAutoplay then var24 else hoverKey,
+		}),
+		VideoPlaybackDetector = if IsDisablePlayback then nil else ReactModule.createElement(VideoPlaybackDetector, {
+			videoKey = if FFlagLuaAppOneByTwoHoverIdleAutoplay then Text1 else HoverKey,
 			itemIndex = p1.index,
-			itemFrameRef = var8,
-			playbackDetectionMethod = if fFlagLuaAppGameTileSelectionVideoPlayback or fFlagLuaAppOneByTwoHoverIdleAutoplay then var71 else nil,
-			isHoverSupported = if fFlagLuaAppGameTileSelectionVideoPlayback then nil else var10,
-			autoplay = if fFlagLuaAppGameTileSelectionVideoPlayback then nil else true,
-			isHovered = var11,
-			hasVideoPlaybackUserIntent = if fFlagLuaAppOneByTwoHoverIdleAutoplay and var71 == videoPlaybackDetectionMethod.Hover then var11 else nil,
-			onPlaybackChange = var48,
+			itemFrameRef = UseRefResult,
+			playbackDetectionMethod = if FFlagLuaAppGameTileSelectionVideoPlayback or FFlagLuaAppOneByTwoHoverIdleAutoplay then PlaybackDetectionMethod else nil,
+			isHoverSupported = if FFlagLuaAppGameTileSelectionVideoPlayback then nil else IsNotUseLastInputResultMatch,
+			autoplay = not FFlagLuaAppGameTileSelectionVideoPlayback or nil,
+			isHovered = UseIsHoveredTileResult,
+			hasVideoPlaybackUserIntent = if FFlagLuaAppOneByTwoHoverIdleAutoplay and PlaybackDetectionMethod == VideoPlaybackDetectionMethod.Hover then UseIsHoveredTileResult else nil,
+			onPlaybackChange = UseStateResult2_4,
 			videoAnalytics = p1.videoAnalytics,
-			videoDwellTimeInSec = fIntLuaAppGameTileVideoDwellTimeInSec,
-			videoVisiblePercent = fIntLuaAppGameTileVideoVisiblePercent,
-			videoPlaybackCoordinator = var27,
-			viewportVideoAutoplayController = if p1.videoPlaybackContext then p1.videoPlaybackContext.viewportVideoAutoplayController else nil,
-			isVideoEligible = var50,
-			onPlaybackCandidate = var53
+			videoDwellTimeInSec = FIntLuaAppGameTileVideoDwellTimeInSec,
+			videoVisiblePercent = FIntLuaAppGameTileVideoVisiblePercent,
+			videoPlaybackCoordinator = UseMemoResult1,
+			viewportVideoAutoplayController = if FFlagLuaAppVideoAutoplayOneByTwoConcurrentPlayback then ViewportVideoAutoplayController elseif p1.videoPlaybackContext then p1.videoPlaybackContext.viewportVideoAutoplayController else nil,
+			isVideoEligible = UseStateResult3,
+			onPlaybackCandidate = UseResult
 		})
-	end
-	t_5.VideoPlaybackDetector = createElement_5
-	
-	return createElement_4(fragment, var72, t_5)
+	})
 end)

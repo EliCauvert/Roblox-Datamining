@@ -1,34 +1,35 @@
-﻿local squadsCore = script:FindFirstAncestor("SquadsCore")
-local parent = squadsCore.Parent
-local useCurrentSquadMemberModule = require(script.Parent.useCurrentSquadMember)
-local reactModule = require(parent.React)
-local _ = require(parent.RoduxSquads)
-local getFFlagEnablePartyVoiceOnlyForEligibleUsersModule = require(squadsCore.Flags.GetFFlagEnablePartyVoiceOnlyForEligibleUsers)
-local getFStringPartyVoiceEligibilityAllowListModule = require(squadsCore.Flags.GetFStringPartyVoiceEligibilityAllowList)
+﻿local SquadsCore = script:FindFirstAncestor("SquadsCore")
+local Parent = SquadsCore.Parent
+local UseCurrentSquadMemberModule = require(script.Parent.useCurrentSquadMember)
+local ReactModule = require(Parent.React)
+local _ = require(Parent.RoduxSquads)
+local GetFFlagEnablePartyVoiceOnlyForEligibleUsersModule = require(SquadsCore.Flags.GetFFlagEnablePartyVoiceOnlyForEligibleUsers)
+local GetFStringPartyVoiceEligibilityAllowListModule = require(SquadsCore.Flags.GetFStringPartyVoiceEligibilityAllowList)
 
-function getIsUserWhitelisted(p1)
-	-- upvalues: getFStringPartyVoiceEligibilityAllowListModule (ref)
-	for i in getFStringPartyVoiceEligibilityAllowListModule():gmatch("%d+") do
-		if tonumber(i) == p1 then
+function getIsUserWhitelisted(Number): boolean --[[ Line: 15 ]]
+	-- upvalues: GetFStringPartyVoiceEligibilityAllowListModule (copy)
+	for i in GetFStringPartyVoiceEligibilityAllowListModule():gmatch("%d+") do
+		if tonumber(i) == Number then
 			return true
 		end
 	end
 	return false
 end
 
-function useIsUserPartyVoiceEligible(p2)
-	-- upvalues: useCurrentSquadMemberModule (ref), reactModule (ref)
-	local var1 = useCurrentSquadMemberModule(p2)
+function useIsUserPartyVoiceEligible(p1) --[[ Line: 24 ]]
+	-- upvalues: UseCurrentSquadMemberModule (copy), ReactModule (copy)
+	local UseCurrentSquadMemberModuleResult = UseCurrentSquadMemberModule(p1)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 31 ]]
+		-- upvalues: p1 (copy)
+		return getIsUserWhitelisted(p1)
+	end, { p1 })
 	
-	return reactModule.useMemo(function()
-		-- upvalues: var1 (ref)
-		return var1 and var1.partyVoiceEligible == true
-	end, { var1 }) or reactModule.useMemo(function()
-		-- upvalues: p2 (ref)
-		return getIsUserWhitelisted(p2)
-	end, { p2 })
+	return ReactModule.useMemo(function(): boolean --[[ Line: 27 ]]
+		-- upvalues: UseCurrentSquadMemberModuleResult (copy)
+		return UseCurrentSquadMemberModuleResult and UseCurrentSquadMemberModuleResult.partyVoiceEligible == true
+	end, { UseCurrentSquadMemberModuleResult }) or UseMemoResult
 end
 
-return if getFFlagEnablePartyVoiceOnlyForEligibleUsersModule() then useIsUserPartyVoiceEligible else function(_)
+return if GetFFlagEnablePartyVoiceOnlyForEligibleUsersModule() then useIsUserPartyVoiceEligible else function(_): boolean --[[ Line: 40 ]]
 	return true
 end

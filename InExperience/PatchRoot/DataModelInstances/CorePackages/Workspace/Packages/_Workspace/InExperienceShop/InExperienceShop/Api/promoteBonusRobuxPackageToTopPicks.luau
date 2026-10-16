@@ -1,21 +1,21 @@
-﻿local inExperienceShop = script:FindFirstAncestor("InExperienceShop")
-local sharedFlagsModule = require(inExperienceShop.Parent.SharedFlags)
-local _ = require(inExperienceShop.Types)
-local findTopPicksSectionIndexModule = require(inExperienceShop.Utils.findTopPicksSectionIndex)
-local fFlagPromoteRobuxInTopPicksModule = require(inExperienceShop.Flags.FFlagPromoteRobuxInTopPicks)
-local fFlagHideBonusInShopWhenNotClaimableModule = require(inExperienceShop.Flags.FFlagHideBonusInShopWhenNotClaimable)
-local fFlagEnableRobuxInExperienceShop = sharedFlagsModule.FFlagEnableRobuxInExperienceShop
-local fFlagEnableBonusJwtInShop = sharedFlagsModule.FFlagEnableBonusJwtInShop
-local bonusPromotionEligibilityModule = require(inExperienceShop.Api.BonusPromotionEligibility)
+﻿local InExperienceShop = script:FindFirstAncestor("InExperienceShop")
+local SharedFlagsModule = require(InExperienceShop.Parent.SharedFlags)
+local _ = require(InExperienceShop.Types)
+local FindTopPicksSectionIndexModule = require(InExperienceShop.Utils.findTopPicksSectionIndex)
+local FFlagPromoteRobuxInTopPicksModule = require(InExperienceShop.Flags.FFlagPromoteRobuxInTopPicks)
+local FFlagHideBonusInShopWhenNotClaimableModule = require(InExperienceShop.Flags.FFlagHideBonusInShopWhenNotClaimable)
+local FFlagEnableRobuxInExperienceShop = SharedFlagsModule.FFlagEnableRobuxInExperienceShop
+local FFlagEnableBonusJwtInShop = SharedFlagsModule.FFlagEnableBonusJwtInShop
+local BonusPromotionEligibilityModule = require(InExperienceShop.Api.BonusPromotionEligibility)
 
-local function findFirstBonusRobuxPackageWithPaymentSession(p1)
-	for i, v in p1 do
-		local robuxPackages = v.robuxPackages
+local function findFirstBonusRobuxPackageWithPaymentSession(List) --[[ Line: 18 ]]
+	for _, value in List do
+		local RobuxPackages = value.robuxPackages
 		
-		if robuxPackages ~= nil then
-			for i_1, v_1 in robuxPackages do
-				if v_1.bonusItem ~= nil then
-					return v_1, v.paymentSessionId, v.bonusJwt
+		if RobuxPackages ~= nil then
+			for _, robuxPackage in RobuxPackages do
+				if robuxPackage.bonusItem ~= nil then
+					return robuxPackage, value.paymentSessionId, value.bonusJwt
 				end
 			end
 		end
@@ -23,126 +23,111 @@ local function findFirstBonusRobuxPackageWithPaymentSession(p1)
 	return nil, nil, nil
 end
 
-local function findFirstBonusRobuxPackage(p2)
-	-- upvalues: findFirstBonusRobuxPackageWithPaymentSession (ref)
-	local var1, _, _ = findFirstBonusRobuxPackageWithPaymentSession(p2)
+local function withoutFeaturedPromotion(Tbl) --[[ Line: 40 ]]
+	-- upvalues: FindTopPicksSectionIndexModule (copy)
+	local TopPicksSectionIndexModule = FindTopPicksSectionIndexModule(Tbl)
 	
-	return var1
+	if TopPicksSectionIndexModule == nil then
+		return Tbl
+	end
+	local Entry = Tbl[TopPicksSectionIndexModule]
+	
+	if Entry.featuredRobuxPackage == nil then
+		return Tbl
+	else
+		local Copy = table.clone(Tbl)
+		Copy[TopPicksSectionIndexModule] = {
+			featuredRobuxPackage = nil,
+			id = Entry.id,
+			name = Entry.name,
+			items = Entry.items,
+			categoryType = Entry.categoryType,
+			stableCategoryId = Entry.stableCategoryId,
+			categoryGroup = Entry.categoryGroup,
+			robuxPackages = Entry.robuxPackages
+		}
+		
+		return Copy
+	end
 end
 
-local function withoutFeaturedPromotion(p2)
-	-- upvalues: findTopPicksSectionIndexModule (ref)
-	local var1 = findTopPicksSectionIndexModule(p2)
+local function _(p1, p2): boolean --[[ Line: 73 | Named "canPromoteBonusPackage" ]]
+	-- upvalues: BonusPromotionEligibilityModule (copy)
+	local BonusItem = p1.bonusItem
+	local Text = if BonusItem == nil or BonusItem.type ~= "GamePass" then nil else tostring(BonusItem.id)
 	
-	if var1 == nil then
-		return p2
-	end
-	local var2 = p2[var1]
-	
-	if var2.featuredRobuxPackage == nil then
-		return p2
-	end
-	local cloned = table.clone(p2)
-	cloned[var1] = {
-		featuredRobuxPackage = nil,
-		id = var2.id,
-		name = var2.name,
-		items = var2.items,
-		categoryType = var2.categoryType,
-		stableCategoryId = var2.stableCategoryId,
-		categoryGroup = var2.categoryGroup,
-		robuxPackages = var2.robuxPackages
-	}
-	
-	return cloned
-end
-
-local function _(p2, p3)
-	-- upvalues: bonusPromotionEligibilityModule (ref)
-	local bonusItem = p2.bonusItem
-	local var1 = if bonusItem == nil or bonusItem.type ~= "GamePass" then nil else tostring(bonusItem.id)
-	
-	return if var1 == nil then false elseif p2.bonusItemDetails == nil then false else p3[var1] == bonusPromotionEligibilityModule.Eligible
+	return Text ~= nil and (p1.bonusItemDetails ~= nil and p2[Text] == BonusPromotionEligibilityModule.Eligible)
 end
 
 return {
-	findFirstBonusRobuxPackage = findFirstBonusRobuxPackage,
-	getBonusGamePassId = function(p2)
-		local bonusItem = p2.bonusItem
+	findFirstBonusRobuxPackage = function(p1) --[[ Line: 35 ]]
+		-- upvalues: findFirstBonusRobuxPackageWithPaymentSession (copy)
+		local FirstBonusRobuxPackageWithPaymentSession, _, _ = findFirstBonusRobuxPackageWithPaymentSession(p1)
 		
-		return if bonusItem == nil or bonusItem.type ~= "GamePass" then nil else tostring(bonusItem.id)
+		return FirstBonusRobuxPackageWithPaymentSession
+	end,
+	getBonusGamePassId = function(p1) --[[ Line: 65 ]]
+		local BonusItem = p1.bonusItem
+		
+		return if BonusItem == nil or BonusItem.type ~= "GamePass" then nil else tostring(BonusItem.id)
 	end,
 	withoutFeaturedPromotion = withoutFeaturedPromotion,
-	promoteBonusRobuxPackageToTopPicks = function(p2, p3)
-		-- upvalues: fFlagEnableRobuxInExperienceShop (ref), fFlagPromoteRobuxInTopPicksModule (ref), withoutFeaturedPromotion (ref), findFirstBonusRobuxPackageWithPaymentSession (ref), fFlagEnableBonusJwtInShop (ref), fFlagHideBonusInShopWhenNotClaimableModule (ref), findTopPicksSectionIndexModule (ref), bonusPromotionEligibilityModule (ref)
-		if not fFlagEnableRobuxInExperienceShop or not fFlagPromoteRobuxInTopPicksModule then
-			return withoutFeaturedPromotion(p2)
+	promoteBonusRobuxPackageToTopPicks = function(Tbl, p1) --[[ Line: 96 ]]
+		-- upvalues: FFlagEnableRobuxInExperienceShop (copy), FFlagPromoteRobuxInTopPicksModule (copy), withoutFeaturedPromotion (copy), findFirstBonusRobuxPackageWithPaymentSession (copy), FFlagEnableBonusJwtInShop (copy), FFlagHideBonusInShopWhenNotClaimableModule (copy), FindTopPicksSectionIndexModule (copy), BonusPromotionEligibilityModule (copy)
+		if not FFlagEnableRobuxInExperienceShop or not FFlagPromoteRobuxInTopPicksModule then
+			return (withoutFeaturedPromotion(Tbl))
 		end
-		local var1
-		local var2, var3, var4 = findFirstBonusRobuxPackageWithPaymentSession(p2)
+		local FirstBonusRobuxPackageWithPaymentSession, FirstBonusRobuxPackageWithPaymentSession2, FirstBonusRobuxPackageWithPaymentSession3 = findFirstBonusRobuxPackageWithPaymentSession(Tbl)
 		
-		if var2 == nil then
-			return withoutFeaturedPromotion(p2)
-		elseif var3 ~= nil then
-			var1 = true
-			
-			if var3 == "" then
-				var1 = fFlagEnableBonusJwtInShop and (var4 ~= nil and var4 ~= "")
-			end
-			if fFlagHideBonusInShopWhenNotClaimableModule and not var1 then
-				return withoutFeaturedPromotion(p2)
-			end
-			local var5 = findTopPicksSectionIndexModule(p2)
-			
-			if var5 == nil then
-				return withoutFeaturedPromotion(p2)
-			end
-			local bonusItem = var2.bonusItem
-			local var6 = if bonusItem == nil or bonusItem.type ~= "GamePass" then nil else tostring(bonusItem.id)
-			
-			if not (if var6 == nil then false elseif var2.bonusItemDetails == nil then false else p3[var6] == bonusPromotionEligibilityModule.Eligible) then
-				return withoutFeaturedPromotion(p2)
-			end
-			local var7 = p2[var5]
-			local featuredRobuxPackage = var7.featuredRobuxPackage
-			
-			if featuredRobuxPackage ~= nil and featuredRobuxPackage.id == var2.id then
-				local var8
-				bonusItem = var7.paymentSessionId == var3
-				
-				if fFlagEnableBonusJwtInShop then
-					var8 = var7.bonusJwt == var4
-					var8 = nil
-				else
-					var8 = true
-				end
-				if bonusItem and var8 then
-					return p2
-				end
-			end
-			bonusItem = table.clone(p2)
-			local t = {
-				id = var7.id,
-				name = var7.name,
-				items = var7.items,
-				categoryType = var7.categoryType,
-				stableCategoryId = var7.stableCategoryId,
-				categoryGroup = var7.categoryGroup,
-				paymentSessionId = var7.paymentSessionId,
-				bonusJwt = var7.bonusJwt,
-				robuxPackages = var7.robuxPackages,
-				featuredRobuxPackage = var2
-			}
-			
-			if var3 ~= nil then
-				t.paymentSessionId = var3
-			end
-			if fFlagEnableBonusJwtInShop and var4 ~= nil then
-				t.bonusJwt = var4
-			end
-			bonusItem[var5] = t
-			
-			return bonusItem
+		if FirstBonusRobuxPackageWithPaymentSession == nil then
+			return (withoutFeaturedPromotion(Tbl))
 		end
+		if FFlagHideBonusInShopWhenNotClaimableModule and not (if FirstBonusRobuxPackageWithPaymentSession2 == nil then FFlagEnableBonusJwtInShop and (FirstBonusRobuxPackageWithPaymentSession3 ~= nil and FirstBonusRobuxPackageWithPaymentSession3 ~= "") else FirstBonusRobuxPackageWithPaymentSession2 ~= "" or FFlagEnableBonusJwtInShop and (FirstBonusRobuxPackageWithPaymentSession3 ~= nil and FirstBonusRobuxPackageWithPaymentSession3 ~= "")) then
+			return (withoutFeaturedPromotion(Tbl))
+		end
+		local TopPicksSectionIndexModule = FindTopPicksSectionIndexModule(Tbl)
+		
+		if TopPicksSectionIndexModule == nil then
+			return (withoutFeaturedPromotion(Tbl))
+		end
+		local BonusItem = FirstBonusRobuxPackageWithPaymentSession.bonusItem
+		local Text = if BonusItem == nil or BonusItem.type ~= "GamePass" then nil else tostring(BonusItem.id)
+		
+		if Text == nil or (FirstBonusRobuxPackageWithPaymentSession.bonusItemDetails == nil or p1[Text] ~= BonusPromotionEligibilityModule.Eligible) then
+			return (withoutFeaturedPromotion(Tbl))
+		end
+		local Entry = Tbl[TopPicksSectionIndexModule]
+		local FeaturedRobuxPackage = Entry.featuredRobuxPackage
+		
+		if FeaturedRobuxPackage ~= nil and FeaturedRobuxPackage.id == FirstBonusRobuxPackageWithPaymentSession.id then
+			local NoFFlagEnableBonusJwtInShop: boolean = not FFlagEnableBonusJwtInShop or Entry.bonusJwt == FirstBonusRobuxPackageWithPaymentSession3
+			
+			if Entry.paymentSessionId == FirstBonusRobuxPackageWithPaymentSession2 and NoFFlagEnableBonusJwtInShop then
+				return Tbl
+			end
+		end
+		local Copy = table.clone(Tbl)
+		local config = {
+			id = Entry.id,
+			name = Entry.name,
+			items = Entry.items,
+			categoryType = Entry.categoryType,
+			stableCategoryId = Entry.stableCategoryId,
+			categoryGroup = Entry.categoryGroup,
+			paymentSessionId = Entry.paymentSessionId,
+			bonusJwt = Entry.bonusJwt,
+			robuxPackages = Entry.robuxPackages,
+			featuredRobuxPackage = FirstBonusRobuxPackageWithPaymentSession
+		}
+		
+		if FirstBonusRobuxPackageWithPaymentSession2 ~= nil then
+			config.paymentSessionId = FirstBonusRobuxPackageWithPaymentSession2
+		end
+		if FFlagEnableBonusJwtInShop and FirstBonusRobuxPackageWithPaymentSession3 ~= nil then
+			config.bonusJwt = FirstBonusRobuxPackageWithPaymentSession3
+		end
+		Copy[TopPicksSectionIndexModule] = config
+		
+		return Copy
 	end
 }

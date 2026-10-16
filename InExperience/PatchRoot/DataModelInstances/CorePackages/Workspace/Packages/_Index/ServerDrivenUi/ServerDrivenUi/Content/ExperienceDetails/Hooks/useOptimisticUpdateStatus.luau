@@ -1,37 +1,37 @@
-﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
+﻿local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
 
-return function(p1, p2)
-	-- upvalues: reactModule (ref), signalsModule (ref)
-	local var1 = reactModule.useRef(nil)
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref)
-		return function()
-			-- upvalues: var1 (copy)
-			if var1.current then
-				var1.current()
+return function(Callback, Callback1) --[[ Line: 11 | Named "useOptimisticUpdateStatus" ]]
+	-- upvalues: ReactModule (copy), SignalsModule (copy)
+	local UseRefResult = ReactModule.useRef(nil)
+	ReactModule.useEffect(function() --[[ Line: 18 ]]
+		-- upvalues: UseRefResult (copy)
+		return function() --[[ Line: 19 ]]
+			-- upvalues: UseRefResult (upval)
+			if UseRefResult.current then
+				UseRefResult.current()
 			end
 		end
 	end, {})
 	
-	return reactModule.useCallback(function(...)
-		-- upvalues: var1 (ref), p1 (ref), signalsModule (copy), p2 (ref)
-		if var1.current then
-			var1.current()
-			var1.current = nil
+	return ReactModule.useCallback(function(...) --[[ Line: 27 ]]
+		-- upvalues: UseRefResult (copy), Callback (copy), SignalsModule (upval), Callback1 (copy)
+		if UseRefResult.current then
+			UseRefResult.current()
+			UseRefResult.current = nil
 		end
-		local var2 = p1(...)
+		local CallbackResult = Callback(...)
 		
-		if var2 then
-			var1.current = signalsModule.createEffect(function(p3)
-				-- upvalues: var2 (ref), p2 (copy)
-				local var3 = var2(p3)
+		if CallbackResult then
+			UseRefResult.current = SignalsModule.createEffect(function(p1) --[[ Line: 39 ]]
+				-- upvalues: CallbackResult (copy), Callback1 (upval)
+				local CallbackResultResult = CallbackResult(p1)
 				
-				if var3 ~= nil then
-					p2(var3)
+				if CallbackResultResult ~= nil then
+					Callback1(CallbackResultResult)
 				end
 			end)
 		end
-	end, { p1, p2 })
+	end, { Callback, Callback1 })
 end

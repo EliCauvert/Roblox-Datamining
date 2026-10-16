@@ -1,22 +1,22 @@
-﻿local genericChallenges = script:FindFirstAncestor("GenericChallenges")
-local errorKindModule = require(genericChallenges.Types.ErrorKind)
-local luauPolyfillModule = require(genericChallenges.Parent.LuauPolyfill)
-local t = {}
-t.__index = t
+﻿local GenericChallenges = script:FindFirstAncestor("GenericChallenges")
+local ErrorKindModule = require(GenericChallenges.Types.ErrorKind)
+local LuauPolyfillModule = require(GenericChallenges.Parent.LuauPolyfill)
+local ChallengeErrorModule = {}
+ChallengeErrorModule.__index = ChallengeErrorModule
 
-function t.new(p1, p2)
-	-- upvalues: t (ref)
-	return setmetatable({ kind = p1, data = p2 }, t)
+function ChallengeErrorModule.new(Kind, Data) --[[ Line: 25 ]]
+	-- upvalues: ChallengeErrorModule (copy)
+	return (setmetatable({ kind = Kind, data = Data }, ChallengeErrorModule))
 end
 
-function t.match(p1)
-	-- upvalues: luauPolyfillModule (ref), t (ref)
-	return luauPolyfillModule.instanceof(p1, t)
+function ChallengeErrorModule.match(p1) --[[ Line: 32 ]]
+	-- upvalues: LuauPolyfillModule (copy), ChallengeErrorModule (copy)
+	return LuauPolyfillModule.instanceof(p1, ChallengeErrorModule)
 end
 
-function t:matchAbandoned()
-	-- upvalues: t (ref), errorKindModule (ref)
-	return t.match(self) and self.kind == errorKindModule.Abandoned
+function ChallengeErrorModule:matchAbandoned(): boolean --[[ Line: 36 ]]
+	-- upvalues: ChallengeErrorModule (copy), ErrorKindModule (copy)
+	return ChallengeErrorModule.match(self) and self.kind == ErrorKindModule.Abandoned
 end
 
-return t
+return ChallengeErrorModule

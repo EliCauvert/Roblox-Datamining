@@ -1,52 +1,51 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent.Parent
-local roactModule = require(parent_1.Parent.Roact)
-local tModule = require(parent_1.Parent.t)
-local slidingDirectionModule = require(parent.Enum.SlidingDirection)
-local springAnimatedItemModule = require(parent_1.Utility.SpringAnimatedItem)
-local t = { dampingRatio = 1, frequency = 4 }
-local slidingContainer = roactModule.PureComponent:extend("SlidingContainer")
-local t_1 = {
-	[slidingDirectionModule.Up] = UDim2.new(0, 0, 1, 0),
-	[slidingDirectionModule.Down] = UDim2.new(0, 0, -1, 0),
-	[slidingDirectionModule.Left] = UDim2.new(1, 0, 0, 0),
-	[slidingDirectionModule.Right] = UDim2.new(-1, 0, 0, 0)
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent.Parent
+local RoactModule = require(Parent1.Parent.Roact)
+local TModule = require(Parent1.Parent.t)
+local SlidingDirectionModule = require(Parent.Enum.SlidingDirection)
+local SpringAnimatedItemModule = require(Parent1.Utility.SpringAnimatedItem)
+local SlidingContainer = RoactModule.PureComponent:extend("SlidingContainer")
+local config = {
+	[SlidingDirectionModule.Up] = UDim2.new(0, 0, 1, 0),
+	[SlidingDirectionModule.Down] = UDim2.new(0, 0, -1, 0),
+	[SlidingDirectionModule.Left] = UDim2.new(1, 0, 0, 0),
+	[SlidingDirectionModule.Right] = UDim2.new(-1, 0, 0, 0)
 }
-slidingContainer.validateProps = tModule.strictInterface({
-	layoutOrder = tModule.optional(tModule.integer),
-	onComplete = tModule.optional(tModule.callback),
-	show = tModule.optional(tModule.boolean),
-	slidingDirection = slidingDirectionModule.isEnumValue,
-	springOptions = tModule.optional(tModule.table),
-	[roactModule.Children] = tModule.optional(tModule.table)
+SlidingContainer.validateProps = TModule.strictInterface({
+	layoutOrder = TModule.optional(TModule.integer),
+	onComplete = TModule.optional(TModule.callback),
+	show = TModule.optional(TModule.boolean),
+	slidingDirection = SlidingDirectionModule.isEnumValue,
+	springOptions = TModule.optional(TModule.table),
+	[RoactModule.Children] = TModule.optional(TModule.table)
 })
-slidingContainer.defaultProps = { springOptions = t }
+SlidingContainer.defaultProps = { springOptions = { dampingRatio = 1, frequency = 4 } }
 
-function slidingContainer.render(p1)
-	-- upvalues: roactModule (ref), springAnimatedItemModule (ref), t_1 (ref)
-	local show = p1.props.show
-	local slidingDirection = p1.props.slidingDirection
+function SlidingContainer.render(p1) --[[ Line: 45 ]]
+	-- upvalues: RoactModule (copy), SpringAnimatedItemModule (copy), config (copy)
+	local Show = p1.props.show
+	local SlidingDirection = p1.props.slidingDirection
 	
-	return roactModule.createElement(springAnimatedItemModule.AnimatedFrame, {
+	return RoactModule.createElement(SpringAnimatedItemModule.AnimatedFrame, {
 		springOptions = p1.props.springOptions,
-		animatedValues = { step = if show then 0 else 1 },
-		mapValuesToProps = function(p2)
-			-- upvalues: t_1 (copy), slidingDirection (ref)
-			local var1 = t_1[slidingDirection]
+		animatedValues = { step = if Show then 0 else 1 },
+		mapValuesToProps = function(p2) --[[ Line: 54 ]]
+			-- upvalues: config (upval), SlidingDirection (copy)
+			local Entry = config[SlidingDirection]
 			
 			return {
-				Position = UDim2.new(var1.X.Scale * p2.step, 0, var1.Y.Scale * p2.step, 0)
+				Position = UDim2.new(Entry.X.Scale * p2.step, 0, Entry.Y.Scale * p2.step, 0)
 			}
 		end,
 		regularProps = {
 			BackgroundTransparency = 1,
 			LayoutOrder = p1.props.layoutOrder,
-			Position = if show then t_1[slidingDirection] else UDim2.new(0, 0, 0, 0),
+			Position = Show and config[SlidingDirection] or UDim2.new(0, 0, 0, 0),
 			Size = UDim2.new(1, 0, 1, 0)
 		},
 		onComplete = p1.props.onComplete,
-		[roactModule.Children] = p1.props[roactModule.Children]
+		[RoactModule.Children] = p1.props[RoactModule.Children]
 	})
 end
 
-return slidingContainer
+return SlidingContainer

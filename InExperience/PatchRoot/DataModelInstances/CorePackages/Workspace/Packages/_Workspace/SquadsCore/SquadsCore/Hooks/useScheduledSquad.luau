@@ -1,33 +1,33 @@
-﻿local squadsCore = script:FindFirstAncestor("SquadsCore")
-local parent = squadsCore.Parent
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local getScheduledSquadsStoreModule = require(squadsCore.Stores.GetScheduledSquadsStore)
-local _ = require(squadsCore.Types)
+﻿local SquadsCore = script:FindFirstAncestor("SquadsCore")
+local Parent = SquadsCore.Parent
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local GetScheduledSquadsStoreModule = require(SquadsCore.Stores.GetScheduledSquadsStore)
+local _ = require(SquadsCore.Types)
 
-return function(p1)
-	-- upvalues: getScheduledSquadsStoreModule (ref), reactModule (ref), signalsModule (ref)
-	local var1 = getScheduledSquadsStoreModule(false)
-	local var2 = reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), var1 (ref), p1 (ref)
-		return signalsModule.createComputed(function(p2)
-			-- upvalues: var1 (copy), p1 (copy)
-			return var1.getScheduledSquadsStatus(p2)[p1]
+return function(p1) --[[ Line: 12 | Named "useScheduledSquad" ]]
+	-- upvalues: GetScheduledSquadsStoreModule (copy), ReactModule (copy), SignalsModule (copy)
+	local ScheduledSquadsStoreModule = GetScheduledSquadsStoreModule(false)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 15 ]]
+		-- upvalues: SignalsModule (upval), ScheduledSquadsStoreModule (copy), p1 (copy)
+		return SignalsModule.createComputed(function(p2) --[[ Line: 16 ]]
+			-- upvalues: ScheduledSquadsStoreModule (upval), p1 (upval)
+			return ScheduledSquadsStoreModule.getScheduledSquadsStatus(p2)[p1]
 		end)
-	end, { var1, p1 })
-	local var3, var4 = reactModule.useState(function()
-		-- upvalues: var2 (ref)
-		return var2(false)
+	end, { ScheduledSquadsStoreModule, p1 })
+	local UseStateResult, UseStateResult2 = ReactModule.useState(function() --[[ Line: 21 ]]
+		-- upvalues: UseMemoResult (copy)
+		return UseMemoResult(false)
 	end)
-	reactModule.useLayoutEffect(function()
-		-- upvalues: var4 (ref), var2 (ref), signalsModule (copy)
-		var4(var2(false))
+	ReactModule.useLayoutEffect(function() --[[ Line: 25 ]]
+		-- upvalues: UseStateResult2 (copy), UseMemoResult (copy), SignalsModule (upval)
+		UseStateResult2(UseMemoResult(false))
 		
-		return signalsModule.createEffect(function(p2)
-			-- upvalues: var4 (copy), var2 (copy)
-			var4(var2(p2))
+		return SignalsModule.createEffect(function(p2) --[[ Line: 27 ]]
+			-- upvalues: UseStateResult2 (upval), UseMemoResult (upval)
+			UseStateResult2(UseMemoResult(p2))
 		end)
-	end, { var2 })
+	end, { UseMemoResult })
 	
-	return var3
+	return UseStateResult
 end

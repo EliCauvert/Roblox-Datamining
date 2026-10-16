@@ -1,62 +1,62 @@
-﻿local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local roactModule = require(parent_1.Roact)
-local roactFitComponentsModule = require(parent_1.RoactFitComponents)
-local fitFrameVertical = roactFitComponentsModule.FitFrameVertical
-local fitTextLabel = roactFitComponentsModule.FitTextLabel
-local UIBloxModule = require(parent_1.UIBlox)
-local images = UIBloxModule.App.ImageSet.Images
-local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
-local iconSize = UIBloxModule.App.Constant.IconSize
-local withStyle = UIBloxModule.Core.Style.withStyle
-local modelViewportModule = require(parent.Generic.ModelViewport)
-local constantsModule = require(parent.Generic.Constants)
-local getEnableCondenseRobuxUpsellModule = require(parent.Flags.getEnableCondenseRobuxUpsell)
-local robux = images["icons/common/robux"]
-local imageunavailable = images["icons/status/imageunavailable"]
-local name = roactModule.Component:extend(script.Name)
+﻿local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local RoactModule = require(Parent1.Roact)
+local RoactFitComponentsModule = require(Parent1.RoactFitComponents)
+local FitFrameVertical = RoactFitComponentsModule.FitFrameVertical
+local FitTextLabel = RoactFitComponentsModule.FitTextLabel
+local UIBloxModule = require(Parent1.UIBlox)
+local Images = UIBloxModule.App.ImageSet.Images
+local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
+local IconSize = UIBloxModule.App.Constant.IconSize
+local WithStyleFunction = UIBloxModule.Core.Style.withStyle
+local ModelViewportModule = require(Parent.Generic.ModelViewport)
+local ConstantsModule = require(Parent.Generic.Constants)
+local GetEnableCondenseRobuxUpsellModule = require(Parent.Flags.getEnableCondenseRobuxUpsell)
+local IconsCommonRobux = Images["icons/common/robux"]
+local IconsStatusImageunavailable = Images["icons/status/imageunavailable"]
+local ExtendResult = RoactModule.Component:extend(script.Name)
 
-function name.init(p1)
-	-- upvalues: roactModule (ref)
-	p1.contentRef = roactModule.createRef()
+function ExtendResult.init(p1) --[[ Line: 39 ]]
+	-- upvalues: RoactModule (copy)
+	p1.contentRef = RoactModule.createRef()
 	p1.state = { contentSize = Vector2.new(0, 0) }
 	
-	function p0.changeContentSize(p2)
-		-- upvalues: p1 (ref)
-		if p1.state.contentSize ~= p2.AbsoluteSize then
-			p1:setState({ contentSize = p2.AbsoluteSize })
+	function p1.changeContentSize(Frame: Frame) --[[ Line: 45 ]]
+		-- upvalues: p1 (copy)
+		if p1.state.contentSize ~= Frame.AbsoluteSize then
+			p1:setState({ contentSize = Frame.AbsoluteSize })
 		end
 	end
 end
 
-function name.render(p1)
-	-- upvalues: withStyle (ref), constantsModule (ref), iconSize (ref), getEnableCondenseRobuxUpsellModule (ref), roactModule (ref), imageSetLabel (ref), imageunavailable (ref), modelViewportModule (ref), fitFrameVertical (ref), fitTextLabel (ref), robux (ref)
-	local props = p1.props
+function ExtendResult.render(p1) --[[ Line: 54 ]]
+	-- upvalues: WithStyleFunction (copy), ConstantsModule (copy), IconSize (copy), GetEnableCondenseRobuxUpsellModule (copy), RoactModule (copy), ImageSetLabel (copy), IconsStatusImageunavailable (copy), ModelViewportModule (copy), FitFrameVertical (copy), FitTextLabel (copy), IconsCommonRobux (copy)
+	local Props = p1.props
 	
-	return withStyle(function(p2)
-		-- upvalues: props (ref), constantsModule (copy), iconSize (copy), getEnableCondenseRobuxUpsellModule (copy), roactModule (copy), imageSetLabel (copy), imageunavailable (copy), modelViewportModule (copy), fitFrameVertical (copy), p1 (ref), fitTextLabel (copy), robux (copy)
-		local theme = p2.Theme
-		local font = p2.Font
-		local var1 = if props.model ~= nil then constantsModule.NORMAL_ICON_SIZE elseif props.itemIcon ~= nil then constantsModule.NORMAL_ICON_SIZE else iconSize.Large
-		local var2 = var1
-		local var3 = var1
+	return WithStyleFunction(function(p2) --[[ Line: 57 ]]
+		-- upvalues: Props (copy), ConstantsModule (upval), IconSize (upval), GetEnableCondenseRobuxUpsellModule (upval), RoactModule (upval), ImageSetLabel (upval), IconsStatusImageunavailable (upval), ModelViewportModule (upval), FitFrameVertical (upval), p1 (copy), FitTextLabel (upval), IconsCommonRobux (upval)
+		local Theme = p2.Theme
+		local _Font = p2.Font
+		local Large = if Props.itemIcon == nil then if Props.model == nil then IconSize.Large else ConstantsModule.NORMAL_ICON_SIZE elseif Props.model == nil then ConstantsModule.NORMAL_ICON_SIZE or IconSize.Large else ConstantsModule.NORMAL_ICON_SIZE
+		local XOffset = Large
+		local YOffset = Large
 		
-		if getEnableCondenseRobuxUpsellModule() then
-			var2 = if props.itemIconWidth == nil then var1 else props.itemIconWidth
-			var3 = if props.itemIconHeight == nil then var1 else props.itemIconHeight
+		if GetEnableCondenseRobuxUpsellModule() then
+			XOffset = Props.itemIconWidth == nil and Large or Props.itemIconWidth
+			YOffset = Props.itemIconHeight == nil and Large or Props.itemIconHeight
 		end
-		return roactModule.createElement(fitFrameVertical, {
-			LayoutOrder = props.layoutOrder,
+		return RoactModule.createElement(FitFrameVertical, {
+			LayoutOrder = Props.layoutOrder,
 			BackgroundTransparency = 1,
 			width = UDim.new(1, 0),
 			FillDirection = Enum.FillDirection.Horizontal,
 			HorizontalAlignment = Enum.HorizontalAlignment.Center,
 			VerticalAlignment = Enum.VerticalAlignment.Center,
 			contentPadding = UDim.new(0, 6),
-			[roactModule.Ref] = p1.contentRef,
-			[roactModule.Change.AbsoluteSize] = p1.changeContentSize
+			[RoactModule.Ref] = p1.contentRef,
+			[RoactModule.Change.AbsoluteSize] = p1.changeContentSize
 		}, {
-			ItemIconFrame = roactModule.createElement(fitFrameVertical, {
+			ItemIconFrame = RoactModule.createElement(FitFrameVertical, {
 				LayoutOrder = 1,
 				BackgroundTransparency = 1,
 				width = UDim.new(0.45, 0),
@@ -64,28 +64,28 @@ function name.render(p1)
 				VerticalAlignment = Enum.VerticalAlignment.Center,
 				margin = { top = 0, bottom = 0, left = 0, right = 20 }
 			}, {
-				ItemIcon = if props.model ~= nil then roactModule.createElement(modelViewportModule, {
-					model = props.model,
-					Position = UDim2.fromOffset(5, 5),
-					Size = UDim2.fromOffset(var2, var3)
-				}) elseif props.itemIcon then roactModule.createElement(imageSetLabel, {
+				ItemIcon = if Props.model == nil then if Props.itemIcon then RoactModule.createElement(ImageSetLabel, {
 					BackgroundTransparency = 1,
 					ImageTransparency = 0,
 					Position = UDim2.new(0, 5, 0, 5),
-					Size = UDim2.new(0, var2, 0, var3),
+					Size = UDim2.new(0, XOffset, 0, YOffset),
 					ScaleType = Enum.ScaleType.Stretch,
-					Image = props.itemIcon
-				}) else roactModule.createElement(imageSetLabel, {
+					Image = Props.itemIcon
+				}) else RoactModule.createElement(ImageSetLabel, {
 					BackgroundTransparency = 1,
 					Position = UDim2.new(0, 5, 0, 5),
-					Size = UDim2.new(0, var2, 0, var3),
+					Size = UDim2.new(0, XOffset, 0, YOffset),
 					ScaleType = Enum.ScaleType.Stretch,
-					Image = imageunavailable,
-					ImageColor3 = theme.UIDefault.Color,
-					ImageTransparency = theme.UIDefault.Transparency
+					Image = IconsStatusImageunavailable,
+					ImageColor3 = Theme.UIDefault.Color,
+					ImageTransparency = Theme.UIDefault.Transparency
+				}) else RoactModule.createElement(ModelViewportModule, {
+					model = Props.model,
+					Position = UDim2.fromOffset(5, 5),
+					Size = UDim2.fromOffset(XOffset, YOffset)
 				})
 			}),
-			ItemDetailsFrame = roactModule.createElement(fitFrameVertical, {
+			ItemDetailsFrame = RoactModule.createElement(FitFrameVertical, {
 				LayoutOrder = 2,
 				BackgroundTransparency = 1,
 				width = UDim.new(0.55, 0),
@@ -94,19 +94,19 @@ function name.render(p1)
 				VerticalAlignment = Enum.VerticalAlignment.Center,
 				contentPadding = UDim.new(0, 5)
 			}, {
-				ItemName = roactModule.createElement(fitTextLabel, {
+				ItemName = RoactModule.createElement(FitTextLabel, {
 					LayoutOrder = 1,
 					BackgroundTransparency = 1,
 					TextWrapped = true,
-					width = fitTextLabel.Width.FitToText,
+					width = FitTextLabel.Width.FitToText,
 					maximumWidth = p1.state.contentSize.X * 0.55,
-					Font = font.Header2.Font,
-					Text = props.itemName,
-					TextSize = font.BaseSize * font.Header2.RelativeSize,
-					TextColor3 = theme.TextEmphasis.Color,
+					Font = _Font.Header2.Font,
+					Text = Props.itemName,
+					TextSize = _Font.BaseSize * _Font.Header2.RelativeSize,
+					TextColor3 = Theme.TextEmphasis.Color,
 					TextXAlignment = Enum.TextXAlignment.Left
 				}),
-				ItemCostFrame = roactModule.createElement(fitFrameVertical, {
+				ItemCostFrame = RoactModule.createElement(FitFrameVertical, {
 					LayoutOrder = 2,
 					BackgroundTransparency = 1,
 					width = UDim.new(0.5, 0),
@@ -115,26 +115,26 @@ function name.render(p1)
 					VerticalAlignment = Enum.VerticalAlignment.Top,
 					contentPadding = UDim.new(0, 2)
 				}, {
-					RobuxIcon = roactModule.createElement(imageSetLabel, {
+					RobuxIcon = RoactModule.createElement(ImageSetLabel, {
 						LayoutOrder = 1,
 						BackgroundTransparency = 1,
 						Position = UDim2.new(0, 5, 0, 5),
 						Size = UDim2.new(0, 24, 0, 24),
 						ScaleType = Enum.ScaleType.Stretch,
-						Image = robux,
-						ImageColor3 = theme.IconEmphasis.Color,
-						ImageTransparency = theme.IconEmphasis.Transparency
+						Image = IconsCommonRobux,
+						ImageColor3 = Theme.IconEmphasis.Color,
+						ImageTransparency = Theme.IconEmphasis.Transparency
 					}),
-					ItemCost = roactModule.createElement(fitTextLabel, {
+					ItemCost = RoactModule.createElement(FitTextLabel, {
 						LayoutOrder = 2,
 						BackgroundTransparency = 1,
 						TextWrapped = true,
-						width = fitTextLabel.Width.FitToText,
+						width = FitTextLabel.Width.FitToText,
 						maximumWidth = p1.state.contentSize.X,
-						Font = font.Header2.Font,
-						Text = tostring(props.itemRobuxCost),
-						TextSize = font.BaseSize * font.Header2.RelativeSize,
-						TextColor3 = theme.TextEmphasis.Color
+						Font = _Font.Header2.Font,
+						Text = tostring(Props.itemRobuxCost),
+						TextSize = _Font.BaseSize * _Font.Header2.RelativeSize,
+						TextColor3 = Theme.TextEmphasis.Color
 					})
 				})
 			})
@@ -142,4 +142,4 @@ function name.render(p1)
 	end)
 end
 
-return name
+return ExtendResult

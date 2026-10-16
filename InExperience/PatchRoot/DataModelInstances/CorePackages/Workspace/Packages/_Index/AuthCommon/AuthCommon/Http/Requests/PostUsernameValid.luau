@@ -1,17 +1,21 @@
-﻿local authCommon = script:FindFirstAncestor("AuthCommon")
-local httpService = game:GetService("HttpService")
-local urlBuilder = require(authCommon.Parent.UrlBuilder).UrlBuilder
-local usernameValidationContextModule = require(authCommon.Enums.UsernameValidationContext)
+﻿local AuthCommon = script:FindFirstAncestor("AuthCommon")
+local HttpService = game:GetService("HttpService")
+local UrlBuilder = require(AuthCommon.Parent.UrlBuilder).UrlBuilder
+local UsernameValidationContextModule = require(AuthCommon.Enums.UsernameValidationContext)
 
-return function(p1, p2, p3, p4)
-	-- upvalues: usernameValidationContextModule (ref), urlBuilder (ref), httpService (ref)
-	if not p4 then
-		p4 = usernameValidationContextModule.Unknown
+return function(Callback, Username, Birthday, Context) --[[ Line: 12 ]]
+	-- upvalues: UsernameValidationContextModule (copy), UrlBuilder (copy), HttpService (copy)
+	if not Context then
+		Context = UsernameValidationContextModule.Unknown
 	end
-	assert(type(p2) == "string", "invalid username")
-	assert(type(p3) == "string", "invalid birthday")
+	assert(type(Username) == "string", "invalid username")
+	assert(type(Birthday) == "string", "invalid birthday")
 	
-	return p1(urlBuilder.fromString("auth:v2/usernames/validate")(), "POST", {
-		postBody = httpService:JSONEncode({ username = p2, birthday = p3, context = p4 })
+	return Callback(UrlBuilder.fromString("auth:v2/usernames/validate")(), "POST", {
+		postBody = HttpService:JSONEncode({
+			username = Username,
+			birthday = Birthday,
+			context = Context
+		})
 	})
 end

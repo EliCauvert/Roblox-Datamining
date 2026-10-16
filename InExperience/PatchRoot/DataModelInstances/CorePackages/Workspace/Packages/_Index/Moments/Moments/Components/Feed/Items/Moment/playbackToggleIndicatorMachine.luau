@@ -1,65 +1,65 @@
-﻿return function(p1, p2)
-	local var1 = "hidden"
-	local var2 = nil
+﻿return function(p1, p2) --[[ Line: 63 | Named "createPlaybackToggleIndicatorMachine" ]]
+	local v1 = "hidden"
+	local ScheduleResult: (() -> ())? = nil
 	
-	local function _()
-		-- upvalues: var2 (write)
-		if var2 ~= nil then
-			var2()
-			var2 = nil
+	local function _() --[[ Line: 71 | Named "clearTimer" ]]
+		-- upvalues: ScheduleResult (ref)
+		if ScheduleResult ~= nil then
+			ScheduleResult()
+			ScheduleResult = nil
 		end
 	end
 	
-	local function onExitElapsed()
-		-- upvalues: var2 (write), var1 (write), p2 (ref)
-		var2 = nil
-		var1 = "hidden"
+	local function onExitElapsed() --[[ Line: 78 ]]
+		-- upvalues: ScheduleResult (ref), v1 (ref), p2 (copy)
+		ScheduleResult = nil
+		v1 = "hidden"
 		p2.setMounted(false)
 	end
 	
-	local function beginExit()
-		-- upvalues: var2 (write), var1 (write), p2 (ref), p1 (ref), onExitElapsed (ref)
-		var2 = nil
-		var1 = "exiting"
+	local function beginExit() --[[ Line: 85 ]]
+		-- upvalues: ScheduleResult (ref), v1 (ref), p2 (copy), p1 (copy), onExitElapsed (copy)
+		ScheduleResult = nil
+		v1 = "exiting"
 		p2.animate("exit")
-		var2 = p2.schedule(p1.exitDurationMs, onExitElapsed)
+		ScheduleResult = p2.schedule(p1.exitDurationMs, onExitElapsed)
 	end
 	
-	local _ = function()
-		-- upvalues: var2 (write), p2 (ref), p1 (ref), beginExit (ref)
-		if var2 ~= nil then
-			var2()
-			var2 = nil
+	local _ = function() --[[ Line: 93 | Named "armDwell" ]]
+		-- upvalues: ScheduleResult (ref), p2 (copy), p1 (copy), beginExit (copy)
+		if ScheduleResult ~= nil then
+			ScheduleResult()
+			ScheduleResult = nil
 		end
-		var2 = p2.schedule(p1.dwellMs, beginExit)
+		ScheduleResult = p2.schedule(p1.dwellMs, beginExit)
 	end
 	
 	return {
-		notifyUserToggle = function()
-			-- upvalues: var1 (write), p2 (ref), var2 (write), p1 (ref), beginExit (ref)
-			if var1 == "hidden" then
-				var1 = "shown"
+		notifyUserToggle = function() --[[ Line: 99 ]]
+			-- upvalues: v1 (ref), p2 (copy), ScheduleResult (ref), p1 (copy), beginExit (copy)
+			if v1 == "hidden" then
+				v1 = "shown"
 				p2.setMounted(true)
 				p2.animate("enter")
-			elseif var1 == "exiting" then
-				var1 = "shown"
+			elseif v1 == "exiting" then
+				v1 = "shown"
 				p2.animate("enter")
 			end
-			if var2 ~= nil then
-				var2()
-				var2 = nil
+			if ScheduleResult ~= nil then
+				ScheduleResult()
+				ScheduleResult = nil
 			end
-			var2 = p2.schedule(p1.dwellMs, beginExit)
+			ScheduleResult = p2.schedule(p1.dwellMs, beginExit)
 		end,
-		getPhase = function()
-			-- upvalues: var1 (write)
-			return var1
+		getPhase = function() --[[ Line: 121 ]]
+			-- upvalues: v1 (ref)
+			return v1
 		end,
-		dispose = function()
-			-- upvalues: var2 (write)
-			if var2 ~= nil then
-				var2()
-				var2 = nil
+		dispose = function() --[[ Line: 115 ]]
+			-- upvalues: ScheduleResult (ref)
+			if ScheduleResult ~= nil then
+				ScheduleResult()
+				ScheduleResult = nil
 			end
 		end
 	}

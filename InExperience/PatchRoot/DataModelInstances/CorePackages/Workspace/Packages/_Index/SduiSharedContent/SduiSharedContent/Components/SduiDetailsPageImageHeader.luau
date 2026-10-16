@@ -1,13 +1,13 @@
-﻿local parent = script:FindFirstAncestor("SduiSharedContent").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local _ = require(parent.SduiCompat)
-local view = foundationModule.View
-local image = foundationModule.Image
+﻿local Parent = script:FindFirstAncestor("SduiSharedContent").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local _ = require(Parent.SduiCompat)
+local View = FoundationModule.View
+local Image = FoundationModule.Image
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), view (ref), image (ref)
-	return reactModule.createElement(view, {
+return ReactModule.memo(function(p1) --[[ Line: 42 | Named "SduiDetailsPageImageHeader" ]]
+	-- upvalues: ReactModule (copy), View (copy), Image (copy)
+	return ReactModule.createElement(View, {
 		tag = "col align-x-center align-y-center",
 		Size = p1.size,
 		Position = p1.position,
@@ -19,7 +19,7 @@ return reactModule.memo(function(p1)
 		AutomaticSize = p1.automaticSize,
 		testId = p1.testId
 	}, {
-		Image = reactModule.createElement(image, {
+		Image = ReactModule.createElement(Image, {
 			Image = p1.image,
 			Size = p1.imageSize,
 			TileSize = p1.tileSize,

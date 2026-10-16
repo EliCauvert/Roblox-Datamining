@@ -1,52 +1,54 @@
-﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local sduiActionType = sduiCoreSystemModule.SduiActionType
-local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
-local gameInviteModule = require(parent.GameInvite)
-local gameInviteModalManager = gameInviteModule.GameInviteModalManager
-local gameInviteAnalyticsManager = gameInviteModule.GameInviteAnalyticsManager
+﻿local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local SduiActionType = SduiCoreSystemModule.SduiActionType
+local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
+local GameInviteModule = require(Parent.GameInvite)
+local GameInviteModalManager = GameInviteModule.GameInviteModalManager
+local GameInviteAnalyticsManager = GameInviteModule.GameInviteAnalyticsManager
 
-return function(p1, _, p2)
-	-- upvalues: sduiErrorType (ref), sduiActionType (ref), gameInviteAnalyticsManager (ref), gameInviteModalManager (ref)
-	local var1 = if p1 then p1.actionParams else nil
+return function(p1, _, p2) --[[ Line: 16 ]]
+	-- upvalues: SduiErrorType (copy), SduiActionType (copy), GameInviteAnalyticsManager (copy), GameInviteModalManager (copy)
+	local ActionParams = p1 and p1.actionParams or nil
 	
-	if var1 == nil then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if ActionParams == nil then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			message = "Missing actionParams",
-			name = sduiActionType.OpenGameInvite
+			name = SduiActionType.OpenGameInvite
 		}, p2.appPage)
 		
 		return
 	end
-	assert(var1, "actionParams must exist")
-	local universeId = var1.universeId
-	local rootPlaceId = var1.rootPlaceId
-	local trigger = var1.trigger
-	local buttonName = var1.buttonName
+	assert(ActionParams, "actionParams must exist")
+	local UniverseId = ActionParams.universeId
+	local RootPlaceId = ActionParams.rootPlaceId
+	local Trigger = ActionParams.trigger
+	local ButtonName = ActionParams.buttonName
 	
-	if typeof(rootPlaceId) ~= "string" or rootPlaceId == "" then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if typeof(RootPlaceId) ~= "string" or RootPlaceId == "" then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			propName = "rootPlaceId",
-			name = sduiActionType.OpenGameInvite,
-			message = `Invalid or missing rootPlaceId: {rootPlaceId}`
+			name = SduiActionType.OpenGameInvite,
+			message = `Invalid or missing rootPlaceId: {RootPlaceId}`
 		}, p2.appPage)
 		
 		return
-	elseif typeof(trigger) ~= "string" or trigger == "" then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
-			propName = "trigger",
-			name = sduiActionType.OpenGameInvite,
-			message = `Invalid or missing trigger: {trigger}`
-		}, p2.appPage)
-		
-		return
-	elseif typeof(buttonName) == "string" and buttonName ~= "" then
-		gameInviteAnalyticsManager:withButtonName(buttonName)
-		gameInviteAnalyticsManager:inputShareGameEntryPoint(rootPlaceId, universeId)
 	end
-	gameInviteModalManager:openModal({
-		trigger = trigger,
-		rootPlaceId = rootPlaceId,
-		universeId = universeId
+	if typeof(Trigger) ~= "string" or Trigger == "" then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
+			propName = "trigger",
+			name = SduiActionType.OpenGameInvite,
+			message = `Invalid or missing trigger: {Trigger}`
+		}, p2.appPage)
+		
+		return
+	end
+	if typeof(ButtonName) == "string" and ButtonName ~= "" then
+		GameInviteAnalyticsManager:withButtonName(ButtonName)
+		GameInviteAnalyticsManager:inputShareGameEntryPoint(RootPlaceId, UniverseId)
+	end
+	GameInviteModalManager:openModal({
+		trigger = Trigger,
+		rootPlaceId = RootPlaceId,
+		universeId = UniverseId
 	})
 end

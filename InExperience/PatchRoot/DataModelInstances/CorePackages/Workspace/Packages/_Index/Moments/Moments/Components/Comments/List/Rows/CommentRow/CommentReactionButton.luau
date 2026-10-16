@@ -1,132 +1,151 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
-local builderIconsModule = require(parent.BuilderIcons)
-local foundationModule = require(parent.Foundation)
-local momentsCommonModule = require(parent.MomentsCommon)
-local reactModule = require(parent.React)
-local reactOtterModule = require(parent.ReactOtter)
-local getColorStyleWithTransparencyModule = require(moments.Utils.getColorStyleWithTransparency)
-local icon = foundationModule.Icon
-local text = foundationModule.Text
-local view = foundationModule.View
-local iconSize = foundationModule.Enums.IconSize
-local useTokens = foundationModule.Hooks.useTokens
-local reaction = momentsCommonModule.Components.Reaction
-local reactionSize = momentsCommonModule.Enums.ReactionSize
-local reactionType = momentsCommonModule.Enums.ReactionType
-local t = { Transparency = 0, Color3 = Color3.new(1, 1, 1) }
-local t_1 = { frequency = 5, dampingRatio = 0.5 }
-local t_2 = { frequency = 6, dampingRatio = 1 }
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
+local BuilderIconsModule = require(Parent.BuilderIcons)
+local FoundationModule = require(Parent.Foundation)
+local MomentsCommonModule = require(Parent.MomentsCommon)
+local ReactModule = require(Parent.React)
+local ReactOtterModule = require(Parent.ReactOtter)
+local FFlagMomentsCommentRowRedesignModule = require(Moments.Flags.FFlagMomentsCommentRowRedesign)
+local GetColorStyleWithTransparencyModule = require(Moments.Utils.getColorStyleWithTransparency)
+local Icon = FoundationModule.Icon
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local IconSize = FoundationModule.Enums.IconSize
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local Reaction = MomentsCommonModule.Components.Reaction
+local ReactionAssets = MomentsCommonModule.Components.ReactionAssets
+local ReactionSize = MomentsCommonModule.Enums.ReactionSize
+local ReactionType = MomentsCommonModule.Enums.ReactionType
+local config = { Transparency = 0, Color3 = Color3.new(1, 1, 1) }
+local config1 = { frequency = 5, dampingRatio = 0.5 }
+local config2 = { frequency = 6, dampingRatio = 1 }
 
-return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), reactOtterModule (ref), reactModule (ref), t_1 (ref), t_2 (ref), getColorStyleWithTransparencyModule (ref), t (ref), view (ref), icon (ref), builderIconsModule (ref), iconSize (ref), reaction (ref), reactionType (ref), reactionSize (ref), text (ref)
-	local var1 = useTokens()
-	local commentId = `moments-comment-reaction-button-{p1.commentId}`
-	local var2, var3 = reactOtterModule.useAnimatedBinding(if p1.isReactionSelected then 1 else 0)
-	local var4 = reactModule.useRef({
-		commentId = p1.commentId,
-		isReactionSelected = p1.isReactionSelected
+return ReactModule.memo(function(Frame) --[[ Line: 45 | Named "CommentReactionButton" ]]
+	-- upvalues: UseTokensFunction (copy), ReactOtterModule (copy), ReactModule (copy), config1 (copy), config2 (copy), FFlagMomentsCommentRowRedesignModule (copy), GetColorStyleWithTransparencyModule (copy), config (copy), ReactionAssets (copy), ReactionSize (copy), View (copy), Icon (copy), BuilderIconsModule (copy), IconSize (copy), Reaction (copy), ReactionType (copy), Text (copy)
+	local UseTokensResult = UseTokensFunction()
+	local ReactionName: string = `moments-comment-reaction-button-{Frame.commentId}`
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(if Frame.isReactionSelected then 1 else 0)
+	local UseRefResult = ReactModule.useRef({
+		commentId = Frame.commentId,
+		isReactionSelected = Frame.isReactionSelected
 	})
-	reactModule.useLayoutEffect(function()
-		-- upvalues: var4 (ref), p1 (ref), var3 (ref), reactOtterModule (copy), t_1 (copy), t_2 (copy)
-		local current = var4.current
-		var4.current = {
-			commentId = p1.commentId,
-			isReactionSelected = p1.isReactionSelected
+	ReactModule.useLayoutEffect(function() --[[ Line: 51 ]]
+		-- upvalues: UseRefResult (copy), Frame (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), config1 (upval), config2 (upval)
+		local Current = UseRefResult.current
+		UseRefResult.current = {
+			commentId = Frame.commentId,
+			isReactionSelected = Frame.isReactionSelected
 		}
-		local var5 = if p1.isReactionSelected then 1 else 0
+		local v1: number = if Frame.isReactionSelected then 1 else 0
 		
-		if current.commentId ~= p1.commentId then
-			var3(reactOtterModule.instant(var5))
+		if Current.commentId ~= Frame.commentId then
+			UseAnimatedBindingResult2((ReactOtterModule.instant(v1)))
 			
 			return
-		elseif current.isReactionSelected ~= p1.isReactionSelected then
-			var3(reactOtterModule.spring(var5, if p1.isReactionSelected then t_1 else t_2))
 		end
-	end, { p1.commentId, p1.isReactionSelected })
-	local small = var1.Padding.Small
+		if Current.isReactionSelected ~= Frame.isReactionSelected then
+			UseAnimatedBindingResult2(ReactOtterModule.spring(v1, if Frame.isReactionSelected then config1 else config2))
+		end
+	end, { Frame.commentId, Frame.isReactionSelected })
+	local Emphasis = if FFlagMomentsCommentRowRedesignModule then UseTokensResult.Color.Content.Emphasis else UseTokensResult.Color.Content.Default
+	local SizeRatio = if FFlagMomentsCommentRowRedesignModule then UseTokensResult.Size.Size_400 / ReactionAssets.getSizePixels(ReactionSize.XSmall) else 1
+	local Small = UseTokensResult.Padding.Small
+	local SmallDelta = if FFlagMomentsCommentRowRedesignModule then Small - (UseTokensResult.Size.Size_600 - UseTokensResult.Size.Size_400) / 2 else Small
 	
-	return reactModule.createElement(view, {
-		tag = "auto-xy",
-		LayoutOrder = p1.LayoutOrder,
-		testId = `moments-comment-reaction-{p1.commentId}`
+	return ReactModule.createElement(View, {
+		tag = {
+			["size-0-600 auto-x"] = FFlagMomentsCommentRowRedesignModule,
+			["auto-xy"] = not FFlagMomentsCommentRowRedesignModule
+		},
+		LayoutOrder = Frame.LayoutOrder,
+		testId = `moments-comment-reaction-{Frame.commentId}`
 	}, {
-		PaddedContent = reactModule.createElement(view, {
+		PaddedContent = ReactModule.createElement(View, {
 			tag = "auto-xy",
-			padding = { right = UDim.new(0, small), bottom = UDim.new(0, small) }
+			AnchorPoint = if FFlagMomentsCommentRowRedesignModule then Vector2.new(0, 0.5) else nil,
+			Position = if FFlagMomentsCommentRowRedesignModule then UDim2.new(0, 0, 0.5, -1) else nil,
+			padding = {
+				right = UDim.new(0, Small),
+				bottom = if FFlagMomentsCommentRowRedesignModule then nil else UDim.new(0, Small)
+			}
 		}, {
-			Content = reactModule.createElement(view, {
+			Content = ReactModule.createElement(View, {
 				tag = "row align-y-center gap-xsmall auto-xy",
-				testId = `moments-comment-reaction-content-{p1.commentId}`,
-				GroupTransparency = if p1.isReactionDisabled then 0.5 else nil
+				testId = `moments-comment-reaction-content-{Frame.commentId}`,
+				GroupTransparency = if Frame.isReactionDisabled then 0.5 else nil
 			}, {
-				IconSlot = reactModule.createElement(view, {
-					tag = "size-500-500",
+				IconSlot = ReactModule.createElement(View, {
 					LayoutOrder = 1,
-					testId = `moments-comment-reaction-icon-slot-{p1.commentId}`
+					tag = {
+						["size-400-400"] = FFlagMomentsCommentRowRedesignModule,
+						["size-500-500"] = not FFlagMomentsCommentRowRedesignModule
+					},
+					testId = `moments-comment-reaction-icon-slot-{Frame.commentId}`
 				}, {
-					Thumb = reactModule.createElement(view, {
+					Thumb = ReactModule.createElement(View, {
 						tag = "position-center-center anchor-center-center size-full",
-						scale = var2:map(function(p2)
-							return math.lerp(1, 0.6, math.clamp(p2, 0, 1))
+						scale = UseAnimatedBindingResult:map(function(Value: number): number --[[ Line: 70 ]]
+							return (math.lerp(1, 0.6, (math.clamp(Value, 0, 1))))
 						end)
 					}, {
-						Icon = reactModule.createElement(icon, {
-							name = builderIconsModule.Icon.ThumbUp,
-							size = iconSize.Medium,
-							style = var2:map(function(p2)
-								-- upvalues: getColorStyleWithTransparencyModule (copy), var1 (ref)
-								return getColorStyleWithTransparencyModule(var1.Color.Content.Default, math.clamp(p2, 0, 1))
+						Icon = ReactModule.createElement(Icon, {
+							name = BuilderIconsModule.Icon.ThumbUp,
+							size = if FFlagMomentsCommentRowRedesignModule then IconSize.Small else IconSize.Medium,
+							style = UseAnimatedBindingResult:map(function(Value: number) --[[ Line: 67 ]]
+								-- upvalues: GetColorStyleWithTransparencyModule (upval), Emphasis (copy)
+								return GetColorStyleWithTransparencyModule(Emphasis, (math.clamp(Value, 0, 1)))
 							end),
 							AnchorPoint = Vector2.new(0.5, 0.5),
 							Position = UDim2.fromScale(0.5, 0.5),
-							testId = `{commentId}--icon`
+							testId = `{ReactionName}--icon`
 						})
 					}),
-					Reacted = reactModule.createElement(reaction, {
-						reactionType = reactionType.ThumbsUp,
-						size = reactionSize.XSmall,
-						imageStyle = var2:map(function(p2)
-							-- upvalues: getColorStyleWithTransparencyModule (copy), t (copy)
-							return getColorStyleWithTransparencyModule(t, 1 - math.clamp(p2, 0, 1))
+					Reacted = ReactModule.createElement(Reaction, {
+						reactionType = ReactionType.ThumbsUp,
+						size = ReactionSize.XSmall,
+						imageStyle = UseAnimatedBindingResult:map(function(Value: number) --[[ Line: 73 ]]
+							-- upvalues: GetColorStyleWithTransparencyModule (upval), config (upval)
+							return GetColorStyleWithTransparencyModule(config, 1 - math.clamp(Value, 0, 1))
 						end),
-						scale = var2:map(function(p2)
-							return math.lerp(0.6, 1, p2)
+						scale = UseAnimatedBindingResult:map(function(Alpha: number) --[[ Line: 80 ]]
+							-- upvalues: SizeRatio (copy)
+							return math.lerp(0.6, 1, Alpha) * SizeRatio
 						end),
 						AnchorPoint = Vector2.new(0.5, 0.5),
 						Position = UDim2.fromScale(0.5, 0.5),
-						testId = `{commentId}--image`
+						testId = `{ReactionName}--image`
 					})
 				}),
-				Count = if p1.isReactionCountHidden then nil else reactModule.createElement(text, {
+				Count = if Frame.isReactionCountHidden then nil else ReactModule.createElement(Text, {
 					LayoutOrder = 2,
 					tag = {
 						["auto-xy"] = true,
-						["text-title-small content-emphasis"] = p1.isReactionSelected,
-						["text-body-small content-default"] = not p1.isReactionSelected
+						["text-label-small content-emphasis"] = FFlagMomentsCommentRowRedesignModule,
+						["text-title-small content-emphasis"] = not FFlagMomentsCommentRowRedesignModule and Frame.isReactionSelected,
+						["text-body-small content-default"] = not FFlagMomentsCommentRowRedesignModule and not Frame.isReactionSelected
 					},
-					Text = p1.reactionCountLabel,
-					testId = `moments-comment-reaction-count-{p1.commentId}`
+					Text = Frame.reactionCountLabel,
+					testId = `moments-comment-reaction-count-{Frame.commentId}`
 				})
 			})
 		}),
-		HitArea = reactModule.createElement(view, {
+		HitArea = ReactModule.createElement(View, {
 			tag = "radius-medium",
 			ZIndex = 2,
-			Position = UDim2.fromOffset(-small, -small),
-			Size = UDim2.new(1, small, 1, small),
-			cursor = reactModule.useMemo(function()
-				-- upvalues: var1 (ref)
+			Position = UDim2.fromOffset(-Small, -SmallDelta),
+			Size = if FFlagMomentsCommentRowRedesignModule then UDim2.new(1, Small, 1, 2 * SmallDelta) else UDim2.new(1, Small, 1, Small),
+			cursor = ReactModule.useMemo(function() --[[ Line: 95 ]]
+				-- upvalues: UseTokensResult (copy)
 				return {
 					offset = 0,
-					radius = UDim.new(0, var1.Radius.Medium),
-					borderWidth = var1.Stroke.Thicker
+					radius = UDim.new(0, UseTokensResult.Radius.Medium),
+					borderWidth = UseTokensResult.Stroke.Thicker
 				}
-			end, { var1 }),
-			isDisabled = p1.isReactionDisabled,
-			onActivated = if p1.isReactionDisabled then nil else p1.onReactionActivated,
-			selection = { Selectable = not p1.isReactionDisabled },
-			testId = commentId
+			end, { UseTokensResult }),
+			isDisabled = Frame.isReactionDisabled,
+			onActivated = if Frame.isReactionDisabled then nil else Frame.onReactionActivated,
+			selection = { Selectable = not Frame.isReactionDisabled },
+			testId = ReactionName
 		})
 	})
 end)

@@ -1,8 +1,7 @@
-﻿local globalConfigModule = require(script.Parent.Parent.GlobalConfig)
+﻿local GlobalConfigModule = require(script.Parent.Parent.GlobalConfig)
 
-return function(...)
-	-- upvalues: globalConfigModule (ref)
-	if globalConfigModule.actionValidation then
-		return assert(...)
-	end
+return function(...) --[[ Line: 4 | Named "maybeAssert" ]]
+	-- upvalues: GlobalConfigModule (copy)
+	if not GlobalConfigModule.actionValidation then return end
+	return assert(...)
 end

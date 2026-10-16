@@ -1,117 +1,123 @@
-﻿local guiService = game:GetService("GuiService")
-local userList = script:FindFirstAncestor("UserList")
-local parent = userList.Parent
-local reactModule = require(parent.React)
-local roactUtilsModule = require(parent.RoactUtils)
-local localizationModule = require(parent.Localization)
-local enumsModule = require(userList.Common.Enums)
-local enteredChatFromEntryPoint = require(parent.SocialCommon).Actions.EnteredChatFromEntryPoint
-local fFlagUserListCtaAnalyticsEnabled = require(parent.SharedFlags).FFlagUserListCtaAnalyticsEnabled
-local fFlagUserListCanonicalCtaAnalyticsModule = require(userList.Flags.FFlagUserListCanonicalCtaAnalytics)
-local reportCtaActivatedModule = require(userList.Analytics.reportCtaActivated)
-local fFlagSharedChatEntryPointAction = require(parent.SharedFlags).FFlagSharedChatEntryPointAction
-local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
-local useLocalization = localizationModule.Hooks.useLocalization
-local buttonTypes = enumsModule.ButtonTypes
-local textKeysModule = require(userList.Common.TextKeys)
-local _ = require(userList.Common.Types)
-local friendingActionsModule = require(userList.Cta.friendingActions)
-local notificationTypeList = guiService:GetNotificationTypeList()
+﻿local GuiService = game:GetService("GuiService")
+local UserList = script:FindFirstAncestor("UserList")
+local Parent = UserList.Parent
+local ReactModule = require(Parent.React)
+local EnteredChatFromEntryPointFunction = require(Parent.SocialCommon).Actions.EnteredChatFromEntryPoint
+local FFlagUserListCtaAnalyticsEnabled = require(Parent.SharedFlags).FFlagUserListCtaAnalyticsEnabled
+local FFlagUserListCanonicalCtaAnalyticsModule = require(UserList.Flags.FFlagUserListCanonicalCtaAnalytics)
+local ReportCtaActivatedModule = require(UserList.Analytics.reportCtaActivated)
+local FFlagSharedChatEntryPointAction = require(Parent.SharedFlags).FFlagSharedChatEntryPointAction
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local ButtonTypes = require(UserList.Common.Enums).ButtonTypes
+local TextKeysModule = require(UserList.Common.TextKeys)
+local _ = require(UserList.Common.Types)
+local FriendingActionsModule = require(UserList.Cta.friendingActions)
+local NotificationTypeList = GuiService:GetNotificationTypeList()
 
-return function(p1)
-	-- upvalues: useDispatch (ref), reactModule (ref), useLocalization (ref), textKeysModule (ref), fFlagSharedChatEntryPointAction (ref), fFlagUserListCtaAnalyticsEnabled (ref), fFlagUserListCanonicalCtaAnalyticsModule (ref), buttonTypes (ref), reportCtaActivatedModule (ref), enteredChatFromEntryPoint (ref), guiService (ref), notificationTypeList (ref), friendingActionsModule (ref)
-	local var1 = useDispatch()
-	local var2 = reactModule.useRef({})
-	local var3 = useLocalization({
-		friendRequestSent = textKeysModule.FriendRequestSent,
-		friendAdded = textKeysModule.FriendAdded,
-		invalidTargetUserError = textKeysModule.InvalidTargetUserError,
-		alreadyFriendError = textKeysModule.AlreadyFriendError,
-		maxFriendsError = textKeysModule.MaxFriendsError,
-		invalidNicknameError = textKeysModule.InvalidNicknameError,
-		unauthorizedError = textKeysModule.UnauthorizedError,
-		userBannedError = textKeysModule.UserBannedError,
-		userBlockedError = textKeysModule.UserBlockedError,
-		userNotPassedCaptchaError = textKeysModule.UserNotPassedCaptchaError,
-		tooManyRequestsError = textKeysModule.TooManyRequestsError,
-		defaultFriendingError = textKeysModule.DefaultFriendingError
+return function(p1) --[[ Line: 35 | Named "useCtaActionHandlers" ]]
+	-- upvalues: UseDispatchFunction (copy), ReactModule (copy), UseLocalizationFunction (copy), TextKeysModule (copy), FFlagSharedChatEntryPointAction (copy), FFlagUserListCtaAnalyticsEnabled (copy), FFlagUserListCanonicalCtaAnalyticsModule (copy), ButtonTypes (copy), ReportCtaActivatedModule (copy), EnteredChatFromEntryPointFunction (copy), GuiService (copy), NotificationTypeList (copy), FriendingActionsModule (copy)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseRefResult = ReactModule.useRef({})
+	local UseLocalizationResult = UseLocalizationFunction({
+		friendRequestSent = TextKeysModule.FriendRequestSent,
+		friendAdded = TextKeysModule.FriendAdded,
+		invalidTargetUserError = TextKeysModule.InvalidTargetUserError,
+		alreadyFriendError = TextKeysModule.AlreadyFriendError,
+		maxFriendsError = TextKeysModule.MaxFriendsError,
+		invalidNicknameError = TextKeysModule.InvalidNicknameError,
+		unauthorizedError = TextKeysModule.UnauthorizedError,
+		userBannedError = TextKeysModule.UserBannedError,
+		userBlockedError = TextKeysModule.UserBlockedError,
+		userNotPassedCaptchaError = TextKeysModule.UserNotPassedCaptchaError,
+		tooManyRequestsError = TextKeysModule.TooManyRequestsError,
+		defaultFriendingError = TextKeysModule.DefaultFriendingError
 	})
-	local var4 = if p1 then p1.friendshipOriginSourceType else nil
-	local var5 = if fFlagSharedChatEntryPointAction then if p1 then p1.chatEntryPoint else nil else nil
-	local var6 = if fFlagUserListCtaAnalyticsEnabled then if p1 then p1.onCtaActivated else nil else nil
-	local var7 = if fFlagUserListCanonicalCtaAnalyticsModule then if p1 then p1.analytics else nil else nil
+	local FriendshipOriginSourceType = if p1 then p1.friendshipOriginSourceType else nil
+	local ChatEntryPoint = if FFlagSharedChatEntryPointAction and p1 then p1.chatEntryPoint else nil
+	local OnCtaActivated = if FFlagUserListCtaAnalyticsEnabled and p1 then p1.onCtaActivated else nil
+	local Analytics = if FFlagUserListCanonicalCtaAnalyticsModule and p1 then p1.analytics else nil
 	
-	return reactModule.useMemo(function()
-		-- upvalues: buttonTypes (copy), fFlagUserListCtaAnalyticsEnabled (copy), var6 (write), fFlagUserListCanonicalCtaAnalyticsModule (copy), reportCtaActivatedModule (copy), var7 (write), fFlagSharedChatEntryPointAction (copy), var5 (write), var1 (ref), enteredChatFromEntryPoint (copy), guiService (copy), notificationTypeList (copy), var2 (ref), friendingActionsModule (copy), var4 (ref), var3 (ref)
+	return ReactModule.useMemo(function() --[[ Line: 71 ]]
+		-- upvalues: ButtonTypes (upval), FFlagUserListCtaAnalyticsEnabled (upval), OnCtaActivated (ref), FFlagUserListCanonicalCtaAnalyticsModule (upval), ReportCtaActivatedModule (upval), Analytics (ref), FFlagSharedChatEntryPointAction (upval), ChatEntryPoint (ref), UseDispatchResult (copy), EnteredChatFromEntryPointFunction (upval), GuiService (upval), NotificationTypeList (upval), UseRefResult (copy), FriendingActionsModule (upval), FriendshipOriginSourceType (copy), UseLocalizationResult (copy)
 		return {
-			[buttonTypes.Chat] = function(p2, p3)
-				-- upvalues: fFlagUserListCtaAnalyticsEnabled (copy), var6 (copy), buttonTypes (copy), fFlagUserListCanonicalCtaAnalyticsModule (copy), reportCtaActivatedModule (copy), var7 (copy), fFlagSharedChatEntryPointAction (copy), var5 (copy), var1 (copy), enteredChatFromEntryPoint (copy), guiService (copy), notificationTypeList (copy)
-				if fFlagUserListCtaAnalyticsEnabled and var6 ~= nil then
-					var6({ buttonType = buttonTypes.Chat, userId = p2 })
+			[ButtonTypes.Chat] = function(UserId, p2) --[[ Line: 73 ]]
+				-- upvalues: FFlagUserListCtaAnalyticsEnabled (upval), OnCtaActivated (upval), ButtonTypes (upval), FFlagUserListCanonicalCtaAnalyticsModule (upval), ReportCtaActivatedModule (upval), Analytics (upval), FFlagSharedChatEntryPointAction (upval), ChatEntryPoint (upval), UseDispatchResult (upval), EnteredChatFromEntryPointFunction (upval), GuiService (upval), NotificationTypeList (upval)
+				if FFlagUserListCtaAnalyticsEnabled and OnCtaActivated ~= nil then
+					OnCtaActivated({ buttonType = ButtonTypes.Chat, userId = UserId })
 				end
-				if fFlagUserListCanonicalCtaAnalyticsModule then
-					reportCtaActivatedModule(var7, buttonTypes.Chat, p2, p3)
+				if FFlagUserListCanonicalCtaAnalyticsModule then
+					ReportCtaActivatedModule(Analytics, ButtonTypes.Chat, UserId, p2)
 				end
-				if fFlagSharedChatEntryPointAction and var5 ~= nil then
-					var1(enteredChatFromEntryPoint(var5))
+				if FFlagSharedChatEntryPointAction and ChatEntryPoint ~= nil then
+					UseDispatchResult(EnteredChatFromEntryPointFunction(ChatEntryPoint))
 				end
-				guiService:BroadcastNotification(p2, notificationTypeList.LAUNCH_CONVERSATION)
+				GuiService:BroadcastNotification(UserId, NotificationTypeList.LAUNCH_CONVERSATION)
 			end,
-			[buttonTypes.Add] = function(p2, p3)
-				-- upvalues: var2 (copy), fFlagUserListCtaAnalyticsEnabled (copy), var6 (copy), buttonTypes (copy), fFlagUserListCanonicalCtaAnalyticsModule (copy), reportCtaActivatedModule (copy), var7 (copy), friendingActionsModule (copy), var1 (copy), var4 (copy), var3 (copy)
-				if var2.current[p2] then return end
-				var2.current[p2] = true
+			[ButtonTypes.Add] = function(TargetUserId, p2) --[[ Line: 88 ]]
+				-- upvalues: UseRefResult (upval), FFlagUserListCtaAnalyticsEnabled (upval), OnCtaActivated (upval), ButtonTypes (upval), FFlagUserListCanonicalCtaAnalyticsModule (upval), ReportCtaActivatedModule (upval), Analytics (upval), FriendingActionsModule (upval), UseDispatchResult (upval), FriendshipOriginSourceType (upval), UseLocalizationResult (upval)
+				if UseRefResult.current[TargetUserId] then return end
+				UseRefResult.current[TargetUserId] = true
 				
-				if fFlagUserListCtaAnalyticsEnabled and var6 ~= nil then
-					var6({ buttonType = buttonTypes.Add, userId = p2 })
+				if FFlagUserListCtaAnalyticsEnabled and OnCtaActivated ~= nil then
+					OnCtaActivated({ buttonType = ButtonTypes.Add, userId = TargetUserId })
 				end
-				if fFlagUserListCanonicalCtaAnalyticsModule then
-					reportCtaActivatedModule(var7, buttonTypes.Add, p2, p3)
+				if FFlagUserListCanonicalCtaAnalyticsModule then
+					ReportCtaActivatedModule(Analytics, ButtonTypes.Add, TargetUserId, p2)
 				end
-				friendingActionsModule.executeAddFriend({
-					dispatch = var1,
-					targetUserId = p2,
-					friendshipOriginSourceType = var4,
-					localized = var3
-				}):finally(function()
-					-- upvalues: var2 (copy), p2 (ref)
-					var2.current[p2] = nil
+				FriendingActionsModule.executeAddFriend({
+					dispatch = UseDispatchResult,
+					targetUserId = TargetUserId,
+					friendshipOriginSourceType = FriendshipOriginSourceType,
+					localized = UseLocalizationResult
+				}):finally(function() --[[ Line: 106 ]]
+					-- upvalues: UseRefResult (upval), TargetUserId (copy)
+					UseRefResult.current[TargetUserId] = nil
 				end)
 			end,
-			[buttonTypes.Accept] = function(p2, p3)
-				-- upvalues: var2 (copy), fFlagUserListCtaAnalyticsEnabled (copy), var6 (copy), buttonTypes (copy), fFlagUserListCanonicalCtaAnalyticsModule (copy), reportCtaActivatedModule (copy), var7 (copy), friendingActionsModule (copy), var1 (copy), var3 (copy)
-				if var2.current[p2] then return end
-				var2.current[p2] = true
+			[ButtonTypes.Accept] = function(TargetUserId, p2) --[[ Line: 111 ]]
+				-- upvalues: UseRefResult (upval), FFlagUserListCtaAnalyticsEnabled (upval), OnCtaActivated (upval), ButtonTypes (upval), FFlagUserListCanonicalCtaAnalyticsModule (upval), ReportCtaActivatedModule (upval), Analytics (upval), FriendingActionsModule (upval), UseDispatchResult (upval), UseLocalizationResult (upval)
+				if UseRefResult.current[TargetUserId] then return end
+				UseRefResult.current[TargetUserId] = true
 				
-				if fFlagUserListCtaAnalyticsEnabled and var6 ~= nil then
-					var6({ buttonType = buttonTypes.Accept, userId = p2 })
+				if FFlagUserListCtaAnalyticsEnabled and OnCtaActivated ~= nil then
+					OnCtaActivated({ buttonType = ButtonTypes.Accept, userId = TargetUserId })
 				end
-				if fFlagUserListCanonicalCtaAnalyticsModule then
-					reportCtaActivatedModule(var7, buttonTypes.Accept, p2, p3)
+				if FFlagUserListCanonicalCtaAnalyticsModule then
+					ReportCtaActivatedModule(Analytics, ButtonTypes.Accept, TargetUserId, p2)
 				end
-				friendingActionsModule.executeAcceptFriendRequest({ dispatch = var1, targetUserId = p2, localized = var3 }):finally(function()
-					-- upvalues: var2 (copy), p2 (ref)
-					var2.current[p2] = nil
+				FriendingActionsModule.executeAcceptFriendRequest({
+					dispatch = UseDispatchResult,
+					targetUserId = TargetUserId,
+					localized = UseLocalizationResult
+				}):finally(function() --[[ Line: 128 ]]
+					-- upvalues: UseRefResult (upval), TargetUserId (copy)
+					UseRefResult.current[TargetUserId] = nil
 				end)
 			end,
-			[buttonTypes.Dismiss] = function(p2, p3)
-				-- upvalues: var2 (copy), fFlagUserListCtaAnalyticsEnabled (copy), var6 (copy), buttonTypes (copy), fFlagUserListCanonicalCtaAnalyticsModule (copy), reportCtaActivatedModule (copy), var7 (copy), friendingActionsModule (copy), var1 (copy), var3 (copy)
-				if var2.current[p2] then return end
-				var2.current[p2] = true
+			[ButtonTypes.Dismiss] = function(TargetUserId, p2) --[[ Line: 133 ]]
+				-- upvalues: UseRefResult (upval), FFlagUserListCtaAnalyticsEnabled (upval), OnCtaActivated (upval), ButtonTypes (upval), FFlagUserListCanonicalCtaAnalyticsModule (upval), ReportCtaActivatedModule (upval), Analytics (upval), FriendingActionsModule (upval), UseDispatchResult (upval), UseLocalizationResult (upval)
+				if UseRefResult.current[TargetUserId] then return end
+				UseRefResult.current[TargetUserId] = true
 				
-				if fFlagUserListCtaAnalyticsEnabled and var6 ~= nil then
-					var6({ buttonType = buttonTypes.Dismiss, userId = p2 })
+				if FFlagUserListCtaAnalyticsEnabled and OnCtaActivated ~= nil then
+					OnCtaActivated({ buttonType = ButtonTypes.Dismiss, userId = TargetUserId })
 				end
-				if fFlagUserListCanonicalCtaAnalyticsModule then
-					reportCtaActivatedModule(var7, buttonTypes.Dismiss, p2, p3)
+				if FFlagUserListCanonicalCtaAnalyticsModule then
+					ReportCtaActivatedModule(Analytics, ButtonTypes.Dismiss, TargetUserId, p2)
 				end
-				friendingActionsModule.executeDeclineFriendRequest({ dispatch = var1, targetUserId = p2, localized = var3 }):finally(function()
-					-- upvalues: var2 (copy), p2 (ref)
-					var2.current[p2] = nil
+				FriendingActionsModule.executeDeclineFriendRequest({
+					dispatch = UseDispatchResult,
+					targetUserId = TargetUserId,
+					localized = UseLocalizationResult
+				}):finally(function() --[[ Line: 150 ]]
+					-- upvalues: UseRefResult (upval), TargetUserId (copy)
+					UseRefResult.current[TargetUserId] = nil
 				end)
 			end
 		}
 	end, {
-		var1, var3, var4, var6, var5, var7
+		UseDispatchResult, UseLocalizationResult, FriendshipOriginSourceType,
+		OnCtaActivated, ChatEntryPoint, Analytics
 	})
 end

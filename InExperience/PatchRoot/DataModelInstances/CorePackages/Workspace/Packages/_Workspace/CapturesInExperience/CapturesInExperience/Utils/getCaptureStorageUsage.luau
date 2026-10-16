@@ -1,11 +1,11 @@
-﻿local captureService = game:GetService("CaptureService")
-local parent = script.Parent.Parent
-local captureTypeModule = require(parent.Enums.CaptureType)
-local _ = require(parent.Types)
-local fFlagUseRbxstorageInGalleryModule = require(parent.Flags.FFlagUseRbxstorageInGallery)
-local fFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
+﻿local CaptureService = game:GetService("CaptureService")
+local Parent = script.Parent.Parent
+local CaptureTypeModule = require(Parent.Enums.CaptureType)
+local _ = require(Parent.Types)
+local FFlagUseRbxstorageInGalleryModule = require(Parent.Flags.FFlagUseRbxstorageInGallery)
+local FFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(Parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
 
-function formatBytes(p1)
+function formatBytes(p1: number): string --[[ Line: 12 ]]
 	local list = {
 		"Bytes",
 		"KB",
@@ -13,33 +13,33 @@ function formatBytes(p1)
 		"GB",
 		"TB"
 	}
-	local floored = math.floor(math.log(p1) / 6.931471805599)
-	local var1 = p1 / math.pow(1024, floored)
-	local var2 = "%.2f%s"
+	local Floored = math.floor(math.log(p1) / 6.931471805599453)
+	local Value = p1 / math.pow(1024, Floored)
+	local Template = "%.2f%s"
 	
-	if floored <= 2 then
-		var1 = math.round(var1)
-		var2 = "%d%s"
+	if Floored <= 2 then
+		Value = math.round(Value)
+		Template = "%d%s"
 	end
-	return if list[floored + 1] then string.format(var2, var1, list[floored + 1]) else ""
+	return if list[Floored + 1] then string.format(Template, Value, list[Floored + 1]) else ""
 end
 
-return function(p1)
-	-- upvalues: fFlagEnableCapturesGalleryRetrievalCoreScriptModule (ref), fFlagUseRbxstorageInGalleryModule (ref), captureTypeModule (ref), captureService (ref)
-	if #p1 == 0 then return end
-	local t = {}
+return function(List) --[[ Line: 31 | Named "getCaptureStorageUsage" ]]
+	-- upvalues: FFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), FFlagUseRbxstorageInGalleryModule (copy), CaptureTypeModule (copy), CaptureService (copy)
+	if #List == 0 then return end
+	local FilePaths = {}
 	
-	if not fFlagEnableCapturesGalleryRetrievalCoreScriptModule then
-		for i, v in ipairs(p1) do
-			if not fFlagUseRbxstorageInGalleryModule or v.type ~= captureTypeModule.Video then
-				table.insert(t, v.filePath)
+	if not FFlagEnableCapturesGalleryRetrievalCoreScriptModule then
+		for _, value in ipairs(List) do
+			if not FFlagUseRbxstorageInGalleryModule or value.type ~= CaptureTypeModule.Video then
+				table.insert(FilePaths, value.filePath)
 			end
 		end
 	end
-	local _, status = pcall(function()
-		-- upvalues: captureService (copy), t (ref)
-		return captureService:GetCaptureStorageSizeAsync(t)
+	local _, Result = pcall(function() --[[ Line: 47 ]]
+		-- upvalues: CaptureService (upval), FilePaths (copy)
+		return CaptureService:GetCaptureStorageSizeAsync(FilePaths)
 	end)
 	
-	return formatBytes(status)
+	return formatBytes(Result)
 end

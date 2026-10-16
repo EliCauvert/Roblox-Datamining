@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.AppPageShell.AppPageShell)
+﻿return (require(script.Parent.Parent.Parent._Index.AppPageShell.AppPageShell))

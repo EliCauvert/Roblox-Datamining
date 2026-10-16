@@ -1,9 +1,11 @@
-﻿local makeDefaultReadPolicyModule = require(script.Parent.utils.makeDefaultReadPolicy)
+﻿local MakeDefaultReadPolicyModule = require(script.Parent.utils.makeDefaultReadPolicy)
 
 return {
 	fields = {
-		alias = { read = makeDefaultReadPolicyModule("") },
-		contactName = { read = makeDefaultReadPolicyModule("") },
-		platformName = { read = makeDefaultReadPolicyModule("") }
+		alias = { read = MakeDefaultReadPolicyModule("") },
+		contactName = { read = MakeDefaultReadPolicyModule("") },
+		platformName = {
+			read = if require(script:FindFirstAncestor("ApolloLocalState").Parent.SharedFlags).FFlagUserProfilePlatformProfile then nil else MakeDefaultReadPolicyModule("")
+		}
 	}
 }

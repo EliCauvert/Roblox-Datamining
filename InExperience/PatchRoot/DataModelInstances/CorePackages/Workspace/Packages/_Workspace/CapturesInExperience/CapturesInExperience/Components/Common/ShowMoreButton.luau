@@ -1,23 +1,23 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local reactModule = require(parent_1.React)
-local useLocalization = require(parent_1.Localization).Hooks.useLocalization
-local eventNamesModule = require(parent.Analytics.EventNames)
-local menuButtonModule = require(parent.Components.Common.MenuButton)
-local useAnalyticsModule = require(parent.Analytics.useAnalytics)
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
+local UseLocalizationFunction = require(Parent1.Localization).Hooks.useLocalization
+local EventNamesModule = require(Parent.Analytics.EventNames)
+local MenuButtonModule = require(Parent.Components.Common.MenuButton)
+local UseAnalyticsModule = require(Parent.Analytics.useAnalytics)
 
-return function(p1)
-	-- upvalues: useAnalyticsModule (ref), useLocalization (ref), reactModule (ref), eventNamesModule (ref), menuButtonModule (ref)
-	local var1 = useAnalyticsModule()
+return function(Frame) --[[ Line: 19 ]]
+	-- upvalues: UseAnalyticsModule (copy), UseLocalizationFunction (copy), ReactModule (copy), EventNamesModule (copy), MenuButtonModule (copy)
+	local UseAnalyticsModuleResult = UseAnalyticsModule()
 	
-	return reactModule.createElement(menuButtonModule, {
-		buttonHeight = p1.buttonHeight,
-		LayoutOrder = p1.LayoutOrder,
-		onActivated = reactModule.useCallback(function()
-			-- upvalues: var1 (ref), eventNamesModule (copy), p1 (ref)
-			var1.fireEvent(eventNamesModule.CapturesShowMoreInGameMenu)
-			p1.onActivated()
-		end, { p1.onActivated }),
-		text = useLocalization({ showMore = "Feature.Avatar.Action.ShowMore" }).showMore
+	return ReactModule.createElement(MenuButtonModule, {
+		buttonHeight = Frame.buttonHeight,
+		LayoutOrder = Frame.LayoutOrder,
+		onActivated = ReactModule.useCallback(function() --[[ Line: 25 ]]
+			-- upvalues: UseAnalyticsModuleResult (copy), EventNamesModule (upval), Frame (copy)
+			UseAnalyticsModuleResult.fireEvent(EventNamesModule.CapturesShowMoreInGameMenu)
+			Frame.onActivated()
+		end, { Frame.onActivated }),
+		text = UseLocalizationFunction({ showMore = "Feature.Avatar.Action.ShowMore" }).showMore
 	})
 end

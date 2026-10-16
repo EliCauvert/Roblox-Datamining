@@ -1,60 +1,63 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local reactModule = require(parent_1.React)
-local signalsReactModule = require(parent_1.SignalsReact)
-local foundationModule = require(parent_1.Foundation)
-local view = foundationModule.View
-local text = foundationModule.Text
-local useTokens = foundationModule.Hooks.useTokens
-local stateLayerAffordance = foundationModule.Enums.StateLayerAffordance
-local playerListIconModule = require(parent.Common.PlayerListIcon)
-local playerContextualMenuStoreModule = require(parent.Common.PlayerContextualMenuStore)
-local constantsModule = require(parent.Common.Constants)
-local t = { affordance = stateLayerAffordance.Background }
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
+local SignalsReactModule = require(Parent1.SignalsReact)
+local FoundationModule = require(Parent1.Foundation)
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local PlayerListIconModule = require(Parent.Common.PlayerListIcon)
+local PlayerContextualMenuStoreModule = require(Parent.Common.PlayerContextualMenuStore)
+local ConstantsModule = require(Parent.Common.Constants)
+local config = {
+	affordance = FoundationModule.Enums.StateLayerAffordance.Background
+}
 
-return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), signalsReactModule (ref), playerContextualMenuStoreModule (ref), reactModule (ref), playerListIconModule (ref), view (ref), text (ref), t (ref), constantsModule (ref)
-	local var1 = useTokens()
-	local item = p1.item
-	local var2 = if (item.requiresConfirm == true and signalsReactModule.useSignalState(playerContextualMenuStoreModule.getPendingConfirmKey) == item.key) and item.confirmLabel ~= nil then item.confirmLabel else item.label
-	local var3 = p1.isInteractable ~= false
-	local var4 = if item.icon ~= nil then nil else reactModule.createElement(playerListIconModule, {
+return ReactModule.memo(function(p1) --[[ Line: 21 | Named "MenuActionRow" ]]
+	-- upvalues: UseTokensFunction (copy), SignalsReactModule (copy), PlayerContextualMenuStoreModule (copy), ReactModule (copy), PlayerListIconModule (copy), View (copy), Text (copy), config (copy), ConstantsModule (copy)
+	local UseTokensResult = UseTokensFunction()
+	local Item = p1.item
+	local UseSignalStateResult = SignalsReactModule.useSignalState(PlayerContextualMenuStoreModule.getPendingConfirmKey)
+	local IsUseSignalStateResultMatch: boolean = Item.requiresConfirm == true and UseSignalStateResult == Item.key
+	local IsIsInteractable = p1.isInteractable ~= false
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 35 ]]
+		-- upvalues: IsIsInteractable (copy), PlayerContextualMenuStoreModule (upval), Item (copy)
+		if IsIsInteractable then
+			PlayerContextualMenuStoreModule.activateMenuItem(Item)
+			
+			return
+		end
+	end, { Item, IsIsInteractable })
+	local Element = if Item.icon == nil then nil else ReactModule.createElement(PlayerListIconModule, {
 		layoutOrder = 1,
 		testId = "menu-action-row-icon",
-		icon = item.icon,
-		size = var1.Size.Size_500
+		icon = Item.icon,
+		size = UseTokensResult.Size.Size_500
 	})
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "row align-x-left align-y-center gap-none size-full-1000 auto-y",
 		testId = "menu-action-row",
 		LayoutOrder = p1.layoutOrder,
-		onActivated = if var3 then reactModule.useCallback(function()
-			-- upvalues: var3 (ref), playerContextualMenuStoreModule (copy), item (ref)
-			if var3 then
-				playerContextualMenuStoreModule.activateMenuItem(item)
-				
-				return
-			end
-		end, { item, var3 }) else nil,
+		onActivated = if IsIsInteractable then UseResult else nil,
 		ref = p1.rowRef,
-		stateLayer = if var3 then t else nil,
-		selection = constantsModule.SELECTABLE
+		stateLayer = if IsIsInteractable then config else nil,
+		selection = ConstantsModule.SELECTABLE
 	}, {
-		Icon = if var4 ~= nil then nil else reactModule.createElement(view, {
+		Icon = if Element == nil then nil else ReactModule.createElement(View, {
 			tag = "row align-x-center align-y-center size-1000-1000",
 			LayoutOrder = 1,
 			testId = "menu-action-row-icon-column"
-		}, { Icon = var4 }),
-		Label = reactModule.createElement(view, {
+		}, { Icon = Element }),
+		Label = ReactModule.createElement(View, {
 			tag = "fill auto-y",
 			LayoutOrder = 2,
 			testId = "menu-action-row-label-column"
 		}, {
-			Text = reactModule.createElement(text, {
+			Text = ReactModule.createElement(Text, {
 				tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-default",
 				testId = "menu-action-row-label",
-				Text = var2
+				Text = if IsUseSignalStateResultMatch and Item.confirmLabel ~= nil then Item.confirmLabel else Item.label
 			})
 		})
 	})

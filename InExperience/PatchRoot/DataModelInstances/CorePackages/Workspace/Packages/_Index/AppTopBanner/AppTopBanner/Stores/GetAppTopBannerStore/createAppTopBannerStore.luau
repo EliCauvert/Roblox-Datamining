@@ -1,96 +1,97 @@
-﻿local appTopBanner = script:FindFirstAncestor("AppTopBanner")
-local parent = appTopBanner.Parent
-local signalsModule = require(parent.Signals)
-local signalsExperimentalModule = require(parent.SignalsExperimental)
-local signalsUtilsModule = require(parent.SignalsUtils)
-local appTopBannerTypeModule = require(appTopBanner.Enums.AppTopBannerType)
-local constantsModule = require(appTopBanner.Constants)
+﻿local AppTopBanner = script:FindFirstAncestor("AppTopBanner")
+local Parent = AppTopBanner.Parent
+local SignalsModule = require(Parent.Signals)
+local SignalsExperimentalModule = require(Parent.SignalsExperimental)
+local SignalsUtilsModule = require(Parent.SignalsUtils)
+local AppTopBannerTypeModule = require(AppTopBanner.Enums.AppTopBannerType)
+local ConstantsModule = require(AppTopBanner.Constants)
 
-local function defaultOnAppTopBannerClick() end
+local function defaultOnAppTopBannerClick() --[[ Line: 15 ]] end
 
-return function()
-	-- upvalues: signalsUtilsModule (ref), appTopBannerTypeModule (ref), defaultOnAppTopBannerClick (ref), signalsModule (ref), signalsExperimentalModule (ref), constantsModule (ref)
-	local var1, var2 = signalsUtilsModule.createSessionScopedSignal(true)
-	local var3, var4 = signalsUtilsModule.createSessionScopedSignal(false)
-	local var5, var6 = signalsUtilsModule.createSessionScopedSignal(appTopBannerTypeModule.None)
-	local var7, var8 = signalsUtilsModule.createSessionScopedSignal(nil)
-	local var9, var10 = signalsUtilsModule.createSessionScopedSignal(0)
-	local var11, var12 = signalsUtilsModule.createSessionScopedSignal({ callback = defaultOnAppTopBannerClick }, function(p1, p2)
+return function() --[[ Line: 17 ]]
+	-- upvalues: SignalsUtilsModule (copy), AppTopBannerTypeModule (copy), defaultOnAppTopBannerClick (copy), SignalsModule (copy), SignalsExperimentalModule (copy), ConstantsModule (copy)
+	local SessionScopedSignal, SessionScopedSignal2 = SignalsUtilsModule.createSessionScopedSignal(true)
+	local SessionScopedSignal1, SessionScopedSignal2_1 = SignalsUtilsModule.createSessionScopedSignal(false)
+	local SessionScopedSignal3, SessionScopedSignal2_2 = SignalsUtilsModule.createSessionScopedSignal(AppTopBannerTypeModule.None)
+	local SessionScopedSignal4, SessionScopedSignal2_3 = SignalsUtilsModule.createSessionScopedSignal(nil)
+	local SessionScopedSignal5, SessionScopedSignal2_4 = SignalsUtilsModule.createSessionScopedSignal(0)
+	local SessionScopedSignal6, SessionScopedSignal2_5 = SignalsUtilsModule.createSessionScopedSignal({ callback = defaultOnAppTopBannerClick }, function(p1, p2): boolean --[[ Line: 38 ]]
 		return p1.callback == p2.callback
 	end)
 	
-	local function _()
-		-- upvalues: signalsExperimentalModule (copy), var4 (ref), var6 (ref), appTopBannerTypeModule (copy), var8 (ref), var10 (ref), var12 (ref), defaultOnAppTopBannerClick (copy)
-		signalsExperimentalModule.batch(function()
-			-- upvalues: var4 (copy), var6 (copy), appTopBannerTypeModule (copy), var8 (copy), var10 (copy), var12 (copy), defaultOnAppTopBannerClick (copy)
-			var4(false)
-			var6(appTopBannerTypeModule.None)
-			var8(nil)
-			var10(0)
-			var12({ callback = defaultOnAppTopBannerClick })
+	local function _() --[[ Line: 46 | Named "collapseToDefaults" ]]
+		-- upvalues: SignalsExperimentalModule (upval), SessionScopedSignal2_1 (copy), SessionScopedSignal2_2 (copy), AppTopBannerTypeModule (upval), SessionScopedSignal2_3 (copy), SessionScopedSignal2_4 (copy), SessionScopedSignal2_5 (copy), defaultOnAppTopBannerClick (upval)
+		SignalsExperimentalModule.batch(function() --[[ Line: 47 ]]
+			-- upvalues: SessionScopedSignal2_1 (upval), SessionScopedSignal2_2 (upval), AppTopBannerTypeModule (upval), SessionScopedSignal2_3 (upval), SessionScopedSignal2_4 (upval), SessionScopedSignal2_5 (upval), defaultOnAppTopBannerClick (upval)
+			SessionScopedSignal2_1(false)
+			SessionScopedSignal2_2(AppTopBannerTypeModule.None)
+			SessionScopedSignal2_3(nil)
+			SessionScopedSignal2_4(0)
+			SessionScopedSignal2_5({ callback = defaultOnAppTopBannerClick })
 		end)
 	end
 	
 	return {
-		getIsDisabled = var1,
-		getExpanded = var3,
-		getAppTopBannerType = var5,
-		getAppTopBannerContentProps = var7,
-		getAppTopBannerContentHeight = var9,
-		getOnAppTopBannerClick = var11,
-		getIsVisible = signalsModule.createComputed(function(p1)
-			-- upvalues: var3 (ref), var1 (ref)
-			return var3(p1) and not var1(p1)
+		getIsDisabled = SessionScopedSignal,
+		getExpanded = SessionScopedSignal1,
+		getAppTopBannerType = SessionScopedSignal3,
+		getAppTopBannerContentProps = SessionScopedSignal4,
+		getAppTopBannerContentHeight = SessionScopedSignal5,
+		getOnAppTopBannerClick = SessionScopedSignal6,
+		getIsVisible = SignalsModule.createComputed(function(p1): boolean --[[ Line: 42 ]]
+			-- upvalues: SessionScopedSignal1 (copy), SessionScopedSignal (copy)
+			return SessionScopedSignal1(p1) and not SessionScopedSignal(p1)
 		end),
-		setAppTopBanner = function(value, p1, p2, p3, p4)
-			-- upvalues: signalsExperimentalModule (copy), var4 (ref), var6 (ref), var8 (ref), var12 (ref), var10 (ref), constantsModule (copy), var3 (ref), appTopBannerTypeModule (copy), defaultOnAppTopBannerClick (copy)
-			if value then
-				signalsExperimentalModule.batch(function()
-					-- upvalues: var4 (copy), value (ref), p1 (ref), var6 (copy), p2 (ref), var8 (copy), p3 (ref), var12 (copy), var10 (copy), p4 (ref), constantsModule (copy)
-					var4(value)
+		setAppTopBanner = function(p1, p2, p3, Callback, p4) --[[ Line: 56 ]]
+			-- upvalues: SignalsExperimentalModule (upval), SessionScopedSignal2_1 (copy), SessionScopedSignal2_2 (copy), SessionScopedSignal2_3 (copy), SessionScopedSignal2_5 (copy), SessionScopedSignal2_4 (copy), ConstantsModule (upval), SessionScopedSignal1 (copy), AppTopBannerTypeModule (upval), defaultOnAppTopBannerClick (upval)
+			if p1 then
+				SignalsExperimentalModule.batch(function() --[[ Line: 64 ]]
+					-- upvalues: SessionScopedSignal2_1 (upval), p1 (copy), p2 (copy), SessionScopedSignal2_2 (upval), p3 (copy), SessionScopedSignal2_3 (upval), Callback (copy), SessionScopedSignal2_5 (upval), SessionScopedSignal2_4 (upval), p4 (copy), ConstantsModule (upval)
+					SessionScopedSignal2_1(p1)
 					
-					if p1 ~= nil then
-						var6(p1)
-					end
 					if p2 ~= nil then
-						var8(p2)
+						SessionScopedSignal2_2(p2)
 					end
 					if p3 ~= nil then
-						var12({ callback = p3 })
+						SessionScopedSignal2_3(p3)
 					end
-					var10(p4 or constantsModule.CONTENT_HEIGHT)
+					if Callback ~= nil then
+						SessionScopedSignal2_5({ callback = Callback })
+					end
+					SessionScopedSignal2_4(p4 or ConstantsModule.CONTENT_HEIGHT)
 				end)
 				
 				return
-			elseif var3(false) ~= value then
-				signalsExperimentalModule.batch(function()
-					-- upvalues: var4 (copy), var6 (copy), appTopBannerTypeModule (copy), var8 (copy), var10 (copy), var12 (copy), defaultOnAppTopBannerClick (copy)
-					var4(false)
-					var6(appTopBannerTypeModule.None)
-					var8(nil)
-					var10(0)
-					var12({ callback = defaultOnAppTopBannerClick })
+			end
+			if SessionScopedSignal1(false) ~= p1 then
+				SignalsExperimentalModule.batch(function() --[[ Line: 47 ]]
+					-- upvalues: SessionScopedSignal2_1 (upval), SessionScopedSignal2_2 (upval), AppTopBannerTypeModule (upval), SessionScopedSignal2_3 (upval), SessionScopedSignal2_4 (upval), SessionScopedSignal2_5 (upval), defaultOnAppTopBannerClick (upval)
+					SessionScopedSignal2_1(false)
+					SessionScopedSignal2_2(AppTopBannerTypeModule.None)
+					SessionScopedSignal2_3(nil)
+					SessionScopedSignal2_4(0)
+					SessionScopedSignal2_5({ callback = defaultOnAppTopBannerClick })
 				end)
 			end
 		end,
-		disableAppTopBanner = function(p1)
-			-- upvalues: var1 (ref), var2 (ref)
-			if var1(false) ~= p1 then
-				var2(p1)
+		disableAppTopBanner = function(p1) --[[ Line: 82 ]]
+			-- upvalues: SessionScopedSignal (copy), SessionScopedSignal2 (copy)
+			if SessionScopedSignal(false) ~= p1 then
+				SessionScopedSignal2(p1)
 			end
 		end,
-		reset = function()
-			-- upvalues: signalsExperimentalModule (copy), var2 (ref), var4 (ref), var6 (ref), appTopBannerTypeModule (copy), var8 (ref), var10 (ref), var12 (ref), defaultOnAppTopBannerClick (copy)
-			signalsExperimentalModule.batch(function()
-				-- upvalues: var2 (copy), signalsExperimentalModule (copy), var4 (copy), var6 (copy), appTopBannerTypeModule (copy), var8 (copy), var10 (copy), var12 (copy), defaultOnAppTopBannerClick (copy)
-				var2(true)
-				signalsExperimentalModule.batch(function()
-					-- upvalues: var4 (copy), var6 (copy), appTopBannerTypeModule (copy), var8 (copy), var10 (copy), var12 (copy), defaultOnAppTopBannerClick (copy)
-					var4(false)
-					var6(appTopBannerTypeModule.None)
-					var8(nil)
-					var10(0)
-					var12({ callback = defaultOnAppTopBannerClick })
+		reset = function() --[[ Line: 88 ]]
+			-- upvalues: SignalsExperimentalModule (upval), SessionScopedSignal2 (copy), SessionScopedSignal2_1 (copy), SessionScopedSignal2_2 (copy), AppTopBannerTypeModule (upval), SessionScopedSignal2_3 (copy), SessionScopedSignal2_4 (copy), SessionScopedSignal2_5 (copy), defaultOnAppTopBannerClick (upval)
+			SignalsExperimentalModule.batch(function() --[[ Line: 89 ]]
+				-- upvalues: SessionScopedSignal2 (upval), SignalsExperimentalModule (upval), SessionScopedSignal2_1 (upval), SessionScopedSignal2_2 (upval), AppTopBannerTypeModule (upval), SessionScopedSignal2_3 (upval), SessionScopedSignal2_4 (upval), SessionScopedSignal2_5 (upval), defaultOnAppTopBannerClick (upval)
+				SessionScopedSignal2(true)
+				SignalsExperimentalModule.batch(function() --[[ Line: 47 ]]
+					-- upvalues: SessionScopedSignal2_1 (upval), SessionScopedSignal2_2 (upval), AppTopBannerTypeModule (upval), SessionScopedSignal2_3 (upval), SessionScopedSignal2_4 (upval), SessionScopedSignal2_5 (upval), defaultOnAppTopBannerClick (upval)
+					SessionScopedSignal2_1(false)
+					SessionScopedSignal2_2(AppTopBannerTypeModule.None)
+					SessionScopedSignal2_3(nil)
+					SessionScopedSignal2_4(0)
+					SessionScopedSignal2_5({ callback = defaultOnAppTopBannerClick })
 				end)
 			end)
 		end

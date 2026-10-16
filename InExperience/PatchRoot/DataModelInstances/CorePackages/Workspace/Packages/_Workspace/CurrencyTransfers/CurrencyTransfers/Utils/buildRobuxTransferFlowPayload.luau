@@ -1,57 +1,57 @@
-﻿local currencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
-local playersService = game:GetService("Players")
-local _ = require(currencyTransfers.Stores.createTransferStore)
-local transferDirectionModule = require(currencyTransfers.Enums.TransferDirection)
+﻿local CurrencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
+local Players = game:GetService("Players")
+local _ = require(CurrencyTransfers.Stores.createTransferStore)
+local TransferDirectionModule = require(CurrencyTransfers.Enums.TransferDirection)
 
-return function(p1, p2)
-	-- upvalues: playersService (ref), transferDirectionModule (ref)
-	local localPlayer = playersService.LocalPlayer
-	local var1 = if localPlayer then localPlayer.UserId else 0
-	local direction = p1.getDirection(false)
-	local var2 = 0
-	local var3 = 0
+return function(p1, Event_name) --[[ Line: 10 | Named "buildRobuxTransferFlowPayload" ]]
+	-- upvalues: Players (copy), TransferDirectionModule (copy)
+	local LocalPlayer = Players.LocalPlayer
+	local UserId = if LocalPlayer then LocalPlayer.UserId else 0
+	local Direction = p1.getDirection(false)
+	local TargetId = 0
+	local TargetId1 = 0
 	
-	if direction == transferDirectionModule.Send then
-		var2 = var1
-		local recipient = p1.getRecipient(false)
-		var3 = if recipient then recipient.targetId else p1.getRecipientUserId(false)
-	elseif direction == transferDirectionModule.Receive then
-		var3 = var1
-		local sender = p1.getSender(false)
-		var2 = if sender then sender.targetId else 0
+	if Direction == TransferDirectionModule.Send then
+		TargetId = UserId
+		local Recipient = p1.getRecipient(false)
+		TargetId1 = if Recipient then Recipient.targetId else p1.getRecipientUserId(false)
+	elseif Direction == TransferDirectionModule.Receive then
+		TargetId1 = UserId
+		local Sender = p1.getSender(false)
+		TargetId = if Sender then Sender.targetId else 0
 	end
-	local transferRequestId = p1.getTransferRequestId(false)
-	local robuxTransfer = p1.getRobuxTransfer(false)
-	local selectedAmount = p1.getSelectedAmount(false)
+	local TransferRequestId = p1.getTransferRequestId(false)
+	local RobuxTransfer = p1.getRobuxTransfer(false)
+	local SelectedAmount = p1.getSelectedAmount(false)
 	
-	if selectedAmount == nil and robuxTransfer then
-		selectedAmount = robuxTransfer.transferAmount
+	if SelectedAmount == nil and RobuxTransfer then
+		SelectedAmount = RobuxTransfer.transferAmount
 	end
-	local var4 = nil
-	local gameId = game.GameId
+	local Universe_id: number? = nil
+	local GameId: number = game.GameId
 	
-	if gameId > 0 then
-		var4 = gameId
+	if GameId > 0 then
+		Universe_id = GameId
 	end
-	local transferOrigination = p1.getTransferOrigination(false)
-	local t = {
-		transfer_request_id = transferRequestId or "",
+	local TransferOrigination = p1.getTransferOrigination(false)
+	local config = {
+		transfer_request_id = TransferRequestId or "",
 		transfer_client_session_id = p1.getTransferClientSessionId(false),
-		event_name = p2,
-		sender_user_id = var2,
-		recipient_user_id = var3,
-		transfer_amount = selectedAmount,
+		event_name = Event_name,
+		sender_user_id = TargetId,
+		recipient_user_id = TargetId1,
+		transfer_amount = SelectedAmount,
 		transfer_prompt_state = tostring(p1.getPromptState(false)),
-		transfer_origination = if transferOrigination then tostring(transferOrigination) else "",
-		transfer_direction = if direction then tostring(direction) else "",
+		transfer_origination = if TransferOrigination then tostring(TransferOrigination) else "",
+		transfer_direction = if Direction then tostring(Direction) else "",
 		ingest_timestamp_milliseconds = DateTime.now().UnixTimestampMillis
 	}
 	
-	if direction == transferDirectionModule.Send and p1.getBalanceReceivedFromApi(false) then
-		t.user_balance = p1.getRobuxBalanceAmount(false)
+	if Direction == TransferDirectionModule.Send and p1.getBalanceReceivedFromApi(false) then
+		config.user_balance = p1.getRobuxBalanceAmount(false)
 	end
-	if var4 ~= nil then
-		t.universe_id = var4
+	if Universe_id ~= nil then
+		config.universe_id = Universe_id
 	end
-	return t
+	return config
 end

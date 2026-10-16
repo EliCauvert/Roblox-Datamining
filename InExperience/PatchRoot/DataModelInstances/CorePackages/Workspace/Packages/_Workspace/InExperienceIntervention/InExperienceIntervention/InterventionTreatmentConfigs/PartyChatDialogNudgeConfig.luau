@@ -1,73 +1,74 @@
-﻿local inExperienceIntervention = script:FindFirstAncestor("InExperienceIntervention")
-local parent = inExperienceIntervention.Parent
-local abuseVectorModule = require(parent.UniversalFeatureRestrictions.AbuseVector)
-local constants = require(parent.InterventionShared).Utils.Constants
-local interventionAnalytics = require(parent.InterventionShared).InterventionAnalytics
-local interventionTreatmentShownSignal = require(parent.InterventionShared).Signals.interventionTreatmentShownSignal
-local partyChatTimeoutReceivedSignal = require(parent.InterventionShared).Signals.partyChatTimeoutReceivedSignal
-local showFeatureRestrictionFromRealtimeModule = require(parent.UniversalFeatureRestrictions.showFeatureRestrictionFromRealtime)
-local fFlagAppChatReactiveFeatureRestrictions = require(parent.SharedFlags).FFlagAppChatReactiveFeatureRestrictions
-local fFlagAppChatUniversalFeatureRestriction = require(parent.SharedFlags).FFlagAppChatUniversalFeatureRestriction
-local _ = require(inExperienceIntervention.Utils.Types)
+﻿local InExperienceIntervention = script:FindFirstAncestor("InExperienceIntervention")
+local Parent = InExperienceIntervention.Parent
+local AbuseVectorModule = require(Parent.UniversalFeatureRestrictions.AbuseVector)
+local Constants = require(Parent.InterventionShared).Utils.Constants
+local InterventionAnalytics = require(Parent.InterventionShared).InterventionAnalytics
+local InterventionTreatmentShownSignal = require(Parent.InterventionShared).Signals.interventionTreatmentShownSignal
+local PartyChatTimeoutReceivedSignal = require(Parent.InterventionShared).Signals.partyChatTimeoutReceivedSignal
+local ShowFeatureRestrictionFromRealtimeModule = require(Parent.UniversalFeatureRestrictions.showFeatureRestrictionFromRealtime)
+local FFlagAppChatReactiveFeatureRestrictions = require(Parent.SharedFlags).FFlagAppChatReactiveFeatureRestrictions
+local FFlagAppChatUniversalFeatureRestriction = require(Parent.SharedFlags).FFlagAppChatUniversalFeatureRestriction
+local _ = require(InExperienceIntervention.Utils.Types)
 
-local function onPartyChatNudgeUFRAppeal() end
+local function onPartyChatNudgeUFRAppeal() --[[ Line: 18 ]] end
 
-local function onPartyChatNudgeUFRShown()
-	-- upvalues: interventionTreatmentShownSignal (ref), constants (ref)
-	interventionTreatmentShownSignal:fire(constants.TreatmentType.PartyChatNudgeDialog)
+local function onPartyChatNudgeUFRShown() --[[ Line: 19 ]]
+	-- upvalues: InterventionTreatmentShownSignal (copy), Constants (copy)
+	InterventionTreatmentShownSignal:fire(Constants.TreatmentType.PartyChatNudgeDialog)
 end
 
-local function onPartyChatNudgeAcknowledgementSuccess()
-	-- upvalues: partyChatTimeoutReceivedSignal (ref)
-	partyChatTimeoutReceivedSignal:fire(nil)
+local function onPartyChatNudgeAcknowledgementSuccess() --[[ Line: 22 ]]
+	-- upvalues: PartyChatTimeoutReceivedSignal (copy)
+	PartyChatTimeoutReceivedSignal:fire(nil)
 end
 
 return {
 	configName = "PartyChatDialogNudge",
-	shouldTriggerVisualTreatment = function(p1)
-		-- upvalues: constants (ref)
-		return p1.type == constants.NotificationDialogType.ChatNudge and (p1.modalType == constants.NotificationModalType.Dialog and p1.abuseVector == constants.AbuseVectorType.PartyChat)
+	shouldTriggerVisualTreatment = function(p1): boolean --[[ Line: 28 ]]
+		-- upvalues: Constants (copy)
+		return p1.type == Constants.NotificationDialogType.ChatNudge and p1.modalType == Constants.NotificationModalType.Dialog and p1.abuseVector == Constants.AbuseVectorType.PartyChat
 	end,
-	shouldTriggerBehavioralTreatment = function(p1)
-		-- upvalues: fFlagAppChatReactiveFeatureRestrictions (ref), constants (ref)
-		return fFlagAppChatReactiveFeatureRestrictions and (p1.type == constants.NotificationDialogType.ChatNudge and (p1.modalType == constants.NotificationModalType.Dialog and (p1.abuseVector == constants.AbuseVectorType.PartyChat and p1.acknowledgeable == true)))
+	shouldTriggerBehavioralTreatment = function(p1): boolean --[[ Line: 33 ]]
+		-- upvalues: FFlagAppChatReactiveFeatureRestrictions (copy), Constants (copy)
+		return FFlagAppChatReactiveFeatureRestrictions and (p1.type == Constants.NotificationDialogType.ChatNudge and (p1.modalType == Constants.NotificationModalType.Dialog and p1.abuseVector == Constants.AbuseVectorType.PartyChat) and p1.acknowledgeable == true)
 	end,
-	shouldTriggerEventReceived = function(p1)
-		-- upvalues: constants (ref)
-		return p1.type == constants.NotificationDialogType.ChatNudge and (p1.modalType == constants.NotificationModalType.Dialog and p1.abuseVector == constants.AbuseVectorType.PartyChat)
+	shouldTriggerEventReceived = function(p1): boolean --[[ Line: 40 ]]
+		-- upvalues: Constants (copy)
+		return p1.type == Constants.NotificationDialogType.ChatNudge and p1.modalType == Constants.NotificationModalType.Dialog and p1.abuseVector == Constants.AbuseVectorType.PartyChat
 	end,
-	onTriggerVisualTreatment = function(p1, p2)
-		-- upvalues: fFlagAppChatUniversalFeatureRestriction (ref), showFeatureRestrictionFromRealtimeModule (ref), abuseVectorModule (ref), onPartyChatNudgeUFRAppeal (ref), onPartyChatNudgeUFRShown (ref), fFlagAppChatReactiveFeatureRestrictions (ref), onPartyChatNudgeAcknowledgementSuccess (ref), constants (ref)
-		if fFlagAppChatUniversalFeatureRestriction then
-			showFeatureRestrictionFromRealtimeModule(abuseVectorModule.PartyChat, p2, {
+	onTriggerVisualTreatment = function(Callback: (any) -> (), Detail) --[[ Line: 45 ]]
+		-- upvalues: FFlagAppChatUniversalFeatureRestriction (copy), ShowFeatureRestrictionFromRealtimeModule (copy), AbuseVectorModule (copy), onPartyChatNudgeUFRAppeal (copy), onPartyChatNudgeUFRShown (copy), FFlagAppChatReactiveFeatureRestrictions (copy), onPartyChatNudgeAcknowledgementSuccess (copy), Constants (copy)
+		if FFlagAppChatUniversalFeatureRestriction then
+			ShowFeatureRestrictionFromRealtimeModule(AbuseVectorModule.PartyChat, Detail, {
 				onAppeal = onPartyChatNudgeUFRAppeal,
 				onShown = onPartyChatNudgeUFRShown,
-				onAcknowledgementSuccess = if fFlagAppChatReactiveFeatureRestrictions then onPartyChatNudgeAcknowledgementSuccess else nil
+				onAcknowledgementSuccess = if FFlagAppChatReactiveFeatureRestrictions then onPartyChatNudgeAcknowledgementSuccess else nil
 			})
 			
 			return
+		else
+			Callback({
+				isShown = true,
+				type = Constants.UIStateActions.ToggleNotificationDialog,
+				treatmentType = Constants.TreatmentType.PartyChatNudgeDialog,
+				detail = Detail
+			})
 		end
-		p1({
-			isShown = true,
-			type = constants.UIStateActions.ToggleNotificationDialog,
-			treatmentType = constants.TreatmentType.PartyChatNudgeDialog,
-			detail = p2
-		})
 	end,
-	onTriggerBehavioralTreatment = function(_)
-		-- upvalues: partyChatTimeoutReceivedSignal (ref)
-		partyChatTimeoutReceivedSignal:fire(nil)
+	onTriggerBehavioralTreatment = function(_) --[[ Line: 63 ]]
+		-- upvalues: PartyChatTimeoutReceivedSignal (copy)
+		PartyChatTimeoutReceivedSignal:fire(nil)
 	end,
-	onTriggerEventReceived = function(p1)
-		-- upvalues: interventionAnalytics (ref), constants (ref)
-		interventionAnalytics.sendAnalyticsEvent(interventionAnalytics.TelemetryConfigs.MessageReceived, {
-			eventType = interventionAnalytics.Constants.EventTypes.ModalMessageReceived,
-			counterNamespace = interventionAnalytics.Constants.CounterNamespaceTypes.PartyChat,
-			interventionType = interventionAnalytics.Constants.InterventionTypes.PartyChatNudge,
+	onTriggerEventReceived = function(p1) --[[ Line: 66 ]]
+		-- upvalues: InterventionAnalytics (copy), Constants (copy)
+		InterventionAnalytics.sendAnalyticsEvent(InterventionAnalytics.TelemetryConfigs.MessageReceived, {
+			eventType = InterventionAnalytics.Constants.EventTypes.ModalMessageReceived,
+			counterNamespace = InterventionAnalytics.Constants.CounterNamespaceTypes.PartyChat,
+			interventionType = InterventionAnalytics.Constants.InterventionTypes.PartyChatNudge,
 			renderedTimestamp = DateTime.now().UnixTimestampMillis,
 			eventId = p1.decisionEventId,
 			duration = p1.timeoutDurationSeconds,
-			placement = constants.InterventionPlacementType.InExperience
+			placement = Constants.InterventionPlacementType.InExperience
 		})
 	end
 }

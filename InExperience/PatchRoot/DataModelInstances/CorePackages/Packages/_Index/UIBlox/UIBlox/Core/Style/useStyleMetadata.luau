@@ -1,10 +1,10 @@
-﻿local parent = script.Parent
-local styleContextModule = require(parent.StyleContext)
-local reactModule = require(parent.Parent.Parent.Parent.React)
+﻿local Parent = script.Parent
+local StyleContextModule = require(Parent.StyleContext)
+local ReactModule = require(Parent.Parent.Parent.Parent.React)
 
-return function()
-	-- upvalues: reactModule (ref), styleContextModule (ref)
-	local var1 = reactModule.useContext(styleContextModule)
+return function() --[[ Line: 13 | Named "useStyleMetadata" ]]
+	-- upvalues: ReactModule (copy), StyleContextModule (copy)
+	local UseContextResult = ReactModule.useContext(StyleContextModule)
 	
-	return if var1 then var1.styleMetadata else nil
+	return if UseContextResult then UseContextResult.styleMetadata else nil
 end

@@ -1,11 +1,10 @@
-﻿local avatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
-local parent = avatarExperienceCatalog.Parent
-local roduxModule = require(parent.Rodux)
-local _ = require(avatarExperienceCatalog.Stores.createAXShoppingCartStore)
-local fFlagAXMISSaveWearFix = require(parent.AvatarExperienceFlags).FFlagAXMISSaveWearFix
+﻿local AvatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
+local Parent = AvatarExperienceCatalog.Parent
+local _ = require(AvatarExperienceCatalog.Stores.createAXShoppingCartStore)
+local FFlagAXMISSaveWearFix = require(Parent.AvatarExperienceFlags).FFlagAXMISSaveWearFix
 
-return roduxModule.makeActionCreator(script.Name, function(p1)
-	-- upvalues: fFlagAXMISSaveWearFix (ref)
+return require(Parent.Rodux).makeActionCreator(script.Name, function(p1) --[[ Line: 56 ]]
+	-- upvalues: FFlagAXMISSaveWearFix (copy)
 	return {
 		equippableAssets = p1.equippableAssets,
 		items = p1.items,
@@ -14,6 +13,6 @@ return roduxModule.makeActionCreator(script.Name, function(p1)
 		bodyColor3s = p1.bodyColor3s,
 		bodyScales = p1.bodyScales,
 		bodyPartColorRangeIds = p1.bodyPartColorRangeIds,
-		makeupAssetsOnHumanoid = if fFlagAXMISSaveWearFix then p1.makeupAssetsOnHumanoid else nil
+		makeupAssetsOnHumanoid = if FFlagAXMISSaveWearFix then p1.makeupAssetsOnHumanoid else nil
 	}
 end)

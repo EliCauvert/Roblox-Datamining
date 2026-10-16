@@ -1,16 +1,17 @@
-﻿local avatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
-local reactModule = require(avatarExperienceCatalog.Parent.React)
-local AXCatalogStoreContextModule = require(avatarExperienceCatalog.Context.AXCatalogStoreContext)
-local storesModule = require(avatarExperienceCatalog.Stores)
+﻿local AvatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
+local ReactModule = require(AvatarExperienceCatalog.Parent.React)
+local AXCatalogStoreContextModule = require(AvatarExperienceCatalog.Context.AXCatalogStoreContext)
+local StoresModule = require(AvatarExperienceCatalog.Stores)
 
-return function()
-	-- upvalues: reactModule (ref), AXCatalogStoreContextModule (ref), storesModule (ref)
-	local var1 = reactModule.useContext(AXCatalogStoreContextModule)
+return function() --[[ Line: 10 | Named "useAXCatalogStoreContext" ]]
+	-- upvalues: ReactModule (copy), AXCatalogStoreContextModule (copy), StoresModule (copy)
+	local UseContextResult = ReactModule.useContext(AXCatalogStoreContextModule)
 	
-	if var1 then
-		return var1
+	if UseContextResult then
+		return UseContextResult
+	else
+		warn("useAXCatalogStoreContext must be used within an AXCatalogStoreContext provider")
+		
+		return StoresModule()
 	end
-	warn("useAXCatalogStoreContext must be used within an AXCatalogStoreContext provider")
-	
-	return storesModule()
 end

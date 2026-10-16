@@ -1,13 +1,13 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local flagsModule = require(foundation.Utility.Flags)
-local iconSizeModule = require(foundation.Enums.IconSize)
-local inputSizeModule = require(foundation.Enums.InputSize)
-local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant)
-local _ = require(foundation.Providers.Style.Tokens)
-local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local FlagsModule = require(Foundation.Utility.Flags)
+local IconSizeModule = require(Foundation.Enums.IconSize)
+local InputSizeModule = require(Foundation.Enums.InputSize)
+local ComposeStyleVariantModule = require(Foundation.Utility.composeStyleVariant)
+local _ = require(Foundation.Providers.Style.Tokens)
+local VariantsContextModule = require(Foundation.Providers.Style.VariantsContext)
 
-local function variantsFactory(_)
-	-- upvalues: inputSizeModule (ref), iconSizeModule (ref), flagsModule (ref)
+local function variantsFactory(_) --[[ Line: 26 ]]
+	-- upvalues: InputSizeModule (copy), IconSizeModule (copy), FlagsModule (copy)
 	return {
 		common = {
 			title = {
@@ -17,39 +17,39 @@ local function variantsFactory(_)
 			description = { tag = "auto-xy text-wrap text-align-x-left" }
 		},
 		sizes = {
-			[inputSizeModule.XSmall] = {
+			[InputSizeModule.XSmall] = {
 				title = { tag = "text-title-small" },
 				metadata = { tag = "text-body-small" },
 				description = { tag = "text-body-small" },
-				icon = { size = iconSizeModule.XSmall }
+				icon = { size = IconSizeModule.XSmall }
 			},
-			[inputSizeModule.Small] = {
+			[InputSizeModule.Small] = {
 				title = {
-					tag = if flagsModule.FoundationListItemTypographySpacing then "text-title-medium" else "text-title-small"
+					tag = if FlagsModule.FoundationListItemTypographySpacing then "text-title-medium" else "text-title-small"
 				},
 				metadata = { tag = "text-body-small" },
 				description = { tag = "text-body-small" },
-				icon = { size = iconSizeModule.Small }
+				icon = { size = IconSizeModule.Small }
 			},
-			[inputSizeModule.Medium] = {
+			[InputSizeModule.Medium] = {
 				title = { tag = "text-title-medium" },
 				metadata = { tag = "text-body-medium" },
 				description = { tag = "text-body-medium" },
-				icon = { size = iconSizeModule.Medium }
+				icon = { size = IconSizeModule.Medium }
 			},
-			[inputSizeModule.Large] = {
+			[InputSizeModule.Large] = {
 				title = { tag = "text-title-large" },
 				metadata = { tag = "text-body-medium" },
 				description = { tag = "text-body-medium" },
-				icon = { size = iconSizeModule.Large }
+				icon = { size = IconSizeModule.Large }
 			}
 		}
 	}
 end
 
-return function(p1, p2)
-	-- upvalues: variantsContextModule (ref), variantsFactory (ref), composeStyleVariantModule (ref)
-	local listItem = variantsContextModule.useVariants("ListItem", variantsFactory, p1)
+return function(p1, p2) --[[ Line: 68 ]]
+	-- upvalues: VariantsContextModule (copy), variantsFactory (copy), ComposeStyleVariantModule (copy)
+	local ListItem = VariantsContextModule.useVariants("ListItem", variantsFactory, p1)
 	
-	return composeStyleVariantModule(listItem.common, listItem.sizes[p2])
+	return ComposeStyleVariantModule(ListItem.common, ListItem.sizes[p2])
 end

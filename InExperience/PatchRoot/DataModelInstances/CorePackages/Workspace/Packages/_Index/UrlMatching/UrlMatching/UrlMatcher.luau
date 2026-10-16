@@ -1,106 +1,105 @@
-﻿local parent = script.Parent.Parent
-local matchAllRegexModule = require(script.Parent.matchAllRegex)
-local cryoModule = require(parent.Cryo)
-local regExpModule = require(parent.RegExp)
-local stringTrim = require(parent.StringUtilities).StringTrim
-local regexModule = require(script.Parent.Regex)
+﻿local Parent = script.Parent.Parent
+local MatchAllRegexModule = require(script.Parent.matchAllRegex)
+local CryoModule = require(Parent.Cryo)
+local RegExpModule = require(Parent.RegExp)
+local StringTrimFunction = require(Parent.StringUtilities).StringTrim
+local RegexModule = require(script.Parent.Regex)
 local _ = require(script.Parent.Types)
-local constantsModule = require(script.Parent.Constants)
-local t = {
+local ConstantsModule = require(script.Parent.Constants)
+local config = {
 	protocolStrict = false,
 	subdomainStrict = true,
 	pathPatterns = nil,
 	trimPunctuation = false,
 	protocolPatterns = { "https?" },
 	subdomainPatterns = { "www" },
-	domainsPatterns = { constantsModule.ANY_DOMAIN_PATTERN }
+	domainsPatterns = { ConstantsModule.ANY_DOMAIN_PATTERN }
 }
-local t_1 = {}
-t_1.__index = t_1
+local UrlMatcherModule = {}
+UrlMatcherModule.__index = UrlMatcherModule
 
-function t_1.new(p1)
-	-- upvalues: cryoModule (ref), t (ref), regexModule (ref), constantsModule (ref), regExpModule (ref), t_1 (ref)
-	local var1 = cryoModule.Dictionary.union(t, p1 or {})
-	local text = regexModule.oneOf(var1.protocolPatterns) .. regexModule.COLON .. regexModule.SLASH .. regexModule.SLASH
-	local var2 = regexModule.oneOf({
-		regexModule.negativeLookbehind(regexModule.ALPHANUMERIC),
-		text
+function UrlMatcherModule.new(p1) --[[ Line: 66 ]]
+	-- upvalues: CryoModule (copy), config (copy), RegexModule (copy), ConstantsModule (copy), RegExpModule (copy), UrlMatcherModule (copy)
+	local UnionResult = CryoModule.Dictionary.union(config, p1 or {})
+	local Text = RegexModule.oneOf(UnionResult.protocolPatterns) .. RegexModule.COLON .. RegexModule.SLASH .. RegexModule.SLASH
+	local OneOfResult = RegexModule.oneOf({
+		RegexModule.negativeLookbehind(RegexModule.ALPHANUMERIC),
+		Text
 	})
-	local var3 = regexModule.negativeLookahead(text)
-	local text_1 = regexModule.oneOf(var1.subdomainPatterns) .. regexModule.DOT
-	local t_2 = {
-		_urlPattern = regExpModule(regexModule.capture(if var1.protocolStrict then text else var2) .. regexModule.capture(if var1.subdomainStrict then regexModule.oneOf(text_1) else regexModule.zeroOrOneOf(text_1)) .. regexModule.capture(regexModule.oneOf(var1.domainsPatterns)) .. regexModule.capture(regexModule.capture(if var1.pathPatterns ~= nil then "" else regexModule.oneOf(var1.pathPatterns)) .. (regexModule.zeroOrMore({
-			regexModule.SLASH .. regexModule.oneOrMore(var3 .. constantsModule.PATH_CHAR)
-		}) .. regexModule.zeroOrOneOf(regexModule.SLASH))) .. regexModule.capture(regexModule.zeroOrOneOf(regexModule.QUESTION .. regexModule.zeroOrMore(var3 .. constantsModule.QUERY_CHAR))) .. regexModule.capture(regexModule.zeroOrOneOf(regexModule.HASH .. regexModule.zeroOrMore(var3 .. constantsModule.FRAGMENT_CHAR))) .. regexModule.oneOf({
-			regexModule.lookahead(text),
-			regexModule.negativeLookahead(regexModule.ALPHANUMERIC),
-			regexModule.STRING_END
+	local NegativeLookaheadResult = RegexModule.negativeLookahead(Text)
+	local Text1 = RegexModule.oneOf(UnionResult.subdomainPatterns) .. RegexModule.DOT
+	local config1 = {
+		_urlPattern = RegExpModule(RegexModule.capture(if UnionResult.protocolStrict then Text else OneOfResult) .. RegexModule.capture(if UnionResult.subdomainStrict then RegexModule.oneOf(Text1) else RegexModule.zeroOrOneOf(Text1)) .. RegexModule.capture((RegexModule.oneOf(UnionResult.domainsPatterns))) .. RegexModule.capture(RegexModule.capture(if UnionResult.pathPatterns == nil then "" else RegexModule.oneOf(UnionResult.pathPatterns)) .. (RegexModule.zeroOrMore({
+			RegexModule.SLASH .. RegexModule.oneOrMore(NegativeLookaheadResult .. ConstantsModule.PATH_CHAR)
+		}) .. RegexModule.zeroOrOneOf(RegexModule.SLASH))) .. RegexModule.capture((RegexModule.zeroOrOneOf(RegexModule.QUESTION .. RegexModule.zeroOrMore(NegativeLookaheadResult .. ConstantsModule.QUERY_CHAR)))) .. RegexModule.capture((RegexModule.zeroOrOneOf(RegexModule.HASH .. RegexModule.zeroOrMore(NegativeLookaheadResult .. ConstantsModule.FRAGMENT_CHAR)))) .. RegexModule.oneOf({
+			RegexModule.lookahead(Text),
+			RegexModule.negativeLookahead(RegexModule.ALPHANUMERIC),
+			RegexModule.STRING_END
 		}), "m"),
-		_trimPunctuation = var1.trimPunctuation,
-		match = t_1.match
+		_trimPunctuation = UnionResult.trimPunctuation,
+		match = UrlMatcherModule.match
 	}
-	setmetatable(t_2, t_1)
+	setmetatable(config1, UrlMatcherModule)
 	
-	return t_2
+	return config1
 end
 
-function t_1.default()
-	-- upvalues: t_1 (ref), t (ref)
-	return t_1.new(t)
+function UrlMatcherModule.default() --[[ Line: 108 ]]
+	-- upvalues: UrlMatcherModule (copy), config (copy)
+	return UrlMatcherModule.new(config)
 end
 
-function t_1.match(p1, p2)
-	-- upvalues: matchAllRegexModule (ref), stringTrim (ref)
-	local t = {}
-	local var1 = 0
-	local ok, status = pcall(function()
-		-- upvalues: matchAllRegexModule (copy), p2 (ref), p1 (ref), var1 (write), stringTrim (copy), t (ref)
-		for i, v in matchAllRegexModule(p2:lower(), p1._urlPattern) do
-			local v
-			local var2 = var1 + v.index
-			local var3 = var2 + #v.matchedText - 1
-			var1 = var3
+function UrlMatcherModule.match(p1, Text) --[[ Line: 119 ]]
+	-- upvalues: MatchAllRegexModule (copy), StringTrimFunction (copy)
+	local List = {}
+	local v1 = 0
+	local Success, Result = pcall(function() --[[ Line: 122 ]]
+		-- upvalues: MatchAllRegexModule (upval), Text (copy), p1 (copy), v1 (ref), StringTrimFunction (upval), List (copy)
+		for _, value in MatchAllRegexModule(Text:lower(), p1._urlPattern) do
+			local NewIndex = v1 + value.index
+			local NewIndexDelta = NewIndex + #value.matchedText - 1
+			v1 = NewIndexDelta
 			
-			if p1._trimPunctuation and not v.matchedText:match("%b()$") then
-				local var4 = stringTrim(v.matchedText, "%?%.%!%,%;%:%(%)", { right = true })
+			if p1._trimPunctuation and not value.matchedText:match("%b()$") then
+				local MatchedText = StringTrimFunction(value.matchedText, "%?%.%!%,%;%:%(%)", { right = true })
 				
-				if var4 ~= v.matchedText then
-					v = matchAllRegexModule(var4, p1._urlPattern)[1]
+				if MatchedText ~= value.matchedText then
+					value = MatchAllRegexModule(MatchedText, p1._urlPattern)[1]
 				end
-				var3 = var2 + #var4 - 1
+				NewIndexDelta = NewIndex + #MatchedText - 1
 			end
-			local var5, var6, var7, var8, var9, var10, var11 = unpack(v.capturedGroups)
-			local var12 = p2:sub(var2, var3)
-			local var13 = #var5 + 1 + #var6 + #var7
-			local var14 = var13 + #var8
-			local var15 = var14 + #var10
-			local var16 = var12:sub(var13, var14 - 1)
-			local var17 = var12:sub(var14, var15 - 1)
-			local var18 = var12:sub(var15, var15 + #var11 - 1)
-			table.insert(t, {
-				startIndex = var2,
-				endIndex = var3,
-				matchedPath = var9,
+			local Unpacked, Unpacked2, Unpacked3, Unpacked4, Unpacked5, Unpacked6, Unpacked7 = unpack(value.capturedGroups)
+			local Segment: string = Text:sub(NewIndex, NewIndexDelta)
+			local v2 = #Unpacked + 1 + #Unpacked2 + #Unpacked3
+			local v3 = v2 + #Unpacked4
+			local v4 = v3 + #Unpacked6
+			local Segment1: string = Segment:sub(v3, v4 - 1)
+			local Segment2: string = Segment:sub(v4, v4 + #Unpacked7 - 1)
+			table.insert(List, {
+				startIndex = NewIndex,
+				endIndex = NewIndexDelta,
+				matchedPath = Unpacked5,
 				url = {
-					fullText = var12,
-					protocol = stringTrim(var5, ":/", { right = true }),
-					subdomain = stringTrim(var6, ".", { right = true }),
-					domain = var7,
-					path = var16,
-					query = if var17 ~= "" then nil else stringTrim(var17, "?", { left = true }),
-					fragment = if var18 ~= "" then nil else stringTrim(var18, "#", { left = true })
+					fullText = Segment,
+					protocol = StringTrimFunction(Unpacked, ":/", { right = true }),
+					subdomain = StringTrimFunction(Unpacked2, ".", { right = true }),
+					domain = Unpacked3,
+					path = Segment:sub(v2, v3 - 1),
+					query = if Segment1 == "" then nil else StringTrimFunction(Segment1, "?", { left = true }),
+					fragment = if Segment2 == "" then nil else StringTrimFunction(Segment2, "#", { left = true })
 				}
 			})
 		end
-		return t
+		return List
 	end)
 	
-	if ok then
-		return status or {}
+	if Success then
+		return Result or {}
+	else
+		warn("UrlMatcher:match failed: " .. tostring(Result))
+		
+		return {}
 	end
-	warn("UrlMatcher:match failed: " .. tostring(status))
-	
-	return {}
 end
 
-return t_1
+return UrlMatcherModule

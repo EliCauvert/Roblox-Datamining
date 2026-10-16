@@ -1,100 +1,106 @@
-﻿local contentProviderService = game:GetService("ContentProvider")
-local httpService = game:GetService("HttpService")
-local openCloudService = game:GetService("OpenCloudService")
-local playersService = game:GetService("Players")
-local runService = game:GetService("RunService")
+﻿local ContentProvider = game:GetService("ContentProvider")
+local HttpService = game:GetService("HttpService")
+local OpenCloudService = game:GetService("OpenCloudService")
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
 
-function returnInvalidArgumentError(p1)
-	-- upvalues: httpService (ref)
+function returnInvalidArgumentError(Message) --[[ Line: 23 ]]
+	-- upvalues: HttpService (copy)
 	return {
 		StatusCode = 400,
-		Body = httpService:JSONEncode({ code = "INVALID_ARGUMENT", message = p1 })
+		Body = HttpService:JSONEncode({ code = "INVALID_ARGUMENT", message = Message })
 	}
 end
 
-function verifyPlayerOnServer(p1)
-	-- upvalues: playersService (ref)
-	local var1 = verifyPlayer(p1)
+function verifyPlayerOnServer(Player) --[[ Line: 33 ]]
+	-- upvalues: Players (copy)
+	local VerifyPlayerResult = verifyPlayer(Player)
 	
-	if var1 ~= nil then
-		return var1
+	if VerifyPlayerResult ~= nil then
+		return VerifyPlayerResult
 	end
-	for i, v in ipairs(playersService:GetPlayers()) do
-		if v.UserId == p1.UserId then
+	for _, player in ipairs((Players:GetPlayers())) do
+		if player.UserId == Player.UserId then
 			return nil
 		end
 	end
 	return returnInvalidArgumentError("Player not found on server.")
 end
 
-function verifyPlayer(p2)
-	return if typeof(p2) == "Instance" and p2.ClassName == "Player" then nil else returnInvalidArgumentError("user argument not a Player instance.")
+function verifyPlayer(Player: Player) --[[ Line: 49 ]]
+	return if typeof(Player) == "Instance" and Player.ClassName == "Player" then nil else returnInvalidArgumentError("user argument not a Player instance.")
 end
 
-function verifyString(p2)
-	return if typeof(p2) == "string" then nil else returnInvalidArgumentError("Argument not a string.")
+function verifyString(p1) --[[ Line: 56 ]]
+	return if typeof(p1) == "string" then nil else returnInvalidArgumentError("Argument not a string.")
 end
 
-function verifyNumber(p2)
-	return if typeof(p2) == "number" then nil else returnInvalidArgumentError("Argument not a number.")
+function verifyNumber(p1) --[[ Line: 63 ]]
+	return if typeof(p1) == "number" then nil else returnInvalidArgumentError("Argument not a number.")
 end
 
-function getUrlPrefix()
-	-- upvalues: runService (ref)
-	return if runService:IsStudio() then "user" else "rcc"
+function getUrlPrefix(): string --[[ Line: 70 ]]
+	-- upvalues: RunService (copy)
+	return if RunService:IsStudio() then "user" else "rcc"
 end
 
-function createListInventoryItemsUrl(p2, p3, p4, p5)
-	-- upvalues: contentProviderService (ref)
-	local formattedText = string.format("%s%s/cloud/v2/users/%d/inventory-items", string.gsub(string.gsub(contentProviderService.BaseUrl:lower(), "http:", "https:"), "www", "apis"), getUrlPrefix(), p2)
+function createListInventoryItemsUrl(p1, p2, p3, p4): string --[[ Line: 77 ]]
+	-- upvalues: ContentProvider (copy)
+	local Formatted = string.format("%s%s/cloud/v2/users/%d/inventory-items", string.gsub(string.gsub(ContentProvider.BaseUrl:lower(), "http:", "https:"), "www", "apis"), getUrlPrefix(), p1)
 	
-	if p3 == nil and p4 == nil and p5 == nil then
-		return formattedText
+	if p2 == nil and p3 == nil and p4 == nil then
+		return Formatted
 	end
-	local t = {}
+	local List = {}
 	
+	if p2 ~= nil then
+		table.insert(List, string.format("maxPageSize=%d", p2))
+	end
 	if p3 ~= nil then
-		table.insert(t, string.format("maxPageSize=%d", p3))
+		table.insert(List, string.format("pageToken=%s", p3))
 	end
 	if p4 ~= nil then
-		table.insert(t, string.format("pageToken=%s", p4))
+		table.insert(List, string.format("filter=%s", p4))
 	end
-	if p5 ~= nil then
-		table.insert(t, string.format("filter=%s", p5))
-	end
-	return string.format("%s?%s", formattedText, table.concat(t, "&"))
+	return (string.format("%s?%s", Formatted, table.concat(List, "&")))
 end
 
-function listInventoryItems(p2)
-	-- upvalues: openCloudService (ref)
-	if p2.user == nil then
+function listInventoryItems(p1) --[[ Line: 102 ]]
+	-- upvalues: OpenCloudService (copy)
+	if p1.user == nil then
 		return returnInvalidArgumentError("user argument was not provided.")
 	end
-	local var2 = verifyPlayerOnServer(p2.user)
+	local VerifyPlayerOnServerResult = verifyPlayerOnServer(p1.user)
 	
-	if var2 ~= nil then
-		return var2
-	elseif p2.maxPageSize ~= nil then
-		local var3 = verifyNumber(p2.maxPageSize)
+	if VerifyPlayerOnServerResult ~= nil then
+		return VerifyPlayerOnServerResult
+	end
+	if p1.maxPageSize ~= nil then
+		local VerifyNumberResult = verifyNumber(p1.maxPageSize)
 		
-		if var3 ~= nil then
-			return var3
-		elseif p2.pageToken ~= nil then
-			local var4 = verifyString(p2.pageToken)
-			
-			if var4 ~= nil then
-				return var4
-			elseif p2.filter ~= nil then
-				local var5 = verifyString(p2.filter)
-				
-				return if var5 == nil then openCloudService:HttpRequestAsync({
-					Url = createListInventoryItemsUrl(p2.user.UserId, p2.maxPageSize, p2.pageToken, p2.filter),
-					Request_Type = "GET"
-				}) else var5
-			end
+		if VerifyNumberResult ~= nil then
+			return VerifyNumberResult
 		end
 	end
+	if p1.pageToken ~= nil then
+		local VerifyStringResult = verifyString(p1.pageToken)
+		
+		if VerifyStringResult ~= nil then
+			return VerifyStringResult
+		end
+	end
+	if p1.filter ~= nil then
+		local VerifyStringResult = verifyString(p1.filter)
+		
+		if VerifyStringResult ~= nil then
+			return VerifyStringResult
+		end
+	end
+	return OpenCloudService:HttpRequestAsync({
+		Url = createListInventoryItemsUrl(p1.user.UserId, p1.maxPageSize, p1.pageToken, p1.filter),
+		Request_Type = "GET"
+	})
 end
 
-openCloudService:RegisterOpenCloud("v2", "listInventoryItems", listInventoryItems)
-openCloudService:RegistrationComplete()
+OpenCloudService:RegisterOpenCloud("v2", "listInventoryItems", listInventoryItems)
+OpenCloudService:RegistrationComplete()

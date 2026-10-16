@@ -1,59 +1,58 @@
-﻿local gameVotesRodux = script:FindFirstAncestor("GameVotesRodux")
-local parent = gameVotesRodux.Parent
-local promiseModule = require(parent.Promise)
-local performFetch = require(parent.Http).PerformFetch
-local logging = require(parent.AppCommonLib).Logging
-local setNetworkingErrorToast = require(parent.RobloxAppToastsRodux).Thunks.SetNetworkingErrorToast
-local getUserGameVotesModule = require(gameVotesRodux.UserGameVotes.GetUserGameVotes)
-local setUserGameVotesModule = require(gameVotesRodux.UserGameVotes.SetUserGameVotes)
-local voteStatusModule = require(gameVotesRodux.Enums.VoteStatus)
+﻿local GameVotesRodux = script:FindFirstAncestor("GameVotesRodux")
+local Parent = GameVotesRodux.Parent
+local PromiseModule = require(Parent.Promise)
+local PerformFetch = require(Parent.Http).PerformFetch
+local Logging = require(Parent.AppCommonLib).Logging
+local SetNetworkingErrorToastFunction = require(Parent.RobloxAppToastsRodux).Thunks.SetNetworkingErrorToast
+local GetUserGameVotesModule = require(GameVotesRodux.UserGameVotes.GetUserGameVotes)
+local SetUserGameVotesModule = require(GameVotesRodux.UserGameVotes.SetUserGameVotes)
+local VoteStatusModule = require(GameVotesRodux.Enums.VoteStatus)
 
-local function _(p1)
-	-- upvalues: voteStatusModule (ref)
-	return if p1 == true then voteStatusModule.VotedUp elseif p1 == false then voteStatusModule.VotedDown elseif p1 == nil then voteStatusModule.NotVoted else nil
+local function _(Enabled) --[[ Line: 11 | Named "getUserVoteStatus" ]]
+	-- upvalues: VoteStatusModule (copy)
+	return if Enabled == true then VoteStatusModule.VotedUp elseif Enabled == false then VoteStatusModule.VotedDown elseif Enabled == nil then VoteStatusModule.NotVoted else nil
 end
 
-local _ = function(p1)
-	return "luaapp.gamesapi.user-game-votes" .. p1
+local _ = function(Text): string --[[ Line: 24 | Named "fetchKeymapper" ]]
+	return "luaapp.gamesapi.user-game-votes" .. Text
 end
 
 return {
-	Fetch = function(p1, p2)
-		-- upvalues: performFetch (ref), getUserGameVotesModule (ref), voteStatusModule (ref), setUserGameVotesModule (ref), logging (ref), promiseModule (ref), setNetworkingErrorToast (ref)
-		assert(type(p2) == "string", string.format("FetchUserGameVotes thunk expects universeId to be a string, was %s", type(p2)))
+	Fetch = function(p1, Text) --[[ Line: 28 ]]
+		-- upvalues: PerformFetch (copy), GetUserGameVotesModule (copy), VoteStatusModule (copy), SetUserGameVotesModule (copy), Logging (copy), PromiseModule (copy), SetNetworkingErrorToastFunction (copy)
+		assert(type(Text) == "string", string.format("FetchUserGameVotes thunk expects universeId to be a string, was %s", (type(Text))))
 		
-		return performFetch.Single("luaapp.gamesapi.user-game-votes" .. p3, function(p3)
-			-- upvalues: getUserGameVotesModule (copy), p1 (ref), p2 (ref), voteStatusModule (copy), setUserGameVotesModule (copy), logging (copy), promiseModule (copy), setNetworkingErrorToast (copy)
-			return getUserGameVotesModule(p1, p2):andThen(function(p4)
-				-- upvalues: voteStatusModule (copy), p3 (ref), setUserGameVotesModule (copy), p2 (copy), logging (copy), promiseModule (copy)
-				local responseBody = p4.responseBody
+		return PerformFetch.Single("luaapp.gamesapi.user-game-votes" .. Text, function(p2) --[[ Line: 34 ]]
+			-- upvalues: GetUserGameVotesModule (upval), p1 (copy), Text (copy), VoteStatusModule (upval), SetUserGameVotesModule (upval), Logging (upval), PromiseModule (upval), SetNetworkingErrorToastFunction (upval)
+			return GetUserGameVotesModule(p1, Text):andThen(function(Result) --[[ Line: 35 ]]
+				-- upvalues: VoteStatusModule (upval), p2 (copy), SetUserGameVotesModule (upval), Text (upval), Logging (upval), PromiseModule (upval)
+				local ResponseBody = Result.responseBody
 				
-				if responseBody == nil or responseBody.canVote == nil or responseBody.reasonForNotVoteable == nil then
-					logging.warn("Response from GetUserGameVotes is malformed!")
+				if ResponseBody == nil or ResponseBody.canVote == nil or ResponseBody.reasonForNotVoteable == nil then
+					Logging.warn("Response from GetUserGameVotes is malformed!")
 					
-					return promiseModule.reject({ HttpError = Enum.HttpError.OK })
+					return PromiseModule.reject({ HttpError = Enum.HttpError.OK })
 				end
-				local userVote = responseBody.userVote
-				local var1 = if userVote == true then voteStatusModule.VotedUp elseif userVote == false then voteStatusModule.VotedDown elseif userVote == nil then voteStatusModule.NotVoted else nil
+				local UserVote = ResponseBody.userVote
+				local VotedUp = if UserVote == true then VoteStatusModule.VotedUp elseif UserVote == false then VoteStatusModule.VotedDown elseif UserVote == nil then VoteStatusModule.NotVoted else nil
 				
-				if var1 then
-					p3:dispatch(setUserGameVotesModule(p2, responseBody.canVote, var1, responseBody.reasonForNotVoteable))
-				else
-					logging.warn("Response from GetUserGameVotes is malformed!")
+				if not VotedUp then
+					Logging.warn("Response from GetUserGameVotes is malformed!")
 					
-					return promiseModule.reject({ HttpError = Enum.HttpError.OK })
+					return PromiseModule.reject({ HttpError = Enum.HttpError.OK })
 				end
-				return promiseModule.resolve(p4)
-			end, function(p4)
-				-- upvalues: p3 (ref), setNetworkingErrorToast (copy), promiseModule (copy)
-				p3:dispatch(setNetworkingErrorToast(p4))
+				p2:dispatch(SetUserGameVotesModule(Text, ResponseBody.canVote, VotedUp, ResponseBody.reasonForNotVoteable))
+				return PromiseModule.resolve(Result)
+			end, function(p3) --[[ Line: 53 ]]
+				-- upvalues: p2 (copy), SetNetworkingErrorToastFunction (upval), PromiseModule (upval)
+				p2:dispatch(SetNetworkingErrorToastFunction(p3))
 				
-				return promiseModule.reject(p4)
+				return PromiseModule.reject(p3)
 			end)
 		end)
 	end,
-	GetFetchingStatus = function(p1, p2)
-		-- upvalues: performFetch (ref)
-		return performFetch.GetStatus(p1, "luaapp.gamesapi.user-game-votes" .. p8)
+	GetFetchingStatus = function(p1, Text) --[[ Line: 60 ]]
+		-- upvalues: PerformFetch (copy)
+		return PerformFetch.GetStatus(p1, "luaapp.gamesapi.user-game-votes" .. Text)
 	end
 }

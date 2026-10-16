@@ -1,53 +1,55 @@
-﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
-local sendSocialLinksImpressionsEvent = require(parent.DiscoveryAnalytics).Events.sendSocialLinksImpressionsEvent
-local sduiErrors = require(parent.SduiCoreSystem).SduiErrors
+﻿local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
+local SendSocialLinksImpressionsEventFunction = require(Parent.DiscoveryAnalytics).Events.sendSocialLinksImpressionsEvent
+local SduiErrors = require(Parent.SduiCoreSystem).SduiErrors
 local t = {}
 
-return function(p1, p2, p3, p4, _)
-	-- upvalues: sduiErrors (ref), t (ref), sendSocialLinksImpressionsEvent (ref)
-	if not p4 then
-		p1.dependencies.logger.reportError(sduiErrors.SduiErrorType.FailedToLogSocialLinksImpressions, {
+return function(p1, List, p2, p3, _) --[[ Line: 15 | Named "SduiSocialLinksImpressionsHandler" ]]
+	-- upvalues: SduiErrors (copy), t (copy), SendSocialLinksImpressionsEventFunction (copy)
+	if not p3 then
+		p1.dependencies.logger.reportError(SduiErrors.SduiErrorType.FailedToLogSocialLinksImpressions, {
 			name = "SduiSocialLinksImpressionsHandler",
 			message = "Missing collectionAnalyticsData"
 		}, p1.appPage)
 		
 		return
-	elseif #p2 == 0 or #(p3 or t) == 0 then
-		p1.dependencies.logger.reportError(sduiErrors.SduiErrorType.FailedToLogSocialLinksImpressions, {
+	end
+	if #List == 0 or #(p2 or t) == 0 then
+		p1.dependencies.logger.reportError(SduiErrors.SduiErrorType.FailedToLogSocialLinksImpressions, {
 			name = "SduiSocialLinksImpressionsHandler",
-			message = `No entries to log: impressionIndexes={#p2}, itemAnalyticsDatas={#(p3 or t)}`
+			message = `No entries to log: impressionIndexes={#List}, itemAnalyticsDatas={#(p2 or t)}`
 		}, p1.appPage)
 		
 		return
 	end
-	local t_1 = {}
-	local t_2 = {}
-	local t_3 = {}
+	local List1 = {}
+	local List2 = {}
+	local List3 = {}
 	
-	for i, v in p2 do
-		local var1 = p3[v]
+	for _, value in List do
+		local v1 = p2[value]
 		
-		if var1 then
-			table.insert(t_1, v)
-			table.insert(t_2, var1.socialLinkUrl or "")
-			table.insert(t_3, var1.socialLinkType or "")
+		if v1 then
+			table.insert(List1, value)
+			table.insert(List2, v1.socialLinkUrl or "")
+			table.insert(List3, v1.socialLinkType or "")
 		end
 	end
-	if #t_1 == 0 then
-		p1.dependencies.logger.reportError(sduiErrors.SduiErrorType.FailedToLogSocialLinksImpressions, {
+	if #List1 == 0 then
+		p1.dependencies.logger.reportError(SduiErrors.SduiErrorType.FailedToLogSocialLinksImpressions, {
 			name = "SduiSocialLinksImpressionsHandler",
 			message = "No valid items found for impression indexes"
 		}, p1.appPage)
 		
 		return
+	else
+		SendSocialLinksImpressionsEventFunction({
+			item_positions = table.concat(List1, ","),
+			social_link_urls = table.concat(List2, ","),
+			social_link_types = table.concat(List3, ","),
+			social_link_display_type = p3.socialLinkDisplayType,
+			assignment_id = tonumber(p3.assignmentId),
+			assignment_type = p3.assignmentType,
+			page = p1.appPage
+		})
 	end
-	sendSocialLinksImpressionsEvent({
-		item_positions = table.concat(t_1, ","),
-		social_link_urls = table.concat(t_2, ","),
-		social_link_types = table.concat(t_3, ","),
-		social_link_display_type = p4.socialLinkDisplayType,
-		assignment_id = tonumber(p4.assignmentId),
-		assignment_type = p4.assignmentType,
-		page = p1.appPage
-	})
 end

@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.SetAlias.SetAlias)
+﻿return (require(script.Parent.Parent.Parent._Index.SetAlias.SetAlias))

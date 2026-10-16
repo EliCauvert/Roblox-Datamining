@@ -1,870 +1,866 @@
-﻿local foundation = game:GetService("CorePackages").Packages._Index.Foundation.Foundation
-local parent = foundation.Parent
-local parent_1 = script:FindFirstAncestor("AppBlox").Parent
-local reactModule = require(parent.React)
-local reactUtilsModule = require(parent.ReactUtils)
-local fFlagComposerControlAlignment = require(parent_1.SharedFlags).FFlagComposerControlAlignment
-local composerMultiLineCaretFix = game:DefineFastFlag("ComposerMultiLineCaretFix", false)
-local foundationFontFaceMigration = require(parent_1.Foundation).Utility.Flags.FoundationFontFaceMigration
-local components = foundation.Components
-local iconModule = require(components.Icon)
-local paddingModule = require(components.Padding)
-local normalizeFontFaceModule = require(foundation.Utility.normalizeFontFace)
-local scrollViewModule = require(components.ScrollView)
-local _ = require(components.Types)
-local viewModule = require(components.View)
-local constantsModule = require(foundation.Constants)
-local blendTransparenciesModule = require(foundation.Utility.blendTransparencies)
-local getBindableValueModule = require(foundation.Utility.getBindableValue)
-local getDisabledStyleModule = require(foundation.Utility.getDisabledStyle)
-local getMultiLineTextHeightModule = require(foundation.Utility.getMultiLineTextHeight)
-local isPluginSecurityModule = require(foundation.Utility.isPluginSecurity)
-local mapBindableModule = require(foundation.Utility.mapBindable)
-local truncateTextToCursorModule = require(foundation.Components.InternalTextInput.truncateTextToCursor)
-local composerDebugModule = require(script.Parent.composerDebug)
-local measureTextLineCountModule = require(script.Parent.measureTextLineCount)
-local useComposerFocusLockModule = require(script.Parent.useComposerFocusLock)
-local useComposerKeyboardConnectionsModule = require(script.Parent.useComposerKeyboardConnections)
-local useBindableModule = require(foundation.Utility.useBindable)
-local usePreferredInputModule = require(foundation.Utility.usePreferredInput)
-local useStyleTagsModule = require(foundation.Providers.Style.useStyleTags)
-local useTextInputVariantsModule = require(components.TextInput.useTextInputVariants)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local inputFocusBehaviorModule = require(foundation.Enums.InputFocusBehavior)
-local inputSizeModule = require(foundation.Enums.InputSize)
-local inputVariantModule = require(foundation.Enums.InputVariant)
-local radiusModule = require(foundation.Enums.Radius)
-local controlStateModule = require(foundation.Enums.ControlState)
-local stateLayerAffordanceModule = require(foundation.Enums.StateLayerAffordance)
-local t = {
+﻿local Foundation = game:GetService("CorePackages").Packages._Index.Foundation.Foundation
+local Parent = Foundation.Parent
+local Parent1 = script:FindFirstAncestor("AppBlox").Parent
+local ReactModule = require(Parent.React)
+local ReactUtilsModule = require(Parent.ReactUtils)
+local FFlagComposerControlAlignment = require(Parent1.SharedFlags).FFlagComposerControlAlignment
+local ComposerMultiLineCaretFix = game:DefineFastFlag("ComposerMultiLineCaretFix", false)
+local FoundationFontFaceMigration = require(Parent1.Foundation).Utility.Flags.FoundationFontFaceMigration
+local Components = Foundation.Components
+local IconModule = require(Components.Icon)
+local PaddingModule = require(Components.Padding)
+local NormalizeFontFaceModule = require(Foundation.Utility.normalizeFontFace)
+local ScrollViewModule = require(Components.ScrollView)
+local _ = require(Components.Types)
+local ViewModule = require(Components.View)
+local ConstantsModule = require(Foundation.Constants)
+local BlendTransparenciesModule = require(Foundation.Utility.blendTransparencies)
+local GetBindableValueModule = require(Foundation.Utility.getBindableValue)
+local GetDisabledStyleModule = require(Foundation.Utility.getDisabledStyle)
+local GetMultiLineTextHeightModule = require(Foundation.Utility.getMultiLineTextHeight)
+local IsPluginSecurityModule = require(Foundation.Utility.isPluginSecurity)
+local MapBindableModule = require(Foundation.Utility.mapBindable)
+local TruncateTextToCursorModule = require(Foundation.Components.InternalTextInput.truncateTextToCursor)
+local ComposerDebugModule = require(script.Parent.composerDebug)
+local MeasureTextLineCountModule = require(script.Parent.measureTextLineCount)
+local UseComposerFocusLockModule = require(script.Parent.useComposerFocusLock)
+local UseComposerKeyboardConnectionsModule = require(script.Parent.useComposerKeyboardConnections)
+local UseBindableModule = require(Foundation.Utility.useBindable)
+local UsePreferredInputModule = require(Foundation.Utility.usePreferredInput)
+local UseStyleTagsModule = require(Foundation.Providers.Style.useStyleTags)
+local UseTextInputVariantsModule = require(Components.TextInput.useTextInputVariants)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local InputFocusBehaviorModule = require(Foundation.Enums.InputFocusBehavior)
+local InputVariantModule = require(Foundation.Enums.InputVariant)
+local RadiusModule = require(Foundation.Enums.Radius)
+local ControlStateModule = require(Foundation.Enums.ControlState)
+local StateLayerAffordanceModule = require(Foundation.Enums.StateLayerAffordance)
+local config = {
 	numLines = 1,
 	testId = "--foundation-internal-text-input",
 	Selectable = true,
-	size = inputSizeModule.Large,
-	variant = inputVariantModule.Standard
+	size = require(Foundation.Enums.InputSize).Large,
+	variant = InputVariantModule.Standard
 }
-local var1 = reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: reactModule (ref), foundationFontFaceMigration (ref), normalizeFontFaceModule (ref), isPluginSecurityModule (ref), paddingModule (ref)
-	local isBoundsChecker = p1.isBoundsChecker
-	local isMultiLine = p1.isMultiLine or isBoundsChecker
+local MemoResult = ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 152 ]]
+	-- upvalues: ReactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceModule (copy), IsPluginSecurityModule (copy), PaddingModule (copy)
+	local IsBoundsChecker = p1.isBoundsChecker
+	local IsMultiLine = p1.isMultiLine or IsBoundsChecker
 	
-	return reactModule.createElement("TextBox", {
+	return ReactModule.createElement("TextBox", {
 		ClearTextOnFocus = false,
 		Selectable = false,
-		Active = if isBoundsChecker then false else nil,
-		Visible = if isBoundsChecker then false else nil,
-		Font = if foundationFontFaceMigration then nil else p1.fontStyle.Font,
-		FontFace = if foundationFontFaceMigration then normalizeFontFaceModule(p1.fontStyle.Font) else nil,
+		Active = not IsBoundsChecker and nil,
+		Visible = not IsBoundsChecker and nil,
+		Font = if FoundationFontFaceMigration then nil else p1.fontStyle.Font,
+		FontFace = if FoundationFontFaceMigration then NormalizeFontFaceModule(p1.fontStyle.Font) else nil,
 		TextSize = p1.fontStyle.FontSize,
 		LineHeight = p1.fontStyle.LineHeight,
 		TextColor3 = if p1.textStyle then p1.textStyle.Color3 else nil,
 		TextTransparency = if p1.textStyle then p1.textStyle.Transparency else nil,
-		MultiLine = isMultiLine,
-		TextWrapped = isMultiLine,
-		TextYAlignment = if isMultiLine then Enum.TextYAlignment.Top else Enum.TextYAlignment.Center,
-		TextEditable = if isBoundsChecker then false else not p1.isDisabled,
+		MultiLine = IsMultiLine,
+		TextWrapped = IsMultiLine,
+		TextYAlignment = if IsMultiLine then Enum.TextYAlignment.Top else Enum.TextYAlignment.Center,
+		TextEditable = not IsBoundsChecker and not p1.isDisabled,
 		PlaceholderText = p1.placeholder,
-		TextInputType = if isPluginSecurityModule() then p1.textInputType else nil,
+		TextInputType = if IsPluginSecurityModule() then p1.textInputType else nil,
 		ManualFocusRelease = if p1.manualFocusRelease then true else nil,
 		ShouldEmitReturnEvents = if p1.shouldEmitReturnEvents then true else nil,
 		OverlayNativeInput = if p1.overlayNativeInput then true else nil,
-		Size = if p1.Size ~= nil then UDim2.fromScale(1, 1) else p1.Size,
+		Size = if p1.Size == nil then UDim2.fromScale(1, 1) else p1.Size,
 		AutomaticSize = p1.automaticSize,
-		Text = if isBoundsChecker then nil elseif typeof(p1.text) == "string" then p1.text else p1.text,
-		ref = p2,
-		[reactModule.Tag] = p1.tag,
-		[reactModule.Change.Text] = p1.onTextChanged,
-		[reactModule.Change.CursorPosition] = p1.onCursorPositionChanged,
-		[reactModule.Change.AbsoluteSize] = p1.onAbsoluteSizeChanged,
-		[reactModule.Event.Focused] = p1.onFocusGained,
-		[reactModule.Event.FocusLost] = p1.onFocusLost,
-		[reactModule.Event.InputChanged] = p1.onInputChanged,
-		[reactModule.Event.InputEnded] = p1.onInputEnded
+		Text = if IsBoundsChecker then nil elseif typeof(p1.text) == "string" then p1.text else p1.text,
+		ref = Ref,
+		[ReactModule.Tag] = p1.tag,
+		[ReactModule.Change.Text] = p1.onTextChanged,
+		[ReactModule.Change.CursorPosition] = p1.onCursorPositionChanged,
+		[ReactModule.Change.AbsoluteSize] = p1.onAbsoluteSizeChanged,
+		[ReactModule.Event.Focused] = p1.onFocusGained,
+		[ReactModule.Event.FocusLost] = p1.onFocusLost,
+		[ReactModule.Event.InputChanged] = p1.onInputChanged,
+		[ReactModule.Event.InputEnded] = p1.onInputEnded
 	}, if p1.padding then {
-		Padding = reactModule.createElement(paddingModule, { value = p1.padding })
+		Padding = ReactModule.createElement(PaddingModule, { value = p1.padding })
 	} else nil, p1.children)
 end))
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), reactModule (ref), getBindableValueModule (ref), useTextInputVariantsModule (ref), fFlagComposerControlAlignment (ref), inputVariantModule (ref), useStyleTagsModule (ref), usePreferredInputModule (ref), useComposerFocusLockModule (ref), getDisabledStyleModule (ref), getMultiLineTextHeightModule (ref), composerDebugModule (ref), measureTextLineCountModule (ref), foundationFontFaceMigration (ref), normalizeFontFaceModule (ref), composerMultiLineCaretFix (ref), inputFocusBehaviorModule (ref), useComposerKeyboardConnectionsModule (ref), controlStateModule (ref), radiusModule (ref), truncateTextToCursorModule (ref), useBindableModule (ref), reactUtilsModule (ref), viewModule (ref), withCommonPropsModule (ref), blendTransparenciesModule (ref), constantsModule (ref), stateLayerAffordanceModule (ref), scrollViewModule (ref), var1 (ref), mapBindableModule (ref), iconModule (ref)
-	local var2 = p1
+return ReactModule.memo(ReactModule.forwardRef(function(Tbl, p1) --[[ Line: 203 | Named "InternalTextInput" ]]
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), ReactModule (copy), GetBindableValueModule (copy), UseTextInputVariantsModule (copy), FFlagComposerControlAlignment (copy), InputVariantModule (copy), UseStyleTagsModule (copy), UsePreferredInputModule (copy), UseComposerFocusLockModule (copy), GetDisabledStyleModule (copy), GetMultiLineTextHeightModule (copy), ComposerDebugModule (copy), MeasureTextLineCountModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceModule (copy), ComposerMultiLineCaretFix (copy), InputFocusBehaviorModule (copy), UseComposerKeyboardConnectionsModule (copy), ControlStateModule (copy), RadiusModule (copy), TruncateTextToCursorModule (copy), UseBindableModule (copy), ReactUtilsModule (copy), ViewModule (copy), WithCommonPropsModule (copy), BlendTransparenciesModule (copy), ConstantsModule (copy), StateLayerAffordanceModule (copy), ScrollViewModule (copy), MemoResult (copy), MapBindableModule (copy), IconModule (copy)
+	local Tbl1 = Tbl
 	
-	if p1.Selectable == nil then
-		var2 = table.clone(p1)
-		var2.Selectable = true
+	if Tbl.Selectable == nil then
+		Tbl1 = table.clone(Tbl)
+		Tbl1.Selectable = true
 	end
-	local var3 = withDefaultsModule(var2, t)
-	local var4 = useTokensModule()
-	local var5 = reactModule.useRef(nil)
-	local var6 = reactModule.useRef(nil)
-	local var7 = reactModule.useRef(nil)
-	local var8 = reactModule.useRef(nil)
-	local var9 = reactModule.useRef("")
-	local var10 = reactModule.useRef(getBindableValueModule(var3.text))
-	local var11 = reactModule.useRef(nil)
-	local var12 = reactModule.useRef(Vector2.zero)
-	local var13 = reactModule.useRef(false)
-	local var14 = reactModule.useRef(0)
-	local var15, var16 = reactModule.useState(false)
-	local var17, var18 = reactModule.useState(false)
-	local var19 = useTextInputVariantsModule(var4, var3.size, var3.variant, var3.radius, var17, var3.hasError)
-	local container = var19.container
-	local var20 = if var3.leadingElement ~= nil then if fFlagComposerControlAlignment and var3.trailingElement ~= nil then var4.Gap.XSmall else nil else var4.Gap.Small
-	local var21 = if var20 == nil and var3.trailingElement and typeof(container.tag) == "string" then string.gsub(container.tag, "gap%-large", "gap-xsmall") else container.tag
-	local var22 = if fFlagComposerControlAlignment and var17 and (var3.variant == inputVariantModule.Standard and not var3.hasError) then var4.Color.Stroke.Default else container.strokeStyle
-	local var23 = useStyleTagsModule(var19.textBox.tag)
-	local isDisabled = var3.isDisabled
-	local var24 = reactModule.useRef(isDisabled)
-	var24.current = isDisabled
-	local var25 = var3.isDisabled and var3.trailingElement == nil
-	local var26 = usePreferredInputModule()
-	local var27, var28 = reactModule.useState(false)
-	local var29 = var26 == Enum.PreferredInput.Touch
-	reactModule.useEffect(function()
-		-- upvalues: isDisabled (ref), var28 (ref), var18 (ref)
-		if isDisabled then
-			var28(false)
-			var18(false)
+	local WithDefaultsModuleResult = WithDefaultsModule(Tbl1, config)
+	local UseTokensModuleResult = UseTokensModule()
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseRefResult2 = ReactModule.useRef(nil)
+	local UseRefResult3 = ReactModule.useRef(nil)
+	local UseRefResult4 = ReactModule.useRef("")
+	local UseRefResult5 = ReactModule.useRef(GetBindableValueModule(WithDefaultsModuleResult.text))
+	local UseRefResult6 = ReactModule.useRef(nil)
+	local UseRefResult7 = ReactModule.useRef(Vector2.zero)
+	local UseRefResult8 = ReactModule.useRef(false)
+	local UseRefResult9 = ReactModule.useRef(0)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
+	local UseTextInputVariantsModuleResult = UseTextInputVariantsModule(UseTokensModuleResult, WithDefaultsModuleResult.size, WithDefaultsModuleResult.variant, WithDefaultsModuleResult.radius, UseStateResult1, WithDefaultsModuleResult.hasError)
+	local Container = UseTextInputVariantsModuleResult.container
+	local XSmall = if WithDefaultsModuleResult.leadingElement == nil then if FFlagComposerControlAlignment and WithDefaultsModuleResult.trailingElement ~= nil then UseTokensModuleResult.Gap.XSmall else nil else UseTokensModuleResult.Gap.Small
+	local Replaced = if XSmall == nil and WithDefaultsModuleResult.trailingElement and typeof(Container.tag) == "string" then string.gsub(Container.tag, "gap%-large", "gap-xsmall") else Container.tag
+	local Default = if FFlagComposerControlAlignment and UseStateResult1 and WithDefaultsModuleResult.variant == InputVariantModule.Standard and not WithDefaultsModuleResult.hasError then UseTokensModuleResult.Color.Stroke.Default else Container.strokeStyle
+	local UseStyleTagsModuleResult = UseStyleTagsModule(UseTextInputVariantsModuleResult.textBox.tag)
+	local IsDisabled = WithDefaultsModuleResult.isDisabled
+	local UseRefResult10 = ReactModule.useRef(IsDisabled)
+	UseRefResult10.current = IsDisabled
+	local NoTrailingElement: boolean = WithDefaultsModuleResult.isDisabled and WithDefaultsModuleResult.trailingElement == nil
+	local UsePreferredInputModuleResult = UsePreferredInputModule()
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(false)
+	local IsUsePreferredInputModuleResultMatch = UsePreferredInputModuleResult == Enum.PreferredInput.Touch
+	ReactModule.useEffect(function() --[[ Line: 255 ]]
+		-- upvalues: IsDisabled (copy), UseStateResult2_2 (copy), UseStateResult2_1 (copy)
+		if IsDisabled then
+			UseStateResult2_2(false)
+			UseStateResult2_1(false)
 		end
-		return function() end
-	end, { isDisabled })
-	local standard = var4.Stroke.Standard
-	local var30 = math.ceil(standard) * 2
-	local var31 = math.ceil(var4.Stroke.Thick) * 2
-	useComposerFocusLockModule(isDisabled == true, { var5, var6 })
-	local var32 = getDisabledStyleModule(var4.Color.Content.Emphasis, isDisabled)
-	local fontStyle = var19.textBox.fontStyle
-	local fontSize = fontStyle.FontSize
-	local lineHeight = fontStyle.LineHeight
-	local var33 = getMultiLineTextHeightModule(fontSize, 1, lineHeight)
-	local var34, var35 = reactModule.useState(1)
-	local var36, var37 = reactModule.useState(var33)
-	local var38 = var3.maxLines ~= nil
-	local var39, var40 = reactModule.useState(function()
-		-- upvalues: getBindableValueModule (copy), var3 (ref)
-		return getBindableValueModule(var3.text)
+		return function() --[[ Line: 260 ]] end
+	end, { IsDisabled })
+	local Standard: number = UseTokensModuleResult.Stroke.Standard
+	local ScaledCeiled = math.ceil(Standard) * 2
+	local ScaledCeiled1 = math.ceil(UseTokensModuleResult.Stroke.Thick) * 2
+	UseComposerFocusLockModule(IsDisabled == true, { UseRefResult, UseRefResult1 })
+	local DisabledStyleModule = GetDisabledStyleModule(UseTokensModuleResult.Color.Content.Emphasis, IsDisabled)
+	local FontStyle = UseTextInputVariantsModuleResult.textBox.fontStyle
+	local FontSize = FontStyle.FontSize
+	local LineHeight = FontStyle.LineHeight
+	local MultiLineTextHeightModule = GetMultiLineTextHeightModule(FontSize, 1, LineHeight)
+	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(1)
+	local UseStateResult5, UseStateResult2_4 = ReactModule.useState(MultiLineTextHeightModule)
+	local HasMaxLines = WithDefaultsModuleResult.maxLines ~= nil
+	local UseStateResult6, UseStateResult2_5 = ReactModule.useState(function() --[[ Line: 279 ]]
+		-- upvalues: GetBindableValueModule (upval), WithDefaultsModuleResult (copy)
+		return GetBindableValueModule(WithDefaultsModuleResult.text)
 	end)
-	reactModule.useEffect(function()
-		-- upvalues: composerDebugModule (copy), var3 (ref)
-		composerDebugModule.setEnabled(var3.composerDebug == true)
+	ReactModule.useEffect(function() --[[ Line: 283 ]]
+		-- upvalues: ComposerDebugModule (upval), WithDefaultsModuleResult (copy)
+		ComposerDebugModule.setEnabled(WithDefaultsModuleResult.composerDebug == true)
 		
-		return function() end
-	end, { var3.composerDebug })
-	local var41 = reactModule.useCallback(function()
-		-- upvalues: var5 (ref), var6 (ref)
-		local current = var5.current or var6.current
+		return function() --[[ Line: 285 ]] end
+	end, { WithDefaultsModuleResult.composerDebug })
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 288 ]]
+		-- upvalues: UseRefResult (copy), UseRefResult1 (copy)
+		local Current = UseRefResult.current or UseRefResult1.current
 		
-		return if current and current.AbsoluteSize.X > 0 then current.AbsoluteSize.X else 0
+		return if Current and Current.AbsoluteSize.X > 0 then Current.AbsoluteSize.X else 0
 	end, {})
-	local var42 = reactModule.useCallback(function(p3)
-		-- upvalues: measureTextLineCountModule (copy), var3 (ref), var33 (ref), var41 (ref), foundationFontFaceMigration (copy), normalizeFontFaceModule (copy), fontStyle (ref), fontSize (ref), composerMultiLineCaretFix (copy), var37 (ref), getMultiLineTextHeightModule (copy), lineHeight (ref)
-		local var43 = measureTextLineCountModule({
-			text = p3,
-			maxLines = var3.maxLines,
-			singleLineHeight = var33,
-			layoutWidth = var41(),
-			font = if foundationFontFaceMigration then normalizeFontFaceModule(fontStyle.Font) else fontStyle.Font,
-			fontSize = fontSize
+	local UseResult1 = ReactModule.useCallback(function(Text) --[[ Line: 297 ]]
+		-- upvalues: MeasureTextLineCountModule (upval), WithDefaultsModuleResult (copy), MultiLineTextHeightModule (copy), UseResult (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceModule (upval), FontStyle (copy), FontSize (copy), ComposerMultiLineCaretFix (upval), UseStateResult2_4 (copy), GetMultiLineTextHeightModule (upval), LineHeight (copy)
+		local MeasureTextLineCountModuleResult = MeasureTextLineCountModule({
+			text = Text,
+			maxLines = WithDefaultsModuleResult.maxLines,
+			singleLineHeight = MultiLineTextHeightModule,
+			layoutWidth = UseResult(),
+			font = if FoundationFontFaceMigration then NormalizeFontFaceModule(FontStyle.Font) else FontStyle.Font,
+			fontSize = FontSize
 		})
 		
-		if composerMultiLineCaretFix then
-			var37(getMultiLineTextHeightModule(fontSize, var43.unclampedLineCount, lineHeight))
+		if ComposerMultiLineCaretFix then
+			UseStateResult2_4(GetMultiLineTextHeightModule(FontSize, MeasureTextLineCountModuleResult.unclampedLineCount, LineHeight))
 		else
-			var37(math.max(if var43.boundsY and var43.boundsY > 0 then math.ceil(var43.boundsY) else var33, var43.lineCount * var33))
+			UseStateResult2_4((math.max(if MeasureTextLineCountModuleResult.boundsY and MeasureTextLineCountModuleResult.boundsY > 0 then math.ceil(MeasureTextLineCountModuleResult.boundsY) else MultiLineTextHeightModule, MeasureTextLineCountModuleResult.lineCount * MultiLineTextHeightModule)))
 		end
-		return var43.lineCount
+		return MeasureTextLineCountModuleResult.lineCount
 	end, {
-		fontSize, lineHeight, fontStyle.Font, var3.maxLines, var41, var33
+		FontSize, LineHeight, FontStyle.Font, WithDefaultsModuleResult.maxLines,
+		UseResult, MultiLineTextHeightModule
 	})
-	local var43 = if var38 then var3.text else getBindableValueModule(var3.text)
-	local maxValue = math.max(1, math.floor(var3.minLines or 1))
+	local Text = if HasMaxLines then WithDefaultsModuleResult.text else GetBindableValueModule(WithDefaultsModuleResult.text)
+	local Largest = math.max(1, (math.floor(WithDefaultsModuleResult.minLines or 1)))
 	
-	if var3.maxLines then
-		maxValue = math.min(maxValue, var3.maxLines)
+	if WithDefaultsModuleResult.maxLines then
+		Largest = math.min(Largest, WithDefaultsModuleResult.maxLines)
 	end
-	local createElement_3
-	local var44 = if var3.maxLines then math.max(maxValue, var34) else math.max(maxValue, var3.numLines)
-	local var45 = if var3.alwaysMultiLine then true else var44 > 1
-	local var46 = var45 and var27
-	reactModule.useEffect(function()
-		-- upvalues: var38 (ref), getBindableValueModule (copy), var3 (ref), var10 (ref), composerDebugModule (copy), var40 (ref), var35 (ref), var42 (ref)
-		if not var38 then
-			return function() end
+	local Largest1: number = if WithDefaultsModuleResult.maxLines then math.max(Largest, UseStateResult4) else math.max(Largest, WithDefaultsModuleResult.numLines)
+	local IsLargestAbove: boolean = if WithDefaultsModuleResult.alwaysMultiLine then true else Largest1 > 1
+	local UseStateResult3_1 = IsLargestAbove and UseStateResult3
+	ReactModule.useEffect(function() --[[ Line: 342 ]]
+		-- upvalues: HasMaxLines (copy), GetBindableValueModule (upval), WithDefaultsModuleResult (copy), UseRefResult5 (copy), ComposerDebugModule (upval), UseStateResult2_5 (copy), UseStateResult2_3 (copy), UseResult1 (copy)
+		if not HasMaxLines then
+			return function() --[[ Line: 344 ]] end
 		end
-		local var47 = getBindableValueModule(var3.text)
+		local BindableValueModule = GetBindableValueModule(WithDefaultsModuleResult.text)
 		
-		if var47 ~= var10.current then
-			composerDebugModule.log("syncFromParent", `len={utf8.len(var47) or #var47}`)
-			var10.current = var47
-			var40(var47)
-			var35(var42(var47))
-			task.defer(function()
-				-- upvalues: var35 (copy), var42 (copy), var47 (ref)
-				var35(var42(var47))
+		if BindableValueModule ~= UseRefResult5.current then
+			ComposerDebugModule.log("syncFromParent", `len={utf8.len(BindableValueModule) or #BindableValueModule}`)
+			UseRefResult5.current = BindableValueModule
+			UseStateResult2_5(BindableValueModule)
+			UseStateResult2_3(UseResult1(BindableValueModule))
+			task.defer(function() --[[ Line: 352 ]]
+				-- upvalues: UseStateResult2_3 (upval), UseResult1 (upval), BindableValueModule (copy)
+				UseStateResult2_3(UseResult1(BindableValueModule))
 			end)
 		end
-		return function() end
-	end, { var3.text, var42, var38 })
-	local var47 = reactModule.useCallback(function(p3)
-		-- upvalues: var5 (ref), var6 (ref)
-		if var5.current then
-			var5.current.SelectionStart = p3
+		return function() --[[ Line: 356 ]] end
+	end, { WithDefaultsModuleResult.text, UseResult1, HasMaxLines })
+	local UseResult2 = ReactModule.useCallback(function(SelectionStart) --[[ Line: 359 ]]
+		-- upvalues: UseRefResult (copy), UseRefResult1 (copy)
+		if UseRefResult.current then
+			UseRefResult.current.SelectionStart = SelectionStart
 		end
-		if var6.current then
-			var6.current.SelectionStart = p3
-		end
-	end, {})
-	local var48 = reactModule.useCallback(function(p3)
-		-- upvalues: var5 (ref), var6 (ref)
-		if var5.current then
-			var5.current.CursorPosition = p3
-		end
-		if var6.current then
-			var6.current.CursorPosition = p3
+		if UseRefResult1.current then
+			UseRefResult1.current.SelectionStart = SelectionStart
 		end
 	end, {})
-	local var49 = reactModule.useCallback(function()
-		-- upvalues: var5 (ref), var6 (ref), var47 (ref), var48 (ref)
-		local current = var5.current or var6.current
-		
-		if current == nil or current.Parent == nil then return end
-		local charCount = utf8.len(current.Text)
-		
-		if charCount then
-			var47(0)
-			var48(charCount + 1)
+	local UseResult3 = ReactModule.useCallback(function(CursorPosition) --[[ Line: 368 ]]
+		-- upvalues: UseRefResult (copy), UseRefResult1 (copy)
+		if UseRefResult.current then
+			UseRefResult.current.CursorPosition = CursorPosition
 		end
-	end, { var47, var48 })
-	local var50 = reactModule.useCallback(function()
-		-- upvalues: var45 (ref), var29 (ref), var27 (ref), var5 (ref), var9 (ref), var28 (ref), var6 (ref), var3 (ref), inputFocusBehaviorModule (copy), var49 (ref)
-		if var45 and var29 and not var27 then
-			if var5.current and var5.current.Parent then
-				var9.current = var5.current.Text
+		if UseRefResult1.current then
+			UseRefResult1.current.CursorPosition = CursorPosition
+		end
+	end, {})
+	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 377 ]]
+		-- upvalues: UseRefResult (copy), UseRefResult1 (copy), UseResult2 (copy), UseResult3 (copy)
+		local Current = UseRefResult.current or UseRefResult1.current
+		
+		if Current == nil or Current.Parent == nil then return end
+		local Length = utf8.len(Current.Text)
+		
+		if Length then
+			UseResult2(0)
+			UseResult3(Length + 1)
+		end
+	end, { UseResult2, UseResult3 })
+	local UseResult5 = ReactModule.useCallback(function() --[[ Line: 391 ]]
+		-- upvalues: IsLargestAbove (copy), IsUsePreferredInputModuleResultMatch (copy), UseStateResult3 (copy), UseRefResult (copy), UseRefResult4 (copy), UseStateResult2_2 (copy), UseRefResult1 (copy), WithDefaultsModuleResult (copy), InputFocusBehaviorModule (upval), UseResult4 (copy)
+		if IsLargestAbove and IsUsePreferredInputModuleResultMatch and not UseStateResult3 then
+			if UseRefResult.current and UseRefResult.current.Parent then
+				UseRefResult4.current = UseRefResult.current.Text
 			end
-			var28(true)
+			UseStateResult2_2(true)
 			
 			return
 		else
-			local current = var5.current or var6.current
+			local Current = UseRefResult.current or UseRefResult1.current
 			
-			if current == nil then return end
-			current:CaptureFocus()
+			if Current == nil then return end
+			Current:CaptureFocus()
 			
-			if var3.focusBehavior == inputFocusBehaviorModule.Highlight then
-				task.spawn(var49)
+			if WithDefaultsModuleResult.focusBehavior == InputFocusBehaviorModule.Highlight then
+				task.spawn(UseResult4)
 			end
 		end
 	end, {
-		var49,
-		var3.focusBehavior,
-		var45,
-		var29,
-		var27
+		UseResult4,
+		WithDefaultsModuleResult.focusBehavior,
+		IsLargestAbove,
+		IsUsePreferredInputModuleResultMatch,
+		UseStateResult3
 	})
-	local var51 = reactModule.useCallback(function()
-		-- upvalues: var5 (ref), var6 (ref), var28 (ref), var18 (ref)
-		if var5.current then
-			var5.current:ReleaseFocus()
+	local UseResult6 = ReactModule.useCallback(function() --[[ Line: 420 ]]
+		-- upvalues: UseRefResult (copy), UseRefResult1 (copy), UseStateResult2_2 (copy), UseStateResult2_1 (copy)
+		if UseRefResult.current then
+			UseRefResult.current:ReleaseFocus()
 		end
-		if var6.current then
-			var6.current:ReleaseFocus()
+		if UseRefResult1.current then
+			UseRefResult1.current:ReleaseFocus()
 		end
-		var28(false)
-		var18(false)
+		UseStateResult2_2(false)
+		UseStateResult2_1(false)
 	end, {})
-	local var52 = reactModule.useCallback(function()
-		-- upvalues: var5 (ref), var6 (ref)
-		local current = var5.current or var6.current
+	local UseResult7 = ReactModule.useCallback(function() --[[ Line: 431 ]]
+		-- upvalues: UseRefResult (copy), UseRefResult1 (copy)
+		local Current = UseRefResult.current or UseRefResult1.current
 		
-		return if current then current:IsFocused() else nil
+		return if Current then Current:IsFocused() else nil
 	end, {})
-	local var53 = reactModule.useCallback(function()
-		-- upvalues: var5 (ref), var6 (ref)
-		local current = var5.current or var6.current
+	local UseResult8 = ReactModule.useCallback(function() --[[ Line: 439 ]]
+		-- upvalues: UseRefResult (copy), UseRefResult1 (copy)
+		local Current = UseRefResult.current or UseRefResult1.current
 		
-		return if current then current.SelectionStart else nil
+		return if Current then Current.SelectionStart else nil
 	end, {})
-	local var54 = reactModule.useCallback(function()
-		-- upvalues: var5 (ref), var6 (ref)
-		local current = var5.current or var6.current
+	local UseResult9 = ReactModule.useCallback(function() --[[ Line: 447 ]]
+		-- upvalues: UseRefResult (copy), UseRefResult1 (copy)
+		local Current = UseRefResult.current or UseRefResult1.current
 		
-		return if current then current.CursorPosition else nil
+		return if Current then Current.CursorPosition else nil
 	end, {})
-	local var55 = reactModule.useCallback(function()
-		-- upvalues: var5 (ref), var6 (ref)
-		local current = var5.current or var6.current
+	local UseResult10 = ReactModule.useCallback(function() --[[ Line: 455 ]]
+		-- upvalues: UseRefResult (copy), UseRefResult1 (copy)
+		local Current = UseRefResult.current or UseRefResult1.current
 		
-		if current then
-			current.Text = ""
+		if Current then
+			Current.Text = ""
 		end
 	end, {})
-	reactModule.useImperativeHandle(p2, function()
-		-- upvalues: var52 (ref), var50 (ref), var51 (ref), var16 (ref), var53 (ref), var54 (ref), var48 (ref), var47 (ref)
+	ReactModule.useImperativeHandle(p1, function() --[[ Line: 464 ]]
+		-- upvalues: UseResult7 (copy), UseResult5 (copy), UseResult6 (copy), UseStateResult2 (copy), UseResult8 (copy), UseResult9 (copy), UseResult3 (copy), UseResult2 (copy)
 		return {
-			getIsFocused = var52,
-			focus = var50,
-			releaseFocus = var51,
-			setHover = var16,
-			getSelectionStart = var53,
-			getCursorPosition = var54,
-			setCursorPosition = var48,
-			setSelectionStart = var47
+			getIsFocused = UseResult7,
+			focus = UseResult5,
+			releaseFocus = UseResult6,
+			setHover = UseStateResult2,
+			getSelectionStart = UseResult8,
+			getCursorPosition = UseResult9,
+			setCursorPosition = UseResult3,
+			setSelectionStart = UseResult2
 		}
 	end, {
-		var54, var52, var53, var50, var51, var48, var47
+		UseResult9, UseResult7, UseResult8, UseResult5, UseResult6, UseResult3,
+		UseResult2
 	})
-	local var56 = reactModule.useCallback(function(p3)
-		-- upvalues: var9 (ref), var24 (ref), var13 (ref), var10 (ref), var45 (ref), var7 (ref), var38 (ref), var40 (ref), var3 (ref), var35 (ref), var42 (ref)
-		if p3 == nil or p3.Parent == nil or var9.current ~= "" then return end
-		if var24.current then return end
-		local text = p3.Text
+	local UseResult11 = ReactModule.useCallback(function(p2) --[[ Line: 487 ]]
+		-- upvalues: UseRefResult4 (copy), UseRefResult10 (copy), UseRefResult8 (copy), UseRefResult5 (copy), IsLargestAbove (copy), UseRefResult2 (copy), HasMaxLines (copy), UseStateResult2_5 (copy), WithDefaultsModuleResult (copy), UseStateResult2_3 (copy), UseResult1 (copy)
+		if p2 == nil or p2.Parent == nil or UseRefResult4.current ~= "" then return end
+		if UseRefResult10.current then return end
+		local Text = p2.Text
 		
-		if var13.current and text ~= "" then return end
-		if text == var10.current then return end
-		var10.current = text
+		if UseRefResult8.current and Text ~= "" then return end
+		if Text == UseRefResult5.current then return end
+		UseRefResult5.current = Text
 		
-		if var45 and var7.current then
-			var7.current.Text = text
+		if IsLargestAbove and UseRefResult2.current then
+			UseRefResult2.current.Text = Text
 		end
-		if var38 then
-			var40(text)
+		if HasMaxLines then
+			UseStateResult2_5(Text)
 		end
-		if var3.maxLines then
-			var35(var42(text))
-			task.defer(function()
-				-- upvalues: var35 (copy), var42 (copy), text (ref)
-				var35(var42(text))
+		if WithDefaultsModuleResult.maxLines then
+			UseStateResult2_3(UseResult1(Text))
+			task.defer(function() --[[ Line: 517 ]]
+				-- upvalues: UseStateResult2_3 (upval), UseResult1 (upval), Text (copy)
+				UseStateResult2_3(UseResult1(Text))
 			end)
 		end
-		var3.onChanged(text)
+		WithDefaultsModuleResult.onChanged(Text)
 	end, {
-		var3.onChanged,
-		var45,
-		var3.maxLines,
-		var42,
-		var38
+		WithDefaultsModuleResult.onChanged,
+		IsLargestAbove,
+		WithDefaultsModuleResult.maxLines,
+		UseResult1,
+		HasMaxLines
 	})
-	local var57 = reactModule.useRef(false)
-	local var58 = reactModule.useCallback(function(_, p3)
-		-- upvalues: var57 (ref)
-		if p3.UserInputType == Enum.UserInputType.MouseMovement then
-			var57.current = false
+	local UseRefResult11 = ReactModule.useRef(false)
+	local UseResult12 = ReactModule.useCallback(function(_, Input) --[[ Line: 527 ]]
+		-- upvalues: UseRefResult11 (copy)
+		if Input.UserInputType == Enum.UserInputType.MouseMovement then
+			UseRefResult11.current = false
 		end
 	end, {})
-	local var59 = reactModule.useCallback(function(_, p3)
-		-- upvalues: var57 (ref), var49 (ref)
-		if not var57.current then return end
-		var57.current = false
+	local UseResult13 = ReactModule.useCallback(function(_, Input) --[[ Line: 534 ]]
+		-- upvalues: UseRefResult11 (copy), UseResult4 (copy)
+		if not UseRefResult11.current then return end
+		UseRefResult11.current = false
 		
-		if p3.UserInputType == Enum.UserInputType.MouseButton1 then
-			var49()
+		if Input.UserInputType == Enum.UserInputType.MouseButton1 then
+			UseResult4()
 			
 			return
 		end
-	end, { var47, var48, var49 })
-	local var60 = reactModule.useCallback(function(p3)
-		-- upvalues: var10 (ref), var38 (ref), var40 (ref), var3 (ref), var35 (ref), var42 (ref)
-		var10.current = p3
+	end, { UseResult2, UseResult3, UseResult4 })
+	local UseResult14 = ReactModule.useCallback(function(Current) --[[ Line: 553 ]]
+		-- upvalues: UseRefResult5 (copy), HasMaxLines (copy), UseStateResult2_5 (copy), WithDefaultsModuleResult (copy), UseStateResult2_3 (copy), UseResult1 (copy)
+		UseRefResult5.current = Current
 		
-		if var38 then
-			var40(p3)
+		if HasMaxLines then
+			UseStateResult2_5(Current)
 		end
-		if var3.maxLines then
-			var35(var42(p3))
+		if WithDefaultsModuleResult.maxLines then
+			UseStateResult2_3(UseResult1(Current))
 		end
-		var3.onChanged(p3)
-	end, { var3.maxLines, var42, var3.onChanged, var38 })
-	local var61 = var3.onReturnPressed ~= nil and not var29
-	local var62 = reactModule.useCallback(function(_, p3)
-		-- upvalues: var3 (ref), var14 (ref), composerDebugModule (copy), var13 (ref)
-		if var3.onReturnPressed == nil then return end
-		local processTime = os.clock()
+		WithDefaultsModuleResult.onChanged(Current)
+	end, {
+		WithDefaultsModuleResult.maxLines,
+		UseResult1,
+		WithDefaultsModuleResult.onChanged,
+		HasMaxLines
+	})
+	local NoIsUsePreferredInputModuleResultMatch: boolean = WithDefaultsModuleResult.onReturnPressed ~= nil and not IsUsePreferredInputModuleResultMatch
+	local UseResult15 = ReactModule.useCallback(function(_, p2) --[[ Line: 566 ]]
+		-- upvalues: WithDefaultsModuleResult (copy), UseRefResult9 (copy), ComposerDebugModule (upval), UseRefResult8 (copy)
+		if WithDefaultsModuleResult.onReturnPressed == nil then return end
+		local ClockTime = os.clock()
 		
-		if processTime - var14.current < 0.15 then
-			composerDebugModule.log("returnSubmit", `source={p3} skipped=debounced`)
+		if ClockTime - UseRefResult9.current < 0.15 then
+			ComposerDebugModule.log("returnSubmit", `source={p2} skipped=debounced`)
 			
 			return
+		else
+			ComposerDebugModule.log("returnSubmit", `source={p2}`)
+			UseRefResult9.current = ClockTime
+			UseRefResult8.current = true
+			WithDefaultsModuleResult.onReturnPressed()
+			task.delay(0.15, function() --[[ Line: 582 ]]
+				-- upvalues: UseRefResult8 (upval)
+				UseRefResult8.current = false
+			end)
 		end
-		composerDebugModule.log("returnSubmit", `source={p3}`)
-		var14.current = processTime
-		var13.current = true
-		var3.onReturnPressed()
-		task.delay(0.15, function()
-			-- upvalues: var13 (copy)
-			var13.current = false
-		end)
-	end, { var3.onReturnPressed })
-	local var63 = useComposerKeyboardConnectionsModule({
-		enabled = var61 == true,
-		onReturnPressed = reactModule.useCallback(function(_, p3)
-			-- upvalues: var5 (ref), composerDebugModule (copy), var60 (ref), var62 (ref)
-			local current = var5.current
+	end, { WithDefaultsModuleResult.onReturnPressed })
+	local UseComposerKeyboardConnectionsModuleResult = UseComposerKeyboardConnectionsModule({
+		enabled = NoIsUsePreferredInputModuleResultMatch == true,
+		onReturnPressed = ReactModule.useCallback(function(_, p2) --[[ Line: 587 ]]
+			-- upvalues: UseRefResult (copy), ComposerDebugModule (upval), UseResult14 (copy), UseResult15 (copy)
+			local Current = UseRefResult.current
 			
-			if current == nil or current:IsFocused() ~= true then return end
-			if p3 then
-				local text = current.Text
-				task.defer(function()
-					-- upvalues: current (ref), text (ref), composerDebugModule (copy), var60 (copy)
-					if current.Parent == nil then return end
-					local text_1 = current.Text
+			if Current == nil or Current:IsFocused() ~= true then return end
+			if p2 then
+				local Text = Current.Text
+				task.defer(function() --[[ Line: 595 ]]
+					-- upvalues: Current (copy), Text (copy), ComposerDebugModule (upval), UseResult14 (upval)
+					if Current.Parent == nil then return end
+					local Text1 = Current.Text
 					
-					if text_1 ~= text then
-						composerDebugModule.log("returnNewline", "source=UserInputService.InputBegan-shift engineInserted=true")
-						var60(text_1)
+					if Text1 ~= Text then
+						ComposerDebugModule.log("returnNewline", "source=UserInputService.InputBegan-shift engineInserted=true")
+						UseResult14(Text1)
 					end
 				end)
 				
 				return
+			else
+				UseResult15(Current, "UserInputService.InputBegan")
 			end
-			var62(current, "UserInputService.InputBegan")
-		end, { var62, var60 })
+		end, { UseResult15, UseResult14 })
 	})
-	local connect = var63.connect
-	local disconnect = var63.disconnect
-	local var64 = reactModule.useCallback(function()
-		-- upvalues: isDisabled (ref), var18 (ref), var3 (ref), var61 (ref), connect (ref), inputFocusBehaviorModule (copy), var5 (ref), var6 (ref), var57 (ref)
-		if isDisabled then return end
-		var18(true)
+	local ConnectFunction = UseComposerKeyboardConnectionsModuleResult.connect
+	local DisconnectFunction = UseComposerKeyboardConnectionsModuleResult.disconnect
+	local UseResult16 = ReactModule.useCallback(function() --[[ Line: 621 ]]
+		-- upvalues: IsDisabled (copy), UseStateResult2_1 (copy), WithDefaultsModuleResult (copy), NoIsUsePreferredInputModuleResultMatch (copy), ConnectFunction (copy), InputFocusBehaviorModule (upval), UseRefResult (copy), UseRefResult1 (copy), UseRefResult11 (copy)
+		if IsDisabled then return end
+		UseStateResult2_1(true)
 		
-		if var3.onFocus then
-			var3.onFocus()
+		if WithDefaultsModuleResult.onFocus then
+			WithDefaultsModuleResult.onFocus()
 		end
-		if var61 then
-			connect()
+		if NoIsUsePreferredInputModuleResultMatch then
+			ConnectFunction()
 		end
-		local focusBehavior = var3.focusBehavior
+		local FocusBehavior = WithDefaultsModuleResult.focusBehavior
 		
-		if focusBehavior == inputFocusBehaviorModule.Clear then
-			if var5.current then
-				var5.current.Text = ""
+		if FocusBehavior == InputFocusBehaviorModule.Clear then
+			if UseRefResult.current then
+				UseRefResult.current.Text = ""
 			end
-			if var6.current then
-				var6.current.Text = ""
+			if UseRefResult1.current then
+				UseRefResult1.current.Text = ""
 				
 				return
 			end
-		elseif focusBehavior == inputFocusBehaviorModule.Highlight then
-			var57.current = true
+		elseif FocusBehavior == InputFocusBehaviorModule.Highlight then
+			UseRefResult11.current = true
 		end
 	end, {
-		var3.onFocus,
-		isDisabled,
-		var3.focusBehavior,
-		var61,
-		connect
+		WithDefaultsModuleResult.onFocus,
+		IsDisabled,
+		WithDefaultsModuleResult.focusBehavior,
+		NoIsUsePreferredInputModuleResultMatch,
+		ConnectFunction
 	})
-	local var65 = reactModule.useCallback(function(p3, p4)
-		-- upvalues: var59 (ref)
-		var59(p3, p4)
-	end, { var59 })
-	local var66 = reactModule.useCallback(function(p3, p4, p5)
-		-- upvalues: composerDebugModule (copy), var61 (ref), disconnect (ref), var18 (ref), var57 (ref), var45 (ref), var28 (ref), var3 (ref), var62 (ref)
-		composerDebugModule.log("textBox.FocusLost", `enterPressed={p4}`)
+	local UseResult17 = ReactModule.useCallback(function(p2, p3) --[[ Line: 656 ]]
+		-- upvalues: UseResult13 (copy)
+		UseResult13(p2, p3)
+	end, { UseResult13 })
+	local UseResult18 = ReactModule.useCallback(function(p2, p3, p4) --[[ Line: 661 ]]
+		-- upvalues: ComposerDebugModule (upval), NoIsUsePreferredInputModuleResultMatch (copy), DisconnectFunction (copy), UseStateResult2_1 (copy), UseRefResult11 (copy), IsLargestAbove (copy), UseStateResult2_2 (copy), WithDefaultsModuleResult (copy), UseResult15 (copy)
+		ComposerDebugModule.log("textBox.FocusLost", `enterPressed={p3}`)
 		
-		if var61 then
-			disconnect()
+		if NoIsUsePreferredInputModuleResultMatch then
+			DisconnectFunction()
 		end
-		var18(false)
-		var57.current = false
+		UseStateResult2_1(false)
+		UseRefResult11.current = false
 		
-		if var45 then
-			var28(false)
+		if IsLargestAbove then
+			UseStateResult2_2(false)
 		end
-		if var3.onFocusLost then
-			var3.onFocusLost(p5)
+		if WithDefaultsModuleResult.onFocusLost then
+			WithDefaultsModuleResult.onFocusLost(p4)
 		end
-		if p4 and var61 then
-			var62(p3, "TextBox.FocusLost")
+		if p3 and NoIsUsePreferredInputModuleResultMatch then
+			UseResult15(p2, "TextBox.FocusLost")
 		end
 	end, {
-		var45,
-		var3.onFocusLost,
-		var61,
-		var62,
-		disconnect
+		IsLargestAbove,
+		WithDefaultsModuleResult.onFocusLost,
+		NoIsUsePreferredInputModuleResultMatch,
+		UseResult15,
+		DisconnectFunction
 	})
-	local var67 = reactModule.useCallback(function(p3)
-		-- upvalues: var16 (ref), controlStateModule (copy)
-		var16(p3 == controlStateModule.Hover)
+	local UseResult19 = ReactModule.useCallback(function(Hover) --[[ Line: 692 ]]
+		-- upvalues: UseStateResult2 (copy), ControlStateModule (upval)
+		UseStateResult2(Hover == ControlStateModule.Hover)
 	end, {})
-	local var68 = reactModule.useCallback(function(p3, p4)
-		-- upvalues: var11 (ref), var3 (ref)
-		var11.current = p4
+	local UseResult20 = ReactModule.useCallback(function(p2, Current) --[[ Line: 696 ]]
+		-- upvalues: UseRefResult6 (copy), WithDefaultsModuleResult (copy)
+		UseRefResult6.current = Current
 		
-		if var3.onDragStarted then
-			var3.onDragStarted(p3, p4)
+		if WithDefaultsModuleResult.onDragStarted then
+			WithDefaultsModuleResult.onDragStarted(p2, Current)
 		end
-	end, { var3.onDragStarted })
-	local var69 = reactModule.useCallback(function(p3, p4)
-		-- upvalues: var3 (ref)
-		if var3.onDrag then
-			var3.onDrag(p3, p4)
+	end, { WithDefaultsModuleResult.onDragStarted })
+	local UseResult21 = ReactModule.useCallback(function(p2, p3) --[[ Line: 703 ]]
+		-- upvalues: WithDefaultsModuleResult (copy)
+		if WithDefaultsModuleResult.onDrag then
+			WithDefaultsModuleResult.onDrag(p2, p3)
 		end
-	end, { var3.onDrag })
-	local var70 = reactModule.useCallback(function(p3, p4)
-		-- upvalues: var11 (ref), var50 (ref), var51 (ref), var18 (ref), var3 (ref)
-		if var11.current == p4 then
-			var50()
+	end, { WithDefaultsModuleResult.onDrag })
+	local UseResult22 = ReactModule.useCallback(function(p2, Current) --[[ Line: 709 ]]
+		-- upvalues: UseRefResult6 (copy), UseResult5 (copy), UseResult6 (copy), UseStateResult2_1 (copy), WithDefaultsModuleResult (copy)
+		if UseRefResult6.current == Current then
+			UseResult5()
 		else
-			var51()
-			var18(false)
+			UseResult6()
+			UseStateResult2_1(false)
 		end
-		var11.current = nil
+		UseRefResult6.current = nil
 		
-		if var3.onDragEnded then
-			var3.onDragEnded(p3, p4)
+		if WithDefaultsModuleResult.onDragEnded then
+			WithDefaultsModuleResult.onDragEnded(p2, Current)
 		end
-	end, { var3.onDragEnded, var50, var51 })
-	local var71 = if var3.maxLines then getMultiLineTextHeightModule(fontSize, var3.maxLines, lineHeight) else nil
-	local var72 = getMultiLineTextHeightModule(fontSize, maxValue, lineHeight)
-	local var73 = reactModule.useMemo(function()
-		-- upvalues: var3 (ref), var72 (ref), var36 (ref), var71 (ref), getMultiLineTextHeightModule (copy), fontSize (ref), var44 (ref), lineHeight (ref)
-		return if var3.maxLines then math.clamp(math.max(var72, var36), var72, var71) else getMultiLineTextHeightModule(fontSize, var44, lineHeight)
 	end, {
-		var3.maxLines, var72, var36, var71, fontSize, var44, lineHeight
+		WithDefaultsModuleResult.onDragEnded,
+		UseResult5,
+		UseResult6
 	})
-	local var74 = reactModule.useMemo(function()
-		-- upvalues: getMultiLineTextHeightModule (copy), fontSize (ref), lineHeight (ref), container (ref), var30 (ref)
-		local var75 = getMultiLineTextHeightModule(fontSize, 1, lineHeight)
+	local MultiLineTextHeightModule1 = if WithDefaultsModuleResult.maxLines then GetMultiLineTextHeightModule(FontSize, WithDefaultsModuleResult.maxLines, LineHeight) else nil
+	local MultiLineTextHeightModule2 = GetMultiLineTextHeightModule(FontSize, Largest, LineHeight)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 727 ]]
+		-- upvalues: WithDefaultsModuleResult (copy), MultiLineTextHeightModule2 (copy), UseStateResult5 (copy), MultiLineTextHeightModule1 (copy), GetMultiLineTextHeightModule (upval), FontSize (copy), Largest1 (copy), LineHeight (copy)
+		return if WithDefaultsModuleResult.maxLines then math.clamp(math.max(MultiLineTextHeightModule2, UseStateResult5), MultiLineTextHeightModule2, MultiLineTextHeightModule1) else GetMultiLineTextHeightModule(FontSize, Largest1, LineHeight)
+	end, {
+		WithDefaultsModuleResult.maxLines, MultiLineTextHeightModule2, UseStateResult5,
+		MultiLineTextHeightModule1, FontSize, Largest1, LineHeight
+	})
+	local UseMemoResult1 = ReactModule.useMemo(function(): UDim --[[ Line: 749 ]]
+		-- upvalues: GetMultiLineTextHeightModule (upval), FontSize (copy), LineHeight (copy), Container (copy), ScaledCeiled (copy)
+		local MultiLineTextHeightModule = GetMultiLineTextHeightModule(FontSize, 1, LineHeight)
 		
-		return UDim.new(0, math.ceil((var75 + math.round(math.round((container.minHeight - var30 - var75) * 2) / 2) + var30) / 2))
-	end, { container.minHeight, var30, fontSize, lineHeight })
-	local var75 = reactModule.useMemo(function()
-		-- upvalues: var3 (ref), var74 (ref), radiusModule (copy), container (ref)
-		return if var3.maxLines then var74 elseif var3.radius == radiusModule.Circle then UDim.new(0, math.ceil(container.minHeight / 2)) else nil
+		return UDim.new(0, (math.ceil((MultiLineTextHeightModule + math.round(math.round((Container.minHeight - ScaledCeiled - MultiLineTextHeightModule) * 2) / 2) + ScaledCeiled) / 2)))
+	end, { Container.minHeight, ScaledCeiled, FontSize, LineHeight })
+	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 758 ]]
+		-- upvalues: WithDefaultsModuleResult (copy), UseMemoResult1 (copy), RadiusModule (upval), Container (copy)
+		return if WithDefaultsModuleResult.maxLines then UseMemoResult1 elseif WithDefaultsModuleResult.radius == RadiusModule.Circle then UDim.new(0, (math.ceil(Container.minHeight / 2))) else nil
 	end, {
-		var3.maxLines,
-		var74,
-		container.minHeight,
-		var3.radius
+		WithDefaultsModuleResult.maxLines,
+		UseMemoResult1,
+		Container.minHeight,
+		WithDefaultsModuleResult.radius
 	})
-	local var76 = reactModule.useMemo(function()
-		-- upvalues: var75 (ref), container (ref), var4 (ref)
+	local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 768 ]]
+		-- upvalues: UseMemoResult2 (copy), Container (copy), UseTokensModuleResult (copy)
 		return {
-			radius = var75 or UDim.new(0, container.radius),
-			offset = var4.Stroke.Thick,
-			borderWidth = var4.Stroke.Thick
+			radius = if UseMemoResult2 then UseMemoResult2 else UDim.new(0, Container.radius),
+			offset = UseTokensModuleResult.Stroke.Thick,
+			borderWidth = UseTokensModuleResult.Stroke.Thick
 		}
-	end, { var4, container.radius, var75 })
-	local var77, var78 = reactModule.useMemo(function()
-		-- upvalues: container (ref), var30 (ref), getMultiLineTextHeightModule (copy), fontSize (ref), lineHeight (ref), var73 (ref)
-		local var79 = math.round((container.minHeight - var30 - getMultiLineTextHeightModule(fontSize, 1, lineHeight)) * 2) / 2
+	end, { UseTokensModuleResult, Container.radius, UseMemoResult2 })
+	local UseMemoResult4, UseMemoResult2_1 = ReactModule.useMemo(function() --[[ Line: 777 ]]
+		-- upvalues: Container (copy), ScaledCeiled (copy), GetMultiLineTextHeightModule (upval), FontSize (copy), LineHeight (copy), UseMemoResult (copy)
+		local RoundedRatio = math.round((Container.minHeight - ScaledCeiled - GetMultiLineTextHeightModule(FontSize, 1, LineHeight)) * 2) / 2
 		
 		return {
-			top = UDim.new(0, math.floor(var79 / 2)),
-			bottom = UDim.new(0, math.ceil(var79 / 2)),
+			top = UDim.new(0, (math.floor(RoundedRatio / 2))),
+			bottom = UDim.new(0, (math.ceil(RoundedRatio / 2))),
 			left = UDim.new(0, 0),
 			right = UDim.new(0, 0)
-		}, var73 + math.round(var79) + var30
+		}, UseMemoResult + math.round(RoundedRatio) + ScaledCeiled
 	end, {
-		container.minHeight, var30, var31, fontSize, var73, lineHeight
+		Container.minHeight, ScaledCeiled, ScaledCeiled1, FontSize, UseMemoResult,
+		LineHeight
 	})
-	local var79 = var77.bottom.Offset + var77.top.Offset
-	local var80 = var45 and (var3.maxLines ~= nil and not var27)
-	local var81 = var3.textPaddingOnParent == true
-	local var82 = var81 and var80
-	local var83 = var81 and not var82
-	local var84 = if var81 then nil else var77
-	local var85 = if var81 then var73 else var73 + var79
-	local var86 = if var80 then math.max(var85, if var81 then var36 else var36 + var79) else var85
-	local var87 = if var83 then var86 + var79 else var86
-	local uDim2 = UDim2.new(1, 0, 0, var86)
-	local uDim2_1 = UDim2.new(1, 0, 0, var85)
-	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), composerDebugModule (copy), var44 (ref), var78 (ref)
-		if var3.maxLines then
-			composerDebugModule.log("layout", `lineCount={var44} borderFrameHeight={var78}`)
+	local NewOffset = UseMemoResult4.bottom.Offset + UseMemoResult4.top.Offset
+	local NoUseStateResult3: boolean = IsLargestAbove and (WithDefaultsModuleResult.maxLines ~= nil and not UseStateResult3)
+	local IsTextPaddingOnParent = WithDefaultsModuleResult.textPaddingOnParent == true
+	local NoUseStateResult3_1: boolean = IsTextPaddingOnParent and NoUseStateResult3
+	local NoNoUseStateResult3_1: boolean = IsTextPaddingOnParent and not NoUseStateResult3_1
+	local UseMemoResult5 = if IsTextPaddingOnParent then nil else UseMemoResult4
+	local YOffset = if IsTextPaddingOnParent then UseMemoResult else UseMemoResult + NewOffset
+	local UseStateResult7 = if IsTextPaddingOnParent then UseStateResult5 else UseStateResult5 + NewOffset
+	local Largest2 = if NoUseStateResult3 then math.max(YOffset, UseStateResult7) else YOffset
+	local YOffset1 = if NoNoUseStateResult3_1 then Largest2 + NewOffset else Largest2
+	local _UDim2 = UDim2.new(1, 0, 0, Largest2)
+	local _UDim2_1 = UDim2.new(1, 0, 0, YOffset)
+	ReactModule.useEffect(function() --[[ Line: 827 ]]
+		-- upvalues: WithDefaultsModuleResult (copy), ComposerDebugModule (upval), Largest1 (copy), UseMemoResult2_1 (copy)
+		if WithDefaultsModuleResult.maxLines then
+			ComposerDebugModule.log("layout", `lineCount={Largest1} borderFrameHeight={UseMemoResult2_1}`)
 		end
-		return function() end
-	end, { var44, var78, var3.maxLines })
-	local var88 = reactModule.useMemo(function()
-		-- upvalues: var45 (ref), var3 (ref)
-		return if var45 then {
+		return function() --[[ Line: 831 ]] end
+	end, {
+		Largest1,
+		UseMemoResult2_1,
+		WithDefaultsModuleResult.maxLines
+	})
+	local UseMemoResult6 = ReactModule.useMemo(function() --[[ Line: 834 ]]
+		-- upvalues: IsLargestAbove (copy), WithDefaultsModuleResult (copy)
+		return if IsLargestAbove then {
 			FillDirection = Enum.FillDirection.Vertical,
-			ItemLineAlignment = if var3.maxLines ~= nil then Enum.ItemLineAlignment.Center else Enum.ItemLineAlignment.Start
+			ItemLineAlignment = if WithDefaultsModuleResult.maxLines == nil then Enum.ItemLineAlignment.Center else Enum.ItemLineAlignment.Start
 		} else nil
-	end, { var45, var3.maxLines })
-	local var89 = reactModule.useMemo(function()
-		-- upvalues: var45 (ref)
-		return if var45 then {
+	end, { IsLargestAbove, WithDefaultsModuleResult.maxLines })
+	local UseMemoResult7 = ReactModule.useMemo(function() --[[ Line: 845 ]]
+		-- upvalues: IsLargestAbove (copy)
+		return if IsLargestAbove then {
 			AutomaticCanvasSize = Enum.AutomaticSize.Y,
 			CanvasSize = UDim2.fromOffset(0, 0),
 			ScrollingDirection = Enum.ScrollingDirection.Y,
 			VerticalScrollBarInset = Enum.ScrollBarInset.Always
 		} else nil
-	end, { var45 })
-	local var90 = reactModule.useCallback(function(p3)
-		-- upvalues: var8 (ref), var7 (ref), truncateTextToCursorModule (copy), var77 (ref)
-		local current = var8.current
-		local current_1 = var7.current
+	end, { IsLargestAbove })
+	local UseResult23 = ReactModule.useCallback(function(Label) --[[ Line: 856 ]]
+		-- upvalues: UseRefResult3 (copy), UseRefResult2 (copy), TruncateTextToCursorModule (upval), UseMemoResult4 (copy)
+		local Current = UseRefResult3.current
+		local Current1 = UseRefResult2.current
 		
-		if current == nil or current_1 == nil then return end
-		local var91 = p3.TextSize * p3.LineHeight
-		local y = current.CanvasPosition.Y
-		current_1.Text = truncateTextToCursorModule(p3)
-		local y_1 = current_1.TextBounds.Y
-		local var92 = y - var77.top.Offset + var77.bottom.Offset
-		local var93 = y + current.AbsoluteSize.Y - var77.top.Offset - var77.bottom.Offset
+		if Current == nil or Current1 == nil then return end
+		local ScaledTextSize = Label.TextSize * Label.LineHeight
+		local Y = Current.CanvasPosition.Y
+		Current1.Text = TruncateTextToCursorModule(Label)
+		local Y1 = Current1.TextBounds.Y
+		local NewY = Y - UseMemoResult4.top.Offset + UseMemoResult4.bottom.Offset
+		local YDelta = Y + Current.AbsoluteSize.Y - UseMemoResult4.top.Offset - UseMemoResult4.bottom.Offset
 		
-		if y_1 - var91 < var92 then
-			current.CanvasPosition += Vector2.new(0, y_1 - var91 - var92)
+		if Y1 - ScaledTextSize < NewY then
+			Current.CanvasPosition += Vector2.new(0, Y1 - ScaledTextSize - NewY)
 		end
-		if var93 < y_1 then
-			current.CanvasPosition += Vector2.new(0, y_1 - var93)
+		if YDelta < Y1 then
+			Current.CanvasPosition += Vector2.new(0, Y1 - YDelta)
 		end
-	end, { var77 })
-	local var91 = if composerMultiLineCaretFix then reactModule.useCallback(function(p3)
-		-- upvalues: var90 (ref)
-		if p3:IsFocused() then
-			p3.CursorPosition = p3.CursorPosition
-			var90(p3)
+	end, { UseMemoResult4 })
+	local UseResult24 = if ComposerMultiLineCaretFix then ReactModule.useCallback(function(TextBox) --[[ Line: 891 ]]
+		-- upvalues: UseResult23 (copy)
+		if TextBox:IsFocused() then
+			TextBox.CursorPosition = TextBox.CursorPosition
+			UseResult23(TextBox)
 			
 			return
 		end
-	end, { var90 }) else nil
-	local var92 = reactModule.useCallback(function(p3)
-		-- upvalues: var8 (ref), var12 (ref)
-		if p3 == nil then
+	end, { UseResult23 }) else nil
+	local UseResult25 = ReactModule.useCallback(function(Current) --[[ Line: 902 ]]
+		-- upvalues: UseRefResult3 (copy), UseRefResult7 (copy)
+		if Current ~= nil then
+			UseRefResult3.current = Current
+			Current.ClipsDescendants = true
+			Current.CanvasPosition = UseRefResult7.current
+			
 			return
 		end
-		var8.current = p3
-		p3.ClipsDescendants = true
-		p3.CanvasPosition = var12.current
 	end, {})
-	local var93 = reactModule.useCallback(function(p3)
-		-- upvalues: var9 (ref)
-		if p3 then
-			p3.Text = var9.current
-			var9.current = ""
-			task.delay(0, function()
-				-- upvalues: p3 (ref)
-				if p3.Parent ~= nil then
-					p3:CaptureFocus()
+	local UseResult26 = ReactModule.useCallback(function(TextBox) --[[ Line: 912 ]]
+		-- upvalues: UseRefResult4 (copy)
+		if TextBox then
+			TextBox.Text = UseRefResult4.current
+			UseRefResult4.current = ""
+			task.delay(0, function() --[[ Line: 916 ]]
+				-- upvalues: TextBox (copy)
+				if TextBox.Parent ~= nil then
+					TextBox:CaptureFocus()
 				end
 			end)
 		end
 	end, {})
-	local var94 = reactModule.useCallback(function(p3)
-		-- upvalues: var12 (ref)
-		var12.current = p3.CanvasPosition
+	local UseResult27 = ReactModule.useCallback(function(ScrollFrame) --[[ Line: 924 ]]
+		-- upvalues: UseRefResult7 (copy)
+		UseRefResult7.current = ScrollFrame.CanvasPosition
 	end, {})
-	local var95 = reactModule.useMemo(function()
-		-- upvalues: var3 (ref), reactModule (copy), var68 (ref), var69 (ref), var70 (ref), var17 (ref), isDisabled (ref)
-		return if var3.onDragStarted or var3.onDrag or var3.onDragEnded then reactModule.createElement("UIDragDetector", {
+	local UseMemoResult8 = ReactModule.useMemo(function() --[[ Line: 929 ]]
+		-- upvalues: WithDefaultsModuleResult (copy), ReactModule (upval), UseResult20 (copy), UseResult21 (copy), UseResult22 (copy), UseStateResult1 (copy), IsDisabled (copy)
+		return if WithDefaultsModuleResult.onDragStarted or WithDefaultsModuleResult.onDrag or WithDefaultsModuleResult.onDragEnded then ReactModule.createElement("UIDragDetector", {
 			DragStyle = Enum.UIDragDetectorDragStyle.Scriptable,
-			[reactModule.Event.DragStart] = var68,
-			[reactModule.Event.DragContinue] = var69,
-			[reactModule.Event.DragEnd] = var70,
-			Enabled = not var17 and not isDisabled
+			[ReactModule.Event.DragStart] = UseResult20,
+			[ReactModule.Event.DragContinue] = UseResult21,
+			[ReactModule.Event.DragEnd] = UseResult22,
+			Enabled = not UseStateResult1 and not IsDisabled
 		}) else nil
 	end, {
-		var68, var69, var70, var17, isDisabled, var3.onDragStarted, var3.onDrag,
-		var3.onDragEnded
+		UseResult20, UseResult21, UseResult22, UseStateResult1, IsDisabled,
+		WithDefaultsModuleResult.onDragStarted, WithDefaultsModuleResult.onDrag,
+		WithDefaultsModuleResult.onDragEnded
 	})
-	local var96 = useBindableModule(if var3.horizontalPadding then var3.horizontalPadding.left or UDim.new(0, 0) else UDim.new(0, 0))
-	local var97 = useBindableModule(if var3.horizontalPadding then var3.horizontalPadding.right or UDim.new(0, 0) else UDim.new(0, 0))
-	local var98 = reactModule.useMemo(function()
-		-- upvalues: var3 (ref), container (ref), var4 (ref)
-		return if var3.hasClearButton then UDim2.fromOffset(0, (container.minHeight - var4.Stroke.Standard) / 2) else nil
+	local UseBindableModuleResult = UseBindableModule(WithDefaultsModuleResult.horizontalPadding and WithDefaultsModuleResult.horizontalPadding.left or UDim.new(0, 0))
+	local UseBindableModuleResult1 = UseBindableModule(WithDefaultsModuleResult.horizontalPadding and WithDefaultsModuleResult.horizontalPadding.right or UDim.new(0, 0))
+	local UseMemoResult9 = ReactModule.useMemo(function() --[[ Line: 960 ]]
+		-- upvalues: WithDefaultsModuleResult (copy), Container (copy), UseTokensModuleResult (copy)
+		return if WithDefaultsModuleResult.hasClearButton then UDim2.fromOffset(0, (Container.minHeight - UseTokensModuleResult.Stroke.Standard) / 2) else nil
 	end, {
-		var3.hasClearButton,
-		container.minHeight,
-		var4.Stroke.Standard
+		WithDefaultsModuleResult.hasClearButton,
+		Container.minHeight,
+		UseTokensModuleResult.Stroke.Standard
 	})
-	local var99 = reactUtilsModule.useComposedRef(var6, var93)
-	local createElement = reactModule.createElement
-	local var100 = withCommonPropsModule(var3, {
-		Size = UDim2.new(1, 0, 0, var78),
+	local UseComposedRefResult = ReactUtilsModule.useComposedRef(UseRefResult1, UseResult26)
+	
+	return ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, {
+		Size = UDim2.new(1, 0, 0, UseMemoResult2_1),
 		selection = {
-			Selectable = var3.Selectable and not isDisabled,
-			NextSelectionUp = var3.NextSelectionUp,
-			NextSelectionDown = var3.NextSelectionDown,
-			NextSelectionLeft = var3.NextSelectionLeft,
-			NextSelectionRight = var3.NextSelectionRight
+			Selectable = WithDefaultsModuleResult.Selectable and not IsDisabled,
+			NextSelectionUp = WithDefaultsModuleResult.NextSelectionUp,
+			NextSelectionDown = WithDefaultsModuleResult.NextSelectionDown,
+			NextSelectionLeft = WithDefaultsModuleResult.NextSelectionLeft,
+			NextSelectionRight = WithDefaultsModuleResult.NextSelectionRight
 		},
-		cursor = var76,
-		stroke = if var22 and container.strokeThickness then {
-			Color = var22.Color3,
-			Transparency = if isDisabled then blendTransparenciesModule(var22.Transparency, constantsModule.DISABLED_TRANSPARENCY) else var22.Transparency,
-			Thickness = container.strokeThickness,
-			BorderStrokePosition = if var17 or var15 then Enum.BorderStrokePosition.Center else Enum.BorderStrokePosition.Inner
+		cursor = UseMemoResult3,
+		stroke = if Default and Container.strokeThickness then {
+			Color = Default.Color3,
+			Transparency = if IsDisabled then BlendTransparenciesModule(Default.Transparency, ConstantsModule.DISABLED_TRANSPARENCY) else Default.Transparency,
+			Thickness = Container.strokeThickness,
+			BorderStrokePosition = if UseStateResult1 or UseStateResult then Enum.BorderStrokePosition.Center else Enum.BorderStrokePosition.Inner
 		} else nil,
-		cornerRadius = var75,
+		cornerRadius = UseMemoResult2,
 		padding = {
-			left = var96:map(function(p3)
-				-- upvalues: standard (ref)
-				return UDim.new(0, standard) + p3
+			left = UseBindableModuleResult:map(function(p2): UDim --[[ Line: 997 ]]
+				-- upvalues: Standard (copy)
+				return UDim.new(0, Standard) + p2
 			end),
-			right = if var3.trailingElement == nil and var3.hasClearButton then UDim.new(0, standard) else var97:map(function(p3)
-				-- upvalues: standard (ref)
-				return UDim.new(0, standard) + p3
+			right = if WithDefaultsModuleResult.trailingElement == nil and WithDefaultsModuleResult.hasClearButton then UDim.new(0, Standard) else UseBindableModuleResult1:map(function(p2): UDim --[[ Line: 1003 ]]
+				-- upvalues: Standard (copy)
+				return UDim.new(0, Standard) + p2
 			end),
-			top = UDim.new(0, standard),
-			bottom = UDim.new(0, standard)
+			top = UDim.new(0, Standard),
+			bottom = UDim.new(0, Standard)
 		},
-		onActivated = if not isDisabled then var50 else nil,
-		onStateChanged = var67,
-		isDisabled = var25,
-		backgroundStyle = if container.bgStyle then getDisabledStyleModule({
-			Color3 = container.bgStyle.Color3,
-			Transparency = if var3.backgroundGradient then 0 else container.bgStyle.Transparency
-		}, var25) else nil,
-		stateLayer = { affordance = stateLayerAffordanceModule.None },
-		layout = if var20 ~= nil then nil else {
+		onActivated = if IsDisabled then nil else UseResult5,
+		onStateChanged = UseResult19,
+		isDisabled = NoTrailingElement,
+		backgroundStyle = if Container.bgStyle then GetDisabledStyleModule({
+			Color3 = Container.bgStyle.Color3,
+			Transparency = if WithDefaultsModuleResult.backgroundGradient then 0 else Container.bgStyle.Transparency
+		}, NoTrailingElement) else nil,
+		stateLayer = { affordance = StateLayerAffordanceModule.None },
+		layout = if XSmall == nil then nil else {
 			FillDirection = Enum.FillDirection.Horizontal,
-			Padding = UDim.new(0, var20),
+			Padding = UDim.new(0, XSmall),
 			SortOrder = Enum.SortOrder.LayoutOrder
 		},
-		tag = var21,
-		testId = `{var3.testId}--outer-container`
-	})
-	local t_1 = {
-		DragDetector = var95,
-		Background = var3.backgroundGradient,
-		Leading = if var3.leadingElement then reactModule.createElement(viewModule, {
+		tag = Replaced,
+		testId = `{WithDefaultsModuleResult.testId}--outer-container`
+	}), {
+		DragDetector = UseMemoResult8,
+		Background = WithDefaultsModuleResult.backgroundGradient,
+		Leading = if WithDefaultsModuleResult.leadingElement then ReactModule.createElement(ViewModule, {
 			LayoutOrder = 1,
 			tag = "col align-y-bottom self-stretch size-0-full auto-x",
-			GroupTransparency = if var25 then constantsModule.DISABLED_TRANSPARENCY else nil,
-			testId = `{var3.testId}--leading`
-		}, var3.leadingElement) else nil
-	}
-	local createElement_1 = reactModule.createElement
-	local var101 = if var45 then scrollViewModule else viewModule
-	local t_2 = {
-		LayoutOrder = 2,
-		tag = "fill size-full clip",
-		padding = if var82 then var77 else nil,
-		selection = { Selectable = false },
-		scroll = var89,
-		layout = var88,
-		onCanvasPositionChanged = if var45 then var94 else nil,
-		scrollingFrameRef = if var45 then var92 else nil
-	}
-	local t_3 = {}
-	local createElement_2 = reactModule.createElement
-	local var102 = viewModule
-	local t_4 = {
-		Size = if var80 then UDim2.new(1, 0, 0, var87) else nil,
-		tag = { ["fill size-full"] = not var80 },
-		padding = if var83 then var77 else nil,
-		selection = { Selectable = false },
-		onActivated = if not isDisabled then var50 else nil,
-		stateLayer = { affordance = stateLayerAffordanceModule.None }
-	}
-	local t_5 = {}
-	
-	if var27 then
-		createElement_3 = nil
-	else
-		createElement_3 = reactModule.createElement
-		createElement_3 = createElement_3(var1, {
-			overlayNativeInput = nil,
-			text = var43,
-			placeholder = var3.placeholder,
-			textInputType = var3.textInputType,
-			fontStyle = fontStyle,
-			textStyle = var32,
-			isMultiLine = var45,
-			isDisabled = isDisabled,
-			ref = var5,
-			tag = `{var23 or ""} data-testid={var3.testId}--textbox`,
-			Size = if var45 then uDim2 else nil,
-			automaticSize = if var3.maxLines then nil elseif not var38 then if var45 and not var27 and var39 ~= "" then Enum.AutomaticSize.Y else nil else mapBindableModule(var3.text, function(p3)
-				-- upvalues: var45 (ref), var27 (ref)
-				return if var45 and not var27 and p3 ~= "" then Enum.AutomaticSize.Y else nil
+			GroupTransparency = if NoTrailingElement then ConstantsModule.DISABLED_TRANSPARENCY else nil,
+			testId = `{WithDefaultsModuleResult.testId}--leading`
+		}, WithDefaultsModuleResult.leadingElement) else nil,
+		TextBoxWrapper = ReactModule.createElement(if IsLargestAbove then ScrollViewModule else ViewModule, {
+			LayoutOrder = 2,
+			tag = "fill size-full clip",
+			padding = if NoUseStateResult3_1 then UseMemoResult4 else nil,
+			selection = { Selectable = false },
+			scroll = UseMemoResult7,
+			layout = UseMemoResult6,
+			onCanvasPositionChanged = if IsLargestAbove then UseResult27 else nil,
+			scrollingFrameRef = if IsLargestAbove then UseResult25 else nil
+		}, {
+			TextContent = ReactModule.createElement(ViewModule, {
+				Size = if NoUseStateResult3 then UDim2.new(1, 0, 0, YOffset1) else nil,
+				tag = { ["fill size-full"] = not NoUseStateResult3 },
+				padding = if NoNoUseStateResult3_1 then UseMemoResult4 else nil,
+				selection = { Selectable = false },
+				onActivated = if IsDisabled then nil else UseResult5,
+				stateLayer = { affordance = StateLayerAffordanceModule.None }
+			}, {
+				TextBox = if UseStateResult3 then nil else ReactModule.createElement(MemoResult, {
+					overlayNativeInput = nil,
+					text = Text,
+					placeholder = WithDefaultsModuleResult.placeholder,
+					textInputType = WithDefaultsModuleResult.textInputType,
+					fontStyle = FontStyle,
+					textStyle = DisabledStyleModule,
+					isMultiLine = IsLargestAbove,
+					isDisabled = IsDisabled,
+					ref = UseRefResult,
+					tag = `{UseStyleTagsModuleResult or ""} data-testid={WithDefaultsModuleResult.testId}--textbox`,
+					Size = if IsLargestAbove then _UDim2 else nil,
+					automaticSize = if WithDefaultsModuleResult.maxLines then nil elseif HasMaxLines then if IsLargestAbove and not UseStateResult3 and UseStateResult6 ~= "" then Enum.AutomaticSize.Y else nil else MapBindableModule(WithDefaultsModuleResult.text, function(p2) --[[ Line: 1081 ]]
+						-- upvalues: IsLargestAbove (copy), UseStateResult3 (copy)
+						return if IsLargestAbove and not UseStateResult3 and p2 ~= "" then Enum.AutomaticSize.Y else nil
+					end),
+					padding = UseMemoResult5,
+					onFocusGained = UseResult16,
+					onFocusLost = if IsLargestAbove and IsUsePreferredInputModuleResultMatch then nil else UseResult18,
+					onTextChanged = UseResult11,
+					onCursorPositionChanged = if IsLargestAbove then UseResult23 else nil,
+					onAbsoluteSizeChanged = if ComposerMultiLineCaretFix and IsLargestAbove then UseResult24 else nil,
+					onInputChanged = UseResult12,
+					onInputEnded = UseResult17,
+					manualFocusRelease = if IsUsePreferredInputModuleResultMatch then WithDefaultsModuleResult.manualFocusRelease else nil,
+					shouldEmitReturnEvents = IsUsePreferredInputModuleResultMatch and WithDefaultsModuleResult.manualFocusRelease == true and WithDefaultsModuleResult.alwaysMultiLine == true or nil
+				}, {
+					DragDetector = UseMemoResult8,
+					BoundsChecker = if IsLargestAbove then ReactModule.createElement(MemoResult, {
+						isBoundsChecker = true,
+						fontStyle = FontStyle,
+						textStyle = DisabledStyleModule,
+						Size = if IsTextPaddingOnParent then UDim2.fromScale(1, 1) else UDim2.new(1, 0, 1, NewOffset),
+						ref = UseRefResult2
+					}) else nil
+				}),
+				MobileFocusTarget = if IsLargestAbove and IsUsePreferredInputModuleResultMatch and not UseStateResult3 and not IsDisabled then ReactModule.createElement(ViewModule, {
+					tag = "size-full",
+					ZIndex = 2,
+					onActivated = UseResult5,
+					selection = { Selectable = false },
+					stateLayer = { affordance = StateLayerAffordanceModule.None },
+					testId = `{WithDefaultsModuleResult.testId}--mobile-focus-target`
+				}) else nil,
+				MobileTextBox = if UseStateResult3_1 then ReactModule.createElement(MemoResult, {
+					overlayNativeInput = nil,
+					text = Text,
+					placeholder = WithDefaultsModuleResult.placeholder,
+					textInputType = WithDefaultsModuleResult.textInputType,
+					fontStyle = FontStyle,
+					textStyle = DisabledStyleModule,
+					isMultiLine = IsLargestAbove,
+					isDisabled = IsDisabled,
+					padding = UseMemoResult5,
+					ref = UseComposedRefResult,
+					tag = `{UseStyleTagsModuleResult or ""} data-testid={WithDefaultsModuleResult.testId}--mobile-textbox`,
+					Size = _UDim2_1,
+					onFocusGained = UseResult16,
+					onFocusLost = if IsLargestAbove and IsUsePreferredInputModuleResultMatch then UseResult18 else nil,
+					onTextChanged = UseResult11,
+					onCursorPositionChanged = if IsLargestAbove then UseResult23 else nil,
+					onInputEnded = UseResult17,
+					manualFocusRelease = if IsUsePreferredInputModuleResultMatch then WithDefaultsModuleResult.manualFocusRelease else nil,
+					shouldEmitReturnEvents = IsUsePreferredInputModuleResultMatch and WithDefaultsModuleResult.manualFocusRelease == true and WithDefaultsModuleResult.alwaysMultiLine == true or nil
+				}) else nil
+			})
+		}),
+		Clear = if WithDefaultsModuleResult.hasClearButton then ReactModule.createElement(ViewModule, {
+			LayoutOrder = 3,
+			isDisabled = IsDisabled,
+			GroupTransparency = if IsDisabled then ConstantsModule.DISABLED_TRANSPARENCY else nil,
+			Visible = MapBindableModule(WithDefaultsModuleResult.text, function(p2): boolean --[[ Line: 1173 ]]
+				return p2 ~= ""
 			end),
-			padding = var84,
-			onFocusGained = var64,
-			onFocusLost = if var45 and var29 then nil else var66,
-			onTextChanged = var56,
-			onCursorPositionChanged = if var45 then var90 else nil,
-			onAbsoluteSizeChanged = if composerMultiLineCaretFix and var45 then var91 else nil,
-			onInputChanged = var58,
-			onInputEnded = var65,
-			manualFocusRelease = if var29 then var3.manualFocusRelease else nil,
-			shouldEmitReturnEvents = if var29 and var3.manualFocusRelease == true and var3.alwaysMultiLine == true then true else nil
+			tag = UseTextInputVariantsModuleResult.clearButton.tag
 		}, {
-			DragDetector = var95,
-			BoundsChecker = if var45 then reactModule.createElement(var1, {
-				isBoundsChecker = true,
-				fontStyle = fontStyle,
-				textStyle = var32,
-				Size = if var81 then UDim2.fromScale(1, 1) else UDim2.new(1, 0, 1, var79),
-				ref = var7
-			}) else nil
-		})
-	end
-	local var103
-	t_5.TextBox = createElement_3
-	t_5.MobileFocusTarget = if var45 and var29 and (not var27 and not isDisabled) then reactModule.createElement(viewModule, {
-		tag = "size-full",
-		ZIndex = 2,
-		onActivated = var50,
-		selection = { Selectable = false },
-		stateLayer = { affordance = stateLayerAffordanceModule.None },
-		testId = `{var3.testId}--mobile-focus-target`
-	}) else nil
-	
-	if var46 then
-		var103 = reactModule.createElement
-		var103 = var103(var1, {
-			overlayNativeInput = nil,
-			text = var43,
-			placeholder = var3.placeholder,
-			textInputType = var3.textInputType,
-			fontStyle = fontStyle,
-			textStyle = var32,
-			isMultiLine = var45,
-			isDisabled = isDisabled,
-			padding = var84,
-			ref = var99,
-			tag = `{var23 or ""} data-testid={var3.testId}--mobile-textbox`,
-			Size = uDim2_1,
-			onFocusGained = var64,
-			onFocusLost = if var45 and var29 then var66 else nil,
-			onTextChanged = var56,
-			onCursorPositionChanged = if var45 then var90 else nil,
-			onInputEnded = var65,
-			manualFocusRelease = if var29 then var3.manualFocusRelease else nil,
-			shouldEmitReturnEvents = if var29 and var3.manualFocusRelease == true and var3.alwaysMultiLine == true then true else nil
-		})
-	else
-		var103 = nil
-	end
-	t_5.MobileTextBox = var103
-	t_3.TextContent = createElement_2(var102, t_4, t_5)
-	t_1.TextBoxWrapper = createElement_1(var101, t_2, t_3)
-	t_1.Clear = if var3.hasClearButton then reactModule.createElement(viewModule, {
-		LayoutOrder = 3,
-		isDisabled = isDisabled,
-		GroupTransparency = if isDisabled then constantsModule.DISABLED_TRANSPARENCY else nil,
-		Visible = mapBindableModule(var3.text, function(p3)
-			return p3 ~= ""
-		end),
-		tag = var19.clearButton.tag
-	}, {
-		ClearButton = reactModule.createElement(viewModule, {
-			tag = "anchor-center-left auto-xy",
-			onActivated = var55,
-			padding = UDim.new(0, var19.clearButton.padding),
-			Position = var98,
-			stateLayer = { affordance = stateLayerAffordanceModule.None },
-			testId = `{var3.testId}--clear-button`
-		}, {
-			Icon = reactModule.createElement(iconModule, { name = var19.clearButton.icon })
-		})
-	}) else nil
-	t_1.Trailing = if var3.trailingElement then reactModule.createElement(viewModule, {
-		LayoutOrder = 4,
-		GroupTransparency = if var25 then constantsModule.DISABLED_TRANSPARENCY else nil,
-		tag = {
-			["col align-y-bottom self-stretch size-0-full auto-x"] = var3.trailingAlignBottom == true,
-			["row align-y-center size-0-full auto-x"] = var3.trailingAlignBottom ~= true
-		},
-		testId = `{var3.testId}--trailing`
-	}, var3.trailingElement) else nil
-	
-	return createElement(viewModule, var100, t_1)
+			ClearButton = ReactModule.createElement(ViewModule, {
+				tag = "anchor-center-left auto-xy",
+				onActivated = UseResult10,
+				padding = UDim.new(0, UseTextInputVariantsModuleResult.clearButton.padding),
+				Position = UseMemoResult9,
+				stateLayer = { affordance = StateLayerAffordanceModule.None },
+				testId = `{WithDefaultsModuleResult.testId}--clear-button`
+			}, {
+				Icon = ReactModule.createElement(IconModule, { name = UseTextInputVariantsModuleResult.clearButton.icon })
+			})
+		}) else nil,
+		Trailing = if WithDefaultsModuleResult.trailingElement then ReactModule.createElement(ViewModule, {
+			LayoutOrder = 4,
+			GroupTransparency = if NoTrailingElement then ConstantsModule.DISABLED_TRANSPARENCY else nil,
+			tag = {
+				["col align-y-bottom self-stretch size-0-full auto-x"] = WithDefaultsModuleResult.trailingAlignBottom == true,
+				["row align-y-center size-0-full auto-x"] = WithDefaultsModuleResult.trailingAlignBottom ~= true
+			},
+			testId = `{WithDefaultsModuleResult.testId}--trailing`
+		}, WithDefaultsModuleResult.trailingElement) else nil
+	})
 end))

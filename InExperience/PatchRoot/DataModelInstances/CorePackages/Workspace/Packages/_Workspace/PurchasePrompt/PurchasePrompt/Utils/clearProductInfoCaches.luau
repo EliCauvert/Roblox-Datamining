@@ -1,9 +1,9 @@
-﻿local marketplaceService = game:GetService("MarketplaceService")
+﻿local MarketplaceService = game:GetService("MarketplaceService")
 
-return function()
-	-- upvalues: marketplaceService (ref)
-	pcall(function()
-		-- upvalues: marketplaceService (copy)
-		marketplaceService:clearProductInfoCaches()
+return function() --[[ Line: 12 | Named "clearProductInfoCaches" ]]
+	-- upvalues: MarketplaceService (copy)
+	pcall(function() --[[ Line: 14 ]]
+		-- upvalues: MarketplaceService (upval)
+		MarketplaceService:clearProductInfoCaches()
 	end)
 end

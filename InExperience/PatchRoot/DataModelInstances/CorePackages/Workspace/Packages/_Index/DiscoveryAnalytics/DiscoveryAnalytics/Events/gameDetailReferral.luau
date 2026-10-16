@@ -1,128 +1,130 @@
-﻿local httpService = game:GetService("HttpService")
-local appStorageService = game:GetService("AppStorageService")
-local telemetryService = game:GetService("TelemetryService")
-local parent = script:FindFirstAncestor("DiscoveryAnalytics").Parent
-local cryoModule = require(parent.Cryo)
-local getPlatformTarget = require(parent.Analytics).getPlatformTarget
-local tModule = require(parent.t)
-local discoveryEventErrorLogger = require(parent.DiscoveryUtils).DiscoveryEventErrorLogger
-local fFlagEnableShareLinksInGameDetailEvent = require(parent.SharedFlags).FFlagEnableShareLinksInGameDetailEvent
-local fFlagEnableTopSongsSort = require(parent.SharedFlags).FFlagEnableTopSongsSort
-local fFlagLuaAppGameDetailEventMobileAdsId = require(parent.SharedFlags).FFlagLuaAppGameDetailEventMobileAdsId
-local fFlagLuaAppMigrateGameEventsTelemetryService = require(parent.SharedFlags).FFlagLuaAppMigrateGameEventsTelemetryService
-local fFlagLuaAppGameEventsTelemetryServiceShadowTraffic = require(parent.SharedFlags).FFlagLuaAppGameEventsTelemetryServiceShadowTraffic
-local var1 = if fFlagLuaAppMigrateGameEventsTelemetryService then {
+﻿local HttpService = game:GetService("HttpService")
+local AppStorageService = game:GetService("AppStorageService")
+local TelemetryService = game:GetService("TelemetryService")
+local Parent = script:FindFirstAncestor("DiscoveryAnalytics").Parent
+local CryoModule = require(Parent.Cryo)
+local GetPlatformTargetFunction = require(Parent.Analytics).getPlatformTarget
+local TModule = require(Parent.t)
+local DiscoveryEventErrorLogger = require(Parent.DiscoveryUtils).DiscoveryEventErrorLogger
+local FFlagEnableShareLinksInGameDetailEvent = require(Parent.SharedFlags).FFlagEnableShareLinksInGameDetailEvent
+local FFlagEnableTopSongsSort = require(Parent.SharedFlags).FFlagEnableTopSongsSort
+local FFlagLuaAppGameDetailEventMobileAdsId = require(Parent.SharedFlags).FFlagLuaAppGameDetailEventMobileAdsId
+local FFlagLuaAppMigrateGameEventsTelemetryService = require(Parent.SharedFlags).FFlagLuaAppMigrateGameEventsTelemetryService
+local FFlagLuaAppGameEventsTelemetryServiceShadowTraffic = require(Parent.SharedFlags).FFlagLuaAppGameEventsTelemetryServiceShadowTraffic
+local LuaAppGameDetailReferralEventThrottlingHundredthsPercent = game:DefineFastInt("LuaAppGameDetailReferralEventThrottlingHundredthsPercent", 10000)
+local LuaAppGameDetailReferralShadowThrottlingHundredthsPercent = game:DefineFastInt("LuaAppGameDetailReferralShadowThrottlingHundredthsPercent", 10000)
+local Config = if FFlagLuaAppMigrateGameEventsTelemetryService then {
 	eventName = "gameDetailReferral",
 	description = "Fires when the user navigates to game details",
 	backends = { "EventIngest" },
-	throttlingPercentage = game:DefineFastInt("LuaAppGameDetailReferralEventThrottlingHundredthsPercent", 10000),
+	throttlingPercentage = LuaAppGameDetailReferralEventThrottlingHundredthsPercent,
 	lastUpdated = { 26, 2, 4 }
 } else nil
-local var2 = if fFlagLuaAppGameEventsTelemetryServiceShadowTraffic then {
+local Config1 = if FFlagLuaAppGameEventsTelemetryServiceShadowTraffic then {
 	eventName = "gameDetailReferralShadow",
 	description = "Shadow traffic for gameDetailReferral event recovery percentage",
 	backends = { "EventIngest" },
-	throttlingPercentage = game:DefineFastInt("LuaAppGameDetailReferralShadowThrottlingHundredthsPercent", 10000),
+	throttlingPercentage = LuaAppGameDetailReferralShadowThrottlingHundredthsPercent,
 	lastUpdated = { 26, 3, 4 }
 } else nil
-local var3 = tModule.strictInterface({
-	pg = tModule.string,
-	universeId = tModule.union(tModule.string, tModule.number),
-	navigationUniverseId = tModule.optional(tModule.string),
-	pos = tModule.optional(tModule.number),
-	pid = tModule.optional(tModule.union(tModule.number, tModule.string)),
-	sortPos = tModule.optional(tModule.number),
-	ad = tModule.optional(tModule.string),
-	isAd = tModule.optional(tModule.boolean),
-	nativeAdData = tModule.optional(tModule.string),
-	gameSetTargetId = tModule.optional(tModule.number),
-	gameSetTypeId = tModule.optional(tModule.string),
-	tis = tModule.optional(tModule.number),
-	refId = tModule.optional(tModule.string),
-	src = tModule.optional(tModule.string),
-	friendId = tModule.optional(tModule.string),
-	position = tModule.optional(tModule.number),
-	absolutePosition = tModule.optional(tModule.number),
-	fromWhere = tModule.optional(tModule.string),
-	locale = tModule.optional(tModule.string),
-	conversationId = tModule.optional(tModule.number),
-	shareLinkType = if fFlagEnableShareLinksInGameDetailEvent then tModule.optional(tModule.string) else nil,
-	shareLinkId = if fFlagEnableShareLinksInGameDetailEvent then tModule.optional(tModule.string) else nil,
-	rowOnPage = tModule.optional(tModule.number),
-	appliedFilters = tModule.optional(tModule.string),
-	topicDataPosition = tModule.optional(tModule.number),
-	refSongId = if fFlagEnableTopSongsSort then tModule.optional(tModule.string) else nil,
-	isSdui = tModule.optional(tModule.boolean),
-	contentType = tModule.optional(tModule.string),
-	actionType = tModule.optional(tModule.string),
-	interactionUuid = tModule.optional(tModule.string),
-	positionInRow = tModule.optional(tModule.number),
-	rowNumber = tModule.optional(tModule.number),
-	heroUnitId = tModule.optional(tModule.string),
-	loadSource = tModule.optional(tModule.string),
-	tileType = tModule.optional(tModule.string),
-	sortSubId = tModule.optional(tModule.string),
-	analyticsData = tModule.optional(tModule.table),
-	seeAllFlag = tModule.optional(tModule.number)
+local StrictInterfaceResult = TModule.strictInterface({
+	pg = TModule.string,
+	universeId = TModule.union(TModule.string, TModule.number),
+	navigationUniverseId = TModule.optional(TModule.string),
+	pos = TModule.optional(TModule.number),
+	pid = TModule.optional(TModule.union(TModule.number, TModule.string)),
+	sortPos = TModule.optional(TModule.number),
+	ad = TModule.optional(TModule.string),
+	isAd = TModule.optional(TModule.boolean),
+	nativeAdData = TModule.optional(TModule.string),
+	gameSetTargetId = TModule.optional(TModule.number),
+	gameSetTypeId = TModule.optional(TModule.string),
+	tis = TModule.optional(TModule.number),
+	refId = TModule.optional(TModule.string),
+	src = TModule.optional(TModule.string),
+	friendId = TModule.optional(TModule.string),
+	position = TModule.optional(TModule.number),
+	absolutePosition = TModule.optional(TModule.number),
+	fromWhere = TModule.optional(TModule.string),
+	locale = TModule.optional(TModule.string),
+	conversationId = TModule.optional(TModule.number),
+	shareLinkType = if FFlagEnableShareLinksInGameDetailEvent then TModule.optional(TModule.string) else nil,
+	shareLinkId = if FFlagEnableShareLinksInGameDetailEvent then TModule.optional(TModule.string) else nil,
+	rowOnPage = TModule.optional(TModule.number),
+	appliedFilters = TModule.optional(TModule.string),
+	topicDataPosition = TModule.optional(TModule.number),
+	refSongId = if FFlagEnableTopSongsSort then TModule.optional(TModule.string) else nil,
+	isSdui = TModule.optional(TModule.boolean),
+	contentType = TModule.optional(TModule.string),
+	actionType = TModule.optional(TModule.string),
+	interactionUuid = TModule.optional(TModule.string),
+	positionInRow = TModule.optional(TModule.number),
+	rowNumber = TModule.optional(TModule.number),
+	heroUnitId = TModule.optional(TModule.string),
+	loadSource = TModule.optional(TModule.string),
+	tileType = TModule.optional(TModule.string),
+	sortSubId = TModule.optional(TModule.string),
+	analyticsData = TModule.optional(TModule.table),
+	seeAllFlag = TModule.optional(TModule.number)
 })
 
-local function _(p1)
-	-- upvalues: appStorageService (ref)
-	local mobileAdvertisingIdItem = appStorageService:GetItem("MobileAdvertisingId")
+local function _(p1) --[[ Line: 90 | Named "addMobileAdvertisingIdToEventParams" ]]
+	-- upvalues: AppStorageService (copy)
+	local MobileAdvertisingIdItem = AppStorageService:GetItem("MobileAdvertisingId")
 	
-	if mobileAdvertisingIdItem and mobileAdvertisingIdItem ~= "" then
-		p1.mobileAdvertisingId = mobileAdvertisingIdItem
+	if MobileAdvertisingIdItem and MobileAdvertisingIdItem ~= "" then
+		p1.mobileAdvertisingId = MobileAdvertisingIdItem
 	end
 end
 
-return function(p1, p2, p3)
-	-- upvalues: var3 (ref), discoveryEventErrorLogger (ref), httpService (ref), fFlagLuaAppGameDetailEventMobileAdsId (ref), appStorageService (ref), cryoModule (ref), fFlagLuaAppMigrateGameEventsTelemetryService (ref), telemetryService (ref), var1 (write), getPlatformTarget (ref), fFlagLuaAppGameEventsTelemetryServiceShadowTraffic (ref), var2 (write)
-	local var4, var5 = var3(p3)
+return function(p1, EventContext, Tbl) --[[ Line: 97 ]]
+	-- upvalues: StrictInterfaceResult (copy), DiscoveryEventErrorLogger (copy), HttpService (copy), FFlagLuaAppGameDetailEventMobileAdsId (copy), AppStorageService (copy), CryoModule (copy), FFlagLuaAppMigrateGameEventsTelemetryService (copy), TelemetryService (copy), Config (ref), GetPlatformTargetFunction (copy), FFlagLuaAppGameEventsTelemetryServiceShadowTraffic (copy), Config1 (ref)
+	local StrictInterfaceResultResult, StrictInterfaceResultResult2 = StrictInterfaceResult(Tbl)
 	
-	if not var4 then
-		discoveryEventErrorLogger.reportError("GameDetailReferralInvalidInterface", var5)
+	if not StrictInterfaceResultResult then
+		DiscoveryEventErrorLogger.reportError("GameDetailReferralInvalidInterface", StrictInterfaceResultResult2)
 	end
-	if not p3.interactionUuid then
-		p3.interactionUuid = httpService:GenerateGUID(false)
+	if not Tbl.interactionUuid then
+		Tbl.interactionUuid = HttpService:GenerateGUID(false)
 	end
-	if not p3.contentType then
-		p3.contentType = "Game"
+	if not Tbl.contentType then
+		Tbl.contentType = "Game"
 	end
-	if not p3.actionType then
-		p3.actionType = "OpenGameDetails"
+	if not Tbl.actionType then
+		Tbl.actionType = "OpenGameDetails"
 	end
-	if fFlagLuaAppGameDetailEventMobileAdsId then
-		local var6 = p3
-		local mobileAdvertisingIdItem = appStorageService:GetItem("MobileAdvertisingId")
+	if FFlagLuaAppGameDetailEventMobileAdsId then
+		local JoinResult = Tbl
+		local MobileAdvertisingIdItem = AppStorageService:GetItem("MobileAdvertisingId")
 		
-		if mobileAdvertisingIdItem and mobileAdvertisingIdItem ~= "" then
-			var6.mobileAdvertisingId = mobileAdvertisingIdItem
+		if MobileAdvertisingIdItem and MobileAdvertisingIdItem ~= "" then
+			JoinResult.mobileAdvertisingId = MobileAdvertisingIdItem
 		end
 	end
-	if p3.analyticsData then
-		p3 = cryoModule.Dictionary.join(p3.analyticsData, p3, { analyticsData = cryoModule.None })
+	if Tbl.analyticsData then
+		Tbl = CryoModule.Dictionary.join(Tbl.analyticsData, Tbl, { analyticsData = CryoModule.None })
 	end
-	if fFlagLuaAppMigrateGameEventsTelemetryService then
-		p3.isSdui = if p3.isSdui == true then "true" elseif p3.isSdui == false then "false" else nil
-		p3.isAd = if p3.isAd == true then "true" elseif p3.isAd == false then "false" else nil
-		telemetryService:LogEvent(var1, {
-			eventContext = p2,
+	if FFlagLuaAppMigrateGameEventsTelemetryService then
+		Tbl.isSdui = if Tbl.isSdui == true then "true" elseif Tbl.isSdui == false then "false" else nil
+		Tbl.isAd = if Tbl.isAd == true then "true" elseif Tbl.isAd == false then "false" else nil
+		TelemetryService:LogEvent(Config, {
+			eventContext = EventContext,
 			standardizedFields = { "addSessionInfo", "addSessionId", "addOSInfo" },
-			customFields = p3,
-			legacyOverrideTargetForEventIngest = getPlatformTarget()
+			customFields = Tbl,
+			legacyOverrideTargetForEventIngest = GetPlatformTargetFunction()
 		})
 	else
-		p1:sendEventDeferred(p2, "gameDetailReferral", p3)
+		p1:sendEventDeferred(EventContext, "gameDetailReferral", Tbl)
 	end
-	if fFlagLuaAppGameEventsTelemetryServiceShadowTraffic then
-		local cloned = table.clone(p3)
-		cloned.isSdui = if cloned.isSdui == true then "true" elseif cloned.isSdui == false then "false" else cloned.isSdui
-		cloned.isAd = if cloned.isAd == true then "true" elseif cloned.isAd == false then "false" else cloned.isAd
-		telemetryService:LogEvent(var2, {
-			eventContext = p2,
+	if FFlagLuaAppGameEventsTelemetryServiceShadowTraffic then
+		local Copy = table.clone(Tbl)
+		Copy.isSdui = if Copy.isSdui == true then "true" elseif Copy.isSdui == false then "false" else Copy.isSdui
+		Copy.isAd = if Copy.isAd == true then "true" elseif Copy.isAd == false then "false" else Copy.isAd
+		TelemetryService:LogEvent(Config1, {
+			eventContext = EventContext,
 			standardizedFields = { "addSessionInfo", "addSessionId", "addOSInfo" },
-			customFields = cloned,
-			legacyOverrideTargetForEventIngest = getPlatformTarget()
+			customFields = Copy,
+			legacyOverrideTargetForEventIngest = GetPlatformTargetFunction()
 		})
 	end
 end

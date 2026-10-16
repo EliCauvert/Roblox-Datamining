@@ -1,52 +1,52 @@
-﻿local var1 = nil
-local var2 = false
+﻿local v1 = nil
+local Flag = false
 
-local _ = function()
-	-- upvalues: var2 (write), var1 (write)
-	if not var2 then
-		local ok, status = pcall(function()
+local function _() --[[ Line: 3 ]]
+	-- upvalues: Flag (ref), v1 (ref)
+	if not Flag then
+		local Success, Result = pcall(function() --[[ Line: 5 ]]
 			return game:GetService("AudioFocusService")
 		end)
 		
-		if ok and status then
-			var1 = status
+		if Success and Result then
+			v1 = Result
 		end
-		var2 = true
+		Flag = true
 	end
-	return var1
+	return v1
 end
 
-return function(p1)
-	-- upvalues: var2 (write), var1 (write)
-	if not var2 then
-		local ok, status = pcall(function()
+return function(Callback: (any) -> ()) --[[ Line: 16 ]]
+	-- upvalues: Flag (ref), v1 (ref)
+	if not Flag then
+		local Success, Result = pcall(function() --[[ Line: 5 ]]
 			return game:GetService("AudioFocusService")
 		end)
 		
-		if ok and status then
-			var1 = status
+		if Success and Result then
+			v1 = Result
 		end
-		var2 = true
+		Flag = true
 	end
-	local var3 = var1
+	local AudioFocusService = v1
 	
-	if var3 then
-		local focusedContextId = var3:GetFocusedContextId()
-		p1(focusedContextId)
+	if AudioFocusService then
+		local FocusedContextId = AudioFocusService:GetFocusedContextId()
+		Callback(FocusedContextId)
 		
-		local var4 = function()
-			-- upvalues: var3 (ref), focusedContextId (write), p1 (ref)
-			local focusedContextId_1 = var3:GetFocusedContextId()
+		local function Callback1() --[[ Line: 21 ]]
+			-- upvalues: AudioFocusService (copy), FocusedContextId (ref), Callback (copy)
+			local FocusedContextId1 = AudioFocusService:GetFocusedContextId()
 			
-			if focusedContextId ~= focusedContextId_1 then
-				focusedContextId = focusedContextId_1
-				p1(focusedContextId)
+			if FocusedContextId ~= FocusedContextId1 then
+				FocusedContextId = FocusedContextId1
+				Callback(FocusedContextId)
 			end
 		end
 		
-		var3.OnContextRegistered:Connect(var4)
-		var3.OnContextUnregistered:Connect(var4)
-		var3.OnDeafenVoiceAudio:Connect(var4)
-		var3.OnUndeafenVoiceAudio:Connect(var4)
+		AudioFocusService.OnContextRegistered:Connect(Callback1)
+		AudioFocusService.OnContextUnregistered:Connect(Callback1)
+		AudioFocusService.OnDeafenVoiceAudio:Connect(Callback1)
+		AudioFocusService.OnUndeafenVoiceAudio:Connect(Callback1)
 	end
 end

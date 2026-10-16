@@ -1,55 +1,53 @@
-﻿local chrome = script:FindFirstAncestor("Chrome")
-local corePackagesService = game:GetService("CorePackages")
-local reactModule = require(corePackagesService.Packages.React)
-local serviceModule = require(chrome.Service)
-local commonIconModule = require(chrome.Integrations.CommonIcon)
-local constantsModule = require(chrome.ChromeShared.Unibar.Constants)
-local windowSizeSignalModule = require(chrome.ChromeShared.Service.WindowSizeSignal)
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local images = UIBloxModule.App.ImageSet.Images
-local iconButton = UIBloxModule.App.Button.IconButton
-local getFFlagDebugEnableUnibarDummyIntegrations = require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagDebugEnableUnibarDummyIntegrations
-local cycleUp = images["icons/navigation/cycleUp"]
-local var1 = false
-local var2 = windowSizeSignalModule.new(constantsModule.DEFAULT_WIDTH, constantsModule.DEFAULT_HEIGHT)
+﻿local Chrome = script:FindFirstAncestor("Chrome")
+local CorePackages = game:GetService("CorePackages")
+local ReactModule = require(CorePackages.Packages.React)
+local ServiceModule = require(Chrome.Service)
+local CommonIconModule = require(Chrome.Integrations.CommonIcon)
+local ConstantsModule = require(Chrome.ChromeShared.Unibar.Constants)
+local UIBloxModule = require(CorePackages.Packages.UIBlox)
+local IconButton = UIBloxModule.App.Button.IconButton
+local IconsNavigationCycleUp = UIBloxModule.App.ImageSet.Images["icons/navigation/cycleUp"]
+local Flag = false
+local NewResult = require(Chrome.ChromeShared.Service.WindowSizeSignal).new(ConstantsModule.DEFAULT_WIDTH, ConstantsModule.DEFAULT_HEIGHT)
 
-return serviceModule:register({
+return (ServiceModule:register({
 	id = "dummy_window",
 	label = "CoreScripts.TopBar.Menu",
 	draggable = true,
 	cachePosition = true,
 	persistWindowState = true,
-	initialAvailability = if getFFlagDebugEnableUnibarDummyIntegrations() then serviceModule.AvailabilitySignal.Available else serviceModule.AvailabilitySignal.Unavailable,
+	initialAvailability = if require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagDebugEnableUnibarDummyIntegrations() then ServiceModule.AvailabilitySignal.Available else ServiceModule.AvailabilitySignal.Unavailable,
 	startingWindowPosition = UDim2.new(1, -95, 0, 165),
-	windowSize = var2,
+	windowSize = NewResult,
 	components = {
-		Icon = function(_)
-			-- upvalues: commonIconModule (ref)
-			return commonIconModule("icons/menu/avatar_on")
+		Icon = function(_) --[[ Line: 35 ]]
+			-- upvalues: CommonIconModule (copy)
+			return CommonIconModule("icons/menu/avatar_on")
 		end,
-		Window = function(_)
-			-- upvalues: reactModule (ref), constantsModule (ref), iconButton (ref), cycleUp (ref), var1 (write), var2 (ref)
-			return reactModule.createElement("Frame", { BackgroundTransparency = 0, Size = UDim2.new(1, 0, 1, 0) }, {
-				Corner = reactModule.createElement("UICorner", { CornerRadius = constantsModule.CORNER_RADIUS }),
-				SizeIcon = reactModule.createElement(iconButton, {
+		Window = function(_) --[[ Line: 38 ]]
+			-- upvalues: ReactModule (copy), ConstantsModule (copy), IconButton (copy), IconsNavigationCycleUp (copy), Flag (ref), NewResult (copy)
+			return ReactModule.createElement("Frame", { BackgroundTransparency = 0, Size = UDim2.new(1, 0, 1, 0) }, {
+				Corner = ReactModule.createElement("UICorner", { CornerRadius = ConstantsModule.CORNER_RADIUS }),
+				SizeIcon = ReactModule.createElement(IconButton, {
 					backgroundTransparency = 0.5,
-					icon = cycleUp,
-					iconSize = constantsModule.CLOSE_ICON_SIZE,
+					icon = IconsNavigationCycleUp,
+					iconSize = ConstantsModule.CLOSE_ICON_SIZE,
 					anchorPoint = Vector2.new(0.5, 1),
 					position = UDim2.new(0.5, 0, 1, 0),
-					onActivated = function()
-						-- upvalues: var1 (copy), var2 (copy), constantsModule (copy)
-						if var1 then
-							var2:requestSize(constantsModule.DEFAULT_WIDTH, constantsModule.DEFAULT_HEIGHT)
-							var1 = false
+					onActivated = function() --[[ Line: 52 ]]
+						-- upvalues: Flag (upval), NewResult (upval), ConstantsModule (upval)
+						if Flag then
+							NewResult:requestSize(ConstantsModule.DEFAULT_WIDTH, ConstantsModule.DEFAULT_HEIGHT)
+							Flag = false
 							
 							return
+						else
+							NewResult:requestSize(ConstantsModule.DEFAULT_WIDTH_LARGE, ConstantsModule.DEFAULT_HEIGHT_LARGE)
+							Flag = true
 						end
-						var2:requestSize(constantsModule.DEFAULT_WIDTH_LARGE, constantsModule.DEFAULT_HEIGHT_LARGE)
-						var1 = true
 					end
 				})
 			})
 		end
 	}
-})
+}))

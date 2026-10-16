@@ -1,32 +1,33 @@
-﻿local parent = script.Parent.Parent.Parent
-local _ = require(parent.util.Types)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
+﻿local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.util.Types)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
 
 return {
 	categories = {
-		require(parent.validationSystem.ValidationEnums).UploadCategory.FULL_BODY
+		require(Parent.validationSystem.ValidationEnums).UploadCategory.FULL_BODY
 	},
-	fflag = require(parent.flags.getFFlagUGCValidateAQRiggingQuality),
-	run = function(p1, p2)
-		-- upvalues: errorSourceStringsModule (ref)
-		local measureJointNumber = p2.aqsSummaryData.Measure_Joint_Number
+	fflag = require(Parent.flags.getFFlagUGCValidateAQRiggingQuality),
+	run = function(p1, p2) --[[ Line: 11 ]]
+		-- upvalues: ErrorSourceStringsModule (copy)
+		local MeasureJointNumber = p2.aqsSummaryData.Measure_Joint_Number
 		
-		if measureJointNumber == nil then
-			p1:warn(errorSourceStringsModule.Keys.AQSWarn_MissingData, { measureName = "Measure_Joint_Number" })
+		if MeasureJointNumber == nil then
+			p1:warn(ErrorSourceStringsModule.Keys.AQSWarn_MissingData, { measureName = "Measure_Joint_Number" })
 			
 			return
 		end
-		local fullBodyMesh = measureJointNumber.full_body_mesh
+		local FullBodyMesh = MeasureJointNumber.full_body_mesh
 		
-		if fullBodyMesh == nil or fullBodyMesh.score == nil then
-			p1:warn(errorSourceStringsModule.Keys.AQSWarn_MissingData, { measureName = "Measure_Joint_Number" })
+		if FullBodyMesh == nil or FullBodyMesh.score == nil then
+			p1:warn(ErrorSourceStringsModule.Keys.AQSWarn_MissingData, { measureName = "Measure_Joint_Number" })
 			
 			return
-		elseif tonumber(fullBodyMesh.score) ~= 100 then
-			p1:warn(errorSourceStringsModule.Keys.AQSWarn_JointNumber, {
-				joint_number = fullBodyMesh.joint_number or "unknown",
-				left_hand_joint_number = fullBodyMesh.left_hand_joint_number or "unknown",
-				right_hand_joint_number = fullBodyMesh.right_hand_joint_number or "unknown"
+		end
+		if tonumber(FullBodyMesh.score) ~= 100 then
+			p1:warn(ErrorSourceStringsModule.Keys.AQSWarn_JointNumber, {
+				joint_number = FullBodyMesh.joint_number or "unknown",
+				left_hand_joint_number = FullBodyMesh.left_hand_joint_number or "unknown",
+				right_hand_joint_number = FullBodyMesh.right_hand_joint_number or "unknown"
 			})
 		end
 	end

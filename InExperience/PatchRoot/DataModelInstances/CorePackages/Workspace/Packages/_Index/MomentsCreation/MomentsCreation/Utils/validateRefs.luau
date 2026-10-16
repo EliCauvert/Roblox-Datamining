@@ -1,6 +1,6 @@
-﻿return function(p1)
-	for i, v in p1 do
-		if v.current == nil then
+﻿return function(List): boolean --[[ Line: 7 | Named "validateRefs" ]]
+	for _, value in List do
+		if value.current == nil then
 			return false
 		end
 	end

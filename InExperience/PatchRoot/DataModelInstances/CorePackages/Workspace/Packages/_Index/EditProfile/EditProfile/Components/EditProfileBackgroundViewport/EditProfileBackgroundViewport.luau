@@ -1,86 +1,89 @@
-﻿local parent = script:FindFirstAncestor("EditProfile").Parent
-local reactModule = require(parent.React)
-local view = require(parent.Foundation).View
-local roactUtilsModule = require(parent.RoactUtils)
-local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
-local useSelectedTheme = roactUtilsModule.Hooks.useSelectedTheme
-local useLocalUserId = require(parent.RobloxAppHooks).useLocalUserId
-local getDisplayBackgroundId = require(parent.EditProfileBackground).BackgroundUtils.getDisplayBackgroundId
-local color = Color3.fromRGB(185, 185, 185)
-local color_1 = Color3.fromRGB(200, 200, 200)
-local insertService = game:GetService("InsertService")
+﻿local Parent = script:FindFirstAncestor("EditProfile").Parent
+local ReactModule = require(Parent.React)
+local View = require(Parent.Foundation).View
+local RoactUtilsModule = require(Parent.RoactUtils)
+local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
+local UseSelectedThemeFunction = RoactUtilsModule.Hooks.useSelectedTheme
+local UseLocalUserIdFunction = require(Parent.RobloxAppHooks).useLocalUserId
+local GetDisplayBackgroundIdFunction = require(Parent.EditProfileBackground).BackgroundUtils.getDisplayBackgroundId
+local _Color3 = Color3.fromRGB(185, 185, 185)
+local _Color3_1 = Color3.fromRGB(200, 200, 200)
+local InsertService = game:GetService("InsertService")
 
-return function(value)
-	-- upvalues: reactModule (ref), useSelectedTheme (ref), useLocalUserId (ref), useSelector (ref), insertService (ref), getDisplayBackgroundId (ref), color (ref), color_1 (ref), view (ref)
-	local var1 = reactModule.useRef(nil)
-	local var2 = reactModule.useRef(nil)
-	local var3 = reactModule.useRef(nil)
-	local var4 = useSelectedTheme()
-	local var5 = useLocalUserId()
-	local var6 = useSelector(function(p1)
-		-- upvalues: var5 (ref)
-		if p1.ProfilePlatform and p1.ProfilePlatform.Profiles and var5 then
-			local var7 = p1.ProfilePlatform.Profiles.User[tostring(var5)]
+return function(p1) --[[ Line: 37 | Named "EditProfileBackgroundViewport" ]]
+	-- upvalues: ReactModule (copy), UseSelectedThemeFunction (copy), UseLocalUserIdFunction (copy), UseSelectorFunction (copy), InsertService (copy), GetDisplayBackgroundIdFunction (copy), _Color3 (copy), _Color3_1 (copy), View (copy)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseRefResult2 = ReactModule.useRef(nil)
+	local UseSelectedThemeResult = UseSelectedThemeFunction()
+	local UseLocalUserIdResult = UseLocalUserIdFunction()
+	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 44 ]]
+		-- upvalues: UseLocalUserIdResult (copy)
+		if p2.ProfilePlatform and p2.ProfilePlatform.Profiles and UseLocalUserIdResult then
+			local UserEntry = p2.ProfilePlatform.Profiles.User[tostring(UseLocalUserIdResult)]
 			
-			return if var7 and var7.components and var7.components.ProfileBackground then var7.components.ProfileBackground.assetId else -1
+			if UserEntry and UserEntry.components and UserEntry.components.ProfileBackground then
+				return UserEntry.components.ProfileBackground.assetId
+			end
 		end
+		return -1
 	end)
-	reactModule.useEffect(function()
-		-- upvalues: var6 (ref), insertService (copy), getDisplayBackgroundId (copy), var4 (ref), var2 (ref), var1 (ref), color (copy), color_1 (copy)
-		task.defer(function()
-			-- upvalues: var6 (copy), insertService (copy), getDisplayBackgroundId (copy), var4 (copy), var2 (copy), var1 (copy), color (copy), color_1 (copy)
-			if not var6 then return end
-			local ok, status = pcall(function()
-				-- upvalues: insertService (copy), getDisplayBackgroundId (copy), var6 (copy), var4 (copy)
-				return insertService:LoadAsset(getDisplayBackgroundId(var6, var4))
+	ReactModule.useEffect(function() --[[ Line: 54 ]]
+		-- upvalues: UseSelectorResult (copy), InsertService (upval), GetDisplayBackgroundIdFunction (upval), UseSelectedThemeResult (copy), UseRefResult1 (copy), UseRefResult (copy), _Color3 (upval), _Color3_1 (upval)
+		task.defer(function() --[[ Line: 56 ]]
+			-- upvalues: UseSelectorResult (upval), InsertService (upval), GetDisplayBackgroundIdFunction (upval), UseSelectedThemeResult (upval), UseRefResult1 (upval), UseRefResult (upval), _Color3 (upval), _Color3_1 (upval)
+			if not UseSelectorResult then return end
+			local Success, Result = pcall(function() --[[ Line: 61 ]]
+				-- upvalues: InsertService (upval), GetDisplayBackgroundIdFunction (upval), UseSelectorResult (upval), UseSelectedThemeResult (upval)
+				return InsertService:LoadAsset(GetDisplayBackgroundIdFunction(UseSelectorResult, UseSelectedThemeResult))
 			end)
 			
-			if ok and status then
-				if var2.current then
-					for i, v in pairs(var2.current:GetChildren()) do
-						v:Destroy()
+			if Success and Result then
+				if UseRefResult1.current then
+					for _, child in pairs(UseRefResult1.current:GetChildren()) do
+						child:Destroy()
 					end
 				end
-				local backgroundModel = Instance.new("Model")
-				backgroundModel.Name = "BackgroundModel"
-				backgroundModel.Parent = var2.current
+				local BackgroundModel = Instance.new("Model")
+				BackgroundModel.Name = "BackgroundModel"
+				BackgroundModel.Parent = UseRefResult1.current
 				
-				for i, v in pairs(status:GetChildren()) do
-					v.Parent = backgroundModel
+				for _, child1 in pairs(Result:GetChildren()) do
+					child1.Parent = BackgroundModel
 				end
-				backgroundModel:PivotTo(CFrame.new(0, 7, -4.5))
-				status:Destroy()
-				local current = var1.current
+				BackgroundModel:PivotTo(CFrame.new(0, 7, -4.5))
+				Result:Destroy()
+				local Current = UseRefResult.current
 				
-				if current then
-					current.Ambient = color
-					current.LightColor = color_1
-					current.LightDirection = Vector3.new(0, 0.20000000298, 0.20000000298)
+				if Current then
+					Current.Ambient = _Color3
+					Current.LightColor = _Color3_1
+					Current.LightDirection = vector.create(0, 0.20000000298023224, 0.20000000298023224)
 				end
 			end
 		end)
-	end, { var6, var4 })
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), var3 (ref)
-		if var1.current and var3.current then
-			var1.current.CurrentCamera = var3.current
+	end, { UseSelectorResult, UseSelectedThemeResult })
+	ReactModule.useEffect(function() --[[ Line: 94 ]]
+		-- upvalues: UseRefResult (copy), UseRefResult2 (copy)
+		if UseRefResult.current and UseRefResult2.current then
+			UseRefResult.current.CurrentCamera = UseRefResult2.current
 		end
 	end)
 	
-	return reactModule.createElement(view, { Size = UDim2.new(1, 0, 0, value.height) }, {
-		Background = reactModule.createElement("ViewportFrame", {
+	return ReactModule.createElement(View, { Size = UDim2.new(1, 0, 0, p1.height) }, {
+		Background = ReactModule.createElement("ViewportFrame", {
 			ZIndex = 1,
 			BackgroundTransparency = 1,
 			Size = UDim2.fromScale(1, 1),
-			ref = var1,
-			Ambient = color,
-			LightColor = color_1
+			ref = UseRefResult,
+			Ambient = _Color3,
+			LightColor = _Color3_1
 		}, {
-			WorldModel = reactModule.createElement("WorldModel", { ref = var2 }),
-			Camera = reactModule.createElement("Camera", {
+			WorldModel = ReactModule.createElement("WorldModel", { ref = UseRefResult1 }),
+			Camera = ReactModule.createElement("Camera", {
 				CameraType = Enum.CameraType.Scriptable,
-				CFrame = CFrame.lookAt(Vector3.new(0, 7, 4), Vector3.new(0, 7, 10)),
-				ref = var3
+				CFrame = CFrame.lookAt(vector.create(0, 7, 4), vector.create(0, 7, 10)),
+				ref = UseRefResult2
 			})
 		})
 	})

@@ -1,96 +1,95 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local _ = require(appChat.types)
-local parent = appChat.Parent
-local _ = require(parent.SocialLuaAnalytics)
-local _ = require(parent.AppChatNetworking)
-local telemetryModule = require(appChat.Telemetry.Telemetry)
-local defaultTelemetryEventsModule = require(appChat.Telemetry.DefaultTelemetryEvents)
-local namedCounterConfigurationAndFormat = defaultTelemetryEventsModule.namedCounterConfigurationAndFormat
-local eventIngestWithFormatFunction = defaultTelemetryEventsModule.eventIngestWithFormatFunction
-local cryoModule = require(parent.Cryo)
-local t = {}
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local _ = require(AppChat.types)
+local Parent = AppChat.Parent
+local _ = require(Parent.SocialLuaAnalytics)
+local _ = require(Parent.AppChatNetworking)
+local TelemetryModule = require(AppChat.Telemetry.Telemetry)
+local DefaultTelemetryEventsModule = require(AppChat.Telemetry.DefaultTelemetryEvents)
+local NamedCounterConfigurationAndFormatFunction = DefaultTelemetryEventsModule.namedCounterConfigurationAndFormat
+local EventIngestWithFormatFunctionFunction = DefaultTelemetryEventsModule.eventIngestWithFormatFunction
+local CryoModule = require(Parent.Cryo)
 
-local function eventIngestWithModalFormatFunction(p1, p2)
-	-- upvalues: cryoModule (ref), eventIngestWithFormatFunction (ref)
-	return eventIngestWithFormatFunction(function(p3, p4)
-		-- upvalues: p1 (ref), cryoModule (copy), p2 (ref)
-		return cryoModule.Dictionary.join({ modalSequence = p2 }, p1(p3, p4))
+local function eventIngestWithModalFormatFunction(Callback, ModalSequence) --[[ Line: 37 ]]
+	-- upvalues: CryoModule (copy), EventIngestWithFormatFunctionFunction (copy)
+	return EventIngestWithFormatFunctionFunction(function(p1, p2) --[[ Line: 38 ]]
+		-- upvalues: Callback (copy), CryoModule (upval), ModalSequence (copy)
+		return CryoModule.Dictionary.join({ modalSequence = ModalSequence }, (Callback(p1, p2)))
 	end)
 end
 
-t.Events = {
-	modalRenderedWithSequence = function(p1)
-		-- upvalues: namedCounterConfigurationAndFormat (ref), eventIngestWithModalFormatFunction (ref), telemetryModule (ref)
-		local t = {}
-		local counterFormat = p1.counterFormat
-		local eventStreamFormat = p1.eventStreamFormat
-		
-		if counterFormat then
-			table.insert(t, namedCounterConfigurationAndFormat(`AppChat.Modal.{p1.modalSequence}.Rendered`, counterFormat))
+return {
+	Events = {
+		modalRenderedWithSequence = function(p1) --[[ Line: 48 ]]
+			-- upvalues: NamedCounterConfigurationAndFormatFunction (copy), eventIngestWithModalFormatFunction (copy), TelemetryModule (copy)
+			local List = {}
+			local CounterFormat = p1.counterFormat
+			local EventStreamFormat = p1.eventStreamFormat
+			
+			if CounterFormat then
+				table.insert(List, NamedCounterConfigurationAndFormatFunction(`AppChat.Modal.{p1.modalSequence}.Rendered`, CounterFormat))
+			end
+			if EventStreamFormat then
+				table.insert(List, eventIngestWithModalFormatFunction(EventStreamFormat, p1.modalSequence))
+			end
+			return (TelemetryModule.new({
+				name = "appChatModalRendered",
+				description = "",
+				lastUpdated = { 2025, 9, 8 },
+				backendsList = List
+			}))
+		end,
+		modalActionWithSequence = function(p1) --[[ Line: 79 ]]
+			-- upvalues: NamedCounterConfigurationAndFormatFunction (copy), eventIngestWithModalFormatFunction (copy), TelemetryModule (copy)
+			local List = {}
+			local CounterFormat = p1.counterFormat
+			local EventStreamFormat = p1.eventStreamFormat
+			
+			if CounterFormat then
+				table.insert(List, NamedCounterConfigurationAndFormatFunction(`AppChat.Modal.{p1.modalSequence}.Action`, CounterFormat))
+			end
+			if EventStreamFormat then
+				table.insert(List, eventIngestWithModalFormatFunction(EventStreamFormat, p1.modalSequence))
+			end
+			return (TelemetryModule.new({
+				name = "appChatModalAction",
+				description = "",
+				lastUpdated = { 2025, 9, 8 },
+				backendsList = List
+			}))
+		end,
+		modalActionResultWithSequence = function(p1) --[[ Line: 113 ]]
+			-- upvalues: NamedCounterConfigurationAndFormatFunction (copy), eventIngestWithModalFormatFunction (copy), TelemetryModule (copy)
+			local List = {}
+			local CounterFormat = p1.counterFormat
+			local EventStreamFormat = p1.eventStreamFormat
+			
+			if CounterFormat then
+				table.insert(List, NamedCounterConfigurationAndFormatFunction(`AppChat.Modal.{p1.modalSequence}.ActionResult`, CounterFormat))
+			end
+			if EventStreamFormat then
+				table.insert(List, eventIngestWithModalFormatFunction(EventStreamFormat, p1.modalSequence))
+			end
+			return (TelemetryModule.new({
+				name = "appChatModalActionResult",
+				description = "",
+				lastUpdated = { 2025, 9, 8 },
+				backendsList = List
+			}))
 		end
-		if eventStreamFormat then
-			table.insert(t, eventIngestWithModalFormatFunction(eventStreamFormat, p1.modalSequence))
-		end
-		return telemetryModule.new({
-			name = "appChatModalRendered",
-			description = "",
-			lastUpdated = { 2025, 9, 8 },
-			backendsList = t
-		})
-	end,
-	modalActionWithSequence = function(p1)
-		-- upvalues: namedCounterConfigurationAndFormat (ref), eventIngestWithModalFormatFunction (ref), telemetryModule (ref)
-		local t = {}
-		local counterFormat = p1.counterFormat
-		local eventStreamFormat = p1.eventStreamFormat
-		
-		if counterFormat then
-			table.insert(t, namedCounterConfigurationAndFormat(`AppChat.Modal.{p1.modalSequence}.Action`, counterFormat))
-		end
-		if eventStreamFormat then
-			table.insert(t, eventIngestWithModalFormatFunction(eventStreamFormat, p1.modalSequence))
-		end
-		return telemetryModule.new({
-			name = "appChatModalAction",
-			description = "",
-			lastUpdated = { 2025, 9, 8 },
-			backendsList = t
-		})
-	end,
-	modalActionResultWithSequence = function(p1)
-		-- upvalues: namedCounterConfigurationAndFormat (ref), eventIngestWithModalFormatFunction (ref), telemetryModule (ref)
-		local t = {}
-		local counterFormat = p1.counterFormat
-		local eventStreamFormat = p1.eventStreamFormat
-		
-		if counterFormat then
-			table.insert(t, namedCounterConfigurationAndFormat(`AppChat.Modal.{p1.modalSequence}.ActionResult`, counterFormat))
-		end
-		if eventStreamFormat then
-			table.insert(t, eventIngestWithModalFormatFunction(eventStreamFormat, p1.modalSequence))
-		end
-		return telemetryModule.new({
-			name = "appChatModalActionResult",
-			description = "",
-			lastUpdated = { 2025, 9, 8 },
-			backendsList = t
-		})
-	end
-}
-t.Enums = {
-	ModalActions = {
-		PrimaryCta = "primaryCta",
-		SecondaryCta = "secondaryCta",
-		Dismiss = "dismiss",
-		InlineCta = "inlineCta"
 	},
-	ModalActionResults = { Success = "success", Failure = "failure" },
-	ModalSequence = {
-		ChatLandingModal = "ChatLandingModal",
-		ConversationOverlay = "ConversationOverlay",
-		ConversationTopModal = "ConversationTopModal",
-		ConversationListOverlay = "ConversationListOverlay"
+	Enums = {
+		ModalActions = {
+			PrimaryCta = "primaryCta",
+			SecondaryCta = "secondaryCta",
+			Dismiss = "dismiss",
+			InlineCta = "inlineCta"
+		},
+		ModalActionResults = { Success = "success", Failure = "failure" },
+		ModalSequence = {
+			ChatLandingModal = "ChatLandingModal",
+			ConversationOverlay = "ConversationOverlay",
+			ConversationTopModal = "ConversationTopModal",
+			ConversationListOverlay = "ConversationListOverlay"
+		}
 	}
 }
-
-return t

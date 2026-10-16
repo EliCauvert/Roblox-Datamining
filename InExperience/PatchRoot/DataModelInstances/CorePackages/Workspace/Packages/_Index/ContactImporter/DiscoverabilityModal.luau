@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.DiscoverabilityModal.DiscoverabilityModal)
+﻿return (require(script.Parent.Parent.Parent._Index.DiscoverabilityModal.DiscoverabilityModal))

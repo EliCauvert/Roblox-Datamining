@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.DeviceOrientationRodux.DeviceOrientationRodux)
+﻿return (require(script.Parent._Workspace.DeviceOrientationRodux.DeviceOrientationRodux))

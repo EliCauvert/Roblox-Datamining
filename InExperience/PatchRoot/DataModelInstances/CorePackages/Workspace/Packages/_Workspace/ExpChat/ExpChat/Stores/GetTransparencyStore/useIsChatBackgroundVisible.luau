@@ -1,41 +1,42 @@
-﻿local expChat = script:FindFirstAncestor("ExpChat")
-local parent = expChat.Parent
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local configModule = require(expChat.Config)
-local parentModule = require(script.Parent)
+﻿local ExpChat = script:FindFirstAncestor("ExpChat")
+local Parent = ExpChat.Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local ConfigModule = require(ExpChat.Config)
+local ParentModule = require(script.Parent)
 
-return function()
-	-- upvalues: parentModule (ref), signalsReactModule (ref), reactModule (ref), configModule (ref)
-	local var1 = parentModule(false)
-	local var2 = signalsReactModule.useSignalState(var1.getIsFocused or var1.getIsTextBoxFocused)
-	local var3 = signalsReactModule.useSignalState(var1.getLastActivity)
-	local var4, var5 = reactModule.useState(true)
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), var5 (ref), configModule (copy), var3 (ref)
-		if var2 then
-			var5(true)
+return function() --[[ Line: 12 | Named "useIsChatBackgroundVisible" ]]
+	-- upvalues: ParentModule (copy), SignalsReactModule (copy), ReactModule (copy), ConfigModule (copy)
+	local ParentModuleResult = ParentModule(false)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(ParentModuleResult.getIsFocused or ParentModuleResult.getIsTextBoxFocused)
+	local UseSignalStateResult1 = SignalsReactModule.useSignalState(ParentModuleResult.getLastActivity)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(true)
+	ReactModule.useEffect(function() --[[ Line: 20 ]]
+		-- upvalues: UseSignalStateResult (copy), UseStateResult2 (copy), ConfigModule (upval), UseSignalStateResult1 (copy)
+		if UseSignalStateResult then
+			UseStateResult2(true)
 			
 			return nil
 		end
-		local var6 = configModule.ChatWindowBackgroundFadeOutTime - (os.clock() - var3)
+		local ChatWindowBackgroundFadeOutTimeDelta = ConfigModule.ChatWindowBackgroundFadeOutTime - (os.clock() - UseSignalStateResult1)
 		
-		if var6 <= 0 then
-			var5(false)
+		if ChatWindowBackgroundFadeOutTimeDelta <= 0 then
+			UseStateResult2(false)
 			
 			return nil
+		else
+			UseStateResult2(true)
+			local DelayedThread = task.delay(ChatWindowBackgroundFadeOutTimeDelta, function() --[[ Line: 32 ]]
+				-- upvalues: UseStateResult2 (upval)
+				UseStateResult2(false)
+			end)
+			
+			return function() --[[ Line: 35 ]]
+				-- upvalues: DelayedThread (copy)
+				pcall(task.cancel, DelayedThread)
+			end
 		end
-		var5(true)
-		local delayedThread = task.delay(var6, function()
-			-- upvalues: var5 (copy)
-			var5(false)
-		end)
-		
-		return function()
-			-- upvalues: delayedThread (ref)
-			pcall(task.cancel, delayedThread)
-		end
-	end, { var3, var2 })
+	end, { UseSignalStateResult1, UseSignalStateResult })
 	
-	return var4
+	return UseStateResult
 end

@@ -1,18 +1,18 @@
 ﻿local _ = require(script.Parent.Parent.Parent.ES7Types)
 
-return function(p1, p2, p3)
-	if typeof(p1) ~= "table" then
-		error(string.format("Array.some called on %s", typeof(p1)))
+return function(List, Callback, p1): boolean --[[ Line: 28 ]]
+	if typeof(List) ~= "table" then
+		error(string.format("Array.some called on %s", (typeof(List))))
 	end
-	if typeof(p2) ~= "function" then
+	if typeof(Callback) ~= "function" then
 		error("callback is not a function")
 	end
-	for i, v in p1 do
-		if p3 == nil then
-			if v ~= nil and p2(v, i, p1) then
+	for i, value in List do
+		if p1 == nil then
+			if value ~= nil and Callback(value, i, List) then
 				return true
 			end
-		elseif v ~= nil and p2(p3, v, i, p1) then
+		elseif value ~= nil and Callback(p1, value, i, List) then
 			return true
 		end
 	end

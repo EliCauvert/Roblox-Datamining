@@ -1,96 +1,94 @@
-﻿local getFFlagReportAnythingFixConvexHullCalculationModule = require(script:FindFirstAncestor("TnSAvatarIdentification").Flags.GetFFlagReportAnythingFixConvexHullCalculation)
-local coreGuiService = game:GetService("CoreGui")
+﻿local GetFFlagReportAnythingFixConvexHullCalculationModule = require(script:FindFirstAncestor("TnSAvatarIdentification").Flags.GetFFlagReportAnythingFixConvexHullCalculation)
+local CoreGui = game:GetService("CoreGui")
 
-local function getViewportInfo()
-	-- upvalues: coreGuiService (ref)
-	assert(coreGuiService, "getViewportInfo requires CoreGui to be available")
-	local fullscreenTestGuiAvatarID_1 = coreGuiService:FindFirstChild("_FullscreenTestGui_AvatarID")
+local function getViewportInfo() --[[ Line: 17 ]]
+	-- upvalues: CoreGui (copy)
+	assert(CoreGui, "getViewportInfo requires CoreGui to be available")
+	local _FullscreenTestGui_AvatarID = CoreGui:FindFirstChild("_FullscreenTestGui_AvatarID")
 	
-	if not fullscreenTestGuiAvatarID_1 then
-		fullscreenTestGuiAvatarID_1 = Instance.new("ScreenGui")
-		fullscreenTestGuiAvatarID_1.Name = "_FullscreenTestGui_AvatarID"
-		fullscreenTestGuiAvatarID_1.Parent = coreGuiService
-		fullscreenTestGuiAvatarID_1.ScreenInsets = Enum.ScreenInsets.None
+	if not _FullscreenTestGui_AvatarID then
+		_FullscreenTestGui_AvatarID = Instance.new("ScreenGui")
+		_FullscreenTestGui_AvatarID.Name = "_FullscreenTestGui_AvatarID"
+		_FullscreenTestGui_AvatarID.Parent = CoreGui
+		_FullscreenTestGui_AvatarID.ScreenInsets = Enum.ScreenInsets.None
 	end
-	local deviceTestGuiAvatarID_1 = coreGuiService:FindFirstChild("_DeviceTestGui_AvatarID")
+	local _DeviceTestGui_AvatarID = CoreGui:FindFirstChild("_DeviceTestGui_AvatarID")
 	
-	if not deviceTestGuiAvatarID_1 then
-		deviceTestGuiAvatarID_1 = Instance.new("ScreenGui")
-		deviceTestGuiAvatarID_1.Name = "_DeviceTestGui_AvatarID"
-		deviceTestGuiAvatarID_1.Parent = coreGuiService
-		deviceTestGuiAvatarID_1.ScreenInsets = Enum.ScreenInsets.DeviceSafeInsets
+	if not _DeviceTestGui_AvatarID then
+		_DeviceTestGui_AvatarID = Instance.new("ScreenGui")
+		_DeviceTestGui_AvatarID.Name = "_DeviceTestGui_AvatarID"
+		_DeviceTestGui_AvatarID.Parent = CoreGui
+		_DeviceTestGui_AvatarID.ScreenInsets = Enum.ScreenInsets.DeviceSafeInsets
 	end
-	local var1 = deviceTestGuiAvatarID_1.AbsolutePosition - fullscreenTestGuiAvatarID_1.AbsolutePosition
-	local var2 = fullscreenTestGuiAvatarID_1.AbsolutePosition + fullscreenTestGuiAvatarID_1.AbsoluteSize - (deviceTestGuiAvatarID_1.AbsolutePosition + deviceTestGuiAvatarID_1.AbsoluteSize)
+	local AbsolutePositionDelta = _DeviceTestGui_AvatarID.AbsolutePosition - _FullscreenTestGui_AvatarID.AbsolutePosition
+	local AbsolutePositionDelta1 = _FullscreenTestGui_AvatarID.AbsolutePosition + _FullscreenTestGui_AvatarID.AbsoluteSize - (_DeviceTestGui_AvatarID.AbsolutePosition + _DeviceTestGui_AvatarID.AbsoluteSize)
 	
 	return {
-		width = fullscreenTestGuiAvatarID_1.AbsoluteSize.X,
-		height = fullscreenTestGuiAvatarID_1.AbsoluteSize.Y,
+		width = _FullscreenTestGui_AvatarID.AbsoluteSize.X,
+		height = _FullscreenTestGui_AvatarID.AbsoluteSize.Y,
 		insets = {
-			left = var1.X,
-			top = var1.Y,
-			right = var2.X,
-			bottom = var2.Y
+			left = AbsolutePositionDelta.X,
+			top = AbsolutePositionDelta.Y,
+			right = AbsolutePositionDelta1.X,
+			bottom = AbsolutePositionDelta1.Y
 		}
 	}
 end
 
-local vector2 = Vector2.new(0, 0)
-local vector2_1 = Vector2.new(1e999, 1e999)
+local _Vector2 = Vector2.new(0, 0)
+local _Vector2_1 = Vector2.new(1e999, 1e999)
 
-local _ = function(p1)
-	return if p1.Y >= 0 then if p1.Y <= 1 then if p1.X >= 0 then p1.X > 1 else true else true else true
+local function _(Vector): boolean --[[ Line: 52 ]]
+	return Vector.Y < 0 or (Vector.Y > 1 or (Vector.X < 0 or Vector.X > 1))
 end
 
-function worldToFullViewportPointNormalized(p1, p2, p3)
-	local var1, _ = p2:WorldToViewportPoint(p1)
-	local vector2 = Vector2.new((var1.X + p3.insets.left) / p3.width, (var1.Y + p3.insets.top) / p3.height)
+function worldToFullViewportPointNormalized(Position, Camera: Camera, ViewportInfo) --[[ Line: 56 ]]
+	local ViewportPosition, _ = Camera:WorldToViewportPoint(Position)
+	local _Vector2 = Vector2.new((ViewportPosition.X + ViewportInfo.insets.left) / ViewportInfo.width, (ViewportPosition.Y + ViewportInfo.insets.top) / ViewportInfo.height)
 	
-	return vector2, var1.Z, not (if vector2.Y >= 0 then if vector2.Y <= 1 then if vector2.X >= 0 then vector2.X > 1 else true else true else true) and var1.Z > 0
+	return _Vector2, ViewportPosition.Z, not (_Vector2.Y < 0 or (_Vector2.Y > 1 or (_Vector2.X < 0 or _Vector2.X > 1))) and ViewportPosition.Z > 0
 end
 
-function getViewportCorners(p1, p2, p3)
-	-- upvalues: vector2_1 (ref), vector2 (ref), getFFlagReportAnythingFixConvexHullCalculationModule (ref)
-	local var1 = vector2_1
-	local var2 = vector2
-	local var3 = 0
+function getViewportCorners(List, p1, p2) --[[ Line: 73 ]]
+	-- upvalues: _Vector2_1 (copy), _Vector2 (copy), GetFFlagReportAnythingFixConvexHullCalculationModule (copy)
+	local MinResult = _Vector2_1
+	local MaxResult = _Vector2
+	local Count = 0
 	
-	for i, v in ipairs(p1) do
-		local _ = nil
-		local _ = nil
-		assert(p3, "getViewportCorners requires viewportInfo")
-		local var4, var5, var6 = worldToFullViewportPointNormalized(v, p2, p3)
-		local var7 = var4
-		i = var5
-		local var8 = var6
+	for _, value in ipairs(List) do
+		assert(p2, "getViewportCorners requires viewportInfo")
+		local WorldToFullViewportPointNormalizedResult, _, WorldToFullViewportPointNormalizedResult3 = worldToFullViewportPointNormalized(value, p1, p2)
 		
-		if not var8 then
-			var7 = Vector2.new(math.clamp(var7.X, 0, 1), math.clamp(var7.Y, 0, 1))
+		if not WorldToFullViewportPointNormalizedResult3 then
+			WorldToFullViewportPointNormalizedResult = Vector2.new(math.clamp(WorldToFullViewportPointNormalizedResult.X, 0, 1), (math.clamp(WorldToFullViewportPointNormalizedResult.Y, 0, 1)))
 		end
-		if not getFFlagReportAnythingFixConvexHullCalculationModule() then
-			var3 += 1
-		elseif var8 then
-			var3 += 1
+		if GetFFlagReportAnythingFixConvexHullCalculationModule() then
+			if WorldToFullViewportPointNormalizedResult3 then
+				Count += 1
+			end
+		else
+			Count += 1
 		end
-		var1 = var1:Min(var7)
-		var2 = var2:Max(var7)
+		MinResult = MinResult:Min(WorldToFullViewportPointNormalizedResult)
+		MaxResult = MaxResult:Max(WorldToFullViewportPointNormalizedResult)
 	end
-	if var3 <= 2 then
-		return vector2_1, vector2
+	if Count <= 2 then
+		return _Vector2_1, _Vector2
+	else
+		return MinResult, MaxResult
 	end
-	return var1, var2
 end
 
-function shouldIgnoreLocalCharacter(p4)
-	local head = p4:FindFirstChild("Head")
+function shouldIgnoreLocalCharacter(Object): boolean --[[ Line: 109 ]]
+	local Head = Object:FindFirstChild("Head")
 	
-	return if head and head:IsA("BasePart") then head.LocalTransparencyModifier >= 0.95 else false
+	return if Head and Head:IsA("BasePart") then Head.LocalTransparencyModifier >= 0.95 else false
 end
 
-function getLocalCharacterPosition(p4)
-	local humanoidRootPart = p4:FindFirstChild("HumanoidRootPart")
+function getLocalCharacterPosition(Object) --[[ Line: 118 ]]
+	local HumanoidRootPart = Object:FindFirstChild("HumanoidRootPart")
 	
-	return if humanoidRootPart then humanoidRootPart.Position else nil
+	return if HumanoidRootPart then HumanoidRootPart.Position else nil
 end
 
 return {
@@ -99,5 +97,5 @@ return {
 	worldToFullViewportPointNormalized = worldToFullViewportPointNormalized,
 	shouldIgnoreLocalCharacter = shouldIgnoreLocalCharacter,
 	getLocalCharacterPosition = getLocalCharacterPosition,
-	defaultMin = vector2_1
+	defaultMin = _Vector2_1
 }

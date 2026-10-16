@@ -1,5 +1,5 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
 
-return require(profilePlatform.Parent.UserBlockingNetworking).config({
-	roduxNetworking = require(profilePlatform.Networking.myRoduxNetworking)
-})
+return (require(ProfilePlatform.Parent.UserBlockingNetworking).config({
+	roduxNetworking = require(ProfilePlatform.Networking.myRoduxNetworking)
+}))

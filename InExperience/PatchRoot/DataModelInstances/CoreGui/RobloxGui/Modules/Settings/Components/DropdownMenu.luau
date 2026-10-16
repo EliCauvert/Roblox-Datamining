@@ -1,104 +1,102 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local reactModule = require(corePackagesService.Packages.React)
-local roactModule = require(corePackagesService.Packages.Roact)
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local foundationModule = require(corePackagesService.Packages.Foundation)
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local tModule = require(corePackagesService.Packages.t)
-local argCheckModule = require(corePackagesService.Workspace.Packages.ArgCheck)
-local images = UIBloxModule.App.ImageSet.Images
-local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
-local useStyle = UIBloxModule.Core.Style.useStyle
-local baseMenu = UIBloxModule.App.Menu.BaseMenu
-local truncationExpandSmall = images["icons/actions/truncationExpand_small"]
-local var1 = argCheckModule.wrap(tModule.strictInterface({
-	buttonSize = tModule.UDim2,
-	dropdownList = tModule.table,
-	selectedIndex = tModule.number,
-	onSelection = tModule.callback,
-	layoutOrder = tModule.number
+﻿local CorePackages = game:GetService("CorePackages")
+local ReactModule = require(CorePackages.Packages.React)
+local RoactModule = require(CorePackages.Packages.Roact)
+local UIBloxModule = require(CorePackages.Packages.UIBlox)
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local TModule = require(CorePackages.Packages.t)
+local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local BaseMenu = UIBloxModule.App.Menu.BaseMenu
+local IconsActionsTruncationExpandSmall = UIBloxModule.App.ImageSet.Images["icons/actions/truncationExpand_small"]
+local WrapResult = require(CorePackages.Workspace.Packages.ArgCheck).wrap(TModule.strictInterface({
+	buttonSize = TModule.UDim2,
+	dropdownList = TModule.table,
+	selectedIndex = TModule.number,
+	onSelection = TModule.callback,
+	layoutOrder = TModule.number
 }))
 
-return function(p1)
-	-- upvalues: var1 (ref), useStyle (ref), reactModule (ref), roactModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), imageSetLabel (ref), truncationExpandSmall (ref), baseMenu (ref)
-	assert(var1(p1))
-	local var2 = useStyle()
-	local captionHeader = var2.Font.CaptionHeader
-	local var3 = captionHeader.RelativeSize * var2.Font.BaseSize
-	local var4 = if var2.UIBloxThemeEnabled then var2.color("ControlInputBackground") else Color3.fromRGB(79, 84, 95)
-	local var5, var6 = reactModule.useState(false)
-	local var7, var8 = reactModule.useState({})
-	local var9 = reactModule.useCallback(function()
-		-- upvalues: var6 (ref), var5 (ref)
-		var6(not var5)
+return function(p1) --[[ Line: 48 | Named "DropdownMenu" ]]
+	-- upvalues: WrapResult (copy), UseStyleFunction (copy), ReactModule (copy), RoactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), ImageSetLabel (copy), IconsActionsTruncationExpandSmall (copy), BaseMenu (copy)
+	assert(WrapResult(p1))
+	local UseStyleResult = UseStyleFunction()
+	local CaptionHeader = UseStyleResult.Font.CaptionHeader
+	local ScaledRelativeSize = CaptionHeader.RelativeSize * UseStyleResult.Font.BaseSize
+	local ControlInputBackground = if UseStyleResult.UIBloxThemeEnabled then UseStyleResult.color("ControlInputBackground") else Color3.fromRGB(79, 84, 95)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState({})
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 61 ]]
+		-- upvalues: UseStateResult2 (copy), UseStateResult (copy)
+		UseStateResult2(not UseStateResult)
 	end)
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), captionHeader (ref), var6 (ref), var8 (ref)
+	ReactModule.useEffect(function() --[[ Line: 65 ]]
+		-- upvalues: p1 (copy), CaptionHeader (copy), UseStateResult2 (copy), UseStateResult2_1 (copy)
 		local t = {}
 		
-		for i, v in pairs(p1.dropdownList) do
+		for i, Text in pairs(p1.dropdownList) do
 			t[i] = {
 				leftPaddingOffset = -12,
 				selectedIconPaddingRight = 12,
-				text = v,
+				text = Text,
 				fontStyle = {
-					Font = captionHeader.Font,
-					RelativeSize = captionHeader.RelativeSize
+					Font = CaptionHeader.Font,
+					RelativeSize = CaptionHeader.RelativeSize
 				},
-				onActivated = function()
-					-- upvalues: p1 (copy), i (ref), var6 (copy)
+				onActivated = function() --[[ Line: 74 ]]
+					-- upvalues: p1 (upval), i (copy), UseStateResult2 (upval)
 					p1.onSelection(i)
-					var6(false)
+					UseStateResult2(false)
 				end,
 				selected = i == p1.selectedIndex
 			}
 		end
-		var8(t)
+		UseStateResult2_1(t)
 	end, { p1.dropdownList, p1.selectedIndex })
 	
-	return roactModule.createElement("Frame", {
+	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
 		ZIndex = 3,
 		Size = p1.buttonSize,
 		LayoutOrder = p1.layoutOrder
 	}, {
-		SpawnButton = roactModule.createElement("TextButton", {
+		SpawnButton = RoactModule.createElement("TextButton", {
 			Size = UDim2.new(1, 0, 1, 0),
 			Text = p1.dropdownList[p1.selectedIndex],
 			TextColor3 = Color3.new(1, 1, 1),
-			TextSize = var3,
-			Font = if foundationFontFaceMigration then nil else captionHeader.Font,
-			FontFace = if foundationFontFaceMigration then normalizeFontFace(var2.Tokens.Typography.CaptionLarge.Font) else nil,
+			TextSize = ScaledRelativeSize,
+			Font = if FoundationFontFaceMigration then nil else CaptionHeader.Font,
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.CaptionLarge.Font) else nil,
 			TextXAlignment = Enum.TextXAlignment.Left,
-			BackgroundColor3 = var4,
+			BackgroundColor3 = ControlInputBackground,
 			BackgroundTransparency = 0,
 			LayoutOrder = p1.layoutOrder,
-			[roactModule.Event.Activated] = var9
+			[RoactModule.Event.Activated] = UseResult
 		}, {
-			UICorner = roactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 4) }),
-			UIPadding = roactModule.createElement("UIPadding", { PaddingLeft = UDim.new(0, 12) }),
-			UIStroke = roactModule.createElement("UIStroke", {
+			UICorner = RoactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 4) }),
+			UIPadding = RoactModule.createElement("UIPadding", { PaddingLeft = UDim.new(0, 12) }),
+			UIStroke = RoactModule.createElement("UIStroke", {
 				Thickness = 1,
 				Transparency = 0.8,
 				ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
 				Color = Color3.new(1, 1, 1)
 			}),
-			Arrow = roactModule.createElement(imageSetLabel, {
+			Arrow = RoactModule.createElement(ImageSetLabel, {
 				BackgroundTransparency = 1,
-				Image = truncationExpandSmall,
+				Image = IconsActionsTruncationExpandSmall,
 				Size = UDim2.new(0, 16, 0, 16),
 				Position = UDim2.new(1, -28, 0.5, -8)
 			})
 		}),
-		Dropdown = var5 and roactModule.createElement(baseMenu, {
+		Dropdown = UseStateResult and RoactModule.createElement(BaseMenu, {
 			layoutOrder = 2,
 			elementHeight = 40,
 			showDropShadow = true,
-			buttonProps = var7,
+			buttonProps = UseStateResult1,
 			position = UDim2.new(0, 0, 1, 6),
-			background = { Color = var4 }
+			background = { Color = ControlInputBackground }
 		})
 	})
 end

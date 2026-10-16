@@ -1,61 +1,59 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local _ = require(parent.Foundation)
-local reactModule = require(parent.React)
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local _ = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
 local _ = require(script.Parent.SearchBarView)
 
-return function(p1)
-	-- upvalues: reactModule (ref)
-	local clear = p1.clear
-	local onDismiss = p1.onDismiss
-	local setQuery = p1.setQuery
-	local onFocusGained = p1.onFocusGained
-	local onFocusLost = p1.onFocusLost
-	local shouldFocus = p1.shouldFocus
-	local var1 = reactModule.useRef(nil)
-	local var2 = reactModule.useRef(false)
-	reactModule.useEffect(function()
-		-- upvalues: shouldFocus (ref), var1 (ref)
-		if shouldFocus and var1.current then
-			var1.current.focus()
+return function(Frame) --[[ Line: 24 | Named "useSearchBarViewModel" ]]
+	-- upvalues: ReactModule (copy)
+	local ClearFunction = Frame.clear
+	local OnDismissFunction = Frame.onDismiss
+	local SetQueryFunction = Frame.setQuery
+	local OnFocusGainedFunction = Frame.onFocusGained
+	local OnFocusLostFunction = Frame.onFocusLost
+	local ShouldFocus = Frame.shouldFocus
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(false)
+	ReactModule.useEffect(function() --[[ Line: 37 ]]
+		-- upvalues: ShouldFocus (copy), UseRefResult (copy)
+		if ShouldFocus and UseRefResult.current then
+			UseRefResult.current.focus()
 		end
-	end, { shouldFocus })
+	end, { ShouldFocus })
 	
 	return {
-		LayoutOrder = p1.LayoutOrder,
-		onChanged = reactModule.useCallback(function(p2)
-			-- upvalues: clear (ref), var2 (ref), onDismiss (ref), setQuery (ref)
-			if p2 == "" then
-				clear()
+		LayoutOrder = Frame.LayoutOrder,
+		onChanged = ReactModule.useCallback(function(p1) --[[ Line: 57 ]]
+			-- upvalues: ClearFunction (copy), UseRefResult1 (copy), OnDismissFunction (copy), SetQueryFunction (copy)
+			if p1 == "" then
+				ClearFunction()
 				
-				if var2.current or not onDismiss then
-					return
-				else
-					onDismiss()
+				if not UseRefResult1.current and OnDismissFunction then
+					OnDismissFunction()
 					
 					return
 				end
 			else
-				setQuery(p2)
+				SetQueryFunction(p1)
 			end
-		end, { clear, onDismiss, setQuery }),
-		onFocusGained = reactModule.useCallback(function()
-			-- upvalues: var2 (ref), onFocusGained (ref)
-			var2.current = true
+		end, { ClearFunction, OnDismissFunction, SetQueryFunction }),
+		onFocusGained = ReactModule.useCallback(function() --[[ Line: 43 ]]
+			-- upvalues: UseRefResult1 (copy), OnFocusGainedFunction (copy)
+			UseRefResult1.current = true
 			
-			if onFocusGained then
-				onFocusGained()
+			if OnFocusGainedFunction then
+				OnFocusGainedFunction()
 			end
-		end, { onFocusGained }),
-		onFocusLost = reactModule.useCallback(function(p2)
-			-- upvalues: var2 (ref), onFocusLost (ref)
-			var2.current = false
+		end, { OnFocusGainedFunction }),
+		onFocusLost = ReactModule.useCallback(function(p1) --[[ Line: 50 ]]
+			-- upvalues: UseRefResult1 (copy), OnFocusLostFunction (copy)
+			UseRefResult1.current = false
 			
-			if onFocusLost then
-				onFocusLost(p2)
+			if OnFocusLostFunction then
+				OnFocusLostFunction(p1)
 			end
-		end, { onFocusLost }),
-		placeholder = p1.placeholder,
-		query = p1.query,
-		textInputRef = var1
+		end, { OnFocusLostFunction }),
+		placeholder = Frame.placeholder,
+		query = Frame.query,
+		textInputRef = UseRefResult
 	}
 end

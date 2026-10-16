@@ -1,98 +1,99 @@
-﻿local currencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
-local parent = currencyTransfers.Parent
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local localizationService = game:GetService("LocalizationService")
-local transferLocalizationKeysModule = require(currencyTransfers.Localization.TransferLocalizationKeys)
-local transferLocaleFormatModule = require(currencyTransfers.Localization.transferLocaleFormat)
-local foundationModule = require(parent.Foundation)
-local sheet = foundationModule.Sheet
-local view = foundationModule.View
-local text = foundationModule.Text
-local icon = foundationModule.Icon
-local button = foundationModule.Button
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local fillBehavior = foundationModule.Enums.FillBehavior
-local useScaledValue = foundationModule.Hooks.useScaledValue
-local useTokens = foundationModule.Hooks.useTokens
-local enums = foundationModule.Enums
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local handleTransferCompleteModule = require(currencyTransfers.Actions.Send.handleTransferComplete)
-local transferRobuxHeaderModule = require(currencyTransfers.Components.Generic.TransferRobuxHeader)
-local useTransferStoreModule = require(currencyTransfers.Hooks.useTransferStore)
-local useUpdatedRobuxBalanceModule = require(currencyTransfers.Hooks.useUpdatedRobuxBalance)
-local formatNumberModule = require(currencyTransfers.Utils.formatNumber)
-local getFFlagCurrencyTransferFocusNavigationModule = require(currencyTransfers.Flags.GetFFlagCurrencyTransferFocusNavigation)
-local useTransferSheetFocusModule = require(currencyTransfers.Hooks.useTransferSheetFocus)
+﻿local CurrencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
+local Parent = CurrencyTransfers.Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local LocalizationService = game:GetService("LocalizationService")
+local TransferLocalizationKeysModule = require(CurrencyTransfers.Localization.TransferLocalizationKeys)
+local TransferLocaleFormatModule = require(CurrencyTransfers.Localization.transferLocaleFormat)
+local FoundationModule = require(Parent.Foundation)
+local Sheet = FoundationModule.Sheet
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local Icon = FoundationModule.Icon
+local Button = FoundationModule.Button
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local FillBehavior = FoundationModule.Enums.FillBehavior
+local UseScaledValueFunction = FoundationModule.Hooks.useScaledValue
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local Enums = FoundationModule.Enums
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local HandleTransferCompleteModule = require(CurrencyTransfers.Actions.Send.handleTransferComplete)
+local TransferRobuxHeaderModule = require(CurrencyTransfers.Components.Generic.TransferRobuxHeader)
+local UseTransferStoreModule = require(CurrencyTransfers.Hooks.useTransferStore)
+local UseUpdatedRobuxBalanceModule = require(CurrencyTransfers.Hooks.useUpdatedRobuxBalance)
+local FormatNumberModule = require(CurrencyTransfers.Utils.formatNumber)
+local GetFFlagCurrencyTransferFocusNavigationModule = require(CurrencyTransfers.Flags.GetFFlagCurrencyTransferFocusNavigation)
+local UseTransferSheetFocusModule = require(CurrencyTransfers.Hooks.useTransferSheetFocus)
 
-return function(_)
-	-- upvalues: useTransferStoreModule (ref), useTokens (ref), useUpdatedRobuxBalanceModule (ref), signalsReactModule (ref), useScaledValue (ref), useLocalization (ref), transferLocalizationKeysModule (ref), formatNumberModule (ref), localizationService (ref), reactModule (ref), transferLocaleFormatModule (ref), handleTransferCompleteModule (ref), getFFlagCurrencyTransferFocusNavigationModule (ref), useTransferSheetFocusModule (ref), sheet (ref), transferRobuxHeaderModule (ref), view (ref), icon (ref), enums (ref), text (ref), button (ref), buttonVariant (ref), fillBehavior (ref)
-	local var1 = useTransferStoreModule()
-	local var2 = useTokens()
-	local var3 = useUpdatedRobuxBalanceModule(var1)
-	local var4 = signalsReactModule.useSignalState(var1.getSelectedAmount)
-	local var5 = useScaledValue(300)
-	local var6 = useLocalization(transferLocalizationKeysModule.Presets.TransferRobuxSuccessModal)
-	local var7 = if var4 then formatNumberModule(localizationService.RobloxLocaleId, var4) else "0"
-	local var8 = reactModule.useMemo(function()
-		-- upvalues: transferLocaleFormatModule (copy), var6 (ref), var7 (ref)
-		return transferLocaleFormatModule.substituteAmount(var6.SuccessNotification, tostring(var7))
-	end, { var7, var6.SuccessNotification })
+return function(_) --[[ Line: 49 | Named "TransferRobuxSuccessModal" ]]
+	-- upvalues: UseTransferStoreModule (copy), UseTokensFunction (copy), UseUpdatedRobuxBalanceModule (copy), SignalsReactModule (copy), UseScaledValueFunction (copy), UseLocalizationFunction (copy), TransferLocalizationKeysModule (copy), FormatNumberModule (copy), LocalizationService (copy), ReactModule (copy), TransferLocaleFormatModule (copy), HandleTransferCompleteModule (copy), GetFFlagCurrencyTransferFocusNavigationModule (copy), UseTransferSheetFocusModule (copy), Sheet (copy), TransferRobuxHeaderModule (copy), View (copy), Icon (copy), Enums (copy), Text (copy), Button (copy), ButtonVariant (copy), FillBehavior (copy)
+	local UseTransferStoreModuleResult = UseTransferStoreModule()
+	local UseTokensResult = UseTokensFunction()
+	local UseUpdatedRobuxBalanceModuleResult = UseUpdatedRobuxBalanceModule(UseTransferStoreModuleResult)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(UseTransferStoreModuleResult.getSelectedAmount)
+	local UseScaledValueResult = UseScaledValueFunction(300)
+	local UseLocalizationResult = UseLocalizationFunction(TransferLocalizationKeysModule.Presets.TransferRobuxSuccessModal)
+	local FormatNumberModuleResult = if UseSignalStateResult then FormatNumberModule(LocalizationService.RobloxLocaleId, UseSignalStateResult) else "0"
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 63 ]]
+		-- upvalues: TransferLocaleFormatModule (upval), UseLocalizationResult (copy), FormatNumberModuleResult (copy)
+		return TransferLocaleFormatModule.substituteAmount(UseLocalizationResult.SuccessNotification, (tostring(FormatNumberModuleResult)))
+	end, {
+		FormatNumberModuleResult,
+		UseLocalizationResult.SuccessNotification
+	})
 	
-	local function onComplete()
-		-- upvalues: handleTransferCompleteModule (copy), var1 (ref)
-		handleTransferCompleteModule(var1)
+	local function onComplete() --[[ Line: 70 ]]
+		-- upvalues: HandleTransferCompleteModule (upval), UseTransferStoreModuleResult (copy)
+		HandleTransferCompleteModule(UseTransferStoreModuleResult)
 	end
 	
-	local var9 = nil
-	local var10 = nil
+	local Ref = nil
+	local Ref1 = nil
 	
-	if getFFlagCurrencyTransferFocusNavigationModule() then
-		local var11, var12 = useTransferSheetFocusModule(onComplete)
-		var9 = var11
-		var10 = var12
+	if GetFFlagCurrencyTransferFocusNavigationModule() then
+		Ref, Ref1 = UseTransferSheetFocusModule(onComplete)
 	end
-	return reactModule.createElement(sheet.Root, {
+	return ReactModule.createElement(Sheet.Root, {
 		preferCenterSheet = true,
-		snapPoints = { var5, 0.5 },
+		snapPoints = { UseScaledValueResult, 0.5 },
 		onClose = onComplete,
-		ref = var9
+		ref = Ref
 	}, {
-		Header = reactModule.createElement(sheet.Header, {}, {
-			TransferRobuxHeader = reactModule.createElement(transferRobuxHeaderModule, {
-				titleText = var6.SendRobux or "",
-				robuxBalanceAmount = var3
+		Header = ReactModule.createElement(Sheet.Header, {}, {
+			TransferRobuxHeader = ReactModule.createElement(TransferRobuxHeaderModule, {
+				titleText = UseLocalizationResult.SendRobux or "",
+				robuxBalanceAmount = UseUpdatedRobuxBalanceModuleResult
 			})
 		}),
-		Content = reactModule.createElement(sheet.Content, { LayoutOrder = 2 }, {
-			SheetContentContainer = reactModule.createElement(view, {
+		Content = ReactModule.createElement(Sheet.Content, { LayoutOrder = 2 }, {
+			SheetContentContainer = ReactModule.createElement(View, {
 				tag = "col align-x-center align-y-center gap-xlarge size-full-0 auto-y padding-top-xlarge"
 			}, {
-				SuccessIcon = reactModule.createElement(icon, {
+				SuccessIcon = ReactModule.createElement(Icon, {
 					tag = "auto-xy",
 					LayoutOrder = 1,
-					name = enums.IconName.CircleCheck,
-					size = var2.Size.Size_1200
+					name = Enums.IconName.CircleCheck,
+					size = UseTokensResult.Size.Size_1200
 				}),
-				SuccessMessage = reactModule.createElement(text, {
+				SuccessMessage = ReactModule.createElement(Text, {
 					tag = "auto-y text-body-large text-wrap text-align-x-center content-emphasis",
 					LayoutOrder = 2,
-					Text = var8,
+					Text = UseMemoResult,
 					Size = UDim2.new(1, 0, 0, 0)
 				})
 			})
 		}),
-		Actions = reactModule.createElement(sheet.Actions, { LayoutOrder = 3 }, {
-			reactModule.createElement(view, {
+		Actions = ReactModule.createElement(Sheet.Actions, { LayoutOrder = 3 }, {
+			ReactModule.createElement(View, {
 				tag = "col align-x-center align-y-center gap-small size-full-0 auto-y"
 			}, {
-				reactModule.createElement(view, { tag = "row gap-small size-full-0 auto-y" }, {
-					reactModule.createElement(button, {
-						ref = var10,
-						text = var6.OK,
+				ReactModule.createElement(View, { tag = "row gap-small size-full-0 auto-y" }, {
+					ReactModule.createElement(Button, {
+						ref = Ref1,
+						text = UseLocalizationResult.OK,
 						onActivated = onComplete,
-						variant = buttonVariant.Emphasis,
-						fillBehavior = fillBehavior.Fill
+						variant = ButtonVariant.Emphasis,
+						fillBehavior = FillBehavior.Fill
 					})
 				})
 			})

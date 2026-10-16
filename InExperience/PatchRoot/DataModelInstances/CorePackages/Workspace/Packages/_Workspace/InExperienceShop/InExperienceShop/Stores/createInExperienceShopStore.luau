@@ -1,908 +1,957 @@
-﻿local marketplaceService = game:GetService("MarketplaceService")
-local playersService = game:GetService("Players")
-local inExperienceShop = script:FindFirstAncestor("InExperienceShop")
-local parent = inExperienceShop.Parent
-local promiseModule = require(parent.Promise)
-local sharedFlagsModule = require(parent.SharedFlags)
-local pioneerInfo = require(parent.PioneerUtils).PioneerInfo
-local createSignal = require(parent.Signals).createSignal
-local inExperienceOffersModule = require(parent.InExperienceOffers)
-local fFlagEnableUserOffers = sharedFlagsModule.FFlagEnableUserOffers
-local fFlagEnableOffersPrefetch = sharedFlagsModule.FFlagEnableOffersPrefetch
-local fFlagOfferNineDotActivityIndicator = sharedFlagsModule.FFlagOfferNineDotActivityIndicator
-local fFlagOfferNotifyOnGlobalIcon = sharedFlagsModule.FFlagOfferNotifyOnGlobalIcon
-local fFlagHideOfferNotificationsWhenShopEmpty = sharedFlagsModule.FFlagHideOfferNotificationsWhenShopEmpty
-local constantsModule = require(inExperienceShop.Constants)
-local _ = require(inExperienceShop.Types)
-local hasOfferEligibleCategoryModule = require(inExperienceShop.Utils.hasOfferEligibleCategory)
-local errorsModule = require(inExperienceShop.Api.Errors)
-local fetchAllShopDataModule = require(inExperienceShop.Api.fetchAllShopData)
-local fetchShopWidgetsOnlyModule = require(inExperienceShop.Api.fetchShopWidgetsOnly)
-local fetchRobuxWidgetsAfterPurchaseModule = require(inExperienceShop.Api.fetchRobuxWidgetsAfterPurchase)
-local mergeRobuxShopDataModule = require(inExperienceShop.Api.mergeRobuxShopData)
-local multiGetProductInfoModule = require(inExperienceShop.Api.multiGetProductInfo)
-local streamMultiGetProductInfoModule = require(inExperienceShop.Api.streamMultiGetProductInfo)
-local logCounterModule = require(inExperienceShop.Internal.logCounter)
-local shopDebugLoggerModule = require(inExperienceShop.Internal.ShopDebugLogger)
-local productInfoFailedItemsCounterModule = require(inExperienceShop.Events.ProductInfoFailedItemsCounter)
-local userOwnsGamePassModule = require(inExperienceShop.Api.userOwnsGamePass)
-local userOwnsGamePassHttpModule = require(inExperienceShop.Api.userOwnsGamePassHttp)
-local fetchGamePassTrialAvailabilitiesModule = require(inExperienceShop.Api.fetchGamePassTrialAvailabilities)
-local getPassOwnershipModule = require(inExperienceShop.Api.getPassOwnership)
-local fFlagShopUseMockDataModule = require(inExperienceShop.Flags.FFlagShopUseMockData)
-local fFlagShopUseMockUserOwnsGamePassModule = require(inExperienceShop.Flags.FFlagShopUseMockUserOwnsGamePass)
-local fFlagShopUseMockGamePassTrialAvailabilitiesModule = require(inExperienceShop.Flags.FFlagShopUseMockGamePassTrialAvailabilities)
-local fFlagMockGetGamePassOwnershipModule = require(inExperienceShop.Flags.FFlagMockGetGamePassOwnership)
-local fFlagUseGetGamePassOwnershipApi = sharedFlagsModule.FFlagUseGetGamePassOwnershipApi
-local fFlagLuaAppEnableGamePassFreeTrialsModule = require(inExperienceShop.Flags.FFlagLuaAppEnableGamePassFreeTrials)
-local fFlagShopUseMockMultiGetProductInfoModule = require(inExperienceShop.Flags.FFlagShopUseMockMultiGetProductInfo)
-local fFlagEnableShopProductInfoRefreshModule = require(inExperienceShop.Flags.FFlagEnableShopProductInfoRefresh)
-local fFlagRefetchRobuxWidgetAfterPurchaseModule = require(inExperienceShop.Flags.FFlagRefetchRobuxWidgetAfterPurchase)
-local fFlagSkipPaymentSessionForPlainRobuxModule = require(inExperienceShop.Flags.FFlagSkipPaymentSessionForPlainRobux)
-local fFlagEnablePartialDisplayInExperienceShopModule = require(inExperienceShop.Flags.FFlagEnablePartialDisplayInExperienceShop)
-local _ = require(inExperienceShop.Flags.FFlagPromoteRobuxInTopPicks)
-local fFlagEnableRobuxInExperienceShop = sharedFlagsModule.FFlagEnableRobuxInExperienceShop
-local fFlagLuaAppEnableNativePurchaseFinishedV2Signals = sharedFlagsModule.FFlagLuaAppEnableNativePurchaseFinishedV2Signals
-local fFlagShopListenNativePurchaseFinishedModule = require(inExperienceShop.Flags.FFlagShopListenNativePurchaseFinished)
-local fFlagShopRobuxPurchaseCompletionModalModule = require(inExperienceShop.Flags.FFlagShopRobuxPurchaseCompletionModal)
-local fIntShopOwnershipFetchMaxAttemptsModule = require(inExperienceShop.Flags.FIntShopOwnershipFetchMaxAttempts)
-local mockFetchAllShopDataModule = require(inExperienceShop.Mocks.MockFetchAllShopData)
-local mockMultiGetProductInfoModule = require(inExperienceShop.Mocks.MockMultiGetProductInfo)
-local mockUserOwnsGamePassModule = require(inExperienceShop.Mocks.MockUserOwnsGamePass)
-local mockGamePassTrialAvailabilitiesModule = require(inExperienceShop.Mocks.MockGamePassTrialAvailabilities)
-local mockGetPassOwnershipModule = require(inExperienceShop.Mocks.MockGetPassOwnership)
-local promoteBonusRobuxPackageToTopPicksModule = require(inExperienceShop.Api.promoteBonusRobuxPackageToTopPicks)
-local bonusPromotionEligibilityModule = require(inExperienceShop.Api.BonusPromotionEligibility)
-local sortRobuxPackagesByAmountDescendingModule = require(inExperienceShop.Utils.sortRobuxPackagesByAmountDescending)
-local fFlagEnableExperienceShopGlobalIconModule = require(inExperienceShop.Flags.FFlagEnableExperienceShopGlobalIcon)
-local fFlagInExperienceShopExpectStringMetadataValuesModule = require(inExperienceShop.Flags.FFlagInExperienceShopExpectStringMetadataValues)
-local list = { inExperienceOffersModule.FeatureKeys.RobloxShop }
+﻿local MarketplaceService = game:GetService("MarketplaceService")
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local InExperienceShop = script:FindFirstAncestor("InExperienceShop")
+local Parent = InExperienceShop.Parent
+local PromiseModule = require(Parent.Promise)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local PioneerInfo = require(Parent.PioneerUtils).PioneerInfo
+local CreateSignalFunction = require(Parent.Signals).createSignal
+local InExperienceOffersModule = require(Parent.InExperienceOffers)
+local FFlagEnableUserOffers = SharedFlagsModule.FFlagEnableUserOffers
+local FFlagEnableOffersPrefetch = SharedFlagsModule.FFlagEnableOffersPrefetch
+local FFlagOfferNineDotActivityIndicator = SharedFlagsModule.FFlagOfferNineDotActivityIndicator
+local FFlagOfferNotifyOnGlobalIcon = SharedFlagsModule.FFlagOfferNotifyOnGlobalIcon
+local FFlagHideOfferNotificationsWhenShopEmpty = SharedFlagsModule.FFlagHideOfferNotificationsWhenShopEmpty
+local ConstantsModule = require(InExperienceShop.Constants)
+local _ = require(InExperienceShop.Types)
+local HasOfferEligibleCategoryModule = require(InExperienceShop.Utils.hasOfferEligibleCategory)
+local ErrorsModule = require(InExperienceShop.Api.Errors)
+local FetchAllShopDataModule = require(InExperienceShop.Api.fetchAllShopData)
+local FetchShopWidgetsOnlyModule = require(InExperienceShop.Api.fetchShopWidgetsOnly)
+local FetchRobuxWidgetsAfterPurchaseModule = require(InExperienceShop.Api.fetchRobuxWidgetsAfterPurchase)
+local MergeRobuxShopDataModule = require(InExperienceShop.Api.mergeRobuxShopData)
+local MultiGetProductInfoModule = require(InExperienceShop.Api.multiGetProductInfo)
+local StreamMultiGetProductInfoModule = require(InExperienceShop.Api.streamMultiGetProductInfo)
+local LogCounterModule = require(InExperienceShop.Internal.logCounter)
+local ShopDebugLoggerModule = require(InExperienceShop.Internal.ShopDebugLogger)
+local ProductInfoFailedItemsCounterModule = require(InExperienceShop.Events.ProductInfoFailedItemsCounter)
+local UserOwnsGamePassModule = require(InExperienceShop.Api.userOwnsGamePass)
+local UserOwnsGamePassHttpModule = require(InExperienceShop.Api.userOwnsGamePassHttp)
+local FetchGamePassTrialAvailabilitiesModule = require(InExperienceShop.Api.fetchGamePassTrialAvailabilities)
+local GetPassOwnershipModule = require(InExperienceShop.Api.getPassOwnership)
+local FFlagShopUseMockDataModule = require(InExperienceShop.Flags.FFlagShopUseMockData)
+local FFlagShopUseMockUserOwnsGamePassModule = require(InExperienceShop.Flags.FFlagShopUseMockUserOwnsGamePass)
+local FFlagShopUseMockGamePassTrialAvailabilitiesModule = require(InExperienceShop.Flags.FFlagShopUseMockGamePassTrialAvailabilities)
+local FFlagMockGetGamePassOwnershipModule = require(InExperienceShop.Flags.FFlagMockGetGamePassOwnership)
+local FFlagUseGetGamePassOwnershipApi = SharedFlagsModule.FFlagUseGetGamePassOwnershipApi
+local FFlagLuaAppEnableGamePassFreeTrialsModule = require(InExperienceShop.Flags.FFlagLuaAppEnableGamePassFreeTrials)
+local FFlagShopUseMockMultiGetProductInfoModule = require(InExperienceShop.Flags.FFlagShopUseMockMultiGetProductInfo)
+local FFlagEnableShopProductInfoRefreshModule = require(InExperienceShop.Flags.FFlagEnableShopProductInfoRefresh)
+local FFlagEnableShopExposureLoggingModule = require(InExperienceShop.Flags.FFlagEnableShopExposureLogging)
+local FStringExperienceShopIXPLayersCommaSeparatedModule = require(InExperienceShop.Flags.FStringExperienceShopIXPLayersCommaSeparated)
+local FFlagRefetchRobuxWidgetAfterPurchaseModule = require(InExperienceShop.Flags.FFlagRefetchRobuxWidgetAfterPurchase)
+local FFlagSkipPaymentSessionForPlainRobuxModule = require(InExperienceShop.Flags.FFlagSkipPaymentSessionForPlainRobux)
+local FFlagEnablePartialDisplayInExperienceShopModule = require(InExperienceShop.Flags.FFlagEnablePartialDisplayInExperienceShop)
+local _ = require(InExperienceShop.Flags.FFlagPromoteRobuxInTopPicks)
+local FFlagEnableRobuxInExperienceShop = SharedFlagsModule.FFlagEnableRobuxInExperienceShop
+local FFlagLuaAppEnableNativePurchaseFinishedV2Signals = SharedFlagsModule.FFlagLuaAppEnableNativePurchaseFinishedV2Signals
+local FFlagShopListenNativePurchaseFinishedModule = require(InExperienceShop.Flags.FFlagShopListenNativePurchaseFinished)
+local FFlagShopRobuxPurchaseCompletionModalModule = require(InExperienceShop.Flags.FFlagShopRobuxPurchaseCompletionModal)
+local FIntShopOwnershipFetchMaxAttemptsModule = require(InExperienceShop.Flags.FIntShopOwnershipFetchMaxAttempts)
+local MockFetchAllShopDataModule = require(InExperienceShop.Mocks.MockFetchAllShopData)
+local MockMultiGetProductInfoModule = require(InExperienceShop.Mocks.MockMultiGetProductInfo)
+local MockUserOwnsGamePassModule = require(InExperienceShop.Mocks.MockUserOwnsGamePass)
+local MockGamePassTrialAvailabilitiesModule = require(InExperienceShop.Mocks.MockGamePassTrialAvailabilities)
+local MockGetPassOwnershipModule = require(InExperienceShop.Mocks.MockGetPassOwnership)
+local PromoteBonusRobuxPackageToTopPicksModule = require(InExperienceShop.Api.promoteBonusRobuxPackageToTopPicks)
+local BonusPromotionEligibilityModule = require(InExperienceShop.Api.BonusPromotionEligibility)
+local SortRobuxPackagesByAmountDescendingModule = require(InExperienceShop.Utils.sortRobuxPackagesByAmountDescending)
+local FFlagEnableExperienceShopGlobalIconModule = require(InExperienceShop.Flags.FFlagEnableExperienceShopGlobalIcon)
+local FFlagInExperienceShopExpectStringMetadataValuesModule = require(InExperienceShop.Flags.FFlagInExperienceShopExpectStringMetadataValues)
+local list = { InExperienceOffersModule.FeatureKeys.RobloxShop }
 
-local function _(p1)
-	return type(p1) == "table" and (type(p1.categories) == "table" and type(p1.sections) == "table")
+local function _(p1): boolean --[[ Line: 154 | Named "isValidShopData" ]]
+	return type(p1) == "table" and type(p1.categories) == "table" and type(p1.sections) == "table"
 end
 
-local _ = function()
-	-- upvalues: fFlagEnablePartialDisplayInExperienceShopModule (ref)
-	return if typeof(fFlagEnablePartialDisplayInExperienceShopModule) == "function" then fFlagEnablePartialDisplayInExperienceShopModule() else fFlagEnablePartialDisplayInExperienceShopModule
+local _ = function() --[[ Line: 172 | Named "isPartialDisplayEnabled" ]]
+	-- upvalues: FFlagEnablePartialDisplayInExperienceShopModule (copy)
+	return if typeof(FFlagEnablePartialDisplayInExperienceShopModule) == "function" then FFlagEnablePartialDisplayInExperienceShopModule() else FFlagEnablePartialDisplayInExperienceShopModule
 end
 
-return function()
-	-- upvalues: createSignal (ref), constantsModule (ref), shopDebugLoggerModule (ref), fFlagRefetchRobuxWidgetAfterPurchaseModule (ref), fFlagShopRobuxPurchaseCompletionModalModule (ref), pioneerInfo (ref), sortRobuxPackagesByAmountDescendingModule (ref), promoteBonusRobuxPackageToTopPicksModule (ref), fFlagEnableRobuxInExperienceShop (ref), bonusPromotionEligibilityModule (ref), fFlagUseGetGamePassOwnershipApi (ref), playersService (ref), promiseModule (ref), fFlagMockGetGamePassOwnershipModule (ref), mockGetPassOwnershipModule (ref), getPassOwnershipModule (ref), fFlagShopUseMockUserOwnsGamePassModule (ref), mockUserOwnsGamePassModule (ref), userOwnsGamePassModule (ref), fFlagLuaAppEnableGamePassFreeTrialsModule (ref), fFlagShopUseMockGamePassTrialAvailabilitiesModule (ref), mockGamePassTrialAvailabilitiesModule (ref), fetchGamePassTrialAvailabilitiesModule (ref), fFlagEnableExperienceShopGlobalIconModule (ref), fFlagInExperienceShopExpectStringMetadataValuesModule (ref), fFlagHideOfferNotificationsWhenShopEmpty (ref), inExperienceOffersModule (ref), hasOfferEligibleCategoryModule (ref), inExperienceShop (ref), fFlagShopUseMockDataModule (ref), fFlagShopUseMockMultiGetProductInfoModule (ref), mockMultiGetProductInfoModule (ref), streamMultiGetProductInfoModule (ref), logCounterModule (ref), productInfoFailedItemsCounterModule (ref), errorsModule (ref), fFlagEnableUserOffers (ref), fFlagEnableOffersPrefetch (ref), list (ref), fFlagEnablePartialDisplayInExperienceShopModule (ref), fetchShopWidgetsOnlyModule (ref), mockFetchAllShopDataModule (ref), fetchAllShopDataModule (ref), fFlagEnableShopProductInfoRefreshModule (ref), multiGetProductInfoModule (ref), fFlagOfferNineDotActivityIndicator (ref), fFlagOfferNotifyOnGlobalIcon (ref), fetchRobuxWidgetsAfterPurchaseModule (ref), mergeRobuxShopDataModule (ref), marketplaceService (ref), fIntShopOwnershipFetchMaxAttemptsModule (ref), fFlagShopListenNativePurchaseFinishedModule (ref), userOwnsGamePassHttpModule (ref), fFlagSkipPaymentSessionForPlainRobuxModule (ref), fFlagLuaAppEnableNativePurchaseFinishedV2Signals (ref)
-	local var1, var2 = createSignal({})
-	local var3, var4 = createSignal({})
-	local var5, var6 = createSignal(false)
-	local var7, var8 = createSignal(nil)
-	local var9, var10 = createSignal(nil)
-	local var11, var12 = createSignal(false)
-	local var13, var14 = createSignal(false)
-	local var15, var16 = createSignal({})
-	local var17, var18 = createSignal({ available = {}, active = {} })
-	local var19, var20 = createSignal({})
-	local var21, var22 = createSignal(constantsModule.MIN_COLUMNS)
-	local var23, var24 = createSignal(nil)
+return function() --[[ Line: 178 | Named "createInExperienceShopStore" ]]
+	-- upvalues: CreateSignalFunction (copy), ConstantsModule (copy), ShopDebugLoggerModule (copy), FFlagRefetchRobuxWidgetAfterPurchaseModule (copy), FFlagShopRobuxPurchaseCompletionModalModule (copy), PioneerInfo (copy), SortRobuxPackagesByAmountDescendingModule (copy), PromoteBonusRobuxPackageToTopPicksModule (copy), FFlagEnableRobuxInExperienceShop (copy), BonusPromotionEligibilityModule (copy), FFlagUseGetGamePassOwnershipApi (copy), Players (copy), PromiseModule (copy), FFlagMockGetGamePassOwnershipModule (copy), MockGetPassOwnershipModule (copy), GetPassOwnershipModule (copy), FFlagShopUseMockUserOwnsGamePassModule (copy), MockUserOwnsGamePassModule (copy), UserOwnsGamePassModule (copy), FFlagLuaAppEnableGamePassFreeTrialsModule (copy), FFlagShopUseMockGamePassTrialAvailabilitiesModule (copy), MockGamePassTrialAvailabilitiesModule (copy), FetchGamePassTrialAvailabilitiesModule (copy), FFlagEnableExperienceShopGlobalIconModule (copy), FFlagInExperienceShopExpectStringMetadataValuesModule (copy), FFlagHideOfferNotificationsWhenShopEmpty (copy), InExperienceOffersModule (copy), HasOfferEligibleCategoryModule (copy), InExperienceShop (copy), FFlagShopUseMockDataModule (copy), FFlagShopUseMockMultiGetProductInfoModule (copy), MockMultiGetProductInfoModule (copy), StreamMultiGetProductInfoModule (copy), LogCounterModule (copy), ProductInfoFailedItemsCounterModule (copy), ErrorsModule (copy), FFlagEnableUserOffers (copy), FFlagEnableOffersPrefetch (copy), list (copy), FFlagEnablePartialDisplayInExperienceShopModule (copy), FetchShopWidgetsOnlyModule (copy), MockFetchAllShopDataModule (copy), FetchAllShopDataModule (copy), FFlagEnableShopProductInfoRefreshModule (copy), MultiGetProductInfoModule (copy), FFlagOfferNineDotActivityIndicator (copy), FFlagOfferNotifyOnGlobalIcon (copy), FFlagEnableShopExposureLoggingModule (copy), RunService (copy), Parent (copy), FStringExperienceShopIXPLayersCommaSeparatedModule (copy), FetchRobuxWidgetsAfterPurchaseModule (copy), MergeRobuxShopDataModule (copy), MarketplaceService (copy), FIntShopOwnershipFetchMaxAttemptsModule (copy), FFlagShopListenNativePurchaseFinishedModule (copy), UserOwnsGamePassHttpModule (copy), FFlagSkipPaymentSessionForPlainRobuxModule (copy), FFlagLuaAppEnableNativePurchaseFinishedV2Signals (copy)
+	local Signal, Signal2 = CreateSignalFunction({})
+	local Signal1, Signal2_1 = CreateSignalFunction({})
+	local Signal3, Signal2_2 = CreateSignalFunction(false)
+	local Signal4, Signal2_3 = CreateSignalFunction(nil)
+	local Signal5, Signal2_4 = CreateSignalFunction(nil)
+	local Signal6, Signal2_5 = CreateSignalFunction(false)
+	local Signal7, Signal2_6 = CreateSignalFunction(false)
+	local Signal8, Signal2_7 = CreateSignalFunction({})
+	local Signal9, Signal2_8 = CreateSignalFunction({ available = {}, active = {} })
+	local Signal10, Signal2_9 = CreateSignalFunction({})
+	local Signal11, Signal2_10 = CreateSignalFunction(ConstantsModule.MIN_COLUMNS)
+	local Signal12, Signal2_11 = CreateSignalFunction(nil)
 	local t = {}
-	local var25 = false
-	local var26 = nil
-	local var27 = nil
-	local var28 = nil
-	local t_1 = {}
-	local var29 = false
+	local Flag = false
+	local Flag1 = false
+	local Flag2 = false
+	local v1 = nil
+	local v2 = nil
+	local v3 = nil
+	local t1 = {}
+	local Flag3 = false
 	
-	local function bonusGamePassIdForNativePurchase(p1, p2, p3)
-		-- upvalues: shopDebugLoggerModule (copy), fFlagRefetchRobuxWidgetAfterPurchaseModule (copy), var26 (write), var27 (write), fFlagShopRobuxPurchaseCompletionModalModule (copy), var28 (write), pioneerInfo (copy), var24 (ref)
+	local function bonusGamePassIdForNativePurchase(p1, p2, p3: number) --[[ Line: 231 ]]
+		-- upvalues: ShopDebugLoggerModule (upval), FFlagRefetchRobuxWidgetAfterPurchaseModule (upval), v1 (ref), v2 (ref), FFlagShopRobuxPurchaseCompletionModalModule (upval), v3 (ref), PioneerInfo (upval), Signal2_11 (copy)
 		if p2 == "" then
-			shopDebugLoggerModule.log("bonusGamePassIdForNativePurchase: skip, empty store SKU")
+			ShopDebugLoggerModule.log("bonusGamePassIdForNativePurchase: skip, empty store SKU")
 			
 			return
 		end
-		var26 = if fFlagRefetchRobuxWidgetAfterPurchaseModule then if p1 == nil or p1 == "" then nil else p1 else p1
-		var27 = p2
+		v1 = if FFlagRefetchRobuxWidgetAfterPurchaseModule and (p1 == nil or p1 == "") then nil else p1
+		v2 = p2
 		
-		if fFlagShopRobuxPurchaseCompletionModalModule then
-			var28 = if pioneerInfo.isDaveyBazooka() and p3 ~= nil and p3 > 0 then p3 else nil
-			var24(nil)
+		if FFlagShopRobuxPurchaseCompletionModalModule then
+			v3 = if PioneerInfo.isDaveyBazooka() and p3 ~= nil and p3 > 0 then p3 else nil
+			Signal2_11(nil)
 		end
-		shopDebugLoggerModule.logLazy(function()
-			-- upvalues: var26 (copy), p2 (ref)
-			return "bonusGamePassIdForNativePurchase: recorded bonusGamePassId=" .. tostring(var26) .. " storeSku=" .. p2
+		ShopDebugLoggerModule.logLazy(function(): string --[[ Line: 252 ]]
+			-- upvalues: v1 (upval), p2 (copy)
+			return "bonusGamePassIdForNativePurchase: recorded bonusGamePassId=" .. tostring(v1) .. " storeSku=" .. p2
 		end)
 	end
 	
-	local var30 = false
-	local var31 = false
-	local var32 = false
-	local var33 = false
-	local t_2 = {}
-	local t_3 = {}
-	local t_4 = {}
-	local t_5 = {}
-	local var34, var35 = createSignal(false)
-	local var36, var37 = createSignal(false)
+	local Flag4 = false
+	local Flag5 = false
+	local Flag6 = false
+	local Flag7 = false
+	local Flag8 = false
+	local FailedItems = {}
+	local WithoutFeaturedPromotionResult = {}
+	local Tbl = {}
+	local t2 = {}
+	local Signal13, Signal2_12 = CreateSignalFunction(false)
+	local Signal14, Signal2_13 = CreateSignalFunction(false)
 	
-	local function _(p1, p2)
-		-- upvalues: t_4 (ref), var20 (ref)
-		t_4[p1] = p2
-		var20(table.clone(t_4))
+	local function _(Key, p1) --[[ Line: 313 | Named "commitBonusPromotionEligibility" ]]
+		-- upvalues: Tbl (copy), Signal2_9 (copy)
+		Tbl[Key] = p1
+		Signal2_9(table.clone(Tbl))
 	end
 	
-	local function sortRobuxPackagesInSections(p1)
-		-- upvalues: sortRobuxPackagesByAmountDescendingModule (copy)
-		local v_1
-		local var38 = false
+	local function sortRobuxPackagesInSections(Tbl) --[[ Line: 318 ]]
+		-- upvalues: SortRobuxPackagesByAmountDescendingModule (upval)
+		local Flag = false
 		
-		for i, v in p1 do
-			v_1 = v.robuxPackages
+		for _, value in Tbl do
+			local RobuxPackages = value.robuxPackages
 			
-			if v_1 ~= nil and #v_1 > 1 then
-				var38 = true
+			if RobuxPackages ~= nil and #RobuxPackages > 1 then
+				Flag = true
 				break
 			end
 		end
-		if not var38 then
-			return p1
+		if not Flag then
+			return Tbl
 		end
-		local cloned = table.clone(p1)
+		local Copy = table.clone(Tbl)
 		
-		for i_1, v_1 in ipairs(p1) do
-			local robuxPackages = v_1.robuxPackages
+		for i, value1 in ipairs(Tbl) do
+			local RobuxPackages = value1.robuxPackages
 			
-			if robuxPackages ~= nil and #robuxPackages > 1 then
-				cloned[i_1] = {
-					id = v_1.id,
-					name = v_1.name,
-					items = v_1.items,
-					categoryType = v_1.categoryType,
-					stableCategoryId = v_1.stableCategoryId,
-					categoryGroup = v_1.categoryGroup,
-					paymentSessionId = v_1.paymentSessionId,
-					bonusJwt = v_1.bonusJwt,
-					robuxPackages = sortRobuxPackagesByAmountDescendingModule(robuxPackages),
-					featuredRobuxPackage = v_1.featuredRobuxPackage
+			if RobuxPackages ~= nil and #RobuxPackages > 1 then
+				Copy[i] = {
+					id = value1.id,
+					name = value1.name,
+					items = value1.items,
+					categoryType = value1.categoryType,
+					stableCategoryId = value1.stableCategoryId,
+					categoryGroup = value1.categoryGroup,
+					paymentSessionId = value1.paymentSessionId,
+					bonusJwt = value1.bonusJwt,
+					robuxPackages = SortRobuxPackagesByAmountDescendingModule(RobuxPackages),
+					featuredRobuxPackage = value1.featuredRobuxPackage
 				}
 			end
 		end
-		return cloned
+		return Copy
 	end
 	
-	local _ = function()
-		-- upvalues: promoteBonusRobuxPackageToTopPicksModule (copy), t_3 (write), t_4 (ref), var4 (ref), sortRobuxPackagesInSections (ref)
-		var4(sortRobuxPackagesInSections(promoteBonusRobuxPackageToTopPicksModule.promoteBonusRobuxPackageToTopPicks(t_3, t_4)))
+	local _ = function() --[[ Line: 353 | Named "reapplyFeaturedPromotion" ]]
+		-- upvalues: PromoteBonusRobuxPackageToTopPicksModule (upval), WithoutFeaturedPromotionResult (ref), Tbl (copy), Signal2_1 (copy), sortRobuxPackagesInSections (copy)
+		Signal2_1((sortRobuxPackagesInSections((PromoteBonusRobuxPackageToTopPicksModule.promoteBonusRobuxPackageToTopPicks(WithoutFeaturedPromotionResult, Tbl)))))
 	end
 	
-	local function writeOwnership(p2, p3)
-		-- upvalues: var15 (ref), var16 (ref), fFlagEnableRobuxInExperienceShop (copy), promoteBonusRobuxPackageToTopPicksModule (copy), t_3 (write), bonusPromotionEligibilityModule (copy), t_4 (ref), var20 (ref), var4 (ref), sortRobuxPackagesInSections (ref)
-		local cloned = table.clone(var15(false))
-		cloned[p2] = p3
-		var16(cloned)
+	local function writeOwnership(Key, p1) --[[ Line: 361 ]]
+		-- upvalues: Signal8 (copy), Signal2_7 (copy), FFlagEnableRobuxInExperienceShop (upval), PromoteBonusRobuxPackageToTopPicksModule (upval), WithoutFeaturedPromotionResult (ref), BonusPromotionEligibilityModule (upval), Tbl (copy), Signal2_9 (copy), Signal2_1 (copy), sortRobuxPackagesInSections (copy)
+		local Copy = table.clone(Signal8(false))
+		Copy[Key] = p1
+		Signal2_7(Copy)
 		
-		if not p3 or not fFlagEnableRobuxInExperienceShop then return end
-		local var39 = promoteBonusRobuxPackageToTopPicksModule.findFirstBonusRobuxPackage(t_3)
-		local var40 = if var39 ~= nil then nil else promoteBonusRobuxPackageToTopPicksModule.getBonusGamePassId(var39)
+		if not p1 or not FFlagEnableRobuxInExperienceShop then return end
+		local FirstBonusRobuxPackage = PromoteBonusRobuxPackageToTopPicksModule.findFirstBonusRobuxPackage(WithoutFeaturedPromotionResult)
+		local BonusGamePassId = if FirstBonusRobuxPackage == nil then nil else PromoteBonusRobuxPackageToTopPicksModule.getBonusGamePassId(FirstBonusRobuxPackage)
 		
-		if var40 == nil or var40 ~= p2 then
+		if BonusGamePassId ~= nil and BonusGamePassId == Key then
+			Tbl[Key] = BonusPromotionEligibilityModule.Ineligible
+			Signal2_9(table.clone(Tbl))
+			Signal2_1((sortRobuxPackagesInSections((PromoteBonusRobuxPackageToTopPicksModule.promoteBonusRobuxPackageToTopPicks(WithoutFeaturedPromotionResult, Tbl)))))
+			
 			return
 		end
-		t_4[p2] = bonusPromotionEligibilityModule.Ineligible
-		var20(table.clone(t_4))
-		var4(sortRobuxPackagesInSections(promoteBonusRobuxPackageToTopPicksModule.promoteBonusRobuxPackageToTopPicks(t_3, t_4)))
 	end
 	
-	local function fetchOwnedGamePass(p2)
-		-- upvalues: fFlagUseGetGamePassOwnershipApi (copy), playersService (copy), promiseModule (copy), fFlagMockGetGamePassOwnershipModule (copy), mockGetPassOwnershipModule (copy), getPassOwnershipModule (copy), fFlagShopUseMockUserOwnsGamePassModule (copy), mockUserOwnsGamePassModule (copy), userOwnsGamePassModule (copy)
-		if not fFlagUseGetGamePassOwnershipApi then
-			return (if fFlagShopUseMockUserOwnsGamePassModule then mockUserOwnsGamePassModule else userOwnsGamePassModule)(p2)
-		end
-		local localPlayer = playersService.LocalPlayer
-		
-		return if localPlayer == nil then promiseModule.reject("fetchOwnedGamePass: no LocalPlayer") elseif fFlagMockGetGamePassOwnershipModule then mockGetPassOwnershipModule.getPassOwnership(localPlayer, p2) else getPassOwnershipModule.getPassOwnership(localPlayer, p2):andThen(function(p3)
-			return if p3 == nil then false else p3.Owned == true
-		end)
-	end
-	
-	local function fetchGamePassOwnership(p2)
-		-- upvalues: t (ref), var15 (ref), fetchOwnedGamePass (ref), writeOwnership (ref)
-		if t[p2] then return end
-		if var15(false)[p2] ~= nil then return end
-		local var39 = tonumber(p2)
-		
-		if var39 == nil then
-			return
-		end
-		t[p2] = true
-		fetchOwnedGamePass(var39):andThen(function(p3)
-			-- upvalues: var15 (copy), p2 (ref), writeOwnership (copy)
-			if var15(false)[p2] == nil then
-				writeOwnership(p2, p3)
-				
-				return
-			end
-		end):catch(function(p3)
-			-- upvalues: p2 (ref)
-			warn("[Shop] fetchGamePassOwnership failed", p2, tostring(p3))
-		end):finally(function()
-			-- upvalues: t (copy), p2 (ref)
-			t[p2] = nil
-		end)
-	end
-	
-	local function hydrateGamePassTrialAvailabilities()
-		-- upvalues: fFlagLuaAppEnableGamePassFreeTrialsModule (copy), var25 (write), fFlagShopUseMockGamePassTrialAvailabilitiesModule (copy), mockGamePassTrialAvailabilitiesModule (copy), fetchGamePassTrialAvailabilitiesModule (copy), var18 (ref)
-		if not fFlagLuaAppEnableGamePassFreeTrialsModule then return end
-		if var25 then
-			return
-		end
-		var25 = true;
-		(if fFlagShopUseMockGamePassTrialAvailabilitiesModule then mockGamePassTrialAvailabilitiesModule.fetchGamePassTrialAvailabilities else fetchGamePassTrialAvailabilitiesModule.fetchGamePassTrialAvailabilities)(game.GameId):andThen(function(p2)
-			-- upvalues: var18 (copy)
-			var18(p2)
-		end):catch(function(p2)
-			warn("[Shop] hydrateGamePassTrialAvailabilities failed", tostring(p2))
-		end):finally(function()
-			-- upvalues: var25 (copy)
-			var25 = false
-		end)
-	end
-	
-	local function fetchBonusGamePassOwnershipForPromotionId(p2)
-		-- upvalues: fFlagRefetchRobuxWidgetAfterPurchaseModule (copy), t_1 (ref), shopDebugLoggerModule (copy), t_5 (ref), bonusPromotionEligibilityModule (copy), t_4 (ref), var20 (ref), promoteBonusRobuxPackageToTopPicksModule (copy), t_3 (write), var4 (ref), sortRobuxPackagesInSections (ref), fetchOwnedGamePass (ref), var15 (ref), writeOwnership (ref)
-		if fFlagRefetchRobuxWidgetAfterPurchaseModule and t_1[p2] then
-			shopDebugLoggerModule.logLazy(function()
-				-- upvalues: p2 (ref)
-				return "fetchBonusGamePassOwnershipForPromotion: skip, poll in flight itemId=" .. p2
+	local function fetchOwnedGamePass(Number) --[[ Line: 384 ]]
+		-- upvalues: FFlagUseGetGamePassOwnershipApi (upval), Players (upval), PromiseModule (upval), FFlagMockGetGamePassOwnershipModule (upval), MockGetPassOwnershipModule (upval), GetPassOwnershipModule (upval), FFlagShopUseMockUserOwnsGamePassModule (upval), MockUserOwnsGamePassModule (upval), UserOwnsGamePassModule (upval)
+		if FFlagUseGetGamePassOwnershipApi then
+			local LocalPlayer = Players.LocalPlayer
+			
+			return if LocalPlayer == nil then PromiseModule.reject("fetchOwnedGamePass: no LocalPlayer") elseif FFlagMockGetGamePassOwnershipModule then MockGetPassOwnershipModule.getPassOwnership(LocalPlayer, Number) else GetPassOwnershipModule.getPassOwnership(LocalPlayer, Number):andThen(function(Result): boolean --[[ Line: 393 ]]
+				return Result ~= nil and Result.Owned == true
 			end)
-			
-			return
-		elseif t_5[p2] then return end
-		t_4[p2] = bonusPromotionEligibilityModule.Unknown
-		var20(table.clone(t_4))
-		var4(sortRobuxPackagesInSections(promoteBonusRobuxPackageToTopPicksModule.promoteBonusRobuxPackageToTopPicks(t_3, t_4)))
-		local var39 = tonumber(p2)
-		
-		if var39 == nil then
-			t_4[p2] = bonusPromotionEligibilityModule.Ineligible
-			var20(table.clone(t_4))
-			var4(sortRobuxPackagesInSections(promoteBonusRobuxPackageToTopPicksModule.promoteBonusRobuxPackageToTopPicks(t_3, t_4)))
-			
-			return
-		end
-		t_5[p2] = true
-		fetchOwnedGamePass(var39):andThen(function(p3)
-			-- upvalues: p2 (ref), bonusPromotionEligibilityModule (copy), t_4 (copy), var20 (copy), var15 (copy), writeOwnership (copy), promoteBonusRobuxPackageToTopPicksModule (copy), t_3 (copy), var4 (copy), sortRobuxPackagesInSections (copy)
-			t_4[p2] = if p3 then bonusPromotionEligibilityModule.Ineligible else bonusPromotionEligibilityModule.Eligible
-			var20(table.clone(t_4))
-			
-			if var15(false)[p2] == nil then
-				writeOwnership(p2, p3)
-			end
-			var4(sortRobuxPackagesInSections(promoteBonusRobuxPackageToTopPicksModule.promoteBonusRobuxPackageToTopPicks(t_3, t_4)))
-		end):catch(function(p3)
-			-- upvalues: p2 (ref), bonusPromotionEligibilityModule (copy), t_4 (copy), var20 (copy), promoteBonusRobuxPackageToTopPicksModule (copy), t_3 (copy), var4 (copy), sortRobuxPackagesInSections (copy)
-			warn("[Shop] fetchBonusGamePassOwnershipForPromotion failed", p2, tostring(p3))
-			t_4[p2] = bonusPromotionEligibilityModule.Ineligible
-			var20(table.clone(t_4))
-			var4(sortRobuxPackagesInSections(promoteBonusRobuxPackageToTopPicksModule.promoteBonusRobuxPackageToTopPicks(t_3, t_4)))
-		end):finally(function()
-			-- upvalues: t_5 (copy), p2 (ref)
-			t_5[p2] = nil
-		end)
-	end
-	
-	local function fetchBonusGamePassOwnershipForPromotion(p2)
-		-- upvalues: fFlagEnableRobuxInExperienceShop (copy), promoteBonusRobuxPackageToTopPicksModule (copy), fetchBonusGamePassOwnershipForPromotionId (ref)
-		if not fFlagEnableRobuxInExperienceShop then return end
-		local var39 = promoteBonusRobuxPackageToTopPicksModule.findFirstBonusRobuxPackage(p2)
-		local var40 = if var39 ~= nil then nil else promoteBonusRobuxPackageToTopPicksModule.getBonusGamePassId(var39)
-		
-		for i, v in if var40 ~= nil then {} else { var40 } do
-			fetchBonusGamePassOwnershipForPromotionId(v)
-		end
-	end
-	
-	local _ = function(p3)
-		-- upvalues: t_3 (write), promoteBonusRobuxPackageToTopPicksModule (copy), t_4 (ref), var4 (ref), sortRobuxPackagesInSections (ref), fetchBonusGamePassOwnershipForPromotion (ref)
-		t_3 = promoteBonusRobuxPackageToTopPicksModule.withoutFeaturedPromotion(p3)
-		var4(sortRobuxPackagesInSections(promoteBonusRobuxPackageToTopPicksModule.promoteBonusRobuxPackageToTopPicks(t_3, t_4)))
-		fetchBonusGamePassOwnershipForPromotion(t_3)
-	end
-	
-	local _ = function(p3)
-		-- upvalues: fFlagEnableExperienceShopGlobalIconModule (copy), var10 (ref), fFlagInExperienceShopExpectStringMetadataValuesModule (copy), var12 (ref), var14 (ref)
-		if fFlagEnableExperienceShopGlobalIconModule then
-			local var41
-			local metadata = p3.metadata
-			var10(metadata)
-			local var42 = if metadata ~= nil then nil else metadata.inExperienceGlobalIconEnabled
-			
-			if fFlagInExperienceShopExpectStringMetadataValuesModule then
-				var41 = var42 == "true"
-				var41 = nil
-			else
-				var41 = var42 == true
-			end
-			var12(var41)
-			var14(metadata ~= nil and metadata.newOffers == true)
-		end
-	end
-	
-	local _ = function(p3)
-		-- upvalues: fFlagHideOfferNotificationsWhenShopEmpty (copy), inExperienceOffersModule (copy), hasOfferEligibleCategoryModule (copy)
-		if fFlagHideOfferNotificationsWhenShopEmpty then
-			inExperienceOffersModule.getOffersStore(false).setShopHasItems(hasOfferEligibleCategoryModule(p3.categories))
-		end
-	end
-	
-	local function buildProductInfoRequestsForHydration(p3, p4)
-		-- upvalues: inExperienceShop (copy), fFlagEnableRobuxInExperienceShop (copy)
-		local refreshShopItemsModule = require(inExperienceShop.Api.refreshShopItems)
-		local hydrateRobuxBonusItemsModule = require(inExperienceShop.Api.hydrateRobuxBonusItems)
-		local var41 = refreshShopItemsModule.buildRequestsFromSections(p3)
-		
-		if fFlagEnableRobuxInExperienceShop then
-			hydrateRobuxBonusItemsModule.appendBonusItemRequests(var41, p3)
-		end
-		refreshShopItemsModule.appendFailedItemRequests(var41, p4)
-		
-		return var41
-	end
-	
-	local function applyStreamingProductInfoResult(a, b, p3)
-		-- upvalues: inExperienceShop (copy), fFlagEnableRobuxInExperienceShop (copy)
-		local refreshShopItemsModule = require(inExperienceShop.Api.refreshShopItems)
-		local hydrateRobuxBonusItemsModule = require(inExperienceShop.Api.hydrateRobuxBonusItems)
-		local makeRequestKey = require(inExperienceShop.Api.shopItemMapping).makeRequestKey
-		local var41 = makeRequestKey(b.request.id, b.request.infoType)
-		local t = {}
-		local t_1 = {}
-		
-		for i, v in p3 do
-			if makeRequestKey(v.id, v.infoType) == var41 then
-				table.insert(t, v)
-			else
-				table.insert(t_1, v)
-			end
-		end
-		local var42 = refreshShopItemsModule.mergeProductInfoIntoSections(a, { b })
-		local var43, var44 = refreshShopItemsModule.insertRecoveredItemsIntoSections(if fFlagEnableRobuxInExperienceShop then hydrateRobuxBonusItemsModule.mergeBonusItemDetailsIntoSections(var42, { b }) else var42, { b }, t)
-		
-		for i_1, v_1 in var44 do
-			table.insert(t_1, v_1)
-		end
-		return var43, t_1
-	end
-	
-	local function routeStreamMultiGetProductInfo(p4, p5)
-		-- upvalues: fFlagShopUseMockDataModule (copy), fFlagShopUseMockMultiGetProductInfoModule (copy), mockMultiGetProductInfoModule (copy), streamMultiGetProductInfoModule (copy)
-		return if fFlagShopUseMockDataModule and fFlagShopUseMockMultiGetProductInfoModule then mockMultiGetProductInfoModule.streamMultiGetProductInfo(p4, { onResult = p5 }, 0) else streamMultiGetProductInfoModule(p4, { onResult = p5 })
-	end
-	
-	local function streamProductInfoIntoSections(p4, p5, p6, p7)
-		-- upvalues: var33 (write), t_3 (write), promoteBonusRobuxPackageToTopPicksModule (copy), t_4 (ref), var4 (ref), sortRobuxPackagesInSections (ref), fetchBonusGamePassOwnershipForPromotion (ref), routeStreamMultiGetProductInfo (ref), applyStreamingProductInfoResult (ref), t_2 (write), logCounterModule (copy), productInfoFailedItemsCounterModule (copy)
-		if #p5 == 0 then
-			if p7 then
-				p7(p6)
-			end
-			return
 		else
-			var33 = true
-			local var45 = p4
-			local var46 = p6
-			local var47 = nil
-			local var48 = false
-			
-			local function flushPendingSections()
-				-- upvalues: var48 (write), var47 (write), t_3 (copy), promoteBonusRobuxPackageToTopPicksModule (copy), t_4 (copy), var4 (copy), sortRobuxPackagesInSections (copy), fetchBonusGamePassOwnershipForPromotion (copy)
-				var48 = false
-				
-				if var47 ~= nil then
-					t_3 = promoteBonusRobuxPackageToTopPicksModule.withoutFeaturedPromotion(var47)
-					var4(sortRobuxPackagesInSections(promoteBonusRobuxPackageToTopPicksModule.promoteBonusRobuxPackageToTopPicks(t_3, t_4)))
-					fetchBonusGamePassOwnershipForPromotion(t_3)
-					var47 = nil
-				end
-			end
-			
-			local function _(p8)
-				-- upvalues: var47 (write), var48 (write), flushPendingSections (ref)
-				var47 = p8
-				
-				if var48 then
+			return (if FFlagShopUseMockUserOwnsGamePassModule then MockUserOwnsGamePassModule else UserOwnsGamePassModule)(Number)
+		end
+	end
+	
+	local function fetchGamePassOwnership(Key) --[[ Line: 410 ]]
+		-- upvalues: t (copy), Signal8 (copy), fetchOwnedGamePass (copy), writeOwnership (copy)
+		if t[Key] then return end
+		if Signal8(false)[Key] ~= nil then return end
+		local Number: number? = tonumber(Key)
+		
+		if Number ~= nil then
+			t[Key] = true
+			fetchOwnedGamePass(Number):andThen(function(Result) --[[ Line: 423 ]]
+				-- upvalues: Signal8 (upval), Key (copy), writeOwnership (upval)
+				if Signal8(false)[Key] == nil then
+					writeOwnership(Key, Result)
+					
 					return
 				end
-				var48 = true
-				task.delay(0.05, flushPendingSections)
+			end):catch(function(Err) --[[ Line: 435 ]]
+				-- upvalues: Key (copy)
+				warn("[Shop] fetchGamePassOwnership failed", Key, (tostring(Err)))
+			end):finally(function() --[[ Line: 441 ]]
+				-- upvalues: t (upval), Key (copy)
+				t[Key] = nil
+			end)
+			
+			return
+		end
+	end
+	
+	local Callback = nil
+	
+	local _ = function() --[[ Line: 448 | Named "retryTrialsIfRequested" ]]
+		-- upvalues: Flag2 (ref), Flag5 (ref), Flag1 (ref), Flag (ref), Callback (ref)
+		if Flag2 and Flag5 and not Flag1 and not Flag then
+			Callback()
+		end
+	end
+	
+	Callback = function() --[[ Line: 459 | Named "hydrateGamePassTrialAvailabilities" ]]
+		-- upvalues: FFlagLuaAppEnableGamePassFreeTrialsModule (upval), Flag1 (ref), Flag (ref), Flag2 (ref), FFlagShopUseMockGamePassTrialAvailabilitiesModule (upval), MockGamePassTrialAvailabilitiesModule (upval), FetchGamePassTrialAvailabilitiesModule (upval), Signal2_8 (copy), Flag5 (ref), Callback (ref)
+		if not FFlagLuaAppEnableGamePassFreeTrialsModule then return end
+		if not Flag1 and not Flag then
+			Flag2 = false
+			Flag = true;
+			(if FFlagShopUseMockGamePassTrialAvailabilitiesModule then MockGamePassTrialAvailabilitiesModule.fetchGamePassTrialAvailabilities else FetchGamePassTrialAvailabilitiesModule.fetchGamePassTrialAvailabilities)(game.GameId):andThen(function(Result) --[[ Line: 472 ]]
+				-- upvalues: Signal2_8 (upval), Flag1 (upval)
+				Signal2_8(Result)
+				Flag1 = true
+			end):catch(function(Err) --[[ Line: 476 ]]
+				warn("[Shop] hydrateGamePassTrialAvailabilities failed", if typeof(Err) == "table" and Err.errorMessage ~= nil then Err.errorMessage else Err)
+			end):finally(function() --[[ Line: 481 ]]
+				-- upvalues: Flag (upval), Flag2 (upval), Flag5 (upval), Flag1 (upval), Callback (upval)
+				Flag = false
+				
+				if Flag2 and Flag5 and not Flag1 and not Flag then
+					Callback()
+				end
+			end)
+			
+			return
+		end
+	end
+	
+	local function fetchBonusGamePassOwnershipForPromotionId(Key) --[[ Line: 487 ]]
+		-- upvalues: FFlagRefetchRobuxWidgetAfterPurchaseModule (upval), t1 (copy), ShopDebugLoggerModule (upval), t2 (copy), BonusPromotionEligibilityModule (upval), Tbl (copy), Signal2_9 (copy), PromoteBonusRobuxPackageToTopPicksModule (upval), WithoutFeaturedPromotionResult (ref), Signal2_1 (copy), sortRobuxPackagesInSections (copy), fetchOwnedGamePass (copy), Signal8 (copy), writeOwnership (copy)
+		if FFlagRefetchRobuxWidgetAfterPurchaseModule and t1[Key] then
+			ShopDebugLoggerModule.logLazy(function(): string --[[ Line: 489 ]]
+				-- upvalues: Key (copy)
+				return "fetchBonusGamePassOwnershipForPromotion: skip, poll in flight itemId=" .. Key
+			end)
+			
+			return
+		end
+		if t2[Key] then return end
+		Tbl[Key] = BonusPromotionEligibilityModule.Unknown
+		Signal2_9(table.clone(Tbl))
+		Signal2_1((sortRobuxPackagesInSections((PromoteBonusRobuxPackageToTopPicksModule.promoteBonusRobuxPackageToTopPicks(WithoutFeaturedPromotionResult, Tbl)))))
+		local Number: number? = tonumber(Key)
+		
+		if Number == nil then
+			Tbl[Key] = BonusPromotionEligibilityModule.Ineligible
+			Signal2_9(table.clone(Tbl))
+			Signal2_1((sortRobuxPackagesInSections((PromoteBonusRobuxPackageToTopPicksModule.promoteBonusRobuxPackageToTopPicks(WithoutFeaturedPromotionResult, Tbl)))))
+			
+			return
+		else
+			t2[Key] = true
+			fetchOwnedGamePass(Number):andThen(function(Result) --[[ Line: 510 ]]
+				-- upvalues: Key (copy), BonusPromotionEligibilityModule (upval), Tbl (upval), Signal2_9 (upval), Signal8 (upval), writeOwnership (upval), PromoteBonusRobuxPackageToTopPicksModule (upval), WithoutFeaturedPromotionResult (upval), Signal2_1 (upval), sortRobuxPackagesInSections (upval)
+				Tbl[Key] = if Result then BonusPromotionEligibilityModule.Ineligible else BonusPromotionEligibilityModule.Eligible
+				Signal2_9(table.clone(Tbl))
+				
+				if Signal8(false)[Key] == nil then
+					writeOwnership(Key, Result)
+				end
+				Signal2_1((sortRobuxPackagesInSections((PromoteBonusRobuxPackageToTopPicksModule.promoteBonusRobuxPackageToTopPicks(WithoutFeaturedPromotionResult, Tbl)))))
+			end):catch(function(Err) --[[ Line: 520 ]]
+				-- upvalues: Key (copy), BonusPromotionEligibilityModule (upval), Tbl (upval), Signal2_9 (upval), PromoteBonusRobuxPackageToTopPicksModule (upval), WithoutFeaturedPromotionResult (upval), Signal2_1 (upval), sortRobuxPackagesInSections (upval)
+				warn("[Shop] fetchBonusGamePassOwnershipForPromotion failed", Key, (tostring(Err)))
+				Tbl[Key] = BonusPromotionEligibilityModule.Ineligible
+				Signal2_9(table.clone(Tbl))
+				Signal2_1((sortRobuxPackagesInSections((PromoteBonusRobuxPackageToTopPicksModule.promoteBonusRobuxPackageToTopPicks(WithoutFeaturedPromotionResult, Tbl)))))
+			end):finally(function() --[[ Line: 525 ]]
+				-- upvalues: t2 (upval), Key (copy)
+				t2[Key] = nil
+			end)
+		end
+	end
+	
+	local function fetchBonusGamePassOwnershipForPromotion(WithoutFeaturedPromotionResult) --[[ Line: 530 ]]
+		-- upvalues: FFlagEnableRobuxInExperienceShop (upval), PromoteBonusRobuxPackageToTopPicksModule (upval), fetchBonusGamePassOwnershipForPromotionId (copy)
+		if not FFlagEnableRobuxInExperienceShop then return end
+		local FirstBonusRobuxPackage = PromoteBonusRobuxPackageToTopPicksModule.findFirstBonusRobuxPackage(WithoutFeaturedPromotionResult)
+		local BonusGamePassId = if FirstBonusRobuxPackage == nil then nil else PromoteBonusRobuxPackageToTopPicksModule.getBonusGamePassId(FirstBonusRobuxPackage)
+		local T = if BonusGamePassId == nil then {} else { BonusGamePassId }
+		for _, value in T do
+			fetchBonusGamePassOwnershipForPromotionId(value)
+		end
+	end
+	
+	local _ = function(p1) --[[ Line: 544 | Named "applySections" ]]
+		-- upvalues: WithoutFeaturedPromotionResult (ref), PromoteBonusRobuxPackageToTopPicksModule (upval), Tbl (copy), Signal2_1 (copy), sortRobuxPackagesInSections (copy), fetchBonusGamePassOwnershipForPromotion (copy)
+		WithoutFeaturedPromotionResult = PromoteBonusRobuxPackageToTopPicksModule.withoutFeaturedPromotion(p1)
+		Signal2_1((sortRobuxPackagesInSections((PromoteBonusRobuxPackageToTopPicksModule.promoteBonusRobuxPackageToTopPicks(WithoutFeaturedPromotionResult, Tbl)))))
+		fetchBonusGamePassOwnershipForPromotion(WithoutFeaturedPromotionResult)
+	end
+	
+	local _ = function(p1) --[[ Line: 554 | Named "commitShopMetadata" ]]
+		-- upvalues: FFlagEnableExperienceShopGlobalIconModule (upval), Signal2_4 (copy), FFlagInExperienceShopExpectStringMetadataValuesModule (upval), Signal2_5 (copy), Signal2_6 (copy)
+		if FFlagEnableExperienceShopGlobalIconModule then
+			local Metadata = p1.metadata
+			Signal2_4(Metadata)
+			local InExperienceGlobalIconEnabled = if Metadata == nil then nil else Metadata.inExperienceGlobalIconEnabled
+			Signal2_5(if FFlagInExperienceShopExpectStringMetadataValuesModule then InExperienceGlobalIconEnabled == "true" else InExperienceGlobalIconEnabled == true)
+			Signal2_6(Metadata ~= nil and Metadata.newOffers == true)
+		end
+	end
+	
+	local _ = function(p1) --[[ Line: 573 | Named "publishShopHasItems" ]]
+		-- upvalues: FFlagHideOfferNotificationsWhenShopEmpty (upval), InExperienceOffersModule (upval), HasOfferEligibleCategoryModule (upval)
+		if FFlagHideOfferNotificationsWhenShopEmpty then
+			InExperienceOffersModule.getOffersStore(false).setShopHasItems(HasOfferEligibleCategoryModule(p1.categories))
+		end
+	end
+	
+	local function buildProductInfoRequestsForHydration(WithoutFeaturedPromotionResult, FailedItems) --[[ Line: 579 ]]
+		-- upvalues: InExperienceShop (upval), FFlagEnableRobuxInExperienceShop (upval)
+		local RefreshShopItemsModule = require(InExperienceShop.Api.refreshShopItems)
+		local HydrateRobuxBonusItemsModule = require(InExperienceShop.Api.hydrateRobuxBonusItems)
+		local RequestsFromSections = RefreshShopItemsModule.buildRequestsFromSections(WithoutFeaturedPromotionResult)
+		
+		if FFlagEnableRobuxInExperienceShop then
+			HydrateRobuxBonusItemsModule.appendBonusItemRequests(RequestsFromSections, WithoutFeaturedPromotionResult)
+		end
+		RefreshShopItemsModule.appendFailedItemRequests(RequestsFromSections, FailedItems)
+		
+		return RequestsFromSections
+	end
+	
+	local function applyStreamingProductInfoResult(p1, p2, List) --[[ Line: 593 ]]
+		-- upvalues: InExperienceShop (upval), FFlagEnableRobuxInExperienceShop (upval)
+		local RefreshShopItemsModule = require(InExperienceShop.Api.refreshShopItems)
+		local HydrateRobuxBonusItemsModule = require(InExperienceShop.Api.hydrateRobuxBonusItems)
+		local MakeRequestKeyFunction = require(InExperienceShop.Api.shopItemMapping).makeRequestKey
+		local RequestKey = MakeRequestKeyFunction(p2.request.id, p2.request.infoType)
+		local List1 = {}
+		local List2 = {}
+		
+		for _, value in List do
+			if MakeRequestKeyFunction(value.id, value.infoType) == RequestKey then
+				table.insert(List1, value)
+			else
+				table.insert(List2, value)
+			end
+		end
+		local MergeProductInfoIntoSectionsResult = RefreshShopItemsModule.mergeProductInfoIntoSections(p1, { p2 })
+		local InsertRecoveredItemsIntoSectionsResult, InsertRecoveredItemsIntoSectionsResult2 = RefreshShopItemsModule.insertRecoveredItemsIntoSections(if FFlagEnableRobuxInExperienceShop then HydrateRobuxBonusItemsModule.mergeBonusItemDetailsIntoSections(MergeProductInfoIntoSectionsResult, { p2 }) else MergeProductInfoIntoSectionsResult, { p2 }, List1)
+		
+		for _, value1 in InsertRecoveredItemsIntoSectionsResult2 do
+			table.insert(List2, value1)
+		end
+		return InsertRecoveredItemsIntoSectionsResult, List2
+	end
+	
+	local function routeStreamMultiGetProductInfo(p3, OnResult) --[[ Line: 628 ]]
+		-- upvalues: FFlagShopUseMockDataModule (upval), FFlagShopUseMockMultiGetProductInfoModule (upval), MockMultiGetProductInfoModule (upval), StreamMultiGetProductInfoModule (upval)
+		return if FFlagShopUseMockDataModule and FFlagShopUseMockMultiGetProductInfoModule then MockMultiGetProductInfoModule.streamMultiGetProductInfo(p3, { onResult = OnResult }, 0) else StreamMultiGetProductInfoModule(p3, { onResult = OnResult })
+	end
+	
+	local function streamProductInfoIntoSections(WithoutFeaturedPromotionResult1, RequestsFromSections, FailedItems1, Callback: (any) -> ()) --[[ Line: 638 ]]
+		-- upvalues: Flag8 (ref), WithoutFeaturedPromotionResult (ref), PromoteBonusRobuxPackageToTopPicksModule (upval), Tbl (copy), Signal2_1 (copy), sortRobuxPackagesInSections (copy), fetchBonusGamePassOwnershipForPromotion (copy), routeStreamMultiGetProductInfo (copy), applyStreamingProductInfoResult (copy), FailedItems (ref), LogCounterModule (upval), ProductInfoFailedItemsCounterModule (upval)
+		if #RequestsFromSections ~= 0 then
+			Flag8 = true
+			local WithoutFeaturedPromotionResult2 = WithoutFeaturedPromotionResult1
+			local FailedItems2 = FailedItems1
+			local v4 = nil
+			local Flag = false
+			
+			local function flushPendingSections() --[[ Line: 657 ]]
+				-- upvalues: Flag (ref), v4 (ref), WithoutFeaturedPromotionResult (upval), PromoteBonusRobuxPackageToTopPicksModule (upval), Tbl (upval), Signal2_1 (upval), sortRobuxPackagesInSections (upval), fetchBonusGamePassOwnershipForPromotion (upval)
+				Flag = false
+				
+				if v4 ~= nil then
+					WithoutFeaturedPromotionResult = PromoteBonusRobuxPackageToTopPicksModule.withoutFeaturedPromotion(v4)
+					Signal2_1((sortRobuxPackagesInSections((PromoteBonusRobuxPackageToTopPicksModule.promoteBonusRobuxPackageToTopPicks(WithoutFeaturedPromotionResult, Tbl)))))
+					fetchBonusGamePassOwnershipForPromotion(WithoutFeaturedPromotionResult)
+					v4 = nil
+				end
 			end
 			
-			routeStreamMultiGetProductInfo(p5, function(p8)
-				-- upvalues: var45 (write), var46 (write), applyStreamingProductInfoResult (copy), var47 (write), var48 (write), flushPendingSections (ref)
-				local var49, var50 = applyStreamingProductInfoResult(var45, p8, var46)
-				var45 = var49
-				var46 = var50
-				var47 = var45
+			local function _(p3) --[[ Line: 665 | Named "scheduleFlush" ]]
+				-- upvalues: v4 (ref), Flag (ref), flushPendingSections (copy)
+				v4 = p3
 				
-				if var48 then
+				if not Flag then
+					Flag = true
+					task.delay(0.05, flushPendingSections)
+					
 					return
 				end
-				var48 = true
-				task.delay(0.05, flushPendingSections)
-			end):andThen(function(_)
-				-- upvalues: var48 (write), var47 (write), t_3 (copy), promoteBonusRobuxPackageToTopPicksModule (copy), t_4 (copy), var4 (copy), sortRobuxPackagesInSections (copy), fetchBonusGamePassOwnershipForPromotion (copy), var45 (write), t_2 (copy), var46 (write), logCounterModule (copy), productInfoFailedItemsCounterModule (copy), var33 (copy), p7 (ref)
-				var48 = false
-				
-				if var47 ~= nil then
-					t_3 = promoteBonusRobuxPackageToTopPicksModule.withoutFeaturedPromotion(var47)
-					var4(sortRobuxPackagesInSections(promoteBonusRobuxPackageToTopPicksModule.promoteBonusRobuxPackageToTopPicks(t_3, t_4)))
-					fetchBonusGamePassOwnershipForPromotion(t_3)
-					var47 = nil
-				end
-				t_3 = promoteBonusRobuxPackageToTopPicksModule.withoutFeaturedPromotion(var45)
-				var4(sortRobuxPackagesInSections(promoteBonusRobuxPackageToTopPicksModule.promoteBonusRobuxPackageToTopPicks(t_3, t_4)))
-				fetchBonusGamePassOwnershipForPromotion(t_3)
-				t_2 = var46
-				
-				if #var46 > 0 then
-					logCounterModule(productInfoFailedItemsCounterModule, #var46)
-				end
-				var33 = false
-				
-				if p7 then
-					p7(var46)
-				end
-			end):catch(function(p8)
-				-- upvalues: var48 (write), var47 (write), t_3 (copy), promoteBonusRobuxPackageToTopPicksModule (copy), t_4 (copy), var4 (copy), sortRobuxPackagesInSections (copy), fetchBonusGamePassOwnershipForPromotion (copy), var33 (copy), p7 (ref), var46 (write)
-				warn("[Shop] streamProductInfoIntoSections failed", tostring(p8))
-				var48 = false
-				
-				if var47 ~= nil then
-					t_3 = promoteBonusRobuxPackageToTopPicksModule.withoutFeaturedPromotion(var47)
-					var4(sortRobuxPackagesInSections(promoteBonusRobuxPackageToTopPicksModule.promoteBonusRobuxPackageToTopPicks(t_3, t_4)))
-					fetchBonusGamePassOwnershipForPromotion(t_3)
-					var47 = nil
-				end
-				var33 = false
-				
-				if p7 then
-					p7(var46)
-				end
-			end)
-		end
-	end
-	
-	local function runShopFetch(p4, p5, p6)
-		-- upvalues: var31 (write), var30 (write), var6 (ref), var8 (ref), hydrateGamePassTrialAvailabilities (ref), fFlagShopUseMockDataModule (copy), errorsModule (copy), var2 (ref), t_3 (write), promoteBonusRobuxPackageToTopPicksModule (copy), t_4 (ref), var4 (ref), sortRobuxPackagesInSections (ref), fetchBonusGamePassOwnershipForPromotion (ref), fFlagEnableExperienceShopGlobalIconModule (copy), var10 (ref), fFlagInExperienceShopExpectStringMetadataValuesModule (copy), var12 (ref), var14 (ref), fFlagHideOfferNotificationsWhenShopEmpty (copy), inExperienceOffersModule (copy), hasOfferEligibleCategoryModule (copy), t_2 (write), fFlagEnableUserOffers (copy), fFlagEnableOffersPrefetch (copy), list (copy)
-		if var31 or var30 then
-			return
-		end
-		var30 = true
-		var6(true)
-		var8(nil)
-		hydrateGamePassTrialAvailabilities();
-		(if fFlagShopUseMockDataModule then p5() else p4()):andThen(function(p7)
-			-- upvalues: errorsModule (copy), p6 (ref), var2 (copy), t_3 (copy), promoteBonusRobuxPackageToTopPicksModule (copy), t_4 (copy), var4 (copy), sortRobuxPackagesInSections (copy), fetchBonusGamePassOwnershipForPromotion (copy), fFlagEnableExperienceShopGlobalIconModule (copy), var10 (copy), fFlagInExperienceShopExpectStringMetadataValuesModule (copy), var12 (copy), var14 (copy), fFlagHideOfferNotificationsWhenShopEmpty (copy), inExperienceOffersModule (copy), hasOfferEligibleCategoryModule (copy), t_2 (copy), var6 (copy), var30 (copy), var31 (copy), fFlagEnableUserOffers (copy), fFlagEnableOffersPrefetch (copy), list (copy)
-			if not (type(p7) == "table" and (type(p7.categories) == "table" and type(p7.sections) == "table")) then
-				return errorsModule.rejectSchema(string.format("createInExperienceShopStore: %s payload missing categories/sections", p6), p7)
 			end
-			var2(p7.categories)
-			t_3 = promoteBonusRobuxPackageToTopPicksModule.withoutFeaturedPromotion(p7.sections)
-			var4(sortRobuxPackagesInSections(promoteBonusRobuxPackageToTopPicksModule.promoteBonusRobuxPackageToTopPicks(t_3, t_4)))
-			fetchBonusGamePassOwnershipForPromotion(t_3)
 			
-			if fFlagEnableExperienceShopGlobalIconModule then
-				local var45
-				local metadata = p7.metadata
-				var10(metadata)
-				local var46 = if metadata ~= nil then nil else metadata.inExperienceGlobalIconEnabled
+			routeStreamMultiGetProductInfo(RequestsFromSections, function(p3) --[[ Line: 674 ]]
+				-- upvalues: WithoutFeaturedPromotionResult2 (ref), FailedItems2 (ref), applyStreamingProductInfoResult (upval), v4 (ref), Flag (ref), flushPendingSections (copy)
+				WithoutFeaturedPromotionResult2, FailedItems2 = applyStreamingProductInfoResult(WithoutFeaturedPromotionResult2, p3, FailedItems2)
+				v4 = WithoutFeaturedPromotionResult2
 				
-				if fFlagInExperienceShopExpectStringMetadataValuesModule then
-					var45 = var46 == "true"
-					var45 = nil
-				else
-					var45 = var46 == true
+				if not Flag then
+					Flag = true
+					task.delay(0.05, flushPendingSections)
+					
+					return
 				end
-				var12(var45)
-				var14(metadata ~= nil and metadata.newOffers == true)
-			end
-			if fFlagHideOfferNotificationsWhenShopEmpty then
-				inExperienceOffersModule.getOffersStore(false).setShopHasItems(hasOfferEligibleCategoryModule(p7.categories))
-			end
-			t_2 = p7.failedItems or {}
-			var6(false)
-			var30 = false
-			var31 = true
-			
-			if fFlagEnableUserOffers and not fFlagEnableOffersPrefetch then
-				inExperienceOffersModule.getOffersStore(false).fetchOffers(list)
-			end
-		end):catch(function(p7)
-			-- upvalues: var8 (copy), var2 (copy), var4 (copy), t_2 (copy), var6 (copy), var30 (copy)
-			var8(p7)
-			var2({})
-			var4({})
-			t_2 = {}
-			var6(false)
-			var30 = false
-		end)
-	end
-	
-	local function runPartialDisplayShopFetch(p4, p5, p6)
-		-- upvalues: var31 (write), var30 (write), var6 (ref), var8 (ref), hydrateGamePassTrialAvailabilities (ref), fFlagShopUseMockDataModule (copy), errorsModule (copy), var2 (ref), t_3 (write), promoteBonusRobuxPackageToTopPicksModule (copy), t_4 (ref), var4 (ref), sortRobuxPackagesInSections (ref), fetchBonusGamePassOwnershipForPromotion (ref), fFlagEnableExperienceShopGlobalIconModule (copy), var10 (ref), fFlagInExperienceShopExpectStringMetadataValuesModule (copy), var12 (ref), var14 (ref), fFlagHideOfferNotificationsWhenShopEmpty (copy), inExperienceOffersModule (copy), hasOfferEligibleCategoryModule (copy), t_2 (write), fFlagEnableUserOffers (copy), fFlagEnableOffersPrefetch (copy), list (copy), buildProductInfoRequestsForHydration (ref), streamProductInfoIntoSections (ref)
-		if var31 or var30 then
-			return
-		end
-		var30 = true
-		var6(true)
-		var8(nil)
-		hydrateGamePassTrialAvailabilities();
-		(if fFlagShopUseMockDataModule then p5() else p4()):andThen(function(p7)
-			-- upvalues: errorsModule (copy), p6 (ref), var2 (copy), t_3 (copy), promoteBonusRobuxPackageToTopPicksModule (copy), t_4 (copy), var4 (copy), sortRobuxPackagesInSections (copy), fetchBonusGamePassOwnershipForPromotion (copy), fFlagEnableExperienceShopGlobalIconModule (copy), var10 (copy), fFlagInExperienceShopExpectStringMetadataValuesModule (copy), var12 (copy), var14 (copy), fFlagHideOfferNotificationsWhenShopEmpty (copy), inExperienceOffersModule (copy), hasOfferEligibleCategoryModule (copy), t_2 (copy), var6 (copy), var30 (copy), var31 (copy), fFlagEnableUserOffers (copy), fFlagEnableOffersPrefetch (copy), list (copy), buildProductInfoRequestsForHydration (copy), streamProductInfoIntoSections (copy)
-			if not (type(p7) == "table" and (type(p7.categories) == "table" and type(p7.sections) == "table")) then
-				return errorsModule.rejectSchema(string.format("createInExperienceShopStore: %s payload missing categories/sections", p6), p7)
-			end
-			var2(p7.categories)
-			t_3 = promoteBonusRobuxPackageToTopPicksModule.withoutFeaturedPromotion(p7.sections)
-			var4(sortRobuxPackagesInSections(promoteBonusRobuxPackageToTopPicksModule.promoteBonusRobuxPackageToTopPicks(t_3, t_4)))
-			fetchBonusGamePassOwnershipForPromotion(t_3)
-			
-			if fFlagEnableExperienceShopGlobalIconModule then
-				local var45
-				local metadata = p7.metadata
-				var10(metadata)
-				local var46 = if metadata ~= nil then nil else metadata.inExperienceGlobalIconEnabled
+			end):andThen(function(_) --[[ Line: 679 ]]
+				-- upvalues: Flag (ref), v4 (ref), WithoutFeaturedPromotionResult (upval), PromoteBonusRobuxPackageToTopPicksModule (upval), Tbl (upval), Signal2_1 (upval), sortRobuxPackagesInSections (upval), fetchBonusGamePassOwnershipForPromotion (upval), WithoutFeaturedPromotionResult2 (ref), FailedItems (upval), FailedItems2 (ref), LogCounterModule (upval), ProductInfoFailedItemsCounterModule (upval), Flag8 (upval), Callback (copy)
+				Flag = false
 				
-				if fFlagInExperienceShopExpectStringMetadataValuesModule then
-					var45 = var46 == "true"
-					var45 = nil
-				else
-					var45 = var46 == true
+				if v4 ~= nil then
+					WithoutFeaturedPromotionResult = PromoteBonusRobuxPackageToTopPicksModule.withoutFeaturedPromotion(v4)
+					Signal2_1((sortRobuxPackagesInSections((PromoteBonusRobuxPackageToTopPicksModule.promoteBonusRobuxPackageToTopPicks(WithoutFeaturedPromotionResult, Tbl)))))
+					fetchBonusGamePassOwnershipForPromotion(WithoutFeaturedPromotionResult)
+					v4 = nil
 				end
-				var12(var45)
-				var14(metadata ~= nil and metadata.newOffers == true)
-			end
-			if fFlagHideOfferNotificationsWhenShopEmpty then
-				inExperienceOffersModule.getOffersStore(false).setShopHasItems(hasOfferEligibleCategoryModule(p7.categories))
-			end
-			t_2 = p7.failedItems or {}
-			var6(false)
-			var30 = false
-			var31 = true
-			
-			if fFlagEnableUserOffers and not fFlagEnableOffersPrefetch then
-				inExperienceOffersModule.getOffersStore(false).fetchOffers(list)
-			end
-			local var47 = t_3
-			streamProductInfoIntoSections(var47, buildProductInfoRequestsForHydration(var47, t_2), t_2, nil)
-		end):catch(function(p7)
-			-- upvalues: var8 (copy), var2 (copy), var4 (copy), t_2 (copy), var6 (copy), var30 (copy)
-			var8(p7)
-			var2({})
-			var4({})
-			t_2 = {}
-			var6(false)
-			var30 = false
-		end)
-	end
-	
-	local function fetchAllShopData()
-		-- upvalues: fFlagEnablePartialDisplayInExperienceShopModule (copy), runPartialDisplayShopFetch (ref), fetchShopWidgetsOnlyModule (copy), mockFetchAllShopDataModule (copy), runShopFetch (ref), fetchAllShopDataModule (copy)
-		local var45 = fFlagEnablePartialDisplayInExperienceShopModule
-		
-		if if typeof(var45) == "function" then var45() else var45 then
-			runPartialDisplayShopFetch(fetchShopWidgetsOnlyModule, mockFetchAllShopDataModule.fetchShopWidgetsOnly, "fetchAllShopData")
-			
-			return
-		end
-		runShopFetch(fetchAllShopDataModule, mockFetchAllShopDataModule.fetchAllShopData, "fetchAllShopData")
-	end
-	
-	local function prefetchWidgetsOnly()
-		-- upvalues: runShopFetch (ref), fetchShopWidgetsOnlyModule (copy), mockFetchAllShopDataModule (copy)
-		runShopFetch(fetchShopWidgetsOnlyModule, mockFetchAllShopDataModule.fetchShopWidgetsOnly, "prefetchWidgetsOnly")
-	end
-	
-	local function refreshShopItemInfo()
-		-- upvalues: fFlagEnableShopProductInfoRefreshModule (copy), var31 (write), var32 (write), var33 (write), inExperienceShop (copy), t_3 (write), var3 (ref), fFlagEnableRobuxInExperienceShop (copy), t_2 (write), fFlagEnablePartialDisplayInExperienceShopModule (copy), streamProductInfoIntoSections (ref), fFlagShopUseMockDataModule (copy), fFlagShopUseMockMultiGetProductInfoModule (copy), mockMultiGetProductInfoModule (copy), multiGetProductInfoModule (copy), promoteBonusRobuxPackageToTopPicksModule (copy), t_4 (ref), var4 (ref), sortRobuxPackagesInSections (ref), fetchBonusGamePassOwnershipForPromotion (ref)
-		if not fFlagEnableShopProductInfoRefreshModule then return end
-		if not var31 or var32 or var33 then return end
-		local refreshShopItemsModule = require(inExperienceShop.Api.refreshShopItems)
-		local hydrateRobuxBonusItemsModule = require(inExperienceShop.Api.hydrateRobuxBonusItems)
-		local var45 = if #t_3 > 0 then t_3 else var3(false)
-		local var46 = refreshShopItemsModule.buildRequestsFromSections(var45)
-		
-		if fFlagEnableRobuxInExperienceShop then
-			hydrateRobuxBonusItemsModule.appendBonusItemRequests(var46, var45)
-		end
-		refreshShopItemsModule.appendFailedItemRequests(var46, t_2)
-		
-		if #var46 == 0 then return end
-		var32 = true
-		local var47 = fFlagEnablePartialDisplayInExperienceShopModule
-		
-		if if typeof(var47) == "function" then var47() else var47 then
-			streamProductInfoIntoSections(var45, var46, t_2, function()
-				-- upvalues: var32 (copy)
-				var32 = false
+				WithoutFeaturedPromotionResult = PromoteBonusRobuxPackageToTopPicksModule.withoutFeaturedPromotion(WithoutFeaturedPromotionResult2)
+				Signal2_1((sortRobuxPackagesInSections((PromoteBonusRobuxPackageToTopPicksModule.promoteBonusRobuxPackageToTopPicks(WithoutFeaturedPromotionResult, Tbl)))))
+				fetchBonusGamePassOwnershipForPromotion(WithoutFeaturedPromotionResult)
+				FailedItems = FailedItems2
+				
+				if #FailedItems2 > 0 then
+					LogCounterModule(ProductInfoFailedItemsCounterModule, #FailedItems2)
+				end
+				Flag8 = false
+				
+				if Callback then
+					Callback(FailedItems2)
+				end
+			end):catch(function(Err) --[[ Line: 691 ]]
+				-- upvalues: Flag (ref), v4 (ref), WithoutFeaturedPromotionResult (upval), PromoteBonusRobuxPackageToTopPicksModule (upval), Tbl (upval), Signal2_1 (upval), sortRobuxPackagesInSections (upval), fetchBonusGamePassOwnershipForPromotion (upval), Flag8 (upval), Callback (copy), FailedItems2 (ref)
+				warn("[Shop] streamProductInfoIntoSections failed", (tostring(Err)))
+				Flag = false
+				
+				if v4 ~= nil then
+					WithoutFeaturedPromotionResult = PromoteBonusRobuxPackageToTopPicksModule.withoutFeaturedPromotion(v4)
+					Signal2_1((sortRobuxPackagesInSections((PromoteBonusRobuxPackageToTopPicksModule.promoteBonusRobuxPackageToTopPicks(WithoutFeaturedPromotionResult, Tbl)))))
+					fetchBonusGamePassOwnershipForPromotion(WithoutFeaturedPromotionResult)
+					v4 = nil
+				end
+				Flag8 = false
+				
+				if Callback then
+					Callback(FailedItems2)
+				end
 			end)
 			
 			return
+		elseif Callback then
+			Callback(FailedItems1)
 		end
-		local _ = nil;
-		(if fFlagShopUseMockDataModule and fFlagShopUseMockMultiGetProductInfoModule then mockMultiGetProductInfoModule.multiGetProductInfo(var46, 0) else multiGetProductInfoModule(var46)):andThen(function(p4)
-			-- upvalues: refreshShopItemsModule (ref), var45 (ref), fFlagEnableRobuxInExperienceShop (copy), hydrateRobuxBonusItemsModule (ref), t_2 (ref), t_2 (copy), t_3 (copy), promoteBonusRobuxPackageToTopPicksModule (copy), t_4 (copy), var4 (copy), sortRobuxPackagesInSections (copy), fetchBonusGamePassOwnershipForPromotion (copy), var32 (copy)
-			local var48 = refreshShopItemsModule.mergeProductInfoIntoSections(var45, p4)
-			local var49, var50 = refreshShopItemsModule.insertRecoveredItemsIntoSections(if fFlagEnableRobuxInExperienceShop then hydrateRobuxBonusItemsModule.mergeBonusItemDetailsIntoSections(var48, p4) else var48, p4, t_2)
-			t_2 = var50
-			t_3 = promoteBonusRobuxPackageToTopPicksModule.withoutFeaturedPromotion(var49)
-			var4(sortRobuxPackagesInSections(promoteBonusRobuxPackageToTopPicksModule.promoteBonusRobuxPackageToTopPicks(t_3, t_4)))
-			fetchBonusGamePassOwnershipForPromotion(t_3)
-			var32 = false
-		end):catch(function(p4)
-			-- upvalues: var32 (copy)
-			warn("[Shop] refreshShopItemInfo failed", tostring(p4))
-			var32 = false
+	end
+	
+	local function runShopFetch(Callback2, Callback1, p3) --[[ Line: 701 ]]
+		-- upvalues: Flag5 (ref), Flag4 (ref), Signal2_2 (copy), Signal2_3 (copy), Flag6 (ref), Callback (ref), FFlagShopUseMockDataModule (upval), ErrorsModule (upval), Signal2 (copy), WithoutFeaturedPromotionResult (ref), PromoteBonusRobuxPackageToTopPicksModule (upval), Tbl (copy), Signal2_1 (copy), sortRobuxPackagesInSections (copy), fetchBonusGamePassOwnershipForPromotion (copy), FFlagEnableExperienceShopGlobalIconModule (upval), Signal2_4 (copy), FFlagInExperienceShopExpectStringMetadataValuesModule (upval), Signal2_5 (copy), Signal2_6 (copy), FFlagHideOfferNotificationsWhenShopEmpty (upval), InExperienceOffersModule (upval), HasOfferEligibleCategoryModule (upval), FailedItems (ref), Flag2 (ref), Flag1 (ref), Flag (ref), FFlagEnableUserOffers (upval), FFlagEnableOffersPrefetch (upval), list (upval)
+		if Flag5 or Flag4 then return end
+		Flag4 = true
+		Signal2_2(true)
+		Signal2_3(nil)
+		local NoFlag6 = not Flag6
+		Flag6 = true
+		
+		if NoFlag6 then
+			Callback()
+		end;
+		(if FFlagShopUseMockDataModule then Callback1() else Callback2()):andThen(function(Result) --[[ Line: 718 ]]
+			-- upvalues: ErrorsModule (upval), p3 (copy), Signal2 (upval), WithoutFeaturedPromotionResult (upval), PromoteBonusRobuxPackageToTopPicksModule (upval), Tbl (upval), Signal2_1 (upval), sortRobuxPackagesInSections (upval), fetchBonusGamePassOwnershipForPromotion (upval), FFlagEnableExperienceShopGlobalIconModule (upval), Signal2_4 (upval), FFlagInExperienceShopExpectStringMetadataValuesModule (upval), Signal2_5 (upval), Signal2_6 (upval), FFlagHideOfferNotificationsWhenShopEmpty (upval), InExperienceOffersModule (upval), HasOfferEligibleCategoryModule (upval), FailedItems (upval), Signal2_2 (upval), Flag4 (upval), Flag5 (upval), NoFlag6 (copy), Callback (upval), Flag2 (upval), Flag1 (upval), Flag (upval), FFlagEnableUserOffers (upval), FFlagEnableOffersPrefetch (upval), list (upval)
+			if type(Result) ~= "table" or (type(Result.categories) ~= "table" or type(Result.sections) ~= "table") then
+				return ErrorsModule.rejectSchema(string.format("createInExperienceShopStore: %s payload missing categories/sections", p3), Result)
+			end
+			Signal2(Result.categories)
+			WithoutFeaturedPromotionResult = PromoteBonusRobuxPackageToTopPicksModule.withoutFeaturedPromotion(Result.sections)
+			Signal2_1((sortRobuxPackagesInSections((PromoteBonusRobuxPackageToTopPicksModule.promoteBonusRobuxPackageToTopPicks(WithoutFeaturedPromotionResult, Tbl)))))
+			fetchBonusGamePassOwnershipForPromotion(WithoutFeaturedPromotionResult)
+			
+			if FFlagEnableExperienceShopGlobalIconModule then
+				local Metadata = Result.metadata
+				Signal2_4(Metadata)
+				local InExperienceGlobalIconEnabled = if Metadata == nil then nil else Metadata.inExperienceGlobalIconEnabled
+				Signal2_5(if FFlagInExperienceShopExpectStringMetadataValuesModule then InExperienceGlobalIconEnabled == "true" else InExperienceGlobalIconEnabled == true)
+				Signal2_6(Metadata ~= nil and Metadata.newOffers == true)
+			end
+			if FFlagHideOfferNotificationsWhenShopEmpty then
+				InExperienceOffersModule.getOffersStore(false).setShopHasItems(HasOfferEligibleCategoryModule(Result.categories))
+			end
+			FailedItems = Result.failedItems or {}
+			Signal2_2(false)
+			Flag4 = false
+			Flag5 = true
+			
+			if NoFlag6 then
+				if Flag2 and Flag5 and not Flag1 and not Flag then
+					Callback()
+				end
+			else
+				Callback()
+			end
+			if FFlagEnableUserOffers and not FFlagEnableOffersPrefetch then
+				InExperienceOffersModule.getOffersStore(false).fetchOffers(list)
+			end
+		end):catch(function(Err) --[[ Line: 751 ]]
+			-- upvalues: Signal2_3 (upval), Signal2 (upval), Signal2_1 (upval), FailedItems (upval), Signal2_2 (upval), Flag4 (upval)
+			Signal2_3(Err)
+			Signal2({})
+			Signal2_1({})
+			FailedItems = {}
+			Signal2_2(false)
+			Flag4 = false
 		end)
 	end
 	
-	local function onShopOpened()
-		-- upvalues: fFlagEnableUserOffers (copy), fFlagOfferNineDotActivityIndicator (copy), fFlagOfferNotifyOnGlobalIcon (copy), inExperienceOffersModule (copy), fFlagEnablePartialDisplayInExperienceShopModule (copy), runPartialDisplayShopFetch (ref), fetchShopWidgetsOnlyModule (copy), mockFetchAllShopDataModule (copy), runShopFetch (ref), fetchAllShopDataModule (copy), refreshShopItemInfo (ref)
-		if fFlagEnableUserOffers and (fFlagOfferNineDotActivityIndicator or fFlagOfferNotifyOnGlobalIcon) then
-			inExperienceOffersModule.getOffersStore(false).markInExperienceShopOpened()
-		end
-		if if typeof(fFlagEnablePartialDisplayInExperienceShopModule) == "function" then fFlagEnablePartialDisplayInExperienceShopModule() else fFlagEnablePartialDisplayInExperienceShopModule then
-			runPartialDisplayShopFetch(fetchShopWidgetsOnlyModule, mockFetchAllShopDataModule.fetchShopWidgetsOnly, "fetchAllShopData")
+	local function runPartialDisplayShopFetch(Callback2, Callback1, p3) --[[ Line: 764 ]]
+		-- upvalues: Flag5 (ref), Flag4 (ref), Signal2_2 (copy), Signal2_3 (copy), Flag6 (ref), Callback (ref), FFlagShopUseMockDataModule (upval), ErrorsModule (upval), Signal2 (copy), WithoutFeaturedPromotionResult (ref), PromoteBonusRobuxPackageToTopPicksModule (upval), Tbl (copy), Signal2_1 (copy), sortRobuxPackagesInSections (copy), fetchBonusGamePassOwnershipForPromotion (copy), FFlagEnableExperienceShopGlobalIconModule (upval), Signal2_4 (copy), FFlagInExperienceShopExpectStringMetadataValuesModule (upval), Signal2_5 (copy), Signal2_6 (copy), FFlagHideOfferNotificationsWhenShopEmpty (upval), InExperienceOffersModule (upval), HasOfferEligibleCategoryModule (upval), FailedItems (ref), Flag2 (ref), Flag1 (ref), Flag (ref), FFlagEnableUserOffers (upval), FFlagEnableOffersPrefetch (upval), list (upval), buildProductInfoRequestsForHydration (copy), streamProductInfoIntoSections (copy)
+		if Flag5 or Flag4 then return end
+		Flag4 = true
+		Signal2_2(true)
+		Signal2_3(nil)
+		local NoFlag6 = not Flag6
+		Flag6 = true
+		
+		if NoFlag6 then
+			Callback()
+		end;
+		(if FFlagShopUseMockDataModule then Callback1() else Callback2()):andThen(function(Result) --[[ Line: 785 ]]
+			-- upvalues: ErrorsModule (upval), p3 (copy), Signal2 (upval), WithoutFeaturedPromotionResult (upval), PromoteBonusRobuxPackageToTopPicksModule (upval), Tbl (upval), Signal2_1 (upval), sortRobuxPackagesInSections (upval), fetchBonusGamePassOwnershipForPromotion (upval), FFlagEnableExperienceShopGlobalIconModule (upval), Signal2_4 (upval), FFlagInExperienceShopExpectStringMetadataValuesModule (upval), Signal2_5 (upval), Signal2_6 (upval), FFlagHideOfferNotificationsWhenShopEmpty (upval), InExperienceOffersModule (upval), HasOfferEligibleCategoryModule (upval), FailedItems (upval), Signal2_2 (upval), Flag4 (upval), Flag5 (upval), NoFlag6 (copy), Callback (upval), Flag2 (upval), Flag1 (upval), Flag (upval), FFlagEnableUserOffers (upval), FFlagEnableOffersPrefetch (upval), list (upval), buildProductInfoRequestsForHydration (upval), streamProductInfoIntoSections (upval)
+			if type(Result) ~= "table" or (type(Result.categories) ~= "table" or type(Result.sections) ~= "table") then
+				return ErrorsModule.rejectSchema(string.format("createInExperienceShopStore: %s payload missing categories/sections", p3), Result)
+			end
+			Signal2(Result.categories)
+			WithoutFeaturedPromotionResult = PromoteBonusRobuxPackageToTopPicksModule.withoutFeaturedPromotion(Result.sections)
+			Signal2_1((sortRobuxPackagesInSections((PromoteBonusRobuxPackageToTopPicksModule.promoteBonusRobuxPackageToTopPicks(WithoutFeaturedPromotionResult, Tbl)))))
+			fetchBonusGamePassOwnershipForPromotion(WithoutFeaturedPromotionResult)
+			
+			if FFlagEnableExperienceShopGlobalIconModule then
+				local Metadata = Result.metadata
+				Signal2_4(Metadata)
+				local InExperienceGlobalIconEnabled = if Metadata == nil then nil else Metadata.inExperienceGlobalIconEnabled
+				Signal2_5(if FFlagInExperienceShopExpectStringMetadataValuesModule then InExperienceGlobalIconEnabled == "true" else InExperienceGlobalIconEnabled == true)
+				Signal2_6(Metadata ~= nil and Metadata.newOffers == true)
+			end
+			if FFlagHideOfferNotificationsWhenShopEmpty then
+				InExperienceOffersModule.getOffersStore(false).setShopHasItems(HasOfferEligibleCategoryModule(Result.categories))
+			end
+			FailedItems = Result.failedItems or {}
+			Signal2_2(false)
+			Flag4 = false
+			Flag5 = true
+			
+			if NoFlag6 then
+				if Flag2 and Flag5 and not Flag1 and not Flag then
+					Callback()
+				end
+			else
+				Callback()
+			end
+			if FFlagEnableUserOffers and not FFlagEnableOffersPrefetch then
+				InExperienceOffersModule.getOffersStore(false).fetchOffers(list)
+			end
+			local WithoutFeaturedPromotionResult1 = WithoutFeaturedPromotionResult
+			streamProductInfoIntoSections(WithoutFeaturedPromotionResult1, buildProductInfoRequestsForHydration(WithoutFeaturedPromotionResult1, FailedItems), FailedItems, nil)
+		end):catch(function(Err) --[[ Line: 817 ]]
+			-- upvalues: Signal2_3 (upval), Signal2 (upval), Signal2_1 (upval), FailedItems (upval), Signal2_2 (upval), Flag4 (upval)
+			Signal2_3(Err)
+			Signal2({})
+			Signal2_1({})
+			FailedItems = {}
+			Signal2_2(false)
+			Flag4 = false
+		end)
+	end
+	
+	local function fetchAllShopData() --[[ Line: 827 ]]
+		-- upvalues: FFlagEnablePartialDisplayInExperienceShopModule (upval), runPartialDisplayShopFetch (copy), FetchShopWidgetsOnlyModule (upval), MockFetchAllShopDataModule (upval), runShopFetch (copy), FetchAllShopDataModule (upval)
+		if if typeof(FFlagEnablePartialDisplayInExperienceShopModule) == "function" then FFlagEnablePartialDisplayInExperienceShopModule() else FFlagEnablePartialDisplayInExperienceShopModule then
+			runPartialDisplayShopFetch(FetchShopWidgetsOnlyModule, MockFetchAllShopDataModule.fetchShopWidgetsOnly, "fetchAllShopData")
+			
+			return
 		else
-			runShopFetch(fetchAllShopDataModule, mockFetchAllShopDataModule.fetchAllShopData, "fetchAllShopData")
+			runShopFetch(FetchAllShopDataModule, MockFetchAllShopDataModule.fetchAllShopData, "fetchAllShopData")
+		end
+	end
+	
+	local function prefetchWidgetsOnly() --[[ Line: 839 ]]
+		-- upvalues: runShopFetch (copy), FetchShopWidgetsOnlyModule (upval), MockFetchAllShopDataModule (upval)
+		runShopFetch(FetchShopWidgetsOnlyModule, MockFetchAllShopDataModule.fetchShopWidgetsOnly, "prefetchWidgetsOnly")
+	end
+	
+	local function refreshShopItemInfo() --[[ Line: 862 ]]
+		-- upvalues: FFlagEnableShopProductInfoRefreshModule (upval), Flag5 (ref), Flag7 (ref), Flag8 (ref), InExperienceShop (upval), WithoutFeaturedPromotionResult (ref), Signal1 (copy), FFlagEnableRobuxInExperienceShop (upval), FailedItems (ref), FFlagEnablePartialDisplayInExperienceShopModule (upval), streamProductInfoIntoSections (copy), FFlagShopUseMockDataModule (upval), FFlagShopUseMockMultiGetProductInfoModule (upval), MockMultiGetProductInfoModule (upval), MultiGetProductInfoModule (upval), PromoteBonusRobuxPackageToTopPicksModule (upval), Tbl (copy), Signal2_1 (copy), sortRobuxPackagesInSections (copy), fetchBonusGamePassOwnershipForPromotion (copy)
+		if not FFlagEnableShopProductInfoRefreshModule then return end
+		if not Flag5 or Flag7 or Flag8 then return end
+		local RefreshShopItemsModule = require(InExperienceShop.Api.refreshShopItems)
+		local HydrateRobuxBonusItemsModule = require(InExperienceShop.Api.hydrateRobuxBonusItems)
+		local WithoutFeaturedPromotionResult1 = if #WithoutFeaturedPromotionResult > 0 then WithoutFeaturedPromotionResult else Signal1(false)
+		local RequestsFromSections = RefreshShopItemsModule.buildRequestsFromSections(WithoutFeaturedPromotionResult1)
+		
+		if FFlagEnableRobuxInExperienceShop then
+			HydrateRobuxBonusItemsModule.appendBonusItemRequests(RequestsFromSections, WithoutFeaturedPromotionResult1)
+		end
+		local FailedItems1 = FailedItems
+		RefreshShopItemsModule.appendFailedItemRequests(RequestsFromSections, FailedItems1)
+		
+		if #RequestsFromSections == 0 then return end
+		Flag7 = true
+		
+		if if typeof(FFlagEnablePartialDisplayInExperienceShopModule) == "function" then FFlagEnablePartialDisplayInExperienceShopModule() else FFlagEnablePartialDisplayInExperienceShopModule then
+			streamProductInfoIntoSections(WithoutFeaturedPromotionResult1, RequestsFromSections, FailedItems1, function() --[[ Line: 894 ]]
+				-- upvalues: Flag7 (upval)
+				Flag7 = false
+			end)
+			
+			return
+		else
+			(if FFlagShopUseMockDataModule and FFlagShopUseMockMultiGetProductInfoModule then MockMultiGetProductInfoModule.multiGetProductInfo(RequestsFromSections, 0) else MultiGetProductInfoModule(RequestsFromSections)):andThen(function(Result) --[[ Line: 909 ]]
+				-- upvalues: RefreshShopItemsModule (copy), WithoutFeaturedPromotionResult1 (copy), FFlagEnableRobuxInExperienceShop (upval), HydrateRobuxBonusItemsModule (copy), FailedItems1 (copy), FailedItems (upval), WithoutFeaturedPromotionResult (upval), PromoteBonusRobuxPackageToTopPicksModule (upval), Tbl (upval), Signal2_1 (upval), sortRobuxPackagesInSections (upval), fetchBonusGamePassOwnershipForPromotion (upval), Flag7 (upval)
+				local MergeProductInfoIntoSectionsResult = RefreshShopItemsModule.mergeProductInfoIntoSections(WithoutFeaturedPromotionResult1, Result)
+				local InsertRecoveredItemsIntoSectionsResult, InsertRecoveredItemsIntoSectionsResult2 = RefreshShopItemsModule.insertRecoveredItemsIntoSections(if FFlagEnableRobuxInExperienceShop then HydrateRobuxBonusItemsModule.mergeBonusItemDetailsIntoSections(MergeProductInfoIntoSectionsResult, Result) else MergeProductInfoIntoSectionsResult, Result, FailedItems1)
+				FailedItems = InsertRecoveredItemsIntoSectionsResult2
+				WithoutFeaturedPromotionResult = PromoteBonusRobuxPackageToTopPicksModule.withoutFeaturedPromotion(InsertRecoveredItemsIntoSectionsResult)
+				Signal2_1((sortRobuxPackagesInSections((PromoteBonusRobuxPackageToTopPicksModule.promoteBonusRobuxPackageToTopPicks(WithoutFeaturedPromotionResult, Tbl)))))
+				fetchBonusGamePassOwnershipForPromotion(WithoutFeaturedPromotionResult)
+				Flag7 = false
+			end):catch(function(Err) --[[ Line: 920 ]]
+				-- upvalues: Flag7 (upval)
+				warn("[Shop] refreshShopItemInfo failed", (tostring(Err)))
+				Flag7 = false
+			end)
+		end
+	end
+	
+	local function onShopOpened() --[[ Line: 937 ]]
+		-- upvalues: FFlagEnableUserOffers (upval), FFlagOfferNineDotActivityIndicator (upval), FFlagOfferNotifyOnGlobalIcon (upval), InExperienceOffersModule (upval), FFlagEnableShopExposureLoggingModule (upval), RunService (upval), Parent (upval), FStringExperienceShopIXPLayersCommaSeparatedModule (upval), FFlagLuaAppEnableGamePassFreeTrialsModule (upval), Flag1 (ref), Flag5 (ref), Flag (ref), Callback (ref), Flag2 (ref), FFlagEnablePartialDisplayInExperienceShopModule (upval), runPartialDisplayShopFetch (copy), FetchShopWidgetsOnlyModule (upval), MockFetchAllShopDataModule (upval), runShopFetch (copy), FetchAllShopDataModule (upval), refreshShopItemInfo (copy)
+		if FFlagEnableUserOffers and (FFlagOfferNineDotActivityIndicator or FFlagOfferNotifyOnGlobalIcon) then
+			InExperienceOffersModule.getOffersStore(false).markInExperienceShopOpened()
+		end
+		if FFlagEnableShopExposureLoggingModule and not RunService:IsStudio() then
+			local IXPServiceWrapper = require(Parent.IxpServiceWrapper).IXPServiceWrapper
+			
+			for _, value in string.split(FStringExperienceShopIXPLayersCommaSeparatedModule, ",") do
+				local Match: string? = string.match(value, "^%s*(.-)%s*$")
+				
+				if Match ~= nil and Match ~= "" then
+					IXPServiceWrapper:LogUserLayerExposure(Match)
+				end
+			end
+		end
+		if FFlagLuaAppEnableGamePassFreeTrialsModule and not Flag1 then
+			if Flag5 and not Flag then
+				Callback()
+			else
+				Flag2 = true
+			end
+		end
+		if if typeof(FFlagEnablePartialDisplayInExperienceShopModule) == "function" then FFlagEnablePartialDisplayInExperienceShopModule() else FFlagEnablePartialDisplayInExperienceShopModule then
+			runPartialDisplayShopFetch(FetchShopWidgetsOnlyModule, MockFetchAllShopDataModule.fetchShopWidgetsOnly, "fetchAllShopData")
+		else
+			runShopFetch(FetchAllShopDataModule, MockFetchAllShopDataModule.fetchAllShopData, "fetchAllShopData")
 		end
 		refreshShopItemInfo()
 	end
 	
-	local function refreshRobuxWidgetsAfterPurchase()
-		-- upvalues: fFlagRefetchRobuxWidgetAfterPurchaseModule (copy), promiseModule (copy), var31 (write), var29 (write), shopDebugLoggerModule (copy), fFlagShopUseMockDataModule (copy), mockFetchAllShopDataModule (copy), fetchRobuxWidgetsAfterPurchaseModule (copy), mergeRobuxShopDataModule (copy), var1 (ref), t_3 (write), var2 (ref), promoteBonusRobuxPackageToTopPicksModule (copy), t_4 (ref), var4 (ref), sortRobuxPackagesInSections (ref), fetchBonusGamePassOwnershipForPromotion (ref)
-		if not fFlagRefetchRobuxWidgetAfterPurchaseModule then
-			return promiseModule.resolve()
-		elseif not var31 then
-			return promiseModule.resolve()
-		elseif var29 then
-			return promiseModule.resolve()
+	local function refreshRobuxWidgetsAfterPurchase() --[[ Line: 966 ]]
+		-- upvalues: FFlagRefetchRobuxWidgetAfterPurchaseModule (upval), PromiseModule (upval), Flag5 (ref), Flag3 (ref), ShopDebugLoggerModule (upval), FFlagShopUseMockDataModule (upval), MockFetchAllShopDataModule (upval), FetchRobuxWidgetsAfterPurchaseModule (upval), MergeRobuxShopDataModule (upval), Signal (copy), WithoutFeaturedPromotionResult (ref), Signal2 (copy), PromoteBonusRobuxPackageToTopPicksModule (upval), Tbl (copy), Signal2_1 (copy), sortRobuxPackagesInSections (copy), fetchBonusGamePassOwnershipForPromotion (copy)
+		if not FFlagRefetchRobuxWidgetAfterPurchaseModule then
+			return PromiseModule.resolve()
+		elseif not Flag5 then
+			return PromiseModule.resolve()
+		elseif Flag3 then
+			return PromiseModule.resolve()
+		else
+			Flag3 = true
+			ShopDebugLoggerModule.log("refreshRobuxWidgetsAfterPurchase: start")
+			
+			return (if FFlagShopUseMockDataModule then MockFetchAllShopDataModule.fetchRobuxWidgetsAfterPurchase(0) else FetchRobuxWidgetsAfterPurchaseModule.fetchRobuxWidgetsAfterPurchase()):andThen(function(Result) --[[ Line: 984 ]]
+				-- upvalues: ShopDebugLoggerModule (upval), MergeRobuxShopDataModule (upval), Signal (upval), WithoutFeaturedPromotionResult (upval), Signal2 (upval), PromoteBonusRobuxPackageToTopPicksModule (upval), Tbl (upval), Signal2_1 (upval), sortRobuxPackagesInSections (upval), fetchBonusGamePassOwnershipForPromotion (upval)
+				if type(Result) == "table" and (type(Result.categories) == "table" and type(Result.sections) == "table") then
+					local MergeRobuxShopDataModuleResult, MergeRobuxShopDataModuleResult2 = MergeRobuxShopDataModule(Signal(false), WithoutFeaturedPromotionResult, Result)
+					Signal2(MergeRobuxShopDataModuleResult)
+					WithoutFeaturedPromotionResult = PromoteBonusRobuxPackageToTopPicksModule.withoutFeaturedPromotion(MergeRobuxShopDataModuleResult2)
+					Signal2_1((sortRobuxPackagesInSections((PromoteBonusRobuxPackageToTopPicksModule.promoteBonusRobuxPackageToTopPicks(WithoutFeaturedPromotionResult, Tbl)))))
+					fetchBonusGamePassOwnershipForPromotion(WithoutFeaturedPromotionResult)
+					
+					return
+				else
+					ShopDebugLoggerModule.log("refreshRobuxWidgetsAfterPurchase: skip, invalid payload")
+				end
+			end):catch(function(Err) --[[ Line: 994 ]]
+				-- upvalues: ShopDebugLoggerModule (upval)
+				ShopDebugLoggerModule.logLazy(function(): string --[[ Line: 995 ]]
+					-- upvalues: Err (copy)
+					return "refreshRobuxWidgetsAfterPurchase: failed err=" .. tostring(Err)
+				end)
+			end):finally(function() --[[ Line: 999 ]]
+				-- upvalues: Flag3 (upval)
+				Flag3 = false
+			end)
 		end
-		var29 = true
-		shopDebugLoggerModule.log("refreshRobuxWidgetsAfterPurchase: start")
+	end
+	
+	local function pollOwnershipUntilTrue(Callback, Number, p3, ScaledPOLLBACKOFFMULTIPLIER) --[[ Line: 1011 ]]
+		-- upvalues: PromiseModule (upval), pollOwnershipUntilTrue (copy), ConstantsModule (upval)
+		return Callback(Number):andThen(function(Result) --[[ Line: 1018 ]]
+			-- upvalues: p3 (copy), PromiseModule (upval), ScaledPOLLBACKOFFMULTIPLIER (copy), pollOwnershipUntilTrue (upval), Callback (copy), Number (copy), ConstantsModule (upval)
+			return if Result then true else p3 > 1 and PromiseModule.delay(ScaledPOLLBACKOFFMULTIPLIER):andThen(function() --[[ Line: 1025 ]]
+				-- upvalues: pollOwnershipUntilTrue (upval), Callback (upval), Number (upval), p3 (upval), ScaledPOLLBACKOFFMULTIPLIER (upval), ConstantsModule (upval)
+				return pollOwnershipUntilTrue(Callback, Number, p3 - 1, ScaledPOLLBACKOFFMULTIPLIER * ConstantsModule.POLL_BACKOFF_MULTIPLIER)
+			end)
+		end):catch(function(Err) --[[ Line: 1034 ]]
+			-- upvalues: p3 (copy), Number (copy), PromiseModule (upval), ScaledPOLLBACKOFFMULTIPLIER (copy), pollOwnershipUntilTrue (upval), Callback (copy), ConstantsModule (upval)
+			if p3 <= 1 then
+				warn("[Shop] pollOwnershipUntilTrue exhausted with engine error", Number, (tostring(Err)))
+				
+				return nil
+			else
+				return PromiseModule.delay(ScaledPOLLBACKOFFMULTIPLIER):andThen(function() --[[ Line: 1039 ]]
+					-- upvalues: pollOwnershipUntilTrue (upval), Callback (upval), Number (upval), p3 (upval), ScaledPOLLBACKOFFMULTIPLIER (upval), ConstantsModule (upval)
+					return pollOwnershipUntilTrue(Callback, Number, p3 - 1, ScaledPOLLBACKOFFMULTIPLIER * ConstantsModule.POLL_BACKOFF_MULTIPLIER)
+				end)
+			end
+		end)
+	end
+	
+	local function pollGamePassOwnershipAfterPurchase(Key, FIntShopOwnershipFetchMaxAttemptsModule, FetchOwnedGamePass, Enabled) --[[ Line: 1055 ]]
+		-- upvalues: t1 (copy), ShopDebugLoggerModule (upval), pollOwnershipUntilTrue (copy), ConstantsModule (upval), writeOwnership (copy), Players (upval), MarketplaceService (upval), PromiseModule (upval)
+		if t1[Key] then
+			ShopDebugLoggerModule.logLazy(function(): string --[[ Line: 1062 ]]
+				-- upvalues: Key (copy)
+				return "pollGamePassOwnership: already in flight itemId=" .. Key
+			end)
+			
+			return
+		end
+		local Number: number? = tonumber(Key)
 		
-		return (if fFlagShopUseMockDataModule then mockFetchAllShopDataModule.fetchRobuxWidgetsAfterPurchase(0) else fetchRobuxWidgetsAfterPurchaseModule.fetchRobuxWidgetsAfterPurchase()):andThen(function(p4)
-			-- upvalues: shopDebugLoggerModule (copy), mergeRobuxShopDataModule (copy), var1 (copy), t_3 (copy), var2 (copy), promoteBonusRobuxPackageToTopPicksModule (copy), t_4 (copy), var4 (copy), sortRobuxPackagesInSections (copy), fetchBonusGamePassOwnershipForPromotion (copy)
-			if type(p4) == "table" and (type(p4.categories) == "table" and type(p4.sections) == "table") then
-				local var45, var46 = mergeRobuxShopDataModule(var1(false), t_3, p4)
-				var2(var45)
-				t_3 = promoteBonusRobuxPackageToTopPicksModule.withoutFeaturedPromotion(var46)
-				var4(sortRobuxPackagesInSections(promoteBonusRobuxPackageToTopPicksModule.promoteBonusRobuxPackageToTopPicks(t_3, t_4)))
-				fetchBonusGamePassOwnershipForPromotion(t_3)
+		if Number == nil then
+			ShopDebugLoggerModule.logLazy(function(): string --[[ Line: 1069 ]]
+				-- upvalues: Key (copy)
+				return "pollGamePassOwnership: skip invalid itemId=" .. Key
+			end)
+			
+			return
+		else
+			t1[Key] = true
+			ShopDebugLoggerModule.logLazy(function(): string --[[ Line: 1076 ]]
+				-- upvalues: Key (copy), FIntShopOwnershipFetchMaxAttemptsModule (copy), Enabled (copy)
+				return "pollGamePassOwnership: start itemId=" .. Key .. " maxAttempts=" .. tostring(FIntShopOwnershipFetchMaxAttemptsModule) .. " signalOnSuccess=" .. tostring(Enabled == true)
+			end)
+			PromiseModule.delay(ConstantsModule.POLL_INITIAL_DELAY_SECONDS):andThen(function() --[[ Line: 1085 | Named "startPoll" ]]
+				-- upvalues: pollOwnershipUntilTrue (upval), FetchOwnedGamePass (copy), Number (copy), FIntShopOwnershipFetchMaxAttemptsModule (copy), ConstantsModule (upval), ShopDebugLoggerModule (upval), Key (copy), writeOwnership (upval), Enabled (copy), Players (upval), MarketplaceService (upval), t1 (upval)
+				pollOwnershipUntilTrue(FetchOwnedGamePass, Number, FIntShopOwnershipFetchMaxAttemptsModule, ConstantsModule.POLL_INITIAL_DELAY_SECONDS):andThen(function(Enabled1) --[[ Line: 1087 ]]
+					-- upvalues: ShopDebugLoggerModule (upval), Key (upval), writeOwnership (upval), Enabled (upval), Players (upval), MarketplaceService (upval), Number (upval)
+					ShopDebugLoggerModule.logLazy(function(): string --[[ Line: 1088 ]]
+						-- upvalues: Key (upval), Enabled1 (copy)
+						return "pollGamePassOwnership: result itemId=" .. Key .. " owned=" .. tostring(Enabled1)
+					end)
+					
+					if Enabled1 ~= true then return end
+					writeOwnership(Key, Enabled1)
+					
+					if Enabled then
+						local LocalPlayer = Players.LocalPlayer
+						
+						if LocalPlayer ~= nil then
+							ShopDebugLoggerModule.logLazy(function(): string --[[ Line: 1100 ]]
+								-- upvalues: Key (upval)
+								return "pollGamePassOwnership: SignalPromptGamePassPurchaseFinished itemId=" .. Key
+							end)
+							MarketplaceService:SignalPromptGamePassPurchaseFinished(LocalPlayer, Number, true)
+						end
+					end
+				end):finally(function() --[[ Line: 1107 ]]
+					-- upvalues: t1 (upval), Key (upval)
+					t1[Key] = nil
+				end)
+			end)
+		end
+	end
+	
+	MarketplaceService.PromptGamePassPurchaseFinished:Connect(function(Player, GamePassId, WasPurchased) --[[ Line: 1125 ]]
+		-- upvalues: Players (upval), pollGamePassOwnershipAfterPurchase (copy), FIntShopOwnershipFetchMaxAttemptsModule (upval), fetchOwnedGamePass (copy)
+		if not WasPurchased then return end
+		local LocalPlayer = Players.LocalPlayer
+		
+		if LocalPlayer ~= nil and Player.UserId == LocalPlayer.UserId then
+			pollGamePassOwnershipAfterPurchase(tostring(GamePassId), FIntShopOwnershipFetchMaxAttemptsModule, fetchOwnedGamePass)
+			
+			return
+		end
+	end)
+	
+	if FFlagShopListenNativePurchaseFinishedModule and FFlagEnableRobuxInExperienceShop then
+		local function pollBonusOwnershipAfterNativeRobuxPurchase(p3, p4, Player) --[[ Line: 1146 ]]
+			-- upvalues: Players (upval), ShopDebugLoggerModule (upval), v1 (ref), v2 (ref), v3 (ref), FFlagRefetchRobuxWidgetAfterPurchaseModule (upval), FFlagShopRobuxPurchaseCompletionModalModule (upval), Signal2_11 (copy), FFlagShopUseMockUserOwnsGamePassModule (upval), MockUserOwnsGamePassModule (upval), UserOwnsGamePassHttpModule (upval), pollGamePassOwnershipAfterPurchase (copy), FIntShopOwnershipFetchMaxAttemptsModule (upval), FFlagSkipPaymentSessionForPlainRobuxModule (upval), refreshRobuxWidgetsAfterPurchase (copy)
+			if Player ~= nil then
+				local LocalPlayer = Players.LocalPlayer
+				
+				if LocalPlayer == nil or Player.UserId ~= LocalPlayer.UserId then
+					ShopDebugLoggerModule.log("NativePurchaseFinished: ignored, not local player")
+					
+					return
+				end
+			end
+			local Key = v1
+			local v4 = v2
+			local v5 = v3
+			
+			if v4 == nil or not FFlagRefetchRobuxWidgetAfterPurchaseModule and Key == nil and (not FFlagShopRobuxPurchaseCompletionModalModule or v5 == nil) then
+				ShopDebugLoggerModule.log("NativePurchaseFinished: skip, no pending shop Robux purchase")
 				
 				return
 			end
-			shopDebugLoggerModule.log("refreshRobuxWidgetsAfterPurchase: skip, invalid payload")
-		end):catch(function(p4)
-			-- upvalues: shopDebugLoggerModule (copy)
-			shopDebugLoggerModule.logLazy(function()
-				-- upvalues: p4 (ref)
-				return "refreshRobuxWidgetsAfterPurchase: failed err=" .. tostring(p4)
-			end)
-		end):finally(function()
-			-- upvalues: var29 (copy)
-			var29 = false
-		end)
-	end
-	
-	local function pollOwnershipUntilTrue(p4, p5, p6, p7)
-		-- upvalues: promiseModule (copy), pollOwnershipUntilTrue (ref), constantsModule (copy)
-		return p4(p5):andThen(function(p8)
-			-- upvalues: p6 (ref), promiseModule (copy), p7 (ref), pollOwnershipUntilTrue (copy), p4 (ref), p5 (ref), constantsModule (copy)
-			return if p8 then true elseif p6 <= 1 then false else promiseModule.delay(p7):andThen(function()
-				-- upvalues: pollOwnershipUntilTrue (copy), p4 (copy), p5 (copy), p6 (copy), p7 (copy), constantsModule (copy)
-				return pollOwnershipUntilTrue(p4, p5, p6 - 1, p7 * constantsModule.POLL_BACKOFF_MULTIPLIER)
-			end)
-		end):catch(function(p8)
-			-- upvalues: p6 (ref), p5 (ref), promiseModule (copy), p7 (ref), pollOwnershipUntilTrue (copy), p4 (ref), constantsModule (copy)
-			if p6 <= 1 then
-				warn("[Shop] pollOwnershipUntilTrue exhausted with engine error", p5, tostring(p8))
-				
-				return nil
-			end
-			return promiseModule.delay(p7):andThen(function()
-				-- upvalues: pollOwnershipUntilTrue (copy), p4 (copy), p5 (copy), p6 (copy), p7 (copy), constantsModule (copy)
-				return pollOwnershipUntilTrue(p4, p5, p6 - 1, p7 * constantsModule.POLL_BACKOFF_MULTIPLIER)
-			end)
-		end)
-	end
-	
-	local function pollGamePassOwnershipAfterPurchase(p4, p5, p6, p7)
-		-- upvalues: t_1 (ref), shopDebugLoggerModule (copy), pollOwnershipUntilTrue (ref), constantsModule (copy), writeOwnership (ref), playersService (copy), marketplaceService (copy), promiseModule (copy)
-		if t_1[p4] then
-			shopDebugLoggerModule.logLazy(function()
-				-- upvalues: p4 (ref)
-				return "pollGamePassOwnership: already in flight itemId=" .. p4
-			end)
-			
-			return
-		end
-		local var45 = tonumber(p4)
-		
-		if var45 == nil then
-			shopDebugLoggerModule.logLazy(function()
-				-- upvalues: p4 (ref)
-				return "pollGamePassOwnership: skip invalid itemId=" .. p4
-			end)
-			
-			return
-		end
-		t_1[p4] = true
-		shopDebugLoggerModule.logLazy(function()
-			-- upvalues: p4 (ref), p5 (ref), p7 (ref)
-			return "pollGamePassOwnership: start itemId=" .. p4 .. " maxAttempts=" .. tostring(p5) .. " signalOnSuccess=" .. tostring(p7 == true)
-		end)
-		promiseModule.delay(constantsModule.POLL_INITIAL_DELAY_SECONDS):andThen(function()
-			-- upvalues: pollOwnershipUntilTrue (copy), p6 (ref), var45 (ref), p5 (ref), constantsModule (copy), shopDebugLoggerModule (copy), p4 (ref), writeOwnership (copy), p7 (ref), playersService (copy), marketplaceService (copy), t_1 (copy)
-			pollOwnershipUntilTrue(p6, var45, p5, constantsModule.POLL_INITIAL_DELAY_SECONDS):andThen(function(p8)
-				-- upvalues: shopDebugLoggerModule (copy), p4 (copy), writeOwnership (copy), p7 (copy), playersService (copy), marketplaceService (copy), var45 (copy)
-				shopDebugLoggerModule.logLazy(function()
-					-- upvalues: p4 (copy), p8 (ref)
-					return "pollGamePassOwnership: result itemId=" .. p4 .. " owned=" .. tostring(p8)
+			if tostring(p4) ~= v4 then
+				ShopDebugLoggerModule.logLazy(function(): string --[[ Line: 1173 ]]
+					-- upvalues: p4 (copy), v4 (copy)
+					return "NativePurchaseFinished: skip, sku mismatch productId=" .. tostring(p4) .. " pendingStoreSku=" .. v4
 				end)
 				
-				if p8 ~= true then return end
-				writeOwnership(p4, p8)
-				
-				if p7 then
-					local localPlayer = playersService.LocalPlayer
-					
-					if localPlayer ~= nil then
-						shopDebugLoggerModule.logLazy(function()
-							-- upvalues: p4 (copy)
-							return "pollGamePassOwnership: SignalPromptGamePassPurchaseFinished itemId=" .. p4
-						end)
-						marketplaceService:SignalPromptGamePassPurchaseFinished(localPlayer, var45, true)
-					end
-				end
-			end):finally(function()
-				-- upvalues: t_1 (copy), p4 (copy)
-				t_1[p4] = nil
-			end)
-		end)
-	end
-	
-	marketplaceService.PromptGamePassPurchaseFinished:Connect(function(p4, p5, p6)
-		-- upvalues: playersService (copy), pollGamePassOwnershipAfterPurchase (ref), fIntShopOwnershipFetchMaxAttemptsModule (copy), fetchOwnedGamePass (ref)
-		if not p6 then return end
-		local localPlayer = playersService.LocalPlayer
-		
-		if localPlayer == nil or p4.UserId ~= localPlayer.UserId then
-			return
-		end
-		pollGamePassOwnershipAfterPurchase(tostring(p5), fIntShopOwnershipFetchMaxAttemptsModule, fetchOwnedGamePass)
-	end)
-	
-	if fFlagShopListenNativePurchaseFinishedModule and fFlagEnableRobuxInExperienceShop then
-		local function pollBonusOwnershipAfterNativeRobuxPurchase(p4, p5, p6)
-			-- upvalues: playersService (copy), shopDebugLoggerModule (copy), var26 (write), var27 (write), var28 (write), fFlagRefetchRobuxWidgetAfterPurchaseModule (copy), fFlagShopRobuxPurchaseCompletionModalModule (copy), var24 (ref), fFlagShopUseMockUserOwnsGamePassModule (copy), mockUserOwnsGamePassModule (copy), userOwnsGamePassHttpModule (copy), pollGamePassOwnershipAfterPurchase (ref), fIntShopOwnershipFetchMaxAttemptsModule (copy), fFlagSkipPaymentSessionForPlainRobuxModule (copy), refreshRobuxWidgetsAfterPurchase (ref)
-			if p6 ~= nil then
-				local localPlayer = playersService.LocalPlayer
-				
-				if localPlayer == nil or p6.UserId ~= localPlayer.UserId then
-					shopDebugLoggerModule.log("NativePurchaseFinished: ignored, not local player")
-					
-					return
-				elseif var27 == nil or not fFlagRefetchRobuxWidgetAfterPurchaseModule and var26 == nil and (not fFlagShopRobuxPurchaseCompletionModalModule or var28 == nil) then
-					shopDebugLoggerModule.log("NativePurchaseFinished: skip, no pending shop Robux purchase")
-					
-					return
-				elseif tostring(p5) ~= var27 then
-					shopDebugLoggerModule.logLazy(function()
-						-- upvalues: p5 (ref), var27 (ref)
-						return "NativePurchaseFinished: skip, sku mismatch productId=" .. tostring(p5) .. " pendingStoreSku=" .. var27
-					end)
-					
-					return
-				end
-				var26 = nil
-				var27 = nil
-				var28 = nil
-				
-				if not p4 then
-					shopDebugLoggerModule.logLazy(function()
-						-- upvalues: var26 (ref)
-						return "NativePurchaseFinished: skip, not purchased bonusGamePassId=" .. tostring(var26)
-					end)
-					
-					return
-				elseif fFlagShopRobuxPurchaseCompletionModalModule and var28 ~= nil then
-					var24(var28)
-				end
-				if var26 ~= nil then
-					shopDebugLoggerModule.logLazy(function()
-						-- upvalues: var26 (ref)
-						return "NativePurchaseFinished: polling bonusGamePassId=" .. var26
-					end)
-					pollGamePassOwnershipAfterPurchase(var26, fIntShopOwnershipFetchMaxAttemptsModule, if fFlagShopUseMockUserOwnsGamePassModule then mockUserOwnsGamePassModule else userOwnsGamePassHttpModule, true)
-				end
-				if fFlagRefetchRobuxWidgetAfterPurchaseModule and (var26 ~= nil or not fFlagSkipPaymentSessionForPlainRobuxModule) then
-					refreshRobuxWidgetsAfterPurchase()
-				end
+				return
 			end
-		end
-		
-		local function onNativePurchaseFinished(p4, p5, p6, p7)
-			-- upvalues: shopDebugLoggerModule (copy), pollBonusOwnershipAfterNativeRobuxPurchase (ref)
-			shopDebugLoggerModule.logLazy(function()
-				-- upvalues: p5 (ref), p6 (ref), p7 (ref)
-				return "NativePurchaseFinished: productId=" .. tostring(p5) .. " wasPurchased=" .. tostring(p6) .. " checkoutSessionId=" .. tostring(p7)
-			end)
-			pollBonusOwnershipAfterNativeRobuxPurchase(p6, p5, p4)
-		end
-		
-		local function onNativePurchaseFinishedWithLocalPlayer(p4, p5, p6)
-			-- upvalues: shopDebugLoggerModule (copy), pollBonusOwnershipAfterNativeRobuxPurchase (ref)
-			shopDebugLoggerModule.logLazy(function()
-				-- upvalues: p4 (ref), p5 (ref), p6 (ref)
-				return "NativePurchaseFinishedWithLocalPlayer: productId=" .. tostring(p4) .. " wasPurchased=" .. tostring(p5) .. " checkoutSessionId=" .. tostring(p6)
-			end)
-			pollBonusOwnershipAfterNativeRobuxPurchase(p5, p4, nil)
-		end
-		
-		local _ = function(p4, p5)
-			if typeof(p4) == "RBXScriptSignal" or type(p4) == "table" and p4.Connect ~= nil then
-				p4:Connect(p5)
-			end
-		end
-		
-		local var45 = marketplaceService
-		local nativePurchaseWithLocalPlayerEngineFeature = game:GetEngineFeature("NativePurchaseWithLocalPlayer")
-		shopDebugLoggerModule.logLazy(function()
-			-- upvalues: fFlagLuaAppEnableNativePurchaseFinishedV2Signals (copy), nativePurchaseWithLocalPlayerEngineFeature (ref)
-			return "NativePurchaseFinished: connecting v2=" .. tostring(fFlagLuaAppEnableNativePurchaseFinishedV2Signals) .. " localPlayerFeature=" .. tostring(nativePurchaseWithLocalPlayerEngineFeature)
-		end)
-		local nativePurchaseFinished = var45.NativePurchaseFinished
-		
-		if typeof(nativePurchaseFinished) == "RBXScriptSignal" or type(nativePurchaseFinished) == "table" and nativePurchaseFinished.Connect ~= nil then
-			nativePurchaseFinished:Connect(onNativePurchaseFinished)
-		end
-		if fFlagLuaAppEnableNativePurchaseFinishedV2Signals then
-			nativePurchaseFinished = var45.NativePurchaseFinishedV2
+			v1 = nil
+			v2 = nil
+			v3 = nil
 			
-			if typeof(nativePurchaseFinished) == "RBXScriptSignal" or type(nativePurchaseFinished) == "table" and nativePurchaseFinished.Connect ~= nil then
-				nativePurchaseFinished:Connect(onNativePurchaseFinished)
+			if not p3 then
+				ShopDebugLoggerModule.logLazy(function(): string --[[ Line: 1185 ]]
+					-- upvalues: Key (copy)
+					return "NativePurchaseFinished: skip, not purchased bonusGamePassId=" .. tostring(Key)
+				end)
+				
+				return
+			end
+			if FFlagShopRobuxPurchaseCompletionModalModule and v5 ~= nil then
+				Signal2_11(v5)
+			end
+			if Key ~= nil then
+				ShopDebugLoggerModule.logLazy(function(): string --[[ Line: 1194 ]]
+					-- upvalues: Key (copy)
+					return "NativePurchaseFinished: polling bonusGamePassId=" .. Key
+				end)
+				pollGamePassOwnershipAfterPurchase(Key, FIntShopOwnershipFetchMaxAttemptsModule, if FFlagShopUseMockUserOwnsGamePassModule then MockUserOwnsGamePassModule else UserOwnsGamePassHttpModule, true)
+			end
+			if FFlagRefetchRobuxWidgetAfterPurchaseModule and (Key ~= nil or not FFlagSkipPaymentSessionForPlainRobuxModule) then
+				refreshRobuxWidgetsAfterPurchase()
 			end
 		end
-		if nativePurchaseWithLocalPlayerEngineFeature then
-			nativePurchaseFinished = var45.NativePurchaseFinishedWithLocalPlayer
-			
-			if typeof(nativePurchaseFinished) == "RBXScriptSignal" or type(nativePurchaseFinished) == "table" and nativePurchaseFinished.Connect ~= nil then
-				nativePurchaseFinished:Connect(onNativePurchaseFinishedWithLocalPlayer)
+		
+		local function onNativePurchaseFinished(Player, p3, p4, p5) --[[ Line: 1219 ]]
+			-- upvalues: ShopDebugLoggerModule (upval), pollBonusOwnershipAfterNativeRobuxPurchase (copy)
+			ShopDebugLoggerModule.logLazy(function(): string --[[ Line: 1225 ]]
+				-- upvalues: p3 (copy), p4 (copy), p5 (copy)
+				return "NativePurchaseFinished: productId=" .. tostring(p3) .. " wasPurchased=" .. tostring(p4) .. " checkoutSessionId=" .. tostring(p5)
+			end)
+			pollBonusOwnershipAfterNativeRobuxPurchase(p4, p3, Player)
+		end
+		
+		local function onNativePurchaseFinishedWithLocalPlayer(p3, p4, p5) --[[ Line: 1236 ]]
+			-- upvalues: ShopDebugLoggerModule (upval), pollBonusOwnershipAfterNativeRobuxPurchase (copy)
+			ShopDebugLoggerModule.logLazy(function(): string --[[ Line: 1241 ]]
+				-- upvalues: p3 (copy), p4 (copy), p5 (copy)
+				return "NativePurchaseFinishedWithLocalPlayer: productId=" .. tostring(p3) .. " wasPurchased=" .. tostring(p4) .. " checkoutSessionId=" .. tostring(p5)
+			end)
+			pollBonusOwnershipAfterNativeRobuxPurchase(p4, p3, nil)
+		end
+		
+		local _ = function(Signal, Callback) --[[ Line: 1253 | Named "connectIfAvailable" ]]
+			if typeof(Signal) == "RBXScriptSignal" or type(Signal) == "table" and Signal.Connect ~= nil then
+				Signal:Connect(Callback)
 			end
-			if fFlagLuaAppEnableNativePurchaseFinishedV2Signals then
-				nativePurchaseFinished = var45.NativePurchaseFinishedWithLocalPlayerV2
+		end
+		
+		local NativePurchaseWithLocalPlayerEngineFeature = game:GetEngineFeature("NativePurchaseWithLocalPlayer")
+		ShopDebugLoggerModule.logLazy(function(): string --[[ Line: 1261 ]]
+			-- upvalues: FFlagLuaAppEnableNativePurchaseFinishedV2Signals (upval), NativePurchaseWithLocalPlayerEngineFeature (copy)
+			return "NativePurchaseFinished: connecting v2=" .. tostring(FFlagLuaAppEnableNativePurchaseFinishedV2Signals) .. " localPlayerFeature=" .. tostring(NativePurchaseWithLocalPlayerEngineFeature)
+		end)
+		local NativePurchaseFinished = MarketplaceService.NativePurchaseFinished
+		
+		if typeof(NativePurchaseFinished) == "RBXScriptSignal" or type(NativePurchaseFinished) == "table" and NativePurchaseFinished.Connect ~= nil then
+			NativePurchaseFinished:Connect(onNativePurchaseFinished)
+		end
+		if FFlagLuaAppEnableNativePurchaseFinishedV2Signals then
+			local NativePurchaseFinishedV2 = MarketplaceService.NativePurchaseFinishedV2
+			
+			if typeof(NativePurchaseFinishedV2) == "RBXScriptSignal" or type(NativePurchaseFinishedV2) == "table" and NativePurchaseFinishedV2.Connect ~= nil then
+				NativePurchaseFinishedV2:Connect(onNativePurchaseFinished)
+			end
+		end
+		if NativePurchaseWithLocalPlayerEngineFeature then
+			local NativePurchaseFinishedWithLocalPlayer = MarketplaceService.NativePurchaseFinishedWithLocalPlayer
+			
+			if typeof(NativePurchaseFinishedWithLocalPlayer) == "RBXScriptSignal" or type(NativePurchaseFinishedWithLocalPlayer) == "table" and NativePurchaseFinishedWithLocalPlayer.Connect ~= nil then
+				NativePurchaseFinishedWithLocalPlayer:Connect(onNativePurchaseFinishedWithLocalPlayer)
+			end
+			if FFlagLuaAppEnableNativePurchaseFinishedV2Signals then
+				local NativePurchaseFinishedWithLocalPlayerV2 = MarketplaceService.NativePurchaseFinishedWithLocalPlayerV2
 				
-				if typeof(nativePurchaseFinished) == "RBXScriptSignal" or type(nativePurchaseFinished) == "table" and nativePurchaseFinished.Connect ~= nil then
-					nativePurchaseFinished:Connect(onNativePurchaseFinishedWithLocalPlayer)
+				if typeof(NativePurchaseFinishedWithLocalPlayerV2) == "RBXScriptSignal" or type(NativePurchaseFinishedWithLocalPlayerV2) == "table" and NativePurchaseFinishedWithLocalPlayerV2.Connect ~= nil then
+					NativePurchaseFinishedWithLocalPlayerV2:Connect(onNativePurchaseFinishedWithLocalPlayer)
 				end
 			end
 		end
 	end
 	return {
-		getCategories = var1,
-		getSections = var3,
-		getLoading = var5,
-		getError = var7,
-		getOwnership = var15,
-		getTrialAvailabilities = var17,
-		getBonusPromotionEligibility = var19,
-		getItemsPerRow = var21,
-		getMetadata = var9,
-		getGlobalIconBackendEnabled = var11,
-		getGlobalIconHasNewOffers = var13,
-		getShouldOpenToRobuxTab = var34,
-		getOpenedFromBuyRobux = var36,
-		getPurchasedRobuxAmount = var23,
-		dismissRobuxPurchaseSuccess = function()
-			-- upvalues: var24 (ref)
-			var24(nil)
+		getCategories = Signal,
+		getSections = Signal1,
+		getLoading = Signal3,
+		getError = Signal4,
+		getOwnership = Signal8,
+		getTrialAvailabilities = Signal9,
+		getBonusPromotionEligibility = Signal10,
+		getItemsPerRow = Signal11,
+		getMetadata = Signal5,
+		getGlobalIconBackendEnabled = Signal6,
+		getGlobalIconHasNewOffers = Signal7,
+		getShouldOpenToRobuxTab = Signal13,
+		getOpenedFromBuyRobux = Signal14,
+		getPurchasedRobuxAmount = Signal12,
+		dismissRobuxPurchaseSuccess = function() --[[ Line: 1294 ]]
+			-- upvalues: Signal2_11 (copy)
+			Signal2_11(nil)
 		end,
 		onShopOpened = onShopOpened,
 		fetchAllShopData = fetchAllShopData,
@@ -912,11 +961,11 @@ return function()
 		fetchGamePassOwnership = fetchGamePassOwnership,
 		pollGamePassOwnership = pollGamePassOwnershipAfterPurchase,
 		bonusGamePassIdForNativePurchase = bonusGamePassIdForNativePurchase,
-		setItemsPerRow = function(value)
-			-- upvalues: var22 (ref)
-			var22(value)
+		setItemsPerRow = function(p3) --[[ Line: 1290 ]]
+			-- upvalues: Signal2_10 (copy)
+			Signal2_10(p3)
 		end,
-		setShouldOpenToRobuxTab = var35,
-		setOpenedFromBuyRobux = var37
+		setShouldOpenToRobuxTab = Signal2_12,
+		setOpenedFromBuyRobux = Signal2_13
 	}
 end

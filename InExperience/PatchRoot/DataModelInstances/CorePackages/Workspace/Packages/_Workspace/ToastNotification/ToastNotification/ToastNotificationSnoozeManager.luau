@@ -1,46 +1,44 @@
-﻿local appStorageService = game:GetService("AppStorageService")
-local httpService = game:GetService("HttpService")
-local parent = script.Parent
-local analyticsServiceModule = require(parent.analytics.analyticsService)
-local dependenciesModule = require(parent.dependencies)
-local notificationSnoozedSignal = require(parent.Signals).NotificationSnoozedSignal
-local typeModule = require(parent.type)
-local cryo = dependenciesModule.Cryo
-local localStorage = dependenciesModule.LocalStorage
-local notificationModalsManager = dependenciesModule.NotificationModalsManager
-local images = dependenciesModule.UIBlox.App.ImageSet.Images
-local localStorageKey = localStorage.Enums.LocalStorageKey
-local t = {}
-t.__index = t
+﻿local AppStorageService = game:GetService("AppStorageService")
+local HttpService = game:GetService("HttpService")
+local Parent = script.Parent
+local AnalyticsServiceModule = require(Parent.analytics.analyticsService)
+local DependenciesModule = require(Parent.dependencies)
+local NotificationSnoozedSignal = require(Parent.Signals).NotificationSnoozedSignal
+local TypeModule = require(Parent.type)
+local Cryo = DependenciesModule.Cryo
+local NotificationModalsManager = DependenciesModule.NotificationModalsManager
+local Images = DependenciesModule.UIBlox.App.ImageSet.Images
+local LocalStorageKey = DependenciesModule.LocalStorage.Enums.LocalStorageKey
+local ToastNotificationSnoozeManager = {}
+ToastNotificationSnoozeManager.__index = ToastNotificationSnoozeManager
 
-function t:_batchNotificationAction(p1, p2)
-	-- upvalues: typeModule (ref), notificationSnoozedSignal (ref)
-	local var1 = if type(p1.notificationType) == "table" then p1.notificationType else { p1.notificationType }
-	
-	for i, v in ipairs(var1) do
-		if p2 == typeModule.SnoozeActionEnum.Mute then
-			self.snoozedNotificationTypes[v] = {
+function ToastNotificationSnoozeManager:_batchNotificationAction(p1, Mute) --[[ Line: 31 ]]
+	-- upvalues: TypeModule (copy), NotificationSnoozedSignal (copy)
+	local NotificationType = if type(p1.notificationType) == "table" then p1.notificationType else { p1.notificationType }
+	for _, value in ipairs(NotificationType) do
+		if Mute == TypeModule.SnoozeActionEnum.Mute then
+			self.snoozedNotificationTypes[value] = {
 				durationMinutes = p1.durationMinutes,
 				snoozedTimestampMs = DateTime.now().UnixTimestampMillis
 			}
-		elseif p2 == typeModule.SnoozeActionEnum.Unmute and self.snoozedNotificationTypes[v] then
-			self.snoozedNotificationTypes[v] = nil
+		elseif Mute == TypeModule.SnoozeActionEnum.Unmute and self.snoozedNotificationTypes[value] then
+			self.snoozedNotificationTypes[value] = nil
 		end
 	end
 	self:_updateAppStorage()
-	local context = p1.context or ""
+	local Context = p1.context or ""
 	
-	for i_1, v_1 in ipairs(var1) do
-		self._eventStream.sendEventDeferred(context, "notificationSnoozedEvent", {
-			action_type = p2,
+	for _, NotificationType1 in ipairs(NotificationType) do
+		self._eventStream.sendEventDeferred(Context, "notificationSnoozedEvent", {
+			action_type = Mute,
 			duration_minutes = p1.durationMinutes,
-			notification_type = v_1
+			notification_type = NotificationType1
 		})
-		notificationSnoozedSignal:fire({
-			actionType = p2,
+		NotificationSnoozedSignal:fire({
+			actionType = Mute,
 			context = p1.context,
 			durationMinutes = p1.durationMinutes,
-			notificationType = v_1
+			notificationType = NotificationType1
 		})
 	end
 	if p1.modalMessage and p1.modalMessage ~= "" then
@@ -48,88 +46,89 @@ function t:_batchNotificationAction(p1, p2)
 	end
 end
 
-function t:_isExpiredSnooze()
-	return self.durationMinutes == -1 or self.durationMinutes * 60 > (DateTime.now().UnixTimestampMillis - self.snoozedTimestampMs) / 1000
+function ToastNotificationSnoozeManager:_isExpiredSnooze(): boolean --[[ Line: 90 ]]
+	return self.durationMinutes ~= -1 and self.durationMinutes * 60 <= (DateTime.now().UnixTimestampMillis - self.snoozedTimestampMs) / 1000
 end
 
-function t._showNotificationsModal(_, p3)
-	-- upvalues: notificationModalsManager (ref), images (ref)
-	notificationModalsManager.SetUIBloxToast({
-		iconImage = images["icons/common/notificationOn"],
-		toastTitle = p3
+function ToastNotificationSnoozeManager:_showNotificationsModal(ToastTitle) --[[ Line: 104 ]]
+	-- upvalues: NotificationModalsManager (copy), Images (copy)
+	NotificationModalsManager.SetUIBloxToast({
+		iconImage = Images["icons/common/notificationOn"],
+		toastTitle = ToastTitle
 	})
 end
 
-function t:_updateAppStorage()
-	-- upvalues: localStorageKey (ref), httpService (ref)
-	self._appStorageService:SetItem(localStorageKey.SnoozedNotificationTypesLocalStorageKey, httpService:JSONEncode(self.snoozedNotificationTypes))
+function ToastNotificationSnoozeManager:_updateAppStorage() --[[ Line: 121 ]]
+	-- upvalues: LocalStorageKey (copy), HttpService (copy)
+	self._appStorageService:SetItem(LocalStorageKey.SnoozedNotificationTypesLocalStorageKey, HttpService:JSONEncode(self.snoozedNotificationTypes))
 	self._appStorageService:Flush()
 end
 
-function t:unmuteNotification(p3)
-	-- upvalues: typeModule (ref)
-	self:_batchNotificationAction(p3, typeModule.SnoozeActionEnum.Unmute)
+function ToastNotificationSnoozeManager:unmuteNotification(p2) --[[ Line: 138 ]]
+	-- upvalues: TypeModule (copy)
+	self:_batchNotificationAction(p2, TypeModule.SnoozeActionEnum.Unmute)
 end
 
-function t:snoozeNotification(p3)
-	-- upvalues: typeModule (ref)
-	self:_batchNotificationAction(p3, typeModule.SnoozeActionEnum.Mute)
+function ToastNotificationSnoozeManager:snoozeNotification(p2) --[[ Line: 156 ]]
+	-- upvalues: TypeModule (copy)
+	self:_batchNotificationAction(p2, TypeModule.SnoozeActionEnum.Mute)
 end
 
-function t:isSnoozedNotificationType(p3)
-	-- upvalues: cryo (ref)
-	if not self.snoozedNotificationTypes[p3] then
+function ToastNotificationSnoozeManager:isSnoozedNotificationType(p2): boolean --[[ Line: 173 ]]
+	-- upvalues: Cryo (copy)
+	if not self.snoozedNotificationTypes[p2] then
 		return false
-	elseif self._isExpiredSnooze(self.snoozedNotificationTypes[p3]) then
-		self.snoozedNotificationTypes = cryo.Dictionary.omit(self.snoozedNotificationTypes, p3)
+	elseif self._isExpiredSnooze(self.snoozedNotificationTypes[p2]) then
+		self.snoozedNotificationTypes = Cryo.Dictionary.omit(self.snoozedNotificationTypes, p2)
 		self:_updateAppStorage()
 		
 		return false
+	else
+		return true
 	end
-	return true
 end
 
-function t.new(p3)
-	-- upvalues: analyticsServiceModule (ref), t (ref), localStorageKey (ref), httpService (ref)
-	local t_1 = {
-		_appStorageService = p3,
-		_eventStream = analyticsServiceModule.EventStream,
+function ToastNotificationSnoozeManager.new(_appStorageService) --[[ Line: 191 ]]
+	-- upvalues: AnalyticsServiceModule (copy), ToastNotificationSnoozeManager (copy), LocalStorageKey (copy), HttpService (copy)
+	local config = {
+		_appStorageService = _appStorageService,
+		_eventStream = AnalyticsServiceModule.EventStream,
 		snoozedNotificationTypes = {}
 	}
-	setmetatable(t_1, t)
-	local t_2 = {}
-	local t_3 = {}
-	local var2 = false
-	local ok, status = pcall(function()
-		-- upvalues: t_1 (ref), localStorageKey (copy)
-		return t_1._appStorageService:GetItem(localStorageKey.SnoozedNotificationTypesLocalStorageKey)
+	setmetatable(config, ToastNotificationSnoozeManager)
+	local t = {}
+	local SnoozedNotificationTypes = {}
+	local Flag = false
+	local Success, Result = pcall(function() --[[ Line: 204 ]]
+		-- upvalues: config (copy), LocalStorageKey (upval)
+		return config._appStorageService:GetItem(LocalStorageKey.SnoozedNotificationTypesLocalStorageKey)
 	end)
 	
-	if ok and status ~= "" then
-		local ok_1, status_1 = pcall(function()
-			-- upvalues: httpService (copy), status (ref)
-			return httpService:JSONDecode(status)
+	if Success and Result ~= "" then
+		local Success1, Result1 = pcall(function() --[[ Line: 209 ]]
+			-- upvalues: HttpService (upval), Result (copy)
+			return HttpService:JSONDecode(Result)
 		end)
 		
-		if ok_1 then
-			t_2 = status_1
+		if Success1 then
+			t = Result1
 		end
 	end
-	for i, v in pairs(t_2) do
-		if t_1._isExpiredSnooze(v) then
-			var2 = true
+	for i, value in pairs(t) do
+		if config._isExpiredSnooze(value) then
+			Flag = true
 		else
-			t_3[i] = v
+			SnoozedNotificationTypes[i] = value
 		end
 	end
-	t_1.snoozedNotificationTypes = t_3
+	config.snoozedNotificationTypes = SnoozedNotificationTypes
 	
-	if var2 then
-		t_1:_updateAppStorage()
+	if Flag then
+		config:_updateAppStorage()
 	end
-	return t_1
+	return config
 end
 
-t.default = t.new(appStorageService)
+ToastNotificationSnoozeManager.default = ToastNotificationSnoozeManager.new(AppStorageService)
 
-return t
+return ToastNotificationSnoozeManager

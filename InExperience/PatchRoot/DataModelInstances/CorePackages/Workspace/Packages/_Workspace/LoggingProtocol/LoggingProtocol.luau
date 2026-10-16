@@ -1,1 +1,1 @@
-﻿return require(script.LoggingProtocol)
+﻿return (require(script.LoggingProtocol))

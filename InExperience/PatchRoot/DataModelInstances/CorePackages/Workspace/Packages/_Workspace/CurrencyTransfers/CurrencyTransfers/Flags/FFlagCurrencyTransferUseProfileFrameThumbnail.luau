@@ -1,1 +1,3 @@
-﻿return game:DefineFastFlag("CurrencyTransferUseProfileFrameThumbnail", false) and require(script:FindFirstAncestor("CurrencyTransfers").Parent.SharedFlags).GetFFlagProfileFrameThumbnailEnabled()
+﻿local GetFFlagProfileFrameThumbnailEnabledFunction = require(script:FindFirstAncestor("CurrencyTransfers").Parent.SharedFlags).GetFFlagProfileFrameThumbnailEnabled
+
+return game:DefineFastFlag("CurrencyTransferUseProfileFrameThumbnail", false) and GetFFlagProfileFrameThumbnailEnabledFunction()

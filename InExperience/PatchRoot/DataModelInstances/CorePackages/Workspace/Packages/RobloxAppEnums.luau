@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.RobloxAppEnums.RobloxAppEnums)
+﻿return (require(script.Parent._Workspace.RobloxAppEnums.RobloxAppEnums))

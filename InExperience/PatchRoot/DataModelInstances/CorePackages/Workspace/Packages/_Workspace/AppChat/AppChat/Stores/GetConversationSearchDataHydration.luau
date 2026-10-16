@@ -1,162 +1,170 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local dataHydrationModule = require(parent.DataHydration)
-local appChatNetworkingModule = require(parent.AppChatNetworking)
-local signalsModule = require(parent.Signals)
-local signalsExperimentalModule = require(parent.SignalsExperimental)
-local name = require(appChat.Logger):new(script.Name)
-local conversationChannelsModule = require(appChat.Models.ConversationChannels)
-local ingestConversationListPageModule = require(appChat.Stores.Ingestion.ingestConversationListPage)
-local getResponseBodyModule = require(appChat.Stores.Ingestion.getResponseBody)
-local getConversationStoreModule = require(appChat.Stores.GetConversationStore)
-local searchIntroducedConversationIdsModule = require(appChat.Stores.searchIntroducedConversationIds)
-local createDataCache = dataHydrationModule.createDataCache
-local createDataResolver = dataHydrationModule.createDataResolver
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local DataHydrationModule = require(Parent.DataHydration)
+local AppChatNetworkingModule = require(Parent.AppChatNetworking)
+local SignalsModule = require(Parent.Signals)
+local SignalsExperimentalModule = require(Parent.SignalsExperimental)
+local NewResult = require(AppChat.Logger):new(script.Name)
+local ConversationChannelsModule = require(AppChat.Models.ConversationChannels)
+local IngestConversationListPageModule = require(AppChat.Stores.Ingestion.ingestConversationListPage)
+local GetResponseBodyModule = require(AppChat.Stores.Ingestion.getResponseBody)
+local GetConversationStoreModule = require(AppChat.Stores.GetConversationStore)
+local SearchIntroducedConversationIdsModule = require(AppChat.Stores.searchIntroducedConversationIds)
+local CreateDataCacheFunction = DataHydrationModule.createDataCache
+local CreateDataResolverFunction = DataHydrationModule.createDataResolver
 
-local function _(p1)
-	return if p1 ~= nil then p1 == "" else true
+local function _(p1): boolean --[[ Line: 39 | Named "isEmptyQuery" ]]
+	return p1 == nil or p1 == ""
 end
 
-local _ = function(p1, p2)
+local _ = function(p1, p2): string --[[ Line: 43 | Named "getPageId" ]]
 	return `{p1}\0{if p2 == nil or p2 == "" then "__initial__" else p2}`
 end
 
-local _ = function(p3, p4)
-	-- upvalues: conversationChannelsModule (ref)
-	return p4.source == conversationChannelsModule.Source.Channels and p4.type == conversationChannelsModule.Type.OneToOne and p4.participant_user_ids ~= nil and p3.getConversation(conversationChannelsModule.getFriendConversationId(p4.participant_user_ids), false) ~= nil
+local _ = function(p3, p4): boolean --[[ Line: 51 | Named "supersedesStoredFriendPlaceholder" ]]
+	-- upvalues: ConversationChannelsModule (copy)
+	return p4.source == ConversationChannelsModule.Source.Channels and p4.type == ConversationChannelsModule.Type.OneToOne and p4.participant_user_ids ~= nil and p3.getConversation(ConversationChannelsModule.getFriendConversationId(p4.participant_user_ids), false) ~= nil
 end
 
-local function collectSearchOnlyIds(p3, p4)
-	-- upvalues: conversationChannelsModule (ref), searchIntroducedConversationIdsModule (ref)
-	local t = {}
+local function collectSearchOnlyIds(p3, p4) --[[ Line: 71 ]]
+	-- upvalues: ConversationChannelsModule (copy), SearchIntroducedConversationIdsModule (copy)
+	local ConversationIds = {}
 	
 	if p4 == nil or p4.conversations == nil then
-		return t
+		return ConversationIds
 	end
-	for i, v in p4.conversations do
-		if v ~= nil and v.status ~= "failed" then
-			local conversationId = conversationChannelsModule.getConversationId(v)
-			
-			if not (v.source == conversationChannelsModule.Source.Channels and v.type == conversationChannelsModule.Type.OneToOne and v.participant_user_ids ~= nil and p3.getConversation(conversationChannelsModule.getFriendConversationId(v.participant_user_ids), false) ~= nil) and (p3.getConversation(conversationId, false) == nil or searchIntroducedConversationIdsModule.has(conversationId)) then
-				table.insert(t, conversationId)
-			end
+	for _, conversation in p4.conversations do
+		local HasConversation: boolean = conversation == nil or conversation.status == "failed"
+		local ConversationId = nil
+		
+		if not HasConversation then
+			ConversationId = ConversationChannelsModule.getConversationId(conversation)
+			HasConversation = conversation.source == ConversationChannelsModule.Source.Channels and conversation.type == ConversationChannelsModule.Type.OneToOne and conversation.participant_user_ids ~= nil and p3.getConversation(ConversationChannelsModule.getFriendConversationId(conversation.participant_user_ids), false) ~= nil or p3.getConversation(ConversationId, false) ~= nil and not SearchIntroducedConversationIdsModule.has(ConversationId)
+		end
+		if not HasConversation then
+			table.insert(ConversationIds, ConversationId)
 		end
 	end
-	return t
+	return ConversationIds
 end
 
-local function getOrderedMatchedIds(p5)
-	-- upvalues: conversationChannelsModule (ref)
-	local t = {}
+local function getOrderedMatchedIds(p5) --[[ Line: 100 ]]
+	-- upvalues: ConversationChannelsModule (copy)
+	local ConversationIds = {}
 	
 	if p5 == nil or p5.conversations == nil then
-		return t
+		return ConversationIds
 	end
-	local t_1 = {}
+	local t = {}
 	
-	for i, v in p5.conversations do
-		if v ~= nil and v.status ~= "failed" then
-			local conversationId = conversationChannelsModule.getConversationId(v)
-			
-			if not t_1[conversationId] then
-				t_1[conversationId] = true
-				table.insert(t, conversationId)
-			end
+	for _, conversation in p5.conversations do
+		local v1 = conversation == nil or conversation.status == "failed"
+		local ConversationId = nil
+		
+		if not v1 then
+			ConversationId = ConversationChannelsModule.getConversationId(conversation)
+			v1 = t[ConversationId]
+		end
+		if not v1 then
+			t[ConversationId] = true
+			table.insert(ConversationIds, ConversationId)
 		end
 	end
-	return t
+	return ConversationIds
 end
 
-return signalsModule.createComputed(function()
-	-- upvalues: createDataCache (ref), getConversationStoreModule (ref), signalsModule (ref), createDataResolver (ref), name (ref), appChatNetworkingModule (ref), getResponseBodyModule (ref), collectSearchOnlyIds (ref), signalsExperimentalModule (ref), ingestConversationListPageModule (ref), searchIntroducedConversationIdsModule (ref), getOrderedMatchedIds (ref)
-	local var1 = createDataCache(30)
-	local var2 = getConversationStoreModule(false)
+return SignalsModule.createComputed(function() --[[ Line: 124 | Named "createConversationSearchDataHydrationStore" ]]
+	-- upvalues: CreateDataCacheFunction (copy), GetConversationStoreModule (copy), SignalsModule (copy), CreateDataResolverFunction (copy), NewResult (copy), AppChatNetworkingModule (copy), GetResponseBodyModule (copy), collectSearchOnlyIds (copy), SignalsExperimentalModule (copy), IngestConversationListPageModule (copy), SearchIntroducedConversationIdsModule (copy), getOrderedMatchedIds (copy)
+	local DataCache = CreateDataCacheFunction(30)
+	local ConversationStoreModule = GetConversationStoreModule(false)
 	local t = {}
-	local var3 = 0
-	local var4, var5 = signalsModule.createSignal(0)
-	local t_1 = {}
-	local fetchPage = nil
-	local var6 = createDataResolver({
+	local Count = 0
+	local Signal, Signal2 = SignalsModule.createSignal(0)
+	local t1 = {}
+	local Callback = nil
+	local DataResolver = CreateDataResolverFunction({
 		supportsMultiGet = false,
 		queueProcessDelaySec = 0,
 		replaceItems = true,
-		cache = var1,
-		logError = function(p6)
-			-- upvalues: name (copy)
-			name:warning(`Failed to fetch AppChat conversation search page: {tostring(p6)}`)
+		cache = DataCache,
+		logError = function(p6) --[[ Line: 142 ]]
+			-- upvalues: NewResult (upval)
+			NewResult:warning(`Failed to fetch AppChat conversation search page: {tostring(p6)}`)
 		end,
-		fetchFn = function(p6)
-			-- upvalues: t (write), var3 (write), t_1 (write), var4 (ref), appChatNetworkingModule (copy), getResponseBodyModule (copy), collectSearchOnlyIds (copy), var2 (ref), signalsExperimentalModule (copy), ingestConversationListPageModule (copy), searchIntroducedConversationIdsModule (copy), getOrderedMatchedIds (copy), fetchPage (write)
-			local var7 = t[p6]
-			local var8 = if var7 ~= nil then "" else var7.query
-			local var9 = if var7 ~= nil then nil else var7.cursor
-			t_1[p6] = var4(false)
+		fetchFn = function(Key) --[[ Line: 145 ]]
+			-- upvalues: t (ref), Count (ref), t1 (ref), Signal (copy), AppChatNetworkingModule (upval), GetResponseBodyModule (upval), collectSearchOnlyIds (upval), ConversationStoreModule (copy), SignalsExperimentalModule (upval), IngestConversationListPageModule (upval), SearchIntroducedConversationIdsModule (upval), getOrderedMatchedIds (upval), Callback (ref)
+			local Entry = t[Key]
+			local Query = if Entry == nil then "" else Entry.query
+			local Cursor = if Entry == nil then nil else Entry.cursor
+			local Count1 = Count
+			t1[Key] = Signal(false)
 			
-			return appChatNetworkingModule.http.SearchConversations(nil, var8, var9):andThen(function(p7)
-				-- upvalues: var3 (ref), var3 (copy), getResponseBodyModule (copy), collectSearchOnlyIds (copy), var2 (copy), signalsExperimentalModule (copy), ingestConversationListPageModule (copy), searchIntroducedConversationIdsModule (copy), getOrderedMatchedIds (copy), t_1 (copy), p6 (ref), var4 (copy), fetchPage (copy), var8 (ref), var9 (ref)
-				if var3 ~= var3 then
+			return AppChatNetworkingModule.http.SearchConversations(nil, Query, Cursor):andThen(function(Result) --[[ Line: 152 ]]
+				-- upvalues: Count1 (copy), Count (upval), GetResponseBodyModule (upval), collectSearchOnlyIds (upval), ConversationStoreModule (upval), SignalsExperimentalModule (upval), IngestConversationListPageModule (upval), SearchIntroducedConversationIdsModule (upval), getOrderedMatchedIds (upval), t1 (upval), Key (copy), Signal (upval), Callback (upval), Query (copy), Cursor (copy)
+				if Count1 ~= Count then
 					return { nextCursor = nil, matchedConversationIds = {} }
 				end
-				local var10 = getResponseBodyModule(p7)
-				local var11 = collectSearchOnlyIds(var2, var10)
-				signalsExperimentalModule.batch(function()
-					-- upvalues: ingestConversationListPageModule (copy), var2 (copy), var10 (ref), var11 (ref), searchIntroducedConversationIdsModule (copy)
-					ingestConversationListPageModule.ingestConversationResponses(var2, var10)
+				local ResponseBodyModule = GetResponseBodyModule(Result)
+				local CollectSearchOnlyIdsResult = collectSearchOnlyIds(ConversationStoreModule, ResponseBodyModule)
+				SignalsExperimentalModule.batch(function() --[[ Line: 170 ]]
+					-- upvalues: IngestConversationListPageModule (upval), ConversationStoreModule (upval), ResponseBodyModule (copy), CollectSearchOnlyIdsResult (copy), SearchIntroducedConversationIdsModule (upval)
+					IngestConversationListPageModule.ingestConversationResponses(ConversationStoreModule, ResponseBodyModule)
 					
-					for i, v in var11 do
-						searchIntroducedConversationIdsModule.add(v)
+					for _, value in CollectSearchOnlyIdsResult do
+						SearchIntroducedConversationIdsModule.add(value)
 					end
 				end)
-				local var12 = getOrderedMatchedIds(var10)
-				local var13 = if var10 ~= nil then nil else var10.next_cursor
+				local OrderedMatchedIds = getOrderedMatchedIds(ResponseBodyModule)
+				local NextCursor = if ResponseBodyModule == nil then nil else ResponseBodyModule.next_cursor
 				
-				if t_1[p6] ~= var4(false) then
-					task.defer(function()
-						-- upvalues: var3 (copy), var3 (copy), fetchPage (copy), var8 (copy), var9 (copy)
-						if var3 == var3 then
-							fetchPage(var8, var9)
+				if t1[Key] ~= Signal(false) then
+					task.defer(function() --[[ Line: 185 ]]
+						-- upvalues: Count1 (upval), Count (upval), Callback (upval), Query (upval), Cursor (upval)
+						if Count1 == Count then
+							Callback(Query, Cursor)
 						end
 					end)
 				end
 				return {
-					matchedConversationIds = var12,
-					nextCursor = if var13 == nil or var13 == "" then nil else var13
+					matchedConversationIds = OrderedMatchedIds,
+					nextCursor = if NextCursor == nil or NextCursor == "" then nil else NextCursor
 				}
 			end)
 		end
 	})
 	
-	fetchPage = function(p7, p8)
-		-- upvalues: t (write), var6 (ref), t_1 (write), var4 (ref)
-		if if p7 ~= nil then p7 == "" else true then
+	Callback = function(Query, Cursor) --[[ Line: 200 | Named "fetchPage" ]]
+		-- upvalues: t (ref), DataResolver (copy), t1 (ref), Signal (copy)
+		if Query == nil or Query == "" then
 			return nil
+		else
+			local Text: string = `{Query}\0{if Cursor == nil or Cursor == "" then "__initial__" else Cursor}`
+			t[Text] = { query = Query, cursor = Cursor }
+			
+			return DataResolver.getAndFetchItem(Text, function(): boolean --[[ Line: 207 ]]
+				-- upvalues: t1 (upval), Text (copy), Signal (upval)
+				return t1[Text] ~= Signal(false)
+			end)
 		end
-		local var10 = `{p7}\0{if p8 == nil or p8 == "" then "__initial__" else p8}`
-		t[var10] = { query = p7, cursor = p8 }
-		
-		return var6.getAndFetchItem(var10, function()
-			-- upvalues: t_1 (copy), var10 (ref), var4 (copy)
-			return t_1[var10] ~= var4(false)
-		end)
 	end
 	
-	local function invalidate()
-		-- upvalues: var5 (ref), var4 (ref)
-		var5(var4(false) + 1)
+	local function invalidate() --[[ Line: 212 ]]
+		-- upvalues: Signal2 (copy), Signal (copy)
+		Signal2(Signal(false) + 1)
 	end
 	
-	var2.addClearListener(function()
-		-- upvalues: var3 (write), t (write), t_1 (write), searchIntroducedConversationIdsModule (copy), var6 (ref)
-		var3 += 1
+	ConversationStoreModule.addClearListener(function() --[[ Line: 216 ]]
+		-- upvalues: Count (ref), t (ref), t1 (ref), SearchIntroducedConversationIdsModule (upval), DataResolver (copy)
+		Count += 1
 		t = {}
-		t_1 = {}
-		searchIntroducedConversationIdsModule.clear()
-		var6.clear()
+		t1 = {}
+		SearchIntroducedConversationIdsModule.clear()
+		DataResolver.clear()
 	end)
 	
 	return {
-		fetchPage = fetchPage,
-		getInvalidationGeneration = var4,
+		fetchPage = Callback,
+		getInvalidationGeneration = Signal,
 		invalidate = invalidate
 	}
 end)

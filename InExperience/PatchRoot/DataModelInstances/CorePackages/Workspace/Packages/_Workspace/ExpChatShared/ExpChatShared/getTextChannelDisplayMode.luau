@@ -1,12 +1,13 @@
-﻿local getFFlagExpChatUseIsDefaultTextChannelModule = require(script.Parent.Flags.GetFFlagExpChatUseIsDefaultTextChannel)
-local textChatService = game:GetService("TextChatService")
+﻿local GetFFlagExpChatUseIsDefaultTextChannelModule = require(script.Parent.Flags.GetFFlagExpChatUseIsDefaultTextChannel)
+local TextChatService = game:GetService("TextChatService")
 
-return function()
-	-- upvalues: getFFlagExpChatUseIsDefaultTextChannelModule (ref), textChatService (ref)
-	if not getFFlagExpChatUseIsDefaultTextChannelModule() then
+return function() --[[ Line: 22 | Named "getTextChannelDisplayMode" ]]
+	-- upvalues: GetFFlagExpChatUseIsDefaultTextChannelModule (copy), TextChatService (copy)
+	if GetFFlagExpChatUseIsDefaultTextChannelModule() then
+		local ChatWindowConfiguration = TextChatService:FindFirstChildOfClass("ChatWindowConfiguration")
+		
+		return if ChatWindowConfiguration == nil then nil else ChatWindowConfiguration.TextChannelDisplayMode
+	else
 		return nil
 	end
-	local chatWindowConfiguration = textChatService:FindFirstChildOfClass("ChatWindowConfiguration")
-	
-	return if chatWindowConfiguration == nil then nil else chatWindowConfiguration.TextChannelDisplayMode
 end

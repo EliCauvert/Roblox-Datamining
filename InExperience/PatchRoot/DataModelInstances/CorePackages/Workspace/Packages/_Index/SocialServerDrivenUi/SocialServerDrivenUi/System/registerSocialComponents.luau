@@ -1,32 +1,39 @@
-﻿local socialServerDrivenUi = script:FindFirstAncestor("SocialServerDrivenUi")
-local parent = socialServerDrivenUi.Parent
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local getSduiComponentRegistry = sduiCoreSystemModule.getSduiComponentRegistry
-local sduiComponentType = sduiCoreSystemModule.SduiComponentType
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagSduiRequestFriendshipAction = sharedFlagsModule.FFlagSduiRequestFriendshipAction
-local fFlagLuaAppSduiHomeFriendCarousel = sharedFlagsModule.FFlagLuaAppSduiHomeFriendCarousel
-local fFlagLuaAppSduiHomePageSupport = sharedFlagsModule.FFlagLuaAppSduiHomePageSupport
+﻿local SocialServerDrivenUi = script:FindFirstAncestor("SocialServerDrivenUi")
+local Parent = SocialServerDrivenUi.Parent
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local GetSduiComponentRegistryFunction = SduiCoreSystemModule.getSduiComponentRegistry
+local SduiComponentType = SduiCoreSystemModule.SduiComponentType
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagSduiRequestFriendshipAction = SharedFlagsModule.FFlagSduiRequestFriendshipAction
+local FFlagLuaAppSduiHomeFriendCarousel = SharedFlagsModule.FFlagLuaAppSduiHomeFriendCarousel
+local FFlagLuaAppSduiHomePageSupport = SharedFlagsModule.FFlagLuaAppSduiHomePageSupport
+local FFlagSduiUserSearchTile = SharedFlagsModule.FFlagSduiUserSearchTile
 
-return function()
-	-- upvalues: sduiComponentType (ref), fFlagLuaAppSduiHomeFriendCarousel (ref), socialServerDrivenUi (ref), fFlagLuaAppSduiHomePageSupport (ref), fFlagSduiRequestFriendshipAction (ref), getSduiComponentRegistry (ref)
-	getSduiComponentRegistry().registerComponentDefinitions({
-		[sduiComponentType.FriendCarousel] = if fFlagLuaAppSduiHomeFriendCarousel then {
-			getLazyComponent = function()
-				-- upvalues: socialServerDrivenUi (copy)
-				return require(socialServerDrivenUi.Components.SduiFriendCarousel)
+return function() --[[ Line: 21 | Named "registerSocialComponents" ]]
+	-- upvalues: SduiComponentType (copy), FFlagLuaAppSduiHomeFriendCarousel (copy), SocialServerDrivenUi (copy), FFlagLuaAppSduiHomePageSupport (copy), FFlagSduiRequestFriendshipAction (copy), FFlagSduiUserSearchTile (copy), GetSduiComponentRegistryFunction (copy)
+	GetSduiComponentRegistryFunction().registerComponentDefinitions({
+		[SduiComponentType.FriendCarousel] = if FFlagLuaAppSduiHomeFriendCarousel then {
+			getLazyComponent = function() --[[ Line: 25 ]]
+				-- upvalues: SocialServerDrivenUi (upval)
+				return require(SocialServerDrivenUi.Components.SduiFriendCarousel)
 			end
 		} else nil,
-		[sduiComponentType.PymkCarousel] = if fFlagLuaAppSduiHomePageSupport then {
-			getLazyComponent = function()
-				-- upvalues: socialServerDrivenUi (copy)
-				return require(socialServerDrivenUi.Components.SduiPymkCarousel)
+		[SduiComponentType.PymkCarousel] = if FFlagLuaAppSduiHomePageSupport then {
+			getLazyComponent = function() --[[ Line: 32 ]]
+				-- upvalues: SocialServerDrivenUi (upval)
+				return require(SocialServerDrivenUi.Components.SduiPymkCarousel)
 			end
 		} else nil,
-		[sduiComponentType.FriendRequestButton] = if fFlagSduiRequestFriendshipAction then {
-			getLazyComponent = function()
-				-- upvalues: socialServerDrivenUi (copy)
-				return require(socialServerDrivenUi.Components.SduiFriendRequestButton)
+		[SduiComponentType.FriendRequestButton] = if FFlagSduiRequestFriendshipAction then {
+			getLazyComponent = function() --[[ Line: 39 ]]
+				-- upvalues: SocialServerDrivenUi (upval)
+				return require(SocialServerDrivenUi.Components.SduiFriendRequestButton)
+			end
+		} else nil,
+		[SduiComponentType.UserSearchTile] = if FFlagSduiUserSearchTile then {
+			getLazyComponent = function() --[[ Line: 46 ]]
+				-- upvalues: SocialServerDrivenUi (upval)
+				return require(SocialServerDrivenUi.Components.SduiUserSearchTile)
 			end
 		} else nil
 	})

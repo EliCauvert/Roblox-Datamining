@@ -1,8 +1,8 @@
-﻿local parent = script:FindFirstAncestor("AuthCommon").Parent
-local _ = require(parent.RobloxAppHooks)
-local _ = require(parent.Style)
+﻿local Parent = script:FindFirstAncestor("AuthCommon").Parent
+local _ = require(Parent.RobloxAppHooks)
+local _ = require(Parent.Style)
 
-return function(_, p1)
+return function(_, p1) --[[ Line: 10 ]]
 	return {
 		robloxLogoTextImageUrl = "rbxasset://textures/ui/LuaApp/graphic/Auth/logo_white_1x.png",
 		containerWidth = 846,

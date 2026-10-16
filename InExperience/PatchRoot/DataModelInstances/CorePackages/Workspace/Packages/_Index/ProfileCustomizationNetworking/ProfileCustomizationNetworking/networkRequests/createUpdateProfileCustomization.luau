@@ -1,14 +1,14 @@
-﻿local API_URLModule = require(script.Parent.Parent.API_URL)
+﻿local APIURLModule = require(script.Parent.Parent.API_URL)
 
-return function(p1)
-	-- upvalues: API_URLModule (ref)
-	return p1.roduxNetworking.POST("UpdateProfileCustomization", function(p2, p3)
-		-- upvalues: API_URLModule (copy)
-		return p2(API_URLModule):path("profile-platform-api"):path("v1"):path("profiles"):path("customization"):path("update"):body({
+return function(p1) --[[ Line: 30 ]]
+	-- upvalues: APIURLModule (copy)
+	return p1.roduxNetworking.POST("UpdateProfileCustomization", function(Callback, p2) --[[ Line: 33 ]]
+		-- upvalues: APIURLModule (upval)
+		return Callback(APIURLModule):path("profile-platform-api"):path("v1"):path("profiles"):path("customization"):path("update"):body({
 			profileCustomization = {
-				profileEntity = p3.profileEntity,
-				pinnedComponents = p3.pinnedComponents,
-				customizedComponents = p3.customizedComponents
+				profileEntity = p2.profileEntity,
+				pinnedComponents = p2.pinnedComponents,
+				customizedComponents = p2.customizedComponents
 			}
 		})
 	end)

@@ -1,7 +1,7 @@
 ﻿game:DefineFastFlag("UploadMakeupSupport", false)
-local getFFlagSingleUploadMakeupSupportModule = require(script.Parent.GetFFlagSingleUploadMakeupSupport)
+local GetFFlagSingleUploadMakeupSupportModule = require(script.Parent.GetFFlagSingleUploadMakeupSupport)
 
-return function()
-	-- upvalues: getFFlagSingleUploadMakeupSupportModule (ref)
-	return getFFlagSingleUploadMakeupSupportModule() and game:GetFastFlag("UploadMakeupSupport")
+return function() --[[ Line: 5 ]]
+	-- upvalues: GetFFlagSingleUploadMakeupSupportModule (copy)
+	return GetFFlagSingleUploadMakeupSupportModule() and game:GetFastFlag("UploadMakeupSupport")
 end

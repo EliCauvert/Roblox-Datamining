@@ -1,153 +1,153 @@
-﻿local localizationService = game:GetService("LocalizationService")
-local parent = script:FindFirstAncestor("AppStartup").Parent
-local dashModule = require(parent.Dash)
-local reactModule = require(parent.React)
-local appLinking = require(parent.RoactServiceTags).AppLinking
-local appLogging = require(parent.RoactServiceTags).AppLogging
-local appAppLifecycleObserverService = require(parent.RoactServiceTags).AppAppLifecycleObserverService
-local appStartupMessageService = require(parent.RoactServiceTags).AppStartupMessageService
-local useRoactService = require(parent.RobloxAppHooks).useRoactService
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useDesignTokens = require(parent.Style).useDesignTokens
-local appPage = require(parent.RobloxAppEnums).AppPage
-local navigateDown = require(parent.NavigationRodux).Thunks.NavigateDown
-local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
-local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
-local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
-local useAppFocusRoot = focusNavigationUtilsModule.useAppFocusRoot
-local showStartupMessageOnUnhide = game:DefineFastFlag("ShowStartupMessageOnUnhide", false)
-local startupMessageActionButtonEnabledEngineFeature = game:GetEngineFeature("StartupMessageActionButtonEnabled")
+﻿local LocalizationService = game:GetService("LocalizationService")
+local Parent = script:FindFirstAncestor("AppStartup").Parent
+local DashModule = require(Parent.Dash)
+local ReactModule = require(Parent.React)
+local AppLinking = require(Parent.RoactServiceTags).AppLinking
+local AppLogging = require(Parent.RoactServiceTags).AppLogging
+local AppAppLifecycleObserverService = require(Parent.RoactServiceTags).AppAppLifecycleObserverService
+local AppStartupMessageService = require(Parent.RoactServiceTags).AppStartupMessageService
+local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseDesignTokensFunction = require(Parent.Style).useDesignTokens
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local NavigateDownFunction = require(Parent.NavigationRodux).Thunks.NavigateDown
+local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3Dispatch
+local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
+local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
+local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
+local UseAppFocusRootFunction = FocusNavigationUtilsModule.useAppFocusRoot
+local ShowStartupMessageOnUnhide = game:DefineFastFlag("ShowStartupMessageOnUnhide", false)
+local StartupMessageActionButtonEnabledEngineFeature = game:GetEngineFeature("StartupMessageActionButtonEnabled")
 
-local function selectScreenSize(p1)
+local function selectScreenSize(p1) --[[ Line: 30 ]]
 	return p1.ScreenSize
 end
 
-return function()
-	-- upvalues: useRoactService (ref), appLinking (ref), appLogging (ref), showStartupMessageOnUnhide (ref), appAppLifecycleObserverService (ref), appStartupMessageService (ref), useSelector (ref), selectScreenSize (ref), useDispatch (ref), useDesignTokens (ref), reactModule (ref), startupMessageActionButtonEnabledEngineFeature (ref), useLocalization (ref), dashModule (ref), localizationService (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), useAppFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref)
-	local var2 = useRoactService(appLinking)
-	local var3 = useRoactService(appLogging)
-	local var4 = if showStartupMessageOnUnhide then useRoactService(appAppLifecycleObserverService) else nil
-	local var5 = useRoactService(appStartupMessageService)
-	local var6 = useSelector(selectScreenSize)
-	local var7 = useDispatch()
-	local var8 = useDesignTokens(function(p1)
+return function() --[[ Line: 34 | Named "useStartupMessageProps" ]]
+	-- upvalues: UseRoactServiceFunction (copy), AppLinking (copy), AppLogging (copy), ShowStartupMessageOnUnhide (copy), AppAppLifecycleObserverService (copy), AppStartupMessageService (copy), UseSelectorFunction (copy), selectScreenSize (copy), UseDispatchFunction (copy), UseDesignTokensFunction (copy), ReactModule (copy), StartupMessageActionButtonEnabledEngineFeature (copy), UseLocalizationFunction (copy), DashModule (copy), LocalizationService (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), UseAppFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy)
+	local UseRoactServiceResult = UseRoactServiceFunction(AppLinking)
+	local UseRoactServiceResult1 = UseRoactServiceFunction(AppLogging)
+	local UseRoactServiceResult2 = if ShowStartupMessageOnUnhide then UseRoactServiceFunction(AppAppLifecycleObserverService) else nil
+	local UseRoactServiceResult3 = UseRoactServiceFunction(AppStartupMessageService)
+	local UseSelectorResult = UseSelectorFunction(selectScreenSize)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseDesignTokensResult = UseDesignTokensFunction(function(p1) --[[ Line: 43 ]]
 		return p1.Color.Common.Scrim
 	end)
-	local var9, var10 = reactModule.useState(false)
-	local var11, var12 = reactModule.useState(false)
-	local var13 = if showStartupMessageOnUnhide then reactModule.useCallback(function()
-		-- upvalues: var10 (ref), var12 (ref)
-		var10(false)
-		var12(false)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
+	local UseResult = if ShowStartupMessageOnUnhide then ReactModule.useCallback(function() --[[ Line: 50 ]]
+		-- upvalues: UseStateResult2 (copy), UseStateResult2_1 (copy)
+		UseStateResult2(false)
+		UseStateResult2_1(false)
 	end, {}) else nil
 	
-	if showStartupMessageOnUnhide then
-		reactModule.useEffect(function()
-			-- upvalues: var4 (ref), var13 (ref)
-			if var4 then
-				local onUnhideConnection = var4.OnUnhide:Connect(var13)
-				
-				return function()
-					-- upvalues: onUnhideConnection (ref)
-					if onUnhideConnection then
-						onUnhideConnection:Disconnect()
-					end
+	if ShowStartupMessageOnUnhide then
+		ReactModule.useEffect(function() --[[ Line: 57 ]]
+			-- upvalues: UseRoactServiceResult2 (copy), UseResult (copy)
+			if not UseRoactServiceResult2 then return end
+			local OnUnhideConnection = UseRoactServiceResult2.OnUnhide:Connect(UseResult)
+			
+			return function() --[[ Line: 63 ]]
+				-- upvalues: OnUnhideConnection (copy)
+				if OnUnhideConnection then
+					OnUnhideConnection:Disconnect()
 				end
 			end
-		end, { var4, var13 })
+		end, { UseRoactServiceResult2, UseResult })
 	end
-	local startupMessage = var5:getStartupMessage()
-	local var14 = if startupMessage and not var9 then true else false
-	local startupMessage_1 = startupMessage or {}
-	local titleLocalizationKey = startupMessage_1.titleLocalizationKey
-	local bodyLocalizationKey = startupMessage_1.bodyLocalizationKey
-	local var15 = if startupMessageActionButtonEnabledEngineFeature then startupMessage_1.actionButtonLocalizationKey else nil
-	local loggingEventName = startupMessage_1.loggingEventName
-	local links = startupMessage_1.links or {}
-	local var16 = useLocalization(dashModule.map(links, function(p1)
+	local StartupMessage = UseRoactServiceResult3:getStartupMessage()
+	local NoUseStateResult: boolean = StartupMessage and not UseStateResult or false
+	local StartupMessage1 = StartupMessage or {}
+	local TitleLocalizationKey = StartupMessage1.titleLocalizationKey
+	local BodyLocalizationKey = StartupMessage1.bodyLocalizationKey
+	local ActionButtonLocalizationKey = if StartupMessageActionButtonEnabledEngineFeature then StartupMessage1.actionButtonLocalizationKey else nil
+	local LoggingEventName = StartupMessage1.loggingEventName
+	local Links = StartupMessage1.links or {}
+	local UseLocalizationResult = UseLocalizationFunction(DashModule.map(Links, function(p1) --[[ Line: 83 ]]
 		return p1.localizationKey
 	end))
-	local var17 = dashModule.reduce(links, function(p1, p2, p3)
-		-- upvalues: dashModule (copy), var16 (ref)
-		return dashModule.append(p1, { { label = var16[p3], url = p2.url } })
+	local ReduceResult = DashModule.reduce(Links, function(p1, p2, p3) --[[ Line: 86 ]]
+		-- upvalues: DashModule (upval), UseLocalizationResult (copy)
+		return DashModule.append(p1, { { label = UseLocalizationResult[p3], url = p2.url } })
 	end, {})
-	local date = startupMessage_1.date
-	local robloxLocaleId = localizationService.RobloxLocaleId
-	local var18 = tonumber(startupMessage_1.date)
+	local Date = StartupMessage1.date
+	local RobloxLocaleId = LocalizationService.RobloxLocaleId
+	local Number: number? = tonumber(StartupMessage1.date)
 	
-	if var18 then
-		date = DateTime.fromUnixTimestamp(var18):FormatUniversalTime("LL", robloxLocaleId)
+	if Number then
+		Date = DateTime.fromUnixTimestamp(Number):FormatUniversalTime("LL", RobloxLocaleId)
 	end
-	local var19 = useLocalization({
+	local UseLocalizationResult1 = UseLocalizationFunction({
 		buttonText = "CommonUI.Messages.Action.Dismiss",
-		titleText = titleLocalizationKey,
-		bodyText = bodyLocalizationKey and { bodyLocalizationKey, date = date },
-		actionButtonText = var15
+		titleText = TitleLocalizationKey,
+		bodyText = BodyLocalizationKey and { BodyLocalizationKey, date = Date },
+		actionButtonText = ActionButtonLocalizationKey
 	})
-	local var20 = reactModule.useCallback(function()
-		-- upvalues: var10 (ref)
-		var10(true)
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 109 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(true)
 	end, {})
 	
-	local function onActionButtonActivated()
-		-- upvalues: var5 (ref)
-		var5:executeActionButton()
+	local function onActionButtonActivated() --[[ Line: 113 ]]
+		-- upvalues: UseRoactServiceResult3 (copy)
+		UseRoactServiceResult3:executeActionButton()
 	end
 	
-	local var21 = reactModule.useCallback(function(p1, p2)
-		-- upvalues: var2 (ref), appPage (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var7 (ref), navigateDown (copy)
-		var2:isURLRegistered(p1):andThen(function(p3)
-			-- upvalues: var2 (copy), p1 (ref), appPage (copy), p2 (ref), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var7 (copy), navigateDown (copy)
-			if p3 then
-				var2:detectURL(p1)
+	local UseResult2 = ReactModule.useCallback(function(Detail, Title) --[[ Line: 117 ]]
+		-- upvalues: UseRoactServiceResult (copy), AppPage (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval)
+		UseRoactServiceResult:isURLRegistered(Detail):andThen(function(Result) --[[ Line: 118 ]]
+			-- upvalues: UseRoactServiceResult (upval), Detail (copy), AppPage (upval), Title (copy), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (upval), NavigateDownFunction (upval)
+			if Result then
+				UseRoactServiceResult:detectURL(Detail)
 				
 				return
 			end
-			local t = {
-				name = appPage.GenericWebPage,
-				detail = p1,
-				extraProps = { title = p2 }
+			local config = {
+				name = AppPage.GenericWebPage,
+				detail = Detail,
+				extraProps = { title = Title }
 			}
 			
-			if fFlagSignalsNavP3Dispatch then
-				var1.down(var1.fromLegacyPage(t))
+			if FFlagSignalsNavP3Dispatch then
+				NavigationCommands.down(NavigationCommands.fromLegacyPage(config))
 				
 				return
+			else
+				UseDispatchResult(NavigateDownFunction(config))
 			end
-			var7(navigateDown(t))
 		end)
-	end, { var7, var2 })
-	local var22 = useAppFocusRoot({
+	end, { UseDispatchResult, UseRoactServiceResult })
+	local UseAppFocusRootResult = UseAppFocusRootFunction({
 		isAutoFocusRoot = true,
-		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.CentralOverlay,
-		isFocusable = not var9
+		surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.CentralOverlay,
+		isFocusable = not UseStateResult
 	})
-	reactModule.useEffect(function()
-		-- upvalues: var11 (ref), var14 (ref), loggingEventName (ref), var3 (ref), var12 (ref)
-		if not var11 and var14 and loggingEventName then
-			var3:logEphemeralCounterEvent({
+	ReactModule.useEffect(function() --[[ Line: 144 ]]
+		-- upvalues: UseStateResult1 (copy), NoUseStateResult (copy), LoggingEventName (copy), UseRoactServiceResult1 (copy), UseStateResult2_1 (copy)
+		if not UseStateResult1 and NoUseStateResult and LoggingEventName then
+			UseRoactServiceResult1:logEphemeralCounterEvent({
 				description = "Startup Message Displayed Event",
-				eventName = loggingEventName,
+				eventName = LoggingEventName,
 				backends = { "EphemeralCounter" },
 				lastUpdated = { 24, 2, 18 }
 			})
-			var12(true)
+			UseStateResult2_1(true)
 		end
-	end, { var11, var14, loggingEventName })
+	end, { UseStateResult1, NoUseStateResult, LoggingEventName })
 	
 	return {
-		displayStartupMessage = var14,
-		screenSize = var6,
-		message = startupMessage_1,
-		localizedStrings = var19,
-		localizedLinks = var17,
-		overlayColor = var8,
-		onDismissed = var20,
-		onOpenUrl = var21,
-		onActionButtonActivated = if startupMessageActionButtonEnabledEngineFeature then onActionButtonActivated else nil,
-		focusNavRef = var22
+		displayStartupMessage = NoUseStateResult,
+		screenSize = UseSelectorResult,
+		message = StartupMessage1,
+		localizedStrings = UseLocalizationResult1,
+		localizedLinks = ReduceResult,
+		overlayColor = UseDesignTokensResult,
+		onDismissed = UseResult1,
+		onOpenUrl = UseResult2,
+		onActionButtonActivated = if StartupMessageActionButtonEnabledEngineFeature then onActionButtonActivated else nil,
+		focusNavRef = UseAppFocusRootResult
 	}
 end

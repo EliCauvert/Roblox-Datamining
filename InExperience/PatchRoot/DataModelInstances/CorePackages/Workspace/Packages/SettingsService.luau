@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.SettingsService.SettingsService)
+﻿return (require(script.Parent._Workspace.SettingsService.SettingsService))

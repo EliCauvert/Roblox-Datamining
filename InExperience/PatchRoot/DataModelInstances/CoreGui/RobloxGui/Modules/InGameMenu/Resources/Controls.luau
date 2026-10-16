@@ -1,45 +1,44 @@
-﻿local userInputService = game:GetService("UserInputService")
-local keyCode = Enum.KeyCode
-local userInputType = Enum.UserInputType
-local t = { KEYBOARD = "Keyboard", GAMEPAD = "Gamepad" }
-local t_1 = {
-	[Enum.UserInputType.MouseButton2] = t.KEYBOARD,
-	[Enum.UserInputType.MouseButton3] = t.KEYBOARD,
-	[Enum.UserInputType.MouseWheel] = t.KEYBOARD,
-	[Enum.UserInputType.MouseMovement] = t.KEYBOARD,
-	[Enum.UserInputType.Keyboard] = t.KEYBOARD,
-	[Enum.UserInputType.Gamepad1] = t.GAMEPAD,
-	[Enum.UserInputType.Gamepad2] = t.GAMEPAD,
-	[Enum.UserInputType.Gamepad3] = t.GAMEPAD,
-	[Enum.UserInputType.Gamepad4] = t.GAMEPAD,
-	[Enum.UserInputType.Gamepad5] = t.GAMEPAD,
-	[Enum.UserInputType.Gamepad6] = t.GAMEPAD,
-	[Enum.UserInputType.Gamepad7] = t.GAMEPAD,
-	[Enum.UserInputType.Gamepad8] = t.GAMEPAD
+﻿local KeyCode = Enum.KeyCode
+local UserInputType = Enum.UserInputType
+local ControlLayouts = { KEYBOARD = "Keyboard", GAMEPAD = "Gamepad" }
+local InputToControlTypeMap = {
+	[Enum.UserInputType.MouseButton2] = ControlLayouts.KEYBOARD,
+	[Enum.UserInputType.MouseButton3] = ControlLayouts.KEYBOARD,
+	[Enum.UserInputType.MouseWheel] = ControlLayouts.KEYBOARD,
+	[Enum.UserInputType.MouseMovement] = ControlLayouts.KEYBOARD,
+	[Enum.UserInputType.Keyboard] = ControlLayouts.KEYBOARD,
+	[Enum.UserInputType.Gamepad1] = ControlLayouts.GAMEPAD,
+	[Enum.UserInputType.Gamepad2] = ControlLayouts.GAMEPAD,
+	[Enum.UserInputType.Gamepad3] = ControlLayouts.GAMEPAD,
+	[Enum.UserInputType.Gamepad4] = ControlLayouts.GAMEPAD,
+	[Enum.UserInputType.Gamepad5] = ControlLayouts.GAMEPAD,
+	[Enum.UserInputType.Gamepad6] = ControlLayouts.GAMEPAD,
+	[Enum.UserInputType.Gamepad7] = ControlLayouts.GAMEPAD,
+	[Enum.UserInputType.Gamepad8] = ControlLayouts.GAMEPAD
 }
-local list = {
+local List = {
 	{
 		title = "CoreScripts.InGameMenu.Controls.CharacterMovementTitle",
 		controls = {
 			{
 				desc = "CoreScripts.InGameMenu.Controls.MoveForward",
-				inputs = { keyCode.Up, keyCode.W }
+				inputs = { KeyCode.Up, KeyCode.W }
 			},
 			{
 				desc = "CoreScripts.InGameMenu.Controls.MoveBackward",
-				inputs = { keyCode.Down, keyCode.S }
+				inputs = { KeyCode.Down, KeyCode.S }
 			},
 			{
 				desc = "CoreScripts.InGameMenu.Controls.MoveLeft",
-				inputs = { keyCode.A }
+				inputs = { KeyCode.A }
 			},
 			{
 				desc = "CoreScripts.InGameMenu.Controls.MoveRight",
-				inputs = { keyCode.D }
+				inputs = { KeyCode.D }
 			},
 			{
 				desc = "CoreScripts.InGameMenu.Controls.Jump",
-				inputs = { keyCode.Space }
+				inputs = { KeyCode.Space }
 			}
 		}
 	},
@@ -48,23 +47,23 @@ local list = {
 		controls = {
 			{
 				desc = "CoreScripts.InGameMenu.Controls.RotateCamera",
-				inputs = { keyCode.Left, keyCode.Right, userInputType.MouseButton2 }
+				inputs = { KeyCode.Left, KeyCode.Right, UserInputType.MouseButton2 }
 			},
 			{
 				desc = "CoreScripts.InGameMenu.Controls.ZoomInOutCamera",
-				inputs = { userInputType.MouseWheel }
+				inputs = { UserInputType.MouseWheel }
 			},
 			{
 				desc = "CoreScripts.InGameMenu.Controls.ZoomInCamera",
-				inputs = { keyCode.I }
+				inputs = { KeyCode.I }
 			},
 			{
 				desc = "CoreScripts.InGameMenu.Controls.ZoomOutCamera",
-				inputs = { keyCode.O }
+				inputs = { KeyCode.O }
 			},
 			{
 				desc = "CoreScripts.InGameMenu.Controls.MouseLock",
-				inputs = { keyCode.LeftShift }
+				inputs = { KeyCode.LeftShift }
 			}
 		}
 	},
@@ -74,15 +73,15 @@ local list = {
 			{
 				desc = "CoreScripts.InGameMenu.Controls.EquipUnequipTools",
 				list = true,
-				inputs = { keyCode.One, keyCode.Two, keyCode.Three }
+				inputs = { KeyCode.One, KeyCode.Two, KeyCode.Three }
 			},
 			{
 				desc = "CoreScripts.InGameMenu.Controls.DropTool",
-				inputs = { keyCode.Backspace }
+				inputs = { KeyCode.Backspace }
 			},
 			{
 				desc = "CoreScripts.InGameMenu.Controls.UseTool",
-				inputs = { userInputType.MouseButton1 }
+				inputs = { UserInputType.MouseButton1 }
 			}
 		}
 	},
@@ -91,113 +90,113 @@ local list = {
 		controls = {
 			{
 				desc = "CoreScripts.InGameMenu.Controls.RobloxMenu",
-				inputs = { keyCode.Escape }
+				inputs = { KeyCode.Escape }
 			},
 			{
 				desc = "CoreScripts.InGameMenu.Controls.Backpack",
-				inputs = { keyCode.Tilde }
+				inputs = { KeyCode.Tilde }
 			},
 			{
 				desc = "CoreScripts.InGameMenu.Controls.Playerlist",
-				inputs = { keyCode.Tab }
+				inputs = { KeyCode.Tab }
 			},
 			{
 				desc = "CoreScripts.InGameMenu.Controls.Chat",
-				inputs = { keyCode.Slash }
+				inputs = { KeyCode.Slash }
 			}
 		}
 	}
 }
-local t_2 = {
+local config = {
 	title = "CoreScripts.InGameMenu.Controls.MiscellaneousTitle",
 	controls = {
 		{
 			desc = "CoreScripts.InGameMenu.Controls.GameMenuToggleGamepad",
-			inputs = { keyCode.BackSlash }
+			inputs = { KeyCode.BackSlash }
 		},
 		{
 			desc = "CoreScripts.InGameMenu.Controls.Screenshot",
-			inputs = { { keyCode.LeftSuper, keyCode.LeftShift, keyCode.Three } }
+			inputs = { { KeyCode.LeftSuper, KeyCode.LeftShift, KeyCode.Three } }
 		},
 		{
 			desc = "CoreScripts.InGameMenu.Controls.DevConsole",
-			inputs = { { keyCode.LeftMeta, keyCode.F9 }, keyCode.F9 }
+			inputs = { { KeyCode.LeftMeta, KeyCode.F9 }, KeyCode.F9 }
 		},
 		{
 			desc = "CoreScripts.InGameMenu.Controls.GraphicsLevelUp",
-			inputs = { { keyCode.LeftMeta, keyCode.F10 }, keyCode.F10 }
+			inputs = { { KeyCode.LeftMeta, KeyCode.F10 }, KeyCode.F10 }
 		},
 		{
 			desc = "CoreScripts.InGameMenu.Controls.GraphicsLevelDown",
 			inputs = {
-				{ keyCode.LeftMeta, keyCode.LeftShift, keyCode.F10 },
-				{ keyCode.LeftShift, keyCode.F10 }
+				{ KeyCode.LeftMeta, KeyCode.LeftShift, KeyCode.F10 },
+				{ KeyCode.LeftShift, KeyCode.F10 }
 			}
 		},
 		{
 			desc = "CoreScripts.InGameMenu.Controls.ToggleFullscreen",
-			inputs = { { keyCode.LeftControl, keyCode.LeftSuper, keyCode.F } }
+			inputs = { { KeyCode.LeftControl, KeyCode.LeftSuper, KeyCode.F } }
 		},
 		{
 			desc = "CoreScripts.InGameMenu.Controls.PerformanceStats",
 			inputs = {
 				{
-					keyCode.LeftMeta,
-					keyCode.LeftAlt,
-					keyCode.LeftSuper,
-					keyCode.F7
+					KeyCode.LeftMeta,
+					KeyCode.LeftAlt,
+					KeyCode.LeftSuper,
+					KeyCode.F7
 				}
 			}
 		}
 	}
 }
-local t_3 = {
+local config1 = {
 	title = "CoreScripts.InGameMenu.Controls.MiscellaneousTitle",
 	controls = {
 		{
 			desc = "CoreScripts.InGameMenu.Controls.GameMenuToggleGamepad",
-			inputs = { keyCode.BackSlash }
+			inputs = { KeyCode.BackSlash }
 		},
 		{
 			desc = "CoreScripts.InGameMenu.Controls.Screenshot",
-			inputs = { keyCode.Print }
+			inputs = { KeyCode.Print }
 		},
 		{
 			desc = "CoreScripts.InGameMenu.Controls.RecordVideo",
-			inputs = { keyCode.F12 }
+			inputs = { KeyCode.F12 }
 		},
 		{
 			desc = "CoreScripts.InGameMenu.Controls.DevConsole",
-			inputs = { keyCode.F9 }
+			inputs = { KeyCode.F9 }
 		},
 		{
 			desc = "CoreScripts.InGameMenu.Controls.GraphicsLevelUp",
-			inputs = { keyCode.F10 }
+			inputs = { KeyCode.F10 }
 		},
 		{
 			desc = "CoreScripts.InGameMenu.Controls.GraphicsLevelDown",
-			inputs = { { keyCode.LeftShift, keyCode.F10 } }
+			inputs = { { KeyCode.LeftShift, KeyCode.F10 } }
 		},
 		{
 			desc = "CoreScripts.InGameMenu.Controls.ToggleFullscreen",
-			inputs = { keyCode.F11 }
+			inputs = { KeyCode.F11 }
 		},
 		{
 			desc = "CoreScripts.InGameMenu.Controls.PerformanceStats",
-			inputs = { { keyCode.LeftControl, keyCode.LeftShift, keyCode.F7 } }
+			inputs = { { KeyCode.LeftControl, KeyCode.LeftShift, KeyCode.F7 } }
 		}
 	}
 }
 
-if userInputService:GetPlatform() == Enum.Platform.OSX then
-	table.insert(list, t_2)
+if game:GetService("UserInputService"):GetPlatform() == Enum.Platform.OSX then
+	table.insert(List, config)
 else
-	table.insert(list, t_3)
+	table.insert(List, config1)
 end
 return {
-	ControlLayouts = t,
-	keybinds = list,
-	inputToControlTypeMap = t_1,
+	ControlLayouts = ControlLayouts,
+	keybinds = List,
+	inputToControlTypeMap = InputToControlTypeMap,
 	gamepadLabels = {
 		left = {
 			"CoreScripts.InGameMenu.Controls.SwitchToolGamepad",

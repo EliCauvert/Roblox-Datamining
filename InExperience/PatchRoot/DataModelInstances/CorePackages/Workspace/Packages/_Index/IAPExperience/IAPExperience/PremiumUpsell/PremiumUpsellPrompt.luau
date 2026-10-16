@@ -1,23 +1,23 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent
-local parent_2 = parent_1.Parent
-local roactModule = require(parent_2.Roact)
-local fitFrameVertical = require(parent_2.RoactFitComponents).FitFrameVertical
-local UIBloxModule = require(parent_2.UIBlox)
-local foundationModule = require(parent_2.Foundation)
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local partialPageModal = UIBloxModule.App.Dialog.Modal.PartialPageModal
-local getPartialPageModalMiddleContentWidth = UIBloxModule.App.Dialog.Modal.getPartialPageModalMiddleContentWidth
-local buttonType = UIBloxModule.App.Button.Enum.ButtonType
-local images = UIBloxModule.App.ImageSet.Images
-local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
-local withStyle = UIBloxModule.Style.withStyle
-local multiTextLocalizerModule = require(parent_1.Locale.MultiTextLocalizer)
-local bulletPointModule = require(parent.BulletPoint)
-local name = roactModule.Component:extend(script.Name)
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent
+local Parent2 = Parent1.Parent
+local RoactModule = require(Parent2.Roact)
+local FitFrameVertical = require(Parent2.RoactFitComponents).FitFrameVertical
+local UIBloxModule = require(Parent2.UIBlox)
+local FoundationModule = require(Parent2.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local PartialPageModal = UIBloxModule.App.Dialog.Modal.PartialPageModal
+local GetPartialPageModalMiddleContentWidthFunction = UIBloxModule.App.Dialog.Modal.getPartialPageModalMiddleContentWidth
+local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
+local Images = UIBloxModule.App.ImageSet.Images
+local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
+local WithStyleFunction = UIBloxModule.Style.withStyle
+local MultiTextLocalizerModule = require(Parent1.Locale.MultiTextLocalizer)
+local BulletPointModule = require(Parent.BulletPoint)
+local ExtendResult = RoactModule.Component:extend(script.Name)
 
-function name.init(p1)
+function ExtendResult.init(p1) --[[ Line: 50 ]]
 	p1.isCondensed = false
 	p1.contentSize = Vector2.new(0, 0)
 	p1.state = {
@@ -25,41 +25,38 @@ function name.init(p1)
 		iconSize = UDim2.new(1, 0, 0, 80)
 	}
 	
-	function p0.updateContentSizes(p2, p3)
-		-- upvalues: p1 (ref)
-		if p3.X < 200 or p3.Y > 1000 then return end
-		local var1
-		local contentSize = p1.contentSize
-		p1.contentSize = p3
+	function p1.updateContentSizes(ScreenSize, ContentSize) --[[ Line: 59 ]]
+		-- upvalues: p1 (copy)
+		if ContentSize.X < 200 or ContentSize.Y > 1000 then return end
+		local ContentSize1 = p1.contentSize
+		p1.contentSize = ContentSize
 		
-		if p3.X == 0 and p3.Y == 0 then return end
-		if p2.X == 0 and p2.Y == 0 then return end
-		if p3 == contentSize and p2 == p1.props.screenSize then return end
-		if p1.isCondensed then
-			var1 = p2.Y < p3.Y + 120 + 80 - 48 + 24
-			var1 = nil
-		else
-			var1 = p2.Y < p3.Y + 120
+		if ContentSize.X == 0 and ContentSize.Y == 0 then return end
+		if ScreenSize.X == 0 and ScreenSize.Y == 0 then return end
+		if ContentSize ~= ContentSize1 or ScreenSize ~= p1.props.screenSize then
+			local IsYBelow: boolean = if p1.isCondensed then ScreenSize.Y < ContentSize.Y + 120 + 80 - 48 + 24 else ScreenSize.Y < ContentSize.Y + 120
+			p1.isCondensed = IsYBelow
+			p1:setState({
+				padding = UDim.new(0, if IsYBelow then 12 else 24),
+				iconSize = UDim2.new(1, 0, 0, if IsYBelow then 48 else 80)
+			})
+			
+			return
 		end
-		p1.isCondensed = var1
-		p1:setState({
-			padding = UDim.new(0, if var1 then 12 else 24),
-			iconSize = UDim2.new(1, 0, 0, if var1 then 48 else 80)
-		})
 	end
 end
 
-function name.willUpdate(p1, p2)
+function ExtendResult.willUpdate(p1, p2) --[[ Line: 101 ]]
 	if p1.props.screenSize ~= p2.screenSize then
 		p1.updateContentSizes(p2.screenSize, p1.contentSize)
 	end
 end
 
-function name.render(p1)
-	-- upvalues: roactModule (ref), multiTextLocalizerModule (ref)
-	local props = p1.props
+function ExtendResult.render(p1) --[[ Line: 107 ]]
+	-- upvalues: RoactModule (copy), MultiTextLocalizerModule (copy)
+	local Props = p1.props
 	
-	return roactModule.createElement(multiTextLocalizerModule, {
+	return RoactModule.createElement(MultiTextLocalizerModule, {
 		keys = {
 			titleLocalizedText = {
 				key = "IAPExperience.SubscriptionPurchasePrompt.Label.GetSubscription"
@@ -70,19 +67,19 @@ function name.render(p1)
 			},
 			bulletPoint1Text = {
 				key = "IAPExperience.PremiumUpsell.Label.RobuxPerMonth",
-				params = { robux = utf8.char(57346) .. tostring(props.robuxAmount) }
+				params = { robux = utf8.char(57346) .. tostring(Props.robuxAmount) }
 			},
 			bulletPoint2Text = {
 				key = "IAPExperience.PremiumUpsell.Label.PremiumOnlyBenefits"
 			},
-			bulletPoint3Text = if props.isCatalog then {
+			bulletPoint3Text = if Props.isCatalog then {
 				key = "IAPExperience.PremiumUpsell.Label.AvatarShopBenefits"
 			} else { key = "IAPExperience.PremiumUpsell.Body.RobuxDiscount" },
 			disclosure = {
 				key = "IAPExperience.PremiumUpsell.Label.Disclosure",
 				params = {
-					currencySymbol = props.currencySymbol,
-					price = tostring(props.robuxPrice)
+					currencySymbol = Props.currencySymbol,
+					price = tostring(Props.robuxPrice)
 				}
 			},
 			shortDisclosure = {
@@ -91,42 +88,42 @@ function name.render(p1)
 			priceLocalizedText = {
 				key = "IAPExperience.PremiumUpsell.Label.PremiumPrice",
 				params = {
-					currencySymbol = props.currencySymbol,
-					price = tostring(props.robuxPrice)
+					currencySymbol = Props.currencySymbol,
+					price = tostring(Props.robuxPrice)
 				}
 			},
 			headerLocalizedText = { key = "IAPExperience.PremiumUpsell.Label.RobloxPremium" },
 			policyLocalizedText = { key = "IAPExperience.PremiumUpsell.Label.PremiumPolicy" }
 		},
-		render = function(p2)
-			-- upvalues: p1 (ref)
+		render = function(p2) --[[ Line: 161 ]]
+			-- upvalues: p1 (copy)
 			return p1:renderPrompt(p2)
 		end
 	})
 end
 
-function name.renderCondensedPremiumInfo(_, b)
-	-- upvalues: withStyle (ref), roactModule (ref), imageSetLabel (ref), images (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
-	return withStyle(function(p1)
-		-- upvalues: roactModule (copy), imageSetLabel (copy), images (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy), b (ref)
-		local theme = p1.Theme
-		local font = p1.Font
+function ExtendResult:renderCondensedPremiumInfo(p1) --[[ Line: 167 ]]
+	-- upvalues: WithStyleFunction (copy), RoactModule (copy), ImageSetLabel (copy), Images (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	return WithStyleFunction(function(p2) --[[ Line: 168 ]]
+		-- upvalues: RoactModule (upval), ImageSetLabel (upval), Images (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), p1 (copy)
+		local Theme = p2.Theme
+		local _Font = p2.Font
 		
-		return roactModule.createElement("Frame", {
+		return RoactModule.createElement("Frame", {
 			LayoutOrder = 1,
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y
 		}, {
-			Padding = roactModule.createElement("UIPadding", {
+			Padding = RoactModule.createElement("UIPadding", {
 				PaddingTop = UDim.new(0, 12),
 				PaddingBottom = UDim.new(0, 12)
 			}),
-			Layout = roactModule.createElement("UIListLayout", {
+			Layout = RoactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Horizontal,
 				SortOrder = Enum.SortOrder.LayoutOrder
 			}),
-			IconContainer = roactModule.createElement("Frame", {
+			IconContainer = RoactModule.createElement("Frame", {
 				LayoutOrder = 1,
 				BackgroundTransparency = 1,
 				Size = UDim2.new(0, 96, 0, 96),
@@ -134,27 +131,27 @@ function name.renderCondensedPremiumInfo(_, b)
 				AnchorPoint = Vector2.new(0, 0),
 				Position = UDim2.new(0, 0, 0, 0)
 			}, {
-				Padding = roactModule.createElement("UIPadding", { PaddingRight = UDim.new(0, 12) }),
-				Icon = roactModule.createElement(imageSetLabel, {
+				Padding = RoactModule.createElement("UIPadding", { PaddingRight = UDim.new(0, 12) }),
+				Icon = RoactModule.createElement(ImageSetLabel, {
 					BackgroundTransparency = 1,
 					Size = UDim2.new(1, 0, 1, 0),
 					ScaleType = Enum.ScaleType.Fit,
-					Image = images["icons/graphic/premium_large"]
+					Image = Images["icons/graphic/premium_large"]
 				})
 			}),
-			PremiumInfoContainer = roactModule.createElement("Frame", {
+			PremiumInfoContainer = RoactModule.createElement("Frame", {
 				LayoutOrder = 2,
 				BackgroundTransparency = 1,
 				Size = UDim2.new(1, -80, 0, 0),
 				AutomaticSize = Enum.AutomaticSize.Y
 			}, {
-				Padding = roactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, 6) }),
-				ListLayout = roactModule.createElement("UIListLayout", {
+				Padding = RoactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, 6) }),
+				ListLayout = RoactModule.createElement("UIListLayout", {
 					FillDirection = Enum.FillDirection.Vertical,
 					SortOrder = Enum.SortOrder.LayoutOrder,
 					Padding = UDim.new(0, 12)
 				}),
-				PremiumHeader = roactModule.createElement("TextLabel", {
+				PremiumHeader = RoactModule.createElement("TextLabel", {
 					LayoutOrder = 1,
 					BackgroundTransparency = 1,
 					TextWrapped = true,
@@ -162,14 +159,14 @@ function name.renderCondensedPremiumInfo(_, b)
 					Size = UDim2.new(1, 0, 0, 0),
 					AutomaticSize = Enum.AutomaticSize.Y,
 					TextXAlignment = Enum.TextXAlignment.Left,
-					Font = if foundationFontFaceMigration then nil else font.Header2.Font,
-					FontFace = if foundationFontFaceMigration then normalizeFontFace(p1.Tokens.Typography.TitleLarge.Font) else nil,
-					Text = b.headerLocalizedText,
-					TextSize = font.BaseSize * font.Header2.RelativeSize,
-					TextColor3 = theme.TextEmphasis.Color,
-					TextTransparency = theme.TextDefault.Transparency
+					Font = if FoundationFontFaceMigration then nil else _Font.Header2.Font,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Tokens.Typography.TitleLarge.Font) else nil,
+					Text = p1.headerLocalizedText,
+					TextSize = _Font.BaseSize * _Font.Header2.RelativeSize,
+					TextColor3 = Theme.TextEmphasis.Color,
+					TextTransparency = Theme.TextDefault.Transparency
 				}),
-				CostPerMonth = roactModule.createElement("TextLabel", {
+				CostPerMonth = RoactModule.createElement("TextLabel", {
 					LayoutOrder = 2,
 					BackgroundTransparency = 1,
 					TextWrapped = true,
@@ -177,148 +174,148 @@ function name.renderCondensedPremiumInfo(_, b)
 					Size = UDim2.new(1, 0, 0, 0),
 					AutomaticSize = Enum.AutomaticSize.Y,
 					TextXAlignment = Enum.TextXAlignment.Left,
-					Font = if foundationFontFaceMigration then nil else font.Body.Font,
-					FontFace = if foundationFontFaceMigration then normalizeFontFace(p1.Tokens.Typography.BodyLarge.Font) else nil,
-					Text = b.priceLocalizedText,
-					TextSize = font.BaseSize,
-					TextColor3 = theme.TextEmphasis.Color,
-					TextTransparency = theme.TextDefault.Transparency
+					Font = if FoundationFontFaceMigration then nil else _Font.Body.Font,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Tokens.Typography.BodyLarge.Font) else nil,
+					Text = p1.priceLocalizedText,
+					TextSize = _Font.BaseSize,
+					TextColor3 = Theme.TextEmphasis.Color,
+					TextTransparency = Theme.TextDefault.Transparency
 				}),
-				RenewAndCancelText = roactModule.createElement("TextLabel", {
+				RenewAndCancelText = RoactModule.createElement("TextLabel", {
 					LayoutOrder = 3,
 					BackgroundTransparency = 1,
 					TextWrapped = true,
 					Size = UDim2.new(1, 0, 0, 0),
 					AutomaticSize = Enum.AutomaticSize.Y,
 					TextXAlignment = Enum.TextXAlignment.Left,
-					Font = if foundationFontFaceMigration then nil else font.Body.Font,
-					FontFace = if foundationFontFaceMigration then normalizeFontFace(p1.Tokens.Typography.BodyLarge.Font) else nil,
-					Text = b.policyLocalizedText,
-					TextSize = font.BaseSize,
-					TextColor3 = theme.TextDefault.Color,
-					TextTransparency = theme.TextDefault.Transparency
+					Font = if FoundationFontFaceMigration then nil else _Font.Body.Font,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Tokens.Typography.BodyLarge.Font) else nil,
+					Text = p1.policyLocalizedText,
+					TextSize = _Font.BaseSize,
+					TextColor3 = Theme.TextDefault.Color,
+					TextTransparency = Theme.TextDefault.Transparency
 				})
 			})
 		})
 	end)
 end
 
-function name.renderBulletInfo(p1, p2)
-	-- upvalues: withStyle (ref), getPartialPageModalMiddleContentWidth (ref), roactModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), fitFrameVertical (ref), bulletPointModule (ref)
-	return withStyle(function(p3)
-		-- upvalues: getPartialPageModalMiddleContentWidth (copy), p1 (ref), roactModule (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy), p2 (ref), fitFrameVertical (copy), bulletPointModule (copy)
-		local theme = p3.Theme
-		local font = p3.Font
-		local var1 = getPartialPageModalMiddleContentWidth(p1.props.screenSize.X)
+function ExtendResult.renderBulletInfo(p1, p2) --[[ Line: 273 ]]
+	-- upvalues: WithStyleFunction (copy), GetPartialPageModalMiddleContentWidthFunction (copy), RoactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), FitFrameVertical (copy), BulletPointModule (copy)
+	return WithStyleFunction(function(p3) --[[ Line: 274 ]]
+		-- upvalues: GetPartialPageModalMiddleContentWidthFunction (upval), p1 (copy), RoactModule (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), p2 (copy), FitFrameVertical (upval), BulletPointModule (upval)
+		local Theme = p3.Theme
+		local _Font = p3.Font
+		local PartialPageModalMiddleContentWidth = GetPartialPageModalMiddleContentWidthFunction(p1.props.screenSize.X)
 		
-		return roactModule.createElement("Frame", {
+		return RoactModule.createElement("Frame", {
 			LayoutOrder = 2,
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y
 		}, {
-			Padding = roactModule.createElement("UIPadding", { PaddingBottom = UDim.new(0, 12) }),
-			ListLayout = roactModule.createElement("UIListLayout", {
+			Padding = RoactModule.createElement("UIPadding", { PaddingBottom = UDim.new(0, 12) }),
+			ListLayout = RoactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Vertical,
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				Padding = UDim.new(0, 12)
 			}),
-			BulletListText = roactModule.createElement("TextLabel", {
+			BulletListText = RoactModule.createElement("TextLabel", {
 				LayoutOrder = 1,
 				BackgroundTransparency = 1,
-				Size = UDim2.new(0, var1, 0, 0),
+				Size = UDim2.new(0, PartialPageModalMiddleContentWidth, 0, 0),
 				AutomaticSize = Enum.AutomaticSize.Y,
 				TextXAlignment = Enum.TextXAlignment.Left,
-				Font = if foundationFontFaceMigration then nil else font.Body.Font,
-				FontFace = if foundationFontFaceMigration then normalizeFontFace(p3.Tokens.Typography.BodyLarge.Font) else nil,
+				Font = if FoundationFontFaceMigration then nil else _Font.Body.Font,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p3.Tokens.Typography.BodyLarge.Font) else nil,
 				Text = p2.descLocalizedText,
-				TextSize = font.BaseSize * font.Body.RelativeSize,
-				TextColor3 = theme.TextDefault.Color,
-				TextTransparency = theme.TextDefault.Transparency
+				TextSize = _Font.BaseSize * _Font.Body.RelativeSize,
+				TextColor3 = Theme.TextDefault.Color,
+				TextTransparency = Theme.TextDefault.Transparency
 			}),
-			BulletList = roactModule.createElement(fitFrameVertical, {
+			BulletList = RoactModule.createElement(FitFrameVertical, {
 				LayoutOrder = 2,
 				BackgroundTransparency = 1,
 				width = UDim.new(1, 0),
 				contentPadding = UDim.new(0, 12)
 			}, {
-				BulletText1 = roactModule.createElement(bulletPointModule, {
+				BulletText1 = RoactModule.createElement(BulletPointModule, {
 					layoutOrder = 1,
 					text = p2.bulletPoint1Text,
-					width = var1
+					width = PartialPageModalMiddleContentWidth
 				}),
-				BulletText2 = roactModule.createElement(bulletPointModule, {
+				BulletText2 = RoactModule.createElement(BulletPointModule, {
 					layoutOrder = 2,
 					text = p2.bulletPoint2Text,
-					width = var1
+					width = PartialPageModalMiddleContentWidth
 				}),
-				BulletText3 = roactModule.createElement(bulletPointModule, {
+				BulletText3 = RoactModule.createElement(BulletPointModule, {
 					layoutOrder = 3,
 					text = p2.bulletPoint3Text,
-					width = var1
+					width = PartialPageModalMiddleContentWidth
 				})
 			})
 		})
 	end)
 end
 
-function name.renderDisclosure(_, p1)
-	-- upvalues: withStyle (ref), roactModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
-	return withStyle(function(p2)
-		-- upvalues: roactModule (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy), p1 (ref)
-		local theme = p2.Theme
-		local font = p2.Font
+function ExtendResult:renderDisclosure(p1) --[[ Line: 336 ]]
+	-- upvalues: WithStyleFunction (copy), RoactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	return WithStyleFunction(function(p2) --[[ Line: 337 ]]
+		-- upvalues: RoactModule (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), p1 (copy)
+		local Theme = p2.Theme
+		local _Font = p2.Font
 		
-		return roactModule.createElement("Frame", {
+		return RoactModule.createElement("Frame", {
 			LayoutOrder = 5,
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y
 		}, {
-			Padding = roactModule.createElement("UIPadding", { PaddingBottom = UDim.new(0, 12) }),
-			Disclosure = roactModule.createElement("TextLabel", {
+			Padding = RoactModule.createElement("UIPadding", { PaddingBottom = UDim.new(0, 12) }),
+			Disclosure = RoactModule.createElement("TextLabel", {
 				LayoutOrder = 1,
 				BackgroundTransparency = 1,
 				RichText = true,
 				TextWrapped = true,
 				AutomaticSize = Enum.AutomaticSize.XY,
 				TextXAlignment = Enum.TextXAlignment.Left,
-				Font = if foundationFontFaceMigration then nil else font.Body.Font,
-				FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.BodyLarge.Font) else nil,
+				Font = if FoundationFontFaceMigration then nil else _Font.Body.Font,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Tokens.Typography.BodyLarge.Font) else nil,
 				Text = p1.shortDisclosure,
-				TextSize = font.BaseSize * font.Body.RelativeSize,
-				TextColor3 = theme.TextDefault.Color,
-				TextTransparency = theme.TextDefault.Transparency
+				TextSize = _Font.BaseSize * _Font.Body.RelativeSize,
+				TextColor3 = Theme.TextDefault.Color,
+				TextTransparency = Theme.TextDefault.Transparency
 			})
 		})
 	end)
 end
 
-function name.renderLandscapePrompt(p1, p2)
-	-- upvalues: withStyle (ref), roactModule (ref), partialPageModal (ref), buttonType (ref)
-	local props = p1.props
+function ExtendResult.renderLandscapePrompt(p1, p2) --[[ Line: 370 ]]
+	-- upvalues: WithStyleFunction (copy), RoactModule (copy), PartialPageModal (copy), ButtonType (copy)
+	local Props = p1.props
 	
-	return withStyle(function(_)
-		-- upvalues: roactModule (copy), partialPageModal (copy), p2 (ref), props (ref), buttonType (copy), p1 (ref)
-		return roactModule.createElement(partialPageModal, {
+	return WithStyleFunction(function(_) --[[ Line: 373 ]]
+		-- upvalues: RoactModule (upval), PartialPageModal (upval), p2 (copy), Props (copy), ButtonType (upval), p1 (copy)
+		return RoactModule.createElement(PartialPageModal, {
 			title = p2.titleLocalizedText,
-			screenSize = props.screenSize,
+			screenSize = Props.screenSize,
 			buttonStackProps = {
 				buttonHeight = 48,
 				buttons = {
 					{
-						buttonType = buttonType.PrimarySystem,
+						buttonType = ButtonType.PrimarySystem,
 						props = {
-							onActivated = props.purchasePremiumActivated,
+							onActivated = Props.purchasePremiumActivated,
 							text = p2.monthlyLocalizedText,
-							inputIcon = props.acceptControllerIcon
+							inputIcon = Props.acceptControllerIcon
 						}
 					}
 				}
 			},
-			onCloseClicked = props.cancelPurchaseActivated
+			onCloseClicked = Props.cancelPurchaseActivated
 		}, {
-			roactModule.createElement("ScrollingFrame", {
+			RoactModule.createElement("ScrollingFrame", {
 				LayoutOrder = 1,
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
@@ -326,11 +323,11 @@ function name.renderLandscapePrompt(p1, p2)
 				ScrollingEnabled = true,
 				ScrollBarThickness = 5,
 				Selectable = false,
-				Size = UDim2.new(1, 0, 0, props.screenSize.Y / 2),
+				Size = UDim2.new(1, 0, 0, Props.screenSize.Y / 2),
 				ScrollingDirection = Enum.ScrollingDirection.Y,
-				CanvasSize = UDim2.new(1, 0, 0, math.min(props.screenSize.Y / 2 + 96 + 12, 450))
+				CanvasSize = UDim2.new(1, 0, 0, (math.min(Props.screenSize.Y / 2 + 96 + 12, 450)))
 			}, {
-				Layout = roactModule.createElement("UIListLayout", {
+				Layout = RoactModule.createElement("UIListLayout", {
 					FillDirection = Enum.FillDirection.Vertical,
 					SortOrder = Enum.SortOrder.LayoutOrder
 				}),
@@ -342,37 +339,37 @@ function name.renderLandscapePrompt(p1, p2)
 	end)
 end
 
-function name.renderPortraitPrompt(p1, p2)
-	-- upvalues: withStyle (ref), roactModule (ref), partialPageModal (ref), buttonType (ref)
-	local props = p1.props
+function ExtendResult.renderPortraitPrompt(p1, p2) --[[ Line: 421 ]]
+	-- upvalues: WithStyleFunction (copy), RoactModule (copy), PartialPageModal (copy), ButtonType (copy)
+	local Props = p1.props
 	
-	return withStyle(function(_)
-		-- upvalues: roactModule (copy), partialPageModal (copy), p2 (ref), props (ref), buttonType (copy), p1 (ref)
-		return roactModule.createElement(partialPageModal, {
+	return WithStyleFunction(function(_) --[[ Line: 424 ]]
+		-- upvalues: RoactModule (upval), PartialPageModal (upval), p2 (copy), Props (copy), ButtonType (upval), p1 (copy)
+		return RoactModule.createElement(PartialPageModal, {
 			title = p2.titleLocalizedText,
-			screenSize = props.screenSize,
+			screenSize = Props.screenSize,
 			buttonStackProps = {
 				buttonHeight = 48,
 				buttons = {
 					{
-						buttonType = buttonType.PrimarySystem,
+						buttonType = ButtonType.PrimarySystem,
 						props = {
-							onActivated = props.purchasePremiumActivated,
+							onActivated = Props.purchasePremiumActivated,
 							text = p2.monthlyLocalizedText,
-							inputIcon = props.acceptControllerIcon
+							inputIcon = Props.acceptControllerIcon
 						}
 					}
 				}
 			},
-			onCloseClicked = props.cancelPurchaseActivated
+			onCloseClicked = Props.cancelPurchaseActivated
 		}, {
-			roactModule.createElement("Frame", {
+			RoactModule.createElement("Frame", {
 				LayoutOrder = 1,
 				BackgroundTransparency = 1,
 				Size = UDim2.new(1, 0, 0, 0),
 				AutomaticSize = Enum.AutomaticSize.Y
 			}, {
-				Layout = roactModule.createElement("UIListLayout", {
+				Layout = RoactModule.createElement("UIListLayout", {
 					FillDirection = Enum.FillDirection.Vertical,
 					SortOrder = Enum.SortOrder.LayoutOrder
 				}),
@@ -384,140 +381,140 @@ function name.renderPortraitPrompt(p1, p2)
 	end)
 end
 
-function name.renderUpdatedPrompt(p1, p2)
-	-- upvalues: withStyle (ref), getPartialPageModalMiddleContentWidth (ref), roactModule (ref), partialPageModal (ref), buttonType (ref), fitFrameVertical (ref), imageSetLabel (ref), images (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), bulletPointModule (ref)
-	local props = p1.props
+function ExtendResult.renderUpdatedPrompt(p1, p2) --[[ Line: 461 ]]
+	-- upvalues: WithStyleFunction (copy), GetPartialPageModalMiddleContentWidthFunction (copy), RoactModule (copy), PartialPageModal (copy), ButtonType (copy), FitFrameVertical (copy), ImageSetLabel (copy), Images (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), BulletPointModule (copy)
+	local Props = p1.props
 	
-	return withStyle(function(p3)
-		-- upvalues: getPartialPageModalMiddleContentWidth (copy), p1 (ref), roactModule (copy), partialPageModal (copy), p2 (ref), props (ref), buttonType (copy), fitFrameVertical (copy), imageSetLabel (copy), images (copy), foundationFontFaceMigration (copy), normalizeFontFace (copy), bulletPointModule (copy)
-		local theme = p3.Theme
-		local font = p3.Font
-		local var1 = getPartialPageModalMiddleContentWidth(p1.props.screenSize.X)
+	return WithStyleFunction(function(p3) --[[ Line: 464 ]]
+		-- upvalues: GetPartialPageModalMiddleContentWidthFunction (upval), p1 (copy), RoactModule (upval), PartialPageModal (upval), p2 (copy), Props (copy), ButtonType (upval), FitFrameVertical (upval), ImageSetLabel (upval), Images (upval), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), BulletPointModule (upval)
+		local Theme = p3.Theme
+		local _Font = p3.Font
+		local PartialPageModalMiddleContentWidth = GetPartialPageModalMiddleContentWidthFunction(p1.props.screenSize.X)
 		
-		return roactModule.createElement(partialPageModal, {
+		return RoactModule.createElement(PartialPageModal, {
 			title = p2.titleLocalizedText,
-			screenSize = props.screenSize,
+			screenSize = Props.screenSize,
 			buttonStackProps = {
 				buttonHeight = 48,
 				buttons = {
 					{
-						buttonType = buttonType.PrimarySystem,
+						buttonType = ButtonType.PrimarySystem,
 						props = {
-							onActivated = props.purchasePremiumActivated,
+							onActivated = Props.purchasePremiumActivated,
 							text = p2.monthlyLocalizedText,
-							inputIcon = props.acceptControllerIcon
+							inputIcon = Props.acceptControllerIcon
 						}
 					}
 				}
 			},
-			onCloseClicked = props.cancelPurchaseActivated
+			onCloseClicked = Props.cancelPurchaseActivated
 		}, {
-			roactModule.createElement(fitFrameVertical, {
+			RoactModule.createElement(FitFrameVertical, {
 				BackgroundTransparency = 1,
 				width = UDim.new(1, 0),
 				contentPadding = UDim.new(0, 12),
 				margin = { top = 12, bottom = 12 },
-				[roactModule.Change.AbsoluteSize] = function(p4)
-					-- upvalues: p1 (copy)
-					if p1.contentSize.X ~= p4.AbsoluteSize.X or p1.contentSize.Y ~= p4.AbsoluteSize.Y then
-						p1.updateContentSizes(p1.props.screenSize, p4.AbsoluteSize)
+				[RoactModule.Change.AbsoluteSize] = function(Frame: Frame) --[[ Line: 497 ]]
+					-- upvalues: p1 (upval)
+					if p1.contentSize.X ~= Frame.AbsoluteSize.X or p1.contentSize.Y ~= Frame.AbsoluteSize.Y then
+						p1.updateContentSizes(p1.props.screenSize, Frame.AbsoluteSize)
 					end
 				end
 			}, {
-				Icon = roactModule.createElement(imageSetLabel, {
+				Icon = RoactModule.createElement(ImageSetLabel, {
 					LayoutOrder = 1,
 					BackgroundTransparency = 1,
 					Size = p1.state.iconSize,
 					ScaleType = Enum.ScaleType.Fit,
-					Image = images["icons/graphic/premium_large"]
+					Image = Images["icons/graphic/premium_large"]
 				}),
-				PremiumInfoContainer = roactModule.createElement("Frame", {
+				PremiumInfoContainer = RoactModule.createElement("Frame", {
 					LayoutOrder = 2,
 					BackgroundTransparency = 1,
 					Size = UDim2.new(1, 0, 0, 0),
 					AutomaticSize = Enum.AutomaticSize.Y
 				}, {
-					Padding = roactModule.createElement("UIPadding", { PaddingBottom = UDim.new(0, 12) }),
-					ListLayout = roactModule.createElement("UIListLayout", {
+					Padding = RoactModule.createElement("UIPadding", { PaddingBottom = UDim.new(0, 12) }),
+					ListLayout = RoactModule.createElement("UIListLayout", {
 						FillDirection = Enum.FillDirection.Vertical,
 						SortOrder = Enum.SortOrder.LayoutOrder,
 						Padding = UDim.new(0, 12)
 					}),
-					PremiumHeader = roactModule.createElement("TextLabel", {
+					PremiumHeader = RoactModule.createElement("TextLabel", {
 						LayoutOrder = 1,
 						BackgroundTransparency = 1,
 						RichText = true,
 						Size = UDim2.new(1, 0, 0, 0),
 						AutomaticSize = Enum.AutomaticSize.Y,
 						TextXAlignment = Enum.TextXAlignment.Center,
-						Font = if foundationFontFaceMigration then nil else font.Header2.Font,
-						FontFace = if foundationFontFaceMigration then normalizeFontFace(p3.Tokens.Typography.TitleLarge.Font) else nil,
+						Font = if FoundationFontFaceMigration then nil else _Font.Header2.Font,
+						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p3.Tokens.Typography.TitleLarge.Font) else nil,
 						Text = p2.headerLocalizedText,
-						TextSize = font.BaseSize * font.Header2.RelativeSize,
-						TextColor3 = theme.TextEmphasis.Color,
-						TextTransparency = theme.TextDefault.Transparency
+						TextSize = _Font.BaseSize * _Font.Header2.RelativeSize,
+						TextColor3 = Theme.TextEmphasis.Color,
+						TextTransparency = Theme.TextDefault.Transparency
 					}),
-					CostPerMonth = roactModule.createElement("TextLabel", {
+					CostPerMonth = RoactModule.createElement("TextLabel", {
 						LayoutOrder = 2,
 						BackgroundTransparency = 1,
 						RichText = true,
 						Size = UDim2.new(1, 0, 0, 0),
 						AutomaticSize = Enum.AutomaticSize.Y,
 						TextXAlignment = Enum.TextXAlignment.Center,
-						Font = if foundationFontFaceMigration then nil else font.Body.Font,
-						FontFace = if foundationFontFaceMigration then normalizeFontFace(p3.Tokens.Typography.BodyLarge.Font) else nil,
+						Font = if FoundationFontFaceMigration then nil else _Font.Body.Font,
+						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p3.Tokens.Typography.BodyLarge.Font) else nil,
 						Text = p2.priceLocalizedText,
-						TextSize = font.BaseSize,
-						TextColor3 = theme.TextEmphasis.Color,
-						TextTransparency = theme.TextDefault.Transparency
+						TextSize = _Font.BaseSize,
+						TextColor3 = Theme.TextEmphasis.Color,
+						TextTransparency = Theme.TextDefault.Transparency
 					}),
-					CancelText = roactModule.createElement("TextLabel", {
+					CancelText = RoactModule.createElement("TextLabel", {
 						LayoutOrder = 3,
 						BackgroundTransparency = 1,
 						Size = UDim2.new(1, 0, 0, 0),
 						AutomaticSize = Enum.AutomaticSize.Y,
 						TextXAlignment = Enum.TextXAlignment.Center,
-						Font = if foundationFontFaceMigration then nil else font.Body.Font,
-						FontFace = if foundationFontFaceMigration then normalizeFontFace(p3.Tokens.Typography.BodyLarge.Font) else nil,
+						Font = if FoundationFontFaceMigration then nil else _Font.Body.Font,
+						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p3.Tokens.Typography.BodyLarge.Font) else nil,
 						Text = p2.policyLocalizedText,
-						TextSize = font.BaseSize,
-						TextColor3 = theme.TextDefault.Color,
-						TextTransparency = theme.TextDefault.Transparency
+						TextSize = _Font.BaseSize,
+						TextColor3 = Theme.TextDefault.Color,
+						TextTransparency = Theme.TextDefault.Transparency
 					})
 				}),
-				BulletListText = roactModule.createElement("TextLabel", {
+				BulletListText = RoactModule.createElement("TextLabel", {
 					LayoutOrder = 3,
 					BackgroundTransparency = 1,
-					Size = UDim2.new(0, var1, 0, 0),
+					Size = UDim2.new(0, PartialPageModalMiddleContentWidth, 0, 0),
 					AutomaticSize = Enum.AutomaticSize.Y,
 					TextXAlignment = Enum.TextXAlignment.Left,
-					Font = if foundationFontFaceMigration then nil else font.Body.Font,
-					FontFace = if foundationFontFaceMigration then normalizeFontFace(p3.Tokens.Typography.BodyLarge.Font) else nil,
+					Font = if FoundationFontFaceMigration then nil else _Font.Body.Font,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p3.Tokens.Typography.BodyLarge.Font) else nil,
 					Text = p2.descLocalizedText,
-					TextSize = font.BaseSize * font.Body.RelativeSize,
-					TextColor3 = theme.TextDefault.Color,
-					TextTransparency = theme.TextDefault.Transparency
+					TextSize = _Font.BaseSize * _Font.Body.RelativeSize,
+					TextColor3 = Theme.TextDefault.Color,
+					TextTransparency = Theme.TextDefault.Transparency
 				}),
-				BulletList = roactModule.createElement(fitFrameVertical, {
+				BulletList = RoactModule.createElement(FitFrameVertical, {
 					LayoutOrder = 4,
 					BackgroundTransparency = 1,
 					width = UDim.new(1, 0),
 					contentPadding = UDim.new(0, 12)
 				}, {
-					BulletText1 = roactModule.createElement(bulletPointModule, {
+					BulletText1 = RoactModule.createElement(BulletPointModule, {
 						layoutOrder = 1,
 						text = p2.bulletPoint1Text,
-						width = var1
+						width = PartialPageModalMiddleContentWidth
 					}),
-					BulletText2 = roactModule.createElement(bulletPointModule, {
+					BulletText2 = RoactModule.createElement(BulletPointModule, {
 						layoutOrder = 2,
 						text = p2.bulletPoint2Text,
-						width = var1
+						width = PartialPageModalMiddleContentWidth
 					}),
-					BulletText3 = roactModule.createElement(bulletPointModule, {
+					BulletText3 = RoactModule.createElement(BulletPointModule, {
 						layoutOrder = 3,
 						text = p2.bulletPoint3Text,
-						width = var1
+						width = PartialPageModalMiddleContentWidth
 					})
 				}),
 				Disclosure = p1:renderDisclosure(p2)
@@ -526,10 +523,10 @@ function name.renderUpdatedPrompt(p1, p2)
 	end)
 end
 
-function name.renderPrompt(p1, p2)
-	local props = p1.props
+function ExtendResult.renderPrompt(p1, p2) --[[ Line: 615 ]]
+	local Props = p1.props
 	
-	return if props.screenSize.Y < 450 then p1:renderLandscapePrompt(p2) elseif props.screenSize.X < 450 then p1:renderPortraitPrompt(p2) else p1:renderUpdatedPrompt(p2)
+	return if Props.screenSize.Y < 450 then p1:renderLandscapePrompt(p2) elseif Props.screenSize.X < 450 then p1:renderPortraitPrompt(p2) else p1:renderUpdatedPrompt(p2)
 end
 
-return name
+return ExtendResult

@@ -1,40 +1,38 @@
-﻿local momentsTypesModule = require(script:FindFirstAncestor("DataHydration").Parent.MomentsTypes)
-local decodeEmojiSetsModule = require(script.Parent.decodeEmojiSets)
-local resolveEmoteIdModule = require(script.Parent.resolveEmoteId)
-local reactionType = momentsTypesModule.Enums.ReactionType
+﻿local DecodeEmojiSetsModule = require(script.Parent.decodeEmojiSets)
+local ResolveEmoteIdModule = require(script.Parent.resolveEmoteId)
+local ReactionType = require(script:FindFirstAncestor("DataHydration").Parent.MomentsTypes).Enums.ReactionType
 local list = {
-	reactionType.ThumbsUp, reactionType.Heart, reactionType.LaughJoy,
-	reactionType.Wow, reactionType.Cry, reactionType.Fire, reactionType.Skull
+	ReactionType.ThumbsUp, ReactionType.Heart, ReactionType.LaughJoy,
+	ReactionType.Wow, ReactionType.Cry, ReactionType.Fire, ReactionType.Skull
 }
 
-local function isValidMomentsEmojiCatalog(p1)
-	-- upvalues: list (ref), resolveEmoteIdModule (ref)
-	if #p1 == 0 then
+local function isValidMomentsEmojiCatalog(FlattenEmojisResult): boolean --[[ Line: 32 ]]
+	-- upvalues: list (copy), ResolveEmoteIdModule (copy)
+	if #FlattenEmojisResult == 0 then
 		return false
 	end
 	for i = 1, #list do
-		local var1 = list[i]
-		local var2 = resolveEmoteIdModule.resolveEmoteIdForReaction(p1, var1)
+		local Entry = list[i]
+		local ResolveEmoteIdForReactionResult: string = ResolveEmoteIdModule.resolveEmoteIdForReaction(FlattenEmojisResult, Entry)
 		
-		if var2 ~= var1 and string.find(var2, "-", 1, true) ~= nil then
-			continue
+		if ResolveEmoteIdForReactionResult == Entry or string.find(ResolveEmoteIdForReactionResult, "-", 1, true) == nil then
+			return false
 		end
-		return false
 	end
 	return true
 end
 
 return {
 	isValidMomentsEmojiCatalog = isValidMomentsEmojiCatalog,
-	isValidGetEmojiSetsResponseShape = function(value)
-		-- upvalues: decodeEmojiSetsModule (ref), isValidMomentsEmojiCatalog (ref)
-		return type(value) == "table" and type(value.emoji_sets) == "table" and #value.emoji_sets ~= 0 and isValidMomentsEmojiCatalog(decodeEmojiSetsModule.flattenEmojis(decodeEmojiSetsModule.decodeGetEmojiSetsResponse(value)))
+	isValidGetEmojiSetsResponseShape = function(p1) --[[ Line: 48 ]]
+		-- upvalues: DecodeEmojiSetsModule (copy), isValidMomentsEmojiCatalog (copy)
+		return type(p1) == "table" and type(p1.emoji_sets) == "table" and #p1.emoji_sets ~= 0 and isValidMomentsEmojiCatalog(DecodeEmojiSetsModule.flattenEmojis((DecodeEmojiSetsModule.decodeGetEmojiSetsResponse(p1))))
 	end,
-	isValidCachedGetEmojiSetsResponse = function(value)
-		-- upvalues: isValidMomentsEmojiCatalog (ref), decodeEmojiSetsModule (ref)
-		return if value == nil then false else isValidMomentsEmojiCatalog(decodeEmojiSetsModule.flattenEmojis(value))
+	isValidCachedGetEmojiSetsResponse = function(p1) --[[ Line: 57 ]]
+		-- upvalues: isValidMomentsEmojiCatalog (copy), DecodeEmojiSetsModule (copy)
+		return p1 ~= nil and isValidMomentsEmojiCatalog(DecodeEmojiSetsModule.flattenEmojis(p1))
 	end,
-	isUuidLikeEmoteId = function(p2)
-		return string.find(p2, "-", 1, true) ~= nil
+	isUuidLikeEmoteId = function(Text: string): boolean --[[ Line: 27 ]]
+		return string.find(Text, "-", 1, true) ~= nil
 	end
 }

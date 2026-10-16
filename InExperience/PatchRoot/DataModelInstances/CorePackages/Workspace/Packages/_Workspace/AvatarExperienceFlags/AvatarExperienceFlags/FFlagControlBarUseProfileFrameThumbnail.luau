@@ -1,1 +1,3 @@
-﻿return game:DefineFastFlag("ControlBarUseProfileFrameThumbnail", false) and require(script:FindFirstAncestor("AvatarExperienceFlags").Parent.SharedFlags).GetFFlagProfileFrameThumbnailEnabled()
+﻿local GetFFlagProfileFrameThumbnailEnabledFunction = require(script:FindFirstAncestor("AvatarExperienceFlags").Parent.SharedFlags).GetFFlagProfileFrameThumbnailEnabled
+
+return game:DefineFastFlag("ControlBarUseProfileFrameThumbnail", false) and GetFFlagProfileFrameThumbnailEnabledFunction()

@@ -1,217 +1,217 @@
-﻿local parent = script.Parent.Parent
-local reactGlobalsModule = require(parent.ReactGlobals)
-local console = require(parent.Shared).console
+﻿local Parent = script.Parent.Parent
+local Console = require(Parent.Shared).console
 local _ = require(script.Parent.ReactInternalTypes)
-local reactCurrentFiberModule = require(script.Parent.ReactCurrentFiber)
-local resetCurrentFiber = reactCurrentFiberModule.resetCurrentFiber
-local setCurrentFiber = reactCurrentFiberModule.setCurrentFiber
-local getComponentName = require(parent.Shared).getComponentName
-local strictMode = require(script.Parent.ReactTypeOfMode).StrictMode
-local t = {
-	recordUnsafeLifecycleWarnings = function(_, _) end,
-	flushPendingUnsafeLifecycleWarnings = function() end,
-	recordLegacyContextWarning = function(_, _) end,
-	flushLegacyContextWarning = function() end,
-	discardPendingWarnings = function() end
+local ReactCurrentFiberModule = require(script.Parent.ReactCurrentFiber)
+local ResetCurrentFiberFunction = ReactCurrentFiberModule.resetCurrentFiber
+local SetCurrentFiberFunction = ReactCurrentFiberModule.setCurrentFiber
+local GetComponentNameFunction = require(Parent.Shared).getComponentName
+local StrictMode = require(script.Parent.ReactTypeOfMode).StrictMode
+local ReactStrictModeWarningsModule = {
+	recordUnsafeLifecycleWarnings = function(_, _) --[[ Line: 32 ]] end,
+	flushPendingUnsafeLifecycleWarnings = function() --[[ Line: 33 ]] end,
+	recordLegacyContextWarning = function(_, _) --[[ Line: 34 ]] end,
+	flushLegacyContextWarning = function() --[[ Line: 35 ]] end,
+	discardPendingWarnings = function() --[[ Line: 36 ]] end
 }
 
-if reactGlobalsModule.__DEV__ then
-	local _ = function(p1)
-		-- upvalues: strictMode (ref)
-		local var1 = nil
-		local var2 = p1
-		while var2 ~= nil do
-			if bit32.band(var2.mode, strictMode) ~= 0 then
-				var1 = var2
+if require(Parent.ReactGlobals).__DEV__ then
+	local function _(Return) --[[ Line: 40 ]]
+		-- upvalues: StrictMode (copy)
+		local v1 = nil
+		local Return1 = Return
+		while Return1 ~= nil do
+			if bit32.band(Return1.mode, StrictMode) ~= 0 then
+				v1 = Return1
 			end
-			var2 = var2.return_
+			Return1 = Return1.return_
 		end
-		return var1
+		return v1
 	end
 	
-	local var3 = function(p2)
-		local t = {}
+	local function v6(List): string --[[ Line: 55 ]]
+		local List1 = {}
 		
-		for i, v in p2 do
-			table.insert(t, i)
+		for i, _ in List do
+			table.insert(List1, i)
 		end
-		table.sort(t)
+		table.sort(List1)
 		
-		return table.concat(t, ", ")
+		return table.concat(List1, ", ")
 	end
 	
-	local t_1 = {}
-	local t_2 = {}
-	local t_3 = {}
-	local t_4 = {}
-	local t_5 = {}
-	local t_6 = {}
-	local t_7 = {}
+	local Tbl = {}
+	local Tbl1 = {}
+	local Tbl2 = {}
+	local Tbl3 = {}
+	local Tbl4 = {}
+	local Tbl5 = {}
+	local t = {}
 	
-	function t.recordUnsafeLifecycleWarnings(p3, p4)
-		-- upvalues: t_7 (ref), t_1 (ref), strictMode (ref), t_2 (ref), t_3 (ref), t_4 (ref), t_5 (ref), t_6 (ref)
-		if t_7[p3.type] then return end
-		if typeof(p4.componentWillMount) == "function" then
-			table.insert(t_1, p3)
+	function ReactStrictModeWarningsModule.recordUnsafeLifecycleWarnings(p1, p2) --[[ Line: 74 ]]
+		-- upvalues: t (copy), Tbl (copy), StrictMode (copy), Tbl1 (copy), Tbl2 (copy), Tbl3 (copy), Tbl4 (copy), Tbl5 (copy)
+		if t[p1.type] then return end
+		if typeof(p2.componentWillMount) == "function" then
+			table.insert(Tbl, p1)
 		end
-		if bit32.band(p3.mode, strictMode) ~= 0 and typeof(p4.UNSAFE_componentWillMount) == "function" then
-			table.insert(t_2, p3)
+		if bit32.band(p1.mode, StrictMode) ~= 0 and typeof(p2.UNSAFE_componentWillMount) == "function" then
+			table.insert(Tbl1, p1)
 		end
-		if typeof(p4.componentWillReceiveProps) == "function" then
-			table.insert(t_3, p3)
+		if typeof(p2.componentWillReceiveProps) == "function" then
+			table.insert(Tbl2, p1)
 		end
-		if bit32.band(p3.mode, strictMode) ~= 0 and typeof(p4.UNSAFE_componentWillReceiveProps) == "function" then
-			table.insert(t_4, p3)
+		if bit32.band(p1.mode, StrictMode) ~= 0 and typeof(p2.UNSAFE_componentWillReceiveProps) == "function" then
+			table.insert(Tbl3, p1)
 		end
-		if typeof(p4.componentWillUpdate) == "function" then
-			table.insert(t_5, p3)
+		if typeof(p2.componentWillUpdate) == "function" then
+			table.insert(Tbl4, p1)
 		end
-		if bit32.band(p3.mode, strictMode) ~= 0 and typeof(p4.UNSAFE_componentWillUpdate) == "function" then
-			table.insert(t_6, p3)
-		end
-	end
-	
-	function t.flushPendingUnsafeLifecycleWarnings()
-		-- upvalues: t_1 (ref), getComponentName (ref), t_7 (ref), t_2 (ref), t_3 (ref), t_4 (ref), t_5 (ref), t_6 (ref), var3 (ref), console (ref)
-		local t = {}
-		
-		if #t_1 > 0 then
-			for i, v in t_1 do
-				t[getComponentName(v.type) or "Component"] = true
-				t_7[v.type] = true
-			end
-			table.clear(t_1)
-		end
-		local t_8 = {}
-		
-		if #t_2 > 0 then
-			for i, v in t_2 do
-				t_8[getComponentName(v.type) or "Component"] = true
-				t_7[v.type] = true
-			end
-			table.clear(t_2)
-		end
-		local t_9 = {}
-		
-		if #t_3 > 0 then
-			for i, v in t_3 do
-				t_9[getComponentName(v.type) or "Component"] = true
-				t_7[v.type] = true
-			end
-			table.clear(t_3)
-		end
-		local t_10 = {}
-		
-		if #t_4 > 0 then
-			for i, v in t_4 do
-				t_10[getComponentName(v.type) or "Component"] = true
-				t_7[v.type] = true
-			end
-			table.clear(t_4)
-		end
-		local t_11 = {}
-		
-		if #t_5 > 0 then
-			for i, v in t_5 do
-				t_11[getComponentName(v.type) or "Component"] = true
-				t_7[v.type] = true
-			end
-			table.clear(t_5)
-		end
-		local t_12 = {}
-		
-		if #t_6 > 0 then
-			for i, v in t_6 do
-				t_12[getComponentName(v.type) or "Component"] = true
-				t_7[v.type] = true
-			end
-			table.clear(t_6)
-		end
-		if next(t_8) ~= nil then
-			console.error("Using UNSAFE_componentWillMount in strict mode is not recommended and may indicate bugs in your code. See https://reactjs.org/link/unsafe-component-lifecycles for details.\n\n* Move code with side effects to componentDidMount, and set initial state in the constructor.\n\nPlease update the following components: %s", var3(t_8))
-		end
-		if next(t_10) ~= nil then
-			console.error("Using UNSAFE_componentWillReceiveProps in strict mode is not recommended and may indicate bugs in your code. See https://reactjs.org/link/unsafe-component-lifecycles for details.\n\n* Move data fetching code or side effects to componentDidUpdate.\n* If you're updating state whenever props change, refactor your code to use memoization techniques or move it to static getDerivedStateFromProps. Learn more at: https://reactjs.org/link/derived-state\n\nPlease update the following components: %s", var3(t_10))
-		end
-		if next(t_12) ~= nil then
-			console.error("Using UNSAFE_componentWillUpdate in strict mode is not recommended and may indicate bugs in your code. See https://reactjs.org/link/unsafe-component-lifecycles for details.\n\n* Move data fetching code or side effects to componentDidUpdate.\n\nPlease update the following components: %s", var3(t_12))
-		end
-		if next(t) ~= nil then
-			console.warn("componentWillMount has been renamed, and is not recommended for use. See https://reactjs.org/link/unsafe-component-lifecycles for details.\n\n* Move code with side effects to componentDidMount, and set initial state in the constructor.\n* Rename componentWillMount to UNSAFE_componentWillMount to suppress this warning in non-strict mode. In React 18.x, only the UNSAFE_ name will work.\n\nPlease update the following components: %s", var3(t))
-		end
-		if next(t_9) ~= nil then
-			console.warn("componentWillReceiveProps has been renamed, and is not recommended for use. See https://reactjs.org/link/unsafe-component-lifecycles for details.\n\n* Move data fetching code or side effects to componentDidUpdate.\n* If you're updating state whenever props change, refactor your code to use memoization techniques or move it to static getDerivedStateFromProps. Learn more at: https://reactjs.org/link/derived-state\n* Rename componentWillReceiveProps to UNSAFE_componentWillReceiveProps to suppress this warning in non-strict mode. In React 18.x, only the UNSAFE_ name will work.\n\nPlease update the following components: %s", var3(t_9))
-		end
-		if next(t_11) ~= nil then
-			console.warn("componentWillUpdate has been renamed, and is not recommended for use. See https://reactjs.org/link/unsafe-component-lifecycles for details.\n\n* Move data fetching code or side effects to componentDidUpdate.\n* Rename componentWillUpdate to UNSAFE_componentWillUpdate to suppress this warning in non-strict mode. In React 18.x, only the UNSAFE_ name will work.\n\nPlease update the following components: %s", var3(t_11))
+		if bit32.band(p1.mode, StrictMode) ~= 0 and typeof(p2.UNSAFE_componentWillUpdate) == "function" then
+			table.insert(Tbl5, p1)
 		end
 	end
 	
-	local t_8 = {}
-	local t_9 = {}
-	
-	function t.recordLegacyContextWarning(p3, p4)
-		-- upvalues: strictMode (ref), console (ref), t_9 (ref), t_8 (ref)
-		local t = nil
-		local var4 = p3
-		while var4 ~= nil do
-			if bit32.band(var4.mode, strictMode) ~= 0 then
-				t = var4
+	function ReactStrictModeWarningsModule.flushPendingUnsafeLifecycleWarnings() --[[ Line: 130 ]]
+		-- upvalues: Tbl (copy), GetComponentNameFunction (copy), t (copy), Tbl1 (copy), Tbl2 (copy), Tbl3 (copy), Tbl4 (copy), Tbl5 (copy), v6 (copy), Console (copy)
+		local t1 = {}
+		
+		if #Tbl > 0 then
+			for _, value in Tbl do
+				t1[GetComponentNameFunction(value.type) or "Component"] = true
+				t[value.type] = true
 			end
-			var4 = var4.return_
+			table.clear(Tbl)
 		end
-		if t == nil then
-			console.error("Expected to find a StrictMode component in a strict mode tree. This error is likely caused by a bug in React. Please file an issue.")
+		local t2 = {}
+		
+		if #Tbl1 > 0 then
+			for _, value1 in Tbl1 do
+				t2[GetComponentNameFunction(value1.type) or "Component"] = true
+				t[value1.type] = true
+			end
+			table.clear(Tbl1)
+		end
+		local t3 = {}
+		
+		if #Tbl2 > 0 then
+			for _, value2 in Tbl2 do
+				t3[GetComponentNameFunction(value2.type) or "Component"] = true
+				t[value2.type] = true
+			end
+			table.clear(Tbl2)
+		end
+		local t4 = {}
+		
+		if #Tbl3 > 0 then
+			for _, value3 in Tbl3 do
+				t4[GetComponentNameFunction(value3.type) or "Component"] = true
+				t[value3.type] = true
+			end
+			table.clear(Tbl3)
+		end
+		local t5 = {}
+		
+		if #Tbl4 > 0 then
+			for _, value4 in Tbl4 do
+				t5[GetComponentNameFunction(value4.type) or "Component"] = true
+				t[value4.type] = true
+			end
+			table.clear(Tbl4)
+		end
+		local t6 = {}
+		
+		if #Tbl5 > 0 then
+			for _, value5 in Tbl5 do
+				t6[GetComponentNameFunction(value5.type) or "Component"] = true
+				t[value5.type] = true
+			end
+			table.clear(Tbl5)
+		end
+		if next(t2) ~= nil then
+			Console.error("Using UNSAFE_componentWillMount in strict mode is not recommended and may indicate bugs in your code. See https://reactjs.org/link/unsafe-component-lifecycles for details.\n\n* Move code with side effects to componentDidMount, and set initial state in the constructor.\n\nPlease update the following components: %s", (v6(t2)))
+		end
+		if next(t4) ~= nil then
+			Console.error("Using UNSAFE_componentWillReceiveProps in strict mode is not recommended and may indicate bugs in your code. See https://reactjs.org/link/unsafe-component-lifecycles for details.\n\n* Move data fetching code or side effects to componentDidUpdate.\n* If you're updating state whenever props change, refactor your code to use memoization techniques or move it to static getDerivedStateFromProps. Learn more at: https://reactjs.org/link/derived-state\n\nPlease update the following components: %s", (v6(t4)))
+		end
+		if next(t6) ~= nil then
+			Console.error("Using UNSAFE_componentWillUpdate in strict mode is not recommended and may indicate bugs in your code. See https://reactjs.org/link/unsafe-component-lifecycles for details.\n\n* Move data fetching code or side effects to componentDidUpdate.\n\nPlease update the following components: %s", (v6(t6)))
+		end
+		if next(t1) ~= nil then
+			Console.warn("componentWillMount has been renamed, and is not recommended for use. See https://reactjs.org/link/unsafe-component-lifecycles for details.\n\n* Move code with side effects to componentDidMount, and set initial state in the constructor.\n* Rename componentWillMount to UNSAFE_componentWillMount to suppress this warning in non-strict mode. In React 18.x, only the UNSAFE_ name will work.\n\nPlease update the following components: %s", (v6(t1)))
+		end
+		if next(t3) ~= nil then
+			Console.warn("componentWillReceiveProps has been renamed, and is not recommended for use. See https://reactjs.org/link/unsafe-component-lifecycles for details.\n\n* Move data fetching code or side effects to componentDidUpdate.\n* If you're updating state whenever props change, refactor your code to use memoization techniques or move it to static getDerivedStateFromProps. Learn more at: https://reactjs.org/link/derived-state\n* Rename componentWillReceiveProps to UNSAFE_componentWillReceiveProps to suppress this warning in non-strict mode. In React 18.x, only the UNSAFE_ name will work.\n\nPlease update the following components: %s", (v6(t3)))
+		end
+		if next(t5) ~= nil then
+			Console.warn("componentWillUpdate has been renamed, and is not recommended for use. See https://reactjs.org/link/unsafe-component-lifecycles for details.\n\n* Move data fetching code or side effects to componentDidUpdate.\n* Rename componentWillUpdate to UNSAFE_componentWillUpdate to suppress this warning in non-strict mode. In React 18.x, only the UNSAFE_ name will work.\n\nPlease update the following components: %s", (v6(t5)))
+		end
+	end
+	
+	local Tbl6 = {}
+	local t1 = {}
+	
+	function ReactStrictModeWarningsModule.recordLegacyContextWarning(Return, p1) --[[ Line: 303 ]]
+		-- upvalues: StrictMode (copy), Console (copy), t1 (copy), Tbl6 (copy)
+		local v2 = nil
+		local Return1 = Return
+		while Return1 ~= nil do
+			if bit32.band(Return1.mode, StrictMode) ~= 0 then
+				v2 = Return1
+			end
+			Return1 = Return1.return_
+		end
+		local v3 = v2
+		
+		if v3 == nil then
+			Console.error("Expected to find a StrictMode component in a strict mode tree. This error is likely caused by a bug in React. Please file an issue.")
 			
 			return
-		elseif t_9[p3.type] then return end
-		t = t_8[t]
+		end
+		if t1[Return.type] then return end
+		local Entry = Tbl6[v3]
 		
-		if typeof(p3.type) ~= "function" and (p3.type.contextTypes ~= nil or p3.type.childContextTypes ~= nil or p4 ~= nil and typeof(p4.getChildContext) == "function") then
-			if t == nil then
-				t = {}
-				t_8[t] = t
+		if typeof(Return.type) ~= "function" and (Return.type.contextTypes ~= nil or Return.type.childContextTypes ~= nil or p1 ~= nil and typeof(p1.getChildContext) == "function") then
+			if Entry == nil then
+				Entry = {}
+				Tbl6[v3] = Entry
 			end
-			table.insert(t, p3)
+			table.insert(Entry, Return)
 		end
 	end
 	
-	function t.flushLegacyContextWarning()
-		-- upvalues: t_8 (ref), getComponentName (ref), t_9 (ref), var3 (ref), setCurrentFiber (ref), console (ref), resetCurrentFiber (ref)
-		for i, v in t_8 do
-			if #v ~= 0 then
-				local var5 = v[1]
-				local t = {}
-				
-				for i_1, v_1 in v do
-					t[getComponentName(v_1.type) or "Component"] = true
-					t_9[v_1.type] = true
-				end
-				local var6 = var3(t)
-				local ok, status = pcall(function()
-					-- upvalues: setCurrentFiber (copy), var5 (ref), console (copy), var6 (ref)
-					setCurrentFiber(var5)
-					console.error("Legacy context API has been detected within a strict-mode tree.\n\nThe old API will be supported in all 16.x releases, but applications using it should migrate to the new version.\n\nPlease update the following components: %s\n\nLearn more about this warning here: https://reactjs.org/link/legacy-context", var6)
-				end)
-				resetCurrentFiber()
-				
-				if not ok then
-					error(status)
-				end
+	function ReactStrictModeWarningsModule.flushLegacyContextWarning() --[[ Line: 342 ]]
+		-- upvalues: Tbl6 (copy), GetComponentNameFunction (copy), t1 (copy), v6 (copy), SetCurrentFiberFunction (copy), Console (copy), ResetCurrentFiberFunction (copy)
+		for _, value in Tbl6 do
+			if #value == 0 then break end
+			local Entry = value[1]
+			local t = {}
+			
+			for _, value1 in value do
+				t[GetComponentNameFunction(value1.type) or "Component"] = true
+				t1[value1.type] = true
 			end
-			return
+			local v4 = v6(t)
+			local Success, Result = pcall(function() --[[ Line: 357 ]]
+				-- upvalues: SetCurrentFiberFunction (upval), Entry (copy), Console (upval), v4 (copy)
+				SetCurrentFiberFunction(Entry)
+				Console.error("Legacy context API has been detected within a strict-mode tree.\n\nThe old API will be supported in all 16.x releases, but applications using it should migrate to the new version.\n\nPlease update the following components: %s\n\nLearn more about this warning here: https://reactjs.org/link/legacy-context", v4)
+			end)
+			ResetCurrentFiberFunction()
+			
+			if not Success then
+				error(Result)
+			end
 		end
 	end
 	
-	function t.discardPendingWarnings()
-		-- upvalues: t_1 (ref), t_2 (ref), t_3 (ref), t_4 (ref), t_5 (ref), t_6 (ref), t_8 (ref)
-		table.clear(t_1)
-		table.clear(t_2)
-		table.clear(t_3)
-		table.clear(t_4)
-		table.clear(t_5)
-		table.clear(t_6)
-		table.clear(t_8)
+	function ReactStrictModeWarningsModule.discardPendingWarnings() --[[ Line: 378 ]]
+		-- upvalues: Tbl (copy), Tbl1 (copy), Tbl2 (copy), Tbl3 (copy), Tbl4 (copy), Tbl5 (copy), Tbl6 (copy)
+		table.clear(Tbl)
+		table.clear(Tbl1)
+		table.clear(Tbl2)
+		table.clear(Tbl3)
+		table.clear(Tbl4)
+		table.clear(Tbl5)
+		table.clear(Tbl6)
 	end
 end
-return t
+return ReactStrictModeWarningsModule

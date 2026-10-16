@@ -1,23 +1,22 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local cryoModule = require(profilePlatform.Parent.Cryo)
-local enumsModule = require(profilePlatform.Common.Enums)
-local getProfilePlatformModule = require(profilePlatform.Networking.getProfilePlatform)
-local fFlagProfilePlatformCTAsRefactorModule = require(profilePlatform.Flags.FFlagProfilePlatformCTAsRefactor)
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local CryoModule = require(ProfilePlatform.Parent.Cryo)
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local GetProfilePlatformModule = require(ProfilePlatform.Networking.getProfilePlatform)
 
-function refreshProfilePlatform(p1)
-	-- upvalues: cryoModule (ref), enumsModule (ref), fFlagProfilePlatformCTAsRefactorModule (ref), getProfilePlatformModule (ref)
-	return getProfilePlatformModule.API({
+function refreshProfilePlatform(p1) --[[ Line: 15 ]]
+	-- upvalues: CryoModule (copy), EnumsModule (copy), GetProfilePlatformModule (copy)
+	return GetProfilePlatformModule.API({
 		includeComponentOrdering = false,
 		profileType = p1.profileType,
 		profileId = p1.profileId,
-		components = cryoModule.List.map(p1.components, function(p2)
-			-- upvalues: enumsModule (copy), fFlagProfilePlatformCTAsRefactorModule (copy)
-			local t = { component = p2 }
+		components = CryoModule.List.map(p1.components, function(Component) --[[ Line: 16 ]]
+			-- upvalues: EnumsModule (upval)
+			local config = { component = Component }
 			
-			if p2 == enumsModule.Components.Actions and fFlagProfilePlatformCTAsRefactorModule then
-				t.isActionsV2Supported = true
+			if Component == EnumsModule.Components.Actions then
+				config.isActionsV2Supported = true
 			end
-			return t
+			return config
 		end)
 	})
 end

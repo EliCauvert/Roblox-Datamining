@@ -1,164 +1,186 @@
-﻿local playersService = game:GetService("Players")
-local dataHydration = script:FindFirstAncestor("DataHydration")
-local parent = dataHydration.Parent
-local _ = require(dataHydration.DataHydrationTypes)
-local dataHydrationUtilsModule = require(dataHydration.DataHydrationUtils)
-local getLocalPlayerUserId = dataHydrationUtilsModule.getLocalPlayerUserId
-local observeLocalPlayerUserId = dataHydrationUtilsModule.observeLocalPlayerUserId
-local createRequestQueueModule = require(dataHydration.createRequestQueue)
-local createMutationLayerModule = require(dataHydration.createMutationLayer)
-local promiseModule = require(parent.Promise)
-local fFlagDataHydrationAccountReset = require(parent.SharedFlags).FFlagDataHydrationAccountReset
-local luaAppDataHydrationDefaultBatchSize = game:DefineFastInt("LuaAppDataHydrationDefaultBatchSize", 50)
-local luaAppDataHydrationQueueProcessDelaySec = game:DefineFastInt("LuaAppDataHydrationQueueProcessDelaySec", 1)
-local luaAppDataHydrationDefaultRequestTimeoutSec = game:DefineFastInt("LuaAppDataHydrationDefaultRequestTimeoutSec", 30)
+﻿local Players = game:GetService("Players")
+local DataHydration = script:FindFirstAncestor("DataHydration")
+local Parent = DataHydration.Parent
+local _ = require(DataHydration.DataHydrationTypes)
+local DataHydrationUtilsModule = require(DataHydration.DataHydrationUtils)
+local GetLocalPlayerUserIdFunction = DataHydrationUtilsModule.getLocalPlayerUserId
+local ObserveLocalPlayerUserIdFunction = DataHydrationUtilsModule.observeLocalPlayerUserId
+local CreateRequestQueueModule = require(DataHydration.createRequestQueue)
+local CreateMutationLayerModule = require(DataHydration.createMutationLayer)
+local PromiseModule = require(Parent.Promise)
+local SignalsModule = require(Parent.Signals)
+local FFlagDataHydrationAccountReset = require(Parent.SharedFlags).FFlagDataHydrationAccountReset
+local FFlagBuildExperienceMonetizationMultiKindModule = require(DataHydration.Flags.FFlagBuildExperienceMonetizationMultiKind)
+local LuaAppDataHydrationDefaultBatchSize = game:DefineFastInt("LuaAppDataHydrationDefaultBatchSize", 50)
+local LuaAppDataHydrationQueueProcessDelaySec = game:DefineFastInt("LuaAppDataHydrationQueueProcessDelaySec", 1)
+local LuaAppDataHydrationDefaultRequestTimeoutSec = game:DefineFastInt("LuaAppDataHydrationDefaultRequestTimeoutSec", 30)
 
-return function(p1)
-	-- upvalues: luaAppDataHydrationDefaultBatchSize (ref), luaAppDataHydrationQueueProcessDelaySec (ref), luaAppDataHydrationDefaultRequestTimeoutSec (ref), createRequestQueueModule (ref), getLocalPlayerUserId (ref), fFlagDataHydrationAccountReset (ref), createMutationLayerModule (ref), promiseModule (ref), observeLocalPlayerUserId (ref), playersService (ref)
-	local var1 = p1.supportsMultiGet ~= nil or p1.supportsMultiGet
-	local var2 = p1.requestBatchSize or luaAppDataHydrationDefaultBatchSize
-	
-	if not var1 and not p1.requestBatchSize then
-		var2 = 1
-	end
-	local var3 = p1.queueProcessDelaySec or luaAppDataHydrationQueueProcessDelaySec
-	
-	if not var1 and not p1.queueProcessDelaySec then
-		var3 = 0
-	end
-	local requestTimeoutSec = p1.requestTimeoutSec or luaAppDataHydrationDefaultRequestTimeoutSec
-	local cache = p1.cache
-	local var4 = createRequestQueueModule()
+return function(p1) --[[ Line: 28 | Named "createDataResolver" ]]
+	-- upvalues: LuaAppDataHydrationDefaultBatchSize (copy), LuaAppDataHydrationQueueProcessDelaySec (copy), LuaAppDataHydrationDefaultRequestTimeoutSec (copy), CreateRequestQueueModule (copy), GetLocalPlayerUserIdFunction (copy), FFlagDataHydrationAccountReset (copy), SignalsModule (copy), FFlagBuildExperienceMonetizationMultiKindModule (copy), CreateMutationLayerModule (copy), PromiseModule (copy), ObserveLocalPlayerUserIdFunction (copy), Players (copy)
+	local NoSupportsMultiGet = p1.supportsMultiGet == nil or p1.supportsMultiGet
+	local RequestBatchSize = if p1.requestBatchSize then if NoSupportsMultiGet or p1.requestBatchSize then p1.requestBatchSize else 1 elseif NoSupportsMultiGet or p1.requestBatchSize then LuaAppDataHydrationDefaultBatchSize else 1
+	local QueueProcessDelaySec = if p1.queueProcessDelaySec then if NoSupportsMultiGet or p1.queueProcessDelaySec then p1.queueProcessDelaySec else 0 elseif NoSupportsMultiGet or p1.queueProcessDelaySec then LuaAppDataHydrationQueueProcessDelaySec else 0
+	local RequestTimeoutSec = p1.requestTimeoutSec or LuaAppDataHydrationDefaultRequestTimeoutSec
+	local Cache = p1.cache
+	local RequestQueueModule = CreateRequestQueueModule()
 	local t = {}
-	local var5 = nil
-	local var6 = getLocalPlayerUserId()
-	local var7 = if fFlagDataHydrationAccountReset then 0 else nil
-	local var8 = if p1.supportsMutations then createMutationLayerModule() else nil
+	local DelayedThread = nil
+	local LocalPlayerUserId = GetLocalPlayerUserIdFunction()
+	local Callback = nil
+	local Callback1 = nil
+	local Callback3 = nil
+	local Callback2 = nil
 	
-	local function FORCE_FETCH()
+	if FFlagDataHydrationAccountReset then
+		Callback, Callback1 = SignalsModule.createSignal(0)
+	end
+	if FFlagBuildExperienceMonetizationMultiKindModule then
+		Callback3, Callback2 = SignalsModule.createSignal(0)
+	end
+	local MutationLayerModule = if p1.supportsMutations then CreateMutationLayerModule() else nil
+	
+	local function FORCE_FETCH(): boolean --[[ Line: 78 ]]
 		return true
 	end
 	
-	local function _(p2)
-		-- upvalues: p1 (ref)
+	local function _(p2) --[[ Line: 82 | Named "logError" ]]
+		-- upvalues: p1 (copy)
 		if p1.logError then
 			p1.logError(p2)
 		end
 	end
 	
-	local _ = function(p2, p3)
-		-- upvalues: var7 (write), getLocalPlayerUserId (copy)
-		return p3 == var7 and p2 == getLocalPlayerUserId()
+	local function isCurrentRequest(p2, p3): boolean --[[ Line: 89 ]]
+		-- upvalues: Callback (ref), GetLocalPlayerUserIdFunction (upval)
+		return p3 == Callback(false) and p2 == GetLocalPlayerUserIdFunction()
 	end
 	
-	local function handleFailure(p2, p3, p4, p5)
-		-- upvalues: fFlagDataHydrationAccountReset (copy), var7 (write), getLocalPlayerUserId (copy), var6 (write), p1 (ref), t (write), cache (ref), var8 (write)
-		if fFlagDataHydrationAccountReset then
-			if not (p5 == var7 and p4 == getLocalPlayerUserId()) then return end
-		elseif p4 ~= var6 then return end
+	local function handleFailure(Message, PopResult, p2, p3) --[[ Line: 98 ]]
+		-- upvalues: FFlagDataHydrationAccountReset (upval), Callback (ref), GetLocalPlayerUserIdFunction (upval), LocalPlayerUserId (ref), p1 (copy), t (ref), Cache (copy), MutationLayerModule (ref)
+		if FFlagDataHydrationAccountReset then
+			if p3 ~= Callback(false) or p2 ~= GetLocalPlayerUserIdFunction() then return end
+		elseif p2 ~= LocalPlayerUserId then return end
 		if p1.logError then
-			p1.logError(p2)
+			p1.logError(Message)
 		end
-		for i, v in p3 do
-			t[v] = nil
+		for _, value in PopResult do
+			t[value] = nil
 		end
-		cache.markItemsAsFailed(p3)
+		Cache.markItemsAsFailed(PopResult)
 		
-		if var8 then
-			var8.drainCommitted(p3, cache.updateItem)
+		if MutationLayerModule then
+			MutationLayerModule.drainCommitted(PopResult, Cache.updateItem)
 		end
 	end
 	
-	local function handleSuccess(p6, p7, p8, p9)
-		-- upvalues: fFlagDataHydrationAccountReset (copy), var7 (write), getLocalPlayerUserId (copy), var6 (write), t (write), p1 (ref), cache (ref), var8 (write), handleFailure (ref)
-		if fFlagDataHydrationAccountReset then
-			if not (p9 == var7 and p8 == getLocalPlayerUserId()) then return end
-		elseif p8 ~= var6 then return end
-		for i, v in p6 do
+	local function handleSuccess(List, PopResult, p4, p5) --[[ Line: 122 ]]
+		-- upvalues: FFlagDataHydrationAccountReset (upval), Callback (ref), GetLocalPlayerUserIdFunction (upval), LocalPlayerUserId (ref), t (ref), p1 (copy), Cache (copy), MutationLayerModule (ref), handleFailure (copy)
+		if FFlagDataHydrationAccountReset then
+			if p5 ~= Callback(false) or p4 ~= GetLocalPlayerUserIdFunction() then return end
+		elseif p4 ~= LocalPlayerUserId then return end
+		for i, _ in List do
 			t[i] = nil
 		end
 		if p1.replaceItems then
-			cache.replaceItems(p6)
+			Cache.replaceItems(List)
 		else
-			cache.updateItems(p6)
+			Cache.updateItems(List)
 		end
-		local t_1 = {}
+		local List1 = {}
 		
-		for v, v_1 in p7 do
-			if p6[v_1] == nil then
-				if var8 and var8.isCommitted(v_1) then
-					t[v_1] = nil
+		for _, value in PopResult do
+			if List[value] == nil then
+				if MutationLayerModule and MutationLayerModule.isCommitted(value) then
+					t[value] = nil
 				else
-					table.insert(t_1, v_1)
+					table.insert(List1, value)
 				end
 			end
 		end
-		if var8 then
-			var8.drainCommitted(p7, cache.updateItem)
+		if MutationLayerModule then
+			MutationLayerModule.drainCommitted(PopResult, Cache.updateItem)
 		end
-		if #t_1 > 0 then
-			handleFailure("Items missing in response", t_1, p8, p9)
+		if #List1 > 0 then
+			handleFailure("Items missing in response", List1, p4, p5)
 		end
 	end
 	
-	local function scheduleFetch()
-		-- upvalues: var5 (write), var4 (ref), var3 (write), var6 (write), fFlagDataHydrationAccountReset (copy), var7 (write), var2 (write), t (write), cache (ref), requestTimeoutSec (ref), handleFailure (ref), var1 (ref), p1 (ref), promiseModule (copy), handleSuccess (ref), scheduleFetch (ref)
-		if var5 == nil and not var4.isEmpty() then
-			var5 = task.delay(var3, function()
-				-- upvalues: var6 (copy), fFlagDataHydrationAccountReset (copy), var7 (copy), var5 (copy), var4 (copy), var2 (copy), t (copy), cache (copy), requestTimeoutSec (copy), handleFailure (copy), var1 (copy), p1 (copy), promiseModule (copy), handleSuccess (copy), scheduleFetch (copy)
-				local var9 = if fFlagDataHydrationAccountReset then var7 else nil
-				var5 = nil
+	local function scheduleFetch() --[[ Line: 169 ]]
+		-- upvalues: DelayedThread (ref), RequestQueueModule (copy), QueueProcessDelaySec (ref), LocalPlayerUserId (ref), FFlagDataHydrationAccountReset (upval), Callback (ref), RequestBatchSize (ref), t (ref), Cache (copy), RequestTimeoutSec (copy), p1 (copy), handleFailure (copy), NoSupportsMultiGet (copy), PromiseModule (upval), handleSuccess (copy), scheduleFetch (copy)
+		if DelayedThread == nil and not RequestQueueModule.isEmpty() then
+			DelayedThread = task.delay(QueueProcessDelaySec, function() --[[ Line: 175 ]]
+				-- upvalues: LocalPlayerUserId (upval), FFlagDataHydrationAccountReset (upval), Callback (upval), DelayedThread (upval), RequestQueueModule (upval), RequestBatchSize (upval), t (upval), Cache (upval), RequestTimeoutSec (upval), p1 (upval), handleFailure (upval), NoSupportsMultiGet (upval), PromiseModule (upval), handleSuccess (upval), scheduleFetch (upval)
+				local v1 = LocalPlayerUserId
+				local v2 = if FFlagDataHydrationAccountReset then Callback(false) else nil
+				DelayedThread = nil
 				
-				if var4.isEmpty() then return end
-				local var10 = var4.pop(var2)
+				if RequestQueueModule.isEmpty() then return end
+				local PopResult = RequestQueueModule.pop(RequestBatchSize)
 				
-				for i, v in var10 do
-					t[v] = true
+				for _, value in PopResult do
+					t[value] = true
 				end
-				local items = cache.getItems(var10)
-				local delayedThread = task.delay(requestTimeoutSec, function()
-					-- upvalues: handleFailure (copy), requestTimeoutSec (copy), var10 (ref), var6 (ref), var9 (ref)
-					handleFailure(`No fetch response after {requestTimeoutSec} sec`, var10, var6, var9)
+				local Items = Cache.getItems(PopResult)
+				local Flag = false
+				local DelayedThread = task.delay(RequestTimeoutSec, function() --[[ Line: 194 ]]
+					-- upvalues: p1 (upval), Flag (ref), handleFailure (upval), RequestTimeoutSec (upval), PopResult (copy), v1 (copy), v2 (copy)
+					if p1.ignoreResponsesAfterTimeout then
+						Flag = true
+					end
+					handleFailure(`No fetch response after {RequestTimeoutSec} sec`, PopResult, v1, v2)
 				end)
-				local ok, status = pcall(function()
-					-- upvalues: var1 (copy), var10 (ref), items (ref), p1 (copy), promiseModule (copy), handleSuccess (copy), var6 (ref), var9 (ref), delayedThread (ref), handleFailure (copy)
-					if var1 then
-						p1.fetchFn(items):andThen(function(p10)
-							-- upvalues: handleSuccess (copy), var10 (copy), var6 (copy), var9 (copy), delayedThread (copy)
-							handleSuccess(p10, var10, var6, var9)
-							task.cancel(delayedThread)
-						end):catch(function(p10)
-							-- upvalues: handleFailure (copy), var10 (copy), var6 (copy), var9 (copy), delayedThread (copy)
-							handleFailure(p10, var10, var6, var9)
-							task.cancel(delayedThread)
+				local Success, Result = pcall(function() --[[ Line: 206 ]]
+					-- upvalues: NoSupportsMultiGet (upval), PopResult (copy), Items (copy), p1 (upval), PromiseModule (upval), Flag (ref), handleSuccess (upval), v1 (copy), v2 (copy), DelayedThread (copy), handleFailure (upval)
+					if NoSupportsMultiGet then
+						p1.fetchFn(Items):andThen(function(Result) --[[ Line: 235 ]]
+							-- upvalues: Flag (upval), handleSuccess (upval), PopResult (upval), v1 (upval), v2 (upval), DelayedThread (upval)
+							if not Flag then
+								handleSuccess(Result, PopResult, v1, v2)
+								task.cancel(DelayedThread)
+								
+								return
+							end
+						end):catch(function(Err) --[[ Line: 242 ]]
+							-- upvalues: Flag (upval), handleFailure (upval), PopResult (upval), v1 (upval), v2 (upval), DelayedThread (upval)
+							if not Flag then
+								handleFailure(Err, PopResult, v1, v2)
+								task.cancel(DelayedThread)
+								
+								return
+							end
 						end)
 						
 						return
 					end
-					local t = {}
+					local Fns = {}
 					
-					for i, v in var10 do
-						table.insert(t, p1.fetchFn(v, items[v]))
+					for _, value in PopResult do
+						table.insert(Fns, p1.fetchFn(value, Items[value]))
 					end
-					promiseModule.all(t):andThen(function(p10)
-						-- upvalues: var10 (copy), handleSuccess (copy), var6 (copy), var9 (copy), delayedThread (copy)
+					PromiseModule.all(Fns):andThen(function(Result) --[[ Line: 215 ]]
+						-- upvalues: Flag (upval), PopResult (upval), handleSuccess (upval), v1 (upval), v2 (upval), DelayedThread (upval)
+						if Flag then return end
 						local t = {}
 						
-						for i, v in var10 do
-							t[v] = p10[i]
+						for i, value in PopResult do
+							t[value] = Result[i]
 						end
-						handleSuccess(t, var10, var6, var9)
-						task.cancel(delayedThread)
-					end):catch(function(p11)
-						-- upvalues: handleFailure (copy), var10 (copy), var6 (copy), var9 (copy), delayedThread (copy)
-						handleFailure(p11, var10, var6, var9)
-						task.cancel(delayedThread)
+						handleSuccess(t, PopResult, v1, v2)
+						task.cancel(DelayedThread)
+					end):catch(function(Err) --[[ Line: 226 ]]
+						-- upvalues: Flag (upval), handleFailure (upval), PopResult (upval), v1 (upval), v2 (upval), DelayedThread (upval)
+						if not Flag then
+							handleFailure(Err, PopResult, v1, v2)
+							task.cancel(DelayedThread)
+							
+							return
+						end
 					end)
 				end)
 				
-				if not ok then
-					handleFailure(status, var10, var6, var9)
-					task.cancel(delayedThread)
+				if not Success then
+					handleFailure(Result, PopResult, v1, v2)
+					task.cancel(DelayedThread)
 				end
 				scheduleFetch()
 			end)
@@ -167,209 +189,245 @@ return function(p1)
 		end
 	end
 	
-	local function isRequestInQueueOrInFlight(p10)
-		-- upvalues: var4 (ref), t (write)
-		return if var4.hasItem(p10) then true else t[p10] ~= nil
+	local function isRequestInQueueOrInFlight(p6): boolean --[[ Line: 261 ]]
+		-- upvalues: RequestQueueModule (copy), t (ref)
+		return if RequestQueueModule.hasItem(p6) then true else t[p6] ~= nil
 	end
 	
-	local function getAndFetchItems(p10, p11)
-		-- upvalues: cache (ref), var4 (ref), t (write), var5 (write), var3 (write), var6 (write), fFlagDataHydrationAccountReset (copy), var7 (write), var2 (write), requestTimeoutSec (ref), handleFailure (ref), var1 (ref), p1 (ref), promiseModule (copy), handleSuccess (ref), scheduleFetch (ref)
-		local items, items_1 = cache.getItems(p10, p11)
-		local t_1 = {}
-		local t_2 = {}
+	local function getAndFetchItems(p6, p7, p8) --[[ Line: 271 ]]
+		-- upvalues: Cache (copy), RequestQueueModule (copy), t (ref), DelayedThread (ref), QueueProcessDelaySec (ref), LocalPlayerUserId (ref), FFlagDataHydrationAccountReset (upval), Callback (ref), RequestBatchSize (ref), RequestTimeoutSec (copy), p1 (copy), handleFailure (copy), NoSupportsMultiGet (copy), PromiseModule (upval), handleSuccess (copy), scheduleFetch (copy)
+		local Items, Items2 = Cache.getItems(p6, p7, p8)
+		local t1 = {}
+		local List = {}
 		
-		for i, v in items do
-			t_1[i] = v
+		for i, item in Items do
+			t1[i] = item
 			
-			if items_1[i] and not (if var4.hasItem(i) then true else t[i] == nil) then
-				var4.push(i)
-				table.insert(t_2, i)
+			if Items2[i] and not (if RequestQueueModule.hasItem(i) then true else t[i] ~= nil) then
+				RequestQueueModule.push(i)
+				table.insert(List, i)
 			end
 		end
-		if #t_2 > 0 then
-			cache.resetFailedItems(t_2)
+		if #List > 0 then
+			Cache.resetFailedItems(List)
 		end
-		if not var4.isEmpty() and var5 == nil then
-			if var4.isEmpty() then
-				return t_1
+		if not RequestQueueModule.isEmpty() and DelayedThread == nil then
+			if RequestQueueModule.isEmpty() then
+				return t1
 			end
-			var5 = task.delay(var3, function()
-				-- upvalues: var6 (copy), fFlagDataHydrationAccountReset (copy), var7 (copy), var5 (copy), var4 (copy), var2 (copy), t (copy), cache (copy), requestTimeoutSec (copy), handleFailure (copy), var1 (copy), p1 (copy), promiseModule (copy), handleSuccess (copy), scheduleFetch (copy)
-				local var11 = if fFlagDataHydrationAccountReset then var7 else nil
-				var5 = nil
+			DelayedThread = task.delay(QueueProcessDelaySec, function() --[[ Line: 175 ]]
+				-- upvalues: LocalPlayerUserId (upval), FFlagDataHydrationAccountReset (upval), Callback (upval), DelayedThread (upval), RequestQueueModule (upval), RequestBatchSize (upval), t (upval), Cache (upval), RequestTimeoutSec (upval), p1 (upval), handleFailure (upval), NoSupportsMultiGet (upval), PromiseModule (upval), handleSuccess (upval), scheduleFetch (upval)
+				local v3 = LocalPlayerUserId
+				local v4 = if FFlagDataHydrationAccountReset then Callback(false) else nil
+				DelayedThread = nil
 				
-				if var4.isEmpty() then return end
-				local var12 = var4.pop(var2)
+				if RequestQueueModule.isEmpty() then return end
+				local PopResult = RequestQueueModule.pop(RequestBatchSize)
 				
-				for i, v in var12 do
-					t[v] = true
+				for _, value in PopResult do
+					t[value] = true
 				end
-				local items = cache.getItems(var12)
-				local delayedThread = task.delay(requestTimeoutSec, function()
-					-- upvalues: handleFailure (copy), requestTimeoutSec (copy), var12 (ref), var6 (ref), var11 (ref)
-					handleFailure(`No fetch response after {requestTimeoutSec} sec`, var12, var6, var11)
+				local Items = Cache.getItems(PopResult)
+				local Flag = false
+				local DelayedThread = task.delay(RequestTimeoutSec, function() --[[ Line: 194 ]]
+					-- upvalues: p1 (upval), Flag (ref), handleFailure (upval), RequestTimeoutSec (upval), PopResult (copy), v3 (copy), v4 (copy)
+					if p1.ignoreResponsesAfterTimeout then
+						Flag = true
+					end
+					handleFailure(`No fetch response after {RequestTimeoutSec} sec`, PopResult, v3, v4)
 				end)
-				local ok, status = pcall(function()
-					-- upvalues: var1 (copy), var12 (ref), items (ref), p1 (copy), promiseModule (copy), handleSuccess (copy), var6 (ref), var11 (ref), delayedThread (ref), handleFailure (copy)
-					if var1 then
-						p1.fetchFn(items):andThen(function(p12)
-							-- upvalues: handleSuccess (copy), var12 (copy), var6 (copy), var11 (copy), delayedThread (copy)
-							handleSuccess(p12, var12, var6, var11)
-							task.cancel(delayedThread)
-						end):catch(function(p12)
-							-- upvalues: handleFailure (copy), var12 (copy), var6 (copy), var11 (copy), delayedThread (copy)
-							handleFailure(p12, var12, var6, var11)
-							task.cancel(delayedThread)
+				local Success, Result = pcall(function() --[[ Line: 206 ]]
+					-- upvalues: NoSupportsMultiGet (upval), PopResult (copy), Items (copy), p1 (upval), PromiseModule (upval), Flag (ref), handleSuccess (upval), v3 (copy), v4 (copy), DelayedThread (copy), handleFailure (upval)
+					if NoSupportsMultiGet then
+						p1.fetchFn(Items):andThen(function(Result) --[[ Line: 235 ]]
+							-- upvalues: Flag (upval), handleSuccess (upval), PopResult (upval), v3 (upval), v4 (upval), DelayedThread (upval)
+							if not Flag then
+								handleSuccess(Result, PopResult, v3, v4)
+								task.cancel(DelayedThread)
+								
+								return
+							end
+						end):catch(function(Err) --[[ Line: 242 ]]
+							-- upvalues: Flag (upval), handleFailure (upval), PopResult (upval), v3 (upval), v4 (upval), DelayedThread (upval)
+							if not Flag then
+								handleFailure(Err, PopResult, v3, v4)
+								task.cancel(DelayedThread)
+								
+								return
+							end
 						end)
 						
 						return
 					end
-					local t = {}
+					local Fns = {}
 					
-					for i, v in var12 do
-						table.insert(t, p1.fetchFn(v, items[v]))
+					for _, value in PopResult do
+						table.insert(Fns, p1.fetchFn(value, Items[value]))
 					end
-					promiseModule.all(t):andThen(function(p12)
-						-- upvalues: var12 (copy), handleSuccess (copy), var6 (copy), var11 (copy), delayedThread (copy)
+					PromiseModule.all(Fns):andThen(function(Result) --[[ Line: 215 ]]
+						-- upvalues: Flag (upval), PopResult (upval), handleSuccess (upval), v3 (upval), v4 (upval), DelayedThread (upval)
+						if Flag then return end
 						local t = {}
 						
-						for i, v in var12 do
-							t[v] = p12[i]
+						for i, value in PopResult do
+							t[value] = Result[i]
 						end
-						handleSuccess(t, var12, var6, var11)
-						task.cancel(delayedThread)
-					end):catch(function(p13)
-						-- upvalues: handleFailure (copy), var12 (copy), var6 (copy), var11 (copy), delayedThread (copy)
-						handleFailure(p13, var12, var6, var11)
-						task.cancel(delayedThread)
+						handleSuccess(t, PopResult, v3, v4)
+						task.cancel(DelayedThread)
+					end):catch(function(Err) --[[ Line: 226 ]]
+						-- upvalues: Flag (upval), handleFailure (upval), PopResult (upval), v3 (upval), v4 (upval), DelayedThread (upval)
+						if not Flag then
+							handleFailure(Err, PopResult, v3, v4)
+							task.cancel(DelayedThread)
+							
+							return
+						end
 					end)
 				end)
 				
-				if not ok then
-					handleFailure(status, var12, var6, var11)
-					task.cancel(delayedThread)
+				if not Success then
+					handleFailure(Result, PopResult, v3, v4)
+					task.cancel(DelayedThread)
 				end
 				scheduleFetch()
 			end)
 		end
-		return t_1
+		return t1
 	end
 	
-	local function getAndFetchItem(p12, p13)
-		-- upvalues: cache (ref), var4 (ref), t (write), var5 (write), var3 (write), var6 (write), fFlagDataHydrationAccountReset (copy), var7 (write), var2 (write), requestTimeoutSec (ref), handleFailure (ref), var1 (ref), p1 (ref), promiseModule (copy), handleSuccess (ref), scheduleFetch (ref)
-		local item, item_1 = cache.getItem(p12, p13)
+	local function getAndFetchItem(p9, p10, p11) --[[ Line: 293 ]]
+		-- upvalues: Cache (copy), RequestQueueModule (copy), t (ref), DelayedThread (ref), QueueProcessDelaySec (ref), LocalPlayerUserId (ref), FFlagDataHydrationAccountReset (upval), Callback (ref), RequestBatchSize (ref), RequestTimeoutSec (copy), p1 (copy), handleFailure (copy), NoSupportsMultiGet (copy), PromiseModule (upval), handleSuccess (copy), scheduleFetch (copy)
+		local Item, Item2 = Cache.getItem(p9, p10, p11)
 		
-		if item_1 and not (if var4.hasItem(p12) then true else t[p12] == nil) then
-			cache.resetFailedItem(p12)
-			var4.push(p12)
+		if Item2 and not (if RequestQueueModule.hasItem(p9) then true else t[p9] ~= nil) then
+			Cache.resetFailedItem(p9)
+			RequestQueueModule.push(p9)
 		end
-		if not var4.isEmpty() and var5 == nil then
-			if var4.isEmpty() then
-				return item, item_1
+		if not RequestQueueModule.isEmpty() and DelayedThread == nil then
+			if RequestQueueModule.isEmpty() then
+				return Item, Item2
 			end
-			var5 = task.delay(var3, function()
-				-- upvalues: var6 (copy), fFlagDataHydrationAccountReset (copy), var7 (copy), var5 (copy), var4 (copy), var2 (copy), t (copy), cache (copy), requestTimeoutSec (copy), handleFailure (copy), var1 (copy), p1 (copy), promiseModule (copy), handleSuccess (copy), scheduleFetch (copy)
-				local var13 = if fFlagDataHydrationAccountReset then var7 else nil
-				var5 = nil
+			DelayedThread = task.delay(QueueProcessDelaySec, function() --[[ Line: 175 ]]
+				-- upvalues: LocalPlayerUserId (upval), FFlagDataHydrationAccountReset (upval), Callback (upval), DelayedThread (upval), RequestQueueModule (upval), RequestBatchSize (upval), t (upval), Cache (upval), RequestTimeoutSec (upval), p1 (upval), handleFailure (upval), NoSupportsMultiGet (upval), PromiseModule (upval), handleSuccess (upval), scheduleFetch (upval)
+				local v5 = LocalPlayerUserId
+				local v6 = if FFlagDataHydrationAccountReset then Callback(false) else nil
+				DelayedThread = nil
 				
-				if var4.isEmpty() then return end
-				local var14 = var4.pop(var2)
+				if RequestQueueModule.isEmpty() then return end
+				local PopResult = RequestQueueModule.pop(RequestBatchSize)
 				
-				for i, v in var14 do
-					t[v] = true
+				for _, value in PopResult do
+					t[value] = true
 				end
-				local items = cache.getItems(var14)
-				local delayedThread = task.delay(requestTimeoutSec, function()
-					-- upvalues: handleFailure (copy), requestTimeoutSec (copy), var14 (ref), var6 (ref), var13 (ref)
-					handleFailure(`No fetch response after {requestTimeoutSec} sec`, var14, var6, var13)
+				local Items = Cache.getItems(PopResult)
+				local Flag = false
+				local DelayedThread = task.delay(RequestTimeoutSec, function() --[[ Line: 194 ]]
+					-- upvalues: p1 (upval), Flag (ref), handleFailure (upval), RequestTimeoutSec (upval), PopResult (copy), v5 (copy), v6 (copy)
+					if p1.ignoreResponsesAfterTimeout then
+						Flag = true
+					end
+					handleFailure(`No fetch response after {RequestTimeoutSec} sec`, PopResult, v5, v6)
 				end)
-				local ok, status = pcall(function()
-					-- upvalues: var1 (copy), var14 (ref), items (ref), p1 (copy), promiseModule (copy), handleSuccess (copy), var6 (ref), var13 (ref), delayedThread (ref), handleFailure (copy)
-					if var1 then
-						p1.fetchFn(items):andThen(function(p14)
-							-- upvalues: handleSuccess (copy), var14 (copy), var6 (copy), var13 (copy), delayedThread (copy)
-							handleSuccess(p14, var14, var6, var13)
-							task.cancel(delayedThread)
-						end):catch(function(p14)
-							-- upvalues: handleFailure (copy), var14 (copy), var6 (copy), var13 (copy), delayedThread (copy)
-							handleFailure(p14, var14, var6, var13)
-							task.cancel(delayedThread)
+				local Success, Result = pcall(function() --[[ Line: 206 ]]
+					-- upvalues: NoSupportsMultiGet (upval), PopResult (copy), Items (copy), p1 (upval), PromiseModule (upval), Flag (ref), handleSuccess (upval), v5 (copy), v6 (copy), DelayedThread (copy), handleFailure (upval)
+					if NoSupportsMultiGet then
+						p1.fetchFn(Items):andThen(function(Result) --[[ Line: 235 ]]
+							-- upvalues: Flag (upval), handleSuccess (upval), PopResult (upval), v5 (upval), v6 (upval), DelayedThread (upval)
+							if not Flag then
+								handleSuccess(Result, PopResult, v5, v6)
+								task.cancel(DelayedThread)
+								
+								return
+							end
+						end):catch(function(Err) --[[ Line: 242 ]]
+							-- upvalues: Flag (upval), handleFailure (upval), PopResult (upval), v5 (upval), v6 (upval), DelayedThread (upval)
+							if not Flag then
+								handleFailure(Err, PopResult, v5, v6)
+								task.cancel(DelayedThread)
+								
+								return
+							end
 						end)
 						
 						return
 					end
-					local t = {}
+					local Fns = {}
 					
-					for i, v in var14 do
-						table.insert(t, p1.fetchFn(v, items[v]))
+					for _, value in PopResult do
+						table.insert(Fns, p1.fetchFn(value, Items[value]))
 					end
-					promiseModule.all(t):andThen(function(p14)
-						-- upvalues: var14 (copy), handleSuccess (copy), var6 (copy), var13 (copy), delayedThread (copy)
+					PromiseModule.all(Fns):andThen(function(Result) --[[ Line: 215 ]]
+						-- upvalues: Flag (upval), PopResult (upval), handleSuccess (upval), v5 (upval), v6 (upval), DelayedThread (upval)
+						if Flag then return end
 						local t = {}
 						
-						for i, v in var14 do
-							t[v] = p14[i]
+						for i, value in PopResult do
+							t[value] = Result[i]
 						end
-						handleSuccess(t, var14, var6, var13)
-						task.cancel(delayedThread)
-					end):catch(function(p15)
-						-- upvalues: handleFailure (copy), var14 (copy), var6 (copy), var13 (copy), delayedThread (copy)
-						handleFailure(p15, var14, var6, var13)
-						task.cancel(delayedThread)
+						handleSuccess(t, PopResult, v5, v6)
+						task.cancel(DelayedThread)
+					end):catch(function(Err) --[[ Line: 226 ]]
+						-- upvalues: Flag (upval), handleFailure (upval), PopResult (upval), v5 (upval), v6 (upval), DelayedThread (upval)
+						if not Flag then
+							handleFailure(Err, PopResult, v5, v6)
+							task.cancel(DelayedThread)
+							
+							return
+						end
 					end)
 				end)
 				
-				if not ok then
-					handleFailure(status, var14, var6, var13)
-					task.cancel(delayedThread)
+				if not Success then
+					handleFailure(Result, PopResult, v5, v6)
+					task.cancel(DelayedThread)
 				end
 				scheduleFetch()
 			end)
 		end
-		return item, item_1
+		return Item, Item2
 	end
 	
-	local function getCachedItem(p14)
-		-- upvalues: cache (ref)
-		return cache.getItem(p14)
+	local function getCachedItem(p12) --[[ Line: 305 ]]
+		-- upvalues: Cache (copy)
+		return Cache.getItem(p12)
 	end
 	
-	local function getCachedItems(p14)
-		-- upvalues: cache (ref)
-		return cache.getItems(p14)
+	local function getCachedItems(p12) --[[ Line: 309 ]]
+		-- upvalues: Cache (copy)
+		return Cache.getItems(p12)
 	end
 	
-	local function fetchItem(p14, p15)
-		-- upvalues: getAndFetchItem (ref), FORCE_FETCH (ref)
-		return getAndFetchItem(p14, p15 or FORCE_FETCH)
+	local function fetchItem(p12, p13) --[[ Line: 313 ]]
+		-- upvalues: getAndFetchItem (copy), FORCE_FETCH (copy)
+		return getAndFetchItem(p12, p13 or FORCE_FETCH)
 	end
 	
-	local function fetchItems(p14, p15)
-		-- upvalues: getAndFetchItems (ref), FORCE_FETCH (ref)
-		return getAndFetchItems(p14, p15 or FORCE_FETCH)
+	local function fetchItems(p12, p13) --[[ Line: 317 ]]
+		-- upvalues: getAndFetchItems (copy), FORCE_FETCH (copy)
+		return (getAndFetchItems(p12, p13 or FORCE_FETCH))
 	end
 	
-	local function clear()
-		-- upvalues: fFlagDataHydrationAccountReset (copy), var7 (write), var5 (write), t (write), var4 (ref), var8 (write), p1 (ref), cache (ref)
-		if fFlagDataHydrationAccountReset then
-			var7 += 1
+	local function clear() --[[ Line: 321 ]]
+		-- upvalues: FFlagDataHydrationAccountReset (upval), Callback1 (ref), Callback (ref), DelayedThread (ref), t (ref), RequestQueueModule (copy), MutationLayerModule (ref), p1 (copy), Cache (copy)
+		if FFlagDataHydrationAccountReset then
+			Callback1(Callback(false) + 1)
 		end
-		if var5 then
-			task.cancel(var5)
-			var5 = nil
+		if DelayedThread then
+			task.cancel(DelayedThread)
+			DelayedThread = nil
 		end
 		t = {}
 		
-		if fFlagDataHydrationAccountReset then
-			var4.clear()
+		if FFlagDataHydrationAccountReset then
+			RequestQueueModule.clear()
 			
-			if var8 then
-				var8.clearAll()
+			if MutationLayerModule then
+				MutationLayerModule.clearAll()
 			end
 			if p1.onBeforeClear then
 				p1.onBeforeClear()
 			end
-			cache.clear()
+			Cache.clear()
 			
 			if p1.onClear then
 				p1.onClear()
@@ -377,11 +435,11 @@ return function(p1)
 				return
 			end
 		else
-			cache.clear()
-			var4.clear()
+			Cache.clear()
+			RequestQueueModule.clear()
 			
-			if var8 then
-				var8.clearAll()
+			if MutationLayerModule then
+				MutationLayerModule.clearAll()
 			end
 			if p1.onClear then
 				p1.onClear()
@@ -389,27 +447,35 @@ return function(p1)
 		end
 	end
 	
-	local var15 = nil
-	local var16 = nil
+	local Connection = nil
+	local Callback4 = nil
 	
-	if fFlagDataHydrationAccountReset then
-		var16 = observeLocalPlayerUserId(function(p14)
-			-- upvalues: var6 (write), clear (ref)
-			var6 = p14
+	if FFlagDataHydrationAccountReset then
+		Callback4 = ObserveLocalPlayerUserIdFunction(function(p12) --[[ Line: 359 ]]
+			-- upvalues: LocalPlayerUserId (ref), clear (copy), FFlagBuildExperienceMonetizationMultiKindModule (upval), Callback2 (ref), Callback3 (ref)
+			LocalPlayerUserId = p12
 			clear()
+			
+			if FFlagBuildExperienceMonetizationMultiKindModule then
+				Callback2(Callback3(false) + 1)
+			end
 		end)
 	else
-		var15 = playersService:GetPropertyChangedSignal("LocalPlayer"):Connect(function()
-			-- upvalues: getLocalPlayerUserId (copy), var6 (write), clear (ref)
-			local var17 = getLocalPlayerUserId()
+		Connection = Players:GetPropertyChangedSignal("LocalPlayer"):Connect(function() --[[ Line: 367 ]]
+			-- upvalues: GetLocalPlayerUserIdFunction (upval), LocalPlayerUserId (ref), clear (copy), FFlagBuildExperienceMonetizationMultiKindModule (upval), Callback2 (ref), Callback3 (ref)
+			local LocalPlayerUserId1 = GetLocalPlayerUserIdFunction()
 			
-			if var17 ~= var6 then
-				var6 = var17
+			if LocalPlayerUserId1 ~= LocalPlayerUserId then
+				LocalPlayerUserId = LocalPlayerUserId1
 				clear()
+				
+				if FFlagBuildExperienceMonetizationMultiKindModule then
+					Callback2(Callback3(false) + 1)
+				end
 			end
 		end)
 	end
-	local t_1 = {
+	local config = {
 		getAndFetchItems = getAndFetchItems,
 		getAndFetchItem = getAndFetchItem,
 		getCachedItem = getCachedItem,
@@ -417,84 +483,87 @@ return function(p1)
 		fetchItem = fetchItem,
 		fetchItems = fetchItems,
 		isRequestInQueueOrInFlight = isRequestInQueueOrInFlight,
-		dispose = function()
-			-- upvalues: var16 (write), var15 (write), fFlagDataHydrationAccountReset (copy), clear (ref), cache (ref)
-			if var16 then
-				var16()
-				var16 = nil
+		dispose = function() --[[ Line: 379 ]]
+			-- upvalues: Callback4 (ref), Connection (ref), FFlagDataHydrationAccountReset (upval), clear (copy), Cache (copy)
+			if Callback4 then
+				Callback4()
+				Callback4 = nil
 			end
-			if var15 then
-				var15:Disconnect()
-				var15 = nil
+			if Connection then
+				Connection:Disconnect()
+				Connection = nil
 			end
-			if fFlagDataHydrationAccountReset then
+			if FFlagDataHydrationAccountReset then
 				clear()
 			end
-			cache.dispose()
+			Cache.dispose()
 		end,
-		clear = clear
+		clear = clear,
+		getAccountGeneration = if FFlagDataHydrationAccountReset then Callback else nil,
+		getAccountResetGeneration = if FFlagBuildExperienceMonetizationMultiKindModule then Callback3 else nil,
+		isCurrentRequest = if FFlagDataHydrationAccountReset then isCurrentRequest else nil
 	}
 	
-	if var8 then
-		function t_1.getOptimisticCachedItem(p14)
-			-- upvalues: cache (ref), var8 (write)
-			local item, item_1 = cache.getItem(p14)
+	if MutationLayerModule then
+		function config.getOptimisticCachedItem(p12) --[[ Line: 417 ]]
+			-- upvalues: Cache (copy), MutationLayerModule (ref)
+			local Item, Item2 = Cache.getItem(p12)
 			
-			return var8.getMergedResult(p14, item), item_1
+			return MutationLayerModule.getMergedResult(p12, Item), Item2
 		end
 		
-		function t_1.getOptimisticCachedItems(p14)
-			-- upvalues: cache (ref), var8 (write)
-			local items, items_1 = cache.getItems(p14)
-			local t = {}
+		function config.getOptimisticCachedItems(p12) --[[ Line: 422 ]]
+			-- upvalues: Cache (copy), MutationLayerModule (ref)
+			local Items, Items2 = Cache.getItems(p12)
+			local MergedResults = {}
 			
-			for i, v in items do
-				t[i] = var8.getMergedResult(i, v)
+			for i, item in Items do
+				MergedResults[i] = MutationLayerModule.getMergedResult(i, item)
 			end
-			return t, items_1
+			return MergedResults, Items2
 		end
 		
-		function t_1.getOptimisticAndFetchItem(p15, p16)
-			-- upvalues: getAndFetchItem (ref), var8 (write)
-			local var17, var18 = getAndFetchItem(p15, p16)
+		function config.getOptimisticAndFetchItem(p13, p14, p15) --[[ Line: 432 ]]
+			-- upvalues: getAndFetchItem (copy), MutationLayerModule (ref)
+			local AndFetchItem, AndFetchItem2 = getAndFetchItem(p13, p14, p15)
 			
-			return var8.getMergedResult(p15, var17), var18
+			return MutationLayerModule.getMergedResult(p13, AndFetchItem), AndFetchItem2
 		end
 		
-		function t_1.getOptimisticAndFetchItems(p15, p16)
-			-- upvalues: getAndFetchItems (ref), var8 (write)
-			local t = {}
+		function config.getOptimisticAndFetchItems(p13, p14, p15) --[[ Line: 441 ]]
+			-- upvalues: getAndFetchItems (copy), MutationLayerModule (ref)
+			local MergedResults = {}
 			
-			for i, v in getAndFetchItems(p15, p16) do
-				t[i] = var8.getMergedResult(i, v)
+			for i, value in getAndFetchItems(p13, p14, p15) do
+				MergedResults[i] = MutationLayerModule.getMergedResult(i, value)
 			end
-			return t
+			return MergedResults
 		end
 		
-		function t_1.setMutation(p17, p18)
-			-- upvalues: var8 (write)
-			var8.set(p17, p18)
+		function config.setMutation(p16, p17) --[[ Line: 455 ]]
+			-- upvalues: MutationLayerModule (ref)
+			MutationLayerModule.set(p16, p17)
 		end
 		
-		function t_1.clearMutation(p17)
-			-- upvalues: var8 (write)
-			var8.clear(p17)
+		function config.clearMutation(p16) --[[ Line: 460 ]]
+			-- upvalues: MutationLayerModule (ref)
+			MutationLayerModule.clear(p16)
 		end
 		
-		function t_1.commitMutation(p17)
-			-- upvalues: var4 (ref), t (write), var8 (write), cache (ref)
-			if if var4.hasItem(p17) then true else t[p17] == nil then
-				var8.markCommitted(p17)
+		function config.commitMutation(p16) --[[ Line: 465 ]]
+			-- upvalues: RequestQueueModule (copy), t (ref), MutationLayerModule (ref), Cache (copy)
+			if if RequestQueueModule.hasItem(p16) then true else t[p16] ~= nil then
+				MutationLayerModule.markCommitted(p16)
 				
 				return
 			end
-			local var17 = var8.get(p17)
+			local GetResult = MutationLayerModule.get(p16)
 			
-			if var17 ~= nil then
-				cache.updateItem(p17, var17)
+			if GetResult ~= nil then
+				Cache.updateItem(p16, GetResult)
 			end
-			var8.clear(p17)
+			MutationLayerModule.clear(p16)
 		end
 	end
-	return t_1
+	return config
 end

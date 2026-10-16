@@ -1,44 +1,44 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local _ = require(dataHydration.Parent.HttpClient)
-local createSingleEntityResolverModule = require(dataHydration.createSingleEntityResolver)
-local fetchExperienceGuidelinesModule = require(script.Parent.fetchExperienceGuidelines)
-local syncGuidelinesAgeToGameStores = require(script.Parent.syncGuidelinesAgeToGameStores).syncGuidelinesAgeToGameStores
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local _ = require(DataHydration.Parent.HttpClient)
+local CreateSingleEntityResolverModule = require(DataHydration.createSingleEntityResolver)
+local FetchExperienceGuidelinesModule = require(script.Parent.fetchExperienceGuidelines)
+local SyncGuidelinesAgeToGameStoresFunction = require(script.Parent.syncGuidelinesAgeToGameStores).syncGuidelinesAgeToGameStores
 local _ = require(script.Parent.ExperienceGuidelinesStoreTypes)
 
-return function(p1)
-	-- upvalues: createSingleEntityResolverModule (ref), fetchExperienceGuidelinesModule (ref), syncGuidelinesAgeToGameStores (ref)
-	p1 = p1 or {}
-	local t = { network = p1.network, baseUrl = p1.baseUrl }
-	local var1 = createSingleEntityResolverModule(function(p2)
-		-- upvalues: fetchExperienceGuidelinesModule (copy), t (ref), syncGuidelinesAgeToGameStores (copy)
-		return fetchExperienceGuidelinesModule.fetchDetailedGuidelines(p2, t):andThen(function(p3)
-			-- upvalues: syncGuidelinesAgeToGameStores (copy), p2 (ref)
-			syncGuidelinesAgeToGameStores(p2, p3)
+return function(p1) --[[ Line: 20 | Named "createExperienceGuidelinesStore" ]]
+	-- upvalues: CreateSingleEntityResolverModule (copy), FetchExperienceGuidelinesModule (copy), SyncGuidelinesAgeToGameStoresFunction (copy)
+	local P0 = p1 or {}
+	local config = { network = P0.network, baseUrl = P0.baseUrl }
+	local SingleEntityResolverModule = CreateSingleEntityResolverModule(function(p2) --[[ Line: 24 ]]
+		-- upvalues: FetchExperienceGuidelinesModule (upval), config (copy), SyncGuidelinesAgeToGameStoresFunction (upval)
+		return FetchExperienceGuidelinesModule.fetchDetailedGuidelines(p2, config):andThen(function(Result) --[[ Line: 27 ]]
+			-- upvalues: SyncGuidelinesAgeToGameStoresFunction (upval), p2 (copy)
+			SyncGuidelinesAgeToGameStoresFunction(p2, Result)
 			
-			return p3
+			return Result
 		end)
 	end)
 	
 	return {
-		getDetailedGuidelines = var1.get,
-		fetchDetailedGuidelines = var1.fetch,
-		refreshDetailedGuidelines = function(p2)
-			-- upvalues: fetchExperienceGuidelinesModule (copy), t (ref), var1 (ref), syncGuidelinesAgeToGameStores (copy)
-			return fetchExperienceGuidelinesModule.fetchDetailedGuidelines(p2, t):andThen(function(p3)
-				-- upvalues: var1 (copy), p2 (ref), syncGuidelinesAgeToGameStores (copy)
-				var1.cache.replaceItem(tostring(p2), p3)
-				syncGuidelinesAgeToGameStores(p2, p3)
+		getDetailedGuidelines = SingleEntityResolverModule.get,
+		fetchDetailedGuidelines = SingleEntityResolverModule.fetch,
+		refreshDetailedGuidelines = function(p2) --[[ Line: 33 ]]
+			-- upvalues: FetchExperienceGuidelinesModule (upval), config (copy), SingleEntityResolverModule (copy), SyncGuidelinesAgeToGameStoresFunction (upval)
+			return FetchExperienceGuidelinesModule.fetchDetailedGuidelines(p2, config):andThen(function(Result) --[[ Line: 36 ]]
+				-- upvalues: SingleEntityResolverModule (upval), p2 (copy), SyncGuidelinesAgeToGameStoresFunction (upval)
+				SingleEntityResolverModule.cache.replaceItem(tostring(p2), Result)
+				SyncGuidelinesAgeToGameStoresFunction(p2, Result)
 				
-				return p3
+				return Result
 			end)
 		end,
-		getAndFetchDetailedGuidelines = var1.getAndFetch,
-		updateDetailedGuidelines = function(p2, p3)
-			-- upvalues: var1 (ref), syncGuidelinesAgeToGameStores (copy)
-			var1.update(p2, p3)
-			syncGuidelinesAgeToGameStores(p2, p3)
+		getAndFetchDetailedGuidelines = SingleEntityResolverModule.getAndFetch,
+		updateDetailedGuidelines = function(p2, p3) --[[ Line: 48 ]]
+			-- upvalues: SingleEntityResolverModule (copy), SyncGuidelinesAgeToGameStoresFunction (upval)
+			SingleEntityResolverModule.update(p2, p3)
+			SyncGuidelinesAgeToGameStoresFunction(p2, p3)
 		end,
-		clear = var1.clear,
-		dispose = var1.dispose
+		clear = SingleEntityResolverModule.clear,
+		dispose = SingleEntityResolverModule.dispose
 	}
 end

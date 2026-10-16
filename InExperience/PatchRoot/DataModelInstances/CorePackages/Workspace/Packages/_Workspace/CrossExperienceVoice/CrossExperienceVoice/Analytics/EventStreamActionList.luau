@@ -1,112 +1,112 @@
-﻿local parent = script:FindFirstAncestor("CrossExperienceVoice").Parent
-local cryoModule = require(parent.Cryo)
-local dashModule = require(parent.Dash)
-local enums = require(parent.SocialLuaAnalytics).Analytics.Enums
-local contexts = enums.Contexts
-local eventTypes = enums.EventTypes
-local eventNamesModule = require(script.Parent.EventNames)
-local t = {
-	cevJoinAttemptId = dashModule.identity,
-	clientTimeStamp = dashModule.identity
+﻿local Parent = script:FindFirstAncestor("CrossExperienceVoice").Parent
+local CryoModule = require(Parent.Cryo)
+local DashModule = require(Parent.Dash)
+local Enums = require(Parent.SocialLuaAnalytics).Analytics.Enums
+local Contexts = Enums.Contexts
+local EventTypes = Enums.EventTypes
+local EventNamesModule = require(script.Parent.EventNames)
+local config = {
+	cevJoinAttemptId = DashModule.identity,
+	clientTimeStamp = DashModule.identity
 }
 
 return {
-	[eventNamesModule.PartyVoiceStateChanged] = {
-		context = contexts.PartyVoice,
-		eventType = eventTypes.PartyVoiceStateChanged,
-		formatRulesForAdditionalInfo = cryoModule.Dictionary.union(t, {
-			userId = dashModule.identity,
-			partyId = dashModule.identity,
-			detail = dashModule.identity,
-			voiceSessionId = dashModule.identity,
-			voiceChannelId = dashModule.identity,
-			status = dashModule.identity,
-			previousStatus = dashModule.identity,
-			activeDm = dashModule.identity
+	[EventNamesModule.PartyVoiceStateChanged] = {
+		context = Contexts.PartyVoice,
+		eventType = EventTypes.PartyVoiceStateChanged,
+		formatRulesForAdditionalInfo = CryoModule.Dictionary.union(config, {
+			userId = DashModule.identity,
+			partyId = DashModule.identity,
+			detail = DashModule.identity,
+			voiceSessionId = DashModule.identity,
+			voiceChannelId = DashModule.identity,
+			status = DashModule.identity,
+			previousStatus = DashModule.identity,
+			activeDm = DashModule.identity
 		})
 	},
-	[eventNamesModule.PartyVoiceJoinAttempt] = {
-		context = contexts.PartyVoice,
-		eventType = eventTypes.PartyVoiceJoinAttempt,
-		formatRulesForAdditionalInfo = cryoModule.Dictionary.union(t, {
-			userId = dashModule.identity,
-			partyId = dashModule.identity,
-			targetPlaceId = dashModule.identity,
-			isConnected = dashModule.identity,
-			activeDm = dashModule.identity
+	[EventNamesModule.PartyVoiceJoinAttempt] = {
+		context = Contexts.PartyVoice,
+		eventType = EventTypes.PartyVoiceJoinAttempt,
+		formatRulesForAdditionalInfo = CryoModule.Dictionary.union(config, {
+			userId = DashModule.identity,
+			partyId = DashModule.identity,
+			targetPlaceId = DashModule.identity,
+			isConnected = DashModule.identity,
+			activeDm = DashModule.identity
 		})
 	},
-	[eventNamesModule.PartyVoiceJoinFailure] = {
-		context = contexts.PartyVoice,
-		eventType = eventTypes.PartyVoiceJoinFailure,
-		formatRulesForAdditionalInfo = cryoModule.Dictionary.union(t, {
-			userId = dashModule.identity,
-			partyId = dashModule.identity,
-			errorMessage = dashModule.identity
+	[EventNamesModule.PartyVoiceJoinFailure] = {
+		context = Contexts.PartyVoice,
+		eventType = EventTypes.PartyVoiceJoinFailure,
+		formatRulesForAdditionalInfo = CryoModule.Dictionary.union(config, {
+			userId = DashModule.identity,
+			partyId = DashModule.identity,
+			errorMessage = DashModule.identity
 		})
 	},
-	[eventNamesModule.PartyVoiceConnectedParticipantsOnJoin] = {
-		context = contexts.PartyVoice,
-		eventType = eventTypes.PartyVoiceConnectedParticipantsOnJoin,
-		formatRulesForAdditionalInfo = cryoModule.Dictionary.union(t, {
-			userId = dashModule.identity,
-			partyId = dashModule.identity,
-			status = dashModule.identity,
-			voiceChannelId = dashModule.identity,
-			voiceSessionId = dashModule.identity,
-			voicePlaySessionId = dashModule.identity,
-			participants = dashModule.identity,
-			numberActive = dashModule.identity,
-			activeDm = dashModule.identity
+	[EventNamesModule.PartyVoiceConnectedParticipantsOnJoin] = {
+		context = Contexts.PartyVoice,
+		eventType = EventTypes.PartyVoiceConnectedParticipantsOnJoin,
+		formatRulesForAdditionalInfo = CryoModule.Dictionary.union(config, {
+			userId = DashModule.identity,
+			partyId = DashModule.identity,
+			status = DashModule.identity,
+			voiceChannelId = DashModule.identity,
+			voiceSessionId = DashModule.identity,
+			voicePlaySessionId = DashModule.identity,
+			participants = DashModule.identity,
+			numberActive = DashModule.identity,
+			activeDm = DashModule.identity
 		})
 	},
-	[eventNamesModule.PartyVoiceUnmuteParticipant] = {
-		context = contexts.PartyVoice,
-		eventType = eventTypes.PartyVoiceUnmuteParticipant,
-		formatRulesForAdditionalInfo = cryoModule.Dictionary.union(t, {
-			userId = dashModule.identity,
-			partyId = dashModule.identity
+	[EventNamesModule.PartyVoiceUnmuteParticipant] = {
+		context = Contexts.PartyVoice,
+		eventType = EventTypes.PartyVoiceUnmuteParticipant,
+		formatRulesForAdditionalInfo = CryoModule.Dictionary.union(config, {
+			userId = DashModule.identity,
+			partyId = DashModule.identity
 		})
 	},
-	[eventNamesModule.PartyVoiceMuteParticipant] = {
-		context = contexts.PartyVoice,
-		eventType = eventTypes.PartyVoiceMuteParticipant,
-		formatRulesForAdditionalInfo = cryoModule.Dictionary.union(t, {
-			userId = dashModule.identity,
-			partyId = dashModule.identity
+	[EventNamesModule.PartyVoiceMuteParticipant] = {
+		context = Contexts.PartyVoice,
+		eventType = EventTypes.PartyVoiceMuteParticipant,
+		formatRulesForAdditionalInfo = CryoModule.Dictionary.union(config, {
+			userId = DashModule.identity,
+			partyId = DashModule.identity
 		})
 	},
-	[eventNamesModule.PartyVoiceBlockParticipant] = {
-		context = contexts.PartyVoice,
-		eventType = eventTypes.PartyVoiceBlockParticipant,
-		formatRulesForAdditionalInfo = cryoModule.Dictionary.union(t, {
-			userId = dashModule.identity,
-			partyId = dashModule.identity
+	[EventNamesModule.PartyVoiceBlockParticipant] = {
+		context = Contexts.PartyVoice,
+		eventType = EventTypes.PartyVoiceBlockParticipant,
+		formatRulesForAdditionalInfo = CryoModule.Dictionary.union(config, {
+			userId = DashModule.identity,
+			partyId = DashModule.identity
 		})
 	},
-	[eventNamesModule.PartyVoiceUnblockParticipant] = {
-		context = contexts.PartyVoice,
-		eventType = eventTypes.PartyVoiceUnblockParticipant,
-		formatRulesForAdditionalInfo = cryoModule.Dictionary.union(t, {
-			userId = dashModule.identity,
-			partyId = dashModule.identity
+	[EventNamesModule.PartyVoiceUnblockParticipant] = {
+		context = Contexts.PartyVoice,
+		eventType = EventTypes.PartyVoiceUnblockParticipant,
+		formatRulesForAdditionalInfo = CryoModule.Dictionary.union(config, {
+			userId = DashModule.identity,
+			partyId = DashModule.identity
 		})
 	},
-	[eventNamesModule.PartyVoiceOnCrossExperienceStartedSignalReceived] = {
-		context = contexts.PartyVoice,
-		eventType = eventTypes.PartyVoiceOnCrossExperienceStartedSignalReceived,
-		formatRulesForAdditionalInfo = cryoModule.Dictionary.union(t, {
-			hasExperienceStarted = dashModule.identity,
-			isActiveDM = dashModule.identity
+	[EventNamesModule.PartyVoiceOnCrossExperienceStartedSignalReceived] = {
+		context = Contexts.PartyVoice,
+		eventType = EventTypes.PartyVoiceOnCrossExperienceStartedSignalReceived,
+		formatRulesForAdditionalInfo = CryoModule.Dictionary.union(config, {
+			hasExperienceStarted = DashModule.identity,
+			isActiveDM = DashModule.identity
 		})
 	},
-	[eventNamesModule.PartyVoiceStateChangeHandlerRun] = {
-		context = contexts.PartyVoice,
-		eventType = eventTypes.PartyVoiceStateChangeHandlerRun,
-		formatRulesForAdditionalInfo = cryoModule.Dictionary.union(t, {
-			isActiveDM = dashModule.identity,
-			status = dashModule.identity,
-			detail = dashModule.identity
+	[EventNamesModule.PartyVoiceStateChangeHandlerRun] = {
+		context = Contexts.PartyVoice,
+		eventType = EventTypes.PartyVoiceStateChangeHandlerRun,
+		formatRulesForAdditionalInfo = CryoModule.Dictionary.union(config, {
+			isActiveDM = DashModule.identity,
+			status = DashModule.identity,
+			detail = DashModule.identity
 		})
 	}
 }

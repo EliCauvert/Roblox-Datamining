@@ -1,59 +1,59 @@
-﻿local verifiedBadges = script:FindFirstAncestor("VerifiedBadges")
-local roduxModule = require(verifiedBadges.Parent.Rodux)
-local cryoModule = require(verifiedBadges.Parent.Cryo)
-local dependenciesModule = require(verifiedBadges.dependencies)
+﻿local VerifiedBadges = script:FindFirstAncestor("VerifiedBadges")
+local CryoModule = require(VerifiedBadges.Parent.Cryo)
+local DependenciesModule = require(VerifiedBadges.dependencies)
+local FFlagLuaAppEdpBackendV2HydrateLegacyIxp = require(VerifiedBadges.Parent.SharedFlags).FFlagLuaAppEdpBackendV2HydrateLegacyIxp
 
-local var1 = function(p1, p2)
-	-- upvalues: cryoModule (ref)
-	local t = {}
+local function v4(p1, List) --[[ Line: 24 ]]
+	-- upvalues: CryoModule (copy)
+	local Nones = {}
 	
-	for i, v in ipairs(p2) do
-		t[tostring(v.id)] = if v.hasVerifiedBadge then true else cryoModule.None
+	for _, value in ipairs(List) do
+		Nones[tostring(value.id)] = if value.hasVerifiedBadge then true else CryoModule.None
 	end
-	return cryoModule.Dictionary.join(p1, t)
+	return CryoModule.Dictionary.join(p1, Nones)
 end
 
-return roduxModule.createReducer({}, {
-	[dependenciesModule.UsersNetworking.GetUserV2FromUserId.Succeeded.name] = function(p3, p4)
-		-- upvalues: var1 (ref)
-		return var1(p3, { p4.responseBody })
+return require(VerifiedBadges.Parent.Rodux).createReducer({}, {
+	[DependenciesModule.UsersNetworking.GetUserV2FromUserId.Succeeded.name] = function(p2, p3) --[[ Line: 35 ]]
+		-- upvalues: v4 (copy)
+		return v4(p2, { p3.responseBody })
 	end,
-	[dependenciesModule.FriendsNetworking.GetFriendsFromUserId.Succeeded.name] = function(p3, p4)
-		-- upvalues: var1 (ref)
-		return var1(p3, p4.responseBody.data)
+	[DependenciesModule.FriendsNetworking.GetFriendsFromUserId.Succeeded.name] = function(p2, p3) --[[ Line: 39 ]]
+		-- upvalues: v4 (copy)
+		return v4(p2, p3.responseBody.data)
 	end,
-	AddGameDetails = function(p3, p4)
-		-- upvalues: cryoModule (ref)
-		local t = {}
+	AddGameDetails = function(p2, p3) --[[ Line: 43 ]]
+		-- upvalues: CryoModule (copy)
+		local Nones = {}
 		
-		for i, v in pairs(p4.gameDetails) do
-			local var2 = tostring(v.creator.id)
-			local hasVerifiedBadge = v.creator.hasVerifiedBadge
+		for _, gameDetail in pairs(p3.gameDetails) do
+			local Text = tostring(gameDetail.creator.id)
+			local HasVerifiedBadge = gameDetail.creator.hasVerifiedBadge
 			
-			if v.creator.type == Enum.CreatorType.User.Name then
-				t[var2] = if hasVerifiedBadge then true else cryoModule.None
+			if gameDetail.creator.type == Enum.CreatorType.User.Name then
+				Nones[Text] = if HasVerifiedBadge then true else CryoModule.None
 			end
 		end
-		return cryoModule.Dictionary.join(p3, t)
+		return CryoModule.Dictionary.join(p2, Nones)
 	end,
-	AddGameDetailsV2 = if require(verifiedBadges.Parent.SharedFlags).FFlagLuaAppEdpBackendV2HydrateLegacyDefault or require(verifiedBadges.Parent.SharedFlags).FFlagLuaAppEdpBackendV2HydrateLegacyIxp then function(p5, p6)
-		-- upvalues: cryoModule (ref)
-		local t = {}
+	AddGameDetailsV2 = if require(VerifiedBadges.Parent.SharedFlags).FFlagLuaAppEdpBackendV2HydrateLegacyDefault or FFlagLuaAppEdpBackendV2HydrateLegacyIxp then function(p4, p5) --[[ Line: 60 ]]
+		-- upvalues: CryoModule (copy)
+		local Nones = {}
 		
-		for i, v in pairs(p6.gameDetails) do
-			local var3 = tostring(v.creator.id)
-			local hasVerifiedBadge = v.creator.hasVerifiedBadge
+		for _, gameDetail in pairs(p5.gameDetails) do
+			local Text = tostring(gameDetail.creator.id)
+			local HasVerifiedBadge = gameDetail.creator.hasVerifiedBadge
 			
-			if v.creator.type == Enum.CreatorType.User.Name then
-				t[var3] = if hasVerifiedBadge then true else cryoModule.None
+			if gameDetail.creator.type == Enum.CreatorType.User.Name then
+				Nones[Text] = if HasVerifiedBadge then true else CryoModule.None
 			end
 		end
-		return cryoModule.Dictionary.join(p5, t)
+		return CryoModule.Dictionary.join(p4, Nones)
 	end else nil,
-	SetAssetInfoFromCatalogItemAction = function(value, p7)
-		-- upvalues: cryoModule (ref)
-		return if p7.assetData.creatorType == Enum.CreatorType.User.Name then cryoModule.Dictionary.join(value, {
-			[tostring(p7.assetData.creatorTargetId)] = if p7.assetData.creatorHasVerifiedBadge then true else cryoModule.None
-		}) else value
+	SetAssetInfoFromCatalogItemAction = function(p6, p7) --[[ Line: 77 ]]
+		-- upvalues: CryoModule (copy)
+		return if p7.assetData.creatorType == Enum.CreatorType.User.Name then CryoModule.Dictionary.join(p6, {
+			[tostring(p7.assetData.creatorTargetId)] = if p7.assetData.creatorHasVerifiedBadge then true else CryoModule.None
+		}) else p6
 	end
 })

@@ -1,54 +1,54 @@
 ﻿local _ = require(script.Parent.GameProtocolTypes)
-local t = {
-	new = function()
+local GameParamsModule = {
+	new = function() --[[ Line: 9 ]]
 		return { referralPage = "LuaChat" }
 	end
 }
 
-function t.fromPlaceId(p1, p2)
-	-- upvalues: t (ref)
-	local var1 = t.new()
-	var1.placeId = p1
-	var1.isTeamTest = p2
+function GameParamsModule.fromPlaceId(PlaceId, IsTeamTest) --[[ Line: 17 ]]
+	-- upvalues: GameParamsModule (copy)
+	local NewGameParams = GameParamsModule.new()
+	NewGameParams.placeId = PlaceId
+	NewGameParams.isTeamTest = IsTeamTest
 	
-	return var1
+	return NewGameParams
 end
 
-function t.fromUserId(p1, p2)
-	-- upvalues: t (ref)
-	local var1 = t.new()
-	var1.userId = p1
-	var1.placeId = p2
+function GameParamsModule.fromUserId(UserId, PlaceId) --[[ Line: 26 ]]
+	-- upvalues: GameParamsModule (copy)
+	local NewGameParams = GameParamsModule.new()
+	NewGameParams.userId = UserId
+	NewGameParams.placeId = PlaceId
 	
-	return var1
+	return NewGameParams
 end
 
-function t.fromPlaceInstance(p1, p2)
-	-- upvalues: t (ref)
-	local var1 = t.new()
-	var1.placeId = p1
-	var1.gameInstanceId = p2
+function GameParamsModule.fromPlaceInstance(PlaceId, GameInstanceId) --[[ Line: 33 ]]
+	-- upvalues: GameParamsModule (copy)
+	local NewGameParams = GameParamsModule.new()
+	NewGameParams.placeId = PlaceId
+	NewGameParams.gameInstanceId = GameInstanceId
 	
-	return var1
+	return NewGameParams
 end
 
-function t.fromConversationId(p1, p2)
-	-- upvalues: t (ref)
-	local var1 = t.new()
-	var1.placeId = p1
-	var1.conversationId = p2
+function GameParamsModule.fromConversationId(PlaceId, ConversationId) --[[ Line: 42 ]]
+	-- upvalues: GameParamsModule (copy)
+	local NewGameParams = GameParamsModule.new()
+	NewGameParams.placeId = PlaceId
+	NewGameParams.conversationId = ConversationId
 	
-	return var1
+	return NewGameParams
 end
 
-function t.fromParams(p1)
-	-- upvalues: t (ref)
-	local var1 = t.new()
+function GameParamsModule.fromParams(List) --[[ Line: 51 ]]
+	-- upvalues: GameParamsModule (copy)
+	local NewGameParams = GameParamsModule.new()
 	
-	for i, v in pairs(p1) do
-		var1[i] = v
+	for i, value in pairs(List) do
+		NewGameParams[i] = value
 	end
-	return var1
+	return NewGameParams
 end
 
-return t
+return GameParamsModule

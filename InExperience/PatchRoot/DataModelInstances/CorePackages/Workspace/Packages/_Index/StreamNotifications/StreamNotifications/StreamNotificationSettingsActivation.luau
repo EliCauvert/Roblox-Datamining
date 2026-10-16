@@ -1,26 +1,26 @@
-﻿local streamNotifications = script:FindFirstAncestor("StreamNotifications")
-local parent = streamNotifications.Parent
-local notificationHelper = require(parent.NotificationsCommon).NotificationHelper
-local navigateDownToNotificationSettings = require(parent.NavigationRodux).Thunks.NavigateDownToNotificationSettings
-local eventStream = require(streamNotifications.analytics.analyticsService).EventStream
-local analyticsConstantsModule = require(streamNotifications.analytics.analyticsConstants)
-local constantsModule = require(streamNotifications.constants)
+﻿local StreamNotifications = script:FindFirstAncestor("StreamNotifications")
+local Parent = StreamNotifications.Parent
+local NotificationHelper = require(Parent.NotificationsCommon).NotificationHelper
+local NavigateDownToNotificationSettingsFunction = require(Parent.NavigationRodux).Thunks.NavigateDownToNotificationSettings
+local EventStream = require(StreamNotifications.analytics.analyticsService).EventStream
+local AnalyticsConstantsModule = require(StreamNotifications.analytics.analyticsConstants)
+local ConstantsModule = require(StreamNotifications.constants)
 
 return {
-	createOnSettingsActivated = function(value, p1, p2, p3)
-		-- upvalues: notificationHelper (ref), eventStream (ref), analyticsConstantsModule (ref), constantsModule (ref), navigateDownToNotificationSettings (ref)
-		return function()
-			-- upvalues: value (ref), notificationHelper (copy), eventStream (copy), analyticsConstantsModule (copy), constantsModule (copy), p1 (ref), p2 (ref), p3 (ref), navigateDownToNotificationSettings (copy)
-			if not value then return end
-			notificationHelper.fireEvent(eventStream, analyticsConstantsModule.Context.click, analyticsConstantsModule.EventNames.goToSettingPage, {
+	createOnSettingsActivated = function(p1, p2, Callback, Callback1) --[[ Line: 11 ]]
+		-- upvalues: NotificationHelper (copy), EventStream (copy), AnalyticsConstantsModule (copy), ConstantsModule (copy), NavigateDownToNotificationSettingsFunction (copy)
+		return function() --[[ Line: 17 ]]
+			-- upvalues: p1 (copy), NotificationHelper (upval), EventStream (upval), AnalyticsConstantsModule (upval), ConstantsModule (upval), p2 (copy), Callback (copy), Callback1 (copy), NavigateDownToNotificationSettingsFunction (upval)
+			if not p1 then return end
+			NotificationHelper.fireEvent(EventStream, AnalyticsConstantsModule.Context.click, AnalyticsConstantsModule.EventNames.goToSettingPage, {
 				in_app = true,
-				sendrVersion = constantsModule.SENDRVersion
+				sendrVersion = ConstantsModule.SENDRVersion
 			})
 			
-			if p1 then
-				p2(false)
+			if p2 then
+				Callback(false)
 			end
-			p3(navigateDownToNotificationSettings())
+			Callback1(NavigateDownToNotificationSettingsFunction())
 		end
 	end
 }

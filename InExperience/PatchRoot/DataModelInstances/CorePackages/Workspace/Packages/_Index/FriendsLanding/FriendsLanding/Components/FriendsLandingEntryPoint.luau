@@ -1,29 +1,29 @@
-﻿local friendsLanding = script:FindFirstAncestor("FriendsLanding")
-local parent = friendsLanding.Parent
-local dependenciesModule = require(friendsLanding.dependencies)
-local roact = dependenciesModule.Roact
-local logger = dependenciesModule.Logger
-local roactRodux = dependenciesModule.RoactRodux
-local roactAppExperiment = dependenciesModule.RoactAppExperiment
-local friendsLandingContextModule = require(friendsLanding.FriendsLandingContext)
-local friendsLandingAnalyticsModule = require(friendsLanding.FriendsLandingAnalytics)
-local navigatorModule = require(friendsLanding.Navigator)
-local enumScreensModule = require(friendsLanding.EnumScreens)
-local filterStatesModule = require(friendsLanding.Friends.filterStates)
-local memoize = dependenciesModule.memoize
-local bottomInsetBackground = dependenciesModule.SocialCommon.Components.BottomInsetBackground
-local compose = dependenciesModule.SocialLibraries.RoduxTools.compose
-local mapStateToPropsModule = require(script.mapStateToProps)
-local mapDispatchToPropsModule = require(script.mapDispatchToProps)
-local withLocalization = dependenciesModule.withLocalization
-local getFStringSocialAddFriendsPageLayer = dependenciesModule.getFStringSocialAddFriendsPageLayer
-local fFlagContactImporterIXPCleanup = require(parent.SharedFlags).FFlagContactImporterIXPCleanup
-local fFlagFriendsPageAlwaysOpenPPV = require(parent.SharedFlags).FFlagFriendsPageAlwaysOpenPPV
+﻿local FriendsLanding = script:FindFirstAncestor("FriendsLanding")
+local Parent = FriendsLanding.Parent
+local DependenciesModule = require(FriendsLanding.dependencies)
+local Roact = DependenciesModule.Roact
+local Logger = DependenciesModule.Logger
+local RoactRodux = DependenciesModule.RoactRodux
+local RoactAppExperiment = DependenciesModule.RoactAppExperiment
+local FriendsLandingContextModule = require(FriendsLanding.FriendsLandingContext)
+local FriendsLandingAnalyticsModule = require(FriendsLanding.FriendsLandingAnalytics)
+local NavigatorModule = require(FriendsLanding.Navigator)
+local EnumScreensModule = require(FriendsLanding.EnumScreens)
+local FilterStatesModule = require(FriendsLanding.Friends.filterStates)
+local MemoizeFunction = DependenciesModule.memoize
+local BottomInsetBackground = DependenciesModule.SocialCommon.Components.BottomInsetBackground
+local ComposeFunction = DependenciesModule.SocialLibraries.RoduxTools.compose
+local MapStateToPropsModule = require(script.mapStateToProps)
+local MapDispatchToPropsModule = require(script.mapDispatchToProps)
+local WithLocalizationFunction = DependenciesModule.withLocalization
+local GetFStringSocialAddFriendsPageLayerFunction = DependenciesModule.getFStringSocialAddFriendsPageLayer
+local FFlagContactImporterIXPCleanup = require(Parent.SharedFlags).FFlagContactImporterIXPCleanup
+local FFlagFriendsPageAlwaysOpenPPV = require(Parent.SharedFlags).FFlagFriendsPageAlwaysOpenPPV
 
-local var1 = function() end
+local function v17() --[[ Line: 29 ]] end
 
-local friendsLandingEntryPoint = roact.PureComponent:extend("FriendsLandingEntryPoint")
-friendsLandingEntryPoint.defaultProps = {
+local FriendsLandingEntryPoint = Roact.PureComponent:extend("FriendsLandingEntryPoint")
+FriendsLandingEntryPoint.defaultProps = {
 	renderAndroidBackButtonNavigationHandler = nil,
 	isLuobu = false,
 	logger = nil,
@@ -31,59 +31,61 @@ friendsLandingEntryPoint.defaultProps = {
 	luaAppPages = {}
 }
 
-function friendsLandingEntryPoint.init(p1)
-	-- upvalues: logger (ref), filterStatesModule (ref), enumScreensModule (ref), var1 (ref), memoize (ref), friendsLandingAnalyticsModule (ref)
+function FriendsLandingEntryPoint.init(p1) --[[ Line: 45 ]]
+	-- upvalues: Logger (copy), FilterStatesModule (copy), EnumScreensModule (copy), v17 (copy), MemoizeFunction (copy), FriendsLandingAnalyticsModule (copy)
 	if p1.props.logger then
-		logger:setParent(p1.props.logger)
+		Logger:setParent(p1.props.logger)
 	end
 	p1.state = {
-		filter = filterStatesModule.All,
+		filter = FilterStatesModule.All,
 		topBar = {
-			[enumScreensModule.FriendsLanding] = { shouldRenderCenter = false }
+			[EnumScreensModule.FriendsLanding] = { shouldRenderCenter = false }
 		}
 	}
 	p1.localization = { pageError = "CommonUI.Messages.Response.PageError" }
 	
-	function p0.setFilterKeys(p2)
-		-- upvalues: p1 (ref)
-		assert(type(p2) == "string", "Expected value to be a string")
-		p1:setState({ filter = p2 })
+	function p1.setFilterKeys(Filter) --[[ Line: 63 ]]
+		-- upvalues: p1 (copy)
+		assert(type(Filter) == "string", "Expected value to be a string")
+		p1:setState({ filter = Filter })
 	end
 	
-	function p0.showErrorToast(p2)
-		-- upvalues: p1 (ref), enumScreensModule (copy)
-		p1.props.navigation.navigate(enumScreensModule.GenericToast, { toastProps = { toastContent = { toastTitle = p2 } } })
-	end
-	
-	function p0.refreshPage(p2)
-		-- upvalues: p1 (ref), logger (copy), var1 (copy)
-		return p1.props.refreshPageData({
-			localUserId = p1.props.localUserId,
-			inactiveFriendsNetworkRequestStatus = p1.props.inactiveFriendsNetworkRequestStatus,
-			onError = function()
-				-- upvalues: p1 (copy), p2 (ref), logger (copy)
-				p1.showErrorToast(p2.errorMessage)
-				logger:info("Refreshing FriendsLanding data failed")
-			end,
-			onResolve = p2.onResolve or var1
+	function p1.showErrorToast(ToastTitle) --[[ Line: 68 ]]
+		-- upvalues: p1 (copy), EnumScreensModule (upval)
+		p1.props.navigation.navigate(EnumScreensModule.GenericToast, {
+			toastProps = { toastContent = { toastTitle = ToastTitle } }
 		})
 	end
 	
-	p1.getAnalytics = memoize(function(p2)
-		-- upvalues: friendsLandingAnalyticsModule (copy), p1 (ref)
-		return friendsLandingAnalyticsModule.Class.new({
+	function p1.refreshPage(p2) --[[ Line: 78 ]]
+		-- upvalues: p1 (copy), Logger (upval), v17 (upval)
+		return p1.props.refreshPageData({
+			localUserId = p1.props.localUserId,
+			inactiveFriendsNetworkRequestStatus = p1.props.inactiveFriendsNetworkRequestStatus,
+			onError = function() --[[ Line: 82 ]]
+				-- upvalues: p1 (upval), p2 (copy), Logger (upval)
+				p1.showErrorToast(p2.errorMessage)
+				Logger:info("Refreshing FriendsLanding data failed")
+			end,
+			onResolve = p2.onResolve or v17
+		})
+	end
+	
+	p1.getAnalytics = MemoizeFunction(function(p2) --[[ Line: 90 ]]
+		-- upvalues: FriendsLandingAnalyticsModule (upval), p1 (copy)
+		return FriendsLandingAnalyticsModule.Class.new({
 			Diag = p1.props.diagService,
 			EventStream = p1.props.eventIngestService
 		}, p2, p1.props.getLoadingTimeInfo)
 	end)
 end
 
-function friendsLandingEntryPoint.render(p1)
-	-- upvalues: withLocalization (ref), roact (ref), friendsLandingAnalyticsModule (ref), friendsLandingContextModule (ref), fFlagContactImporterIXPCleanup (ref), fFlagFriendsPageAlwaysOpenPPV (ref), navigatorModule (ref), bottomInsetBackground (ref)
-	return withLocalization(p1.localization)(function(_)
-		-- upvalues: roact (copy), friendsLandingAnalyticsModule (copy), p1 (ref), friendsLandingContextModule (copy), fFlagContactImporterIXPCleanup (copy), fFlagFriendsPageAlwaysOpenPPV (copy), navigatorModule (copy), bottomInsetBackground (copy)
-		return roact.createElement(friendsLandingAnalyticsModule.Context.Provider, { value = p1.getAnalytics(p1.props.localUserId) }, {
-			roact.createElement(friendsLandingContextModule.Provider, {
+function FriendsLandingEntryPoint.render(p1) --[[ Line: 98 ]]
+	-- upvalues: WithLocalizationFunction (copy), Roact (copy), FriendsLandingAnalyticsModule (copy), FriendsLandingContextModule (copy), FFlagContactImporterIXPCleanup (copy), FFlagFriendsPageAlwaysOpenPPV (copy), NavigatorModule (copy), BottomInsetBackground (copy)
+	return WithLocalizationFunction(p1.localization)(function(_) --[[ Line: 99 ]]
+		-- upvalues: Roact (upval), FriendsLandingAnalyticsModule (upval), p1 (copy), FriendsLandingContextModule (upval), FFlagContactImporterIXPCleanup (upval), FFlagFriendsPageAlwaysOpenPPV (upval), NavigatorModule (upval), BottomInsetBackground (upval)
+		return Roact.createElement(FriendsLandingAnalyticsModule.Context.Provider, { value = p1.getAnalytics(p1.props.localUserId) }, {
+			Roact.createElement(FriendsLandingContextModule.Provider, {
 				value = {
 					navigateToLuaAppPages = p1.props.navigateToLuaAppPages,
 					filter = p1.state.filter,
@@ -99,39 +101,39 @@ function friendsLandingEntryPoint.render(p1)
 					refreshPage = p1.refreshPage,
 					friendsRequestEventListener = p1.props.friendsRequestEventListener,
 					robloxEventReceiver = p1.props.robloxEventReceiver,
-					contactImporterAndPYMKEnabled = if fFlagContactImporterIXPCleanup then nil else p1.props.contactImporterAndPYMKEnabled,
-					contactImporterExperimentVariant = if fFlagContactImporterIXPCleanup then nil else p1.props.contactImporterExperimentVariant,
+					contactImporterAndPYMKEnabled = if FFlagContactImporterIXPCleanup then nil else p1.props.contactImporterAndPYMKEnabled,
+					contactImporterExperimentVariant = if FFlagContactImporterIXPCleanup then nil else p1.props.contactImporterExperimentVariant,
 					addFriendsPageSearchbarEnabled = p1.props.addFriendsPageSearchbarEnabled,
 					openProfilePeekView = p1.props.openProfilePeekView,
-					openPlayerContextualMenu = if fFlagFriendsPageAlwaysOpenPPV then nil else p1.props.openPlayerContextualMenu,
+					openPlayerContextualMenu = if FFlagFriendsPageAlwaysOpenPPV then nil else p1.props.openPlayerContextualMenu,
 					openAmpUpsell = p1.props.openAmpUpsell,
 					passedNavParams = p1.props.passedNavParams
 				}
 			}, {
-				navigation = roact.createElement(navigatorModule, { navigation = p1.props.navigation }),
-				BottomInsetBackground = roact.createElement(bottomInsetBackground)
+				navigation = Roact.createElement(NavigatorModule, { navigation = p1.props.navigation }),
+				BottomInsetBackground = Roact.createElement(BottomInsetBackground)
 			})
 		})
 	end)
 end
 
-function friendsLandingEntryPoint.didMount(_)
-	-- upvalues: logger (ref)
-	logger:info("FriendsLandingEntryPoint mounted")
+function FriendsLandingEntryPoint:didMount() --[[ Line: 145 ]]
+	-- upvalues: Logger (copy)
+	Logger:info("FriendsLandingEntryPoint mounted")
 end
 
-function friendsLandingEntryPoint.willUnmount(p1)
-	-- upvalues: logger (ref)
-	logger:info("FriendsLandingEntryPoint unmounted")
+function FriendsLandingEntryPoint.willUnmount(p1) --[[ Line: 149 ]]
+	-- upvalues: Logger (copy)
+	Logger:info("FriendsLandingEntryPoint unmounted")
 	
 	if p1.props.debug_willUnmount then
 		p1.props.debug_willUnmount()
 	end
 end
 
-return compose(roactRodux.connect(mapStateToPropsModule, mapDispatchToPropsModule), roactAppExperiment.connectUserLayer({ getFStringSocialAddFriendsPageLayer() }, function(p1, _)
-	-- upvalues: getFStringSocialAddFriendsPageLayer (ref)
+return (ComposeFunction(RoactRodux.connect(MapStateToPropsModule, MapDispatchToPropsModule), RoactAppExperiment.connectUserLayer({ GetFStringSocialAddFriendsPageLayerFunction() }, function(p1, _) --[[ Line: 160 ]]
+	-- upvalues: GetFStringSocialAddFriendsPageLayerFunction (copy)
 	return {
-		addFriendsPageSearchbarEnabled = (p1[getFStringSocialAddFriendsPageLayer()] or {}).show_add_friends_page_search_bar
+		addFriendsPageSearchbarEnabled = (p1[GetFStringSocialAddFriendsPageLayerFunction()] or {}).show_add_friends_page_search_bar
 	}
-end, false))(friendsLandingEntryPoint)
+end, false))(FriendsLandingEntryPoint))

@@ -1,85 +1,86 @@
-﻿local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local cryoModule = require(parent_1.Cryo)
-local foundationModule = require(parent_1.Foundation)
-local reactModule = require(parent_1.React)
-local _ = require(parent.Enums.NavigationType)
-local _ = require(parent.Signal)
-local view = foundationModule.View
-local useCallback = reactModule.useCallback
-local useEffect = reactModule.useEffect
-local useSnapScrollControllerModule = require(parent.Hooks.useSnapScrollController)
-local useState = reactModule.useState
+﻿local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local CryoModule = require(Parent1.Cryo)
+local ReactModule = require(Parent1.React)
+local _ = require(Parent.Enums.NavigationType)
+local _ = require(Parent.Signal)
+local View = require(Parent1.Foundation).View
+local UseCallbackFunction = ReactModule.useCallback
+local UseEffectFunction = ReactModule.useEffect
+local UseSnapScrollControllerModule = require(Parent.Hooks.useSnapScrollController)
+local UseStateFunction = ReactModule.useState
 
-return function(p1)
-	-- upvalues: useState (ref), useSnapScrollControllerModule (ref), useCallback (ref), useEffect (ref), reactModule (ref), cryoModule (ref), view (ref)
-	local var1, var2 = useState(Vector2.new(0, 0))
-	local var3 = p1.active ~= nil or p1.active
-	local initialIndex = p1.initialIndex or 1
-	local itemAbsoluteSize = p1.itemAbsoluteSize or var1
-	local windowSize = p1.windowSize or 3
-	local var4, var5, var6, var7, var8 = useSnapScrollControllerModule(var3, initialIndex, itemAbsoluteSize, #p1.contents)
-	local var9 = useCallback(function(p2)
-		-- upvalues: var2 (ref)
-		var2(p2.AbsoluteSize)
+return function(p1) --[[ Line: 33 ]]
+	-- upvalues: UseStateFunction (copy), UseSnapScrollControllerModule (copy), UseCallbackFunction (copy), UseEffectFunction (copy), ReactModule (copy), CryoModule (copy), View (copy)
+	local UseStateResult, UseStateResult2 = UseStateFunction(Vector2.new(0, 0))
+	local ItemAbsoluteSize = p1.itemAbsoluteSize or UseStateResult
+	local WindowSize = p1.windowSize or 3
+	local UseSnapScrollControllerModuleResult, UseSnapScrollControllerModuleResult2, UseSnapScrollControllerModuleResult3, UseSnapScrollControllerModuleResult4, UseSnapScrollControllerModuleResult5 = UseSnapScrollControllerModule(p1.active == nil or p1.active, p1.initialIndex or 1, ItemAbsoluteSize, #p1.contents)
+	local UseCallbackResult = UseCallbackFunction(function(Frame) --[[ Line: 44 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(Frame.AbsoluteSize)
 	end, {})
-	useEffect(function()
-		-- upvalues: p1 (ref), var4 (ref)
+	UseEffectFunction(function() --[[ Line: 48 ]]
+		-- upvalues: p1 (copy), UseSnapScrollControllerModuleResult (copy)
 		if p1.onIndexChanged then
-			p1.onIndexChanged(var4)
+			p1.onIndexChanged(UseSnapScrollControllerModuleResult)
 		end
-	end, { var4, p1.onIndexChanged })
-	local var10 = reactModule.useMemo(function()
-		-- upvalues: cryoModule (copy), p1 (ref), var4 (ref), windowSize (ref), reactModule (copy), view (copy), itemAbsoluteSize (ref)
-		return cryoModule.List.map(p1.contents, function(p2, p3)
-			-- upvalues: var4 (copy), windowSize (copy), reactModule (copy), view (copy), itemAbsoluteSize (copy), p1 (copy)
-			return if p3 < var4 - windowSize or var4 + windowSize < p3 then reactModule.createElement(view, {
+	end, { UseSnapScrollControllerModuleResult, p1.onIndexChanged })
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 54 ]]
+		-- upvalues: CryoModule (upval), p1 (copy), UseSnapScrollControllerModuleResult (copy), WindowSize (copy), ReactModule (upval), View (upval), ItemAbsoluteSize (copy)
+		return CryoModule.List.map(p1.contents, function(p2, LayoutOrder) --[[ Line: 55 ]]
+			-- upvalues: UseSnapScrollControllerModuleResult (upval), WindowSize (upval), ReactModule (upval), View (upval), ItemAbsoluteSize (upval), p1 (upval)
+			return if LayoutOrder < UseSnapScrollControllerModuleResult - WindowSize or UseSnapScrollControllerModuleResult + WindowSize < LayoutOrder then ReactModule.createElement(View, {
 				tag = "anchor-top-center bg-action-subtle position-top-center",
-				key = `PLACEHOLDER-{p3}`,
-				LayoutOrder = p3,
-				Size = UDim2.fromOffset(itemAbsoluteSize.X, itemAbsoluteSize.Y)
-			}) else p1.renderContent(p2, p3)
+				key = `PLACEHOLDER-{LayoutOrder}`,
+				LayoutOrder = LayoutOrder,
+				Size = UDim2.fromOffset(ItemAbsoluteSize.X, ItemAbsoluteSize.Y)
+			}) else p1.renderContent(p2, LayoutOrder)
 		end)
 	end, {
-		var4,
-		itemAbsoluteSize,
+		UseSnapScrollControllerModuleResult,
+		ItemAbsoluteSize,
 		p1.contents,
 		p1.renderContent,
-		windowSize
+		WindowSize
 	})
-	useEffect(function()
-		-- upvalues: p1 (ref), var7 (ref)
-		if p1.scrollToIndexSignal then
-			local scrollToIndexSignalConnection = p1.scrollToIndexSignal:connect(var7)
-			
-			return function()
-				-- upvalues: scrollToIndexSignalConnection (ref)
-				scrollToIndexSignalConnection:disconnect()
-			end
+	UseEffectFunction(function() --[[ Line: 68 ]]
+		-- upvalues: p1 (copy), UseSnapScrollControllerModuleResult4 (copy)
+		if not p1.scrollToIndexSignal then return end
+		local ScrollToIndexSignalConnection = p1.scrollToIndexSignal:connect(UseSnapScrollControllerModuleResult4)
+		
+		return function() --[[ Line: 74 ]]
+			-- upvalues: ScrollToIndexSignalConnection (copy)
+			ScrollToIndexSignalConnection:disconnect()
 		end
-	end, { p1.scrollToIndexSignal, var7 })
-	useEffect(function()
-		-- upvalues: p1 (ref), var8 (ref)
-		if p1.triggerNavigationSignal then
-			local triggerNavigationSignalConnection = p1.triggerNavigationSignal:connect(var8)
-			
-			return function()
-				-- upvalues: triggerNavigationSignalConnection (ref)
-				triggerNavigationSignalConnection:disconnect()
-			end
+	end, {
+		p1.scrollToIndexSignal,
+		UseSnapScrollControllerModuleResult4
+	})
+	UseEffectFunction(function() --[[ Line: 79 ]]
+		-- upvalues: p1 (copy), UseSnapScrollControllerModuleResult5 (copy)
+		if not p1.triggerNavigationSignal then return end
+		local TriggerNavigationSignalConnection = p1.triggerNavigationSignal:connect(UseSnapScrollControllerModuleResult5)
+		
+		return function() --[[ Line: 85 ]]
+			-- upvalues: TriggerNavigationSignalConnection (copy)
+			TriggerNavigationSignalConnection:disconnect()
 		end
-	end, { p1.triggerNavigationSignal, var8 })
+	end, {
+		p1.triggerNavigationSignal,
+		UseSnapScrollControllerModuleResult5
+	})
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "anchor-top-center bg-action-subtle position-top-center size-full",
-		onAbsoluteSizeChanged = var9,
-		ref = var5
+		onAbsoluteSizeChanged = UseCallbackResult,
+		ref = UseSnapScrollControllerModuleResult2
 	}, {
-		MotionView = reactModule.createElement(view, {
+		MotionView = ReactModule.createElement(View, {
 			LayoutOrder = 1,
 			tag = "align-x-center anchor-top-center bg-action-subtle col no-clip position-top-center",
-			ref = var6,
+			ref = UseSnapScrollControllerModuleResult3,
 			Size = UDim2.fromScale(1, #p1.contents)
-		}, var10)
+		}, UseMemoResult)
 	})
 end

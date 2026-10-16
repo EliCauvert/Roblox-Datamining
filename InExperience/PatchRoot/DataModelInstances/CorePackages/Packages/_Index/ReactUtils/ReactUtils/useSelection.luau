@@ -1,18 +1,18 @@
-﻿local reactUtils = script:FindFirstAncestor("ReactUtils")
-local reactModule = require(reactUtils.Parent.React)
-local useEventConnectionModule = require(reactUtils.useEventConnection)
+﻿local ReactUtils = script:FindFirstAncestor("ReactUtils")
+local ReactModule = require(ReactUtils.Parent.React)
+local UseEventConnectionModule = require(ReactUtils.useEventConnection)
 
-return function(p1)
-	-- upvalues: reactModule (ref), useEventConnectionModule (ref)
-	p1 = p1 or game:GetService("Selection")
-	local var1, var2 = reactModule.useState(function()
-		-- upvalues: p1 (ref)
-		return p1:Get()
+return function(p1) --[[ Line: 9 | Named "useSelection" ]]
+	-- upvalues: ReactModule (copy), UseEventConnectionModule (copy)
+	local P0 = p1 or game:GetService("Selection")
+	local UseStateResult, UseStateResult2 = ReactModule.useState(function() --[[ Line: 12 ]]
+		-- upvalues: P0 (copy)
+		return P0:Get()
 	end)
-	useEventConnectionModule(p1.SelectionChanged, function()
-		-- upvalues: var2 (ref), p1 (ref)
-		var2(p1:Get())
+	UseEventConnectionModule(P0.SelectionChanged, function() --[[ Line: 16 ]]
+		-- upvalues: UseStateResult2 (copy), P0 (copy)
+		UseStateResult2(P0:Get())
 	end, {})
 	
-	return var1
+	return UseStateResult
 end

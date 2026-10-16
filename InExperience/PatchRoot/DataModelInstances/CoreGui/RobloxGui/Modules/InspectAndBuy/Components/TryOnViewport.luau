@@ -1,33 +1,29 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local cryoModule = require(corePackagesService.Packages.Cryo)
-local parent = script.Parent.Parent
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local constantsModule = require(parent.Constants)
-local avatarViewportModule = require(parent.Components.AvatarViewport)
-local getHumanoidDescriptionFromCostumeIdModule = require(parent.Thunks.GetHumanoidDescriptionFromCostumeId)
-local getFFlagDisplayCollectiblesIconModule = require(parent.Flags.GetFFlagDisplayCollectiblesIcon)
-local tryOnViewport = roactModule.PureComponent:extend("TryOnViewport")
+﻿local CorePackages = game:GetService("CorePackages")
+local CryoModule = require(CorePackages.Packages.Cryo)
+local Parent = script.Parent.Parent
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local ConstantsModule = require(Parent.Constants)
+local AvatarViewportModule = require(Parent.Components.AvatarViewport)
+local GetHumanoidDescriptionFromCostumeIdModule = require(Parent.Thunks.GetHumanoidDescriptionFromCostumeId)
+local GetFFlagDisplayCollectiblesIconModule = require(Parent.Flags.GetFFlagDisplayCollectiblesIcon)
+local TryOnViewport = RoactModule.PureComponent:extend("TryOnViewport")
 
-local function _(p1)
-	local var1
-	if p1 and p1.parentBundleId ~= nil then
-		var1 = not p1.isForSale or false
-	end
-	return var1
+local function _(p1): boolean --[[ Line: 14 | Named "isPartOfBundleAndOffsale" ]]
+	return p1 and p1.parentBundleId ~= nil and not p1.isForSale or false
 end
 
-local _ = function(p1, p2)
-	-- upvalues: constantsModule (ref)
+local _ = function(p1, p2) --[[ Line: 18 | Named "createDefaultHumanoidDescriptionAccessoryInfo" ]]
+	-- upvalues: ConstantsModule (copy)
 	return {
 		AssetId = tonumber(p2),
-		Order = constantsModule.LayeredClothingOrder[p1],
-		AccessoryType = constantsModule.AssetTypeIdToAccessoryTypeEnum[p1],
-		IsLayered = constantsModule.LayeredAssetTypes[p1] ~= nil
+		Order = ConstantsModule.LayeredClothingOrder[p1],
+		AccessoryType = ConstantsModule.AssetTypeIdToAccessoryTypeEnum[p1],
+		IsLayered = ConstantsModule.LayeredAssetTypes[p1] ~= nil
 	}
 end
 
-function tryOnViewport.init(p1)
+function TryOnViewport.init(p1) --[[ Line: 27 ]]
 	p1.model = p1.props.localPlayerModel
 	p1.model.HumanoidRootPart.Anchored = true
 	p1.humanoidDescriptions = {}
@@ -35,183 +31,175 @@ function tryOnViewport.init(p1)
 	p1.state = { obtainedHumanoidDescriptions = {} }
 end
 
-function tryOnViewport.didMount(p1)
+function TryOnViewport.didMount(p1) --[[ Line: 37 ]]
 	p1.isMounted = true
 end
 
-function tryOnViewport.didUpdate(p1, p2)
-	-- upvalues: cryoModule (ref)
-	local assetInfo = p1.props.assetInfo
-	local bundles = p1.props.bundles
-	local tryingOnInfo = p1.props.tryingOnInfo
+function TryOnViewport.didUpdate(p1, p2) --[[ Line: 41 ]]
+	-- upvalues: CryoModule (copy)
+	local AssetInfo = p1.props.assetInfo
+	local Bundles = p1.props.bundles
+	local TryingOnInfo = p1.props.tryingOnInfo
 	
-	if tryingOnInfo ~= p2.tryingOnInfo and tryingOnInfo.tryingOn then
-		local var1
-		if assetInfo and assetInfo.parentBundleId ~= nil then
-			var1 = not assetInfo.isForSale or false
-		end
-		if var1 then
-			local costumeId = bundles[assetInfo.parentBundleId].costumeId
-			
-			if costumeId then
-				p1.props.getHumanoidDescriptionFromCostumeId(costumeId, function(p3)
-					-- upvalues: p1 (ref), costumeId (ref), cryoModule (copy)
-					if p1 and p1.isMounted then
-						p1.humanoidDescriptions[costumeId] = p3
-						p1:setState({
-							obtainedHumanoidDescriptions = cryoModule.Dictionary.join(p1.state.obtainedHumanoidDescriptions, { [costumeId] = true })
-						})
-					end
-				end)
-			end
+	if TryingOnInfo ~= p2.tryingOnInfo and TryingOnInfo.tryingOn and (AssetInfo and AssetInfo.parentBundleId ~= nil and not AssetInfo.isForSale or false) then
+		local CostumeId = Bundles[AssetInfo.parentBundleId].costumeId
+		
+		if CostumeId then
+			p1.props.getHumanoidDescriptionFromCostumeId(CostumeId, function(p3) --[[ Line: 53 ]]
+				-- upvalues: p1 (copy), CostumeId (copy), CryoModule (upval)
+				if p1 and p1.isMounted then
+					p1.humanoidDescriptions[CostumeId] = p3
+					p1:setState({
+						obtainedHumanoidDescriptions = CryoModule.Dictionary.join(p1.state.obtainedHumanoidDescriptions, { [CostumeId] = true })
+					})
+				end
+			end)
 		end
 	end
 end
 
-function tryOnViewport.tryOnBundleWithoutCostumeId(p1, p2, p3)
-	-- upvalues: constantsModule (ref)
+function TryOnViewport.tryOnBundleWithoutCostumeId(p1, ParentBundleId, Humanoid: Humanoid) --[[ Line: 72 ]]
+	-- upvalues: ConstantsModule (copy)
 	local t = {}
-	local t_1 = {}
-	local var1 = false
+	local t1 = {}
+	local Flag = false
 	
-	for i, v in pairs(p1.props.bundles[p2].assetIds) do
-		local var2 = p1.props.assets[v]
-		local assetTypeId = constantsModule.AssetTypeIdToAccessoryTypeEnum[var2.assetTypeId]
+	for _, assetId in pairs(p1.props.bundles[ParentBundleId].assetIds) do
+		local Asset = p1.props.assets[assetId]
+		local AssetTypeIdToAccessoryTypeEnumEntry = ConstantsModule.AssetTypeIdToAccessoryTypeEnum[Asset.assetTypeId]
 		
-		if assetTypeId then
-			t[assetTypeId] = true
-			local assetTypeId_1 = constantsModule.AssetTypeToAssetCategory[var2.assetTypeId]
+		if AssetTypeIdToAccessoryTypeEnumEntry then
+			t[AssetTypeIdToAccessoryTypeEnumEntry] = true
+			local AssetTypeToAssetCategoryEntry = ConstantsModule.AssetTypeToAssetCategory[Asset.assetTypeId]
 			
-			if assetTypeId_1 then
-				t_1[assetTypeId_1] = true
+			if AssetTypeToAssetCategoryEntry then
+				t1[AssetTypeToAssetCategoryEntry] = true
 			end
-			var1 = true
+			Flag = true
 		end
 	end
-	local var3 = p3:GetAccessories(true)
-	local t_2 = {}
+	local Accessories = Humanoid:GetAccessories(true)
+	local List = {}
 	
-	if var1 then
-		for i_1, v_1 in pairs(var3) do
-			local accessoryType = constantsModule.AssetTypeToAssetCategory[constantsModule.AccessoryTypeEnumToAssetTypeId[v_1.AccessoryType]]
+	if Flag then
+		for _, accessory in pairs(Accessories) do
+			local AssetTypeToAssetCategoryEntry = ConstantsModule.AssetTypeToAssetCategory[ConstantsModule.AccessoryTypeEnumToAssetTypeId[accessory.AccessoryType]]
+			local NoAssetTypeToAssetCategoryEntry: boolean = not AssetTypeToAssetCategoryEntry or not t1[AssetTypeToAssetCategoryEntry]
 			
-			if not t[v_1.AccessoryType] and (not accessoryType or not t_1[accessoryType]) then
-				table.insert(t_2, v_1)
+			if not t[accessory.AccessoryType] and NoAssetTypeToAssetCategoryEntry then
+				table.insert(List, accessory)
 			end
 		end
 	end
-	for i_1, v_1 in pairs(p1.props.bundles[p2].assetIds) do
-		local var4 = p1.props.assets[v_1]
+	for _, assetId1 in pairs(p1.props.bundles[ParentBundleId].assetIds) do
+		local Asset = p1.props.assets[assetId1]
 		
-		if constantsModule.AssetTypeIdToAccessoryTypeEnum[var4.assetTypeId] then
-			local assetTypeId = var4.assetTypeId
-			table.insert(t_2, {
-				AssetId = tonumber(v_1),
-				Order = constantsModule.LayeredClothingOrder[assetTypeId],
-				AccessoryType = constantsModule.AssetTypeIdToAccessoryTypeEnum[assetTypeId],
-				IsLayered = constantsModule.LayeredAssetTypes[assetTypeId] ~= nil
+		if ConstantsModule.AssetTypeIdToAccessoryTypeEnum[Asset.assetTypeId] then
+			local AssetTypeId = Asset.assetTypeId
+			table.insert(List, {
+				AssetId = tonumber(assetId1),
+				Order = ConstantsModule.LayeredClothingOrder[AssetTypeId],
+				AccessoryType = ConstantsModule.AssetTypeIdToAccessoryTypeEnum[AssetTypeId],
+				IsLayered = ConstantsModule.LayeredAssetTypes[AssetTypeId] ~= nil
 			})
 		else
-			p3[constantsModule.AssetTypeIdStringToHumanoidDescriptionProp[var4.assetTypeId]] = v_1
+			Humanoid[ConstantsModule.AssetTypeIdStringToHumanoidDescriptionProp[Asset.assetTypeId]] = assetId1
 		end
 	end
-	if var1 then
-		p3:SetAccessories(t_2, true)
+	if Flag then
+		Humanoid:SetAccessories(List, true)
 	end
-	return p3
+	return Humanoid
 end
 
-function tryOnViewport.render(p4)
-	-- upvalues: constantsModule (ref), roactModule (ref), getFFlagDisplayCollectiblesIconModule (ref), avatarViewportModule (ref)
-	local assetInfo = p4.props.assetInfo
-	local bundles = p4.props.bundles
-	local tryingOnInfo = p4.props.tryingOnInfo
-	local var5 = p4.humanoidDescriptionForLocalPlayer:Clone()
-	local tryingOn = tryingOnInfo.tryingOn
-	local setScrollingEnabled = p4.props.setScrollingEnabled
+function TryOnViewport.render(p2) --[[ Line: 126 ]]
+	-- upvalues: ConstantsModule (copy), RoactModule (copy), GetFFlagDisplayCollectiblesIconModule (copy), AvatarViewportModule (copy)
+	local AssetInfo = p2.props.assetInfo
+	local Bundles = p2.props.bundles
+	local TryingOnInfo = p2.props.tryingOnInfo
+	local HumanoidDescriptionForLocalPlayer = p2.humanoidDescriptionForLocalPlayer:Clone()
+	local TryingOn = TryingOnInfo.tryingOn
+	local SetScrollingEnabled = p2.props.setScrollingEnabled
 	
-	if tryingOnInfo and tryingOnInfo.tryingOn then
-		local var6
-		if assetInfo and assetInfo.parentBundleId ~= nil then
-			var6 = not assetInfo.isForSale or false
-		end
-		if var6 then
-			var6 = assetInfo.parentBundleId
-			local costumeId = bundles[var6].costumeId
+	if TryingOnInfo and TryingOnInfo.tryingOn then
+		if AssetInfo and AssetInfo.parentBundleId ~= nil and not AssetInfo.isForSale or false then
+			local ParentBundleId = AssetInfo.parentBundleId
+			local CostumeId = Bundles[ParentBundleId].costumeId
 			
-			if costumeId then
-				local var7 = p4.humanoidDescriptions[costumeId]
-				tryingOn = p4.state.obtainedHumanoidDescriptions[costumeId] == true
+			if CostumeId then
+				local HumanoidDescription = p2.humanoidDescriptions[CostumeId]
+				TryingOn = p2.state.obtainedHumanoidDescriptions[CostumeId] == true
 				
-				if var7 then
-					for i, v in pairs(constantsModule.AssetTypeIdStringToHumanoidDescriptionProp) do
-						if constantsModule.AssetTypeIdToAccessoryTypeEnum[i] == nil and tonumber(var7[v]) and tostring(var7[v]) ~= "0" then
-							var5[v] = var7[v]
+				if HumanoidDescription then
+					for i, value in pairs(ConstantsModule.AssetTypeIdStringToHumanoidDescriptionProp) do
+						if ConstantsModule.AssetTypeIdToAccessoryTypeEnum[i] == nil and tonumber(HumanoidDescription[value]) and tostring(HumanoidDescription[value]) ~= "0" then
+							HumanoidDescriptionForLocalPlayer[value] = HumanoidDescription[value]
 						end
 					end
-					var5:SetAccessories(var7:GetAccessories(true), true)
+					HumanoidDescriptionForLocalPlayer:SetAccessories(HumanoidDescription:GetAccessories(true), true)
 				end
 			else
-				var5 = p4:tryOnBundleWithoutCostumeId(var6, var5)
+				HumanoidDescriptionForLocalPlayer = p2:tryOnBundleWithoutCostumeId(ParentBundleId, HumanoidDescriptionForLocalPlayer)
 			end
-		elseif constantsModule.AssetTypeIdToAccessoryTypeEnum[tryingOnInfo.assetTypeId] then
-			var6 = constantsModule.AssetTypeIdToAccessoryTypeEnum[tryingOnInfo.assetTypeId]
-			local t = {}
+		elseif ConstantsModule.AssetTypeIdToAccessoryTypeEnum[TryingOnInfo.assetTypeId] then
+			local AssetTypeIdToAccessoryTypeEnumEntry = ConstantsModule.AssetTypeIdToAccessoryTypeEnum[TryingOnInfo.assetTypeId]
+			local List = {}
 			
-			for i, v in pairs(var5:GetAccessories(true)) do
-				local assetTypeId = constantsModule.AssetTypeToAssetCategory[tryingOnInfo.assetTypeId]
+			for _, accessory in pairs((HumanoidDescriptionForLocalPlayer:GetAccessories(true))) do
+				local AssetTypeToAssetCategoryEntry = ConstantsModule.AssetTypeToAssetCategory[TryingOnInfo.assetTypeId]
+				local AssetTypeToAssetCategoryEntry1 = ConstantsModule.AssetTypeToAssetCategory[ConstantsModule.AccessoryTypeEnumToAssetTypeId[accessory.AccessoryType]]
 				
-				if v.AccessoryType ~= var6 and (not assetTypeId or constantsModule.AssetTypeToAssetCategory[constantsModule.AccessoryTypeEnumToAssetTypeId[v.AccessoryType]] ~= assetTypeId) then
-					table.insert(t, v)
+				if accessory.AccessoryType ~= AssetTypeIdToAccessoryTypeEnumEntry and (not AssetTypeToAssetCategoryEntry or AssetTypeToAssetCategoryEntry1 ~= AssetTypeToAssetCategoryEntry) then
+					table.insert(List, accessory)
 				end
 			end
-			local assetTypeId = tryingOnInfo.assetTypeId
-			table.insert(t, {
-				AssetId = tonumber(tryingOnInfo.assetId),
-				Order = constantsModule.LayeredClothingOrder[assetTypeId],
-				AccessoryType = constantsModule.AssetTypeIdToAccessoryTypeEnum[assetTypeId],
-				IsLayered = constantsModule.LayeredAssetTypes[assetTypeId] ~= nil
+			local AssetTypeId = TryingOnInfo.assetTypeId
+			table.insert(List, {
+				AssetId = tonumber(TryingOnInfo.assetId),
+				Order = ConstantsModule.LayeredClothingOrder[AssetTypeId],
+				AccessoryType = ConstantsModule.AssetTypeIdToAccessoryTypeEnum[AssetTypeId],
+				IsLayered = ConstantsModule.LayeredAssetTypes[AssetTypeId] ~= nil
 			})
-			var5:SetAccessories(t, true)
+			HumanoidDescriptionForLocalPlayer:SetAccessories(List, true)
 		else
-			var5[constantsModule.AssetTypeIdStringToHumanoidDescriptionProp[tryingOnInfo.assetTypeId]] = tryingOnInfo.assetId
+			HumanoidDescriptionForLocalPlayer[ConstantsModule.AssetTypeIdStringToHumanoidDescriptionProp[TryingOnInfo.assetTypeId]] = TryingOnInfo.assetId
 		end
 	end
-	return roactModule.createElement("Frame", {
+	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		LayoutOrder = 2,
-		Size = UDim2.new(1, 0, 0, if getFFlagDisplayCollectiblesIconModule() then constantsModule.DetailsThumbnailFrameHeight else 300),
-		Visible = tryingOn
+		Size = UDim2.new(1, 0, 0, GetFFlagDisplayCollectiblesIconModule() and ConstantsModule.DetailsThumbnailFrameHeight or 300),
+		Visible = TryingOn
 	}, {
-		AvatarViewport = roactModule.createElement(avatarViewportModule, {
+		AvatarViewport = RoactModule.createElement(AvatarViewportModule, {
 			visible = true,
 			backgroundTransparency = 1,
 			size = UDim2.new(0.75, 0, 1, 0),
 			position = UDim2.new(0.5, 0, 0.5, 0),
-			humanoidDescription = var5,
-			model = p4.model,
-			setScrollingEnabled = setScrollingEnabled
+			humanoidDescription = HumanoidDescriptionForLocalPlayer,
+			model = p2.model,
+			setScrollingEnabled = SetScrollingEnabled
 		})
 	})
 end
 
-function tryOnViewport.willUnmount(p5)
-	p5.isMounted = false
+function TryOnViewport.willUnmount(p3) --[[ Line: 214 ]]
+	p3.isMounted = false
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p5, _)
+return RoactRoduxModule.UNSTABLE_connect2(function(p3, _) --[[ Line: 218 ]]
 	return {
-		assets = p5.assets,
-		assetInfo = p5.assets[p5.detailsInformation.assetId],
-		bundles = p5.bundles,
-		tryingOnInfo = p5.tryingOnInfo
+		assets = p3.assets,
+		assetInfo = p3.assets[p3.detailsInformation.assetId],
+		bundles = p3.bundles,
+		tryingOnInfo = p3.tryingOnInfo
 	}
-end, function(p5)
-	-- upvalues: getHumanoidDescriptionFromCostumeIdModule (ref)
+end, function(Callback) --[[ Line: 227 ]]
+	-- upvalues: GetHumanoidDescriptionFromCostumeIdModule (copy)
 	return {
-		getHumanoidDescriptionFromCostumeId = function(p6, p7)
-			-- upvalues: p5 (ref), getHumanoidDescriptionFromCostumeIdModule (copy)
-			return p5(getHumanoidDescriptionFromCostumeIdModule(p6, p7))
+		getHumanoidDescriptionFromCostumeId = function(p3, p4) --[[ Line: 229 ]]
+			-- upvalues: Callback (copy), GetHumanoidDescriptionFromCostumeIdModule (upval)
+			return Callback(GetHumanoidDescriptionFromCostumeIdModule(p3, p4))
 		end
 	}
-end)(tryOnViewport)
+end)(TryOnViewport)

@@ -1,132 +1,137 @@
-﻿local httpService = game:GetService("HttpService")
-local memStorageService = game:GetService("MemStorageService")
-local loggingProtocolModule = require(script:FindFirstAncestor("AuthAnalytics").Parent.LoggingProtocol)
-local telemetryConfigsModule = require(script.Parent.TelemetryConfigs)
+﻿local HttpService = game:GetService("HttpService")
+local MemStorageService = game:GetService("MemStorageService")
+local TelemetryConfigsModule = require(script.Parent.TelemetryConfigs)
 
-local function getWallClockMillis()
+local function getWallClockMillis() --[[ Line: 52 ]]
 	return DateTime.now().UnixTimestampMillis
 end
 
-local function createTimeToLoginTracker(p1, p2, p3, p4)
-	-- upvalues: getWallClockMillis (ref), memStorageService (ref), httpService (ref), telemetryConfigsModule (ref)
-	p2 = p2 or getWallClockMillis
-	p3 = p3 or memStorageService
-	p4 = p4 or httpService
+local function createTimeToLoginTracker(Default, p1, p2, p3) --[[ Line: 56 ]]
+	-- upvalues: getWallClockMillis (copy), MemStorageService (copy), HttpService (copy), TelemetryConfigsModule (copy)
+	local Callback = p1 or getWallClockMillis
+	local P2 = p2 or MemStorageService
+	local P3 = p3 or HttpService
 	
-	local function readPendingAttempt()
-		-- upvalues: p3 (ref), p4 (ref)
-		local timeToLoginPendingItem = p3:GetItem("TimeToLoginPending")
+	local function readPendingAttempt() --[[ Line: 66 ]]
+		-- upvalues: P2 (copy), P3 (copy)
+		local TimeToLoginPendingItem = P2:GetItem("TimeToLoginPending")
 		
-		if timeToLoginPendingItem == nil or timeToLoginPendingItem == "" then
+		if TimeToLoginPendingItem == nil or TimeToLoginPendingItem == "" then
 			return nil
 		end
-		local ok, status = pcall(function()
-			-- upvalues: p4 (copy), timeToLoginPendingItem (ref)
-			return p4:JSONDecode(timeToLoginPendingItem)
+		local Success, Result = pcall(function() --[[ Line: 72 ]]
+			-- upvalues: P3 (upval), TimeToLoginPendingItem (copy)
+			return P3:JSONDecode(TimeToLoginPendingItem)
 		end)
 		
-		if not ok or type(status) ~= "table" then
+		if Success and type(Result) == "table" then
+			local LoginType = Result.loginType
+			local IdentifierType = Result.identifierType
+			local StartTimeMillis = Result.startTimeMillis
+			
+			return if type(LoginType) == "string" and type(IdentifierType) == "string" and type(StartTimeMillis) == "number" then {
+				loginType = LoginType,
+				identifierType = IdentifierType,
+				startTimeMillis = StartTimeMillis,
+				twoStepVerification = Result.twoStepVerification == true
+			} else nil
+		else
 			return nil
 		end
-		local loginType = status.loginType
-		local identifierType = status.identifierType
-		local startTimeMillis = status.startTimeMillis
-		
-		return if type(loginType) == "string" and type(identifierType) == "string" and type(startTimeMillis) == "number" then {
-			loginType = loginType,
-			identifierType = identifierType,
-			startTimeMillis = startTimeMillis,
-			twoStepVerification = status.twoStepVerification == true
-		} else nil
 	end
 	
-	local function _(p5)
-		-- upvalues: p3 (ref), p4 (ref)
-		p3:SetItem("TimeToLoginPending", p4:JSONEncode({
-			loginType = p5.loginType,
-			identifierType = p5.identifierType,
-			startTimeMillis = p5.startTimeMillis,
-			twoStepVerification = p5.twoStepVerification
+	local function _(p4) --[[ Line: 94 | Named "writePendingAttempt" ]]
+		-- upvalues: P2 (copy), P3 (copy)
+		P2:SetItem("TimeToLoginPending", P3:JSONEncode({
+			loginType = p4.loginType,
+			identifierType = p4.identifierType,
+			startTimeMillis = p4.startTimeMillis,
+			twoStepVerification = p4.twoStepVerification
 		}))
 	end
 	
-	local function cancel()
-		-- upvalues: p3 (ref)
-		p3:SetItem("TimeToLoginPending", "")
+	local _ = function(p4) --[[ Line: 113 | Named "pendingAgeMillis" ]]
+		-- upvalues: Callback (copy)
+		return Callback() - p4.startTimeMillis
 	end
 	
-	local _ = function(p5)
-		-- upvalues: p2 (ref)
-		return p2() - p5.startTimeMillis
-	end
-	
-	local _ = function(p5, p6)
-		-- upvalues: p1 (ref), telemetryConfigsModule (copy)
-		p1:logRobloxTelemetryCounter(telemetryConfigsModule.TimeToLoginInvalidDurationConfig, 1, { loginType = p5.loginType, reason = p6 })
+	local _ = function(p4, Reason) --[[ Line: 117 | Named "reportInvalidDuration" ]]
+		-- upvalues: Default (copy), TelemetryConfigsModule (upval)
+		Default:logRobloxTelemetryCounter(TelemetryConfigsModule.TimeToLoginInvalidDurationConfig, 1, { loginType = p4.loginType, reason = Reason })
 	end
 	
 	return {
-		start = function(p5, p6)
-			-- upvalues: p2 (ref), p3 (ref), p4 (ref)
-			if p5 == nil or p5 == "" then
-				return
-			end
-			local t = {
-				twoStepVerification = false,
-				loginType = p5,
-				identifierType = p6 or "Unknown",
-				startTimeMillis = p2()
-			}
-			p3:SetItem("TimeToLoginPending", p4:JSONEncode({
-				loginType = t.loginType,
-				identifierType = t.identifierType,
-				startTimeMillis = t.startTimeMillis,
-				twoStepVerification = t.twoStepVerification
-			}))
-		end,
-		markTwoStepVerification = function()
-			-- upvalues: readPendingAttempt (ref), p3 (ref), p4 (ref)
-			local var1 = readPendingAttempt()
-			
-			if var1 == nil or var1.twoStepVerification then
-				return
-			end
-			var1.twoStepVerification = true
-			p3:SetItem("TimeToLoginPending", p4:JSONEncode({
-				loginType = var1.loginType,
-				identifierType = var1.identifierType,
-				startTimeMillis = var1.startTimeMillis,
-				twoStepVerification = var1.twoStepVerification
-			}))
-		end,
-		cancel = cancel,
-		finish = function()
-			-- upvalues: readPendingAttempt (ref), p3 (ref), p2 (ref), p1 (ref), telemetryConfigsModule (copy)
-			local var1 = readPendingAttempt()
-			
-			if var1 == nil then return end
-			p3:SetItem("TimeToLoginPending", "")
-			local var2 = p2() - var1.startTimeMillis
-			
-			if var2 < 0 then
-				p1:logRobloxTelemetryCounter(telemetryConfigsModule.TimeToLoginInvalidDurationConfig, 1, { reason = "negative", loginType = var1.loginType })
-				
-				return
-			elseif var2 > 600000 then
-				p1:logRobloxTelemetryCounter(telemetryConfigsModule.TimeToLoginInvalidDurationConfig, 1, { reason = "stale", loginType = var1.loginType })
+		start = function(LoginType, p4) --[[ Line: 153 ]]
+			-- upvalues: Callback (copy), P2 (copy), P3 (copy)
+			if LoginType ~= nil and LoginType ~= "" then
+				local config = {
+					twoStepVerification = false,
+					loginType = LoginType,
+					identifierType = p4 or "Unknown",
+					startTimeMillis = Callback()
+				}
+				P2:SetItem("TimeToLoginPending", P3:JSONEncode({
+					loginType = config.loginType,
+					identifierType = config.identifierType,
+					startTimeMillis = config.startTimeMillis,
+					twoStepVerification = config.twoStepVerification
+				}))
 				
 				return
 			end
-			p1:logRobloxTelemetryStat(telemetryConfigsModule.TimeToLoginStatConfig, math.floor(var2), {
-				loginType = var1.loginType,
-				identifierType = var1.identifierType,
-				twoStepVerification = tostring(var1.twoStepVerification)
-			})
+		end,
+		markTwoStepVerification = function() --[[ Line: 168 ]]
+			-- upvalues: readPendingAttempt (copy), P2 (copy), P3 (copy)
+			local PendingAttempt = readPendingAttempt()
+			
+			if PendingAttempt ~= nil and not PendingAttempt.twoStepVerification then
+				PendingAttempt.twoStepVerification = true
+				P2:SetItem("TimeToLoginPending", P3:JSONEncode({
+					loginType = PendingAttempt.loginType,
+					identifierType = PendingAttempt.identifierType,
+					startTimeMillis = PendingAttempt.startTimeMillis,
+					twoStepVerification = PendingAttempt.twoStepVerification
+				}))
+				
+				return
+			end
+		end,
+		cancel = function() --[[ Line: 106 ]]
+			-- upvalues: P2 (copy)
+			P2:SetItem("TimeToLoginPending", "")
+		end,
+		finish = function() --[[ Line: 124 ]]
+			-- upvalues: readPendingAttempt (copy), P2 (copy), Callback (copy), Default (copy), TelemetryConfigsModule (upval)
+			local PendingAttempt = readPendingAttempt()
+			
+			if PendingAttempt == nil then return end
+			P2:SetItem("TimeToLoginPending", "")
+			local CallbackResultDelta = Callback() - PendingAttempt.startTimeMillis
+			
+			if CallbackResultDelta < 0 then
+				Default:logRobloxTelemetryCounter(TelemetryConfigsModule.TimeToLoginInvalidDurationConfig, 1, {
+					reason = "negative",
+					loginType = PendingAttempt.loginType
+				})
+				
+				return
+			end
+			if CallbackResultDelta > 600000 then
+				Default:logRobloxTelemetryCounter(TelemetryConfigsModule.TimeToLoginInvalidDurationConfig, 1, { reason = "stale", loginType = PendingAttempt.loginType })
+				
+				return
+			else
+				Default:logRobloxTelemetryStat(TelemetryConfigsModule.TimeToLoginStatConfig, math.floor(CallbackResultDelta), {
+					loginType = PendingAttempt.loginType,
+					identifierType = PendingAttempt.identifierType,
+					twoStepVerification = tostring(PendingAttempt.twoStepVerification)
+				})
+			end
 		end
 	}
 end
 
 return {
 	create = createTimeToLoginTracker,
-	default = createTimeToLoginTracker(loggingProtocolModule.default)
+	default = createTimeToLoginTracker(require(script:FindFirstAncestor("AuthAnalytics").Parent.LoggingProtocol).default)
 }

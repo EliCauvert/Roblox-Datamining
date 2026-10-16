@@ -1,317 +1,329 @@
-﻿local runService = game:GetService("RunService")
-local parent = script:FindFirstAncestor("ScrollTelemetry").Parent
-local reactModule = require(parent.React)
-local fFlagLuaAppScrollDetectorLifecycleHardening = require(parent.SharedFlags).FFlagLuaAppScrollDetectorLifecycleHardening
+﻿local RunService = game:GetService("RunService")
+local Parent = script:FindFirstAncestor("ScrollTelemetry").Parent
+local ReactModule = require(Parent.React)
+local FFlagLuaAppScrollDetectorLifecycleHardening = require(Parent.SharedFlags).FFlagLuaAppScrollDetectorLifecycleHardening
 game:DefineFastInt("ScrollDetectorTimeThresholdMillis", 300000)
 game:DefineFastInt("ScrollDetectorDelayMillis", 250)
 
-local function _()
+local function _() --[[ Line: 12 | Named "getDelaySeconds" ]]
 	return game:GetFastInt("ScrollDetectorDelayMillis") / 1000
 end
 
-local _ = function()
+local _ = function() --[[ Line: 16 | Named "getThresholdSeconds" ]]
 	return game:GetFastInt("ScrollDetectorTimeThresholdMillis") / 1000
 end
 
-return function(p1)
-	-- upvalues: reactModule (ref), fFlagLuaAppScrollDetectorLifecycleHardening (ref), runService (ref)
-	local var1 = reactModule.useRef(0)
-	local var2 = reactModule.useRef(0)
-	local var3 = reactModule.useRef(nil)
-	local var4 = reactModule.useRef(nil)
-	local var5 = reactModule.useRef(0)
-	local var6 = reactModule.useRef(0)
-	local var7 = reactModule.useRef(nil)
-	local var8 = reactModule.useRef(p1.onScrollStart)
-	var8.current = p1.onScrollStart
-	local var9 = reactModule.useRef(p1.onScrollSettled)
-	var9.current = p1.onScrollSettled
+return function(p1) --[[ Line: 27 ]]
+	-- upvalues: ReactModule (copy), FFlagLuaAppScrollDetectorLifecycleHardening (copy), RunService (copy)
+	local UseRefResult = ReactModule.useRef(0)
+	local UseRefResult1 = ReactModule.useRef(0)
+	local UseRefResult2 = ReactModule.useRef(nil)
+	local UseRefResult3 = ReactModule.useRef(nil)
+	local UseRefResult4 = ReactModule.useRef(0)
+	local UseRefResult5 = ReactModule.useRef(0)
+	local UseRefResult6 = ReactModule.useRef(nil)
+	local UseRefResult7 = ReactModule.useRef(p1.onScrollStart)
+	UseRefResult7.current = p1.onScrollStart
+	local UseRefResult8 = ReactModule.useRef(p1.onScrollSettled)
+	UseRefResult8.current = p1.onScrollSettled
 	
-	if fFlagLuaAppScrollDetectorLifecycleHardening then
-		local var10 = reactModule.useRef(p1.sendScrollEvent)
-		var10.current = p1.sendScrollEvent
-		reactModule.useEffect(function()
-			-- upvalues: var1 (ref), var2 (ref), var10 (ref), var5 (ref), p1 (ref), var6 (ref), var3 (ref), var7 (ref), var9 (ref), var8 (ref), runService (copy), var4 (ref)
-			local _ = function(p2)
-				-- upvalues: var1 (copy), var2 (copy), var10 (copy), var5 (copy)
-				local var11 = var1.current - var2.current
+	if FFlagLuaAppScrollDetectorLifecycleHardening then
+		local UseRefResult9 = ReactModule.useRef(p1.sendScrollEvent)
+		UseRefResult9.current = p1.sendScrollEvent
+		ReactModule.useEffect(function() --[[ Line: 51 ]]
+			-- upvalues: UseRefResult (copy), UseRefResult1 (copy), UseRefResult9 (copy), UseRefResult4 (copy), p1 (copy), UseRefResult5 (copy), UseRefResult2 (copy), UseRefResult6 (copy), UseRefResult8 (copy), UseRefResult7 (copy), RunService (upval), UseRefResult3 (copy)
+			local function _(p2) --[[ Line: 52 ]]
+				-- upvalues: UseRefResult (upval), UseRefResult1 (upval), UseRefResult9 (upval), UseRefResult4 (upval)
+				local CurrentDelta = UseRefResult.current - UseRefResult1.current
 				
-				if var11 == 0 then return end
-				if var10.current then
-					var10.current(var11, p2 - var5.current, var2.current)
+				if CurrentDelta == 0 then return end
+				if UseRefResult9.current then
+					UseRefResult9.current(CurrentDelta, p2 - UseRefResult4.current, UseRefResult1.current)
 				end
 			end
 			
-			local var11 = function()
-				-- upvalues: p1 (copy), var6 (copy), var1 (copy), var2 (copy), var10 (copy), var5 (copy), var3 (copy), var7 (copy), var9 (copy)
+			local function v20() --[[ Line: 67 ]]
+				-- upvalues: p1 (upval), UseRefResult5 (upval), UseRefResult (upval), UseRefResult1 (upval), UseRefResult9 (upval), UseRefResult4 (upval), UseRefResult2 (upval), UseRefResult6 (upval), UseRefResult8 (upval)
 				if p1.scrollingFrameRef and p1.scrollingFrameRef.current then
-					local var12 = nil
-					local var13 = time()
-					local var14 = var13 - var5.current
+					local Current1 = nil
+					local CurrentTime = time()
+					local CurrentTimeDelta = CurrentTime - UseRefResult4.current
 					
 					if p1.scrollingFrameRef and p1.scrollingFrameRef.current then
-						var12 = if p1.scrollingFrameRef.current.ScrollingDirection == Enum.ScrollingDirection.Y then p1.scrollingFrameRef.current.CanvasPosition.Y else p1.scrollingFrameRef.current.CanvasPosition.X
+						Current1 = if p1.scrollingFrameRef.current.ScrollingDirection == Enum.ScrollingDirection.Y then p1.scrollingFrameRef.current.CanvasPosition.Y else p1.scrollingFrameRef.current.CanvasPosition.X
 					end
-					local var15 = var1.current - var2.current
-					local var16 = var12 - var1.current
+					local CurrentDelta = UseRefResult.current - UseRefResult1.current
+					local CurrentDelta1 = Current1 - UseRefResult.current
 					
-					if not var7.current and var16 == 0 then
-						var7.current = var6.current
-					elseif var7.current and var16 ~= 0 then
-						var7.current = nil
+					if UseRefResult6.current or CurrentDelta1 ~= 0 then
+						if UseRefResult6.current and CurrentDelta1 ~= 0 then
+							UseRefResult6.current = nil
+						end
+					else
+						UseRefResult6.current = UseRefResult5.current
 					end
-					if var7.current and var7.current + game:GetFastInt("ScrollDetectorDelayMillis") / 1000 < var13 then
-						var1.current = var12
-						local current = var7.current
-						local var17 = var1.current - var2.current
+					if UseRefResult6.current and UseRefResult6.current + game:GetFastInt("ScrollDetectorDelayMillis") / 1000 < CurrentTime then
+						UseRefResult.current = Current1
+						local Current = UseRefResult6.current
+						local CurrentDelta2 = UseRefResult.current - UseRefResult1.current
 						
-						if var17 ~= 0 and var10.current then
-							var10.current(var17, current - var5.current, var2.current)
+						if CurrentDelta2 ~= 0 and UseRefResult9.current then
+							UseRefResult9.current(CurrentDelta2, Current - UseRefResult4.current, UseRefResult1.current)
 						end
-						if var9.current then
-							var9.current(var1.current - var2.current)
+						if UseRefResult8.current then
+							UseRefResult8.current(UseRefResult.current - UseRefResult1.current)
 						end
-						var2.current = var12
-						local current_1 = var3.current
+						UseRefResult1.current = Current1
+						local Current2 = UseRefResult2.current
 						
-						if current_1 then
-							current_1:Disconnect()
+						if Current2 then
+							Current2:Disconnect()
 						end
-						var3.current = nil
+						UseRefResult2.current = nil
 						
 						return
-					elseif var15 ~= 0 and var16 ~= 0 and math.sign(var15) ~= math.sign(var16) then
-						local current = var6.current
-						local var18 = var1.current - var2.current
-						
-						if var18 ~= 0 and var10.current then
-							var10.current(var18, current - var5.current, var2.current)
+					else
+						if CurrentDelta == 0 or CurrentDelta1 == 0 or math.sign(CurrentDelta) == math.sign(CurrentDelta1) then
+							if not UseRefResult6.current and game:GetFastInt("ScrollDetectorTimeThresholdMillis") / 1000 <= CurrentTimeDelta then
+								UseRefResult.current = Current1
+								local CurrentDelta3 = UseRefResult.current - UseRefResult1.current
+								
+								if CurrentDelta3 ~= 0 and UseRefResult9.current then
+									UseRefResult9.current(CurrentDelta3, CurrentTime - UseRefResult4.current, UseRefResult1.current)
+								end
+								UseRefResult1.current = Current1
+								UseRefResult4.current = CurrentTime
+							end
+						else
+							local Current = UseRefResult5.current
+							local CurrentDelta4 = UseRefResult.current - UseRefResult1.current
+							
+							if CurrentDelta4 ~= 0 and UseRefResult9.current then
+								UseRefResult9.current(CurrentDelta4, Current - UseRefResult4.current, UseRefResult1.current)
+							end
+							UseRefResult1.current = UseRefResult.current
+							UseRefResult4.current = UseRefResult5.current
 						end
-						var2.current = var1.current
-						var5.current = var6.current
-					elseif not var7.current and game:GetFastInt("ScrollDetectorTimeThresholdMillis") / 1000 <= var14 then
-						var1.current = var12
-						local var19 = var1.current - var2.current
+						UseRefResult.current = Current1
+						UseRefResult5.current = CurrentTime
 						
-						if var19 ~= 0 and var10.current then
-							var10.current(var19, var13 - var5.current, var2.current)
-						end
-						var2.current = var12
-						var5.current = var13
+						return
 					end
-					var1.current = var12
-					var6.current = var13
-					
-					return
 				else
-					local current = var6.current
-					local var20 = var1.current - var2.current
+					local Current = UseRefResult5.current
+					local CurrentDelta = UseRefResult.current - UseRefResult1.current
 					
-					if var20 ~= 0 and var10.current then
-						var10.current(var20, current - var5.current, var2.current)
+					if CurrentDelta ~= 0 and UseRefResult9.current then
+						UseRefResult9.current(CurrentDelta, Current - UseRefResult4.current, UseRefResult1.current)
 					end
-					if var3.current then
-						var3.current:Disconnect()
+					if UseRefResult2.current then
+						UseRefResult2.current:Disconnect()
 					end
-					var3.current = nil
+					UseRefResult2.current = nil
 				end
 			end
 			
-			local var12 = function()
-				-- upvalues: var3 (copy), var5 (copy), var6 (copy), var2 (copy), var1 (copy), var7 (copy), var8 (copy), runService (copy), var11 (ref)
-				if not var3.current then
-					var5.current = time()
-					var6.current = var5.current
-					var2.current = var1.current
-					var7.current = nil
+			local function v21() --[[ Line: 139 ]]
+				-- upvalues: UseRefResult2 (upval), UseRefResult4 (upval), UseRefResult5 (upval), UseRefResult1 (upval), UseRefResult (upval), UseRefResult6 (upval), UseRefResult7 (upval), RunService (upval), v20 (copy)
+				if not UseRefResult2.current then
+					UseRefResult4.current = time()
+					UseRefResult5.current = UseRefResult4.current
+					UseRefResult1.current = UseRefResult.current
+					UseRefResult6.current = nil
 					
-					if var8.current then
-						var8.current()
+					if UseRefResult7.current then
+						UseRefResult7.current()
 					end
-					var3.current = runService.Stepped:Connect(function()
-						-- upvalues: var11 (copy)
-						var11()
+					UseRefResult2.current = RunService.Stepped:Connect(function() --[[ Line: 152 ]]
+						-- upvalues: v20 (upval)
+						v20()
 					end)
 				end
 			end
 			
-			local var13 = nil
+			local Connection = nil
 			
-			if p1.scrollingFrameRef and p1.scrollingFrameRef.current and var4.current ~= p1.scrollingFrameRef.current then
-				var1.current = if p1.scrollingFrameRef.current.ScrollingDirection == Enum.ScrollingDirection.Y then p1.scrollingFrameRef.current.CanvasPosition.Y else p1.scrollingFrameRef.current.CanvasPosition.X
-				var13 = p1.scrollingFrameRef.current:GetPropertyChangedSignal("CanvasPosition"):Connect(function()
-					-- upvalues: var12 (ref)
-					var12()
+			if p1.scrollingFrameRef and p1.scrollingFrameRef.current and UseRefResult3.current ~= p1.scrollingFrameRef.current then
+				UseRefResult.current = if p1.scrollingFrameRef.current.ScrollingDirection == Enum.ScrollingDirection.Y then p1.scrollingFrameRef.current.CanvasPosition.Y else p1.scrollingFrameRef.current.CanvasPosition.X
+				Connection = p1.scrollingFrameRef.current:GetPropertyChangedSignal("CanvasPosition"):Connect(function() --[[ Line: 170 ]]
+					-- upvalues: v21 (copy)
+					v21()
 				end)
-				var4.current = p1.scrollingFrameRef.current
+				UseRefResult3.current = p1.scrollingFrameRef.current
 			end
-			return function()
-				-- upvalues: var3 (copy), var6 (copy), var1 (copy), var2 (copy), var10 (copy), var5 (copy), var9 (copy), var13 (write), p1 (copy), var4 (copy)
-				if var3.current then
-					local current = var6.current
-					local var14 = var1.current - var2.current
+			return function() --[[ Line: 177 ]]
+				-- upvalues: UseRefResult2 (upval), UseRefResult5 (upval), UseRefResult (upval), UseRefResult1 (upval), UseRefResult9 (upval), UseRefResult4 (upval), UseRefResult8 (upval), Connection (ref), p1 (upval), UseRefResult3 (upval)
+				if UseRefResult2.current then
+					local Current = UseRefResult5.current
+					local CurrentDelta = UseRefResult.current - UseRefResult1.current
 					
-					if var14 ~= 0 and var10.current then
-						var10.current(var14, current - var5.current, var2.current)
+					if CurrentDelta ~= 0 and UseRefResult9.current then
+						UseRefResult9.current(CurrentDelta, Current - UseRefResult4.current, UseRefResult1.current)
 					end
-					var3.current:Disconnect()
+					UseRefResult2.current:Disconnect()
 					
-					if var9.current then
-						var9.current(var1.current - var2.current)
+					if UseRefResult8.current then
+						UseRefResult8.current(UseRefResult.current - UseRefResult1.current)
 					end
 				end
-				var3.current = nil
+				UseRefResult2.current = nil
 				
-				if var13 then
-					var13:Disconnect()
+				if Connection then
+					Connection:Disconnect()
 				end
-				var13 = nil
+				Connection = nil
 				
 				if not p1.scrollingFrameRef or not p1.scrollingFrameRef.current then
-					var4.current = nil
+					UseRefResult3.current = nil
 				end
 			end
 		end, { p1.scrollingFrameRef })
 	else
-		local _ = function(p2)
-			-- upvalues: var1 (ref), var2 (ref), p1 (ref), var5 (ref)
-			local var11 = var1.current - var2.current
+		local function _(p2) --[[ Line: 201 ]]
+			-- upvalues: UseRefResult (copy), UseRefResult1 (copy), p1 (copy), UseRefResult4 (copy)
+			local CurrentDelta = UseRefResult.current - UseRefResult1.current
 			
-			if var11 == 0 then return end
+			if CurrentDelta == 0 then return end
 			if p1.sendScrollEvent then
-				p1.sendScrollEvent(var11, p2 - var5.current, var2.current)
+				p1.sendScrollEvent(CurrentDelta, p2 - UseRefResult4.current, UseRefResult1.current)
 			end
 		end
 		
-		local var11 = function()
-			-- upvalues: p1 (ref), var6 (ref), var1 (ref), var2 (ref), var5 (ref), var3 (ref), var7 (ref), var9 (ref)
+		local function v17() --[[ Line: 212 ]]
+			-- upvalues: p1 (copy), UseRefResult5 (copy), UseRefResult (copy), UseRefResult1 (copy), UseRefResult4 (copy), UseRefResult2 (copy), UseRefResult6 (copy), UseRefResult8 (copy)
 			if p1.scrollingFrameRef and p1.scrollingFrameRef.current then
-				local var12 = nil
-				local var13 = time()
-				local var14 = var13 - var5.current
+				local Current1 = nil
+				local CurrentTime = time()
+				local CurrentTimeDelta = CurrentTime - UseRefResult4.current
 				
 				if p1.scrollingFrameRef and p1.scrollingFrameRef.current then
-					var12 = if p1.scrollingFrameRef.current.ScrollingDirection == Enum.ScrollingDirection.Y then p1.scrollingFrameRef.current.CanvasPosition.Y else p1.scrollingFrameRef.current.CanvasPosition.X
+					Current1 = if p1.scrollingFrameRef.current.ScrollingDirection == Enum.ScrollingDirection.Y then p1.scrollingFrameRef.current.CanvasPosition.Y else p1.scrollingFrameRef.current.CanvasPosition.X
 				end
-				local var15 = var1.current - var2.current
-				local var16 = var12 - var1.current
+				local CurrentDelta = UseRefResult.current - UseRefResult1.current
+				local CurrentDelta1 = Current1 - UseRefResult.current
 				
-				if not var7.current and var16 == 0 then
-					var7.current = var6.current
-				elseif var7.current and var16 ~= 0 then
-					var7.current = nil
+				if UseRefResult6.current or CurrentDelta1 ~= 0 then
+					if UseRefResult6.current and CurrentDelta1 ~= 0 then
+						UseRefResult6.current = nil
+					end
+				else
+					UseRefResult6.current = UseRefResult5.current
 				end
-				if var7.current and var7.current + game:GetFastInt("ScrollDetectorDelayMillis") / 1000 < var13 then
-					var1.current = var12
-					local current = var7.current
-					local var17 = var1.current - var2.current
+				if UseRefResult6.current and UseRefResult6.current + game:GetFastInt("ScrollDetectorDelayMillis") / 1000 < CurrentTime then
+					UseRefResult.current = Current1
+					local Current = UseRefResult6.current
+					local CurrentDelta2 = UseRefResult.current - UseRefResult1.current
 					
-					if var17 ~= 0 and p1.sendScrollEvent then
-						p1.sendScrollEvent(var17, current - var5.current, var2.current)
+					if CurrentDelta2 ~= 0 and p1.sendScrollEvent then
+						p1.sendScrollEvent(CurrentDelta2, Current - UseRefResult4.current, UseRefResult1.current)
 					end
-					if var9.current then
-						var9.current(var1.current - var2.current)
+					if UseRefResult8.current then
+						UseRefResult8.current(UseRefResult.current - UseRefResult1.current)
 					end
-					var2.current = var12
-					local current_1 = var3.current
+					UseRefResult1.current = Current1
+					local Current2 = UseRefResult2.current
 					
-					if current_1 then
-						current_1:Disconnect()
+					if Current2 then
+						Current2:Disconnect()
 					end
-					var3.current = nil
+					UseRefResult2.current = nil
 					
 					return
-				elseif var15 ~= 0 and var16 ~= 0 and math.sign(var15) ~= math.sign(var16) then
-					local current = var6.current
-					local var18 = var1.current - var2.current
-					
-					if var18 ~= 0 and p1.sendScrollEvent then
-						p1.sendScrollEvent(var18, current - var5.current, var2.current)
+				else
+					if CurrentDelta == 0 or CurrentDelta1 == 0 or math.sign(CurrentDelta) == math.sign(CurrentDelta1) then
+						if not UseRefResult6.current and game:GetFastInt("ScrollDetectorTimeThresholdMillis") / 1000 <= CurrentTimeDelta then
+							UseRefResult.current = Current1
+							local CurrentDelta3 = UseRefResult.current - UseRefResult1.current
+							
+							if CurrentDelta3 ~= 0 and p1.sendScrollEvent then
+								p1.sendScrollEvent(CurrentDelta3, CurrentTime - UseRefResult4.current, UseRefResult1.current)
+							end
+							UseRefResult1.current = Current1
+							UseRefResult4.current = CurrentTime
+						end
+					else
+						local Current = UseRefResult5.current
+						local CurrentDelta4 = UseRefResult.current - UseRefResult1.current
+						
+						if CurrentDelta4 ~= 0 and p1.sendScrollEvent then
+							p1.sendScrollEvent(CurrentDelta4, Current - UseRefResult4.current, UseRefResult1.current)
+						end
+						UseRefResult1.current = UseRefResult.current
+						UseRefResult4.current = UseRefResult5.current
 					end
-					var2.current = var1.current
-					var5.current = var6.current
-				elseif not var7.current and game:GetFastInt("ScrollDetectorTimeThresholdMillis") / 1000 <= var14 then
-					var1.current = var12
-					local var19 = var1.current - var2.current
+					UseRefResult.current = Current1
+					UseRefResult5.current = CurrentTime
 					
-					if var19 ~= 0 and p1.sendScrollEvent then
-						p1.sendScrollEvent(var19, var13 - var5.current, var2.current)
-					end
-					var2.current = var12
-					var5.current = var13
+					return
 				end
-				var1.current = var12
-				var6.current = var13
-				
-				return
 			else
-				local current = var6.current
-				local var20 = var1.current - var2.current
+				local Current = UseRefResult5.current
+				local CurrentDelta = UseRefResult.current - UseRefResult1.current
 				
-				if var20 ~= 0 and p1.sendScrollEvent then
-					p1.sendScrollEvent(var20, current - var5.current, var2.current)
+				if CurrentDelta ~= 0 and p1.sendScrollEvent then
+					p1.sendScrollEvent(CurrentDelta, Current - UseRefResult4.current, UseRefResult1.current)
 				end
-				if var3.current then
-					var3.current:Disconnect()
+				if UseRefResult2.current then
+					UseRefResult2.current:Disconnect()
 				end
-				var3.current = nil
+				UseRefResult2.current = nil
 			end
 		end
 		
-		local var12 = function()
-			-- upvalues: var3 (ref), var5 (ref), var6 (ref), var2 (ref), var1 (ref), var7 (ref), var8 (ref), runService (copy), var11 (ref)
-			if not var3.current then
-				var5.current = time()
-				var6.current = var5.current
-				var2.current = var1.current
-				var7.current = nil
+		local function v18() --[[ Line: 284 ]]
+			-- upvalues: UseRefResult2 (copy), UseRefResult4 (copy), UseRefResult5 (copy), UseRefResult1 (copy), UseRefResult (copy), UseRefResult6 (copy), UseRefResult7 (copy), RunService (upval), v17 (copy)
+			if not UseRefResult2.current then
+				UseRefResult4.current = time()
+				UseRefResult5.current = UseRefResult4.current
+				UseRefResult1.current = UseRefResult.current
+				UseRefResult6.current = nil
 				
-				if var8.current then
-					var8.current()
+				if UseRefResult7.current then
+					UseRefResult7.current()
 				end
-				var3.current = runService.Stepped:Connect(function()
-					-- upvalues: var11 (copy)
-					var11()
+				UseRefResult2.current = RunService.Stepped:Connect(function() --[[ Line: 297 ]]
+					-- upvalues: v17 (upval)
+					v17()
 				end)
 			end
 		end
 		
-		reactModule.useEffect(function()
-			-- upvalues: p1 (ref), var4 (ref), var1 (ref), var12 (ref), var3 (ref), var6 (ref), var2 (ref), var5 (ref), var9 (ref)
-			local var13 = nil
+		ReactModule.useEffect(function() --[[ Line: 303 ]]
+			-- upvalues: p1 (copy), UseRefResult3 (copy), UseRefResult (copy), v18 (copy), UseRefResult2 (copy), UseRefResult5 (copy), UseRefResult1 (copy), UseRefResult4 (copy), UseRefResult8 (copy)
+			local Connection = nil
 			
-			if p1.scrollingFrameRef and p1.scrollingFrameRef.current and var4.current ~= p1.scrollingFrameRef.current then
-				var1.current = if p1.scrollingFrameRef.current.ScrollingDirection == Enum.ScrollingDirection.Y then p1.scrollingFrameRef.current.CanvasPosition.Y else p1.scrollingFrameRef.current.CanvasPosition.X
-				var13 = p1.scrollingFrameRef.current:GetPropertyChangedSignal("CanvasPosition"):Connect(function()
-					-- upvalues: var12 (copy)
-					var12()
+			if p1.scrollingFrameRef and p1.scrollingFrameRef.current and UseRefResult3.current ~= p1.scrollingFrameRef.current then
+				UseRefResult.current = if p1.scrollingFrameRef.current.ScrollingDirection == Enum.ScrollingDirection.Y then p1.scrollingFrameRef.current.CanvasPosition.Y else p1.scrollingFrameRef.current.CanvasPosition.X
+				Connection = p1.scrollingFrameRef.current:GetPropertyChangedSignal("CanvasPosition"):Connect(function() --[[ Line: 316 ]]
+					-- upvalues: v18 (upval)
+					v18()
 				end)
-				var4.current = p1.scrollingFrameRef.current
+				UseRefResult3.current = p1.scrollingFrameRef.current
 			end
-			return function()
-				-- upvalues: var3 (copy), var6 (copy), var1 (copy), var2 (copy), p1 (copy), var5 (copy), var9 (copy), var13 (write), var4 (copy)
-				if var3.current then
-					local current = var6.current
-					local var14 = var1.current - var2.current
+			return function() --[[ Line: 323 ]]
+				-- upvalues: UseRefResult2 (upval), UseRefResult5 (upval), UseRefResult (upval), UseRefResult1 (upval), p1 (upval), UseRefResult4 (upval), UseRefResult8 (upval), Connection (ref), UseRefResult3 (upval)
+				if UseRefResult2.current then
+					local Current = UseRefResult5.current
+					local CurrentDelta = UseRefResult.current - UseRefResult1.current
 					
-					if var14 ~= 0 and p1.sendScrollEvent then
-						p1.sendScrollEvent(var14, current - var5.current, var2.current)
+					if CurrentDelta ~= 0 and p1.sendScrollEvent then
+						p1.sendScrollEvent(CurrentDelta, Current - UseRefResult4.current, UseRefResult1.current)
 					end
-					var3.current:Disconnect()
+					UseRefResult2.current:Disconnect()
 					
-					if var9.current then
-						var9.current(var1.current - var2.current)
+					if UseRefResult8.current then
+						UseRefResult8.current(UseRefResult.current - UseRefResult1.current)
 					end
 				end
-				var3.current = nil
+				UseRefResult2.current = nil
 				
-				if var13 then
-					var13:Disconnect()
+				if Connection then
+					Connection:Disconnect()
 				end
-				var13 = nil
+				Connection = nil
 				
 				if not p1.scrollingFrameRef or not p1.scrollingFrameRef.current then
-					var4.current = nil
+					UseRefResult3.current = nil
 				end
 			end
 		end, { p1.scrollingFrameRef })

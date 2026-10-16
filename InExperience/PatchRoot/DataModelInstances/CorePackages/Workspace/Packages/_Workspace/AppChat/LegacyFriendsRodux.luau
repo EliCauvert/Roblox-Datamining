@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Workspace.LegacyFriendsRodux.LegacyFriendsRodux)
+﻿return (require(script.Parent.Parent.Parent._Workspace.LegacyFriendsRodux.LegacyFriendsRodux))

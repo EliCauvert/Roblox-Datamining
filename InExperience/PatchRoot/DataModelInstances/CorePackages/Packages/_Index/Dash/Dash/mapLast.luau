@@ -1,11 +1,11 @@
-﻿return function(p1, p2)
+﻿return function(p1, Callback) --[[ Line: 12 | Named "mapLast" ]]
+	local CallbackResult = nil
 	for i = #p1, 1, -1 do
-		local var1 = p2(p1[i], i)
+		CallbackResult = Callback(p1[i], i)
 		
-		if var1 == nil then
-			continue
+		if CallbackResult ~= nil then
+			return CallbackResult
 		end
-		return var1
 	end
 	return nil
 end

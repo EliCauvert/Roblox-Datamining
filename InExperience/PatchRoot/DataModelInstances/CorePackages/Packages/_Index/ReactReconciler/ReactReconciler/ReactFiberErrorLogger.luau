@@ -1,51 +1,49 @@
-﻿local parent = script.Parent.Parent
-local reactGlobalsModule = require(parent.ReactGlobals)
-local luauPolyfillModule = require(parent.LuauPolyfill)
-local inspect = luauPolyfillModule.util.inspect
-local setTimeout = luauPolyfillModule.setTimeout
-local sharedModule = require(parent.Shared)
-local console = sharedModule.console
-local errorToString = sharedModule.errorToString
+﻿local Parent = script.Parent.Parent
+local ReactGlobalsModule = require(Parent.ReactGlobals)
+local LuauPolyfillModule = require(Parent.LuauPolyfill)
+local InspectFunction = LuauPolyfillModule.util.inspect
+local SetTimeoutFunction = LuauPolyfillModule.setTimeout
+local SharedModule = require(Parent.Shared)
+local Console = SharedModule.console
+local ErrorToStringFunction = SharedModule.errorToString
 local _ = require(script.Parent.ReactInternalTypes)
 local _ = require(script.Parent.ReactCapturedValue)
-local showErrorDialog = require(script.Parent.ReactFiberErrorDialog).showErrorDialog
-local classComponent = require(script.Parent.ReactWorkTags).ClassComponent
-local getComponentName = require(parent.Shared).getComponentName
+local ShowErrorDialogFunction = require(script.Parent.ReactFiberErrorDialog).showErrorDialog
+local ClassComponent = require(script.Parent.ReactWorkTags).ClassComponent
+local GetComponentNameFunction = require(Parent.Shared).getComponentName
 
 return {
-	logCapturedError = function(p1, p2)
-		-- upvalues: showErrorDialog (ref), reactGlobalsModule (ref), classComponent (ref), console (ref), getComponentName (ref), inspect (ref), setTimeout (ref), errorToString (ref)
-		local ok, status = pcall(function()
-			-- upvalues: showErrorDialog (copy), p1 (ref), p2 (ref), reactGlobalsModule (copy), classComponent (copy), console (copy), getComponentName (copy), inspect (copy)
-			if showErrorDialog(p1, p2) == false then
+	logCapturedError = function(p1, p2) --[[ Line: 34 ]]
+		-- upvalues: ShowErrorDialogFunction (copy), ReactGlobalsModule (copy), ClassComponent (copy), Console (copy), GetComponentNameFunction (copy), InspectFunction (copy), SetTimeoutFunction (copy), ErrorToStringFunction (copy)
+		local Success, Result = pcall(function() --[[ Line: 35 ]]
+			-- upvalues: ShowErrorDialogFunction (upval), p1 (copy), p2 (copy), ReactGlobalsModule (upval), ClassComponent (upval), Console (upval), GetComponentNameFunction (upval), InspectFunction (upval)
+			if ShowErrorDialogFunction(p1, p2) == false then
 				return nil
 			end
-			local value = p2.value
+			local Value = p2.value
 			
-			if reactGlobalsModule.__DEV__ then
-				local source = p2.source
-				local stack = p2.stack or ""
+			if ReactGlobalsModule.__DEV__ then
+				local Source = p2.source
+				local Stack = p2.stack or ""
 				
-				if value ~= nil and value._suppressLogging then
-					if p1.tag == classComponent then return end
-					console.error(value)
+				if Value ~= nil and Value._suppressLogging then
+					if p1.tag == ClassComponent then return end
+					Console.error(Value)
 				end
-				local var1 = if source ~= nil then nil else getComponentName(source.type)
-				local var2 = if var1 then "The above error occurred in the <" .. tostring(var1) .. "> component:" else "The above error occurred in one of your React components:"
-				local _ = nil
-				local var3 = getComponentName(p1.type)
-				console.error(var2 .. "\n" .. stack .. "\n\n" .. (if var3 then "React will try to recreate this component tree from scratch " .. "using the error boundary you provided, " .. var6 .. "." else "Consider adding an error boundary to your tree to customize error handling behavior.\nVisit https://reactjs.org/link/error-boundaries to learn more about error boundaries."))
+				local ComponentName = if Source == nil then nil else GetComponentNameFunction(Source.type)
+				local ComponentName1 = GetComponentNameFunction(p1.type)
+				Console.error((if ComponentName then "The above error occurred in the <" .. tostring(ComponentName) .. "> component:" else "The above error occurred in one of your React components:") .. "\n" .. Stack .. "\n\n" .. (if ComponentName1 then "React will try to recreate this component tree from scratch " .. "using the error boundary you provided, " .. ComponentName1 .. "." else "Consider adding an error boundary to your tree to customize error handling behavior.\nVisit https://reactjs.org/link/error-boundaries to learn more about error boundaries."))
 			else
-				console.error(inspect(value))
+				Console.error(InspectFunction(Value))
 			end
 			return nil
 		end)
 		
-		if not ok then
-			warn("failed to error with error: " .. inspect(status))
-			setTimeout(function()
-				-- upvalues: errorToString (copy), status (ref)
-				error(errorToString(status))
+		if not Success then
+			warn("failed to error with error: " .. InspectFunction(Result))
+			SetTimeoutFunction(function() --[[ Line: 126 ]]
+				-- upvalues: ErrorToStringFunction (upval), Result (copy)
+				error(ErrorToStringFunction(Result))
 			end)
 		end
 	end

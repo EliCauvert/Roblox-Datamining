@@ -1,1 +1,1 @@
-﻿return require(game:GetService("CorePackages").Packages.Result)
+﻿return (require(game:GetService("CorePackages").Packages.Result))

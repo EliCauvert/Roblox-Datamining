@@ -1,61 +1,55 @@
-﻿local cancelSubscriptionApp = script:FindFirstAncestor("CancelSubscriptionApp")
-local roduxModule = require(cancelSubscriptionApp.Parent.Rodux)
-local cancelUserSubscriptionAsyncPromptStateEnumModule = require(cancelSubscriptionApp.Enums.CancelUserSubscriptionAsyncPromptStateEnum)
-local cancelSubscriptionEndedModule = require(cancelSubscriptionApp.Store.Actions.CancelSubscriptionEnded)
-local cancelSubscriptionSucceededModule = require(cancelSubscriptionApp.Store.Actions.CancelSubscriptionSucceeded)
-local cancelSubscriptionFailedModule = require(cancelSubscriptionApp.Store.Actions.CancelSubscriptionFailed)
-local cancelSubscriptionStartedModule = require(cancelSubscriptionApp.Store.Actions.CancelSubscriptionStarted)
-local cancelSubscriptionRequestedModule = require(cancelSubscriptionApp.Store.Actions.CancelSubscriptionRequested)
-local _ = require(cancelSubscriptionApp.Store.Types)
+﻿local CancelSubscriptionApp = script:FindFirstAncestor("CancelSubscriptionApp")
+local CancelUserSubscriptionAsyncPromptStateEnumModule = require(CancelSubscriptionApp.Enums.CancelUserSubscriptionAsyncPromptStateEnum)
+local _ = require(CancelSubscriptionApp.Store.Types)
 
-local function _()
-	-- upvalues: cancelUserSubscriptionAsyncPromptStateEnumModule (ref)
+local function _() --[[ Line: 22 | Named "createInitialState" ]]
+	-- upvalues: CancelUserSubscriptionAsyncPromptStateEnumModule (copy)
 	return {
-		promptState = cancelUserSubscriptionAsyncPromptStateEnumModule.None
+		promptState = CancelUserSubscriptionAsyncPromptStateEnumModule.None
 	}
 end
 
-return roduxModule.createReducer({
-	promptState = cancelUserSubscriptionAsyncPromptStateEnumModule.None
+return (require(CancelSubscriptionApp.Parent.Rodux).createReducer({
+	promptState = CancelUserSubscriptionAsyncPromptStateEnumModule.None
 }, {
-	[cancelSubscriptionEndedModule.name] = function(_, _)
-		-- upvalues: cancelUserSubscriptionAsyncPromptStateEnumModule (ref)
+	[require(CancelSubscriptionApp.Store.Actions.CancelSubscriptionEnded).name] = function(_, _) --[[ Line: 29 ]]
+		-- upvalues: CancelUserSubscriptionAsyncPromptStateEnumModule (copy)
 		return {
-			promptState = cancelUserSubscriptionAsyncPromptStateEnumModule.None
+			promptState = CancelUserSubscriptionAsyncPromptStateEnumModule.None
 		}
 	end,
-	[cancelSubscriptionSucceededModule.name] = function(p1, p2)
-		-- upvalues: cancelUserSubscriptionAsyncPromptStateEnumModule (ref)
-		local cloned = table.clone(p1)
-		cloned.subscriptionId = p2.subscriptionId
-		cloned.promptState = cancelUserSubscriptionAsyncPromptStateEnumModule.Success
+	[require(CancelSubscriptionApp.Store.Actions.CancelSubscriptionSucceeded).name] = function(Tbl, p1) --[[ Line: 35 ]]
+		-- upvalues: CancelUserSubscriptionAsyncPromptStateEnumModule (copy)
+		local Copy = table.clone(Tbl)
+		Copy.subscriptionId = p1.subscriptionId
+		Copy.promptState = CancelUserSubscriptionAsyncPromptStateEnumModule.Success
 		
-		return cloned
+		return Copy
 	end,
-	[cancelSubscriptionFailedModule.name] = function(p1, p2)
-		-- upvalues: cancelUserSubscriptionAsyncPromptStateEnumModule (ref)
-		local cloned = table.clone(p1)
-		cloned.errorState = p2.errorState
-		cloned.subscriptionId = p2.subscriptionId
-		cloned.promptState = cancelUserSubscriptionAsyncPromptStateEnumModule.Error
+	[require(CancelSubscriptionApp.Store.Actions.CancelSubscriptionFailed).name] = function(Tbl, p1) --[[ Line: 44 ]]
+		-- upvalues: CancelUserSubscriptionAsyncPromptStateEnumModule (copy)
+		local Copy = table.clone(Tbl)
+		Copy.errorState = p1.errorState
+		Copy.subscriptionId = p1.subscriptionId
+		Copy.promptState = CancelUserSubscriptionAsyncPromptStateEnumModule.Error
 		
-		return cloned
+		return Copy
 	end,
-	[cancelSubscriptionRequestedModule.name] = function(p1, p2)
-		-- upvalues: cancelUserSubscriptionAsyncPromptStateEnumModule (ref)
-		local cloned = table.clone(p1)
-		cloned.subscriptionId = p2.subscriptionId
-		cloned.promptState = cancelUserSubscriptionAsyncPromptStateEnumModule.Pending
+	[require(CancelSubscriptionApp.Store.Actions.CancelSubscriptionRequested).name] = function(Tbl, p1) --[[ Line: 54 ]]
+		-- upvalues: CancelUserSubscriptionAsyncPromptStateEnumModule (copy)
+		local Copy = table.clone(Tbl)
+		Copy.subscriptionId = p1.subscriptionId
+		Copy.promptState = CancelUserSubscriptionAsyncPromptStateEnumModule.Pending
 		
-		return cloned
+		return Copy
 	end,
-	[cancelSubscriptionStartedModule.name] = function(p1, p2)
-		-- upvalues: cancelUserSubscriptionAsyncPromptStateEnumModule (ref)
-		local cloned = table.clone(p1)
-		cloned.promptState = cancelUserSubscriptionAsyncPromptStateEnumModule.Request
-		cloned.subscriptionId = p2.subscriptionId
-		cloned.expirationDate = p2.expirationDate
+	[require(CancelSubscriptionApp.Store.Actions.CancelSubscriptionStarted).name] = function(Tbl, p1) --[[ Line: 63 ]]
+		-- upvalues: CancelUserSubscriptionAsyncPromptStateEnumModule (copy)
+		local Copy = table.clone(Tbl)
+		Copy.promptState = CancelUserSubscriptionAsyncPromptStateEnumModule.Request
+		Copy.subscriptionId = p1.subscriptionId
+		Copy.expirationDate = p1.expirationDate
 		
-		return cloned
+		return Copy
 	end
-})
+}))

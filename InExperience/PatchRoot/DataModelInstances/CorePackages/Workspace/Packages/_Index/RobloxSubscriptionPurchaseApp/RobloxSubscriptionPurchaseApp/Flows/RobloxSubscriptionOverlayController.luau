@@ -1,72 +1,73 @@
-﻿local robloxSubscriptionPurchaseApp = script:FindFirstAncestor("RobloxSubscriptionPurchaseApp")
-local parent = robloxSubscriptionPurchaseApp.Parent
-local localizationService = game:GetService("LocalizationService")
-local reactModule = require(parent.React)
-local reactRobloxModule = require(parent.ReactRoblox)
-local styleModule = require(parent.Style)
-local roactRoduxModule = require(parent.RoactRodux)
-local roduxModule = require(parent.Rodux)
-local useSelectedTheme = require(parent.RoactUtils).Hooks.useSelectedTheme
-local styleProviderWithDefaultTheme = styleModule.StyleProviderWithDefaultTheme
-local foundationProvider = require(parent.Foundation).FoundationProvider
-local UIBloxModule = require(parent.UIBlox)
-local selectionCursorProvider = UIBloxModule.App.SelectionImage.SelectionCursorProvider
-local cursorProvider = UIBloxModule.App.SelectionCursor.CursorProvider
-local localization = require(parent.AppLocales).Localization
-local localizationProvider = require(parent.Localization).LocalizationProvider
-local providerContainer = require(parent.RoactUtils).Components.ProviderContainer
-local robloxSubscriptionContainerModule = require(robloxSubscriptionPurchaseApp.Components.RobloxSubscriptionContainer)
-local robloxSubscriptionStoreModule = require(robloxSubscriptionPurchaseApp.Store.RobloxSubscriptionStore)
-local var1 = nil
-local list = { roduxModule.thunkMiddleware }
+﻿local RobloxSubscriptionPurchaseApp = script:FindFirstAncestor("RobloxSubscriptionPurchaseApp")
+local Parent = RobloxSubscriptionPurchaseApp.Parent
+local LocalizationService = game:GetService("LocalizationService")
+local ReactModule = require(Parent.React)
+local ReactRobloxModule = require(Parent.ReactRoblox)
+local RoactRoduxModule = require(Parent.RoactRodux)
+local RoduxModule = require(Parent.Rodux)
+local UseSelectedThemeFunction = require(Parent.RoactUtils).Hooks.useSelectedTheme
+local StyleProviderWithDefaultTheme = require(Parent.Style).StyleProviderWithDefaultTheme
+local FoundationProvider = require(Parent.Foundation).FoundationProvider
+local UIBloxModule = require(Parent.UIBlox)
+local SelectionCursorProvider = UIBloxModule.App.SelectionImage.SelectionCursorProvider
+local CursorProvider = UIBloxModule.App.SelectionCursor.CursorProvider
+local Localization = require(Parent.AppLocales).Localization
+local LocalizationProvider = require(Parent.Localization).LocalizationProvider
+local ProviderContainer = require(Parent.RoactUtils).Components.ProviderContainer
+local RobloxSubscriptionContainerModule = require(RobloxSubscriptionPurchaseApp.Components.RobloxSubscriptionContainer)
+local RobloxSubscriptionStoreModule = require(RobloxSubscriptionPurchaseApp.Store.RobloxSubscriptionStore)
+local Callback: (() -> ())? = nil
+local list = { RoduxModule.thunkMiddleware }
 
-local function close()
-	-- upvalues: var1 (write)
-	if var1 then
-		var1()
-		var1 = nil
+local function close() --[[ Line: 42 ]]
+	-- upvalues: Callback (ref)
+	if Callback then
+		Callback()
+		Callback = nil
 	end
 end
 
-local function ThemedOverlay(p1)
-	-- upvalues: useSelectedTheme (ref), reactModule (ref), roduxModule (ref), list (ref), roactRoduxModule (ref), styleProviderWithDefaultTheme (ref), localizationProvider (ref), localization (ref), localizationService (ref), selectionCursorProvider (ref), cursorProvider (ref), foundationProvider (ref), providerContainer (ref), robloxSubscriptionContainerModule (ref)
-	local var2 = useSelectedTheme()
-	local var3 = reactModule.useMemo(function()
-		-- upvalues: roduxModule (copy), list (copy)
-		return roduxModule.Store.new(roduxModule.combineReducers({}), nil, list)
+local function ThemedOverlay(p1) --[[ Line: 49 ]]
+	-- upvalues: UseSelectedThemeFunction (copy), ReactModule (copy), RoduxModule (copy), list (copy), RoactRoduxModule (copy), StyleProviderWithDefaultTheme (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy), SelectionCursorProvider (copy), CursorProvider (copy), FoundationProvider (copy), ProviderContainer (copy), RobloxSubscriptionContainerModule (copy)
+	local UseSelectedThemeResult = UseSelectedThemeFunction()
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 52 ]]
+		-- upvalues: RoduxModule (upval), list (upval)
+		return RoduxModule.Store.new(RoduxModule.combineReducers({}), nil, list)
 	end, {})
 	
-	return reactModule.createElement(foundationProvider, { colorMode = if var2 == "light" then "Light" else "Dark" }, {
-		Providers = reactModule.createElement(providerContainer, {
-			providers = reactModule.useMemo(function()
-				-- upvalues: roactRoduxModule (copy), var3 (ref), styleProviderWithDefaultTheme (copy), var2 (ref), localizationProvider (copy), localization (copy), localizationService (copy), selectionCursorProvider (copy), cursorProvider (copy)
-				local t = {}
-				table.insert(t, {
-					class = roactRoduxModule.StoreProvider,
-					props = { store = var3 }
+	return ReactModule.createElement(FoundationProvider, {
+		colorMode = if UseSelectedThemeResult == "light" then "Light" else "Dark"
+	}, {
+		Providers = ReactModule.createElement(ProviderContainer, {
+			providers = ReactModule.useMemo(function() --[[ Line: 56 ]]
+				-- upvalues: RoactRoduxModule (upval), UseMemoResult (copy), StyleProviderWithDefaultTheme (upval), UseSelectedThemeResult (copy), LocalizationProvider (upval), Localization (upval), LocalizationService (upval), SelectionCursorProvider (upval), CursorProvider (upval)
+				local List = {}
+				table.insert(List, {
+					class = RoactRoduxModule.StoreProvider,
+					props = { store = UseMemoResult }
 				})
-				table.insert(t, {
-					class = styleProviderWithDefaultTheme,
+				table.insert(List, {
+					class = StyleProviderWithDefaultTheme,
 					props = {
 						withUiModeSupport = false,
-						withDarkTheme = var2 ~= "light"
+						withDarkTheme = UseSelectedThemeResult ~= "light"
 					}
 				})
-				table.insert(t, {
-					class = localizationProvider,
+				table.insert(List, {
+					class = LocalizationProvider,
 					props = {
-						localization = localization.new(localizationService.RobloxLocaleId)
+						localization = Localization.new(LocalizationService.RobloxLocaleId)
 					}
 				})
-				table.insert(t, { class = selectionCursorProvider, props = {} })
-				table.insert(t, { class = cursorProvider, props = {} })
+				table.insert(List, { class = SelectionCursorProvider, props = {} })
+				table.insert(List, { class = CursorProvider, props = {} })
 				
-				return t
-			end, { var2, var3 })
+				return List
+			end, { UseSelectedThemeResult, UseMemoResult })
 		}, {
-			Sheet = reactModule.createElement(robloxSubscriptionContainerModule, {
-				title = if p1.params then p1.params.title else nil,
-				message = if p1.params then p1.params.message else nil,
+			Sheet = ReactModule.createElement(RobloxSubscriptionContainerModule, {
+				title = p1.params and p1.params.title or nil,
+				message = p1.params and p1.params.message or nil,
 				onClose = p1.onClose
 			})
 		})
@@ -74,24 +75,24 @@ local function ThemedOverlay(p1)
 end
 
 return {
-	render = function(p1)
-		-- upvalues: robloxSubscriptionStoreModule (ref), reactRobloxModule (ref), reactModule (ref), ThemedOverlay (ref), close (ref), var1 (write)
-		local var2 = robloxSubscriptionStoreModule.get()
-		var2.triggerUnmountUI()
-		local robloxSubscriptionPurchaseOverlay = Instance.new("Folder")
-		robloxSubscriptionPurchaseOverlay.Name = "RobloxSubscriptionPurchaseOverlay"
-		robloxSubscriptionPurchaseOverlay.Parent = game:GetService("CoreGui")
-		local var3 = reactRobloxModule.createRoot(robloxSubscriptionPurchaseOverlay)
-		var3:render(reactModule.createElement(ThemedOverlay, { params = p1, onClose = close }))
+	render = function(Params) --[[ Line: 94 ]]
+		-- upvalues: RobloxSubscriptionStoreModule (copy), ReactRobloxModule (copy), ReactModule (copy), ThemedOverlay (copy), close (copy), Callback (ref)
+		local GetResult = RobloxSubscriptionStoreModule.get()
+		GetResult.triggerUnmountUI()
+		local RobloxSubscriptionPurchaseOverlay = Instance.new("Folder")
+		RobloxSubscriptionPurchaseOverlay.Name = "RobloxSubscriptionPurchaseOverlay"
+		RobloxSubscriptionPurchaseOverlay.Parent = game:GetService("CoreGui")
+		local Root = ReactRobloxModule.createRoot(RobloxSubscriptionPurchaseOverlay)
+		Root:render(ReactModule.createElement(ThemedOverlay, { params = Params, onClose = close }))
 		
-		local function cleanup()
-			-- upvalues: var3 (ref), robloxSubscriptionPurchaseOverlay (ref)
-			var3:unmount()
-			robloxSubscriptionPurchaseOverlay:Destroy()
+		local function cleanup() --[[ Line: 108 ]]
+			-- upvalues: Root (copy), RobloxSubscriptionPurchaseOverlay (copy)
+			Root:unmount()
+			RobloxSubscriptionPurchaseOverlay:Destroy()
 		end
 		
-		var1 = cleanup
-		var2.setOnUnmountUI(cleanup)
+		Callback = cleanup
+		GetResult.setOnUnmountUI(cleanup)
 		
 		return cleanup
 	end,

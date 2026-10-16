@@ -1,11 +1,11 @@
-﻿local parent = script:FindFirstAncestor("SduiSharedContent").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local _ = require(parent.SduiCompat)
+﻿local Parent = script:FindFirstAncestor("SduiSharedContent").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local _ = require(Parent.SduiCompat)
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), foundationModule (ref)
-	return reactModule.createElement(foundationModule.Icon, {
+return ReactModule.memo(function(p1) --[[ Line: 32 | Named "SduiIcon" ]]
+	-- upvalues: ReactModule (copy), FoundationModule (copy)
+	return ReactModule.createElement(FoundationModule.Icon, {
 		name = p1.name,
 		style = p1.style,
 		size = p1.size,

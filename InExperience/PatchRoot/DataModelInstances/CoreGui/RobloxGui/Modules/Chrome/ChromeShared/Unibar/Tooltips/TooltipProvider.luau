@@ -1,122 +1,122 @@
-﻿local reactModule = require(game:GetService("CorePackages").Packages.React)
-local tooltipContextModule = require(script.Parent.TooltipContext)
+﻿local ReactModule = require(game:GetService("CorePackages").Packages.React)
+local TooltipContextModule = require(script.Parent.TooltipContext)
 
-function TooltipProvider(p1)
-	-- upvalues: reactModule (ref), tooltipContextModule (ref)
-	local var1, var2 = reactModule.useState(nil)
-	local var3 = reactModule.useRef(nil)
-	local var4 = reactModule.useRef(nil)
-	local var5 = reactModule.useRef(nil)
-	local var6 = reactModule.useRef({})
-	local var7 = reactModule.useCallback(function(p2)
-		-- upvalues: var2 (ref), var3 (ref), var4 (ref)
-		var2(p2)
-		var3.current = p2
+function TooltipProvider(p1) --[[ Line: 29 ]]
+	-- upvalues: ReactModule (copy), TooltipContextModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseRefResult2 = ReactModule.useRef(nil)
+	local UseRefResult3 = ReactModule.useRef({})
+	local UseResult = ReactModule.useCallback(function(Current) --[[ Line: 40 ]]
+		-- upvalues: UseStateResult2 (copy), UseRefResult (copy), UseRefResult1 (copy)
+		UseStateResult2(Current)
+		UseRefResult.current = Current
 		
-		if var3.current and var4.current and var3.current.id == var4.current.id then
-			var4.current = nil
+		if UseRefResult.current and UseRefResult1.current and UseRefResult.current.id == UseRefResult1.current.id then
+			UseRefResult1.current = nil
 		end
 	end, {})
-	local var8 = reactModule.useCallback(function(p2)
-		-- upvalues: var3 (ref), var7 (ref), var4 (ref), var6 (ref)
-		if var3 and var3.current and var3.current.id == p2 then
-			var7(nil)
+	local UseResult1 = ReactModule.useCallback(function(Id) --[[ Line: 52 ]]
+		-- upvalues: UseRefResult (copy), UseResult (copy), UseRefResult1 (copy), UseRefResult3 (copy)
+		if UseRefResult and UseRefResult.current and UseRefResult.current.id == Id then
+			UseResult(nil)
 		end
-		if var4 and var4.current and var4.current.id == p2 then
-			var4.current = nil
+		if UseRefResult1 and UseRefResult1.current and UseRefResult1.current.id == Id then
+			UseRefResult1.current = nil
 		end
-		local var9 = nil
+		local v1 = nil
 		
-		for i, v in pairs(var6.current) do
-			if v.id == p2 then
-				var9 = v
+		for _, value in pairs(UseRefResult3.current) do
+			if value.id == Id then
+				v1 = value
 				break
 			end
 		end
-		if var9 and var9.priority and var6.current[var9.priority] then
-			var6.current[var9.priority] = nil
+		if v1 and v1.priority and UseRefResult3.current[v1.priority] then
+			UseRefResult3.current[v1.priority] = nil
 		end
-	end, { var1 })
-	var5.current = reactModule.useCallback(function()
-		-- upvalues: var3 (ref), var4 (ref), var6 (ref), var7 (ref), var8 (ref), var5 (ref)
-		if var3.current or var4.current then return end
-		local t = {}
+	end, { UseStateResult })
+	UseRefResult2.current = ReactModule.useCallback(function() --[[ Line: 73 ]]
+		-- upvalues: UseRefResult (copy), UseRefResult1 (copy), UseRefResult3 (copy), UseResult (copy), UseResult1 (copy), UseRefResult2 (copy)
+		if UseRefResult.current or UseRefResult1.current then return end
+		local List = {}
 		
-		for i, v in pairs(var6.current) do
-			table.insert(t, v)
+		for _, value in pairs(UseRefResult3.current) do
+			table.insert(List, value)
 		end
-		table.sort(t, function(p3, p4)
-			return p4.priority < p3.priority
+		table.sort(List, function(A, B): boolean --[[ Line: 85 ]]
+			return B.priority < A.priority
 		end)
-		local var10 = t[1]
+		local Entry = List[1]
 		
-		if var10 then
-			var4.current = var10
-			task.delay(var10.showDelay / 1000, function()
-				-- upvalues: var7 (copy), var10 (ref), var8 (copy), var5 (copy)
-				var7(var10)
-				task.delay(var10.dismissDelay / 1000, function()
-					-- upvalues: var8 (copy), var10 (copy), var5 (copy)
-					var8(var10.id)
+		if Entry then
+			UseRefResult1.current = Entry
+			task.delay(Entry.showDelay / 1000, function() --[[ Line: 96 ]]
+				-- upvalues: UseResult (upval), Entry (copy), UseResult1 (upval), UseRefResult2 (upval)
+				UseResult(Entry)
+				task.delay(Entry.dismissDelay / 1000, function() --[[ Line: 99 ]]
+					-- upvalues: UseResult1 (upval), Entry (upval), UseRefResult2 (upval)
+					UseResult1(Entry.id)
 					
-					if var5.current then
-						var5.current()
+					if UseRefResult2.current then
+						UseRefResult2.current()
 					end
 				end)
 			end)
 			
 			return
 		end
-	end, { var1 })
+	end, { UseStateResult })
 	
-	local _ = function()
-		-- upvalues: var5 (ref)
-		if var5.current then
-			var5.current()
+	local function _() --[[ Line: 108 ]]
+		-- upvalues: UseRefResult2 (copy)
+		if UseRefResult2.current then
+			UseRefResult2.current()
 		end
 	end
 	
-	return reactModule.createElement(tooltipContextModule.Provider, {
-		value = reactModule.useMemo(function()
-			-- upvalues: var6 (ref), var5 (ref), var8 (ref), var1 (ref)
+	return ReactModule.createElement(TooltipContextModule.Provider, {
+		value = ReactModule.useMemo(function() --[[ Line: 114 ]]
+			-- upvalues: UseRefResult3 (copy), UseRefResult2 (copy), UseResult1 (copy), UseStateResult (copy)
 			return {
-				registerTooltip = function(p3, p4, p5, p6)
-					-- upvalues: var6 (copy), var5 (copy)
-					if not var6.current[p4] then
-						table.insert(var6.current, p4, {
-							id = p3,
-							priority = p4,
-							showDelay = p5,
-							dismissDelay = p6
+				registerTooltip = function(Id, Priority, ShowDelay, DismissDelay) --[[ Line: 116 ]]
+					-- upvalues: UseRefResult3 (upval), UseRefResult2 (upval)
+					if not UseRefResult3.current[Priority] then
+						table.insert(UseRefResult3.current, Priority, {
+							id = Id,
+							priority = Priority,
+							showDelay = ShowDelay,
+							dismissDelay = DismissDelay
 						})
 						
-						if var5.current then
-							var5.current()
+						if UseRefResult2.current then
+							UseRefResult2.current()
 						end
 					end
 				end,
-				unregisterTooltip = function(p3)
-					-- upvalues: var8 (copy), var5 (copy)
-					var8(p3)
+				unregisterTooltip = function(p2) --[[ Line: 127 ]]
+					-- upvalues: UseResult1 (upval), UseRefResult2 (upval)
+					UseResult1(p2)
 					
-					if var5.current then
-						var5.current()
+					if UseRefResult2.current then
+						UseRefResult2.current()
 					end
 				end,
-				dismissTooltip = function(p3, _)
-					-- upvalues: var8 (copy), var5 (copy)
-					var8(p3)
+				dismissTooltip = function(p2, _) --[[ Line: 131 ]]
+					-- upvalues: UseResult1 (upval), UseRefResult2 (upval)
+					UseResult1(p2)
 					
-					if var5.current then
-						var5.current()
+					if UseRefResult2.current then
+						UseRefResult2.current()
 					end
 				end,
-				isCurrentTooltip = function(p3)
-					-- upvalues: var1 (copy)
-					return var1 and var1.id == p3
+				isCurrentTooltip = function(Id): boolean --[[ Line: 135 ]]
+					-- upvalues: UseStateResult (upval)
+					return UseStateResult and UseStateResult.id == Id
 				end
 			}
-		end, { var1 })
+		end, { UseStateResult })
 	}, p1.children)
 end
 

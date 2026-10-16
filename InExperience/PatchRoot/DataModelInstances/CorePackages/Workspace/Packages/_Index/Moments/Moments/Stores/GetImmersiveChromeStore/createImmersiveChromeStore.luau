@@ -1,34 +1,35 @@
-﻿local createSignal = require(script:FindFirstAncestor("Moments").Parent.Signals).createSignal
+﻿local CreateSignalFunction = require(script:FindFirstAncestor("Moments").Parent.Signals).createSignal
 
-return function()
-	-- upvalues: createSignal (ref)
-	local var1, var2 = createSignal(true)
-	local var3 = nil
-	local var4, var5 = createSignal(false)
+return function() --[[ Line: 37 | Named "createImmersiveChromeStore" ]]
+	-- upvalues: CreateSignalFunction (copy)
+	local Signal, Signal2 = CreateSignalFunction(true)
+	local Callback = nil
+	local Signal1, Signal2_1 = CreateSignalFunction(false)
 	
 	return {
-		getChromeVisible = var1,
-		setChromeVisible = function(value)
-			-- upvalues: var2 (ref)
-			var2(value)
+		getChromeVisible = Signal,
+		setChromeVisible = function(p1) --[[ Line: 45 ]]
+			-- upvalues: Signal2 (copy)
+			Signal2(p1)
 		end,
-		revealChrome = function()
-			-- upvalues: var3 (write), var2 (ref)
-			if var3 == nil then
-				var2(true)
+		revealChrome = function() --[[ Line: 57 ]]
+			-- upvalues: Callback (ref), Signal2 (copy)
+			if Callback == nil then
+				Signal2(true)
 				
 				return
+			else
+				Callback()
 			end
-			var3()
 		end,
-		setRevealHandler = function(value)
-			-- upvalues: var3 (write)
-			var3 = value
+		setRevealHandler = function(Value) --[[ Line: 53 ]]
+			-- upvalues: Callback (ref)
+			Callback = Value
 		end,
-		getOverlayCovering = var4,
-		setOverlayCovering = function(value)
-			-- upvalues: var5 (ref)
-			var5(value)
+		getOverlayCovering = Signal1,
+		setOverlayCovering = function(p1) --[[ Line: 49 ]]
+			-- upvalues: Signal2_1 (copy)
+			Signal2_1(p1)
 		end
 	}
 end

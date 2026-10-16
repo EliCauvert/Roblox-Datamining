@@ -1,16 +1,16 @@
-﻿local parent = script:FindFirstAncestor("InExperienceShop").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useOpenWebView = require(parent.WebViewUtils).useOpenWebView
-local urlBuilder = require(parent.UrlBuilder).UrlBuilder
-local view = foundationModule.View
-local useTokens = foundationModule.Hooks.useTokens
-local inlineLayoutModule = require(parent.InlineLayout)
-local inlineLayout = inlineLayoutModule.Components.InlineLayout
-local linkElement = inlineLayoutModule.Components.InlineLayoutElements.LinkElement
-local textElement = inlineLayoutModule.Components.InlineLayoutElements.TextElement
-local t = {
+﻿local Parent = script:FindFirstAncestor("InExperienceShop").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseOpenWebViewFunction = require(Parent.WebViewUtils).useOpenWebView
+local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
+local View = FoundationModule.View
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local InlineLayoutModule = require(Parent.InlineLayout)
+local InlineLayout = InlineLayoutModule.Components.InlineLayout
+local LinkElement = InlineLayoutModule.Components.InlineLayoutElements.LinkElement
+local TextElement = InlineLayoutModule.Components.InlineLayoutElements.TextElement
+local config = {
 	disclosure = {
 		"Feature.InExperienceShop.Description.RobuxPurchaseLegalDisclosure",
 		termsLinkStart = "<a>",
@@ -18,55 +18,63 @@ local t = {
 	}
 }
 
-return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), useOpenWebView (ref), useLocalization (ref), t (ref), reactModule (ref), urlBuilder (ref), textElement (ref), linkElement (ref), view (ref), inlineLayout (ref)
-	local var1 = useTokens()
-	local var2 = useOpenWebView()
-	local disclosure = useLocalization(t).disclosure
-	local var3 = reactModule.useCallback(function()
-		-- upvalues: var2 (ref), urlBuilder (copy)
-		var2(urlBuilder.static.about.terms(), "")
-	end, { var2 })
-	local var4 = p1.isMobile == true
-	local var5 = if var4 then var1.Typography.CaptionSmall else var1.Typography.BodySmall
-	local var6 = if var4 then var1.Typography.CaptionSmall else var1.Typography.CaptionMedium
-	local var7 = if var4 then var1.Color.System.Neutral else var1.Color.Content.Default
-	local var8 = if var4 then var1.Color.Content.Emphasis else var7
+return ReactModule.memo(function(Frame) --[[ Line: 38 | Named "RobuxTermsDisclosure" ]]
+	-- upvalues: UseTokensFunction (copy), UseOpenWebViewFunction (copy), UseLocalizationFunction (copy), config (copy), ReactModule (copy), UrlBuilder (copy), TextElement (copy), LinkElement (copy), View (copy), InlineLayout (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseOpenWebViewResult = UseOpenWebViewFunction()
+	local Disclosure = UseLocalizationFunction(config).disclosure
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 45 ]]
+		-- upvalues: UseOpenWebViewResult (copy), UrlBuilder (upval)
+		UseOpenWebViewResult(UrlBuilder.static.about.terms(), "")
+	end, { UseOpenWebViewResult })
+	local IsIsMobile = Frame.isMobile == true
+	local CaptionSmall = if IsIsMobile then UseTokensResult.Typography.CaptionSmall else UseTokensResult.Typography.BodySmall
+	local CaptionSmall1 = if IsIsMobile then UseTokensResult.Typography.CaptionSmall else UseTokensResult.Typography.CaptionMedium
+	local Neutral = if IsIsMobile then UseTokensResult.Color.System.Neutral else UseTokensResult.Color.Content.Default
+	local Emphasis = if IsIsMobile then UseTokensResult.Color.Content.Emphasis else Neutral
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "size-full-0 auto-y",
 		testId = "RobuxTermsDisclosure",
-		LayoutOrder = p1.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		Layout = reactModule.createElement(inlineLayout, {
-			Elements = reactModule.useMemo(function()
-				-- upvalues: disclosure (ref), textElement (copy), var5 (ref), var7 (ref), linkElement (copy), var6 (ref), var8 (ref), var3 (ref)
-				local match, match_1, match_2 = string.match(disclosure, "^(.*)<a>(.*)</a>(.*)$")
+		Layout = ReactModule.createElement(InlineLayout, {
+			Elements = ReactModule.useMemo(function() --[[ Line: 55 ]]
+				-- upvalues: Disclosure (copy), TextElement (upval), CaptionSmall (copy), Neutral (copy), LinkElement (upval), CaptionSmall1 (copy), Emphasis (copy), UseResult (copy)
+				local Match, Match2, Match3 = string.match(Disclosure, "^(.*)<a>(.*)</a>(.*)$")
 				
-				return if match_1 == nil then {
-					textElement.new({ Text = disclosure, fontStyle = var5, textStyle = var7 })
+				return if Match2 == nil then {
+					TextElement.new({
+						Text = Disclosure,
+						fontStyle = CaptionSmall,
+						textStyle = Neutral
+					})
 				} else {
-					textElement.new({
+					TextElement.new({
 						testId = "RobuxTermsDisclosure-LeadingText",
-						Text = match,
-						fontStyle = var5,
-						textStyle = var7
+						Text = Match,
+						fontStyle = CaptionSmall,
+						textStyle = Neutral
 					}),
-					linkElement.new({
-						textElement.new({
+					LinkElement.new({
+						TextElement.new({
 							testId = "RobuxTermsDisclosure-TermsLinkText",
-							Text = match_1,
-							fontStyle = var6,
-							textStyle = var8
+							Text = Match2,
+							fontStyle = CaptionSmall1,
+							textStyle = Emphasis
 						})
 					}, {
 						key = "RobuxTermsDisclosure-TermsLink",
-						onActivated = var3
+						onActivated = UseResult
 					}),
-					textElement.new({ Text = match_2, fontStyle = var5, textStyle = var7 })
+					TextElement.new({
+						Text = Match3,
+						fontStyle = CaptionSmall,
+						textStyle = Neutral
+					})
 				}
 			end, {
-				disclosure, var5, var6, var7, var8, var3
+				Disclosure, CaptionSmall, CaptionSmall1, Neutral, Emphasis, UseResult
 			})
 		})
 	})

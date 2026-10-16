@@ -1,17 +1,20 @@
-﻿local telemetryService = game:GetService("TelemetryService")
-local t = {
+﻿local TelemetryService = game:GetService("TelemetryService")
+local config = {
 	eventName = "coachmarkImpression",
 	description = "Sent when a coachmark is shown",
 	backends = { "EventIngest" },
 	throttlingPercentage = game:DefineFastInt("CoachmarkImpressionThrottleHundredthsPercent", 10000),
 	lastUpdated = { 26, 6, 16 }
 }
-local list = { "addOSInfo", "addSessionInfo" }
+local StandardizedFields = { "addOSInfo", "addSessionInfo" }
 
-return function(p1, p2)
-	-- upvalues: telemetryService (ref), t (ref), list (ref)
-	telemetryService:LogEvent(t, {
-		standardizedFields = list,
-		customFields = { collectionServiceAnchorTag = p1, hasMedia = p2 }
+return function(CollectionServiceAnchorTag, HasMedia) --[[ Line: 18 | Named "sendCoachmarkImpression" ]]
+	-- upvalues: TelemetryService (copy), config (copy), StandardizedFields (copy)
+	TelemetryService:LogEvent(config, {
+		standardizedFields = StandardizedFields,
+		customFields = {
+			collectionServiceAnchorTag = CollectionServiceAnchorTag,
+			hasMedia = HasMedia
+		}
 	})
 end

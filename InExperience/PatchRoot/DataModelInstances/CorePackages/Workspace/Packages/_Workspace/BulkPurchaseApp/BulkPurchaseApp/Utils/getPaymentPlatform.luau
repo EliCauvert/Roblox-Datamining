@@ -1,11 +1,10 @@
-﻿local bulkPurchaseApp = script:FindFirstAncestor("BulkPurchaseApp")
-local userInputService = game:GetService("UserInputService")
+﻿local UserInputService = game:GetService("UserInputService")
 local VRService = game:GetService("VRService")
-local paymentPlatformEnumModule = require(bulkPurchaseApp.Enums.PaymentPlatformEnum)
+local PaymentPlatformEnumModule = require(script:FindFirstAncestor("BulkPurchaseApp").Enums.PaymentPlatformEnum)
 
-return function()
-	-- upvalues: userInputService (ref), paymentPlatformEnumModule (ref), VRService (ref)
-	local platform = userInputService:GetPlatform()
+return function() --[[ Line: 9 | Named "getPaymentPlatform" ]]
+	-- upvalues: UserInputService (copy), PaymentPlatformEnumModule (copy), VRService (copy)
+	local Platform = UserInputService:GetPlatform()
 	
-	return if platform == Enum.Platform.Windows or platform == Enum.Platform.OSX or platform == Enum.Platform.Linux then paymentPlatformEnumModule.Desktop elseif platform == Enum.Platform.IOS or platform == Enum.Platform.Android or platform == Enum.Platform.UWP then paymentPlatformEnumModule.Mobile elseif platform == Enum.Platform.XBoxOne or platform == Enum.Platform.XBox360 or (platform == Enum.Platform.PS3 or platform == Enum.Platform.PS4) or platform == Enum.Platform.PS5 then paymentPlatformEnumModule.Console elseif VRService:IsVRAppBuild() then paymentPlatformEnumModule.VR else paymentPlatformEnumModule.Unknown
+	return if Platform == Enum.Platform.Windows or Platform == Enum.Platform.OSX or Platform == Enum.Platform.Linux then PaymentPlatformEnumModule.Desktop elseif Platform == Enum.Platform.IOS or Platform == Enum.Platform.Android or Platform == Enum.Platform.UWP then PaymentPlatformEnumModule.Mobile elseif Platform == Enum.Platform.XBoxOne or Platform == Enum.Platform.XBox360 or Platform == Enum.Platform.PS3 or Platform == Enum.Platform.PS4 or Platform == Enum.Platform.PS5 then PaymentPlatformEnumModule.Console elseif VRService:IsVRAppBuild() then PaymentPlatformEnumModule.VR else PaymentPlatformEnumModule.Unknown
 end

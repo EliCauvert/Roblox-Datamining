@@ -1,46 +1,46 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local corePackagesService = game:GetService("CorePackages")
-local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
-local modules = coreGuiService.RobloxGui.Modules
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local roactAppPolicy = require(corePackagesService.Workspace.Packages.UniversalAppPolicy).RoactAppPolicy
-local shareGame = modules.Settings.Pages.ShareGame
-local constantsModule = require(shareGame.Constants)
-local appFeaturePolicies = require(corePackagesService.Workspace.Packages.UniversalAppPolicy).AppFeaturePolicies
-local eventStream = require(corePackagesService.Workspace.Packages.Analytics).AnalyticsReporters.EventStream
-local layoutProviderModule = require(shareGame.Components.LayoutProvider)
-local shareGameContainerModule = require(shareGame.Components.ShareGameContainer)
-local app = roactModule.PureComponent:extend("App")
+﻿local CorePackages = game:GetService("CorePackages")
+local RbxAnalyticsService = game:GetService("RbxAnalyticsService")
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local RoactAppPolicy = require(CorePackages.Workspace.Packages.UniversalAppPolicy).RoactAppPolicy
+local ShareGame = game:GetService("CoreGui").RobloxGui.Modules.Settings.Pages.ShareGame
+local ConstantsModule = require(ShareGame.Constants)
+local AppFeaturePolicies = require(CorePackages.Workspace.Packages.UniversalAppPolicy).AppFeaturePolicies
+local EventStream = require(CorePackages.Workspace.Packages.Analytics).AnalyticsReporters.EventStream
+local LayoutProviderModule = require(ShareGame.Components.LayoutProvider)
+local ShareGameContainerModule = require(ShareGame.Components.ShareGameContainer)
+local App = RoactModule.PureComponent:extend("App")
 
-local function wrapWithProviders(p1)
-	-- upvalues: roactModule (ref), layoutProviderModule (ref), roactAppPolicy (ref), appFeaturePolicies (ref)
-	return roactModule.createElement(layoutProviderModule, nil, {
-		PolicyProvider = roactModule.createElement(roactAppPolicy.Provider, { policy = { appFeaturePolicies } }, p1)
+local function wrapWithProviders(p1) --[[ Line: 23 ]]
+	-- upvalues: RoactModule (copy), LayoutProviderModule (copy), RoactAppPolicy (copy), AppFeaturePolicies (copy)
+	return RoactModule.createElement(LayoutProviderModule, nil, {
+		PolicyProvider = RoactModule.createElement(RoactAppPolicy.Provider, { policy = { AppFeaturePolicies } }, p1)
 	})
 end
 
-function app.render(p1)
-	-- upvalues: roactModule (ref), shareGameContainerModule (ref), constantsModule (ref), wrapWithProviders (ref)
+function App.render(p1) --[[ Line: 33 ]]
+	-- upvalues: RoactModule (copy), ShareGameContainerModule (copy), ConstantsModule (copy), wrapWithProviders (copy)
+	local Analytics = p1.props.analytics
+	
 	return wrapWithProviders({
-		roactModule.createElement(roactModule.Portal, { target = p1.props.pageTarget }, {
-			ShareGamePageFrame = if p1.props.isPageOpen then roactModule.createElement(shareGameContainerModule, {
-				analytics = p1.props.analytics,
-				zIndex = constantsModule.SHARE_GAME_Z_INDEX
+		RoactModule.createElement(RoactModule.Portal, { target = p1.props.pageTarget }, {
+			ShareGamePageFrame = if p1.props.isPageOpen then RoactModule.createElement(ShareGameContainerModule, {
+				analytics = Analytics,
+				zIndex = ConstantsModule.SHARE_GAME_Z_INDEX
 			}) else nil
 		})
 	})
 end
 
-function app.didMount(p1)
-	-- upvalues: eventStream (ref), rbxAnalyticsService (ref)
-	p1.eventStream = eventStream.new(rbxAnalyticsService)
+function App.didMount(p1) --[[ Line: 54 ]]
+	-- upvalues: EventStream (copy), RbxAnalyticsService (copy)
+	p1.eventStream = EventStream.new(RbxAnalyticsService)
 end
 
-function app.willUnmount(p1)
+function App.willUnmount(p1) --[[ Line: 58 ]]
 	p1.eventStream:releaseRBXEventStream()
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p1, _)
+return RoactRoduxModule.UNSTABLE_connect2(function(p1, _) --[[ Line: 62 ]]
 	return { isPageOpen = p1.Page.IsOpen }
-end)(app)
+end)(App)

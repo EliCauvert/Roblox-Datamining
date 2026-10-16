@@ -1,14 +1,14 @@
-﻿return function(p1)
-	local t = {}
+﻿return function(List) --[[ Line: 8 | Named "createBrickColorsFromIds" ]]
+	local List1 = {}
 	
-	for i, v in p1 do
-		local ok, status = pcall(BrickColor.new, v)
+	for _, value in List do
+		local Success, Result = pcall(BrickColor.new, value)
 		
-		if ok and status then
-			table.insert(t, status)
+		if Success and Result then
+			table.insert(List1, Result)
 		else
-			warn(`createBrickColorsFromIds: Failed to create BrickColor with ID {v}`)
+			warn(`createBrickColorsFromIds: Failed to create BrickColor with ID {value}`)
 		end
 	end
-	return t
+	return List1
 end

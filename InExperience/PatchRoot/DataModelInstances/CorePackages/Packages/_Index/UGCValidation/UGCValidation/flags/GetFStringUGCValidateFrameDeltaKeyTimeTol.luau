@@ -1,13 +1,13 @@
 ﻿game:DefineFastString("UGCValidateFrameDeltaKeyTimeTol", "0.85")
-local t = {
-	asString = function()
+local GetFStringUGCValidateFrameDeltaKeyTimeTolModule = {
+	asString = function() --[[ Line: 9 ]]
 		return game:GetFastString("UGCValidateFrameDeltaKeyTimeTol")
 	end
 }
 
-function t.asNumber()
-	-- upvalues: t (ref)
-	return tonumber(t.asString())
+function GetFStringUGCValidateFrameDeltaKeyTimeTolModule.asNumber(): number --[[ Line: 13 ]]
+	-- upvalues: GetFStringUGCValidateFrameDeltaKeyTimeTolModule (copy)
+	return (tonumber(GetFStringUGCValidateFrameDeltaKeyTimeTolModule.asString()))
 end
 
-return t
+return GetFStringUGCValidateFrameDeltaKeyTimeTolModule

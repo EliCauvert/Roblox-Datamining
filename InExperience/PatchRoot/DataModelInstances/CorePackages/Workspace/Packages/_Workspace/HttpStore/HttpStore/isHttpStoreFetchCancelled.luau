@@ -1,13 +1,14 @@
-﻿local httpResponseStatus = require(script.Parent.Parent.InternalHttpStore).HttpResponseStatus
+﻿local HttpResponseStatus = require(script.Parent.Parent.InternalHttpStore).HttpResponseStatus
 
-return function(p1)
-	-- upvalues: httpResponseStatus (ref)
-	if p1.status ~= httpResponseStatus.Failed then
+return function(p1): boolean --[[ Line: 9 | Named "isHttpStoreFetchCancelled" ]]
+	-- upvalues: HttpResponseStatus (copy)
+	if p1.status ~= HttpResponseStatus.Failed then
 		return false
 	elseif p1.cancelled == true then
 		return true
+	else
+		local Response = p1.response
+		
+		return Response and Response.HttpError == Enum.HttpError.Aborted or false
 	end
-	local response = p1.response
-	
-	return response and response.HttpError == Enum.HttpError.Aborted
 end

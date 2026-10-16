@@ -1,18 +1,19 @@
-﻿local function convertSecondsToTimeFrames(p1)
-	return if p1 >= 86400 then { unit = "days", value = math.ceil(p1 / 86400) } elseif p1 >= 3600 then { unit = "hours", value = math.ceil(p1 / 3600) } else { unit = "minutes", value = math.ceil(p1 / 60) }
+﻿local function convertSecondsToTimeFrames(Largest: number) --[[ Line: 26 ]]
+	return if Largest >= 86400 then { unit = "days", value = math.ceil(Largest / 86400) } elseif Largest >= 3600 then { unit = "hours", value = math.ceil(Largest / 3600) } else { unit = "minutes", value = math.ceil(Largest / 60) }
 end
 
-return function(p1, p2)
-	-- upvalues: convertSecondsToTimeFrames (ref)
+return function(p1, p2) --[[ Line: 36 | Named "getRemainingTimeFromExpiration" ]]
+	-- upvalues: convertSecondsToTimeFrames (copy)
 	if not p1 then
 		return nil
 	end
-	local dateTime = DateTime.fromIsoDate(p1)
+	local _DateTime = DateTime.fromIsoDate(p1)
 	
-	if not dateTime then
+	if _DateTime then
+		local Largest = math.max(_DateTime.UnixTimestamp - (if p2 then p2 else DateTime.now()).UnixTimestamp, 0)
+		
+		return if Largest <= 0 then nil else convertSecondsToTimeFrames(Largest)
+	else
 		return nil
 	end
-	local maxValue = math.max(dateTime.UnixTimestamp - (p2 or DateTime.now()).UnixTimestamp, 0)
-	
-	return if maxValue <= 0 then nil else convertSecondsToTimeFrames(maxValue)
 end

@@ -1,50 +1,50 @@
-﻿local parent = script:FindFirstAncestor("AppChat").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
+﻿local Parent = script:FindFirstAncestor("AppChat").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
 
-local function isNonEmpty(p1)
-	return if typeof(p1) == "string" then p1 ~= "" else p1:map(function(p2)
-		return p2 ~= ""
+local function isNonEmpty(SubtitleText) --[[ Line: 24 ]]
+	return if typeof(SubtitleText) == "string" then SubtitleText ~= "" else SubtitleText:map(function(p1): boolean --[[ Line: 28 ]]
+		return p1 ~= ""
 	end)
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), isNonEmpty (ref), foundationModule (ref)
-	local var1 = reactModule.useMemo(function()
-		-- upvalues: isNonEmpty (copy), p1 (ref)
-		return isNonEmpty(p1.subtitleText)
-	end, { p1.subtitleText })
+return ReactModule.memo(function(Frame) --[[ Line: 33 | Named "ConversationRowSubtitle" ]]
+	-- upvalues: ReactModule (copy), isNonEmpty (copy), FoundationModule (copy)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 34 ]]
+		-- upvalues: isNonEmpty (upval), Frame (copy)
+		return isNonEmpty(Frame.subtitleText)
+	end, { Frame.subtitleText })
 	
-	return reactModule.createElement(foundationModule.View, {
+	return ReactModule.createElement(FoundationModule.View, {
 		tag = "row align-y-center gap-xsmall size-full-0 auto-y padding-right-medium clip",
-		LayoutOrder = p1.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		subtitle = reactModule.createElement(foundationModule.Text, {
+		subtitle = ReactModule.createElement(FoundationModule.Text, {
 			tag = "shrink auto-xy text-body-small text-align-x-left text-truncate-split content-default",
 			LayoutOrder = 1,
-			Text = p1.subtitleText,
-			Visible = var1
+			Text = Frame.subtitleText,
+			Visible = UseMemoResult
 		}),
-		inlineTimestamp = reactModule.createElement(foundationModule.View, {
+		inlineTimestamp = ReactModule.createElement(FoundationModule.View, {
 			tag = "row align-y-center gap-xsmall auto-xy",
 			LayoutOrder = 2,
 			testId = "conversation-row-inline-timestamp",
-			Visible = reactModule.useMemo(function()
-				-- upvalues: isNonEmpty (copy), p1 (ref)
-				return isNonEmpty(p1.timestampText)
-			end, { p1.timestampText })
+			Visible = ReactModule.useMemo(function() --[[ Line: 37 ]]
+				-- upvalues: isNonEmpty (upval), Frame (copy)
+				return isNonEmpty(Frame.timestampText)
+			end, { Frame.timestampText })
 		}, {
-			separator = reactModule.createElement(foundationModule.Text, {
+			separator = ReactModule.createElement(FoundationModule.Text, {
 				tag = "auto-xy text-body-small content-default",
-				Text = "\194\183",
+				Text = "·",
 				LayoutOrder = 1,
-				Visible = var1
+				Visible = UseMemoResult
 			}),
-			timestamp = reactModule.createElement(foundationModule.Text, {
+			timestamp = ReactModule.createElement(FoundationModule.Text, {
 				tag = "auto-xy text-body-small content-default",
 				LayoutOrder = 2,
 				testId = "conversation-row-timestamp",
-				Text = p1.timestampText
+				Text = Frame.timestampText
 			})
 		})
 	})

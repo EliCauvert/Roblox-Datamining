@@ -1,20 +1,20 @@
-﻿local avatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
-local parent = avatarExperienceCatalog.Parent
-local signalsModule = require(parent.Signals)
-local useSignalState = require(parent.SignalsReact).useSignalState
-local useAXCatalogStoreContextModule = require(avatarExperienceCatalog.Context.useAXCatalogStoreContext)
-local _ = require(avatarExperienceCatalog.Stores.createCatalogOffersBannerStore)
-local var1 = signalsModule.createSignal(nil)
+﻿local AvatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
+local Parent = AvatarExperienceCatalog.Parent
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local UseAXCatalogStoreContextModule = require(AvatarExperienceCatalog.Context.useAXCatalogStoreContext)
+local _ = require(AvatarExperienceCatalog.Stores.createCatalogOffersBannerStore)
+local Signal = require(Parent.Signals).createSignal(nil)
 
-return function()
-	-- upvalues: useAXCatalogStoreContextModule (ref), var1 (ref), useSignalState (ref)
-	local catalogOffersBannerStore = useAXCatalogStoreContextModule().catalogOffersBannerStore
-	local var2 = useSignalState(if catalogOffersBannerStore ~= nil then var1 else catalogOffersBannerStore.getPayload)
+return function(): boolean --[[ Line: 32 | Named "useHasAtLeastOneCatalogOffer" ]]
+	-- upvalues: UseAXCatalogStoreContextModule (copy), Signal (copy), UseSignalStateFunction (copy)
+	local CatalogOffersBannerStore = UseAXCatalogStoreContextModule().catalogOffersBannerStore
+	local UseSignalStateResult = UseSignalStateFunction(if CatalogOffersBannerStore == nil then Signal else CatalogOffersBannerStore.getPayload)
 	
-	if var2 == nil then
+	if UseSignalStateResult == nil then
 		return false
+	else
+		local Offers = UseSignalStateResult.offers
+		
+		return Offers ~= nil and #Offers > 0
 	end
-	local offers = var2.offers
-	
-	return offers ~= nil and #offers > 0
 end

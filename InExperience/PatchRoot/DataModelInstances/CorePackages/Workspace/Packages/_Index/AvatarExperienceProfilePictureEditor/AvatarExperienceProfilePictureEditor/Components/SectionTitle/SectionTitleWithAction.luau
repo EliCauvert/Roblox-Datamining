@@ -1,33 +1,33 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local view = foundationModule.View
-local icon = foundationModule.Icon
-local iconName = foundationModule.Enums.IconName
-local iconSize = foundationModule.Enums.IconSize
-local iconVariant = foundationModule.Enums.IconVariant
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local Icon = FoundationModule.Icon
+local IconName = FoundationModule.Enums.IconName
+local IconSize = FoundationModule.Enums.IconSize
+local IconVariant = FoundationModule.Enums.IconVariant
 local _ = require(script.Parent.SectionTitle)
-local sectionTitleLabelModule = require(script.Parent.SectionTitleLabel)
+local SectionTitleLabelModule = require(script.Parent.SectionTitleLabel)
 
-return function(p1)
-	-- upvalues: reactModule (ref), view (ref), sectionTitleLabelModule (ref), icon (ref), iconName (ref), iconSize (ref), iconVariant (ref)
-	local isBack = p1.variant == "back"
+return function(p1) --[[ Line: 25 | Named "SectionTitleWithAction" ]]
+	-- upvalues: ReactModule (copy), View (copy), SectionTitleLabelModule (copy), Icon (copy), IconName (copy), IconSize (copy), IconVariant (copy)
+	local IsBack = p1.variant == "back"
 	
-	return reactModule.createElement(view, { tag = "size-full-0 auto-y", LayoutOrder = p1.layoutOrder }, {
-		TitleRow = reactModule.createElement(view, {
+	return ReactModule.createElement(View, { tag = "size-full-0 auto-y", LayoutOrder = p1.layoutOrder }, {
+		TitleRow = ReactModule.createElement(View, {
 			tag = "row align-y-center gap-xsmall auto-xy padding-y-xsmall",
 			onActivated = p1.onActivated
 		}, {
-			Label = reactModule.createElement(sectionTitleLabelModule, {
+			Label = ReactModule.createElement(SectionTitleLabelModule, {
 				title = p1.title,
 				leadingIconName = p1.leadingIconName,
-				layoutOrder = if isBack then 2 else 1
+				layoutOrder = if IsBack then 2 else 1
 			}),
-			Chevron = reactModule.createElement(icon, {
-				name = if isBack then iconName.ChevronLargeLeft else iconName.ChevronLargeRight,
-				size = iconSize.Medium,
-				variant = iconVariant.Filled,
-				LayoutOrder = if isBack then 1 else 2
+			Chevron = ReactModule.createElement(Icon, {
+				name = if IsBack then IconName.ChevronLargeLeft else IconName.ChevronLargeRight,
+				size = IconSize.Medium,
+				variant = IconVariant.Filled,
+				LayoutOrder = if IsBack then 1 else 2
 			})
 		})
 	})

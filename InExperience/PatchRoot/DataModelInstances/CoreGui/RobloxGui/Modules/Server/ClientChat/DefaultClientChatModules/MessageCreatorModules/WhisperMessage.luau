@@ -1,122 +1,123 @@
-﻿local playersService = game:GetService("Players")
-local localPlayer = playersService.LocalPlayer
-while not localPlayer do
-	playersService.ChildAdded:wait()
-	localPlayer = playersService.LocalPlayer
+﻿local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+while not LocalPlayer do
+	Players.ChildAdded:wait()
+	LocalPlayer = Players.LocalPlayer
 end
-local parent = script.Parent.Parent
-local chatSettingsModule = require(parent:WaitForChild("ChatSettings"))
-local chatConstantsModule = require(parent:WaitForChild("ChatConstants"))
-local utilModule = require(script.Parent:WaitForChild("Util"))
-local char = utf8.char(57344)
-local var1 = nil
-pcall(function()
-	-- upvalues: var1 (write)
-	var1 = require(game:GetService("Chat").ClientChatModules.ChatLocalization)
+local Parent = script.Parent.Parent
+local ChatSettingsModule = require(Parent:WaitForChild("ChatSettings"))
+local ChatConstantsModule = require(Parent:WaitForChild("ChatConstants"))
+local UtilModule = require(script.Parent:WaitForChild("Util"))
+local Character = utf8.char(57344)
+local ChatLocalizationModule = nil
+pcall(function() --[[ Line: 22 ]]
+	-- upvalues: ChatLocalizationModule (ref)
+	ChatLocalizationModule = require(game:GetService("Chat").ClientChatModules.ChatLocalization)
 end)
 
-function IsPlayerVerified(p1)
-	-- upvalues: playersService (ref)
-	local var2 = playersService:GetPlayerByUserId(p1)
+function IsPlayerVerified(UserId) --[[ Line: 24 ]]
+	-- upvalues: Players (copy)
+	local Player = Players:GetPlayerByUserId(UserId)
 	
-	if not var2 then
+	if Player then
+		local Success, Result = pcall(function() --[[ Line: 31 ]]
+			-- upvalues: Player (copy)
+			return Player.HasVerifiedBadge
+		end)
+		
+		return if Success then Result else false
+	else
 		return false
 	end
-	local ok, status = pcall(function()
-		-- upvalues: var2 (ref)
-		return var2.HasVerifiedBadge
-	end)
-	
-	return if ok then status else false
 end
 
-function AppendVerifiedBadge(p1)
-	-- upvalues: char (ref)
-	return p1 .. char
+function AppendVerifiedBadge(Text): string --[[ Line: 38 ]]
+	-- upvalues: Character (copy)
+	return Text .. Character
 end
 
-function CreateMessageLabel(p1, p2)
-	-- upvalues: chatSettingsModule (ref), utilModule (ref), localPlayer (write), var1 (write)
-	local fromSpeaker = p1.FromSpeaker
-	local _ = nil
-	local var2 = if chatSettingsModule.PlayerDisplayNamesEnabled and p1.SpeakerDisplayName then p1.SpeakerDisplayName else fromSpeaker
+function CreateMessageLabel(p1, OriginalChannel) --[[ Line: 42 ]]
+	-- upvalues: ChatSettingsModule (copy), UtilModule (copy), LocalPlayer (ref), ChatLocalizationModule (ref)
+	local FromSpeaker = p1.FromSpeaker
+	local SpeakerDisplayName = if ChatSettingsModule.PlayerDisplayNamesEnabled and p1.SpeakerDisplayName then p1.SpeakerDisplayName else FromSpeaker
 	
 	if IsPlayerVerified(p1.SpeakerUserId) then
-		var2 = AppendVerifiedBadge(var2)
+		SpeakerDisplayName = AppendVerifiedBadge(SpeakerDisplayName)
 	end
 	local _ = p1.Message
-	local extraData = p1.ExtraData or {}
-	local font = extraData.Font or chatSettingsModule.DefaultFont
-	local textSize = extraData.TextSize or chatSettingsModule.ChatWindowTextSize
-	local nameColor = extraData.NameColor or chatSettingsModule.DefaultNameColor
-	local chatColor = extraData.ChatColor or chatSettingsModule.DefaultMessageColor
-	local channelColor = extraData.ChannelColor or chatColor
-	local formattedText = string.format("[%s]:", var2)
-	local _ = utilModule:GetStringTextBounds(formattedText, font, textSize)
-	local var3 = utilModule:GetNumberOfSpaces(formattedText, font, textSize) + 1
-	local var4, var5 = utilModule:CreateBaseMessage("", font, textSize, chatColor)
-	local var6 = utilModule:AddNameButtonToBaseMessage(var5, nameColor, formattedText, fromSpeaker)
-	local var7 = nil
+	local ExtraData = p1.ExtraData or {}
+	local _Font = ExtraData.Font or ChatSettingsModule.DefaultFont
+	local TextSize = ExtraData.TextSize or ChatSettingsModule.ChatWindowTextSize
+	local NameColor = ExtraData.NameColor or ChatSettingsModule.DefaultNameColor
+	local ChatColor = ExtraData.ChatColor or ChatSettingsModule.DefaultMessageColor
+	local ChannelColor = ExtraData.ChannelColor or ChatColor
+	local Formatted = string.format("[%s]:", SpeakerDisplayName)
+	local _ = UtilModule:GetStringTextBounds(Formatted, _Font, TextSize)
+	local NewNumberOfSpaces = UtilModule:GetNumberOfSpaces(Formatted, _Font, TextSize) + 1
+	local BaseMessage, BaseMessage2 = UtilModule:CreateBaseMessage("", _Font, TextSize, ChatColor)
+	local AddNameButtonToBaseMessageResult = UtilModule:AddNameButtonToBaseMessage(BaseMessage2, NameColor, Formatted, FromSpeaker)
+	local AddChannelButtonToBaseMessageResult = nil
 	
-	if p2 ~= p1.OriginalChannel then
-		local var8 = if p1.FromSpeaker ~= localPlayer.Name then string.format("From %s", p1.FromSpeaker) else p1.OriginalChannel
+	if OriginalChannel ~= p1.OriginalChannel then
+		local Formatted1 = if p1.FromSpeaker ~= LocalPlayer.Name then string.format("From %s", p1.FromSpeaker) else p1.OriginalChannel
 		
-		if var1.tryLocalize then
-			var8 = var1:tryLocalize(var8)
+		if ChatLocalizationModule.tryLocalize then
+			Formatted1 = ChatLocalizationModule:tryLocalize(Formatted1)
 		end
-		local formattedText_1 = string.format("{%s}", var8)
-		var7 = utilModule:AddChannelButtonToBaseMessage(var5, channelColor, formattedText_1, p1.OriginalChannel)
-		var6.Position = UDim2.new(0, var7.Size.X.Offset + utilModule:GetStringTextBounds(" ", font, textSize).X, 0, 0)
-		var3 = var3 + utilModule:GetNumberOfSpaces(formattedText_1, font, textSize) + 1
+		local Formatted11 = string.format("{%s}", Formatted1)
+		AddChannelButtonToBaseMessageResult = UtilModule:AddChannelButtonToBaseMessage(BaseMessage2, ChannelColor, Formatted11, p1.OriginalChannel)
+		AddNameButtonToBaseMessageResult.Position = UDim2.new(0, AddChannelButtonToBaseMessageResult.Size.X.Offset + UtilModule:GetStringTextBounds(" ", _Font, TextSize).X, 0, 0)
+		NewNumberOfSpaces = NewNumberOfSpaces + UtilModule:GetNumberOfSpaces(Formatted11, _Font, TextSize) + 1
 	end
-	local function UpdateTextFunction(p3)
-		-- upvalues: p1 (ref), var5 (ref), utilModule (copy), var3 (write)
+	local function UpdateTextFunction(p2) --[[ Line: 92 ]]
+		-- upvalues: p1 (copy), BaseMessage2 (copy), UtilModule (upval), NewNumberOfSpaces (ref)
 		if p1.IsFiltered then
-			var5.Text = utilModule:CreateLeadingSpaces(var3) .. utilModule:SanitizeForRichText(p3.Message)
+			BaseMessage2.Text = UtilModule:CreateLeadingSpaces(NewNumberOfSpaces) .. UtilModule:SanitizeForRichText(p2.Message)
 			
 			return
+		else
+			BaseMessage2.Text = UtilModule:CreateLeadingSpaces(NewNumberOfSpaces) .. string.rep("_", p2.MessageLengthUtf8 or p2.MessageLength)
 		end
-		var5.Text = utilModule:CreateLeadingSpaces(var3) .. string.rep("_", p3.MessageLengthUtf8 or p3.MessageLength)
 	end
 	
 	UpdateTextFunction(p1)
 	
-	local function GetHeightFunction(p3)
-		-- upvalues: utilModule (copy), var5 (ref), var4 (ref)
-		return utilModule:GetMessageHeight(var5, var4, p3)
+	local function GetHeightFunction(p2) --[[ Line: 103 ]]
+		-- upvalues: UtilModule (upval), BaseMessage2 (copy), BaseMessage (copy)
+		return UtilModule:GetMessageHeight(BaseMessage2, BaseMessage, p2)
 	end
 	
-	local t = {
-		[var6] = {
+	local config = {
+		[AddNameButtonToBaseMessageResult] = {
 			TextTransparency = { FadedIn = 0, FadedOut = 1 },
 			TextStrokeTransparency = { FadedIn = 0.75, FadedOut = 1 }
 		},
-		[var5] = {
+		[BaseMessage2] = {
 			TextTransparency = { FadedIn = 0, FadedOut = 1 },
 			TextStrokeTransparency = { FadedIn = 0.75, FadedOut = 1 }
 		}
 	}
 	
-	if var7 then
-		t[var7] = {
+	if AddChannelButtonToBaseMessageResult then
+		config[AddChannelButtonToBaseMessageResult] = {
 			TextTransparency = { FadedIn = 0, FadedOut = 1 },
 			TextStrokeTransparency = { FadedIn = 0.75, FadedOut = 1 }
 		}
 	end
-	local var9, var10, var11 = utilModule:CreateFadeFunctions(t)
+	local FadeFunctions, FadeFunctions2, FadeFunctions3 = UtilModule:CreateFadeFunctions(config)
 	
 	return {
-		[utilModule.KEY_BASE_FRAME] = var4,
-		[utilModule.KEY_BASE_MESSAGE] = var5,
-		[utilModule.KEY_UPDATE_TEXT_FUNC] = UpdateTextFunction,
-		[utilModule.KEY_GET_HEIGHT] = GetHeightFunction,
-		[utilModule.KEY_FADE_IN] = var9,
-		[utilModule.KEY_FADE_OUT] = var10,
-		[utilModule.KEY_UPDATE_ANIMATION] = var11
+		[UtilModule.KEY_BASE_FRAME] = BaseMessage,
+		[UtilModule.KEY_BASE_MESSAGE] = BaseMessage2,
+		[UtilModule.KEY_UPDATE_TEXT_FUNC] = UpdateTextFunction,
+		[UtilModule.KEY_GET_HEIGHT] = GetHeightFunction,
+		[UtilModule.KEY_FADE_IN] = FadeFunctions,
+		[UtilModule.KEY_FADE_OUT] = FadeFunctions2,
+		[UtilModule.KEY_UPDATE_ANIMATION] = FadeFunctions3
 	}
 end
 
 return {
-	[utilModule.KEY_MESSAGE_TYPE] = chatConstantsModule.MessageTypeWhisper,
-	[utilModule.KEY_CREATOR_FUNCTION] = CreateMessageLabel
+	[UtilModule.KEY_MESSAGE_TYPE] = ChatConstantsModule.MessageTypeWhisper,
+	[UtilModule.KEY_CREATOR_FUNCTION] = CreateMessageLabel
 }

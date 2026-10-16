@@ -1,91 +1,90 @@
-﻿local signalModule = require(script:FindFirstAncestor("MomentsCommon").Utils.Signal)
-local localPlayer = game:GetService("Players").LocalPlayer
-local var1 = false
-local var2 = signalModule.new()
-local var3 = nil
-local var4 = nil
-local t = { left = 0, top = 0, right = 0, bottom = 0 }
+﻿local LocalPlayer = game:GetService("Players").LocalPlayer
+local Flag = false
+local NewResult = require(script:FindFirstAncestor("MomentsCommon").Utils.Signal).new()
+local ScreenGui = nil
+local ScreenGui1 = nil
+local config = { left = 0, top = 0, right = 0, bottom = 0 }
 
-function diffInsets(value, p1)
-	return if value.top == p1.top then if value.bottom == p1.bottom then if value.left == p1.left then value.right ~= p1.right else true else true else true
+function diffInsets(p1, p2): boolean --[[ Line: 27 ]]
+	return p1.top ~= p2.top or (p1.bottom ~= p2.bottom or p1.left ~= p2.left) or p1.right ~= p2.right
 end
 
-function getHardwareSafeAreaInsets()
-	-- upvalues: var3 (write), var4 (write)
-	local absolutePosition = var3.AbsolutePosition
-	local absolutePosition_1 = var4.AbsolutePosition
-	local var5 = absolutePosition_1 - absolutePosition
-	local var6 = absolutePosition + var3.AbsoluteSize - (absolutePosition_1 + var4.AbsoluteSize)
+function getHardwareSafeAreaInsets() --[[ Line: 31 ]]
+	-- upvalues: ScreenGui (ref), ScreenGui1 (ref)
+	local AbsolutePosition = ScreenGui.AbsolutePosition
+	local AbsolutePosition1 = ScreenGui1.AbsolutePosition
+	local AbsolutePositionDelta = AbsolutePosition1 - AbsolutePosition
+	local AbsolutePositionDelta1 = AbsolutePosition + ScreenGui.AbsoluteSize - (AbsolutePosition1 + ScreenGui1.AbsoluteSize)
 	
 	return {
-		left = math.round(var5.X),
-		top = math.round(var5.Y),
-		right = math.round(var6.X),
-		bottom = math.round(var6.Y)
+		left = math.round(AbsolutePositionDelta.X),
+		top = math.round(AbsolutePositionDelta.Y),
+		right = math.round(AbsolutePositionDelta1.X),
+		bottom = math.round(AbsolutePositionDelta1.Y)
 	}
 end
 
-local var5 = nil
+local DeferredThread = nil
 
-function handleSizeChange()
-	-- upvalues: t (write), var5 (write), var2 (ref)
-	local var6 = getHardwareSafeAreaInsets()
+function handleSizeChange() --[[ Line: 48 ]]
+	-- upvalues: config (ref), DeferredThread (ref), NewResult (copy)
+	local HardwareSafeAreaInsets = getHardwareSafeAreaInsets()
 	
-	if diffInsets(var6, t) then
-		t = var6
+	if diffInsets(HardwareSafeAreaInsets, config) then
+		config = HardwareSafeAreaInsets
 		
-		if var5 then
-			task.cancel(var5)
+		if DeferredThread then
+			task.cancel(DeferredThread)
 		end
-		var5 = task.defer(function()
-			-- upvalues: var5 (copy), var2 (copy), var6 (ref)
-			var5 = nil
-			var2:fire(var6)
+		DeferredThread = task.defer(function() --[[ Line: 55 ]]
+			-- upvalues: DeferredThread (upval), NewResult (upval), HardwareSafeAreaInsets (copy)
+			DeferredThread = nil
+			NewResult:fire(HardwareSafeAreaInsets)
 		end)
 	end
 end
 
-function init()
-	-- upvalues: var1 (write), var3 (write), localPlayer (ref), var4 (write)
-	if var1 then return end
-	if not var3 then
-		var3 = Instance.new("ScreenGui")
-		var3.Name = "_FullscreenTestGui"
-		var3.Parent = localPlayer.PlayerGui
-		var3.ScreenInsets = Enum.ScreenInsets.None
-		var3:GetPropertyChangedSignal("AbsoluteSize"):Connect(handleSizeChange)
-		var3:GetPropertyChangedSignal("AbsolutePosition"):Connect(handleSizeChange)
+function init() --[[ Line: 62 ]]
+	-- upvalues: Flag (ref), ScreenGui (ref), LocalPlayer (copy), ScreenGui1 (ref)
+	if Flag then return end
+	if not ScreenGui then
+		ScreenGui = Instance.new("ScreenGui")
+		ScreenGui.Name = "_FullscreenTestGui"
+		ScreenGui.Parent = LocalPlayer.PlayerGui
+		ScreenGui.ScreenInsets = Enum.ScreenInsets.None
+		ScreenGui:GetPropertyChangedSignal("AbsoluteSize"):Connect(handleSizeChange)
+		ScreenGui:GetPropertyChangedSignal("AbsolutePosition"):Connect(handleSizeChange)
 	end
-	if not var4 then
-		var4 = Instance.new("ScreenGui")
-		var4.Name = "_DeviceTestGui"
-		var4.Parent = localPlayer.PlayerGui
-		var4.ScreenInsets = Enum.ScreenInsets.DeviceSafeInsets
-		var4:GetPropertyChangedSignal("AbsoluteSize"):Connect(handleSizeChange)
-		var4:GetPropertyChangedSignal("AbsolutePosition"):Connect(handleSizeChange)
+	if not ScreenGui1 then
+		ScreenGui1 = Instance.new("ScreenGui")
+		ScreenGui1.Name = "_DeviceTestGui"
+		ScreenGui1.Parent = LocalPlayer.PlayerGui
+		ScreenGui1.ScreenInsets = Enum.ScreenInsets.DeviceSafeInsets
+		ScreenGui1:GetPropertyChangedSignal("AbsoluteSize"):Connect(handleSizeChange)
+		ScreenGui1:GetPropertyChangedSignal("AbsolutePosition"):Connect(handleSizeChange)
 	end
 	handleSizeChange()
-	var1 = true
+	Flag = true
 end
 
 return {
-	connect = function(_, p1)
-		-- upvalues: var2 (ref)
+	connect = function(_, p1) --[[ Line: 90 ]]
+		-- upvalues: NewResult (copy)
 		init()
 		
-		return var2:connect(p1)
+		return NewResult:connect(p1)
 	end,
-	deviceInsets = function()
-		-- upvalues: t (write)
+	deviceInsets = function() --[[ Line: 94 ]]
+		-- upvalues: config (ref)
 		init()
 		
-		return t
+		return config
 	end,
 	diffInsets = diffInsets,
-	fullscreenGui = function()
-		-- upvalues: var3 (write)
+	fullscreenGui = function() --[[ Line: 99 ]]
+		-- upvalues: ScreenGui (ref)
 		init()
 		
-		return var3
+		return ScreenGui
 	end
 }

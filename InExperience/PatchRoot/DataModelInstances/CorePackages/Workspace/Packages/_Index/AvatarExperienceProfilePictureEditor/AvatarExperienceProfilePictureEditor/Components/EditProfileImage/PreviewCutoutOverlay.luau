@@ -1,12 +1,12 @@
-﻿local avatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
-local parent = avatarExperienceProfilePictureEditor.Parent
-local reactModule = require(parent.React)
-local constantsModule = require(avatarExperienceProfilePictureEditor.Constants)
-local useTokens = require(parent.Foundation).Hooks.useTokens
+﻿local AvatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
+local Parent = AvatarExperienceProfilePictureEditor.Parent
+local ReactModule = require(Parent.React)
+local ConstantsModule = require(AvatarExperienceProfilePictureEditor.Constants)
+local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
 
-local function _(p1)
-	-- upvalues: reactModule (ref)
-	return reactModule.createElement("Frame", {
+local function _(p1) --[[ Line: 22 | Named "createCompositionGridLine" ]]
+	-- upvalues: ReactModule (copy)
+	return ReactModule.createElement("Frame", {
 		BorderSizePixel = 0,
 		Active = false,
 		Size = p1.size,
@@ -17,180 +17,180 @@ local function _(p1)
 	})
 end
 
-local function buildCompositionGridChildren(p1, p2, p3)
-	-- upvalues: reactModule (ref)
-	local vector2 = Vector2.new(0.5, 0)
-	local vector2_1 = Vector2.new(0, 0.5)
-	local uDim2 = UDim2.new(0, p1, 1, 0)
-	local uDim2_1 = UDim2.new(1, 0, 0, p1)
-	local t = {}
-	local t_1 = {
-		size = uDim2,
-		position = UDim2.fromScale(0.333333333333, 0),
-		anchorPoint = vector2,
-		color = p2,
-		transparency = p3
+local function buildCompositionGridChildren(XOffset, Color, Transparency) --[[ Line: 40 ]]
+	-- upvalues: ReactModule (copy)
+	local _Vector2 = Vector2.new(0.5, 0)
+	local _Vector2_1 = Vector2.new(0, 0.5)
+	local _UDim2 = UDim2.new(0, XOffset, 1, 0)
+	local _UDim2_1 = UDim2.new(1, 0, 0, XOffset)
+	local config = {
+		size = _UDim2,
+		position = UDim2.fromScale(0.3333333333333333, 0),
+		anchorPoint = _Vector2,
+		color = Color,
+		transparency = Transparency
 	}
-	t.VerticalLine1 = reactModule.createElement("Frame", {
+	local Frame = ReactModule.createElement("Frame", {
 		BorderSizePixel = 0,
 		Active = false,
-		Size = t_1.size,
-		Position = t_1.position,
-		AnchorPoint = t_1.anchorPoint,
-		BackgroundColor3 = t_1.color,
-		BackgroundTransparency = t_1.transparency
+		Size = config.size,
+		Position = config.position,
+		AnchorPoint = config.anchorPoint,
+		BackgroundColor3 = config.color,
+		BackgroundTransparency = config.transparency
 	})
-	local t_2 = {
-		size = uDim2,
-		position = UDim2.fromScale(0.666666666667, 0),
-		anchorPoint = vector2,
-		color = p2,
-		transparency = p3
+	local config1 = {
+		size = _UDim2,
+		position = UDim2.fromScale(0.6666666666666666, 0),
+		anchorPoint = _Vector2,
+		color = Color,
+		transparency = Transparency
 	}
-	t.VerticalLine2 = reactModule.createElement("Frame", {
+	local Frame1 = ReactModule.createElement("Frame", {
 		BorderSizePixel = 0,
 		Active = false,
-		Size = t_2.size,
-		Position = t_2.position,
-		AnchorPoint = t_2.anchorPoint,
-		BackgroundColor3 = t_2.color,
-		BackgroundTransparency = t_2.transparency
+		Size = config1.size,
+		Position = config1.position,
+		AnchorPoint = config1.anchorPoint,
+		BackgroundColor3 = config1.color,
+		BackgroundTransparency = config1.transparency
 	})
-	local t_3 = {
-		size = uDim2_1,
-		position = UDim2.fromScale(0, 0.333333333333),
-		anchorPoint = vector2_1,
-		color = p2,
-		transparency = p3
+	local config2 = {
+		size = _UDim2_1,
+		position = UDim2.fromScale(0, 0.3333333333333333),
+		anchorPoint = _Vector2_1,
+		color = Color,
+		transparency = Transparency
 	}
-	t.HorizontalLine1 = reactModule.createElement("Frame", {
+	local Frame2 = ReactModule.createElement("Frame", {
 		BorderSizePixel = 0,
 		Active = false,
-		Size = t_3.size,
-		Position = t_3.position,
-		AnchorPoint = t_3.anchorPoint,
-		BackgroundColor3 = t_3.color,
-		BackgroundTransparency = t_3.transparency
+		Size = config2.size,
+		Position = config2.position,
+		AnchorPoint = config2.anchorPoint,
+		BackgroundColor3 = config2.color,
+		BackgroundTransparency = config2.transparency
 	})
-	local t_4 = {
-		size = uDim2_1,
-		position = UDim2.fromScale(0, 0.666666666667),
-		anchorPoint = vector2_1,
-		color = p2,
-		transparency = p3
+	local config3 = {
+		size = _UDim2_1,
+		position = UDim2.fromScale(0, 0.6666666666666666),
+		anchorPoint = _Vector2_1,
+		color = Color,
+		transparency = Transparency
 	}
-	t.HorizontalLine2 = reactModule.createElement("Frame", {
-		BorderSizePixel = 0,
-		Active = false,
-		Size = t_4.size,
-		Position = t_4.position,
-		AnchorPoint = t_4.anchorPoint,
-		BackgroundColor3 = t_4.color,
-		BackgroundTransparency = t_4.transparency
-	})
 	
-	return t
+	return {
+		VerticalLine1 = Frame,
+		VerticalLine2 = Frame1,
+		HorizontalLine1 = Frame2,
+		HorizontalLine2 = ReactModule.createElement("Frame", {
+			BorderSizePixel = 0,
+			Active = false,
+			Size = config3.size,
+			Position = config3.position,
+			AnchorPoint = config3.anchorPoint,
+			BackgroundColor3 = config3.color,
+			BackgroundTransparency = config3.transparency
+		})
+	}
 end
 
-return function(p1)
-	-- upvalues: useTokens (ref), constantsModule (ref), reactModule (ref), buildCompositionGridChildren (ref)
-	local var1 = useTokens()
-	local maxValue = math.max(0, math.floor((p1.width - p1.cutoutSize) / 2 + 0.5))
-	local maxValue_1 = math.max(0, p1.height - p1.cutoutTopOffset - p1.cutoutSize)
-	local overMedia100 = var1.Color.OverMedia.OverMedia_100
-	local color3 = overMedia100.Color3
-	local transparency = overMedia100.Transparency or 0.35
-	local emphasis = var1.Color.Stroke.Emphasis
-	local color3_1 = emphasis.Color3
-	local transparency_1 = emphasis.Transparency or 0.84
-	local maxValue_2 = math.max(1, math.floor(var1.Stroke.Standard + 0.5))
-	local floored = math.floor(p1.cutoutSize * constantsModule.CircleCutoutHoleDiameterFraction + 0.5)
-	local maxValue_3 = math.max(0, math.floor((p1.cutoutSize - floored) / 2 + 0.5))
-	local var2 = maxValue + maxValue_3
-	local var3 = p1.cutoutTopOffset + maxValue_3
-	local var4 = maxValue + p1.cutoutSize * 0.5
-	local var5 = p1.cutoutTopOffset + p1.cutoutSize * 0.5
-	local maxValue_4 = math.max(1, floored - maxValue_2)
+return function(p1) --[[ Line: 81 | Named "PreviewCutoutOverlay" ]]
+	-- upvalues: UseTokensFunction (copy), ConstantsModule (copy), ReactModule (copy), buildCompositionGridChildren (copy)
+	local UseTokensResult = UseTokensFunction()
+	local Largest = math.max(0, (math.floor((p1.width - p1.cutoutSize) / 2 + 0.5)))
+	local OverMedia100 = UseTokensResult.Color.OverMedia.OverMedia_100
+	local OverMediaColor3 = OverMedia100.Color3
+	local Transparency = OverMedia100.Transparency or 0.35
+	local Emphasis = UseTokensResult.Color.Stroke.Emphasis
+	local EmphasisColor3 = Emphasis.Color3
+	local Transparency1 = Emphasis.Transparency or 0.84
+	local Largest1 = math.max(1, (math.floor(UseTokensResult.Stroke.Standard + 0.5)))
+	local Floored = math.floor(p1.cutoutSize * ConstantsModule.CircleCutoutHoleDiameterFraction + 0.5)
+	local Largest2 = math.max(0, (math.floor((p1.cutoutSize - Floored) / 2 + 0.5)))
+	local NewLargest = Largest + p1.cutoutSize * 0.5
+	local NewCutoutTopOffset = p1.cutoutTopOffset + p1.cutoutSize * 0.5
+	local Largest3 = math.max(1, Floored - Largest1)
 	
-	return reactModule.createElement(reactModule.Fragment, nil, {
-		DimTop = reactModule.createElement("Frame", {
+	return ReactModule.createElement(ReactModule.Fragment, nil, {
+		DimTop = ReactModule.createElement("Frame", {
 			BorderSizePixel = 0,
 			Active = false,
 			ZIndex = 2,
 			Size = UDim2.new(1, 0, 0, p1.cutoutTopOffset),
-			BackgroundColor3 = color3,
-			BackgroundTransparency = transparency
+			BackgroundColor3 = OverMediaColor3,
+			BackgroundTransparency = Transparency
 		}),
-		DimLeft = reactModule.createElement("Frame", {
+		DimLeft = ReactModule.createElement("Frame", {
 			BorderSizePixel = 0,
 			Active = false,
 			ZIndex = 2,
-			Size = UDim2.fromOffset(maxValue, p1.cutoutSize),
+			Size = UDim2.fromOffset(Largest, p1.cutoutSize),
 			Position = UDim2.fromOffset(0, p1.cutoutTopOffset),
-			BackgroundColor3 = color3,
-			BackgroundTransparency = transparency
+			BackgroundColor3 = OverMediaColor3,
+			BackgroundTransparency = Transparency
 		}),
-		DimRight = reactModule.createElement("Frame", {
+		DimRight = ReactModule.createElement("Frame", {
 			BorderSizePixel = 0,
 			Active = false,
 			ZIndex = 2,
-			Size = UDim2.fromOffset(maxValue, p1.cutoutSize),
-			Position = UDim2.fromOffset(maxValue + p1.cutoutSize, p1.cutoutTopOffset),
-			BackgroundColor3 = color3,
-			BackgroundTransparency = transparency
+			Size = UDim2.fromOffset(Largest, p1.cutoutSize),
+			Position = UDim2.fromOffset(Largest + p1.cutoutSize, p1.cutoutTopOffset),
+			BackgroundColor3 = OverMediaColor3,
+			BackgroundTransparency = Transparency
 		}),
-		DimBottom = reactModule.createElement("Frame", {
+		DimBottom = ReactModule.createElement("Frame", {
 			BorderSizePixel = 0,
 			Active = false,
 			ZIndex = 2,
-			Size = UDim2.new(1, 0, 0, maxValue_1),
+			Size = UDim2.new(1, 0, 0, (math.max(0, p1.height - p1.cutoutTopOffset - p1.cutoutSize))),
 			Position = UDim2.fromOffset(0, p1.cutoutTopOffset + p1.cutoutSize),
-			BackgroundColor3 = color3,
-			BackgroundTransparency = transparency
+			BackgroundColor3 = OverMediaColor3,
+			BackgroundTransparency = Transparency
 		}),
-		CompositionGrid = reactModule.createElement("Frame", {
+		CompositionGrid = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Active = false,
 			ZIndex = 2,
-			Size = UDim2.fromOffset(floored, floored),
-			Position = UDim2.fromOffset(var2, var3)
-		}, buildCompositionGridChildren(maxValue_2, color3_1, transparency_1)),
-		Cutout = reactModule.createElement("ImageLabel", {
+			Size = UDim2.fromOffset(Floored, Floored),
+			Position = UDim2.fromOffset(Largest + Largest2, p1.cutoutTopOffset + Largest2)
+		}, (buildCompositionGridChildren(Largest1, EmphasisColor3, Transparency1))),
+		Cutout = ReactModule.createElement("ImageLabel", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			Active = false,
 			ZIndex = 3,
-			Image = constantsModule.CircleCutoutAsset,
-			ImageColor3 = color3,
-			ImageTransparency = transparency,
+			Image = ConstantsModule.CircleCutoutAsset,
+			ImageColor3 = OverMediaColor3,
+			ImageTransparency = Transparency,
 			Size = UDim2.fromOffset(p1.cutoutSize, p1.cutoutSize),
-			Position = UDim2.fromOffset(maxValue, p1.cutoutTopOffset)
+			Position = UDim2.fromOffset(Largest, p1.cutoutTopOffset)
 		}),
-		CutoutBorder = reactModule.createElement("Frame", {
+		CutoutBorder = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			Active = false,
 			ZIndex = 4,
-			Size = UDim2.fromOffset(maxValue_4, maxValue_4),
-			Position = UDim2.fromOffset(var4, var5),
+			Size = UDim2.fromOffset(Largest3, Largest3),
+			Position = UDim2.fromOffset(NewLargest, NewCutoutTopOffset),
 			AnchorPoint = Vector2.new(0.5, 0.5)
 		}, {
-			UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0.5, 0) }),
-			UIStroke = reactModule.createElement("UIStroke", {
+			UICorner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0.5, 0) }),
+			UIStroke = ReactModule.createElement("UIStroke", {
 				ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
-				Color = color3_1,
-				Transparency = transparency_1,
-				Thickness = maxValue_2
+				Color = EmphasisColor3,
+				Transparency = Transparency1,
+				Thickness = Largest1
 			})
 		}),
-		ProfileFrame = if p1.frameImage then reactModule.createElement("ImageLabel", {
+		ProfileFrame = if p1.frameImage then ReactModule.createElement("ImageLabel", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			Active = false,
 			ZIndex = 5,
 			Image = p1.frameImage,
-			Size = UDim2.fromOffset(floored, floored),
-			Position = UDim2.fromOffset(var4, var5),
+			Size = UDim2.fromOffset(Floored, Floored),
+			Position = UDim2.fromOffset(NewLargest, NewCutoutTopOffset),
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			ScaleType = Enum.ScaleType.Fit
 		}) else nil

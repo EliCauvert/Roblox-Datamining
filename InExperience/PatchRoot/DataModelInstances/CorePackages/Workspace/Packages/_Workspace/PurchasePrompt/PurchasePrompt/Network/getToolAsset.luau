@@ -1,14 +1,14 @@
-﻿return function(value, p1)
-	return value.loadAssetForEquip(p1):andThen(function(p2)
-		if p2:IsA("Tool") then
-			return p2
+﻿return function(p1, p2) --[[ Line: 2 | Named "getToolAsset" ]]
+	return p1.loadAssetForEquip(p2):andThen(function(Result: Tool) --[[ Line: 5 ]]
+		if Result:IsA("Tool") then
+			return Result
 		end
-		for i, v in ipairs(p2:GetChildren()) do
-			if v:IsA("Tool") then
-				return v
+		for _, Tool in ipairs((Result:GetChildren())) do
+			if Tool:IsA("Tool") then
+				return Tool
 			end
 		end
-	end):catch(function(_)
+	end):catch(function(_) --[[ Line: 17 ]]
 		return nil
 	end)
 end

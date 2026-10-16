@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.SocialCards.SocialCards)
+﻿return (require(script.Parent.Parent.Parent._Index.SocialCards.SocialCards))

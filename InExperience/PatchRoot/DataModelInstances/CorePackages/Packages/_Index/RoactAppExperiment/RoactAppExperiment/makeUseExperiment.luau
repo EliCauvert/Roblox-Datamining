@@ -1,119 +1,120 @@
-﻿local roactAppExperiment = script:FindFirstAncestor("RoactAppExperiment")
-local reactModule = require(roactAppExperiment.Parent.React)
-local usePreviousModule = require(script.Parent.usePrevious)
-local useIXPServiceModule = require(roactAppExperiment.useIXPService)
+﻿local RoactAppExperiment = script:FindFirstAncestor("RoactAppExperiment")
+local ReactModule = require(RoactAppExperiment.Parent.React)
+local UsePreviousModule = require(script.Parent.usePrevious)
+local UseIXPServiceModule = require(RoactAppExperiment.useIXPService)
 
-local function _(p1)
-	local var1 = ""
+local function _(List): string --[[ Line: 21 | Named "getLayerNamesKey" ]]
+	local Text = ""
 	
-	for i, v in ipairs(p1) do
+	for i, value in ipairs(List) do
 		if i > 1 then
-			var1 ..= ","
+			Text ..= ","
 		end
-		var1 ..= v
+		Text ..= value
 	end
-	return var1
+	return Text
 end
 
-return function(p2, p3, p4, p5, p6)
-	-- upvalues: useIXPServiceModule (ref), reactModule (ref), usePreviousModule (ref)
-	return function(p7, p8, p9)
-		-- upvalues: useIXPServiceModule (copy), p4 (ref), p3 (ref), reactModule (copy), p2 (ref), usePreviousModule (copy), p6 (ref), p5 (ref)
-		if p9 == nil then
-			p9 = true
+return function(p1, p2, p3, p4, p5) --[[ Line: 35 | Named "makeUseExperiment" ]]
+	-- upvalues: UseIXPServiceModule (copy), ReactModule (copy), UsePreviousModule (copy)
+	return function(List, Callback, p6: boolean) --[[ Line: 45 ]]
+		-- upvalues: UseIXPServiceModule (upval), p3 (copy), p2 (copy), ReactModule (upval), p1 (copy), UsePreviousModule (upval), p5 (copy), p4 (copy)
+		if p6 == nil then
+			p6 = true
 		end
-		local var2 = useIXPServiceModule()
-		assert(type(p7) == "table", "useExperiment expects layerNames to be a list of layers")
-		assert(type(p8) == "function", "useExperiment expects mapLayers to be a function")
+		local UseIXPServiceModuleResult = UseIXPServiceModule()
+		assert(type(List) == "table", "useExperiment expects layerNames to be a list of layers")
+		assert(type(Callback) == "function", "useExperiment expects mapLayers to be a function")
 		
-		local function getNewLayerToVariables()
-			-- upvalues: p7 (ref), var2 (ref), p4 (copy)
+		local function getNewLayerToVariables() --[[ Line: 59 ]]
+			-- upvalues: List (copy), UseIXPServiceModuleResult (copy), p3 (upval)
 			local t = {}
 			
-			for i, v in ipairs(p7) do
-				t[v] = var2[p4](var2, v)
+			for _, value in ipairs(List) do
+				t[value] = UseIXPServiceModuleResult[p3](UseIXPServiceModuleResult, value)
 				
-				if t[v] and not next(t[v]) then
-					t[v] = nil
+				if t[value] and not next(t[value]) then
+					t[value] = nil
 				end
 			end
 			return t
 		end
 		
-		local function getLoadingStatus()
-			-- upvalues: var2 (ref), p3 (copy)
-			return var2[p3](var2)
+		local function getLoadingStatus() --[[ Line: 75 ]]
+			-- upvalues: UseIXPServiceModuleResult (copy), p2 (upval)
+			return UseIXPServiceModuleResult[p2](UseIXPServiceModuleResult)
 		end
 		
-		local var3, var4 = reactModule.useState(getNewLayerToVariables)
-		local var5, var6 = reactModule.useState(getLoadingStatus)
-		local var7 = ""
+		local UseStateResult, UseStateResult2 = ReactModule.useState(getNewLayerToVariables)
+		local UseStateResult1, UseStateResult2_1 = ReactModule.useState(getLoadingStatus)
+		local Text = ""
 		
-		for i, v in ipairs(p7) do
+		for i, value in ipairs(List) do
 			if i > 1 then
-				var7 ..= ","
+				Text ..= ","
 			end
-			var7 ..= v
+			Text ..= value
 		end
-		reactModule.useEffect(function()
-			-- upvalues: var2 (ref), p3 (copy), getNewLayerToVariables (ref), var4 (ref), var6 (ref), p2 (copy)
-			if var2 == nil then
-				return function() end
-			end
-			local function _()
-				-- upvalues: var2 (copy), p3 (copy), getNewLayerToVariables (copy), var4 (copy), var6 (copy)
-				local var8 = var2[p3](var2)
-				local var9 = getNewLayerToVariables()
-				var4(function(p10)
-					-- upvalues: var9 (ref)
-					return if not next(var9) == not next(p10) then p10 else var9
+		ReactModule.useEffect(function() --[[ Line: 86 ]]
+			-- upvalues: UseIXPServiceModuleResult (copy), p2 (upval), getNewLayerToVariables (copy), UseStateResult2 (copy), UseStateResult2_1 (copy), p1 (upval)
+			if UseIXPServiceModuleResult == nil then
+				return function() --[[ Line: 88 ]] end
+			else
+				local function _() --[[ Line: 91 | Named "updateStateLayerData" ]]
+					-- upvalues: UseIXPServiceModuleResult (upval), p2 (upval), getNewLayerToVariables (upval), UseStateResult2 (upval), UseStateResult2_1 (upval)
+					local v1 = UseIXPServiceModuleResult[p2](UseIXPServiceModuleResult)
+					local NewLayerToVariables = getNewLayerToVariables()
+					UseStateResult2(function(p7) --[[ Line: 95 ]]
+						-- upvalues: NewLayerToVariables (copy)
+						return if not next(NewLayerToVariables) == not next(p7) then p7 else NewLayerToVariables
+					end)
+					UseStateResult2_1(v1)
+				end
+				
+				local Connection = UseIXPServiceModuleResult[p1]:Connect(function(_) --[[ Line: 106 ]]
+					-- upvalues: UseIXPServiceModuleResult (upval), p2 (upval), getNewLayerToVariables (upval), UseStateResult2 (upval), UseStateResult2_1 (upval)
+					local v1 = UseIXPServiceModuleResult[p2](UseIXPServiceModuleResult)
+					local NewLayerToVariables = getNewLayerToVariables()
+					UseStateResult2(function(p7) --[[ Line: 95 ]]
+						-- upvalues: NewLayerToVariables (copy)
+						return if not next(NewLayerToVariables) == not next(p7) then p7 else NewLayerToVariables
+					end)
+					UseStateResult2_1(v1)
 				end)
-				var6(var8)
-			end
-			
-			local var8 = var2[p2]:Connect(function(_)
-				-- upvalues: var2 (copy), p3 (copy), getNewLayerToVariables (copy), var4 (copy), var6 (copy)
-				local var9 = var2[p3](var2)
-				local var10 = getNewLayerToVariables()
-				var4(function(p10)
-					-- upvalues: var10 (ref)
-					return if not next(var10) == not next(p10) then p10 else var10
+				local v1 = UseIXPServiceModuleResult[p2](UseIXPServiceModuleResult)
+				local NewLayerToVariables = getNewLayerToVariables()
+				UseStateResult2(function(p7) --[[ Line: 95 ]]
+					-- upvalues: NewLayerToVariables (copy)
+					return if not next(NewLayerToVariables) == not next(p7) then p7 else NewLayerToVariables
 				end)
-				var6(var9)
-			end)
-			local var9 = var2[p3](var2)
-			local var10 = getNewLayerToVariables()
-			var4(function(p10)
-				-- upvalues: var10 (ref)
-				return if not next(var10) == not next(p10) then p10 else var10
-			end)
-			var6(var9)
-			
-			return function()
-				-- upvalues: var8 (ref)
-				if var8 ~= nil then
-					var8:Disconnect()
+				UseStateResult2_1(v1)
+				
+				return function() --[[ Line: 117 ]]
+					-- upvalues: Connection (copy)
+					if Connection ~= nil then
+						Connection:Disconnect()
+					end
 				end
 			end
-		end, { var2, var7 })
-		local var8 = usePreviousModule(var5) or Enum.IXPLoadingStatus.None
-		reactModule.useEffect(function()
-			-- upvalues: p9 (write), var2 (ref), var5 (ref), var8 (ref), p7 (ref), p6 (copy), p5 (copy)
-			if p9 and var2 ~= nil and (var5 == Enum.IXPLoadingStatus.Initialized and var8 ~= Enum.IXPLoadingStatus.Initialized) then
-				for i, v in ipairs(p7) do
-					if var2[p6](var2, v) == Enum.IXPLoadingStatus.Initialized then
-						var2[p5](var2, v)
+		end, { UseIXPServiceModuleResult, Text })
+		local UsePreviousModuleResult = UsePreviousModule(UseStateResult1) or Enum.IXPLoadingStatus.None
+		ReactModule.useEffect(function() --[[ Line: 127 ]]
+			-- upvalues: p6 (ref), UseIXPServiceModuleResult (copy), UseStateResult1 (copy), UsePreviousModuleResult (copy), List (copy), p5 (upval), p4 (upval)
+			if p6 and UseIXPServiceModuleResult ~= nil and UseStateResult1 == Enum.IXPLoadingStatus.Initialized and UsePreviousModuleResult ~= Enum.IXPLoadingStatus.Initialized then
+				for _, value in ipairs(List) do
+					if UseIXPServiceModuleResult[p5](UseIXPServiceModuleResult, value) == Enum.IXPLoadingStatus.Initialized then
+						UseIXPServiceModuleResult[p4](UseIXPServiceModuleResult, value)
 					end
 				end
 			end
 		end, {
-			var2,
-			var7,
-			p9,
-			var5,
-			var8
+			UseIXPServiceModuleResult,
+			Text,
+			p6,
+			UseStateResult1,
+			UsePreviousModuleResult
 		})
 		
-		return p8(var3)
+		return Callback(UseStateResult)
 	end
 end

@@ -1,16 +1,16 @@
-﻿local parent = script.Parent
-local parent_1 = script:FindFirstAncestor("Foundation").Parent
-local getStoriesModule = require(parent.GetStories)
+﻿local Parent = script.Parent
+local Parent1 = script:FindFirstAncestor("Foundation").Parent
+local GetStoriesModule = require(Parent.GetStories)
 
 return {
 	name = "Components",
 	group = "Foundation",
-	roact = require(parent_1.Roact),
-	storyRoots = getStoriesModule.getStorybookRoots("components"),
-	exclude = getStoriesModule.getComponentFolderExcludeList("components"),
-	mapStory = require(parent.StoryMiddleware),
+	roact = require(Parent1.Roact),
+	storyRoots = GetStoriesModule.getStorybookRoots("components"),
+	exclude = GetStoriesModule.getComponentFolderExcludeList("components"),
+	mapStory = require(Parent.StoryMiddleware),
 	packages = {
-		React = require(parent_1.React),
-		ReactRoblox = require(parent_1.ReactRoblox)
+		React = require(Parent1.React),
+		ReactRoblox = require(Parent1.ReactRoblox)
 	}
 }

@@ -1,36 +1,38 @@
-﻿local parent = script:FindFirstAncestor("AppChat").Parent
-local reactModule = require(parent.React)
-local inputHandlersModule = require(parent.InputHandlers)
-local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-local focusNavigationEventNameEnum = focusNavigationUtilsModule.FocusNavigationEventNameEnum
-local autoFocusNavigationModule = require(script.Parent.autoFocusNavigation)
+﻿local Parent = script:FindFirstAncestor("AppChat").Parent
+local ReactModule = require(Parent.React)
+local InputHandlersModule = require(Parent.InputHandlers)
+local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
+local FocusNavigationEventNameEnum = FocusNavigationUtilsModule.FocusNavigationEventNameEnum
+local AutoFocusNavigationModule = require(script.Parent.autoFocusNavigation)
 
-return function(p1, p2, p3)
-	-- upvalues: reactModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), focusNavigationUtilsModule (ref), autoFocusNavigationModule (ref)
-	return function(p4)
-		-- upvalues: reactModule (copy), focusNavigationEventNameEnum (copy), inputHandlersModule (copy), p3 (ref), focusNavigationUtilsModule (copy), p2 (ref), autoFocusNavigationModule (copy), p1 (ref)
-		return reactModule.createElement(focusNavigationUtilsModule.FocusNavigableSurfaceWrapper, {
+return function(p1, SurfaceIdentifier, Callback) --[[ Line: 13 | Named "isolatedAutoFocusNavigation" ]]
+	-- upvalues: ReactModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), FocusNavigationUtilsModule (copy), AutoFocusNavigationModule (copy)
+	return function(p2) --[[ Line: 18 ]]
+		-- upvalues: ReactModule (upval), FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), Callback (copy), FocusNavigationUtilsModule (upval), SurfaceIdentifier (copy), AutoFocusNavigationModule (upval), p1 (copy)
+		local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 19 ]]
+			-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), Callback (upval), p2 (copy)
+			return {
+				[FocusNavigationEventNameEnum.NavigateBack] = {
+					handler = InputHandlersModule.onRelease(function(p3) --[[ Line: 22 ]]
+						-- upvalues: Callback (upval), p2 (upval)
+						if Callback then
+							Callback(p2)
+							p3:cancel()
+						end
+					end)
+				}
+			}
+		end, { Callback })
+		
+		return ReactModule.createElement(FocusNavigationUtilsModule.FocusNavigableSurfaceWrapper, {
 			isIsolated = true,
 			shouldRestoreFocus = true,
 			isAutoFocusRoot = false,
 			isFocusable = true,
-			surfaceIdentifier = p2,
-			customEventHandlers = if p3 then reactModule.useMemo(function()
-				-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), p3 (copy), p4 (ref)
-				return {
-					[focusNavigationEventNameEnum.NavigateBack] = {
-						handler = inputHandlersModule.onRelease(function(p5)
-							-- upvalues: p3 (copy), p4 (copy)
-							if p3 then
-								p3(p4)
-								p5:cancel()
-							end
-						end)
-					}
-				}
-			end, { p3 }) else nil
+			surfaceIdentifier = SurfaceIdentifier,
+			customEventHandlers = if Callback then UseMemoResult else nil
 		}, {
-			content = reactModule.createElement(autoFocusNavigationModule(p1), p4)
+			content = ReactModule.createElement(AutoFocusNavigationModule(p1), p2)
 		})
 	end
 end

@@ -1,14 +1,14 @@
-﻿local userInputService = game:GetService("UserInputService")
-local parent = script:FindFirstAncestor("AppSplitView").Parent
-local reactModule = require(parent.React)
-local useTokens = require(parent.Foundation).Hooks.useTokens
+﻿local UserInputService = game:GetService("UserInputService")
+local Parent = script:FindFirstAncestor("AppSplitView").Parent
+local ReactModule = require(Parent.React)
+local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
 
-local function VisualPaneResizer(p1)
-	-- upvalues: useTokens (ref), reactModule (ref)
-	local var1 = useTokens()
-	local lineTopInset = p1.lineTopInset or 0
+local function VisualPaneResizer(p1) --[[ Line: 22 ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy)
+	local UseTokensResult = UseTokensFunction()
+	local LineTopInset = p1.lineTopInset or 0
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
 		Active = false,
@@ -17,40 +17,40 @@ local function VisualPaneResizer(p1)
 		Size = UDim2.new(0, p1.hitWidth, 1, 0),
 		ZIndex = p1.ZIndex
 	}, {
-		Line = reactModule.createElement("Frame", {
+		Line = ReactModule.createElement("Frame", {
 			Name = "Line",
 			BorderSizePixel = 0,
 			Active = false,
 			AnchorPoint = Vector2.new(0.5, 0),
-			Position = UDim2.new(0.5, 0, 0, lineTopInset),
-			Size = UDim2.new(0, 1, 1, -lineTopInset),
-			BackgroundColor3 = var1.Color.Stroke.Emphasis.Color3,
-			BackgroundTransparency = var1.Color.Stroke.Emphasis.Transparency
+			Position = UDim2.new(0.5, 0, 0, LineTopInset),
+			Size = UDim2.new(0, 1, 1, -LineTopInset),
+			BackgroundColor3 = UseTokensResult.Color.Stroke.Emphasis.Color3,
+			BackgroundTransparency = UseTokensResult.Color.Stroke.Emphasis.Transparency
 		})
 	})
 end
 
-local function InteractivePaneResizer(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), userInputService (ref)
-	local var1 = useTokens()
-	local name = p1.Name or "PaneResizer"
-	local lineTopInset = p1.lineTopInset or 0
-	local var2, var3 = reactModule.useBinding(false)
-	local var4 = reactModule.useRef(p1.onDrag)
-	local var5 = reactModule.useRef(p1.onDragStart)
-	local var6 = reactModule.useRef(p1.onDragEnd)
-	var4.current = p1.onDrag
-	var5.current = p1.onDragStart
-	var6.current = p1.onDragEnd
-	local var7 = reactModule.useRef(false)
-	local var8 = reactModule.useRef(false)
-	local var9 = reactModule.useCallback(function()
-		-- upvalues: var3 (ref), var7 (ref), var8 (ref)
-		var3(var7.current or var8.current)
+local function InteractivePaneResizer(p1) --[[ Line: 49 ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), UserInputService (copy)
+	local UseTokensResult = UseTokensFunction()
+	local Name = p1.Name or "PaneResizer"
+	local LineTopInset = p1.lineTopInset or 0
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(false)
+	local UseRefResult = ReactModule.useRef(p1.onDrag)
+	local UseRefResult1 = ReactModule.useRef(p1.onDragStart)
+	local UseRefResult2 = ReactModule.useRef(p1.onDragEnd)
+	UseRefResult.current = p1.onDrag
+	UseRefResult1.current = p1.onDragStart
+	UseRefResult2.current = p1.onDragEnd
+	local UseRefResult3 = ReactModule.useRef(false)
+	local UseRefResult4 = ReactModule.useRef(false)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 65 ]]
+		-- upvalues: UseBindingResult2 (copy), UseRefResult3 (copy), UseRefResult4 (copy)
+		UseBindingResult2(UseRefResult3.current or UseRefResult4.current)
 	end, {})
 	
-	return reactModule.createElement("TextButton", {
-		Name = name,
+	return ReactModule.createElement("TextButton", {
+		Name = Name,
 		Text = "",
 		AutoButtonColor = false,
 		BackgroundTransparency = 1,
@@ -59,76 +59,76 @@ local function InteractivePaneResizer(p1)
 		Position = p1.position,
 		Size = UDim2.new(0, p1.hitWidth, 1, 0),
 		ZIndex = p1.ZIndex,
-		[reactModule.Event.InputBegan] = reactModule.useCallback(function(_, p2)
-			-- upvalues: var7 (ref), var9 (ref), var5 (ref), userInputService (copy), var4 (ref), var6 (ref)
-			if p2.UserInputType ~= Enum.UserInputType.MouseButton1 and p2.UserInputType ~= Enum.UserInputType.Touch then return end
-			local position = p2.Position
-			var7.current = true
-			var9()
+		[ReactModule.Event.InputBegan] = ReactModule.useCallback(function(_, Input) --[[ Line: 69 ]]
+			-- upvalues: UseRefResult3 (copy), UseResult (copy), UseRefResult1 (copy), UserInputService (upval), UseRefResult (copy), UseRefResult2 (copy)
+			if Input.UserInputType ~= Enum.UserInputType.MouseButton1 and Input.UserInputType ~= Enum.UserInputType.Touch then return end
+			local Position = Input.Position
+			UseRefResult3.current = true
+			UseResult()
 			
-			if var5.current then
-				var5.current()
+			if UseRefResult1.current then
+				UseRefResult1.current()
 			end
-			local _ = nil
-			local changedConnection = nil
-			local inputChangedConnection = userInputService.InputChanged:Connect(function(p3)
-				-- upvalues: var4 (copy), position (write)
-				if p3.UserInputType ~= Enum.UserInputType.MouseMovement and p3.UserInputType ~= Enum.UserInputType.Touch then return end
-				if var4.current then
-					local var10 = p3.Position - position
-					position = p3.Position
-					var4.current(Vector2.new(var10.X, var10.Y))
+			local InputChangedConnection = nil
+			local Connection = nil
+			InputChangedConnection = UserInputService.InputChanged:Connect(function(Input) --[[ Line: 87 ]]
+				-- upvalues: UseRefResult (upval), Position (ref)
+				if Input.UserInputType ~= Enum.UserInputType.MouseMovement and Input.UserInputType ~= Enum.UserInputType.Touch then return end
+				if UseRefResult.current then
+					local PositionDelta = Input.Position - Position
+					Position = Input.Position
+					UseRefResult.current(Vector2.new(PositionDelta.X, PositionDelta.Y))
 				end
 			end)
-			changedConnection = p2.Changed:Connect(function(p3)
-				-- upvalues: p2 (ref), inputChangedConnection (write), changedConnection (write), var7 (copy), var9 (copy), var6 (copy)
-				if p3 == "UserInputState" and p2.UserInputState == Enum.UserInputState.End then
-					if inputChangedConnection then
-						inputChangedConnection:Disconnect()
+			Connection = Input.Changed:Connect(function(p2) --[[ Line: 101 ]]
+				-- upvalues: Input (copy), InputChangedConnection (ref), Connection (ref), UseRefResult3 (upval), UseResult (upval), UseRefResult2 (upval)
+				if p2 == "UserInputState" and Input.UserInputState == Enum.UserInputState.End then
+					if InputChangedConnection then
+						InputChangedConnection:Disconnect()
 					end
-					if changedConnection then
-						changedConnection:Disconnect()
+					if Connection then
+						Connection:Disconnect()
 					end
-					var7.current = false
-					var9()
+					UseRefResult3.current = false
+					UseResult()
 					
-					if var6.current then
-						var6.current()
+					if UseRefResult2.current then
+						UseRefResult2.current()
 					end
 				end
 			end)
-		end, { var9 }),
-		[reactModule.Event.MouseEnter] = reactModule.useCallback(function(_, _)
-			-- upvalues: var8 (ref), var9 (ref)
-			var8.current = true
-			var9()
-		end, { var9 }),
-		[reactModule.Event.MouseLeave] = reactModule.useCallback(function(_, _)
-			-- upvalues: var8 (ref), var9 (ref)
-			var8.current = false
-			var9()
-		end, { var9 })
+		end, { UseResult }),
+		[ReactModule.Event.MouseEnter] = ReactModule.useCallback(function(_, _) --[[ Line: 118 ]]
+			-- upvalues: UseRefResult4 (copy), UseResult (copy)
+			UseRefResult4.current = true
+			UseResult()
+		end, { UseResult }),
+		[ReactModule.Event.MouseLeave] = ReactModule.useCallback(function(_, _) --[[ Line: 122 ]]
+			-- upvalues: UseRefResult4 (copy), UseResult (copy)
+			UseRefResult4.current = false
+			UseResult()
+		end, { UseResult })
 	}, {
-		Line = reactModule.createElement("Frame", {
+		Line = ReactModule.createElement("Frame", {
 			Name = "Line",
 			BorderSizePixel = 0,
 			Active = false,
 			AnchorPoint = Vector2.new(0.5, 0),
-			Position = UDim2.new(0.5, 0, 0, lineTopInset),
-			Size = UDim2.new(0, 1, 1, -lineTopInset),
-			BackgroundColor3 = var2:map(function(p2)
-				-- upvalues: var1 (ref)
-				return if p2 then var1.Color.System.Emphasis.Color3 else var1.Color.Stroke.Emphasis.Color3
+			Position = UDim2.new(0.5, 0, 0, LineTopInset),
+			Size = UDim2.new(0, 1, 1, -LineTopInset),
+			BackgroundColor3 = UseBindingResult:map(function(p2) --[[ Line: 127 ]]
+				-- upvalues: UseTokensResult (copy)
+				return if p2 then UseTokensResult.Color.System.Emphasis.Color3 else UseTokensResult.Color.Stroke.Emphasis.Color3
 			end),
-			BackgroundTransparency = var2:map(function(p2)
-				-- upvalues: var1 (ref)
-				return if p2 then var1.Color.System.Emphasis.Transparency else var1.Color.Stroke.Emphasis.Transparency
+			BackgroundTransparency = UseBindingResult:map(function(p2) --[[ Line: 130 ]]
+				-- upvalues: UseTokensResult (copy)
+				return if p2 then UseTokensResult.Color.System.Emphasis.Transparency else UseTokensResult.Color.Stroke.Emphasis.Transparency
 			end)
 		})
 	})
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), VisualPaneResizer (ref), InteractivePaneResizer (ref)
-	return if p1.interactive == false then reactModule.createElement(VisualPaneResizer, p1) else reactModule.createElement(InteractivePaneResizer, p1)
+return ReactModule.memo(function(p1) --[[ Line: 161 | Named "PaneResizer" ]]
+	-- upvalues: ReactModule (copy), VisualPaneResizer (copy), InteractivePaneResizer (copy)
+	return if p1.interactive == false then ReactModule.createElement(VisualPaneResizer, p1) else ReactModule.createElement(InteractivePaneResizer, p1)
 end)

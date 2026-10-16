@@ -1,30 +1,30 @@
-﻿local roduxPresence = script:FindFirstAncestor("RoduxPresence")
-local parent = roduxPresence.Parent
-local roduxModule = require(parent.Rodux)
-local cryoModule = require(parent.Cryo)
-local receivedUserPresenceModule = require(roduxPresence.Actions.ReceivedUserPresence)
-local presenceModelModule = require(roduxPresence.Models.PresenceModel)
+﻿local RoduxPresence = script:FindFirstAncestor("RoduxPresence")
+local Parent = RoduxPresence.Parent
+local RoduxModule = require(Parent.Rodux)
+local CryoModule = require(Parent.Cryo)
+local ReceivedUserPresenceModule = require(RoduxPresence.Actions.ReceivedUserPresence)
+local PresenceModelModule = require(RoduxPresence.Models.PresenceModel)
 local t = {}
 
-return function(p1)
-	-- upvalues: roduxModule (ref), t (ref), receivedUserPresenceModule (ref), presenceModelModule (ref), cryoModule (ref)
-	return roduxModule.createReducer(t, {
-		[receivedUserPresenceModule.name] = function(p2, p3)
-			-- upvalues: presenceModelModule (copy), cryoModule (copy)
-			local userId = p3.payload.userId
-			local payload = p3.payload
-			assert(presenceModelModule.isValid(payload))
+return function(p1) --[[ Line: 12 ]]
+	-- upvalues: RoduxModule (copy), t (copy), ReceivedUserPresenceModule (copy), PresenceModelModule (copy), CryoModule (copy)
+	return RoduxModule.createReducer(t, {
+		[ReceivedUserPresenceModule.name] = function(p2, p3) --[[ Line: 16 ]]
+			-- upvalues: PresenceModelModule (upval), CryoModule (upval)
+			local UserId = p3.payload.userId
+			local Payload = p3.payload
+			assert(PresenceModelModule.isValid(Payload))
 			
-			return cryoModule.Dictionary.join(p2, { [userId] = presenceModelModule.format(payload) })
+			return CryoModule.Dictionary.join(p2, { [UserId] = PresenceModelModule.format(Payload) })
 		end,
-		[p1.presenceNetworking.GetPresencesFromUserIds.Succeeded.name] = function(p2, p3)
-			-- upvalues: presenceModelModule (copy), cryoModule (copy)
-			local t = {}
+		[p1.presenceNetworking.GetPresencesFromUserIds.Succeeded.name] = function(p2, p3) --[[ Line: 27 ]]
+			-- upvalues: PresenceModelModule (upval), CryoModule (upval)
+			local FormatResults = {}
 			
-			for i, v in ipairs(p3.responseBody.userPresences) do
-				t[tostring(v.userId)] = presenceModelModule.format(v)
+			for _, userPresence in ipairs(p3.responseBody.userPresences) do
+				FormatResults[tostring(userPresence.userId)] = PresenceModelModule.format(userPresence)
 			end
-			return cryoModule.Dictionary.join(p2, t)
+			return CryoModule.Dictionary.join(p2, FormatResults)
 		end
 	})
 end

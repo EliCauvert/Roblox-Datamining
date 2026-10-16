@@ -1,140 +1,145 @@
-﻿local parent = script:FindFirstAncestor("GenericAbuseReporting").Parent
-local httpService = game:GetService("HttpService")
-local localPlayer = game:GetService("Players").LocalPlayer
-local dashModule = require(parent.Dash)
+﻿local HttpService = game:GetService("HttpService")
+local LocalPlayer = game:GetService("Players").LocalPlayer
+local DashModule = require(script:FindFirstAncestor("GenericAbuseReporting").Parent.Dash)
 local _ = require(script.Parent.AbuseSheetFlowTypes)
 
-local function getInitialState(p1, p2, p3)
-	-- upvalues: localPlayer (ref)
+local function getInitialState(RunId, EnterTime, NodeId) --[[ Line: 30 ]]
+	-- upvalues: LocalPlayer (copy)
 	return {
 		navigationState = "idle",
 		submissionState = "idle",
-		runId = p1,
-		userId = if localPlayer then localPlayer.UserId else 0,
-		stack = { { nodeId = p3, store = {}, enterTime = p2 } },
-		openTime = p2
+		runId = RunId,
+		userId = if LocalPlayer then LocalPlayer.UserId else 0,
+		stack = { { nodeId = NodeId, store = {}, enterTime = EnterTime } },
+		openTime = EnterTime
 	}
 end
 
 return {
 	getInitialState = getInitialState,
-	getNewRunId = function()
-		-- upvalues: httpService (ref)
-		return httpService:GenerateGUID(false)
+	getNewRunId = function() --[[ Line: 84 ]]
+		-- upvalues: HttpService (copy)
+		return HttpService:GenerateGUID(false)
 	end,
-	selectStore = function(p1)
+	selectStore = function(p1) --[[ Line: 88 ]]
 		local t = {}
 		
-		for i, v in p1.stack do
-			if v.store then
-				for i_1, v_1 in v.store do
-					t[i_1] = v_1
+		for _, value in p1.stack do
+			if value.store then
+				for i, value1 in value.store do
+					t[i] = value1
 				end
 			end
 		end
 		return t
 	end,
-	reducer = function(p2, p3)
-		-- upvalues: dashModule (ref), getInitialState (ref)
-		local var1 = nil
+	reducer = function(InitialState, p2) --[[ Line: 100 ]]
+		-- upvalues: DashModule (copy), getInitialState (copy)
+		local JoinResult = nil
 		
-		if p3.type == "gotoNode" then
-			if not p3.payload or not p3.payload.nodeId then
-				error(`gotoNode action requires payload.nodeId, got: {dashModule.pretty(p3, { depth = 5 })}`)
+		if p2.type == "gotoNode" then
+			if not p2.payload or not p2.payload.nodeId then
+				error(`gotoNode action requires payload.nodeId, got: {DashModule.pretty(p2, { depth = 5 })}`)
 			end
-			local cloned = table.clone(p2.stack)
-			table.insert(cloned, {
-				nodeId = p3.payload.nodeId,
+			local Copy = table.clone(InitialState.stack)
+			table.insert(Copy, {
+				nodeId = p2.payload.nodeId,
 				store = {},
-				enterTime = p3.payload.enterTime
+				enterTime = p2.payload.enterTime
 			})
-			var1 = dashModule.join(p2, {
+			JoinResult = DashModule.join(InitialState, {
 				navigationState = "idle",
 				lastNavigationDirection = "forward",
-				stack = cloned
+				stack = Copy
 			})
 			
-			return var1
-		elseif p3.type == "replaceAndGotoNode" then
-			local var2 = dashModule.last(p2.stack)
+			return JoinResult
+		elseif p2.type == "replaceAndGotoNode" then
+			local LastResult = DashModule.last(InitialState.stack)
 			
-			if not var2 then
+			if not LastResult then
 				error("Stack is empty, cannot replace and go to node")
 			end
-			local var3 = dashModule.slice(p2.stack, 1, #p2.stack - 1)
-			table.insert(var3, {
-				nodeId = p3.payload.nodeId,
-				store = var2.store,
-				enterTime = p3.payload.enterTime
+			local SliceResult = DashModule.slice(InitialState.stack, 1, #InitialState.stack - 1)
+			table.insert(SliceResult, {
+				nodeId = p2.payload.nodeId,
+				store = LastResult.store,
+				enterTime = p2.payload.enterTime
 			})
-			var1 = dashModule.join(p2, {
+			JoinResult = DashModule.join(InitialState, {
 				navigationState = "idle",
 				lastNavigationDirection = "forward",
-				stack = var3
+				stack = SliceResult
 			})
 			
-			return var1
-		elseif p3.type == "goBack" then
-			if #p2.stack <= 1 then
-				warn("Cannot go back from stack with only one or zero items")
+			return JoinResult
+		elseif p2.type ~= "goBack" then
+			if p2.type == "updateDataAndNavigateNext" then
+				local LastResult = DashModule.last(InitialState.stack)
 				
-				return p2
+				if not LastResult then
+					error("Stack is empty, cannot update data")
+				end
+				if p2.payload.expectedFromNodeId ~= LastResult.nodeId then
+					return InitialState
+				elseif InitialState.navigationState == "idle" then
+					local SliceResult = DashModule.slice(InitialState.stack, 1, #InitialState.stack - 1)
+					table.insert(SliceResult, (DashModule.join(LastResult, {
+						store = DashModule.join(LastResult.store, p2.payload.store)
+					})))
+					JoinResult = DashModule.join(InitialState, { navigationState = "gotoNext", stack = SliceResult })
+					
+					return JoinResult
+				else
+					return InitialState
+				end
+			elseif p2.type == "navigateFailure" then
+				local LastResult = DashModule.last(InitialState.stack)
+				
+				if not LastResult then
+					error("Stack is empty, cannot navigate after failure")
+				end
+				if p2.payload.expectedFromNodeId ~= LastResult.nodeId then
+					return InitialState
+				elseif InitialState.navigationState == "idle" then
+					JoinResult = DashModule.join(InitialState, { navigationState = "gotoFailure" })
+					
+					return JoinResult
+				else
+					return InitialState
+				end
+			elseif p2.type == "startedSubmission" then
+				JoinResult = DashModule.join(InitialState, { submissionState = "submitting" })
+				
+				return JoinResult
+			elseif p2.type == "completedSubmission" then
+				JoinResult = DashModule.join(InitialState, { submissionState = "completed" })
+				
+				return JoinResult
+			elseif p2.type == "submissionFailed" then
+				JoinResult = DashModule.join(InitialState, { submissionState = "failed" })
+				
+				return JoinResult
+			elseif p2.type == "reset" then
+				JoinResult = getInitialState(p2.payload.runId, p2.payload.initialEnterTime, p2.payload.startNodeId)
+				
+				return JoinResult
+			else
+				error("Unknown action type: " .. tostring(p2.type))
+				
+				return JoinResult
 			end
-			var1 = dashModule.join(p2, {
+		elseif #InitialState.stack <= 1 then
+			warn("Cannot go back from stack with only one or zero items")
+			
+			return InitialState
+		else
+			JoinResult = DashModule.join(InitialState, {
 				lastNavigationDirection = "back",
-				stack = dashModule.slice(p2.stack, 1, #p2.stack - 1)
+				stack = DashModule.slice(InitialState.stack, 1, #InitialState.stack - 1)
 			})
 			
-			return var1
-		elseif p3.type == "updateDataAndNavigateNext" then
-			local var4 = dashModule.last(p2.stack)
-			
-			if not var4 then
-				error("Stack is empty, cannot update data")
-			end
-			if p3.payload.expectedFromNodeId ~= var4.nodeId then
-				return p2
-			elseif p2.navigationState == "idle" then
-				local var5 = dashModule.slice(p2.stack, 1, #p2.stack - 1)
-				table.insert(var5, dashModule.join(var4, { store = dashModule.join(var4.store, p3.payload.store) }))
-				var1 = dashModule.join(p2, { navigationState = "gotoNext", stack = var5 })
-				
-				return var1
-			end
-			return p2
-		elseif p3.type == "navigateFailure" then
-			local var6 = dashModule.last(p2.stack)
-			
-			if not var6 then
-				error("Stack is empty, cannot navigate after failure")
-			end
-			if p3.payload.expectedFromNodeId ~= var6.nodeId then
-				return p2
-			elseif p2.navigationState == "idle" then
-				var1 = dashModule.join(p2, { navigationState = "gotoFailure" })
-				
-				return var1
-			end
-			return p2
-		elseif p3.type == "startedSubmission" then
-			var1 = dashModule.join(p2, { submissionState = "submitting" })
-			
-			return var1
-		elseif p3.type == "completedSubmission" then
-			var1 = dashModule.join(p2, { submissionState = "completed" })
-			
-			return var1
-		elseif p3.type == "submissionFailed" then
-			var1 = dashModule.join(p2, { submissionState = "failed" })
-			
-			return var1
-		elseif p3.type == "reset" then
-			var1 = getInitialState(p3.payload.runId, p3.payload.initialEnterTime, p3.payload.startNodeId)
-			
-			return var1
+			return JoinResult
 		end
-		error("Unknown action type: " .. tostring(p3.type))
-		
-		return var1
 	end
 }

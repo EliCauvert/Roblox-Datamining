@@ -1,13 +1,13 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local reactModule = require(buildExperience.Parent.React)
-local buildChatPageViewModule = require(script.Parent.BuildChatPageView)
-local useBuildChatPageViewModelModule = require(script.Parent.useBuildChatPageViewModel)
-local chatCardEmphasisProviderModule = require(buildExperience.Components.Chat.ChatCardEmphasis.ChatCardEmphasisProvider)
-local fFlagBuildExperienceChatCardEmphasisModule = require(buildExperience.Flags.FFlagBuildExperienceChatCardEmphasis)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local ReactModule = require(BuildExperience.Parent.React)
+local BuildChatPageViewModule = require(script.Parent.BuildChatPageView)
+local UseBuildChatPageViewModelModule = require(script.Parent.useBuildChatPageViewModel)
+local ChatCardEmphasisProviderModule = require(BuildExperience.Components.Chat.ChatCardEmphasis.ChatCardEmphasisProvider)
+local FFlagBuildExperienceChatCardEmphasisModule = require(BuildExperience.Flags.FFlagBuildExperienceChatCardEmphasis)
 
-return function(p1)
-	-- upvalues: useBuildChatPageViewModelModule (ref), fFlagBuildExperienceChatCardEmphasisModule (ref), reactModule (ref), chatCardEmphasisProviderModule (ref), buildChatPageViewModule (ref)
-	local var1 = useBuildChatPageViewModelModule(p1)
+return function(p1) --[[ Line: 13 | Named "BuildChatPage" ]]
+	-- upvalues: UseBuildChatPageViewModelModule (copy), FFlagBuildExperienceChatCardEmphasisModule (copy), ReactModule (copy), ChatCardEmphasisProviderModule (copy), BuildChatPageViewModule (copy)
+	local UseBuildChatPageViewModelModuleResult = UseBuildChatPageViewModelModule(p1)
 	
-	return if fFlagBuildExperienceChatCardEmphasisModule then reactModule.createElement(chatCardEmphasisProviderModule, nil, reactModule.createElement(buildChatPageViewModule, var1)) else reactModule.createElement(buildChatPageViewModule, var1)
+	return if FFlagBuildExperienceChatCardEmphasisModule then ReactModule.createElement(ChatCardEmphasisProviderModule, nil, ReactModule.createElement(BuildChatPageViewModule, UseBuildChatPageViewModelModuleResult)) else ReactModule.createElement(BuildChatPageViewModule, UseBuildChatPageViewModelModuleResult)
 end

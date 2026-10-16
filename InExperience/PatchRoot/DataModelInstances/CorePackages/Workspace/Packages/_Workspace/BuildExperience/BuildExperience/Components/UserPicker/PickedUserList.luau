@@ -1,34 +1,34 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local pickedUserRowModule = require(script.Parent.PickedUserRow)
-local list = foundationModule.List
-local inputSize = foundationModule.Enums.InputSize
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local PickedUserRowModule = require(script.Parent.PickedUserRow)
+local List = FoundationModule.List
+local InputSize = FoundationModule.Enums.InputSize
 
-return function(p1)
-	-- upvalues: reactModule (ref), pickedUserRowModule (ref), list (ref), inputSize (ref)
-	local testId = p1.testId or "picked-user-list"
-	local onRemove = p1.onRemove
-	local removingUserIds = p1.removingUserIds or {}
-	local t = {}
+return function(p1) --[[ Line: 31 | Named "PickedUserList" ]]
+	-- upvalues: ReactModule (copy), PickedUserRowModule (copy), List (copy), InputSize (copy)
+	local TestId = p1.testId or "picked-user-list"
+	local OnRemove = p1.onRemove
+	local RemovingUserIds = p1.removingUserIds or {}
+	local Elements = {}
 	
 	if p1.header ~= nil then
-		t.Header = p1.header
+		Elements.Header = p1.header
 	end
-	for i, v in p1.userIds do
-		t[`row-{v}`] = reactModule.createElement(pickedUserRowModule, {
-			userId = v,
-			isRemoving = removingUserIds[v] == true,
-			onRemove = onRemove,
+	for i, userId in p1.userIds do
+		Elements[`row-{userId}`] = ReactModule.createElement(PickedUserRowModule, {
+			userId = userId,
+			isRemoving = RemovingUserIds[userId] == true,
+			onRemove = OnRemove,
 			LayoutOrder = i + 1,
-			testId = `{testId}-user-{v}`
+			testId = `{TestId}-user-{userId}`
 		})
 	end
-	return reactModule.createElement(list.Root, {
+	return ReactModule.createElement(List.Root, {
 		isContained = true,
 		LayoutOrder = p1.layoutOrder,
 		hasDivider = { hasDivider = true, isInset = false },
-		size = inputSize.Medium,
-		testId = testId
-	}, t)
+		size = InputSize.Medium,
+		testId = TestId
+	}, Elements)
 end

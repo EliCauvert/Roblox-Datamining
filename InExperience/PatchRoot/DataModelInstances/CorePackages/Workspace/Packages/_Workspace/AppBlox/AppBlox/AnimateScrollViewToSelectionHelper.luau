@@ -1,62 +1,65 @@
-﻿local userGameSettingsService = UserSettings():GetService("UserGameSettings")
-local gamepadService = game:GetService("GamepadService")
-local tweenService = game:GetService("TweenService")
-local appBlox = script:FindFirstAncestor("AppBlox")
-local centerOnFocusScrollModule = require(appBlox.CenterOnFocusScroll)
-local fFlagLuaAppMediaGalleryGamepadSupport = require(appBlox.Parent.SharedFlags).FFlagLuaAppMediaGalleryGamepadSupport
+﻿local UserGameSettings = UserSettings():GetService("UserGameSettings")
+local GamepadService = game:GetService("GamepadService")
+local GuiService = game:GetService("GuiService")
+local TweenService = game:GetService("TweenService")
+local AppBlox = script:FindFirstAncestor("AppBlox")
+local CenterOnFocusScrollModule = require(AppBlox.CenterOnFocusScroll)
+local FFlagLuaAppMediaGalleryGamepadSupport = require(AppBlox.Parent.SharedFlags).FFlagLuaAppMediaGalleryGamepadSupport
+local AnimateScrollViewIgnoreStaleSelection = game:DefineFastFlag("AnimateScrollViewIgnoreStaleSelection", false)
 
-function AnimateScrollViewToSelectionHelper(p1, p2, p3, p4)
-	-- upvalues: gamepadService (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref), centerOnFocusScrollModule (ref), userGameSettingsService (ref), tweenService (ref)
-	local t = {}
-	local var1 = nil
+function AnimateScrollViewToSelectionHelper(Frame: Frame, Duration, Callback, p1) --[[ Line: 12 ]]
+	-- upvalues: GamepadService (copy), AnimateScrollViewIgnoreStaleSelection (copy), GuiService (copy), FFlagLuaAppMediaGalleryGamepadSupport (copy), CenterOnFocusScrollModule (copy), UserGameSettings (copy), TweenService (copy)
+	local List = {}
+	local CreateResult = nil
 	
-	if p1 then
-		local y = p1.AbsolutePosition.Y
-		local y_1 = p1.AbsoluteWindowSize.Y
-		table.insert(t, p1:GetPropertyChangedSignal("AbsolutePosition"):Connect(function()
-			-- upvalues: y (write), p1 (ref)
-			y = p1.AbsolutePosition.Y
+	if Frame then
+		local Y = Frame.AbsolutePosition.Y
+		local Y1 = Frame.AbsoluteWindowSize.Y
+		table.insert(List, Frame:GetPropertyChangedSignal("AbsolutePosition"):Connect(function() --[[ Line: 29 ]]
+			-- upvalues: Y (ref), Frame (copy)
+			Y = Frame.AbsolutePosition.Y
 		end))
-		table.insert(t, p1:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(function()
-			-- upvalues: y_1 (write), p1 (ref)
-			y_1 = p1.AbsoluteWindowSize.Y
+		table.insert(List, Frame:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(function() --[[ Line: 35 ]]
+			-- upvalues: Y1 (ref), Frame (copy)
+			Y1 = Frame.AbsoluteWindowSize.Y
 		end))
-		table.insert(t, p1.SelectionChanged:Connect(function(_, _, p5)
-			-- upvalues: p1 (ref), gamepadService (copy), var1 (write), fFlagLuaAppMediaGalleryGamepadSupport (copy), p4 (ref), centerOnFocusScrollModule (copy), y (write), y_1 (write), userGameSettingsService (copy), p3 (ref), tweenService (copy), p2 (ref)
-			if not p5 or not p5:IsDescendantOf(p1) or gamepadService.GamepadCursorEnabled then return end
-			if var1 then
-				var1:Cancel()
-				var1 = nil
+		table.insert(List, Frame.SelectionChanged:Connect(function(_, _, Frame1: Frame) --[[ Line: 41 ]]
+			-- upvalues: Frame (copy), GamepadService (upval), AnimateScrollViewIgnoreStaleSelection (upval), GuiService (upval), CreateResult (ref), FFlagLuaAppMediaGalleryGamepadSupport (upval), p1 (copy), CenterOnFocusScrollModule (upval), Y (ref), Y1 (ref), UserGameSettings (upval), Callback (copy), TweenService (upval), Duration (copy)
+			if not Frame1 or not Frame1:IsDescendantOf(Frame) or GamepadService.GamepadCursorEnabled then return end
+			if AnimateScrollViewIgnoreStaleSelection and Frame1 ~= GuiService.SelectedCoreObject and Frame1 ~= GuiService.SelectedObject then return end
+			if CreateResult then
+				CreateResult:Cancel()
+				CreateResult = nil
 			end
-			local vector2
-			local y_2 = p5.AbsoluteSize.Y
-			local y_3 = p5.AbsolutePosition.Y
-			local canvasPosition = p1.CanvasPosition
-			local _ = nil
+			local Y2: number = Frame1.AbsoluteSize.Y
+			local Y3 = Frame1.AbsolutePosition.Y
+			local CanvasPosition = Frame.CanvasPosition
+			local _Vector2 = nil
 			
-			if fFlagLuaAppMediaGalleryGamepadSupport and p4 then
-				local revealOnlyCanvasY = centerOnFocusScrollModule.getRevealOnlyCanvasY(y_3, y_2, canvasPosition, y, y_1)
+			if FFlagLuaAppMediaGalleryGamepadSupport and p1 then
+				local RevealOnlyCanvasY = CenterOnFocusScrollModule.getRevealOnlyCanvasY(Y3, Y2, CanvasPosition, Y, Y1)
 				
-				if revealOnlyCanvasY == nil then return end
-				vector2 = Vector2.new(canvasPosition.X, revealOnlyCanvasY)
+				if RevealOnlyCanvasY == nil then return end
+				_Vector2 = Vector2.new(CanvasPosition.X, RevealOnlyCanvasY)
 			else
-				vector2 = Vector2.new(canvasPosition.X, canvasPosition.Y + (y_3 - (y_1 * 0.5 - y_2 * 0.5 + y)))
+				_Vector2 = Vector2.new(CanvasPosition.X, CanvasPosition.Y + (Y3 - (Y1 * 0.5 - Y2 * 0.5 + Y)))
 			end
-			if userGameSettingsService.ReducedMotion or p3 and p3() then
-				p1.CanvasPosition = vector2
+			if UserGameSettings.ReducedMotion or Callback and Callback() then
+				Frame.CanvasPosition = _Vector2
 				
 				return
 			end
-			var1 = tweenService:Create(p1, TweenInfo.new(p2, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), { CanvasPosition = vector2 })
+			CreateResult = TweenService:Create(Frame, TweenInfo.new(Duration, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), { CanvasPosition = _Vector2 })
 			
-			if var1 then
-				var1:Play()
+			if CreateResult then
+				CreateResult:Play()
 			end
 		end))
 		
-		return t, var1
+		return List, CreateResult
+	else
+		return List
 	end
-	return t
 end
 
 return AnimateScrollViewToSelectionHelper

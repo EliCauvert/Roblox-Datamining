@@ -1,33 +1,34 @@
-﻿local serverTriggeredModals = script:FindFirstAncestor("ServerTriggeredModals")
-local parent = serverTriggeredModals.Parent
-local localUserIdStore = require(parent.LocalUserIdStore).LocalUserIdStore
-local loggerModule = require(serverTriggeredModals.Logger)
-local reportPromptImpressionModule = require(serverTriggeredModals.reportPromptImpression)
-local sendModalImpressionEvent = require(parent.ServerTriggeredModalImpressions).sendModalImpressionEvent
+﻿local ServerTriggeredModals = script:FindFirstAncestor("ServerTriggeredModals")
+local Parent = ServerTriggeredModals.Parent
+local LocalUserIdStore = require(Parent.LocalUserIdStore).LocalUserIdStore
+local LoggerModule = require(ServerTriggeredModals.Logger)
+local ReportPromptImpressionModule = require(ServerTriggeredModals.reportPromptImpression)
+local SendModalImpressionEventFunction = require(Parent.ServerTriggeredModalImpressions).sendModalImpressionEvent
 
 return {
-	handlePromptsResponse = function(p1)
-		-- upvalues: localUserIdStore (ref), parent (ref), reportPromptImpressionModule (ref), loggerModule (ref), sendModalImpressionEvent (ref)
+	handlePromptsResponse = function(p1) --[[ Line: 11 ]]
+		-- upvalues: LocalUserIdStore (copy), Parent (copy), ReportPromptImpressionModule (copy), LoggerModule (copy), SendModalImpressionEventFunction (copy)
 		if type(p1) ~= "table" or type(p1.custom_prompts) ~= "table" then return end
-		local currentUserId = localUserIdStore.getCurrentUserId(false)
+		local CurrentUserId = LocalUserIdStore.getCurrentUserId(false)
 		
-		if currentUserId == "" then return end
+		if CurrentUserId == "" then return end
 		if p1.custom_prompts.SplitPaneEducationalTour == nil then return end
-		local splitPaneEducationalTourStore = require(parent.SplitPane).getSplitPaneEducationalTourStore(false)
+		local SplitPaneEducationalTourStore = require(Parent.SplitPane).getSplitPaneEducationalTourStore(false)
 		
-		if splitPaneEducationalTourStore.hasHandledCustomPromptForUser(currentUserId) then
+		if not SplitPaneEducationalTourStore.hasHandledCustomPromptForUser(CurrentUserId) then
+			SplitPaneEducationalTourStore.setHasHandledCustomPromptForUser(CurrentUserId, true)
+			SplitPaneEducationalTourStore.setPendingUserId(CurrentUserId)
+			SplitPaneEducationalTourStore.setOnTourVisible(function() --[[ Line: 33 ]]
+				-- upvalues: ReportPromptImpressionModule (upval), LoggerModule (upval), SendModalImpressionEventFunction (upval)
+				ReportPromptImpressionModule("SplitPaneEducationalTour", "SplitPaneEducationalTour"):catch(function() --[[ Line: 36 ]]
+					-- upvalues: LoggerModule (upval)
+					LoggerModule:warning("Failed to report split-pane educational prompt impression")
+				end)
+				SendModalImpressionEventFunction("SplitPaneEducationalTour", "SplitPaneEducationalTour")
+			end)
+			SplitPaneEducationalTourStore.setIsOpen(true)
+			
 			return
 		end
-		splitPaneEducationalTourStore.setHasHandledCustomPromptForUser(currentUserId, true)
-		splitPaneEducationalTourStore.setPendingUserId(currentUserId)
-		splitPaneEducationalTourStore.setOnTourVisible(function()
-			-- upvalues: reportPromptImpressionModule (copy), loggerModule (copy), sendModalImpressionEvent (copy)
-			reportPromptImpressionModule("SplitPaneEducationalTour", "SplitPaneEducationalTour"):catch(function()
-				-- upvalues: loggerModule (copy)
-				loggerModule:warning("Failed to report split-pane educational prompt impression")
-			end)
-			sendModalImpressionEvent("SplitPaneEducationalTour", "SplitPaneEducationalTour")
-		end)
-		splitPaneEducationalTourStore.setIsOpen(true)
 	end
 }

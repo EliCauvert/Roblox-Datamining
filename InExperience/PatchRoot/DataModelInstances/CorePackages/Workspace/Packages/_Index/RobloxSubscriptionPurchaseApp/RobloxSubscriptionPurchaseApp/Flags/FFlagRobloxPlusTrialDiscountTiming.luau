@@ -1,1 +1,4 @@
-﻿return if game:DefineFastFlag("RobloxPlusTrialDiscountTiming", false) then game:GetEngineFeature("EnableSubscriptionFreeTrialOfferDetails") or require(script.Parent.FFlagRobloxSubscriptionProductsDirectFetch) else game:DefineFastFlag("RobloxPlusTrialDiscountTiming", false)
+﻿local FFlagRobloxSubscriptionProductsDirectFetchModule = require(script.Parent.FFlagRobloxSubscriptionProductsDirectFetch)
+local EnableSubscriptionFreeTrialOfferDetailsEngineFeature = game:GetEngineFeature("EnableSubscriptionFreeTrialOfferDetails")
+
+return game:DefineFastFlag("RobloxPlusTrialDiscountTiming", false) and (EnableSubscriptionFreeTrialOfferDetailsEngineFeature or FFlagRobloxSubscriptionProductsDirectFetchModule)

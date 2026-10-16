@@ -1,36 +1,36 @@
-﻿local utilityModule = require(game:GetService("CoreGui"):FindFirstChild("RobloxGui"):FindFirstChild("Modules"):FindFirstChild("Shell"):FindFirstChild("Utility"))
-local t = {
+﻿local UtilityModule = require(game:GetService("CoreGui"):FindFirstChild("RobloxGui"):FindFirstChild("Modules"):FindFirstChild("Shell"):FindFirstChild("Utility"))
+local GlobalSettingsModule = {
 	WhiteTextColor = Color3.new(1, 1, 1),
 	GreyTextColor = Color3.new(0.5, 0.5, 0.5),
-	LightGreyTextColor = Color3.new(0.721568627451, 0.721568627451, 0.721568627451),
-	BlueTextColor = Color3.new(0, 0.454901960784, 0.741176470588),
+	LightGreyTextColor = Color3.new(0.7215686274509804, 0.7215686274509804, 0.7215686274509804),
+	BlueTextColor = Color3.new(0, 0.4549019607843137, 0.7411764705882353),
 	BlackTextColor = Color3.new(0, 0, 0),
-	GreenTextColor = Color3.new(0.007843137255, 0.717647058824, 0.341176470588),
-	RedTextColor = Color3.new(0.847058823529, 0.407843137255, 0.407843137255),
-	OrangeTextColor = Color3.new(0.964705882353, 0.533333333333, 0.007843137255),
-	TextSelectedColor = Color3.new(0.098039215686, 0.098039215686, 0.098039215686),
-	LineBreakColor = Color3.new(0.305882352941, 0.305882352941, 0.305882352941),
-	PageDivideColor = Color3.new(0.592156862745, 0.592156862745, 0.592156862745),
-	BadgeOwnedColor = Color3.new(0.176470588235, 0.376470588235, 0.501960784314),
-	BadgeOverlayColor = Color3.new(0.050980392157, 0.109803921569, 0.149019607843),
-	OverlayColor = Color3.new(0.101960784314, 0.223529411765, 0.298039215686),
-	BadgeFrameColor = Color3.new(0.41568627451, 0.470588235294, 0.505882352941),
-	RobuxOverlayImageColor = Color3.new(0.164705882353, 0.2, 0.223529411765),
+	GreenTextColor = Color3.new(0.00784313725490196, 0.7176470588235294, 0.3411764705882353),
+	RedTextColor = Color3.new(0.8470588235294118, 0.40784313725490196, 0.40784313725490196),
+	OrangeTextColor = Color3.new(0.9647058823529412, 0.5333333333333333, 0.00784313725490196),
+	TextSelectedColor = Color3.new(0.09803921568627451, 0.09803921568627451, 0.09803921568627451),
+	LineBreakColor = Color3.new(0.3058823529411765, 0.3058823529411765, 0.3058823529411765),
+	PageDivideColor = Color3.new(0.592156862745098, 0.592156862745098, 0.592156862745098),
+	BadgeOwnedColor = Color3.new(0.17647058823529413, 0.3764705882352941, 0.5019607843137255),
+	BadgeOverlayColor = Color3.new(0.050980392156862744, 0.10980392156862745, 0.14901960784313725),
+	OverlayColor = Color3.new(0.10196078431372549, 0.2235294117647059, 0.2980392156862745),
+	BadgeFrameColor = Color3.new(0.41568627450980394, 0.47058823529411764, 0.5058823529411764),
+	RobuxOverlayImageColor = Color3.new(0.16470588235294117, 0.2, 0.2235294117647059),
 	BlueButtonColor = Color3.fromRGB(0, 162, 255),
-	GreySelectionColor = Color3.new(0.329411764706, 0.388235294118, 0.427450980392),
-	GreenButtonColor = Color3.new(0.007843137255, 0.639215686275, 0.301960784314),
-	GreenSelectedButtonColor = Color3.new(0.247058823529, 0.776470588235, 0.474509803922),
-	GreyButtonColor = Color3.new(0.305882352941, 0.329411764706, 0.376470588235),
-	GreySelectedButtonColor = Color3.new(0.196078431373, 0.709803921569, 1),
-	CharacterBackgroundColor = Color3.new(0.152941176471, 0.270588235294, 0.321568627451),
-	ForegroundGreyColor = Color3.new(0.227450980392, 0.235294117647, 0.250980392157),
-	BackgroundGreyColor = Color3.new(0.305882352941, 0.329411764706, 0.376470588235),
+	GreySelectionColor = Color3.new(0.32941176470588235, 0.38823529411764707, 0.42745098039215684),
+	GreenButtonColor = Color3.new(0.00784313725490196, 0.6392156862745098, 0.30196078431372547),
+	GreenSelectedButtonColor = Color3.new(0.24705882352941178, 0.7764705882352941, 0.4745098039215686),
+	GreyButtonColor = Color3.new(0.3058823529411765, 0.32941176470588235, 0.3764705882352941),
+	GreySelectedButtonColor = Color3.new(0.19607843137254902, 0.7098039215686275, 1),
+	CharacterBackgroundColor = Color3.new(0.15294117647058825, 0.27058823529411763, 0.3215686274509804),
+	ForegroundGreyColor = Color3.new(0.22745098039215686, 0.23529411764705882, 0.25098039215686274),
+	BackgroundGreyColor = Color3.new(0.3058823529411765, 0.32941176470588235, 0.3764705882352941),
 	ModalBackgroundColor = Color3.new(0, 0, 0),
 	AvatarBoxBackgroundColor = Color3.new(1, 1, 1),
-	TabUnderlineColor = Color3.new(0.196078431373, 0.709803921569, 1),
-	PriceLabelColor = Color3.new(0.945098039216, 0.454901960784, 0.039215686275),
+	TabUnderlineColor = Color3.new(0.19607843137254902, 0.7098039215686275, 1),
+	PriceLabelColor = Color3.new(0.9450980392156862, 0.4549019607843137, 0.0392156862745098),
 	PromoLabelColor = Color3.new(1, 0, 0),
-	StatusIconEnabledColor = Color3.new(0.007843137255, 0.717647058824, 0.341176470588),
+	StatusIconEnabledColor = Color3.new(0.00784313725490196, 0.7176470588235294, 0.3411764705882353),
 	StatusIconDisabledColor = Color3.new(1, 0, 0),
 	StatusIconUnknownColor = Color3.new(0.5, 0.5, 0.5),
 	TextBoxColor = Color3.new(1, 1, 1),
@@ -66,9 +66,9 @@ local t = {
 	ElevatedPriority = 3,
 	ImmediatePriority = 4,
 	TabDockTweenDuration = 0.35,
-	AvatarPaneRefreshInterval = utilityModule.GetFastVariable("XboxAvatarPaneRefreshInterval") and tonumber(utilityModule.GetFastVariable("XboxAvatarPaneRefreshInterval")) or 1800,
-	GameDetailsRefreshInterval = utilityModule.GetFastVariable("XboxGameDetailsRefreshInterval") and tonumber(utilityModule.GetFastVariable("XboxGameDetailsRefreshInterval")) or 1800,
-	GameSortsUpdateInterval = utilityModule.GetFastVariable("XboxGameSortsUpdateInterval") and tonumber(utilityModule.GetFastVariable("XboxGameSortsUpdateInterval")) or 1800,
+	AvatarPaneRefreshInterval = UtilityModule.GetFastVariable("XboxAvatarPaneRefreshInterval") and tonumber(UtilityModule.GetFastVariable("XboxAvatarPaneRefreshInterval")) or 1800,
+	GameDetailsRefreshInterval = UtilityModule.GetFastVariable("XboxGameDetailsRefreshInterval") and tonumber(UtilityModule.GetFastVariable("XboxGameDetailsRefreshInterval")) or 1800,
+	GameSortsUpdateInterval = UtilityModule.GetFastVariable("XboxGameSortsUpdateInterval") and tonumber(UtilityModule.GetFastVariable("XboxGameSortsUpdateInterval")) or 1800,
 	TextVerticalPadding = 10,
 	TextHorizontalPadding = 13,
 	RoundCornerButtonImage = "rbxasset://textures/ui/Shell/Buttons/Generic9ScaleButton@720.png",
@@ -140,10 +140,16 @@ local t = {
 	}
 }
 
-for i in pairs(t.Images) do
-	t.Images[i] = table.concat({ "rbxasset://textures/ui/Shell/", t.Images[i] })
+for image in pairs(GlobalSettingsModule.Images) do
+	GlobalSettingsModule.Images[image] = table.concat({
+		"rbxasset://textures/ui/Shell/",
+		GlobalSettingsModule.Images[image]
+	})
 end
-for i_1 in pairs(t.Sounds) do
-	t.Sounds[i_1] = table.concat({ "rbxasset://sounds/ui/Shell/", t.Sounds[i_1] })
+for sound in pairs(GlobalSettingsModule.Sounds) do
+	GlobalSettingsModule.Sounds[sound] = table.concat({
+		"rbxasset://sounds/ui/Shell/",
+		GlobalSettingsModule.Sounds[sound]
+	})
 end
-return t
+return GlobalSettingsModule

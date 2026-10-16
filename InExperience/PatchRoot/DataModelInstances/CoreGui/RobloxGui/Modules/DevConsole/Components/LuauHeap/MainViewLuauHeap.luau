@@ -1,364 +1,368 @@
-﻿local corePackagesService = game:GetService("CorePackages")
+﻿local CorePackages = game:GetService("CorePackages")
 local _ = game:GetService("ScriptContext")
-local httpService = game:GetService("HttpService")
-local heapProfilerService = game:GetService("HeapProfilerService")
-local playersService = game:GetService("Players")
-local appCommonLibModule = require(corePackagesService.Workspace.Packages.AppCommonLib)
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local memoize = appCommonLibModule.memoize
-local components = script.Parent.Parent.Parent.Components
-local dataConsumerModule = require(components.DataConsumer)
-local utilAndTabModule = require(components.UtilAndTab)
-local boxButtonModule = require(components.BoxButton)
-local luauHeapViewModule = require(script.Parent.LuauHeapView)
+local HttpService = game:GetService("HttpService")
+local HeapProfilerService = game:GetService("HeapProfilerService")
+local Players = game:GetService("Players")
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local MemoizeFunction = require(CorePackages.Workspace.Packages.AppCommonLib).memoize
+local Components = script.Parent.Parent.Parent.Components
+local DataConsumerModule = require(Components.DataConsumer)
+local UtilAndTabModule = require(Components.UtilAndTab)
+local BoxButtonModule = require(Components.BoxButton)
+local LuauHeapViewModule = require(script.Parent.LuauHeapView)
 local _ = require(script.Parent.LuauHeapTypes)
-local actions = script.Parent.Parent.Parent.Actions
-local setLuauHeapStateModule = require(actions.SetLuauHeapState)
-local setLuauHeapProfileTargetModule = require(actions.SetLuauHeapProfileTarget)
-local constantsModule = require(script.Parent.Parent.Parent.Constants)
-local mainRowPadding = constantsModule.GeneralFormatting.MainRowPadding
-local mainViewLuauHeap = roactModule.PureComponent:extend("MainViewLuauHeap")
+local Actions = script.Parent.Parent.Parent.Actions
+local SetLuauHeapStateModule = require(Actions.SetLuauHeapState)
+local SetLuauHeapProfileTargetModule = require(Actions.SetLuauHeapProfileTarget)
+local ConstantsModule = require(script.Parent.Parent.Parent.Constants)
+local MainRowPadding = ConstantsModule.GeneralFormatting.MainRowPadding
+local MainViewLuauHeap = RoactModule.PureComponent:extend("MainViewLuauHeap")
 local _ = game:GetService("CoreGui"):WaitForChild("RobloxGui")
 
-local function filterNode(p1, p2)
-	-- upvalues: filterNode (ref)
-	if p2 == nil then
+local function filterNode(Tbl, Text: string) --[[ Line: 34 ]]
+	-- upvalues: filterNode (copy)
+	if Text == nil then
 		return false
 	end
-	local cloned = table.clone(p1)
-	local var1 = cloned.Name ~= nil and string.find(string.lower(cloned.Name), string.lower(p2), 1, true) ~= nil
+	local Copy = table.clone(Tbl)
+	local HasFoundAt = Copy.Name ~= nil and string.find(string.lower(Copy.Name), string.lower(Text), 1, true) ~= nil
 	
-	if cloned.Source ~= nil then
-		var1 = var1 or string.find(string.lower(cloned.Source), string.lower(p2), 1, true) ~= nil
+	if Copy.Source ~= nil then
+		local HasFoundAt1 = string.find(string.lower(Copy.Source), string.lower(Text), 1, true) ~= nil
+		HasFoundAt = HasFoundAt or HasFoundAt1
 	end
-	if cloned.Paths ~= nil then
-		for i, v in cloned.Paths do
-			for i_1, v_1 in v do
-				var1 = var1 or string.find(string.lower(v_1), string.lower(p2), 1, true) ~= nil
+	if Copy.Paths ~= nil then
+		for _, path in Copy.Paths do
+			for _, value in path do
+				local HasFoundAt2 = string.find(string.lower(value), string.lower(Text), 1, true) ~= nil
+				HasFoundAt = HasFoundAt or HasFoundAt2
 			end
 		end
 	end
-	if cloned.Roots ~= nil then
-		local t = {}
+	if Copy.Roots ~= nil then
+		local Roots = {}
 		
-		for i, v in cloned.Roots do
-			local cloned_1 = table.clone(v)
-			local var2 = filterNode(cloned_1, p2)
+		for _, root in Copy.Roots do
+			local Copy1 = table.clone(root)
+			local FilterNodeResult = filterNode(Copy1, Text)
 			
-			if var2 then
-				table.insert(t, cloned_1)
+			if FilterNodeResult then
+				table.insert(Roots, Copy1)
 			end
-			var1 = var1 or var2
+			HasFoundAt = HasFoundAt or FilterNodeResult
 		end
-		cloned.Roots = t
+		Copy.Roots = Roots
 	end
-	if cloned.Children ~= nil then
-		local t = {}
+	if Copy.Children ~= nil then
+		local Children = {}
 		
-		for i, v in cloned.Children do
-			local var3 = filterNode(table.clone(v), p2)
+		for _, child in Copy.Children do
+			local FilterNodeResult = filterNode(table.clone(child), Text)
 			
-			if var3 then
-				table.insert(t, v)
+			if FilterNodeResult then
+				table.insert(Children, child)
 			end
-			var1 = var1 or var3
+			HasFoundAt = HasFoundAt or FilterNodeResult
 		end
-		cloned.Children = t
+		Copy.Children = Children
 	end
-	return if var1 then cloned else nil
+	return if HasFoundAt then Copy else nil
 end
 
-local function filterHeapReportsStatEntryList(p3, p4)
+local function filterHeapReportsStatEntryList(MemcatBreakdown, Text: string) --[[ Line: 93 ]]
+	if Text == nil then
+		return MemcatBreakdown
+	end
+	local List = {}
+	
+	for _, value in MemcatBreakdown do
+		if string.find(string.lower(value.Name), string.lower(Text), 1, true) ~= nil then
+			table.insert(List, (table.clone(value)))
+		end
+	end
+	return List
+end
+
+local function filterHeapReportGraph(Tbl, Text: string, p1: number) --[[ Line: 112 ]]
+	-- upvalues: filterHeapReportGraph (copy)
+	if Text == nil then
+		return Tbl
+	end
+	local Copy = table.clone(Tbl)
+	local Children = {}
+	
+	for _, child in Copy.Children do
+		local FilterHeapReportGraphResult = filterHeapReportGraph(child, Text, p1 + 1)
+		
+		if FilterHeapReportGraphResult then
+			table.insert(Children, FilterHeapReportGraphResult)
+		end
+	end
+	Copy.Children = Children
+	
+	if p1 == 0 then
+		return Copy
+	else
+		local HasFoundAt: boolean = string.find(string.lower(Copy.Name), string.lower(Text), 1, true) ~= nil or #Children > 0
+		
+		return if HasFoundAt then Copy else nil
+	end
+end
+
+local function filterUniqueRefEntryPath(List, Text: string) --[[ Line: 143 ]]
+	if Text == nil then
+		return List
+	end
+	local List1 = {}
+	
+	for _, value in List do
+		if string.find(string.lower(value), string.lower(Text), 1, true) ~= nil then
+			table.insert(List1, value)
+		end
+	end
+	return if #List1 > 0 then List1 else nil
+end
+
+local function filterUniqueRefEntryPathList(Paths, p2) --[[ Line: 162 ]]
+	-- upvalues: filterUniqueRefEntryPath (copy)
+	if p2 == nil then
+		return Paths
+	end
+	local List = {}
+	
+	for _, path in Paths do
+		local FilterUniqueRefEntryPathResult = filterUniqueRefEntryPath(path, p2)
+		
+		if FilterUniqueRefEntryPathResult then
+			table.insert(List, FilterUniqueRefEntryPathResult)
+		end
+	end
+	return List
+end
+
+local function filterUniqueRefEntry(Tbl, Text: string) --[[ Line: 182 ]]
+	-- upvalues: filterUniqueRefEntryPathList (copy)
+	if Text == nil then
+		return Tbl
+	end
+	local Copy = table.clone(Tbl)
+	local HasFoundAt = string.find(string.lower(Copy.Name), string.lower(Text), 1, true) ~= nil
+	local FilterUniqueRefEntryPathListResult = filterUniqueRefEntryPathList(Copy.Paths, Text)
+	Copy.Paths = FilterUniqueRefEntryPathListResult
+	
+	if #FilterUniqueRefEntryPathListResult > 0 then
+		HasFoundAt = true
+	end
+	return if HasFoundAt then Copy else nil
+end
+
+local function filterUniqueRefReport(Tbl, p3) --[[ Line: 211 ]]
+	-- upvalues: filterUniqueRefEntry (copy)
+	if p3 == nil or Tbl == nil then
+		return Tbl
+	end
+	local Copy = table.clone(Tbl)
+	local Roots = {}
+	
+	for _, root in Copy.Roots do
+		local FilterUniqueRefEntryResult = filterUniqueRefEntry(root, p3)
+		
+		if FilterUniqueRefEntryResult then
+			table.insert(Roots, FilterUniqueRefEntryResult)
+		end
+	end
+	Copy.Roots = Roots
+	
+	return Copy
+end
+
+local function filterSnapshots(List, p4, _) --[[ Line: 230 ]]
+	-- upvalues: filterHeapReportsStatEntryList (copy), filterHeapReportGraph (copy), filterUniqueRefReport (copy)
 	if p4 == nil then
-		return p3
+		return List
 	end
-	local t = {}
+	local List1 = {}
 	
-	for i, v in p3 do
-		if string.find(string.lower(v.Name), string.lower(p4), 1, true) ~= nil then
-			table.insert(t, table.clone(v))
-		end
-	end
-	return t
-end
-
-local function filterHeapReportGraph(p5, p6, p7)
-	-- upvalues: filterHeapReportGraph (ref)
-	if p6 == nil then
-		return p5
-	end
-	local cloned = table.clone(p5)
-	local t = {}
-	
-	for i, v in cloned.Children do
-		local var4 = filterHeapReportGraph(v, p6, p7 + 1)
+	for _, value in List do
+		local Copy = table.clone(value)
+		Copy.TagBreakdown = filterHeapReportsStatEntryList(Copy.TagBreakdown, p4)
+		Copy.MemcatBreakdown = filterHeapReportsStatEntryList(Copy.MemcatBreakdown, p4)
+		Copy.UserdataBreakdown = filterHeapReportsStatEntryList(Copy.UserdataBreakdown, p4)
+		Copy.Graph = filterHeapReportGraph(Copy.Graph, p4, 0)
 		
-		if var4 then
-			table.insert(t, var4)
+		if Copy.Refs then
+			Copy.Refs = filterUniqueRefReport(Copy.Refs, p4)
 		end
+		table.insert(List1, Copy)
 	end
-	cloned.Children = t
-	
-	return if p7 == 0 then cloned elseif string.find(string.lower(cloned.Name), string.lower(p6), 1, true) ~= nil or #t > 0 then cloned else nil
+	return List1
 end
 
-local function filterUniqueRefEntryPath(p8, p9)
-	if p9 == nil then
-		return p8
-	end
-	local t = {}
-	
-	for i, v in p8 do
-		if string.find(string.lower(v), string.lower(p9), 1, true) ~= nil then
-			table.insert(t, v)
-		end
-	end
-	return if #t > 0 then t else nil
+function MainViewLuauHeap.getState(p5, p6) --[[ Line: 258 ]]
+	return if p6 then p5.props.client else p5.props.server
 end
 
-local function filterUniqueRefEntryPathList(p10, p11)
-	-- upvalues: filterUniqueRefEntryPath (ref)
-	if p11 == nil then
-		return p10
+function MainViewLuauHeap.getActiveState(p5) --[[ Line: 262 ]]
+	return p5.props.isClientView, p5:getState(p5.props.isClientView)
+end
+
+function MainViewLuauHeap.init(p5) --[[ Line: 266 ]]
+	-- upvalues: MemoizeFunction (copy), filterSnapshots (copy), HeapProfilerService (copy), Players (copy), HttpService (copy), RoactModule (copy)
+	function p5.onUtilTabHeightChanged(UtilTabHeight) --[[ Line: 267 ]]
+		-- upvalues: p5 (copy)
+		p5:setState({ utilTabHeight = UtilTabHeight })
 	end
-	local t = {}
 	
-	for i, v in p10 do
-		local var5 = filterUniqueRefEntryPath(v, p11)
+	p5.version = 0
+	
+	function p5.dispatchSetLuauHeapState(p6, p7) --[[ Line: 275 ]]
+		-- upvalues: p5 (copy)
+		p5.version += 1
+		p5.props.dispatchSetLuauHeapState(p6, p7)
+	end
+	
+	function p5.onClientButton() --[[ Line: 279 ]]
+		-- upvalues: p5 (copy)
+		p5.props.dispatchSetLuauHeapProfileTarget(true)
+	end
+	
+	function p5.onServerButton() --[[ Line: 283 ]]
+		-- upvalues: p5 (copy)
+		p5.props.dispatchSetLuauHeapProfileTarget(false)
+	end
+	
+	p5.filterSnapshots = MemoizeFunction(filterSnapshots)
+	
+	function p5.onCreateSnapshot() --[[ Line: 289 ]]
+		-- upvalues: p5 (copy), HeapProfilerService (upval), Players (upval), HttpService (upval)
+		local ActiveState, ActiveState2 = p5:getActiveState()
+		local Result = nil
+		local Success = nil
 		
-		if var5 then
-			table.insert(t, var5)
-		end
-	end
-	return t
-end
-
-local function filterUniqueRefEntry(p12, p13)
-	-- upvalues: filterUniqueRefEntryPathList (ref)
-	if p13 == nil then
-		return p12
-	end
-	local cloned = table.clone(p12)
-	local var6 = string.find(string.lower(cloned.Name), string.lower(p13), 1, true) ~= nil and true
-	local var7 = filterUniqueRefEntryPathList(cloned.Paths, p13)
-	cloned.Paths = var7
-	
-	if #var7 > 0 then
-		var6 = true
-	end
-	return if var6 then cloned else nil
-end
-
-local function filterUniqueRefReport(p12, p13)
-	-- upvalues: filterUniqueRefEntry (ref)
-	if p13 == nil or p12 == nil then
-		return p12
-	end
-	local cloned = table.clone(p12)
-	local t = {}
-	
-	for i, v in cloned.Roots do
-		local var6 = filterUniqueRefEntry(v, p13)
-		
-		if var6 then
-			table.insert(t, var6)
-		end
-	end
-	cloned.Roots = t
-	
-	return cloned
-end
-
-local function filterSnapshots(p14, p15, _)
-	-- upvalues: filterHeapReportsStatEntryList (ref), filterHeapReportGraph (ref), filterUniqueRefReport (ref)
-	if p15 == nil then
-		return p14
-	end
-	local t = {}
-	
-	for i, v in p14 do
-		local cloned = table.clone(v)
-		cloned.TagBreakdown = filterHeapReportsStatEntryList(cloned.TagBreakdown, p15)
-		cloned.MemcatBreakdown = filterHeapReportsStatEntryList(cloned.MemcatBreakdown, p15)
-		cloned.UserdataBreakdown = filterHeapReportsStatEntryList(cloned.UserdataBreakdown, p15)
-		cloned.Graph = filterHeapReportGraph(cloned.Graph, p15, 0)
-		
-		if cloned.Refs then
-			cloned.Refs = filterUniqueRefReport(cloned.Refs, p15)
-		end
-		table.insert(t, cloned)
-	end
-	return t
-end
-
-function mainViewLuauHeap.getState(p16, p17)
-	return if p17 then p16.props.client else p16.props.server
-end
-
-function mainViewLuauHeap.getActiveState(p16)
-	return p16.props.isClientView, p16:getState(p16.props.isClientView)
-end
-
-function mainViewLuauHeap.init(p16)
-	-- upvalues: memoize (ref), filterSnapshots (ref), heapProfilerService (ref), playersService (ref), httpService (ref), roactModule (ref)
-	function p20.onUtilTabHeightChanged(p17)
-		-- upvalues: p16 (ref)
-		p16:setState({ utilTabHeight = p17 })
-	end
-	
-	p16.version = 0
-	
-	function p20.dispatchSetLuauHeapState(p17, p18)
-		-- upvalues: p16 (ref)
-		p16.version += 1
-		p16.props.dispatchSetLuauHeapState(p17, p18)
-	end
-	
-	function p20.onClientButton()
-		-- upvalues: p16 (ref)
-		p16.props.dispatchSetLuauHeapProfileTarget(true)
-	end
-	
-	function p20.onServerButton()
-		-- upvalues: p16 (ref)
-		p16.props.dispatchSetLuauHeapProfileTarget(false)
-	end
-	
-	p16.filterSnapshots = memoize(filterSnapshots)
-	
-	function p20.onCreateSnapshot()
-		-- upvalues: p16 (ref), heapProfilerService (copy), playersService (copy), httpService (copy)
-		local var7, var8
-		local activeState, activeState_1 = p16:getActiveState()
-		local _ = nil
-		local _ = nil
-		
-		if activeState then
-			local ok, status = pcall(heapProfilerService.ClientRequestDataAsync, heapProfilerService, playersService.LocalPlayer)
-			var7 = ok
-			var8 = status
+		if ActiveState then
+			Success, Result = pcall(HeapProfilerService.ClientRequestDataAsync, HeapProfilerService, Players.LocalPlayer)
 		else
-			local ok, status = pcall(heapProfilerService.ServerRequestDataAsync, heapProfilerService)
-			var7 = ok
-			var8 = status
+			Success, Result = pcall(HeapProfilerService.ServerRequestDataAsync, HeapProfilerService)
 		end
-		if var7 then
-			local var9 = httpService:JSONDecode(var8)
-			local report = var9.Report
-			report.Refs = var9.Refs
-			local cloned = table.clone(activeState_1)
-			table.insert(cloned.snapshots, report)
-			cloned.active = #cloned.snapshots
-			p16.dispatchSetLuauHeapState(activeState, cloned)
+		if Success then
+			local Data = HttpService:JSONDecode(Result)
+			local Report = Data.Report
+			Report.Refs = Data.Refs
+			local Copy = table.clone(ActiveState2)
+			table.insert(Copy.snapshots, Report)
+			Copy.active = #Copy.snapshots
+			p5.dispatchSetLuauHeapState(ActiveState, Copy)
 			
 			return
+		else
+			warn(Result)
 		end
-		warn(var8)
 	end
 	
-	function p20.onClearSnapshots()
-		-- upvalues: p16 (ref)
-		local activeState, activeState_1 = p16:getActiveState()
-		local cloned = table.clone(activeState_1)
-		table.clear(cloned.snapshots)
-		cloned.active = 0
-		p16.dispatchSetLuauHeapState(activeState, cloned)
+	function p5.onClearSnapshots() --[[ Line: 317 ]]
+		-- upvalues: p5 (copy)
+		local ActiveState, ActiveState2 = p5:getActiveState()
+		local Copy = table.clone(ActiveState2)
+		table.clear(Copy.snapshots)
+		Copy.active = 0
+		p5.dispatchSetLuauHeapState(ActiveState, Copy)
 	end
 	
-	p16.utilRef = roactModule.createRef()
-	p16.state = { searchTerm = nil, utilTabHeight = 0 }
+	p5.utilRef = RoactModule.createRef()
+	p5.state = { searchTerm = nil, utilTabHeight = 0 }
 	
-	function p20.onSearchTermChanged(p17)
-		-- upvalues: p16 (ref), roactModule (copy)
-		if p17 == nil or p17 == "" then
-			p16:setState({ searchTerm = roactModule.None })
+	function p5.onSearchTermChanged(SearchTerm) --[[ Line: 335 ]]
+		-- upvalues: p5 (copy), RoactModule (upval)
+		if SearchTerm == nil or SearchTerm == "" then
+			p5:setState({ searchTerm = RoactModule.None })
 			
 			return
+		else
+			p5:setState({ searchTerm = SearchTerm })
 		end
-		p16:setState({ searchTerm = p17 })
 	end
 end
 
-function mainViewLuauHeap.didMount(p16)
-	p16:setState({ utilTabHeight = p16.utilRef.current.Size.Y.Offset })
+function MainViewLuauHeap.didMount(p5) --[[ Line: 348 ]]
+	p5:setState({ utilTabHeight = p5.utilRef.current.Size.Y.Offset })
 end
 
-function mainViewLuauHeap.willUnmount(_) end
+function MainViewLuauHeap:willUnmount() --[[ Line: 355 ]] end
 
-function mainViewLuauHeap.didUpdate(p16)
-	local size = p16.utilRef.current.Size
+function MainViewLuauHeap.didUpdate(p5) --[[ Line: 358 ]]
+	local Size = p5.utilRef.current.Size
 	
-	if size.Y.Offset ~= p16.state.utilTabHeight then
-		p16:setState({ utilTabHeight = size.Y.Offset })
+	if Size.Y.Offset ~= p5.state.utilTabHeight then
+		p5:setState({ utilTabHeight = Size.Y.Offset })
 	end
 end
 
-function mainViewLuauHeap.render(p16)
-	-- upvalues: roactModule (ref), constantsModule (ref), mainRowPadding (ref), utilAndTabModule (ref), boxButtonModule (ref), luauHeapViewModule (ref)
-	local size = p16.props.size
-	local formFactor = p16.props.formFactor
-	local tabList = p16.props.tabList
-	local utilTabHeight = p16.state.utilTabHeight
-	local activeState, activeState_1 = p16:getActiveState()
+function MainViewLuauHeap.render(p5) --[[ Line: 367 ]]
+	-- upvalues: RoactModule (copy), ConstantsModule (copy), MainRowPadding (copy), UtilAndTabModule (copy), BoxButtonModule (copy), LuauHeapViewModule (copy)
+	local Size = p5.props.size
+	local FormFactor = p5.props.formFactor
+	local TabList = p5.props.tabList
+	local UtilTabHeight = p5.state.utilTabHeight
+	local ActiveState, ActiveState2 = p5:getActiveState()
 	
-	return roactModule.createElement("Frame", {
+	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		LayoutOrder = 3,
-		Size = size,
-		BackgroundColor3 = constantsModule.Color.BaseGray
+		Size = Size,
+		BackgroundColor3 = ConstantsModule.Color.BaseGray
 	}, {
-		UIListLayout = roactModule.createElement("UIListLayout", {
-			Padding = UDim.new(0, mainRowPadding),
+		UIListLayout = RoactModule.createElement("UIListLayout", {
+			Padding = UDim.new(0, MainRowPadding),
 			SortOrder = Enum.SortOrder.LayoutOrder
 		}),
-		UtilAndTab = roactModule.createElement(utilAndTabModule, {
+		UtilAndTab = RoactModule.createElement(UtilAndTabModule, {
 			layoutOrder = 1,
-			windowWidth = size.X.Offset,
-			formFactor = formFactor,
-			tabList = tabList,
-			isClientView = activeState,
-			onClientButton = p16.onClientButton,
-			onServerButton = p16.onServerButton,
-			refForParent = p16.utilRef,
-			onHeightChanged = p16.onUtilTabHeightChanged,
-			onSearchTermChanged = p16.onSearchTermChanged
+			windowWidth = Size.X.Offset,
+			formFactor = FormFactor,
+			tabList = TabList,
+			isClientView = ActiveState,
+			onClientButton = p5.onClientButton,
+			onServerButton = p5.onServerButton,
+			refForParent = p5.utilRef,
+			onHeightChanged = p5.onUtilTabHeightChanged,
+			onSearchTermChanged = p5.onSearchTermChanged
 		}, {
-			roactModule.createElement(boxButtonModule, {
+			RoactModule.createElement(BoxButtonModule, {
 				text = "Create Snapshot",
-				onClicked = p16.onCreateSnapshot
+				onClicked = p5.onCreateSnapshot
 			}),
-			roactModule.createElement(boxButtonModule, {
+			RoactModule.createElement(BoxButtonModule, {
 				text = "Clear Snapshots",
-				onClicked = p16.onClearSnapshots
+				onClicked = p5.onClearSnapshots
 			})
 		}),
-		LuauHeapView = roactModule.createElement(luauHeapViewModule, {
+		LuauHeapView = RoactModule.createElement(LuauHeapViewModule, {
 			layoutOrder = 2,
-			size = UDim2.new(1, 0, 1, -utilTabHeight),
-			data = p16.filterSnapshots(activeState_1.snapshots, p16.state.searchTerm, p16.version),
-			activeSnapshot = activeState_1.active,
-			compareSnapshot = activeState_1.compare
+			size = UDim2.new(1, 0, 1, -UtilTabHeight),
+			data = p5.filterSnapshots(ActiveState2.snapshots, p5.state.searchTerm, p5.version),
+			activeSnapshot = ActiveState2.active,
+			compareSnapshot = ActiveState2.compare
 		})
 	})
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p16, _)
+return RoactRoduxModule.UNSTABLE_connect2(function(p5, _) --[[ Line: 423 | Named "mapStateToProps" ]]
 	return {
-		isClientView = p16.LuauHeap.isClientView,
-		client = p16.LuauHeap.client,
-		server = p16.LuauHeap.server
+		isClientView = p5.LuauHeap.isClientView,
+		client = p5.LuauHeap.client,
+		server = p5.LuauHeap.server
 	}
-end, function(p16)
-	-- upvalues: setLuauHeapStateModule (ref), setLuauHeapProfileTargetModule (ref)
+end, function(Callback) --[[ Line: 432 | Named "mapDispatchToProps" ]]
+	-- upvalues: SetLuauHeapStateModule (copy), SetLuauHeapProfileTargetModule (copy)
 	return {
-		dispatchSetLuauHeapState = function(value, p17)
-			-- upvalues: p16 (ref), setLuauHeapStateModule (copy)
-			p16(setLuauHeapStateModule(value, p17))
+		dispatchSetLuauHeapState = function(p5, p6) --[[ Line: 434 ]]
+			-- upvalues: Callback (copy), SetLuauHeapStateModule (upval)
+			Callback(SetLuauHeapStateModule(p5, p6))
 		end,
-		dispatchSetLuauHeapProfileTarget = function(value)
-			-- upvalues: p16 (ref), setLuauHeapProfileTargetModule (copy)
-			p16(setLuauHeapProfileTargetModule(value))
+		dispatchSetLuauHeapProfileTarget = function(p5) --[[ Line: 437 ]]
+			-- upvalues: Callback (copy), SetLuauHeapProfileTargetModule (upval)
+			Callback(SetLuauHeapProfileTargetModule(p5))
 		end
 	}
-end)(dataConsumerModule(mainViewLuauHeap, "LuauHeapData"))
+end)(DataConsumerModule(MainViewLuauHeap, "LuauHeapData"))

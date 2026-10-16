@@ -1,42 +1,41 @@
 ﻿local t = {}
 
-local function _(p1, p2)
-	return { id = p1, callback = p2 }
+local function _(Id, Callback) --[[ Line: 6 | Named "createListener" ]]
+	return { id = Id, callback = Callback }
 end
 
 return {
-	addEventListener = function(_, p1, p2, p3)
-		-- upvalues: t (ref)
-		if t[p1] == nil then
-			t[p1] = {}
+	addEventListener = function(_, Key, Id, Callback) --[[ Line: 18 ]]
+		-- upvalues: t (copy)
+		if t[Key] == nil then
+			t[Key] = {}
 		end
-		table.insert(t[p1], { id = p2, callback = p3 })
+		table.insert(t[Key], { id = Id, callback = Callback })
 	end,
-	removeEventListener = function(_, p1, p2)
-		-- upvalues: t (ref)
+	removeEventListener = function(_, p1, Id) --[[ Line: 26 ]]
+		-- upvalues: t (copy)
 		if t[p1] == nil then return end
-		for i, v in ipairs(t[p1]) do
-			if v ~= nil and v.id == p2 then
+		for i, value in ipairs(t[p1]) do
+			if value ~= nil and value.id == Id then
 				table.remove(t[p1], i)
 			end
 		end
 	end,
-	removeCallbackFromEvent = function(_, p3, p4, p5)
-		-- upvalues: t (ref)
-		if t[p3] == nil then return end
-		for i, v in ipairs(t[p3]) do
-			if v ~= nil and v.id == p4 and v.callback == p5 then
-				table.remove(t[p3], i)
-				
-				return
+	removeCallbackFromEvent = function(_, p2, Id, Callback) --[[ Line: 40 ]]
+		-- upvalues: t (copy)
+		if t[p2] == nil then return end
+		for i, Listener in ipairs(t[p2]) do
+			if Listener ~= nil and Listener.id == Id and Listener.callback == Callback then
+				table.remove(t[p2], i)
+				break
 			end
 		end
 	end,
-	dispatchEvent = function(_, p6, ...)
-		-- upvalues: t (ref)
-		if t[p6] == nil then return end
-		for i, v in ipairs(t[p6]) do
-			v.callback(...)
+	dispatchEvent = function(_, p3, ...) --[[ Line: 56 ]]
+		-- upvalues: t (copy)
+		if t[p3] == nil then return end
+		for _, value in ipairs(t[p3]) do
+			value.callback(...)
 		end
 	end,
 	Notifications = {

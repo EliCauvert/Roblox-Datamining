@@ -1,92 +1,96 @@
-﻿local sduiSharedUtilities = script:FindFirstAncestor("SduiSharedUtilities")
-local parent = sduiSharedUtilities.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local useTokens = foundationModule.Hooks.useTokens
-local iconButton = foundationModule.IconButton
-local builderIconsModule = require(parent.BuilderIcons)
-local responsiveModule = require(parent.Responsive)
-local usePreferredInput = responsiveModule.usePreferredInput
-local signalsReactModule = require(parent.SignalsReact)
-local getDisplayStore = require(parent.Display).GetDisplayStore
-local appHeaderBarModule = require(parent.AppHeaderBar)
-local navButtonType = require(sduiSharedUtilities.SduiIntegrationTypes).NavButtonType
-local useScrollAwayHeaderPositionModule = require(sduiSharedUtilities.useScrollAwayHeaderPosition)
-local fFlagLuaAppSduiStickyHeaderScrollAway = require(parent.SharedFlags).FFlagLuaAppSduiStickyHeaderScrollAway
+﻿local SduiSharedUtilities = script:FindFirstAncestor("SduiSharedUtilities")
+local Parent = SduiSharedUtilities.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local IconButton = FoundationModule.IconButton
+local BuilderIconsModule = require(Parent.BuilderIcons)
+local ResponsiveModule = require(Parent.Responsive)
+local UsePreferredInputFunction = ResponsiveModule.usePreferredInput
+local SignalsReactModule = require(Parent.SignalsReact)
+local GetDisplayStoreFunction = require(Parent.Display).GetDisplayStore
+local AppHeaderBarModule = require(Parent.AppHeaderBar)
+local NavButtonType = require(SduiSharedUtilities.SduiIntegrationTypes).NavButtonType
+local UseScrollAwayHeaderPositionModule = require(SduiSharedUtilities.useScrollAwayHeaderPosition)
 
-local function calculateSize(p1)
-	-- upvalues: getDisplayStore (ref)
-	local var1 = getDisplayStore(p1)
+local function calculateSize(p1): UDim2 --[[ Line: 39 ]]
+	-- upvalues: GetDisplayStoreFunction (copy)
+	local DisplayStore = GetDisplayStoreFunction(p1)
 	
-	return UDim2.new(1, 0, 0, var1.getTopBarHeight(p1) - var1.getGuiInset(p1).top or 0)
+	return UDim2.new(1, 0, 0, DisplayStore.getTopBarHeight(p1) - DisplayStore.getGuiInset(p1).top or 0)
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), usePreferredInput (ref), responsiveModule (ref), signalsReactModule (ref), calculateSize (ref), reactModule (ref), navButtonType (ref), iconButton (ref), foundationModule (ref), builderIconsModule (ref), appHeaderBarModule (ref), useScrollAwayHeaderPositionModule (ref), fFlagLuaAppSduiStickyHeaderScrollAway (ref)
-	local closeCallback = p1.closeCallback
-	local var1 = useTokens()
-	local var2 = usePreferredInput() == responsiveModule.Input.Directional
-	local var3 = signalsReactModule.useSignalBinding(calculateSize)
-	local var4 = reactModule.useMemo(function()
-		-- upvalues: var2 (ref), closeCallback (ref), p1 (ref), navButtonType (copy), reactModule (copy), var1 (ref), iconButton (copy), foundationModule (copy), builderIconsModule (copy)
-		return if var2 or not closeCallback or p1.navButtonType ~= navButtonType.back and p1.navButtonType ~= navButtonType.close then nil else function()
-			-- upvalues: reactModule (copy), var1 (copy), iconButton (copy), closeCallback (copy), foundationModule (copy), p1 (copy), navButtonType (copy), builderIconsModule (copy)
-			return reactModule.createElement("Frame", {
+return ReactModule.memo(function(p1) --[[ Line: 47 | Named "SduiPageNavigationHeader" ]]
+	-- upvalues: UseTokensFunction (copy), UsePreferredInputFunction (copy), ResponsiveModule (copy), SignalsReactModule (copy), calculateSize (copy), ReactModule (copy), NavButtonType (copy), IconButton (copy), FoundationModule (copy), BuilderIconsModule (copy), AppHeaderBarModule (copy), UseScrollAwayHeaderPositionModule (copy)
+	local CloseCallback = p1.closeCallback
+	local UseTokensResult = UseTokensFunction()
+	local IsUsePreferredInputResultMatch = UsePreferredInputFunction() == ResponsiveModule.Input.Directional
+	local UseSignalBindingResult = SignalsReactModule.useSignalBinding(calculateSize)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 55 ]]
+		-- upvalues: IsUsePreferredInputResultMatch (copy), CloseCallback (copy), p1 (copy), NavButtonType (upval), ReactModule (upval), UseTokensResult (copy), IconButton (upval), FoundationModule (upval), BuilderIconsModule (upval)
+		return if IsUsePreferredInputResultMatch or not CloseCallback or p1.navButtonType ~= NavButtonType.back and p1.navButtonType ~= NavButtonType.close then nil else function() --[[ Line: 60 ]]
+			-- upvalues: ReactModule (upval), UseTokensResult (upval), IconButton (upval), CloseCallback (upval), FoundationModule (upval), p1 (upval), NavButtonType (upval), BuilderIconsModule (upval)
+			return ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
-				Size = UDim2.new(0, var1.Size.Size_1400, 0, 0),
+				Size = UDim2.new(0, UseTokensResult.Size.Size_1400, 0, 0),
 				AutomaticSize = Enum.AutomaticSize.Y
 			}, {
-				UIPadding = reactModule.createElement("UIPadding", { PaddingLeft = UDim.new(0, -var1.Size.Size_250) }),
-				IconButton = reactModule.createElement(iconButton, {
+				UIPadding = ReactModule.createElement("UIPadding", {
+					PaddingLeft = UDim.new(0, -UseTokensResult.Size.Size_250)
+				}),
+				IconButton = ReactModule.createElement(IconButton, {
 					SelectionOrder = 10,
 					isCircular = true,
-					onActivated = closeCallback,
-					size = foundationModule.Enums.InputSize.Large,
+					onActivated = CloseCallback,
+					size = FoundationModule.Enums.InputSize.Large,
 					icon = {
-						name = if p1.navButtonType == navButtonType.close then builderIconsModule.Icon.X else builderIconsModule.Icon.ChevronLargeLeft,
-						variant = foundationModule.Enums.IconVariant.Regular
+						name = if p1.navButtonType == NavButtonType.close then BuilderIconsModule.Icon.X else BuilderIconsModule.Icon.ChevronLargeLeft,
+						variant = FoundationModule.Enums.IconVariant.Regular
 					}
 				})
 			})
 		end
-	end, { var2, p1.navButtonType, closeCallback })
+	end, {
+		IsUsePreferredInputResultMatch,
+		p1.navButtonType,
+		CloseCallback
+	})
 	
-	return reactModule.createElement("Frame", {
-		[reactModule.Tag] = p1.contentTag,
-		Size = var3,
+	return ReactModule.createElement("Frame", {
+		[ReactModule.Tag] = p1.contentTag,
+		Size = UseSignalBindingResult,
 		LayoutOrder = p1.layoutOrder or -1,
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
-		AutomaticSize = if var4 then Enum.AutomaticSize.Y else nil,
+		AutomaticSize = if UseMemoResult then Enum.AutomaticSize.Y else nil,
 		ZIndex = 2,
 		ClipsDescendants = false
 	}, {
-		Content = reactModule.createElement("Frame", {
+		Content = ReactModule.createElement("Frame", {
 			BorderSizePixel = 0,
-			BackgroundColor3 = var1.Color.Surface.Surface_0.Color3,
-			Size = var3,
-			Position = useScrollAwayHeaderPositionModule({
-				sizeBinding = if fFlagLuaAppSduiStickyHeaderScrollAway then nil else var3,
+			BackgroundColor3 = UseTokensResult.Color.Surface.Surface_0.Color3,
+			Size = UseSignalBindingResult,
+			Position = UseScrollAwayHeaderPositionModule({
 				enabled = p1.scrollAwayHeader,
-				scrollAwayHeight = if fFlagLuaAppSduiStickyHeaderScrollAway and p1.scrollAwayHeader then var3:getValue().Y.Offset else nil
+				scrollAwayHeight = if p1.scrollAwayHeader then UseSignalBindingResult:getValue().Y.Offset else nil
 			}),
-			AutomaticSize = if var4 then Enum.AutomaticSize.Y else nil
+			AutomaticSize = if UseMemoResult then Enum.AutomaticSize.Y else nil
 		}, {
-			AppHeaderBarLayout = reactModule.createElement("UIListLayout", {
+			AppHeaderBarLayout = ReactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Vertical,
 				VerticalAlignment = Enum.VerticalAlignment.Bottom
 			}),
-			AppHeaderBar = reactModule.createElement(appHeaderBarModule.AppHeaderBar, {
+			AppHeaderBar = ReactModule.createElement(AppHeaderBarModule.AppHeaderBar, {
 				automaticHeight = true,
 				shouldRenderTitle = true,
 				onMedia = false,
-				renderNavigation = var4,
+				renderNavigation = UseMemoResult,
 				title = p1.title,
 				renderUtilities = p1.renderUtilities,
 				paddingLeft = UDim.new(0, 0),
 				paddingRight = UDim.new(0, 0),
-				isTitleCentered = p1.navButtonType ~= navButtonType.back
+				isTitleCentered = p1.navButtonType ~= NavButtonType.back
 			})
 		})
 	})

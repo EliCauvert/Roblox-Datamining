@@ -1,73 +1,70 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local cryoModule = require(corePackagesService.Packages.Cryo)
-local roduxModule = require(corePackagesService.Packages.Rodux)
-local parent = script.Parent.Parent
-local setBundlesModule = require(parent.Actions.SetBundles)
-local setFavoriteBundleModule = require(parent.Actions.SetFavoriteBundle)
-local updateBulkPuchaseResultsModule = require(parent.Actions.UpdateBulkPuchaseResults)
-local setAvatarPreviewDetailsModule = require(parent.Actions.SetAvatarPreviewDetails)
-local itemTypeEnum = require(corePackagesService.Workspace.Packages.AvatarExperienceModel).Enums.ItemTypeEnum
-local bundleInfoModule = require(parent.Models.BundleInfo)
+﻿local CorePackages = game:GetService("CorePackages")
+local CryoModule = require(CorePackages.Packages.Cryo)
+local Parent = script.Parent.Parent
+local ItemTypeEnum = require(CorePackages.Workspace.Packages.AvatarExperienceModel).Enums.ItemTypeEnum
+local FFlagAXEnableFetchAvatarPreviewModule = require(Parent.Flags.FFlagAXEnableFetchAvatarPreview)
+local BundleInfoModule = require(Parent.Models.BundleInfo)
 
-return roduxModule.createReducer({}, {
-	[setFavoriteBundleModule.name] = function(p1, p2)
-		-- upvalues: cryoModule (ref), bundleInfoModule (ref)
-		p1[p2.id] = cryoModule.Dictionary.join(cryoModule.Dictionary.join({}, p1[p2.id] or {}), bundleInfoModule.fromGetFavoriteForAsset(p2.id, p2.isFavorite))
+return require(CorePackages.Packages.Rodux).createReducer({}, {
+	[require(Parent.Actions.SetFavoriteBundle).name] = function(JoinResults, p1) --[[ Line: 32 ]]
+		-- upvalues: CryoModule (copy), BundleInfoModule (copy)
+		JoinResults[p1.id] = CryoModule.Dictionary.join(CryoModule.Dictionary.join({}, JoinResults[p1.id] or {}), BundleInfoModule.fromGetFavoriteForAsset(p1.id, p1.isFavorite))
 		
-		return p1
+		return JoinResults
 	end,
-	[updateBulkPuchaseResultsModule.name] = if require(corePackagesService.Workspace.Packages.SharedFlags).FFlagAXEnableInspectAndBuyBulkPurchase then function(p1, p2)
-		-- upvalues: cryoModule (ref), bundleInfoModule (ref)
-		for i, v in p2.result.Items do
-			if v.type == Enum.MarketplaceProductType.AvatarBundle then
-				local var1 = cryoModule.Dictionary.join({}, p1[v.id])
-				p1[v.id] = cryoModule.Dictionary.join(var1, bundleInfoModule.fromBulkPurchaseResult(v, var1))
+	[require(Parent.Actions.UpdateBulkPuchaseResults).name] = if require(CorePackages.Workspace.Packages.SharedFlags).FFlagAXEnableInspectAndBuyBulkPurchase then function(JoinResults, p1) --[[ Line: 43 ]]
+		-- upvalues: CryoModule (copy), BundleInfoModule (copy)
+		for _, item in p1.result.Items do
+			if item.type == Enum.MarketplaceProductType.AvatarBundle then
+				local JoinResult = CryoModule.Dictionary.join({}, JoinResults[item.id])
+				JoinResults[item.id] = CryoModule.Dictionary.join(JoinResult, BundleInfoModule.fromBulkPurchaseResult(item, JoinResult))
 			end
 		end
-		return p1
+		return JoinResults
 	end else nil,
-	[setAvatarPreviewDetailsModule.name] = if require(parent.Flags.FFlagAXEnableFetchAvatarPreview) then function(p3, p4)
-		-- upvalues: itemTypeEnum (ref), bundleInfoModule (ref), cryoModule (ref)
-		local look = p4.avatarPreviewDetails.look
-		local t = {}
+	[require(Parent.Actions.SetAvatarPreviewDetails).name] = if FFlagAXEnableFetchAvatarPreviewModule then function(p2, p3) --[[ Line: 59 ]]
+		-- upvalues: ItemTypeEnum (copy), BundleInfoModule (copy), CryoModule (copy)
+		local Look = p3.avatarPreviewDetails.look
+		local FromAvatarPreviewItemResults = {}
 		
-		if look.items then
-			for i, v in look.items do
-				if v.itemType == itemTypeEnum.Bundle then
-					t[tostring(v.id)] = bundleInfoModule.fromAvatarPreviewItem(v)
+		if Look.items then
+			for _, item in Look.items do
+				if item.itemType == ItemTypeEnum.Bundle then
+					FromAvatarPreviewItemResults[tostring(item.id)] = BundleInfoModule.fromAvatarPreviewItem(item)
 				end
 			end
 		end
-		return cryoModule.Dictionary.join(p3, t)
+		return CryoModule.Dictionary.join(p2, FromAvatarPreviewItemResults)
 	end else nil,
-	[setBundlesModule.name] = function(p5, p6)
-		-- upvalues: cryoModule (ref), bundleInfoModule (ref)
-		local t_1
-		local t = {}
+	[require(Parent.Actions.SetBundles).name] = function(p4, p5) --[[ Line: 76 ]]
+		-- upvalues: CryoModule (copy), BundleInfoModule (copy)
+		local JoinResults = {}
+		local AssetsInBundle = nil
 		
-		for i, v in ipairs(p6.bundles) do
-			assert(v.bundleId ~= nil, "Expected a bundle id when setting a bundle's information.")
-			local bundleId = p5[v.bundleId] or {}
+		for _, bundle in ipairs(p5.bundles) do
+			assert(bundle.bundleId ~= nil, "Expected a bundle id when setting a bundle's information.")
+			local v1 = p4[bundle.bundleId] or {}
 			
-			if not v.assetsInBundle then
-				t[v.bundleId] = cryoModule.Dictionary.join(bundleId, v)
+			if bundle.assetsInBundle then
+				AssetsInBundle = {}
 				
-				if t[v.bundleId] then
-					t[v.bundleId] = bundleInfoModule.getSaleDetailsForCollectibles(t[v.bundleId])
-				end
-			end
-			t_1 = {}
-			
-			for i_1, v_1 in v.assetsInBundle do
-				for i_2, v_2 in bundleId.assetsInBundle or {} do
-					if v_2.id == v_1.id then
-						table.insert(t_1, cryoModule.Dictionary.join(v_2, v_1))
-						continue
+				for _, value in bundle.assetsInBundle do
+					local AssetsInBundle1 = v1.assetsInBundle or {}
+					for _, value1 in AssetsInBundle1 do
+						if value1.id == value.id then
+							table.insert(AssetsInBundle, (CryoModule.Dictionary.join(value1, value)))
+							break
+						end
 					end
 				end
+				bundle.assetsInBundle = AssetsInBundle
 			end
-			v.assetsInBundle = t_1
+			JoinResults[bundle.bundleId] = CryoModule.Dictionary.join(v1, bundle)
+			
+			if JoinResults[bundle.bundleId] then
+				JoinResults[bundle.bundleId] = BundleInfoModule.getSaleDetailsForCollectibles(JoinResults[bundle.bundleId])
+			end
 		end
-		return cryoModule.Dictionary.join(p5, t)
+		return CryoModule.Dictionary.join(p4, JoinResults)
 	end
 })

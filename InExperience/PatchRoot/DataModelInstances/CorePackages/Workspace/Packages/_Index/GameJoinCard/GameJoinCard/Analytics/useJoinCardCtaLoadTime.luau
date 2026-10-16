@@ -1,32 +1,39 @@
-﻿local gameJoinCard = script:FindFirstAncestor("GameJoinCard")
-local reactModule = require(gameJoinCard.Parent.React)
-local gameJoinCardTTIModule = require(gameJoinCard.Telemetry.GameJoinCardTTI)
-local useGameJoinCardAnalyticsModule = require(script.Parent.useGameJoinCardAnalytics)
+﻿local GameJoinCard = script:FindFirstAncestor("GameJoinCard")
+local Parent = GameJoinCard.Parent
+local ReactModule = require(Parent.React)
+local GameJoinCardTTIModule = require(GameJoinCard.Telemetry.GameJoinCardTTI)
+local UseGameJoinCardAnalyticsModule = require(script.Parent.useGameJoinCardAnalytics)
+local FFlagGameJoinCardOptionalActions = require(Parent.SharedFlags).FFlagGameJoinCardOptionalActions
 
-return function(p1)
-	-- upvalues: reactModule (ref), gameJoinCardTTIModule (ref), useGameJoinCardAnalyticsModule (ref)
-	local var1 = reactModule.useRef(tick())
-	local var2 = reactModule.useRef(nil)
-	local var3 = reactModule.useRef(false)
-	local var4 = reactModule.useRef(false)
-	local var5 = reactModule.useRef(p1.ctaType)
-	var5.current = p1.ctaType
-	local var6 = reactModule.useRef(p1.wasCached)
-	var6.current = p1.wasCached
-	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), var2 (ref), gameJoinCardTTIModule (copy), var4 (ref), p1 (ref), var1 (ref), useGameJoinCardAnalyticsModule (copy), var5 (ref), var6 (ref)
-		if not var3.current then
-			var3.current = true
-			var2.current = gameJoinCardTTIModule.consumeMobileCardClickStartMs()
+return function(p1) --[[ Line: 45 | Named "useJoinCardCtaLoadTime" ]]
+	-- upvalues: ReactModule (copy), FFlagGameJoinCardOptionalActions (copy), GameJoinCardTTIModule (copy), UseGameJoinCardAnalyticsModule (copy)
+	local UseRefResult = ReactModule.useRef(tick())
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseRefResult2 = ReactModule.useRef(false)
+	local UseRefResult3 = ReactModule.useRef(false)
+	local UseRefResult4 = ReactModule.useRef(p1.ctaType)
+	UseRefResult4.current = p1.ctaType
+	local UseRefResult5 = ReactModule.useRef(p1.wasCached)
+	UseRefResult5.current = p1.wasCached
+	ReactModule.useEffect(function() --[[ Line: 56 ]]
+		-- upvalues: FFlagGameJoinCardOptionalActions (upval), p1 (copy), UseRefResult2 (copy), UseRefResult1 (copy), GameJoinCardTTIModule (upval), UseRefResult3 (copy), UseRefResult (copy), UseGameJoinCardAnalyticsModule (upval), UseRefResult4 (copy), UseRefResult5 (copy)
+		if FFlagGameJoinCardOptionalActions and p1.isDisabled then return end
+		if not UseRefResult2.current then
+			UseRefResult2.current = true
+			UseRefResult1.current = GameJoinCardTTIModule.consumeMobileCardClickStartMs()
 		end
-		if var4.current or p1.isLoading then
+		if not UseRefResult3.current and not p1.isLoading then
+			UseRefResult3.current = true
+			UseGameJoinCardAnalyticsModule.logJoinCardCtaLoadTime({
+				durationMs = tick() * 1000 - (UseRefResult1.current or UseRefResult.current * 1000),
+				ctaType = UseRefResult4.current,
+				wasCached = UseRefResult5.current == true
+			})
+			
 			return
 		end
-		var4.current = true
-		useGameJoinCardAnalyticsModule.logJoinCardCtaLoadTime({
-			durationMs = tick() * 1000 - (var2.current or var1.current * 1000),
-			ctaType = var5.current,
-			wasCached = var6.current == true
-		})
-	end, { p1.isLoading })
+	end, {
+		p1.isLoading,
+		if FFlagGameJoinCardOptionalActions then p1.isDisabled else nil
+	})
 end

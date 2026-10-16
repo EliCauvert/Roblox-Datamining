@@ -1,131 +1,131 @@
-﻿local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local captureService = game:GetService("CaptureService")
-local guiService = game:GetService("GuiService")
-local httpService = game:GetService("HttpService")
-local userInputService = game:GetService("UserInputService")
-local capturesToastTypeModule = require(parent.Enums.CapturesToastType)
-local getAvatarAssetsModule = require(parent.Utils.getAvatarAssets)
-local getScreenshotHudModule = require(parent.Utils.getScreenshotHud)
-local getUserMetadataModule = require(parent.Utils.getUserMetadata)
-local IXPServiceWrapper = require(parent_1.IXPServiceWrapper).IXPServiceWrapper
-local overlayActivatedModule = require(parent.Actions.OverlayActivated)
-local overlayDeactivatedModule = require(parent.Actions.OverlayDeactivated)
-local overlayFlashActivatedModule = require(parent.Actions.OverlayFlashActivated)
-local overlayFlashDeactivatedModule = require(parent.Actions.OverlayFlashDeactivated)
-local pendingCaptureToastActionModule = require(parent.Utils.pendingCaptureToastAction)
-local removeCoreUIModule = require(parent.Utils.removeCoreUI)
-local toastTriggeredModule = require(parent.Actions.ToastTriggered)
-local _ = require(parent.Types)
-local fStringSocialCaptureTakenIXPLayer = require(parent_1.SharedFlags).FStringSocialCaptureTakenIXPLayer
-local fFlagBuildExperienceInGameCaptureToChat = require(parent_1.SharedFlags).FFlagBuildExperienceInGameCaptureToChat
-local debugAPPEXP4747B = game:DefineFastFlag("DebugAPPEXP4747B", false)
+﻿local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local CaptureService = game:GetService("CaptureService")
+local GuiService = game:GetService("GuiService")
+local HttpService = game:GetService("HttpService")
+local UserInputService = game:GetService("UserInputService")
+local CapturesToastTypeModule = require(Parent.Enums.CapturesToastType)
+local GetAvatarAssetsModule = require(Parent.Utils.getAvatarAssets)
+local GetScreenshotHudModule = require(Parent.Utils.getScreenshotHud)
+local GetUserMetadataModule = require(Parent.Utils.getUserMetadata)
+local IXPServiceWrapper = require(Parent1.IXPServiceWrapper).IXPServiceWrapper
+local OverlayActivatedModule = require(Parent.Actions.OverlayActivated)
+local OverlayDeactivatedModule = require(Parent.Actions.OverlayDeactivated)
+local OverlayFlashActivatedModule = require(Parent.Actions.OverlayFlashActivated)
+local OverlayFlashDeactivatedModule = require(Parent.Actions.OverlayFlashDeactivated)
+local PendingCaptureToastActionModule = require(Parent.Utils.pendingCaptureToastAction)
+local RemoveCoreUIModule = require(Parent.Utils.removeCoreUI)
+local ToastTriggeredModule = require(Parent.Actions.ToastTriggered)
+local _ = require(Parent.Types)
+local FStringSocialCaptureTakenIXPLayer = require(Parent1.SharedFlags).FStringSocialCaptureTakenIXPLayer
+local FFlagBuildExperienceInGameCaptureToChat = require(Parent1.SharedFlags).FFlagBuildExperienceInGameCaptureToChat
+local DebugAPPEXP4747B = game:DefineFastFlag("DebugAPPEXP4747B", false)
 
-local function _(p1)
-	-- upvalues: guiService (ref)
-	if guiService:GetGuiIsVisible(p1) then
-		guiService:ToggleGuiIsVisibleForCaptures(p1)
+local function _(GuiType) --[[ Line: 28 | Named "hideGui" ]]
+	-- upvalues: GuiService (copy)
+	if GuiService:GetGuiIsVisible(GuiType) then
+		GuiService:ToggleGuiIsVisibleForCaptures(GuiType)
 	end
 end
 
-local _ = function(p1)
-	-- upvalues: guiService (ref)
-	if not guiService:GetGuiIsVisible(p1) then
-		guiService:ToggleGuiIsVisibleForCaptures(p1)
+local _ = function(GuiType) --[[ Line: 34 | Named "showGui" ]]
+	-- upvalues: GuiService (copy)
+	if not GuiService:GetGuiIsVisible(GuiType) then
+		GuiService:ToggleGuiIsVisibleForCaptures(GuiType)
 	end
 end
 
-local _ = function()
-	-- upvalues: guiService (ref)
-	if guiService:GetGuiIsVisible(Enum.GuiType.Custom) then
-		guiService:ToggleGuiIsVisibleForCaptures(Enum.GuiType.Custom)
+local _ = function() --[[ Line: 40 | Named "hidePlayerGui" ]]
+	-- upvalues: GuiService (copy)
+	if GuiService:GetGuiIsVisible(Enum.GuiType.Custom) then
+		GuiService:ToggleGuiIsVisibleForCaptures(Enum.GuiType.Custom)
 	end
 end
 
-local _ = function()
-	-- upvalues: guiService (ref)
-	if not guiService:GetGuiIsVisible(Enum.GuiType.Custom) then
-		guiService:ToggleGuiIsVisibleForCaptures(Enum.GuiType.Custom)
+local _ = function() --[[ Line: 46 | Named "showPlayerGui" ]]
+	-- upvalues: GuiService (copy)
+	if not GuiService:GetGuiIsVisible(Enum.GuiType.Custom) then
+		GuiService:ToggleGuiIsVisibleForCaptures(Enum.GuiType.Custom)
 	end
 end
 
-return function(p1)
-	-- upvalues: fFlagBuildExperienceInGameCaptureToChat (ref), pendingCaptureToastActionModule (ref), toastTriggeredModule (ref), capturesToastTypeModule (ref), userInputService (ref), getScreenshotHudModule (ref), debugAPPEXP4747B (ref), guiService (ref), removeCoreUIModule (ref), overlayActivatedModule (ref), captureService (ref), getAvatarAssetsModule (ref), getUserMetadataModule (ref), httpService (ref), overlayFlashActivatedModule (ref), overlayFlashDeactivatedModule (ref), overlayDeactivatedModule (ref), IXPServiceWrapper (ref), fStringSocialCaptureTakenIXPLayer (ref)
-	return function(p2)
-		-- upvalues: fFlagBuildExperienceInGameCaptureToChat (copy), pendingCaptureToastActionModule (copy), p1 (ref), toastTriggeredModule (copy), capturesToastTypeModule (copy), userInputService (copy), getScreenshotHudModule (copy), debugAPPEXP4747B (copy), guiService (copy), removeCoreUIModule (copy), overlayActivatedModule (copy), captureService (copy), getAvatarAssetsModule (copy), getUserMetadataModule (copy), httpService (copy), overlayFlashActivatedModule (copy), overlayFlashDeactivatedModule (copy), overlayDeactivatedModule (copy), IXPServiceWrapper (copy), fStringSocialCaptureTakenIXPLayer (copy)
-		local var1 = false
-		local var2 = false
+return function(p1) --[[ Line: 52 ]]
+	-- upvalues: FFlagBuildExperienceInGameCaptureToChat (copy), PendingCaptureToastActionModule (copy), ToastTriggeredModule (copy), CapturesToastTypeModule (copy), UserInputService (copy), GetScreenshotHudModule (copy), DebugAPPEXP4747B (copy), GuiService (copy), RemoveCoreUIModule (copy), OverlayActivatedModule (copy), CaptureService (copy), GetAvatarAssetsModule (copy), GetUserMetadataModule (copy), HttpService (copy), OverlayFlashActivatedModule (copy), OverlayFlashDeactivatedModule (copy), OverlayDeactivatedModule (copy), IXPServiceWrapper (copy), FStringSocialCaptureTakenIXPLayer (copy)
+	return function(p2) --[[ Line: 53 ]]
+		-- upvalues: FFlagBuildExperienceInGameCaptureToChat (upval), PendingCaptureToastActionModule (upval), p1 (copy), ToastTriggeredModule (upval), CapturesToastTypeModule (upval), UserInputService (upval), GetScreenshotHudModule (upval), DebugAPPEXP4747B (upval), GuiService (upval), RemoveCoreUIModule (upval), OverlayActivatedModule (upval), CaptureService (upval), GetAvatarAssetsModule (upval), GetUserMetadataModule (upval), HttpService (upval), OverlayFlashActivatedModule (upval), OverlayFlashDeactivatedModule (upval), OverlayDeactivatedModule (upval), IXPServiceWrapper (upval), FStringSocialCaptureTakenIXPLayer (upval)
+		local Flag = false
+		local Flag1 = false
 		
-		if fFlagBuildExperienceInGameCaptureToChat then
-			pendingCaptureToastActionModule.set(if p1 then p1.toastAction else nil)
+		if FFlagBuildExperienceInGameCaptureToChat then
+			PendingCaptureToastActionModule.set(if p1 then p1.toastAction else nil)
 		end
-		p2:dispatch(toastTriggeredModule(capturesToastTypeModule.None))
-		local overrideMouseIconBehavior = userInputService.OverrideMouseIconBehavior
-		userInputService.OverrideMouseIconBehavior = Enum.OverrideMouseIconBehavior.ForceHide
-		local var3 = getScreenshotHudModule()
+		p2:dispatch(ToastTriggeredModule(CapturesToastTypeModule.None))
+		local OverrideMouseIconBehavior = UserInputService.OverrideMouseIconBehavior
+		UserInputService.OverrideMouseIconBehavior = Enum.OverrideMouseIconBehavior.ForceHide
+		local ScreenshotHudModule = GetScreenshotHudModule()
 		
-		if not debugAPPEXP4747B and (not var3 or var3.HidePlayerGuiForCaptures) then
-			if guiService:GetGuiIsVisible(Enum.GuiType.Custom) then
-				guiService:ToggleGuiIsVisibleForCaptures(Enum.GuiType.Custom)
+		if not DebugAPPEXP4747B and (not ScreenshotHudModule or ScreenshotHudModule.HidePlayerGuiForCaptures) then
+			if GuiService:GetGuiIsVisible(Enum.GuiType.Custom) then
+				GuiService:ToggleGuiIsVisibleForCaptures(Enum.GuiType.Custom)
 			end
-			var2 = true
+			Flag1 = true
 		end
-		local var4 = nil
+		local Callback: () -> () = nil
 		
-		if not debugAPPEXP4747B then
-			if not var3 or var3.HideCoreGuiForCaptures then
-				var4 = removeCoreUIModule()
-				var1 = true
+		if not DebugAPPEXP4747B then
+			if not ScreenshotHudModule or ScreenshotHudModule.HideCoreGuiForCaptures then
+				Callback = RemoveCoreUIModule()
+				Flag = true
 			end
-			local customBillboards = Enum.GuiType.CustomBillboards
+			local CustomBillboards = Enum.GuiType.CustomBillboards
 			
-			if guiService:GetGuiIsVisible(customBillboards) then
-				guiService:ToggleGuiIsVisibleForCaptures(customBillboards)
+			if GuiService:GetGuiIsVisible(CustomBillboards) then
+				GuiService:ToggleGuiIsVisibleForCaptures(CustomBillboards)
 			end
-			local playerNameplates = Enum.GuiType.PlayerNameplates
+			local PlayerNameplates = Enum.GuiType.PlayerNameplates
 			
-			if guiService:GetGuiIsVisible(playerNameplates) then
-				guiService:ToggleGuiIsVisibleForCaptures(playerNameplates)
+			if GuiService:GetGuiIsVisible(PlayerNameplates) then
+				GuiService:ToggleGuiIsVisibleForCaptures(PlayerNameplates)
 			end
 		end
-		p2:dispatch(overlayActivatedModule())
-		captureService:OnCaptureBegan()
+		p2:dispatch(OverlayActivatedModule())
+		CaptureService:OnCaptureBegan()
 		task.wait(0.1)
-		local var5 = getAvatarAssetsModule()
-		local var6 = getUserMetadataModule()
+		local AvatarAssetsModule = GetAvatarAssetsModule()
+		local UserMetadataModule = GetUserMetadataModule()
 		
-		if next(var5) == nil and next(var6) == nil then
-			captureService:SaveScreenshotCapture()
+		if next(AvatarAssetsModule) == nil and next(UserMetadataModule) == nil then
+			CaptureService:SaveScreenshotCapture()
 		else
-			captureService:SaveScreenshotCapture(httpService:JSONEncode({
-				avatarItems = if next(var5) ~= nil then nil else var5,
-				userMetadata = if next(var6) ~= nil then nil else var6
+			CaptureService:SaveScreenshotCapture(HttpService:JSONEncode({
+				avatarItems = if next(AvatarAssetsModule) == nil then nil else AvatarAssetsModule,
+				userMetadata = if next(UserMetadataModule) == nil then nil else UserMetadataModule
 			}))
 		end
 		task.wait()
-		p2:dispatch(overlayFlashActivatedModule())
+		p2:dispatch(OverlayFlashActivatedModule())
 		task.wait(0.5)
-		captureService:OnCaptureEnded()
-		p2:dispatch(overlayFlashDeactivatedModule())
-		p2:dispatch(overlayDeactivatedModule())
-		userInputService.OverrideMouseIconBehavior = overrideMouseIconBehavior
+		CaptureService:OnCaptureEnded()
+		p2:dispatch(OverlayFlashDeactivatedModule())
+		p2:dispatch(OverlayDeactivatedModule())
+		UserInputService.OverrideMouseIconBehavior = OverrideMouseIconBehavior
 		
-		if var2 and not guiService:GetGuiIsVisible(Enum.GuiType.Custom) then
-			guiService:ToggleGuiIsVisibleForCaptures(Enum.GuiType.Custom)
+		if Flag1 and not GuiService:GetGuiIsVisible(Enum.GuiType.Custom) then
+			GuiService:ToggleGuiIsVisibleForCaptures(Enum.GuiType.Custom)
 		end
-		if var1 then
-			var4()
+		if Flag then
+			Callback()
 		end
-		local customBillboards = Enum.GuiType.CustomBillboards
+		local CustomBillboards = Enum.GuiType.CustomBillboards
 		
-		if not guiService:GetGuiIsVisible(customBillboards) then
-			guiService:ToggleGuiIsVisibleForCaptures(customBillboards)
+		if not GuiService:GetGuiIsVisible(CustomBillboards) then
+			GuiService:ToggleGuiIsVisibleForCaptures(CustomBillboards)
 		end
-		local playerNameplates = Enum.GuiType.PlayerNameplates
+		local PlayerNameplates = Enum.GuiType.PlayerNameplates
 		
-		if not guiService:GetGuiIsVisible(playerNameplates) then
-			guiService:ToggleGuiIsVisibleForCaptures(playerNameplates)
+		if not GuiService:GetGuiIsVisible(PlayerNameplates) then
+			GuiService:ToggleGuiIsVisibleForCaptures(PlayerNameplates)
 		end
-		IXPServiceWrapper:LogUserLayerExposure(fStringSocialCaptureTakenIXPLayer)
+		IXPServiceWrapper:LogUserLayerExposure(FStringSocialCaptureTakenIXPLayer)
 	end
 end

@@ -1,92 +1,98 @@
-﻿local reactModule = require(script:FindFirstAncestor("DiscoveryHeroUnit").Parent.React)
+﻿local ReactModule = require(script:FindFirstAncestor("DiscoveryHeroUnit").Parent.React)
 
-local function _(p1, p2, p3, p4, p5)
+local function _(p1: number, p2, p3, p4, p5) --[[ Line: 99 | Named "customEasing" ]]
 	return (1 - p1) ^ 3 * p2 + 3 * (1 - p1) ^ 2 * p1 * p3 + 3 * (1 - p1) * p1 ^ 2 * p4 + p1 ^ 3 * p5
 end
 
 return {
-	useNormalizedVerticalProgress = function(p1, p2)
-		-- upvalues: reactModule (ref)
-		local var1, var2 = reactModule.useBinding(-1)
-		reactModule.useEffect(function()
-			-- upvalues: p1 (ref), p2 (ref), var2 (ref)
-			local t = {}
+	useNormalizedVerticalProgress = function(p1, p2) --[[ Line: 31 ]]
+		-- upvalues: ReactModule (copy)
+		local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(-1)
+		ReactModule.useEffect(function() --[[ Line: 38 ]]
+			-- upvalues: p1 (copy), p2 (copy), UseBindingResult2 (copy)
+			local Connections = {}
 			
 			if p1 and p1.current and p2.current then
-				local current = p2.current
-				local current_1 = p1.current
-				local y = current_1.AbsolutePosition.Y
-				local y_1 = current_1.AbsoluteWindowSize.Y
+				local Current = p2.current
+				local Current1 = p1.current
+				local Y = Current1.AbsolutePosition.Y
+				local Y1 = Current1.AbsoluteWindowSize.Y
 				
-				local function _()
-					-- upvalues: current (ref), current_1 (ref), y (write)
-					return current.AbsolutePosition.Y + current_1.CanvasPosition.Y - y
+				local function _() --[[ Line: 48 | Named "calculateOffset" ]]
+					-- upvalues: Current (copy), Current1 (copy), Y (ref)
+					return Current.AbsolutePosition.Y + Current1.CanvasPosition.Y - Y
 				end
 				
-				local var3 = current.AbsolutePosition.Y + current_1.CanvasPosition.Y - y
+				local YDelta = Current.AbsolutePosition.Y + Current1.CanvasPosition.Y - Y
 				
-				local function updateBinding()
-					-- upvalues: y_1 (write), var3 (write), current_1 (ref), var2 (copy)
-					if y_1 == 0 then
+				local function updateBinding() --[[ Line: 55 ]]
+					-- upvalues: Y1 (ref), YDelta (ref), Current1 (copy), UseBindingResult2 (upval)
+					if Y1 ~= 0 then
+						UseBindingResult2((YDelta - Current1.CanvasPosition.Y) / Y1)
+						
 						return
 					end
-					var2((var3 - current_1.CanvasPosition.Y) / y_1)
 				end
 				
-				local function updateWindowParams()
-					-- upvalues: y (write), current_1 (ref), y_1 (write), var3 (write), current (ref), var2 (copy)
-					y = current_1.AbsolutePosition.Y
-					y_1 = current_1.AbsoluteWindowSize.Y
-					var3 = current.AbsolutePosition.Y + current_1.CanvasPosition.Y - y
+				local function updateWindowParams() --[[ Line: 66 ]]
+					-- upvalues: Y (ref), Current1 (copy), Y1 (ref), YDelta (ref), Current (copy), UseBindingResult2 (upval)
+					Y = Current1.AbsolutePosition.Y
+					Y1 = Current1.AbsoluteWindowSize.Y
+					YDelta = Current.AbsolutePosition.Y + Current1.CanvasPosition.Y - Y
 					
-					if y_1 == 0 then
+					if Y1 ~= 0 then
+						UseBindingResult2((YDelta - Current1.CanvasPosition.Y) / Y1)
+						
 						return
 					end
-					var2((var3 - current_1.CanvasPosition.Y) / y_1)
 				end
 				
-				y_1 = current_1.AbsoluteWindowSize.Y
-				var3 = current.AbsolutePosition.Y + current_1.CanvasPosition.Y - current_1.AbsolutePosition.Y
+				Y = Current1.AbsolutePosition.Y
+				Y1 = Current1.AbsoluteWindowSize.Y
+				YDelta = Current.AbsolutePosition.Y + Current1.CanvasPosition.Y - Y
 				
-				if y_1 ~= 0 then
-					var2((var3 - current_1.CanvasPosition.Y) / y_1)
+				if Y1 ~= 0 then
+					UseBindingResult2((YDelta - Current1.CanvasPosition.Y) / Y1)
 				end
-				t = {
-					current_1:GetPropertyChangedSignal("AbsolutePosition"):Connect(updateWindowParams),
-					current_1:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(updateWindowParams),
-					current_1:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(updateWindowParams),
-					current_1:GetPropertyChangedSignal("CanvasPosition"):Connect(updateBinding)
+				Connections = {
+					Current1:GetPropertyChangedSignal("AbsolutePosition"):Connect(updateWindowParams),
+					Current1:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(updateWindowParams),
+					Current1:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(updateWindowParams),
+					Current1:GetPropertyChangedSignal("CanvasPosition"):Connect(updateBinding)
 				}
 			end
-			return function()
-				-- upvalues: t (write)
-				for i, v in t do
-					v:Disconnect()
+			return function() --[[ Line: 82 ]]
+				-- upvalues: Connections (ref)
+				for _, connection in Connections do
+					connection:Disconnect()
 				end
 			end
 		end, { p2, p1 })
 		
-		return var1
+		return UseBindingResult
 	end,
-	getYPositionOffsetForMotion = function(value, p3, p4, p5)
-		local clampedValue = math.clamp(value, -1, 1)
+	getYPositionOffsetForMotion = function(Value: number, p3, p4, p5) --[[ Line: 103 ]]
+		local ClampedValue = math.clamp(Value, -1, 1)
 		
-		if clampedValue >= 0 then
-			local var3 = (1 - clampedValue) ^ 3 * 0 + 3 * (1 - clampedValue) ^ 2 * clampedValue * 0.3 + 3 * (1 - clampedValue) * clampedValue ^ 2 * 0.6 + clampedValue ^ 3 * 1
+		if ClampedValue >= 0 then
+			local NewClampedValue = (1 - ClampedValue) ^ 3 * 0 + 3 * (1 - ClampedValue) ^ 2 * ClampedValue * 0.3 + 3 * (1 - ClampedValue) * ClampedValue ^ 2 * 0.6 + ClampedValue ^ 3 * 1
 			
-			return p4 * var3 + p5 * (1 - var3)
+			return p4 * NewClampedValue + p5 * (1 - NewClampedValue)
+		else
+			local Negated = -ClampedValue
+			local NewNegated = (1 - Negated) ^ 3 * 0 + 3 * (1 - Negated) ^ 2 * Negated * 0.3 + 3 * (1 - Negated) * Negated ^ 2 * 0.6 + Negated ^ 3 * 1
+			
+			return p3 * NewNegated + p5 * (1 - NewNegated)
 		end
-		local var4 = -clampedValue
-		local var5 = (1 - var4) ^ 3 * 0 + 3 * (1 - var4) ^ 2 * var4 * 0.3 + 3 * (1 - var4) * var4 ^ 2 * 0.6 + var4 ^ 3 * 1
-		
-		return p3 * var5 + p5 * (1 - var5)
 	end,
-	getNormalizedTopPosition = function(p3, p4)
-		if not p4 or not p3 then
+	getNormalizedTopPosition = function(ScrollFrame, Frame) --[[ Line: 8 ]]
+		if Frame and ScrollFrame then
+			local Y = ScrollFrame.AbsoluteWindowSize.Y
+			local YDelta = Frame.AbsolutePosition.Y + ScrollFrame.CanvasPosition.Y - ScrollFrame.AbsolutePosition.Y - ScrollFrame.CanvasPosition.Y
+			
+			return if Y == 0 then nil else YDelta / Y
+		else
 			return nil
 		end
-		local y = p3.AbsoluteWindowSize.Y
-		
-		return if y == 0 then nil else (p4.AbsolutePosition.Y + p3.CanvasPosition.Y - p3.AbsolutePosition.Y - p3.CanvasPosition.Y) / y
 	end
 }

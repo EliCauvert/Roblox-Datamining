@@ -1,10 +1,8 @@
-﻿local reactModule = require(script:FindFirstAncestor("Moments").Parent.React)
-local avatarActionBarModule = require(script.Parent.AvatarActionBar)
-local useAvatarActionBarViewModelModule = require(script.Parent.useAvatarActionBarViewModel)
+﻿local ReactModule = require(script:FindFirstAncestor("Moments").Parent.React)
+local AvatarActionBarModule = require(script.Parent.AvatarActionBar)
+local UseAvatarActionBarViewModelModule = require(script.Parent.useAvatarActionBarViewModel)
 
-return reactModule.memo(function(p1)
-	-- upvalues: useAvatarActionBarViewModelModule (ref), reactModule (ref), avatarActionBarModule (ref)
-	local var1 = useAvatarActionBarViewModelModule(p1)
-	
-	return if var1 == nil then nil else reactModule.createElement(avatarActionBarModule, var1)
+return ReactModule.memo(function(p1) --[[ Line: 16 | Named "AvatarActionBarContainer" ]]
+	-- upvalues: UseAvatarActionBarViewModelModule (copy), ReactModule (copy), AvatarActionBarModule (copy)
+	return ReactModule.createElement(AvatarActionBarModule, (UseAvatarActionBarViewModelModule(p1)))
 end)

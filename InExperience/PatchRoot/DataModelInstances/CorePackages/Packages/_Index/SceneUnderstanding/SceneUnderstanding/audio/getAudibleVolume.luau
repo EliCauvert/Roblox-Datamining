@@ -1,7 +1,7 @@
-﻿local userGameSettingsService = UserSettings():GetService("UserGameSettings")
-local safelyAccessPropertyModule = require(script:FindFirstAncestor("SceneUnderstanding").safelyAccessProperty)
+﻿local UserGameSettings = UserSettings():GetService("UserGameSettings")
+local SafelyAccessPropertyModule = require(script:FindFirstAncestor("SceneUnderstanding").safelyAccessProperty)
 
-return function(p1)
-	-- upvalues: safelyAccessPropertyModule (ref), userGameSettingsService (ref)
-	return if p1.IsPlaying then safelyAccessPropertyModule(userGameSettingsService, "MasterVolume", 0) * (if p1.SoundGroup then p1.SoundGroup.Volume else 1) * p1.Volume * safelyAccessPropertyModule(p1, "RollOffGain", 0) else 0
+return function(Sound) --[[ Line: 19 | Named "getAudibleVolume" ]]
+	-- upvalues: SafelyAccessPropertyModule (copy), UserGameSettings (copy)
+	return if Sound.IsPlaying then SafelyAccessPropertyModule(UserGameSettings, "MasterVolume", 0) * (if Sound.SoundGroup then Sound.SoundGroup.Volume else 1) * Sound.Volume * SafelyAccessPropertyModule(Sound, "RollOffGain", 0) else 0
 end

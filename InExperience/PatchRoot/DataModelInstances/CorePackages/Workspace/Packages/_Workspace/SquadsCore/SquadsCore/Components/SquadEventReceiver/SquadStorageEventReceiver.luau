@@ -1,44 +1,44 @@
-﻿local squadsCore = script:FindFirstAncestor("SquadsCore")
-local parent = squadsCore.Parent
-local appStorageService = game:GetService("AppStorageService")
-local roduxSquadsModule = require(squadsCore.RoduxSquads)
-local constantsModule = require(squadsCore.Common.Constants)
-local squadExternalContractContextModule = require(squadsCore.Components.SquadExternalContractProvider.SquadExternalContractContext)
-local fetchActiveSquadModule = require(squadsCore.Thunks.fetchActiveSquad)
-local useCurrentSquadIdModule = require(squadsCore.Hooks.useCurrentSquadId)
-local validateSquadIdModule = require(squadsCore.Common.validateSquadId)
-local reactModule = require(parent.React)
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local useEffect = reactModule.useEffect
+﻿local SquadsCore = script:FindFirstAncestor("SquadsCore")
+local Parent = SquadsCore.Parent
+local AppStorageService = game:GetService("AppStorageService")
+local RoduxSquadsModule = require(SquadsCore.RoduxSquads)
+local ConstantsModule = require(SquadsCore.Common.Constants)
+local SquadExternalContractContextModule = require(SquadsCore.Components.SquadExternalContractProvider.SquadExternalContractContext)
+local FetchActiveSquadModule = require(SquadsCore.Thunks.fetchActiveSquad)
+local UseCurrentSquadIdModule = require(SquadsCore.Hooks.useCurrentSquadId)
+local ValidateSquadIdModule = require(SquadsCore.Common.validateSquadId)
+local ReactModule = require(Parent.React)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseEffectFunction = ReactModule.useEffect
 
-return function()
-	-- upvalues: useDispatch (ref), useCurrentSquadIdModule (ref), reactModule (ref), squadExternalContractContextModule (ref), appStorageService (ref), constantsModule (ref), useEffect (ref), validateSquadIdModule (ref), fetchActiveSquadModule (ref), roduxSquadsModule (ref)
-	local var1 = useDispatch()
-	local var2 = useCurrentSquadIdModule() or ""
-	local var3, var4 = reactModule.useState(false)
-	local var5 = reactModule.useContext(squadExternalContractContextModule).useIsChatEnabled()
-	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), appStorageService (copy), constantsModule (copy), var2 (ref)
-		if var3 then
-			appStorageService:SetItem(constantsModule.ACTIVE_SQUAD_APP_STORAGE_KEY, var2)
-			appStorageService:Flush()
+return function() --[[ Line: 18 ]]
+	-- upvalues: UseDispatchFunction (copy), UseCurrentSquadIdModule (copy), ReactModule (copy), SquadExternalContractContextModule (copy), AppStorageService (copy), ConstantsModule (copy), UseEffectFunction (copy), ValidateSquadIdModule (copy), FetchActiveSquadModule (copy), RoduxSquadsModule (copy)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseCurrentSquadIdModuleResult = UseCurrentSquadIdModule() or ""
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseIsChatEnabledResult = ReactModule.useContext(SquadExternalContractContextModule).useIsChatEnabled()
+	ReactModule.useEffect(function() --[[ Line: 27 ]]
+		-- upvalues: UseStateResult (copy), AppStorageService (upval), ConstantsModule (upval), UseCurrentSquadIdModuleResult (copy)
+		if UseStateResult then
+			AppStorageService:SetItem(ConstantsModule.ACTIVE_SQUAD_APP_STORAGE_KEY, UseCurrentSquadIdModuleResult)
+			AppStorageService:Flush()
 		end
-	end, { var2, var3 })
-	useEffect(function()
-		-- upvalues: var5 (ref), appStorageService (copy), constantsModule (copy), validateSquadIdModule (copy), var2 (ref), var1 (ref), fetchActiveSquadModule (copy), roduxSquadsModule (copy), var4 (ref)
-		if not var5 then return end
-		local active_squad_app_storage_keyItem = appStorageService:GetItem(constantsModule.ACTIVE_SQUAD_APP_STORAGE_KEY)
-		local var6 = validateSquadIdModule(active_squad_app_storage_keyItem)
+	end, { UseCurrentSquadIdModuleResult, UseStateResult })
+	UseEffectFunction(function() --[[ Line: 35 ]]
+		-- upvalues: UseIsChatEnabledResult (copy), AppStorageService (upval), ConstantsModule (upval), ValidateSquadIdModule (upval), UseCurrentSquadIdModuleResult (copy), UseDispatchResult (copy), FetchActiveSquadModule (upval), RoduxSquadsModule (upval), UseStateResult2 (copy)
+		if not UseIsChatEnabledResult then return end
+		local Item = AppStorageService:GetItem(ConstantsModule.ACTIVE_SQUAD_APP_STORAGE_KEY)
+		local ValidateSquadIdModuleResult = ValidateSquadIdModule(Item)
 		
-		if var6 and var2 == "" then
-			var1(fetchActiveSquadModule())
-		elseif active_squad_app_storage_keyItem ~= "" and not var6 or var2 ~= "" and var2 ~= active_squad_app_storage_keyItem then
-			var1(roduxSquadsModule.Actions.CurrentSquadUpdated(nil))
-			appStorageService:SetItem(constantsModule.ACTIVE_SQUAD_APP_STORAGE_KEY, "")
-			appStorageService:Flush()
+		if ValidateSquadIdModuleResult and UseCurrentSquadIdModuleResult == "" then
+			UseDispatchResult(FetchActiveSquadModule())
+		elseif Item ~= "" and not ValidateSquadIdModuleResult or UseCurrentSquadIdModuleResult ~= "" and UseCurrentSquadIdModuleResult ~= Item then
+			UseDispatchResult(RoduxSquadsModule.Actions.CurrentSquadUpdated(nil))
+			AppStorageService:SetItem(ConstantsModule.ACTIVE_SQUAD_APP_STORAGE_KEY, "")
+			AppStorageService:Flush()
 		end
-		var4(true)
-	end, { var5 })
+		UseStateResult2(true)
+	end, { UseIsChatEnabledResult })
 	
 	return nil
 end

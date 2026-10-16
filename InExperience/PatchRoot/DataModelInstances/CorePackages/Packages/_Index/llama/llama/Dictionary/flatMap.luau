@@ -1,19 +1,19 @@
-﻿local joinModule = require(script.Parent.join)
+﻿local JoinModule = require(script.Parent.join)
 
-local function flatMap(p1, p2)
-	-- upvalues: joinModule (ref), flatMap (ref)
-	local var1 = type(p1)
-	assert(var1 == "table", "expected a table for first argument, got " .. var2)
-	local var2 = type(p2)
-	assert(var2 == "function", "expected a function for second argument, got " .. var3)
+local function flatMap(List, Callback) --[[ Line: 4 ]]
+	-- upvalues: JoinModule (copy), flatMap (copy)
+	local ValueType = type(List)
+	assert(ValueType == "table", "expected a table for first argument, got " .. ValueType)
+	local ValueType1 = type(Callback)
+	assert(ValueType1 == "function", "expected a function for second argument, got " .. ValueType1)
 	local t = {}
 	
-	for i, v in pairs(p1) do
-		if type(v) == "table" then
-			t = joinModule(flatMap(v, p2), t)
+	for i, value in pairs(List) do
+		if type(value) == "table" then
+			t = JoinModule(flatMap(value, Callback), t)
 		else
-			local var3, var4 = p2(v, i)
-			t[var4 or i] = var3
+			local CallbackResult2
+			t[CallbackResult2 or i], CallbackResult2 = Callback(value, i)
 		end
 	end
 	return t

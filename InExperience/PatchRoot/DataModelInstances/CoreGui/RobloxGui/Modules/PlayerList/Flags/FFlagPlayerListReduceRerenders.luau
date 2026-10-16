@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("PlayerListReduceRerenders", false)
+﻿return (game:DefineFastFlag("PlayerListReduceRerenders", false))

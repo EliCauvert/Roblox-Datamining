@@ -1,141 +1,147 @@
-﻿local avatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
-local parent = avatarExperienceProfilePictureEditor.Parent
-local reactModule = require(parent.React)
-local cryoModule = require(parent.Cryo)
-local editProfileImageAnalyticsModule = require(avatarExperienceProfilePictureEditor.Analytics.EditProfileImageAnalytics)
-local avatarEditorService = game:GetService("AvatarEditorService")
+﻿local AvatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
+local Parent = AvatarExperienceProfilePictureEditor.Parent
+local ReactModule = require(Parent.React)
+local CryoModule = require(Parent.Cryo)
+local EditProfileImageAnalyticsModule = require(AvatarExperienceProfilePictureEditor.Analytics.EditProfileImageAnalytics)
+local AvatarEditorService = game:GetService("AvatarEditorService")
 
-local function _(p1)
-	local name = p1.Name or p1.name
+local function _(p1) --[[ Line: 42 | Named "getEmoteLabel" ]]
+	local Name = p1.Name or p1.name
 	
-	return if typeof(name) == "string" and name ~= "" then name else ""
+	return if typeof(Name) == "string" and Name ~= "" then Name else ""
 end
 
-local function getCurrentPageItems(p1)
-	local t = {}
+local function getCurrentPageItems(Pages) --[[ Line: 51 ]]
+	local List = {}
 	
-	for i, v in p1:GetCurrentPage() do
-		local t_1 = { id = tostring(v.AssetId) }
-		local name = v.Name or v.name
-		t_1.label = if typeof(name) == "string" and name ~= "" then name else ""
-		table.insert(t, t_1)
+	for _, value in Pages:GetCurrentPage() do
+		local Name = value.Name or value.name
+		table.insert(List, {
+			id = tostring(value.AssetId),
+			label = if typeof(Name) == "string" and Name ~= "" then Name else ""
+		})
 	end
-	return t
+	return List
 end
 
-return function()
-	-- upvalues: reactModule (ref), cryoModule (ref), getCurrentPageItems (ref), avatarEditorService (ref), editProfileImageAnalyticsModule (ref)
-	local var1, var2 = reactModule.useState({})
-	local var3, var4 = reactModule.useState(true)
-	local var5, var6 = reactModule.useState(false)
-	local var7, var8 = reactModule.useState(false)
-	local var9, var10 = reactModule.useState(false)
-	local var11, var12 = reactModule.useState(false)
-	local var13, var14 = reactModule.useState(0)
-	local var15 = reactModule.useRef(nil)
-	local var16 = reactModule.useRef(false)
-	local var17 = reactModule.useCallback(function(p2, p3)
-		-- upvalues: var2 (ref), cryoModule (copy)
-		var2(function(p4)
-			-- upvalues: p2 (ref), cryoModule (copy), p3 (ref)
-			for i, v in p4 do
-				if v.id == p2 then
-					return p4
+return function() --[[ Line: 62 | Named "useOwnedEmotes" ]]
+	-- upvalues: ReactModule (copy), CryoModule (copy), getCurrentPageItems (copy), AvatarEditorService (copy), EditProfileImageAnalyticsModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState({})
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(true)
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(false)
+	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(false)
+	local UseStateResult5, UseStateResult2_4 = ReactModule.useState(false)
+	local UseStateResult6, UseStateResult2_5 = ReactModule.useState(false)
+	local UseStateResult7, UseStateResult2_6 = ReactModule.useState(0)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(false)
+	local UseResult = ReactModule.useCallback(function(Id, p1) --[[ Line: 73 ]]
+		-- upvalues: UseStateResult2 (copy), CryoModule (upval)
+		UseStateResult2(function(List) --[[ Line: 74 ]]
+			-- upvalues: Id (copy), CryoModule (upval), p1 (copy)
+			for _, value in List do
+				if value.id == Id then
+					return List
 				end
 			end
-			return cryoModule.List.join({ { id = p2, label = p3 or "" } }, p4)
+			return CryoModule.List.join({ { id = Id, label = p1 or "" } }, List)
 		end)
 	end, {})
-	local var18 = reactModule.useCallback(function()
-		-- upvalues: var15 (ref), var16 (ref), var4 (ref), var6 (ref), var8 (ref), var10 (ref), var12 (ref), var14 (ref)
-		var15.current = nil
-		var16.current = false
-		var4(true)
-		var6(false)
-		var8(false)
-		var10(false)
-		var12(false)
-		var14(function(p4)
-			return p4 + 1
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 88 ]]
+		-- upvalues: UseRefResult (copy), UseRefResult1 (copy), UseStateResult2_1 (copy), UseStateResult2_2 (copy), UseStateResult2_3 (copy), UseStateResult2_4 (copy), UseStateResult2_5 (copy), UseStateResult2_6 (copy)
+		UseRefResult.current = nil
+		UseRefResult1.current = false
+		UseStateResult2_1(true)
+		UseStateResult2_2(false)
+		UseStateResult2_3(false)
+		UseStateResult2_4(false)
+		UseStateResult2_5(false)
+		UseStateResult2_6(function(p2: number): number --[[ Line: 96 ]]
+			return p2 + 1
 		end)
 	end, {})
-	local var19 = reactModule.useCallback(function()
-		-- upvalues: var15 (ref), var16 (ref), var10 (ref), var12 (ref), getCurrentPageItems (copy), var2 (ref), cryoModule (copy), var8 (ref)
-		local current = var15.current
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 101 ]]
+		-- upvalues: UseRefResult (copy), UseRefResult1 (copy), UseStateResult2_4 (copy), UseStateResult2_5 (copy), getCurrentPageItems (upval), UseStateResult2 (copy), CryoModule (upval), UseStateResult2_3 (copy)
+		local Current = UseRefResult.current
 		
-		if current == nil or current.IsFinished or var16.current then
+		if Current ~= nil and not Current.IsFinished and not UseRefResult1.current then
+			UseRefResult1.current = true
+			UseStateResult2_4(true)
+			UseStateResult2_5(false)
+			task.spawn(function() --[[ Line: 110 ]]
+				-- upvalues: Current (copy), getCurrentPageItems (upval), UseRefResult1 (upval), UseStateResult2_4 (upval), UseStateResult2 (upval), CryoModule (upval), UseStateResult2_3 (upval), UseStateResult2_5 (upval)
+				local Success, Result = pcall(function() --[[ Line: 111 ]]
+					-- upvalues: Current (upval), getCurrentPageItems (upval)
+					Current:AdvanceToNextPageAsync()
+					
+					return (getCurrentPageItems(Current))
+				end)
+				UseRefResult1.current = false
+				UseStateResult2_4(false)
+				
+				if Success then
+					UseStateResult2(function(p2) --[[ Line: 119 ]]
+						-- upvalues: CryoModule (upval), Result (copy)
+						return CryoModule.List.join(p2, Result)
+					end)
+					UseStateResult2_3(not Current.IsFinished)
+					
+					return
+				else
+					UseStateResult2_5(true)
+				end
+			end)
+			
 			return
 		end
-		var16.current = true
-		var10(true)
-		var12(false)
-		task.spawn(function()
-			-- upvalues: current (ref), getCurrentPageItems (copy), var16 (copy), var10 (copy), var2 (copy), cryoModule (copy), var8 (copy), var12 (copy)
-			local ok, status = pcall(function()
-				-- upvalues: current (copy), getCurrentPageItems (copy)
-				current:AdvanceToNextPageAsync()
-				
-				return getCurrentPageItems(current)
-			end)
-			var16.current = false
-			var10(false)
-			
-			if ok then
-				var2(function(p4)
-					-- upvalues: cryoModule (copy), status (ref)
-					return cryoModule.List.join(p4, status)
-				end)
-				var8(not current.IsFinished)
-				
-				return
-			end
-			var12(true)
-		end)
 	end, {})
-	reactModule.useEffect(function()
-		-- upvalues: var15 (ref), var16 (ref), var10 (ref), var12 (ref), avatarEditorService (copy), getCurrentPageItems (copy), var2 (ref), var8 (ref), editProfileImageAnalyticsModule (copy), var6 (ref), var4 (ref)
-		local var20 = false
-		var15.current = nil
-		var16.current = false
-		var10(false)
-		var12(false)
-		task.spawn(function()
-			-- upvalues: avatarEditorService (copy), getCurrentPageItems (copy), var20 (write), var15 (copy), var2 (copy), var8 (copy), editProfileImageAnalyticsModule (copy), var6 (copy), var4 (copy)
-			local ok, status = pcall(function()
-				-- upvalues: avatarEditorService (copy), getCurrentPageItems (copy)
-				local var21 = avatarEditorService:GetInventoryAsync({ Enum.AvatarAssetType.EmoteAnimation })
+	ReactModule.useEffect(function() --[[ Line: 129 ]]
+		-- upvalues: UseRefResult (copy), UseRefResult1 (copy), UseStateResult2_4 (copy), UseStateResult2_5 (copy), AvatarEditorService (upval), getCurrentPageItems (upval), UseStateResult2 (copy), UseStateResult2_3 (copy), EditProfileImageAnalyticsModule (upval), UseStateResult2_2 (copy), UseStateResult2_1 (copy)
+		local Flag = false
+		UseRefResult.current = nil
+		UseRefResult1.current = false
+		UseStateResult2_4(false)
+		UseStateResult2_5(false)
+		task.spawn(function() --[[ Line: 136 ]]
+			-- upvalues: AvatarEditorService (upval), getCurrentPageItems (upval), Flag (ref), UseRefResult (upval), UseStateResult2 (upval), UseStateResult2_3 (upval), EditProfileImageAnalyticsModule (upval), UseStateResult2_2 (upval), UseStateResult2_1 (upval)
+			local Success, Result = pcall(function() --[[ Line: 137 ]]
+				-- upvalues: AvatarEditorService (upval), getCurrentPageItems (upval)
+				local InventoryAsync = AvatarEditorService:GetInventoryAsync({ Enum.AvatarAssetType.EmoteAnimation })
 				
-				return { items = getCurrentPageItems(var21), pageObject = var21 }
+				return {
+					items = getCurrentPageItems(InventoryAsync),
+					pageObject = InventoryAsync
+				}
 			end)
 			
-			if var20 then return end
-			if ok then
-				var15.current = status.pageObject
-				var2(status.items)
-				var8(not status.pageObject.IsFinished)
+			if Flag then return end
+			if Success then
+				UseRefResult.current = Result.pageObject
+				UseStateResult2(Result.items)
+				UseStateResult2_3(not Result.pageObject.IsFinished)
 			else
-				editProfileImageAnalyticsModule.logFetchFailure({ assetType = "emotes" })
-				var6(true)
-				var8(false)
+				EditProfileImageAnalyticsModule.logFetchFailure({ assetType = "emotes" })
+				UseStateResult2_2(true)
+				UseStateResult2_3(false)
 			end
-			var4(false)
+			UseStateResult2_1(false)
 		end)
 		
-		return function()
-			-- upvalues: var20 (write)
-			var20 = true
+		return function() --[[ Line: 163 ]]
+			-- upvalues: Flag (ref)
+			Flag = true
 		end
-	end, { var13 })
+	end, { UseStateResult7 })
 	
 	return {
-		emoteItems = var1,
-		isLoading = var3,
-		hasError = var5,
-		refetch = var18,
-		onMoreEmotes = var19,
-		hasMoreEmotes = var7,
-		isLoadingMoreEmotes = var9,
-		hasLoadMoreError = var11,
-		markEmoteOwned = var17
+		emoteItems = UseStateResult,
+		isLoading = UseStateResult1,
+		hasError = UseStateResult3,
+		refetch = UseResult1,
+		onMoreEmotes = UseResult2,
+		hasMoreEmotes = UseStateResult4,
+		isLoadingMoreEmotes = UseStateResult5,
+		hasLoadMoreError = UseStateResult6,
+		markEmoteOwned = UseResult
 	}
 end

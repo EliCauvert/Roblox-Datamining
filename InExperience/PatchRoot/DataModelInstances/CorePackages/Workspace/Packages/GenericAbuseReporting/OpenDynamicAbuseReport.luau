@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent._Workspace.GenericAbuseReporting.GenericAbuseReporting.Thunks.OpenDynamicAbuseReport)
+﻿return (require(script.Parent.Parent._Workspace.GenericAbuseReporting.GenericAbuseReporting.Thunks.OpenDynamicAbuseReport))

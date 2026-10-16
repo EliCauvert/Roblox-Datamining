@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.ExpChatShared.ExpChatShared)
+﻿return (require(script.Parent._Workspace.ExpChatShared.ExpChatShared))

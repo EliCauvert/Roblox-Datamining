@@ -1,132 +1,128 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local appNotificationService = require(parent.RoactServiceTags).AppNotificationService
-local convertPresenceEnumModule = require(profilePlatform.Utils.convertPresenceEnum)
-local presenceModule = require(profilePlatform.Rodux.Presence)
-local presenceType = presenceModule.Enums.PresenceType
-local useProfileWrapperContextModule = require(profilePlatform.Contexts.useProfileWrapperContext)
-local refreshProfilePlatformUserInfoModule = require(profilePlatform.Networking.refreshProfilePlatformUserInfo)
-local refreshProfilePlatformActionInfoModule = require(profilePlatform.Networking.refreshProfilePlatformActionInfo)
-local useActionsComponentRequestModule = require(profilePlatform.Hooks.useActionsComponentRequest)
-local fFlagProfilePlatformRefreshActionsRespectPoliciesModule = require(profilePlatform.Flags.FFlagProfilePlatformRefreshActionsRespectPolicies)
-local robloxEventReceiver = require(parent.RealtimeDelivery).RobloxEventReceiver
-local reactModule = require(parent.React)
-local robloxAppHooksModule = require(parent.RobloxAppHooks)
-local roactUtilsModule = require(parent.RoactUtils)
-local useLocalUserId = robloxAppHooksModule.useLocalUserId
-local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
-local useRoactService = robloxAppHooksModule.useRoactService
-local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
-local enumsModule = require(profilePlatform.Common.Enums)
-local fFlagProfilePlatformPresenceStoreMigrationModule = require(profilePlatform.Flags.FFlagProfilePlatformPresenceStoreMigration)
-local var1 = if fFlagProfilePlatformPresenceStoreMigrationModule then require(parent.FriendsCommon).Hooks.useGetPresenceByUserId else nil
-local refreshProfileOnTrustedFriendsRtn = game:DefineFastFlag("RefreshProfileOnTrustedFriendsRtn", false)
-local t = { skipFetch = true }
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local AppNotificationService = require(Parent.RoactServiceTags).AppNotificationService
+local ConvertPresenceEnumModule = require(ProfilePlatform.Utils.convertPresenceEnum)
+local PresenceModule = require(ProfilePlatform.Rodux.Presence)
+local PresenceType = PresenceModule.Enums.PresenceType
+local UseProfileWrapperContextModule = require(ProfilePlatform.Contexts.useProfileWrapperContext)
+local RefreshProfilePlatformUserInfoModule = require(ProfilePlatform.Networking.refreshProfilePlatformUserInfo)
+local RefreshProfilePlatformActionInfoModule = require(ProfilePlatform.Networking.refreshProfilePlatformActionInfo)
+local UseActionsComponentRequestModule = require(ProfilePlatform.Hooks.useActionsComponentRequest)
+local FFlagProfilePlatformRefreshActionsRespectPoliciesModule = require(ProfilePlatform.Flags.FFlagProfilePlatformRefreshActionsRespectPolicies)
+local RobloxEventReceiver = require(Parent.RealtimeDelivery).RobloxEventReceiver
+local ReactModule = require(Parent.React)
+local RobloxAppHooksModule = require(Parent.RobloxAppHooks)
+local RoactUtilsModule = require(Parent.RoactUtils)
+local UseLocalUserIdFunction = RobloxAppHooksModule.useLocalUserId
+local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
+local UseRoactServiceFunction = RobloxAppHooksModule.useRoactService
+local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local FFlagProfilePlatformPresenceStoreMigrationModule = require(ProfilePlatform.Flags.FFlagProfilePlatformPresenceStoreMigration)
+local UseGetPresenceByUserId = if FFlagProfilePlatformPresenceStoreMigrationModule then require(Parent.FriendsCommon).Hooks.useGetPresenceByUserId else nil
+local RefreshProfileOnTrustedFriendsRtn = game:DefineFastFlag("RefreshProfileOnTrustedFriendsRtn", false)
+local config = { skipFetch = true }
 
-return function()
-	-- upvalues: useProfileWrapperContextModule (ref), useRoactService (ref), appNotificationService (ref), reactModule (ref), robloxEventReceiver (ref), useDispatch (ref), useLocalUserId (ref), fFlagProfilePlatformRefreshActionsRespectPoliciesModule (ref), useActionsComponentRequestModule (ref), fFlagProfilePlatformPresenceStoreMigrationModule (ref), var1 (ref), t (ref), convertPresenceEnumModule (ref), presenceType (ref), useSelector (ref), presenceModule (ref), enumsModule (ref), refreshProfilePlatformActionInfoModule (ref), refreshProfilePlatformUserInfoModule (ref), refreshProfileOnTrustedFriendsRtn (ref)
-	local var2, var3
-	local var4 = useProfileWrapperContextModule()
-	local var5 = useRoactService(appNotificationService)
-	local var6 = reactModule.useMemo(function()
-		-- upvalues: robloxEventReceiver (copy), var5 (ref)
-		return robloxEventReceiver.new(var5)
-	end, { var5 })
-	local var7 = useDispatch()
-	local var8 = useLocalUserId()
-	local profileId = var4.profileId
-	local profileType = var4.profileType
-	local var9 = if fFlagProfilePlatformRefreshActionsRespectPoliciesModule then useActionsComponentRequestModule() else nil
-	local _ = nil
+return function() --[[ Line: 40 ]]
+	-- upvalues: UseProfileWrapperContextModule (copy), UseRoactServiceFunction (copy), AppNotificationService (copy), ReactModule (copy), RobloxEventReceiver (copy), UseDispatchFunction (copy), UseLocalUserIdFunction (copy), FFlagProfilePlatformRefreshActionsRespectPoliciesModule (copy), UseActionsComponentRequestModule (copy), FFlagProfilePlatformPresenceStoreMigrationModule (copy), UseGetPresenceByUserId (copy), config (copy), ConvertPresenceEnumModule (copy), PresenceType (copy), UseSelectorFunction (copy), PresenceModule (copy), EnumsModule (copy), RefreshProfilePlatformActionInfoModule (copy), RefreshProfilePlatformUserInfoModule (copy), RefreshProfileOnTrustedFriendsRtn (copy)
+	local UseProfileWrapperContextModuleResult = UseProfileWrapperContextModule()
+	local UseRoactServiceResult = UseRoactServiceFunction(AppNotificationService)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 43 ]]
+		-- upvalues: RobloxEventReceiver (upval), UseRoactServiceResult (copy)
+		return RobloxEventReceiver.new(UseRoactServiceResult)
+	end, { UseRoactServiceResult })
+	local UseDispatchResult = UseDispatchFunction()
+	local UseLocalUserIdResult = UseLocalUserIdFunction()
+	local ProfileId = UseProfileWrapperContextModuleResult.profileId
+	local ProfileType = UseProfileWrapperContextModuleResult.profileType
+	local UseActionsComponentRequestModuleResult = if FFlagProfilePlatformRefreshActionsRespectPoliciesModule then UseActionsComponentRequestModule() else nil
+	local ConvertPresenceEnumModuleResult = nil
 	
-	if fFlagProfilePlatformPresenceStoreMigrationModule then
-		var2 = var1(profileId, t)
-		var3 = convertPresenceEnumModule(if var2 then var2.userPresenceType else presenceType.Offline, if var2 and var2.universeId ~= "" then tonumber(var2.universeId) else nil)
+	if FFlagProfilePlatformPresenceStoreMigrationModule then
+		local UseGetPresenceByUserIdResult = UseGetPresenceByUserId(ProfileId, config)
+		ConvertPresenceEnumModuleResult = ConvertPresenceEnumModule(if UseGetPresenceByUserIdResult then UseGetPresenceByUserIdResult.userPresenceType else PresenceType.Offline, if UseGetPresenceByUserIdResult and UseGetPresenceByUserIdResult.universeId ~= "" then tonumber(UseGetPresenceByUserIdResult.universeId) else nil)
 	else
-		local var10 = useSelector(function(p1)
-			-- upvalues: presenceModule (copy), profileId (ref), presenceType (copy)
-			return presenceModule.Selectors.getUserPresenceByUserId(p1, profileId) or {
+		local UseSelectorResult = UseSelectorFunction(function(p1) --[[ Line: 62 ]]
+			-- upvalues: PresenceModule (upval), ProfileId (copy), PresenceType (upval)
+			return PresenceModule.Selectors.getUserPresenceByUserId(p1, ProfileId) or {
 				lastLocation = "",
-				userPresenceType = presenceType.Offline
+				userPresenceType = PresenceType.Offline
 			}
 		end)
-		var3 = convertPresenceEnumModule(var10.userPresenceType, var10.universeId)
+		ConvertPresenceEnumModuleResult = ConvertPresenceEnumModule(UseSelectorResult.userPresenceType, UseSelectorResult.universeId)
 	end
-	var2 = reactModule.useRef(var3)
-	reactModule.useEffect(function()
-		-- upvalues: profileType (ref), enumsModule (copy), var2 (ref), var3 (write), var7 (ref), refreshProfilePlatformActionInfoModule (copy), profileId (ref), var9 (ref)
-		if profileType ~= enumsModule.ProfileTypes.User then return end
-		if var2.current ~= var3 then
-			if var2.current == enumsModule.PresenceTypes.InGame or var3 == enumsModule.PresenceTypes.InGame then
-				var7(refreshProfilePlatformActionInfoModule(profileId, var9))
+	local UseRefResult = ReactModule.useRef(ConvertPresenceEnumModuleResult)
+	ReactModule.useEffect(function() --[[ Line: 72 ]]
+		-- upvalues: ProfileType (copy), EnumsModule (upval), UseRefResult (copy), ConvertPresenceEnumModuleResult (ref), UseDispatchResult (copy), RefreshProfilePlatformActionInfoModule (upval), ProfileId (copy), UseActionsComponentRequestModuleResult (copy)
+		if ProfileType ~= EnumsModule.ProfileTypes.User then return end
+		if UseRefResult.current ~= ConvertPresenceEnumModuleResult then
+			if UseRefResult.current == EnumsModule.PresenceTypes.InGame or ConvertPresenceEnumModuleResult == EnumsModule.PresenceTypes.InGame then
+				UseDispatchResult(RefreshProfilePlatformActionInfoModule(ProfileId, UseActionsComponentRequestModuleResult))
 			end
-			var2.current = var3
+			UseRefResult.current = ConvertPresenceEnumModuleResult
 		end
 	end, {
-		var3,
-		var7,
-		profileId,
-		profileType,
-		if fFlagProfilePlatformRefreshActionsRespectPoliciesModule then var9 else nil
+		ConvertPresenceEnumModuleResult,
+		UseDispatchResult,
+		ProfileId,
+		ProfileType,
+		if FFlagProfilePlatformRefreshActionsRespectPoliciesModule then UseActionsComponentRequestModuleResult else nil
 	})
-	reactModule.useEffect(function()
-		-- upvalues: profileType (ref), enumsModule (copy), var6 (ref), profileId (ref), var7 (ref), refreshProfilePlatformUserInfoModule (copy)
-		if profileType == enumsModule.ProfileTypes.User then
-			local userProfileNotifications = var6:observeEvent("UserProfileNotifications", function(p1)
-				-- upvalues: profileId (copy), enumsModule (copy), var7 (copy), refreshProfilePlatformUserInfoModule (copy)
-				local var11 = tostring(p1.VieweeUserId)
-				local type = p1.Type
-				
-				if profileId == var11 and (type == enumsModule.NameTypes.DisplayName or type == enumsModule.NameTypes.Alias or type == enumsModule.NameTypes.Username) then
-					var7(refreshProfilePlatformUserInfoModule(var11))
-				end
-			end)
+	ReactModule.useEffect(function() --[[ Line: 93 ]]
+		-- upvalues: ProfileType (copy), EnumsModule (upval), UseMemoResult (copy), ProfileId (copy), UseDispatchResult (copy), RefreshProfilePlatformUserInfoModule (upval)
+		if ProfileType ~= EnumsModule.ProfileTypes.User then return end
+		local UserProfileNotifications = UseMemoResult:observeEvent("UserProfileNotifications", function(p1) --[[ Line: 98 ]]
+			-- upvalues: ProfileId (upval), EnumsModule (upval), UseDispatchResult (upval), RefreshProfilePlatformUserInfoModule (upval)
+			local Text = tostring(p1.VieweeUserId)
+			local Type = p1.Type
 			
-			return function()
-				-- upvalues: userProfileNotifications (ref)
-				userProfileNotifications:disconnect()
+			if ProfileId == Text and (Type == EnumsModule.NameTypes.DisplayName or Type == EnumsModule.NameTypes.Alias or Type == EnumsModule.NameTypes.Username) then
+				UseDispatchResult(RefreshProfilePlatformUserInfoModule(Text))
 			end
+		end)
+		
+		return function() --[[ Line: 113 ]]
+			-- upvalues: UserProfileNotifications (copy)
+			UserProfileNotifications:disconnect()
 		end
-	end, { var6, var7, profileId, profileType })
-	reactModule.useEffect(function()
-		-- upvalues: profileType (ref), enumsModule (copy), var6 (ref), var8 (ref), profileId (ref), var7 (ref), refreshProfilePlatformActionInfoModule (copy), var9 (ref)
-		if profileType == enumsModule.ProfileTypes.User then
-			local friendshipNotifications = var6:observeEvent("FriendshipNotifications", function(p1)
-				-- upvalues: var8 (copy), profileId (copy), var7 (copy), refreshProfilePlatformActionInfoModule (copy), var9 (copy)
-				if profileId == (if tostring(var8) == tostring(p1.EventArgs.UserId1) then tostring(p1.EventArgs.UserId2) else tostring(p1.EventArgs.UserId1)) then
-					var7(refreshProfilePlatformActionInfoModule(profileId, var9))
-				end
-			end)
-			
-			return function()
-				-- upvalues: friendshipNotifications (ref)
-				friendshipNotifications:disconnect()
+	end, { UseMemoResult, UseDispatchResult, ProfileId, ProfileType })
+	ReactModule.useEffect(function() --[[ Line: 123 ]]
+		-- upvalues: ProfileType (copy), EnumsModule (upval), UseMemoResult (copy), UseLocalUserIdResult (copy), ProfileId (copy), UseDispatchResult (copy), RefreshProfilePlatformActionInfoModule (upval), UseActionsComponentRequestModuleResult (copy)
+		if ProfileType ~= EnumsModule.ProfileTypes.User then return end
+		local FriendshipNotifications = UseMemoResult:observeEvent("FriendshipNotifications", function(p1) --[[ Line: 128 ]]
+			-- upvalues: UseLocalUserIdResult (upval), ProfileId (upval), UseDispatchResult (upval), RefreshProfilePlatformActionInfoModule (upval), UseActionsComponentRequestModuleResult (upval)
+			if ProfileId == (if tostring(UseLocalUserIdResult) == tostring(p1.EventArgs.UserId1) then tostring(p1.EventArgs.UserId2) else tostring(p1.EventArgs.UserId1)) then
+				UseDispatchResult(RefreshProfilePlatformActionInfoModule(ProfileId, UseActionsComponentRequestModuleResult))
 			end
+		end)
+		
+		return function() --[[ Line: 138 ]]
+			-- upvalues: FriendshipNotifications (copy)
+			FriendshipNotifications:disconnect()
 		end
 	end, {
-		var6, var7, profileId, var8, profileType,
-		if fFlagProfilePlatformRefreshActionsRespectPoliciesModule then var9 else nil
+		UseMemoResult, UseDispatchResult, ProfileId, UseLocalUserIdResult, ProfileType,
+		if FFlagProfilePlatformRefreshActionsRespectPoliciesModule then UseActionsComponentRequestModuleResult else nil
 	})
 	
-	if refreshProfileOnTrustedFriendsRtn then
-		reactModule.useEffect(function()
-			-- upvalues: profileType (ref), enumsModule (copy), var6 (ref), var8 (ref), profileId (ref), var7 (ref), refreshProfilePlatformActionInfoModule (copy), var9 (ref)
-			if profileType == enumsModule.ProfileTypes.User then
-				local trustedConnectionNotifications = var6:observeEvent("TrustedConnectionNotifications", function(p1)
-					-- upvalues: var8 (copy), profileId (copy), var7 (copy), refreshProfilePlatformActionInfoModule (copy), var9 (copy)
-					if profileId == (if tostring(var8) == tostring(p1.Actor) then tostring(p1.Target) else tostring(p1.Actor)) then
-						var7(refreshProfilePlatformActionInfoModule(profileId, var9))
-					end
-				end)
-				
-				return function()
-					-- upvalues: trustedConnectionNotifications (ref)
-					trustedConnectionNotifications:disconnect()
+	if RefreshProfileOnTrustedFriendsRtn then
+		ReactModule.useEffect(function() --[[ Line: 151 ]]
+			-- upvalues: ProfileType (copy), EnumsModule (upval), UseMemoResult (copy), UseLocalUserIdResult (copy), ProfileId (copy), UseDispatchResult (copy), RefreshProfilePlatformActionInfoModule (upval), UseActionsComponentRequestModuleResult (copy)
+			if ProfileType ~= EnumsModule.ProfileTypes.User then return end
+			local TrustedConnectionNotifications = UseMemoResult:observeEvent("TrustedConnectionNotifications", function(Mouse) --[[ Line: 156 ]]
+				-- upvalues: UseLocalUserIdResult (upval), ProfileId (upval), UseDispatchResult (upval), RefreshProfilePlatformActionInfoModule (upval), UseActionsComponentRequestModuleResult (upval)
+				if ProfileId == (if tostring(UseLocalUserIdResult) == tostring(Mouse.Actor) then tostring(Mouse.Target) else tostring(Mouse.Actor)) then
+					UseDispatchResult(RefreshProfilePlatformActionInfoModule(ProfileId, UseActionsComponentRequestModuleResult))
 				end
+			end)
+			
+			return function() --[[ Line: 166 ]]
+				-- upvalues: TrustedConnectionNotifications (copy)
+				TrustedConnectionNotifications:disconnect()
 			end
 		end, {
-			var6, var7, profileId, var8, profileType,
-			if fFlagProfilePlatformRefreshActionsRespectPoliciesModule then var9 else nil
+			UseMemoResult, UseDispatchResult, ProfileId, UseLocalUserIdResult, ProfileType,
+			if FFlagProfilePlatformRefreshActionsRespectPoliciesModule then UseActionsComponentRequestModuleResult else nil
 		})
 	end
 end

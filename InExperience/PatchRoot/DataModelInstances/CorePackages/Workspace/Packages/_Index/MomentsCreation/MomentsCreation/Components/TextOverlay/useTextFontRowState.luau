@@ -1,107 +1,108 @@
-﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
-local parent = momentsCreation.Parent
-local dashModule = require(parent.Dash)
-local foundationModule = require(parent.Foundation)
-local momentsCommonModule = require(parent.MomentsCommon)
-local reactModule = require(parent.React)
-local reactOtterModule = require(parent.ReactOtter)
-local signalsModule = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local useCallback = reactModule.useCallback
-local useMemo = reactModule.useMemo
-local useRef = reactModule.useRef
-local useState = reactModule.useState
-local useSignalState = signalsReactModule.useSignalState
-local useTokens = foundationModule.Hooks.useTokens
-local useFormFactor = momentsCommonModule.Hooks.useFormFactor
-local formFactor = momentsCommonModule.Enums.FormFactor
-local eventNames = momentsCommonModule.Analytics.EventNames
-local fireAnalyticsEventModule = require(momentsCreation.Analytics.fireAnalyticsEvent)
-local makeCreationEventFieldsModule = require(momentsCreation.Analytics.makeCreationEventFields)
-local fFlagMomentsTextOverlayV2Redesign = momentsCommonModule.Flags.FFlagMomentsTextOverlayV2Redesign
-local _ = require(momentsCreation.Types.CreationFlowTypes)
-local _ = require(parent.MomentsTypes)
+﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
+local Parent = MomentsCreation.Parent
+local DashModule = require(Parent.Dash)
+local MomentsCommonModule = require(Parent.MomentsCommon)
+local ReactModule = require(Parent.React)
+local ReactOtterModule = require(Parent.ReactOtter)
+local SignalsModule = require(Parent.Signals)
+local UseCallbackFunction = ReactModule.useCallback
+local UseMemoFunction = ReactModule.useMemo
+local UseRefFunction = ReactModule.useRef
+local UseStateFunction = ReactModule.useState
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
+local UseFormFactorFunction = MomentsCommonModule.Hooks.useFormFactor
+local FormFactor = MomentsCommonModule.Enums.FormFactor
+local EventNames = MomentsCommonModule.Analytics.EventNames
+local FireAnalyticsEventModule = require(MomentsCreation.Analytics.fireAnalyticsEvent)
+local MakeCreationEventFieldsModule = require(MomentsCreation.Analytics.makeCreationEventFields)
+local FFlagMomentsTextOverlayV2Redesign = MomentsCommonModule.Flags.FFlagMomentsTextOverlayV2Redesign
+local _ = require(MomentsCreation.Types.CreationFlowTypes)
+local _ = require(Parent.MomentsTypes)
 
-return function(value)
-	-- upvalues: useTokens (ref), useFormFactor (ref), formFactor (ref), useMemo (ref), signalsModule (ref), useSignalState (ref), useCallback (ref), dashModule (ref), fFlagMomentsTextOverlayV2Redesign (ref), fireAnalyticsEventModule (ref), eventNames (ref), makeCreationEventFieldsModule (ref), useRef (ref), useState (ref), reactOtterModule (ref)
-	local var1 = useTokens()
-	local var2 = useFormFactor() == formFactor.Wide
-	local var3 = useSignalState(useMemo(function()
-		-- upvalues: signalsModule (copy), value (ref)
-		return signalsModule.createComputed(function(p1)
-			-- upvalues: value (copy)
-			local activeSession = value.getActiveSession(p1)
-			local var4 = if activeSession ~= nil then nil else activeSession.getDraft(p1)
-			local var5 = var4 and var4[1]
+return function(p1) --[[ Line: 53 | Named "useTextFontRowState" ]]
+	-- upvalues: UseTokensFunction (copy), UseFormFactorFunction (copy), FormFactor (copy), UseMemoFunction (copy), SignalsModule (copy), UseSignalStateFunction (copy), UseCallbackFunction (copy), DashModule (copy), FFlagMomentsTextOverlayV2Redesign (copy), FireAnalyticsEventModule (copy), EventNames (copy), MakeCreationEventFieldsModule (copy), UseRefFunction (copy), UseStateFunction (copy), ReactOtterModule (copy)
+	local UseTokensResult = UseTokensFunction()
+	local IsUseFormFactorResultMatch = UseFormFactorFunction() == FormFactor.Wide
+	local UseSignalStateResult = UseSignalStateFunction((UseMemoFunction(function() --[[ Line: 57 ]]
+		-- upvalues: SignalsModule (upval), p1 (copy)
+		return SignalsModule.createComputed(function(p2) --[[ Line: 58 ]]
+			-- upvalues: p1 (upval)
+			local ActiveSession = p1.getActiveSession(p2)
+			local Draft = if ActiveSession == nil then nil else ActiveSession.getDraft(p2)
+			local DraftEntry = Draft and Draft[1]
 			
-			return if var5 == nil then Enum.Font.BuilderSansMedium else var5.textOverlayStyle.font
+			return if DraftEntry == nil then Enum.Font.BuilderSansMedium else DraftEntry.textOverlayStyle.font
 		end)
-	end, { value }))
-	local var4 = useCallback(function(p1, p2)
-		-- upvalues: value (ref), dashModule (copy), fFlagMomentsTextOverlayV2Redesign (copy), fireAnalyticsEventModule (copy), eventNames (copy), makeCreationEventFieldsModule (copy)
-		local activeSession = value.getActiveSession(false)
+	end, { p1 })))
+	local UseCallbackResult = UseCallbackFunction(function(p2, p3) --[[ Line: 67 ]]
+		-- upvalues: p1 (copy), DashModule (upval), FFlagMomentsTextOverlayV2Redesign (upval), FireAnalyticsEventModule (upval), EventNames (upval), MakeCreationEventFieldsModule (upval)
+		local ActiveSession = p1.getActiveSession(false)
 		
-		if activeSession == nil then return end
-		local draft = activeSession.getDraft(false)
-		local var5 = draft and draft[1]
+		if ActiveSession == nil then return end
+		local Draft = ActiveSession.getDraft(false)
+		local DraftEntry = Draft and Draft[1]
 		
-		if var5 == nil then return end
-		activeSession.update({
-			dashModule.joinDeep(var5, { textOverlayStyle = { font = p1 } })
+		if DraftEntry == nil then return end
+		ActiveSession.update({
+			DashModule.joinDeep(DraftEntry, { textOverlayStyle = { font = p2 } })
 		})
 		
-		if fFlagMomentsTextOverlayV2Redesign then
-			fireAnalyticsEventModule(eventNames.EditingFlowTextOverlayFontSelected, makeCreationEventFieldsModule.makeTextOverlayEventFields({ buttonIndex = tostring(p2), font = p1.Name }))
+		if FFlagMomentsTextOverlayV2Redesign then
+			FireAnalyticsEventModule(EventNames.EditingFlowTextOverlayFontSelected, MakeCreationEventFieldsModule.makeTextOverlayEventFields({ buttonIndex = tostring(p3), font = p2.Name }))
 		end
-	end, { value })
-	local var5 = useRef(nil)
-	local var6, var7 = useState(false)
-	local var8, var9 = useState(false)
-	local var10 = useCallback(function(p1)
-		-- upvalues: var7 (ref), var9 (ref)
-		if p1.AbsoluteWindowSize.X == 0 then
+	end, { p1 })
+	local UseRefResult = UseRefFunction(nil)
+	local UseStateResult, UseStateResult2 = UseStateFunction(false)
+	local UseStateResult1, UseStateResult2_1 = UseStateFunction(false)
+	local UseCallbackResult1 = UseCallbackFunction(function(ScrollFrame) --[[ Line: 94 ]]
+		-- upvalues: UseStateResult2 (copy), UseStateResult2_1 (copy)
+		if ScrollFrame.AbsoluteWindowSize.X ~= 0 then
+			UseStateResult2(ScrollFrame.CanvasPosition.X > 0)
+			UseStateResult2_1(ScrollFrame.AbsoluteWindowSize.X + ScrollFrame.CanvasPosition.X < ScrollFrame.AbsoluteCanvasSize.X - 1)
+			
 			return
 		end
-		var7(p1.CanvasPosition.X > 0)
-		var9(p1.AbsoluteWindowSize.X + p1.CanvasPosition.X < p1.AbsoluteCanvasSize.X - 1)
 	end, {})
-	local var11 = reactOtterModule.useMotor(0, function(p1)
-		-- upvalues: var5 (ref)
-		local current = var5.current
+	local UseMotorResult = ReactOtterModule.useMotor(0, function(X) --[[ Line: 105 ]]
+		-- upvalues: UseRefResult (copy)
+		local Current = UseRefResult.current
 		
-		if current == nil then
+		if Current ~= nil then
+			Current.CanvasPosition = Vector2.new(X, 0)
+			
 			return
 		end
-		current.CanvasPosition = Vector2.new(p1, 0)
 	end)
-	local var12 = useCallback(function(p1)
-		-- upvalues: var5 (ref), var11 (ref), reactOtterModule (copy), var1 (ref)
-		local current = var5.current
+	local UseCallbackResult2 = UseCallbackFunction(function(p2) --[[ Line: 113 ]]
+		-- upvalues: UseRefResult (copy), UseMotorResult (copy), ReactOtterModule (upval), UseTokensResult (copy)
+		local Current = UseRefResult.current
 		
-		if current == nil then
+		if Current ~= nil then
+			UseMotorResult(ReactOtterModule.ease(math.clamp(Current.CanvasPosition.X + p2 * (Current.AbsoluteWindowSize.X * 0.8), 0, (math.max(Current.AbsoluteCanvasSize.X - Current.AbsoluteWindowSize.X, 0))), {
+				duration = UseTokensResult.Time.Time_200,
+				easingStyle = Enum.EasingStyle.Quad,
+				startingValue = Current.CanvasPosition.X
+			}))
+			
 			return
 		end
-		var11(reactOtterModule.ease(math.clamp(current.CanvasPosition.X + p1 * (current.AbsoluteWindowSize.X * 0.8), 0, math.max(current.AbsoluteCanvasSize.X - current.AbsoluteWindowSize.X, 0)), {
-			duration = var1.Time.Time_200,
-			easingStyle = Enum.EasingStyle.Quad,
-			startingValue = current.CanvasPosition.X
-		}))
-	end, { var1, var11 })
+	end, { UseTokensResult, UseMotorResult })
 	
 	return {
-		font = var3,
-		onChipActivated = var4,
-		scrollingFrameRef = var5,
-		onScrollViewportChanged = var10,
-		showLeftChevron = var2 and var6,
-		showRightChevron = var2 and var8,
-		onLeftChevronActivated = useCallback(function()
-			-- upvalues: var12 (ref)
-			var12(-1)
-		end, { var12 }),
-		onRightChevronActivated = useCallback(function()
-			-- upvalues: var12 (ref)
-			var12(1)
-		end, { var12 })
+		font = UseSignalStateResult,
+		onChipActivated = UseCallbackResult,
+		scrollingFrameRef = UseRefResult,
+		onScrollViewportChanged = UseCallbackResult1,
+		showLeftChevron = IsUseFormFactorResultMatch and UseStateResult,
+		showRightChevron = IsUseFormFactorResultMatch and UseStateResult1,
+		onLeftChevronActivated = UseCallbackFunction(function() --[[ Line: 129 ]]
+			-- upvalues: UseCallbackResult2 (copy)
+			UseCallbackResult2(-1)
+		end, { UseCallbackResult2 }),
+		onRightChevronActivated = UseCallbackFunction(function() --[[ Line: 133 ]]
+			-- upvalues: UseCallbackResult2 (copy)
+			UseCallbackResult2(1)
+		end, { UseCallbackResult2 })
 	}
 end

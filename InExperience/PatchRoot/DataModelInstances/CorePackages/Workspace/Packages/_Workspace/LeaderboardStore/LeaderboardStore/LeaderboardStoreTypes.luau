@@ -1,5 +1,5 @@
-﻿local parent = script.Parent.Parent
-local _ = require(parent.Signals)
-local _ = require(parent.CoreScriptsRoactCommon)
+﻿local Parent = script.Parent.Parent
+local _ = require(Parent.Signals)
+local _ = require(Parent.CoreScriptsRoactCommon)
 
 return nil

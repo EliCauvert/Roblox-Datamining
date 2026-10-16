@@ -1,11 +1,11 @@
-﻿local avatarExperienceNavigation = script:FindFirstAncestor("AvatarExperienceNavigation")
-local parent = avatarExperienceNavigation.Parent
-local reactModule = require(parent.React)
-local argCheckModule = require(parent.ArgCheck)
-local avatarRouteContextModule = require(avatarExperienceNavigation.AvatarRoute.Context.AvatarRouteContext)
-local _ = require(avatarExperienceNavigation.AvatarRoute.Types)
+﻿local AvatarExperienceNavigation = script:FindFirstAncestor("AvatarExperienceNavigation")
+local Parent = AvatarExperienceNavigation.Parent
+local ReactModule = require(Parent.React)
+local ArgCheckModule = require(Parent.ArgCheck)
+local AvatarRouteContextModule = require(AvatarExperienceNavigation.AvatarRoute.Context.AvatarRouteContext)
+local _ = require(AvatarExperienceNavigation.AvatarRoute.Types)
 
-return function()
-	-- upvalues: reactModule (ref), avatarRouteContextModule (ref), argCheckModule (ref)
-	return argCheckModule.isNotNil(reactModule.useContext(avatarRouteContextModule), "AvatarRouteContext")
+return function() --[[ Line: 16 | Named "useAvatarRoute" ]]
+	-- upvalues: ReactModule (copy), AvatarRouteContextModule (copy), ArgCheckModule (copy)
+	return ArgCheckModule.isNotNil(ReactModule.useContext(AvatarRouteContextModule), "AvatarRouteContext")
 end

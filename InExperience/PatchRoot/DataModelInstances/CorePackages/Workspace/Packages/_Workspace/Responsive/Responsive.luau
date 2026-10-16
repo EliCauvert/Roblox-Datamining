@@ -1,100 +1,100 @@
-﻿local responsiveModule = require(script.Responsive)
-local reactModule = require(script.Parent.React)
-local standardBreakpointsModule = require(script.CommonConfigs.StandardBreakpoints)
-local containerRefModule = require(script.Context.ContainerRef)
-local findFirstAncestorWithTagModule = require(script.FindFirstAncestorWithTag)
-local useResponsiveImplModule = require(script.Hooks.useResponsiveImpl)
-local inputModeModule = require(script.InputMode)
-local hardwareSafeAreaInsetsModule = require(script.HardwareSafeAreaInsets)
-local useDeviceInsetsModule = require(script.Hooks.useDeviceInsets)
-local getInputModeStoreModule = require(script.Stores.GetInputModeStore)
-local useIsInFullScreenModule = require(script.Hooks.useIsInFullScreen)
-local useIsSpatialModule = require(script.Hooks.useIsSpatial)
-local useLastInputModule = require(script.Hooks.useLastInput)
-local usePreferredInputModule = require(script.Hooks.usePreferredInput)
-local getVirtualResolutionScaleModule = require(script.getVirtualResolutionScale)
-local getIsCompactTouchModule = require(script.getIsCompactTouch)
+﻿local ResponsiveModule = require(script.Responsive)
+local ReactModule = require(script.Parent.React)
+local StandardBreakpointsModule = require(script.CommonConfigs.StandardBreakpoints)
+local ContainerRefModule = require(script.Context.ContainerRef)
+local FindFirstAncestorWithTagModule = require(script.FindFirstAncestorWithTag)
+local UseResponsiveImplModule = require(script.Hooks.useResponsiveImpl)
+local InputModeModule = require(script.InputMode)
+local HardwareSafeAreaInsetsModule = require(script.HardwareSafeAreaInsets)
+local UseDeviceInsetsModule = require(script.Hooks.useDeviceInsets)
+local GetInputModeStoreModule = require(script.Stores.GetInputModeStore)
+local UseIsInFullScreenModule = require(script.Hooks.useIsInFullScreen)
+local UseIsSpatialModule = require(script.Hooks.useIsSpatial)
+local UseLastInputModule = require(script.Hooks.useLastInput)
+local UsePreferredInputModule = require(script.Hooks.usePreferredInput)
+local GetVirtualResolutionScaleModule = require(script.getVirtualResolutionScale)
+local GetIsCompactTouchModule = require(script.getIsCompactTouch)
 
-function breakpointCompare(p1, p2)
-	-- upvalues: standardBreakpointsModule (ref), responsiveModule (ref)
-	local keyIndex = standardBreakpointsModule.keyIndex
+function breakpointCompare(DefaultKey, DefaultKey1): boolean --[[ Line: 24 ]]
+	-- upvalues: StandardBreakpointsModule (copy), ResponsiveModule (copy)
+	local KeyIndex = StandardBreakpointsModule.keyIndex
 	
-	return if p1 == responsiveModule.DefaultKey or p2 == responsiveModule.DefaultKey or (keyIndex[p1] == nil or keyIndex[p2] == nil) then false else keyIndex[p2] <= keyIndex[p1]
+	return DefaultKey ~= ResponsiveModule.DefaultKey and DefaultKey1 ~= ResponsiveModule.DefaultKey and KeyIndex[DefaultKey] ~= nil and KeyIndex[DefaultKey1] ~= nil and KeyIndex[DefaultKey1] <= KeyIndex[DefaultKey]
 end
 
-function ResponsiveProvider(p1)
-	-- upvalues: reactModule (ref), containerRefModule (ref)
-	return reactModule.createElement(containerRefModule.Provider, { value = reactModule.useRef(nil) }, p1.children)
+function ResponsiveProvider(p1) --[[ Line: 32 ]]
+	-- upvalues: ReactModule (copy), ContainerRefModule (copy)
+	return ReactModule.createElement(ContainerRefModule.Provider, { value = ReactModule.useRef(nil) }, p1.children)
 end
 
 return {
-	HardwareSafeAreaInsets = hardwareSafeAreaInsetsModule,
-	useDeviceInsets = useDeviceInsetsModule,
-	Keys = standardBreakpointsModule.Enum,
-	Input = inputModeModule.Enum,
-	BreakpointConfig = standardBreakpointsModule,
-	DefaultKey = responsiveModule.DefaultKey,
-	ContainerRef = containerRefModule,
+	HardwareSafeAreaInsets = HardwareSafeAreaInsetsModule,
+	useDeviceInsets = UseDeviceInsetsModule,
+	Keys = StandardBreakpointsModule.Enum,
+	Input = InputModeModule.Enum,
+	BreakpointConfig = StandardBreakpointsModule,
+	DefaultKey = ResponsiveModule.DefaultKey,
+	ContainerRef = ContainerRefModule,
 	ResponsiveProvider = ResponsiveProvider,
-	ResponsiveContainerFrame = function(p1)
-		-- upvalues: reactModule (ref), containerRefModule (ref)
-		return reactModule.createElement("Frame", {
+	ResponsiveContainerFrame = function(p1) --[[ Line: 39 ]]
+		-- upvalues: ReactModule (copy), ContainerRefModule (copy)
+		return ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Visible = false,
 			ZIndex = if p1 and p1.ZIndex then p1.ZIndex else -100,
 			Size = if p1 and p1.Size then p1.Size else UDim2.new(1, 0, 1, 0),
-			ref = reactModule.useContext(containerRefModule)
+			ref = ReactModule.useContext(ContainerRefModule)
 		})
 	end,
-	FindFirstAncestorWithTag = findFirstAncestorWithTagModule,
-	useBreakpointX = useResponsiveImplModule,
-	useBreakpointXOrLarger = function(p1)
-		-- upvalues: useResponsiveImplModule (ref)
-		return useResponsiveImplModule(function(p2)
-			-- upvalues: p1 (ref)
+	FindFirstAncestorWithTag = FindFirstAncestorWithTagModule,
+	useBreakpointX = UseResponsiveImplModule,
+	useBreakpointXOrLarger = function(p1) --[[ Line: 62 ]]
+		-- upvalues: UseResponsiveImplModule (copy)
+		return UseResponsiveImplModule(function(p2) --[[ Line: 63 ]]
+			-- upvalues: p1 (copy)
 			return breakpointCompare(p2, p1)
 		end, nil)
 	end,
-	useBreakpointXOrSmaller = function(p1)
-		-- upvalues: useResponsiveImplModule (ref)
-		return useResponsiveImplModule(function(p2)
-			-- upvalues: p1 (ref)
+	useBreakpointXOrSmaller = function(p1) --[[ Line: 67 ]]
+		-- upvalues: UseResponsiveImplModule (copy)
+		return UseResponsiveImplModule(function(p2) --[[ Line: 68 ]]
+			-- upvalues: p1 (copy)
 			return breakpointCompare(p1, p2)
 		end, nil)
 	end,
-	useBreakpointY = function()
-		-- upvalues: useResponsiveImplModule (ref)
-		return useResponsiveImplModule(nil, nil, "Y")
+	useBreakpointY = function() --[[ Line: 72 ]]
+		-- upvalues: UseResponsiveImplModule (copy)
+		return UseResponsiveImplModule(nil, nil, "Y")
 	end,
-	useBreakpointYOrLarger = function(p1)
-		-- upvalues: useResponsiveImplModule (ref)
-		return useResponsiveImplModule(function(p2)
-			-- upvalues: p1 (ref)
+	useBreakpointYOrLarger = function(p1) --[[ Line: 75 ]]
+		-- upvalues: UseResponsiveImplModule (copy)
+		return UseResponsiveImplModule(function(p2) --[[ Line: 76 ]]
+			-- upvalues: p1 (copy)
 			return breakpointCompare(p2, p1)
 		end, nil, "Y")
 	end,
-	useBreakpointYOrSmaller = function(p1)
-		-- upvalues: useResponsiveImplModule (ref)
-		return useResponsiveImplModule(function(p2)
-			-- upvalues: p1 (ref)
+	useBreakpointYOrSmaller = function(p1) --[[ Line: 80 ]]
+		-- upvalues: UseResponsiveImplModule (copy)
+		return UseResponsiveImplModule(function(p2) --[[ Line: 81 ]]
+			-- upvalues: p1 (copy)
 			return breakpointCompare(p1, p2)
 		end, nil, "Y")
 	end,
-	useOrientation = function()
-		-- upvalues: useResponsiveImplModule (ref)
-		return useResponsiveImplModule(nil, nil, "Orientation")
+	useOrientation = function() --[[ Line: 85 ]]
+		-- upvalues: UseResponsiveImplModule (copy)
+		return UseResponsiveImplModule(nil, nil, "Orientation")
 	end,
-	useResponsive = function(p1)
-		-- upvalues: useResponsiveImplModule (ref)
-		return useResponsiveImplModule(nil, p1)
+	useResponsive = function(p1) --[[ Line: 88 ]]
+		-- upvalues: UseResponsiveImplModule (copy)
+		return UseResponsiveImplModule(nil, p1)
 	end,
-	usePreferredInput = usePreferredInputModule,
-	useLastInput = useLastInputModule,
-	useIsInFullScreen = useIsInFullScreenModule,
-	useIsSpatial = useIsSpatialModule,
-	bindContainer = responsiveModule.bindContainer,
+	usePreferredInput = UsePreferredInputModule,
+	useLastInput = UseLastInputModule,
+	useIsInFullScreen = UseIsInFullScreenModule,
+	useIsSpatial = UseIsSpatialModule,
+	bindContainer = ResponsiveModule.bindContainer,
 	["jest.config"] = script["jest.config"],
-	getVirtualResolutionScale = getVirtualResolutionScaleModule,
-	GetInputModeStore = getInputModeStoreModule,
-	getIsCompactTouch = getIsCompactTouchModule
+	getVirtualResolutionScale = GetVirtualResolutionScaleModule,
+	GetInputModeStore = GetInputModeStoreModule,
+	getIsCompactTouch = GetIsCompactTouchModule
 }

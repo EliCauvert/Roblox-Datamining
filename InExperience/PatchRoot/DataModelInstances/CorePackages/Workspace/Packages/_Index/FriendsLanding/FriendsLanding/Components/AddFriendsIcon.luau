@@ -1,1 +1,1 @@
-﻿return require(script.AddFriendsIcon)
+﻿return (require(script.AddFriendsIcon))

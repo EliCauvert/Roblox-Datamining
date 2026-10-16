@@ -1,21 +1,21 @@
-﻿local parent = script.Parent.Parent
-local dependenciesModule = require(parent.dependencies)
-local appStorageService = dependenciesModule.AppStorageService
-local useDispatch = dependenciesModule.useDispatch
-local useSelector = dependenciesModule.useSelector
-local useEffectOnce = dependenciesModule.useEffectOnce
-local fetchContactImporterParamsModule = require(parent.Networking.FetchContactImporterParams)
-local permissionsProtocol = dependenciesModule.PermissionsProtocol
-local useContactImporterConfigurationModule = require(script.Parent.useContactImporterConfiguration)
+﻿local Parent = script.Parent.Parent
+local DependenciesModule = require(Parent.dependencies)
+local AppStorageService = DependenciesModule.AppStorageService
+local UseDispatchFunction = DependenciesModule.useDispatch
+local UseSelectorFunction = DependenciesModule.useSelector
+local UseEffectOnceFunction = DependenciesModule.useEffectOnce
+local FetchContactImporterParamsModule = require(Parent.Networking.FetchContactImporterParams)
+local PermissionsProtocol = DependenciesModule.PermissionsProtocol
+local UseContactImporterConfigurationModule = require(script.Parent.useContactImporterConfiguration)
 
-return function(p1)
-	-- upvalues: useSelector (ref), useDispatch (ref), fetchContactImporterParamsModule (ref), permissionsProtocol (ref), appStorageService (ref), useContactImporterConfigurationModule (ref), useEffectOnce (ref)
-	local var1 = useSelector(function(p2)
+return function(p1) --[[ Line: 12 ]]
+	-- upvalues: UseSelectorFunction (copy), UseDispatchFunction (copy), FetchContactImporterParamsModule (copy), PermissionsProtocol (copy), AppStorageService (copy), UseContactImporterConfigurationModule (copy), UseEffectOnceFunction (copy)
+	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 13 ]]
 		return p2.LocalUserId
 	end)
-	local var2 = useDispatch()
-	useEffectOnce(function()
-		-- upvalues: var2 (ref), fetchContactImporterParamsModule (copy), var1 (ref), permissionsProtocol (copy), appStorageService (copy)
-		var2(fetchContactImporterParamsModule(var1, permissionsProtocol.default, appStorageService))
-	end, if useContactImporterConfigurationModule(p1).shouldFetchContactImporterData then var1 and (var1 ~= "" and var1 ~= "0") else useContactImporterConfigurationModule(p1).shouldFetchContactImporterData)
+	local UseDispatchResult = UseDispatchFunction()
+	UseEffectOnceFunction(function() --[[ Line: 19 ]]
+		-- upvalues: UseDispatchResult (copy), FetchContactImporterParamsModule (upval), UseSelectorResult (copy), PermissionsProtocol (upval), AppStorageService (upval)
+		UseDispatchResult(FetchContactImporterParamsModule(UseSelectorResult, PermissionsProtocol.default, AppStorageService))
+	end, UseContactImporterConfigurationModule(p1).shouldFetchContactImporterData and (UseSelectorResult and (UseSelectorResult ~= "" and UseSelectorResult ~= "0")))
 end

@@ -1,133 +1,130 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local luauPolyfillModule = require(parent_1.LuauPolyfill)
-local object = luauPolyfillModule.Object
-local boolean = luauPolyfillModule.Boolean
-local t = {}
-local _ = require(parent_1.GraphQL)
-local wrap = require(parent.optimism).wrap
-local getFragmentQueryDocument = require(script.Parent.Parent.Parent.utilities).getFragmentQueryDocument
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local LuauPolyfillModule = require(Parent1.LuauPolyfill)
+local Object = LuauPolyfillModule.Object
+local Boolean = LuauPolyfillModule.Boolean
+local _ = require(Parent1.GraphQL)
+local WrapFunction = require(Parent.optimism).wrap
+local GetFragmentQueryDocument = require(script.Parent.Parent.Parent.utilities).getFragmentQueryDocument
 local _ = require(script.Parent.types.DataProxy)
 local _ = require(script.Parent.types.Cache)
-local t_1 = {}
-t_1.__index = t_1
+local Module = {}
+Module.__index = Module
 
-function t_1.new()
-	-- upvalues: t_1 (ref), wrap (ref), getFragmentQueryDocument (ref)
-	local tbl = setmetatable({}, t_1)
-	tbl.getFragmentDoc = wrap(getFragmentQueryDocument)
+function Module.new() --[[ Line: 207 ]]
+	-- upvalues: Module (copy), WrapFunction (copy), GetFragmentQueryDocument (copy)
+	local self = setmetatable({}, Module)
+	self.getFragmentDoc = WrapFunction(GetFragmentQueryDocument)
 	
-	return tbl
+	return self
 end
 
-function t_1.read(_, _)
+function Module:read(_) --[[ Line: 217 ]]
 	error("not implemented abstract method")
 end
 
-function t_1.write(_, _)
+function Module:write(_) --[[ Line: 220 ]]
 	error("not implemented abstract method")
 end
 
-function t_1.diff(_, _)
+function Module:diff(_) --[[ Line: 223 ]]
 	error("not implemented abstract method")
 end
 
-function t_1.watch(_, _)
+function Module:watch(_) --[[ Line: 226 ]]
 	error("not implemented abstract method")
 end
 
-function t_1.reset(_)
+function Module:reset() --[[ Line: 229 ]]
 	error("not implemented abstract method")
 end
 
-function t_1.evict(_, _)
+function Module:evict(_) --[[ Line: 233 ]]
 	error("not implemented abstract method")
 end
 
-function t_1.restore(_, _)
+function Module:restore(_) --[[ Line: 237 ]]
 	error("not implemented abstract method")
 end
 
-function t_1.extract(_, _)
+function Module:extract(_) --[[ Line: 241 ]]
 	error("not implemented abstract method")
 end
 
-function t_1.removeOptimistic(_, _)
+function Module:removeOptimistic(_) --[[ Line: 245 ]]
 	error("not implemented abstract method")
 end
 
-function t_1:batch(p1)
+function Module:batch(p1) --[[ Line: 249 ]]
 	self:performTransaction(p1.update, if typeof(p1.optimistic) == "string" then p1.optimistic elseif p1.optimistic == false then nil else nil)
 end
 
-function t_1.performTransaction(_, _, _)
+function Module:performTransaction(_, _) --[[ Line: 263 ]]
 	error("not implemented abstract method")
 end
 
-function t_1:recordOptimisticTransaction(p1, p2)
+function Module:recordOptimisticTransaction(p1, p2) --[[ Line: 277 ]]
 	self:performTransaction(p1, p2)
 end
 
-function t_1.transformDocument(_, p1)
+function Module:transformDocument(p1) --[[ Line: 281 ]]
 	return p1
 end
 
-function t_1.identify(_, _) end
+function Module:identify(_) --[[ Line: 285 ]] end
 
-function t_1.gc(_)
+function Module:gc() --[[ Line: 289 ]]
 	return {}
 end
 
-function t_1.modify(_, _)
+function Module:modify(_): boolean --[[ Line: 293 ]]
 	return false
 end
 
-function t_1.transformForLink(_, p1)
+function Module:transformForLink(p1) --[[ Line: 297 ]]
 	return p1
 end
 
-function t_1:readQuery(p1, p2)
-	-- upvalues: object (ref), boolean (ref)
-	if p2 == nil then
-		p2 = not not p1.optimistic
+function Module:readQuery(Tbl, Optimistic: boolean) --[[ Line: 301 ]]
+	-- upvalues: Object (copy), Boolean (copy)
+	if Optimistic == nil then
+		Optimistic = not not Tbl.optimistic
 	end
-	return self:read(object.assign(table.clone(p1), {
-		rootId = if boolean.toJSBoolean(p1.id) then p1.id else "ROOT_QUERY",
-		optimistic = p2
+	return self:read(Object.assign(table.clone(Tbl), {
+		rootId = Boolean.toJSBoolean(Tbl.id) and Tbl.id or "ROOT_QUERY",
+		optimistic = Optimistic
 	}))
 end
 
-function t_1:readFragment(p1, p2)
-	-- upvalues: object (ref)
-	if p2 == nil then
-		p2 = not not p1.optimistic
+function Module:readFragment(p1, Optimistic: boolean) --[[ Line: 320 ]]
+	-- upvalues: Object (copy)
+	if Optimistic == nil then
+		Optimistic = not not p1.optimistic
 	end
-	return self:read(object.assign({}, p1, {
+	return self:read(Object.assign({}, p1, {
 		query = self.getFragmentDoc(p1.fragment, p1.fragmentName),
 		rootId = p1.id,
-		optimistic = p2
+		optimistic = Optimistic
 	}))
 end
 
-function t_1:writeQuery(p1)
-	-- upvalues: object (ref)
-	return self:write(object.assign(object.assign(table.clone(p1), { id = object.None, data = object.None }), { dataId = p1.id or "ROOT_QUERY", result = p1.data }))
+function Module:writeQuery(Tbl) --[[ Line: 338 ]]
+	-- upvalues: Object (copy)
+	return self:write(Object.assign(Object.assign(table.clone(Tbl), { id = Object.None, data = Object.None }), { dataId = Tbl.id or "ROOT_QUERY", result = Tbl.data }))
 end
 
-function t_1:writeFragment(p1)
-	-- upvalues: object (ref)
-	return self:write(object.assign(object.assign(table.clone(p1), {
-		id = object.None,
-		data = object.None,
-		fragment = object.None,
-		fragmentName = object.None
+function Module:writeFragment(Tbl) --[[ Line: 350 ]]
+	-- upvalues: Object (copy)
+	return self:write(Object.assign(Object.assign(table.clone(Tbl), {
+		id = Object.None,
+		data = Object.None,
+		fragment = Object.None,
+		fragmentName = Object.None
 	}), {
-		query = self.getFragmentDoc(p1.fragment, p1.fragmentName),
-		dataId = p1.id,
-		result = p1.data
+		query = self.getFragmentDoc(Tbl.fragment, Tbl.fragmentName),
+		dataId = Tbl.id,
+		result = Tbl.data
 	}))
 end
 
-t.ApolloCache = t_1
-
-return t
+return { ApolloCache = Module }

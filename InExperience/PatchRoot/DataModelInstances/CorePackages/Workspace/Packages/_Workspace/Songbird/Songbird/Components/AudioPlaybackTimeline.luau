@@ -1,44 +1,44 @@
-﻿local songbird = script:FindFirstAncestor("Songbird")
-local reactModule = require(songbird.Parent.React)
-local foundationModule = require(songbird.Parent.Foundation)
-local progressCountdownModule = require(songbird.Components.ProgressCountdown)
-local createNextOrder = require(songbird.Parent.ReactUtils).createNextOrder
+﻿local Songbird = script:FindFirstAncestor("Songbird")
+local ReactModule = require(Songbird.Parent.React)
+local FoundationModule = require(Songbird.Parent.Foundation)
+local ProgressCountdownModule = require(Songbird.Components.ProgressCountdown)
+local CreateNextOrderFunction = require(Songbird.Parent.ReactUtils).createNextOrder
 
-return function(p1)
-	-- upvalues: createNextOrder (ref), reactModule (ref), foundationModule (ref), progressCountdownModule (ref)
-	local var1 = createNextOrder()
+return function(Frame) --[[ Line: 22 | Named "AudioPlaybackTimeline" ]]
+	-- upvalues: CreateNextOrderFunction (copy), ReactModule (copy), FoundationModule (copy), ProgressCountdownModule (copy)
+	local NextOrder = CreateNextOrderFunction()
 	
-	return reactModule.createElement(foundationModule.View, {
+	return ReactModule.createElement(FoundationModule.View, {
 		tag = "size-full-0 auto-y row flex-between align-y-center gap-large",
-		LayoutOrder = p1.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		TimeElapsed = reactModule.createElement(progressCountdownModule, {
+		TimeElapsed = ReactModule.createElement(ProgressCountdownModule, {
 			counterType = "Elapsed",
-			timeLength = p1.duration,
-			timePosition = p1.elapsed,
-			LayoutOrder = var1()
+			timeLength = Frame.duration,
+			timePosition = Frame.elapsed,
+			LayoutOrder = NextOrder()
 		}),
-		ProgressBar = reactModule.createElement(foundationModule.View, {
+		ProgressBar = ReactModule.createElement(FoundationModule.View, {
 			tag = "size-full-0 auto-y shrink padding-top-xxsmall",
-			LayoutOrder = var1()
+			LayoutOrder = NextOrder()
 		}, {
-			Slider = reactModule.createElement(foundationModule.Slider, {
-				value = p1.elapsed:map(function(p2)
-					-- upvalues: p1 (ref)
-					return if p1.duration > 0 then p2 / p1.duration else 0
+			Slider = ReactModule.createElement(FoundationModule.Slider, {
+				value = Frame.elapsed:map(function(p1) --[[ Line: 41 ]]
+					-- upvalues: Frame (copy)
+					return if Frame.duration > 0 then p1 / Frame.duration else 0
 				end),
-				onValueChanged = p1.onDragTimeline,
-				onDragStarted = p1.onDragTimelineStart,
-				onDragEnded = p1.onDragTimelineEnd,
-				size = foundationModule.Enums.InputSize.Medium,
-				knobVisibility = foundationModule.Enums.ScrollBarVisibility.Auto,
-				variant = foundationModule.Enums.SliderVariant.Standard
+				onValueChanged = Frame.onDragTimeline,
+				onDragStarted = Frame.onDragTimelineStart,
+				onDragEnded = Frame.onDragTimelineEnd,
+				size = FoundationModule.Enums.InputSize.Medium,
+				knobVisibility = FoundationModule.Enums.ScrollBarVisibility.Auto,
+				variant = FoundationModule.Enums.SliderVariant.Standard
 			})
 		}),
-		TimeRemaining = reactModule.createElement(progressCountdownModule, {
-			timeLength = p1.duration,
-			timePosition = p1.elapsed,
-			LayoutOrder = var1()
+		TimeRemaining = ReactModule.createElement(ProgressCountdownModule, {
+			timeLength = Frame.duration,
+			timePosition = Frame.elapsed,
+			LayoutOrder = NextOrder()
 		})
 	})
 end

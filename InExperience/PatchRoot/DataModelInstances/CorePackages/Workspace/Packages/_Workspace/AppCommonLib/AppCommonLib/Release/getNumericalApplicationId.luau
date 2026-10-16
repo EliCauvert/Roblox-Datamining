@@ -1,11 +1,11 @@
-﻿local appStorageService = game:GetService("AppStorageService")
+﻿local AppStorageService = game:GetService("AppStorageService")
 game:DefineFastFlag("EnableContactInvitesForNonPhoneVerifiedForAll", false)
 game:DefineFastInt("EnableContactInvitesForNonPhoneVerifiedRollout", 0)
 
-return function(p1)
-	-- upvalues: appStorageService (ref)
-	local appInstallationIdItem = (p1 or appStorageService):GetItem("AppInstallationId")
-	local var1 = typeof(appInstallationIdItem)
+return function(p1) --[[ Line: 7 ]]
+	-- upvalues: AppStorageService (copy)
+	local AppInstallationIdItem: string = (if p1 then p1 else AppStorageService):GetItem("AppInstallationId")
+	local ValueType = typeof(AppInstallationIdItem)
 	
-	return if var1 == "number" then appInstallationIdItem elseif var1 == "string" then if string.len(appInstallationIdItem) <= 0 then nil else tonumber(string.sub(appInstallationIdItem, -2)) else nil
+	return if ValueType == "number" then AppInstallationIdItem elseif ValueType == "string" then if string.len(AppInstallationIdItem) <= 0 then nil else tonumber((string.sub(AppInstallationIdItem, -2))) else nil
 end

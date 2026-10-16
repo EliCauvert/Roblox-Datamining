@@ -1,173 +1,185 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local _ = require(parent.DataHydration)
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local getConversationStoreModule = require(appChat.Stores.GetConversationStore)
-local getConversationSearchDataHydrationModule = require(appChat.Stores.GetConversationSearchDataHydration)
-local t = {
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local _ = require(Parent.DataHydration)
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
+local GetConversationStoreModule = require(AppChat.Stores.GetConversationStore)
+local GetConversationSearchDataHydrationModule = require(AppChat.Stores.GetConversationSearchDataHydration)
+local config = {
 	query = "",
 	status = "Idle",
 	nextCursor = nil,
 	items = {}
 }
-local t_1 = { query = "", pages = {} }
+local config1 = { query = "", pages = {} }
 
-local function normalizeQuery(p1, p2)
-	if not p2 or p1 == nil then
+local function normalizeQuery(Text: string, p1): string --[[ Line: 69 ]]
+	if not p1 or Text == nil then
 		return ""
 	end
-	local var1 = string.match(p1, "^%s*(.-)%s*$") or ""
-	local var2 = utf8.len(var1) or #var1
+	local Match: string = string.match(Text, "^%s*(.-)%s*$") or ""
+	local Length: number = utf8.len(Match) or #Match
 	
-	if var2 < 1 then
+	if Length < 1 then
 		return ""
-	elseif var2 > 200 then
-		local byteOffset = utf8.offset(var1, 201)
-		
-		return if byteOffset == nil then var1 else string.sub(var1, 1, byteOffset - 1)
 	end
+	if Length > 200 then
+		local OffsetResult = utf8.offset(Match, 201)
+		
+		if OffsetResult ~= nil then
+			return (string.sub(Match, 1, OffsetResult - 1))
+		end
+	end
+	return Match
 end
 
-return function(p1, p2)
-	-- upvalues: getConversationSearchDataHydrationModule (ref), getConversationStoreModule (ref), normalizeQuery (ref), reactModule (ref), t_1 (ref), signalsReactModule (ref), signalsModule (ref), t (ref)
-	local var1 = p2 ~= false
-	local var2 = getConversationSearchDataHydrationModule(false)
-	local var3 = getConversationStoreModule(false)
-	local var4 = normalizeQuery(p1, var1)
-	local var5, var6 = reactModule.useState("")
-	reactModule.useEffect(function()
-		-- upvalues: var4 (ref), var6 (ref)
-		if var4 == "" then
-			var6("")
+return function(p1, Enabled) --[[ Line: 90 | Named "useConversationSearch" ]]
+	-- upvalues: GetConversationSearchDataHydrationModule (copy), GetConversationStoreModule (copy), normalizeQuery (copy), ReactModule (copy), config1 (copy), SignalsReactModule (copy), SignalsModule (copy), config (copy)
+	local IsEnabled = Enabled ~= false
+	local ConversationSearchDataHydrationModule = GetConversationSearchDataHydrationModule(false)
+	local ConversationStoreModule = GetConversationStoreModule(false)
+	local NormalizeQueryResult = normalizeQuery(p1, IsEnabled)
+	local UseStateResult, UseStateResult2 = ReactModule.useState("")
+	ReactModule.useEffect(function() --[[ Line: 99 ]]
+		-- upvalues: NormalizeQueryResult (copy), UseStateResult2 (copy)
+		if NormalizeQueryResult == "" then
+			UseStateResult2("")
 			
 			return
 		end
-		local delayedThread = task.delay(0.15, function()
-			-- upvalues: var6 (copy), var4 (copy)
-			var6(var4)
+		local DelayedThread = task.delay(0.15, function() --[[ Line: 106 ]]
+			-- upvalues: UseStateResult2 (upval), NormalizeQueryResult (upval)
+			UseStateResult2(NormalizeQueryResult)
 		end)
 		
-		return function()
-			-- upvalues: delayedThread (ref)
-			task.cancel(delayedThread)
+		return function() --[[ Line: 110 ]]
+			-- upvalues: DelayedThread (copy)
+			task.cancel(DelayedThread)
 		end
-	end, { var4 })
-	local var7, var8 = reactModule.useState(t_1)
-	local var9 = signalsReactModule.useSignalState(var2.getInvalidationGeneration)
-	reactModule.useEffect(function()
-		-- upvalues: var5 (ref), var8 (ref), t_1 (copy), var2 (ref)
-		if var5 == "" then
-			var8(t_1)
+	end, { NormalizeQueryResult })
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(config1)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(ConversationSearchDataHydrationModule.getInvalidationGeneration)
+	ReactModule.useEffect(function() --[[ Line: 118 ]]
+		-- upvalues: UseStateResult (copy), UseStateResult2_1 (copy), config1 (upval), ConversationSearchDataHydrationModule (copy)
+		if UseStateResult == "" then
+			UseStateResult2_1(config1)
 			
 			return
 		end
-		local var10 = var2.fetchPage(var5)
+		local Page = ConversationSearchDataHydrationModule.fetchPage(UseStateResult)
 		
-		if var10 == nil then
-			var8({ query = var5, pages = {} })
+		if Page == nil then
+			UseStateResult2_1({ query = UseStateResult, pages = {} })
 			
 			return
+		else
+			UseStateResult2_1({ query = UseStateResult, pages = { { result = Page } } })
 		end
-		var8({ query = var5, pages = { { result = var10 } } })
-	end, { var5, var2 })
-	local var10 = reactModule.useRef(var9)
-	reactModule.useEffect(function()
-		-- upvalues: var10 (ref), var9 (ref), var7 (ref), var2 (ref)
-		if var10.current == var9 then return end
-		var10.current = var9
+	end, { UseStateResult, ConversationSearchDataHydrationModule })
+	local UseRefResult = ReactModule.useRef(UseSignalStateResult)
+	ReactModule.useEffect(function() --[[ Line: 135 ]]
+		-- upvalues: UseRefResult (copy), UseSignalStateResult (copy), UseStateResult1 (copy), ConversationSearchDataHydrationModule (copy)
+		if UseRefResult.current == UseSignalStateResult then return end
+		UseRefResult.current = UseSignalStateResult
 		
-		for i, v in var7.pages do
-			var2.fetchPage(var7.query, v.cursor)
+		for _, page in UseStateResult1.pages do
+			ConversationSearchDataHydrationModule.fetchPage(UseStateResult1.query, page.cursor)
 		end
-	end, { var7, var2, var9 })
-	local var11 = signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), var3 (ref), var7 (ref), t (copy)
-		return signalsModule.createComputed(function(p3)
-			-- upvalues: var3 (copy), var7 (copy), t (copy)
-			local function collectItems(p4)
-				-- upvalues: p3 (ref), var3 (copy)
+	end, {
+		UseStateResult1,
+		ConversationSearchDataHydrationModule,
+		UseSignalStateResult
+	})
+	local UseSignalStateResult1 = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 176 ]]
+		-- upvalues: SignalsModule (upval), ConversationStoreModule (copy), UseStateResult1 (copy), config (upval)
+		return SignalsModule.createComputed(function(p2) --[[ Line: 177 ]]
+			-- upvalues: ConversationStoreModule (upval), UseStateResult1 (upval), config (upval)
+			local function collectItems(Pages) --[[ Line: 178 ]]
+				-- upvalues: p2 (copy), ConversationStoreModule (upval)
+				local List = {}
 				local t = {}
-				local t_1 = {}
 				
-				for i, v in p4 do
-					local var12 = v.result.data(p3)
+				for _, page in Pages do
+					local DataResult = page.result.data(p2)
 					
-					if var12 ~= nil and var12.matchedConversationIds ~= nil then
-						for i_1, v_1 in var12.matchedConversationIds do
-							if not t_1[v_1] then
-								t_1[v_1] = true
-								table.insert(t, v_1)
+					if DataResult ~= nil and DataResult.matchedConversationIds ~= nil then
+						for _, matchedConversationId in DataResult.matchedConversationIds do
+							if not t[matchedConversationId] then
+								t[matchedConversationId] = true
+								table.insert(List, matchedConversationId)
 							end
 						end
 					end
 				end
-				local t_2 = {}
+				local Conversations = {}
 				
-				for i_1, v_1 in t do
-					local conversation = var3.getConversation(v_1, p3)
+				for _, value in List do
+					local Conversation = ConversationStoreModule.getConversation(value, p2)
 					
-					if conversation ~= nil then
-						table.insert(t_2, conversation)
+					if Conversation ~= nil then
+						table.insert(Conversations, Conversation)
 					end
 				end
-				return t_2
+				return Conversations
 			end
 			
-			local pages = var7.pages
+			local Pages = UseStateResult1.pages
 			
-			if var7.query == "" or #pages == 0 then
-				return t
+			if UseStateResult1.query == "" or #Pages == 0 then
+				return config
+			else
+				local Page = Pages[#Pages]
+				local DataResult = Page.result.data(p2)
+				
+				return {
+					query = UseStateResult1.query,
+					items = collectItems(Pages),
+					status = Page.result.status(p2),
+					nextCursor = if DataResult == nil then nil else DataResult.nextCursor
+				}
 			end
-			local var13 = pages[#pages]
-			local var14 = var13.result.data(p3)
-			
-			return {
-				query = var7.query,
-				items = collectItems(pages),
-				status = var13.result.status(p3),
-				nextCursor = if var14 ~= nil then nil else var14.nextCursor
-			}
 		end)
-	end, { var7, var3 }))
+	end, { UseStateResult1, ConversationStoreModule })))
 	
 	return {
-		items = var11.items,
-		status = var11.status,
-		isActive = var4 ~= "",
-		debouncedQuery = var5,
-		isFetching = var11.status == "NotReady",
-		isAwaitingResults = var4 ~= "" and (if var11.query == var4 then if var11.status ~= "NotReady" then var11.status == "Idle" else true else true),
-		hasError = var11.status == "Failed",
-		hasSearched = var11.query ~= "",
-		nextCursor = var11.nextCursor,
-		loadNext = reactModule.useCallback(function()
-			-- upvalues: var7 (ref), var2 (ref), var8 (ref)
-			local pages = var7.pages
-			local var15 = pages[#pages]
+		items = UseSignalStateResult1.items,
+		status = UseSignalStateResult1.status,
+		isActive = NormalizeQueryResult ~= "",
+		debouncedQuery = UseStateResult,
+		isFetching = UseSignalStateResult1.status == "NotReady",
+		isAwaitingResults = NormalizeQueryResult ~= "" and (UseSignalStateResult1.query ~= NormalizeQueryResult or (UseSignalStateResult1.status == "NotReady" or UseSignalStateResult1.status == "Idle")),
+		hasError = UseSignalStateResult1.status == "Failed",
+		hasSearched = UseSignalStateResult1.query ~= "",
+		nextCursor = UseSignalStateResult1.nextCursor,
+		loadNext = ReactModule.useCallback(function() --[[ Line: 145 ]]
+			-- upvalues: UseStateResult1 (copy), ConversationSearchDataHydrationModule (copy), UseStateResult2_1 (copy)
+			local Pages = UseStateResult1.pages
+			local Page = Pages[#Pages]
 			
-			if var15 == nil then return end
-			if var15.result.status(false) ~= "Ready" then return end
-			local var16 = var15.result.data(false)
-			local var17 = if var16 ~= nil then nil else var16.nextCursor
+			if Page == nil then return end
+			if Page.result.status(false) ~= "Ready" then return end
+			local DataResult = Page.result.data(false)
+			local NextCursor = if DataResult == nil then nil else DataResult.nextCursor
 			
-			if var17 == nil then return end
-			local var18 = var2.fetchPage(var7.query, var17)
+			if NextCursor == nil then return end
+			local Page1 = ConversationSearchDataHydrationModule.fetchPage(UseStateResult1.query, NextCursor)
 			
-			if var18 == nil then
+			if Page1 ~= nil then
+				UseStateResult2_1(function(p3) --[[ Line: 166 ]]
+					-- upvalues: UseStateResult1 (upval), Page1 (copy), NextCursor (copy)
+					if p3.query == UseStateResult1.query then
+						local Copy = table.clone(p3.pages)
+						table.insert(Copy, { result = Page1, cursor = NextCursor })
+						
+						return { query = p3.query, pages = Copy }
+					else
+						return p3
+					end
+				end)
+				
 				return
 			end
-			var8(function(p5)
-				-- upvalues: var7 (copy), var18 (ref), var17 (ref)
-				if p5.query == var7.query then
-					local cloned = table.clone(p5.pages)
-					table.insert(cloned, { result = var18, cursor = var17 })
-					
-					return { query = p5.query, pages = cloned }
-				end
-				return p5
-			end)
-		end, { var7, var2 })
+		end, { UseStateResult1, ConversationSearchDataHydrationModule })
 	}
 end

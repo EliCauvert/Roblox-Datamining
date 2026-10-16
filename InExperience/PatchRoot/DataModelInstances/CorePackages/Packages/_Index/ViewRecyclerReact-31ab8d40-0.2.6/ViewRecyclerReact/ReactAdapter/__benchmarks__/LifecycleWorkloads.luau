@@ -1,43 +1,43 @@
-﻿local viewRecyclerReact = script:FindFirstAncestor("ViewRecyclerReact")
-local viewRecyclerModule = require(viewRecyclerReact.Parent.ViewRecycler)
-local compositionPlacementModule = require(viewRecyclerReact.ReactAdapter.Private.CompositionPlacement)
-local recyclingRootModule = require(viewRecyclerReact.ReactAdapter.Private.RecyclingRoot)
-local signalsModule = require(viewRecyclerReact.Parent.Signals)
-local signalsExperimentalModule = require(viewRecyclerReact.Parent.SignalsExperimental)
-local createRecyclableViewModule = require(viewRecyclerReact.ReactAdapter.createRecyclableView)
-local recyclableViewModule = require(viewRecyclerReact.ReactAdapter.Private.RecyclableView)
+﻿local ViewRecyclerReact = script:FindFirstAncestor("ViewRecyclerReact")
+local ViewRecyclerModule = require(ViewRecyclerReact.Parent.ViewRecycler)
+local CompositionPlacementModule = require(ViewRecyclerReact.ReactAdapter.Private.CompositionPlacement)
+local RecyclingRootModule = require(ViewRecyclerReact.ReactAdapter.Private.RecyclingRoot)
+local SignalsModule = require(ViewRecyclerReact.Parent.Signals)
+local SignalsExperimentalModule = require(ViewRecyclerReact.Parent.SignalsExperimental)
+local CreateRecyclableViewModule = require(ViewRecyclerReact.ReactAdapter.createRecyclableView)
+local RecyclableViewModule = require(ViewRecyclerReact.ReactAdapter.Private.RecyclableView)
 
-local function _()
-	-- upvalues: createRecyclableViewModule (ref)
-	return createRecyclableViewModule(function()
+local function _() --[[ Line: 13 | Named "viewType" ]]
+	-- upvalues: CreateRecyclableViewModule (copy)
+	return CreateRecyclableViewModule(function() --[[ Line: 14 ]]
 		return nil
 	end, { readiness = "ReadyOnAssignment" })
 end
 
 return {
-	recyclingScopeHighWater = function(p1, p2)
-		-- upvalues: recyclingRootModule (ref), createRecyclableViewModule (ref)
-		local var1 = 0
-		local var2 = recyclingRootModule.new(function()
-			-- upvalues: var1 (write)
-			var1 += 1
+	recyclingScopeHighWater = function(p1: number, Callback) --[[ Line: 21 ]]
+		-- upvalues: RecyclingRootModule (copy), CreateRecyclableViewModule (copy)
+		local HostChanges = 0
+		local NewRecyclingRoot = RecyclingRootModule.new(function() --[[ Line: 23 ]]
+			-- upvalues: HostChanges (ref)
+			HostChanges += 1
 		end)
-		local scope = var2.getScope({})
-		local var3 = scope == var2.getScope({})
-		local var4 = createRecyclableViewModule(function()
+		local Scope = NewRecyclingRoot.getScope({})
+		local IsScopeMatch = Scope == NewRecyclingRoot.getScope({})
+		local RecyclableViewModule = CreateRecyclableViewModule(function() --[[ Line: 14 ]]
 			return nil
 		end, { readiness = "ReadyOnAssignment" })
-		local var5 = createRecyclableViewModule(function()
+		local RecyclableViewModule1 = CreateRecyclableViewModule(function() --[[ Line: 29 ]]
 			return nil
 		end, { readiness = "ReadyOnAssignment" })
-		local var6 = p2()
+		local CallbackResult = Callback()
 		local t = {}
-		local list = table.create(p1)
-		local list_1 = table.create(p1)
+		local Buffer = table.create(p1)
+		local Buffer1 = table.create(p1)
 		
 		for i = 1, p1 do
-			list[i] = { viewType = var4 }
-			list_1[i] = {
+			Buffer[i] = { viewType = RecyclableViewModule }
+			Buffer1[i] = {
 				key = `item{i}`,
 				index = i,
 				value = {
@@ -48,124 +48,123 @@ return {
 				generation = i
 			}
 		end
-		local acquired = scope.exchange(t, {}, list).acquired
+		local Acquired = Scope.exchange(t, {}, Buffer).acquired
 		
-		for i_1, v in acquired do
-			v.view.set(list_1[i_1])
+		for i1, value in Acquired do
+			value.view.set(Buffer1[i1])
 		end
-		local list_2 = table.create(p1)
-		local list_3 = table.create(p1)
+		local Buffer2 = table.create(p1)
+		local Buffer21 = table.create(p1)
 		
-		for i_2 = 1, p1 do
-			list_2[i_2] = { viewType = var5 }
-			list_3[i_2] = {
-				key = `listItem{i_2}`,
-				index = i_2,
-				value = i_2,
-				generation = p1 + i_2
+		for i2 = 1, p1 do
+			Buffer2[i2] = { viewType = RecyclableViewModule1 }
+			Buffer21[i2] = {
+				key = `listItem{i2}`,
+				index = i2,
+				value = i2,
+				generation = p1 + i2
 			}
 		end
-		local acquired_1 = scope.exchange(t, acquired, list_2).acquired
+		local Acquired1 = Scope.exchange(t, Acquired, Buffer2).acquired
 		
-		for i_3, v_1 in acquired_1 do
-			v_1.view.set(list_3[i_3])
+		for i3, value1 in Acquired1 do
+			value1.view.set(Buffer21[i3])
 		end
-		for i_4, v_2 in list_1 do
-			v_2.value.placeholder:Destroy()
+		for _, value2 in Buffer1 do
+			value2.value.placeholder:Destroy()
 		end
-		local var7 = (p2() - var6) * 1000
-		local count = #scope.getScopeInventory()
-		local count_1 = #scope.getScopeInventory()
-		local var8 = 0
+		local ScaledCallbackResult = (Callback() - CallbackResult) * 1000
+		local Count = #Scope.getScopeInventory()
+		local Count1 = #Scope.getScopeInventory()
+		local PublishedHosts = 0
 		
-		for i_5 in var2.getPortalChildren(function()
+		for _ in NewRecyclingRoot.getPortalChildren(function() --[[ Line: 78 ]]
 			return nil
 		end) do
-			var8 += 1
+			PublishedHosts += 1
 		end
-		scope.exchange(t, acquired_1, {})
-		var2.destroy()
+		Scope.exchange(t, Acquired1, {})
+		NewRecyclingRoot.destroy()
 		
-		return var7, {
+		return ScaledCallbackResult, {
 			scopeWideHostScans = 0,
-			createdHosts = count,
-			listItemHosts = count_1,
-			publishedHosts = var8,
-			sameListRecyclingScope = var3,
-			hostChanges = var1,
+			createdHosts = Count,
+			listItemHosts = Count1,
+			publishedHosts = PublishedHosts,
+			sameListRecyclingScope = IsScopeMatch,
+			hostChanges = HostChanges,
 			completionPhaseCounts = { scopePublication = { synchronousBatch = 1 } }
 		}
 	end,
-	compositionChurn = function(p3)
-		-- upvalues: viewRecyclerModule (ref), recyclableViewModule (ref), signalsExperimentalModule (ref), compositionPlacementModule (ref), createRecyclableViewModule (ref), signalsModule (ref)
-		local var9 = 1
-		local var10 = 0
-		local var11 = viewRecyclerModule.Adapter.createRecyclingScope({
+	compositionChurn = function(p2) --[[ Line: 102 ]]
+		-- upvalues: ViewRecyclerModule (copy), RecyclableViewModule (copy), SignalsExperimentalModule (copy), CompositionPlacementModule (copy), CreateRecyclableViewModule (copy), SignalsModule (copy)
+		local Count = 1
+		local Count1 = 0
+		local RecyclingScope = ViewRecyclerModule.Adapter.createRecyclingScope({
 			adapter = {
-				create = function(p4)
-					-- upvalues: recyclableViewModule (copy), var9 (write), var10 (write)
-					local var12 = recyclableViewModule(var9, p4, nil)
-					var9 += 1
-					local set = var12.set
+				create = function(p3) --[[ Line: 107 ]]
+					-- upvalues: RecyclableViewModule (upval), Count (ref), Count1 (ref)
+					local RecyclableViewModuleResult = RecyclableViewModule(Count, p3, nil)
+					Count += 1
+					local SetFunction = RecyclableViewModuleResult.set
 					
-					function var36.set(p5)
-						-- upvalues: var10 (copy), set (ref)
-						var10 += 1
-						set(p5)
+					function RecyclableViewModuleResult.set(p4) --[[ Line: 111 ]]
+						-- upvalues: Count1 (upval), SetFunction (copy)
+						Count1 += 1
+						SetFunction(p4)
 					end
 					
-					return var12
+					return RecyclableViewModuleResult
 				end,
-				destroy = function() end,
-				batch = signalsExperimentalModule.batch
+				destroy = function() --[[ Line: 117 ]] end,
+				batch = SignalsExperimentalModule.batch
 			}
 		})
-		local var12 = compositionPlacementModule.new(var11, function() end)
-		local var13 = createRecyclableViewModule(function()
+		local NewCompositionPlacement = CompositionPlacementModule.new(RecyclingScope, function() --[[ Line: 121 ]] end)
+		local RecyclableViewModule1 = CreateRecyclableViewModule(function() --[[ Line: 14 ]]
 			return nil
 		end, { readiness = "ReadyOnAssignment" })
-		local list = table.create(p3)
-		local list_1 = table.create(p3)
+		local Buffer = table.create(p2)
+		local Buffer1 = table.create(p2)
 		
-		for i = 1, p3 do
-			local var14 = signalsModule.createSignal({ generation = 1, key = `parent{i}`, index = i, value = i })
-			local frame = Instance.new("Frame")
-			list_1[i] = frame
-			list[i] = var12.register(var13, {}, var14, {}, frame)
+		for i = 1, p2 do
+			local Frame = Instance.new("Frame")
+			Buffer1[i] = Frame
+			Buffer[i] = NewCompositionPlacement.register(RecyclableViewModule1, {}, SignalsModule.createSignal({ generation = 1, key = `parent{i}`, index = i, value = i }), {}, Frame)
 		end
-		var12.flush()
-		var10 = 0
-		local var15 = 0
-		local var16 = 0
-		local var17 = 1
+		NewCompositionPlacement.flush()
+		Count1 = 0
+		local Count2 = 0
+		local Revision = 0
+		local v1 = 1
 		
 		return {
-			run = function()
-				-- upvalues: var16 (write), p3 (ref), list (ref), var17 (write), var12 (ref), var15 (write)
-				var16 += 1
+			run = function() --[[ Line: 142 ]]
+				-- upvalues: Revision (ref), p2 (copy), Buffer (copy), v1 (ref), NewCompositionPlacement (copy), Count2 (ref)
+				Revision += 1
 				
-				for i = 1, p3 do
-					list[var17].setProps({ revision = var16, update = i })
+				for i = 1, p2 do
+					Buffer[v1].setProps({ revision = Revision, update = i })
 				end
-				var12.flush()
-				var15 += 1
-				var17 = var17 % p3 + 1
+				NewCompositionPlacement.flush()
+				Count2 += 1
+				v1 = v1 % p2 + 1
 			end,
-			getAssignmentUpdates = function()
-				-- upvalues: var10 (write)
-				return var10
+			getAssignmentUpdates = function() --[[ Line: 154 ]]
+				-- upvalues: Count1 (ref)
+				return Count1
 			end,
-			getFlushes = function()
-				-- upvalues: var15 (write)
-				return var15
+			getFlushes = function() --[[ Line: 157 ]]
+				-- upvalues: Count2 (ref)
+				return Count2
 			end,
-			destroy = function()
-				-- upvalues: var12 (ref), var11 (ref), list_1 (ref)
-				var12.destroy()
-				var11.destroy()
+			destroy = function() --[[ Line: 160 ]]
+				-- upvalues: NewCompositionPlacement (copy), RecyclingScope (copy), Buffer1 (copy)
+				NewCompositionPlacement.destroy()
+				RecyclingScope.destroy()
 				
-				for i, v in list_1 do
-					v:Destroy()
+				for _, value in Buffer1 do
+					value:Destroy()
 				end
 			end
 		}

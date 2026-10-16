@@ -1,131 +1,102 @@
-﻿local protoModule = require(script.Parent.Parent.Parent.Parent.Parent.proto)
-local typeRegistryModule = require(script.Parent.Parent.Parent.Parent.Parent.proto.typeRegistry)
-local t = {}
-local surfacingModule = require(script.Parent.surfacing)
-local t_1 = {}
-t_1.__index = t_1
+﻿local ProtoModule = require(script.Parent.Parent.Parent.Parent.Parent.proto)
+local TypeRegistryModule = require(script.Parent.Parent.Parent.Parent.Parent.proto.typeRegistry)
+local SurfacingModule = require(script.Parent.surfacing)
+local Module = {}
+Module.__index = Module
 
-function t_1.new(p1)
-	-- upvalues: t_1 (ref)
-	return setmetatable({
+function Module.new(p1) --[[ Line: 49 ]]
+	-- upvalues: Module (copy)
+	return (setmetatable({
 		roblox_component = if p1 == nil or p1.roblox_component == nil then "" else p1.roblox_component,
 		identifier = if p1 == nil or p1.identifier == nil then "" else p1.identifier,
 		title = if p1 == nil or p1.title == nil then "" else p1.title,
 		category = if p1 == nil or p1.category == nil then "" else p1.category,
 		surfacing = if p1 == nil or p1.surfacing == nil then nil else p1.surfacing
-	}, t_1)
+	}, Module))
 end
 
-function t_1:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var1 = 0
+function Module:encode() --[[ Line: 59 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.roblox_component ~= nil and self.roblox_component ~= "" then
-		local var2, var3 = protoModule.writeTag(buff, var1, 1, protoModule.wireTypes.lengthDelimited)
-		var2, var8 = protoModule.writeString(var2, var3, self.roblox_component)
-		buff = var2
-		var1 = var3
+		local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult, WriteTagResult2, self.roblox_component)
 	end
 	if self.identifier ~= nil and self.identifier ~= "" then
-		local var4, var5 = protoModule.writeTag(buff, var1, 2, protoModule.wireTypes.lengthDelimited)
-		var4, var10 = protoModule.writeString(var4, var5, self.identifier)
-		buff = var4
-		var1 = var5
+		local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult1, WriteTagResult2_1, self.identifier)
 	end
 	if self.title ~= nil and self.title ~= "" then
-		local var6, var7 = protoModule.writeTag(buff, var1, 3, protoModule.wireTypes.lengthDelimited)
-		var6, var12 = protoModule.writeString(var6, var7, self.title)
-		buff = var6
-		var1 = var7
+		local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult3, WriteTagResult2_2, self.title)
 	end
 	if self.category ~= nil and self.category ~= "" then
-		local var8, var9 = protoModule.writeTag(buff, var1, 4, protoModule.wireTypes.lengthDelimited)
-		var8, var14 = protoModule.writeString(var8, var9, self.category)
-		buff = var8
-		var1 = var9
+		local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult4, WriteTagResult2_3, self.category)
 	end
 	if self.surfacing ~= nil then
-		local var10 = self.surfacing:encode()
-		local var11, var12 = protoModule.writeTag(buff, var1, 5, protoModule.wireTypes.lengthDelimited)
-		var11, var17 = protoModule.writeBuffer(var11, var12, var10, buffer.len(var10))
-		buff = var11
-		var1 = var12
+		local EncodeResult = self.surfacing:encode()
+		local WriteTagResult5, WriteTagResult2_4 = ProtoModule.writeTag(Buf, Count, 5, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeBuffer(WriteTagResult5, WriteTagResult2_4, EncodeResult, buffer.len(EncodeResult))
 	end
-	local buff_1 = buffer.create(var1)
-	buffer.copy(buff_1, 0, buff, 0, var1)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_1.decode(p1)
-	-- upvalues: t_1 (ref), protoModule (ref), surfacingModule (ref)
-	local var1 = t_1.new()
-	local var2 = 0
-	while var2 < buffer.len(p1) do
-		local _ = nil
-		local var3 = nil
-		local var4, var5, var6 = protoModule.readTag(p1, var2)
-		local var7 = var4
-		var3 = var5
-		var2 = var6
+function Module.decode(Buf) --[[ Line: 94 ]]
+	-- upvalues: Module (copy), ProtoModule (copy), SurfacingModule (copy)
+	local NewModule = Module.new()
+	local v1 = 0
+	while v1 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v19 = ProtoModule.readTag(Buf, v1)
 		
-		if var3 == protoModule.wireTypes.varint then
-			local _ = nil
-			local var8, var9 = protoModule.readVarInt(p1, var2)
-			local _ = var8
-			var2 = var9
-			continue
-		end
-		if var3 == protoModule.wireTypes.lengthDelimited then
-			if var7 == 1 then
-				local _ = nil
-				local var10, var11 = protoModule.readBuffer(p1, var2)
-				var2 = var11
-				var1.roblox_component = buffer.tostring(var10)
-			elseif var7 == 2 then
-				local _ = nil
-				local var12, var13 = protoModule.readBuffer(p1, var2)
-				var2 = var13
-				var1.identifier = buffer.tostring(var12)
-			elseif var7 == 3 then
-				local _ = nil
-				local var14, var15 = protoModule.readBuffer(p1, var2)
-				var2 = var15
-				var1.title = buffer.tostring(var14)
-			elseif var7 == 4 then
-				local _ = nil
-				local var16, var17 = protoModule.readBuffer(p1, var2)
-				var2 = var17
-				var1.category = buffer.tostring(var16)
-			elseif var7 == 5 then
-				local _ = nil
-				local var18, var19 = protoModule.readBuffer(p1, var2)
-				var2 = var19
-				var1.surfacing = surfacingModule.Surfacing.decode(var18)
+		if Tag2 == ProtoModule.wireTypes.varint then
+			local _
+			_, v19 = ProtoModule.readVarInt(Buf, v1)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v19 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.roblox_component = buffer.tostring(Buffer1)
+			elseif Tag == 2 then
+				local Buffer2
+				Buffer2, v19 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.identifier = buffer.tostring(Buffer2)
+			elseif Tag == 3 then
+				local Buffer3
+				Buffer3, v19 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.title = buffer.tostring(Buffer3)
+			elseif Tag == 4 then
+				local Buffer4
+				Buffer4, v19 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.category = buffer.tostring(Buffer4)
+			elseif Tag == 5 then
+				local Buffer5
+				Buffer5, v19 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.surfacing = SurfacingModule.Surfacing.decode(Buffer5)
 			else
-				local _ = nil
-				local var20, var21 = protoModule.readVarInt(p1, var2)
-				var2 = var21 + var20
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v1)
+				v1 = VarInt2 + VarInt
 			end
-		elseif var3 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var22, var23 = protoModule.readFixed32(p1, var2)
-			local _ = var22
-			var2 = var23
-		elseif var3 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var24, var25 = protoModule.readFixed64(p1, var2)
-			local _ = var24
-			var2 = var25
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v19 = ProtoModule.readFixed32(Buf, v1)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v19 = ProtoModule.readFixed64(Buf, v1)
 		else
-			error("Unsupported wire type: " .. var21)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var1
+	return NewModule
 end
 
-function t_1:jsonEncode()
+function Module:jsonEncode() --[[ Line: 157 ]]
 	local t = {}
 	
 	if self.roblox_component ~= nil and self.roblox_component ~= "" then
@@ -146,36 +117,36 @@ function t_1:jsonEncode()
 	return t
 end
 
-function t_1:jsonDecode()
-	-- upvalues: t_1 (ref), surfacingModule (ref)
-	local var26 = t_1.new()
+function Module:jsonDecode() --[[ Line: 183 ]]
+	-- upvalues: Module (copy), SurfacingModule (copy)
+	local NewModule = Module.new()
 	
 	if self.roblox_component ~= nil then
-		var26.roblox_component = self.roblox_component
+		NewModule.roblox_component = self.roblox_component
 	end
 	if self.robloxComponent ~= nil then
-		var26.roblox_component = self.robloxComponent
+		NewModule.roblox_component = self.robloxComponent
 	end
 	if self.identifier ~= nil then
-		var26.identifier = self.identifier
+		NewModule.identifier = self.identifier
 	end
 	if self.title ~= nil then
-		var26.title = self.title
+		NewModule.title = self.title
 	end
 	if self.category ~= nil then
-		var26.category = self.category
+		NewModule.category = self.category
 	end
 	if self.surfacing ~= nil then
-		var26.surfacing = surfacingModule.Surfacing.jsonDecode(self.surfacing)
+		NewModule.surfacing = SurfacingModule.Surfacing.jsonDecode(self.surfacing)
 	end
-	return var26
+	return NewModule
 end
 
-t_1.descriptor = {
+Module.descriptor = {
 	name = "PageEntry",
 	fullName = "roblox.apppageplatform.shared.v1beta1.PageEntry"
 }
-t.PageEntry = t_1
-typeRegistryModule.default:register(t.PageEntry)
+local config = { PageEntry = Module }
+TypeRegistryModule.default:register(config.PageEntry)
 
-return { PageEntry = t.PageEntry }
+return { PageEntry = config.PageEntry }

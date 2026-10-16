@@ -1,41 +1,39 @@
-﻿local dEV = _G.__DEV__
-local parent = script.Parent
-local isArrayModule = require(parent.isArray)
-local _ = require(parent.Parent.Parent.ES7Types)
+﻿local DEV = _G.__DEV__
+local Parent = script.Parent
+local IsArrayModule = require(Parent.isArray)
+local _ = require(Parent.Parent.Parent.ES7Types)
 
-return function(p1, ...)
-	-- upvalues: isArrayModule (ref), dEV (ref)
-	local cloned
-	local _ = nil
-	local var1 = 0
+return function(Tbl, ...) --[[ Line: 29 | Named "concat" ]]
+	-- upvalues: IsArrayModule (copy), DEV (copy)
+	local v1 = 0
+	local Copy = nil
+	local CountTbl = nil
 	
-	if isArrayModule(p1) then
-		cloned = table.clone(p1)
-		var1 = #p1
+	if IsArrayModule(Tbl) then
+		Copy = table.clone(Tbl)
+		CountTbl = #Tbl
 	else
-		var1 += 1
-		cloned = { [var1] = p1 }
+		CountTbl = v1 + 1
+		Copy = { [CountTbl] = Tbl }
 	end
-	local var2
-	for i_1 = 1, select("#", ...) do
-		var2 = select(i_1, ...)
-		local var3 = typeof(var2)
+	for i = 1, select("#", ...) do
+		local Selected = select(i, ...)
+		local ValueType = typeof(Selected)
 		
-		if var2 == nil then
-			continue
-		end
-		if var3 ~= "table" then
-			var1 += 1
-			cloned[var1] = var2
-			continue
-		end
-		if dEV and not isArrayModule(var2) then
-			error("Array.concat(...) only works with array-like tables but it received an object-like table.\nYou can avoid this error by wrapping the object-like table into an array. Example: `concat({1, 2}, {a = true})` should be `concat({1, 2}, { {a = true} }`")
-		end
-		for i = 1, #var2 do
-			var1 += 1
-			cloned[var1] = var2[i]
+		if Selected ~= nil then
+			if ValueType ~= "table" then
+				CountTbl += 1
+				Copy[CountTbl] = Selected
+				continue
+			end
+			if DEV and not IsArrayModule(Selected) then
+				error("Array.concat(...) only works with array-like tables but it received an object-like table.\nYou can avoid this error by wrapping the object-like table into an array. Example: `concat({1, 2}, {a = true})` should be `concat({1, 2}, { {a = true} }`")
+			end
+			for i1 = 1, #Selected do
+				CountTbl += 1
+				Copy[CountTbl] = Selected[i1]
+			end
 		end
 	end
-	return cloned
+	return Copy
 end

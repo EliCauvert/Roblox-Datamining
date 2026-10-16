@@ -1,3 +1,3 @@
-﻿return require(script:FindFirstAncestor("BulkPurchaseApp").Parent.Rodux).makeActionCreator("BulkPurchaseStarted", function(p1)
-	return { balance = p1 }
+﻿return require(script:FindFirstAncestor("BulkPurchaseApp").Parent.Rodux).makeActionCreator("BulkPurchaseStarted", function(Balance) --[[ Line: 12 ]]
+	return { balance = Balance }
 end)

@@ -1,1 +1,3 @@
-﻿return game:DefineFastFlag("HomepagePromptsPaddingFix", false) and require(script.Parent.FFlagHomePagePromptsHandlerEnabled)
+﻿local FFlagHomePagePromptsHandlerEnabledModule = require(script.Parent.FFlagHomePagePromptsHandlerEnabled)
+
+return game:DefineFastFlag("HomepagePromptsPaddingFix", false) and FFlagHomePagePromptsHandlerEnabledModule

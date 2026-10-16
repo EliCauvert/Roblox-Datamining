@@ -1,26 +1,25 @@
-﻿local chrome = script:FindFirstAncestor("Chrome")
-local corePackagesService = game:GetService("CorePackages")
-local serviceModule = require(chrome.Service)
-local constantsModule = require(chrome.ChromeShared.Unibar.Constants)
-local useMappedSignal = require(corePackagesService.Workspace.Packages.Chrome).Hooks.useMappedSignal
-local commonFtuxTooltipModule = require(chrome.Integrations.CommonFtuxTooltip)
-local inExperienceShopTooltipPriority = game:DefineFastInt("InExperienceShopTooltipPriority", 3500)
-local inExperienceShopTooltipStorageKey = game:DefineFastString("InExperienceShopTooltipStorageKey", "InExperienceShopTooltipStorageKey")
-local inExperienceShopTooltipShowDelay = game:DefineFastInt("InExperienceShopTooltipShowDelay", 1000)
-local inExperienceShopTooltipDismissDelay = game:DefineFastInt("InExperienceShopTooltipDismissDelay", 7000)
+﻿local Chrome = script:FindFirstAncestor("Chrome")
+local ServiceModule = require(Chrome.Service)
+local ConstantsModule = require(Chrome.ChromeShared.Unibar.Constants)
+local UseMappedSignalFunction = require(game:GetService("CorePackages").Workspace.Packages.Chrome).Hooks.useMappedSignal
+local CommonFtuxTooltipModule = require(Chrome.Integrations.CommonFtuxTooltip)
+local InExperienceShopTooltipPriority = game:DefineFastInt("InExperienceShopTooltipPriority", 3500)
+local InExperienceShopTooltipStorageKey = game:DefineFastString("InExperienceShopTooltipStorageKey", "InExperienceShopTooltipStorageKey")
+local InExperienceShopTooltipShowDelay = game:DefineFastInt("InExperienceShopTooltipShowDelay", 1000)
+local InExperienceShopTooltipDismissDelay = game:DefineFastInt("InExperienceShopTooltipDismissDelay", 7000)
 
-return function(p1)
-	-- upvalues: serviceModule (ref), constantsModule (ref), useMappedSignal (ref), commonFtuxTooltipModule (ref), inExperienceShopTooltipPriority (ref), inExperienceShopTooltipStorageKey (ref), inExperienceShopTooltipShowDelay (ref), inExperienceShopTooltipDismissDelay (ref)
-	local iNEXPERIENCESHOPID = serviceModule:integrations()[constantsModule.IN_EXPERIENCE_SHOP_ID]
+return function(p1) --[[ Line: 20 | Named "InExperienceShopFtuxTooltip" ]]
+	-- upvalues: ServiceModule (copy), ConstantsModule (copy), UseMappedSignalFunction (copy), CommonFtuxTooltipModule (copy), InExperienceShopTooltipPriority (copy), InExperienceShopTooltipStorageKey (copy), InExperienceShopTooltipShowDelay (copy), InExperienceShopTooltipDismissDelay (copy)
+	local IntegrationsResultEntry = ServiceModule:integrations()[ConstantsModule.IN_EXPERIENCE_SHOP_ID]
 	
-	return useMappedSignal(if iNEXPERIENCESHOPID then iNEXPERIENCESHOPID.availability else nil) == serviceModule.AvailabilitySignal.Available and commonFtuxTooltipModule({
+	return UseMappedSignalFunction(if IntegrationsResultEntry then IntegrationsResultEntry.availability else nil) == ServiceModule.AvailabilitySignal.Available and CommonFtuxTooltipModule({
 		id = "IN_EXPERIENCE_SHOP_TOOLTIP",
 		headerKey = "CoreScripts.FTUX.Heading.InExperienceShop",
 		bodyKey = "CoreScripts.FTUX.Label.InExperienceShopDescription",
-		priority = inExperienceShopTooltipPriority,
+		priority = InExperienceShopTooltipPriority,
 		isIconVisible = p1.visible,
-		localStorageKey = inExperienceShopTooltipStorageKey,
-		showDelay = inExperienceShopTooltipShowDelay,
-		dismissDelay = inExperienceShopTooltipDismissDelay
+		localStorageKey = InExperienceShopTooltipStorageKey,
+		showDelay = InExperienceShopTooltipShowDelay,
+		dismissDelay = InExperienceShopTooltipDismissDelay
 	})
 end

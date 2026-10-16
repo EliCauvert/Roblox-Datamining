@@ -1,28 +1,31 @@
-﻿local parent = script.Parent
-local createLazyComponent = require(parent.RoactUtils).Components.createLazyComponent
-local sharedFlagsModule = require(parent.SharedFlags)
+﻿local Parent = script.Parent
+local CreateLazyComponentFunction = require(Parent.RoactUtils).Components.createLazyComponent
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagEnableHomeRobloxLogo = SharedFlagsModule.FFlagEnableHomeRobloxLogo
+local FFlagEnableFlyoutOnNavRail = SharedFlagsModule.FFlagEnableFlyoutOnNavRail
+local FFlagFlyoutUseOpenHook = SharedFlagsModule.FFlagFlyoutUseOpenHook
+local FFlagSendLogOutClickTelemetry = SharedFlagsModule.FFlagSendLogOutClickTelemetry
+local FFlagCTAChangeMorePageFlyoutButtonTextIxpEnabled = SharedFlagsModule.FFlagCTAChangeMorePageFlyoutButtonTextIxpEnabled
 
 return {
 	Components = {
-		FlyoutSidePanelComponent = createLazyComponent(function()
+		FlyoutSidePanelComponent = CreateLazyComponentFunction(function() --[[ Line: 12 ]]
 			return require(script.Components.FlyoutSidePanelComponent)
 		end),
-		FlyoutProfileCard = createLazyComponent(function()
+		FlyoutProfileCard = CreateLazyComponentFunction(function() --[[ Line: 15 ]]
 			return require(script.Components.FlyoutProfileCard)
 		end),
 		FlyoutLeftHeader = require(script.Components.FlyoutLeftHeader),
-		FlyoutStatusListener = if sharedFlagsModule.FFlagEnableHomeRobloxLogo then nil else require(script.Components.FlyoutStatusListener),
-		FlyoutHamburgerButton = if sharedFlagsModule.FFlagEnableFlyoutOnNavRail then require(script.Components.FlyoutHamburgerButton) else nil
-	},
-	Flags = {
-		FFlagLuaAppsEnableMarkButtonSeq = require(script.Flags.FFlagLuaAppsEnableMarkButtonSeq)
+		FlyoutStatusListener = if FFlagEnableHomeRobloxLogo then nil else require(script.Components.FlyoutStatusListener),
+		FlyoutHamburgerButton = if FFlagEnableFlyoutOnNavRail then require(script.Components.FlyoutHamburgerButton) else nil
 	},
 	Utils = {
 		shouldShowLeftHeader = require(script.Utils.shouldShowLeftHeader),
-		logCTAChangeMorePageFlyoutButtonTextExposure = if sharedFlagsModule.FFlagCTAChangeMorePageFlyoutButtonTextIxpEnabled then require(script.Utils.logCTAChangeMorePageFlyoutButtonTextExposure) else nil
+		sendMoreLegacyAndFlyoutItemClickEvent = if FFlagSendLogOutClickTelemetry then require(script.Analytics.FlyoutAnalytics).sendMoreLegacyAndFlyoutItemClickEvent else nil,
+		logCTAChangeMorePageFlyoutButtonTextExposure = if FFlagCTAChangeMorePageFlyoutButtonTextIxpEnabled then require(script.Utils.logCTAChangeMorePageFlyoutButtonTextExposure) else nil
 	},
 	Hooks = {
-		useOpenFlyoutSidePanel = if sharedFlagsModule.FFlagFlyoutUseOpenHook then require(script.Hooks.useOpenFlyoutSidePanel) else nil
+		useOpenFlyoutSidePanel = if FFlagFlyoutUseOpenHook then require(script.Hooks.useOpenFlyoutSidePanel) else nil
 	},
 	FlyoutScrollAwayControl = require(script.FlyoutScrollAwayControl),
 	["jest.config"] = script["jest.config"]

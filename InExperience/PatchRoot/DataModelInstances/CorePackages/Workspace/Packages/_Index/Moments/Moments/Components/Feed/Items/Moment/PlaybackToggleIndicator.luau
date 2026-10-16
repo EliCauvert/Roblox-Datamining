@@ -1,124 +1,123 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local reactOtterModule = require(parent.ReactOtter)
-local sharedFlagsModule = require(parent.SharedFlags)
-local signalsModule = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local momentContextModule = require(script.Parent.MomentContext)
-local playbackToggleIndicatorMachineModule = require(script.Parent.playbackToggleIndicatorMachine)
-local useIsPlayingModule = require(moments.Hooks.useIsPlaying)
-local fFlagMomentsAutoplayAmpPolicy = sharedFlagsModule.FFlagMomentsAutoplayAmpPolicy
-local useSignalState = signalsReactModule.useSignalState
-local icon = foundationModule.Icon
-local view = foundationModule.View
-local iconName = foundationModule.Enums.IconName
-local iconSize = foundationModule.Enums.IconSize
-local useTokens = foundationModule.Hooks.useTokens
-local usePreferences = foundationModule.Hooks.usePreferences
-local t = { frequency = 4, dampingRatio = 1 }
-local t_1 = { duration = 0.15, easingStyle = Enum.EasingStyle.Quad }
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local ReactOtterModule = require(Parent.ReactOtter)
+local SignalsModule = require(Parent.Signals)
+local MomentContextModule = require(script.Parent.MomentContext)
+local PlaybackToggleIndicatorMachineModule = require(script.Parent.playbackToggleIndicatorMachine)
+local UseIsPlayingModule = require(Moments.Hooks.useIsPlaying)
+local FFlagMomentsAutoplayAmpPolicy = require(Parent.SharedFlags).FFlagMomentsAutoplayAmpPolicy
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local Icon = FoundationModule.Icon
+local View = FoundationModule.View
+local IconName = FoundationModule.Enums.IconName
+local IconSize = FoundationModule.Enums.IconSize
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UsePreferencesFunction = FoundationModule.Hooks.usePreferences
+local config = { frequency = 4, dampingRatio = 1 }
+local config1 = { duration = 0.15, easingStyle = Enum.EasingStyle.Quad }
 
-local function defaultSchedule(p1, p2)
-	local delayedThread = task.delay(p1 / 1000, p2)
+local function defaultSchedule(p1: number, p2) --[[ Line: 55 ]]
+	local DelayedThread = task.delay(p1 / 1000, p2)
 	
-	return function()
-		-- upvalues: delayedThread (ref)
-		task.cancel(delayedThread)
+	return function() --[[ Line: 57 ]]
+		-- upvalues: DelayedThread (copy)
+		task.cancel(DelayedThread)
 	end
 end
 
-return function(p1)
-	-- upvalues: momentContextModule (ref), useTokens (ref), usePreferences (ref), reactModule (ref), reactOtterModule (ref), useIsPlayingModule (ref), fFlagMomentsAutoplayAmpPolicy (ref), signalsModule (ref), useSignalState (ref), t (ref), t_1 (ref), defaultSchedule (ref), playbackToggleIndicatorMachineModule (ref), view (ref), icon (ref), iconName (ref), iconSize (ref)
-	local controller = momentContextModule.useMoment().controller
-	local var1 = useTokens()
-	local reducedMotion = usePreferences().reducedMotion
-	local var2, var3 = reactModule.useState(false)
-	local var4, var5 = reactOtterModule.useAnimatedBinding(0)
-	local var6 = useIsPlayingModule()
-	local var7 = if fFlagMomentsAutoplayAmpPolicy then useSignalState(if fFlagMomentsAutoplayAmpPolicy then reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), controller (ref)
-		return signalsModule.createComputed(function(p2)
-			-- upvalues: controller (copy)
-			return if controller == nil then "Idle" else controller.getState(p2).readiness
+return function(p1) --[[ Line: 68 | Named "PlaybackToggleIndicator" ]]
+	-- upvalues: MomentContextModule (copy), UseTokensFunction (copy), UsePreferencesFunction (copy), ReactModule (copy), ReactOtterModule (copy), UseIsPlayingModule (copy), FFlagMomentsAutoplayAmpPolicy (copy), SignalsModule (copy), UseSignalStateFunction (copy), config (copy), config1 (copy), defaultSchedule (copy), PlaybackToggleIndicatorMachineModule (copy), View (copy), Icon (copy), IconName (copy), IconSize (copy)
+	local Controller = MomentContextModule.useMoment().controller
+	local UseTokensResult = UseTokensFunction()
+	local ReducedMotion = UsePreferencesFunction().reducedMotion
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(0)
+	local UseIsPlayingModuleResult = UseIsPlayingModule()
+	local UseMemoResult = if FFlagMomentsAutoplayAmpPolicy then ReactModule.useMemo(function() --[[ Line: 79 ]]
+		-- upvalues: SignalsModule (upval), Controller (copy)
+		return SignalsModule.createComputed(function(p2) --[[ Line: 80 ]]
+			-- upvalues: Controller (upval)
+			return if Controller == nil then "Idle" else Controller.getState(p2).readiness
 		end)
-	end, { controller }) else nil) else nil
-	local var8 = reactModule.useRef(nil)
+	end, { Controller }) else nil
+	local UseSignalStateResult = if FFlagMomentsAutoplayAmpPolicy then UseSignalStateFunction(UseMemoResult) else nil
+	local UseRefResult = ReactModule.useRef(nil)
 	
-	function var21.current(p2)
-		-- upvalues: reducedMotion (ref), reactOtterModule (copy), t (copy), t_1 (copy), var5 (ref)
-		var5(if reducedMotion then reactOtterModule.instant(if p2 == "enter" then 1 else 0) elseif p2 == "enter" then reactOtterModule.spring(1, t) else reactOtterModule.ease(0, t_1))
+	function UseRefResult.current(p2) --[[ Line: 93 ]]
+		-- upvalues: ReducedMotion (copy), ReactOtterModule (upval), config (upval), config1 (upval), UseAnimatedBindingResult2 (copy)
+		UseAnimatedBindingResult2(if ReducedMotion then ReactOtterModule.instant(if p2 == "enter" then 1 else 0) elseif p2 == "enter" then ReactOtterModule.spring(1, config) else ReactOtterModule.ease(0, config1))
 	end
 	
-	local var9 = reactModule.useRef(nil)
-	var9.current = p1.scheduleOverride or defaultSchedule
-	local var10 = reactModule.useMemo(function()
-		-- upvalues: playbackToggleIndicatorMachineModule (copy), var9 (ref), var3 (ref), var8 (ref)
-		return playbackToggleIndicatorMachineModule({ dwellMs = 800, exitDurationMs = 150 }, {
-			schedule = function(p2, p3)
-				-- upvalues: var9 (copy)
-				return var9.current(p2, p3)
+	local UseRefResult1 = ReactModule.useRef(nil)
+	UseRefResult1.current = p1.scheduleOverride or defaultSchedule
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 111 ]]
+		-- upvalues: PlaybackToggleIndicatorMachineModule (upval), UseRefResult1 (copy), UseStateResult2 (copy), UseRefResult (copy)
+		return PlaybackToggleIndicatorMachineModule({ dwellMs = 800, exitDurationMs = 150 }, {
+			schedule = function(p2, p3) --[[ Line: 116 ]]
+				-- upvalues: UseRefResult1 (upval)
+				return UseRefResult1.current(p2, p3)
 			end,
-			setMounted = var3,
-			animate = function(p2)
-				-- upvalues: var8 (copy)
-				var8.current(p2)
+			setMounted = UseStateResult2,
+			animate = function(p2) --[[ Line: 120 ]]
+				-- upvalues: UseRefResult (upval)
+				UseRefResult.current(p2)
 			end
 		})
 	end, {})
-	reactModule.useEffect(function()
-		-- upvalues: var10 (ref)
-		return function()
-			-- upvalues: var10 (copy)
-			var10.dispose()
+	ReactModule.useEffect(function() --[[ Line: 128 ]]
+		-- upvalues: UseMemoResult1 (copy)
+		return function() --[[ Line: 129 ]]
+			-- upvalues: UseMemoResult1 (upval)
+			UseMemoResult1.dispose()
 		end
-	end, { var10 })
-	reactModule.useEffect(function()
-		-- upvalues: controller (ref), signalsModule (copy), var10 (ref)
-		if controller == nil then
-			return
-		end
-		local var11 = nil
+	end, { UseMemoResult1 })
+	ReactModule.useEffect(function() --[[ Line: 137 ]]
+		-- upvalues: Controller (copy), SignalsModule (upval), UseMemoResult1 (copy)
+		if Controller == nil then return end
+		local UserToggleNonce = nil
 		
-		return signalsModule.createEffect(function(p2)
-			-- upvalues: controller (copy), var11 (write), var10 (copy)
-			local userToggleNonce = controller.getUserToggleNonce(p2)
+		return (SignalsModule.createEffect(function(p2) --[[ Line: 142 ]]
+			-- upvalues: Controller (upval), UserToggleNonce (ref), UseMemoResult1 (upval)
+			local UserToggleNonce1 = Controller.getUserToggleNonce(p2)
 			
-			if var11 == nil then
-				var11 = userToggleNonce
+			if UserToggleNonce == nil then
+				UserToggleNonce = UserToggleNonce1
 				
 				return
-			elseif userToggleNonce == var11 then
+			end
+			if UserToggleNonce1 ~= UserToggleNonce then
+				UserToggleNonce = UserToggleNonce1
+				UseMemoResult1.notifyUserToggle()
+				
 				return
 			end
-			var11 = userToggleNonce
-			var10.notifyUserToggle()
-		end)
-	end, { controller, var10 })
-	local var11 = if fFlagMomentsAutoplayAmpPolicy then var7 == "Ready" and not var6 else nil
+		end))
+	end, { Controller, UseMemoResult1 })
+	local NoUseIsPlayingModuleResult = if FFlagMomentsAutoplayAmpPolicy then UseSignalStateResult == "Ready" and not UseIsPlayingModuleResult else nil
 	
-	return if var2 or fFlagMomentsAutoplayAmpPolicy and var11 then reactModule.createElement(view, {
+	return if UseStateResult or FFlagMomentsAutoplayAmpPolicy and NoUseIsPlayingModuleResult then ReactModule.createElement(View, {
 		tag = "position-center-center anchor-center-center",
 		BackgroundTransparency = 1,
 		ZIndex = 3,
 		Size = UDim2.fromOffset(64, 64),
-		scale = var4:map(function(p2)
-			-- upvalues: fFlagMomentsAutoplayAmpPolicy (copy), var11 (ref)
-			return if fFlagMomentsAutoplayAmpPolicy and var11 then 1 else p2 * 0.25 + 0.75
+		scale = UseAnimatedBindingResult:map(function(p2: number): number --[[ Line: 164 ]]
+			-- upvalues: FFlagMomentsAutoplayAmpPolicy (upval), NoUseIsPlayingModuleResult (copy)
+			return if FFlagMomentsAutoplayAmpPolicy and NoUseIsPlayingModuleResult then 1 else p2 * 0.25 + 0.75
 		end)
 	}, {
-		Circle = reactModule.createElement(view, {
+		Circle = ReactModule.createElement(View, {
 			tag = "row align-x-center align-y-center size-full radius-circle clip bg-over-media-0",
-			GroupTransparency = var4:map(function(p2)
-				-- upvalues: fFlagMomentsAutoplayAmpPolicy (copy), var11 (ref)
-				return if fFlagMomentsAutoplayAmpPolicy and var11 then 0 else 1 - p2
+			GroupTransparency = UseAnimatedBindingResult:map(function(p2: number): number --[[ Line: 171 ]]
+				-- upvalues: FFlagMomentsAutoplayAmpPolicy (upval), NoUseIsPlayingModuleResult (copy)
+				return if FFlagMomentsAutoplayAmpPolicy and NoUseIsPlayingModuleResult then 0 else 1 - p2
 			end)
 		}, {
-			Glyph = reactModule.createElement(icon, {
-				name = if var6 then iconName.PauseLarge else iconName.PlayLarge,
-				size = iconSize.Large,
-				style = var1.Color.Content.Emphasis
+			Glyph = ReactModule.createElement(Icon, {
+				name = if UseIsPlayingModuleResult then IconName.PauseLarge else IconName.PlayLarge,
+				size = IconSize.Large,
+				style = UseTokensResult.Color.Content.Emphasis
 			})
 		})
 	}) else nil

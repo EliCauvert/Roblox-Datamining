@@ -1,8 +1,8 @@
-﻿local reactModule = require(script:FindFirstAncestor("BuildExperience").Parent.React)
-local versionTitleDescriptionPageViewModule = require(script.Parent.VersionTitleDescriptionPageView)
-local useVersionTitleDescriptionPageViewModelModule = require(script.Parent.useVersionTitleDescriptionPageViewModel)
+﻿local ReactModule = require(script:FindFirstAncestor("BuildExperience").Parent.React)
+local VersionTitleDescriptionPageViewModule = require(script.Parent.VersionTitleDescriptionPageView)
+local UseVersionTitleDescriptionPageViewModelModule = require(script.Parent.useVersionTitleDescriptionPageViewModel)
 
-return function(p1)
-	-- upvalues: useVersionTitleDescriptionPageViewModelModule (ref), reactModule (ref), versionTitleDescriptionPageViewModule (ref)
-	return reactModule.createElement(versionTitleDescriptionPageViewModule, useVersionTitleDescriptionPageViewModelModule(p1))
+return function(p1) --[[ Line: 11 | Named "VersionTitleDescriptionPageContainer" ]]
+	-- upvalues: UseVersionTitleDescriptionPageViewModelModule (copy), ReactModule (copy), VersionTitleDescriptionPageViewModule (copy)
+	return ReactModule.createElement(VersionTitleDescriptionPageViewModule, (UseVersionTitleDescriptionPageViewModelModule(p1)))
 end

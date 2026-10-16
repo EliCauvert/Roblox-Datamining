@@ -1,84 +1,96 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local telemetryService = game:GetService("TelemetryService")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local useRoactService = require(parent.RobloxAppHooks).useRoactService
-local roactAnalyticsCommonGameEvents = require(parent.RoactServiceTags).RoactAnalyticsCommonGameEvents
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local textKeysModule = require(profilePlatform.Common.TextKeys)
-local contentType = require(parent.UnifiedLogging).ContentType
-local cryoModule = require(parent.Cryo)
-local squareCollectionGridViewModule = require(profilePlatform.BaseComponents.CollectionGridViews.SquareCollectionGridView)
-local enumsModule = require(profilePlatform.Common.Enums)
-local useRenderExperienceTileModule = require(profilePlatform.Hooks.Tiles.useRenderExperienceTile)
-local useProfileAnalyticsContextModule = require(profilePlatform.Contexts.useProfileAnalyticsContext)
-local useProfileWrapperContextModule = require(profilePlatform.Contexts.useProfileWrapperContext)
-local formatExperienceDetailsForImpressionsModule = require(profilePlatform.Hooks.formatExperienceDetailsForImpressions)
-local useGenerateImpressionsTagModule = require(profilePlatform.Hooks.useGenerateImpressionsTag)
-local useSendItemImpressionsModule = require(profilePlatform.Hooks.useSendItemImpressions)
-local eventNamesModule = require(profilePlatform.Analytics.EventNames)
-local _ = require(profilePlatform.Common.Types)
-local appPage = require(parent.RobloxAppEnums).AppPage
-local useTextSizeOffset = require(parent.Foundation).Hooks.useTextSizeOffset
-local communityProfileAffiliatedExperienceTelemetryThrottlePermyriad = game:DefineFastInt("CommunityProfileAffiliatedExperienceTelemetryThrottlePermyriad", 0)
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local TelemetryService = game:GetService("TelemetryService")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
+local RoactAnalyticsCommonGameEvents = require(Parent.RoactServiceTags).RoactAnalyticsCommonGameEvents
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local TextKeysModule = require(ProfilePlatform.Common.TextKeys)
+local ContentType = require(Parent.UnifiedLogging).ContentType
+local CryoModule = require(Parent.Cryo)
+local SquareCollectionGridViewModule = require(ProfilePlatform.BaseComponents.CollectionGridViews.SquareCollectionGridView)
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local UseRenderExperienceTileModule = require(ProfilePlatform.Hooks.Tiles.useRenderExperienceTile)
+local UseProfileAnalyticsContextModule = require(ProfilePlatform.Contexts.useProfileAnalyticsContext)
+local UseProfileWrapperContextModule = require(ProfilePlatform.Contexts.useProfileWrapperContext)
+local FormatExperienceDetailsForImpressionsModule = require(ProfilePlatform.Hooks.formatExperienceDetailsForImpressions)
+local UseGenerateImpressionsTagModule = require(ProfilePlatform.Hooks.useGenerateImpressionsTag)
+local UseSendItemImpressionsModule = require(ProfilePlatform.Hooks.useSendItemImpressions)
+local EventNamesModule = require(ProfilePlatform.Analytics.EventNames)
+local _ = require(ProfilePlatform.Common.Types)
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local UseTextSizeOffsetFunction = require(Parent.Foundation).Hooks.useTextSizeOffset
+local CommunityProfileAffiliatedExperienceTelemetryThrottlePermyriad = game:DefineFastInt("CommunityProfileAffiliatedExperienceTelemetryThrottlePermyriad", 0)
 
-local function _(p1)
-	return function(p2)
-		-- upvalues: p1 (ref)
+local function _(p1) --[[ Line: 40 | Named "getTextSizeAdjustedSquareExperienceTileHeight" ]]
+	return function(p2: number): number --[[ Line: 41 ]]
+		-- upvalues: p1 (copy)
 		return p2 + 80 + p1 * 3
 	end
 end
 
-return function(p1)
-	-- upvalues: useTextSizeOffset (ref), reactModule (ref), useProfileAnalyticsContextModule (ref), useProfileWrapperContextModule (ref), useRoactService (ref), roactAnalyticsCommonGameEvents (ref), useGenerateImpressionsTagModule (ref), enumsModule (ref), formatExperienceDetailsForImpressionsModule (ref), useSendItemImpressionsModule (ref), contentType (ref), eventNamesModule (ref), communityProfileAffiliatedExperienceTelemetryThrottlePermyriad (ref), telemetryService (ref), appPage (ref), useRenderExperienceTileModule (ref), useLocalization (ref), textKeysModule (ref), cryoModule (ref), squareCollectionGridViewModule (ref)
-	local experienceDetails = p1.experienceDetails
-	local _ = nil
-	local _ = nil
-	local var1 = useTextSizeOffset()
-	local var2 = reactModule.useMemo(function()
-		-- upvalues: var1 (write)
-		return function(p2)
-			-- upvalues: var1 (ref)
-			return p2 + 80 + var1 * 3
+return function(p1) --[[ Line: 46 | Named "Experiences" ]]
+	-- upvalues: UseTextSizeOffsetFunction (copy), ReactModule (copy), UseProfileAnalyticsContextModule (copy), UseProfileWrapperContextModule (copy), UseRoactServiceFunction (copy), RoactAnalyticsCommonGameEvents (copy), UseGenerateImpressionsTagModule (copy), EnumsModule (copy), FormatExperienceDetailsForImpressionsModule (copy), UseSendItemImpressionsModule (copy), ContentType (copy), EventNamesModule (copy), CommunityProfileAffiliatedExperienceTelemetryThrottlePermyriad (copy), TelemetryService (copy), AppPage (copy), UseRenderExperienceTileModule (copy), UseLocalizationFunction (copy), TextKeysModule (copy), CryoModule (copy), SquareCollectionGridViewModule (copy)
+	local ExperienceDetails = p1.experienceDetails
+	local UseTextSizeOffsetResult = nil
+	UseTextSizeOffsetResult = UseTextSizeOffsetFunction()
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 50 ]]
+		-- upvalues: UseTextSizeOffsetResult (ref)
+		local UseTextSizeOffsetResult1 = UseTextSizeOffsetResult
+		
+		return function(p2: number): number --[[ Line: 41 ]]
+			-- upvalues: UseTextSizeOffsetResult1 (copy)
+			return p2 + 80 + UseTextSizeOffsetResult1 * 3
 		end
-	end, { var1 })
-	local var3 = useProfileAnalyticsContextModule()
-	local var4 = useProfileWrapperContextModule()
-	local var5 = useRoactService(roactAnalyticsCommonGameEvents)
-	local var6 = useGenerateImpressionsTagModule(enumsModule.Components.Experiences)
+	end, { UseTextSizeOffsetResult })
+	local UseProfileAnalyticsContextModuleResult = UseProfileAnalyticsContextModule()
+	local UseProfileWrapperContextModuleResult = UseProfileWrapperContextModule()
+	local UseRoactServiceResult = UseRoactServiceFunction(RoactAnalyticsCommonGameEvents)
+	local UseGenerateImpressionsTagModuleResult = UseGenerateImpressionsTagModule(EnumsModule.Components.Experiences)
+	local UseSendItemImpressionsModuleResult = UseSendItemImpressionsModule(ReactModule.useMemo(function() --[[ Line: 58 ]]
+		-- upvalues: FormatExperienceDetailsForImpressionsModule (upval), ExperienceDetails (copy)
+		return FormatExperienceDetailsForImpressionsModule(ExperienceDetails)
+	end, { ExperienceDetails }), 3, ContentType.Game, p1.layoutOrder, EnumsModule.Components.Experiences)
+	local ProfileExperienceTile = UseRenderExperienceTileModule(UseGenerateImpressionsTagModuleResult, "ProfileExperienceTile", ReactModule.useCallback(function(p2, PositionInComponent, p3) --[[ Line: 70 ]]
+		-- upvalues: UseProfileAnalyticsContextModuleResult (copy), EventNamesModule (upval), CommunityProfileAffiliatedExperienceTelemetryThrottlePermyriad (upval), UseProfileWrapperContextModuleResult (copy), TelemetryService (upval), ExperienceDetails (copy), UseRoactServiceResult (copy), AppPage (upval), p1 (copy)
+		UseProfileAnalyticsContextModuleResult.fireAnalyticsEvent(EventNamesModule.ExperienceOpened, {
+			experienceId = p2.experienceId,
+			positionInComponent = PositionInComponent
+		})
+		TelemetryService:LogEvent({
+			eventName = "communityAffiliatedExperienceClick",
+			description = "Event fired from the client every time an experience is clicked from a community profile",
+			links = "https://github.rbx.com/Roblox/proto-schemas/pull/6250",
+			backends = { "EventIngest" },
+			throttlingPercentage = CommunityProfileAffiliatedExperienceTelemetryThrottlePermyriad,
+			lastUpdated = { 25, 6, 5 }
+		}, {
+			customFields = {
+				affiliationType = "owner",
+				community_id = UseProfileWrapperContextModuleResult.profileId,
+				place_id = p2.rootPlaceId,
+				universe_id = p2.experienceId
+			}
+		})
+		UseRoactServiceResult.reportOpenGameDetailFromProfile(p2.rootPlaceId, PositionInComponent, if ExperienceDetails then #ExperienceDetails else 0, p2.experienceId, AppPage.ProfilePlatform, p1.layoutOrder, p3 or 1, nil)
+	end, {
+		UseProfileAnalyticsContextModuleResult,
+		ExperienceDetails,
+		UseRoactServiceResult,
+		p1.layoutOrder
+	}), true)
+	local UseLocalizationResult = UseLocalizationFunction({ title = TextKeysModule.Experiences })
 	
-	return if experienceDetails and not cryoModule.isEmpty(experienceDetails) then reactModule.createElement(squareCollectionGridViewModule, {
+	return if ExperienceDetails and not CryoModule.isEmpty(ExperienceDetails) then ReactModule.createElement(SquareCollectionGridViewModule, {
 		hideHeaderButton = true,
 		maxNumRows = 1,
-		getItemHeight = var2,
-		items = experienceDetails,
+		getItemHeight = UseMemoResult,
+		items = ExperienceDetails,
 		layoutOrder = p1.layoutOrder,
-		renderItem = useRenderExperienceTileModule(var6, "ProfileExperienceTile", reactModule.useCallback(function(p2, p3, p4)
-			-- upvalues: var3 (ref), eventNamesModule (copy), communityProfileAffiliatedExperienceTelemetryThrottlePermyriad (copy), var4 (ref), telemetryService (copy), experienceDetails (ref), var5 (ref), appPage (copy), p1 (ref)
-			var3.fireAnalyticsEvent(eventNamesModule.ExperienceOpened, { experienceId = p2.experienceId, positionInComponent = p3 })
-			telemetryService:LogEvent({
-				eventName = "communityAffiliatedExperienceClick",
-				description = "Event fired from the client every time an experience is clicked from a community profile",
-				links = "https://github.rbx.com/Roblox/proto-schemas/pull/6250",
-				backends = { "EventIngest" },
-				throttlingPercentage = communityProfileAffiliatedExperienceTelemetryThrottlePermyriad,
-				lastUpdated = { 25, 6, 5 }
-			}, {
-				customFields = {
-					affiliationType = "owner",
-					community_id = var4.profileId,
-					place_id = p2.rootPlaceId,
-					universe_id = p2.experienceId
-				}
-			})
-			var5.reportOpenGameDetailFromProfile(p2.rootPlaceId, p3, if experienceDetails then #experienceDetails else 0, p2.experienceId, appPage.ProfilePlatform, p1.layoutOrder, p4 or 1, nil)
-		end, { var3, experienceDetails, var5, p1.layoutOrder }), true),
-		title = useLocalization({ title = textKeysModule.Experiences }).title,
-		impressionsTag = var6,
-		sendImpressions = useSendItemImpressionsModule(reactModule.useMemo(function()
-			-- upvalues: formatExperienceDetailsForImpressionsModule (copy), experienceDetails (ref)
-			return formatExperienceDetailsForImpressionsModule(experienceDetails)
-		end, { experienceDetails }), 3, contentType.Game, p1.layoutOrder, enumsModule.Components.Experiences),
+		renderItem = ProfileExperienceTile,
+		title = UseLocalizationResult.title,
+		impressionsTag = UseGenerateImpressionsTagModuleResult,
+		sendImpressions = UseSendItemImpressionsModuleResult,
 		overrides = { numColumns = 3 }
 	}) else nil
 end

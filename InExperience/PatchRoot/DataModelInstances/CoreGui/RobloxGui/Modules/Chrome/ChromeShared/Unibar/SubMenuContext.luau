@@ -1,1 +1,1 @@
-﻿return require(game:GetService("CorePackages").Packages.React).createContext(nil)
+﻿return (require(game:GetService("CorePackages").Packages.React).createContext(nil))

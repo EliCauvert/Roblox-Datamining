@@ -1,179 +1,173 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local guiService = game:GetService("GuiService")
-local parent = script.Parent.Parent
-local roactModule = require(corePackagesService.Packages.Roact)
-local cryoModule = require(corePackagesService.Packages.Cryo)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local skeleton = require(corePackagesService.Packages.Foundation).Skeleton
-local playerListModule = require(corePackagesService.Workspace.Packages.PlayerList)
-local assetCardModule = require(parent.Components.AssetCard)
-local inspectAndBuyContextModule = require(parent.Components.InspectAndBuyContext)
-local setAssetFromBundleInfoModule = require(parent.Actions.SetAssetFromBundleInfo)
-local fFlagAddNewPlayerListMobileFocusNav = playerListModule.Flags.FFlagAddNewPlayerListMobileFocusNav
-local assetList = roactModule.PureComponent:extend("AssetList")
+﻿local CorePackages = game:GetService("CorePackages")
+local GuiService = game:GetService("GuiService")
+local Parent = script.Parent.Parent
+local RoactModule = require(CorePackages.Packages.Roact)
+local CryoModule = require(CorePackages.Packages.Cryo)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local Skeleton = require(CorePackages.Packages.Foundation).Skeleton
+local AssetCardModule = require(Parent.Components.AssetCard)
+local InspectAndBuyContextModule = require(Parent.Components.InspectAndBuyContext)
+local SetAssetFromBundleInfoModule = require(Parent.Actions.SetAssetFromBundleInfo)
+local FFlagAddNewPlayerListMobileFocusNav = require(CorePackages.Workspace.Packages.PlayerList).Flags.FFlagAddNewPlayerListMobileFocusNav
+local AssetList = RoactModule.PureComponent:extend("AssetList")
 
-function assetList.calculateCanvasSize(p1, p2, p3, p4)
-	local current = p1.gridFrameRef.current
-	local _ = nil
-	local view = p1.props.views[p1.props.view]
+function AssetList.calculateCanvasSize(p1, MaxAssetCardsPerRow, Count, AssetCardSizeY: number) --[[ Line: 25 ]]
+	local Current = p1.gridFrameRef.current
+	local View = p1.props.views[p1.props.view]
 	
-	if current then
-		current.Parent.CanvasSize = UDim2.new(1, 0, 0, math.ceil(p3 / p2) * (p4 + 10) + (view.TopSizeY + 15))
+	if Current then
+		Current.Parent.CanvasSize = UDim2.new(1, 0, 0, math.ceil(Count / MaxAssetCardsPerRow) * (AssetCardSizeY + 10) + (View.TopSizeY + 15))
 	end
 end
 
-function assetList.init(p1)
-	-- upvalues: roactModule (ref), fFlagAddNewPlayerListMobileFocusNav (ref)
-	local _ = nil
-	local view = p1.props.views[p1.props.view]
-	p1.gridFrameRef = roactModule.createRef()
+function AssetList.init(p1) --[[ Line: 38 ]]
+	-- upvalues: RoactModule (copy), FFlagAddNewPlayerListMobileFocusNav (copy)
+	local View = p1.props.views[p1.props.view]
+	p1.gridFrameRef = RoactModule.createRef()
 	p1.state = {
-		assetCardSizeX = view.AssetCardMaxSizeX,
-		assetCardSizeY = view.AssetCardMaxSizeY,
-		assetCardsLoaded = if fFlagAddNewPlayerListMobileFocusNav then false else nil
+		assetCardSizeX = View.AssetCardMaxSizeX,
+		assetCardSizeY = View.AssetCardMaxSizeY,
+		assetCardsLoaded = not FFlagAddNewPlayerListMobileFocusNav and nil
 	}
 end
 
-function assetList.render(p1)
-	-- upvalues: roactModule (ref), assetCardModule (ref), skeleton (ref), fFlagAddNewPlayerListMobileFocusNav (ref)
-	local _ = nil
-	local view = p1.props.views[p1.props.view]
-	local assets = p1.props.assets
-	local maxAssetCardsPerRow = view.MaxAssetCardsPerRow
-	local assetCardSizeX = p1.state.assetCardSizeX
-	local assetCardSizeY = p1.state.assetCardSizeY
-	local t = {
-		UIGridLayout = roactModule.createElement("UIGridLayout", {
+function AssetList.render(p1) --[[ Line: 52 ]]
+	-- upvalues: RoactModule (copy), AssetCardModule (copy), Skeleton (copy), FFlagAddNewPlayerListMobileFocusNav (copy)
+	local View = p1.props.views[p1.props.view]
+	local MaxAssetCardsPerRow = View.MaxAssetCardsPerRow
+	local AssetCardSizeX = p1.state.assetCardSizeX
+	local AssetCardSizeY = p1.state.assetCardSizeY
+	local Count = 0
+	local Elements = {
+		UIGridLayout = RoactModule.createElement("UIGridLayout", {
 			CellPadding = UDim2.new(0, 10, 0, 10),
-			CellSize = UDim2.new(0, assetCardSizeX, 0, assetCardSizeY),
+			CellSize = UDim2.new(0, AssetCardSizeX, 0, AssetCardSizeY),
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			HorizontalAlignment = Enum.HorizontalAlignment.Left,
 			VerticalAlignment = Enum.VerticalAlignment.Top,
-			FillDirectionMaxCells = maxAssetCardsPerRow
+			FillDirectionMaxCells = MaxAssetCardsPerRow
 		})
 	}
-	local var1 = 0
 	
-	for i, v in pairs(assets) do
-		var1 += 1
-		t[v.assetId] = roactModule.createElement(assetCardModule, { assetInfo = v, assetCardSizeX = assetCardSizeX })
+	for _, asset in pairs(p1.props.assets) do
+		Count += 1
+		Elements[asset.assetId] = RoactModule.createElement(AssetCardModule, { assetInfo = asset, assetCardSizeX = AssetCardSizeX })
 	end
-	if var1 == 0 then
-		for i_1 = 1, 30 do
-			t[i_1] = roactModule.createElement(skeleton, { Size = UDim2.new(1, 0, 0, assetCardSizeX) })
+	if Count == 0 then
+		for i = 1, 30 do
+			Elements[i] = RoactModule.createElement(Skeleton, { Size = UDim2.new(1, 0, 0, AssetCardSizeX) })
 		end
-	elseif fFlagAddNewPlayerListMobileFocusNav then
+	elseif FFlagAddNewPlayerListMobileFocusNav then
 		p1:setState({ assetCardsLoaded = true })
 	end
-	p1:calculateCanvasSize(maxAssetCardsPerRow, var1, assetCardSizeY)
+	p1:calculateCanvasSize(MaxAssetCardsPerRow, Count, AssetCardSizeY)
 	
-	return roactModule.createElement("Frame", {
-		Size = UDim2.new(1, -(2 * view.BorderPaddingSize), 1, 0),
+	return RoactModule.createElement("Frame", {
+		Size = UDim2.new(1, -(2 * View.BorderPaddingSize), 1, 0),
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
 		LayoutOrder = 3,
-		[roactModule.Ref] = p1.gridFrameRef,
-		[roactModule.Change.AbsoluteSize] = function(_)
-			-- upvalues: p1 (ref)
-			spawn(function()
-				-- upvalues: p1 (copy)
+		[RoactModule.Ref] = p1.gridFrameRef,
+		[RoactModule.Change.AbsoluteSize] = function(_) --[[ Line: 104 ]]
+			-- upvalues: p1 (copy)
+			spawn(function() --[[ Line: 105 ]]
+				-- upvalues: p1 (upval)
 				p1:resize()
 			end)
 		end
-	}, t)
+	}, Elements)
 end
 
-function assetList.didMount(p2)
+function AssetList.didMount(p2) --[[ Line: 112 ]]
 	p2:resize()
 	p2.mounted = true
 end
 
-function assetList.updateAssetsFromBundles(value)
-	-- upvalues: cryoModule (ref)
-	local bundles = value.props.bundles
-	local assetBundles = value.props.assetBundles
-	local assets = value.props.assets
-	local var2 = cryoModule.Dictionary.keys(assets)
+function AssetList.updateAssetsFromBundles(p2) --[[ Line: 126 ]]
+	-- upvalues: CryoModule (copy)
+	local Bundles = p2.props.bundles
+	local AssetBundles = p2.props.assetBundles
+	local Assets = p2.props.assets
+	local KeysResult = CryoModule.Dictionary.keys(Assets)
 	
-	if not bundles or cryoModule.isEmpty(bundles) then return end
-	local var3 = 1
+	if not Bundles or CryoModule.isEmpty(Bundles) then return end
+	local Count = 1
 	
-	for i, v in pairs(bundles) do
-		local assetIds = v.assetIds
+	for _, bundle in pairs(Bundles) do
+		local AssetIds = bundle.assetIds
 		
-		for i_1 = 1, #assetIds do
-			local var4 = tostring(assetIds[i_1])
+		for i = 1, #AssetIds do
+			local Text = tostring(AssetIds[i])
 			
-			if table.find(var2, var4) then
-				local var5 = assetBundles[var4] or {}
+			if table.find(KeysResult, Text) then
+				local AssetBundle = AssetBundles[Text] or {}
 				
-				if #var5 == 1 or var3 == 1 and #var5 > 1 and (assets[var4] and assets[var4].parentBundleId == nil) then
-					value.props.dispatchSetAssetFromBundleInfo(var4, v)
+				if #AssetBundle == 1 or Count == 1 and #AssetBundle > 1 and Assets[Text] and Assets[Text].parentBundleId == nil then
+					p2.props.dispatchSetAssetFromBundleInfo(Text, bundle)
 				end
 			end
 		end
-		var3 += 1
+		Count += 1
 	end
 end
 
-function assetList.didUpdate(p2, p3)
-	-- upvalues: fFlagAddNewPlayerListMobileFocusNav (ref), guiService (ref)
-	if p2.props.view ~= p3.view then
-		p2:resize()
+function AssetList.didUpdate(p3, p4) --[[ Line: 166 ]]
+	-- upvalues: FFlagAddNewPlayerListMobileFocusNav (copy), GuiService (copy)
+	if p3.props.view ~= p4.view then
+		p3:resize()
 	end
-	if p2.mounted and p2.props.gamepadEnabled and (not p2.props.detailsInformation.viewingDetails and p2.props.visible) and (if fFlagAddNewPlayerListMobileFocusNav then p2.state.assetCardsLoaded else true) then
-		guiService.SelectedCoreObject = p2.gridFrameRef.current:FindFirstChildWhichIsA("GuiObject")
+	if p3.mounted and p3.props.gamepadEnabled and not p3.props.detailsInformation.viewingDetails and p3.props.visible and (not FFlagAddNewPlayerListMobileFocusNav or p3.state.assetCardsLoaded) then
+		GuiService.SelectedCoreObject = p3.gridFrameRef.current:FindFirstChildWhichIsA("GuiObject")
 	end
-	if p2.props.assetBundles ~= p3.assetBundles or p2.props.bundles ~= p3.bundles then
-		p2:updateAssetsFromBundles()
+	if p3.props.assetBundles ~= p4.assetBundles or p3.props.bundles ~= p4.bundles then
+		p3:updateAssetsFromBundles()
 	end
 end
 
-function assetList.willUnmount(p2)
-	p2.mounted = false
+function AssetList.willUnmount(p3) --[[ Line: 186 ]]
+	p3.mounted = false
 end
 
-function assetList.resize(p2)
-	local current = p2.gridFrameRef.current
-	local _ = nil
-	local view = p2.props.views[p2.props.view]
+function AssetList.resize(p3) --[[ Line: 190 ]]
+	local Current = p3.gridFrameRef.current
+	local View = p3.props.views[p3.props.view]
 	
-	if current then
-		local maxAssetCardsPerRow = view.MaxAssetCardsPerRow
-		local floored = math.floor((current.AbsoluteSize.X - 10 * (maxAssetCardsPerRow - 1)) / maxAssetCardsPerRow)
-		local minValue = math.min(floored, view.AssetCardMaxSizeX)
-		local minValue_1 = math.min(floored / 0.68, view.AssetCardMaxSizeY)
+	if Current then
+		local MaxAssetCardsPerRow: number = View.MaxAssetCardsPerRow
+		local Floored = math.floor((Current.AbsoluteSize.X - 10 * (MaxAssetCardsPerRow - 1)) / MaxAssetCardsPerRow)
+		local Smallest = math.min(Floored, View.AssetCardMaxSizeX)
+		local Smallest1 = math.min(Floored / 0.68, View.AssetCardMaxSizeY)
 		
-		if p2.state.assetCardSizeX ~= minValue or p2.state.assetCardSizeY ~= minValue_1 then
-			p2:setState({ assetCardSizeX = minValue, assetCardSizeY = minValue_1 })
+		if p3.state.assetCardSizeX ~= Smallest or p3.state.assetCardSizeY ~= Smallest1 then
+			p3:setState({ assetCardSizeX = Smallest, assetCardSizeY = Smallest1 })
 		end
 	end
 end
 
-return roactRoduxModule.connect(function(p2, _)
+return RoactRoduxModule.connect(function(p3, _) --[[ Line: 221 ]]
 	return {
-		view = p2.view,
-		visible = p2.visible,
-		assets = p2.assets,
-		bundles = p2.bundles,
-		assetBundles = p2.assetBundles,
-		detailsInformation = p2.detailsInformation,
-		gamepadEnabled = p2.gamepadEnabled
+		view = p3.view,
+		visible = p3.visible,
+		assets = p3.assets,
+		bundles = p3.bundles,
+		assetBundles = p3.assetBundles,
+		detailsInformation = p3.detailsInformation,
+		gamepadEnabled = p3.gamepadEnabled
 	}
-end, function(p2)
-	-- upvalues: setAssetFromBundleInfoModule (ref)
+end, function(Callback) --[[ Line: 231 ]]
+	-- upvalues: SetAssetFromBundleInfoModule (copy)
 	return {
-		dispatchSetAssetFromBundleInfo = function(value, p3)
-			-- upvalues: p2 (ref), setAssetFromBundleInfoModule (copy)
-			p2(setAssetFromBundleInfoModule(value, p3))
+		dispatchSetAssetFromBundleInfo = function(p3, p4) --[[ Line: 233 ]]
+			-- upvalues: Callback (copy), SetAssetFromBundleInfoModule (upval)
+			Callback(SetAssetFromBundleInfoModule(p3, p4))
 		end
 	}
-end)(function(value)
-	-- upvalues: roactModule (ref), inspectAndBuyContextModule (ref), cryoModule (ref), assetList (ref)
-	return roactModule.createElement(inspectAndBuyContextModule.Consumer, {
-		render = function(p2)
-			-- upvalues: cryoModule (copy), value (ref), roactModule (copy), assetList (copy)
-			return roactModule.createElement(assetList, cryoModule.Dictionary.join(value, { views = p2 }))
+end)(function(p3) --[[ Line: 212 | Named "AssetListWrapper" ]]
+	-- upvalues: RoactModule (copy), InspectAndBuyContextModule (copy), CryoModule (copy), AssetList (copy)
+	return RoactModule.createElement(InspectAndBuyContextModule.Consumer, {
+		render = function(Views) --[[ Line: 214 ]]
+			-- upvalues: CryoModule (upval), p3 (copy), RoactModule (upval), AssetList (upval)
+			return RoactModule.createElement(AssetList, (CryoModule.Dictionary.join(p3, { views = Views })))
 		end
 	})
 end)

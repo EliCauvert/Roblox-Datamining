@@ -1,1 +1,1 @@
-﻿return require(script.AppShortcutBarContainer)
+﻿return (require(script.AppShortcutBarContainer))

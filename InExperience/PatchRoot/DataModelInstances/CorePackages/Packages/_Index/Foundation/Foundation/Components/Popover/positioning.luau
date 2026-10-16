@@ -1,134 +1,136 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local flagsModule = require(foundation.Utility.Flags)
-local popoverAlignModule = require(foundation.Enums.PopoverAlign)
-local popoverSideModule = require(foundation.Enums.PopoverSide)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local FlagsModule = require(Foundation.Utility.Flags)
+local PopoverAlignModule = require(Foundation.Enums.PopoverAlign)
+local PopoverSideModule = require(Foundation.Enums.PopoverSide)
 
 return {
-	adjustForOnScreenKeyboard = function(p1, p2, p3)
-		return Rect.new(p1.Min, Vector2.new(p1.Max.X, math.min(p1.Max.Y, (p2 - p3).Y)))
+	adjustForOnScreenKeyboard = function(p1, p2, p3): Rect --[[ Line: 94 ]]
+		return Rect.new(p1.Min, Vector2.new(p1.Max.X, (math.min(p1.Max.Y, (p2 - p3).Y))))
 	end,
-	isOnScreen = function(p1, p2)
-		return p2.Max.X < p1.Min.X or p1.Max.X < p2.Min.X or (p2.Max.Y < p1.Min.Y or p1.Max.Y < p2.Min.Y)
+	isOnScreen = function(p1, p2): boolean --[[ Line: 26 ]]
+		return p2.Max.X >= p1.Min.X and p1.Max.X >= p2.Min.X and p2.Max.Y >= p1.Min.Y and p1.Max.Y >= p2.Min.Y
 	end,
-	calculateSide = function(p1, p2, p3, p4)
-		-- upvalues: popoverSideModule (ref)
-		if p1 == popoverSideModule.Top then
-			if p2.Min.Y - p4.Y < p3.Min.Y and p2.Max.Y + p4.Y < p3.Max.Y then
-				return popoverSideModule.Bottom
+	calculateSide = function(Bottom, p1, p2, Vector) --[[ Line: 39 ]]
+		-- upvalues: PopoverSideModule (copy)
+		if Bottom == PopoverSideModule.Top then
+			if p1.Min.Y - Vector.Y < p2.Min.Y and p1.Max.Y + Vector.Y < p2.Max.Y then
+				return PopoverSideModule.Bottom
 			end
-		elseif p1 == popoverSideModule.Bottom then
-			if p3.Max.Y < p2.Max.Y + p4.Y and p3.Min.Y < p2.Min.Y - p4.Y then
-				return popoverSideModule.Top
+		elseif Bottom == PopoverSideModule.Bottom then
+			if p2.Max.Y < p1.Max.Y + Vector.Y and p2.Min.Y < p1.Min.Y - Vector.Y then
+				return PopoverSideModule.Top
 			end
-		elseif p1 == popoverSideModule.Left then
-			if p2.Min.X - p4.X < p3.Min.X and p2.Max.X + p4.X < p3.Max.X then
-				return popoverSideModule.Right
+		elseif Bottom == PopoverSideModule.Left then
+			if p1.Min.X - Vector.X < p2.Min.X and p1.Max.X + Vector.X < p2.Max.X then
+				return PopoverSideModule.Right
 			end
-		else
-			return if p1 == popoverSideModule.Right and p3.Max.X < p2.Max.X + p4.X and p3.Min.X < p2.Min.X - p4.X then popoverSideModule.Left else p1
+		elseif Bottom == PopoverSideModule.Right and p2.Max.X < p1.Max.X + Vector.X and p2.Min.X < p1.Min.X - Vector.X then
+			return PopoverSideModule.Left
 		end
+		return Bottom
 	end,
-	calculatePositions = function(p1, p2, p3, p4, p5, p6, p7, p8)
-		-- upvalues: popoverSideModule (ref), popoverAlignModule (ref), flagsModule (ref)
-		local t = { X = 0, Y = 0 }
-		local t_1 = { X = 0, Y = 0 }
-		local t_2 = { X = 0, Y = 0 }
-		local var1 = if p1 ~= popoverSideModule.Top then p1 == popoverSideModule.Bottom else true
-		local var2 = if p1 ~= popoverSideModule.Top then p1 == popoverSideModule.Left else true
-		local var3 = "X"
-		local var4 = "Y"
-		local height = p5.Height
-		local x = p5.Min.X
-		local y = p5.Min.Y
-		local y_1 = p8.Y
-		local x_1 = p8.X
-		local x_2 = p5.Max.X
-		local y_2 = p5.Max.Y
-		local y_3 = p6.Min.Y
-		local y_4 = p6.Max.Y
-		local x_3 = p6.Min.X
-		local x_4 = p6.Max.X
+	calculatePositions = function(Top, p1: number, Center, p2: number, p3, p4, p5: number, Vector) --[[ Line: 103 ]]
+		-- upvalues: PopoverSideModule (copy), PopoverAlignModule (copy), FlagsModule (copy)
+		local Vector1 = { X = 0, Y = 0 }
+		local config = { X = 0, Y = 0 }
+		local config1 = { X = 0, Y = 0 }
+		local IsTopMatch: boolean = Top == PopoverSideModule.Top or Top == PopoverSideModule.Left
+		local v1 = "X"
+		local v2 = "Y"
+		local Height = p3.Height
+		local X = p3.Min.X
+		local Y = p3.Min.Y
+		local Y1 = Vector.Y
+		local X1 = Vector.X
+		local X2 = p3.Max.X
+		local Y2 = p3.Max.Y
+		local Y3 = p4.Min.Y
+		local Y4 = p4.Max.Y
+		local X3 = p4.Min.X
+		local X4 = p4.Max.X
 		
-		if var1 then
-			var3 = "Y"
-			var4 = "X"
-			height = p5.Width
-			x = p5.Min.Y
-			y = p5.Min.X
-			y_1 = p8.X
-			x_1 = p8.Y
-			x_2 = p5.Max.Y
-			y_2 = p5.Max.X
-			y_3 = p6.Min.X
-			y_4 = p6.Max.X
-			x_3 = p6.Min.Y
-			x_4 = p6.Max.Y
+		if Top == PopoverSideModule.Top or Top == PopoverSideModule.Bottom then
+			v1 = "Y"
+			v2 = "X"
+			Height = p3.Width
+			X = p3.Min.Y
+			Y = p3.Min.X
+			Y1 = Vector.X
+			X1 = Vector.Y
+			X2 = p3.Max.Y
+			Y2 = p3.Max.X
+			Y3 = p4.Min.X
+			Y4 = p4.Max.X
+			X3 = p4.Min.Y
+			X4 = p4.Max.Y
 		end
-		local var5 = p2 + p7
+		local v3 = p1 + p5
 		
-		if var2 then
-			t[var3] = x - var5 - x_1
-			t_1[var3] = x_1
+		if IsTopMatch then
+			Vector1[v1] = X - v3 - X1
+			config[v1] = X1
 		else
-			t[var3] = x_2 + var5
-			t_1[var3] = 0
+			Vector1[v1] = X2 + v3
+			config[v1] = 0
 		end
-		if p3 == popoverAlignModule.Start then
-			t[var4] = y + p4
-		elseif p3 == popoverAlignModule.Center then
-			t[var4] = y + height / 2 - y_1 / 2 + p4
+		if Center == PopoverAlignModule.Start then
+			Vector1[v2] = Y + p2
+		elseif Center == PopoverAlignModule.Center then
+			Vector1[v2] = Y + Height / 2 - Y1 / 2 + p2
 		else
-			t[var4] = y_2 + -p4
-			t_2[var4] = 1
+			Vector1[v2] = Y2 + -p2
+			config1[v2] = 1
 		end
-		local var6 = t[var4] - t_2[var4] * y_1
-		local var7 = var6 + y_1
+		local VectorEntryDelta = Vector1[v2] - config1[v2] * Y1
+		local NewVectorEntryDelta = VectorEntryDelta + Y1
 		
-		if var6 < y_3 then
-			t_2[var4] = 0
-			t[var4] = y_3
-		elseif y_4 < var7 then
-			t_2[var4] = 1
-			t[var4] = y_4
+		if VectorEntryDelta < Y3 then
+			config1[v2] = 0
+			Vector1[v2] = Y3
+		elseif Y4 < NewVectorEntryDelta then
+			config1[v2] = 1
+			Vector1[v2] = Y4
 		end
-		local var8 = t[var4] - t_2[var4] * y_1
-		local var9 = var8 + y_1
-		local maxValue = math.max(y, var8)
-		local minValue = math.min(y_2, var9)
-		t_1[var4] = (if maxValue <= minValue then (maxValue + minValue) / 2 elseif var9 < y then var9 - p7 else var8 + p7) - t[var4]
-		t[var3] = math.clamp(t[var3], x_3, math.max(x_4 - x_1 - var5, if flagsModule.FoundationPopoverClampMinBound then x_3 else 0))
-		t.X -= p6.Min.X
-		t.Y -= p6.Min.Y
+		local VectorEntryDelta1 = Vector1[v2] - config1[v2] * Y1
+		local NewVectorEntryDelta1 = VectorEntryDelta1 + Y1
+		local Largest = math.max(Y, VectorEntryDelta1)
+		local Smallest = math.min(Y2, NewVectorEntryDelta1)
+		config[v2] = (if Largest <= Smallest then (Largest + Smallest) / 2 elseif NewVectorEntryDelta1 < Y then NewVectorEntryDelta1 - p5 else VectorEntryDelta1 + p5) - Vector1[v2]
+		Vector1[v1] = math.clamp(Vector1[v1], X3, (math.max(X4 - X1 - v3, if FlagsModule.FoundationPopoverClampMinBound then X3 else 0)))
+		Vector1.X -= p4.Min.X
+		Vector1.Y -= p4.Min.Y
 		
-		return Vector2.new(t.X, t.Y), Vector2.new(t_1.X, t_1.Y), Vector2.new(t_2.X, t_2.Y)
+		return Vector2.new(Vector1.X, Vector1.Y), Vector2.new(config.X, config.Y), Vector2.new(config1.X, config1.Y)
 	end,
-	calculatePopoverBounds = function(p1, p2, p3, p4, p5)
-		-- upvalues: popoverSideModule (ref)
-		local var1 = p5
+	calculatePopoverBounds = function(Bottom, p1, X, p2, NewVector) --[[ Line: 10 ]]
+		-- upvalues: PopoverSideModule (copy)
+		local NewVector1 = NewVector
 		
-		if p1 == popoverSideModule.Top or p1 == popoverSideModule.Bottom then
-			var1 += Vector2.new(p3, p2 + p4)
+		if Bottom == PopoverSideModule.Top or Bottom == PopoverSideModule.Bottom then
+			NewVector1 += Vector2.new(X, p1 + p2)
 			
-			return var1
-		end
-		return var1 + Vector2.new(p2 + p4, p3)
-	end,
-	calculateAlign = function(p1, p2, p3, p4, p5)
-		-- upvalues: popoverSideModule (ref), popoverAlignModule (ref)
-		if if p1 ~= popoverSideModule.Top then p1 == popoverSideModule.Bottom else true then
-			if p2 == popoverAlignModule.Start then
-				if p4.Max.X < p3.Min.X + p5.X then
-					return popoverAlignModule.End
-				end
-			elseif p2 == popoverAlignModule.End and p3.Max.X - p5.X < p4.Min.X then
-				return popoverAlignModule.Start
-			end
-		elseif p2 == popoverAlignModule.Start then
-			if p4.Max.Y < p3.Min.Y + p5.Y then
-				return popoverAlignModule.End
-			end
+			return NewVector1
 		else
-			return if p2 == popoverAlignModule.End and p3.Max.Y - p5.Y < p4.Min.Y then popoverAlignModule.Start else p2
+			return NewVector1 + Vector2.new(p1 + p2, X)
 		end
+	end,
+	calculateAlign = function(Bottom, End, p1, p2, Vector) --[[ Line: 60 ]]
+		-- upvalues: PopoverSideModule (copy), PopoverAlignModule (copy)
+		if Bottom == PopoverSideModule.Top or Bottom == PopoverSideModule.Bottom then
+			if End == PopoverAlignModule.Start then
+				if p2.Max.X < p1.Min.X + Vector.X then
+					return PopoverAlignModule.End
+				end
+			elseif End == PopoverAlignModule.End and p1.Max.X - Vector.X < p2.Min.X then
+				return PopoverAlignModule.Start
+			end
+		elseif End == PopoverAlignModule.Start then
+			if p2.Max.Y < p1.Min.Y + Vector.Y then
+				return PopoverAlignModule.End
+			end
+		elseif End == PopoverAlignModule.End and p1.Max.Y - Vector.Y < p2.Min.Y then
+			return PopoverAlignModule.Start
+		end
+		return End
 	end
 }

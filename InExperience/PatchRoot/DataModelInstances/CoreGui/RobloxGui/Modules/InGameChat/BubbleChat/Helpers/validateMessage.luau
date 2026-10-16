@@ -1,18 +1,19 @@
-﻿local tModule = require(game:GetService("CorePackages").Packages.t)
-local constantsModule = require(script.Parent.Parent.Constants)
-local maybeAssertModule = require(script.Parent.maybeAssert)
+﻿local TModule = require(game:GetService("CorePackages").Packages.t)
+local ConstantsModule = require(script.Parent.Parent.Constants)
+local MaybeAssertModule = require(script.Parent.maybeAssert)
 
-return function(p1)
-	-- upvalues: maybeAssertModule (ref), tModule (ref), constantsModule (ref)
-	maybeAssertModule(tModule.string(p1))
+return function(Text) --[[ Line: 15 | Named "validateMessageText" ]]
+	-- upvalues: MaybeAssertModule (copy), TModule (copy), ConstantsModule (copy)
+	MaybeAssertModule(TModule.string(Text))
 	
-	if utf8.len(p1) == nil then
+	if utf8.len(Text) == nil then
 		return false
 	end
-	local charCount = utf8.len(utf8.nfcnormalize(p1))
+	local Length = utf8.len(utf8.nfcnormalize(Text))
 	
-	if constantsModule.MAX_MESSAGE_LENGTH < charCount then
-		return false, charCount
+	if ConstantsModule.MAX_MESSAGE_LENGTH < Length then
+		return false, Length
+	else
+		return true
 	end
-	return true
 end

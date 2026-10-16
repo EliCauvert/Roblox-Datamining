@@ -1,66 +1,65 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local inGameMenuDependenciesModule = require(corePackagesService.Packages.InGameMenuDependencies)
-local roact = inGameMenuDependenciesModule.Roact
-local roactRodux = inGameMenuDependenciesModule.RoactRodux
-local t = inGameMenuDependenciesModule.t
-local UIBlox = inGameMenuDependenciesModule.UIBlox
-local parent = script.Parent.Parent.Parent
-local globalConfigModule = require(parent.GlobalConfig)
-local assetsModule = require(parent.Resources.Assets)
-local openReportDialogModule = require(parent.Actions.OpenReportDialog)
-local imageSetButton = UIBlox.Core.ImageSet.ImageSetButton
-local foundationModule = require(corePackagesService.Packages.Foundation)
-local fFlagCoreUiMigrateUIBloxToFoundation = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
-local var1 = if fFlagCoreUiMigrateUIBloxToFoundation then foundationModule.UNSTABLE.withCursorMigration else UIBlox.App.SelectionImage.withSelectionCursorProvider
-local var2 = if fFlagCoreUiMigrateUIBloxToFoundation then foundationModule.Enums.CursorType else UIBlox.App.SelectionImage.CursorKind
-local image = foundationModule.Image
-local var3 = t.strictInterface({
-	userId = t.optional(t.integer),
-	userName = t.optional(t.string),
-	LayoutOrder = t.integer,
-	dispatchOpenReportDialog = t.callback
+﻿local CorePackages = game:GetService("CorePackages")
+local InGameMenuDependenciesModule = require(CorePackages.Packages.InGameMenuDependencies)
+local Roact = InGameMenuDependenciesModule.Roact
+local T = InGameMenuDependenciesModule.t
+local UIBlox = InGameMenuDependenciesModule.UIBlox
+local Parent = script.Parent.Parent.Parent
+local GlobalConfigModule = require(Parent.GlobalConfig)
+local AssetsModule = require(Parent.Resources.Assets)
+local OpenReportDialogModule = require(Parent.Actions.OpenReportDialog)
+local ImageSetButton = UIBlox.Core.ImageSet.ImageSetButton
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local FFlagCoreUiMigrateUIBloxToFoundation = require(CorePackages.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
+local WithCursorMigration = if FFlagCoreUiMigrateUIBloxToFoundation then FoundationModule.UNSTABLE.withCursorMigration else UIBlox.App.SelectionImage.withSelectionCursorProvider
+local CursorType = if FFlagCoreUiMigrateUIBloxToFoundation then FoundationModule.Enums.CursorType else UIBlox.App.SelectionImage.CursorKind
+local Image = FoundationModule.Image
+local StrictInterfaceResult = T.strictInterface({
+	userId = T.optional(T.integer),
+	userName = T.optional(T.string),
+	LayoutOrder = T.integer,
+	dispatchOpenReportDialog = T.callback
 })
 
-return roactRodux.UNSTABLE_connect2(nil, function(p1)
-	-- upvalues: openReportDialogModule (ref)
+return InGameMenuDependenciesModule.RoactRodux.UNSTABLE_connect2(nil, function(Callback) --[[ Line: 78 ]]
+	-- upvalues: OpenReportDialogModule (copy)
 	return {
-		dispatchOpenReportDialog = function(p2, p3)
-			-- upvalues: p1 (ref), openReportDialogModule (copy)
-			p1(openReportDialogModule(p2, p3))
+		dispatchOpenReportDialog = function(UserId, UserName) --[[ Line: 80 ]]
+			-- upvalues: Callback (copy), OpenReportDialogModule (upval)
+			Callback(OpenReportDialogModule(UserId, UserName))
 		end
 	}
-end)(function(p1)
-	-- upvalues: globalConfigModule (ref), var3 (ref), var1 (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), roact (ref), image (ref), assetsModule (ref), var2 (ref), imageSetButton (ref)
-	if globalConfigModule.propValidation then
-		assert(var3(p1))
+end)(function(Frame: Frame) --[[ Line: 37 | Named "ReportButton" ]]
+	-- upvalues: GlobalConfigModule (copy), StrictInterfaceResult (copy), WithCursorMigration (copy), FFlagCoreUiMigrateUIBloxToFoundation (copy), Roact (copy), Image (copy), AssetsModule (copy), CursorType (copy), ImageSetButton (copy)
+	if GlobalConfigModule.propValidation then
+		assert(StrictInterfaceResult(Frame))
 	end
-	return var1(function(p2)
-		-- upvalues: fFlagCoreUiMigrateUIBloxToFoundation (copy), roact (copy), image (copy), assetsModule (copy), p1 (ref), var2 (copy), imageSetButton (copy)
-		return if fFlagCoreUiMigrateUIBloxToFoundation then roact.createElement(image, {
-			Image = assetsModule.Images.ReportIcon,
+	return WithCursorMigration(function(Callback) --[[ Line: 42 ]]
+		-- upvalues: FFlagCoreUiMigrateUIBloxToFoundation (upval), Roact (upval), Image (upval), AssetsModule (upval), Frame (copy), CursorType (upval), ImageSetButton (upval)
+		return if FFlagCoreUiMigrateUIBloxToFoundation then Roact.createElement(Image, {
+			Image = AssetsModule.Images.ReportIcon,
 			Size = UDim2.new(0, 36, 0, 36),
 			backgroundStyle = { Transparency = 1 },
 			imageStyle = { Transparency = 0, Color3 = Color3.fromRGB(255, 255, 255) },
-			LayoutOrder = p1.LayoutOrder,
+			LayoutOrder = Frame.LayoutOrder,
 			selection = {
 				Selectable = false,
-				SelectionImageObject = p2(var2.RoundedRectNoInset)
+				SelectionImageObject = Callback(CursorType.RoundedRectNoInset)
 			},
-			onActivated = function()
-				-- upvalues: p1 (copy)
-				p1.dispatchOpenReportDialog(p1.userId, p1.userName)
+			onActivated = function() --[[ Line: 57 ]]
+				-- upvalues: Frame (upval)
+				Frame.dispatchOpenReportDialog(Frame.userId, Frame.userName)
 			end
-		}) else roact.createElement(imageSetButton, {
+		}) else Roact.createElement(ImageSetButton, {
 			Selectable = false,
-			Image = assetsModule.Images.ReportIcon,
+			Image = AssetsModule.Images.ReportIcon,
 			Size = UDim2.new(0, 36, 0, 36),
 			ImageColor3 = Color3.fromRGB(255, 255, 255),
 			BackgroundTransparency = 1,
-			LayoutOrder = p1.LayoutOrder,
-			SelectionImageObject = p2(var2.RoundedRectNoInset),
-			[roact.Event.Activated] = function()
-				-- upvalues: p1 (copy)
-				p1.dispatchOpenReportDialog(p1.userId, p1.userName)
+			LayoutOrder = Frame.LayoutOrder,
+			SelectionImageObject = Callback(CursorType.RoundedRectNoInset),
+			[Roact.Event.Activated] = function() --[[ Line: 70 ]]
+				-- upvalues: Frame (upval)
+				Frame.dispatchOpenReportDialog(Frame.userId, Frame.userName)
 			end
 		})
 	end)

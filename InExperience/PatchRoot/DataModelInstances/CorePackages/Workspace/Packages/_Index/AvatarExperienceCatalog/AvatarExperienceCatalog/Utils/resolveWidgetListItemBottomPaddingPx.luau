@@ -1,7 +1,7 @@
-﻿local widgetPaddingSizing = game:DefineFastInt("WidgetPaddingSizing", 32)
+﻿local WidgetPaddingSizing = game:DefineFastInt("WidgetPaddingSizing", 32)
 
-return function(p1)
-	-- upvalues: widgetPaddingSizing (ref)
+return function(p1) --[[ Line: 24 | Named "resolveWidgetListItemBottomPaddingPx" ]]
+	-- upvalues: WidgetPaddingSizing (copy)
 	local XXLarge = p1.Padding.XXLarge
 	
 	return ({
@@ -9,5 +9,5 @@ return function(p1)
 		[24] = p1.Padding.XXLarge,
 		[20] = p1.Padding.XLarge,
 		[16] = p1.Padding.Large
-	})[widgetPaddingSizing] or XXLarge
+	})[WidgetPaddingSizing] or XXLarge
 end

@@ -1,17 +1,38 @@
-﻿local parent = script.Parent.Parent
-local momentsCreationFlowModule = require(parent.Parent.MomentsCreationFlow)
-local creationFlowState = momentsCreationFlowModule.Enums.CreationFlowState
-local selectedCaptureUpdated = momentsCreationFlowModule.Actions.SelectedCaptureUpdated
-local creationFlowStateUpdated = momentsCreationFlowModule.Actions.CreationFlowStateUpdated
-local momentsCreationFlowOpenedModule = require(parent.Actions.MomentsCreationFlowOpened)
-local _ = require(parent.Types)
+﻿local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local MomentsCreationFlowOpenedModule = require(Parent.Actions.MomentsCreationFlowOpened)
+local _ = require(Parent.Types)
 
-return function(p1, p2)
-	-- upvalues: momentsCreationFlowOpenedModule (ref), creationFlowStateUpdated (ref), creationFlowState (ref), selectedCaptureUpdated (ref)
-	return function(p3)
-		-- upvalues: momentsCreationFlowOpenedModule (copy), p1 (ref), p2 (ref), creationFlowStateUpdated (copy), creationFlowState (copy), selectedCaptureUpdated (copy)
-		p3:dispatch(momentsCreationFlowOpenedModule(p1, p2))
-		p3:dispatch(creationFlowStateUpdated(creationFlowState.Preview))
-		p3:dispatch(selectedCaptureUpdated(p1))
+if require(Parent.Flags.FFlagCapturesInExpUseMomentsCreation) then
+	return function(p1, p2) --[[ Line: 9 ]]
+		-- upvalues: Parent (copy), Parent1 (copy), MomentsCreationFlowOpenedModule (copy)
+		return function(p3) --[[ Line: 10 ]]
+			-- upvalues: Parent (upval), Parent1 (upval), p1 (copy), MomentsCreationFlowOpenedModule (upval), p2 (copy)
+			if not p3:getState()[require(Parent.Constants).RoduxKey].MomentsCreationFlow.IsOpen then
+				local MomentsCreationModule = require(Parent1.MomentsCreation)
+				local CreationFlowStore = MomentsCreationModule.Stores.GetCreationFlowStore(false)
+				MomentsCreationModule.resetCreationFlow(MomentsCreationModule.Enums.CreationFlowState.Preview)
+				CreationFlowStore.onSelectedCaptureUpdated(p1)
+				MomentsCreationModule.beginCreationFlow("Captures")
+				p3:dispatch(MomentsCreationFlowOpenedModule(p1, p2))
+				
+				return
+			end
+		end
+	end
+else
+	local MomentsCreationFlowModule = require(Parent1.MomentsCreationFlow)
+	local CreationFlowState = MomentsCreationFlowModule.Enums.CreationFlowState
+	local SelectedCaptureUpdatedFunction = MomentsCreationFlowModule.Actions.SelectedCaptureUpdated
+	local CreationFlowStateUpdatedFunction = MomentsCreationFlowModule.Actions.CreationFlowStateUpdated
+	
+	return function(p1, p2) --[[ Line: 34 ]]
+		-- upvalues: MomentsCreationFlowOpenedModule (copy), CreationFlowStateUpdatedFunction (copy), CreationFlowState (copy), SelectedCaptureUpdatedFunction (copy)
+		return function(p3) --[[ Line: 35 ]]
+			-- upvalues: MomentsCreationFlowOpenedModule (upval), p1 (copy), p2 (copy), CreationFlowStateUpdatedFunction (upval), CreationFlowState (upval), SelectedCaptureUpdatedFunction (upval)
+			p3:dispatch(MomentsCreationFlowOpenedModule(p1, p2))
+			p3:dispatch(CreationFlowStateUpdatedFunction(CreationFlowState.Preview))
+			p3:dispatch(SelectedCaptureUpdatedFunction(p1))
+		end
 	end
 end

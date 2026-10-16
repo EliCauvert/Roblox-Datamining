@@ -1,50 +1,50 @@
-﻿local squadsCore = script:FindFirstAncestor("SquadsCore")
-local parent = squadsCore.Parent
-local loggerModule = require(squadsCore.Logger)
-local squadLocationEnumModule = require(squadsCore.Enums.SquadLocationEnum)
-local _ = require(squadsCore.Enums.SquadPromptType)
-local squadRccEventManagerModule = require(squadsCore.ServiceManager.SquadRccEventManager)
-local promiseModule = require(parent.Promise)
-local currentSquadUpdated = require(squadsCore.RoduxSquads).Actions.CurrentSquadUpdated
-local networkingSquadsModule = require(squadsCore.Http.NetworkingSquads)
-local getExperienceInviteRetryAfterStoreModule = require(squadsCore.Stores.GetExperienceInviteRetryAfterStore)
+﻿local SquadsCore = script:FindFirstAncestor("SquadsCore")
+local LoggerModule = require(SquadsCore.Logger)
+local SquadLocationEnumModule = require(SquadsCore.Enums.SquadLocationEnum)
+local _ = require(SquadsCore.Enums.SquadPromptType)
+local SquadRccEventManagerModule = require(SquadsCore.ServiceManager.SquadRccEventManager)
+local PromiseModule = require(SquadsCore.Parent.Promise)
+local CurrentSquadUpdatedFunction = require(SquadsCore.RoduxSquads).Actions.CurrentSquadUpdated
+local NetworkingSquadsModule = require(SquadsCore.Http.NetworkingSquads)
+local GetExperienceInviteRetryAfterStoreModule = require(SquadsCore.Stores.GetExperienceInviteRetryAfterStore)
 
-return function(p1, p2, p3, p4, p5)
-	-- upvalues: promiseModule (ref), squadLocationEnumModule (ref), squadRccEventManagerModule (ref), getExperienceInviteRetryAfterStoreModule (ref), currentSquadUpdated (ref), networkingSquadsModule (ref), loggerModule (ref)
-	return function(p6)
-		-- upvalues: promiseModule (copy), p3 (ref), p4 (ref), squadLocationEnumModule (copy), squadRccEventManagerModule (copy), p5 (ref), getExperienceInviteRetryAfterStoreModule (copy), currentSquadUpdated (copy), networkingSquadsModule (copy), loggerModule (copy), p1 (ref), p2 (ref)
-		local state = p6:getState()
-		local squadId = state.Squad and (state.Squad.Squad and (state.Squad.Squad.currentSquad and state.Squad.Squad.currentSquad.squadId))
+return function(PromptType, Callback, Callback1, InExperience, p1) --[[ Line: 16 ]]
+	-- upvalues: PromiseModule (copy), SquadLocationEnumModule (copy), SquadRccEventManagerModule (copy), GetExperienceInviteRetryAfterStoreModule (copy), CurrentSquadUpdatedFunction (copy), NetworkingSquadsModule (copy), LoggerModule (copy)
+	return function(p2) --[[ Line: 23 ]]
+		-- upvalues: PromiseModule (upval), Callback1 (copy), InExperience (copy), SquadLocationEnumModule (upval), SquadRccEventManagerModule (upval), p1 (copy), GetExperienceInviteRetryAfterStoreModule (upval), CurrentSquadUpdatedFunction (upval), NetworkingSquadsModule (upval), LoggerModule (upval), PromptType (copy), Callback (copy)
+		local State = p2:getState()
+		local SquadId = State.Squad and (State.Squad.Squad and (State.Squad.Squad.currentSquad and State.Squad.Squad.currentSquad.squadId))
 		
-		if not squadId then
-			return promiseModule.resolve()
+		if not SquadId then
+			return PromiseModule.resolve()
 		end
-		local var1 = function()
-			-- upvalues: p3 (copy), p4 (copy), squadLocationEnumModule (copy), squadRccEventManagerModule (copy), p5 (copy), getExperienceInviteRetryAfterStoreModule (copy), squadId (ref), p6 (ref), currentSquadUpdated (copy), networkingSquadsModule (copy), loggerModule (copy)
-			if p3 then
-				p3()
+		local function OnConfirm() --[[ Line: 35 ]]
+			-- upvalues: Callback1 (upval), InExperience (upval), SquadLocationEnumModule (upval), SquadRccEventManagerModule (upval), p1 (upval), GetExperienceInviteRetryAfterStoreModule (upval), SquadId (copy), p2 (copy), CurrentSquadUpdatedFunction (upval), NetworkingSquadsModule (upval), LoggerModule (upval)
+			if Callback1 then
+				Callback1()
 			end
-			if p4 == squadLocationEnumModule.InExperience then
-				squadRccEventManagerModule:setLeaveSquadPendingAndFireEvent(true, p5)
+			if InExperience == SquadLocationEnumModule.InExperience then
+				SquadRccEventManagerModule:setLeaveSquadPendingAndFireEvent(true, p1)
 			end
-			getExperienceInviteRetryAfterStoreModule(false).unblock(squadId)
-			p6:dispatch(currentSquadUpdated(nil))
-			p6:dispatch(networkingSquadsModule.LeaveSquad.API({ squadId = squadId })):andThen(function()
-				-- upvalues: p4 (copy), squadLocationEnumModule (copy), squadRccEventManagerModule (copy), p5 (copy)
-				if p4 == squadLocationEnumModule.InExperience then
-					squadRccEventManagerModule:setLeaveSquadPendingAndFireEvent(false, p5)
+			GetExperienceInviteRetryAfterStoreModule(false).unblock(SquadId)
+			p2:dispatch(CurrentSquadUpdatedFunction(nil))
+			p2:dispatch(NetworkingSquadsModule.LeaveSquad.API({ squadId = SquadId })):andThen(function() --[[ Line: 51 ]]
+				-- upvalues: InExperience (upval), SquadLocationEnumModule (upval), SquadRccEventManagerModule (upval), p1 (upval)
+				if InExperience == SquadLocationEnumModule.InExperience then
+					SquadRccEventManagerModule:setLeaveSquadPendingAndFireEvent(false, p1)
 				end
-			end):catch(function(p7)
-				-- upvalues: loggerModule (copy)
-				loggerModule:error("Error occured with NetworkingSquads.LeaveSquad: {}", tostring(p7))
+			end):catch(function(Err) --[[ Line: 56 ]]
+				-- upvalues: LoggerModule (upval)
+				LoggerModule:error("Error occured with NetworkingSquads.LeaveSquad: {}", (tostring(Err)))
 			end)
 		end
 		
-		if p1 then
-			return p2(p6, { onConfirm = var1, promptType = p1 })
+		if PromptType then
+			return Callback(p2, { onConfirm = OnConfirm, promptType = PromptType })
+		else
+			OnConfirm()
+			
+			return PromiseModule.resolve()
 		end
-		var1()
-		
-		return promiseModule.resolve()
 	end
 end

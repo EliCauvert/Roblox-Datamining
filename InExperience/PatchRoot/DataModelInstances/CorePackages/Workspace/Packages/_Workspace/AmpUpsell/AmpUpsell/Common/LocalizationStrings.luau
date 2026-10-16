@@ -1,36 +1,35 @@
-﻿local enumsModule = require(script.Parent.Enums)
+﻿local EnumsModule = require(script.Parent.Enums)
 local _ = require(script.Parent.Types)
-local actionTypeEnum = enumsModule.ActionTypeEnum
-local userSettingsSettingNameEnum = enumsModule.UserSettingsSettingNameEnum
-local VPCErrorCategoriesEnum = enumsModule.VPCErrorCategoriesEnum
-local t = {
-	[actionTypeEnum.GovernmentId] = {
+local ActionTypeEnum = EnumsModule.ActionTypeEnum
+local VPCErrorCategoriesEnum = EnumsModule.VPCErrorCategoriesEnum
+local AccountSettingsUpsellStrings = {
+	[ActionTypeEnum.GovernmentId] = {
 		title = "Feature.AgeVerificationUpsell.Modal.Title",
 		message = "Feature.AgeVerificationUpsell.Modal.ContentText",
 		buttonCancel = "Feature.AgeVerificationUpsell.Button.Cancel",
 		buttonSettings = "Feature.AgeVerificationUpsell.Button.Settings"
 	},
-	[actionTypeEnum.Phone] = {
+	[ActionTypeEnum.Phone] = {
 		title = "Amp.AccountSettingsUpsell.Phone.Modal.Title",
 		message = "Amp.AccountSettingsUpsell.Phone.Modal.ContentText",
 		buttonCancel = "Amp.AccountSettingsUpsell.Phone.Button.Cancel",
 		buttonSettings = "Amp.AccountSettingsUpsell.Phone.Button.Settings"
 	},
-	[actionTypeEnum.Email] = {
+	[ActionTypeEnum.Email] = {
 		title = "Amp.AccountSettingsUpsell.Email.Modal.Title",
 		message = "Amp.AccountSettingsUpsell.Email.Modal.ContentText",
 		buttonCancel = "Amp.AccountSettingsUpsell.Email.Button.Cancel",
 		buttonSettings = "Amp.AccountSettingsUpsell.Email.Button.Settings"
 	},
-	[actionTypeEnum.AddedEmail] = {
+	[ActionTypeEnum.AddedEmail] = {
 		title = "Amp.AccountSettingsUpsell.Email.Modal.Title",
 		message = "Amp.AccountSettingsUpsell.Email.Modal.ContentText",
 		buttonCancel = "Amp.AccountSettingsUpsell.Email.Button.Cancel",
 		buttonSettings = "Amp.AccountSettingsUpsell.Email.Button.Settings"
 	}
 }
-local t_1 = {
-	[userSettingsSettingNameEnum.AllowFacialAgeEstimation] = {
+local config = {
+	[EnumsModule.UserSettingsSettingNameEnum.AllowFacialAgeEstimation] = {
 		title = "Feature.AgeVerificationUpsell.Title.AgeSettingsRedirect",
 		message = "Feature.AgeVerificationUpsell.Body.AgeSettingsRedirect",
 		buttonCancel = "Feature.AgeVerificationUpsell.Button.Cancel",
@@ -39,18 +38,19 @@ local t_1 = {
 }
 
 return {
-	accountSettingsUpsellStringsFn = function(value)
-		-- upvalues: actionTypeEnum (ref), t_1 (ref), t (ref)
-		local action = value.action
+	accountSettingsUpsellStringsFn = function(p1) --[[ Line: 53 ]]
+		-- upvalues: ActionTypeEnum (copy), config (copy), AccountSettingsUpsellStrings (copy)
+		local Action = p1.action
 		
-		if action ~= actionTypeEnum.UserSettings then
-			return t[action]
+		if Action == ActionTypeEnum.UserSettings then
+			local UserSettings = p1.userSettings
+			
+			return if UserSettings and UserSettings.settingName then config[UserSettings.settingName] else nil
+		else
+			return AccountSettingsUpsellStrings[Action]
 		end
-		local userSettings = value.userSettings
-		
-		return if userSettings and userSettings.settingName then t_1[userSettings.settingName] else nil
 	end,
-	accountSettingsUpsellStrings = t,
+	accountSettingsUpsellStrings = AccountSettingsUpsellStrings,
 	idvWithQRCodeUpsellStrings = {
 		title = "Amp.IDVUpsell.Modal.Title",
 		beginText = "Amp.IDVUpsell.Modal.QRHeaderText",

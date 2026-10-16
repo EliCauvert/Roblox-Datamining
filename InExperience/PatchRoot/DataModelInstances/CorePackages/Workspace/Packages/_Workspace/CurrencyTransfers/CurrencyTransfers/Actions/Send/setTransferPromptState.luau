@@ -1,54 +1,53 @@
-﻿local currencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
-local _ = require(currencyTransfers.Stores.createTransferStore)
-local promptStateModule = require(currencyTransfers.Enums.PromptState)
-local _ = require(currencyTransfers.Models.InitiateTransferModel)
-local t = {
-	[promptStateModule.TransferRequested] = { promptStateModule.TransferStarted },
-	[promptStateModule.TransferStarted] = { promptStateModule.TransferInput },
-	[promptStateModule.TransferInput] = {
-		promptStateModule.TransferConfirm,
-		promptStateModule.TransferInsufficientBalance
+﻿local CurrencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
+local _ = require(CurrencyTransfers.Stores.createTransferStore)
+local PromptStateModule = require(CurrencyTransfers.Enums.PromptState)
+local _ = require(CurrencyTransfers.Models.InitiateTransferModel)
+local config = {
+	[PromptStateModule.TransferRequested] = { PromptStateModule.TransferStarted },
+	[PromptStateModule.TransferStarted] = { PromptStateModule.TransferInput },
+	[PromptStateModule.TransferInput] = {
+		PromptStateModule.TransferConfirm,
+		PromptStateModule.TransferInsufficientBalance
 	},
-	[promptStateModule.TransferInsufficientBalance] = {
-		promptStateModule.TransferInput,
-		promptStateModule.TransferConfirm
+	[PromptStateModule.TransferInsufficientBalance] = {
+		PromptStateModule.TransferInput,
+		PromptStateModule.TransferConfirm
 	},
-	[promptStateModule.TransferConfirm] = {
-		promptStateModule.TransferInput,
-		promptStateModule.TransferProcessing,
-		promptStateModule.TransferConfirm,
-		promptStateModule.TransferInsufficientBalance
+	[PromptStateModule.TransferConfirm] = {
+		PromptStateModule.TransferInput,
+		PromptStateModule.TransferProcessing,
+		PromptStateModule.TransferConfirm,
+		PromptStateModule.TransferInsufficientBalance
 	},
-	[promptStateModule.TransferProcessing] = { promptStateModule.TransferSuccess }
+	[PromptStateModule.TransferProcessing] = { PromptStateModule.TransferSuccess }
 }
 
-local function _(p1, p2)
-	-- upvalues: t (ref)
-	for i, v in ipairs(t[p1]) do
-		if v == p2 then
+local function _(p1, p2): boolean --[[ Line: 26 | Named "isValidPromptStateTransition" ]]
+	-- upvalues: config (copy)
+	for _, value in ipairs(config[p1]) do
+		if value == p2 then
 			return true
 		end
 	end
 	return false
 end
 
-return function(value, p3)
-	-- upvalues: t (ref), promptStateModule (ref)
-	local var1
-	local setPromptState = value.setPromptState
+return function(p3, p4) --[[ Line: 36 | Named "setTransferPromptState" ]]
+	-- upvalues: config (copy), PromptStateModule (copy)
+	local SetPromptStateFunction: (any) -> () = p3.setPromptState
+	local Flag = false
 	
-	for i, v in ipairs(t[value.getPromptState(false)]) do
-		if v == p3 then
-			var1 = true
-			if var1 then
-				setPromptState(p3)
-				
-				return
-			end
-			setPromptState(promptStateModule.TransferError)
-			
-			return
+	for _, value in ipairs(config[p3.getPromptState(false)]) do
+		if value == p4 then
+			Flag = true
+			break
 		end
 	end
-	var1 = false
+	if Flag then
+		SetPromptStateFunction(p4)
+		
+		return
+	else
+		SetPromptStateFunction(PromptStateModule.TransferError)
+	end
 end

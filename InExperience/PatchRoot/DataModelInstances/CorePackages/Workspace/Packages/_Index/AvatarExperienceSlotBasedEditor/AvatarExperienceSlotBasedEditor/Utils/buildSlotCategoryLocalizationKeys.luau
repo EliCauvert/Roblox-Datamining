@@ -1,13 +1,13 @@
 ﻿local _ = require(script.Parent.Parent.Types)
 local _ = require(script.Parent.Parent.Enums.Categories)
 
-return function(p1)
-	local t = {}
+return function(List) --[[ Line: 8 | Named "buildSlotCategoryLocalizationKeys" ]]
+	local NameTranslationKeys = {}
 	
-	for i, v in p1 do
-		if not v.hide then
-			t[v.nameTranslationKey] = v.nameTranslationKey
+	for _, value in List do
+		if not value.hide then
+			NameTranslationKeys[value.nameTranslationKey] = value.nameTranslationKey
 		end
 	end
-	return t
+	return NameTranslationKeys
 end

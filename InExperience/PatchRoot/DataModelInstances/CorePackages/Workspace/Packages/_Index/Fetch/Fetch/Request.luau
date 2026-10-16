@@ -1,54 +1,55 @@
-﻿local instanceof = require(script.Parent.Parent.LuauPolyfill).instanceof
-local headers = require(script.Parent.Headers).Headers
-local body = require(script.Parent.Body).Body
-local abortSignal = require(script.Parent.AbortSignal).AbortSignal
-local tbl = setmetatable({}, { __index = body })
-tbl.__index = tbl
+﻿local InstanceofFunction = require(script.Parent.Parent.LuauPolyfill).instanceof
+local Headers = require(script.Parent.Headers).Headers
+local Body = require(script.Parent.Body).Body
+local AbortSignal = require(script.Parent.AbortSignal).AbortSignal
+local self = setmetatable({}, { __index = Body })
+self.__index = self
 
-function tbl.new(p1, p2)
-	-- upvalues: instanceof (ref), tbl (ref), body (ref), headers (ref), abortSignal (ref)
-	p2 = p2 or {}
-	local url = nil
-	local var1 = nil
+function self.new(Body1, p1) --[[ Line: 92 ]]
+	-- upvalues: InstanceofFunction (copy), self (copy), Body (copy), Headers (copy), AbortSignal (copy)
+	local P1 = p1 or {}
+	local Url = nil
+	local v1 = nil
 	
-	if type(p1) == "string" then
-		url = p1
-		var1 = {}
-	elseif instanceof(p1, tbl) then
-		url = p1.url
-		var1 = p1
+	if type(Body1) == "string" then
+		Url = Body1
+		v1 = {}
+	elseif InstanceofFunction(Body1, self) then
+		Url = Body1.url
+		v1 = Body1
 	else
 		error("The first argument of Request.new() must be a string or Request object")
 	end
-	local var2 = if p2.body or not instanceof(p1, tbl) then nil else p1.body
-	local tbl_1 = setmetatable(body.new(p2.body or var2), tbl)
-	tbl_1.method = p2.method or (var1.method or "GET")
+	local Body2 = if P1.body or not InstanceofFunction(Body1, self) then nil else Body1.body
+	local self1 = setmetatable(Body.new(P1.body or Body2), self)
+	self1.method = P1.method or (v1.method or "GET")
 	
-	if (p2.body or var2) and (tbl_1.method == "GET" or tbl_1.method == "HEAD") then
-		error(string.format("'body' should not be provided as an option for request method %s", tbl_1.method))
+	if (P1.body or Body2) and (self1.method == "GET" or self1.method == "HEAD") then
+		error(string.format("'body' should not be provided as an option for request method %s", self1.method))
 	end
-	tbl_1.url = url
-	tbl_1.headers = if p2.headers then headers.new(p2.headers) else var1.headers or headers.new()
-	tbl_1.cache = p2.cache or (var1.cache or Enum.HttpCachePolicy.None)
-	tbl_1.signal = p2.signal or (var1.signal or abortSignal.abort("Request Cancelled"))
-	tbl_1.destination = "document"
-	tbl_1.referrer = "client"
-	tbl_1.referrerPolicy = "no-referrer"
-	tbl_1.mode = p2.mode or "cors"
-	tbl_1.credentials = p2.credentials or (var1.credentials or "omit")
-	tbl_1.redirect = p2.redirect or (var1.redirect or "error")
-	tbl_1.integrity = p2.integrity or (var1.integrity or "")
-	tbl_1.keepalive = p2.keepalive or (var1.keepalive or false)
-	tbl_1.isReloadNavigation = false
-	tbl_1.isHistoryNavigation = false
-	tbl_1.duplex = p2.duplex or (var1.duplex or "half")
+	self1.url = Url
+	local Headers1 = v1.headers or Headers.new()
+	self1.headers = if P1.headers then Headers.new(P1.headers) else Headers1
+	self1.cache = P1.cache or (v1.cache or Enum.HttpCachePolicy.None)
+	self1.signal = P1.signal or (v1.signal or AbortSignal.abort("Request Cancelled"))
+	self1.destination = "document"
+	self1.referrer = "client"
+	self1.referrerPolicy = "no-referrer"
+	self1.mode = P1.mode or "cors"
+	self1.credentials = P1.credentials or (v1.credentials or "omit")
+	self1.redirect = P1.redirect or (v1.redirect or "error")
+	self1.integrity = P1.integrity or (v1.integrity or "")
+	self1.keepalive = P1.keepalive or (v1.keepalive or false)
+	self1.isReloadNavigation = false
+	self1.isHistoryNavigation = false
+	self1.duplex = P1.duplex or (v1.duplex or "half")
 	
-	return tbl_1
+	return self1
 end
 
-function tbl.clone(p1)
-	-- upvalues: tbl (ref)
-	return tbl.new(p1)
+function self.clone(p1) --[[ Line: 137 ]]
+	-- upvalues: self (copy)
+	return self.new(p1)
 end
 
-return { Request = tbl }
+return { Request = self }

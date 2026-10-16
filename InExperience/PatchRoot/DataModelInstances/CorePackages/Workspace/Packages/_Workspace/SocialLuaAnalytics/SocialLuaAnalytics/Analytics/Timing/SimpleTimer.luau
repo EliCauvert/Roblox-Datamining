@@ -1,51 +1,37 @@
-﻿local loggerModule = require(script.Parent.Parent.Logger)
+﻿local LoggerModule = require(script.Parent.Parent.Logger)
 
-local _ = function(p1, p2)
+local function _(p1, p2) --[[ Line: 3 ]]
 	return (p1.UnixTimestampMillis - p2.UnixTimestampMillis) / 1000
 end
 
-return function(p1)
-	-- upvalues: loggerModule (ref)
-	local var1 = nil
-	local var2 = nil
-	local var3 = nil
-	local var4 = nil
-	local var5 = if p1 then p1.timeoutThreshold else nil
-	local var6 = if p1 then p1.onReachingThreshold else nil
+return function(p1) --[[ Line: 23 | Named "SimpleTimer" ]]
+	-- upvalues: LoggerModule (copy)
+	local UnixTimestampMillisRatio = nil
+	local ClockTime = nil
+	local v1 = nil
+	local DelayedThread = nil
+	local TimeoutThreshold = p1 and p1.timeoutThreshold or nil
+	local OnReachingThreshold = p1 and p1.onReachingThreshold or nil
 	
-	local _ = function()
-		-- upvalues: var1 (write), var2 (write)
-		return if var1 and var2 then var2 - var1 else -1
+	local function _() --[[ Line: 33 ]]
+		-- upvalues: UnixTimestampMillisRatio (ref), ClockTime (ref)
+		return if UnixTimestampMillisRatio and ClockTime then ClockTime - UnixTimestampMillisRatio else -1
 	end
 	
-	local var7 = function()
-		-- upvalues: var1 (write), var2 (write), loggerModule (copy)
-		local processTime = nil
-		
-		if var1 and not var2 then
-			processTime = os.clock()
-		elseif var1 then
-			loggerModule:warning("Timer has been already stopped")
-		else
-			loggerModule:warning("Timer has not been started yet")
-		end
-		return if var1 and processTime then processTime - var1 else -1
-	end
-	
-	local _ = function()
-		-- upvalues: var4 (write)
-		if var4 then
-			task.cancel(var4)
+	local _ = function() --[[ Line: 54 ]]
+		-- upvalues: DelayedThread (ref)
+		if DelayedThread then
+			task.cancel(DelayedThread)
 		end
 	end
 	
-	local _ = function()
-		-- upvalues: var5 (ref), var6 (ref), var4 (write)
-		if var5 and var6 then
-			var4 = task.delay(var5, function()
-				-- upvalues: var4 (copy), var6 (ref)
-				var4 = nil
-				var6()
+	local _ = function() --[[ Line: 66 ]]
+		-- upvalues: TimeoutThreshold (copy), OnReachingThreshold (copy), DelayedThread (ref)
+		if TimeoutThreshold and OnReachingThreshold then
+			DelayedThread = task.delay(TimeoutThreshold, function() --[[ Line: 73 ]]
+				-- upvalues: DelayedThread (upval), OnReachingThreshold (copy)
+				DelayedThread = nil
+				OnReachingThreshold()
 			end)
 			
 			return
@@ -53,63 +39,76 @@ return function(p1)
 	end
 	
 	return {
-		start = function(p2)
-			-- upvalues: var1 (write), var3 (write), var5 (ref), var6 (ref), var4 (write), loggerModule (copy)
-			if var1 then
-				loggerModule:warning("Timer has been already started")
+		start = function(p2) --[[ Line: 79 ]]
+			-- upvalues: UnixTimestampMillisRatio (ref), v1 (ref), TimeoutThreshold (copy), OnReachingThreshold (copy), DelayedThread (ref), LoggerModule (upval)
+			if UnixTimestampMillisRatio then
+				LoggerModule:warning("Timer has been already started")
 			else
-				var1 = os.clock()
-				var3 = p2 or DateTime.now()
+				UnixTimestampMillisRatio = os.clock()
+				v1 = p2 or DateTime.now()
 				
 				if p2 then
-					var1 = (var3.UnixTimestampMillis - DateTime.now().UnixTimestampMillis) / 1000
+					UnixTimestampMillisRatio = (v1.UnixTimestampMillis - DateTime.now().UnixTimestampMillis) / 1000
 				end
-				if not var5 then return end
-				if var6 then
-					local var8 = var6
-					var4 = task.delay(var5, function()
-						-- upvalues: var4 (copy), var8 (ref)
-						var4 = nil
-						var8()
-					end)
-					
+				if TimeoutThreshold then
+					if OnReachingThreshold then
+						DelayedThread = task.delay(TimeoutThreshold, function() --[[ Line: 73 ]]
+							-- upvalues: DelayedThread (upval), OnReachingThreshold (copy)
+							DelayedThread = nil
+							OnReachingThreshold()
+						end)
+						
+						return
+					end
 					return
 				end
-				return
 			end
 		end,
-		getStartTimestamp = function()
-			-- upvalues: var3 (write), loggerModule (copy)
-			if var3 then
-				return var3
-			end
-			loggerModule:warning("Timer has not been started yet")
-			
-			return nil
-		end,
-		stop = function()
-			-- upvalues: var4 (write), var1 (write), var2 (write), loggerModule (copy)
-			if var4 then
-				task.cancel(var4)
-			end
-			if var1 and not var2 then
-				var2 = os.clock()
-			elseif var1 then
-				loggerModule:warning("Timer has been already stopped")
+		getStartTimestamp = function() --[[ Line: 106 ]]
+			-- upvalues: v1 (ref), LoggerModule (upval)
+			if v1 then
+				return v1
 			else
-				loggerModule:warning("Timer has not been started yet")
+				LoggerModule:warning("Timer has not been started yet")
+				
+				return nil
 			end
-			return if var1 and var2 then var2 - var1 else -1
 		end,
-		clear = function()
-			-- upvalues: var1 (write), var2 (write), var4 (write)
-			var1 = nil
-			var2 = nil
+		stop = function(): number --[[ Line: 92 ]]
+			-- upvalues: DelayedThread (ref), UnixTimestampMillisRatio (ref), ClockTime (ref), LoggerModule (upval)
+			if DelayedThread then
+				task.cancel(DelayedThread)
+			end
+			if UnixTimestampMillisRatio and not ClockTime then
+				ClockTime = os.clock()
+			elseif UnixTimestampMillisRatio then
+				LoggerModule:warning("Timer has been already stopped")
+			else
+				LoggerModule:warning("Timer has not been started yet")
+			end
+			return if UnixTimestampMillisRatio and ClockTime then ClockTime - UnixTimestampMillisRatio else -1
+		end,
+		clear = function() --[[ Line: 60 ]]
+			-- upvalues: UnixTimestampMillisRatio (ref), ClockTime (ref), DelayedThread (ref)
+			UnixTimestampMillisRatio = nil
+			ClockTime = nil
 			
-			if var4 then
-				task.cancel(var4)
+			if DelayedThread then
+				task.cancel(DelayedThread)
 			end
 		end,
-		getTime = var7
+		getTime = function(): number --[[ Line: 40 ]]
+			-- upvalues: UnixTimestampMillisRatio (ref), ClockTime (ref), LoggerModule (upval)
+			local ClockTime1: number? = nil
+			
+			if UnixTimestampMillisRatio and not ClockTime then
+				ClockTime1 = os.clock()
+			elseif UnixTimestampMillisRatio then
+				LoggerModule:warning("Timer has been already stopped")
+			else
+				LoggerModule:warning("Timer has not been started yet")
+			end
+			return if UnixTimestampMillisRatio and ClockTime1 then ClockTime1 - UnixTimestampMillisRatio else -1
+		end
 	}
 end

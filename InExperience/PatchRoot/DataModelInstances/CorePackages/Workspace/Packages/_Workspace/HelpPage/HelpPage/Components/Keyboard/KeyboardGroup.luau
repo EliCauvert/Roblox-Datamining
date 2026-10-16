@@ -1,57 +1,56 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local reactModule = require(parent_1.React)
-local foundationModule = require(parent_1.Foundation)
-local _ = require(parent.Configs.ConfigTypes)
-local localizationModule = require(parent_1.Localization)
-local keyboardActionModule = require(script.Parent.KeyboardAction)
-local fFlagHelpPageCCLModule = require(parent.Flags.FFlagHelpPageCCL)
-local view = foundationModule.View
-local text = foundationModule.Text
-local useTokens = foundationModule.Hooks.useTokens
-local useLocalization = localizationModule.Hooks.useLocalization
-local var1 = reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), useLocalization (ref), reactModule (ref), view (ref), text (ref), fFlagHelpPageCCLModule (ref)
-	return reactModule.createElement(view, {
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
+local FoundationModule = require(Parent1.Foundation)
+local _ = require(Parent.Configs.ConfigTypes)
+local KeyboardActionModule = require(script.Parent.KeyboardAction)
+local FFlagHelpPageCCLModule = require(Parent.Flags.FFlagHelpPageCCL)
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UseLocalizationFunction = require(Parent1.Localization).Hooks.useLocalization
+local MemoResult = ReactModule.memo(function(Frame) --[[ Line: 25 ]]
+	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), View (copy), Text (copy), FFlagHelpPageCCLModule (copy)
+	return ReactModule.createElement(View, {
 		tag = "col align-y-center align-x-left size-full-0 auto-y padding-x-small padding-y-small",
-		LayoutOrder = p1.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		reactModule.createElement(text, {
+		ReactModule.createElement(Text, {
 			key = "title-text",
 			tag = {
-				["auto-xy text-title-small text-wrap text-align-x-left"] = fFlagHelpPageCCLModule,
-				["auto-xy text-title-medium text-wrap text-align-x-left"] = not fFlagHelpPageCCLModule
+				["auto-xy text-title-small text-wrap text-align-x-left"] = FFlagHelpPageCCLModule,
+				["auto-xy text-title-medium text-wrap text-align-x-left"] = not FFlagHelpPageCCLModule
 			},
-			textStyle = useTokens().Color.Extended.White.White_100,
-			Text = useLocalization({ title = p1.title }).title
+			textStyle = UseTokensFunction().Color.Extended.White.White_100,
+			Text = UseLocalizationFunction({ title = Frame.title }).title
 		})
 	})
 end)
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), var1 (ref), keyboardActionModule (ref), view (ref)
-	return reactModule.createElement(view, {
+return ReactModule.memo(function(p1) --[[ Line: 52 ]]
+	-- upvalues: ReactModule (copy), MemoResult (copy), KeyboardActionModule (copy), View (copy)
+	return ReactModule.createElement(View, {
 		tag = "col align-y-top align-x-center size-full gap-xxsmall",
 		testId = "KeyboardGroup",
 		LayoutOrder = p1.group.layoutOrder
-	}, reactModule.useMemo(function()
-		-- upvalues: reactModule (copy), var1 (copy), p1 (ref), keyboardActionModule (copy)
-		local t = {}
-		table.insert(t, reactModule.createElement(var1, {
+	}, (ReactModule.useMemo(function() --[[ Line: 53 ]]
+		-- upvalues: ReactModule (upval), MemoResult (upval), p1 (copy), KeyboardActionModule (upval)
+		local Elements = {}
+		table.insert(Elements, ReactModule.createElement(MemoResult, {
 			LayoutOrder = 0,
 			title = p1.group.label,
 			key = "groupTitle-" .. p1.group.id
 		}))
 		
-		for i, v in p1.controls do
-			if v.keyboardInput ~= nil then
-				table.insert(t, reactModule.createElement(keyboardActionModule, {
-					control = v,
-					LayoutOrder = v.keyboardInput.layoutOrder,
-					key = v.label .. v.keyboardInput.layoutOrder
-				}))
+		for _, control in p1.controls do
+			if control.keyboardInput ~= nil then
+				table.insert(Elements, (ReactModule.createElement(KeyboardActionModule, {
+					control = control,
+					LayoutOrder = control.keyboardInput.layoutOrder,
+					key = control.label .. control.keyboardInput.layoutOrder
+				})))
 			end
 		end
-		return t
-	end, { p1.controls, p1.group }))
+		return Elements
+	end, { p1.controls, p1.group })))
 end)

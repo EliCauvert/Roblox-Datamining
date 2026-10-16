@@ -1,54 +1,55 @@
 ﻿local UGCValidationService = game:GetService("UGCValidationService")
-local parent = script.Parent.Parent.Parent
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
+local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
 local UGCValidationAddThumbnailFrustumCheckingv2 = game:DefineFastFlag("UGCValidationAddThumbnailFrustumCheckingv2", false)
 
 return {
 	categories = {
-		validationEnumsModule.UploadCategory.LAYERED_CLOTHING,
-		validationEnumsModule.UploadCategory.EYEBROW_EYELASH,
-		validationEnumsModule.UploadCategory.RIGID_ACCESSORY
+		ValidationEnumsModule.UploadCategory.LAYERED_CLOTHING,
+		ValidationEnumsModule.UploadCategory.EYEBROW_EYELASH,
+		ValidationEnumsModule.UploadCategory.RIGID_ACCESSORY
 	},
 	requiredData = {
-		validationEnumsModule.SharedDataMember.rootInstance,
-		validationEnumsModule.SharedDataMember.renderMeshesData,
-		validationEnumsModule.SharedDataMember.uploadEnum
+		ValidationEnumsModule.SharedDataMember.rootInstance,
+		ValidationEnumsModule.SharedDataMember.renderMeshesData,
+		ValidationEnumsModule.SharedDataMember.uploadEnum
 	},
 	expectedFailures = {},
-	run = function(p1, p2)
-		-- upvalues: errorSourceStringsModule (ref), UGCValidationAddThumbnailFrustumCheckingv2 (ref), UGCValidationService (ref)
-		local rootInstance = p2.rootInstance
-		local assetType = p2.uploadEnum and p2.uploadEnum.assetType
+	run = function(p1, p2) --[[ Line: 26 ]]
+		-- upvalues: ErrorSourceStringsModule (copy), UGCValidationAddThumbnailFrustumCheckingv2 (copy), UGCValidationService (copy)
+		local RootInstance = p2.rootInstance
+		local AssetType = p2.uploadEnum and p2.uploadEnum.assetType
 		
-		if assetType == Enum.AssetType.EyebrowAccessory or assetType == Enum.AssetType.EyelashAccessory then return end
-		local thumbnailConfiguration = rootInstance:FindFirstChild("ThumbnailConfiguration")
+		if AssetType == Enum.AssetType.EyebrowAccessory or AssetType == Enum.AssetType.EyelashAccessory then return end
+		local ThumbnailConfiguration = RootInstance:FindFirstChild("ThumbnailConfiguration")
 		
-		if not thumbnailConfiguration then return end
-		local handle = rootInstance:FindFirstChild("Handle")
+		if not ThumbnailConfiguration then return end
+		local Handle = RootInstance:FindFirstChild("Handle")
 		
-		if not handle or not handle:IsA("BasePart") then return end
-		local thumbnailCameraTarget = thumbnailConfiguration:FindFirstChild("ThumbnailCameraTarget")
+		if not Handle or not Handle:IsA("BasePart") then return end
+		local ThumbnailCameraTarget = ThumbnailConfiguration:FindFirstChild("ThumbnailCameraTarget")
 		
-		if not thumbnailCameraTarget then return end
-		if thumbnailCameraTarget.Value ~= handle then
-			p1:fail(errorSourceStringsModule.Keys.ThumbnailInvalidTarget, { ExpectedTarget = handle:GetFullName() })
+		if not ThumbnailCameraTarget then return end
+		if ThumbnailCameraTarget.Value ~= Handle then
+			p1:fail(ErrorSourceStringsModule.Keys.ThumbnailInvalidTarget, { ExpectedTarget = Handle:GetFullName() })
 			
 			return
-		elseif game:GetEngineFeature("EngineUGCValidateThumbnailerMeshInFrustum") and UGCValidationAddThumbnailFrustumCheckingv2 then
-			local renderMeshesData = p2.renderMeshesData
+		end
+		if game:GetEngineFeature("EngineUGCValidateThumbnailerMeshInFrustum") and UGCValidationAddThumbnailFrustumCheckingv2 then
+			local RenderMeshesData = p2.renderMeshesData
 			
-			if not renderMeshesData then return end
-			local name = renderMeshesData[handle.Name]
+			if not RenderMeshesData then return end
+			local RenderMeshes = RenderMeshesData[Handle.Name]
 			
-			if not name then return end
-			local cFrame = thumbnailCameraTarget.Value.CFrame
-			local thumbnailCameraValue = thumbnailConfiguration:FindFirstChild("ThumbnailCameraValue")
+			if not RenderMeshes then return end
+			local ValueCFrame = ThumbnailCameraTarget.Value.CFrame
+			local ThumbnailCameraValue = ThumbnailConfiguration:FindFirstChild("ThumbnailCameraValue")
 			
-			if not thumbnailCameraValue then return end
-			if UGCValidationService:CheckEditableMeshInCameraFrustum(name.editable, name.scale, cFrame, cFrame * thumbnailCameraValue.Value) == false then
-				p1:fail(errorSourceStringsModule.Keys.ThumbnailOutsideView, { InstancePath = handle:GetFullName() })
+			if not ThumbnailCameraValue then return end
+			if UGCValidationService:CheckEditableMeshInCameraFrustum(RenderMeshes.editable, RenderMeshes.scale, ValueCFrame, ValueCFrame * ThumbnailCameraValue.Value) == false then
+				p1:fail(ErrorSourceStringsModule.Keys.ThumbnailOutsideView, { InstancePath = Handle:GetFullName() })
 			end
 		end
 	end

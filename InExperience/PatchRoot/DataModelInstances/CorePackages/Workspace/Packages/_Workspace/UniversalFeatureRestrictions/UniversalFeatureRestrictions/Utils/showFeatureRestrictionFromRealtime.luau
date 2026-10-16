@@ -1,34 +1,36 @@
-﻿local universalFeatureRestrictions = script:FindFirstAncestor("UniversalFeatureRestrictions")
-local _ = require(universalFeatureRestrictions.Common.AbuseVector)
-local _ = require(universalFeatureRestrictions.Parent.ModerationCommon.Types)
-local showFeatureRestrictionModule = require(universalFeatureRestrictions.Utils.showFeatureRestriction)
-local showFeatureRestrictionDirectModule = require(universalFeatureRestrictions.Utils.showFeatureRestrictionDirect)
+﻿local UniversalFeatureRestrictions = script:FindFirstAncestor("UniversalFeatureRestrictions")
+local _ = require(UniversalFeatureRestrictions.Common.AbuseVector)
+local _ = require(UniversalFeatureRestrictions.Parent.ModerationCommon.Types)
+local ShowFeatureRestrictionModule = require(UniversalFeatureRestrictions.Utils.showFeatureRestriction)
+local ShowFeatureRestrictionDirectModule = require(UniversalFeatureRestrictions.Utils.showFeatureRestrictionDirect)
 
-local function _(p1)
+local function _(p1): boolean --[[ Line: 30 | Named "hasContent" ]]
 	return type(p1) == "string" and p1 ~= ""
 end
 
-local function buildEndDate(p1)
+local function buildEndDate(p1) --[[ Line: 38 ]]
 	if p1.type == "nudge" then
 		return "", 0
 	end
-	local timeoutStartTime = p1.timeoutStartTime
-	local timeoutDurationSeconds = p1.timeoutDurationSeconds
+	local TimeoutStartTime = p1.timeoutStartTime
+	local TimeoutDurationSeconds: number = p1.timeoutDurationSeconds
 	
-	if not timeoutStartTime or timeoutStartTime == "" or (not timeoutDurationSeconds or timeoutDurationSeconds < 0) then
+	if not TimeoutStartTime or TimeoutStartTime == "" or not TimeoutDurationSeconds or TimeoutDurationSeconds < 0 then
 		return nil, nil
-	elseif timeoutDurationSeconds == 0 then
-		return "", timeoutDurationSeconds
+	elseif TimeoutDurationSeconds == 0 then
+		return "", TimeoutDurationSeconds
+	else
+		local _DateTime = DateTime.fromIsoDate(TimeoutStartTime)
+		
+		if _DateTime then
+			return DateTime.fromUnixTimestamp(_DateTime.UnixTimestamp + TimeoutDurationSeconds):ToIsoDate(), TimeoutDurationSeconds
+		else
+			return nil, nil
+		end
 	end
-	local dateTime = DateTime.fromIsoDate(timeoutStartTime)
-	
-	if dateTime then
-		return DateTime.fromUnixTimestamp(dateTime.UnixTimestamp + timeoutDurationSeconds):ToIsoDate(), timeoutDurationSeconds
-	end
-	return nil, nil
 end
 
-local function buildModerationDetail(p1, p2, p3)
+local function buildModerationDetail(ModerationDetail, EndDate, Duration) --[[ Line: 66 ]]
 	return {
 		punishedUserId = 0,
 		interventionId = "",
@@ -42,45 +44,45 @@ local function buildModerationDetail(p1, p2, p3)
 		acknowledgeable = false,
 		showUGCAvatarGuidelinesLink = false,
 		labelTranslationKey = "",
-		title = p1.title,
-		body = p1.body,
-		punishmentTypeDescription = p1.type,
-		beginDate = p1.timeoutStartTime or "",
-		endDate = p2,
+		title = ModerationDetail.title,
+		body = ModerationDetail.body,
+		punishmentTypeDescription = ModerationDetail.type,
+		beginDate = ModerationDetail.timeoutStartTime or "",
+		endDate = EndDate,
 		badUtterances = {},
 		context = {},
-		duration = p3
+		duration = Duration
 	}
 end
 
-return function(p1, p2, p3)
-	-- upvalues: showFeatureRestrictionModule (ref), buildEndDate (ref), showFeatureRestrictionDirectModule (ref), buildModerationDetail (ref)
-	local decisionEventId
-	if not p2.acknowledgeable and (p2.type == "nudge" or p2.type == "timeout") then
-		decisionEventId = p2.decisionEventId
+return function(p1, ModerationDetail, p2) --[[ Line: 99 | Named "showFeatureRestrictionFromRealtime" ]]
+	-- upvalues: ShowFeatureRestrictionModule (copy), buildEndDate (copy), ShowFeatureRestrictionDirectModule (copy), buildModerationDetail (copy)
+	if not ModerationDetail.acknowledgeable and (ModerationDetail.type == "nudge" or ModerationDetail.type == "timeout") then
+		local DecisionEventId = ModerationDetail.decisionEventId
 		
-		if type(decisionEventId) == "string" and decisionEventId ~= "" then
-			decisionEventId = p2.title
+		if type(DecisionEventId) == "string" and DecisionEventId ~= "" then
+			local Title = ModerationDetail.title
 			
-			if type(decisionEventId) == "string" and decisionEventId ~= "" then
-				decisionEventId = p2.body
+			if type(Title) == "string" and Title ~= "" then
+				local Body = ModerationDetail.body
 				
-				if not (type(decisionEventId) == "string" and decisionEventId ~= "") then
-					showFeatureRestrictionModule(p1, p3)
+				if type(Body) == "string" and Body ~= "" then
+					local EndDate, EndDate2 = buildEndDate(ModerationDetail)
 					
-					return
+					if EndDate == nil or EndDate2 == nil then
+						ShowFeatureRestrictionModule(p1, p2)
+						
+						return
+					else
+						local Copy = table.clone(p2 or {})
+						Copy.analyticsEventId = ModerationDetail.decisionEventId
+						ShowFeatureRestrictionDirectModule(p1, buildModerationDetail(ModerationDetail, EndDate, EndDate2), Copy)
+						
+						return
+					end
 				end
-				var6, decisionEventId = buildEndDate(p2)
-				
-				if var6 == nil or decisionEventId == nil then
-					showFeatureRestrictionModule(p1, p3)
-					
-					return
-				end
-				local cloned = table.clone(p3 or {})
-				cloned.analyticsEventId = p2.decisionEventId
-				showFeatureRestrictionDirectModule(p1, buildModerationDetail(p2, var6, decisionEventId), cloned)
 			end
 		end
 	end
+	ShowFeatureRestrictionModule(p1, p2)
 end

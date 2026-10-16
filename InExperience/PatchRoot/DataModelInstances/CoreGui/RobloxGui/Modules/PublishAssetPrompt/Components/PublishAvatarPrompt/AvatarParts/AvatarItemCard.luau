@@ -1,75 +1,72 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local reactModule = require(corePackagesService.Packages.React)
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local foundationModule = require(corePackagesService.Packages.Foundation)
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local useStyle = UIBloxModule.Core.Style.useStyle
-local avatarPartViewportModule = require(script.Parent.AvatarPartViewport)
-local getFFlagSingleUploadMakeupSupportModule = require(script.Parent.Parent.Parent.Parent.Flags.GetFFlagSingleUploadMakeupSupport)
+﻿local CorePackages = game:GetService("CorePackages")
+local ReactModule = require(CorePackages.Packages.React)
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local UseStyleFunction = require(CorePackages.Packages.UIBlox).Core.Style.useStyle
+local AvatarPartViewportModule = require(script.Parent.AvatarPartViewport)
+local GetFFlagSingleUploadMakeupSupportModule = require(script.Parent.Parent.Parent.Parent.Flags.GetFFlagSingleUploadMakeupSupport)
 
-return function(p1)
-	-- upvalues: useStyle (ref), getFFlagSingleUploadMakeupSupportModule (ref), reactModule (ref), avatarPartViewportModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
-	local var1 = useStyle()
-	local font = var1.Font
-	local theme = var1.Theme
-	local asset = p1.asset
-	local captionHeader = font.CaptionHeader
-	local color = theme.TextEmphasis.Color
+return function(Frame) --[[ Line: 28 | Named "AvatarItemCard" ]]
+	-- upvalues: UseStyleFunction (copy), GetFFlagSingleUploadMakeupSupportModule (copy), ReactModule (copy), AvatarPartViewportModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	local UseStyleResult = UseStyleFunction()
+	local UseStyleResultFont = UseStyleResult.Font
+	local Asset = Frame.asset
+	local CaptionHeader = UseStyleResultFont.CaptionHeader
+	local Color = UseStyleResult.Theme.TextEmphasis.Color
 	
-	if getFFlagSingleUploadMakeupSupportModule() then
-		assert(if typeof(asset) ~= "table" then asset:IsA("MeshPart") or (asset:IsA("Accessory") or asset:IsA("Decal")) else true, "Assert that asset is a table, MeshPart, Accessory, or Decal")
+	if GetFFlagSingleUploadMakeupSupportModule() then
+		assert(typeof(Asset) == "table" or (Asset:IsA("MeshPart") or (Asset:IsA("Accessory") or Asset:IsA("Decal"))), "Assert that asset is a table, MeshPart, Accessory, or Decal")
 	else
-		assert(if typeof(asset) ~= "table" then asset:IsA("MeshPart") or asset:IsA("Accessory") else true, "Assert that asset is a table, MeshPart, or Accessory")
+		assert(typeof(Asset) == "table" or (Asset:IsA("MeshPart") or Asset:IsA("Accessory")), "Assert that asset is a table, MeshPart, or Accessory")
 	end
-	local var2
-	local bodyName = p1.bodyName
-	local partName = p1.partName
-	local _ = nil
-	local text = nil
+	local BodyName = Frame.bodyName
+	local PartName = Frame.partName
+	local Text: string? = nil
+	local HasPartName = nil
 	
-	if getFFlagSingleUploadMakeupSupportModule() then
-		if bodyName and partName then
-			text = bodyName .. "'s " .. partName
-		elseif partName then
-			text = partName
+	if GetFFlagSingleUploadMakeupSupportModule() then
+		if BodyName and PartName then
+			Text = BodyName .. "'s " .. PartName
+		elseif PartName then
+			Text = PartName
 		end
-		local _ = text ~= nil
+		HasPartName = Text ~= nil
 	else
-		var2 = bodyName ~= nil and partName ~= nil
+		HasPartName = BodyName ~= nil and PartName ~= nil
 		
-		if bodyName and partName then
-			text = bodyName .. "'s " .. partName
+		if BodyName and PartName then
+			Text = BodyName .. "'s " .. PartName
 		end
 	end
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.fromScale(1, 1),
-		LayoutOrder = p1.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		UIListLayout = reactModule.createElement("UIListLayout", {
+		UIListLayout = ReactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			Padding = UDim.new(0, 5)
 		}),
-		AvatarPartViewport = reactModule.createElement(avatarPartViewportModule, {
+		AvatarPartViewport = ReactModule.createElement(AvatarPartViewportModule, {
 			LayoutOrder = 1,
-			asset = asset,
-			assetType = if getFFlagSingleUploadMakeupSupportModule() then p1.assetType else nil,
-			viewportSize = p1.viewportSize
+			asset = Asset,
+			assetType = if GetFFlagSingleUploadMakeupSupportModule() then Frame.assetType else nil,
+			viewportSize = Frame.viewportSize
 		}),
-		TitleText = var2 and reactModule.createElement("TextLabel", {
+		TitleText = HasPartName and ReactModule.createElement("TextLabel", {
 			LayoutOrder = 2,
 			BackgroundTransparency = 1,
 			TextWrapped = true,
-			Text = text,
+			Text = Text,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextYAlignment = Enum.TextYAlignment.Top,
 			Size = UDim2.new(1, 0, 0, 50),
-			TextColor3 = color,
-			Font = if foundationFontFaceMigration then nil else captionHeader.Font,
-			FontFace = if foundationFontFaceMigration then normalizeFontFace(var1.Tokens.Typography.CaptionLarge.Font) else nil,
-			TextSize = captionHeader.RelativeSize * font.BaseSize,
+			TextColor3 = Color,
+			Font = if FoundationFontFaceMigration then nil else CaptionHeader.Font,
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.CaptionLarge.Font) else nil,
+			TextSize = CaptionHeader.RelativeSize * UseStyleResultFont.BaseSize,
 			TextTruncate = Enum.TextTruncate.AtEnd
 		})
 	})

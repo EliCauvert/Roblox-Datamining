@@ -1,58 +1,59 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local appFonts = require(corePackagesService.Workspace.Packages.Style).AppFonts
-local parent = script.Parent.Parent
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local colorsModule = require(parent.Colors)
-local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
-local noInventoryNotice = roactModule.PureComponent:extend("NoInventoryNotice")
+﻿local CorePackages = game:GetService("CorePackages")
+local AppFonts = require(CorePackages.Workspace.Packages.Style).AppFonts
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local ColorsModule = require(script.Parent.Parent.Colors)
+local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
+local NoInventoryNotice = RoactModule.PureComponent:extend("NoInventoryNotice")
 
-function noInventoryNotice.render(p1)
-	-- upvalues: roactModule (ref), colorsModule (ref), appFonts (ref), robloxTranslatorModule (ref)
-	return roactModule.createElement("Frame", {
+function NoInventoryNotice.render(p1) --[[ Line: 13 ]]
+	-- upvalues: RoactModule (copy), ColorsModule (copy), AppFonts (copy), RobloxTranslatorModule (copy)
+	local IsLoaded = p1.props.isLoaded
+	
+	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.new(1, 0, 1, 0),
-		Visible = next(p1.props.assets) == nil and p1.props.isLoaded
+		Visible = next(p1.props.assets) == nil and IsLoaded
 	}, {
-		UIListLayout = roactModule.createElement("UIListLayout", {
+		UIListLayout = RoactModule.createElement("UIListLayout", {
 			Padding = UDim.new(0, 15),
 			FillDirection = Enum.FillDirection.Vertical,
 			HorizontalAlignment = Enum.HorizontalAlignment.Center,
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			VerticalAlignment = Enum.VerticalAlignment.Center
 		}),
-		NotWearingImage = roactModule.createElement("ImageLabel", {
+		NotWearingImage = RoactModule.createElement("ImageLabel", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 1,
 			Image = "rbxasset://textures/ui/InspectMenu/ico_isnt-wearing.png",
 			AnchorPoint = Vector2.new(0.5, 0),
 			Size = UDim2.new(0.25, 0, 0.25, 0),
-			ImageColor3 = colorsModule.White
+			ImageColor3 = ColorsModule.White
 		}, {
-			UIAspectRatioConstraint = roactModule.createElement("UIAspectRatioConstraint", { AspectRatio = 1 })
+			UIAspectRatioConstraint = RoactModule.createElement("UIAspectRatioConstraint", { AspectRatio = 1 })
 		}),
-		NotWearingText = roactModule.createElement("TextLabel", {
+		NotWearingText = RoactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 2,
 			TextScaled = true,
 			TextSize = 20,
 			TextWrapped = true,
 			Size = UDim2.new(0.8, 0, 0.3, 0),
-			Font = appFonts.default:getDefault(),
-			Text = robloxTranslatorModule:FormatByKeyForLocale("InGame.InspectMenu.Description.NoInventoryNotice", p1.props.locale),
-			TextColor3 = colorsModule.White,
+			Font = AppFonts.default:getDefault(),
+			Text = RobloxTranslatorModule:FormatByKeyForLocale("InGame.InspectMenu.Description.NoInventoryNotice", p1.props.locale),
+			TextColor3 = ColorsModule.White,
 			TextXAlignment = Enum.TextXAlignment.Center,
 			TextYAlignment = Enum.TextYAlignment.Top
 		}, {
-			UITextSizeConstraint = roactModule.createElement("UITextSizeConstraint", { MaxTextSize = 20 })
+			UITextSizeConstraint = RoactModule.createElement("UITextSizeConstraint", { MaxTextSize = 20 })
 		})
 	})
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p1, _)
+return RoactRoduxModule.UNSTABLE_connect2(function(p1, _) --[[ Line: 62 ]]
 	return {
 		assets = p1.assets,
 		locale = p1.locale,
 		isLoaded = p1.isLoaded
 	}
-end)(noInventoryNotice)
+end)(NoInventoryNotice)

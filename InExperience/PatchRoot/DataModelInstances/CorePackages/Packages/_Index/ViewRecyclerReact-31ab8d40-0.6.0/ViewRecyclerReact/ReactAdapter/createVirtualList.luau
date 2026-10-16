@@ -1,37 +1,37 @@
-﻿local viewRecyclerReact = script:FindFirstAncestor("ViewRecyclerReact")
-local viewRecyclerModule = require(viewRecyclerReact.Parent.ViewRecycler)
-local axis = viewRecyclerModule.Axis
-local _ = viewRecyclerModule.Layout
-local itemHooksModule = require(viewRecyclerReact.ReactAdapter.ItemHooks)
-local reactModule = require(viewRecyclerReact.Parent.React)
-local signalsReactModule = require(viewRecyclerReact.Parent.SignalsReact)
-local _ = require(viewRecyclerReact.ReactAdapter.VirtualList)
-local createRecyclableViewModule = require(viewRecyclerReact.ReactAdapter.createRecyclableView)
-local createElement = reactModule.createElement
+﻿local ViewRecyclerReact = script:FindFirstAncestor("ViewRecyclerReact")
+local ViewRecyclerModule = require(ViewRecyclerReact.Parent.ViewRecycler)
+local Axis = ViewRecyclerModule.Axis
+local _ = ViewRecyclerModule.Layout
+local ItemHooksModule = require(ViewRecyclerReact.ReactAdapter.ItemHooks)
+local ReactModule = require(ViewRecyclerReact.Parent.React)
+local SignalsReactModule = require(ViewRecyclerReact.Parent.SignalsReact)
+local _ = require(ViewRecyclerReact.ReactAdapter.VirtualList)
+local CreateRecyclableViewModule = require(ViewRecyclerReact.ReactAdapter.createRecyclableView)
+local CreateElementFunction = ReactModule.createElement
 
-local function createItemViewType(p1)
-	-- upvalues: createRecyclableViewModule (ref), itemHooksModule (ref), signalsReactModule (ref), reactModule (ref), createElement (ref)
-	local component = p1.component
+local function createItemViewType(p1) --[[ Line: 57 ]]
+	-- upvalues: CreateRecyclableViewModule (copy), ItemHooksModule (copy), SignalsReactModule (copy), ReactModule (copy), CreateElementFunction (copy)
+	local Component = p1.component
 	
-	return createRecyclableViewModule(function(p2)
-		-- upvalues: itemHooksModule (copy), signalsReactModule (copy), reactModule (copy), createElement (copy), component (ref)
-		local var1 = signalsReactModule.useSignalState(itemHooksModule.useRecyclingAssignment())
-		local var2 = signalsReactModule.useSignalState(itemHooksModule.useRecyclingIndex())
-		local var3 = reactModule.useRef(nil)
-		local var4 = reactModule.useRef(nil)
+	return CreateRecyclableViewModule(function(p2) --[[ Line: 59 ]]
+		-- upvalues: ItemHooksModule (upval), SignalsReactModule (upval), ReactModule (upval), CreateElementFunction (upval), Component (copy)
+		local UseSignalStateResult = SignalsReactModule.useSignalState((ItemHooksModule.useRecyclingAssignment()))
+		local UseSignalStateResult1 = SignalsReactModule.useSignalState(ItemHooksModule.useRecyclingIndex())
+		local UseRefResult = ReactModule.useRef(nil)
+		local UseRefResult1 = ReactModule.useRef(nil)
 		
-		if var1 ~= nil then
-			var3.current = var1
+		if UseSignalStateResult ~= nil then
+			UseRefResult.current = UseSignalStateResult
 		end
-		if var2 ~= nil then
-			var4.current = var2
+		if UseSignalStateResult1 ~= nil then
+			UseRefResult1.current = UseSignalStateResult1
 		end
-		local current = var3.current
-		local current_1 = var4.current
+		local Current = UseRefResult.current
+		local Current1 = UseRefResult1.current
 		
-		return if current == nil or current_1 == nil then nil else createElement(component, {
-			item = current.value,
-			index = current_1,
+		return if Current == nil or Current1 == nil then nil else CreateElementFunction(Component, {
+			item = Current.value,
+			index = Current1,
 			pending = p2.pending
 		})
 	end, {
@@ -41,50 +41,50 @@ local function createItemViewType(p1)
 end
 
 return {
-	create = function(p1)
-		-- upvalues: createItemViewType (ref), axis (ref), createElement (ref)
-		return function(p2)
-			-- upvalues: createItemViewType (copy), axis (copy), createElement (copy), p1 (ref)
+	create = function(p1) --[[ Line: 87 ]]
+		-- upvalues: createItemViewType (copy), Axis (copy), CreateElementFunction (copy)
+		return function(p2) --[[ Line: 88 ]]
+			-- upvalues: createItemViewType (upval), Axis (upval), CreateElementFunction (upval), p1 (copy)
 			assert(type(p2) == "table", "createVirtualList: definition must be a table")
-			local _ = nil
+			local ItemViewType = nil
 			
 			if p2.itemComponent == nil then
-				local itemComponents = p2.itemComponents
-				local getItemComponent = p2.getItemComponent
-				assert(type(itemComponents) == "table" and #itemComponents > 0, "createVirtualList: itemComponents must be a non-empty array")
-				assert(type(getItemComponent) == "function", "createVirtualList: getItemComponent must be a function")
+				local ItemComponents = p2.itemComponents
+				local GetItemComponentFunction = p2.getItemComponent
+				assert(type(ItemComponents) == "table" and #ItemComponents > 0, "createVirtualList: itemComponents must be a non-empty array")
+				assert(type(GetItemComponentFunction) == "function", "createVirtualList: getItemComponent must be a function")
 				local t = {}
 				
-				for i, v in itemComponents do
-					local component = v.component
-					assert(type(component) == "function", "createVirtualList: component must be a React component")
-					assert(t[component] == nil, "createVirtualList: each component may be declared only once")
-					t[component] = createItemViewType(v)
+				for _, itemComponent in ItemComponents do
+					local ComponentFunction = itemComponent.component
+					assert(type(ComponentFunction) == "function", "createVirtualList: component must be a React component")
+					assert(t[ComponentFunction] == nil, "createVirtualList: each component may be declared only once")
+					t[ComponentFunction] = createItemViewType(itemComponent)
 				end
-				local var1 = function(p3, p4)
-					-- upvalues: getItemComponent (ref), t (ref)
-					local var2 = t[getItemComponent(p3, p4)]
-					assert(var2 ~= nil, "createVirtualList: getItemComponent returned an undeclared component")
+				ItemViewType = function(p3, p4) --[[ Line: 120 ]]
+					-- upvalues: GetItemComponentFunction (copy), t (copy)
+					local Entry = t[GetItemComponentFunction(p3, p4)]
+					assert(Entry ~= nil, "createVirtualList: getItemComponent returned an undeclared component")
 					
-					return var2
+					return Entry
 				end
 			else
 				assert(type(p2.itemComponent) == "function", "createVirtualList: itemComponent must be a React component")
 				assert(p2.itemComponents == nil, "createVirtualList: choose one definition form")
-				local var1 = createItemViewType({
+				ItemViewType = createItemViewType({
 					component = p2.itemComponent,
 					readiness = p2.readiness,
 					hideWhilePending = p2.hideWhilePending
 				})
 			end
-			return function(p3)
-				-- upvalues: axis (copy), var1 (write), createElement (copy), p1 (copy)
-				assert(p3.pinnedStartItem == nil and p3.pinnedEndItem == nil, "createVirtualList: pinned Items require VirtualList")
-				local cloned = table.clone(p3)
-				cloned.axis = p3.axis or axis.Y
-				cloned.itemType = var1
+			return function(Tbl) --[[ Line: 128 | Named "SpecializedVirtualList" ]]
+				-- upvalues: Axis (upval), ItemViewType (ref), CreateElementFunction (upval), p1 (upval)
+				assert(Tbl.pinnedStartItem == nil and Tbl.pinnedEndItem == nil, "createVirtualList: pinned Items require VirtualList")
+				local Copy = table.clone(Tbl)
+				Copy.axis = Tbl.axis or Axis.Y
+				Copy.itemType = ItemViewType
 				
-				return createElement(p1, cloned)
+				return CreateElementFunction(p1, Copy)
 			end
 		end
 	end

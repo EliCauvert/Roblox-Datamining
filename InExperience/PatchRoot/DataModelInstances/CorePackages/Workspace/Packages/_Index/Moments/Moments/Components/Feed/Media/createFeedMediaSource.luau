@@ -1,70 +1,123 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
-local _ = require(parent.Signals)
-local _ = require(parent.MomentsCommon)
-local _ = require(moments.Components.Feed.FeedTypes)
-local fFlagMomentsModeratedMomentPageModule = require(moments.Flags.FFlagMomentsModeratedMomentPage)
-local toMediaItemModule = require(script.Parent.toMediaItem)
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
+local _ = require(Parent.Signals)
+local _ = require(Parent.MomentsCommon)
+local _ = require(Moments.Components.Feed.FeedTypes)
+local FFlagMomentsModeratedMomentPageModule = require(Moments.Flags.FFlagMomentsModeratedMomentPage)
+local FFlagMomentsServeEDPVideos = require(Parent.SharedFlags).FFlagMomentsServeEDPVideos
+local GameGetPlayabilityStoreModule = if FFlagMomentsServeEDPVideos then require(Parent.DataHydration.GameGetPlayabilityStore) else nil
+local IsVideoEligibleForPlayability = if FFlagMomentsServeEDPVideos then require(Parent.VideoUtils).isVideoEligibleForPlayability else nil
+local ToMediaItemModule = require(script.Parent.toMediaItem)
 
-local function _(p1)
-	if p1.kind ~= "moment" then
+local function _(p1): boolean --[[ Line: 46 | Named "hasMedia" ]]
+	if p1.kind == "moment" then
+		local Moment = p1.moment
+		
+		return Moment ~= nil and Moment.metadata ~= nil
+	else
 		return false
 	end
-	local moment = p1.moment
-	
-	return moment ~= nil and moment.metadata ~= nil
 end
 
-return function(p1, p2, p3)
-	-- upvalues: toMediaItemModule (ref), fFlagMomentsModeratedMomentPageModule (ref)
+return function(p1, GetPlaybackActive, GetCanAutoPlay) --[[ Line: 54 | Named "createFeedMediaSource" ]]
+	-- upvalues: FFlagMomentsServeEDPVideos (copy), GameGetPlayabilityStoreModule (copy), IsVideoEligibleForPlayability (copy), ToMediaItemModule (copy), FFlagMomentsModeratedMomentPageModule (copy)
+	local T = if FFlagMomentsServeEDPVideos then {} else nil
+	local Callback = if FFlagMomentsServeEDPVideos then function(p2, p3) --[[ Line: 61 ]]
+		-- upvalues: T (copy), GameGetPlayabilityStoreModule (upval), IsVideoEligibleForPlayability (upval)
+		local HasMetadata = nil
+		if p2.kind == "moment" then
+			local Moment = p2.moment
+			HasMetadata = Moment ~= nil and Moment.metadata ~= nil
+		else
+			HasMetadata = false
+		end
+		if not HasMetadata then
+			return false
+		end
+		local Moment = p2.moment
+		
+		if Moment.entityType ~= "edpVideo" then
+			return true
+		end
+		local UniverseId: number = Moment.metadata.universeId
+		
+		if UniverseId == nil or UniverseId <= 0 then
+			return false
+		end
+		local Text = tostring(UniverseId)
+		local Entry = T[Text]
+		
+		if Entry == nil then
+			Entry = GameGetPlayabilityStoreModule(false).getPlayability(Text)
+			T[Text] = Entry
+		end
+		return IsVideoEligibleForPlayability(Entry.status(p3) == "Ready", Entry.data(p3))
+	end else nil
+	
+	local function v13(p2): number --[[ Line: 109 ]]
+		-- upvalues: p1 (copy), FFlagMomentsServeEDPVideos (upval), Callback (copy)
+		local Items = p1.getItems(p2)
+		local CurrentIndex: number = p1.getCurrentIndex(p2)
+		local Count = 0
+		
+		for i = 1, math.min(CurrentIndex - 1, #Items) do
+			local CallbackResult = nil
+			if FFlagMomentsServeEDPVideos then
+				CallbackResult = Callback(Items[i], p2)
+			else
+				local Item1 = Items[i]
+				
+				if Item1.kind == "moment" then
+					local Moment = Item1.moment
+					CallbackResult = Moment ~= nil and Moment.metadata ~= nil
+				else
+					CallbackResult = false
+				end
+			end
+			if CallbackResult then
+				Count += 1
+			end
+		end
+		local Item = Items[CurrentIndex]
+		
+		if Item ~= nil then
+			local CallbackResult = nil
+			if FFlagMomentsServeEDPVideos then
+				CallbackResult = Callback(Item, p2)
+			elseif Item.kind == "moment" then
+				local Moment = Item.moment
+				CallbackResult = Moment ~= nil and Moment.metadata ~= nil
+			else
+				CallbackResult = false
+			end
+			if CallbackResult then
+				return Count + 1
+			end
+		end
+		return Count + 0.5
+	end
+	
 	return {
-		getActiveIndex = if fFlagMomentsModeratedMomentPageModule then function(p4)
-			-- upvalues: p1 (ref)
-			local items = p1.getItems(p4)
-			local currentIndex = p1.getCurrentIndex(p4)
-			local var1 = 0
+		getActiveIndex = if FFlagMomentsModeratedMomentPageModule or FFlagMomentsServeEDPVideos then v13 else p1.getCurrentIndex,
+		getItems = function(p3) --[[ Line: 95 ]]
+			-- upvalues: p1 (copy), FFlagMomentsServeEDPVideos (upval), Callback (copy), ToMediaItemModule (upval)
+			local List = {}
 			
-			for i = 1, math.min(currentIndex - 1, #items) do
-				local var2
-				local var3 = items[i]
+			for _, value in p1.getItems(p3) do
+				local Inverted: boolean = FFlagMomentsServeEDPVideos and not Callback(value, p3)
+				local MediaItemModule = nil
 				
-				if var3.kind == "moment" then
-					local moment = var3.moment
-					var2 = moment ~= nil and moment.metadata ~= nil
-				else
-					var2 = false
+				if not Inverted then
+					MediaItemModule = ToMediaItemModule(value, { includeLocalTts = true })
+					Inverted = MediaItemModule == nil
 				end
-				if var2 then
-					var1 += 1
+				if not Inverted then
+					table.insert(List, MediaItemModule)
 				end
 			end
-			local var4 = items[currentIndex]
-			
-			if var4 ~= nil then
-				local var5
-				if var4.kind == "moment" then
-					local moment = var4.moment
-					var5 = moment ~= nil and moment.metadata ~= nil
-				else
-					var5 = false
-				end
-				return if var5 then var1 + 1 else var1 + 0.5
-			end
-		end else p1.getCurrentIndex,
-		getItems = function(p5)
-			-- upvalues: p1 (ref), toMediaItemModule (copy)
-			local t = {}
-			
-			for i, v in p1.getItems(p5) do
-				local var6 = toMediaItemModule(v)
-				
-				if var6 ~= nil then
-					table.insert(t, var6)
-				end
-			end
-			return t
+			return List
 		end,
-		getPlaybackActive = p2,
-		getCanAutoPlay = p3
+		getPlaybackActive = GetPlaybackActive,
+		getCanAutoPlay = GetCanAutoPlay
 	}
 end

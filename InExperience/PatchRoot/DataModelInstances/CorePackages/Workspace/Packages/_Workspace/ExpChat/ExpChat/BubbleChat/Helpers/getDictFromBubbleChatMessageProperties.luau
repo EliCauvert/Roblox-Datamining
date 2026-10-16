@@ -1,51 +1,51 @@
-﻿local configModule = require(script:FindFirstAncestor("ExpChat").Config)
+﻿local ConfigModule = require(script:FindFirstAncestor("ExpChat").Config)
 
-return function(p1)
-	-- upvalues: configModule (ref)
+return function(Object) --[[ Line: 4 ]]
+	-- upvalues: ConfigModule (copy)
 	local t = {}
 	
-	for i, v in pairs(configModule.DefaultBubbleChatMessagePropertiesInstanceSettings) do
-		t[i] = p1[i]
+	for i, _ in pairs(ConfigModule.DefaultBubbleChatMessagePropertiesInstanceSettings) do
+		t[i] = Object[i]
 	end
-	local imageLabel = p1:FindFirstChildOfClass("ImageLabel")
+	local ImageLabel = Object:FindFirstChildOfClass("ImageLabel")
 	
-	if imageLabel then
-		local t_1 = {}
+	if ImageLabel then
+		local ImageLabel1 = {}
 		
-		for i_1, v_1 in pairs(configModule.DefaultBubbleChatChildrenCustomizationProperties.ImageLabel) do
-			t_1[i_1] = imageLabel[i_1]
+		for i1, _ in pairs(ConfigModule.DefaultBubbleChatChildrenCustomizationProperties.ImageLabel) do
+			ImageLabel1[i1] = ImageLabel[i1]
 		end
-		t.ImageLabel = t_1
+		t.ImageLabel = ImageLabel1
 	end
-	local UIGradient = p1:FindFirstChildOfClass("UIGradient")
+	local UIGradient = Object:FindFirstChildOfClass("UIGradient")
 	
 	if UIGradient then
-		local t_1 = {}
+		local UIGradient1 = {}
 		
-		for i_1, v_1 in pairs(configModule.DefaultBubbleChatChildrenCustomizationProperties.UIGradient) do
-			t_1[i_1] = UIGradient[i_1]
+		for i2, _ in pairs(ConfigModule.DefaultBubbleChatChildrenCustomizationProperties.UIGradient) do
+			UIGradient1[i2] = UIGradient[i2]
 		end
-		t.UIGradient = t_1
+		t.UIGradient = UIGradient1
 	end
-	local UICorner = p1:FindFirstChildOfClass("UICorner")
+	local UICorner = Object:FindFirstChildOfClass("UICorner")
 	
 	if UICorner then
-		local t_1 = {}
+		local UICorner1 = {}
 		
-		for i_1, v_1 in pairs(configModule.DefaultBubbleChatChildrenCustomizationProperties.UICorner) do
-			t_1[i_1] = UICorner[i_1]
+		for i3, _ in pairs(ConfigModule.DefaultBubbleChatChildrenCustomizationProperties.UICorner) do
+			UICorner1[i3] = UICorner[i3]
 		end
-		t.UICorner = t_1
+		t.UICorner = UICorner1
 	end
-	local UIPadding = p1:FindFirstChildOfClass("UIPadding")
+	local UIPadding = Object:FindFirstChildOfClass("UIPadding")
 	
 	if UIPadding then
-		local t_1 = {}
+		local UIPadding1 = {}
 		
-		for i_1, v_1 in pairs(configModule.DefaultBubbleChatChildrenCustomizationProperties.UIPadding) do
-			t_1[i_1] = UIPadding[i_1]
+		for i4, _ in pairs(ConfigModule.DefaultBubbleChatChildrenCustomizationProperties.UIPadding) do
+			UIPadding1[i4] = UIPadding[i4]
 		end
-		t.UIPadding = t_1
+		t.UIPadding = UIPadding1
 	end
 	return t
 end

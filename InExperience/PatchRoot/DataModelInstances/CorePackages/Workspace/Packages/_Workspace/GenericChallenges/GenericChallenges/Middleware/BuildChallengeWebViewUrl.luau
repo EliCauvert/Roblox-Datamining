@@ -1,138 +1,145 @@
 ﻿local _ = require(script.Parent.ChallengeHeaders)
-local genericChallenges = script:FindFirstAncestor("GenericChallenges")
-local constantsModule = require(genericChallenges.Utils.constants)
-local challengeTypeModule = require(genericChallenges.Types.ChallengeType)
-local _ = require(genericChallenges.Types.ChallengeParameters)
-local twoStepVerificationActionTypeModule = require(genericChallenges.Types.TwoStepVerificationActionType)
-local captchaActionTypeModule = require(genericChallenges.Types.CaptchaActionType)
-local parent = genericChallenges.Parent
-local base64 = require(parent.AuthCommon).Utils.Base64
-local notificationService = game:GetService("NotificationService")
-local userInputService = game:GetService("UserInputService")
-local urlBuilder = require(parent.UrlBuilder).UrlBuilder
-local urlBase = require(parent.UrlBuilder).UrlBase
-local cryoModule = require(parent.Cryo)
+local GenericChallenges = script:FindFirstAncestor("GenericChallenges")
+local ConstantsModule = require(GenericChallenges.Utils.constants)
+local ChallengeTypeModule = require(GenericChallenges.Types.ChallengeType)
+local _ = require(GenericChallenges.Types.ChallengeParameters)
+local TwoStepVerificationActionTypeModule = require(GenericChallenges.Types.TwoStepVerificationActionType)
+local CaptchaActionTypeModule = require(GenericChallenges.Types.CaptchaActionType)
+local Parent = GenericChallenges.Parent
+local Base64 = require(Parent.AuthCommon).Utils.Base64
+local NotificationService = game:GetService("NotificationService")
+local UserInputService = game:GetService("UserInputService")
+local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
+local UrlBase = require(Parent.UrlBuilder).UrlBase
+local CryoModule = require(Parent.Cryo)
 
-local function _()
-	-- upvalues: notificationService (ref)
-	return if string.lower(notificationService.SelectedTheme) == "dark" then "true" else "false"
+local function _(): string --[[ Line: 23 | Named "getUserDarkModeSettingQueryParam" ]]
+	-- upvalues: NotificationService (copy)
+	return if string.lower(NotificationService.SelectedTheme) == "dark" then "true" else "false"
 end
 
-local function getUserAppTypeQueryParam()
-	-- upvalues: userInputService (ref)
-	local platform = userInputService:GetPlatform()
-	local var1 = "unknown"
+local function getUserAppTypeQueryParam(): string --[[ Line: 30 ]]
+	-- upvalues: UserInputService (copy)
+	local Platform = UserInputService:GetPlatform()
+	local v1 = "unknown"
 	
-	if platform == Enum.Platform.Android then
-		var1 = "android"
+	if Platform == Enum.Platform.Android then
+		v1 = "android"
 		
-		return var1
-	elseif platform == Enum.Platform.IOS then
-		var1 = "ios"
-		
-		return var1
-	elseif platform == Enum.Platform.Windows then
-		var1 = "windows"
-		
-		return var1
-	elseif platform == Enum.Platform.OSX then
-		var1 = "osx"
-		
-		return var1
-	elseif platform == Enum.Platform.UWP then
-		var1 = "uwp"
-		
-		return var1
-	elseif platform == Enum.Platform.XBoxOne then
-		var1 = "xbox"
+		return v1
 	end
-	return var1
+	if Platform == Enum.Platform.IOS then
+		v1 = "ios"
+		
+		return v1
+	end
+	if Platform == Enum.Platform.Windows then
+		v1 = "windows"
+		
+		return v1
+	end
+	if Platform == Enum.Platform.OSX then
+		v1 = "osx"
+		
+		return v1
+	end
+	if Platform == Enum.Platform.UWP then
+		v1 = "uwp"
+		
+		return v1
+	end
+	if Platform == Enum.Platform.XBoxOne then
+		v1 = "xbox"
+	end
+	return v1
 end
 
-local function getChallengeTypeQueryParameters(p1, p2)
-	-- upvalues: challengeTypeModule (ref), captchaActionTypeModule (ref), twoStepVerificationActionTypeModule (ref)
-	if p1 == challengeTypeModule.Captcha then
-		assert(p2.actionType ~= nil, "actionType must be provided to render captcha")
-		assert(p2.dataExchangeBlob ~= nil, "dataExchangeBlob must be provided to render captcha")
-		assert(p2.captchaId ~= nil, "captchaId must be provided to render captcha")
+local function getChallengeTypeQueryParameters(Generic, p1) --[[ Line: 49 ]]
+	-- upvalues: ChallengeTypeModule (copy), CaptchaActionTypeModule (copy), TwoStepVerificationActionTypeModule (copy)
+	if Generic == ChallengeTypeModule.Captcha then
+		assert(p1.actionType ~= nil, "actionType must be provided to render captcha")
+		assert(p1.dataExchangeBlob ~= nil, "dataExchangeBlob must be provided to render captcha")
+		assert(p1.captchaId ~= nil, "captchaId must be provided to render captcha")
 		
 		return {
-			["action-type"] = captchaActionTypeModule.toRawValue(p2.actionType),
-			["data-exchange-blob"] = p2.dataExchangeBlob,
-			["captcha-id"] = p2.captchaId
+			["action-type"] = CaptchaActionTypeModule.toRawValue(p1.actionType),
+			["data-exchange-blob"] = p1.dataExchangeBlob,
+			["captcha-id"] = p1.captchaId
 		}
-	elseif p1 == challengeTypeModule.TwoStepVerification then
-		assert(p2.challengeId ~= nil, "challengeId must be provided to render 2sv")
-		assert(p2.userId ~= nil, "userId must be provided to render 2sv")
-		assert(p2.actionType ~= nil, "actionType must be provided to render 2sv")
-		assert(p2.allowRememberDevice ~= nil, "allowRememberDevice must be provided to render 2sv")
-		local t = {
-			["challenge-id"] = p2.challengeId,
-			["user-id"] = p2.userId,
-			["action-type"] = twoStepVerificationActionTypeModule.toRawValue(p2.actionType),
-			["allow-remember-device"] = if p2.allowRememberDevice then "true" else "false",
-			["client-supports-2sv-recovery"] = if p2.clientSupports2svRecovery then "true" else "false"
+	end
+	if Generic == ChallengeTypeModule.TwoStepVerification then
+		assert(p1.challengeId ~= nil, "challengeId must be provided to render 2sv")
+		assert(p1.userId ~= nil, "userId must be provided to render 2sv")
+		assert(p1.actionType ~= nil, "actionType must be provided to render 2sv")
+		assert(p1.allowRememberDevice ~= nil, "allowRememberDevice must be provided to render 2sv")
+		local config = {
+			["challenge-id"] = p1.challengeId,
+			["user-id"] = p1.userId,
+			["action-type"] = TwoStepVerificationActionTypeModule.toRawValue(p1.actionType),
+			["allow-remember-device"] = if p1.allowRememberDevice then "true" else "false",
+			["client-supports-2sv-recovery"] = if p1.clientSupports2svRecovery then "true" else "false"
 		}
 		
-		if p2.recoverySessionId ~= nil and string.len(p2.recoverySessionId) > 0 then
-			t["recovery-session-id"] = p2.recoverySessionId
+		if p1.recoverySessionId ~= nil and string.len(p1.recoverySessionId) > 0 then
+			config["recovery-session-id"] = p1.recoverySessionId
 		end
-		return t
-	elseif p1 == challengeTypeModule.SecurityQuestions then
-		assert(p2.sessionId ~= nil, "sessionId must be provided to render security questions")
-		assert(p2.userId ~= nil, "userId must be provided to render security questions")
+		return config
+	elseif Generic == ChallengeTypeModule.SecurityQuestions then
+		assert(p1.sessionId ~= nil, "sessionId must be provided to render security questions")
+		assert(p1.userId ~= nil, "userId must be provided to render security questions")
 		
-		return { ["user-id"] = p2.userId, ["session-id"] = p2.sessionId }
-	elseif p1 == challengeTypeModule.Reauthentication then
+		return { ["user-id"] = p1.userId, ["session-id"] = p1.sessionId }
+	elseif Generic == ChallengeTypeModule.Reauthentication then
 		return {}
-	elseif p1 == challengeTypeModule.Generic then
-		assert(p2.genericChallengeId ~= nil, "genericChallengeId must be provided to render challenge")
-		assert(p2.genericChallengeType ~= nil, "genericChallengeType must be provided to render challenge")
-		assert(p2.genericChallengeMetadata ~= nil, "genericChallengeMetadata must be provided to render challenge")
+	elseif Generic == ChallengeTypeModule.Generic then
+		assert(p1.genericChallengeId ~= nil, "genericChallengeId must be provided to render challenge")
+		assert(p1.genericChallengeType ~= nil, "genericChallengeType must be provided to render challenge")
+		assert(p1.genericChallengeMetadata ~= nil, "genericChallengeMetadata must be provided to render challenge")
 		
 		return {
-			["generic-challenge-id"] = p2.genericChallengeId,
-			["generic-challenge-type"] = p2.genericChallengeType,
-			["challenge-metadata-json"] = p2.genericChallengeMetadata
+			["generic-challenge-id"] = p1.genericChallengeId,
+			["generic-challenge-type"] = p1.genericChallengeType,
+			["challenge-metadata-json"] = p1.genericChallengeMetadata
 		}
+	else
+		return {}
 	end
-	return {}
 end
 
-return function(p1, p2, p3)
-	-- upvalues: challengeTypeModule (ref), constantsModule (ref), getUserAppTypeQueryParam (ref), notificationService (ref), getChallengeTypeQueryParameters (ref), base64 (ref), urlBuilder (ref), urlBase (ref), cryoModule (ref)
+return function(p1, p2, p3) --[[ Line: 109 ]]
+	-- upvalues: ChallengeTypeModule (copy), ConstantsModule (copy), getUserAppTypeQueryParam (copy), NotificationService (copy), getChallengeTypeQueryParameters (copy), Base64 (copy), UrlBuilder (copy), UrlBase (copy), CryoModule (copy)
 	if p1 ~= nil then
 		assert(p3 == nil, "challenge parameters cannot be specified for generic challenge rendering")
 		assert(string.len(p1.challengeId) > 0, "challenge id does not exist")
 		assert(p1.challengeType.typed ~= nil, "challenge is of an unknown type")
 	end
-	local generic = challengeTypeModule.Generic
+	local Generic = ChallengeTypeModule.Generic
 	
 	if p2 ~= nil then
-		assert(challengeTypeModule.toRawValue(p2) ~= nil, "challenge type is not valid")
-		generic = p2
+		assert(ChallengeTypeModule.toRawValue(p2) ~= nil, "challenge type is not valid")
+		Generic = p2
 	end
-	local var1
-	local t = {
-		[constantsModule.appTypeQueryParam] = getUserAppTypeQueryParam(),
-		[constantsModule.challengeTypeQueryParam] = challengeTypeModule.toRawValue(generic),
-		[constantsModule.darkModeQueryParam] = if string.lower(notificationService.SelectedTheme) == "dark" then "true" else "false"
+	local IsDark = string.lower(NotificationService.SelectedTheme) == "dark"
+	local config = {
+		[ConstantsModule.appTypeQueryParam] = getUserAppTypeQueryParam(),
+		[ConstantsModule.challengeTypeQueryParam] = ChallengeTypeModule.toRawValue(Generic),
+		[ConstantsModule.darkModeQueryParam] = if IsDark then "true" else "false"
 	}
-	local _ = nil
+	local ChallengeTypeQueryParameters = nil
 	
 	if p3 == nil then
 		assert(p1 ~= nil, "challenge headers must be defined for generic challenge rendering")
-		var1 = {
-			[constantsModule.genericChallengeIdQueryParam] = p1.challengeId,
-			[constantsModule.genericChallengeTypeQueryParam] = p1.challengeType.raw,
-			[constantsModule.challengeMetadataJsonQueryParam] = base64.EncodeUrl(p1.challengeMetadata.decoded)
+		ChallengeTypeQueryParameters = {
+			[ConstantsModule.genericChallengeIdQueryParam] = p1.challengeId,
+			[ConstantsModule.genericChallengeTypeQueryParam] = p1.challengeType.raw,
+			[ConstantsModule.challengeMetadataJsonQueryParam] = Base64.EncodeUrl(p1.challengeMetadata.decoded)
 		}
 	else
-		var1 = getChallengeTypeQueryParameters(generic, p3)
+		ChallengeTypeQueryParameters = getChallengeTypeQueryParameters(Generic, p3)
 	end
-	return urlBuilder.new({
+	return UrlBuilder.new({
 		path = "challenge/cdn/hybrid",
-		base = urlBase.WWW,
-		query = cryoModule.Dictionary.join(t, var1)
+		base = UrlBase.WWW,
+		query = CryoModule.Dictionary.join(config, ChallengeTypeQueryParameters)
 	})()
 end

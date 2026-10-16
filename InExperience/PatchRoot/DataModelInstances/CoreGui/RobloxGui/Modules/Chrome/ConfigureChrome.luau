@@ -1,65 +1,65 @@
-﻿local chrome = script:FindFirstAncestor("Chrome")
-local corePackagesService = game:GetService("CorePackages")
+﻿local Chrome = script:FindFirstAncestor("Chrome")
+local CorePackages = game:GetService("CorePackages")
 
-if not require(corePackagesService.Workspace.Packages.Chrome).Enabled() then
+if not require(CorePackages.Workspace.Packages.Chrome).Enabled() then
 	return nil
 end
-local serviceModule = require(chrome.Service)
-local constantsModule = require(chrome.Integrations.Party.Constants)
-local isConnectUnibarEnabledModule = require(chrome.Integrations.Connect.isConnectUnibarEnabled)
-local isInExperienceUIVREnabled = require(corePackagesService.Workspace.Packages.SharedExperimentDefinition).isInExperienceUIVREnabled
-local configureShortcutsModule = require(chrome.ChromeShared.Shortcuts.ConfigureShortcuts)
-local buildMenuOrderModule = require(chrome.ChromeShared.Unibar.buildMenuOrder)
-local sharedFlagsModule = require(corePackagesService.Workspace.Packages.SharedFlags)
-local getFFlagDebugEnableUnibarDummyIntegrations = sharedFlagsModule.GetFFlagDebugEnableUnibarDummyIntegrations
-local fFlagEnableConsoleExpControls = sharedFlagsModule.FFlagEnableConsoleExpControls
-local fFlagAppNavMyStatsTab = sharedFlagsModule.FFlagAppNavMyStatsTab
-local argoPartyExperimentation = require(corePackagesService.Workspace.Packages.SocialExperiments).ArgoPartyExperimentation
-local isSpatial = require(corePackagesService.Workspace.Packages.AppCommonLib).isSpatial
+local ServiceModule = require(Chrome.Service)
+local ConstantsModule = require(Chrome.Integrations.Party.Constants)
+local IsConnectUnibarEnabledModule = require(Chrome.Integrations.Connect.isConnectUnibarEnabled)
+local IsInExperienceUIVREnabled = require(CorePackages.Workspace.Packages.SharedExperimentDefinition).isInExperienceUIVREnabled
+local ConfigureShortcutsModule: () -> () = require(Chrome.ChromeShared.Shortcuts.ConfigureShortcuts)
+local BuildMenuOrderModule = require(Chrome.ChromeShared.Unibar.buildMenuOrder)
+local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
+local GetFFlagDebugEnableUnibarDummyIntegrationsFunction = SharedFlagsModule.GetFFlagDebugEnableUnibarDummyIntegrations
+local FFlagEnableConsoleExpControls = SharedFlagsModule.FFlagEnableConsoleExpControls
+local FFlagAppNavMyStatsTab = SharedFlagsModule.FFlagAppNavMyStatsTab
+local ArgoPartyExperimentation = require(CorePackages.Workspace.Packages.SocialExperiments).ArgoPartyExperimentation
+local IsSpatialFunction = require(CorePackages.Workspace.Packages.AppCommonLib).isSpatial
 
-local function _()
-	-- upvalues: chrome (ref)
-	require(chrome.Integrations)
+local function _() --[[ Line: 26 | Named "initializeIntegrations" ]]
+	-- upvalues: Chrome (copy)
+	require(Chrome.Integrations)
 end
 
-local _ = function()
-	-- upvalues: configureShortcutsModule (ref)
-	configureShortcutsModule()
+local _ = function() --[[ Line: 30 ]]
+	-- upvalues: ConfigureShortcutsModule (copy)
+	ConfigureShortcutsModule()
 end
 
-local function configureUnibar()
-	-- upvalues: buildMenuOrderModule (ref), getFFlagDebugEnableUnibarDummyIntegrations (ref), isConnectUnibarEnabledModule (ref), argoPartyExperimentation (ref), constantsModule (ref), fFlagAppNavMyStatsTab (ref), isInExperienceUIVREnabled (ref), isSpatial (ref), serviceModule (ref)
-	local var1 = buildMenuOrderModule()
-	local list = { "nine_dot", "chat", "toggle_mic_mute" }
-	table.insert(list, 3, "join_voice")
+local function configureUnibar() --[[ Line: 34 ]]
+	-- upvalues: BuildMenuOrderModule (copy), GetFFlagDebugEnableUnibarDummyIntegrationsFunction (copy), IsConnectUnibarEnabledModule (copy), ArgoPartyExperimentation (copy), ConstantsModule (copy), FFlagAppNavMyStatsTab (copy), IsInExperienceUIVREnabled (copy), IsSpatialFunction (copy), ServiceModule (copy)
+	local MenuOrderModule = BuildMenuOrderModule()
+	local List = { "nine_dot", "chat", "toggle_mic_mute" }
+	table.insert(List, 3, "join_voice")
 	
-	if getFFlagDebugEnableUnibarDummyIntegrations() then
-		table.insert(list, "dummy_window")
-		table.insert(list, "dummy_window_2")
+	if GetFFlagDebugEnableUnibarDummyIntegrationsFunction() then
+		table.insert(List, "dummy_window")
+		table.insert(List, "dummy_window_2")
 	end
-	if isConnectUnibarEnabledModule() then
-		table.insert(list, if argoPartyExperimentation.getIsRenameEnabled() then "party_entrypoint" else "connect_unibar")
+	if IsConnectUnibarEnabledModule() then
+		table.insert(List, if ArgoPartyExperimentation.getIsRenameEnabled() then "party_entrypoint" else "connect_unibar")
 	end
-	local index = table.find(list, "toggle_mic_mute")
+	local FoundIndex: number? = table.find(List, "toggle_mic_mute")
 	
-	if index then
-		table.insert(list, index, constantsModule.TOGGLE_MIC_INTEGRATION_ID)
+	if FoundIndex then
+		table.insert(List, FoundIndex, ConstantsModule.TOGGLE_MIC_INTEGRATION_ID)
 	end
-	if fFlagAppNavMyStatsTab then
-		table.insert(list, "assistant_build")
+	if FFlagAppNavMyStatsTab then
+		table.insert(List, "assistant_build")
 	end
-	if isInExperienceUIVREnabled and isSpatial() then
-		serviceModule:configureMenu({ { "vr_toggle_button", "vr_safety_bubble" }, list })
+	if IsInExperienceUIVREnabled and IsSpatialFunction() then
+		ServiceModule:configureMenu({ { "vr_toggle_button", "vr_safety_bubble" }, List })
 	else
-		serviceModule:configureMenu({ list })
+		ServiceModule:configureMenu({ List })
 	end
-	serviceModule:configureSubMenu("nine_dot", var1)
+	ServiceModule:configureSubMenu("nine_dot", MenuOrderModule)
 end
 
-require(chrome.Integrations)
+require(Chrome.Integrations)
 
-if fFlagEnableConsoleExpControls then
-	configureShortcutsModule()
+if FFlagEnableConsoleExpControls then
+	ConfigureShortcutsModule()
 end
 configureUnibar()
 

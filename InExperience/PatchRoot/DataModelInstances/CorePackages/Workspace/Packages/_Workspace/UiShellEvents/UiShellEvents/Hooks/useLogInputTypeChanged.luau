@@ -1,59 +1,59 @@
-﻿local uiShellEvents = script:FindFirstAncestor("UiShellEvents")
-local userInputService = game:GetService("UserInputService")
-local parent = uiShellEvents.Parent
-local reactModule = require(parent.React)
-local logInputTypeChangedModule = require(uiShellEvents.Analytics.logInputTypeChanged)
-local useInputType = require(parent.RoactUtils).Hooks.useInputType
-local useIsTvRemoteDevice = require(parent.RoactUtils).Hooks.useIsTvRemoteDevice
-local logInputTypeChangedTvRemote1 = game:DefineFastFlag("LogInputTypeChangedTvRemote1", false)
+﻿local UiShellEvents = script:FindFirstAncestor("UiShellEvents")
+local UserInputService = game:GetService("UserInputService")
+local Parent = UiShellEvents.Parent
+local ReactModule = require(Parent.React)
+local LogInputTypeChangedModule = require(UiShellEvents.Analytics.logInputTypeChanged)
+local UseInputTypeFunction = require(Parent.RoactUtils).Hooks.useInputType
+local UseIsTvRemoteDeviceFunction = require(Parent.RoactUtils).Hooks.useIsTvRemoteDevice
+local LogInputTypeChangedTvRemote1 = game:DefineFastFlag("LogInputTypeChangedTvRemote1", false)
 
-local function getConnectedGamepadTypes(p1)
-	-- upvalues: userInputService (ref)
-	if p1 == nil then
+local function getConnectedGamepadTypes(ConnectedGamepads) --[[ Line: 11 ]]
+	-- upvalues: UserInputService (copy)
+	if ConnectedGamepads == nil then
 		return nil
 	end
-	local t = {}
+	local List = {}
 	
-	for i, v in p1 do
-		if userInputService:GamepadSupports(v, Enum.KeyCode.Return) then
-			table.insert(t, "tv_remote")
+	for _, connectedGamepad in ConnectedGamepads do
+		if UserInputService:GamepadSupports(connectedGamepad, Enum.KeyCode.Return) then
+			table.insert(List, "tv_remote")
 		else
-			table.insert(t, "full_gamepad")
+			table.insert(List, "full_gamepad")
 		end
 	end
-	return t
+	return List
 end
 
-local function anyFullGamepadConnected(p2)
-	-- upvalues: userInputService (ref)
-	if p2 == nil then
+local function anyFullGamepadConnected(ConnectedGamepads): boolean? --[[ Line: 27 ]]
+	-- upvalues: UserInputService (copy)
+	if ConnectedGamepads == nil then
 		return nil
 	end
-	for i, v in p2 do
-		if not userInputService:GamepadSupports(v, Enum.KeyCode.Return) then
+	for _, connectedGamepad in ConnectedGamepads do
+		if not UserInputService:GamepadSupports(connectedGamepad, Enum.KeyCode.Return) then
 			return true
 		end
 	end
 	return false
 end
 
-return function(p3, p4)
-	-- upvalues: useInputType (ref), logInputTypeChangedTvRemote1 (ref), useIsTvRemoteDevice (ref), userInputService (ref), anyFullGamepadConnected (ref), getConnectedGamepadTypes (ref), reactModule (ref), logInputTypeChangedModule (ref)
-	local var1 = useInputType()
-	local var2 = if logInputTypeChangedTvRemote1 then useIsTvRemoteDevice() else nil
-	local var3 = if logInputTypeChangedTvRemote1 then userInputService:GetConnectedGamepads() else nil
-	local var4 = if logInputTypeChangedTvRemote1 then anyFullGamepadConnected(var3) else nil
-	local var5 = if logInputTypeChangedTvRemote1 then getConnectedGamepadTypes(var3) else nil
-	local var6 = if var5 then table.concat(var5, ",") else nil
-	reactModule.useEffect(function()
-		-- upvalues: userInputService (copy), logInputTypeChangedModule (copy), p3 (ref), var1 (ref), var4 (ref), var6 (ref), var2 (ref), p4 (ref)
-		logInputTypeChangedModule(p3, "inputTypeChanged", {
-			inputType = var1,
-			gamepadConnected = userInputService:GetGamepadConnected(Enum.UserInputType.Gamepad1),
-			anyFullGamepadConnected = var4,
-			connectedGamepads = var6,
-			isTvRemote = var2,
-			playSessionId = p4
+return function(p1, PlaySessionId) --[[ Line: 40 | Named "useLogInputTypeChanged" ]]
+	-- upvalues: UseInputTypeFunction (copy), LogInputTypeChangedTvRemote1 (copy), UseIsTvRemoteDeviceFunction (copy), UserInputService (copy), anyFullGamepadConnected (copy), getConnectedGamepadTypes (copy), ReactModule (copy), LogInputTypeChangedModule (copy)
+	local UseInputTypeResult = UseInputTypeFunction()
+	local UseIsTvRemoteDeviceResult = if LogInputTypeChangedTvRemote1 then UseIsTvRemoteDeviceFunction() else nil
+	local ConnectedGamepads = if LogInputTypeChangedTvRemote1 then UserInputService:GetConnectedGamepads() else nil
+	local AnyFullGamepadConnectedResult = if LogInputTypeChangedTvRemote1 then anyFullGamepadConnected(ConnectedGamepads) else nil
+	local ConnectedGamepadTypes = if LogInputTypeChangedTvRemote1 then getConnectedGamepadTypes(ConnectedGamepads) else nil
+	local Joined = if ConnectedGamepadTypes then table.concat(ConnectedGamepadTypes, ",") else nil
+	ReactModule.useEffect(function() --[[ Line: 57 ]]
+		-- upvalues: UserInputService (upval), LogInputTypeChangedModule (upval), p1 (copy), UseInputTypeResult (copy), AnyFullGamepadConnectedResult (copy), Joined (copy), UseIsTvRemoteDeviceResult (copy), PlaySessionId (copy)
+		LogInputTypeChangedModule(p1, "inputTypeChanged", {
+			inputType = UseInputTypeResult,
+			gamepadConnected = UserInputService:GetGamepadConnected(Enum.UserInputType.Gamepad1),
+			anyFullGamepadConnected = AnyFullGamepadConnectedResult,
+			connectedGamepads = Joined,
+			isTvRemote = UseIsTvRemoteDeviceResult,
+			playSessionId = PlaySessionId
 		})
-	end, { var1, var6 })
+	end, { UseInputTypeResult, Joined })
 end

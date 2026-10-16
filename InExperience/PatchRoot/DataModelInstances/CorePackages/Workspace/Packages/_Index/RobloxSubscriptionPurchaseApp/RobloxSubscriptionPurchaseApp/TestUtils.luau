@@ -1,96 +1,96 @@
-﻿local parent = script:FindFirstAncestor("RobloxSubscriptionPurchaseApp").Parent
-local reactModule = require(parent.React)
-local localizationService = game:GetService("LocalizationService")
-local localization = require(parent.AppLocales).Localization
-local localizationProvider = require(parent.Localization).LocalizationProvider
+﻿local Parent = script:FindFirstAncestor("RobloxSubscriptionPurchaseApp").Parent
+local ReactModule = require(Parent.React)
+local LocalizationService = game:GetService("LocalizationService")
+local Localization = require(Parent.AppLocales).Localization
+local LocalizationProvider = require(Parent.Localization).LocalizationProvider
 
 return {
-	makeTestRoot = function(p1)
-		-- upvalues: reactModule (ref), localizationProvider (ref), localization (ref), localizationService (ref)
-		return reactModule.createElement(localizationProvider, {
-			localization = localization.new(localizationService.RobloxLocaleId)
-		}, { Child = p1 })
+	makeTestRoot = function(Child) --[[ Line: 14 ]]
+		-- upvalues: ReactModule (copy), LocalizationProvider (copy), Localization (copy), LocalizationService (copy)
+		return ReactModule.createElement(LocalizationProvider, {
+			localization = Localization.new(LocalizationService.RobloxLocaleId)
+		}, { Child = Child })
 	end,
 	NativePurchaseFinishedWithLocalPlayer = {
-		new = function()
-			local bindableEvent = Instance.new("BindableEvent")
+		new = function() --[[ Line: 39 ]]
+			local BindableEvent = Instance.new("BindableEvent")
 			
 			return {
-				getSignal = function()
-					-- upvalues: bindableEvent (ref)
-					return bindableEvent.Event
+				getSignal = function() --[[ Line: 42 ]]
+					-- upvalues: BindableEvent (copy)
+					return BindableEvent.Event
 				end,
-				fire = function(p1, p2)
-					-- upvalues: bindableEvent (ref)
-					bindableEvent:Fire(p1, p2)
+				fire = function(p1, p2) --[[ Line: 45 ]]
+					-- upvalues: BindableEvent (copy)
+					BindableEvent:Fire(p1, p2)
 				end
 			}
 		end
 	},
 	NativePurchaseFinishedWithLocalPlayerV2 = {
-		new = function()
-			local bindableEvent = Instance.new("BindableEvent")
+		new = function() --[[ Line: 51 ]]
+			local BindableEvent = Instance.new("BindableEvent")
 			
 			return {
-				getSignal = function()
-					-- upvalues: bindableEvent (ref)
-					return bindableEvent.Event
+				getSignal = function() --[[ Line: 54 ]]
+					-- upvalues: BindableEvent (copy)
+					return BindableEvent.Event
 				end,
-				fire = function(p1, p2, p3)
-					-- upvalues: bindableEvent (ref)
-					bindableEvent:Fire(p1, p2, p3)
+				fire = function(p1, p2, p3) --[[ Line: 57 ]]
+					-- upvalues: BindableEvent (copy)
+					BindableEvent:Fire(p1, p2, p3)
 				end
 			}
 		end
 	},
 	NativePurchaseFinished = {
-		new = function()
-			local bindableEvent = Instance.new("BindableEvent")
+		new = function() --[[ Line: 63 ]]
+			local BindableEvent = Instance.new("BindableEvent")
 			
 			return {
-				getSignal = function()
-					-- upvalues: bindableEvent (ref)
-					return bindableEvent.Event
+				getSignal = function() --[[ Line: 66 ]]
+					-- upvalues: BindableEvent (copy)
+					return BindableEvent.Event
 				end,
-				fire = function(p1, p2, p3)
-					-- upvalues: bindableEvent (ref)
-					bindableEvent:Fire(p1, p2, p3)
+				fire = function(p1, p2, p3) --[[ Line: 69 ]]
+					-- upvalues: BindableEvent (copy)
+					BindableEvent:Fire(p1, p2, p3)
 				end
 			}
 		end
 	},
 	NativePurchaseFinishedV2 = {
-		new = function()
-			local bindableEvent = Instance.new("BindableEvent")
+		new = function() --[[ Line: 81 ]]
+			local BindableEvent = Instance.new("BindableEvent")
 			
 			return {
-				getSignal = function()
-					-- upvalues: bindableEvent (ref)
-					return bindableEvent.Event
+				getSignal = function() --[[ Line: 84 ]]
+					-- upvalues: BindableEvent (copy)
+					return BindableEvent.Event
 				end,
-				fire = function(p1, p2, p3, p4)
-					-- upvalues: bindableEvent (ref)
-					bindableEvent:Fire(p1, p2, p3, p4)
+				fire = function(p1, p2, p3, p4) --[[ Line: 87 ]]
+					-- upvalues: BindableEvent (copy)
+					BindableEvent:Fire(p1, p2, p3, p4)
 				end
 			}
 		end
 	},
 	LocalPlayerHasRobloxSubscription = {
-		new = function()
-			local bindableEvent = Instance.new("BindableEvent")
+		new = function() --[[ Line: 99 ]]
+			local BindableEvent = Instance.new("BindableEvent")
 			
 			return {
 				HasRobloxSubscription = false,
-				GetPropertyChangedSignal = function(_, p1)
-					-- upvalues: bindableEvent (ref)
+				GetPropertyChangedSignal = function(_, p1) --[[ Line: 103 ]]
+					-- upvalues: BindableEvent (copy)
 					assert(p1 == "HasRobloxSubscription", "Invalid property name")
 					
-					return bindableEvent.Event
+					return BindableEvent.Event
 				end,
-				setHasRobloxSubscription = function(value, p1)
-					-- upvalues: bindableEvent (ref)
-					value.HasRobloxSubscription = p1
-					bindableEvent:Fire()
+				setHasRobloxSubscription = function(p1, HasRobloxSubscription) --[[ Line: 107 ]]
+					-- upvalues: BindableEvent (copy)
+					p1.HasRobloxSubscription = HasRobloxSubscription
+					BindableEvent:Fire()
 				end
 			}
 		end

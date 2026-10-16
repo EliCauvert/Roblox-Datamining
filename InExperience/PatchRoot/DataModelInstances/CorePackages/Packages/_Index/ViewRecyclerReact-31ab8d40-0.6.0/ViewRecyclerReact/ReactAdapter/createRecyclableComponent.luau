@@ -1,15 +1,15 @@
-﻿local viewRecyclerReact = script:FindFirstAncestor("ViewRecyclerReact")
-local reactModule = require(viewRecyclerReact.Parent.React)
-local signalsReactModule = require(viewRecyclerReact.Parent.SignalsReact)
-local createRecyclableViewModule = require(viewRecyclerReact.ReactAdapter.createRecyclableView)
+﻿local ViewRecyclerReact = script:FindFirstAncestor("ViewRecyclerReact")
+local ReactModule = require(ViewRecyclerReact.Parent.React)
+local SignalsReactModule = require(ViewRecyclerReact.Parent.SignalsReact)
+local CreateRecyclableViewModule = require(ViewRecyclerReact.ReactAdapter.createRecyclableView)
 
-return function(p1, p2)
-	-- upvalues: signalsReactModule (ref), reactModule (ref), createRecyclableViewModule (ref)
-	return createRecyclableViewModule(function(p3)
-		-- upvalues: signalsReactModule (copy), reactModule (copy), p1 (ref)
-		local cloned = table.clone(signalsReactModule.useSignalState(p3.itemSignal))
-		cloned.pending = p3.pending
+return function(p1, p2) --[[ Line: 12 | Named "createRecyclableComponent" ]]
+	-- upvalues: SignalsReactModule (copy), ReactModule (copy), CreateRecyclableViewModule (copy)
+	return CreateRecyclableViewModule(function(p3) --[[ Line: 16 | Named "OrdinaryPropsAdapter" ]]
+		-- upvalues: SignalsReactModule (upval), ReactModule (upval), p1 (copy)
+		local Copy = table.clone((SignalsReactModule.useSignalState(p3.itemSignal)))
+		Copy.pending = p3.pending
 		
-		return reactModule.createElement(p1, cloned)
+		return ReactModule.createElement(p1, Copy)
 	end, p2)
 end

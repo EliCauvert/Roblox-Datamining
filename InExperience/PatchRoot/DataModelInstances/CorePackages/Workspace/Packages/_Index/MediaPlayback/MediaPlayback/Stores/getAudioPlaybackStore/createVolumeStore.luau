@@ -1,34 +1,34 @@
-﻿local signalsModule = require(script:FindFirstAncestor("MediaPlayback").Parent.Signals)
-local createSignal = signalsModule.createSignal
-local createComputed = signalsModule.createComputed
+﻿local SignalsModule = require(script:FindFirstAncestor("MediaPlayback").Parent.Signals)
+local CreateSignalFunction = SignalsModule.createSignal
+local CreateComputedFunction = SignalsModule.createComputed
 
-return function()
-	-- upvalues: createSignal (ref), createComputed (ref)
-	local var1, var2 = createSignal(1)
-	local var3, var4 = createSignal(var1(false))
-	local var5 = createComputed(function(p1)
-		-- upvalues: var1 (ref)
-		return var1(p1) <= 0
+return function() --[[ Line: 16 | Named "createVolumeStore" ]]
+	-- upvalues: CreateSignalFunction (copy), CreateComputedFunction (copy)
+	local Signal, Signal2 = CreateSignalFunction(1)
+	local Signal1, Signal2_1 = CreateSignalFunction(Signal(false))
+	local Computed = CreateComputedFunction(function(p1): boolean --[[ Line: 20 ]]
+		-- upvalues: Signal (copy)
+		return Signal(p1) <= 0
 	end)
 	
 	return {
-		getVolume = var1,
-		setVolume = function(value)
-			-- upvalues: var2 (ref)
-			var2(math.clamp(value, 0, 1))
+		getVolume = Signal,
+		setVolume = function(Value: number) --[[ Line: 24 ]]
+			-- upvalues: Signal2 (copy)
+			Signal2((math.clamp(Value, 0, 1)))
 		end,
-		getIsMuted = var5,
-		mute = function()
-			-- upvalues: var5 (ref), var4 (ref), var1 (ref), var2 (ref)
-			if not var5(false) then
-				var4(var1(false))
-				var2(0)
+		getIsMuted = Computed,
+		mute = function() --[[ Line: 28 ]]
+			-- upvalues: Computed (copy), Signal2_1 (copy), Signal (copy), Signal2 (copy)
+			if not Computed(false) then
+				Signal2_1(Signal(false))
+				Signal2(0)
 			end
 		end,
-		unmute = function()
-			-- upvalues: var5 (ref), var2 (ref), var3 (ref)
-			if var5(false) then
-				var2(var3(false))
+		unmute = function() --[[ Line: 35 ]]
+			-- upvalues: Computed (copy), Signal2 (copy), Signal1 (copy)
+			if Computed(false) then
+				Signal2(Signal1(false))
 			end
 		end
 	}

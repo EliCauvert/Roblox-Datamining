@@ -1,35 +1,35 @@
-﻿local placeVersionHistoryModule = require(script:FindFirstAncestor("BuildExperience").Parent.DataHydration.PlaceVersionHistory)
-local versionHistoryConstantsModule = require(script.Parent.VersionHistoryConstants)
-local publishStatus = placeVersionHistoryModule.PublishStatus
-local saveType = placeVersionHistoryModule.SaveType
+﻿local PlaceVersionHistoryModule = require(script:FindFirstAncestor("BuildExperience").Parent.DataHydration.PlaceVersionHistory)
+local VersionHistoryConstantsModule = require(script.Parent.VersionHistoryConstants)
+local PublishStatus = PlaceVersionHistoryModule.PublishStatus
+local SaveType = PlaceVersionHistoryModule.SaveType
 
-local function _(p1)
+local function _(p1) --[[ Line: 13 | Named "toNumber" ]]
 	return if type(p1) == "number" then p1 elseif type(p1) == "string" then tonumber(p1) else nil
 end
 
 return {
-	getBadgeKind = function(p1)
-		-- upvalues: publishStatus (ref), saveType (ref)
-		return if p1.publishStatus == publishStatus.Live then "published" elseif p1.publishStatus == publishStatus.PreviouslyPublished then "previouslyPublished" elseif p1.parentAssetVersionId == nil then if p1.saveType == saveType.AutoSave then "autosaved" else nil else "restored"
+	getBadgeKind = function(p1) --[[ Line: 44 ]]
+		-- upvalues: PublishStatus (copy), SaveType (copy)
+		return if p1.publishStatus == PublishStatus.Live then "published" elseif p1.publishStatus == PublishStatus.PreviouslyPublished then "previouslyPublished" elseif p1.parentAssetVersionId == nil then if p1.saveType == SaveType.AutoSave then "autosaved" else nil else "restored"
 	end,
-	getCreatedDateParts = function(p1)
-		assert(type(p1) == "string" and p1 ~= "", "Place version createdTime must not be empty")
-		local match, match_1, match_2 = string.match(p1, "^(%d%d%d%d)%-(%d%d)%-(%d%d)")
-		local var1 = if match_1 then tonumber(match_1) else nil
-		local var2 = if match_2 then tonumber(match_2) else nil
-		assert(match ~= nil and (var1 ~= nil and var2 ~= nil), `Place version createdTime must be an ISO date: {p1}`)
+	getCreatedDateParts = function(Text: string) --[[ Line: 30 ]]
+		assert(type(Text) == "string" and Text ~= "", "Place version createdTime must not be empty")
+		local Match, Match2, Match3 = string.match(Text, "^(%d%d%d%d)%-(%d%d)%-(%d%d)")
+		local Number = if Match2 then tonumber(Match2) else nil
+		local Number1 = if Match3 then tonumber(Match3) else nil
+		assert(Match ~= nil and (Number ~= nil and Number1 ~= nil), `Place version createdTime must be an ISO date: {Text}`)
 		
-		return var1, var2, match
+		return Number, Number1, Match
 	end,
-	getVersionNumber = function(p1)
-		local version = p1.version
-		local var1 = if type(version) == "number" then version elseif type(version) == "string" then tonumber(version) else nil
-		assert(var1 ~= nil, `Place version must be numeric: {p1.version}`)
+	getVersionNumber = function(p1) --[[ Line: 23 ]]
+		local Version = p1.version
+		local Version1 = if type(Version) == "number" then Version elseif type(Version) == "string" then tonumber(Version) else nil
+		assert(Version1 ~= nil, `Place version must be numeric: {p1.version}`)
 		
-		return var1
+		return Version1
 	end,
-	shouldShowEntry = function(p1, p2)
-		-- upvalues: versionHistoryConstantsModule (ref)
-		return not p2 or p1 ~= versionHistoryConstantsModule.AUTOSAVED_BADGE_TEXT
+	shouldShowEntry = function(AUTOSAVEDBADGETEXT, p1): boolean --[[ Line: 57 ]]
+		-- upvalues: VersionHistoryConstantsModule (copy)
+		return not p1 or AUTOSAVEDBADGETEXT ~= VersionHistoryConstantsModule.AUTOSAVED_BADGE_TEXT
 	end
 }

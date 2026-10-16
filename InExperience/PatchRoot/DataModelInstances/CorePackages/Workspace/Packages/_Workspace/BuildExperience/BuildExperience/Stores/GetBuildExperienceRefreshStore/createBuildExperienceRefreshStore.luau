@@ -1,14 +1,14 @@
-﻿local signalsModule = require(script:FindFirstAncestor("BuildExperience").Parent.Signals)
+﻿local SignalsModule = require(script:FindFirstAncestor("BuildExperience").Parent.Signals)
 
-return function()
-	-- upvalues: signalsModule (ref)
-	local var1, var2 = signalsModule.createSignal(0)
+return function() --[[ Line: 11 | Named "createBuildExperienceRefreshStore" ]]
+	-- upvalues: SignalsModule (copy)
+	local Signal, Signal2 = SignalsModule.createSignal(0)
 	
 	return {
-		getRefreshTick = var1,
-		bumpRefreshTick = function()
-			-- upvalues: var2 (ref)
-			var2(function(p1)
+		getRefreshTick = Signal,
+		bumpRefreshTick = function() --[[ Line: 14 ]]
+			-- upvalues: Signal2 (copy)
+			Signal2(function(p1: number): number --[[ Line: 15 ]]
 				return p1 + 1
 			end)
 		end

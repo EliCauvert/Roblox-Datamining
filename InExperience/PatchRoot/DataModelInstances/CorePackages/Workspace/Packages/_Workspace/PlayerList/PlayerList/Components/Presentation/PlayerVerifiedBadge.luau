@@ -1,10 +1,10 @@
-﻿local parent = script.Parent.Parent.Parent.Parent
-local reactModule = require(parent.React)
-local useVerifiedBadge = require(parent.UserProfiles).Hooks.useVerifiedBadge
-local verifiedBadgeModule = require(parent.VerifiedBadges.VerifiedBadge)
-local fFlagEnableVerifiedBadgeStore = require(parent.SharedFlags).FFlagEnableVerifiedBadgeStore
+﻿local Parent = script.Parent.Parent.Parent.Parent
+local ReactModule = require(Parent.React)
+local UseVerifiedBadgeFunction = require(Parent.UserProfiles).Hooks.useVerifiedBadge
+local VerifiedBadgeModule = require(Parent.VerifiedBadges.VerifiedBadge)
+local FFlagEnableVerifiedBadgeStore = require(Parent.SharedFlags).FFlagEnableVerifiedBadgeStore
 
-return reactModule.memo(function(p1)
-	-- upvalues: fFlagEnableVerifiedBadgeStore (ref), useVerifiedBadge (ref), reactModule (ref), verifiedBadgeModule (ref)
-	return if if fFlagEnableVerifiedBadgeStore then useVerifiedBadge(p1.player) else p1.player.HasVerifiedBadge then reactModule.createElement(verifiedBadgeModule, { LayoutOrder = p1.layoutOrder }) else nil
+return ReactModule.memo(function(p1) --[[ Line: 13 | Named "PlayerVerifiedBadge" ]]
+	-- upvalues: FFlagEnableVerifiedBadgeStore (copy), UseVerifiedBadgeFunction (copy), ReactModule (copy), VerifiedBadgeModule (copy)
+	return if if FFlagEnableVerifiedBadgeStore then UseVerifiedBadgeFunction(p1.player) else p1.player.HasVerifiedBadge then ReactModule.createElement(VerifiedBadgeModule, { LayoutOrder = p1.layoutOrder }) else nil
 end)

@@ -1,259 +1,224 @@
-﻿local avatarExperienceControlBar = script:FindFirstAncestor("AvatarExperienceControlBar")
-local parent = avatarExperienceControlBar.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local reactOtterModule = require(parent.ReactOtter)
-local tooltipModule = require(avatarExperienceControlBar.Components.Tooltip)
-local _ = require(avatarExperienceControlBar.ControlBarTypes)
-local fFlagAXAddToolTipToIconItemMenu = require(parent.AvatarExperienceFlags).FFlagAXAddToolTipToIconItemMenu
-local fFlagAXMigrateBuilderIcons = require(parent.AvatarExperienceFlags).FFlagAXMigrateBuilderIcons
-local isBuilderIcon = foundationModule.Utility.isBuilderIcon
-local iconVariant = foundationModule.Enums.IconVariant
-local useSemanticTokensModule = require(avatarExperienceControlBar.Hooks.useSemanticTokens)
-local useHoverBindingModule = require(avatarExperienceControlBar.Hooks.useHoverBinding)
-local var1 = if fFlagAXMigrateBuilderIcons then foundationModule.Enums.IconName.X else "icons/navigation/close"
-local t = { dampingRatio = 1, frequency = 5 }
+﻿local AvatarExperienceControlBar = script:FindFirstAncestor("AvatarExperienceControlBar")
+local Parent = AvatarExperienceControlBar.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local ReactOtterModule = require(Parent.ReactOtter)
+local TooltipModule = require(AvatarExperienceControlBar.Components.Tooltip)
+local _ = require(AvatarExperienceControlBar.ControlBarTypes)
+local FFlagAXAddToolTipToIconItemMenu = require(Parent.AvatarExperienceFlags).FFlagAXAddToolTipToIconItemMenu
+local FFlagAXMigrateBuilderIcons = require(Parent.AvatarExperienceFlags).FFlagAXMigrateBuilderIcons
+local IsBuilderIconFunction = FoundationModule.Utility.isBuilderIcon
+local IconVariant = FoundationModule.Enums.IconVariant
+local UseSemanticTokensModule = require(AvatarExperienceControlBar.Hooks.useSemanticTokens)
+local UseHoverBindingModule = require(AvatarExperienceControlBar.Hooks.useHoverBinding)
+local X = if FFlagAXMigrateBuilderIcons then FoundationModule.Enums.IconName.X else "icons/navigation/close"
+local config = { dampingRatio = 1, frequency = 5 }
 
-return reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useSemanticTokensModule (ref), useHoverBindingModule (ref), reactOtterModule (ref), fFlagAXMigrateBuilderIcons (ref), var1 (ref), iconVariant (ref), reactModule (ref), t (ref), fFlagAXAddToolTipToIconItemMenu (ref), foundationModule (ref), tooltipModule (ref), isBuilderIcon (ref)
-	local var2 = useSemanticTokensModule()
-	local var3, var4 = useHoverBindingModule()
-	local var5, var6 = reactOtterModule.useAnimatedBinding(0)
-	local isActive = p1.isActive or false
-	local var7 = if p1.size then p1.size else var2.defaultIconContainerSize
-	local var8 = if p1.iconSize then p1.iconSize elseif fFlagAXMigrateBuilderIcons then var2.defaultLegacyIconSize else var2.defaultIconSize
-	local var9 = if p1.activeIcon then p1.activeIcon else var1
-	local var10 = if fFlagAXMigrateBuilderIcons then if p1.activeIconVariant then p1.activeIconVariant else iconVariant.Regular else nil
-	local var11 = if p1.activeIconSize then p1.activeIconSize elseif var9 == var1 then var2.closeIconSize else var8
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var6 (ref), reactOtterModule (copy), isActive (ref), t (copy)
-		if p1.animate then
-			var6(reactOtterModule.spring(if isActive then 1 else 0, t))
+return ReactModule.forwardRef(function(Frame: Frame, Ref) --[[ Line: 44 | Named "IconItem" ]]
+	-- upvalues: UseSemanticTokensModule (copy), UseHoverBindingModule (copy), ReactOtterModule (copy), FFlagAXMigrateBuilderIcons (copy), X (copy), IconVariant (copy), ReactModule (copy), config (copy), FFlagAXAddToolTipToIconItemMenu (copy), FoundationModule (copy), TooltipModule (copy), IsBuilderIconFunction (copy)
+	local UseSemanticTokensModuleResult = UseSemanticTokensModule()
+	local UseHoverBindingModuleResult, UseHoverBindingModuleResult2 = UseHoverBindingModule()
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(0)
+	local IsActive = Frame.isActive or false
+	local Size = if Frame.size then Frame.size else UseSemanticTokensModuleResult.defaultIconContainerSize
+	local IconSize = if Frame.iconSize then Frame.iconSize elseif FFlagAXMigrateBuilderIcons then UseSemanticTokensModuleResult.defaultLegacyIconSize else UseSemanticTokensModuleResult.defaultIconSize
+	local ActiveIcon = if Frame.activeIcon then Frame.activeIcon else X
+	local ActiveIconVariant = if FFlagAXMigrateBuilderIcons then if Frame.activeIconVariant then Frame.activeIconVariant else IconVariant.Regular else nil
+	local ActiveIconSize = if Frame.activeIconSize then Frame.activeIconSize elseif ActiveIcon == X then UseSemanticTokensModuleResult.closeIconSize else IconSize
+	ReactModule.useEffect(function() --[[ Line: 64 ]]
+		-- upvalues: Frame (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), IsActive (copy), config (upval)
+		if Frame.animate then
+			UseAnimatedBindingResult2(ReactOtterModule.spring(if IsActive then 1 else 0, config))
 			
 			return
+		else
+			UseAnimatedBindingResult2((ReactOtterModule.instant(if IsActive then 1 else 0)))
 		end
-		var6(reactOtterModule.instant(if isActive then 1 else 0))
-	end, { isActive, p1.animate })
+	end, { IsActive, Frame.animate })
 	
-	if fFlagAXAddToolTipToIconItemMenu then
-		local var12
-		local createElement = reactModule.createElement
-		local view = foundationModule.View
-		local t_1 = {
-			tag = "row align-x-center align-y-center",
-			Size = UDim2.new(0, var7, 0, var7),
-			LayoutOrder = p1.LayoutOrder
-		}
-		local t_2 = {}
-		local createElement_1 = reactModule.createElement
-		local var13 = tooltipModule
-		local toolTipConfig = p1.toolTipConfig
-		local createElement_2 = reactModule.createElement
-		local view_1 = foundationModule.View
-		local t_3 = {
+	return if FFlagAXAddToolTipToIconItemMenu then ReactModule.createElement(FoundationModule.View, {
+		tag = "row align-x-center align-y-center",
+		Size = UDim2.new(0, Size, 0, Size),
+		LayoutOrder = Frame.LayoutOrder
+	}, {
+		TooltipIconItem = ReactModule.createElement(TooltipModule, Frame.toolTipConfig, ReactModule.createElement(FoundationModule.View, {
 			tag = "radius-circle",
-			Size = UDim2.new(0, var7, 0, var7),
-			onStateChanged = var4,
+			Size = UDim2.new(0, Size, 0, Size),
+			onStateChanged = UseHoverBindingModuleResult2,
 			stateLayer = {
-				affordance = foundationModule.Enums.StateLayerAffordance.None
+				affordance = FoundationModule.Enums.StateLayerAffordance.None
 			},
-			onActivated = p1.onActivated,
-			disabled = p1.disabled,
-			ref = p2,
-			LayoutOrder = p1.LayoutOrder
-		}
-		local t_4 = {
-			Icon = reactModule.createElement(foundationModule.View, {
+			onActivated = Frame.onActivated,
+			disabled = Frame.disabled,
+			ref = Ref,
+			LayoutOrder = Frame.LayoutOrder
+		}, {
+			Icon = ReactModule.createElement(FoundationModule.View, {
 				Size = UDim2.fromScale(1, 1),
-				Visible = if p1.isActive and not p1.animate then false else true,
-				backgroundStyle = if p1.disabled then nil else var3:map(function(p3)
-					-- upvalues: var2 (ref)
+				Visible = not Frame.isActive or Frame.animate,
+				backgroundStyle = if Frame.disabled then nil else UseHoverBindingModuleResult:map(function(p1) --[[ Line: 98 ]]
+					-- upvalues: UseSemanticTokensModuleResult (copy)
 					return {
-						Color3 = var2.hoverIconBackgroundStyle.Color3,
-						Transparency = if p3 then var2.hoverIconBackgroundStyle.Transparency else 1
+						Color3 = UseSemanticTokensModuleResult.hoverIconBackgroundStyle.Color3,
+						Transparency = if p1 then UseSemanticTokensModuleResult.hoverIconBackgroundStyle.Transparency else 1
 					}
 				end),
-				tag = if fFlagAXMigrateBuilderIcons then {
+				tag = if FFlagAXMigrateBuilderIcons then {
 					["radius-circle position-center-center anchor-center-center clip"] = true,
-					["row align-x-center align-y-center"] = isBuilderIcon(p1.icon)
+					["row align-x-center align-y-center"] = IsBuilderIconFunction(Frame.icon)
 				} else "radius-circle position-center-center anchor-center-center clip"
 			}, {
-				IconImage = if fFlagAXMigrateBuilderIcons and isBuilderIcon(p1.icon) then reactModule.createElement(foundationModule.Icon, {
+				IconImage = if FFlagAXMigrateBuilderIcons and IsBuilderIconFunction(Frame.icon) then ReactModule.createElement(FoundationModule.Icon, {
 					tag = "position-center-center anchor-center-center content-emphasis",
-					name = p1.icon,
-					size = var5:map(function(p3)
-						-- upvalues: var8 (ref)
-						return math.round((1 - p3) * var8)
+					name = Frame.icon,
+					size = UseAnimatedBindingResult:map(function(p1: number): number --[[ Line: 114 ]]
+						-- upvalues: IconSize (copy)
+						return (math.round((1 - p1) * IconSize))
 					end),
-					variant = if p1.iconVariant then p1.iconVariant else iconVariant.Regular,
+					variant = if Frame.iconVariant then Frame.iconVariant else IconVariant.Regular,
 					style = {
-						Color3 = var2.contentForegroundStyle.Color3,
-						Transparency = if p1.disabled then var2.contentDisabledTransparency else var2.contentForegroundStyle.Transparency
+						Color3 = UseSemanticTokensModuleResult.contentForegroundStyle.Color3,
+						Transparency = if Frame.disabled then UseSemanticTokensModuleResult.contentDisabledTransparency else UseSemanticTokensModuleResult.contentForegroundStyle.Transparency
 					}
-				}) else reactModule.createElement(foundationModule.Image, {
+				}) else ReactModule.createElement(FoundationModule.Image, {
 					tag = "position-center-center anchor-center-center content-emphasis",
-					Image = p1.icon,
-					Size = var5:map(function(p3)
-						-- upvalues: var8 (ref)
-						local rounded = math.round((1 - p3) * var8)
+					Image = Frame.icon,
+					Size = UseAnimatedBindingResult:map(function(p1: number): UDim2 --[[ Line: 129 ]]
+						-- upvalues: IconSize (copy)
+						local Rounded = math.round((1 - p1) * IconSize)
 						
-						return UDim2.fromOffset(rounded, rounded)
+						return UDim2.fromOffset(Rounded, Rounded)
 					end),
 					imageStyle = {
-						Color3 = var2.contentForegroundStyle.Color3,
-						Transparency = if p1.disabled then var2.contentDisabledTransparency else var2.contentForegroundStyle.Transparency
+						Color3 = UseSemanticTokensModuleResult.contentForegroundStyle.Color3,
+						Transparency = if Frame.disabled then UseSemanticTokensModuleResult.contentDisabledTransparency else UseSemanticTokensModuleResult.contentForegroundStyle.Transparency
 					}
 				})
-			})
-		}
-		
-		if isActive or p1.animate then
-			var12 = reactModule.createElement
-			var12 = var12(foundationModule.View, {
+			}),
+			ActiveIcon = if IsActive or Frame.animate then ReactModule.createElement(FoundationModule.View, {
 				Size = UDim2.fromScale(1, 1),
-				GroupTransparency = var5:map(function(p3)
-					return 1 - p3
+				GroupTransparency = UseAnimatedBindingResult:map(function(p1: number): number --[[ Line: 145 ]]
+					return 1 - p1
 				end),
-				backgroundStyle = if p1.disabled then nil else var3:map(function(p3)
-					-- upvalues: var2 (ref)
-					return if p3 then var2.hoverIconBackgroundStyle else var2.activeIconBackgroundStyle
+				backgroundStyle = if Frame.disabled then nil else UseHoverBindingModuleResult:map(function(p1) --[[ Line: 150 ]]
+					-- upvalues: UseSemanticTokensModuleResult (copy)
+					return if p1 then UseSemanticTokensModuleResult.hoverIconBackgroundStyle else UseSemanticTokensModuleResult.activeIconBackgroundStyle
 				end),
-				tag = if fFlagAXMigrateBuilderIcons then {
+				tag = if FFlagAXMigrateBuilderIcons then {
 					["radius-circle position-center-center anchor-center-center clip"] = true,
-					["row align-x-center align-y-center"] = isBuilderIcon(var9)
+					["row align-x-center align-y-center"] = IsBuilderIconFunction(ActiveIcon)
 				} else "radius-circle position-center-center anchor-center-center clip"
 			}, {
-				ActiveIconImage = if fFlagAXMigrateBuilderIcons and isBuilderIcon(var9) then reactModule.createElement(foundationModule.Icon, {
+				ActiveIconImage = if FFlagAXMigrateBuilderIcons and IsBuilderIconFunction(ActiveIcon) then ReactModule.createElement(FoundationModule.Icon, {
 					tag = "size-full-full position-center-center anchor-center-center content-emphasis",
-					name = var9,
-					size = var5:map(function(p3)
-						-- upvalues: var8 (ref)
-						return math.round(p3 * var8)
+					name = ActiveIcon,
+					size = UseAnimatedBindingResult:map(function(p1): number --[[ Line: 166 ]]
+						-- upvalues: IconSize (copy)
+						return (math.round(p1 * IconSize))
 					end),
-					variant = var10,
+					variant = ActiveIconVariant,
 					style = {
-						Color3 = var2.contentForegroundStyle.Color3,
-						Transparency = if p1.disabled then var2.contentDisabledTransparency else var2.contentForegroundStyle.Transparency
+						Color3 = UseSemanticTokensModuleResult.contentForegroundStyle.Color3,
+						Transparency = if Frame.disabled then UseSemanticTokensModuleResult.contentDisabledTransparency else UseSemanticTokensModuleResult.contentForegroundStyle.Transparency
 					}
-				}) else reactModule.createElement(foundationModule.Image, {
+				}) else ReactModule.createElement(FoundationModule.Image, {
 					tag = "position-center-center anchor-center-center clip content-emphasis",
-					Image = var9,
-					Size = var5:map(function(p3)
-						-- upvalues: var11 (ref)
-						local rounded = math.round(p3 * var11)
+					Image = ActiveIcon,
+					Size = UseAnimatedBindingResult:map(function(p1): UDim2 --[[ Line: 181 ]]
+						-- upvalues: ActiveIconSize (copy)
+						local Rounded = math.round(p1 * ActiveIconSize)
 						
-						return UDim2.fromOffset(rounded, rounded)
+						return UDim2.fromOffset(Rounded, Rounded)
 					end)
 				})
-			})
-		else
-			var12 = nil
-		end
-		t_4.ActiveIcon = var12
-		t_2.TooltipIconItem = createElement_1(var13, toolTipConfig, createElement_2(view_1, t_3, t_4))
-		
-		return createElement(view, t_1, t_2)
-	else
-		local var14
-		local createElement = reactModule.createElement
-		local view = foundationModule.View
-		local t_1 = {
-			tag = "radius-circle",
-			Size = UDim2.new(0, var7, 0, var7),
-			onStateChanged = var4,
-			stateLayer = {
-				affordance = foundationModule.Enums.StateLayerAffordance.None
-			},
-			onActivated = p1.onActivated,
-			disabled = p1.disabled,
-			ref = p2,
-			LayoutOrder = p1.LayoutOrder
-		}
-		local t_2 = {
-			Icon = reactModule.createElement(foundationModule.View, {
-				Size = UDim2.fromScale(1, 1),
-				Visible = if p1.isActive and not p1.animate then false else true,
-				backgroundStyle = if p1.disabled then nil else var3:map(function(p3)
-					-- upvalues: var2 (ref)
-					return {
-						Color3 = var2.hoverIconBackgroundStyle.Color3,
-						Transparency = if p3 then var2.hoverIconBackgroundStyle.Transparency else 1
-					}
+			}) else nil
+		}))
+	}) else ReactModule.createElement(FoundationModule.View, {
+		tag = "radius-circle",
+		Size = UDim2.new(0, Size, 0, Size),
+		onStateChanged = UseHoverBindingModuleResult2,
+		stateLayer = {
+			affordance = FoundationModule.Enums.StateLayerAffordance.None
+		},
+		onActivated = Frame.onActivated,
+		disabled = Frame.disabled,
+		ref = Ref,
+		LayoutOrder = Frame.LayoutOrder
+	}, {
+		Icon = ReactModule.createElement(FoundationModule.View, {
+			Size = UDim2.fromScale(1, 1),
+			Visible = not Frame.isActive or Frame.animate,
+			backgroundStyle = if Frame.disabled then nil else UseHoverBindingModuleResult:map(function(p1) --[[ Line: 210 ]]
+				-- upvalues: UseSemanticTokensModuleResult (copy)
+				return {
+					Color3 = UseSemanticTokensModuleResult.hoverIconBackgroundStyle.Color3,
+					Transparency = if p1 then UseSemanticTokensModuleResult.hoverIconBackgroundStyle.Transparency else 1
+				}
+			end),
+			tag = if FFlagAXMigrateBuilderIcons then {
+				["radius-circle position-center-center anchor-center-center clip"] = true,
+				["row align-x-center align-y-center"] = IsBuilderIconFunction(Frame.icon)
+			} else "radius-circle position-center-center anchor-center-center clip"
+		}, {
+			IconImage = if FFlagAXMigrateBuilderIcons and IsBuilderIconFunction(Frame.icon) then ReactModule.createElement(FoundationModule.Icon, {
+				tag = "position-center-center anchor-center-center content-emphasis",
+				name = Frame.icon,
+				size = UseAnimatedBindingResult:map(function(p1: number): number --[[ Line: 226 ]]
+					-- upvalues: IconSize (copy)
+					return (math.round((1 - p1) * IconSize))
 				end),
-				tag = if fFlagAXMigrateBuilderIcons then {
-					["radius-circle position-center-center anchor-center-center clip"] = true,
-					["row align-x-center align-y-center"] = isBuilderIcon(p1.icon)
-				} else "radius-circle position-center-center anchor-center-center clip"
-			}, {
-				IconImage = if fFlagAXMigrateBuilderIcons and isBuilderIcon(p1.icon) then reactModule.createElement(foundationModule.Icon, {
-					tag = "position-center-center anchor-center-center content-emphasis",
-					name = p1.icon,
-					size = var5:map(function(p3)
-						-- upvalues: var8 (ref)
-						return math.round((1 - p3) * var8)
-					end),
-					variant = if p1.iconVariant then p1.iconVariant else iconVariant.Regular,
-					style = {
-						Color3 = var2.contentForegroundStyle.Color3,
-						Transparency = if p1.disabled then var2.contentDisabledTransparency else var2.contentForegroundStyle.Transparency
-					}
-				}) else reactModule.createElement(foundationModule.Image, {
-					tag = "position-center-center anchor-center-center content-emphasis",
-					Image = p1.icon,
-					Size = var5:map(function(p3)
-						-- upvalues: var8 (ref)
-						local rounded = math.round((1 - p3) * var8)
-						
-						return UDim2.fromOffset(rounded, rounded)
-					end),
-					imageStyle = {
-						Color3 = var2.contentForegroundStyle.Color3,
-						Transparency = if p1.disabled then var2.contentDisabledTransparency else var2.contentForegroundStyle.Transparency
-					}
-				})
-			})
-		}
-		
-		if isActive or p1.animate then
-			var14 = reactModule.createElement
-			var14 = var14(foundationModule.View, {
-				Size = UDim2.fromScale(1, 1),
-				GroupTransparency = var5:map(function(p3)
-					return 1 - p3
+				variant = if Frame.iconVariant then Frame.iconVariant else IconVariant.Regular,
+				style = {
+					Color3 = UseSemanticTokensModuleResult.contentForegroundStyle.Color3,
+					Transparency = if Frame.disabled then UseSemanticTokensModuleResult.contentDisabledTransparency else UseSemanticTokensModuleResult.contentForegroundStyle.Transparency
+				}
+			}) else ReactModule.createElement(FoundationModule.Image, {
+				tag = "position-center-center anchor-center-center content-emphasis",
+				Image = Frame.icon,
+				Size = UseAnimatedBindingResult:map(function(p1: number): UDim2 --[[ Line: 241 ]]
+					-- upvalues: IconSize (copy)
+					local Rounded = math.round((1 - p1) * IconSize)
+					
+					return UDim2.fromOffset(Rounded, Rounded)
 				end),
-				backgroundStyle = if p1.disabled then nil else var3:map(function(p3)
-					-- upvalues: var2 (ref)
-					return if p3 then var2.hoverIconBackgroundStyle else var2.activeIconBackgroundStyle
-				end),
-				tag = if fFlagAXMigrateBuilderIcons then {
-					["radius-circle position-center-center anchor-center-center clip"] = true,
-					["row align-x-center align-y-center"] = isBuilderIcon(var9)
-				} else "radius-circle position-center-center anchor-center-center clip"
-			}, {
-				ActiveIconImage = if fFlagAXMigrateBuilderIcons and isBuilderIcon(var9) then reactModule.createElement(foundationModule.Icon, {
-					tag = "position-center-center anchor-center-center clip content-emphasis",
-					name = var9,
-					size = var5:map(function(p3)
-						-- upvalues: var8 (ref)
-						return math.round((1 - p3) * var8)
-					end),
-					variant = var10
-				}) else reactModule.createElement(foundationModule.Image, {
-					tag = "position-center-center anchor-center-center clip content-emphasis",
-					Image = var9,
-					Size = var5:map(function(p3)
-						-- upvalues: var11 (ref)
-						local rounded = math.round(p3 * var11)
-						
-						return UDim2.fromOffset(rounded, rounded)
-					end)
-				})
+				imageStyle = {
+					Color3 = UseSemanticTokensModuleResult.contentForegroundStyle.Color3,
+					Transparency = if Frame.disabled then UseSemanticTokensModuleResult.contentDisabledTransparency else UseSemanticTokensModuleResult.contentForegroundStyle.Transparency
+				}
 			})
-		else
-			var14 = nil
-		end
-		t_2.ActiveIcon = var14
-		
-		return createElement(view, t_1, t_2)
-	end
+		}),
+		ActiveIcon = if IsActive or Frame.animate then ReactModule.createElement(FoundationModule.View, {
+			Size = UDim2.fromScale(1, 1),
+			GroupTransparency = UseAnimatedBindingResult:map(function(p1: number): number --[[ Line: 257 ]]
+				return 1 - p1
+			end),
+			backgroundStyle = if Frame.disabled then nil else UseHoverBindingModuleResult:map(function(p1) --[[ Line: 262 ]]
+				-- upvalues: UseSemanticTokensModuleResult (copy)
+				return if p1 then UseSemanticTokensModuleResult.hoverIconBackgroundStyle else UseSemanticTokensModuleResult.activeIconBackgroundStyle
+			end),
+			tag = if FFlagAXMigrateBuilderIcons then {
+				["radius-circle position-center-center anchor-center-center clip"] = true,
+				["row align-x-center align-y-center"] = IsBuilderIconFunction(ActiveIcon)
+			} else "radius-circle position-center-center anchor-center-center clip"
+		}, {
+			ActiveIconImage = if FFlagAXMigrateBuilderIcons and IsBuilderIconFunction(ActiveIcon) then ReactModule.createElement(FoundationModule.Icon, {
+				tag = "position-center-center anchor-center-center clip content-emphasis",
+				name = ActiveIcon,
+				size = UseAnimatedBindingResult:map(function(p1: number): number --[[ Line: 278 ]]
+					-- upvalues: IconSize (copy)
+					return (math.round((1 - p1) * IconSize))
+				end),
+				variant = ActiveIconVariant
+			}) else ReactModule.createElement(FoundationModule.Image, {
+				tag = "position-center-center anchor-center-center clip content-emphasis",
+				Image = ActiveIcon,
+				Size = UseAnimatedBindingResult:map(function(p1): UDim2 --[[ Line: 287 ]]
+					-- upvalues: ActiveIconSize (copy)
+					local Rounded = math.round(p1 * ActiveIconSize)
+					
+					return UDim2.fromOffset(Rounded, Rounded)
+				end)
+			})
+		}) else nil
+	})
 end)

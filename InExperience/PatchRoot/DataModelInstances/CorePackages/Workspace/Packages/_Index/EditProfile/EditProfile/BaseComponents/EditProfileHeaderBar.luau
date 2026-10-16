@@ -1,1 +1,1 @@
-﻿return require(script.EditProfileHeaderBar)
+﻿return (require(script.EditProfileHeaderBar))

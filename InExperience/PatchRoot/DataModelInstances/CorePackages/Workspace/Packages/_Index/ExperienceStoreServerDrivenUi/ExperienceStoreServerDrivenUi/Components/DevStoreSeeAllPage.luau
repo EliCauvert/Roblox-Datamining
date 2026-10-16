@@ -1,51 +1,52 @@
-﻿local experienceStoreServerDrivenUi = script:FindFirstAncestor("ExperienceStoreServerDrivenUi")
-local parent = experienceStoreServerDrivenUi.Parent
-local _ = require(parent.Navigation)
-local reactModule = require(parent.React)
-local sduiSharedUtilitiesModule = require(parent.SduiSharedUtilities)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local sduiLoadTimer = sduiSharedUtilitiesModule.SduiLoadTimer
-local sduiPageEntryPoint = sduiSharedUtilitiesModule.SduiPageEntryPoint
-local compositionTags = require(parent.AppComposition).CompositionTags
-local fetchDevStoreSeeAllPageIfNeededModule = require(experienceStoreServerDrivenUi.Api.fetchDevStoreSeeAllPageIfNeeded)
-local getDevStoreSeeAllPageKeyModule = require(experienceStoreServerDrivenUi.Utils.getDevStoreSeeAllPageKey)
+﻿local ExperienceStoreServerDrivenUi = script:FindFirstAncestor("ExperienceStoreServerDrivenUi")
+local Parent = ExperienceStoreServerDrivenUi.Parent
+local _ = require(Parent.Navigation)
+local ReactModule = require(Parent.React)
+local SduiSharedUtilitiesModule = require(Parent.SduiSharedUtilities)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local SduiLoadTimer = SduiSharedUtilitiesModule.SduiLoadTimer
+local SduiPageEntryPoint = SduiSharedUtilitiesModule.SduiPageEntryPoint
+local CompositionTags = require(Parent.AppComposition).CompositionTags
+local FetchDevStoreSeeAllPageIfNeededModule = require(ExperienceStoreServerDrivenUi.Api.fetchDevStoreSeeAllPageIfNeeded)
+local GetDevStoreSeeAllPageKeyModule = require(ExperienceStoreServerDrivenUi.Utils.getDevStoreSeeAllPageKey)
 
-local function _(p1, p2)
+local function _(p1, p2) --[[ Line: 32 | Named "getFromPropsOrNavigationParams" ]]
 	return p1[p2] or p1.navigation and p1.navigation.getParam(p2)
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: getDevStoreSeeAllPageKeyModule (ref), useLocalization (ref), reactModule (ref), sduiLoadTimer (ref), fetchDevStoreSeeAllPageIfNeededModule (ref), sduiPageEntryPoint (ref), compositionTags (ref)
-	local universeId = p1.universeId or p1.navigation and p1.navigation.getParam("universeId")
-	local var1 = getDevStoreSeeAllPageKeyModule(universeId)
-	local var2 = useLocalization({ pageTitle = "Feature.GameDetails.Label.Store" })
-	local pageTimer = p1.pageTimer or p1.navigation and p1.navigation.getParam("pageTimer")
-	local var3 = reactModule.useMemo(function()
-		-- upvalues: pageTimer (ref), sduiLoadTimer (copy)
-		return pageTimer or sduiLoadTimer.createLoadTimer("DevStoreSeeAll")
-	end, { var1, pageTimer })
-	reactModule.useEffect(function()
-		-- upvalues: universeId (ref), fetchDevStoreSeeAllPageIfNeededModule (copy), var3 (ref)
-		if universeId then
-			fetchDevStoreSeeAllPageIfNeededModule(universeId, var3)
+return ReactModule.memo(function(p1) --[[ Line: 36 | Named "DevStoreSeeAllPage" ]]
+	-- upvalues: GetDevStoreSeeAllPageKeyModule (copy), UseLocalizationFunction (copy), ReactModule (copy), SduiLoadTimer (copy), FetchDevStoreSeeAllPageIfNeededModule (copy), SduiPageEntryPoint (copy), CompositionTags (copy)
+	local UniverseId = p1.universeId or p1.navigation and p1.navigation.getParam("universeId")
+	local DevStoreSeeAllPageKeyModule = GetDevStoreSeeAllPageKeyModule(UniverseId)
+	local UseLocalizationResult = UseLocalizationFunction({ pageTitle = "Feature.GameDetails.Label.Store" })
+	local PageTimer = p1.pageTimer or p1.navigation and p1.navigation.getParam("pageTimer")
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 44 ]]
+		-- upvalues: PageTimer (copy), SduiLoadTimer (upval)
+		return PageTimer or SduiLoadTimer.createLoadTimer("DevStoreSeeAll")
+	end, { DevStoreSeeAllPageKeyModule, PageTimer })
+	ReactModule.useEffect(function() --[[ Line: 48 ]]
+		-- upvalues: UniverseId (copy), FetchDevStoreSeeAllPageIfNeededModule (upval), UseMemoResult (copy)
+		if UniverseId then
+			FetchDevStoreSeeAllPageIfNeededModule(UniverseId, UseMemoResult)
 		end
-	end, { universeId, var3 })
+	end, { UniverseId, UseMemoResult })
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 54 ]]
+		-- upvalues: UniverseId (copy), SduiLoadTimer (upval), FetchDevStoreSeeAllPageIfNeededModule (upval)
+		if UniverseId then
+			local DevStoreSeeAll = SduiLoadTimer.createLoadTimer("DevStoreSeeAll")
+			DevStoreSeeAll.start("refresh")
+			FetchDevStoreSeeAllPageIfNeededModule(UniverseId, DevStoreSeeAll, true)
+		end
+	end, { UniverseId })
 	
-	return if universeId == nil then nil else reactModule.createElement(sduiPageEntryPoint, {
+	return if UniverseId == nil then nil else ReactModule.createElement(SduiPageEntryPoint, {
 		appPage = "DevStoreSeeAll",
 		includeNavigationHeaderBar = true,
-		configKey = var1,
-		pageTimer = var3,
-		pageTitle = var2.pageTitle,
-		refresh = reactModule.useCallback(function()
-			-- upvalues: universeId (ref), sduiLoadTimer (copy), fetchDevStoreSeeAllPageIfNeededModule (copy)
-			if universeId then
-				local devStoreSeeAll = sduiLoadTimer.createLoadTimer("DevStoreSeeAll")
-				devStoreSeeAll.start("refresh")
-				fetchDevStoreSeeAllPageIfNeededModule(universeId, devStoreSeeAll, true)
-			end
-		end, { universeId }),
-		contentTag = compositionTags.ContentRegion.Body,
-		layoutTag = compositionTags.Layout.Detail
+		configKey = DevStoreSeeAllPageKeyModule,
+		pageTimer = UseMemoResult,
+		pageTitle = UseLocalizationResult.pageTitle,
+		refresh = UseResult,
+		contentTag = CompositionTags.ContentRegion.Body,
+		layoutTag = CompositionTags.Layout.Detail
 	})
 end)

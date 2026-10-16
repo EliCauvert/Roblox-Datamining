@@ -1,32 +1,34 @@
-﻿local avatarExperienceSave = script:FindFirstAncestor("AvatarExperienceSave")
-local parent = avatarExperienceSave.Parent
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local avatarExperienceNavigationModule = require(parent.AvatarExperienceNavigation)
-local slotBasedEditorAnalytics = require(parent.AvatarExperienceAnalytics).Surfaces.SlotBasedEditorAnalytics
-local saveStatusEnumModule = require(avatarExperienceSave.Enums.SaveStatusEnum)
-local useAvatarSaveContextModule = require(avatarExperienceSave.Context.useAvatarSaveContext)
-local useAvatarRoute = avatarExperienceNavigationModule.AvatarRoute.Hooks.useAvatarRoute
+﻿local AvatarExperienceSave = script:FindFirstAncestor("AvatarExperienceSave")
+local Parent = AvatarExperienceSave.Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local SlotBasedEditorAnalytics = require(Parent.AvatarExperienceAnalytics).Surfaces.SlotBasedEditorAnalytics
+local SaveStatusEnumModule = require(AvatarExperienceSave.Enums.SaveStatusEnum)
+local UseAvatarSaveContextModule = require(AvatarExperienceSave.Context.useAvatarSaveContext)
+local UseAvatarRouteFunction = require(Parent.AvatarExperienceNavigation).AvatarRoute.Hooks.useAvatarRoute
 
-return function()
-	-- upvalues: useAvatarRoute (ref), useAvatarSaveContextModule (ref), signalsReactModule (ref), reactModule (ref), saveStatusEnumModule (ref), slotBasedEditorAnalytics (ref)
-	local var1 = useAvatarRoute()
-	local var2 = useAvatarSaveContextModule()
-	local trySaveAvatar = var2.trySaveAvatar
-	local var3 = signalsReactModule.useSignalState(var2.getSaveEligibilityStatusSignal)
-	local var4 = reactModule.useMemo(function()
-		-- upvalues: var3 (ref), saveStatusEnumModule (copy), var1 (ref)
-		return if var3 == saveStatusEnumModule.Eligible then var1.isOverlayVisible else true
-	end, { var3, var1.isOverlayVisible })
+return function() --[[ Line: 22 | Named "useSaveButtonProps" ]]
+	-- upvalues: UseAvatarRouteFunction (copy), UseAvatarSaveContextModule (copy), SignalsReactModule (copy), ReactModule (copy), SaveStatusEnumModule (copy), SlotBasedEditorAnalytics (copy)
+	local UseAvatarRouteResult = UseAvatarRouteFunction()
+	local UseAvatarSaveContextModuleResult = UseAvatarSaveContextModule()
+	local TrySaveAvatarFunction = UseAvatarSaveContextModuleResult.trySaveAvatar
+	local UseSignalStateResult = SignalsReactModule.useSignalState(UseAvatarSaveContextModuleResult.getSaveEligibilityStatusSignal)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 31 ]]
+		-- upvalues: UseSignalStateResult (copy), SaveStatusEnumModule (upval), UseAvatarRouteResult (copy)
+		return UseSignalStateResult ~= SaveStatusEnumModule.Eligible or UseAvatarRouteResult.isOverlayVisible
+	end, {
+		UseSignalStateResult,
+		UseAvatarRouteResult.isOverlayVisible
+	})
 	
 	return {
-		disabled = var4,
-		onActivated = reactModule.useCallback(function()
-			-- upvalues: var4 (ref), trySaveAvatar (ref), slotBasedEditorAnalytics (copy)
-			if not var4 and trySaveAvatar then
-				trySaveAvatar()
-				slotBasedEditorAnalytics.trackSaveClick()
+		disabled = UseMemoResult,
+		onActivated = ReactModule.useCallback(function() --[[ Line: 35 ]]
+			-- upvalues: UseMemoResult (copy), TrySaveAvatarFunction (copy), SlotBasedEditorAnalytics (upval)
+			if not UseMemoResult and TrySaveAvatarFunction then
+				TrySaveAvatarFunction()
+				SlotBasedEditorAnalytics.trackSaveClick()
 			end
-		end, { var4, trySaveAvatar })
+		end, { UseMemoResult, TrySaveAvatarFunction })
 	}
 end

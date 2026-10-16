@@ -1,75 +1,74 @@
-﻿local runService = game:GetService("RunService")
-local reactModule = require(script:FindFirstAncestor("GamePlayButton").Parent.React)
+﻿local RunService = game:GetService("RunService")
+local ReactModule = require(script:FindFirstAncestor("GamePlayButton").Parent.React)
 
-local function formatRemaining(p1)
-	local maxValue = math.max(math.floor(p1), 0)
-	local floored = math.floor(maxValue / 86400)
-	local floored_1 = math.floor(maxValue % 86400 / 3600)
-	local floored_2 = math.floor(maxValue % 3600 / 60)
-	local var1 = maxValue % 60
-	local t = {}
+local function formatRemaining(Value: number): string --[[ Line: 13 ]]
+	local Largest = math.max(math.floor(Value), 0)
+	local Floored = math.floor(Largest / 86400)
+	local Floored1 = math.floor(Largest % 86400 / 3600)
+	local Floored2 = math.floor(Largest % 3600 / 60)
+	local LargestRemainder = Largest % 60
+	local List = {}
 	
-	if floored > 0 then
-		table.insert(t, string.format("%dd", floored))
+	if Floored > 0 then
+		table.insert(List, string.format("%dd", Floored))
 	end
-	if floored_1 > 0 then
-		table.insert(t, string.format("%dh", floored_1))
+	if Floored1 > 0 then
+		table.insert(List, string.format("%dh", Floored1))
 	end
-	if floored_2 > 0 then
-		table.insert(t, string.format("%dm", floored_2))
+	if Floored2 > 0 then
+		table.insert(List, string.format("%dm", Floored2))
 	end
-	table.insert(t, string.format("%ds", var1))
+	table.insert(List, string.format("%ds", LargestRemainder))
 	
-	return table.concat(t, " ")
+	return table.concat(List, " ")
 end
 
-local function computeText(p1)
-	-- upvalues: formatRemaining (ref)
+local function computeText(p1) --[[ Line: 34 ]]
+	-- upvalues: formatRemaining (copy)
 	if p1 == nil then
 		return ""
+	else
+		local v1 = p1 - DateTime.now().UnixTimestamp
+		
+		return if v1 <= 0 then "" else formatRemaining(v1)
 	end
-	local var1 = p1 - DateTime.now().UnixTimestamp
-	
-	return if var1 <= 0 then "" else formatRemaining(var1)
 end
 
-return function(p1)
-	-- upvalues: reactModule (ref), computeText (ref), runService (ref)
-	local var1, var2 = reactModule.useState(function()
-		-- upvalues: computeText (copy), p1 (ref)
+return function(p1) --[[ Line: 46 | Named "useCountdownText" ]]
+	-- upvalues: ReactModule (copy), computeText (copy), RunService (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(function() --[[ Line: 47 ]]
+		-- upvalues: computeText (upval), p1 (copy)
 		return computeText(p1)
 	end)
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), computeText (copy), p1 (ref), runService (copy)
-		var2(computeText(p1))
+	ReactModule.useEffect(function() --[[ Line: 51 ]]
+		-- upvalues: UseStateResult2 (copy), computeText (upval), p1 (copy), RunService (upval)
+		UseStateResult2(computeText(p1))
 		
-		if p1 == nil or p1 - DateTime.now().UnixTimestamp <= 0 then
-			return
-		end
-		local heartbeatConnection = nil
-		local var3 = 0
-		heartbeatConnection = runService.Heartbeat:Connect(function()
-			-- upvalues: var3 (write), var2 (copy), computeText (copy), p1 (copy), heartbeatConnection (write)
-			local processTime = os.clock()
+		if p1 == nil or p1 - DateTime.now().UnixTimestamp <= 0 then return end
+		local Connection = nil
+		local v1 = 0
+		Connection = RunService.Heartbeat:Connect(function() --[[ Line: 60 ]]
+			-- upvalues: v1 (ref), UseStateResult2 (upval), computeText (upval), p1 (upval), Connection (ref)
+			local ClockTime = os.clock()
 			
-			if processTime - var3 < 1 then return end
-			var3 = processTime
-			var2(computeText(p1))
+			if ClockTime - v1 < 1 then return end
+			v1 = ClockTime
+			UseStateResult2(computeText(p1))
 			
-			if p1 - DateTime.now().UnixTimestamp <= 0 and heartbeatConnection then
-				heartbeatConnection:Disconnect()
-				heartbeatConnection = nil
+			if p1 - DateTime.now().UnixTimestamp <= 0 and Connection then
+				Connection:Disconnect()
+				Connection = nil
 			end
 		end)
 		
-		return function()
-			-- upvalues: heartbeatConnection (write)
-			if heartbeatConnection then
-				heartbeatConnection:Disconnect()
-				heartbeatConnection = nil
+		return function() --[[ Line: 73 ]]
+			-- upvalues: Connection (ref)
+			if Connection then
+				Connection:Disconnect()
+				Connection = nil
 			end
 		end
 	end, { p1 })
 	
-	return var1
+	return UseStateResult
 end

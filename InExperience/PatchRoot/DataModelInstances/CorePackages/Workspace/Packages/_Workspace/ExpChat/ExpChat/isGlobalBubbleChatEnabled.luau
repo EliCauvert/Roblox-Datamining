@@ -1,10 +1,10 @@
-﻿local expChatGlobalTabDefaultExperimentation = require(script:FindFirstAncestor("ExpChat").Parent.SocialExperiments).ExpChatGlobalTabDefaultExperimentation
-local var1 = nil
+﻿local ExpChatGlobalTabDefaultExperimentation = require(script:FindFirstAncestor("ExpChat").Parent.SocialExperiments).ExpChatGlobalTabDefaultExperimentation
+local IsGlobalBubbleChatEnabled = nil
 
-return function()
-	-- upvalues: var1 (write), expChatGlobalTabDefaultExperimentation (ref)
-	if var1 == nil then
-		var1 = expChatGlobalTabDefaultExperimentation.getIsGlobalBubbleChatEnabled()
+return function() --[[ Line: 22 | Named "isGlobalBubbleChatEnabled" ]]
+	-- upvalues: IsGlobalBubbleChatEnabled (ref), ExpChatGlobalTabDefaultExperimentation (copy)
+	if IsGlobalBubbleChatEnabled == nil then
+		IsGlobalBubbleChatEnabled = ExpChatGlobalTabDefaultExperimentation.getIsGlobalBubbleChatEnabled()
 	end
-	return var1
+	return IsGlobalBubbleChatEnabled
 end

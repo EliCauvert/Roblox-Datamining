@@ -2,50 +2,50 @@
 local t = {}
 
 return {
-	add = function(p1, p2)
-		-- upvalues: t (write)
-		local var1 = t[p1]
+	add = function(Key, p1) --[[ Line: 11 ]]
+		-- upvalues: t (ref)
+		local Entry = t[Key]
 		
-		if var1 == nil then
-			var1 = {}
-			t[p1] = var1
+		if Entry == nil then
+			Entry = {}
+			t[Key] = Entry
 		end
-		table.insert(var1, p2)
+		table.insert(Entry, p1)
 	end,
-	remove = function(p1, p2)
-		-- upvalues: t (write)
-		local var1 = t[p1]
+	remove = function(Key, p1) --[[ Line: 21 ]]
+		-- upvalues: t (ref)
+		local Entry = t[Key]
 		
-		if var1 == nil then return end
-		for i, v in var1 do
-			if v == p2 then
-				table.remove(var1, i)
+		if Entry == nil then return end
+		for i, value in Entry do
+			if value == p1 then
+				table.remove(Entry, i)
 				break
 			end
 		end
-		if #var1 == 0 then
-			t[p1] = nil
+		if #Entry == 0 then
+			t[Key] = nil
 		end
 	end,
-	clear = function()
-		-- upvalues: t (write)
+	clear = function() --[[ Line: 37 ]]
+		-- upvalues: t (ref)
 		t = {}
 	end,
-	snapshot = function()
-		-- upvalues: t (write)
+	snapshot = function() --[[ Line: 42 ]]
+		-- upvalues: t (ref)
 		if next(t) == nil then
 			return nil
 		end
-		local t_1 = {}
+		local t1 = {}
 		
-		for i, v in t do
-			local t_2 = {}
+		for i1, value in t do
+			local List = {}
 			
-			for i_1 = #v, 1, -1 do
-				table.insert(t_2, v[i_1])
+			for i = #value, 1, -1 do
+				table.insert(List, value[i])
 			end
-			t_1[i] = t_2
+			t1[i1] = List
 		end
-		return t_1
+		return t1
 	end
 }

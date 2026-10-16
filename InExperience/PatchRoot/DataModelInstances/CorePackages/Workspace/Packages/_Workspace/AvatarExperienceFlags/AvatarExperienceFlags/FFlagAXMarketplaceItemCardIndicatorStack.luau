@@ -1,1 +1,3 @@
-﻿return game:DefineFastFlag("AXMarketplaceItemCardIndicatorStack", false) and require(script.Parent.FFlagAXRemoveDynamicHeadBadge)
+﻿local FFlagAXRemoveDynamicHeadBadgeModule = require(script.Parent.FFlagAXRemoveDynamicHeadBadge)
+
+return game:DefineFastFlag("AXMarketplaceItemCardIndicatorStack", false) and FFlagAXRemoveDynamicHeadBadgeModule

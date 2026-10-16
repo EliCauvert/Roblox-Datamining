@@ -1,63 +1,65 @@
-﻿local parent = script:FindFirstAncestor("PlayabilityRodux").Parent
-local playabilityStatusEnum = require(parent.DiscoveryTypes).PlayabilityStatusEnum
-local fFlagLuaAppPlayableUxTreatment = require(parent.SharedFlags).FFlagLuaAppPlayableUxTreatment
-local fFlagLuaAppPlayButtonPrivatePT = require(parent.SharedFlags).FFlagLuaAppPlayButtonPrivatePT
-local resultModule = require(parent.Result)
-local t = {
-	new = function()
+﻿local Parent = script:FindFirstAncestor("PlayabilityRodux").Parent
+local PlayabilityStatusEnum = require(Parent.DiscoveryTypes).PlayabilityStatusEnum
+local FFlagLuaAppPlayableUxTreatment = require(Parent.SharedFlags).FFlagLuaAppPlayableUxTreatment
+local FFlagLuaAppPlayButtonPrivatePT = require(Parent.SharedFlags).FFlagLuaAppPlayButtonPrivatePT
+local ResultModule = require(Parent.Result)
+local PlayabilityStatusModelModule = {
+	new = function() --[[ Line: 58 ]]
 		return {}
 	end
 }
 
-function t.mock()
-	-- upvalues: t (ref), playabilityStatusEnum (ref)
-	local var1 = t.new()
-	var1.universeId = "149757"
-	var1.isPlayable = true
-	var1.playabilityStatus = playabilityStatusEnum.Playable
+function PlayabilityStatusModelModule.mock() --[[ Line: 64 ]]
+	-- upvalues: PlayabilityStatusModelModule (copy), PlayabilityStatusEnum (copy)
+	local NewPlayabilityStatusModel = PlayabilityStatusModelModule.new()
+	NewPlayabilityStatusModel.universeId = "149757"
+	NewPlayabilityStatusModel.isPlayable = true
+	NewPlayabilityStatusModel.playabilityStatus = PlayabilityStatusEnum.Playable
 	
-	return var1
+	return NewPlayabilityStatusModel
 end
 
-function t.fromJsonData(p1)
-	-- upvalues: resultModule (ref), t (ref), fFlagLuaAppPlayButtonPrivatePT (ref), fFlagLuaAppPlayableUxTreatment (ref)
+function PlayabilityStatusModelModule.fromJsonData(p1) --[[ Line: 73 ]]
+	-- upvalues: ResultModule (copy), PlayabilityStatusModelModule (copy), FFlagLuaAppPlayButtonPrivatePT (copy), FFlagLuaAppPlayableUxTreatment (copy)
 	if type(p1.universeId) ~= "number" and type(p1.universeId) ~= "string" then
-		return resultModule.error("PlayabilityStatus.fromJsonData expects universeId to be a number or a string")
-	elseif type(p1.isPlayable) ~= "boolean" then
-		return resultModule.error("PlayabilityStatus.fromJsonData expects isPlayable to be a boolean")
-	elseif type(p1.playabilityStatus) ~= "string" then
-		return resultModule.error("PlayabilityStatus.fromJsonData expects playabilityStatus to be a string")
+		return ResultModule.error("PlayabilityStatus.fromJsonData expects universeId to be a number or a string")
 	end
-	local var1 = t.new()
-	var1.universeId = tostring(p1.universeId)
-	var1.isPlayable = p1.isPlayable
-	var1.playabilityStatus = p1.playabilityStatus
-	var1.unplayableDisplayText = p1.unplayableDisplayText
+	if type(p1.isPlayable) ~= "boolean" then
+		return ResultModule.error("PlayabilityStatus.fromJsonData expects isPlayable to be a boolean")
+	end
+	if type(p1.playabilityStatus) ~= "string" then
+		return ResultModule.error("PlayabilityStatus.fromJsonData expects playabilityStatus to be a string")
+	end
+	local NewPlayabilityStatusModel = PlayabilityStatusModelModule.new()
+	NewPlayabilityStatusModel.universeId = tostring(p1.universeId)
+	NewPlayabilityStatusModel.isPlayable = p1.isPlayable
+	NewPlayabilityStatusModel.playabilityStatus = p1.playabilityStatus
+	NewPlayabilityStatusModel.unplayableDisplayText = p1.unplayableDisplayText
 	
 	if type(p1.demoModeAvailable) == "boolean" then
-		var1.demoModeAvailable = p1.demoModeAvailable
+		NewPlayabilityStatusModel.demoModeAvailable = p1.demoModeAvailable
 	end
-	if fFlagLuaAppPlayButtonPrivatePT then
-		local privatePlaytestInfo = p1.privatePlaytestInfo
+	if FFlagLuaAppPlayButtonPrivatePT then
+		local PrivatePlaytestInfo = p1.privatePlaytestInfo
 		
-		if type(privatePlaytestInfo) == "table" and type(privatePlaytestInfo.isPlayable) == "boolean" then
-			var1.privatePlaytestInfo = {
-				isPlayable = privatePlaytestInfo.isPlayable,
-				playabilityStatus = privatePlaytestInfo.playabilityStatus
+		if type(PrivatePlaytestInfo) == "table" and type(PrivatePlaytestInfo.isPlayable) == "boolean" then
+			NewPlayabilityStatusModel.privatePlaytestInfo = {
+				isPlayable = PrivatePlaytestInfo.isPlayable,
+				playabilityStatus = PrivatePlaytestInfo.playabilityStatus
 			}
 		end
 	end
-	if fFlagLuaAppPlayableUxTreatment then
-		local playableUxTreatment = p1.playableUxTreatment
+	if FFlagLuaAppPlayableUxTreatment then
+		local PlayableUxTreatment = p1.playableUxTreatment
 		
-		if playableUxTreatment and type(playableUxTreatment) == "table" and type(playableUxTreatment.treatment) == "string" then
-			var1.playableUxTreatment = {
-				treatment = playableUxTreatment.treatment,
-				data = playableUxTreatment.data
+		if PlayableUxTreatment and type(PlayableUxTreatment) == "table" and type(PlayableUxTreatment.treatment) == "string" then
+			NewPlayabilityStatusModel.playableUxTreatment = {
+				treatment = PlayableUxTreatment.treatment,
+				data = PlayableUxTreatment.data
 			}
 		end
 	end
-	return resultModule.success(var1)
+	return ResultModule.success(NewPlayabilityStatusModel)
 end
 
-return t
+return PlayabilityStatusModelModule

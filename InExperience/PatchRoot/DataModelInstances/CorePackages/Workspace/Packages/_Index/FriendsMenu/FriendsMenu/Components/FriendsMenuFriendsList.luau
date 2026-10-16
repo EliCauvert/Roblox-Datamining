@@ -1,76 +1,73 @@
-﻿local friendsMenu = script:FindFirstAncestor("FriendsMenu")
-local userInputService = game:GetService("UserInputService")
-local guiService = game:GetService("GuiService")
-local components = friendsMenu.Components
-local context = friendsMenu.Context
-local enums = friendsMenu.Enums
-local parent = friendsMenu.Parent
-local reactModule = require(parent.React)
-local UIBloxModule = require(parent.UIBlox)
-local friendRowModule = require(components.FriendRow)
-local emptyFriendsListModule = require(components.EmptyFriendsList)
-local friendsListMsgModule = require(components.FriendsListMsg)
-local friendsListContextModule = require(context.FriendsListContext)
-local _ = require(enums.FriendMenuType)
-local _ = require(friendsMenu.friendsMenuModalType)
-local verticalScrollView = UIBloxModule.App.Container.VerticalScrollView
-local fFlagUpdateInvitesToUsePaginatedFriendsModule = require(friendsMenu.Flags.FFlagUpdateInvitesToUsePaginatedFriends)
-local friendsMenuShareGameInviteLinkModule = require(components.FriendsMenuShareGameInviteLink)
-local enableFriendsMenuShareGameInviteLink3 = game:DefineFastFlag("EnableFriendsMenuShareGameInviteLink3", false)
-local useAppPolicy = require(parent.UniversalAppPolicy).useAppPolicy
+﻿local FriendsMenu = script:FindFirstAncestor("FriendsMenu")
+local UserInputService = game:GetService("UserInputService")
+local GuiService = game:GetService("GuiService")
+local Components = FriendsMenu.Components
+local Parent = FriendsMenu.Parent
+local ReactModule = require(Parent.React)
+local FriendRowModule = require(Components.FriendRow)
+local EmptyFriendsListModule = require(Components.EmptyFriendsList)
+local FriendsListMsgModule = require(Components.FriendsListMsg)
+local FriendsListContextModule = require(FriendsMenu.Context.FriendsListContext)
+local _ = require(FriendsMenu.Enums.FriendMenuType)
+local _ = require(FriendsMenu.friendsMenuModalType)
+local VerticalScrollView = require(Parent.UIBlox).App.Container.VerticalScrollView
+local FFlagUpdateInvitesToUsePaginatedFriendsModule = require(FriendsMenu.Flags.FFlagUpdateInvitesToUsePaginatedFriends)
+local FriendsMenuShareGameInviteLinkModule = require(Components.FriendsMenuShareGameInviteLink)
+local EnableFriendsMenuShareGameInviteLink3 = game:DefineFastFlag("EnableFriendsMenuShareGameInviteLink3", false)
+local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
 
-return function(p1)
-	-- upvalues: reactModule (ref), friendsListContextModule (ref), userInputService (ref), guiService (ref), useAppPolicy (ref), enableFriendsMenuShareGameInviteLink3 (ref), friendRowModule (ref), friendsMenuShareGameInviteLinkModule (ref), friendsListMsgModule (ref), emptyFriendsListModule (ref), verticalScrollView (ref), fFlagUpdateInvitesToUsePaginatedFriendsModule (ref)
-	local var1
-	local var2 = reactModule.useContext(friendsListContextModule)
-	local friends = var2.friends
-	local isFetchingFriends = var2.isFetchingFriends
-	local isFetchingFriends_1 = isFetchingFriends or var2.friendsNames and var2.friendsNames.loading
-	local isFriendsListFetchFailed = var2.isFriendsListFetchFailed
-	local hasFriends = var2.hasFriends
-	local var3 = reactModule.useRef(nil)
-	local var4, var5 = reactModule.useState(0)
-	reactModule.useEffect(function()
-		-- upvalues: userInputService (copy), p1 (ref), var3 (ref), guiService (copy)
-		if not userInputService.GamepadEnabled or p1.disableListFocus then return end
-		local current = var3.current
-		local screenGui = nil
+return function(p1) --[[ Line: 42 ]]
+	-- upvalues: ReactModule (copy), FriendsListContextModule (copy), UserInputService (copy), GuiService (copy), UseAppPolicyFunction (copy), EnableFriendsMenuShareGameInviteLink3 (copy), FriendRowModule (copy), FriendsMenuShareGameInviteLinkModule (copy), FriendsListMsgModule (copy), EmptyFriendsListModule (copy), VerticalScrollView (copy), FFlagUpdateInvitesToUsePaginatedFriendsModule (copy)
+	local UseContextResult = ReactModule.useContext(FriendsListContextModule)
+	local Friends = UseContextResult.friends
+	local IsFetchingFriends = UseContextResult.isFetchingFriends
+	local IsFetchingFriends1 = IsFetchingFriends or UseContextResult.friendsNames and UseContextResult.friendsNames.loading
+	local IsFriendsListFetchFailed = UseContextResult.isFriendsListFetchFailed
+	local HasFriends = UseContextResult.hasFriends
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
+	ReactModule.useEffect(function() --[[ Line: 54 ]]
+		-- upvalues: UserInputService (upval), p1 (copy), UseRefResult (copy), GuiService (upval)
+		if not UserInputService.GamepadEnabled or p1.disableListFocus then return end
+		local Current = UseRefResult.current
+		local ScreenGui = nil
 		
-		if current then
-			screenGui = current:FindFirstAncestorOfClass("ScreenGui")
+		if Current then
+			ScreenGui = Current:FindFirstAncestorOfClass("ScreenGui")
 			
-			if screenGui and screenGui.Enabled and guiService.SelectedCoreObject == nil then
+			if ScreenGui and ScreenGui.Enabled and GuiService.SelectedCoreObject == nil then
 				if not p1.disableSelectionParentManagement then
-					guiService:AddSelectionParent(p1.parentComponentName, current)
+					GuiService:AddSelectionParent(p1.parentComponentName, Current)
 				end
-				for i, v in ipairs(current:GetChildren()) do
-					if v:IsA("ImageButton") and v.LayoutOrder == 1 then
-						guiService.SelectedCoreObject = v
+				for _, Button in ipairs(Current:GetChildren()) do
+					if Button:IsA("ImageButton") and Button.LayoutOrder == 1 then
+						GuiService.SelectedCoreObject = Button
 					end
 				end
 			end
 		end
-		return function()
-			-- upvalues: guiService (copy), screenGui (write), p1 (copy)
-			if guiService.SelectedCoreObject and screenGui and (guiService.SelectedCoreObject.Parent == nil or screenGui:IsAncestorOf(guiService.SelectedCoreObject)) then
-				guiService.SelectedCoreObject = nil
+		return function() --[[ Line: 76 ]]
+			-- upvalues: GuiService (upval), ScreenGui (ref), p1 (upval)
+			if GuiService.SelectedCoreObject and ScreenGui and (GuiService.SelectedCoreObject.Parent == nil or ScreenGui:IsAncestorOf(GuiService.SelectedCoreObject)) then
+				GuiService.SelectedCoreObject = nil
 			end
 			if not p1.disableSelectionParentManagement then
-				guiService:RemoveSelectionGroup(p1.parentComponentName)
+				GuiService:RemoveSelectionGroup(p1.parentComponentName)
 			end
 		end
 	end, {
-		friends,
+		Friends,
 		p1.disableListFocus,
 		p1.disableSelectionParentManagement
 	})
-	local var6 = enableFriendsMenuShareGameInviteLink3 and (p1.parentComponentName == "GameInviteModal" and (game.GameId > 0 and (p1.gameDetailsData and (p1.gameDetailsData.isCoreScript and (p1.gameDetailsData.serverType == "StandardServer" and useAppPolicy(function(p2)
+	local UseAppPolicyResult = UseAppPolicyFunction(function(p2) --[[ Line: 102 ]]
 		return p2.getExperienceInviteShareLinkEnabled()
-	end))))))
-	local var7 = reactModule.useMemo(function()
-		-- upvalues: reactModule (copy), friends (ref), friendRowModule (copy), userInputService (copy), p1 (ref), isFetchingFriends (ref), isFetchingFriends_1 (ref)
-		local t = {
-			RowListLayout = reactModule.createElement("UIListLayout", {
+	end)
+	local UseAppPolicyResult1 = EnableFriendsMenuShareGameInviteLink3 and (p1.parentComponentName == "GameInviteModal" and game.GameId > 0 and (p1.gameDetailsData and (p1.gameDetailsData.isCoreScript and (p1.gameDetailsData.serverType == "StandardServer" and UseAppPolicyResult))))
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 115 ]]
+		-- upvalues: ReactModule (upval), Friends (copy), FriendRowModule (upval), UserInputService (upval), p1 (copy), IsFetchingFriends (copy), IsFetchingFriends1 (copy)
+		local config = {
+			RowListLayout = ReactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Vertical,
 				HorizontalAlignment = Enum.HorizontalAlignment.Center,
 				SortOrder = Enum.SortOrder.LayoutOrder,
@@ -78,63 +75,65 @@ return function(p1)
 			})
 		}
 		
-		for i, v in ipairs(friends) do
-			t["User-" .. tostring(v.id)] = reactModule.createElement(friendRowModule, {
-				friend = v,
-				layoutOrder = i,
-				isFullRowActivatable = (userInputService.GamepadEnabled or p1.isFullRowActivatable) == true,
+		for LayoutOrder, friend in ipairs(Friends) do
+			config["User-" .. tostring(friend.id)] = ReactModule.createElement(FriendRowModule, {
+				friend = friend,
+				layoutOrder = LayoutOrder,
+				isFullRowActivatable = (UserInputService.GamepadEnabled or p1.isFullRowActivatable) == true,
 				menuType = p1.menuType,
 				sidePadding = p1.sidePadding,
 				backgroundTransparency = p1.backgroundTransparency,
-				isFetchingFriends = isFetchingFriends,
-				isFetchingFriendsNames = isFetchingFriends_1
+				isFetchingFriends = IsFetchingFriends,
+				isFetchingFriendsNames = IsFetchingFriends1
 			})
 		end
-		return t
-	end, { friends })
-	local _ = nil
+		return config
+	end, { Friends })
+	local Config = nil
 	
-	if isFriendsListFetchFailed then
-		var1 = if var6 then {
-			InviteLink = reactModule.createElement(friendsMenuShareGameInviteLinkModule, { layoutOrder = 0 }),
-			FriendsListMsg = reactModule.createElement(friendsListMsgModule, { msgType = "errorFriendsList" })
-		} else reactModule.createElement(friendsListMsgModule, { msgType = "errorFriendsList" })
-	elseif isFetchingFriends then
-		var1 = var7
+	if IsFriendsListFetchFailed then
+		Config = if UseAppPolicyResult1 then {
+			InviteLink = ReactModule.createElement(FriendsMenuShareGameInviteLinkModule, { layoutOrder = 0 }),
+			FriendsListMsg = ReactModule.createElement(FriendsListMsgModule, { msgType = "errorFriendsList" })
+		} else ReactModule.createElement(FriendsListMsgModule, { msgType = "errorFriendsList" })
+	elseif IsFetchingFriends then
+		Config = UseMemoResult
 		
-		if var6 then
-			var1.InviteLink = reactModule.createElement(friendsMenuShareGameInviteLinkModule, { layoutOrder = 0 })
+		if UseAppPolicyResult1 then
+			Config.InviteLink = ReactModule.createElement(FriendsMenuShareGameInviteLinkModule, { layoutOrder = 0 })
 		end
-	elseif not hasFriends then
-		var1 = if var6 then {
-			InviteLink = reactModule.createElement(friendsMenuShareGameInviteLinkModule, { layoutOrder = 0 }),
-			EmptyFriendsList = reactModule.createElement(emptyFriendsListModule)
-		} else reactModule.createElement(emptyFriendsListModule)
-	elseif #friends > 0 then
-		var1 = var7
-		
-		if var6 then
-			var1.InviteLink = reactModule.createElement(friendsMenuShareGameInviteLinkModule, { layoutOrder = 0 })
+	elseif HasFriends then
+		if #Friends > 0 then
+			Config = UseMemoResult
+			
+			if UseAppPolicyResult1 then
+				Config.InviteLink = ReactModule.createElement(FriendsMenuShareGameInviteLinkModule, { layoutOrder = 0 })
+			end
+		else
+			Config = if UseAppPolicyResult1 then {
+				InviteLink = ReactModule.createElement(FriendsMenuShareGameInviteLinkModule, { layoutOrder = 0 }),
+				FriendsListMsg = ReactModule.createElement(FriendsListMsgModule, { msgType = "noResultFriendsList" })
+			} else ReactModule.createElement(FriendsListMsgModule, { msgType = "noResultFriendsList" })
 		end
 	else
-		var1 = if var6 then {
-			InviteLink = reactModule.createElement(friendsMenuShareGameInviteLinkModule, { layoutOrder = 0 }),
-			FriendsListMsg = reactModule.createElement(friendsListMsgModule, { msgType = "noResultFriendsList" })
-		} else reactModule.createElement(friendsListMsgModule, { msgType = "noResultFriendsList" })
+		Config = if UseAppPolicyResult1 then {
+			InviteLink = ReactModule.createElement(FriendsMenuShareGameInviteLinkModule, { layoutOrder = 0 }),
+			EmptyFriendsList = ReactModule.createElement(EmptyFriendsListModule)
+		} else ReactModule.createElement(EmptyFriendsListModule)
 	end
-	return reactModule.createElement(verticalScrollView, {
+	return ReactModule.createElement(VerticalScrollView, {
 		layoutOrder = p1.layoutOrder,
 		size = p1.size,
 		useAutomaticCanvasSize = true,
 		canvasSizeY = UDim.new(1, 0),
 		selectable = false,
-		scrollingFrameRef = var3,
-		[reactModule.Change.CanvasPosition] = if fFlagUpdateInvitesToUsePaginatedFriendsModule then function(p2)
-			-- upvalues: var4 (ref), var5 (ref), var2 (ref)
-			if p2.CanvasPosition.Y / (p2.AbsoluteCanvasSize.Y - p2.AbsoluteWindowSize.Y) >= 0.8 and var4 < p2.AbsoluteCanvasSize.Y then
-				var5(p2.AbsoluteCanvasSize.Y)
-				var2.fetchMoreFriends()
+		scrollingFrameRef = UseRefResult,
+		[ReactModule.Change.CanvasPosition] = if FFlagUpdateInvitesToUsePaginatedFriendsModule then function(ScrollFrame) --[[ Line: 202 ]]
+			-- upvalues: UseStateResult (copy), UseStateResult2 (copy), UseContextResult (copy)
+			if ScrollFrame.CanvasPosition.Y / (ScrollFrame.AbsoluteCanvasSize.Y - ScrollFrame.AbsoluteWindowSize.Y) >= 0.8 and UseStateResult < ScrollFrame.AbsoluteCanvasSize.Y then
+				UseStateResult2(ScrollFrame.AbsoluteCanvasSize.Y)
+				UseContextResult.fetchMoreFriends()
 			end
 		end else nil
-	}, var1)
+	}, Config)
 end

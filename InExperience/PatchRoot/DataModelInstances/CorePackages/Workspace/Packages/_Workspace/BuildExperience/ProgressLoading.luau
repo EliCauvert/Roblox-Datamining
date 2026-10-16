@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.ProgressLoading.ProgressLoading)
+﻿return (require(script.Parent.Parent.Parent._Index.ProgressLoading.ProgressLoading))

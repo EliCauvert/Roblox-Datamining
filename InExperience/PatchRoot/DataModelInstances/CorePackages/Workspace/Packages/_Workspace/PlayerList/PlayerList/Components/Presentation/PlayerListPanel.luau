@@ -1,174 +1,180 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local reactModule = require(parent_1.React)
-local cryoModule = require(parent_1.Cryo)
-local signalsReactModule = require(parent_1.SignalsReact)
-local foundationModule = require(parent_1.Foundation)
-local reactOtterModule = require(parent_1.ReactOtter)
-local createSignalMap = require(parent_1.CoreScriptsRoactCommon).Utilities.createSignalMap
-local _ = require(parent_1.LeaderboardStore)
-local view = foundationModule.View
-local scrollView = foundationModule.ScrollView
-local useTokens = foundationModule.Hooks.useTokens
-local panelContentHeightStoreModule = require(parent.Common.PanelContentHeightStore)
-local useReportPanelContentHeightModule = require(parent.Hooks.useReportPanelContentHeight)
-local usePreferredBackgroundStyleModule = require(parent.Hooks.usePreferredBackgroundStyle)
-local useLeaderboardStoreModule = require(parent.Hooks.useLeaderboardStore)
-local usePanelLayoutModule = require(parent.Hooks.usePanelLayout)
-local usePlatformLeaderboardModule = require(parent.Hooks.usePlatformLeaderboard)
-local useSlideOpenCloseAnimationModule = require(parent.Hooks.useSlideOpenCloseAnimation)
-local useSlideOpenCloseAnimation = useSlideOpenCloseAnimationModule.useSlideOpenCloseAnimation
-local PANEL_SLIDE_CONFIG = useSlideOpenCloseAnimationModule.PANEL_SLIDE_CONFIG
-local PANEL_ZOOM_CONFIG = useSlideOpenCloseAnimationModule.PANEL_ZOOM_CONFIG
-local MOBILE_ZOOM_SPRING = useSlideOpenCloseAnimationModule.MOBILE_ZOOM_SPRING
-local MENU_ZOOM_CLOSED_SCALE = useSlideOpenCloseAnimationModule.MENU_ZOOM_CLOSED_SCALE
-local PANEL_RECESS_SCALE = useSlideOpenCloseAnimationModule.PANEL_RECESS_SCALE
-local PANEL_RECESS_TRANSPARENCY = useSlideOpenCloseAnimationModule.PANEL_RECESS_TRANSPARENCY
-local computeStatColumnsModule = require(parent.Common.computeStatColumns)
-local playerListVisibilityStoreModule = require(parent.Common.PlayerListVisibilityStore)
-local playerContextualMenuStoreModule = require(parent.Common.PlayerContextualMenuStore)
-local toggleContextMenu = playerContextualMenuStoreModule.toggleContextMenu
-local constantsModule = require(parent.Common.Constants)
-local panelHeaderModule = require(parent.Components.Presentation.PanelHeader)
-local columnHeaderRowModule = require(parent.Components.Presentation.ColumnHeaderRow)
-local teamListViewModule = require(parent.Components.Presentation.TeamListView)
-local consoleFocusScrollViewModule = require(parent.Components.Presentation.ConsoleFocusScrollView)
-local entryViewModule = require(parent.Components.Presentation.EntryView)
-local tabbedLeaderboardBodyModule = require(parent.Components.Presentation.TabbedLeaderboardBody)
-local fFlagPlayerListReskinModule = require(parent.Flags.FFlagPlayerListReskin)
-local fallbackSignalsModule = require(parent.Common.FallbackSignals)
-local var1 = createSignalMap()
-local var2 = createSignalMap()
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
+local CryoModule = require(Parent1.Cryo)
+local SignalsReactModule = require(Parent1.SignalsReact)
+local FoundationModule = require(Parent1.Foundation)
+local ReactOtterModule = require(Parent1.ReactOtter)
+local CreateSignalMapFunction = require(Parent1.CoreScriptsRoactCommon).Utilities.createSignalMap
+local _ = require(Parent1.LeaderboardStore)
+local View = FoundationModule.View
+local ScrollView = FoundationModule.ScrollView
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local PanelContentHeightStoreModule = require(Parent.Common.PanelContentHeightStore)
+local UseReportPanelContentHeightModule = require(Parent.Hooks.useReportPanelContentHeight)
+local UsePreferredBackgroundStyleModule = require(Parent.Hooks.usePreferredBackgroundStyle)
+local UseLeaderboardStoreModule = require(Parent.Hooks.useLeaderboardStore)
+local UsePanelLayoutModule = require(Parent.Hooks.usePanelLayout)
+local UsePlatformLeaderboardModule = require(Parent.Hooks.usePlatformLeaderboard)
+local UseSlideOpenCloseAnimationModule = require(Parent.Hooks.useSlideOpenCloseAnimation)
+local UseSlideOpenCloseAnimationFunction = UseSlideOpenCloseAnimationModule.useSlideOpenCloseAnimation
+local PANELSLIDECONFIG = UseSlideOpenCloseAnimationModule.PANEL_SLIDE_CONFIG
+local PANELZOOMCONFIG = UseSlideOpenCloseAnimationModule.PANEL_ZOOM_CONFIG
+local MOBILEZOOMSPRING = UseSlideOpenCloseAnimationModule.MOBILE_ZOOM_SPRING
+local MENUZOOMCLOSEDSCALE = UseSlideOpenCloseAnimationModule.MENU_ZOOM_CLOSED_SCALE
+local PANELRECESSSCALE = UseSlideOpenCloseAnimationModule.PANEL_RECESS_SCALE
+local PANELRECESSTRANSPARENCY = UseSlideOpenCloseAnimationModule.PANEL_RECESS_TRANSPARENCY
+local ComputeStatColumnsModule = require(Parent.Common.computeStatColumns)
+local PlayerListVisibilityStoreModule = require(Parent.Common.PlayerListVisibilityStore)
+local PlayerContextualMenuStoreModule = require(Parent.Common.PlayerContextualMenuStore)
+local ToggleContextMenu = PlayerContextualMenuStoreModule.toggleContextMenu
+local ConstantsModule = require(Parent.Common.Constants)
+local PanelHeaderModule = require(Parent.Components.Presentation.PanelHeader)
+local ColumnHeaderRowModule = require(Parent.Components.Presentation.ColumnHeaderRow)
+local TeamListViewModule = require(Parent.Components.Presentation.TeamListView)
+local ConsoleFocusScrollViewModule = require(Parent.Components.Presentation.ConsoleFocusScrollView)
+local EntryViewModule = require(Parent.Components.Presentation.EntryView)
+local TabbedLeaderboardBodyModule = require(Parent.Components.Presentation.TabbedLeaderboardBody)
+local FFlagPlayerListReskinModule = require(Parent.Flags.FFlagPlayerListReskin)
+local FallbackSignalsModule = require(Parent.Common.FallbackSignals)
+local SignalMap = CreateSignalMapFunction()
+local SignalMap1 = CreateSignalMapFunction()
 
-local function wrapWithSlide(p1, p2, p3, p4)
-	-- upvalues: reactModule (ref), view (ref)
-	return if p2 == nil then p1 else reactModule.createElement(view, { Size = UDim2.fromOffset(p3, p4) }, {
-		SlideOffset = reactModule.createElement(view, { tag = "size-full", Position = p2 }, { PanelContent = p1 })
+local function wrapWithSlide(PanelContent, Position, XOffset, YOffset) --[[ Line: 63 ]]
+	-- upvalues: ReactModule (copy), View (copy)
+	return if Position == nil then PanelContent else ReactModule.createElement(View, { Size = UDim2.fromOffset(XOffset, YOffset) }, {
+		SlideOffset = ReactModule.createElement(View, { tag = "size-full", Position = Position }, { PanelContent = PanelContent })
 	})
 end
 
-local function createZoomDecorations(p1, p2, p3)
-	-- upvalues: reactModule (ref)
-	if p1 == nil then
+local function createZoomDecorations(Scale, Transparency, p1) --[[ Line: 85 ]]
+	-- upvalues: ReactModule (copy)
+	if Scale == nil then
 		return nil
 	end
-	local t = {
-		UIScale = reactModule.createElement("UIScale", { Scale = p1 })
+	local config = {
+		UIScale = ReactModule.createElement("UIScale", { Scale = Scale })
 	}
 	
-	if p2 ~= nil then
-		t.UIStroke = reactModule.createElement("UIStroke", {
+	if Transparency ~= nil then
+		config.UIStroke = ReactModule.createElement("UIStroke", {
 			ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
-			Color = p3.Color.Stroke.Default.Color3,
-			Transparency = p2,
-			Thickness = p3.Stroke.Standard
+			Color = p1.Color.Stroke.Default.Color3,
+			Transparency = Transparency,
+			Thickness = p1.Stroke.Standard
 		})
 	end
-	return t
+	return config
 end
 
-local function renderWithSlideAndZoomDecorations(p1, p2, p3, p4, p5, p6, p7)
-	-- upvalues: cryoModule (ref), wrapWithSlide (ref), reactModule (ref)
-	return wrapWithSlide(reactModule.createElement(p1, p2, if p7 ~= nil then p3 else cryoModule.Dictionary.join(p3, p7)), p4, p5, p6)
+local function renderWithSlideAndZoomDecorations(TabbedLeaderboardBodyModule, UseMemoResult, p1, SlidePosition, PanelWidth, PanelHeight, p2) --[[ Line: 109 ]]
+	-- upvalues: CryoModule (copy), wrapWithSlide (copy), ReactModule (copy)
+	return wrapWithSlide(ReactModule.createElement(TabbedLeaderboardBodyModule, UseMemoResult, if p2 == nil then p1 else CryoModule.Dictionary.join(p1, p2)), SlidePosition, PanelWidth, PanelHeight)
 end
 
-local function PlayerListPanelContent(p1)
-	-- upvalues: useLeaderboardStoreModule (ref), var1 (ref), var2 (ref), signalsReactModule (ref), fFlagPlayerListReskinModule (ref), usePlatformLeaderboardModule (ref), fallbackSignalsModule (ref), usePanelLayoutModule (ref), useTokens (ref), usePreferredBackgroundStyleModule (ref), playerListVisibilityStoreModule (ref), reactModule (ref), playerContextualMenuStoreModule (ref), toggleContextMenu (ref), reactOtterModule (ref), MOBILE_ZOOM_SPRING (ref), MENU_ZOOM_CLOSED_SCALE (ref), PANEL_RECESS_SCALE (ref), PANEL_RECESS_TRANSPARENCY (ref), createZoomDecorations (ref), useReportPanelContentHeightModule (ref), panelContentHeightStoreModule (ref), computeStatColumnsModule (ref), constantsModule (ref), consoleFocusScrollViewModule (ref), teamListViewModule (ref), scrollView (ref), entryViewModule (ref), columnHeaderRowModule (ref), panelHeaderModule (ref), foundationModule (ref), view (ref), renderWithSlideAndZoomDecorations (ref), tabbedLeaderboardBodyModule (ref)
-	local var3 = p1.isSmallTouchDevice == true
-	local title = p1.title
-	local platformLeaderboardOverride = p1.platformLeaderboardOverride
-	local var4 = useLeaderboardStoreModule()
-	local localPlayerOverride = p1.localPlayerOverride or game:GetService("Players").LocalPlayer
-	local var5 = if var4 then var4.getTeamList() else var1
-	local var6 = if var4 then var4.getGameStatsList() else var2
-	local var7 = signalsReactModule.useSignalState(var5.getAllData)
-	local var8 = signalsReactModule.useSignalState(var6.getAllData)
-	local count = var6.getCount(false)
-	local var9 = if fFlagPlayerListReskinModule then platformLeaderboardOverride or usePlatformLeaderboardModule() else nil
-	local var10 = usePanelLayoutModule(var3, count, if fFlagPlayerListReskinModule then signalsReactModule.useSignalState(if var9 then var9.getHasActiveLeaderboard else fallbackSignalsModule.getHasActiveLeaderboard) else false)
-	local var11 = useTokens()
-	local var12 = usePreferredBackgroundStyleModule(var11.Color.OverMedia.OverMedia_200)
-	local var13 = signalsReactModule.useSignalState(playerListVisibilityStoreModule.getEffectiveVisible)
-	local var14 = reactModule.useCallback(function()
-		-- upvalues: playerListVisibilityStoreModule (copy), playerContextualMenuStoreModule (copy)
-		if playerListVisibilityStoreModule.getEffectiveVisible(false) then
-			playerContextualMenuStoreModule.closeContextMenu()
-			playerListVisibilityStoreModule.setVisible(false)
+local function PlayerListPanelContent(p1) --[[ Line: 141 ]]
+	-- upvalues: UseLeaderboardStoreModule (copy), SignalMap (copy), SignalMap1 (copy), SignalsReactModule (copy), FFlagPlayerListReskinModule (copy), UsePlatformLeaderboardModule (copy), FallbackSignalsModule (copy), UsePanelLayoutModule (copy), UseTokensFunction (copy), UsePreferredBackgroundStyleModule (copy), PlayerListVisibilityStoreModule (copy), ReactModule (copy), PlayerContextualMenuStoreModule (copy), ToggleContextMenu (copy), ReactOtterModule (copy), MOBILEZOOMSPRING (copy), MENUZOOMCLOSEDSCALE (copy), PANELRECESSSCALE (copy), PANELRECESSTRANSPARENCY (copy), createZoomDecorations (copy), UseReportPanelContentHeightModule (copy), PanelContentHeightStoreModule (copy), ComputeStatColumnsModule (copy), ConstantsModule (copy), ConsoleFocusScrollViewModule (copy), TeamListViewModule (copy), ScrollView (copy), EntryViewModule (copy), ColumnHeaderRowModule (copy), PanelHeaderModule (copy), FoundationModule (copy), View (copy), renderWithSlideAndZoomDecorations (copy), TabbedLeaderboardBodyModule (copy)
+	local IsIsSmallTouchDevice = p1.isSmallTouchDevice == true
+	local Title = p1.title
+	local PlatformLeaderboardOverride = p1.platformLeaderboardOverride
+	local UseLeaderboardStoreModuleResult = UseLeaderboardStoreModule()
+	local LocalPlayerOverride = p1.localPlayerOverride or game:GetService("Players").LocalPlayer
+	local TeamList = if UseLeaderboardStoreModuleResult then UseLeaderboardStoreModuleResult.getTeamList() else SignalMap
+	local GameStatsList = if UseLeaderboardStoreModuleResult then UseLeaderboardStoreModuleResult.getGameStatsList() else SignalMap1
+	local UseSignalStateResult = SignalsReactModule.useSignalState(TeamList.getAllData)
+	local UseSignalStateResult1 = SignalsReactModule.useSignalState(GameStatsList.getAllData)
+	local Count: number = GameStatsList.getCount(false)
+	local PlatformLeaderboardOverride1 = if FFlagPlayerListReskinModule then PlatformLeaderboardOverride or UsePlatformLeaderboardModule() else nil
+	local GetHasActiveLeaderboard = if PlatformLeaderboardOverride1 then PlatformLeaderboardOverride1.getHasActiveLeaderboard else FallbackSignalsModule.getHasActiveLeaderboard
+	local UsePanelLayoutModuleResult = UsePanelLayoutModule(IsIsSmallTouchDevice, Count, if FFlagPlayerListReskinModule then SignalsReactModule.useSignalState(GetHasActiveLeaderboard) else false)
+	local UseTokensResult = UseTokensFunction()
+	local UsePreferredBackgroundStyleModuleResult = UsePreferredBackgroundStyleModule(UseTokensResult.Color.OverMedia.OverMedia_200)
+	local UseSignalStateResult2 = SignalsReactModule.useSignalState(PlayerListVisibilityStoreModule.getEffectiveVisible)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 186 ]]
+		-- upvalues: PlayerListVisibilityStoreModule (upval), PlayerContextualMenuStoreModule (upval)
+		if PlayerListVisibilityStoreModule.getEffectiveVisible(false) then
+			PlayerContextualMenuStoreModule.closeContextMenu()
+			PlayerListVisibilityStoreModule.setVisible(false)
 			
 			return
 		end
 	end, {})
-	local var15 = if var13 then toggleContextMenu else nil
-	local var16 = signalsReactModule.useSignalState(playerContextualMenuStoreModule.getMenuData) ~= nil
-	local var17, var18 = reactOtterModule.useAnimatedBinding(0)
-	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), var18 (ref), reactOtterModule (copy), var16 (ref), MOBILE_ZOOM_SPRING (copy)
-		if var3 then
-			var18(reactOtterModule.spring(if var16 then 1 else 0, MOBILE_ZOOM_SPRING))
+	local ToggleContextMenu1 = if UseSignalStateResult2 then ToggleContextMenu else nil
+	local HasUseSignalStateResult = SignalsReactModule.useSignalState(PlayerContextualMenuStoreModule.getMenuData) ~= nil
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(0)
+	ReactModule.useEffect(function() --[[ Line: 203 ]]
+		-- upvalues: IsIsSmallTouchDevice (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), HasUseSignalStateResult (copy), MOBILEZOOMSPRING (upval)
+		if IsIsSmallTouchDevice then
+			UseAnimatedBindingResult2(ReactOtterModule.spring(if HasUseSignalStateResult then 1 else 0, MOBILEZOOMSPRING))
 			
 			return
 		end
-	end, { var16, var3 })
-	local openCloseOffset = p1.openCloseOffset
-	local var19 = var3 and openCloseOffset ~= nil
-	local var20 = reactModule.useMemo(function()
-		-- upvalues: var19 (ref), openCloseOffset (ref), reactModule (copy), var17 (ref), MENU_ZOOM_CLOSED_SCALE (copy), PANEL_RECESS_SCALE (copy)
-		return if var19 and openCloseOffset ~= nil then reactModule.joinBindings({ openCloseOffset, var17 }):map(function(p2)
-			-- upvalues: MENU_ZOOM_CLOSED_SCALE (copy), PANEL_RECESS_SCALE (copy)
-			return (1 + (MENU_ZOOM_CLOSED_SCALE - 1) * p2[1]) * (1 - (1 - PANEL_RECESS_SCALE) * p2[2])
+	end, { HasUseSignalStateResult, IsIsSmallTouchDevice })
+	local OpenCloseOffset = p1.openCloseOffset
+	local HasOpenCloseOffset: boolean = IsIsSmallTouchDevice and OpenCloseOffset ~= nil
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 223 ]]
+		-- upvalues: HasOpenCloseOffset (copy), OpenCloseOffset (copy), ReactModule (upval), UseAnimatedBindingResult (copy), PANELRECESSTRANSPARENCY (upval)
+		return if HasOpenCloseOffset and OpenCloseOffset ~= nil then ReactModule.joinBindings({ OpenCloseOffset, UseAnimatedBindingResult }):map(function(Entry): number --[[ Line: 227 ]]
+			-- upvalues: PANELRECESSTRANSPARENCY (upval)
+			return 1 - (1 - Entry[1]) * (1 - PANELRECESSTRANSPARENCY * Entry[2])
 		end) else nil
-	end, { var19, openCloseOffset, var17 })
-	local var21 = reactModule.useMemo(function()
-		-- upvalues: var19 (ref), openCloseOffset (ref), reactModule (copy), var17 (ref), PANEL_RECESS_TRANSPARENCY (copy)
-		return if var19 and openCloseOffset ~= nil then reactModule.joinBindings({ openCloseOffset, var17 }):map(function(p2)
-			-- upvalues: PANEL_RECESS_TRANSPARENCY (copy)
-			return 1 - (1 - p2[1]) * (1 - PANEL_RECESS_TRANSPARENCY * p2[2])
-		end) else nil
-	end, { var19, openCloseOffset, var17 })
-	local var22 = reactModule.useMemo(function()
-		-- upvalues: var21 (ref), var11 (ref)
-		if var21 == nil then
+	end, {
+		HasOpenCloseOffset,
+		OpenCloseOffset,
+		UseAnimatedBindingResult
+	})
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 234 ]]
+		-- upvalues: UseMemoResult (copy), UseTokensResult (copy)
+		if UseMemoResult == nil then
 			return nil
+		else
+			local Transparency = UseTokensResult.Color.Stroke.Default.Transparency
+			
+			return UseMemoResult:map(function(p2): number --[[ Line: 239 ]]
+				-- upvalues: Transparency (copy)
+				return Transparency + (1 - Transparency) * p2
+			end)
 		end
-		local transparency = var11.Color.Stroke.Default.Transparency
-		
-		return var21:map(function(p2)
-			-- upvalues: transparency (ref)
-			return transparency + (1 - transparency) * p2
-		end)
-	end, { var21, var11.Color.Stroke.Default.Transparency })
-	local var23 = createZoomDecorations(var20, var22, var11)
-	local var24 = useReportPanelContentHeightModule(var10.columnHeaderHeight)
-	reactModule.useEffect(function()
-		-- upvalues: panelContentHeightStoreModule (copy)
-		return function()
-			-- upvalues: panelContentHeightStoreModule (copy)
-			panelContentHeightStoreModule.reset()
+	end, {
+		UseMemoResult,
+		UseTokensResult.Color.Stroke.Default.Transparency
+	})
+	local ZoomDecorations = createZoomDecorations(ReactModule.useMemo(function() --[[ Line: 211 ]]
+		-- upvalues: HasOpenCloseOffset (copy), OpenCloseOffset (copy), ReactModule (upval), UseAnimatedBindingResult (copy), MENUZOOMCLOSEDSCALE (upval), PANELRECESSSCALE (upval)
+		return if HasOpenCloseOffset and OpenCloseOffset ~= nil then ReactModule.joinBindings({ OpenCloseOffset, UseAnimatedBindingResult }):map(function(Entry): number --[[ Line: 215 ]]
+			-- upvalues: MENUZOOMCLOSEDSCALE (upval), PANELRECESSSCALE (upval)
+			return (1 + (MENUZOOMCLOSEDSCALE - 1) * Entry[1]) * (1 - (1 - PANELRECESSSCALE) * Entry[2])
+		end) else nil
+	end, {
+		HasOpenCloseOffset,
+		OpenCloseOffset,
+		UseAnimatedBindingResult
+	}), UseMemoResult1, UseTokensResult)
+	local UseReportPanelContentHeightModuleResult = UseReportPanelContentHeightModule(UsePanelLayoutModuleResult.columnHeaderHeight)
+	ReactModule.useEffect(function() --[[ Line: 252 ]]
+		-- upvalues: PanelContentHeightStoreModule (upval)
+		return function() --[[ Line: 253 ]]
+			-- upvalues: PanelContentHeightStoreModule (upval)
+			PanelContentHeightStoreModule.reset()
 		end
 	end, {})
-	local var25 = false
+	local IsCountAbove: boolean = if IsIsSmallTouchDevice and LocalPlayerOverride ~= nil and UseLeaderboardStoreModuleResult ~= nil then TeamList.getCount(false) > 0 or Count > 0 else false
+	local MaxStatColumns = UsePanelLayoutModuleResult.maxStatColumns
+	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 270 ]]
+		-- upvalues: ComputeStatColumnsModule (upval), GameStatsList (copy), MaxStatColumns (copy)
+		return ComputeStatColumnsModule(GameStatsList, MaxStatColumns)
+	end, { UseSignalStateResult1, GameStatsList, MaxStatColumns })
+	local HasNonNeutralTeams = false
 	
-	if var3 and localPlayerOverride ~= nil and var4 ~= nil then
-		var25 = if var5.getCount(false) <= 0 then count > 0 else true
-	end
-	local v
-	local maxStatColumns = var10.maxStatColumns
-	local var26 = reactModule.useMemo(function()
-		-- upvalues: computeStatColumnsModule (copy), var6 (ref), maxStatColumns (ref)
-		return computeStatColumnsModule(var6, maxStatColumns)
-	end, { var8, var6, maxStatColumns })
-	local var27 = false
-	
-	if var4 then
-		for i, v in pairs(var7) do
-			if v and i ~= "Neutral" then
-				var27 = true
+	if UseLeaderboardStoreModuleResult then
+		for i, value in pairs(UseSignalStateResult) do
+			if value and i ~= "Neutral" then
+				HasNonNeutralTeams = true
 				break
 			end
 		end
 	end
-	local var28
-	local t = {
+	local ScrollViewProps = {
 		LayoutOrder = 2,
 		tag = "fill size-full-0",
 		layout = {
@@ -179,121 +185,121 @@ local function PlayerListPanelContent(p1)
 			AutomaticCanvasSize = nil,
 			ScrollingDirection = Enum.ScrollingDirection.Y
 		},
-		scrollingFrameRef = var24,
-		selectionGroup = constantsModule.CONSOLE_FOCUS_SCROLL_ESCAPE_UP,
-		selection = constantsModule.NOT_SELECTABLE
+		scrollingFrameRef = UseReportPanelContentHeightModuleResult,
+		selectionGroup = ConstantsModule.CONSOLE_FOCUS_SCROLL_ESCAPE_UP,
+		selection = ConstantsModule.NOT_SELECTABLE
 	}
-	local _ = nil
+	local Element = nil
 	
-	if var4 then
-		var28 = reactModule.createElement(consoleFocusScrollViewModule, {
-			allTeams = var7,
-			hasNonNeutralTeams = var27,
-			leaderboardStore = var4,
-			statColumns = var26,
-			statWidth = var10.statWidth,
-			rowHeight = var10.rowHeight,
-			columnHeaderHeight = var10.columnHeaderHeight,
-			localPlayer = localPlayerOverride,
-			scrollViewProps = t,
-			onActivated = var15
+	if UseLeaderboardStoreModuleResult then
+		Element = ReactModule.createElement(ConsoleFocusScrollViewModule, {
+			allTeams = UseSignalStateResult,
+			hasNonNeutralTeams = HasNonNeutralTeams,
+			leaderboardStore = UseLeaderboardStoreModuleResult,
+			statColumns = UseMemoResult2,
+			statWidth = UsePanelLayoutModuleResult.statWidth,
+			rowHeight = UsePanelLayoutModuleResult.rowHeight,
+			columnHeaderHeight = UsePanelLayoutModuleResult.columnHeaderHeight,
+			localPlayer = LocalPlayerOverride,
+			scrollViewProps = ScrollViewProps,
+			onActivated = ToggleContextMenu1
 		})
 	else
-		local t_1 = {}
+		local Elements = {}
 		
-		if var4 then
-			for i, v in pairs(var7) do
-				if v then
-					t_1[`Team_{tostring(i)}`] = reactModule.createElement(teamListViewModule, {
-						teamEntry = v,
-						isNeutral = i == "Neutral",
-						hasNonNeutralTeams = var27,
-						leaderboardStore = var4,
-						statColumns = var26,
-						statWidth = var10.statWidth,
-						rowHeight = var10.rowHeight,
-						columnHeaderHeight = var10.columnHeaderHeight,
-						onActivated = var15,
-						localPlayer = localPlayerOverride
+		if UseLeaderboardStoreModuleResult then
+			for i1, TeamEntry in pairs(UseSignalStateResult) do
+				if TeamEntry then
+					Elements[`Team_{tostring(i1)}`] = ReactModule.createElement(TeamListViewModule, {
+						teamEntry = TeamEntry,
+						isNeutral = i1 == "Neutral",
+						hasNonNeutralTeams = HasNonNeutralTeams,
+						leaderboardStore = UseLeaderboardStoreModuleResult,
+						statColumns = UseMemoResult2,
+						statWidth = UsePanelLayoutModuleResult.statWidth,
+						rowHeight = UsePanelLayoutModuleResult.rowHeight,
+						columnHeaderHeight = UsePanelLayoutModuleResult.columnHeaderHeight,
+						onActivated = ToggleContextMenu1,
+						localPlayer = LocalPlayerOverride
 					})
 				end
 			end
 		end
-		var28 = reactModule.createElement(scrollView, t, t_1)
+		Element = ReactModule.createElement(ScrollView, ScrollViewProps, Elements)
 	end
-	local t_1 = {
-		StickySelfRow = if var25 then reactModule.createElement(entryViewModule, {
+	local config = {
+		StickySelfRow = if IsCountAbove then ReactModule.createElement(EntryViewModule, {
 			isCurrentUser = true,
 			layoutOrder = 0,
-			player = localPlayerOverride,
-			leaderboardStore = var4,
-			statColumns = var26,
-			statWidth = var10.statWidth,
-			rowHeight = var10.rowHeight,
-			onActivated = var15
+			player = LocalPlayerOverride,
+			leaderboardStore = UseLeaderboardStoreModuleResult,
+			statColumns = UseMemoResult2,
+			statWidth = UsePanelLayoutModuleResult.statWidth,
+			rowHeight = UsePanelLayoutModuleResult.rowHeight,
+			onActivated = ToggleContextMenu1
 		}) else nil,
-		ColumnHeaders = reactModule.createElement(columnHeaderRowModule, {
+		ColumnHeaders = ReactModule.createElement(ColumnHeaderRowModule, {
 			layoutOrder = 1,
-			statColumns = var26,
-			statWidth = var10.statWidth,
-			headerHeight = var10.columnHeaderHeight
+			statColumns = UseMemoResult2,
+			statWidth = UsePanelLayoutModuleResult.statWidth,
+			headerHeight = UsePanelLayoutModuleResult.columnHeaderHeight
 		}),
-		PlayerRows = var28
+		PlayerRows = Element
 	}
-	local var29 = var22 == nil
-	v = reactModule.useMemo(function()
-		-- upvalues: var10 (ref), var29 (ref), var12 (ref), var21 (ref), constantsModule (copy)
+	local NoUseMemoResult = UseMemoResult1 == nil
+	local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 373 ]]
+		-- upvalues: UsePanelLayoutModuleResult (copy), NoUseMemoResult (copy), UsePreferredBackgroundStyleModuleResult (copy), UseMemoResult (copy), ConstantsModule (upval)
 		return {
 			Visible = true,
-			Size = UDim2.fromOffset(var10.panelWidth, var10.panelHeight),
+			Size = UDim2.fromOffset(UsePanelLayoutModuleResult.panelWidth, UsePanelLayoutModuleResult.panelHeight),
 			tag = {
 				["col radius-medium"] = true,
-				["stroke-standard stroke-default"] = var29
+				["stroke-standard stroke-default"] = NoUseMemoResult
 			},
-			backgroundStyle = var12,
-			GroupTransparency = var21,
-			selectionGroup = constantsModule.CONSOLE_FOCUS_ISOLATE,
-			selection = constantsModule.NOT_SELECTABLE
+			backgroundStyle = UsePreferredBackgroundStyleModuleResult,
+			GroupTransparency = UseMemoResult,
+			selectionGroup = ConstantsModule.CONSOLE_FOCUS_ISOLATE,
+			selection = ConstantsModule.NOT_SELECTABLE
 		}
 	end, {
-		var10.panelWidth,
-		var10.panelHeight,
-		var29,
-		var12,
-		var21
+		UsePanelLayoutModuleResult.panelWidth,
+		UsePanelLayoutModuleResult.panelHeight,
+		NoUseMemoResult,
+		UsePreferredBackgroundStyleModuleResult,
+		UseMemoResult
 	})
-	local var30 = reactModule.createElement(panelHeaderModule, {
+	local Element1 = ReactModule.createElement(PanelHeaderModule, {
 		layoutOrder = 1,
-		onClose = var14,
-		isDisabled = not var13,
-		height = var10.headerHeight,
-		title = title
+		onClose = UseResult,
+		isDisabled = not UseSignalStateResult2,
+		height = UsePanelLayoutModuleResult.headerHeight,
+		title = Title
 	})
-	local var31 = reactModule.createElement(foundationModule.Divider, { LayoutOrder = 2 })
+	local Element11 = ReactModule.createElement(FoundationModule.Divider, { LayoutOrder = 2 })
 	
-	return if fFlagPlayerListReskinModule then renderWithSlideAndZoomDecorations(tabbedLeaderboardBodyModule, {
-		serverBody = reactModule.createElement(view, { LayoutOrder = 4, tag = "col fill size-full-0" }, t_1),
-		panelHeader = var30,
-		panelDivider = var31,
-		panelProps = v
-	}, {}, p1.slidePosition, var10.panelWidth, var10.panelHeight, var23) else renderWithSlideAndZoomDecorations(view, v, {
-		Header = var30,
-		HeaderDivider = var31,
-		LeaderboardBody = reactModule.createElement(view, { LayoutOrder = 3, tag = "col fill size-full-0" }, t_1)
-	}, p1.slidePosition, var10.panelWidth, var10.panelHeight, var23)
+	return if FFlagPlayerListReskinModule then renderWithSlideAndZoomDecorations(TabbedLeaderboardBodyModule, {
+		serverBody = ReactModule.createElement(View, { LayoutOrder = 4, tag = "col fill size-full-0" }, config),
+		panelHeader = Element1,
+		panelDivider = Element11,
+		panelProps = UseMemoResult3
+	}, {}, p1.slidePosition, UsePanelLayoutModuleResult.panelWidth, UsePanelLayoutModuleResult.panelHeight, ZoomDecorations) else renderWithSlideAndZoomDecorations(View, UseMemoResult3, {
+		Header = Element1,
+		HeaderDivider = Element11,
+		LeaderboardBody = ReactModule.createElement(View, { LayoutOrder = 3, tag = "col fill size-full-0" }, config)
+	}, p1.slidePosition, UsePanelLayoutModuleResult.panelWidth, UsePanelLayoutModuleResult.panelHeight, ZoomDecorations)
 end
 
-return reactModule.memo(function(p2)
-	-- upvalues: signalsReactModule (ref), playerListVisibilityStoreModule (ref), useSlideOpenCloseAnimation (ref), PANEL_ZOOM_CONFIG (ref), PANEL_SLIDE_CONFIG (ref), reactModule (ref), PlayerListPanelContent (ref)
-	local var32 = p2.isSmallTouchDevice == true
-	local var33 = useSlideOpenCloseAnimation(signalsReactModule.useSignalState(playerListVisibilityStoreModule.getEffectiveVisible), if var32 then PANEL_ZOOM_CONFIG else PANEL_SLIDE_CONFIG)
+return ReactModule.memo(function(p2) --[[ Line: 431 | Named "PlayerListPanel" ]]
+	-- upvalues: SignalsReactModule (copy), PlayerListVisibilityStoreModule (copy), UseSlideOpenCloseAnimationFunction (copy), PANELZOOMCONFIG (copy), PANELSLIDECONFIG (copy), ReactModule (copy), PlayerListPanelContent (copy)
+	local IsIsSmallTouchDevice = p2.isSmallTouchDevice == true
+	local UseSlideOpenCloseAnimationResult = UseSlideOpenCloseAnimationFunction(SignalsReactModule.useSignalState(PlayerListVisibilityStoreModule.getEffectiveVisible), if IsIsSmallTouchDevice then PANELZOOMCONFIG else PANELSLIDECONFIG)
 	
-	return if var33.shouldMount then reactModule.createElement(PlayerListPanelContent, {
+	return if UseSlideOpenCloseAnimationResult.shouldMount then ReactModule.createElement(PlayerListPanelContent, {
 		isSmallTouchDevice = p2.isSmallTouchDevice,
 		title = p2.title,
 		localPlayerOverride = p2.localPlayerOverride,
 		platformLeaderboardOverride = p2.platformLeaderboardOverride,
-		slidePosition = if var32 then nil else var33.position,
-		openCloseOffset = if var32 then var33.offset else nil
+		slidePosition = if IsIsSmallTouchDevice then nil else UseSlideOpenCloseAnimationResult.position,
+		openCloseOffset = if IsIsSmallTouchDevice then UseSlideOpenCloseAnimationResult.offset else nil
 	}) else nil
 end)

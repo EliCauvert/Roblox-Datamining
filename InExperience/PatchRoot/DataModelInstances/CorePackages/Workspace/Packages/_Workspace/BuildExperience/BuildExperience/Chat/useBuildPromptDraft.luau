@@ -1,48 +1,52 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local fFlagBuildExperienceMonetizationNativeUIModule = require(buildExperience.Flags.FFlagBuildExperienceMonetizationNativeUI)
-local fFlagBuildExperienceDeveloperProductContextModule = require(buildExperience.Flags.FFlagBuildExperienceDeveloperProductContext)
-local getBuildPromptDraftStoreModule = require(buildExperience.Stores.GetBuildPromptDraftStore)
-local chatTypesModule = require(script.Parent.chatTypes)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local FFlagBuildExperienceMonetizationNativeUIModule = require(BuildExperience.Flags.FFlagBuildExperienceMonetizationNativeUI)
+local FFlagBuildExperienceDeveloperProductContextModule = require(BuildExperience.Flags.FFlagBuildExperienceDeveloperProductContext)
+local GetBuildPromptDraftStoreModule = require(BuildExperience.Stores.GetBuildPromptDraftStore)
+local ChatTypesModule = require(script.Parent.chatTypes)
 
-return function(p1, p2, p3, p4, p5, p6)
-	-- upvalues: getBuildPromptDraftStoreModule (ref), signalsReactModule (ref), fFlagBuildExperienceDeveloperProductContextModule (ref), reactModule (ref), fFlagBuildExperienceMonetizationNativeUIModule (ref), chatTypesModule (ref)
-	local var1 = getBuildPromptDraftStoreModule()
-	local var2 = signalsReactModule.useSignalState(var1.getPendingDraft)
-	local var3 = nil
+return function(UniverseId, SessionId, Callback, Callback1, Enabled, Current) --[[ Line: 19 | Named "useBuildPromptDraft" ]]
+	-- upvalues: GetBuildPromptDraftStoreModule (copy), SignalsReactModule (copy), FFlagBuildExperienceDeveloperProductContextModule (copy), ReactModule (copy), FFlagBuildExperienceMonetizationNativeUIModule (copy), ChatTypesModule (copy)
+	local BuildPromptDraftStoreModule = GetBuildPromptDraftStoreModule()
+	local UseSignalStateResult = SignalsReactModule.useSignalState(BuildPromptDraftStoreModule.getPendingDraft)
+	local v1 = nil
 	
-	if fFlagBuildExperienceDeveloperProductContextModule then
-		local var4 = reactModule.useRef(p6)
-		var4.current = p6
-		var3 = var4
+	if FFlagBuildExperienceDeveloperProductContextModule then
+		local UseRefResult = ReactModule.useRef(Current)
+		UseRefResult.current = Current
+		v1 = UseRefResult
 	end
-	reactModule.useEffect(function()
-		-- upvalues: fFlagBuildExperienceMonetizationNativeUIModule (copy), p5 (ref), var1 (ref), var2 (ref), p1 (ref), p2 (ref), fFlagBuildExperienceDeveloperProductContextModule (copy), var3 (write), chatTypesModule (copy), p3 (ref), p4 (ref)
-		if fFlagBuildExperienceMonetizationNativeUIModule and (p5 == false or var1.getPendingDraft() ~= var2) then return end
-		if var2 == nil or var2.universeId ~= p1 or var2.sessionId ~= nil and var2.sessionId ~= p2 or not fFlagBuildExperienceDeveloperProductContextModule and var2.resourceAttachments ~= nil then return end
-		if fFlagBuildExperienceDeveloperProductContextModule and var2.resourceAttachments ~= nil then
-			local var5 = if var3 ~= nil then nil else var3.current
+	ReactModule.useEffect(function() --[[ Line: 37 ]]
+		-- upvalues: FFlagBuildExperienceMonetizationNativeUIModule (upval), Enabled (copy), BuildPromptDraftStoreModule (copy), UseSignalStateResult (copy), UniverseId (copy), SessionId (copy), FFlagBuildExperienceDeveloperProductContextModule (upval), v1 (ref), ChatTypesModule (upval), Callback (copy), Callback1 (copy)
+		if FFlagBuildExperienceMonetizationNativeUIModule and (Enabled == false or BuildPromptDraftStoreModule.getPendingDraft() ~= UseSignalStateResult) then return end
+		if UseSignalStateResult == nil or UseSignalStateResult.universeId ~= UniverseId or UseSignalStateResult.sessionId ~= nil and UseSignalStateResult.sessionId ~= SessionId or not FFlagBuildExperienceDeveloperProductContextModule and UseSignalStateResult.resourceAttachments ~= nil then return end
+		if FFlagBuildExperienceDeveloperProductContextModule and UseSignalStateResult.resourceAttachments ~= nil then
+			local Current = if v1 == nil then nil else v1.current
 			
-			if var5 == nil then return end
-			var5.clearComposerResourceAttachments()
+			if Current == nil then return end
+			Current.clearComposerResourceAttachments()
 			
-			for i, v in var2.resourceAttachments do
-				if var5.findComposerResourceAttachmentIndexByUri(chatTypesModule.getResourceAttachmentUri(v)) == nil then
-					var5.addComposerResourceAttachment(v)
+			for _, resourceAttachment in UseSignalStateResult.resourceAttachments do
+				if Current.findComposerResourceAttachmentIndexByUri(ChatTypesModule.getResourceAttachmentUri(resourceAttachment)) == nil then
+					Current.addComposerResourceAttachment(resourceAttachment)
 				end
 			end
 		end
-		p3(var2.text)
+		Callback(UseSignalStateResult.text)
 		
-		if var2.autoSend == true and (p4 == nil or not p4()) then
+		if UseSignalStateResult.autoSend ~= true or Callback1 ~= nil and Callback1() then
+			BuildPromptDraftStoreModule.consumeDraft(UniverseId, SessionId)
+			
 			return
 		end
-		var1.consumeDraft(p1, p2)
-	end, if fFlagBuildExperienceMonetizationNativeUIModule then {
-		var2 or false, var1, p1 or false, p2 or false, p3, p4 or false, p5 ~= false
+	end, if FFlagBuildExperienceMonetizationNativeUIModule then {
+		UseSignalStateResult or false, BuildPromptDraftStoreModule,
+		UniverseId or false, SessionId or false, Callback, Callback1 or false,
+		Enabled ~= false
 	} else {
-		var2, var1, p1, p2, p3, p4
+		UseSignalStateResult, BuildPromptDraftStoreModule, UniverseId, SessionId,
+		Callback, Callback1
 	})
 end

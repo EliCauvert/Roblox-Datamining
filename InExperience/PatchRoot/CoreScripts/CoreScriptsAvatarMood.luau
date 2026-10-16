@@ -1,18 +1,14 @@
-﻿local playersService = game:GetService("Players")
-local coreGuiService = game:GetService("CoreGui")
-local corePackagesService = game:GetService("CorePackages")
-local localPlayer = playersService.LocalPlayer
-local _ = coreGuiService.RobloxGui
-local _ = require(corePackagesService.Workspace.Packages.CoreScriptsInitializer).CoreLogger:new(script.Name)
-local _ = nil
-local var1 = nil
-local var2 = nil
-local core = Enum.AnimationPriority.Core
-local var3 = nil
-local var4 = true
-local var5 = false
-local t = {}
-local t_1 = {
+﻿local LocalPlayer = game:GetService("Players").LocalPlayer
+local _ = game:GetService("CoreGui").RobloxGui
+local _ = require(game:GetService("CorePackages").Workspace.Packages.CoreScriptsInitializer).CoreLogger:new(script.Name)
+local Animation = nil
+local AnimationTrack = nil
+local Core = Enum.AnimationPriority.Core
+local AnimationTrack1 = nil
+local Flag = true
+local Flag1 = false
+local StoppedConnections = {}
+local config = {
 	EmoteStopped = "currentEmoteTrackStopped",
 	EmoteKeyframeReached = "emoteKeyframeReached",
 	AnimationInstanceChanged = "animationInstanceChanged",
@@ -31,7 +27,7 @@ local t_1 = {
 	AnimationStreamTrackPlayed = "AnimationStreamTrackPlayed",
 	StreamTrackStopped = "StreamTrackStopped"
 }
-local t_2 = {
+local config1 = {
 	wave = true,
 	point = true,
 	dance = true,
@@ -41,733 +37,732 @@ local t_2 = {
 	cheer = true
 }
 
-local function _(p1)
-	return if p1.Character then p1.Character:FindFirstChildOfClass("Humanoid") else nil
+local function _(Player: Player) --[[ Line: 63 | Named "getPlayerHumanoid" ]]
+	return if Player.Character then Player.Character:FindFirstChildOfClass("Humanoid") else nil
 end
 
-local _ = function(p1)
-	local var6 = if p1.Character then p1.Character:FindFirstChildOfClass("Humanoid") else nil
+local _ = function(Player: Player) --[[ Line: 71 | Named "getPlayerAnimator" ]]
+	local Humanoid = if Player.Character then Player.Character:FindFirstChildOfClass("Humanoid") else nil
 	
-	return if var6 then var6:FindFirstChildOfClass("Animator") else nil
+	return if Humanoid then Humanoid:FindFirstChildOfClass("Animator") else nil
 end
 
-local _ = function(p1)
-	-- upvalues: core (write), var2 (write)
-	core = p1
+local _ = function(p1) --[[ Line: 80 | Named "switchPriority" ]]
+	-- upvalues: Core (ref), AnimationTrack (ref)
+	Core = p1
 	
-	if var2 then
-		var2.Priority = core
+	if AnimationTrack then
+		AnimationTrack.Priority = Core
 	end
 end
 
-local _ = function(p1)
-	-- upvalues: t (ref)
-	if t[p1] ~= nil then
-		t[p1]:Disconnect()
-		t[p1] = nil
+local _ = function(Key) --[[ Line: 87 | Named "disconnectAndRemoveConnection" ]]
+	-- upvalues: StoppedConnections (copy)
+	if StoppedConnections[Key] ~= nil then
+		StoppedConnections[Key]:Disconnect()
+		StoppedConnections[Key] = nil
 	end
 end
 
-local _ = function()
-	-- upvalues: var3 (write), var2 (write), t (ref)
-	var3 = nil
+local _ = function() --[[ Line: 94 | Named "resumeMoodAfterEmote" ]]
+	-- upvalues: AnimationTrack1 (ref), AnimationTrack (ref), StoppedConnections (copy)
+	AnimationTrack1 = nil
 	
-	if var2 ~= nil then
-		var2:Play()
+	if AnimationTrack ~= nil then
+		AnimationTrack:Play()
 	end
-	if t.currentEmoteTrackStopped ~= nil then
-		t.currentEmoteTrackStopped:Disconnect()
-		t.currentEmoteTrackStopped = nil
+	if StoppedConnections.currentEmoteTrackStopped ~= nil then
+		StoppedConnections.currentEmoteTrackStopped:Disconnect()
+		StoppedConnections.currentEmoteTrackStopped = nil
 	end
-	if t.emoteKeyframeReached ~= nil then
-		t.emoteKeyframeReached:Disconnect()
-		t.emoteKeyframeReached = nil
+	if StoppedConnections.emoteKeyframeReached ~= nil then
+		StoppedConnections.emoteKeyframeReached:Disconnect()
+		StoppedConnections.emoteKeyframeReached = nil
 	end
 end
 
-local function onEmoteTriggered(p1, p2)
-	-- upvalues: var4 (write), var2 (write), var3 (write), var5 (write), t (ref), t_1 (ref)
-	if not var4 or var2 == nil then return end
-	if p1 and p2 then
-		var2:Stop()
-		var3 = p2
-		var5 = true
+local function onEmoteTriggered(Success, AnimationTrack2) --[[ Line: 104 ]]
+	-- upvalues: Flag (ref), AnimationTrack (ref), AnimationTrack1 (ref), Flag1 (ref), StoppedConnections (copy), config (copy)
+	if not Flag or AnimationTrack == nil then return end
+	if Success and AnimationTrack2 then
+		AnimationTrack:Stop()
+		AnimationTrack1 = AnimationTrack2
+		Flag1 = true
 		
-		if t.currentEmoteTrackStopped ~= nil then
-			t.currentEmoteTrackStopped:Disconnect()
-			t.currentEmoteTrackStopped = nil
+		if StoppedConnections.currentEmoteTrackStopped ~= nil then
+			StoppedConnections.currentEmoteTrackStopped:Disconnect()
+			StoppedConnections.currentEmoteTrackStopped = nil
 		end
-		if t.emoteKeyframeReached ~= nil then
-			t.emoteKeyframeReached:Disconnect()
-			t.emoteKeyframeReached = nil
+		if StoppedConnections.emoteKeyframeReached ~= nil then
+			StoppedConnections.emoteKeyframeReached:Disconnect()
+			StoppedConnections.emoteKeyframeReached = nil
 		end
-		t.currentEmoteTrackStopped = var3.Stopped:Connect(function()
-			-- upvalues: var3 (copy), var2 (copy), t_1 (copy), t (copy), var5 (copy)
-			var3 = nil
+		StoppedConnections.currentEmoteTrackStopped = AnimationTrack1.Stopped:Connect(function() --[[ Line: 116 ]]
+			-- upvalues: AnimationTrack1 (upval), AnimationTrack (upval), config (upval), StoppedConnections (upval), Flag1 (upval)
+			AnimationTrack1 = nil
 			
-			if var2 ~= nil then
-				var2:Play()
+			if AnimationTrack ~= nil then
+				AnimationTrack:Play()
 			end
-			local emoteStopped = t_1.EmoteStopped
+			local EmoteStopped = config.EmoteStopped
 			
-			if t[emoteStopped] ~= nil then
-				t[emoteStopped]:Disconnect()
-				t[emoteStopped] = nil
+			if StoppedConnections[EmoteStopped] ~= nil then
+				StoppedConnections[EmoteStopped]:Disconnect()
+				StoppedConnections[EmoteStopped] = nil
 			end
-			local emoteKeyframeReached = t_1.EmoteKeyframeReached
+			local EmoteKeyframeReached = config.EmoteKeyframeReached
 			
-			if t[emoteKeyframeReached] ~= nil then
-				t[emoteKeyframeReached]:Disconnect()
-				t[emoteKeyframeReached] = nil
+			if StoppedConnections[EmoteKeyframeReached] ~= nil then
+				StoppedConnections[EmoteKeyframeReached]:Disconnect()
+				StoppedConnections[EmoteKeyframeReached] = nil
 			end
-			var5 = false
+			Flag1 = false
 		end)
-		t.emoteKeyframeReached = var3.KeyframeReached:Connect(function(p3)
-			-- upvalues: var3 (copy), var2 (copy), t_1 (copy), t (copy), var5 (copy)
-			if p3 == "End" and not var3.Looped then
-				var3 = nil
+		StoppedConnections.emoteKeyframeReached = AnimationTrack1.KeyframeReached:Connect(function(KeyframeName) --[[ Line: 122 ]]
+			-- upvalues: AnimationTrack1 (upval), AnimationTrack (upval), config (upval), StoppedConnections (upval), Flag1 (upval)
+			if KeyframeName == "End" and not AnimationTrack1.Looped then
+				AnimationTrack1 = nil
 				
-				if var2 ~= nil then
-					var2:Play()
+				if AnimationTrack ~= nil then
+					AnimationTrack:Play()
 				end
-				local emoteStopped = t_1.EmoteStopped
+				local EmoteStopped = config.EmoteStopped
 				
-				if t[emoteStopped] ~= nil then
-					t[emoteStopped]:Disconnect()
-					t[emoteStopped] = nil
+				if StoppedConnections[EmoteStopped] ~= nil then
+					StoppedConnections[EmoteStopped]:Disconnect()
+					StoppedConnections[EmoteStopped] = nil
 				end
-				local emoteKeyframeReached = t_1.EmoteKeyframeReached
+				local EmoteKeyframeReached = config.EmoteKeyframeReached
 				
-				if t[emoteKeyframeReached] ~= nil then
-					t[emoteKeyframeReached]:Disconnect()
-					t[emoteKeyframeReached] = nil
+				if StoppedConnections[EmoteKeyframeReached] ~= nil then
+					StoppedConnections[EmoteKeyframeReached]:Disconnect()
+					StoppedConnections[EmoteKeyframeReached] = nil
 				end
-				var5 = false
+				Flag1 = false
 			end
 		end)
 	end
 end
 
-local function checkEmotePlaying(p1)
-	-- upvalues: t_2 (ref), t (ref), var3 (write), var5 (write), var2 (write), checkEmotePlaying (ref), t_1 (ref)
-	local var6 = false
+local function checkEmotePlaying(Humanoid): boolean --[[ Line: 131 ]]
+	-- upvalues: config1 (copy), StoppedConnections (copy), AnimationTrack1 (ref), Flag1 (ref), AnimationTrack (ref), checkEmotePlaying (copy), config (copy)
+	local Flag = false
 	
-	for i, v in pairs(p1:GetPlayingAnimationTracks()) do
-		if v.IsPlaying and v.Animation.Parent and t_2[v.Animation.Parent.Name] then
-			if t.currentEmoteTrackStopped ~= nil then
-				t.currentEmoteTrackStopped:Disconnect()
-				t.currentEmoteTrackStopped = nil
+	for _, playingAnimationTrack in pairs((Humanoid:GetPlayingAnimationTracks())) do
+		if playingAnimationTrack.IsPlaying and playingAnimationTrack.Animation.Parent and config1[playingAnimationTrack.Animation.Parent.Name] then
+			if StoppedConnections.currentEmoteTrackStopped ~= nil then
+				StoppedConnections.currentEmoteTrackStopped:Disconnect()
+				StoppedConnections.currentEmoteTrackStopped = nil
 			end
-			if t.emoteKeyframeReached ~= nil then
-				t.emoteKeyframeReached:Disconnect()
-				t.emoteKeyframeReached = nil
+			if StoppedConnections.emoteKeyframeReached ~= nil then
+				StoppedConnections.emoteKeyframeReached:Disconnect()
+				StoppedConnections.emoteKeyframeReached = nil
 			end
-			var3 = v
-			var5 = false
-			var2:Stop()
-			t.currentEmoteTrackStopped = var3.Stopped:Connect(function()
-				-- upvalues: checkEmotePlaying (copy), p1 (ref), var5 (copy), var3 (copy), var2 (copy), t_1 (copy), t (copy)
+			AnimationTrack1 = playingAnimationTrack
+			Flag1 = false
+			AnimationTrack:Stop()
+			StoppedConnections.currentEmoteTrackStopped = AnimationTrack1.Stopped:Connect(function() --[[ Line: 150 ]]
+				-- upvalues: checkEmotePlaying (upval), Humanoid (copy), Flag1 (upval), AnimationTrack1 (upval), AnimationTrack (upval), config (upval), StoppedConnections (upval)
 				wait(0.3)
 				
-				if not checkEmotePlaying(p1) and not var5 then
-					var3 = nil
+				if not checkEmotePlaying(Humanoid) and not Flag1 then
+					AnimationTrack1 = nil
 					
-					if var2 ~= nil then
-						var2:Play()
+					if AnimationTrack ~= nil then
+						AnimationTrack:Play()
 					end
-					local emoteStopped = t_1.EmoteStopped
+					local EmoteStopped = config.EmoteStopped
 					
-					if t[emoteStopped] ~= nil then
-						t[emoteStopped]:Disconnect()
-						t[emoteStopped] = nil
+					if StoppedConnections[EmoteStopped] ~= nil then
+						StoppedConnections[EmoteStopped]:Disconnect()
+						StoppedConnections[EmoteStopped] = nil
 					end
-					local emoteKeyframeReached = t_1.EmoteKeyframeReached
+					local EmoteKeyframeReached = config.EmoteKeyframeReached
 					
-					if t[emoteKeyframeReached] ~= nil then
-						t[emoteKeyframeReached]:Disconnect()
-						t[emoteKeyframeReached] = nil
+					if StoppedConnections[EmoteKeyframeReached] ~= nil then
+						StoppedConnections[EmoteKeyframeReached]:Disconnect()
+						StoppedConnections[EmoteKeyframeReached] = nil
 					end
 				end
 			end)
-			t.emoteKeyframeReached = var3.KeyframeReached:Connect(function(p2)
-				-- upvalues: checkEmotePlaying (copy), p1 (ref), var5 (copy), var3 (copy), var2 (copy), t_1 (copy), t (copy)
-				if p2 == "End" then
+			StoppedConnections.emoteKeyframeReached = AnimationTrack1.KeyframeReached:Connect(function(KeyframeName) --[[ Line: 159 ]]
+				-- upvalues: checkEmotePlaying (upval), Humanoid (copy), Flag1 (upval), AnimationTrack1 (upval), AnimationTrack (upval), config (upval), StoppedConnections (upval)
+				if KeyframeName == "End" then
 					wait(0.3)
 					
-					if not checkEmotePlaying(p1) and not var5 then
-						var3 = nil
+					if not checkEmotePlaying(Humanoid) and not Flag1 then
+						AnimationTrack1 = nil
 						
-						if var2 ~= nil then
-							var2:Play()
+						if AnimationTrack ~= nil then
+							AnimationTrack:Play()
 						end
-						local emoteStopped = t_1.EmoteStopped
+						local EmoteStopped = config.EmoteStopped
 						
-						if t[emoteStopped] ~= nil then
-							t[emoteStopped]:Disconnect()
-							t[emoteStopped] = nil
+						if StoppedConnections[EmoteStopped] ~= nil then
+							StoppedConnections[EmoteStopped]:Disconnect()
+							StoppedConnections[EmoteStopped] = nil
 						end
-						local emoteKeyframeReached = t_1.EmoteKeyframeReached
+						local EmoteKeyframeReached = config.EmoteKeyframeReached
 						
-						if t[emoteKeyframeReached] ~= nil then
-							t[emoteKeyframeReached]:Disconnect()
-							t[emoteKeyframeReached] = nil
+						if StoppedConnections[EmoteKeyframeReached] ~= nil then
+							StoppedConnections[EmoteKeyframeReached]:Disconnect()
+							StoppedConnections[EmoteKeyframeReached] = nil
 						end
 					end
 				end
 			end)
-			var6 = true
+			Flag = true
 		end
 	end
-	return var6
+	return Flag
 end
 
-local chattedConnection = localPlayer.Chatted:Connect(function(p2)
-	-- upvalues: var4 (write), var2 (write), localPlayer (ref), t_2 (ref), checkEmotePlaying (ref)
-	if not var4 or var2 == nil then return end
-	if localPlayer.Character then
-		local humanoid = localPlayer.Character:FindFirstChildWhichIsA("Humanoid")
+local _ = LocalPlayer.Chatted:Connect(function(Text: string) --[[ Line: 175 ]]
+	-- upvalues: Flag (ref), AnimationTrack (ref), LocalPlayer (copy), config1 (copy), checkEmotePlaying (copy)
+	if not Flag or AnimationTrack == nil then return end
+	if LocalPlayer.Character then
+		local Humanoid = LocalPlayer.Character:FindFirstChildWhichIsA("Humanoid")
 		
-		if humanoid then
-			local var7 = ""
+		if Humanoid then
+			local Segment = ""
 			
-			if string.sub(p2, 1, 3) == "/e " then
-				var7 = string.sub(p2, 4)
-			elseif string.sub(p2, 1, 7) == "/emote " then
-				var7 = string.sub(p2, 8)
+			if string.sub(Text, 1, 3) == "/e " then
+				Segment = string.sub(Text, 4)
+			elseif string.sub(Text, 1, 7) == "/emote " then
+				Segment = string.sub(Text, 8)
 			end
-			if t_2[var7] then
+			if config1[Segment] then
 				wait(0.3)
-				checkEmotePlaying(humanoid)
+				checkEmotePlaying(Humanoid)
 			end
 		end
 	end
 end)
 
-chattedConnection = function()
-	-- upvalues: var2 (write)
-	if var2 ~= nil then
-		var2:Stop()
-		var2:Destroy()
-		var2 = nil
+local _ = function() --[[ Line: 198 | Named "stopAndDestroyCurrentMoodTrack" ]]
+	-- upvalues: AnimationTrack (ref)
+	if AnimationTrack ~= nil then
+		AnimationTrack:Stop()
+		AnimationTrack:Destroy()
+		AnimationTrack = nil
 	end
 end
 
-local _ = function()
-	-- upvalues: var2 (write), t (ref), var1 (write)
-	if var2 ~= nil then
-		var2:Stop()
-		var2:Destroy()
-		var2 = nil
+local _ = function() --[[ Line: 206 | Named "stopAndDestroyCurrentMoodTrackConnections" ]]
+	-- upvalues: AnimationTrack (ref), StoppedConnections (copy), Animation (ref)
+	if AnimationTrack ~= nil then
+		AnimationTrack:Stop()
+		AnimationTrack:Destroy()
+		AnimationTrack = nil
 	end
-	if t.currentEmoteTrackStopped ~= nil then
-		t.currentEmoteTrackStopped:Disconnect()
-		t.currentEmoteTrackStopped = nil
+	if StoppedConnections.currentEmoteTrackStopped ~= nil then
+		StoppedConnections.currentEmoteTrackStopped:Disconnect()
+		StoppedConnections.currentEmoteTrackStopped = nil
 	end
-	if t.emoteKeyframeReached ~= nil then
-		t.emoteKeyframeReached:Disconnect()
-		t.emoteKeyframeReached = nil
+	if StoppedConnections.emoteKeyframeReached ~= nil then
+		StoppedConnections.emoteKeyframeReached:Disconnect()
+		StoppedConnections.emoteKeyframeReached = nil
 	end
-	if t.animationInstanceChanged ~= nil then
-		t.animationInstanceChanged:Disconnect()
-		t.animationInstanceChanged = nil
+	if StoppedConnections.animationInstanceChanged ~= nil then
+		StoppedConnections.animationInstanceChanged:Disconnect()
+		StoppedConnections.animationInstanceChanged = nil
 	end
-	if t.localEmote ~= nil then
-		t.localEmote:Disconnect()
-		t.localEmote = nil
+	if StoppedConnections.localEmote ~= nil then
+		StoppedConnections.localEmote:Disconnect()
+		StoppedConnections.localEmote = nil
 	end
-	var1 = nil
+	Animation = nil
 end
 
-local _ = function(_, _, p2, p3)
-	-- upvalues: var2 (write), var1 (write), core (write), var3 (write), t (ref), onEmoteTriggered (ref)
-	var2 = p3:LoadAnimation(var1)
-	var2.Priority = core
-	task.delay(0.1, function()
-		-- upvalues: var3 (copy), var1 (copy), var2 (copy), p3 (ref), core (copy), t (copy), p2 (ref), onEmoteTriggered (copy)
-		if var3 == nil and var1 then
-			if not var2 then
-				var2 = p3:LoadAnimation(var1)
+local _ = function(_, _, p1, Animator: Animator) --[[ Line: 215 | Named "updateCharacterMoodOnAnimatorAdded" ]]
+	-- upvalues: AnimationTrack (ref), Animation (ref), Core (ref), AnimationTrack1 (ref), StoppedConnections (copy), onEmoteTriggered (copy)
+	AnimationTrack = Animator:LoadAnimation(Animation)
+	AnimationTrack.Priority = Core
+	task.delay(0.1, function() --[[ Line: 222 ]]
+		-- upvalues: AnimationTrack1 (upval), Animation (upval), AnimationTrack (upval), Animator (copy), Core (upval), StoppedConnections (upval), p1 (copy), onEmoteTriggered (upval)
+		if AnimationTrack1 == nil and Animation then
+			if not AnimationTrack then
+				AnimationTrack = Animator:LoadAnimation(Animation)
 			end
-			if var2 then
-				var2.Priority = core
-				var2:Play()
+			if AnimationTrack then
+				AnimationTrack.Priority = Core
+				AnimationTrack:Play()
 			end
 		end
-		if t.localEmote ~= nil then
-			t.localEmote:Disconnect()
-			t.localEmote = nil
+		if StoppedConnections.localEmote ~= nil then
+			StoppedConnections.localEmote:Disconnect()
+			StoppedConnections.localEmote = nil
 		end
-		t.localEmote = p2.EmoteTriggered:Connect(onEmoteTriggered)
+		StoppedConnections.localEmote = p1.EmoteTriggered:Connect(onEmoteTriggered)
 	end)
 end
 
-local function updateCharacterMoodOnHumanoidAdded(p2, p3, p4)
-	-- upvalues: var2 (write), var1 (write), core (write), var3 (write), t (ref), onEmoteTriggered (ref)
-	local animator = p4:FindFirstChild("Animator")
+local function updateCharacterMoodOnHumanoidAdded(p1, p2, Humanoid) --[[ Line: 242 ]]
+	-- upvalues: AnimationTrack (ref), Animation (ref), Core (ref), AnimationTrack1 (ref), StoppedConnections (copy), onEmoteTriggered (copy)
+	local Animator = Humanoid:FindFirstChild("Animator")
 	
-	if animator then
-		var2 = animator:LoadAnimation(var1)
-		var2.Priority = core
-		task.delay(0.1, function()
-			-- upvalues: var3 (copy), var1 (copy), var2 (copy), animator (ref), core (copy), t (copy), p4 (ref), onEmoteTriggered (copy)
-			if var3 == nil and var1 then
-				if not var2 then
-					var2 = animator:LoadAnimation(var1)
+	if Animator then
+		AnimationTrack = Animator:LoadAnimation(Animation)
+		AnimationTrack.Priority = Core
+		task.delay(0.1, function() --[[ Line: 222 ]]
+			-- upvalues: AnimationTrack1 (upval), Animation (upval), AnimationTrack (upval), Animator (copy), Core (upval), StoppedConnections (upval), Humanoid (copy), onEmoteTriggered (upval)
+			if AnimationTrack1 == nil and Animation then
+				if not AnimationTrack then
+					AnimationTrack = Animator:LoadAnimation(Animation)
 				end
-				if var2 then
-					var2.Priority = core
-					var2:Play()
+				if AnimationTrack then
+					AnimationTrack.Priority = Core
+					AnimationTrack:Play()
 				end
 			end
-			if t.localEmote ~= nil then
-				t.localEmote:Disconnect()
-				t.localEmote = nil
+			if StoppedConnections.localEmote ~= nil then
+				StoppedConnections.localEmote:Disconnect()
+				StoppedConnections.localEmote = nil
 			end
-			t.localEmote = p4.EmoteTriggered:Connect(onEmoteTriggered)
+			StoppedConnections.localEmote = Humanoid.EmoteTriggered:Connect(onEmoteTriggered)
 		end)
 	end
-	if t.humanoidAnimatorAdded and t.humanoidAnimatorAdded ~= nil then
-		t.humanoidAnimatorAdded:Disconnect()
-		t.humanoidAnimatorAdded = nil
+	if StoppedConnections.humanoidAnimatorAdded and StoppedConnections.humanoidAnimatorAdded ~= nil then
+		StoppedConnections.humanoidAnimatorAdded:Disconnect()
+		StoppedConnections.humanoidAnimatorAdded = nil
 	end
-	t.humanoidAnimatorAdded = p4.ChildAdded:Connect(function(p5)
-		-- upvalues: p2 (ref), p3 (ref), p4 (ref), var2 (copy), var1 (copy), core (copy), var3 (copy), t (copy), onEmoteTriggered (copy)
-		if p5.Name == "Animator" then
-			local _ = p2
-			local _ = p3
-			local var7 = p4
-			var2 = p5:LoadAnimation(var1)
-			var2.Priority = core
-			task.delay(0.1, function()
-				-- upvalues: var3 (copy), var1 (copy), var2 (copy), p5 (ref), core (copy), t (copy), var7 (ref), onEmoteTriggered (copy)
-				if var3 == nil and var1 then
-					if not var2 then
-						var2 = p5:LoadAnimation(var1)
+	StoppedConnections.humanoidAnimatorAdded = Humanoid.ChildAdded:Connect(function(Child: Animator) --[[ Line: 252 ]]
+		-- upvalues: p1 (copy), p2 (copy), Humanoid (copy), AnimationTrack (upval), Animation (upval), Core (upval), AnimationTrack1 (upval), StoppedConnections (upval), onEmoteTriggered (upval)
+		if Child.Name == "Animator" then
+			AnimationTrack = Child:LoadAnimation(Animation)
+			AnimationTrack.Priority = Core
+			task.delay(0.1, function() --[[ Line: 222 ]]
+				-- upvalues: AnimationTrack1 (upval), Animation (upval), AnimationTrack (upval), Child (copy), Core (upval), StoppedConnections (upval), Humanoid (copy), onEmoteTriggered (upval)
+				if AnimationTrack1 == nil and Animation then
+					if not AnimationTrack then
+						AnimationTrack = Child:LoadAnimation(Animation)
 					end
-					if var2 then
-						var2.Priority = core
-						var2:Play()
+					if AnimationTrack then
+						AnimationTrack.Priority = Core
+						AnimationTrack:Play()
 					end
 				end
-				if t.localEmote ~= nil then
-					t.localEmote:Disconnect()
-					t.localEmote = nil
+				if StoppedConnections.localEmote ~= nil then
+					StoppedConnections.localEmote:Disconnect()
+					StoppedConnections.localEmote = nil
 				end
-				t.localEmote = var7.EmoteTriggered:Connect(onEmoteTriggered)
+				StoppedConnections.localEmote = Humanoid.EmoteTriggered:Connect(onEmoteTriggered)
 			end)
 		end
 	end)
 end
 
-local function updateCharacterMood(p2, p3)
-	-- upvalues: var4 (write), t (ref), var2 (write), var1 (write), updateCharacterMood (ref), updateCharacterMoodOnHumanoidAdded (ref)
-	if p2 == nil or p3 == nil or not var4 then return end
-	if t.animationInstanceChanged and t.animationInstanceChanged ~= nil then
-		t.animationInstanceChanged:Disconnect()
-		t.animationInstanceChanged = nil
+local function updateCharacterMood(Character, Animation1) --[[ Line: 259 ]]
+	-- upvalues: Flag (ref), StoppedConnections (copy), AnimationTrack (ref), Animation (ref), updateCharacterMood (copy), updateCharacterMoodOnHumanoidAdded (copy)
+	if Character == nil or Animation1 == nil or not Flag then return end
+	if StoppedConnections.animationInstanceChanged and StoppedConnections.animationInstanceChanged ~= nil then
+		StoppedConnections.animationInstanceChanged:Disconnect()
+		StoppedConnections.animationInstanceChanged = nil
 	end
-	if t.characterHumanoidAdded and t.characterHumanoidAdded ~= nil then
-		t.characterHumanoidAdded:Disconnect()
-		t.characterHumanoidAdded = nil
+	if StoppedConnections.characterHumanoidAdded and StoppedConnections.characterHumanoidAdded ~= nil then
+		StoppedConnections.characterHumanoidAdded:Disconnect()
+		StoppedConnections.characterHumanoidAdded = nil
 	end
-	if var2 ~= nil then
-		var2:Stop()
-		var2:Destroy()
-		var2 = nil
+	if AnimationTrack ~= nil then
+		AnimationTrack:Stop()
+		AnimationTrack:Destroy()
+		AnimationTrack = nil
 	end
-	var1 = p3
-	t.animationInstanceChanged = var1.Changed:Connect(function(_)
-		-- upvalues: updateCharacterMood (copy), p2 (ref), p3 (ref)
-		updateCharacterMood(p2, p3)
+	Animation = Animation1
+	StoppedConnections.animationInstanceChanged = Animation.Changed:Connect(function(_) --[[ Line: 275 ]]
+		-- upvalues: updateCharacterMood (upval), Character (copy), Animation1 (copy)
+		updateCharacterMood(Character, Animation1)
 	end)
-	local humanoid = p2:FindFirstChildWhichIsA("Humanoid")
+	local Humanoid = Character:FindFirstChildWhichIsA("Humanoid")
 	
-	if humanoid then
-		updateCharacterMoodOnHumanoidAdded(p2, p3, humanoid)
+	if Humanoid then
+		updateCharacterMoodOnHumanoidAdded(Character, Animation1, Humanoid)
 	end
-	t.characterHumanoidAdded = p2.ChildAdded:Connect(function(p4)
-		-- upvalues: updateCharacterMoodOnHumanoidAdded (copy), p2 (ref), p3 (ref), humanoid (ref)
-		if p4:IsA("Humanoid") then
-			updateCharacterMoodOnHumanoidAdded(p2, p3, humanoid)
+	StoppedConnections.characterHumanoidAdded = Character.ChildAdded:Connect(function(Child: Humanoid) --[[ Line: 284 ]]
+		-- upvalues: updateCharacterMoodOnHumanoidAdded (upval), Character (copy), Animation1 (copy), Humanoid (copy)
+		if Child:IsA("Humanoid") then
+			updateCharacterMoodOnHumanoidAdded(Character, Animation1, Humanoid)
 		end
 	end)
 end
 
-function initAvatarMood(p2)
-	-- upvalues: t (ref), var4 (write), updateCharacterMood (ref), localPlayer (ref), var2 (write), t_1 (ref), var1 (write)
-	local moodsEnabled = p2:FindFirstChild("MoodsEnabled")
+function initAvatarMood(Object) --[[ Line: 291 ]]
+	-- upvalues: StoppedConnections (copy), Flag (ref), updateCharacterMood (copy), LocalPlayer (copy), AnimationTrack (ref), config (copy), Animation (ref)
+	local MoodsEnabled = Object:FindFirstChild("MoodsEnabled")
 	
-	if t.animateScriptMoodAdded ~= nil then
-		t.animateScriptMoodAdded:Disconnect()
-		t.animateScriptMoodAdded = nil
+	if StoppedConnections.animateScriptMoodAdded ~= nil then
+		StoppedConnections.animateScriptMoodAdded:Disconnect()
+		StoppedConnections.animateScriptMoodAdded = nil
 	end
-	if t.animateScriptMoodRemoved ~= nil then
-		t.animateScriptMoodRemoved:Disconnect()
-		t.animateScriptMoodRemoved = nil
+	if StoppedConnections.animateScriptMoodRemoved ~= nil then
+		StoppedConnections.animateScriptMoodRemoved:Disconnect()
+		StoppedConnections.animateScriptMoodRemoved = nil
 	end
-	if moodsEnabled then
-		var4 = false
+	if MoodsEnabled then
+		Flag = false
 		
 		return
 	end
-	local mood = p2:FindFirstChild("mood")
+	local Mood = Object:FindFirstChild("mood")
 	
-	if mood then
-		if #mood:GetChildren() > 0 then
-			updateCharacterMood(localPlayer.Character, mood:FindFirstChildWhichIsA("Animation"))
+	if Mood then
+		if #Mood:GetChildren() > 0 then
+			updateCharacterMood(LocalPlayer.Character, Mood:FindFirstChildWhichIsA("Animation"))
 		end
-		if t.moodChildAdded ~= nil then
-			t.moodChildAdded:Disconnect()
-			t.moodChildAdded = nil
+		if StoppedConnections.moodChildAdded ~= nil then
+			StoppedConnections.moodChildAdded:Disconnect()
+			StoppedConnections.moodChildAdded = nil
 		end
-		t.moodChildAdded = mood.ChildAdded:Connect(function(p3)
-			-- upvalues: updateCharacterMood (copy), localPlayer (copy)
-			if p3:IsA("Animation") then
-				updateCharacterMood(localPlayer.Character, p3)
+		StoppedConnections.moodChildAdded = Mood.ChildAdded:Connect(function(Child) --[[ Line: 313 ]]
+			-- upvalues: updateCharacterMood (upval), LocalPlayer (upval)
+			if Child:IsA("Animation") then
+				updateCharacterMood(LocalPlayer.Character, Child)
 			end
 		end)
-	elseif var2 ~= nil then
-		var2:Stop()
-		var2:Destroy()
-		var2 = nil
+	else
+		if AnimationTrack ~= nil then
+			AnimationTrack:Stop()
+			AnimationTrack:Destroy()
+			AnimationTrack = nil
+		end
+		local EmoteStopped = config.EmoteStopped
+		
+		if StoppedConnections[EmoteStopped] ~= nil then
+			StoppedConnections[EmoteStopped]:Disconnect()
+			StoppedConnections[EmoteStopped] = nil
+		end
+		local EmoteKeyframeReached = config.EmoteKeyframeReached
+		
+		if StoppedConnections[EmoteKeyframeReached] ~= nil then
+			StoppedConnections[EmoteKeyframeReached]:Disconnect()
+			StoppedConnections[EmoteKeyframeReached] = nil
+		end
+		local AnimationInstanceChanged = config.AnimationInstanceChanged
+		
+		if StoppedConnections[AnimationInstanceChanged] ~= nil then
+			StoppedConnections[AnimationInstanceChanged]:Disconnect()
+			StoppedConnections[AnimationInstanceChanged] = nil
+		end
+		local EmoteTriggered = config.EmoteTriggered
+		
+		if StoppedConnections[EmoteTriggered] ~= nil then
+			StoppedConnections[EmoteTriggered]:Disconnect()
+			StoppedConnections[EmoteTriggered] = nil
+		end
+		Animation = nil
 	end
-	local emoteStopped = t_1.EmoteStopped
-	
-	if t[emoteStopped] ~= nil then
-		t[emoteStopped]:Disconnect()
-		t[emoteStopped] = nil
-	end
-	local emoteKeyframeReached = t_1.EmoteKeyframeReached
-	
-	if t[emoteKeyframeReached] ~= nil then
-		t[emoteKeyframeReached]:Disconnect()
-		t[emoteKeyframeReached] = nil
-	end
-	local animationInstanceChanged = t_1.AnimationInstanceChanged
-	
-	if t[animationInstanceChanged] ~= nil then
-		t[animationInstanceChanged]:Disconnect()
-		t[animationInstanceChanged] = nil
-	end
-	local emoteTriggered = t_1.EmoteTriggered
-	
-	if t[emoteTriggered] ~= nil then
-		t[emoteTriggered]:Disconnect()
-		t[emoteTriggered] = nil
-	end
-	var1 = nil
-	t.animateScriptMoodAdded = p2.ChildAdded:Connect(function(p3)
-		-- upvalues: updateCharacterMood (copy), localPlayer (copy), t (copy), var4 (copy)
-		if p3.Name == "mood" then
-			if #p3:GetChildren() > 0 then
-				updateCharacterMood(localPlayer.Character, p3:GetChildren()[1])
+	StoppedConnections.animateScriptMoodAdded = Object.ChildAdded:Connect(function(Child) --[[ Line: 322 ]]
+		-- upvalues: updateCharacterMood (upval), LocalPlayer (upval), StoppedConnections (upval), Flag (upval)
+		if Child.Name == "mood" then
+			if #Child:GetChildren() > 0 then
+				updateCharacterMood(LocalPlayer.Character, Child:GetChildren()[1])
 			end
-			if t.moodChildAdded ~= nil then
-				t.moodChildAdded:Disconnect()
-				t.moodChildAdded = nil
+			if StoppedConnections.moodChildAdded ~= nil then
+				StoppedConnections.moodChildAdded:Disconnect()
+				StoppedConnections.moodChildAdded = nil
 			end
-			t.moodChildAdded = p3.ChildAdded:Connect(function(p4)
-				-- upvalues: updateCharacterMood (copy), localPlayer (copy)
-				updateCharacterMood(localPlayer.Character, p4)
+			StoppedConnections.moodChildAdded = Child.ChildAdded:Connect(function(Child) --[[ Line: 332 ]]
+				-- upvalues: updateCharacterMood (upval), LocalPlayer (upval)
+				updateCharacterMood(LocalPlayer.Character, Child)
 			end)
 			
 			return
-		elseif p3.Name == "MoodsEnabled" then
-			var4 = false
+		elseif Child.Name == "MoodsEnabled" then
+			Flag = false
 		end
 	end)
-	t.animateScriptMoodRemoved = p2.ChildRemoved:Connect(function(p3)
-		-- upvalues: p2 (ref), updateCharacterMood (copy), localPlayer (copy), var2 (copy), t_1 (copy), t (copy), var1 (copy)
-		if p3.Name == "mood" then
-			local mood = p2:FindFirstChild("mood")
+	StoppedConnections.animateScriptMoodRemoved = Object.ChildRemoved:Connect(function(Child) --[[ Line: 340 ]]
+		-- upvalues: Object (copy), updateCharacterMood (upval), LocalPlayer (upval), AnimationTrack (upval), config (upval), StoppedConnections (upval), Animation (upval)
+		if Child.Name == "mood" then
+			local Mood = Object:FindFirstChild("mood")
 			
-			if mood then
-				updateCharacterMood(localPlayer.Character, mood:FindFirstChildWhichIsA("Animation"))
+			if Mood then
+				updateCharacterMood(LocalPlayer.Character, Mood:FindFirstChildWhichIsA("Animation"))
 				
 				return
-			elseif var2 ~= nil then
-				var2:Stop()
-				var2:Destroy()
-				var2 = nil
 			end
-			local emoteStopped = t_1.EmoteStopped
+			if AnimationTrack ~= nil then
+				AnimationTrack:Stop()
+				AnimationTrack:Destroy()
+				AnimationTrack = nil
+			end
+			local EmoteStopped = config.EmoteStopped
 			
-			if t[emoteStopped] ~= nil then
-				t[emoteStopped]:Disconnect()
-				t[emoteStopped] = nil
+			if StoppedConnections[EmoteStopped] ~= nil then
+				StoppedConnections[EmoteStopped]:Disconnect()
+				StoppedConnections[EmoteStopped] = nil
 			end
-			local emoteKeyframeReached = t_1.EmoteKeyframeReached
+			local EmoteKeyframeReached = config.EmoteKeyframeReached
 			
-			if t[emoteKeyframeReached] ~= nil then
-				t[emoteKeyframeReached]:Disconnect()
-				t[emoteKeyframeReached] = nil
+			if StoppedConnections[EmoteKeyframeReached] ~= nil then
+				StoppedConnections[EmoteKeyframeReached]:Disconnect()
+				StoppedConnections[EmoteKeyframeReached] = nil
 			end
-			local animationInstanceChanged = t_1.AnimationInstanceChanged
+			local AnimationInstanceChanged = config.AnimationInstanceChanged
 			
-			if t[animationInstanceChanged] ~= nil then
-				t[animationInstanceChanged]:Disconnect()
-				t[animationInstanceChanged] = nil
+			if StoppedConnections[AnimationInstanceChanged] ~= nil then
+				StoppedConnections[AnimationInstanceChanged]:Disconnect()
+				StoppedConnections[AnimationInstanceChanged] = nil
 			end
-			local emoteTriggered = t_1.EmoteTriggered
+			local EmoteTriggered = config.EmoteTriggered
 			
-			if t[emoteTriggered] ~= nil then
-				t[emoteTriggered]:Disconnect()
-				t[emoteTriggered] = nil
+			if StoppedConnections[EmoteTriggered] ~= nil then
+				StoppedConnections[EmoteTriggered]:Disconnect()
+				StoppedConnections[EmoteTriggered] = nil
 			end
-			var1 = nil
+			Animation = nil
 		end
 	end)
 end
 
-local function waitForAnimateScript()
-	-- upvalues: localPlayer (ref), t (ref)
-	local animate = localPlayer.Character:FindFirstChild("Animate")
+local function waitForAnimateScript() --[[ Line: 352 ]]
+	-- upvalues: LocalPlayer (copy), StoppedConnections (copy)
+	local Animate = LocalPlayer.Character:FindFirstChild("Animate")
 	
-	if animate then
-		initAvatarMood(animate)
+	if Animate then
+		initAvatarMood(Animate)
 	end
-	if t.animateScriptAdded ~= nil then
-		t.animateScriptAdded:Disconnect()
-		t.animateScriptAdded = nil
+	if StoppedConnections.animateScriptAdded ~= nil then
+		StoppedConnections.animateScriptAdded:Disconnect()
+		StoppedConnections.animateScriptAdded = nil
 	end
-	t.animateScriptAdded = localPlayer.Character.ChildAdded:Connect(function(p2)
-		if p2.Name == "Animate" then
-			initAvatarMood(p2)
+	StoppedConnections.animateScriptAdded = LocalPlayer.Character.ChildAdded:Connect(function(Child) --[[ Line: 359 ]]
+		if Child.Name == "Animate" then
+			initAvatarMood(Child)
 		end
 	end)
 end
 
-local function onHeadAdded(p2)
-	-- upvalues: waitForAnimateScript (ref), t (ref)
-	if p2:FindFirstChildWhichIsA("FaceControls") then
+local function onHeadAdded(Head) --[[ Line: 367 ]]
+	-- upvalues: waitForAnimateScript (copy), StoppedConnections (copy)
+	if Head:FindFirstChildWhichIsA("FaceControls") then
 		waitForAnimateScript()
 	end
-	if t.headChildAdded ~= nil then
-		t.headChildAdded:Disconnect()
-		t.headChildAdded = nil
+	if StoppedConnections.headChildAdded ~= nil then
+		StoppedConnections.headChildAdded:Disconnect()
+		StoppedConnections.headChildAdded = nil
 	end
-	t.headChildAdded = p2.ChildAdded:Connect(function(p3)
-		-- upvalues: waitForAnimateScript (copy)
-		if p3:IsA("FaceControls") then
+	StoppedConnections.headChildAdded = Head.ChildAdded:Connect(function(Child) --[[ Line: 374 ]]
+		-- upvalues: waitForAnimateScript (upval)
+		if Child:IsA("FaceControls") then
 			waitForAnimateScript()
 		end
 	end)
 end
 
-local _ = function(p2)
-	-- upvalues: t (ref), core (write), var2 (write)
-	if t.StreamTrackStopped ~= nil then
-		t.StreamTrackStopped:Disconnect()
-		t.StreamTrackStopped = nil
+local _ = function(p1) --[[ Line: 381 | Named "syncWithStreamTrack" ]]
+	-- upvalues: StoppedConnections (copy), Core (ref), AnimationTrack (ref)
+	if StoppedConnections.StreamTrackStopped ~= nil then
+		StoppedConnections.StreamTrackStopped:Disconnect()
+		StoppedConnections.StreamTrackStopped = nil
 	end
-	core = Enum.AnimationPriority.Idle
+	Core = Enum.AnimationPriority.Idle
 	
-	if var2 then
-		var2.Priority = core
+	if AnimationTrack then
+		AnimationTrack.Priority = Core
 	end
-	t.StreamTrackStopped = p2.Stopped:Connect(function()
-		-- upvalues: t (copy), core (copy), var2 (copy)
-		if t.StreamTrackStopped ~= nil then
-			t.StreamTrackStopped:Disconnect()
-			t.StreamTrackStopped = nil
+	StoppedConnections.StreamTrackStopped = p1.Stopped:Connect(function() --[[ Line: 389 ]]
+		-- upvalues: StoppedConnections (upval), Core (upval), AnimationTrack (upval)
+		if StoppedConnections.StreamTrackStopped ~= nil then
+			StoppedConnections.StreamTrackStopped:Disconnect()
+			StoppedConnections.StreamTrackStopped = nil
 		end
-		core = Enum.AnimationPriority.Core
+		Core = Enum.AnimationPriority.Core
 		
-		if var2 then
-			var2.Priority = core
+		if AnimationTrack then
+			AnimationTrack.Priority = Core
 		end
 	end)
 end
 
-local function onAnimatorAdded(p2)
-	-- upvalues: t (ref), t_1 (ref), core (write), var2 (write)
-	if t.AnimationStreamTrackPlayed ~= nil then
-		t.AnimationStreamTrackPlayed:Disconnect()
-		t.AnimationStreamTrackPlayed = nil
+local function onAnimatorAdded(Animator) --[[ Line: 397 ]]
+	-- upvalues: StoppedConnections (copy), config (copy), Core (ref), AnimationTrack (ref)
+	if StoppedConnections.AnimationStreamTrackPlayed ~= nil then
+		StoppedConnections.AnimationStreamTrackPlayed:Disconnect()
+		StoppedConnections.AnimationStreamTrackPlayed = nil
 	end
-	t.AnimationStreamTrackPlayed = p2.AnimationStreamTrackPlayed:Connect(function(p3)
-		-- upvalues: t_1 (copy), t (copy), core (copy), var2 (copy)
-		local streamTrackStopped = t_1.StreamTrackStopped
+	StoppedConnections.AnimationStreamTrackPlayed = Animator.AnimationStreamTrackPlayed:Connect(function(AnimationTrack1) --[[ Line: 402 ]]
+		-- upvalues: config (upval), StoppedConnections (upval), Core (upval), AnimationTrack (upval)
+		local StreamTrackStopped = config.StreamTrackStopped
 		
-		if t[streamTrackStopped] ~= nil then
-			t[streamTrackStopped]:Disconnect()
-			t[streamTrackStopped] = nil
+		if StoppedConnections[StreamTrackStopped] ~= nil then
+			StoppedConnections[StreamTrackStopped]:Disconnect()
+			StoppedConnections[StreamTrackStopped] = nil
 		end
-		core = Enum.AnimationPriority.Idle
+		Core = Enum.AnimationPriority.Idle
 		
-		if var2 then
-			var2.Priority = core
+		if AnimationTrack then
+			AnimationTrack.Priority = Core
 		end
-		t[t_1.StreamTrackStopped] = p3.Stopped:Connect(function()
-			-- upvalues: t (copy), core (copy), var2 (copy)
-			if t.StreamTrackStopped ~= nil then
-				t.StreamTrackStopped:Disconnect()
-				t.StreamTrackStopped = nil
+		StoppedConnections[config.StreamTrackStopped] = AnimationTrack1.Stopped:Connect(function() --[[ Line: 389 ]]
+			-- upvalues: StoppedConnections (upval), Core (upval), AnimationTrack (upval)
+			if StoppedConnections.StreamTrackStopped ~= nil then
+				StoppedConnections.StreamTrackStopped:Disconnect()
+				StoppedConnections.StreamTrackStopped = nil
 			end
-			core = Enum.AnimationPriority.Core
+			Core = Enum.AnimationPriority.Core
 			
-			if var2 then
-				var2.Priority = core
+			if AnimationTrack then
+				AnimationTrack.Priority = Core
 			end
 		end)
 	end)
-	local var7 = nil
+	local v1 = nil
 	
-	for i, v in p2:GetPlayingAnimationTracksCoreScript() do
-		if v:IsA("AnimationStreamTrack") then
-			var7 = v
+	for _, AnimationStreamTrack in Animator:GetPlayingAnimationTracksCoreScript() do
+		if AnimationStreamTrack:IsA("AnimationStreamTrack") then
+			v1 = AnimationStreamTrack
 			break
 		end
 	end
-	if var7 then
-		local var8 = var7
-		local streamTrackStopped = t_1.StreamTrackStopped
+	if v1 then
+		local v2 = v1
+		local StreamTrackStopped = config.StreamTrackStopped
 		
-		if t[streamTrackStopped] ~= nil then
-			t[streamTrackStopped]:Disconnect()
-			t[streamTrackStopped] = nil
+		if StoppedConnections[StreamTrackStopped] ~= nil then
+			StoppedConnections[StreamTrackStopped]:Disconnect()
+			StoppedConnections[StreamTrackStopped] = nil
 		end
-		core = Enum.AnimationPriority.Idle
+		Core = Enum.AnimationPriority.Idle
 		
-		if var2 then
-			var2.Priority = core
+		if AnimationTrack then
+			AnimationTrack.Priority = Core
 		end
-		t[t_1.StreamTrackStopped] = var8.Stopped:Connect(function()
-			-- upvalues: t (copy), core (copy), var2 (copy)
-			if t.StreamTrackStopped ~= nil then
-				t.StreamTrackStopped:Disconnect()
-				t.StreamTrackStopped = nil
+		StoppedConnections[config.StreamTrackStopped] = v2.Stopped:Connect(function() --[[ Line: 389 ]]
+			-- upvalues: StoppedConnections (upval), Core (upval), AnimationTrack (upval)
+			if StoppedConnections.StreamTrackStopped ~= nil then
+				StoppedConnections.StreamTrackStopped:Disconnect()
+				StoppedConnections.StreamTrackStopped = nil
 			end
-			core = Enum.AnimationPriority.Core
+			Core = Enum.AnimationPriority.Core
 			
-			if var2 then
-				var2.Priority = core
+			if AnimationTrack then
+				AnimationTrack.Priority = Core
 			end
 		end)
 		
 		return
 	else
-		core = Enum.AnimationPriority.Core
+		Core = Enum.AnimationPriority.Core
 		
-		if var2 then
-			var2.Priority = core
+		if AnimationTrack then
+			AnimationTrack.Priority = Core
 		end
 	end
 end
 
-local _ = function(p3, _)
-	-- upvalues: t (ref), core (write), var2 (write), onAnimatorAdded (ref)
-	if t.AnimationStreamTrackPlayed ~= nil then
-		t.AnimationStreamTrackPlayed:Disconnect()
-		t.AnimationStreamTrackPlayed = nil
+local _ = function(Player: Player, _) --[[ Line: 424 | Named "onAnimatorRemoving" ]]
+	-- upvalues: StoppedConnections (copy), Core (ref), AnimationTrack (ref), onAnimatorAdded (copy)
+	if StoppedConnections.AnimationStreamTrackPlayed ~= nil then
+		StoppedConnections.AnimationStreamTrackPlayed:Disconnect()
+		StoppedConnections.AnimationStreamTrackPlayed = nil
 	end
-	if t.StreamTrackStopped ~= nil then
-		t.StreamTrackStopped:Disconnect()
-		t.StreamTrackStopped = nil
+	if StoppedConnections.StreamTrackStopped ~= nil then
+		StoppedConnections.StreamTrackStopped:Disconnect()
+		StoppedConnections.StreamTrackStopped = nil
 	end
-	core = Enum.AnimationPriority.Core
+	Core = Enum.AnimationPriority.Core
 	
-	if var2 then
-		var2.Priority = core
+	if AnimationTrack then
+		AnimationTrack.Priority = Core
 	end
-	local var9 = if p3.Character then p3.Character:FindFirstChildOfClass("Humanoid") else nil
-	local var10 = if var9 then var9:FindFirstChildOfClass("Animator") else nil
+	local Humanoid = if Player.Character then Player.Character:FindFirstChildOfClass("Humanoid") else nil
+	local Animator = if Humanoid then Humanoid:FindFirstChildOfClass("Animator") else nil
 	
-	if var10 then
-		onAnimatorAdded(var10)
+	if Animator then
+		onAnimatorAdded(Animator)
 	end
 end
 
-local function onCharacterAdded(p3, p4)
-	-- upvalues: onHeadAdded (ref), t (ref), var2 (write), onAnimatorAdded (ref), t_1 (ref), core (write)
-	local head = p4:FindFirstChild("Head")
+local function onCharacterAdded(Player: Player, Object) --[[ Line: 439 ]]
+	-- upvalues: onHeadAdded (copy), StoppedConnections (copy), AnimationTrack (ref), onAnimatorAdded (copy), config (copy), Core (ref)
+	local Head = Object:FindFirstChild("Head")
 	
-	if head then
-		onHeadAdded(head)
+	if Head then
+		onHeadAdded(Head)
 	end
-	t.characterChildAdded = p4.ChildAdded:Connect(function(p5)
-		-- upvalues: onHeadAdded (copy)
-		if p5.Name == "Head" then
-			onHeadAdded(p5)
+	StoppedConnections.characterChildAdded = Object.ChildAdded:Connect(function(Child) --[[ Line: 445 ]]
+		-- upvalues: onHeadAdded (upval)
+		if Child.Name == "Head" then
+			onHeadAdded(Child)
 		end
 	end)
-	t.characterChildRemoved = p4.ChildRemoved:Connect(function(p5)
-		-- upvalues: var2 (copy), p4 (ref), onHeadAdded (copy)
-		if p5.Name == "Head" then
-			if var2 ~= nil then
-				var2:Stop()
-				var2:Destroy()
-				var2 = nil
+	StoppedConnections.characterChildRemoved = Object.ChildRemoved:Connect(function(Child) --[[ Line: 451 ]]
+		-- upvalues: AnimationTrack (upval), Object (copy), onHeadAdded (upval)
+		if Child.Name == "Head" then
+			if AnimationTrack ~= nil then
+				AnimationTrack:Stop()
+				AnimationTrack:Destroy()
+				AnimationTrack = nil
 			end
-			local head = p4:FindFirstChild("Head")
+			local Head = Object:FindFirstChild("Head")
 			
-			if head then
-				onHeadAdded(head)
+			if Head then
+				onHeadAdded(Head)
 			end
 		end
 	end)
-	t.DescendantAdded = p4.DescendantAdded:Connect(function(p5)
-		-- upvalues: onAnimatorAdded (copy)
-		if p5:IsA("Animator") then
-			onAnimatorAdded(p5)
+	StoppedConnections.DescendantAdded = Object.DescendantAdded:Connect(function(Descendant: Animator) --[[ Line: 461 ]]
+		-- upvalues: onAnimatorAdded (upval)
+		if Descendant:IsA("Animator") then
+			onAnimatorAdded(Descendant)
 		end
 	end)
-	local animator = p4:FindFirstChildWhichIsA("Animator", true)
+	local Animator = Object:FindFirstChildWhichIsA("Animator", true)
 	
-	if animator then
-		onAnimatorAdded(animator)
+	if Animator then
+		onAnimatorAdded(Animator)
 	end
-	t.DescendantRemoving = p4.DescendantRemoving:Connect(function(p5)
-		-- upvalues: p3 (ref), t_1 (copy), t (copy), core (copy), var2 (copy), onAnimatorAdded (copy)
-		if p5:IsA("Animator") then
-			local var9 = p3
-			local animationStreamTrackPlayed = t_1.AnimationStreamTrackPlayed
+	StoppedConnections.DescendantRemoving = Object.DescendantRemoving:Connect(function(Descendant: Animator) --[[ Line: 471 ]]
+		-- upvalues: Player (copy), config (upval), StoppedConnections (upval), Core (upval), AnimationTrack (upval), onAnimatorAdded (upval)
+		if Descendant:IsA("Animator") then
+			local AnimationStreamTrackPlayed = config.AnimationStreamTrackPlayed
 			
-			if t[animationStreamTrackPlayed] ~= nil then
-				t[animationStreamTrackPlayed]:Disconnect()
-				t[animationStreamTrackPlayed] = nil
+			if StoppedConnections[AnimationStreamTrackPlayed] ~= nil then
+				StoppedConnections[AnimationStreamTrackPlayed]:Disconnect()
+				StoppedConnections[AnimationStreamTrackPlayed] = nil
 			end
-			local streamTrackStopped = t_1.StreamTrackStopped
+			local StreamTrackStopped = config.StreamTrackStopped
 			
-			if t[streamTrackStopped] ~= nil then
-				t[streamTrackStopped]:Disconnect()
-				t[streamTrackStopped] = nil
+			if StoppedConnections[StreamTrackStopped] ~= nil then
+				StoppedConnections[StreamTrackStopped]:Disconnect()
+				StoppedConnections[StreamTrackStopped] = nil
 			end
-			core = Enum.AnimationPriority.Core
+			Core = Enum.AnimationPriority.Core
 			
-			if var2 then
-				var2.Priority = core
+			if AnimationTrack then
+				AnimationTrack.Priority = Core
 			end
-			local var10 = if var9.Character then var9.Character:FindFirstChildOfClass("Humanoid") else nil
-			local var11 = if var10 then var10:FindFirstChildOfClass("Animator") else nil
+			local Humanoid = if Player.Character then Player.Character:FindFirstChildOfClass("Humanoid") else nil
+			local Animator = if Humanoid then Humanoid:FindFirstChildOfClass("Animator") else nil
 			
-			if var11 then
-				onAnimatorAdded(var11)
+			if Animator then
+				onAnimatorAdded(Animator)
 			end
 		end
 	end)
 end
 
-local function onCharacterRemoving(_)
-	-- upvalues: var2 (write), t (ref)
-	if var2 ~= nil then
-		var2:Stop()
-		var2:Destroy()
-		var2 = nil
+local function onCharacterRemoving(_) --[[ Line: 478 ]]
+	-- upvalues: AnimationTrack (ref), StoppedConnections (copy)
+	if AnimationTrack ~= nil then
+		AnimationTrack:Stop()
+		AnimationTrack:Destroy()
+		AnimationTrack = nil
 	end
-	for i, v in pairs(t) do
-		if v then
-			v:Disconnect()
+	for _, stoppedConnection in pairs(StoppedConnections) do
+		if stoppedConnection then
+			stoppedConnection:Disconnect()
 		end
 	end
-	table.clear(t)
+	table.clear(StoppedConnections)
 end
 
-if localPlayer.Character then
-	onCharacterAdded(localPlayer, localPlayer.Character)
+if LocalPlayer.Character then
+	onCharacterAdded(LocalPlayer, LocalPlayer.Character)
 end
-localPlayer.CharacterAdded:Connect(function(p3)
-	-- upvalues: onCharacterAdded (ref), localPlayer (ref)
-	onCharacterAdded(localPlayer, p3)
+LocalPlayer.CharacterAdded:Connect(function(Character) --[[ Line: 492 ]]
+	-- upvalues: onCharacterAdded (copy), LocalPlayer (copy)
+	onCharacterAdded(LocalPlayer, Character)
 end)
-localPlayer.CharacterRemoving:Connect(onCharacterRemoving)
+LocalPlayer.CharacterRemoving:Connect(onCharacterRemoving)

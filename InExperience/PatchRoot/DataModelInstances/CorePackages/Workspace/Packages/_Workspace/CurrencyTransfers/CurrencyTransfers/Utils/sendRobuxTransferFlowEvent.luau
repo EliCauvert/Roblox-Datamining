@@ -1,12 +1,12 @@
-﻿local currencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
-local default = require(currencyTransfers.Parent.LoggingProtocol).default
-local robuxTransferFlowTelemetryModule = require(currencyTransfers.Events.RobuxTransferFlowTelemetry)
+﻿local CurrencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
+local Default = require(CurrencyTransfers.Parent.LoggingProtocol).default
+local RobuxTransferFlowTelemetryModule = require(CurrencyTransfers.Events.RobuxTransferFlowTelemetry)
 
-function sendRobuxTransferFlowEvent(p1)
-	-- upvalues: default (ref), robuxTransferFlowTelemetryModule (ref)
-	default:logRobloxTelemetryEvent(robuxTransferFlowTelemetryModule.RobuxTransferFlowEvent, {
-		default.StandardizedFields.addOsInfo,
-		default.StandardizedFields.addSessionId,
+function sendRobuxTransferFlowEvent(p1) --[[ Line: 7 ]]
+	-- upvalues: Default (copy), RobuxTransferFlowTelemetryModule (copy)
+	Default:logRobloxTelemetryEvent(RobuxTransferFlowTelemetryModule.RobuxTransferFlowEvent, {
+		Default.StandardizedFields.addOsInfo,
+		Default.StandardizedFields.addSessionId,
 		"addSessionInfo"
 	}, p1, "RobuxTransferFlow")
 end

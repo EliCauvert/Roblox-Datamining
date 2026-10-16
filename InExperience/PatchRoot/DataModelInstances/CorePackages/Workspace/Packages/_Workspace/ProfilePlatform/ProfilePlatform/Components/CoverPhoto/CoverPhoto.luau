@@ -1,61 +1,66 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local useScreenSize = require(parent.RobloxAppHooks).useScreenSize
-local view = require(parent.Foundation).View
-local loadableImage = require(parent.UIBlox).App.Loading.LoadableImage
-local enumsModule = require(profilePlatform.Common.Enums)
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local UseScreenSizeFunction = require(Parent.RobloxAppHooks).useScreenSize
+local View = require(Parent.Foundation).View
+local LoadableImage = require(Parent.UIBlox).App.Loading.LoadableImage
+local EnumsModule = require(ProfilePlatform.Common.Enums)
 
-local function _(p1, p2, p3)
+local function _(p1, p2, p3) --[[ Line: 30 | Named "interpolateHeight" ]]
 	return p1 + (p2 - p1) * p3
 end
 
-return function(p1)
-	-- upvalues: enumsModule (ref), useScreenSize (ref), reactModule (ref), view (ref), loadableImage (ref)
-	local var1 = p1.profileFormFactorInfo.formFactor == enumsModule.ProfileFormFactor.Wide
-	local var2 = p1.profileFormFactorInfo.formFactor == enumsModule.ProfileFormFactor.PeekView
-	local isFullView = p1.profileFormFactorInfo.isFullView
-	local var3 = useScreenSize()
-	local var4 = reactModule.useMemo(function()
-		-- upvalues: var2 (ref)
-		return if var2 then 393 else 456
-	end, { var2, isFullView, p1.peekViewOpenPercent })
-	local var5 = reactModule.useMemo(function()
-		-- upvalues: var2 (ref), isFullView (ref), p1 (ref), var4 (ref)
-		return if var2 and not isFullView then p1.peekViewOpenPercent * 98 + 295 else var4
-	end, { var2, isFullView, p1.peekViewOpenPercent, var4 })
-	local var6 = var5 - 100
-	local var7 = var6 - p1.parallaxOffset
+return function(p1) --[[ Line: 34 | Named "CoverPhoto" ]]
+	-- upvalues: EnumsModule (copy), UseScreenSizeFunction (copy), ReactModule (copy), View (copy), LoadableImage (copy)
+	local IsFormFactorMatch = p1.profileFormFactorInfo.formFactor == EnumsModule.ProfileFormFactor.Wide
+	local IsFormFactorMatch1 = p1.profileFormFactorInfo.formFactor == EnumsModule.ProfileFormFactor.PeekView
+	local IsFullView = p1.profileFormFactorInfo.isFullView
+	local UseScreenSizeResult = UseScreenSizeFunction()
+	local UseMemoResult = ReactModule.useMemo(function(): number --[[ Line: 40 ]]
+		-- upvalues: IsFormFactorMatch1 (copy)
+		return if IsFormFactorMatch1 then 393 else 456
+	end, { IsFormFactorMatch1, IsFullView, p1.peekViewOpenPercent })
+	local UseMemoResult1: number = ReactModule.useMemo(function() --[[ Line: 48 ]]
+		-- upvalues: IsFormFactorMatch1 (copy), IsFullView (copy), p1 (copy), UseMemoResult (copy)
+		return if IsFormFactorMatch1 and not IsFullView then p1.peekViewOpenPercent * 98 + 295 else UseMemoResult
+	end, {
+		IsFormFactorMatch1,
+		IsFullView,
+		p1.peekViewOpenPercent,
+		UseMemoResult
+	})
+	local Offset = UseMemoResult1 - 100
+	local OffsetDelta = Offset - p1.parallaxOffset
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		ZIndex = -1,
 		LayoutOrder = p1.layoutOrder,
-		Size = UDim2.new(if isFullView then UDim.new(0, var3.X) else UDim.new(1, 0), UDim.new(0, var6))
+		Size = UDim2.new(if IsFullView then UDim.new(0, UseScreenSizeResult.X) else UDim.new(1, 0), UDim.new(0, Offset))
 	}, {
-		ParallaxWrapper = reactModule.createElement(view, {
-			Size = UDim2.new(1, 0, 0, var7),
+		ParallaxWrapper = ReactModule.createElement(View, {
+			Size = UDim2.new(1, 0, 0, OffsetDelta),
 			Position = UDim2.new(0, 0, 0, p1.parallaxOffset)
 		}, {
-			CoverPhotoWrapper = reactModule.createElement(view, {
+			CoverPhotoWrapper = ReactModule.createElement(View, {
 				ClipsDescendants = true,
-				Size = UDim2.new(1, 0, 0, var5 - p1.parallaxOffset)
+				Size = UDim2.new(1, 0, 0, UseMemoResult1 - p1.parallaxOffset)
 			}, {
-				CoverPhoto = reactModule.createElement(loadableImage, {
+				CoverPhoto = ReactModule.createElement(LoadableImage, {
 					BackgroundTransparency = 1,
 					useShimmerAnimationWhileLoading = true,
 					AnchorPoint = Vector2.new(0.5, 0.5),
 					Image = p1.coverPhotoThumbnail,
 					Position = UDim2.fromScale(0.5, 0.5),
 					ScaleType = Enum.ScaleType.Crop,
-					Size = UDim2.new(1, 0, 0, var4)
+					Size = UDim2.new(1, 0, 0, UseMemoResult)
 				})
 			}),
-			GradientWrapper = reactModule.createElement(view, {
+			GradientWrapper = ReactModule.createElement(View, {
 				Size = UDim2.new(1, 0, 0, 100),
-				Position = UDim2.new(0, 0, 0, var7),
-				tag = if var1 or isFullView then "bg-surface-0" else "bg-surface-100"
+				Position = UDim2.new(0, 0, 0, OffsetDelta),
+				tag = if IsFormFactorMatch or IsFullView then "bg-surface-0" else "bg-surface-100"
 			}, {
-				Gradient = reactModule.createElement("UIGradient", {
+				Gradient = ReactModule.createElement("UIGradient", {
 					Rotation = 270,
 					Transparency = NumberSequence.new({
 						NumberSequenceKeypoint.new(0, 0),

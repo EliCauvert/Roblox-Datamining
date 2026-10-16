@@ -1,48 +1,47 @@
-﻿local memStorageService = game:GetService("MemStorageService")
-local userInputService = game:GetService("UserInputService")
-local parent = script:FindFirstAncestor("InputUi").Parent
-local reactModule = require(parent.React)
-local UIBloxModule = require(parent.UIBlox)
-local foundationModule = require(parent.Foundation)
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local images = UIBloxModule.App.ImageSet.Images
-local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useDesignTokens = require(parent.Style).useDesignTokens
+﻿local MemStorageService = game:GetService("MemStorageService")
+local UserInputService = game:GetService("UserInputService")
+local Parent = script:FindFirstAncestor("InputUi").Parent
+local ReactModule = require(Parent.React)
+local UIBloxModule = require(Parent.UIBlox)
+local FoundationModule = require(Parent.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local Images = UIBloxModule.App.ImageSet.Images
+local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseDesignTokensFunction = require(Parent.Style).useDesignTokens
 local _ = require(script.Parent.GamepadDisconnectTokenMapper)
-local gamepadMessageKeyEngineFeature = game:GetEngineFeature("GamepadMessageKeyEngineFeature")
+local GamepadMessageKeyEngineFeature = game:GetEngineFeature("GamepadMessageKeyEngineFeature")
 
-return function(p1)
-	-- upvalues: useDesignTokens (ref), gamepadMessageKeyEngineFeature (ref), memStorageService (ref), useLocalization (ref), userInputService (ref), reactModule (ref), imageSetLabel (ref), images (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
-	local gamepadDisconnectMessageKeyItem
-	local var1 = useDesignTokens()
-	local color3 = var1.Color.Content.Emphasis.Color3
-	local transparency = var1.Color.Content.Emphasis.Transparency
-	local gamepadDisconnect = var1.LuaApps.GamepadDisconnect
-	local designWidth = gamepadDisconnect.designWidth
-	local imageWidth = gamepadDisconnect.imageWidth
-	local imageHeight = gamepadDisconnect.imageHeight
-	local textContainerWidth = gamepadDisconnect.textContainerWidth
-	local horizontalInnerPadding = gamepadDisconnect.horizontalInnerPadding
-	local verticalPadding = gamepadDisconnect.verticalPadding
-	local _ = ""
+return function(p1) --[[ Line: 26 ]]
+	-- upvalues: UseDesignTokensFunction (copy), GamepadMessageKeyEngineFeature (copy), MemStorageService (copy), UseLocalizationFunction (copy), UserInputService (copy), ReactModule (copy), ImageSetLabel (copy), Images (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	local UseDesignTokensResult = UseDesignTokensFunction()
+	local EmphasisColor3 = UseDesignTokensResult.Color.Content.Emphasis.Color3
+	local Transparency = UseDesignTokensResult.Color.Content.Emphasis.Transparency
+	local GamepadDisconnect = UseDesignTokensResult.LuaApps.GamepadDisconnect
+	local DesignWidth = GamepadDisconnect.designWidth
+	local ImageWidth: number = GamepadDisconnect.imageWidth
+	local ImageHeight: number = GamepadDisconnect.imageHeight
+	local TextContainerWidth: number = GamepadDisconnect.textContainerWidth
+	local HorizontalInnerPadding = GamepadDisconnect.horizontalInnerPadding
+	local VerticalPadding = GamepadDisconnect.verticalPadding
+	local GamepadDisconnectMessageKeyItem = nil
 	
-	if gamepadMessageKeyEngineFeature then
-		gamepadDisconnectMessageKeyItem = memStorageService:GetItem("GamepadDisconnectMessageKey")
+	if GamepadMessageKeyEngineFeature then
+		GamepadDisconnectMessageKeyItem = MemStorageService:GetItem("GamepadDisconnectMessageKey")
 		
-		if gamepadDisconnectMessageKeyItem == "" then
-			gamepadDisconnectMessageKeyItem = "Feature.GamepadDisconnect.Label.MessageGeneric"
+		if GamepadDisconnectMessageKeyItem == "" then
+			GamepadDisconnectMessageKeyItem = "Feature.GamepadDisconnect.Label.MessageGeneric"
 		end
 	else
-		gamepadDisconnectMessageKeyItem = "Feature.GamepadDisconnect.Label.Message"
+		GamepadDisconnectMessageKeyItem = "Feature.GamepadDisconnect.Label.Message"
 	end
-	local var2 = useLocalization({
+	local UseLocalizationResult = UseLocalizationFunction({
 		title = "Feature.GamepadDisconnect.Label.Title",
-		message = gamepadDisconnectMessageKeyItem
+		message = GamepadDisconnectMessageKeyItem
 	})
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
 		Active = true,
@@ -50,97 +49,97 @@ return function(p1)
 		Position = UDim2.fromScale(0.5, 0.5),
 		Size = UDim2.new(1, 0, 1, 0)
 	}, {
-		Modal = reactModule.createElement("Frame", {
+		Modal = ReactModule.createElement("Frame", {
 			BorderSizePixel = 0,
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			Position = UDim2.fromScale(0.5, 0.5),
-			Size = UDim2.new(1, 0, 1, -verticalPadding * 2),
-			BackgroundTransparency = var1.Color.OverMedia.OverMedia_0.Transparency,
-			BackgroundColor3 = var1.Color.OverMedia.OverMedia_0.Color3
+			Size = UDim2.new(1, 0, 1, -VerticalPadding * 2),
+			BackgroundTransparency = UseDesignTokensResult.Color.OverMedia.OverMedia_0.Transparency,
+			BackgroundColor3 = UseDesignTokensResult.Color.OverMedia.OverMedia_0.Color3
 		}, {
-			Content = reactModule.createElement("Frame", {
+			Content = ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
 				AnchorPoint = Vector2.new(0.5, 0.5),
 				Position = UDim2.fromScale(0.5, 0.5),
-				Size = UDim2.new(1, 0, 0, imageHeight)
+				Size = UDim2.new(1, 0, 0, ImageHeight)
 			}, {
-				UIListLayout = reactModule.createElement("UIListLayout", {
+				UIListLayout = ReactModule.createElement("UIListLayout", {
 					FillDirection = Enum.FillDirection.Horizontal,
 					HorizontalAlignment = Enum.HorizontalAlignment.Center,
 					SortOrder = Enum.SortOrder.LayoutOrder,
 					VerticalAlignment = Enum.VerticalAlignment.Center,
-					Padding = UDim.new(horizontalInnerPadding / designWidth, 0)
+					Padding = UDim.new(HorizontalInnerPadding / DesignWidth, 0)
 				}),
-				ControllerImage = reactModule.createElement("ImageLabel", {
+				ControllerImage = ReactModule.createElement("ImageLabel", {
 					Image = "rbxasset://textures/ui/Gamepad/Controller.png",
 					BackgroundTransparency = 1,
 					LayoutOrder = 1,
-					Size = UDim2.new(imageWidth / designWidth, 0, 0, imageHeight),
+					Size = UDim2.new(ImageWidth / DesignWidth, 0, 0, ImageHeight),
 					ScaleType = Enum.ScaleType.Fit
 				}, {
-					UIAspectRatioConstraint = reactModule.createElement("UIAspectRatioConstraint", { AspectRatio = imageWidth / imageHeight }),
-					UISizeConstraint = reactModule.createElement("UISizeConstraint", {
-						MaxSize = Vector2.new(imageWidth, imageHeight),
-						MinSize = Vector2.new(imageWidth * 0.5, imageHeight * 0.5)
+					UIAspectRatioConstraint = ReactModule.createElement("UIAspectRatioConstraint", { AspectRatio = ImageWidth / ImageHeight }),
+					UISizeConstraint = ReactModule.createElement("UISizeConstraint", {
+						MaxSize = Vector2.new(ImageWidth, ImageHeight),
+						MinSize = Vector2.new(ImageWidth * 0.5, ImageHeight * 0.5)
 					})
 				}),
-				TextContainer = reactModule.createElement("Frame", {
+				TextContainer = ReactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 2,
 					AutomaticSize = Enum.AutomaticSize.Y,
-					Size = UDim2.new(textContainerWidth / designWidth, 0, 0, imageHeight)
+					Size = UDim2.new(TextContainerWidth / DesignWidth, 0, 0, ImageHeight)
 				}, {
-					UIListLayout = reactModule.createElement("UIListLayout", {
+					UIListLayout = ReactModule.createElement("UIListLayout", {
 						FillDirection = Enum.FillDirection.Vertical,
 						SortOrder = Enum.SortOrder.LayoutOrder,
 						HorizontalAlignment = Enum.HorizontalAlignment.Left,
 						VerticalAlignment = Enum.VerticalAlignment.Center,
-						Padding = UDim.new(0, var1.Size.Size_800)
+						Padding = UDim.new(0, UseDesignTokensResult.Size.Size_800)
 					}),
-					TitleRow = reactModule.createElement("Frame", {
+					TitleRow = ReactModule.createElement("Frame", {
 						BackgroundTransparency = 1,
 						LayoutOrder = 1,
 						AutomaticSize = Enum.AutomaticSize.Y,
 						Size = UDim2.fromScale(1, 0)
 					}, {
-						UIListLayout = reactModule.createElement("UIListLayout", {
+						UIListLayout = ReactModule.createElement("UIListLayout", {
 							FillDirection = Enum.FillDirection.Horizontal,
 							SortOrder = Enum.SortOrder.LayoutOrder,
 							VerticalAlignment = Enum.VerticalAlignment.Center,
 							HorizontalAlignment = Enum.HorizontalAlignment.Left,
-							Padding = UDim.new(24 / textContainerWidth, 0)
+							Padding = UDim.new(24 / TextContainerWidth, 0)
 						}),
-						Icon = reactModule.createElement(imageSetLabel, {
+						Icon = ReactModule.createElement(ImageSetLabel, {
 							BackgroundTransparency = 1,
 							LayoutOrder = 1,
-							Image = images["icons/menu/about_large"],
-							Size = UDim2.fromOffset(var1.Size.Size_1200, var1.Size.Size_1200)
+							Image = Images["icons/menu/about_large"],
+							Size = UDim2.fromOffset(UseDesignTokensResult.Size.Size_1200, UseDesignTokensResult.Size.Size_1200)
 						}),
-						Title = reactModule.createElement("TextLabel", {
+						Title = ReactModule.createElement("TextLabel", {
 							BackgroundTransparency = 1,
 							LayoutOrder = 2,
-							Text = var2.title,
-							TextColor3 = color3,
-							TextTransparency = transparency,
-							TextSize = var1.Typography.HeadingLarge.FontSize,
-							Font = if foundationFontFaceMigration then nil else var1.Typography.HeadingLarge.Font,
-							FontFace = if foundationFontFaceMigration then normalizeFontFace(var1.Typography.HeadingLarge.Font) else nil,
+							Text = UseLocalizationResult.title,
+							TextColor3 = EmphasisColor3,
+							TextTransparency = Transparency,
+							TextSize = UseDesignTokensResult.Typography.HeadingLarge.FontSize,
+							Font = if FoundationFontFaceMigration then nil else UseDesignTokensResult.Typography.HeadingLarge.Font,
+							FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseDesignTokensResult.Typography.HeadingLarge.Font) else nil,
 							TextXAlignment = Enum.TextXAlignment.Left
 						})
 					}),
-					Message = reactModule.createElement("TextLabel", {
+					Message = ReactModule.createElement("TextLabel", {
 						BackgroundTransparency = 1,
 						LayoutOrder = 2,
 						TextWrapped = true,
-						Text = string.format(var2.message, p1.username, userInputService:GetStringForKeyCode(Enum.KeyCode.A)),
+						Text = string.format(UseLocalizationResult.message, p1.username, UserInputService:GetStringForKeyCode(Enum.KeyCode.A)),
 						AutomaticSize = Enum.AutomaticSize.XY,
 						Size = UDim2.fromOffset(0, 0),
-						TextColor3 = color3,
-						TextTransparency = transparency,
-						TextSize = var1.Typography.TitleLarge.FontSize,
-						Font = if foundationFontFaceMigration then nil else var1.Typography.TitleLarge.Font,
-						FontFace = if foundationFontFaceMigration then normalizeFontFace(var1.Typography.TitleLarge.Font) else nil,
+						TextColor3 = EmphasisColor3,
+						TextTransparency = Transparency,
+						TextSize = UseDesignTokensResult.Typography.TitleLarge.FontSize,
+						Font = if FoundationFontFaceMigration then nil else UseDesignTokensResult.Typography.TitleLarge.Font,
+						FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseDesignTokensResult.Typography.TitleLarge.Font) else nil,
 						TextXAlignment = Enum.TextXAlignment.Left
 					})
 				})

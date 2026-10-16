@@ -1,23 +1,23 @@
-﻿local parent = script.Parent.Parent
-local captureServiceModule = require(parent.Services.CaptureService)
-local captureTypeModule = require(parent.Enums.CaptureType)
-local capturesToastTypeModule = require(parent.Enums.CapturesToastType)
-local toastTriggeredModule = require(parent.Actions.ToastTriggered)
-local _ = require(parent.Types)
-local fFlagUseRbxstorageInGalleryModule = require(parent.Flags.FFlagUseRbxstorageInGallery)
-local fFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
+﻿local Parent = script.Parent.Parent
+local CaptureServiceModule = require(Parent.Services.CaptureService)
+local CaptureTypeModule = require(Parent.Enums.CaptureType)
+local CapturesToastTypeModule = require(Parent.Enums.CapturesToastType)
+local ToastTriggeredModule = require(Parent.Actions.ToastTriggered)
+local _ = require(Parent.Types)
+local FFlagUseRbxstorageInGalleryModule = require(Parent.Flags.FFlagUseRbxstorageInGallery)
+local FFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(Parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
 
-return function(p1)
-	-- upvalues: fFlagEnableCapturesGalleryRetrievalCoreScriptModule (ref), captureServiceModule (ref), fFlagUseRbxstorageInGalleryModule (ref), captureTypeModule (ref), toastTriggeredModule (ref), capturesToastTypeModule (ref)
-	return function(p2)
-		-- upvalues: fFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), captureServiceModule (copy), p1 (ref), fFlagUseRbxstorageInGalleryModule (copy), captureTypeModule (copy), toastTriggeredModule (copy), capturesToastTypeModule (copy)
-		if fFlagEnableCapturesGalleryRetrievalCoreScriptModule then
-			captureServiceModule:SaveCapturesToExternalStorageAsync({ p1 })
-		elseif fFlagUseRbxstorageInGalleryModule and p1.type == captureTypeModule.Video then
-			captureServiceModule:SaveVideoCaptureToExternalStorage(p1.videoCapture)
+return function(CaptureInfo) --[[ Line: 15 ]]
+	-- upvalues: FFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), CaptureServiceModule (copy), FFlagUseRbxstorageInGalleryModule (copy), CaptureTypeModule (copy), ToastTriggeredModule (copy), CapturesToastTypeModule (copy)
+	return function(p1) --[[ Line: 16 ]]
+		-- upvalues: FFlagEnableCapturesGalleryRetrievalCoreScriptModule (upval), CaptureServiceModule (upval), CaptureInfo (copy), FFlagUseRbxstorageInGalleryModule (upval), CaptureTypeModule (upval), ToastTriggeredModule (upval), CapturesToastTypeModule (upval)
+		if FFlagEnableCapturesGalleryRetrievalCoreScriptModule then
+			CaptureServiceModule:SaveCapturesToExternalStorageAsync({ CaptureInfo })
+		elseif FFlagUseRbxstorageInGalleryModule and CaptureInfo.type == CaptureTypeModule.Video then
+			CaptureServiceModule:SaveVideoCaptureToExternalStorage(CaptureInfo.videoCapture)
 		else
-			captureServiceModule:SaveCaptureToExternalStorage(p1.filePath)
+			CaptureServiceModule:SaveCaptureToExternalStorage(CaptureInfo.filePath)
 		end
-		p2:dispatch(toastTriggeredModule(capturesToastTypeModule.CaptureSavedToDevice, { captureInfo = p1 }))
+		p1:dispatch(ToastTriggeredModule(CapturesToastTypeModule.CaptureSavedToDevice, { captureInfo = CaptureInfo }))
 	end
 end

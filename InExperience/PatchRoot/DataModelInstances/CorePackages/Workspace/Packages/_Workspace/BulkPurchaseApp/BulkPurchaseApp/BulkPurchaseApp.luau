@@ -1,63 +1,63 @@
-﻿local guiService = game:GetService("GuiService")
-local bulkPurchaseApp = script:FindFirstAncestor("BulkPurchaseApp")
-local parent = bulkPurchaseApp.Parent
-local reactModule = require(parent.React)
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local focusNavigableSurfaceIdentifierEnum = require(parent.FocusNavigationUtils).FocusNavigableSurfaceIdentifierEnum
-local bulkPurchasePromptStateEnumModule = require(bulkPurchaseApp.Enums.BulkPurchasePromptStateEnum)
-local bulkPurchaseErrorContainerModule = require(bulkPurchaseApp.Features.BulkPurchaseError.BulkPurchaseErrorContainer)
-local bulkPurchaseSuccessContainerModule = require(bulkPurchaseApp.Features.BulkPurchaseSuccess.BulkPurchaseSuccessContainer)
-local bulkPurchasePartialSuccessContainerModule = require(bulkPurchaseApp.Features.BulkPurchasePartialSuccess.BulkPurchasePartialSuccessContainer)
-local bulkPurchaseRequestContainerModule = require(bulkPurchaseApp.Features.BulkPurchaseRequest.BulkPurchaseRequestContainer)
-local screenSizeContext = require(parent.EconomyCommonCoreScriptHooks).ScreenSizeContext
-local useBulkPurchaseRequestListenerEffectModule = require(bulkPurchaseApp.Hooks.useBulkPurchaseRequestListenerEffect)
-local useFocusNavigationSurface = require(parent.EconomyCommonCoreScriptHooks).useFocusNavigationSurface
-local focusNavigationModalSurface = require(parent.EconomyCommonCoreScriptHooks).FocusNavigationModalSurface
-local selectPromptStateModule = require(bulkPurchaseApp.Store.Selectors.selectPromptState)
-local fixBulkPurchaseInputPerf = game:DefineFastFlag("FixBulkPurchaseInputPerf", false)
+﻿local GuiService = game:GetService("GuiService")
+local BulkPurchaseApp = script:FindFirstAncestor("BulkPurchaseApp")
+local Parent = BulkPurchaseApp.Parent
+local ReactModule = require(Parent.React)
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local FocusNavigableSurfaceIdentifierEnum = require(Parent.FocusNavigationUtils).FocusNavigableSurfaceIdentifierEnum
+local BulkPurchasePromptStateEnumModule = require(BulkPurchaseApp.Enums.BulkPurchasePromptStateEnum)
+local BulkPurchaseErrorContainerModule = require(BulkPurchaseApp.Features.BulkPurchaseError.BulkPurchaseErrorContainer)
+local BulkPurchaseSuccessContainerModule = require(BulkPurchaseApp.Features.BulkPurchaseSuccess.BulkPurchaseSuccessContainer)
+local BulkPurchasePartialSuccessContainerModule = require(BulkPurchaseApp.Features.BulkPurchasePartialSuccess.BulkPurchasePartialSuccessContainer)
+local BulkPurchaseRequestContainerModule = require(BulkPurchaseApp.Features.BulkPurchaseRequest.BulkPurchaseRequestContainer)
+local ScreenSizeContext = require(Parent.EconomyCommonCoreScriptHooks).ScreenSizeContext
+local UseBulkPurchaseRequestListenerEffectModule = require(BulkPurchaseApp.Hooks.useBulkPurchaseRequestListenerEffect)
+local UseFocusNavigationSurfaceFunction = require(Parent.EconomyCommonCoreScriptHooks).useFocusNavigationSurface
+local FocusNavigationModalSurface = require(Parent.EconomyCommonCoreScriptHooks).FocusNavigationModalSurface
+local SelectPromptStateModule = require(BulkPurchaseApp.Store.Selectors.selectPromptState)
+local FixBulkPurchaseInputPerf = game:DefineFastFlag("FixBulkPurchaseInputPerf", false)
 
-return function()
-	-- upvalues: reactModule (ref), useSelector (ref), selectPromptStateModule (ref), fixBulkPurchaseInputPerf (ref), useFocusNavigationSurface (ref), focusNavigableSurfaceIdentifierEnum (ref), useBulkPurchaseRequestListenerEffectModule (ref), bulkPurchasePromptStateEnumModule (ref), guiService (ref), screenSizeContext (ref), focusNavigationModalSurface (ref), bulkPurchaseErrorContainerModule (ref), bulkPurchaseSuccessContainerModule (ref), bulkPurchaseRequestContainerModule (ref), bulkPurchasePartialSuccessContainerModule (ref)
-	local var1, var2 = reactModule.useState(Vector2.new(0, 0))
-	local var3 = useSelector(selectPromptStateModule)
-	local var4 = if fixBulkPurchaseInputPerf then nil else useFocusNavigationSurface({
+return function() --[[ Line: 24 | Named "BulkPurchaseApp" ]]
+	-- upvalues: ReactModule (copy), UseSelectorFunction (copy), SelectPromptStateModule (copy), FixBulkPurchaseInputPerf (copy), UseFocusNavigationSurfaceFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), UseBulkPurchaseRequestListenerEffectModule (copy), BulkPurchasePromptStateEnumModule (copy), GuiService (copy), ScreenSizeContext (copy), FocusNavigationModalSurface (copy), BulkPurchaseErrorContainerModule (copy), BulkPurchaseSuccessContainerModule (copy), BulkPurchaseRequestContainerModule (copy), BulkPurchasePartialSuccessContainerModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(Vector2.new(0, 0))
+	local UseSelectorResult = UseSelectorFunction(SelectPromptStateModule)
+	local UseFocusNavigationSurfaceResult = if FixBulkPurchaseInputPerf then nil else UseFocusNavigationSurfaceFunction({
 		selectionGroupName = "BulkPurchaseApp",
-		focusNavigableSurfaceIdentifier = focusNavigableSurfaceIdentifierEnum.CentralOverlay
+		focusNavigableSurfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.CentralOverlay
 	})
-	useBulkPurchaseRequestListenerEffectModule()
-	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), bulkPurchasePromptStateEnumModule (copy), guiService (copy)
-		if var3 == bulkPurchasePromptStateEnumModule.None then
-			guiService.SelectedCoreObject = nil
+	UseBulkPurchaseRequestListenerEffectModule()
+	ReactModule.useEffect(function() --[[ Line: 36 ]]
+		-- upvalues: UseSelectorResult (copy), BulkPurchasePromptStateEnumModule (upval), GuiService (upval)
+		if UseSelectorResult == BulkPurchasePromptStateEnumModule.None then
+			GuiService.SelectedCoreObject = nil
 		end
-	end, { var3 })
+	end, { UseSelectorResult })
 	
-	return reactModule.createElement(screenSizeContext.Provider, { value = var1 }, reactModule.createElement("ScreenGui", {
-		[reactModule.Change.AbsoluteSize] = function(p1)
-			-- upvalues: var2 (ref)
-			var2(p1.AbsoluteSize)
+	return ReactModule.createElement(ScreenSizeContext.Provider, { value = UseStateResult }, ReactModule.createElement("ScreenGui", {
+		[ReactModule.Change.AbsoluteSize] = function(Frame) --[[ Line: 46 ]]
+			-- upvalues: UseStateResult2 (copy)
+			UseStateResult2(Frame.AbsoluteSize)
 		end,
 		ScreenInsets = Enum.ScreenInsets.None
 	}, {
-		FocusNavigationEffects = if fixBulkPurchaseInputPerf then if var3 ~= bulkPurchasePromptStateEnumModule.None then nil else reactModule.createElement(focusNavigationModalSurface, { selectionGroupName = "BulkPurchaseApp" }, {
-			Error = if var3 == bulkPurchasePromptStateEnumModule.Error then reactModule.createElement(bulkPurchaseErrorContainerModule) else nil,
-			Success = if var3 == bulkPurchasePromptStateEnumModule.Success then reactModule.createElement(bulkPurchaseSuccessContainerModule) else nil,
-			Request = if var3 == bulkPurchasePromptStateEnumModule.Request then reactModule.createElement(bulkPurchaseRequestContainerModule) else nil,
-			PartialSuccess = if var3 == bulkPurchasePromptStateEnumModule.PartialSuccess then reactModule.createElement(bulkPurchasePartialSuccessContainerModule) else nil
-		}) else reactModule.createElement("Frame", {
+		FocusNavigationEffects = if FixBulkPurchaseInputPerf then if UseSelectorResult == BulkPurchasePromptStateEnumModule.None then nil else ReactModule.createElement(FocusNavigationModalSurface, { selectionGroupName = "BulkPurchaseApp" }, {
+			Error = if UseSelectorResult == BulkPurchasePromptStateEnumModule.Error then ReactModule.createElement(BulkPurchaseErrorContainerModule) else nil,
+			Success = if UseSelectorResult == BulkPurchasePromptStateEnumModule.Success then ReactModule.createElement(BulkPurchaseSuccessContainerModule) else nil,
+			Request = if UseSelectorResult == BulkPurchasePromptStateEnumModule.Request then ReactModule.createElement(BulkPurchaseRequestContainerModule) else nil,
+			PartialSuccess = if UseSelectorResult == BulkPurchasePromptStateEnumModule.PartialSuccess then ReactModule.createElement(BulkPurchasePartialSuccessContainerModule) else nil
+		}) else ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
-			ref = if var3 == bulkPurchasePromptStateEnumModule.None then nil else var4,
+			ref = if UseSelectorResult == BulkPurchasePromptStateEnumModule.None then nil else UseFocusNavigationSurfaceResult,
 			Size = UDim2.fromScale(1, 1),
 			SelectionBehaviorDown = Enum.SelectionBehavior.Stop,
 			SelectionBehaviorLeft = Enum.SelectionBehavior.Stop,
 			SelectionBehaviorRight = Enum.SelectionBehavior.Stop,
 			SelectionBehaviorUp = Enum.SelectionBehavior.Stop
 		}, {
-			Error = if var3 == bulkPurchasePromptStateEnumModule.Error then reactModule.createElement(bulkPurchaseErrorContainerModule) else nil,
-			Success = if var3 == bulkPurchasePromptStateEnumModule.Success then reactModule.createElement(bulkPurchaseSuccessContainerModule) else nil,
-			Request = if var3 == bulkPurchasePromptStateEnumModule.Request then reactModule.createElement(bulkPurchaseRequestContainerModule) else nil,
-			PartialSuccess = if var3 == bulkPurchasePromptStateEnumModule.PartialSuccess then reactModule.createElement(bulkPurchasePartialSuccessContainerModule) else nil
+			Error = if UseSelectorResult == BulkPurchasePromptStateEnumModule.Error then ReactModule.createElement(BulkPurchaseErrorContainerModule) else nil,
+			Success = if UseSelectorResult == BulkPurchasePromptStateEnumModule.Success then ReactModule.createElement(BulkPurchaseSuccessContainerModule) else nil,
+			Request = if UseSelectorResult == BulkPurchasePromptStateEnumModule.Request then ReactModule.createElement(BulkPurchaseRequestContainerModule) else nil,
+			PartialSuccess = if UseSelectorResult == BulkPurchasePromptStateEnumModule.PartialSuccess then ReactModule.createElement(BulkPurchasePartialSuccessContainerModule) else nil
 		})
 	}))
 end

@@ -1,36 +1,36 @@
-﻿local parent = script:FindFirstAncestor("AppChat").Parent
-local reactModule = require(parent.React)
-local fFlagExpChatEnableFriendsTab = require(parent.SharedFlags).FFlagExpChatEnableFriendsTab
-local t = {
+﻿local Parent = script:FindFirstAncestor("AppChat").Parent
+local ReactModule = require(Parent.React)
+local FFlagExpChatEnableFriendsTab = require(Parent.SharedFlags).FFlagExpChatEnableFriendsTab
+local config = {
 	Unknown = "Unknown",
 	ConnectTab = "ConnectTab",
 	ChatTab = "ChatTab",
 	InExperienceDefault = "InExperienceDefault",
 	InExperienceFriendsTab = "InExperienceFriendsTab"
 }
-local var1 = reactModule.createContext({ chatPlacement = t.Unknown })
-local consumer = var1.Consumer
+local Context = ReactModule.createContext({ chatPlacement = config.Unknown })
+local Consumer = Context.Consumer
 
 return {
-	Provider = var1.Provider,
-	Consumer = consumer,
-	Context = var1,
-	Enum = t,
-	useChatPlacementContext = function()
-		-- upvalues: reactModule (ref), var1 (ref)
-		return reactModule.useContext(var1)
+	Provider = Context.Provider,
+	Consumer = Consumer,
+	Context = Context,
+	Enum = config,
+	useChatPlacementContext = function() --[[ Line: 42 ]]
+		-- upvalues: ReactModule (copy), Context (copy)
+		return ReactModule.useContext(Context)
 	end,
-	withChatPlacementContext = function(p1)
-		-- upvalues: reactModule (ref), consumer (ref)
-		return reactModule.createElement(consumer, {
-			render = function(p2)
-				-- upvalues: p1 (ref)
-				return p1(p2)
+	withChatPlacementContext = function(Callback) --[[ Line: 45 ]]
+		-- upvalues: ReactModule (copy), Consumer (copy)
+		return ReactModule.createElement(Consumer, {
+			render = function(p1) --[[ Line: 47 ]]
+				-- upvalues: Callback (copy)
+				return Callback(p1)
 			end
 		})
 	end,
-	isPlacementInExperience = function(p1)
-		-- upvalues: fFlagExpChatEnableFriendsTab (ref), t (ref)
-		return if fFlagExpChatEnableFriendsTab and p1 == t.InExperienceFriendsTab then true else p1 == t.InExperienceDefault
+	isPlacementInExperience = function(InExperienceDefault): boolean --[[ Line: 52 ]]
+		-- upvalues: FFlagExpChatEnableFriendsTab (copy), config (copy)
+		return FFlagExpChatEnableFriendsTab and InExperienceDefault == config.InExperienceFriendsTab or InExperienceDefault == config.InExperienceDefault
 	end
 }

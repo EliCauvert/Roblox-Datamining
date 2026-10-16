@@ -1,47 +1,47 @@
-﻿local parent = script:FindFirstAncestor("GameHydrationReact").Parent
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local dataHydrationModule = require(parent.DataHydration)
-local fFlagMigrateGameInfoToStore = require(parent.SharedFlags).FFlagMigrateGameInfoToStore
-local var1 = nil
-local t = nil
+﻿local Parent = script:FindFirstAncestor("GameHydrationReact").Parent
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
+local DataHydrationModule = require(Parent.DataHydration)
+local FFlagMigrateGameInfoToStore = require(Parent.SharedFlags).FFlagMigrateGameInfoToStore
+local Callback = nil
+local v1 = nil
 
-if fFlagMigrateGameInfoToStore then
-	var1 = signalsModule.createSignal(false)
-	t = {}
+if FFlagMigrateGameInfoToStore then
+	Callback = SignalsModule.createSignal(false)
+	v1 = {}
 end
-return function(p1, p2, p3)
-	-- upvalues: reactModule (ref), dataHydrationModule (ref), fFlagMigrateGameInfoToStore (ref), var1 (write), t (write), signalsReactModule (ref)
-	local t_1 = {}
+return function(List, p1, p2) --[[ Line: 26 | Named "useGameIconsForSize" ]]
+	-- upvalues: ReactModule (copy), DataHydrationModule (copy), FFlagMigrateGameInfoToStore (copy), Callback (ref), v1 (ref), SignalsReactModule (copy)
+	local List1 = {}
 	
-	for i, v in p1 do
-		table.insert(t_1, tostring(v))
+	for _, value in List do
+		table.insert(List1, (tostring(value)))
 	end
-	table.sort(t_1)
+	table.sort(List1)
 	
-	return signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: dataHydrationModule (copy), p3 (ref), t_1 (ref), p2 (ref), fFlagMigrateGameInfoToStore (copy), var1 (copy), t (copy)
-		local gameIconStore = dataHydrationModule.Game.getGameIconStore(false)
-		local var2 = if p3 then gameIconStore.getAndFetchGameIcons(t_1, p2) else gameIconStore.getGameIcons(t_1, p2)
+	return SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 39 ]]
+		-- upvalues: DataHydrationModule (upval), p2 (copy), List1 (copy), p1 (copy), FFlagMigrateGameInfoToStore (upval), Callback (upval), v1 (upval)
+		local GameIconStore = DataHydrationModule.Game.getGameIconStore(false)
+		local AndFetchGameIcons = if p2 then GameIconStore.getAndFetchGameIcons(List1, p1) else GameIconStore.getGameIcons(List1, p1)
 		
-		return function(p4)
-			-- upvalues: fFlagMigrateGameInfoToStore (copy), var2 (ref), var1 (copy), t (copy)
-			if fFlagMigrateGameInfoToStore and next(var2) == nil then
-				var1(p4)
+		return function(p3) --[[ Line: 44 ]]
+			-- upvalues: FFlagMigrateGameInfoToStore (upval), AndFetchGameIcons (copy), Callback (upval), v1 (upval)
+			if FFlagMigrateGameInfoToStore and next(AndFetchGameIcons) == nil then
+				Callback(p3)
 				
-				return t
+				return v1
 			end
-			local t_1 = {}
+			local Urls = {}
 			
-			for i, v in var2 do
-				local var3 = v.data(p4)
+			for i, andFetchGameIcon in AndFetchGameIcons do
+				local DataResult = andFetchGameIcon.data(p3)
 				
-				if var3 and var3.url then
-					t_1[i] = var3.url
+				if DataResult and DataResult.url then
+					Urls[i] = DataResult.url
 				end
 			end
-			return t_1
+			return Urls
 		end
-	end, { table.concat(t_1, ","), p2, p3 }))
+	end, { table.concat(List1, ","), p1, p2 })))
 end

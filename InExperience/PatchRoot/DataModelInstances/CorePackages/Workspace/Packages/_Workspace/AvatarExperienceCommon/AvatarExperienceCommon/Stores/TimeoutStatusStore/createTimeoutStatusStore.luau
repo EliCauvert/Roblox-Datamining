@@ -1,16 +1,16 @@
-﻿local httpService = game:GetService("HttpService")
-local parent = script:FindFirstAncestor("AvatarExperienceCommon").Parent
-local signalsModule = require(parent.Signals)
-local promiseModule = require(parent.Promise)
-local createSignal = signalsModule.createSignal
-local createComputed = signalsModule.createComputed
-local createHttpStore = require(parent.InternalHttpStore).createHttpStore
-local mutedError = require(parent.Loggers).mutedError
-local url = require(parent.Http).Url
+﻿local HttpService = game:GetService("HttpService")
+local Parent = script:FindFirstAncestor("AvatarExperienceCommon").Parent
+local SignalsModule = require(Parent.Signals)
+local PromiseModule = require(Parent.Promise)
+local CreateSignalFunction = SignalsModule.createSignal
+local CreateComputedFunction = SignalsModule.createComputed
+local CreateHttpStoreFunction = require(Parent.InternalHttpStore).createHttpStore
+local MutedErrorFunction = require(Parent.Loggers).mutedError
+local Url = require(Parent.Http).Url
 
-return function()
-	-- upvalues: createSignal (ref), createHttpStore (ref), signalsModule (ref), url (ref), httpService (ref), mutedError (ref), promiseModule (ref), createComputed (ref)
-	local var1, var2 = createSignal({
+return function() --[[ Line: 88 | Named "createTimeoutStatusStore" ]]
+	-- upvalues: CreateSignalFunction (copy), CreateHttpStoreFunction (copy), SignalsModule (copy), Url (copy), HttpService (copy), MutedErrorFunction (copy), PromiseModule (copy), CreateComputedFunction (copy)
+	local Signal, Signal2 = CreateSignalFunction({
 		isTimedOut = false,
 		featureName = nil,
 		access = nil,
@@ -18,27 +18,27 @@ return function()
 		details = nil,
 		error = nil
 	})
-	local var3 = false
-	local var4 = false
-	local var5 = createHttpStore()
-	local var6 = nil
-	local var7 = nil
-	local _ = nil
-	local t = {}
+	local Flag = false
+	local Flag1 = false
+	local HttpStore = CreateHttpStoreFunction()
+	local Effect: (() -> ())? = nil
+	local Effect1: (() -> ())? = nil
+	local List = {}
 	
-	local function extractTimeoutAction(p1, p2)
+	local function extractTimeoutAction(p1, FeatureName) --[[ Line: 107 ]]
 		if not p1.features then
 			return nil
 		end
-		for i, v in p1.features do
-			if v.featureName == p2 and v.v2Recourses and #v.v2Recourses > 0 then
-				local var8 = v.v2Recourses[1]
+		local V2Recour = nil
+		for _, feature in p1.features do
+			if feature.featureName == FeatureName and feature.v2Recourses and #feature.v2Recourses > 0 then
+				local V2Recours = feature.v2Recourses[1]
 				
-				if var8 and #var8 > 0 then
-					local var9 = var8[1]
+				if V2Recours and #V2Recours > 0 then
+					V2Recour = V2Recours[1]
 					
-					if var9.timeoutActions and #var9.timeoutActions > 0 then
-						return var9.timeoutActions[1]
+					if V2Recour.timeoutActions and #V2Recour.timeoutActions > 0 then
+						return V2Recour.timeoutActions[1]
 					end
 				end
 			end
@@ -46,269 +46,280 @@ return function()
 		return nil
 	end
 	
-	local var10 = nil
-	local var11 = signalsModule.createEffect(function(p3)
-		-- upvalues: var1 (ref), var10 (write)
-		local var12 = var1(p3)
-		local var13 = if var12.details and var12.details.endDate then var12.details.endDate elseif var12.timeoutAction and var12.timeoutAction.endTime then var12.timeoutAction.endTime else nil
+	local Callback = nil
+	local Effect2 = SignalsModule.createEffect(function(p2) --[[ Line: 131 ]]
+		-- upvalues: Signal (copy), Callback (ref)
+		local SignalResult = Signal(p2)
+		local EndDate = if SignalResult.details and SignalResult.details.endDate then SignalResult.details.endDate elseif SignalResult.timeoutAction and SignalResult.timeoutAction.endTime then SignalResult.timeoutAction.endTime else nil
 		
-		if not var13 or var13 == "" then return end
-		local ok, status = pcall(function()
-			-- upvalues: var13 (ref)
-			return DateTime.fromIsoDate(var13)
+		if not EndDate or EndDate == "" then return end
+		local Success, Result = pcall(function() --[[ Line: 145 ]]
+			-- upvalues: EndDate (copy)
+			return DateTime.fromIsoDate(EndDate)
 		end)
 		
-		if not ok or not status then return end
-		local var14 = status.UnixTimestamp - DateTime.now().UnixTimestamp
+		if not Success or not Result then return end
+		local UnixTimestampDelta = Result.UnixTimestamp - DateTime.now().UnixTimestamp
 		
-		if var14 <= 0 then
-			var10()
+		if UnixTimestampDelta <= 0 then
+			Callback()
 			
 			return
 		end
-		local delayedThread = task.delay(var14, function()
-			-- upvalues: var10 (copy)
-			var10()
+		local DelayedThread = task.delay(UnixTimestampDelta, function() --[[ Line: 163 ]]
+			-- upvalues: Callback (upval)
+			Callback()
 		end)
 		
-		return function()
-			-- upvalues: delayedThread (ref)
-			if delayedThread then
-				task.cancel(delayedThread)
+		return function() --[[ Line: 168 ]]
+			-- upvalues: DelayedThread (copy)
+			if DelayedThread then
+				task.cancel(DelayedThread)
 			end
 		end
 	end)
 	
-	local function fetchTimeoutDetails(p3, p4)
-		-- upvalues: var4 (write), url (copy), var5 (ref), var7 (write), signalsModule (copy), httpService (copy), var1 (ref), var2 (ref), mutedError (copy)
-		if var4 then
-			p4()
+	local function fetchTimeoutDetails(FeatureVector, Callback: () -> ()) --[[ Line: 176 ]]
+		-- upvalues: Flag1 (ref), Url (upval), HttpStore (copy), Effect1 (ref), SignalsModule (upval), HttpService (upval), Signal (copy), Signal2 (copy), MutedErrorFunction (upval)
+		if Flag1 then
+			Callback()
 			
 			return
 		end
-		var4 = true
-		local var12, _ = var5.fetch("TimeoutDetails_" .. p3, {
+		Flag1 = true
+		local FetchResult, _ = HttpStore.fetch("TimeoutDetails_" .. FeatureVector, {
 			Method = "GET",
-			Url = string.format("%sv1/not-approved?abuseVector=%s", url.USER_MODERATION_URL, p3)
+			Url = string.format("%sv1/not-approved?abuseVector=%s", Url.USER_MODERATION_URL, FeatureVector)
 		})
 		
-		if var7 then
-			var7()
+		if Effect1 then
+			Effect1()
 		end
-		local function _()
-			-- upvalues: var4 (copy), p4 (ref)
-			var4 = false
-			p4()
+		local function _() --[[ Line: 196 | Named "complete" ]]
+			-- upvalues: Flag1 (upval), Callback (copy)
+			Flag1 = false
+			Callback()
 		end
 		
-		var7 = signalsModule.createEffect(function(p5)
-			-- upvalues: var12 (ref), httpService (copy), var1 (copy), var2 (copy), var4 (copy), p4 (ref), mutedError (copy)
-			local var13 = var12(p5)
+		Effect1 = SignalsModule.createEffect(function(p2) --[[ Line: 201 ]]
+			-- upvalues: FetchResult (copy), HttpService (upval), Signal (upval), Signal2 (upval), Flag1 (upval), Callback (copy), MutedErrorFunction (upval)
+			local Result = FetchResult(p2)
 			
-			if var13.status == "Success" then
-				local body = var13.response.Body
-				local ok, status = pcall(function()
-					-- upvalues: httpService (copy), body (ref)
-					return httpService:JSONDecode(body)
+			if Result.status == "Success" then
+				local Body = Result.response.Body
+				local Success, Result1 = pcall(function() --[[ Line: 205 ]]
+					-- upvalues: HttpService (upval), Body (copy)
+					return HttpService:JSONDecode(Body)
 				end)
 				
-				if ok and status then
-					local var14 = var1(p5)
-					var2({
+				if Success and Result1 then
+					local SignalResult = Signal(p2)
+					Signal2({
 						error = nil,
-						isTimedOut = var14.isTimedOut,
-						featureName = var14.featureName,
-						access = var14.access,
-						timeoutAction = var14.timeoutAction,
-						details = status
+						isTimedOut = SignalResult.isTimedOut,
+						featureName = SignalResult.featureName,
+						access = SignalResult.access,
+						timeoutAction = SignalResult.timeoutAction,
+						details = Result1
 					})
-					var4 = false
-					p4()
+					Flag1 = false
+					Callback()
+					
+					return
+				else
+					MutedErrorFunction("Failed to decode timeout details JSON response")
+					local SignalResult = Signal(p2)
+					Signal2({
+						details = nil,
+						error = "Failed to decode timeout details",
+						isTimedOut = SignalResult.isTimedOut,
+						featureName = SignalResult.featureName,
+						access = SignalResult.access,
+						timeoutAction = SignalResult.timeoutAction
+					})
+					Flag1 = false
+					Callback()
 					
 					return
 				end
-				mutedError("Failed to decode timeout details JSON response")
-				local var15 = var1(p5)
-				var2({
-					details = nil,
-					error = "Failed to decode timeout details",
-					isTimedOut = var15.isTimedOut,
-					featureName = var15.featureName,
-					access = var15.access,
-					timeoutAction = var15.timeoutAction
-				})
-				var4 = false
-				p4()
-				
-				return
-			elseif var13.status == "Failed" then
-				mutedError("Failed to fetch timeout details")
-				local var16 = var1(p5)
-				var2({
+			elseif Result.status == "Failed" then
+				MutedErrorFunction("Failed to fetch timeout details")
+				local SignalResult = Signal(p2)
+				Signal2({
 					details = nil,
 					error = "Failed to fetch timeout details",
-					isTimedOut = var16.isTimedOut,
-					featureName = var16.featureName,
-					access = var16.access,
-					timeoutAction = var16.timeoutAction
+					isTimedOut = SignalResult.isTimedOut,
+					featureName = SignalResult.featureName,
+					access = SignalResult.access,
+					timeoutAction = SignalResult.timeoutAction
 				})
-				var4 = false
-				p4()
+				Flag1 = false
+				Callback()
 			end
 		end)
 	end
 	
-	local function resolvePendingFetches()
-		-- upvalues: var1 (ref), t (write)
-		local var12 = var1(false)
+	local function resolvePendingFetches() --[[ Line: 251 ]]
+		-- upvalues: Signal (copy), List (ref)
+		local SignalResult = Signal(false)
 		
-		for i, v in t do
-			v(var12)
+		for _, value in List do
+			value(SignalResult)
 		end
-		t = {}
+		List = {}
 	end
 	
-	local function doFetchStatus(p3, p4)
-		-- upvalues: var3 (write), url (copy), var5 (ref), var6 (write), resolvePendingFetches (ref), signalsModule (copy), httpService (copy), extractTimeoutAction (ref), var2 (ref), fetchTimeoutDetails (ref), mutedError (copy)
-		if var3 then return end
-		var3 = true
-		p3 = p3 or "AvatarChange"
-		local var13, _ = var5.fetch("TimeoutStatus_" .. p6, {
+	local function doFetchStatus(p2, p3) --[[ Line: 259 ]]
+		-- upvalues: Flag (ref), Url (upval), HttpStore (copy), Effect (ref), resolvePendingFetches (copy), SignalsModule (upval), HttpService (upval), extractTimeoutAction (copy), Signal2 (copy), fetchTimeoutDetails (copy), MutedErrorFunction (upval)
+		if Flag then return end
+		Flag = true
+		local P5 = p2 or "AvatarChange"
+		local FetchResult, _ = HttpStore.fetch("TimeoutStatus_" .. P5, {
 			Method = "GET",
-			Url = string.format("%saccess-management/v1/feature-access?%s", url.APIS_URL, url:makeQueryString({
-				featureNames = p3,
-				nameSpace = p4 or "avatar_marketplace/AvatarMarketPlace"
+			Url = string.format("%saccess-management/v1/feature-access?%s", Url.APIS_URL, Url:makeQueryString({
+				featureNames = P5,
+				nameSpace = p3 or "avatar_marketplace/AvatarMarketPlace"
 			}))
 		})
 		
-		if var6 then
-			var6()
+		if Effect then
+			Effect()
 		end
-		local function complete()
-			-- upvalues: resolvePendingFetches (copy)
+		local function complete() --[[ Line: 288 ]]
+			-- upvalues: resolvePendingFetches (upval)
 			resolvePendingFetches()
 		end
 		
-		var6 = signalsModule.createEffect(function(p5)
-			-- upvalues: var13 (ref), httpService (copy), extractTimeoutAction (copy), p3 (ref), var2 (copy), var3 (copy), fetchTimeoutDetails (copy), complete (ref), resolvePendingFetches (copy), mutedError (copy)
-			local var14 = var13(p5)
+		Effect = SignalsModule.createEffect(function(p4) --[[ Line: 292 ]]
+			-- upvalues: FetchResult (copy), HttpService (upval), extractTimeoutAction (upval), P5 (copy), Signal2 (upval), Flag (upval), fetchTimeoutDetails (upval), complete (copy), resolvePendingFetches (upval), MutedErrorFunction (upval)
+			local Result = FetchResult(p4)
 			
-			if var14.status == "Success" then
-				local body = var14.response.Body
-				local ok, status = pcall(function()
-					-- upvalues: httpService (copy), body (ref)
-					return httpService:JSONDecode(body)
+			if Result.status == "Success" then
+				local Body = Result.response.Body
+				local Success, Result1 = pcall(function() --[[ Line: 296 ]]
+					-- upvalues: HttpService (upval), Body (copy)
+					return HttpService:JSONDecode(Body)
 				end)
 				
-				if not ok or not status then
-					mutedError("Failed to decode timeout status JSON response")
-					var2({
+				if not Success or not Result1 then
+					MutedErrorFunction("Failed to decode timeout status JSON response")
+					Signal2({
 						isTimedOut = false,
 						access = nil,
 						timeoutAction = nil,
 						details = nil,
 						error = "Failed to decode timeout status",
-						featureName = p3
+						featureName = P5
 					})
-					var3 = false
+					Flag = false
 					resolvePendingFetches()
 					
 					return
 				end
-				local var15 = extractTimeoutAction(status, p3)
-				local var16 = var15 ~= nil
-				local access = nil
+				local ExtractTimeoutActionResult = extractTimeoutAction(Result1, P5)
+				local HasExtractTimeoutActionResult = ExtractTimeoutActionResult ~= nil
+				local Access = nil
 				
-				if status.features then
-					for i, v in status.features do
-						if v.featureName == p3 then
-							access = v.access
+				if Result1.features then
+					for _, feature in Result1.features do
+						if feature.featureName == P5 then
+							Access = feature.access
 							break
 						end
 					end
 				end
-				var2({
+				Signal2({
 					details = nil,
 					error = nil,
-					isTimedOut = var16,
-					featureName = p3,
-					access = access,
-					timeoutAction = var15
+					isTimedOut = HasExtractTimeoutActionResult,
+					featureName = P5,
+					access = Access,
+					timeoutAction = ExtractTimeoutActionResult
 				})
-				var3 = false
+				Flag = false
 				
-				if var16 and var15 then
-					fetchTimeoutDetails(var15.featureVector or "avatar_change", complete)
+				if HasExtractTimeoutActionResult and ExtractTimeoutActionResult then
+					fetchTimeoutDetails(ExtractTimeoutActionResult.featureVector or "avatar_change", complete)
+					
+					return
+				else
+					resolvePendingFetches()
 					
 					return
 				end
-				resolvePendingFetches()
-				
-				return
-			elseif var14.status == "Failed" then
-				mutedError("Failed to fetch timeout status")
-				var2({
+			elseif Result.status == "Failed" then
+				MutedErrorFunction("Failed to fetch timeout status")
+				Signal2({
 					isTimedOut = false,
 					access = nil,
 					timeoutAction = nil,
 					details = nil,
 					error = "Failed to fetch timeout status",
-					featureName = p3
+					featureName = P5
 				})
-				var3 = false
+				Flag = false
 				resolvePendingFetches()
 			end
 		end)
 	end
 	
+	local function fetchStatus(p4, p5) --[[ Line: 361 ]]
+		-- upvalues: doFetchStatus (copy)
+		doFetchStatus(p4, p5)
+	end
+	
+	local function fetchStatusAsync(p4, p5) --[[ Line: 365 ]]
+		-- upvalues: PromiseModule (upval), List (ref), doFetchStatus (copy)
+		return PromiseModule.new(function(p6) --[[ Line: 366 ]]
+			-- upvalues: List (upval), doFetchStatus (upval), p4 (copy), p5 (copy)
+			table.insert(List, p6)
+			doFetchStatus(p4, p5)
+		end)
+	end
+	
+	local Computed = CreateComputedFunction(function(p4) --[[ Line: 373 ]]
+		-- upvalues: Signal (copy)
+		return Signal(p4).isTimedOut
+	end)
+	local Computed1 = CreateComputedFunction(function(p4) --[[ Line: 377 ]]
+		-- upvalues: Signal (copy)
+		return Signal(p4).details
+	end)
+	
+	Callback = function() --[[ Line: 388 ]]
+		-- upvalues: Effect1 (ref), Effect (ref), Flag1 (ref), Flag (ref), Signal2 (copy), resolvePendingFetches (copy)
+		if Effect1 then
+			Effect1()
+			Effect1 = nil
+		end
+		if Effect then
+			Effect()
+			Effect = nil
+		end
+		Flag1 = false
+		Flag = false
+		Signal2({
+			isTimedOut = false,
+			featureName = nil,
+			access = nil,
+			timeoutAction = nil,
+			details = nil,
+			error = nil
+		})
+		resolvePendingFetches()
+	end
+	
 	return {
-		getStatus = var1,
-		getIsTimedOut = createComputed(function(p5)
-			-- upvalues: var1 (ref)
-			return var1(p5).isTimedOut
-		end),
-		getTimeoutDetails = createComputed(function(p5)
-			-- upvalues: var1 (ref)
-			return var1(p5).details
-		end),
-		fetchStatus = function(p5, p6)
-			-- upvalues: doFetchStatus (ref)
-			doFetchStatus(p5, p6)
+		getStatus = Signal,
+		getIsTimedOut = Computed,
+		getTimeoutDetails = Computed1,
+		fetchStatus = fetchStatus,
+		fetchStatusAsync = fetchStatusAsync,
+		setStatus = function(p4) --[[ Line: 382 ]]
+			-- upvalues: Signal2 (copy)
+			Signal2(p4)
 		end,
-		fetchStatusAsync = function(p5, p6)
-			-- upvalues: promiseModule (copy), t (write), doFetchStatus (ref)
-			return promiseModule.new(function(p7)
-				-- upvalues: t (copy), doFetchStatus (copy), p5 (ref), p6 (ref)
-				table.insert(t, p7)
-				doFetchStatus(p5, p6)
-			end)
-		end,
-		setStatus = function(value)
-			-- upvalues: var2 (ref)
-			var2(value)
-		end,
-		clearStatus = function()
-			-- upvalues: var7 (write), var6 (write), var4 (write), var3 (write), var2 (ref), resolvePendingFetches (ref)
-			if var7 then
-				var7()
-				var7 = nil
-			end
-			if var6 then
-				var6()
-				var6 = nil
-			end
-			var4 = false
-			var3 = false
-			var2({
-				isTimedOut = false,
-				featureName = nil,
-				access = nil,
-				timeoutAction = nil,
-				details = nil,
-				error = nil
-			})
-			resolvePendingFetches()
-		end,
-		effectDispose = var11
+		clearStatus = Callback,
+		effectDispose = Effect2
 	}
 end

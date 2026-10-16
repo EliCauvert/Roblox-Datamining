@@ -1,72 +1,72 @@
-﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local presenceType = require(parent.DataHydration).Presence.PresenceEnums.PresenceType
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local _ = require(parent.SduiCoreSystem)
-local useGetOnlineFriends = require(parent.FriendsHydrationReact).useGetOnlineFriends
-local fFlagSduiSocialDataMigrateOffLegacyPresence = require(parent.SharedFlags).FFlagSduiSocialDataMigrateOffLegacyPresence
+﻿local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local PresenceType = require(Parent.DataHydration).Presence.PresenceEnums.PresenceType
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local _ = require(Parent.SduiCoreSystem)
+local UseGetOnlineFriendsFunction = require(Parent.FriendsHydrationReact).useGetOnlineFriends
+local FFlagSduiSocialDataMigrateOffLegacyPresence = require(Parent.SharedFlags).FFlagSduiSocialDataMigrateOffLegacyPresence
 
-local function useOnlineFriendsInGameByUniverseId()
-	-- upvalues: useGetOnlineFriends (ref), reactModule (ref), presenceType (ref)
-	local var1 = useGetOnlineFriends()
+local function useOnlineFriendsInGameByUniverseId() --[[ Line: 24 ]]
+	-- upvalues: UseGetOnlineFriendsFunction (copy), ReactModule (copy), PresenceType (copy)
+	local UseGetOnlineFriendsResult = UseGetOnlineFriendsFunction()
 	
-	return reactModule.useMemo(function()
-		-- upvalues: var1 (ref), presenceType (copy)
+	return ReactModule.useMemo(function() --[[ Line: 27 ]]
+		-- upvalues: UseGetOnlineFriendsResult (copy), PresenceType (upval)
 		local t = {}
-		
-		for i, v in var1 or {} do
-			local presence = v.presence
+		local UseGetOnlineFriendsResult1 = UseGetOnlineFriendsResult or {}
+		for _, value in UseGetOnlineFriendsResult1 do
+			local Presence = value.presence
 			
-			if presence and presence.userPresenceType == presenceType.InGame and (presence.universeId and presence.universeId ~= "") then
-				local universeId = t[presence.universeId] or {}
-				universeId[v.id] = v.id
-				t[presence.universeId] = universeId
+			if Presence and Presence.userPresenceType == PresenceType.InGame and Presence.universeId and Presence.universeId ~= "" then
+				local Entry = t[Presence.universeId] or {}
+				Entry[value.id] = value.id
+				t[Presence.universeId] = Entry
 			end
 		end
 		return t
-	end, { var1 })
+	end, { UseGetOnlineFriendsResult })
 end
 
-local function useFriendsInGame()
-	-- upvalues: useSelector (ref), reactModule (ref)
-	local var2 = useSelector(function(p1)
+local function useFriendsInGame() --[[ Line: 47 ]]
+	-- upvalues: UseSelectorFunction (copy), ReactModule (copy)
+	local UseSelectorResult = UseSelectorFunction(function(p1) --[[ Line: 48 ]]
 		return p1.LocalUserId
 	end)
-	local var3 = useSelector(function(p1)
+	local UseSelectorResult1 = UseSelectorFunction(function(p1) --[[ Line: 52 ]]
 		return p1.InGameUsersByGame
 	end)
 	
-	return reactModule.useMemo(function()
-		-- upvalues: var3 (ref), var2 (ref)
+	return ReactModule.useMemo(function() --[[ Line: 56 ]]
+		-- upvalues: UseSelectorResult1 (copy), UseSelectorResult (copy)
 		local t = {}
 		
-		for i, v in var3 do
-			local t_1 = {}
+		for i, value in UseSelectorResult1 do
+			local t1 = {}
 			
-			for i_1, v_1 in v do
-				if i_1 ~= tostring(var2) then
-					t_1[i_1] = i_1
+			for i1, _ in value do
+				if i1 ~= tostring(UseSelectorResult) then
+					t1[i1] = i1
 				end
 			end
-			if next(t_1) then
-				t[tostring(i)] = t_1
+			if next(t1) then
+				t[tostring(i)] = t1
 			end
 		end
 		return t
-	end, { var2, var3 })
+	end, { UseSelectorResult, UseSelectorResult1 })
 end
 
-return function()
-	-- upvalues: reactModule (ref), signalsModule (ref), fFlagSduiSocialDataMigrateOffLegacyPresence (ref), useOnlineFriendsInGameByUniverseId (ref), useFriendsInGame (ref)
-	local var4, var5 = reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy)
-		return signalsModule.createSignal({})
+return function() --[[ Line: 74 | Named "useSduiSocialData" ]]
+	-- upvalues: ReactModule (copy), SignalsModule (copy), FFlagSduiSocialDataMigrateOffLegacyPresence (copy), useOnlineFriendsInGameByUniverseId (copy), useFriendsInGame (copy)
+	local UseMemoResult, UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 75 ]]
+		-- upvalues: SignalsModule (upval)
+		return SignalsModule.createSignal({})
 	end, {})
-	var5(if fFlagSduiSocialDataMigrateOffLegacyPresence then useOnlineFriendsInGameByUniverseId() else useFriendsInGame())
+	UseMemoResult2(if FFlagSduiSocialDataMigrateOffLegacyPresence then useOnlineFriendsInGameByUniverseId() else useFriendsInGame())
 	
-	return reactModule.useMemo(function()
-		-- upvalues: var4 (ref)
-		return { getInGameFriendsByGame = var4 }
-	end, { var4 })
+	return ReactModule.useMemo(function() --[[ Line: 85 ]]
+		-- upvalues: UseMemoResult (copy)
+		return { getInGameFriendsByGame = UseMemoResult }
+	end, { UseMemoResult })
 end

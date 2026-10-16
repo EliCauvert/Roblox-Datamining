@@ -1,101 +1,102 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local promiseModule = require(dataHydration.Parent.Promise)
-local createDataCacheModule = require(dataHydration.createDataCache)
-local _ = require(dataHydration.DataHydrationTypes)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local PromiseModule = require(DataHydration.Parent.Promise)
+local CreateDataCacheModule = require(DataHydration.createDataCache)
+local _ = require(DataHydration.DataHydrationTypes)
 local _ = require(script.Parent.MarketplaceBundleStoreTypes)
-local createDataResolverModule = require(dataHydration.createDataResolver)
+local CreateDataResolverModule = require(DataHydration.createDataResolver)
 
-local function normalizeTaxonomy(p1)
-	if not p1 then
+local function normalizeTaxonomy(Taxonomy) --[[ Line: 28 ]]
+	if not Taxonomy then
 		return nil
 	end
-	local list = table.create(#p1)
+	local Buffer = table.create(#Taxonomy)
 	
-	for i, v in p1 do
-		table.insert(list, {
-			taxonomyId = if v.taxonomyId ~= nil then v.taxonomy_id else v.taxonomyId,
-			taxonomyName = if v.taxonomyName ~= nil then v.taxonomy_name else v.taxonomyName
+	for _, value in Taxonomy do
+		table.insert(Buffer, {
+			taxonomyId = if value.taxonomyId == nil then value.taxonomy_id else value.taxonomyId,
+			taxonomyName = if value.taxonomyName == nil then value.taxonomy_name else value.taxonomyName
 		})
 	end
-	return list
+	return Buffer
 end
 
-local function normalizeBundledItems(p2)
-	if not p2 then
+local function normalizeBundledItems(BundledItems) --[[ Line: 42 ]]
+	if not BundledItems then
 		return nil
 	end
-	local list = table.create(#p2)
+	local Buffer = table.create(#BundledItems)
 	
-	for i, v in p2 do
-		table.insert(list, {
-			id = v.id,
-			assetType = if v.assetType ~= nil then v.asset_type else v.assetType,
-			type = v.type
+	for _, bundledItem in BundledItems do
+		table.insert(Buffer, {
+			id = bundledItem.id,
+			assetType = if bundledItem.assetType == nil then bundledItem.asset_type else bundledItem.assetType,
+			type = bundledItem.type
 		})
 	end
-	return list
+	return Buffer
 end
 
-local function _(p3)
-	-- upvalues: normalizeTaxonomy (ref), normalizeBundledItems (ref)
-	if not p3.taxonomy and not p3.bundledItems then
-		return p3
+local function _(Tbl) --[[ Line: 61 | Named "normalizeBundle" ]]
+	-- upvalues: normalizeTaxonomy (copy), normalizeBundledItems (copy)
+	if not Tbl.taxonomy and not Tbl.bundledItems then
+		return Tbl
 	end
-	local cloned = table.clone(p3)
+	local Copy = table.clone(Tbl)
 	
-	if p3.taxonomy then
-		cloned.taxonomy = normalizeTaxonomy(p3.taxonomy)
+	if Tbl.taxonomy then
+		Copy.taxonomy = normalizeTaxonomy(Tbl.taxonomy)
 	end
-	if p3.bundledItems then
-		cloned.bundledItems = normalizeBundledItems(p3.bundledItems)
+	if Tbl.bundledItems then
+		Copy.bundledItems = normalizeBundledItems(Tbl.bundledItems)
 	end
-	return cloned
+	return Copy
 end
 
-return function()
-	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), promiseModule (ref), normalizeTaxonomy (ref), normalizeBundledItems (ref)
-	local var1 = createDataCacheModule()
-	local var2 = createDataResolverModule({
-		cache = var1,
-		fetchFn = function(_)
-			-- upvalues: promiseModule (copy)
-			return promiseModule.resolve({})
+return function() --[[ Line: 75 | Named "createMarketplaceBundleStore" ]]
+	-- upvalues: CreateDataCacheModule (copy), CreateDataResolverModule (copy), PromiseModule (copy), normalizeTaxonomy (copy), normalizeBundledItems (copy)
+	local DataCacheModule = CreateDataCacheModule()
+	local DataResolverModule = CreateDataResolverModule({
+		cache = DataCacheModule,
+		fetchFn = function(_) --[[ Line: 79 ]]
+			-- upvalues: PromiseModule (upval)
+			return PromiseModule.resolve({})
 		end
 	})
 	
 	return {
-		getMarketplaceBundleInfo = var2.getCachedItem,
-		getMarketplaceBundleInfos = var2.getCachedItems,
-		getNormalizedMarketplaceBundleInfo = function(p3)
-			-- upvalues: var2 (ref), normalizeTaxonomy (copy), normalizeBundledItems (copy)
-			local cachedItem = var2.getCachedItem(p3)
+		getMarketplaceBundleInfo = DataResolverModule.getCachedItem,
+		getMarketplaceBundleInfos = DataResolverModule.getCachedItems,
+		getNormalizedMarketplaceBundleInfo = function(p1) --[[ Line: 87 ]]
+			-- upvalues: DataResolverModule (copy), normalizeTaxonomy (upval), normalizeBundledItems (upval)
+			local CachedItem = DataResolverModule.getCachedItem(p1)
 			
 			return {
-				data = function(p4)
-					-- upvalues: cachedItem (ref), normalizeTaxonomy (copy), normalizeBundledItems (copy)
-					local var3 = cachedItem.data(p4)
+				data = function(p2) --[[ Line: 90 ]]
+					-- upvalues: CachedItem (copy), normalizeTaxonomy (upval), normalizeBundledItems (upval)
+					local DataResult = CachedItem.data(p2)
 					
-					if not var3 then
+					if not DataResult then
 						return nil
-					elseif not var3.taxonomy and not var3.bundledItems then
-						return var3
 					end
-					local cloned = table.clone(var3)
+					if not DataResult.taxonomy and not DataResult.bundledItems then
+						return DataResult
+					end
+					local Copy = table.clone(DataResult)
 					
-					if var3.taxonomy then
-						cloned.taxonomy = normalizeTaxonomy(var3.taxonomy)
+					if DataResult.taxonomy then
+						Copy.taxonomy = normalizeTaxonomy(DataResult.taxonomy)
 					end
-					if var3.bundledItems then
-						cloned.bundledItems = normalizeBundledItems(var3.bundledItems)
+					if DataResult.bundledItems then
+						Copy.bundledItems = normalizeBundledItems(DataResult.bundledItems)
 					end
-					return cloned
+					return Copy
 				end,
-				status = cachedItem.status
+				status = CachedItem.status
 			}
 		end,
-		updateMarketplaceBundleInfo = var1.updateItem,
-		updateMarketplaceBundleInfos = var1.updateItems,
-		clear = var1.clear,
-		dispose = var1.dispose
+		updateMarketplaceBundleInfo = DataCacheModule.updateItem,
+		updateMarketplaceBundleInfos = DataCacheModule.updateItems,
+		clear = DataCacheModule.clear,
+		dispose = DataCacheModule.dispose
 	}
 end

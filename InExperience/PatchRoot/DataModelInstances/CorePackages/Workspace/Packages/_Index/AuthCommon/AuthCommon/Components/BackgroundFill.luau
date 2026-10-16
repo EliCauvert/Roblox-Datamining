@@ -1,11 +1,11 @@
-﻿local parent = script:FindFirstAncestor("AuthCommon").Parent
-local foundationModule = require(parent.Foundation)
-local roactModule = require(parent.Roact)
-local backgroundFill = roactModule.PureComponent:extend("BackgroundFill")
+﻿local Parent = script:FindFirstAncestor("AuthCommon").Parent
+local FoundationModule = require(Parent.Foundation)
+local RoactModule = require(Parent.Roact)
+local BackgroundFill = RoactModule.PureComponent:extend("BackgroundFill")
 
-function backgroundFill.render(p1)
-	-- upvalues: roactModule (ref), foundationModule (ref)
-	return roactModule.createElement(foundationModule.Image, {
+function BackgroundFill.render(p1) --[[ Line: 8 ]]
+	-- upvalues: RoactModule (copy), FoundationModule (copy)
+	return RoactModule.createElement(FoundationModule.Image, {
 		BorderSizePixel = 0,
 		Image = p1.props.Image,
 		Size = UDim2.new(1, 0, 1, 0),
@@ -15,4 +15,4 @@ function backgroundFill.render(p1)
 	})
 end
 
-return backgroundFill
+return BackgroundFill

@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.VirtualizedList.VirtualizedList)
+﻿return (require(script.Parent.Parent.Parent._Index.VirtualizedList.VirtualizedList))

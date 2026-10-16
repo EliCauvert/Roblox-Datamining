@@ -1,1 +1,3 @@
-﻿return game:DefineFastFlag("AppChatMomentShareCardEdgeCases", false) and require(script:FindFirstAncestor("AppChat").Flags.FFlagAppChatMomentShareCard)
+﻿local FFlagAppChatMomentShareCardModule = require(script:FindFirstAncestor("AppChat").Flags.FFlagAppChatMomentShareCard)
+
+return game:DefineFastFlag("AppChatMomentShareCardEdgeCases", false) and FFlagAppChatMomentShareCardModule

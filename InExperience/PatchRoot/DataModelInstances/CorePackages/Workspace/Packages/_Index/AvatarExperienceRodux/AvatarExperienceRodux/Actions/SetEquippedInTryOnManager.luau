@@ -1,6 +1,10 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceRodux").Parent
-local _ = require(parent.AvatarExperienceModel)
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceRodux").Parent
+local _ = require(Parent.AvatarExperienceModel)
 
-return require(parent.Rodux).makeActionCreator(script.Name, function(p1, p2, p3)
-	return { itemId = p1, selectedInTryOnManager = p2, itemType = p3 }
+return require(Parent.Rodux).makeActionCreator(script.Name, function(ItemId, SelectedInTryOnManager, ItemType) --[[ Line: 13 ]]
+	return {
+		itemId = ItemId,
+		selectedInTryOnManager = SelectedInTryOnManager,
+		itemType = ItemType
+	}
 end)

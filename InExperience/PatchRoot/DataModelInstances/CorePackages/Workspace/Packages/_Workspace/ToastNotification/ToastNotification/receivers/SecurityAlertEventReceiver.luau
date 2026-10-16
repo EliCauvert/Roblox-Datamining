@@ -1,41 +1,41 @@
-﻿local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local getFFlagGenerateLinkWithChannel = require(parent_1.SharedFlags).GetFFlagGenerateLinkWithChannel
-local webViewServiceWrapperModule = require(parent.utils.WebViewServiceWrapper)
-local reactModule = require(parent_1.React)
-local urlBuilder = require(parent_1.UrlBuilder).UrlBuilder
-local lifecycleEventsModule = require(parent.utils.LifecycleEvents)
-local notificationTypeEnum = require(parent.type).NotificationTypeEnum
-local default = require(parent_1.ToastNotificationsProtocol).ToastNotificationProtocol.default
-local localizationService = game:GetService("LocalizationService")
-local localization = require(parent_1.RobloxAppLocales).Localization
+﻿local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local GetFFlagGenerateLinkWithChannelFunction = require(Parent1.SharedFlags).GetFFlagGenerateLinkWithChannel
+local WebViewServiceWrapperModule = require(Parent.utils.WebViewServiceWrapper)
+local ReactModule = require(Parent1.React)
+local UrlBuilder = require(Parent1.UrlBuilder).UrlBuilder
+local LifecycleEventsModule = require(Parent.utils.LifecycleEvents)
+local NotificationTypeEnum = require(Parent.type).NotificationTypeEnum
+local Default = require(Parent1.ToastNotificationsProtocol).ToastNotificationProtocol.default
+local LocalizationService = game:GetService("LocalizationService")
+local Localization = require(Parent1.RobloxAppLocales).Localization
 
-return function()
-	-- upvalues: reactModule (ref), lifecycleEventsModule (ref), notificationTypeEnum (ref), getFFlagGenerateLinkWithChannel (ref), urlBuilder (ref), localization (ref), localizationService (ref), webViewServiceWrapperModule (ref), default (ref)
-	reactModule.useEffect(function()
-		-- upvalues: lifecycleEventsModule (copy), notificationTypeEnum (copy), getFFlagGenerateLinkWithChannel (copy), urlBuilder (copy), localization (copy), localizationService (copy), webViewServiceWrapperModule (copy), default (copy)
-		local userAction = lifecycleEventsModule:RegisterCallback(lifecycleEventsModule.ToastEvents.UserAction, notificationTypeEnum.SecurityAlert, function(p1)
-			-- upvalues: getFFlagGenerateLinkWithChannel (copy), urlBuilder (copy), localization (copy), localizationService (copy), webViewServiceWrapperModule (copy), default (copy)
-			if p1 and p1.notificationData and (p1.notificationData.notificationType and p1.notificationData.clientEventsPayload) and (p1.notificationData.clientEventsPayload.payload and p1.notificationData.clientEventsPayload.username) then
-				local payload = p1.notificationData.clientEventsPayload.payload
-				local username = p1.notificationData.clientEventsPayload.username
-				webViewServiceWrapperModule.new({
-					title = localization.new(localizationService.RobloxLocaleId):Format("Feature.SecurityFeedback.Header.NewLogin"),
-					url = if getFFlagGenerateLinkWithChannel() then urlBuilder.static.securityAlertWithChannel({
+return function() --[[ Line: 19 | Named "SecurityEventReceiver" ]]
+	-- upvalues: ReactModule (copy), LifecycleEventsModule (copy), NotificationTypeEnum (copy), GetFFlagGenerateLinkWithChannelFunction (copy), UrlBuilder (copy), Localization (copy), LocalizationService (copy), WebViewServiceWrapperModule (copy), Default (copy)
+	ReactModule.useEffect(function() --[[ Line: 20 ]]
+		-- upvalues: LifecycleEventsModule (upval), NotificationTypeEnum (upval), GetFFlagGenerateLinkWithChannelFunction (upval), UrlBuilder (upval), Localization (upval), LocalizationService (upval), WebViewServiceWrapperModule (upval), Default (upval)
+		local RegisterResult = LifecycleEventsModule:RegisterCallback(LifecycleEventsModule.ToastEvents.UserAction, NotificationTypeEnum.SecurityAlert, function(p1) --[[ Line: 24 ]]
+			-- upvalues: GetFFlagGenerateLinkWithChannelFunction (upval), UrlBuilder (upval), Localization (upval), LocalizationService (upval), WebViewServiceWrapperModule (upval), Default (upval)
+			if p1 and p1.notificationData and p1.notificationData.notificationType and p1.notificationData.clientEventsPayload and p1.notificationData.clientEventsPayload.payload and p1.notificationData.clientEventsPayload.username then
+				local Payload = p1.notificationData.clientEventsPayload.payload
+				local Username = p1.notificationData.clientEventsPayload.username
+				WebViewServiceWrapperModule.new({
+					title = Localization.new(LocalizationService.RobloxLocaleId):Format("Feature.SecurityFeedback.Header.NewLogin"),
+					url = if GetFFlagGenerateLinkWithChannelFunction() then UrlBuilder.static.securityAlertWithChannel({
 						channel = "toast",
-						payload = payload,
-						username = username
-					}) else urlBuilder.static.securityAlert({ payload = payload, username = username })
+						payload = Payload,
+						username = Username
+					}) else UrlBuilder.static.securityAlert({ payload = Payload, username = Username })
 				}):open()
-				default:dismissNotification(p1.notificationData.id)
+				Default:dismissNotification(p1.notificationData.id)
 				
 				return
 			end
 		end)
 		
-		return function()
-			-- upvalues: userAction (ref)
-			userAction()
+		return function() --[[ Line: 65 ]]
+			-- upvalues: RegisterResult (copy)
+			RegisterResult()
 		end
 	end, {})
 end

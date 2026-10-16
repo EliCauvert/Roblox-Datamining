@@ -1,13 +1,13 @@
-﻿local parent = script.Parent
-local foundationModule = require(parent.Parent.Foundation)
-local extraKeysEnumModule = require(parent.Enums.ExtraKeysEnum)
-local touchControlsEnumModule = require(parent.Enums.TouchControlsEnum)
-local enums = foundationModule.Enums
-local iconName = foundationModule.Enums.IconName
-local t = {
-	ZOOM = enums.IconName.HandDualArrows,
-	TAP = enums.IconName.HandHalfEllipse,
-	ROTATE = enums.IconName.HandCurvedArrowLeft
+﻿local Parent = script.Parent
+local FoundationModule = require(Parent.Parent.Foundation)
+local ExtraKeysEnumModule = require(Parent.Enums.ExtraKeysEnum)
+local TouchControlsEnumModule = require(Parent.Enums.TouchControlsEnum)
+local Enums = FoundationModule.Enums
+local IconName = FoundationModule.Enums.IconName
+local config = {
+	ZOOM = Enums.IconName.HandDualArrows,
+	TAP = Enums.IconName.HandHalfEllipse,
+	ROTATE = Enums.IconName.HandCurvedArrowLeft
 }
 
 return {
@@ -19,7 +19,7 @@ return {
 			TEXT = "CoreScripts.Feedback.Help.MainHeader"
 		},
 		KEYCODES_LOCALIZED = {
-			[extraKeysEnumModule.MouseWheel] = "CoreScripts.InGameMenu.Controls.MouseWheel",
+			[ExtraKeysEnumModule.MouseWheel] = "CoreScripts.InGameMenu.Controls.MouseWheel",
 			[Enum.KeyCode.Up] = "CoreScripts.InGameMenu.Controls.UpArrow",
 			[Enum.KeyCode.Down] = "CoreScripts.InGameMenu.Controls.DownArrow",
 			[Enum.KeyCode.Left] = "CoreScripts.InGameMenu.Controls.LeftArrow",
@@ -31,8 +31,8 @@ return {
 			[Enum.KeyCode.LeftShift] = "CoreScripts.InGameMenu.Controls.Shift"
 		},
 		KEYCODES_UNLOCALIZED = {
-			[extraKeysEnumModule.Fn] = "Fn",
-			[extraKeysEnumModule.NumSequence] = "1,2,3...",
+			[ExtraKeysEnumModule.Fn] = "Fn",
+			[ExtraKeysEnumModule.NumSequence] = "1,2,3...",
 			[Enum.KeyCode.LeftControl] = "Ctrl",
 			[Enum.KeyCode.LeftAlt] = "Alt",
 			[Enum.KeyCode.RightAlt] = "Opt",
@@ -53,7 +53,7 @@ return {
 			[Enum.KeyCode.F12] = "F12"
 		},
 		KEYCODE_ORDER = {
-			[extraKeysEnumModule.Fn] = 1,
+			[ExtraKeysEnumModule.Fn] = 1,
 			[Enum.KeyCode.LeftControl] = 2,
 			[Enum.KeyCode.LeftAlt] = 3,
 			[Enum.KeyCode.RightAlt] = 4,
@@ -75,10 +75,10 @@ return {
 			[Enum.KeyCode.Left] = 161,
 			[Enum.KeyCode.Right] = 162,
 			[Enum.KeyCode.Down] = 163,
-			[extraKeysEnumModule.NumSequence] = 164,
+			[ExtraKeysEnumModule.NumSequence] = 164,
 			[Enum.KeyCode.MouseLeftButton] = 165,
 			[Enum.KeyCode.MouseMiddleButton] = 166,
-			[extraKeysEnumModule.MouseWheel] = 167,
+			[ExtraKeysEnumModule.MouseWheel] = 167,
 			[Enum.KeyCode.MouseRightButton] = 168
 		},
 		SEPARATORS = { COMBO = " + ", ALTERNATIVE = "/" },
@@ -91,13 +91,13 @@ return {
 			[Enum.KeyCode.ButtonL2] = 1,
 			[Enum.KeyCode.ButtonL1] = 2,
 			[Enum.KeyCode.ButtonSelect] = 3,
-			[extraKeysEnumModule.TouchPad] = 4,
+			[ExtraKeysEnumModule.TouchPad] = 4,
 			[Enum.KeyCode.Thumbstick1] = 5,
 			[Enum.KeyCode.DPadUp] = 6,
 			[Enum.KeyCode.DPadLeft] = 7,
 			[Enum.KeyCode.DPadRight] = 8,
 			[Enum.KeyCode.DPadDown] = 9,
-			[extraKeysEnumModule.DPad] = 10,
+			[ExtraKeysEnumModule.DPad] = 10,
 			[Enum.KeyCode.ButtonL3] = 11,
 			[Enum.KeyCode.ButtonR3] = 12,
 			[Enum.KeyCode.Thumbstick2] = 13,
@@ -110,63 +110,63 @@ return {
 			[Enum.KeyCode.ButtonR2] = 20
 		},
 		GAMEPAD_ICON_MAP_XBOX = {
-			[Enum.KeyCode.ButtonL2] = iconName.XboxLt,
-			[Enum.KeyCode.ButtonL1] = iconName.XboxLb,
-			[Enum.KeyCode.ButtonSelect] = iconName.XboxView,
-			[Enum.KeyCode.DPadUp] = iconName.XboxDpadUp,
-			[Enum.KeyCode.DPadLeft] = iconName.XboxDpadLeft,
-			[Enum.KeyCode.DPadRight] = iconName.XboxDpadRight,
-			[Enum.KeyCode.DPadDown] = iconName.XboxDpadDown,
-			[extraKeysEnumModule.DPad] = iconName.XboxDpad,
-			[Enum.KeyCode.Thumbstick1] = iconName.XboxStickLeftDirectional,
-			[Enum.KeyCode.ButtonL3] = iconName.XboxStickLeft,
-			[Enum.KeyCode.ButtonR3] = iconName.XboxStickRight,
-			[Enum.KeyCode.Thumbstick2] = iconName.XboxStickRightDirectional,
-			[Enum.KeyCode.ButtonA] = iconName.XboxA,
-			[Enum.KeyCode.ButtonX] = iconName.XboxX,
-			[Enum.KeyCode.ButtonB] = iconName.XboxB,
-			[Enum.KeyCode.ButtonY] = iconName.XboxY,
-			[Enum.KeyCode.ButtonStart] = iconName.XboxMenu,
-			[Enum.KeyCode.ButtonR1] = iconName.XboxRb,
-			[Enum.KeyCode.ButtonR2] = iconName.XboxRt
+			[Enum.KeyCode.ButtonL2] = IconName.XboxLt,
+			[Enum.KeyCode.ButtonL1] = IconName.XboxLb,
+			[Enum.KeyCode.ButtonSelect] = IconName.XboxView,
+			[Enum.KeyCode.DPadUp] = IconName.XboxDpadUp,
+			[Enum.KeyCode.DPadLeft] = IconName.XboxDpadLeft,
+			[Enum.KeyCode.DPadRight] = IconName.XboxDpadRight,
+			[Enum.KeyCode.DPadDown] = IconName.XboxDpadDown,
+			[ExtraKeysEnumModule.DPad] = IconName.XboxDpad,
+			[Enum.KeyCode.Thumbstick1] = IconName.XboxStickLeftDirectional,
+			[Enum.KeyCode.ButtonL3] = IconName.XboxStickLeft,
+			[Enum.KeyCode.ButtonR3] = IconName.XboxStickRight,
+			[Enum.KeyCode.Thumbstick2] = IconName.XboxStickRightDirectional,
+			[Enum.KeyCode.ButtonA] = IconName.XboxA,
+			[Enum.KeyCode.ButtonX] = IconName.XboxX,
+			[Enum.KeyCode.ButtonB] = IconName.XboxB,
+			[Enum.KeyCode.ButtonY] = IconName.XboxY,
+			[Enum.KeyCode.ButtonStart] = IconName.XboxMenu,
+			[Enum.KeyCode.ButtonR1] = IconName.XboxRb,
+			[Enum.KeyCode.ButtonR2] = IconName.XboxRt
 		},
 		GAMEPAD_ICON_MAP_PLAYSTATION = {
-			[Enum.KeyCode.ButtonL2] = iconName.PsL2,
-			[Enum.KeyCode.ButtonL1] = iconName.PsL1,
-			[Enum.KeyCode.ButtonSelect] = iconName.Ps4Share,
-			[extraKeysEnumModule.TouchPad] = iconName.Ps4Touchpad,
-			[Enum.KeyCode.DPadUp] = iconName.PsDpadUp,
-			[Enum.KeyCode.DPadLeft] = iconName.PsDpadLeft,
-			[Enum.KeyCode.DPadRight] = iconName.PsDpadRight,
-			[Enum.KeyCode.DPadDown] = iconName.PsDpadDown,
-			[extraKeysEnumModule.DPad] = iconName.PsDpad,
-			[Enum.KeyCode.Thumbstick1] = iconName.PsStickLeft,
-			[Enum.KeyCode.ButtonL3] = iconName.PsL3,
-			[Enum.KeyCode.ButtonR3] = iconName.PsR3,
-			[Enum.KeyCode.Thumbstick2] = iconName.PsStickRight,
-			[Enum.KeyCode.ButtonA] = iconName.PsX,
-			[Enum.KeyCode.ButtonX] = iconName.PsSquare,
-			[Enum.KeyCode.ButtonB] = iconName.PsCircle,
-			[Enum.KeyCode.ButtonY] = iconName.PsTriagle,
-			[Enum.KeyCode.ButtonStart] = iconName.Ps4Options,
-			[Enum.KeyCode.ButtonR1] = iconName.PsR1,
-			[Enum.KeyCode.ButtonR2] = iconName.PsR2
+			[Enum.KeyCode.ButtonL2] = IconName.PsL2,
+			[Enum.KeyCode.ButtonL1] = IconName.PsL1,
+			[Enum.KeyCode.ButtonSelect] = IconName.Ps4Share,
+			[ExtraKeysEnumModule.TouchPad] = IconName.Ps4Touchpad,
+			[Enum.KeyCode.DPadUp] = IconName.PsDpadUp,
+			[Enum.KeyCode.DPadLeft] = IconName.PsDpadLeft,
+			[Enum.KeyCode.DPadRight] = IconName.PsDpadRight,
+			[Enum.KeyCode.DPadDown] = IconName.PsDpadDown,
+			[ExtraKeysEnumModule.DPad] = IconName.PsDpad,
+			[Enum.KeyCode.Thumbstick1] = IconName.PsStickLeft,
+			[Enum.KeyCode.ButtonL3] = IconName.PsL3,
+			[Enum.KeyCode.ButtonR3] = IconName.PsR3,
+			[Enum.KeyCode.Thumbstick2] = IconName.PsStickRight,
+			[Enum.KeyCode.ButtonA] = IconName.PsX,
+			[Enum.KeyCode.ButtonX] = IconName.PsSquare,
+			[Enum.KeyCode.ButtonB] = IconName.PsCircle,
+			[Enum.KeyCode.ButtonY] = IconName.PsTriagle,
+			[Enum.KeyCode.ButtonStart] = IconName.Ps4Options,
+			[Enum.KeyCode.ButtonR1] = IconName.PsR1,
+			[Enum.KeyCode.ButtonR2] = IconName.PsR2
 		},
 		GAMEPAD_ICON_MAP_PLAYSTATION_5 = {
-			[extraKeysEnumModule.TouchPad] = iconName.Ps5Touchpad,
-			[Enum.KeyCode.ButtonSelect] = iconName.Ps5Share,
-			[Enum.KeyCode.ButtonStart] = iconName.Ps5Options
+			[ExtraKeysEnumModule.TouchPad] = IconName.Ps5Touchpad,
+			[Enum.KeyCode.ButtonSelect] = IconName.Ps5Share,
+			[Enum.KeyCode.ButtonStart] = IconName.Ps5Options
 		},
 		GAMEPAD_ICON_MAP_SPATIAL = {
-			[Enum.KeyCode.ButtonSelect] = iconName.XboxMenu,
-			[Enum.KeyCode.Thumbstick1] = iconName.XboxStickLeftDirectional,
-			[Enum.KeyCode.ButtonL3] = iconName.XboxStickLeft,
-			[Enum.KeyCode.DPadDown] = iconName.XboxX,
-			[Enum.KeyCode.DPadUp] = iconName.XboxY,
-			[Enum.KeyCode.ButtonA] = iconName.XboxA,
-			[Enum.KeyCode.ButtonB] = iconName.XboxB,
-			[Enum.KeyCode.ButtonR3] = iconName.XboxStickRight,
-			[Enum.KeyCode.Thumbstick2] = iconName.XboxStickRightDirectional
+			[Enum.KeyCode.ButtonSelect] = IconName.XboxMenu,
+			[Enum.KeyCode.Thumbstick1] = IconName.XboxStickLeftDirectional,
+			[Enum.KeyCode.ButtonL3] = IconName.XboxStickLeft,
+			[Enum.KeyCode.DPadDown] = IconName.XboxX,
+			[Enum.KeyCode.DPadUp] = IconName.XboxY,
+			[Enum.KeyCode.ButtonA] = IconName.XboxA,
+			[Enum.KeyCode.ButtonB] = IconName.XboxB,
+			[Enum.KeyCode.ButtonR3] = IconName.XboxStickRight,
+			[Enum.KeyCode.Thumbstick2] = IconName.XboxStickRightDirectional
 		},
 		GAMEPAD_CUTOFFS = { LEFT_COL = 11, BOTTOM_RIGHT_COL = 13 },
 		GAMEPAD_SIZES = {
@@ -181,18 +181,18 @@ return {
 			NO_PADDING_CUTOFF_Y = 650,
 			COL_SIZE = 0.25,
 			COL_SIZE_PORTRAIT = 0.5,
-			LEFT_COL_SCALE = if require(parent.Flags.FFlagHelpPageCCL) then 0.25 else 0.285
+			LEFT_COL_SCALE = if require(Parent.Flags.FFlagHelpPageCCL) then 0.25 else 0.285
 		},
 		TOUCH_ENUM_TO_ICON = {
-			[touchControlsEnumModule.TopLeft] = t.ZOOM,
-			[touchControlsEnumModule.TopMidTap] = t.TAP,
-			[touchControlsEnumModule.TopMidRotate] = t.ROTATE,
-			[touchControlsEnumModule.TopRightTap] = t.TAP,
-			[touchControlsEnumModule.TopRightRotate] = t.ROTATE,
-			[touchControlsEnumModule.BottomLeftTap] = t.TAP,
-			[touchControlsEnumModule.BottomLeftRotate] = t.ROTATE,
-			[touchControlsEnumModule.BottomMid] = nil,
-			[touchControlsEnumModule.BottomRight] = t.TAP
+			[TouchControlsEnumModule.TopLeft] = config.ZOOM,
+			[TouchControlsEnumModule.TopMidTap] = config.TAP,
+			[TouchControlsEnumModule.TopMidRotate] = config.ROTATE,
+			[TouchControlsEnumModule.TopRightTap] = config.TAP,
+			[TouchControlsEnumModule.TopRightRotate] = config.ROTATE,
+			[TouchControlsEnumModule.BottomLeftTap] = config.TAP,
+			[TouchControlsEnumModule.BottomLeftRotate] = config.ROTATE,
+			[TouchControlsEnumModule.BottomMid] = nil,
+			[TouchControlsEnumModule.BottomRight] = config.TAP
 		},
 		TOUCH_OFFSETS = {
 			SMALL_SCREEN_CUTOFF_X = 700,

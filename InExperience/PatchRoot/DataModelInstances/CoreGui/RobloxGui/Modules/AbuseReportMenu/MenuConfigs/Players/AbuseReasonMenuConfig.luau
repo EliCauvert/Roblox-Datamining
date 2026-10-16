@@ -1,32 +1,31 @@
-﻿local abuseReportMenu = script:FindFirstAncestor("AbuseReportMenu")
-local corePackagesService = game:GetService("CorePackages")
-local constantsModule = require(abuseReportMenu.Components.Constants)
-local _ = require(abuseReportMenu.Components.Types)
-local cryoModule = require(corePackagesService.Packages.Cryo)
+﻿local AbuseReportMenu = script:FindFirstAncestor("AbuseReportMenu")
+local ConstantsModule = require(AbuseReportMenu.Components.Constants)
+local _ = require(AbuseReportMenu.Components.Types)
+local CryoModule = require(game:GetService("CorePackages").Packages.Cryo)
 
 return {
 	componentType = "dropdown",
 	fieldLabel = "ReasonForAbuse",
 	componentName = "AbuseReason",
-	getIsVisible = function(_)
+	getIsVisible = function(_): boolean --[[ Line: 9 ]]
 		return true
 	end,
-	getMenuItems = function(p1)
-		-- upvalues: constantsModule (ref), cryoModule (ref)
-		return cryoModule.Dictionary.values(if p1.methodOfAbuse == "Voice Chat" then constantsModule.PlayerVoiceAbuseTypes else constantsModule.PlayerAbuseTypes)
+	getMenuItems = function(p1) --[[ Line: 12 ]]
+		-- upvalues: ConstantsModule (copy), CryoModule (copy)
+		return CryoModule.Dictionary.values(if p1.methodOfAbuse == "Voice Chat" then ConstantsModule.PlayerVoiceAbuseTypes else ConstantsModule.PlayerAbuseTypes)
 	end,
-	onUpdateSelectedOption = function(p1, _, p2, p3)
-		-- upvalues: constantsModule (ref)
-		p3.analyticsDispatch({
-			type = constantsModule.AnalyticsActions.IncrementReasonChanged
+	onUpdateSelectedOption = function(AbuseReason, _, Callback: (any) -> (), p1) --[[ Line: 18 ]]
+		-- upvalues: ConstantsModule (copy)
+		p1.analyticsDispatch({
+			type = ConstantsModule.AnalyticsActions.IncrementReasonChanged
 		})
-		p3.analyticsDispatch({
-			type = constantsModule.AnalyticsActions.SetReasonSelection,
-			selection = p1
+		p1.analyticsDispatch({
+			type = ConstantsModule.AnalyticsActions.SetReasonSelection,
+			selection = AbuseReason
 		})
-		p2({
-			type = constantsModule.PlayerMenuActions.UpdateAbuseReason,
-			abuseReason = p1
+		Callback({
+			type = ConstantsModule.PlayerMenuActions.UpdateAbuseReason,
+			abuseReason = AbuseReason
 		})
 	end
 }

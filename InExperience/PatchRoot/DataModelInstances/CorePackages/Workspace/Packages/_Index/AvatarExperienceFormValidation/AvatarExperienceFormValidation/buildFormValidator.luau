@@ -1,13 +1,15 @@
 ﻿local _ = require(script.Parent.FormValidationErrorEnum)
 
-return function(p1)
-	return function(p2)
-		-- upvalues: p1 (ref)
-		for i, v in p1 do
-			local var1, var2 = v(p2)
+return function(p1) --[[ Line: 4 | Named "buildFormValidator" ]]
+	return function(p2) --[[ Line: 5 ]]
+		-- upvalues: p1 (copy)
+		local v1 = nil
+		for _, value in p1 do
+			local v2
+			v2, v2 = value(p2)
 			
-			if not var1 then
-				return false, var2
+			if not v2 then
+				return false, v1
 			end
 		end
 		return true, nil

@@ -1,143 +1,145 @@
-﻿local socialTabsPage = script:FindFirstAncestor("SocialTabsPage")
-local parent = socialTabsPage.Parent
-local reactModule = require(parent.React)
-local dashModule = require(parent.Dash)
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local findFriendsFromUserId = require(socialTabsPage.Networking.NetworkingFriends).FindFriendsFromUserId
-local usePageSizeModule = require(socialTabsPage.Hooks.usePageSize)
+﻿local SocialTabsPage = script:FindFirstAncestor("SocialTabsPage")
+local Parent = SocialTabsPage.Parent
+local ReactModule = require(Parent.React)
+local DashModule = require(Parent.Dash)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local FindFriendsFromUserId = require(SocialTabsPage.Networking.NetworkingFriends).FindFriendsFromUserId
+local UsePageSizeModule = require(SocialTabsPage.Hooks.usePageSize)
 
-local function mapPageItemsToFriends(p1)
-	-- upvalues: dashModule (ref)
-	local t = {}
+local function mapPageItemsToFriends(PageItems) --[[ Line: 33 ]]
+	-- upvalues: DashModule (copy)
+	local List = {}
 	
-	for i, v in dashModule.map(p1, function(p2)
+	for _, value in DashModule.map(PageItems, function(p1) --[[ Line: 34 ]]
 		return {
-			id = tostring(p2.id),
-			hasVerifiedBadge = p2.hasVerifiedBadge or false
+			id = tostring(p1.id),
+			hasVerifiedBadge = p1.hasVerifiedBadge or false
 		}
 	end) do
-		local var1 = tonumber(v.id)
+		local Number: number? = tonumber(value.id)
 		
-		if var1 ~= nil and var1 > 0 then
-			table.insert(t, v)
+		if Number ~= nil and Number > 0 then
+			table.insert(List, value)
 		end
 	end
-	return t
+	return List
 end
 
-return function(p2)
-	-- upvalues: useDispatch (ref), usePageSizeModule (ref), reactModule (ref), findFriendsFromUserId (ref), mapPageItemsToFriends (ref)
-	local var2 = useDispatch()
-	local var3 = usePageSizeModule()
-	local var4 = if p2.skip ~= true then not p2.targetUserId or p2.targetUserId == "" else true
-	local var5, var6 = reactModule.useState({})
-	local var7, var8 = reactModule.useState(not var4)
-	local var9, var10 = reactModule.useState(nil)
-	local var11, var12 = reactModule.useState(nil)
-	local var13 = reactModule.useRef(0)
-	local var14 = reactModule.useRef(false)
-	local var15 = reactModule.useRef(true)
-	reactModule.useEffect(function()
-		-- upvalues: var15 (ref)
-		return function()
-			-- upvalues: var15 (copy)
-			var15.current = false
+return function(p1) --[[ Line: 55 | Named "useFriendsList" ]]
+	-- upvalues: UseDispatchFunction (copy), UsePageSizeModule (copy), ReactModule (copy), FindFriendsFromUserId (copy), mapPageItemsToFriends (copy)
+	local UseDispatchResult = UseDispatchFunction()
+	local UsePageSizeModuleResult = UsePageSizeModule()
+	local IsSkip: boolean = p1.skip == true or (not p1.targetUserId or p1.targetUserId == "")
+	local UseStateResult, UseStateResult2 = ReactModule.useState({})
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(not IsSkip)
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(nil)
+	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(nil)
+	local UseRefResult = ReactModule.useRef(0)
+	local UseRefResult1 = ReactModule.useRef(false)
+	local UseRefResult2 = ReactModule.useRef(true)
+	ReactModule.useEffect(function() --[[ Line: 68 ]]
+		-- upvalues: UseRefResult2 (copy)
+		return function() --[[ Line: 69 ]]
+			-- upvalues: UseRefResult2 (upval)
+			UseRefResult2.current = false
 		end
 	end, {})
-	local var16 = reactModule.useCallback(function(p3, p4, p5)
-		-- upvalues: var8 (ref), var14 (ref), var10 (ref), var2 (ref), findFriendsFromUserId (copy), var3 (ref), var13 (ref), var15 (ref), var12 (ref), mapPageItemsToFriends (copy), var6 (ref)
-		local var17 = not p4 or p4 == ""
+	local UseResult = ReactModule.useCallback(function(p2, p3, Current) --[[ Line: 74 ]]
+		-- upvalues: UseStateResult2_1 (copy), UseRefResult1 (copy), UseStateResult2_2 (copy), UseDispatchResult (copy), FindFriendsFromUserId (upval), UsePageSizeModuleResult (copy), UseRefResult (copy), UseRefResult2 (copy), UseStateResult2_3 (copy), mapPageItemsToFriends (upval), UseStateResult2 (copy)
+		local NoP4: boolean = not p3 or p3 == ""
 		
-		if var17 then
-			var8(true)
+		if NoP4 then
+			UseStateResult2_1(true)
 		end
-		var14.current = true
-		var10(nil)
-		var2(findFriendsFromUserId.API(p3, {
-			limit = var3,
-			cursor = if p4 and p4 ~= "" then p4 else nil
-		})):andThen(function(p6)
-			-- upvalues: var13 (copy), p5 (ref), var15 (copy), var14 (copy), var12 (copy), mapPageItemsToFriends (copy), var17 (ref), var6 (copy), var8 (copy)
-			if var13.current ~= p5 or not var15.current then
-				var14.current = false
+		UseRefResult1.current = true
+		UseStateResult2_2(nil)
+		UseDispatchResult(FindFriendsFromUserId.API(p2, {
+			limit = UsePageSizeModuleResult,
+			cursor = if p3 and p3 ~= "" then p3 else nil
+		})):andThen(function(Result) --[[ Line: 87 ]]
+			-- upvalues: UseRefResult (upval), Current (copy), UseRefResult2 (upval), UseRefResult1 (upval), UseStateResult2_3 (upval), mapPageItemsToFriends (upval), NoP4 (copy), UseStateResult2 (upval), UseStateResult2_1 (upval)
+			if UseRefResult.current ~= Current or not UseRefResult2.current then
+				UseRefResult1.current = false
 				
 				return
 			end
-			local var18 = if p6 then p6.responseBody else nil
-			local var19 = if var18 then var18.PageItems else nil
-			var12(if var18 and var18.NextCursor and var18.NextCursor ~= "" then var18.NextCursor else nil)
+			local ResponseBody = if Result then Result.responseBody else nil
+			local PageItems = if ResponseBody then ResponseBody.PageItems else nil
+			UseStateResult2_3(if ResponseBody and ResponseBody.NextCursor and ResponseBody.NextCursor ~= "" then ResponseBody.NextCursor else nil)
 			
-			if var19 then
-				local var20 = mapPageItemsToFriends(var19)
+			if PageItems then
+				local MapPageItemsToFriendsResult = mapPageItemsToFriends(PageItems)
 				
-				if var17 then
-					var6(var20)
+				if NoP4 then
+					UseStateResult2(MapPageItemsToFriendsResult)
 				else
-					var6(function(p7)
-						-- upvalues: var20 (ref)
-						local cloned = table.clone(p7)
+					UseStateResult2(function(Tbl) --[[ Line: 108 ]]
+						-- upvalues: MapPageItemsToFriendsResult (copy)
+						local Copy = table.clone(Tbl)
 						
-						for i, v in var20 do
-							table.insert(cloned, v)
+						for _, value in MapPageItemsToFriendsResult do
+							table.insert(Copy, value)
 						end
-						return cloned
+						return Copy
 					end)
 				end
-			elseif var17 then
-				var6({})
+			elseif NoP4 then
+				UseStateResult2({})
 			end
-			if var17 then
-				var8(false)
+			if NoP4 then
+				UseStateResult2_1(false)
 			end
-			var14.current = false
-		end):catch(function(p7)
-			-- upvalues: var13 (copy), p5 (ref), var15 (copy), var14 (copy), var10 (copy), var17 (ref), var8 (copy)
-			if var13.current ~= p5 or not var15.current then
-				var14.current = false
+			UseRefResult1.current = false
+		end):catch(function(Err) --[[ Line: 125 ]]
+			-- upvalues: UseRefResult (upval), Current (copy), UseRefResult2 (upval), UseRefResult1 (upval), UseStateResult2_2 (upval), NoP4 (copy), UseStateResult2_1 (upval)
+			if UseRefResult.current ~= Current or not UseRefResult2.current then
+				UseRefResult1.current = false
 				
 				return
 			end
-			var10(p7)
+			UseStateResult2_2(Err)
 			
-			if var17 then
-				var8(false)
+			if NoP4 then
+				UseStateResult2_1(false)
 			end
-			var14.current = false
+			UseRefResult1.current = false
 		end)
-	end, { var2, var3 })
-	reactModule.useEffect(function()
-		-- upvalues: var4 (ref), var13 (ref), var12 (ref), var6 (ref), var16 (ref), p2 (ref)
-		if var4 then
+	end, { UseDispatchResult, UsePageSizeModuleResult })
+	ReactModule.useEffect(function() --[[ Line: 138 ]]
+		-- upvalues: IsSkip (copy), UseRefResult (copy), UseStateResult2_3 (copy), UseStateResult2 (copy), UseResult (copy), p1 (copy)
+		if IsSkip then
+			return nil
+		else
+			UseRefResult.current += 1
+			local Current = UseRefResult.current
+			UseStateResult2_3(nil)
+			UseStateResult2({})
+			UseResult(p1.targetUserId, nil, Current)
+			
 			return nil
 		end
-		var13.current += 1
-		local current = var13.current
-		var12(nil)
-		var6({})
-		var16(p2.targetUserId, nil, current)
-		
-		return nil
-	end, { var4, p2.targetUserId, var16 })
+	end, { IsSkip, p1.targetUserId, UseResult })
 	
 	return {
-		friends = var5,
-		loading = var7,
-		hasMore = var11 ~= nil,
-		fetchMore = reactModule.useCallback(function()
-			-- upvalues: var14 (ref), var11 (ref), var16 (ref), p2 (ref), var13 (ref)
-			if var14.current or not var11 then
+		friends = UseStateResult,
+		loading = UseStateResult1,
+		hasMore = UseStateResult4 ~= nil,
+		fetchMore = ReactModule.useCallback(function() --[[ Line: 154 ]]
+			-- upvalues: UseRefResult1 (copy), UseStateResult4 (copy), UseResult (copy), p1 (copy), UseRefResult (copy)
+			if not UseRefResult1.current and UseStateResult4 then
+				UseResult(p1.targetUserId, UseStateResult4, UseRefResult.current)
+				
 				return
 			end
-			var16(p2.targetUserId, var11, var13.current)
-		end, { var11, var16, p2.targetUserId }),
-		refresh = reactModule.useCallback(function()
-			-- upvalues: var13 (ref), var12 (ref), var6 (ref), var16 (ref), p2 (ref)
-			var13.current += 1
-			local current = var13.current
-			var12(nil)
-			var6({})
-			var16(p2.targetUserId, nil, current)
-		end, { var16, p2.targetUserId }),
-		error = var9
+		end, { UseStateResult4, UseResult, p1.targetUserId }),
+		refresh = ReactModule.useCallback(function() --[[ Line: 161 ]]
+			-- upvalues: UseRefResult (copy), UseStateResult2_3 (copy), UseStateResult2 (copy), UseResult (copy), p1 (copy)
+			UseRefResult.current += 1
+			local Current = UseRefResult.current
+			UseStateResult2_3(nil)
+			UseStateResult2({})
+			UseResult(p1.targetUserId, nil, Current)
+		end, { UseResult, p1.targetUserId }),
+		error = UseStateResult3
 	}
 end

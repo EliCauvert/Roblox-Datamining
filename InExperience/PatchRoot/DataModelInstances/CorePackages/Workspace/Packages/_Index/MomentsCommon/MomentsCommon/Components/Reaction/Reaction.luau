@@ -1,167 +1,163 @@
-﻿local runService = game:GetService("RunService")
-local momentsCommon = script:FindFirstAncestor("MomentsCommon")
-local parent = momentsCommon.Parent
-local reactModule = require(parent.React)
-local image = require(parent.Foundation).Image
-local _ = require(momentsCommon.Enums.ReactionSize)
-local _ = require(momentsCommon.Enums.ReactionType)
-local animationDataModule = require(script.Parent.AnimationData)
-local reactionAnimationModule = require(script.Parent.ReactionAnimation)
-local reactionAssetsModule = require(script.Parent.ReactionAssets)
+﻿local RunService = game:GetService("RunService")
+local MomentsCommon = script:FindFirstAncestor("MomentsCommon")
+local Parent = MomentsCommon.Parent
+local ReactModule = require(Parent.React)
+local Image = require(Parent.Foundation).Image
+local _ = require(MomentsCommon.Enums.ReactionSize)
+local _ = require(MomentsCommon.Enums.ReactionType)
+local AnimationDataModule = require(script.Parent.AnimationData)
+local ReactionAnimationModule = require(script.Parent.ReactionAnimation)
+local ReactionAssetsModule = require(script.Parent.ReactionAssets)
 local t = {}
 
-local function _(p1)
-	-- upvalues: t (ref)
-	if t[p1] then
+local function _(Key) --[[ Line: 47 | Named "warnMissingAnimation" ]]
+	-- upvalues: t (copy)
+	if not t[Key] then
+		warn(`Reaction animation missing for {Key}`)
+		t[Key] = true
+		
 		return
 	end
-	warn(`Reaction animation missing for {p1}`)
-	t[p1] = true
 end
 
-local function getStaticImageData(p2, p3)
-	-- upvalues: reactionAssetsModule (ref)
-	local staticImageUri = reactionAssetsModule.getStaticImageUri(p2, p3)
+local function getStaticImageData(ReactionType, Size) --[[ Line: 56 ]]
+	-- upvalues: ReactionAssetsModule (copy)
+	local StaticImageUri = ReactionAssetsModule.getStaticImageUri(ReactionType, Size)
 	
-	return if staticImageUri == nil then nil else {
-		Image = staticImageUri,
+	return if StaticImageUri == nil then nil else {
+		Image = StaticImageUri,
 		ImageRectSize = Vector2.new(0, 0),
 		ImageRectOffset = Vector2.new(0, 0)
 	}
 end
 
-local _ = function(value, p2, p3, p4, p5)
-	-- upvalues: reactionAnimationModule (ref)
-	local frameRect = reactionAnimationModule.getFrameRect(value, p2)
-	p3.current = frameRect.frameIndex
-	p4(frameRect.offset)
-	p5(frameRect.size)
+local _ = function(p1, p2, p3, Callback: (any) -> (), Callback1: (any) -> ()) --[[ Line: 68 | Named "setFrame" ]]
+	-- upvalues: ReactionAnimationModule (copy)
+	local FrameRect = ReactionAnimationModule.getFrameRect(p1, p2)
+	p3.current = FrameRect.frameIndex
+	Callback(FrameRect.offset)
+	Callback1(FrameRect.size)
 end
 
-return reactModule.memo(reactModule.forwardRef(function(p2, p3)
-	-- upvalues: reactionAssetsModule (ref), animationDataModule (ref), reactModule (ref), getStaticImageData (ref), reactionAnimationModule (ref), t (ref), runService (ref), image (ref)
-	local assetKey = reactionAssetsModule.getAssetKey(p2.reactionType)
-	local var1 = if assetKey ~= nil then nil else animationDataModule(assetKey)
-	local var2 = reactModule.useMemo(function()
-		-- upvalues: getStaticImageData (copy), p2 (ref)
-		return getStaticImageData(p2.reactionType, p2.size)
-	end, { p2.reactionType, p2.size })
-	local sizePixels = reactionAssetsModule.getSizePixels(p2.size)
-	local var3 = assetKey ~= nil and var1 ~= nil
-	local var4, var5 = reactModule.useState(false)
-	local var6 = if p2.isPlaying ~= nil then var4 else p2.isPlaying
-	local var7 = var6 and var3
-	local var8 = if var2 ~= nil then Vector2.zero else var2.ImageRectSize
-	local var9, var10 = reactModule.useBinding(if var2 ~= nil then Vector2.zero else var2.ImageRectOffset)
-	local var11, var12 = reactModule.useBinding(var8)
-	local var13 = reactModule.useRef(1)
-	local var14 = reactModule.useRef(0)
-	local var15 = reactModule.useRef(false)
-	reactModule.useEffect(function()
-		-- upvalues: var7 (ref), var1 (ref), var14 (ref), var15 (ref), var13 (ref), var10 (ref), var12 (ref), reactionAnimationModule (copy), var2 (ref), var6 (ref), var3 (ref), assetKey (ref), p2 (ref), t (copy)
-		if var7 and var1 ~= nil then
-			var14.current = 0
-			var15.current = false
-			local var16 = var1
-			local var17 = var13
-			local var18 = var10
-			local var19 = var12
-			local frameRect = reactionAnimationModule.getFrameRect(var16, 1)
-			var17.current = frameRect.frameIndex
-			var18(frameRect.offset)
-			var19(frameRect.size)
-		elseif var2 ~= nil then
-			var14.current = 0
-			var15.current = false
-			var13.current = 1
-			var10(var2.ImageRectOffset)
-			var12(var2.ImageRectSize)
+return ReactModule.memo(ReactModule.forwardRef(function(Frame: Frame, p1) --[[ Line: 81 | Named "Reaction" ]]
+	-- upvalues: ReactionAssetsModule (copy), AnimationDataModule (copy), ReactModule (copy), getStaticImageData (copy), ReactionAnimationModule (copy), t (copy), RunService (copy), Image (copy)
+	local AssetKey = ReactionAssetsModule.getAssetKey(Frame.reactionType)
+	local AnimationDataModuleResult = if AssetKey == nil then nil else AnimationDataModule(AssetKey)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 84 ]]
+		-- upvalues: getStaticImageData (upval), Frame (copy)
+		return (getStaticImageData(Frame.reactionType, Frame.size))
+	end, { Frame.reactionType, Frame.size })
+	local SizePixels = ReactionAssetsModule.getSizePixels(Frame.size)
+	local HasAnimationDataModuleResult: boolean = AssetKey ~= nil and AnimationDataModuleResult ~= nil
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseStateResult1 = if Frame.isPlaying == nil then UseStateResult else Frame.isPlaying
+	local HasAnimationDataModuleResult1: boolean = UseStateResult1 and HasAnimationDataModuleResult
+	local ZeroVector = if UseMemoResult == nil then Vector2.zero else UseMemoResult.ImageRectSize
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(if UseMemoResult == nil then Vector2.zero else UseMemoResult.ImageRectOffset)
+	local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(ZeroVector)
+	local UseRefResult = ReactModule.useRef(1)
+	local UseRefResult1 = ReactModule.useRef(0)
+	local UseRefResult2 = ReactModule.useRef(false)
+	ReactModule.useEffect(function() --[[ Line: 104 ]]
+		-- upvalues: HasAnimationDataModuleResult1 (copy), AnimationDataModuleResult (copy), UseRefResult1 (copy), UseRefResult2 (copy), UseRefResult (copy), UseBindingResult2 (copy), UseBindingResult2_1 (copy), ReactionAnimationModule (upval), UseMemoResult (copy), UseStateResult1 (copy), HasAnimationDataModuleResult (copy), AssetKey (copy), Frame (copy), t (upval)
+		if HasAnimationDataModuleResult1 and AnimationDataModuleResult ~= nil then
+			UseRefResult1.current = 0
+			UseRefResult2.current = false
+			local FrameRect = ReactionAnimationModule.getFrameRect(AnimationDataModuleResult, 1)
+			UseRefResult.current = FrameRect.frameIndex
+			UseBindingResult2(FrameRect.offset)
+			UseBindingResult2_1(FrameRect.size)
+		elseif UseMemoResult ~= nil then
+			UseRefResult1.current = 0
+			UseRefResult2.current = false
+			UseRefResult.current = 1
+			UseBindingResult2(UseMemoResult.ImageRectOffset)
+			UseBindingResult2_1(UseMemoResult.ImageRectSize)
 		end
-		if var6 and not var3 then
-			local assetKey_1 = assetKey or tostring(p2.reactionType)
+		if UseStateResult1 and not HasAnimationDataModuleResult then
+			local AssetKey1 = AssetKey or tostring(Frame.reactionType)
 			
-			if t[assetKey_1] then return end
-			warn(`Reaction animation missing for {assetKey_1}`)
-			t[assetKey_1] = true
+			if t[AssetKey1] then return end
+			warn(`Reaction animation missing for {AssetKey1}`)
+			t[AssetKey1] = true
 		end
 	end, {
-		var7, var1, var2, p2.reactionType, var6, p2.loop, var3, assetKey
+		HasAnimationDataModuleResult1, AnimationDataModuleResult, UseMemoResult,
+		Frame.reactionType, UseStateResult1, Frame.loop, HasAnimationDataModuleResult,
+		AssetKey
 	})
-	reactModule.useEffect(function()
-		-- upvalues: var7 (ref), var1 (ref), runService (copy), var15 (ref), var14 (ref), p2 (ref), reactionAnimationModule (copy), var13 (ref), var10 (ref), var12 (ref), var5 (ref)
-		if var7 and var1 ~= nil then
-			local heartbeatConnection = runService.Heartbeat:Connect(function(p4)
-				-- upvalues: var15 (copy), var14 (copy), p2 (copy), reactionAnimationModule (copy), var1 (copy), var13 (copy), var10 (copy), var12 (copy), var5 (copy)
-				if var15.current then return end
-				var14.current += p4
+	ReactModule.useEffect(function() --[[ Line: 133 ]]
+		-- upvalues: HasAnimationDataModuleResult1 (copy), AnimationDataModuleResult (copy), RunService (upval), UseRefResult2 (copy), UseRefResult1 (copy), Frame (copy), ReactionAnimationModule (upval), UseRefResult (copy), UseBindingResult2 (copy), UseBindingResult2_1 (copy), UseStateResult2 (copy)
+		if HasAnimationDataModuleResult1 and AnimationDataModuleResult ~= nil then
+			local HeartbeatConnection = RunService.Heartbeat:Connect(function(DeltaTime) --[[ Line: 138 ]]
+				-- upvalues: UseRefResult2 (upval), UseRefResult1 (upval), Frame (upval), ReactionAnimationModule (upval), AnimationDataModuleResult (upval), UseRefResult (upval), UseBindingResult2 (upval), UseBindingResult2_1 (upval), UseStateResult2 (upval)
+				if UseRefResult2.current then return end
+				UseRefResult1.current += DeltaTime
 				
-				if not p2.loop and reactionAnimationModule.getDurationSeconds(var1) <= var14.current then
-					local frameCount = var1.frameCount
-					local var20 = var13
-					local var21 = var10
-					local var22 = var12
-					local frameRect = reactionAnimationModule.getFrameRect(var1, frameCount)
-					var20.current = frameRect.frameIndex
-					var21(frameRect.offset)
-					var22(frameRect.size)
-					var15.current = true
-					var5(false)
+				if not Frame.loop and ReactionAnimationModule.getDurationSeconds(AnimationDataModuleResult) <= UseRefResult1.current then
+					local FrameRect = ReactionAnimationModule.getFrameRect(AnimationDataModuleResult, AnimationDataModuleResult.frameCount)
+					UseRefResult.current = FrameRect.frameIndex
+					UseBindingResult2(FrameRect.offset)
+					UseBindingResult2_1(FrameRect.size)
+					UseRefResult2.current = true
+					UseStateResult2(false)
 					
 					return
 				end
-				local frameIndex = reactionAnimationModule.getFrameIndex(var1, var14.current, p2.loop == true)
+				local FrameIndex = ReactionAnimationModule.getFrameIndex(AnimationDataModuleResult, UseRefResult1.current, Frame.loop == true)
 				
-				if frameIndex ~= var13.current then
-					local var23 = var1
-					local var24 = var13
-					local var25 = var10
-					local var26 = var12
-					local frameRect = reactionAnimationModule.getFrameRect(var23, frameIndex)
-					var24.current = frameRect.frameIndex
-					var25(frameRect.offset)
-					var26(frameRect.size)
+				if FrameIndex ~= UseRefResult.current then
+					local FrameRect = ReactionAnimationModule.getFrameRect(AnimationDataModuleResult, FrameIndex)
+					UseRefResult.current = FrameRect.frameIndex
+					UseBindingResult2(FrameRect.offset)
+					UseBindingResult2_1(FrameRect.size)
 				end
 			end)
 			
-			return function()
-				-- upvalues: heartbeatConnection (ref)
-				heartbeatConnection:Disconnect()
+			return function() --[[ Line: 159 ]]
+				-- upvalues: HeartbeatConnection (copy)
+				HeartbeatConnection:Disconnect()
 			end
+		else
+			return nil
 		end
-		return nil
-	end, { var7, var1, p2.loop })
-	reactModule.useImperativeHandle(p3, function()
-		-- upvalues: p2 (ref), var5 (ref)
+	end, {
+		HasAnimationDataModuleResult1,
+		AnimationDataModuleResult,
+		Frame.loop
+	})
+	ReactModule.useImperativeHandle(p1, function() --[[ Line: 164 ]]
+		-- upvalues: Frame (copy), UseStateResult2 (copy)
 		return {
-			start = function()
-				-- upvalues: p2 (copy), var5 (copy)
-				if p2.isPlaying == nil then
-					var5(true)
+			start = function() --[[ Line: 166 ]]
+				-- upvalues: Frame (upval), UseStateResult2 (upval)
+				if Frame.isPlaying == nil then
+					UseStateResult2(true)
 				end
 			end,
-			stop = function()
-				-- upvalues: p2 (copy), var5 (copy)
-				if p2.isPlaying == nil then
-					var5(false)
+			stop = function() --[[ Line: 171 ]]
+				-- upvalues: Frame (upval), UseStateResult2 (upval)
+				if Frame.isPlaying == nil then
+					UseStateResult2(false)
 				end
 			end
 		}
-	end, { p2.isPlaying })
-	local var20 = if var7 and assetKey ~= nil then reactionAssetsModule.getAnimatedImageUri(assetKey) elseif var2 ~= nil then nil else var2.Image
+	end, { Frame.isPlaying })
+	local AnimatedImageUri = if HasAnimationDataModuleResult1 and AssetKey ~= nil then ReactionAssetsModule.getAnimatedImageUri(AssetKey) elseif UseMemoResult == nil then nil else UseMemoResult.Image
 	
-	return if var20 == nil or sizePixels == nil then nil else reactModule.createElement(image, {
+	return if AnimatedImageUri == nil or SizePixels == nil then nil else ReactModule.createElement(Image, {
 		BackgroundTransparency = 1,
-		AnchorPoint = p2.AnchorPoint,
-		Image = var20,
-		LayoutOrder = p2.LayoutOrder,
-		Position = p2.Position,
+		AnchorPoint = Frame.AnchorPoint,
+		Image = AnimatedImageUri,
+		LayoutOrder = Frame.LayoutOrder,
+		Position = Frame.Position,
 		ScaleType = Enum.ScaleType.Fit,
-		Size = UDim2.fromOffset(sizePixels, sizePixels),
-		Visible = p2.Visible,
-		ZIndex = p2.ZIndex,
-		scale = p2.scale,
-		imageRect = { offset = var9, size = var11 },
-		imageStyle = p2.imageStyle,
-		testId = p2.testId
+		Size = UDim2.fromOffset(SizePixels, SizePixels),
+		Visible = Frame.Visible,
+		ZIndex = Frame.ZIndex,
+		scale = Frame.scale,
+		imageRect = { offset = UseBindingResult, size = UseBindingResult1 },
+		imageStyle = Frame.imageStyle,
+		testId = Frame.testId
 	})
 end))

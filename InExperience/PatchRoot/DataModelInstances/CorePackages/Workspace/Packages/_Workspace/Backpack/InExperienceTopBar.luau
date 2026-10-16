@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Workspace.InExperienceTopBar.InExperienceTopBar)
+﻿return (require(script.Parent.Parent.Parent._Workspace.InExperienceTopBar.InExperienceTopBar))

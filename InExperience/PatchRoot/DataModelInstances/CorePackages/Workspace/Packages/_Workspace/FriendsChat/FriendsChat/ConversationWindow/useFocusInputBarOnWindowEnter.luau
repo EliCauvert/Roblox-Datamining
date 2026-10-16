@@ -1,83 +1,62 @@
-﻿local friendsChat = script:FindFirstAncestor("FriendsChat")
-local parent = friendsChat.Parent
-local reactModule = require(parent.React)
-local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
-local getFriendsChatNavigationStoreModule = require(friendsChat.Stores.GetFriendsChatNavigationStore)
-local fFlagFriendsChatConversationListFocusNav = require(parent.SharedFlags).FFlagFriendsChatConversationListFocusNav
+﻿local FriendsChat = script:FindFirstAncestor("FriendsChat")
+local Parent = FriendsChat.Parent
+local ReactModule = require(Parent.React)
+local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
+local GetFriendsChatNavigationStoreModule = require(FriendsChat.Stores.GetFriendsChatNavigationStore)
+local FFlagFriendsChatConversationListFocusNav = require(Parent.SharedFlags).FFlagFriendsChatConversationListFocusNav
 
-return function(p1, p2)
-	-- upvalues: reactModule (ref), reactFocusNavigationModule (ref), fFlagFriendsChatConversationListFocusNav (ref), getFriendsChatNavigationStoreModule (ref)
-	local var1 = reactModule.useContext(reactFocusNavigationModule.FocusNavigationContext)
-	reactModule.useEffect(function()
-		-- upvalues: fFlagFriendsChatConversationListFocusNav (copy), var1 (ref), getFriendsChatNavigationStoreModule (copy), p1 (ref), p2 (ref)
-		if fFlagFriendsChatConversationListFocusNav and var1 ~= nil then
-			local var2 = getFriendsChatNavigationStoreModule(false)
-			
-			local function _(p3)
-				-- upvalues: p1 (copy), p2 (copy)
-				if p3 == nil then
-					return false
-				end
-				local var3
-				local current = p1.current
-				local current_1 = p2.current
+return function(p1, p2) --[[ Line: 19 | Named "useFocusInputBarOnWindowEnter" ]]
+	-- upvalues: ReactModule (copy), ReactFocusNavigationModule (copy), FFlagFriendsChatConversationListFocusNav (copy), GetFriendsChatNavigationStoreModule (copy)
+	local UseContextResult = ReactModule.useContext(ReactFocusNavigationModule.FocusNavigationContext)
+	ReactModule.useEffect(function() --[[ Line: 24 ]]
+		-- upvalues: FFlagFriendsChatConversationListFocusNav (upval), UseContextResult (copy), GetFriendsChatNavigationStoreModule (upval), p1 (copy), p2 (copy)
+		if not FFlagFriendsChatConversationListFocusNav or UseContextResult == nil then return end
+		local FriendsChatNavigationStoreModule = GetFriendsChatNavigationStoreModule(false)
+		
+		local function _(Object) --[[ Line: 29 | Named "isInsideWindow" ]]
+			-- upvalues: p1 (upval), p2 (upval)
+			if Object == nil then
+				return false
+			else
+				local Current = p1.current
+				local Current1 = p2.current
 				
-				if current ~= nil then
-					var3 = p3:IsDescendantOf(current)
-					
-					if not var3 then
-						var3 = current_1 ~= nil and p3:IsDescendantOf(current_1)
-					end
-					return var3
-				end
-			end
-			
-			local value = var1.focusedGuiObject:getValue()
-			local var3 = var1.focusedGuiObject:subscribe(function(p3)
-				-- upvalues: p1 (copy), p2 (copy), value (write), var2 (ref)
-				local var4, current
-				if p3 == nil then
-					var4 = false
-				else
-					current = p1.current
-					local current_1 = p2.current
-					
-					if current ~= nil then
-						var4 = p3:IsDescendantOf(current)
-						
-						if not var4 then
-							var4 = current_1 ~= nil and p3:IsDescendantOf(current_1)
-						end
-					end
-				end
-				if var4 and value ~= nil then
-					current = value
-					
-					if current == nil then
-						var4 = false
-					else
-						local current_1 = p1.current
-						local current_2 = p2.current
-						
-						if current_1 ~= nil then
-							var4 = current:IsDescendantOf(current_1)
-							
-							if not var4 then
-								var4 = current_2 ~= nil and current:IsDescendantOf(current_2)
-							end
-						end
-					end
-					if not var4 then
-						var2.requestFocusInputBar()
-					end
-				end
-				value = p3
-			end)
-			
-			return function()
-				-- upvalues: var3 (ref)
-				var3:unsubscribe()
+				return if Current == nil then Current1 ~= nil and Object:IsDescendantOf(Current1) else Object:IsDescendantOf(Current) or Current1 ~= nil and Object:IsDescendantOf(Current1)
 			end
 		end
-	end, { var1 })
+		
+		local Value = UseContextResult.focusedGuiObject:getValue()
+		local SubscribeResult = UseContextResult.focusedGuiObject:subscribe(function(Object) --[[ Line: 39 ]]
+			-- upvalues: p1 (upval), p2 (upval), Value (ref), FriendsChatNavigationStoreModule (copy)
+			local IsDescendantOf = nil
+			if Object == nil then
+				IsDescendantOf = false
+			else
+				local Current = p1.current
+				local Current1 = p2.current
+				IsDescendantOf = if Current == nil then Current1 ~= nil and Object:IsDescendantOf(Current1) else Object:IsDescendantOf(Current) or Current1 ~= nil and Object:IsDescendantOf(Current1)
+			end
+			if IsDescendantOf and Value ~= nil then
+				local Object1 = Value
+				local IsDescendantOf1 = nil
+				
+				if Object1 == nil then
+					IsDescendantOf1 = false
+				else
+					local Current = p1.current
+					local Current2 = p2.current
+					IsDescendantOf1 = if Current == nil then Current2 ~= nil and Object1:IsDescendantOf(Current2) else Object1:IsDescendantOf(Current) or Current2 ~= nil and Object1:IsDescendantOf(Current2)
+				end
+				if not IsDescendantOf1 then
+					FriendsChatNavigationStoreModule.requestFocusInputBar()
+				end
+			end
+			Value = Object
+		end)
+		
+		return function() --[[ Line: 49 ]]
+			-- upvalues: SubscribeResult (copy)
+			SubscribeResult:unsubscribe()
+		end
+	end, { UseContextResult })
 end

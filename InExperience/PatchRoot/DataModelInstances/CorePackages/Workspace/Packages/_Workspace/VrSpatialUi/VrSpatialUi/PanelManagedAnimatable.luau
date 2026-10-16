@@ -1,118 +1,119 @@
-﻿local parent = script:FindFirstAncestor("VrSpatialUi").Parent
-local otterModule = require(parent.Otter)
-local _ = require(parent.Observable)
+﻿local Parent = script:FindFirstAncestor("VrSpatialUi").Parent
+local OtterModule = require(Parent.Otter)
+local _ = require(Parent.Observable)
 
-local var1 = function() end
+local function _pendingHideAnimation() --[[ Line: 8 ]] end
 
-local t = {
+local config = {
 	Default = { dampingRatio = 1, frequency = 4.5 },
 	Slower = { dampingRatio = 1, frequency = 0.66 }
 }
-local t_1 = {}
-t_1.__index = t_1
+local PanelManagedAnimatableModule = {}
+PanelManagedAnimatableModule.__index = PanelManagedAnimatableModule
 
-function t_1.checkIfAnimateNeeded(p1, p2)
-	return p2 ~= p1._currentGoal
+function PanelManagedAnimatableModule.checkIfAnimateNeeded(p1, CurrentGoal): boolean --[[ Line: 36 ]]
+	return CurrentGoal ~= p1._currentGoal
 end
 
-function t_1.hideAndBlockAnimationUntilLookBackAgain(p1)
+function PanelManagedAnimatableModule.hideAndBlockAnimationUntilLookBackAgain(p1) --[[ Line: 43 ]]
 	p1._ignoreAnimateShow = true
 	p1:animateHideIfNeeded(true)
 end
 
-function t_1.animateHideIfNeeded(p1, p2)
-	-- upvalues: var1 (ref), t (ref)
+function PanelManagedAnimatableModule.animateHideIfNeeded(p1, p2) --[[ Line: 48 ]]
+	-- upvalues: _pendingHideAnimation (copy), config (copy)
 	if not p2 then
 		p1._ignoreAnimateShow = false
 	end
-	if p1:checkIfAnimateNeeded(1) and (not p1._pendingHideAnimation or p1._pendingHideAnimation == var1) then
+	if p1:checkIfAnimateNeeded(1) and (not p1._pendingHideAnimation or p1._pendingHideAnimation == _pendingHideAnimation) then
 		p1._currentGoal = 1
-		p1:animateToGoal(p1._currentGoal, t.Slower)
+		p1:animateToGoal(p1._currentGoal, config.Slower)
 		
 		return
 	end
 end
 
-function t_1.animateShowIfNeeded(p1)
-	-- upvalues: t (ref), var1 (ref)
+function PanelManagedAnimatableModule.animateShowIfNeeded(p1) --[[ Line: 59 ]]
+	-- upvalues: config (copy), _pendingHideAnimation (copy)
 	if p1:checkIfAnimateNeeded(0) and not p1._ignoreAnimateShow then
 		p1:cancelPendingTaskIfNeeded()
 		p1._currentGoal = 0
-		p1:animateToGoal(p1._currentGoal, t.Default)
-		local pendingHideAnimation = nil
+		p1:animateToGoal(p1._currentGoal, config.Default)
+		local PendingHideAnimation = nil
 		
-		function p5._pendingHideAnimation()
-			-- upvalues: p1 (ref), pendingHideAnimation (write), var1 (copy), t (copy)
-			if p1._pendingHideAnimation == pendingHideAnimation then
-				p1._pendingHideAnimation = var1
-				p1:animateToGoal(1, t.Slower)
+		function p1._pendingHideAnimation() --[[ Line: 68 ]]
+			-- upvalues: p1 (copy), PendingHideAnimation (ref), _pendingHideAnimation (upval), config (upval)
+			if p1._pendingHideAnimation == PendingHideAnimation then
+				p1._pendingHideAnimation = _pendingHideAnimation
+				p1:animateToGoal(1, config.Slower)
 			end
 		end
 		
-		pendingHideAnimation = p1._pendingHideAnimation
+		PendingHideAnimation = p1._pendingHideAnimation
 		task.delay(3, p1._pendingHideAnimation)
 		
 		return
 	end
 end
 
-function t_1.animateToGoal(p1, p2, p3)
-	-- upvalues: otterModule (ref)
+function PanelManagedAnimatableModule.animateToGoal(p1, CurrentGoal, Slower) --[[ Line: 78 ]]
+	-- upvalues: OtterModule (copy)
 	p1._fadeTransparencyMotor:stop()
-	p1._fadeTransparencyMotor:setGoal(otterModule.spring(p2, p3))
+	p1._fadeTransparencyMotor:setGoal(OtterModule.spring(CurrentGoal, Slower))
 end
 
-function t_1.isTargetVisible(p1)
+function PanelManagedAnimatableModule.isTargetVisible(p1): boolean --[[ Line: 83 ]]
 	return p1._targetInstance.GroupTransparency == 0
 end
 
-function t_1.reset(value)
-	value._fadeTransparencyMotor:stop()
-	value:cancelPendingTaskIfNeeded()
-	value._ignoreAnimateShow = false
-	value._currentGoal = -1
-	value._targetInstance.GroupTransparency = 0
-	value._visibilityObservable:set(true)
+function PanelManagedAnimatableModule.reset(p1) --[[ Line: 87 ]]
+	p1._fadeTransparencyMotor:stop()
+	p1:cancelPendingTaskIfNeeded()
+	p1._ignoreAnimateShow = false
+	p1._currentGoal = -1
+	p1._targetInstance.GroupTransparency = 0
+	p1._visibilityObservable:set(true)
 end
 
-function t_1.cancelPendingTaskIfNeeded(p1)
-	-- upvalues: var1 (ref)
-	p1._pendingHideAnimation = var1
+function PanelManagedAnimatableModule.cancelPendingTaskIfNeeded(p1) --[[ Line: 96 ]]
+	-- upvalues: _pendingHideAnimation (copy)
+	p1._pendingHideAnimation = _pendingHideAnimation
 end
 
-function t_1.create(p1, p2, p3)
-	-- upvalues: otterModule (ref), var1 (ref), t_1 (ref)
-	local var2 = nil
+function PanelManagedAnimatableModule.create(Object, _visibilityObservable, p1) --[[ Line: 100 ]]
+	-- upvalues: OtterModule (copy), _pendingHideAnimation (copy), PanelManagedAnimatableModule (copy)
+	local _targetInstance = nil
 	
-	for i, v in ipairs(p1:GetDescendants()) do
-		if v.Name == "AnimatablePanelManagedContent" then
-			var2 = v
+	for _, descendant in ipairs(Object:GetDescendants()) do
+		if descendant.Name == "AnimatablePanelManagedContent" then
+			_targetInstance = descendant
 			break
 		end
 	end
-	if var2 == nil then
+	if _targetInstance == nil then
 		return nil
-	elseif p3 then
-		var2.GroupTransparency = 1
 	end
-	p2:set(var2.GroupTransparency == 0)
-	local var3 = otterModule.createSingleMotor(if p3 then 1 else 0)
-	var3:onStep(function(p4)
-		-- upvalues: var2 (write), p2 (ref)
-		var2.GroupTransparency = p4
-		p2:set(var2.GroupTransparency == 0)
+	if p1 then
+		_targetInstance.GroupTransparency = 1
+	end
+	_visibilityObservable:set(_targetInstance.GroupTransparency == 0)
+	local SingleMotor = OtterModule.createSingleMotor(if p1 then 1 else 0)
+	SingleMotor:onStep(function(GroupTransparency) --[[ Line: 120 ]]
+		-- upvalues: _targetInstance (ref), _visibilityObservable (copy)
+		_targetInstance.GroupTransparency = GroupTransparency
+		_visibilityObservable:set(_targetInstance.GroupTransparency == 0)
 	end)
-	local t = {
+	local config = {
 		_currentGoal = -1,
 		_ignoreAnimateShow = false,
-		_targetInstance = var2,
-		_fadeTransparencyMotor = var3,
-		_pendingHideAnimation = var1,
-		_visibilityObservable = p2
+		_targetInstance = _targetInstance,
+		_fadeTransparencyMotor = SingleMotor,
+		_pendingHideAnimation = _pendingHideAnimation,
+		_visibilityObservable = _visibilityObservable
 	}
-	setmetatable(t, t_1)
+	setmetatable(config, PanelManagedAnimatableModule)
 	
-	return t
+	return config
 end
 
-return t_1
+return PanelManagedAnimatableModule

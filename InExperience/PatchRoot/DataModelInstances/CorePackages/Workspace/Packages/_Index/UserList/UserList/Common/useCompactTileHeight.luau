@@ -1,17 +1,16 @@
-﻿local parent = script:FindFirstAncestor("UserList").Parent
-local reactModule = require(parent.React)
-local useTokens = require(parent.Foundation).Hooks.useTokens
+﻿local Parent = script:FindFirstAncestor("UserList").Parent
+local ReactModule = require(Parent.React)
+local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
 
-return function()
-	-- upvalues: useTokens (ref), reactModule (ref)
-	local var1 = useTokens()
+return function() --[[ Line: 21 | Named "useCompactTileHeight" ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy)
+	local UseTokensResult = UseTokensFunction()
 	
-	return reactModule.useMemo(function()
-		-- upvalues: var1 (ref)
-		local size1400 = var1.Size.Size_1400
-		local medium = var1.Padding.Medium
-		local small = var1.Gap.Small
+	return (ReactModule.useMemo(function() --[[ Line: 24 ]]
+		-- upvalues: UseTokensResult (copy)
+		local Medium = UseTokensResult.Padding.Medium
+		local Small = UseTokensResult.Gap.Small
 		
-		return medium + size1400 + small + (var1.Typography.TitleSmall.FontSize + var1.Typography.LabelSmall.FontSize + var1.Typography.BodySmall.FontSize) + small + var1.Size.Size_800 + medium
-	end, { var1 })
+		return Medium + UseTokensResult.Size.Size_1400 + Small + (UseTokensResult.Typography.TitleSmall.FontSize + UseTokensResult.Typography.LabelSmall.FontSize + UseTokensResult.Typography.BodySmall.FontSize) + Small + UseTokensResult.Size.Size_800 + Medium
+	end, { UseTokensResult }))
 end

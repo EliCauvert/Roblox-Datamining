@@ -1,22 +1,22 @@
-﻿local guiPositionToScreenPositionModule = require(script:FindFirstAncestor("AdGuiInteractivity").guiPositionToScreenPosition)
+﻿local GuiPositionToScreenPositionModule = require(script:FindFirstAncestor("AdGuiInteractivity").guiPositionToScreenPosition)
 
-return function(p1, p2)
-	-- upvalues: guiPositionToScreenPositionModule (ref)
-	local currentCamera = game.Workspace.CurrentCamera
+return function(Frame: Frame, p1) --[[ Line: 5 ]]
+	-- upvalues: GuiPositionToScreenPositionModule (copy)
+	local CurrentCamera = game.Workspace.CurrentCamera
 	
-	if not currentCamera then
+	if not CurrentCamera then
 		return Vector2.zero
 	end
-	local layerCollector = p1:FindFirstAncestorWhichIsA("LayerCollector")
-	local var1 = currentCamera.ViewportSize / 2
+	local LayerCollector = Frame:FindFirstAncestorWhichIsA("LayerCollector")
+	local ViewportSizeRatio = CurrentCamera.ViewportSize / 2
 	
-	if not layerCollector then
-		return var1
+	if not LayerCollector then
+		return ViewportSizeRatio
 	end
-	local vector2 = Vector2.new(p2.Position.X, p2.Position.Y)
+	local _Vector2 = Vector2.new(p1.Position.X, p1.Position.Y)
 	
-	if vector2 == Vector2.zero then
-		vector2 = p1.AbsolutePosition + p1.AbsoluteSize / 2
+	if _Vector2 == Vector2.zero then
+		_Vector2 = Frame.AbsolutePosition + Frame.AbsoluteSize / 2
 	end
-	return guiPositionToScreenPositionModule(layerCollector, vector2, currentCamera) or var1
+	return GuiPositionToScreenPositionModule(LayerCollector, _Vector2, CurrentCamera) or ViewportSizeRatio
 end

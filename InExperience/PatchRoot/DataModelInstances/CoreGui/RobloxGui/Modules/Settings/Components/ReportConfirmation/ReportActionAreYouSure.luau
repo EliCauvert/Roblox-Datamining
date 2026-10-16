@@ -1,186 +1,186 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local roactModule = require(corePackagesService.Packages.Roact)
-local tModule = require(corePackagesService.Packages.t)
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local foundationModule = require(corePackagesService.Packages.Foundation)
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local withFoundationOrUIBloxStyle = require(corePackagesService.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
-local textButton = UIBloxModule.App.Button.TextButton
-local reportActionSelection = roactModule.PureComponent:extend("ReportActionSelection")
+﻿local CorePackages = game:GetService("CorePackages")
+local RoactModule = require(CorePackages.Packages.Roact)
+local TModule = require(CorePackages.Packages.t)
+local UIBloxModule = require(CorePackages.Packages.UIBlox)
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local WithFoundationOrUIBloxStyleFunction = require(CorePackages.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
+local TextButton = UIBloxModule.App.Button.TextButton
+local ReportActionSelection = RoactModule.PureComponent:extend("ReportActionSelection")
 
-local var1 = function() end
+local function OnCancelActivated() --[[ Line: 25 ]] end
 
-reportActionSelection.defaultProps = {
+ReportActionSelection.defaultProps = {
 	isMuted = true,
 	isBlocked = true,
 	ZIndex = 1,
 	uiScale = 1.3,
-	onCancelActivated = var1,
-	onConfirmActivated = var1
+	onCancelActivated = OnCancelActivated,
+	onConfirmActivated = OnCancelActivated
 }
-reportActionSelection.validateProps = tModule.strictInterface({
-	mutedTitleText = tModule.string,
-	blockedTitleText = tModule.string,
-	mutedAndBlockedTitleText = tModule.string,
-	mutedSubtitleText = tModule.string,
-	blockedSubtitleText = tModule.string,
-	mutedAndBlockedSubtitleText = tModule.string,
-	cancelText = tModule.string,
-	confirmText = tModule.string,
-	isMuted = tModule.boolean,
-	isBlocked = tModule.boolean,
-	onCancelActivated = tModule.callback,
-	onConfirmActivated = tModule.callback,
-	ZIndex = tModule.optional(tModule.number),
-	uiScale = tModule.optional(tModule.number)
+ReportActionSelection.validateProps = TModule.strictInterface({
+	mutedTitleText = TModule.string,
+	blockedTitleText = TModule.string,
+	mutedAndBlockedTitleText = TModule.string,
+	mutedSubtitleText = TModule.string,
+	blockedSubtitleText = TModule.string,
+	mutedAndBlockedSubtitleText = TModule.string,
+	cancelText = TModule.string,
+	confirmText = TModule.string,
+	isMuted = TModule.boolean,
+	isBlocked = TModule.boolean,
+	onCancelActivated = TModule.callback,
+	onConfirmActivated = TModule.callback,
+	ZIndex = TModule.optional(TModule.number),
+	uiScale = TModule.optional(TModule.number)
 })
 
-function reportActionSelection.init(p1)
-	function p0.onCancelActivated()
-		-- upvalues: p1 (ref)
-		p1.props.onCancelActivated()
+function ReportActionSelection.init(DefaultProps) --[[ Line: 53 ]]
+	function DefaultProps.onCancelActivated() --[[ Line: 54 ]]
+		-- upvalues: DefaultProps (copy)
+		DefaultProps.props.onCancelActivated()
 	end
 	
-	function p0.onConfirmActivated()
-		-- upvalues: p1 (ref)
-		p1.props.onConfirmActivated()
+	function DefaultProps.onConfirmActivated() --[[ Line: 58 ]]
+		-- upvalues: DefaultProps (copy)
+		DefaultProps.props.onConfirmActivated()
 	end
 	
-	local blockedTitleText = nil
-	local blockedSubtitleText = nil
+	local BlockedTitleText = nil
+	local BlockedSubtitleText = nil
 	
-	if p1.props.isMuted and p1.props.isBlocked then
-		blockedTitleText = p1.props.mutedAndBlockedTitleText
-		blockedSubtitleText = p1.props.mutedAndBlockedSubtitleText
-	elseif p1.props.isMuted then
-		blockedTitleText = p1.props.mutedTitleText
-		blockedSubtitleText = p1.props.mutedSubtitleText
-	elseif p1.props.isBlocked then
-		blockedTitleText = p1.props.blockedTitleText
-		blockedSubtitleText = p1.props.blockedSubtitleText
+	if DefaultProps.props.isMuted and DefaultProps.props.isBlocked then
+		BlockedTitleText = DefaultProps.props.mutedAndBlockedTitleText
+		BlockedSubtitleText = DefaultProps.props.mutedAndBlockedSubtitleText
+	elseif DefaultProps.props.isMuted then
+		BlockedTitleText = DefaultProps.props.mutedTitleText
+		BlockedSubtitleText = DefaultProps.props.mutedSubtitleText
+	elseif DefaultProps.props.isBlocked then
+		BlockedTitleText = DefaultProps.props.blockedTitleText
+		BlockedSubtitleText = DefaultProps.props.blockedSubtitleText
 	end
-	p1:setState({
-		titleText = blockedTitleText,
-		subtitleText = blockedSubtitleText
+	DefaultProps:setState({
+		titleText = BlockedTitleText,
+		subtitleText = BlockedSubtitleText
 	})
 end
 
-function reportActionSelection.render(p1)
-	-- upvalues: withFoundationOrUIBloxStyle (ref), foundationFontFaceMigration (ref), roactModule (ref), normalizeFontFace (ref), textButton (ref), UIBloxModule (ref)
-	return withFoundationOrUIBloxStyle(function(p2)
-		-- upvalues: foundationFontFaceMigration (copy)
+function ReportActionSelection.render(DefaultProps) --[[ Line: 82 ]]
+	-- upvalues: WithFoundationOrUIBloxStyleFunction (copy), FoundationFontFaceMigration (copy), RoactModule (copy), NormalizeFontFaceFunction (copy), TextButton (copy), UIBloxModule (copy)
+	return WithFoundationOrUIBloxStyleFunction(function(p1) --[[ Line: 83 ]]
+		-- upvalues: FoundationFontFaceMigration (upval)
 		return {
-			Tokens = if foundationFontFaceMigration then p2 else nil,
+			Tokens = if FoundationFontFaceMigration then p1 else nil,
 			Theme = {
 				SystemPrimaryContent = {
-					Color = p2.Color.ActionSubEmphasis.Foreground.Color3,
-					Transparency = p2.Color.ActionSubEmphasis.Foreground.Transparency
+					Color = p1.Color.ActionSubEmphasis.Foreground.Color3,
+					Transparency = p1.Color.ActionSubEmphasis.Foreground.Transparency
 				},
 				TextEmphasis = {
-					Color = p2.Color.Content.Emphasis.Color3,
-					Transparency = p2.Color.Content.Emphasis.Transparency
+					Color = p1.Color.Content.Emphasis.Color3,
+					Transparency = p1.Color.Content.Emphasis.Transparency
 				}
 			},
 			Font = {
 				BaseSize = 1,
 				CaptionHeader = {
-					Font = p2.Typography.CaptionLarge.Font,
-					RelativeSize = p2.Typography.CaptionLarge.FontSize
+					Font = p1.Typography.CaptionLarge.Font,
+					RelativeSize = p1.Typography.CaptionLarge.FontSize
 				},
 				Header1 = {
-					Font = p2.Typography.HeadingSmall.Font,
-					RelativeSize = p2.Typography.HeadingSmall.FontSize
+					Font = p1.Typography.HeadingSmall.Font,
+					RelativeSize = p1.Typography.HeadingSmall.FontSize
 				}
 			}
 		}
-	end, function(p2)
-		-- upvalues: roactModule (copy), p1 (ref), foundationFontFaceMigration (copy), normalizeFontFace (copy), textButton (copy), UIBloxModule (copy)
-		local baseSize = p2.Font.BaseSize
+	end, function(p1) --[[ Line: 108 ]]
+		-- upvalues: RoactModule (upval), DefaultProps (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), TextButton (upval), UIBloxModule (upval)
+		local BaseSize = p1.Font.BaseSize
 		
-		return roactModule.createElement("Frame", {
+		return RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.fromScale(1, 1),
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			Position = UDim2.fromScale(0.5, 0.5),
-			ZIndex = p1.props.ZIndex
+			ZIndex = DefaultProps.props.ZIndex
 		}, {
-			uiScale = roactModule.createElement("UIScale", { Scale = p1.props.uiScale }),
-			layout = roactModule.createElement("UIListLayout", {
+			uiScale = RoactModule.createElement("UIScale", { Scale = DefaultProps.props.uiScale }),
+			layout = RoactModule.createElement("UIListLayout", {
 				VerticalAlignment = Enum.VerticalAlignment.Top,
 				HorizontalAlignment = Enum.HorizontalAlignment.Center,
 				Padding = UDim.new(0, 22),
 				FillDirection = Enum.FillDirection.Vertical,
 				SortOrder = Enum.SortOrder.LayoutOrder
 			}),
-			title = roactModule.createElement("TextLabel", {
+			title = RoactModule.createElement("TextLabel", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 1,
-				Text = p1.state.titleText,
-				TextColor3 = p2.Theme.TextEmphasis.Color,
-				TextTransparency = p2.Theme.TextEmphasis.Transparency,
-				TextSize = p2.Font.Header1.RelativeSize * baseSize,
-				Font = if foundationFontFaceMigration then nil else p2.Font.Header1.Font,
-				FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.HeadingSmall.Font) else nil,
+				Text = DefaultProps.state.titleText,
+				TextColor3 = p1.Theme.TextEmphasis.Color,
+				TextTransparency = p1.Theme.TextEmphasis.Transparency,
+				TextSize = p1.Font.Header1.RelativeSize * BaseSize,
+				Font = if FoundationFontFaceMigration then nil else p1.Font.Header1.Font,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p1.Tokens.Typography.HeadingSmall.Font) else nil,
 				AutomaticSize = Enum.AutomaticSize.XY
 			}),
-			subtitle = roactModule.createElement("TextLabel", {
+			subtitle = RoactModule.createElement("TextLabel", {
 				TextWrapped = true,
 				BackgroundTransparency = 1,
 				LayoutOrder = 2,
 				Size = UDim2.fromOffset(612, 0),
-				Text = p1.state.subtitleText,
-				TextColor3 = p2.Theme.TextEmphasis.Color,
-				TextTransparency = p2.Theme.TextEmphasis.Transparency,
-				TextSize = p2.Font.CaptionHeader.RelativeSize * baseSize,
-				Font = if foundationFontFaceMigration then nil else p2.Font.CaptionHeader.Font,
-				FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.CaptionLarge.Font) else nil,
+				Text = DefaultProps.state.subtitleText,
+				TextColor3 = p1.Theme.TextEmphasis.Color,
+				TextTransparency = p1.Theme.TextEmphasis.Transparency,
+				TextSize = p1.Font.CaptionHeader.RelativeSize * BaseSize,
+				Font = if FoundationFontFaceMigration then nil else p1.Font.CaptionHeader.Font,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p1.Tokens.Typography.CaptionLarge.Font) else nil,
 				AutomaticSize = Enum.AutomaticSize.Y
 			}),
-			spacer = roactModule.createElement("Frame", {
+			spacer = RoactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 3,
 				Size = UDim2.fromOffset(0, 62)
 			}),
-			actions = roactModule.createElement("Frame", {
+			actions = RoactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 4,
 				Size = UDim2.fromOffset(584, 0),
 				AutomaticSize = Enum.AutomaticSize.Y
 			}, {
-				layout = roactModule.createElement("UIListLayout", {
+				layout = RoactModule.createElement("UIListLayout", {
 					VerticalAlignment = Enum.VerticalAlignment.Center,
 					HorizontalAlignment = Enum.HorizontalAlignment.Center,
 					Padding = UDim.new(0, 70),
 					FillDirection = Enum.FillDirection.Horizontal,
 					SortOrder = Enum.SortOrder.LayoutOrder
 				}),
-				cancelContainer = roactModule.createElement("Frame", {
+				cancelContainer = RoactModule.createElement("Frame", {
 					BorderSizePixel = 0,
 					LayoutOrder = 1,
-					BackgroundColor3 = p2.Theme.SystemPrimaryContent.Color,
-					BackgroundTransparency = p2.Theme.SystemPrimaryContent.Transparency,
+					BackgroundColor3 = p1.Theme.SystemPrimaryContent.Color,
+					BackgroundTransparency = p1.Theme.SystemPrimaryContent.Transparency,
 					Size = UDim2.fromOffset(234, 44)
 				}, {
-					uiCorner = roactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 4) }),
-					cancelButton = roactModule.createElement(textButton, {
+					uiCorner = RoactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 4) }),
+					cancelButton = RoactModule.createElement(TextButton, {
 						size = UDim2.fromScale(1, 1),
-						text = p1.props.cancelText,
-						onActivated = p1.onCancelActivated
+						text = DefaultProps.props.cancelText,
+						onActivated = DefaultProps.onCancelActivated
 					})
 				}),
-				confirmContainer = roactModule.createElement("Frame", {
+				confirmContainer = RoactModule.createElement("Frame", {
 					BackgroundTransparency = 0,
 					BorderSizePixel = 0,
 					LayoutOrder = 2,
 					BackgroundColor3 = UIBloxModule.App.Style.Colors.Blue,
 					Size = UDim2.fromOffset(234, 44)
 				}, {
-					uiCorner = roactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 4) }),
-					confirmButton = roactModule.createElement(textButton, {
+					uiCorner = RoactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 4) }),
+					confirmButton = RoactModule.createElement(TextButton, {
 						size = UDim2.fromScale(1, 1),
-						text = p1.props.confirmText,
-						onActivated = p1.onConfirmActivated
+						text = DefaultProps.props.confirmText,
+						onActivated = DefaultProps.onConfirmActivated
 					})
 				})
 			})
@@ -188,4 +188,4 @@ function reportActionSelection.render(p1)
 	end)
 end
 
-return reportActionSelection
+return ReportActionSelection

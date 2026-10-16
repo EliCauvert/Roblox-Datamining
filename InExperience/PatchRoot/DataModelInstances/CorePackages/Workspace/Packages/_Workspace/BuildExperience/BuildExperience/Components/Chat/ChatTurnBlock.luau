@@ -1,45 +1,51 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local foundationModule = require(parent.Foundation)
-local localizationModule = require(parent.Localization)
-local markdownModule = require(parent.Markdown)
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local useLocalization = localizationModule.Hooks.useLocalization
-local localizationRoactContext = localizationModule.LocalizationRoactContext
-local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local chatScrollAnchorContextModule = require(buildExperience.Chat.ChatScrollAnchorContext)
-local _ = require(buildExperience.Chat.chatTypes)
-local turnProjectionModule = require(buildExperience.Chat.turnProjection)
-local fFlagBuildExperienceChatAccordionScrollAnchorModule = require(buildExperience.Flags.FFlagBuildExperienceChatAccordionScrollAnchor)
-local fFlagBuildExperienceCopyChatMessagesModule = require(buildExperience.Flags.FFlagBuildExperienceCopyChatMessages)
-local fFlagBuildExperienceManageDevProductModule = require(buildExperience.Flags.FFlagBuildExperienceManageDevProduct)
-local fFlagBuildAgentAdCampaignCardModule = require(buildExperience.Flags.FFlagBuildAgentAdCampaignCard)
-local fFlagBuildEventsUpdate1Module = require(buildExperience.Flags.FFlagBuildEventsUpdate1)
-local sendBuildExperienceEventModule = require(buildExperience.Telemetry.sendBuildExperienceEvent)
-local reportTurnActivityGapModule = require(buildExperience.Telemetry.reportTurnActivityGap)
-local getMarkdownRendererPropsModule = require(buildExperience.utils.getMarkdownRendererProps)
-local agentPlanCardModule = require(buildExperience.Components.AgentCard.AgentPlanCard)
-local var1 = if fFlagBuildExperienceManageDevProductModule then require(buildExperience.Components.AgentCard.AgentDevProductCard) else nil
-local answerStackModule = require(buildExperience.Components.AnswerStack.AnswerStack)
-local optionSelectorModule = require(buildExperience.Components.AnswerStack.OptionSelector)
-local agentTurnFeedbackModule = require(script.Parent.AgentTurnFeedback)
-local chatUserMessageModule = require(script.Parent.ChatUserMessage)
-local playtestCompletedCardModule = require(script.Parent.PlaytestCompletedCard)
-local var2 = if fFlagBuildAgentAdCampaignCardModule then require(buildExperience.Components.Ads.AdUpsellCard) else nil
-local var3 = if fFlagBuildAgentAdCampaignCardModule then require(buildExperience.Components.Ads.AdCampaignIsActiveCard) else nil
-local var4 = if fFlagBuildAgentAdCampaignCardModule then require(script.Parent.useAgentAdCampaignTurnCards) else nil
-local turnActivitySummaryModule = require(script.Parent.TurnActivitySummary)
-local icon = foundationModule.Icon
-local text = foundationModule.Text
-local view = foundationModule.View
-local iconName = foundationModule.Enums.IconName
-local iconSize = foundationModule.Enums.IconSize
-local iconVariant = foundationModule.Enums.IconVariant
-local stateLayerAffordance = foundationModule.Enums.StateLayerAffordance
-local markdownViewer = markdownModule.Components.MarkdownViewer
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local FoundationModule = require(Parent.Foundation)
+local LocalizationModule = require(Parent.Localization)
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local UseLocalizationFunction = LocalizationModule.Hooks.useLocalization
+local LocalizationRoactContext = LocalizationModule.LocalizationRoactContext
+local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
+local ChatScrollAnchorContextModule = require(BuildExperience.Chat.ChatScrollAnchorContext)
+local ChatCardEmphasisPositionProviderModule = require(script.Parent.ChatCardEmphasis.ChatCardEmphasisPositionProvider)
+local FFlagBuildExperienceChatCardEmphasisModule = require(BuildExperience.Flags.FFlagBuildExperienceChatCardEmphasis)
+local _ = require(BuildExperience.Chat.chatTypes)
+local FFlagBuildExperienceAnswerFormModule = require(BuildExperience.Flags.FFlagBuildExperienceAnswerForm)
+local AnswersCardContainerModule = if FFlagBuildExperienceAnswerFormModule then require(script.Parent.AnswersCardContainer) else nil
+local TurnProjectionModule = require(BuildExperience.Chat.turnProjection)
+local FFlagBuildExperienceChatAccordionScrollAnchorModule = require(BuildExperience.Flags.FFlagBuildExperienceChatAccordionScrollAnchor)
+local FFlagBuildExperienceCopyChatMessagesModule = require(BuildExperience.Flags.FFlagBuildExperienceCopyChatMessages)
+local FFlagBuildExperienceManageDevProductModule = require(BuildExperience.Flags.FFlagBuildExperienceManageDevProduct)
+local FFlagBuildAgentAdCampaignCardModule = require(BuildExperience.Flags.FFlagBuildAgentAdCampaignCard)
+local FFlagBuildAgentAdCampaignRefreshEligibilityModule = require(BuildExperience.Flags.FFlagBuildAgentAdCampaignRefreshEligibility)
+local FFlagBuildEventsUpdate1Module = require(BuildExperience.Flags.FFlagBuildEventsUpdate1)
+local FFlagBuildExperiencePlaytestCardPublishCtaModule = require(BuildExperience.Flags.FFlagBuildExperiencePlaytestCardPublishCta)
+local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
+local ReportTurnActivityGapModule = require(BuildExperience.Telemetry.reportTurnActivityGap)
+local GetMarkdownRendererPropsModule = require(BuildExperience.utils.getMarkdownRendererProps)
+local AgentPlanCardModule = require(BuildExperience.Components.AgentCard.AgentPlanCard)
+local AgentDevProductCardModule = if FFlagBuildExperienceManageDevProductModule then require(BuildExperience.Components.AgentCard.AgentDevProductCard) else nil
+local AnswerStackModule = require(BuildExperience.Components.AnswerStack.AnswerStack)
+local OptionSelectorModule = require(BuildExperience.Components.AnswerStack.OptionSelector)
+local AgentTurnFeedbackModule = require(script.Parent.AgentTurnFeedback)
+local ChatUserMessageModule = require(script.Parent.ChatUserMessage)
+local PlaytestCompletedCardModule = require(script.Parent.PlaytestCompletedCard)
+local UseIsPlaceVersionLiveModule = if FFlagBuildExperiencePlaytestCardPublishCtaModule then require(script.Parent.useIsPlaceVersionLive) else nil
+local AdUpsellCardModule = if FFlagBuildAgentAdCampaignCardModule then require(BuildExperience.Components.Ads.AdUpsellCard) else nil
+local AdCampaignIsActiveCardModule = if FFlagBuildAgentAdCampaignCardModule then require(BuildExperience.Components.Ads.AdCampaignIsActiveCard) else nil
+local UseAgentAdCampaignTurnCardsModule = if FFlagBuildAgentAdCampaignCardModule then require(script.Parent.useAgentAdCampaignTurnCards) else nil
+local TurnActivitySummaryModule = require(script.Parent.TurnActivitySummary)
+local Icon = FoundationModule.Icon
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local IconName = FoundationModule.Enums.IconName
+local IconSize = FoundationModule.Enums.IconSize
+local IconVariant = FoundationModule.Enums.IconVariant
+local StateLayerAffordance = FoundationModule.Enums.StateLayerAffordance
+local MarkdownViewer = require(Parent.Markdown).Components.MarkdownViewer
 local t = {}
-local t_1 = {
+local config = {
 	onAnswerSelectedByToolCallId = {},
 	onAnswerConfirmedByToolCallId = {},
 	onPlanAcceptedByToolCallId = {},
@@ -47,493 +53,544 @@ local t_1 = {
 	onDevProductRejectedByToolCallId = {}
 }
 
-local function constantSource()
+local function constantSource(): number --[[ Line: 122 ]]
 	return 0
 end
 
-local function useReactiveValue(p1)
-	-- upvalues: reactModule (ref), constantSource (ref), signalsReactModule (ref)
-	return signalsReactModule.useSignalState(reactModule.useCallback(function(p2)
-		-- upvalues: p1 (ref), constantSource (copy)
-		if typeof(p1) == "function" then
-			return p1(p2)
-		elseif typeof(p2) == "function" then
-			p2(constantSource)
+local function useReactiveValue(Callback) --[[ Line: 126 ]]
+	-- upvalues: ReactModule (copy), constantSource (copy), SignalsReactModule (copy)
+	return (SignalsReactModule.useSignalState((ReactModule.useCallback(function(Callback1: (any) -> ()) --[[ Line: 127 ]]
+		-- upvalues: Callback (copy), constantSource (upval)
+		if typeof(Callback) == "function" then
+			return (Callback(Callback1))
 		end
-		return p1
-	end, { p1 }))
+		if typeof(Callback1) == "function" then
+			Callback1(constantSource)
+		end
+		return Callback
+	end, { Callback }))))
 end
 
-local function _(p1)
-	return typeof(p1) == "string" or (typeof(p1) == "table" and #p1 > 0)
+local function _(p1): boolean --[[ Line: 140 | Named "hasSelectedOptions" ]]
+	return typeof(p1) == "string" or typeof(p1) == "table" and #p1 > 0
 end
 
-local function AnswerStackSection(p1)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), reactModule (ref), view (ref), text (ref), optionSelectorModule (ref), answerStackModule (ref)
-	local var5
-	local var6 = useLocalization({
-		customAnswer = localizationStringsModule.ANSWER_STACK_CUSTOM_ANSWER,
-		next = localizationStringsModule.ANSWER_STACK_NEXT,
-		submit = localizationStringsModule.ANSWER_STACK_SUBMIT
+local function AnswerStackSection(Frame) --[[ Line: 150 ]]
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), View (copy), Text (copy), OptionSelectorModule (copy), AnswerStackModule (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
+		customAnswer = LocalizationStringsModule.ANSWER_STACK_CUSTOM_ANSWER,
+		next = LocalizationStringsModule.ANSWER_STACK_NEXT,
+		submit = LocalizationStringsModule.ANSWER_STACK_SUBMIT
 	})
-	local prompt = p1.prompt
-	local question = prompt.question
-	local customResponseText = prompt.customResponseText
-	local var7 = p1.isActive == true
-	local isMultiSelect = question.responseType == "multi_select"
-	local var8 = if prompt.isLastQuestion == false then var6.next else var6.submit
-	local createElement = reactModule.createElement
-	local t = {
+	local Prompt = Frame.prompt
+	local Question = Prompt.question
+	local CustomResponseText = Prompt.customResponseText
+	local IsIsActive = Frame.isActive == true
+	local IsMultiSelect = Question.responseType == "multi_select"
+	local Next = if Prompt.isLastQuestion == false then UseLocalizationResult.next else UseLocalizationResult.submit
+	local CreateElementFunction = ReactModule.createElement
+	local config = {
 		tag = "col gap-medium size-full-0 auto-y",
-		LayoutOrder = p1.LayoutOrder,
-		testId = `ChatTurnBlock.AnswerStack.{question.id}`
+		LayoutOrder = Frame.LayoutOrder,
+		testId = `ChatTurnBlock.AnswerStack.{Question.id}`
 	}
-	local t_1 = {
-		Question = reactModule.createElement(text, {
+	local config1 = {
+		Question = ReactModule.createElement(Text, {
 			LayoutOrder = 1,
 			tag = "size-full-0 auto-y text-title-medium text-wrap text-align-x-left content-emphasis",
-			Text = question.question
+			Text = Question.question
 		})
 	}
+	local Element = nil
 	
-	if customResponseText ~= nil then
-		var5 = reactModule.createElement(optionSelectorModule, {
+	if CustomResponseText == nil then
+		if #Question.options > 0 then
+			local SelectedOptionId = Prompt.selectedOptionId
+			Element = ReactModule.createElement(AnswerStackModule, {
+				LayoutOrder = 2,
+				options = Question.options,
+				selectedOptionId = Prompt.selectedOptionId,
+				selectionMode = if IsMultiSelect then "multi" else "single",
+				confirmLabel = Next,
+				isConfirmDisabled = not (typeof(SelectedOptionId) == "string" or typeof(SelectedOptionId) == "table" and #SelectedOptionId > 0),
+				onConfirm = if IsMultiSelect and IsIsActive then Frame.onAnswerConfirmed else nil,
+				testId = `AnswerStack.{Question.id}`,
+				onOptionSelected = function(p1) --[[ Line: 190 ]]
+					-- upvalues: Frame (copy), IsMultiSelect (copy), IsIsActive (copy), Question (copy), Prompt (copy)
+					if Frame.onAnswerSelected == nil then return end
+					if IsMultiSelect then
+						if IsIsActive then
+							Frame.onAnswerSelected(Question, p1)
+						end
+						return
+					elseif Prompt.selectedOptionId == nil then
+						Frame.onAnswerSelected(Question, p1)
+					end
+				end
+			})
+		else
+			Element = nil
+		end
+	else
+		Element = ReactModule.createElement(OptionSelectorModule, {
 			LayoutOrder = 2,
 			isSelected = true,
-			title = var6.customAnswer,
-			description = customResponseText,
-			testId = `AnswerStack.{question.id}.CustomAnswer`,
-			onActivated = function() end
+			title = UseLocalizationResult.customAnswer,
+			description = CustomResponseText,
+			testId = `AnswerStack.{Question.id}.CustomAnswer`,
+			onActivated = function() --[[ Line: 179 ]] end
 		})
-	elseif #question.options > 0 then
-		var5 = reactModule.createElement
-		local var9 = answerStackModule
-		local t_2 = {
-			LayoutOrder = 2,
-			options = question.options,
-			selectedOptionId = prompt.selectedOptionId,
-			selectionMode = if isMultiSelect then "multi" else "single",
-			confirmLabel = var8
-		}
-		local selectedOptionId = prompt.selectedOptionId
-		t_2.isConfirmDisabled = not (typeof(selectedOptionId) == "string" or (typeof(selectedOptionId) ~= "table" and #selectedOptionId > 0))
-		t_2.onConfirm = if isMultiSelect and var7 then p1.onAnswerConfirmed else nil
-		t_2.testId = `AnswerStack.{question.id}`
-		
-		function t_2.onOptionSelected(p2)
-			-- upvalues: p1 (ref), isMultiSelect (ref), var7 (ref), question (ref), prompt (ref)
-			if p1.onAnswerSelected == nil then return end
-			if isMultiSelect then
-				if var7 then
-					p1.onAnswerSelected(question, p2)
-				end
-				return
-			elseif prompt.selectedOptionId == nil then
-				p1.onAnswerSelected(question, p2)
-			end
-		end
-		
-		var5 = var5(var9, t_2)
-	else
-		var5 = nil
 	end
-	t_1.Answers = var5
+	config1.Answers = Element
 	
-	return createElement(view, t, t_1)
+	return CreateElementFunction(View, config, config1)
 end
 
-local function PlanProposalSection(p1)
-	-- upvalues: reactModule (ref), agentPlanCardModule (ref), view (ref), chatUserMessageModule (ref)
-	local planProposal = p1.planProposal
-	local var5 = reactModule.createElement(agentPlanCardModule, {
+local function PlanProposalSection(Frame: Frame) --[[ Line: 209 ]]
+	-- upvalues: ReactModule (copy), AgentPlanCardModule (copy), View (copy), ChatUserMessageModule (copy)
+	local PlanProposal = Frame.planProposal
+	local Element = ReactModule.createElement(AgentPlanCardModule, {
 		layoutOrder = 1,
 		testId = "ChatTurnBlock.PlanProposal",
-		title = planProposal.title,
-		textContent = planProposal.textContent,
-		summary = planProposal.summary,
-		onBuild = p1.onPlanAccepted or function() end,
-		isBuildDisabled = not (planProposal.isAccepted ~= true and planProposal.feedbackText == nil)
+		title = PlanProposal.title,
+		textContent = PlanProposal.textContent,
+		summary = PlanProposal.summary,
+		onBuild = Frame.onPlanAccepted or function() --[[ Line: 217 ]] end,
+		isBuildDisabled = not (PlanProposal.isAccepted ~= true and PlanProposal.feedbackText == nil)
 	})
 	
-	return if planProposal.feedbackText == nil then reactModule.createElement(view, {
+	return if PlanProposal.feedbackText == nil then ReactModule.createElement(View, {
 		tag = "col gap-medium size-full-0 auto-y",
-		LayoutOrder = p1.LayoutOrder
-	}, { Plan = var5 }) else reactModule.createElement(view, {
+		LayoutOrder = Frame.LayoutOrder
+	}, { Plan = Element }) else ReactModule.createElement(View, {
 		tag = "col gap-medium size-full-0 auto-y",
-		LayoutOrder = p1.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		Plan = var5,
-		Feedback = reactModule.createElement(chatUserMessageModule, {
+		Plan = Element,
+		Feedback = ReactModule.createElement(ChatUserMessageModule, {
 			LayoutOrder = 2,
-			message = { kind = "user_message", text = planProposal.feedbackText }
+			message = { kind = "user_message", text = PlanProposal.feedbackText }
 		})
 	})
 end
 
-local function AgentMessageSegment(p1)
-	-- upvalues: useReactiveValue (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), localizationRoactContext (ref), foundationModule (ref), getMarkdownRendererPropsModule (ref), view (ref), icon (ref), iconName (ref), iconVariant (ref), iconSize (ref), text (ref), markdownViewer (ref)
-	local var5 = useReactiveValue(p1.segment.text)
-	local _ = nil
-	local var6 = useLocalization({
-		assistantResponseFailed = localizationStringsModule.CHAT_ASSISTANT_RESPONSE_FAILED,
-		assistantStopped = localizationStringsModule.CHAT_ASSISTANT_STOPPED
+local function AgentMessageSegment(Frame: Frame) --[[ Line: 246 ]]
+	-- upvalues: useReactiveValue (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), LocalizationRoactContext (copy), FoundationModule (copy), GetMarkdownRendererPropsModule (copy), View (copy), Icon (copy), IconName (copy), IconVariant (copy), IconSize (copy), Text (copy), MarkdownViewer (copy)
+	local UseReactiveValueResult = useReactiveValue(Frame.segment.text)
+	local UseLocalizationResult = UseLocalizationFunction({
+		assistantResponseFailed = LocalizationStringsModule.CHAT_ASSISTANT_RESPONSE_FAILED,
+		assistantStopped = LocalizationStringsModule.CHAT_ASSISTANT_STOPPED
 	})
-	local var7 = reactModule.useContext(localizationRoactContext)
-	local var8 = if var5 == localizationStringsModule.CHAT_ASSISTANT_RESPONSE_FAILED then var6.assistantResponseFailed elseif var5 == localizationStringsModule.CHAT_ASSISTANT_STOPPED then var6.assistantStopped else var5
+	local UseContextResult = ReactModule.useContext(LocalizationRoactContext)
+	local AssistantResponseFailed = if UseReactiveValueResult == LocalizationStringsModule.CHAT_ASSISTANT_RESPONSE_FAILED then UseLocalizationResult.assistantResponseFailed elseif UseReactiveValueResult == LocalizationStringsModule.CHAT_ASSISTANT_STOPPED then UseLocalizationResult.assistantStopped else UseReactiveValueResult
 	
-	if p1.segment.errorCode ~= nil then
-		var8 = var7:Format(localizationStringsModule.CHAT_ERROR_CODE_TEXT, { ERROR_CODE = p1.segment.errorCode, ERROR_TEXT = var8 })
+	if Frame.segment.errorCode ~= nil then
+		AssistantResponseFailed = UseContextResult:Format(LocalizationStringsModule.CHAT_ERROR_CODE_TEXT, {
+			ERROR_CODE = Frame.segment.errorCode,
+			ERROR_TEXT = AssistantResponseFailed
+		})
 	end
-	local var9 = foundationModule.Hooks.useTokens()
+	local UseTokensResult = FoundationModule.Hooks.useTokens()
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 265 ]]
+		-- upvalues: GetMarkdownRendererPropsModule (upval), UseTokensResult (copy), Frame (copy)
+		return GetMarkdownRendererPropsModule(UseTokensResult, Frame.markdownTextStyle)
+	end, { UseTokensResult, Frame.markdownTextStyle })
 	
-	return if var8 == "" then nil elseif p1.segment.isError then reactModule.createElement(view, {
+	return if AssistantResponseFailed == "" then nil elseif Frame.segment.isError then ReactModule.createElement(View, {
 		tag = "row align-y-center gap-xsmall size-full-0 auto-y",
 		testId = "ChatTurnBlock.ErrorMessage",
-		LayoutOrder = p1.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		Icon = reactModule.createElement(icon, {
+		Icon = ReactModule.createElement(Icon, {
 			LayoutOrder = 1,
 			testId = "ChatTurnBlock.ErrorMessage.Icon",
-			name = iconName.CircleX,
-			variant = iconVariant.Filled,
-			size = iconSize.Small,
-			style = var9.Color.System.Alert
+			name = IconName.CircleX,
+			variant = IconVariant.Filled,
+			size = IconSize.Small,
+			style = UseTokensResult.Color.System.Alert
 		}),
-		Text = reactModule.createElement(text, {
+		Text = ReactModule.createElement(Text, {
 			LayoutOrder = 2,
 			tag = "fill text-body-medium text-wrap text-align-x-left content-emphasis",
-			Text = var8
+			Text = AssistantResponseFailed
 		})
-	}) else reactModule.createElement(markdownViewer, {
-		Markdown = var8,
+	}) else ReactModule.createElement(MarkdownViewer, {
+		Markdown = AssistantResponseFailed,
 		WrapperProps = {
 			tag = "size-full-0 auto-y text-body-medium content-emphasis",
-			LayoutOrder = p1.LayoutOrder
+			LayoutOrder = Frame.LayoutOrder
 		},
-		MarkdownRendererProps = reactModule.useMemo(function()
-			-- upvalues: getMarkdownRendererPropsModule (copy), var9 (ref), p1 (ref)
-			return getMarkdownRendererPropsModule(var9, p1.markdownTextStyle)
-		end, { var9, p1.markdownTextStyle })
+		MarkdownRendererProps = UseMemoResult
 	})
 end
 
-local function DevProductProposalSection(p1)
-	-- upvalues: reactModule (ref), view (ref), var1 (ref)
-	local devProductProposal = p1.devProductProposal
+local function PlaytestCardSection(Frame) --[[ Line: 316 ]]
+	-- upvalues: UseIsPlaceVersionLiveModule (copy), ReactModule (copy), PlaytestCompletedCardModule (copy)
+	return ReactModule.createElement(PlaytestCompletedCardModule, {
+		LayoutOrder = Frame.LayoutOrder,
+		onPlaytest = Frame.onPlaytest,
+		onPublish = Frame.onPublish,
+		isPublishDisabled = UseIsPlaceVersionLiveModule(if Frame.onPublish == nil then nil else Frame.placeId, Frame.publishedVersionNumber),
+		isLoading = Frame.isLoading
+	})
+end
+
+local function DevProductProposalSection(Frame) --[[ Line: 335 ]]
+	-- upvalues: ReactModule (copy), View (copy), AgentDevProductCardModule (copy)
+	local DevProductProposal = Frame.devProductProposal
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "col gap-medium size-full-0 auto-y",
-		LayoutOrder = p1.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		DevProduct = reactModule.createElement(var1, {
+		DevProduct = ReactModule.createElement(AgentDevProductCardModule, {
 			layoutOrder = 1,
 			testId = "ChatTurnBlock.DevProductProposal",
-			action = devProductProposal.action,
-			name = devProductProposal.name,
-			description = devProductProposal.description,
-			priceInRobux = devProductProposal.priceInRobux,
-			productId = devProductProposal.productId,
-			imageAssetId = devProductProposal.imageAssetId,
-			onApprove = p1.onApprove or function() end,
-			onReject = p1.onReject or function() end,
-			isActionDisabled = not (devProductProposal.isApproved ~= true and devProductProposal.isRejected ~= true),
-			isPending = devProductProposal.isPending,
-			hasError = devProductProposal.hasError,
-			canRetry = devProductProposal.canRetry
+			action = DevProductProposal.action,
+			name = DevProductProposal.name,
+			description = DevProductProposal.description,
+			priceInRobux = DevProductProposal.priceInRobux,
+			productId = DevProductProposal.productId,
+			imageAssetId = DevProductProposal.imageAssetId,
+			productType = DevProductProposal.productType,
+			itemKind = DevProductProposal.itemKind,
+			itemId = DevProductProposal.itemId,
+			cancelRenewals = DevProductProposal.cancelRenewals,
+			onApprove = Frame.onApprove or function() --[[ Line: 354 ]] end,
+			onReject = Frame.onReject or function() --[[ Line: 355 ]] end,
+			isActionDisabled = not (DevProductProposal.isApproved ~= true and DevProductProposal.isRejected ~= true),
+			isPending = DevProductProposal.isPending,
+			hasError = DevProductProposal.hasError,
+			canRetry = DevProductProposal.canRetry
 		})
 	})
 end
 
-local function renderClientToolSegment(p1, p2, p3)
-	-- upvalues: reactModule (ref), AnswerStackSection (ref), PlanProposalSection (ref), fFlagBuildExperienceManageDevProductModule (ref), DevProductProposalSection (ref)
-	return if p1.answerStackPrompt == nil then if p1.planProposal == nil then if fFlagBuildExperienceManageDevProductModule and p1.devProductProposal ~= nil then reactModule.createElement(DevProductProposalSection, {
-		LayoutOrder = p2,
-		devProductProposal = p1.devProductProposal,
-		onApprove = if p1.isActive then p3.onDevProductApprovedByToolCallId[p1.toolCallId] else nil,
-		onReject = if p1.isActive then p3.onDevProductRejectedByToolCallId[p1.toolCallId] else nil
-	}) else nil else reactModule.createElement(PlanProposalSection, {
-		LayoutOrder = p2,
-		planProposal = p1.planProposal,
-		onPlanAccepted = if p1.isActive then p3.onPlanAcceptedByToolCallId[p1.toolCallId] else nil
-	}) else reactModule.createElement(AnswerStackSection, {
-		LayoutOrder = p2,
-		prompt = p1.answerStackPrompt,
-		isActive = p1.isActive,
-		onAnswerSelected = if p1.isActive then p3.onAnswerSelectedByToolCallId[p1.toolCallId] else nil,
-		onAnswerConfirmed = if p1.isActive then p3.onAnswerConfirmedByToolCallId[p1.toolCallId] else nil
+local function renderClientToolSegment(Segment, LayoutOrder, p1) --[[ Line: 365 ]]
+	-- upvalues: FFlagBuildExperienceAnswerFormModule (copy), ReactModule (copy), AnswersCardContainerModule (copy), AnswerStackSection (copy), PlanProposalSection (copy), FFlagBuildExperienceManageDevProductModule (copy), DevProductProposalSection (copy)
+	return if FFlagBuildExperienceAnswerFormModule and Segment.answeredPrompts ~= nil then ReactModule.createElement(AnswersCardContainerModule, {
+		LayoutOrder = LayoutOrder,
+		prompts = Segment.answeredPrompts
+	}) elseif FFlagBuildExperienceAnswerFormModule and Segment.answerStackPrompt ~= nil then nil elseif Segment.answerStackPrompt == nil then if Segment.planProposal == nil then if FFlagBuildExperienceManageDevProductModule and Segment.devProductProposal ~= nil then ReactModule.createElement(DevProductProposalSection, {
+		LayoutOrder = LayoutOrder,
+		devProductProposal = Segment.devProductProposal,
+		onApprove = if Segment.isActive then p1.onDevProductApprovedByToolCallId[Segment.toolCallId] else nil,
+		onReject = if Segment.isActive then p1.onDevProductRejectedByToolCallId[Segment.toolCallId] else nil
+	}) else nil else ReactModule.createElement(PlanProposalSection, {
+		LayoutOrder = LayoutOrder,
+		planProposal = Segment.planProposal,
+		onPlanAccepted = if Segment.isActive then p1.onPlanAcceptedByToolCallId[Segment.toolCallId] else nil
+	}) else ReactModule.createElement(AnswerStackSection, {
+		LayoutOrder = LayoutOrder,
+		prompt = Segment.answerStackPrompt,
+		isActive = Segment.isActive,
+		onAnswerSelected = if Segment.isActive then p1.onAnswerSelectedByToolCallId[Segment.toolCallId] else nil,
+		onAnswerConfirmed = if Segment.isActive then p1.onAnswerConfirmedByToolCallId[Segment.toolCallId] else nil
 	})
 end
 
-local function renderWorkSegment(p1, p2, p3, p4, p5)
-	-- upvalues: reactModule (ref), AgentMessageSegment (ref), turnActivitySummaryModule (ref), renderClientToolSegment (ref)
-	return if p1.kind == "agent_message" then reactModule.createElement(AgentMessageSegment, {
-		LayoutOrder = p2,
-		segment = p1,
-		markdownTextStyle = p3
-	}) elseif p1.kind == "activity_summary" then reactModule.createElement(turnActivitySummaryModule, { LayoutOrder = p2, segment = p1, clockBinding = p4 }) elseif p1.kind == "client_tool" then renderClientToolSegment(p1, p2, p5) else nil
+local function renderWorkSegment(Segment, LayoutOrder, MarkdownTextStyle, ClockBinding, LocalToolActions) --[[ Line: 415 ]]
+	-- upvalues: ReactModule (copy), AgentMessageSegment (copy), TurnActivitySummaryModule (copy), renderClientToolSegment (copy)
+	return if Segment.kind == "agent_message" then ReactModule.createElement(AgentMessageSegment, {
+		LayoutOrder = LayoutOrder,
+		segment = Segment,
+		markdownTextStyle = MarkdownTextStyle
+	}) elseif Segment.kind == "activity_summary" then ReactModule.createElement(TurnActivitySummaryModule, {
+		LayoutOrder = LayoutOrder,
+		segment = Segment,
+		clockBinding = ClockBinding
+	}) elseif Segment.kind == "client_tool" then renderClientToolSegment(Segment, LayoutOrder, LocalToolActions) else nil
 end
 
-local function TurnWorkSegment(p1)
-	-- upvalues: useReactiveValue (ref), useLocalization (ref), localizationStringsModule (ref), reactModule (ref), fFlagBuildExperienceChatAccordionScrollAnchorModule (ref), chatScrollAnchorContextModule (ref), foundationModule (ref), renderWorkSegment (ref), view (ref), stateLayerAffordance (ref), icon (ref), iconName (ref), iconSize (ref), text (ref)
-	local _ = nil
-	local var5 = useReactiveValue(p1.segment.label or "")
-	local workedDurationSeconds = p1.segment.workedDurationSeconds
-	local var6 = if workedDurationSeconds ~= nil then nil else math.max(0, math.floor(workedDurationSeconds + 0.5))
-	local actionCount = p1.segment.actionCount or 0
-	local var7 = useLocalization({
-		summary = if var6 == nil or var6 >= 60 then if var6 ~= nil then if actionCount == 1 then localizationStringsModule.CHAT_ONE_TASK_COMPLETED elseif actionCount > 1 then {
-			localizationStringsModule.CHAT_TASKS_COMPLETED,
-			NUM_COMPLETED_TASKS = actionCount
+local function TurnWorkSegment(Frame) --[[ Line: 441 ]]
+	-- upvalues: useReactiveValue (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), FFlagBuildExperienceChatAccordionScrollAnchorModule (copy), ChatScrollAnchorContextModule (copy), FoundationModule (copy), renderWorkSegment (copy), FFlagBuildExperienceChatCardEmphasisModule (copy), ChatCardEmphasisPositionProviderModule (copy), View (copy), StateLayerAffordance (copy), Icon (copy), IconName (copy), IconSize (copy), Text (copy)
+	local UseReactiveValueResult = useReactiveValue(Frame.segment.label or "")
+	local WorkedDurationSeconds: number = Frame.segment.workedDurationSeconds
+	local Largest = if WorkedDurationSeconds == nil then nil else math.max(0, (math.floor(WorkedDurationSeconds + 0.5)))
+	local ActionCount = Frame.segment.actionCount or 0
+	local UseLocalizationResult = UseLocalizationFunction({
+		summary = if Largest == nil or Largest >= 60 then if Largest == nil then if ActionCount == 1 then LocalizationStringsModule.CHAT_ONE_TASK_COMPLETED elseif ActionCount > 1 then {
+			LocalizationStringsModule.CHAT_TASKS_COMPLETED,
+			NUM_COMPLETED_TASKS = ActionCount
 		} else nil else {
-			localizationStringsModule.CHAT_WORKED_MINUTES_SECONDS,
-			MINUTES = math.floor(var6 / 60),
-			REM_SECONDS = var6 % 60
+			LocalizationStringsModule.CHAT_WORKED_MINUTES_SECONDS,
+			MINUTES = math.floor(Largest / 60),
+			REM_SECONDS = Largest % 60
 		} else {
-			localizationStringsModule.CHAT_WORKED_SECONDS,
-			SECONDS = var6
+			LocalizationStringsModule.CHAT_WORKED_SECONDS,
+			SECONDS = Largest
 		},
-		turnActivity = localizationStringsModule.CHAT_TURN_ACTIVITY
+		turnActivity = LocalizationStringsModule.CHAT_TURN_ACTIVITY
 	})
-	local var8 = if var6 == nil and actionCount <= 0 then if var5 == localizationStringsModule.CHAT_TURN_ACTIVITY then var7.turnActivity else var5 else var7.summary
-	local var9 = useReactiveValue(p1.segment.segments)
-	local var10, var11 = reactModule.useState(false)
-	local var12 = nil
-	local var13 = nil
+	local TurnActivity = if Largest == nil and ActionCount <= 0 then if UseReactiveValueResult == LocalizationStringsModule.CHAT_TURN_ACTIVITY then UseLocalizationResult.turnActivity else UseReactiveValueResult else UseLocalizationResult.summary
+	local UseReactiveValueResult1 = useReactiveValue(Frame.segment.segments)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseRefResult = nil
+	local Callback = nil
 	
-	if fFlagBuildExperienceChatAccordionScrollAnchorModule then
-		var12 = reactModule.useRef(nil)
-		var13 = reactModule.useContext(chatScrollAnchorContextModule)
+	if FFlagBuildExperienceChatAccordionScrollAnchorModule then
+		UseRefResult = ReactModule.useRef(nil)
+		Callback = ReactModule.useContext(ChatScrollAnchorContextModule)
 	end
-	local var14 = foundationModule.Hooks.useTokens()
-	local isDone = p1.isDone
-	local var15 = not p1.isDone or var10
-	local var16 = reactModule.useCallback(function()
-		-- upvalues: fFlagBuildExperienceChatAccordionScrollAnchorModule (copy), var13 (write), var12 (write), var11 (ref)
-		if fFlagBuildExperienceChatAccordionScrollAnchorModule and var13 ~= nil and var12 ~= nil then
-			var13(var12.current)
+	local UseTokensResult = FoundationModule.Hooks.useTokens()
+	local IsDone = Frame.isDone
+	local NoIsDone = not Frame.isDone or UseStateResult
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 487 ]]
+		-- upvalues: FFlagBuildExperienceChatAccordionScrollAnchorModule (upval), Callback (ref), UseRefResult (ref), UseStateResult2 (copy)
+		if FFlagBuildExperienceChatAccordionScrollAnchorModule and Callback ~= nil and UseRefResult ~= nil then
+			Callback(UseRefResult.current)
 		end
-		var11(function(p2)
-			return not p2
+		UseStateResult2(function(p1): boolean --[[ Line: 491 ]]
+			return not p1
 		end)
-	end, { var13 })
-	local t = {}
+	end, { Callback })
+	local Elements = {}
 	
-	if var15 then
-		local var17 = 1
+	if NoIsDone then
+		local ChildOrder = 1
 		
-		for i, v in var9 do
-			local var18 = renderWorkSegment(v, var17, p1.markdownTextStyle, p1.clockBinding, p1.localToolActions)
+		for _, value in UseReactiveValueResult1 do
+			local RenderWorkSegmentResult = renderWorkSegment(value, ChildOrder, Frame.markdownTextStyle, Frame.clockBinding, Frame.localToolActions)
 			
-			if var18 ~= nil then
-				t[v.key] = var18
-				var17 += 1
+			if RenderWorkSegmentResult ~= nil then
+				if FFlagBuildExperienceChatCardEmphasisModule then
+					RenderWorkSegmentResult = ReactModule.createElement(ChatCardEmphasisPositionProviderModule, { childOrder = ChildOrder }, RenderWorkSegmentResult)
+				end
+				Elements[value.key] = RenderWorkSegmentResult
+				ChildOrder += 1
 			end
 		end
 	end
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "col gap-medium size-full-0 auto-y",
 		testId = "ChatTurnBlock.TurnWork",
-		LayoutOrder = p1.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		Summary = if isDone then reactModule.createElement(view, {
+		Summary = if IsDone then ReactModule.createElement(View, {
 			LayoutOrder = 1,
 			tag = "row align-y-center gap-xsmall size-full-0 auto-y padding-y-xxsmall",
 			testId = "ChatTurnBlock.TurnWork.Summary",
-			ref = var12,
-			onActivated = var16,
-			stateLayer = { affordance = stateLayerAffordance.None }
+			ref = UseRefResult,
+			onActivated = UseResult,
+			stateLayer = { affordance = StateLayerAffordance.None }
 		}, {
-			Chevron = reactModule.createElement(icon, {
+			Chevron = ReactModule.createElement(Icon, {
 				LayoutOrder = 1,
-				name = if var10 then iconName.ChevronLargeDown else iconName.ChevronLargeRight,
-				size = iconSize.XSmall,
-				style = var14.Color.Content.Muted
+				name = if UseStateResult then IconName.ChevronLargeDown else IconName.ChevronLargeRight,
+				size = IconSize.XSmall,
+				style = UseTokensResult.Color.Content.Muted
 			}),
-			Label = reactModule.createElement(text, {
+			Label = ReactModule.createElement(Text, {
 				LayoutOrder = 2,
 				tag = "fill text-body-medium text-wrap text-align-x-left content-muted",
-				Text = var8
+				Text = TurnActivity
 			})
 		}) else nil,
-		Work = if var15 then reactModule.createElement(view, {
+		Work = if NoIsDone then ReactModule.createElement(View, {
 			testId = "ChatTurnBlock.TurnWork.Content",
-			LayoutOrder = if isDone then 2 else 1,
+			LayoutOrder = if IsDone then 2 else 1,
 			tag = {
-				["col gap-xlarge size-full-0 auto-y padding-left-large"] = isDone,
-				["col gap-xlarge size-full-0 auto-y"] = not isDone
+				["col gap-xlarge size-full-0 auto-y padding-left-large"] = IsDone,
+				["col gap-xlarge size-full-0 auto-y"] = not IsDone
 			}
-		}, t) else nil
+		}, Elements) else nil
 	})
 end
 
-return reactModule.memo(function(p2)
-	-- upvalues: reactModule (ref), turnProjectionModule (ref), reportTurnActivityGapModule (ref), useReactiveValue (ref), t (ref), fFlagBuildAgentAdCampaignCardModule (ref), var4 (ref), t_1 (ref), foundationModule (ref), fFlagBuildExperienceCopyChatMessagesModule (ref), sendBuildExperienceEventModule (ref), fFlagBuildEventsUpdate1Module (ref), renderWorkSegment (ref), TurnWorkSegment (ref), playtestCompletedCardModule (ref), var3 (ref), var2 (ref), view (ref), agentTurnFeedbackModule (ref)
-	local turn = p2.turn
-	local turnState = turn.turnState
-	local turnKey = turn.turnKey
-	local startSequenceId = turn.startSequenceId
-	local endSequenceId = turn.endSequenceId
-	local optimisticLocalTools = turn.optimisticLocalTools
-	local setupErrorText = turn.setupErrorText
-	local universeId = turn.universeId
-	local sessionId = turn.sessionId
-	local isDone = turn.isDone
-	local isLatestPublishTurn = turn.isLatestPublishTurn
-	local var19 = reactModule.useMemo(function()
-		-- upvalues: turnState (ref), turnProjectionModule (copy), turnKey (ref), universeId (ref), sessionId (ref), startSequenceId (ref), endSequenceId (ref), optimisticLocalTools (ref), isLatestPublishTurn (ref), setupErrorText (ref)
-		return if turnState == nil then if setupErrorText == nil then turnProjectionModule.projectLoadingTurnSegments({ turnKey = turnKey }) else turnProjectionModule.projectSetupErrorSegments(setupErrorText, { turnKey = turnKey }) else turnProjectionModule.projectActiveTurnSegments(turnState, {
-			turnKey = turnKey,
-			universeId = universeId,
-			sessionId = sessionId,
-			startSequenceId = startSequenceId,
-			endSequenceId = endSequenceId,
-			optimisticLocalTools = optimisticLocalTools,
-			showPlaytestCta = isLatestPublishTurn
+return ReactModule.memo(function(Frame: Frame) --[[ Line: 559 | Named "ChatTurnBlock" ]]
+	-- upvalues: ReactModule (copy), TurnProjectionModule (copy), ReportTurnActivityGapModule (copy), useReactiveValue (copy), t (copy), FFlagBuildAgentAdCampaignCardModule (copy), UseAgentAdCampaignTurnCardsModule (copy), config (copy), FoundationModule (copy), FFlagBuildExperienceCopyChatMessagesModule (copy), SendBuildExperienceEventModule (copy), FFlagBuildEventsUpdate1Module (copy), renderWorkSegment (copy), TurnWorkSegment (copy), FFlagBuildExperiencePlaytestCardPublishCtaModule (copy), PlaytestCardSection (copy), PlaytestCompletedCardModule (copy), FFlagBuildAgentAdCampaignRefreshEligibilityModule (copy), AdCampaignIsActiveCardModule (copy), AdUpsellCardModule (copy), FFlagBuildExperienceChatCardEmphasisModule (copy), ChatCardEmphasisPositionProviderModule (copy), View (copy), AgentTurnFeedbackModule (copy)
+	local Turn = Frame.turn
+	local TurnState = Turn.turnState
+	local TurnKey = Turn.turnKey
+	local StartSequenceId = Turn.startSequenceId
+	local EndSequenceId = Turn.endSequenceId
+	local OptimisticLocalTools = Turn.optimisticLocalTools
+	local SetupErrorText = Turn.setupErrorText
+	local UniverseId = Turn.universeId
+	local SessionId = Turn.sessionId
+	local IsDone = Turn.isDone
+	local IsLatestPublishTurn = Turn.isLatestPublishTurn
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 574 ]]
+		-- upvalues: TurnState (copy), TurnProjectionModule (upval), TurnKey (copy), UniverseId (copy), SessionId (copy), StartSequenceId (copy), EndSequenceId (copy), OptimisticLocalTools (copy), IsLatestPublishTurn (copy), SetupErrorText (copy)
+		return if TurnState == nil then if SetupErrorText == nil then TurnProjectionModule.projectLoadingTurnSegments({ turnKey = TurnKey }) else TurnProjectionModule.projectSetupErrorSegments(SetupErrorText, { turnKey = TurnKey }) else TurnProjectionModule.projectActiveTurnSegments(TurnState, {
+			turnKey = TurnKey,
+			universeId = UniverseId,
+			sessionId = SessionId,
+			startSequenceId = StartSequenceId,
+			endSequenceId = EndSequenceId,
+			optimisticLocalTools = OptimisticLocalTools,
+			showPlaytestCta = IsLatestPublishTurn
 		})
 	end, {
-		turnState, turnKey, startSequenceId, endSequenceId, optimisticLocalTools,
-		setupErrorText, universeId, sessionId, isLatestPublishTurn
+		TurnState, TurnKey, StartSequenceId, EndSequenceId, OptimisticLocalTools,
+		SetupErrorText, UniverseId, SessionId, IsLatestPublishTurn
 	})
-	local var20 = reactModule.useRef(nil)
-	reactModule.useEffect(function()
-		-- upvalues: isDone (ref), var20 (ref), reportTurnActivityGapModule (copy), universeId (ref)
-		if isDone then
-			var20.current = nil
+	local UseRefResult = ReactModule.useRef(nil)
+	ReactModule.useEffect(function() --[[ Line: 605 ]]
+		-- upvalues: IsDone (copy), UseRefResult (copy), ReportTurnActivityGapModule (upval), UniverseId (copy)
+		if IsDone then
+			UseRefResult.current = nil
 			
 			return
+		else
+			local ClockTime = os.clock()
+			ReportTurnActivityGapModule.log(if UseRefResult.current == nil then 0 else (ClockTime - UseRefResult.current) * 1000, UseRefResult.current == nil, UniverseId)
+			UseRefResult.current = ClockTime
 		end
-		local processTime = os.clock()
-		reportTurnActivityGapModule.log(if var20.current ~= nil then 0 else (processTime - var20.current) * 1000, var20.current == nil, universeId)
-		var20.current = processTime
-	end, { isDone, var19, universeId })
-	local var21 = useReactiveValue(turn.turnFeedbackIds or t)
-	local var22 = if fFlagBuildAgentAdCampaignCardModule then var4({
-		segments = var19,
-		sessionId = sessionId,
-		universeId = universeId,
-		isPageVisible = p2.isPageVisible,
-		scrollingFrameRef = p2.scrollingFrameRef,
-		getCardState = p2.getAgentAdCampaignCardState,
-		isCreateDisabled = p2.isAgentAdCampaignCreateDisabled,
-		onOfferSelected = p2.onAgentAdCampaignOfferSelected
+	end, { IsDone, UseMemoResult, UniverseId })
+	local UseReactiveValueResult = useReactiveValue(Turn.turnFeedbackIds or t)
+	local UseAgentAdCampaignTurnCardsModuleResult = if FFlagBuildAgentAdCampaignCardModule then UseAgentAdCampaignTurnCardsModule({
+		segments = UseMemoResult,
+		sessionId = SessionId,
+		universeId = UniverseId,
+		isPageVisible = Frame.isPageVisible,
+		scrollingFrameRef = Frame.scrollingFrameRef,
+		getCardState = Frame.getAgentAdCampaignCardState,
+		isCreateDisabled = Frame.isAgentAdCampaignCreateDisabled,
+		onOfferSelected = Frame.onAgentAdCampaignOfferSelected
 	}) else {}
-	local localToolActions = p2.localToolActions or t_1
-	local emphasis = foundationModule.Hooks.useTokens().Color.Content.Emphasis
-	local var23 = if fFlagBuildExperienceCopyChatMessagesModule and turnState ~= nil then turnProjectionModule.getFinalAssistantMessageText(turnState) else nil
-	local onPlaytest = p2.onPlaytest
-	local var24 = reactModule.useCallback(function()
-		-- upvalues: sendBuildExperienceEventModule (copy), var21 (ref), fFlagBuildEventsUpdate1Module (copy), onPlaytest (ref)
-		sendBuildExperienceEventModule("PLAYTEST_CLICK", {
-			universeId = var21.universeId,
-			placeId = var21.placeId,
-			conversationId = var21.sessionId,
-			messageId = var21.sequenceId
-		}, if fFlagBuildEventsUpdate1Module then { context = "chat_widget" } else nil)
+	local LocalToolActions = Frame.localToolActions or config
+	local Emphasis = FoundationModule.Hooks.useTokens().Color.Content.Emphasis
+	local FinalAssistantMessageText = if FFlagBuildExperienceCopyChatMessagesModule and TurnState ~= nil then TurnProjectionModule.getFinalAssistantMessageText(TurnState) else nil
+	local OnPlaytestFunction = Frame.onPlaytest
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 640 ]]
+		-- upvalues: SendBuildExperienceEventModule (upval), UseReactiveValueResult (copy), FFlagBuildEventsUpdate1Module (upval), OnPlaytestFunction (copy)
+		SendBuildExperienceEventModule("PLAYTEST_CLICK", {
+			universeId = UseReactiveValueResult.universeId,
+			placeId = UseReactiveValueResult.placeId,
+			conversationId = UseReactiveValueResult.sessionId,
+			messageId = UseReactiveValueResult.sequenceId
+		}, if FFlagBuildEventsUpdate1Module then { context = "chat_widget" } else nil)
 		
-		if onPlaytest ~= nil then
-			onPlaytest()
+		if OnPlaytestFunction ~= nil then
+			OnPlaytestFunction()
 		end
-	end, { onPlaytest, var21 })
-	local var25 = reactModule.useRef(false)
-	reactModule.useEffect(function()
-		-- upvalues: var25 (ref), onPlaytest (ref), var19 (ref), sendBuildExperienceEventModule (copy), var21 (ref)
-		if var25.current or onPlaytest == nil then return end
-		local var26 = false
+	end, { OnPlaytestFunction, UseReactiveValueResult })
+	local UseRefResult1 = ReactModule.useRef(false)
+	ReactModule.useEffect(function() --[[ Line: 653 ]]
+		-- upvalues: UseRefResult1 (copy), OnPlaytestFunction (copy), UseMemoResult (copy), SendBuildExperienceEventModule (upval), UseReactiveValueResult (copy)
+		if UseRefResult1.current or OnPlaytestFunction == nil then return end
+		local Flag = false
 		
-		for i, v in var19 do
-			if v.kind == "playtest_cta" then
-				var26 = true
+		for _, value in UseMemoResult do
+			if value.kind == "playtest_cta" then
+				Flag = true
 				break
 			end
 		end
-		if var26 then
-			var25.current = true
-			sendBuildExperienceEventModule("PLAYTEST_IMPRESSION", {
-				universeId = var21.universeId,
-				placeId = var21.placeId,
-				conversationId = var21.sessionId,
-				messageId = var21.sequenceId
+		if Flag then
+			UseRefResult1.current = true
+			SendBuildExperienceEventModule("PLAYTEST_IMPRESSION", {
+				universeId = UseReactiveValueResult.universeId,
+				placeId = UseReactiveValueResult.placeId,
+				conversationId = UseReactiveValueResult.sessionId,
+				messageId = UseReactiveValueResult.sequenceId
 			})
 			
 			return
 		end
-	end, { var19, onPlaytest, var21 })
-	local t_2 = {}
-	local var27 = 1
+	end, {
+		UseMemoResult,
+		OnPlaytestFunction,
+		UseReactiveValueResult
+	})
+	local Elements = {}
+	local LayoutOrder = 1
 	
-	for i, v in var19 do
-		local var28 = nil
+	for _, Segment in UseMemoResult do
+		local Element = nil
 		
-		if v.kind == "agent_message" or v.kind == "activity_summary" or v.kind == "client_tool" then
-			var28 = renderWorkSegment(v, var27, emphasis, p2.clockBinding, localToolActions)
-		elseif v.kind == "turn_work" then
-			var28 = reactModule.createElement(TurnWorkSegment, {
-				LayoutOrder = var27,
-				segment = v,
-				isDone = isDone,
-				markdownTextStyle = emphasis,
-				clockBinding = p2.clockBinding,
-				localToolActions = localToolActions
+		if Segment.kind == "agent_message" or Segment.kind == "activity_summary" or Segment.kind == "client_tool" then
+			Element = renderWorkSegment(Segment, LayoutOrder, Emphasis, Frame.clockBinding, LocalToolActions)
+		elseif Segment.kind == "turn_work" then
+			Element = ReactModule.createElement(TurnWorkSegment, {
+				LayoutOrder = LayoutOrder,
+				segment = Segment,
+				isDone = IsDone,
+				markdownTextStyle = Emphasis,
+				clockBinding = Frame.clockBinding,
+				localToolActions = LocalToolActions
 			})
-		elseif v.kind == "playtest_cta" and onPlaytest ~= nil then
-			var28 = reactModule.createElement(playtestCompletedCardModule, {
-				LayoutOrder = var27,
-				onPlaytest = var24,
-				isLoading = p2.isPlaytestLoading
+		elseif Segment.kind == "playtest_cta" and OnPlaytestFunction ~= nil then
+			Element = if FFlagBuildExperiencePlaytestCardPublishCtaModule then ReactModule.createElement(PlaytestCardSection, {
+				LayoutOrder = LayoutOrder,
+				onPlaytest = UseResult,
+				onPublish = Frame.onPublish,
+				isLoading = Frame.isPlaytestLoading,
+				placeId = UseReactiveValueResult.placeId,
+				publishedVersionNumber = UseReactiveValueResult.publishedVersionNumber
+			}) else ReactModule.createElement(PlaytestCompletedCardModule, {
+				LayoutOrder = LayoutOrder,
+				onPlaytest = UseResult,
+				isLoading = Frame.isPlaytestLoading
 			})
-		elseif v.kind == "agent_ad_campaign_card" and fFlagBuildAgentAdCampaignCardModule then
-			local toolCallId = var22[v.toolCallId]
-			local state = toolCallId.state
+		elseif Segment.kind == "agent_ad_campaign_card" and FFlagBuildAgentAdCampaignCardModule then
+			local UseAgentAdCampaignTurnCardsModuleResultEntry = UseAgentAdCampaignTurnCardsModuleResult[Segment.toolCallId]
+			local State = UseAgentAdCampaignTurnCardsModuleResultEntry.state
+			local State1 = State
 			
-			if state ~= nil then
-				var28 = reactModule.createElement(var3, {
-					LayoutOrder = var27,
-					variant = state.variant,
-					campaignStartDate = state.campaignStartDate,
-					campaignEndDate = state.campaignEndDate,
-					isDisabled = p2.onAgentAdCampaignActive == nil,
-					onActivated = function()
-						-- upvalues: p2 (ref)
-						if p2.onAgentAdCampaignActive ~= nil then
-							p2.onAgentAdCampaignActive()
+			if FFlagBuildAgentAdCampaignRefreshEligibilityModule and State1 ~= nil and State1.campaignId == nil then
+				State1 = nil
+			end
+			if State1 == nil then
+				if Segment.offers ~= nil and not UseAgentAdCampaignTurnCardsModuleResultEntry.isPending then
+					Element = ReactModule.createElement(AdUpsellCardModule, {
+						LayoutOrder = LayoutOrder,
+						freePromotionsRemaining = Segment.availableCreditsSnapshot,
+						isCreatePending = if FFlagBuildAgentAdCampaignRefreshEligibilityModule and State ~= nil then State.eligibilityStatus == "loading" else nil,
+						eligibilityError = if FFlagBuildAgentAdCampaignRefreshEligibilityModule and State ~= nil and State.eligibilityStatus ~= "loading" then State.eligibilityStatus else nil,
+						fundingType = UseAgentAdCampaignTurnCardsModuleResultEntry.fundingType,
+						containerRef = UseAgentAdCampaignTurnCardsModuleResultEntry.cardRef,
+						isCreateDisabled = UseAgentAdCampaignTurnCardsModuleResultEntry.isCreateDisabled,
+						onCreate = UseAgentAdCampaignTurnCardsModuleResultEntry.onCreate
+					})
+				end
+			else
+				Element = ReactModule.createElement(AdCampaignIsActiveCardModule, {
+					LayoutOrder = LayoutOrder,
+					variant = State1.variant,
+					campaignStartDate = State1.campaignStartDate,
+					campaignEndDate = State1.campaignEndDate,
+					isDisabled = Frame.onAgentAdCampaignActive == nil,
+					onActivated = function() --[[ Line: 726 ]]
+						-- upvalues: Frame (copy)
+						if Frame.onAgentAdCampaignActive ~= nil then
+							Frame.onAgentAdCampaignActive()
 						end
 					end
 				})
-			elseif v.offers ~= nil and not toolCallId.isPending then
-				var28 = reactModule.createElement(var2, {
-					LayoutOrder = var27,
-					freePromotionsRemaining = v.availableCreditsSnapshot,
-					fundingType = toolCallId.fundingType,
-					containerRef = toolCallId.cardRef,
-					isCreateDisabled = toolCallId.isCreateDisabled,
-					onCreate = toolCallId.onCreate
-				})
 			end
 		end
-		if var28 ~= nil then
-			t_2[v.key] = var28
-			var27 += 1
+		if Element ~= nil then
+			if FFlagBuildExperienceChatCardEmphasisModule then
+				Element = ReactModule.createElement(ChatCardEmphasisPositionProviderModule, {
+					messageOrder = Frame.LayoutOrder or 0,
+					segmentOrder = LayoutOrder
+				}, Element)
+			end
+			Elements[Segment.key] = Element
+			LayoutOrder += 1
 		end
 	end
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "row gap-small size-full-0 auto-y",
-		LayoutOrder = p2.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		Message = reactModule.createElement(view, {
+		Message = ReactModule.createElement(View, {
 			LayoutOrder = 1,
 			tag = "col gap-xsmall size-full-0 auto-y",
 			testId = "ChatTurnBlock.Message"
 		}, {
-			Content = reactModule.createElement(view, {
+			Content = ReactModule.createElement(View, {
 				LayoutOrder = 1,
 				tag = "col gap-xlarge size-full-0 auto-y",
 				testId = "ChatTurnBlock.Message.Content"
-			}, t_2),
-			Feedback = if isDone then reactModule.createElement(agentTurnFeedbackModule, {
+			}, Elements),
+			Feedback = if IsDone then ReactModule.createElement(AgentTurnFeedbackModule, {
 				LayoutOrder = 2,
 				testId = "ChatTurnBlock.UserFeedback",
-				messageText = if fFlagBuildExperienceCopyChatMessagesModule then var23 else nil,
-				turnFeedbackIds = var21
+				messageText = if FFlagBuildExperienceCopyChatMessagesModule then FinalAssistantMessageText else nil,
+				turnFeedbackIds = UseReactiveValueResult
 			}) else nil
 		})
 	})

@@ -1,81 +1,85 @@
-﻿local parent = script:FindFirstAncestor("InterventionShared").Parent
-local localizationService = game:GetService("LocalizationService")
-local runService = game:GetService("RunService")
-local reactModule = require(parent.React)
-local useEffect = reactModule.useEffect
-local useMemo = reactModule.useMemo
-local useState = reactModule.useState
-local dependencyArray = require(parent.RoactUtils).Hooks.dependencyArray
-local var1 = require(parent.RobloxAppLocales).Localization.new(localizationService.RobloxLocaleId)
+﻿local Parent = script:FindFirstAncestor("InterventionShared").Parent
+local LocalizationService = game:GetService("LocalizationService")
+local RunService = game:GetService("RunService")
+local ReactModule = require(Parent.React)
+local UseEffectFunction = ReactModule.useEffect
+local UseMemoFunction = ReactModule.useMemo
+local UseStateFunction = ReactModule.useState
+local DependencyArrayFunction = require(Parent.RoactUtils).Hooks.dependencyArray
+local NewResult = require(Parent.RobloxAppLocales).Localization.new(LocalizationService.RobloxLocaleId)
 
-local function formatCountdown(p1)
-	-- upvalues: var1 (ref), localizationService (ref)
-	if p1 <= 0 then
+local function formatCountdown(Largest: number) --[[ Line: 37 ]]
+	-- upvalues: NewResult (copy), LocalizationService (copy)
+	if Largest <= 0 then
 		return nil
 	end
-	local var2 = math.ceil(p1 / 60) * 60
+	local ScaledCeiled = math.ceil(Largest / 60) * 60
 	
-	if var2 < 86400 then
-		return var1:Format("Feature.InExperienceIntervention.Label.TimeLeft.Hours", {
-			time = DateTime.fromUnixTimestamp(var2):FormatUniversalTime("HH:mm", localizationService.RobloxLocaleId)
+	if ScaledCeiled >= 86400 then
+		local Ceiled = math.ceil(ScaledCeiled / 86400)
+		
+		return if Ceiled == 1 then NewResult:Format("Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular") else NewResult:Format("Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural", { number = Ceiled })
+	else
+		return NewResult:Format("Feature.InExperienceIntervention.Label.TimeLeft.Hours", {
+			time = DateTime.fromUnixTimestamp(ScaledCeiled):FormatUniversalTime("HH:mm", LocalizationService.RobloxLocaleId)
 		})
 	end
-	local ceiled = math.ceil(var2 / 86400)
-	
-	return if ceiled == 1 then var1:Format("Feature.InExperienceIntervention.Label.TimeLeft.Day.Singular") else var1:Format("Feature.InExperienceIntervention.Label.TimeLeft.Day.Plural", { number = ceiled })
 end
 
-return function(p1)
-	-- upvalues: useMemo (ref), localizationService (ref), dependencyArray (ref), useState (ref), formatCountdown (ref), useEffect (ref), runService (ref)
-	local var2 = if p1 and p1 ~= "" then DateTime.fromIsoDate(p1) else nil
-	local var3 = useMemo(function()
-		-- upvalues: var2 (ref), localizationService (copy)
-		return if var2 then var2:FormatLocalTime("LLL", localizationService.RobloxLocaleId) else nil
-	end, dependencyArray(var2))
-	local var4, var5 = useState(function()
-		-- upvalues: var2 (ref), formatCountdown (copy)
-		return if var2 == nil then nil else formatCountdown(math.max(var2.UnixTimestamp - DateTime.now().UnixTimestamp, 0))
+return function(p1) --[[ Line: 70 | Named "useRestrictionEndDateInfo" ]]
+	-- upvalues: UseMemoFunction (copy), LocalizationService (copy), DependencyArrayFunction (copy), UseStateFunction (copy), formatCountdown (copy), UseEffectFunction (copy), RunService (copy)
+	local _DateTime = if p1 and p1 ~= "" then DateTime.fromIsoDate(p1) else nil
+	local UseMemoResult = UseMemoFunction(function() --[[ Line: 73 ]]
+		-- upvalues: _DateTime (copy), LocalizationService (upval)
+		return if _DateTime then _DateTime:FormatLocalTime("LLL", LocalizationService.RobloxLocaleId) else nil
+	end, DependencyArrayFunction(_DateTime))
+	local UseStateResult, UseStateResult2 = UseStateFunction(function() --[[ Line: 77 ]]
+		-- upvalues: _DateTime (copy), formatCountdown (upval)
+		return if _DateTime == nil then nil else formatCountdown((math.max(_DateTime.UnixTimestamp - DateTime.now().UnixTimestamp, 0)))
 	end)
-	useEffect(function()
-		-- upvalues: var2 (ref), var5 (ref), formatCountdown (copy), runService (copy)
-		if var2 == nil then
-			var5(nil)
+	UseEffectFunction(function() --[[ Line: 86 ]]
+		-- upvalues: _DateTime (copy), UseStateResult2 (copy), formatCountdown (upval), RunService (upval)
+		if _DateTime == nil then
+			UseStateResult2(nil)
 			
 			return
 		end
-		local var6 = var2.UnixTimestamp - DateTime.now().UnixTimestamp
+		local UnixTimestampDelta = _DateTime.UnixTimestamp - DateTime.now().UnixTimestamp
 		
-		if var6 <= 0 then
-			var5(nil)
+		if UnixTimestampDelta <= 0 then
+			UseStateResult2(nil)
 			
 			return
 		end
-		var5(formatCountdown(var6))
-		local var7 = 0
-		local heartbeatConnection = nil
-		heartbeatConnection = runService.Heartbeat:Connect(function()
-			-- upvalues: var7 (write), var2 (copy), var5 (copy), formatCountdown (copy), heartbeatConnection (write)
-			local processTime = os.clock()
+		UseStateResult2(formatCountdown(UnixTimestampDelta))
+		local v1 = 0
+		local Connection = nil
+		Connection = RunService.Heartbeat:Connect(function() --[[ Line: 107 ]]
+			-- upvalues: v1 (ref), _DateTime (upval), UseStateResult2 (upval), formatCountdown (upval), Connection (ref)
+			local ClockTime = os.clock()
 			
-			if processTime - var7 < 1 then return end
-			var7 = processTime
-			local maxValue = math.max(var2.UnixTimestamp - DateTime.now().UnixTimestamp, 0)
-			var5(formatCountdown(maxValue))
+			if ClockTime - v1 < 1 then return end
+			v1 = ClockTime
+			local Largest = math.max(_DateTime.UnixTimestamp - DateTime.now().UnixTimestamp, 0)
+			UseStateResult2(formatCountdown(Largest))
 			
-			if maxValue <= 0 and heartbeatConnection then
-				heartbeatConnection:Disconnect()
-				heartbeatConnection = nil
+			if Largest <= 0 and Connection then
+				Connection:Disconnect()
+				Connection = nil
 			end
 		end)
 		
-		return function()
-			-- upvalues: heartbeatConnection (write)
-			if heartbeatConnection then
-				heartbeatConnection:Disconnect()
-				heartbeatConnection = nil
+		return function() --[[ Line: 125 ]]
+			-- upvalues: Connection (ref)
+			if Connection then
+				Connection:Disconnect()
+				Connection = nil
 			end
 		end
-	end, dependencyArray(var2, var5))
+	end, DependencyArrayFunction(_DateTime, UseStateResult2))
 	
-	return { formattedEndDate = var3, countdownText = var4 }
+	return {
+		formattedEndDate = UseMemoResult,
+		countdownText = UseStateResult
+	}
 end

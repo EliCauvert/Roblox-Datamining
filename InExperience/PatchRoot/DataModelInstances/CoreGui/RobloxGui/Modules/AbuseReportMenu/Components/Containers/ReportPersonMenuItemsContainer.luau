@@ -1,107 +1,121 @@
-﻿local abuseReportMenu = script:FindFirstAncestor("AbuseReportMenu")
-local corePackagesService = game:GetService("CorePackages")
-local playersService = game:GetService("Players")
-local robloxGui = game:GetService("CoreGui").RobloxGui
-local reactModule = require(corePackagesService.Packages.React)
-local cryoModule = require(corePackagesService.Packages.Cryo)
-local getMenuItemsFromConfigsModule = require(abuseReportMenu.MenuConfigs.getMenuItemsFromConfigs)
-local getMenuItemSizingsModule = require(abuseReportMenu.Utility.getMenuItemSizings)
-local _ = require(abuseReportMenu.Components.Types)
-local constantsModule = require(abuseReportMenu.Components.Constants)
-local reportPlayerMenuItemConfigListModule = require(abuseReportMenu.MenuConfigs.Players.ReportPlayerMenuItemConfigList)
-local reportPersonUIStateReducerModule = require(abuseReportMenu.Reducers.reportPersonUIStateReducer)
-local handlePreselectedPlayerModule = require(abuseReportMenu.Utility.handlePreselectedPlayer)
-local default = require(robloxGui.Modules.VoiceChat.VoiceChatServiceManager).default
-local _ = require(robloxGui.Modules.VoiceChat.VoiceUsersByProximity)
-local constants = require(corePackagesService.Workspace.Packages.VoiceChatCore).Constants
-local playerMenuActions = constantsModule.PlayerMenuActions
-local preselectedPlayerReportBugfix = game:DefineFastFlag("PreselectedPlayerReportBugfix", false)
+﻿local AbuseReportMenu = script:FindFirstAncestor("AbuseReportMenu")
+local CorePackages = game:GetService("CorePackages")
+local Players = game:GetService("Players")
+local RobloxGui = game:GetService("CoreGui").RobloxGui
+local ReactModule = require(CorePackages.Packages.React)
+local CryoModule = require(CorePackages.Packages.Cryo)
+local GetMenuItemsFromConfigsModule = require(AbuseReportMenu.MenuConfigs.getMenuItemsFromConfigs)
+local GetMenuItemSizingsModule = require(AbuseReportMenu.Utility.getMenuItemSizings)
+local _ = require(AbuseReportMenu.Components.Types)
+local ConstantsModule = require(AbuseReportMenu.Components.Constants)
+local ReportPlayerMenuItemConfigListModule = require(AbuseReportMenu.MenuConfigs.Players.ReportPlayerMenuItemConfigList)
+local ReportPersonUIStateReducerModule = require(AbuseReportMenu.Reducers.reportPersonUIStateReducer)
+local HandlePreselectedPlayerModule = require(AbuseReportMenu.Utility.handlePreselectedPlayer)
+local Default = require(RobloxGui.Modules.VoiceChat.VoiceChatServiceManager).default
+local _ = require(RobloxGui.Modules.VoiceChat.VoiceUsersByProximity)
+local Constants = require(CorePackages.Workspace.Packages.VoiceChatCore).Constants
+local PlayerMenuActions = ConstantsModule.PlayerMenuActions
+local PreselectedPlayerReportBugfix = game:DefineFastFlag("PreselectedPlayerReportBugfix", false)
 
-local function alphabeticalSort(x, p1)
-	return x.Name:lower() < p1.Name:lower()
+local function alphabeticalSort(A, B): boolean --[[ Line: 31 ]]
+	return A.Name:lower() < B.Name:lower()
 end
 
-return function(p1)
-	-- upvalues: getMenuItemSizingsModule (ref), reactModule (ref), reportPersonUIStateReducerModule (ref), constantsModule (ref), preselectedPlayerReportBugfix (ref), default (ref), constants (ref), handlePreselectedPlayerModule (ref), playerMenuActions (ref), alphabeticalSort (ref), playersService (ref), cryoModule (ref), getMenuItemsFromConfigsModule (ref), reportPlayerMenuItemConfigListModule (ref)
-	local var1 = getMenuItemSizingsModule()
-	local var2, var3 = reactModule.useReducer(reportPersonUIStateReducerModule, constantsModule.InitPersonUIState)
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), constantsModule (copy), preselectedPlayerReportBugfix (copy), default (copy), constants (copy), handlePreselectedPlayerModule (copy), var3 (ref), playerMenuActions (copy)
+return function(p1) --[[ Line: 35 | Named "ReportPersonMenuItemsContainer" ]]
+	-- upvalues: GetMenuItemSizingsModule (copy), ReactModule (copy), ReportPersonUIStateReducerModule (copy), ConstantsModule (copy), PreselectedPlayerReportBugfix (copy), Default (copy), Constants (copy), HandlePreselectedPlayerModule (copy), PlayerMenuActions (copy), alphabeticalSort (copy), Players (copy), CryoModule (copy), GetMenuItemsFromConfigsModule (copy), ReportPlayerMenuItemConfigListModule (copy)
+	local MenuItemSizingsModule = GetMenuItemSizingsModule()
+	local UseReducerResult, UseReducerResult2 = ReactModule.useReducer(ReportPersonUIStateReducerModule, ConstantsModule.InitPersonUIState)
+	ReactModule.useEffect(function() --[[ Line: 39 ]]
+		-- upvalues: p1 (copy), ConstantsModule (upval), PreselectedPlayerReportBugfix (upval), Default (upval), Constants (upval), HandlePreselectedPlayerModule (upval), UseReducerResult2 (copy), PlayerMenuActions (upval)
 		if p1.utilityProps.isReportTabVisible ~= true then return end
 		p1.utilityProps.analyticsDispatch({
-			type = constantsModule.AnalyticsActions.SwitchToPersonInitialSelections
+			type = ConstantsModule.AnalyticsActions.SwitchToPersonInitialSelections
 		})
 		
-		if not preselectedPlayerReportBugfix or default:UserVoiceEnabled() and default:GetVoiceJoinProgress() ~= constants.VOICE_JOIN_PROGRESS.Suspended then
-			default:asyncInit():andThen(function()
-				-- upvalues: p1 (copy), handlePreselectedPlayerModule (copy), var3 (copy), playerMenuActions (copy)
+		if not PreselectedPlayerReportBugfix or Default:UserVoiceEnabled() and Default:GetVoiceJoinProgress() ~= Constants.VOICE_JOIN_PROGRESS.Suspended then
+			Default:asyncInit():andThen(function() --[[ Line: 67 ]]
+				-- upvalues: p1 (upval), HandlePreselectedPlayerModule (upval), UseReducerResult2 (upval), PlayerMenuActions (upval)
 				if p1.utilityProps.preselectedPlayer then
-					handlePreselectedPlayerModule(p1.utilityProps.preselectedPlayer, true, var3, p1.utilityProps.analyticsDispatch)
+					HandlePreselectedPlayerModule(p1.utilityProps.preselectedPlayer, true, UseReducerResult2, p1.utilityProps.analyticsDispatch)
 				end
-				var3({ enabled = true, type = playerMenuActions.SetVoiceEnabled })
-			end):catch(function()
-				-- upvalues: p1 (copy), handlePreselectedPlayerModule (copy), var3 (copy)
+				UseReducerResult2({ enabled = true, type = PlayerMenuActions.SetVoiceEnabled })
+			end):catch(function() --[[ Line: 81 ]]
+				-- upvalues: p1 (upval), HandlePreselectedPlayerModule (upval), UseReducerResult2 (upval)
 				if p1.utilityProps.preselectedPlayer then
-					handlePreselectedPlayerModule(p1.utilityProps.preselectedPlayer, false, var3, p1.utilityProps.analyticsDispatch)
+					HandlePreselectedPlayerModule(p1.utilityProps.preselectedPlayer, false, UseReducerResult2, p1.utilityProps.analyticsDispatch)
 				end
 			end)
 			
 			return
-		elseif p1.utilityProps.preselectedPlayer then
-			handlePreselectedPlayerModule(p1.utilityProps.preselectedPlayer, false, var3, p1.utilityProps.analyticsDispatch)
 		end
-		var3({
+		if p1.utilityProps.preselectedPlayer then
+			HandlePreselectedPlayerModule(p1.utilityProps.preselectedPlayer, false, UseReducerResult2, p1.utilityProps.analyticsDispatch)
+		end
+		UseReducerResult2({
 			enabled = false,
-			type = playerMenuActions.SetVoiceEnabled
+			type = PlayerMenuActions.SetVoiceEnabled
 		})
 	end, { p1.utilityProps.isReportTabVisible })
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), constantsModule (copy), default (copy), alphabeticalSort (copy), playersService (copy), cryoModule (copy), var3 (ref), playerMenuActions (copy)
-		local t = {}
+	ReactModule.useEffect(function() --[[ Line: 96 ]]
+		-- upvalues: UseReducerResult (copy), ConstantsModule (upval), Default (upval), alphabeticalSort (upval), Players (upval), CryoModule (upval), UseReducerResult2 (copy), PlayerMenuActions (upval)
+		local List = {}
 		
-		if var2.methodOfAbuse == constantsModule.AbuseMethods.VoiceChat then
-			for i, v in pairs(default:getRecentUsersInteractionData()) do
-				table.insert(t, v.player)
+		if UseReducerResult.methodOfAbuse == ConstantsModule.AbuseMethods.VoiceChat then
+			for _, value in pairs((Default:getRecentUsersInteractionData())) do
+				table.insert(List, value.player)
 			end
-			table.sort(t, alphabeticalSort)
-		elseif var2.methodOfAbuse == constantsModule.AbuseMethods.TextChat or var2.methodOfAbuse == constantsModule.AbuseMethods.Other or (var2.methodOfAbuse == constantsModule.AbuseMethods.Avatar or var2.methodOfAbuse == nil) then
-			t = playersService:GetPlayers()
-			table.sort(t, alphabeticalSort)
+			table.sort(List, alphabeticalSort)
+		elseif UseReducerResult.methodOfAbuse == ConstantsModule.AbuseMethods.TextChat or UseReducerResult.methodOfAbuse == ConstantsModule.AbuseMethods.Other or UseReducerResult.methodOfAbuse == ConstantsModule.AbuseMethods.Avatar or UseReducerResult.methodOfAbuse == nil then
+			List = Players:GetPlayers()
+			table.sort(List, alphabeticalSort)
 		end
-		local var4 = false
-		local var5 = false
-		var3({
-			type = playerMenuActions.UpdatePlayerNameMap,
-			playerObjects = cryoModule.List.filter(t, function(p2)
-				-- upvalues: var2 (copy), var4 (write), var5 (write), playersService (copy)
-				if var2.preselectedPlayer and p2.UserId == var2.preselectedPlayer.UserId then
-					var4 = true
+		local Flag = false
+		local Flag1 = false
+		UseReducerResult2({
+			type = PlayerMenuActions.UpdatePlayerNameMap,
+			playerObjects = CryoModule.List.filter(List, function(Player: Player): boolean --[[ Line: 175 ]]
+				-- upvalues: UseReducerResult (upval), Flag (ref), Flag1 (ref), Players (upval)
+				if UseReducerResult.preselectedPlayer and Player.UserId == UseReducerResult.preselectedPlayer.UserId then
+					Flag = true
 				end
-				if var2.allegedAbuser and p2.UserId == var2.allegedAbuserId then
-					var5 = true
+				if UseReducerResult.allegedAbuser and Player.UserId == UseReducerResult.allegedAbuserId then
+					Flag1 = true
 				end
-				return p2 ~= playersService.LocalPlayer and p2.UserId > 0
+				return Player ~= Players.LocalPlayer and Player.UserId > 0
 			end)
 		})
-		var3({
-			abuseId = nil,
-			abuser = nil,
-			type = constantsModule.PlayerMenuActions.UpdateAbuser
-		})
+		
+		if UseReducerResult.preselectedPlayer and Flag then
+			UseReducerResult2({
+				type = ConstantsModule.PlayerMenuActions.UpdateAbuser,
+				abuseId = UseReducerResult.preselectedPlayer.UserId,
+				abuser = UseReducerResult.preselectedPlayer
+			})
+			UseReducerResult2({
+				player = nil,
+				type = ConstantsModule.PlayerMenuActions.SetPreselectedPlayer
+			})
+		elseif not Flag1 then
+			UseReducerResult2({
+				abuseId = nil,
+				abuser = nil,
+				type = ConstantsModule.PlayerMenuActions.UpdateAbuser
+			})
+		end
 	end, {
-		var2.methodOfAbuse,
-		var2.isVoiceEnabled,
+		UseReducerResult.methodOfAbuse,
+		UseReducerResult.isVoiceEnabled,
 		p1.utilityProps.isReportTabVisible,
-		var2.preselectedPlayer
+		UseReducerResult.preselectedPlayer
 	})
 	
-	return reactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
-		MenuItems = reactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, cryoModule.Dictionary.join({
-			Layout = reactModule.createElement("UIListLayout", {
+	return ReactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
+		MenuItems = ReactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, (CryoModule.Dictionary.join({
+			Layout = ReactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Vertical,
 				SortOrder = Enum.SortOrder.LayoutOrder,
-				Padding = UDim.new(0, var1.ItemPadding)
+				Padding = UDim.new(0, MenuItemSizingsModule.ItemPadding)
 			})
-		}, getMenuItemsFromConfigsModule(var2, var3, p1.utilityProps, reportPlayerMenuItemConfigListModule, p1.isSmallPortraitViewport)))
+		}, (GetMenuItemsFromConfigsModule(UseReducerResult, UseReducerResult2, p1.utilityProps, ReportPlayerMenuItemConfigListModule, p1.isSmallPortraitViewport)))))
 	})
 end

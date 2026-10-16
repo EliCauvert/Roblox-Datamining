@@ -1,44 +1,46 @@
-﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local sduiActionType = sduiCoreSystemModule.SduiActionType
-local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
-local centralOverlayType = require(parent.RobloxAppEnums).CentralOverlayType
-local setCentralOverlay = require(parent.CentralOverlay).Actions.SetCentralOverlay
+﻿local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local SduiActionType = SduiCoreSystemModule.SduiActionType
+local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
+local CentralOverlayType = require(Parent.RobloxAppEnums).CentralOverlayType
+local SetCentralOverlayFunction = require(Parent.CentralOverlay).Actions.SetCentralOverlay
 
-return function(p1, _, p2)
-	-- upvalues: sduiErrorType (ref), sduiActionType (ref), setCentralOverlay (ref), centralOverlayType (ref)
-	local var1 = if p1 then p1.actionParams else nil
+return function(p1, _, p2) --[[ Line: 14 | Named "SduiOpenSduiOverlayAction" ]]
+	-- upvalues: SduiErrorType (copy), SduiActionType (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy)
+	local ActionParams = p1 and p1.actionParams or nil
 	
-	if var1 == nil then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if ActionParams == nil then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			message = "Missing actionParams",
-			name = sduiActionType.OpenSduiOverlay
+			name = SduiActionType.OpenSduiOverlay
 		}, p2.appPage)
 		
 		return
 	end
-	assert(var1, "actionParams must exist")
-	local configKey = var1.configKey
-	local identifier = var1.identifier
+	assert(ActionParams, "actionParams must exist")
+	local ConfigKey = ActionParams.configKey
+	local Identifier = ActionParams.identifier
 	
-	if not configKey then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if not ConfigKey then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			message = "Missing configKey in action params",
-			name = sduiActionType.OpenSduiOverlay
+			name = SduiActionType.OpenSduiOverlay
 		}, p2.appPage)
 		
 		return
-	elseif identifier then
-		p2.dependencies.dispatch(setCentralOverlay(centralOverlayType.SduiOverlay, {
-			configKey = configKey,
-			identifier = identifier,
+	end
+	if Identifier then
+		p2.dependencies.dispatch(SetCentralOverlayFunction(CentralOverlayType.SduiOverlay, {
+			configKey = ConfigKey,
+			identifier = Identifier,
 			appPage = p2.appPage
 		}))
 		
 		return
+	else
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
+			message = "Missing identifier in action params",
+			name = SduiActionType.OpenSduiOverlay
+		}, p2.appPage)
 	end
-	p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
-		message = "Missing identifier in action params",
-		name = sduiActionType.OpenSduiOverlay
-	}, p2.appPage)
 end

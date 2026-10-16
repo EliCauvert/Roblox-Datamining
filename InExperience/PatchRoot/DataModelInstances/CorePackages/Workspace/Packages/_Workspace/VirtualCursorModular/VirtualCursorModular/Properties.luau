@@ -1,4 +1,4 @@
-﻿local t = {
+﻿local PropertiesModule = {
 	SpeedAdjustmentTarget = 0.5,
 	CursorRadius = 40,
 	SelectionRadius = 40,
@@ -12,10 +12,10 @@
 	MoveAssistExpireTime = 0.5,
 	MoveAssistMinInputMagnitude = 0.35
 }
-setmetatable(t, {
-	__index = function(_, p1)
-		error(string.format("%q is not a valid member of properties", tostring(p1)), 2)
+setmetatable(PropertiesModule, {
+	__index = function(_, p1) --[[ Line: 27 ]]
+		error(string.format("%q is not a valid member of properties", (tostring(p1))), 2)
 	end
 })
 
-return t
+return PropertiesModule

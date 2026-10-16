@@ -1,26 +1,25 @@
-﻿local chrome = script:FindFirstAncestor("Chrome")
-local corePackagesService = game:GetService("CorePackages")
-local serviceModule = require(chrome.Service)
-local commonIconModule = require(chrome.Integrations.CommonIcon)
-local sideSheetPlacement = require(corePackagesService.Workspace.Packages.Chrome).Enums.SideSheetPlacement
-local isPioneerLaunch = require(corePackagesService.Workspace.Packages.PioneerUtils).isPioneerLaunch
-local inGameMenuIntegrationUtilsModule = require(script.Parent.InGameMenuIntegrationUtils)
-local helpPage = inGameMenuIntegrationUtilsModule.createPageOpenSignal("HelpPage")
+﻿local Chrome = script:FindFirstAncestor("Chrome")
+local CorePackages = game:GetService("CorePackages")
+local ServiceModule = require(Chrome.Service)
+local CommonIconModule = require(Chrome.Integrations.CommonIcon)
+local SideSheetPlacement = require(CorePackages.Workspace.Packages.Chrome).Enums.SideSheetPlacement
+local InGameMenuIntegrationUtilsModule = require(script.Parent.InGameMenuIntegrationUtils)
+local HelpPage = InGameMenuIntegrationUtilsModule.createPageOpenSignal("HelpPage")
 
-return serviceModule:register({
+return ServiceModule:register({
 	id = "help",
 	label = "CoreScripts.Feedback.Help.MainHeader",
-	initialAvailability = serviceModule.AvailabilitySignal.Available,
-	sideSheetPlacement = if isPioneerLaunch() then sideSheetPlacement.AboveFold else sideSheetPlacement.BelowFold,
-	activated = function(_)
-		-- upvalues: inGameMenuIntegrationUtilsModule (ref), helpPage (ref)
-		inGameMenuIntegrationUtilsModule.toggleIGMPage("HelpPage", helpPage:get())
+	initialAvailability = ServiceModule.AvailabilitySignal.Available,
+	sideSheetPlacement = if require(CorePackages.Workspace.Packages.PioneerUtils).isPioneerLaunch() then SideSheetPlacement.AboveFold else SideSheetPlacement.BelowFold,
+	activated = function(_) --[[ Line: 20 ]]
+		-- upvalues: InGameMenuIntegrationUtilsModule (copy), HelpPage (copy)
+		InGameMenuIntegrationUtilsModule.toggleIGMPage("HelpPage", HelpPage:get())
 	end,
-	isActivated = helpPage,
+	isActivated = HelpPage,
 	components = {
-		Icon = function(_)
-			-- upvalues: commonIconModule (ref), helpPage (ref)
-			return commonIconModule("CircleQuestion", nil, helpPage)
+		Icon = function(_) --[[ Line: 25 ]]
+			-- upvalues: CommonIconModule (copy), HelpPage (copy)
+			return CommonIconModule("CircleQuestion", nil, HelpPage)
 		end
 	}
 })

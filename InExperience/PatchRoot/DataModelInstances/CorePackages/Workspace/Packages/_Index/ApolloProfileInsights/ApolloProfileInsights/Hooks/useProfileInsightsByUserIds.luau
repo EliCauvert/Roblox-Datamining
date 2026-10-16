@@ -1,10 +1,10 @@
-﻿local parent = script:FindFirstAncestor("ApolloProfileInsights").Parent
-local useQuery = require(parent.ApolloClient).useQuery
-local queries = require(parent.ApolloLocalState).queries
+﻿local Parent = script:FindFirstAncestor("ApolloProfileInsights").Parent
+local UseQueryFunction = require(Parent.ApolloClient).useQuery
+local Queries = require(Parent.ApolloLocalState).queries
 
-return function(p1)
-	-- upvalues: useQuery (ref), queries (ref)
-	return useQuery(queries.profilesInsightsByUserIds, {
+return function(p1) --[[ Line: 17 | Named "useProfileInsightsByUserIds" ]]
+	-- upvalues: UseQueryFunction (copy), Queries (copy)
+	return (UseQueryFunction(Queries.profilesInsightsByUserIds, {
 		errorPolicy = "all",
 		skip = not p1.userIds or p1.skip,
 		variables = {
@@ -12,5 +12,5 @@ return function(p1)
 			rankingStrategy = p1.rankingStrategy
 		},
 		fetchPolicy = p1.fetchPolicy
-	})
+	}))
 end

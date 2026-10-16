@@ -1,14 +1,13 @@
-﻿local squads = script:FindFirstAncestor("Squads")
-local httpService = game:GetService("HttpService")
-local abuseReportingModule = require(squads.Parent.AbuseReporting)
-local _ = require(squads.Common.ModelTypes)
-local dependenciesModule = require(squads.dependencies)
-local loggerModule = require(squads.Logger)
-local react = dependenciesModule.React
-local defaultTwoStepReportFlow = abuseReportingModule.UXFlows.DefaultTwoStepReportFlow
-local networkingSquads = dependenciesModule.NetworkingSquads
-local useDispatch = dependenciesModule.Hooks.useDispatch
-local list = {
+﻿local Squads = script:FindFirstAncestor("Squads")
+local HttpService = game:GetService("HttpService")
+local _ = require(Squads.Common.ModelTypes)
+local DependenciesModule = require(Squads.dependencies)
+local LoggerModule = require(Squads.Logger)
+local React = DependenciesModule.React
+local DefaultTwoStepReportFlow = require(Squads.Parent.AbuseReporting).UXFlows.DefaultTwoStepReportFlow
+local NetworkingSquads = DependenciesModule.NetworkingSquads
+local UseDispatchFunction = DependenciesModule.Hooks.useDispatch
+local ReportCategories = {
 	{
 		localizationKey = "Feature.ReportAbuse.Label.CategoryInappropriate",
 		value = "Swearing"
@@ -35,40 +34,41 @@ local list = {
 	}
 }
 
-return function(p1)
-	-- upvalues: useDispatch (ref), react (ref), loggerModule (ref), httpService (ref), networkingSquads (ref), defaultTwoStepReportFlow (ref), list (ref)
-	local var1 = useDispatch()
+return function(p1) --[[ Line: 33 | Named "SquadVoiceAbuseReport" ]]
+	-- upvalues: UseDispatchFunction (copy), React (copy), LoggerModule (copy), HttpService (copy), NetworkingSquads (copy), DefaultTwoStepReportFlow (copy), ReportCategories (copy)
+	local UseDispatchResult = UseDispatchFunction()
 	
-	return react.createElement(defaultTwoStepReportFlow, {
+	return React.createElement(DefaultTwoStepReportFlow, {
 		analyticsContext = "Squad",
 		onSubmitProps = {
 			hasNextSteps = false,
-			onSubmit = react.useCallback(function(p2, p3)
-				-- upvalues: loggerModule (copy), httpService (copy), p1 (ref), var1 (ref), networkingSquads (copy)
-				loggerModule:info("Submitting abuse report. Reason: {}, Comment: {}, Data: {}", p2, p3, httpService:JSONEncode(p1.reportData))
-				local var2, var3 = var1(networkingSquads.SendSquadVoiceAbuseReport.API({
+			onSubmit = React.useCallback(function(AbuseReason, AbuseComment) --[[ Line: 35 ]]
+				-- upvalues: LoggerModule (upval), HttpService (upval), p1 (copy), UseDispatchResult (copy), NetworkingSquads (upval)
+				LoggerModule:info("Submitting abuse report. Reason: {}, Comment: {}, Data: {}", AbuseReason, AbuseComment, HttpService:JSONEncode(p1.reportData))
+				local v1, Input = UseDispatchResult(NetworkingSquads.SendSquadVoiceAbuseReport.API({
 					submitterUserId = p1.reportData.submitterUserId,
 					abuserUserId = p1.reportData.abuserUserId,
 					reportBeginTimestampMs = p1.reportData.reportBeginTimestampMs,
 					voiceChannelId = p1.reportData.voiceChannelId,
 					voiceUserIds = p1.reportData.voiceUserIds,
 					voiceUserCount = p1.reportData.voiceUserCount,
-					abuseReason = p2,
-					abuseComment = p3
+					abuseReason = AbuseReason,
+					abuseComment = AbuseComment
 				})):await()
 				
-				if var2 then
-					loggerModule:info("Abuse report submitted successfully. Response: {}", httpService:JSONEncode(var3))
+				if v1 then
+					LoggerModule:info("Abuse report submitted successfully. Response: {}", HttpService:JSONEncode(Input))
 					
-					return var2
+					return v1
+				else
+					LoggerModule:error("Failed to submit abuse report. Response: {}", HttpService:JSONEncode(Input))
+					
+					return v1
 				end
-				loggerModule:error("Failed to submit abuse report. Response: {}", httpService:JSONEncode(var3))
-				
-				return var2
-			end, { p1.reportData, var1 })
+			end, { p1.reportData, UseDispatchResult })
 		},
 		onCloseProps = { hasPreviousSteps = false, onAbandon = p1.onAbandon },
 		onComplete = p1.onComplete,
-		reportCategories = list
+		reportCategories = ReportCategories
 	})
 end

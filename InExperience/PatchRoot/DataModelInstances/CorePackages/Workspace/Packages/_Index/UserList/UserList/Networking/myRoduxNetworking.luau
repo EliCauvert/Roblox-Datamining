@@ -1,22 +1,21 @@
-﻿local userList = script:FindFirstAncestor("UserList")
-local parent = userList.Parent
-local httpRequestModule = require(parent.HttpRequest)
-local roduxNetworkingModule = require(parent.RoduxNetworking)
-local RODUX_KEY = require(userList.Common.Constants).RODUX_KEY
-local var1 = require(parent.Lumberyak).Logger.new(nil, RODUX_KEY):new(RODUX_KEY .. " Networking")
+﻿local UserList = script:FindFirstAncestor("UserList")
+local Parent = UserList.Parent
+local HttpRequestModule = require(Parent.HttpRequest)
+local RODUXKEY = require(UserList.Common.Constants).RODUX_KEY
+local NewResult = require(Parent.Lumberyak).Logger.new(nil, RODUXKEY):new(RODUXKEY .. " Networking")
 
-return roduxNetworkingModule.config({
-	keyPath = RODUX_KEY .. ".NetworkStatus",
-	networkImpl = httpRequestModule.config({
-		requestFunction = function(p1, p2, p3)
-			-- upvalues: var1 (ref), httpRequestModule (ref)
-			var1:info("Fetching: {}", string.format("[ requestMethod = %q, url = %q ]", p2, p1))
+return (require(Parent.RoduxNetworking).config({
+	keyPath = RODUXKEY .. ".NetworkStatus",
+	networkImpl = HttpRequestModule.config({
+		requestFunction = function(p1, p2, p3) --[[ Line: 14 ]]
+			-- upvalues: NewResult (copy), HttpRequestModule (copy)
+			NewResult:info("Fetching: {}", string.format("[ requestMethod = %q, url = %q ]", p2, p1))
 			
-			return httpRequestModule.requestFunctions.RequestInternal(p1, p2, p3)
+			return HttpRequestModule.requestFunctions.RequestInternal(p1, p2, p3)
 		end,
-		postRequestFunction = function(p1, p2)
-			-- upvalues: var1 (ref)
-			var1:debug("Returned: {}", string.format("[ requestMethod = %q, url = %q, statusCode = %s ]", p2.requestMethod, p2.url, p1.StatusCode))
+		postRequestFunction = function(p1, p2) --[[ Line: 18 ]]
+			-- upvalues: NewResult (copy)
+			NewResult:debug("Returned: {}", string.format("[ requestMethod = %q, url = %q, statusCode = %s ]", p2.requestMethod, p2.url, p1.StatusCode))
 		end
 	})
-})
+}))

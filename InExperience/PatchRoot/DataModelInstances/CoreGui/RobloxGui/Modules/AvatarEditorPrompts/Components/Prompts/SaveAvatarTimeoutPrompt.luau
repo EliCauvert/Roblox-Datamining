@@ -1,69 +1,68 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local reactModule = require(corePackagesService.Packages.React)
-local useSignalState = require(corePackagesService.Packages.SignalsReact).useSignalState
-local useLocalization = require(corePackagesService.Workspace.Packages.Localization).Hooks.useLocalization
-local useDispatch = require(corePackagesService.Workspace.Packages.RoactUtils).Hooks.RoactRodux.useDispatch
-local avatarExperienceCommonModule = require(corePackagesService.Workspace.Packages.AvatarExperienceCommon)
-local AXPartialPageModal = avatarExperienceCommonModule.Components.AXPartialPageModal
-local getTimeoutStatusStore = avatarExperienceCommonModule.Stores.getTimeoutStatusStore
-local formatTimeoutEndTime = avatarExperienceCommonModule.Utils.formatTimeoutEndTime
-local labelAbuseTypeMapping = avatarExperienceCommonModule.Constants.LabelAbuseTypeMapping
-local foundationModule = require(corePackagesService.Packages.Foundation)
-local view = foundationModule.View
-local text = foundationModule.Text
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local inputSize = foundationModule.Enums.InputSize
-local closeOpenPromptModule = require(script.Parent.Parent.Parent.Thunks.CloseOpenPrompt)
+﻿local CorePackages = game:GetService("CorePackages")
+local ReactModule = require(CorePackages.Packages.React)
+local UseSignalStateFunction = require(CorePackages.Packages.SignalsReact).useSignalState
+local UseLocalizationFunction = require(CorePackages.Workspace.Packages.Localization).Hooks.useLocalization
+local UseDispatchFunction = require(CorePackages.Workspace.Packages.RoactUtils).Hooks.RoactRodux.useDispatch
+local AvatarExperienceCommonModule = require(CorePackages.Workspace.Packages.AvatarExperienceCommon)
+local AXPartialPageModal = AvatarExperienceCommonModule.Components.AXPartialPageModal
+local GetTimeoutStatusStoreFunction = AvatarExperienceCommonModule.Stores.getTimeoutStatusStore
+local FormatTimeoutEndTimeFunction = AvatarExperienceCommonModule.Utils.formatTimeoutEndTime
+local LabelAbuseTypeMapping = AvatarExperienceCommonModule.Constants.LabelAbuseTypeMapping
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local InputSize = FoundationModule.Enums.InputSize
+local CloseOpenPromptModule = require(script.Parent.Parent.Parent.Thunks.CloseOpenPrompt)
 
-return function()
-	-- upvalues: useDispatch (ref), getTimeoutStatusStore (ref), useSignalState (ref), reactModule (ref), closeOpenPromptModule (ref), labelAbuseTypeMapping (ref), useLocalization (ref), formatTimeoutEndTime (ref), AXPartialPageModal (ref), buttonVariant (ref), inputSize (ref), view (ref), text (ref)
-	local var1 = useDispatch()
-	local var2 = useSignalState(getTimeoutStatusStore().getTimeoutDetails)
-	local var3 = reactModule.useCallback(function()
-		-- upvalues: var1 (ref), closeOpenPromptModule (copy)
-		var1(closeOpenPromptModule)
-	end, { var1 })
-	local _ = nil
-	local var4 = useLocalization({
+return function() --[[ Line: 26 | Named "SaveAvatarTimeoutPrompt" ]]
+	-- upvalues: UseDispatchFunction (copy), GetTimeoutStatusStoreFunction (copy), UseSignalStateFunction (copy), ReactModule (copy), CloseOpenPromptModule (copy), LabelAbuseTypeMapping (copy), UseLocalizationFunction (copy), FormatTimeoutEndTimeFunction (copy), AXPartialPageModal (copy), ButtonVariant (copy), InputSize (copy), View (copy), Text (copy)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseSignalStateResult = UseSignalStateFunction(GetTimeoutStatusStoreFunction().getTimeoutDetails)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 31 ]]
+		-- upvalues: UseDispatchResult (copy), CloseOpenPromptModule (upval)
+		UseDispatchResult(CloseOpenPromptModule)
+	end, { UseDispatchResult })
+	local UseLocalizationResult = UseLocalizationFunction({
 		titleText = "Feature.Timeout.Prompt.SaveTitleText",
 		closeText = "Feature.Timeout.Label.OK",
 		bodyText = {
 			"Feature.Timeout.Prompt.BodyText",
-			rule = useLocalization({
-				rule = if var2 and labelAbuseTypeMapping then labelAbuseTypeMapping[var2.labelTranslationKey] or "Feature.NotApproved.Label.AbuseType.Other" else "Feature.NotApproved.Label.AbuseType.Other"
+			rule = UseLocalizationFunction({
+				rule = UseSignalStateResult and LabelAbuseTypeMapping and LabelAbuseTypeMapping[UseSignalStateResult.labelTranslationKey] or "Feature.NotApproved.Label.AbuseType.Other"
 			}).rule or "",
-			time = if var2 then formatTimeoutEndTime(var2.endDate) else ""
+			time = if UseSignalStateResult then FormatTimeoutEndTimeFunction(UseSignalStateResult.endDate) else ""
 		}
 	})
 	
-	return reactModule.createElement(AXPartialPageModal, {
-		onBackgroundPress = var3,
+	return ReactModule.createElement(AXPartialPageModal, {
+		onBackgroundPress = UseResult,
 		buttonStackProps = {
 			rowLayout = false,
 			buttons = {
 				{
 					props = {
-						onActivated = var3,
-						text = var4.closeText,
-						variant = buttonVariant.Standard,
-						size = inputSize.Medium
+						onActivated = UseResult,
+						text = UseLocalizationResult.closeText,
+						variant = ButtonVariant.Standard,
+						size = InputSize.Medium
 					}
 				}
 			}
 		}
 	}, {
-		ViewFrame = reactModule.createElement(view, {
+		ViewFrame = ReactModule.createElement(View, {
 			tag = "auto-y size-full-0 padding-bottom-xxlarge col align-x-left align-y-top"
 		}, {
-			PromptBodyTitle = reactModule.createElement(text, {
+			PromptBodyTitle = ReactModule.createElement(Text, {
 				tag = "auto-xy padding-bottom-small text-align-x-left text-heading-small text-wrap",
 				LayoutOrder = 2,
-				Text = var4.titleText
+				Text = UseLocalizationResult.titleText
 			}),
-			PromptBodyText = reactModule.createElement(text, {
+			PromptBodyText = ReactModule.createElement(Text, {
 				tag = "auto-xy text-align-x-left text-body-large text-wrap font-family-code",
 				LayoutOrder = 3,
-				Text = var4.bodyText
+				Text = UseLocalizationResult.bodyText
 			})
 		})
 	})

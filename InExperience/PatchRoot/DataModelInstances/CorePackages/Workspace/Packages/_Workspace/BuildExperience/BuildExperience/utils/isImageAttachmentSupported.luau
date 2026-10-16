@@ -1,11 +1,11 @@
-﻿local captureService = game:GetService("CaptureService")
+﻿local CaptureService = game:GetService("CaptureService")
 
-return function()
-	-- upvalues: captureService (ref)
-	local ok, status = pcall(function()
-		-- upvalues: captureService (copy)
-		return game:GetEngineFeature("CaptureServiceStartUploadCoreScriptBypass") and (captureService.ReadCapturesFromGalleryAsync ~= nil and (captureService.StartUploadCaptureAsync ~= nil and captureService.CheckUploadCaptureStatusAsync ~= nil))
+return function(): boolean --[[ Line: 3 | Named "isImageAttachmentSupported" ]]
+	-- upvalues: CaptureService (copy)
+	local Success, Result = pcall(function(): boolean --[[ Line: 4 ]]
+		-- upvalues: CaptureService (upval)
+		return game:GetEngineFeature("CaptureServiceStartUploadCoreScriptBypass") and (CaptureService.ReadCapturesFromGalleryAsync ~= nil and (CaptureService.StartUploadCaptureAsync ~= nil and CaptureService.CheckUploadCaptureStatusAsync ~= nil))
 	end)
 	
-	return ok and status == true
+	return Success and Result == true
 end

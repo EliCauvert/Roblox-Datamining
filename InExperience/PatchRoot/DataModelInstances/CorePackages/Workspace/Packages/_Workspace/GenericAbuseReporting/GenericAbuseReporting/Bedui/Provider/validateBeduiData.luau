@@ -1,41 +1,42 @@
-﻿local genericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
-local tModule = require(genericAbuseReporting.Parent.t)
-local beduiDataTypeInterface = require(genericAbuseReporting.Bedui.Provider.AbuseReportBeduiTypes).BeduiDataTypeInterface
+﻿local GenericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
+local TModule = require(GenericAbuseReporting.Parent.t)
+local BeduiDataTypeInterface = require(GenericAbuseReporting.Bedui.Provider.AbuseReportBeduiTypes).BeduiDataTypeInterface
 
-local function _(p1, p2)
-	-- upvalues: tModule (ref)
-	return tModule.interface(p2)(p1)
+local function _(p1, p2) --[[ Line: 15 | Named "validateInterface" ]]
+	-- upvalues: TModule (copy)
+	return TModule.interface(p2)(p1)
 end
 
-local function validateStepId(p1)
-	local var1 = false
-	local t = {}
+local function validateStepId(p1) --[[ Line: 24 ]]
+	local Flag = false
+	local List = {}
 	
-	for i, v in p1.nodes do
-		if v.stepId == p1.rootStepId then
-			if not var1 then
-				var1 = true
+	for _, node in p1.nodes do
+		if node.stepId == p1.rootStepId then
+			if Flag then
+				return false, "Bedui data contains multiple steps with the same rootStepId"
 			end
-			return false, "Bedui data contains multiple steps with the same rootStepId"
+			Flag = true
 		end
-		if not table.find(t, v.stepId) then
-			table.insert(t, v.stepId)
-			continue
+		if table.find(List, node.stepId) then
+			return false, "Bedui data contains duplicate stepId: " .. tostring(node.stepId)
 		end
-		return false, "Bedui data contains duplicate stepId: " .. tostring(v.stepId)
+		table.insert(List, node.stepId)
 	end
-	if var1 then
+	if Flag then
 		return true, nil
+	else
+		return false, "Bedui data does not contain a step with the rootStepId"
 	end
-	return false, "Bedui data does not contain a step with the rootStepId"
 end
 
-return function(p2)
-	-- upvalues: beduiDataTypeInterface (ref), tModule (ref), validateStepId (ref)
+return function(p2) --[[ Line: 51 | Named "validateBeduiData" ]]
+	-- upvalues: BeduiDataTypeInterface (copy), TModule (copy), validateStepId (copy)
 	if p2 == nil then
 		return false, "Bedui data is nil"
-	elseif tModule.interface(beduiDataTypeInterface)(p2) then
+	elseif TModule.interface(BeduiDataTypeInterface)(p2) then
 		return validateStepId(p2)
+	else
+		return false, "Bedui data does not conform to the expected structure"
 	end
-	return false, "Bedui data does not conform to the expected structure"
 end

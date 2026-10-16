@@ -1,12 +1,12 @@
-﻿local parent = script:FindFirstAncestor("PageLoadTracker").Parent
-local reactModule = require(parent.React)
-local pageTrackerContextModule = require(script.Parent.Parent.PageTrackerContext)
+﻿local Parent = script:FindFirstAncestor("PageLoadTracker").Parent
+local ReactModule = require(Parent.React)
+local PageTrackerContextModule = require(script.Parent.Parent.PageTrackerContext)
 local _ = require(script.Parent.Parent.createPageTracker)
-local signal = require(script.Parent.Parent.Parent.AppCommonLib).Signal
-local fFlagLuaAppEnableChatMilestones = require(parent.SharedFlags).FFlagLuaAppEnableChatMilestones
+local Signal = require(script.Parent.Parent.Parent.AppCommonLib).Signal
+local FFlagLuaAppEnableChatMilestones = require(Parent.SharedFlags).FFlagLuaAppEnableChatMilestones
 
-local function createNoOpTracker()
-	-- upvalues: signal (ref)
+local function createNoOpTracker() --[[ Line: 11 ]]
+	-- upvalues: Signal (copy)
 	return {
 		pageName = "",
 		startTime = 0,
@@ -14,29 +14,29 @@ local function createNoOpTracker()
 		timeoutThread = nil,
 		isActive = false,
 		numLoads = 0,
-		onCompleteSignal = signal.new(),
+		onCompleteSignal = Signal.new(),
 		sentMilestones = {},
-		start = function() end,
-		logMilestone = function() end,
-		stop = function() end,
-		onComponentAdded = function() end,
-		complete = function() end,
-		sendMilestone = function() end
+		start = function() --[[ Line: 22 ]] end,
+		logMilestone = function() --[[ Line: 23 ]] end,
+		stop = function() --[[ Line: 24 ]] end,
+		onComponentAdded = function() --[[ Line: 25 ]] end,
+		complete = function() --[[ Line: 26 ]] end,
+		sendMilestone = function() --[[ Line: 27 ]] end
 	}
 end
 
-return function()
-	-- upvalues: reactModule (ref), pageTrackerContextModule (ref), fFlagLuaAppEnableChatMilestones (ref), createNoOpTracker (ref)
-	local var1 = reactModule.useContext(pageTrackerContextModule)
+return function() --[[ Line: 31 | Named "usePageTracker" ]]
+	-- upvalues: ReactModule (copy), PageTrackerContextModule (copy), FFlagLuaAppEnableChatMilestones (copy), createNoOpTracker (copy)
+	local UseContextResult = ReactModule.useContext(PageTrackerContextModule)
 	
-	if var1 == nil then
-		if fFlagLuaAppEnableChatMilestones then
-			return reactModule.useMemo(function()
-				-- upvalues: createNoOpTracker (copy)
-				return createNoOpTracker()
+	if UseContextResult == nil then
+		if FFlagLuaAppEnableChatMilestones then
+			return ReactModule.useMemo(function() --[[ Line: 36 ]]
+				-- upvalues: createNoOpTracker (upval)
+				return (createNoOpTracker())
 			end, {})
 		end
 		error("usePageTracker must be used within a PageTrackerContext.Provider")
 	end
-	return var1
+	return UseContextResult
 end

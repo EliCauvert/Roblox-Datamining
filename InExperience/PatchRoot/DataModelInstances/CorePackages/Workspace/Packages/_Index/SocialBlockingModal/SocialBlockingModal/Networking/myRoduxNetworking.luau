@@ -1,14 +1,14 @@
-﻿local socialBlockingModal = script:FindFirstAncestor("SocialBlockingModal")
-local parent = socialBlockingModal.Parent
-local httpRequestModule = require(parent.HttpRequest)
+﻿local SocialBlockingModal = script:FindFirstAncestor("SocialBlockingModal")
+local Parent = SocialBlockingModal.Parent
+local HttpRequestModule = require(Parent.HttpRequest)
 
-return require(parent.RoduxNetworking).config({
-	keyPath = `{require(socialBlockingModal.Rodux.RODUX_KEY)}.NetworkStatus`,
-	networkImpl = require(parent.GenericChallenges).Middleware.ChallengeRequestWrapper(httpRequestModule.config({
-		requestFunction = function(p1, p2, p3)
-			-- upvalues: httpRequestModule (ref)
-			return httpRequestModule.requestFunctions.RequestInternal(p1, p2, p3)
+return (require(Parent.RoduxNetworking).config({
+	keyPath = `{require(SocialBlockingModal.Rodux.RODUX_KEY)}.NetworkStatus`,
+	networkImpl = require(Parent.GenericChallenges).Middleware.ChallengeRequestWrapper((HttpRequestModule.config({
+		requestFunction = function(p1, p2, p3) --[[ Line: 13 ]]
+			-- upvalues: HttpRequestModule (copy)
+			return HttpRequestModule.requestFunctions.RequestInternal(p1, p2, p3)
 		end,
 		maxRetryCount = game:DefineFastInt("AddFriendsHttpRetryCount", 3)
-	}))
-})
+	})))
+}))

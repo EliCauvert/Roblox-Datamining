@@ -1,14 +1,13 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local expChatModule = require(corePackagesService.Workspace.Packages.ExpChat)
-local makeActionCreator = require(corePackagesService.Packages.Rodux).makeActionCreator
-local tModule = require(corePackagesService.Packages.t)
-local maybeAssertModule = require(script.Parent.Parent.Helpers.maybeAssert)
-local var1 = tModule.tuple(tModule.string, tModule.string)
+﻿local CorePackages = game:GetService("CorePackages")
+local ExpChatModule = require(CorePackages.Workspace.Packages.ExpChat)
+local TModule = require(CorePackages.Packages.t)
+local MaybeAssertModule = require(script.Parent.Parent.Helpers.maybeAssert)
+local TupleResult = TModule.tuple(TModule.string, TModule.string)
 
-return makeActionCreator(script.Name, function(p1, p2)
-	-- upvalues: maybeAssertModule (ref), var1 (ref), expChatModule (ref)
-	maybeAssertModule(var1(p1, p2))
-	expChatModule.Events.LegacyBubbleTextUpdated(p1, p2)
+return require(CorePackages.Packages.Rodux).makeActionCreator(script.Name, function(MessageId, NewText) --[[ Line: 10 ]]
+	-- upvalues: MaybeAssertModule (copy), TupleResult (copy), ExpChatModule (copy)
+	MaybeAssertModule(TupleResult(MessageId, NewText))
+	ExpChatModule.Events.LegacyBubbleTextUpdated(MessageId, NewText)
 	
-	return { messageId = p1, newText = p2 }
+	return { messageId = MessageId, newText = NewText }
 end)

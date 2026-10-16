@@ -1,6 +1,6 @@
-﻿local createExperienceGuidelinesStoreModule = require(script.Parent.createExperienceGuidelinesStore)
+﻿local CreateExperienceGuidelinesStoreModule = require(script.Parent.createExperienceGuidelinesStore)
 
-return require(script:FindFirstAncestor("DataHydration").Parent.Signals).createComputed(function()
-	-- upvalues: createExperienceGuidelinesStoreModule (ref)
-	return createExperienceGuidelinesStoreModule()
+return require(script:FindFirstAncestor("DataHydration").Parent.Signals).createComputed(function() --[[ Line: 8 ]]
+	-- upvalues: CreateExperienceGuidelinesStoreModule (copy)
+	return CreateExperienceGuidelinesStoreModule()
 end)

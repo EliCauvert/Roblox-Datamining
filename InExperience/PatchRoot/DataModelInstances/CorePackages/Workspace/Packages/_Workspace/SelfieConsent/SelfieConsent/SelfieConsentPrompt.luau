@@ -1,72 +1,72 @@
-﻿local reactModule = require(script.Parent.Parent.React)
-local localizationModule = require(script.Parent.Parent.Localization)
-local foundationModule = require(script.Parent.Parent.Foundation)
-local legallySensitiveContentModule = require(script.Parent.Parent.LegallySensitiveContent)
-local button = foundationModule.Button
-local dialog = foundationModule.Dialog
-local view = foundationModule.View
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local dialogSize = foundationModule.Enums.DialogSize
-local useLocalization = localizationModule.Hooks.useLocalization
-local consentName = legallySensitiveContentModule.ConsentName
-local useLegallySensitiveContentAndActions = legallySensitiveContentModule.useLegallySensitiveContentAndActions
-local linkingProtocol = require(script.Parent.Parent.LinkingProtocol).LinkingProtocol
-local avatarCreationService = game:GetService("AvatarCreationService")
-local browserService = game:GetService("BrowserService")
-local userInputService = game:GetService("UserInputService")
+﻿local ReactModule = require(script.Parent.Parent.React)
+local FoundationModule = require(script.Parent.Parent.Foundation)
+local LegallySensitiveContentModule = require(script.Parent.Parent.LegallySensitiveContent)
+local Button = FoundationModule.Button
+local Dialog = FoundationModule.Dialog
+local View = FoundationModule.View
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local DialogSize = FoundationModule.Enums.DialogSize
+local UseLocalizationFunction = require(script.Parent.Parent.Localization).Hooks.useLocalization
+local ConsentName = LegallySensitiveContentModule.ConsentName
+local UseLegallySensitiveContentAndActionsFunction = LegallySensitiveContentModule.useLegallySensitiveContentAndActions
+local LinkingProtocol = require(script.Parent.Parent.LinkingProtocol).LinkingProtocol
+local AvatarCreationService = game:GetService("AvatarCreationService")
+local BrowserService = game:GetService("BrowserService")
+local UserInputService = game:GetService("UserInputService")
 
-return function(p1)
-	-- upvalues: useLocalization (ref), useLegallySensitiveContentAndActions (ref), consentName (ref), reactModule (ref), dialog (ref), dialogSize (ref), view (ref), button (ref), buttonVariant (ref), userInputService (ref), browserService (ref), linkingProtocol (ref), avatarCreationService (ref)
-	local var1 = useLocalization({
+return function(p1) --[[ Line: 27 ]]
+	-- upvalues: UseLocalizationFunction (copy), UseLegallySensitiveContentAndActionsFunction (copy), ConsentName (copy), ReactModule (copy), Dialog (copy), DialogSize (copy), View (copy), Button (copy), ButtonVariant (copy), UserInputService (copy), BrowserService (copy), LinkingProtocol (copy), AvatarCreationService (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
 		title = "AvatarGeneration.SelfieConsent.Title",
 		bodyText = "AvatarGeneration.SelfieConsent.BodyTextLink",
 		privacyLinkText = "AvatarGeneration.SelfieConsent.PrivacyLinkText",
 		agreeButton = "AvatarGeneration.SelfieConsent.AgreeButton",
 		cancelButton = "AvatarGeneration.SelfieConsent.CancelButton"
 	})
-	local _, var2 = useLegallySensitiveContentAndActions(consentName.PhotoToAvatar, "in-experience-photo-to-avatar-selfie-consent")
+	local _, InExperiencePhotoToAvatarSelfieConsent2 = UseLegallySensitiveContentAndActionsFunction(ConsentName.PhotoToAvatar, "in-experience-photo-to-avatar-selfie-consent")
 	
-	return reactModule.createElement(dialog.Root, { size = dialogSize.Large }, {
-		DialogTitle = reactModule.createElement(dialog.Title, { text = var1.title }),
-		DialogContent = reactModule.createElement(dialog.Content, nil, {
-			DialogView = reactModule.createElement(view, { tag = "col fill auto-xy items-start gap-medium" }, {
-				DialogContentText = reactModule.createElement(dialog.Text, { Text = var1.bodyText }),
-				DialogFooter = reactModule.createElement(button, {
-					text = var1.privacyLinkText,
-					variant = buttonVariant.Link,
-					onActivated = function()
-						-- upvalues: userInputService (copy), browserService (copy), linkingProtocol (copy)
-						if userInputService:GetPlatform() == Enum.Platform.Android then
-							browserService:OpenBrowserWindow("https://en.help.roblox.com/hc/en-us/articles/115004630823-Roblox-Privacy-and-Cookie-Policy")
+	return ReactModule.createElement(Dialog.Root, { size = DialogSize.Large }, {
+		DialogTitle = ReactModule.createElement(Dialog.Title, { text = UseLocalizationResult.title }),
+		DialogContent = ReactModule.createElement(Dialog.Content, nil, {
+			DialogView = ReactModule.createElement(View, { tag = "col fill auto-xy items-start gap-medium" }, {
+				DialogContentText = ReactModule.createElement(Dialog.Text, { Text = UseLocalizationResult.bodyText }),
+				DialogFooter = ReactModule.createElement(Button, {
+					text = UseLocalizationResult.privacyLinkText,
+					variant = ButtonVariant.Link,
+					onActivated = function() --[[ Line: 55 ]]
+						-- upvalues: UserInputService (upval), BrowserService (upval), LinkingProtocol (upval)
+						if UserInputService:GetPlatform() == Enum.Platform.Android then
+							BrowserService:OpenBrowserWindow("https://en.help.roblox.com/hc/en-us/articles/115004630823-Roblox-Privacy-and-Cookie-Policy")
 							
 							return
+						else
+							LinkingProtocol.default:openURL("https://en.help.roblox.com/hc/en-us/articles/115004630823-Roblox-Privacy-and-Cookie-Policy")
 						end
-						linkingProtocol.default:openURL("https://en.help.roblox.com/hc/en-us/articles/115004630823-Roblox-Privacy-and-Cookie-Policy")
 					end
 				})
 			})
 		}),
-		DialogActions = reactModule.createElement(dialog.Actions, {
+		DialogActions = ReactModule.createElement(Dialog.Actions, {
 			LayoutOrder = 3,
 			actions = {
 				{
-					text = var1.agreeButton,
-					variant = buttonVariant.Emphasis,
-					onActivated = function()
-						-- upvalues: avatarCreationService (copy), p1 (ref), var2 (ref)
-						avatarCreationService:HandleSelfieConsentResult(true)
+					text = UseLocalizationResult.agreeButton,
+					variant = ButtonVariant.Emphasis,
+					onActivated = function() --[[ Line: 72 ]]
+						-- upvalues: AvatarCreationService (upval), p1 (copy), InExperiencePhotoToAvatarSelfieConsent2 (copy)
+						AvatarCreationService:HandleSelfieConsentResult(true)
 						p1.displaySelfieConsent(false)
-						var2.grantOneTimeUserConsentWithAuditing(nil, {
+						InExperiencePhotoToAvatarSelfieConsent2.grantOneTimeUserConsentWithAuditing(nil, {
 							privacyPolicyLink = "https://en.help.roblox.com/hc/en-us/articles/115004630823-Roblox-Privacy-and-Cookie-Policy"
 						})
 					end
 				},
 				{
-					text = var1.cancelButton,
-					variant = buttonVariant.Standard,
-					onActivated = function()
-						-- upvalues: avatarCreationService (copy), p1 (ref)
-						avatarCreationService:HandleSelfieConsentResult(false)
+					text = UseLocalizationResult.cancelButton,
+					variant = ButtonVariant.Standard,
+					onActivated = function() --[[ Line: 81 ]]
+						-- upvalues: AvatarCreationService (upval), p1 (copy)
+						AvatarCreationService:HandleSelfieConsentResult(false)
 						p1.displaySelfieConsent(false)
 					end
 				}

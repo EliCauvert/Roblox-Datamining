@@ -1,49 +1,51 @@
-﻿local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local reactModule = require(parent_1.React)
-local foundationModule = require(parent_1.Foundation)
-local inputTypesEnumModule = require(parent.Enums.InputTypesEnum)
-local responsiveModule = require(parent_1.Responsive)
-local keyboardHelpPageModule = require(parent.Components.Keyboard.KeyboardHelpPage)
-local gamepadHelpPageModule = require(parent.Components.Gamepad.GamepadHelpPage)
-local touchHelpPageModule = require(parent.Components.Touch.TouchHelpPage)
-local helpPageTelemetryModule = require(parent.Telemetry.HelpPageTelemetry)
-local robloxAppHooksModule = require(parent_1.RobloxAppHooks)
-local _ = require(parent_1.RobloxAppEnums)
-local view = foundationModule.View
-local useDeviceOrientation = robloxAppHooksModule.useDeviceOrientation
+﻿local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
+local InputTypesEnumModule = require(Parent.Enums.InputTypesEnum)
+local ResponsiveModule = require(Parent1.Responsive)
+local KeyboardHelpPageModule = require(Parent.Components.Keyboard.KeyboardHelpPage)
+local GamepadHelpPageModule = require(Parent.Components.Gamepad.GamepadHelpPage)
+local TouchHelpPageModule = require(Parent.Components.Touch.TouchHelpPage)
+local HelpPageTelemetryModule = require(Parent.Telemetry.HelpPageTelemetry)
+local _ = require(Parent1.RobloxAppEnums)
+local View = require(Parent1.Foundation).View
+local UseDeviceOrientationFunction = require(Parent1.RobloxAppHooks).useDeviceOrientation
 
-local _ = function(p1, p2, p3)
-	-- upvalues: inputTypesEnumModule (ref), responsiveModule (ref)
-	if p2 then
-		return inputTypesEnumModule.InputType.SPATIAL_GAMEPAD
-	elseif p1 == nil then
-		p1 = p3
+local function _(Directional, p1, p2) --[[ Line: 22 ]]
+	-- upvalues: InputTypesEnumModule (copy), ResponsiveModule (copy)
+	if p1 then
+		return InputTypesEnumModule.InputType.SPATIAL_GAMEPAD
 	end
-	return if p1 == responsiveModule.Input.Pointer then inputTypesEnumModule.InputType.KEYBOARD elseif p1 == responsiveModule.Input.Directional then inputTypesEnumModule.InputType.GAMEPAD elseif p1 == responsiveModule.Input.Touch then inputTypesEnumModule.InputType.TOUCH else inputTypesEnumModule.InputType.KEYBOARD
+	if Directional == nil then
+		Directional = p2
+	end
+	return if Directional == ResponsiveModule.Input.Pointer then InputTypesEnumModule.InputType.KEYBOARD elseif Directional == ResponsiveModule.Input.Directional then InputTypesEnumModule.InputType.GAMEPAD elseif Directional == ResponsiveModule.Input.Touch then InputTypesEnumModule.InputType.TOUCH else InputTypesEnumModule.InputType.KEYBOARD
 end
 
-return reactModule.memo(function()
-	-- upvalues: responsiveModule (ref), inputTypesEnumModule (ref), useDeviceOrientation (ref), reactModule (ref), helpPageTelemetryModule (ref), keyboardHelpPageModule (ref), gamepadHelpPageModule (ref), touchHelpPageModule (ref), view (ref)
-	local SPATIAL_GAMEPAD
-	local var1 = responsiveModule.useLastInput()
-	local var2 = responsiveModule.useIsSpatial()
-	local var3 = responsiveModule.usePreferredInput()
-	local var4 = var1
+return ReactModule.memo(function() --[[ Line: 43 | Named "HelpPageContainer" ]]
+	-- upvalues: ResponsiveModule (copy), InputTypesEnumModule (copy), UseDeviceOrientationFunction (copy), ReactModule (copy), HelpPageTelemetryModule (copy), KeyboardHelpPageModule (copy), GamepadHelpPageModule (copy), TouchHelpPageModule (copy), View (copy)
+	local UsePreferredInputResult = ResponsiveModule.usePreferredInput()
+	local UseLastInputResult = ResponsiveModule.useLastInput()
+	local SPATIALGAMEPAD = nil
 	
-	if var2 then
-		SPATIAL_GAMEPAD = inputTypesEnumModule.InputType.SPATIAL_GAMEPAD
-	elseif var4 == nil then
-		var4 = var3
+	if ResponsiveModule.useIsSpatial() then
+		SPATIALGAMEPAD = InputTypesEnumModule.InputType.SPATIAL_GAMEPAD
+	else
+		if UseLastInputResult == nil then
+			UseLastInputResult = UsePreferredInputResult
+		end
+		SPATIALGAMEPAD = if UseLastInputResult == ResponsiveModule.Input.Pointer then InputTypesEnumModule.InputType.KEYBOARD elseif UseLastInputResult == ResponsiveModule.Input.Directional then InputTypesEnumModule.InputType.GAMEPAD elseif UseLastInputResult == ResponsiveModule.Input.Touch then InputTypesEnumModule.InputType.TOUCH else InputTypesEnumModule.InputType.KEYBOARD
 	end
-	SPATIAL_GAMEPAD = if var4 == responsiveModule.Input.Pointer then inputTypesEnumModule.InputType.KEYBOARD elseif var4 == responsiveModule.Input.Directional then inputTypesEnumModule.InputType.GAMEPAD elseif var4 == responsiveModule.Input.Touch then inputTypesEnumModule.InputType.TOUCH else inputTypesEnumModule.InputType.KEYBOARD
-	local var5 = useDeviceOrientation()
-	reactModule.useEffect(function()
-		-- upvalues: helpPageTelemetryModule (copy), var5 (ref), SPATIAL_GAMEPAD (ref)
-		helpPageTelemetryModule.default:logHelpPageInteraction("Help_Interaction", { orientation = var5, last_input_type = SPATIAL_GAMEPAD })
-	end, { var5, SPATIAL_GAMEPAD })
+	local UseDeviceOrientationResult = UseDeviceOrientationFunction()
+	ReactModule.useEffect(function() --[[ Line: 50 ]]
+		-- upvalues: HelpPageTelemetryModule (upval), UseDeviceOrientationResult (copy), SPATIALGAMEPAD (copy)
+		HelpPageTelemetryModule.default:logHelpPageInteraction("Help_Interaction", {
+			orientation = UseDeviceOrientationResult,
+			last_input_type = SPATIALGAMEPAD
+		})
+	end, { UseDeviceOrientationResult, SPATIALGAMEPAD })
 	
-	return if SPATIAL_GAMEPAD == inputTypesEnumModule.InputType.KEYBOARD then reactModule.createElement(keyboardHelpPageModule) elseif SPATIAL_GAMEPAD == inputTypesEnumModule.InputType.GAMEPAD or SPATIAL_GAMEPAD == inputTypesEnumModule.InputType.SPATIAL_GAMEPAD then reactModule.createElement(gamepadHelpPageModule, {
-		isSpatial = SPATIAL_GAMEPAD == inputTypesEnumModule.InputType.SPATIAL_GAMEPAD
-	}) elseif SPATIAL_GAMEPAD == inputTypesEnumModule.InputType.TOUCH then reactModule.createElement(touchHelpPageModule) else reactModule.createElement(view, nil, {})
+	return if SPATIALGAMEPAD == InputTypesEnumModule.InputType.KEYBOARD then ReactModule.createElement(KeyboardHelpPageModule) elseif SPATIALGAMEPAD == InputTypesEnumModule.InputType.GAMEPAD or SPATIALGAMEPAD == InputTypesEnumModule.InputType.SPATIAL_GAMEPAD then ReactModule.createElement(GamepadHelpPageModule, {
+		isSpatial = SPATIALGAMEPAD == InputTypesEnumModule.InputType.SPATIAL_GAMEPAD
+	}) elseif SPATIALGAMEPAD == InputTypesEnumModule.InputType.TOUCH then ReactModule.createElement(TouchHelpPageModule) else ReactModule.createElement(View, nil, {})
 end)

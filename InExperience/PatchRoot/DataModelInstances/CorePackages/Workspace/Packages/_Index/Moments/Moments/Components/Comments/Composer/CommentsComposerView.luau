@@ -1,45 +1,45 @@
-﻿local parent = script:FindFirstAncestor("Moments").Parent
-local composerModule = require(parent.AppBlox.Composer)
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local iconName = foundationModule.Enums.IconName
-local inputSize = foundationModule.Enums.InputSize
-local stateLayerAffordance = foundationModule.Enums.StateLayerAffordance
-local t = { placeholder = "Feature.Moments.Label.WriteComment" }
+﻿local Parent = script:FindFirstAncestor("Moments").Parent
+local ComposerModule = require(Parent.AppBlox.Composer)
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local IconName = FoundationModule.Enums.IconName
+local InputSize = FoundationModule.Enums.InputSize
+local StateLayerAffordance = FoundationModule.Enums.StateLayerAffordance
+local config = { placeholder = "Feature.Moments.Label.WriteComment" }
 
-return function(p1)
-	-- upvalues: useLocalization (ref), t (ref), reactModule (ref), composerModule (ref), inputSize (ref), foundationModule (ref), stateLayerAffordance (ref), iconName (ref), buttonVariant (ref)
-	return reactModule.createElement(composerModule, {
+return function(p1) --[[ Line: 29 | Named "CommentsComposerView" ]]
+	-- upvalues: UseLocalizationFunction (copy), config (copy), ReactModule (copy), ComposerModule (copy), InputSize (copy), FoundationModule (copy), StateLayerAffordance (copy), IconName (copy), ButtonVariant (copy)
+	return ReactModule.createElement(ComposerModule, {
 		minLines = 1,
 		maxLines = 5,
 		label = "",
 		testId = "moments-comments-composer",
 		width = UDim.new(1, 0),
-		size = inputSize.Medium,
-		placeholder = useLocalization(t).placeholder,
+		size = InputSize.Medium,
+		placeholder = UseLocalizationFunction(config).placeholder,
 		text = p1.text,
 		hint = p1.errorMessage,
 		hasError = p1.errorMessage ~= nil,
 		isDisabled = p1.isInputDisabled,
 		onChanged = p1.onTextChanged,
 		onReturnPressed = p1.onSubmit,
-		trailingElement = reactModule.createElement(foundationModule.View, { tag = "size-800-1000" }, {
-			SubmitHitArea = reactModule.createElement(foundationModule.View, {
+		trailingElement = ReactModule.createElement(FoundationModule.View, { tag = "size-800-1000" }, {
+			SubmitHitArea = ReactModule.createElement(FoundationModule.View, {
 				tag = "position-center-center anchor-center-center size-1000-1000",
 				testId = "moments-comments-composer-submit-hit-area",
 				isDisabled = not p1.isSubmitEnabled,
 				onActivated = p1.onSubmit,
 				selection = { Selectable = false },
-				stateLayer = { affordance = stateLayerAffordance.None }
+				stateLayer = { affordance = StateLayerAffordance.None }
 			}, {
-				SubmitButton = reactModule.createElement(foundationModule.IconButton, {
+				SubmitButton = ReactModule.createElement(FoundationModule.IconButton, {
 					isCircular = true,
 					testId = "moments-comments-composer-submit",
-					icon = iconName.ArrowMediumUp,
-					variant = if p1.isSubmitEnabled then buttonVariant.Emphasis else buttonVariant.Standard,
-					size = inputSize.XSmall,
+					icon = IconName.ArrowMediumUp,
+					variant = if p1.isSubmitEnabled then ButtonVariant.Emphasis else ButtonVariant.Standard,
+					size = InputSize.XSmall,
 					isDisabled = not p1.isSubmitEnabled,
 					onActivated = p1.onSubmit,
 					AnchorPoint = Vector2.new(0.5, 0.5),

@@ -1,22 +1,22 @@
 ﻿local _ = require(script.Parent.Parent.Parent.LeaderboardStore)
 
-return function(p1, p2)
+return function(p1, p2) --[[ Line: 19 | Named "computeStatColumns" ]]
 	if not p1 then
 		return {}
 	end
-	local t = {}
-	p1.iterateData(function(p3, p4)
-		-- upvalues: t (ref)
-		table.insert(t, { name = p3, order = p4.order(false) })
+	local List = {}
+	p1.iterateData(function(Name, p3) --[[ Line: 25 ]]
+		-- upvalues: List (copy)
+		table.insert(List, { name = Name, order = p3.order(false) })
 	end, false)
-	table.sort(t, function(p3, p4)
-		return p3.order < p4.order
+	table.sort(List, function(A, B): boolean --[[ Line: 29 ]]
+		return A.order < B.order
 	end)
-	local t_1 = {}
+	local List1 = {}
 	
-	for i, v in ipairs(t) do
+	for i, value in ipairs(List) do
 		if p2 < i then break end
-		table.insert(t_1, { name = v.name, order = v.order })
+		table.insert(List1, { name = value.name, order = value.order })
 	end
-	return t_1
+	return List1
 end

@@ -1,38 +1,36 @@
-﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local dataHydrationModule = require(parent.DataHydration)
-local foundationModule = require(parent.Foundation)
-local sduiSharedUtilitiesModule = require(parent.SduiSharedUtilities)
-local virtualEventsModule = require(parent.VirtualEvents)
-local centralOverlayType = require(parent.RobloxAppEnums).CentralOverlayType
-local setCentralOverlay = require(parent.CentralOverlay).Actions.SetCentralOverlay
-local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
-local getActionTelemetryFieldValue = sduiCoreSystemModule.getActionTelemetryFieldValue
-local getExperienceEventInfoStore = dataHydrationModule.ExperienceEvents.getExperienceEventInfoStore
-local getSduiPageEntrySnackbarStore = sduiSharedUtilitiesModule.getSduiPageEntrySnackbarStore
+﻿local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local FoundationModule = require(Parent.Foundation)
+local VirtualEventsModule = require(Parent.VirtualEvents)
+local CentralOverlayType = require(Parent.RobloxAppEnums).CentralOverlayType
+local SetCentralOverlayFunction = require(Parent.CentralOverlay).Actions.SetCentralOverlay
+local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
+local GetActionTelemetryFieldValueFunction = SduiCoreSystemModule.getActionTelemetryFieldValue
+local GetExperienceEventInfoStoreFunction = require(Parent.DataHydration).ExperienceEvents.getExperienceEventInfoStore
+local GetSduiPageEntrySnackbarStoreFunction = require(Parent.SduiSharedUtilities).getSduiPageEntrySnackbarStore
 
-local function showRsvpSuccessToast(p1, p2, p3, p4)
-	-- upvalues: getSduiPageEntrySnackbarStore (ref), foundationModule (ref)
-	getSduiPageEntrySnackbarStore().show(p2, {
-		title = p1.dependencies.localization:Format("Feature.VirtualEvents.Label.ReminderSetForEventTime"):gsub("{(.-)}", { eventName = p3, eventTime = p4 }),
-		icon = foundationModule.Enums.IconName.CircleCheck
+local function showRsvpSuccessToast(p1, EntryPointKey, EventName, EventTime) --[[ Line: 23 ]]
+	-- upvalues: GetSduiPageEntrySnackbarStoreFunction (copy), FoundationModule (copy)
+	GetSduiPageEntrySnackbarStoreFunction().show(EntryPointKey, {
+		title = p1.dependencies.localization:Format("Feature.VirtualEvents.Label.ReminderSetForEventTime"):gsub("{(.-)}", { eventName = EventName, eventTime = EventTime }),
+		icon = FoundationModule.Enums.IconName.CircleCheck
 	})
 end
 
-return function(p1, p2, p3, _)
-	-- upvalues: sduiErrorType (ref), virtualEventsModule (ref), getActionTelemetryFieldValue (ref), getExperienceEventInfoStore (ref), setCentralOverlay (ref), centralOverlayType (ref), showRsvpSuccessToast (ref)
-	local var1 = if p1 then p1.actionParams else nil
+return function(p1, p2, p3, _) --[[ Line: 42 ]]
+	-- upvalues: SduiErrorType (copy), VirtualEventsModule (copy), GetActionTelemetryFieldValueFunction (copy), GetExperienceEventInfoStoreFunction (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy), showRsvpSuccessToast (copy)
+	local ActionParams = p1 and p1.actionParams or nil
 	
-	if var1 == nil then
-		p3.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, { name = "RsvpToEvent", message = "Missing actionParams" }, p3.appPage)
+	if ActionParams == nil then
+		p3.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, { name = "RsvpToEvent", message = "Missing actionParams" }, p3.appPage)
 		
 		return
 	end
-	assert(var1, "actionParams must exist")
-	local eventId = var1.eventId
+	assert(ActionParams, "actionParams must exist")
+	local EventId = ActionParams.eventId
 	
-	if eventId == nil then
-		p3.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if EventId == nil then
+		p3.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			name = "RsvpToEvent",
 			message = "Missing eventId",
 			propName = "eventId"
@@ -40,43 +38,43 @@ return function(p1, p2, p3, _)
 		
 		return
 	end
-	local userRsvp = var1.userRsvp
-	virtualEventsModule.fireVirtualEventRSVP({
-		virtualEventId = tostring(eventId),
-		universeId = tostring(getActionTelemetryFieldValue(p1, p2, "universeId", "")),
-		channel = tostring(getActionTelemetryFieldValue(p1, p2, "channel", "")),
-		status = if userRsvp then "going" else "notGoing"
+	local UserRsvp = ActionParams.userRsvp
+	VirtualEventsModule.fireVirtualEventRSVP({
+		virtualEventId = tostring(EventId),
+		universeId = tostring(GetActionTelemetryFieldValueFunction(p1, p2, "universeId", "")),
+		channel = tostring(GetActionTelemetryFieldValueFunction(p1, p2, "channel", "")),
+		status = if UserRsvp then "going" else "notGoing"
 	})
-	local var2 = getExperienceEventInfoStore(false)
-	local var3 = var2.patchRsvpStatus(eventId, userRsvp)
+	local ExperienceEventInfoStore = GetExperienceEventInfoStoreFunction(false)
+	local PatchRsvpStatusResult = ExperienceEventInfoStore.patchRsvpStatus(EventId, UserRsvp)
 	
-	if var3 then
-		local entryPointKey = var1.entryPointKey or p3.configKey
-		var3:andThen(function(p4)
-			-- upvalues: userRsvp (ref), entryPointKey (ref), var1 (ref), p3 (ref), setCentralOverlay (copy), centralOverlayType (copy), var2 (ref), eventId (ref), showRsvpSuccessToast (copy)
-			if userRsvp ~= true or not entryPointKey then return end
-			local notificationsModalIdentifier = var1.notificationsModalIdentifier
+	if PatchRsvpStatusResult then
+		local EntryPointKey = ActionParams.entryPointKey or p3.configKey
+		PatchRsvpStatusResult:andThen(function(Result) --[[ Line: 84 ]]
+			-- upvalues: UserRsvp (copy), EntryPointKey (copy), ActionParams (copy), p3 (copy), SetCentralOverlayFunction (upval), CentralOverlayType (upval), ExperienceEventInfoStore (copy), EventId (copy), showRsvpSuccessToast (upval)
+			if UserRsvp ~= true or not EntryPointKey then return end
+			local NotificationsModalIdentifier = ActionParams.notificationsModalIdentifier
 			
-			if p4 and p4.shouldSeeNotificationsUpsellModal == true and notificationsModalIdentifier then
-				p3.dependencies.dispatch(setCentralOverlay(centralOverlayType.SduiOverlay, {
+			if Result and Result.shouldSeeNotificationsUpsellModal == true and NotificationsModalIdentifier then
+				p3.dependencies.dispatch(SetCentralOverlayFunction(CentralOverlayType.SduiOverlay, {
 					configKey = p3.configKey,
-					identifier = notificationsModalIdentifier,
+					identifier = NotificationsModalIdentifier,
 					appPage = p3.appPage
 				}))
 				
 				return
 			end
-			local experienceEventInfo = var2.getExperienceEventInfo(eventId)
-			local var4 = experienceEventInfo and (experienceEventInfo.data and experienceEventInfo.data(false))
+			local ExperienceEventInfo = ExperienceEventInfoStore.getExperienceEventInfo(EventId)
+			local DataResult = ExperienceEventInfo and (ExperienceEventInfo.data and ExperienceEventInfo.data(false))
 			
-			if not var4 then return end
-			local title = var4.title
-			local formattedStartDate = var2.calculateDerivedField("formattedStartDate", var4, false, p3.dependencies.localization)
+			if not DataResult then return end
+			local Title = DataResult.title
+			local FormattedStartDate = ExperienceEventInfoStore.calculateDerivedField("formattedStartDate", DataResult, false, p3.dependencies.localization)
 			
-			if title and formattedStartDate and var4.userRsvp then
-				showRsvpSuccessToast(p3, entryPointKey, title, formattedStartDate)
+			if Title and FormattedStartDate and DataResult.userRsvp then
+				showRsvpSuccessToast(p3, EntryPointKey, Title, FormattedStartDate)
 			end
-		end):catch(function()
+		end):catch(function() --[[ Line: 122 ]]
 			return nil
 		end)
 	end

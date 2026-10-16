@@ -1,94 +1,95 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local metricGranularity = require(buildExperience.Parent.DataHydration.ExperienceAnalytics).MetricGranularity
-local fillMetricSeriesGapsModule = require(buildExperience.Analytics.fillMetricSeriesGaps)
-local t = {
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local MetricGranularity = require(BuildExperience.Parent.DataHydration.ExperienceAnalytics).MetricGranularity
+local FillMetricSeriesGapsModule = require(BuildExperience.Analytics.fillMetricSeriesGaps)
+local config = {
 	hasData = false,
 	latest = nil,
 	trendPct = 0,
 	priorValue = nil
 }
 
-local function deriveSimpleSummary(p1)
-	local cloned = table.clone(p1)
-	table.sort(cloned, function(p2, p3)
-		return p2.time < p3.time
+local function deriveSimpleSummary(Tbl) --[[ Line: 36 ]]
+	local Copy = table.clone(Tbl)
+	table.sort(Copy, function(A, B): boolean --[[ Line: 38 ]]
+		return A.time < B.time
 	end)
-	local value = cloned[1].value
-	local value_1 = cloned[#cloned].value
+	local Value = Copy[1].value
+	local Value1 = Copy[#Copy].value
 	
 	return {
 		hasData = true,
 		priorValue = nil,
-		latest = value_1,
-		trendPct = if not (value == nil or value == 0) then (value_1 - value) / value else 0
+		latest = Value1,
+		trendPct = if Value == nil or Value == 0 then 0 else (Value1 - Value) / Value
 	}
 end
 
-local function _(p1, p2, p3)
-	local var1 = p3 - p2 + 1
+local function _(p1, p2, p3): number --[[ Line: 58 | Named "averageRange" ]]
+	local v1 = p3 - p2 + 1
 	
-	if var1 < 1 then
+	if v1 < 1 then
 		return 0
 	end
-	local var2 = 0
+	local NewValue = 0
 	
 	for i = p2, p3 do
-		var2 += p1[i].value
+		NewValue += p1[i].value
 	end
-	return var2 / var1
+	return NewValue / v1
 end
 
-return function(p4, p5)
-	-- upvalues: t (ref), metricGranularity (ref), deriveSimpleSummary (ref), fillMetricSeriesGapsModule (ref)
-	local var3 = if p4 ~= nil then nil else p4.dataPoints
+return function(p4, p5) --[[ Line: 70 | Named "deriveMetricSummary" ]]
+	-- upvalues: config (copy), MetricGranularity (copy), deriveSimpleSummary (copy), FillMetricSeriesGapsModule (copy)
+	local DataPoints = if p4 == nil then nil else p4.dataPoints
 	
-	if var3 == nil or #var3 == 0 then
-		return t
-	elseif p5 == nil or p4 ~= nil and p4.granularity ~= metricGranularity.OneDay then
-		return deriveSimpleSummary(var3)
+	if DataPoints == nil or #DataPoints == 0 then
+		return config
 	end
-	local var4 = fillMetricSeriesGapsModule(p4, {
+	if p5 == nil or p4 ~= nil and p4.granularity ~= MetricGranularity.OneDay then
+		return (deriveSimpleSummary(DataPoints))
+	end
+	local FillMetricSeriesGapsModuleResult = FillMetricSeriesGapsModule(p4, {
 		lookbackSeconds = p5.lookbackSeconds * 2,
 		endUnix = p5.endUnix
 	})
-	local var5 = if var4 ~= nil then var3 else var4.dataPoints
-	local var9Count = #var5
-	local floored = math.floor(var9Count / 2)
+	local DataPoints1 = if FillMetricSeriesGapsModuleResult == nil then DataPoints else FillMetricSeriesGapsModuleResult.dataPoints
+	local CountDataPoints1 = #DataPoints1
+	local Floored = math.floor(CountDataPoints1 / 2)
 	
-	if floored < 1 then
-		return deriveSimpleSummary(var3)
+	if Floored < 1 then
+		return (deriveSimpleSummary(DataPoints))
 	end
-	local var6
-	local var7 = floored - 1 + 1
+	local NewFloored = Floored - 1 + 1
+	local PriorValue = nil
 	
-	if var7 < 1 then
-		var6 = 0
+	if NewFloored < 1 then
+		PriorValue = 0
 	else
-		local var8 = 0
+		local NewValue = 0
 		
-		for i = 1, floored do
-			var8 += var5[i].value
+		for i = 1, Floored do
+			NewValue += DataPoints1[i].value
 		end
-		var6 = var8 / var7
+		PriorValue = NewValue / NewFloored
 	end
-	local var9
-	local var10 = var9Count - floored + 1
-	local var11 = var9Count - var10 + 1
+	local NewCountDataPoints = CountDataPoints1 - Floored + 1
+	local NewCountDataPoints1 = CountDataPoints1 - NewCountDataPoints + 1
+	local Latest = nil
 	
-	if var11 < 1 then
-		var9 = 0
+	if NewCountDataPoints1 < 1 then
+		Latest = 0
 	else
-		local var12 = 0
+		local NewValue = 0
 		
-		for i_1 = var10, var9Count do
-			var12 += var5[i_1].value
+		for i1 = NewCountDataPoints, CountDataPoints1 do
+			NewValue += DataPoints1[i1].value
 		end
-		var9 = var12 / var11
+		Latest = NewValue / NewCountDataPoints1
 	end
 	return {
 		hasData = true,
-		latest = var9,
-		trendPct = if var6 ~= 0 then (var9 - var6) / var6 else 0,
-		priorValue = var6
+		latest = Latest,
+		trendPct = if PriorValue == 0 then 0 else (Latest - PriorValue) / PriorValue,
+		priorValue = PriorValue
 	}
 end

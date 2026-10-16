@@ -1,295 +1,279 @@
-﻿local chatUIPrimitives = script:FindFirstAncestor("ChatUIPrimitives")
-local parent = chatUIPrimitives.Parent
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local signalsExperimentalModule = require(parent.SignalsExperimental)
-local useStableSignalModule = require(chatUIPrimitives.Hooks.useStableSignal)
+﻿local ChatUIPrimitives = script:FindFirstAncestor("ChatUIPrimitives")
+local Parent = ChatUIPrimitives.Parent
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local SignalsExperimentalModule = require(Parent.SignalsExperimental)
+local UseStableSignalModule = require(ChatUIPrimitives.Hooks.useStableSignal)
 
-return function(p1)
-	-- upvalues: reactModule (ref), useStableSignalModule (ref), signalsExperimentalModule (ref), signalsModule (ref)
-	local var1 = reactModule.useRef({})
-	local var2 = reactModule.useRef({})
-	local var3 = reactModule.useRef(0)
-	local maxSlots = p1.maxSlots or 50
-	local var4 = reactModule.useRef(p1.createSlotElement)
-	var4.current = p1.createSlotElement
-	local var5, var6 = useStableSignalModule({})
+return function(p1) --[[ Line: 66 | Named "useMessagePool" ]]
+	-- upvalues: ReactModule (copy), UseStableSignalModule (copy), SignalsExperimentalModule (copy), SignalsModule (copy)
+	local UseRefResult = ReactModule.useRef({})
+	local UseRefResult1 = ReactModule.useRef({})
+	local UseRefResult2 = ReactModule.useRef(0)
+	local MaxSlots = p1.maxSlots or 50
+	local UseRefResult3 = ReactModule.useRef(p1.createSlotElement)
+	UseRefResult3.current = p1.createSlotElement
+	local UseStableSignalModuleResult, UseStableSignalModuleResult2 = UseStableSignalModule({})
 	
-	local function publishChildrenFromCache()
-		-- upvalues: var1 (ref), var2 (ref), var6 (ref)
-		local t = {}
+	local function publishChildrenFromCache() --[[ Line: 86 ]]
+		-- upvalues: UseRefResult (copy), UseRefResult1 (copy), UseStableSignalModuleResult2 (copy)
+		local Elements = {}
 		
-		for i, v in var1.current do
-			t[v.stableKey] = v.element
+		for _, value in UseRefResult.current do
+			Elements[value.stableKey] = value.element
 		end
-		for i, v_1 in var2.current do
-			t[v_1.stableKey] = v_1.element
+		for _, value1 in UseRefResult1.current do
+			Elements[value1.stableKey] = value1.element
 		end
-		var6(t)
+		UseStableSignalModuleResult2(Elements)
 	end
 	
-	local function rebuildElementsFromFactory()
-		-- upvalues: var4 (ref), var1 (ref), var2 (ref), publishChildrenFromCache (ref)
-		local current = var4.current
+	local function rebuildElementsFromFactory() --[[ Line: 103 ]]
+		-- upvalues: UseRefResult3 (copy), UseRefResult (copy), UseRefResult1 (copy), publishChildrenFromCache (copy)
+		local CurrentFunction = UseRefResult3.current
 		
-		for i, v in var1.current do
-			v.element = current({
-				getMessageId = v.getMessageId,
-				getLayoutOrder = v.getLayoutOrder
+		for _, value in UseRefResult.current do
+			value.element = CurrentFunction({
+				getMessageId = value.getMessageId,
+				getLayoutOrder = value.getLayoutOrder
 			})
 		end
-		for i, v_1 in var2.current do
-			v_1.element = current({
-				getMessageId = v_1.getMessageId,
-				getLayoutOrder = v_1.getLayoutOrder
+		for _, value1 in UseRefResult1.current do
+			value1.element = CurrentFunction({
+				getMessageId = value1.getMessageId,
+				getLayoutOrder = value1.getLayoutOrder
 			})
 		end
 		publishChildrenFromCache()
 	end
 	
-	local function _(p2)
-		-- upvalues: signalsExperimentalModule (copy), var1 (ref), var2 (ref), maxSlots (ref), var3 (ref), signalsModule (copy), var4 (ref), publishChildrenFromCache (ref)
-		signalsExperimentalModule.batch(function()
-			-- upvalues: var1 (copy), var2 (copy), p2 (ref), maxSlots (copy), var3 (copy), signalsModule (copy), var4 (copy), publishChildrenFromCache (copy)
-			local current = var1.current
-			local current_1 = var2.current
-			local var7 = false
-			local p1Count = #p2
-			local maxValue = math.max(1, p1Count - maxSlots + 1)
+	local function _(p2) --[[ Line: 137 | Named "reconcile" ]]
+		-- upvalues: SignalsExperimentalModule (upval), UseRefResult (copy), UseRefResult1 (copy), MaxSlots (copy), UseRefResult2 (copy), SignalsModule (upval), UseRefResult3 (copy), publishChildrenFromCache (copy)
+		SignalsExperimentalModule.batch(function() --[[ Line: 138 ]]
+			-- upvalues: UseRefResult (upval), UseRefResult1 (upval), p2 (copy), MaxSlots (upval), UseRefResult2 (upval), SignalsModule (upval), UseRefResult3 (upval), publishChildrenFromCache (upval)
+			local Current = UseRefResult.current
+			local Current1 = UseRefResult1.current
+			local Flag = false
+			local Count = #p2
+			local Largest = math.max(1, Count - MaxSlots + 1)
 			local t = {}
 			
-			for i = maxValue, p1Count do
+			for i = Largest, Count do
 				t[p2[i]] = true
 			end
-			for i_1, v in current do
-				if not t[i_1] then
-					v.setMessageId(nil)
-					current_1[#current_1 + 1] = v
-					current[i_1] = nil
+			for i1, value in Current do
+				if not t[i1] then
+					value.setMessageId(nil)
+					Current1[#Current1 + 1] = value
+					Current[i1] = nil
 				end
 			end
-			local var8
-			for i_2 = maxValue, p1Count do
-				var8 = p2[i_2]
+			for i2 = Largest, Count do
+				local v1 = p2[i2]
 				
-				if current[var8] then
-					continue
+				if not Current[v1] then
+					local CurrentEntry = nil
+					if #Current1 > 0 then
+						CurrentEntry = Current1[#Current1]
+						Current1[#Current1] = nil
+						CurrentEntry.setMessageId(v1)
+					else
+						UseRefResult2.current += 1
+						local Text = "slot-" .. UseRefResult2.current
+						local Signal, Signal2 = SignalsModule.createSignal(v1)
+						local Signal1, Signal2_1 = SignalsModule.createSignal(0)
+						CurrentEntry = {
+							stableKey = Text,
+							getMessageId = Signal,
+							setMessageId = Signal2,
+							getLayoutOrder = Signal1,
+							setLayoutOrder = Signal2_1,
+							element = UseRefResult3.current({ getMessageId = Signal, getLayoutOrder = Signal1 })
+						}
+						Flag = true
+					end
+					Current[v1] = CurrentEntry
 				end
-				local var9
-				local _ = nil
-				
-				if #current_1 > 0 then
-					var9 = current_1[#current_1]
-					current_1[#current_1] = nil
-					var9.setMessageId(var8)
-				else
-					var3.current += 1
-					local text = "slot-" .. var7.current
-					local var10, var11 = signalsModule.createSignal(var8)
-					local var12, var13 = signalsModule.createSignal(0)
-					var9 = {
-						stableKey = text,
-						getMessageId = var10,
-						setMessageId = var11,
-						getLayoutOrder = var12,
-						setLayoutOrder = var13,
-						element = var4.current({ getMessageId = var10, getLayoutOrder = var12 })
-					}
-					var7 = true
-				end
-				current[var8] = var9
 			end
-			local var14 = 0
+			local v2 = 0
 			
-			for var8 = maxValue, p1Count do
-				local var15 = current[p2[var8]]
+			for i3 = Largest, Count do
+				local CurrentEntry = Current[p2[i3]]
 				
-				if var15 == nil then
-					continue
+				if CurrentEntry ~= nil then
+					local LayoutOrder = CurrentEntry.getLayoutOrder(false)
+					
+					if LayoutOrder <= v2 then
+						LayoutOrder = v2 + 1
+						CurrentEntry.setLayoutOrder(LayoutOrder)
+					end
+					v2 = LayoutOrder
 				end
-				local layoutOrder = var15.getLayoutOrder(false)
-				
-				if layoutOrder <= var14 then
-					layoutOrder = var14 + 1
-					var15.setLayoutOrder(layoutOrder)
-				end
-				var14 = layoutOrder
 			end
-			if var7 then
+			if Flag then
 				publishChildrenFromCache()
 			end
 		end)
 	end
 	
-	local var16 = reactModule.useRef(false)
+	local UseRefResult4 = ReactModule.useRef(false)
 	
-	if not var16.current then
-		var16.current = true
-		local var17 = p1.messageIdsSignal()
-		signalsExperimentalModule.batch(function()
-			-- upvalues: var1 (ref), var2 (ref), var17 (ref), maxSlots (ref), var3 (ref), signalsModule (copy), var4 (ref), publishChildrenFromCache (ref)
-			local current = var1.current
-			local current_1 = var2.current
-			local var18 = false
-			local p1Count = #var17
-			local maxValue = math.max(1, p1Count - maxSlots + 1)
+	if not UseRefResult4.current then
+		UseRefResult4.current = true
+		local MessageIdsSignalResult = p1.messageIdsSignal()
+		SignalsExperimentalModule.batch(function() --[[ Line: 138 ]]
+			-- upvalues: UseRefResult (copy), UseRefResult1 (copy), MessageIdsSignalResult (copy), MaxSlots (copy), UseRefResult2 (copy), SignalsModule (upval), UseRefResult3 (copy), publishChildrenFromCache (copy)
+			local Current = UseRefResult.current
+			local Current1 = UseRefResult1.current
+			local Flag = false
+			local Count = #MessageIdsSignalResult
+			local Largest = math.max(1, Count - MaxSlots + 1)
 			local t = {}
 			
-			for i = maxValue, p1Count do
-				t[var17[i]] = true
+			for i = Largest, Count do
+				t[MessageIdsSignalResult[i]] = true
 			end
-			for i_1, v in current do
-				if not t[i_1] then
-					v.setMessageId(nil)
-					current_1[#current_1 + 1] = v
-					current[i_1] = nil
+			for i1, value in Current do
+				if not t[i1] then
+					value.setMessageId(nil)
+					Current1[#Current1 + 1] = value
+					Current[i1] = nil
 				end
 			end
-			local var19
-			for i_2 = maxValue, p1Count do
-				var19 = var17[i_2]
+			for i2 = Largest, Count do
+				local v3 = MessageIdsSignalResult[i2]
 				
-				if current[var19] then
-					continue
-					continue
+				if not Current[v3] then
+					local CurrentEntry = nil
+					if #Current1 > 0 then
+						CurrentEntry = Current1[#Current1]
+						Current1[#Current1] = nil
+						CurrentEntry.setMessageId(v3)
+					else
+						UseRefResult2.current += 1
+						local Text = "slot-" .. UseRefResult2.current
+						local Signal, Signal2 = SignalsModule.createSignal(v3)
+						local Signal1, Signal2_1 = SignalsModule.createSignal(0)
+						CurrentEntry = {
+							stableKey = Text,
+							getMessageId = Signal,
+							setMessageId = Signal2,
+							getLayoutOrder = Signal1,
+							setLayoutOrder = Signal2_1,
+							element = UseRefResult3.current({ getMessageId = Signal, getLayoutOrder = Signal1 })
+						}
+						Flag = true
+					end
+					Current[v3] = CurrentEntry
 				end
-				local var20
-				local _ = nil
-				
-				if #current_1 > 0 then
-					var20 = current_1[#current_1]
-					current_1[#current_1] = nil
-					var20.setMessageId(var19)
-				else
-					var3.current += 1
-					local text = "slot-" .. var7.current
-					local var21, var22 = signalsModule.createSignal(var19)
-					local var23, var24 = signalsModule.createSignal(0)
-					var20 = {
-						stableKey = text,
-						getMessageId = var21,
-						setMessageId = var22,
-						getLayoutOrder = var23,
-						setLayoutOrder = var24,
-						element = var4.current({ getMessageId = var21, getLayoutOrder = var23 })
-					}
-					var18 = true
-				end
-				current[var19] = var20
 			end
-			local var25 = 0
+			local v4 = 0
 			
-			for var19 = maxValue, p1Count do
-				local var26 = current[var17[var19]]
+			for i3 = Largest, Count do
+				local CurrentEntry = Current[MessageIdsSignalResult[i3]]
 				
-				if var26 == nil then
-					continue
-					continue
+				if CurrentEntry ~= nil then
+					local LayoutOrder = CurrentEntry.getLayoutOrder(false)
+					
+					if LayoutOrder <= v4 then
+						LayoutOrder = v4 + 1
+						CurrentEntry.setLayoutOrder(LayoutOrder)
+					end
+					v4 = LayoutOrder
 				end
-				local layoutOrder = var26.getLayoutOrder(false)
-				
-				if layoutOrder <= var25 then
-					layoutOrder = var25 + 1
-					var26.setLayoutOrder(layoutOrder)
-				end
-				var25 = layoutOrder
 			end
-			if var18 then
+			if Flag then
 				publishChildrenFromCache()
 			end
 		end)
 	end
-	reactModule.useEffect(function()
-		-- upvalues: signalsModule (copy), p1 (ref), signalsExperimentalModule (copy), var1 (ref), var2 (ref), maxSlots (ref), var3 (ref), var4 (ref), publishChildrenFromCache (ref)
-		return signalsModule.createEffect(function(p3)
-			-- upvalues: p1 (copy), signalsExperimentalModule (copy), var1 (copy), var2 (copy), maxSlots (copy), var3 (copy), signalsModule (copy), var4 (copy), publishChildrenFromCache (copy)
-			local var27 = p1.messageIdsSignal(p3)
-			signalsExperimentalModule.batch(function()
-				-- upvalues: var1 (copy), var2 (copy), var27 (ref), maxSlots (copy), var3 (copy), signalsModule (copy), var4 (copy), publishChildrenFromCache (copy)
-				local current = var1.current
-				local current_1 = var2.current
-				local var28 = false
-				local p1Count = #var27
-				local maxValue = math.max(1, p1Count - maxSlots + 1)
+	ReactModule.useEffect(function() --[[ Line: 234 ]]
+		-- upvalues: SignalsModule (upval), p1 (copy), SignalsExperimentalModule (upval), UseRefResult (copy), UseRefResult1 (copy), MaxSlots (copy), UseRefResult2 (copy), UseRefResult3 (copy), publishChildrenFromCache (copy)
+		return (SignalsModule.createEffect(function(p3) --[[ Line: 235 ]]
+			-- upvalues: p1 (upval), SignalsExperimentalModule (upval), UseRefResult (upval), UseRefResult1 (upval), MaxSlots (upval), UseRefResult2 (upval), SignalsModule (upval), UseRefResult3 (upval), publishChildrenFromCache (upval)
+			local MessageIdsSignalResult = p1.messageIdsSignal(p3)
+			SignalsExperimentalModule.batch(function() --[[ Line: 138 ]]
+				-- upvalues: UseRefResult (upval), UseRefResult1 (upval), MessageIdsSignalResult (copy), MaxSlots (upval), UseRefResult2 (upval), SignalsModule (upval), UseRefResult3 (upval), publishChildrenFromCache (upval)
+				local Current = UseRefResult.current
+				local Current1 = UseRefResult1.current
+				local Flag = false
+				local Count = #MessageIdsSignalResult
+				local Largest = math.max(1, Count - MaxSlots + 1)
 				local t = {}
 				
-				for i = maxValue, p1Count do
-					t[var27[i]] = true
+				for i = Largest, Count do
+					t[MessageIdsSignalResult[i]] = true
 				end
-				for i_1, v in current do
-					if not t[i_1] then
-						v.setMessageId(nil)
-						current_1[#current_1 + 1] = v
-						current[i_1] = nil
+				for i1, value in Current do
+					if not t[i1] then
+						value.setMessageId(nil)
+						Current1[#Current1 + 1] = value
+						Current[i1] = nil
 					end
 				end
-				local var29
-				for i_2 = maxValue, p1Count do
-					var29 = var27[i_2]
+				for i2 = Largest, Count do
+					local v5 = MessageIdsSignalResult[i2]
 					
-					if current[var29] then
-						continue
-						continue
-						continue
+					if not Current[v5] then
+						local CurrentEntry = nil
+						if #Current1 > 0 then
+							CurrentEntry = Current1[#Current1]
+							Current1[#Current1] = nil
+							CurrentEntry.setMessageId(v5)
+						else
+							UseRefResult2.current += 1
+							local Text = "slot-" .. UseRefResult2.current
+							local Signal, Signal2 = SignalsModule.createSignal(v5)
+							local Signal1, Signal2_1 = SignalsModule.createSignal(0)
+							CurrentEntry = {
+								stableKey = Text,
+								getMessageId = Signal,
+								setMessageId = Signal2,
+								getLayoutOrder = Signal1,
+								setLayoutOrder = Signal2_1,
+								element = UseRefResult3.current({ getMessageId = Signal, getLayoutOrder = Signal1 })
+							}
+							Flag = true
+						end
+						Current[v5] = CurrentEntry
 					end
-					local var30
-					local _ = nil
-					
-					if #current_1 > 0 then
-						var30 = current_1[#current_1]
-						current_1[#current_1] = nil
-						var30.setMessageId(var29)
-					else
-						var3.current += 1
-						local text = "slot-" .. var7.current
-						local var31, var32 = signalsModule.createSignal(var29)
-						local var33, var34 = signalsModule.createSignal(0)
-						var30 = {
-							stableKey = text,
-							getMessageId = var31,
-							setMessageId = var32,
-							getLayoutOrder = var33,
-							setLayoutOrder = var34,
-							element = var4.current({ getMessageId = var31, getLayoutOrder = var33 })
-						}
-						var28 = true
-					end
-					current[var29] = var30
 				end
-				local var35 = 0
+				local v6 = 0
 				
-				for var29 = maxValue, p1Count do
-					local var36 = current[var27[var29]]
+				for i3 = Largest, Count do
+					local CurrentEntry = Current[MessageIdsSignalResult[i3]]
 					
-					if var36 == nil then
-						continue
-						continue
-						continue
+					if CurrentEntry ~= nil then
+						local LayoutOrder = CurrentEntry.getLayoutOrder(false)
+						
+						if LayoutOrder <= v6 then
+							LayoutOrder = v6 + 1
+							CurrentEntry.setLayoutOrder(LayoutOrder)
+						end
+						v6 = LayoutOrder
 					end
-					local layoutOrder = var36.getLayoutOrder(false)
-					
-					if layoutOrder <= var35 then
-						layoutOrder = var35 + 1
-						var36.setLayoutOrder(layoutOrder)
-					end
-					var35 = layoutOrder
 				end
-				if var28 then
+				if Flag then
 					publishChildrenFromCache()
 				end
 			end)
-		end)
-	end, { p1.messageIdsSignal, var6, maxSlots })
-	local var37 = reactModule.useRef(false)
-	reactModule.useEffect(function()
-		-- upvalues: var37 (ref), rebuildElementsFromFactory (ref)
-		if var37.current then
+		end))
+	end, {
+		p1.messageIdsSignal,
+		UseStableSignalModuleResult2,
+		MaxSlots
+	})
+	local UseRefResult5 = ReactModule.useRef(false)
+	ReactModule.useEffect(function() --[[ Line: 248 ]]
+		-- upvalues: UseRefResult5 (copy), rebuildElementsFromFactory (copy)
+		if UseRefResult5.current then
 			rebuildElementsFromFactory()
 			
 			return
+		else
+			UseRefResult5.current = true
 		end
-		var37.current = true
 	end, { p1.createSlotElement })
 	
-	return var5
+	return UseStableSignalModuleResult
 end

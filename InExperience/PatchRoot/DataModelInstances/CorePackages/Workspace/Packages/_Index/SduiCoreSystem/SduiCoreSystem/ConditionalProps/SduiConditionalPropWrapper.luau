@@ -1,42 +1,43 @@
-﻿local sduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
-local parent = sduiCoreSystem.Parent
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local getInputModeStore = require(parent.Responsive).GetInputModeStore
-local compareSduiPropsModule = require(sduiCoreSystem.compareSduiProps)
-local _ = require(sduiCoreSystem.SduiBuilderTypes)
-local _ = require(sduiCoreSystem.SduiConfigTypes)
-local sduiResponsiveDetectorModule = require(sduiCoreSystem.ConditionalProps.SduiResponsiveDetector)
-local sduiPresenceDetectorModule = require(sduiCoreSystem.ConditionalProps.SduiPresenceDetector)
-local getDisplayStore = require(parent.Display).GetDisplayStore
-local checkPresenceConditionsModule = require(sduiCoreSystem.ConditionalProps.checkPresenceConditions)
-local checkResponsiveConditions = require(sduiCoreSystem.SduiResponsiveHelpers).checkResponsiveConditions
-local sduiConditionalPropTypesModule = require(sduiCoreSystem.ConditionalProps.SduiConditionalPropTypes)
-local sduiConditionKey = sduiConditionalPropTypesModule.SduiConditionKey
-local sduiResponsiveKey = sduiConditionalPropTypesModule.SduiResponsiveKey
+﻿local SduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
+local Parent = SduiCoreSystem.Parent
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local GetInputModeStoreFunction = require(Parent.Responsive).GetInputModeStore
+local _ = require(SduiCoreSystem.SduiBuilderTypes)
+local _ = require(SduiCoreSystem.SduiConfigTypes)
+local SduiResponsiveDetectorModule = require(SduiCoreSystem.ConditionalProps.SduiResponsiveDetector)
+local SduiPresenceDetectorModule = require(SduiCoreSystem.ConditionalProps.SduiPresenceDetector)
+local GetDisplayStoreFunction = require(Parent.Display).GetDisplayStore
+local CheckPresenceConditionsModule = require(SduiCoreSystem.ConditionalProps.checkPresenceConditions)
+local CheckResponsiveConditionsFunction = require(SduiCoreSystem.SduiResponsiveHelpers).checkResponsiveConditions
+local SduiConditionalPropTypesModule = require(SduiCoreSystem.ConditionalProps.SduiConditionalPropTypes)
+local SduiConditionKey = SduiConditionalPropTypesModule.SduiConditionKey
+local SduiResponsiveKey = SduiConditionalPropTypesModule.SduiResponsiveKey
 local t = {}
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), sduiConditionKey (ref), sduiResponsiveKey (ref), getDisplayStore (ref), getInputModeStore (ref), checkResponsiveConditions (ref), t (ref), checkPresenceConditionsModule (ref), cryoModule (ref), sduiPresenceDetectorModule (ref), sduiResponsiveDetectorModule (ref)
-	local sduiContext = p1.sduiContext
-	sduiContext.dependencies.instrumentation:startTimerFlow("SduiConditionalPropWrapper")
-	local conditionalProps = p1.componentConfig.conditionalProps
-	local dataStore = sduiContext.dataStore
-	local var1 = reactModule.useMemo(function()
-		-- upvalues: conditionalProps (ref), sduiConditionKey (copy), sduiResponsiveKey (copy)
+return ReactModule.memo(function(p1) --[[ Line: 46 | Named "SduiConditionalPropWrapper" ]]
+	-- upvalues: ReactModule (copy), SduiConditionKey (copy), SduiResponsiveKey (copy), GetDisplayStoreFunction (copy), GetInputModeStoreFunction (copy), CheckResponsiveConditionsFunction (copy), t (copy), CheckPresenceConditionsModule (copy), CryoModule (copy), SduiPresenceDetectorModule (copy), SduiResponsiveDetectorModule (copy)
+	local SduiContext = p1.sduiContext
+	SduiContext.dependencies.instrumentation:startTimerFlow("SduiConditionalPropWrapper")
+	local ConditionalProps = p1.componentConfig.conditionalProps
+	local DataStore = SduiContext.dataStore
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 55 ]]
+		-- upvalues: ConditionalProps (copy), SduiConditionKey (upval), SduiResponsiveKey (upval)
 		local t = {}
 		
-		if not conditionalProps then
+		if not ConditionalProps then
 			return t
 		end
-		assert(conditionalProps, "conditionalProps must exist")
+		assert(ConditionalProps, "conditionalProps must exist")
 		
-		for i, v in conditionalProps do
-			if v.conditions then
-				for i_1, v_1 in v.conditions do
-					if i_1 == sduiConditionKey.friendInGame then
+		for _, conditionalProp in ConditionalProps do
+			if conditionalProp.conditions then
+				for i, _ in conditionalProp.conditions do
+					if i == SduiConditionKey.friendInGame then
 						t.hasPresenceProp = true
-					elseif sduiResponsiveKey[i_1] == nil then
+						continue
+					end
+					if SduiResponsiveKey[i] == nil then
 						t.hasCustomProp = true
 					else
 						t.hasResponsiveProp = true
@@ -45,88 +46,90 @@ return reactModule.memo(function(p1)
 			end
 		end
 		return t
-	end, { conditionalProps })
-	local var2, var3 = reactModule.useState(nil)
-	local var4 = reactModule.useCallback(function(p2, p3)
-		-- upvalues: var3 (ref)
-		var3(function(p4)
-			-- upvalues: p3 (ref), p2 (ref)
-			if p4 == nil and p3 == nil then
-				return p4
-			elseif p4 == nil then
+	end, { ConditionalProps })
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	local UseResult = ReactModule.useCallback(function(p2, p3) --[[ Line: 81 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(function(Tbl) --[[ Line: 82 ]]
+			-- upvalues: p3 (copy), p2 (copy)
+			if Tbl == nil and p3 == nil then
+				return Tbl
+			elseif Tbl == nil then
 				return { [p2] = p3 }
-			elseif p4[p2] == p3 then
-				return p4
+			elseif Tbl[p2] == p3 then
+				return Tbl
+			else
+				local Copy = table.clone(Tbl)
+				Copy[p2] = p3
+				
+				return Copy
 			end
-			local cloned = table.clone(p4)
-			cloned[p2] = p3
-			
-			return cloned
 		end)
 	end, {})
-	local var5, var6 = reactModule.useState(function()
-		-- upvalues: var1 (ref), getDisplayStore (copy), getInputModeStore (copy), checkResponsiveConditions (copy), conditionalProps (ref), sduiContext (ref), t (copy)
-		return if var1.hasResponsiveProp then checkResponsiveConditions(conditionalProps, getDisplayStore(false).getViewportSize(false), getInputModeStore(false).getLastInputType(false), getInputModeStore(false).getPreferredInputType(false), getDisplayStore(false).getIsSpatial(false), sduiContext) else t
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(function() --[[ Line: 99 ]]
+		-- upvalues: UseMemoResult (copy), GetDisplayStoreFunction (upval), GetInputModeStoreFunction (upval), CheckResponsiveConditionsFunction (upval), ConditionalProps (copy), SduiContext (copy), t (upval)
+		return if UseMemoResult.hasResponsiveProp then CheckResponsiveConditionsFunction(ConditionalProps, GetDisplayStoreFunction(false).getViewportSize(false), GetInputModeStoreFunction(false).getLastInputType(false), GetInputModeStoreFunction(false).getPreferredInputType(false), GetDisplayStoreFunction(false).getIsSpatial(false), SduiContext) else t
 	end)
-	local var7, var8 = reactModule.useState(function()
-		-- upvalues: var1 (ref), checkPresenceConditionsModule (copy), conditionalProps (ref), dataStore (ref), t (copy)
-		return if var1.hasPresenceProp then checkPresenceConditionsModule(conditionalProps, dataStore.social.getInGameFriendsByGame(false)) else t
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(function() --[[ Line: 119 ]]
+		-- upvalues: UseMemoResult (copy), CheckPresenceConditionsModule (upval), ConditionalProps (copy), DataStore (copy), t (upval)
+		return if UseMemoResult.hasPresenceProp then CheckPresenceConditionsModule(ConditionalProps, DataStore.social.getInGameFriendsByGame(false)) else t
 	end)
-	local var9 = reactModule.useCallback(function(p2, p3)
-		-- upvalues: var5 (ref), var7 (ref), sduiResponsiveKey (copy), sduiConditionKey (copy), var2 (ref)
-		if var5[p2] or var7[p2] then
+	local UseResult1 = ReactModule.useCallback(function(p2, p3): boolean --[[ Line: 128 ]]
+		-- upvalues: UseStateResult1 (copy), UseStateResult3 (copy), SduiResponsiveKey (upval), SduiConditionKey (upval), UseStateResult (copy)
+		if UseStateResult1[p2] or UseStateResult3[p2] then
 			return false
-		elseif p3.conditions then
-			for i, v in p3.conditions do
-				if sduiResponsiveKey[i] == nil and i ~= sduiConditionKey.friendInGame then
-					return if var2 then true else false
+		end
+		if p3.conditions then
+			for i, condition in p3.conditions do
+				if SduiResponsiveKey[i] == nil and i ~= SduiConditionKey.friendInGame then
+					return if UseStateResult then UseStateResult[i] == condition else false
 				end
 			end
 		end
 		return true
-	end, { var5, var7, var2 })
-	local var10 = reactModule.useMemo(function()
-		-- upvalues: var4 (ref), conditionalProps (ref), var9 (ref), cryoModule (copy)
-		local t = { setCustomConditionState = var4 }
+	end, { UseStateResult1, UseStateResult3, UseStateResult })
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 146 ]]
+		-- upvalues: UseResult (copy), ConditionalProps (copy), UseResult1 (copy), CryoModule (upval)
+		local JoinResult = { setCustomConditionState = UseResult }
 		
-		if conditionalProps then
-			for i, v in conditionalProps do
-				if v.propOverrides and var9(i, v) then
-					t = cryoModule.Dictionary.join(t, v.propOverrides)
+		if ConditionalProps then
+			for i, conditionalProp in ConditionalProps do
+				if conditionalProp.propOverrides and UseResult1(i, conditionalProp) then
+					JoinResult = CryoModule.Dictionary.join(JoinResult, conditionalProp.propOverrides)
 				end
 			end
 		end
-		return t
-	end, { var9, conditionalProps, var4 })
-	local var11 = reactModule.useMemo(function()
-		-- upvalues: conditionalProps (ref), var1 (ref), reactModule (copy), sduiPresenceDetectorModule (copy), var8 (ref), sduiContext (ref), sduiResponsiveDetectorModule (copy), var6 (ref)
-		if not conditionalProps then
+		return JoinResult
+	end, { UseResult1, ConditionalProps, UseResult })
+	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 166 ]]
+		-- upvalues: ConditionalProps (copy), UseMemoResult (copy), ReactModule (upval), SduiPresenceDetectorModule (upval), UseStateResult2_2 (copy), SduiContext (copy), SduiResponsiveDetectorModule (upval), UseStateResult2_1 (copy)
+		if not ConditionalProps then
 			return {}
 		end
-		assert(conditionalProps, "conditionalProps must exist")
+		assert(ConditionalProps, "conditionalProps must exist")
 		local t = {}
 		
-		if var1.hasPresenceProp then
-			t.PresenceDetector = reactModule.createElement(sduiPresenceDetectorModule, {
-				setFailedPresencePropIndexes = var8,
-				sduiContext = sduiContext,
-				allConditionalProps = conditionalProps
+		if UseMemoResult.hasPresenceProp then
+			t.PresenceDetector = ReactModule.createElement(SduiPresenceDetectorModule, {
+				setFailedPresencePropIndexes = UseStateResult2_2,
+				sduiContext = SduiContext,
+				allConditionalProps = ConditionalProps
 			})
 		end
-		if var1.hasResponsiveProp then
-			t.ResponsiveDetector = reactModule.createElement(sduiResponsiveDetectorModule, {
-				setFailedResponsivePropIndexes = var6,
-				sduiContext = sduiContext,
-				allConditionalProps = conditionalProps
+		if UseMemoResult.hasResponsiveProp then
+			t.ResponsiveDetector = ReactModule.createElement(SduiResponsiveDetectorModule, {
+				setFailedResponsivePropIndexes = UseStateResult2_1,
+				sduiContext = SduiContext,
+				allConditionalProps = ConditionalProps
 			})
 		end
 		return t
-	end, { conditionalProps, sduiContext, var1 })
-	var11.WrappedComponent = reactModule.useMemo(function()
-		-- upvalues: reactModule (copy), p1 (ref), cryoModule (copy), var10 (ref)
-		return reactModule.createElement(p1.wrappedComponent, cryoModule.Dictionary.join(p1, { conditionalProps = var10 }))
-	end, { p1.wrappedComponent, var10, p1 })
-	sduiContext.dependencies.instrumentation:stopTimerFlow("SduiConditionalPropWrapper", sduiContext)
+	end, { ConditionalProps, SduiContext, UseMemoResult })
+	UseMemoResult2.WrappedComponent = ReactModule.useMemo(function() --[[ Line: 200 ]]
+		-- upvalues: ReactModule (upval), p1 (copy), CryoModule (upval), UseMemoResult1 (copy)
+		return ReactModule.createElement(p1.wrappedComponent, CryoModule.Dictionary.join(p1, { conditionalProps = UseMemoResult1 }))
+	end, { p1.wrappedComponent, UseMemoResult1, p1 })
+	SduiContext.dependencies.instrumentation:stopTimerFlow("SduiConditionalPropWrapper", SduiContext)
 	
-	return reactModule.createElement(reactModule.Fragment, nil, var11)
-end, compareSduiPropsModule)
+	return ReactModule.createElement(ReactModule.Fragment, nil, UseMemoResult2)
+end, (require(SduiCoreSystem.compareSduiProps)))

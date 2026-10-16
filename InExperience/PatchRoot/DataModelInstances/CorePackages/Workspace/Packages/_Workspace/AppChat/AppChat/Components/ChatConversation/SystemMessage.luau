@@ -1,48 +1,47 @@
-﻿local parent = script:FindFirstAncestor("AppChat").Parent
-local text = require(parent.AppCommonLib).Text
-local roactModule = require(parent.Roact)
-local memoize = require(parent.AppCommonLib).memoize
-local UIBloxModule = require(parent.UIBlox)
-local foundationModule = require(parent.Foundation)
-local getTextSize = require(parent.Style).GetTextSize
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local withStyle = UIBloxModule.Style.withStyle
-local systemMessage = roactModule.PureComponent:extend("SystemMessage")
-systemMessage.defaultProps = {
+﻿local Parent = script:FindFirstAncestor("AppChat").Parent
+local Text = require(Parent.AppCommonLib).Text
+local RoactModule = require(Parent.Roact)
+local MemoizeFunction = require(Parent.AppCommonLib).memoize
+local FoundationModule = require(Parent.Foundation)
+local GetTextSizeFunction = require(Parent.Style).GetTextSize
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local WithStyleFunction = require(Parent.UIBlox).Style.withStyle
+local SystemMessage = RoactModule.PureComponent:extend("SystemMessage")
+SystemMessage.defaultProps = {
 	LayoutOrder = nil,
 	Text = "PLACEHOLDER This message could not be displayed",
 	maxWidth = 250
 }
 
-function systemMessage.init(p1)
-	-- upvalues: memoize (ref), foundationFontFaceMigration (ref), getTextSize (ref), text (ref)
-	p1.calculateSize = memoize(function(p2, p3, p4, p5)
-		-- upvalues: foundationFontFaceMigration (copy), getTextSize (copy), text (copy)
-		return if foundationFontFaceMigration then getTextSize(p2, p5, p4, Vector2.new(p3, 1000)) else text.GetTextBounds(p2, p4, p5, Vector2.new(p3, 1000))
+function SystemMessage.init(p1) --[[ Line: 29 ]]
+	-- upvalues: MemoizeFunction (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), Text (copy)
+	p1.calculateSize = MemoizeFunction(function(p2, X, p3, p4) --[[ Line: 30 ]]
+		-- upvalues: FoundationFontFaceMigration (upval), GetTextSizeFunction (upval), Text (upval)
+		return if FoundationFontFaceMigration then GetTextSizeFunction(p2, p4, p3, Vector2.new(X, 1000)) else Text.GetTextBounds(p2, p3, p4, Vector2.new(X, 1000))
 	end)
 end
 
-function systemMessage.render(p1)
-	-- upvalues: withStyle (ref), foundationFontFaceMigration (ref), roactModule (ref), normalizeFontFace (ref)
-	return withStyle(function(p2)
-		-- upvalues: p1 (ref), foundationFontFaceMigration (copy), roactModule (copy), normalizeFontFace (copy)
-		local captionBody = p2.Font.CaptionBody
-		local var1 = p2.Font.BaseSize * captionBody.RelativeSize
-		local var2 = p1.calculateSize(p1.props.Text, p1.props.maxWidth, if foundationFontFaceMigration then p2.Tokens.Typography.BodySmall.Font else captionBody.Font, var1)
+function SystemMessage.render(p1) --[[ Line: 44 ]]
+	-- upvalues: WithStyleFunction (copy), FoundationFontFaceMigration (copy), RoactModule (copy), NormalizeFontFaceFunction (copy)
+	return WithStyleFunction(function(p2) --[[ Line: 45 ]]
+		-- upvalues: p1 (copy), FoundationFontFaceMigration (upval), RoactModule (upval), NormalizeFontFaceFunction (upval)
+		local CaptionBody = p2.Font.CaptionBody
+		local ScaledBaseSize = p2.Font.BaseSize * CaptionBody.RelativeSize
+		local Size = p1.calculateSize(p1.props.Text, p1.props.maxWidth, if FoundationFontFaceMigration then p2.Tokens.Typography.BodySmall.Font else CaptionBody.Font, ScaledBaseSize)
 		
-		return roactModule.createElement("Frame", {
+		return RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			LayoutOrder = p1.props.LayoutOrder,
-			Size = UDim2.new(1, 0, 0, 30 + var2.Y + 8)
+			Size = UDim2.new(1, 0, 0, 30 + Size.Y + 8)
 		}, {
-			UiListLayout = roactModule.createElement("UIListLayout", {
+			UiListLayout = RoactModule.createElement("UIListLayout", {
 				HorizontalAlignment = Enum.HorizontalAlignment.Center,
 				SortOrder = Enum.SortOrder.LayoutOrder
 			}),
-			Padding = roactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, 20) }),
-			GreyBox = roactModule.createElement("ImageLabel", {
+			Padding = RoactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, 20) }),
+			GreyBox = RoactModule.createElement("ImageLabel", {
 				BorderSizePixel = 0,
 				Image = "rbxasset://textures/ui/LuaChat/9-slice/system-message.png",
 				ImageTransparency = 1,
@@ -51,21 +50,21 @@ function systemMessage.render(p1)
 				AnchorPoint = Vector2.new(0.5, 0.5),
 				Position = UDim2.new(0.5, 0, 0.5, 0),
 				ScaleType = Enum.ScaleType.Slice,
-				Size = UDim2.new(0, math.min(p1.props.maxWidth, var2.X) + 12, 0, var2.Y + 8),
+				Size = UDim2.new(0, math.min(p1.props.maxWidth, Size.X) + 12, 0, Size.Y + 8),
 				SliceCenter = Rect.new(3, 3, 4, 4)
 			}, {
-				SystemText = roactModule.createElement("TextLabel", {
+				SystemText = RoactModule.createElement("TextLabel", {
 					BackgroundTransparency = 1,
 					BorderSizePixel = 0,
 					TextWrapped = true,
 					AnchorPoint = Vector2.new(0.5, 0.5),
-					Font = if foundationFontFaceMigration then nil else captionBody.Font,
-					FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.BodySmall.Font) else nil,
+					Font = if FoundationFontFaceMigration then nil else CaptionBody.Font,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Tokens.Typography.BodySmall.Font) else nil,
 					Position = UDim2.new(0.5, 0, 0.5, 0),
 					Size = UDim2.new(1, 0, 1, 0),
 					Text = p1.props.Text,
 					TextColor3 = p2.Theme.TextDefault.Color,
-					TextSize = var1,
+					TextSize = ScaledBaseSize,
 					TextTransparency = p2.Theme.TextDefault.Transparency
 				})
 			})
@@ -73,4 +72,4 @@ function systemMessage.render(p1)
 	end)
 end
 
-return systemMessage
+return SystemMessage

@@ -1,124 +1,134 @@
-﻿local var1
-local parent = script.Parent.Parent.Parent
-local luauPolyfillModule = require(parent.Parent.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local boolean = luauPolyfillModule.Boolean
-local uuid = require(parent.utilities.common.makeUniqueId).uuid
+﻿local Parent = script.Parent.Parent.Parent
+local LuauPolyfillModule = require(Parent.Parent.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local UuidFunction = require(Parent.utilities.common.makeUniqueId).uuid
 local t = {}
-local var2 = nil
-local t_1 = {}
-local var3 = 1
+local Parent1 = nil
+local Slot = {}
+local Count = 1
 
-local function makeSlotClass()
-	-- upvalues: array (ref), var3 (write), uuid (ref), var2 (write), t_1 (ref)
-	local t = {}
-	t.__index = t
+local function makeSlotClass() --[[ Line: 62 ]]
+	-- upvalues: Array (copy), Count (ref), UuidFunction (copy), Parent1 (ref), Slot (copy)
+	local Module = {}
+	Module.__index = Module
 	
-	function t.new()
-		-- upvalues: t (ref), array (copy), var3 (copy), uuid (copy)
-		local tbl = setmetatable({}, t)
-		tbl.id = array.join({ "slot", var3, DateTime.now().UnixTimestampMillis, uuid() }, ":")
-		var3 += 1
+	function Module.new() --[[ Line: 66 ]]
+		-- upvalues: Module (copy), Array (upval), Count (upval), UuidFunction (upval)
+		local self = setmetatable({}, Module)
+		self.id = Array.join({
+			"slot",
+			Count,
+			DateTime.now().UnixTimestampMillis,
+			UuidFunction()
+		}, ":")
+		Count += 1
 		
-		return tbl
+		return self
 	end
 	
-	function t:hasValue()
-		-- upvalues: var2 (copy), t_1 (copy)
-		local var4 = var2
-		while var4 do
-			if not var4.slots[self.id] then
-				var4 = var4.parent
+	function Module:hasValue(): boolean --[[ Line: 84 ]]
+		-- upvalues: Parent1 (upval), Slot (upval)
+		local Parent1 = Parent1
+		while Parent1 do
+			if not Parent1.slots[self.id] then
+				Parent1 = Parent1.parent
 				continue
 			end
-			local id = var4.slots[self.id]
+			local Slot1 = Parent1.slots[self.id]
 			
-			if id == t_1 then break end
-			if var4 ~= var2 then
-				var2.slots[self.id] = id
+			if Slot1 == Slot then break end
+			if Parent1 ~= Parent1 then
+				Parent1.slots[self.id] = Slot1
 			end
 			return true
 		end
-		if var2 then
-			var2.slots[self.id] = t_1
+		if Parent1 then
+			Parent1.slots[self.id] = Slot
 		end
 		return false
 	end
 	
-	function t:getValue()
-		-- upvalues: var2 (copy)
-		return if self:hasValue() then var2.slots[self.id] else nil
+	function Module.getValue(p1) --[[ Line: 120 ]]
+		-- upvalues: Parent1 (upval)
+		return if p1:hasValue() then Parent1.slots[p1.id] else nil
 	end
 	
-	function t:withValue(p1, p2, p3, p4)
-		-- upvalues: var2 (copy)
-		var2 = { parent = var2, slots = { [self.id] = p1 } }
-		local ok, status, var5 = pcall(function()
-			-- upvalues: p2 (ref), p4 (ref), p3 (ref)
-			return p2(p4, table.unpack(p3 or {})), true
+	function Module:withValue(p1, Callback, p2, p3) --[[ Line: 127 ]]
+		-- upvalues: Parent1 (upval)
+		local Parent1 = Parent1
+		Parent1 = { parent = Parent1, slots = { [self.id] = p1 } }
+		local Success, Result, Result3 = pcall(function() --[[ Line: 144 ]]
+			-- upvalues: Callback (copy), p3 (copy), p2 (copy)
+			return Callback(p3, table.unpack(p2 or {})), true
 		end)
-		var2 = var2
+		Parent1 = Parent1
 		
-		if var5 then
-			return status
-		elseif not ok then
-			error(status)
+		if Result3 then
+			return Result
+		end
+		if not Success then
+			error(Result)
 		end
 		return nil
 	end
 	
-	function t.bind(p1)
-		-- upvalues: var2 (copy)
-		return function(p2, ...)
-			-- upvalues: var2 (copy), var2 (ref), p1 (ref)
-			var2 = var2
-			local ok, status = pcall(p1, p2, table.unpack({ ... }))
-			var2 = var2
+	function Module.bind(p1) --[[ Line: 162 ]]
+		-- upvalues: Parent1 (upval)
+		local Parent1 = Parent1
+		
+		return function(p2, ...) --[[ Line: 164 ]]
+			-- upvalues: Parent1 (upval), Parent1 (copy), p1 (copy)
+			local Parent2 = Parent1
+			Parent1 = Parent1
+			local Success, Result = pcall(p1, p2, table.unpack({ ... }))
+			Parent1 = Parent2
 			
-			if not ok then
-				error(status)
+			if not Success then
+				error(Result)
 			end
-			return status
+			return Result
 		end
 	end
 	
-	function t.noContext(p1, p2, p3)
-		-- upvalues: var2 (copy)
-		if not var2 then
-			return p1(p3, table.unpack(p2 or {}))
+	function Module.noContext(Callback, p1, p2) --[[ Line: 178 ]]
+		-- upvalues: Parent1 (upval)
+		if not Parent1 then
+			return Callback(p2, table.unpack(p1 or {}))
 		end
-		local var5 = var2
-		local ok, status, var6 = pcall(function()
-			-- upvalues: var2 (copy), p1 (ref), p3 (ref), p2 (ref)
-			var2 = nil
+		local Parent1 = Parent1
+		local Success, Result, Result3 = pcall(function() --[[ Line: 189 ]]
+			-- upvalues: Parent1 (upval), Callback (copy), p2 (copy), p1 (copy)
+			Parent1 = nil
 			
-			return p1(p3, table.unpack(p2 or {})), true
+			return Callback(p2, table.unpack(p1 or {})), true
 		end)
-		var2 = var5
+		Parent1 = Parent1
 		
-		if var6 then
-			return status
-		elseif not ok then
-			error(status)
+		if Result3 then
+			return Result
+		end
+		if not Success then
+			error(Result)
 		end
 		return nil
 	end
 	
-	return t
+	return Module
 end
-
-if boolean.toJSBoolean(array["@wry/context:Slot"]) then
-	var1 = array["@wry/context:Slot"]
-	
-	if not var1 then
-		local var4 = makeSlotClass()
-		pcall(function()
-			-- upvalues: array (ref), var4 (ref)
-			array["@wry/context:Slot"] = var4
-		end)
-		var1 = var4
+local WryContextSlot = nil
+repeat
+	if LuauPolyfillModule.Boolean.toJSBoolean(Array["@wry/context:Slot"]) then
+		WryContextSlot = Array["@wry/context:Slot"]
+		
+		if WryContextSlot then break end
 	end
-	t.Slot = var1
-	
-	return t
-end
+	local SlotClass = makeSlotClass()
+	pcall(function() --[[ Line: 227 ]]
+		-- upvalues: Array (copy), SlotClass (copy)
+		Array["@wry/context:Slot"] = SlotClass
+	end)
+	WryContextSlot = SlotClass
+until true
+t.Slot = WryContextSlot
+
+return t

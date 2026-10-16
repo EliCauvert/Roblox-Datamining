@@ -1,23 +1,21 @@
-﻿local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
-local socialLuaAnalyticsModule = require(script:FindFirstAncestor("CrossExperienceVoice").Parent.SocialLuaAnalytics)
-local analyticsFactory = socialLuaAnalyticsModule.Analytics.AnalyticsFactory
-local defaultAnalyticsService = socialLuaAnalyticsModule.Analytics.DefaultAnalyticsService
-local playSessionId = rbxAnalyticsService:GetPlaySessionId()
+﻿local SocialLuaAnalyticsModule = require(script:FindFirstAncestor("CrossExperienceVoice").Parent.SocialLuaAnalytics)
+local DefaultAnalyticsService = SocialLuaAnalyticsModule.Analytics.DefaultAnalyticsService
+local PlaySessionId = game:GetService("RbxAnalyticsService"):GetPlaySessionId()
 
 return {
-	Analytics = analyticsFactory.setUpAnalyticsFactory({
+	Analytics = SocialLuaAnalyticsModule.Analytics.AnalyticsFactory.setUpAnalyticsFactory({
 		eventLists = {
 			EventStream = require(script.EventStreamActionList),
 			Diag = require(script.DiagActionList),
 			Telemetry = require(script.TelemetryActionList)
 		},
 		analyticsImpl = {
-			EventStream = defaultAnalyticsService.EventStream,
-			Diag = defaultAnalyticsService.Diag,
-			Telemetry = defaultAnalyticsService.Telemetry
+			EventStream = DefaultAnalyticsService.EventStream,
+			Diag = DefaultAnalyticsService.Diag,
+			Telemetry = DefaultAnalyticsService.Telemetry
 		},
 		staticInfoForAllEvents = {
-			playSessionId = if playSessionId ~= "" then nil else playSessionId,
+			playSessionId = if PlaySessionId == "" then nil else PlaySessionId,
 			placeId = if game.PlaceId > 0 then tostring(game.PlaceId) else nil,
 			universeId = if game.GameId > 0 then tostring(game.GameId) else nil
 		}

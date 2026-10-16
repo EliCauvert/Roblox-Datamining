@@ -1,18 +1,20 @@
-﻿return function(p1, p2, p3)
-	if not p1 or not p2 then
+﻿return function(List, List1, p1): boolean --[[ Line: 5 ]]
+	if not List or not List1 then
 		return false
-	elseif p1 == p2 then
-		return true
-	elseif not p3 then
-		p3 = {}
 	end
-	for i, v in pairs(p1) do
-		if p2[i] ~= v and not p3[i] then
+	if List == List1 then
+		return true
+	end
+	if not p1 then
+		p1 = {}
+	end
+	for i, value in pairs(List) do
+		if List1[i] ~= value and not p1[i] then
 			return false
 		end
 	end
-	for i, v_1 in pairs(p2) do
-		if p1[i] ~= v_1 and not p3[i] then
+	for i1, value1 in pairs(List1) do
+		if List[i1] ~= value1 and not p1[i1] then
 			return false
 		end
 	end

@@ -1,13 +1,13 @@
-﻿local telemetryService = game:GetService("TelemetryService")
-local parent = script:FindFirstAncestor("GameTile").Parent
-local tModule = require(parent.t)
-local discoveryEventErrorLogger = require(parent.DiscoveryUtils).DiscoveryEventErrorLogger
-local var1 = tModule.strictInterface({
-	universeId = tModule.string,
-	sortId = tModule.optional(tModule.string),
-	actionType = tModule.string
+﻿local TelemetryService = game:GetService("TelemetryService")
+local Parent = script:FindFirstAncestor("GameTile").Parent
+local TModule = require(Parent.t)
+local DiscoveryEventErrorLogger = require(Parent.DiscoveryUtils).DiscoveryEventErrorLogger
+local StrictInterfaceResult = TModule.strictInterface({
+	universeId = TModule.string,
+	sortId = TModule.optional(TModule.string),
+	actionType = TModule.string
 })
-local t = {
+local config = {
 	eventName = "notInterestedFeedbackFormAction",
 	description = "User has taken an action with the Not Interested Feedback Form",
 	backends = { "EventIngest" },
@@ -15,19 +15,19 @@ local t = {
 	lastUpdated = { 25, 10, 22 }
 }
 
-return function(p1, p2)
-	-- upvalues: discoveryEventErrorLogger (ref), var1 (ref), telemetryService (ref), t (ref)
-	if not p2 then
-		discoveryEventErrorLogger.reportError("NotInterestedFeedbackFormActionInvalidInterface", "event is missing context")
+return function(CustomFields, EventContext) --[[ Line: 27 ]]
+	-- upvalues: DiscoveryEventErrorLogger (copy), StrictInterfaceResult (copy), TelemetryService (copy), config (copy)
+	if not EventContext then
+		DiscoveryEventErrorLogger.reportError("NotInterestedFeedbackFormActionInvalidInterface", "event is missing context")
 	end
-	local var2, var3 = var1(p1)
+	local StrictInterfaceResultResult, StrictInterfaceResultResult2 = StrictInterfaceResult(CustomFields)
 	
-	if not var2 then
-		discoveryEventErrorLogger.reportError("NotInterestedFeedbackFormActionInvalidInterface", var3)
+	if not StrictInterfaceResultResult then
+		DiscoveryEventErrorLogger.reportError("NotInterestedFeedbackFormActionInvalidInterface", StrictInterfaceResultResult2)
 	end
-	telemetryService:LogEvent(t, {
-		eventContext = p2,
+	TelemetryService:LogEvent(config, {
+		eventContext = EventContext,
 		standardizedFields = { "addSessionInfo" },
-		customFields = p1
+		customFields = CustomFields
 	})
 end

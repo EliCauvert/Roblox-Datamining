@@ -1,49 +1,50 @@
-﻿local voiceChat = script:FindFirstAncestor("VoiceChat")
-local getShowAgeVerificationOverlayModule = require(voiceChat.AgeVerificationOverlay.GetShowAgeVerificationOverlay)
-local setShowAgeVerificationOverlayModule = require(voiceChat.AgeVerificationOverlay.SetShowAgeVerificationOverlay)
-local parent = voiceChat.Parent
-local promiseModule = require(parent.Promise)
-local performFetch = require(parent.Http).PerformFetch
-local mutedError = require(parent.Loggers).mutedError
-local logging = require(parent.AppCommonLib).Logging
+﻿local VoiceChat = script:FindFirstAncestor("VoiceChat")
+local GetShowAgeVerificationOverlayModule = require(VoiceChat.AgeVerificationOverlay.GetShowAgeVerificationOverlay)
+local SetShowAgeVerificationOverlayModule = require(VoiceChat.AgeVerificationOverlay.SetShowAgeVerificationOverlay)
+local Parent = VoiceChat.Parent
+local PromiseModule = require(Parent.Promise)
+local PerformFetch = require(Parent.Http).PerformFetch
+local MutedErrorFunction = require(Parent.Loggers).mutedError
+local Logging = require(Parent.AppCommonLib).Logging
 
 return {
-	KeyMapper = function(p1)
-		return "luaapp.showageverificationoverlay." .. p0
+	KeyMapper = function(Text): string --[[ Line: 14 ]]
+		return "luaapp.showageverificationoverlay." .. Text
 	end,
-	Fetch = function(p1, p2, p3)
-		-- upvalues: performFetch (ref), getShowAgeVerificationOverlayModule (ref), mutedError (ref), setShowAgeVerificationOverlayModule (ref), promiseModule (ref), logging (ref)
-		if type(p2) ~= "string" then
+	Fetch = function(p1, Text: string, p2) --[[ Line: 20 ]]
+		-- upvalues: PerformFetch (copy), GetShowAgeVerificationOverlayModule (copy), MutedErrorFunction (copy), SetShowAgeVerificationOverlayModule (copy), PromiseModule (copy), Logging (copy)
+		if type(Text) ~= "string" then
 			error("ApiFetchShowAgeVerificationOverlay thunk expects universeId to be a string")
 		end
-		p3 = p3 or ""
+		local P3 = p2 or ""
 		
-		if type(p3) ~= "string" then
+		if type(P3) ~= "string" then
 			error("ApiFetchShowAgeVerificationOverlay thunk expects placeId to be a string")
 		end
-		return performFetch.Single("luaapp.showageverificationoverlay." .. p2, function(p4)
-			-- upvalues: getShowAgeVerificationOverlayModule (copy), p1 (ref), p2 (ref), p3 (write), mutedError (copy), setShowAgeVerificationOverlayModule (copy), promiseModule (copy), logging (copy)
-			return getShowAgeVerificationOverlayModule(p1, p2, p3):andThen(function(p5)
-				-- upvalues: mutedError (copy), p2 (copy), p4 (ref), setShowAgeVerificationOverlayModule (copy), promiseModule (copy), logging (copy)
-				local responseBody = p5.responseBody
-				local var1 = responseBody.voiceSettings ~= nil and responseBody.voiceSettings.isVoiceEnabled
+		return PerformFetch.Single("luaapp.showageverificationoverlay." .. Text, function(p3) --[[ Line: 30 ]]
+			-- upvalues: GetShowAgeVerificationOverlayModule (upval), p1 (copy), Text (copy), P3 (ref), MutedErrorFunction (upval), SetShowAgeVerificationOverlayModule (upval), PromiseModule (upval), Logging (upval)
+			return GetShowAgeVerificationOverlayModule(p1, Text, P3):andThen(function(Result) --[[ Line: 31 ]]
+				-- upvalues: MutedErrorFunction (upval), Text (upval), p3 (copy), SetShowAgeVerificationOverlayModule (upval), PromiseModule (upval), Logging (upval)
+				local ResponseBody = Result.responseBody
+				local IsVoiceEnabled = ResponseBody.voiceSettings ~= nil and ResponseBody.voiceSettings.isVoiceEnabled
 				
-				if responseBody.showAgeVerificationOverlay then
-					mutedError(`showAgeVerificationOverlay is deprecated but was truthy for universe {p2}`)
+				if ResponseBody.showAgeVerificationOverlay then
+					MutedErrorFunction(`showAgeVerificationOverlay is deprecated but was truthy for universe {Text}`)
 				end
-				if responseBody == nil or responseBody.showAgeVerificationOverlay == nil or responseBody.universePlaceVoiceEnabledSettings == nil then
-					logging.warn("Response from GetShowAgeVerificationOverlay is malformed!")
+				if ResponseBody == nil or ResponseBody.showAgeVerificationOverlay == nil or ResponseBody.universePlaceVoiceEnabledSettings == nil then
+					Logging.warn("Response from GetShowAgeVerificationOverlay is malformed!")
 					
-					return promiseModule.reject({ HttpError = Enum.HttpError.OK })
+					return PromiseModule.reject({ HttpError = Enum.HttpError.OK })
+				else
+					p3:dispatch(SetShowAgeVerificationOverlayModule(Text, ResponseBody.universePlaceVoiceEnabledSettings.isPlaceEnabledForVoice, ResponseBody.universePlaceVoiceEnabledSettings.isUniverseEnabledForVoice, IsVoiceEnabled, ResponseBody.showVoiceOptInOverlay, ResponseBody.universePlaceVoiceEnabledSettings.isUniverseEnabledForAvatarVideo, ResponseBody.elegibleToSeeVoiceUpsell))
+					
+					return PromiseModule.resolve(Result)
 				end
-				p4:dispatch(setShowAgeVerificationOverlayModule(p2, responseBody.universePlaceVoiceEnabledSettings.isPlaceEnabledForVoice, responseBody.universePlaceVoiceEnabledSettings.isUniverseEnabledForVoice, var1, responseBody.showVoiceOptInOverlay, responseBody.universePlaceVoiceEnabledSettings.isUniverseEnabledForAvatarVideo, responseBody.elegibleToSeeVoiceUpsell))
-				
-				return promiseModule.resolve(p5)
 			end)
 		end)
 	end,
-	GetFetchingStatus = function(p4, p5)
-		-- upvalues: performFetch (ref)
-		return performFetch.GetStatus(p4, "luaapp.showageverificationoverlay." .. p7)
+	GetFetchingStatus = function(p3, Text) --[[ Line: 71 ]]
+		-- upvalues: PerformFetch (copy)
+		return PerformFetch.GetStatus(p3, "luaapp.showageverificationoverlay." .. Text)
 	end
 }

@@ -1,85 +1,82 @@
-﻿local teleportService = game:GetService("TeleportService")
-local corePackagesService = game:GetService("CorePackages")
-local coreGuiService = game:GetService("CoreGui")
-local httpRbxApiService = game:GetService("HttpRbxApiService")
-local promiseModule = require(corePackagesService.Packages.Promise)
-local roactModule = require(corePackagesService.Packages.Roact)
-local var1 = require(coreGuiService:WaitForChild("RobloxGui").Modules.Common.httpRequest)(httpRbxApiService)
-local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
-local getGameNameAndDescription = require(corePackagesService.Workspace.Packages.GameDetailRodux).GetGameNameAndDescription
-local teleportHistoryButtonsEngineFeature = game:GetEngineFeature("TeleportHistoryButtons")
-local var2 = 0
-local var3 = 0
-local var4 = 0
+﻿local TeleportService = game:GetService("TeleportService")
+local CorePackages = game:GetService("CorePackages")
+local PromiseModule = require(CorePackages.Packages.Promise)
+local RoactModule = require(CorePackages.Packages.Roact)
+local v1 = require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.Common.httpRequest)((game:GetService("HttpRbxApiService")))
+local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
+local GetGameNameAndDescriptionFunction = require(CorePackages.Workspace.Packages.GameDetailRodux).GetGameNameAndDescription
+local TeleportHistoryButtonsEngineFeature = game:GetEngineFeature("TeleportHistoryButtons")
+local v2 = 0
+local v3 = 0
 
-if teleportHistoryButtonsEngineFeature then
-	local var5, var6 = teleportService:GetThirdPartyTeleportInfo(true)
-	var3 = var5
-	var4 = var6
+if TeleportHistoryButtonsEngineFeature then
+	local _
+	v3, _ = TeleportService:GetThirdPartyTeleportInfo(true)
 end
-if teleportHistoryButtonsEngineFeature and var3 > 0 then
-	var2 = var3
+if TeleportHistoryButtonsEngineFeature and v3 > 0 then
+	v2 = v3
 end
-local function _(p1, p2)
-	return if p2 < #p1 then string.sub(p1, 1, p2 - 3) .. "..." else p1
+local function _(Text: string, p1: number): string --[[ Line: 30 | Named "truncateWithEllipsis" ]]
+	return if p1 < #Text then string.sub(Text, 1, p1 - 3) .. "..." else Text
 end
 
-local var7 = nil
-local var8 = promiseModule.defer(function(p1)
-	-- upvalues: var2 (write), getGameNameAndDescription (ref), var1 (ref), var7 (write)
-	if var2 > 0 then
-		getGameNameAndDescription(var1, var2):andThen(function(p2)
-			-- upvalues: var7 (copy)
-			local name = p2.Name
-			var7 = if #name > 30 then string.sub(name, 1, 27) .. "..." else name
+local PlaceName = nil
+local DeferResult = PromiseModule.defer(function(Callback: () -> ()) --[[ Line: 39 ]]
+	-- upvalues: v2 (ref), GetGameNameAndDescriptionFunction (copy), v1 (copy), PlaceName (ref)
+	if v2 > 0 then
+		GetGameNameAndDescriptionFunction(v1, v2):andThen(function(Result) --[[ Line: 41 ]]
+			-- upvalues: PlaceName (upval)
+			local Name: string = Result.Name
+			PlaceName = if #Name > 30 then string.sub(Name, 1, 27) .. "..." else Name
 		end):await()
-		p1()
+		Callback()
 		
 		return
+	else
+		Callback()
 	end
-	p1()
 end)
-local t = {
-	getTooltipText = function()
-		-- upvalues: var7 (write), robloxTranslatorModule (ref)
-		return if var7 == nil then robloxTranslatorModule:FormatByKey("InGame.CommonUI.Label.ReturnFallback") else robloxTranslatorModule:FormatByKey("InGame.CommonUI.Label.ReturnTo", { placeName = var7 })
+local config = {
+	getTooltipText = function() --[[ Line: 51 ]]
+		-- upvalues: PlaceName (ref), RobloxTranslatorModule (copy)
+		return if PlaceName == nil then RobloxTranslatorModule:FormatByKey("InGame.CommonUI.Label.ReturnFallback") else RobloxTranslatorModule:FormatByKey("InGame.CommonUI.Label.ReturnTo", { placeName = PlaceName })
 	end
 }
 
-function t.getTooltipTextTimeout()
-	-- upvalues: var7 (write), promiseModule (ref), var8 (ref), t (ref)
-	if var7 == nil then
-		promiseModule.any({ var8, promiseModule.delay(1) }):await()
+function config.getTooltipTextTimeout() --[[ Line: 61 ]]
+	-- upvalues: PlaceName (ref), PromiseModule (copy), DeferResult (copy), config (copy)
+	if PlaceName == nil then
+		PromiseModule.any({ DeferResult, PromiseModule.delay(1) }):await()
 	end
-	return t.getTooltipText()
+	return config.getTooltipText()
 end
 
-function t.getMenuText()
-	-- upvalues: roactModule (ref), t (ref), var7 (write), var8 (ref)
-	local var9, var10 = roactModule.createBinding(t.getTooltipText())
+function config.getMenuText() --[[ Line: 67 ]]
+	-- upvalues: RoactModule (copy), config (copy), PlaceName (ref), DeferResult (copy)
+	local Binding, Binding2 = RoactModule.createBinding(config.getTooltipText())
 	
-	if var7 == nil then
-		pcall(function()
-			-- upvalues: var8 (copy), var10 (ref), t (copy)
-			var8:andThen(function()
-				-- upvalues: var10 (copy), t (copy)
-				var10(t.getTooltipText())
+	if PlaceName == nil then
+		pcall(function() --[[ Line: 70 ]]
+			-- upvalues: DeferResult (upval), Binding2 (copy), config (upval)
+			DeferResult:andThen(function() --[[ Line: 71 ]]
+				-- upvalues: Binding2 (upval), config (upval)
+				Binding2(config.getTooltipText())
 			end)
 		end)
 	end
-	return var9
+	return Binding
 end
 
-function t.initiateFrontButtonTeleport()
-	-- upvalues: teleportHistoryButtonsEngineFeature (ref), teleportService (ref)
-	if teleportHistoryButtonsEngineFeature then
-		teleportService:TeleportTrustedBackForth(true)
+function config.initiateFrontButtonTeleport() --[[ Line: 78 ]]
+	-- upvalues: TeleportHistoryButtonsEngineFeature (copy), TeleportService (copy)
+	if TeleportHistoryButtonsEngineFeature then
+		TeleportService:TeleportTrustedBackForth(true)
 	end
 end
 
-function t.hasReturnUniverse()
-	-- upvalues: var2 (write)
-	return var2 > 0
+function config.hasReturnUniverse(): boolean --[[ Line: 83 ]]
+	-- upvalues: v2 (ref)
+	return v2 > 0
 end
 
-return t
+return config

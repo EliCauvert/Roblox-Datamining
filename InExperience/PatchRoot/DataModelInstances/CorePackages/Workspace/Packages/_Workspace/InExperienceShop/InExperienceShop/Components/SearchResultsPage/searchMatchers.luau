@@ -1,261 +1,272 @@
 ﻿local _ = require(script:FindFirstAncestor("InExperienceShop").Types)
 
-local function _(p1)
-	local t = {}
+local function _(Text: string) --[[ Line: 41 | Named "tokenize" ]]
+	local List = {}
 	
-	for i in string.gmatch(p1, "%S+") do
-		table.insert(t, i)
+	for i in string.gmatch(Text, "%S+") do
+		table.insert(List, i)
 	end
-	return t
+	return List
 end
 
-local _ = function(p2)
-	return string.match(p2, "^%s*(.-)%s*$") or ""
+local _ = function(Text: string): string --[[ Line: 49 | Named "trim" ]]
+	return string.match(Text, "^%s*(.-)%s*$") or ""
 end
 
-local _ = function(p2, p3)
-	return if #p2 < #p3 then false else string.sub(p2, 1, #p3) == p3
+local _ = function(Text: string, Segment): boolean --[[ Line: 53 | Named "startsWith" ]]
+	return #Text >= #Segment and string.sub(Text, 1, #Segment) == Segment
 end
 
-local _ = function(p2, p3)
-	for i, v in p2 do
-		if v == p3 then
+local _ = function(List, p1): boolean --[[ Line: 60 | Named "anyWordEquals" ]]
+	for _, value in List do
+		if value == p1 then
 			return true
 		end
 	end
 	return false
 end
 
-local _ = function(p4, p5)
-	for i, v in p4 do
-		if if #v < #p5 then false else string.sub(v, 1, #p5) == p5 then
+local _ = function(List, Segment): boolean --[[ Line: 69 | Named "anyWordStartsWith" ]]
+	for _, value in List do
+		if #Segment <= #value and string.sub(value, 1, #Segment) == Segment then
 			return true
 		end
 	end
 	return false
 end
 
-local function anyWordIncludes(p6, p7)
-	for i, v in p6 do
-		if string.find(v, p7, 1, true) ~= nil then
+local function anyWordIncludes(List, Pattern): boolean --[[ Line: 78 ]]
+	for _, value in List do
+		if string.find(value, Pattern, 1, true) ~= nil then
 			return true
 		end
 	end
 	return false
 end
 
-local _ = function(a)
-	return if a >= 8 then 2 else 1
+local _ = function(p2: number): number --[[ Line: 87 | Named "maxEditsFor" ]]
+	return if p2 >= 8 then 2 else 1
 end
 
-local function editDistanceWithin(p8, p9, p10)
-	if p8 == p9 then
+local function editDistanceWithin(Text: string, Text1: string, p2): boolean --[[ Line: 95 ]]
+	if Text == Text1 then
 		return true
 	end
-	local p10Count = #p8
-	local p11Count = #p9
+	local CountText = #Text
+	local CountText1 = #Text1
 	
-	if p10 < math.abs(p10Count - p11Count) then
+	if p2 < math.abs(CountText - CountText1) then
 		return false
-	elseif p10Count < p11Count then
-		p9 = p8
-		p8 = p9
-		local var1 = p11Count
-		p11Count = p10Count
-		p10Count = var1
 	end
-	if p11Count == 0 then
-		return p10Count <= p10
+	if CountText < CountText1 then
+		local Text2: string = Text1
+		Text1 = Text
+		Text = Text2
+		local Count: number = CountText1
+		CountText1 = CountText
+		CountText = Count
 	end
-	local list = table.create(p11Count + 1)
-	local list_1 = table.create(p11Count + 1)
-	local list_2 = table.create(p11Count + 1)
+	if CountText1 == 0 then
+		return CountText <= p2
+	end
+	local Buffer = table.create(CountText1 + 1)
+	local Buffer1 = table.create(CountText1 + 1)
+	local Buffer2 = table.create(CountText1 + 1)
 	
-	for i = 0, p11Count do
-		list_1[i + 1] = i
+	for i = 0, CountText1 do
+		Buffer1[i + 1] = i
 	end
-	for i_2 = 1, p10Count do
-		list_2[1] = i_2
-		local var2 = i_2
-		local byteValue = string.byte(p8, i_2)
-		local var3 = if i_2 >= 2 then string.byte(p8, i_2 - 1) else 0
-		
-		for i_1 = 1, p11Count do
-			local byteValue_1 = string.byte(p9, i_1)
-			local var4 = if byteValue == byteValue_1 then 0 else 1
-			local var5 = list_1[i_1 + 1] + 1
-			local var6 = list_2[i_1] + 1
-			local var7 = list_1[i_1] + var4
-			local var8 = var5
+	for i1 = 1, CountText do
+		Buffer2[1] = i1
+		local Index: number = i1
+		local ByteValue = string.byte(Text, i1)
+		local ByteValue1: number = if i1 >= 2 then string.byte(Text, i1 - 1) else 0
+		for i2 = 1, CountText1 do
+			local ByteValue2 = string.byte(Text1, i2)
+			local NewBufferEntry = Buffer2[i2] + 1
+			local NewBufferEntry1 = Buffer1[i2] + (if ByteValue == ByteValue2 then 0 else 1)
+			local NewBufferEntry2 = Buffer1[i2 + 1] + 1
 			
-			if var6 < var8 then
-				var8 = var6
+			if NewBufferEntry < NewBufferEntry2 then
+				NewBufferEntry2 = NewBufferEntry
 			end
-			if var7 < var8 then
-				var8 = var7
+			if NewBufferEntry1 < NewBufferEntry2 then
+				NewBufferEntry2 = NewBufferEntry1
 			end
-			if i_2 >= 2 and i_1 >= 2 and (byteValue == string.byte(p9, i_1 - 1) and var3 == byteValue_1) then
-				local var9 = list[i_1 - 1] + 1
+			if i1 >= 2 and i2 >= 2 and ByteValue == string.byte(Text1, i2 - 1) and ByteValue1 == ByteValue2 then
+				local NewBufferEntry3 = Buffer[i2 - 1] + 1
 				
-				if var9 < var8 then
-					var8 = var9
+				if NewBufferEntry3 < NewBufferEntry2 then
+					NewBufferEntry2 = NewBufferEntry3
 				end
 			end
-			list_2[i_1 + 1] = var8
+			Buffer2[i2 + 1] = NewBufferEntry2
 			
-			if var8 < var2 then
-				var2 = var8
+			if NewBufferEntry2 < Index then
+				Index = NewBufferEntry2
 			end
 		end
-		if p10 >= var2 then
-			local var10 = list_1
-			list_1 = list_2
-			list_2 = list
-			list = var10
-			continue
+		if p2 < Index then
+			return false
 		end
-		return false
+		local Buffer3 = Buffer1
+		Buffer1 = Buffer2
+		Buffer2 = Buffer
+		Buffer = Buffer3
 	end
-	return list_1[p11Count + 1] <= p10
+	return Buffer1[CountText1 + 1] <= p2
 end
 
-local _ = function(p11, p12, p13)
-	-- upvalues: editDistanceWithin (ref)
-	for i, v in p11 do
-		if editDistanceWithin(p12, v, p13) then
+local _ = function(List, p3, p4): boolean --[[ Line: 164 | Named "anyWordWithinEditDistance" ]]
+	-- upvalues: editDistanceWithin (copy)
+	for _, value in List do
+		if editDistanceWithin(p3, value, p4) then
 			return true
 		end
 	end
 	return false
 end
 
-local function anyWordHasFuzzyPrefix(p14, p15, p16)
-	-- upvalues: editDistanceWithin (ref)
-	local p17Count = #p15
+local function anyWordHasFuzzyPrefix(List, Pattern, p5): boolean --[[ Line: 176 ]]
+	-- upvalues: editDistanceWithin (copy)
+	local CountPattern = #Pattern
 	
-	for i, v in p14 do
-		if p17Count <= #v and editDistanceWithin(p15, string.sub(v, 1, p17Count), p16) then
+	for _, value in List do
+		if CountPattern <= #value and editDistanceWithin(Pattern, string.sub(value, 1, CountPattern), p5) then
 			return true
 		end
 	end
 	return false
 end
 
-local function scoreToken(p17, p18, p19, p20)
-	-- upvalues: anyWordHasFuzzyPrefix (ref), anyWordIncludes (ref), editDistanceWithin (ref)
-	if p17 == p19 then
+local function scoreToken(Text: string, List, Pattern, Count: number): number --[[ Line: 215 ]]
+	-- upvalues: anyWordHasFuzzyPrefix (copy), anyWordIncludes (copy), editDistanceWithin (copy)
+	if Text == Pattern then
 		return 100
 	end
-	local var11
-	for i, v in p18 do
-		if v == p19 then
-			var11 = true
-			if var11 then
-				return 50
-			end
-			local var12
-			for i, v in p18 do
-				if if #v < #p19 then false else string.sub(v, 1, #p19) == p19 then
-					var12 = true
-					if var12 then
-						return 20
-					elseif #p19 >= 5 and anyWordHasFuzzyPrefix(p18, p19, if #p19 >= 8 then 2 else 1) then
-						return 8
-					elseif #p19 > 1 and string.find(p17, p19, 1, true) ~= nil then
-						return 5
-					elseif #p19 == 1 and p20 > 1 and anyWordIncludes(p18, p19) then
-						return 5
-					elseif #p19 >= 4 then
-						local var13
-						local var14 = if #p19 >= 8 then 2 else 1
-						
-						for v, v_2 in p18 do
-							if editDistanceWithin(p19, v_2, var14) then
-								var13 = true
-								return if var13 then 12 else 0
-							end
-						end
-						var13 = false
-					end
-				end
-			end
-			var12 = false
+	local Flag = false
+	
+	for _, value in List do
+		if value == Pattern then
+			Flag = true
+			break
 		end
 	end
-	var11 = false
+	if Flag then
+		return 50
+	end
+	local Flag1 = false
+	
+	for _, value1 in List do
+		if #Pattern <= #value1 and string.sub(value1, 1, #Pattern) == Pattern then
+			Flag1 = true
+			break
+		end
+	end
+	if Flag1 then
+		return 20
+	end
+	if #Pattern >= 5 and anyWordHasFuzzyPrefix(List, Pattern, if #Pattern >= 8 then 2 else 1) then
+		return 8
+	end
+	if #Pattern > 1 and string.find(Text, Pattern, 1, true) ~= nil then
+		return 5
+	end
+	if #Pattern == 1 and Count > 1 and anyWordIncludes(List, Pattern) then
+		return 5
+	end
+	if #Pattern >= 4 then
+		local v1: number = if #Pattern >= 8 then 2 else 1
+		local Flag2 = false
+		
+		for _, value2 in List do
+			if editDistanceWithin(Pattern, value2, v1) then
+				Flag2 = true
+				break
+			end
+		end
+		if Flag2 then
+			return 12
+		end
+	end
+	return 0
 end
 
 return {
-	substringMatch = function(p21, p22, p23)
-		if p23 <= 0 then
-			return {}
-		elseif p22 == "" then
+	substringMatch = function(List, Text: string, p6: number) --[[ Line: 191 ]]
+		if p6 <= 0 then
 			return {}
 		end
-		local lowerText = string.lower(p22)
-		local t = {}
+		if Text == "" then
+			return {}
+		end
+		local Lowered = string.lower(Text)
+		local List1 = {}
 		
-		for i, v in p21 do
-			if string.find(string.lower(v.name), lowerText, 1, true) ~= nil then
-				table.insert(t, v)
+		for _, value in List do
+			if string.find(string.lower(value.name), Lowered, 1, true) ~= nil then
+				table.insert(List1, value)
 				
-				if p23 <= #t then break end
+				if p6 <= #List1 then break end
+			else
+				continue
 			end
 		end
-		return t
+		return List1
 	end,
-	fuzzyMatch = function(p24, p25, p26)
-		-- upvalues: scoreToken (ref)
-		if p26 <= 0 then
+	fuzzyMatch = function(Items, Text: string, p7: number) --[[ Line: 256 ]]
+		-- upvalues: scoreToken (copy)
+		if p7 <= 0 then
 			return {}
 		end
-		local lowerText = string.lower(string.match(p25, "^%s*(.-)%s*$") or "")
+		local Lowered = string.lower(string.match(Text, "^%s*(.-)%s*$") or "")
 		
-		if lowerText == "" then
-			return p24
+		if Lowered == "" then
+			return Items
 		end
-		local t = {}
+		local List = {}
 		
-		for i in string.gmatch(lowerText, "%S+") do
-			table.insert(t, i)
+		for i in string.gmatch(Lowered, "%S+") do
+			table.insert(List, i)
 		end
-		local lowerText_1, var15, var16, var17
-		t = #t
-		local t_1 = {}
+		local CountList = #List
+		local List1 = {}
+		local Flag = nil
 		
-		for i_1, v in p24 do
-			lowerText_1 = string.lower(v.name)
-			local t_2 = {}
+		for Index, item in Items do
+			local Lowered1 = string.lower(item.name)
+			local List2 = {}
 			
-			for i_3 in string.gmatch(lowerText_1, "%S+") do
-				table.insert(t_2, i_3)
+			for i1 in string.gmatch(Lowered1, "%S+") do
+				table.insert(List2, i1)
 			end
-			var15 = t_2
-			var16 = 0
-			var17 = false
+			local Score = 0
+			Flag = false
 			
-			for i_4, v_1 in t do
-				local var18 = scoreToken(lowerText_1, var15, v_1, t)
+			for _, value in List do
+				local ScoreTokenResult: number = scoreToken(Lowered1, List2, value, CountList)
 				
-				if var18 ~= 0 then
-					var17 = true
+				if ScoreTokenResult == 0 then
+					Flag = true
 					break
+				else
+					Score += ScoreTokenResult
+					continue
 				end
-				var16 += var18
 			end
-			if not var17 then
-				table.insert(t_1, { item = v, score = var16, index = i_1 })
+			if not Flag then
+				table.insert(List1, { item = item, score = Score, index = Index })
 			end
 		end
-		table.sort(t_1, function(p27, p28)
-			return if p27.score == p28.score then p27.index < p28.index else p28.score < p27.score
+		table.sort(List1, function(A, B): boolean --[[ Line: 294 ]]
+			return if A.score == B.score then A.index < B.index else B.score < A.score
 		end)
-		local minValue = math.min(p26, #t_1)
-		local list = table.create(minValue)
+		local Smallest = math.min(p7, #List1)
+		local Buffer = table.create(Smallest)
 		
-		for i_2 = 1, minValue do
-			list[i_2] = t_1[i_2].item
+		for i2 = 1, Smallest do
+			Buffer[i2] = List1[i2].item
 		end
-		return list
+		return Buffer
 	end
 }

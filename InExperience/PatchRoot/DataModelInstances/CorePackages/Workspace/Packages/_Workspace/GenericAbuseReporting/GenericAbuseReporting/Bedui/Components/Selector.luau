@@ -1,108 +1,109 @@
-﻿local genericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
-local parent = genericAbuseReporting.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local roactNetworking = require(parent.RoactServiceTags).RoactNetworking
-local useRoactService = require(parent.RobloxAppHooks).useRoactService
-local checkbox = foundationModule.Checkbox
-local image = foundationModule.Image
-local scaleType = Enum.ScaleType
-local text = foundationModule.Text
-local view = foundationModule.View
-local _ = require(genericAbuseReporting.Bedui.Provider.AbuseReportBeduiTypes)
-local abuseVectorModule = require(genericAbuseReporting.Enums.AbuseVector)
-local componentSubtextModule = require(genericAbuseReporting.Bedui.Components.ComponentSubtext)
-local getPlaceMediaAssetIdsModule = require(genericAbuseReporting.Bedui.Utils.getPlaceMediaAssetIds)
-local useFormDataModule = require(genericAbuseReporting.Bedui.Provider.useFormData)
-local uDim2 = UDim2.fromOffset(180, 101)
-local t = { [abuseVectorModule.Place] = "THUMBNAIL_IDS" }
+﻿local GenericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
+local Parent = GenericAbuseReporting.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local RoactNetworking = require(Parent.RoactServiceTags).RoactNetworking
+local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
+local Checkbox = FoundationModule.Checkbox
+local Image = FoundationModule.Image
+local ScaleType = Enum.ScaleType
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local _ = require(GenericAbuseReporting.Bedui.Provider.AbuseReportBeduiTypes)
+local AbuseVectorModule = require(GenericAbuseReporting.Enums.AbuseVector)
+local ComponentSubtextModule = require(GenericAbuseReporting.Bedui.Components.ComponentSubtext)
+local GetPlaceMediaAssetIdsModule = require(GenericAbuseReporting.Bedui.Utils.getPlaceMediaAssetIds)
+local UseFormDataModule = require(GenericAbuseReporting.Bedui.Provider.useFormData)
+local _UDim2 = UDim2.fromOffset(180, 101)
+local config = { [AbuseVectorModule.Place] = "THUMBNAIL_IDS" }
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), useFormDataModule (ref), useRoactService (ref), roactNetworking (ref), abuseVectorModule (ref), getPlaceMediaAssetIdsModule (ref), t (ref), view (ref), checkbox (ref), image (ref), scaleType (ref), uDim2 (ref), text (ref), componentSubtextModule (ref)
-	local var1, var2 = reactModule.useState({})
-	local var3, var4 = reactModule.useState({})
-	local custom = useFormDataModule().custom
-	local updateForm = useFormDataModule().updateForm
-	local updateAdditionalReportTags = useFormDataModule().updateAdditionalReportTags
-	local var5 = useRoactService(roactNetworking)
-	local var6 = reactModule.useRef(`selector-{DateTime.now()}`)
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), abuseVectorModule (copy), getPlaceMediaAssetIdsModule (copy), var5 (ref), custom (ref), var2 (ref)
-		if p1.abuseVector == abuseVectorModule.Place then
-			getPlaceMediaAssetIdsModule(var5, tostring(custom and custom.universeId)):andThen(function(p2)
-				-- upvalues: var2 (copy)
-				var2(p2)
+return ReactModule.memo(function(p1) --[[ Line: 38 | Named "Selector" ]]
+	-- upvalues: ReactModule (copy), UseFormDataModule (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), AbuseVectorModule (copy), GetPlaceMediaAssetIdsModule (copy), config (copy), View (copy), Checkbox (copy), Image (copy), ScaleType (copy), _UDim2 (copy), Text (copy), ComponentSubtextModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState({})
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState({})
+	local Custom = UseFormDataModule().custom
+	local UpdateForm = UseFormDataModule().updateForm
+	local UpdateAdditionalReportTagsFunction = UseFormDataModule().updateAdditionalReportTags
+	local UseRoactServiceResult = UseRoactServiceFunction(RoactNetworking)
+	local UseRefResult = ReactModule.useRef(`selector-{DateTime.now()}`)
+	ReactModule.useEffect(function() --[[ Line: 52 ]]
+		-- upvalues: p1 (copy), AbuseVectorModule (upval), GetPlaceMediaAssetIdsModule (upval), UseRoactServiceResult (copy), Custom (copy), UseStateResult2 (copy)
+		if p1.abuseVector == AbuseVectorModule.Place then
+			GetPlaceMediaAssetIdsModule(UseRoactServiceResult, (tostring(Custom and Custom.universeId))):andThen(function(Result) --[[ Line: 54 ]]
+				-- upvalues: UseStateResult2 (upval)
+				UseStateResult2(Result)
 			end)
 		end
 	end, {
 		p1.abuseVector,
-		getPlaceMediaAssetIdsModule,
-		var5,
-		custom and custom.universeId
+		GetPlaceMediaAssetIdsModule,
+		UseRoactServiceResult,
+		Custom and Custom.universeId
 	})
-	local var7 = reactModule.useCallback(function(p2)
-		-- upvalues: var4 (ref), p1 (ref), abuseVectorModule (copy), updateAdditionalReportTags (ref), var6 (ref), t (copy)
-		var4(function(p3)
-			-- upvalues: p2 (ref), p1 (copy), abuseVectorModule (copy), updateAdditionalReportTags (copy), var6 (copy), t (copy)
-			local cloned = table.clone(p3)
-			local index = table.find(cloned, p2)
+	local UseResult = ReactModule.useCallback(function(Value) --[[ Line: 61 ]]
+		-- upvalues: UseStateResult2_1 (copy), p1 (copy), AbuseVectorModule (upval), UpdateAdditionalReportTagsFunction (copy), UseRefResult (copy), config (upval)
+		UseStateResult2_1(function(Tbl) --[[ Line: 62 ]]
+			-- upvalues: Value (copy), p1 (upval), AbuseVectorModule (upval), UpdateAdditionalReportTagsFunction (upval), UseRefResult (upval), config (upval)
+			local Copy = table.clone(Tbl)
+			local FoundIndex: number? = table.find(Copy, Value)
 			
-			if index then
-				table.remove(cloned, index)
+			if FoundIndex then
+				table.remove(Copy, FoundIndex)
 			else
-				table.insert(cloned, p2)
+				table.insert(Copy, Value)
 			end
-			if p1.abuseVector == abuseVectorModule.Place then
-				local joined = table.concat(cloned, ",")
+			if p1.abuseVector == AbuseVectorModule.Place then
+				local Joined = table.concat(Copy, ",")
 				
-				if updateAdditionalReportTags then
-					updateAdditionalReportTags(var6.current, { tagKey = t[p1.abuseVector], tagValue = joined })
+				if UpdateAdditionalReportTagsFunction then
+					UpdateAdditionalReportTagsFunction(UseRefResult.current, { tagKey = config[p1.abuseVector], tagValue = Joined })
 				end
 			end
-			return cloned
+			return Copy
 		end)
-	end, { p1.component, p1.abuseVector, updateForm })
+	end, { p1.component, p1.abuseVector, UpdateForm })
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 85 ]]
+		-- upvalues: UseStateResult (copy), ReactModule (upval), View (upval), Checkbox (upval), UseStateResult1 (copy), UseResult (copy), Image (upval), ScaleType (upval), _UDim2 (upval)
+		local Elements = {}
+		
+		for LayoutOrder, value in ipairs(UseStateResult) do
+			table.insert(Elements, ReactModule.createElement(View, {
+				tag = "size-0-0 auto-xy row gap-small self-center border-radius-medium padding-small",
+				LayoutOrder = LayoutOrder
+			}, {
+				Checkbox = ReactModule.createElement(Checkbox, {
+					label = "",
+					isChecked = table.find(UseStateResult1, value) ~= nil,
+					onActivated = function() --[[ Line: 97 ]]
+						-- upvalues: UseResult (upval), value (copy)
+						UseResult(value)
+					end
+				}),
+				Image = ReactModule.createElement(Image, {
+					Image = `rbxthumb://type=Asset&id={value}&w=768&h=432`,
+					ScaleType = ScaleType.Fit,
+					Size = _UDim2,
+					onActivated = function() --[[ Line: 105 ]]
+						-- upvalues: UseResult (upval), value (copy)
+						UseResult(value)
+					end
+				})
+			}))
+		end
+		return Elements
+	end, { UseStateResult, UseStateResult1 })
 	
-	return if #var1 == 0 then nil else reactModule.createElement(view, {
+	return if #UseStateResult == 0 then nil else ReactModule.createElement(View, {
 		tag = "size-full-0 auto-y col gap-small",
 		LayoutOrder = p1.layoutOrder
 	}, {
-		Prompt = reactModule.createElement(text, {
+		Prompt = ReactModule.createElement(Text, {
 			tag = "auto-xy",
 			LayoutOrder = 0,
 			Text = p1.component.selector.prompt
 		}),
-		CheckboxGroup = reactModule.createElement(view, { tag = "size-full-0 auto-y col", LayoutOrder = 1 }, reactModule.useMemo(function()
-			-- upvalues: var1 (ref), reactModule (copy), view (copy), checkbox (copy), var3 (ref), var7 (ref), image (copy), scaleType (copy), uDim2 (copy)
-			local t = {}
-			
-			for i, v in ipairs(var1) do
-				table.insert(t, reactModule.createElement(view, {
-					tag = "size-0-0 auto-xy row gap-small self-center border-radius-medium padding-small",
-					LayoutOrder = i
-				}, {
-					Checkbox = reactModule.createElement(checkbox, {
-						label = "",
-						isChecked = table.find(var3, v) ~= nil,
-						onActivated = function()
-							-- upvalues: var7 (copy), v (ref)
-							var7(v)
-						end
-					}),
-					Image = reactModule.createElement(image, {
-						Image = `rbxthumb://type=Asset&id={v}&w=768&h=432`,
-						ScaleType = scaleType.Fit,
-						Size = uDim2,
-						onActivated = function()
-							-- upvalues: var7 (copy), v (ref)
-							var7(v)
-						end
-					})
-				}))
-			end
-			return t
-		end, { var1, var3 })),
-		ComponentSubtext = reactModule.createElement(componentSubtextModule, {
+		CheckboxGroup = ReactModule.createElement(View, { tag = "size-full-0 auto-y col", LayoutOrder = 1 }, UseMemoResult),
+		ComponentSubtext = ReactModule.createElement(ComponentSubtextModule, {
 			layoutOrder = 2,
 			isErrorState = p1.isErrorState,
 			isOptional = p1.component.isOptional,

@@ -1,12 +1,12 @@
-﻿local parent = script.Parent
-local jestConfigsModule = require(parent.Parent.Dev.JestConfigs)
+﻿local Parent = script.Parent
+local JestConfigsModule = require(Parent.Parent.Dev.JestConfigs)
 
 return {
 	displayName = "ExperienceLoadingScript",
 	setupFilesAfterEnv = {
-		parent.LogHandler,
-		jestConfigsModule.setupFiles.UIBloxInitializer,
-		jestConfigsModule.setupFiles.createPromiseRejectionHandler(),
-		jestConfigsModule.setupFiles.RetryTimes
+		Parent.LogHandler,
+		JestConfigsModule.setupFiles.UIBloxInitializer,
+		JestConfigsModule.setupFiles.createPromiseRejectionHandler(),
+		JestConfigsModule.setupFiles.RetryTimes
 	}
 }

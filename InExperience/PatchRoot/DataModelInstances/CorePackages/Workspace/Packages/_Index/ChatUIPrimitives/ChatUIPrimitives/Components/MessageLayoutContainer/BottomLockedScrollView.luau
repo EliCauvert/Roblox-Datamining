@@ -1,60 +1,60 @@
-﻿local chatUIPrimitives = script:FindFirstAncestor("ChatUIPrimitives")
-local parent = chatUIPrimitives.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local _ = require(chatUIPrimitives.Types)
+﻿local ChatUIPrimitives = script:FindFirstAncestor("ChatUIPrimitives")
+local Parent = ChatUIPrimitives.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local _ = require(ChatUIPrimitives.Types)
 
-local function _(p1)
-	local y = p1.AbsoluteWindowSize.Y
-	local y_1 = p1.AbsoluteCanvasSize.Y
+local function _(ScrollFrame): boolean --[[ Line: 12 | Named "isNearBottom" ]]
+	local Y = ScrollFrame.AbsoluteWindowSize.Y
+	local Y1 = ScrollFrame.AbsoluteCanvasSize.Y
 	
-	return y_1 <= y or p1.CanvasPosition.Y / (y_1 - y) >= 0.9
+	return Y1 <= Y or ScrollFrame.CanvasPosition.Y / (Y1 - Y) >= 0.9
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), foundationModule (ref)
-	local var1 = reactModule.useRef(nil)
-	local var2 = reactModule.useRef(true)
-	local onScroll = p1.onScroll
-	local var3 = reactModule.useCallback(function(p2)
-		-- upvalues: var2 (ref), onScroll (ref)
-		local y = p2.AbsoluteWindowSize.Y
-		local y_1 = p2.AbsoluteCanvasSize.Y
-		var2.current = y_1 <= y or p2.CanvasPosition.Y / (y_1 - y) >= 0.9
+return ReactModule.memo(function(p1) --[[ Line: 33 | Named "BottomLockedScrollView" ]]
+	-- upvalues: ReactModule (copy), FoundationModule (copy)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(true)
+	local OnScrollFunction = p1.onScroll
+	local UseResult = ReactModule.useCallback(function(ScrollFrame) --[[ Line: 38 ]]
+		-- upvalues: UseRefResult1 (copy), OnScrollFunction (copy)
+		local Y = ScrollFrame.AbsoluteWindowSize.Y
+		local Y1 = ScrollFrame.AbsoluteCanvasSize.Y
+		UseRefResult1.current = Y1 <= Y or ScrollFrame.CanvasPosition.Y / (Y1 - Y) >= 0.9
 		
-		if onScroll and not var2.current then
-			onScroll()
+		if OnScrollFunction and not UseRefResult1.current then
+			OnScrollFunction()
 		end
-	end, { onScroll })
-	local var4 = reactModule.useCallback(function(p2)
-		-- upvalues: var2 (ref)
-		if var2.current then
-			p2.CanvasPosition = Vector2.new(0, 9007199254740992)
+	end, { OnScrollFunction })
+	local UseResult1 = ReactModule.useCallback(function(ScrollFrame) --[[ Line: 46 ]]
+		-- upvalues: UseRefResult1 (copy)
+		if UseRefResult1.current then
+			ScrollFrame.CanvasPosition = Vector2.new(0, 9007199254740992)
 		end
 	end, {})
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref)
-		local current = var1.current
+	ReactModule.useEffect(function() --[[ Line: 53 ]]
+		-- upvalues: UseRefResult (copy)
+		local Current = UseRefResult.current
 		
-		if current then
-			current.CanvasPosition = Vector2.new(0, 9007199254740992)
+		if Current then
+			Current.CanvasPosition = Vector2.new(0, 9007199254740992)
 		end
 	end, {})
 	
-	return reactModule.createElement(foundationModule.ScrollView, {
+	return ReactModule.createElement(FoundationModule.ScrollView, {
 		tag = "fill",
 		scrollBarVisibility = "Auto",
 		Size = p1.Size or UDim2.fromScale(1, 1),
-		scrollingFrameRef = var1,
+		scrollingFrameRef = UseRefResult,
 		selection = if p1.selectableRows then { Selectable = false } else nil,
 		scroll = {
 			AutomaticCanvasSize = Enum.AutomaticSize.Y,
 			CanvasSize = UDim2.fromScale(0, 0)
 		},
-		onCanvasPositionChanged = var3,
-		onAbsoluteCanvasSizeChanged = var4
+		onCanvasPositionChanged = UseResult,
+		onAbsoluteCanvasSizeChanged = UseResult1
 	}, if p1.contentPadding then {
-		paddedContent = reactModule.createElement(foundationModule.View, {
+		paddedContent = ReactModule.createElement(FoundationModule.View, {
 			tag = "auto-y",
 			Size = UDim2.fromScale(1, 0),
 			padding = p1.contentPadding

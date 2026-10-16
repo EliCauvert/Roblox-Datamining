@@ -1,109 +1,117 @@
-﻿local httpService = game:GetService("HttpService")
-local simpleTimerModule = require(script.Parent.SimpleTimer)
-local loggerModule = require(script.Parent.Parent.Logger)
+﻿local HttpService = game:GetService("HttpService")
+local SimpleTimerModule = require(script.Parent.SimpleTimer)
+local LoggerModule = require(script.Parent.Parent.Logger)
 
-return function(p1)
-	-- upvalues: loggerModule (ref), httpService (ref), simpleTimerModule (ref)
+return function(p1) --[[ Line: 16 | Named "Timers" ]]
+	-- upvalues: LoggerModule (copy), HttpService (copy), SimpleTimerModule (copy)
 	local t = {}
 	
-	local _ = function(p2)
-		-- upvalues: t (ref), loggerModule (copy)
-		if t[p2] then
-			t[p2].clear()
-			t[p2] = nil
+	local function _(Key) --[[ Line: 19 ]]
+		-- upvalues: t (copy), LoggerModule (upval)
+		if t[Key] then
+			t[Key].clear()
+			t[Key] = nil
 			
 			return
+		else
+			LoggerModule:warning("(Clear) Timer with this key doesn't exist: " .. tostring(Key))
 		end
-		loggerModule:warning("(Clear) Timer with this key doesn't exist: " .. tostring(p2))
 	end
 	
-	local _ = function(p2, p3)
-		-- upvalues: t (ref), loggerModule (copy)
-		return if p3 then function()
-			-- upvalues: p2 (ref), t (copy), loggerModule (copy), p3 (ref)
+	local _ = function(p2, p3) --[[ Line: 29 ]]
+		-- upvalues: t (copy), LoggerModule (upval)
+		return if p3 then function() --[[ Line: 31 ]]
+			-- upvalues: p2 (copy), t (upval), LoggerModule (upval), p3 (copy)
 			if t[p2] then
 				t[p2].clear()
 				t[p2] = nil
 			else
-				loggerModule:warning("(Clear) Timer with this key doesn't exist: " .. tostring(p2))
+				LoggerModule:warning("(Clear) Timer with this key doesn't exist: " .. tostring(p2))
 			end
 			p3()
 		end else nil
 	end
 	
-	local var1 = function(p2)
-		-- upvalues: httpService (copy), t (ref), simpleTimerModule (copy), p1 (ref), loggerModule (copy)
-		p2 = p2 or httpService:GenerateGUID(false)
+	local function v6(p2) --[[ Line: 38 ]]
+		-- upvalues: HttpService (upval), t (copy), SimpleTimerModule (upval), p1 (copy), LoggerModule (upval)
+		local P4 = p2 or HttpService:GenerateGUID(false)
 		
-		if t[p2] then
-			loggerModule:warning("(Start) Timer with this key already exists: " .. tostring(p2))
+		if t[P4] then
+			LoggerModule:warning("(Start) Timer with this key already exists: " .. tostring(P4))
 			
-			return p2
+			return P4
 		end
-		local var2 = t
-		local t_1 = {
-			timeoutThreshold = if p1 then p1.timeoutThreshold else nil
-		}
-		local onReachingThreshold = p1.onReachingThreshold
-		t_1.onReachingThreshold = if p1 then if onReachingThreshold then function()
-			-- upvalues: p2 (ref), t (copy), loggerModule (copy), onReachingThreshold (ref)
-			if t[p2] then
-				t[p2].clear()
-				t[p2] = nil
-			else
-				loggerModule:warning("(Clear) Timer with this key doesn't exist: " .. tostring(p2))
-			end
-			onReachingThreshold()
-		end else nil else nil
-		var2[p2] = simpleTimerModule(t_1)
+		local config = { timeoutThreshold = p1 and p1.timeoutThreshold or nil }
+		local OnReachingThreshold = nil
 		
-		return p2
+		if p1 then
+			local OnReachingThresholdFunction = p1.onReachingThreshold
+			OnReachingThreshold = (if OnReachingThresholdFunction then function() --[[ Line: 31 ]]
+				-- upvalues: P4 (copy), t (upval), LoggerModule (upval), OnReachingThresholdFunction (copy)
+				if t[P4] then
+					t[P4].clear()
+					t[P4] = nil
+				else
+					LoggerModule:warning("(Clear) Timer with this key doesn't exist: " .. tostring(P4))
+				end
+				OnReachingThresholdFunction()
+			end else nil) or nil
+		else
+			OnReachingThreshold = nil
+		end
+		config.onReachingThreshold = OnReachingThreshold
+		t[P4] = SimpleTimerModule(config)
+		
+		return P4
 	end
 	
 	return {
-		start = function(p2, p3)
-			-- upvalues: var1 (ref), t (ref)
-			local var2 = var1(p2)
-			t[var2].start(p3)
+		start = function(p2, p3) --[[ Line: 52 ]]
+			-- upvalues: v6 (copy), t (copy)
+			local v1 = v6(p2)
+			t[v1].start(p3)
 			
-			return var2
+			return v1
 		end,
-		stop = function(p2)
-			-- upvalues: t (ref), loggerModule (copy)
-			if not t[p2] then
-				loggerModule:warning("(Stop) Timer with this key doesn't exist: " .. tostring(p2))
+		stop = function(Key) --[[ Line: 59 ]]
+			-- upvalues: t (copy), LoggerModule (upval)
+			if not t[Key] then
+				LoggerModule:warning("(Stop) Timer with this key doesn't exist: " .. tostring(Key))
 				
 				return -1
 			end
-			local var2 = t[p2].stop()
+			local StopResult = t[Key].stop()
 			
-			if t[p2] then
-				t[p2].clear()
-				t[p2] = nil
+			if t[Key] then
+				t[Key].clear()
+				t[Key] = nil
 				
-				return var2
+				return StopResult
+			else
+				LoggerModule:warning("(Clear) Timer with this key doesn't exist: " .. tostring(Key))
+				
+				return StopResult
 			end
-			loggerModule:warning("(Clear) Timer with this key doesn't exist: " .. tostring(p2))
-			
-			return var2
 		end,
-		getTime = function(p2)
-			-- upvalues: t (ref), loggerModule (copy)
+		getTime = function(p2) --[[ Line: 71 ]]
+			-- upvalues: t (copy), LoggerModule (upval)
 			if t[p2] then
 				return t[p2].getTime()
+			else
+				LoggerModule:warning("(getTime) Timer with this key doesn't exist: " .. tostring(p2))
+				
+				return -1
 			end
-			loggerModule:warning("(getTime) Timer with this key doesn't exist: " .. tostring(p2))
-			
-			return -1
 		end,
-		getStartTimestamp = function(p2)
-			-- upvalues: t (ref), loggerModule (copy)
+		getStartTimestamp = function(p2) --[[ Line: 80 ]]
+			-- upvalues: t (copy), LoggerModule (upval)
 			if t[p2] then
 				return t[p2].getStartTimestamp()
+			else
+				LoggerModule:warning("(startTimeStamp) Timer with this key doesn't exist: " .. tostring(p2))
+				
+				return nil
 			end
-			loggerModule:warning("(startTimeStamp) Timer with this key doesn't exist: " .. tostring(p2))
-			
-			return nil
 		end
 	}
 end

@@ -1,421 +1,427 @@
-﻿local viewRecyclerReact = script:FindFirstAncestor("ViewRecyclerReact")
-local _ = require(viewRecyclerReact.Parent.ViewRecycler)
-local viewRecyclerRobloxModule = require(viewRecyclerReact.Parent.ViewRecyclerRoblox)
-local hostPresentationPhase = viewRecyclerRobloxModule.HostPresentationPhase
-local placementKindModule = require(script.Parent.PlacementKind)
-local reactModule = require(viewRecyclerReact.Parent.React)
-local recyclableViewReadinessModule = require(viewRecyclerReact.ReactAdapter.RecyclableViewReadiness)
-local recyclableViewRegistryModule = require(script.Parent.RecyclableViewRegistry)
-local reparentableHost = viewRecyclerRobloxModule.ReparentableHost
-local signalsModule = require(viewRecyclerReact.Parent.Signals)
-local signalsExperimentalModule = require(viewRecyclerReact.Parent.SignalsExperimental)
-local signalsSchedulerModule = require(viewRecyclerReact.Parent.SignalsScheduler)
+﻿local ViewRecyclerReact = script:FindFirstAncestor("ViewRecyclerReact")
+local _ = require(ViewRecyclerReact.Parent.ViewRecycler)
+local ViewRecyclerRobloxModule = require(ViewRecyclerReact.Parent.ViewRecyclerRoblox)
+local HostPresentationPhase = ViewRecyclerRobloxModule.HostPresentationPhase
+local PlacementKindModule = require(script.Parent.PlacementKind)
+local ReactModule = require(ViewRecyclerReact.Parent.React)
+local RecyclableViewReadinessModule = require(ViewRecyclerReact.ReactAdapter.RecyclableViewReadiness)
+local RecyclableViewRegistryModule = require(script.Parent.RecyclableViewRegistry)
+local ReparentableHost = ViewRecyclerRobloxModule.ReparentableHost
+local SignalsModule = require(ViewRecyclerReact.Parent.Signals)
+local SignalsExperimentalModule = require(ViewRecyclerReact.Parent.SignalsExperimental)
+local SignalsSchedulerModule = require(ViewRecyclerReact.Parent.SignalsScheduler)
 
-return function(p1, p2, p3, p4, p5)
-	-- upvalues: recyclableViewRegistryModule (ref), signalsModule (ref), reactModule (ref), recyclableViewReadinessModule (ref), reparentableHost (ref), placementKindModule (ref), hostPresentationPhase (ref), signalsSchedulerModule (ref), signalsExperimentalModule (ref)
-	local metadata = recyclableViewRegistryModule.getMetadata(p2)
-	assert(metadata ~= nil, "RecyclableView: unknown Recyclable view type")
-	p4 = p4 or metadata.readiness
-	local var1 = if p5 == nil then metadata.hideWhilePending else p5
-	local var2, var3 = signalsModule.createSignal(p3)
-	local var4, var5 = signalsModule.createSignal(nil)
-	local var6, var7 = signalsModule.createSignal(p3)
-	local var8, var9 = signalsModule.createSignal(nil)
-	local var10, var11 = reactModule.createBinding(false)
-	local var12 = if p3 == nil then 0 else 1
-	local _ = nil
-	local _ = nil
+return function(Id, ItemViewType, p1, p2, p3) --[[ Line: 74 | Named "RecyclableView" ]]
+	-- upvalues: RecyclableViewRegistryModule (copy), SignalsModule (copy), ReactModule (copy), RecyclableViewReadinessModule (copy), ReparentableHost (copy), PlacementKindModule (copy), HostPresentationPhase (copy), SignalsSchedulerModule (copy), SignalsExperimentalModule (copy)
+	local Metadata = RecyclableViewRegistryModule.getMetadata(ItemViewType)
+	assert(Metadata ~= nil, "RecyclableView: unknown Recyclable view type")
+	local P3 = p2 or Metadata.readiness
+	local HideWhilePending = if p3 == nil then Metadata.hideWhilePending else p3
+	local Signal, Signal2 = SignalsModule.createSignal(p1)
+	local Signal1, Signal2_1 = SignalsModule.createSignal(nil)
+	local Signal3, Signal2_2 = SignalsModule.createSignal(p1)
+	local Signal4, Signal2_3 = SignalsModule.createSignal(nil)
+	local Binding, Binding2 = ReactModule.createBinding(false)
+	local Count: number = if p1 == nil then 0 else 1
+	local Signal2_4 = nil
 	
-	if p4 == recyclableViewReadinessModule.ReadyOnCommit then
-		local var13, var14 = signalsModule.createSignal(var12)
-		local var15 = var13
-		local var16 = var14
+	if P3 == RecyclableViewReadinessModule.ReadyOnCommit then
+		local Signal5
+		Signal5, Signal2_4 = SignalsModule.createSignal(Count)
 	else
-		local var15 = function(_)
-			-- upvalues: var12 (write)
-			return var12
+		local function Signal5(_) --[[ Line: 98 ]]
+			-- upvalues: Count (ref)
+			return Count
 		end
 		
-		local var16 = function(_) end
+		Signal2_4 = function(_) --[[ Line: 101 ]] end
 	end
-	local frame = Instance.new("Frame")
-	frame.Name = `ListItemViewFrame{p1}`
-	frame.BackgroundTransparency = 1
-	frame.BorderSizePixel = 0
-	frame.Position = UDim2.new()
-	frame.Size = UDim2.new()
-	local var17 = nil
-	local var18 = nil
-	local var19 = nil
-	local var20 = true
-	local var21 = false
-	local var22 = nil
-	local var23 = nil
-	local var24 = nil
-	local var25 = nil
-	local var26 = nil
-	local var27 = false
-	local var28 = false
-	local _ = nil
+	local Frame = Instance.new("Frame")
+	Frame.Name = `ListItemViewFrame{Id}`
+	Frame.BackgroundTransparency = 1
+	Frame.BorderSizePixel = 0
+	Frame.Position = UDim2.new()
+	Frame.Size = UDim2.new()
+	local v1 = nil
+	local v2 = nil
+	local Composition = nil
+	local IsReadyOnAssignmentMatch = true
+	local ContentMounted = false
+	local v3 = nil
+	local Hidden = nil
+	local Sink = nil
+	local v4 = nil
+	local CompositionPlacement = nil
+	local Flag = false
+	local Flag1 = false
+	local v5 = nil
 	
-	local function _()
-		-- upvalues: reparentableHost (copy), frame (ref)
-		reparentableHost.detach(frame)
-		frame.AnchorPoint = Vector2.zero
-		frame.Position = UDim2.new()
-		frame.Size = UDim2.new()
-		frame.AutomaticSize = Enum.AutomaticSize.None
+	local function _() --[[ Line: 125 | Named "resetCompositionHost" ]]
+		-- upvalues: ReparentableHost (upval), Frame (copy)
+		ReparentableHost.detach(Frame)
+		Frame.AnchorPoint = Vector2.zero
+		Frame.Position = UDim2.new()
+		Frame.Size = UDim2.new()
+		Frame.AutomaticSize = Enum.AutomaticSize.None
 	end
 	
-	local function measurementDependencies(p6)
-		-- upvalues: var2 (ref), signalsModule (copy)
-		local _ = nil
-		
+	local function measurementDependencies(CompositionPlacement) --[[ Line: 133 ]]
+		-- upvalues: Signal (copy), SignalsModule (upval)
 		return {
-			get = function()
-				-- upvalues: var2 (copy), p6 (ref)
-				local var29 = var2(false)
+			get = function() --[[ Line: 136 ]]
+				-- upvalues: Signal (upval), CompositionPlacement (copy)
+				local SignalResult = Signal(false)
 				
-				return if var29 == nil then {} else p6.getMeasurementDependencies(var29)
+				return if SignalResult == nil then {} else CompositionPlacement.getMeasurementDependencies(SignalResult)
 			end,
-			subscribe = function(p7)
-				-- upvalues: signalsModule (copy), var2 (copy), p6 (ref)
-				local var29 = nil
-				local var30 = nil
-				local var31 = true
-				local var32 = signalsModule.createEffect(function(p8)
-					-- upvalues: var2 (copy), var29 (write), var30 (write), p6 (copy), p7 (ref), var31 (write)
-					local var33 = var2(p8)
+			subscribe = function(Callback) --[[ Line: 140 ]]
+				-- upvalues: SignalsModule (upval), Signal (upval), CompositionPlacement (copy)
+				local v6 = nil
+				local SubscribeMeasurementDependenciesResult = nil
+				local Flag = true
+				local Effect = SignalsModule.createEffect(function(p4) --[[ Line: 144 ]]
+					-- upvalues: Signal (upval), v6 (ref), SubscribeMeasurementDependenciesResult (ref), CompositionPlacement (upval), Callback (copy), Flag (ref)
+					local SignalResult = Signal(p4)
 					
-					if var29 ~= var33 then
-						if var30 ~= nil then
-							var30()
-							var30 = nil
+					if v6 ~= SignalResult then
+						if SubscribeMeasurementDependenciesResult ~= nil then
+							SubscribeMeasurementDependenciesResult()
+							SubscribeMeasurementDependenciesResult = nil
 						end
-						var29 = var33
+						v6 = SignalResult
 						
-						if var33 ~= nil then
-							var30 = p6.subscribeMeasurementDependencies(var33, p7)
+						if SignalResult ~= nil then
+							SubscribeMeasurementDependenciesResult = CompositionPlacement.subscribeMeasurementDependencies(SignalResult, Callback)
 						end
-						if not var31 then
-							p7()
+						if not Flag then
+							Callback()
 						end
 					end
-					var31 = false
+					Flag = false
 				end)
 				
-				return function()
-					-- upvalues: var32 (ref), var30 (write)
-					var32()
+				return function() --[[ Line: 161 ]]
+					-- upvalues: Effect (copy), SubscribeMeasurementDependenciesResult (ref)
+					Effect()
 					
-					if var30 ~= nil then
-						var30()
+					if SubscribeMeasurementDependenciesResult ~= nil then
+						SubscribeMeasurementDependenciesResult()
 					end
 				end
 			end
 		}
 	end
 	
-	local _ = function()
-		-- upvalues: var24 (write), var25 (write), var26 (write)
-		if var24 ~= nil and var24.setMeasurementDependencies ~= nil then
-			var24.setMeasurementDependencies(nil)
+	local _ = function() --[[ Line: 172 | Named "unregisterListDependencies" ]]
+		-- upvalues: Sink (ref), v4 (ref), CompositionPlacement (ref)
+		if Sink ~= nil and Sink.setMeasurementDependencies ~= nil then
+			Sink.setMeasurementDependencies(nil)
 		end
-		var24 = nil
-		var25 = nil
-		var26 = nil
+		Sink = nil
+		v4 = nil
+		CompositionPlacement = nil
 	end
 	
-	local function registerListDependencies(p6)
-		-- upvalues: var24 (write), var25 (write), var26 (write), measurementDependencies (ref)
-		local sink = p6.sink
-		local compositionPlacement = p6.compositionPlacement
+	local function registerListDependencies(Destination) --[[ Line: 181 ]]
+		-- upvalues: Sink (ref), v4 (ref), CompositionPlacement (ref), measurementDependencies (copy)
+		local Sink1 = Destination.sink
+		local CompositionPlacement1 = Destination.compositionPlacement
 		
-		if var24 == sink and (compositionPlacement == nil and var25 == nil or var25 ~= nil and var26 == compositionPlacement) then return end
-		if var24 ~= nil and var24.setMeasurementDependencies ~= nil then
-			var24.setMeasurementDependencies(nil)
+		if Sink == Sink1 and (CompositionPlacement1 == nil and v4 == nil or v4 ~= nil and CompositionPlacement == CompositionPlacement1) then return end
+		if Sink ~= nil and Sink.setMeasurementDependencies ~= nil then
+			Sink.setMeasurementDependencies(nil)
 		end
-		var24 = nil
-		var25 = nil
-		var26 = nil
+		Sink = nil
+		v4 = nil
+		CompositionPlacement = nil
 		
-		if compositionPlacement ~= nil and sink.setMeasurementDependencies ~= nil then
-			var25 = measurementDependencies(compositionPlacement)
-			var24 = sink
-			var26 = compositionPlacement
-			sink.setMeasurementDependencies(var25)
+		if CompositionPlacement1 ~= nil and Sink1.setMeasurementDependencies ~= nil then
+			v4 = measurementDependencies(CompositionPlacement1)
+			Sink = Sink1
+			CompositionPlacement = CompositionPlacement1
+			Sink1.setMeasurementDependencies(v4)
 		end
 	end
 	
-	local _ = function(p6)
-		-- upvalues: placementKindModule (copy), var24 (write), var25 (write), var26 (write), frame (ref), reparentableHost (copy)
-		if p6 == nil then return end
-		local destination = p6.destination
+	local _ = function(p4) --[[ Line: 202 | Named "detachState" ]]
+		-- upvalues: PlacementKindModule (upval), Sink (ref), v4 (ref), CompositionPlacement (ref), Frame (copy), ReparentableHost (upval)
+		if p4 == nil then return end
+		local Destination = p4.destination
 		
-		if destination.kind ~= placementKindModule.List then
-			destination.detachMeasurementDependency(frame)
-			reparentableHost.detach(frame)
-			frame.AnchorPoint = Vector2.zero
-			frame.Position = UDim2.new()
-			frame.Size = UDim2.new()
-			frame.AutomaticSize = Enum.AutomaticSize.None
+		if Destination.kind ~= PlacementKindModule.List then
+			Destination.detachMeasurementDependency(Frame)
+			ReparentableHost.detach(Frame)
+			Frame.AnchorPoint = Vector2.zero
+			Frame.Position = UDim2.new()
+			Frame.Size = UDim2.new()
+			Frame.AutomaticSize = Enum.AutomaticSize.None
 			
 			return
 		end
-		destination.sink.apply(nil)
+		Destination.sink.apply(nil)
 		
-		if var24 ~= nil and var24.setMeasurementDependencies ~= nil then
-			var24.setMeasurementDependencies(nil)
+		if Sink ~= nil and Sink.setMeasurementDependencies ~= nil then
+			Sink.setMeasurementDependencies(nil)
 		end
-		var24 = nil
-		var25 = nil
-		var26 = nil
+		Sink = nil
+		v4 = nil
+		CompositionPlacement = nil
 	end
 	
-	local _ = function()
-		-- upvalues: var18 (write), hostPresentationPhase (copy), var21 (write), p4 (ref), recyclableViewReadinessModule (copy), var20 (write), var1 (ref)
-		return if var18 == nil then hostPresentationPhase.Hidden elseif var21 and (p4 == recyclableViewReadinessModule.ReadyOnAssignment or var20) then hostPresentationPhase.Presented elseif var1 then hostPresentationPhase.Hidden else hostPresentationPhase.Pending
+	local _ = function() --[[ Line: 217 | Named "resolvePhase" ]]
+		-- upvalues: v2 (ref), HostPresentationPhase (upval), ContentMounted (ref), P3 (copy), RecyclableViewReadinessModule (upval), IsReadyOnAssignmentMatch (ref), HideWhilePending (copy)
+		return if v2 == nil then HostPresentationPhase.Hidden elseif ContentMounted and (P3 == RecyclableViewReadinessModule.ReadyOnAssignment or IsReadyOnAssignmentMatch) then HostPresentationPhase.Presented elseif HideWhilePending then HostPresentationPhase.Hidden else HostPresentationPhase.Pending
 	end
 	
-	local var29 = function()
-		-- upvalues: var28 (write), var18 (write), var27 (write), hostPresentationPhase (copy), var21 (write), p4 (ref), recyclableViewReadinessModule (copy), var20 (write), var1 (ref), var22 (write), var23 (write), placementKindModule (copy), registerListDependencies (ref), frame (ref), reparentableHost (copy)
-		var28 = false
+	v5 = function() --[[ Line: 227 ]]
+		-- upvalues: Flag1 (ref), v2 (ref), Flag (ref), HostPresentationPhase (upval), ContentMounted (ref), P3 (copy), RecyclableViewReadinessModule (upval), IsReadyOnAssignmentMatch (ref), HideWhilePending (copy), v3 (ref), Hidden (ref), PlacementKindModule (upval), registerListDependencies (copy), Frame (copy), ReparentableHost (upval)
+		Flag1 = false
+		local v6 = v2
 		
-		if var18 == nil or var27 then return end
-		local var30 = if var18 == nil then hostPresentationPhase.Hidden elseif var21 and (p4 == recyclableViewReadinessModule.ReadyOnAssignment or var20) then hostPresentationPhase.Presented elseif var1 then hostPresentationPhase.Hidden else hostPresentationPhase.Pending
+		if v6 == nil or Flag then return end
+		local Hidden1 = if v2 == nil then HostPresentationPhase.Hidden elseif ContentMounted and (P3 == RecyclableViewReadinessModule.ReadyOnAssignment or IsReadyOnAssignmentMatch) then HostPresentationPhase.Presented elseif HideWhilePending then HostPresentationPhase.Hidden else HostPresentationPhase.Pending
 		
-		if var22 == var18 and var23 == var30 then return end
-		local destination = var18.destination
+		if v3 == v6 and Hidden == Hidden1 then return end
+		local Destination = v6.destination
 		
-		if destination.kind == placementKindModule.List then
-			registerListDependencies(destination)
-			destination.sink.apply({ host = frame, phase = var30, state = destination.state })
-		elseif frame.Parent ~= destination.placeholder or frame.AutomaticSize ~= destination.automaticSize then
-			reparentableHost.place(frame, destination)
+		if Destination.kind == PlacementKindModule.List then
+			registerListDependencies(Destination)
+			Destination.sink.apply({ host = Frame, phase = Hidden1, state = Destination.state })
+		else
+			if Frame.Parent ~= Destination.placeholder or Frame.AutomaticSize ~= Destination.automaticSize then
+				ReparentableHost.place(Frame, Destination)
+			end
+			Frame.Visible = Hidden1 ~= HostPresentationPhase.Hidden
+			Destination.attachMeasurementDependency(Frame)
 		end
-		frame.Visible = var30 ~= hostPresentationPhase.Hidden
-		destination.attachMeasurementDependency(frame)
-		var22 = var18
-		var23 = var30
+		v3 = v6
+		Hidden = Hidden1
 	end
 	
-	local function requestPublication()
-		-- upvalues: var28 (write), signalsSchedulerModule (copy), var29 (write)
-		if not var28 then
-			var28 = true
-			signalsSchedulerModule.schedule(var29)
+	local function requestPublication() --[[ Line: 261 ]]
+		-- upvalues: Flag1 (ref), SignalsSchedulerModule (upval), v5 (ref)
+		if not Flag1 then
+			Flag1 = true
+			SignalsSchedulerModule.schedule(v5)
 		end
 	end
 	
 	return {
-		id = p1,
-		viewType = p2,
-		itemViewType = p2,
-		signal = var2,
-		indexSignal = var4,
-		itemSignal = function(value)
-			-- upvalues: var6 (ref), var19 (write), placementKindModule (copy)
-			local var30 = var6(value)
-			assert(var30 ~= nil, "RecyclableView: item read before first Assignment")
+		id = Id,
+		viewType = ItemViewType,
+		itemViewType = ItemViewType,
+		signal = Signal,
+		indexSignal = Signal1,
+		itemSignal = function(p4) --[[ Line: 281 ]]
+			-- upvalues: Signal3 (copy), Composition (ref), PlacementKindModule (upval)
+			local SignalResult = Signal3(p4)
+			assert(SignalResult ~= nil, "RecyclableView: item read before first Assignment")
 			
-			return if var19 == placementKindModule.Composition then var30.value(value) else var30.value
+			return if Composition == PlacementKindModule.Composition then SignalResult.value(p4) else SignalResult.value
 		end,
-		itemKeySignal = function(value)
-			-- upvalues: var6 (ref)
-			local var30 = var6(value)
-			assert(var30 ~= nil, "RecyclableView: item key read before first Assignment")
+		itemKeySignal = function(p4) --[[ Line: 287 ]]
+			-- upvalues: Signal3 (copy)
+			local SignalResult = Signal3(p4)
+			assert(SignalResult ~= nil, "RecyclableView: item key read before first Assignment")
 			
-			return var30.key
+			return SignalResult.key
 		end,
-		hasItem = function(p6)
-			-- upvalues: var6 (ref)
-			return var6(p6) ~= nil
+		hasItem = function(p4): boolean --[[ Line: 414 ]]
+			-- upvalues: Signal3 (copy)
+			return Signal3(p4) ~= nil
 		end,
-		transition = function(p6)
-			-- upvalues: var27 (write), var18 (write), placementKindModule (copy), var24 (write), var25 (write), var26 (write), frame (ref), reparentableHost (copy), var22 (write), var23 (write), var17 (write), hostPresentationPhase (copy), var19 (write), p4 (ref), recyclableViewReadinessModule (copy), var20 (write), var12 (write), signalsExperimentalModule (copy), var7 (ref), var16 (write), var5 (ref), var3 (ref), var9 (ref), var11 (ref), var28 (write), signalsSchedulerModule (copy), var29 (write)
-			if var27 then
-				assert(p6 == nil, "RecyclableView: cannot transition an occupied state after destroy")
+		transition = function(p4) --[[ Line: 293 ]]
+			-- upvalues: Flag (ref), v2 (ref), PlacementKindModule (upval), Sink (ref), v4 (ref), CompositionPlacement (ref), Frame (copy), ReparentableHost (upval), v3 (ref), Hidden (ref), v1 (ref), HostPresentationPhase (upval), Composition (ref), P3 (copy), RecyclableViewReadinessModule (upval), IsReadyOnAssignmentMatch (ref), Count (ref), SignalsExperimentalModule (upval), Signal2_2 (copy), Signal2_4 (ref), Signal2_1 (copy), Signal2 (copy), Signal2_3 (copy), Binding2 (copy), Flag1 (ref), SignalsSchedulerModule (upval), v5 (ref)
+			if Flag then
+				assert(p4 == nil, "RecyclableView: cannot transition an occupied state after destroy")
 				
 				return
 			end
-			local var30 = if var18 == nil then nil else var18.assignment
-			local var31 = if p6 == nil then nil else p6.assignment
-			local var32 = if var18 == nil then nil else var18.destination
-			local var33 = if p6 == nil then nil else p6.destination
+			local v6 = v2
+			local Assignment = if v6 == nil then nil else v6.assignment
+			local Assignment1 = if p4 == nil then nil else p4.assignment
+			local Destination = if v6 == nil then nil else v6.destination
+			local Destination1 = if p4 == nil then nil else p4.destination
 			
-			if var32 ~= nil and (if var33 ~= nil then if var32.kind == var33.kind and var32.kind == placementKindModule.List then if var32.sink == var33.sink then var32.kind == placementKindModule.Composition and var32.placementId ~= var33.placementId else true else true else true) then
-				if var18 ~= nil then
-					local destination = var18.destination
+			if Destination ~= nil and (Destination1 == nil or (Destination.kind ~= Destination1.kind or (Destination.kind == PlacementKindModule.List and Destination.sink ~= Destination1.sink or Destination.kind == PlacementKindModule.Composition and Destination.placementId ~= Destination1.placementId))) then
+				if v6 ~= nil then
+					local Destination2 = v6.destination
 					
-					if destination.kind == placementKindModule.List then
-						destination.sink.apply(nil)
+					if Destination2.kind == PlacementKindModule.List then
+						Destination2.sink.apply(nil)
 						
-						if var24 ~= nil and var24.setMeasurementDependencies ~= nil then
-							var24.setMeasurementDependencies(nil)
+						if Sink ~= nil and Sink.setMeasurementDependencies ~= nil then
+							Sink.setMeasurementDependencies(nil)
 						end
-						var24 = nil
-						var25 = nil
-						var26 = nil
+						Sink = nil
+						v4 = nil
+						CompositionPlacement = nil
 					else
-						destination.detachMeasurementDependency(frame)
-						reparentableHost.detach(frame)
-						frame.AnchorPoint = Vector2.zero
-						frame.Position = UDim2.new()
-						frame.Size = UDim2.new()
-						frame.AutomaticSize = Enum.AutomaticSize.None
+						Destination2.detachMeasurementDependency(Frame)
+						ReparentableHost.detach(Frame)
+						Frame.AnchorPoint = Vector2.zero
+						Frame.Position = UDim2.new()
+						Frame.Size = UDim2.new()
+						Frame.AutomaticSize = Enum.AutomaticSize.None
 					end
 				end
-				var22 = nil
-				var23 = nil
+				v3 = nil
+				Hidden = nil
 			end
-			if var30 ~= nil and var30 ~= var31 then
-				local var34 = var17
+			if Assignment ~= nil and Assignment ~= Assignment1 then
+				local v7 = v1
 				
-				if var34 ~= nil then
-					var34.clearSelection()
+				if v7 ~= nil then
+					v7.clearSelection()
 				end
 			end
-			var18 = p6
+			v2 = p4
 			
-			if var30 ~= var31 and p6 ~= nil then
-				local destination = p6.destination
+			if Assignment ~= Assignment1 and p4 ~= nil then
+				local Destination3 = p4.destination
 				
-				if destination.kind == placementKindModule.List then
-					destination.sink.apply({
-						host = frame,
-						phase = hostPresentationPhase.Hidden,
-						state = destination.state
+				if Destination3.kind == PlacementKindModule.List then
+					Destination3.sink.apply({
+						host = Frame,
+						phase = HostPresentationPhase.Hidden,
+						state = Destination3.state
 					})
 				else
-					frame.Visible = false
+					Frame.Visible = false
 				end
-				var22 = p6
-				var23 = hostPresentationPhase.Hidden
+				v3 = p4
+				Hidden = HostPresentationPhase.Hidden
 			end
-			local var35 = if p6 == nil then nil else p6.destination.kind
-			local var36 = var31 ~= nil and (if var30 == var31 then var19 ~= var35 else true)
-			local var37 = p4 == recyclableViewReadinessModule.ReadyOnCommit and (var31 ~= nil and (if var30 == var31 then not var20 else true))
+			local Kind = if p4 == nil then nil else p4.destination.kind
+			local IsNotAssignmentMatch: boolean = Assignment1 ~= nil and (Assignment ~= Assignment1 or Composition ~= Kind)
+			local IsNotAssignmentMatch1: boolean = P3 == RecyclableViewReadinessModule.ReadyOnCommit and (Assignment1 ~= nil and (Assignment ~= Assignment1 or not IsReadyOnAssignmentMatch))
 			
-			if var37 then
-				var12 += 1
+			if IsNotAssignmentMatch1 then
+				Count += 1
 			end
-			var20 = if var31 == nil then false else p4 == recyclableViewReadinessModule.ReadyOnAssignment or (if var37 then false else var20)
-			signalsExperimentalModule.batch(function()
-				-- upvalues: var36 (ref), var19 (copy), var35 (ref), var7 (copy), var31 (ref), var37 (ref), var16 (copy), var12 (copy), var5 (copy), p6 (ref), var3 (copy), var9 (copy), p4 (copy), recyclableViewReadinessModule (copy), var11 (copy), var28 (copy), signalsSchedulerModule (copy), var29 (copy)
-				if var36 then
-					var19 = var35
-					var7(var31)
+			IsReadyOnAssignmentMatch = Assignment1 ~= nil and (P3 == RecyclableViewReadinessModule.ReadyOnAssignment or not IsNotAssignmentMatch1 and IsReadyOnAssignmentMatch)
+			SignalsExperimentalModule.batch(function() --[[ Line: 357 ]]
+				-- upvalues: IsNotAssignmentMatch (copy), Composition (upval), Kind (copy), Signal2_2 (upval), Assignment1 (copy), IsNotAssignmentMatch1 (copy), Signal2_4 (upval), Count (upval), Signal2_1 (upval), p4 (copy), Signal2 (upval), Signal2_3 (upval), P3 (upval), RecyclableViewReadinessModule (upval), Binding2 (upval), Flag1 (upval), SignalsSchedulerModule (upval), v5 (upval)
+				if IsNotAssignmentMatch then
+					Composition = Kind
+					Signal2_2(Assignment1)
 				end
-				if var37 then
-					var16(var12)
+				if IsNotAssignmentMatch1 then
+					Signal2_4(Count)
 				end
-				var5(if p6 == nil then nil else p6.index)
-				var3(var31)
-				var9(if p6 == nil then nil else p6.destination.compositionPlacement)
+				Signal2_1(if p4 == nil then nil else p4.index)
+				Signal2(Assignment1)
+				Signal2_3(if p4 == nil then nil else p4.destination.compositionPlacement)
 				
-				if p4 == recyclableViewReadinessModule.ReadyOnCommit and (var31 == nil or var37) then
-					var11(var31 ~= nil)
+				if P3 == RecyclableViewReadinessModule.ReadyOnCommit and (Assignment1 == nil or IsNotAssignmentMatch1) then
+					Binding2(Assignment1 ~= nil)
 				end
-				if p6 ~= nil and not var28 then
-					var28 = true
-					signalsSchedulerModule.schedule(var29)
+				if p4 ~= nil and not Flag1 then
+					Flag1 = true
+					SignalsSchedulerModule.schedule(v5)
 				end
 			end)
 		end,
-		pending = var10,
-		contentRevision = var15,
-		commitContent = function(p6)
-			-- upvalues: var27 (write), p4 (ref), recyclableViewReadinessModule (copy), var18 (write), var12 (write), var20 (write), signalsExperimentalModule (copy), var11 (ref), var28 (write), signalsSchedulerModule (copy), var29 (write)
-			if var27 or p4 ~= recyclableViewReadinessModule.ReadyOnCommit or (var18 == nil or p6 ~= var12) then
+		pending = Binding,
+		contentRevision = Signal5,
+		commitContent = function(Count1): boolean --[[ Line: 379 ]]
+			-- upvalues: Flag (ref), P3 (copy), RecyclableViewReadinessModule (upval), v2 (ref), Count (ref), IsReadyOnAssignmentMatch (ref), SignalsExperimentalModule (upval), Binding2 (copy), Flag1 (ref), SignalsSchedulerModule (upval), v5 (ref)
+			if Flag or P3 ~= RecyclableViewReadinessModule.ReadyOnCommit or v2 == nil or Count1 ~= Count then
 				return false
-			end
-			var20 = true
-			signalsExperimentalModule.batch(function()
-				-- upvalues: var11 (copy), var28 (copy), signalsSchedulerModule (copy), var29 (copy)
-				var11(false)
-				
-				if not var28 then
-					var28 = true
-					signalsSchedulerModule.schedule(var29)
-				end
-			end)
-			
-			return true
-		end,
-		setContentMounted = function(value)
-			-- upvalues: var27 (write), var21 (write), var18 (write), signalsExperimentalModule (copy), requestPublication (ref)
-			if var27 or var21 == value then return end
-			var21 = value
-			
-			if value and var18 ~= nil then
-				signalsExperimentalModule.batch(requestPublication)
-			end
-		end,
-		readiness = p4,
-		hideWhilePending = var1,
-		compositionPlacement = var8,
-		portalFrame = function(_)
-			-- upvalues: var27 (write), frame (ref)
-			return if var27 then nil else frame
-		end,
-		bindHost = function(p6)
-			-- upvalues: var27 (write), var17 (write)
-			assert(not var27, "RecyclableView: cannot bind a destroyed host")
-			assert(var17 == nil, "RecyclableView: host is already bound")
-			var17 = p6
-			local var30 = true
-			
-			return function()
-				-- upvalues: var30 (write), var17 (copy), p6 (ref)
-				if var30 and var17 == p6 then
-					var30 = false
-					var17 = nil
-				end
-			end
-		end,
-		clearSelection = function()
-			-- upvalues: var17 (write)
-			if var17 ~= nil then
-				var17.clearSelection()
-			end
-		end,
-		detachFromPlaceholder = function(p6)
-			-- upvalues: var17 (write)
-			if var17 ~= nil then
-				var17.detachFromPlaceholder(p6)
-			end
-		end,
-		destroy = function()
-			-- upvalues: var27 (write), var18 (write), placementKindModule (copy), var24 (write), var25 (write), var26 (write), frame (ref), reparentableHost (copy), var17 (write), var11 (ref)
-			if var27 then return end
-			var27 = true
-			
-			if var18 ~= nil then
-				local destination = var18.destination
-				
-				if destination.kind == placementKindModule.List then
-					destination.sink.apply(nil)
+			else
+				IsReadyOnAssignmentMatch = true
+				SignalsExperimentalModule.batch(function() --[[ Line: 387 ]]
+					-- upvalues: Binding2 (upval), Flag1 (upval), SignalsSchedulerModule (upval), v5 (upval)
+					Binding2(false)
 					
-					if var24 ~= nil and var24.setMeasurementDependencies ~= nil then
-						var24.setMeasurementDependencies(nil)
+					if not Flag1 then
+						Flag1 = true
+						SignalsSchedulerModule.schedule(v5)
 					end
-					var24 = nil
-					var25 = nil
-					var26 = nil
-				else
-					destination.detachMeasurementDependency(frame)
-					reparentableHost.detach(frame)
-					frame.AnchorPoint = Vector2.zero
-					frame.Position = UDim2.new()
-					frame.Size = UDim2.new()
-					frame.AutomaticSize = Enum.AutomaticSize.None
+				end)
+				
+				return true
+			end
+		end,
+		setContentMounted = function(Value) --[[ Line: 396 ]]
+			-- upvalues: Flag (ref), ContentMounted (ref), v2 (ref), SignalsExperimentalModule (upval), requestPublication (copy)
+			if Flag or ContentMounted == Value then return end
+			ContentMounted = Value
+			
+			if Value and v2 ~= nil then
+				SignalsExperimentalModule.batch(requestPublication)
+			end
+		end,
+		readiness = P3,
+		hideWhilePending = HideWhilePending,
+		compositionPlacement = Signal4,
+		portalFrame = function(_) --[[ Line: 425 ]]
+			-- upvalues: Flag (ref), Frame (copy)
+			return if Flag then nil else Frame
+		end,
+		bindHost = function(p4) --[[ Line: 268 ]]
+			-- upvalues: Flag (ref), v1 (ref)
+			assert(not Flag, "RecyclableView: cannot bind a destroyed host")
+			assert(v1 == nil, "RecyclableView: host is already bound")
+			v1 = p4
+			local Flag1 = true
+			
+			return function() --[[ Line: 273 ]]
+				-- upvalues: Flag1 (ref), v1 (upval), p4 (copy)
+				if Flag1 and v1 == p4 then
+					Flag1 = false
+					v1 = nil
 				end
 			end
-			var18 = nil
-			var17 = nil
-			var11(false)
-			frame.Parent = nil
-			frame:Destroy()
+		end,
+		clearSelection = function() --[[ Line: 429 ]]
+			-- upvalues: v1 (ref)
+			local v6 = v1
+			
+			if v6 ~= nil then
+				v6.clearSelection()
+			end
+		end,
+		detachFromPlaceholder = function(p4) --[[ Line: 435 ]]
+			-- upvalues: v1 (ref)
+			local v6 = v1
+			
+			if v6 ~= nil then
+				v6.detachFromPlaceholder(p4)
+			end
+		end,
+		destroy = function() --[[ Line: 441 ]]
+			-- upvalues: Flag (ref), v2 (ref), PlacementKindModule (upval), Sink (ref), v4 (ref), CompositionPlacement (ref), Frame (copy), ReparentableHost (upval), v1 (ref), Binding2 (copy)
+			if Flag then return end
+			Flag = true
+			local v6 = v2
+			
+			if v6 ~= nil then
+				local Destination = v6.destination
+				
+				if Destination.kind == PlacementKindModule.List then
+					Destination.sink.apply(nil)
+					
+					if Sink ~= nil and Sink.setMeasurementDependencies ~= nil then
+						Sink.setMeasurementDependencies(nil)
+					end
+					Sink = nil
+					v4 = nil
+					CompositionPlacement = nil
+				else
+					Destination.detachMeasurementDependency(Frame)
+					ReparentableHost.detach(Frame)
+					Frame.AnchorPoint = Vector2.zero
+					Frame.Position = UDim2.new()
+					Frame.Size = UDim2.new()
+					Frame.AutomaticSize = Enum.AutomaticSize.None
+				end
+			end
+			v2 = nil
+			v1 = nil
+			Binding2(false)
+			Frame.Parent = nil
+			Frame:Destroy()
 		end
 	}
 end

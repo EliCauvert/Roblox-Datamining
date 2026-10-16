@@ -1,206 +1,211 @@
-﻿local roactModule = require(game:GetService("CorePackages").Packages.Roact)
-local components = script.Parent.Parent.Parent.Components
-local dataConsumerModule = require(components.DataConsumer)
-local cellLabelModule = require(components.CellLabel)
-local bannerButtonModule = require(components.BannerButton)
-local lineGraphModule = require(components.LineGraph)
-local constantsModule = require(script.Parent.Parent.Parent.Constants)
-local lineWidth = constantsModule.GeneralFormatting.LineWidth
-local lineColor = constantsModule.GeneralFormatting.LineColor
-local chartHeaderNames = constantsModule.DataStoresFormatting.ChartHeaderNames
-local valueCellWidth = constantsModule.DataStoresFormatting.ValueCellWidth
-local cellPadding = constantsModule.DataStoresFormatting.CellPadding
-local expandArrowPadding = constantsModule.DataStoresFormatting.ExpandArrowPadding
-local headerFrameHeight = constantsModule.DataStoresFormatting.HeaderFrameHeight
-local entryFrameHeight = constantsModule.DataStoresFormatting.EntryFrameHeight
-local lineGraphHeight = constantsModule.GeneralFormatting.LineGraphHeight
-local noResultSearchStr = constantsModule.GeneralFormatting.NoResultSearchStr
-local convertTimeStampModule = require(script.Parent.Parent.Parent.Util.convertTimeStamp)
-local dataStoresChart = roactModule.Component:extend("DataStoresChart")
+﻿local RoactModule = require(game:GetService("CorePackages").Packages.Roact)
+local Components = script.Parent.Parent.Parent.Components
+local DataConsumerModule = require(Components.DataConsumer)
+local CellLabelModule = require(Components.CellLabel)
+local BannerButtonModule = require(Components.BannerButton)
+local LineGraphModule = require(Components.LineGraph)
+local ConstantsModule = require(script.Parent.Parent.Parent.Constants)
+local LineWidth = ConstantsModule.GeneralFormatting.LineWidth
+local LineColor = ConstantsModule.GeneralFormatting.LineColor
+local ChartHeaderNames = ConstantsModule.DataStoresFormatting.ChartHeaderNames
+local ValueCellWidth = ConstantsModule.DataStoresFormatting.ValueCellWidth
+local CellPadding = ConstantsModule.DataStoresFormatting.CellPadding
+local ExpandArrowPadding = ConstantsModule.DataStoresFormatting.ExpandArrowPadding
+local HeaderFrameHeight = ConstantsModule.DataStoresFormatting.HeaderFrameHeight
+local EntryFrameHeight = ConstantsModule.DataStoresFormatting.EntryFrameHeight
+local LineGraphHeight = ConstantsModule.GeneralFormatting.LineGraphHeight
+local NoResultSearchStr = ConstantsModule.GeneralFormatting.NoResultSearchStr
+local ConvertTimeStampModule = require(script.Parent.Parent.Parent.Util.convertTimeStamp)
+local DataStoresChart = RoactModule.Component:extend("DataStoresChart")
 
-local function getX(p1)
+local function getX(p1) --[[ Line: 30 ]]
 	return p1.time
 end
 
-local function getY(p1)
+local function getY(p1) --[[ Line: 34 ]]
 	return p1.value
 end
 
-local function stringFormatY(p1)
-	return math.ceil(p1)
+local function stringFormatY(Value: number): number --[[ Line: 38 ]]
+	return (math.ceil(Value))
 end
 
-function dataStoresChart.init(p1, p2)
-	local currentData, currentData_1 = p2.DataStoresData:getCurrentData()
+function DataStoresChart.init(p1, p2) --[[ Line: 42 ]]
+	local CurrentData, CurrentData2 = p2.DataStoresData:getCurrentData()
 	
-	function p3.getOnButtonPress(p3)
-		-- upvalues: p1 (ref)
-		return function(_, _)
-			-- upvalues: p1 (copy), p3 (ref)
-			p1:setState({ expandedEntry = p1.state.expandedEntry ~= p3 and p3 })
+	function p1.getOnButtonPress(ExpandedEntry) --[[ Line: 45 ]]
+		-- upvalues: p1 (copy)
+		return function(_, _) --[[ Line: 46 ]]
+			-- upvalues: p1 (upval), ExpandedEntry (copy)
+			p1:setState({
+				expandedEntry = p1.state.expandedEntry ~= ExpandedEntry and ExpandedEntry
+			})
 		end
 	end
 	
 	p1.state = {
 		expandedEntry = nil,
-		dataStoresData = currentData,
-		dataStoresDataCount = currentData_1
+		dataStoresData = CurrentData,
+		dataStoresDataCount = CurrentData2
 	}
 end
 
-function dataStoresChart.didMount(p1)
-	p1.statsConnector = p1.props.DataStoresData:Signal():Connect(function(p2, p3)
-		-- upvalues: p1 (ref)
-		p1:setState({ dataStoresData = p2, dataStoresDataCount = p3 })
+function DataStoresChart.didMount(p1) --[[ Line: 60 ]]
+	p1.statsConnector = p1.props.DataStoresData:Signal():Connect(function(DataStoresData, DataStoresDataCount) --[[ Line: 61 ]]
+		-- upvalues: p1 (copy)
+		p1:setState({
+			dataStoresData = DataStoresData,
+			dataStoresDataCount = DataStoresDataCount
+		})
 	end)
 end
 
-function dataStoresChart.willUnmount(p1)
+function DataStoresChart.willUnmount(p1) --[[ Line: 69 ]]
 	p1.statsConnector:Disconnect()
 	p1.statsConnector = nil
 end
 
-function dataStoresChart.render(p1)
-	-- upvalues: roactModule (ref), headerFrameHeight (ref), entryFrameHeight (ref), lineGraphHeight (ref), bannerButtonModule (ref), cellLabelModule (ref), valueCellWidth (ref), cellPadding (ref), expandArrowPadding (ref), lineWidth (ref), lineColor (ref), lineGraphModule (ref), getX (ref), getY (ref), convertTimeStampModule (ref), stringFormatY (ref), constantsModule (ref), noResultSearchStr (ref), chartHeaderNames (ref)
-	local t = {
-		UIListLayout = roactModule.createElement("UIListLayout", {
+function DataStoresChart.render(p1) --[[ Line: 74 ]]
+	-- upvalues: RoactModule (copy), HeaderFrameHeight (copy), EntryFrameHeight (copy), LineGraphHeight (copy), BannerButtonModule (copy), CellLabelModule (copy), ValueCellWidth (copy), CellPadding (copy), ExpandArrowPadding (copy), LineWidth (copy), LineColor (copy), LineGraphModule (copy), getX (copy), getY (copy), ConvertTimeStampModule (copy), stringFormatY (copy), ConstantsModule (copy), NoResultSearchStr (copy), ChartHeaderNames (copy)
+	local SearchTerm: string = p1.props.searchTerm
+	local Size = p1.props.size
+	local LayoutOrder = p1.props.layoutOrder
+	local ExpandedEntry = p1.state.expandedEntry
+	local config = {
+		UIListLayout = RoactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
 			HorizontalAlignment = Enum.HorizontalAlignment.Left,
 			VerticalAlignment = Enum.VerticalAlignment.Top,
 			SortOrder = Enum.SortOrder.LayoutOrder
 		})
 	}
-	local searchTerm = p1.props.searchTerm
-	local size = p1.props.size
-	local layoutOrder = p1.props.layoutOrder
-	local expandedEntry = p1.state.expandedEntry
-	local var1 = headerFrameHeight
-	local dataStoresData = p1.state.dataStoresData
-	local var2 = 0
-	local var3 = 1
+	local YOffset = HeaderFrameHeight
+	local DataStoresData = p1.state.dataStoresData
+	local Count = 0
+	local LayoutOrder1 = 1
 	
-	if dataStoresData then
-		for i, v in pairs(dataStoresData) do
-			var2 += 1
+	if DataStoresData then
+		for Text, value in pairs(DataStoresData) do
+			Count += 1
 			
-			if not searchTerm or string.find(i:lower(), searchTerm:lower()) ~= nil then
-				var3 += 1
-				local var4 = expandedEntry == i
-				t[i] = roactModule.createElement("Frame", {
+			if not SearchTerm or string.find(Text:lower(), SearchTerm:lower()) ~= nil then
+				LayoutOrder1 += 1
+				local IsExpandedEntryMatch = ExpandedEntry == Text
+				config[Text] = RoactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
-					Size = UDim2.new(1, 0, 0, if var4 then entryFrameHeight + lineGraphHeight else entryFrameHeight),
-					LayoutOrder = var3
+					Size = UDim2.new(1, 0, 0, IsExpandedEntryMatch and EntryFrameHeight + LineGraphHeight or EntryFrameHeight),
+					LayoutOrder = LayoutOrder1
 				}, {
-					DataButton = roactModule.createElement(bannerButtonModule, {
-						size = UDim2.new(1, 0, 0, entryFrameHeight),
+					DataButton = RoactModule.createElement(BannerButtonModule, {
+						size = UDim2.new(1, 0, 0, EntryFrameHeight),
 						pos = UDim2.new(),
-						isExpanded = var4,
-						onButtonPress = p1.getOnButtonPress(i)
+						isExpanded = IsExpandedEntryMatch,
+						onButtonPress = p1.getOnButtonPress(Text)
 					}, {
-						[i] = roactModule.createElement(cellLabelModule, {
-							text = i,
-							size = UDim2.new(1 - valueCellWidth, (-cellPadding) - expandArrowPadding, 1, 0),
-							pos = UDim2.new(0, cellPadding + expandArrowPadding, 0, 0)
+						[Text] = RoactModule.createElement(CellLabelModule, {
+							text = Text,
+							size = UDim2.new(1 - ValueCellWidth, -CellPadding - ExpandArrowPadding, 1, 0),
+							pos = UDim2.new(0, CellPadding + ExpandArrowPadding, 0, 0)
 						}),
-						Data = roactModule.createElement(cellLabelModule, {
-							text = v.dataSet:back().value,
-							size = UDim2.new(valueCellWidth, -cellPadding, 1, 0),
-							pos = UDim2.new(1 - valueCellWidth, cellPadding, 0, 0)
+						Data = RoactModule.createElement(CellLabelModule, {
+							text = value.dataSet:back().value,
+							size = UDim2.new(ValueCellWidth, -CellPadding, 1, 0),
+							pos = UDim2.new(1 - ValueCellWidth, CellPadding, 0, 0)
 						}),
-						VerticalLine = roactModule.createElement("Frame", {
+						VerticalLine = RoactModule.createElement("Frame", {
 							BorderSizePixel = 0,
-							Size = UDim2.new(0, lineWidth, 0, entryFrameHeight),
-							Position = UDim2.new(1 - valueCellWidth, 0, 0, 0),
-							BackgroundColor3 = lineColor
+							Size = UDim2.new(0, LineWidth, 0, EntryFrameHeight),
+							Position = UDim2.new(1 - ValueCellWidth, 0, 0, 0),
+							BackgroundColor3 = LineColor
 						}),
-						lowerHorizontalLine = roactModule.createElement("Frame", {
+						lowerHorizontalLine = RoactModule.createElement("Frame", {
 							BorderSizePixel = 0,
-							Size = UDim2.new(1, 0, 0, lineWidth),
+							Size = UDim2.new(1, 0, 0, LineWidth),
 							Position = UDim2.new(0, 0, 1, 0),
-							BackgroundColor3 = lineColor
+							BackgroundColor3 = LineColor
 						})
 					}),
-					Graph = var4 and roactModule.createElement(lineGraphModule, {
+					Graph = IsExpandedEntryMatch and RoactModule.createElement(LineGraphModule, {
 						axisLabelX = "Timestamp",
-						pos = UDim2.new(0, 0, 0, entryFrameHeight),
-						size = UDim2.new(1, 0, 1, -entryFrameHeight),
-						graphData = v.dataSet,
-						maxY = v.max,
-						minY = v.min,
+						pos = UDim2.new(0, 0, 0, EntryFrameHeight),
+						size = UDim2.new(1, 0, 1, -EntryFrameHeight),
+						graphData = value.dataSet,
+						maxY = value.max,
+						minY = value.min,
 						getX = getX,
 						getY = getY,
-						axisLabelY = i,
-						stringFormatX = convertTimeStampModule,
+						axisLabelY = Text,
+						stringFormatX = ConvertTimeStampModule,
 						stringFormatY = stringFormatY
 					})
 				})
-				var1 += entryFrameHeight
+				YOffset += EntryFrameHeight
 			end
 		end
 	end
-	if var3 == 1 then
-		if var2 == 0 then
-			return roactModule.createElement("TextLabel", {
+	if LayoutOrder1 == 1 then
+		if Count == 0 then
+			return RoactModule.createElement("TextLabel", {
 				Text = "Initialize DataStoresService to view DataStore Budget.",
 				BackgroundTransparency = 1,
-				Size = size,
-				TextColor3 = constantsModule.Color.Text,
-				LayoutOrder = layoutOrder
+				Size = Size,
+				TextColor3 = ConstantsModule.Color.Text,
+				LayoutOrder = LayoutOrder
 			})
 		end
-		t.emptyResult = roactModule.createElement("TextLabel", {
+		config.emptyResult = RoactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
-			Size = size,
-			Text = string.format(noResultSearchStr, searchTerm),
-			TextColor3 = constantsModule.Color.Text
+			Size = Size,
+			Text = string.format(NoResultSearchStr, SearchTerm),
+			TextColor3 = ConstantsModule.Color.Text
 		})
 	end
-	return roactModule.createElement("Frame", {
+	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		Size = size,
-		LayoutOrder = layoutOrder
+		Size = Size,
+		LayoutOrder = LayoutOrder
 	}, {
-		Header = roactModule.createElement("Frame", {
+		Header = RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 1,
-			Size = UDim2.new(1, 0, 0, headerFrameHeight)
+			Size = UDim2.new(1, 0, 0, HeaderFrameHeight)
 		}, {
-			[chartHeaderNames[1]] = roactModule.createElement(cellLabelModule, {
-				text = chartHeaderNames[1],
-				size = UDim2.new(1 - valueCellWidth, (-cellPadding) - expandArrowPadding, 1, 0),
-				pos = UDim2.new(0, cellPadding + expandArrowPadding, 0, 0)
+			[ChartHeaderNames[1]] = RoactModule.createElement(CellLabelModule, {
+				text = ChartHeaderNames[1],
+				size = UDim2.new(1 - ValueCellWidth, -CellPadding - ExpandArrowPadding, 1, 0),
+				pos = UDim2.new(0, CellPadding + ExpandArrowPadding, 0, 0)
 			}),
-			[chartHeaderNames[2]] = roactModule.createElement(cellLabelModule, {
-				text = chartHeaderNames[2],
-				size = UDim2.new(valueCellWidth, -cellPadding, 1, 0),
-				pos = UDim2.new(1 - valueCellWidth, cellPadding, 0, 0)
+			[ChartHeaderNames[2]] = RoactModule.createElement(CellLabelModule, {
+				text = ChartHeaderNames[2],
+				size = UDim2.new(ValueCellWidth, -CellPadding, 1, 0),
+				pos = UDim2.new(1 - ValueCellWidth, CellPadding, 0, 0)
 			}),
-			upperHorizontalLine = roactModule.createElement("Frame", {
+			upperHorizontalLine = RoactModule.createElement("Frame", {
 				BorderSizePixel = 0,
-				Size = UDim2.new(1, 0, 0, lineWidth),
-				BackgroundColor3 = lineColor
+				Size = UDim2.new(1, 0, 0, LineWidth),
+				BackgroundColor3 = LineColor
 			}),
-			vertical = roactModule.createElement("Frame", {
+			vertical = RoactModule.createElement("Frame", {
 				BorderSizePixel = 0,
-				Size = UDim2.new(0, lineWidth, 1, 0),
-				Position = UDim2.new(1 - valueCellWidth, 0, 0, 0),
-				BackgroundColor3 = lineColor
+				Size = UDim2.new(0, LineWidth, 1, 0),
+				Position = UDim2.new(1 - ValueCellWidth, 0, 0, 0),
+				BackgroundColor3 = LineColor
 			}),
-			lowerHorizontalLine = roactModule.createElement("Frame", {
+			lowerHorizontalLine = RoactModule.createElement("Frame", {
 				BorderSizePixel = 0,
-				Size = UDim2.new(1, 0, 0, lineWidth),
+				Size = UDim2.new(1, 0, 0, LineWidth),
 				Position = UDim2.new(0, 0, 1, 0),
-				BackgroundColor3 = lineColor
+				BackgroundColor3 = LineColor
 			})
 		}),
-		mainFrame = roactModule.createElement("ScrollingFrame", {
+		mainFrame = RoactModule.createElement("ScrollingFrame", {
 			ScrollBarThickness = 5,
 			BackgroundTransparency = 1,
-			Position = UDim2.new(0, 0, 0, headerFrameHeight),
-			Size = UDim2.new(1, 0, 1, -headerFrameHeight),
-			CanvasSize = UDim2.new(1, 0, 0, var1)
-		}, t)
+			Position = UDim2.new(0, 0, 0, HeaderFrameHeight),
+			Size = UDim2.new(1, 0, 1, -HeaderFrameHeight),
+			CanvasSize = UDim2.new(1, 0, 0, YOffset)
+		}, config)
 	})
 end
 
-return dataConsumerModule(dataStoresChart, "DataStoresData")
+return DataConsumerModule(DataStoresChart, "DataStoresData")

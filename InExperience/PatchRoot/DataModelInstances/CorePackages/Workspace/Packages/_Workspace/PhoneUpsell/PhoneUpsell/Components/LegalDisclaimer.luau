@@ -1,111 +1,111 @@
-﻿local parent = script:FindFirstAncestor("PhoneUpsell").Parent
-local reactModule = require(parent.React)
-local UIBloxModule = require(parent.UIBlox)
-local foundationModule = require(parent.Foundation)
-local checkbox = foundationModule.Checkbox
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local linkButton = UIBloxModule.App.Button.LinkButton
-local useStyle = UIBloxModule.Core.Style.useStyle
+﻿local Parent = script:FindFirstAncestor("PhoneUpsell").Parent
+local ReactModule = require(Parent.React)
+local UIBloxModule = require(Parent.UIBlox)
+local FoundationModule = require(Parent.Foundation)
+local Checkbox = FoundationModule.Checkbox
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local LinkButton = UIBloxModule.App.Button.LinkButton
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
 
-return function(p1)
-	-- upvalues: useStyle (ref), reactModule (ref), checkbox (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), linkButton (ref)
-	local var1 = useStyle()
-	local baseSize = var1.Font.BaseSize
-	local relativeSize = var1.Font.CaptionHeader.RelativeSize
-	local size150 = var1.Tokens.Size.Size_150
+return function(Frame) --[[ Line: 32 ]]
+	-- upvalues: UseStyleFunction (copy), ReactModule (copy), Checkbox (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), LinkButton (copy)
+	local UseStyleResult = UseStyleFunction()
+	local BaseSize = UseStyleResult.Font.BaseSize
+	local RelativeSize = UseStyleResult.Font.CaptionHeader.RelativeSize
+	local Size150: number = UseStyleResult.Tokens.Size.Size_150
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		AutomaticSize = Enum.AutomaticSize.Y,
 		Size = UDim2.new(1, 0, 0, 0),
-		LayoutOrder = p1.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		ListLayout = reactModule.createElement("UIListLayout", {
+		ListLayout = ReactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
-			Padding = UDim.new(0, var1.Tokens.Size.Size_150)
+			Padding = UDim.new(0, UseStyleResult.Tokens.Size.Size_150)
 		}),
-		LegalTextContainer = if p1.showLegalText and p1.showLegalTextCheckbox then reactModule.createElement("Frame", {
+		LegalTextContainer = if Frame.showLegalText and Frame.showLegalTextCheckbox then ReactModule.createElement("Frame", {
 			LayoutOrder = 3,
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y
 		}, {
-			UIListLayout = reactModule.createElement("UIListLayout", {
+			UIListLayout = ReactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Horizontal,
 				HorizontalAlignment = Enum.HorizontalAlignment.Center,
 				VerticalAlignment = Enum.VerticalAlignment.Center,
-				Padding = UDim.new(0, size150)
+				Padding = UDim.new(0, Size150)
 			}),
-			LegalCheckbox = reactModule.createElement(checkbox, {
+			LegalCheckbox = ReactModule.createElement(Checkbox, {
 				label = "",
-				onActivated = p1.setLegalTextChecked,
-				isChecked = p1.legalTextChecked
+				onActivated = Frame.setLegalTextChecked,
+				isChecked = Frame.legalTextChecked
 			}),
-			LegalText = reactModule.createElement("TextLabel", {
+			LegalText = ReactModule.createElement("TextLabel", {
 				BackgroundTransparency = 1,
 				TextWrapped = true,
-				Text = p1.legalText,
-				TextSize = baseSize * relativeSize,
-				TextColor3 = var1.Theme.TextDefault.Color,
-				TextTransparency = var1.Theme.TextDefault.Transparency,
-				Font = if foundationFontFaceMigration then nil else var1.Font.Body.Font,
-				FontFace = if foundationFontFaceMigration then normalizeFontFace(var1.Tokens.Typography.BodyLarge.Font) else nil,
+				Text = Frame.legalText,
+				TextSize = BaseSize * RelativeSize,
+				TextColor3 = UseStyleResult.Theme.TextDefault.Color,
+				TextTransparency = UseStyleResult.Theme.TextDefault.Transparency,
+				Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.Body.Font,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font) else nil,
 				TextXAlignment = Enum.TextXAlignment.Left,
-				Size = UDim2.new(1, -(26 + size150), 0, 0),
+				Size = UDim2.new(1, -(26 + Size150), 0, 0),
 				AutomaticSize = Enum.AutomaticSize.Y
 			})
-		}) else p1.showLegalText and reactModule.createElement("TextLabel", {
+		}) else Frame.showLegalText and ReactModule.createElement("TextLabel", {
 			LayoutOrder = 3,
 			BackgroundTransparency = 1,
 			TextWrapped = true,
-			Text = p1.legalText,
-			TextSize = baseSize * relativeSize,
-			TextColor3 = var1.Theme.TextDefault.Color,
-			TextTransparency = var1.Theme.TextDefault.Transparency,
-			Font = if foundationFontFaceMigration then nil else var1.Font.Body.Font,
-			FontFace = if foundationFontFaceMigration then normalizeFontFace(var1.Tokens.Typography.BodyLarge.Font) else nil,
+			Text = Frame.legalText,
+			TextSize = BaseSize * RelativeSize,
+			TextColor3 = UseStyleResult.Theme.TextDefault.Color,
+			TextTransparency = UseStyleResult.Theme.TextDefault.Transparency,
+			Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.Body.Font,
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font) else nil,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			Size = UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y
 		}),
-		LegalButtonsContainer = p1.showLegalButtons and reactModule.createElement("Frame", {
+		LegalButtonsContainer = Frame.showLegalButtons and ReactModule.createElement("Frame", {
 			LayoutOrder = 4,
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y
 		}, {
-			UIListLayout = reactModule.createElement("UIListLayout", {
+			UIListLayout = ReactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Horizontal,
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				HorizontalAlignment = Enum.HorizontalAlignment.Center,
 				VerticalAlignment = Enum.VerticalAlignment.Center,
 				Padding = UDim.new(0, 5)
 			}),
-			TermsOfUseButton = reactModule.createElement(linkButton, {
+			TermsOfUseButton = ReactModule.createElement(LinkButton, {
 				layoutOrder = 5,
 				fontStyle = "CaptionBody",
-				text = p1.termsOfUse,
-				onActivated = p1.onTermsOfUseClick
+				text = Frame.termsOfUse,
+				onActivated = Frame.onTermsOfUseClick
 			}),
-			TextButtonDivider = reactModule.createElement("TextLabel", {
+			TextButtonDivider = ReactModule.createElement("TextLabel", {
 				LayoutOrder = 6,
 				BackgroundTransparency = 1,
 				Text = "-",
 				TextWrapped = true,
-				TextSize = baseSize * relativeSize,
-				TextColor3 = var1.Theme.TextDefault.Color,
-				TextTransparency = var1.Theme.TextDefault.Transparency,
-				Font = if foundationFontFaceMigration then nil else var1.Font.Body.Font,
-				FontFace = if foundationFontFaceMigration then normalizeFontFace(var1.Tokens.Typography.BodyLarge.Font) else nil,
+				TextSize = BaseSize * RelativeSize,
+				TextColor3 = UseStyleResult.Theme.TextDefault.Color,
+				TextTransparency = UseStyleResult.Theme.TextDefault.Transparency,
+				Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.Body.Font,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font) else nil,
 				TextXAlignment = Enum.TextXAlignment.Center,
 				AutomaticSize = Enum.AutomaticSize.XY
 			}),
-			PrivacyPolicyButton = reactModule.createElement(linkButton, {
+			PrivacyPolicyButton = ReactModule.createElement(LinkButton, {
 				layoutOrder = 7,
 				fontStyle = "CaptionBody",
-				text = p1.privacyPolicy,
-				onActivated = p1.onPrivacyPolicyClick
+				text = Frame.privacyPolicy,
+				onActivated = Frame.onPrivacyPolicyClick
 			})
 		})
 	})

@@ -1,592 +1,592 @@
-﻿local socialLuaAnalyticsModule = require(script.Parent.Parent.Parent.SocialLuaAnalytics)
-local supportedTelemetryBackends = socialLuaAnalyticsModule.Analytics.Enums.SupportedTelemetryBackends
-local eventTypes = socialLuaAnalyticsModule.Analytics.Enums.EventTypes
-local contexts = socialLuaAnalyticsModule.Analytics.Enums.Contexts
-local eventNamesModule = require(script.Parent.EventNames)
+﻿local SocialLuaAnalyticsModule = require(script.Parent.Parent.Parent.SocialLuaAnalytics)
+local SupportedTelemetryBackends = SocialLuaAnalyticsModule.Analytics.Enums.SupportedTelemetryBackends
+local EventTypes = SocialLuaAnalyticsModule.Analytics.Enums.EventTypes
+local Contexts = SocialLuaAnalyticsModule.Analytics.Enums.Contexts
+local EventNamesModule = require(script.Parent.EventNames)
 
 return {
 	defaults = {
 		links = "",
 		throttlingThousandths = game:DefineFastInt("CapturesTelemetryThrottlingThousandths", 1000)
 	},
-	[eventNamesModule.CapturesActivatedInGameMenu] = {
+	[EventNamesModule.CapturesActivatedInGameMenu] = {
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.CapturesActivatedChrome] = {
+	[EventNamesModule.CapturesActivatedChrome] = {
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.CapturesCarouselOpened] = {
+	[EventNamesModule.CapturesCarouselOpened] = {
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.CapturesCarouselVideoExpanded] = {
+	[EventNamesModule.CapturesCarouselVideoExpanded] = {
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.CapturesCarouselVideoMuteButtonActivated] = {
+	[EventNamesModule.CapturesCarouselVideoMuteButtonActivated] = {
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.CapturesCarouselVideoShrank] = {
+	[EventNamesModule.CapturesCarouselVideoShrank] = {
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.CapturesDeactivatedInGameMenu] = {
+	[EventNamesModule.CapturesDeactivatedInGameMenu] = {
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.CapturesDeactivatedChrome] = {
+	[EventNamesModule.CapturesDeactivatedChrome] = {
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.CapturesEntrypointActivated] = {
+	[EventNamesModule.CapturesEntrypointActivated] = {
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.RobloxTelemetryCounter,
+				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					entrypointType = function(p1)
+					entrypointType = function(p1) --[[ Line: 77 ]]
 						return p1
 					end
 				}
 			}
 		}
 	},
-	[eventNamesModule.CapturesEntrypointLatency] = {
+	[EventNamesModule.CapturesEntrypointLatency] = {
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryStat }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryStat }
 		}
 	},
-	[eventNamesModule.CapturesLegacyVideoRecordingDuration] = {
+	[EventNamesModule.CapturesLegacyVideoRecordingDuration] = {
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryStat }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryStat }
 		}
 	},
-	[eventNamesModule.CapturesPageOpenedInGameMenu] = {
+	[EventNamesModule.CapturesPageOpenedInGameMenu] = {
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.CapturesShareFromNonStandardServer] = {
+	[EventNamesModule.CapturesShareFromNonStandardServer] = {
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.CapturesShareLatency] = {
+	[EventNamesModule.CapturesShareLatency] = {
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.RobloxTelemetryStat,
+				type = SupportedTelemetryBackends.RobloxTelemetryStat,
 				dynamicCustomFields = {
-					externalShareSource = function(p1)
+					externalShareSource = function(p1) --[[ Line: 117 ]]
 						return p1
 					end
 				}
 			}
 		}
 	},
-	[eventNamesModule.CapturesShareToastButtonActivated] = {
+	[EventNamesModule.CapturesShareToastButtonActivated] = {
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.CapturesVideoCaptureStarted] = {
+	[EventNamesModule.CapturesVideoCaptureStarted] = {
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.RobloxTelemetryCounter,
+				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					triggerType = function(p1)
+					triggerType = function(p1) --[[ Line: 136 ]]
 						return p1
 					end
 				}
 			}
 		}
 	},
-	[eventNamesModule.CapturesVideoCaptureStopped] = {
+	[EventNamesModule.CapturesVideoCaptureStopped] = {
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.RobloxTelemetryCounter,
+				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					triggerType = function(p1)
+					triggerType = function(p1) --[[ Line: 148 ]]
 						return p1
 					end
 				}
 			}
 		}
 	},
-	[eventNamesModule.ShareCaptureGenerateLinkFailed] = {
+	[EventNamesModule.ShareCaptureGenerateLinkFailed] = {
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.ShareCapturePromptAccepted] = {
+	[EventNamesModule.ShareCapturePromptAccepted] = {
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.ShareCapturePromptRejected] = {
+	[EventNamesModule.ShareCapturePromptRejected] = {
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.CapturePermissionsPromptAccepted] = {
+	[EventNamesModule.CapturePermissionsPromptAccepted] = {
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.CapturePermissionsPromptRejected] = {
+	[EventNamesModule.CapturePermissionsPromptRejected] = {
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.CapturePermissionsPromptViewed] = {
+	[EventNamesModule.CapturePermissionsPromptViewed] = {
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.XExpEditingFlowDescriptionEdited] = {
+	[EventNamesModule.XExpEditingFlowDescriptionEdited] = {
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function()
-					-- upvalues: eventTypes (ref)
-					return eventTypes.ButtonClick
+				type = SupportedTelemetryBackends.EventIngest,
+				overrideName = function() --[[ Line: 201 ]]
+					-- upvalues: EventTypes (copy)
+					return EventTypes.ButtonClick
 				end,
 				staticCustomFields = {
-					eventContext = contexts.Moments,
-					action = eventNamesModule.XExpEditingFlowDescriptionEdited
+					eventContext = Contexts.Moments,
+					action = EventNamesModule.XExpEditingFlowDescriptionEdited
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p1)
+					creationSessionId = function(p1) --[[ Line: 209 ]]
 						return p1
 					end
 				}
 			}
 		}
 	},
-	[eventNamesModule.XExpEditingFlowGalleryItemSelected] = {
+	[EventNamesModule.XExpEditingFlowGalleryItemSelected] = {
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function()
-					-- upvalues: eventTypes (ref)
-					return eventTypes.ButtonClick
+				type = SupportedTelemetryBackends.EventIngest,
+				overrideName = function() --[[ Line: 220 ]]
+					-- upvalues: EventTypes (copy)
+					return EventTypes.ButtonClick
 				end,
 				staticCustomFields = {
-					eventContext = contexts.Moments,
-					action = eventNamesModule.XExpEditingFlowGalleryItemSelected
+					eventContext = Contexts.Moments,
+					action = EventNamesModule.XExpEditingFlowGalleryItemSelected
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p1)
+					creationSessionId = function(p1) --[[ Line: 228 ]]
 						return p1
 					end
 				}
 			}
 		}
 	},
-	[eventNamesModule.XExpEditingFlowGalleryNoCapturesAvailable] = {
+	[EventNamesModule.XExpEditingFlowGalleryNoCapturesAvailable] = {
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function()
-					-- upvalues: eventTypes (ref)
-					return eventTypes.UserSeen
+				type = SupportedTelemetryBackends.EventIngest,
+				overrideName = function() --[[ Line: 239 ]]
+					-- upvalues: EventTypes (copy)
+					return EventTypes.UserSeen
 				end,
 				staticCustomFields = {
-					eventContext = contexts.Moments,
-					action = eventNamesModule.XExpEditingFlowGalleryNoCapturesAvailable
+					eventContext = Contexts.Moments,
+					action = EventNamesModule.XExpEditingFlowGalleryNoCapturesAvailable
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p1)
+					creationSessionId = function(p1) --[[ Line: 247 ]]
 						return p1
 					end
 				}
 			}
 		}
 	},
-	[eventNamesModule.XExpEditingFlowMusicBackButtonPressed] = {
+	[EventNamesModule.XExpEditingFlowMusicBackButtonPressed] = {
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function()
-					-- upvalues: eventTypes (ref)
-					return eventTypes.ButtonClick
+				type = SupportedTelemetryBackends.EventIngest,
+				overrideName = function() --[[ Line: 258 ]]
+					-- upvalues: EventTypes (copy)
+					return EventTypes.ButtonClick
 				end,
 				staticCustomFields = {
-					eventContext = contexts.Moments,
-					action = eventNamesModule.XExpEditingFlowMusicBackButtonPressed
+					eventContext = Contexts.Moments,
+					action = EventNamesModule.XExpEditingFlowMusicBackButtonPressed
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p1)
+					creationSessionId = function(p1) --[[ Line: 266 ]]
 						return p1
 					end
 				}
 			}
 		}
 	},
-	[eventNamesModule.XExpEditingFlowMusicButtonPressed] = {
+	[EventNamesModule.XExpEditingFlowMusicButtonPressed] = {
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function()
-					-- upvalues: eventTypes (ref)
-					return eventTypes.ButtonClick
+				type = SupportedTelemetryBackends.EventIngest,
+				overrideName = function() --[[ Line: 277 ]]
+					-- upvalues: EventTypes (copy)
+					return EventTypes.ButtonClick
 				end,
 				staticCustomFields = {
-					eventContext = contexts.Moments,
-					action = eventNamesModule.XExpEditingFlowMusicButtonPressed
+					eventContext = Contexts.Moments,
+					action = EventNamesModule.XExpEditingFlowMusicButtonPressed
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p1)
+					creationSessionId = function(p1) --[[ Line: 285 ]]
 						return p1
 					end
 				}
 			}
 		}
 	},
-	[eventNamesModule.XExpEditingFlowMusicDoneButtonPressed] = {
+	[EventNamesModule.XExpEditingFlowMusicDoneButtonPressed] = {
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function()
-					-- upvalues: eventTypes (ref)
-					return eventTypes.ButtonClick
+				type = SupportedTelemetryBackends.EventIngest,
+				overrideName = function() --[[ Line: 296 ]]
+					-- upvalues: EventTypes (copy)
+					return EventTypes.ButtonClick
 				end,
 				staticCustomFields = {
-					eventContext = contexts.Moments,
-					action = eventNamesModule.XExpEditingFlowMusicDoneButtonPressed
+					eventContext = Contexts.Moments,
+					action = EventNamesModule.XExpEditingFlowMusicDoneButtonPressed
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p1)
+					creationSessionId = function(p1) --[[ Line: 304 ]]
 						return p1
 					end
 				}
 			}
 		}
 	},
-	[eventNamesModule.XExpEditingFlowMusicSelected] = {
+	[EventNamesModule.XExpEditingFlowMusicSelected] = {
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function()
-					-- upvalues: eventTypes (ref)
-					return eventTypes.ButtonClick
+				type = SupportedTelemetryBackends.EventIngest,
+				overrideName = function() --[[ Line: 315 ]]
+					-- upvalues: EventTypes (copy)
+					return EventTypes.ButtonClick
 				end,
 				staticCustomFields = {
-					eventContext = contexts.Moments,
-					action = eventNamesModule.XExpEditingFlowMusicSelected
+					eventContext = Contexts.Moments,
+					action = EventNamesModule.XExpEditingFlowMusicSelected
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p1)
+					creationSessionId = function(p1) --[[ Line: 323 ]]
 						return p1
 					end,
-					musicAssetId = function(value)
-						return value
+					musicAssetId = function(p1) --[[ Line: 326 ]]
+						return p1
 					end
 				}
 			}
 		}
 	},
-	[eventNamesModule.XExpEditingFlowNextButtonPressed] = {
+	[EventNamesModule.XExpEditingFlowNextButtonPressed] = {
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function()
-					-- upvalues: eventTypes (ref)
-					return eventTypes.ButtonClick
+				type = SupportedTelemetryBackends.EventIngest,
+				overrideName = function() --[[ Line: 337 ]]
+					-- upvalues: EventTypes (copy)
+					return EventTypes.ButtonClick
 				end,
 				staticCustomFields = {
-					eventContext = contexts.Moments,
-					action = eventNamesModule.XExpEditingFlowNextButtonPressed
+					eventContext = Contexts.Moments,
+					action = EventNamesModule.XExpEditingFlowNextButtonPressed
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p1)
+					creationSessionId = function(p1) --[[ Line: 345 ]]
 						return p1
 					end,
-					editFlowState = function(p1)
+					editFlowState = function(p1) --[[ Line: 348 ]]
 						return p1
 					end
 				}
 			}
 		}
 	},
-	[eventNamesModule.XExpEditingFlowReturnButtonPressed] = {
+	[EventNamesModule.XExpEditingFlowReturnButtonPressed] = {
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function()
-					-- upvalues: eventTypes (ref)
-					return eventTypes.ButtonClick
+				type = SupportedTelemetryBackends.EventIngest,
+				overrideName = function() --[[ Line: 359 ]]
+					-- upvalues: EventTypes (copy)
+					return EventTypes.ButtonClick
 				end,
 				staticCustomFields = {
-					eventContext = contexts.Moments,
-					action = eventNamesModule.XExpEditingFlowReturnButtonPressed
+					eventContext = Contexts.Moments,
+					action = EventNamesModule.XExpEditingFlowReturnButtonPressed
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p1)
+					creationSessionId = function(p1) --[[ Line: 367 ]]
 						return p1
 					end,
-					editFlowState = function(p1)
+					editFlowState = function(p1) --[[ Line: 370 ]]
 						return p1
 					end
 				}
 			}
 		}
 	},
-	[eventNamesModule.XExpEditingFlowTextOverlayBackButtonPressed] = {
+	[EventNamesModule.XExpEditingFlowTextOverlayBackButtonPressed] = {
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function()
-					-- upvalues: eventTypes (ref)
-					return eventTypes.ButtonClick
+				type = SupportedTelemetryBackends.EventIngest,
+				overrideName = function() --[[ Line: 381 ]]
+					-- upvalues: EventTypes (copy)
+					return EventTypes.ButtonClick
 				end,
 				staticCustomFields = {
-					eventContext = contexts.Moments,
-					action = eventNamesModule.XExpEditingFlowTextOverlayBackButtonPressed
+					eventContext = Contexts.Moments,
+					action = EventNamesModule.XExpEditingFlowTextOverlayBackButtonPressed
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p1)
+					creationSessionId = function(p1) --[[ Line: 389 ]]
 						return p1
 					end
 				}
 			}
 		}
 	},
-	[eventNamesModule.XExpEditingFlowTextOverlayButtonPressed] = {
+	[EventNamesModule.XExpEditingFlowTextOverlayButtonPressed] = {
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function()
-					-- upvalues: eventTypes (ref)
-					return eventTypes.ButtonClick
+				type = SupportedTelemetryBackends.EventIngest,
+				overrideName = function() --[[ Line: 400 ]]
+					-- upvalues: EventTypes (copy)
+					return EventTypes.ButtonClick
 				end,
 				staticCustomFields = {
-					eventContext = contexts.Moments,
-					action = eventNamesModule.XExpEditingFlowTextOverlayButtonPressed
+					eventContext = Contexts.Moments,
+					action = EventNamesModule.XExpEditingFlowTextOverlayButtonPressed
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p1)
+					creationSessionId = function(p1) --[[ Line: 408 ]]
 						return p1
 					end
 				}
 			}
 		}
 	},
-	[eventNamesModule.XExpEditingFlowTextOverlayDoneButtonPressed] = {
+	[EventNamesModule.XExpEditingFlowTextOverlayDoneButtonPressed] = {
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function()
-					-- upvalues: eventTypes (ref)
-					return eventTypes.ButtonClick
+				type = SupportedTelemetryBackends.EventIngest,
+				overrideName = function() --[[ Line: 419 ]]
+					-- upvalues: EventTypes (copy)
+					return EventTypes.ButtonClick
 				end,
 				staticCustomFields = {
-					eventContext = contexts.Moments,
-					action = eventNamesModule.XExpEditingFlowTextOverlayDoneButtonPressed
+					eventContext = Contexts.Moments,
+					action = EventNamesModule.XExpEditingFlowTextOverlayDoneButtonPressed
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p1)
+					creationSessionId = function(p1) --[[ Line: 427 ]]
 						return p1
 					end
 				}
 			}
 		}
 	},
-	[eventNamesModule.XExpEditingFlowTrimBackButtonPressed] = {
+	[EventNamesModule.XExpEditingFlowTrimBackButtonPressed] = {
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function()
-					-- upvalues: eventTypes (ref)
-					return eventTypes.ButtonClick
+				type = SupportedTelemetryBackends.EventIngest,
+				overrideName = function() --[[ Line: 438 ]]
+					-- upvalues: EventTypes (copy)
+					return EventTypes.ButtonClick
 				end,
 				staticCustomFields = {
-					eventContext = contexts.Moments,
-					action = eventNamesModule.XExpEditingFlowTrimBackButtonPressed
+					eventContext = Contexts.Moments,
+					action = EventNamesModule.XExpEditingFlowTrimBackButtonPressed
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p1)
+					creationSessionId = function(p1) --[[ Line: 446 ]]
 						return p1
 					end
 				}
 			}
 		}
 	},
-	[eventNamesModule.XExpEditingFlowTrimButtonPressed] = {
+	[EventNamesModule.XExpEditingFlowTrimButtonPressed] = {
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function()
-					-- upvalues: eventTypes (ref)
-					return eventTypes.ButtonClick
+				type = SupportedTelemetryBackends.EventIngest,
+				overrideName = function() --[[ Line: 457 ]]
+					-- upvalues: EventTypes (copy)
+					return EventTypes.ButtonClick
 				end,
 				staticCustomFields = {
-					eventContext = contexts.Moments,
-					action = eventNamesModule.XExpEditingFlowTrimButtonPressed
+					eventContext = Contexts.Moments,
+					action = EventNamesModule.XExpEditingFlowTrimButtonPressed
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p1)
+					creationSessionId = function(p1) --[[ Line: 465 ]]
 						return p1
 					end
 				}
 			}
 		}
 	},
-	[eventNamesModule.XExpEditingFlowTrimDoneButtonPressed] = {
+	[EventNamesModule.XExpEditingFlowTrimDoneButtonPressed] = {
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function()
-					-- upvalues: eventTypes (ref)
-					return eventTypes.ButtonClick
+				type = SupportedTelemetryBackends.EventIngest,
+				overrideName = function() --[[ Line: 476 ]]
+					-- upvalues: EventTypes (copy)
+					return EventTypes.ButtonClick
 				end,
 				staticCustomFields = {
-					eventContext = contexts.Moments,
-					action = eventNamesModule.XExpEditingFlowTrimDoneButtonPressed
+					eventContext = Contexts.Moments,
+					action = EventNamesModule.XExpEditingFlowTrimDoneButtonPressed
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p1)
+					creationSessionId = function(p1) --[[ Line: 484 ]]
 						return p1
 					end
 				}
 			}
 		}
 	},
-	[eventNamesModule.XExpMomentCreationStarted] = {
+	[EventNamesModule.XExpMomentCreationStarted] = {
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function()
-					-- upvalues: eventTypes (ref)
-					return eventTypes.ButtonClick
+				type = SupportedTelemetryBackends.EventIngest,
+				overrideName = function() --[[ Line: 495 ]]
+					-- upvalues: EventTypes (copy)
+					return EventTypes.ButtonClick
 				end,
 				staticCustomFields = {
-					eventContext = contexts.Moments,
-					action = eventNamesModule.XExpMomentCreationStarted
+					eventContext = Contexts.Moments,
+					action = EventNamesModule.XExpMomentCreationStarted
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p1)
+					creationSessionId = function(p1) --[[ Line: 503 ]]
 						return p1
 					end
 				}
 			}
 		}
 	},
-	[eventNamesModule.XExpMomentsEditingFlowContinueToDescriptionButtonPressed] = {
+	[EventNamesModule.XExpMomentsEditingFlowContinueToDescriptionButtonPressed] = {
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function()
-					-- upvalues: eventTypes (ref)
-					return eventTypes.ButtonClick
+				type = SupportedTelemetryBackends.EventIngest,
+				overrideName = function() --[[ Line: 514 ]]
+					-- upvalues: EventTypes (copy)
+					return EventTypes.ButtonClick
 				end,
 				staticCustomFields = {
-					eventContext = contexts.Moments,
-					action = eventNamesModule.XExpMomentsEditingFlowContinueToDescriptionButtonPressed
+					eventContext = Contexts.Moments,
+					action = EventNamesModule.XExpMomentsEditingFlowContinueToDescriptionButtonPressed
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p1)
+					creationSessionId = function(p1) --[[ Line: 522 ]]
 						return p1
 					end
 				}
 			}
 		}
 	},
-	[eventNamesModule.XExpMomentsEditingFlowContinueToEditButtonPressed] = {
+	[EventNamesModule.XExpMomentsEditingFlowContinueToEditButtonPressed] = {
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function()
-					-- upvalues: eventTypes (ref)
-					return eventTypes.ButtonClick
+				type = SupportedTelemetryBackends.EventIngest,
+				overrideName = function() --[[ Line: 533 ]]
+					-- upvalues: EventTypes (copy)
+					return EventTypes.ButtonClick
 				end,
 				staticCustomFields = {
-					eventContext = contexts.Moments,
-					action = eventNamesModule.XExpMomentsEditingFlowContinueToEditButtonPressed
+					eventContext = Contexts.Moments,
+					action = EventNamesModule.XExpMomentsEditingFlowContinueToEditButtonPressed
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p1)
+					creationSessionId = function(p1) --[[ Line: 541 ]]
 						return p1
 					end
 				}
 			}
 		}
 	},
-	[eventNamesModule.XExpMomentsEditingFlowExited] = {
+	[EventNamesModule.XExpMomentsEditingFlowExited] = {
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function()
-					-- upvalues: eventTypes (ref)
-					return eventTypes.UserSeen
+				type = SupportedTelemetryBackends.EventIngest,
+				overrideName = function() --[[ Line: 552 ]]
+					-- upvalues: EventTypes (copy)
+					return EventTypes.UserSeen
 				end,
 				staticCustomFields = {
-					eventContext = contexts.Moments,
-					action = eventNamesModule.XExpMomentsEditingFlowExited
+					eventContext = Contexts.Moments,
+					action = EventNamesModule.XExpMomentsEditingFlowExited
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p1)
+					creationSessionId = function(p1) --[[ Line: 560 ]]
 						return p1
 					end
 				}
 			}
 		}
 	},
-	[eventNamesModule.XExpMomentsEditingFlowPublished] = {
+	[EventNamesModule.XExpMomentsEditingFlowPublished] = {
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function()
-					-- upvalues: eventTypes (ref)
-					return eventTypes.UserSeen
+				type = SupportedTelemetryBackends.EventIngest,
+				overrideName = function() --[[ Line: 571 ]]
+					-- upvalues: EventTypes (copy)
+					return EventTypes.UserSeen
 				end,
 				staticCustomFields = {
-					eventContext = contexts.Moments,
-					action = eventNamesModule.XExpMomentsEditingFlowPublished
+					eventContext = Contexts.Moments,
+					action = EventNamesModule.XExpMomentsEditingFlowPublished
 				},
 				dynamicCustomFields = {
-					creationSessionId = function(p1)
+					creationSessionId = function(p1) --[[ Line: 579 ]]
 						return p1
 					end
 				}
 			}
 		}
 	},
-	[eventNamesModule.CapturesCreateMomentToastViewed] = {
+	[EventNamesModule.CapturesCreateMomentToastViewed] = {
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function()
-					-- upvalues: eventTypes (ref)
-					return eventTypes.UserSeen
+				type = SupportedTelemetryBackends.EventIngest,
+				overrideName = function() --[[ Line: 590 ]]
+					-- upvalues: EventTypes (copy)
+					return EventTypes.UserSeen
 				end,
 				staticCustomFields = {
-					eventContext = contexts.Captures,
-					btn = eventNamesModule.CapturesCreateMomentToastViewed
+					eventContext = Contexts.Captures,
+					btn = EventNamesModule.CapturesCreateMomentToastViewed
 				}
 			}
 		}
 	},
-	[eventNamesModule.CapturesCreateMomentToastButtonActivated] = {
+	[EventNamesModule.CapturesCreateMomentToastButtonActivated] = {
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function()
-					-- upvalues: eventTypes (ref)
-					return eventTypes.ButtonClick
+				type = SupportedTelemetryBackends.EventIngest,
+				overrideName = function() --[[ Line: 604 ]]
+					-- upvalues: EventTypes (copy)
+					return EventTypes.ButtonClick
 				end,
 				staticCustomFields = {
-					eventContext = contexts.Captures,
-					btn = eventNamesModule.CapturesCreateMomentToastButtonActivated
+					eventContext = Contexts.Captures,
+					btn = EventNamesModule.CapturesCreateMomentToastButtonActivated
 				}
 			}
 		}

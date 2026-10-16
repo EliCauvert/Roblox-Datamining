@@ -1,3 +1,7 @@
-﻿return require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator(script.Name, function(p1, p2, p3)
-	return { tryingOn = p1, assetId = p2, assetTypeId = p3 }
+﻿return require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator(script.Name, function(TryingOn, AssetId, AssetTypeId) --[[ Line: 4 ]]
+	return {
+		tryingOn = TryingOn,
+		assetId = AssetId,
+		assetTypeId = AssetTypeId
+	}
 end)

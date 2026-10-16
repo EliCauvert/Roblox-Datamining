@@ -1,65 +1,65 @@
-﻿local avatarExperienceNavigation = script:FindFirstAncestor("AvatarExperienceNavigation")
-local reactModule = require(avatarExperienceNavigation.Parent.React)
-local _ = require(avatarExperienceNavigation.AvatarRoute.Types)
-local avatarScreenModule = require(avatarExperienceNavigation.Enums.AvatarScreen)
-local avatarRouteContextModule = require(avatarExperienceNavigation.AvatarRoute.Context.AvatarRouteContext)
-local avatarRouteModule = require(avatarExperienceNavigation.AvatarRoute.AvatarRoute)
+﻿local AvatarExperienceNavigation = script:FindFirstAncestor("AvatarExperienceNavigation")
+local ReactModule = require(AvatarExperienceNavigation.Parent.React)
+local _ = require(AvatarExperienceNavigation.AvatarRoute.Types)
+local AvatarScreenModule = require(AvatarExperienceNavigation.Enums.AvatarScreen)
+local AvatarRouteContextModule = require(AvatarExperienceNavigation.AvatarRoute.Context.AvatarRouteContext)
+local AvatarRouteModule = require(AvatarExperienceNavigation.AvatarRoute.AvatarRoute)
 
-local function avatarRouteFromString(p1)
-	-- upvalues: avatarRouteModule (ref)
-	local t = { name = p1, key = p1, params = {} }
+local function avatarRouteFromString(Key) --[[ Line: 17 ]]
+	-- upvalues: AvatarRouteModule (copy)
+	local Current = { name = Key, key = Key, params = {} }
 	
-	return avatarRouteModule.new({
+	return AvatarRouteModule.new({
 		isVisible = true,
 		isOverlayVisible = false,
-		current = t,
-		previousPages = { t },
-		opaque = t
+		current = Current,
+		previousPages = { Current },
+		opaque = Current
 	})
 end
 
-local function avatarRouteFromTable(p1)
-	-- upvalues: avatarScreenModule (ref), avatarRouteModule (ref)
-	p1 = p1 or {}
-	p1 = p1.current or {}
-	local previous = p1.previous or {}
-	local opaque = p1.opaque or {}
-	local name = p1.name or avatarScreenModule.None
-	local name_1 = previous.name or avatarScreenModule.None
-	local name_2 = opaque.name or avatarScreenModule.None
+local function avatarRouteFromTable(Key) --[[ Line: 32 ]]
+	-- upvalues: AvatarScreenModule (copy), AvatarRouteModule (copy)
+	local Key1 = Key or {}
+	local Current = Key1.current or {}
+	local Previous = Key1.previous or {}
+	local Opaque = Key1.opaque or {}
+	local Name = Current.name or AvatarScreenModule.None
+	local Name1 = Previous.name or AvatarScreenModule.None
+	local Name2 = Opaque.name or AvatarScreenModule.None
 	
-	return avatarRouteModule.new({
+	return AvatarRouteModule.new({
 		current = {
-			name = name,
-			key = p1.key or name,
-			params = p1.params or {}
+			name = Name,
+			key = Current.key or Name,
+			params = Current.params or {}
 		},
 		previousPages = {
 			{
-				name = name_1,
-				key = previous.key or name_1,
-				params = previous.params or {}
+				name = Name1,
+				key = Previous.key or Name1,
+				params = Previous.params or {}
 			}
 		},
 		opaque = {
-			name = name_2,
-			key = opaque.key or name_2,
-			params = opaque.params or {}
+			name = Name2,
+			key = Opaque.key or Name2,
+			params = Opaque.params or {}
 		},
-		isVisible = p1.isVisible ~= false,
-		isOverlayVisible = p1.isOverlayVisible == true
+		isVisible = Key1.isVisible ~= false,
+		isOverlayVisible = Key1.isOverlayVisible == true
 	})
 end
 
-return function(p1, p2)
-	-- upvalues: avatarRouteFromString (ref), avatarRouteFromTable (ref), reactModule (ref), avatarRouteContextModule (ref)
-	local var1 = if type(p2) == "string" then avatarRouteFromString(p2) else avatarRouteFromTable(p2)
+return function(p1, Key) --[[ Line: 72 ]]
+	-- upvalues: avatarRouteFromString (copy), avatarRouteFromTable (copy), ReactModule (copy), AvatarRouteContextModule (copy)
+	local AvatarRouteFromStringResult = if type(Key) == "string" then avatarRouteFromString(Key) else avatarRouteFromTable(Key)
 	
-	return reactModule.forwardRef(function(p3, p4)
-		-- upvalues: reactModule (copy), avatarRouteContextModule (copy), var1 (ref), p1 (ref)
-		local cloned = table.clone(p3)
-		cloned.ref = p4
+	return ReactModule.forwardRef(function(Tbl, Ref) --[[ Line: 77 ]]
+		-- upvalues: ReactModule (upval), AvatarRouteContextModule (upval), AvatarRouteFromStringResult (copy), p1 (copy)
+		local Copy = table.clone(Tbl)
+		Copy.ref = Ref
 		
-		return reactModule.createElement(avatarRouteContextModule.Provider, { value = var1 }, { component = reactModule.createElement(p1, cloned) })
+		return ReactModule.createElement(AvatarRouteContextModule.Provider, { value = AvatarRouteFromStringResult }, { component = ReactModule.createElement(p1, Copy) })
 	end)
 end

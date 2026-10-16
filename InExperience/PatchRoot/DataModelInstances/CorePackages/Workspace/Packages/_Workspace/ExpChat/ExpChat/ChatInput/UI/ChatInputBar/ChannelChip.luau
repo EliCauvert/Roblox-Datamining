@@ -1,26 +1,29 @@
-﻿local expChat = script:FindFirstAncestor("ExpChat")
-local parent = expChat.Parent
-local reactModule = require(parent.React)
-local expChatSharedModule = require(parent.ExpChatShared)
-local useCursor = require(parent.UIBlox).App.SelectionCursor.useCursor
-local configModule = require(expChat.Config)
-local getFFlagTextChatEnableUniverseChatTabs = expChatSharedModule.Flags.GetFFlagTextChatEnableUniverseChatTabs
+﻿local ExpChat = script:FindFirstAncestor("ExpChat")
+local Parent = ExpChat.Parent
+local ReactModule = require(Parent.React)
+local UseCursorFunction = require(Parent.UIBlox).App.SelectionCursor.useCursor
+local ConfigModule = require(ExpChat.Config)
+local GetFFlagTextChatEnableUniverseChatTabsFunction = require(Parent.ExpChatShared).Flags.GetFFlagTextChatEnableUniverseChatTabs
 
-return function(p1)
-	-- upvalues: useCursor (ref), getFFlagTextChatEnableUniverseChatTabs (ref), reactModule (ref), configModule (ref)
-	return reactModule.createElement("TextButton", {
+return function(p1) --[[ Line: 13 ]]
+	-- upvalues: UseCursorFunction (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (copy), ReactModule (copy), ConfigModule (copy)
+	local UseCursorResult = UseCursorFunction()
+	local v1 = (p1.targetTextChannelDisplayName or "") ~= ""
+	local NoDeveloperChannelTabsEnabled: boolean = GetFFlagTextChatEnableUniverseChatTabsFunction() and not p1.developerChannelTabsEnabled
+	
+	return ReactModule.createElement("TextButton", {
 		AutomaticSize = Enum.AutomaticSize.XY,
 		BackgroundTransparency = 1,
-		Font = configModule.ChatInputBarFont,
-		SelectionImageObject = useCursor(),
+		Font = ConfigModule.ChatInputBarFont,
+		SelectionImageObject = UseCursorResult,
 		Size = UDim2.fromScale(0, 1),
 		Text = p1.targetTextChannelDisplayName or "",
-		TextColor3 = configModule.ChatInputBarTextColor3,
-		TextSize = configModule.ChatInputBarTextSize,
+		TextColor3 = ConfigModule.ChatInputBarTextColor3,
+		TextSize = ConfigModule.ChatInputBarTextSize,
 		TextTransparency = p1.transparency or 1,
 		TextWrapped = true,
-		Visible = (p1.targetTextChannelDisplayName or "") ~= "" and (not p1.isChannelBarVisible or getFFlagTextChatEnableUniverseChatTabs() and not p1.developerChannelTabsEnabled),
-		[reactModule.Change.AbsoluteSize] = p1.onAbsoluteSizeChanged,
-		[reactModule.Event.Activated] = p1.onChannelChipActivated
+		Visible = v1 and (not p1.isChannelBarVisible or NoDeveloperChannelTabsEnabled),
+		[ReactModule.Change.AbsoluteSize] = p1.onAbsoluteSizeChanged,
+		[ReactModule.Event.Activated] = p1.onChannelChipActivated
 	})
 end

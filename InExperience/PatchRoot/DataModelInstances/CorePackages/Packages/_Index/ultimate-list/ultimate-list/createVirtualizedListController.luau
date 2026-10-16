@@ -1,207 +1,212 @@
-﻿local var1 = script:FindFirstAncestor("ultimate-list")
-local dataSourceMethodsModule = require(var1.DataSources.DataSourceMethods)
-local _ = require(var1.DataSources)
-local _ = require(var1.Dimensions)
-local dimensionsMethodsModule = require(var1.Dimensions.DimensionsMethods)
-local binarySearchIndexRangeInViewModule = require(script.binarySearchIndexRangeInView)
-local exhaustiveMatchModule = require(var1.Util.exhaustiveMatch)
-local var2 = require(var1.Util.createDebugLogger)("createVirtualizedListController")
+﻿local UltimateList = script:FindFirstAncestor("ultimate-list")
+local DataSourceMethodsModule = require(UltimateList.DataSources.DataSourceMethods)
+local _ = require(UltimateList.DataSources)
+local _ = require(UltimateList.Dimensions)
+local DimensionsMethodsModule = require(UltimateList.Dimensions.DimensionsMethods)
+local BinarySearchIndexRangeInViewModule = require(script.binarySearchIndexRangeInView)
+local ExhaustiveMatchModule = require(UltimateList.Util.exhaustiveMatch)
+local CreateVirtualizedListController = require(UltimateList.Util.createDebugLogger)("createVirtualizedListController")
 
-return function(p1, p2, p3)
-	-- upvalues: dimensionsMethodsModule (ref), exhaustiveMatchModule (ref), var2 (ref), binarySearchIndexRangeInViewModule (ref), dataSourceMethodsModule (ref)
-	local t = {
+return function(DataSource, LastDimensions, p1) --[[ Line: 43 | Named "createVirtualizedListController" ]]
+	-- upvalues: DimensionsMethodsModule (copy), ExhaustiveMatchModule (copy), CreateVirtualizedListController (copy), BinarySearchIndexRangeInViewModule (copy), DataSourceMethodsModule (copy)
+	local config = {
 		scrollSizeAxis = 0,
 		range = Vector3.new(),
 		canvasSize = UDim2.new(),
 		windowSize = Vector2.new(),
-		lastDimensions = p2,
+		lastDimensions = LastDimensions,
 		cachedLastResult = {},
-		dataSource = p1
+		dataSource = DataSource
 	}
-	local var3 = 0
-	local var4 = 0
-	local vector2 = Vector2.new()
-	local var5 = 0
+	local ScrollAxis = 0
+	local DominantAxis = 0
+	local _Vector2 = Vector2.new()
+	local Overscan = 0
 	
-	local function _()
-		-- upvalues: var3 (write), var5 (write), var4 (write)
-		local maxValue = math.max(0, var3 - var5)
+	local function _() --[[ Line: 64 | Named "getRangeAxes" ]]
+		-- upvalues: ScrollAxis (ref), Overscan (ref), DominantAxis (ref)
+		local Largest = math.max(0, ScrollAxis - Overscan)
 		
-		return maxValue, var3 + var4 + var5 - maxValue
+		return Largest, ScrollAxis + DominantAxis + Overscan - Largest
 	end
 	
-	local _ = function(p4, p5, p6)
-		return Vector3.new(p5 // p4 + 1, (p5 + p6) // p4 + 1)
+	local _ = function(p2: number, p3: number, p4: number): Vector3 --[[ Line: 70 | Named "getIndexRangeInViewForSize" ]]
+		return (Vector3.new(p3 // p2 + 1, (p3 + p4) // p2 + 1))
 	end
 	
-	local function getIndexRangeInViewForUDim2(p4, p5, p6)
-		-- upvalues: dimensionsMethodsModule (copy), vector2 (write), p3 (ref), exhaustiveMatchModule (copy), var2 (copy)
-		local amountPerNonDominantInGrid = dimensionsMethodsModule.getAmountPerNonDominantInGrid(p4, vector2, p3)
-		local var6 = if p3 == "x" then p4.X.Offset elseif p3 == "y" then p4.Y.Offset else exhaustiveMatchModule(p3)
-		local var7 = 1 + p5 // var6 * amountPerNonDominantInGrid
-		local var8 = (1 + (p5 + p6) // var6) * amountPerNonDominantInGrid
-		var2("getIndexRangeInView: amountPerNonDominant = %d, scrollAxis = %d, dominantSize = %d. Going from %d to %d", amountPerNonDominantInGrid, p5, var6, var7, var8)
+	local function getIndexRangeInViewForUDim2(Udim, Largest: number, p2: number): Vector3 --[[ Line: 81 ]]
+		-- upvalues: DimensionsMethodsModule (upval), _Vector2 (ref), p1 (copy), ExhaustiveMatchModule (upval), CreateVirtualizedListController (upval)
+		local AmountPerNonDominantInGrid = DimensionsMethodsModule.getAmountPerNonDominantInGrid(Udim, _Vector2, p1)
+		local Offset = if p1 == "x" then Udim.X.Offset elseif p1 == "y" then Udim.Y.Offset else ExhaustiveMatchModule(p1)
+		local X = 1 + Largest // Offset * AmountPerNonDominantInGrid
+		local Y = (1 + (Largest + p2) // Offset) * AmountPerNonDominantInGrid
+		CreateVirtualizedListController("getIndexRangeInView: amountPerNonDominant = %d, scrollAxis = %d, dominantSize = %d. Going from %d to %d", AmountPerNonDominantInGrid, Largest, Offset, X, Y)
 		
-		return Vector3.new(var7, var8)
+		return (Vector3.new(X, Y))
 	end
 	
-	local function getIndexRangeInView()
-		-- upvalues: var3 (write), var5 (write), var4 (write), p2 (write), getIndexRangeInViewForUDim2 (ref), binarySearchIndexRangeInViewModule (copy), p1 (write), p3 (ref), exhaustiveMatchModule (copy)
-		local maxValue = math.max(0, var3 - var5)
-		local var6 = var3 + var4 + var5 - maxValue
+	local function getIndexRangeInView() --[[ Line: 113 ]]
+		-- upvalues: ScrollAxis (ref), Overscan (ref), DominantAxis (ref), LastDimensions (ref), getIndexRangeInViewForUDim2 (copy), BinarySearchIndexRangeInViewModule (upval), DataSource (ref), p1 (copy), ExhaustiveMatchModule (upval)
+		local Largest = math.max(0, ScrollAxis - Overscan)
+		local ScrollAxisDelta = ScrollAxis + DominantAxis + Overscan - Largest
 		
-		if p2.type == "consistentUDim2" then
-			return getIndexRangeInViewForUDim2(p2.udim2, maxValue, var6)
-		elseif p2.type == "consistentSize" then
-			local size = p2.size
+		if LastDimensions.type == "consistentUDim2" then
+			return (getIndexRangeInViewForUDim2(LastDimensions.udim2, Largest, ScrollAxisDelta))
+		elseif LastDimensions.type == "consistentSize" then
+			local Size: number = LastDimensions.size
 			
-			return Vector3.new(maxValue // size + 1, (maxValue + var6) // size + 1)
-		elseif p2.type == "getter" then
-			return binarySearchIndexRangeInViewModule(p1, p2.callback, maxValue, var6, p3)
-		elseif p2.type ~= "spaced" then
-			return exhaustiveMatchModule(p2.type)
-		elseif p2.inner.type == "consistentSize" then
-			local var7 = p2.inner.size + p2.spacing
+			return (Vector3.new(Largest // Size + 1, (Largest + ScrollAxisDelta) // Size + 1))
+		elseif LastDimensions.type == "getter" then
+			return BinarySearchIndexRangeInViewModule(DataSource, LastDimensions.callback, Largest, ScrollAxisDelta, p1)
+		elseif LastDimensions.type ~= "spaced" then
+			return ExhaustiveMatchModule(LastDimensions.type)
+		elseif LastDimensions.inner.type == "consistentSize" then
+			local NewSize = LastDimensions.inner.size + LastDimensions.spacing
 			
-			return Vector3.new(maxValue // var7 + 1, (maxValue + var6) // var7 + 1)
-		elseif p2.inner.type == "consistentUDim2" then
-			return getIndexRangeInViewForUDim2(p2.inner.udim2 + UDim2.fromOffset(if p3 == "x" then p2.spacing else 0, if p3 == "y" then p2.spacing else 0), maxValue, var6)
-		elseif p2.inner.type == "spaced" or p2.inner.type == "getter" then
+			return (Vector3.new(Largest // NewSize + 1, (Largest + ScrollAxisDelta) // NewSize + 1))
+		elseif LastDimensions.inner.type == "consistentUDim2" then
+			return (getIndexRangeInViewForUDim2(LastDimensions.inner.udim2 + UDim2.fromOffset(if p1 == "x" then LastDimensions.spacing else 0, if p1 == "y" then LastDimensions.spacing else 0), Largest, ScrollAxisDelta))
+		elseif LastDimensions.inner.type == "spaced" or LastDimensions.inner.type == "getter" then
 			error("Unsupported spaced dimensions")
 			
 			return
+		else
+			return ExhaustiveMatchModule(LastDimensions.inner.type)
 		end
-		return exhaustiveMatchModule(p2.inner.type)
 	end
 	
-	local t_1 = {}
+	local t = {}
 	
-	local _ = function()
-		-- upvalues: t_1 (ref)
-		for i in t_1 do
+	local _ = function() --[[ Line: 157 | Named "callUpdateCallbacks" ]]
+		-- upvalues: t (copy)
+		for i in t do
 			i()
 		end
 	end
 	
-	local function update()
-		-- upvalues: var3 (write), var5 (write), var4 (write), t (write), vector2 (write), p1 (write), p2 (write), getIndexRangeInView (ref), dataSourceMethodsModule (copy), var2 (copy), dimensionsMethodsModule (copy), p3 (ref), t_1 (ref), exhaustiveMatchModule (copy)
-		local maxValue = math.max(0, var3 - var5)
-		local var6 = var3 + var4 + var5 - maxValue
+	local function update() --[[ Line: 163 ]]
+		-- upvalues: ScrollAxis (ref), Overscan (ref), DominantAxis (ref), config (ref), _Vector2 (ref), DataSource (ref), LastDimensions (ref), getIndexRangeInView (copy), DataSourceMethodsModule (upval), CreateVirtualizedListController (upval), DimensionsMethodsModule (upval), p1 (copy), t (copy), ExhaustiveMatchModule (upval)
+		local X = math.max(0, ScrollAxis - Overscan)
+		local ScrollAxisDelta = ScrollAxis + DominantAxis + Overscan - X
 		
-		if t.offsetBoundaries ~= nil and t.offsetBoundaries.X <= maxValue and (var6 + maxValue <= t.offsetBoundaries.Y and t.windowSize == vector2) and (t.dataSource == p1 and t.lastDimensions == p2) then return end
-		local var7 = getIndexRangeInView()
-		local byRange = dataSourceMethodsModule.getByRange(p1, var7)
+		if config.offsetBoundaries ~= nil and config.offsetBoundaries.X <= X and ScrollAxisDelta + X <= config.offsetBoundaries.Y and config.windowSize == _Vector2 and config.dataSource == DataSource and config.lastDimensions == LastDimensions then return end
+		local IndexRangeInView = getIndexRangeInView()
+		local ByRange = DataSourceMethodsModule.getByRange(DataSource, IndexRangeInView)
 		
-		if #byRange == 0 then
-			var2("View changed, but no items in list")
-			t = {
-				range = var7,
-				canvasSize = dimensionsMethodsModule.getCanvasSize(p2, p1, vector2, p3),
-				windowSize = vector2,
-				lastDimensions = p2,
+		if #ByRange == 0 then
+			CreateVirtualizedListController("View changed, but no items in list")
+			config = {
+				range = IndexRangeInView,
+				canvasSize = DimensionsMethodsModule.getCanvasSize(LastDimensions, DataSource, _Vector2, p1),
+				windowSize = _Vector2,
+				lastDimensions = LastDimensions,
 				cachedLastResult = {},
-				offsetBoundaries = Vector3.new(maxValue, var6 + maxValue),
-				dataSource = p1
+				offsetBoundaries = Vector3.new(X, ScrollAxisDelta + X),
+				dataSource = DataSource
 			}
 			
-			for i in t_1 do
+			for i in t do
 				i()
 			end
 			return
 		else
-			local uDimRect = dimensionsMethodsModule.getUDimRect(p2, byRange[1], var7.X, vector2, p3)
-			local uDimRect_1 = dimensionsMethodsModule.getUDimRect(p2, byRange[#byRange], var7.Y, vector2, p3)
-			var2("View changed: %d..%d (scroll axis: %d, window axis: %d, offset boundaries: %* - %*)", var7.X, var7.Y, var3, var4, t.offsetBoundaries and t.offsetBoundaries.X, t.offsetBoundaries and t.offsetBoundaries.Y)
-			t = {
-				range = var7,
-				canvasSize = dimensionsMethodsModule.getCanvasSize(p2, p1, vector2, p3),
-				windowSize = vector2,
-				lastDimensions = p2,
-				cachedLastResult = byRange,
-				offsetBoundaries = Vector3.new(if p3 == "x" then uDimRect.position.X.Offset elseif p3 == "y" then uDimRect.position.Y.Offset else exhaustiveMatchModule(p3), if p3 == "x" then uDimRect_1.position.X.Offset + uDimRect_1.size.X.Offset elseif p3 == "y" then uDimRect_1.position.Y.Offset + uDimRect_1.size.Y.Offset else exhaustiveMatchModule(p3)),
-				dataSource = p1
+			local UDimRect = DimensionsMethodsModule.getUDimRect(LastDimensions, ByRange[1], IndexRangeInView.X, _Vector2, p1)
+			local UDimRect1 = DimensionsMethodsModule.getUDimRect(LastDimensions, ByRange[#ByRange], IndexRangeInView.Y, _Vector2, p1)
+			CreateVirtualizedListController("View changed: %d..%d (scroll axis: %d, window axis: %d, offset boundaries: %* - %*)", IndexRangeInView.X, IndexRangeInView.Y, ScrollAxis, DominantAxis, config.offsetBoundaries and config.offsetBoundaries.X, config.offsetBoundaries and config.offsetBoundaries.Y)
+			config = {
+				range = IndexRangeInView,
+				canvasSize = DimensionsMethodsModule.getCanvasSize(LastDimensions, DataSource, _Vector2, p1),
+				windowSize = _Vector2,
+				lastDimensions = LastDimensions,
+				cachedLastResult = ByRange,
+				offsetBoundaries = Vector3.new(if p1 == "x" then UDimRect.position.X.Offset elseif p1 == "y" then UDimRect.position.Y.Offset else ExhaustiveMatchModule(p1), if p1 == "x" then UDimRect1.position.X.Offset + UDimRect1.size.X.Offset elseif p1 == "y" then UDimRect1.position.Y.Offset + UDimRect1.size.Y.Offset else ExhaustiveMatchModule(p1)),
+				dataSource = DataSource
 			}
 			
-			for i in t_1 do
-				i()
+			for i1 in t do
+				i1()
 			end
 		end
 	end
 	
-	local var8 = if p1.type == "mutableSource" then p1.methods.bindToChanged(update) else nil
+	local BindToChangedResult = if DataSource.type == "mutableSource" then DataSource.methods.bindToChanged(update) else nil
 	
 	return {
-		setScrollAxis = function(value)
-			-- upvalues: var3 (write), update (ref)
-			var3 = value
+		setScrollAxis = function(Value) --[[ Line: 240 ]]
+			-- upvalues: ScrollAxis (ref), update (copy)
+			ScrollAxis = Value
 			update()
 		end,
-		setDataSource = function(value)
-			-- upvalues: p1 (write), dataSourceMethodsModule (copy), update (ref)
-			assert(p1.type == value.type, "Data source type changed, you must keep it the same")
+		setDataSource = function(Value) --[[ Line: 245 ]]
+			-- upvalues: DataSource (ref), DataSourceMethodsModule (upval), update (copy)
+			assert(DataSource.type == Value.type, "Data source type changed, you must keep it the same")
 			
-			if dataSourceMethodsModule.equals(p1, value) then
+			if not DataSourceMethodsModule.equals(DataSource, Value) then
+				DataSource = Value
+				update()
+				
 				return
 			end
-			p1 = value
-			update()
 		end,
-		setDimensions = function(value)
-			-- upvalues: dimensionsMethodsModule (copy), p2 (write), update (ref)
-			if dimensionsMethodsModule.equals(p2, value) then
+		setDimensions = function(Value) --[[ Line: 256 ]]
+			-- upvalues: DimensionsMethodsModule (upval), LastDimensions (ref), update (copy)
+			if not DimensionsMethodsModule.equals(LastDimensions, Value) then
+				LastDimensions = Value
+				update()
+				
 				return
 			end
-			p2 = value
-			update()
 		end,
-		setWindowSize = function(value)
-			-- upvalues: vector2 (write), var4 (write), dimensionsMethodsModule (copy), p3 (ref), update (ref)
-			if vector2 == value then
+		setWindowSize = function(Value) --[[ Line: 265 ]]
+			-- upvalues: _Vector2 (ref), DominantAxis (ref), DimensionsMethodsModule (upval), p1 (copy), update (copy)
+			if _Vector2 ~= Value then
+				_Vector2 = Value
+				DominantAxis = DimensionsMethodsModule.getDominantAxis(Value, p1)
+				update()
+				
 				return
 			end
-			vector2 = value
-			var4 = dimensionsMethodsModule.getDominantAxis(value, p3)
-			update()
 		end,
-		getWindowSize = function()
-			-- upvalues: vector2 (write)
-			return vector2
+		getWindowSize = function() --[[ Line: 276 ]]
+			-- upvalues: _Vector2 (ref)
+			return _Vector2
 		end,
-		setOverscan = function(value)
-			-- upvalues: var5 (write), update (ref)
-			assert(value >= 0, "overscan must not be negative")
+		setOverscan = function(Value: number) --[[ Line: 280 ]]
+			-- upvalues: Overscan (ref), update (copy)
+			assert(Value >= 0, "overscan must not be negative")
 			
-			if var5 == value then
+			if Overscan ~= Value then
+				Overscan = Value
+				update()
+				
 				return
 			end
-			var5 = value
-			update()
 		end,
-		get = function()
-			-- upvalues: t (write)
-			return t.cachedLastResult
+		get = function() --[[ Line: 291 ]]
+			-- upvalues: config (ref)
+			return config.cachedLastResult
 		end,
-		getCanvasSize = function()
-			-- upvalues: t (write)
-			return t.canvasSize
+		getCanvasSize = function() --[[ Line: 295 ]]
+			-- upvalues: config (ref)
+			return config.canvasSize
 		end,
-		getRange = function()
-			-- upvalues: t (write)
-			return t.range
+		getRange = function() --[[ Line: 299 ]]
+			-- upvalues: config (ref)
+			return config.range
 		end,
-		bindToUpdate = function(p4)
-			-- upvalues: t_1 (ref)
-			t_1[p4] = true
+		bindToUpdate = function(Key) --[[ Line: 303 ]]
+			-- upvalues: t (copy)
+			t[Key] = true
 			
-			return function()
-				-- upvalues: t_1 (copy), p4 (ref)
-				t_1[p4] = nil
+			return function() --[[ Line: 305 ]]
+				-- upvalues: t (upval), Key (copy)
+				t[Key] = nil
 			end
 		end,
-		destroy = function()
-			-- upvalues: var8 (ref)
-			if var8 ~= nil then
-				var8()
+		destroy = function() --[[ Line: 314 ]]
+			-- upvalues: BindToChangedResult (copy)
+			if BindToChangedResult ~= nil then
+				BindToChangedResult()
 			end
 		end
 	}

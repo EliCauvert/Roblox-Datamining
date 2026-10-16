@@ -1,10 +1,10 @@
-﻿local parent = script.Parent.Parent
-local reactModule = require(parent.Parent.React)
-local capturesContextModule = require(parent.Context.CapturesContext)
+﻿local Parent = script.Parent.Parent
+local ReactModule = require(Parent.Parent.React)
+local CapturesContextModule = require(Parent.Context.CapturesContext)
 
-return function()
-	-- upvalues: reactModule (ref), capturesContextModule (ref)
+return function() --[[ Line: 10 ]]
+	-- upvalues: ReactModule (copy), CapturesContextModule (copy)
 	return {
-		fireEvent = reactModule.useContext(capturesContextModule).fireAnalyticsEvent
+		fireEvent = ReactModule.useContext(CapturesContextModule).fireAnalyticsEvent
 	}
 end

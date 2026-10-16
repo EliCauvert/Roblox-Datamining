@@ -1,18 +1,18 @@
-﻿local telemetryService = game:GetService("TelemetryService")
-local cryoModule = require(script:FindFirstAncestor("DiscoveryUtils").Parent.Cryo)
-local updateDiscoveryEventErrorDetailsLogging = game:DefineFastFlag("UpdateDiscoveryEventErrorDetailsLogging", false)
-local t = {
+﻿local TelemetryService = game:GetService("TelemetryService")
+local CryoModule = require(script:FindFirstAncestor("DiscoveryUtils").Parent.Cryo)
+local UpdateDiscoveryEventErrorDetailsLogging = game:DefineFastFlag("UpdateDiscoveryEventErrorDetailsLogging", false)
+local config = {
 	eventName = "DiscoveryEventErrorLogger_ErrorDetails",
 	description = "Error messages related to discovery events",
 	links = "https://roblox.atlassian.net/browse/CLIGROW-2890",
 	lastUpdated = { 25, 10, 14 },
 	backends = {
 		"Points",
-		if updateDiscoveryEventErrorDetailsLogging then "EventIngest" else nil
+		if UpdateDiscoveryEventErrorDetailsLogging then "EventIngest" else nil
 	},
 	throttlingPercentage = game:DefineFastInt("DiscoveryEventErrorDetailsHundredthsPercent", 0)
 }
-local t_1 = {
+local config1 = {
 	eventName = "DiscoveryEventErrorLogger_ErrorCounter",
 	description = "Counter related to discovery event errors",
 	links = "https://roblox.atlassian.net/browse/CLIGROW-2890",
@@ -21,15 +21,15 @@ local t_1 = {
 }
 
 return {
-	reportError = function(p1, p2, p3)
-		-- upvalues: telemetryService (ref), t_1 (ref), t (ref), updateDiscoveryEventErrorDetailsLogging (ref), cryoModule (ref)
+	reportError = function(ErrorType, ErrorMessage, p1) --[[ Line: 33 ]]
+		-- upvalues: TelemetryService (copy), config1 (copy), config (copy), UpdateDiscoveryEventErrorDetailsLogging (copy), CryoModule (copy)
 		if not _G.__TESTEZ_RUNNING_TEST__ then
-			warn(`[DiscoveryEventErrorLogger]\nError Type: {p1}\nError Message: {p2}`)
+			warn(`[DiscoveryEventErrorLogger]\nError Type: {ErrorType}\nError Message: {ErrorMessage}`)
 		end
-		telemetryService:LogCounter(t_1, { customFields = { errorType = p1 } }, 1)
-		telemetryService:LogEvent(t, {
-			standardizedFields = if updateDiscoveryEventErrorDetailsLogging then { "addSessionInfo" } else nil,
-			customFields = cryoModule.Dictionary.join(p3 or {}, { errorType = p1, errorMessage = p2 })
+		TelemetryService:LogCounter(config1, { customFields = { errorType = ErrorType } }, 1)
+		TelemetryService:LogEvent(config, {
+			standardizedFields = if UpdateDiscoveryEventErrorDetailsLogging then { "addSessionInfo" } else nil,
+			customFields = CryoModule.Dictionary.join(p1 or {}, { errorType = ErrorType, errorMessage = ErrorMessage })
 		})
 	end
 }

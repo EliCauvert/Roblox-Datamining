@@ -1,12 +1,11 @@
-﻿local notificationService = game:GetService("NotificationService")
-local playersService = game:GetService("Players")
-local dataHydration = script:FindFirstAncestor("DataHydration")
-local parent = dataHydration.Parent
-local var1 = require(parent.RealtimeDelivery).RobloxEventReceiver.new(notificationService)
-local getLocalPlayerUserId = require(dataHydration.DataHydrationUtils).getLocalPlayerUserId
-local trustedConnectionStatusModule = require(dataHydration.TrustedConnections.Enums.TrustedConnectionStatus)
-local fFlagAddFriendsPageTrustedFriendRequestSection = require(parent.SharedFlags).FFlagAddFriendsPageTrustedFriendRequestSection
-local t = {
+﻿local Players = game:GetService("Players")
+local DataHydration = script:FindFirstAncestor("DataHydration")
+local Parent = DataHydration.Parent
+local NewResult = require(Parent.RealtimeDelivery).RobloxEventReceiver.new((game:GetService("NotificationService")))
+local GetLocalPlayerUserIdFunction = require(DataHydration.DataHydrationUtils).getLocalPlayerUserId
+local TrustedConnectionStatusModule = require(DataHydration.TrustedConnections.Enums.TrustedConnectionStatus)
+local FFlagAddFriendsPageTrustedFriendRequestSection = require(Parent.SharedFlags).FFlagAddFriendsPageTrustedFriendRequestSection
+local config = {
 	Namespace = "TrustedConnectionNotifications",
 	EventTypes = {
 		TrustedConnectionCreated = 1,
@@ -17,55 +16,57 @@ local t = {
 	}
 }
 
-return function(p1)
-	-- upvalues: getLocalPlayerUserId (ref), playersService (ref), var1 (ref), t (ref), trustedConnectionStatusModule (ref), fFlagAddFriendsPageTrustedFriendRequestSection (ref)
-	local var2 = getLocalPlayerUserId()
-	local var3 = playersService:GetPropertyChangedSignal("LocalPlayer"):Connect(function()
-		-- upvalues: getLocalPlayerUserId (copy), var2 (write)
-		local var4 = getLocalPlayerUserId()
+return function(Callback) --[[ Line: 40 | Named "createTrustedConnectionEventListener" ]]
+	-- upvalues: GetLocalPlayerUserIdFunction (copy), Players (copy), NewResult (copy), config (copy), TrustedConnectionStatusModule (copy), FFlagAddFriendsPageTrustedFriendRequestSection (copy)
+	local LocalPlayerUserId = GetLocalPlayerUserIdFunction()
+	local Connection = Players:GetPropertyChangedSignal("LocalPlayer"):Connect(function() --[[ Line: 48 ]]
+		-- upvalues: GetLocalPlayerUserIdFunction (upval), LocalPlayerUserId (ref)
+		local LocalPlayerUserId1 = GetLocalPlayerUserIdFunction()
 		
-		if var4 ~= var2 then
-			var2 = var4
+		if LocalPlayerUserId1 ~= LocalPlayerUserId then
+			LocalPlayerUserId = LocalPlayerUserId1
 		end
 	end)
-	local namespace = var1:observeEvent(t.Namespace, function(p2)
-		-- upvalues: var2 (write), t (copy), p1 (ref), trustedConnectionStatusModule (copy), fFlagAddFriendsPageTrustedFriendRequestSection (copy)
-		if not p2.Actor or not p2.Target or not var2 then return end
-		local var4 = tostring(p2.Actor)
-		local var5 = tostring(p2.Target)
-		local var6 = tostring(var2)
+	local ObserveEventResult = NewResult:observeEvent(config.Namespace, function(Mouse) --[[ Line: 57 ]]
+		-- upvalues: LocalPlayerUserId (ref), config (upval), Callback (copy), TrustedConnectionStatusModule (upval), FFlagAddFriendsPageTrustedFriendRequestSection (upval)
+		if not Mouse.Actor or not Mouse.Target or not LocalPlayerUserId then return end
+		local Text = tostring(Mouse.Actor)
+		local Text1 = tostring(Mouse.Target)
+		local Text2 = tostring(LocalPlayerUserId)
 		
-		if p2.EventType == t.EventTypes.TrustedConnectionCreated then
-			p1(if var4 == var6 then var5 else var4, trustedConnectionStatusModule.TrustedFriends)
+		if Mouse.EventType == config.EventTypes.TrustedConnectionCreated then
+			Callback(if Text == Text2 then Text1 else Text, TrustedConnectionStatusModule.TrustedFriends)
 		end
-		if p2.EventType == t.EventTypes.TrustedConnectionDeleted then
-			if var6 ~= var4 then
-				p1(var4, trustedConnectionStatusModule.RequestSent)
-			elseif fFlagAddFriendsPageTrustedFriendRequestSection then
-				p1(var5, trustedConnectionStatusModule.RequestIgnored)
+		if Mouse.EventType == config.EventTypes.TrustedConnectionDeleted then
+			if Text2 == Text then
+				if FFlagAddFriendsPageTrustedFriendRequestSection then
+					Callback(Text1, TrustedConnectionStatusModule.RequestIgnored)
+				else
+					Callback(Text1, TrustedConnectionStatusModule.RequestReceived)
+				end
 			else
-				p1(var5, trustedConnectionStatusModule.RequestReceived)
+				Callback(Text, TrustedConnectionStatusModule.RequestSent)
 			end
 		end
-		if p2.EventType == t.EventTypes.TrustedConnectionRequestSent then
-			if var6 == var4 then
-				p1(var5, trustedConnectionStatusModule.RequestSent)
+		if Mouse.EventType == config.EventTypes.TrustedConnectionRequestSent then
+			if Text2 == Text then
+				Callback(Text1, TrustedConnectionStatusModule.RequestSent)
 				
 				return
 			end
-			p1(var4, trustedConnectionStatusModule.RequestReceived)
+			Callback(Text, TrustedConnectionStatusModule.RequestReceived)
 		end
 	end)
 	
-	return function()
-		-- upvalues: var3 (write), namespace (ref)
-		if var3 then
-			var3:Disconnect()
-			var3 = nil
+	return function() --[[ Line: 93 ]]
+		-- upvalues: Connection (ref), ObserveEventResult (copy)
+		if Connection then
+			Connection:Disconnect()
+			Connection = nil
 		end
-		if namespace then
-			namespace:disconnect()
-			var3 = nil
+		if ObserveEventResult then
+			ObserveEventResult:disconnect()
+			Connection = nil
 		end
 	end
 end

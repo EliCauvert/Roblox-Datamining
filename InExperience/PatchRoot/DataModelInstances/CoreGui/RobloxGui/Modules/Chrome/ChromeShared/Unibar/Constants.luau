@@ -1,60 +1,48 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local sharedFlagsModule = require(corePackagesService.Workspace.Packages.SharedFlags)
-local fFlagEnableConsoleExpControls = sharedFlagsModule.FFlagEnableConsoleExpControls
-local fFlagChromeShortcutRemoveLeaveOnRespawnPage = sharedFlagsModule.FFlagChromeShortcutRemoveLeaveOnRespawnPage
-local fFlagChromeShortcutRemoveRespawnOnLeavePage = sharedFlagsModule.FFlagChromeShortcutRemoveRespawnOnLeavePage
-local _ = require(corePackagesService.Packages.ReactOtter)
-local tenFootInterfaceModule = require(script.Parent.Parent.Parent.Parent.TenFootInterface)
-local getStyleTokensModule = require(script.Parent.Parent.Utility.GetStyleTokens)
-local iconSize = require(corePackagesService.Packages.UIBlox).App.ImageSet.Enum.IconSize
-local _ = {
-	MouseAndKeyboard = "MouseAndKeyboard",
-	Touch = "Touch",
-	Gamepad = "Gamepad"
-}
-local _ = {
-	Landscape = "Landscape",
-	Portrait = "Portrait",
-	Sensor = "Sensor"
-}
-local var1 = getStyleTokensModule()
+﻿local CorePackages = game:GetService("CorePackages")
+local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
+local FFlagEnableConsoleExpControls = SharedFlagsModule.FFlagEnableConsoleExpControls
+local FFlagChromeShortcutRemoveLeaveOnRespawnPage = SharedFlagsModule.FFlagChromeShortcutRemoveLeaveOnRespawnPage
+local FFlagChromeShortcutRemoveRespawnOnLeavePage = SharedFlagsModule.FFlagChromeShortcutRemoveRespawnOnLeavePage
+local _ = require(CorePackages.Packages.ReactOtter)
+local TenFootInterfaceModule = require(script.Parent.Parent.Parent.Parent.TenFootInterface)
+local v1 = require(script.Parent.Parent.Utility.GetStyleTokens)()
 
-local function _(p1)
-	-- upvalues: tenFootInterfaceModule (ref)
-	return (if tenFootInterfaceModule:IsEnabled() then 1.5 else 1) * p1
+local function _(p1) --[[ Line: 34 | Named "withUIScale" ]]
+	-- upvalues: TenFootInterfaceModule (copy)
+	return (if TenFootInterfaceModule:IsEnabled() then 1.5 else 1) * p1
 end
 
 return {
-	ICON_CELL_WIDTH = var1.Size.Size_1100,
-	DIVIDER_CELL_WIDTH = (if tenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 5,
-	ICON_SIZE = var1.Size.Size_900,
-	ICON_NAME_PREFIX = if fFlagEnableConsoleExpControls then "IconHitArea_" else nil,
-	ICON_HIGHLIGHT_SIZE = UDim2.new(0, var1.Size.Size_900, 0, var1.Size.Size_900),
-	ICON_DIVIDER_SIZE = UDim2.new(0, (if tenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 1, 0, var1.Size.Size_700),
-	ICON_DIVIDER_POSITION = UDim2.new(0, var1.Size.Size_50, 0.5, 0),
-	ICON_BADGE_OFFSET_X = var1.Gap.XXLarge,
-	ICON_BADGE_OFFSET_Y = (if tenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 5,
-	MEDIUM_ICON_SIZE = var1.Size.Size_700,
-	UNIBAR_END_PADDING = var1.Padding.XSmall,
-	MENU_SUBMENU_PADDING = (if tenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 10,
-	UNIBAR_LEFT_MARGIN = var1.Padding.Small,
-	MENU_ICON_SCREEN_SIDE_OFFSET = var1.Gap.Large,
-	SUB_MENU_ROW_HEIGHT = var1.Size.Size_1400,
-	SUBMENU_CORNER_RADIUS = (if tenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 10,
-	SUBMENU_PADDING_LEFT = var1.Padding.Small,
-	SUBMENU_PADDING_RIGHT = var1.Padding.Small,
-	SUBMENU_ROW_LABEL_FONT = var1.Typography.TitleLarge,
-	SUBMENU_ROW_PADDING = var1.Padding.Small,
-	SUBMENU_ROW_CORNER_RADIUS = (if tenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 10,
-	SUBMENU_BOTTOM_PADDING = var1.Padding.XLarge,
-	PIN_ICON_SIZE = UDim2.new(0, (if tenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 18, 0, (if tenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 18),
-	PIN_BUTTON_SIZE = var1.Size.Size_1000,
-	PIN_RIGHT_PADDING = (if tenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 13,
-	PIN_CORNER_RADIUS = var1.Radius.Medium,
-	NEW_BADGE_SIZE = (if tenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 66,
+	ICON_CELL_WIDTH = v1.Size.Size_1100,
+	DIVIDER_CELL_WIDTH = (if TenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 5,
+	ICON_SIZE = v1.Size.Size_900,
+	ICON_NAME_PREFIX = if FFlagEnableConsoleExpControls then "IconHitArea_" else nil,
+	ICON_HIGHLIGHT_SIZE = UDim2.new(0, v1.Size.Size_900, 0, v1.Size.Size_900),
+	ICON_DIVIDER_SIZE = UDim2.new(0, (if TenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 1, 0, v1.Size.Size_700),
+	ICON_DIVIDER_POSITION = UDim2.new(0, v1.Size.Size_50, 0.5, 0),
+	ICON_BADGE_OFFSET_X = v1.Gap.XXLarge,
+	ICON_BADGE_OFFSET_Y = (if TenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 5,
+	MEDIUM_ICON_SIZE = v1.Size.Size_700,
+	UNIBAR_END_PADDING = v1.Padding.XSmall,
+	MENU_SUBMENU_PADDING = (if TenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 10,
+	UNIBAR_LEFT_MARGIN = v1.Padding.Small,
+	MENU_ICON_SCREEN_SIDE_OFFSET = v1.Gap.Large,
+	SUB_MENU_ROW_HEIGHT = v1.Size.Size_1400,
+	SUBMENU_CORNER_RADIUS = (if TenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 10,
+	SUBMENU_PADDING_LEFT = v1.Padding.Small,
+	SUBMENU_PADDING_RIGHT = v1.Padding.Small,
+	SUBMENU_ROW_LABEL_FONT = v1.Typography.TitleLarge,
+	SUBMENU_ROW_PADDING = v1.Padding.Small,
+	SUBMENU_ROW_CORNER_RADIUS = (if TenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 10,
+	SUBMENU_BOTTOM_PADDING = v1.Padding.XLarge,
+	PIN_ICON_SIZE = UDim2.new(0, (if TenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 18, 0, (if TenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 18),
+	PIN_BUTTON_SIZE = v1.Size.Size_1000,
+	PIN_RIGHT_PADDING = (if TenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 13,
+	PIN_CORNER_RADIUS = v1.Radius.Medium,
+	NEW_BADGE_SIZE = (if TenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 66,
 	MENU_ANIMATION_SPRING = {
 		dampingRatio = 1.1,
-		frequency = 6.666666666667,
+		frequency = 6.666666666666667,
 		restingPositionLimit = 0.1,
 		restingVelocityLimit = 0.05
 	},
@@ -66,26 +54,26 @@ return {
 	UNIBAR_SHORTCUTBAR_ID = "unibarShortcuts",
 	TILTMENU_SHORTCUTBAR_ID = "tiltMenuShortcuts",
 	TILTMENU_DIALOG_SHORTCUTBAR_ID = "tiltMenuDialogShortcuts",
-	TILTMENU_RESPAWN_DIALOG_SHORTCUTBAR_ID = if fFlagChromeShortcutRemoveLeaveOnRespawnPage then "tiltMenuRespawnDialogShortcuts" else nil,
-	TILTMENU_LEAVE_DIALOG_SHORTCUTBAR_ID = if fFlagChromeShortcutRemoveRespawnOnLeavePage then "tiltMenuLeaveDialogShortcuts" else nil,
+	TILTMENU_RESPAWN_DIALOG_SHORTCUTBAR_ID = if FFlagChromeShortcutRemoveLeaveOnRespawnPage then "tiltMenuRespawnDialogShortcuts" else nil,
+	TILTMENU_LEAVE_DIALOG_SHORTCUTBAR_ID = if FFlagChromeShortcutRemoveRespawnOnLeavePage then "tiltMenuLeaveDialogShortcuts" else nil,
 	SHORTCUTBAR_DISPLAYORDER = 100,
 	WINDOW_HOST_GUI_NAME = "WindowHost",
-	CLOSE_BUTTON_FRAME = UDim2.fromOffset(var1.Size.Size_1100, var1.Size.Size_1100),
-	CLOSE_BUTTON_SIZE = UDim2.fromOffset((if tenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 22, (if tenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 22),
-	CLOSE_ICON_SIZE = iconSize.Small,
-	CORNER_RADIUS = UDim.new(0, var1.Radius.Medium),
-	WINDOW_DEFAULT_PADDING = var1.Padding.Small,
-	WINDOW_ICON_SIZE = (if tenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 42,
+	CLOSE_BUTTON_FRAME = UDim2.fromOffset(v1.Size.Size_1100, v1.Size.Size_1100),
+	CLOSE_BUTTON_SIZE = UDim2.fromOffset((if TenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 22, (if TenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 22),
+	CLOSE_ICON_SIZE = require(CorePackages.Packages.UIBlox).App.ImageSet.Enum.IconSize.Small,
+	CORNER_RADIUS = UDim.new(0, v1.Radius.Medium),
+	WINDOW_DEFAULT_PADDING = v1.Padding.Small,
+	WINDOW_ICON_SIZE = (if TenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 42,
 	DRAG_MAGNITUDE_THRESHOLD = 10,
 	WINDOW_MIN_DRAG_DISTANCE = 25,
-	DEFAULT_HEIGHT_LARGE = (if tenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 285,
-	DEFAULT_WIDTH_LARGE = (if tenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 176,
-	DEFAULT_HEIGHT = (if tenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 130,
-	DEFAULT_WIDTH = (if tenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 176,
-	MAX_HEIGHT_PORTRAIT = (if tenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 285,
-	MAX_WIDTH_PORTRAIT = (if tenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 260,
-	MAX_HEIGHT_LANDSCAPE = (if tenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 285,
-	MAX_WIDTH_LANDSCAPE = (if tenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 260,
+	DEFAULT_HEIGHT_LARGE = (if TenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 285,
+	DEFAULT_WIDTH_LARGE = (if TenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 176,
+	DEFAULT_HEIGHT = (if TenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 130,
+	DEFAULT_WIDTH = (if TenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 176,
+	MAX_HEIGHT_PORTRAIT = (if TenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 285,
+	MAX_WIDTH_PORTRAIT = (if TenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 260,
+	MAX_HEIGHT_LANDSCAPE = (if TenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 285,
+	MAX_WIDTH_LANDSCAPE = (if TenFootInterfaceModule:IsEnabled() then 1.5 else 1) * 260,
 	SOCIAL_SLOTS = 3,
 	TOGGLE_SLOTS = 1,
 	NINE_DOT_SLOTS = 1,

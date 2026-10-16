@@ -1,10 +1,10 @@
-﻿local parent = script.Parent.Parent.Parent.Parent.Parent
-local reactModule = require(parent.React)
-local dashModule = require(parent.Dash)
-local useNavigation = require(parent.Navigation).useNavigation
-local contactsRevokedAccessDialogModule = require(script.Parent.ContactsRevokedAccessDialog)
+﻿local Parent = script.Parent.Parent.Parent.Parent.Parent
+local ReactModule = require(Parent.React)
+local DashModule = require(Parent.Dash)
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local ContactsRevokedAccessDialogModule = require(script.Parent.ContactsRevokedAccessDialog)
 
-return function(p1)
-	-- upvalues: useNavigation (ref), reactModule (ref), contactsRevokedAccessDialogModule (ref), dashModule (ref)
-	return reactModule.createElement(contactsRevokedAccessDialogModule, dashModule.join(p1, { navigation = useNavigation() }))
+return function(p1) --[[ Line: 14 | Named "ContactsRevokedAccessDialogEntryPoint" ]]
+	-- upvalues: UseNavigationFunction (copy), ReactModule (copy), ContactsRevokedAccessDialogModule (copy), DashModule (copy)
+	return ReactModule.createElement(ContactsRevokedAccessDialogModule, DashModule.join(p1, { navigation = UseNavigationFunction() }))
 end

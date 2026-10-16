@@ -1,150 +1,150 @@
-﻿local httpService = game:GetService("HttpService")
-local fFlagCreatorAgentChatFilterTerminalClientToolsModule = require(script.Parent.FFlagCreatorAgentChatFilterTerminalClientTools)
+﻿local HttpService = game:GetService("HttpService")
+local FFlagCreatorAgentChatFilterTerminalClientToolsModule = require(script.Parent.FFlagCreatorAgentChatFilterTerminalClientTools)
 local _ = require(script.Parent.types)
-local t = {
-	name = "ask_for_logs",
-	inputSchema = {
-		type = "object",
-		properties = { reason = { type = "string" } }
-	}
-}
 
-local function _(p1)
-	return typeof(p1) == "string" and string.lower(p1) == "ask_for_logs"
+local function _(Text: string): boolean --[[ Line: 42 | Named "valueLooksLikeToolName" ]]
+	return typeof(Text) == "string" and string.lower(Text) == "ask_for_logs"
 end
 
-local function toolCallLooksLikeClientLogsRequest(p1)
-	local kind = p1.kind
+local _ = function(p1) --[[ Line: 63 | Named "decodePersistedToolResultText" ]]
+	-- upvalues: HttpService (copy)
+	local Success, Result = pcall(HttpService.JSONDecode, HttpService, p1)
 	
-	if not (typeof(kind) == "string" and string.lower(kind) == "ask_for_logs") then
-		kind = p1.title
-		
-		if typeof(kind) == "string" and string.lower(kind) == "ask_for_logs" then
-			return true
-		end
-		local rawInput = p1.rawInput
-		
-		if typeof(rawInput) ~= "table" then
-			return false
-		end
-		local name = rawInput.name
-		kind = typeof(name) == "string" and string.lower(name) == "ask_for_logs"
-		
-		if not kind then
-			local toolName = rawInput.toolName
-			kind = typeof(toolName) == "string" and string.lower(toolName) == "ask_for_logs"
-		end
-		return kind
-	end
+	return if Success and typeof(Result) == "table" and typeof(Result.text) == "string" then Result.text else nil
 end
 
-local _ = function(p1)
-	-- upvalues: httpService (ref)
-	local ok, status = pcall(httpService.JSONDecode, httpService, p1)
-	
-	return if not (not ok or typeof(status) ~= "table") then if typeof(status.text) == "string" then status.text else nil else nil
-end
-
-local function getPersistedToolResultText(p1)
-	-- upvalues: httpService (ref)
-	if p1.content == nil then
+local function getPersistedToolResultText(ToolCall) --[[ Line: 73 ]]
+	-- upvalues: HttpService (copy)
+	if ToolCall.content == nil then
 		return nil
 	end
-	local t = {}
+	local List = {}
 	
-	for i, v in p1.content do
-		if v.type == "content" and v.content ~= nil then
-			local content = v.content
+	for _, value in ToolCall.content do
+		if value.type == "content" and value.content ~= nil then
+			local Content = value.content
 			
-			if content.type == "text" and typeof(content.text) == "string" then
-				local ok, status = pcall(httpService.JSONDecode, httpService, content.text)
-				local var1 = if ok and typeof(status) == "table" then if typeof(status.text) == "string" then status.text else nil else nil
+			if Content.type == "text" and typeof(Content.text) == "string" then
+				local Success, Result = pcall(HttpService.JSONDecode, HttpService, Content.text)
+				local Text = if Success and typeof(Result) == "table" and typeof(Result.text) == "string" then Result.text else nil
 				
-				if var1 ~= nil and var1 ~= "" then
-					table.insert(t, var1)
+				if Text ~= nil and Text ~= "" then
+					table.insert(List, Text)
 				end
 			end
 		end
 	end
-	return if #t > 0 then table.concat(t) else nil
+	return if #List > 0 then table.concat(List) else nil
 end
 
 return {
 	TOOL_NAME = "ask_for_logs",
 	NOT_IN_GAME_MESSAGE = "The user is not in the game.",
 	STALE_LOGS_MESSAGE = "The available logs are from an older saved version. Playtest the latest version first.",
-	LOCAL_TOOL_DEFINITION = t,
-	toolCallLooksLikeClientLogsRequest = toolCallLooksLikeClientLogsRequest,
-	findClientLogsRequestInTurnState = function(p2, p3)
-		-- upvalues: fFlagCreatorAgentChatFilterTerminalClientToolsModule (ref), getPersistedToolResultText (ref)
-		local t = {}
+	LOCAL_TOOL_DEFINITION = {
+		name = "ask_for_logs",
+		inputSchema = {
+			type = "object",
+			properties = { reason = { type = "string" } }
+		}
+	},
+	toolCallLooksLikeClientLogsRequest = function(p1): boolean --[[ Line: 46 ]]
+		local Kind: string = p1.kind
 		
-		for i in p2.toolCalls do
-			table.insert(t, i)
-		end
-		table.sort(t)
-		
-		for i_1, v in t do
-			if not p3 or not p3[v] then
-				local var2 = p2.toolCalls[v]
+		if typeof(Kind) ~= "string" or string.lower(Kind) ~= "ask_for_logs" then
+			local Title: string = p1.title
+			
+			if typeof(Title) ~= "string" or string.lower(Title) ~= "ask_for_logs" then
+				local RawInput = p1.rawInput
 				
-				if (not fFlagCreatorAgentChatFilterTerminalClientToolsModule or var2.status ~= "completed" and var2.status ~= "failed" and var2.status ~= "cancelled") and getPersistedToolResultText(var2) == nil then
-					local var3
-					local kind = var2.kind
+				if typeof(RawInput) ~= "table" then
+					return false
+				end
+				local Name: string = RawInput.name
+				local IsAskForLogs: boolean = typeof(Name) == "string" and string.lower(Name) == "ask_for_logs"
+				
+				if not IsAskForLogs then
+					local ToolName: string = RawInput.toolName
+					IsAskForLogs = typeof(ToolName) == "string" and string.lower(ToolName) == "ask_for_logs"
+				end
+				return IsAskForLogs
+			end
+		end
+		return true
+	end,
+	findClientLogsRequestInTurnState = function(p1, p2) --[[ Line: 96 ]]
+		-- upvalues: FFlagCreatorAgentChatFilterTerminalClientToolsModule (copy), getPersistedToolResultText (copy)
+		local List = {}
+		
+		for toolCall in p1.toolCalls do
+			table.insert(List, toolCall)
+		end
+		table.sort(List)
+		local ToolCall = nil
+		
+		for _, value in List do
+			local IsCompleted = p2 and p2[value]
+			
+			if not IsCompleted then
+				ToolCall = p1.toolCalls[value]
+				IsCompleted = FFlagCreatorAgentChatFilterTerminalClientToolsModule and (ToolCall.status == "completed" or ToolCall.status == "failed" or ToolCall.status == "cancelled")
+			end
+			if not IsCompleted and getPersistedToolResultText(ToolCall) == nil then
+				local Kind: string = ToolCall.kind
+				local IsAskForLogs: boolean = typeof(Kind) == "string" and string.lower(Kind) == "ask_for_logs"
+				
+				if not IsAskForLogs then
+					local Title: string = ToolCall.title
+					IsAskForLogs = typeof(Title) == "string" and string.lower(Title) == "ask_for_logs"
+				end
+				local IsAskForLogs1 = nil
+				if IsAskForLogs then
+					IsAskForLogs1 = true
+				else
+					local RawInput = ToolCall.rawInput
 					
-					if not (typeof(kind) == "string" and string.lower(kind) == "ask_for_logs") then
-						kind = var2.title
+					if typeof(RawInput) == "table" then
+						local Name: string = RawInput.name
+						IsAskForLogs1 = typeof(Name) == "string" and string.lower(Name) == "ask_for_logs"
 						
-						if typeof(kind) == "string" and string.lower(kind) == "ask_for_logs" then
-							var3 = true
-						else
-							local rawInput = var2.rawInput
-							
-							if typeof(rawInput) == "table" then
-								kind = rawInput.name
-								var3 = typeof(kind) == "string" and string.lower(kind) == "ask_for_logs"
-								
-								if not var3 then
-									kind = rawInput.toolName
-									var3 = false
-									
-									if typeof(kind) == "string" then
-										var3 = string.lower(kind) == "ask_for_logs"
-										var3 = nil
-									end
-								end
-							else
-								var3 = false
-							end
+						if not IsAskForLogs1 then
+							local ToolName: string = RawInput.toolName
+							IsAskForLogs1 = typeof(ToolName) == "string" and string.lower(ToolName) == "ask_for_logs"
 						end
-						if var3 then
-							return v, var2.rawInput, var2.turnId, var2.referenceId
-						end
+					else
+						IsAskForLogs1 = false
 					end
+				end
+				if IsAskForLogs1 then
+					return value, ToolCall.rawInput, ToolCall.turnId, ToolCall.referenceId
 				end
 			end
 		end
 		return nil, nil, nil, nil
 	end,
-	formatLogsContent = function(p4, p5)
-		-- upvalues: httpService (ref)
+	formatLogsContent = function(ClientLogs, ServerLogs) --[[ Line: 128 ]]
+		-- upvalues: HttpService (copy)
 		return {
-			text = httpService:JSONEncode({ status = "ok", clientLogs = p4, serverLogs = p5 })
+			text = HttpService:JSONEncode({
+				status = "ok",
+				clientLogs = ClientLogs,
+				serverLogs = ServerLogs
+			})
 		}
 	end,
-	formatNotInGameContent = function()
-		-- upvalues: httpService (ref)
+	formatNotInGameContent = function() --[[ Line: 138 ]]
+		-- upvalues: HttpService (copy)
 		return {
-			text = httpService:JSONEncode({
+			text = HttpService:JSONEncode({
 				status = "not_in_game",
 				message = "The user is not in the game."
 			})
 		}
 	end,
-	formatStaleLogsContent = function()
-		-- upvalues: httpService (ref)
+	formatStaleLogsContent = function() --[[ Line: 147 ]]
+		-- upvalues: HttpService (copy)
 		return {
-			text = httpService:JSONEncode({
+			text = HttpService:JSONEncode({
 				status = "stale",
 				message = "The available logs are from an older saved version. Playtest the latest version first."
 			})

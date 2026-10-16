@@ -1,8 +1,8 @@
-﻿local trustedContacts = script:FindFirstAncestor("TrustedContacts")
-local url = require(trustedContacts.Parent.Http).Url
-local myHttpRequestModule = require(trustedContacts.Networking.myHttpRequest)
+﻿local TrustedContacts = script:FindFirstAncestor("TrustedContacts")
+local Url = require(TrustedContacts.Parent.Http).Url
+local MyHttpRequestModule = require(TrustedContacts.Networking.myHttpRequest)
 
-return function(p1)
-	-- upvalues: url (ref), myHttpRequestModule (ref)
-	return myHttpRequestModule(string.format("%s/users/%s/send-trusted-friend-request", url.FRIEND_URL, tostring(p1)), "POST", { postBody = {} })
+return function(p1) --[[ Line: 8 ]]
+	-- upvalues: Url (copy), MyHttpRequestModule (copy)
+	return MyHttpRequestModule(string.format("%s/users/%s/send-trusted-friend-request", Url.FRIEND_URL, (tostring(p1))), "POST", { postBody = {} })
 end

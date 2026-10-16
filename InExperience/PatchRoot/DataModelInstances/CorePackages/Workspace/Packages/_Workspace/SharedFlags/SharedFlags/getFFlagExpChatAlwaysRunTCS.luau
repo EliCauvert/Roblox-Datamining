@@ -1,30 +1,30 @@
-﻿local chatService = game:GetService("Chat")
+﻿local Chat = game:GetService("Chat")
 game:DefineFastFlag("DebugExpChatAlwaysRunTCS", false)
-local expChatMigrationReplicationFix = game:DefineFastFlag("ExpChatMigrationReplicationFix", false)
-local robloxReplicatedStorageService = game:GetService("RobloxReplicatedStorage")
-local isAutoMigrated = chatService.IsAutoMigrated
+local ExpChatMigrationReplicationFix = game:DefineFastFlag("ExpChatMigrationReplicationFix", false)
+local RobloxReplicatedStorage = game:GetService("RobloxReplicatedStorage")
+local IsAutoMigrated = Chat.IsAutoMigrated
 
 if game:GetService("RunService"):IsServer() then
-	robloxReplicatedStorageService:SetAttribute("ChatMigratedToExpChat", chatService.IsAutoMigrated)
-	chatService:GetPropertyChangedSignal("IsAutoMigrated"):Connect(function()
-		-- upvalues: robloxReplicatedStorageService (ref), chatService (ref), isAutoMigrated (write)
-		robloxReplicatedStorageService:SetAttribute("ChatMigratedToExpChat", chatService.IsAutoMigrated)
-		isAutoMigrated = chatService.IsAutoMigrated
+	RobloxReplicatedStorage:SetAttribute("ChatMigratedToExpChat", Chat.IsAutoMigrated)
+	Chat:GetPropertyChangedSignal("IsAutoMigrated"):Connect(function() --[[ Line: 17 ]]
+		-- upvalues: RobloxReplicatedStorage (copy), Chat (copy), IsAutoMigrated (ref)
+		RobloxReplicatedStorage:SetAttribute("ChatMigratedToExpChat", Chat.IsAutoMigrated)
+		IsAutoMigrated = Chat.IsAutoMigrated
 	end)
 else
-	isAutoMigrated = robloxReplicatedStorageService:GetAttribute("ChatMigratedToExpChat") == true
-	robloxReplicatedStorageService:GetAttributeChangedSignal("ChatMigratedToExpChat"):Connect(function()
-		-- upvalues: isAutoMigrated (write), robloxReplicatedStorageService (ref), chatService (ref)
-		isAutoMigrated = robloxReplicatedStorageService:GetAttribute("ChatMigratedToExpChat") == true
-		chatService.IsAutoMigrated = isAutoMigrated
+	IsAutoMigrated = RobloxReplicatedStorage:GetAttribute("ChatMigratedToExpChat") == true
+	RobloxReplicatedStorage:GetAttributeChangedSignal("ChatMigratedToExpChat"):Connect(function() --[[ Line: 23 ]]
+		-- upvalues: IsAutoMigrated (ref), RobloxReplicatedStorage (copy), Chat (copy)
+		IsAutoMigrated = RobloxReplicatedStorage:GetAttribute("ChatMigratedToExpChat") == true
+		Chat.IsAutoMigrated = IsAutoMigrated
 	end)
 end
-local function _()
-	-- upvalues: expChatMigrationReplicationFix (ref), chatService (ref), isAutoMigrated (write)
-	return if game:GetEngineFeature("ChatServiceCompatibilityForAll") then true elseif expChatMigrationReplicationFix and game:GetEngineFeature("TCSMigrationReplicationFix") then chatService.IsAutoMigrated else isAutoMigrated
+local function _() --[[ Line: 29 | Named "IsChatAutoMigrated" ]]
+	-- upvalues: ExpChatMigrationReplicationFix (copy), Chat (copy), IsAutoMigrated (ref)
+	return if game:GetEngineFeature("ChatServiceCompatibilityForAll") then true elseif ExpChatMigrationReplicationFix and game:GetEngineFeature("TCSMigrationReplicationFix") then Chat.IsAutoMigrated else IsAutoMigrated
 end
 
-return function()
-	-- upvalues: expChatMigrationReplicationFix (ref), chatService (ref), isAutoMigrated (write)
-	return (if game:GetEngineFeature("ChatServiceCompatibilityForAll") then true elseif expChatMigrationReplicationFix and game:GetEngineFeature("TCSMigrationReplicationFix") then chatService.IsAutoMigrated else isAutoMigrated) or game:GetFastFlag("DebugExpChatAlwaysRunTCS")
+return function() --[[ Line: 41 ]]
+	-- upvalues: ExpChatMigrationReplicationFix (copy), Chat (copy), IsAutoMigrated (ref)
+	return (if game:GetEngineFeature("ChatServiceCompatibilityForAll") then true elseif ExpChatMigrationReplicationFix and game:GetEngineFeature("TCSMigrationReplicationFix") then Chat.IsAutoMigrated else IsAutoMigrated) or game:GetFastFlag("DebugExpChatAlwaysRunTCS")
 end

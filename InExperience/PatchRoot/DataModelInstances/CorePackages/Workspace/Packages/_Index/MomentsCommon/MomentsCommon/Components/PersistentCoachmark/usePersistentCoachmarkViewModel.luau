@@ -1,64 +1,64 @@
-﻿local parent = script.Parent.Parent.Parent
-local _ = require(parent.Utils.createCoachmarkImpressionCache)
-local reactModule = require(parent.Parent.React)
+﻿local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.Utils.createCoachmarkImpressionCache)
+local ReactModule = require(Parent.Parent.React)
 
-return function(p1)
-	-- upvalues: reactModule (ref)
-	local impressionCache = p1.impressionCache
-	local onSessionHandled = p1.onSessionHandled
-	local autoDismissSeconds = p1.autoDismissSeconds
-	local var1 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref), impressionCache (ref)
+return function(p1) --[[ Line: 42 | Named "usePersistentCoachmarkViewModel" ]]
+	-- upvalues: ReactModule (copy)
+	local ImpressionCache = p1.impressionCache
+	local OnSessionHandledFunction = p1.onSessionHandled
+	local AutoDismissSeconds = p1.autoDismissSeconds
+	local UseMemoResult = ReactModule.useMemo(function(): boolean --[[ Line: 49 ]]
+		-- upvalues: p1 (copy), ImpressionCache (copy)
 		if p1.isSessionHandled then
 			return false
+		else
+			local Value: number = ImpressionCache.getValue()
+			
+			return Value >= 0 and Value < p1.maxImpressions
 		end
-		local value = impressionCache.getValue()
-		
-		return value >= 0 and value < p1.maxImpressions
 	end, {})
-	local var2, var3 = reactModule.useState(var1)
-	local var4 = reactModule.useRef(false)
-	local var5 = reactModule.useRef(nil)
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), var4 (ref), impressionCache (ref), onSessionHandled (ref), p1 (ref)
-		if var1 and not var4.current then
-			var4.current = true
-			impressionCache.incrementValue()
-			onSessionHandled()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(UseMemoResult)
+	local UseRefResult = ReactModule.useRef(false)
+	local UseRefResult1 = ReactModule.useRef(nil)
+	ReactModule.useEffect(function() --[[ Line: 63 ]]
+		-- upvalues: UseMemoResult (copy), UseRefResult (copy), ImpressionCache (copy), OnSessionHandledFunction (copy), p1 (copy)
+		if UseMemoResult and not UseRefResult.current then
+			UseRefResult.current = true
+			ImpressionCache.incrementValue()
+			OnSessionHandledFunction()
 			
 			if p1.onImpression ~= nil then
 				p1.onImpression()
 			end
 		end
 	end, {})
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), autoDismissSeconds (ref), var5 (ref), var3 (ref)
-		if var2 and autoDismissSeconds ~= nil then
-			var5.current = task.delay(autoDismissSeconds, function()
-				-- upvalues: var3 (copy)
-				var3(false)
-			end)
-			
-			return function()
-				-- upvalues: var5 (copy)
-				if var5.current ~= nil then
-					task.cancel(var5.current)
-					var5.current = nil
-				end
+	ReactModule.useEffect(function() --[[ Line: 74 ]]
+		-- upvalues: UseStateResult (copy), AutoDismissSeconds (copy), UseRefResult1 (copy), UseStateResult2 (copy)
+		if not UseStateResult or AutoDismissSeconds == nil then return end
+		UseRefResult1.current = task.delay(AutoDismissSeconds, function() --[[ Line: 79 ]]
+			-- upvalues: UseStateResult2 (upval)
+			UseStateResult2(false)
+		end)
+		
+		return function() --[[ Line: 83 ]]
+			-- upvalues: UseRefResult1 (upval)
+			if UseRefResult1.current ~= nil then
+				task.cancel(UseRefResult1.current)
+				UseRefResult1.current = nil
 			end
 		end
-	end, { var2, autoDismissSeconds })
+	end, { UseStateResult, AutoDismissSeconds })
 	
 	return {
-		isOpen = var2,
-		onClose = reactModule.useCallback(function()
-			-- upvalues: impressionCache (ref), p1 (ref), var3 (ref)
-			impressionCache.dismissValue()
+		isOpen = UseStateResult,
+		onClose = ReactModule.useCallback(function() --[[ Line: 92 ]]
+			-- upvalues: ImpressionCache (copy), p1 (copy), UseStateResult2 (copy)
+			ImpressionCache.dismissValue()
 			
 			if p1.onDismissed ~= nil then
 				p1.onDismissed()
 			end
-			var3(false)
+			UseStateResult2(false)
 		end, {})
 	}
 end

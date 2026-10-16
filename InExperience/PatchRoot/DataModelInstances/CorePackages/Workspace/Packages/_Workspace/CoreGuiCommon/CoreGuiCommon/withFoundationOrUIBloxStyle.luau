@@ -1,20 +1,20 @@
-﻿local parent = script.Parent.Parent
-local roactModule = require(parent.Roact)
-local foundationModule = require(parent.Foundation)
-local useTokens = foundationModule.Hooks.useTokens
-local usePreferences = foundationModule.Hooks.usePreferences
-local withStyle = require(parent.UIBlox).Style.withStyle
-local fFlagCoreUiMigrateUIBloxToFoundation = require(parent.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
+﻿local Parent = script.Parent.Parent
+local RoactModule = require(Parent.Roact)
+local FoundationModule = require(Parent.Foundation)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UsePreferencesFunction = FoundationModule.Hooks.usePreferences
+local WithStyleFunction = require(Parent.UIBlox).Style.withStyle
+local FFlagCoreUiMigrateUIBloxToFoundation = require(Parent.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
 
-local function FoundationStyleAdapter(p1)
-	-- upvalues: useTokens (ref), usePreferences (ref)
-	return p1.renderContent(p1.tokenMapper(useTokens(), usePreferences()))
+local function FoundationStyleAdapter(p1) --[[ Line: 15 ]]
+	-- upvalues: UseTokensFunction (copy), UsePreferencesFunction (copy)
+	return p1.renderContent((p1.tokenMapper(UseTokensFunction(), (UsePreferencesFunction()))))
 end
 
-return function(p1, p2)
-	-- upvalues: fFlagCoreUiMigrateUIBloxToFoundation (ref), roactModule (ref), FoundationStyleAdapter (ref), withStyle (ref)
-	return if fFlagCoreUiMigrateUIBloxToFoundation then roactModule.createElement(FoundationStyleAdapter, { tokenMapper = p1, renderContent = p2 }) else withStyle(function(p3)
-		-- upvalues: p2 (ref)
-		return p2(p3)
+return function(TokenMapper, Callback) --[[ Line: 22 | Named "withFoundationOrUIBloxStyle" ]]
+	-- upvalues: FFlagCoreUiMigrateUIBloxToFoundation (copy), RoactModule (copy), FoundationStyleAdapter (copy), WithStyleFunction (copy)
+	return if FFlagCoreUiMigrateUIBloxToFoundation then RoactModule.createElement(FoundationStyleAdapter, { tokenMapper = TokenMapper, renderContent = Callback }) else WithStyleFunction(function(p1) --[[ Line: 29 ]]
+		-- upvalues: Callback (copy)
+		return Callback(p1)
 	end)
 end

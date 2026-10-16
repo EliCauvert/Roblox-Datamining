@@ -1,21 +1,21 @@
-﻿local trieModule = require(script:FindFirstAncestor("Autocomplete").Trie.Trie)
-local t = {}
-t.__index = t
+﻿local TrieModule = require(script:FindFirstAncestor("Autocomplete").Trie.Trie)
+local AutocompleteTextModule = {}
+AutocompleteTextModule.__index = AutocompleteTextModule
 
-function t.new(p1)
-	-- upvalues: t (ref), trieModule (ref)
-	local t_1 = {}
-	setmetatable(t_1, t)
-	t_1.trie = trieModule.new()
-	t_1.trie = p1(t_1)
+function AutocompleteTextModule.new(Callback) --[[ Line: 11 ]]
+	-- upvalues: AutocompleteTextModule (copy), TrieModule (copy)
+	local t = {}
+	setmetatable(t, AutocompleteTextModule)
+	t.trie = TrieModule.new()
+	t.trie = Callback(t)
 	
-	return t_1
+	return t
 end
 
-function t:getResults(p1, p2)
-	local var1 = self.trie:autocomplete(p1)
+function AutocompleteTextModule:getResults(p1, Callback) --[[ Line: 22 ]]
+	local AutocompleteResult = self.trie:autocomplete(p1)
 	
-	return if p2 then p2(var1) else var1
+	return if Callback then Callback(AutocompleteResult) else AutocompleteResult
 end
 
-return t
+return AutocompleteTextModule

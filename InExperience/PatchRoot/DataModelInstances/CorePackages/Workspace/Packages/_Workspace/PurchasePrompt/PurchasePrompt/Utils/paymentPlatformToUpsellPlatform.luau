@@ -1,6 +1,6 @@
-﻿local paymentPlatformModule = require(script.Parent.Parent.Enums.PaymentPlatform)
+﻿local PaymentPlatformModule = require(script.Parent.Parent.Enums.PaymentPlatform)
 
-return function(p1)
-	-- upvalues: paymentPlatformModule (ref)
-	return if p1 == paymentPlatformModule.Web then "Web" elseif p1 == paymentPlatformModule.Apple then "AppleAppStore" elseif p1 == paymentPlatformModule.Google then "GooglePlayStore" elseif p1 == paymentPlatformModule.Amazon then "AmazonStore" elseif p1 == paymentPlatformModule.UWP then "WindowsStore" elseif p1 == paymentPlatformModule.Xbox then "XboxStore" elseif p1 == paymentPlatformModule.Maquettes then "MaquettesStore" elseif p1 == paymentPlatformModule.Palisades then "PalisadesStore" elseif p1 == paymentPlatformModule.Microsoft then "MicrosoftStore" elseif p1 == paymentPlatformModule.MilkyWay then "MilkyWayStore" elseif p1 == paymentPlatformModule.Pioneer then "PioneerStore" else "None"
+return function(Amazon): string --[[ Line: 6 ]]
+	-- upvalues: PaymentPlatformModule (copy)
+	return if Amazon == PaymentPlatformModule.Web then "Web" elseif Amazon == PaymentPlatformModule.Apple then "AppleAppStore" elseif Amazon == PaymentPlatformModule.Google then "GooglePlayStore" elseif Amazon == PaymentPlatformModule.Amazon then "AmazonStore" elseif Amazon == PaymentPlatformModule.UWP then "WindowsStore" elseif Amazon == PaymentPlatformModule.Xbox then "XboxStore" elseif Amazon == PaymentPlatformModule.Maquettes then "MaquettesStore" elseif Amazon == PaymentPlatformModule.Palisades then "PalisadesStore" elseif Amazon == PaymentPlatformModule.Microsoft then "MicrosoftStore" elseif Amazon == PaymentPlatformModule.MilkyWay then "MilkyWayStore" elseif Amazon == PaymentPlatformModule.Pioneer then "PioneerStore" else "None"
 end

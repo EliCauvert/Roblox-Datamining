@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.AppSplitView.AppSplitView)
+﻿return (require(script.Parent.Parent.Parent._Index.AppSplitView.AppSplitView))

@@ -1,157 +1,154 @@
-﻿local playersService = game:GetService("Players")
-local avatarEditorService = game:GetService("AvatarEditorService")
-local parent = script:FindFirstAncestor("AvatarSwitcher").Parent
-local t = {}
-local avatarSwitcherEmoteIds = game:DefineFastString("AvatarSwitcherEmoteIds", "3344650532,3344585679,5911729486")
-local fFlagAvatarSwitcherAccurateAvatarWarning = require(parent.AvatarExperienceFlags).FFlagAvatarSwitcherAccurateAvatarWarning
-local avatarSwitcherMakeupSupport = game:DefineFastFlag("AvatarSwitcherMakeupSupport", false)
-
-function t.buildOutfitModel(p1, p2)
-	-- upvalues: playersService (ref), avatarEditorService (ref), fFlagAvatarSwitcherAccurateAvatarWarning (ref)
-	local var1 = avatarEditorService:ConformToAvatarRulesAsync(playersService:GetHumanoidDescriptionFromOutfitIdAsync(p1))
-	local var2 = playersService:CreateHumanoidModelFromDescriptionAsync(var1, p2)
-	
-	if fFlagAvatarSwitcherAccurateAvatarWarning then
-		return var2, var1
-	end
-	return var2
-end
-
-function t.getCameraDistance(p1, p2)
-	local _, boundingBox = p1:GetBoundingBox()
-	
-	return (boundingBox / 2).Magnitude / math.sin(math.rad(p2 / 2))
-end
-
-function t.loadIdleAnimationForAvatar(p1)
-	local humanoid = p1:FindFirstChildOfClass("Humanoid")
-	local animator = humanoid and humanoid:FindFirstChildOfClass("Animator")
-	
-	if not animator then
-		return nil
-	end
-	local animate = p1:FindFirstChild("Animate")
-	
-	if not animate then
-		return nil
-	end
-	local idle = animate:FindFirstChild("idle")
-	
-	if not idle then
-		return nil
-	end
-	local animation = idle:FindFirstChildOfClass("Animation")
-	
-	if animation then
-		local var1 = animator:LoadAnimation(animation)
-		var1.Looped = true
+﻿local Players = game:GetService("Players")
+local AvatarEditorService = game:GetService("AvatarEditorService")
+local AvatarSwitcherEmoteIds = game:DefineFastString("AvatarSwitcherEmoteIds", "3344650532,3344585679,5911729486")
+local FFlagAvatarSwitcherAccurateAvatarWarning = require(script:FindFirstAncestor("AvatarSwitcher").Parent.AvatarExperienceFlags).FFlagAvatarSwitcherAccurateAvatarWarning
+local AvatarSwitcherMakeupSupport = game:DefineFastFlag("AvatarSwitcherMakeupSupport", false)
+local OutfitViewportUtils = {
+	buildOutfitModel = function(OutfitId, RigType) --[[ Line: 17 ]]
+		-- upvalues: Players (copy), AvatarEditorService (copy), FFlagAvatarSwitcherAccurateAvatarWarning (copy)
+		local ConformToAvatarRulesAsyncResult = AvatarEditorService:ConformToAvatarRulesAsync((Players:GetHumanoidDescriptionFromOutfitIdAsync(OutfitId)))
+		local HumanoidModelFromDescriptionAsync = Players:CreateHumanoidModelFromDescriptionAsync(ConformToAvatarRulesAsyncResult, RigType)
 		
-		return var1
-	end
-	return nil
-end
-
-function t.loadAnimationTrackForAvatar(p1, p2)
-	local humanoid = p2:FindFirstChildOfClass("Humanoid")
-	local animator = humanoid and humanoid:FindFirstChildOfClass("Animator")
-	
-	if animator then
-		local animation = Instance.new("Animation")
-		animation.AnimationId = "rbxassetid://" .. p5
+		if FFlagAvatarSwitcherAccurateAvatarWarning then
+			return HumanoidModelFromDescriptionAsync, ConformToAvatarRulesAsyncResult
+		else
+			return HumanoidModelFromDescriptionAsync
+		end
+	end,
+	getCameraDistance = function(Model: Model, p1: number) --[[ Line: 29 ]]
+		local _, BoundingSize = Model:GetBoundingBox()
 		
-		return animator:LoadAnimation(animation)
+		return (BoundingSize / 2).Magnitude / math.sin((math.rad(p1 / 2)))
+	end,
+	loadIdleAnimationForAvatar = function(Object) --[[ Line: 37 ]]
+		local Humanoid = Object:FindFirstChildOfClass("Humanoid")
+		local Animator = Humanoid and Humanoid:FindFirstChildOfClass("Animator")
+		
+		if not Animator then
+			return nil
+		end
+		local Animate = Object:FindFirstChild("Animate")
+		
+		if not Animate then
+			return nil
+		end
+		local Idle = Animate:FindFirstChild("idle")
+		
+		if not Idle then
+			return nil
+		end
+		local Animation = Idle:FindFirstChildOfClass("Animation")
+		
+		if Animation then
+			local AnimationTrack = Animator:LoadAnimation(Animation)
+			AnimationTrack.Looped = true
+			
+			return AnimationTrack
+		else
+			return nil
+		end
+	end,
+	loadAnimationTrackForAvatar = function(Text, Object) --[[ Line: 65 ]]
+		local Humanoid = Object:FindFirstChildOfClass("Humanoid")
+		local Animator = Humanoid and Humanoid:FindFirstChildOfClass("Animator")
+		
+		if Animator then
+			local Animation = Instance.new("Animation")
+			Animation.AnimationId = "rbxassetid://" .. Text
+			
+			return (Animator:LoadAnimation(Animation))
+		else
+			return nil
+		end
 	end
-	return nil
-end
+}
+local v1 = nil
 
-local var1 = nil
-
-function t.playRandomEmote(p1)
-	-- upvalues: avatarSwitcherEmoteIds (ref), var1 (write), t (ref)
-	local humanoid = p1:FindFirstChildOfClass("Humanoid")
-	local var2 = humanoid and humanoid.RigType == Enum.HumanoidRigType.R15
-	local var3 = nil
-	local ok, status = pcall(function()
-		-- upvalues: avatarSwitcherEmoteIds (copy)
-		return string.split(avatarSwitcherEmoteIds)
+function OutfitViewportUtils.playRandomEmote(Object) --[[ Line: 80 ]]
+	-- upvalues: AvatarSwitcherEmoteIds (copy), v1 (ref), OutfitViewportUtils (copy)
+	local Humanoid = Object:FindFirstChildOfClass("Humanoid")
+	local IsRigTypeMatch: boolean = Humanoid and Humanoid.RigType == Enum.HumanoidRigType.R15
+	local AnimationTrackForAvatar = nil
+	local Success, Result = pcall(function() --[[ Line: 85 ]]
+		-- upvalues: AvatarSwitcherEmoteIds (upval)
+		return string.split(AvatarSwitcherEmoteIds)
 	end)
+	local Entry = nil
 	
-	if var2 and ok and #status > 0 then
-		local var4
-		local _ = nil
+	if IsRigTypeMatch and Success and #Result > 0 then
 		repeat
-			var4 = status[math.random(#status)]
-		until not (var4 == var1 and #status ~= 1)
-		var3 = t.loadAnimationTrackForAvatar(var4, p1)
-		var1 = var4
+			Entry = Result[math.random(#Result)]
+		until Entry ~= v1 or #Result == 1
+		AnimationTrackForAvatar = OutfitViewportUtils.loadAnimationTrackForAvatar(Entry, Object)
+		v1 = Entry
 	end
-	task.spawn(function()
-		-- upvalues: var3 (write), p1 (ref), t (copy)
-		if var3 then
-			var3.Looped = false
-			var3:Play()
-			var3.Stopped:Wait()
+	task.spawn(function() --[[ Line: 100 ]]
+		-- upvalues: AnimationTrackForAvatar (ref), Object (copy), OutfitViewportUtils (upval)
+		if AnimationTrackForAvatar then
+			AnimationTrackForAvatar.Looped = false
+			AnimationTrackForAvatar:Play()
+			AnimationTrackForAvatar.Stopped:Wait()
 		end
-		if p1.Parent == nil then return end
-		local var5 = t.loadIdleAnimationForAvatar(p1)
+		if Object.Parent == nil then return end
+		local IdleAnimationForAvatar = OutfitViewportUtils.loadIdleAnimationForAvatar(Object)
 		
-		if var5 then
-			var5.Looped = true
-			var5:Play()
+		if IdleAnimationForAvatar then
+			IdleAnimationForAvatar.Looped = true
+			IdleAnimationForAvatar:Play()
 		end
 	end)
 end
 
-function t.hasMissingAccessoriesInHumanoid(p1, p2)
-	return #p1:GetAccessories() < #p2:GetAccessories(true)
+function OutfitViewportUtils.hasMissingAccessoriesInHumanoid(Humanoid: Humanoid, Humanoid1: Humanoid): boolean --[[ Line: 124 ]]
+	return #Humanoid:GetAccessories() < #Humanoid1:GetAccessories(true)
 end
 
-local function getAssetIdsInHumanoidDescription(value)
-	-- upvalues: avatarSwitcherMakeupSupport (ref)
+local function getAssetIdsInHumanoidDescription(Character) --[[ Line: 136 ]]
+	-- upvalues: AvatarSwitcherMakeupSupport (copy)
 	local t = {}
 	
-	for i, v in value:GetAccessories(true) do
-		t[v.AssetId] = true
+	for _, accessory in Character:GetAccessories(true) do
+		t[accessory.AssetId] = true
 	end
-	t[value.Face] = true
-	t[value.Head] = true
-	t[value.Torso] = true
-	t[value.LeftArm] = true
-	t[value.RightArm] = true
-	t[value.LeftLeg] = true
-	t[value.RightLeg] = true
-	t[value.GraphicTShirt] = true
-	t[value.Pants] = true
-	t[value.Shirt] = true
-	t[value.ClimbAnimation] = true
-	t[value.FallAnimation] = true
-	t[value.IdleAnimation] = true
-	t[value.JumpAnimation] = true
-	t[value.MoodAnimation] = true
-	t[value.RunAnimation] = true
-	t[value.SwimAnimation] = true
-	t[value.WalkAnimation] = true
+	t[Character.Face] = true
+	t[Character.Head] = true
+	t[Character.Torso] = true
+	t[Character.LeftArm] = true
+	t[Character.RightArm] = true
+	t[Character.LeftLeg] = true
+	t[Character.RightLeg] = true
+	t[Character.GraphicTShirt] = true
+	t[Character.Pants] = true
+	t[Character.Shirt] = true
+	t[Character.ClimbAnimation] = true
+	t[Character.FallAnimation] = true
+	t[Character.IdleAnimation] = true
+	t[Character.JumpAnimation] = true
+	t[Character.MoodAnimation] = true
+	t[Character.RunAnimation] = true
+	t[Character.SwimAnimation] = true
+	t[Character.WalkAnimation] = true
 	
-	if avatarSwitcherMakeupSupport then
-		for i, v_1 in value:GetChildren() do
-			if v_1:IsA("MakeupDescription") then
-				t[v_1.AssetId] = true
+	if AvatarSwitcherMakeupSupport then
+		for _, MakeupDescription in Character:GetChildren() do
+			if MakeupDescription:IsA("MakeupDescription") then
+				t[MakeupDescription.AssetId] = true
 			end
 		end
 	end
 	return t
 end
 
-function t.hasMissingAssetsInDescription(value, p1)
-	-- upvalues: getAssetIdsInHumanoidDescription (ref)
-	local var2 = getAssetIdsInHumanoidDescription(value)
+function OutfitViewportUtils.hasMissingAssetsInDescription(Character, List): boolean --[[ Line: 177 ]]
+	-- upvalues: getAssetIdsInHumanoidDescription (copy)
+	local AssetIdsInHumanoidDescription = getAssetIdsInHumanoidDescription(Character)
 	
-	for i, v in p1 do
-		if not var2[v] then
+	for _, value in List do
+		if not AssetIdsInHumanoidDescription[value] then
 			return true
 		end
 	end
 	return false
 end
 
-return t
+return OutfitViewportUtils

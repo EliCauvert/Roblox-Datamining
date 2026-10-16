@@ -1,55 +1,53 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local UIBloxModule = require(parent.UIBlox)
-local luaAppNavigationContextModule = require(appChat.LuaAppNavigationContext)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useTelemetryModule = require(appChat.Telemetry.useTelemetry)
-local chatLandingTelemetryLayerModule = require(appChat.Telemetry.Layers.ChatLandingTelemetryLayer)
-local chatLandingTelemetryEventsModule = require(script:FindFirstAncestor("ChatLanding").ChatLandingTelemetryEvents)
-local getAppChatCommunitiesVisualConfigModule = require(appChat.Utils.getAppChatCommunitiesVisualConfig)
-local images = UIBloxModule.App.ImageSet.Images
-local iconName = foundationModule.Enums.IconName
-local domLocatorsModule = require(appChat.Utils.DomLocators)
-local customConversationListEntryModule = require(script.Parent.CustomConversationListEntry)
-local customConversationListRowModule = require(script.Parent.CustomConversationListRow.CustomConversationListRow)
-local fFlagAppChatUseFoundationCustomConversationListRowModule = require(appChat.Flags.FFlagAppChatUseFoundationCustomConversationListRow)
-local fFlagDebugAppChatEnableDomLocatorsModule = require(appChat.Flags.FFlagDebugAppChatEnableDomLocators)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local ReactModule = require(Parent.React)
+local LuaAppNavigationContextModule = require(AppChat.LuaAppNavigationContext)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseTelemetryModule = require(AppChat.Telemetry.useTelemetry)
+local ChatLandingTelemetryLayerModule = require(AppChat.Telemetry.Layers.ChatLandingTelemetryLayer)
+local ChatLandingTelemetryEventsModule = require(script:FindFirstAncestor("ChatLanding").ChatLandingTelemetryEvents)
+local GetAppChatCommunitiesVisualConfigModule = require(AppChat.Utils.getAppChatCommunitiesVisualConfig)
+local Images = require(Parent.UIBlox).App.ImageSet.Images
+local IconName = require(Parent.Foundation).Enums.IconName
+local DomLocatorsModule = require(AppChat.Utils.DomLocators)
+local CustomConversationListEntryModule = require(script.Parent.CustomConversationListEntry)
+local CustomConversationListRowModule = require(script.Parent.CustomConversationListRow.CustomConversationListRow)
+local FFlagAppChatUseFoundationCustomConversationListRowModule = require(AppChat.Flags.FFlagAppChatUseFoundationCustomConversationListRow)
+local FFlagDebugAppChatEnableDomLocatorsModule = require(AppChat.Flags.FFlagDebugAppChatEnableDomLocators)
 
-function ConversationGroupsEntryContainer(p1)
-	-- upvalues: getAppChatCommunitiesVisualConfigModule (ref), useLocalization (ref), reactModule (ref), luaAppNavigationContextModule (ref), useTelemetryModule (ref), chatLandingTelemetryLayerModule (ref), images (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref), chatLandingTelemetryEventsModule (ref), fFlagAppChatUseFoundationCustomConversationListRowModule (ref), customConversationListRowModule (ref), iconName (ref), customConversationListEntryModule (ref)
-	local var1 = getAppChatCommunitiesVisualConfigModule()
-	local var2 = useLocalization({
+function ConversationGroupsEntryContainer(p1) --[[ Line: 30 ]]
+	-- upvalues: GetAppChatCommunitiesVisualConfigModule (copy), UseLocalizationFunction (copy), ReactModule (copy), LuaAppNavigationContextModule (copy), UseTelemetryModule (copy), ChatLandingTelemetryLayerModule (copy), Images (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), DomLocatorsModule (copy), ChatLandingTelemetryEventsModule (copy), FFlagAppChatUseFoundationCustomConversationListRowModule (copy), CustomConversationListRowModule (copy), IconName (copy), CustomConversationListEntryModule (copy)
+	local AppChatCommunitiesVisualConfigModule = GetAppChatCommunitiesVisualConfigModule()
+	local UseLocalizationResult = UseLocalizationFunction({
 		createAndExploreGroupsText = "Feature.SocialTab.Label.CreateAndExploreGroups",
-		groupsText = var1.label
+		groupsText = AppChatCommunitiesVisualConfigModule.label
 	})
-	local var3 = reactModule.useContext(luaAppNavigationContextModule)
-	local var4 = useTelemetryModule(chatLandingTelemetryLayerModule.Context)
-	local icon = images[var1.icon]
-	local var5 = if fFlagDebugAppChatEnableDomLocatorsModule then domLocatorsModule.chatLandingConversationListHeader("communities") else nil
-	local var6 = reactModule.useCallback(function()
-		-- upvalues: var4 (ref), chatLandingTelemetryEventsModule (copy), var3 (ref)
-		var4.emit(chatLandingTelemetryEventsModule.ChatLandingGroupsBtnClicked, {})
-		var3.navigateToGroups()
-	end, { var4, var3 })
+	local UseContextResult = ReactModule.useContext(LuaAppNavigationContextModule)
+	local UseTelemetryModuleResult = UseTelemetryModule(ChatLandingTelemetryLayerModule.Context)
+	local Image = Images[AppChatCommunitiesVisualConfigModule.icon]
+	local Communities = if FFlagDebugAppChatEnableDomLocatorsModule then DomLocatorsModule.chatLandingConversationListHeader("communities") else nil
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 43 ]]
+		-- upvalues: UseTelemetryModuleResult (copy), ChatLandingTelemetryEventsModule (upval), UseContextResult (copy)
+		UseTelemetryModuleResult.emit(ChatLandingTelemetryEventsModule.ChatLandingGroupsBtnClicked, {})
+		UseContextResult.navigateToGroups()
+	end, { UseTelemetryModuleResult, UseContextResult })
 	
-	return if fFlagAppChatUseFoundationCustomConversationListRowModule then reactModule.createElement(customConversationListRowModule, {
+	return if FFlagAppChatUseFoundationCustomConversationListRowModule then ReactModule.createElement(CustomConversationListRowModule, {
 		key = "ConversationGroupsEntry",
 		entryHeight = p1.entryHeight,
-		entryIcon = iconName.ThreePeople,
-		onActivated = var6,
-		subTitleText = var2.createAndExploreGroupsText,
-		titleText = var2.groupsText,
-		testId = var5
-	}) else reactModule.createElement(customConversationListEntryModule, {
+		entryIcon = IconName.ThreePeople,
+		onActivated = UseResult,
+		subTitleText = UseLocalizationResult.createAndExploreGroupsText,
+		titleText = UseLocalizationResult.groupsText,
+		testId = Communities
+	}) else ReactModule.createElement(CustomConversationListEntryModule, {
 		key = "ConversationGroupsEntry",
 		entryHeight = p1.entryHeight,
-		entryIcon = icon,
-		onActivated = var6,
-		subTitleText = var2.createAndExploreGroupsText,
-		titleText = var2.groupsText,
-		testId = var5
+		entryIcon = Image,
+		onActivated = UseResult,
+		subTitleText = UseLocalizationResult.createAndExploreGroupsText,
+		titleText = UseLocalizationResult.groupsText,
+		testId = Communities
 	})
 end
 

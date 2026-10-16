@@ -1,80 +1,82 @@
-﻿local gameCollections = script:FindFirstAncestor("GameCollections")
-local parent = gameCollections.Parent
-local reactModule = require(parent.React)
-local gameTileConstants = require(parent.GameTile).GameTileConstants
-local responsiveModule = require(parent.Responsive)
-local usePreferredInput = responsiveModule.usePreferredInput
-local useAppPolicy = require(parent.UniversalAppPolicy).useAppPolicy
-local collectionViewsModule = require(parent.CollectionViews)
-local collectionGrid = collectionViewsModule.CollectionGrid
-local useCollectionLayout = collectionViewsModule.useCollectionLayout
-local useGetGameTileHeightModule = require(gameCollections.useGetGameTileHeight)
-local useGameCollectionLayoutParamsModule = require(gameCollections.useGameCollectionLayoutParams)
-local getGameTileCollectionItemSize = require(parent.GameTile).getGameTileCollectionItemSize
-local fFlagLuaAppCompositionAlways = require(parent.SharedFlags).FFlagLuaAppCompositionAlways
+﻿local GameCollections = script:FindFirstAncestor("GameCollections")
+local Parent = GameCollections.Parent
+local ReactModule = require(Parent.React)
+local GameTileConstants = require(Parent.GameTile).GameTileConstants
+local ResponsiveModule = require(Parent.Responsive)
+local UsePreferredInputFunction = ResponsiveModule.usePreferredInput
+local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
+local CollectionViewsModule = require(Parent.CollectionViews)
+local CollectionGrid = CollectionViewsModule.CollectionGrid
+local UseCollectionLayoutFunction = CollectionViewsModule.useCollectionLayout
+local UseGetGameTileHeightModule = require(GameCollections.useGetGameTileHeight)
+local UseGameCollectionLayoutParamsModule = require(GameCollections.useGameCollectionLayoutParams)
+local GetGameTileCollectionItemSizeFunction = require(Parent.GameTile).getGameTileCollectionItemSize
+local FFlagLuaAppCompositionAlways = require(Parent.SharedFlags).FFlagLuaAppCompositionAlways
 local t = {}
 
-local function renderItem(_, _, _, _)
+local function renderItem(_, _, _, _) --[[ Line: 41 ]]
 	return nil, "placeholder"
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: useAppPolicy (ref), usePreferredInput (ref), responsiveModule (ref), fFlagLuaAppCompositionAlways (ref), getGameTileCollectionItemSize (ref), reactModule (ref), useGameCollectionLayoutParamsModule (ref), useCollectionLayout (ref), gameTileConstants (ref), useGetGameTileHeightModule (ref), t (ref), collectionGrid (ref), renderItem (ref)
-	local var1 = useAppPolicy(function(p2)
+return ReactModule.memo(function(p1) --[[ Line: 48 | Named "PlaceholderGameGrid" ]]
+	-- upvalues: UseAppPolicyFunction (copy), UsePreferredInputFunction (copy), ResponsiveModule (copy), FFlagLuaAppCompositionAlways (copy), GetGameTileCollectionItemSizeFunction (copy), ReactModule (copy), UseGameCollectionLayoutParamsModule (copy), UseCollectionLayoutFunction (copy), GameTileConstants (copy), UseGetGameTileHeightModule (copy), t (copy), CollectionGrid (copy), renderItem (copy)
+	local UseAppPolicyResult = UseAppPolicyFunction(function(p2) --[[ Line: 50 ]]
 		return p2.useGridPageLayout()
 	end)
-	local var2 = p1.isHoverSupportEnabled and (var1 and usePreferredInput() == responsiveModule.Input.Pointer)
-	local gameTileLayoutType = p1.gameTileLayoutType or "Narrow"
-	local fFlagLuaAppCompositionAlways_1 = fFlagLuaAppCompositionAlways or p1.appCompositionEnabled
-	local var3 = if fFlagLuaAppCompositionAlways_1 then getGameTileCollectionItemSize(gameTileLayoutType) else nil
-	local var4, var5 = reactModule.useState(nil)
-	reactModule.useRef(var4).current = var4
-	local var6 = useGameCollectionLayoutParamsModule(gameTileLayoutType, var4, false, if var1 then nil else { sideMargin = p1.sideMargin })
-	local var7 = if fFlagLuaAppCompositionAlways_1 then useCollectionLayout(var3).itemsPerRow else var6.numColumns
-	local var8 = useGetGameTileHeightModule(var2, gameTileLayoutType, p1.containedTile or false, p1.shouldHideTileMetadata or false, p1.shouldHideTileTitle or false, nil, nil, gameTileConstants.TileTextLines[gameTileLayoutType] and gameTileConstants.TileTextLines[gameTileLayoutType].titleTextLines)
+	local UsePreferredInputResult = UsePreferredInputFunction()
+	local IsUsePreferredInputResultMatch: boolean = p1.isHoverSupportEnabled and (UseAppPolicyResult and UsePreferredInputResult == ResponsiveModule.Input.Pointer)
+	local GameTileLayoutType = p1.gameTileLayoutType or "Narrow"
+	local FFlagLuaAppCompositionAlways1 = FFlagLuaAppCompositionAlways or p1.appCompositionEnabled
+	local GameTileCollectionItemSize = if FFlagLuaAppCompositionAlways1 then GetGameTileCollectionItemSizeFunction(GameTileLayoutType) else nil
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	ReactModule.useRef(UseStateResult).current = UseStateResult
+	local UseGameCollectionLayoutParamsModuleResult = UseGameCollectionLayoutParamsModule(GameTileLayoutType, UseStateResult, false, if UseAppPolicyResult then nil else { sideMargin = p1.sideMargin })
+	local ItemsPerRow = UseCollectionLayoutFunction(GameTileCollectionItemSize).itemsPerRow
+	local ItemsPerRow1 = if FFlagLuaAppCompositionAlways1 then ItemsPerRow else UseGameCollectionLayoutParamsModuleResult.numColumns
+	local UseGetGameTileHeightModuleResult = UseGetGameTileHeightModule(IsUsePreferredInputResultMatch, GameTileLayoutType, p1.containedTile or false, p1.shouldHideTileMetadata or false, p1.shouldHideTileTitle or false, nil, nil, GameTileConstants.TileTextLines[GameTileLayoutType] and GameTileConstants.TileTextLines[GameTileLayoutType].titleTextLines)
 	
-	if not fFlagLuaAppCompositionAlways then
-		local var9 = reactModule.useRef(0)
-		reactModule.useEffect(function()
-			-- upvalues: fFlagLuaAppCompositionAlways_1 (ref), var6 (ref), var9 (ref), p1 (ref)
-			if not fFlagLuaAppCompositionAlways_1 and var6.numColumns ~= var9.current then
-				var9.current = var6.numColumns
+	if not FFlagLuaAppCompositionAlways then
+		local UseRefResult = ReactModule.useRef(0)
+		ReactModule.useEffect(function() --[[ Line: 101 ]]
+			-- upvalues: FFlagLuaAppCompositionAlways1 (copy), UseGameCollectionLayoutParamsModuleResult (copy), UseRefResult (copy), p1 (copy)
+			if not FFlagLuaAppCompositionAlways1 and UseGameCollectionLayoutParamsModuleResult.numColumns ~= UseRefResult.current then
+				UseRefResult.current = UseGameCollectionLayoutParamsModuleResult.numColumns
 				
 				if p1.onItemsPerRowChanged then
-					p1.onItemsPerRowChanged(var6.numColumns)
+					p1.onItemsPerRowChanged(UseGameCollectionLayoutParamsModuleResult.numColumns)
 				end
 			end
 		end, {
-			var6.numColumns,
+			UseGameCollectionLayoutParamsModuleResult.numColumns,
 			p1.onItemsPerRowChanged,
-			var9,
-			fFlagLuaAppCompositionAlways_1
+			UseRefResult,
+			FFlagLuaAppCompositionAlways1
 		})
 	end
-	local clampedValue = math.clamp(p1.numRows, 0, 4)
+	local ClampedValue = math.clamp(p1.numRows, 0, 4)
 	
-	return reactModule.createElement(reactModule.Fragment, nil, {
-		GameGrid = reactModule.createElement(collectionGrid, {
+	return ReactModule.createElement(ReactModule.Fragment, nil, {
+		GameGrid = ReactModule.createElement(CollectionGrid, {
 			hideHeaderButton = true,
-			collectionItemSize = if fFlagLuaAppCompositionAlways_1 then var3 else nil,
-			title = if clampedValue > 0 then p1.title else nil,
+			collectionItemSize = if FFlagLuaAppCompositionAlways1 then GameTileCollectionItemSize else nil,
+			title = if ClampedValue > 0 then p1.title else nil,
 			headerComponent = p1.headerComponent,
-			containerRef = var5,
+			containerRef = UseStateResult2,
 			verticalScrollingFrameRef = p1.verticalScrollingFrameRef,
-			items = reactModule.useMemo(function()
-				-- upvalues: var7 (ref), clampedValue (ref), t (copy)
-				local t_1 = {}
+			items = ReactModule.useMemo(function() --[[ Line: 124 ]]
+				-- upvalues: ItemsPerRow1 (copy), ClampedValue (copy), t (upval)
+				local List = {}
 				
-				for _ = 1, var7 * clampedValue do
-					table.insert(t_1, t)
+				for _ = 1, ItemsPerRow1 * ClampedValue do
+					table.insert(List, t)
 				end
-				return t_1
-			end, { var7, clampedValue }),
+				return List
+			end, { ItemsPerRow1, ClampedValue }),
 			renderItem = renderItem,
-			getItemHeight = var8,
-			numColumns = if fFlagLuaAppCompositionAlways_1 then nil else var6.numColumns,
-			columnGap = if fFlagLuaAppCompositionAlways_1 then nil else var6.columnGap,
-			sideMargin = if fFlagLuaAppCompositionAlways_1 then nil else var6.sideMargin
+			getItemHeight = UseGetGameTileHeightModuleResult,
+			numColumns = if FFlagLuaAppCompositionAlways1 then nil else UseGameCollectionLayoutParamsModuleResult.numColumns,
+			columnGap = if FFlagLuaAppCompositionAlways1 then nil else UseGameCollectionLayoutParamsModuleResult.columnGap,
+			sideMargin = if FFlagLuaAppCompositionAlways1 then nil else UseGameCollectionLayoutParamsModuleResult.sideMargin
 		})
 	})
 end)

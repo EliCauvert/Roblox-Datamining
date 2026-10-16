@@ -1,24 +1,24 @@
-﻿local robloxSubscriptionPurchaseApp = script:FindFirstAncestor("RobloxSubscriptionPurchaseApp")
-local completeRobloxSubscriptionUpsellFlowModule = require(robloxSubscriptionPurchaseApp.Actions.completeRobloxSubscriptionUpsellFlow)
-local useNativePurchaseFinishedListenerModule = require(robloxSubscriptionPurchaseApp.Hooks.useNativePurchaseFinishedListener)
-local fFlagEnableHeadlessSubscriptionNativePurchaseCancelCallbackModule = require(robloxSubscriptionPurchaseApp.Flags.FFlagEnableHeadlessSubscriptionNativePurchaseCancelCallback)
-local useRobloxSubscriptionChangedListenerModule = require(robloxSubscriptionPurchaseApp.Hooks.useRobloxSubscriptionChangedListener)
-local useSubscriptionPollingTimeoutGuardModule = require(robloxSubscriptionPurchaseApp.Hooks.useSubscriptionPollingTimeoutGuard)
-local useHeadlessSubscriptionErrorCompletionModule = require(robloxSubscriptionPurchaseApp.Hooks.useHeadlessSubscriptionErrorCompletion)
+﻿local RobloxSubscriptionPurchaseApp = script:FindFirstAncestor("RobloxSubscriptionPurchaseApp")
+local CompleteRobloxSubscriptionUpsellFlowModule = require(RobloxSubscriptionPurchaseApp.Actions.completeRobloxSubscriptionUpsellFlow)
+local UseNativePurchaseFinishedListenerModule = require(RobloxSubscriptionPurchaseApp.Hooks.useNativePurchaseFinishedListener)
+local FFlagEnableHeadlessSubscriptionNativePurchaseCancelCallbackModule = require(RobloxSubscriptionPurchaseApp.Flags.FFlagEnableHeadlessSubscriptionNativePurchaseCancelCallback)
+local UseRobloxSubscriptionChangedListenerModule = require(RobloxSubscriptionPurchaseApp.Hooks.useRobloxSubscriptionChangedListener)
+local UseSubscriptionPollingTimeoutGuardModule = require(RobloxSubscriptionPurchaseApp.Hooks.useSubscriptionPollingTimeoutGuard)
+local UseHeadlessSubscriptionErrorCompletionModule = require(RobloxSubscriptionPurchaseApp.Hooks.useHeadlessSubscriptionErrorCompletion)
 
-return function()
-	-- upvalues: fFlagEnableHeadlessSubscriptionNativePurchaseCancelCallbackModule (ref), useNativePurchaseFinishedListenerModule (ref), completeRobloxSubscriptionUpsellFlowModule (ref), useRobloxSubscriptionChangedListenerModule (ref), useSubscriptionPollingTimeoutGuardModule (ref), useHeadlessSubscriptionErrorCompletionModule (ref)
-	if fFlagEnableHeadlessSubscriptionNativePurchaseCancelCallbackModule then
-		useNativePurchaseFinishedListenerModule(nil, nil, function()
-			-- upvalues: completeRobloxSubscriptionUpsellFlowModule (copy)
-			completeRobloxSubscriptionUpsellFlowModule()
+return function() --[[ Line: 15 | Named "RobloxSubscriptionHeadlessListenerHost" ]]
+	-- upvalues: FFlagEnableHeadlessSubscriptionNativePurchaseCancelCallbackModule (copy), UseNativePurchaseFinishedListenerModule (copy), CompleteRobloxSubscriptionUpsellFlowModule (copy), UseRobloxSubscriptionChangedListenerModule (copy), UseSubscriptionPollingTimeoutGuardModule (copy), UseHeadlessSubscriptionErrorCompletionModule (copy)
+	if FFlagEnableHeadlessSubscriptionNativePurchaseCancelCallbackModule then
+		UseNativePurchaseFinishedListenerModule(nil, nil, function() --[[ Line: 17 ]]
+			-- upvalues: CompleteRobloxSubscriptionUpsellFlowModule (upval)
+			CompleteRobloxSubscriptionUpsellFlowModule()
 		end)
 	else
-		useNativePurchaseFinishedListenerModule()
+		UseNativePurchaseFinishedListenerModule()
 	end
-	useRobloxSubscriptionChangedListenerModule()
-	useSubscriptionPollingTimeoutGuardModule()
-	useHeadlessSubscriptionErrorCompletionModule()
+	UseRobloxSubscriptionChangedListenerModule()
+	UseSubscriptionPollingTimeoutGuardModule()
+	UseHeadlessSubscriptionErrorCompletionModule()
 	
 	return nil
 end

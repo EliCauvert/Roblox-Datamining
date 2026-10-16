@@ -1,89 +1,101 @@
-﻿local realtimeEventNamesModule = require(script.Parent.RealtimeEventNames)
-local realtimeTelemetryActionListModule = require(script.Parent.RealtimeTelemetryActionList)
-local realtimeTelemetryEmitterModule = require(script.Parent.realtimeTelemetryEmitter)
+﻿local RealtimeEventNamesModule = require(script.Parent.RealtimeEventNames)
+local RealtimeTelemetryActionListModule = require(script.Parent.RealtimeTelemetryActionList)
+local RealtimeTelemetryEmitterModule = require(script.Parent.realtimeTelemetryEmitter)
 
-local function _(p1, p2, p3)
-	-- upvalues: realtimeTelemetryEmitterModule (ref)
-	;(p3 or realtimeTelemetryEmitterModule.emit)(p1, p2)
+local function _(p1, p2, p3) --[[ Line: 21 | Named "emit" ]]
+	-- upvalues: RealtimeTelemetryEmitterModule (copy)
+	(p3 or RealtimeTelemetryEmitterModule.emit)(p1, p2)
 end
 
 return {
-	reportMomentsFeedLoadAttempt = function(p1, p2)
-		-- upvalues: realtimeTelemetryActionListModule (ref), realtimeEventNamesModule (ref), realtimeTelemetryEmitterModule (ref)
-		;(p2 or realtimeTelemetryEmitterModule.emit)(realtimeTelemetryActionListModule[realtimeEventNamesModule.MomentsFeedLoadAttempt], { feedType = p1 })
+	reportMomentsFeedLoadAttempt = function(FeedType, p1) --[[ Line: 26 ]]
+		-- upvalues: RealtimeTelemetryActionListModule (copy), RealtimeEventNamesModule (copy), RealtimeTelemetryEmitterModule (copy)
+		(p1 or RealtimeTelemetryEmitterModule.emit)(RealtimeTelemetryActionListModule[RealtimeEventNamesModule.MomentsFeedLoadAttempt], { feedType = FeedType })
 	end,
-	reportMomentsFeedLoadMore = function(p1, p2, p3, p4)
-		-- upvalues: realtimeTelemetryActionListModule (ref), realtimeEventNamesModule (ref), realtimeTelemetryEmitterModule (ref)
-		;(p4 or realtimeTelemetryEmitterModule.emit)(realtimeTelemetryActionListModule[realtimeEventNamesModule.MomentsFeedLoadMore], { status = p1, feedType = p2, failureReason = p3 })
+	reportMomentsFeedLoadMore = function(Status, FeedType, FailureReason, p1) --[[ Line: 40 ]]
+		-- upvalues: RealtimeTelemetryActionListModule (copy), RealtimeEventNamesModule (copy), RealtimeTelemetryEmitterModule (copy)
+		(p1 or RealtimeTelemetryEmitterModule.emit)(RealtimeTelemetryActionListModule[RealtimeEventNamesModule.MomentsFeedLoadMore], {
+			status = Status,
+			feedType = FeedType,
+			failureReason = FailureReason
+		})
 	end,
-	reportMomentsFeedMediaLoad = function(p1, p2, p3, p4)
-		-- upvalues: realtimeTelemetryActionListModule (ref), realtimeEventNamesModule (ref), realtimeTelemetryEmitterModule (ref)
-		;(p4 or realtimeTelemetryEmitterModule.emit)(realtimeTelemetryActionListModule[realtimeEventNamesModule.MomentsFeedMediaLoad], { status = p1, feedType = p2, failureReason = p3 })
+	reportMomentsFeedMediaLoad = function(Status, FeedType, FailureReason, p1) --[[ Line: 53 ]]
+		-- upvalues: RealtimeTelemetryActionListModule (copy), RealtimeEventNamesModule (copy), RealtimeTelemetryEmitterModule (copy)
+		(p1 or RealtimeTelemetryEmitterModule.emit)(RealtimeTelemetryActionListModule[RealtimeEventNamesModule.MomentsFeedMediaLoad], {
+			status = Status,
+			feedType = FeedType,
+			failureReason = FailureReason
+		})
 	end,
-	reportMomentsFeedState = function(p1, p2, p3, p4)
-		-- upvalues: realtimeTelemetryActionListModule (ref), realtimeEventNamesModule (ref), realtimeTelemetryEmitterModule (ref)
-		;(p4 or realtimeTelemetryEmitterModule.emit)(realtimeTelemetryActionListModule[realtimeEventNamesModule.MomentsFeedState], { status = p1, feedType = p2, failureReason = p3 })
+	reportMomentsFeedState = function(Status, FeedType, FailureReason, p1) --[[ Line: 32 ]]
+		-- upvalues: RealtimeTelemetryActionListModule (copy), RealtimeEventNamesModule (copy), RealtimeTelemetryEmitterModule (copy)
+		(p1 or RealtimeTelemetryEmitterModule.emit)(RealtimeTelemetryActionListModule[RealtimeEventNamesModule.MomentsFeedState], {
+			status = Status,
+			feedType = FeedType,
+			failureReason = FailureReason
+		})
 	end,
-	reportMomentsSurfaceLoadAbort = function(p1, p2)
-		-- upvalues: realtimeTelemetryActionListModule (ref), realtimeEventNamesModule (ref), realtimeTelemetryEmitterModule (ref)
-		;(p2 or realtimeTelemetryEmitterModule.emit)(realtimeTelemetryActionListModule[realtimeEventNamesModule.MomentsSurfaceLoadAbort], { reason = p1 })
+	reportMomentsSurfaceLoadAbort = function(Reason, p1) --[[ Line: 66 ]]
+		-- upvalues: RealtimeTelemetryActionListModule (copy), RealtimeEventNamesModule (copy), RealtimeTelemetryEmitterModule (copy)
+		(p1 or RealtimeTelemetryEmitterModule.emit)(RealtimeTelemetryActionListModule[RealtimeEventNamesModule.MomentsSurfaceLoadAbort], { reason = Reason })
 	end,
-	reportMomentsViewBegan = function(p1, p2)
-		-- upvalues: realtimeTelemetryActionListModule (ref), realtimeEventNamesModule (ref), realtimeTelemetryEmitterModule (ref)
-		;(p2 or realtimeTelemetryEmitterModule.emit)(realtimeTelemetryActionListModule[realtimeEventNamesModule.MomentsViewBegan], { source = p1 })
+	reportMomentsViewBegan = function(Source, p1) --[[ Line: 70 ]]
+		-- upvalues: RealtimeTelemetryActionListModule (copy), RealtimeEventNamesModule (copy), RealtimeTelemetryEmitterModule (copy)
+		(p1 or RealtimeTelemetryEmitterModule.emit)(RealtimeTelemetryActionListModule[RealtimeEventNamesModule.MomentsViewBegan], { source = Source })
 	end,
-	reportMomentsSessionStarted = function(p1, p2)
-		-- upvalues: realtimeTelemetryActionListModule (ref), realtimeEventNamesModule (ref), realtimeTelemetryEmitterModule (ref)
-		;(p2 or realtimeTelemetryEmitterModule.emit)(realtimeTelemetryActionListModule[realtimeEventNamesModule.MomentsSessionStarted], { source = p1 })
+	reportMomentsSessionStarted = function(Source, p1) --[[ Line: 76 ]]
+		-- upvalues: RealtimeTelemetryActionListModule (copy), RealtimeEventNamesModule (copy), RealtimeTelemetryEmitterModule (copy)
+		(p1 or RealtimeTelemetryEmitterModule.emit)(RealtimeTelemetryActionListModule[RealtimeEventNamesModule.MomentsSessionStarted], { source = Source })
 	end,
-	reportMomentsSessionEnded = function(p1, p2)
-		-- upvalues: realtimeTelemetryActionListModule (ref), realtimeEventNamesModule (ref), realtimeTelemetryEmitterModule (ref)
-		;(p2 or realtimeTelemetryEmitterModule.emit)(realtimeTelemetryActionListModule[realtimeEventNamesModule.MomentsSessionEnded], { source = p1 })
+	reportMomentsSessionEnded = function(Source, p1) --[[ Line: 82 ]]
+		-- upvalues: RealtimeTelemetryActionListModule (copy), RealtimeEventNamesModule (copy), RealtimeTelemetryEmitterModule (copy)
+		(p1 or RealtimeTelemetryEmitterModule.emit)(RealtimeTelemetryActionListModule[RealtimeEventNamesModule.MomentsSessionEnded], { source = Source })
 	end,
-	reportMomentsSessionHeartbeat = function(p1, p2)
-		-- upvalues: realtimeTelemetryActionListModule (ref), realtimeEventNamesModule (ref), realtimeTelemetryEmitterModule (ref)
-		;(p2 or realtimeTelemetryEmitterModule.emit)(realtimeTelemetryActionListModule[realtimeEventNamesModule.MomentsSessionHeartbeat], { source = p1 })
+	reportMomentsSessionHeartbeat = function(Source, p1) --[[ Line: 88 ]]
+		-- upvalues: RealtimeTelemetryActionListModule (copy), RealtimeEventNamesModule (copy), RealtimeTelemetryEmitterModule (copy)
+		(p1 or RealtimeTelemetryEmitterModule.emit)(RealtimeTelemetryActionListModule[RealtimeEventNamesModule.MomentsSessionHeartbeat], { source = Source })
 	end,
-	reportMomentsEngagement = function(p1, p2)
-		-- upvalues: realtimeTelemetryActionListModule (ref), realtimeEventNamesModule (ref), realtimeTelemetryEmitterModule (ref)
-		;(p2 or realtimeTelemetryEmitterModule.emit)(realtimeTelemetryActionListModule[realtimeEventNamesModule.MomentsEngagement], { action = p1 })
+	reportMomentsEngagement = function(Action, p1) --[[ Line: 94 ]]
+		-- upvalues: RealtimeTelemetryActionListModule (copy), RealtimeEventNamesModule (copy), RealtimeTelemetryEmitterModule (copy)
+		(p1 or RealtimeTelemetryEmitterModule.emit)(RealtimeTelemetryActionListModule[RealtimeEventNamesModule.MomentsEngagement], { action = Action })
 	end,
-	reportMomentsCreationStep = function(p1, p2, p3, p4)
-		-- upvalues: realtimeTelemetryActionListModule (ref), realtimeEventNamesModule (ref), realtimeTelemetryEmitterModule (ref)
-		;(p4 or realtimeTelemetryEmitterModule.emit)(realtimeTelemetryActionListModule[realtimeEventNamesModule.MomentsCreationStep], { step = p1, status = p2, reason = p3 })
+	reportMomentsCreationStep = function(Step, Status, Reason, p1) --[[ Line: 100 ]]
+		-- upvalues: RealtimeTelemetryActionListModule (copy), RealtimeEventNamesModule (copy), RealtimeTelemetryEmitterModule (copy)
+		(p1 or RealtimeTelemetryEmitterModule.emit)(RealtimeTelemetryActionListModule[RealtimeEventNamesModule.MomentsCreationStep], { step = Step, status = Status, reason = Reason })
 	end,
-	reportMomentsFeedItemsReceived = function(p1, p2)
-		-- upvalues: realtimeTelemetryActionListModule (ref), realtimeEventNamesModule (ref), realtimeTelemetryEmitterModule (ref)
-		;(p2 or realtimeTelemetryEmitterModule.emit)(realtimeTelemetryActionListModule[realtimeEventNamesModule.MomentsFeedItemsReceived], { feedType = p1 })
+	reportMomentsFeedItemsReceived = function(FeedType, p1) --[[ Line: 108 ]]
+		-- upvalues: RealtimeTelemetryActionListModule (copy), RealtimeEventNamesModule (copy), RealtimeTelemetryEmitterModule (copy)
+		(p1 or RealtimeTelemetryEmitterModule.emit)(RealtimeTelemetryActionListModule[RealtimeEventNamesModule.MomentsFeedItemsReceived], { feedType = FeedType })
 	end,
-	reportMomentsFeedItemFiltered = function(p1, p2, p3)
-		-- upvalues: realtimeTelemetryActionListModule (ref), realtimeEventNamesModule (ref), realtimeTelemetryEmitterModule (ref)
-		;(p3 or realtimeTelemetryEmitterModule.emit)(realtimeTelemetryActionListModule[realtimeEventNamesModule.MomentsFeedItemFiltered], { reason = p1, feedType = p2 })
+	reportMomentsFeedItemFiltered = function(Reason, FeedType, p1) --[[ Line: 114 ]]
+		-- upvalues: RealtimeTelemetryActionListModule (copy), RealtimeEventNamesModule (copy), RealtimeTelemetryEmitterModule (copy)
+		(p1 or RealtimeTelemetryEmitterModule.emit)(RealtimeTelemetryActionListModule[RealtimeEventNamesModule.MomentsFeedItemFiltered], { reason = Reason, feedType = FeedType })
 	end,
-	reportMomentsPublishedWithEdit = function(p1, p2)
-		-- upvalues: realtimeTelemetryActionListModule (ref), realtimeEventNamesModule (ref), realtimeTelemetryEmitterModule (ref)
-		;(p2 or realtimeTelemetryEmitterModule.emit)(realtimeTelemetryActionListModule[realtimeEventNamesModule.MomentsPublishedWithEdit], { editType = p1 })
+	reportMomentsPublishedWithEdit = function(EditType, p1) --[[ Line: 121 ]]
+		-- upvalues: RealtimeTelemetryActionListModule (copy), RealtimeEventNamesModule (copy), RealtimeTelemetryEmitterModule (copy)
+		(p1 or RealtimeTelemetryEmitterModule.emit)(RealtimeTelemetryActionListModule[RealtimeEventNamesModule.MomentsPublishedWithEdit], { editType = EditType })
 	end,
-	reportMomentsPublishedEditCount = function(p1, p2)
-		-- upvalues: realtimeTelemetryActionListModule (ref), realtimeEventNamesModule (ref), realtimeTelemetryEmitterModule (ref)
-		;(p2 or realtimeTelemetryEmitterModule.emit)(realtimeTelemetryActionListModule[realtimeEventNamesModule.MomentsPublishedEditCount], {
+	reportMomentsPublishedEditCount = function(p1: number, p2) --[[ Line: 127 ]]
+		-- upvalues: RealtimeTelemetryActionListModule (copy), RealtimeEventNamesModule (copy), RealtimeTelemetryEmitterModule (copy)
+		(p2 or RealtimeTelemetryEmitterModule.emit)(RealtimeTelemetryActionListModule[RealtimeEventNamesModule.MomentsPublishedEditCount], {
 			bucket = if p1 >= 3 then "3plus" elseif p1 == 2 then "2" elseif p1 == 1 then "1" else "0"
 		})
 	end,
-	reportMomentsPublishedByCaptureType = function(p1, p2)
-		-- upvalues: realtimeTelemetryActionListModule (ref), realtimeEventNamesModule (ref), realtimeTelemetryEmitterModule (ref)
-		;(p2 or realtimeTelemetryEmitterModule.emit)(realtimeTelemetryActionListModule[realtimeEventNamesModule.MomentsPublishedByCaptureType], { captureType = p1 })
+	reportMomentsPublishedByCaptureType = function(CaptureType, p1) --[[ Line: 134 ]]
+		-- upvalues: RealtimeTelemetryActionListModule (copy), RealtimeEventNamesModule (copy), RealtimeTelemetryEmitterModule (copy)
+		(p1 or RealtimeTelemetryEmitterModule.emit)(RealtimeTelemetryActionListModule[RealtimeEventNamesModule.MomentsPublishedByCaptureType], { captureType = CaptureType })
 	end,
-	reportMomentsEditToolOpened = function(p1, p2)
-		-- upvalues: realtimeTelemetryActionListModule (ref), realtimeEventNamesModule (ref), realtimeTelemetryEmitterModule (ref)
-		;(p2 or realtimeTelemetryEmitterModule.emit)(realtimeTelemetryActionListModule[realtimeEventNamesModule.MomentsEditToolOpened], { tool = p1 })
+	reportMomentsEditToolOpened = function(Tool, p1) --[[ Line: 140 ]]
+		-- upvalues: RealtimeTelemetryActionListModule (copy), RealtimeEventNamesModule (copy), RealtimeTelemetryEmitterModule (copy)
+		(p1 or RealtimeTelemetryEmitterModule.emit)(RealtimeTelemetryActionListModule[RealtimeEventNamesModule.MomentsEditToolOpened], { tool = Tool })
 	end,
-	reportMomentsEditToolAbandoned = function(p1, p2)
-		-- upvalues: realtimeTelemetryActionListModule (ref), realtimeEventNamesModule (ref), realtimeTelemetryEmitterModule (ref)
-		;(p2 or realtimeTelemetryEmitterModule.emit)(realtimeTelemetryActionListModule[realtimeEventNamesModule.MomentsEditToolAbandoned], { tool = p1 })
+	reportMomentsEditToolAbandoned = function(Tool, p1) --[[ Line: 146 ]]
+		-- upvalues: RealtimeTelemetryActionListModule (copy), RealtimeEventNamesModule (copy), RealtimeTelemetryEmitterModule (copy)
+		(p1 or RealtimeTelemetryEmitterModule.emit)(RealtimeTelemetryActionListModule[RealtimeEventNamesModule.MomentsEditToolAbandoned], { tool = Tool })
 	end,
-	reportMomentsGenerateText = function(p1, p2)
-		-- upvalues: realtimeTelemetryActionListModule (ref), realtimeEventNamesModule (ref), realtimeTelemetryEmitterModule (ref)
-		;(p2 or realtimeTelemetryEmitterModule.emit)(realtimeTelemetryActionListModule[realtimeEventNamesModule.MomentsGenerateText], { status = p1 })
+	reportMomentsGenerateText = function(Status, p1) --[[ Line: 152 ]]
+		-- upvalues: RealtimeTelemetryActionListModule (copy), RealtimeEventNamesModule (copy), RealtimeTelemetryEmitterModule (copy)
+		(p1 or RealtimeTelemetryEmitterModule.emit)(RealtimeTelemetryActionListModule[RealtimeEventNamesModule.MomentsGenerateText], { status = Status })
 	end
 }

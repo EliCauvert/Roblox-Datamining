@@ -1,4 +1,4 @@
-﻿local t = {
+﻿local config = {
 	GuiBase2d = {
 		"AbsolutePosition", "AbsoluteRotation", "AbsoluteSize", "AutoLocalize",
 		"ClippedRect", "IsNotOccluded", "RawRect2D", "ReplicatedInsertionOrder",
@@ -70,87 +70,92 @@
 	LayerCollector = { "Enabled", "ResetOnSpawn", "ZIndexBehavior" }
 }
 
-local function getProperty(p1, p2)
-	local ok, status = pcall(function()
-		-- upvalues: p1 (ref), p2 (ref)
+local function getProperty(p1, p2) --[[ Line: 217 ]]
+	local Success, Result = pcall(function() --[[ Line: 218 ]]
+		-- upvalues: p1 (copy), p2 (copy)
 		return p1[p2]
 	end)
 	
-	if not ok or status == nil then
+	if not Success or Result == nil then
 		return nil
 	end
-	local function _(p3)
+	local function _(p3) --[[ Line: 226 | Named "handleInf" ]]
 		return if p3 == 1e999 then "inf" elseif p3 == -1e999 then "-inf" else p3
 	end
 	
-	if typeof(status) == "Vector2" then
-		local t = {}
-		local x = status.X
-		local y = status.Y
-		-- Unknown statement at pc 3: <SetList>
+	if typeof(Result) == "Vector2" then
+		local X = Result.X
+		local Y = Result.Y
 		
-		return t
-	elseif typeof(status) == "Vector3" then
-		local t = {}
-		local x = status.X
-		local var1 = if x == 1e999 then "inf" elseif x == -1e999 then "-inf" else x
-		local y = status.Y
-		local z = status.Z
-		-- Unknown statement at pc 5: <SetList>
+		return {
+			if X == 1e999 then "inf" elseif X == -1e999 then "-inf" else X,
+			if Y == 1e999 then "inf" elseif Y == -1e999 then "-inf" else Y
+		}
+	elseif typeof(Result) == "Vector3" then
+		local X = Result.X
+		local Y = Result.Y
+		local Z = Result.Z
 		
-		return t
-	elseif typeof(status) == "Color3" then
-		return { status.R, status.G, status.B }
-	elseif typeof(status) == "UDim2" then
-		local t = {}
-		local scale = status.X.Scale
-		local var2 = if scale == 1e999 then "inf" elseif scale == -1e999 then "-inf" else scale
-		local offset = status.X.Offset
-		local var3 = if offset == 1e999 then "inf" elseif offset == -1e999 then "-inf" else offset
-		local scale_1 = status.Y.Scale
-		local offset_1 = status.Y.Offset
-		-- Unknown statement at pc 7: <SetList>
+		return {
+			if X == 1e999 then "inf" elseif X == -1e999 then "-inf" else X,
+			if Y == 1e999 then "inf" elseif Y == -1e999 then "-inf" else Y,
+			if Z == 1e999 then "inf" elseif Z == -1e999 then "-inf" else Z
+		}
+	elseif typeof(Result) == "Color3" then
+		return { Result.R, Result.G, Result.B }
+	elseif typeof(Result) == "UDim2" then
+		local Scale = Result.X.Scale
+		local Offset = Result.X.Offset
+		local Scale1 = Result.Y.Scale
+		local Offset1 = Result.Y.Offset
 		
-		return t
-	elseif typeof(status) == "Rect" then
-		local t = {}
-		local x = status.Min.X
-		local var4 = if x == 1e999 then "inf" elseif x == -1e999 then "-inf" else x
-		local y = status.Min.Y
-		local var5 = if y == 1e999 then "inf" elseif y == -1e999 then "-inf" else y
-		local x_1 = status.Max.X
-		local y_1 = status.Max.Y
-		-- Unknown statement at pc 7: <SetList>
+		return {
+			if Scale == 1e999 then "inf" elseif Scale == -1e999 then "-inf" else Scale,
+			if Offset == 1e999 then "inf" elseif Offset == -1e999 then "-inf" else Offset,
+			if Scale1 == 1e999 then "inf" elseif Scale1 == -1e999 then "-inf" else Scale1,
+			if Offset1 == 1e999 then "inf" elseif Offset1 == -1e999 then "-inf" else Offset1
+		}
+	elseif typeof(Result) == "Rect" then
+		local X = Result.Min.X
+		local Y = Result.Min.Y
+		local X1 = Result.Max.X
+		local Y1 = Result.Max.Y
 		
-		return t
+		return {
+			if X == 1e999 then "inf" elseif X == -1e999 then "-inf" else X,
+			if Y == 1e999 then "inf" elseif Y == -1e999 then "-inf" else Y,
+			if X1 == 1e999 then "inf" elseif X1 == -1e999 then "-inf" else X1,
+			if Y1 == 1e999 then "inf" elseif Y1 == -1e999 then "-inf" else Y1
+		}
+	else
+		return if typeof(Result) == "number" or typeof(Result) == "boolean" then Result else tostring(Result)
 	end
-	return if typeof(status) == "number" or typeof(status) == "boolean" then status else tostring(status)
 end
 
-return function(p1, p2)
-	-- upvalues: t (ref), getProperty (ref)
-	if not p1 then
+return function(Object, List) --[[ Line: 273 | Named "getInstanceProperties" ]]
+	-- upvalues: config (copy), getProperty (copy)
+	if not Object then
 		return {}
 	end
-	local t_1 = { ClassName = p1.ClassName, Name = p1.Name }
+	local config1 = { ClassName = Object.ClassName, Name = Object.Name }
 	
-	for i, v in t do
-		if p1:IsA(i) then
-			for i_1, v_1 in v do
-				if p2 == nil or table.find(p2, v_1) then
-					local var1 = getProperty(p1, v_1)
+	for ClassName, value in config do
+		if Object:IsA(ClassName) then
+			for _, value1 in value do
+				if List == nil or table.find(List, value1) then
+					local Property = getProperty(Object, value1)
 					
-					if var1 ~= nil then
-						t_1[v_1] = var1
+					if Property ~= nil then
+						config1[value1] = Property
 					end
 				end
 			end
 		end
 	end
-	for i_1, v_1 in p1:GetTags() do
-		if string.sub(v_1, 1, 12) == "data-testid=" then
-			t_1.TestId = string.sub(v_1, 13)
+	for _, tag in Object:GetTags() do
+		if string.sub(tag, 1, 12) == "data-testid=" then
+			config1.TestId = string.sub(tag, 13)
 		end
 	end
-	return t_1
+	return config1
 end

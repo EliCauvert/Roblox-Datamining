@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.SocialServerDrivenUi.SocialServerDrivenUi)
+﻿return (require(script.Parent.Parent.Parent._Index.SocialServerDrivenUi.SocialServerDrivenUi))

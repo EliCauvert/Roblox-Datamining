@@ -1,74 +1,79 @@
-﻿local textChatService = game:GetService("TextChatService")
-local expChat = script:FindFirstAncestor("ExpChat")
-local parent = expChat.Parent
-local roactModule = require(parent.Roact)
-local roactRoduxModule = require(parent.RoactRodux)
-local expChatSharedModule = require(parent.ExpChatShared)
-local localizationModule = require(script.Parent.Localization)
-local gameLocalizationModule = require(script.Parent.GameLocalization)
-local appContainerModule = require(script.Parent.AppContainer)
-local createStoreModule = require(script.Parent.createStore)
-local getPresetChatStoreModule = require(expChat.Stores.GetPresetChatStore)
-local constantsModule = require(expChat.PresetChat.Constants)
-local fFlagExpChatPresetChatEnabled = expChatSharedModule.Flags.FFlagExpChatPresetChatEnabled
-local fFlagExpChatUniverseChatPresetEnabledModule = require(expChat.Flags.FFlagExpChatUniverseChatPresetEnabled)
-local expChatPresetChatLoadAnalyticsTimeoutMs = game:DefineFastInt("ExpChatPresetChatLoadAnalyticsTimeoutMs", 20000)
-local expChatReconcileOnAgeVerifiedChange = game:DefineFastFlag("ExpChatReconcileOnAgeVerifiedChange", false)
-local var1 = if expChatReconcileOnAgeVerifiedChange then require(script.Parent.ExpChatEventReceiver) else nil
-local fFlagExpChatEnableFriendsTab = require(parent.SharedFlags).FFlagExpChatEnableFriendsTab
-local var2 = if fFlagExpChatEnableFriendsTab then require(script.Parent.FriendsChatEventReceiverConnector) else nil
-local shortcutNavReceiverModule = require(script.Parent.ShortcutNav.ShortcutNavReceiver)
-local getFFlagExpChatTelemetryEventTriggerModule = require(expChat.Flags.getFFlagExpChatTelemetryEventTrigger)
+﻿local TextChatService = game:GetService("TextChatService")
+local ExpChat = script:FindFirstAncestor("ExpChat")
+local Parent = ExpChat.Parent
+local RoactModule = require(Parent.Roact)
+local RoactRoduxModule = require(Parent.RoactRodux)
+local LocalizationModule = require(script.Parent.Localization)
+local GameLocalizationModule = require(script.Parent.GameLocalization)
+local AppContainerModule = require(script.Parent.AppContainer)
+local GetPresetChatStoreModule = require(ExpChat.Stores.GetPresetChatStore)
+local ConstantsModule = require(ExpChat.PresetChat.Constants)
+local FFlagExpChatPresetChatEnabled = require(Parent.ExpChatShared).Flags.FFlagExpChatPresetChatEnabled
+local FFlagExpChatUniverseChatPresetEnabledModule = require(ExpChat.Flags.FFlagExpChatUniverseChatPresetEnabled)
+local ExpChatPresetChatLoadAnalyticsTimeoutMs = game:DefineFastInt("ExpChatPresetChatLoadAnalyticsTimeoutMs", 20000)
+local ExpChatReconcileOnAgeVerifiedChange = game:DefineFastFlag("ExpChatReconcileOnAgeVerifiedChange", false)
+local ExpChatEventReceiverModule = if ExpChatReconcileOnAgeVerifiedChange then require(script.Parent.ExpChatEventReceiver) else nil
+local FFlagExpChatEnableFriendsTab = require(Parent.SharedFlags).FFlagExpChatEnableFriendsTab
+local FriendsChatEventReceiverConnectorModule = if FFlagExpChatEnableFriendsTab then require(script.Parent.FriendsChatEventReceiverConnector) else nil
+local ShortcutNavReceiverModule = require(script.Parent.ShortcutNav.ShortcutNavReceiver)
+local ExpChatPresetChatEmojiTabExperimentation = require(Parent.SocialExperiments).ExpChatPresetChatEmojiTabExperimentation
+local PresetChatEmojiTabExposureLoggerModule = if ExpChatPresetChatEmojiTabExperimentation.isExperimentEnabled then require(script.Parent.PresetChat.PresetChatEmojiTabExposureLogger) else nil
+local GetFFlagExpChatTelemetryEventTriggerModule = require(ExpChat.Flags.getFFlagExpChatTelemetryEventTrigger)
 
-local function computePresetBitmap(value)
-	-- upvalues: getPresetChatStoreModule (ref), constantsModule (ref), fFlagExpChatUniverseChatPresetEnabledModule (ref), textChatService (ref)
-	local var3 = getPresetChatStoreModule(false)
+local function computePresetBitmap(AllTextChannels): number --[[ Line: 48 ]]
+	-- upvalues: GetPresetChatStoreModule (copy), ConstantsModule (copy), FFlagExpChatUniverseChatPresetEnabledModule (copy), TextChatService (copy)
+	local PresetChatStoreModule = GetPresetChatStoreModule(false)
 	
-	if not var3.getIsEnabled() or var3.getAccessLevel() ~= constantsModule.AccessLevel.Enabled then
+	if not PresetChatStoreModule.getIsEnabled() or PresetChatStoreModule.getAccessLevel() ~= ConstantsModule.AccessLevel.Enabled then
 		return 0
 	end
-	local var4 = 0
+	local Value = 0
 	
-	for i in pairs(value) do
-		if i ~= "RBXSystem" then
-			var4 = if i == "RBXGeneral" then bit32.bor(var4, 1) else bit32.bor(var4, 4)
+	for allTextChannel in pairs(AllTextChannels) do
+		if allTextChannel ~= "RBXSystem" then
+			if allTextChannel == "RBXGeneral" then
+				Value = bit32.bor(Value, 1)
+			else
+				Value = bit32.bor(Value, 4)
+			end
 		end
 	end
-	if fFlagExpChatUniverseChatPresetEnabledModule and textChatService:HasAllocatedUniverseChatContext("global") then
-		var4 = bit32.bor(var4, 2)
+	if FFlagExpChatUniverseChatPresetEnabledModule and TextChatService:HasAllocatedUniverseChatContext("global") then
+		Value = bit32.bor(Value, 2)
 	end
-	return var4
+	return Value
 end
 
-local app = roactModule.Component:extend("App")
-app.defaultProps = {
+local App = RoactModule.Component:extend("App")
+App.defaultProps = {
 	isChatWindowVisible = true,
 	isChatInputBarVisible = true,
 	isChannelBarVisible = false,
 	isDefaultChatEnabled = true,
 	isSpatialUIEnabled = false,
-	store = createStoreModule(),
+	store = require(script.Parent.createStore)(),
 	translator = {
-		FormatByKey = function(_, p1)
-			return tostring(p1)
+		FormatByKey = function(_, p1): string --[[ Line: 89 ]]
+			return (tostring(p1))
 		end
 	},
 	gameTranslator = {
-		TranslateGameText = function(_, _, p1)
+		TranslateGameText = function(_, _, p1) --[[ Line: 94 ]]
 			return p1
 		end
 	}
 }
 
-function app.render(p1)
-	-- upvalues: roactModule (ref), roactRoduxModule (ref), localizationModule (ref), gameLocalizationModule (ref), expChatReconcileOnAgeVerifiedChange (ref), var1 (ref), fFlagExpChatEnableFriendsTab (ref), var2 (ref), shortcutNavReceiverModule (ref), appContainerModule (ref)
-	return p1.props.isDefaultChatEnabled and roactModule.createElement(roactRoduxModule.StoreProvider, { store = p1.props.store }, {
-		localization = roactModule.createElement(localizationModule.Provider, { value = p1.props.translator }, {
-			gameLocalization = roactModule.createElement(gameLocalizationModule.Provider, { value = p1.props.gameTranslator }, {
-				eventReceiver = if expChatReconcileOnAgeVerifiedChange then roactModule.createElement(var1) else nil,
-				friendsChatEventReceiver = if fFlagExpChatEnableFriendsTab then roactModule.createElement(var2) else nil,
-				shortcutNavReceiver = if fFlagExpChatEnableFriendsTab then roactModule.createElement(shortcutNavReceiverModule) else nil,
-				container = roactModule.createElement(appContainerModule, {
+function App.render(p1) --[[ Line: 99 ]]
+	-- upvalues: RoactModule (copy), RoactRoduxModule (copy), LocalizationModule (copy), GameLocalizationModule (copy), ExpChatReconcileOnAgeVerifiedChange (copy), ExpChatEventReceiverModule (copy), FFlagExpChatEnableFriendsTab (copy), FriendsChatEventReceiverConnectorModule (copy), ShortcutNavReceiverModule (copy), ExpChatPresetChatEmojiTabExperimentation (copy), PresetChatEmojiTabExposureLoggerModule (copy), AppContainerModule (copy)
+	return p1.props.isDefaultChatEnabled and RoactModule.createElement(RoactRoduxModule.StoreProvider, { store = p1.props.store }, {
+		localization = RoactModule.createElement(LocalizationModule.Provider, { value = p1.props.translator }, {
+			gameLocalization = RoactModule.createElement(GameLocalizationModule.Provider, { value = p1.props.gameTranslator }, {
+				eventReceiver = if ExpChatReconcileOnAgeVerifiedChange then RoactModule.createElement(ExpChatEventReceiverModule) else nil,
+				friendsChatEventReceiver = if FFlagExpChatEnableFriendsTab then RoactModule.createElement(FriendsChatEventReceiverConnectorModule) else nil,
+				shortcutNavReceiver = if FFlagExpChatEnableFriendsTab then RoactModule.createElement(ShortcutNavReceiverModule) else nil,
+				presetChatEmojiTabExposureLogger = if ExpChatPresetChatEmojiTabExperimentation.isExperimentEnabled then RoactModule.createElement(PresetChatEmojiTabExposureLoggerModule) else nil,
+				container = RoactModule.createElement(AppContainerModule, {
 					isChatInputBarVisible = p1.props.isChatInputBarVisible,
 					isChatWindowVisible = p1.props.isChatWindowVisible,
 					isChannelBarVisible = p1.props.isChannelBarVisible,
@@ -88,31 +93,32 @@ function app.render(p1)
 	})
 end
 
-if getFFlagExpChatTelemetryEventTriggerModule() then
-	function app.didMount(p1)
-		-- upvalues: fFlagExpChatPresetChatEnabled (ref), getPresetChatStoreModule (ref), expChatPresetChatLoadAnalyticsTimeoutMs (ref), textChatService (ref), computePresetBitmap (ref)
-		local expChatLoadStartTime = p1.props.expChatLoadStartTime
+if GetFFlagExpChatTelemetryEventTriggerModule() then
+	function App.didMount(p1) --[[ Line: 143 ]]
+		-- upvalues: FFlagExpChatPresetChatEnabled (copy), GetPresetChatStoreModule (copy), ExpChatPresetChatLoadAnalyticsTimeoutMs (copy), TextChatService (copy), computePresetBitmap (copy)
+		local ExpChatLoadStartTime = p1.props.expChatLoadStartTime
 		
-		if expChatLoadStartTime then
-			if fFlagExpChatPresetChatEnabled then
-				local var5 = os.clock() - expChatLoadStartTime
-				local var6 = getPresetChatStoreModule(false)
-				task.spawn(function()
-					-- upvalues: var6 (ref), expChatPresetChatLoadAnalyticsTimeoutMs (copy), p1 (ref), textChatService (copy), var5 (ref), computePresetBitmap (copy)
-					local processTime = os.clock()
-					while var6.getIsLoading() and os.clock() - processTime < expChatPresetChatLoadAnalyticsTimeoutMs / 1000 do
+		if ExpChatLoadStartTime then
+			if FFlagExpChatPresetChatEnabled then
+				local Elapsed = os.clock() - ExpChatLoadStartTime
+				local PresetChatStoreModule = GetPresetChatStoreModule(false)
+				task.spawn(function() --[[ Line: 152 ]]
+					-- upvalues: PresetChatStoreModule (copy), ExpChatPresetChatLoadAnalyticsTimeoutMs (upval), p1 (copy), TextChatService (upval), Elapsed (copy), computePresetBitmap (upval)
+					local ClockTime = os.clock()
+					while PresetChatStoreModule.getIsLoading() and os.clock() - ClockTime < ExpChatPresetChatLoadAnalyticsTimeoutMs / 1000 do
 						task.wait()
 					end
-					local state = p1.props.store:getState()
-					textChatService:SendExpChatLoadSuccess(var5, {
-						preset_bitmap = computePresetBitmap(if state.TextChannels then state.TextChannels.allTextChannels else {})
+					local State = p1.props.store:getState()
+					TextChatService:SendExpChatLoadSuccess(Elapsed, {
+						preset_bitmap = computePresetBitmap(State.TextChannels and State.TextChannels.allTextChannels or {})
 					})
 				end)
 				
 				return
+			else
+				TextChatService:SendExpChatLoadSuccess(os.clock() - ExpChatLoadStartTime)
 			end
-			textChatService:SendExpChatLoadSuccess(os.clock() - expChatLoadStartTime)
 		end
 	end
 end
-return app
+return App

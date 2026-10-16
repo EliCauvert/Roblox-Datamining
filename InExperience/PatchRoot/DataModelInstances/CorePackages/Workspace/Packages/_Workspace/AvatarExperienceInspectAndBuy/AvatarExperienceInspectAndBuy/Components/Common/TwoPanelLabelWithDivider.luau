@@ -1,29 +1,29 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceInspectAndBuy").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceInspectAndBuy").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
 
-return function(p1)
-	-- upvalues: reactModule (ref), foundationModule (ref)
-	return reactModule.createElement(foundationModule.View, {
+return function(Frame) --[[ Line: 26 | Named "TwoPanelLabelWithDivider" ]]
+	-- upvalues: ReactModule (copy), FoundationModule (copy)
+	return ReactModule.createElement(FoundationModule.View, {
 		tag = "auto-y size-full-0 padding-top-medium col align-x-left align-y-top gap-small",
-		LayoutOrder = p1.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		LabelContainer = reactModule.createElement(foundationModule.View, {
+		LabelContainer = ReactModule.createElement(FoundationModule.View, {
 			tag = "auto-y size-full-0 row align-x-center align-y-center gap-small flex-x-between",
 			LayoutOrder = 1
 		}, {
-			LeftLabel = reactModule.createElement(foundationModule.Text, {
+			LeftLabel = ReactModule.createElement(FoundationModule.Text, {
 				LayoutOrder = 1,
 				tag = "auto-xy text-title-medium content-default text-align-x-left",
-				Text = p1.labelProps.leftLabel
+				Text = Frame.labelProps.leftLabel
 			}),
-			RightLabel = if type(p1.labelProps.rightLabel) == "string" then reactModule.createElement(foundationModule.Text, {
+			RightLabel = if type(Frame.labelProps.rightLabel) == "string" then ReactModule.createElement(FoundationModule.Text, {
 				LayoutOrder = 2,
 				tag = "auto-xy text-title-medium content-default text-align-x-right",
-				Text = p1.labelProps.rightLabel
-			}) else p1.labelProps.rightLabel
+				Text = Frame.labelProps.rightLabel
+			}) else Frame.labelProps.rightLabel
 		}),
-		Divider = if p1.showDivider then reactModule.createElement(foundationModule.Divider, {
+		Divider = if Frame.showDivider then ReactModule.createElement(FoundationModule.Divider, {
 			LayoutOrder = 2,
 			Orientation = Enum.FillDirection.Horizontal,
 			Size = UDim2.new(1, 0, 0, 1)

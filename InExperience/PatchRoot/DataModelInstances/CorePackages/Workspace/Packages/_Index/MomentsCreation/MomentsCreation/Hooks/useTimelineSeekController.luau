@@ -1,148 +1,163 @@
-﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
-local parent = momentsCreation.Parent
-local momentsCommonModule = require(parent.MomentsCommon)
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local guiService = game:GetService("GuiService")
-local useCallback = reactModule.useCallback
-local useEffect = reactModule.useEffect
-local useMemo = reactModule.useMemo
-local useRef = reactModule.useRef
-local useDeviceInsets = momentsCommonModule.Hooks.useDeviceInsets
-local computeSeekFractionModule = require(momentsCreation.Utils.computeSeekFraction)
-local fFlagMomentsTTSScrubberDragInOverlayModule = require(momentsCreation.Flags.FFlagMomentsTTSScrubberDragInOverlay)
-local fFlagMomentsScrubberSeekOnReleaseModule = require(momentsCreation.Flags.FFlagMomentsScrubberSeekOnRelease)
-local _ = require(momentsCreation.Types.CreationFlowTypes)
+﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
+local Parent = MomentsCreation.Parent
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local GuiService = game:GetService("GuiService")
+local UseCallbackFunction = ReactModule.useCallback
+local UseEffectFunction = ReactModule.useEffect
+local UseMemoFunction = ReactModule.useMemo
+local UseRefFunction = ReactModule.useRef
+local UseDeviceInsetsFunction = require(Parent.MomentsCommon).Hooks.useDeviceInsets
+local ComputeSeekFractionModule = require(MomentsCreation.Utils.computeSeekFraction)
+local FFlagMomentsTTSScrubberDragInOverlayModule = require(MomentsCreation.Flags.FFlagMomentsTTSScrubberDragInOverlay)
+local FFlagMomentsScrubberSeekOnReleaseModule = require(MomentsCreation.Flags.FFlagMomentsScrubberSeekOnRelease)
+local _ = require(MomentsCreation.Types.CreationFlowTypes)
 local UIDragDetectorFixEventPositionEnabledEngineFeature = game:GetEngineFeature("UIDragDetectorFixEventPositionEnabled")
 
-return function(value, p1, p2, p3)
-	-- upvalues: useRef (ref), fFlagMomentsTTSScrubberDragInOverlayModule (ref), fFlagMomentsScrubberSeekOnReleaseModule (ref), useMemo (ref), signalsModule (ref), useDeviceInsets (ref), useCallback (ref), computeSeekFractionModule (ref), UIDragDetectorFixEventPositionEnabledEngineFeature (ref), guiService (ref), useEffect (ref)
-	local var1 = useRef(nil)
-	local var2 = useRef(nil)
-	local var3 = if fFlagMomentsTTSScrubberDragInOverlayModule then useRef(nil) else nil
-	local var4 = useRef(false)
-	local var5 = useRef(false)
-	local var6 = nil
-	local get = nil
-	local set = nil
+return function(p1, Callback, p2, p3) --[[ Line: 37 | Named "useTimelineSeekController" ]]
+	-- upvalues: UseRefFunction (copy), FFlagMomentsTTSScrubberDragInOverlayModule (copy), FFlagMomentsScrubberSeekOnReleaseModule (copy), UseMemoFunction (copy), SignalsModule (copy), UseDeviceInsetsFunction (copy), UseCallbackFunction (copy), ComputeSeekFractionModule (copy), UIDragDetectorFixEventPositionEnabledEngineFeature (copy), GuiService (copy), UseEffectFunction (copy)
+	local UseRefResult = UseRefFunction(nil)
+	local UseRefResult1 = UseRefFunction(nil)
+	local UseRefResult2 = if FFlagMomentsTTSScrubberDragInOverlayModule then UseRefFunction(nil) else nil
+	local UseRefResult3 = UseRefFunction(false)
+	local UseRefResult4 = UseRefFunction(false)
+	local v1 = nil
+	local Get = nil
+	local SetFunction = nil
 	
-	if fFlagMomentsScrubberSeekOnReleaseModule then
-		var6 = useRef(nil)
-		local var7 = useMemo(function()
-			-- upvalues: signalsModule (copy)
-			local var8, var9 = signalsModule.createSignal(nil)
+	if FFlagMomentsScrubberSeekOnReleaseModule then
+		v1 = UseRefFunction(nil)
+		local UseMemoResult = UseMemoFunction(function() --[[ Line: 64 ]]
+			-- upvalues: SignalsModule (upval)
+			local Signal, Signal2 = SignalsModule.createSignal(nil)
 			
-			return { get = var8, set = var9 }
+			return { get = Signal, set = Signal2 }
 		end, {})
-		get = var7.get
-		set = var7.set
+		Get = UseMemoResult.get
+		SetFunction = UseMemoResult.set
 	end
-	local var8 = useDeviceInsets()
-	local var9 = useCallback(function(p4)
-		-- upvalues: var1 (ref), computeSeekFractionModule (copy), value (ref), fFlagMomentsScrubberSeekOnReleaseModule (copy), set (write), var6 (write), p1 (ref)
-		local current = var1.current
+	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
+	local UseCallbackResult = UseCallbackFunction(function(p4) --[[ Line: 74 ]]
+		-- upvalues: UseRefResult (copy), ComputeSeekFractionModule (upval), p1 (copy), FFlagMomentsScrubberSeekOnReleaseModule (upval), SetFunction (ref), v1 (ref), Callback (copy)
+		local Current = UseRefResult.current
 		
-		if not current then return end
-		local var10 = computeSeekFractionModule(p4, current.AbsolutePosition.X, current.AbsoluteSize.X)
-		local var11 = var10 * value.getDuration(false)
+		if not Current then return end
+		local SeekFractionModule = ComputeSeekFractionModule(p4, Current.AbsolutePosition.X, Current.AbsoluteSize.X)
+		local ScaledSeekFractionModule = SeekFractionModule * p1.getDuration(false)
 		
-		if fFlagMomentsScrubberSeekOnReleaseModule and set and var6 then
-			set(var10)
-			var6.current = var11
+		if FFlagMomentsScrubberSeekOnReleaseModule and SetFunction and v1 then
+			SetFunction(SeekFractionModule)
+			v1.current = ScaledSeekFractionModule
 			
 			return
 		end
-		value.seek(var11)
+		p1.seek(ScaledSeekFractionModule)
 		
-		if p1 then
-			p1(var11)
+		if Callback then
+			Callback(ScaledSeekFractionModule)
 		end
-	end, { value, p1, set })
-	local var10 = useCallback(function(p4)
-		-- upvalues: UIDragDetectorFixEventPositionEnabledEngineFeature (copy), guiService (copy), var8 (ref)
-		return if UIDragDetectorFixEventPositionEnabledEngineFeature then p4.X else p4.X - (guiService:GetGuiInset().X + var8.left)
-	end, { var8 })
-	local var11 = useCallback(function()
-		-- upvalues: value (ref), var5 (ref)
-		if value.getIsPlaying(false) then
-			var5.current = true
-			value.toggle()
+	end, { p1, Callback, SetFunction })
+	local UseCallbackResult1 = UseCallbackFunction(function(Vector) --[[ Line: 98 ]]
+		-- upvalues: UIDragDetectorFixEventPositionEnabledEngineFeature (upval), GuiService (upval), UseDeviceInsetsResult (copy)
+		return if UIDragDetectorFixEventPositionEnabledEngineFeature then Vector.X else Vector.X - (GuiService:GetGuiInset().X + UseDeviceInsetsResult.left)
+	end, { UseDeviceInsetsResult })
+	local UseCallbackResult2 = UseCallbackFunction(function() --[[ Line: 107 ]]
+		-- upvalues: p1 (copy), UseRefResult4 (copy)
+		if p1.getIsPlaying(false) then
+			UseRefResult4.current = true
+			p1.toggle()
 		end
-	end, { value })
-	local var12 = useCallback(function(p4)
-		-- upvalues: var4 (ref), p3 (ref), var11 (ref), var9 (ref), var10 (ref)
-		var4.current = true
+	end, { p1 })
+	local UseCallbackResult3 = UseCallbackFunction(function(p4) --[[ Line: 114 ]]
+		-- upvalues: UseRefResult3 (copy), p3 (copy), UseCallbackResult2 (copy), UseCallbackResult (copy), UseCallbackResult1 (copy)
+		UseRefResult3.current = true
 		
-		if p3 then
+		if not p3 then
+			UseCallbackResult2()
+			UseCallbackResult(UseCallbackResult1(p4))
+			
 			return
 		end
-		var11()
-		var9(var10(p4))
-	end, { var11, var9, var10, p3 })
-	local var13 = useCallback(function(p4)
-		-- upvalues: var4 (ref), p3 (ref), var11 (ref), var9 (ref), var10 (ref)
-		if not var4.current then return end
+	end, {
+		UseCallbackResult2,
+		UseCallbackResult,
+		UseCallbackResult1,
+		p3
+	})
+	local UseCallbackResult4 = UseCallbackFunction(function(p4) --[[ Line: 125 ]]
+		-- upvalues: UseRefResult3 (copy), p3 (copy), UseCallbackResult2 (copy), UseCallbackResult (copy), UseCallbackResult1 (copy)
+		if not UseRefResult3.current then return end
 		if p3 then
-			var11()
+			UseCallbackResult2()
 		end
-		var9(var10(p4))
-	end, { var11, var9, var10, p3 })
-	local var14 = useCallback(function()
-		-- upvalues: var4 (ref), fFlagMomentsScrubberSeekOnReleaseModule (copy), var6 (write), set (write), value (ref), p1 (ref), var5 (ref)
-		if not var4.current then return end
-		var4.current = false
+		UseCallbackResult(UseCallbackResult1(p4))
+	end, {
+		UseCallbackResult2,
+		UseCallbackResult,
+		UseCallbackResult1,
+		p3
+	})
+	local UseCallbackResult5 = UseCallbackFunction(function() --[[ Line: 135 ]]
+		-- upvalues: UseRefResult3 (copy), FFlagMomentsScrubberSeekOnReleaseModule (upval), v1 (ref), SetFunction (ref), p1 (copy), Callback (copy), UseRefResult4 (copy)
+		if not UseRefResult3.current then return end
+		UseRefResult3.current = false
 		
-		if fFlagMomentsScrubberSeekOnReleaseModule and var6 and set then
-			local current = var6.current
-			var6.current = nil
+		if FFlagMomentsScrubberSeekOnReleaseModule and v1 and SetFunction then
+			local Current = v1.current
+			v1.current = nil
 			
-			if current ~= nil then
-				value.seek(current)
+			if Current ~= nil then
+				p1.seek(Current)
 				
-				if p1 then
-					p1(current)
+				if Callback then
+					Callback(Current)
 				end
 			end
-			set(nil)
+			SetFunction(nil)
 		end
-		if var5.current and not value.getIsPlaying(false) then
-			value.toggle()
+		if UseRefResult4.current and not p1.getIsPlaying(false) then
+			p1.toggle()
 		end
-		var5.current = false
-	end, { value, p1, set })
-	useEffect(function()
-		-- upvalues: p2 (ref), var2 (ref), var12 (ref), var13 (ref), var14 (ref), fFlagMomentsTTSScrubberDragInOverlayModule (copy), var3 (write)
+		UseRefResult4.current = false
+	end, { p1, Callback, SetFunction })
+	UseEffectFunction(function() --[[ Line: 158 ]]
+		-- upvalues: p2 (copy), UseRefResult1 (copy), UseCallbackResult3 (copy), UseCallbackResult4 (copy), UseCallbackResult5 (copy), FFlagMomentsTTSScrubberDragInOverlayModule (upval), UseRefResult2 (ref)
 		if not p2 then return end
-		local current = var2.current
+		local Current = UseRefResult1.current
 		
-		if current == nil then return end
-		local list = {
-			current.DragStart:Connect(var12),
-			current.DragContinue:Connect(var13),
-			current.DragEnd:Connect(var14)
+		if Current == nil then return end
+		local List = {
+			Current.DragStart:Connect(UseCallbackResult3),
+			Current.DragContinue:Connect(UseCallbackResult4),
+			Current.DragEnd:Connect(UseCallbackResult5)
 		}
 		
-		if fFlagMomentsTTSScrubberDragInOverlayModule and var3 then
-			local current_1 = var3.current
+		if FFlagMomentsTTSScrubberDragInOverlayModule and UseRefResult2 then
+			local Current1 = UseRefResult2.current
 			
-			if current_1 ~= nil then
-				table.insert(list, current_1.DragStart:Connect(var12))
-				table.insert(list, current_1.DragContinue:Connect(var13))
-				table.insert(list, current_1.DragEnd:Connect(var14))
+			if Current1 ~= nil then
+				table.insert(List, Current1.DragStart:Connect(UseCallbackResult3))
+				table.insert(List, Current1.DragContinue:Connect(UseCallbackResult4))
+				table.insert(List, Current1.DragEnd:Connect(UseCallbackResult5))
 			end
 		end
-		return function()
-			-- upvalues: list (ref)
-			for i, v in list do
-				v:Disconnect()
+		return function() --[[ Line: 179 ]]
+			-- upvalues: List (copy)
+			for _, Connection in List do
+				Connection:Disconnect()
 			end
 		end
-	end, { p2, var12, var13, var14 })
+	end, {
+		p2,
+		UseCallbackResult3,
+		UseCallbackResult4,
+		UseCallbackResult5
+	})
 	
 	return {
-		containerRef = var1,
-		dragDetectorRef = var2,
-		playheadDragDetectorRef = var3,
-		getDragFraction = get
+		containerRef = UseRefResult,
+		dragDetectorRef = UseRefResult1,
+		playheadDragDetectorRef = UseRefResult2,
+		getDragFraction = Get
 	}
 end

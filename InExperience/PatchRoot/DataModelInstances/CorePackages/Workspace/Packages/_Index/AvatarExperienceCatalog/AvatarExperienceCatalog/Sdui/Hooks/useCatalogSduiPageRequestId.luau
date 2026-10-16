@@ -1,22 +1,22 @@
-﻿local avatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
-local parent = avatarExperienceCatalog.Parent
-local reactModule = require(parent.React)
-local useSignalState = require(parent.SignalsReact).useSignalState
-local catalogSduiPageContextModule = require(avatarExperienceCatalog.Sdui.CatalogSduiPageContext)
-local getCatalogPageRequestIdStoreModule = require(avatarExperienceCatalog.Stores.GetCatalogPageRequestIdStore)
+﻿local AvatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
+local Parent = AvatarExperienceCatalog.Parent
+local ReactModule = require(Parent.React)
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local CatalogSduiPageContextModule = require(AvatarExperienceCatalog.Sdui.CatalogSduiPageContext)
+local GetCatalogPageRequestIdStoreModule = require(AvatarExperienceCatalog.Stores.GetCatalogPageRequestIdStore)
 
-return function()
-	-- upvalues: reactModule (ref), catalogSduiPageContextModule (ref), getCatalogPageRequestIdStoreModule (ref), useSignalState (ref)
-	local var1 = reactModule.useContext(catalogSduiPageContextModule)
-	local var2 = if var1 then var1.identifier else nil
-	local var3 = getCatalogPageRequestIdStoreModule(false)
-	local var4 = useSignalState(var3.getPageRequestIdMap)[var2 or ""]
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), var3 (ref)
-		if var2 ~= nil then
-			var3.getOrCreatePageRequestId(var2)
+return function() --[[ Line: 23 | Named "useCatalogSduiPageRequestId" ]]
+	-- upvalues: ReactModule (copy), CatalogSduiPageContextModule (copy), GetCatalogPageRequestIdStoreModule (copy), UseSignalStateFunction (copy)
+	local UseContextResult = ReactModule.useContext(CatalogSduiPageContextModule)
+	local Identifier = if UseContextResult then UseContextResult.identifier else nil
+	local CatalogPageRequestIdStoreModule = GetCatalogPageRequestIdStoreModule(false)
+	local UseSignalStateResultEntry = UseSignalStateFunction(CatalogPageRequestIdStoreModule.getPageRequestIdMap)[Identifier or ""]
+	ReactModule.useEffect(function() --[[ Line: 29 ]]
+		-- upvalues: Identifier (copy), CatalogPageRequestIdStoreModule (copy)
+		if Identifier ~= nil then
+			CatalogPageRequestIdStoreModule.getOrCreatePageRequestId(Identifier)
 		end
-	end, { var2, var3 })
+	end, { Identifier, CatalogPageRequestIdStoreModule })
 	
-	return var2, var4
+	return Identifier, UseSignalStateResultEntry
 end

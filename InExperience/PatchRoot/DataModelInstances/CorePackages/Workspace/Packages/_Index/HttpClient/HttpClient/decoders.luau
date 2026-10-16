@@ -1,78 +1,81 @@
-﻿local httpService = game:GetService("HttpService")
-local parseApiErrorModule = require(script.Parent.parseApiError)
-local parseLegacyErrorModule = require(script.Parent.parseLegacyError)
+﻿local HttpService = game:GetService("HttpService")
+local ParseApiErrorModule = require(script.Parent.parseApiError)
+local ParseLegacyErrorModule = require(script.Parent.parseLegacyError)
 local _ = require(script.Parent.types)
-local isSuccess = require(script.Parent.httpStatus).isSuccess
+local IsSuccessFunction = require(script.Parent.httpStatus).isSuccess
 
-local function _(p1)
-	return if p1 == nil then nil elseif typeof(p1) == "buffer" then buffer.tostring(p1) else p1
+local function _(Buf) --[[ Line: 11 | Named "bodyToString" ]]
+	return if Buf == nil then nil elseif typeof(Buf) == "buffer" then buffer.tostring(Buf) else Buf
 end
 
-local _ = function(p1)
-	-- upvalues: httpService (ref)
-	local var1 = if p1 == nil then nil elseif typeof(p1) == "buffer" then buffer.tostring(p1) else p1
+local _ = function(Buf) --[[ Line: 21 | Named "tryJsonDecode" ]]
+	-- upvalues: HttpService (copy)
+	local Text = if Buf == nil then nil elseif typeof(Buf) == "buffer" then buffer.tostring(Buf) else Buf
 	
-	if var1 == nil or var1 == "" then
+	if Text == nil or Text == "" then
 		return nil
+	else
+		local Success, Result = pcall(HttpService.JSONDecode, HttpService, Text)
+		
+		return if Success then Result else nil
 	end
-	local ok, status = pcall(httpService.JSONDecode, httpService, var1)
-	
-	return if ok then status else nil
 end
 
 return {
-	decodeJson = function(p1)
-		-- upvalues: httpService (ref), parseApiErrorModule (ref), isSuccess (ref)
-		return function(p2)
-			-- upvalues: httpService (copy), parseApiErrorModule (copy), isSuccess (copy), p1 (ref)
-			local var1
-			local responseBody = p2.responseBody
-			local var2 = if responseBody == nil then nil elseif typeof(responseBody) == "buffer" then buffer.tostring(responseBody) else responseBody
+	decodeJson = function(Callback) --[[ Line: 30 ]]
+		-- upvalues: HttpService (copy), ParseApiErrorModule (copy), IsSuccessFunction (copy)
+		return function(p1) --[[ Line: 31 ]]
+			-- upvalues: HttpService (upval), ParseApiErrorModule (upval), IsSuccessFunction (upval), Callback (copy)
+			local ResponseBody = p1.responseBody
+			local Text = if ResponseBody == nil then nil elseif typeof(ResponseBody) == "buffer" then buffer.tostring(ResponseBody) else ResponseBody
+			local v1 = nil
 			
-			if var2 == nil or var2 == "" then
-				var1 = nil
+			if Text == nil or Text == "" then
+				v1 = nil
 			else
-				local ok, status = pcall(httpService.JSONDecode, httpService, var2)
-				var1 = if ok then status else nil
+				local Success, Result = pcall(HttpService.JSONDecode, HttpService, Text)
+				v1 = if Success then Result else nil
 			end
-			local var3 = parseApiErrorModule(var1)
+			local ParseApiErrorModuleResult = ParseApiErrorModule(v1)
 			
-			if var3 then
-				return nil, `api error {var3.code}: {var3.message}`, var3.code
-			elseif isSuccess(p2.statusCode) then
-				return p1(var1), nil, nil
+			if ParseApiErrorModuleResult then
+				return nil, `api error {ParseApiErrorModuleResult.code}: {ParseApiErrorModuleResult.message}`, ParseApiErrorModuleResult.code
+			elseif IsSuccessFunction(p1.statusCode) then
+				return Callback(v1), nil, nil
+			else
+				local ResponseBody1 = p1.responseBody
+				
+				return nil, `http {p1.statusCode}: {(if ResponseBody1 == nil then nil elseif typeof(ResponseBody1) == "buffer" then buffer.tostring(ResponseBody1) else ResponseBody1) or ""}`, p1.statusCode
 			end
-			local responseBody_1 = p2.responseBody
-			
-			return nil, `http {p2.statusCode}: {(if responseBody_1 == nil then nil elseif typeof(responseBody_1) == "buffer" then buffer.tostring(responseBody_1) else responseBody_1) or ""}`, p2.statusCode
 		end
 	end,
-	decodeLegacyJson = function(p1)
-		-- upvalues: httpService (ref), parseLegacyErrorModule (ref), isSuccess (ref)
-		return function(p2)
-			-- upvalues: httpService (copy), parseLegacyErrorModule (copy), isSuccess (copy), p1 (ref)
-			local var1
-			local responseBody = p2.responseBody
-			local var2 = if responseBody == nil then nil elseif typeof(responseBody) == "buffer" then buffer.tostring(responseBody) else responseBody
+	decodeLegacyJson = function(Callback) --[[ Line: 44 ]]
+		-- upvalues: HttpService (copy), ParseLegacyErrorModule (copy), IsSuccessFunction (copy)
+		return function(p1) --[[ Line: 45 ]]
+			-- upvalues: HttpService (upval), ParseLegacyErrorModule (upval), IsSuccessFunction (upval), Callback (copy)
+			local ResponseBody = p1.responseBody
+			local Text = if ResponseBody == nil then nil elseif typeof(ResponseBody) == "buffer" then buffer.tostring(ResponseBody) else ResponseBody
+			local v1 = nil
 			
-			if var2 == nil or var2 == "" then
-				var1 = nil
+			if Text == nil or Text == "" then
+				v1 = nil
 			else
-				local ok, status = pcall(httpService.JSONDecode, httpService, var2)
-				var1 = if ok then status else nil
+				local Success, Result = pcall(HttpService.JSONDecode, HttpService, Text)
+				v1 = if Success then Result else nil
 			end
-			local var3 = parseLegacyErrorModule(var1)
+			local ParseLegacyErrorModuleResult = ParseLegacyErrorModule(v1)
 			
-			if var3 then
-				var2 = var3.errors[1]
+			if ParseLegacyErrorModuleResult then
+				local Error = ParseLegacyErrorModuleResult.errors[1]
 				
-				return nil, `api error {var2.code}: {var2.message}`, var2.code
-			elseif isSuccess(p2.statusCode) then
-				return p1(var1), nil, nil
+				return nil, `api error {Error.code}: {Error.message}`, Error.code
+			elseif IsSuccessFunction(p1.statusCode) then
+				return Callback(v1), nil, nil
+			else
+				local ResponseBody1 = p1.responseBody
+				
+				return nil, `http {p1.statusCode}: {(if ResponseBody1 == nil then nil elseif typeof(ResponseBody1) == "buffer" then buffer.tostring(ResponseBody1) else ResponseBody1) or ""}`, p1.statusCode
 			end
-			local responseBody_1 = p2.responseBody
-			
-			return nil, `http {p2.statusCode}: {(if responseBody_1 == nil then nil elseif typeof(responseBody_1) == "buffer" then buffer.tostring(responseBody_1) else responseBody_1) or ""}`, p2.statusCode
 		end
 	end
 }

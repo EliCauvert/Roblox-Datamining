@@ -1,26 +1,26 @@
-﻿local groups = script:FindFirstAncestor("Groups")
-local parent = groups.Parent
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local textKeysModule = require(groups.Common.TextKeys)
+﻿local Groups = script:FindFirstAncestor("Groups")
+local Parent = Groups.Parent
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local TextKeysModule = require(Groups.Common.TextKeys)
 
-return function(p1)
-	-- upvalues: reactModule (ref), textKeysModule (ref), useLocalization (ref)
-	local hasSocialModules = p1.hasSocialModules
-	local count = p1.count
-	local truncatedCount = p1.truncatedCount
-	local capitalize = p1.capitalize or false
-	local var1 = useLocalization({
-		noun = reactModule.useMemo(function()
-			-- upvalues: count (ref), hasSocialModules (ref), capitalize (ref), textKeysModule (copy)
-			local var2 = count == 1
+return function(p1) --[[ Line: 31 | Named "useMembersFollowersLabel" ]]
+	-- upvalues: ReactModule (copy), TextKeysModule (copy), UseLocalizationFunction (copy)
+	local HasSocialModules = p1.hasSocialModules
+	local Count = p1.count
+	local TruncatedCount = p1.truncatedCount
+	local Capitalize = p1.capitalize or false
+	local UseLocalizationResult = UseLocalizationFunction({
+		noun = ReactModule.useMemo(function() --[[ Line: 38 ]]
+			-- upvalues: Count (copy), HasSocialModules (copy), Capitalize (copy), TextKeysModule (upval)
+			local IsCountMatch = Count == 1
 			
-			return if hasSocialModules then if var2 then if capitalize then textKeysModule.LabelMember else textKeysModule.LabelMemberLowerCase elseif capitalize then textKeysModule.LabelMemberCapitalPlural else textKeysModule.LabelMemberLowerCasePlural elseif var2 then if capitalize then textKeysModule.LabelFollowerCapital else textKeysModule.LabelFollower elseif capitalize then textKeysModule.LabelFollowerCapitalPlural else textKeysModule.LabelFollowerPlural
-		end, { count, capitalize, hasSocialModules })
+			return if HasSocialModules then if IsCountMatch then if Capitalize then TextKeysModule.LabelMember else TextKeysModule.LabelMemberLowerCase elseif Capitalize then TextKeysModule.LabelMemberCapitalPlural else TextKeysModule.LabelMemberLowerCasePlural elseif IsCountMatch then if Capitalize then TextKeysModule.LabelFollowerCapital else TextKeysModule.LabelFollower elseif Capitalize then TextKeysModule.LabelFollowerCapitalPlural else TextKeysModule.LabelFollowerPlural
+		end, { Count, Capitalize, HasSocialModules })
 	})
 	
-	return reactModule.useMemo(function()
-		-- upvalues: truncatedCount (ref), count (ref), var1 (ref)
-		return `{if truncatedCount and truncatedCount ~= "" then truncatedCount else tostring(count)} {var1.noun}`
-	end, { truncatedCount, count, var1.noun })
+	return (ReactModule.useMemo(function(): string --[[ Line: 61 ]]
+		-- upvalues: TruncatedCount (copy), Count (copy), UseLocalizationResult (copy)
+		return `{if TruncatedCount and TruncatedCount ~= "" then TruncatedCount else tostring(Count)} {UseLocalizationResult.noun}`
+	end, { TruncatedCount, Count, UseLocalizationResult.noun }))
 end

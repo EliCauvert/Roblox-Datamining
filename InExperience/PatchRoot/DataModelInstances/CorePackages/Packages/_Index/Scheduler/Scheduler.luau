@@ -1,113 +1,114 @@
-﻿local reactGlobalsModule = require(script.Parent.ReactGlobals)
-
-local function _(p1)
-	return function()
-		-- upvalues: p1 (ref)
+﻿local function _(p1) --[[ Line: 17 | Named "onlyInTestError" ]]
+	return function() --[[ Line: 18 ]]
+		-- upvalues: p1 (copy)
 		error(p1 .. " is only available in tests, not in production")
 	end
 end
 
-local var1 = require(script.Scheduler)(nil)
-local tracingModule = require(script.Tracing)
-local tracingSubscriptionsModule = require(script.TracingSubscriptions)
+local v1 = require(script.Scheduler)(nil)
+local TracingModule = require(script.Tracing)
+local TracingSubscriptionsModule = require(script.TracingSubscriptions)
 
-if reactGlobalsModule.__ROACT_17_MOCK_SCHEDULER__ then
+if require(script.Parent.ReactGlobals).__ROACT_17_MOCK_SCHEDULER__ then
 	return require(script.unstable_mock)
 end
-local t = {
-	unstable_ImmediatePriority = var1.unstable_ImmediatePriority,
-	unstable_UserBlockingPriority = var1.unstable_UserBlockingPriority,
-	unstable_NormalPriority = var1.unstable_NormalPriority,
-	unstable_IdlePriority = var1.unstable_IdlePriority,
-	unstable_LowPriority = var1.unstable_LowPriority,
-	unstable_runWithPriority = var1.unstable_runWithPriority,
-	unstable_next = var1.unstable_next,
-	unstable_scheduleCallback = var1.unstable_scheduleCallback,
-	unstable_cancelCallback = var1.unstable_cancelCallback,
-	unstable_wrapCallback = var1.unstable_wrapCallback,
-	unstable_getCurrentPriorityLevel = var1.unstable_getCurrentPriorityLevel,
-	unstable_shouldYield = var1.unstable_shouldYield,
-	unstable_requestPaint = var1.unstable_requestPaint,
-	unstable_continueExecution = var1.unstable_continueExecution,
-	unstable_pauseExecution = var1.unstable_pauseExecution,
-	unstable_getFirstCallbackNode = var1.unstable_getFirstCallbackNode,
-	unstable_now = var1.unstable_now,
-	unstable_forceFrameRate = var1.unstable_forceFrameRate,
-	unstable_setSchedulerFlags = var1.unstable_setSchedulerFlags,
-	unstable_getSchedulerFlags = var1.unstable_getSchedulerFlags
+local v2 = "unstable_flushAllWithoutAsserting"
+
+local function Unstable_flushAllWithoutAsserting() --[[ Line: 18 ]]
+	-- upvalues: v2 (copy)
+	error(v2 .. " is only available in tests, not in production")
+end
+
+local v3 = "unstable_flushAll"
+
+local function Unstable_flushAll() --[[ Line: 18 ]]
+	-- upvalues: v3 (copy)
+	error(v3 .. " is only available in tests, not in production")
+end
+
+local v4 = "unstable_flushNumberOfYields"
+
+local function Unstable_flushNumberOfYields() --[[ Line: 18 ]]
+	-- upvalues: v4 (copy)
+	error(v4 .. " is only available in tests, not in production")
+end
+
+local v5 = "unstable_clearYields"
+
+local function Unstable_clearYields() --[[ Line: 18 ]]
+	-- upvalues: v5 (copy)
+	error(v5 .. " is only available in tests, not in production")
+end
+
+local v6 = "unstable_clearYields"
+
+local function Unstable_flushUntilNextPaint() --[[ Line: 18 ]]
+	-- upvalues: v6 (copy)
+	error(v6 .. " is only available in tests, not in production")
+end
+
+local v7 = "unstable_advanceTime"
+
+local function Unstable_advanceTime() --[[ Line: 18 ]]
+	-- upvalues: v7 (copy)
+	error(v7 .. " is only available in tests, not in production")
+end
+
+local v8 = "unstable_flushExpired"
+
+local function Unstable_flushExpired() --[[ Line: 18 ]]
+	-- upvalues: v8 (copy)
+	error(v8 .. " is only available in tests, not in production")
+end
+
+local v9 = "unstable_yieldValue"
+local v10 = "unstable_wrap"
+local SchedulerModule = {
+	unstable_ImmediatePriority = v1.unstable_ImmediatePriority,
+	unstable_UserBlockingPriority = v1.unstable_UserBlockingPriority,
+	unstable_NormalPriority = v1.unstable_NormalPriority,
+	unstable_IdlePriority = v1.unstable_IdlePriority,
+	unstable_LowPriority = v1.unstable_LowPriority,
+	unstable_runWithPriority = v1.unstable_runWithPriority,
+	unstable_next = v1.unstable_next,
+	unstable_scheduleCallback = v1.unstable_scheduleCallback,
+	unstable_cancelCallback = v1.unstable_cancelCallback,
+	unstable_wrapCallback = v1.unstable_wrapCallback,
+	unstable_getCurrentPriorityLevel = v1.unstable_getCurrentPriorityLevel,
+	unstable_shouldYield = v1.unstable_shouldYield,
+	unstable_requestPaint = v1.unstable_requestPaint,
+	unstable_continueExecution = v1.unstable_continueExecution,
+	unstable_pauseExecution = v1.unstable_pauseExecution,
+	unstable_getFirstCallbackNode = v1.unstable_getFirstCallbackNode,
+	unstable_now = v1.unstable_now,
+	unstable_forceFrameRate = v1.unstable_forceFrameRate,
+	unstable_setSchedulerFlags = v1.unstable_setSchedulerFlags,
+	unstable_getSchedulerFlags = v1.unstable_getSchedulerFlags,
+	unstable_flushAllWithoutAsserting = Unstable_flushAllWithoutAsserting,
+	unstable_flushAll = Unstable_flushAll,
+	unstable_flushNumberOfYields = Unstable_flushNumberOfYields,
+	unstable_clearYields = Unstable_clearYields,
+	unstable_flushUntilNextPaint = Unstable_flushUntilNextPaint,
+	unstable_advanceTime = Unstable_advanceTime,
+	unstable_flushExpired = Unstable_flushExpired,
+	unstable_yieldValue = function() --[[ Line: 18 ]]
+		-- upvalues: v9 (copy)
+		error(v9 .. " is only available in tests, not in production")
+	end,
+	tracing = {
+		unstable_wrap = function() --[[ Line: 18 ]]
+			-- upvalues: v10 (copy)
+			error(v10 .. " is only available in tests, not in production")
+		end,
+		__interactionsRef = {},
+		__subscriberRef = {}
+	}
 }
-local var2 = "unstable_flushAllWithoutAsserting"
 
-function t.unstable_flushAllWithoutAsserting()
-	-- upvalues: var2 (ref)
-	error(var2 .. " is only available in tests, not in production")
+for i, value in TracingModule do
+	SchedulerModule.tracing[i] = value
 end
-
-local var3 = "unstable_flushAll"
-
-function t.unstable_flushAll()
-	-- upvalues: var3 (ref)
-	error(var3 .. " is only available in tests, not in production")
+for i1, value1 in TracingSubscriptionsModule do
+	SchedulerModule.tracing[i1] = value1
 end
-
-local var4 = "unstable_flushNumberOfYields"
-
-function t.unstable_flushNumberOfYields()
-	-- upvalues: var4 (ref)
-	error(var4 .. " is only available in tests, not in production")
-end
-
-local var5 = "unstable_clearYields"
-
-function t.unstable_clearYields()
-	-- upvalues: var5 (ref)
-	error(var5 .. " is only available in tests, not in production")
-end
-
-local var6 = "unstable_clearYields"
-
-function t.unstable_flushUntilNextPaint()
-	-- upvalues: var6 (ref)
-	error(var6 .. " is only available in tests, not in production")
-end
-
-local var7 = "unstable_advanceTime"
-
-function t.unstable_advanceTime()
-	-- upvalues: var7 (ref)
-	error(var7 .. " is only available in tests, not in production")
-end
-
-local var8 = "unstable_flushExpired"
-
-function t.unstable_flushExpired()
-	-- upvalues: var8 (ref)
-	error(var8 .. " is only available in tests, not in production")
-end
-
-local var9 = "unstable_yieldValue"
-
-function t.unstable_yieldValue()
-	-- upvalues: var9 (ref)
-	error(var9 .. " is only available in tests, not in production")
-end
-
-local t_1 = {}
-local var10 = "unstable_wrap"
-
-function t_1.unstable_wrap()
-	-- upvalues: var10 (ref)
-	error(var10 .. " is only available in tests, not in production")
-end
-
-t_1.__interactionsRef = {}
-t_1.__subscriberRef = {}
-t.tracing = t_1
-
-for i, v in tracingModule do
-	t.tracing[i] = v
-end
-for i_1, v_1 in tracingSubscriptionsModule do
-	t.tracing[i_1] = v_1
-end
-return t
+return SchedulerModule

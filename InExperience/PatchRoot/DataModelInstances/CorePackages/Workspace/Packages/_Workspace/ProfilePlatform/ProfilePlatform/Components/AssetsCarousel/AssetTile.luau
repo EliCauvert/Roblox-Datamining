@@ -1,29 +1,28 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local priceFooterModule = require(script.Parent.PriceFooter)
-local userLibModule = require(parent.UserLib)
-local constants = userLibModule.Utils.Constants
-local getRbxthumbWithTypeSizeAndOptions = userLibModule.Utils.getRbxthumbWithTypeSizeAndOptions
-local UIBloxModule = require(parent.UIBlox)
-local enumsModule = require(profilePlatform.Common.Enums)
-local fFlagProfilePlatformEnableBundlesInAssetsCarousel = require(parent.SharedFlags).FFlagProfilePlatformEnableBundlesInAssetsCarousel
-local fFlagProfilePlatformFixResaleLimitedPriceModule = require(profilePlatform.Flags.FFlagProfilePlatformFixResaleLimitedPrice)
-local itemTile = UIBloxModule.Tile.ItemTile
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local PriceFooterModule = require(script.Parent.PriceFooter)
+local UserLibModule = require(Parent.UserLib)
+local Constants = UserLibModule.Utils.Constants
+local GetRbxthumbWithTypeSizeAndOptionsFunction = UserLibModule.Utils.getRbxthumbWithTypeSizeAndOptions
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local FFlagProfilePlatformEnableBundlesInAssetsCarousel = require(Parent.SharedFlags).FFlagProfilePlatformEnableBundlesInAssetsCarousel
+local FFlagProfilePlatformFixResaleLimitedPriceModule = require(ProfilePlatform.Flags.FFlagProfilePlatformFixResaleLimitedPrice)
+local ItemTile = require(Parent.UIBlox).Tile.ItemTile
 
-return function(value)
-	-- upvalues: fFlagProfilePlatformEnableBundlesInAssetsCarousel (ref), enumsModule (ref), constants (ref), getRbxthumbWithTypeSizeAndOptions (ref), reactModule (ref), itemTile (ref), priceFooterModule (ref), fFlagProfilePlatformFixResaleLimitedPriceModule (ref)
-	return reactModule.createElement(itemTile, {
+return function(p1) --[[ Line: 36 | Named "AssetTile" ]]
+	-- upvalues: FFlagProfilePlatformEnableBundlesInAssetsCarousel (copy), EnumsModule (copy), Constants (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (copy), ReactModule (copy), ItemTile (copy), PriceFooterModule (copy), FFlagProfilePlatformFixResaleLimitedPriceModule (copy)
+	return ReactModule.createElement(ItemTile, {
 		useMaxTitleHeight = false,
 		titleTextLineCount = 1,
 		Selectable = true,
-		name = value.name,
-		thumbnail = getRbxthumbWithTypeSizeAndOptions(value.assetId, if fFlagProfilePlatformEnableBundlesInAssetsCarousel and value.itemType and value.itemType == enumsModule.ItemTypes.Bundle then constants.RbxthumbTypes.BundleThumbnail else constants.RbxthumbTypes.Asset, 150),
-		onActivated = value.onActivated,
-		footer = reactModule.createElement(priceFooterModule, {
-			price = value.price,
-			isOffSale = value.isOffSale,
-			lowestResalePrice = if fFlagProfilePlatformFixResaleLimitedPriceModule then value.lowestResalePrice else nil
+		name = p1.name,
+		thumbnail = GetRbxthumbWithTypeSizeAndOptionsFunction(p1.assetId, if FFlagProfilePlatformEnableBundlesInAssetsCarousel and p1.itemType and p1.itemType == EnumsModule.ItemTypes.Bundle then Constants.RbxthumbTypes.BundleThumbnail else Constants.RbxthumbTypes.Asset, 150),
+		onActivated = p1.onActivated,
+		footer = ReactModule.createElement(PriceFooterModule, {
+			price = p1.price,
+			isOffSale = p1.isOffSale,
+			lowestResalePrice = if FFlagProfilePlatformFixResaleLimitedPriceModule then p1.lowestResalePrice else nil
 		})
 	})
 end

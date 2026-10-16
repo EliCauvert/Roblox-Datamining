@@ -1,6 +1,6 @@
-﻿local parent = script.Parent
+﻿local Parent = script.Parent
 
 return require(game:GetService("CorePackages").Packages.Rodux).combineReducers({
-	assets = require(parent.FavoriteAssets),
-	bundles = require(parent.FavoriteBundles)
+	assets = require(Parent.FavoriteAssets),
+	bundles = require(Parent.FavoriteBundles)
 })

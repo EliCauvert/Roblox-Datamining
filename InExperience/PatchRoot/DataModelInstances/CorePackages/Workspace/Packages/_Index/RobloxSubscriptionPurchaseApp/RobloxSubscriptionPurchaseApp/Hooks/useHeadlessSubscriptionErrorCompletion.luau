@@ -1,18 +1,18 @@
-﻿local robloxSubscriptionPurchaseApp = script:FindFirstAncestor("RobloxSubscriptionPurchaseApp")
-local parent = robloxSubscriptionPurchaseApp.Parent
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local robloxSubscriptionStoreModule = require(robloxSubscriptionPurchaseApp.Store.RobloxSubscriptionStore)
-local promptStateModule = require(robloxSubscriptionPurchaseApp.Enums.PromptState)
-local completeRobloxSubscriptionUpsellFlowModule = require(robloxSubscriptionPurchaseApp.Actions.completeRobloxSubscriptionUpsellFlow)
+﻿local RobloxSubscriptionPurchaseApp = script:FindFirstAncestor("RobloxSubscriptionPurchaseApp")
+local Parent = RobloxSubscriptionPurchaseApp.Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local RobloxSubscriptionStoreModule = require(RobloxSubscriptionPurchaseApp.Store.RobloxSubscriptionStore)
+local PromptStateModule = require(RobloxSubscriptionPurchaseApp.Enums.PromptState)
+local CompleteRobloxSubscriptionUpsellFlowModule = require(RobloxSubscriptionPurchaseApp.Actions.completeRobloxSubscriptionUpsellFlow)
 
-return function()
-	-- upvalues: robloxSubscriptionStoreModule (ref), signalsReactModule (ref), reactModule (ref), promptStateModule (ref), completeRobloxSubscriptionUpsellFlowModule (ref)
-	local var1 = signalsReactModule.useSignalState(robloxSubscriptionStoreModule.get().getPromptState)
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), promptStateModule (copy), completeRobloxSubscriptionUpsellFlowModule (copy)
-		if var1 == promptStateModule.Error then
-			completeRobloxSubscriptionUpsellFlowModule()
+return function() --[[ Line: 14 | Named "useHeadlessSubscriptionErrorCompletion" ]]
+	-- upvalues: RobloxSubscriptionStoreModule (copy), SignalsReactModule (copy), ReactModule (copy), PromptStateModule (copy), CompleteRobloxSubscriptionUpsellFlowModule (copy)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(RobloxSubscriptionStoreModule.get().getPromptState)
+	ReactModule.useEffect(function() --[[ Line: 18 ]]
+		-- upvalues: UseSignalStateResult (copy), PromptStateModule (upval), CompleteRobloxSubscriptionUpsellFlowModule (upval)
+		if UseSignalStateResult == PromptStateModule.Error then
+			CompleteRobloxSubscriptionUpsellFlowModule()
 		end
-	end, { var1 })
+	end, { UseSignalStateResult })
 end

@@ -1,18 +1,17 @@
-﻿local parent = script:FindFirstAncestor("CoreScriptsRoactCommon").Parent
-local foundationModule = require(parent.Foundation)
-local localizationModule = require(parent.Localization)
-local reactModule = require(parent.React)
-local teleportBackModule = require(script.Parent.TeleportBack)
-local traversalTelemetryModule = require(script.Parent.TraversalTelemetry)
-local dialog = foundationModule.Dialog
-local dialogSize = foundationModule.Enums.DialogSize
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local orientation = foundationModule.Enums.Orientation
-local useLocalization = localizationModule.Hooks.useLocalization
+﻿local Parent = script:FindFirstAncestor("CoreScriptsRoactCommon").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local TeleportBackModule = require(script.Parent.TeleportBack)
+local TraversalTelemetryModule = require(script.Parent.TraversalTelemetry)
+local Dialog = FoundationModule.Dialog
+local DialogSize = FoundationModule.Enums.DialogSize
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local Orientation = FoundationModule.Enums.Orientation
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useLocalization (ref), reactModule (ref), traversalTelemetryModule (ref), teleportBackModule (ref), dialog (ref), dialogSize (ref), orientation (ref), buttonVariant (ref)
-	local var1 = useLocalization({
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 40 | Named "TeleportLeaveConfirmation" ]]
+	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), TraversalTelemetryModule (copy), TeleportBackModule (copy), Dialog (copy), DialogSize (copy), Orientation (copy), ButtonVariant (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
 		leaveHeader = "CoreScripts.InGameMenu.Traversal.LeaveHeader",
 		leaveContinueAction = "CoreScripts.InGameMenu.Actions.Continue",
 		leaveCancelAction = "CoreScripts.InGameMenu.Cancel",
@@ -22,47 +21,47 @@ return reactModule.memo(reactModule.forwardRef(function(p1, p2)
 		}
 	})
 	
-	return reactModule.createElement(dialog.Root, {
-		size = dialogSize.Small,
-		onClose = function(p3)
-			-- upvalues: traversalTelemetryModule (copy), p1 (ref)
-			traversalTelemetryModule.sendTeleportConfirmationActions({ event_type = "cancel", source = p1.source })
+	return ReactModule.createElement(Dialog.Root, {
+		size = DialogSize.Small,
+		onClose = function(p2) --[[ Line: 65 ]]
+			-- upvalues: TraversalTelemetryModule (upval), p1 (copy)
+			TraversalTelemetryModule.sendTeleportConfirmationActions({ event_type = "cancel", source = p1.source })
 			
 			if p1.onClose then
-				p1.onClose(p3)
+				p1.onClose(p2)
 			end
 		end,
-		hasBackdrop = p1.hasBackdrop ~= nil or p1.hasBackdrop,
-		ref = p2
+		hasBackdrop = p1.hasBackdrop == nil or p1.hasBackdrop,
+		ref = Ref
 	}, {
-		DialogTitle = reactModule.createElement(dialog.Title, {
+		DialogTitle = ReactModule.createElement(Dialog.Title, {
 			testId = "--foundation-dialog--title",
-			text = var1.leaveHeader
+			text = UseLocalizationResult.leaveHeader
 		}),
-		DialogContent = reactModule.createElement(dialog.Content, { LayoutOrder = 2 }, {
-			DialogText = reactModule.createElement(dialog.Text, { Text = var1.leaveBody })
+		DialogContent = ReactModule.createElement(Dialog.Content, { LayoutOrder = 2 }, {
+			DialogText = ReactModule.createElement(Dialog.Text, { Text = UseLocalizationResult.leaveBody })
 		}),
-		DialogActions = reactModule.createElement(dialog.Actions, {
+		DialogActions = ReactModule.createElement(Dialog.Actions, {
 			LayoutOrder = 3,
-			orientation = orientation.Vertical,
+			orientation = Orientation.Vertical,
 			actions = {
 				{
 					testId = "--teleport-leave-continue",
-					text = var1.leaveContinueAction,
-					variant = buttonVariant.Emphasis,
-					onActivated = reactModule.useCallback(function()
-						-- upvalues: traversalTelemetryModule (copy), p1 (ref), teleportBackModule (copy)
-						traversalTelemetryModule.sendTeleportConfirmationActions({ event_type = "confirm", source = p1.source })
-						teleportBackModule(p1.placeId)
-					end, { teleportBackModule, p1.placeId })
+					text = UseLocalizationResult.leaveContinueAction,
+					variant = ButtonVariant.Emphasis,
+					onActivated = ReactModule.useCallback(function() --[[ Line: 54 ]]
+						-- upvalues: TraversalTelemetryModule (upval), p1 (copy), TeleportBackModule (upval)
+						TraversalTelemetryModule.sendTeleportConfirmationActions({ event_type = "confirm", source = p1.source })
+						TeleportBackModule(p1.placeId)
+					end, { TeleportBackModule, p1.placeId })
 				},
 				{
 					testId = "--teleport-leave-cancel",
-					text = var1.leaveCancelAction,
-					variant = buttonVariant.Standard,
-					onActivated = function()
-						-- upvalues: traversalTelemetryModule (copy), p1 (ref)
-						traversalTelemetryModule.sendTeleportConfirmationActions({ event_type = "cancel", source = p1.source })
+					text = UseLocalizationResult.leaveCancelAction,
+					variant = ButtonVariant.Standard,
+					onActivated = function() --[[ Line: 105 ]]
+						-- upvalues: TraversalTelemetryModule (upval), p1 (copy)
+						TraversalTelemetryModule.sendTeleportConfirmationActions({ event_type = "cancel", source = p1.source })
 						p1.onCancel()
 					end
 				}

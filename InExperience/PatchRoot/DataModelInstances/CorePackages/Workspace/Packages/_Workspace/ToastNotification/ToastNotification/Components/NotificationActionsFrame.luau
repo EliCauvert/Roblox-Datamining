@@ -1,129 +1,111 @@
-﻿local parent = script.Parent.Parent
-local context = parent.context
-local hooks = parent.Hooks
-local utils = parent.utils
-local dependenciesModule = require(parent.dependencies)
-local UIBlox = dependenciesModule.UIBlox
-local foundationModule = require(parent.Parent.Foundation)
-local useTokens = foundationModule.Hooks.useTokens
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local useLocalization = dependenciesModule.Localization.Hooks.useLocalization
-local typeModule = require(parent.type)
-local buttonStack = UIBlox.App.Button.ButtonStack
-local buttonType = UIBlox.App.Button.Enum.ButtonType
-local constantsModule = require(parent.constants)
-local defaultContentPadding = constantsModule.DefaultContentPadding
-local defaultButtonHeight = constantsModule.DefaultButtonHeight
-local parent_1 = parent.Parent
-local reactModule = require(parent_1.React)
-local useFocusGuiObject = require(parent_1.ReactFocusNavigation).useFocusGuiObject
-local focusNavigationUtilsModule = require(parent_1.FocusNavigationUtils)
-local focusRoot = focusNavigationUtilsModule.FocusRoot
-local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
-local getTimerFromCardData = require(utils.toastNotificationHelper).getTimerFromCardData
-local useNotificationCardStateModule = require(context.useNotificationCardState)
-local useNotificationCardDataModule = require(context.useNotificationCardData)
-local useTimeRemainingMapModule = require(hooks.useTimeRemainingMap)
+﻿local Parent = script.Parent.Parent
+local Context = Parent.context
+local DependenciesModule = require(Parent.dependencies)
+local UIBlox = DependenciesModule.UIBlox
+local FoundationModule = require(Parent.Parent.Foundation)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local UseLocalizationFunction = DependenciesModule.Localization.Hooks.useLocalization
+local TypeModule = require(Parent.type)
+local ButtonStack = UIBlox.App.Button.ButtonStack
+local ButtonType = UIBlox.App.Button.Enum.ButtonType
+local ConstantsModule = require(Parent.constants)
+local DefaultContentPadding = ConstantsModule.DefaultContentPadding
+local DefaultButtonHeight = ConstantsModule.DefaultButtonHeight
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
+local UseFocusGuiObjectFunction = require(Parent1.ReactFocusNavigation).useFocusGuiObject
+local FocusNavigationUtilsModule = require(Parent1.FocusNavigationUtils)
+local FocusRoot = FocusNavigationUtilsModule.FocusRoot
+local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
+local GetTimerFromCardDataFunction = require(Parent.utils.toastNotificationHelper).getTimerFromCardData
+local UseNotificationCardStateModule = require(Context.useNotificationCardState)
+local UseNotificationCardDataModule = require(Context.useNotificationCardData)
+local UseTimeRemainingMapModule = require(Parent.Hooks.useTimeRemainingMap)
 
-local _ = function(p1)
-	-- upvalues: typeModule (ref), buttonType (ref)
-	return if p1 == typeModule.SENDERButtonStyleEnum.Growth then buttonType.PrimaryContextual elseif p1 == typeModule.SENDERButtonStyleEnum.Primary then buttonType.PrimarySystem elseif p1 == typeModule.SENDERButtonStyleEnum.Secondary then buttonType.Secondary elseif p1 == typeModule.SENDERButtonStyleEnum.Alert then buttonType.Alert else buttonType.Secondary
+local function _(Alert) --[[ Line: 35 ]]
+	-- upvalues: TypeModule (copy), ButtonType (copy)
+	return if Alert == TypeModule.SENDERButtonStyleEnum.Growth then ButtonType.PrimaryContextual elseif Alert == TypeModule.SENDERButtonStyleEnum.Primary then ButtonType.PrimarySystem elseif Alert == TypeModule.SENDERButtonStyleEnum.Secondary then ButtonType.Secondary elseif Alert == TypeModule.SENDERButtonStyleEnum.Alert then ButtonType.Alert else ButtonType.Secondary
 end
 
-local var1 = function(p1, p2, p3, p4)
-	-- upvalues: foundationFontFaceMigration (ref), useTokens (ref), useNotificationCardDataModule (ref), getTimerFromCardData (ref), useTimeRemainingMapModule (ref), typeModule (ref), buttonType (ref)
-	local var2 = if foundationFontFaceMigration then useTokens() else nil
-	local var3 = useNotificationCardDataModule()
-	local _ = nil
+local function v21(List, p1, Callback, UseRefResult) --[[ Line: 49 ]]
+	-- upvalues: FoundationFontFaceMigration (copy), UseTokensFunction (copy), UseNotificationCardDataModule (copy), GetTimerFromCardDataFunction (copy), UseTimeRemainingMapModule (copy), TypeModule (copy), ButtonType (copy)
+	local UseTokensResult = if FoundationFontFaceMigration then UseTokensFunction() else nil
+	local UseNotificationCardDataModuleResult = UseNotificationCardDataModule()
 	local t = {}
 	
-	for i, v in ipairs(p1) do
-		if v.timer and v.timer.showTimeOnElement then
-			t[v.timer.showTimeOnElement] = getTimerFromCardData(var3, v.timer.showTimeOnElement)
+	for _, value in ipairs(List) do
+		if value.timer and value.timer.showTimeOnElement then
+			t[value.timer.showTimeOnElement] = GetTimerFromCardDataFunction(UseNotificationCardDataModuleResult, value.timer.showTimeOnElement)
 		end
 	end
-	local var4 = useTimeRemainingMapModule(t, var3)
-	local t_1 = {}
+	local UseTimeRemainingMapModuleResult = UseTimeRemainingMapModule(t, UseNotificationCardDataModuleResult)
+	local List1 = {}
 	
-	if p1 then
-		for i_1, v_1 in ipairs(p1) do
-			local var5, text
-			local _ = nil
-			
-			if v_1 and v_1.timer and v_1.timer.showTimeOnElement then
-				var5 = `{v_1.label.text} ({var4[v_1.timer.showTimeOnElement]}{p2.secondsAbbreviated})`
-				local buttonStyle = v_1.buttonStyle
-				local var6 = if buttonStyle == typeModule.SENDERButtonStyleEnum.Growth then buttonType.PrimaryContextual elseif buttonStyle == typeModule.SENDERButtonStyleEnum.Primary then buttonType.PrimarySystem elseif buttonStyle == typeModule.SENDERButtonStyleEnum.Secondary then buttonType.Secondary elseif buttonStyle == typeModule.SENDERButtonStyleEnum.Alert then buttonType.Alert else buttonType.Secondary
-				table.insert(t_1, {
-					buttonType = var6,
-					props = {
-						text = var5,
-						fontStyle = if foundationFontFaceMigration then var2.Typography.TitleLarge else nil,
-						onActivated = function()
-							-- upvalues: p3 (ref), v_1 (ref)
-							if p3 then
-								p3(v_1)
-							end
-						end,
-						buttonRef = if var6 == buttonType.PrimaryContextual then p4 else nil
-					}
-				})
-			end
-			if v_1 and v_1.label then
-				text = v_1.label.text
-				
-				if not text then
-					text = ""
-				end
-				var5 = text
-			end
+	if List then
+		for _, value1 in ipairs(List) do
+			local ButtonStyle = value1.buttonStyle
+			local PrimaryContextual = if ButtonStyle == TypeModule.SENDERButtonStyleEnum.Growth then ButtonType.PrimaryContextual elseif ButtonStyle == TypeModule.SENDERButtonStyleEnum.Primary then ButtonType.PrimarySystem elseif ButtonStyle == TypeModule.SENDERButtonStyleEnum.Secondary then ButtonType.Secondary elseif ButtonStyle == TypeModule.SENDERButtonStyleEnum.Alert then ButtonType.Alert else ButtonType.Secondary
+			table.insert(List1, {
+				buttonType = PrimaryContextual,
+				props = {
+					text = if value1 and value1.timer and value1.timer.showTimeOnElement then `{value1.label.text} ({UseTimeRemainingMapModuleResult[value1.timer.showTimeOnElement]}{p1.secondsAbbreviated})` else value1 and value1.label and value1.label.text or "",
+					fontStyle = if FoundationFontFaceMigration then UseTokensResult.Typography.TitleLarge else nil,
+					onActivated = function() --[[ Line: 85 ]]
+						-- upvalues: Callback (copy), value1 (copy)
+						if Callback then
+							Callback(value1)
+						end
+					end,
+					buttonRef = if PrimaryContextual == ButtonType.PrimaryContextual then UseRefResult else nil
+				}
+			})
 		end
 	end
-	return t_1
+	return List1
 end
 
-return function(p5)
-	-- upvalues: useNotificationCardStateModule (ref), useNotificationCardDataModule (ref), useLocalization (ref), reactModule (ref), useFocusGuiObject (ref), var1 (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), buttonStack (ref), defaultButtonHeight (ref), defaultContentPadding (ref)
-	local var7 = useNotificationCardStateModule("button")
-	local handleActions = useNotificationCardDataModule().handleActions
-	local var8 = useLocalization({
+return function(p2) --[[ Line: 103 ]]
+	-- upvalues: UseNotificationCardStateModule (copy), UseNotificationCardDataModule (copy), UseLocalizationFunction (copy), ReactModule (copy), UseFocusGuiObjectFunction (copy), v21 (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), ButtonStack (copy), DefaultButtonHeight (copy), DefaultContentPadding (copy)
+	local Button = UseNotificationCardStateModule("button")
+	local HandleActions = UseNotificationCardDataModule().handleActions
+	local UseLocalizationResult = UseLocalizationFunction({
 		secondsAbbreviated = "Feature.Notifications.Label.SecondsAbbreviated"
 	})
-	local shouldAutoFocus = p5.shouldAutoFocus
-	local var9 = reactModule.useRef(nil)
-	local var10 = useFocusGuiObject()
-	reactModule.useEffect(function()
-		-- upvalues: shouldAutoFocus (ref), var9 (ref), var10 (ref)
-		if not shouldAutoFocus then return end
-		local current = var9.current
+	local ShouldAutoFocus = p2.shouldAutoFocus
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseFocusGuiObjectResult = UseFocusGuiObjectFunction()
+	ReactModule.useEffect(function() --[[ Line: 116 ]]
+		-- upvalues: ShouldAutoFocus (copy), UseRefResult (copy), UseFocusGuiObjectResult (copy)
+		if not ShouldAutoFocus then return end
+		local Current = UseRefResult.current
 		
-		if current then
-			var10(current)
-			
-			return function()
-				-- upvalues: var10 (copy)
-				var10(nil)
-			end
+		if not Current then return end
+		UseFocusGuiObjectResult(Current)
+		
+		return function() --[[ Line: 128 ]]
+			-- upvalues: UseFocusGuiObjectResult (upval)
+			UseFocusGuiObjectResult(nil)
 		end
-	end, { shouldAutoFocus, var10 })
-	local var11 = var1(var7, var8, handleActions, var9)
+	end, { ShouldAutoFocus, UseFocusGuiObjectResult })
+	local Buttons = v21(Button, UseLocalizationResult, HandleActions, UseRefResult)
 	
-	return if #var11 > 0 then reactModule.createElement("Frame", {
+	return if #Buttons > 0 then ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		LayoutOrder = 2,
 		AutomaticSize = Enum.AutomaticSize.Y,
 		Size = UDim2.new(1, 0, 0, 0)
 	}, {
-		FocusRoot = reactModule.createElement(focusRoot, {
+		FocusRoot = ReactModule.createElement(FocusRoot, {
 			isIsolated = true,
-			surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.PopUp,
-			isFocusable = shouldAutoFocus,
-			isAutoFocusRoot = shouldAutoFocus
+			surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.PopUp,
+			isFocusable = ShouldAutoFocus,
+			isAutoFocusRoot = ShouldAutoFocus
 		}, {
-			ActionButtons = var11 and reactModule.createElement(buttonStack, {
-				buttonHeight = defaultButtonHeight,
-				buttons = var11,
-				marginBetween = defaultContentPadding
+			ActionButtons = Buttons and ReactModule.createElement(ButtonStack, {
+				buttonHeight = DefaultButtonHeight,
+				buttons = Buttons,
+				marginBetween = DefaultContentPadding
 			})
 		})
 	}) else nil

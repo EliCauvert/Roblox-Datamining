@@ -1,266 +1,268 @@
-﻿local playersService = game:GetService("Players")
-local robloxReplicatedStorageService = game:GetService("RobloxReplicatedStorage")
-local promiseModule = require(game:GetService("CorePackages").Packages.Promise)
-local cFrame = CFrame.new(Vector3.new(0, 150, 0))
-local inspectAndBuyClusterCompositionTimeoutMs = game:DefineFastInt("InspectAndBuyClusterCompositionTimeoutMs", 3000)
-local t = {}
-t.__index = t
+﻿local Players = game:GetService("Players")
+local RobloxReplicatedStorage = game:GetService("RobloxReplicatedStorage")
+local PromiseModule = require(game:GetService("CorePackages").Packages.Promise)
+local _CFrame = CFrame.new(vector.create(0, 150, 0))
+local InspectAndBuyClusterCompositionTimeoutMs = game:DefineFastInt("InspectAndBuyClusterCompositionTimeoutMs", 3000)
+local CharacterModelPoolModule = {}
+CharacterModelPoolModule.__index = CharacterModelPoolModule
 
-local function setupCharacterModels(value)
-	-- upvalues: playersService (ref), robloxReplicatedStorageService (ref)
-	local humanoidDescription = playersService:CreateHumanoidModelFromDescriptionAsync(Instance.new("HumanoidDescription"), Enum.HumanoidRigType.R6)
-	local humanoidDescription_1 = playersService:CreateHumanoidModelFromDescriptionAsync(Instance.new("HumanoidDescription"), Enum.HumanoidRigType.R15)
-	humanoidDescription.Humanoid.DisplayDistanceType = Enum.HumanoidDisplayDistanceType.None
-	humanoidDescription_1.Humanoid.DisplayDistanceType = Enum.HumanoidDisplayDistanceType.None
-	humanoidDescription.HumanoidRootPart.Anchored = true
-	humanoidDescription_1.HumanoidRootPart.Anchored = true
-	humanoidDescription.Parent = robloxReplicatedStorageService
-	humanoidDescription_1.Parent = robloxReplicatedStorageService
-	humanoidDescription.HumanoidRootPart.CFrame = CFrame.new(value)
-	humanoidDescription_1:SetPrimaryPartCFrame(humanoidDescription.HumanoidRootPart.CFrame)
+local function setupCharacterModels(X) --[[ Line: 25 ]]
+	-- upvalues: Players (copy), RobloxReplicatedStorage (copy)
+	local HumanoidModelFromDescriptionAsync = Players:CreateHumanoidModelFromDescriptionAsync(Instance.new("HumanoidDescription"), Enum.HumanoidRigType.R6)
+	local HumanoidModelFromDescriptionAsync1 = Players:CreateHumanoidModelFromDescriptionAsync(Instance.new("HumanoidDescription"), Enum.HumanoidRigType.R15)
+	HumanoidModelFromDescriptionAsync.Humanoid.DisplayDistanceType = Enum.HumanoidDisplayDistanceType.None
+	HumanoidModelFromDescriptionAsync1.Humanoid.DisplayDistanceType = Enum.HumanoidDisplayDistanceType.None
+	HumanoidModelFromDescriptionAsync.HumanoidRootPart.Anchored = true
+	HumanoidModelFromDescriptionAsync1.HumanoidRootPart.Anchored = true
+	HumanoidModelFromDescriptionAsync.Parent = RobloxReplicatedStorage
+	HumanoidModelFromDescriptionAsync1.Parent = RobloxReplicatedStorage
+	HumanoidModelFromDescriptionAsync.HumanoidRootPart.CFrame = CFrame.new(X)
+	HumanoidModelFromDescriptionAsync1:SetPrimaryPartCFrame(HumanoidModelFromDescriptionAsync.HumanoidRootPart.CFrame)
 	
-	return humanoidDescription, humanoidDescription_1
+	return HumanoidModelFromDescriptionAsync, HumanoidModelFromDescriptionAsync1
 end
 
-function t.new(p1, p2, p3, p4)
-	-- upvalues: t (ref), setupCharacterModels (ref), robloxReplicatedStorageService (ref)
-	local t_1 = {}
-	setmetatable(t_1, t)
-	t_1.mockApplyDescription = p4
-	local var1, var2 = setupCharacterModels(p2)
-	t_1.r6 = var1
-	t_1.r15current = var2
-	t_1.r15offScreen = var2:Clone()
-	t_1.r15offScreen.Parent = robloxReplicatedStorageService
-	t_1.avatarType = p3
-	t_1.worldModelRef = p1
-	t_1.inProgressPromise = nil
-	t_1.waitingPromise = nil
-	t_1.r6Promise = nil
-	t_1.destroyed = false
+function CharacterModelPoolModule.new(WorldModelRef, p1, AvatarType, MockApplyDescription) --[[ Line: 51 ]]
+	-- upvalues: CharacterModelPoolModule (copy), setupCharacterModels (copy), RobloxReplicatedStorage (copy)
+	local t = {}
+	setmetatable(t, CharacterModelPoolModule)
+	t.mockApplyDescription = MockApplyDescription
+	local SetupCharacterModelsResult2
+	t.r6, SetupCharacterModelsResult2 = setupCharacterModels(p1)
+	t.r15current = SetupCharacterModelsResult2
+	t.r15offScreen = SetupCharacterModelsResult2:Clone()
+	t.r15offScreen.Parent = RobloxReplicatedStorage
+	t.avatarType = AvatarType
+	t.worldModelRef = WorldModelRef
+	t.inProgressPromise = nil
+	t.waitingPromise = nil
+	t.r6Promise = nil
+	t.destroyed = false
 	
-	return t_1
+	return t
 end
 
-function t:setupAnimations(p1, p2)
+function CharacterModelPoolModule:setupAnimations(p1, Object) --[[ Line: 83 ]]
 	p1.Parent = self.r6
-	p2.Parent = self.r15current
-	p2.Archivable = true
-	local var1 = p2:Clone()
-	var1.Parent = self.r15offScreen
-	var1.Archivable = false
-	p2.Archivable = false
+	Object.Parent = self.r15current
+	Object.Archivable = true
+	local ObjectClone = Object:Clone()
+	ObjectClone.Parent = self.r15offScreen
+	ObjectClone.Archivable = false
+	Object.Archivable = false
 end
 
-function t:getCurrentCharacter()
-	return if self.avatarType == Enum.HumanoidRigType.R15 then self.r15current else self.r6
+function CharacterModelPoolModule.getCurrentCharacter(p1) --[[ Line: 93 ]]
+	return if p1.avatarType == Enum.HumanoidRigType.R15 then p1.r15current else p1.r6
 end
 
-function t:isR15()
+function CharacterModelPoolModule:isR15(): boolean --[[ Line: 101 ]]
 	return self.avatarType == Enum.HumanoidRigType.R15
 end
 
-function t.syncRotation(_, p1, p2)
-	local _, _, _, var1, var2, var3, var4, var5, var6, var7, var8, var9 = p1.HumanoidRootPart.CFrame:components()
-	local p = p2.HumanoidRootPart.CFrame.p
-	p2.HumanoidRootPart.CFrame = CFrame.new(p.X, p.Y, p.Z, var1, var2, var3, var4, var5, var6, var7, var8, var9)
+function CharacterModelPoolModule:syncRotation(Character, Character1) --[[ Line: 105 ]]
+	local _, _, _, ComponentsResult4, ComponentsResult5, ComponentsResult6, ComponentsResult7, ComponentsResult8, ComponentsResult9, ComponentsResult10, ComponentsResult11, ComponentsResult12 = Character.HumanoidRootPart.CFrame:components()
+	local P = Character1.HumanoidRootPart.CFrame.p
+	Character1.HumanoidRootPart.CFrame = CFrame.new(P.X, P.Y, P.Z, ComponentsResult4, ComponentsResult5, ComponentsResult6, ComponentsResult7, ComponentsResult8, ComponentsResult9, ComponentsResult10, ComponentsResult11, ComponentsResult12)
 end
 
-local function hasLayeredAccessoryUpdates(p1, p2)
-	local var1 = p1:GetAccessories(false)
-	local var2 = p2:GetAccessories(false)
+local function hasLayeredAccessoryUpdates(Humanoid: Humanoid, Humanoid1: Humanoid): boolean --[[ Line: 113 ]]
+	local Accessories = Humanoid:GetAccessories(false)
+	local Accessories1 = Humanoid1:GetAccessories(false)
 	
-	if #var2 == 0 then
+	if #Accessories1 == 0 then
 		return false
-	elseif #var1 ~= #var2 then
+	end
+	if #Accessories ~= #Accessories1 then
 		return true
 	end
 	local t = {}
 	
-	for i, v in ipairs(var1) do
-		t[v.AssetId] = true
+	for _, accessory in ipairs(Accessories) do
+		t[accessory.AssetId] = true
 	end
-	for i, v_1 in ipairs(var2) do
-		if not t[v_1.AssetId] then
+	for _, value in ipairs(Accessories1) do
+		if not t[value.AssetId] then
 			return true
 		end
 	end
 	return false
 end
 
-local function _(p3)
-	return p3:FindFirstChildWhichIsA("WrapLayer", true) ~= nil
+local function _(Object): boolean --[[ Line: 139 | Named "hasWrapLayer" ]]
+	return Object:FindFirstChildWhichIsA("WrapLayer", true) ~= nil
 end
 
-function t._doUpdateR6(p3, p4)
-	-- upvalues: promiseModule (ref)
-	return promiseModule.new(function(p5, _)
-		-- upvalues: p3 (ref), p4 (ref)
-		p3.r6.Parent = p3.worldModelRef:getValue()
+function CharacterModelPoolModule._doUpdateR6(p1, HumanoidDescription) --[[ Line: 143 ]]
+	-- upvalues: PromiseModule (copy)
+	return PromiseModule.new(function(Callback: (any) -> (), _) --[[ Line: 144 ]]
+		-- upvalues: p1 (copy), HumanoidDescription (copy)
+		p1.r6.Parent = p1.worldModelRef:getValue()
 		
-		if p3.mockApplyDescription then
-			p3.mockApplyDescription(p3.r6, p4)
+		if p1.mockApplyDescription then
+			p1.mockApplyDescription(p1.r6, HumanoidDescription)
 		else
-			p3.r6.Humanoid:ApplyDescriptionAsync(p4)
+			p1.r6.Humanoid:ApplyDescriptionAsync(HumanoidDescription)
 		end
-		p5(p3:getCurrentCharacter())
+		Callback(p1:getCurrentCharacter())
 	end)
 end
 
-function t._doSimpleUpdateR15(p3, p4)
-	-- upvalues: promiseModule (ref)
-	return promiseModule.new(function(p5, _)
-		-- upvalues: p3 (ref), p4 (ref)
-		p3.r15current.Parent = p3.worldModelRef:getValue()
+function CharacterModelPoolModule._doSimpleUpdateR15(p1, Humanoid) --[[ Line: 156 ]]
+	-- upvalues: PromiseModule (copy)
+	return PromiseModule.new(function(Callback: (any) -> (), _) --[[ Line: 157 ]]
+		-- upvalues: p1 (copy), Humanoid (copy)
+		p1.r15current.Parent = p1.worldModelRef:getValue()
 		
-		if p3.mockApplyDescription then
-			p3.mockApplyDescription(p3.r15current, p4)
+		if p1.mockApplyDescription then
+			p1.mockApplyDescription(p1.r15current, Humanoid)
 		else
-			p3.r15current.Humanoid:ApplyDescriptionAsync(p4)
+			p1.r15current.Humanoid:ApplyDescriptionAsync(Humanoid)
 		end
-		p5(p3.r15current)
+		Callback(p1.r15current)
 	end)
 end
 
-function t._updateOffscreenR15(p3, p4)
-	-- upvalues: promiseModule (ref), cFrame (ref)
-	return promiseModule.new(function(p5, _)
-		-- upvalues: p3 (ref), cFrame (copy), p4 (ref)
-		p3.r15offScreen.HumanoidRootPart.CFrame = cFrame
-		p3.r15offScreen.Parent = p3.worldModelRef:getValue()
+function CharacterModelPoolModule._updateOffscreenR15(p1, Humanoid) --[[ Line: 169 ]]
+	-- upvalues: PromiseModule (copy), _CFrame (copy)
+	return PromiseModule.new(function(Callback: (any) -> (), _) --[[ Line: 170 ]]
+		-- upvalues: p1 (copy), _CFrame (upval), Humanoid (copy)
+		p1.r15offScreen.HumanoidRootPart.CFrame = _CFrame
+		p1.r15offScreen.Parent = p1.worldModelRef:getValue()
 		
-		if p3.mockApplyDescription then
-			p3.mockApplyDescription(p3.r15offScreen, p4)
+		if p1.mockApplyDescription then
+			p1.mockApplyDescription(p1.r15offScreen, Humanoid)
 		else
-			p3.r15offScreen.Humanoid:ApplyDescriptionAsync(p4)
+			p1.r15offScreen.Humanoid:ApplyDescriptionAsync(Humanoid)
 		end
-		p5(p3.r15offScreen)
+		Callback(p1.r15offScreen)
 	end)
 end
 
-local function waitForClusterCompositionFinished(p3)
-	-- upvalues: promiseModule (ref), inspectAndBuyClusterCompositionTimeoutMs (ref)
-	return if p3:FindFirstChildWhichIsA("WrapLayer", true) ~= nil then promiseModule.race({
-		promiseModule.fromEvent(p3.Humanoid.ClusterCompositionFinished),
-		promiseModule.delay(inspectAndBuyClusterCompositionTimeoutMs * 0.001)
-	}):andThen(function()
+local function waitForClusterCompositionFinished(Result) --[[ Line: 186 ]]
+	-- upvalues: PromiseModule (copy), InspectAndBuyClusterCompositionTimeoutMs (copy)
+	return if Result:FindFirstChildWhichIsA("WrapLayer", true) ~= nil then PromiseModule.race({
+		PromiseModule.fromEvent(Result.Humanoid.ClusterCompositionFinished),
+		PromiseModule.delay(InspectAndBuyClusterCompositionTimeoutMs * 0.001)
+	}):andThen(function(): boolean --[[ Line: 193 ]]
 		return true
-	end) else promiseModule.resolve(false)
+	end) else PromiseModule.resolve(false)
 end
 
-function t:_completeUpdate()
-	-- upvalues: cFrame (ref), robloxReplicatedStorageService (ref)
+function CharacterModelPoolModule:_completeUpdate() --[[ Line: 201 ]]
+	-- upvalues: _CFrame (copy), RobloxReplicatedStorage (copy)
 	self.r15offScreen.HumanoidRootPart.CFrame = self.r15current.HumanoidRootPart.CFrame
-	self.r15current.HumanoidRootPart.CFrame = cFrame
-	self.r15current.Parent = robloxReplicatedStorageService
-	local r15offScreen = self.r15offScreen
+	self.r15current.HumanoidRootPart.CFrame = _CFrame
+	self.r15current.Parent = RobloxReplicatedStorage
+	local R15offScreen = self.r15offScreen
 	self.r15offScreen = self.r15current
-	self.r15current = r15offScreen
+	self.r15current = R15offScreen
 	
 	return self.r15current
 end
 
-function t:_doUpdateR15(p3)
-	-- upvalues: hasLayeredAccessoryUpdates (ref), waitForClusterCompositionFinished (ref)
-	if hasLayeredAccessoryUpdates(self.r15current.Humanoid:GetAppliedDescription(), p3) then
-		self.inProgressPromise = self:_updateOffscreenR15(p3):andThen(waitForClusterCompositionFinished):andThen(function()
-			-- upvalues: self (ref)
+function CharacterModelPoolModule:_doUpdateR15(Humanoid) --[[ Line: 213 ]]
+	-- upvalues: hasLayeredAccessoryUpdates (copy), waitForClusterCompositionFinished (copy)
+	if hasLayeredAccessoryUpdates(self.r15current.Humanoid:GetAppliedDescription(), Humanoid) then
+		self.inProgressPromise = self:_updateOffscreenR15(Humanoid):andThen(waitForClusterCompositionFinished):andThen(function() --[[ Line: 221 ]]
+			-- upvalues: self (copy)
 			return self:_completeUpdate()
 		end)
 		
 		return self.inProgressPromise
+	else
+		return self:_doSimpleUpdateR15(Humanoid)
 	end
-	return self:_doSimpleUpdateR15(p3)
 end
 
-function t:maybeUpdateCharacter(p3)
-	-- upvalues: promiseModule (ref)
+function CharacterModelPoolModule:maybeUpdateCharacter(p1) --[[ Line: 234 ]]
+	-- upvalues: PromiseModule (copy)
 	if self.avatarType == Enum.HumanoidRigType.R6 then
-		self.r6Promise = self:_doUpdateR6(p3)
+		self.r6Promise = self:_doUpdateR6(p1)
 		
 		return self.r6Promise
-	elseif not self.inProgressPromise or self.inProgressPromise:getStatus() ~= promiseModule.Status.Started then
-		return self:_doUpdateR15(p3)
 	end
-	local waitingPromise = self.waitingPromise
-	self.waitingPromise = self.inProgressPromise:andThen(function()
-		-- upvalues: self (ref), p3 (ref)
-		return self:_doUpdateR15(p3)
+	if not self.inProgressPromise or self.inProgressPromise:getStatus() ~= PromiseModule.Status.Started then
+		return self:_doUpdateR15(p1)
+	end
+	local WaitingPromise = self.waitingPromise
+	self.waitingPromise = self.inProgressPromise:andThen(function() --[[ Line: 245 ]]
+		-- upvalues: self (copy), p1 (copy)
+		return self:_doUpdateR15(p1)
 	end)
 	
-	if waitingPromise then
-		waitingPromise:cancel()
+	if WaitingPromise then
+		WaitingPromise:cancel()
 	end
 	return self.waitingPromise
 end
 
-function t:switchAvatarType(p3)
-	-- upvalues: robloxReplicatedStorageService (ref)
-	if p3 == self.avatarType then
+function CharacterModelPoolModule:switchAvatarType(AvatarType) --[[ Line: 260 ]]
+	-- upvalues: RobloxReplicatedStorage (copy)
+	if AvatarType == self.avatarType then
 		return self:getCurrentCharacter()
 	end
-	local r6, r15current
 	self:_cancelPromises()
-	self.avatarType = p3
-	local _ = nil
-	local _ = nil
+	self.avatarType = AvatarType
+	local R6 = nil
+	local R15current = nil
 	
-	if p3 == Enum.HumanoidRigType.R6 then
-		r6 = self.r6
-		r15current = self.r15current
+	if AvatarType == Enum.HumanoidRigType.R6 then
+		R6 = self.r6
+		R15current = self.r15current
 	else
-		r6 = self.r15current
-		r15current = self.r6
+		R6 = self.r15current
+		R15current = self.r6
 	end
-	r15current.Parent = robloxReplicatedStorageService
-	r15current.Humanoid:UnequipTools()
-	self:syncRotation(r15current, r6)
+	R15current.Parent = RobloxReplicatedStorage
+	R15current.Humanoid:UnequipTools()
+	self:syncRotation(R15current, R6)
 	
-	return r6
+	return R6
 end
 
-function t.start(_) end
+function CharacterModelPoolModule:start() --[[ Line: 286 ]] end
 
-local _ = function(p3)
-	if p3 then
-		p3:cancel()
+local _ = function(p1) --[[ Line: 288 | Named "cancelPromise" ]]
+	if p1 then
+		p1:cancel()
 	end
 end
 
-function t:_cancelPromises()
-	local inProgressPromise = self.inProgressPromise
+function CharacterModelPoolModule:_cancelPromises() --[[ Line: 294 ]]
+	local InProgressPromise = self.inProgressPromise
 	
-	if inProgressPromise then
-		inProgressPromise:cancel()
+	if InProgressPromise then
+		InProgressPromise:cancel()
 	end
-	local waitingPromise = self.waitingPromise
+	local WaitingPromise = self.waitingPromise
 	
-	if waitingPromise then
-		waitingPromise:cancel()
+	if WaitingPromise then
+		WaitingPromise:cancel()
 	end
-	local r6Promise = self.r6Promise
+	local R6Promise = self.r6Promise
 	
-	if r6Promise then
-		r6Promise:cancel()
+	if R6Promise then
+		R6Promise:cancel()
 	end
 	self.inProgressPromise = nil
 	self.waitingPromise = nil
 	self.r6Promise = nil
 end
 
-function t:stop()
-	-- upvalues: robloxReplicatedStorageService (ref)
-	self.r6.Parent = robloxReplicatedStorageService
-	self.r15current.Parent = robloxReplicatedStorageService
-	self.r15offScreen.Parent = robloxReplicatedStorageService
+function CharacterModelPoolModule:stop() --[[ Line: 303 ]]
+	-- upvalues: RobloxReplicatedStorage (copy)
+	self.r6.Parent = RobloxReplicatedStorage
+	self.r15current.Parent = RobloxReplicatedStorage
+	self.r15offScreen.Parent = RobloxReplicatedStorage
 	self:_cancelPromises()
 end
 
-function t:onDestroy()
+function CharacterModelPoolModule:onDestroy() --[[ Line: 311 ]]
 	self:_cancelPromises()
 	self.r6:Destroy()
 	self.r15current:Destroy()
 	self.r15offScreen:Destroy()
 end
 
-return t
+return CharacterModelPoolModule

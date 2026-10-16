@@ -1,10 +1,10 @@
-﻿local url = require(script.Parent.Parent.Parent.Http).Url
-local httpService = game:GetService("HttpService")
+﻿local Url = require(script.Parent.Parent.Parent.Http).Url
+local HttpService = game:GetService("HttpService")
 
-return function(p1, p2, p3)
-	-- upvalues: url (ref), httpService (ref)
-	assert(type(p2) == "string", "FollowingsPostFollow request expects userId to be a string")
-	assert(type(p3) == "string", "FollowingsPostFollow request expects universeId to be a string")
+return function(Callback, p1, p2) --[[ Line: 14 ]]
+	-- upvalues: Url (copy), HttpService (copy)
+	assert(type(p1) == "string", "FollowingsPostFollow request expects userId to be a string")
+	assert(type(p2) == "string", "FollowingsPostFollow request expects universeId to be a string")
 	
-	return p1(string.format("%s/v1/users/%s/universes/%s", url.FOLLOWINGS_URL, p2, p3), "POST", { postBody = httpService:JSONEncode({}) })
+	return Callback(string.format("%s/v1/users/%s/universes/%s", Url.FOLLOWINGS_URL, p1, p2), "POST", { postBody = HttpService:JSONEncode({}) })
 end

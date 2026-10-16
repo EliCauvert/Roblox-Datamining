@@ -1,117 +1,113 @@
-﻿local roactModule = require(game:GetService("CorePackages").Packages.Roact)
-local components = script.Parent.Parent.Parent.Components
-local cellLabelModule = require(components.CellLabel)
-local bannerButtonModule = require(components.BannerButton)
-local lineGraphModule = require(components.LineGraph)
-local constantsModule = require(script.Parent.Parent.Parent.Constants)
-local lineWidth = constantsModule.GeneralFormatting.LineWidth
-local lineColor = constantsModule.GeneralFormatting.LineColor
-local chartHeaderNames = constantsModule.ServerScriptsFormatting.ChartHeaderNames
-local entryFrameHeight = constantsModule.ServerScriptsFormatting.EntryFrameHeight
-local activityBoxWidth = constantsModule.ServerScriptsFormatting.ActivityBoxWidth
-local activityBoxPadding = constantsModule.ServerScriptsFormatting.ActivityBoxPadding
-local uDim2 = UDim2.new(0, activityBoxPadding, 0, 0)
-local lineGraphHeight = constantsModule.GeneralFormatting.LineGraphHeight
-local convertTimeStampModule = require(script.Parent.Parent.Parent.Util.convertTimeStamp)
+﻿local RoactModule = require(game:GetService("CorePackages").Packages.Roact)
+local Components = script.Parent.Parent.Parent.Components
+local CellLabelModule = require(Components.CellLabel)
+local BannerButtonModule = require(Components.BannerButton)
+local LineGraphModule = require(Components.LineGraph)
+local ConstantsModule = require(script.Parent.Parent.Parent.Constants)
+local LineWidth = ConstantsModule.GeneralFormatting.LineWidth
+local LineColor = ConstantsModule.GeneralFormatting.LineColor
+local ChartHeaderNames = ConstantsModule.ServerScriptsFormatting.ChartHeaderNames
+local EntryFrameHeight = ConstantsModule.ServerScriptsFormatting.EntryFrameHeight
+local ActivityBoxWidth = ConstantsModule.ServerScriptsFormatting.ActivityBoxWidth
+local ActivityBoxPadding = ConstantsModule.ServerScriptsFormatting.ActivityBoxPadding
+local _UDim2 = UDim2.new(0, ActivityBoxPadding, 0, 0)
+local LineGraphHeight = ConstantsModule.GeneralFormatting.LineGraphHeight
+local ConvertTimeStampModule = require(script.Parent.Parent.Parent.Util.convertTimeStamp)
 
-return function(p1)
-	-- upvalues: roactModule (ref), bannerButtonModule (ref), entryFrameHeight (ref), activityBoxWidth (ref), activityBoxPadding (ref), cellLabelModule (ref), uDim2 (ref), lineWidth (ref), lineColor (ref), lineGraphModule (ref), lineGraphHeight (ref), convertTimeStampModule (ref), chartHeaderNames (ref)
-	local scriptData = p1.scriptData
-	local frameHeight = p1.frameHeight
-	local showGraph = p1.showGraph
-	local layoutOrder = p1.layoutOrder
-	local activityBoxColor = p1.activityBoxColor
-	local entryCellSize = p1.entryCellSize
-	local cellOffset = p1.cellOffset
-	local verticalOffsets = p1.verticalOffsets
-	local onButtonPress = p1.onButtonPress
-	local getX = p1.getX
-	local getActivity = p1.getActivity
-	local getRate = p1.getRate
-	local formatScriptsData = p1.formatScriptsData
-	local dataStats = scriptData.dataStats
-	local var1 = dataStats.dataSet:back()
+return function(p1) --[[ Line: 24 ]]
+	-- upvalues: RoactModule (copy), BannerButtonModule (copy), EntryFrameHeight (copy), ActivityBoxWidth (copy), ActivityBoxPadding (copy), CellLabelModule (copy), _UDim2 (copy), LineWidth (copy), LineColor (copy), LineGraphModule (copy), LineGraphHeight (copy), ConvertTimeStampModule (copy), ChartHeaderNames (copy)
+	local ScriptData = p1.scriptData
+	local ShowGraph = p1.showGraph
+	local EntryCellSize = p1.entryCellSize
+	local CellOffset = p1.cellOffset
+	local VerticalOffsets = p1.verticalOffsets
+	local GetX = p1.getX
+	local GetActivity = p1.getActivity
+	local GetRate = p1.getRate
+	local FormatScriptsDataFunction = p1.formatScriptsData
+	local DataStats = ScriptData.dataStats
+	local BackResult = DataStats.dataSet:back()
 	
-	return roactModule.createElement("Frame", {
+	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		Size = UDim2.new(1, 0, 0, frameHeight),
-		LayoutOrder = layoutOrder
+		Size = UDim2.new(1, 0, 0, p1.frameHeight),
+		LayoutOrder = p1.layoutOrder
 	}, {
-		button = roactModule.createElement(bannerButtonModule, {
-			size = UDim2.new(1, 0, 0, entryFrameHeight),
+		button = RoactModule.createElement(BannerButtonModule, {
+			size = UDim2.new(1, 0, 0, EntryFrameHeight),
 			pos = UDim2.new(),
-			isExpanded = showGraph,
-			onButtonPress = onButtonPress
+			isExpanded = ShowGraph,
+			onButtonPress = p1.onButtonPress
 		}, {
-			ActivityBox = roactModule.createElement("Frame", {
-				Size = UDim2.new(0, activityBoxWidth, 0, activityBoxWidth),
-				Position = UDim2.new(0, activityBoxPadding, 0, (entryFrameHeight - activityBoxWidth) / 2),
-				BackgroundColor3 = activityBoxColor
+			ActivityBox = RoactModule.createElement("Frame", {
+				Size = UDim2.new(0, ActivityBoxWidth, 0, ActivityBoxWidth),
+				Position = UDim2.new(0, ActivityBoxPadding, 0, (EntryFrameHeight - ActivityBoxWidth) / 2),
+				BackgroundColor3 = p1.activityBoxColor
 			}),
-			ScriptName = roactModule.createElement(cellLabelModule, {
-				text = scriptData.name,
-				size = entryCellSize[1] - uDim2,
-				pos = cellOffset[1] + uDim2
+			ScriptName = RoactModule.createElement(CellLabelModule, {
+				text = ScriptData.name,
+				size = EntryCellSize[1] - _UDim2,
+				pos = CellOffset[1] + _UDim2
 			}),
-			ScriptAcitivity = roactModule.createElement(cellLabelModule, {
-				text = formatScriptsData(var1.data[1]),
-				size = entryCellSize[2],
-				pos = cellOffset[2]
+			ScriptAcitivity = RoactModule.createElement(CellLabelModule, {
+				text = FormatScriptsDataFunction(BackResult.data[1]),
+				size = EntryCellSize[2],
+				pos = CellOffset[2]
 			}),
-			scriptFreqStr = roactModule.createElement(cellLabelModule, {
-				text = formatScriptsData(var1.data[2]),
-				size = entryCellSize[3],
-				pos = cellOffset[3]
+			scriptFreqStr = RoactModule.createElement(CellLabelModule, {
+				text = FormatScriptsDataFunction(BackResult.data[2]),
+				size = EntryCellSize[3],
+				pos = CellOffset[3]
 			}),
-			upperHorizontalLine = roactModule.createElement("Frame", {
+			upperHorizontalLine = RoactModule.createElement("Frame", {
 				BorderSizePixel = 0,
-				Size = UDim2.new(1, 0, 0, lineWidth),
-				BackgroundColor3 = lineColor
+				Size = UDim2.new(1, 0, 0, LineWidth),
+				BackgroundColor3 = LineColor
 			}),
-			verticalLine1 = roactModule.createElement("Frame", {
+			verticalLine1 = RoactModule.createElement("Frame", {
 				BorderSizePixel = 0,
-				Size = UDim2.new(0, lineWidth, 1, 0),
-				Position = verticalOffsets[2],
-				BackgroundColor3 = lineColor
+				Size = UDim2.new(0, LineWidth, 1, 0),
+				Position = VerticalOffsets[2],
+				BackgroundColor3 = LineColor
 			}),
-			verticalLine2 = roactModule.createElement("Frame", {
+			verticalLine2 = RoactModule.createElement("Frame", {
 				BorderSizePixel = 0,
-				Size = UDim2.new(0, lineWidth, 1, 0),
-				Position = verticalOffsets[3],
-				BackgroundColor3 = lineColor
+				Size = UDim2.new(0, LineWidth, 1, 0),
+				Position = VerticalOffsets[3],
+				BackgroundColor3 = LineColor
 			}),
-			lowerHorizontalLine = roactModule.createElement("Frame", {
+			lowerHorizontalLine = RoactModule.createElement("Frame", {
 				BorderSizePixel = 0,
-				Size = UDim2.new(1, 0, 0, lineWidth),
+				Size = UDim2.new(1, 0, 0, LineWidth),
 				Position = UDim2.new(0, 0, 1, 0),
-				BackgroundColor3 = lineColor
+				BackgroundColor3 = LineColor
 			})
 		}),
-		ActivityGraph = showGraph and roactModule.createElement(lineGraphModule, {
+		ActivityGraph = ShowGraph and RoactModule.createElement(LineGraphModule, {
 			axisLabelX = "Timestamp",
-			pos = UDim2.new(0, 0, 0, entryFrameHeight),
-			size = UDim2.new(1, 0, 0, lineGraphHeight),
-			graphData = dataStats.dataSet,
-			maxY = dataStats.max[1],
-			minY = dataStats.min[1],
-			getX = getX,
-			getY = getActivity,
-			stringFormatX = convertTimeStampModule,
-			stringFormatY = formatScriptsData,
-			axisLabelY = chartHeaderNames[2]
+			pos = UDim2.new(0, 0, 0, EntryFrameHeight),
+			size = UDim2.new(1, 0, 0, LineGraphHeight),
+			graphData = DataStats.dataSet,
+			maxY = DataStats.max[1],
+			minY = DataStats.min[1],
+			getX = GetX,
+			getY = GetActivity,
+			stringFormatX = ConvertTimeStampModule,
+			stringFormatY = FormatScriptsDataFunction,
+			axisLabelY = ChartHeaderNames[2]
 		}),
-		RateGraph = showGraph and roactModule.createElement(lineGraphModule, {
+		RateGraph = ShowGraph and RoactModule.createElement(LineGraphModule, {
 			axisLabelX = "Timestamp",
-			pos = UDim2.new(0, 0, 0, entryFrameHeight + lineGraphHeight),
-			size = UDim2.new(1, 0, 0, lineGraphHeight),
-			graphData = dataStats.dataSet,
-			maxY = dataStats.max[2],
-			minY = dataStats.min[2],
-			getX = getX,
-			getY = getRate,
-			stringFormatX = convertTimeStampModule,
-			stringFormatY = formatScriptsData,
-			axisLabelY = chartHeaderNames[3]
+			pos = UDim2.new(0, 0, 0, EntryFrameHeight + LineGraphHeight),
+			size = UDim2.new(1, 0, 0, LineGraphHeight),
+			graphData = DataStats.dataSet,
+			maxY = DataStats.max[2],
+			minY = DataStats.min[2],
+			getX = GetX,
+			getY = GetRate,
+			stringFormatX = ConvertTimeStampModule,
+			stringFormatY = FormatScriptsDataFunction,
+			axisLabelY = ChartHeaderNames[3]
 		})
 	})
 end

@@ -1,67 +1,67 @@
-﻿local userList = script:FindFirstAncestor("UserList")
-local parent = userList.Parent
-local reactModule = require(parent.React)
-local view = require(parent.Foundation).View
-local _ = require(userList.Common.Types)
-local entityRow = require(userList.Components.UserRow).EntityRow
-local fFlagUserListCtaIntegrationEnabled = require(parent.SharedFlags).FFlagUserListCtaIntegrationEnabled
-local fFlagAddStatusIndicatorToBaseRow = require(parent.SharedFlags).FFlagAddStatusIndicatorToBaseRow
-local fFlagUserListSurfaceExtensions = require(parent.SharedFlags).FFlagUserListSurfaceExtensions
+﻿local UserList = script:FindFirstAncestor("UserList")
+local Parent = UserList.Parent
+local ReactModule = require(Parent.React)
+local View = require(Parent.Foundation).View
+local _ = require(UserList.Common.Types)
+local EntityRow = require(UserList.Components.UserRow).EntityRow
+local FFlagUserListCtaIntegrationEnabled = require(Parent.SharedFlags).FFlagUserListCtaIntegrationEnabled
+local FFlagAddStatusIndicatorToBaseRow = require(Parent.SharedFlags).FFlagAddStatusIndicatorToBaseRow
+local FFlagUserListSurfaceExtensions = require(Parent.SharedFlags).FFlagUserListSurfaceExtensions
 
-return function(p1)
-	-- upvalues: fFlagUserListSurfaceExtensions (ref), reactModule (ref), view (ref), entityRow (ref), fFlagUserListCtaIntegrationEnabled (ref), fFlagAddStatusIndicatorToBaseRow (ref)
-	local onActivated = p1.onActivated
-	local renderRow = p1.renderRow
-	local entitiesMap = p1.entitiesMap
-	local configs = p1.configs
-	local layoutMode = p1.layoutMode
-	local var1 = if fFlagUserListSurfaceExtensions then p1.firstRowRef else nil
+return function(p1) --[[ Line: 42 | Named "useRenderEntity" ]]
+	-- upvalues: FFlagUserListSurfaceExtensions (copy), ReactModule (copy), View (copy), EntityRow (copy), FFlagUserListCtaIntegrationEnabled (copy), FFlagAddStatusIndicatorToBaseRow (copy)
+	local OnActivated = p1.onActivated
+	local RenderRowFunction = p1.renderRow
+	local EntitiesMap = p1.entitiesMap
+	local Configs = p1.configs
+	local LayoutMode = p1.layoutMode
+	local FirstRowRef = if FFlagUserListSurfaceExtensions then p1.firstRowRef else nil
 	
-	return reactModule.useCallback(function(p2, p3, p4)
-		-- upvalues: entitiesMap (ref), renderRow (ref), onActivated (ref), reactModule (copy), view (copy), fFlagUserListSurfaceExtensions (copy), var1 (ref), entityRow (copy), fFlagUserListCtaIntegrationEnabled (copy), fFlagAddStatusIndicatorToBaseRow (copy), configs (ref), layoutMode (ref)
-		local var2 = entitiesMap[p2]
+	return (ReactModule.useCallback(function(p2, LayoutOrder, Size) --[[ Line: 51 ]]
+		-- upvalues: EntitiesMap (copy), RenderRowFunction (copy), OnActivated (copy), ReactModule (upval), View (upval), FFlagUserListSurfaceExtensions (upval), FirstRowRef (copy), EntityRow (upval), FFlagUserListCtaIntegrationEnabled (upval), FFlagAddStatusIndicatorToBaseRow (upval), Configs (copy), LayoutMode (copy)
+		local Entities = EntitiesMap[p2]
 		
-		return if var2 then if renderRow then renderRow(function(p5)
-			-- upvalues: var2 (ref), p3 (ref), onActivated (copy), reactModule (copy), view (copy), p4 (ref), fFlagUserListSurfaceExtensions (copy), var1 (copy), entityRow (copy), fFlagUserListCtaIntegrationEnabled (copy), fFlagAddStatusIndicatorToBaseRow (copy), configs (copy), layoutMode (copy)
-			return reactModule.createElement(view, {
+		return if Entities then if RenderRowFunction then RenderRowFunction(function(p3) --[[ Line: 59 ]]
+			-- upvalues: Entities (copy), LayoutOrder (copy), OnActivated (upval), ReactModule (upval), View (upval), Size (copy), FFlagUserListSurfaceExtensions (upval), FirstRowRef (upval), EntityRow (upval), FFlagUserListCtaIntegrationEnabled (upval), FFlagAddStatusIndicatorToBaseRow (upval), Configs (upval), LayoutMode (upval)
+			return ReactModule.createElement(View, {
 				tag = "size-full-full",
-				Size = p4,
-				LayoutOrder = p3,
-				ref = if fFlagUserListSurfaceExtensions and p3 == 1 then var1 else nil
+				Size = Size,
+				LayoutOrder = LayoutOrder,
+				ref = if FFlagUserListSurfaceExtensions and LayoutOrder == 1 then FirstRowRef else nil
 			}, {
-				reactModule.createElement(entityRow, {
-					entity = var2,
-					onActivated = if p5.onRowActivated then function()
-						-- upvalues: p5 (ref), var2 (copy), p3 (copy)
-						p5.onRowActivated(var2.id, var2.type, p3)
-					end else onActivated,
-					primaryCta = p5.primaryCta,
-					secondaryCta = p5.secondaryCta,
-					ctaLoading = if fFlagUserListCtaIntegrationEnabled then p5.ctaLoading else nil,
-					contextualInfo = p5.contextualInfo,
-					loadingState = p5.loadingState,
-					presence = p5.presence,
-					shouldShowNewIndicator = if fFlagAddStatusIndicatorToBaseRow then p5.shouldShowNewIndicator else nil,
-					trailingContent = p5.trailingContent,
-					configs = configs,
-					layoutMode = layoutMode
+				ReactModule.createElement(EntityRow, {
+					entity = Entities,
+					onActivated = if p3.onRowActivated then function() --[[ Line: 62 ]]
+						-- upvalues: p3 (copy), Entities (upval), LayoutOrder (upval)
+						p3.onRowActivated(Entities.id, Entities.type, LayoutOrder)
+					end else OnActivated,
+					primaryCta = p3.primaryCta,
+					secondaryCta = p3.secondaryCta,
+					ctaLoading = if FFlagUserListCtaIntegrationEnabled then p3.ctaLoading else nil,
+					contextualInfo = p3.contextualInfo,
+					loadingState = p3.loadingState,
+					presence = p3.presence,
+					shouldShowNewIndicator = if FFlagAddStatusIndicatorToBaseRow then p3.shouldShowNewIndicator else nil,
+					trailingContent = p3.trailingContent,
+					configs = Configs,
+					layoutMode = LayoutMode
 				})
 			})
-		end, var2, p3) else reactModule.createElement(view, {
+		end, Entities, LayoutOrder) else ReactModule.createElement(View, {
 			tag = "size-full-full",
-			Size = p4,
-			LayoutOrder = p3,
-			ref = if fFlagUserListSurfaceExtensions and p3 == 1 then var1 else nil
+			Size = Size,
+			LayoutOrder = LayoutOrder,
+			ref = if FFlagUserListSurfaceExtensions and LayoutOrder == 1 then FirstRowRef else nil
 		}, {
-			reactModule.createElement(entityRow, {
-				entity = var2,
-				onActivated = onActivated,
-				configs = configs,
-				layoutMode = layoutMode
+			ReactModule.createElement(EntityRow, {
+				entity = Entities,
+				onActivated = OnActivated,
+				configs = Configs,
+				layoutMode = LayoutMode
 			})
 		}) else nil
 	end, {
-		onActivated, renderRow, entitiesMap, configs, layoutMode,
-		if fFlagUserListSurfaceExtensions then var1 else nil
-	})
+		OnActivated, RenderRowFunction, EntitiesMap, Configs, LayoutMode,
+		if FFlagUserListSurfaceExtensions then FirstRowRef else nil
+	}))
 end

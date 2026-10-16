@@ -1,37 +1,37 @@
-﻿local parent = script:FindFirstAncestor("MomentsCreation").Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local view = foundationModule.View
-local useTokens = foundationModule.Hooks.useTokens
+﻿local Parent = script:FindFirstAncestor("MomentsCreation").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local View = FoundationModule.View
+local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), view (ref)
-	local var1 = useTokens()
+return function(p1) --[[ Line: 27 ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy)
+	local UseTokensResult = UseTokensFunction()
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "size-300-1000 radius-medium bg-system-contrast",
 		AnchorPoint = p1.anchorPoint,
 		Position = p1.position,
 		stroke = {
-			Color = var1.Color.System.Contrast.Color3,
-			Transparency = var1.Color.System.Contrast.Transparency,
-			Thickness = var1.Stroke.Thicker
+			Color = UseTokensResult.Color.System.Contrast.Color3,
+			Transparency = UseTokensResult.Color.System.Contrast.Transparency,
+			Thickness = UseTokensResult.Stroke.Thicker
 		}
 	}, {
-		Line = reactModule.createElement(view, {
+		Line = ReactModule.createElement(View, {
 			tag = "position-center-center anchor-center-center size-100-400 radius-circle bg-surface-300",
 			ZIndex = 2
 		}),
-		Box = reactModule.createElement(view, {
+		Box = ReactModule.createElement(View, {
 			tag = "anchor-center-center size-100-1000 bg-system-contrast",
-			Position = if p1.isFlipped then UDim2.new(0, var1.Size.Size_50, 0.5, 0) else UDim2.new(1, -var1.Size.Size_50, 0.5, 0),
+			Position = if p1.isFlipped then UDim2.new(0, UseTokensResult.Size.Size_50, 0.5, 0) else UDim2.new(1, -UseTokensResult.Size.Size_50, 0.5, 0),
 			stroke = {
-				Color = var1.Color.System.Contrast.Color3,
-				Transparency = var1.Color.System.Contrast.Transparency,
-				Thickness = var1.Stroke.Thicker
+				Color = UseTokensResult.Color.System.Contrast.Color3,
+				Transparency = UseTokensResult.Color.System.Contrast.Transparency,
+				Thickness = UseTokensResult.Stroke.Thicker
 			}
 		}),
-		DragDetector = reactModule.createElement("UIDragDetector", {
+		DragDetector = ReactModule.createElement("UIDragDetector", {
 			DragStyle = Enum.UIDragDetectorDragStyle.TranslateLine,
 			ref = p1.dragDetectorRef,
 			ResponseStyle = Enum.UIDragDetectorResponseStyle.CustomScale

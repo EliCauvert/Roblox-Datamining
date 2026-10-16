@@ -1,89 +1,89 @@
-﻿local dEV = _G.__DEV__
-local _, status = xpcall(function()
+﻿local DEV = _G.__DEV__
+local _, Result = xpcall(function() --[[ Line: 9 ]]
 	return game:DefineFastFlag("RoduxRemoveConnectTraceback", false)
-end, function()
+end, function(): boolean --[[ Line: 11 ]]
 	return true
 end)
 
-local function immutableAppend(p1, ...)
+local function immutableAppend(Listeners, ...) --[[ Line: 15 ]]
 	local t = {}
-	local p0Count = #p1
+	local CountListeners = #Listeners
 	
-	for i = 1, p0Count do
-		t[i] = p1[i]
+	for i = 1, CountListeners do
+		t[i] = Listeners[i]
 	end
-	for i_1 = 1, select("#", ...) do
-		t[p0Count + i_1] = select(i_1, ...)
+	for i1 = 1, select("#", ...) do
+		t[CountListeners + i1] = select(i1, ...)
 	end
 	return t
 end
 
-local function immutableRemoveValue(p2, p3)
-	local t = {}
+local function immutableRemoveValue(Listeners, p1) --[[ Line: 30 ]]
+	local List = {}
 	
-	for i = 1, #p2 do
-		if p2[i] ~= p3 then
-			table.insert(t, p2[i])
+	for i = 1, #Listeners do
+		if Listeners[i] ~= p1 then
+			table.insert(List, Listeners[i])
 		end
 	end
-	return t
+	return List
 end
 
-local t = {}
-t.__index = t
+local SignalModule = {}
+SignalModule.__index = SignalModule
 
-function t.new(p4)
-	-- upvalues: t (ref)
-	local t_1 = { _listeners = {}, _store = p4 }
-	setmetatable(t_1, t)
+function SignalModule.new(_store) --[[ Line: 46 ]]
+	-- upvalues: SignalModule (copy)
+	local config = { _listeners = {}, _store = _store }
+	setmetatable(config, SignalModule)
 	
-	return t_1
+	return config
 end
 
-function t:connect(p4)
-	-- upvalues: status (ref), dEV (ref), immutableAppend (ref), immutableRemoveValue (ref)
-	if typeof(p4) ~= "function" then
+function SignalModule:connect(Callback) --[[ Line: 57 ]]
+	-- upvalues: Result (copy), DEV (copy), immutableAppend (copy), immutableRemoveValue (copy)
+	if typeof(Callback) ~= "function" then
 		error("Expected the listener to be a function.")
 	end
 	if self._store and self._store._isDispatching then
 		error("You may not call store.changed:connect() while the reducer is executing. If you would like to be notified after the store has been updated, subscribe from a component and invoke store:getState() in the callback to access the latest state. ")
 	end
-	local t = {
+	local config = {
 		disconnected = false,
 		connectTraceback = nil,
 		disconnectTraceback = nil,
-		callback = p4
+		callback = Callback
 	}
 	
-	if not status or dEV then
-		t.connectTraceback = debug.traceback()
+	if not Result or DEV then
+		config.connectTraceback = debug.traceback()
 	end
-	self._listeners = immutableAppend(self._listeners, t)
+	self._listeners = immutableAppend(self._listeners, config)
 	
 	return {
-		disconnect = function()
-			-- upvalues: t (ref), self (ref), status (copy), dEV (copy), immutableRemoveValue (copy)
-			if t.disconnected then
-				error(("Listener connected at: \n%s\nwas already disconnected at: \n%s\n"):format(tostring(t.connectTraceback), tostring(t.disconnectTraceback)))
+		disconnect = function() --[[ Line: 83 ]]
+			-- upvalues: config (copy), self (copy), Result (upval), DEV (upval), immutableRemoveValue (upval)
+			if config.disconnected then
+				error(("Listener connected at: \n%s\nwas already disconnected at: \n%s\n"):format(tostring(config.connectTraceback), (tostring(config.disconnectTraceback))))
 			end
 			if self._store and self._store._isDispatching then
 				error("You may not unsubscribe from a store listener while the reducer is executing.")
 			end
-			if not status or dEV then
-				t.disconnectTraceback = debug.traceback()
+			if not Result or DEV then
+				config.disconnectTraceback = debug.traceback()
 			end
-			t.disconnected = true
-			self._listeners = immutableRemoveValue(self._listeners, t)
+			config.disconnected = true
+			self._listeners = immutableRemoveValue(self._listeners, config)
 		end
 	}
 end
 
-function t:fire(...)
-	for i, v in ipairs(self._listeners) do
-		if not v.disconnected then
-			v.callback(...)
+function SignalModule.fire(p2, ...) --[[ Line: 109 ]]
+	for _, listener in ipairs(p2._listeners) do
+		if not listener.disconnected then
+			listener.callback(...)
 		end
 	end
 end
 
-return t
+return SignalModule

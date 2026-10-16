@@ -1,35 +1,35 @@
-﻿local immutableModule = require(script.Parent.Immutable)
-local t = {}
-t.__index = t
+﻿local ImmutableModule = require(script.Parent.Immutable)
+local SignalModule = {}
+SignalModule.__index = SignalModule
 
-function t.new()
-	-- upvalues: t (ref)
-	local t_1 = { _listeners = {} }
-	setmetatable(t_1, t)
+function SignalModule.new() --[[ Line: 16 ]]
+	-- upvalues: SignalModule (copy)
+	local config = { _listeners = {} }
+	setmetatable(config, SignalModule)
 	
-	return t_1
+	return config
 end
 
-function t:Connect(p1)
-	-- upvalues: immutableModule (ref)
-	local t = { isConnected = true, callback = p1 }
-	self._listeners = immutableModule.Append(self._listeners, t)
+function SignalModule:Connect(Callback) --[[ Line: 26 ]]
+	-- upvalues: ImmutableModule (copy)
+	local config = { isConnected = true, callback = Callback }
+	self._listeners = ImmutableModule.Append(self._listeners, config)
 	
 	return {
-		Disconnect = function()
-			-- upvalues: t (ref), self (ref), immutableModule (copy)
-			t.isConnected = false
-			self._listeners = immutableModule.RemoveValueFromList(self._listeners, t)
+		Disconnect = function() --[[ Line: 33 ]]
+			-- upvalues: config (copy), self (copy), ImmutableModule (upval)
+			config.isConnected = false
+			self._listeners = ImmutableModule.RemoveValueFromList(self._listeners, config)
 		end
 	}
 end
 
-function t:Fire(...)
-	for i, v in ipairs(self._listeners) do
-		if v.isConnected then
-			v.callback(...)
+function SignalModule.Fire(p1, ...) --[[ Line: 43 ]]
+	for _, listener in ipairs(p1._listeners) do
+		if listener.isConnected then
+			listener.callback(...)
 		end
 	end
 end
 
-return t
+return SignalModule

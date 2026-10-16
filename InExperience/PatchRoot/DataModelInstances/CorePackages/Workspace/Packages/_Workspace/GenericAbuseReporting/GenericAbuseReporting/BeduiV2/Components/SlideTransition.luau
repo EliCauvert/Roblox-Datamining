@@ -1,28 +1,27 @@
-﻿local genericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
-local parent = genericAbuseReporting.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local reactOtterModule = require(parent.ReactOtter)
-local slideTransitionContextModule = require(genericAbuseReporting.BeduiV2.Components.SlideTransitionContext)
-local view = foundationModule.View
-local t = {
+﻿local GenericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
+local Parent = GenericAbuseReporting.Parent
+local ReactModule = require(Parent.React)
+local ReactOtterModule = require(Parent.ReactOtter)
+local SlideTransitionContextModule = require(GenericAbuseReporting.BeduiV2.Components.SlideTransitionContext)
+local View = require(Parent.Foundation).View
+local config = {
 	stiffness = 400,
 	damping = 40,
 	mass = 1,
 	restingPositionLimit = 0.5,
 	restingVelocityLimit = 0.1
 }
-local t_1 = { inExpChatSelection = true, inExpSceneSelection = true }
+local config1 = { inExpChatSelection = true, inExpSceneSelection = true }
 
-local function SlidePane(p1)
-	-- upvalues: reactModule (ref), view (ref)
-	return reactModule.createElement(view, {
+local function SlidePane(p1) --[[ Line: 49 ]]
+	-- upvalues: ReactModule (copy), View (copy)
+	return ReactModule.createElement(View, {
 		tag = "size-full",
 		Position = p1.position,
 		testId = if p1.withInputSink then "SlideTransitionOutgoing" else "SlideTransitionIncoming"
 	}, {
-		Content = reactModule.createElement(view, { tag = "col size-full" }, { Page = p1.content }),
-		InputSink = if p1.withInputSink then reactModule.createElement("TextButton", {
+		Content = ReactModule.createElement(View, { tag = "col size-full" }, { Page = p1.content }),
+		InputSink = if p1.withInputSink then ReactModule.createElement("TextButton", {
 			Size = UDim2.fromScale(1, 1),
 			Position = UDim2.fromScale(0, 0),
 			BackgroundTransparency = 1,
@@ -31,17 +30,17 @@ local function SlidePane(p1)
 			Selectable = false,
 			Active = true,
 			ZIndex = 100,
-			[reactModule.Tag] = "data-testid=SlideTransitionInputSink"
+			[ReactModule.Tag] = "data-testid=SlideTransitionInputSink"
 		}) else nil
 	})
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: t_1 (ref), reactModule (ref), reactOtterModule (ref), t (ref), SlidePane (ref), slideTransitionContextModule (ref), view (ref)
-	local nodeType = t_1[p1.nodeType] or false
-	local var1, var2 = reactModule.useState(false)
-	local var3, var4 = reactModule.useBinding(false)
-	local var5 = reactModule.useRef({
+return ReactModule.memo(function(p1) --[[ Line: 88 | Named "SlideTransition" ]]
+	-- upvalues: config1 (copy), ReactModule (copy), ReactOtterModule (copy), config (copy), SlidePane (copy), SlideTransitionContextModule (copy), View (copy)
+	local Entry = config1[p1.nodeType] or false
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(false)
+	local UseRefResult = ReactModule.useRef({
 		prevNodeId = nil,
 		prevContent = nil,
 		outgoing = nil,
@@ -51,89 +50,91 @@ return reactModule.memo(function(p1)
 		transitionId = 0,
 		springId = 0
 	})
-	local var6, var7 = reactOtterModule.useAnimatedBinding(1, reactModule.useCallback(function()
-		-- upvalues: var5 (ref), var2 (ref), var4 (ref)
-		local current = var5.current
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(1, (ReactModule.useCallback(function() --[[ Line: 110 ]]
+		-- upvalues: UseRefResult (copy), UseStateResult2 (copy), UseBindingResult2 (copy)
+		local Current = UseRefResult.current
 		
-		if current.springId == current.transitionId then
-			current.outgoing = nil
-			var2(false)
-			var4(false)
+		if Current.springId == Current.transitionId then
+			Current.outgoing = nil
+			UseStateResult2(false)
+			UseBindingResult2(false)
 			
 			return
 		end
-	end, {}))
-	local current = var5.current
+	end, {})))
+	local Current = UseRefResult.current
 	
-	if current.prevNodeId ~= nil and current.prevNodeId ~= p1.nodeId then
-		local var8 = p1.direction ~= nil
+	if Current.prevNodeId ~= nil and Current.prevNodeId ~= p1.nodeId then
+		local HasDirection = p1.direction ~= nil
 		
-		if not nodeType and current.prevContent and var8 then
-			current.outgoing = {
-				nodeId = current.prevNodeId,
-				content = current.prevContent
-			}
-			current.direction = p1.direction or "forward"
-			current.needsAnimationStart = true
-			current.needsAnimationCancel = false
-			current.transitionId += 1
-			current.springId = -1
-		elseif not var8 then
-			current.outgoing = nil
-			current.needsAnimationStart = false
-			current.transitionId += 1
-			current.springId = -1
-			
-			if var1 then
-				current.needsAnimationCancel = true
+		if Entry or not Current.prevContent or not HasDirection then
+			if not HasDirection then
+				Current.outgoing = nil
+				Current.needsAnimationStart = false
+				Current.transitionId += 1
+				Current.springId = -1
+				
+				if UseStateResult then
+					Current.needsAnimationCancel = true
+				end
 			end
+		else
+			Current.outgoing = {
+				nodeId = Current.prevNodeId,
+				content = Current.prevContent
+			}
+			Current.direction = p1.direction or "forward"
+			Current.needsAnimationStart = true
+			Current.needsAnimationCancel = false
+			Current.transitionId += 1
+			Current.springId = -1
 		end
 	end
-	if not nodeType then
-		current.prevNodeId = p1.nodeId
-		current.prevContent = p1.nodeContent
+	if not Entry then
+		Current.prevNodeId = p1.nodeId
+		Current.prevContent = p1.nodeContent
 	end
-	reactModule.useLayoutEffect(function()
-		-- upvalues: var5 (ref), var2 (ref), var4 (ref), t (copy), var7 (ref), reactOtterModule (copy)
-		local current = var5.current
+	ReactModule.useLayoutEffect(function() --[[ Line: 156 ]]
+		-- upvalues: UseRefResult (copy), UseStateResult2 (copy), UseBindingResult2 (copy), config (upval), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval)
+		local Current = UseRefResult.current
 		
-		if current.needsAnimationCancel then
-			current.needsAnimationCancel = false
-			var2(false)
-			var4(false)
+		if Current.needsAnimationCancel then
+			Current.needsAnimationCancel = false
+			UseStateResult2(false)
+			UseBindingResult2(false)
 		end
-		if current.needsAnimationStart then
-			current.needsAnimationStart = false
-			current.springId = current.transitionId
-			var2(true)
-			var4(true)
-			local cloned = table.clone(t)
-			cloned.startingValue = 0
-			var7(reactOtterModule.spring(1, cloned))
+		if Current.needsAnimationStart then
+			Current.needsAnimationStart = false
+			Current.springId = Current.transitionId
+			UseStateResult2(true)
+			UseBindingResult2(true)
+			local Copy = table.clone(config)
+			Copy.startingValue = 0
+			UseAnimatedBindingResult2(ReactOtterModule.spring(1, Copy))
 		end
 	end, { p1.nodeId })
-	local t_2 = {}
-	local var9 = current.outgoing ~= nil
-	local needsAnimationStart = var9 and (current.needsAnimationStart or not var1)
+	local Elements = {}
+	local HasOutgoing = Current.outgoing ~= nil
+	local NeedsAnimationStart = HasOutgoing and (Current.needsAnimationStart or not UseStateResult)
 	
-	if current.outgoing then
-		t_2[current.outgoing.nodeId] = reactModule.createElement(SlidePane, {
+	if Current.outgoing then
+		Elements[Current.outgoing.nodeId] = ReactModule.createElement(SlidePane, {
 			withInputSink = true,
-			content = current.outgoing.content,
-			position = if needsAnimationStart then UDim2.new(0, 0, 0, 0) else var6:map(function(p2)
-				-- upvalues: var5 (ref)
-				return UDim2.new(p2 * (if var5.current.direction == "forward" then -1 else 1), 0, 0, 0)
+			content = Current.outgoing.content,
+			position = if NeedsAnimationStart then UDim2.new(0, 0, 0, 0) else UseAnimatedBindingResult:map(function(p2): UDim2 --[[ Line: 187 ]]
+				-- upvalues: UseRefResult (copy)
+				return UDim2.new(p2 * (if UseRefResult.current.direction == "forward" then -1 else 1), 0, 0, 0)
 			end)
 		})
 	end
-	t_2[p1.nodeId] = reactModule.createElement(SlidePane, {
+	Elements[p1.nodeId] = ReactModule.createElement(SlidePane, {
 		withInputSink = false,
 		content = p1.nodeContent,
-		position = if needsAnimationStart then UDim2.new(if current.direction == "forward" then 1 else -1, 0, 0, 0) elseif var9 then var6:map(function(p2)
-			-- upvalues: var5 (ref)
-			return UDim2.new((1 - p2) * (if var5.current.direction == "forward" then 1 else -1), 0, 0, 0)
+		position = if NeedsAnimationStart then UDim2.new(if Current.direction == "forward" then 1 else -1, 0, 0, 0) elseif HasOutgoing then UseAnimatedBindingResult:map(function(p2: number): UDim2 --[[ Line: 204 ]]
+			-- upvalues: UseRefResult (copy)
+			return UDim2.new((1 - p2) * (if UseRefResult.current.direction == "forward" then 1 else -1), 0, 0, 0)
 		end) else nil
 	})
 	
-	return reactModule.createElement(slideTransitionContextModule.Provider, { value = var3 }, reactModule.createElement(view, { tag = "fill size-full-0", ClipsDescendants = true }, t_2))
+	return ReactModule.createElement(SlideTransitionContextModule.Provider, { value = UseBindingResult }, ReactModule.createElement(View, { tag = "fill size-full-0", ClipsDescendants = true }, Elements))
 end)

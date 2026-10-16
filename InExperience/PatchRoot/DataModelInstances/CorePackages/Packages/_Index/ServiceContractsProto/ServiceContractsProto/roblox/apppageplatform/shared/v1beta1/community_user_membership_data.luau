@@ -1,91 +1,73 @@
-﻿local protoModule = require(script.Parent.Parent.Parent.Parent.Parent.proto)
-local typeRegistryModule = require(script.Parent.Parent.Parent.Parent.Parent.proto.typeRegistry)
-local t = {}
-local t_1 = {}
-t_1.__index = t_1
+﻿local ProtoModule = require(script.Parent.Parent.Parent.Parent.Parent.proto)
+local TypeRegistryModule = require(script.Parent.Parent.Parent.Parent.Parent.proto.typeRegistry)
+local Module = {}
+Module.__index = Module
 
-function t_1.new(p1)
-	-- upvalues: t_1 (ref)
-	return setmetatable({
-		can_join = if p1 == nil or p1.can_join == nil then false else p1.can_join,
-		is_pending_approval = if p1 == nil or p1.is_pending_approval == nil then false else p1.is_pending_approval
-	}, t_1)
+function Module.new(p1) --[[ Line: 47 ]]
+	-- upvalues: Module (copy)
+	return (setmetatable({
+		can_join = p1 ~= nil and p1.can_join ~= nil and p1.can_join,
+		is_pending_approval = p1 ~= nil and p1.is_pending_approval ~= nil and p1.is_pending_approval
+	}, Module))
 end
 
-function t_1:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var1 = 0
+function Module:encode() --[[ Line: 58 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.can_join then
-		local var2, var3 = protoModule.writeTag(buff, var1, 1, protoModule.wireTypes.varint)
-		var2, var7 = protoModule.writeVarInt(var2, var3, if self.can_join then 1 else 0)
-		buff = var2
-		var1 = var3
+		local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult, WriteTagResult2, if self.can_join then 1 else 0)
 	end
 	if self.is_pending_approval then
-		local var4, var5 = protoModule.writeTag(buff, var1, 2, protoModule.wireTypes.varint)
-		var4, var9 = protoModule.writeVarInt(var4, var5, if self.is_pending_approval then 1 else 0)
-		buff = var4
-		var1 = var5
+		local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult1, WriteTagResult2_1, if self.is_pending_approval then 1 else 0)
 	end
-	local buff_1 = buffer.create(var1)
-	buffer.copy(buff_1, 0, buff, 0, var1)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_1.decode(p1)
-	-- upvalues: t_1 (ref), protoModule (ref)
-	local var1 = t_1.new()
-	local var2 = 0
-	while var2 < buffer.len(p1) do
-		local _ = nil
-		local _ = nil
-		local var3, var4, var5 = protoModule.readTag(p1, var2)
-		local var6 = var3
-		local var7 = var4
-		var2 = var5
+function Module.decode(Buf) --[[ Line: 77 ]]
+	-- upvalues: Module (copy), ProtoModule (copy)
+	local NewModule = Module.new()
+	local v1 = 0
+	while v1 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v11 = ProtoModule.readTag(Buf, v1)
 		
-		if var7 == protoModule.wireTypes.varint then
-			if var6 == 1 then
-				local _ = nil
-				local var8, var9 = protoModule.readVarInt(p1, var2)
-				var2 = var9
-				var1.can_join = var8 ~= 0
-			elseif var6 == 2 then
-				local _ = nil
-				local var10, var11 = protoModule.readVarInt(p1, var2)
-				var2 = var11
-				var1.is_pending_approval = var10 ~= 0
+		if Tag2 == ProtoModule.wireTypes.varint then
+			if Tag == 1 then
+				local VarInt
+				VarInt, v11 = ProtoModule.readVarInt(Buf, v1)
+				NewModule.can_join = VarInt ~= 0
+			elseif Tag == 2 then
+				local VarInt1
+				VarInt1, v11 = ProtoModule.readVarInt(Buf, v1)
+				NewModule.is_pending_approval = VarInt1 ~= 0
 			else
-				local _ = nil
-				local var12, var13 = protoModule.readVarInt(p1, var2)
-				local _ = var12
-				var2 = var13
+				local _
+				_, v11 = ProtoModule.readVarInt(Buf, v1)
 			end
-		elseif var7 == protoModule.wireTypes.lengthDelimited then
-			local _ = nil
-			local var14, var15 = protoModule.readVarInt(p1, var2)
-			var2 = var15 + var14
-		elseif var7 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var16, var17 = protoModule.readFixed32(p1, var2)
-			local _ = var16
-			var2 = var17
-		elseif var7 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var18, var19 = protoModule.readFixed64(p1, var2)
-			local _ = var18
-			var2 = var19
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			local VarInt2, VarInt2_1 = ProtoModule.readVarInt(Buf, v1)
+			v1 = VarInt2_1 + VarInt2
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v11 = ProtoModule.readFixed32(Buf, v1)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v11 = ProtoModule.readFixed64(Buf, v1)
 		else
-			error("Unsupported wire type: " .. var17)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var1
+	return NewModule
 end
 
-function t_1:jsonEncode()
+function Module:jsonEncode() --[[ Line: 125 ]]
 	local t = {}
 	
 	if self.can_join then
@@ -97,32 +79,32 @@ function t_1:jsonEncode()
 	return t
 end
 
-function t_1:jsonDecode()
-	-- upvalues: t_1 (ref)
-	local var20 = t_1.new()
+function Module:jsonDecode() --[[ Line: 139 ]]
+	-- upvalues: Module (copy)
+	local NewModule = Module.new()
 	
 	if self.can_join ~= nil then
-		var20.can_join = self.can_join
+		NewModule.can_join = self.can_join
 	end
 	if self.canJoin ~= nil then
-		var20.can_join = self.canJoin
+		NewModule.can_join = self.canJoin
 	end
 	if self.is_pending_approval ~= nil then
-		var20.is_pending_approval = self.is_pending_approval
+		NewModule.is_pending_approval = self.is_pending_approval
 	end
 	if self.isPendingApproval ~= nil then
-		var20.is_pending_approval = self.isPendingApproval
+		NewModule.is_pending_approval = self.isPendingApproval
 	end
-	return var20
+	return NewModule
 end
 
-t_1.descriptor = {
+Module.descriptor = {
 	name = "CommunityUserMembershipData",
 	fullName = "roblox.apppageplatform.shared.v1beta1.CommunityUserMembershipData"
 }
-t.CommunityUserMembershipData = t_1
-typeRegistryModule.default:register(t.CommunityUserMembershipData)
+local config = { CommunityUserMembershipData = Module }
+TypeRegistryModule.default:register(config.CommunityUserMembershipData)
 
 return {
-	CommunityUserMembershipData = t.CommunityUserMembershipData
+	CommunityUserMembershipData = config.CommunityUserMembershipData
 }

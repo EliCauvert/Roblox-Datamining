@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent._Workspace.AppChat.AppChat.Contexts.ParentContainer)
+﻿return (require(script.Parent.Parent._Workspace.AppChat.AppChat.Contexts.ParentContainer))

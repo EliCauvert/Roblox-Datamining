@@ -1,34 +1,34 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local roactModule = require(corePackagesService.Packages.Roact)
-local tModule = require(corePackagesService.Packages.t)
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local userLibModule = require(corePackagesService.Workspace.Packages.UserLib)
-local cryoModule = require(corePackagesService.Packages.Cryo)
-local foundationModule = require(corePackagesService.Packages.Foundation)
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local withFoundationOrUIBloxStyle = require(corePackagesService.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
-local withLayoutValues = require(script.Parent.Parent.Connection.LayoutValues).WithLayoutValues
-local useVerifiedBadge = require(corePackagesService.Workspace.Packages.UserProfiles).Hooks.useVerifiedBadge
-local sharedFlagsModule = require(corePackagesService.Workspace.Packages.SharedFlags)
-local fFlagEnableVerifiedBadgeStore = sharedFlagsModule.FFlagEnableVerifiedBadgeStore
-local fFlagCoreUiMigrateUIBloxToFoundation = sharedFlagsModule.FFlagCoreUiMigrateUIBloxToFoundation
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local emojiTextLabel = UIBloxModule.Core.Text.EmojiTextLabel
-local emoji = UIBloxModule.App.Emoji.Enum.Emoji
-local dropDownPlayerHeader = roactModule.PureComponent:extend("DropDownPlayerHeader")
-dropDownPlayerHeader.validateProps = tModule.strictInterface({
-	player = tModule.instanceIsA("Player"),
-	showVerifiedBadge = tModule.optional(tModule.boolean)
+﻿local CorePackages = game:GetService("CorePackages")
+local RoactModule = require(CorePackages.Packages.Roact)
+local TModule = require(CorePackages.Packages.t)
+local UIBloxModule = require(CorePackages.Packages.UIBlox)
+local UserLibModule = require(CorePackages.Workspace.Packages.UserLib)
+local CryoModule = require(CorePackages.Packages.Cryo)
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local WithFoundationOrUIBloxStyleFunction = require(CorePackages.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
+local WithLayoutValuesFunction = require(script.Parent.Parent.Connection.LayoutValues).WithLayoutValues
+local UseVerifiedBadgeFunction = require(CorePackages.Workspace.Packages.UserProfiles).Hooks.useVerifiedBadge
+local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
+local FFlagEnableVerifiedBadgeStore = SharedFlagsModule.FFlagEnableVerifiedBadgeStore
+local FFlagCoreUiMigrateUIBloxToFoundation = SharedFlagsModule.FFlagCoreUiMigrateUIBloxToFoundation
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local EmojiTextLabel = UIBloxModule.Core.Text.EmojiTextLabel
+local Emoji = UIBloxModule.App.Emoji.Enum.Emoji
+local DropDownPlayerHeader = RoactModule.PureComponent:extend("DropDownPlayerHeader")
+DropDownPlayerHeader.validateProps = TModule.strictInterface({
+	player = TModule.instanceIsA("Player"),
+	showVerifiedBadge = TModule.optional(TModule.boolean)
 })
 
-function dropDownPlayerHeader.render(p1)
-	-- upvalues: withLayoutValues (ref), withFoundationOrUIBloxStyle (ref), foundationFontFaceMigration (ref), fFlagEnableVerifiedBadgeStore (ref), userLibModule (ref), cryoModule (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), roactModule (ref), emojiTextLabel (ref), emoji (ref), normalizeFontFace (ref)
-	return withLayoutValues(function(p2)
-		-- upvalues: withFoundationOrUIBloxStyle (copy), foundationFontFaceMigration (copy), p1 (ref), fFlagEnableVerifiedBadgeStore (copy), userLibModule (copy), cryoModule (copy), fFlagCoreUiMigrateUIBloxToFoundation (copy), roactModule (copy), emojiTextLabel (copy), emoji (copy), normalizeFontFace (copy)
-		return withFoundationOrUIBloxStyle(function(p3)
-			-- upvalues: foundationFontFaceMigration (copy)
+function DropDownPlayerHeader.render(p1) --[[ Line: 42 ]]
+	-- upvalues: WithLayoutValuesFunction (copy), WithFoundationOrUIBloxStyleFunction (copy), FoundationFontFaceMigration (copy), FFlagEnableVerifiedBadgeStore (copy), UserLibModule (copy), CryoModule (copy), FFlagCoreUiMigrateUIBloxToFoundation (copy), RoactModule (copy), EmojiTextLabel (copy), Emoji (copy), NormalizeFontFaceFunction (copy)
+	return WithLayoutValuesFunction(function(p2) --[[ Line: 43 ]]
+		-- upvalues: WithFoundationOrUIBloxStyleFunction (upval), FoundationFontFaceMigration (upval), p1 (copy), FFlagEnableVerifiedBadgeStore (upval), UserLibModule (upval), CryoModule (upval), FFlagCoreUiMigrateUIBloxToFoundation (upval), RoactModule (upval), EmojiTextLabel (upval), Emoji (upval), NormalizeFontFaceFunction (upval)
+		return WithFoundationOrUIBloxStyleFunction(function(p3) --[[ Line: 44 ]]
+			-- upvalues: FoundationFontFaceMigration (upval)
 			return {
-				Tokens = if foundationFontFaceMigration then p3 else nil,
+				Tokens = if FoundationFontFaceMigration then p3 else nil,
 				Theme = {
 					Divider = {
 						Color = p3.Color.Stroke.Emphasis.Color3,
@@ -62,18 +62,24 @@ function dropDownPlayerHeader.render(p1)
 					}
 				}
 			}
-		end, function(p3)
-			-- upvalues: p1 (copy), fFlagEnableVerifiedBadgeStore (copy), userLibModule (copy), foundationFontFaceMigration (copy), cryoModule (copy), fFlagCoreUiMigrateUIBloxToFoundation (copy), roactModule (copy), p2 (ref), emojiTextLabel (copy), emoji (copy), normalizeFontFace (copy)
-			local player = p1.props.player
+		end, function(p3) --[[ Line: 80 ]]
+			-- upvalues: p1 (upval), FFlagEnableVerifiedBadgeStore (upval), UserLibModule (upval), FoundationFontFaceMigration (upval), CryoModule (upval), FFlagCoreUiMigrateUIBloxToFoundation (upval), RoactModule (upval), p2 (copy), EmojiTextLabel (upval), Emoji (upval), NormalizeFontFaceFunction (upval)
+			local Player = p1.props.player
+			local JoinResult = if FoundationFontFaceMigration then CryoModule.Dictionary.join(p3.Font.Header2, { Font = p3.Tokens.Typography.TitleLarge.Font }) elseif FFlagCoreUiMigrateUIBloxToFoundation and p3.Font.Header2.FontSize then {
+				Font = p3.Font.Header2.Font,
+				FontSize = p3.Font.Header2.FontSize,
+				LineHeight = p3.Font.Header2.LineHeight,
+				LetterSpacing = p3.Font.Header2.LetterSpacing
+			} else p3.Font.Header2
 			
-			return roactModule.createElement("TextButton", {
+			return RoactModule.createElement("TextButton", {
 				BackgroundTransparency = 1,
 				Text = "",
 				LayoutOrder = 0,
 				Selectable = false,
 				Size = UDim2.new(1, 0, 0, p2.DropDownHeaderSizeY)
 			}, {
-				Background = roactModule.createElement("ImageLabel", {
+				Background = RoactModule.createElement("ImageLabel", {
 					BackgroundTransparency = 1,
 					Image = "rbxasset://textures/ui/PlayerList/NewAvatarBackground.png",
 					ImageTransparency = 0,
@@ -81,83 +87,78 @@ function dropDownPlayerHeader.render(p1)
 					Position = UDim2.new(0, 0, 1, 0),
 					AnchorPoint = Vector2.new(0, 1)
 				}, {
-					TextContainerFrame = roactModule.createElement("Frame", {
+					TextContainerFrame = RoactModule.createElement("Frame", {
 						BackgroundTransparency = 1,
 						Size = UDim2.new(1, -124, 1, 0),
 						Position = UDim2.new(0, 107, 0, 0)
 					}, {
-						Layout = roactModule.createElement("UIListLayout", {
+						Layout = RoactModule.createElement("UIListLayout", {
 							SortOrder = Enum.SortOrder.LayoutOrder,
 							FillDirection = Enum.FillDirection.Vertical,
 							Padding = UDim.new(0, 0),
 							VerticalAlignment = Enum.VerticalAlignment.Center
 						}),
-						DisplayName = (if fFlagEnableVerifiedBadgeStore then p1.props.showVerifiedBadge else userLibModule.Utils.isPlayerVerified(player)) and roactModule.createElement(emojiTextLabel, {
+						DisplayName = (if FFlagEnableVerifiedBadgeStore then p1.props.showVerifiedBadge else UserLibModule.Utils.isPlayerVerified(Player)) and RoactModule.createElement(EmojiTextLabel, {
 							fluidSizing = false,
 							LayoutOrder = 1,
 							BackgroundTransparency = 1,
 							TextScaled = true,
-							fontStyle = if foundationFontFaceMigration then cryoModule.Dictionary.join(p3.Font.Header2, { Font = p3.Tokens.Typography.TitleLarge.Font }) elseif fFlagCoreUiMigrateUIBloxToFoundation and p3.Font.Header2.FontSize then {
-								Font = p3.Font.Header2.Font,
-								FontSize = p3.Font.Header2.FontSize,
-								LineHeight = p3.Font.Header2.LineHeight,
-								LetterSpacing = p3.Font.Header2.LetterSpacing
-							} else p3.Font.Header2,
+							fontStyle = JoinResult,
 							colorStyle = p3.Theme.TextEmphasis,
-							emoji = emoji.Verified,
+							emoji = Emoji.Verified,
 							maxSize = Vector2.new(p2.PlayerDropDownSizeX - 124, 22),
-							Text = player.DisplayName,
+							Text = Player.DisplayName,
 							TextXAlignment = Enum.TextXAlignment.Left,
 							TextTruncate = Enum.TextTruncate.AtEnd
-						}) or roactModule.createElement("TextLabel", {
+						}) or RoactModule.createElement("TextLabel", {
 							LayoutOrder = 1,
 							BackgroundTransparency = 1,
 							TextScaled = true,
 							Size = UDim2.new(1, 0, 0, 22),
-							Text = player.DisplayName,
-							Font = if foundationFontFaceMigration then nil else p3.Font.Header2.Font,
-							FontFace = if foundationFontFaceMigration then normalizeFontFace(p3.Tokens.Typography.TitleLarge.Font) else nil,
+							Text = Player.DisplayName,
+							Font = if FoundationFontFaceMigration then nil else p3.Font.Header2.Font,
+							FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p3.Tokens.Typography.TitleLarge.Font) else nil,
 							TextSize = p3.Font.BaseSize * p3.Font.Header2.RelativeSize,
 							TextColor3 = p3.Theme.TextEmphasis.Color,
 							TextTransparency = p3.Theme.TextEmphasis.Transparency,
 							TextXAlignment = Enum.TextXAlignment.Left,
 							TextTruncate = Enum.TextTruncate.AtEnd
 						}, {
-							SizeConstraint = roactModule.createElement("UITextSizeConstraint", {
+							SizeConstraint = RoactModule.createElement("UITextSizeConstraint", {
 								MaxTextSize = p3.Font.BaseSize * p3.Font.Header2.RelativeSize,
 								MinTextSize = p3.Font.BaseSize * p3.Font.Footer.RelativeSize
 							})
 						}),
-						PlayerName = roactModule.createElement("TextLabel", {
+						PlayerName = RoactModule.createElement("TextLabel", {
 							LayoutOrder = 2,
 							BackgroundTransparency = 1,
 							TextScaled = true,
 							Size = UDim2.new(1, 0, 0, 22),
-							Text = "@" .. player.Name,
-							Font = if foundationFontFaceMigration then nil else p3.Font.CaptionHeader.Font,
-							FontFace = if foundationFontFaceMigration then normalizeFontFace(p3.Tokens.Typography.CaptionLarge.Font) else nil,
+							Text = "@" .. Player.Name,
+							Font = if FoundationFontFaceMigration then nil else p3.Font.CaptionHeader.Font,
+							FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p3.Tokens.Typography.CaptionLarge.Font) else nil,
 							TextSize = p3.Font.BaseSize * p3.Font.CaptionHeader.RelativeSize,
 							TextColor3 = p3.Theme.TextMuted.Color,
 							TextTransparency = p3.Theme.TextMuted.Transparency,
 							TextXAlignment = Enum.TextXAlignment.Left,
 							TextTruncate = Enum.TextTruncate.AtEnd
 						}, {
-							SizeConstraint = roactModule.createElement("UITextSizeConstraint", {
+							SizeConstraint = RoactModule.createElement("UITextSizeConstraint", {
 								MaxTextSize = p3.Font.BaseSize * p3.Font.CaptionHeader.RelativeSize,
 								MinTextSize = p3.Font.BaseSize * p3.Font.Footer.RelativeSize
 							})
 						})
 					})
 				}),
-				AvatarImage = roactModule.createElement("ImageLabel", {
+				AvatarImage = RoactModule.createElement("ImageLabel", {
 					BackgroundTransparency = 1,
 					ZIndex = 2,
 					Position = UDim2.new(0, 56, 0, 0),
 					Size = UDim2.new(0, p2.DropDownHeaderSizeY, 0, p2.DropDownHeaderSizeY),
 					AnchorPoint = Vector2.new(0.5, 0),
-					Image = "rbxthumb://type=AvatarHeadShot&id=" .. player.UserId .. "&w=150&h=150"
+					Image = "rbxthumb://type=AvatarHeadShot&id=" .. Player.UserId .. "&w=150&h=150"
 				}),
-				Divider = not p1.props.lastButton and roactModule.createElement("Frame", {
+				Divider = not p1.props.lastButton and RoactModule.createElement("Frame", {
 					BorderSizePixel = 0,
 					ZIndex = 3,
 					Size = UDim2.new(1, 0, 0, 1),
@@ -171,7 +172,9 @@ function dropDownPlayerHeader.render(p1)
 	end)
 end
 
-return if fFlagEnableVerifiedBadgeStore then function(p1)
-	-- upvalues: useVerifiedBadge (ref), roactModule (ref), dropDownPlayerHeader (ref), cryoModule (ref)
-	return roactModule.createElement(dropDownPlayerHeader, cryoModule.Dictionary.join(p1, { showVerifiedBadge = useVerifiedBadge(p1.player) }))
-end else dropDownPlayerHeader
+local function v14(p1) --[[ Line: 207 ]]
+	-- upvalues: UseVerifiedBadgeFunction (copy), RoactModule (copy), DropDownPlayerHeader (copy), CryoModule (copy)
+	return RoactModule.createElement(DropDownPlayerHeader, CryoModule.Dictionary.join(p1, { showVerifiedBadge = UseVerifiedBadgeFunction(p1.player) }))
+end
+
+return if FFlagEnableVerifiedBadgeStore then v14 else DropDownPlayerHeader

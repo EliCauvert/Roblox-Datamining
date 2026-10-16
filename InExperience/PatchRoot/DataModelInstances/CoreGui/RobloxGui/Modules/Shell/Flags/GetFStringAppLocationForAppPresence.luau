@@ -1,5 +1,5 @@
 ﻿game:DefineFastString("AppLocationForAppPresence", "App")
 
-return function()
+return function() --[[ Line: 3 ]]
 	return game:GetFastString("AppLocationForAppPresence")
 end

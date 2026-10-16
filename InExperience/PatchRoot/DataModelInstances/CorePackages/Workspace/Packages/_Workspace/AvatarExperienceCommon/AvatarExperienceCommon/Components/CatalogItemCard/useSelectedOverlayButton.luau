@@ -1,15 +1,17 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceCommon").Parent
-local responsiveModule = require(parent.Responsive)
-local useTokens = require(parent.Foundation).Hooks.useTokens
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceCommon").Parent
+local ResponsiveModule = require(Parent.Responsive)
+local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
 
-return function(p1)
-	-- upvalues: useTokens (ref), responsiveModule (ref)
-	local var1 = useTokens()
+return function(p1) --[[ Line: 18 | Named "useSelectedOverlayButton" ]]
+	-- upvalues: UseTokensFunction (copy), ResponsiveModule (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseIsSpatialResult = ResponsiveModule.useIsSpatial()
+	local NoUseIsSpatialResult: boolean = ResponsiveModule.useLastInput() == ResponsiveModule.Input.Directional and not UseIsSpatialResult
 	
 	return {
-		isVisible = p1 and not (responsiveModule.useLastInput() == responsiveModule.Input.Directional and not responsiveModule.useIsSpatial()),
-		height = var1.Size.Size_700,
-		bottomOffset = var1.Gap.XXSmall,
-		occupiedHeight = var1.Size.Size_700 + var1.Gap.XXSmall
+		isVisible = p1 and not NoUseIsSpatialResult,
+		height = UseTokensResult.Size.Size_700,
+		bottomOffset = UseTokensResult.Gap.XXSmall,
+		occupiedHeight = UseTokensResult.Size.Size_700 + UseTokensResult.Gap.XXSmall
 	}
 end

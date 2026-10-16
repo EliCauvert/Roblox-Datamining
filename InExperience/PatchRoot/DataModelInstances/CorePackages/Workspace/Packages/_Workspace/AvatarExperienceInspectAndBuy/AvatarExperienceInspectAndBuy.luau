@@ -1,26 +1,19 @@
-﻿local parent = script.Parent
+﻿local Parent = script.Parent
 local _ = require(script.Types)
-local priceStatusModule = require(script.Enums.PriceStatus)
-local useViewBreakpointsModule = require(script.Hooks.useViewBreakpoints)
-local useResponsivePanelLayoutPropsModule = require(script.Components.useResponsivePanelLayoutProps)
-local useInspectAndBuyFocusNavigationModule = require(script.Hooks.useInspectAndBuyFocusNavigation)
-local viewTypeModule = require(script.Enums.ViewType)
-local inspectAndBuyVersionModule = require(script.Enums.InspectAndBuyVersion)
-local constantsModule = require(script.Constants)
-local buyActionBarModule = require(script.Components.Common.BuyActionBar)
-local fFlagSocialEnableProfileInspectAndBuy = require(parent.SharedFlags).FFlagSocialEnableProfileInspectAndBuy or require(parent.AvatarExperienceFlags).FFlagAXIaBEnableShopContext
+local FFlagAXIaBEnableShopContext = require(Parent.AvatarExperienceFlags).FFlagAXIaBEnableShopContext
+local FFlagSocialEnableProfileInspectAndBuy = require(Parent.SharedFlags).FFlagSocialEnableProfileInspectAndBuy or FFlagAXIaBEnableShopContext
 local _ = require(script.Stores.createItemSelectionStore)
 
 return {
 	Enums = {
-		PriceStatus = priceStatusModule,
-		ViewType = viewTypeModule,
-		InspectAndBuyVersion = inspectAndBuyVersionModule
+		PriceStatus = require(script.Enums.PriceStatus),
+		ViewType = require(script.Enums.ViewType),
+		InspectAndBuyVersion = require(script.Enums.InspectAndBuyVersion)
 	},
 	Utils = {
 		getPriceStatus = require(script.Utils.getPriceStatus),
-		getPriceStatusInShop = if fFlagSocialEnableProfileInspectAndBuy then require(script.Utils.getPriceStatusInShop) else nil,
-		getPriceLineContent = if fFlagSocialEnableProfileInspectAndBuy then require(script.Utils.getPriceLineContent) else nil,
+		getPriceStatusInShop = if FFlagSocialEnableProfileInspectAndBuy then require(script.Utils.getPriceStatusInShop) else nil,
+		getPriceLineContent = if FFlagSocialEnableProfileInspectAndBuy then require(script.Utils.getPriceLineContent) else nil,
 		getViewType = require(script.Utils.getViewType),
 		applyTryOnItemToHumanoidDescription = require(script.Utils.applyTryOnItemToHumanoidDescription),
 		convertAssetInfoToItemData = require(script.Utils.convertAssetInfoToItemData),
@@ -33,12 +26,12 @@ return {
 		formatNumber = require(script.Utils.formatNumber)
 	},
 	Hooks = {
-		useViewBreakpoints = useViewBreakpointsModule,
-		useResponsivePanelLayoutProps = useResponsivePanelLayoutPropsModule,
-		useInspectAndBuyFocusNavigation = useInspectAndBuyFocusNavigationModule
+		useViewBreakpoints = require(script.Hooks.useViewBreakpoints),
+		useResponsivePanelLayoutProps = require(script.Components.useResponsivePanelLayoutProps),
+		useInspectAndBuyFocusNavigation = require(script.Hooks.useInspectAndBuyFocusNavigation)
 	},
 	Components = {
-		BuyActionBar = buyActionBarModule,
+		BuyActionBar = require(script.Components.Common.BuyActionBar),
 		ResponsivePanelLayout = require(script.Components.Common.ResponsivePanelLayout),
 		SelectableItemCardRow = require(script.Components.Common.SelectableItemCardRow.SelectableCardRowContainer),
 		SelectableItemCardList = require(script.Components.Common.SelectableItemCardList.SelectableItemCardList)
@@ -46,6 +39,6 @@ return {
 	Contexts = {
 		ItemSelectionStoreContext = require(script.Contexts.ItemSelectionStoreContext)
 	},
-	Constants = constantsModule,
+	Constants = require(script.Constants),
 	["jest.config"] = script["jest.config"]
 }

@@ -1,42 +1,48 @@
-﻿local parent = script:FindFirstAncestor("AppChat").Parent
-local httpService = game:GetService("HttpService")
-local momentsTypesModule = require(parent.MomentsTypes)
-local _ = require(parent.ShareLinksNetworking)
-local shareLinkClassificationModule = require(script.Parent.ShareLinkClassification)
-local fFlagMomentsPassFeedItemIdToBackendApis = require(parent.SharedFlags).FFlagMomentsPassFeedItemIdToBackendApis
-local shareLinkTargetIdType = momentsTypesModule.Enums.ShareLinkTargetIdType
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local HttpService = game:GetService("HttpService")
+local _ = require(Parent.ShareLinksNetworking)
+local ShareLinkClassificationModule = require(script.Parent.ShareLinkClassification)
+local FFlagMomentsPassFeedItemIdToBackendApis = require(Parent.SharedFlags).FFlagMomentsPassFeedItemIdToBackendApis
+local FFlagAppChatPlusReferralAssetCardModule = require(AppChat.Flags.FFlagAppChatPlusReferralAssetCard)
+local ShareLinkTargetIdType = require(Parent.MomentsTypes).Enums.ShareLinkTargetIdType
 
-local function _(p1)
-	-- upvalues: fFlagMomentsPassFeedItemIdToBackendApis (ref), httpService (ref), shareLinkTargetIdType (ref)
-	if not fFlagMomentsPassFeedItemIdToBackendApis or p1 == "" then
+local function _(p1) --[[ Line: 23 | Named "getTargetIdType" ]]
+	-- upvalues: FFlagMomentsPassFeedItemIdToBackendApis (copy), HttpService (copy), ShareLinkTargetIdType (copy)
+	if FFlagMomentsPassFeedItemIdToBackendApis and p1 ~= "" then
+		local Success, Result = pcall(HttpService.JSONDecode, HttpService, p1)
+		
+		return if Success and type(Result) == "table" and Result.targetIdType == ShareLinkTargetIdType.FeedItemId then ShareLinkTargetIdType.FeedItemId else nil
+	else
 		return nil
 	end
-	local ok, status = pcall(httpService.JSONDecode, httpService, p1)
-	
-	return if ok and type(status) == "table" and status.targetIdType == shareLinkTargetIdType.FeedItemId then shareLinkTargetIdType.FeedItemId else nil
 end
 
-return function(p1)
-	-- upvalues: shareLinkClassificationModule (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), httpService (ref), shareLinkTargetIdType (ref)
+return function(p1) --[[ Line: 40 | Named "classifyShareLinkV2" ]]
+	-- upvalues: ShareLinkClassificationModule (copy), FFlagMomentsPassFeedItemIdToBackendApis (copy), HttpService (copy), ShareLinkTargetIdType (copy), FFlagAppChatPlusReferralAssetCardModule (copy)
 	if p1.status ~= "Valid" then
-		return { type = shareLinkClassificationModule.Invalid }
-	elseif p1.linkType ~= "Moments" then
-		return { type = shareLinkClassificationModule.Unhandled }
+		return { type = ShareLinkClassificationModule.Invalid }
 	end
-	local var1
-	local t = {
-		type = shareLinkClassificationModule.Moment,
+	if p1.linkType ~= "Moments" then
+		return if FFlagAppChatPlusReferralAssetCardModule and p1.linkType == "Referral" then {
+			type = ShareLinkClassificationModule.PlusReferral,
+			referrerId = p1.targetId
+		} else { type = ShareLinkClassificationModule.Unhandled }
+	end
+	local config = {
+		type = ShareLinkClassificationModule.Moment,
 		momentId = p1.targetId
 	}
-	local customData = p1.customData
+	local CustomData = p1.customData
+	local FeedItemId = nil
 	
-	if fFlagMomentsPassFeedItemIdToBackendApis and customData ~= "" then
-		local ok, status = pcall(httpService.JSONDecode, httpService, customData)
-		var1 = if ok and type(status) == "table" and status.targetIdType == shareLinkTargetIdType.FeedItemId then shareLinkTargetIdType.FeedItemId else nil
+	if FFlagMomentsPassFeedItemIdToBackendApis and CustomData ~= "" then
+		local Success, Result = pcall(HttpService.JSONDecode, HttpService, CustomData)
+		FeedItemId = if Success and type(Result) == "table" and Result.targetIdType == ShareLinkTargetIdType.FeedItemId then ShareLinkTargetIdType.FeedItemId else nil
 	else
-		var1 = nil
+		FeedItemId = nil
 	end
-	t.targetIdType = var1
+	config.targetIdType = FeedItemId
 	
-	return t
+	return config
 end

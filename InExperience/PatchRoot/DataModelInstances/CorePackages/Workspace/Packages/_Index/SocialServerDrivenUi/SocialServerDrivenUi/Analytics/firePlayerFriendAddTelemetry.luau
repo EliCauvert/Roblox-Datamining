@@ -1,57 +1,57 @@
-﻿local httpService = game:GetService("HttpService")
-local telemetryService = game:GetService("TelemetryService")
-local localizationService = game:GetService("LocalizationService")
-local getActionTelemetryFieldValue = require(script:FindFirstAncestor("SocialServerDrivenUi").Parent.SduiCoreSystem).getActionTelemetryFieldValue
-local sduiPlayerFriendAddThrottlingHundredthsPercent = game:DefineFastInt("SduiPlayerFriendAddThrottlingHundredthsPercent", 10000)
+﻿local HttpService = game:GetService("HttpService")
+local TelemetryService = game:GetService("TelemetryService")
+local LocalizationService = game:GetService("LocalizationService")
+local GetActionTelemetryFieldValueFunction = require(script:FindFirstAncestor("SocialServerDrivenUi").Parent.SduiCoreSystem).getActionTelemetryFieldValue
+local SduiPlayerFriendAddThrottlingHundredthsPercent = game:DefineFastInt("SduiPlayerFriendAddThrottlingHundredthsPercent", 10000)
 
-return function(p1, p2, p3)
-	-- upvalues: getActionTelemetryFieldValue (ref), telemetryService (ref), sduiPlayerFriendAddThrottlingHundredthsPercent (ref), httpService (ref), localizationService (ref)
-	local var1 = getActionTelemetryFieldValue(nil, p2, "tilePos") or getActionTelemetryFieldValue(nil, p2, "itemPosition")
-	local var2 = getActionTelemetryFieldValue(nil, p2, "pageContext") or (if p3 then p3.appPage else nil)
-	local var3 = getActionTelemetryFieldValue(nil, p2, "eventContext") or "playerSearch"
-	local var4 = getActionTelemetryFieldValue(nil, p2, "contentType") or "User"
-	local var5 = getActionTelemetryFieldValue(nil, p2, "userSearchSessionId")
-	local var6 = if var5 ~= nil then nil else tostring(var5)
-	local var7 = getActionTelemetryFieldValue(nil, p2, "collectionId")
-	local var8 = getActionTelemetryFieldValue(nil, p2, "collectionPosition")
-	local var9 = if p2 and p2.getCollectionData then p2.getCollectionData() else nil
-	local var10 = if var9 then var9.itemsPerRow else nil
-	local var11 = if var9 then var9.startRowNumber else nil
-	local var12 = nil
-	local var13 = nil
-	local ceiled = nil
+return function(PlayerId, p1, p2) --[[ Line: 20 | Named "firePlayerFriendAddTelemetry" ]]
+	-- upvalues: GetActionTelemetryFieldValueFunction (copy), TelemetryService (copy), SduiPlayerFriendAddThrottlingHundredthsPercent (copy), HttpService (copy), LocalizationService (copy)
+	local TilePos = GetActionTelemetryFieldValueFunction(nil, p1, "tilePos") or GetActionTelemetryFieldValueFunction(nil, p1, "itemPosition")
+	local PageContext = GetActionTelemetryFieldValueFunction(nil, p1, "pageContext") or (if p2 then p2.appPage else nil)
+	local EventContext = GetActionTelemetryFieldValueFunction(nil, p1, "eventContext") or "playerSearch"
+	local ContentType = GetActionTelemetryFieldValueFunction(nil, p1, "contentType") or "User"
+	local UserSearchSessionId = GetActionTelemetryFieldValueFunction(nil, p1, "userSearchSessionId")
+	local Text = if UserSearchSessionId == nil then nil else tostring(UserSearchSessionId)
+	local CollectionId = GetActionTelemetryFieldValueFunction(nil, p1, "collectionId")
+	local CollectionPosition = GetActionTelemetryFieldValueFunction(nil, p1, "collectionPosition")
+	local CollectionData = if p1 and p1.getCollectionData then p1.getCollectionData() else nil
+	local ItemsPerRow = if CollectionData then CollectionData.itemsPerRow else nil
+	local StartRowNumber = if CollectionData then CollectionData.startRowNumber else nil
+	local v1: number? = nil
+	local v2: number? = nil
+	local Ceiled: number? = nil
 	
-	if typeof(var1) == "number" and var1 > 0 and (typeof(var10) == "number" and var10 > 0) then
-		ceiled = math.ceil(var1 / var10)
-		var13 = (var1 - 1) % var10 + 1
+	if typeof(TilePos) == "number" and TilePos > 0 and typeof(ItemsPerRow) == "number" and ItemsPerRow > 0 then
+		Ceiled = math.ceil(TilePos / ItemsPerRow)
+		v2 = (TilePos - 1) % ItemsPerRow + 1
 		
-		if typeof(var11) == "number" then
-			var12 = var11 + ceiled - 1
+		if typeof(StartRowNumber) == "number" then
+			v1 = StartRowNumber + Ceiled - 1
 		end
 	end
-	telemetryService:LogEvent({
+	TelemetryService:LogEvent({
 		eventName = "playerFriendAdd",
 		description = "Fired when a player tile friend request is sent in an SDUI collection",
 		backends = { "EventIngest" },
-		throttlingPercentage = sduiPlayerFriendAddThrottlingHundredthsPercent,
+		throttlingPercentage = SduiPlayerFriendAddThrottlingHundredthsPercent,
 		lastUpdated = { 26, 7, 17 }
 	}, {
-		eventContext = var3,
+		eventContext = EventContext,
 		standardizedFields = { "addSessionInfo", "addSessionId", "addOSInfo" },
 		customFields = {
 			actionType = "RequestFriendship",
-			playerId = p1,
-			contentType = var4,
-			interactionUuid = httpService:GenerateGUID(false),
-			tilePos = var1,
-			pageContext = var2,
-			userSearchSessionId = var6,
-			feedRowNumber = getActionTelemetryFieldValue(nil, p2, "feedRowNumber") or var12,
-			positionInRow = getActionTelemetryFieldValue(nil, p2, "positionInRow") or var13,
-			rowInSort = getActionTelemetryFieldValue(nil, p2, "rowInSort") or ceiled,
-			sortId = if var7 ~= nil then nil else tostring(var7),
-			sortPosition = var8,
-			locale = localizationService.RobloxLocaleId
+			playerId = PlayerId,
+			contentType = ContentType,
+			interactionUuid = HttpService:GenerateGUID(false),
+			tilePos = TilePos,
+			pageContext = PageContext,
+			userSearchSessionId = Text,
+			feedRowNumber = GetActionTelemetryFieldValueFunction(nil, p1, "feedRowNumber") or v1,
+			positionInRow = GetActionTelemetryFieldValueFunction(nil, p1, "positionInRow") or v2,
+			rowInSort = GetActionTelemetryFieldValueFunction(nil, p1, "rowInSort") or Ceiled,
+			sortId = if CollectionId == nil then nil else tostring(CollectionId),
+			sortPosition = CollectionPosition,
+			locale = LocalizationService.RobloxLocaleId
 		}
 	})
 end

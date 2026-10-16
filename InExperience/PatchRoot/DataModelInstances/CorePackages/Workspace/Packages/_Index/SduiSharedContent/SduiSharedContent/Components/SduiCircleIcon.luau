@@ -1,20 +1,22 @@
-﻿local parent = script:FindFirstAncestor("SduiSharedContent").Parent
-local reactModule = require(parent.React)
-local useTokens = require(parent.Foundation).Hooks.useTokens
-local _ = require(parent.SduiCompat)
-local sduiViewModule = require(script.Parent.SduiView)
-local sduiIconModule = require(script.Parent.SduiIcon)
+﻿local Parent = script:FindFirstAncestor("SduiSharedContent").Parent
+local ReactModule = require(Parent.React)
+local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
+local _ = require(Parent.SduiCompat)
+local SduiViewModule = require(script.Parent.SduiView)
+local SduiIconModule = require(script.Parent.SduiIcon)
 
-return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), sduiViewModule (ref), sduiIconModule (ref)
-	return reactModule.createElement(sduiViewModule, {
+return ReactModule.memo(function(p1) --[[ Line: 33 | Named "SduiCircleIcon" ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), SduiViewModule (copy), SduiIconModule (copy)
+	local UseTokensResult = UseTokensFunction()
+	
+	return ReactModule.createElement(SduiViewModule, {
 		tag = "radius-circle align-x-center align-y-center aspect-1-1",
 		size = p1.size or UDim2.fromScale(1, 1),
-		backgroundStyle = p1.backgroundStyle or useTokens().Color.Surface.Surface_100,
+		backgroundStyle = p1.backgroundStyle or UseTokensResult.Color.Surface.Surface_100,
 		layoutOrder = p1.layoutOrder,
 		testId = p1.testId
 	}, {
-		Icon = if p1.iconName then reactModule.createElement(sduiIconModule, {
+		Icon = if p1.iconName then ReactModule.createElement(SduiIconModule, {
 			name = p1.iconName,
 			size = p1.iconSize,
 			testId = if p1.testId then p1.testId .. "-icon" else nil

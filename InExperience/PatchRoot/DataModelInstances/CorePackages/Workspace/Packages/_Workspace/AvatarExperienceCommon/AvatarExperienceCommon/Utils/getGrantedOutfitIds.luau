@@ -1,33 +1,32 @@
-﻿local avatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
-local outfitTypesModule = require(avatarExperienceCommon.Enums.OutfitTypes)
-local _ = require(avatarExperienceCommon.Types.CategoryTypes.CategoryTypes)
-local NON_EDITABLE_MAKEUP_GRANT_KEY = require(avatarExperienceCommon.Constants).NON_EDITABLE_MAKEUP_GRANT_KEY
+﻿local AvatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
+local OutfitTypesModule = require(AvatarExperienceCommon.Enums.OutfitTypes)
+local _ = require(AvatarExperienceCommon.Types.CategoryTypes.CategoryTypes)
+local NONEDITABLEMAKEUPGRANTKEY = require(AvatarExperienceCommon.Constants).NON_EDITABLE_MAKEUP_GRANT_KEY
 
-return function(p1, p2, p3)
-	-- upvalues: outfitTypesModule (ref), NON_EDITABLE_MAKEUP_GRANT_KEY (ref)
+return function(p1, Avatar, p2) --[[ Line: 33 | Named "getGrantedOutfitIds" ]]
+	-- upvalues: OutfitTypesModule (copy), NONEDITABLEMAKEUPGRANTKEY (copy)
 	if not p1 then
 		return {}
 	end
-	local var1 = if p2 == outfitTypesModule.Avatar then if p3 == nil then {
-		outfitTypesModule.EditableAvatar,
-		outfitTypesModule.Avatar
-	} elseif p3 then { outfitTypesModule.EditableAvatar } else { outfitTypesModule.Avatar } elseif p2 == outfitTypesModule.Makeup then if p3 == nil then { outfitTypesModule.Makeup, NON_EDITABLE_MAKEUP_GRANT_KEY } elseif p3 then { outfitTypesModule.Makeup } else { NON_EDITABLE_MAKEUP_GRANT_KEY } else { p2 }
+	local List = {}
 	local t = {}
-	local t_1 = {}
 	
-	for i, v in var1 do
-		local var2 = p1.grantedOutfitsByType[v]
+	for _, value in if Avatar == OutfitTypesModule.Avatar then if p2 == nil then {
+		OutfitTypesModule.EditableAvatar,
+		OutfitTypesModule.Avatar
+	} elseif p2 then { OutfitTypesModule.EditableAvatar } else { OutfitTypesModule.Avatar } elseif Avatar == OutfitTypesModule.Makeup then if p2 == nil then { OutfitTypesModule.Makeup, NONEDITABLEMAKEUPGRANTKEY } elseif p2 then { OutfitTypesModule.Makeup } else { NONEDITABLEMAKEUPGRANTKEY } else { Avatar } do
+		local GrantedOutfitsByTypeEntry = p1.grantedOutfitsByType[value]
 		
-		if var2 then
-			for i_1, v_1 in var2 do
-				local var3 = tostring(v_1)
+		if GrantedOutfitsByTypeEntry then
+			for _, value1 in GrantedOutfitsByTypeEntry do
+				local Text = tostring(value1)
 				
-				if not t_1[var3] then
-					t_1[var3] = true
-					table.insert(t, var3)
+				if not t[Text] then
+					t[Text] = true
+					table.insert(List, Text)
 				end
 			end
 		end
 	end
-	return t
+	return List
 end

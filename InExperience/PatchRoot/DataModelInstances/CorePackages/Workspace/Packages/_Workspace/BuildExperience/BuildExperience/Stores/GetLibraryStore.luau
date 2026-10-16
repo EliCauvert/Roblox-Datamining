@@ -1,1 +1,1 @@
-﻿return require(script:FindFirstAncestor("BuildExperience").Parent.Signals).createComputed(require(script.createLibraryStore))
+﻿return require(script:FindFirstAncestor("BuildExperience").Parent.Signals).createComputed((require(script.createLibraryStore)))

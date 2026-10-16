@@ -1,17 +1,17 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
-local reactModule = require(parent.React)
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
+local ReactModule = require(Parent.React)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
 
-return function(p1)
-	-- upvalues: useDispatch (ref), reactModule (ref)
-	local var1 = useDispatch()
+return function(p1) --[[ Line: 27 | Named "useClearSduiFocusedSort" ]]
+	-- upvalues: UseDispatchFunction (copy), ReactModule (copy)
+	local UseDispatchResult = UseDispatchFunction()
 	
-	return reactModule.useCallback(function(p2)
-		-- upvalues: var1 (ref), p1 (ref)
+	return ReactModule.useCallback(function(p2) --[[ Line: 29 ]]
+		-- upvalues: UseDispatchResult (copy), p1 (copy)
 		if p2 then
-			var1(p1.ClearWidgetInfo(nil, p2))
+			UseDispatchResult(p1.ClearWidgetInfo(nil, p2))
 			
 			return
 		end
-	end, { var1, p1.ClearWidgetInfo })
+	end, { UseDispatchResult, p1.ClearWidgetInfo })
 end

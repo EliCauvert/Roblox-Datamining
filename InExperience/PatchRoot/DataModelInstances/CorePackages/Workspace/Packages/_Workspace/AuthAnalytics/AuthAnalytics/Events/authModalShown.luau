@@ -1,28 +1,28 @@
-﻿local parent = script.Parent.Parent
-local logging = require(parent.Parent.AppCommonLib).Logging
-local checkAndSendEventModule = require(parent.Utils.checkAndSendEvent)
+﻿local Parent = script.Parent.Parent
+local Logging = require(Parent.Parent.AppCommonLib).Logging
+local CheckAndSendEventModule = require(Parent.Utils.checkAndSendEvent)
 
-return function(p1, p2, p3, p4, p5, p6)
-	-- upvalues: logging (ref), checkAndSendEventModule (ref)
+return function(p1, State, Field, Origin, AssociatedText, p2) --[[ Line: 6 ]]
+	-- upvalues: Logging (copy), CheckAndSendEventModule (copy)
 	local t = {}
 	
-	if p2 then
-		t.state = p2
+	if State then
+		t.state = State
 	end
-	if p3 then
-		t.field = p3
+	if Field then
+		t.field = Field
 	end
-	if p4 then
-		t.origin = p4
+	if Origin then
+		t.origin = Origin
 	end
-	if p5 then
-		t.associatedText = p5
+	if AssociatedText then
+		t.associatedText = AssociatedText
 	end
-	if p6 ~= nil then
-		if type(p6) ~= "string" then
-			logging.warn("Failure logging authModalShown: Expected errorCode to be a string but got " .. type(p6))
+	if p2 ~= nil then
+		if type(p2) ~= "string" then
+			Logging.warn("Failure logging authModalShown: Expected errorCode to be a string but got " .. type(p2))
 		end
-		t.errorCode = tostring(p6)
+		t.errorCode = tostring(p2)
 	end
-	checkAndSendEventModule(p1, "authModalShown", t)
+	CheckAndSendEventModule(p1, "authModalShown", t)
 end

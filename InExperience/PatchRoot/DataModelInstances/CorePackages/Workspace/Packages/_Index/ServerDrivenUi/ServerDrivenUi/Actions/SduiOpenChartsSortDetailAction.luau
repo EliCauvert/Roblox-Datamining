@@ -1,30 +1,31 @@
-﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local navigateToChartsSortDetailPage = require(parent.Charts).navigateToChartsSortDetailPage
-local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
-local sduiActionType = sduiCoreSystemModule.SduiActionType
+﻿local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local NavigateToChartsSortDetailPageFunction = require(Parent.Charts).navigateToChartsSortDetailPage
+local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
+local SduiActionType = SduiCoreSystemModule.SduiActionType
 
-return function(p1, _, p2, _)
-	-- upvalues: sduiErrorType (ref), sduiActionType (ref), navigateToChartsSortDetailPage (ref)
-	local var1 = if p1 then p1.actionParams else nil
+return function(p1, _, p2, _) --[[ Line: 14 ]]
+	-- upvalues: SduiErrorType (copy), SduiActionType (copy), NavigateToChartsSortDetailPageFunction (copy)
+	local ActionParams = p1 and p1.actionParams or nil
 	
-	if var1 == nil then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if ActionParams == nil then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			message = "Missing actionParams",
-			name = sduiActionType.OpenChartsSortDetail
+			name = SduiActionType.OpenChartsSortDetail
 		}, p2.appPage)
 		
 		return
 	end
-	local sortId = var1.sortId or var1.sort_id
+	local SortId = ActionParams.sortId or ActionParams.sort_id
 	
-	if sortId == nil or sortId == "" then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if SortId == nil or SortId == "" then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			message = "Missing sortId",
-			name = sduiActionType.OpenChartsSortDetail
+			name = SduiActionType.OpenChartsSortDetail
 		}, p2.appPage)
 		
 		return
+	else
+		NavigateToChartsSortDetailPageFunction(p2.dependencies.getNavigation(), { sortId = SortId, pageContext = p2.appPage })
 	end
-	navigateToChartsSortDetailPage(p2.dependencies.getNavigation(), { sortId = sortId, pageContext = p2.appPage })
 end

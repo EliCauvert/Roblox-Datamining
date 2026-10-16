@@ -1,57 +1,57 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local cryoModule = require(parent.Cryo)
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local _ = require(appChat.types)
-local useTokens = foundationModule.Hooks.useTokens
-local useChatPagePaddingModule = require(appChat.Contexts.ChatPagePadding.useChatPagePadding)
-local t = {
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local CryoModule = require(Parent.Cryo)
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local _ = require(AppChat.types)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UseChatPagePaddingModule = require(AppChat.Contexts.ChatPagePadding.useChatPagePadding)
+local config = {
 	actionText = "PLACEHOLDER Action",
 	bodyText = "PLACEHOLDER Body",
-	onActivated = function() end,
-	onDismissed = function() end
+	onActivated = function() --[[ Line: 24 ]] end,
+	onDismissed = function() --[[ Line: 25 ]] end
 }
 
-return reactModule.memo(function(p1)
-	-- upvalues: cryoModule (ref), t (ref), useTokens (ref), useChatPagePaddingModule (ref), reactModule (ref), foundationModule (ref)
-	local var1 = cryoModule.Dictionary.union(t, p1)
-	local medium = useTokens().Padding.Medium
-	local var2 = useChatPagePaddingModule()
+return ReactModule.memo(function(p1) --[[ Line: 28 | Named "ConversationBanner" ]]
+	-- upvalues: CryoModule (copy), config (copy), UseTokensFunction (copy), UseChatPagePaddingModule (copy), ReactModule (copy), FoundationModule (copy)
+	local UnionResult = CryoModule.Dictionary.union(config, p1)
+	local Medium = UseTokensFunction().Padding.Medium
+	local UseChatPagePaddingModuleResult = UseChatPagePaddingModule()
 	
-	return reactModule.createElement(foundationModule.View, {
+	return ReactModule.createElement(FoundationModule.View, {
 		tag = "row gap-medium align-y-center size-full-0 auto-y bg-shift-200",
 		padding = {
-			left = UDim.new(0, var2.left),
-			right = UDim.new(0, var2.right),
-			top = UDim.new(0, medium),
-			bottom = UDim.new(0, medium)
+			left = UDim.new(0, UseChatPagePaddingModuleResult.left),
+			right = UDim.new(0, UseChatPagePaddingModuleResult.right),
+			top = UDim.new(0, Medium),
+			bottom = UDim.new(0, Medium)
 		},
-		LayoutOrder = var1.layoutOrder
+		LayoutOrder = UnionResult.layoutOrder
 	}, {
-		BodyText = reactModule.createElement(foundationModule.Text, {
+		BodyText = ReactModule.createElement(FoundationModule.Text, {
 			tag = "text-title-medium text-align-x-left text-truncate-end content-emphasis auto-y fill",
 			LayoutOrder = 1,
-			Text = var1.bodyText
+			Text = UnionResult.bodyText
 		}),
-		ActionContainer = reactModule.createElement(foundationModule.View, {
+		ActionContainer = ReactModule.createElement(FoundationModule.View, {
 			LayoutOrder = 2,
 			tag = "row gap-small align-y-center auto-xy"
 		}, {
-			ActionButton = reactModule.createElement(foundationModule.Button, {
+			ActionButton = ReactModule.createElement(FoundationModule.Button, {
 				LayoutOrder = 1,
-				text = var1.actionText,
-				onActivated = var1.onActivated,
-				size = foundationModule.Enums.InputSize.Small
+				text = UnionResult.actionText,
+				onActivated = UnionResult.onActivated,
+				size = FoundationModule.Enums.InputSize.Small
 			}),
-			CloseButton = reactModule.createElement(foundationModule.View, {
+			CloseButton = ReactModule.createElement(FoundationModule.View, {
 				LayoutOrder = 2,
 				tag = "auto-xy x-default-transparent radius-small padding-xsmall",
-				onActivated = var1.onDismissed
+				onActivated = UnionResult.onDismissed
 			}, {
-				Icon = reactModule.createElement(foundationModule.Icon, {
-					size = foundationModule.Enums.IconSize.Large,
-					name = foundationModule.Enums.IconName.X
+				Icon = ReactModule.createElement(FoundationModule.Icon, {
+					size = FoundationModule.Enums.IconSize.Large,
+					name = FoundationModule.Enums.IconName.X
 				})
 			})
 		})

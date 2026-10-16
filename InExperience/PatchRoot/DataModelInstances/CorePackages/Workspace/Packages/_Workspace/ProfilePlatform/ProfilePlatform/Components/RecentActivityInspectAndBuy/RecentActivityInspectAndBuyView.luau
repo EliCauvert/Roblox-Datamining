@@ -1,27 +1,26 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local dashModule = require(parent.Dash)
-local buyActionBar = require(parent.AvatarExperienceInspectAndBuy).Components.BuyActionBar
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local _ = require(profilePlatform.Common.Types)
-local inspectAvatarUtilsModule = require(profilePlatform.Components.InspectAvatar.InspectAvatarUtils)
-local itemDisplayHelpersModule = require(profilePlatform.Components.InspectAvatar.ItemDisplayHelpers)
-local catalogItemRowCardContainerModule = require(profilePlatform.Components.InspectAvatar.CatalogItemRowCardContainer)
-local recentActivityPurchaseConfirmationDialogModule = require(script.Parent.RecentActivityPurchaseConfirmationDialog)
-local recentActivityInsufficientRobuxDialogModule = require(script.Parent.RecentActivityInsufficientRobuxDialog)
-local sheet = foundationModule.Sheet
-local view = foundationModule.View
-local text = foundationModule.Text
-local skeleton = foundationModule.Skeleton
-local dialogSize = foundationModule.Enums.DialogSize
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local isItemPurchasable = inspectAvatarUtilsModule.isItemPurchasable
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local DashModule = require(Parent.Dash)
+local BuyActionBar = require(Parent.AvatarExperienceInspectAndBuy).Components.BuyActionBar
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local _ = require(ProfilePlatform.Common.Types)
+local ItemDisplayHelpersModule = require(ProfilePlatform.Components.InspectAvatar.ItemDisplayHelpers)
+local CatalogItemRowCardContainerModule = require(ProfilePlatform.Components.InspectAvatar.CatalogItemRowCardContainer)
+local RecentActivityPurchaseConfirmationDialogModule = require(script.Parent.RecentActivityPurchaseConfirmationDialog)
+local RecentActivityInsufficientRobuxDialogModule = require(script.Parent.RecentActivityInsufficientRobuxDialog)
+local Sheet = FoundationModule.Sheet
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local Skeleton = FoundationModule.Skeleton
+local DialogSize = FoundationModule.Enums.DialogSize
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local IsItemPurchasableFunction = require(ProfilePlatform.Components.InspectAvatar.InspectAvatarUtils).isItemPurchasable
 
-return function(p1)
-	-- upvalues: useLocalization (ref), itemDisplayHelpersModule (ref), reactModule (ref), dashModule (ref), catalogItemRowCardContainerModule (ref), isItemPurchasable (ref), skeleton (ref), sheet (ref), dialogSize (ref), text (ref), view (ref), buyActionBar (ref), buttonVariant (ref), recentActivityPurchaseConfirmationDialogModule (ref), recentActivityInsufficientRobuxDialogModule (ref)
-	local var1 = useLocalization({
+return function(p1) --[[ Line: 53 | Named "RecentActivityInspectAndBuyView" ]]
+	-- upvalues: UseLocalizationFunction (copy), ItemDisplayHelpersModule (copy), ReactModule (copy), DashModule (copy), CatalogItemRowCardContainerModule (copy), IsItemPurchasableFunction (copy), Skeleton (copy), Sheet (copy), DialogSize (copy), Text (copy), View (copy), BuyActionBar (copy), ButtonVariant (copy), RecentActivityPurchaseConfirmationDialogModule (copy), RecentActivityInsufficientRobuxDialogModule (copy)
+	local FeatureCatalogLabelBuyItems = UseLocalizationFunction({
 		title = "Feature.Catalog.Label.BuyItems",
 		buyWholeLook = "Feature.Profile.Header.BuyWholeLook",
 		bundle = "Feature.Catalog.Label.Bundle",
@@ -31,83 +30,89 @@ return function(p1)
 			totalNumberOfItems = #p1.displayItems
 		}
 	})
-	local var2 = useLocalization(itemDisplayHelpersModule.PRICE_STATUS_LOCALIZATION_KEYS)
-	local var3 = useLocalization(itemDisplayHelpersModule.ASSET_TYPE_LOCALIZATION_KEYS)
-	local var4 = useLocalization(itemDisplayHelpersModule.BUNDLE_TYPE_LOCALIZATION_KEYS)
-	local var5 = reactModule.useMemo(function()
-		-- upvalues: var1 (ref), dashModule (copy), var3 (ref), var4 (ref)
+	local UseLocalizationResult = UseLocalizationFunction(ItemDisplayHelpersModule.PRICE_STATUS_LOCALIZATION_KEYS)
+	local UseLocalizationResult1 = UseLocalizationFunction(ItemDisplayHelpersModule.ASSET_TYPE_LOCALIZATION_KEYS)
+	local UseLocalizationResult2 = UseLocalizationFunction(ItemDisplayHelpersModule.BUNDLE_TYPE_LOCALIZATION_KEYS)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 69 ]]
+		-- upvalues: FeatureCatalogLabelBuyItems (copy), DashModule (upval), UseLocalizationResult1 (copy), UseLocalizationResult2 (copy)
 		return {
 			bundleParts = nil,
-			bundle = var1.bundle,
-			assetTypeNames = dashModule.join(var3, var4)
+			bundle = FeatureCatalogLabelBuyItems.bundle,
+			assetTypeNames = DashModule.join(UseLocalizationResult1, UseLocalizationResult2)
 		}
-	end, { var1.bundle, var3, var4 })
-	local t = {}
+	end, {
+		FeatureCatalogLabelBuyItems.bundle,
+		UseLocalizationResult1,
+		UseLocalizationResult2
+	})
+	local Elements = {}
 	
-	for i, v in p1.displayItems do
-		local id = v.id
-		t[`item_{id}`] = reactModule.createElement(catalogItemRowCardContainerModule, {
+	for Index, displayItem in p1.displayItems do
+		local Id = displayItem.id
+		Elements[`item_{Id}`] = ReactModule.createElement(CatalogItemRowCardContainerModule, {
 			rowHeight = 72,
-			asset = v,
-			index = i,
-			isChecked = p1.selectedItems[id] == true,
-			isPurchasable = isItemPurchasable(v),
-			localizedStrings = var5,
-			priceStatusLocalized = var2,
+			asset = displayItem,
+			index = Index,
+			isChecked = p1.selectedItems[Id] == true,
+			isPurchasable = IsItemPurchasableFunction(displayItem),
+			localizedStrings = UseMemoResult,
+			priceStatusLocalized = UseLocalizationResult,
 			onToggleItem = p1.onToggleItem,
 			openItemDetails = p1.openItemDetails
 		})
 	end
-	return reactModule.createElement(reactModule.Fragment, nil, {
-		SheetRoot = reactModule.createElement(sheet.Root, {
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 93 ]]
+		-- upvalues: ReactModule (upval), Skeleton (upval)
+		local Elements = {}
+		
+		for i = 1, 4 do
+			Elements[`Shimmer{i}`] = ReactModule.createElement(Skeleton, { Size = UDim2.new(1, 0, 0, 72), LayoutOrder = i })
+		end
+		return Elements
+	end, {})
+	
+	return ReactModule.createElement(ReactModule.Fragment, nil, {
+		SheetRoot = ReactModule.createElement(Sheet.Root, {
 			onClose = p1.onClose,
 			snapPoints = { 1 },
-			size = dialogSize.Large
+			size = DialogSize.Large
 		}, {
-			Header = reactModule.createElement(sheet.Header, { hasCloseAffordance = true }, {
-				HeaderTitle = reactModule.createElement(text, {
+			Header = ReactModule.createElement(Sheet.Header, { hasCloseAffordance = true }, {
+				HeaderTitle = ReactModule.createElement(Text, {
 					tag = "size-full-0 auto-y text-title-large text-align-x-center",
-					Text = var1.title
+					Text = FeatureCatalogLabelBuyItems.title
 				})
 			}),
-			Content = reactModule.createElement(sheet.Content, nil, {
-				ItemList = if not p1.isLoading then reactModule.createElement(view, {
+			Content = ReactModule.createElement(Sheet.Content, nil, {
+				ItemList = if p1.isLoading then nil else ReactModule.createElement(View, {
 					tag = "col gap-large size-full-0 auto-y padding-bottom-large padding-top-medium"
-				}, t) else nil,
-				LoadingShimmer = if p1.isLoading then reactModule.createElement(view, { tag = "col size-full-0 auto-y" }, reactModule.useMemo(function()
-					-- upvalues: reactModule (copy), skeleton (copy)
-					local t = {}
-					
-					for i = 1, 4 do
-						t[`Shimmer{i}`] = reactModule.createElement(skeleton, { Size = UDim2.new(1, 0, 0, 72), LayoutOrder = i })
-					end
-					return t
-				end, {})) else nil
+				}, Elements),
+				LoadingShimmer = if p1.isLoading then ReactModule.createElement(View, { tag = "col size-full-0 auto-y" }, UseMemoResult1) else nil
 			}),
-			Actions = reactModule.createElement(sheet.Actions, nil, {
-				ActionBar = reactModule.createElement(view, { tag = "size-full-2500" }, {
-					BuyBar = reactModule.createElement(buyActionBar, {
+			Actions = ReactModule.createElement(Sheet.Actions, nil, {
+				ActionBar = ReactModule.createElement(View, { tag = "size-full-2500" }, {
+					BuyBar = ReactModule.createElement(BuyActionBar, {
 						priceLabel = {
-							leftLabel = var1.buyHeader,
+							leftLabel = FeatureCatalogLabelBuyItems.buyHeader,
 							priceInRobux = tostring(p1.purchaseSummary.totalPrice)
 						},
 						purchaseButtonProps = {
-							purchaseButtonText = var1.buyWholeLook,
+							purchaseButtonText = FeatureCatalogLabelBuyItems.buyWholeLook,
 							onPurchase = p1.onBuyAll,
 							isDisabled = p1.isLoading or p1.purchaseSummary.count == 0,
-							variant = buttonVariant.Emphasis
+							variant = ButtonVariant.Emphasis
 						}
 					})
 				})
 			})
 		}),
-		PurchaseConfirmation = if p1.isConfirmingPurchase then reactModule.createElement(recentActivityPurchaseConfirmationDialogModule, {
+		PurchaseConfirmation = if p1.isConfirmingPurchase then ReactModule.createElement(RecentActivityPurchaseConfirmationDialogModule, {
 			totalPrice = p1.purchaseSummary.totalPrice,
 			isPurchasing = p1.isPurchasing,
 			onConfirm = p1.onConfirmPurchase,
 			onCancel = p1.onCancelPurchase
 		}) else nil,
-		InsufficientRobux = if p1.isShowingInsufficientRobux then reactModule.createElement(recentActivityInsufficientRobuxDialogModule, {
+		InsufficientRobux = if p1.isShowingInsufficientRobux then ReactModule.createElement(RecentActivityInsufficientRobuxDialogModule, {
 			totalPrice = p1.purchaseSummary.totalPrice,
 			robuxBalance = p1.robuxBalance,
 			onClose = p1.onDismissInsufficientRobux

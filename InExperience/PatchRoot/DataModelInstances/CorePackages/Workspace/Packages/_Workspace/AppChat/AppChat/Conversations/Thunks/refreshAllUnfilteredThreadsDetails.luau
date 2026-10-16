@@ -1,45 +1,45 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local cryoModule = require(parent.Cryo)
-local promiseModule = require(parent.Promise)
-local getDeepValueModule = require(appChat.Utils.getDeepValue)
-local multiGetConversationDetailsModule = require(appChat.Conversations.Thunks.multiGetConversationDetails)
-local name = require(appChat.Logger):new(script.Name)
-local appChatNetworkingModule = require(parent.AppChatNetworking)
-local refreshConversationUnfilteredThreadsDetailsModule = require(script.Parent.refreshConversationUnfilteredThreadsDetails)
-local fFlagAppChatEnableDoubleOptIn = require(parent.SharedFlags).FFlagAppChatEnableDoubleOptIn
-local fIntUnfilteredThreadsPvDelayMsModule = require(appChat.Flags.FIntUnfilteredThreadsPvDelayMs)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local CryoModule = require(Parent.Cryo)
+local PromiseModule = require(Parent.Promise)
+local GetDeepValueModule = require(AppChat.Utils.getDeepValue)
+local MultiGetConversationDetailsModule = require(AppChat.Conversations.Thunks.multiGetConversationDetails)
+local NewResult = require(AppChat.Logger):new(script.Name)
+local AppChatNetworkingModule = require(Parent.AppChatNetworking)
+local RefreshConversationUnfilteredThreadsDetailsModule = require(script.Parent.refreshConversationUnfilteredThreadsDetails)
+local FFlagAppChatEnableDoubleOptIn = require(Parent.SharedFlags).FFlagAppChatEnableDoubleOptIn
+local FIntUnfilteredThreadsPvDelayMsModule = require(AppChat.Flags.FIntUnfilteredThreadsPvDelayMs)
 
-return function(p1, p2)
-	-- upvalues: getDeepValueModule (ref), cryoModule (ref), promiseModule (ref), fIntUnfilteredThreadsPvDelayMsModule (ref), multiGetConversationDetailsModule (ref), name (ref), appChatNetworkingModule (ref), fFlagAppChatEnableDoubleOptIn (ref), refreshConversationUnfilteredThreadsDetailsModule (ref)
-	return function(p3)
-		-- upvalues: getDeepValueModule (copy), cryoModule (copy), promiseModule (copy), fIntUnfilteredThreadsPvDelayMsModule (copy), multiGetConversationDetailsModule (copy), name (copy), appChatNetworkingModule (copy), p2 (ref), p1 (ref), fFlagAppChatEnableDoubleOptIn (copy), refreshConversationUnfilteredThreadsDetailsModule (copy)
-		local var1 = cryoModule.List.filterMap(cryoModule.Dictionary.values(getDeepValueModule(p3:getState(), "ChatAppReducer.Conversations") or {}), function(p4)
+return function(p1, p2) --[[ Line: 21 ]]
+	-- upvalues: GetDeepValueModule (copy), CryoModule (copy), PromiseModule (copy), FIntUnfilteredThreadsPvDelayMsModule (copy), MultiGetConversationDetailsModule (copy), NewResult (copy), AppChatNetworkingModule (copy), FFlagAppChatEnableDoubleOptIn (copy), RefreshConversationUnfilteredThreadsDetailsModule (copy)
+	return function(p3) --[[ Line: 22 ]]
+		-- upvalues: GetDeepValueModule (upval), CryoModule (upval), PromiseModule (upval), FIntUnfilteredThreadsPvDelayMsModule (upval), MultiGetConversationDetailsModule (upval), NewResult (upval), AppChatNetworkingModule (upval), p2 (copy), p1 (copy), FFlagAppChatEnableDoubleOptIn (upval), RefreshConversationUnfilteredThreadsDetailsModule (upval)
+		local FilterMapResult = CryoModule.List.filterMap(CryoModule.Dictionary.values(GetDeepValueModule(p3:getState(), "ChatAppReducer.Conversations") or {}), function(p4) --[[ Line: 25 ]]
 			return if p4 and p4.id and p4.source ~= "friends" then p4.id else nil
 		end)
 		
-		return promiseModule.delay(fIntUnfilteredThreadsPvDelayMsModule / 1000):andThen(function()
-			-- upvalues: var1 (ref), p3 (ref), multiGetConversationDetailsModule (copy), name (copy), appChatNetworkingModule (copy), p2 (copy), p1 (copy), fFlagAppChatEnableDoubleOptIn (copy), refreshConversationUnfilteredThreadsDetailsModule (copy)
-			if var1 then
-				p3:dispatch(multiGetConversationDetailsModule(var1)):catch(function(p4)
-					-- upvalues: name (copy)
-					name:warning("Error in multiGetConversationDetails thunk. Error: {}", tostring(p4))
+		return PromiseModule.delay(FIntUnfilteredThreadsPvDelayMsModule / 1000):andThen(function() --[[ Line: 34 ]]
+			-- upvalues: FilterMapResult (copy), p3 (copy), MultiGetConversationDetailsModule (upval), NewResult (upval), AppChatNetworkingModule (upval), p2 (upval), p1 (upval), FFlagAppChatEnableDoubleOptIn (upval), RefreshConversationUnfilteredThreadsDetailsModule (upval)
+			if FilterMapResult then
+				p3:dispatch(MultiGetConversationDetailsModule(FilterMapResult)):catch(function(Err) --[[ Line: 36 ]]
+					-- upvalues: NewResult (upval)
+					NewResult:warning("Error in multiGetConversationDetails thunk. Error: {}", (tostring(Err)))
 				end)
 			end
-			p3:dispatch(appChatNetworkingModule.rodux.GetChatLandingModal.API(p2)):catch(function(p4)
-				-- upvalues: name (copy)
-				name:warning("Error in GetChatLandingModal request. Error: {}", tostring(p4))
+			p3:dispatch(AppChatNetworkingModule.rodux.GetChatLandingModal.API(p2)):catch(function(Err) --[[ Line: 40 ]]
+				-- upvalues: NewResult (upval)
+				NewResult:warning("Error in GetChatLandingModal request. Error: {}", (tostring(Err)))
 			end)
 			
 			if p1 then
-				if fFlagAppChatEnableDoubleOptIn then
-					p3:dispatch(refreshConversationUnfilteredThreadsDetailsModule(p1, p2))
+				if FFlagAppChatEnableDoubleOptIn then
+					p3:dispatch(RefreshConversationUnfilteredThreadsDetailsModule(p1, p2))
 					
 					return
 				end
-				p3:dispatch(appChatNetworkingModule.rodux.GetConversationTopModal.API(p1, p2)):catch(function(p4)
-					-- upvalues: name (copy)
-					name:warning("Error in refreshAllUnfilteredThreadsDetails->GetConversationTopModal. Error: {}", tostring(p4))
+				p3:dispatch(AppChatNetworkingModule.rodux.GetConversationTopModal.API(p1, p2)):catch(function(Err) --[[ Line: 53 ]]
+					-- upvalues: NewResult (upval)
+					NewResult:warning("Error in refreshAllUnfilteredThreadsDetails->GetConversationTopModal. Error: {}", (tostring(Err)))
 				end)
 			end
 		end)

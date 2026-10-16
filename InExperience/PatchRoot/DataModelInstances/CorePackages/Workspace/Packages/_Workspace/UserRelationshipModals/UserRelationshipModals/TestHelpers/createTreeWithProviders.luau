@@ -1,25 +1,25 @@
-﻿local parent = script:FindFirstAncestor("UserRelationshipModals").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local roactRoduxModule = require(parent.RoactRodux)
-local localizationProvider = require(parent.Localization).LocalizationProvider
-local roduxModule = require(parent.Rodux)
-local mockLocalizationModule = require(script.Parent.mockLocalization)
+﻿local Parent = script:FindFirstAncestor("UserRelationshipModals").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local RoactRoduxModule = require(Parent.RoactRodux)
+local LocalizationProvider = require(Parent.Localization).LocalizationProvider
+local RoduxModule = require(Parent.Rodux)
+local MockLocalizationModule = require(script.Parent.mockLocalization)
 
-return function(p1, p2)
-	-- upvalues: roduxModule (ref), reactModule (ref), localizationProvider (ref), mockLocalizationModule (ref), foundationModule (ref), roactRoduxModule (ref)
-	return reactModule.createElement(localizationProvider, { localization = mockLocalizationModule }, {
-		Provider = reactModule.createElement(foundationModule.FoundationProvider, {
+return function(Component, p1) --[[ Line: 12 ]]
+	-- upvalues: RoduxModule (copy), ReactModule (copy), LocalizationProvider (copy), MockLocalizationModule (copy), FoundationModule (copy), RoactRoduxModule (copy)
+	return ReactModule.createElement(LocalizationProvider, { localization = MockLocalizationModule }, {
+		Provider = ReactModule.createElement(FoundationModule.FoundationProvider, {
 			colorMode = "Dark",
 			preferences = { reducedMotion = true }
 		}, {
-			reactModule.createElement(roactRoduxModule.StoreProvider, {
-				store = if p2 ~= nil then roduxModule.Store.new(function()
+			ReactModule.createElement(RoactRoduxModule.StoreProvider, {
+				store = if p1 == nil then RoduxModule.Store.new(function() --[[ Line: 15 ]]
 					return {
 						UserRelationshipModals = { LocalUserId = 456, NetworkStatus = {} }
 					}
-				end, {}, { roduxModule.thunkMiddleware }) else p2.store
-			}, { component = p1 })
+				end, {}, { RoduxModule.thunkMiddleware }) else p1.store
+			}, { component = Component })
 		})
 	})
 end

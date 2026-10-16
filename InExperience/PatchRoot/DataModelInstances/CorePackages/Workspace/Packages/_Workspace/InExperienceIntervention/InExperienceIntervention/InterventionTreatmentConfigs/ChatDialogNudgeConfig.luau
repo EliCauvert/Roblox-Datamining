@@ -1,33 +1,40 @@
-﻿local inExperienceIntervention = script:FindFirstAncestor("InExperienceIntervention")
-local constants = require(inExperienceIntervention.Parent.InterventionShared).Utils.Constants
-local _ = require(inExperienceIntervention.Utils.Types)
-local inExperienceInterventionAnalyticsModule = require(inExperienceIntervention.InExperienceInterventionAnalytics)
+﻿local InExperienceIntervention = script:FindFirstAncestor("InExperienceIntervention")
+local Parent = InExperienceIntervention.Parent
+local Constants = require(Parent.InterventionShared).Utils.Constants
+local ExperienceChatInterventionShownSignal = require(Parent.InterventionShared).Signals.experienceChatInterventionShownSignal
+local FFlagExpChatDictationStopOnSafetyIntervention = require(Parent.SharedFlags).FFlagExpChatDictationStopOnSafetyIntervention
+local _ = require(InExperienceIntervention.Utils.Types)
+local InExperienceInterventionAnalyticsModule = require(InExperienceIntervention.InExperienceInterventionAnalytics)
 
 return {
 	configName = "ChatDialogNudge",
-	shouldTriggerVisualTreatment = function(p1)
-		-- upvalues: constants (ref)
-		return p1.type == constants.NotificationDialogType.ChatNudge and (p1.modalType == constants.NotificationModalType.Dialog and (p1.abuseVector == constants.AbuseVectorType.ExperienceChat and not p1.acknowledgeable))
+	shouldTriggerVisualTreatment = function(p1): boolean --[[ Line: 14 ]]
+		-- upvalues: Constants (copy)
+		return p1.type == Constants.NotificationDialogType.ChatNudge and (p1.modalType == Constants.NotificationModalType.Dialog and p1.abuseVector == Constants.AbuseVectorType.ExperienceChat) and not p1.acknowledgeable
 	end,
-	shouldTriggerBehavioralTreatment = function(_)
+	shouldTriggerBehavioralTreatment = function(_): boolean --[[ Line: 20 ]]
 		return false
 	end,
-	shouldTriggerEventReceived = function(p1)
-		-- upvalues: constants (ref)
-		return p1.type == constants.NotificationDialogType.ChatNudge and (p1.modalType == constants.NotificationModalType.Dialog and p1.abuseVector == constants.AbuseVectorType.ExperienceChat)
+	shouldTriggerEventReceived = function(p1): boolean --[[ Line: 23 ]]
+		-- upvalues: Constants (copy)
+		return p1.type == Constants.NotificationDialogType.ChatNudge and p1.modalType == Constants.NotificationModalType.Dialog and p1.abuseVector == Constants.AbuseVectorType.ExperienceChat
 	end,
-	onTriggerVisualTreatment = function(p1, p2)
-		-- upvalues: constants (ref)
-		p1({
+	onTriggerVisualTreatment = function(Callback: (any) -> (), Detail) --[[ Line: 28 ]]
+		-- upvalues: Constants (copy), FFlagExpChatDictationStopOnSafetyIntervention (copy), ExperienceChatInterventionShownSignal (copy)
+		Callback({
 			isShown = true,
-			type = constants.UIStateActions.ToggleNotificationDialog,
-			treatmentType = constants.TreatmentType.ChatNudgeDialog,
-			detail = p2
+			type = Constants.UIStateActions.ToggleNotificationDialog,
+			treatmentType = Constants.TreatmentType.ChatNudgeDialog,
+			detail = Detail
 		})
+		
+		if FFlagExpChatDictationStopOnSafetyIntervention then
+			ExperienceChatInterventionShownSignal:fire()
+		end
 	end,
-	onTriggerBehavioralTreatment = function(_) end,
-	onTriggerEventReceived = function(p1)
-		-- upvalues: inExperienceInterventionAnalyticsModule (ref)
-		inExperienceInterventionAnalyticsModule.sendAnalyticsEvent(inExperienceInterventionAnalyticsModule.Constants.EventTypes.ModalMessageReceived, inExperienceInterventionAnalyticsModule.Constants.InterventionTypes.Nudge, DateTime.now().UnixTimestampMillis, p1.decisionEventId, p1.evidence, p1.timeoutDurationSeconds)
+	onTriggerBehavioralTreatment = function(_) --[[ Line: 39 ]] end,
+	onTriggerEventReceived = function(p1) --[[ Line: 40 ]]
+		-- upvalues: InExperienceInterventionAnalyticsModule (copy)
+		InExperienceInterventionAnalyticsModule.sendAnalyticsEvent(InExperienceInterventionAnalyticsModule.Constants.EventTypes.ModalMessageReceived, InExperienceInterventionAnalyticsModule.Constants.InterventionTypes.Nudge, DateTime.now().UnixTimestampMillis, p1.decisionEventId, p1.evidence, p1.timeoutDurationSeconds)
 	end
 }

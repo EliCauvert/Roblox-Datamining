@@ -1,131 +1,131 @@
-﻿local httpService = game:GetService("HttpService")
-local sduiSharedUtilities = script:FindFirstAncestor("SduiSharedUtilities")
-local parent = sduiSharedUtilities.Parent
-local getProtoVariableMapper = require(parent.SduiCoreSystem).getProtoVariableMapper
-local _ = require(sduiSharedUtilities.SduiIntegrationTypes)
-local fFlagSduiHydrationDataCamelCasePropertyKeys = require(parent.SharedFlags).FFlagSduiHydrationDataCamelCasePropertyKeys
-local fFlagEnableHomepagePromptsForModalsAndBanners = require(parent.SharedFlags).FFlagEnableHomepagePromptsForModalsAndBanners
-local fFlagPromptsHandlerEnabled = require(parent.SharedFlags).FFlagPromptsHandlerEnabled
+﻿local HttpService = game:GetService("HttpService")
+local SduiSharedUtilities = script:FindFirstAncestor("SduiSharedUtilities")
+local Parent = SduiSharedUtilities.Parent
+local GetProtoVariableMapperFunction = require(Parent.SduiCoreSystem).getProtoVariableMapper
+local _ = require(SduiSharedUtilities.SduiIntegrationTypes)
+local FFlagSduiHydrationDataCamelCasePropertyKeys = require(Parent.SharedFlags).FFlagSduiHydrationDataCamelCasePropertyKeys
+local FFlagEnableHomepagePromptsForModalsAndBanners = require(Parent.SharedFlags).FFlagEnableHomepagePromptsForModalsAndBanners
+local FFlagPromptsHandlerEnabled = require(Parent.SharedFlags).FFlagPromptsHandlerEnabled
 
-local function decodeProto(p1, p2)
+local function decodeProto(p1, p2) --[[ Line: 22 ]]
 	return p1.decode(if typeof(p2) == "string" then buffer.fromstring(p2) else p2)
 end
 
-local function decodeProtobufJson(p1, p2)
-	-- upvalues: httpService (ref)
-	return p1.jsonDecode(httpService:JSONDecode(if typeof(p2) == "buffer" then buffer.tostring(p2) else p2))
+local function decodeProtobufJson(p1, Buf) --[[ Line: 34 ]]
+	-- upvalues: HttpService (copy)
+	return p1.jsonDecode(HttpService:JSONDecode(if typeof(Buf) == "buffer" then buffer.tostring(Buf) else Buf))
 end
 
-local function parseSurfacing(p1)
-	-- upvalues: getProtoVariableMapper (ref)
-	if not p1 or not p1.kind then
+local function parseSurfacing(Surfacing) --[[ Line: 66 ]]
+	-- upvalues: GetProtoVariableMapperFunction (copy)
+	if not Surfacing or not Surfacing.kind then
 		return nil
 	end
-	local kind = p1.kind
+	local Kind = Surfacing.kind
 	
-	if kind.type == nil or kind.value == nil then
+	if Kind.type == nil or Kind.value == nil then
 		return nil
+	else
+		local ProtoVariableMapper = GetProtoVariableMapperFunction()
+		
+		return {
+			[ProtoVariableMapper.mapPropName(Kind.type)] = ProtoVariableMapper.camelCaseKeys(Kind.value)
+		}
 	end
-	local var1 = getProtoVariableMapper()
-	
-	return {
-		[var1.mapPropName(kind.type)] = var1.camelCaseKeys(kind.value)
-	}
 end
 
 return {
 	decodeProto = decodeProto,
 	decodeProtobufJson = decodeProtobufJson,
-	makeProtoResponseDecoder = function(p1)
-		-- upvalues: decodeProto (ref)
-		return function(p2)
-			-- upvalues: decodeProto (copy), p1 (ref)
+	makeProtoResponseDecoder = function(p1) --[[ Line: 42 ]]
+		-- upvalues: decodeProto (copy)
+		return function(p2) --[[ Line: 43 ]]
+			-- upvalues: decodeProto (upval), p1 (copy)
 			return decodeProto(p1, p2)
 		end
 	end,
-	makeProtobufJsonResponseDecoder = function(p1)
-		-- upvalues: decodeProtobufJson (ref)
-		return function(p2)
-			-- upvalues: decodeProtobufJson (copy), p1 (ref)
+	makeProtobufJsonResponseDecoder = function(p1) --[[ Line: 51 ]]
+		-- upvalues: decodeProtobufJson (copy)
+		return function(p2) --[[ Line: 52 ]]
+			-- upvalues: decodeProtobufJson (upval), p1 (copy)
 			return decodeProtobufJson(p1, p2)
 		end
 	end,
-	parsePageEntriesFromResponse = function(p1)
-		-- upvalues: fFlagEnableHomepagePromptsForModalsAndBanners (ref), fFlagPromptsHandlerEnabled (ref), parseSurfacing (ref)
-		local t = {}
+	parsePageEntriesFromResponse = function(p1) --[[ Line: 83 ]]
+		-- upvalues: FFlagEnableHomepagePromptsForModalsAndBanners (copy), FFlagPromptsHandlerEnabled (copy), parseSurfacing (copy)
+		local List = {}
 		
 		if p1.page_entries then
-			for i, v in p1.page_entries do
-				local robloxComponent = v.page_entry.roblox_component
-				local value = v.input_data and (v.input_data.kind and v.input_data.kind.value)
-				local identifier = v.page_entry.identifier
-				local var1 = if fFlagEnableHomepagePromptsForModalsAndBanners or fFlagPromptsHandlerEnabled then v.page_entry.category else nil
-				table.insert(t, {
-					robloxComponentType = robloxComponent,
-					identifier = if identifier ~= "" then nil else identifier,
-					componentInputData = value,
-					title = v.page_entry.title,
-					category = if var1 == nil or var1 == "" then nil else var1,
-					surfacing = parseSurfacing(v.page_entry.surfacing)
+			for _, pageEntry in p1.page_entries do
+				local Identifier = pageEntry.page_entry.identifier
+				local Category = if FFlagEnableHomepagePromptsForModalsAndBanners or FFlagPromptsHandlerEnabled then pageEntry.page_entry.category else nil
+				table.insert(List, {
+					robloxComponentType = pageEntry.page_entry.roblox_component,
+					identifier = if Identifier == "" then nil else Identifier,
+					componentInputData = pageEntry.input_data and (pageEntry.input_data.kind and pageEntry.input_data.kind.value),
+					title = pageEntry.page_entry.title,
+					category = if Category == nil or Category == "" then nil else Category,
+					surfacing = parseSurfacing(pageEntry.page_entry.surfacing)
 				})
 			end
 		end
-		return t
+		return List
 	end,
-	parseHydrationDataFromResponse = function(p2)
-		-- upvalues: fFlagSduiHydrationDataCamelCasePropertyKeys (ref), getProtoVariableMapper (ref)
-		local hydrationData = p2.hydration_data
+	parseHydrationDataFromResponse = function(p2) --[[ Line: 115 ]]
+		-- upvalues: FFlagSduiHydrationDataCamelCasePropertyKeys (copy), GetProtoVariableMapperFunction (copy)
+		local HydrationData = p2.hydration_data
 		
-		if hydrationData then
-			for i, v in hydrationData do
-				for i_1, v_1 in v do
-					if not fFlagSduiHydrationDataCamelCasePropertyKeys then
-						for i_4, i_2 in v_1 do
-							v_1[getProtoVariableMapper().mapPropName(i_4)] = i_2
+		if HydrationData then
+			for _, value in HydrationData do
+				for _, value1 in value do
+					if FFlagSduiHydrationDataCamelCasePropertyKeys then
+						local t = {}
+						
+						for i, value2 in value1 do
+							t[GetProtoVariableMapperFunction().mapPropName(i)] = value2
+						end
+						for i1, value3 in t do
+							value1[i1] = value3
+						end
+					else
+						for i2, value4 in value1 do
+							value1[GetProtoVariableMapperFunction().mapPropName(i2)] = value4
 						end
 					end
-					local t = {}
-					
-					for i_2, v_2 in v_1 do
-						t[getProtoVariableMapper().mapPropName(i_2)] = v_2
-					end
-					for i_2, v_2 in t do
-						v_1[i_2] = v_2
-					end
 				end
 			end
-			local var2 = getProtoVariableMapper()
+			local ProtoVariableMapper = GetProtoVariableMapperFunction()
 			local t = {}
 			
-			for i_1, v_1 in hydrationData do
-				if v_1 then
-					t[var2.mapPropName(i_1)] = v_1
+			for i3, value5 in HydrationData do
+				if value5 then
+					t[ProtoVariableMapper.mapPropName(i3)] = value5
 				end
 			end
-			for i_2, v_2 in t do
-				hydrationData[i_2] = v_2
+			for i4, value6 in t do
+				HydrationData[i4] = value6
 			end
 		end
-		return hydrationData
+		return HydrationData
 	end,
-	parseLocalizedLiteralsFromResponse = function(p3)
+	parseLocalizedLiteralsFromResponse = function(p3) --[[ Line: 158 ]]
 		return if p3.localized_literals then p3.localized_literals else nil
 	end,
-	parseTemplateEntriesFromResponse = function(value, p3)
+	parseTemplateEntriesFromResponse = function(p3, p4) --[[ Line: 173 ]]
+		local Templates = {}
+		local Templates1 = {}
 		local t = {}
-		local t_1 = {}
-		local t_2 = {}
 		
-		if value.templates then
-			for i, v in value.templates do
-				t_1[v.roblox_component] = v.template
+		if p3.templates then
+			for i, template in p3.templates do
+				Templates1[template.roblox_component] = template.template
 				
-				if p3 then
-					t_2[v.roblox_component] = i
+				if p4 then
+					t[template.roblox_component] = i
 				end
-				t[i] = v.template
+				Templates[i] = template.template
 			end
 		end
-		return t, t_1, t_2
+		return Templates, Templates1, t
 	end
 }

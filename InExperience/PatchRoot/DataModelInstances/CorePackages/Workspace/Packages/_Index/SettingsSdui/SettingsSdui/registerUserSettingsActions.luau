@@ -1,16 +1,16 @@
-﻿local settingsSdui = script:FindFirstAncestor("SettingsSdui")
-local sduiCoreSystemModule = require(settingsSdui.Parent.SduiCoreSystem)
-local sduiActionType = sduiCoreSystemModule.SduiActionType
-local getSduiActionHandlerRegistry = sduiCoreSystemModule.getSduiActionHandlerRegistry
+﻿local SettingsSdui = script:FindFirstAncestor("SettingsSdui")
+local SduiCoreSystemModule = require(SettingsSdui.Parent.SduiCoreSystem)
+local SduiActionType = SduiCoreSystemModule.SduiActionType
+local GetSduiActionHandlerRegistryFunction = SduiCoreSystemModule.getSduiActionHandlerRegistry
 
-return function()
-	-- upvalues: sduiActionType (ref), settingsSdui (ref), getSduiActionHandlerRegistry (ref)
-	getSduiActionHandlerRegistry().registerActionHandlerConfigs({
-		[sduiActionType.UpdateUserSettings] = {
+return function() --[[ Line: 11 | Named "registerUserSettingsActions" ]]
+	-- upvalues: SduiActionType (copy), SettingsSdui (copy), GetSduiActionHandlerRegistryFunction (copy)
+	GetSduiActionHandlerRegistryFunction().registerActionHandlerConfigs({
+		[SduiActionType.UpdateUserSettings] = {
 			skipUnifiedLogging = false,
-			lazyHandler = function()
-				-- upvalues: settingsSdui (copy)
-				return require(settingsSdui.SduiUpdateUserSettingsAction)
+			lazyHandler = function() --[[ Line: 14 ]]
+				-- upvalues: SettingsSdui (upval)
+				return require(SettingsSdui.SduiUpdateUserSettingsAction)
 			end
 		}
 	})

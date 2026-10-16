@@ -1,36 +1,37 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor").Parent
-local cFrameUtility = require(parent.Thumbnailing).CFrameUtility
-local cameraUtility = require(parent.Thumbnailing).CameraUtility
-local characterUtility = require(parent.Thumbnailing).CharacterUtility
-local constantsModule = require(script.Parent.Parent.Constants)
-local computeCutoutFieldOfViewDegModule = require(script.Parent.computeCutoutFieldOfViewDeg)
-local computeFocusAngleAboveCenterRadModule = require(script.Parent.computeFocusAngleAboveCenterRad)
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor").Parent
+local CFrameUtility = require(Parent.Thumbnailing).CFrameUtility
+local CameraUtility = require(Parent.Thumbnailing).CameraUtility
+local CharacterUtility = require(Parent.Thumbnailing).CharacterUtility
+local ConstantsModule = require(script.Parent.Parent.Constants)
+local ComputeCutoutFieldOfViewDegModule = require(script.Parent.computeCutoutFieldOfViewDeg)
+local ComputeFocusAngleAboveCenterRadModule = require(script.Parent.computeFocusAngleAboveCenterRad)
 
-return function(p1)
-	-- upvalues: constantsModule (ref), computeCutoutFieldOfViewDegModule (ref), computeFocusAngleAboveCenterRadModule (ref), cFrameUtility (ref), characterUtility (ref), cameraUtility (ref)
-	local character = p1.character
-	local head = character:FindFirstChild("Head")
+return function(p1): CFrame? --[[ Line: 32 | Named "frameCloseupPreviewCamera" ]]
+	-- upvalues: ConstantsModule (copy), ComputeCutoutFieldOfViewDegModule (copy), ComputeFocusAngleAboveCenterRadModule (copy), CFrameUtility (copy), CharacterUtility (copy), CameraUtility (copy)
+	local Character = p1.character
+	local Head = Character:FindFirstChild("Head")
 	
-	if head and head:IsA("BasePart") then
-		local layout = p1.layout
-		local fieldOfViewDeg = p1.fieldOfViewDeg or constantsModule.CameraFieldOfViewDeg
-		local fieldOfViewForDistanceScaleDeg = p1.fieldOfViewForDistanceScaleDeg or computeCutoutFieldOfViewDegModule({
-			viewportHeightPix = layout.viewportHeight,
-			cutoutTopOffsetPix = layout.cutoutTopOffset,
-			cutoutDiameterPix = layout.cutoutDiameter,
-			cameraFieldOfViewDeg = fieldOfViewDeg
+	if Head and Head:IsA("BasePart") then
+		local Layout = p1.layout
+		local FieldOfViewDeg = p1.fieldOfViewDeg or ConstantsModule.CameraFieldOfViewDeg
+		local FieldOfViewForDistanceScaleDeg = p1.fieldOfViewForDistanceScaleDeg or ComputeCutoutFieldOfViewDegModule({
+			viewportHeightPix = Layout.viewportHeight,
+			cutoutTopOffsetPix = Layout.cutoutTopOffset,
+			cutoutDiameterPix = Layout.cutoutDiameter,
+			cameraFieldOfViewDeg = FieldOfViewDeg
 		})
-		local var1 = computeFocusAngleAboveCenterRadModule({
-			viewportHeightPix = layout.viewportHeight,
-			cutoutTopOffsetPix = layout.cutoutTopOffset,
-			cutoutDiameterPix = layout.cutoutDiameter,
-			cameraFieldOfViewDeg = fieldOfViewDeg
+		local FocusAngleAboveCenterRadModule = ComputeFocusAngleAboveCenterRadModule({
+			viewportHeightPix = Layout.viewportHeight,
+			cutoutTopOffsetPix = Layout.cutoutTopOffset,
+			cutoutDiameterPix = Layout.cutoutDiameter,
+			cameraFieldOfViewDeg = FieldOfViewDeg
 		})
-		local var2 = cFrameUtility.CalculateTargetCFrame(head.CFrame)
-		local var3, var4 = characterUtility.CalculateHeadExtents(character, var2)
-		local var5 = var2 + Vector3.new(0, (var3.Y + var4.Y) / 2, 0)
+		local TargetCFrame = CFrameUtility.CalculateTargetCFrame(Head.CFrame)
+		local HeadExtents, HeadExtents2 = CharacterUtility.CalculateHeadExtents(Character, TargetCFrame)
+		local NewTargetCFrame = TargetCFrame + Vector3.new(0, (HeadExtents.Y + HeadExtents2.Y) / 2, 0)
 		
-		return CFrame.lookAt((var5 * CFrame.Angles(0, math.rad(p1.yRotDeg), 0) * CFrame.new(0, 0, -(cameraUtility.CalculateBaseDistanceToCamera(math.rad(fieldOfViewForDistanceScaleDeg), var3, var4, cameraUtility.DefaultHeadMarginScale) * p1.distanceScale))).Position, var5.Position) * CFrame.fromEulerAnglesXYZ(-var1, 0, 0)
+		return CFrame.lookAt((NewTargetCFrame * CFrame.Angles(0, math.rad(p1.yRotDeg), 0) * CFrame.new(0, 0, -(CameraUtility.CalculateBaseDistanceToCamera(math.rad(FieldOfViewForDistanceScaleDeg), HeadExtents, HeadExtents2, CameraUtility.DefaultHeadMarginScale) * p1.distanceScale))).Position, NewTargetCFrame.Position) * CFrame.fromEulerAnglesXYZ(-FocusAngleAboveCenterRadModule, 0, 0)
+	else
+		return nil
 	end
-	return nil
 end

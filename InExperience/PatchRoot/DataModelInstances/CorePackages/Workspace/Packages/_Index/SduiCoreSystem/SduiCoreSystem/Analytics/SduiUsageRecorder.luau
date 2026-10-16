@@ -1,206 +1,201 @@
-﻿local sduiUsageAnalyticsModule = require(script:FindFirstAncestor("SduiCoreSystem").Analytics.SduiUsageAnalytics)
-local var1 = math.random(10000) <= game:DefineFastInt("DiscoverySduiTypeUsageHundredthsPercent", 0)
-local var2 = math.random(10000) <= game:DefineFastInt("DiscoverySduiParamUsageHundredthsPercent", 0)
+﻿local SduiUsageAnalyticsModule = require(script:FindFirstAncestor("SduiCoreSystem").Analytics.SduiUsageAnalytics)
+local IsRandomValueBelow = math.random(10000) <= game:DefineFastInt("DiscoverySduiTypeUsageHundredthsPercent", 0)
+local IsRandomValueBelow1 = math.random(10000) <= game:DefineFastInt("DiscoverySduiParamUsageHundredthsPercent", 0)
 local t = {}
-local t_1 = {}
+local t1 = {}
 
-local function getOrCreateAccumulator(p1, p2)
-	-- upvalues: t (write)
-	local var3 = t[p1]
+local function getOrCreateAccumulator(Key, Key1) --[[ Line: 66 ]]
+	-- upvalues: t (ref)
+	local Entry = t[Key]
 	
-	if not var3 then
-		var3 = {}
-		t[p1] = var3
+	if not Entry then
+		Entry = {}
+		t[Key] = Entry
 	end
-	local var4 = var3[p2]
+	local Entry1 = Entry[Key1]
 	
-	if var4 then
-		return var4
+	if Entry1 then
+		return Entry1
+	else
+		local config = {
+			hasRecorded = false,
+			types = {},
+			props = {},
+			actionTypes = {},
+			actionParams = {}
+		}
+		Entry[Key1] = config
+		
+		return config
 	end
-	local t_1 = {
-		hasRecorded = false,
-		types = {},
-		props = {},
-		actionTypes = {},
-		actionParams = {}
-	}
-	var3[p2] = t_1
-	
-	return t_1
 end
 
-local function getOrCreateGlobalSeen(p1, p2)
-	-- upvalues: t_1 (write)
-	local var3 = t_1[p1]
+local function getOrCreateGlobalSeen(Page, Version) --[[ Line: 87 ]]
+	-- upvalues: t1 (ref)
+	local Entry = t1[Page]
 	
-	if not var3 then
-		var3 = {}
-		t_1[p1] = var3
+	if not Entry then
+		Entry = {}
+		t1[Page] = Entry
 	end
-	local var4 = var3[p2]
+	local Entry1 = Entry[Version]
 	
-	if var4 then
-		return var4
+	if Entry1 then
+		return Entry1
+	else
+		local config = {
+			types = {},
+			props = {},
+			actionTypes = {},
+			actionParams = {}
+		}
+		Entry[Version] = config
+		
+		return config
 	end
-	local t = {
-		types = {},
-		props = {},
-		actionTypes = {},
-		actionParams = {}
-	}
-	var3[p2] = t
-	
-	return t
 end
 
-local function deltaAndCommit(p1, p2)
+local function deltaAndCommit(ActionParams, ActionParams1) --[[ Line: 108 ]]
 	local t = {}
 	
-	for i, v in p1 do
-		if not p2[i] then
+	for i, _ in ActionParams do
+		if not ActionParams1[i] then
 			t[i] = true
-			p2[i] = true
+			ActionParams1[i] = true
 		end
 	end
 	return t
 end
 
-local function recordComponentType(p3, p4, p5)
-	-- upvalues: var1 (write), getOrCreateAccumulator (ref)
-	if not var1 or not p5 then return end
-	local var3 = getOrCreateAccumulator(p3, p4)
+local function flushPageVersion(Page, Version) --[[ Line: 165 ]]
+	-- upvalues: t (ref), getOrCreateGlobalSeen (copy), deltaAndCommit (copy), SduiUsageAnalyticsModule (copy)
+	local Entry = t[Page]
+	local Entry1 = Entry and Entry[Version]
 	
-	if not var3.types[p5] then
-		var3.types[p5] = true
-		var3.hasRecorded = true
+	if not Entry1 or not Entry1.hasRecorded then return end
+	local OrCreateGlobalSeen = getOrCreateGlobalSeen(Page, Version)
+	local DeltaAndCommitResult = deltaAndCommit(Entry1.types, OrCreateGlobalSeen.types)
+	local DeltaAndCommitResult1 = deltaAndCommit(Entry1.props, OrCreateGlobalSeen.props)
+	local DeltaAndCommitResult2 = deltaAndCommit(Entry1.actionTypes, OrCreateGlobalSeen.actionTypes)
+	local DeltaAndCommitResult3 = deltaAndCommit(Entry1.actionParams, OrCreateGlobalSeen.actionParams)
+	Entry[Version] = nil
+	
+	if next(Entry) == nil then
+		t[Page] = nil
 	end
-end
-
-local function recordProp(p3, p4, p5, p6)
-	-- upvalues: var2 (write), getOrCreateAccumulator (ref)
-	if not var2 or not p5 or not p6 then return end
-	local var3 = getOrCreateAccumulator(p3, p4)
-	local var4 = `{p5}.{p6}`
-	
-	if not var3.props[var4] then
-		var3.props[var4] = true
-		var3.hasRecorded = true
-	end
-end
-
-local function recordActionType(p3, p4, p5)
-	-- upvalues: var1 (write), getOrCreateAccumulator (ref)
-	if not var1 or not p5 then return end
-	local var3 = getOrCreateAccumulator(p3, p4)
-	
-	if not var3.actionTypes[p5] then
-		var3.actionTypes[p5] = true
-		var3.hasRecorded = true
-	end
-end
-
-local function recordActionParam(p3, p4, p5, p6)
-	-- upvalues: var2 (write), getOrCreateAccumulator (ref)
-	if not var2 or not p5 or not p6 then return end
-	local var3 = getOrCreateAccumulator(p3, p4)
-	local var4 = `{p5}.{p6}`
-	
-	if not var3.actionParams[var4] then
-		var3.actionParams[var4] = true
-		var3.hasRecorded = true
-	end
-end
-
-local function flushPageVersion(p3, p4)
-	-- upvalues: t (write), getOrCreateGlobalSeen (ref), deltaAndCommit (ref), sduiUsageAnalyticsModule (ref)
-	local var3 = t[p3]
-	local var4 = var3 and var3[p4]
-	
-	if not var4 or not var4.hasRecorded then return end
-	local var5 = getOrCreateGlobalSeen(p3, p4)
-	local var6 = deltaAndCommit(var4.types, var5.types)
-	local var7 = deltaAndCommit(var4.props, var5.props)
-	local var8 = deltaAndCommit(var4.actionTypes, var5.actionTypes)
-	local var9 = deltaAndCommit(var4.actionParams, var5.actionParams)
-	var3[p4] = nil
-	
-	if next(var3) == nil then
-		t[p3] = nil
-	end
-	if next(var6) ~= nil or next(var8) ~= nil then
-		sduiUsageAnalyticsModule.sendTypeUsageEvent({
-			page = p3,
-			version = p4,
-			componentTypes = var6,
-			actionTypes = var8
+	if next(DeltaAndCommitResult) ~= nil or next(DeltaAndCommitResult2) ~= nil then
+		SduiUsageAnalyticsModule.sendTypeUsageEvent({
+			page = Page,
+			version = Version,
+			componentTypes = DeltaAndCommitResult,
+			actionTypes = DeltaAndCommitResult2
 		})
 	end
-	if next(var7) ~= nil or next(var9) ~= nil then
-		sduiUsageAnalyticsModule.sendParamUsageEvent({
-			page = p3,
-			version = p4,
-			props = var7,
-			actionParams = var9
+	if next(DeltaAndCommitResult1) ~= nil or next(DeltaAndCommitResult3) ~= nil then
+		SduiUsageAnalyticsModule.sendParamUsageEvent({
+			page = Page,
+			version = Version,
+			props = DeltaAndCommitResult1,
+			actionParams = DeltaAndCommitResult3
 		})
 	end
 end
 
-local function flushAll()
-	-- upvalues: t (write), flushPageVersion (ref)
-	local t_1 = {}
+local function flushAll() --[[ Line: 204 ]]
+	-- upvalues: t (ref), flushPageVersion (copy)
+	local List = {}
 	
-	for i, v in t do
-		for i_1, v_1 in v do
-			table.insert(t_1, { page = i, version = i_1 })
+	for Page, value in t do
+		for Version, _ in value do
+			table.insert(List, { page = Page, version = Version })
 		end
 	end
-	for i_1, v_1 in t_1 do
-		flushPageVersion(v_1.page, v_1.version)
+	for _, value1 in List do
+		flushPageVersion(value1.page, value1.version)
 	end
 end
 
-local var3 = 1
-local var4 = false
+local Delay = 1
+local Flag = false
 
 return {
-	recordComponentType = recordComponentType,
-	recordProp = recordProp,
-	recordActionType = recordActionType,
-	recordActionParam = recordActionParam,
-	scheduleFlush = function()
-		-- upvalues: var4 (write), var3 (write), flushAll (ref)
-		if var4 then
+	recordComponentType = function(p1, p2, p3) --[[ Line: 119 ]]
+		-- upvalues: IsRandomValueBelow (ref), getOrCreateAccumulator (copy)
+		if not IsRandomValueBelow or not p3 then return end
+		local OrCreateAccumulator = getOrCreateAccumulator(p1, p2)
+		
+		if not OrCreateAccumulator.types[p3] then
+			OrCreateAccumulator.types[p3] = true
+			OrCreateAccumulator.hasRecorded = true
+		end
+	end,
+	recordProp = function(p1, p2, p3, p4) --[[ Line: 130 ]]
+		-- upvalues: IsRandomValueBelow1 (ref), getOrCreateAccumulator (copy)
+		if not IsRandomValueBelow1 or not p3 or not p4 then return end
+		local OrCreateAccumulator = getOrCreateAccumulator(p1, p2)
+		local Text: string = `{p3}.{p4}`
+		
+		if not OrCreateAccumulator.props[Text] then
+			OrCreateAccumulator.props[Text] = true
+			OrCreateAccumulator.hasRecorded = true
+		end
+	end,
+	recordActionType = function(p1, p2, p3) --[[ Line: 142 ]]
+		-- upvalues: IsRandomValueBelow (ref), getOrCreateAccumulator (copy)
+		if not IsRandomValueBelow or not p3 then return end
+		local OrCreateAccumulator = getOrCreateAccumulator(p1, p2)
+		
+		if not OrCreateAccumulator.actionTypes[p3] then
+			OrCreateAccumulator.actionTypes[p3] = true
+			OrCreateAccumulator.hasRecorded = true
+		end
+	end,
+	recordActionParam = function(p1, p2, p3, p4) --[[ Line: 153 ]]
+		-- upvalues: IsRandomValueBelow1 (ref), getOrCreateAccumulator (copy)
+		if not IsRandomValueBelow1 or not p3 or not p4 then return end
+		local OrCreateAccumulator = getOrCreateAccumulator(p1, p2)
+		local Text: string = `{p3}.{p4}`
+		
+		if not OrCreateAccumulator.actionParams[Text] then
+			OrCreateAccumulator.actionParams[Text] = true
+			OrCreateAccumulator.hasRecorded = true
+		end
+	end,
+	scheduleFlush = function() --[[ Line: 221 ]]
+		-- upvalues: Flag (ref), Delay (ref), flushAll (copy)
+		if not Flag then
+			Flag = true
+			task.delay(Delay, function() --[[ Line: 226 ]]
+				-- upvalues: Flag (upval), flushAll (upval)
+				Flag = false
+				flushAll()
+			end)
+			
 			return
 		end
-		var4 = true
-		task.delay(var3, function()
-			-- upvalues: var4 (copy), flushAll (copy)
-			var4 = false
-			flushAll()
-		end)
 	end,
-	isTypeSamplingEnabled = function()
-		-- upvalues: var1 (write)
-		return var1
+	isTypeSamplingEnabled = function() --[[ Line: 232 ]]
+		-- upvalues: IsRandomValueBelow (ref)
+		return IsRandomValueBelow
 	end,
-	isParamSamplingEnabled = function()
-		-- upvalues: var2 (write)
-		return var2
+	isParamSamplingEnabled = function() --[[ Line: 236 ]]
+		-- upvalues: IsRandomValueBelow1 (ref)
+		return IsRandomValueBelow1
 	end,
 	_flushAllForTesting = flushAll,
-	_resetAllForTesting = function()
-		-- upvalues: t (write), t_1 (write), var4 (write)
+	_resetAllForTesting = function() --[[ Line: 240 ]]
+		-- upvalues: t (ref), t1 (ref), Flag (ref)
 		t = {}
-		t_1 = {}
-		var4 = false
+		t1 = {}
+		Flag = false
 	end,
-	_setSamplingForTesting = function(value, p3)
-		-- upvalues: var1 (write), var2 (write)
-		var1 = value
-		var2 = p3
+	_setSamplingForTesting = function(p1, p2) --[[ Line: 246 ]]
+		-- upvalues: IsRandomValueBelow (ref), IsRandomValueBelow1 (ref)
+		IsRandomValueBelow = p1
+		IsRandomValueBelow1 = p2
 	end,
-	_setFlushDelayForTesting = function(value)
-		-- upvalues: var3 (write)
-		var3 = value
+	_setFlushDelayForTesting = function(p1) --[[ Line: 251 ]]
+		-- upvalues: Delay (ref)
+		Delay = p1
 	end
 }

@@ -1,8 +1,8 @@
-﻿local chatPlacementContextModule = require(script:FindFirstAncestor("AppChat").Contexts.ChatPlacementContext)
-local useChatPlacementContext = chatPlacementContextModule.useChatPlacementContext
-local isPlacementInExperience = chatPlacementContextModule.isPlacementInExperience
+﻿local ChatPlacementContextModule = require(script:FindFirstAncestor("AppChat").Contexts.ChatPlacementContext)
+local UseChatPlacementContextFunction = ChatPlacementContextModule.useChatPlacementContext
+local IsPlacementInExperienceFunction = ChatPlacementContextModule.isPlacementInExperience
 
-return function(_)
-	-- upvalues: useChatPlacementContext (ref), isPlacementInExperience (ref)
-	return if isPlacementInExperience(useChatPlacementContext().chatPlacement) then nil else 0
+return function(_) --[[ Line: 12 ]]
+	-- upvalues: UseChatPlacementContextFunction (copy), IsPlacementInExperienceFunction (copy)
+	return if not IsPlacementInExperienceFunction(UseChatPlacementContextFunction().chatPlacement) then nil else 0
 end

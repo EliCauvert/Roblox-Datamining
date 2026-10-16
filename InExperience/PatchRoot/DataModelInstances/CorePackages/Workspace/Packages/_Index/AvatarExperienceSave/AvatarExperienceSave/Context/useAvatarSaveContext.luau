@@ -1,10 +1,10 @@
-﻿local reactModule = require(script:FindFirstAncestor("AvatarExperienceSave").Parent.React)
-local avatarSaveContextModule = require(script.Parent.AvatarSaveContext)
+﻿local ReactModule = require(script:FindFirstAncestor("AvatarExperienceSave").Parent.React)
+local AvatarSaveContextModule = require(script.Parent.AvatarSaveContext)
 
-return function()
-	-- upvalues: reactModule (ref), avatarSaveContextModule (ref)
-	local var1 = reactModule.useContext(avatarSaveContextModule)
-	assert(var1, "useAvatarSaveContext returned nil, usually this means the AvatarSaveContextProvider is not present in the tree")
+return function() --[[ Line: 7 | Named "useAvatarSaveContext" ]]
+	-- upvalues: ReactModule (copy), AvatarSaveContextModule (copy)
+	local UseContextResult = ReactModule.useContext(AvatarSaveContextModule)
+	assert(UseContextResult, "useAvatarSaveContext returned nil, usually this means the AvatarSaveContextProvider is not present in the tree")
 	
-	return var1
+	return UseContextResult
 end

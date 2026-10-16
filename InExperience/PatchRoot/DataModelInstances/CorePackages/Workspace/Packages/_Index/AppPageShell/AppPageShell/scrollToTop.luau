@@ -1,29 +1,31 @@
-﻿local guiService = game:GetService("GuiService")
-local tweenService = game:GetService("TweenService")
-local userGameSettingsService = UserSettings():GetService("UserGameSettings")
-local responsiveModule = require(script:FindFirstAncestor("AppPageShell").Parent.Responsive)
+﻿local GuiService = game:GetService("GuiService")
+local TweenService = game:GetService("TweenService")
+local UserGameSettings = UserSettings():GetService("UserGameSettings")
+local ResponsiveModule = require(script:FindFirstAncestor("AppPageShell").Parent.Responsive)
 
-return function(p1)
-	-- upvalues: userGameSettingsService (ref), responsiveModule (ref), tweenService (ref), guiService (ref)
-	if userGameSettingsService.ReducedMotion then
-		p1.CanvasPosition = Vector2.new(0, 0)
+return function(Target) --[[ Line: 18 | Named "scrollToTop" ]]
+	-- upvalues: UserGameSettings (copy), ResponsiveModule (copy), TweenService (copy), GuiService (copy)
+	if UserGameSettings.ReducedMotion then
+		Target.CanvasPosition = Vector2.new(0, 0)
 		
 		return
-	elseif responsiveModule.GetInputModeStore(false).getLastInputType(false) == responsiveModule.Input.Directional then
-		local var1 = tweenService:Create(p1, TweenInfo.new(0.3), { CanvasPosition = Vector2.new(0, 0) })
-		var1:Play()
-		var1.Completed:Connect(function()
-			-- upvalues: guiService (copy), p1 (ref)
-			guiService:Select(p1)
-			task.defer(function()
-				-- upvalues: p1 (copy), guiService (copy)
-				if p1.Parent ~= nil then
-					guiService:Select(p1)
+	end
+	if ResponsiveModule.GetInputModeStore(false).getLastInputType(false) == ResponsiveModule.Input.Directional then
+		local Tween = TweenService:Create(Target, TweenInfo.new(0.3), { CanvasPosition = Vector2.new(0, 0) })
+		Tween:Play()
+		Tween.Completed:Connect(function() --[[ Line: 26 ]]
+			-- upvalues: GuiService (upval), Target (copy)
+			GuiService:Select(Target)
+			task.defer(function() --[[ Line: 29 ]]
+				-- upvalues: Target (upval), GuiService (upval)
+				if Target.Parent ~= nil then
+					GuiService:Select(Target)
 				end
 			end)
 		end)
 		
 		return
+	else
+		Target:ScrollToTop()
 	end
-	p1:ScrollToTop()
 end

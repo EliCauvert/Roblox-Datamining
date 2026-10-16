@@ -1,37 +1,36 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local momentsCommonModule = require(parent.MomentsCommon)
-local button = foundationModule.Button
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local inputSize = foundationModule.Enums.InputSize
-local view = foundationModule.View
-local mediaPreviewModule = require(script.Parent.MediaPreview)
-local captureGridItemModule = require(script.Parent.CaptureGridItem)
-local useCaptureSelectionViewModelModule = require(script.Parent.useCaptureSelectionViewModel)
-local scrollingGridView = momentsCommonModule.ScrollingGridView
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local Button = FoundationModule.Button
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local InputSize = FoundationModule.Enums.InputSize
+local View = FoundationModule.View
+local MediaPreviewModule = require(script.Parent.MediaPreview)
+local CaptureGridItemModule = require(script.Parent.CaptureGridItem)
+local UseCaptureSelectionViewModelModule = require(script.Parent.useCaptureSelectionViewModel)
+local ScrollingGridView = require(Parent.MomentsCommon).ScrollingGridView
 
-local function renderEmptyState()
-	-- upvalues: reactModule (ref), view (ref)
-	return reactModule.createElement(view, { tag = "align-x-center align-y-center size-full" })
+local function renderEmptyState() --[[ Line: 26 ]]
+	-- upvalues: ReactModule (copy), View (copy)
+	return ReactModule.createElement(View, { tag = "align-x-center align-y-center size-full" })
 end
 
-local function CaptureSelectionView(p1)
-	-- upvalues: reactModule (ref), captureGridItemModule (ref), view (ref), mediaPreviewModule (ref), scrollingGridView (ref), renderEmptyState (ref), button (ref), foundationModule (ref), inputSize (ref), buttonVariant (ref)
-	return reactModule.createElement(view, { tag = "col gap-medium size-full padding-large" }, {
-		Preview = reactModule.createElement(view, {
+local function CaptureSelectionView(p1) --[[ Line: 37 ]]
+	-- upvalues: ReactModule (copy), CaptureGridItemModule (copy), View (copy), MediaPreviewModule (copy), ScrollingGridView (copy), renderEmptyState (copy), Button (copy), FoundationModule (copy), InputSize (copy), ButtonVariant (copy)
+	return ReactModule.createElement(View, { tag = "col gap-medium size-full padding-large" }, {
+		Preview = ReactModule.createElement(View, {
 			LayoutOrder = 1,
 			tag = "align-x-center align-y-center size-full-0 padding-x-xlarge",
 			Size = UDim2.new(1, 0, 0.4, 0)
 		}, {
-			PreviewContent = reactModule.createElement(mediaPreviewModule, {
+			PreviewContent = ReactModule.createElement(MediaPreviewModule, {
 				mediaType = "image",
 				isIcon = false,
 				imageContent = p1.previewContent
 			})
 		}),
-		CaptureGrid = reactModule.createElement(view, { LayoutOrder = 2, tag = "fill size-full" }, {
-			Grid = reactModule.createElement(scrollingGridView, {
+		CaptureGrid = ReactModule.createElement(View, { LayoutOrder = 2, tag = "fill size-full" }, {
+			Grid = ReactModule.createElement(ScrollingGridView, {
 				aspectRatio = 1,
 				layoutOrder = 1,
 				showMoreButtonText = "Show More",
@@ -44,34 +43,34 @@ local function CaptureSelectionView(p1)
 				items = p1.captures,
 				onShowMoreCallback = p1.onShowMore,
 				renderEmptyState = renderEmptyState,
-				renderItem = reactModule.useCallback(function(p2, _)
-					-- upvalues: reactModule (copy), captureGridItemModule (copy), p1 (ref)
-					return reactModule.createElement(captureGridItemModule, {
-						capture = p2,
-						isSelected = p1.selectedCapture == p2,
+				renderItem = ReactModule.useCallback(function(Capture, _) --[[ Line: 38 ]]
+					-- upvalues: ReactModule (upval), CaptureGridItemModule (upval), p1 (copy)
+					return ReactModule.createElement(CaptureGridItemModule, {
+						capture = Capture,
+						isSelected = p1.selectedCapture == Capture,
 						onActivated = p1.onCaptureSelected
 					})
 				end, { p1.selectedCapture, p1.onCaptureSelected }),
 				shouldShowShowMoreButton = not p1.isFinished
 			})
 		}),
-		ConfirmButton = reactModule.createElement(view, { LayoutOrder = 3, tag = "size-full-0 auto-y" }, {
-			Button = reactModule.createElement(button, {
+		ConfirmButton = ReactModule.createElement(View, { LayoutOrder = 3, tag = "size-full-0 auto-y" }, {
+			Button = ReactModule.createElement(Button, {
 				text = "Continue",
-				fillBehavior = foundationModule.Enums.FillBehavior.Fill,
+				fillBehavior = FoundationModule.Enums.FillBehavior.Fill,
 				isDisabled = p1.selectedCapture == nil,
 				onActivated = p1.onConfirm,
-				size = inputSize.Medium,
-				variant = buttonVariant.Emphasis
+				size = InputSize.Medium,
+				variant = ButtonVariant.Emphasis
 			})
 		})
 	})
 end
 
-return function(p1)
-	-- upvalues: useCaptureSelectionViewModelModule (ref), reactModule (ref), CaptureSelectionView (ref)
-	return reactModule.createElement(CaptureSelectionView, useCaptureSelectionViewModelModule({
+return function(p1) --[[ Line: 99 | Named "CaptureSelectionContainer" ]]
+	-- upvalues: UseCaptureSelectionViewModelModule (copy), ReactModule (copy), CaptureSelectionView (copy)
+	return ReactModule.createElement(CaptureSelectionView, (UseCaptureSelectionViewModelModule({
 		captureSource = p1.captureSource,
 		onCaptureConfirmed = p1.onCaptureConfirmed
-	}))
+	})))
 end

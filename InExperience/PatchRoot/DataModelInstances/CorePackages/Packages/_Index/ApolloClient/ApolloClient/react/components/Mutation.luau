@@ -1,15 +1,14 @@
-﻿local t = {}
-local parent = script.Parent.Parent.Parent
-local boolean = require(parent.Parent.LuauPolyfill).Boolean
-local _ = require(parent.core)
+﻿local Parent = script.Parent.Parent.Parent
+local Boolean = require(Parent.Parent.LuauPolyfill).Boolean
+local _ = require(Parent.core)
 local _ = require(script.Parent.types)
-local useMutation = require(script.Parent.Parent.hooks).useMutation
+local UseMutationFunction = require(script.Parent.Parent.hooks).useMutation
 
-function t.Mutation(p1)
-	-- upvalues: useMutation (ref), boolean (ref)
-	local unpacked, unpacked_1 = table.unpack(useMutation(p1.mutation, p1), 1, 2)
-	
-	return if boolean.toJSBoolean(p1.children) then p1.children(unpacked, unpacked_1) else nil
-end
-
-return t
+return {
+	Mutation = function(p1) --[[ Line: 31 ]]
+		-- upvalues: UseMutationFunction (copy), Boolean (copy)
+		local Unpacked, Unpacked2 = table.unpack(UseMutationFunction(p1.mutation, p1), 1, 2)
+		
+		return if Boolean.toJSBoolean(p1.children) then p1.children(Unpacked, Unpacked2) else nil
+	end
+}

@@ -1,65 +1,67 @@
-﻿local teleportService = game:GetService("TeleportService")
-local inExperienceDetailsPrompt = script:FindFirstAncestor("InExperienceDetailsPrompt")
-local parent = inExperienceDetailsPrompt.Parent
-local reactModule = require(parent.React)
-local inExperienceDetailsPromptContainerModule = require(inExperienceDetailsPrompt.Features.InExperienceDetailsPromptContainer)
-local fireInExperienceDetailsPromptOpenedEvent = require(parent.DiscoveryAnalytics).Events.fireInExperienceDetailsPromptOpenedEvent
-local discoveryEventErrorLogger = require(parent.DiscoveryUtils).DiscoveryEventErrorLogger
-local fFlagLuaAppIedpOverlayAndNavigationFix = require(parent.SharedFlags).FFlagLuaAppIedpOverlayAndNavigationFix
+﻿local TeleportService = game:GetService("TeleportService")
+local InExperienceDetailsPrompt = script:FindFirstAncestor("InExperienceDetailsPrompt")
+local Parent = InExperienceDetailsPrompt.Parent
+local ReactModule = require(Parent.React)
+local InExperienceDetailsPromptContainerModule = require(InExperienceDetailsPrompt.Features.InExperienceDetailsPromptContainer)
+local FireInExperienceDetailsPromptOpenedEventFunction = require(Parent.DiscoveryAnalytics).Events.fireInExperienceDetailsPromptOpenedEvent
+local DiscoveryEventErrorLogger = require(Parent.DiscoveryUtils).DiscoveryEventErrorLogger
+local FFlagLuaAppIedpOverlayAndNavigationFix = require(Parent.SharedFlags).FFlagLuaAppIedpOverlayAndNavigationFix
 
-return function()
-	-- upvalues: reactModule (ref), teleportService (ref), fireInExperienceDetailsPromptOpenedEvent (ref), discoveryEventErrorLogger (ref), fFlagLuaAppIedpOverlayAndNavigationFix (ref), inExperienceDetailsPromptContainerModule (ref)
-	local var1, var2 = reactModule.useState(nil)
-	local var3, var4 = reactModule.useState(false)
-	reactModule.useEffect(function()
-		-- upvalues: teleportService (copy), var2 (ref), var4 (ref), fireInExperienceDetailsPromptOpenedEvent (copy)
-		local openExperienceDetailsPromptConnection = teleportService.OpenExperienceDetailsPrompt:Connect(function(p1)
-			-- upvalues: var2 (copy), var4 (copy), fireInExperienceDetailsPromptOpenedEvent (copy)
-			var2(tostring(p1))
-			var4(true)
-			fireInExperienceDetailsPromptOpenedEvent({ targetUniverseId = tostring(p1) })
+return function() --[[ Line: 15 | Named "InExperienceDetailsPromptApp" ]]
+	-- upvalues: ReactModule (copy), TeleportService (copy), FireInExperienceDetailsPromptOpenedEventFunction (copy), DiscoveryEventErrorLogger (copy), FFlagLuaAppIedpOverlayAndNavigationFix (copy), InExperienceDetailsPromptContainerModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
+	ReactModule.useEffect(function() --[[ Line: 19 ]]
+		-- upvalues: TeleportService (upval), UseStateResult2 (copy), UseStateResult2_1 (copy), FireInExperienceDetailsPromptOpenedEventFunction (upval)
+		local OpenExperienceDetailsPromptConnection = TeleportService.OpenExperienceDetailsPrompt:Connect(function(UniverseId) --[[ Line: 20 ]]
+			-- upvalues: UseStateResult2 (upval), UseStateResult2_1 (upval), FireInExperienceDetailsPromptOpenedEventFunction (upval)
+			UseStateResult2((tostring(UniverseId)))
+			UseStateResult2_1(true)
+			FireInExperienceDetailsPromptOpenedEventFunction({ targetUniverseId = tostring(UniverseId) })
 		end)
 		
-		return function()
-			-- upvalues: openExperienceDetailsPromptConnection (ref)
-			if openExperienceDetailsPromptConnection then
-				openExperienceDetailsPromptConnection:Disconnect()
+		return function() --[[ Line: 27 ]]
+			-- upvalues: OpenExperienceDetailsPromptConnection (copy)
+			if OpenExperienceDetailsPromptConnection then
+				OpenExperienceDetailsPromptConnection:Disconnect()
 			end
 		end
 	end, {})
 	
-	if not var3 or not var1 then
+	if UseStateResult1 and UseStateResult then
+		local function _() --[[ Line: 38 | Named "closePrompt" ]]
+			-- upvalues: UseStateResult2 (copy), UseStateResult2_1 (copy)
+			UseStateResult2(nil)
+			UseStateResult2_1(false)
+		end
+		
+		local config = {
+			universeId = UseStateResult,
+			onJoin = function(PlaceId) --[[ Line: 45 ]]
+				-- upvalues: TeleportService (upval), UseStateResult2 (copy), UseStateResult2_1 (copy), DiscoveryEventErrorLogger (upval), UseStateResult (copy)
+				if PlaceId then
+					TeleportService:PromptExperienceDetailsCompleted(Enum.PromptExperienceDetailsResult.TeleportAttempted)
+					TeleportService:Teleport(PlaceId)
+					UseStateResult2(nil)
+					UseStateResult2_1(false)
+					
+					return
+				else
+					DiscoveryEventErrorLogger.reportError("InExperienceDetailsPromptAppOnJoinMissingRootPlaceId", "Missing valid root place id for universe id", { universeId = UseStateResult })
+				end
+			end,
+			onClose = function() --[[ Line: 58 ]]
+				-- upvalues: TeleportService (upval), UseStateResult2 (copy), UseStateResult2_1 (copy)
+				TeleportService:PromptExperienceDetailsCompleted(Enum.PromptExperienceDetailsResult.PromptClosed)
+				UseStateResult2(nil)
+				UseStateResult2_1(false)
+			end
+		}
+		
+		return if FFlagLuaAppIedpOverlayAndNavigationFix then ReactModule.createElement(InExperienceDetailsPromptContainerModule, config) else ReactModule.createElement("ScreenGui", { ScreenInsets = Enum.ScreenInsets.None }, {
+			InExperienceDetailsPrompt = ReactModule.createElement(InExperienceDetailsPromptContainerModule, config)
+		})
+	else
 		return nil
 	end
-	local function _()
-		-- upvalues: var2 (ref), var4 (ref)
-		var2(nil)
-		var4(false)
-	end
-	
-	local t = {
-		universeId = var1,
-		onJoin = function(p1)
-			-- upvalues: teleportService (copy), var2 (ref), var4 (ref), discoveryEventErrorLogger (copy), var1 (ref)
-			if p1 then
-				teleportService:PromptExperienceDetailsCompleted(Enum.PromptExperienceDetailsResult.TeleportAttempted)
-				teleportService:Teleport(p1)
-				var2(nil)
-				var4(false)
-				
-				return
-			end
-			discoveryEventErrorLogger.reportError("InExperienceDetailsPromptAppOnJoinMissingRootPlaceId", "Missing valid root place id for universe id", { universeId = var1 })
-		end,
-		onClose = function()
-			-- upvalues: teleportService (copy), var2 (ref), var4 (ref)
-			teleportService:PromptExperienceDetailsCompleted(Enum.PromptExperienceDetailsResult.PromptClosed)
-			var2(nil)
-			var4(false)
-		end
-	}
-	
-	return if fFlagLuaAppIedpOverlayAndNavigationFix then reactModule.createElement(inExperienceDetailsPromptContainerModule, t) else reactModule.createElement("ScreenGui", { ScreenInsets = Enum.ScreenInsets.None }, {
-		InExperienceDetailsPrompt = reactModule.createElement(inExperienceDetailsPromptContainerModule, t)
-	})
 end

@@ -1,55 +1,56 @@
-﻿local cartPricingResponseLineItemModule = require(script.Parent.cartPricingResponseLineItem)
-local fFlagPurchasePromptFetchCartPricingForLooks = require(script:FindFirstAncestor("IAPExperience").Parent.SharedFlags).FFlagPurchasePromptFetchCartPricingForLooks
+﻿local CartPricingResponseLineItemModule = require(script.Parent.cartPricingResponseLineItem)
+local FFlagPurchasePromptFetchCartPricingForLooks = require(script:FindFirstAncestor("IAPExperience").Parent.SharedFlags).FFlagPurchasePromptFetchCartPricingForLooks
 local _ = require(script.Parent.Parent.PricingTypes)
 
-return function(p1)
-	-- upvalues: cartPricingResponseLineItemModule (ref), fFlagPurchasePromptFetchCartPricingForLooks (ref)
+return function(p1) --[[ Line: 44 | Named "deriveCartPricingView" ]]
+	-- upvalues: CartPricingResponseLineItemModule (copy), FFlagPurchasePromptFetchCartPricingForLooks (copy)
 	if type(p1) ~= "table" then
 		return nil
 	end
-	local errors = p1.errors
+	local Errors = p1.errors
 	
-	if type(errors) == "table" and next(errors) ~= nil then
+	if type(Errors) == "table" and next(Errors) ~= nil then
 		return nil
 	end
-	local items = p1.items
+	local Items = p1.items
 	
-	if type(items) ~= "table" or next(items) == nil then
+	if type(Items) ~= "table" or next(Items) == nil then
 		return nil
 	end
-	local var1 = 0
-	local var2 = 0
+	local PriceAfterDiscount = 0
+	local NewCartLineRegularPriceInRobux = 0
 	
-	for i, v in items do
-		local i_1 = cartPricingResponseLineItemModule.getCartLineSalePriceInRobux(v)
+	for _, item in Items do
+		local CartLineSalePriceInRobux: number = CartPricingResponseLineItemModule.getCartLineSalePriceInRobux(item)
 		
-		if i_1 ~= nil then
-			var1 += i_1
-			var2 += cartPricingResponseLineItemModule.getCartLineRegularPriceInRobux(v, i_1)
-			continue
+		if CartLineSalePriceInRobux == nil then
+			return nil
 		end
+		PriceAfterDiscount += CartLineSalePriceInRobux
+		NewCartLineRegularPriceInRobux += CartPricingResponseLineItemModule.getCartLineRegularPriceInRobux(item, CartLineSalePriceInRobux)
+	end
+	if PriceAfterDiscount <= 0 then
 		return nil
 	end
-	if var1 <= 0 then
-		return nil
-	end
-	local var3 = cartPricingResponseLineItemModule.extractCartPricingMarketingOffers(p1)
-	local t = {}
+	local ExtractCartPricingMarketingOffersResult = CartPricingResponseLineItemModule.extractCartPricingMarketingOffers(p1)
+	local SelectedOfferIds = {}
 	
-	for i_1, v_1 in var3 do
-		if v_1.selected then
-			table.insert(t, v_1.offerId)
+	for _, value in ExtractCartPricingMarketingOffersResult do
+		if value.selected then
+			table.insert(SelectedOfferIds, value.offerId)
 		end
 	end
+	local ConsolidateRobloxPlusDiscountsResult = if FFlagPurchasePromptFetchCartPricingForLooks then CartPricingResponseLineItemModule.consolidateRobloxPlusDiscounts((CartPricingResponseLineItemModule.extractDiscountRowsFromLineItems(Items))) else nil
+	
 	return {
-		priceAfterDiscount = var1,
-		originalPrice = var2,
-		priceWithoutOffersDiscounts = cartPricingResponseLineItemModule.computePriceWithoutOffersDiscounts(items, var1),
-		hasSavings = var1 < var2,
-		itemCount = #items,
-		discounts = if fFlagPurchasePromptFetchCartPricingForLooks then if fFlagPurchasePromptFetchCartPricingForLooks then cartPricingResponseLineItemModule.consolidateRobloxPlusDiscounts(cartPricingResponseLineItemModule.extractDiscountRowsFromLineItems(items)) else nil else cartPricingResponseLineItemModule.extractDiscountRowsFromLineItems(items),
-		offers = var3,
-		selectedOfferIds = t,
-		savingsSummary = cartPricingResponseLineItemModule.extractCartPricingSavingsSummary(p1)
+		priceAfterDiscount = PriceAfterDiscount,
+		originalPrice = NewCartLineRegularPriceInRobux,
+		priceWithoutOffersDiscounts = CartPricingResponseLineItemModule.computePriceWithoutOffersDiscounts(Items, PriceAfterDiscount),
+		hasSavings = PriceAfterDiscount < NewCartLineRegularPriceInRobux,
+		itemCount = #Items,
+		discounts = if FFlagPurchasePromptFetchCartPricingForLooks then ConsolidateRobloxPlusDiscountsResult else CartPricingResponseLineItemModule.extractDiscountRowsFromLineItems(Items),
+		offers = ExtractCartPricingMarketingOffersResult,
+		selectedOfferIds = SelectedOfferIds,
+		savingsSummary = CartPricingResponseLineItemModule.extractCartPricingSavingsSummary(p1)
 	}
 end

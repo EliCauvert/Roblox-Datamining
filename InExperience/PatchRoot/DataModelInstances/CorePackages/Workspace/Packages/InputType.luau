@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.InputType.InputType)
+﻿return (require(script.Parent._Workspace.InputType.InputType))

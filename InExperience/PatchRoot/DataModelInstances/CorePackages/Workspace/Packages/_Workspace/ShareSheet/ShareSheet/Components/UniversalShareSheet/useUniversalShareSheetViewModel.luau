@@ -1,20 +1,23 @@
-﻿local shareSheet = script:FindFirstAncestor("ShareSheet")
-local signalsReactModule = require(shareSheet.Parent.SignalsReact)
+﻿local ShareSheet = script:FindFirstAncestor("ShareSheet")
+local Parent = ShareSheet.Parent
+local SignalsReactModule = require(Parent.SignalsReact)
+local FFlagShareSheetFriendsSort = require(Parent.SharedFlags).FFlagShareSheetFriendsSort
 local _ = require(script.Parent.Parent.useShareSheetViewModel)
-local getUniversalShareSheetStoreModule = require(shareSheet.Stores.GetUniversalShareSheetStore)
+local GetUniversalShareSheetStoreModule = require(ShareSheet.Stores.GetUniversalShareSheetStore)
 
-return function()
-	-- upvalues: getUniversalShareSheetStoreModule (ref), signalsReactModule (ref)
-	local var1 = getUniversalShareSheetStoreModule()
-	local var2 = signalsReactModule.useSignalState(var1.getRequest)
+return function() --[[ Line: 14 | Named "useUniversalShareSheetViewModel" ]]
+	-- upvalues: GetUniversalShareSheetStoreModule (copy), SignalsReactModule (copy), FFlagShareSheetFriendsSort (copy)
+	local UniversalShareSheetStoreModule = GetUniversalShareSheetStoreModule()
+	local UseSignalStateResult = SignalsReactModule.useSignalState(UniversalShareSheetStoreModule.getRequest)
 	
-	return if var2 == nil then nil else {
+	return if UseSignalStateResult == nil then nil else {
 		isOpen = true,
-		context = var2.context,
-		formatSuccessSnackbarText = var2.formatSuccessSnackbarText,
-		messagePlaceholder = var2.messagePlaceholder,
-		onCloseWithReason = var1.hide,
-		telemetryId = var2.telemetryId,
-		url = var2.url
+		context = UseSignalStateResult.context,
+		formatSuccessSnackbarText = UseSignalStateResult.formatSuccessSnackbarText,
+		messagePlaceholder = UseSignalStateResult.messagePlaceholder,
+		onCloseWithReason = UniversalShareSheetStoreModule.hide,
+		recipientSource = if FFlagShareSheetFriendsSort then UseSignalStateResult.recipientSource else nil,
+		telemetryId = UseSignalStateResult.telemetryId,
+		url = UseSignalStateResult.url
 	}
 end

@@ -1,42 +1,45 @@
-﻿local previewSpecsTypesModule = require(script.Parent.PreviewSpecsTypes)
+﻿local PreviewSpecsTypesModule = require(script.Parent.PreviewSpecsTypes)
 
-local function _(p1)
+local function _(p1) --[[ Line: 9 | Named "optionalString" ]]
 	return if typeof(p1) == "string" then p1 else nil
 end
 
-local _ = function(p1)
-	-- upvalues: previewSpecsTypesModule (ref)
-	return if p1 == previewSpecsTypesModule.PreviewSpecPinned.Pr or p1 == previewSpecsTypesModule.PreviewSpecPinned.Hash then p1 else nil
+local _ = function(Hash) --[[ Line: 14 | Named "decodePinned" ]]
+	-- upvalues: PreviewSpecsTypesModule (copy)
+	return if Hash == PreviewSpecsTypesModule.PreviewSpecPinned.Pr or Hash == PreviewSpecsTypesModule.PreviewSpecPinned.Hash then Hash else nil
 end
 
-local function decodeItem(p1)
-	-- upvalues: previewSpecsTypesModule (ref)
+local function decodeItem(p1) --[[ Line: 21 ]]
+	-- upvalues: PreviewSpecsTypesModule (copy)
 	if typeof(p1) ~= "table" then
 		return nil
 	end
-	local prNumber = p1.pr_number
-	local override = p1.override
+	local PrNumber = p1.pr_number
+	local Override = p1.override
 	
-	if typeof(prNumber) ~= "number" or typeof(override) ~= "string" or override == "" then
+	if typeof(PrNumber) == "number" and typeof(Override) == "string" and Override ~= "" then
+		local Title = p1.title
+		local PublishedAt = p1.published_at
+		local Status = p1.status
+		local Status1 = (if typeof(Status) == "string" then Status else nil) or PreviewSpecsTypesModule.PreviewSpecStatus.Unverified
+		local Pinned = p1.pinned
+		
+		return {
+			prNumber = PrNumber,
+			title = (if typeof(Title) == "string" then Title else nil) or "",
+			draft = p1.draft == true,
+			override = Override,
+			publishedAt = if typeof(PublishedAt) == "string" then PublishedAt else nil,
+			status = Status1,
+			pinned = if Pinned == PreviewSpecsTypesModule.PreviewSpecPinned.Pr or Pinned == PreviewSpecsTypesModule.PreviewSpecPinned.Hash then Pinned else nil
+		}
+	else
 		return nil
 	end
-	local t = { prNumber = prNumber }
-	local title = p1.title
-	t.title = (if typeof(title) == "string" then title else nil) or ""
-	t.draft = p1.draft == true
-	t.override = override
-	local publishedAt = p1.published_at
-	t.publishedAt = if typeof(publishedAt) == "string" then publishedAt else nil
-	local status = p1.status
-	t.status = (if typeof(status) == "string" then status else nil) or previewSpecsTypesModule.PreviewSpecStatus.Unverified
-	local pinned = p1.pinned
-	t.pinned = if pinned == previewSpecsTypesModule.PreviewSpecPinned.Pr or pinned == previewSpecsTypesModule.PreviewSpecPinned.Hash then pinned else nil
-	
-	return t
 end
 
-return function(p1)
-	-- upvalues: decodeItem (ref)
+return function(p1) --[[ Line: 41 | Named "decodePreviewSpecs" ]]
+	-- upvalues: decodeItem (copy)
 	if typeof(p1) ~= "table" then
 		error("preview-specs: response is not an object")
 	end
@@ -46,23 +49,25 @@ return function(p1)
 	if typeof(p1.items) ~= "table" then
 		error("preview-specs: items is not an array")
 	end
-	local t = {}
+	local Items = {}
 	
-	for i, v in ipairs(p1.items) do
-		local var1 = decodeItem(v)
+	for _, item in ipairs(p1.items) do
+		local DecodeItemResult = decodeItem(item)
 		
-		if var1 ~= nil then
-			table.insert(t, var1)
+		if DecodeItemResult ~= nil then
+			table.insert(Items, DecodeItemResult)
 		end
 	end
-	local t_1 = {}
-	local environment = p1.environment
-	t_1.environment = if typeof(environment) == "string" then environment else nil
-	local agent = p1.agent
-	t_1.agent = if typeof(agent) == "string" then agent else nil
-	local refreshedAt = p1.refreshed_at
-	t_1.refreshedAt = if typeof(refreshedAt) == "string" then refreshedAt else nil
-	t_1.items = t
+	local Environment = p1.environment
+	local Environment1 = if typeof(Environment) == "string" then Environment else nil
+	local Agent = p1.agent
+	local Agent1 = if typeof(Agent) == "string" then Agent else nil
+	local RefreshedAt = p1.refreshed_at
 	
-	return t_1
+	return {
+		environment = Environment1,
+		agent = Agent1,
+		refreshedAt = if typeof(RefreshedAt) == "string" then RefreshedAt else nil,
+		items = Items
+	}
 end

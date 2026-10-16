@@ -1,68 +1,73 @@
-﻿local guiService = game:GetService("GuiService")
-local parent = script:FindFirstAncestor("AvatarExperienceTimedOptions").Parent
-local reactModule = require(parent.React)
-local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
-local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-local inputHandlersModule = require(parent.InputHandlers)
-local popoverFocusRestorationContextModule = require(script.Parent.PopoverFocusRestorationContext)
-local fFlagAXTimedOptionsPopoverSkipFocusOnCursor = require(parent.AvatarExperienceFlags).FFlagAXTimedOptionsPopoverSkipFocusOnCursor
-local useFocusNavigableSurfaceRegistryConnection = focusNavigationUtilsModule.useFocusNavigableSurfaceRegistryConnection
-local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
-local focusNavigationEventNameEnum = focusNavigationUtilsModule.FocusNavigationEventNameEnum
-local getFirstFocusableDescendant = focusNavigationUtilsModule.getFirstFocusableDescendant
-local useLastInputMode = focusNavigationUtilsModule.useLastInputMode
-local t = {
-	[Enum.KeyCode.ButtonB] = focusNavigationEventNameEnum.NavigateBack
+﻿local GuiService = game:GetService("GuiService")
+local Parent = script:FindFirstAncestor("AvatarExperienceTimedOptions").Parent
+local ReactModule = require(Parent.React)
+local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
+local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
+local InputHandlersModule = require(Parent.InputHandlers)
+local PopoverFocusRestorationContextModule = require(script.Parent.PopoverFocusRestorationContext)
+local FFlagAXTimedOptionsPopoverSkipFocusOnCursor = require(Parent.AvatarExperienceFlags).FFlagAXTimedOptionsPopoverSkipFocusOnCursor
+local UseFocusNavigableSurfaceRegistryConnectionFunction = FocusNavigationUtilsModule.useFocusNavigableSurfaceRegistryConnection
+local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
+local FocusNavigationEventNameEnum = FocusNavigationUtilsModule.FocusNavigationEventNameEnum
+local GetFirstFocusableDescendantFunction = FocusNavigationUtilsModule.getFirstFocusableDescendant
+local UseLastInputModeFunction = FocusNavigationUtilsModule.useLastInputMode
+local config = {
+	[Enum.KeyCode.ButtonB] = FocusNavigationEventNameEnum.NavigateBack
 }
 
-return function(p1, p2, p3)
-	-- upvalues: reactModule (ref), popoverFocusRestorationContextModule (ref), useFocusNavigableSurfaceRegistryConnection (ref), focusNavigableSurfaceIdentifierEnum (ref), fFlagAXTimedOptionsPopoverSkipFocusOnCursor (ref), useLastInputMode (ref), getFirstFocusableDescendant (ref), guiService (ref), reactFocusNavigationModule (ref), t (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref)
-	local var1 = reactModule.useRef(nil)
-	local var2, var3 = reactModule.useState(false)
-	local var4 = reactModule.useContext(popoverFocusRestorationContextModule)
-	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), p2 (ref)
-		var3(p2)
-	end, { p2 })
-	useFocusNavigableSurfaceRegistryConnection(var1 and var1.current, focusNavigableSurfaceIdentifierEnum.PopUp, var2)
-	local var5 = if fFlagAXTimedOptionsPopoverSkipFocusOnCursor then useLastInputMode() else nil
-	local var6 = reactModule.useRef(false)
-	reactModule.useEffect(function()
-		-- upvalues: fFlagAXTimedOptionsPopoverSkipFocusOnCursor (copy), var5 (ref), var2 (ref), var6 (ref), var1 (ref), getFirstFocusableDescendant (copy), guiService (copy), var4 (ref), p3 (ref)
-		local var7 = not fFlagAXTimedOptionsPopoverSkipFocusOnCursor or var5 == "Focus"
+return function(Callback, p1, p2) --[[ Line: 26 | Named "useWearTimePopoverFocusNavigationBindings" ]]
+	-- upvalues: ReactModule (copy), PopoverFocusRestorationContextModule (copy), UseFocusNavigableSurfaceRegistryConnectionFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), FFlagAXTimedOptionsPopoverSkipFocusOnCursor (copy), UseLastInputModeFunction (copy), GetFirstFocusableDescendantFunction (copy), GuiService (copy), ReactFocusNavigationModule (copy), config (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseContextResult = ReactModule.useContext(PopoverFocusRestorationContextModule)
+	ReactModule.useEffect(function() --[[ Line: 35 ]]
+		-- upvalues: UseStateResult2 (copy), p1 (copy)
+		UseStateResult2(p1)
+	end, { p1 })
+	UseFocusNavigableSurfaceRegistryConnectionFunction(UseRefResult and UseRefResult.current, FocusNavigableSurfaceIdentifierEnum.PopUp, UseStateResult)
+	local UseLastInputModeResult = if FFlagAXTimedOptionsPopoverSkipFocusOnCursor then UseLastInputModeFunction() else nil
+	local UseRefResult1 = ReactModule.useRef(false)
+	ReactModule.useEffect(function() --[[ Line: 56 ]]
+		-- upvalues: FFlagAXTimedOptionsPopoverSkipFocusOnCursor (upval), UseLastInputModeResult (copy), UseStateResult (copy), UseRefResult1 (copy), UseRefResult (copy), GetFirstFocusableDescendantFunction (upval), GuiService (upval), UseContextResult (copy), p2 (copy)
+		local NoFFlagAXTimedOptionsPopoverSkipFocusOnCursor: boolean = not FFlagAXTimedOptionsPopoverSkipFocusOnCursor or UseLastInputModeResult == "Focus"
 		
-		if var2 and not var6.current then
-			if var7 then
-				local current = var1.current
+		if UseStateResult and not UseRefResult1.current then
+			if NoFFlagAXTimedOptionsPopoverSkipFocusOnCursor then
+				local Current = UseRefResult.current
 				
-				if current and current:IsDescendantOf(game) then
-					local var8 = getFirstFocusableDescendant(current)
+				if Current and Current:IsDescendantOf(game) then
+					local FirstFocusableDescendant = GetFirstFocusableDescendantFunction(Current)
 					
-					if var8 then
-						guiService.SelectedCoreObject = var8
+					if FirstFocusableDescendant then
+						GuiService.SelectedCoreObject = FirstFocusableDescendant
 					end
 				end
 			end
-		elseif not var2 and var6.current and (var4 and var7) then
-			local current = p3 and p3.current
+		elseif not UseStateResult and UseRefResult1.current and UseContextResult and NoFFlagAXTimedOptionsPopoverSkipFocusOnCursor then
+			local Current = p2 and p2.current
 			
-			if current and current:IsDescendantOf(game) then
-				guiService.SelectedCoreObject = current
+			if Current and Current:IsDescendantOf(game) then
+				GuiService.SelectedCoreObject = Current
 			end
 		end
-		var6.current = var2
-	end, { var2, var4, p3, var5 })
+		UseRefResult1.current = UseStateResult
+	end, {
+		UseStateResult,
+		UseContextResult,
+		p2,
+		UseLastInputModeResult
+	})
 	
-	return reactFocusNavigationModule.useEventHandlerMap(reactModule.useMemo(function()
-		-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), p1 (ref)
+	return ReactFocusNavigationModule.useEventHandlerMap(ReactModule.useMemo(function() --[[ Line: 83 ]]
+		-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), Callback (copy)
 		return {
-			[focusNavigationEventNameEnum.NavigateBack] = {
-				handler = inputHandlersModule.onRelease(function(p4)
-					-- upvalues: p1 (copy)
-					p4.cancelled = true
-					p1()
+			[FocusNavigationEventNameEnum.NavigateBack] = {
+				handler = InputHandlersModule.onRelease(function(p3) --[[ Line: 86 ]]
+					-- upvalues: Callback (upval)
+					p3.cancelled = true
+					Callback()
 				end)
 			}
 		}
-	end, { p1 }), reactFocusNavigationModule.useEventMap(t, var1))
+	end, { Callback }), (ReactFocusNavigationModule.useEventMap(config, UseRefResult)))
 end

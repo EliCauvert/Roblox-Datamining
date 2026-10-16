@@ -1,297 +1,299 @@
-﻿local starterGuiService = game:GetService("StarterGui")
-local guiService = game:GetService("GuiService")
-local replicatedStorageService = game:GetService("ReplicatedStorage")
-local chatSettingsModule = require(game:GetService("Chat"):WaitForChild("ClientChatModules"):WaitForChild("ChatSettings"))
+﻿local StarterGui = game:GetService("StarterGui")
+local GuiService = game:GetService("GuiService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local ChatSettingsModule = require(game:GetService("Chat"):WaitForChild("ClientChatModules"):WaitForChild("ChatSettings"))
 
-local function DoEverything()
-	-- upvalues: chatSettingsModule (ref)
-	local chatMainModule = require(script:WaitForChild("ChatMain"))
-	local t = { ChatWindow = {}, SetCore = {}, GetCore = {} }
-	t.ChatWindow.ChatTypes = {}
-	t.ChatWindow.ChatTypes.BubbleChatEnabled = chatSettingsModule.BubbleChatEnabled
-	t.ChatWindow.ChatTypes.ClassicChatEnabled = chatSettingsModule.ClassicChatEnabled
+local function DoEverything() --[[ Line: 16 ]]
+	-- upvalues: ChatSettingsModule (copy)
+	local ChatMainModule = require(script:WaitForChild("ChatMain"))
+	local config = { ChatWindow = {}, SetCore = {}, GetCore = {} }
+	config.ChatWindow.ChatTypes = {}
+	config.ChatWindow.ChatTypes.BubbleChatEnabled = ChatSettingsModule.BubbleChatEnabled
+	config.ChatWindow.ChatTypes.ClassicChatEnabled = ChatSettingsModule.ClassicChatEnabled
 	
-	local function _(p1)
-		-- upvalues: t (ref), chatMainModule (ref)
-		local bindableEvent = Instance.new("BindableEvent")
-		bindableEvent.Name = p1
-		t.ChatWindow[p1] = bindableEvent
-		bindableEvent.Event:connect(function(...)
-			-- upvalues: chatMainModule (copy), p1 (ref)
-			chatMainModule[p1](chatMainModule, ...)
+	local function _(Name) --[[ Line: 29 | Named "ConnectEvent" ]]
+		-- upvalues: config (copy), ChatMainModule (copy)
+		local BindableEvent = Instance.new("BindableEvent")
+		BindableEvent.Name = Name
+		config.ChatWindow[Name] = BindableEvent
+		BindableEvent.Event:connect(function(...) --[[ Line: 34 ]]
+			-- upvalues: ChatMainModule (upval), Name (copy)
+			ChatMainModule[Name](ChatMainModule, ...)
 		end)
 	end
 	
-	local _ = function(p1)
-		-- upvalues: t (ref), chatMainModule (ref)
-		local bindableFunction = Instance.new("BindableFunction")
-		bindableFunction.Name = p1
-		t.ChatWindow[p1] = bindableFunction
+	local _ = function(Name) --[[ Line: 37 | Named "ConnectFunction" ]]
+		-- upvalues: config (copy), ChatMainModule (copy)
+		local BindableFunction = Instance.new("BindableFunction")
+		BindableFunction.Name = Name
+		config.ChatWindow[Name] = BindableFunction
 		
-		function bindableFunction.OnInvoke(...)
-			-- upvalues: chatMainModule (copy), p1 (ref)
-			return chatMainModule[p1](chatMainModule, ...)
+		function BindableFunction.OnInvoke(...) --[[ Line: 42 ]]
+			-- upvalues: ChatMainModule (upval), Name (copy)
+			return ChatMainModule[Name](ChatMainModule, ...)
 		end
 	end
 	
-	local _ = function(p1)
-		-- upvalues: t (ref), chatMainModule (ref)
-		local bindableEvent = Instance.new("BindableEvent")
-		bindableEvent.Name = p1
-		t.ChatWindow[p1] = bindableEvent
-		chatMainModule[p1]:connect(function(...)
-			-- upvalues: bindableEvent (ref)
-			bindableEvent:Fire(...)
+	local _ = function(Name) --[[ Line: 45 | Named "ReverseConnectEvent" ]]
+		-- upvalues: config (copy), ChatMainModule (copy)
+		local BindableEvent = Instance.new("BindableEvent")
+		BindableEvent.Name = Name
+		config.ChatWindow[Name] = BindableEvent
+		ChatMainModule[Name]:connect(function(...) --[[ Line: 50 ]]
+			-- upvalues: BindableEvent (copy)
+			BindableEvent:Fire(...)
 		end)
 	end
 	
-	local _ = function(value)
-		-- upvalues: t (ref), chatMainModule (ref)
-		local bindableEvent = Instance.new("BindableEvent")
-		bindableEvent.Name = value
-		t.ChatWindow[value] = bindableEvent
-		bindableEvent.Event:connect(function(...)
-			-- upvalues: chatMainModule (copy), value (ref)
-			chatMainModule[value]:fire(...)
+	local _ = function(Name) --[[ Line: 53 | Named "ConnectSignal" ]]
+		-- upvalues: config (copy), ChatMainModule (copy)
+		local BindableEvent = Instance.new("BindableEvent")
+		BindableEvent.Name = Name
+		config.ChatWindow[Name] = BindableEvent
+		BindableEvent.Event:connect(function(...) --[[ Line: 58 ]]
+			-- upvalues: ChatMainModule (upval), Name (copy)
+			ChatMainModule[Name]:fire(...)
 		end)
 	end
 	
-	local _ = function(value)
-		-- upvalues: t (ref), chatMainModule (ref)
-		local bindableEvent = Instance.new("BindableEvent")
-		bindableEvent.Name = value
-		t.SetCore[value] = bindableEvent
-		bindableEvent.Event:connect(function(...)
-			-- upvalues: chatMainModule (copy), value (ref)
-			chatMainModule[value .. "Event"]:fire(...)
+	local _ = function(Name) --[[ Line: 61 | Named "ConnectSetCore" ]]
+		-- upvalues: config (copy), ChatMainModule (copy)
+		local BindableEvent = Instance.new("BindableEvent")
+		BindableEvent.Name = Name
+		config.SetCore[Name] = BindableEvent
+		BindableEvent.Event:connect(function(...) --[[ Line: 66 ]]
+			-- upvalues: ChatMainModule (upval), Name (copy)
+			ChatMainModule[Name .. "Event"]:fire(...)
 		end)
 	end
 	
-	local _ = function(p1)
-		-- upvalues: t (ref), chatMainModule (ref)
-		local bindableFunction = Instance.new("BindableFunction")
-		bindableFunction.Name = p1
-		t.GetCore[p1] = bindableFunction
+	local _ = function(Name) --[[ Line: 69 | Named "ConnectGetCore" ]]
+		-- upvalues: config (copy), ChatMainModule (copy)
+		local BindableFunction = Instance.new("BindableFunction")
+		BindableFunction.Name = Name
+		config.GetCore[Name] = BindableFunction
 		
-		function bindableFunction.OnInvoke(...)
-			-- upvalues: chatMainModule (copy), p1 (ref)
-			return chatMainModule["f" .. p3](...)
+		function BindableFunction.OnInvoke(...) --[[ Line: 74 ]]
+			-- upvalues: ChatMainModule (upval), Name (copy)
+			return ChatMainModule["f" .. Name](...)
 		end
 	end
 	
-	local toggleVisibility = Instance.new("BindableEvent")
-	toggleVisibility.Name = "ToggleVisibility"
-	t.ChatWindow.ToggleVisibility = toggleVisibility
-	local var1 = "ToggleVisibility"
-	toggleVisibility.Event:connect(function(...)
-		-- upvalues: chatMainModule (ref), var1 (ref)
-		chatMainModule[var1](chatMainModule, ...)
+	local ToggleVisibility = Instance.new("BindableEvent")
+	ToggleVisibility.Name = "ToggleVisibility"
+	config.ChatWindow.ToggleVisibility = ToggleVisibility
+	local Name = "ToggleVisibility"
+	ToggleVisibility.Event:connect(function(...) --[[ Line: 34 ]]
+		-- upvalues: ChatMainModule (copy), Name (copy)
+		ChatMainModule[Name](ChatMainModule, ...)
 	end)
-	local setVisible = Instance.new("BindableEvent")
-	setVisible.Name = "SetVisible"
-	t.ChatWindow.SetVisible = setVisible
-	local var2 = "SetVisible"
-	setVisible.Event:connect(function(...)
-		-- upvalues: chatMainModule (ref), var2 (ref)
-		chatMainModule[var2](chatMainModule, ...)
+	local SetVisible = Instance.new("BindableEvent")
+	SetVisible.Name = "SetVisible"
+	config.ChatWindow.SetVisible = SetVisible
+	local Name1 = "SetVisible"
+	SetVisible.Event:connect(function(...) --[[ Line: 34 ]]
+		-- upvalues: ChatMainModule (copy), Name1 (copy)
+		ChatMainModule[Name1](ChatMainModule, ...)
 	end)
-	local focusChatBar = Instance.new("BindableEvent")
-	focusChatBar.Name = "FocusChatBar"
-	t.ChatWindow.FocusChatBar = focusChatBar
-	local var3 = "FocusChatBar"
-	focusChatBar.Event:connect(function(...)
-		-- upvalues: chatMainModule (ref), var3 (ref)
-		chatMainModule[var3](chatMainModule, ...)
+	local FocusChatBar = Instance.new("BindableEvent")
+	FocusChatBar.Name = "FocusChatBar"
+	config.ChatWindow.FocusChatBar = FocusChatBar
+	local Name2 = "FocusChatBar"
+	FocusChatBar.Event:connect(function(...) --[[ Line: 34 ]]
+		-- upvalues: ChatMainModule (copy), Name2 (copy)
+		ChatMainModule[Name2](ChatMainModule, ...)
 	end)
-	local enterWhisperState = Instance.new("BindableEvent")
-	enterWhisperState.Name = "EnterWhisperState"
-	t.ChatWindow.EnterWhisperState = enterWhisperState
-	local var4 = "EnterWhisperState"
-	enterWhisperState.Event:connect(function(...)
-		-- upvalues: chatMainModule (ref), var4 (ref)
-		chatMainModule[var4](chatMainModule, ...)
+	local EnterWhisperState = Instance.new("BindableEvent")
+	EnterWhisperState.Name = "EnterWhisperState"
+	config.ChatWindow.EnterWhisperState = EnterWhisperState
+	local Name3 = "EnterWhisperState"
+	EnterWhisperState.Event:connect(function(...) --[[ Line: 34 ]]
+		-- upvalues: ChatMainModule (copy), Name3 (copy)
+		ChatMainModule[Name3](ChatMainModule, ...)
 	end)
-	local getVisibility = Instance.new("BindableFunction")
-	getVisibility.Name = "GetVisibility"
-	t.ChatWindow.GetVisibility = getVisibility
-	local var5 = "GetVisibility"
+	local GetVisibility = Instance.new("BindableFunction")
+	GetVisibility.Name = "GetVisibility"
+	config.ChatWindow.GetVisibility = GetVisibility
+	local Name4 = "GetVisibility"
 	
-	function getVisibility.OnInvoke(...)
-		-- upvalues: chatMainModule (ref), var5 (ref)
-		return chatMainModule[var5](chatMainModule, ...)
+	function GetVisibility.OnInvoke(...) --[[ Line: 42 ]]
+		-- upvalues: ChatMainModule (copy), Name4 (copy)
+		return ChatMainModule[Name4](ChatMainModule, ...)
 	end
 	
-	local getMessageCount = Instance.new("BindableFunction")
-	getMessageCount.Name = "GetMessageCount"
-	t.ChatWindow.GetMessageCount = getMessageCount
-	local var6 = "GetMessageCount"
+	local GetMessageCount = Instance.new("BindableFunction")
+	GetMessageCount.Name = "GetMessageCount"
+	config.ChatWindow.GetMessageCount = GetMessageCount
+	local Name5 = "GetMessageCount"
 	
-	function getMessageCount.OnInvoke(...)
-		-- upvalues: chatMainModule (ref), var6 (ref)
-		return chatMainModule[var6](chatMainModule, ...)
+	function GetMessageCount.OnInvoke(...) --[[ Line: 42 ]]
+		-- upvalues: ChatMainModule (copy), Name5 (copy)
+		return ChatMainModule[Name5](ChatMainModule, ...)
 	end
 	
-	local topbarEnabledChanged = Instance.new("BindableEvent")
-	topbarEnabledChanged.Name = "TopbarEnabledChanged"
-	t.ChatWindow.TopbarEnabledChanged = topbarEnabledChanged
-	local var7 = "TopbarEnabledChanged"
-	topbarEnabledChanged.Event:connect(function(...)
-		-- upvalues: chatMainModule (ref), var7 (ref)
-		chatMainModule[var7](chatMainModule, ...)
+	local TopbarEnabledChanged = Instance.new("BindableEvent")
+	TopbarEnabledChanged.Name = "TopbarEnabledChanged"
+	config.ChatWindow.TopbarEnabledChanged = TopbarEnabledChanged
+	local Name6 = "TopbarEnabledChanged"
+	TopbarEnabledChanged.Event:connect(function(...) --[[ Line: 34 ]]
+		-- upvalues: ChatMainModule (copy), Name6 (copy)
+		ChatMainModule[Name6](ChatMainModule, ...)
 	end)
-	local isFocused = Instance.new("BindableFunction")
-	isFocused.Name = "IsFocused"
-	t.ChatWindow.IsFocused = isFocused
-	local var8 = "IsFocused"
+	local IsFocused = Instance.new("BindableFunction")
+	IsFocused.Name = "IsFocused"
+	config.ChatWindow.IsFocused = IsFocused
+	local Name7 = "IsFocused"
 	
-	function isFocused.OnInvoke(...)
-		-- upvalues: chatMainModule (ref), var8 (ref)
-		return chatMainModule[var8](chatMainModule, ...)
+	function IsFocused.OnInvoke(...) --[[ Line: 42 ]]
+		-- upvalues: ChatMainModule (copy), Name7 (copy)
+		return ChatMainModule[Name7](ChatMainModule, ...)
 	end
 	
-	local chatBarFocusChanged = Instance.new("BindableEvent")
-	chatBarFocusChanged.Name = "ChatBarFocusChanged"
-	t.ChatWindow.ChatBarFocusChanged = chatBarFocusChanged
-	chatMainModule.ChatBarFocusChanged:connect(function(...)
-		-- upvalues: chatBarFocusChanged (ref)
-		chatBarFocusChanged:Fire(...)
+	local ChatBarFocusChanged = Instance.new("BindableEvent")
+	ChatBarFocusChanged.Name = "ChatBarFocusChanged"
+	config.ChatWindow.ChatBarFocusChanged = ChatBarFocusChanged
+	ChatMainModule.ChatBarFocusChanged:connect(function(...) --[[ Line: 50 ]]
+		-- upvalues: ChatBarFocusChanged (copy)
+		ChatBarFocusChanged:Fire(...)
 	end)
-	local visibilityStateChanged = Instance.new("BindableEvent")
-	visibilityStateChanged.Name = "VisibilityStateChanged"
-	t.ChatWindow.VisibilityStateChanged = visibilityStateChanged
-	chatMainModule.VisibilityStateChanged:connect(function(...)
-		-- upvalues: visibilityStateChanged (ref)
-		visibilityStateChanged:Fire(...)
+	local VisibilityStateChanged = Instance.new("BindableEvent")
+	VisibilityStateChanged.Name = "VisibilityStateChanged"
+	config.ChatWindow.VisibilityStateChanged = VisibilityStateChanged
+	ChatMainModule.VisibilityStateChanged:connect(function(...) --[[ Line: 50 ]]
+		-- upvalues: VisibilityStateChanged (copy)
+		VisibilityStateChanged:Fire(...)
 	end)
-	local messagesChanged = Instance.new("BindableEvent")
-	messagesChanged.Name = "MessagesChanged"
-	t.ChatWindow.MessagesChanged = messagesChanged
-	chatMainModule.MessagesChanged:connect(function(...)
-		-- upvalues: messagesChanged (ref)
-		messagesChanged:Fire(...)
+	local MessagesChanged = Instance.new("BindableEvent")
+	MessagesChanged.Name = "MessagesChanged"
+	config.ChatWindow.MessagesChanged = MessagesChanged
+	ChatMainModule.MessagesChanged:connect(function(...) --[[ Line: 50 ]]
+		-- upvalues: MessagesChanged (copy)
+		MessagesChanged:Fire(...)
 	end)
-	local messagePosted = Instance.new("BindableEvent")
-	messagePosted.Name = "MessagePosted"
-	t.ChatWindow.MessagePosted = messagePosted
-	chatMainModule.MessagePosted:connect(function(...)
-		-- upvalues: messagePosted (ref)
-		messagePosted:Fire(...)
+	local MessagePosted = Instance.new("BindableEvent")
+	MessagePosted.Name = "MessagePosted"
+	config.ChatWindow.MessagePosted = MessagePosted
+	ChatMainModule.MessagePosted:connect(function(...) --[[ Line: 50 ]]
+		-- upvalues: MessagePosted (copy)
+		MessagePosted:Fire(...)
 	end)
-	local coreGuiEnabled = Instance.new("BindableEvent")
-	coreGuiEnabled.Name = "CoreGuiEnabled"
-	t.ChatWindow.CoreGuiEnabled = coreGuiEnabled
-	local var9 = "CoreGuiEnabled"
-	coreGuiEnabled.Event:connect(function(...)
-		-- upvalues: chatMainModule (ref), var9 (ref)
-		chatMainModule[var9]:fire(...)
+	local CoreGuiEnabled = Instance.new("BindableEvent")
+	CoreGuiEnabled.Name = "CoreGuiEnabled"
+	config.ChatWindow.CoreGuiEnabled = CoreGuiEnabled
+	local Name8 = "CoreGuiEnabled"
+	CoreGuiEnabled.Event:connect(function(...) --[[ Line: 58 ]]
+		-- upvalues: ChatMainModule (copy), Name8 (copy)
+		ChatMainModule[Name8]:fire(...)
 	end)
-	local chatMakeSystemMessage = Instance.new("BindableEvent")
-	chatMakeSystemMessage.Name = "ChatMakeSystemMessage"
-	t.SetCore.ChatMakeSystemMessage = chatMakeSystemMessage
-	local var10 = "ChatMakeSystemMessage"
-	chatMakeSystemMessage.Event:connect(function(...)
-		-- upvalues: chatMainModule (ref), var10 (ref)
-		chatMainModule[var10 .. "Event"]:fire(...)
+	local ChatMakeSystemMessage = Instance.new("BindableEvent")
+	ChatMakeSystemMessage.Name = "ChatMakeSystemMessage"
+	config.SetCore.ChatMakeSystemMessage = ChatMakeSystemMessage
+	local Name9 = "ChatMakeSystemMessage"
+	ChatMakeSystemMessage.Event:connect(function(...) --[[ Line: 66 ]]
+		-- upvalues: ChatMainModule (copy), Name9 (copy)
+		ChatMainModule[Name9 .. "Event"]:fire(...)
 	end)
-	local chatWindowPosition = Instance.new("BindableEvent")
-	chatWindowPosition.Name = "ChatWindowPosition"
-	t.SetCore.ChatWindowPosition = chatWindowPosition
-	local var11 = "ChatWindowPosition"
-	chatWindowPosition.Event:connect(function(...)
-		-- upvalues: chatMainModule (ref), var11 (ref)
-		chatMainModule[var11 .. "Event"]:fire(...)
+	local ChatWindowPosition = Instance.new("BindableEvent")
+	ChatWindowPosition.Name = "ChatWindowPosition"
+	config.SetCore.ChatWindowPosition = ChatWindowPosition
+	local Name10 = "ChatWindowPosition"
+	ChatWindowPosition.Event:connect(function(...) --[[ Line: 66 ]]
+		-- upvalues: ChatMainModule (copy), Name10 (copy)
+		ChatMainModule[Name10 .. "Event"]:fire(...)
 	end)
-	local chatWindowSize = Instance.new("BindableEvent")
-	chatWindowSize.Name = "ChatWindowSize"
-	t.SetCore.ChatWindowSize = chatWindowSize
-	local var12 = "ChatWindowSize"
-	chatWindowSize.Event:connect(function(...)
-		-- upvalues: chatMainModule (ref), var12 (ref)
-		chatMainModule[var12 .. "Event"]:fire(...)
+	local ChatWindowSize = Instance.new("BindableEvent")
+	ChatWindowSize.Name = "ChatWindowSize"
+	config.SetCore.ChatWindowSize = ChatWindowSize
+	local Name11 = "ChatWindowSize"
+	ChatWindowSize.Event:connect(function(...) --[[ Line: 66 ]]
+		-- upvalues: ChatMainModule (copy), Name11 (copy)
+		ChatMainModule[Name11 .. "Event"]:fire(...)
 	end)
-	local chatWindowPosition_1 = Instance.new("BindableFunction")
-	chatWindowPosition_1.Name = "ChatWindowPosition"
-	t.GetCore.ChatWindowPosition = chatWindowPosition_1
-	local var13 = "ChatWindowPosition"
+	local ChatWindowPosition1 = Instance.new("BindableFunction")
+	ChatWindowPosition1.Name = "ChatWindowPosition"
+	config.GetCore.ChatWindowPosition = ChatWindowPosition1
+	local Name12 = "ChatWindowPosition"
 	
-	function chatWindowPosition_1.OnInvoke(...)
-		-- upvalues: chatMainModule (ref), var13 (ref)
-		return chatMainModule["f" .. var37](...)
+	function ChatWindowPosition1.OnInvoke(...) --[[ Line: 74 ]]
+		-- upvalues: ChatMainModule (copy), Name12 (copy)
+		return ChatMainModule["f" .. Name12](...)
 	end
 	
-	local chatWindowSize_1 = Instance.new("BindableFunction")
-	chatWindowSize_1.Name = "ChatWindowSize"
-	t.GetCore.ChatWindowSize = chatWindowSize_1
-	local var14 = "ChatWindowSize"
+	local ChatWindowSize1 = Instance.new("BindableFunction")
+	ChatWindowSize1.Name = "ChatWindowSize"
+	config.GetCore.ChatWindowSize = ChatWindowSize1
+	local Name13 = "ChatWindowSize"
 	
-	function chatWindowSize_1.OnInvoke(...)
-		-- upvalues: chatMainModule (ref), var14 (ref)
-		return chatMainModule["f" .. var39](...)
+	function ChatWindowSize1.OnInvoke(...) --[[ Line: 74 ]]
+		-- upvalues: ChatMainModule (copy), Name13 (copy)
+		return ChatMainModule["f" .. Name13](...)
 	end
 	
-	local chatBarDisabled = Instance.new("BindableEvent")
-	chatBarDisabled.Name = "ChatBarDisabled"
-	t.SetCore.ChatBarDisabled = chatBarDisabled
-	local var15 = "ChatBarDisabled"
-	chatBarDisabled.Event:connect(function(...)
-		-- upvalues: chatMainModule (ref), var15 (ref)
-		chatMainModule[var15 .. "Event"]:fire(...)
+	local ChatBarDisabled = Instance.new("BindableEvent")
+	ChatBarDisabled.Name = "ChatBarDisabled"
+	config.SetCore.ChatBarDisabled = ChatBarDisabled
+	local Name14 = "ChatBarDisabled"
+	ChatBarDisabled.Event:connect(function(...) --[[ Line: 66 ]]
+		-- upvalues: ChatMainModule (copy), Name14 (copy)
+		ChatMainModule[Name14 .. "Event"]:fire(...)
 	end)
-	local chatBarDisabled_1 = Instance.new("BindableFunction")
-	chatBarDisabled_1.Name = "ChatBarDisabled"
-	t.GetCore.ChatBarDisabled = chatBarDisabled_1
-	local var16 = "ChatBarDisabled"
+	local ChatBarDisabled1 = Instance.new("BindableFunction")
+	ChatBarDisabled1.Name = "ChatBarDisabled"
+	config.GetCore.ChatBarDisabled = ChatBarDisabled1
+	local Name15 = "ChatBarDisabled"
 	
-	function chatBarDisabled_1.OnInvoke(...)
-		-- upvalues: chatMainModule (ref), var16 (ref)
-		return chatMainModule["f" .. var43](...)
+	function ChatBarDisabled1.OnInvoke(...) --[[ Line: 74 ]]
+		-- upvalues: ChatMainModule (copy), Name15 (copy)
+		return ChatMainModule["f" .. Name15](...)
 	end
 	
-	local specialKeyPressed = Instance.new("BindableEvent")
-	specialKeyPressed.Name = "SpecialKeyPressed"
-	t.ChatWindow.SpecialKeyPressed = specialKeyPressed
-	local var17 = "SpecialKeyPressed"
-	specialKeyPressed.Event:connect(function(...)
-		-- upvalues: chatMainModule (ref), var17 (ref)
-		chatMainModule[var17](chatMainModule, ...)
+	local SpecialKeyPressed = Instance.new("BindableEvent")
+	SpecialKeyPressed.Name = "SpecialKeyPressed"
+	config.ChatWindow.SpecialKeyPressed = SpecialKeyPressed
+	local Name16 = "SpecialKeyPressed"
+	SpecialKeyPressed.Event:connect(function(...) --[[ Line: 34 ]]
+		-- upvalues: ChatMainModule (copy), Name16 (copy)
+		ChatMainModule[Name16](ChatMainModule, ...)
 	end)
-	SetCoreGuiChatConnections(t)
+	SetCoreGuiChatConnections(config)
 end
 
-function SetCoreGuiChatConnections(value)
-	-- upvalues: starterGuiService (ref)
-	local var1 = 0
-	while var1 < 10 do
-		var1 += 1
-		local ok, status = pcall(function()
-			-- upvalues: starterGuiService (copy), value (ref)
-			starterGuiService:SetCore("CoreGuiChatConnections", value)
+function SetCoreGuiChatConnections(Value) --[[ Line: 107 ]]
+	-- upvalues: StarterGui (copy)
+	local Count = 0
+	while Count < 10 do
+		Count += 1
+		local Success, Result = pcall(function() --[[ Line: 111 ]]
+			-- upvalues: StarterGui (upval), Value (copy)
+			StarterGui:SetCore("CoreGuiChatConnections", Value)
 		end)
 		
-		if ok then break end
-		if not ok and var1 == 10 then
-			error("Error calling SetCore CoreGuiChatConnections: " .. status)
+		if Success then break end
+		if not Success and Count == 10 then
+			error("Error calling SetCore CoreGuiChatConnections: " .. Result)
 		end
 		wait()
 	end
 end
 
-function checkBothChatTypesDisabled()
-	-- upvalues: chatSettingsModule (ref)
-	return if chatSettingsModule.BubbleChatEnabled == nil or chatSettingsModule.ClassicChatEnabled == nil then false else not (chatSettingsModule.BubbleChatEnabled or chatSettingsModule.ClassicChatEnabled)
+function checkBothChatTypesDisabled(): boolean --[[ Line: 122 ]]
+	-- upvalues: ChatSettingsModule (copy)
+	return ChatSettingsModule.BubbleChatEnabled ~= nil and ChatSettingsModule.ClassicChatEnabled ~= nil and not (ChatSettingsModule.BubbleChatEnabled or ChatSettingsModule.ClassicChatEnabled)
 end
 
-if guiService:IsTenFootInterface() then
-	replicatedStorageService:WaitForChild("DefaultChatSystemChatEvents").GetInitDataRequest:InvokeServer()
-	
-	return
-elseif checkBothChatTypesDisabled() then
-	local t = { ChatWindow = {} }
-	t.ChatWindow.ChatTypes = {}
-	t.ChatWindow.ChatTypes.BubbleChatEnabled = false
-	t.ChatWindow.ChatTypes.ClassicChatEnabled = false
-	SetCoreGuiChatConnections(t)
+if GuiService:IsTenFootInterface() then
+	ReplicatedStorage:WaitForChild("DefaultChatSystemChatEvents").GetInitDataRequest:InvokeServer()
 	
 	return
 end
-DoEverything()
+if checkBothChatTypesDisabled() then
+	local config = { ChatWindow = {} }
+	config.ChatWindow.ChatTypes = {}
+	config.ChatWindow.ChatTypes.BubbleChatEnabled = false
+	config.ChatWindow.ChatTypes.ClassicChatEnabled = false
+	SetCoreGuiChatConnections(config)
+	
+	return
+else
+	DoEverything()
+end

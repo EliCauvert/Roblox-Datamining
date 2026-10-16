@@ -1,60 +1,59 @@
-﻿local getFFlagEnableInAppBugReporting = require(script:FindFirstAncestor("TnSScreenshot").Parent.SharedFlags).GetFFlagEnableInAppBugReporting
+﻿local GetFFlagEnableInAppBugReportingFunction = require(script:FindFirstAncestor("TnSScreenshot").Parent.SharedFlags).GetFFlagEnableInAppBugReporting
 
-local _ = function()
+local function _() --[[ Line: 6 ]]
 	return game:GetEngineFeature("ReportAnythingScreenshot") and game:GetEngineFeature("ReportAnythingScreenshotUploadedSignal")
 end
 
-local t = {}
-t.__index = t
-local t_1 = {}
-local t_2 = {}
-local var1 = false
-local _ = { RAABTestReason = "RAABTest" }
+local ScreenshotManager = {}
+ScreenshotManager.__index = ScreenshotManager
+local List = {}
+local List1 = {}
+local Flag = false
 
-local var2 = function(p1)
-	-- upvalues: t_1 (ref), t_2 (ref), var1 (write)
-	p1.ScreenshotUploaded:Connect(function(p2, p3)
-		-- upvalues: t_1 (copy)
-		local var3 = t_1[p2]
+local function v4(SafetyService) --[[ Line: 27 ]]
+	-- upvalues: List (copy), List1 (copy), Flag (ref)
+	SafetyService.ScreenshotUploaded:Connect(function(Index, ScreenshotId) --[[ Line: 28 ]]
+		-- upvalues: List (upval)
+		local Entry: (any) -> () = List[Index]
 		
-		if var3 then
-			var3(p3)
-			table.remove(t_1, p2)
+		if Entry then
+			Entry(ScreenshotId)
+			table.remove(List, Index)
 			
 			return
 		end
 	end)
-	p1.ScreenshotContentReady:Connect(function(p2, p3)
-		-- upvalues: t_2 (copy)
-		local var3 = t_2[p2]
+	SafetyService.ScreenshotContentReady:Connect(function(Index, ContentId) --[[ Line: 37 ]]
+		-- upvalues: List1 (upval)
+		local Entry: (any) -> () = List1[Index]
 		
-		if var3 then
-			var3(p3)
-			table.remove(t_2, p2)
+		if Entry then
+			Entry(ContentId)
+			table.remove(List1, Index)
 			
 			return
 		end
 	end)
-	var1 = true
+	Flag = true
 end
 
-function t.TakeScreenshotWithCallback(_, p1, p2, p3)
-	-- upvalues: getFFlagEnableInAppBugReporting (ref), t_1 (ref), t_2 (ref), var1 (write), var2 (ref)
+function ScreenshotManager:TakeScreenshotWithCallback(p1, p2, p3): boolean --[[ Line: 59 ]]
+	-- upvalues: GetFFlagEnableInAppBugReportingFunction (copy), List (copy), List1 (copy), Flag (ref), v4 (copy)
 	if not game:GetEngineFeature("ReportAnythingScreenshot") or not game:GetEngineFeature("ReportAnythingScreenshotUploadedSignal") then
 		return false
 	end
-	local safetyService = game:GetService("SafetyService")
-	local var3 = safetyService:TakeScreenshot({
-		registerContent = if p2 ~= nil then 0 else 1,
-		reason = if getFFlagEnableInAppBugReporting() then p3 or "RAABTest" else "RAABTest"
+	local SafetyService = game:GetService("SafetyService")
+	local TakeScreenshotResult = SafetyService:TakeScreenshot({
+		registerContent = if p2 == nil then 0 else 1,
+		reason = GetFFlagEnableInAppBugReportingFunction() and p3 or "RAABTest"
 	})
-	t_1[var3] = p1
-	t_2[var3] = p2
+	List[TakeScreenshotResult] = p1
+	List1[TakeScreenshotResult] = p2
 	
-	if not var1 then
-		var2(safetyService)
+	if not Flag then
+		v4(SafetyService)
 	end
 	return true
 end
 
-return t
+return ScreenshotManager

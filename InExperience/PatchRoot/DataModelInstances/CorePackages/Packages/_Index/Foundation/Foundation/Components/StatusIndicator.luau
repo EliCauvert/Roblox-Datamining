@@ -1,1 +1,1 @@
-﻿return require(script.StatusIndicator)
+﻿return (require(script.StatusIndicator))

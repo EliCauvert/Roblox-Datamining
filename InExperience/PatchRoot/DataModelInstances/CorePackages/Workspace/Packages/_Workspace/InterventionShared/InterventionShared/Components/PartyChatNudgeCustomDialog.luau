@@ -1,39 +1,39 @@
-﻿local interventionShared = script:FindFirstAncestor("InterventionShared")
-local parent = interventionShared.Parent
+﻿local InterventionShared = script:FindFirstAncestor("InterventionShared")
+local Parent = InterventionShared.Parent
 local IXPService = game:GetService("IXPService")
-local appUserLayers = require(parent.ExperimentLayers).AppUserLayers
-local constantsModule = require(interventionShared.Utils.Constants)
-local interventionAnalyticsModule = require(interventionShared.InterventionAnalytics)
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local iconSize = foundationModule.Enums.IconSize
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useTokens = foundationModule.Hooks.useTokens
-local interventionTreatmentShownSignalModule = require(interventionShared.Signals.interventionTreatmentShownSignal)
-local interventionDialogModule = require(interventionShared.Components.InterventionDialog)
-local fFlagUFRFriendsChatIXPExposureModule = require(interventionShared.Flags.FFlagUFRFriendsChatIXPExposure)
+local AppUserLayers = require(Parent.ExperimentLayers).AppUserLayers
+local ConstantsModule = require(InterventionShared.Utils.Constants)
+local InterventionAnalyticsModule = require(InterventionShared.InterventionAnalytics)
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local IconSize = FoundationModule.Enums.IconSize
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local InterventionTreatmentShownSignalModule = require(InterventionShared.Signals.interventionTreatmentShownSignal)
+local InterventionDialogModule = require(InterventionShared.Components.InterventionDialog)
+local FFlagUFRFriendsChatIXPExposureModule = require(InterventionShared.Flags.FFlagUFRFriendsChatIXPExposure)
 
-return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), useLocalization (ref), constantsModule (ref), reactModule (ref), fFlagUFRFriendsChatIXPExposureModule (ref), IXPService (ref), appUserLayers (ref), interventionTreatmentShownSignalModule (ref), interventionDialogModule (ref), iconSize (ref), interventionAnalyticsModule (ref)
-	local var1 = useTokens()
-	local var2 = useLocalization(constantsModule.localizationKeys)
-	reactModule.useEffect(function()
-		-- upvalues: fFlagUFRFriendsChatIXPExposureModule (copy), IXPService (copy), appUserLayers (copy), interventionTreatmentShownSignalModule (copy), constantsModule (copy)
-		if fFlagUFRFriendsChatIXPExposureModule and game:GetEngineFeature("EnableLogFlagLinkedUserLayerExposure") then
-			IXPService:LogFlagLinkedUserLayerExposure(appUserLayers.FriendsChatRestrictionUserIDLayer)
+return ReactModule.memo(function(p1) --[[ Line: 26 ]]
+	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), ConstantsModule (copy), ReactModule (copy), FFlagUFRFriendsChatIXPExposureModule (copy), IXPService (copy), AppUserLayers (copy), InterventionTreatmentShownSignalModule (copy), InterventionDialogModule (copy), IconSize (copy), InterventionAnalyticsModule (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseLocalizationResult = UseLocalizationFunction(ConstantsModule.localizationKeys)
+	ReactModule.useEffect(function() --[[ Line: 29 ]]
+		-- upvalues: FFlagUFRFriendsChatIXPExposureModule (upval), IXPService (upval), AppUserLayers (upval), InterventionTreatmentShownSignalModule (upval), ConstantsModule (upval)
+		if FFlagUFRFriendsChatIXPExposureModule and game:GetEngineFeature("EnableLogFlagLinkedUserLayerExposure") then
+			IXPService:LogFlagLinkedUserLayerExposure(AppUserLayers.FriendsChatRestrictionUserIDLayer)
 		end
-		interventionTreatmentShownSignalModule:fire(constantsModule.TreatmentType.PartyChatNudgeDialog)
+		InterventionTreatmentShownSignalModule:fire(ConstantsModule.TreatmentType.PartyChatNudgeDialog)
 	end, {})
 	
-	return reactModule.createElement(interventionDialogModule, {
+	return ReactModule.createElement(InterventionDialogModule, {
 		iconName = "icons/status/error_large",
-		titleText = var2.DontSharePersonalInformationText,
-		bodyText = var2.PartyChatMayBeSuspendedText,
+		titleText = UseLocalizationResult.DontSharePersonalInformationText,
+		bodyText = UseLocalizationResult.PartyChatMayBeSuspendedText,
 		onDismiss = p1.onDismiss,
-		iconSize = iconSize.Large,
-		iconStyle = var1.Color.System.Warning,
+		iconSize = IconSize.Large,
+		iconStyle = UseTokensResult.Color.System.Warning,
 		eventId = p1.eventId,
-		namespaceForAnalytics = interventionAnalyticsModule.Constants.CounterNamespaceTypes.PartyChat,
-		interventionTypeForAnalytics = interventionAnalyticsModule.Constants.InterventionTypes.PartyChatNudge
+		namespaceForAnalytics = InterventionAnalyticsModule.Constants.CounterNamespaceTypes.PartyChat,
+		interventionTypeForAnalytics = InterventionAnalyticsModule.Constants.InterventionTypes.PartyChatNudge
 	})
 end)

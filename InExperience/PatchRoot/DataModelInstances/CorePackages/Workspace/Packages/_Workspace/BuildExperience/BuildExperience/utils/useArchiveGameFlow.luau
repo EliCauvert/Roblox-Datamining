@@ -1,27 +1,27 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local reactModule = require(buildExperience.Parent.React)
-local gameConfigurationActionsModule = require(buildExperience.utils.GameConfigurationActions)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local ReactModule = require(BuildExperience.Parent.React)
+local GameConfigurationActionsModule = require(BuildExperience.utils.GameConfigurationActions)
 
-return function()
-	-- upvalues: reactModule (ref), gameConfigurationActionsModule (ref)
-	local var1, var2 = reactModule.useState(nil)
+return function() --[[ Line: 15 | Named "useArchiveGameFlow" ]]
+	-- upvalues: ReactModule (copy), GameConfigurationActionsModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
 	
 	return {
-		isOpen = var1 ~= nil,
-		requestArchive = reactModule.useCallback(function(p1)
-			-- upvalues: var2 (ref)
-			var2(p1)
+		isOpen = UseStateResult ~= nil,
+		requestArchive = ReactModule.useCallback(function(p1) --[[ Line: 18 ]]
+			-- upvalues: UseStateResult2 (copy)
+			UseStateResult2(p1)
 		end, {}),
-		confirm = reactModule.useCallback(function()
-			-- upvalues: var1 (ref), gameConfigurationActionsModule (copy), var2 (ref)
-			if var1 ~= nil then
-				gameConfigurationActionsModule.archiveGame(var1)
+		confirm = ReactModule.useCallback(function() --[[ Line: 26 ]]
+			-- upvalues: UseStateResult (copy), GameConfigurationActionsModule (upval), UseStateResult2 (copy)
+			if UseStateResult ~= nil then
+				GameConfigurationActionsModule.archiveGame(UseStateResult)
 			end
-			var2(nil)
-		end, { var1 }),
-		cancel = reactModule.useCallback(function()
-			-- upvalues: var2 (ref)
-			var2(nil)
+			UseStateResult2(nil)
+		end, { UseStateResult }),
+		cancel = ReactModule.useCallback(function() --[[ Line: 22 ]]
+			-- upvalues: UseStateResult2 (copy)
+			UseStateResult2(nil)
 		end, {})
 	}
 end

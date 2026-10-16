@@ -1,7 +1,7 @@
-﻿local parent = script:FindFirstAncestor("NavigationRodux").Parent
-local argCheckModule = require(parent.ArgCheck)
+﻿local Parent = script:FindFirstAncestor("NavigationRodux").Parent
+local ArgCheckModule = require(Parent.ArgCheck)
 
-return require(parent.Rodux).makeActionCreator(script.Name, function(p1)
-	-- upvalues: argCheckModule (ref)
-	return { locked = argCheckModule.isType(p1, "boolean", "locked") }
+return require(Parent.Rodux).makeActionCreator(script.Name, function(p1) --[[ Line: 7 ]]
+	-- upvalues: ArgCheckModule (copy)
+	return { locked = ArgCheckModule.isType(p1, "boolean", "locked") }
 end)

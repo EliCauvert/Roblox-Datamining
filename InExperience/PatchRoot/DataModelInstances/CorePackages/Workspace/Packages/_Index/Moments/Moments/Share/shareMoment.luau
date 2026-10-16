@@ -1,73 +1,69 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
-local momentsCommonModule = require(parent.MomentsCommon)
-local sharedFlagsModule = require(parent.SharedFlags)
-local default = require(parent.ExternalContentSharingProtocol).ExternalContentSharingProtocol.default
-local analytics = momentsCommonModule.Analytics
-local eventNames = analytics.EventNames
-local fFlagMomentsPassFeedItemIdToBackendApis = sharedFlagsModule.FFlagMomentsPassFeedItemIdToBackendApis
-local makeFeedActionFieldsModule = require(moments.Analytics.makeFeedActionFields)
-local fetchShareLinkModule = require(script.Parent.fetchShareLink)
-local getShareCountsStoreModule = require(moments.Stores.GetShareCountsStore)
-local getToastStoreModule = require(moments.Stores.GetToastStore)
-local readAppPolicyModule = require(script.Parent.readAppPolicy)
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
+local Default = require(Parent.ExternalContentSharingProtocol).ExternalContentSharingProtocol.default
+local Analytics = require(Parent.MomentsCommon).Analytics
+local EventNames = Analytics.EventNames
+local FFlagMomentsPassFeedItemIdToBackendApis = require(Parent.SharedFlags).FFlagMomentsPassFeedItemIdToBackendApis
+local MakeFeedActionFieldsModule = require(Moments.Analytics.makeFeedActionFields)
+local FetchShareLinkModule = require(script.Parent.fetchShareLink)
+local GetShareCountsStoreModule = require(Moments.Stores.GetShareCountsStore)
+local GetToastStoreModule = require(Moments.Stores.GetToastStore)
+local ReadAppPolicyModule = require(script.Parent.readAppPolicy)
 
-return function(p1)
-	-- upvalues: getToastStoreModule (ref), fFlagMomentsPassFeedItemIdToBackendApis (ref), fetchShareLinkModule (ref), readAppPolicyModule (ref), default (ref), getShareCountsStoreModule (ref), makeFeedActionFieldsModule (ref), analytics (ref), eventNames (ref)
-	local momentId = p1.momentId
-	local strings = p1.strings
-	task.spawn(function()
-		-- upvalues: getToastStoreModule (copy), strings (ref), fFlagMomentsPassFeedItemIdToBackendApis (copy), p1 (ref), fetchShareLinkModule (copy), momentId (ref), readAppPolicyModule (copy), default (copy), getShareCountsStoreModule (copy), makeFeedActionFieldsModule (copy), analytics (copy), eventNames (copy)
-		local function _()
-			-- upvalues: getToastStoreModule (copy), strings (copy)
-			getToastStoreModule(false).triggerToast({ text = "", title = strings.linkCopyFailed })
+return function(p1) --[[ Line: 40 | Named "shareMoment" ]]
+	-- upvalues: GetToastStoreModule (copy), FFlagMomentsPassFeedItemIdToBackendApis (copy), FetchShareLinkModule (copy), ReadAppPolicyModule (copy), Default (copy), GetShareCountsStoreModule (copy), MakeFeedActionFieldsModule (copy), Analytics (copy), EventNames (copy)
+	local MomentId = p1.momentId
+	local Strings = p1.strings
+	task.spawn(function() --[[ Line: 44 ]]
+		-- upvalues: GetToastStoreModule (upval), Strings (copy), FFlagMomentsPassFeedItemIdToBackendApis (upval), p1 (copy), FetchShareLinkModule (upval), MomentId (copy), ReadAppPolicyModule (upval), Default (upval), GetShareCountsStoreModule (upval), MakeFeedActionFieldsModule (upval), Analytics (upval), EventNames (upval)
+		local function _() --[[ Line: 45 | Named "notifyFailure" ]]
+			-- upvalues: GetToastStoreModule (upval), Strings (upval)
+			GetToastStoreModule(false).triggerToast({ text = "", title = Strings.linkCopyFailed })
 		end
 		
-		if fFlagMomentsPassFeedItemIdToBackendApis and (p1.feedItemId == nil or p1.feedItemId == "") then
-			getToastStoreModule(false).triggerToast({ text = "", title = strings.linkCopyFailed })
+		if FFlagMomentsPassFeedItemIdToBackendApis and (p1.feedItemId == nil or p1.feedItemId == "") then
+			GetToastStoreModule(false).triggerToast({ text = "", title = Strings.linkCopyFailed })
 			
 			return
 		end
-		local ok, status = pcall(fetchShareLinkModule, {
-			momentId = momentId,
-			feedItemId = if fFlagMomentsPassFeedItemIdToBackendApis then p1.feedItemId else nil,
+		local Success, Result = pcall(FetchShareLinkModule, {
+			momentId = MomentId,
+			feedItemId = if FFlagMomentsPassFeedItemIdToBackendApis then p1.feedItemId else nil,
 			description = p1.description,
-			title = strings.linkPreviewTitle
+			title = Strings.linkPreviewTitle
 		})
 		
-		if not ok or not status then
-			getToastStoreModule(false).triggerToast({ text = "", title = strings.linkCopyFailed })
-			
-			return
-		elseif not pcall(function()
-			-- upvalues: readAppPolicyModule (copy), default (copy), status (ref)
-			local eligibleForCapturesFeature
-			local var1 = readAppPolicyModule()
-			
-			if var1 then
-				eligibleForCapturesFeature = var1.EnableShareCaptureCTA and (var1.EligibleForCapturesFeature or false)
-			end
-			if eligibleForCapturesFeature then
-				default:shareUrl({ context = "MomentsFeed", url = status })
-				
-				return
-			end
-			default:setClipboardText({ context = "MomentsFeed", text = status })
-		end) then
-			getToastStoreModule(false).triggerToast({ text = "", title = strings.linkCopyFailed })
+		if not Success or not Result then
+			GetToastStoreModule(false).triggerToast({ text = "", title = Strings.linkCopyFailed })
 			
 			return
 		end
-		getShareCountsStoreModule(false).markShared(momentId)
+		if not pcall(function() --[[ Line: 65 ]]
+			-- upvalues: ReadAppPolicyModule (upval), Default (upval), Result (copy)
+			local AppPolicyModule = ReadAppPolicyModule()
+			
+			if AppPolicyModule and AppPolicyModule.EnableShareCaptureCTA and AppPolicyModule.EligibleForCapturesFeature or false then
+				Default:shareUrl({ context = "MomentsFeed", url = Result })
+				
+				return
+			else
+				Default:setClipboardText({ context = "MomentsFeed", text = Result })
+			end
+		end) then
+			GetToastStoreModule(false).triggerToast({ text = "", title = Strings.linkCopyFailed })
+			
+			return
+		end
+		GetShareCountsStoreModule(false).markShared(MomentId)
 		
 		if p1.logAction then
 			p1.logAction({})
 		end
-		local var1 = makeFeedActionFieldsModule(momentId, p1.feedItemId, p1.feedSessionId, "share")
+		local Share = MakeFeedActionFieldsModule(MomentId, p1.feedItemId, p1.feedSessionId, "share")
 		
-		if var1 then
-			analytics.fireAnalyticsEvent(eventNames.FeedShareButtonPressed, var1)
+		if Share then
+			Analytics.fireAnalyticsEvent(EventNames.FeedShareButtonPressed, Share)
 		end
-		getToastStoreModule(false).triggerToast({ text = "", title = strings.linkCopied })
+		GetToastStoreModule(false).triggerToast({ text = "", title = Strings.linkCopied })
 	end)
 end

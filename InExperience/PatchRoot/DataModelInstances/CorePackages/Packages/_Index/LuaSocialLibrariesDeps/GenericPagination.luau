@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.GenericPagination.GenericPagination)
+﻿return (require(script.Parent.Parent.Parent._Index.GenericPagination.GenericPagination))

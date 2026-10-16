@@ -1,12 +1,12 @@
-﻿local httpService = game:GetService("HttpService")
-local urlBuilder = require(script:FindFirstAncestor("AuthCommon").Parent.UrlBuilder).UrlBuilder
+﻿local HttpService = game:GetService("HttpService")
+local UrlBuilder = require(script:FindFirstAncestor("AuthCommon").Parent.UrlBuilder).UrlBuilder
 
-return function(p1, p2)
-	-- upvalues: urlBuilder (ref), httpService (ref)
-	return p1(urlBuilder.fromString("apis:account-switcher/v1/getLoggedInUsersMetadata")(), "POST", {
-		postBody = httpService:JSONEncode({
+return function(Callback, Encrypted_users_data_blob) --[[ Line: 8 ]]
+	-- upvalues: UrlBuilder (copy), HttpService (copy)
+	return Callback(UrlBuilder.fromString("apis:account-switcher/v1/getLoggedInUsersMetadata")(), "POST", {
+		postBody = HttpService:JSONEncode({
 			remove_invalid_active_user = false,
-			encrypted_users_data_blob = p2
+			encrypted_users_data_blob = Encrypted_users_data_blob
 		})
 	})
 end

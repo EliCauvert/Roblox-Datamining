@@ -1,57 +1,66 @@
-﻿local abuseReportMenu = script:FindFirstAncestor("AbuseReportMenu")
-local _ = require(abuseReportMenu.Components.Types)
-local constantsModule = require(abuseReportMenu.Components.Constants)
-local reportAnythingActions = constantsModule.ReportAnythingActions
+﻿local AbuseReportMenu = script:FindFirstAncestor("AbuseReportMenu")
+local _ = require(AbuseReportMenu.Components.Types)
+local ConstantsModule = require(AbuseReportMenu.Components.Constants)
+local ReportAnythingActions = ConstantsModule.ReportAnythingActions
 
-return function(p1, p2)
-	-- upvalues: reportAnythingActions (ref), constantsModule (ref)
-	local cloned = table.clone(p1)
-	local type = p2.type
+return function(Tbl, p1) --[[ Line: 7 | Named "reportAnythingReducer" ]]
+	-- upvalues: ReportAnythingActions (copy), ConstantsModule (copy)
+	local Copy = table.clone(Tbl)
+	local Type = p1.type
 	
-	if type == reportAnythingActions.ClearAll then
-		cloned = constantsModule.ReportAnythingInitialState
+	if Type == ReportAnythingActions.ClearAll then
+		Copy = ConstantsModule.ReportAnythingInitialState
 		
-		return cloned
-	elseif type == reportAnythingActions.ClearAnnotationFlowProperties then
-		cloned.annotationPoints = {}
-		cloned.attachCompleted = false
-		cloned.annotationPageSeen = false
-		cloned.annotationOptionSeen = false
-		
-		return cloned
-	elseif type == reportAnythingActions.SetScreenshotId then
-		cloned.screenshotId = p2.screenshotId
-		
-		return cloned
-	elseif type == reportAnythingActions.SetScreenshotContentId then
-		cloned.screenshotContentId = p2.screenshotContentId
-		
-		return cloned
-	elseif type == reportAnythingActions.SetAnnotationPoints then
-		cloned.annotationPoints = p2.annotationPoints
-		cloned.annotationPageSeen = true
-		cloned.annotationOptionSeen = true
-		
-		return cloned
-	elseif type == reportAnythingActions.SetIdentificationResults then
-		cloned.identificationResults = p2.identificationResults
-		
-		return cloned
-	elseif type == reportAnythingActions.CompleteAttachment then
-		cloned.attachCompleted = true
-		
-		return cloned
-	elseif type == reportAnythingActions.SetAnnotationCircleRadius then
-		cloned.annotationCircleRadius = p2.radius
-		
-		return cloned
-	elseif type == reportAnythingActions.SetAnnotationAreaDimensions then
-		cloned.annotationAreaWidth = p2.width
-		cloned.annotationAreaHeight = p2.height
-		
-		return cloned
-	elseif type == reportAnythingActions.SetAnnotationOptionSeen then
-		cloned.annotationOptionSeen = true
+		return Copy
 	end
-	return cloned
+	if Type == ReportAnythingActions.ClearAnnotationFlowProperties then
+		Copy.annotationPoints = {}
+		Copy.attachCompleted = false
+		Copy.annotationPageSeen = false
+		Copy.annotationOptionSeen = false
+		
+		return Copy
+	end
+	if Type == ReportAnythingActions.SetScreenshotId then
+		Copy.screenshotId = p1.screenshotId
+		
+		return Copy
+	end
+	if Type == ReportAnythingActions.SetScreenshotContentId then
+		Copy.screenshotContentId = p1.screenshotContentId
+		
+		return Copy
+	end
+	if Type == ReportAnythingActions.SetAnnotationPoints then
+		Copy.annotationPoints = p1.annotationPoints
+		Copy.annotationPageSeen = true
+		Copy.annotationOptionSeen = true
+		
+		return Copy
+	end
+	if Type == ReportAnythingActions.SetIdentificationResults then
+		Copy.identificationResults = p1.identificationResults
+		
+		return Copy
+	end
+	if Type == ReportAnythingActions.CompleteAttachment then
+		Copy.attachCompleted = true
+		
+		return Copy
+	end
+	if Type == ReportAnythingActions.SetAnnotationCircleRadius then
+		Copy.annotationCircleRadius = p1.radius
+		
+		return Copy
+	end
+	if Type == ReportAnythingActions.SetAnnotationAreaDimensions then
+		Copy.annotationAreaWidth = p1.width
+		Copy.annotationAreaHeight = p1.height
+		
+		return Copy
+	end
+	if Type == ReportAnythingActions.SetAnnotationOptionSeen then
+		Copy.annotationOptionSeen = true
+	end
+	return Copy
 end

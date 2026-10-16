@@ -1,1 +1,1 @@
-﻿return require(script.Breadcrumb)
+﻿return (require(script.Breadcrumb))

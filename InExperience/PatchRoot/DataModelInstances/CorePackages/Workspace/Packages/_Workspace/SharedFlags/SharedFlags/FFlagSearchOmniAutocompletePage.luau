@@ -1,1 +1,3 @@
-﻿return game:DefineFastFlag("EnableSearchOmniAutocompletePageByDefault5", false) or require(script.Parent.FFlagSearchOmniAutocompletePageIXP)
+﻿local FFlagSearchOmniAutocompletePageIXPModule = require(script.Parent.FFlagSearchOmniAutocompletePageIXP)
+
+return game:DefineFastFlag("EnableSearchOmniAutocompletePageByDefault5", false) or FFlagSearchOmniAutocompletePageIXPModule

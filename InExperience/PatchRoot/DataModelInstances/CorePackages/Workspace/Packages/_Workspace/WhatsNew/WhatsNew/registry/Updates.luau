@@ -1,15 +1,14 @@
-﻿local whatsNew = script:FindFirstAncestor("WhatsNew")
-local constantsModule = require(whatsNew.Constants)
-local _ = require(whatsNew.Types)
-local foundationModule = require(whatsNew.Parent.Foundation)
-local popoverAlign = foundationModule.Enums.PopoverAlign
-local popoverSide = foundationModule.Enums.PopoverSide
-local isSideSheetEnabledModule = require(whatsNew.Parent.InExperienceSideSheetUtils.isSideSheetEnabled)
-local roseWhatsNewTourPublishedTime = game:DefineFastString("RoseWhatsNewTourPublishedTime", "2026-08-12T00:00:00Z")
-local roseWhatsNewTourDisabledTime = game:DefineFastString("RoseWhatsNewTourDisabledTime", "2026-09-30T00:00:00Z")
+﻿local WhatsNew = script:FindFirstAncestor("WhatsNew")
+local _ = require(WhatsNew.Types)
+local FoundationModule = require(WhatsNew.Parent.Foundation)
+local PopoverAlign = FoundationModule.Enums.PopoverAlign
+local PopoverSide = FoundationModule.Enums.PopoverSide
+local IsSideSheetEnabledModule = require(WhatsNew.Parent.InExperienceSideSheetUtils.isSideSheetEnabled)
+local RoseWhatsNewTourPublishedTime = game:DefineFastString("RoseWhatsNewTourPublishedTime", "2026-08-12T00:00:00Z")
+local RoseWhatsNewTourDisabledTime = game:DefineFastString("RoseWhatsNewTourDisabledTime", "2026-09-30T00:00:00Z")
 
 return {
-	constants = constantsModule.DEFAULT,
+	constants = require(WhatsNew.Constants).DEFAULT,
 	scopeTours = {
 		InGame = { id = "InGame", parentScopeId = nil },
 		TiltMenu = {
@@ -22,7 +21,7 @@ return {
 			onboardingText = "CoreScripts.FTUX.Label.NewTiltOnboarding",
 			updatesTitle = "CoreScripts.FTUX.Heading.NewTiltUpdate",
 			updatesText = "CoreScripts.FTUX.Label.NewTiltUpdate",
-			align = popoverAlign.Start
+			align = PopoverAlign.Start
 		}
 	},
 	whatsNew = {
@@ -33,11 +32,11 @@ return {
 			title = "CoreScripts.FTUX.Heading.SideSheetUpdate",
 			text = "CoreScripts.FTUX.Label.SideSheetUpdate",
 			icon = "",
-			enabled = isSideSheetEnabledModule,
-			side = popoverSide.Right,
-			align = popoverAlign.Center,
-			publishedTime = roseWhatsNewTourPublishedTime,
-			disabledTime = roseWhatsNewTourDisabledTime
+			enabled = IsSideSheetEnabledModule,
+			side = PopoverSide.Right,
+			align = PopoverAlign.Center,
+			publishedTime = RoseWhatsNewTourPublishedTime,
+			disabledTime = RoseWhatsNewTourDisabledTime
 		},
 		{
 			id = "LeaveRespawn",
@@ -46,11 +45,11 @@ return {
 			title = "CoreScripts.FTUX.Heading.LeaveRespawn",
 			text = "CoreScripts.FTUX.Label.LeaveRespawn",
 			icon = "",
-			enabled = isSideSheetEnabledModule,
-			side = popoverSide.Right,
-			align = popoverAlign.End,
-			publishedTime = roseWhatsNewTourPublishedTime,
-			disabledTime = roseWhatsNewTourDisabledTime
+			enabled = IsSideSheetEnabledModule,
+			side = PopoverSide.Right,
+			align = PopoverAlign.End,
+			publishedTime = RoseWhatsNewTourPublishedTime,
+			disabledTime = RoseWhatsNewTourDisabledTime
 		}
 	},
 	onboarding = {
@@ -62,9 +61,9 @@ return {
 			text = "CoreScripts.FTUX.Label.SocialOnboarding",
 			icon = "",
 			enabled = true,
-			align = popoverAlign.Start,
-			publishedTime = roseWhatsNewTourPublishedTime,
-			disabledTime = roseWhatsNewTourDisabledTime
+			align = PopoverAlign.Start,
+			publishedTime = RoseWhatsNewTourPublishedTime,
+			disabledTime = RoseWhatsNewTourDisabledTime
 		},
 		{
 			id = "SideSheet",
@@ -73,11 +72,11 @@ return {
 			title = "CoreScripts.FTUX.Heading.SideSheetUpdate",
 			text = "CoreScripts.FTUX.Label.SideSheetOnboarding",
 			icon = "",
-			enabled = isSideSheetEnabledModule,
-			side = popoverSide.Right,
-			align = popoverAlign.Center,
-			publishedTime = roseWhatsNewTourPublishedTime,
-			disabledTime = roseWhatsNewTourDisabledTime
+			enabled = IsSideSheetEnabledModule,
+			side = PopoverSide.Right,
+			align = PopoverAlign.Center,
+			publishedTime = RoseWhatsNewTourPublishedTime,
+			disabledTime = RoseWhatsNewTourDisabledTime
 		},
 		{
 			id = "LeaveRespawn",
@@ -86,11 +85,11 @@ return {
 			title = "CoreScripts.FTUX.Heading.LeaveRespawn",
 			text = "CoreScripts.FTUX.Label.LeaveRespawn",
 			icon = "",
-			enabled = isSideSheetEnabledModule,
-			side = popoverSide.Right,
-			align = popoverAlign.End,
-			publishedTime = roseWhatsNewTourPublishedTime,
-			disabledTime = roseWhatsNewTourDisabledTime
+			enabled = IsSideSheetEnabledModule,
+			side = PopoverSide.Right,
+			align = PopoverAlign.End,
+			publishedTime = RoseWhatsNewTourPublishedTime,
+			disabledTime = RoseWhatsNewTourDisabledTime
 		}
 	}
 }

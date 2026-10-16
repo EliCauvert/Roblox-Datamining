@@ -1,25 +1,23 @@
-﻿local chrome = script:FindFirstAncestor("Chrome")
-local corePackagesService = game:GetService("CorePackages")
-local serviceModule = require(chrome.Service)
-local commonIconModule = require(chrome.Integrations.CommonIcon)
-local sideSheetPlacement = require(corePackagesService.Workspace.Packages.Chrome).Enums.SideSheetPlacement
-local inGameMenuIntegrationUtilsModule = require(script.Parent.InGameMenuIntegrationUtils)
-local playersPage = inGameMenuIntegrationUtilsModule.createPageOpenSignal("PlayersPage")
+﻿local Chrome = script:FindFirstAncestor("Chrome")
+local ServiceModule = require(Chrome.Service)
+local CommonIconModule = require(Chrome.Integrations.CommonIcon)
+local InGameMenuIntegrationUtilsModule = require(script.Parent.InGameMenuIntegrationUtils)
+local PlayersPage = InGameMenuIntegrationUtilsModule.createPageOpenSignal("PlayersPage")
 
-return serviceModule:register({
+return ServiceModule:register({
 	id = "people",
 	label = "CoreScripts.InGameMenu.PageTitle.Players",
-	initialAvailability = serviceModule.AvailabilitySignal.Available,
-	sideSheetPlacement = sideSheetPlacement.AboveFold,
-	activated = function(_)
-		-- upvalues: inGameMenuIntegrationUtilsModule (ref), playersPage (ref)
-		inGameMenuIntegrationUtilsModule.toggleIGMPage("PlayersPage", playersPage:get())
+	initialAvailability = ServiceModule.AvailabilitySignal.Available,
+	sideSheetPlacement = require(game:GetService("CorePackages").Workspace.Packages.Chrome).Enums.SideSheetPlacement.AboveFold,
+	activated = function(_) --[[ Line: 19 ]]
+		-- upvalues: InGameMenuIntegrationUtilsModule (copy), PlayersPage (copy)
+		InGameMenuIntegrationUtilsModule.toggleIGMPage("PlayersPage", PlayersPage:get())
 	end,
-	isActivated = playersPage,
+	isActivated = PlayersPage,
 	components = {
-		Icon = function(_)
-			-- upvalues: commonIconModule (ref), playersPage (ref)
-			return commonIconModule("icons/menu/friends", "icons/menu/friendsOn", playersPage)
+		Icon = function(_) --[[ Line: 24 ]]
+			-- upvalues: CommonIconModule (copy), PlayersPage (copy)
+			return CommonIconModule("icons/menu/friends", "icons/menu/friendsOn", PlayersPage)
 		end
 	}
 })

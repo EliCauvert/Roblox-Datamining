@@ -1,93 +1,91 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local statsUtilsModule = require(coreGuiService.RobloxGui.Modules.Stats.StatsUtils)
-local barGraphModule = require(coreGuiService.RobloxGui.Modules.Stats.BarGraph)
-local t = {}
-t.__index = t
+﻿local CoreGui = game:GetService("CoreGui")
+local StatsUtilsModule = require(CoreGui.RobloxGui.Modules.Stats.StatsUtils)
+local BarGraphModule = require(CoreGui.RobloxGui.Modules.Stats.BarGraph)
+local StatsAnnotatedGraphModule = {}
+StatsAnnotatedGraphModule.__index = StatsAnnotatedGraphModule
 
-function t.new(p1, p2)
-	-- upvalues: t (ref), statsUtilsModule (ref), barGraphModule (ref)
-	local pSBottomAxisLabel = {}
-	setmetatable(pSBottomAxisLabel, t)
-	pSBottomAxisLabel._statType = p1
-	pSBottomAxisLabel._statMaxName = statsUtilsModule.StatMaxNames[p1]
-	pSBottomAxisLabel._isMaximized = p2
-	pSBottomAxisLabel._values = {}
-	pSBottomAxisLabel._average = 0
-	pSBottomAxisLabel._target = 0
-	pSBottomAxisLabel._axisMax = 0
-	pSBottomAxisLabel._frame = Instance.new("Frame")
-	pSBottomAxisLabel._frame.Name = "PS_AnnotatedGraph"
-	pSBottomAxisLabel._frame.BackgroundTransparency = 1
-	pSBottomAxisLabel._frame.ZIndex = statsUtilsModule.GraphZIndex
-	pSBottomAxisLabel._topLabel = Instance.new("TextLabel")
-	pSBottomAxisLabel._topLabel.Name = "PS_TopAxisLabel"
-	pSBottomAxisLabel._topLabel.Parent = pSBottomAxisLabel._frame
-	pSBottomAxisLabel._topLabel.TextXAlignment = Enum.TextXAlignment.Left
-	pSBottomAxisLabel._topLabel.TextYAlignment = Enum.TextYAlignment.Top
-	pSBottomAxisLabel._topLabel.FontSize = statsUtilsModule.PanelGraphFontSize
-	pSBottomAxisLabel._bottomLabel = Instance.new("TextLabel")
-	pSBottomAxisLabel._bottomLabel.Name = "PS_BottomAxisLabel"
-	pSBottomAxisLabel._bottomLabel.Parent = pSBottomAxisLabel._frame
-	pSBottomAxisLabel._bottomLabel.TextXAlignment = Enum.TextXAlignment.Left
-	pSBottomAxisLabel._bottomLabel.TextYAlignment = Enum.TextYAlignment.Bottom
-	pSBottomAxisLabel._bottomLabel.FontSize = statsUtilsModule.PanelGraphFontSize
-	pSBottomAxisLabel._graph = barGraphModule.new(p2)
-	statsUtilsModule.StyleTextWidget(pSBottomAxisLabel._topLabel)
-	statsUtilsModule.StyleTextWidget(pSBottomAxisLabel._bottomLabel)
-	pSBottomAxisLabel:_layoutElements()
+function StatsAnnotatedGraphModule.new(_statType, _isMaximized) --[[ Line: 24 ]]
+	-- upvalues: StatsAnnotatedGraphModule (copy), StatsUtilsModule (copy), BarGraphModule (copy)
+	local t = {}
+	setmetatable(t, StatsAnnotatedGraphModule)
+	t._statType = _statType
+	t._statMaxName = StatsUtilsModule.StatMaxNames[_statType]
+	t._isMaximized = _isMaximized
+	t._values = {}
+	t._average = 0
+	t._target = 0
+	t._axisMax = 0
+	t._frame = Instance.new("Frame")
+	t._frame.Name = "PS_AnnotatedGraph"
+	t._frame.BackgroundTransparency = 1
+	t._frame.ZIndex = StatsUtilsModule.GraphZIndex
+	t._topLabel = Instance.new("TextLabel")
+	t._topLabel.Name = "PS_TopAxisLabel"
+	t._topLabel.Parent = t._frame
+	t._topLabel.TextXAlignment = Enum.TextXAlignment.Left
+	t._topLabel.TextYAlignment = Enum.TextYAlignment.Top
+	t._topLabel.FontSize = StatsUtilsModule.PanelGraphFontSize
+	t._bottomLabel = Instance.new("TextLabel")
+	t._bottomLabel.Name = "PS_BottomAxisLabel"
+	t._bottomLabel.Parent = t._frame
+	t._bottomLabel.TextXAlignment = Enum.TextXAlignment.Left
+	t._bottomLabel.TextYAlignment = Enum.TextYAlignment.Bottom
+	t._bottomLabel.FontSize = StatsUtilsModule.PanelGraphFontSize
+	t._graph = BarGraphModule.new(_isMaximized)
+	StatsUtilsModule.StyleTextWidget(t._topLabel)
+	StatsUtilsModule.StyleTextWidget(t._bottomLabel)
+	t:_layoutElements()
 	
-	return pSBottomAxisLabel
+	return t
 end
 
-function t:SetZIndex(p1)
-	self._frame.ZIndex = p1
-	self._topLabel.ZIndex = p1
-	self._bottomLabel.ZIndex = p1
-	self._graph:SetZIndex(p1)
+function StatsAnnotatedGraphModule:SetZIndex(ZIndex) --[[ Line: 71 ]]
+	self._frame.ZIndex = ZIndex
+	self._topLabel.ZIndex = ZIndex
+	self._bottomLabel.ZIndex = ZIndex
+	self._graph:SetZIndex(ZIndex)
 end
 
-function t:_layoutElements()
-	local var1
-	local _ = nil
-	
+function StatsAnnotatedGraphModule:_layoutElements() --[[ Line: 78 ]]
+	local XOffset = nil
 	if self._isMaximized then
-		var1 = 30
+		XOffset = 30
 		self._topLabel.Visible = true
 		self._bottomLabel.Visible = true
 	else
-		var1 = 0
+		XOffset = 0
 		self._topLabel.Visible = false
 		self._bottomLabel.Visible = false
 	end
-	local uDim2 = UDim2.new(0, 10, 0, 10)
-	local uDim2_1 = UDim2.new(1, -(20 + var1), 1, -20)
-	local uDim2_2 = UDim2.new(1, -(10 + var1), 0, 10)
-	local uDim2_3 = UDim2.new(0, var1, 0.333, -20)
-	local uDim2_4 = UDim2.new(1, -(10 + var1), 0.666, 10)
-	local uDim2_5 = UDim2.new(0, var1, 0.333, -20)
-	self._topLabel.Size = uDim2_3
-	self._topLabel.Position = uDim2_2
-	self._bottomLabel.Size = uDim2_5
-	self._bottomLabel.Position = uDim2_4
-	self._graph:PlaceInParent(self._frame, uDim2_1, uDim2)
+	local _UDim2 = UDim2.new(0, 10, 0, 10)
+	local _UDim2_1 = UDim2.new(1, -(20 + XOffset), 1, -20)
+	local _UDim2_2 = UDim2.new(1, -(10 + XOffset), 0, 10)
+	local _UDim2_3 = UDim2.new(1, -(10 + XOffset), 0.666, 10)
+	local _UDim2_4 = UDim2.new(0, XOffset, 0.333, -20)
+	self._topLabel.Size = UDim2.new(0, XOffset, 0.333, -20)
+	self._topLabel.Position = _UDim2_2
+	self._bottomLabel.Size = _UDim2_4
+	self._bottomLabel.Position = _UDim2_3
+	self._graph:PlaceInParent(self._frame, _UDim2_1, _UDim2)
 end
 
-function t:PlaceInParent(p1, p2, p3)
-	self._frame.Position = p3
-	self._frame.Size = p2
-	self._frame.Parent = p1
+function StatsAnnotatedGraphModule:PlaceInParent(Parent, Size, Position) --[[ Line: 108 ]]
+	self._frame.Position = Position
+	self._frame.Size = Size
+	self._frame.Parent = Parent
 end
 
-function t:_getTarget()
+function StatsAnnotatedGraphModule:_getTarget() --[[ Line: 114 ]]
 	if self._performanceStats == nil then
 		return 0
+	else
+		local StatMaxName = self._performanceStats:FindFirstChild(self._statMaxName)
+		
+		return if StatMaxName == nil then 0 else StatMaxName:GetValue()
 	end
-	local statMaxName = self._performanceStats:FindFirstChild(self._statMaxName)
-	
-	return if statMaxName == nil then 0 else statMaxName:GetValue()
 end
 
-function t:_render()
+function StatsAnnotatedGraphModule:_render() --[[ Line: 128 ]]
 	self._graph:SetAxisMax(self._axisMax)
 	self._graph:SetValues(self._values)
 	self._graph:SetAverage(self._average)
@@ -97,36 +95,37 @@ function t:_render()
 	self._bottomLabel.Text = string.format("%.2f", 0)
 end
 
-function t:_calculateAxisMax()
-	local var1 = self._target * 2
-	local var2 = self:_recursiveGetOrderOfMagnitude(1, var1)
-	self._axisMax = math.floor(0.5 + var1 / var2) * var2
+function StatsAnnotatedGraphModule:_calculateAxisMax() --[[ Line: 140 ]]
+	local ScaledTarget = self._target * 2
+	local RecursiveGetOrderOfMagnitudeResult = self:_recursiveGetOrderOfMagnitude(1, ScaledTarget)
+	self._axisMax = math.floor(0.5 + ScaledTarget / RecursiveGetOrderOfMagnitudeResult) * RecursiveGetOrderOfMagnitudeResult
 end
 
-function t:SetStatsAggregator(p1)
+function StatsAnnotatedGraphModule:SetStatsAggregator(_aggregator) --[[ Line: 150 ]]
 	if self._aggregator then
 		self._aggregator:RemoveListener(self._listenerId)
 		self._listenerId = nil
 		self._aggregator = nil
 	end
-	self._aggregator = p1
+	self._aggregator = _aggregator
 	self:_refreshVisibility()
 end
 
-function t:_stopListening()
+function StatsAnnotatedGraphModule:_stopListening() --[[ Line: 162 ]]
 	if self._aggregator == nil then return end
-	if self._listenerId == nil then
+	if self._listenerId ~= nil then
+		self._aggregator:RemoveListener(self._listenerId)
+		self._listenerId = nil
+		
 		return
 	end
-	self._aggregator:RemoveListener(self._listenerId)
-	self._listenerId = nil
 end
 
-function t:_startListening()
+function StatsAnnotatedGraphModule:_startListening() --[[ Line: 175 ]]
 	if self._aggregator == nil then return end
 	if self._listenerId == nil then
-		self._listenerId = self._aggregator:AddListener(function()
-			-- upvalues: self (ref)
+		self._listenerId = self._aggregator:AddListener(function() --[[ Line: 184 ]]
+			-- upvalues: self (copy)
 			self:_updateValuesAndRender()
 		end)
 		
@@ -134,35 +133,36 @@ function t:_startListening()
 	end
 end
 
-function t:_shouldBeVisible()
-	-- upvalues: statsUtilsModule (ref)
-	return if statsUtilsModule.PerformanceStatsShouldBeVisible() then self._frame.Visible else false
+function StatsAnnotatedGraphModule._shouldBeVisible(p1) --[[ Line: 189 ]]
+	-- upvalues: StatsUtilsModule (copy)
+	return if StatsUtilsModule.PerformanceStatsShouldBeVisible() then p1._frame.Visible else false
 end
 
-function t:SetVisible(p1)
-	self._frame.Visible = p1
+function StatsAnnotatedGraphModule:SetVisible(Visible) --[[ Line: 197 ]]
+	self._frame.Visible = Visible
 	self:_refreshVisibility()
 end
 
-function t:_refreshVisibility()
+function StatsAnnotatedGraphModule:_refreshVisibility() --[[ Line: 202 ]]
 	if self:_shouldBeVisible() then
 		self:_startListening()
 		self:_updateValuesAndRender()
 		
 		return
+	else
+		self:_stopListening()
 	end
-	self:_stopListening()
 end
 
-function t:OnPerformanceStatsShouldBeVisibleChanged()
+function StatsAnnotatedGraphModule:OnPerformanceStatsShouldBeVisibleChanged() --[[ Line: 211 ]]
 	self:_refreshVisibility()
 end
 
-function t:_recursiveGetOrderOfMagnitude(p1, p2)
-	return if p2 < p1 then self:_recursiveGetOrderOfMagnitude(p1 / 10, p2) elseif p2 <= p1 * 10 then p1 else self:_recursiveGetOrderOfMagnitude(p1 * 10, p2)
+function StatsAnnotatedGraphModule._recursiveGetOrderOfMagnitude(p1, p2: number, ScaledTarget) --[[ Line: 215 ]]
+	return if ScaledTarget < p2 then p1:_recursiveGetOrderOfMagnitude(p2 / 10, ScaledTarget) elseif ScaledTarget <= p2 * 10 then p2 else p1:_recursiveGetOrderOfMagnitude(p2 * 10, ScaledTarget)
 end
 
-function t:_updateValuesAndRender()
+function StatsAnnotatedGraphModule:_updateValuesAndRender() --[[ Line: 227 ]]
 	self._values = {}
 	self._average = 0
 	self._target = 0
@@ -176,4 +176,4 @@ function t:_updateValuesAndRender()
 	self:_render()
 end
 
-return t
+return StatsAnnotatedGraphModule

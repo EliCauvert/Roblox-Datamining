@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.UserCtaCommon.UserCtaCommon)
+﻿return (require(script.Parent.Parent.Parent._Index.UserCtaCommon.UserCtaCommon))

@@ -1,20 +1,20 @@
-﻿local robloxReplicatedStorageService = game:GetService("RobloxReplicatedStorage")
-local playersService = game:GetService("Players")
+﻿local RobloxReplicatedStorage = game:GetService("RobloxReplicatedStorage")
+local Players = game:GetService("Players")
 
 if require(game:GetService("CorePackages").Workspace.Packages.SharedFlags).GetFFlagEnableReferredPlayerJoinRemoteEvent() then
-	local referredPlayerJoin = Instance.new("RemoteEvent")
-	referredPlayerJoin.Name = "ReferredPlayerJoin"
-	referredPlayerJoin.Parent = robloxReplicatedStorageService
-	playersService.PlayerAdded:Connect(function(p1)
-		-- upvalues: playersService (ref), referredPlayerJoin (ref)
-		local joinData = p1:GetJoinData()
-		local referredByPlayerId = joinData and tonumber(joinData.ReferredByPlayerId)
+	local ReferredPlayerJoin = Instance.new("RemoteEvent")
+	ReferredPlayerJoin.Name = "ReferredPlayerJoin"
+	ReferredPlayerJoin.Parent = RobloxReplicatedStorage
+	Players.PlayerAdded:Connect(function(Player: Player) --[[ Line: 16 ]]
+		-- upvalues: Players (copy), ReferredPlayerJoin (copy)
+		local JoinData = Player:GetJoinData()
+		local Number = JoinData and tonumber(JoinData.ReferredByPlayerId)
 		
-		if referredByPlayerId and referredByPlayerId ~= 0 then
-			local var1 = playersService:GetPlayerByUserId(referredByPlayerId)
+		if Number and Number ~= 0 then
+			local Player1 = Players:GetPlayerByUserId(Number)
 			
-			if var1 then
-				referredPlayerJoin:FireClient(var1, p1)
+			if Player1 then
+				ReferredPlayerJoin:FireClient(Player1, Player)
 			end
 		end
 	end)

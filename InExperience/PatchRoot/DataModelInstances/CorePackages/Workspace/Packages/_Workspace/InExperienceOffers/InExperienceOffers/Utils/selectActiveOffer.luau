@@ -1,23 +1,24 @@
-﻿local inExperienceOffers = script:FindFirstAncestor("InExperienceOffers")
-local fFlagOffersRespectExpirationModule = require(inExperienceOffers.Flags.FFlagOffersRespectExpiration)
-local isOfferExpiredModule = require(inExperienceOffers.Utils.isOfferExpired)
-local _ = require(inExperienceOffers.Types)
+﻿local InExperienceOffers = script:FindFirstAncestor("InExperienceOffers")
+local FFlagOffersRespectExpirationModule = require(InExperienceOffers.Flags.FFlagOffersRespectExpiration)
+local IsOfferExpiredModule = require(InExperienceOffers.Utils.isOfferExpired)
+local _ = require(InExperienceOffers.Types)
 
-return function(p1, p2)
-	-- upvalues: fFlagOffersRespectExpirationModule (ref), isOfferExpiredModule (ref)
-	if p1 == nil then
+return function(List, p1) --[[ Line: 36 | Named "selectActiveOffer" ]]
+	-- upvalues: FFlagOffersRespectExpirationModule (copy), IsOfferExpiredModule (copy)
+	if List == nil then
 		return nil
 	end
-	for i, v in p1 do
-		local presentationData = v.presentationData
+	local PresentationData = nil
+	for _, value in List do
+		PresentationData = value.presentationData
 		
-		if v.offerStatus == "AVAILABLE" and presentationData ~= nil and presentationData[p2] ~= nil and (not fFlagOffersRespectExpirationModule or not isOfferExpiredModule(v)) then
+		if value.offerStatus == "AVAILABLE" and PresentationData ~= nil and PresentationData[p1] ~= nil and (not FFlagOffersRespectExpirationModule or not IsOfferExpiredModule(value)) then
 			return {
-				offerId = v.offerId,
-				offerStatus = v.offerStatus,
-				featureKeys = v.featureKeys,
-				expirationTimeInUTC = v.expirationTimeInUTC,
-				presentationData = presentationData
+				offerId = value.offerId,
+				offerStatus = value.offerStatus,
+				featureKeys = value.featureKeys,
+				expirationTimeInUTC = value.expirationTimeInUTC,
+				presentationData = PresentationData
 			}
 		end
 	end

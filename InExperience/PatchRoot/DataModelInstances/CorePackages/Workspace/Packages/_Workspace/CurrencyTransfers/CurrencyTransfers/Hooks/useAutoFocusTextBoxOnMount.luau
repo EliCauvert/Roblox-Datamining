@@ -1,24 +1,24 @@
-﻿local reactModule = require(script:FindFirstAncestor("CurrencyTransfers").Parent.React)
+﻿local ReactModule = require(script:FindFirstAncestor("CurrencyTransfers").Parent.React)
 
-return function(p1, p2)
-	-- upvalues: reactModule (ref)
-	local var1 = reactModule.useRef(false)
+return function(Callback, p1) --[[ Line: 7 | Named "useAutoFocusTextBoxOnMount" ]]
+	-- upvalues: ReactModule (copy)
+	local UseRefResult = ReactModule.useRef(false)
 	
-	return reactModule.useCallback(function(p3)
-		-- upvalues: p1 (ref), var1 (ref), p2 (ref)
-		if p1 then
-			p1(p3)
+	return ReactModule.useCallback(function(TextBox) --[[ Line: 10 ]]
+		-- upvalues: Callback (copy), UseRefResult (copy), p1 (copy)
+		if Callback then
+			Callback(TextBox)
 		end
-		if p3 and not var1.current then
-			var1.current = true
-			task.spawn(function()
-				-- upvalues: p2 (copy), p3 (ref)
-				task.wait(p2 or 0.05)
+		if TextBox and not UseRefResult.current then
+			UseRefResult.current = true
+			task.spawn(function() --[[ Line: 17 ]]
+				-- upvalues: p1 (upval), TextBox (copy)
+				task.wait(p1 or 0.05)
 				
-				if p3 and p3.Parent then
-					p3:CaptureFocus()
+				if TextBox and TextBox.Parent then
+					TextBox:CaptureFocus()
 				end
 			end)
 		end
-	end, { p1, p2 })
+	end, { Callback, p1 })
 end

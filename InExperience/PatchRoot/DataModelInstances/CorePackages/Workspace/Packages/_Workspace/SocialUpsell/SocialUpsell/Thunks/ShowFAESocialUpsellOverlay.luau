@@ -1,16 +1,16 @@
-﻿local socialUpsell = script:FindFirstAncestor("SocialUpsell")
-local parent = socialUpsell.Parent
-local setCentralOverlay = require(parent.CentralOverlay).Actions.SetCentralOverlay
-local socialUpsellTypeModule = require(socialUpsell.Enum.SocialUpsellType)
-local centralOverlayType = require(parent.RobloxAppEnums).CentralOverlayType
+﻿local SocialUpsell = script:FindFirstAncestor("SocialUpsell")
+local Parent = SocialUpsell.Parent
+local SetCentralOverlayFunction = require(Parent.CentralOverlay).Actions.SetCentralOverlay
+local SocialUpsellTypeModule = require(SocialUpsell.Enum.SocialUpsellType)
+local CentralOverlayType = require(Parent.RobloxAppEnums).CentralOverlayType
 
-return function(p1)
-	-- upvalues: setCentralOverlay (ref), centralOverlayType (ref), socialUpsellTypeModule (ref)
-	return function(p2)
-		-- upvalues: setCentralOverlay (copy), centralOverlayType (copy), p1 (ref), socialUpsellTypeModule (copy)
-		p2:dispatch(setCentralOverlay(centralOverlayType.SocialUpsellOverlay, {
-			data = p1,
-			upsellType = socialUpsellTypeModule.FacialAgeEstimation
+return function(Data) --[[ Line: 15 ]]
+	-- upvalues: SetCentralOverlayFunction (copy), CentralOverlayType (copy), SocialUpsellTypeModule (copy)
+	return function(p1) --[[ Line: 16 ]]
+		-- upvalues: SetCentralOverlayFunction (upval), CentralOverlayType (upval), Data (copy), SocialUpsellTypeModule (upval)
+		p1:dispatch(SetCentralOverlayFunction(CentralOverlayType.SocialUpsellOverlay, {
+			data = Data,
+			upsellType = SocialUpsellTypeModule.FacialAgeEstimation
 		}))
 	end
 end

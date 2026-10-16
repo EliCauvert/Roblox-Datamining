@@ -1,59 +1,59 @@
-﻿local parent = script.Parent
-local findOrModule = require(parent.findOr)
-local sliceModule = require(parent.slice)
-local parent_1 = parent.Parent
-local _ = require(parent_1.ES7Types)
-local MAX_SAFE_INTEGER = require(parent_1.Number).MAX_SAFE_INTEGER
+﻿local Parent = script.Parent
+local FindOrModule = require(Parent.findOr)
+local SliceModule = require(Parent.slice)
+local Parent1 = Parent.Parent
+local _ = require(Parent1.ES7Types)
+local MAXSAFEINTEGER = require(Parent1.Number).MAX_SAFE_INTEGER
 
-return function(p1, p2, p3)
-	-- upvalues: MAX_SAFE_INTEGER (ref), findOrModule (ref), sliceModule (ref)
-	if p2 == nil then
-		return { p1 }
-	elseif p3 == 0 then
+return function(Text: string, p1, p2: number) --[[ Line: 27 | Named "split" ]]
+	-- upvalues: MAXSAFEINTEGER (copy), FindOrModule (copy), SliceModule (copy)
+	if p1 == nil then
+		return { Text }
+	end
+	if p2 == 0 then
 		return {}
 	end
-	local list
-	local var1 = if p3 == nil or p3 < 0 then MAX_SAFE_INTEGER else p3
-	local _ = nil
+	local MAXSAFEINTEGER1 = if p2 == nil or p2 < 0 then MAXSAFEINTEGER else p2
+	local v1 = nil
 	
-	if typeof(p2) == "string" then
-		if p2 == "" then
-			local t = {}
+	if typeof(p1) == "string" then
+		if p1 == "" then
+			local List = {}
 			
-			for i in p1:gmatch(".") do
-				table.insert(t, i)
+			for i in Text:gmatch(".") do
+				table.insert(List, i)
 			end
-			return t
+			return List
 		else
-			list = { p2 }
+			v1 = { p1 }
 		end
 	else
-		list = p2
+		v1 = p1
 	end
-	local var2 = 1
-	local t = {}
-	local var3 = nil
-	local charCount, charCount_1 = utf8.len(p1)
-	assert(charCount ~= nil, ("string `%s` has an invalid byte at position %s"):format(p1, tostring(charCount_1)))
+	local NewIndex = 1
+	local List = {}
+	local v2 = nil
+	local Length, Length2 = utf8.len(Text)
+	assert(Length ~= nil, ("string `%s` has an invalid byte at position %s"):format(Text, (tostring(Length2))))
 	repeat
-		local var4 = findOrModule(p1, list, var2)
-		if var4 == nil then
-			table.insert(t, sliceModule(p1, var2, nil))
+		local OrModule = FindOrModule(Text, v1, NewIndex)
+		if OrModule == nil then
+			table.insert(List, SliceModule(Text, NewIndex, nil))
 		else
-			table.insert(t, sliceModule(p1, var2, var4.index))
-			var2 = var4.index + utf8.len(var4.match)
+			table.insert(List, SliceModule(Text, NewIndex, OrModule.index))
+			NewIndex = OrModule.index + utf8.len(OrModule.match)
 		end
-		if var4 ~= nil then
-			var3 = var4
+		if OrModule ~= nil then
+			v2 = OrModule
 		end
-	until var4 == nil or charCount < var2 or var1 <= #t
-	if var3 ~= nil then
-		local charCount_2, charCount_3 = utf8.len(var3.match)
-		assert(charCount_2 ~= nil, ("string `%s` has an invalid byte at position %s"):format(var3.match, tostring(charCount_3)))
+	until OrModule == nil or Length < NewIndex or MAXSAFEINTEGER1 <= #List
+	if v2 ~= nil then
+		local Length1, Length2_1 = utf8.len(v2.match)
+		assert(Length1 ~= nil, ("string `%s` has an invalid byte at position %s"):format(v2.match, (tostring(Length2_1))))
 		
-		if var3.index + charCount_2 == charCount + 1 then
-			table.insert(t, "")
+		if v2.index + Length1 == Length + 1 then
+			table.insert(List, "")
 		end
 	end
-	return t
+	return List
 end

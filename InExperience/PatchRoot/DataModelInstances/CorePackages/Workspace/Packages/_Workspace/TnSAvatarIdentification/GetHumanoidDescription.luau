@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.GetHumanoidDescription.GetHumanoidDescription)
+﻿return (require(script.Parent.Parent.Parent._Index.GetHumanoidDescription.GetHumanoidDescription))

@@ -1,215 +1,220 @@
-﻿local contextActionService = game:GetService("ContextActionService")
-local coreGuiService = game:GetService("CoreGui")
-local corePackagesService = game:GetService("CorePackages")
-local guiService = game:GetService("GuiService")
-local playersService = game:GetService("Players")
-local runService = game:GetService("RunService")
-local userInputService = game:GetService("UserInputService")
+﻿local ContextActionService = game:GetService("ContextActionService")
+local CoreGui = game:GetService("CoreGui")
+local CorePackages = game:GetService("CorePackages")
+local GuiService = game:GetService("GuiService")
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
 local VRService = game:GetService("VRService")
-local robloxGui = coreGuiService:WaitForChild("RobloxGui")
-local inGameMenuDependenciesModule = require(corePackagesService.Packages.InGameMenuDependencies)
-local roact = inGameMenuDependenciesModule.Roact
-local roactRodux = inGameMenuDependenciesModule.RoactRodux
-local UIBlox = inGameMenuDependenciesModule.UIBlox
-local t = inGameMenuDependenciesModule.t
-local withFoundationOrUIBloxStyle = require(corePackagesService.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
-local contextualMenu = UIBlox.App.Menu.ContextualMenu
-local menuDirection = UIBlox.App.Menu.MenuDirection
-local keyLabel = UIBlox.App.Menu.KeyLabel
-local button = UIBlox.App.Button.Button
-local buttonType = UIBlox.App.Button.Enum.ButtonType
-local parent = script.Parent.Parent
-local withLocalizationModule = require(parent.Localization.withLocalization)
-local setRespawningModule = require(parent.Actions.SetRespawning)
-local closeMenuModule = require(parent.Thunks.CloseMenu)
-local assetsModule = require(parent.Resources.Assets)
-local setCurrentPageModule = require(parent.Actions.SetCurrentPage)
-local voiceIndicatorModule = require(robloxGui.Modules.VoiceChat.Components.VoiceIndicator)
-local constantsModule = require(parent.Resources.Constants)
-local directionModule = require(parent.Enums.Direction)
-local pageNavigationModule = require(script.Parent.PageNavigation)
-local gameIconHeaderModule = require(script.Parent.GameIconHeader)
-local zonePortalModule = require(script.Parent.ZonePortal)
-local flags = parent.Flags
-local takeAScreenshotOfThis = game:DefineFastFlag("TakeAScreenshotOfThis", false)
-local showContextMenuWhenButtonsArePresent = game:DefineFastFlag("ShowContextMenuWhenButtonsArePresent", false)
-local useVRSpecificLeaveButton = game:DefineFastFlag("UseVRSpecificLeaveButton", false)
-local getFFlagIGMGamepadSelectionHistoryModule = require(flags.GetFFlagIGMGamepadSelectionHistory)
-local images = UIBlox.App.ImageSet.Images
-local focusHandlerModule = require(script.Parent.Connection.FocusHandler)
+local RobloxGui = CoreGui:WaitForChild("RobloxGui")
+local InGameMenuDependenciesModule = require(CorePackages.Packages.InGameMenuDependencies)
+local Roact = InGameMenuDependenciesModule.Roact
+local RoactRodux = InGameMenuDependenciesModule.RoactRodux
+local UIBlox = InGameMenuDependenciesModule.UIBlox
+local T = InGameMenuDependenciesModule.t
+local WithFoundationOrUIBloxStyleFunction = require(CorePackages.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
+local ContextualMenu = UIBlox.App.Menu.ContextualMenu
+local MenuDirection = UIBlox.App.Menu.MenuDirection
+local KeyLabel = UIBlox.App.Menu.KeyLabel
+local Button = UIBlox.App.Button.Button
+local ButtonType = UIBlox.App.Button.Enum.ButtonType
+local Parent = script.Parent.Parent
+local WithLocalizationModule = require(Parent.Localization.withLocalization)
+local SetRespawningModule = require(Parent.Actions.SetRespawning)
+local CloseMenuModule = require(Parent.Thunks.CloseMenu)
+local AssetsModule = require(Parent.Resources.Assets)
+local SetCurrentPageModule = require(Parent.Actions.SetCurrentPage)
+local VoiceIndicatorModule = require(RobloxGui.Modules.VoiceChat.Components.VoiceIndicator)
+local ConstantsModule = require(Parent.Resources.Constants)
+local DirectionModule = require(Parent.Enums.Direction)
+local PageNavigationModule = require(script.Parent.PageNavigation)
+local GameIconHeaderModule = require(script.Parent.GameIconHeader)
+local ZonePortalModule = require(script.Parent.ZonePortal)
+local TakeAScreenshotOfThis = game:DefineFastFlag("TakeAScreenshotOfThis", false)
+local ShowContextMenuWhenButtonsArePresent = game:DefineFastFlag("ShowContextMenuWhenButtonsArePresent", false)
+local UseVRSpecificLeaveButton = game:DefineFastFlag("UseVRSpecificLeaveButton", false)
+local GetFFlagIGMGamepadSelectionHistoryModule = require(Parent.Flags.GetFFlagIGMGamepadSelectionHistory)
+local Images = UIBlox.App.ImageSet.Images
+local FocusHandlerModule = require(script.Parent.Connection.FocusHandler)
 local IGMMainPageControllerBarModule = require(script.Parent.IGMMainPageControllerBar)
-local default = require(robloxGui.Modules.VoiceChat.VoiceChatServiceManager).default
-local t_1 = {
-	[constantsModule.InputType.MouseAndKeyboard] = Enum.KeyCode.R,
-	[constantsModule.InputType.Gamepad] = Enum.KeyCode.ButtonY
+local Default = require(RobloxGui.Modules.VoiceChat.VoiceChatServiceManager).default
+local config = {
+	[ConstantsModule.InputType.MouseAndKeyboard] = Enum.KeyCode.R,
+	[ConstantsModule.InputType.Gamepad] = Enum.KeyCode.ButtonY
 }
-local t_2 = {
-	[constantsModule.InputType.MouseAndKeyboard] = Enum.KeyCode.L,
-	[constantsModule.InputType.Gamepad] = Enum.KeyCode.ButtonX
+local config1 = {
+	[ConstantsModule.InputType.MouseAndKeyboard] = Enum.KeyCode.L,
+	[ConstantsModule.InputType.Gamepad] = Enum.KeyCode.ButtonX
 }
-local mainPage = roact.PureComponent:extend("MainPage")
+local MainPage = Roact.PureComponent:extend("MainPage")
 
-local function _()
-	-- upvalues: VRService (ref), takeAScreenshotOfThis (ref), corePackagesService (ref)
-	return if VRService.VREnabled then false elseif takeAScreenshotOfThis then not require(corePackagesService.Workspace.Packages.CachedPolicyService):IsSubjectToChinaPolicies() else true
+local function _(): boolean --[[ Line: 73 | Named "areCapturesAllowed" ]]
+	-- upvalues: VRService (copy), TakeAScreenshotOfThis (copy), CorePackages (copy)
+	return not VRService.VREnabled and (not TakeAScreenshotOfThis or not require(CorePackages.Workspace.Packages.CachedPolicyService):IsSubjectToChinaPolicies())
 end
 
-function mainPage.renderButtonModels(p1, _, p2)
-	-- upvalues: VRService (ref), takeAScreenshotOfThis (ref), corePackagesService (ref), images (ref), runService (ref), coreGuiService (ref), assetsModule (ref), t_1 (ref)
-	local t = {}
-	local inputType = p1.props.inputType
+function MainPage.renderButtonModels(p1, _, p2) --[[ Line: 85 ]]
+	-- upvalues: VRService (copy), TakeAScreenshotOfThis (copy), CorePackages (copy), Images (copy), RunService (copy), CoreGui (copy), AssetsModule (copy), config (copy)
+	local List = {}
+	local InputType = p1.props.inputType
 	
-	if (if VRService.VREnabled then false else not takeAScreenshotOfThis or not require(corePackagesService.Workspace.Packages.CachedPolicyService):IsSubjectToChinaPolicies()) and takeAScreenshotOfThis then
-		table.insert(t, {
-			icon = images["icons/controls/screenshot"],
+	if not VRService.VREnabled and (not TakeAScreenshotOfThis or not require(CorePackages.Workspace.Packages.CachedPolicyService):IsSubjectToChinaPolicies()) and TakeAScreenshotOfThis then
+		table.insert(List, {
+			icon = Images["icons/controls/screenshot"],
 			text = p2.screenCapture,
-			onActivated = function()
-				-- upvalues: p1 (ref), runService (copy), coreGuiService (copy)
+			onActivated = function() --[[ Line: 99 ]]
+				-- upvalues: p1 (copy), RunService (upval), CoreGui (upval)
 				p1:setState({ modalOpen = false })
 				p1.props.closeMenu()
-				runService.RenderStepped:Wait()
-				runService.RenderStepped:Wait()
-				coreGuiService:TakeScreenshot()
+				RunService.RenderStepped:Wait()
+				RunService.RenderStepped:Wait()
+				CoreGui:TakeScreenshot()
 			end
 		})
 	end
 	if p1.props.respawnButtonVisible then
-		table.insert(t, {
-			icon = assetsModule.Images.RespawnIcon,
+		table.insert(List, {
+			icon = AssetsModule.Images.RespawnIcon,
 			text = p2.respawnCharacter,
-			onActivated = function()
-				-- upvalues: p1 (ref)
+			onActivated = function() --[[ Line: 118 ]]
+				-- upvalues: p1 (copy)
 				p1:setState({ modalOpen = false })
 				p1.props.startRespawning()
 			end,
-			keyCodeLabel = t_1[inputType]
+			keyCodeLabel = config[InputType]
 		})
 	end
-	return t
+	return List
 end
 
-mainPage.validateProps = t.strictInterface({
-	open = t.boolean,
-	isMainPageMoreMenuOpen = t.optional(t.boolean),
-	respawnButtonVisible = t.boolean,
-	startLeavingGame = t.callback,
-	startRespawning = t.callback,
-	setMainPageMoreMenuOpen = t.optional(t.callback),
-	closeMenu = t.callback,
-	screenSize = t.Vector2,
-	canCaptureFocus = t.optional(t.boolean),
-	inputType = t.optional(t.string),
-	setFirstItemRef = t.optional(t.callback),
-	voiceEnabled = t.optional(t.boolean),
-	currentZone = getFFlagIGMGamepadSelectionHistoryModule() and t.optional(t.number) or nil
+MainPage.validateProps = T.strictInterface({
+	open = T.boolean,
+	isMainPageMoreMenuOpen = T.optional(T.boolean),
+	respawnButtonVisible = T.boolean,
+	startLeavingGame = T.callback,
+	startRespawning = T.callback,
+	setMainPageMoreMenuOpen = T.optional(T.callback),
+	closeMenu = T.callback,
+	screenSize = T.Vector2,
+	canCaptureFocus = T.optional(T.boolean),
+	inputType = T.optional(T.string),
+	setFirstItemRef = T.optional(T.callback),
+	voiceEnabled = T.optional(T.boolean),
+	currentZone = GetFFlagIGMGamepadSelectionHistoryModule() and T.optional(T.number) or nil
 })
 
-function mainPage.init(p1)
-	-- upvalues: roact (ref)
+function MainPage.init(p1) --[[ Line: 148 ]]
+	-- upvalues: Roact (copy)
 	p1.moreMenuFrameRef = nil
 	p1.moreMenuFirstItemFrameRef = nil
-	p1.moreMenuButtonRef = roact.createRef()
-	p1.mainPageFirstButtonRef = roact.createRef()
+	p1.moreMenuButtonRef = Roact.createRef()
+	p1.mainPageFirstButtonRef = Roact.createRef()
 	
-	function p2.setMoreMenuRef(p2)
-		-- upvalues: p1 (ref)
-		p1.moreMenuFrameRef = p2
+	function p1.setMoreMenuRef(MoreMenuFrameRef) --[[ Line: 154 ]]
+		-- upvalues: p1 (copy)
+		p1.moreMenuFrameRef = MoreMenuFrameRef
 	end
 	
-	function p2.setMoreMenuFirstItemRef(p2)
-		-- upvalues: p1 (ref)
-		p1.moreMenuFirstItemFrameRef = p2
+	function p1.setMoreMenuFirstItemRef(MoreMenuFirstItemFrameRef) --[[ Line: 158 ]]
+		-- upvalues: p1 (copy)
+		p1.moreMenuFirstItemFrameRef = MoreMenuFirstItemFrameRef
 	end
 	
 	p1.state = { modalOpen = false }
 end
 
-function mainPage.getDerivedStateFromProps(p1)
+function MainPage.getDerivedStateFromProps(p1) --[[ Line: 169 ]]
 	return if p1.canCaptureFocus then nil else { modalOpen = false }
 end
 
-function mainPage.renderMainPageFocusHandler(p1)
-	-- upvalues: getFFlagIGMGamepadSelectionHistoryModule (ref), roact (ref), focusHandlerModule (ref), contextActionService (ref), guiService (ref)
-	local var1 = p1.canGamepadCaptureFocus(p1.props)
-	local var2 = nil
+function MainPage.renderMainPageFocusHandler(p1) --[[ Line: 178 ]]
+	-- upvalues: GetFFlagIGMGamepadSelectionHistoryModule (copy), Roact (copy), FocusHandlerModule (copy), ContextActionService (copy), GuiService (copy)
+	local CanGamepadCaptureFocus = p1.canGamepadCaptureFocus(p1.props)
+	local NoOpen: boolean? = nil
 	
-	if getFFlagIGMGamepadSelectionHistoryModule() then
-		var1 = p1.canGamepadCaptureFocus(p1.props) and not p1.state.modalOpen
-		var2 = if p1.props.open then p1.props.currentZone == 0 else not p1.props.open
+	if GetFFlagIGMGamepadSelectionHistoryModule() then
+		local ModalOpen = p1.state.modalOpen
+		CanGamepadCaptureFocus = p1.canGamepadCaptureFocus(p1.props) and not ModalOpen
+		NoOpen = not p1.props.open or p1.props.currentZone == 0
 	end
-	return roact.createElement(focusHandlerModule, {
-		isFocused = var1,
-		shouldForgetPreviousSelection = var2,
-		didFocus = if getFFlagIGMGamepadSelectionHistoryModule() then function(p2)
-			-- upvalues: contextActionService (copy), p1 (ref), guiService (copy)
-			contextActionService:BindCoreAction("LeftStickTogglesMoreMenuAction", function(_, p3)
-				-- upvalues: p1 (copy)
-				if p3 == Enum.UserInputState.End then
+	return Roact.createElement(FocusHandlerModule, {
+		isFocused = CanGamepadCaptureFocus,
+		shouldForgetPreviousSelection = NoOpen,
+		didFocus = GetFFlagIGMGamepadSelectionHistoryModule() and function(p2) --[[ Line: 193 ]]
+			-- upvalues: ContextActionService (upval), p1 (copy), GuiService (upval)
+			ContextActionService:BindCoreAction("LeftStickTogglesMoreMenuAction", function(_, UserInputState) --[[ Line: 196 ]]
+				-- upvalues: p1 (upval)
+				if UserInputState == Enum.UserInputState.End then
 					p1:setState({ modalOpen = true })
 					
 					return Enum.ContextActionResult.Sink
+				else
+					return Enum.ContextActionResult.Pass
 				end
-				return Enum.ContextActionResult.Pass
 			end, false, Enum.KeyCode.ButtonL3)
-			guiService.SelectedCoreObject = p2 or p1.mainPageFirstButtonRef:getValue()
-		end else function()
-			-- upvalues: contextActionService (copy), p1 (ref)
-			contextActionService:BindCoreAction("LeftStickTogglesMoreMenuAction", function(_, p2)
-				-- upvalues: p1 (copy)
-				if p2 == Enum.UserInputState.End then
+			GuiService.SelectedCoreObject = p2 or p1.mainPageFirstButtonRef:getValue()
+		end or function() --[[ Line: 210 ]]
+			-- upvalues: ContextActionService (upval), p1 (copy)
+			ContextActionService:BindCoreAction("LeftStickTogglesMoreMenuAction", function(_, UserInputState) --[[ Line: 211 ]]
+				-- upvalues: p1 (upval)
+				if UserInputState == Enum.UserInputState.End then
 					p1:setState({ modalOpen = not p1.state.modalOpen })
 					
 					return Enum.ContextActionResult.Sink
+				else
+					return Enum.ContextActionResult.Pass
 				end
-				return Enum.ContextActionResult.Pass
 			end, false, Enum.KeyCode.ButtonL3)
 		end,
-		didBlur = function()
-			-- upvalues: contextActionService (copy)
-			contextActionService:UnbindCoreAction("LeftStickTogglesMoreMenuAction")
+		didBlur = function() --[[ Line: 222 ]]
+			-- upvalues: ContextActionService (upval)
+			ContextActionService:UnbindCoreAction("LeftStickTogglesMoreMenuAction")
 		end
 	})
 end
 
-function mainPage.renderMoreMenuFocusHandler(p1)
-	-- upvalues: roact (ref), focusHandlerModule (ref), getFFlagIGMGamepadSelectionHistoryModule (ref), contextActionService (ref), guiService (ref)
-	return roact.createElement(focusHandlerModule, {
-		isFocused = p1.canGamepadCaptureFocus(p1.props) and p1.state.modalOpen,
-		didFocus = function()
-			-- upvalues: p1 (ref), getFFlagIGMGamepadSelectionHistoryModule (copy), contextActionService (copy), guiService (copy)
-			local var1 = function(_, p2)
-				-- upvalues: p1 (copy)
-				if p2 == Enum.UserInputState.End then
+function MainPage.renderMoreMenuFocusHandler(p1) --[[ Line: 228 ]]
+	-- upvalues: Roact (copy), FocusHandlerModule (copy), GetFFlagIGMGamepadSelectionHistoryModule (copy), ContextActionService (copy), GuiService (copy)
+	local ModalOpen = p1.state.modalOpen
+	
+	return Roact.createElement(FocusHandlerModule, {
+		isFocused = p1.canGamepadCaptureFocus(p1.props) and ModalOpen,
+		didFocus = function() --[[ Line: 235 ]]
+			-- upvalues: p1 (copy), GetFFlagIGMGamepadSelectionHistoryModule (upval), ContextActionService (upval), GuiService (upval)
+			local function FunctionToBind(_, UserInputState) --[[ Line: 236 ]]
+				-- upvalues: p1 (upval)
+				if UserInputState == Enum.UserInputState.End then
 					p1:setState({ modalOpen = false })
 					
 					return Enum.ContextActionResult.Sink
+				else
+					return Enum.ContextActionResult.Pass
 				end
-				return Enum.ContextActionResult.Pass
 			end
 			
-			if getFFlagIGMGamepadSelectionHistoryModule() then
-				contextActionService:BindCoreAction("CloseMoreMenuAction", var1, false, Enum.KeyCode.ButtonB, Enum.KeyCode.ButtonL3)
+			if GetFFlagIGMGamepadSelectionHistoryModule() then
+				ContextActionService:BindCoreAction("CloseMoreMenuAction", FunctionToBind, false, Enum.KeyCode.ButtonB, Enum.KeyCode.ButtonL3)
 			else
-				contextActionService:BindCoreAction("CloseMoreMenuAction", var1, false, Enum.KeyCode.ButtonB)
+				ContextActionService:BindCoreAction("CloseMoreMenuAction", FunctionToBind, false, Enum.KeyCode.ButtonB)
 			end
 			if p1.moreMenuFrameRef ~= nil then
-				guiService:RemoveSelectionGroup("MainPageMoreMenu")
+				GuiService:RemoveSelectionGroup("MainPageMoreMenu")
 			end
-			guiService:AddSelectionParent("MainPageMoreMenu", p1.moreMenuFrameRef)
-			guiService.SelectedCoreObject = p1.moreMenuFirstItemFrameRef
+			GuiService:AddSelectionParent("MainPageMoreMenu", p1.moreMenuFrameRef)
+			GuiService.SelectedCoreObject = p1.moreMenuFirstItemFrameRef
 		end,
-		didBlur = function()
-			-- upvalues: contextActionService (copy)
-			contextActionService:UnbindCoreAction("CloseMoreMenuAction")
+		didBlur = function() --[[ Line: 271 ]]
+			-- upvalues: ContextActionService (upval)
+			ContextActionService:UnbindCoreAction("CloseMoreMenuAction")
 		end
 	})
 end
 
-function mainPage.render(p1)
-	-- upvalues: withFoundationOrUIBloxStyle (ref), withLocalizationModule (ref), roact (ref), button (ref), buttonType (ref), assetsModule (ref), showContextMenuWhenButtonsArePresent (ref), VRService (ref), useVRSpecificLeaveButton (ref), t_2 (ref), IGMMainPageControllerBarModule (ref), voiceIndicatorModule (ref), playersService (ref), default (ref), zonePortalModule (ref), directionModule (ref), gameIconHeaderModule (ref), pageNavigationModule (ref), constantsModule (ref), contextualMenu (ref), menuDirection (ref), keyLabel (ref)
-	local var1 = p1.canGamepadCaptureFocus(p1.props)
+function MainPage.render(p1) --[[ Line: 277 ]]
+	-- upvalues: WithFoundationOrUIBloxStyleFunction (copy), WithLocalizationModule (copy), Roact (copy), Button (copy), ButtonType (copy), AssetsModule (copy), ShowContextMenuWhenButtonsArePresent (copy), VRService (copy), UseVRSpecificLeaveButton (copy), config1 (copy), IGMMainPageControllerBarModule (copy), VoiceIndicatorModule (copy), Players (copy), Default (copy), ZonePortalModule (copy), DirectionModule (copy), GameIconHeaderModule (copy), PageNavigationModule (copy), ConstantsModule (copy), ContextualMenu (copy), MenuDirection (copy), KeyLabel (copy)
+	local CanGamepadCaptureFocus = p1.canGamepadCaptureFocus(p1.props)
 	
-	return withFoundationOrUIBloxStyle(function(p2)
+	return WithFoundationOrUIBloxStyleFunction(function(p2) --[[ Line: 280 ]]
 		return {
 			Theme = {
 				BackgroundDefault = {
@@ -218,48 +223,49 @@ function mainPage.render(p1)
 				}
 			}
 		}
-	end, function(p2)
-		-- upvalues: withLocalizationModule (copy), roact (copy), button (copy), buttonType (copy), p1 (ref), assetsModule (copy), showContextMenuWhenButtonsArePresent (copy), VRService (copy), useVRSpecificLeaveButton (copy), t_2 (copy), IGMMainPageControllerBarModule (copy), var1 (ref), voiceIndicatorModule (copy), playersService (copy), default (copy), zonePortalModule (copy), directionModule (copy), gameIconHeaderModule (copy), pageNavigationModule (copy), constantsModule (copy), contextualMenu (copy), menuDirection (copy), keyLabel (copy)
-		return withLocalizationModule({
+	end, function(p2) --[[ Line: 286 ]]
+		-- upvalues: WithLocalizationModule (upval), Roact (upval), Button (upval), ButtonType (upval), p1 (copy), AssetsModule (upval), ShowContextMenuWhenButtonsArePresent (upval), VRService (upval), UseVRSpecificLeaveButton (upval), config1 (upval), IGMMainPageControllerBarModule (upval), CanGamepadCaptureFocus (copy), VoiceIndicatorModule (upval), Players (upval), Default (upval), ZonePortalModule (upval), DirectionModule (upval), GameIconHeaderModule (upval), PageNavigationModule (upval), ConstantsModule (upval), ContextualMenu (upval), MenuDirection (upval), KeyLabel (upval)
+		return WithLocalizationModule({
 			leaveGame = "CoreScripts.InGameMenu.LeaveGame",
 			respawnCharacter = "CoreScripts.InGameMenu.RespawnCharacter",
 			screenCapture = "CoreScripts.InGameMenu.Controls.Screenshot"
-		})(function(p3)
-			-- upvalues: roact (copy), button (copy), buttonType (copy), p1 (copy), assetsModule (copy), p2 (ref), showContextMenuWhenButtonsArePresent (copy), VRService (copy), useVRSpecificLeaveButton (copy), t_2 (copy), IGMMainPageControllerBarModule (copy), var1 (copy), voiceIndicatorModule (copy), playersService (copy), default (copy), zonePortalModule (copy), directionModule (copy), gameIconHeaderModule (copy), pageNavigationModule (copy), constantsModule (copy), contextualMenu (copy), menuDirection (copy), keyLabel (copy)
-			local var2 = roact.createElement(button, {
-				buttonType = buttonType.Secondary,
+		})(function(p3) --[[ Line: 291 ]]
+			-- upvalues: Roact (upval), Button (upval), ButtonType (upval), p1 (upval), AssetsModule (upval), p2 (copy), ShowContextMenuWhenButtonsArePresent (upval), VRService (upval), UseVRSpecificLeaveButton (upval), config1 (upval), IGMMainPageControllerBarModule (upval), CanGamepadCaptureFocus (upval), VoiceIndicatorModule (upval), Players (upval), Default (upval), ZonePortalModule (upval), DirectionModule (upval), GameIconHeaderModule (upval), PageNavigationModule (upval), ConstantsModule (upval), ContextualMenu (upval), MenuDirection (upval), KeyLabel (upval)
+			local Element = Roact.createElement(Button, {
+				buttonType = ButtonType.Secondary,
 				size = UDim2.fromOffset(44, 44),
-				onActivated = function()
-					-- upvalues: p1 (copy)
+				onActivated = function() --[[ Line: 295 ]]
+					-- upvalues: p1 (upval)
 					p1:setState({ modalOpen = true })
 				end,
-				icon = assetsModule.Images.MoreActions,
-				[roact.Ref] = p1.moreMenuButtonRef
+				icon = AssetsModule.Images.MoreActions,
+				[Roact.Ref] = p1.moreMenuButtonRef
 			})
-			local var3 = p1:renderButtonModels(p2, p3)
-			local var4 = if showContextMenuWhenButtonsArePresent then #var3 > 0 else p1.props.respawnButtonVisible
-			local var5 = if VRService.VREnabled and useVRSpecificLeaveButton then Enum.KeyCode.ButtonX else t_2[p1.props.inputType]
-			local var6 = if var4 then -56 else 0
-			local modalOpen = p1.state.modalOpen
-			local var7 = roact.createElement(IGMMainPageControllerBarModule, {
-				canCaptureFocus = var1,
-				isMainPageMoreMenuOpen = modalOpen
+			local RenderButtonModelsResult = p1:renderButtonModels(p2, p3)
+			local RespawnButtonVisible = if ShowContextMenuWhenButtonsArePresent then #RenderButtonModelsResult > 0 else p1.props.respawnButtonVisible
+			local InputType = p1.props.inputType
+			local ButtonX = if VRService.VREnabled and UseVRSpecificLeaveButton then Enum.KeyCode.ButtonX else config1[InputType]
+			local XOffset: number = if RespawnButtonVisible then -56 else 0
+			local ModalOpen = p1.state.modalOpen
+			local Element1 = Roact.createElement(IGMMainPageControllerBarModule, {
+				canCaptureFocus = CanGamepadCaptureFocus,
+				isMainPageMoreMenuOpen = ModalOpen
 			})
-			local var8 = nil
+			local Element2 = nil
 			
 			if p1.props.voiceEnabled then
-				var8 = roact.createElement(voiceIndicatorModule, {
+				Element2 = Roact.createElement(VoiceIndicatorModule, {
 					iconStyle = "MicLight",
 					size = UDim2.fromOffset(44, 44),
-					userId = tostring(playersService.LocalPlayer.UserId),
-					onClicked = function()
-						-- upvalues: default (copy)
-						default:ToggleMic("VRInGameMenuMainPage")
+					userId = tostring(Players.LocalPlayer.UserId),
+					onClicked = function() --[[ Line: 329 ]]
+						-- upvalues: Default (upval)
+						Default:ToggleMic("VRInGameMenuMainPage")
 					end
 				})
-				var6 -= 56
+				XOffset -= 56
 			end
-			return roact.createElement("TextButton", {
+			return Roact.createElement("TextButton", {
 				BorderSizePixel = 0,
 				Text = "",
 				AutoButtonColor = false,
@@ -270,130 +276,131 @@ function mainPage.render(p1)
 				Visible = p1.props.open
 			}, {
 				MoreMenuFocusHandler = p1:renderMoreMenuFocusHandler(),
-				MainPageFocusHandler = not VRService.VREnabled and p1:renderMainPageFocusHandler() or nil,
-				ControllerBar = var7,
-				ZonePortal = roact.createElement(zonePortalModule, { targetZone = 0, direction = directionModule.Left }),
-				GameIconHeader = roact.createElement(gameIconHeaderModule),
-				PageNavigation = roact.createElement(pageNavigationModule, {
-					Position = UDim2.new(0, constantsModule.Zone.ContentOffset, 0, 148),
+				MainPageFocusHandler = if VRService.VREnabled then nil else p1:renderMainPageFocusHandler() or nil,
+				ControllerBar = Element1,
+				ZonePortal = Roact.createElement(ZonePortalModule, { targetZone = 0, direction = DirectionModule.Left }),
+				GameIconHeader = Roact.createElement(GameIconHeaderModule),
+				PageNavigation = Roact.createElement(PageNavigationModule, {
+					Position = UDim2.new(0, ConstantsModule.Zone.ContentOffset, 0, 148),
 					mainPageFirstButtonRef = p1.mainPageFirstButtonRef
 				}),
-				ContextualMenu = roact.createElement(contextualMenu, {
+				ContextualMenu = Roact.createElement(ContextualMenu, {
 					closeBackgroundVisible = true,
-					buttonProps = var3,
+					buttonProps = RenderButtonModelsResult,
 					setFrameRef = p1.setMoreMenuRef,
 					setFirstItemRef = p1.setMoreMenuFirstItemRef,
-					open = modalOpen,
-					menuDirection = menuDirection.Up,
+					open = ModalOpen,
+					menuDirection = MenuDirection.Up,
 					openPositionY = UDim.new(1, -84),
 					screenSize = p1.props.screenSize,
-					onDismiss = function()
-						-- upvalues: p1 (copy)
+					onDismiss = function() --[[ Line: 371 ]]
+						-- upvalues: p1 (upval)
 						p1:setState({ modalOpen = false })
 					end
 				}),
-				BottomButtons = roact.createElement("Frame", {
+				BottomButtons = Roact.createElement("Frame", {
 					BackgroundTransparency = 1,
 					Size = UDim2.new(1, 0, 0, 84),
 					Position = UDim2.new(0, 0, 1, 0),
 					AnchorPoint = Vector2.new(0, 1)
 				}, {
-					Layout = roact.createElement("UIListLayout", {
+					Layout = Roact.createElement("UIListLayout", {
 						FillDirection = Enum.FillDirection.Horizontal,
 						HorizontalAlignment = Enum.HorizontalAlignment.Center,
 						Padding = UDim.new(0, 12),
 						SortOrder = Enum.SortOrder.LayoutOrder,
 						VerticalAlignment = Enum.VerticalAlignment.Top
 					}),
-					Padding = roact.createElement("UIPadding", {
+					Padding = Roact.createElement("UIPadding", {
 						PaddingTop = UDim.new(0, 24),
 						PaddingBottom = UDim.new(0, 24),
 						PaddingLeft = UDim.new(0, 24),
 						PaddingRight = UDim.new(0, 24)
 					}),
-					LeaveGame = roact.createElement("Frame", {
+					LeaveGame = Roact.createElement("Frame", {
 						BackgroundTransparency = 1,
 						LayoutOrder = 1,
-						Size = UDim2.new(1, var6, 0, 44),
+						Size = UDim2.new(1, XOffset, 0, 44),
 						Position = UDim2.fromScale(1, 0),
 						AnchorPoint = Vector2.new(1, 0)
 					}, {
-						Button = roact.createElement(button, {
-							buttonType = buttonType.PrimarySystem,
+						Button = Roact.createElement(Button, {
+							buttonType = ButtonType.PrimarySystem,
 							size = UDim2.new(1, 0, 0, 44),
 							onActivated = p1.props.startLeavingGame,
 							text = p3.leaveGame
 						}),
-						KeyLabel = var5 and roact.createElement(keyLabel, {
+						KeyLabel = ButtonX and Roact.createElement(KeyLabel, {
 							iconThemeKey = "UIDefault",
 							textThemeKey = "SystemPrimaryContent",
 							LayoutOrder = 2,
 							ZIndex = 2,
-							keyCode = var5,
+							keyCode = ButtonX,
 							AnchorPoint = Vector2.new(1, 0.5),
 							Position = UDim2.new(1, -16, 0.5, 0)
 						}) or nil
 					}),
-					VoiceChatMuteButton = var8,
-					MoreButton = var4 and var2
+					VoiceChatMuteButton = Element2,
+					MoreButton = RespawnButtonVisible and Element
 				})
 			})
 		end)
 	end)
 end
 
-function mainPage.willUnmount(_)
-	-- upvalues: guiService (ref)
-	guiService:RemoveSelectionGroup("MainPageMoreMenu")
+function MainPage:willUnmount() --[[ Line: 427 ]]
+	-- upvalues: GuiService (copy)
+	GuiService:RemoveSelectionGroup("MainPageMoreMenu")
 end
 
-function mainPage.canGamepadCaptureFocus(p1)
-	-- upvalues: constantsModule (ref)
-	return p1.canCaptureFocus and p1.inputType == constantsModule.InputType.Gamepad
+function MainPage.canGamepadCaptureFocus(Props): boolean --[[ Line: 431 ]]
+	-- upvalues: ConstantsModule (copy)
+	return Props.canCaptureFocus and Props.inputType == ConstantsModule.InputType.Gamepad
 end
 
-function mainPage.didUpdate(p1, p2, p3)
-	-- upvalues: getFFlagIGMGamepadSelectionHistoryModule (ref), guiService (ref), VRService (ref), userInputService (ref)
-	local modalOpen = p3.modalOpen
+function MainPage.didUpdate(p1, p2, p3) --[[ Line: 435 ]]
+	-- upvalues: GetFFlagIGMGamepadSelectionHistoryModule (copy), GuiService (copy), VRService (copy), UserInputService (copy)
+	local ModalOpen = p1.state.modalOpen
+	local ModalOpen1 = p3.modalOpen
 	
-	if not getFFlagIGMGamepadSelectionHistoryModule() and p1.canGamepadCaptureFocus(p1.props) and not p1.state.modalOpen then
-		if modalOpen then
-			guiService.SelectedCoreObject = p1.moreMenuButtonRef:getValue()
+	if not GetFFlagIGMGamepadSelectionHistoryModule() and p1.canGamepadCaptureFocus(p1.props) and not ModalOpen then
+		if ModalOpen1 then
+			GuiService.SelectedCoreObject = p1.moreMenuButtonRef:getValue()
 		elseif not p1.canGamepadCaptureFocus(p2) then
-			guiService.SelectedCoreObject = p1.mainPageFirstButtonRef:getValue()
+			GuiService.SelectedCoreObject = p1.mainPageFirstButtonRef:getValue()
 		end
 	end
 	if VRService.VREnabled then
-		userInputService.OverrideMouseIconBehavior = Enum.OverrideMouseIconBehavior.ForceHide
+		UserInputService.OverrideMouseIconBehavior = Enum.OverrideMouseIconBehavior.ForceHide
 	end
 end
 
-return roactRodux.UNSTABLE_connect2(function(p1, _)
-	-- upvalues: getFFlagIGMGamepadSelectionHistoryModule (ref), constantsModule (ref)
+return RoactRodux.UNSTABLE_connect2(function(p1, _) --[[ Line: 455 ]]
+	-- upvalues: GetFFlagIGMGamepadSelectionHistoryModule (copy), ConstantsModule (copy)
 	return {
 		isMainPageInForeground = nil,
 		open = p1.isMenuOpen,
 		respawnButtonVisible = p1.respawn.enabled,
 		screenSize = p1.screenSize,
 		voiceEnabled = p1.voiceState.voiceEnabled,
-		canCaptureFocus = p1.menuPage == constantsModule.MainPagePageKey and (p1.isMenuOpen and (not p1.respawn.dialogOpen and p1.currentZone == 1)),
-		currentZone = if getFFlagIGMGamepadSelectionHistoryModule() then p1.currentZone else nil,
+		canCaptureFocus = p1.menuPage == ConstantsModule.MainPagePageKey and (p1.isMenuOpen and (not p1.respawn.dialogOpen and p1.currentZone == 1)),
+		currentZone = if GetFFlagIGMGamepadSelectionHistoryModule() then p1.currentZone else nil,
 		inputType = p1.displayOptions.inputType
 	}
-end, function(p1)
-	-- upvalues: setCurrentPageModule (ref), constantsModule (ref), setRespawningModule (ref), closeMenuModule (ref)
+end, function(Callback) --[[ Line: 478 ]]
+	-- upvalues: SetCurrentPageModule (copy), ConstantsModule (copy), SetRespawningModule (copy), CloseMenuModule (copy)
 	return {
-		startLeavingGame = function()
-			-- upvalues: p1 (ref), setCurrentPageModule (copy), constantsModule (copy)
-			p1(setCurrentPageModule(constantsModule.LeaveGamePromptPageKey))
+		startLeavingGame = function() --[[ Line: 480 ]]
+			-- upvalues: Callback (copy), SetCurrentPageModule (upval), ConstantsModule (upval)
+			Callback(SetCurrentPageModule(ConstantsModule.LeaveGamePromptPageKey))
 		end,
-		startRespawning = function()
-			-- upvalues: p1 (ref), setRespawningModule (copy)
-			p1(setRespawningModule(true))
+		startRespawning = function() --[[ Line: 483 ]]
+			-- upvalues: Callback (copy), SetRespawningModule (upval)
+			Callback(SetRespawningModule(true))
 		end,
-		closeMenu = function()
-			-- upvalues: p1 (ref), closeMenuModule (copy)
-			p1(closeMenuModule)
+		closeMenu = function() --[[ Line: 486 ]]
+			-- upvalues: Callback (copy), CloseMenuModule (upval)
+			Callback(CloseMenuModule)
 		end
 	}
-end)(mainPage)
+end)(MainPage)

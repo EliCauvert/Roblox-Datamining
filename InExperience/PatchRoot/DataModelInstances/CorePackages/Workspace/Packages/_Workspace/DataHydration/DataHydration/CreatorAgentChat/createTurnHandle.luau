@@ -1,169 +1,179 @@
-﻿local createSignal = require(script:FindFirstAncestor("DataHydration").Parent.Signals).createSignal
-local acpProtocolModule = require(script.Parent.Acp.AcpProtocol)
-local turnStateModule = require(script.Parent.turnState)
+﻿local Parent = script:FindFirstAncestor("DataHydration").Parent
+local CreateSignalFunction = require(Parent.Signals).createSignal
+local AcpProtocolModule = require(script.Parent.Acp.AcpProtocol)
+local TurnStateModule = require(script.Parent.turnState)
 local _ = require(script.Parent.types)
+local FFlagBuildExperiencePromptFailureTelemetry = require(Parent.SharedFlags).FFlagBuildExperiencePromptFailureTelemetry
 
-return function(p1, p2, p3, p4, p5)
-	-- upvalues: createSignal (ref), turnStateModule (ref), acpProtocolModule (ref)
-	local var1, var2 = createSignal(p4 or turnStateModule.createEmptyTurnState(p1, p2))
-	local var3 = nil
+return function(p1, RequestId, Cancel, p2, List) --[[ Line: 36 | Named "createTurnHandle" ]]
+	-- upvalues: CreateSignalFunction (copy), TurnStateModule (copy), AcpProtocolModule (copy), FFlagBuildExperiencePromptFailureTelemetry (copy)
+	local Signal, Signal2 = CreateSignalFunction(p2 or TurnStateModule.createEmptyTurnState(p1, RequestId))
+	local ExtractTurnIdResult = nil
 	local t = {}
-	local var4 = 1
-	local t_1 = {}
-	local var5 = nil
-	local var6 = nil
-	local var7 = 0
+	local t1 = {}
+	local Count = 1
+	local t2 = {}
+	local v1 = nil
+	local v2 = nil
+	local Total = 0
 	
-	local function noteProcessedSequenceNumber(p6)
-		-- upvalues: t_1 (ref), var5 (write), var6 (write), var7 (write)
-		if t_1[p6] == true then
+	local function noteProcessedSequenceNumber(Key): boolean --[[ Line: 54 ]]
+		-- upvalues: t2 (copy), v1 (ref), v2 (ref), Total (ref)
+		if t2[Key] == true then
 			return false
 		end
-		t_1[p6] = true
+		t2[Key] = true
 		
-		if var5 == nil then
-			var5 = p6
-			var6 = p6
-		elseif var5 < p6 then
-			var7 += p6 - var5 - 1
-			var5 = p6
-		elseif p6 < var6 then
-			var7 += var6 - p6 - 1
-			var6 = p6
+		if v1 == nil then
+			v1 = Key
+			v2 = Key
+		elseif v1 < Key then
+			Total += Key - v1 - 1
+			v1 = Key
+		elseif Key < v2 then
+			Total += v2 - Key - 1
+			v2 = Key
 		else
-			var7 -= 1
+			Total -= 1
 		end
 		return true
 	end
 	
-	local function hasSequenceGap()
-		-- upvalues: var7 (write)
-		return var7 > 0
+	local function hasSequenceGap(): boolean --[[ Line: 75 ]]
+		-- upvalues: Total (ref)
+		return Total > 0
 	end
 	
-	if p5 ~= nil then
-		for i, v in p5 do
-			if typeof(v) == "number" and t_1[v] ~= true then
-				t_1[v] = true
+	if List ~= nil then
+		for _, value in List do
+			if typeof(value) == "number" and t2[value] ~= true then
+				t2[value] = true
 				
-				if var5 == nil then
-					var5 = v
-					var6 = v
-				elseif var5 < v then
-					var7 += v - var5 - 1
-					var5 = v
-				elseif v < var6 then
-					var7 += var6 - v - 1
-					var6 = v
+				if v1 == nil then
+					v1 = value
+					v2 = value
+				elseif v1 < value then
+					Total += value - v1 - 1
+					v1 = value
+				elseif value < v2 then
+					Total += v2 - value - 1
+					v2 = value
 				else
-					var7 -= 1
+					Total -= 1
 				end
 			end
 		end
 	end
-	local function onNotification(p6)
-		-- upvalues: var4 (write), t (ref)
-		var4 += 1
-		t[var4] = p6
-		
-		return function()
-			-- upvalues: t (copy), var4 (ref)
-			t[var4] = nil
+	local function fireUpdateHandlers(Update, SequenceId) --[[ Line: 106 ]]
+		-- upvalues: t1 (copy)
+		for _, value in t1 do
+			local Success, Result = pcall(function() --[[ Line: 108 ]]
+				-- upvalues: value (copy), Update (copy), SequenceId (copy)
+				value(Update, SequenceId)
+			end)
+			
+			if not Success then
+				warn(("CreatorAgentClient onUpdate handler errored: %s"):format((tostring(Result))))
+			end
 		end
 	end
 	
-	local function _(p6)
-		-- upvalues: var2 (ref)
-		var2(function(p7)
-			-- upvalues: p6 (ref)
-			if p7.isDone then
-				return p7
+	local function _(p3) --[[ Line: 118 | Named "mutate" ]]
+		-- upvalues: Signal2 (copy)
+		Signal2(function(Tbl) --[[ Line: 119 ]]
+			-- upvalues: p3 (copy)
+			if Tbl.isDone then
+				return Tbl
+			else
+				local Copy = table.clone(Tbl)
+				p3(Copy)
+				
+				return Copy
 			end
-			local cloned = table.clone(p7)
-			p6(cloned)
-			
-			return cloned
 		end)
 	end
 	
-	local function fireHandlers(p6)
-		-- upvalues: t (ref)
-		for i, v in t do
-			local ok, status = pcall(function()
-				-- upvalues: v (ref), p6 (ref)
-				v(p6)
+	local function fireHandlers(Notification) --[[ Line: 129 ]]
+		-- upvalues: t (copy)
+		for _, value in t do
+			local Success, Result = pcall(function() --[[ Line: 132 ]]
+				-- upvalues: value (copy), Notification (copy)
+				value(Notification)
 			end)
 			
-			if not ok then
-				warn(("CreatorAgentClient onNotification handler errored: %s"):format(tostring(status)))
+			if not Success then
+				warn(("CreatorAgentClient onNotification handler errored: %s"):format((tostring(Result))))
 			end
 		end
 	end
 	
-	local function i(p7)
-		-- upvalues: var2 (ref)
-		if p7.error then
-			local error = p7.error
+	local _ = function(p3) --[[ Line: 141 | Named "completeFromResponse" ]]
+		-- upvalues: Signal2 (copy)
+		if p3.error then
+			local Error = p3.error
 			
-			local var8 = function(p8)
-				-- upvalues: error (ref)
-				p8.error = tostring(error.message or "JSON-RPC error")
-				p8.errorCode = tonumber(error.code)
-				p8.status = "failed"
-				p8.isDone = true
+			local function v31(p4) --[[ Line: 144 ]]
+				-- upvalues: Error (copy)
+				p4.error = tostring(Error.message or "JSON-RPC error")
+				p4.errorCode = tonumber(Error.code)
+				p4.status = "failed"
+				p4.isDone = true
 			end
 			
-			var2(function(p8)
-				-- upvalues: var8 (ref)
-				if p8.isDone then
-					return p8
+			Signal2(function(Tbl) --[[ Line: 119 ]]
+				-- upvalues: v31 (copy)
+				if Tbl.isDone then
+					return Tbl
+				else
+					local Copy = table.clone(Tbl)
+					v31(Copy)
+					
+					return Copy
 				end
-				local cloned = table.clone(p8)
-				var8(cloned)
-				
-				return cloned
 			end)
 		end
 	end
 	
-	local _ = function(p7, p8)
-		local sequenceId = p7.sequenceId
+	local _ = function(p3, p4) --[[ Line: 153 | Named "getEventSequenceId" ]]
+		local SequenceId = p3.sequenceId
 		
-		if typeof(sequenceId) == "number" then
-			return sequenceId
+		if typeof(SequenceId) == "number" then
+			return SequenceId
+		else
+			local SequenceNumber = if p4 == nil then nil else p4.sequenceNumber
+			
+			return if typeof(SequenceNumber) == "number" then SequenceNumber else nil
 		end
-		local var8 = if p8 ~= nil then nil else p8.sequenceNumber
-		
-		return if typeof(var8) == "number" then var8 else nil
 	end
 	
-	local _ = function(a)
-		-- upvalues: var1 (ref), var2 (ref)
-		local var8 = a.sessionUpdate == "state_change" and a.state == "idle"
+	local _ = function(p3) --[[ Line: 167 | Named "applyTerminalUpdate" ]]
+		-- upvalues: Signal (copy), Signal2 (copy)
+		local IsIdle: boolean = p3.sessionUpdate == "state_change" and p3.state == "idle"
 		
-		if var8 or var1(false).status == "queued" then
-			local var9 = function(p7)
-				-- upvalues: var8 (ref), a (ref)
-				if p7.status == "queued" then
-					p7.status = "streaming"
+		if IsIdle or Signal(false).status == "queued" then
+			local function v35(p4) --[[ Line: 172 ]]
+				-- upvalues: IsIdle (copy), p3 (copy)
+				if p4.status == "queued" then
+					p4.status = "streaming"
 				end
-				if var8 then
-					local var10 = if typeof(a.stop_reason) == "string" then a.stop_reason else "end_turn"
-					p7.stopReason = var10
-					p7.status = if var10 == "cancelled" then "cancelled" else "succeeded"
-					p7.isDone = true
+				if IsIdle then
+					local StopReason = if typeof(p3.stop_reason) == "string" then p3.stop_reason else "end_turn"
+					p4.stopReason = StopReason
+					p4.status = if StopReason == "cancelled" then "cancelled" else "succeeded"
+					p4.isDone = true
 				end
 			end
 			
-			var2(function(p7)
-				-- upvalues: var9 (ref)
-				if p7.isDone then
-					return p7
+			Signal2(function(Tbl) --[[ Line: 119 ]]
+				-- upvalues: v35 (copy)
+				if Tbl.isDone then
+					return Tbl
+				else
+					local Copy = table.clone(Tbl)
+					v35(Copy)
+					
+					return Copy
 				end
-				local cloned = table.clone(p7)
-				var9(cloned)
-				
-				return cloned
 			end)
 			
 			return
@@ -171,199 +181,234 @@ return function(p1, p2, p3, p4, p5)
 	end
 	
 	return {
-		state = var1,
-		getTurnId = function()
-			-- upvalues: var3 (write)
-			return var3
+		state = Signal,
+		getTurnId = function() --[[ Line: 247 ]]
+			-- upvalues: ExtractTurnIdResult (ref)
+			return ExtractTurnIdResult
 		end,
-		onNotification = onNotification,
-		getLatestProcessedSequenceNumber = function()
-			-- upvalues: var5 (write)
-			return var5
+		onNotification = function(p3) --[[ Line: 88 ]]
+			-- upvalues: Count (ref), t (copy)
+			local Count1: number = Count
+			Count += 1
+			t[Count1] = p3
+			
+			return function() --[[ Line: 92 ]]
+				-- upvalues: t (upval), Count1 (copy)
+				t[Count1] = nil
+			end
+		end,
+		onUpdate = function(p3) --[[ Line: 97 ]]
+			-- upvalues: Count (ref), t1 (copy)
+			local Count1: number = Count
+			Count += 1
+			t1[Count1] = p3
+			
+			return function() --[[ Line: 101 ]]
+				-- upvalues: t1 (upval), Count1 (copy)
+				t1[Count1] = nil
+			end
+		end,
+		getLatestProcessedSequenceNumber = function() --[[ Line: 252 ]]
+			-- upvalues: v1 (ref)
+			return v1
 		end,
 		hasSequenceGap = hasSequenceGap,
-		noteProcessedSequenceNumber = function(p7)
-			-- upvalues: t_1 (ref), var5 (write), var6 (write), var7 (write)
-			if t_1[p7] == true then return end
-			t_1[p7] = true
+		noteProcessedSequenceNumber = function(Key) --[[ Line: 256 ]]
+			-- upvalues: t2 (copy), v1 (ref), v2 (ref), Total (ref)
+			if t2[Key] == true then return end
+			t2[Key] = true
 			
-			if var5 == nil then
-				var5 = p7
-				var6 = p7
-				
-				return
-			elseif var5 < p7 then
-				var7 += p7 - var5 - 1
-				var5 = p7
-				
-				return
-			elseif p7 < var6 then
-				var7 += var6 - p7 - 1
-				var6 = p7
+			if v1 == nil then
+				v1 = Key
+				v2 = Key
 				
 				return
 			end
-			var7 -= 1
+			if v1 < Key then
+				Total += Key - v1 - 1
+				v1 = Key
+				
+				return
+			end
+			if Key < v2 then
+				Total += v2 - Key - 1
+				v2 = Key
+				
+				return
+			else
+				Total -= 1
+			end
 		end,
-		cancel = p3
+		cancel = Cancel
 	}, {
-		dispatchFrame = function(p7, p8, p9)
-			-- upvalues: var1 (ref), acpProtocolModule (copy), t_1 (ref), var5 (write), var6 (write), var7 (write), var3 (write), turnStateModule (copy), var2 (ref), fireHandlers (ref)
-			if var1(false).isDone then
+		dispatchFrame = function(p3, p4, Enabled): boolean --[[ Line: 185 ]]
+			-- upvalues: Signal (copy), AcpProtocolModule (upval), t2 (copy), v1 (ref), v2 (ref), Total (ref), ExtractTurnIdResult (ref), TurnStateModule (upval), Signal2 (copy), FFlagBuildExperiencePromptFailureTelemetry (upval), fireUpdateHandlers (copy), fireHandlers (copy)
+			if Signal(false).isDone then
 				return false
 			end
-			local var8 = false
+			local HasError = false
 			
-			if p7.kind == "notification" then
-				if p7.notification.method == acpProtocolModule.Notifications.SessionUpdate then
-					local update = p7.notification.params and p7.notification.params.update
+			if p3.kind == "notification" then
+				if p3.notification.method == AcpProtocolModule.Notifications.SessionUpdate then
+					local Update = p3.notification.params and p3.notification.params.update
 					
-					if update ~= nil then
-						local var9
-						local sequenceId = update.sequenceId
+					if Update ~= nil then
+						local SequenceId = Update.sequenceId
+						local SequenceId1 = nil
 						
-						if typeof(sequenceId) == "number" then
-							var9 = sequenceId
+						if typeof(SequenceId) == "number" then
+							SequenceId1 = SequenceId
 						else
-							local var10 = if p8 ~= nil then nil else p8.sequenceNumber
-							var9 = if typeof(var10) == "number" then var10 else nil
+							local SequenceNumber = if p4 == nil then nil else p4.sequenceNumber
+							SequenceId1 = if typeof(SequenceNumber) == "number" then SequenceNumber else nil
 						end
-						local var11 = true
+						local Flag = true
 						
-						if var9 ~= nil then
-							if t_1[var9] == true then
-								var11 = false
+						if SequenceId1 ~= nil then
+							if t2[SequenceId1] == true then
+								Flag = false
 							else
-								t_1[var9] = true
+								t2[SequenceId1] = true
 								
-								if var5 == nil then
-									var5 = var9
-									var6 = var9
-								elseif var5 < var9 then
-									var7 += var9 - var5 - 1
-									var5 = var9
-								elseif var9 < var6 then
-									var7 += var6 - var9 - 1
-									var6 = var9
+								if v1 == nil then
+									v1 = SequenceId1
+									v2 = SequenceId1
+								elseif v1 < SequenceId1 then
+									Total += SequenceId1 - v1 - 1
+									v1 = SequenceId1
+								elseif SequenceId1 < v2 then
+									Total += v2 - SequenceId1 - 1
+									v2 = SequenceId1
 								else
-									var7 -= 1
+									Total -= 1
 								end
-								var11 = true
+								Flag = true
 							end
 						end
-						if var3 == nil then
-							var3 = turnStateModule.extractTurnId(update)
+						if ExtractTurnIdResult == nil then
+							ExtractTurnIdResult = TurnStateModule.extractTurnId(Update)
 						end
-						local var12 = update.sessionUpdate == "state_change" and update.state == "idle"
+						local IsIdle: boolean = Update.sessionUpdate == "state_change" and Update.state == "idle"
 						
-						if var12 or var1(false).status == "queued" then
-							local var13 = function(p10)
-								-- upvalues: var12 (ref), update (ref)
-								if p10.status == "queued" then
-									p10.status = "streaming"
+						if IsIdle or Signal(false).status == "queued" then
+							local function v44(p5) --[[ Line: 172 ]]
+								-- upvalues: IsIdle (copy), Update (copy)
+								if p5.status == "queued" then
+									p5.status = "streaming"
 								end
-								if var12 then
-									local var14 = if typeof(update.stop_reason) == "string" then update.stop_reason else "end_turn"
-									p10.stopReason = var14
-									p10.status = if var14 == "cancelled" then "cancelled" else "succeeded"
-									p10.isDone = true
+								if IsIdle then
+									local StopReason = if typeof(Update.stop_reason) == "string" then Update.stop_reason else "end_turn"
+									p5.stopReason = StopReason
+									p5.status = if StopReason == "cancelled" then "cancelled" else "succeeded"
+									p5.isDone = true
 								end
 							end
 							
-							var2(function(p10)
-								-- upvalues: var13 (ref)
-								if p10.isDone then
-									return p10
+							Signal2(function(Tbl) --[[ Line: 119 ]]
+								-- upvalues: v44 (copy)
+								if Tbl.isDone then
+									return Tbl
+								else
+									local Copy = table.clone(Tbl)
+									v44(Copy)
+									
+									return Copy
 								end
-								local cloned = table.clone(p10)
-								var13(cloned)
-								
-								return cloned
 							end)
 						end
-						var8 = var11
-					end
-				end
-				if p9 == false then
-					return var8
-				else
-					fireHandlers(p7.notification)
-					
-					return var8
-				end
-			elseif p7.kind == "response" then
-				local response = p7.response
-				
-				if response.error then
-					local error = response.error
-					
-					local var14 = function(p10)
-						-- upvalues: error (ref)
-						p10.error = tostring(error.message or "JSON-RPC error")
-						p10.errorCode = tonumber(error.code)
-						p10.status = "failed"
-						p10.isDone = true
-					end
-					
-					var2(function(p10)
-						-- upvalues: var14 (ref)
-						if p10.isDone then
-							return p10
-						end
-						local cloned = table.clone(p10)
-						var14(cloned)
+						HasError = Flag
 						
-						return cloned
+						if FFlagBuildExperiencePromptFailureTelemetry and Flag then
+							fireUpdateHandlers(Update, SequenceId1)
+						end
+					end
+				end
+				if Enabled ~= false then
+					fireHandlers(p3.notification)
+					
+					return HasError
+				end
+			elseif p3.kind == "response" then
+				local Response = p3.response
+				
+				if Response.error then
+					local Error = Response.error
+					
+					local function v47(p5) --[[ Line: 144 ]]
+						-- upvalues: Error (copy)
+						p5.error = tostring(Error.message or "JSON-RPC error")
+						p5.errorCode = tonumber(Error.code)
+						p5.status = "failed"
+						p5.isDone = true
+					end
+					
+					Signal2(function(Tbl) --[[ Line: 119 ]]
+						-- upvalues: v47 (copy)
+						if Tbl.isDone then
+							return Tbl
+						else
+							local Copy = table.clone(Tbl)
+							v47(Copy)
+							
+							return Copy
+						end
 					end)
 				end
-				var8 = p7.response.error ~= nil
+				HasError = p3.response.error ~= nil
 			end
+			return HasError
 		end,
 		noteProcessedSequenceNumber = noteProcessedSequenceNumber,
-		fail = function(p7, p8)
-			-- upvalues: var2 (ref)
-			local var8 = function(p9)
-				-- upvalues: p7 (ref), p8 (ref)
-				p9.error = p7
-				p9.errorCode = p8
-				p9.status = "failed"
-				p9.isDone = true
+		fail = function(p3, ErrorCode, RequestFailure) --[[ Line: 224 ]]
+			-- upvalues: FFlagBuildExperiencePromptFailureTelemetry (upval), Signal2 (copy)
+			local function v48(p4) --[[ Line: 225 ]]
+				-- upvalues: p3 (copy), ErrorCode (copy), FFlagBuildExperiencePromptFailureTelemetry (upval), RequestFailure (copy)
+				p4.error = p3
+				p4.errorCode = ErrorCode
+				
+				if FFlagBuildExperiencePromptFailureTelemetry then
+					p4.requestFailure = RequestFailure
+				end
+				p4.status = "failed"
+				p4.isDone = true
 			end
 			
-			var2(function(p9)
-				-- upvalues: var8 (ref)
-				if p9.isDone then
-					return p9
+			Signal2(function(Tbl) --[[ Line: 119 ]]
+				-- upvalues: v48 (copy)
+				if Tbl.isDone then
+					return Tbl
+				else
+					local Copy = table.clone(Tbl)
+					v48(Copy)
+					
+					return Copy
 				end
-				local cloned = table.clone(p9)
-				var8(cloned)
-				
-				return cloned
 			end)
 		end,
-		markCancelled = function()
-			-- upvalues: var2 (ref)
-			local var8 = function(p7)
-				p7.status = "cancelled"
-				p7.stopReason = "cancelled"
-				p7.isDone = true
+		markCancelled = function() --[[ Line: 237 ]]
+			-- upvalues: Signal2 (copy)
+			local function v49(p3) --[[ Line: 238 ]]
+				p3.status = "cancelled"
+				p3.stopReason = "cancelled"
+				p3.isDone = true
 			end
 			
-			var2(function(p7)
-				-- upvalues: var8 (ref)
-				if p7.isDone then
-					return p7
+			Signal2(function(Tbl) --[[ Line: 119 ]]
+				-- upvalues: v49 (copy)
+				if Tbl.isDone then
+					return Tbl
+				else
+					local Copy = table.clone(Tbl)
+					v49(Copy)
+					
+					return Copy
 				end
-				local cloned = table.clone(p7)
-				var8(cloned)
-				
-				return cloned
 			end)
 		end,
-		isDone = function()
-			-- upvalues: var1 (ref)
-			return var1(false).isDone
+		isDone = function() --[[ Line: 267 ]]
+			-- upvalues: Signal (copy)
+			return Signal(false).isDone
 		end,
-		requestId = p2
+		requestId = RequestId
 	}
 end

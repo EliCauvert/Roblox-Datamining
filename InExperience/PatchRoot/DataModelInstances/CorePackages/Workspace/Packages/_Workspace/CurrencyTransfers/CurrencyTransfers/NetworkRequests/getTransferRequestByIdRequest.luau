@@ -1,32 +1,32 @@
-﻿local currencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
-local parent = currencyTransfers.Parent
-local urlBuilderModule = require(parent.UrlBuilder)
-local tModule = require(parent.t)
-local promiseModule = require(parent.Promise)
-local getTransferByIdModelModule = require(currencyTransfers.Models.GetTransferByIdModel)
-local httpRequestModule = require(currencyTransfers.NetworkRequests.HttpRequest)
-local urlBuilder = urlBuilderModule.UrlBuilder
-local urlBase = urlBuilderModule.UrlBase
+﻿local CurrencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
+local Parent = CurrencyTransfers.Parent
+local UrlBuilderModule = require(Parent.UrlBuilder)
+local TModule = require(Parent.t)
+local PromiseModule = require(Parent.Promise)
+local GetTransferByIdModelModule = require(CurrencyTransfers.Models.GetTransferByIdModel)
+local HttpRequestModule = require(CurrencyTransfers.NetworkRequests.HttpRequest)
+local UrlBuilder = UrlBuilderModule.UrlBuilder
+local UrlBase = UrlBuilderModule.UrlBase
 
-local function getTransferByIdUrl(p1)
-	-- upvalues: urlBuilder (ref), urlBase (ref)
-	return urlBuilder.new({
-		base = urlBase.APIS,
-		path = `transfer/v1/robux-transfer/transfer/{p1}`
+local function getTransferByIdUrl(TransferRequestId) --[[ Line: 20 ]]
+	-- upvalues: UrlBuilder (copy), UrlBase (copy)
+	return UrlBuilder.new({
+		base = UrlBase.APIS,
+		path = `transfer/v1/robux-transfer/transfer/{TransferRequestId}`
 	})()
 end
 
-local var1 = tModule.strictInterface({ transferRequestId = tModule.string })
+local StrictInterfaceResult = TModule.strictInterface({ transferRequestId = TModule.string })
 
-return function(p1, p2, p3)
-	-- upvalues: var1 (ref), httpRequestModule (ref), getTransferByIdUrl (ref), getTransferByIdModelModule (ref), promiseModule (ref)
-	assert(var1(p1))
+return function(p1, p2, p3) --[[ Line: 31 | Named "getTransferRequestByIdRequest" ]]
+	-- upvalues: StrictInterfaceResult (copy), HttpRequestModule (copy), getTransferByIdUrl (copy), GetTransferByIdModelModule (copy), PromiseModule (copy)
+	assert(StrictInterfaceResult(p1))
 	
-	return (if p3 ~= nil then httpRequestModule.new(p2) else httpRequestModule.fromNetworkImpl(p3)):get(getTransferByIdUrl(p1.transferRequestId)):andThen(function(p4)
-		-- upvalues: getTransferByIdModelModule (copy)
-		return getTransferByIdModelModule.format(p4)
-	end):catch(function(p4)
-		-- upvalues: promiseModule (copy)
-		return promiseModule.reject(p4)
+	return (if p3 == nil then HttpRequestModule.new(p2) else HttpRequestModule.fromNetworkImpl(p3)):get(getTransferByIdUrl(p1.transferRequestId)):andThen(function(Result) --[[ Line: 39 ]]
+		-- upvalues: GetTransferByIdModelModule (upval)
+		return GetTransferByIdModelModule.format(Result)
+	end):catch(function(Err) --[[ Line: 42 ]]
+		-- upvalues: PromiseModule (upval)
+		return PromiseModule.reject(Err)
 	end)
 end

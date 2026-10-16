@@ -1,28 +1,29 @@
-﻿local appComposition = script:FindFirstAncestor("AppComposition")
-local parent = appComposition.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local useStyleSheet = foundationModule.Hooks.useStyleSheet
-local useTokens = foundationModule.Hooks.useTokens
-local setupCompositionStyleRulesModule = require(appComposition.setupCompositionStyleRules)
+﻿local AppComposition = script:FindFirstAncestor("AppComposition")
+local Parent = AppComposition.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local UseStyleSheetFunction = FoundationModule.Hooks.useStyleSheet
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local SetupCompositionStyleRulesModule = require(AppComposition.setupCompositionStyleRules)
 
-return function()
-	-- upvalues: reactModule (ref), useStyleSheet (ref), useTokens (ref), setupCompositionStyleRulesModule (ref)
-	local var1 = reactModule.useRef(nil)
-	local var2 = useStyleSheet()
-	local var3 = useTokens()
-	reactModule.useLayoutEffect(function()
-		-- upvalues: var1 (ref), var2 (ref), setupCompositionStyleRulesModule (copy), var3 (ref)
-		if var1.current and var2 then
-			var1.current:SetDerives({ var2 })
+return function() --[[ Line: 18 | Named "CompositionStyleSheet" ]]
+	-- upvalues: ReactModule (copy), UseStyleSheetFunction (copy), UseTokensFunction (copy), SetupCompositionStyleRulesModule (copy)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseStyleSheetResult = UseStyleSheetFunction()
+	local UseTokensResult = UseTokensFunction()
+	ReactModule.useLayoutEffect(function() --[[ Line: 23 ]]
+		-- upvalues: UseRefResult (copy), UseStyleSheetResult (copy), SetupCompositionStyleRulesModule (upval), UseTokensResult (copy)
+		if UseRefResult.current and UseStyleSheetResult then
+			UseRefResult.current:SetDerives({ UseStyleSheetResult })
 			
-			return setupCompositionStyleRulesModule(var1.current, var3)
+			return SetupCompositionStyleRulesModule(UseRefResult.current, UseTokensResult)
+		else
+			return function() --[[ Line: 28 ]] end
 		end
-		return function() end
-	end, { var1, var2, var3 })
+	end, { UseRefResult, UseStyleSheetResult, UseTokensResult })
 	
-	return reactModule.createElement(reactModule.Fragment, nil, {
-		CompositionStyleSheet = reactModule.createElement("StyleSheet", { ref = var1 }),
-		CompositionStyleLink = reactModule.createElement("StyleLink", { StyleSheet = var1.current })
+	return ReactModule.createElement(ReactModule.Fragment, nil, {
+		CompositionStyleSheet = ReactModule.createElement("StyleSheet", { ref = UseRefResult }),
+		CompositionStyleLink = ReactModule.createElement("StyleLink", { StyleSheet = UseRefResult.current })
 	})
 end

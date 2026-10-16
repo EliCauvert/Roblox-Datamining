@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent.Parent._Workspace.AppChat.AppChat.App.InExperienceAppChatModal)
+﻿return (require(script.Parent.Parent.Parent.Parent._Workspace.AppChat.AppChat.App.InExperienceAppChatModal))

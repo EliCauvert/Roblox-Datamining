@@ -1,59 +1,60 @@
-﻿local parent = script:FindFirstAncestor("GameFilters").Parent
-local foundationModule = require(parent.Foundation)
-local iconButton = foundationModule.IconButton
-local iconSize = foundationModule.Enums.IconSize
-local useTokens = foundationModule.Hooks.useTokens
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local reactModule = require(parent.React)
-local responsiveModule = require(parent.Responsive)
-local fFlagLuaAppChartsFilterOptionTextTag = require(parent.SharedFlags).FFlagLuaAppChartsFilterOptionTextTag
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
+﻿local Parent = script:FindFirstAncestor("GameFilters").Parent
+local FoundationModule = require(Parent.Foundation)
+local IconButton = FoundationModule.IconButton
+local IconSize = FoundationModule.Enums.IconSize
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local ReactModule = require(Parent.React)
+local ResponsiveModule = require(Parent.Responsive)
+local FFlagLuaAppChartsFilterOptionTextTag = require(Parent.SharedFlags).FFlagLuaAppChartsFilterOptionTextTag
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 
-return function(p1)
-	-- upvalues: useTokens (ref), responsiveModule (ref), reactModule (ref), fFlagLuaAppChartsFilterOptionTextTag (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), iconButton (ref), iconSize (ref)
-	local var1 = useTokens()
-	local headingSmall = var1.Typography.HeadingSmall
+return function(Frame) --[[ Line: 21 ]]
+	-- upvalues: UseTokensFunction (copy), ResponsiveModule (copy), ReactModule (copy), FFlagLuaAppChartsFilterOptionTextTag (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), IconButton (copy), IconSize (copy)
+	local UseTokensResult = UseTokensFunction()
+	local IsUsePreferredInputResultMatch = ResponsiveModule.usePreferredInput() == ResponsiveModule.Input.Directional
+	local HeadingSmall = UseTokensResult.Typography.HeadingSmall
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		Size = if fFlagLuaAppChartsFilterOptionTextTag then nil else UDim2.fromScale(1, 0),
+		Size = if FFlagLuaAppChartsFilterOptionTextTag then nil else UDim2.fromScale(1, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
-		LayoutOrder = p1.LayoutOrder,
-		[reactModule.Change.AbsoluteSize] = function(p2)
-			-- upvalues: p1 (ref)
-			p1.onHeightChanged(p2.AbsoluteSize.Y)
+		LayoutOrder = Frame.LayoutOrder,
+		[ReactModule.Change.AbsoluteSize] = function(Frame1) --[[ Line: 33 ]]
+			-- upvalues: Frame (copy)
+			Frame.onHeightChanged(Frame1.AbsoluteSize.Y)
 		end
 	}, {
-		Padding = reactModule.createElement("UIPadding", {
-			PaddingTop = UDim.new(0, var1.Padding.Medium),
-			PaddingBottom = UDim.new(0, var1.Padding.Medium),
-			PaddingLeft = UDim.new(0, var1.Padding.XXLarge),
-			PaddingRight = UDim.new(0, var1.Padding.XXLarge)
+		Padding = ReactModule.createElement("UIPadding", {
+			PaddingTop = UDim.new(0, UseTokensResult.Padding.Medium),
+			PaddingBottom = UDim.new(0, UseTokensResult.Padding.Medium),
+			PaddingLeft = UDim.new(0, UseTokensResult.Padding.XXLarge),
+			PaddingRight = UDim.new(0, UseTokensResult.Padding.XXLarge)
 		}),
-		UIListLayout = reactModule.createElement("UIListLayout", {
+		UIListLayout = ReactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Horizontal,
 			VerticalAlignment = Enum.VerticalAlignment.Center,
 			HorizontalFlex = Enum.UIFlexAlignment.SpaceBetween,
 			SortOrder = Enum.SortOrder.LayoutOrder
 		}),
-		Title = reactModule.createElement("TextLabel", {
+		Title = ReactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 1,
 			TextWrapped = true,
 			AutomaticSize = Enum.AutomaticSize.XY,
-			Text = p1.title,
-			Font = if foundationFontFaceMigration then nil else headingSmall.Font,
-			FontFace = if foundationFontFaceMigration then normalizeFontFace(headingSmall.Font) else nil,
-			TextSize = headingSmall.FontSize,
-			TextColor3 = var1.Color.Content.Emphasis.Color3,
+			Text = Frame.title,
+			Font = if FoundationFontFaceMigration then nil else HeadingSmall.Font,
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(HeadingSmall.Font) else nil,
+			TextSize = HeadingSmall.FontSize,
+			TextColor3 = UseTokensResult.Color.Content.Emphasis.Color3,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextYAlignment = Enum.TextYAlignment.Center
 		}),
-		CloseButton = if responsiveModule.usePreferredInput() == responsiveModule.Input.Directional then nil else reactModule.createElement(iconButton, {
+		CloseButton = if IsUsePreferredInputResultMatch then nil else ReactModule.createElement(IconButton, {
 			LayoutOrder = 2,
 			icon = "icons/navigation/close",
-			size = iconSize.Small,
-			onActivated = p1.onCloseButtonActivated
+			size = IconSize.Small,
+			onActivated = Frame.onCloseButtonActivated
 		})
 	})
 end

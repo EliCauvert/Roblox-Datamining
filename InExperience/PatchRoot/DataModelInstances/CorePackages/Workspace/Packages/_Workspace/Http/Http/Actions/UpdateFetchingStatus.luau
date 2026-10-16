@@ -1,3 +1,3 @@
-﻿return require(script:FindFirstAncestor("Http").Parent.Rodux).makeActionCreator(script.Name, function(p1, p2)
-	return { key = p1, status = p2 }
+﻿return require(script:FindFirstAncestor("Http").Parent.Rodux).makeActionCreator(script.Name, function(Key, Status) --[[ Line: 6 ]]
+	return { key = Key, status = Status }
 end)

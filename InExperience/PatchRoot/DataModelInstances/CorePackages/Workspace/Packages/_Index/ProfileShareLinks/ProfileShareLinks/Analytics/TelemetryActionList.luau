@@ -1,5 +1,5 @@
-﻿local parent = script:FindFirstAncestor("ProfileShareLinks").Parent
-local identity = require(parent.Dash).identity
+﻿local Parent = script:FindFirstAncestor("ProfileShareLinks").Parent
+local Identity = require(Parent.Dash).identity
 
 return {
 	defaults = {
@@ -11,8 +11,8 @@ return {
 		lastUpdated = { 24, 6, 11 },
 		backendsList = {
 			{
-				type = require(parent.SocialLuaAnalytics).Analytics.Enums.SupportedTelemetryBackends.RobloxTelemetryCounter,
-				dynamicCustomFields = { context = identity, shareType = identity }
+				type = require(Parent.SocialLuaAnalytics).Analytics.Enums.SupportedTelemetryBackends.RobloxTelemetryCounter,
+				dynamicCustomFields = { context = Identity, shareType = Identity }
 			}
 		}
 	}

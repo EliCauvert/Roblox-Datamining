@@ -1,35 +1,36 @@
-﻿local guiService = game:GetService("GuiService")
-local reactModule = require(game:GetService("CorePackages").Packages.React)
+﻿local GuiService = game:GetService("GuiService")
+local ReactModule = require(game:GetService("CorePackages").Packages.React)
 
-return function(value, p1)
-	-- upvalues: reactModule (ref), guiService (ref)
-	local var1, var2 = reactModule.useState(nil)
-	local var3, var4 = reactModule.useState(false)
-	reactModule.useEffect(function()
-		-- upvalues: value (ref), var2 (ref)
-		local var5 = if value then value() else nil
-		var2(if var5 then var5.PageTitleCloseButton else nil)
-	end, { value, p1 })
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), var4 (ref), guiService (copy)
-		if var1 then
-			local function updateIsSelected()
-				-- upvalues: var4 (copy), guiService (copy), var1 (copy)
-				var4(guiService.SelectedCoreObject == var1)
+return function(Callback, p1) --[[ Line: 15 | Named "useSettingsHubCloseButton" ]]
+	-- upvalues: ReactModule (copy), GuiService (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
+	ReactModule.useEffect(function() --[[ Line: 24 ]]
+		-- upvalues: Callback (copy), UseStateResult2 (copy)
+		local CallbackResult = if Callback then Callback() else nil
+		UseStateResult2(if CallbackResult then CallbackResult.PageTitleCloseButton else nil)
+	end, { Callback, p1 })
+	ReactModule.useEffect(function() --[[ Line: 29 ]]
+		-- upvalues: UseStateResult (copy), UseStateResult2_1 (copy), GuiService (upval)
+		if UseStateResult then
+			local function updateIsSelected() --[[ Line: 35 ]]
+				-- upvalues: UseStateResult2_1 (upval), GuiService (upval), UseStateResult (upval)
+				UseStateResult2_1(GuiService.SelectedCoreObject == UseStateResult)
 			end
 			
-			var4(guiService.SelectedCoreObject == var1)
-			local var5 = guiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(updateIsSelected)
+			UseStateResult2_1(GuiService.SelectedCoreObject == UseStateResult)
+			local Connection = GuiService:GetPropertyChangedSignal("SelectedCoreObject"):Connect(updateIsSelected)
 			
-			return function()
-				-- upvalues: var5 (ref)
-				var5:Disconnect()
+			return function() --[[ Line: 42 ]]
+				-- upvalues: Connection (copy)
+				Connection:Disconnect()
 			end
+		else
+			UseStateResult2_1(false)
+			
+			return nil
 		end
-		var4(false)
-		
-		return nil
-	end, { var1 })
+	end, { UseStateResult })
 	
-	return var1, var3
+	return UseStateResult, UseStateResult1
 end

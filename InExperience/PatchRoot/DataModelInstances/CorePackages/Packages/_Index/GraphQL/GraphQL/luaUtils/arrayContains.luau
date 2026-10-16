@@ -1,14 +1,14 @@
-﻿local deepEqualModule = require(script.Parent.deepEqual)
-local deepContainsModule = require(script.Parent.deepContains)
+﻿local DeepEqualModule = require(script.Parent.deepEqual)
+local DeepContainsModule = require(script.Parent.deepContains)
 
-return function(p1, p2, p3)
-	-- upvalues: deepContainsModule (ref), deepEqualModule (ref)
-	for i, v in ipairs(p1) do
-		if p3 then
-			if deepContainsModule(v, p2) then
+return function(List, p1, p2): boolean --[[ Line: 4 ]]
+	-- upvalues: DeepContainsModule (copy), DeepEqualModule (copy)
+	for _, value in ipairs(List) do
+		if p2 then
+			if DeepContainsModule(value, p1) then
 				return true
 			end
-		elseif deepEqualModule(v, p2) then
+		elseif DeepEqualModule(value, p1) then
 			return true
 		end
 	end

@@ -1,12 +1,12 @@
-﻿local parent = script:FindFirstAncestor("SduiSharedContent").Parent
-local reactModule = require(parent.React)
-local cryoModule = require(parent.Cryo)
-local sduiTextModule = require(script.Parent.SduiText)
-local useRevealTextModule = require(script.Parent.useRevealText)
+﻿local Parent = script:FindFirstAncestor("SduiSharedContent").Parent
+local ReactModule = require(Parent.React)
+local CryoModule = require(Parent.Cryo)
+local SduiTextModule = require(script.Parent.SduiText)
+local UseRevealTextModule = require(script.Parent.useRevealText)
 
-return function(p1)
-	-- upvalues: useRevealTextModule (ref), reactModule (ref), cryoModule (ref), sduiTextModule (ref)
-	local var1 = useRevealTextModule({
+return function(p1) --[[ Line: 16 | Named "SduiRevealText" ]]
+	-- upvalues: UseRevealTextModule (copy), ReactModule (copy), CryoModule (copy), SduiTextModule (copy)
+	local UseRevealTextModuleResult = UseRevealTextModule({
 		delimiter = p1.delimiter,
 		removeDelimiter = p1.removeDelimiter,
 		revealInterval = p1.revealInterval,
@@ -14,13 +14,13 @@ return function(p1)
 		text = p1.text
 	})
 	
-	return reactModule.createElement(sduiTextModule, reactModule.useMemo(function()
-		-- upvalues: cryoModule (copy), p1 (ref), var1 (ref)
-		return cryoModule.Dictionary.join(p1, {
-			delimiter = cryoModule.None,
-			removeDelimiter = cryoModule.None,
-			revealInterval = cryoModule.None,
-			text = var1
+	return ReactModule.createElement(SduiTextModule, (ReactModule.useMemo(function() --[[ Line: 24 ]]
+		-- upvalues: CryoModule (upval), p1 (copy), UseRevealTextModuleResult (copy)
+		return CryoModule.Dictionary.join(p1, {
+			delimiter = CryoModule.None,
+			removeDelimiter = CryoModule.None,
+			revealInterval = CryoModule.None,
+			text = UseRevealTextModuleResult
 		})
-	end, { p1, var1 }))
+	end, { p1, UseRevealTextModuleResult })))
 end

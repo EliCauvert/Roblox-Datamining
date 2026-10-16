@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.AppNavBar.AppNavBar)
+﻿return (require(script.Parent.Parent.Parent._Index.AppNavBar.AppNavBar))

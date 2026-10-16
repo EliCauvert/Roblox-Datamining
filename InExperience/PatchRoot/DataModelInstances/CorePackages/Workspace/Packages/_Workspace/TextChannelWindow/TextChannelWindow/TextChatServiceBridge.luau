@@ -1,95 +1,95 @@
-﻿local parent = script:FindFirstAncestor("TextChannelWindow").Parent
-local sharedFlagsModule = require(parent.SharedFlags)
-local textChannelWindowAnalyticsModule = require(script.Parent.TextChannelWindowAnalytics)
-local textChannelWindowPerfTracker = require(parent.ChatUIPrimitives).Telemetry.TextChannelWindowPerfTracker
-local textChatServiceIntegrationModule = require(script.Parent.TextChatServiceIntegration)
+﻿local Parent = script:FindFirstAncestor("TextChannelWindow").Parent
+local TextChannelWindowAnalyticsModule = require(script.Parent.TextChannelWindowAnalytics)
+local TextChannelWindowPerfTracker = require(Parent.ChatUIPrimitives).Telemetry.TextChannelWindowPerfTracker
+local TextChatServiceIntegrationModule = require(script.Parent.TextChatServiceIntegration)
 local _ = require(script.Parent.createChannelMessagesStore)
-local isTextSourceMutedModule = require(script.Parent.isTextSourceMuted)
-local getFFlagExpChatProtectedChatInternalAPIs = sharedFlagsModule.getFFlagExpChatProtectedChatInternalAPIs
-local getFFlagExpChatUseChatMuteStoreModule = require(script.Parent.getFFlagExpChatUseChatMuteStore)
+local IsTextSourceMutedModule = require(script.Parent.isTextSourceMuted)
+local GetFFlagExpChatProtectedChatInternalAPIsFunction = require(Parent.SharedFlags).getFFlagExpChatProtectedChatInternalAPIs
+local GetFFlagExpChatUseChatMuteStoreModule = require(script.Parent.getFFlagExpChatUseChatMuteStore)
 
-local function getMessageStatus(p1)
-	local status = p1.Status
+local function getMessageStatus(p1): string --[[ Line: 26 ]]
+	local Status = p1.Status
 	
-	return if status == Enum.TextChatMessageStatus.Success then "success" elseif status == Enum.TextChatMessageStatus.TextFilterFailed then "filter_failed" elseif status == Enum.TextChatMessageStatus.Floodchecked then "floodchecked" elseif status == Enum.TextChatMessageStatus.InvalidPrivacySettings then "invalid_privacy_settings" elseif status == Enum.TextChatMessageStatus.InvalidTextChannelPermissions then "invalid_permissions" elseif status == Enum.TextChatMessageStatus.MessageTooLong then "message_too_long" elseif status == Enum.TextChatMessageStatus.ModerationTimeout then "moderation_timeout" else "unknown"
+	return if Status == Enum.TextChatMessageStatus.Success then "success" elseif Status == Enum.TextChatMessageStatus.TextFilterFailed then "filter_failed" elseif Status == Enum.TextChatMessageStatus.Floodchecked then "floodchecked" elseif Status == Enum.TextChatMessageStatus.InvalidPrivacySettings then "invalid_privacy_settings" elseif Status == Enum.TextChatMessageStatus.InvalidTextChannelPermissions then "invalid_permissions" elseif Status == Enum.TextChatMessageStatus.MessageTooLong then "message_too_long" elseif Status == Enum.TextChatMessageStatus.ModerationTimeout then "moderation_timeout" else "unknown"
 end
 
-return function(p1, p2, p3)
-	-- upvalues: getFFlagExpChatUseChatMuteStoreModule (ref), isTextSourceMutedModule (ref), textChatServiceIntegrationModule (ref), textChannelWindowPerfTracker (ref), textChannelWindowAnalyticsModule (ref), getMessageStatus (ref), getFFlagExpChatProtectedChatInternalAPIs (ref)
+return function(Object, p1, p2) --[[ Line: 47 | Named "createTextChatServiceBridge" ]]
+	-- upvalues: GetFFlagExpChatUseChatMuteStoreModule (copy), IsTextSourceMutedModule (copy), TextChatServiceIntegrationModule (copy), TextChannelWindowPerfTracker (copy), TextChannelWindowAnalyticsModule (copy), getMessageStatus (copy), GetFFlagExpChatProtectedChatInternalAPIsFunction (copy)
 	local t = {}
 	
-	local function connectChannel(p4)
-		-- upvalues: t (ref), getFFlagExpChatUseChatMuteStoreModule (copy), isTextSourceMutedModule (copy), textChatServiceIntegrationModule (copy), p2 (ref), p3 (ref), textChannelWindowPerfTracker (copy), textChannelWindowAnalyticsModule (copy), getMessageStatus (copy)
-		if t[p4] then
+	local function connectChannel(TextChannel) --[[ Line: 54 ]]
+		-- upvalues: t (copy), GetFFlagExpChatUseChatMuteStoreModule (upval), IsTextSourceMutedModule (upval), TextChatServiceIntegrationModule (upval), p1 (copy), p2 (copy), TextChannelWindowPerfTracker (upval), TextChannelWindowAnalyticsModule (upval), getMessageStatus (upval)
+		if not t[TextChannel] then
+			local IsRBXSystem = TextChannel.Name == "RBXSystem"
+			local DestroyingConnections = {
+				(TextChannel.MessageReceived:Connect(function(p3) --[[ Line: 60 ]]
+					-- upvalues: IsRBXSystem (copy), GetFFlagExpChatUseChatMuteStoreModule (upval), IsTextSourceMutedModule (upval), TextChatServiceIntegrationModule (upval), p1 (upval), p2 (upval), TextChannel (copy), TextChannelWindowPerfTracker (upval), TextChannelWindowAnalyticsModule (upval), getMessageStatus (upval)
+					if not p3.TextSource and not IsRBXSystem then return end
+					if GetFFlagExpChatUseChatMuteStoreModule() and p3.TextSource and IsTextSourceMutedModule(p3.TextSource) then return end
+					local MapTextChatMessageResult = TextChatServiceIntegrationModule.mapTextChatMessage(p3, p1)
+					
+					if MapTextChatMessageResult.content == "" then
+						p2.removeMessage(TextChannel, MapTextChatMessageResult.messageId)
+					else
+						p2.upsertMessage(TextChannel, MapTextChatMessageResult)
+					end
+					if p3.TextSource and tostring(p3.TextSource.UserId) ~= p1 then
+						TextChannelWindowPerfTracker.startReceiveInterval(p3.MessageId, TextChannel.Name)
+					end
+					TextChannelWindowAnalyticsModule.emit(TextChannelWindowAnalyticsModule.Counters.MessageReceived, {
+						status = getMessageStatus(p3),
+						target_text_channel_category = TextChannelWindowAnalyticsModule.getChannelCategory(TextChannel.Name)
+					})
+				end))
+			}
+			t[TextChannel] = DestroyingConnections
+			table.insert(DestroyingConnections, TextChannel.Destroying:Connect(function() --[[ Line: 89 ]]
+				-- upvalues: DestroyingConnections (copy), t (upval), TextChannel (copy)
+				for _, destroyingConnection in DestroyingConnections do
+					destroyingConnection:Disconnect()
+				end
+				t[TextChannel] = nil
+			end))
+			TextChannel.ChildRemoved:Connect(function(Child) --[[ Line: 96 ]]
+				-- upvalues: p1 (upval), p2 (upval), TextChannel (copy)
+				if Child:IsA("TextSource") and tostring(Child.UserId) == p1 then
+					p2.clearChannel(TextChannel)
+				end
+			end)
+			
 			return
 		end
-		local isRBXSystem = p4.Name == "RBXSystem"
-		local list = {
-			p4.MessageReceived:Connect(function(p5)
-				-- upvalues: isRBXSystem (ref), getFFlagExpChatUseChatMuteStoreModule (copy), isTextSourceMutedModule (copy), textChatServiceIntegrationModule (copy), p2 (copy), p3 (copy), p4 (ref), textChannelWindowPerfTracker (copy), textChannelWindowAnalyticsModule (copy), getMessageStatus (copy)
-				if not p5.TextSource and not isRBXSystem then return end
-				if getFFlagExpChatUseChatMuteStoreModule() and p5.TextSource and isTextSourceMutedModule(p5.TextSource) then return end
-				local var1 = textChatServiceIntegrationModule.mapTextChatMessage(p5, p2)
-				
-				if var1.content == "" then
-					p3.removeMessage(p4, var1.messageId)
-				else
-					p3.upsertMessage(p4, var1)
-				end
-				if p5.TextSource and tostring(p5.TextSource.UserId) ~= p2 then
-					textChannelWindowPerfTracker.startReceiveInterval(p5.MessageId, p4.Name)
-				end
-				textChannelWindowAnalyticsModule.emit(textChannelWindowAnalyticsModule.Counters.MessageReceived, {
-					status = getMessageStatus(p5),
-					target_text_channel_category = textChannelWindowAnalyticsModule.getChannelCategory(p4.Name)
-				})
-			end)
-		}
-		t[p4] = list
-		table.insert(list, p4.Destroying:Connect(function()
-			-- upvalues: list (ref), t (copy), p4 (ref)
-			for i, v in list do
-				v:Disconnect()
-			end
-			t[p4] = nil
-		end))
-		p4.ChildRemoved:Connect(function(p5)
-			-- upvalues: p2 (copy), p3 (copy), p4 (ref)
-			if p5:IsA("TextSource") and tostring(p5.UserId) == p2 then
-				p3.clearChannel(p4)
-			end
-		end)
 	end
 	
-	p1.SendingMessage:Connect(function(p5)
-		-- upvalues: getFFlagExpChatProtectedChatInternalAPIs (copy), textChannelWindowPerfTracker (copy), textChatServiceIntegrationModule (copy), p2 (ref), p3 (ref)
-		if not p5.TextSource then return end
-		if (if getFFlagExpChatProtectedChatInternalAPIs() then p5.TextInternal else p5.Text) == "" then return end
-		local textChannel = p5.TextChannel
+	Object.SendingMessage:Connect(function(TextChatMessage) --[[ Line: 103 ]]
+		-- upvalues: GetFFlagExpChatProtectedChatInternalAPIsFunction (upval), TextChannelWindowPerfTracker (upval), TextChatServiceIntegrationModule (upval), p1 (copy), p2 (copy)
+		if not TextChatMessage.TextSource then return end
+		if (if GetFFlagExpChatProtectedChatInternalAPIsFunction() then TextChatMessage.TextInternal else TextChatMessage.Text) == "" then return end
+		local TextChannel = TextChatMessage.TextChannel
 		
-		if textChannel then
-			textChannelWindowPerfTracker.startSendInterval(p5.MessageId, textChannel.Name)
-			p3.insertIfAbsent(textChannel, textChatServiceIntegrationModule.mapSendingMessage(p5, p2))
+		if TextChannel then
+			TextChannelWindowPerfTracker.startSendInterval(TextChatMessage.MessageId, TextChannel.Name)
+			p2.insertIfAbsent(TextChannel, (TextChatServiceIntegrationModule.mapSendingMessage(TextChatMessage, p1)))
 			
 			return
 		end
 	end)
 	
-	for i, v in p1:GetDescendants() do
-		if v:IsA("TextChannel") then
-			connectChannel(v)
+	for _, TextChannel in Object:GetDescendants() do
+		if TextChannel:IsA("TextChannel") then
+			connectChannel(TextChannel)
 		end
 	end
-	p1.DescendantAdded:Connect(function(p5)
-		-- upvalues: connectChannel (ref)
-		if p5:IsA("TextChannel") then
-			connectChannel(p5)
+	Object.DescendantAdded:Connect(function(Descendant) --[[ Line: 128 ]]
+		-- upvalues: connectChannel (copy)
+		if Descendant:IsA("TextChannel") then
+			connectChannel(Descendant)
 		end
 	end)
-	p1.DescendantRemoving:Connect(function(p5)
-		-- upvalues: p3 (ref)
-		if p5:IsA("TextChannel") then
-			p3.removeChannelEntry(p5)
+	Object.DescendantRemoving:Connect(function(Descendant) --[[ Line: 133 ]]
+		-- upvalues: p2 (copy)
+		if Descendant:IsA("TextChannel") then
+			p2.removeChannelEntry(Descendant)
 		end
 	end)
 end

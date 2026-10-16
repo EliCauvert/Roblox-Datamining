@@ -1,128 +1,120 @@
-﻿local serverTriggeredModals = script:FindFirstAncestor("ServerTriggeredModals")
-local parent = serverTriggeredModals.Parent
-local reactModule = require(parent.React)
-local robloxAppEnumsModule = require(parent.RobloxAppEnums)
-local centralOverlayModule = require(parent.CentralOverlay)
-local deepLinkModule = require(parent.DeepLink)
-local useSignalState = require(parent.SignalsReact).useSignalState
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local roactServiceTagsModule = require(parent.RoactServiceTags)
-local useRoactService = require(parent.RobloxAppHooks).useRoactService
-local roactNavigationModule = require(parent.RoactNavigation)
-local sharedFlagsModule = require(parent.SharedFlags)
-local notificationsUpsellModule = require(parent.NotificationsUpsell)
-local centralOverlayType = robloxAppEnumsModule.CentralOverlayType
-local setCentralOverlay = centralOverlayModule.Actions.SetCentralOverlay
-local useModalSignalStoreModule = require(serverTriggeredModals.SignalStores.useModalSignalStore)
-local loggerModule = require(serverTriggeredModals.Logger)
-local entryPointModule = require(serverTriggeredModals.EntryPoint)
-local fetchModalMetadataModule = require(serverTriggeredModals.fetchModalMetadata)
-local useHandleCustomModalCallbackModule = require(serverTriggeredModals.useHandleCustomModalCallback)
-local fFlagLuaAppSupportNonSduiTypeForServerTriggeredModals = sharedFlagsModule.FFlagLuaAppSupportNonSduiTypeForServerTriggeredModals
-local fFlagEnableDeepLinkHistoryWithModalAPI = sharedFlagsModule.FFlagEnableDeepLinkHistoryWithModalAPI
-local serverTriggeredModalTrafficPercent = game:DefineFastInt("ServerTriggeredModalTrafficPercent", 0)
-local luaAppAvoidPushUpsellConflicts = game:DefineFastFlag("LuaAppAvoidPushUpsellConflicts", false)
+﻿local ServerTriggeredModals = script:FindFirstAncestor("ServerTriggeredModals")
+local Parent = ServerTriggeredModals.Parent
+local ReactModule = require(Parent.React)
+local DeepLinkModule = require(Parent.DeepLink)
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local RoactServiceTagsModule = require(Parent.RoactServiceTags)
+local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
+local SharedFlagsModule = require(Parent.SharedFlags)
+local NotificationsUpsellModule = require(Parent.NotificationsUpsell)
+local CentralOverlayType = require(Parent.RobloxAppEnums).CentralOverlayType
+local SetCentralOverlayFunction = require(Parent.CentralOverlay).Actions.SetCentralOverlay
+local UseModalSignalStoreModule = require(ServerTriggeredModals.SignalStores.useModalSignalStore)
+local LoggerModule = require(ServerTriggeredModals.Logger)
+local EntryPointModule = require(ServerTriggeredModals.EntryPoint)
+local FetchModalMetadataModule = require(ServerTriggeredModals.fetchModalMetadata)
+local UseHandleCustomModalCallbackModule = require(ServerTriggeredModals.useHandleCustomModalCallback)
+local FFlagLuaAppSupportNonSduiTypeForServerTriggeredModals = SharedFlagsModule.FFlagLuaAppSupportNonSduiTypeForServerTriggeredModals
+local FFlagEnableDeepLinkHistoryWithModalAPI = SharedFlagsModule.FFlagEnableDeepLinkHistoryWithModalAPI
+local ServerTriggeredModalTrafficPercent = game:DefineFastInt("ServerTriggeredModalTrafficPercent", 0)
+local LuaAppAvoidPushUpsellConflicts = game:DefineFastFlag("LuaAppAvoidPushUpsellConflicts", false)
 
-return reactModule.memo(roactNavigationModule.withNavigationFocus(function(p1)
-	-- upvalues: useRoactService (ref), roactServiceTagsModule (ref), useDispatch (ref), useModalSignalStoreModule (ref), useSignalState (ref), entryPointModule (ref), fFlagEnableDeepLinkHistoryWithModalAPI (ref), deepLinkModule (ref), luaAppAvoidPushUpsellConflicts (ref), reactModule (ref), fFlagLuaAppSupportNonSduiTypeForServerTriggeredModals (ref), useHandleCustomModalCallbackModule (ref), notificationsUpsellModule (ref), loggerModule (ref), serverTriggeredModalTrafficPercent (ref), fetchModalMetadataModule (ref), setCentralOverlay (ref), centralOverlayType (ref)
-	local var1 = useRoactService(roactServiceTagsModule.RoactNetworking)
-	local var2 = useDispatch()
-	local var3 = useModalSignalStoreModule()
-	local var4 = useSignalState(var3.getMetadataGetter(entryPointModule.HomepageLaunch))
-	local var5 = useSignalState(var3.getHasShownGetter(entryPointModule.HomepageLaunch))
-	local _ = nil
-	local var6 = if fFlagEnableDeepLinkHistoryWithModalAPI then useSignalState(deepLinkModule.DeepLinkLuaReceiverStatusStore(false).getDeepLinkLuaPostAuthReceiverStatus) else nil
-	local var7 = nil
-	local var8 = nil
+return ReactModule.memo((require(Parent.RoactNavigation).withNavigationFocus(function(p1) --[[ Line: 36 | Named "CheckForSduiModal" ]]
+	-- upvalues: UseRoactServiceFunction (copy), RoactServiceTagsModule (copy), UseDispatchFunction (copy), UseModalSignalStoreModule (copy), UseSignalStateFunction (copy), EntryPointModule (copy), FFlagEnableDeepLinkHistoryWithModalAPI (copy), DeepLinkModule (copy), LuaAppAvoidPushUpsellConflicts (copy), ReactModule (copy), FFlagLuaAppSupportNonSduiTypeForServerTriggeredModals (copy), UseHandleCustomModalCallbackModule (copy), NotificationsUpsellModule (copy), LoggerModule (copy), ServerTriggeredModalTrafficPercent (copy), FetchModalMetadataModule (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy)
+	local UseRoactServiceResult = UseRoactServiceFunction(RoactServiceTagsModule.RoactNetworking)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseModalSignalStoreModuleResult = UseModalSignalStoreModule()
+	local UseSignalStateResult = UseSignalStateFunction(UseModalSignalStoreModuleResult.getMetadataGetter(EntryPointModule.HomepageLaunch))
+	local UseSignalStateResult1 = UseSignalStateFunction(UseModalSignalStoreModuleResult.getHasShownGetter(EntryPointModule.HomepageLaunch))
+	local UseSignalStateResult2 = if FFlagEnableDeepLinkHistoryWithModalAPI then UseSignalStateFunction(DeepLinkModule.DeepLinkLuaReceiverStatusStore(false).getDeepLinkLuaPostAuthReceiverStatus) else nil
+	local v1 = nil
+	local Callback1 = nil
 	
-	if luaAppAvoidPushUpsellConflicts then
-		local var9, var10 = reactModule.useState(false)
-		var7 = var9
-		var8 = var10
+	if LuaAppAvoidPushUpsellConflicts then
+		v1, Callback1 = ReactModule.useState(false)
 	end
-	local var11 = nil
-	local var12 = nil
+	local v2 = nil
+	local Callback = nil
 	
-	if luaAppAvoidPushUpsellConflicts then
-		local var13, var14 = reactModule.useState(false)
-		var11 = var13
-		var12 = var14
+	if LuaAppAvoidPushUpsellConflicts then
+		v2, Callback = ReactModule.useState(false)
 	end
-	local isFocused = p1.isFocused
-	local var15 = if fFlagLuaAppSupportNonSduiTypeForServerTriggeredModals then useHandleCustomModalCallbackModule(entryPointModule.HomepageLaunch, var1) else nil
+	local IsFocused = p1.isFocused
+	local UseHandleCustomModalCallbackModuleResult = if FFlagLuaAppSupportNonSduiTypeForServerTriggeredModals then UseHandleCustomModalCallbackModule(EntryPointModule.HomepageLaunch, UseRoactServiceResult) else nil
 	
-	if luaAppAvoidPushUpsellConflicts then
-		reactModule.useEffect(function()
-			-- upvalues: var12 (write), notificationsUpsellModule (copy), var8 (write), loggerModule (copy)
-			var12(true)
-			notificationsUpsellModule.setupPushNotificationsUpsell.ShouldShowUpsell(notificationsUpsellModule.NotificationsUpsellConstants.ModalKey.PushUpsellHome, false):andThen(function(p2)
-				-- upvalues: var8 (copy)
-				if p2 then
-					var8(true)
+	if LuaAppAvoidPushUpsellConflicts then
+		ReactModule.useEffect(function() --[[ Line: 67 ]]
+			-- upvalues: Callback (ref), NotificationsUpsellModule (upval), Callback1 (ref), LoggerModule (upval)
+			Callback(true)
+			NotificationsUpsellModule.setupPushNotificationsUpsell.ShouldShowUpsell(NotificationsUpsellModule.NotificationsUpsellConstants.ModalKey.PushUpsellHome, false):andThen(function(Result) --[[ Line: 71 ]]
+				-- upvalues: Callback1 (upval)
+				if Result then
+					Callback1(true)
 					
 					return
 				end
-			end):catch(function(p2)
-				-- upvalues: loggerModule (copy)
-				loggerModule:error(`Failed to evaluate push upsell: {p2}`)
-			end):finally(function()
-				-- upvalues: var12 (copy)
-				var12(false)
+			end):catch(function(Err) --[[ Line: 77 ]]
+				-- upvalues: LoggerModule (upval)
+				LoggerModule:error(`Failed to evaluate push upsell: {Err}`)
+			end):finally(function() --[[ Line: 80 ]]
+				-- upvalues: Callback (upval)
+				Callback(false)
 			end)
 		end, {})
 	end
-	reactModule.useEffect(function()
-		-- upvalues: serverTriggeredModalTrafficPercent (copy), fFlagEnableDeepLinkHistoryWithModalAPI (copy), var6 (write), deepLinkModule (copy), fetchModalMetadataModule (copy), var1 (ref), entryPointModule (copy), loggerModule (copy)
-		if serverTriggeredModalTrafficPercent <= math.random(0, 99) then return end
-		if fFlagEnableDeepLinkHistoryWithModalAPI and var6 ~= deepLinkModule.DeepLinkLuaPostAuthReceiverStatus.Ready then
-			return
-		end
-		local var16 = fetchModalMetadataModule(var1, entryPointModule.HomepageLaunch):catch(function(p2)
-			-- upvalues: loggerModule (copy)
-			loggerModule:error(`Failed to fetch modal metadata for home page launch: {p2}`)
+	ReactModule.useEffect(function() --[[ Line: 86 ]]
+		-- upvalues: ServerTriggeredModalTrafficPercent (upval), FFlagEnableDeepLinkHistoryWithModalAPI (upval), UseSignalStateResult2 (ref), DeepLinkModule (upval), FetchModalMetadataModule (upval), UseRoactServiceResult (copy), EntryPointModule (upval), LoggerModule (upval)
+		if ServerTriggeredModalTrafficPercent <= math.random(0, 99) then return end
+		if FFlagEnableDeepLinkHistoryWithModalAPI and UseSignalStateResult2 ~= DeepLinkModule.DeepLinkLuaPostAuthReceiverStatus.Ready then return end
+		local v3 = FetchModalMetadataModule(UseRoactServiceResult, EntryPointModule.HomepageLaunch):catch(function(Err) --[[ Line: 97 ]]
+			-- upvalues: LoggerModule (upval)
+			LoggerModule:error(`Failed to fetch modal metadata for home page launch: {Err}`)
 		end)
 		
-		return function()
-			-- upvalues: var16 (ref)
-			var16:cancel()
+		return function() --[[ Line: 101 ]]
+			-- upvalues: v3 (copy)
+			v3:cancel()
 		end
 	end, {
-		var1,
-		if fFlagEnableDeepLinkHistoryWithModalAPI then var6 else nil
+		UseRoactServiceResult,
+		if FFlagEnableDeepLinkHistoryWithModalAPI then UseSignalStateResult2 else nil
 	})
-	reactModule.useEffect(function()
-		-- upvalues: var5 (ref), var4 (ref), isFocused (ref), luaAppAvoidPushUpsellConflicts (copy), var11 (write), var7 (write), var3 (ref), entryPointModule (copy), fFlagLuaAppSupportNonSduiTypeForServerTriggeredModals (copy), var15 (ref), var2 (ref), setCentralOverlay (copy), centralOverlayType (copy)
-		if var5 then return end
-		if not var4 then return end
-		if not isFocused then return end
-		if luaAppAvoidPushUpsellConflicts and (var11 or var7) then return end
-		var3.setHasShown(entryPointModule.HomepageLaunch, true)
+	ReactModule.useEffect(function() --[[ Line: 107 ]]
+		-- upvalues: UseSignalStateResult1 (copy), UseSignalStateResult (copy), IsFocused (copy), LuaAppAvoidPushUpsellConflicts (upval), v2 (ref), v1 (ref), UseModalSignalStoreModuleResult (copy), EntryPointModule (upval), FFlagLuaAppSupportNonSduiTypeForServerTriggeredModals (upval), UseHandleCustomModalCallbackModuleResult (copy), UseDispatchResult (copy), SetCentralOverlayFunction (upval), CentralOverlayType (upval)
+		if UseSignalStateResult1 then return end
+		if not UseSignalStateResult then return end
+		if not IsFocused then return end
+		if LuaAppAvoidPushUpsellConflicts and (v2 or v1) then return end
+		UseModalSignalStoreModuleResult.setHasShown(EntryPointModule.HomepageLaunch, true)
 		
-		if not fFlagLuaAppSupportNonSduiTypeForServerTriggeredModals then
-			var2(setCentralOverlay(centralOverlayType.SduiModal, {
-				sduiComponentConfig = var4.sduiConfig,
-				modalId = var4.modalId,
-				modalType = var4.modalType
+		if not FFlagLuaAppSupportNonSduiTypeForServerTriggeredModals then
+			UseDispatchResult(SetCentralOverlayFunction(CentralOverlayType.SduiModal, {
+				sduiComponentConfig = UseSignalStateResult.sduiConfig,
+				modalId = UseSignalStateResult.modalId,
+				modalType = UseSignalStateResult.modalType
 			}))
 			
 			return
-		elseif var4.isCustomHandler then
-			var15(var4)
+		end
+		if UseSignalStateResult.isCustomHandler then
+			UseHandleCustomModalCallbackModuleResult(UseSignalStateResult)
 			
 			return
+		else
+			UseDispatchResult(SetCentralOverlayFunction(CentralOverlayType.SduiModal, {
+				sduiComponentConfig = UseSignalStateResult.sduiConfig,
+				modalId = UseSignalStateResult.modalId,
+				modalType = UseSignalStateResult.modalType
+			}))
 		end
-		var2(setCentralOverlay(centralOverlayType.SduiModal, {
-			sduiComponentConfig = var4.sduiConfig,
-			modalId = var4.modalId,
-			modalType = var4.modalType
-		}))
 	end, {
-		var5, var4, isFocused, var2,
-		if fFlagLuaAppSupportNonSduiTypeForServerTriggeredModals then var15 else nil,
-		if fFlagLuaAppSupportNonSduiTypeForServerTriggeredModals then var3 else nil,
-		if luaAppAvoidPushUpsellConflicts then var11 else nil,
-		if luaAppAvoidPushUpsellConflicts then var7 else nil
+		UseSignalStateResult1, UseSignalStateResult, IsFocused, UseDispatchResult,
+		if FFlagLuaAppSupportNonSduiTypeForServerTriggeredModals then UseHandleCustomModalCallbackModuleResult else nil,
+		if FFlagLuaAppSupportNonSduiTypeForServerTriggeredModals then UseModalSignalStoreModuleResult else nil,
+		if LuaAppAvoidPushUpsellConflicts then v2 else nil,
+		if LuaAppAvoidPushUpsellConflicts then v1 else nil
 	})
 	
 	return nil
-end))
+end)))

@@ -1,61 +1,61 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local userInputService = game:GetService("UserInputService")
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local buttonType = UIBloxModule.App.Button.Enum.ButtonType
-local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
-local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
-local xboxA = UIBloxModule.App.ImageSet.Images["icons/controls/keys/xboxA"]
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local tModule = require(corePackagesService.Packages.t)
-local inputTypeModule = require(corePackagesService.Workspace.Packages.InputType)
-local getInputGroup = require(corePackagesService.Workspace.Packages.InputType).getInputGroup
-local closeResultModalModule = require(script.Parent.Parent.Thunks.CloseResultModal)
-local getFFlagValidateDescriptionModule = require(script.Parent.Parent.GetFFlagValidateDescription)
-local var1 = if game:GetEngineFeature("EnableImagePublish") then Enum.PromptCreatePlatformContentResult else Enum.PromptPublishAssetResult
-local resultModal = roactModule.PureComponent:extend("ResultModal")
-resultModal.validateProps = tModule.strictInterface({
-	screenSize = tModule.Vector2,
-	resultModalType = tModule.enum(var1),
-	closeResultModal = tModule.callback
+﻿local CorePackages = game:GetService("CorePackages")
+local UserInputService = game:GetService("UserInputService")
+local UIBloxModule = require(CorePackages.Packages.UIBlox)
+local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
+local InteractiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
+local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
+local IconsControlsKeysXboxA = UIBloxModule.App.ImageSet.Images["icons/controls/keys/xboxA"]
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local TModule = require(CorePackages.Packages.t)
+local InputTypeModule = require(CorePackages.Workspace.Packages.InputType)
+local GetInputGroupFunction = require(CorePackages.Workspace.Packages.InputType).getInputGroup
+local CloseResultModalModule = require(script.Parent.Parent.Thunks.CloseResultModal)
+local GetFFlagValidateDescriptionModule = require(script.Parent.Parent.GetFFlagValidateDescription)
+local PromptCreatePlatformContentResult = if game:GetEngineFeature("EnableImagePublish") then Enum.PromptCreatePlatformContentResult else Enum.PromptPublishAssetResult
+local ResultModal = RoactModule.PureComponent:extend("ResultModal")
+ResultModal.validateProps = TModule.strictInterface({
+	screenSize = TModule.Vector2,
+	resultModalType = TModule.enum(PromptCreatePlatformContentResult),
+	closeResultModal = TModule.callback
 })
 
-local function _(p1)
-	-- upvalues: getInputGroup (ref), inputTypeModule (ref)
-	return getInputGroup(p1) == inputTypeModule.InputTypeConstants.Gamepad
+local function _(p1): boolean --[[ Line: 46 | Named "isGamepadInput" ]]
+	-- upvalues: GetInputGroupFunction (copy), InputTypeModule (copy)
+	return GetInputGroupFunction(p1) == InputTypeModule.InputTypeConstants.Gamepad
 end
 
-function resultModal.init(p1)
-	-- upvalues: userInputService (ref), getInputGroup (ref), inputTypeModule (ref)
+function ResultModal.init(p1) --[[ Line: 51 ]]
+	-- upvalues: UserInputService (copy), GetInputGroupFunction (copy), InputTypeModule (copy)
 	p1:setState({
-		isGamepad = getInputGroup(userInputService:GetLastInputType()) == inputTypeModule.InputTypeConstants.Gamepad
+		isGamepad = GetInputGroupFunction((UserInputService:GetLastInputType())) == InputTypeModule.InputTypeConstants.Gamepad
 	})
 end
 
-function resultModal.getLocalizedStringForResultPrompt(_, p1)
-	-- upvalues: var1 (ref), robloxTranslatorModule (ref)
-	return if p1 == var1.Success then robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.PublishSuccessMessage") elseif p1 == var1.UploadFailed then robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.PublishFailed") elseif p1 == var1.NoUserInput then robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.NoUserInput") else robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.UndefinedError", { RESULT_TYPE = tostring(p1) })
+function ResultModal:getLocalizedStringForResultPrompt(ResultModalType) --[[ Line: 57 ]]
+	-- upvalues: PromptCreatePlatformContentResult (copy), RobloxTranslatorModule (copy)
+	return if ResultModalType == PromptCreatePlatformContentResult.Success then RobloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.PublishSuccessMessage") elseif ResultModalType == PromptCreatePlatformContentResult.UploadFailed then RobloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.PublishFailed") elseif ResultModalType == PromptCreatePlatformContentResult.NoUserInput then RobloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.NoUserInput") else RobloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.UndefinedError", { RESULT_TYPE = tostring(ResultModalType) })
 end
 
-function resultModal.getLocalizedTitleForResultPrompt(_, p1)
-	-- upvalues: var1 (ref), robloxTranslatorModule (ref)
-	return if p1 == var1.Success then robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.PublishSuccessTitle") else robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.PublishFailedTitle")
+function ResultModal:getLocalizedTitleForResultPrompt(ResultModalType) --[[ Line: 72 ]]
+	-- upvalues: PromptCreatePlatformContentResult (copy), RobloxTranslatorModule (copy)
+	return if ResultModalType == PromptCreatePlatformContentResult.Success then RobloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.PublishSuccessTitle") else RobloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.PublishFailedTitle")
 end
 
-function resultModal.render(p1)
-	-- upvalues: roactModule (ref), interactiveAlert (ref), buttonType (ref), getFFlagValidateDescriptionModule (ref), robloxTranslatorModule (ref), xboxA (ref)
-	return roactModule.createElement(interactiveAlert, {
+function ResultModal.render(p1) --[[ Line: 80 ]]
+	-- upvalues: RoactModule (copy), InteractiveAlert (copy), ButtonType (copy), GetFFlagValidateDescriptionModule (copy), RobloxTranslatorModule (copy), IconsControlsKeysXboxA (copy)
+	return RoactModule.createElement(InteractiveAlert, {
 		title = p1:getLocalizedTitleForResultPrompt(p1.props.resultModalType),
 		bodyText = p1:getLocalizedStringForResultPrompt(p1.props.resultModalType),
 		screenSize = p1.props.screenSize,
 		buttonStackInfo = {
 			buttons = {
 				{
-					buttonType = buttonType.PrimarySystem,
+					buttonType = ButtonType.PrimarySystem,
 					props = {
 						onActivated = p1.props.closeResultModal,
-						text = if getFFlagValidateDescriptionModule() then robloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.ResultModalOk") else robloxTranslatorModule:FormatByKey("InGame.CommonUI.Button.Ok"),
-						inputIcon = if p1.state.isGamepad then xboxA else nil
+						text = if GetFFlagValidateDescriptionModule() then RobloxTranslatorModule:FormatByKey("CoreScripts.PublishAssetPrompt.ResultModalOk") else RobloxTranslatorModule:FormatByKey("InGame.CommonUI.Button.Ok"),
+						inputIcon = p1.state.isGamepad and IconsControlsKeysXboxA or nil
 					}
 				}
 			}
@@ -63,14 +63,14 @@ function resultModal.render(p1)
 	})
 end
 
-return roactRoduxModule.connect(function(p1)
+return RoactRoduxModule.connect(function(p1) --[[ Line: 102 | Named "mapStateToProps" ]]
 	return { resultModalType = p1.promptRequest.resultModalType }
-end, function(p1)
-	-- upvalues: closeResultModalModule (ref)
+end, function(Callback) --[[ Line: 108 | Named "mapDispatchToProps" ]]
+	-- upvalues: CloseResultModalModule (copy)
 	return {
-		closeResultModal = function()
-			-- upvalues: p1 (ref), closeResultModalModule (copy)
-			return p1(closeResultModalModule)
+		closeResultModal = function() --[[ Line: 110 ]]
+			-- upvalues: Callback (copy), CloseResultModalModule (upval)
+			return Callback(CloseResultModalModule)
 		end
 	}
-end)(resultModal)
+end)(ResultModal)

@@ -1,58 +1,58 @@
-﻿local avatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
-local parent = avatarExperienceProfilePictureEditor.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local localizationModule = require(parent.Localization)
-local view = foundationModule.View
-local iconName = foundationModule.Enums.IconName
-local useLocalization = localizationModule.Hooks.useLocalization
-local scrollSectionModule = require(avatarExperienceProfilePictureEditor.Components.ScrollSection)
-local assetPickerCarouselModule = require(avatarExperienceProfilePictureEditor.Components.AssetPicker.AssetPickerCarousel)
-local _ = require(avatarExperienceProfilePictureEditor.Components.AssetPicker.AssetPickerTile)
-local shopMoreCarouselTileModule = require(avatarExperienceProfilePictureEditor.Components.AssetPicker.ShopMoreCarouselTile)
-local getAssetPickerStatusModule = require(avatarExperienceProfilePictureEditor.Utils.getAssetPickerStatus)
-local textKeysModule = require(avatarExperienceProfilePictureEditor.Common.TextKeys)
-local useEditProfileImageActions = require(avatarExperienceProfilePictureEditor.Context.EditProfileImageActionsContext).useEditProfileImageActions
+﻿local AvatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
+local Parent = AvatarExperienceProfilePictureEditor.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local IconName = FoundationModule.Enums.IconName
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local ScrollSectionModule = require(AvatarExperienceProfilePictureEditor.Components.ScrollSection)
+local AssetPickerCarouselModule = require(AvatarExperienceProfilePictureEditor.Components.AssetPicker.AssetPickerCarousel)
+local _ = require(AvatarExperienceProfilePictureEditor.Components.AssetPicker.AssetPickerTile)
+local ShopMoreCarouselTileModule = require(AvatarExperienceProfilePictureEditor.Components.AssetPicker.ShopMoreCarouselTile)
+local GetAssetPickerStatusModule = require(AvatarExperienceProfilePictureEditor.Utils.getAssetPickerStatus)
+local TextKeysModule = require(AvatarExperienceProfilePictureEditor.Common.TextKeys)
+local UseEditProfileImageActionsFunction = require(AvatarExperienceProfilePictureEditor.Context.EditProfileImageActionsContext).useEditProfileImageActions
 
-return function(p1)
-	-- upvalues: useEditProfileImageActions (ref), useLocalization (ref), textKeysModule (ref), getAssetPickerStatusModule (ref), reactModule (ref), shopMoreCarouselTileModule (ref), scrollSectionModule (ref), view (ref), assetPickerCarouselModule (ref), iconName (ref)
-	local var1 = useEditProfileImageActions()
-	local var2 = useLocalization({
-		emotes = textKeysModule.Emotes,
-		frames = textKeysModule.Frames,
-		shopForMore = textKeysModule.ShopForMore
+return function(p1) --[[ Line: 52 | Named "CombinedCarouselsContent" ]]
+	-- upvalues: UseEditProfileImageActionsFunction (copy), UseLocalizationFunction (copy), TextKeysModule (copy), GetAssetPickerStatusModule (copy), ReactModule (copy), ShopMoreCarouselTileModule (copy), ScrollSectionModule (copy), View (copy), AssetPickerCarouselModule (copy), IconName (copy)
+	local UseEditProfileImageActionsResult = UseEditProfileImageActionsFunction()
+	local UseLocalizationResult = UseLocalizationFunction({
+		emotes = TextKeysModule.Emotes,
+		frames = TextKeysModule.Frames,
+		shopForMore = TextKeysModule.ShopForMore
 	})
-	local var3 = getAssetPickerStatusModule(p1.emotesLoading, p1.emotesError)
+	local AssetPickerStatusModule = GetAssetPickerStatusModule(p1.emotesLoading, p1.emotesError)
+	local ShowFrames = p1.showFrames
 	
-	return reactModule.createElement(scrollSectionModule, {
+	return ReactModule.createElement(ScrollSectionModule, {
 		pinHeader = false,
 		layoutOrder = p1.layoutOrder,
 		useInternalScroll = p1.useInternalScroll
 	}, {
-		Sections = reactModule.createElement(view, { tag = "col gap-xsmall size-full-0 auto-y" }, {
-			Emotes = reactModule.createElement(assetPickerCarouselModule, {
+		Sections = ReactModule.createElement(View, { tag = "col gap-xsmall size-full-0 auto-y" }, {
+			Emotes = ReactModule.createElement(AssetPickerCarouselModule, {
 				layoutOrder = 1,
-				title = var2.emotes,
-				status = var3,
+				title = UseLocalizationResult.emotes,
+				status = AssetPickerStatusModule,
 				onRetry = p1.onRetryEmotes,
 				items = p1.emoteItems,
 				selectedId = p1.selectedEmoteId,
 				onSelect = p1.onSelectEmote,
-				onDetailsActivated = var1.onOpenEmoteDetails,
+				onDetailsActivated = UseEditProfileImageActionsResult.onOpenEmoteDetails,
 				onTitleActivated = p1.onExpandEmotes,
-				trailingCarouselComponent = if var3 == "ready" then reactModule.createElement(shopMoreCarouselTileModule, {
-					label = var2.shopForMore,
+				trailingCarouselComponent = if AssetPickerStatusModule == "ready" then ReactModule.createElement(ShopMoreCarouselTileModule, {
+					label = UseLocalizationResult.shopForMore,
 					tileSize = p1.tileSize,
 					layoutOrder = #p1.emoteItems + 1,
-					onActivated = var1.onShopForMoreEmotes
+					onActivated = UseEditProfileImageActionsResult.onShopForMoreEmotes
 				}) else nil,
 				tileSize = p1.tileSize
 			}),
-			Frames = if p1.showFrames then reactModule.createElement(assetPickerCarouselModule, {
+			Frames = if ShowFrames then ReactModule.createElement(AssetPickerCarouselModule, {
 				layoutOrder = 2,
-				title = var2.frames,
-				titleLeadingIconName = iconName.RobloxPlus,
-				status = getAssetPickerStatusModule(p1.framesLoading, p1.framesError),
+				title = UseLocalizationResult.frames,
+				titleLeadingIconName = IconName.RobloxPlus,
+				status = GetAssetPickerStatusModule(p1.framesLoading, p1.framesError),
 				onRetry = p1.onRetryFrames,
 				bannerComponent = p1.framesBannerComponent,
 				items = p1.frameItems,

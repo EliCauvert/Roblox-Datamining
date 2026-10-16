@@ -1,43 +1,43 @@
-﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
-local reactModule = require(parent.React)
-local _ = require(parent.UnifiedLogging)
-local getDisplayStore = require(parent.Display).GetDisplayStore
-local feedScroll = require(parent.ScrollTelemetry).feedScroll
-local sduiErrors = require(parent.SduiCoreSystem).SduiErrors
+﻿local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
+local ReactModule = require(Parent.React)
+local _ = require(Parent.UnifiedLogging)
+local GetDisplayStoreFunction = require(Parent.Display).GetDisplayStore
+local FeedScrollFunction = require(Parent.ScrollTelemetry).feedScroll
+local SduiErrors = require(Parent.SduiCoreSystem).SduiErrors
 
-return function(p1, p2, p3)
-	-- upvalues: reactModule (ref), sduiErrors (ref), getDisplayStore (ref), feedScroll (ref)
-	return reactModule.useCallback(function(p4, p5, p6)
-		-- upvalues: p1 (ref), p2 (ref), p3 (ref), sduiErrors (copy), getDisplayStore (copy), feedScroll (copy)
+return function(p1, p2, p3) --[[ Line: 17 | Named "useScrollTelemetryCallback" ]]
+	-- upvalues: ReactModule (copy), SduiErrors (copy), GetDisplayStoreFunction (copy), FeedScrollFunction (copy)
+	return (ReactModule.useCallback(function(Distance, ScrollDuration, StartPos) --[[ Line: 23 ]]
+		-- upvalues: p1 (copy), p2 (copy), p3 (copy), SduiErrors (upval), GetDisplayStoreFunction (upval), FeedScrollFunction (upval)
 		if p1 and p1.current ~= nil and p2.current then
-			local current = p2.current
-			local scrollingDirection = p1.current.ScrollingDirection
-			local var1 = 0
+			local Current = p2.current
+			local ScrollingDirection = p1.current.ScrollingDirection
+			local X = 0
 			
-			if scrollingDirection == Enum.ScrollingDirection.X then
-				var1 = p1.current.AbsoluteSize.X
-			elseif scrollingDirection == Enum.ScrollingDirection.Y then
-				var1 = p1.current.AbsoluteSize.Y
+			if ScrollingDirection == Enum.ScrollingDirection.X then
+				X = p1.current.AbsoluteSize.X
+			elseif ScrollingDirection == Enum.ScrollingDirection.Y then
+				X = p1.current.AbsoluteSize.Y
 			else
-				p3.dependencies.logger.reportError(sduiErrors.SduiErrorType.InvalidScrollDirection, {
-					name = `{current.collectionId}`,
-					message = `Direction {scrollingDirection.Name} is an unsupported option for feedScroll event`
+				p3.dependencies.logger.reportError(SduiErrors.SduiErrorType.InvalidScrollDirection, {
+					name = `{Current.collectionId}`,
+					message = `Direction {ScrollingDirection.Name} is an unsupported option for feedScroll event`
 				}, p3.appPage)
 			end
-			local viewportSize = getDisplayStore(false).getViewportSize(false)
-			feedScroll(p3.dependencies.eventIngest, p3.appPage, scrollingDirection, {
+			local ViewportSize = GetDisplayStoreFunction(false).getViewportSize(false)
+			FeedScrollFunction(p3.dependencies.eventIngest, p3.appPage, ScrollingDirection, {
 				gameSetTargetId = nil,
-				distance = p4,
-				screenSizeX = viewportSize.X,
-				screenSizeY = viewportSize.Y,
-				scrollAreaSize = var1,
-				scrollDepth = if var1 > 0 then p4 / var1 else nil,
-				startDepth = if var1 > 0 then p6 / var1 else nil,
-				startPos = p6,
-				scrollDuration = p5,
-				sortPos = current.collectionPosition,
-				gameSetTypeId = tostring(current.collectionId)
+				distance = Distance,
+				screenSizeX = ViewportSize.X,
+				screenSizeY = ViewportSize.Y,
+				scrollAreaSize = X,
+				scrollDepth = if X > 0 then Distance / X else nil,
+				startDepth = if X > 0 then StartPos / X else nil,
+				startPos = StartPos,
+				scrollDuration = ScrollDuration,
+				sortPos = Current.collectionPosition,
+				gameSetTypeId = tostring(Current.collectionId)
 			})
 		end
-	end, { p3, p2, p1 })
+	end, { p3, p2, p1 }))
 end

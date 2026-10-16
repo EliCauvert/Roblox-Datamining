@@ -1,13 +1,13 @@
-﻿local voiceChat = script:FindFirstAncestor("VoiceChat")
-local setShowAgeVerificationOverlayModule = require(voiceChat.AgeVerificationOverlay.SetShowAgeVerificationOverlay)
-local cryoModule = require(voiceChat.Parent.Cryo)
+﻿local VoiceChat = script:FindFirstAncestor("VoiceChat")
+local SetShowAgeVerificationOverlayModule = require(VoiceChat.AgeVerificationOverlay.SetShowAgeVerificationOverlay)
+local CryoModule = require(VoiceChat.Parent.Cryo)
 
-return function(p1, p2)
-	-- upvalues: setShowAgeVerificationOverlayModule (ref), cryoModule (ref)
-	p1 = p1 or {}
+return function(p1, p2) --[[ Line: 6 ]]
+	-- upvalues: SetShowAgeVerificationOverlayModule (copy), CryoModule (copy)
+	local P0 = p1 or {}
 	
-	if p2.type == setShowAgeVerificationOverlayModule.name then
-		p1 = cryoModule.Dictionary.join(p1, if p2.universeId ~= nil then {
+	if p2.type == SetShowAgeVerificationOverlayModule.name then
+		P0 = CryoModule.Dictionary.join(P0, if p2.universeId == nil then {} else {
 			[p2.universeId] = {
 				universeId = p2.universeId,
 				isPlaceEnabledForVoice = p2.isPlaceEnabledForVoice,
@@ -17,7 +17,7 @@ return function(p1, p2)
 				isUniverseEnabledForAvatarVideo = p2.isUniverseEnabledForAvatarVideo,
 				elegibleToSeeVoiceUpsell = p2.elegibleToSeeVoiceUpsell
 			}
-		} else {})
+		} or {})
 	end
-	return p1
+	return P0
 end

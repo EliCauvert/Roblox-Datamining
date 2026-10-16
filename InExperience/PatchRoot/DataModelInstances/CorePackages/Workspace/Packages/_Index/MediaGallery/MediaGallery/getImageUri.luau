@@ -1,8 +1,9 @@
-﻿return function(p1)
-	if p1 == nil or p1 == "" then
+﻿return function(Text: string): string --[[ Line: 4 | Named "getImageUri" ]]
+	if Text == nil or Text == "" then
 		return ""
+	else
+		local FoundAt: number? = string.find(Text, "http://www.roblox.com/asset/?id=", 1, true)
+		
+		return if FoundAt and FoundAt == 1 then `rbxthumb://type=Asset&id={string.sub(Text, 33)}&w=768&h=432` elseif tonumber(Text) then `rbxthumb://type=Asset&id={Text}&w=768&h=432` else Text
 	end
-	local matchIndex = string.find(p1, "http://www.roblox.com/asset/?id=", 1, true)
-	
-	return if matchIndex and matchIndex == 1 then `rbxthumb://type=Asset&id={string.sub(p1, 33)}&w=768&h=432` elseif tonumber(p1) then `rbxthumb://type=Asset&id={p1}&w=768&h=432` else p1
 end

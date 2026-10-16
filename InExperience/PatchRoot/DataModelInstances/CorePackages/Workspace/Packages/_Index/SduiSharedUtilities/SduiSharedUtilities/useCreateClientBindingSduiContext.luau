@@ -1,18 +1,17 @@
-﻿local parent = script:FindFirstAncestor("SduiSharedUtilities").Parent
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local sduiLogger = sduiCoreSystemModule.SduiLogger
-local sduiErrors = sduiCoreSystemModule.SduiErrors
-local useCollectionLayoutConfig = require(parent.CollectionViews).useCollectionLayoutConfig
-local getSduiServiceDependenciesStore = sduiCoreSystemModule.getSduiServiceDependenciesStore
-local collectionItemSize = require(parent.CollectionViews).CollectionViewTypes.CollectionItemSize
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagLuaAppCompositionAlways = sharedFlagsModule.FFlagLuaAppCompositionAlways
-local fFlagLuaAppSduiStickyHeaderScrollAway = sharedFlagsModule.FFlagLuaAppSduiStickyHeaderScrollAway
-local fFlagLuaAppSduiVideoThumbnail = sharedFlagsModule.FFlagLuaAppSduiVideoThumbnail
-local fFlagLuaAppOneByTwoHoverIdleAutoplay = sharedFlagsModule.FFlagLuaAppOneByTwoHoverIdleAutoplay
-local t = {
+﻿local Parent = script:FindFirstAncestor("SduiSharedUtilities").Parent
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local SduiLogger = SduiCoreSystemModule.SduiLogger
+local SduiErrors = SduiCoreSystemModule.SduiErrors
+local UseCollectionLayoutConfigFunction = require(Parent.CollectionViews).useCollectionLayoutConfig
+local GetSduiServiceDependenciesStoreFunction = SduiCoreSystemModule.getSduiServiceDependenciesStore
+local CollectionItemSize = require(Parent.CollectionViews).CollectionViewTypes.CollectionItemSize
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagLuaAppCompositionAlways = SharedFlagsModule.FFlagLuaAppCompositionAlways
+local FFlagLuaAppSduiVideoThumbnail = SharedFlagsModule.FFlagLuaAppSduiVideoThumbnail
+local FFlagLuaAppOneByTwoHoverIdleAutoplay = SharedFlagsModule.FFlagLuaAppOneByTwoHoverIdleAutoplay
+local config = {
 	numColumns = 3,
 	fractionalItemAmount = 0,
 	columnGap = 24,
@@ -20,47 +19,47 @@ local t = {
 	verticalPadding = 16
 }
 
-return function(p1, p2, p3, p4, p5, p6, p7, p8, p9)
-	-- upvalues: fFlagLuaAppCompositionAlways (ref), useCollectionLayoutConfig (ref), reactModule (ref), signalsModule (ref), t (ref), collectionItemSize (ref), sduiLogger (ref), sduiErrors (ref), getSduiServiceDependenciesStore (ref), fFlagLuaAppSduiStickyHeaderScrollAway (ref), fFlagLuaAppSduiVideoThumbnail (ref), fFlagLuaAppOneByTwoHoverIdleAutoplay (ref)
-	p7 = p7 or p1
-	local _ = nil
-	local var1 = nil
+return function(AppPage, p1, p2, DataUpdatedTimestamp, ConfigKey, Enabled, p3, ScrollAway, p4) --[[ Line: 48 | Named "useCreateClientBindingSduiContext" ]]
+	-- upvalues: FFlagLuaAppCompositionAlways (copy), UseCollectionLayoutConfigFunction (copy), ReactModule (copy), SignalsModule (copy), config (copy), CollectionItemSize (copy), SduiLogger (copy), SduiErrors (copy), GetSduiServiceDependenciesStoreFunction (copy), FFlagLuaAppSduiVideoThumbnail (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy)
+	local P5 = p3 or AppPage
+	local UseCollectionLayoutConfigResult = nil
+	local UseResult = nil
 	
-	if not fFlagLuaAppCompositionAlways then
-		local var2 = useCollectionLayoutConfig(p2, p3)
-		var1 = reactModule.useCallback(function(p10)
-			-- upvalues: signalsModule (copy), p6 (ref), t (copy), var2 (write), collectionItemSize (copy), sduiLogger (copy), sduiErrors (copy), p1 (ref)
-			return signalsModule.createComputed(function(p11)
-				-- upvalues: p6 (copy), t (copy), var2 (copy), p10 (ref), collectionItemSize (copy), sduiLogger (copy), sduiErrors (copy), p1 (copy)
-				if p6 ~= false then
-					return t
-				elseif var2 then
-					return (var2[p10] or var2[collectionItemSize.Small])(p11)
+	if not FFlagLuaAppCompositionAlways then
+		UseCollectionLayoutConfigResult = UseCollectionLayoutConfigFunction(p1, p2)
+		UseResult = ReactModule.useCallback(function(p5) --[[ Line: 67 ]]
+			-- upvalues: SignalsModule (upval), Enabled (copy), config (upval), UseCollectionLayoutConfigResult (ref), CollectionItemSize (upval), SduiLogger (upval), SduiErrors (upval), AppPage (copy)
+			return SignalsModule.createComputed(function(p6) --[[ Line: 68 ]]
+				-- upvalues: Enabled (upval), config (upval), UseCollectionLayoutConfigResult (upval), p5 (copy), CollectionItemSize (upval), SduiLogger (upval), SduiErrors (upval), AppPage (upval)
+				if Enabled ~= false then
+					return config
+				elseif UseCollectionLayoutConfigResult then
+					return (UseCollectionLayoutConfigResult[p5] or UseCollectionLayoutConfigResult[CollectionItemSize.Small])(p6)
+				else
+					SduiLogger.reportError(SduiErrors.SduiErrorType.NoPageLayoutConfig, {
+						message = `No page layout config available for {AppPage}, returning default config`
+					}, AppPage)
+					
+					return config
 				end
-				sduiLogger.reportError(sduiErrors.SduiErrorType.NoPageLayoutConfig, {
-					message = `No page layout config available for {p1}, returning default config`
-				}, p1)
-				
-				return t
 			end)
-		end, { var2, p1, p6 })
+		end, { UseCollectionLayoutConfigResult, AppPage, Enabled })
 	end
-	return reactModule.useMemo(function()
-		-- upvalues: getSduiServiceDependenciesStore (copy), p1 (ref), p7 (ref), var1 (write), p6 (ref), p4 (ref), p5 (ref), fFlagLuaAppSduiStickyHeaderScrollAway (copy), p8 (ref), fFlagLuaAppSduiVideoThumbnail (copy), fFlagLuaAppOneByTwoHoverIdleAutoplay (copy), p9 (ref)
+	return (ReactModule.useMemo(function() --[[ Line: 95 ]]
+		-- upvalues: GetSduiServiceDependenciesStoreFunction (upval), AppPage (copy), P5 (copy), UseResult (ref), Enabled (copy), DataUpdatedTimestamp (copy), ConfigKey (copy), ScrollAway (copy), FFlagLuaAppSduiVideoThumbnail (upval), FFlagLuaAppOneByTwoHoverIdleAutoplay (upval), p4 (copy)
 		return {
-			dependencies = getSduiServiceDependenciesStore().getDependencies(p1),
-			appPage = p1,
-			routeName = p7,
-			getPageLayoutConfig = var1,
-			appCompositionEnabled = p6 ~= nil or p6,
-			dataUpdatedTimestamp = p4,
-			configKey = p5,
-			scrollAway = if fFlagLuaAppSduiStickyHeaderScrollAway then p8 else nil,
-			videoPlaybackContext = if fFlagLuaAppSduiVideoThumbnail or fFlagLuaAppOneByTwoHoverIdleAutoplay then p9 else nil
+			dependencies = GetSduiServiceDependenciesStoreFunction().getDependencies(AppPage),
+			appPage = AppPage,
+			routeName = P5,
+			getPageLayoutConfig = UseResult,
+			appCompositionEnabled = Enabled == nil or Enabled,
+			dataUpdatedTimestamp = DataUpdatedTimestamp,
+			configKey = ConfigKey,
+			scrollAway = ScrollAway,
+			videoPlaybackContext = if FFlagLuaAppSduiVideoThumbnail or FFlagLuaAppOneByTwoHoverIdleAutoplay then p4 else nil
 		}
 	end, {
-		p1, p7, var1, p4, p5, p6,
-		if fFlagLuaAppSduiStickyHeaderScrollAway then p8 else nil,
-		if fFlagLuaAppSduiVideoThumbnail or fFlagLuaAppOneByTwoHoverIdleAutoplay then p9 else nil
-	})
+		AppPage, P5, UseResult, DataUpdatedTimestamp, ConfigKey, Enabled, ScrollAway,
+		if FFlagLuaAppSduiVideoThumbnail or FFlagLuaAppOneByTwoHoverIdleAutoplay then p4 else nil
+	}))
 end

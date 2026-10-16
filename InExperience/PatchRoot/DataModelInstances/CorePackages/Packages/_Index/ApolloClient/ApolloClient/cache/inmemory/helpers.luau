@@ -1,65 +1,60 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local array = require(parent_1.LuauPolyfill).Array
-local luauRegExpModule = require(parent_1.LuauRegExp)
-local _ = require(parent_1.GraphQL)
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local Array = require(Parent1.LuauPolyfill).Array
+local _ = require(Parent1.GraphQL)
 local _ = require(script.Parent.types)
-local utilitiesModule = require(parent.utilities)
-local isReference = utilitiesModule.isReference
-local isField = utilitiesModule.isField
-local deepMerger = utilitiesModule.DeepMerger
-local resultKeyNameFromFieldf = utilitiesModule.resultKeyNameFromFieldf
-local shouldInclude = utilitiesModule.shouldInclude
-local isNonNullObject = utilitiesModule.isNonNullObject
-local t = {}
-local hasOwnPropertyModule = require(parent.luaUtils.hasOwnProperty)
-t.hasOwn = hasOwnPropertyModule
+local UtilitiesModule = require(Parent.utilities)
+local IsReferenceFunction = UtilitiesModule.isReference
+local IsFieldFunction = UtilitiesModule.isField
+local DeepMerger = UtilitiesModule.DeepMerger
+local ResultKeyNameFromFieldfFunction = UtilitiesModule.resultKeyNameFromFieldf
+local ShouldIncludeFunction = UtilitiesModule.shouldInclude
+local IsNonNullObjectFunction = UtilitiesModule.isNonNullObject
+local HasOwnPropertyModule = require(Parent.luaUtils.hasOwnProperty)
+local Matches = {}
 
-function t.getTypenameFromStoreObject(p1, p2)
-	-- upvalues: isReference (ref)
-	return if isReference(p2) then p1:get(p2.__ref, "__typename") elseif p2 then p2.__typename else nil
-end
-
-t.TypeOrFieldNameRegExp = luauRegExpModule("^[_a-zA-Z][_0-9a-zA-Z]*", "i")
-local t_1 = {}
-
-function t.fieldNameFromStoreName(p1)
-	-- upvalues: t_1 (ref)
-	if t_1[p1] then
-		return t_1[p1]
-	end
-	local var1 = string.match(p1, "^[_a-zA-Z][_0-9a-zA-Z]*") or p1
-	t_1[p1] = var1
-	
-	return var1
-end
-
-local function selectionSetMatchesResult(value, p1, p2)
-	-- upvalues: isNonNullObject (ref), array (ref), selectionSetMatchesResult (ref), isField (ref), shouldInclude (ref), resultKeyNameFromFieldf (ref), hasOwnPropertyModule (ref)
-	return if isNonNullObject(p1) then if array.isArray(p1) then array.every(p1, function(p3)
-		-- upvalues: selectionSetMatchesResult (copy), value (ref), p2 (ref)
-		return selectionSetMatchesResult(value, p3, p2)
-	end) else array.every(value.selections, function(p3)
-		-- upvalues: isField (copy), shouldInclude (copy), p2 (ref), resultKeyNameFromFieldf (copy), hasOwnPropertyModule (copy), p1 (ref), selectionSetMatchesResult (copy)
-		if isField(p3) and shouldInclude(p3, p2) then
-			local var1 = resultKeyNameFromFieldf(p3)
+local function selectionSetMatchesResult(SelectionSet, p1, p2) --[[ Line: 76 ]]
+	-- upvalues: IsNonNullObjectFunction (copy), Array (copy), selectionSetMatchesResult (copy), IsFieldFunction (copy), ShouldIncludeFunction (copy), ResultKeyNameFromFieldfFunction (copy), HasOwnPropertyModule (copy)
+	return if IsNonNullObjectFunction(p1) then if Array.isArray(p1) then Array.every(p1, function(p3) --[[ Line: 84 ]]
+		-- upvalues: selectionSetMatchesResult (upval), SelectionSet (copy), p2 (copy)
+		return selectionSetMatchesResult(SelectionSet, p3, p2)
+	end) else Array.every(SelectionSet.selections, function(p3) --[[ Line: 88 ]]
+		-- upvalues: IsFieldFunction (upval), ShouldIncludeFunction (upval), p2 (copy), ResultKeyNameFromFieldfFunction (upval), HasOwnPropertyModule (upval), p1 (copy), selectionSetMatchesResult (upval)
+		if IsFieldFunction(p3) and ShouldIncludeFunction(p3, p2) then
+			local ResultKeyNameFromFieldfResult = ResultKeyNameFromFieldfFunction(p3)
 			
-			return hasOwnPropertyModule(p1, var1) and (not p3.selectionSet or selectionSetMatchesResult(p3.selectionSet, p1[var1], p2))
+			return HasOwnPropertyModule(p1, ResultKeyNameFromFieldfResult) and (not p3.selectionSet or selectionSetMatchesResult(p3.selectionSet, p1[ResultKeyNameFromFieldfResult], p2))
+		else
+			return true
 		end
-		return true
 	end) else false
 end
 
-t.selectionSetMatchesResult = selectionSetMatchesResult
-
-function t.storeValueIsStoreObject(p1)
-	-- upvalues: isNonNullObject (ref), isReference (ref), array (ref)
-	return isNonNullObject(p1) and (not isReference(p1) and not array.isArray(p1))
-end
-
-function t.makeProcessedFieldsMerger()
-	-- upvalues: deepMerger (ref)
-	return deepMerger.new()
-end
-
-return t
+return {
+	hasOwn = HasOwnPropertyModule,
+	getTypenameFromStoreObject = function(p1, p2) --[[ Line: 41 ]]
+		-- upvalues: IsReferenceFunction (copy)
+		return if IsReferenceFunction(p2) then p1:get(p2.__ref, "__typename") elseif p2 then p2.__typename else nil
+	end,
+	TypeOrFieldNameRegExp = require(Parent1.LuauRegExp)("^[_a-zA-Z][_0-9a-zA-Z]*", "i"),
+	fieldNameFromStoreName = function(Text: string) --[[ Line: 64 ]]
+		-- upvalues: Matches (copy)
+		if Matches[Text] then
+			return Matches[Text]
+		else
+			local Match: string = string.match(Text, "^[_a-zA-Z][_0-9a-zA-Z]*") or Text
+			Matches[Text] = Match
+			
+			return Match
+		end
+	end,
+	selectionSetMatchesResult = selectionSetMatchesResult,
+	storeValueIsStoreObject = function(p1): boolean --[[ Line: 116 ]]
+		-- upvalues: IsNonNullObjectFunction (copy), IsReferenceFunction (copy), Array (copy)
+		return IsNonNullObjectFunction(p1) and (not IsReferenceFunction(p1) and not Array.isArray(p1))
+	end,
+	makeProcessedFieldsMerger = function() --[[ Line: 121 ]]
+		-- upvalues: DeepMerger (copy)
+		return DeepMerger.new()
+	end
+}

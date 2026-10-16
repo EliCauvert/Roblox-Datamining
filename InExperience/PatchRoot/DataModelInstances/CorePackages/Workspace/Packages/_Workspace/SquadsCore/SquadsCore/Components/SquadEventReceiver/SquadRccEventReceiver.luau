@@ -1,98 +1,103 @@
-﻿local squadsCore = script:FindFirstAncestor("SquadsCore")
-local parent = squadsCore.Parent
-local robloxReplicatedStorageService = game:GetService("RobloxReplicatedStorage")
-local httpService = game:GetService("HttpService")
-local reactModule = require(parent.React)
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local constantsModule = require(squadsCore.Common.Constants)
-local eventNamesModule = require(squadsCore.Analytics.EventNames)
-local squadExternalContractContextModule = require(squadsCore.Components.SquadExternalContractProvider.SquadExternalContractContext)
-local squadRccEventManagerModule = require(squadsCore.ServiceManager.SquadRccEventManager)
-local actOnPartyNudgeModule = require(squadsCore.Thunks.actOnPartyNudge)
-local createConversationModule = require(squadsCore.Thunks.createConversation)
-local encodeUserIdsModule = require(squadsCore.Common.encodeUserIds)
+﻿local SquadsCore = script:FindFirstAncestor("SquadsCore")
+local Parent = SquadsCore.Parent
+local RobloxReplicatedStorage = game:GetService("RobloxReplicatedStorage")
+local HttpService = game:GetService("HttpService")
+local ReactModule = require(Parent.React)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local ConstantsModule = require(SquadsCore.Common.Constants)
+local EventNamesModule = require(SquadsCore.Analytics.EventNames)
+local SquadExternalContractContextModule = require(SquadsCore.Components.SquadExternalContractProvider.SquadExternalContractContext)
+local SquadRccEventManagerModule = require(SquadsCore.ServiceManager.SquadRccEventManager)
+local ActOnPartyNudgeModule = require(SquadsCore.Thunks.actOnPartyNudge)
+local CreateConversationModule = require(SquadsCore.Thunks.createConversation)
+local EncodeUserIdsModule = require(SquadsCore.Common.encodeUserIds)
 
-return function(p1)
-	-- upvalues: reactModule (ref), squadExternalContractContextModule (ref), squadRccEventManagerModule (ref), useDispatch (ref), constantsModule (ref), httpService (ref), eventNamesModule (ref), encodeUserIdsModule (ref), createConversationModule (ref), actOnPartyNudgeModule (ref), robloxReplicatedStorageService (ref)
-	local var1 = reactModule.useContext(squadExternalContractContextModule)
-	local var2 = var1.useIsChatEnabled()
-	local var3 = var1.useIsLoadingChatSettings()
-	reactModule.useEffect(function()
-		-- upvalues: squadRccEventManagerModule (copy), p1 (ref), var2 (ref)
-		squadRccEventManagerModule:fireSquadChangeEvent(p1.currentSquadId, var2)
-	end, { p1.currentSquadId, var2 })
-	local var4 = useDispatch()
-	local var5 = reactModule.useRef({})
-	local var6 = reactModule.useCallback(function()
-		-- upvalues: var5 (ref), constantsModule (copy), httpService (copy), var1 (ref), eventNamesModule (copy), encodeUserIdsModule (copy), var4 (ref), createConversationModule (copy), actOnPartyNudgeModule (copy), p1 (ref), var2 (ref)
-		for i, v in ipairs(var5.current) do
-			local partySourceType = v.partySourceType
-			local data = v.data
+return function(p1) --[[ Line: 24 ]]
+	-- upvalues: ReactModule (copy), SquadExternalContractContextModule (copy), SquadRccEventManagerModule (copy), UseDispatchFunction (copy), ConstantsModule (copy), HttpService (copy), EventNamesModule (copy), EncodeUserIdsModule (copy), CreateConversationModule (copy), ActOnPartyNudgeModule (copy), RobloxReplicatedStorage (copy)
+	local UseContextResult = ReactModule.useContext(SquadExternalContractContextModule)
+	local UseIsChatEnabledResult = UseContextResult.useIsChatEnabled()
+	local UseIsLoadingChatSettingsResult = UseContextResult.useIsLoadingChatSettings()
+	ReactModule.useEffect(function() --[[ Line: 29 ]]
+		-- upvalues: SquadRccEventManagerModule (upval), p1 (copy), UseIsChatEnabledResult (copy)
+		SquadRccEventManagerModule:fireSquadChangeEvent(p1.currentSquadId, UseIsChatEnabledResult)
+	end, { p1.currentSquadId, UseIsChatEnabledResult })
+	local UseDispatchResult = UseDispatchFunction()
+	local UseRefResult = ReactModule.useRef({})
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 36 ]]
+		-- upvalues: UseRefResult (copy), ConstantsModule (upval), HttpService (upval), UseContextResult (copy), EventNamesModule (upval), EncodeUserIdsModule (upval), UseDispatchResult (copy), CreateConversationModule (upval), ActOnPartyNudgeModule (upval), p1 (copy), UseIsChatEnabledResult (copy)
+		for _, value in ipairs(UseRefResult.current) do
+			local PartySourceType = value.partySourceType
+			local Data = value.data
 			
-			if partySourceType == "PartyNudge" and data.nudgeType == constantsModule.ONE_TO_ONE_NUDGE_IN_EXPERIENCE_TYPE then
-				local var7 = httpService:GenerateGUID(false)
-				var1.fireSquadAnalytics(eventNamesModule.SquadCreateOrJoinFromRCC, {
-					partySourceType = partySourceType,
-					nudgeType = data.nudgeType,
-					nudgeId = data.nudgeId,
-					partyAttemptId = var7,
-					inviteeUserIds = encodeUserIdsModule({ data.inviteeId })
+			if PartySourceType == "PartyNudge" and Data.nudgeType == ConstantsModule.ONE_TO_ONE_NUDGE_IN_EXPERIENCE_TYPE then
+				local Guid = HttpService:GenerateGUID(false)
+				UseContextResult.fireSquadAnalytics(EventNamesModule.SquadCreateOrJoinFromRCC, {
+					partySourceType = PartySourceType,
+					nudgeType = Data.nudgeType,
+					nudgeId = Data.nudgeId,
+					partyAttemptId = Guid,
+					inviteeUserIds = EncodeUserIdsModule({ Data.inviteeId })
 				})
-				var4(createConversationModule({
+				UseDispatchResult(CreateConversationModule({
 					conversationType = "one_to_one",
 					source = "createOrJoinPartyRemoteEvent",
-					userIds = { tostring(data.inviteeId) },
-					squadContext = var1,
-					onSuccessCallback = function(p2)
-						-- upvalues: var4 (copy), actOnPartyNudgeModule (copy), p1 (copy), constantsModule (copy), data (ref), var1 (copy), var2 (copy), var7 (ref)
-						var4(actOnPartyNudgeModule(if p1.currentSquadId == "" then constantsModule.ACCEPT_START_PARTY_REQUEST_ACTION else constantsModule.REJECT_START_PARTY_REQUEST_ACTION, data.nudgeId, false, var1.setSquadPrompt, var1.fireSquadAnalytics, var1.squadLocation, var2, var7, p2))
+					userIds = { (tostring(Data.inviteeId)) },
+					squadContext = UseContextResult,
+					onSuccessCallback = function(p2) --[[ Line: 56 ]]
+						-- upvalues: UseDispatchResult (upval), ActOnPartyNudgeModule (upval), p1 (upval), ConstantsModule (upval), Data (copy), UseContextResult (upval), UseIsChatEnabledResult (upval), Guid (copy)
+						UseDispatchResult(ActOnPartyNudgeModule(if p1.currentSquadId == "" then ConstantsModule.ACCEPT_START_PARTY_REQUEST_ACTION else ConstantsModule.REJECT_START_PARTY_REQUEST_ACTION, Data.nudgeId, false, UseContextResult.setSquadPrompt, UseContextResult.fireSquadAnalytics, UseContextResult.squadLocation, UseIsChatEnabledResult, Guid, p2))
 					end,
-					onErrorCallback = function()
-						-- upvalues: var4 (copy), actOnPartyNudgeModule (copy), constantsModule (copy), data (ref), var1 (copy), var2 (copy), var7 (ref)
-						var4(actOnPartyNudgeModule(constantsModule.REJECT_START_PARTY_REQUEST_ACTION, data.nudgeId, false, var1.setSquadPrompt, var1.fireSquadAnalytics, var1.squadLocation, var2, var7))
+					onErrorCallback = function() --[[ Line: 73 ]]
+						-- upvalues: UseDispatchResult (upval), ActOnPartyNudgeModule (upval), ConstantsModule (upval), Data (copy), UseContextResult (upval), UseIsChatEnabledResult (upval), Guid (copy)
+						UseDispatchResult(ActOnPartyNudgeModule(ConstantsModule.REJECT_START_PARTY_REQUEST_ACTION, Data.nudgeId, false, UseContextResult.setSquadPrompt, UseContextResult.fireSquadAnalytics, UseContextResult.squadLocation, UseIsChatEnabledResult, Guid))
 					end
 				}))
 			end
 		end
-		var5.current = {}
+		UseRefResult.current = {}
 	end, {
-		var2,
-		var1,
-		var1.setSquadPrompt,
-		var1.fireSquadAnalytics,
-		var1.squadLocation
+		UseIsChatEnabledResult,
+		UseContextResult,
+		UseContextResult.setSquadPrompt,
+		UseContextResult.fireSquadAnalytics,
+		UseContextResult.squadLocation
 	})
-	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), var2 (ref), var6 (ref), var5 (ref), robloxReplicatedStorageService (copy)
-		if not var3 then
-			if var2 then
-				var6()
+	ReactModule.useEffect(function() --[[ Line: 101 ]]
+		-- upvalues: UseIsLoadingChatSettingsResult (copy), UseIsChatEnabledResult (copy), UseResult (copy), UseRefResult (copy), RobloxReplicatedStorage (upval)
+		if not UseIsLoadingChatSettingsResult then
+			if UseIsChatEnabledResult then
+				UseResult()
 			else
-				var5.current = {}
+				UseRefResult.current = {}
 			end
 		end
-		local var8 = nil
-		coroutine.wrap(function()
-			-- upvalues: robloxReplicatedStorageService (copy), var8 (write), var3 (copy), var5 (copy), var2 (copy), var6 (copy)
-			var8 = robloxReplicatedStorageService:WaitForChild("CreateOrJoinParty", 1e999).OnClientEvent:Connect(function(p2, p3)
-				-- upvalues: var3 (copy), var5 (copy), var2 (copy), var6 (copy)
-				if var3 then
-					table.insert(var5.current, { partySourceType = p2, data = p3 })
+		local OnClientEventConnection = nil
+		coroutine.wrap(function() --[[ Line: 111 ]]
+			-- upvalues: RobloxReplicatedStorage (upval), OnClientEventConnection (ref), UseIsLoadingChatSettingsResult (upval), UseRefResult (upval), UseIsChatEnabledResult (upval), UseResult (upval)
+			OnClientEventConnection = RobloxReplicatedStorage:WaitForChild("CreateOrJoinParty", 1e999).OnClientEvent:Connect(function(PartySourceType, Data) --[[ Line: 115 ]]
+				-- upvalues: UseIsLoadingChatSettingsResult (upval), UseRefResult (upval), UseIsChatEnabledResult (upval), UseResult (upval)
+				if UseIsLoadingChatSettingsResult then
+					table.insert(UseRefResult.current, { partySourceType = PartySourceType, data = Data })
 					
 					return
-				elseif var2 then
-					var6()
+				end
+				if UseIsChatEnabledResult then
+					UseResult()
 				end
 			end)
 		end)()
 		
-		return function()
-			-- upvalues: var8 (write)
-			if var8 then
-				var8:Disconnect()
+		return function() --[[ Line: 128 ]]
+			-- upvalues: OnClientEventConnection (ref)
+			if OnClientEventConnection then
+				OnClientEventConnection:Disconnect()
 			end
 		end
-	end, { var3, var2, var6 })
+	end, {
+		UseIsLoadingChatSettingsResult,
+		UseIsChatEnabledResult,
+		UseResult
+	})
 	
 	return nil
 end

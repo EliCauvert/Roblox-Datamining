@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Workspace.RoactServices.RoactServices)
+﻿return (require(script.Parent.Parent.Parent._Workspace.RoactServices.RoactServices))

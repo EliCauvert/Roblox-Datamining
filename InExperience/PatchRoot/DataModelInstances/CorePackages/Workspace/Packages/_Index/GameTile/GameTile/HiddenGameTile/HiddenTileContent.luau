@@ -1,80 +1,71 @@
-﻿local guiService = game:GetService("GuiService")
-local gameTile = script:FindFirstAncestor("GameTile")
-local parent = gameTile.Parent
-local foundationModule = require(parent.Foundation)
-local localizationModule = require(parent.Localization)
-local loggersModule = require(parent.Loggers)
-local loggingProtocolModule = require(parent.LoggingProtocol)
-local reactModule = require(parent.React)
-local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
-local roactServiceTagsModule = require(parent.RoactServiceTags)
-local roactUtilsModule = require(parent.RoactUtils)
-local robloxAppHooksModule = require(parent.RobloxAppHooks)
-local robloxAppToastsRoduxModule = require(parent.RobloxAppToastsRodux)
-local sharedFlagsModule = require(parent.SharedFlags)
-local userSignalsModule = require(parent.UserSignals)
-local button = foundationModule.Button
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local inputSize = foundationModule.Enums.InputSize
-local text = foundationModule.Text
-local useTokens = foundationModule.Hooks.useTokens
-local view = foundationModule.View
-local useLocalization = localizationModule.Hooks.useLocalization
-local mutedError = loggersModule.mutedError
-local default = loggingProtocolModule.default
-local useFocusGuiObject = reactFocusNavigationModule.useFocusGuiObject
-local roactNetworking = roactServiceTagsModule.RoactNetworking
-local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
-local useRoactService = robloxAppHooksModule.useRoactService
-local setNetworkingErrorToast = robloxAppToastsRoduxModule.Thunks.SetNetworkingErrorToast
-local postSendUserSignal = userSignalsModule.PostSendUserSignal
-local userSignalTypes = userSignalsModule.UserSignalTypes
-local notInterestedUserSignalTelemetryEventConfigsModule = require(gameTile.NotInterestedUserSignalTelemetryEventConfigs)
-local undoGameNotInterestedModule = require(gameTile.undoGameNotInterested)
-local fFlagLuaAppExtractNotInterestedHelper = sharedFlagsModule.FFlagLuaAppExtractNotInterestedHelper
+﻿local GuiService = game:GetService("GuiService")
+local GameTile = script:FindFirstAncestor("GameTile")
+local Parent = GameTile.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local UserSignalsModule = require(Parent.UserSignals)
+local Button = FoundationModule.Button
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local InputSize = FoundationModule.Enums.InputSize
+local Text = FoundationModule.Text
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local View = FoundationModule.View
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local MutedErrorFunction = require(Parent.Loggers).mutedError
+local Default = require(Parent.LoggingProtocol).default
+local UseFocusGuiObjectFunction = require(Parent.ReactFocusNavigation).useFocusGuiObject
+local RoactNetworking = require(Parent.RoactServiceTags).RoactNetworking
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
+local SetNetworkingErrorToastFunction = require(Parent.RobloxAppToastsRodux).Thunks.SetNetworkingErrorToast
+local PostSendUserSignalFunction = UserSignalsModule.PostSendUserSignal
+local UserSignalTypes = UserSignalsModule.UserSignalTypes
+local NotInterestedUserSignalTelemetryEventConfigsModule = require(GameTile.NotInterestedUserSignalTelemetryEventConfigs)
+local UndoGameNotInterestedModule = require(GameTile.undoGameNotInterested)
+local FFlagLuaAppExtractNotInterestedHelper = require(Parent.SharedFlags).FFlagLuaAppExtractNotInterestedHelper
 
-return reactModule.memo(function(p1)
-	-- upvalues: useDispatch (ref), reactModule (ref), useTokens (ref), useFocusGuiObject (ref), useRoactService (ref), roactNetworking (ref), useLocalization (ref), fFlagLuaAppExtractNotInterestedHelper (ref), guiService (ref), undoGameNotInterestedModule (ref), default (ref), notInterestedUserSignalTelemetryEventConfigsModule (ref), setNetworkingErrorToast (ref), postSendUserSignal (ref), userSignalTypes (ref), mutedError (ref), view (ref), text (ref), button (ref), inputSize (ref), buttonVariant (ref)
-	local var1 = useDispatch()
-	local var2 = reactModule.useRef(nil)
-	local var3 = useTokens()
-	local var4 = useFocusGuiObject()
-	local var5 = useRoactService(roactNetworking)
-	local var6 = useLocalization({
+return ReactModule.memo(function(p1) --[[ Line: 49 | Named "HiddenTileContent" ]]
+	-- upvalues: UseDispatchFunction (copy), ReactModule (copy), UseTokensFunction (copy), UseFocusGuiObjectFunction (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), UseLocalizationFunction (copy), FFlagLuaAppExtractNotInterestedHelper (copy), GuiService (copy), UndoGameNotInterestedModule (copy), Default (copy), NotInterestedUserSignalTelemetryEventConfigsModule (copy), SetNetworkingErrorToastFunction (copy), PostSendUserSignalFunction (copy), UserSignalTypes (copy), MutedErrorFunction (copy), View (copy), Text (copy), Button (copy), InputSize (copy), ButtonVariant (copy)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseTokensResult = UseTokensFunction()
+	local UseFocusGuiObjectResult = UseFocusGuiObjectFunction()
+	local UseRoactServiceResult = UseRoactServiceFunction(RoactNetworking)
+	local UseLocalizationResult = UseLocalizationFunction({
 		undoLabel = "Feature.GameDetails.Action.Undo",
 		hiddenTileMessage = "Feature.GameDetails.Message.SuggestLessOften"
 	})
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "size-full gap-small col align-x-center align-y-center bg-surface-100 radius-medium padding-medium"
 	}, {
-		Message = reactModule.createElement(text, {
+		Message = ReactModule.createElement(Text, {
 			LayoutOrder = 1,
 			TextWrapped = true,
 			AutomaticSize = Enum.AutomaticSize.Y,
-			fontStyle = var3.Typography.BodySmall,
+			fontStyle = UseTokensResult.Typography.BodySmall,
 			Size = UDim2.fromScale(1, 0),
-			Text = var6.hiddenTileMessage,
-			textStyle = var3.Color.Content.Default
+			Text = UseLocalizationResult.hiddenTileMessage,
+			textStyle = UseTokensResult.Color.Content.Default
 		}),
-		UndoButton = reactModule.createElement(button, {
+		UndoButton = ReactModule.createElement(Button, {
 			LayoutOrder = 2,
-			onActivated = reactModule.useCallback(function()
-				-- upvalues: fFlagLuaAppExtractNotInterestedHelper (copy), guiService (copy), var2 (ref), p1 (ref), var4 (ref), undoGameNotInterestedModule (copy), var1 (ref), var5 (ref), default (copy), notInterestedUserSignalTelemetryEventConfigsModule (copy), setNetworkingErrorToast (copy), postSendUserSignal (copy), userSignalTypes (copy), mutedError (copy)
-				if fFlagLuaAppExtractNotInterestedHelper then
-					undoGameNotInterestedModule({
+			onActivated = ReactModule.useCallback(function() --[[ Line: 61 ]]
+				-- upvalues: FFlagLuaAppExtractNotInterestedHelper (upval), GuiService (upval), UseRefResult (copy), p1 (copy), UseFocusGuiObjectResult (copy), UndoGameNotInterestedModule (upval), UseDispatchResult (copy), UseRoactServiceResult (copy), Default (upval), NotInterestedUserSignalTelemetryEventConfigsModule (upval), SetNetworkingErrorToastFunction (upval), PostSendUserSignalFunction (upval), UserSignalTypes (upval), MutedErrorFunction (upval)
+				if FFlagLuaAppExtractNotInterestedHelper then
+					UndoGameNotInterestedModule({
 						appPage = p1.appPage,
 						collectionId = p1.collectionId,
-						dispatch = var1,
+						dispatch = UseDispatchResult,
 						isSponsored = p1.isSponsored,
-						networking = var5,
-						onOptimisticUnhide = function()
-							-- upvalues: guiService (copy), var2 (copy), p1 (copy), var4 (copy)
-							if guiService.SelectedCoreObject == var2.current then
-								task.delay(0, function()
-									-- upvalues: p1 (copy), var4 (copy)
+						networking = UseRoactServiceResult,
+						onOptimisticUnhide = function() --[[ Line: 63 ]]
+							-- upvalues: GuiService (upval), UseRefResult (upval), p1 (upval), UseFocusGuiObjectResult (upval)
+							if GuiService.SelectedCoreObject == UseRefResult.current then
+								task.delay(0, function() --[[ Line: 65 ]]
+									-- upvalues: p1 (upval), UseFocusGuiObjectResult (upval)
 									if p1.parentRef then
-										var4(p1.parentRef.current)
+										UseFocusGuiObjectResult(p1.parentRef.current)
 									end
 								end)
 							end
@@ -84,52 +75,54 @@ return reactModule.memo(function(p1)
 					})
 					
 					return
-				elseif not p1.appPage then
-					default:logRobloxTelemetryCounter(notInterestedUserSignalTelemetryEventConfigsModule.NotInterestedMissingAppPage, 1)
-					var1(setNetworkingErrorToast())
+				end
+				if not p1.appPage then
+					Default:logRobloxTelemetryCounter(NotInterestedUserSignalTelemetryEventConfigsModule.NotInterestedMissingAppPage, 1)
+					UseDispatchResult(SetNetworkingErrorToastFunction())
 					
 					return
 				end
 				p1.setGameHidden(p1.universeId, false)
 				
-				if guiService.SelectedCoreObject == var2.current then
-					task.delay(0, function()
-						-- upvalues: p1 (copy), var4 (copy)
+				if GuiService.SelectedCoreObject == UseRefResult.current then
+					task.delay(0, function() --[[ Line: 96 ]]
+						-- upvalues: p1 (upval), UseFocusGuiObjectResult (upval)
 						if p1.parentRef then
-							var4(p1.parentRef.current)
+							UseFocusGuiObjectResult(p1.parentRef.current)
 						end
 					end)
 				end
-				local ok, status = pcall(function()
-					-- upvalues: postSendUserSignal (copy), var5 (copy), p1 (copy), userSignalTypes (copy), var1 (copy), setNetworkingErrorToast (copy), default (copy), notInterestedUserSignalTelemetryEventConfigsModule (copy)
-					postSendUserSignal(var5, { boolValue = false }, {
+				local Success, Result = pcall(function() --[[ Line: 103 ]]
+					-- upvalues: PostSendUserSignalFunction (upval), UseRoactServiceResult (upval), p1 (upval), UserSignalTypes (upval), UseDispatchResult (upval), SetNetworkingErrorToastFunction (upval), Default (upval), NotInterestedUserSignalTelemetryEventConfigsModule (upval)
+					PostSendUserSignalFunction(UseRoactServiceResult, { boolValue = false }, {
 						id = p1.universeId,
-						assetType = if p1.isSponsored then userSignalTypes.AssetType.SponsoredGame else userSignalTypes.AssetType.Game,
+						assetType = if p1.isSponsored then UserSignalTypes.AssetType.SponsoredGame else UserSignalTypes.AssetType.Game,
 						signalOrigin = {
 							productSurface = p1.appPage,
 							topicId = p1.collectionId or "",
 							subIds = { p1.collectionId or "" }
 						}
-					}, userSignalTypes.SignalValueType.Bool, userSignalTypes.SignalType.NotInterested):catch(function(p2)
-						-- upvalues: p1 (copy), var1 (copy), setNetworkingErrorToast (copy), default (copy), notInterestedUserSignalTelemetryEventConfigsModule (copy)
+					}, UserSignalTypes.SignalValueType.Bool, UserSignalTypes.SignalType.NotInterested):catch(function(Err) --[[ Line: 117 ]]
+						-- upvalues: p1 (upval), UseDispatchResult (upval), SetNetworkingErrorToastFunction (upval), Default (upval), NotInterestedUserSignalTelemetryEventConfigsModule (upval)
 						p1.setGameHidden(p1.universeId, true)
-						var1(setNetworkingErrorToast(p2))
-						default:logRobloxTelemetryCounter(notInterestedUserSignalTelemetryEventConfigsModule.NotInterestedUserSignalFailed, 1)
+						UseDispatchResult(SetNetworkingErrorToastFunction(Err))
+						Default:logRobloxTelemetryCounter(NotInterestedUserSignalTelemetryEventConfigsModule.NotInterestedUserSignalFailed, 1)
 					end)
 				end)
 				
-				if not ok then
+				if not Success then
 					p1.setGameHidden(p1.universeId, true)
-					mutedError(status)
+					MutedErrorFunction(Result)
 				end
 			end, {
-				var5, var4, p1.setGameHidden, p1.universeId, p1.collectionId, p1.appPage,
-				p1.parentRef, var1, p1.isSponsored
+				UseRoactServiceResult, UseFocusGuiObjectResult, p1.setGameHidden,
+				p1.universeId, p1.collectionId, p1.appPage, p1.parentRef, UseDispatchResult,
+				p1.isSponsored
 			}),
-			size = inputSize.XSmall,
-			text = var6.undoLabel,
-			variant = buttonVariant.Standard,
-			ref = var2,
+			size = InputSize.XSmall,
+			text = UseLocalizationResult.undoLabel,
+			variant = ButtonVariant.Standard,
+			ref = UseRefResult,
 			testId = `--game-tile-hidden-undo-{p0.universeId}`
 		})
 	})

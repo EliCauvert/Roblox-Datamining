@@ -1,60 +1,69 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local packages = corePackagesService.Packages
-local reactModule = require(packages.React)
-local luauPolyfillModule = require(packages.LuauPolyfill)
-local setTimeout = luauPolyfillModule.setTimeout
-local clearTimeout = luauPolyfillModule.clearTimeout
-local useTrackerModeModule = require(script.Parent.useTrackerMode)
-local faceChatUtilsModule = require(script.Parent.Parent.Utils.FaceChatUtils)
-local useLocalization = require(corePackagesService.Workspace.Packages.Localization).Hooks.useLocalization
-local trackerMode = Enum.TrackerMode
+﻿local CorePackages = game:GetService("CorePackages")
+local Packages = CorePackages.Packages
+local ReactModule = require(Packages.React)
+local LuauPolyfillModule = require(Packages.LuauPolyfill)
+local SetTimeoutFunction = LuauPolyfillModule.setTimeout
+local ClearTimeoutFunction = LuauPolyfillModule.clearTimeout
+local UseTrackerModeModule = require(script.Parent.useTrackerMode)
+local FaceChatUtilsModule = require(script.Parent.Parent.Utils.FaceChatUtils)
+local UseLocalizationFunction = require(CorePackages.Workspace.Packages.Localization).Hooks.useLocalization
+local TrackerMode = Enum.TrackerMode
 
-return function()
-	-- upvalues: reactModule (ref), faceChatUtilsModule (ref), useTrackerModeModule (ref), useLocalization (ref), trackerMode (ref), clearTimeout (ref), setTimeout (ref)
-	local var1 = reactModule.useRef(faceChatUtilsModule.getTrackerMode())
-	local var2 = useTrackerModeModule()
-	local var3 = useLocalization({
+return function() --[[ Line: 27 ]]
+	-- upvalues: ReactModule (copy), FaceChatUtilsModule (copy), UseTrackerModeModule (copy), UseLocalizationFunction (copy), TrackerMode (copy), ClearTimeoutFunction (copy), SetTimeoutFunction (copy)
+	local UseRefResult = ReactModule.useRef(FaceChatUtilsModule.getTrackerMode())
+	local UseTrackerModeModuleResult = UseTrackerModeModule()
+	local UseLocalizationResult = UseLocalizationFunction({
 		controlMessageSound = "CoreScripts.TopBar.ControlMessageSound",
 		controlMessageMotion = "CoreScripts.TopBar.ControlMessageMotion",
 		controlMessageOn = "CoreScripts.TopBar.ControlMessageOn",
 		controlMessageOff = "CoreScripts.TopBar.ControlMessageOff"
 	})
-	local var4, var5 = reactModule.useState({
+	local UseStateResult, UseStateResult2 = ReactModule.useState({
 		visible = false,
-		text = var3.controlMessageMotion,
-		status = var3.controlMessageOff
+		text = UseLocalizationResult.controlMessageMotion,
+		status = UseLocalizationResult.controlMessageOff
 	})
-	local var6 = reactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(nil)
 	
-	local var7 = function()
-		-- upvalues: var3 (ref), var2 (ref), trackerMode (copy), var1 (ref)
-		local controlMessageOn, var8
-		local _ = var3.controlMessageMotion
-		local _ = var3.controlMessageOff
+	local function v13() --[[ Line: 42 ]]
+		-- upvalues: UseLocalizationResult (copy), UseTrackerModeModuleResult (copy), TrackerMode (upval), UseRefResult (copy)
+		local _ = UseLocalizationResult.controlMessageMotion
+		local _ = UseLocalizationResult.controlMessageOff
+		local ControlMessageOn = nil
+		local ControlMessageMotion = nil
 		
-		if var2 == trackerMode.None then
-			controlMessageOn = var3.controlMessageOff
-			var8 = if var1.current == trackerMode.Audio then var3.controlMessageSound else var3.controlMessageMotion
+		if UseTrackerModeModuleResult == TrackerMode.None then
+			ControlMessageOn = UseLocalizationResult.controlMessageOff
+			ControlMessageMotion = if UseRefResult.current == TrackerMode.Audio then UseLocalizationResult.controlMessageSound else UseLocalizationResult.controlMessageMotion
 		else
-			controlMessageOn = var3.controlMessageOn
-			var8 = if var2 == trackerMode.AudioVideo or var2 == trackerMode.Video then var3.controlMessageMotion else var3.controlMessageSound
+			ControlMessageOn = UseLocalizationResult.controlMessageOn
+			ControlMessageMotion = if UseTrackerModeModuleResult == TrackerMode.AudioVideo or UseTrackerModeModuleResult == TrackerMode.Video then UseLocalizationResult.controlMessageMotion else UseLocalizationResult.controlMessageSound
 		end
-		var1.current = var2
+		UseRefResult.current = UseTrackerModeModuleResult
 		
-		return { visible = true, text = var8, status = controlMessageOn }
+		return {
+			visible = true,
+			text = ControlMessageMotion,
+			status = ControlMessageOn
+		}
 	end
 	
-	reactModule.useEffect(function()
-		-- upvalues: var6 (ref), clearTimeout (copy), var5 (ref), var7 (ref), setTimeout (copy), var4 (ref)
-		if var6.current then
-			clearTimeout(var6.current)
+	ReactModule.useEffect(function() --[[ Line: 75 ]]
+		-- upvalues: UseRefResult1 (copy), ClearTimeoutFunction (upval), UseStateResult2 (copy), v13 (copy), SetTimeoutFunction (upval), UseStateResult (copy)
+		if UseRefResult1.current then
+			ClearTimeoutFunction(UseRefResult1.current)
 		end
-		var5(var7())
-		var6.current = setTimeout(function()
-			-- upvalues: var5 (copy), var4 (copy)
-			var5({ visible = false, text = var4.text, status = var4.status })
+		UseStateResult2((v13()))
+		UseRefResult1.current = SetTimeoutFunction(function() --[[ Line: 81 ]]
+			-- upvalues: UseStateResult2 (upval), UseStateResult (upval)
+			UseStateResult2({
+				visible = false,
+				text = UseStateResult.text,
+				status = UseStateResult.status
+			})
 		end, 2000)
-	end, { var2 })
+	end, { UseTrackerModeModuleResult })
 	
-	return var4
+	return UseStateResult
 end

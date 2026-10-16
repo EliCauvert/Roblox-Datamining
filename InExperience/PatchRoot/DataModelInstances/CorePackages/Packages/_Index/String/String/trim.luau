@@ -1,7 +1,7 @@
-﻿local trimStartModule = require(script.Parent.trimStart)
-local trimEndModule = require(script.Parent.trimEnd)
+﻿local TrimStartModule = require(script.Parent.trimStart)
+local TrimEndModule = require(script.Parent.trimEnd)
 
-return function(p1)
-	-- upvalues: trimStartModule (ref), trimEndModule (ref)
-	return trimStartModule(trimEndModule(p1))
+return function(p1) --[[ Line: 20 ]]
+	-- upvalues: TrimStartModule (copy), TrimEndModule (copy)
+	return TrimStartModule(TrimEndModule(p1))
 end

@@ -1,57 +1,53 @@
-﻿local parent = script.Parent
-local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local colorModeModule = require(foundation.Enums.ColorMode)
-local deviceModule = require(foundation.Enums.Device)
-local styleSheetContextModule = require(parent.StyleSheetContext)
-local tagsContextModule = require(parent.TagsContext)
-local textSizeOffsetContextModule = require(parent.TextSizeOffsetContext)
-local themeNameModule = require(foundation.Enums.ThemeName)
-local tokensModule = require(parent.Tokens)
-local tokensContextModule = require(parent.TokensContext)
-local variantsContextModule = require(parent.VariantsContext)
-local getTextSizeOffsetModule = require(foundation.Utility.getTextSizeOffset)
-local usePreferencesModule = require(foundation.Providers.Preferences.usePreferences)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local getTokens = tokensModule.getTokens
-local useRegistryStyleSheetModule = require(parent.useRegistryStyleSheet)
-local t = {
+﻿local Parent = script.Parent
+local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local StyleSheetContextModule = require(Parent.StyleSheetContext)
+local TagsContextModule = require(Parent.TagsContext)
+local TextSizeOffsetContextModule = require(Parent.TextSizeOffsetContext)
+local TokensContextModule = require(Parent.TokensContext)
+local VariantsContextModule = require(Parent.VariantsContext)
+local GetTextSizeOffsetModule = require(Foundation.Utility.getTextSizeOffset)
+local UsePreferencesModule = require(Foundation.Providers.Preferences.usePreferences)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local GetTokensFunction = require(Parent.Tokens).getTokens
+local UseRegistryStyleSheetModule = require(Parent.useRegistryStyleSheet)
+local config = {
 	scale = 1,
-	themeName = themeNameModule.Default,
-	colorMode = colorModeModule.Dark,
-	device = deviceModule.Desktop
+	themeName = require(Foundation.Enums.ThemeName).Default,
+	colorMode = require(Foundation.Enums.ColorMode).Dark,
+	device = require(Foundation.Enums.Device).Desktop
 }
 
-return function(p1)
-	-- upvalues: withDefaultsModule (ref), t (ref), variantsContextModule (ref), reactModule (ref), getTokens (ref), usePreferencesModule (ref), getTextSizeOffsetModule (ref), useRegistryStyleSheetModule (ref), tokensContextModule (ref), textSizeOffsetContextModule (ref), tagsContextModule (ref), styleSheetContextModule (ref)
-	local var1 = withDefaultsModule({
+return function(p1) --[[ Line: 57 | Named "StyleProvider" ]]
+	-- upvalues: WithDefaultsModule (copy), config (copy), VariantsContextModule (copy), ReactModule (copy), GetTokensFunction (copy), UsePreferencesModule (copy), GetTextSizeOffsetModule (copy), UseRegistryStyleSheetModule (copy), TokensContextModule (copy), TextSizeOffsetContextModule (copy), TagsContextModule (copy), StyleSheetContextModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule({
 		themeName = p1.themeName,
 		colorMode = p1.colorMode or p1.theme,
 		device = p1.device,
 		scale = p1.scale
-	}, t)
-	local var2 = variantsContextModule.useVariantsState()
-	local var3 = reactModule.useMemo(function()
-		-- upvalues: getTokens (copy), var1 (ref), p1 (ref)
-		return getTokens(var1.colorMode, var1.device, var1.scale, p1.tokenOverrides, var1.themeName)
+	}, config)
+	local UseVariantsStateResult = VariantsContextModule.useVariantsState()
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 68 ]]
+		-- upvalues: GetTokensFunction (upval), WithDefaultsModuleResult (copy), p1 (copy)
+		return GetTokensFunction(WithDefaultsModuleResult.colorMode, WithDefaultsModuleResult.device, WithDefaultsModuleResult.scale, p1.tokenOverrides, WithDefaultsModuleResult.themeName)
 	end, {
-		var1.colorMode,
-		var1.device,
-		var1.scale,
+		WithDefaultsModuleResult.colorMode,
+		WithDefaultsModuleResult.device,
+		WithDefaultsModuleResult.scale,
 		p1.tokenOverrides,
-		var1.themeName
+		WithDefaultsModuleResult.themeName
 	})
-	local var4 = reactModule.useMemo(function()
-		-- upvalues: getTextSizeOffsetModule (copy)
-		return getTextSizeOffsetModule() or 0
-	end, { usePreferencesModule().preferredTextSize })
-	local var5, var6 = useRegistryStyleSheetModule(var1.themeName, var1.colorMode, var1.device, var1.scale, p1.tokenOverrides)
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 89 ]]
+		-- upvalues: GetTextSizeOffsetModule (upval)
+		return GetTextSizeOffsetModule() or 0
+	end, { UsePreferencesModule().preferredTextSize })
+	local UseRegistryStyleSheetModuleResult, UseRegistryStyleSheetModuleResult2 = UseRegistryStyleSheetModule(WithDefaultsModuleResult.themeName, WithDefaultsModuleResult.colorMode, WithDefaultsModuleResult.device, WithDefaultsModuleResult.scale, p1.tokenOverrides)
 	
-	return reactModule.createElement(tokensContextModule.Provider, { value = var3 }, {
-		TextSizeOffsetContext = reactModule.createElement(textSizeOffsetContextModule.Provider, { value = var4 }, {
-			VariantsContext = reactModule.createElement(variantsContextModule.Provider, { value = var2 }, {
-				TagsContext = reactModule.createElement(tagsContextModule.Provider, { value = var6 }, reactModule.createElement(styleSheetContextModule.Provider, { value = var5 }, p1.children)),
-				StyleSheet = reactModule.createElement("StyleLink", { StyleSheet = var5 })
+	return ReactModule.createElement(TokensContextModule.Provider, { value = UseMemoResult }, {
+		TextSizeOffsetContext = ReactModule.createElement(TextSizeOffsetContextModule.Provider, { value = UseMemoResult1 }, {
+			VariantsContext = ReactModule.createElement(VariantsContextModule.Provider, { value = UseVariantsStateResult }, {
+				TagsContext = ReactModule.createElement(TagsContextModule.Provider, { value = UseRegistryStyleSheetModuleResult2 }, ReactModule.createElement(StyleSheetContextModule.Provider, { value = UseRegistryStyleSheetModuleResult }, p1.children)),
+				StyleSheet = ReactModule.createElement("StyleLink", { StyleSheet = UseRegistryStyleSheetModuleResult })
 			})
 		})
 	})

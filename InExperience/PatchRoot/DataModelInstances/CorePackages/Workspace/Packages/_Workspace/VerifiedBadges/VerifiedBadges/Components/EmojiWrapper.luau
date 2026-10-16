@@ -1,11 +1,11 @@
-﻿local verifiedBadges = script:FindFirstAncestor("VerifiedBadges")
-local cryoModule = require(verifiedBadges.Parent.Cryo)
-local foundationModule = require(verifiedBadges.Parent.Foundation)
-local reactModule = require(verifiedBadges.Parent.React)
-local reactRobloxModule = require(verifiedBadges.Parent.ReactRoblox)
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local t = {
+﻿local VerifiedBadges = script:FindFirstAncestor("VerifiedBadges")
+local CryoModule = require(VerifiedBadges.Parent.Cryo)
+local FoundationModule = require(VerifiedBadges.Parent.Foundation)
+local ReactModule = require(VerifiedBadges.Parent.React)
+local ReactRobloxModule = require(VerifiedBadges.Parent.ReactRoblox)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local config = {
 	anchorPoint = Vector2.new(),
 	position = UDim2.new(),
 	color = Color3.fromHex("#fff"),
@@ -15,69 +15,73 @@ local t = {
 	verticalAlignment = Enum.VerticalAlignment.Center
 }
 
-return function(p1)
-	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), reactRobloxModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
-	local var1 = cryoModule.Dictionary.join(t, p1)
+return function(p1) --[[ Line: 91 | Named "EmojiWrapper" ]]
+	-- upvalues: CryoModule (copy), config (copy), ReactModule (copy), ReactRobloxModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	local JoinResult = CryoModule.Dictionary.join(config, p1)
 	
-	if var1.children then
-		assert(reactModule.Children.count(var1.children) <= 1, "EmojiWrapper can only contain one child")
+	if JoinResult.children then
+		assert(ReactModule.Children.count(JoinResult.children) <= 1, "EmojiWrapper can only contain one child")
 	end
-	if var1.emoji == "" then
-		return var1.children
-	end
-	local var2, var3 = reactModule.useState(0)
-	local var4, var5 = reactModule.useState(-1)
-	
-	return reactModule.createElement("Frame", {
-		BackgroundTransparency = 1,
-		LayoutOrder = var1.layoutOrder,
-		AnchorPoint = var1.anchorPoint,
-		Position = var1.position,
-		Size = var1.size,
-		AutomaticSize = var1.automaticSize
-	}, {
-		Layout = reactModule.createElement("UIListLayout", {
-			SortOrder = Enum.SortOrder.LayoutOrder,
-			FillDirection = Enum.FillDirection.Horizontal,
-			HorizontalAlignment = var1.horizontalAlignment,
-			VerticalAlignment = var1.verticalAlignment,
-			Padding = UDim.new(0, -var2)
-		}),
-		ChildrenWrapper = reactModule.createElement("Frame", {
-			AutomaticSize = Enum.AutomaticSize.XY,
+	if JoinResult.emoji == "" then
+		return JoinResult.children
+	else
+		local UseStateResult, UseStateResult2 = ReactModule.useState(0)
+		local UseStateResult1, UseStateResult2_1 = ReactModule.useState(-1)
+		
+		return ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
-			LayoutOrder = 1,
-			[reactRobloxModule.Change.AbsoluteSize] = reactModule.useCallback(function(p2)
-				-- upvalues: var1 (ref), var4 (ref), var5 (ref), var2 (ref), var3 (ref)
-				local var6 = if var1.maximumEmojiSize then math.min(p2.AbsoluteSize.Y, var1.maximumEmojiSize) else p2.AbsoluteSize.Y
-				
-				if var6 ~= var4 then
-					var5(var2)
-					var3(var6)
-				end
-			end, { var2, var4 })
+			LayoutOrder = JoinResult.layoutOrder,
+			AnchorPoint = JoinResult.anchorPoint,
+			Position = JoinResult.position,
+			Size = JoinResult.size,
+			AutomaticSize = JoinResult.automaticSize
 		}, {
-			Padding = reactModule.createElement("UIPadding", { PaddingRight = UDim.new(0, var2) }),
-			Children = reactModule.createElement(reactModule.Fragment, nil, var1.children)
-		}),
-		Emoji = reactModule.createElement("TextLabel", {
-			LayoutOrder = 2,
-			BackgroundTransparency = 1,
-			Text = var1.emoji,
-			Font = if foundationFontFaceMigration then nil else var1.font,
-			FontFace = if foundationFontFaceMigration then normalizeFontFace(var1.font) else nil,
-			TextColor3 = var1.color,
-			TextSize = var2,
-			TextYAlignment = Enum.TextYAlignment.Center,
-			TextXAlignment = Enum.TextXAlignment.Center,
-			Size = UDim2.fromOffset(var2, var2)
-		}, {
-			Button = p1.onActivated and reactModule.createElement("ImageButton", {
-				Size = UDim2.fromScale(1, 1),
-				BackgroundTransparency = 1,
-				[reactRobloxModule.Event.Activated] = p1.onActivated
+			Layout = ReactModule.createElement("UIListLayout", {
+				SortOrder = Enum.SortOrder.LayoutOrder,
+				FillDirection = Enum.FillDirection.Horizontal,
+				HorizontalAlignment = JoinResult.horizontalAlignment,
+				VerticalAlignment = JoinResult.verticalAlignment,
+				Padding = UDim.new(0, -UseStateResult)
 			}),
-			UITextSizeConstraint = reactModule.createElement("UITextSizeConstraint", { MinTextSize = 0, MaxTextSize = math.max(var2, 1) })
+			ChildrenWrapper = ReactModule.createElement("Frame", {
+				AutomaticSize = Enum.AutomaticSize.XY,
+				BackgroundTransparency = 1,
+				LayoutOrder = 1,
+				[ReactRobloxModule.Change.AbsoluteSize] = ReactModule.useCallback(function(Frame: Frame) --[[ Line: 105 ]]
+					-- upvalues: JoinResult (copy), UseStateResult1 (copy), UseStateResult2_1 (copy), UseStateResult (copy), UseStateResult2 (copy)
+					local Smallest = if JoinResult.maximumEmojiSize then math.min(Frame.AbsoluteSize.Y, JoinResult.maximumEmojiSize) else Frame.AbsoluteSize.Y
+					
+					if Smallest ~= UseStateResult1 then
+						UseStateResult2_1(UseStateResult)
+						UseStateResult2(Smallest)
+					end
+				end, { UseStateResult, UseStateResult1 })
+			}, {
+				Padding = ReactModule.createElement("UIPadding", { PaddingRight = UDim.new(0, UseStateResult) }),
+				Children = ReactModule.createElement(ReactModule.Fragment, nil, JoinResult.children)
+			}),
+			Emoji = ReactModule.createElement("TextLabel", {
+				LayoutOrder = 2,
+				BackgroundTransparency = 1,
+				Text = JoinResult.emoji,
+				Font = if FoundationFontFaceMigration then nil else JoinResult.font,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(JoinResult.font) else nil,
+				TextColor3 = JoinResult.color,
+				TextSize = UseStateResult,
+				TextYAlignment = Enum.TextYAlignment.Center,
+				TextXAlignment = Enum.TextXAlignment.Center,
+				Size = UDim2.fromOffset(UseStateResult, UseStateResult)
+			}, {
+				Button = p1.onActivated and ReactModule.createElement("ImageButton", {
+					Size = UDim2.fromScale(1, 1),
+					BackgroundTransparency = 1,
+					[ReactRobloxModule.Event.Activated] = p1.onActivated
+				}),
+				UITextSizeConstraint = ReactModule.createElement("UITextSizeConstraint", {
+					MinTextSize = 0,
+					MaxTextSize = math.max(UseStateResult, 1)
+				})
+			})
 		})
-	})
+	end
 end

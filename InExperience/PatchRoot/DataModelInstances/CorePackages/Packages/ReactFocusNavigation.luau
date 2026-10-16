@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Index.ReactFocusNavigation.ReactFocusNavigation)
+﻿return (require(script.Parent._Index.ReactFocusNavigation.ReactFocusNavigation))

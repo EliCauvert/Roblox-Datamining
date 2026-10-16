@@ -1,9 +1,9 @@
-﻿local GROUPS_URLModule = require(script:FindFirstAncestor("GroupsNetworking").GROUPS_URL)
+﻿local GROUPSURLModule = require(script:FindFirstAncestor("GroupsNetworking").GROUPS_URL)
 
-return function(p1)
-	-- upvalues: GROUPS_URLModule (ref)
-	return p1.roduxNetworking.POST("MakePrimaryGroup", function(p2, p3)
-		-- upvalues: GROUPS_URLModule (copy)
-		return p2(GROUPS_URLModule):path("v1"):path("user"):path("groups"):path("primary"):body({ groupId = p3.groupId })
+return function(p1) --[[ Line: 14 ]]
+	-- upvalues: GROUPSURLModule (copy)
+	return p1.roduxNetworking.POST("MakePrimaryGroup", function(Callback, p2) --[[ Line: 17 ]]
+		-- upvalues: GROUPSURLModule (upval)
+		return Callback(GROUPSURLModule):path("v1"):path("user"):path("groups"):path("primary"):body({ groupId = p2.groupId })
 	end)
 end

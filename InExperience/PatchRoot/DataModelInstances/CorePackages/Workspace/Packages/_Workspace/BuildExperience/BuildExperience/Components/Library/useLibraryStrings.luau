@@ -1,53 +1,53 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local reactModule = require(parent.React)
-local localizationModule = require(parent.Localization)
-local localizationStringsModule = require(buildExperience.LocalizationStrings)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local ReactModule = require(Parent.React)
+local LocalizationModule = require(Parent.Localization)
+local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
 local _ = require(script.Parent.LibraryTypes)
-local t = {
-	title = localizationStringsModule.LIBRARY_TITLE,
-	empty = localizationStringsModule.LIBRARY_EMPTY,
-	image = localizationStringsModule.LIBRARY_IMAGES_2D,
-	sound = localizationStringsModule.LIBRARY_SOUNDS,
-	modelUnavailable = localizationStringsModule.LIBRARY_MODEL_UNAVAILABLE,
-	searchPlaceholder = localizationStringsModule.LIBRARY_SEARCH_PLACEHOLDER
+local config = {
+	title = LocalizationStringsModule.LIBRARY_TITLE,
+	empty = LocalizationStringsModule.LIBRARY_EMPTY,
+	image = LocalizationStringsModule.LIBRARY_IMAGES_2D,
+	sound = LocalizationStringsModule.LIBRARY_SOUNDS,
+	modelUnavailable = LocalizationStringsModule.LIBRARY_MODEL_UNAVAILABLE,
+	searchPlaceholder = LocalizationStringsModule.LIBRARY_SEARCH_PLACEHOLDER
 }
-local t_1 = {
+local config1 = {
 	model = {
-		localizationStringsModule.LIBRARY_OBJECTS_3D,
+		LocalizationStringsModule.LIBRARY_OBJECTS_3D,
 		"3D Objects"
 	},
-	object = { localizationStringsModule.LIBRARY_OBJECT, "Object" },
-	world = { localizationStringsModule.LIBRARY_WORLD, "World" },
+	object = { LocalizationStringsModule.LIBRARY_OBJECT, "Object" },
+	world = { LocalizationStringsModule.LIBRARY_WORLD, "World" },
 	searchEmpty = {
-		localizationStringsModule.LIBRARY_SEARCH_EMPTY,
+		LocalizationStringsModule.LIBRARY_SEARCH_EMPTY,
 		"No search results found"
 	}
 }
 
-return function()
-	-- upvalues: localizationModule (ref), t (ref), reactModule (ref), t_1 (ref)
-	local var1 = reactModule.useContext(localizationModule.LocalizationRoactContext)
-	local cloned = table.clone(localizationModule.Hooks.useLocalization(t))
+return function() --[[ Line: 27 | Named "useLibraryStrings" ]]
+	-- upvalues: LocalizationModule (copy), config (copy), ReactModule (copy), config1 (copy)
+	local UseContextResult = ReactModule.useContext(LocalizationModule.LocalizationRoactContext)
+	local Copy = table.clone((LocalizationModule.Hooks.useLocalization(config)))
 	
-	for i, v in t_1 do
-		local var2 = v[1]
-		local var3 = v[2]
-		local ok, status = pcall(function()
-			-- upvalues: var1 (ref), var2 (ref)
-			assert(var1 ~= nil, "Library localization context is unavailable")
+	for i, value in config1 do
+		local v1 = value[1]
+		local v2 = value[2]
+		local Success, Result = pcall(function() --[[ Line: 33 ]]
+			-- upvalues: UseContextResult (copy), v1 (copy)
+			assert(UseContextResult ~= nil, "Library localization context is unavailable")
 			
-			return var1:Format(var2)
+			return UseContextResult:Format(v1)
 		end)
-		cloned[i] = if ok and type(status) == "string" and (status ~= "" and status ~= var2) then status else var3
+		Copy[i] = if Success and type(Result) == "string" and Result ~= "" and Result ~= v1 then Result else v2
 	end
-	local var4 = reactModule.useRef(cloned)
+	local UseRefResult = ReactModule.useRef(Copy)
 	
-	for i_1, v_1 in cloned do
-		if var4.current[i_1] ~= v_1 then
-			var4.current = cloned
+	for i1, value1 in Copy do
+		if UseRefResult.current[i1] ~= value1 then
+			UseRefResult.current = Copy
 			break
 		end
 	end
-	return var4.current
+	return UseRefResult.current
 end

@@ -1,93 +1,92 @@
-﻿local userGameSettingsService = UserSettings():GetService("UserGameSettings")
-local tweenService = game:GetService("TweenService")
-local appBlox = script:FindFirstAncestor("AppBlox")
-local parent = appBlox.Parent
-local reactModule = require(parent.React)
-local gamepadService = game:GetService("GamepadService")
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagUseAnimateScrollViewToSelectionHelper = sharedFlagsModule.FFlagUseAnimateScrollViewToSelectionHelper
-local fFlagLuaAppMediaGalleryGamepadSupport = sharedFlagsModule.FFlagLuaAppMediaGalleryGamepadSupport
-local animateScrollViewToSelectionHelperModule = require(appBlox.AnimateScrollViewToSelectionHelper)
+﻿local UserGameSettings = UserSettings():GetService("UserGameSettings")
+local TweenService = game:GetService("TweenService")
+local AppBlox = script:FindFirstAncestor("AppBlox")
+local Parent = AppBlox.Parent
+local ReactModule = require(Parent.React)
+local GamepadService = game:GetService("GamepadService")
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagUseAnimateScrollViewToSelectionHelper = SharedFlagsModule.FFlagUseAnimateScrollViewToSelectionHelper
+local FFlagLuaAppMediaGalleryGamepadSupport = SharedFlagsModule.FFlagLuaAppMediaGalleryGamepadSupport
+local AnimateScrollViewToSelectionHelperModule = require(AppBlox.AnimateScrollViewToSelectionHelper)
 
-return function(p1, p2, p3)
-	-- upvalues: fFlagUseAnimateScrollViewToSelectionHelper (ref), reactModule (ref), animateScrollViewToSelectionHelperModule (ref), fFlagLuaAppMediaGalleryGamepadSupport (ref), gamepadService (ref), userGameSettingsService (ref), tweenService (ref)
-	if fFlagUseAnimateScrollViewToSelectionHelper then
-		reactModule.useEffect(function()
-			-- upvalues: p1 (ref), animateScrollViewToSelectionHelperModule (copy), p2 (ref), fFlagLuaAppMediaGalleryGamepadSupport (copy), p3 (ref)
-			local var1 = nil
-			local t = {}
+return function(p1, Duration, p2) --[[ Line: 14 | Named "useAnimateScrollViewToSelection" ]]
+	-- upvalues: FFlagUseAnimateScrollViewToSelectionHelper (copy), ReactModule (copy), AnimateScrollViewToSelectionHelperModule (copy), FFlagLuaAppMediaGalleryGamepadSupport (copy), GamepadService (copy), UserGameSettings (copy), TweenService (copy)
+	if FFlagUseAnimateScrollViewToSelectionHelper then
+		ReactModule.useEffect(function() --[[ Line: 21 ]]
+			-- upvalues: p1 (copy), AnimateScrollViewToSelectionHelperModule (upval), Duration (copy), FFlagLuaAppMediaGalleryGamepadSupport (upval), p2 (copy)
+			local v1 = nil
+			local Connections = {}
 			
 			if p1 then
-				local var2, var3 = animateScrollViewToSelectionHelperModule(p1.current, p2, nil, if fFlagLuaAppMediaGalleryGamepadSupport then p3 else nil)
-				t = var2
-				var1 = var3
+				Connections, v10 = AnimateScrollViewToSelectionHelperModule(p1.current, Duration, nil, if FFlagLuaAppMediaGalleryGamepadSupport then p2 else nil)
 			end
-			return function()
-				-- upvalues: t (write), var1 (write)
-				for i, v in t do
-					v:Disconnect()
+			return function() --[[ Line: 33 ]]
+				-- upvalues: Connections (ref), v1 (ref)
+				for _, connection in Connections do
+					connection:Disconnect()
 				end
-				if var1 then
-					var1:Cancel()
+				if v1 then
+					v1:Cancel()
 				end
 			end
 		end, {
 			p1,
-			p2,
-			if fFlagLuaAppMediaGalleryGamepadSupport then p3 else nil
+			Duration,
+			if FFlagLuaAppMediaGalleryGamepadSupport then p2 else nil
 		})
 		
 		return
-	end
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), gamepadService (copy), userGameSettingsService (copy), tweenService (copy), p2 (ref)
-		local t = {}
-		local var1 = nil
-		local _ = 0
-		local _ = 0
-		
-		if p1 and p1.current ~= nil then
-			local current = p1.current
-			local y = current.AbsolutePosition.Y
-			local y_1 = current.AbsoluteWindowSize.Y
-			table.insert(t, current:GetPropertyChangedSignal("AbsolutePosition"):Connect(function()
-				-- upvalues: y (write), current (ref)
-				y = current.AbsolutePosition.Y
-			end))
-			table.insert(t, current:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(function()
-				-- upvalues: y_1 (write), current (ref)
-				y_1 = current.AbsoluteWindowSize.Y
-			end))
-			table.insert(t, current.SelectionChanged:Connect(function(_, _, p4)
-				-- upvalues: current (ref), gamepadService (copy), var1 (write), y_1 (write), y (write), userGameSettingsService (copy), tweenService (copy), p2 (copy)
-				if p4 == nil or not p4:IsDescendantOf(current) or gamepadService.GamepadCursorEnabled then return end
-				if var1 then
-					var1:Cancel()
-					var1 = nil
-				end
-				local canvasPosition = current.CanvasPosition
-				local vector2 = Vector2.new(canvasPosition.X, canvasPosition.Y + (p4.AbsolutePosition.Y - (y_1 * 0.5 - p4.AbsoluteSize.Y * 0.5 + y)))
-				
-				if userGameSettingsService.ReducedMotion then
-					current.CanvasPosition = vector2
+	else
+		ReactModule.useEffect(function() --[[ Line: 49 ]]
+			-- upvalues: p1 (copy), GamepadService (upval), UserGameSettings (upval), TweenService (upval), Duration (copy)
+			local List = {}
+			local CreateResult = nil
+			local Y = 0
+			local Y1 = 0
+			
+			if p1 and p1.current ~= nil then
+				local Current = p1.current
+				Y = Current.AbsolutePosition.Y
+				Y1 = Current.AbsoluteWindowSize.Y
+				table.insert(List, Current:GetPropertyChangedSignal("AbsolutePosition"):Connect(function() --[[ Line: 61 ]]
+					-- upvalues: Y (ref), Current (copy)
+					Y = Current.AbsolutePosition.Y
+				end))
+				table.insert(List, Current:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(function() --[[ Line: 67 ]]
+					-- upvalues: Y1 (ref), Current (copy)
+					Y1 = Current.AbsoluteWindowSize.Y
+				end))
+				table.insert(List, Current.SelectionChanged:Connect(function(_, _, Frame: Frame) --[[ Line: 73 ]]
+					-- upvalues: Current (copy), GamepadService (upval), CreateResult (ref), Y1 (ref), Y (ref), UserGameSettings (upval), TweenService (upval), Duration (upval)
+					if Frame == nil or not Frame:IsDescendantOf(Current) or GamepadService.GamepadCursorEnabled then return end
+					if CreateResult then
+						CreateResult:Cancel()
+						CreateResult = nil
+					end
+					local CanvasPosition = Current.CanvasPosition
+					local _Vector2 = Vector2.new(CanvasPosition.X, CanvasPosition.Y + (Frame.AbsolutePosition.Y - (Y1 * 0.5 - Frame.AbsoluteSize.Y * 0.5 + Y)))
 					
-					return
-				end
-				var1 = tweenService:Create(current, TweenInfo.new(p2, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), { CanvasPosition = vector2 })
-				
-				if var1 then
-					var1:Play()
-				end
-			end))
-		end
-		return function()
-			-- upvalues: t (ref), var1 (write)
-			for i, v in t do
-				v:Disconnect()
+					if UserGameSettings.ReducedMotion then
+						Current.CanvasPosition = _Vector2
+						
+						return
+					end
+					CreateResult = TweenService:Create(Current, TweenInfo.new(Duration, Enum.EasingStyle.Cubic, Enum.EasingDirection.Out), { CanvasPosition = _Vector2 })
+					
+					if CreateResult then
+						CreateResult:Play()
+					end
+				end))
 			end
-			if var1 then
-				var1:Cancel()
+			return function() --[[ Line: 113 ]]
+				-- upvalues: List (copy), CreateResult (ref)
+				for _, Connection in List do
+					Connection:Disconnect()
+				end
+				if CreateResult then
+					CreateResult:Cancel()
+				end
 			end
-		end
-	end, { p1, p2 })
+		end, { p1, Duration })
+	end
 end

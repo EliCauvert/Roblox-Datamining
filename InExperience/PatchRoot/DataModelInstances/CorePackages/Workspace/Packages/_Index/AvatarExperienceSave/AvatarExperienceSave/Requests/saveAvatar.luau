@@ -1,27 +1,28 @@
-﻿local avatarEditorService = game:GetService("AvatarEditorService")
-local parent = script:FindFirstAncestor("AvatarExperienceSave").Parent
-local promiseModule = require(parent.Promise)
-local _ = require(parent.LuauPolyfill)
+﻿local AvatarEditorService = game:GetService("AvatarEditorService")
+local Parent = script:FindFirstAncestor("AvatarExperienceSave").Parent
+local PromiseModule = require(Parent.Promise)
+local _ = require(Parent.LuauPolyfill)
 
-return function(p1, p2, p3, p4)
-	-- upvalues: promiseModule (ref), avatarEditorService (ref)
-	return promiseModule.new(function(p5, p6)
-		-- upvalues: avatarEditorService (copy), p1 (ref), p2 (ref), p3 (ref), p4 (ref)
-		local var1 = avatarEditorService:NoPromptSaveAvatar(p1, p2, p3, p4)
-		while not var1 do
-			avatarEditorService.PromptSaveAvatarCompleted:Wait()
-			var1 = avatarEditorService:NoPromptSaveAvatar(p1, p2, p3, p4)
+return function(HumanoidDescription, RigType, SaveDict, GearAssetId) --[[ Line: 28 | Named "saveAvatar" ]]
+	-- upvalues: PromiseModule (copy), AvatarEditorService (copy)
+	return PromiseModule.new(function(Callback: (any) -> (), Callback1: (any) -> ()) --[[ Line: 34 ]]
+		-- upvalues: AvatarEditorService (upval), HumanoidDescription (copy), RigType (copy), SaveDict (copy), GearAssetId (copy)
+		local NoPromptSaveAvatarResult = AvatarEditorService:NoPromptSaveAvatar(HumanoidDescription, RigType, SaveDict, GearAssetId)
+		while not NoPromptSaveAvatarResult do
+			AvatarEditorService.PromptSaveAvatarCompleted:Wait()
+			NoPromptSaveAvatarResult = AvatarEditorService:NoPromptSaveAvatar(HumanoidDescription, RigType, SaveDict, GearAssetId)
 		end
-		local var2, var3 = avatarEditorService.PromptSaveAvatarCompleted:Wait()
+		local Result, HumanoidDescription1 = AvatarEditorService.PromptSaveAvatarCompleted:Wait()
 		
-		if var2 == Enum.AvatarPromptResult.Success then
-			p5({
-				avatarPromptResult = var2,
-				humanoidDescriptionWithValidAssets = var3
+		if Result == Enum.AvatarPromptResult.Success then
+			Callback({
+				avatarPromptResult = Result,
+				humanoidDescriptionWithValidAssets = HumanoidDescription1
 			})
 			
 			return
+		else
+			Callback1({ avatarPromptResult = Result })
 		end
-		p6({ avatarPromptResult = var2 })
 	end)
 end

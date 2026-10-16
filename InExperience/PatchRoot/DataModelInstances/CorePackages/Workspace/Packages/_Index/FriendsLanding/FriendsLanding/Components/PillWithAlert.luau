@@ -1,1 +1,1 @@
-﻿return require(script.PillWithAlert)
+﻿return (require(script.PillWithAlert))

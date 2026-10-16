@@ -1,188 +1,187 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local cryoModule = require(corePackagesService.Packages.Cryo)
-local roactModule = require(corePackagesService.Packages.Roact)
-local tModule = require(corePackagesService.Packages.t)
-local otterModule = require(corePackagesService.Packages.Otter)
-local useLayoutValues = require(corePackagesService.Workspace.Packages.PlayerList).Common.useLayoutValues
-local withLayoutValues = require(script.Parent.Parent.Connection.LayoutValues).WithLayoutValues
-local dropDownButtonModule = require(script.Parent.DropDownButton)
-local t = { dampingRatio = 1, frequency = 4 }
-local t_1 = { dampingRatio = 1, frequency = 4 }
-local dropDownAnimator = roactModule.PureComponent:extend("DropDownAnimator")
-dropDownAnimator.validateProps = tModule.strictInterface({
-	text = tModule.string,
-	icon = tModule.union(tModule.string, tModule.table),
-	lastButton = tModule.boolean,
-	layoutOrder = tModule.integer,
-	onActivated = tModule.callback,
-	forceShowOptions = tModule.boolean,
-	selectedPlayer = tModule.optional(tModule.instanceIsA("Player")),
-	onDecline = tModule.optional(tModule.callback),
-	onDismiss = tModule.optional(tModule.callback),
-	contentVisible = tModule.boolean,
-	layoutValues = tModule.optional(tModule.table),
-	onAnimationComplete = tModule.optional(tModule.callback),
-	forwardRef = tModule.optional(tModule.callback)
+﻿local CorePackages = game:GetService("CorePackages")
+local CryoModule = require(CorePackages.Packages.Cryo)
+local RoactModule = require(CorePackages.Packages.Roact)
+local TModule = require(CorePackages.Packages.t)
+local OtterModule = require(CorePackages.Packages.Otter)
+local UseLayoutValuesFunction = require(CorePackages.Workspace.Packages.PlayerList).Common.useLayoutValues
+local WithLayoutValuesFunction = require(script.Parent.Parent.Connection.LayoutValues).WithLayoutValues
+local DropDownButtonModule = require(script.Parent.DropDownButton)
+local config = { dampingRatio = 1, frequency = 4 }
+local config1 = { dampingRatio = 1, frequency = 4 }
+local DropDownAnimator = RoactModule.PureComponent:extend("DropDownAnimator")
+DropDownAnimator.validateProps = TModule.strictInterface({
+	text = TModule.string,
+	icon = TModule.union(TModule.string, TModule.table),
+	lastButton = TModule.boolean,
+	layoutOrder = TModule.integer,
+	onActivated = TModule.callback,
+	forceShowOptions = TModule.boolean,
+	selectedPlayer = TModule.optional(TModule.instanceIsA("Player")),
+	onDecline = TModule.optional(TModule.callback),
+	onDismiss = TModule.optional(TModule.callback),
+	contentVisible = TModule.boolean,
+	layoutValues = TModule.optional(TModule.table),
+	onAnimationComplete = TModule.optional(TModule.callback),
+	forwardRef = TModule.optional(TModule.callback)
 })
 
-function dropDownAnimator.init(p1)
-	-- upvalues: roactModule (ref), otterModule (ref), t (ref)
+function DropDownAnimator.init(p1) --[[ Line: 46 ]]
+	-- upvalues: RoactModule (copy), OtterModule (copy), config (copy)
 	p1.state = {
 		lastButtonProps = nil,
 		onDeclineCalled = nil,
 		onActivatedCalled = nil,
 		overlayPercentage = 0
 	}
-	local var1, var2 = roactModule.createBinding(UDim2.new(0, 0, 0, 0))
-	p1.currentButtonPosition = var1
-	p1.updateCurrentButtonPosition = var2
-	local var3, var4 = roactModule.createBinding(UDim2.new(0, 0, 0, 0))
-	p1.lastButtonPosition = var3
-	p1.updateLastButtonPosition = var4
-	p1.positionMotor = otterModule.createSingleMotor(0)
-	p1.positionMotor:onStep(function(p2)
-		-- upvalues: p1 (ref)
-		p1.updateCurrentButtonPosition(UDim2.new(p2, 0, 0, 0))
+	p1.currentButtonPosition, p1.updateCurrentButtonPosition = RoactModule.createBinding(UDim2.new(0, 0, 0, 0))
+	p1.lastButtonPosition, p1.updateLastButtonPosition = RoactModule.createBinding(UDim2.new(0, 0, 0, 0))
+	p1.positionMotor = OtterModule.createSingleMotor(0)
+	p1.positionMotor:onStep(function(XScale: number) --[[ Line: 58 ]]
+		-- upvalues: p1 (copy)
+		p1.updateCurrentButtonPosition(UDim2.new(XScale, 0, 0, 0))
 		
 		if p1.animatingRight then
-			p1.updateLastButtonPosition(UDim2.new(p2 + 1, 0, 0, 0))
+			p1.updateLastButtonPosition(UDim2.new(XScale + 1, 0, 0, 0))
 			
 			return
+		else
+			p1.updateLastButtonPosition(UDim2.new(XScale - 1, 0, 0, 0))
 		end
-		p1.updateLastButtonPosition(UDim2.new(p2 - 1, 0, 0, 0))
 	end)
-	p1.positionMotor:onComplete(function(p2)
-		-- upvalues: p1 (ref), roactModule (copy)
+	p1.positionMotor:onComplete(function(p2) --[[ Line: 66 ]]
+		-- upvalues: p1 (copy), RoactModule (upval)
 		if p2 == 0 then
 			p1:setState({
-				lastButtonProps = roactModule.None,
-				onDeclineCalled = roactModule.None,
-				onActivatedCalled = roactModule.None
+				lastButtonProps = RoactModule.None,
+				onDeclineCalled = RoactModule.None,
+				onActivatedCalled = RoactModule.None
 			})
 		end
 	end)
-	p1.overlayMotor = otterModule.createSingleMotor(0)
-	p1.overlayMotor:onStep(function(p2)
-		-- upvalues: p1 (ref)
-		p1:setState({ overlayPercentage = p2 })
+	p1.overlayMotor = OtterModule.createSingleMotor(0)
+	p1.overlayMotor:onStep(function(OverlayPercentage) --[[ Line: 77 ]]
+		-- upvalues: p1 (copy)
+		p1:setState({ overlayPercentage = OverlayPercentage })
 	end)
-	p1.overlayMotor:onComplete(function(p2)
-		-- upvalues: p1 (ref), otterModule (copy), t (copy)
+	p1.overlayMotor:onComplete(function(p2) --[[ Line: 82 ]]
+		-- upvalues: p1 (copy), OtterModule (upval), config (upval)
 		if p2 == 1 then
-			p1.positionMotor:setGoal(otterModule.spring(0, t))
+			p1.positionMotor:setGoal(OtterModule.spring(0, config))
 		end
 	end)
 end
 
-function dropDownAnimator.getButtonProps(p1, p2, p3)
-	local t = {
-		text = p2.text,
-		icon = p2.icon,
-		lastButton = p2.lastButton,
-		forceShowOptions = p2.forceShowOptions,
-		onDismiss = p2.onDismiss
+function DropDownAnimator.getButtonProps(p1, LastButtonProps, p2) --[[ Line: 89 ]]
+	local config = {
+		text = LastButtonProps.text,
+		icon = LastButtonProps.icon,
+		lastButton = LastButtonProps.lastButton,
+		forceShowOptions = LastButtonProps.forceShowOptions,
+		onDismiss = LastButtonProps.onDismiss
 	}
 	
-	if p1.state.lastButtonProps ~= nil then
-		if p3 then
-			t.animatingAccept = p1.state.onActivatedCalled
-			t.animatingDecline = p1.state.onDeclineCalled
-			t.animatingPercentage = p1.state.overlayPercentage
-			
-			return t
+	if p1.state.lastButtonProps == nil then
+		if LastButtonProps.onActivated and (LastButtonProps.onDecline or p1.props.forceShowOptions) then
+			function config.onActivated() --[[ Line: 106 ]]
+				-- upvalues: p1 (copy), LastButtonProps (copy)
+				p1:setState({ onActivatedCalled = true, onDeclineCalled = false })
+				LastButtonProps.onActivated()
+			end
+		elseif LastButtonProps.onActivated then
+			config.onActivated = LastButtonProps.onActivated
 		end
-	elseif p2.onActivated and (p2.onDecline or p1.props.forceShowOptions) then
-		function t.onActivated()
-			-- upvalues: p1 (ref), p2 (ref)
-			p1:setState({ onActivatedCalled = true, onDeclineCalled = false })
-			p2.onActivated()
+		if LastButtonProps.onDecline then
+			function config.onDecline() --[[ Line: 117 ]]
+				-- upvalues: p1 (copy), LastButtonProps (copy)
+				p1:setState({ onActivatedCalled = false, onDeclineCalled = true })
+				LastButtonProps.onDecline()
+			end
 		end
-	elseif p2.onActivated then
-		t.onActivated = p2.onActivated
+	elseif p2 then
+		config.animatingAccept = p1.state.onActivatedCalled
+		config.animatingDecline = p1.state.onDeclineCalled
+		config.animatingPercentage = p1.state.overlayPercentage
+		
+		return config
 	end
-	if p2.onDecline then
-		function t.onDecline()
-			-- upvalues: p1 (ref), p2 (ref)
-			p1:setState({ onActivatedCalled = false, onDeclineCalled = true })
-			p2.onDecline()
-		end
-	end
-	return t
+	return config
 end
 
-function dropDownAnimator.render(p1)
-	-- upvalues: withLayoutValues (ref), roactModule (ref), dropDownButtonModule (ref)
-	return withLayoutValues(function(_)
-		-- upvalues: p1 (ref), roactModule (copy), dropDownButtonModule (copy)
-		layoutValues = p1.props.layoutValues
-		local t = {
-			CurrentButtonContainer = roactModule.createElement("Frame", {
+function DropDownAnimator.render(p1) --[[ Line: 130 ]]
+	-- upvalues: WithLayoutValuesFunction (copy), RoactModule (copy), DropDownButtonModule (copy)
+	return WithLayoutValuesFunction(function(_) --[[ Line: 131 ]]
+		-- upvalues: p1 (copy), RoactModule (upval), DropDownButtonModule (upval)
+		local LayoutValues = p1.props.layoutValues
+		local config = {
+			CurrentButtonContainer = RoactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				Size = UDim2.new(1, 0, 1, 0),
 				Position = p1.currentButtonPosition
 			}, {
-				DropDownButton = roactModule.createElement(dropDownButtonModule, p1:getButtonProps(p1.props))
+				DropDownButton = RoactModule.createElement(DropDownButtonModule, p1:getButtonProps(p1.props))
 			})
 		}
 		
 		if p1.state.lastButtonProps then
-			t.LastButtonContainer = roactModule.createElement("Frame", {
+			config.LastButtonContainer = RoactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				Size = UDim2.new(1, 0, 1, 0),
 				Position = p1.lastButtonPosition
 			}, {
-				DropDownButton = roactModule.createElement(dropDownButtonModule, p1:getButtonProps(p1.state.lastButtonProps, true))
+				DropDownButton = RoactModule.createElement(DropDownButtonModule, p1:getButtonProps(p1.state.lastButtonProps, true))
 			})
 		end
-		return roactModule.createElement("Frame", {
+		return RoactModule.createElement("Frame", {
 			Visible = p1.props.contentVisible,
 			ZIndex = 2,
-			Size = UDim2.new(1, 0, 0, layoutValues.DropDownButtonSizeY),
+			Size = UDim2.new(1, 0, 0, LayoutValues.DropDownButtonSizeY),
 			BackgroundTransparency = 1,
 			LayoutOrder = p1.props.layoutOrder,
-			[roactModule.Ref] = p1.props.forwardRef
-		}, t)
+			[RoactModule.Ref] = p1.props.forwardRef
+		}, config)
 	end)
 end
 
-function dropDownAnimator.didUpdate(p1, p2, p3)
-	-- upvalues: otterModule (ref), t_1 (ref), roactModule (ref)
-	local var1 = p1.state.lastButtonProps == nil and p3.lastButtonProps ~= nil
+function DropDownAnimator.didUpdate(p1, LastButtonProps, p2) --[[ Line: 167 ]]
+	-- upvalues: OtterModule (copy), config1 (copy), RoactModule (copy)
+	local HasOnDecline = LastButtonProps.onDecline ~= nil or p1.props.forceShowOptions
+	local OnDeclineCalled = p1.state.onDeclineCalled or p1.state.onActivatedCalled
+	local HasLastButtonProps: boolean = p1.state.lastButtonProps == nil and p2.lastButtonProps ~= nil
 	
-	if p1.props.text ~= p2.text and (if p2.onDecline == nil then p1.props.forceShowOptions else true) and (p1.state.onDeclineCalled or p1.state.onActivatedCalled) then
+	if p1.props.text ~= LastButtonProps.text and HasOnDecline and OnDeclineCalled then
 		if p1.state.onActivatedCalled and not p1.props.forceShowOptions then
 			p1.animatingRight = true
-			p1.positionMotor:setGoal(otterModule.instant(-1))
+			p1.positionMotor:setGoal(OtterModule.instant(-1))
 		else
 			p1.animatingRight = false
-			p1.positionMotor:setGoal(otterModule.instant(1))
+			p1.positionMotor:setGoal(OtterModule.instant(1))
 		end
-		p1.overlayMotor:setGoal(otterModule.instant(0))
+		p1.overlayMotor:setGoal(OtterModule.instant(0))
 		p1.positionMotor:step(0)
 		p1.overlayMotor:step(0)
-		p1:setState({ lastButtonProps = p2 })
-		p1.overlayMotor:setGoal(otterModule.spring(1, t_1))
+		p1:setState({ lastButtonProps = LastButtonProps })
+		p1.overlayMotor:setGoal(OtterModule.spring(1, config1))
 	end
-	if var1 and p1.props.onAnimationComplete then
+	if HasLastButtonProps and p1.props.onAnimationComplete then
 		p1.props.onAnimationComplete()
 	end
-	if p1.props.selectedPlayer ~= p2.selectedPlayer then
-		p1.positionMotor:setGoal(otterModule.instant(0))
-		p1.overlayMotor:setGoal(otterModule.instant(0))
+	if p1.props.selectedPlayer ~= LastButtonProps.selectedPlayer then
+		p1.positionMotor:setGoal(OtterModule.instant(0))
+		p1.overlayMotor:setGoal(OtterModule.instant(0))
 		p1.positionMotor:step(0)
 		p1.overlayMotor:step(0)
-		p1:setState({ lastButtonProps = roactModule.None })
+		p1:setState({ lastButtonProps = RoactModule.None })
 	end
 end
 
-function dropDownAnimator.willUnmount(p1)
+function DropDownAnimator.willUnmount(p1) --[[ Line: 209 ]]
 	p1.positionMotor:destroy()
 	p1.positionMotor = nil
 	p1.overlayMotor:destroy()
 	p1.overlayMotor = nil
 end
 
-return function(p1)
-	-- upvalues: useLayoutValues (ref), roactModule (ref), dropDownAnimator (ref), cryoModule (ref)
-	return roactModule.createElement(dropDownAnimator, cryoModule.Dictionary.join(p1, { layoutValues = useLayoutValues() }))
+return function(p1) --[[ Line: 216 ]]
+	-- upvalues: UseLayoutValuesFunction (copy), RoactModule (copy), DropDownAnimator (copy), CryoModule (copy)
+	return RoactModule.createElement(DropDownAnimator, CryoModule.Dictionary.join(p1, { layoutValues = UseLayoutValuesFunction() }))
 end

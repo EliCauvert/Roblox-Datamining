@@ -1,39 +1,38 @@
-﻿local experimentCacheManager = require(script:FindFirstAncestor("SocialExperiments").Parent.ExperimentCacheManager).ExperimentCacheManager
-local argoPartyLayer = game:DefineFastString("ArgoPartyLayer", "Social.ConnectTab")
-local argoPartyVariant = game:DefineFastString("ArgoPartyVariant", "enableArgoPartyChanges")
-local forceEnableArgoPartyChanges7 = game:DefineFastFlag("ForceEnableArgoPartyChanges7", false)
-local enableArgoPartyExperimentation7 = game:DefineFastFlag("EnableArgoPartyExperimentation7", false)
-local enableArgoPartyChanges = game:DefineFastFlag("EnableArgoPartyChanges", false)
+﻿local ExperimentCacheManager = require(script:FindFirstAncestor("SocialExperiments").Parent.ExperimentCacheManager).ExperimentCacheManager
+local ArgoPartyLayer = game:DefineFastString("ArgoPartyLayer", "Social.ConnectTab")
+local ArgoPartyVariant = game:DefineFastString("ArgoPartyVariant", "enableArgoPartyChanges")
+local ForceEnableArgoPartyChanges7 = game:DefineFastFlag("ForceEnableArgoPartyChanges7", false)
+local EnableArgoPartyExperimentation7 = game:DefineFastFlag("EnableArgoPartyExperimentation7", false)
+local EnableArgoPartyChanges = game:DefineFastFlag("EnableArgoPartyChanges", false)
 
-local function _(p1)
-	-- upvalues: experimentCacheManager (ref), argoPartyLayer (ref)
-	local var1 = experimentCacheManager.default:getLayerVariables(argoPartyLayer)
+local function _(p1) --[[ Line: 13 | Named "getIsUserInTreatment" ]]
+	-- upvalues: ExperimentCacheManager (copy), ArgoPartyLayer (copy)
+	local LayerVariables = ExperimentCacheManager.default:getLayerVariables(ArgoPartyLayer)
 	
-	return if var1 and var1[p1] ~= nil then var1[p1] else false
+	return if LayerVariables and LayerVariables[p1] ~= nil then LayerVariables[p1] else false
 end
 
 return {
-	getIsRenameEnabled = function()
-		-- upvalues: forceEnableArgoPartyChanges7 (ref), enableArgoPartyChanges (ref), enableArgoPartyExperimentation7 (ref), argoPartyVariant (ref), experimentCacheManager (ref), argoPartyLayer (ref)
-		local var1 = forceEnableArgoPartyChanges7
+	getIsRenameEnabled = function() --[[ Line: 23 ]]
+		-- upvalues: ForceEnableArgoPartyChanges7 (copy), EnableArgoPartyChanges (copy), EnableArgoPartyExperimentation7 (copy), ArgoPartyVariant (copy), ExperimentCacheManager (copy), ArgoPartyLayer (copy)
+		local Flag: boolean = ForceEnableArgoPartyChanges7
 		
-		if not var1 then
-			var1 = enableArgoPartyChanges
+		if not Flag then
+			Flag = EnableArgoPartyChanges
 			
-			if not var1 then
-				var1 = enableArgoPartyExperimentation7
+			if not Flag then
+				Flag = EnableArgoPartyExperimentation7
 				
-				if var1 then
-					local var2 = argoPartyVariant
-					local var3 = experimentCacheManager.default:getLayerVariables(argoPartyLayer)
+				if Flag then
+					local LayerVariables = ExperimentCacheManager.default:getLayerVariables(ArgoPartyLayer)
 					
-					if var3 and var3[var2] ~= nil then
-						return var3[var2]
+					if LayerVariables and LayerVariables[ArgoPartyVariant] ~= nil then
+						return LayerVariables[ArgoPartyVariant]
 					end
-					var1 = false
+					Flag = false
 				end
 			end
 		end
-		return var1
+		return Flag
 	end
 }

@@ -1,107 +1,107 @@
-﻿local httpService = game:GetService("HttpService")
-local guiService = game:GetService("GuiService")
-local userInputService = game:GetService("UserInputService")
-local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local reactModule = require(parent_1.React)
-local roactUtilsModule = require(parent_1.RoactUtils)
-local reactUtilsModule = require(parent_1.ReactUtils)
-local cryoModule = require(parent_1.Cryo)
-local foundationModule = require(parent_1.Foundation)
-local toast = foundationModule.Toast
-local keyLabel = foundationModule.KeyLabel
-local view = foundationModule.View
-local stateLayerAffordance = foundationModule.Enums.StateLayerAffordance
-local controlState = foundationModule.Enums.ControlState
-local inputTypeConstants = require(parent_1.InputType).InputTypeConstants
-local useInputType = roactUtilsModule.Hooks.useInputType
-local eventConnection = reactUtilsModule.EventConnection
-local useFocusGuiObject = require(parent_1.ReactFocusNavigation).useFocusGuiObject
-local constantsModule = require(parent.constants)
+﻿local HttpService = game:GetService("HttpService")
+local GuiService = game:GetService("GuiService")
+local UserInputService = game:GetService("UserInputService")
+local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
+local CryoModule = require(Parent1.Cryo)
+local FoundationModule = require(Parent1.Foundation)
+local Toast = FoundationModule.Toast
+local KeyLabel = FoundationModule.KeyLabel
+local View = FoundationModule.View
+local StateLayerAffordance = FoundationModule.Enums.StateLayerAffordance
+local ControlState = FoundationModule.Enums.ControlState
+local InputTypeConstants = require(Parent1.InputType).InputTypeConstants
+local UseInputTypeFunction = require(Parent1.RoactUtils).Hooks.useInputType
+local EventConnection = require(Parent1.ReactUtils).EventConnection
+local UseFocusGuiObjectFunction = require(Parent1.ReactFocusNavigation).useFocusGuiObject
+local ConstantsModule = require(Parent.constants)
 
-return reactModule.memo(reactModule.forwardRef(function(p1, _)
-	-- upvalues: reactModule (ref), useInputType (ref), useFocusGuiObject (ref), controlState (ref), httpService (ref), guiService (ref), view (ref), stateLayerAffordance (ref), cryoModule (ref), toast (ref), inputTypeConstants (ref), eventConnection (ref), userInputService (ref), keyLabel (ref), constantsModule (ref)
-	local var1 = reactModule.useRef(nil)
-	local var2, var3 = reactModule.useBinding(false)
-	local var4, var5 = reactModule.useBinding(Enum.SelectionBehavior.Escape)
-	local var6 = useInputType()
-	local var7 = useFocusGuiObject()
-	local var8 = if p1.onHover then reactModule.useCallback(function(p2)
-		-- upvalues: p1 (ref), controlState (copy)
-		p1.onHover(if p2 ~= controlState.Hover then if p2 ~= controlState.Pressed then p2 == controlState.SelectedPressed else true else true)
+return ReactModule.memo(ReactModule.forwardRef(function(p1, _) --[[ Line: 39 | Named "ClientNotificationWrapper" ]]
+	-- upvalues: ReactModule (copy), UseInputTypeFunction (copy), UseFocusGuiObjectFunction (copy), ControlState (copy), HttpService (copy), GuiService (copy), View (copy), StateLayerAffordance (copy), CryoModule (copy), Toast (copy), InputTypeConstants (copy), EventConnection (copy), UserInputService (copy), KeyLabel (copy), ConstantsModule (copy)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(false)
+	local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(Enum.SelectionBehavior.Escape)
+	local UseInputTypeResult = UseInputTypeFunction()
+	local UseFocusGuiObjectResult = UseFocusGuiObjectFunction()
+	local UseResult = if p1.onHover then ReactModule.useCallback(function(Hover) --[[ Line: 48 ]]
+		-- upvalues: p1 (copy), ControlState (upval)
+		p1.onHover(Hover == ControlState.Hover or (Hover == ControlState.Pressed or Hover == ControlState.SelectedPressed))
 	end, { p1.onHover }) else nil
-	local notificationInfo = httpService:JSONDecode(p1.notificationInfo)
-	local t = {}
+	local Data = HttpService:JSONDecode(p1.notificationInfo)
+	local Actions = {}
 	
-	if notificationInfo.Buttons then
-		for i, v in ipairs(notificationInfo.Buttons) do
-			table.insert(t, {
-				text = v.Text,
-				variant = v.ButtonType,
-				onActivated = function()
-					-- upvalues: guiService (copy), p1 (ref), i (ref)
-					guiService:OnNotificationInteraction(p1.notificationId, i - 1)
+	if Data.Buttons then
+		for i, button in ipairs(Data.Buttons) do
+			table.insert(Actions, {
+				text = button.Text,
+				variant = button.ButtonType,
+				onActivated = function() --[[ Line: 64 ]]
+					-- upvalues: GuiService (upval), p1 (copy), i (copy)
+					GuiService:OnNotificationInteraction(p1.notificationId, i - 1)
 				end
 			})
 		end
 	end
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "auto-xy",
-		GroupTransparency = if p1.transparency ~= nil then nil else p1.transparency,
-		onStateChanged = var8,
-		stateLayer = { affordance = stateLayerAffordance.None },
-		SelectionGroup = var2,
-		SelectionBehaviorUp = var4,
-		SelectionBehaviorDown = var4,
-		SelectionBehaviorLeft = var4,
-		SelectionBehaviorRight = var4,
-		ref = var1
-	}, cryoModule.Dictionary.join(p1.children or {}, {
-		Toast = reactModule.createElement(toast, {
-			title = notificationInfo.Title,
-			text = notificationInfo.Text,
-			icon = notificationInfo.Icon,
-			actions = t,
+		GroupTransparency = if p1.transparency == nil then nil else p1.transparency,
+		onStateChanged = UseResult,
+		stateLayer = { affordance = StateLayerAffordance.None },
+		SelectionGroup = UseBindingResult,
+		SelectionBehaviorUp = UseBindingResult1,
+		SelectionBehaviorDown = UseBindingResult1,
+		SelectionBehaviorLeft = UseBindingResult1,
+		SelectionBehaviorRight = UseBindingResult1,
+		ref = UseRefResult
+	}, CryoModule.Dictionary.join(p1.children or {}, {
+		Toast = ReactModule.createElement(Toast, {
+			title = Data.Title,
+			text = Data.Text,
+			icon = Data.Icon,
+			actions = Actions,
 			width = p1.width
 		}),
-		KeyLabelView = if var6 == inputTypeConstants.Gamepad and #t > 0 then reactModule.createElement(view, {
+		KeyLabelView = if UseInputTypeResult == InputTypeConstants.Gamepad and #Actions > 0 then ReactModule.createElement(View, {
 			tag = "size-1400-1400 padding-medium anchor-top-right position-top-right"
 		}, {
-			EventConnection = reactModule.createElement(eventConnection, {
-				event = userInputService.InputBegan,
-				callback = function(p2)
-					-- upvalues: var7 (ref), p1 (ref)
-					if p2.KeyCode == Enum.KeyCode.ButtonB then
-						var7(nil)
+			EventConnection = ReactModule.createElement(EventConnection, {
+				event = UserInputService.InputBegan,
+				callback = function(Input) --[[ Line: 101 ]]
+					-- upvalues: UseFocusGuiObjectResult (copy), p1 (copy)
+					if Input.KeyCode == Enum.KeyCode.ButtonB then
+						UseFocusGuiObjectResult(nil)
 						p1.onPause(false)
 					end
 				end
 			}),
-			KeyLabel = reactModule.createElement(keyLabel, {
+			KeyLabel = ReactModule.createElement(KeyLabel, {
 				Size = UDim2.fromScale(1, 1),
 				keyCode = Enum.KeyCode.ButtonStart,
 				holdBehavior = {
-					holdTime = constantsModule.MenuButtonPressHoldTime,
-					resetTime = constantsModule.MenuButtonPressResetTime,
-					onBeginHold = function()
-						-- upvalues: p1 (ref)
+					holdTime = ConstantsModule.MenuButtonPressHoldTime,
+					resetTime = ConstantsModule.MenuButtonPressResetTime,
+					onBeginHold = function() --[[ Line: 114 ]]
+						-- upvalues: p1 (copy)
 						p1.onPause(true)
 					end,
-					onEndHold = function(p2)
-						-- upvalues: t (ref), p1 (ref), var3 (ref), var5 (ref), var7 (ref), var1 (ref)
+					onEndHold = function(p2) --[[ Line: 117 ]]
+						-- upvalues: Actions (copy), p1 (copy), UseBindingResult2 (copy), UseBindingResult2_1 (copy), UseFocusGuiObjectResult (copy), UseRefResult (copy)
 						if not p2 then
 							p1.onPause(false)
 							
 							return
-						elseif #t == 1 then
+						end
+						if #Actions == 1 then
 							p1.onPause(false)
-							t[1].onActivated()
+							Actions[1].onActivated()
 							
 							return
+						else
+							UseBindingResult2(true)
+							UseBindingResult2_1(Enum.SelectionBehavior.Stop)
+							UseFocusGuiObjectResult(UseRefResult.current)
 						end
-						var3(true)
-						var5(Enum.SelectionBehavior.Stop)
-						var7(var1.current)
 					end
 				}
 			})

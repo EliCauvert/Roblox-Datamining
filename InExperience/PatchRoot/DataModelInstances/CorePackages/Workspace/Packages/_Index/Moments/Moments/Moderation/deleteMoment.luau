@@ -1,26 +1,25 @@
-﻿local parent = script:FindFirstAncestor("Moments").Parent
-local httpModule = require(parent.Http)
-local httpClientModule = require(parent.HttpClient)
-local promiseModule = require(parent.Promise)
-local fFlagMomentsPassFeedItemIdToBackendApis = require(parent.SharedFlags).FFlagMomentsPassFeedItemIdToBackendApis
-local text = httpModule.Url.APIS_URL .. "content-captures-api/v2/moments/"
+﻿local Parent = script:FindFirstAncestor("Moments").Parent
+local HttpClientModule = require(Parent.HttpClient)
+local PromiseModule = require(Parent.Promise)
+local FFlagMomentsPassFeedItemIdToBackendApis = require(Parent.SharedFlags).FFlagMomentsPassFeedItemIdToBackendApis
+local Text = require(Parent.Http).Url.APIS_URL .. "content-captures-api/v2/moments/"
 
-return function(p1, p2, p3)
-	-- upvalues: fFlagMomentsPassFeedItemIdToBackendApis (ref), promiseModule (ref), httpClientModule (ref), text (ref)
-	local var1 = p1
+return function(p1, Network, Text1) --[[ Line: 22 | Named "deleteMoment" ]]
+	-- upvalues: FFlagMomentsPassFeedItemIdToBackendApis (copy), PromiseModule (copy), HttpClientModule (copy), Text (copy)
+	local v1: string = p1
 	
-	if fFlagMomentsPassFeedItemIdToBackendApis then
-		if p3 == nil or p3 == "" then
-			return promiseModule.reject("feedItemId is required to delete a Moment")
+	if FFlagMomentsPassFeedItemIdToBackendApis then
+		if Text1 == nil or Text1 == "" then
+			return PromiseModule.reject("feedItemId is required to delete a Moment")
 		end
-		var1 = "by-feed-item/" .. p2
+		v1 = "by-feed-item/" .. Text1
 	end
-	return httpClientModule.asPromise(httpClientModule.fetch({
+	return HttpClientModule.asPromise(HttpClientModule.fetch({
 		method = "DELETE",
 		analyticsKey = "moments.delete-moment",
-		url = text .. var4,
-		network = p2,
-		decode = function(_)
+		url = Text .. v1,
+		network = Network,
+		decode = function(_) --[[ Line: 36 ]]
 			return { ok = true }
 		end
 	}))

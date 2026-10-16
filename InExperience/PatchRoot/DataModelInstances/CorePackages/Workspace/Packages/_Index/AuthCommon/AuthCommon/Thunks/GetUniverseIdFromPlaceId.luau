@@ -1,12 +1,13 @@
-﻿local url = require(script:FindFirstAncestor("AuthCommon").Parent.Http).Url
+﻿local Url = require(script:FindFirstAncestor("AuthCommon").Parent.Http).Url
 
-return function(p1, p2)
-	-- upvalues: url (ref)
-	return p1(string.format("%suniverses/v1/places/%d/universe", url.APIS_URL, p2), "GET"):andThen(function(p3)
-		-- upvalues: p2 (ref)
-		if p3 and p3.responseBody and p3.responseBody.universeId then
-			return p3.responseBody.universeId
+return function(Callback, p1) --[[ Line: 5 ]]
+	-- upvalues: Url (copy)
+	return Callback(string.format("%suniverses/v1/places/%d/universe", Url.APIS_URL, p1), "GET"):andThen(function(Result) --[[ Line: 8 ]]
+		-- upvalues: p1 (copy)
+		if Result and Result.responseBody and Result.responseBody.universeId then
+			return Result.responseBody.universeId
+		else
+			error("Failed to get universeId from placeId: " .. tostring(p1))
 		end
-		error("Failed to get universeId from placeId: " .. tostring(p2))
 	end)
 end

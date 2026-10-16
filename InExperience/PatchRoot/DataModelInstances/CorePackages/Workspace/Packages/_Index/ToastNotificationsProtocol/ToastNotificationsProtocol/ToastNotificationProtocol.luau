@@ -1,64 +1,67 @@
-﻿local messageBusService = game:GetService("MessageBusService")
-local playersService = game:GetService("Players")
-local parent = script.Parent
-local parent_1 = parent.Parent
-local _ = require(parent.ToastNotificationProtocolTypes)
-local toastNotificationProtocolConstantsModule = require(parent.ToastNotificationProtocolConstants)
-local getPlatformTarget = require(parent_1.Analytics).getPlatformTarget
-local t = {}
-t.__index = t
+﻿local MessageBusService = game:GetService("MessageBusService")
+local Players = game:GetService("Players")
+local Parent = script.Parent
+local _ = require(Parent.ToastNotificationProtocolTypes)
+local ToastNotificationProtocolConstantsModule = require(Parent.ToastNotificationProtocolConstants)
+local GetPlatformTargetFunction = require(Parent.Parent.Analytics).getPlatformTarget
+local ToastNotificationProtocolModule = {}
+ToastNotificationProtocolModule.__index = ToastNotificationProtocolModule
 game:DefineFastFlag("LuaAppInitializeToastNotificationEventParams2", false)
 
-function t.new()
-	-- upvalues: t (ref)
-	return setmetatable({}, t)
+function ToastNotificationProtocolModule.new() --[[ Line: 18 ]]
+	-- upvalues: ToastNotificationProtocolModule (copy)
+	return (setmetatable({}, ToastNotificationProtocolModule))
 end
 
-function t.setupNotifications(_, p1)
-	-- upvalues: getPlatformTarget (ref), playersService (ref), messageBusService (ref), toastNotificationProtocolConstantsModule (ref)
-	if #p1 > 0 then
-		local var1 = nil
-		local var2 = nil
+function ToastNotificationProtocolModule:setupNotifications(Channels) --[[ Line: 23 ]]
+	-- upvalues: GetPlatformTargetFunction (copy), Players (copy), MessageBusService (copy), ToastNotificationProtocolConstantsModule (copy)
+	if #Channels > 0 then
+		local UserId: string? = nil
+		local Platform = nil
 		
 		if game:GetFastFlag("LuaAppInitializeToastNotificationEventParams2") then
-			var2 = getPlatformTarget()
-			var1 = if playersService.LocalPlayer then tostring(playersService.LocalPlayer.UserId) else ""
+			Platform = GetPlatformTargetFunction()
+			UserId = if Players.LocalPlayer then tostring(Players.LocalPlayer.UserId) else ""
 		end
-		messageBusService:Publish(toastNotificationProtocolConstantsModule.MESSAGE_INIT_TOAST_NOTIF, { channels = p1, userId = var1, platform = var2 })
+		MessageBusService:Publish(ToastNotificationProtocolConstantsModule.MESSAGE_INIT_TOAST_NOTIF, {
+			channels = Channels,
+			userId = UserId,
+			platform = Platform
+		})
 	end
 end
 
-function t.updateNotification(_, p1, p2)
-	-- upvalues: messageBusService (ref), toastNotificationProtocolConstantsModule (ref)
-	if p1 and p2 then
-		messageBusService:Publish(toastNotificationProtocolConstantsModule.MESSAGE_UPDATE_TOAST_NOTIF, { notificationId = p1, stateName = p2 })
+function ToastNotificationProtocolModule:updateNotification(NotificationId, StateName) --[[ Line: 39 ]]
+	-- upvalues: MessageBusService (copy), ToastNotificationProtocolConstantsModule (copy)
+	if NotificationId and StateName then
+		MessageBusService:Publish(ToastNotificationProtocolConstantsModule.MESSAGE_UPDATE_TOAST_NOTIF, { notificationId = NotificationId, stateName = StateName })
 	end
 end
 
-function t.voltronBroadcast(_, p1, p2)
-	-- upvalues: messageBusService (ref)
-	if p1 then
-		messageBusService:Publish(p1, p2)
+function ToastNotificationProtocolModule:voltronBroadcast(Mid, p1) --[[ Line: 48 ]]
+	-- upvalues: MessageBusService (copy)
+	if Mid then
+		MessageBusService:Publish(Mid, p1)
 	end
 end
 
-function t.dismissNotification(_, p1)
-	-- upvalues: messageBusService (ref), toastNotificationProtocolConstantsModule (ref)
-	if p1 then
-		messageBusService:Publish(toastNotificationProtocolConstantsModule.MESSAGE_DISMISS_TOAST_NOTIF, { notificationId = p1 })
+function ToastNotificationProtocolModule:dismissNotification(NotificationId) --[[ Line: 54 ]]
+	-- upvalues: MessageBusService (copy), ToastNotificationProtocolConstantsModule (copy)
+	if NotificationId then
+		MessageBusService:Publish(ToastNotificationProtocolConstantsModule.MESSAGE_DISMISS_TOAST_NOTIF, { notificationId = NotificationId })
 	end
 end
 
-function t.listenToDisplayNotification(_, p1)
-	-- upvalues: messageBusService (ref), toastNotificationProtocolConstantsModule (ref)
-	return messageBusService:Subscribe(toastNotificationProtocolConstantsModule.MESSAGE_DISPLAY_TOAST_NOTIF, p1, false, true)
+function ToastNotificationProtocolModule:listenToDisplayNotification(Callback) --[[ Line: 62 ]]
+	-- upvalues: MessageBusService (copy), ToastNotificationProtocolConstantsModule (copy)
+	return MessageBusService:Subscribe(ToastNotificationProtocolConstantsModule.MESSAGE_DISPLAY_TOAST_NOTIF, Callback, false, true)
 end
 
-function t.listenToDismissNotification(_, p1)
-	-- upvalues: messageBusService (ref), toastNotificationProtocolConstantsModule (ref)
-	return messageBusService:Subscribe(toastNotificationProtocolConstantsModule.MESSAGE_DISMISS_TOAST_NOTIF, p1, false, true)
+function ToastNotificationProtocolModule:listenToDismissNotification(Callback) --[[ Line: 66 ]]
+	-- upvalues: MessageBusService (copy), ToastNotificationProtocolConstantsModule (copy)
+	return MessageBusService:Subscribe(ToastNotificationProtocolConstantsModule.MESSAGE_DISMISS_TOAST_NOTIF, Callback, false, true)
 end
 
-t.default = t.new()
+ToastNotificationProtocolModule.default = ToastNotificationProtocolModule.new()
 
-return t
+return ToastNotificationProtocolModule

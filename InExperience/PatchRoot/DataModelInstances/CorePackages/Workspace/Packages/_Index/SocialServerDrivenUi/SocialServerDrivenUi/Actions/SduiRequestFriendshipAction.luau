@@ -1,54 +1,55 @@
-﻿local socialServerDrivenUi = script:FindFirstAncestor("SocialServerDrivenUi")
-local parent = socialServerDrivenUi.Parent
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
-local sduiActionType = sduiCoreSystemModule.SduiActionType
-local friendsStore = require(parent.DataHydration).Friends.FriendsStore
-local setCurrentToastMessage = require(parent.ToastRodux).Actions.SetCurrentToastMessage
-local enums = require(parent.FriendsNetworking).Enums
-local firePlayerFriendAddTelemetryModule = require(socialServerDrivenUi.Analytics.firePlayerFriendAddTelemetry)
-local fFlagSduiSearchPeoplePlayerTileTelemetry = require(parent.SharedFlags).FFlagSduiSearchPeoplePlayerTileTelemetry
-local var1 = enums.FriendshipOriginSourceType.PlayerSearch.rawValue()
+﻿local SocialServerDrivenUi = script:FindFirstAncestor("SocialServerDrivenUi")
+local Parent = SocialServerDrivenUi.Parent
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
+local SduiActionType = SduiCoreSystemModule.SduiActionType
+local FriendsStore = require(Parent.DataHydration).Friends.FriendsStore
+local FriendsStoreChallengeNetworkModule = require(SocialServerDrivenUi.Networking.friendsStoreChallengeNetwork)
+local FFlagEnableFriendsStoreChallengeInterceptor = require(Parent.SharedFlags).FFlagEnableFriendsStoreChallengeInterceptor
+local SetCurrentToastMessageFunction = require(Parent.ToastRodux).Actions.SetCurrentToastMessage
+local FirePlayerFriendAddTelemetryModule = require(SocialServerDrivenUi.Analytics.firePlayerFriendAddTelemetry)
+local FFlagSduiSearchPeoplePlayerTileTelemetry = require(Parent.SharedFlags).FFlagSduiSearchPeoplePlayerTileTelemetry
+local RawValueResult = require(Parent.FriendsNetworking).Enums.FriendshipOriginSourceType.PlayerSearch.rawValue()
 
-return function(p1, p2, p3)
-	-- upvalues: sduiErrorType (ref), sduiActionType (ref), var1 (ref), friendsStore (ref), setCurrentToastMessage (ref), fFlagSduiSearchPeoplePlayerTileTelemetry (ref), firePlayerFriendAddTelemetryModule (ref)
-	local var2 = if p1 then p1.actionParams else nil
+return function(p1, p2, p3) --[[ Line: 27 ]]
+	-- upvalues: SduiErrorType (copy), SduiActionType (copy), RawValueResult (copy), FriendsStore (copy), FFlagEnableFriendsStoreChallengeInterceptor (copy), FriendsStoreChallengeNetworkModule (copy), SetCurrentToastMessageFunction (copy), FFlagSduiSearchPeoplePlayerTileTelemetry (copy), FirePlayerFriendAddTelemetryModule (copy)
+	local ActionParams = p1 and p1.actionParams or nil
 	
-	if var2 == nil then
-		p3.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if ActionParams == nil then
+		p3.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			message = "Missing actionParams",
-			name = sduiActionType.RequestFriendship
+			name = SduiActionType.RequestFriendship
 		}, p3.appPage)
 		
 		return
 	end
-	local targetUserId = var2.targetUserId
+	local TargetUserId = ActionParams.targetUserId
 	
-	if targetUserId == nil or targetUserId == "" then
-		p3.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if TargetUserId == nil or TargetUserId == "" then
+		p3.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			message = "Missing actionParam: targetUserId",
 			propName = "targetUserId",
-			name = sduiActionType.RequestFriendship
+			name = SduiActionType.RequestFriendship
 		}, p3.appPage)
 		
 		return
 	end
-	local source = var2.source
-	friendsStore.get().RequestFriendship(targetUserId, if typeof(source) == "string" and source ~= "" then source else var1):andThen(function()
-		-- upvalues: p3 (ref), setCurrentToastMessage (copy)
-		p3.dependencies.dispatch(setCurrentToastMessage({
+	local Source = ActionParams.source
+	FriendsStore.get().RequestFriendship(TargetUserId, if typeof(Source) == "string" and Source ~= "" then Source else RawValueResult, nil, if FFlagEnableFriendsStoreChallengeInterceptor then FriendsStoreChallengeNetworkModule else nil):andThen(function() --[[ Line: 61 ]]
+		-- upvalues: p3 (copy), SetCurrentToastMessageFunction (upval)
+		p3.dependencies.dispatch(SetCurrentToastMessageFunction({
 			toastMessage = "Feature.Friends.Action.FriendRequestSent",
 			isLocalized = false
 		}))
-	end):catch(function()
-		-- upvalues: p3 (ref), setCurrentToastMessage (copy)
-		p3.dependencies.dispatch(setCurrentToastMessage({
+	end):catch(function() --[[ Line: 67 ]]
+		-- upvalues: p3 (copy), SetCurrentToastMessageFunction (upval)
+		p3.dependencies.dispatch(SetCurrentToastMessageFunction({
 			toastMessage = "Feature.Toast.NetworkingError.SomethingIsWrong",
 			isLocalized = false
 		}))
 	end)
 	
-	if fFlagSduiSearchPeoplePlayerTileTelemetry then
-		firePlayerFriendAddTelemetryModule(targetUserId, p2, p3)
+	if FFlagSduiSearchPeoplePlayerTileTelemetry then
+		FirePlayerFriendAddTelemetryModule(TargetUserId, p2, p3)
 	end
 end

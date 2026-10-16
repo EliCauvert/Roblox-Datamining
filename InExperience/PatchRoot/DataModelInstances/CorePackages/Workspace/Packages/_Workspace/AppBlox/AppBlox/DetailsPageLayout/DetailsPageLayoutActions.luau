@@ -1,39 +1,39 @@
-﻿local parent = script:FindFirstAncestor("AppBlox").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local view = foundationModule.View
-local stateLayerAffordance = foundationModule.Enums.StateLayerAffordance
-local detailsPageLayoutContextModule = require(script.Parent.DetailsPageLayoutContext)
+﻿local Parent = script:FindFirstAncestor("AppBlox").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local StateLayerAffordance = FoundationModule.Enums.StateLayerAffordance
+local DetailsPageLayoutContextModule = require(script.Parent.DetailsPageLayoutContext)
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: reactModule (ref), detailsPageLayoutContextModule (ref), view (ref), stateLayerAffordance (ref)
-	local var1 = reactModule.useContext(detailsPageLayoutContextModule)
-	local setHasActions = var1.setHasActions
-	local setActionBarHeight = var1.setActionBarHeight
-	local testId = var1.testId
-	assert(setHasActions and (setActionBarHeight and testId), "DetailsPageLayout.Actions must be used within DetailsPageLayout.Root")
-	reactModule.useEffect(function()
-		-- upvalues: setHasActions (ref), setActionBarHeight (ref)
-		setHasActions(true)
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 24 | Named "DetailsPageLayoutActions" ]]
+	-- upvalues: ReactModule (copy), DetailsPageLayoutContextModule (copy), View (copy), StateLayerAffordance (copy)
+	local UseContextResult = ReactModule.useContext(DetailsPageLayoutContextModule)
+	local SetHasActionsFunction = UseContextResult.setHasActions
+	local SetActionBarHeightFunction = UseContextResult.setActionBarHeight
+	local TestId = UseContextResult.testId
+	assert(SetHasActionsFunction and (SetActionBarHeightFunction and TestId), "DetailsPageLayout.Actions must be used within DetailsPageLayout.Root")
+	ReactModule.useEffect(function() --[[ Line: 35 ]]
+		-- upvalues: SetHasActionsFunction (copy), SetActionBarHeightFunction (copy)
+		SetHasActionsFunction(true)
 		
-		return function()
-			-- upvalues: setHasActions (copy), setActionBarHeight (copy)
-			setHasActions(false)
-			setActionBarHeight(0)
+		return function() --[[ Line: 37 ]]
+			-- upvalues: SetHasActionsFunction (upval), SetActionBarHeightFunction (upval)
+			SetHasActionsFunction(false)
+			SetActionBarHeightFunction(0)
 		end
 	end, {})
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "row size-full-0 auto-y bg-surface-0 stroke-muted stroke-standard position-bottom-left anchor-bottom-left align-y-center gap-small align-x-center padding-top-large padding-bottom-medium padding-x-large",
 		ZIndex = 2,
-		onAbsoluteSizeChanged = function(value)
-			-- upvalues: setActionBarHeight (ref)
-			setActionBarHeight(value.AbsoluteSize.Y)
+		onAbsoluteSizeChanged = function(Frame) --[[ Line: 45 ]]
+			-- upvalues: SetActionBarHeightFunction (copy)
+			SetActionBarHeightFunction(Frame.AbsoluteSize.Y)
 		end,
-		testId = if testId then `{testId}--actions` else nil,
-		onActivated = function() end,
+		testId = if TestId then `{TestId}--actions` else nil,
+		onActivated = function() --[[ Line: 50 ]] end,
 		selection = { Selectable = false },
-		stateLayer = { affordance = stateLayerAffordance.None },
-		ref = p2
+		stateLayer = { affordance = StateLayerAffordance.None },
+		ref = Ref
 	}, p1.children)
 end))

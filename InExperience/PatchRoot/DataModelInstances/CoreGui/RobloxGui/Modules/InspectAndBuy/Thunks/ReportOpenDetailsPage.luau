@@ -1,29 +1,27 @@
-﻿local parent = script.Parent.Parent
-local thunkModule = require(parent.Thunk)
-local analyticsModule = require(parent.Services.Analytics)
-local utilityFunctionsModule = require(parent.UtilityFunctions)
-local sendCounterModule = require(parent.Thunks.SendCounter)
-local constantsModule = require(parent.Constants)
-local list = { analyticsModule }
+﻿local Parent = script.Parent.Parent
+local ThunkModule = require(Parent.Thunk)
+local AnalyticsModule = require(Parent.Services.Analytics)
+local UtilityFunctionsModule = require(Parent.UtilityFunctions)
+local SendCounterModule = require(Parent.Thunks.SendCounter)
+local ConstantsModule = require(Parent.Constants)
+local list = { AnalyticsModule }
 
-return function(p1)
-	-- upvalues: thunkModule (ref), list (ref), analyticsModule (ref), utilityFunctionsModule (ref), sendCounterModule (ref), constantsModule (ref)
-	return thunkModule.new(script.Name, list, function(p2, p3)
-		-- upvalues: analyticsModule (copy), p1 (ref), utilityFunctionsModule (copy), sendCounterModule (copy), constantsModule (copy)
-		local var1, assetId
-		local var2 = p3[analyticsModule]
-		local var3 = p1 and p1.parentBundleId ~= nil
-		local _ = nil
-		local _ = nil
+return function(p1) --[[ Line: 18 | Named "ReportOpenDetailsPage" ]]
+	-- upvalues: ThunkModule (copy), list (copy), AnalyticsModule (copy), UtilityFunctionsModule (copy), SendCounterModule (copy), ConstantsModule (copy)
+	return ThunkModule.new(script.Name, list, function(p2, p3) --[[ Line: 19 ]]
+		-- upvalues: AnalyticsModule (upval), p1 (copy), UtilityFunctionsModule (upval), SendCounterModule (upval), ConstantsModule (upval)
+		local v1 = p3[AnalyticsModule]
+		local v2 = nil
+		local BundleId = nil
 		
-		if var3 then
-			var1 = "Bundle"
-			assetId = utilityFunctionsModule.getBundleId(p1)
+		if p1 and p1.parentBundleId ~= nil then
+			v2 = "Bundle"
+			BundleId = UtilityFunctionsModule.getBundleId(p1)
 		else
-			var1 = "Asset"
-			assetId = p1.assetId
+			v2 = "Asset"
+			BundleId = p1.assetId
 		end
-		var2.reportItemDetailPageOpened(var1, assetId)
-		p2:dispatch(sendCounterModule(constantsModule.Counters.ItemDetailPageOpened))
+		v1.reportItemDetailPageOpened(v2, BundleId)
+		p2:dispatch(SendCounterModule(ConstantsModule.Counters.ItemDetailPageOpened))
 	end)
 end

@@ -1,67 +1,70 @@
-﻿local parent = script:FindFirstAncestor("ChatUIPrimitives").Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local createNextOrder = require(parent.ReactUtils).createNextOrder
+﻿local Parent = script:FindFirstAncestor("ChatUIPrimitives").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local CreateNextOrderFunction = require(Parent.ReactUtils).createNextOrder
 
-return reactModule.memo(function(p1)
-	-- upvalues: foundationModule (ref), reactModule (ref), createNextOrder (ref)
-	local var1 = foundationModule.Hooks.useTokens()
-	local var2 = #p1.tabs > 1
-	local t = {}
+return ReactModule.memo(function(Frame) --[[ Line: 34 | Named "ExpressionTabBar" ]]
+	-- upvalues: FoundationModule (copy), ReactModule (copy), CreateNextOrderFunction (copy)
+	local UseTokensResult = FoundationModule.Hooks.useTokens()
+	local v1 = #Frame.tabs > 1
+	local Elements = {}
 	
-	for i, v in p1.tabs do
-		local var3 = v.id == p1.activeTabId
-		local var4 = var3 or not var2
-		t["Tab_" .. v.id] = reactModule.createElement(foundationModule.View, {
+	for LayoutOrder, tab in Frame.tabs do
+		local IsIdMatch = tab.id == Frame.activeTabId
+		local IsIdMatch1: boolean = IsIdMatch or not v1
+		Elements["Tab_" .. tab.id] = ReactModule.createElement(FoundationModule.View, {
 			tag = "auto-xy padding-x-small",
-			LayoutOrder = i,
-			testId = "expressionTab_" .. v.id,
+			LayoutOrder = LayoutOrder,
+			testId = "expressionTab_" .. tab.id,
 			stateLayer = {
-				affordance = foundationModule.Enums.StateLayerAffordance.None
+				affordance = FoundationModule.Enums.StateLayerAffordance.None
 			},
-			onActivated = function()
-				-- upvalues: p1 (ref), v (ref)
-				p1.onTabActivated(v.id)
+			onActivated = function() --[[ Line: 49 ]]
+				-- upvalues: Frame (copy), tab (copy)
+				Frame.onTabActivated(tab.id)
 			end,
-			selection = if p1.focusNavEnabled and not var2 then { Selectable = false } else nil
+			selection = if Frame.focusNavEnabled and not v1 then { Selectable = false } else nil
 		}, {
-			Label = reactModule.createElement(foundationModule.Text, {
-				Text = v.text,
+			Label = ReactModule.createElement(FoundationModule.Text, {
+				Text = tab.text,
 				tag = {
 					["auto-xy text-label-medium"] = true,
-					["content-emphasis"] = var4,
-					["content-muted"] = not var4
+					["content-emphasis"] = IsIdMatch1,
+					["content-muted"] = not IsIdMatch1
 				}
 			}),
-			Indicator = if var3 and var2 then reactModule.createElement(foundationModule.View, {
+			Indicator = if IsIdMatch and v1 then ReactModule.createElement(FoundationModule.View, {
 				testId = "presetTabIndicator",
 				tag = "anchor-bottom-center",
 				Position = UDim2.new(0.5, 0, 1, 0),
 				Size = UDim2.new(1, 0, 0, 2),
 				backgroundStyle = {
 					Transparency = 0,
-					Color3 = var1.Color.Content.Emphasis.Color3
+					Color3 = UseTokensResult.Color.Content.Emphasis.Color3
 				}
 			}) else nil
 		})
 	end
-	local var5 = createNextOrder()
+	local NextOrder = CreateNextOrderFunction()
 	
-	return reactModule.createElement(foundationModule.View, {
+	return ReactModule.createElement(FoundationModule.View, {
 		tag = "row align-y-center gap-small size-full-0 auto-y padding-small",
-		LayoutOrder = p1.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		Tabs = reactModule.createElement(foundationModule.View, { tag = "row gap-medium auto-xy", LayoutOrder = var5() }, t),
-		Spacer = reactModule.createElement(foundationModule.View, { tag = "grow auto-y", LayoutOrder = var5() }),
-		Keyboard = if p1.showKeyboardButton ~= false then nil else reactModule.createElement(foundationModule.IconButton, {
+		Tabs = ReactModule.createElement(FoundationModule.View, {
+			tag = "row gap-medium auto-xy",
+			LayoutOrder = NextOrder()
+		}, Elements),
+		Spacer = ReactModule.createElement(FoundationModule.View, { tag = "grow auto-y", LayoutOrder = NextOrder() }),
+		Keyboard = if Frame.showKeyboardButton == false then nil else ReactModule.createElement(FoundationModule.IconButton, {
 			testId = "expressionTrayKeyboardButton",
 			isCircular = true,
 			isDisabled = false,
-			LayoutOrder = var5(),
+			LayoutOrder = NextOrder(),
 			icon = { name = "keyboard", variant = "Regular" },
-			variant = foundationModule.Enums.ButtonVariant.Utility,
-			size = foundationModule.Enums.InputSize.Small,
-			onActivated = p1.onKeyboardActivated
+			variant = FoundationModule.Enums.ButtonVariant.Utility,
+			size = FoundationModule.Enums.InputSize.Small,
+			onActivated = Frame.onKeyboardActivated
 		})
 	})
 end)

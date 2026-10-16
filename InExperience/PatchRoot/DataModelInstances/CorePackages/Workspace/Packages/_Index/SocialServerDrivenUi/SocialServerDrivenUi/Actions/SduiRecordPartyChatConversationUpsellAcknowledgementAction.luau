@@ -1,87 +1,87 @@
-﻿local socialServerDrivenUi = script:FindFirstAncestor("SocialServerDrivenUi")
-local parent = socialServerDrivenUi.Parent
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
-local sduiActionType = sduiCoreSystemModule.SduiActionType
-local recordModalSequenceResponse = require(parent.AppChatNetworking).http.RecordModalSequenceResponse
-local getSduiApiStore = require(parent.SduiSharedUtilities).getSduiApiStore
-local recordedModalActionsModule = require(socialServerDrivenUi.Common.recordedModalActions)
+﻿local SocialServerDrivenUi = script:FindFirstAncestor("SocialServerDrivenUi")
+local Parent = SocialServerDrivenUi.Parent
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
+local SduiActionType = SduiCoreSystemModule.SduiActionType
+local RecordModalSequenceResponseFunction = require(Parent.AppChatNetworking).http.RecordModalSequenceResponse
+local GetSduiApiStoreFunction = require(Parent.SduiSharedUtilities).getSduiApiStore
+local RecordedModalActionsModule = require(SocialServerDrivenUi.Common.recordedModalActions)
 
-local function _(p1)
+local function _(p1) --[[ Line: 17 | Named "orNil" ]]
 	return if typeof(p1) == "string" and p1 ~= "" then p1 else nil
 end
 
-return function(p1, _, p2)
-	-- upvalues: sduiErrorType (ref), sduiActionType (ref), recordedModalActionsModule (ref), recordModalSequenceResponse (ref), getSduiApiStore (ref)
-	local var1 = if p1 then p1.actionParams else nil
+return function(p1, _, p2) --[[ Line: 21 | Named "SduiRecordPartyChatConversationUpsellAcknowledgementAction" ]]
+	-- upvalues: SduiErrorType (copy), SduiActionType (copy), RecordedModalActionsModule (copy), RecordModalSequenceResponseFunction (copy), GetSduiApiStoreFunction (copy)
+	local ActionParams = p1 and p1.actionParams or nil
 	
-	if var1 == nil then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if ActionParams == nil then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			message = "Missing actionParams",
-			name = sduiActionType.RecordPartyChatConversationUpsellAcknowledgement
+			name = SduiActionType.RecordPartyChatConversationUpsellAcknowledgement
 		}, p2.appPage)
 		
 		return
 	end
-	local modalAction = var1.modalAction
-	local var2 = recordedModalActionsModule.toRecordedModalAction(modalAction)
+	local ModalAction = ActionParams.modalAction
+	local RecordedModalAction = RecordedModalActionsModule.toRecordedModalAction(ModalAction)
 	
-	if var2 == nil then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if RecordedModalAction == nil then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			propName = "modalAction",
-			name = sduiActionType.RecordPartyChatConversationUpsellAcknowledgement,
-			message = `Invalid or missing modalAction: {tostring(modalAction)}`
+			name = SduiActionType.RecordPartyChatConversationUpsellAcknowledgement,
+			message = `Invalid or missing modalAction: {tostring(ModalAction)}`
 		}, p2.appPage)
 		
 		return
 	end
-	local modalSequence = var1.modalSequence
-	local var3 = if typeof(modalSequence) == "string" and modalSequence ~= "" then modalSequence else nil
+	local ModalSequence = ActionParams.modalSequence
+	local ModalSequence1 = if typeof(ModalSequence) == "string" and ModalSequence ~= "" then ModalSequence else nil
 	
-	if var3 == nil then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if ModalSequence1 == nil then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			message = "Missing actionParam: modalSequence",
 			propName = "modalSequence",
-			name = sduiActionType.RecordPartyChatConversationUpsellAcknowledgement
+			name = SduiActionType.RecordPartyChatConversationUpsellAcknowledgement
 		}, p2.appPage)
 		
 		return
 	end
-	local modalVariant = var1.modalVariant
-	modalSequence = if typeof(modalVariant) == "string" and modalVariant ~= "" then modalVariant else nil
-	local conversationId = var1.conversationId
-	modalVariant = if typeof(conversationId) == "string" and conversationId ~= "" then conversationId else nil
-	local friendId = var1.friendId
-	conversationId = if typeof(friendId) == "string" and friendId ~= "" then friendId else nil
+	local ModalVariant = ActionParams.modalVariant
+	local ModalVariant1 = if typeof(ModalVariant) == "string" and ModalVariant ~= "" then ModalVariant else nil
+	local ConversationId = ActionParams.conversationId
+	local ConversationId1 = if typeof(ConversationId) == "string" and ConversationId ~= "" then ConversationId else nil
+	local FriendId = ActionParams.friendId
+	local FriendId1 = if typeof(FriendId) == "string" and FriendId ~= "" then FriendId else nil
 	
-	if modalVariant == nil and conversationId == nil then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if ConversationId1 == nil and FriendId1 == nil then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			message = "Missing actionParam: one of conversationId or friendId is required",
 			propName = "conversationId",
-			name = sduiActionType.RecordPartyChatConversationUpsellAcknowledgement
+			name = SduiActionType.RecordPartyChatConversationUpsellAcknowledgement
 		}, p2.appPage)
 		
 		return
 	end
-	recordModalSequenceResponse(nil, {
-		actionType = var2,
-		modalSequence = var3,
-		modalVariant = modalSequence,
-		conversationId = modalVariant,
-		friendId = if modalVariant ~= nil then conversationId else nil
-	}):catch(function(p3)
-		-- upvalues: p2 (ref), sduiErrorType (copy), sduiActionType (copy)
-		p2.dependencies.logger.reportError(sduiErrorType.ActionNetworkRequestFailed, {
-			name = sduiActionType.RecordPartyChatConversationUpsellAcknowledgement,
-			message = `RecordModalSequenceResponse failed: {tostring(p3)}`
+	RecordModalSequenceResponseFunction(nil, {
+		actionType = RecordedModalAction,
+		modalSequence = ModalSequence1,
+		modalVariant = ModalVariant1,
+		conversationId = ConversationId1,
+		friendId = if ConversationId1 == nil then FriendId1 else nil
+	}):catch(function(Err) --[[ Line: 77 ]]
+		-- upvalues: p2 (copy), SduiErrorType (upval), SduiActionType (upval)
+		p2.dependencies.logger.reportError(SduiErrorType.ActionNetworkRequestFailed, {
+			name = SduiActionType.RecordPartyChatConversationUpsellAcknowledgement,
+			message = `RecordModalSequenceResponse failed: {tostring(Err)}`
 		}, p2.appPage)
 	end)
 	
-	if modalAction == recordedModalActionsModule.ModalAction.Close and p2.configKey ~= nil then
-		local clearConfigEntries = getSduiApiStore().clearConfigEntries
+	if ModalAction == RecordedModalActionsModule.ModalAction.Close and p2.configKey ~= nil then
+		local ClearConfigEntriesFunction: (any) -> () = GetSduiApiStoreFunction().clearConfigEntries
 		
-		if clearConfigEntries then
-			clearConfigEntries(p2.configKey)
+		if ClearConfigEntriesFunction then
+			ClearConfigEntriesFunction(p2.configKey)
 		end
 	end
 end

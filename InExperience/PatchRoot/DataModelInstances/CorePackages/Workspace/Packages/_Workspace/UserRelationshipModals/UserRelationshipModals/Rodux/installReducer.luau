@@ -1,8 +1,8 @@
-﻿local userRelationshipModals = script:FindFirstAncestor("UserRelationshipModals")
-local roduxModule = require(userRelationshipModals.Parent.Rodux)
-local myRoduxNetworkingModule = require(userRelationshipModals.Networking.myRoduxNetworking)
+﻿local UserRelationshipModals = script:FindFirstAncestor("UserRelationshipModals")
+local RoduxModule = require(UserRelationshipModals.Parent.Rodux)
+local MyRoduxNetworkingModule = require(UserRelationshipModals.Networking.myRoduxNetworking)
 
-return function()
-	-- upvalues: roduxModule (ref), myRoduxNetworkingModule (ref)
-	return roduxModule.combineReducers({ NetworkStatus = myRoduxNetworkingModule.installReducer() })
+return function() --[[ Line: 7 ]]
+	-- upvalues: RoduxModule (copy), MyRoduxNetworkingModule (copy)
+	return RoduxModule.combineReducers({ NetworkStatus = MyRoduxNetworkingModule.installReducer() })
 end

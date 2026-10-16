@@ -1,90 +1,89 @@
-﻿local momentsCreationFlow = script:FindFirstAncestor("MomentsCreationFlow")
-local playersService = game:GetService("Players")
-local reactModule = require(momentsCreationFlow.Parent.React)
-local useEffect = reactModule.useEffect
-local constantsModule = require(momentsCreationFlow.Constants)
-local localPlayer = playersService.LocalPlayer
-local segmentSelectorWidth = constantsModule.AudioWaveform.SegmentSelectorWidth
-local waveformWidth = constantsModule.AudioWaveform.WaveformWidth
-local waveformPadding = constantsModule.AudioWaveform.WaveformPadding
+﻿local MomentsCreationFlow = script:FindFirstAncestor("MomentsCreationFlow")
+local ReactModule = require(MomentsCreationFlow.Parent.React)
+local UseEffectFunction = ReactModule.useEffect
+local ConstantsModule = require(MomentsCreationFlow.Constants)
+local LocalPlayer = game:GetService("Players").LocalPlayer
+local SegmentSelectorWidth = ConstantsModule.AudioWaveform.SegmentSelectorWidth
+local WaveformWidth = ConstantsModule.AudioWaveform.WaveformWidth
+local WaveformPadding = ConstantsModule.AudioWaveform.WaveformPadding
 
-local function _(value)
-	return `rbxassetid://{value}`
+local function _(p1): string --[[ Line: 18 | Named "assetIdAsContent" ]]
+	return `rbxassetid://{p1}`
 end
 
-local function normalizeWaveform(p1)
-	local var1 = 0
-	local t = {}
+local function normalizeWaveform(WaveformAsync) --[[ Line: 22 ]]
+	local Largest = 0
+	local List = {}
 	
-	for i, v in p1 do
-		local maxValue = math.max(0, v)
-		table.insert(t, maxValue)
-		var1 = math.max(var1, maxValue)
+	for _, value in WaveformAsync do
+		local Largest1 = math.max(0, value)
+		table.insert(List, Largest1)
+		Largest = math.max(Largest, Largest1)
 	end
-	if var1 == 0 then
-		return t
+	if Largest == 0 then
+		return List
 	end
-	local t_1 = {}
+	local List1 = {}
 	
-	for i_1, v_1 in t do
-		table.insert(t_1, v_1 / var1)
+	for _, value1 in List do
+		table.insert(List1, value1 / Largest)
 	end
-	return t_1
+	return List1
 end
 
-return function(p2, p3)
-	-- upvalues: reactModule (ref), segmentSelectorWidth (ref), waveformWidth (ref), waveformPadding (ref), useEffect (ref), localPlayer (ref), normalizeWaveform (ref)
-	local var2, var3 = reactModule.useState({})
-	local var4 = reactModule.useRef(nil)
-	local var5 = reactModule.useMemo(function()
-		-- upvalues: segmentSelectorWidth (copy), waveformWidth (copy), waveformPadding (copy), p3 (ref)
-		return segmentSelectorWidth / (waveformWidth + waveformPadding) / p3
-	end, { p3 })
-	local var6 = reactModule.useMemo(function()
-		-- upvalues: p2 (ref)
-		return `rbxassetid://{p2}`
+return function(p1, p2) --[[ Line: 47 | Named "useAudioWaveform" ]]
+	-- upvalues: ReactModule (copy), SegmentSelectorWidth (copy), WaveformWidth (copy), WaveformPadding (copy), UseEffectFunction (copy), LocalPlayer (copy), normalizeWaveform (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState({})
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 51 ]]
+		-- upvalues: SegmentSelectorWidth (upval), WaveformWidth (upval), WaveformPadding (upval), p2 (copy)
+		return SegmentSelectorWidth / (WaveformWidth + WaveformPadding) / p2
 	end, { p2 })
-	useEffect(function()
-		-- upvalues: var6 (ref), var4 (ref), localPlayer (copy)
-		local audioWaveform = Instance.new("Folder")
-		audioWaveform.Name = "AudioWaveform"
-		local audioPlayer = Instance.new("AudioPlayer")
-		audioPlayer.Asset = var6
-		audioPlayer.Parent = audioWaveform
-		var4.current = audioPlayer
-		audioWaveform.Parent = localPlayer:WaitForChild("PlayerGui")
+	local UseMemoResult1 = ReactModule.useMemo(function(): string --[[ Line: 55 ]]
+		-- upvalues: p1 (copy)
+		return `rbxassetid://{p1}`
+	end, { p1 })
+	UseEffectFunction(function() --[[ Line: 59 ]]
+		-- upvalues: UseMemoResult1 (copy), UseRefResult (copy), LocalPlayer (upval)
+		local AudioWaveform = Instance.new("Folder")
+		AudioWaveform.Name = "AudioWaveform"
+		local AudioPlayer = Instance.new("AudioPlayer")
+		AudioPlayer.Asset = UseMemoResult1
+		AudioPlayer.Parent = AudioWaveform
+		UseRefResult.current = AudioPlayer
+		AudioWaveform.Parent = LocalPlayer:WaitForChild("PlayerGui")
 		
-		return function()
-			-- upvalues: audioWaveform (ref)
-			audioWaveform:Destroy()
+		return function() --[[ Line: 70 ]]
+			-- upvalues: AudioWaveform (copy)
+			AudioWaveform:Destroy()
 		end
-	end, { p2, p3 })
-	local var7 = reactModule.useCallback(function()
-		-- upvalues: var4 (ref), var5 (ref), var3 (ref), normalizeWaveform (copy)
-		local current = var4.current
+	end, { p1, p2 })
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 78 ]]
+		-- upvalues: UseRefResult (copy), UseMemoResult (copy), UseStateResult2 (copy), normalizeWaveform (upval)
+		local Current = UseRefResult.current
 		
-		if current and current.IsReady then
-			task.spawn(function()
-				-- upvalues: current (ref), var5 (copy), var3 (copy), normalizeWaveform (copy)
-				var3(normalizeWaveform(current:GetWaveformAsync(NumberRange.new(0, current.TimeLength), var5 * current.TimeLength)))
+		if Current and Current.IsReady then
+			task.spawn(function() --[[ Line: 82 ]]
+				-- upvalues: Current (copy), UseMemoResult (upval), UseStateResult2 (upval), normalizeWaveform (upval)
+				UseStateResult2((normalizeWaveform((Current:GetWaveformAsync(NumberRange.new(0, Current.TimeLength), UseMemoResult * Current.TimeLength)))))
 			end)
 		end
 	end, {})
-	useEffect(function()
-		-- upvalues: var4 (ref), var7 (ref)
-		local current = var4.current
-		local t = {}
+	UseEffectFunction(function() --[[ Line: 92 ]]
+		-- upvalues: UseRefResult (copy), UseResult (copy)
+		local Current = UseRefResult.current
+		local List = {}
 		
-		if current then
-			table.insert(t, current:GetPropertyChangedSignal("IsReady"):Connect(var7))
+		if Current then
+			table.insert(List, Current:GetPropertyChangedSignal("IsReady"):Connect(UseResult))
 		end
-		return function()
-			-- upvalues: t (ref)
-			for i, v in t do
-				v:Disconnect()
+		return function() --[[ Line: 99 ]]
+			-- upvalues: List (copy)
+			for _, Connection in List do
+				Connection:Disconnect()
 			end
 		end
 	end, {})
 	
-	return var2
+	return UseStateResult
 end

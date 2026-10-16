@@ -1,130 +1,130 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local generateStringId = require(parent.AppCommonLib).GenerateStringId
-local orderedMap = require(parent.AppCommonLib).OrderedMap
-local constantsModule = require(appChat.Constants)
-local dateTime = require(parent.Time).DateTime
-local appChatNetworkingModule = require(parent.AppChatNetworking)
-local playersService = game:GetService("Players")
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local GenerateStringIdFunction = require(Parent.AppCommonLib).GenerateStringId
+local OrderedMap = require(Parent.AppCommonLib).OrderedMap
+local ConstantsModule = require(AppChat.Constants)
+local _DateTime = require(Parent.Time).DateTime
+local AppChatNetworkingModule = require(Parent.AppChatNetworking)
+local Players = game:GetService("Players")
 
-local function getMessageId(p1)
+local function getMessageId(p1) --[[ Line: 13 ]]
 	return p1.id
 end
 
-local function messageSortPredicate(p1, p2)
+local function messageSortPredicate(p1, p2): boolean --[[ Line: 17 ]]
 	return p1.sent:GetUnixTimestamp() < p2.sent:GetUnixTimestamp()
 end
 
-local function sendingMessageSortPredicate(p1, p2)
+local function sendingMessageSortPredicate(p1, p2): boolean --[[ Line: 24 ]]
 	return p1.order < p2.order
 end
 
-local t = {
+local ConversationModule = {
 	Type = {
 		MULTI_USER_CONVERSATION = "MultiUserConversation",
 		ONE_TO_ONE_CONVERSATION = "OneToOneConversation"
 	},
-	OsaAcknowledgementStatus = appChatNetworkingModule.Constants.OsaAcknowledgementStatusResponse,
-	UserOptedIntoChatMessagesStatus = appChatNetworkingModule.Constants.UserOptedIntoChatMessagesStatusResponse
+	OsaAcknowledgementStatus = AppChatNetworkingModule.Constants.OsaAcknowledgementStatusResponse,
+	UserOptedIntoChatMessagesStatus = AppChatNetworkingModule.Constants.UserOptedIntoChatMessagesStatusResponse
 }
 
-function t.IdForFakeOneOnOne(p1)
-	-- upvalues: t (ref)
-	local ONE_TO_ONE_CONVERSATION = t.Type.ONE_TO_ONE_CONVERSATION
-	table.sort(p1)
+function ConversationModule.IdForFakeOneOnOne(List) --[[ Line: 38 ]]
+	-- upvalues: ConversationModule (copy)
+	local ONETOONECONVERSATION = ConversationModule.Type.ONE_TO_ONE_CONVERSATION
+	table.sort(List)
 	
-	for i, v in ipairs(p1) do
-		ONE_TO_ONE_CONVERSATION ..= "-" .. tostring(v)
+	for _, value in ipairs(List) do
+		ONETOONECONVERSATION ..= "-" .. tostring(value)
 	end
-	return ONE_TO_ONE_CONVERSATION
+	return ONETOONECONVERSATION
 end
 
-function t.new()
+function ConversationModule.new() --[[ Line: 50 ]]
 	return {}
 end
 
-function t.fromUser(p2)
-	-- upvalues: t (ref), orderedMap (ref), getMessageId (ref), messageSortPredicate (ref), sendingMessageSortPredicate (ref), generateStringId (ref), playersService (ref), constantsModule (ref)
-	local var1 = t.new()
-	var1.messages = orderedMap.new(getMessageId, messageSortPredicate)
-	var1.sendingMessages = orderedMap.new(getMessageId, sendingMessageSortPredicate)
-	var1.clientId = generateStringId()
-	var1.initiator = nil
-	var1.hasUnreadMessages = false
-	var1.conversationType = t.Type.ONE_TO_ONE_CONVERSATION
-	var1.participants = { tostring(playersService.LocalPlayer.UserId), p2.id }
-	var1.usersTyping = {}
-	var1.isUserLeaving = false
-	var1.fetchingOlderMessages = false
-	var1.fetchedOldestMessage = false
-	var1.serverState = constantsModule.ServerState.NONE
-	var1.id = t.IdForFakeOneOnOne(var1.participants)
-	var1.lastUpdated = nil
-	var1.isDefaultTitle = true
-	var1.title = p2.displayName or p2.name
+function ConversationModule.fromUser(p1) --[[ Line: 56 ]]
+	-- upvalues: ConversationModule (copy), OrderedMap (copy), getMessageId (copy), messageSortPredicate (copy), sendingMessageSortPredicate (copy), GenerateStringIdFunction (copy), Players (copy), ConstantsModule (copy)
+	local NewConversation = ConversationModule.new()
+	NewConversation.messages = OrderedMap.new(getMessageId, messageSortPredicate)
+	NewConversation.sendingMessages = OrderedMap.new(getMessageId, sendingMessageSortPredicate)
+	NewConversation.clientId = GenerateStringIdFunction()
+	NewConversation.initiator = nil
+	NewConversation.hasUnreadMessages = false
+	NewConversation.conversationType = ConversationModule.Type.ONE_TO_ONE_CONVERSATION
+	NewConversation.participants = { tostring(Players.LocalPlayer.UserId), p1.id }
+	NewConversation.usersTyping = {}
+	NewConversation.isUserLeaving = false
+	NewConversation.fetchingOlderMessages = false
+	NewConversation.fetchedOldestMessage = false
+	NewConversation.serverState = ConstantsModule.ServerState.NONE
+	NewConversation.id = ConversationModule.IdForFakeOneOnOne(NewConversation.participants)
+	NewConversation.lastUpdated = nil
+	NewConversation.isDefaultTitle = true
+	NewConversation.title = p1.displayName or p1.name
 	
-	return var1
+	return NewConversation
 end
 
-function t.empty(p2)
-	-- upvalues: t (ref), orderedMap (ref), getMessageId (ref), messageSortPredicate (ref), sendingMessageSortPredicate (ref), constantsModule (ref), dateTime (ref)
-	local var1 = t.new()
-	var1.id = "-1"
-	var1.messages = orderedMap.new(getMessageId, messageSortPredicate)
-	var1.sendingMessages = orderedMap.new(getMessageId, sendingMessageSortPredicate)
-	var1.title = ""
-	var1.initiator = "0"
-	var1.hasUnreadMessages = false
-	var1.conversationType = t.Type.MULTI_USER_CONVERSATION
-	var1.participants = {}
-	var1.usersTyping = {}
-	var1.isUserLeaving = false
-	var1.fetchingOlderMessages = false
-	var1.serverState = constantsModule.ServerState.NONE
-	var1.pinnedGame = {}
-	var1.lastUpdated = dateTime.now()
-	var1.isDefaultTitle = true
-	var1.osaAcknowledgementStatus = t.OsaAcknowledgementStatus.NotApplicable
-	var1.userOptedIntoChatMessages = t.UserOptedIntoChatMessagesStatus.NotApplicable
+function ConversationModule.empty(List) --[[ Line: 82 ]]
+	-- upvalues: ConversationModule (copy), OrderedMap (copy), getMessageId (copy), messageSortPredicate (copy), sendingMessageSortPredicate (copy), ConstantsModule (copy), _DateTime (copy)
+	local NewConversation = ConversationModule.new()
+	NewConversation.id = "-1"
+	NewConversation.messages = OrderedMap.new(getMessageId, messageSortPredicate)
+	NewConversation.sendingMessages = OrderedMap.new(getMessageId, sendingMessageSortPredicate)
+	NewConversation.title = ""
+	NewConversation.initiator = "0"
+	NewConversation.hasUnreadMessages = false
+	NewConversation.conversationType = ConversationModule.Type.MULTI_USER_CONVERSATION
+	NewConversation.participants = {}
+	NewConversation.usersTyping = {}
+	NewConversation.isUserLeaving = false
+	NewConversation.fetchingOlderMessages = false
+	NewConversation.serverState = ConstantsModule.ServerState.NONE
+	NewConversation.pinnedGame = {}
+	NewConversation.lastUpdated = _DateTime.now()
+	NewConversation.isDefaultTitle = true
+	NewConversation.osaAcknowledgementStatus = ConversationModule.OsaAcknowledgementStatus.NotApplicable
+	NewConversation.userOptedIntoChatMessages = ConversationModule.UserOptedIntoChatMessagesStatus.NotApplicable
 	
-	if p2 ~= nil then
-		for i, v in pairs(p2) do
-			var1[i] = v
+	if List ~= nil then
+		for i, value in pairs(List) do
+			NewConversation[i] = value
 		end
 	end
-	return var1
+	return NewConversation
 end
 
-function t.fromWeb(p3, p4)
-	-- upvalues: t (ref), orderedMap (ref), getMessageId (ref), messageSortPredicate (ref), sendingMessageSortPredicate (ref), generateStringId (ref), constantsModule (ref), dateTime (ref)
-	local var2 = t.new()
-	var2.messages = orderedMap.new(getMessageId, messageSortPredicate)
-	var2.sendingMessages = orderedMap.new(getMessageId, sendingMessageSortPredicate)
-	var2.id = tostring(p3.id)
-	var2.clientId = p4 or generateStringId()
-	var2.title = p3.title
-	var2.initiator = tostring(p3.initiator.targetId)
-	var2.hasUnreadMessages = p3.hasUnreadMessages
-	var2.conversationType = p3.conversationType
-	var2.participants = {}
-	var2.usersTyping = {}
-	var2.isUserLeaving = false
-	var2.fetchingOlderMessages = false
-	var2.serverState = constantsModule.ServerState.CREATED
-	var2.pinnedGame = {}
+function ConversationModule.fromWeb(p1, p2) --[[ Line: 116 ]]
+	-- upvalues: ConversationModule (copy), OrderedMap (copy), getMessageId (copy), messageSortPredicate (copy), sendingMessageSortPredicate (copy), GenerateStringIdFunction (copy), ConstantsModule (copy), _DateTime (copy)
+	local NewConversation = ConversationModule.new()
+	NewConversation.messages = OrderedMap.new(getMessageId, messageSortPredicate)
+	NewConversation.sendingMessages = OrderedMap.new(getMessageId, sendingMessageSortPredicate)
+	NewConversation.id = tostring(p1.id)
+	NewConversation.clientId = p2 or GenerateStringIdFunction()
+	NewConversation.title = p1.title
+	NewConversation.initiator = tostring(p1.initiator.targetId)
+	NewConversation.hasUnreadMessages = p1.hasUnreadMessages
+	NewConversation.conversationType = p1.conversationType
+	NewConversation.participants = {}
+	NewConversation.usersTyping = {}
+	NewConversation.isUserLeaving = false
+	NewConversation.fetchingOlderMessages = false
+	NewConversation.serverState = ConstantsModule.ServerState.CREATED
+	NewConversation.pinnedGame = {}
 	
-	if p3.conversationUniverse ~= nil then
-		var2.pinnedGame.universeId = tostring(p3.conversationUniverse.universeId)
-		var2.pinnedGame.rootPlaceId = tostring(p3.conversationUniverse.rootPlaceId)
+	if p1.conversationUniverse ~= nil then
+		NewConversation.pinnedGame.universeId = tostring(p1.conversationUniverse.universeId)
+		NewConversation.pinnedGame.rootPlaceId = tostring(p1.conversationUniverse.rootPlaceId)
 	end
-	var2.lastUpdated = dateTime.fromIsoDate(p3.lastUpdated)
-	var2.titleForViewer = p3.conversationTitle.titleForViewer
-	var2.isDefaultTitle = p3.conversationTitle.isDefaultTitle
+	NewConversation.lastUpdated = _DateTime.fromIsoDate(p1.lastUpdated)
+	NewConversation.titleForViewer = p1.conversationTitle.titleForViewer
+	NewConversation.isDefaultTitle = p1.conversationTitle.isDefaultTitle
 	
-	for i, v in ipairs(p3.participants) do
-		table.insert(var2.participants, tostring(v.targetId))
+	for _, participant in ipairs(p1.participants) do
+		table.insert(NewConversation.participants, (tostring(participant.targetId)))
 	end
-	return var2
+	return NewConversation
 end
 
-return t
+return ConversationModule

@@ -1,1 +1,3 @@
-﻿return game:DefineFastFlag("AXPendingLookModerationStatus", false) and require(script.Parent.FFlagAXMigrateOutfitsToUserInventory)
+﻿local FFlagAXMigrateOutfitsToUserInventoryModule = require(script.Parent.FFlagAXMigrateOutfitsToUserInventory)
+
+return game:DefineFastFlag("AXPendingLookModerationStatus", false) and FFlagAXMigrateOutfitsToUserInventoryModule

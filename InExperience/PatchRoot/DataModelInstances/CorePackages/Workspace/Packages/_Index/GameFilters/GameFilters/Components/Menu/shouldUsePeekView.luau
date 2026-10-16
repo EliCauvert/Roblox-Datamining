@@ -1,7 +1,7 @@
-﻿local responsiveModule = require(script:FindFirstAncestor("GameFilters").Parent.Responsive)
-local useBreakpointXOrSmaller = responsiveModule.useBreakpointXOrSmaller
+﻿local ResponsiveModule = require(script:FindFirstAncestor("GameFilters").Parent.Responsive)
+local UseBreakpointXOrSmallerFunction = ResponsiveModule.useBreakpointXOrSmaller
 
-return function()
-	-- upvalues: useBreakpointXOrSmaller (ref), responsiveModule (ref)
-	return useBreakpointXOrSmaller(responsiveModule.Keys.Small)
+return function() --[[ Line: 7 | Named "shouldUsePeekView" ]]
+	-- upvalues: UseBreakpointXOrSmallerFunction (copy), ResponsiveModule (copy)
+	return UseBreakpointXOrSmallerFunction(ResponsiveModule.Keys.Small)
 end

@@ -1,3 +1,3 @@
-﻿return require(script.Parent.Parent.Action)("ChangeDevConsoleSize", function(p1)
-	return { newSize = p1 }
+﻿return require(script.Parent.Parent.Action)("ChangeDevConsoleSize", function(NewSize) --[[ Line: 4 ]]
+	return { newSize = NewSize }
 end)

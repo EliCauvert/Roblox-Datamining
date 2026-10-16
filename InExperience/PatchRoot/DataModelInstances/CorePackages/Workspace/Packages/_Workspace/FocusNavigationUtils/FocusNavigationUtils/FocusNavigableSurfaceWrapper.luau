@@ -1,1 +1,1 @@
-﻿return require(script:FindFirstAncestor("FocusNavigationUtils").AppFocusRoot)
+﻿return (require(script:FindFirstAncestor("FocusNavigationUtils").AppFocusRoot))

@@ -1,52 +1,54 @@
-﻿local assignModule = require(script.Parent.assign)
+﻿local AssignModule = require(script.Parent.assign)
 
-return function(p1, p2, p3)
-	-- upvalues: assignModule (ref)
-	local var1 = assignModule({ leading = true, trailing = true }, p3)
-	local maxValue = math.max(0, p2)
-	local leading = var1.leading
-	local trailing = var1.trailing
-	local var2 = -1e999
-	local var3 = nil
+return function(Callback, p1: number, p2) --[[ Line: 43 | Named "throttle" ]]
+	-- upvalues: AssignModule (copy)
+	local AssignModuleResult = AssignModule({ leading = true, trailing = true }, p2)
+	local Largest = math.max(0, p1)
+	local Leading = AssignModuleResult.leading
+	local Trailing = AssignModuleResult.trailing
+	local ClockTime = -1e999
+	local DelayedThread = nil
 	local t = {}
 	
-	local function _()
-		-- upvalues: var3 (write)
-		if var3 then
-			task.cancel(var3)
-			var3 = nil
+	local function _() --[[ Line: 59 | Named "clearScheduled" ]]
+		-- upvalues: DelayedThread (ref)
+		if DelayedThread then
+			task.cancel(DelayedThread)
+			DelayedThread = nil
 		end
 	end
 	
-	local function invoke()
-		-- upvalues: var2 (write), var3 (write), p1 (ref), t (write)
-		var2 = os.clock()
-		var3 = nil
-		p1(table.unpack(t))
+	local function invoke() --[[ Line: 66 ]]
+		-- upvalues: ClockTime (ref), DelayedThread (ref), Callback (copy), t (ref)
+		ClockTime = os.clock()
+		DelayedThread = nil
+		Callback(table.unpack(t))
 	end
 	
-	return function(...)
-		-- upvalues: t (write), var2 (write), leading (ref), maxValue (ref), var3 (write), p1 (ref), trailing (ref), invoke (ref)
-		local processTime = os.clock()
+	return function(...) --[[ Line: 73 ]]
+		-- upvalues: t (ref), ClockTime (ref), Leading (copy), Largest (copy), DelayedThread (ref), Callback (copy), Trailing (copy), invoke (copy)
+		local ClockTime1 = os.clock()
 		t = { ... }
 		
-		if leading and maxValue <= processTime - var2 then
-			if var3 then
-				task.cancel(var3)
-				var3 = nil
+		if Leading and Largest <= ClockTime1 - ClockTime then
+			if DelayedThread then
+				task.cancel(DelayedThread)
+				DelayedThread = nil
 			end
-			var2 = os.clock()
-			var3 = nil
-			p1(table.unpack(t))
+			ClockTime = os.clock()
+			DelayedThread = nil
+			Callback(table.unpack(t))
 			
 			return
-		elseif trailing and not var3 then
-			local var4 = maxValue - (processTime - (if var2 == -1e999 then processTime else var2))
-			
-			if var4 < 0 then
-				var4 = 0
+		else
+			if Trailing and not DelayedThread then
+				local LargestDelta = Largest - (ClockTime1 - (ClockTime == -1e999 and ClockTime1 or ClockTime))
+				
+				if LargestDelta < 0 then
+					LargestDelta = 0
+				end
+				DelayedThread = task.delay(LargestDelta, invoke)
 			end
-			var3 = task.delay(var4, invoke)
 		end
 	end
 end

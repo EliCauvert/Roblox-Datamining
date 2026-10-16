@@ -1,22 +1,22 @@
-﻿local parent = script:FindFirstAncestor("ProfileQRCode").Parent
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local var1 = require(parent.UserProfiles).Stores.UserProfileStore.get()
+﻿local Parent = script:FindFirstAncestor("ProfileQRCode").Parent
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
+local GetResult = require(Parent.UserProfiles).Stores.UserProfileStore.get()
 
-return function(p1)
-	-- upvalues: reactModule (ref), signalsModule (ref), var1 (ref), signalsReactModule (ref)
-	return signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: p1 (ref), signalsModule (copy), var1 (copy)
-		return if p1 == "" then function()
+return function(p1) --[[ Line: 11 ]]
+	-- upvalues: ReactModule (copy), SignalsModule (copy), GetResult (copy), SignalsReactModule (copy)
+	return SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 12 ]]
+		-- upvalues: p1 (copy), SignalsModule (upval), GetResult (upval)
+		return if p1 == "" then function(): string --[[ Line: 14 ]]
 			return ""
-		end else signalsModule.createComputed(function(p2)
-			-- upvalues: var1 (copy), p1 (copy)
-			local var2 = var1.fetchNamesByUserIds({ p1 })(p2)
-			local var3 = var2 and (var2.data and var2.data[1])
-			local names = var3 and var3.names
+		end else SignalsModule.createComputed(function(p2) --[[ Line: 19 ]]
+			-- upvalues: GetResult (upval), p1 (upval)
+			local v1 = GetResult.fetchNamesByUserIds({ p1 })(p2)
+			local Entry = v1 and (v1.data and v1.data[1])
+			local Names = Entry and Entry.names
 			
-			return if names then names.getCombinedName(p2) or "" else ""
+			return Names and Names.getCombinedName(p2) or ""
 		end)
-	end, { p1 })) or ""
+	end, { p1 }))) or ""
 end

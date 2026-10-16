@@ -1,66 +1,67 @@
-﻿local groups = script:FindFirstAncestor("Groups")
-local parent = groups.Parent
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useNavigation = require(parent.Navigation).useNavigation
-local foundationModule = require(parent.Foundation)
-local view = foundationModule.View
-local text = foundationModule.Text
-local button = foundationModule.Button
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local inputSize = foundationModule.Enums.InputSize
-local appHeaderBarModule = require(parent.AppHeaderBar)
-local textKeysModule = require(groups.Common.TextKeys)
-local useGroupsWrapperContextModule = require(groups.Contexts.useGroupsWrapperContext)
-local fFlagEnableGroupDetailPane = require(parent.SharedFlags).FFlagEnableGroupDetailPane
+﻿local Groups = script:FindFirstAncestor("Groups")
+local Parent = Groups.Parent
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local Button = FoundationModule.Button
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local InputSize = FoundationModule.Enums.InputSize
+local AppHeaderBarModule = require(Parent.AppHeaderBar)
+local TextKeysModule = require(Groups.Common.TextKeys)
+local UseGroupsWrapperContextModule = require(Groups.Contexts.useGroupsWrapperContext)
+local FFlagEnableGroupDetailPane = require(Parent.SharedFlags).FFlagEnableGroupDetailPane
 
-return function(p1)
-	-- upvalues: useGroupsWrapperContextModule (ref), useNavigation (ref), useLocalization (ref), textKeysModule (ref), reactModule (ref), fFlagEnableGroupDetailPane (ref), appHeaderBarModule (ref), view (ref), text (ref), button (ref), buttonVariant (ref), inputSize (ref)
-	local var1 = useGroupsWrapperContextModule()
-	local var2 = useNavigation()
-	local var3 = useLocalization({
-		title = textKeysModule.HeadingGroups,
-		seeAll = textKeysModule.ActionSeeAll
+return function(p1) --[[ Line: 34 | Named "GroupsListHeader" ]]
+	-- upvalues: UseGroupsWrapperContextModule (copy), UseNavigationFunction (copy), UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), FFlagEnableGroupDetailPane (copy), AppHeaderBarModule (copy), View (copy), Text (copy), Button (copy), ButtonVariant (copy), InputSize (copy)
+	local UseGroupsWrapperContextModuleResult = UseGroupsWrapperContextModule()
+	local UseNavigationResult = UseNavigationFunction()
+	local UseLocalizationResult = UseLocalizationFunction({
+		title = TextKeysModule.HeadingGroups,
+		seeAll = TextKeysModule.ActionSeeAll
 	})
-	local var4 = reactModule.useCallback(function()
-		-- upvalues: fFlagEnableGroupDetailPane (copy), var1 (ref), var2 (ref)
-		if fFlagEnableGroupDetailPane and var1.navigateTo.previousView then
-			var1.navigateTo.previousView()
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 43 ]]
+		-- upvalues: FFlagEnableGroupDetailPane (upval), UseGroupsWrapperContextModuleResult (copy), UseNavigationResult (copy)
+		if FFlagEnableGroupDetailPane and UseGroupsWrapperContextModuleResult.navigateTo.previousView then
+			UseGroupsWrapperContextModuleResult.navigateTo.previousView()
 			
 			return
+		else
+			UseNavigationResult.goBack()
 		end
-		var2.goBack()
 	end, {
-		if fFlagEnableGroupDetailPane then var1.navigateTo.previousView else nil,
-		var2
+		if FFlagEnableGroupDetailPane then UseGroupsWrapperContextModuleResult.navigateTo.previousView else nil,
+		UseNavigationResult
 	})
-	local var5 = reactModule.useMemo(function()
-		-- upvalues: appHeaderBarModule (copy), var4 (ref)
-		return appHeaderBarModule.makeBackButton(var4)
-	end, { var4 })
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 52 ]]
+		-- upvalues: AppHeaderBarModule (upval), UseResult (copy)
+		return AppHeaderBarModule.makeBackButton(UseResult)
+	end, { UseResult })
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		LayoutOrder = p1.layoutOrder,
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y
 	}, {
-		LeftSection = reactModule.createElement(view, { tag = "row align-y-center gap-small auto-xy" }, {
-			BackButton = reactModule.useMemo(function()
-				-- upvalues: var5 (ref), reactModule (copy), view (copy)
-				return reactModule.createElement(view, { tag = "align-x-left size-0 auto-xy", LayoutOrder = 1 }, { button = var5() })
-			end, { var5 }),
-			Title = reactModule.createElement(text, {
+		LeftSection = ReactModule.createElement(View, { tag = "row align-y-center gap-small auto-xy" }, {
+			BackButton = ReactModule.useMemo(function() --[[ Line: 56 ]]
+				-- upvalues: UseMemoResult (copy), ReactModule (upval), View (upval)
+				return ReactModule.createElement(View, { tag = "align-x-left size-0 auto-xy", LayoutOrder = 1 }, { button = UseMemoResult() })
+			end, { UseMemoResult }),
+			Title = ReactModule.createElement(Text, {
 				tag = "text-heading-medium text-align-x-left content-default",
 				LayoutOrder = 2,
-				Text = var3.title
+				Text = UseLocalizationResult.title
 			})
 		}),
-		SeeAllButton = reactModule.createElement(button, {
-			text = var3.seeAll,
-			variant = buttonVariant.Text,
-			size = inputSize.Medium,
-			onActivated = var1.navigateTo.seeAllGroups,
+		SeeAllButton = ReactModule.createElement(Button, {
+			text = UseLocalizationResult.seeAll,
+			variant = ButtonVariant.Text,
+			size = InputSize.Medium,
+			onActivated = UseGroupsWrapperContextModuleResult.navigateTo.seeAllGroups,
 			AnchorPoint = Vector2.new(1, 0.5),
 			Position = UDim2.new(1, 0, 0.5, 0)
 		})

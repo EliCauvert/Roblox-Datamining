@@ -1,58 +1,58 @@
-﻿local parent = script:FindFirstAncestor("InlineRichText").Parent
-local reactModule = require(parent.React)
-local providerContainer = require(parent.RoactUtils).Components.ProviderContainer
-local styleModule = require(parent.Style)
-local styleProviderWithDefaultTheme = styleModule.StyleProviderWithDefaultTheme
-local foundationProvider = require(parent.Foundation).FoundationProvider
-local cryoModule = require(parent.Cryo)
-local roduxModule = require(parent.Rodux)
-local roactRoduxModule = require(parent.RoactRodux)
-local localizationProvider = require(parent.Localization).LocalizationProvider
-local navigationRoduxModule = require(parent.NavigationRodux)
-local t = { withUiModeSupport = false }
+﻿local Parent = script:FindFirstAncestor("InlineRichText").Parent
+local ReactModule = require(Parent.React)
+local ProviderContainer = require(Parent.RoactUtils).Components.ProviderContainer
+local StyleModule = require(Parent.Style)
+local StyleProviderWithDefaultTheme = StyleModule.StyleProviderWithDefaultTheme
+local FoundationProvider = require(Parent.Foundation).FoundationProvider
+local CryoModule = require(Parent.Cryo)
+local RoduxModule = require(Parent.Rodux)
+local RoactRoduxModule = require(Parent.RoactRodux)
+local LocalizationProvider = require(Parent.Localization).LocalizationProvider
+local NavigationRoduxModule = require(Parent.NavigationRodux)
+local config = { withUiModeSupport = false }
 
-return function(p1)
-	-- upvalues: cryoModule (ref), t (ref), foundationProvider (ref), roactRoduxModule (ref), roduxModule (ref), navigationRoduxModule (ref), styleProviderWithDefaultTheme (ref), styleModule (ref), localizationProvider (ref), reactModule (ref), providerContainer (ref)
-	local var1 = cryoModule.Dictionary.union(t, p1)
-	local t_1 = {}
-	table.insert(t_1, {
-		class = foundationProvider,
-		props = { device = "Desktop", theme = var1.themeName }
+return function(p1) --[[ Line: 31 | Named "MockProviders" ]]
+	-- upvalues: CryoModule (copy), config (copy), FoundationProvider (copy), RoactRoduxModule (copy), RoduxModule (copy), NavigationRoduxModule (copy), StyleProviderWithDefaultTheme (copy), StyleModule (copy), LocalizationProvider (copy), ReactModule (copy), ProviderContainer (copy)
+	local UnionResult = CryoModule.Dictionary.union(config, p1)
+	local List = {}
+	table.insert(List, {
+		class = FoundationProvider,
+		props = { device = "Desktop", theme = UnionResult.themeName }
 	})
-	table.insert(t_1, {
-		class = roactRoduxModule.StoreProvider,
+	table.insert(List, {
+		class = RoactRoduxModule.StoreProvider,
 		props = {
-			store = roduxModule.Store.new(function(p2, _)
+			store = RoduxModule.Store.new(function(p2, _) --[[ Line: 47 ]]
 				return p2
 			end, { Navigation = { lockNavigationActions = false } }, {
-				roduxModule.thunkMiddleware,
-				navigationRoduxModule.Thunks.RNAdapterThunk.middleware(function(p2)
+				RoduxModule.thunkMiddleware,
+				NavigationRoduxModule.Thunks.RNAdapterThunk.middleware(function(p2) --[[ Line: 55 ]]
 					print(`[Mock Providers Debug] Navigating to {p2.routeName} with detail {p2.params.detail}`)
 				end)
 			})
 		}
 	})
-	table.insert(t_1, {
-		class = styleProviderWithDefaultTheme,
+	table.insert(List, {
+		class = StyleProviderWithDefaultTheme,
 		props = {
-			withDarkTheme = var1.themeName ~= "Light",
-			withUiModeSupport = var1.withUiModeSupport
+			withDarkTheme = UnionResult.themeName ~= "Light",
+			withUiModeSupport = UnionResult.withUiModeSupport
 		}
 	})
-	table.insert(t_1, {
-		class = styleModule.DesignTokenProvider,
+	table.insert(List, {
+		class = StyleModule.DesignTokenProvider,
 		props = { tokenMappers = {} }
 	})
-	table.insert(t_1, {
-		class = localizationProvider,
+	table.insert(List, {
+		class = LocalizationProvider,
 		props = {
 			localization = {
-				Format = function(_, p2)
+				Format = function(_, p2) --[[ Line: 81 ]]
 					return p2
 				end
 			}
 		}
 	})
 	
-	return reactModule.createElement(providerContainer, { providers = t_1 }, var1.children)
+	return ReactModule.createElement(ProviderContainer, { providers = List }, UnionResult.children)
 end

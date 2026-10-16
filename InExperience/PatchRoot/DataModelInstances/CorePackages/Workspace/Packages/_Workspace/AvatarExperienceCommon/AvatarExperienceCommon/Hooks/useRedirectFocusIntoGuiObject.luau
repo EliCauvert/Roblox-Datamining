@@ -1,49 +1,51 @@
-﻿local guiService = game:GetService("GuiService")
-local reactModule = require(script:FindFirstAncestor("AvatarExperienceCommon").Parent.React)
+﻿local GuiService = game:GetService("GuiService")
+local ReactModule = require(script:FindFirstAncestor("AvatarExperienceCommon").Parent.React)
 
-local function _(p1)
-	-- upvalues: guiService (ref)
-	return guiService.SelectedCoreObject and (not guiService.SelectedCoreObject:IsDescendantOf(p1) and not (guiService.SelectedCoreObject == p1))
+local function _(Ancestor): boolean --[[ Line: 7 | Named "getSelectionIsOutsideGuiObject" ]]
+	-- upvalues: GuiService (copy)
+	return GuiService.SelectedCoreObject and (not GuiService.SelectedCoreObject:IsDescendantOf(Ancestor) and not (GuiService.SelectedCoreObject == Ancestor))
 end
 
-return function(p1)
-	-- upvalues: reactModule (ref), guiService (ref)
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), guiService (copy)
-		local current = p1.current
+return function(p1) --[[ Line: 30 | Named "useRedirectFocusIntoGuiObject" ]]
+	-- upvalues: ReactModule (copy), GuiService (copy)
+	ReactModule.useEffect(function() --[[ Line: 31 ]]
+		-- upvalues: p1 (copy), GuiService (upval)
+		local Current = p1.current
 		
-		if current then
-			if guiService.SelectedCoreObject and (not guiService.SelectedCoreObject:IsDescendantOf(current) and not (guiService.SelectedCoreObject == current)) then
-				current.Selectable = true
+		if Current then
+			if GuiService.SelectedCoreObject and (not GuiService.SelectedCoreObject:IsDescendantOf(Current) and not (GuiService.SelectedCoreObject == Current)) then
+				Current.Selectable = true
 			else
-				current.Selectable = false
+				Current.Selectable = false
 			end
 		end
-		local changedConnection = guiService.Changed:Connect(function(p2)
-			-- upvalues: p1 (copy), guiService (copy)
+		local ChangedConnection = GuiService.Changed:Connect(function(p2) --[[ Line: 45 ]]
+			-- upvalues: p1 (upval), GuiService (upval)
 			if p2 == "SelectedCoreObject" then
-				local current = p1.current
+				local Current = p1.current
 				
-				if current then
-					if guiService.SelectedCoreObject and (not guiService.SelectedCoreObject:IsDescendantOf(current) and not (guiService.SelectedCoreObject == current)) then
-						current.Selectable = true
+				if Current then
+					if GuiService.SelectedCoreObject and (not GuiService.SelectedCoreObject:IsDescendantOf(Current) and not (GuiService.SelectedCoreObject == Current)) then
+						Current.Selectable = true
 						
 						return
-					elseif guiService.SelectedCoreObject == current then
-						current.Selectable = false
-						guiService:Select(current)
+					end
+					if GuiService.SelectedCoreObject == Current then
+						Current.Selectable = false
+						GuiService:Select(Current)
 						
 						return
-					elseif guiService.SelectedCoreObject and guiService.SelectedCoreObject:IsDescendantOf(current) then
-						current.Selectable = false
+					end
+					if GuiService.SelectedCoreObject and GuiService.SelectedCoreObject:IsDescendantOf(Current) then
+						Current.Selectable = false
 					end
 				end
 			end
 		end)
 		
-		return function()
-			-- upvalues: changedConnection (ref)
-			return changedConnection:Disconnect()
+		return function() --[[ Line: 68 ]]
+			-- upvalues: ChangedConnection (copy)
+			return ChangedConnection:Disconnect()
 		end
 	end, {})
 end

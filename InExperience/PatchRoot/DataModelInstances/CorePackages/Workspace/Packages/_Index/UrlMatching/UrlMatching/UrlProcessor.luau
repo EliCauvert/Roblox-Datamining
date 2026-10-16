@@ -1,34 +1,33 @@
-﻿local parent = script.Parent.Parent
-local urlMatcherModule = require(script.Parent.UrlMatcher)
-local urlValidationModule = require(script.Parent.UrlValidation)
+﻿local UrlMatcherModule = require(script.Parent.UrlMatcher)
+local UrlValidationModule = require(script.Parent.UrlValidation)
 local _ = require(script.Parent.Types)
-local cryoModule = require(parent.Cryo)
-local t = {}
-t.__index = t
+local CryoModule = require(script.Parent.Parent.Cryo)
+local UrlProcessorModule = {}
+UrlProcessorModule.__index = UrlProcessorModule
 
-function t.new(p1, p2)
-	-- upvalues: cryoModule (ref), urlMatcherModule (ref), t (ref)
-	local t_1 = {
-		_urlMatcher = urlMatcherModule.new(cryoModule.Dictionary.union(p1 or {}, { pathPatterns = cryoModule.Dictionary.keys(p2) })),
-		_urlMap = p2
+function UrlProcessorModule.new(UnionResult, _urlMap) --[[ Line: 32 ]]
+	-- upvalues: CryoModule (copy), UrlMatcherModule (copy), UrlProcessorModule (copy)
+	local config = {
+		_urlMatcher = UrlMatcherModule.new((CryoModule.Dictionary.union(UnionResult or {}, { pathPatterns = CryoModule.Dictionary.keys(_urlMap) }))),
+		_urlMap = _urlMap
 	}
-	setmetatable(t_1, t)
+	setmetatable(config, UrlProcessorModule)
 	
-	return t_1
+	return config
 end
 
-function t:process(p1)
-	-- upvalues: cryoModule (ref), urlValidationModule (ref)
-	return cryoModule.List.filterMap(self._urlMatcher:match(p1), function(p2)
-		-- upvalues: urlValidationModule (copy), self (ref)
-		local var1, var2 = urlValidationModule.validateUrlMatch(p2, self._urlMap)
+function UrlProcessorModule:process(p1) --[[ Line: 48 ]]
+	-- upvalues: CryoModule (copy), UrlValidationModule (copy)
+	return CryoModule.List.filterMap(self._urlMatcher:match(p1), function(p2) --[[ Line: 50 ]]
+		-- upvalues: UrlValidationModule (upval), self (copy)
+		local ValidateUrlMatchResult, ValidateUrlMatchResult2 = UrlValidationModule.validateUrlMatch(p2, self._urlMap)
 		
-		return if var1 then {
+		return if ValidateUrlMatchResult then {
 			startIndex = p2.startIndex,
 			endIndex = p2.endIndex,
-			result = var2
+			result = ValidateUrlMatchResult2
 		} else nil
 	end)
 end
 
-return t
+return UrlProcessorModule

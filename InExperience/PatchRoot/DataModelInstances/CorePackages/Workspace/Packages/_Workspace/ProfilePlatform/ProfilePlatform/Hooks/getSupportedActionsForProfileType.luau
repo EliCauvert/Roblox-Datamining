@@ -1,8 +1,8 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local _ = require(profilePlatform.Common.Enums)
-local supportedProfileTypesModule = require(profilePlatform.Components.CTARow.ProfileActions.SupportedProfileTypes)
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local _ = require(ProfilePlatform.Common.Enums)
+local SupportedProfileTypesModule = require(ProfilePlatform.Components.CTARow.ProfileActions.SupportedProfileTypes)
 
-return function(p1)
-	-- upvalues: supportedProfileTypesModule (ref)
-	return supportedProfileTypesModule[p1] or {}
+return function(p1) --[[ Line: 6 ]]
+	-- upvalues: SupportedProfileTypesModule (copy)
+	return SupportedProfileTypesModule[p1] or {}
 end

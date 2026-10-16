@@ -1,61 +1,62 @@
-﻿local friendsLanding = script:FindFirstAncestor("FriendsLanding")
-local fFlagConnectionsToFriendsRename = require(friendsLanding.Parent.SharedFlags).FFlagConnectionsToFriendsRename
-local dependenciesModule = require(friendsLanding.dependencies)
-local react = dependenciesModule.React
-local UIBlox = dependenciesModule.UIBlox
-local textKeysModule = require(friendsLanding.Common.TextKeys)
-local iconButton = UIBlox.App.Button.IconButton
-local images = UIBlox.App.ImageSet.Images
-local badge = UIBlox.App.Indicator.Badge
-local tooltip = UIBlox.App.Dialog.Tooltip
-local dash = dependenciesModule.Dash
-local useState = react.useState
-local useLocalization = dependenciesModule.Hooks.useLocalization
-local getDeepValue = dependenciesModule.SocialLibraries.Dictionary.getDeepValue
-local t = {
+﻿local FriendsLanding = script:FindFirstAncestor("FriendsLanding")
+local DependenciesModule = require(FriendsLanding.dependencies)
+local React = DependenciesModule.React
+local UIBlox = DependenciesModule.UIBlox
+local TextKeysModule = require(FriendsLanding.Common.TextKeys)
+local IconButton = UIBlox.App.Button.IconButton
+local Images = UIBlox.App.ImageSet.Images
+local Badge = UIBlox.App.Indicator.Badge
+local Tooltip = UIBlox.App.Dialog.Tooltip
+local Dash = DependenciesModule.Dash
+local UseStateFunction = React.useState
+local UseLocalizationFunction = DependenciesModule.Hooks.useLocalization
+local GetDeepValueFunction = DependenciesModule.SocialLibraries.Dictionary.getDeepValue
+local config = {
 	layoutOrder = 0,
 	friendRequestCount = 0,
 	showTooltip = false,
-	onActivated = dash.noop
+	onActivated = Dash.noop
 }
 
-return function(p1)
-	-- upvalues: dash (ref), t (ref), useState (ref), getDeepValue (ref), useLocalization (ref), fFlagConnectionsToFriendsRename (ref), textKeysModule (ref), react (ref), iconButton (ref), images (ref), badge (ref), tooltip (ref)
-	local var1 = dash.join(t, p1)
-	local var2, var3 = useState(240)
+return function(p1) --[[ Line: 34 ]]
+	-- upvalues: Dash (copy), config (copy), UseStateFunction (copy), GetDeepValueFunction (copy), UseLocalizationFunction (copy), TextKeysModule (copy), React (copy), IconButton (copy), Images (copy), Badge (copy), Tooltip (copy)
+	local JoinResult = Dash.join(config, p1)
+	local UseStateResult, UseStateResult2 = UseStateFunction(240)
 	
-	return react.createElement(iconButton, {
+	local function v14(Object) --[[ Line: 38 ]]
+		-- upvalues: UseStateResult2 (copy), GetDeepValueFunction (upval)
+		if Object and Object:FindFirstChild("CallToActionTooltip", true) then
+			UseStateResult2(GetDeepValueFunction(Object, "CallToActionTooltip.TooltipContainer.AbsoluteSize.X") or 240)
+		end
+	end
+	
+	local UseLocalizationResult = UseLocalizationFunction({ tooltipMessage = TextKeysModule.NO_FRIENDS_TOOLTIP })
+	
+	return React.createElement(IconButton, {
 		size = UDim2.fromOffset(0, 0),
-		icon = images["icons/actions/friends/friendAdd"],
-		position = var1.position,
+		icon = Images["icons/actions/friends/friendAdd"],
+		position = JoinResult.position,
 		anchorPoint = Vector2.new(1, 0.5),
-		layoutOrder = var1.layoutOrder,
-		onActivated = var1.onActivated
+		layoutOrder = JoinResult.layoutOrder,
+		onActivated = JoinResult.onActivated
 	}, {
-		ImagesContainer = react.createElement("Frame", {
+		ImagesContainer = React.createElement("Frame", {
 			Size = UDim2.new(1, 0, 1, 0),
 			BackgroundTransparency = 1,
-			[react.Change.AbsoluteSize] = function(p2)
-				-- upvalues: var3 (ref), getDeepValue (copy)
-				if p2 and p2:FindFirstChild("CallToActionTooltip", true) then
-					var3(getDeepValue(p2, "CallToActionTooltip.TooltipContainer.AbsoluteSize.X") or 240)
-				end
-			end
+			[React.Change.AbsoluteSize] = v14
 		}, {
-			FriendRequestsBadge = var1.friendRequestCount > 0 and react.createElement(badge, {
+			FriendRequestsBadge = JoinResult.friendRequestCount > 0 and React.createElement(Badge, {
 				position = UDim2.new(0.5, 0, 0.5, 0),
 				anchorPoint = Vector2.new(0, 1),
-				value = var1.friendRequestCount
+				value = JoinResult.friendRequestCount
 			}),
-			CallToActionTooltip = var1.showTooltip and react.createElement(tooltip, {
+			CallToActionTooltip = JoinResult.showTooltip and React.createElement(Tooltip, {
 				forceClickTriggerPoint = true,
 				isDirectChild = true,
-				position = UDim2.new(0, 42.5 - var2, 0, 36),
+				position = UDim2.new(0, 42.5 - UseStateResult, 0, 36),
 				triggerPosition = Vector2.new(0, 0),
 				triggerSize = Vector2.new(36, 0),
-				bodyText = useLocalization({
-					tooltipMessage = if fFlagConnectionsToFriendsRename then textKeysModule.NO_FRIENDS_TOOLTIP else textKeysModule.NO_CONNECTIONS_TOOLTIP
-				}).tooltipMessage
+				bodyText = UseLocalizationResult.tooltipMessage
 			})
 		})
 	})

@@ -1,43 +1,43 @@
-﻿local inExperienceShop = script:FindFirstAncestor("InExperienceShop")
-local parent = inExperienceShop.Parent
-local reactModule = require(parent.React)
-local _ = require(parent.GenericAbuseReporting.AbuseVector)
-local shopOverflowConstantsModule = require(inExperienceShop.Components.Shared.shopOverflowConstants)
+﻿local InExperienceShop = script:FindFirstAncestor("InExperienceShop")
+local Parent = InExperienceShop.Parent
+local ReactModule = require(Parent.React)
+local _ = require(Parent.GenericAbuseReporting.AbuseVector)
+local ShopOverflowConstantsModule = require(InExperienceShop.Components.Shared.shopOverflowConstants)
 
 return {
-	useShopReportOverflow = function(p1)
-		-- upvalues: reactModule (ref), shopOverflowConstantsModule (ref)
-		local var1, var2 = reactModule.useState(false)
-		local var3, var4 = reactModule.useState(nil)
+	useShopReportOverflow = function(p1) --[[ Line: 31 ]]
+		-- upvalues: ReactModule (copy), ShopOverflowConstantsModule (copy)
+		local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+		local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
 		
 		return {
-			isOverflowMenuOpen = var1,
-			reportSession = var3,
+			isOverflowMenuOpen = UseStateResult,
+			reportSession = UseStateResult1,
 			isReportingEnabled = p1.isReportingEnabled,
-			onOverflowActivated = reactModule.useCallback(function()
-				-- upvalues: var2 (ref)
-				var2(function(p2)
+			onOverflowActivated = ReactModule.useCallback(function() --[[ Line: 36 ]]
+				-- upvalues: UseStateResult2 (copy)
+				UseStateResult2(function(p2): boolean --[[ Line: 37 ]]
 					return not p2
 				end)
 			end, {}),
-			onOverflowMenuClosed = reactModule.useCallback(function()
-				-- upvalues: var2 (ref)
-				var2(false)
+			onOverflowMenuClosed = ReactModule.useCallback(function() --[[ Line: 42 ]]
+				-- upvalues: UseStateResult2 (copy)
+				UseStateResult2(false)
 			end, {}),
-			onMenuItemActivated = reactModule.useCallback(function(p2)
-				-- upvalues: var2 (ref), shopOverflowConstantsModule (copy), p1 (ref), var4 (ref)
-				var2(false)
+			onMenuItemActivated = ReactModule.useCallback(function(p2) --[[ Line: 46 ]]
+				-- upvalues: UseStateResult2 (copy), ShopOverflowConstantsModule (upval), p1 (copy), UseStateResult2_1 (copy)
+				UseStateResult2(false)
 				
-				if tostring(p2) ~= shopOverflowConstantsModule.REPORT_MENU_ITEM_ID then return end
+				if tostring(p2) ~= ShopOverflowConstantsModule.REPORT_MENU_ITEM_ID then return end
 				if p1.isReportingEnabled then
-					var4(p1.buildReportSession())
+					UseStateResult2_1(p1.buildReportSession())
 					
 					return
 				end
 			end, { p1.isReportingEnabled, p1.buildReportSession }),
-			onReportClose = reactModule.useCallback(function()
-				-- upvalues: var4 (ref)
-				var4(nil)
+			onReportClose = ReactModule.useCallback(function() --[[ Line: 60 ]]
+				-- upvalues: UseStateResult2_1 (copy)
+				UseStateResult2_1(nil)
 			end, {})
 		}
 	end

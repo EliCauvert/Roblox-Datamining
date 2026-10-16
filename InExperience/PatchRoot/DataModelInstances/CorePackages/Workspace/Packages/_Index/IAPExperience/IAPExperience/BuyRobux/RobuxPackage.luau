@@ -1,112 +1,111 @@
-﻿local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local localizationService = game:GetService("LocalizationService")
-local roactModule = require(parent_1.Roact)
-local _ = require(parent_1.React)
-local UIBloxModule = require(parent_1.UIBlox)
-local foundationModule = require(parent_1.Foundation)
-local skeleton = foundationModule.Skeleton
-local useTokens = foundationModule.Hooks.useTokens
-local useStyleMetadata = UIBloxModule.Core.Style.useStyleMetadata
-local images = UIBloxModule.App.ImageSet.Images
-local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
-local withStyle = UIBloxModule.Core.Style.withStyle
-local imageSetButton = UIBloxModule.Core.ImageSet.ImageSetButton
-local useCursor = UIBloxModule.App.SelectionCursor.useCursor
-local roactGamepadModule = require(parent_1.RoactGamepad)
-local roactFitComponentsModule = require(parent_1.RoactFitComponents)
-local fitFrameHorizontal = roactFitComponentsModule.FitFrameHorizontal
-local fitTextLabel = roactFitComponentsModule.FitTextLabel
-local multiTextLocalizerModule = require(parent.Locale.MultiTextLocalizer)
-local formatNumberModule = require(parent.Utility.formatNumber)
-local robux = images["icons/common/robux"]
+﻿local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local LocalizationService = game:GetService("LocalizationService")
+local RoactModule = require(Parent1.Roact)
+local _ = require(Parent1.React)
+local UIBloxModule = require(Parent1.UIBlox)
+local FoundationModule = require(Parent1.Foundation)
+local Skeleton = FoundationModule.Skeleton
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UseStyleMetadataFunction = UIBloxModule.Core.Style.useStyleMetadata
+local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
+local WithStyleFunction = UIBloxModule.Core.Style.withStyle
+local ImageSetButton = UIBloxModule.Core.ImageSet.ImageSetButton
+local UseCursorFunction = UIBloxModule.App.SelectionCursor.useCursor
+local RoactGamepadModule = require(Parent1.RoactGamepad)
+local RoactFitComponentsModule = require(Parent1.RoactFitComponents)
+local FitFrameHorizontal = RoactFitComponentsModule.FitFrameHorizontal
+local FitTextLabel = RoactFitComponentsModule.FitTextLabel
+local MultiTextLocalizerModule = require(Parent.Locale.MultiTextLocalizer)
+local FormatNumberModule = require(Parent.Utility.formatNumber)
+local IconsCommonRobux = UIBloxModule.App.ImageSet.Images["icons/common/robux"]
 
-local function renderWithProviders(p1, p2, p3, p4, _, p5)
-	-- upvalues: roactModule (ref), skeleton (ref), roactGamepadModule (ref), imageSetButton (ref), imageSetLabel (ref), fitFrameHorizontal (ref), robux (ref), fitTextLabel (ref), formatNumberModule (ref), localizationService (ref)
+local function renderWithProviders(p1, p2, p3, SelectionImageObject, _, p4) --[[ Line: 59 ]]
+	-- upvalues: RoactModule (copy), Skeleton (copy), RoactGamepadModule (copy), ImageSetButton (copy), ImageSetLabel (copy), FitFrameHorizontal (copy), IconsCommonRobux (copy), FitTextLabel (copy), FormatNumberModule (copy), LocalizationService (copy)
 	if p1.robuxAmount == nil then
-		return roactModule.createElement("Frame", {
+		return RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.new(0, p1.scale * 404, 0, p1.scale * 448)
 		}, {
-			ShimmerPanel = roactModule.createElement(skeleton, { Size = UDim2.new(1, 0, 1, 0) })
+			ShimmerPanel = RoactModule.createElement(Skeleton, { Size = UDim2.new(1, 0, 1, 0) })
 		})
 	end
-	local theme = p3.Theme
-	local font = p3.Font
-	local var1 = p1.scale * 64
-	local color3 = p5.Color.Surface.Surface_100.Color3
+	local Theme = p3.Theme
+	local _Font = p3.Font
+	local ScaledScale = p1.scale * 64
+	local SurfaceColor3 = p4.Color.Surface.Surface_100.Color3
 	
 	if p1.selected then
-		color3 = color3:Lerp(p5.Color.Surface.Surface_200.Color3, 0.5)
+		SurfaceColor3 = SurfaceColor3:Lerp(p4.Color.Surface.Surface_200.Color3, 0.5)
 	end
-	return roactModule.createElement(roactGamepadModule.Focusable[imageSetButton], {
+	return RoactModule.createElement(RoactGamepadModule.Focusable[ImageSetButton], {
 		LayoutOrder = p1.layoutOrder,
-		BackgroundColor3 = theme.UIEmphasis.Color,
-		BackgroundTransparency = theme.UIEmphasis.Transparency,
+		BackgroundColor3 = Theme.UIEmphasis.Color,
+		BackgroundTransparency = Theme.UIEmphasis.Transparency,
 		Size = UDim2.new(0, p1.scale * 404, 0, p1.scale * 448),
 		Image = nil,
-		SelectionImageObject = p4,
-		[roactModule.Ref] = p1.forwardRef,
+		SelectionImageObject = SelectionImageObject,
+		[RoactModule.Ref] = p1.forwardRef,
 		NextSelectionUp = nil,
 		NextSelectionDown = nil,
 		NextSelectionLeft = p1.nextSelectionLeft,
 		NextSelectionRight = p1.nextSelectionRight,
 		inputBindings = {
-			Activated = if p1.onActivated ~= nil then nil else roactGamepadModule.Input.onBegin(Enum.KeyCode.ButtonA, function()
-				-- upvalues: p1 (ref)
+			Activated = if p1.onActivated == nil then nil else RoactGamepadModule.Input.onBegin(Enum.KeyCode.ButtonA, function() --[[ Line: 99 ]]
+				-- upvalues: p1 (copy)
 				p1.onActivated(p1.packageId)
 			end)
 		},
-		[roactModule.Event.Activated] = function()
-			-- upvalues: p1 (ref)
+		[RoactModule.Event.Activated] = function() --[[ Line: 104 ]]
+			-- upvalues: p1 (copy)
 			p1.onActivated(p1.packageId)
 		end,
-		[roactModule.Event.MouseMoved] = function()
-			-- upvalues: p1 (ref)
+		[RoactModule.Event.MouseMoved] = function() --[[ Line: 107 ]]
+			-- upvalues: p1 (copy)
 			p1.onHover(p1.forwardRef, true)
 		end,
-		[roactModule.Event.MouseEnter] = function()
-			-- upvalues: p1 (ref)
+		[RoactModule.Event.MouseEnter] = function() --[[ Line: 110 ]]
+			-- upvalues: p1 (copy)
 			p1.onHover(p1.forwardRef, true)
 		end,
-		[roactModule.Event.MouseLeave] = function()
-			-- upvalues: p1 (ref)
+		[RoactModule.Event.MouseLeave] = function() --[[ Line: 113 ]]
+			-- upvalues: p1 (copy)
 			p1.onHover(p1.forwardRef, false)
 		end,
-		[roactModule.Event.SelectionGained] = function()
-			-- upvalues: p1 (ref)
+		[RoactModule.Event.SelectionGained] = function() --[[ Line: 116 ]]
+			-- upvalues: p1 (copy)
 			p1.onSelect(p1.forwardRef)
 		end
 	}, {
-		Corner = roactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) }),
-		Outline = roactModule.createElement("Frame", {
+		Corner = RoactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) }),
+		Outline = RoactModule.createElement("Frame", {
 			BackgroundTransparency = 0,
 			BorderSizePixel = 0,
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			Position = UDim2.fromScale(0.5, 0.5),
-			BackgroundColor3 = color3,
+			BackgroundColor3 = SurfaceColor3,
 			Size = UDim2.new(1, -3, 1, -3)
 		}, {
-			Corner = roactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) }),
-			MiddleContent = roactModule.createElement("Frame", {
+			Corner = RoactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) }),
+			MiddleContent = RoactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
 				Size = UDim2.new(1, 0, 1, 0)
 			}, {
-				Padding = roactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, p1.scale * 24) }),
-				roactModule.createElement("UIListLayout", {
+				Padding = RoactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, p1.scale * 24) }),
+				RoactModule.createElement("UIListLayout", {
 					HorizontalAlignment = Enum.HorizontalAlignment.Center,
 					FillDirection = Enum.FillDirection.Vertical,
 					SortOrder = Enum.SortOrder.LayoutOrder,
 					Padding = UDim.new(0, p1.scale * 17.5)
 				}),
-				RobuxImageFrame = roactModule.createElement("Frame", {
+				RobuxImageFrame = RoactModule.createElement("Frame", {
 					LayoutOrder = 1,
 					BackgroundTransparency = 1,
 					Size = UDim2.fromOffset(p1.scale * 192, p1.scale * 192),
 					AnchorPoint = Vector2.new(0.5, 0.5)
 				}, {
-					RobuxImage = roactModule.createElement(imageSetLabel, {
+					RobuxImage = RoactModule.createElement(ImageSetLabel, {
 						BackgroundTransparency = 1,
 						ImageTransparency = 0,
 						Size = if p1.selected then UDim2.fromOffset(p1.scale * 192 * 1.6, p1.scale * 192 * 1.6) else UDim2.fromOffset(p1.scale * 192, p1.scale * 192),
@@ -115,57 +114,57 @@ local function renderWithProviders(p1, p2, p3, p4, _, p5)
 						Image = p1.robuxImage
 					})
 				}),
-				RobuxAmount = roactModule.createElement(fitFrameHorizontal, {
+				RobuxAmount = RoactModule.createElement(FitFrameHorizontal, {
 					LayoutOrder = 2,
 					BackgroundTransparency = 1,
 					AnchorPoint = Vector2.new(0.5, 0.5),
-					height = UDim.new(0, var1),
+					height = UDim.new(0, ScaledScale),
 					contentPadding = UDim.new(0, 0),
 					FillDirection = Enum.FillDirection.Horizontal,
 					VerticalAlignment = Enum.VerticalAlignment.Center
 				}, {
-					Icon = roactModule.createElement(imageSetLabel, {
+					Icon = RoactModule.createElement(ImageSetLabel, {
 						LayoutOrder = 1,
 						BackgroundTransparency = 1,
-						Size = UDim2.new(0, var1, 0, var1),
-						Image = robux,
-						ImageColor3 = theme.TextEmphasis.Color,
-						ImageTransparency = theme.TextEmphasis.Transparency
+						Size = UDim2.new(0, ScaledScale, 0, ScaledScale),
+						Image = IconsCommonRobux,
+						ImageColor3 = Theme.TextEmphasis.Color,
+						ImageTransparency = Theme.TextEmphasis.Transparency
 					}),
-					RobuxAmountText = roactModule.createElement(fitTextLabel, {
+					RobuxAmountText = RoactModule.createElement(FitTextLabel, {
 						LayoutOrder = 2,
 						BackgroundTransparency = 1,
-						width = fitTextLabel.Width.FitToText,
-						Text = formatNumberModule(localizationService.RobloxLocaleId, p1.robuxAmount),
-						Font = font.Title.Font,
-						TextColor3 = theme.TextEmphasis.Color,
-						TextTransparency = theme.TextEmphasis.Transparency,
-						TextSize = var1
+						width = FitTextLabel.Width.FitToText,
+						Text = FormatNumberModule(LocalizationService.RobloxLocaleId, p1.robuxAmount),
+						Font = _Font.Title.Font,
+						TextColor3 = Theme.TextEmphasis.Color,
+						TextTransparency = Theme.TextEmphasis.Transparency,
+						TextSize = ScaledScale
 					})
 				}),
-				CurrencyAmmountText = roactModule.createElement(fitTextLabel, {
+				CurrencyAmmountText = RoactModule.createElement(FitTextLabel, {
 					LayoutOrder = 3,
 					BackgroundTransparency = 1,
 					AnchorPoint = Vector2.new(0.5, 0.5),
-					width = fitTextLabel.Width.FitToText,
+					width = FitTextLabel.Width.FitToText,
 					Text = p1.currencyAmountStr,
-					Font = font.Header1.Font,
-					TextColor3 = theme.TextEmphasis.Color,
-					TextTransparency = theme.TextEmphasis.Transparency,
+					Font = _Font.Header1.Font,
+					TextColor3 = Theme.TextEmphasis.Color,
+					TextTransparency = Theme.TextEmphasis.Transparency,
 					TextSize = p1.scale * 32
 				}),
-				MoreText = p1.robuxMoreAmount and roactModule.createElement(fitTextLabel, {
+				MoreText = p1.robuxMoreAmount and RoactModule.createElement(FitTextLabel, {
 					LayoutOrder = 4,
 					BackgroundTransparency = 1,
 					AnchorPoint = Vector2.new(0.5, 0.5),
-					width = fitTextLabel.Width.FitToText,
+					width = FitTextLabel.Width.FitToText,
 					Text = p2.moreRobux,
-					Font = font.Header2.Font,
-					TextColor3 = theme.TextEmphasis.Color,
-					TextTransparency = theme.TextEmphasis.Transparency,
+					Font = _Font.Header2.Font,
+					TextColor3 = Theme.TextEmphasis.Color,
+					TextTransparency = Theme.TextEmphasis.Transparency,
 					TextSize = p1.scale * 32
 				}, {
-					Gradient = roactModule.createElement("UIGradient", {
+					Gradient = RoactModule.createElement("UIGradient", {
 						Rotation = 0,
 						Color = ColorSequence.new({
 							ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 251, 103)),
@@ -178,29 +177,29 @@ local function renderWithProviders(p1, p2, p3, p4, _, p5)
 	})
 end
 
-return function(p1)
-	-- upvalues: useCursor (ref), useTokens (ref), useStyleMetadata (ref), roactModule (ref), multiTextLocalizerModule (ref), formatNumberModule (ref), localizationService (ref), withStyle (ref), renderWithProviders (ref)
-	local var1 = useCursor(UDim.new(0, 8))
-	local var2 = useTokens()
-	local themeName = useStyleMetadata().ThemeName
+return function(p1) --[[ Line: 242 ]]
+	-- upvalues: UseCursorFunction (copy), UseTokensFunction (copy), UseStyleMetadataFunction (copy), RoactModule (copy), MultiTextLocalizerModule (copy), FormatNumberModule (copy), LocalizationService (copy), WithStyleFunction (copy), renderWithProviders (copy)
+	local UseCursorResult = UseCursorFunction(UDim.new(0, 8))
+	local UseTokensResult = UseTokensFunction()
+	local ThemeName = UseStyleMetadataFunction().ThemeName
 	
-	return roactModule.createElement(multiTextLocalizerModule, {
+	return RoactModule.createElement(MultiTextLocalizerModule, {
 		keys = {
 			moreRobux = {
 				key = "IAPExperience.BuyRobux.Text.MoreRobux2",
 				params = {
-					robux = formatNumberModule(localizationService.RobloxLocaleId, p1.robuxMoreAmount or 0)
+					robux = FormatNumberModule(LocalizationService.RobloxLocaleId, p1.robuxMoreAmount or 0)
 				}
 			}
 		},
-		render = function(p2)
-			-- upvalues: withStyle (copy), p1 (ref), renderWithProviders (copy), var1 (ref), themeName (ref), var2 (ref)
-			return withStyle(function(p3)
-				-- upvalues: p1 (copy), renderWithProviders (copy), p2 (ref), var1 (copy), themeName (copy), var2 (copy)
+		render = function(p2) --[[ Line: 258 ]]
+			-- upvalues: WithStyleFunction (upval), p1 (copy), renderWithProviders (upval), UseCursorResult (copy), ThemeName (copy), UseTokensResult (copy)
+			return WithStyleFunction(function(p3) --[[ Line: 259 ]]
+				-- upvalues: p1 (upval), renderWithProviders (upval), p2 (copy), UseCursorResult (upval), ThemeName (upval), UseTokensResult (upval)
 				if p1.scale == nil then
 					p1.scale = 0.65
 				end
-				return renderWithProviders(p1, p2, p3, var1, themeName, var2)
+				return renderWithProviders(p1, p2, p3, UseCursorResult, ThemeName, UseTokensResult)
 			end)
 		end
 	})

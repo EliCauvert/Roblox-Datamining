@@ -1,463 +1,448 @@
-﻿local httpService = game:GetService("HttpService")
-local typesModule = require(script.Parent.types)
-local subagentTaskStatus = typesModule.SubagentTaskStatus
-local subagentTaskCategory = typesModule.SubagentTaskCategory
-local t = {
-	pending = subagentTaskStatus.Pending,
-	in_progress = subagentTaskStatus.InProgress,
-	done = subagentTaskStatus.Done,
-	error = subagentTaskStatus.Error,
-	deleted = subagentTaskStatus.Deleted
+﻿local HttpService = game:GetService("HttpService")
+local TypesModule = require(script.Parent.types)
+local SubagentTaskStatus = TypesModule.SubagentTaskStatus
+local SubagentTaskCategory = TypesModule.SubagentTaskCategory
+local config = {
+	pending = SubagentTaskStatus.Pending,
+	in_progress = SubagentTaskStatus.InProgress,
+	done = SubagentTaskStatus.Done,
+	error = SubagentTaskStatus.Error,
+	deleted = SubagentTaskStatus.Deleted
 }
-local t_1 = {
-	gameplay = subagentTaskCategory.Gameplay,
-	art = subagentTaskCategory.Art,
-	audio = subagentTaskCategory.Audio,
-	marketing = subagentTaskCategory.Marketing
+local config1 = {
+	gameplay = SubagentTaskCategory.Gameplay,
+	art = SubagentTaskCategory.Art,
+	audio = SubagentTaskCategory.Audio,
+	marketing = SubagentTaskCategory.Marketing
 }
-local t_2 = {
-	[subagentTaskStatus.InProgress] = 1,
-	[subagentTaskStatus.Done] = 2,
-	[subagentTaskStatus.Pending] = 3,
-	[subagentTaskStatus.Error] = 4,
-	[subagentTaskStatus.Deleted] = 5
+local config2 = {
+	[SubagentTaskStatus.InProgress] = 1,
+	[SubagentTaskStatus.Done] = 2,
+	[SubagentTaskStatus.Pending] = 3,
+	[SubagentTaskStatus.Error] = 4,
+	[SubagentTaskStatus.Deleted] = 5
 }
 
-local function _(p1)
-	-- upvalues: subagentTaskStatus (ref), t (ref)
-	return if typeof(p1) == "string" then t[string.lower(p1)] or p1 else subagentTaskStatus.Pending
+local function _(Text: string) --[[ Line: 46 | Named "toTaskStatus" ]]
+	-- upvalues: SubagentTaskStatus (copy), config (copy)
+	return if typeof(Text) == "string" then config[string.lower(Text)] or Text else SubagentTaskStatus.Pending
 end
 
-local _ = function(p1)
-	-- upvalues: t_1 (ref)
-	return if typeof(p1) == "string" then t_1[string.lower(p1)] or p1 else nil
+local _ = function(Text: string) --[[ Line: 53 | Named "toTaskCategory" ]]
+	-- upvalues: config1 (copy)
+	return if typeof(Text) == "string" then config1[string.lower(Text)] or Text else nil
 end
 
-local _ = function(p1)
-	return typeof(p1) == "string" and string.lower(p1) == "manage_tasks"
+local _ = function(Text: string): boolean --[[ Line: 60 | Named "valueLooksLikeToolName" ]]
+	return typeof(Text) == "string" and string.lower(Text) == "manage_tasks"
 end
 
-local _ = function(p1)
-	local kind = p1.kind
+local _ = function(p1): boolean --[[ Line: 64 | Named "toolCallLooksLikeManageTasks" ]]
+	local Kind: string = p1.kind
 	
-	if not (typeof(kind) == "string" and string.lower(kind) == "manage_tasks") then
-		kind = p1.title
+	if typeof(Kind) ~= "string" or string.lower(Kind) ~= "manage_tasks" then
+		local Title: string = p1.title
 		
-		if typeof(kind) == "string" and string.lower(kind) == "manage_tasks" then
-			return true
+		if typeof(Title) ~= "string" or string.lower(Title) ~= "manage_tasks" then
+			local RawInput = p1.rawInput
+			
+			if typeof(RawInput) ~= "table" then
+				return false
+			end
+			local Name: string = RawInput.name
+			local IsManageTasks: boolean = typeof(Name) == "string" and string.lower(Name) == "manage_tasks"
+			
+			if not IsManageTasks then
+				local ToolName: string = RawInput.toolName
+				IsManageTasks = typeof(ToolName) == "string" and string.lower(ToolName) == "manage_tasks"
+			end
+			return IsManageTasks
 		end
-		local rawInput = p1.rawInput
-		
-		if typeof(rawInput) ~= "table" then
-			return false
-		end
-		local name = rawInput.name
-		kind = typeof(name) == "string" and string.lower(name) == "manage_tasks"
-		
-		if not kind then
-			local toolName = rawInput.toolName
-			kind = typeof(toolName) == "string" and string.lower(toolName) == "manage_tasks"
-		end
-		return kind
 	end
+	return true
 end
 
-local function toTaskMetadata(p1)
-	-- upvalues: httpService (ref)
-	if p1 == nil then
+local function toTaskMetadata(Metadata) --[[ Line: 77 ]]
+	-- upvalues: HttpService (copy)
+	if Metadata == nil then
 		return nil
-	elseif typeof(p1) == "table" then
-		return p1
-	elseif typeof(p1) == "string" then
-		local ok, status = pcall(function()
-			-- upvalues: httpService (copy), p1 (ref)
-			return httpService:JSONDecode(p1)
+	end
+	if typeof(Metadata) == "table" then
+		return Metadata
+	end
+	if typeof(Metadata) == "string" then
+		local Success, Result = pcall(function() --[[ Line: 84 ]]
+			-- upvalues: HttpService (upval), Metadata (copy)
+			return HttpService:JSONDecode(Metadata)
 		end)
 		
-		return if ok and typeof(status) == "table" then status else nil
+		if Success and typeof(Result) == "table" then
+			return Result
+		end
 	end
+	return nil
 end
 
-local function toTaskItem(p1)
-	-- upvalues: t_1 (ref), subagentTaskStatus (ref), t (ref), toTaskMetadata (ref)
-	if typeof(p1) ~= "table" or typeof(p1.text) ~= "string" or p1.text == "" then
+local function toTaskItem(TaskItem) --[[ Line: 94 ]]
+	-- upvalues: config1 (copy), SubagentTaskStatus (copy), config (copy), toTaskMetadata (copy)
+	if typeof(TaskItem) ~= "table" or typeof(TaskItem.text) ~= "string" or TaskItem.text == "" then
 		return nil
 	end
-	local category = p1.category
-	local var1 = if typeof(category) ~= "string" then t_1[string.lower(category)] or category else nil
+	local Category: string = TaskItem.category
+	local Entry = if typeof(Category) == "string" then config1[string.lower(Category)] or Category else nil
 	
-	if var1 == nil then
+	if Entry == nil then
 		return nil
-	end
-	local t_2 = { text = p1.text, description = p1.description }
-	local status = p1.status
-	t_2.status = if typeof(status) ~= "string" then t[string.lower(status)] or status else subagentTaskStatus.Pending
-	t_2.category = var1
-	t_2.metadata = toTaskMetadata(p1.metadata)
-	t_2.created_timestamp = if typeof(p1.created_timestamp) == "string" then p1.created_timestamp else nil
-	
-	return t_2
-end
-
-local function isTaskComplete(p1)
-	-- upvalues: subagentTaskStatus (ref)
-	return p1.status == subagentTaskStatus.Done
-end
-
-local function isTaskLoading(p1)
-	-- upvalues: subagentTaskStatus (ref)
-	return p1.status == subagentTaskStatus.InProgress
-end
-
-local _ = function(p1)
-	-- upvalues: t_2 (ref)
-	return if p1 == nil then 6 else t_2[p1] or 6
-end
-
-local _ = function(p1)
-	-- upvalues: t_2 (ref)
-	local cloned = table.clone(p1)
-	table.sort(cloned, function(p2, p3)
-		-- upvalues: t_2 (copy)
-		local status = p2.status
-		local status_1 = p3.status
+	else
+		local Status: string = TaskItem.status
 		
-		return (if status == nil then 6 else t_2[status] or 6) < (if status_1 == nil then 6 else t_2[status_1] or 6)
+		return {
+			text = TaskItem.text,
+			description = TaskItem.description,
+			status = if typeof(Status) == "string" then config[string.lower(Status)] or Status else SubagentTaskStatus.Pending,
+			category = Entry,
+			metadata = toTaskMetadata(TaskItem.metadata),
+			created_timestamp = if typeof(TaskItem.created_timestamp) == "string" then TaskItem.created_timestamp else nil
+		}
+	end
+end
+
+local _ = function(p1) --[[ Line: 122 | Named "getTaskStatusPriority" ]]
+	-- upvalues: config2 (copy)
+	return if p1 == nil then 6 else config2[p1] or 6
+end
+
+local _ = function(Tbl) --[[ Line: 129 | Named "sortTasksByStatus" ]]
+	-- upvalues: config2 (copy)
+	local Copy = table.clone(Tbl)
+	table.sort(Copy, function(A, B): boolean --[[ Line: 131 ]]
+		-- upvalues: config2 (upval)
+		local Status = A.status
+		local Status1 = B.status
+		
+		return (if Status == nil then 6 else config2[Status] or 6) < (if Status1 == nil then 6 else config2[Status1] or 6)
 	end)
 	
-	return cloned
+	return Copy
 end
 
-local function appendTasksFromPayload(p1, p2)
-	-- upvalues: toTaskItem (ref)
-	local var1 = if typeof(p1) == "table" then p1.tasks else nil
+local function appendTasksFromPayload(Input, List) --[[ Line: 137 ]]
+	-- upvalues: toTaskItem (copy)
+	local Tasks = if typeof(Input) == "table" then Input.tasks else nil
 	
-	if typeof(var1) ~= "table" then return end
-	for i, v in var1 do
-		local var2 = toTaskItem(v)
+	if typeof(Tasks) ~= "table" then return end
+	for _, _task in Tasks do
+		local TaskItem = toTaskItem(_task)
 		
-		if var2 ~= nil then
-			table.insert(p2, var2)
+		if TaskItem ~= nil then
+			table.insert(List, TaskItem)
 		end
 	end
 end
 
-local function appendTasksFromMaybeJson(p3, p4)
-	-- upvalues: appendTasksFromPayload (ref), httpService (ref)
-	if typeof(p3) == "table" then
-		appendTasksFromPayload(p3, p4)
+local function appendTasksFromMaybeJson(RawInput, p1) --[[ Line: 151 ]]
+	-- upvalues: appendTasksFromPayload (copy), HttpService (copy)
+	if typeof(RawInput) == "table" then
+		appendTasksFromPayload(RawInput, p1)
 		
 		return
-	elseif typeof(p3) == "string" then
-		local ok, status = pcall(function()
-			-- upvalues: httpService (copy), p3 (ref)
-			return httpService:JSONDecode(p3)
+	end
+	if typeof(RawInput) == "string" then
+		local Success, Result = pcall(function() --[[ Line: 155 ]]
+			-- upvalues: HttpService (upval), RawInput (copy)
+			return HttpService:JSONDecode(RawInput)
 		end)
 		
-		if not ok then return end
-		local var3 = if typeof(status) == "table" then status.text else nil
+		if not Success then return end
+		local Text = if typeof(Result) == "table" then Result.text else nil
 		
-		if typeof(var3) == "string" then
-			local ok_1, status_1 = pcall(function()
-				-- upvalues: httpService (copy), var3 (ref)
-				return httpService:JSONDecode(var3)
+		if typeof(Text) == "string" then
+			local Success1, Result1 = pcall(function() --[[ Line: 164 ]]
+				-- upvalues: HttpService (upval), Text (copy)
+				return HttpService:JSONDecode(Text)
 			end)
 			
-			if ok_1 then
-				appendTasksFromPayload(status_1, p4)
+			if Success1 then
+				appendTasksFromPayload(Result1, p1)
 			end
 		end
-		appendTasksFromPayload(status, p4)
+		appendTasksFromPayload(Result, p1)
 	end
 end
 
-local function extractTasksFromToolCall(p3)
-	-- upvalues: appendTasksFromMaybeJson (ref)
-	local var3
-	local kind = p3.kind
-	
-	if not (typeof(kind) == "string" and string.lower(kind) == "manage_tasks") then
-		kind = p3.title
-		
-		if typeof(kind) == "string" and string.lower(kind) == "manage_tasks" then
-			var3 = true
-		else
-			local rawInput = p3.rawInput
-			
-			if typeof(rawInput) == "table" then
-				kind = rawInput.name
-				var3 = typeof(kind) == "string" and string.lower(kind) == "manage_tasks"
-				
-				if not var3 then
-					kind = rawInput.toolName
-					var3 = false
-					
-					if typeof(kind) == "string" then
-						var3 = string.lower(kind) == "manage_tasks"
-						var3 = nil
-					end
-				end
-			else
-				var3 = false
-			end
-		end
-		if not var3 then
-			return nil
-		end
-		local t = {}
-		appendTasksFromMaybeJson(p3.rawInput, t)
-		
-		return if #t > 0 then t else nil
-	end
-end
-
-local function orderedManageTasksToolCalls(p3)
-	local kind
+local function orderedManageTasksToolCalls(p1) --[[ Line: 185 ]]
+	local List = {}
 	local t = {}
-	local t_1 = {}
 	
-	for i, v in p3.activityItems do
-		if v.kind == "tool_call" then
-			local toolCallId = p3.toolCalls[v.toolCallId]
+	for _, activityItem in p1.activityItems do
+		if activityItem.kind == "tool_call" then
+			local ToolCall = p1.toolCalls[activityItem.toolCallId]
 			
-			if toolCallId ~= nil then
-				local var3
-				kind = toolCallId.kind
+			if ToolCall ~= nil then
+				local Kind: string = ToolCall.kind
+				local IsManageTasks: boolean = typeof(Kind) == "string" and string.lower(Kind) == "manage_tasks"
 				
-				if not (typeof(kind) == "string" and string.lower(kind) == "manage_tasks") then
-					kind = toolCallId.title
-					
-					if typeof(kind) == "string" and string.lower(kind) == "manage_tasks" then
-						var3 = true
-					else
-						local rawInput = toolCallId.rawInput
-						
-						if typeof(rawInput) == "table" then
-							kind = rawInput.name
-							var3 = typeof(kind) == "string" and string.lower(kind) == "manage_tasks"
-							
-							if not var3 then
-								kind = rawInput.toolName
-								var3 = false
-								
-								if typeof(kind) == "string" then
-									var3 = string.lower(kind) == "manage_tasks"
-									var3 = nil
-								end
-							end
-						else
-							var3 = false
-						end
-					end
-					if var3 then
-						table.insert(t, toolCallId)
-						t_1[toolCallId.toolCallId] = true
-					end
+				if not IsManageTasks then
+					local Title: string = ToolCall.title
+					IsManageTasks = typeof(Title) == "string" and string.lower(Title) == "manage_tasks"
 				end
-			end
-		end
-	end
-	local t_2 = {}
-	
-	for i_1, v_1 in p3.toolCalls do
-		if not t_1[i_1] then
-			local var4
-			kind = v_1.kind
-			
-			if not (typeof(kind) == "string" and string.lower(kind) == "manage_tasks") then
-				kind = v_1.title
-				
-				if typeof(kind) == "string" and string.lower(kind) == "manage_tasks" then
-					var4 = true
+				local IsManageTasks1 = nil
+				if IsManageTasks then
+					IsManageTasks1 = true
 				else
-					local rawInput = v_1.rawInput
+					local RawInput = ToolCall.rawInput
 					
-					if typeof(rawInput) == "table" then
-						kind = rawInput.name
-						var4 = typeof(kind) == "string" and string.lower(kind) == "manage_tasks"
+					if typeof(RawInput) == "table" then
+						local Name: string = RawInput.name
+						IsManageTasks1 = typeof(Name) == "string" and string.lower(Name) == "manage_tasks"
 						
-						if not var4 then
-							kind = rawInput.toolName
-							var4 = false
-							
-							if typeof(kind) == "string" then
-								var4 = string.lower(kind) == "manage_tasks"
-								var4 = nil
-							end
+						if not IsManageTasks1 then
+							local ToolName: string = RawInput.toolName
+							IsManageTasks1 = typeof(ToolName) == "string" and string.lower(ToolName) == "manage_tasks"
 						end
 					else
-						var4 = false
+						IsManageTasks1 = false
 					end
 				end
-				if var4 then
-					table.insert(t_2, i_1)
+				if IsManageTasks1 then
+					table.insert(List, ToolCall)
+					t[ToolCall.toolCallId] = true
 				end
 			end
 		end
 	end
-	table.sort(t_2)
+	local List1 = {}
 	
-	for i_1, v_2 in t_2 do
-		table.insert(t, p3.toolCalls[v_2])
-	end
-	return t
-end
-
-local _ = function(p4)
-	return `{p4.category}:{p4.text}`
-end
-
-local function applyTasks(p4, p5, p6)
-	for i, v in p4 do
-		local category = `{v.category}:{v.text}`
-		
-		if p6[category] == nil then
-			table.insert(p5, v)
+	for i, toolCall in p1.toolCalls do
+		if not t[i] then
+			local Kind: string = toolCall.kind
+			local IsManageTasks2: boolean = typeof(Kind) == "string" and string.lower(Kind) == "manage_tasks"
+			
+			if not IsManageTasks2 then
+				local Title: string = toolCall.title
+				IsManageTasks2 = typeof(Title) == "string" and string.lower(Title) == "manage_tasks"
+			end
+			local IsManageTasks3 = nil
+			if IsManageTasks2 then
+				IsManageTasks3 = true
+			else
+				local RawInput = toolCall.rawInput
+				
+				if typeof(RawInput) == "table" then
+					local Name: string = RawInput.name
+					IsManageTasks3 = typeof(Name) == "string" and string.lower(Name) == "manage_tasks"
+					
+					if not IsManageTasks3 then
+						local ToolName: string = RawInput.toolName
+						IsManageTasks3 = typeof(ToolName) == "string" and string.lower(ToolName) == "manage_tasks"
+					end
+				else
+					IsManageTasks3 = false
+				end
+			end
+			if IsManageTasks3 then
+				table.insert(List1, i)
+			end
 		end
-		p6[category] = v
+	end
+	table.sort(List1)
+	
+	for _, value in List1 do
+		table.insert(List, p1.toolCalls[value])
+	end
+	return List
+end
+
+local _ = function(TaskItem): string --[[ Line: 213 | Named "taskKey" ]]
+	return `{TaskItem.category}:{TaskItem.text}`
+end
+
+local function applyTasks(List1, List, p2) --[[ Line: 217 ]]
+	for _, TaskItem in List1 do
+		local Text: string = `{TaskItem.category}:{TaskItem.text}`
+		
+		if p2[Text] == nil then
+			table.insert(List, TaskItem)
+		end
+		p2[Text] = TaskItem
 	end
 end
 
-local function groupTasks(p7)
-	-- upvalues: subagentTaskStatus (ref), t_2 (ref)
+local function groupTasks(List) --[[ Line: 227 ]]
+	-- upvalues: SubagentTaskStatus (copy), config2 (copy)
+	local List1 = {}
 	local t = {}
-	local t_1 = {}
 	
-	for i, v in p7 do
-		local category = t_1[v.category]
+	for _, TaskItem in List do
+		local Entry = t[TaskItem.category]
 		
-		if category == nil then
-			category = {
+		if Entry == nil then
+			Entry = {
 				isComplete = true,
 				isLoading = false,
-				name = v.category,
+				name = TaskItem.category,
 				tasks = {}
 			}
-			t_1[v.category] = category
-			table.insert(t, category)
+			t[TaskItem.category] = Entry
+			table.insert(List1, Entry)
 		end
-		table.insert(category.tasks, v)
+		table.insert(Entry.tasks, TaskItem)
 		
-		if v.status ~= subagentTaskStatus.Done then
-			category.isComplete = false
+		if TaskItem.status ~= SubagentTaskStatus.Done then
+			Entry.isComplete = false
 		end
 	end
-	for i, v_1 in t do
-		local cloned = table.clone(v_1.tasks)
-		table.sort(cloned, function(p8, p9)
-			-- upvalues: t_2 (copy)
-			local status = p8.status
-			local status_1 = p9.status
+	for _, value in List1 do
+		local Copy = table.clone(value.tasks)
+		table.sort(Copy, function(A, B): boolean --[[ Line: 131 ]]
+			-- upvalues: config2 (upval)
+			local Status = A.status
+			local Status1 = B.status
 			
-			return (if status == nil then 6 else t_2[status] or 6) < (if status_1 == nil then 6 else t_2[status_1] or 6)
+			return (if Status == nil then 6 else config2[Status] or 6) < (if Status1 == nil then 6 else config2[Status1] or 6)
 		end)
-		v_1.tasks = cloned
-		v_1.isLoading = false
+		value.tasks = Copy
+		value.isLoading = false
 		
-		for i_2, v_2 in v_1.tasks do
-			if v_2.status == subagentTaskStatus.InProgress then
-				v_1.isLoading = true
-				continue
+		for _, _task in value.tasks do
+			if _task.status == SubagentTaskStatus.InProgress then
+				value.isLoading = true
+				break
 			end
 		end
 	end
-	return t
+	return List1
 end
 
-local function toTaskState(p8, p9)
-	-- upvalues: groupTasks (ref)
-	if #p8 == 0 then
+local function toTaskState(List, p3) --[[ Line: 264 ]]
+	-- upvalues: groupTasks (copy)
+	if #List == 0 then
 		return nil
 	end
-	local t = {}
+	local List1 = {}
 	
-	for i, v in p8 do
-		table.insert(t, p9[`{v.category}:{v.text}`])
+	for _, TaskItem in List do
+		table.insert(List1, p3[`{TaskItem.category}:{TaskItem.text}`])
 	end
-	local var5 = groupTasks(t)
-	local var6 = #var5 > 0
-	
-	for i_1, v_1 in var5 do
-		if not v_1.isComplete then
-			var6 = false
+	local GroupTasksResult = groupTasks(List1)
+	local AllComplete = #GroupTasksResult > 0
+	for _, value in GroupTasksResult do
+		if not value.isComplete then
+			AllComplete = false
 			break
 		end
 	end
-	return { groups = var5, allComplete = var6 }
+	return { groups = GroupTasksResult, allComplete = AllComplete }
 end
 
 return {
 	TOOL_NAME = "manage_tasks",
-	extractTasksFromToolCall = extractTasksFromToolCall,
-	fromTasks = function(p10)
-		-- upvalues: toTaskItem (ref), applyTasks (ref), toTaskState (ref)
-		if typeof(p10) ~= "table" then
+	extractTasksFromToolCall = function(p4) --[[ Line: 175 ]]
+		-- upvalues: appendTasksFromMaybeJson (copy)
+		local Kind: string = p4.kind
+		local IsManageTasks = nil
+		repeat
+			if typeof(Kind) ~= "string" or string.lower(Kind) ~= "manage_tasks" then
+				local Title: string = p4.title
+				
+				if typeof(Title) ~= "string" or string.lower(Title) ~= "manage_tasks" then
+					local RawInput = p4.rawInput
+					
+					if typeof(RawInput) == "table" then
+						local Name: string = RawInput.name
+						IsManageTasks = typeof(Name) == "string" and string.lower(Name) == "manage_tasks"
+						
+						if IsManageTasks then break end
+						local ToolName: string = RawInput.toolName
+						IsManageTasks = typeof(ToolName) == "string" and string.lower(ToolName) == "manage_tasks"
+						break
+					end
+					IsManageTasks = false
+				end
+			end
+			IsManageTasks = true
+			break
+		until true
+		if IsManageTasks then
+			local t = {}
+			appendTasksFromMaybeJson(p4.rawInput, t)
+			
+			return if #t > 0 then t else nil
+		else
+			return nil
+		end
+	end,
+	fromTasks = function(List) --[[ Line: 289 ]]
+		-- upvalues: toTaskItem (copy), applyTasks (copy), toTaskState (copy)
+		if typeof(List) ~= "table" then
 			return nil
 		end
 		local t = {}
-		local t_1 = {}
-		local t_2 = {}
+		local t1 = {}
+		local List1 = {}
 		
-		for i, v in p10 do
-			local var7 = toTaskItem(v)
+		for _, value in List do
+			local TaskItem = toTaskItem(value)
 			
-			if var7 ~= nil then
-				table.insert(t_2, var7)
+			if TaskItem ~= nil then
+				table.insert(List1, TaskItem)
 			end
 		end
-		applyTasks(t_2, t, t_1)
+		applyTasks(List1, t, t1)
 		
-		return toTaskState(t, t_1)
+		return (toTaskState(t, t1))
 	end,
-	fromTurnState = function(p11)
-		-- upvalues: orderedManageTasksToolCalls (ref), appendTasksFromMaybeJson (ref), applyTasks (ref), toTaskState (ref)
+	fromTurnState = function(p4) --[[ Line: 307 ]]
+		-- upvalues: orderedManageTasksToolCalls (copy), appendTasksFromMaybeJson (copy), applyTasks (copy), toTaskState (copy)
 		local t = {}
-		local t_1 = {}
+		local t2 = {}
 		
-		for i, v in orderedManageTasksToolCalls(p11) do
-			local var8
-			local kind = v.kind
+		for _, value in orderedManageTasksToolCalls(p4) do
+			local Kind: string = value.kind
+			local IsManageTasks: boolean = typeof(Kind) == "string" and string.lower(Kind) == "manage_tasks"
 			
-			if not (typeof(kind) == "string" and string.lower(kind) == "manage_tasks") then
-				kind = v.title
+			if not IsManageTasks then
+				local Title: string = value.title
+				IsManageTasks = typeof(Title) == "string" and string.lower(Title) == "manage_tasks"
+			end
+			local IsManageTasks1 = nil
+			if IsManageTasks then
+				IsManageTasks1 = true
+			else
+				local RawInput = value.rawInput
 				
-				if typeof(kind) == "string" and string.lower(kind) == "manage_tasks" then
-					var8 = true
-				else
-					local rawInput = v.rawInput
+				if typeof(RawInput) == "table" then
+					local Name: string = RawInput.name
+					IsManageTasks1 = typeof(Name) == "string" and string.lower(Name) == "manage_tasks"
 					
-					if typeof(rawInput) == "table" then
-						kind = rawInput.name
-						var8 = typeof(kind) == "string" and string.lower(kind) == "manage_tasks"
-						
-						if not var8 then
-							local var9
-							kind = rawInput.toolName
-							var8 = false
-							
-							if typeof(kind) == "string" then
-								var8 = string.lower(kind) == "manage_tasks"
-								var8 = nil
-							end
-						end
-					else
-						var8 = false
+					if not IsManageTasks1 then
+						local ToolName: string = RawInput.toolName
+						IsManageTasks1 = typeof(ToolName) == "string" and string.lower(ToolName) == "manage_tasks"
 					end
-				end
-				if var8 then
-					var8 = {}
-					appendTasksFromMaybeJson(v.rawInput, var8)
-					var9 = if #var8 > 0 then var8 else nil
 				else
-					var9 = nil
-				end
-				if var9 ~= nil then
-					applyTasks(var9, t, t_1)
+					IsManageTasks1 = false
 				end
 			end
+			local v1 = nil
+			if IsManageTasks1 then
+				local t3 = {}
+				appendTasksFromMaybeJson(value.rawInput, t3)
+				v1 = if #t3 > 0 then t3 else nil
+			else
+				v1 = nil
+			end
+			if v1 ~= nil then
+				applyTasks(v1, t, t2)
+			end
 		end
-		return toTaskState(t, t_1)
+		return (toTaskState(t, t2))
 	end,
-	isTaskComplete = isTaskComplete,
-	isTaskLoading = isTaskLoading
+	isTaskComplete = function(p5): boolean --[[ Line: 114 ]]
+		-- upvalues: SubagentTaskStatus (copy)
+		return p5.status == SubagentTaskStatus.Done
+	end,
+	isTaskLoading = function(p5): boolean --[[ Line: 118 ]]
+		-- upvalues: SubagentTaskStatus (copy)
+		return p5.status == SubagentTaskStatus.InProgress
+	end
 }

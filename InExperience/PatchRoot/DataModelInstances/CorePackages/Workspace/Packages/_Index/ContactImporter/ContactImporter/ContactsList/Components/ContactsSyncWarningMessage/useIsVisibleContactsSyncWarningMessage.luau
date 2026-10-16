@@ -1,23 +1,23 @@
-﻿local reactModule = require(script:FindFirstAncestor("ContactImporter").Parent.React)
-local contactsSyncWarningCacheModule = require(script.Parent.ContactsSyncWarningCache)
-local contactsSyncWarningImpressionsCountCap = game:DefineFastInt("ContactsSyncWarningImpressionsCountCap", 1)
+﻿local ReactModule = require(script:FindFirstAncestor("ContactImporter").Parent.React)
+local ContactsSyncWarningCacheModule = require(script.Parent.ContactsSyncWarningCache)
+local ContactsSyncWarningImpressionsCountCap = game:DefineFastInt("ContactsSyncWarningImpressionsCountCap", 1)
 
-local function isMessageHiddenInitState()
-	-- upvalues: contactsSyncWarningCacheModule (ref), contactsSyncWarningImpressionsCountCap (ref)
-	local var1 = contactsSyncWarningCacheModule.getValue() or 0
+local function isMessageHiddenInitState(): boolean --[[ Line: 9 ]]
+	-- upvalues: ContactsSyncWarningCacheModule (copy), ContactsSyncWarningImpressionsCountCap (copy)
+	local Value = ContactsSyncWarningCacheModule.getValue() or 0
 	
-	return if var1 >= 0 then contactsSyncWarningImpressionsCountCap <= var1 else true
+	return Value < 0 or ContactsSyncWarningImpressionsCountCap <= Value
 end
 
-return function()
-	-- upvalues: reactModule (ref), isMessageHiddenInitState (ref), contactsSyncWarningCacheModule (ref)
-	local var1 = reactModule.useState(isMessageHiddenInitState)
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), contactsSyncWarningCacheModule (copy)
-		if not var1 then
-			contactsSyncWarningCacheModule.incrementValue()
+return function(): boolean --[[ Line: 14 | Named "useIsVisibleContactsSyncWarningMessage" ]]
+	-- upvalues: ReactModule (copy), isMessageHiddenInitState (copy), ContactsSyncWarningCacheModule (copy)
+	local UseStateResult = ReactModule.useState(isMessageHiddenInitState)
+	ReactModule.useEffect(function() --[[ Line: 18 ]]
+		-- upvalues: UseStateResult (copy), ContactsSyncWarningCacheModule (upval)
+		if not UseStateResult then
+			ContactsSyncWarningCacheModule.incrementValue()
 		end
-	end, { var1 })
+	end, { UseStateResult })
 	
-	return not var1
+	return not UseStateResult
 end

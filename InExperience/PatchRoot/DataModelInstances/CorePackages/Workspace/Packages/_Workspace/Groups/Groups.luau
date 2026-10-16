@@ -1,14 +1,14 @@
-﻿local _script = script
+﻿local v1 = script
 
 return {
-	GroupsInExperienceApp = require(_script.GroupsInExperienceApp),
-	GroupsList = require(_script.Components.GroupsList),
-	GroupsPage = require(_script.Components.GroupsPage),
-	Common = require(_script.Common),
-	Networking = require(_script.Networking),
-	Contexts = require(_script.Contexts),
-	Hooks = require(_script.Hooks),
-	Navigation = require(_script.Navigation),
-	CommunityListRouting = require(_script.CommunityListRouting),
+	GroupsInExperienceApp = require(v1.GroupsInExperienceApp),
+	GroupsList = require(v1.Components.GroupsList),
+	GroupsPage = require(v1.Components.GroupsPage),
+	Common = require(v1.Common),
+	Networking = require(v1.Networking),
+	Contexts = require(v1.Contexts),
+	Hooks = require(v1.Hooks),
+	Navigation = require(v1.Navigation),
+	CommunityListRouting = require(v1.CommunityListRouting),
 	["jest.config"] = script["jest.config"]
 }

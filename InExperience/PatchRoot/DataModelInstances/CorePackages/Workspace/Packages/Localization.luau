@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.Localization.Localization)
+﻿return (require(script.Parent._Workspace.Localization.Localization))

@@ -1,14 +1,16 @@
-﻿return function(p1)
-	return function()
-		-- upvalues: p1 (ref)
-		local var1 = "unknownLua"
-		local none = Enum.Platform.None
-		pcall(function()
-			-- upvalues: none (write), p1 (copy)
-			none = p1:GetPlatform()
+﻿return function(UserInputService) --[[ Line: 1 ]]
+	return function(): string --[[ Line: 2 | Named "getPlatformTarget" ]]
+		-- upvalues: UserInputService (copy)
+		local v1 = "unknownLua"
+		local None = Enum.Platform.None
+		pcall(function() --[[ Line: 8 ]]
+			-- upvalues: None (ref), UserInputService (upval)
+			None = UserInputService:GetPlatform()
 		end)
-		local var2 = if none ~= Enum.Platform.XBox360 then none == Enum.Platform.XBoxOne else true
+		local IsNoneMatch: boolean = None == Enum.Platform.Windows or None == Enum.Platform.OSX
+		local IsNoneMatch1: boolean = None == Enum.Platform.IOS or None == Enum.Platform.Android or None == Enum.Platform.UWP
+		local IsNoneMatch2: boolean = None == Enum.Platform.XBox360 or None == Enum.Platform.XBoxOne or (None == Enum.Platform.PS3 or (None == Enum.Platform.PS4 or game:GetEngineFeature("PlatformEnumPS5") and None == Enum.Platform.PS5)) or None == Enum.Platform.WiiU
 		
-		return if if none ~= Enum.Platform.Windows then none == Enum.Platform.OSX else true then "client" elseif (if none ~= Enum.Platform.IOS then none == Enum.Platform.Android else true) or none == Enum.Platform.UWP then "mobile" elseif (var2 or (if none ~= Enum.Platform.PS3 then if none ~= Enum.Platform.PS4 then game:GetEngineFeature("PlatformEnumPS5") and none == Enum.Platform.PS5 else true else true)) or none == Enum.Platform.WiiU then "console" else var1 .. tostring(none)
+		return if IsNoneMatch then "client" elseif IsNoneMatch1 then "mobile" elseif IsNoneMatch2 then "console" else v1 .. tostring(None)
 	end
 end

@@ -1,6 +1,6 @@
-﻿local bulkPurchaseApp = script:FindFirstAncestor("BulkPurchaseApp")
-local _ = require(bulkPurchaseApp.Enums.BulkPurchasePromptStateEnum)
+﻿local BulkPurchaseApp = script:FindFirstAncestor("BulkPurchaseApp")
+local _ = require(BulkPurchaseApp.Enums.BulkPurchasePromptStateEnum)
 
-return require(bulkPurchaseApp.Parent.Rodux).makeActionCreator("BulkPurchaseSucceeded", function(p1, p2)
-	return { promptState = p1, itemStatuses = p2 }
+return require(BulkPurchaseApp.Parent.Rodux).makeActionCreator("BulkPurchaseSucceeded", function(PromptState, ItemStatuses) --[[ Line: 15 ]]
+	return { promptState = PromptState, itemStatuses = ItemStatuses }
 end)

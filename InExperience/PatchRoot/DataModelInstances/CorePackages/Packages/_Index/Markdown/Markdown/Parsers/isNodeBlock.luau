@@ -1,8 +1,8 @@
-﻿local markdown = script:FindFirstAncestor("Markdown")
-local nodeTypeModule = require(markdown.Enums.NodeType)
-local _ = require(markdown.Types)
+﻿local Markdown = script:FindFirstAncestor("Markdown")
+local NodeTypeModule = require(Markdown.Enums.NodeType)
+local _ = require(Markdown.Types)
 
-return function(p1)
-	-- upvalues: nodeTypeModule (ref)
-	return p1.name ~= "TAG" and (if p1.type ~= nodeTypeModule.Block then p1.type == nodeTypeModule.TextBlock else true)
+return function(p1): boolean --[[ Line: 5 | Named "isNodeBlock" ]]
+	-- upvalues: NodeTypeModule (copy)
+	return p1.name ~= "TAG" and (p1.type == NodeTypeModule.Block or p1.type == NodeTypeModule.TextBlock)
 end

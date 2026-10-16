@@ -1,15 +1,15 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local parent = dataHydration.Parent
-local sharedFlagsModule = require(parent.SharedFlags)
-local url = require(parent.Http).Url
-local myHttpRequestModule = require(dataHydration.TrustedConnections.Networking.myHttpRequest)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local Parent = DataHydration.Parent
+local SharedFlagsModule = require(Parent.SharedFlags)
+local Url = require(Parent.Http).Url
+local MyHttpRequestModule = require(DataHydration.TrustedConnections.Networking.myHttpRequest)
 
-return function(p1, p2)
-	-- upvalues: url (ref), sharedFlagsModule (ref), myHttpRequestModule (ref)
-	local formattedText = string.format("%s/users/%s/send-trusted-friend-request", url.FRIEND_URL, tostring(p1))
+return function(p1, p2) --[[ Line: 10 ]]
+	-- upvalues: Url (copy), SharedFlagsModule (copy), MyHttpRequestModule (copy)
+	local Formatted = string.format("%s/users/%s/send-trusted-friend-request", Url.FRIEND_URL, (tostring(p1)))
 	
-	if sharedFlagsModule.FFlagProfilePlatformTrustedConnectionsMVP and p2 ~= nil then
-		formattedText ..= `?source={p2}`
+	if SharedFlagsModule.FFlagProfilePlatformTrustedConnectionsMVP and p2 ~= nil then
+		Formatted ..= `?source={p2}`
 	end
-	return myHttpRequestModule(formattedText, "POST", { postBody = {} })
+	return MyHttpRequestModule(Formatted, "POST", { postBody = {} })
 end

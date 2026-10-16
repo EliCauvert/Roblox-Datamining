@@ -1,106 +1,75 @@
-﻿local allowLuobuFreecamGroup = game:DefineFastFlag("AllowLuobuFreecamGroup", false)
-local luaGetCanManageAsync = game:DefineFastFlag("UseGetCanManageAsync", false) and game:GetEngineFeature("LuaGetCanManageAsync")
-local playerScriptStatusProperty = game:DefineFastFlag("FreeCameraToIAS", false) and game:GetEngineFeature("PlayerScriptStatusProperty")
+﻿local AllowLuobuFreecamGroup = game:DefineFastFlag("AllowLuobuFreecamGroup", false)
+local PlayerScriptStatusPropertyEngineFeature = game:DefineFastFlag("FreeCameraToIAS", false) and game:GetEngineFeature("PlayerScriptStatusProperty")
 local list = { 4358041 }
-local list_1 = { 7842878 }
-local httpRbxApiService = game:GetService("HttpRbxApiService")
-local httpService = game:GetService("HttpService")
-local playersService = game:GetService("Players")
-local policyService = game:GetService("PolicyService")
-local runService = game:GetService("RunService")
-local starterPlayerService = game:GetService("StarterPlayer")
-local robloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
-local url = require(game:GetService("CorePackages").Workspace.Packages.CoreScriptsCommon).Url
-local serverUtilModule = require(robloxGui.Modules.Server.ServerUtil)
-local fFlagUserPresenceTokenRccCheckPermissionsLuaModule = require(robloxGui.Modules.Common.Flags.FFlagUserPresenceTokenRccCheckPermissionsLua)
+local list1 = { 7842878 }
+local Players = game:GetService("Players")
+local PolicyService = game:GetService("PolicyService")
+local RunService = game:GetService("RunService")
+local StarterPlayer = game:GetService("StarterPlayer")
+local ServerUtilModule = require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.Server.ServerUtil)
 
-return function()
-	-- upvalues: playerScriptStatusProperty (ref), starterPlayerService (ref), serverUtilModule (ref), runService (ref), luaGetCanManageAsync (ref), url (ref), httpService (ref), fFlagUserPresenceTokenRccCheckPermissionsLuaModule (ref), httpRbxApiService (ref), list (ref), allowLuobuFreecamGroup (ref), policyService (ref), list_1 (ref), playersService (ref)
-	local function WaitForChildOfClass(p1, p2)
-		local var1 = p1:FindFirstChildOfClass(p2)
-		while not var1 or var1.ClassName ~= p2 do
-			var1 = p1.ChildAdded:Wait()
+return function() --[[ Line: 28 | Named "Install" ]]
+	-- upvalues: PlayerScriptStatusPropertyEngineFeature (copy), StarterPlayer (copy), ServerUtilModule (copy), RunService (copy), list (copy), AllowLuobuFreecamGroup (copy), PolicyService (copy), list1 (copy), Players (copy)
+	local function WaitForChildOfClass(Object, ClassName) --[[ Line: 29 ]]
+		local ClassName1 = Object:FindFirstChildOfClass(ClassName)
+		while not ClassName1 or ClassName1.ClassName ~= ClassName do
+			ClassName1 = Object.ChildAdded:Wait()
 		end
-		return var1
+		return ClassName1
 	end
 	
-	local function AddFreeCamera(p3)
-		-- upvalues: WaitForChildOfClass (ref), playerScriptStatusProperty (copy), starterPlayerService (copy), serverUtilModule (copy)
-		local var2
-		local var3 = WaitForChildOfClass(p3, "PlayerGui")
-		local _ = nil
+	local function AddFreeCamera(Player) --[[ Line: 37 ]]
+		-- upvalues: WaitForChildOfClass (copy), PlayerScriptStatusPropertyEngineFeature (upval), StarterPlayer (upval), ServerUtilModule (upval)
+		local PlayerGui = WaitForChildOfClass(Player, "PlayerGui")
+		local Child = nil
 		
-		if playerScriptStatusProperty then
-			local playerModuleStatus = starterPlayerService.PlayerModuleStatus
-			var2 = script.Parent:WaitForChild(if if playerModuleStatus ~= 1 then playerModuleStatus == 2 else true then "FreeCameraIAS" else "FreeCamera")
+		if PlayerScriptStatusPropertyEngineFeature then
+			local PlayerModuleStatus = StarterPlayer.PlayerModuleStatus
+			local IsPlayerModuleStatusMatch: boolean = PlayerModuleStatus == 1 or PlayerModuleStatus == 2
+			Child = script.Parent:WaitForChild(if IsPlayerModuleStatusMatch then "FreeCameraIAS" else "FreeCamera")
 		else
-			var2 = script.Parent:WaitForChild("FreeCamera")
+			Child = script.Parent:WaitForChild("FreeCamera")
 		end
-		local freecam = Instance.new("ScreenGui")
-		freecam.Name = "Freecam"
-		freecam.ResetOnSpawn = false
-		local freecamScript = Instance.new("LocalScript")
-		freecamScript.Name = "FreecamScript"
+		local Freecam = Instance.new("ScreenGui")
+		Freecam.Name = "Freecam"
+		Freecam.ResetOnSpawn = false
+		local FreecamScript = Instance.new("LocalScript")
+		FreecamScript.Name = "FreecamScript"
 		
-		if serverUtilModule.getFFlagServerCoreScriptSourceCode() then
-			freecamScript.Source = serverUtilModule.getSourceForServerScript(var2)
+		if ServerUtilModule.getFFlagServerCoreScriptSourceCode() then
+			FreecamScript.Source = ServerUtilModule.getSourceForServerScript(Child)
 		else
-			freecamScript.Source = var2.Source
+			FreecamScript.Source = Child.Source
 		end
-		freecamScript.Parent = freecam
-		freecam.Parent = var3
+		FreecamScript.Parent = Freecam
+		Freecam.Parent = PlayerGui
 	end
 	
-	local function ShouldAddFreeCam(p3)
-		-- upvalues: runService (copy), luaGetCanManageAsync (copy), url (copy), httpService (copy), fFlagUserPresenceTokenRccCheckPermissionsLuaModule (copy), httpRbxApiService (copy), list (copy), allowLuobuFreecamGroup (copy), policyService (copy), list_1 (copy)
-		if runService:IsStudio() then
+	local function ShouldAddFreeCam(Player): boolean --[[ Line: 66 ]]
+		-- upvalues: RunService (upval), list (upval), AllowLuobuFreecamGroup (upval), PolicyService (upval), list1 (upval)
+		if RunService:IsStudio() then
 			return true
-		elseif p3.UserId <= 0 then
+		end
+		if Player.UserId <= 0 then
 			return false
-		elseif luaGetCanManageAsync then
-			local ok, status = pcall(p3.GetCanManageAsync, p3)
-			
-			if ok and status then
-				return true
-			end
-		else
-			local ok, status = pcall(function()
-				-- upvalues: url (copy), httpService (copy), p3 (ref), fFlagUserPresenceTokenRccCheckPermissionsLuaModule (copy), httpRbxApiService (copy)
-				local formattedText = string.format(url.APIS_URL .. "asset-permissions-api/v1/rcc/assets/check-permissions")
-				local var2 = httpService:JSONEncode({
-					requests = {
-						{
-							action = "Edit",
-							subject = { subjectType = "User", subjectId = p3.UserId },
-							assetId = game.PlaceId
-						}
-					}
-				})
-				
-				return httpService:JSONDecode(if fFlagUserPresenceTokenRccCheckPermissionsLuaModule then httpRbxApiService:PostAsyncFullUrlForPlayer(formattedText, var2, p3) else httpRbxApiService:PostAsyncFullUrl(formattedText, var2))
-			end)
-			
-			if ok then
-				status = status.results[1]
-				
-				if status.value and status.value.status == "HasPermission" then
-					return true
-				end
-			end
 		end
-		local status
-		for i, v in ipairs(list) do
-			ok, status = pcall(p3.IsInGroup, p3, v)
+		local Success, Result = pcall(Player.GetCanManageAsync, Player)
+		
+		if Success and Result then
+			return true
+		end
+		for _, value in ipairs(list) do
+			local Success1, Result1 = pcall(Player.IsInGroup, Player, value)
 			
-			if ok and status then
+			if Success1 and Result1 then
 				return true
 			end
 		end
-		if allowLuobuFreecamGroup and game:GetEngineFeature("LuobuModerationStatus") and policyService.IsLuobuServer == Enum.TriStateBoolean.True then
-			for i, v_1 in ipairs(list_1) do
-				ok, status = pcall(p3.IsInGroup, p3, v_1)
+		if AllowLuobuFreecamGroup and game:GetEngineFeature("LuobuModerationStatus") and PolicyService.IsLuobuServer == Enum.TriStateBoolean.True then
+			for _, value1 in ipairs(list1) do
+				local Success2, Result2 = pcall(Player.IsInGroup, Player, value1)
 				
-				if ok and status then
+				if Success2 and Result2 then
 					return true
 				end
 			end
@@ -108,16 +77,16 @@ return function()
 		return false
 	end
 	
-	local function PlayerAdded(p4)
-		-- upvalues: ShouldAddFreeCam (ref), AddFreeCamera (ref)
-		if ShouldAddFreeCam(p4) then
-			AddFreeCamera(p4)
+	local function PlayerAdded(Player) --[[ Line: 101 ]]
+		-- upvalues: ShouldAddFreeCam (copy), AddFreeCamera (copy)
+		if ShouldAddFreeCam(Player) then
+			AddFreeCamera(Player)
 		end
 	end
 	
-	playersService.PlayerAdded:Connect(PlayerAdded)
+	Players.PlayerAdded:Connect(PlayerAdded)
 	
-	for i, v in ipairs(playersService:GetPlayers()) do
-		coroutine.wrap(PlayerAdded)(v)
+	for _, player in ipairs(Players:GetPlayers()) do
+		coroutine.wrap(PlayerAdded)(player)
 	end
 end

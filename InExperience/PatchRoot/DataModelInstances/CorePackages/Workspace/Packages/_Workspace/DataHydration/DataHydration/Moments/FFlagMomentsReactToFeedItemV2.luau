@@ -1,1 +1,3 @@
-﻿return game:DefineFastFlag("MomentsReactToFeedItemV2", false) and require(script.Parent.FFlagMomentsEmojiSetsApi)
+﻿local FFlagMomentsEmojiSetsApiModule = require(script.Parent.FFlagMomentsEmojiSetsApi)
+
+return game:DefineFastFlag("MomentsReactToFeedItemV2", false) and FFlagMomentsEmojiSetsApiModule

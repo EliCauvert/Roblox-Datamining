@@ -1,4 +1,4 @@
-﻿local frozen = table.freeze({
+﻿local Frozen = table.freeze({
 	Initialization = "core.initialization",
 	DataMutation = "core.dataMutation",
 	LayoutGeometry = "core.layoutGeometry",
@@ -16,7 +16,7 @@
 	Diagnostics = "core.diagnostics",
 	Teardown = "core.teardown"
 })
-local frozen_1 = table.freeze({
+local Frozen1 = table.freeze({
 	GeometryPlacement = "roblox.geometryPlacement",
 	ReparentSelection = "roblox.reparentSelection",
 	PhysicalLifecycle = "roblox.physicalLifecycle",
@@ -26,7 +26,7 @@ local frozen_1 = table.freeze({
 	ViewportActivation = "roblox.viewportActivation",
 	Teardown = "roblox.teardown"
 })
-local frozen_2 = table.freeze({
+local Frozen2 = table.freeze({
 	DataReconciliation = "react.dataReconciliation",
 	PropSynchronization = "react.propSynchronization",
 	MountScroll = "react.mountScroll",
@@ -42,76 +42,76 @@ local frozen_2 = table.freeze({
 	Teardown = "react.teardown"
 })
 
-local function _(p1)
-	local t = {}
+local function _(List) --[[ Line: 47 | Named "values" ]]
+	local List1 = {}
 	
-	for i, v in p1 do
-		table.insert(t, v)
+	for _, value in List do
+		table.insert(List1, value)
 	end
-	table.sort(t)
+	table.sort(List1)
 	
-	return t
+	return List1
 end
 
-local freeze = table.freeze
+local FreezeFunction3 = table.freeze
 local t = {}
-local freeze_1 = table.freeze
-local t_1 = {}
+local FreezeFunction1 = table.freeze
+local List = {}
 
-for i, v in frozen do
-	table.insert(t_1, v)
+for _, value in Frozen do
+	table.insert(List, value)
 end
-table.sort(t_1)
-t.core = freeze_1(t_1)
-local freeze_2 = table.freeze
-local t_2 = {}
+table.sort(List)
+t.core = FreezeFunction1(List)
+local FreezeFunction = table.freeze
+local List1 = {}
 
-for i, v_1 in frozen_1 do
-	table.insert(t_2, v_1)
+for _, value1 in Frozen1 do
+	table.insert(List1, value1)
 end
-table.sort(t_2)
-t.roblox = freeze_2(t_2)
-local freeze_3 = table.freeze
-local t_3 = {}
+table.sort(List1)
+t.roblox = FreezeFunction(List1)
+local FreezeFunction2 = table.freeze
+local List2 = {}
 
-for i, v_2 in frozen_2 do
-	table.insert(t_3, v_2)
+for _, value2 in Frozen2 do
+	table.insert(List2, value2)
 end
-table.sort(t_3)
-t.react = freeze_3(t_3)
-freeze = freeze(t)
-local t_4 = {}
+table.sort(List2)
+t.react = FreezeFunction2(List2)
+local FreezeResult = FreezeFunction3(t)
+local t1 = {}
 
-for i_3, v_3 in freeze do
-	for i_4, v_4 in v_3 do
-		t_4[v_4] = true
+for _, value3 in FreezeResult do
+	for _, value4 in value3 do
+		t1[value4] = true
 	end
 end
 return table.freeze({
-	Core = frozen,
-	Roblox = frozen_1,
-	React = frozen_2,
-	byOwner = freeze,
-	isKnown = function(p2)
-		-- upvalues: t_4 (ref)
-		return t_4[p2] == true
+	Core = Frozen,
+	Roblox = Frozen1,
+	React = Frozen2,
+	byOwner = FreezeResult,
+	isKnown = function(p1): boolean --[[ Line: 69 ]]
+		-- upvalues: t1 (copy)
+		return t1[p1] == true
 	end,
-	getMissing = function(p2, p3)
-		-- upvalues: freeze (ref)
+	getMissing = function(List, Owner) --[[ Line: 73 ]]
+		-- upvalues: FreezeResult (copy)
 		local t = {}
 		
-		for i, v in p2 do
-			if v.owner == p3 then
-				t[v.responsibility] = true
+		for _, value in List do
+			if value.owner == Owner then
+				t[value.responsibility] = true
 			end
 		end
-		local t_1 = {}
+		local List1 = {}
 		
-		for i_1, v_1 in freeze[p3] do
-			if not t[v_1] then
-				table.insert(t_1, v_1)
+		for _, value1 in FreezeResult[Owner] do
+			if not t[value1] then
+				table.insert(List1, value1)
 			end
 		end
-		return t_1
+		return List1
 	end
 })

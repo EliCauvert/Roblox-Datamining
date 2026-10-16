@@ -1,20 +1,20 @@
-﻿local discoveryUtils = script:FindFirstAncestor("DiscoveryUtils")
-local parent = discoveryUtils.Parent
-local _ = require(parent.LuauPolyfill)
-local promiseModule = require(parent.Promise)
-local discoveryClientAppStorageModule = require(discoveryUtils.DiscoveryClientAppStorage)
+﻿local DiscoveryUtils = script:FindFirstAncestor("DiscoveryUtils")
+local Parent = DiscoveryUtils.Parent
+local _ = require(Parent.LuauPolyfill)
+local PromiseModule = require(Parent.Promise)
+local DiscoveryClientAppStorageModule = require(DiscoveryUtils.DiscoveryClientAppStorage)
 
-return function(p1, p2, p3)
-	-- upvalues: discoveryClientAppStorageModule (ref), promiseModule (ref)
-	return p1:andThen(function(p4)
-		return p4
-	end):catch(function(p4)
-		-- upvalues: discoveryClientAppStorageModule (copy), p2 (ref), p3 (ref), promiseModule (copy)
-		local ok, status = pcall(function()
-			-- upvalues: discoveryClientAppStorageModule (copy), p2 (copy), p3 (copy)
-			return discoveryClientAppStorageModule.getJsonStorageData(p2, p3)
+return function(Promise, p1, p2) --[[ Line: 20 | Named "makeDiscoveryNetworkCallWithCacheFallback" ]]
+	-- upvalues: DiscoveryClientAppStorageModule (copy), PromiseModule (copy)
+	return Promise:andThen(function(Result) --[[ Line: 26 ]]
+		return Result
+	end):catch(function(Err) --[[ Line: 29 ]]
+		-- upvalues: DiscoveryClientAppStorageModule (upval), p1 (copy), p2 (copy), PromiseModule (upval)
+		local Success, Result = pcall(function() --[[ Line: 30 ]]
+			-- upvalues: DiscoveryClientAppStorageModule (upval), p1 (upval), p2 (upval)
+			return DiscoveryClientAppStorageModule.getJsonStorageData(p1, p2)
 		end)
 		
-		return if ok then if status then promiseModule.resolve({ isFromCache = true, responseBody = status }) else promiseModule.reject(p4) else promiseModule.reject(status)
+		return if Success then if Result then PromiseModule.resolve({ isFromCache = true, responseBody = Result }) else PromiseModule.reject(Err) else PromiseModule.reject(Result)
 	end)
 end

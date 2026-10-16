@@ -1,6 +1,6 @@
-﻿local var1 = require(script:FindFirstAncestor("Moments").Parent.PolicyProvider).GetPolicyImplementations.MemStorageService("app-policy")
+﻿local AppPolicy = require(script:FindFirstAncestor("Moments").Parent.PolicyProvider).GetPolicyImplementations.MemStorageService("app-policy")
 
-return function()
-	-- upvalues: var1 (ref)
-	return var1.read()
+return function() --[[ Line: 9 ]]
+	-- upvalues: AppPolicy (copy)
+	return AppPolicy.read()
 end

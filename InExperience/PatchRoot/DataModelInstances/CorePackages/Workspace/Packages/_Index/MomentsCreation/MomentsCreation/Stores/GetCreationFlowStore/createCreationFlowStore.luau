@@ -1,132 +1,143 @@
-﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
-local parent = momentsCreation.Parent
-local signalsModule = require(parent.Signals)
-local _ = require(parent.MomentsTypes)
-local momentsCommonModule = require(parent.MomentsCommon)
-local creationFlowStateModule = require(momentsCreation.Enums.CreationFlowState)
-local createNavigationMachineModule = require(momentsCreation.Stores.createNavigationMachine)
-local createSelectionStoreModule = require(momentsCreation.Stores.createSelectionStore)
-local createDescriptionStoreModule = require(momentsCreation.Stores.createDescriptionStore)
-local createEditsStoreModule = require(momentsCreation.Stores.createEditsStore)
-local createComputed = signalsModule.createComputed
-local createSignal = signalsModule.createSignal
-local fFlagMomentTextGenerationFilteredSignal = momentsCommonModule.Flags.FFlagMomentTextGenerationFilteredSignal
-local getFFlagEnableMomentTextGeneration = momentsCommonModule.Flags.GetFFlagEnableMomentTextGeneration
+﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
+local Parent = MomentsCreation.Parent
+local SignalsModule = require(Parent.Signals)
+local _ = require(Parent.MomentsTypes)
+local MomentsCommonModule = require(Parent.MomentsCommon)
+local CreationFlowStateModule = require(MomentsCreation.Enums.CreationFlowState)
+local CreateNavigationMachineModule = require(MomentsCreation.Stores.createNavigationMachine)
+local CreateSelectionStoreModule = require(MomentsCreation.Stores.createSelectionStore)
+local CreateDescriptionStoreModule = require(MomentsCreation.Stores.createDescriptionStore)
+local CreateEditsStoreModule = require(MomentsCreation.Stores.createEditsStore)
+local FFlagMomentsTTSDraftRestoreModule = require(MomentsCreation.Flags.FFlagMomentsTTSDraftRestore)
+local CreateComputedFunction = SignalsModule.createComputed
+local CreateSignalFunction = SignalsModule.createSignal
+local FFlagMomentTextGenerationFilteredSignal = MomentsCommonModule.Flags.FFlagMomentTextGenerationFilteredSignal
+local GetFFlagEnableMomentTextGenerationFunction = MomentsCommonModule.Flags.GetFFlagEnableMomentTextGeneration
 
-return function()
-	-- upvalues: createNavigationMachineModule (ref), creationFlowStateModule (ref), createSelectionStoreModule (ref), createDescriptionStoreModule (ref), createEditsStoreModule (ref), createSignal (ref), createComputed (ref), fFlagMomentTextGenerationFilteredSignal (ref), getFFlagEnableMomentTextGeneration (ref)
-	local var1 = createNavigationMachineModule(creationFlowStateModule.Gallery)
-	local var2 = createSelectionStoreModule()
-	local var3 = createDescriptionStoreModule()
-	local var4 = createEditsStoreModule()
-	local var5, var6 = createSignal(false)
-	local var7, var8 = createSignal({})
-	local var9, var10 = createSignal(nil)
-	local var11, var12 = createSignal(false)
-	local var13, var14 = createSignal(nil)
-	local var15, var16 = createSignal(nil)
+return function() --[[ Line: 108 | Named "createCreationFlowStore" ]]
+	-- upvalues: CreateNavigationMachineModule (copy), CreationFlowStateModule (copy), CreateSelectionStoreModule (copy), CreateDescriptionStoreModule (copy), CreateEditsStoreModule (copy), CreateSignalFunction (copy), CreateComputedFunction (copy), FFlagMomentTextGenerationFilteredSignal (copy), GetFFlagEnableMomentTextGenerationFunction (copy), FFlagMomentsTTSDraftRestoreModule (copy)
+	local NavigationMachineModule = CreateNavigationMachineModule(CreationFlowStateModule.Gallery)
+	local SelectionStoreModule = CreateSelectionStoreModule()
+	local DescriptionStoreModule = CreateDescriptionStoreModule()
+	local EditsStoreModule = CreateEditsStoreModule()
+	local Signal, Signal2 = CreateSignalFunction(false)
+	local Signal1, Signal2_1 = CreateSignalFunction({})
+	local Signal3, Signal2_2 = CreateSignalFunction(nil)
+	local Signal4, Signal2_3 = CreateSignalFunction(false)
+	local Signal5, Signal2_4 = CreateSignalFunction(nil)
+	local Signal6, Signal2_5 = CreateSignalFunction(nil)
+	local Signal7, Signal2_6 = CreateSignalFunction(nil)
 	
 	return {
-		getStep = var1.getStep,
-		getCurrentState = var1.getStep,
-		canNavigate = var1.canNavigate,
-		navigate = var1.navigate,
-		getActive = var5,
-		getSelectedCapture = var2.getSelectedCapture,
-		getDescription = var3.getDescription,
-		getGeneratedDescription = var3.getGeneratedDescription,
-		getGenerationToken = var3.getGenerationToken,
-		getGeneratedTextFeedback = var3.getGeneratedTextFeedback,
-		getGeneratedSummary = var3.getGeneratedSummary,
-		getCommentsEnabled = var3.getCommentsEnabled,
-		getMusicList = var7,
-		getMusicEdit = createComputed(function(p1)
-			-- upvalues: var4 (ref)
-			return var4.getMap(p1).music
+		getStep = NavigationMachineModule.getStep,
+		getCurrentState = NavigationMachineModule.getStep,
+		canNavigate = NavigationMachineModule.canNavigate,
+		navigate = NavigationMachineModule.navigate,
+		getActive = Signal,
+		getSelectedCapture = SelectionStoreModule.getSelectedCapture,
+		getDescription = DescriptionStoreModule.getDescription,
+		getGeneratedDescription = DescriptionStoreModule.getGeneratedDescription,
+		getGenerationToken = DescriptionStoreModule.getGenerationToken,
+		getGeneratedTextFeedback = DescriptionStoreModule.getGeneratedTextFeedback,
+		getGeneratedSummary = DescriptionStoreModule.getGeneratedSummary,
+		getCommentsEnabled = DescriptionStoreModule.getCommentsEnabled,
+		getMusicList = Signal1,
+		getMusicEdit = CreateComputedFunction(function(p1) --[[ Line: 140 ]]
+			-- upvalues: EditsStoreModule (copy)
+			return EditsStoreModule.getMap(p1).music
 		end),
-		getTextOverlayEdits = createComputed(function(p1)
-			-- upvalues: var4 (ref)
-			return var4.getMap(p1).text
+		getTextOverlayEdits = CreateComputedFunction(function(p1) --[[ Line: 143 ]]
+			-- upvalues: EditsStoreModule (copy)
+			return EditsStoreModule.getMap(p1).text
 		end),
-		getTrimEdit = createComputed(function(p1)
-			-- upvalues: var4 (ref)
-			return var4.getMap(p1).trim
+		getTrimEdit = CreateComputedFunction(function(p1) --[[ Line: 137 ]]
+			-- upvalues: EditsStoreModule (copy)
+			return EditsStoreModule.getMap(p1).trim
 		end),
-		getEditsMap = var4.getMap,
-		getActiveSession = var9,
-		getIsGenerating = var11,
-		getActiveGeneration = var13,
-		getTTSAudio = var15,
-		updateCurrentState = function(p1)
-			-- upvalues: var1 (ref)
-			var1.reset(p1)
+		getEditsMap = EditsStoreModule.getMap,
+		getActiveSession = Signal3,
+		getIsGenerating = Signal4,
+		getActiveGeneration = Signal5,
+		getTTSAudio = Signal6,
+		getPendingRestoredVoice = Signal7,
+		updateCurrentState = function(p1) --[[ Line: 149 ]]
+			-- upvalues: NavigationMachineModule (copy)
+			NavigationMachineModule.reset(p1)
 		end,
-		onSelectedCaptureUpdated = function(p1)
-			-- upvalues: var2 (ref)
-			var2.setSelectedCapture(p1)
+		onSelectedCaptureUpdated = function(p1) --[[ Line: 154 ]]
+			-- upvalues: SelectionStoreModule (copy)
+			SelectionStoreModule.setSelectedCapture(p1)
 		end,
-		updateDescription = function(p1)
-			-- upvalues: var3 (ref)
-			var3.setDescription(p1)
+		updateDescription = function(p1) --[[ Line: 159 ]]
+			-- upvalues: DescriptionStoreModule (copy)
+			DescriptionStoreModule.setDescription(p1)
 		end,
-		setGeneratedDescription = function(value)
-			-- upvalues: var3 (ref)
-			var3.setGeneratedDescription(value)
+		setGeneratedDescription = function(p1) --[[ Line: 163 ]]
+			-- upvalues: DescriptionStoreModule (copy)
+			DescriptionStoreModule.setGeneratedDescription(p1)
 		end,
-		setGenerationToken = function(value)
-			-- upvalues: var3 (ref)
-			var3.setGenerationToken(value)
+		setGenerationToken = function(p1) --[[ Line: 171 ]]
+			-- upvalues: DescriptionStoreModule (copy)
+			DescriptionStoreModule.setGenerationToken(p1)
 		end,
-		setGeneratedTextFeedback = function(value)
-			-- upvalues: var3 (ref)
-			var3.setGeneratedTextFeedback(value)
+		setGeneratedTextFeedback = function(p1) --[[ Line: 179 ]]
+			-- upvalues: DescriptionStoreModule (copy)
+			DescriptionStoreModule.setGeneratedTextFeedback(p1)
 		end,
-		setGeneratedSummary = function(value)
-			-- upvalues: var3 (ref)
-			var3.setGeneratedSummary(value)
+		setGeneratedSummary = function(p1) --[[ Line: 167 ]]
+			-- upvalues: DescriptionStoreModule (copy)
+			DescriptionStoreModule.setGeneratedSummary(p1)
 		end,
-		updateCommentsEnabled = function(p1)
-			-- upvalues: var3 (ref)
-			var3.setCommentsEnabled(p1)
+		updateCommentsEnabled = function(p1) --[[ Line: 183 ]]
+			-- upvalues: DescriptionStoreModule (copy)
+			DescriptionStoreModule.setCommentsEnabled(p1)
 		end,
-		updateTrimEdit = function(p1)
-			-- upvalues: var4 (ref)
-			var4.setCommitted("trim", p1)
+		updateTrimEdit = function(p1) --[[ Line: 188 ]]
+			-- upvalues: EditsStoreModule (copy)
+			EditsStoreModule.setCommitted("trim", p1)
 		end,
-		updateMusicEdit = function(p1)
-			-- upvalues: var4 (ref)
-			var4.setCommitted("music", p1)
+		updateMusicEdit = function(p1) --[[ Line: 193 ]]
+			-- upvalues: EditsStoreModule (copy)
+			EditsStoreModule.setCommitted("music", p1)
 		end,
-		updateTextOverlayEdits = function(p1)
-			-- upvalues: var4 (ref)
-			var4.setCommitted("text", p1)
+		updateTextOverlayEdits = function(p1) --[[ Line: 198 ]]
+			-- upvalues: EditsStoreModule (copy)
+			EditsStoreModule.setCommitted("text", p1)
 		end,
-		setCommittedEdit = var4.setCommitted,
-		setActiveSession = var10,
-		setIsGenerating = var12,
-		setActiveGeneration = var14,
-		setTTSAudio = var16,
-		onMusicSearchRetrieved = function(p1)
-			-- upvalues: var8 (ref)
-			var8(p1)
+		setCommittedEdit = EditsStoreModule.setCommitted,
+		setActiveSession = Signal2_2,
+		setIsGenerating = Signal2_3,
+		setActiveGeneration = Signal2_4,
+		setTTSAudio = Signal2_5,
+		setPendingRestoredVoice = function(p1) --[[ Line: 175 ]]
+			-- upvalues: Signal2_6 (copy)
+			Signal2_6(p1)
 		end,
-		clearEdits = function(p1)
-			-- upvalues: var6 (ref), var2 (ref), var1 (ref), var3 (ref), fFlagMomentTextGenerationFilteredSignal (copy), getFFlagEnableMomentTextGeneration (copy), var8 (ref), var4 (ref), var10 (ref)
-			var6(true)
-			var2.setSelectedCapture(nil)
-			var1.reset(p1)
-			var3.setDescription("")
-			var3.setCommentsEnabled(true)
+		onMusicSearchRetrieved = function(p1) --[[ Line: 203 ]]
+			-- upvalues: Signal2_1 (copy)
+			Signal2_1(p1)
+		end,
+		clearEdits = function(p1) --[[ Line: 208 ]]
+			-- upvalues: Signal2 (copy), SelectionStoreModule (copy), NavigationMachineModule (copy), DescriptionStoreModule (copy), FFlagMomentTextGenerationFilteredSignal (upval), GetFFlagEnableMomentTextGenerationFunction (upval), Signal2_1 (copy), EditsStoreModule (copy), Signal2_2 (copy), FFlagMomentsTTSDraftRestoreModule (upval), Signal2_6 (copy)
+			Signal2(true)
+			SelectionStoreModule.setSelectedCapture(nil)
+			NavigationMachineModule.reset(p1)
+			DescriptionStoreModule.setDescription("")
+			DescriptionStoreModule.setCommentsEnabled(true)
 			
-			if fFlagMomentTextGenerationFilteredSignal or getFFlagEnableMomentTextGeneration() then
-				var3.setGeneratedDescription(nil)
-				var3.setGenerationToken(nil)
-				var3.setGeneratedTextFeedback(nil)
-				var3.setGeneratedSummary(nil)
+			if FFlagMomentTextGenerationFilteredSignal or GetFFlagEnableMomentTextGenerationFunction() then
+				DescriptionStoreModule.setGeneratedDescription(nil)
+				DescriptionStoreModule.setGenerationToken(nil)
+				DescriptionStoreModule.setGeneratedTextFeedback(nil)
+				DescriptionStoreModule.setGeneratedSummary(nil)
 			end
-			var8({})
-			var4.clear()
-			var10(nil)
+			Signal2_1({})
+			EditsStoreModule.clear()
+			Signal2_2(nil)
+			
+			if FFlagMomentsTTSDraftRestoreModule then
+				Signal2_6(nil)
+			end
 		end
 	}
 end

@@ -1,11 +1,11 @@
-﻿local httpService = game:GetService("HttpService")
-local parent = script:FindFirstAncestor("Groups").Parent
-local urlBuilder = require(parent.UrlBuilder).UrlBuilder
-local url = require(parent.Http).Url
+﻿local HttpService = game:GetService("HttpService")
+local Parent = script:FindFirstAncestor("Groups").Parent
+local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
+local Url = require(Parent.Http).Url
 
-return function(p1, p2)
-	-- upvalues: urlBuilder (ref), url (ref), httpService (ref)
-	return p1(urlBuilder.fromString(url.GROUPS_URL .. "v1/groups/{id}/users")({ id = tostring(p2) }), "POST", { postBody = httpService:JSONEncode({}) }):andThen(function(p3)
-		return p3.responseBody
+return function(Callback, p1) --[[ Line: 9 ]]
+	-- upvalues: UrlBuilder (copy), Url (copy), HttpService (copy)
+	return Callback(UrlBuilder.fromString(Url.GROUPS_URL .. "v1/groups/{id}/users")({ id = tostring(p1) }), "POST", { postBody = HttpService:JSONEncode({}) }):andThen(function(Result) --[[ Line: 16 ]]
+		return Result.responseBody
 	end)
 end

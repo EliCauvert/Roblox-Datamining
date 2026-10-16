@@ -1,46 +1,45 @@
-﻿local purchasePrompt = script:FindFirstAncestor("PurchasePrompt")
-local parent = purchasePrompt.Parent
-local sharedFlagsModule = require(parent.SharedFlags)
-local _ = require(parent.IAPExperience)
-local fFlagFixResaleDisplayPriceModule = require(purchasePrompt.Flags.FFlagFixResaleDisplayPrice)
-local fFlagPurchasePromptCartPricingEnabledModule = require(purchasePrompt.Flags.FFlagPurchasePromptCartPricingEnabled)
-local fFlagAXFixMISUpsellDiscountSummary = sharedFlagsModule.FFlagAXFixMISUpsellDiscountSummary
-local selectCartPricingOverrideModule = require(script.Parent.selectCartPricingOverride)
+﻿local PurchasePrompt = script:FindFirstAncestor("PurchasePrompt")
+local Parent = PurchasePrompt.Parent
+local _ = require(Parent.IAPExperience)
+local FFlagFixResaleDisplayPriceModule = require(PurchasePrompt.Flags.FFlagFixResaleDisplayPrice)
+local FFlagPurchasePromptCartPricingEnabledModule = require(PurchasePrompt.Flags.FFlagPurchasePromptCartPricingEnabled)
+local FFlagAXFixMISUpsellDiscountSummary = require(Parent.SharedFlags).FFlagAXFixMISUpsellDiscountSummary
+local SelectCartPricingOverrideModule = require(script.Parent.selectCartPricingOverride)
 
-return function(p1)
-	-- upvalues: fFlagFixResaleDisplayPriceModule (ref), fFlagPurchasePromptCartPricingEnabledModule (ref), selectCartPricingOverrideModule (ref), fFlagAXFixMISUpsellDiscountSummary (ref)
-	local productInfo = p1.productInfo
-	local price = productInfo.price or 0
-	local basePrice = productInfo.basePrice or price
-	local priceDiscountDetails = productInfo.priceDiscountDetails or {}
+return function(p1) --[[ Line: 33 | Named "selectPrice" ]]
+	-- upvalues: FFlagFixResaleDisplayPriceModule (copy), FFlagPurchasePromptCartPricingEnabledModule (copy), SelectCartPricingOverrideModule (copy), FFlagAXFixMISUpsellDiscountSummary (copy)
+	local ProductInfo = p1.productInfo
+	local Price = ProductInfo.price or 0
+	local BasePrice = ProductInfo.basePrice or Price
+	local PriceDiscountDetails = ProductInfo.priceDiscountDetails or {}
 	
-	if fFlagFixResaleDisplayPriceModule and p1.promptRequest then
-		local collectibleItemInstanceId = p1.promptRequest.collectibleItemInstanceId
+	if FFlagFixResaleDisplayPriceModule and p1.promptRequest then
+		local CollectibleItemInstanceId = p1.promptRequest.collectibleItemInstanceId
 		
-		if collectibleItemInstanceId and collectibleItemInstanceId ~= "" then
-			local expectedPrice = p1.promptRequest.expectedPrice
+		if CollectibleItemInstanceId and CollectibleItemInstanceId ~= "" then
+			local ExpectedPrice = p1.promptRequest.expectedPrice
 			
-			if expectedPrice ~= nil then
-				price = expectedPrice
-				basePrice = expectedPrice
+			if ExpectedPrice ~= nil then
+				Price = ExpectedPrice
+				BasePrice = ExpectedPrice
 			end
 		end
 	end
-	if fFlagPurchasePromptCartPricingEnabledModule then
-		local var1 = selectCartPricingOverrideModule(p1)
+	if FFlagPurchasePromptCartPricingEnabledModule then
+		local SelectCartPricingOverrideModuleResult = SelectCartPricingOverrideModule(p1)
 		
-		if var1 ~= nil then
-			price = var1.priceInRobux
+		if SelectCartPricingOverrideModuleResult ~= nil then
+			Price = SelectCartPricingOverrideModuleResult.priceInRobux
 			
-			if var1.basePriceInRobux ~= nil then
-				basePrice = var1.basePriceInRobux
+			if SelectCartPricingOverrideModuleResult.basePriceInRobux ~= nil then
+				BasePrice = SelectCartPricingOverrideModuleResult.basePriceInRobux
 			end
 		end
 	end
 	return {
-		priceInRobux = price,
-		basePriceInRobux = basePrice,
-		discounts = priceDiscountDetails,
-		savingsSummaryOverride = if fFlagAXFixMISUpsellDiscountSummary then productInfo.savingsSummaryOverride else nil
+		priceInRobux = Price,
+		basePriceInRobux = BasePrice,
+		discounts = PriceDiscountDetails,
+		savingsSummaryOverride = if FFlagAXFixMISUpsellDiscountSummary then ProductInfo.savingsSummaryOverride else nil
 	}
 end

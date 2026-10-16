@@ -1,563 +1,564 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local creatorAgentChatModule = require(parent.DataHydration.CreatorAgentChat)
-local fFlagBuildExperienceToolResultFailureRecoveryModule = require(buildExperience.Flags.FFlagBuildExperienceToolResultFailureRecovery)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local CreatorAgentChatModule = require(Parent.DataHydration.CreatorAgentChat)
+local FFlagBuildExperienceToolResultFailureRecoveryModule = require(BuildExperience.Flags.FFlagBuildExperienceToolResultFailureRecovery)
+local FFlagBuildExperienceDevProductModerationReadbackModule = require(BuildExperience.Flags.FFlagBuildExperienceDevProductModerationReadback)
+local WasDeveloperProductTextModeratedModule = require(BuildExperience.utils.wasDeveloperProductTextModerated)
 local _ = require(script.Parent.chatTypes)
-local chatConstantsModule = require(script.Parent.chatConstants)
+local ChatConstantsModule = require(script.Parent.chatConstants)
 local _ = require(script.Parent.localToolOverlay)
-local createManageDevProductStoreModule = require(script.Parent.createManageDevProductStore)
-local fFlagBuildExperienceDevProductRecoveryModule = require(buildExperience.Flags.FFlagBuildExperienceDevProductRecovery)
-local fFlagBuildExperienceRemoveDevProductPriceCap = require(parent.SharedFlags).FFlagBuildExperienceRemoveDevProductPriceCap
-local toolControllerUtilsModule = require(script.Parent.toolControllerUtils)
-local downloadGeneratedImageAsyncModule = require(buildExperience.utils.downloadGeneratedImageAsync)
-local studioManageDevProductTool = creatorAgentChatModule.StudioManageDevProductTool
-local debug = creatorAgentChatModule.debug
-local awaitRequestState = toolControllerUtilsModule.awaitRequestState
-local getToolCallOrder = toolControllerUtilsModule.getToolCallOrder
-local var1 = createManageDevProductStoreModule()
+local FFlagBuildExperienceDevProductRecoveryModule = require(BuildExperience.Flags.FFlagBuildExperienceDevProductRecovery)
+local FFlagBuildExperienceRemoveDevProductPriceCap = require(Parent.SharedFlags).FFlagBuildExperienceRemoveDevProductPriceCap
+local ToolControllerUtilsModule = require(script.Parent.toolControllerUtils)
+local DownloadGeneratedImageAsyncModule = require(BuildExperience.utils.downloadGeneratedImageAsync)
+local StudioManageDevProductTool = CreatorAgentChatModule.StudioManageDevProductTool
+local Debug = CreatorAgentChatModule.debug
+local AwaitRequestStateFunction = ToolControllerUtilsModule.awaitRequestState
+local GetToolCallOrderFunction = ToolControllerUtilsModule.getToolCallOrder
+local v1 = require(script.Parent.createManageDevProductStore)()
 
-local function awaitPromise(p1)
-	-- upvalues: chatConstantsModule (ref)
-	local var2 = nil
-	local var3 = nil
-	local var4 = false
-	p1:andThen(function(p2)
-		-- upvalues: var2 (write), var4 (write)
-		var2 = p2
-		var4 = true
-	end, function(p2)
-		-- upvalues: var3 (write), var4 (write)
-		var3 = p2
-		var4 = true
+local function awaitPromise(Promise) --[[ Line: 77 ]]
+	-- upvalues: ChatConstantsModule (copy)
+	local v2 = nil
+	local v3: string? = nil
+	local Flag = false
+	Promise:andThen(function(Result) --[[ Line: 80 ]]
+		-- upvalues: v2 (ref), Flag (ref)
+		v2 = Result
+		Flag = true
+	end, function(p1) --[[ Line: 83 ]]
+		-- upvalues: v3 (ref), Flag (ref)
+		v3 = p1
+		Flag = true
 	end)
-	local var5 = os.clock() + chatConstantsModule.CAS_RPC_TIMEOUT_SECONDS
-	while os.clock() < var5 do
+	local NewClockTime = os.clock() + ChatConstantsModule.CAS_RPC_TIMEOUT_SECONDS
+	while not Flag and os.clock() < NewClockTime do
 		task.wait()
 	end
-	p1:cancel()
-	var3 = "The request timed out and its outcome is unknown. List developer products before retrying."
-	
-	return var2, u420
-end
-
-local function _(p2)
-	return if typeof(p2) == "table" and typeof(p2.errorMessage) == "string" then p2.errorMessage elseif p2 == nil then "The request timed out." else tostring(p2)
-end
-
-local function detailCodeForFailure(p2, p3)
-	local lowerText = string.lower(p3)
-	
-	return if string.find(lowerText, "outcome is unknown", 1, true) then "outcome_unknown" elseif string.find(lowerText, "universe", 1, true) and string.find(lowerText, "publish", 1, true) then "universe_not_published" else p2 .. "_failed"
-end
-
-local function awaitMutation(p2)
-	-- upvalues: awaitPromise (ref)
-	local var6, var7 = awaitPromise(p2)
-	
-	if var6 ~= nil then
-		return var6, nil
+	if not Flag then
+		Promise:cancel()
+		v3 = "The request timed out and its outcome is unknown. List developer products before retrying."
 	end
-	local var8 = if typeof(var7) == "table" then var7.product else nil
-	
-	return var8, if typeof(var7) == "table" and typeof(var7.errorMessage) == "string" then var7.errorMessage elseif var7 == nil then "The request timed out." else tostring(var7), var8 == nil and (if typeof(var7) == "table" then var7.responseCode else nil) == 429
+	return v2, v3
 end
 
-local function proposalFromFlow(p2, p3, p4)
-	-- upvalues: fFlagBuildExperienceDevProductRecoveryModule (ref)
+local function _(p1) --[[ Line: 100 | Named "messageFromRejection" ]]
+	return if typeof(p1) == "table" and typeof(p1.errorMessage) == "string" then p1.errorMessage elseif p1 == nil then "The request timed out." else tostring(p1)
+end
+
+local function detailCodeForFailure(Action, Text: string): string --[[ Line: 110 ]]
+	local Lowered = string.lower(Text)
+	
+	return if string.find(Lowered, "outcome is unknown", 1, true) then "outcome_unknown" elseif string.find(Lowered, "universe", 1, true) and string.find(Lowered, "publish", 1, true) then "universe_not_published" else Action .. "_failed"
+end
+
+local function awaitMutation(ActivateResult) --[[ Line: 121 ]]
+	-- upvalues: awaitPromise (copy), FFlagBuildExperienceDevProductModerationReadbackModule (copy)
+	local AwaitPromiseResult, AwaitPromiseResult2 = awaitPromise(ActivateResult)
+	
+	if AwaitPromiseResult == nil then
+		local Product = if typeof(AwaitPromiseResult2) == "table" then AwaitPromiseResult2.product else nil
+		local ResponseCode = if typeof(AwaitPromiseResult2) == "table" then AwaitPromiseResult2.responseCode else nil
+		
+		return Product, if typeof(AwaitPromiseResult2) == "table" and typeof(AwaitPromiseResult2.errorMessage) == "string" then AwaitPromiseResult2.errorMessage elseif AwaitPromiseResult2 == nil then "The request timed out." else tostring(AwaitPromiseResult2), Product == nil and ResponseCode == 429, if FFlagBuildExperienceDevProductModerationReadbackModule and typeof(AwaitPromiseResult2) == "table" and AwaitPromiseResult2.outcome == "unverified" then "readback_unverified" else nil
+	else
+		return AwaitPromiseResult, nil
+	end
+end
+
+local function proposalFromFlow(p1, IsApproved, IsRejected) --[[ Line: 137 ]]
+	-- upvalues: FFlagBuildExperienceDevProductRecoveryModule (copy)
 	return {
-		toolCallId = p2.toolCallId,
-		callOrder = p2.callOrder,
-		action = p2.action,
-		name = p2.name,
-		description = p2.description,
-		priceInRobux = p2.priceInRobux,
-		productId = p2.productId,
-		imageAssetId = p2.imageAssetId,
-		isApproved = p3,
-		isRejected = p4,
-		isPending = if fFlagBuildExperienceDevProductRecoveryModule then p2.isPending else nil,
-		hasError = if fFlagBuildExperienceDevProductRecoveryModule then p2.resultError ~= nil and not p4 else nil,
-		canRetry = if fFlagBuildExperienceDevProductRecoveryModule then p2.canRetry and not p4 else nil
+		toolCallId = p1.toolCallId,
+		callOrder = p1.callOrder,
+		action = p1.action,
+		name = p1.name,
+		description = p1.description,
+		priceInRobux = p1.priceInRobux,
+		productId = p1.productId,
+		imageAssetId = p1.imageAssetId,
+		isApproved = IsApproved,
+		isRejected = IsRejected,
+		isPending = if FFlagBuildExperienceDevProductRecoveryModule then p1.isPending else nil,
+		hasError = if FFlagBuildExperienceDevProductRecoveryModule then p1.resultError ~= nil and not IsRejected else nil,
+		canRetry = if FFlagBuildExperienceDevProductRecoveryModule then p1.canRetry and not IsRejected else nil
 	}
 end
 
-local function moderationError(p2, p3)
-	return if not (p2.action ~= "create" and p2.action ~= "update") then if (p2.name ~= nil and (p3.name ~= nil and p3.name ~= p2.name)) or (p2.description ~= nil and (p2.description ~= "" and (p3.description ~= nil and p3.description ~= p2.description))) then ("Roblox moderation altered this product's text. Product %s already exists; do not create another. Ask the creator for plainer wording and update this product."):format(tostring(p3.productId or (p2.productId or "unknown"))) else nil else nil
+local function moderationError(p1, Product) --[[ Line: 159 ]]
+	-- upvalues: FFlagBuildExperienceDevProductModerationReadbackModule (copy), WasDeveloperProductTextModeratedModule (copy)
+	if p1.action ~= "create" and p1.action ~= "update" then
+		return nil
+	end
+	local WasDeveloperProductTextModeratedModuleResult = nil
+	local WasDeveloperProductTextModeratedModuleResult1 = nil
+	if FFlagBuildExperienceDevProductModerationReadbackModule then
+		WasDeveloperProductTextModeratedModuleResult = WasDeveloperProductTextModeratedModule(p1.name, Product.name)
+		WasDeveloperProductTextModeratedModuleResult1 = WasDeveloperProductTextModeratedModule(p1.description, Product.description)
+	else
+		WasDeveloperProductTextModeratedModuleResult = p1.name ~= nil and (Product.name ~= nil and Product.name ~= p1.name)
+		WasDeveloperProductTextModeratedModuleResult1 = p1.description ~= nil and (p1.description ~= "" and (Product.description ~= nil and Product.description ~= p1.description))
+	end
+	return if WasDeveloperProductTextModeratedModuleResult or WasDeveloperProductTextModeratedModuleResult1 then ("Roblox moderation altered this product's text. Product %s already exists; do not create another. Ask the creator for plainer wording and update this product."):format((tostring(Product.productId or (p1.productId or "unknown")))) else nil
 end
 
-return function(p2, p3, p4, p5)
-	-- upvalues: var1 (ref), fFlagBuildExperienceRemoveDevProductPriceCap (ref), downloadGeneratedImageAsyncModule (ref), awaitPromise (ref), fFlagBuildExperienceDevProductRecoveryModule (ref), awaitMutation (ref), proposalFromFlow (ref), debug (ref), fFlagBuildExperienceToolResultFailureRecoveryModule (ref), awaitRequestState (ref), chatConstantsModule (ref), moderationError (ref), detailCodeForFailure (ref), studioManageDevProductTool (ref), getToolCallOrder (ref)
-	local var6 = nil
+return function(p1, p2, p3, Callback) --[[ Line: 186 | Named "createManageDevProductController" ]]
+	-- upvalues: v1 (copy), FFlagBuildExperienceRemoveDevProductPriceCap (copy), awaitMutation (copy), DownloadGeneratedImageAsyncModule (copy), FFlagBuildExperienceDevProductRecoveryModule (copy), FFlagBuildExperienceDevProductModerationReadbackModule (copy), proposalFromFlow (copy), Debug (copy), FFlagBuildExperienceToolResultFailureRecoveryModule (copy), AwaitRequestStateFunction (copy), ChatConstantsModule (copy), moderationError (copy), detailCodeForFailure (copy), StudioManageDevProductTool (copy), GetToolCallOrderFunction (copy)
+	local v4 = nil
 	local t = {}
-	local var7 = nil
-	local _ = nil
-	local _ = nil
+	local ToolCallId = nil
+	local onApproveImpl = nil
+	local onRejectImpl = nil
 	
-	local function performMutation(p6)
-		-- upvalues: fFlagBuildExperienceRemoveDevProductPriceCap (copy), downloadGeneratedImageAsyncModule (copy), awaitPromise (copy), fFlagBuildExperienceDevProductRecoveryModule (copy), awaitMutation (copy), var1 (ref)
-		local universeId = p6.universeId
+	local function performMutation(p4) --[[ Line: 199 ]]
+		-- upvalues: FFlagBuildExperienceRemoveDevProductPriceCap (upval), awaitMutation (upval), DownloadGeneratedImageAsyncModule (upval), FFlagBuildExperienceDevProductRecoveryModule (upval), v1 (copy), FFlagBuildExperienceDevProductModerationReadbackModule (upval)
+		local UniverseId = p4.universeId
 		
-		if universeId == nil then
+		if UniverseId == nil then
 			return nil, "No universe is associated with this session."
-		elseif not fFlagBuildExperienceRemoveDevProductPriceCap and p6.priceInRobux ~= nil and (p6.priceInRobux < 1 or p6.priceInRobux > 100) then
+		end
+		if not FFlagBuildExperienceRemoveDevProductPriceCap and p4.priceInRobux ~= nil and (p4.priceInRobux < 1 or p4.priceInRobux > 100) then
 			return nil, "Developer-product prices must be between 1 and 100 Robux."
-		elseif p6.action == "create" then
-			if p6.name == nil or p6.name == "" or p6.priceInRobux == nil then
+		end
+		if p4.action == "create" then
+			if p4.name == nil or p4.name == "" or p4.priceInRobux == nil then
 				return nil, "A name and price are required to create a developer product."
 			end
-			local var8 = nil
+			local ImageFile = nil
 			
-			if p6.imageAssetId ~= nil then
-				local var9, var10
-				local _ = nil
-				local var11, var12 = awaitPromise(downloadGeneratedImageAsyncModule(p6.imageAssetId))
+			if p4.imageAssetId ~= nil then
+				local AwaitMutationResult2
+				ImageFile, AwaitMutationResult2 = awaitMutation(DownloadGeneratedImageAsyncModule(p4.imageAssetId))
 				
-				if var11 == nil then
-					local var13 = if typeof(var12) == "table" then var12.product else nil
-					local _ = var13 == nil and (if typeof(var12) == "table" then var12.responseCode else nil) == 429
-					var9 = var13
-					var10 = if typeof(var12) == "table" and typeof(var12.errorMessage) == "string" then var12.errorMessage elseif var12 == nil then "The request timed out." else tostring(var12)
-				else
-					var9 = var11
-					var10 = nil
-				end
-				var8 = var9
-				local var14 = var10
-				
-				if var8 == nil then
-					if fFlagBuildExperienceDevProductRecoveryModule then
+				if ImageFile == nil then
+					if FFlagBuildExperienceDevProductRecoveryModule then
 						return nil, "The product image could not be loaded. No product was created.", true
+					else
+						return nil, AwaitMutationResult2
 					end
-					return nil, var14
-				else
-					return awaitMutation(var1.create(universeId, {
-						name = p6.name,
-						description = p6.description,
-						priceInRobux = p6.priceInRobux,
-						imageFile = var8
-					}))
 				end
 			end
-		elseif p6.productId == nil then
-			return nil, "A productId is required for this action."
-		elseif p6.action == "update" then
-			return awaitMutation(var1.update(universeId, p6.productId, {
-				name = p6.name,
-				description = p6.description,
-				priceInRobux = p6.priceInRobux
+			return awaitMutation(v1.create(UniverseId, {
+				name = p4.name,
+				description = p4.description,
+				priceInRobux = p4.priceInRobux,
+				imageFile = ImageFile
 			}))
-		elseif p6.action == "activate" then
-			return awaitMutation(var1.activate(universeId, p6.productId))
-		elseif p6.action == "deactivate" then
-			return awaitMutation(var1.deactivate(universeId, p6.productId))
+		elseif p4.productId == nil then
+			return nil, "A productId is required for this action."
+		elseif p4.action == "update" then
+			return awaitMutation(v1.update(UniverseId, p4.productId, {
+				name = p4.name,
+				description = p4.description,
+				priceInRobux = p4.priceInRobux
+			}, FFlagBuildExperienceDevProductModerationReadbackModule))
+		elseif p4.action == "activate" then
+			return awaitMutation(v1.activate(UniverseId, p4.productId))
+		elseif p4.action == "deactivate" then
+			return awaitMutation(v1.deactivate(UniverseId, p4.productId))
+		else
+			return nil, ("Unsupported action '%s'."):format(p4.action)
 		end
-		return nil, ("Unsupported action '%s'."):format(p6.action)
 	end
 	
-	local function _(p6)
-		-- upvalues: p4 (ref)
-		p4.removeDevProductTool(p6.toolCallId)
-		p4.removeDevProductAction(p6.toolCallId)
+	local function _(p4) --[[ Line: 252 | Named "clearMutationCard" ]]
+		-- upvalues: p3 (copy)
+		p3.removeDevProductTool(p4.toolCallId)
+		p3.removeDevProductAction(p4.toolCallId)
 	end
 	
-	local _ = function(p6, p7, p8)
-		-- upvalues: fFlagBuildExperienceDevProductRecoveryModule (copy), var6 (write), p4 (ref), p5 (ref), proposalFromFlow (copy)
-		if fFlagBuildExperienceDevProductRecoveryModule and var6 ~= p6 then
-			p4.removeDevProductAction(p6.toolCallId)
+	local _ = function(p4, p5, p6) --[[ Line: 257 | Named "recoverFailedSubmission" ]]
+		-- upvalues: FFlagBuildExperienceDevProductRecoveryModule (upval), v4 (ref), p3 (copy), Callback (copy), proposalFromFlow (upval)
+		if FFlagBuildExperienceDevProductRecoveryModule and v4 ~= p4 then
+			p3.removeDevProductAction(p4.toolCallId)
 			
 			return
 		end
-		p6.submitted = false
+		p4.submitted = false
 		
-		if p5 == nil then
+		if Callback ~= nil then
+			p3.setDevProductTool((proposalFromFlow(p4, false, false)))
+			Callback(p5, p6)
+			
 			return
 		end
-		p4.setDevProductTool(proposalFromFlow(p6, false, false))
-		p5(p7, p8)
 	end
 	
-	local function submitResult(p6, p7, p8, p9)
-		-- upvalues: p2 (ref), debug (copy), fFlagBuildExperienceToolResultFailureRecoveryModule (copy), fFlagBuildExperienceDevProductRecoveryModule (copy), var6 (write), p4 (ref), p5 (ref), proposalFromFlow (copy), awaitRequestState (copy), chatConstantsModule (copy), p3 (ref)
-		local var8 = p2.submitActiveToolResult(p7, p8, p6.turnId, p6.referenceId)
+	local function submitResult(p4, FormatRejectionContentResult, p5, p6) --[[ Line: 270 ]]
+		-- upvalues: p1 (copy), Debug (upval), FFlagBuildExperienceToolResultFailureRecoveryModule (upval), FFlagBuildExperienceDevProductRecoveryModule (upval), v4 (ref), p3 (copy), Callback (copy), proposalFromFlow (upval), AwaitRequestStateFunction (upval), ChatConstantsModule (upval), p2 (copy)
+		local SubmitActiveToolResultResult = p1.submitActiveToolResult(FormatRejectionContentResult, p5, p4.turnId, p4.referenceId)
 		
-		if var8 == nil then
-			debug.log("warn", "manage_developer_product tool_result submit aborted (no active session)", { toolCallId = p6.toolCallId })
+		if SubmitActiveToolResultResult == nil then
+			Debug.log("warn", "manage_developer_product tool_result submit aborted (no active session)", { toolCallId = p4.toolCallId })
 			
-			if fFlagBuildExperienceToolResultFailureRecoveryModule then
-				if fFlagBuildExperienceDevProductRecoveryModule and var6 ~= p6 then
-					p4.removeDevProductAction(p6.toolCallId)
-					
-					return
-				end
-				p6.submitted = false
-				
-				if p5 == nil then
-					return
-				end
-				p4.setDevProductTool(proposalFromFlow(p6, false, false))
-				p5(p9, nil)
-				
-				return
-			else
-				p6.submitted = false
+			if not FFlagBuildExperienceToolResultFailureRecoveryModule then
+				p4.submitted = false
 				
 				return
 			end
-		else
-			local var9 = awaitRequestState(var8.state, os.clock() + chatConstantsModule.CAS_RPC_TIMEOUT_SECONDS)
-			
-			if var9.status == "succeeded" then
-				p3[p6.toolCallId] = true
-				p4.markSubmitted(p6.toolCallId)
-				p4.removeDevProductAction(p6.toolCallId)
+			if FFlagBuildExperienceDevProductRecoveryModule and v4 ~= p4 then
+				p3.removeDevProductAction(p4.toolCallId)
 				
-				if var6 == p6 then
-					var6 = nil
+				return
+			end
+			p4.submitted = false
+			
+			if Callback ~= nil then
+				p3.setDevProductTool((proposalFromFlow(p4, false, false)))
+				Callback(p6, nil)
+				
+				return
+			end
+			return
+		else
+			local AwaitRequestStateResult = AwaitRequestStateFunction(SubmitActiveToolResultResult.state, os.clock() + ChatConstantsModule.CAS_RPC_TIMEOUT_SECONDS)
+			
+			if AwaitRequestStateResult.status == "succeeded" then
+				p2[p4.toolCallId] = true
+				p3.markSubmitted(p4.toolCallId)
+				p3.removeDevProductAction(p4.toolCallId)
+				
+				if v4 == p4 then
+					v4 = nil
 				end
 				return
-			elseif fFlagBuildExperienceToolResultFailureRecoveryModule then
-				local errorCode = var9.errorCode
-				
-				if fFlagBuildExperienceDevProductRecoveryModule and var6 ~= p6 then
-					p4.removeDevProductAction(p6.toolCallId)
-				else
-					p6.submitted = false
+			else
+				if FFlagBuildExperienceToolResultFailureRecoveryModule then
+					local ErrorCode = AwaitRequestStateResult.errorCode
 					
-					if p5 ~= nil then
-						p4.setDevProductTool(proposalFromFlow(p6, false, false))
-						p5(p9, errorCode)
+					if FFlagBuildExperienceDevProductRecoveryModule and v4 ~= p4 then
+						p3.removeDevProductAction(p4.toolCallId)
+					else
+						p4.submitted = false
+						
+						if Callback ~= nil then
+							p3.setDevProductTool((proposalFromFlow(p4, false, false)))
+							Callback(p6, ErrorCode)
+						end
 					end
+				else
+					p4.submitted = false
 				end
-			else
-				p6.submitted = false
+				Debug.log("warn", "manage_developer_product tool_result submit failed", {
+					sessionId = p4.sessionId,
+					toolCallId = p4.toolCallId,
+					turnId = p4.turnId,
+					referenceId = p4.referenceId,
+					action = p4.action,
+					state = Debug.formatRequestState(AwaitRequestStateResult)
+				})
 			end
-			debug.log("warn", "manage_developer_product tool_result submit failed", {
-				sessionId = p6.sessionId,
-				toolCallId = p6.toolCallId,
-				turnId = p6.turnId,
-				referenceId = p6.referenceId,
-				action = p6.action,
-				state = debug.formatRequestState(var9)
-			})
 		end
 	end
 	
-	local function submitApproval(p6)
-		-- upvalues: performMutation (ref), moderationError (copy), detailCodeForFailure (copy), fFlagBuildExperienceDevProductRecoveryModule (copy), var6 (write), p4 (ref), proposalFromFlow (copy), studioManageDevProductTool (copy), submitResult (ref)
-		local result, resultError
-		local _ = nil
-		local _ = nil
-		local var8 = nil
-		
-		if p6.attempted then
-			result = p6.result
-			resultError = p6.resultError
-			var8 = p6.resultDetailCode
+	local function submitApproval(p4) --[[ Line: 317 ]]
+		-- upvalues: performMutation (copy), moderationError (upval), detailCodeForFailure (upval), FFlagBuildExperienceDevProductRecoveryModule (upval), v4 (ref), p3 (copy), proposalFromFlow (upval), StudioManageDevProductTool (upval), submitResult (copy)
+		local Result = nil
+		local ResultError = nil
+		local ResultDetailCode = nil
+		if p4.attempted then
+			Result = p4.result
+			ResultError = p4.resultError
+			ResultDetailCode = p4.resultDetailCode
 		else
-			p6.attempted = true
-			local _ = nil
-			local var9, var10, var11 = performMutation(p6)
-			result = var9
-			resultError = var10
-			local var12 = var11
+			p4.attempted = true
+			local PerformMutationResult3
+			Result, ResultError, PerformMutationResult3, ResultDetailCode = performMutation(p4)
 			
-			if result ~= nil and resultError == nil then
-				resultError = moderationError(p6, result)
+			if Result ~= nil and ResultError == nil then
+				ResultError = moderationError(p4, Result)
 				
-				if resultError ~= nil then
-					var8 = "name_moderated"
+				if ResultError ~= nil then
+					ResultDetailCode = "name_moderated"
 				end
 			end
-			p6.result = result
-			p6.resultError = resultError
+			p4.result = Result
+			p4.resultError = ResultError
 			
-			if resultError ~= nil and var8 == nil then
-				var8 = detailCodeForFailure(p6.action, resultError)
+			if ResultError ~= nil and ResultDetailCode == nil then
+				ResultDetailCode = detailCodeForFailure(p4.action, ResultError)
 			end
-			p6.resultDetailCode = var8
+			p4.resultDetailCode = ResultDetailCode
 			
-			if fFlagBuildExperienceDevProductRecoveryModule and resultError ~= nil and (var12 and p6.action == "create") and var6 == p6 then
-				p6.attempted = false
-				p6.submitted = false
-				p6.isPending = false
-				p6.canRetry = true
-				p4.setDevProductTool(proposalFromFlow(p6, false, false))
+			if FFlagBuildExperienceDevProductRecoveryModule and ResultError ~= nil and PerformMutationResult3 and p4.action == "create" and v4 == p4 then
+				p4.attempted = false
+				p4.submitted = false
+				p4.isPending = false
+				p4.canRetry = true
+				p3.setDevProductTool((proposalFromFlow(p4, false, false)))
 				
 				return
-			elseif fFlagBuildExperienceDevProductRecoveryModule then
-				p6.isPending = false
-				p6.canRetry = false
-				
-				if p4.getOptimisticLocalTools(false).devProductByToolCallId[p6.toolCallId] ~= nil then
-					p4.setDevProductTool(proposalFromFlow(p6, true, false))
-				end
 			end
-			local var13, var14
-			local _ = nil
-			local _ = nil
+		end
+		if FFlagBuildExperienceDevProductRecoveryModule then
+			p4.isPending = false
+			p4.canRetry = false
 			
-			if result == nil or resultError ~= nil then
-				var13 = studioManageDevProductTool.formatResultContent({
-					status = "error",
-					action = p6.action,
-					detailCode = var8,
-					message = resultError or "The developer product change failed.",
-					product = result
-				})
-				var14 = true
-			else
-				local var15, var16 = studioManageDevProductTool.formatResultContent({ status = "ok", action = p6.action, product = result })
-				var13 = var15
-				var14 = var16
+			if p3.getOptimisticLocalTools(false).devProductByToolCallId[p4.toolCallId] ~= nil then
+				p3.setDevProductTool((proposalFromFlow(p4, true, false)))
 			end
-			submitResult(p6, var13, var14, nil)
 		end
-	end
-	
-	local function submitRejection(p6, p7)
-		-- upvalues: p4 (ref), proposalFromFlow (copy), submitApproval (ref), studioManageDevProductTool (copy), submitResult (ref)
-		if p6.attempted then
-			p4.setDevProductTool(proposalFromFlow(p6, true, false))
-			submitApproval(p6)
-			
-			return
-		end
-		submitResult(p6, studioManageDevProductTool.formatRejectionContent(p6.action, p7), false, p7)
-	end
-	
-	local function onApproveImpl()
-		-- upvalues: var6 (write), fFlagBuildExperienceDevProductRecoveryModule (copy), p4 (ref), proposalFromFlow (copy), submitApproval (ref)
-		if var6 == nil or var6.submitted then return end
-		var6.submitted = true
-		
-		if fFlagBuildExperienceDevProductRecoveryModule then
-			var6.isPending = true
-			var6.canRetry = false
-		end
-		p4.setDevProductTool(proposalFromFlow(var6, true, false))
-		task.spawn(function()
-			-- upvalues: submitApproval (copy), var6 (ref)
-			submitApproval(var6)
-		end)
-	end
-	
-	local function onRejectImpl()
-		-- upvalues: var6 (write), p4 (ref), proposalFromFlow (copy), submitRejection (ref)
-		if var6 == nil or var6.submitted then
-			return
-		end
-		var6.submitted = true
-		p4.setDevProductTool(proposalFromFlow(var6, false, true))
-		task.spawn(function()
-			-- upvalues: submitRejection (copy), var6 (ref)
-			submitRejection(var6, nil)
-		end)
-	end
-	
-	local function runListRequest(p6, p7, p8, p9)
-		-- upvalues: p2 (ref), var1 (ref), awaitPromise (copy), studioManageDevProductTool (copy), t (ref), p3 (ref), awaitRequestState (copy), chatConstantsModule (copy), debug (copy)
-		local var8
-		local universeId = p2.universeId
-		local var9 = nil
-		local _ = nil
-		
-		if universeId == nil then
-			var8 = "No universe is associated with this session."
+		local v5 = nil
+		local FormatResultContentResult = nil
+		if Result == nil or ResultError ~= nil then
+			FormatResultContentResult = StudioManageDevProductTool.formatResultContent({
+				status = "error",
+				action = p4.action,
+				detailCode = ResultDetailCode,
+				message = ResultError or "The developer product change failed.",
+				product = Result
+			})
+			v5 = true
 		else
-			local var10, var11
-			local var12, var13 = awaitPromise(var1.list(universeId))
-			
-			if var12 == nil then
-				local var14 = if typeof(var13) == "table" then var13.product else nil
-				local _ = var14 == nil and (if typeof(var13) == "table" then var13.responseCode else nil) == 429
-				var10 = var14
-				var11 = if typeof(var13) == "table" and typeof(var13.errorMessage) == "string" then var13.errorMessage elseif var13 == nil then "The request timed out." else tostring(var13)
-			else
-				var10 = var12
-				var11 = nil
-			end
-			var9 = var10
-			var8 = var11
+			FormatResultContentResult, v59 = StudioManageDevProductTool.formatResultContent({ status = "ok", action = p4.action, product = Result })
 		end
-		local var15, var16
-		local _ = nil
-		local _ = nil
+		submitResult(p4, FormatResultContentResult, v5, nil)
+	end
+	
+	local function submitRejection(p4, p5) --[[ Line: 383 ]]
+		-- upvalues: p3 (copy), proposalFromFlow (upval), submitApproval (copy), StudioManageDevProductTool (upval), submitResult (copy)
+		if p4.attempted then
+			p3.setDevProductTool((proposalFromFlow(p4, true, false)))
+			submitApproval(p4)
+			
+			return
+		else
+			submitResult(p4, StudioManageDevProductTool.formatRejectionContent(p4.action, p5), false, p5)
+		end
+	end
+	
+	onApproveImpl = function() --[[ Line: 396 | Named "onApproveImpl" ]]
+		-- upvalues: v4 (ref), FFlagBuildExperienceDevProductRecoveryModule (upval), p3 (copy), proposalFromFlow (upval), submitApproval (copy)
+		local v5 = v4
 		
-		if var9 == nil then
-			var15 = studioManageDevProductTool.formatResultContent({
+		if v5 == nil or v5.submitted then return end
+		v5.submitted = true
+		
+		if FFlagBuildExperienceDevProductRecoveryModule then
+			v5.isPending = true
+			v5.canRetry = false
+		end
+		p3.setDevProductTool((proposalFromFlow(v5, true, false)))
+		task.spawn(function() --[[ Line: 407 ]]
+			-- upvalues: submitApproval (upval), v5 (copy)
+			submitApproval(v5)
+		end)
+	end
+	
+	onRejectImpl = function() --[[ Line: 413 | Named "onRejectImpl" ]]
+		-- upvalues: v4 (ref), p3 (copy), proposalFromFlow (upval), submitRejection (copy)
+		local v5 = v4
+		
+		if v5 ~= nil and not v5.submitted then
+			v5.submitted = true
+			p3.setDevProductTool((proposalFromFlow(v5, false, true)))
+			task.spawn(function() --[[ Line: 420 ]]
+				-- upvalues: submitRejection (upval), v5 (copy)
+				submitRejection(v5, nil)
+			end)
+			
+			return
+		end
+	end
+	
+	local function runListRequest(ToolCallId, TurnId, ReferenceId, SessionId) --[[ Line: 427 ]]
+		-- upvalues: p1 (copy), awaitMutation (upval), v1 (copy), StudioManageDevProductTool (upval), t (copy), p2 (copy), AwaitRequestStateFunction (upval), ChatConstantsModule (upval), Debug (upval)
+		local UniverseId = p1.universeId
+		local v5 = nil
+		local v6 = nil
+		
+		if UniverseId == nil then
+			v6 = "No universe is associated with this session."
+		else
+			v5, v64 = awaitMutation(v1.list(UniverseId))
+		end
+		local FormatResultContentResult = nil
+		local FormatResultContentResult2 = nil
+		if v5 == nil then
+			FormatResultContentResult = StudioManageDevProductTool.formatResultContent({
 				status = "error",
 				action = "list",
 				detailCode = "list_failed",
-				message = var8 or "Could not list developer products."
+				message = v6 or "Could not list developer products."
 			})
-			var16 = true
+			FormatResultContentResult2 = true
 		else
-			local var17, var18 = studioManageDevProductTool.formatResultContent({
+			FormatResultContentResult, FormatResultContentResult2 = StudioManageDevProductTool.formatResultContent({
 				status = "ok",
 				action = "list",
-				count = #var9.developerProducts,
-				products = var9.developerProducts,
-				nextPageToken = var9.nextPageToken,
-				truncated = var9.nextPageToken ~= nil
+				count = #v5.developerProducts,
+				products = v5.developerProducts,
+				nextPageToken = v5.nextPageToken,
+				truncated = v5.nextPageToken ~= nil
 			})
-			var15 = var17
-			var16 = var18
 		end
-		local var19 = p2.submitActiveToolResult(var15, var16, p7, p8)
-		t[p6] = nil
+		local SubmitActiveToolResultResult = p1.submitActiveToolResult(FormatResultContentResult, FormatResultContentResult2, TurnId, ReferenceId)
+		t[ToolCallId] = nil
 		
-		if var19 == nil then
-			p3[p6] = nil
+		if SubmitActiveToolResultResult == nil then
+			p2[ToolCallId] = nil
 			
 			return
 		end
-		local var20 = awaitRequestState(var19.state, os.clock() + chatConstantsModule.CAS_RPC_TIMEOUT_SECONDS)
+		local AwaitRequestStateResult = AwaitRequestStateFunction(SubmitActiveToolResultResult.state, os.clock() + ChatConstantsModule.CAS_RPC_TIMEOUT_SECONDS)
 		
-		if var20.status ~= "succeeded" then
-			p3[p6] = nil
+		if AwaitRequestStateResult.status ~= "succeeded" then
+			p2[ToolCallId] = nil
 			
-			if var20.status == "pending" then
-				var19.dispose()
+			if AwaitRequestStateResult.status == "pending" then
+				SubmitActiveToolResultResult.dispose()
 			end
-			debug.log("warn", "manage_developer_product list submit failed", {
-				sessionId = p9,
-				toolCallId = p6,
-				state = debug.formatRequestState(var20)
+			Debug.log("warn", "manage_developer_product list submit failed", {
+				sessionId = SessionId,
+				toolCallId = ToolCallId,
+				state = Debug.formatRequestState(AwaitRequestStateResult)
 			})
 		end
 	end
 	
-	local _ = function()
-		-- upvalues: var6 (write), p4 (ref), var7 (write)
-		if var6 ~= nil then
-			p4.removeDevProductTool(var6.toolCallId)
-			p4.removeDevProductAction(var6.toolCallId)
+	local _ = function() --[[ Line: 477 | Named "clearMutationFlow" ]]
+		-- upvalues: v4 (ref), p3 (copy), ToolCallId (ref)
+		local v5 = v4
+		
+		if v5 ~= nil then
+			p3.removeDevProductTool(v5.toolCallId)
+			p3.removeDevProductAction(v5.toolCallId)
 		end
-		var6 = nil
-		var7 = nil
+		v4 = nil
+		ToolCallId = nil
 	end
 	
 	return {
-		syncManageDevProductRequests = function(p6)
-			-- upvalues: studioManageDevProductTool (copy), p3 (ref), var6 (write), p4 (ref), var7 (write), t (ref), fFlagBuildExperienceDevProductRecoveryModule (copy), p2 (ref), awaitRequestState (copy), chatConstantsModule (copy), runListRequest (ref), getToolCallOrder (copy), proposalFromFlow (copy), onApproveImpl (write), onRejectImpl (write), debug (copy)
-			local var8, var9, var10, var11 = studioManageDevProductTool.findManageDevProductRequestInTurnState(p6, p3)
+		syncManageDevProductRequests = function(p4): boolean --[[ Line: 486 ]]
+			-- upvalues: StudioManageDevProductTool (upval), p2 (copy), v4 (ref), p3 (copy), ToolCallId (ref), t (copy), FFlagBuildExperienceDevProductRecoveryModule (upval), p1 (copy), AwaitRequestStateFunction (upval), ChatConstantsModule (upval), runListRequest (copy), GetToolCallOrderFunction (upval), proposalFromFlow (upval), onApproveImpl (ref), onRejectImpl (ref), Debug (upval)
+			local ManageDevProductRequestInTurnState, ManageDevProductRequestInTurnState2, ManageDevProductRequestInTurnState3, ManageDevProductRequestInTurnState4 = StudioManageDevProductTool.findManageDevProductRequestInTurnState(p4, p2)
 			
-			if var8 == nil then
-				if var6 ~= nil then
-					p4.removeDevProductTool(var6.toolCallId)
-					p4.removeDevProductAction(var6.toolCallId)
+			if ManageDevProductRequestInTurnState == nil then
+				local v5 = v4
+				
+				if v5 ~= nil then
+					p3.removeDevProductTool(v5.toolCallId)
+					p3.removeDevProductAction(v5.toolCallId)
 				end
-				var6 = nil
-				var7 = nil
+				v4 = nil
+				ToolCallId = nil
 				
 				return false
 			else
-				local var12 = studioManageDevProductTool.parseManageDevProductInput(var9)
+				local ParseManageDevProductInputResult = StudioManageDevProductTool.parseManageDevProductInput(ManageDevProductRequestInTurnState2)
 				
-				if var12 == nil then
-					if t[var8] then
+				if ParseManageDevProductInputResult ~= nil then
+					if StudioManageDevProductTool.getActionKind(ParseManageDevProductInputResult.action) ~= "read" then
+						if ManageDevProductRequestInTurnState ~= ToolCallId then
+							ToolCallId = ManageDevProductRequestInTurnState
+							local config = {
+								submitted = false,
+								attempted = false,
+								sessionId = p4.sessionId,
+								toolCallId = ManageDevProductRequestInTurnState,
+								callOrder = GetToolCallOrderFunction(p4, ManageDevProductRequestInTurnState),
+								turnId = ManageDevProductRequestInTurnState3,
+								referenceId = ManageDevProductRequestInTurnState4,
+								universeId = p1.universeId,
+								action = ParseManageDevProductInputResult.action,
+								name = ParseManageDevProductInputResult.name,
+								description = ParseManageDevProductInputResult.description,
+								priceInRobux = ParseManageDevProductInputResult.priceInRobux,
+								productId = ParseManageDevProductInputResult.productId,
+								imageAssetId = ParseManageDevProductInputResult.imageAssetId
+							}
+							v4 = config
+							p3.setDevProductTool((proposalFromFlow(config, false, false)))
+							p3.setDevProductAction(ManageDevProductRequestInTurnState, onApproveImpl, onRejectImpl)
+							Debug.log("info", "manage_developer_product proposal displayed", {
+								toolCallId = ManageDevProductRequestInTurnState,
+								turnId = ManageDevProductRequestInTurnState3,
+								referenceId = ManageDevProductRequestInTurnState4,
+								action = ParseManageDevProductInputResult.action
+							})
+						end
+						return true
+					elseif t[ManageDevProductRequestInTurnState] then
+						return true
+					else
+						p2[ManageDevProductRequestInTurnState] = true
+						t[ManageDevProductRequestInTurnState] = true
+						task.spawn(function() --[[ Line: 539 ]]
+							-- upvalues: runListRequest (upval), ManageDevProductRequestInTurnState (copy), ManageDevProductRequestInTurnState3 (copy), ManageDevProductRequestInTurnState4 (copy), p4 (copy)
+							runListRequest(ManageDevProductRequestInTurnState, ManageDevProductRequestInTurnState3, ManageDevProductRequestInTurnState4, p4.sessionId)
+						end)
+						
 						return true
 					end
-					t[var8] = true
-					task.spawn(function()
-						-- upvalues: fFlagBuildExperienceDevProductRecoveryModule (copy), var9 (ref), studioManageDevProductTool (copy), p2 (copy), var10 (ref), var11 (ref), t (copy), var8 (ref), awaitRequestState (copy), chatConstantsModule (copy), p3 (copy)
-						local var13 = fFlagBuildExperienceDevProductRecoveryModule and (typeof(var9) == "table" and (typeof(var9.action) == "string" and (string.lower(var9.action) == "update" and var9.imageAssetId ~= nil)))
-						local var14 = p2.submitActiveToolResult(studioManageDevProductTool.formatResultContent({
+				elseif t[ManageDevProductRequestInTurnState] then
+					return true
+				else
+					t[ManageDevProductRequestInTurnState] = true
+					task.spawn(function() --[[ Line: 503 ]]
+						-- upvalues: FFlagBuildExperienceDevProductRecoveryModule (upval), ManageDevProductRequestInTurnState2 (copy), StudioManageDevProductTool (upval), p1 (upval), ManageDevProductRequestInTurnState3 (copy), ManageDevProductRequestInTurnState4 (copy), t (upval), ManageDevProductRequestInTurnState (copy), AwaitRequestStateFunction (upval), ChatConstantsModule (upval), p2 (upval)
+						local HasImageAssetId: boolean = FFlagBuildExperienceDevProductRecoveryModule and (typeof(ManageDevProductRequestInTurnState2) == "table" and (typeof(ManageDevProductRequestInTurnState2.action) == "string" and string.lower(ManageDevProductRequestInTurnState2.action) == "update") and ManageDevProductRequestInTurnState2.imageAssetId ~= nil)
+						local SubmitActiveToolResultResult = p1.submitActiveToolResult(StudioManageDevProductTool.formatResultContent({
 							status = "error",
-							action = if var13 then "update" else "unknown",
-							detailCode = if var13 then "unsupported_image_update" else "invalid_arguments",
-							message = if var13 then "Editing an existing developer product's image is not supported. No product was changed. Do not claim the image was updated or create a replacement product." else "The developer-product request was malformed."
-						}), true, var10, var11)
-						t[var8] = nil
+							action = if HasImageAssetId then "update" else "unknown",
+							detailCode = if HasImageAssetId then "unsupported_image_update" else "invalid_arguments",
+							message = if HasImageAssetId then "Editing an existing developer product's image is not supported. No product was changed. Do not claim the image was updated or create a replacement product." else "The developer-product request was malformed."
+						}), true, ManageDevProductRequestInTurnState3, ManageDevProductRequestInTurnState4)
+						t[ManageDevProductRequestInTurnState] = nil
 						
-						if var14 == nil then return end
-						local var15 = awaitRequestState(var14.state, os.clock() + chatConstantsModule.CAS_RPC_TIMEOUT_SECONDS)
+						if SubmitActiveToolResultResult == nil then return end
+						local AwaitRequestStateResult = AwaitRequestStateFunction(SubmitActiveToolResultResult.state, os.clock() + ChatConstantsModule.CAS_RPC_TIMEOUT_SECONDS)
 						
-						if var15.status == "succeeded" then
-							p3[var8] = true
+						if AwaitRequestStateResult.status == "succeeded" then
+							p2[ManageDevProductRequestInTurnState] = true
 							
 							return
-						elseif var15.status == "pending" then
-							var14.dispose()
+						end
+						if AwaitRequestStateResult.status == "pending" then
+							SubmitActiveToolResultResult.dispose()
 						end
 					end)
 					
 					return true
-				elseif studioManageDevProductTool.getActionKind(var12.action) == "read" then
-					if t[var8] then
-						return true
-					end
-					p3[var8] = true
-					t[var8] = true
-					task.spawn(function()
-						-- upvalues: runListRequest (copy), var8 (ref), var10 (ref), var11 (ref), p6 (ref)
-						runListRequest(var8, var10, var11, p6.sessionId)
-					end)
-					
-					return true
-				elseif var8 ~= var7 then
-					var7 = var8
-					local t_1 = {
-						submitted = false,
-						attempted = false,
-						sessionId = p6.sessionId,
-						toolCallId = var8,
-						callOrder = getToolCallOrder(p6, var8),
-						turnId = var10,
-						referenceId = var11,
-						universeId = p2.universeId,
-						action = var12.action,
-						name = var12.name,
-						description = var12.description,
-						priceInRobux = var12.priceInRobux,
-						productId = var12.productId,
-						imageAssetId = var12.imageAssetId
-					}
-					var6 = t_1
-					p4.setDevProductTool(proposalFromFlow(t_1, false, false))
-					p4.setDevProductAction(var8, onApproveImpl, onRejectImpl)
-					debug.log("info", "manage_developer_product proposal displayed", {
-						toolCallId = var8,
-						turnId = var10,
-						referenceId = var11,
-						action = var12.action
-					})
 				end
-				return true
 			end
 		end,
-		stopPending = function()
-			-- upvalues: t (ref), p3 (ref), var6 (write), p4 (ref), var7 (write)
-			local var8 = false
+		stopPending = function(): boolean --[[ Line: 590 ]]
+			-- upvalues: t (copy), p2 (copy), v4 (ref), p3 (copy), ToolCallId (ref)
+			local Flag = false
 			
 			for i in t do
 				t[i] = nil
-				p3[i] = nil
-				var8 = true
+				p2[i] = nil
+				Flag = true
 			end
-			if var6 ~= nil and not var6.submitted then
-				var6.submitted = true
-				p4.removeDevProductTool(var6.toolCallId)
-				p4.removeDevProductAction(var6.toolCallId)
-				var6 = nil
-				var7 = nil
-				var8 = true
-			end
-			return var8
-		end,
-		trySubmitComposerText = function(p6)
-			-- upvalues: var6 (write), p4 (ref), proposalFromFlow (copy), submitRejection (ref)
-			if var6 == nil or var6.submitted then
-				return false
-			end
-			var6.submitted = true
-			p4.setDevProductTool(proposalFromFlow(var6, false, true))
-			task.spawn(function()
-				-- upvalues: submitRejection (copy), var6 (ref), p6 (ref)
-				submitRejection(var6, p6)
-			end)
+			local v5 = v4
 			
-			return true
+			if v5 ~= nil and not v5.submitted then
+				v5.submitted = true
+				p3.removeDevProductTool(v5.toolCallId)
+				p3.removeDevProductAction(v5.toolCallId)
+				v4 = nil
+				ToolCallId = nil
+				Flag = true
+			end
+			return Flag
+		end,
+		trySubmitComposerText = function(p4): boolean --[[ Line: 577 ]]
+			-- upvalues: v4 (ref), p3 (copy), proposalFromFlow (upval), submitRejection (copy)
+			local v6 = v4
+			
+			if v6 == nil or v6.submitted then
+				return false
+			else
+				v6.submitted = true
+				p3.setDevProductTool((proposalFromFlow(v6, false, true)))
+				task.spawn(function() --[[ Line: 584 ]]
+					-- upvalues: submitRejection (upval), v6 (copy), p4 (copy)
+					submitRejection(v6, p4)
+				end)
+				
+				return true
+			end
 		end
 	}
 end

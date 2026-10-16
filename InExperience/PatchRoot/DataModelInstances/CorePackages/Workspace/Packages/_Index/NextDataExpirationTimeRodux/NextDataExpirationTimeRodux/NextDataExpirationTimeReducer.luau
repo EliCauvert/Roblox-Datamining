@@ -1,45 +1,46 @@
-﻿local nextDataExpirationTimeRodux = script:FindFirstAncestor("NextDataExpirationTimeRodux")
-local setNextDataExpirationTimeModule = require(nextDataExpirationTimeRodux.SetNextDataExpirationTime)
-local expirationTimeNamespaceModule = require(nextDataExpirationTimeRodux.ExpirationTimeNamespace)
-local _ = require(nextDataExpirationTimeRodux.Parent.DiscoveryTypes)
+﻿local NextDataExpirationTimeRodux = script:FindFirstAncestor("NextDataExpirationTimeRodux")
+local SetNextDataExpirationTimeModule = require(NextDataExpirationTimeRodux.SetNextDataExpirationTime)
+local ExpirationTimeNamespaceModule = require(NextDataExpirationTimeRodux.ExpirationTimeNamespace)
+local _ = require(NextDataExpirationTimeRodux.Parent.DiscoveryTypes)
 
-local function initializeExpirationTimes()
-	-- upvalues: expirationTimeNamespaceModule (ref)
+local function initializeExpirationTimes() --[[ Line: 8 ]]
+	-- upvalues: ExpirationTimeNamespaceModule (copy)
 	local t = {}
 	
-	for i, v in expirationTimeNamespaceModule do
-		t[v] = {}
+	for _, value in ExpirationTimeNamespaceModule do
+		t[value] = {}
 	end
 	return t
 end
 
 return {
 	key = "NextDataExpirationTimeKey",
-	reducer = function(p1, p2)
-		-- upvalues: initializeExpirationTimes (ref), setNextDataExpirationTimeModule (ref)
-		p1 = p1 or initializeExpirationTimes()
+	reducer = function(p1, p2) --[[ Line: 17 ]]
+		-- upvalues: initializeExpirationTimes (copy), SetNextDataExpirationTimeModule (copy)
+		local Tbl1 = p1 or initializeExpirationTimes()
 		
-		if p2.type ~= setNextDataExpirationTimeModule.name then
-			return p1
+		if p2.type ~= SetNextDataExpirationTimeModule.name then
+			return Tbl1
 		end
-		assert(p1, "state should always exist, assert for linter")
-		local namespace = p2.namespace
-		local key = p2.key
-		assert(namespace, "SetNextDataExpirationTime does not have a valid namespace")
-		assert(key, `SetNextDataExpirationTime does not have a valid key for namespace {namespace}`)
-		local var1 = p1[namespace]
+		assert(Tbl1, "state should always exist, assert for linter")
+		local Namespace = p2.namespace
+		local Key = p2.key
+		assert(Namespace, "SetNextDataExpirationTime does not have a valid namespace")
+		assert(Key, `SetNextDataExpirationTime does not have a valid key for namespace {Namespace}`)
+		local Tbl = Tbl1[Namespace]
 		
-		if var1 then
-			assert(var1, "namespaceState should always exist, assert for linter")
-			local cloned = table.clone(var1)
-			cloned[key] = p2.nextDataExpirationTime
-			local cloned_1 = table.clone(p1)
-			cloned_1[namespace] = cloned
+		if Tbl then
+			assert(Tbl, "namespaceState should always exist, assert for linter")
+			local Copy = table.clone(Tbl)
+			Copy[Key] = p2.nextDataExpirationTime
+			local Copy1 = table.clone(Tbl1)
+			Copy1[Namespace] = Copy
 			
-			return cloned_1
+			return Copy1
+		else
+			warn(`No namespace {Namespace} defined in NextDataExpirationTimeReducer for action`)
+			
+			return Tbl1
 		end
-		warn(`No namespace {namespace} defined in NextDataExpirationTimeReducer for action`)
-		
-		return p1
 	end
 }

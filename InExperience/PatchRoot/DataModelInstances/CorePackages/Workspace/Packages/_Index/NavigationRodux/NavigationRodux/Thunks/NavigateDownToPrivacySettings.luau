@@ -1,20 +1,20 @@
-﻿local navigationRodux = script:FindFirstAncestor("NavigationRodux")
-local parent = navigationRodux.Parent
-local argCheckModule = require(parent.ArgCheck)
-local navigateDownModule = require(navigationRodux.Thunks.NavigateDown)
-local appPage = require(parent.RobloxAppEnums).AppPage
-local urlBuilder = require(parent.UrlBuilder).UrlBuilder
+﻿local NavigationRodux = script:FindFirstAncestor("NavigationRodux")
+local Parent = NavigationRodux.Parent
+local ArgCheckModule = require(Parent.ArgCheck)
+local NavigateDownModule = require(NavigationRodux.Thunks.NavigateDown)
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
 
-return function(p1)
-	-- upvalues: argCheckModule (ref), navigateDownModule (ref), appPage (ref), urlBuilder (ref)
-	argCheckModule.isTypeOrNil(p1, "function", "onClose")
+return function(OnClose) --[[ Line: 12 ]]
+	-- upvalues: ArgCheckModule (copy), NavigateDownModule (copy), AppPage (copy), UrlBuilder (copy)
+	ArgCheckModule.isTypeOrNil(OnClose, "function", "onClose")
 	
-	return navigateDownModule({
-		name = appPage.SettingsSubPage,
-		detail = urlBuilder.static.settings.privacy(),
+	return NavigateDownModule({
+		name = AppPage.SettingsSubPage,
+		detail = UrlBuilder.static.settings.privacy(),
 		extraProps = {
 			titleKey = "Feature.AccountSettings.Heading.Tab.Privacy",
-			onClose = p1
+			onClose = OnClose
 		}
 	})
 end

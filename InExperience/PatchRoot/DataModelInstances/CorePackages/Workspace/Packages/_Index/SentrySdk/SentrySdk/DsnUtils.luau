@@ -1,51 +1,52 @@
-﻿local versionModule = require(script.Parent.Version)
+﻿local VersionModule = require(script.Parent.Version)
 
 return {
-	parse_dsn = function(p1)
+	parse_dsn = function(p1) --[[ Line: 14 ]]
 		if not p1 or p1 == "" then
 			return nil, "DSN is required"
 		end
-		local var1, var2, var3 = p1:match("^(https?)://([^@]+)@(.+)$")
+		local Protocol, v1, v2 = p1:match("^(https?)://([^@]+)@(.+)$")
 		
-		if not var1 or not var2 or not var3 then
+		if not Protocol or not v1 or not v2 then
 			return nil, "Invalid DSN format"
 		end
-		local var4, var5 = var2:match("^([^:]+):(.+)$")
+		local Public_key, v3 = v1:match("^([^:]+):(.+)$")
 		
-		if not var4 then
-			var4 = var2
-			var5 = ""
+		if not Public_key then
+			Public_key = v1
+			v3 = ""
 		end
-		if not var4 or var4 == "" then
+		if not Public_key or Public_key == "" then
 			return nil, "Invalid DSN format"
 		end
-		local var6, var7 = var3:match("^([^/]+)(.*)$")
+		local Host, Path = v2:match("^([^/]+)(.*)$")
 		
-		if not var6 or not var7 or var7 == "" then
+		if not Host or not Path or Path == "" then
 			return nil, "Invalid DSN format"
 		end
-		local var8 = var7:match("/([%d]+)$")
+		local D = Path:match("/([%d]+)$")
 		
-		if var8 then
+		if D then
 			return {
-				protocol = var1,
-				public_key = var4,
-				secret_key = var5 or "",
-				host = var6,
-				path = var7,
-				project_id = var8
+				protocol = Protocol,
+				public_key = Public_key,
+				secret_key = v3 or "",
+				host = Host,
+				path = Path,
+				project_id = D
 			}, nil
+		else
+			return nil, "Could not extract project ID from DSN"
 		end
-		return nil, "Could not extract project ID from DSN"
 	end,
-	build_ingest_url = function(p1)
+	build_ingest_url = function(p1): string --[[ Line: 59 ]]
 		return `https://{p1.host}/api/{p1.project_id}/store/`
 	end,
-	build_envelope_url = function(p1)
+	build_envelope_url = function(p1): string --[[ Line: 63 ]]
 		return `https://{p1.host}/api/{p1.project_id}/envelope/`
 	end,
-	build_auth_header = function(p1)
-		-- upvalues: versionModule (ref)
-		return `Sentry sentry_version={versionModule.SENTRY_VERSION}, sentry_key={p1.public_key}, sentry_client=sentry-lua/{versionModule.SDK_VERSION}`
+	build_auth_header = function(p1): string --[[ Line: 67 ]]
+		-- upvalues: VersionModule (copy)
+		return `Sentry sentry_version={VersionModule.SENTRY_VERSION}, sentry_key={p1.public_key}, sentry_client=sentry-lua/{VersionModule.SDK_VERSION}`
 	end
 }

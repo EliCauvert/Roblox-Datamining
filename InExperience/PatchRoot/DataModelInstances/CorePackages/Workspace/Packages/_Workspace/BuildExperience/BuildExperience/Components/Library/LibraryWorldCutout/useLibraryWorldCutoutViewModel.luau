@@ -1,223 +1,233 @@
-﻿local runService = game:GetService("RunService")
-local parent = script:FindFirstAncestor("BuildExperience").Parent
-local foundationModule = require(parent.Foundation)
-local motionModule = require(parent.Motion)
-local reactModule = require(parent.React)
-local worldCutoutTransitionModule = require(script.Parent.WorldCutoutTransition)
-local userGameSettingsService = UserSettings():GetService("UserGameSettings")
+﻿local RunService = game:GetService("RunService")
+local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local FoundationModule = require(Parent.Foundation)
+local MotionModule = require(Parent.Motion)
+local ReactModule = require(Parent.React)
+local WorldCutoutTransitionModule = require(script.Parent.WorldCutoutTransition)
+local UserGameSettings = UserSettings():GetService("UserGameSettings")
 
-local function _(p1)
-	return if p1 == nil or p1.AbsoluteSize.X <= 1 or p1.AbsoluteSize.Y <= 1 then nil else Rect.new(p1.AbsolutePosition, p1.AbsolutePosition + p1.AbsoluteSize)
+local function _(Frame: Frame) --[[ Line: 43 | Named "toRect" ]]
+	return if Frame == nil or Frame.AbsoluteSize.X <= 1 or Frame.AbsoluteSize.Y <= 1 then nil else Rect.new(Frame.AbsolutePosition, Frame.AbsolutePosition + Frame.AbsoluteSize)
 end
 
-local _ = function(p1, p2)
-	local scrollingFrame = p1:FindFirstAncestorWhichIsA("ScrollingFrame")
+local _ = function(p1, p2) --[[ Line: 52 | Named "toUnscrolledRect" ]]
+	local ScrollingFrame = p1:FindFirstAncestorWhichIsA("ScrollingFrame")
 	
-	return if scrollingFrame == nil then p2 else Rect.new(p2.Min + scrollingFrame.CanvasPosition, p2.Max + scrollingFrame.CanvasPosition)
+	return if ScrollingFrame == nil then p2 else Rect.new(p2.Min + ScrollingFrame.CanvasPosition, p2.Max + ScrollingFrame.CanvasPosition)
 end
 
-return function(p1)
-	-- upvalues: foundationModule (ref), userGameSettingsService (ref), reactModule (ref), worldCutoutTransitionModule (ref), motionModule (ref), runService (ref)
-	local reducedMotion = foundationModule.Hooks.usePreferences().reducedMotion or userGameSettingsService.ReducedMotion
-	local var1 = reactModule.useRef(worldCutoutTransitionModule.initialState)
-	local var2, var3 = reactModule.useState(var1.current.phase)
-	local var4, var5 = reactModule.useState(false)
-	local var6, var7 = reactModule.useBinding(nil)
-	local var8, var9 = reactModule.useBinding(nil)
-	local var10, var11 = motionModule.useMotion({ progress = 0 })
-	local progress = var10.progress
-	local var12 = reactModule.useRef(var11)
-	var12.current = var11
-	local var13 = reactModule.useRef(p1)
-	var13.current = p1
-	local var14 = p1.isAvailable and (p1.isHome and (p1.isOpen and var2 == "Home"))
-	local var15 = reactModule.useRef(var14)
-	var15.current = var14
-	local var16 = reactModule.useCallback(function(p2)
-		-- upvalues: var1 (ref), worldCutoutTransitionModule (copy), var3 (ref)
-		local current = var1.current
-		var1.current = worldCutoutTransitionModule.reduce(current, p2)
+return function(Current) --[[ Line: 60 | Named "useLibraryWorldCutoutViewModel" ]]
+	-- upvalues: FoundationModule (copy), UserGameSettings (copy), ReactModule (copy), WorldCutoutTransitionModule (copy), MotionModule (copy), RunService (copy)
+	local ReducedMotion = FoundationModule.Hooks.usePreferences().reducedMotion or UserGameSettings.ReducedMotion
+	local UseRefResult = ReactModule.useRef(WorldCutoutTransitionModule.initialState)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(UseRefResult.current.phase)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(nil)
+	local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(nil)
+	local UseMotionResult, UseMotionResult2 = MotionModule.useMotion({ progress = 0 })
+	local Progress = UseMotionResult.progress
+	local UseRefResult1 = ReactModule.useRef(UseMotionResult2)
+	UseRefResult1.current = UseMotionResult2
+	local UseRefResult2 = ReactModule.useRef(Current)
+	UseRefResult2.current = Current
+	local IsHome: boolean = Current.isAvailable and (Current.isHome and (Current.isOpen and UseStateResult == "Home"))
+	local UseRefResult3 = ReactModule.useRef(IsHome)
+	UseRefResult3.current = IsHome
+	local UseResult = ReactModule.useCallback(function(p1) --[[ Line: 77 ]]
+		-- upvalues: UseRefResult (copy), WorldCutoutTransitionModule (upval), UseStateResult2 (copy)
+		local Current = UseRefResult.current
+		UseRefResult.current = WorldCutoutTransitionModule.reduce(Current, p1)
 		
-		if var1.current.phase ~= current.phase then
-			var3(var1.current.phase)
+		if UseRefResult.current.phase ~= Current.phase then
+			UseStateResult2(UseRefResult.current.phase)
 		end
-		return var1.current
+		return UseRefResult.current
 	end, {})
-	local var17 = reactModule.useRef(nil)
-	local var18 = reactModule.useRef(nil)
-	local var19 = reactModule.useRef(nil)
-	local var20 = reactModule.useRef(nil)
-	local var21 = reactModule.useCallback(function()
-		-- upvalues: var19 (ref), var9 (ref), var17 (ref), var7 (ref), var5 (ref), var18 (ref), var15 (ref), var13 (ref)
-		local current = var19.current
-		local var22 = if current == nil or current.AbsoluteSize.X <= 1 or current.AbsoluteSize.Y <= 1 then nil else Rect.new(current.AbsolutePosition, current.AbsolutePosition + current.AbsoluteSize)
+	local UseRefResult4 = ReactModule.useRef(nil)
+	local UseRefResult5 = ReactModule.useRef(nil)
+	local UseRefResult6 = ReactModule.useRef(nil)
+	local UseRefResult7 = ReactModule.useRef(nil)
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 92 ]]
+		-- upvalues: UseRefResult6 (copy), UseBindingResult2_1 (copy), UseRefResult4 (copy), UseBindingResult2 (copy), UseStateResult2_1 (copy), UseRefResult5 (copy), UseRefResult3 (copy), UseRefResult2 (copy)
+		local Current = UseRefResult6.current
+		local _Rect = if Current == nil or Current.AbsoluteSize.X <= 1 or Current.AbsoluteSize.Y <= 1 then nil else Rect.new(Current.AbsolutePosition, Current.AbsolutePosition + Current.AbsoluteSize)
 		
-		if var22 ~= nil then
-			var9(var22)
+		if _Rect ~= nil then
+			UseBindingResult2_1(_Rect)
 		end
-		current = var17.current
-		local var23 = if current == nil or current.AbsoluteSize.X <= 1 or current.AbsoluteSize.Y <= 1 then nil else Rect.new(current.AbsolutePosition, current.AbsolutePosition + current.AbsoluteSize)
+		local Current1 = UseRefResult4.current
+		local _Rect1 = if Current1 == nil or Current1.AbsoluteSize.X <= 1 or Current1.AbsoluteSize.Y <= 1 then nil else Rect.new(Current1.AbsolutePosition, Current1.AbsolutePosition + Current1.AbsoluteSize)
 		
-		if current == nil or var23 == nil then return end
-		var7(var23)
-		var5(true)
-		local scrollingFrame = current:FindFirstAncestorWhichIsA("ScrollingFrame")
-		var18.current = if scrollingFrame == nil then var23 else Rect.new(var23.Min + scrollingFrame.CanvasPosition, var23.Max + scrollingFrame.CanvasPosition)
+		if Current1 == nil or _Rect1 == nil then return end
+		UseBindingResult2(_Rect1)
+		UseStateResult2_1(true)
+		local ScrollingFrame = Current1:FindFirstAncestorWhichIsA("ScrollingFrame")
+		UseRefResult5.current = if ScrollingFrame == nil then _Rect1 else Rect.new(_Rect1.Min + ScrollingFrame.CanvasPosition, _Rect1.Max + ScrollingFrame.CanvasPosition)
 		
-		if var15.current then
-			var13.current.onViewportRectChanged(var18.current)
+		if UseRefResult3.current then
+			UseRefResult2.current.onViewportRectChanged(UseRefResult5.current)
 		end
-	end, { var7, var9 })
-	local var22 = reactModule.useCallback(function()
-		-- upvalues: var21 (ref), var20 (ref)
-		var21()
+	end, { UseBindingResult2, UseBindingResult2_1 })
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 109 ]]
+		-- upvalues: UseResult1 (copy), UseRefResult7 (copy)
+		UseResult1()
 		
-		if var20.current == nil then
-			var20.current = task.defer(function()
-				-- upvalues: var20 (copy), var21 (copy)
-				var20.current = nil
-				var21()
+		if UseRefResult7.current == nil then
+			UseRefResult7.current = task.defer(function() --[[ Line: 112 ]]
+				-- upvalues: UseRefResult7 (upval), UseResult1 (upval)
+				UseRefResult7.current = nil
+				UseResult1()
 			end)
 		end
-	end, { var21 })
-	reactModule.useEffect(function()
-		-- upvalues: var20 (ref)
-		return function()
-			-- upvalues: var20 (copy)
-			if var20.current ~= nil then
-				task.cancel(var20.current)
-				var20.current = nil
+	end, { UseResult1 })
+	ReactModule.useEffect(function() --[[ Line: 118 ]]
+		-- upvalues: UseRefResult7 (copy)
+		return function() --[[ Line: 119 ]]
+			-- upvalues: UseRefResult7 (upval)
+			if UseRefResult7.current ~= nil then
+				task.cancel(UseRefResult7.current)
+				UseRefResult7.current = nil
 			end
 		end
 	end, {})
-	local var23 = reactModule.useCallback(function(p2)
-		-- upvalues: var17 (ref), var22 (ref)
-		var17.current = p2
-		var22()
-	end, { var22 })
-	local var24 = reactModule.useCallback(function(p2)
-		-- upvalues: var19 (ref), var22 (ref)
-		var19.current = p2
-		var22()
-	end, { var22 })
-	local var25 = reactModule.useCallback(function()
-		-- upvalues: var13 (ref), var1 (ref), var16 (ref)
-		local current = var13.current
-		local phase = var1.current.phase
+	local UseResult3 = ReactModule.useCallback(function(Current) --[[ Line: 127 ]]
+		-- upvalues: UseRefResult4 (copy), UseResult2 (copy)
+		UseRefResult4.current = Current
+		UseResult2()
+	end, { UseResult2 })
+	local UseResult4 = ReactModule.useCallback(function(Current) --[[ Line: 132 ]]
+		-- upvalues: UseRefResult6 (copy), UseResult2 (copy)
+		UseRefResult6.current = Current
+		UseResult2()
+	end, { UseResult2 })
+	local UseResult5 = ReactModule.useCallback(function(): boolean --[[ Line: 137 ]]
+		-- upvalues: UseRefResult2 (copy), UseRefResult (copy), UseResult (copy)
+		local Current = UseRefResult2.current
+		local Phase = UseRefResult.current.phase
 		
-		if current.isAvailable and current.isHome and current.isOpen and (phase == "Home" or phase == "Collapsing") then
-			var16({ type = "Expand" })
+		if Current.isAvailable and Current.isHome and Current.isOpen and (Phase == "Home" or Phase == "Collapsing") then
+			UseResult({ type = "Expand" })
 			
 			return true
+		else
+			return false
 		end
-		return false
-	end, { var16 })
-	local var26 = reactModule.useCallback(function()
-		-- upvalues: var1 (ref), var16 (ref)
-		local phase = var1.current.phase
+	end, { UseResult })
+	local UseResult6 = ReactModule.useCallback(function(): boolean --[[ Line: 150 ]]
+		-- upvalues: UseRefResult (copy), UseResult (copy)
+		local Phase = UseRefResult.current.phase
 		
-		if phase == "World" or phase == "Expanding" then
-			var16({ type = "Collapse" })
+		if Phase == "World" or Phase == "Expanding" then
+			UseResult({ type = "Collapse" })
 			
 			return true
+		else
+			return false
 		end
-		return false
-	end, { var16 })
-	reactModule.useEffect(function()
-		-- upvalues: var14 (ref), var18 (ref), p1 (ref), var2 (ref)
-		if var14 then
-			local current = var18.current
+	end, { UseResult })
+	ReactModule.useEffect(function() --[[ Line: 160 ]]
+		-- upvalues: IsHome (copy), UseRefResult5 (copy), Current (copy), UseStateResult (copy)
+		if IsHome then
+			local Current1 = UseRefResult5.current
 			
-			if current == nil then
-				return
-			else
-				p1.onViewportRectChanged(current)
+			if Current1 ~= nil then
+				Current.onViewportRectChanged(Current1)
 				
 				return
 			end
-		elseif p1.isAvailable and p1.isOpen and var2 == "Home" then
-			p1.onViewportRectChanged(nil)
+		elseif Current.isAvailable and Current.isOpen and UseStateResult == "Home" then
+			Current.onViewportRectChanged(nil)
 		end
 	end, {
-		var14, var2, p1.isAvailable, p1.isOpen, p1.onViewportRectChanged, var6
+		IsHome, UseStateResult, Current.isAvailable, Current.isOpen,
+		Current.onViewportRectChanged, UseBindingResult
 	})
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), p1 (ref), var16 (ref)
-		if var2 ~= "Home" and (not p1.isAvailable or not p1.isHome or var2 == "World" and p1.isOpen) then
-			var16({ type = "Reset" })
+	ReactModule.useEffect(function() --[[ Line: 180 ]]
+		-- upvalues: UseStateResult (copy), Current (copy), UseResult (copy)
+		if UseStateResult ~= "Home" and (not Current.isAvailable or not Current.isHome or UseStateResult == "World" and Current.isOpen) then
+			UseResult({ type = "Reset" })
 		end
 	end, {
-		var2,
-		p1.isAvailable,
-		p1.isHome,
-		p1.isOpen,
-		var16
+		UseStateResult,
+		Current.isAvailable,
+		Current.isHome,
+		Current.isOpen,
+		UseResult
 	})
-	reactModule.useEffect(function()
-		-- upvalues: worldCutoutTransitionModule (copy), var2 (ref), runService (copy), var16 (ref), progress (ref), var6 (ref), var8 (ref), var13 (ref), var12 (ref), motionModule (copy), reducedMotion (ref), var1 (ref)
-		local var27 = worldCutoutTransitionModule.isTransitioning(var2)
-		local var28 = false
-		local var29 = if var27 then runService.Heartbeat:Connect(function()
-			-- upvalues: var16 (copy), progress (copy), var6 (copy), var8 (copy), worldCutoutTransitionModule (copy), var13 (copy)
-			local var30 = var16({ type = "Progress", progress = progress:getValue() })
-			local value = var6:getValue()
-			local value_1 = var8:getValue()
+	ReactModule.useEffect(function() --[[ Line: 186 ]]
+		-- upvalues: WorldCutoutTransitionModule (upval), UseStateResult (copy), RunService (upval), UseResult (copy), Progress (copy), UseBindingResult (copy), UseBindingResult1 (copy), UseRefResult2 (copy), UseRefResult1 (copy), MotionModule (upval), ReducedMotion (copy), UseRefResult (copy)
+		local IsTransitioning = WorldCutoutTransitionModule.isTransitioning(UseStateResult)
+		local Flag = false
+		local HeartbeatConnection = if IsTransitioning then RunService.Heartbeat:Connect(function() --[[ Line: 191 ]]
+			-- upvalues: UseResult (upval), Progress (upval), UseBindingResult (upval), UseBindingResult1 (upval), WorldCutoutTransitionModule (upval), UseRefResult2 (upval)
+			local UseResultResult = UseResult({ type = "Progress", progress = Progress:getValue() })
+			local Value = UseBindingResult:getValue()
+			local Value1 = UseBindingResult1:getValue()
 			
-			if worldCutoutTransitionModule.isTransitioning(var30.phase) and value ~= nil and value_1 ~= nil then
-				var13.current.onViewportRectChanged(worldCutoutTransitionModule.interpolateRect(value, value_1, var30.progress))
+			if WorldCutoutTransitionModule.isTransitioning(UseResultResult.phase) and Value ~= nil and Value1 ~= nil then
+				UseRefResult2.current.onViewportRectChanged(WorldCutoutTransitionModule.interpolateRect(Value, Value1, UseResultResult.progress))
 			end
 		end) else nil
-		var12.current(motionModule.createState({ progress = worldCutoutTransitionModule.getTarget(var2) }, {
-			default = motionModule.transition({
-				duration = if reducedMotion or not var27 then 0 else 0.3,
+		UseRefResult1.current(MotionModule.createState({
+			progress = WorldCutoutTransitionModule.getTarget(UseStateResult)
+		}, {
+			default = MotionModule.transition({
+				duration = if ReducedMotion or not IsTransitioning then 0 else 0.3,
 				easingStyle = Enum.EasingStyle.Quad
 			})
 		}), {
-			onAnimationComplete = function(p2)
-				-- upvalues: var28 (write), var1 (copy), var2 (copy), var16 (copy)
-				if p2 == true and not var28 and var1.current.phase == var2 then
-					var16({ type = "Settle" })
+			onAnimationComplete = function(Enabled) --[[ Line: 209 ]]
+				-- upvalues: Flag (ref), UseRefResult (upval), UseStateResult (upval), UseResult (upval)
+				if Enabled == true and not Flag and UseRefResult.current.phase == UseStateResult then
+					UseResult({ type = "Settle" })
 				end
 			end
 		})
 		
-		return function()
-			-- upvalues: var28 (write), var29 (write)
-			var28 = true
+		return function() --[[ Line: 216 ]]
+			-- upvalues: Flag (ref), HeartbeatConnection (ref)
+			Flag = true
 			
-			if var29 ~= nil then
-				var29:Disconnect()
+			if HeartbeatConnection ~= nil then
+				HeartbeatConnection:Disconnect()
 			end
 		end
 	end, {
-		var2, reducedMotion, progress, var6, var8, var16
+		UseStateResult, ReducedMotion, Progress, UseBindingResult, UseBindingResult1,
+		UseResult
 	})
-	local var27 = worldCutoutTransitionModule.isTransitioning(var2)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 224 ]]
+		-- upvalues: ReactModule (upval), Progress (copy), UseBindingResult (copy), UseBindingResult1 (copy), WorldCutoutTransitionModule (upval)
+		return ReactModule.joinBindings({
+			progress = Progress,
+			cell = UseBindingResult,
+			content = UseBindingResult1
+		}):map(function(p1): Rect? --[[ Line: 226 ]]
+			-- upvalues: WorldCutoutTransitionModule (upval)
+			if p1.cell == nil or p1.content == nil then
+				return nil
+			else
+				local InterpolateRectResult = WorldCutoutTransitionModule.interpolateRect(p1.cell, p1.content, p1.progress)
+				local Min = p1.content.Min
+				
+				return Rect.new(InterpolateRectResult.Min - Min, InterpolateRectResult.Max - Min)
+			end
+		end)
+	end, { Progress, UseBindingResult, UseBindingResult1 })
+	local IsTransitioning = WorldCutoutTransitionModule.isTransitioning(UseStateResult)
 	
 	return {
-		phase = var2,
-		isMeasured = var4,
-		enter = var25,
-		exit = var26,
-		onCellRectChanged = var23,
-		view = if p1.isAvailable then {
-			isTransitioning = var27,
-			showHole = var27 or p1.isHome and var2 == "Home",
-			progress = progress,
-			hole = reactModule.useMemo(function()
-				-- upvalues: reactModule (copy), progress (ref), var6 (ref), var8 (ref), worldCutoutTransitionModule (copy)
-				return reactModule.joinBindings({ progress = progress, cell = var6, content = var8 }):map(function(p2)
-					-- upvalues: worldCutoutTransitionModule (copy)
-					if p2.cell == nil or p2.content == nil then
-						return nil
-					end
-					local var28 = worldCutoutTransitionModule.interpolateRect(p2.cell, p2.content, p2.progress)
-					local min = p2.content.Min
-					
-					return Rect.new(var28.Min - min, var28.Max - min)
-				end)
-			end, { progress, var6, var8 }),
-			onContentRectChanged = var24
+		phase = UseStateResult,
+		isMeasured = UseStateResult1,
+		enter = UseResult5,
+		exit = UseResult6,
+		onCellRectChanged = UseResult3,
+		view = if Current.isAvailable then {
+			isTransitioning = IsTransitioning,
+			showHole = IsTransitioning or Current.isHome and UseStateResult == "Home",
+			progress = Progress,
+			hole = UseMemoResult,
+			onContentRectChanged = UseResult4
 		} else nil
 	}
 end

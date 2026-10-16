@@ -1,89 +1,92 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local isPioneerLaunch = require(corePackagesService.Workspace.Packages.PioneerUtils).isPioneerLaunch
-local var1 = nil
+﻿local CorePackages = game:GetService("CorePackages")
+local IsPioneerLaunch = require(CorePackages.Workspace.Packages.PioneerUtils).isPioneerLaunch
+local v1 = nil
 
-local function _()
-	-- upvalues: var1 (write), corePackagesService (ref)
-	if var1 then
-		return var1
-	end
-	local accessResponseEnum = require(corePackagesService.Workspace.Packages.AccountUpgrade.Eligibility).AccessResponseEnum
-	var1 = accessResponseEnum
+local function _() --[[ Line: 12 | Named "getAccessResponseEnum" ]]
+	-- upvalues: v1 (ref), CorePackages (copy)
+	local v2 = v1
 	
-	return accessResponseEnum
-end
-
-local function defaultGetAvailability()
-	-- upvalues: corePackagesService (ref)
-	return require(corePackagesService.Workspace.Packages.AccountUpgrade.Eligibility).getAvailability(require(corePackagesService.Workspace.Packages.AccountUpgrade.AccountUpgradeFlow).Pioneer)
-end
-
-local tbl = setmetatable({}, { __mode = "k" })
-
-local _ = function(p1)
-	-- upvalues: tbl (ref), var1 (write), corePackagesService (ref)
-	local var2 = tbl[p1]
-	
-	if var2 then
-		return var2
-	end
-	local var3
-	local var4 = p1()
-	local access = var4.access
-	local var5 = var1
-	
-	if var5 then
-		var3 = var5
+	if v2 then
+		return v2
 	else
-		var5 = require(corePackagesService.Workspace.Packages.AccountUpgrade.Eligibility).AccessResponseEnum
-		var1 = var5
-		var3 = var5
+		local AccessResponseEnum = require(CorePackages.Workspace.Packages.AccountUpgrade.Eligibility).AccessResponseEnum
+		v1 = AccessResponseEnum
+		
+		return AccessResponseEnum
 	end
-	if access == var3.Denied then
-		tbl[p1] = var4
-	end
-	return var4
 end
 
-return function(value, p1)
-	-- upvalues: isPioneerLaunch (ref), defaultGetAvailability (ref), tbl (ref), var1 (write), corePackagesService (ref)
-	if not (value or isPioneerLaunch)() then
+local function defaultGetAvailability() --[[ Line: 28 ]]
+	-- upvalues: CorePackages (copy)
+	return require(CorePackages.Workspace.Packages.AccountUpgrade.Eligibility).getAvailability(require(CorePackages.Workspace.Packages.AccountUpgrade.AccountUpgradeFlow).Pioneer)
+end
+
+local self = setmetatable({}, { __mode = "k" })
+
+local _ = function(Callback) --[[ Line: 36 | Named "getAvailabilityOnce" ]]
+	-- upvalues: self (copy), v1 (ref), CorePackages (copy)
+	local SelfEntry = self[Callback]
+	
+	if SelfEntry then
+		return SelfEntry
+	end
+	local CallbackResult = Callback()
+	local Access = CallbackResult.access
+	local v2 = v1
+	local v3 = nil
+	
+	if v2 then
+		v3 = v2
+	else
+		local AccessResponseEnum = require(CorePackages.Workspace.Packages.AccountUpgrade.Eligibility).AccessResponseEnum
+		v1 = AccessResponseEnum
+		v3 = AccessResponseEnum
+	end
+	if Access == v3.Denied then
+		self[Callback] = CallbackResult
+	end
+	return CallbackResult
+end
+
+return function(p1, p2): boolean --[[ Line: 51 | Named "shouldShowMoreSettingsBanner" ]]
+	-- upvalues: IsPioneerLaunch (copy), defaultGetAvailability (copy), self (copy), v1 (ref), CorePackages (copy)
+	if not (p1 or IsPioneerLaunch)() then
 		return false
 	end
-	local var2
-	p1 = p1 or defaultGetAvailability
-	local var3 = tbl[p1]
+	local Callback = p2 or defaultGetAvailability
+	local SelfEntry = self[Callback]
+	local SelfEntry1 = nil
 	
-	if var3 then
-		var2 = var3
+	if SelfEntry then
+		SelfEntry1 = SelfEntry
 	else
-		local var4
-		local var5 = p1()
-		local access = var5.access
-		local var6 = var1
+		local CallbackResult = Callback()
+		local Access = CallbackResult.access
+		local v2 = v1
+		local v3 = nil
 		
-		if var6 then
-			var4 = var6
+		if v2 then
+			v3 = v2
 		else
-			var6 = require(corePackagesService.Workspace.Packages.AccountUpgrade.Eligibility).AccessResponseEnum
-			var1 = var6
-			var4 = var6
+			local AccessResponseEnum = require(CorePackages.Workspace.Packages.AccountUpgrade.Eligibility).AccessResponseEnum
+			v1 = AccessResponseEnum
+			v3 = AccessResponseEnum
 		end
-		if access == var4.Denied then
-			tbl[p1] = var5
+		if Access == v3.Denied then
+			self[Callback] = CallbackResult
 		end
-		var2 = var5
+		SelfEntry1 = CallbackResult
 	end
-	local var7
-	local access = var2.access
-	local var8 = var1
+	local Access1 = SelfEntry1.access
+	local v4 = v1
+	local v5 = nil
 	
-	if var8 then
-		var7 = var8
+	if v4 then
+		v5 = v4
 	else
-		var8 = require(corePackagesService.Workspace.Packages.AccountUpgrade.Eligibility).AccessResponseEnum
-		var1 = var8
-		var7 = var8
+		local AccessResponseEnum = require(CorePackages.Workspace.Packages.AccountUpgrade.Eligibility).AccessResponseEnum
+		v1 = AccessResponseEnum
+		v5 = AccessResponseEnum
 	end
-	return access == var7.Denied
+	return Access1 == v5.Denied
 end

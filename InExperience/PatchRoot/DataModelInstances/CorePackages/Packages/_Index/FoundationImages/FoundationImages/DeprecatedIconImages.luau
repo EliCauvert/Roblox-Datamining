@@ -1,22 +1,21 @@
-﻿local parent = script.Parent
-local staticFallbackImagesModule = require(parent.Deprecated.StaticFallbackImages)
-local var1 = require(parent.Deprecated.GetDeprecatedIconImageSetData)(require(parent.getResolutionScale)())
-local uiblox = require(parent.Parent.BuilderIcons).Migration.uiblox
-local whitelistedIconAssetsModule = require(parent.whitelistedIconAssets)
-local t = {}
+﻿local Parent = script.Parent
+local StaticFallbackImagesModule = require(Parent.Deprecated.StaticFallbackImages)
+local Uiblox = require(Parent.Parent.BuilderIcons).Migration.uiblox
+local WhitelistedIconAssetsModule = require(Parent.whitelistedIconAssets)
+local DeprecatedIconImagesModule = {}
 
-for i, v in var1 do
-	if uiblox[i] and whitelistedIconAssetsModule[i] == nil then
-		local t_1 = {}
+for i, value in require(Parent.Deprecated.GetDeprecatedIconImageSetData)((require(Parent.getResolutionScale)())) do
+	if Uiblox[i] and WhitelistedIconAssetsModule[i] == nil then
+		local t = {}
 		
-		for i_1, v_1 in v do
-			if i_1 == "ImageSet" then
-				t_1.Image = staticFallbackImagesModule[v_1]
+		for i1, value1 in value do
+			if i1 == "ImageSet" then
+				t.Image = StaticFallbackImagesModule[value1]
 			else
-				t_1[i_1] = v_1
+				t[i1] = value1
 			end
 		end
-		t[i] = t_1
+		DeprecatedIconImagesModule[i] = t
 	end
 end
-return t
+return DeprecatedIconImagesModule

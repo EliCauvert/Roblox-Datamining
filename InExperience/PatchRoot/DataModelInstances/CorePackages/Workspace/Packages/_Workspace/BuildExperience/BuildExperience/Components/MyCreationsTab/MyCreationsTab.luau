@@ -1,188 +1,142 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
 local _ = game:GetService("AppLifecycleObserverService")
-local playersService = game:GetService("Players")
-local fFlagBuildExperienceMyCreationsUseUniverseListModule = require(buildExperience.Flags.FFlagBuildExperienceMyCreationsUseUniverseList)
-local foundationModule = require(parent.Foundation)
-local localizationModule = require(parent.Localization)
-local luaSocialLibrariesDepsModule = require(parent.LuaSocialLibrariesDeps)
-local reactModule = require(parent.React)
-local useLocalization = localizationModule.Hooks.useLocalization
-local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local _ = require(parent.DataHydration.CreatorAgentChat)
-local _ = require(parent.DataHydration.UniverseConfiguration)
-local _ = require(parent.DataHydration.UniverseSearch)
-local list = foundationModule.List
-local view = foundationModule.View
-local refreshScrollingFrame = luaSocialLibrariesDepsModule.SocialLibraries.config({}).Components.RefreshScrollingFrame
-local iconName = foundationModule.Enums.IconName
-local inputSize = foundationModule.Enums.InputSize
-local searchEmptyStateModule = require(buildExperience.Components.SearchEmptyState.SearchEmptyState)
-local buildEmptyStateModule = require(script.Parent.Parent.BuildEmptyState.BuildEmptyState)
-local chatConstantsModule = require(script.Parent.Parent.Parent.Chat.chatConstants)
+local Players = game:GetService("Players")
+local FFlagBuildExperienceMyCreationsCreateGameButtonModule = require(BuildExperience.Flags.FFlagBuildExperienceMyCreationsCreateGameButton)
+local FFlagBuildExperienceMyCreationsLongPressMenuModule = require(BuildExperience.Flags.FFlagBuildExperienceMyCreationsLongPressMenu)
+local FFlagBuildExperienceMyCreationsUseUniverseListModule = require(BuildExperience.Flags.FFlagBuildExperienceMyCreationsUseUniverseList)
+local FFlagBuildExperienceStableMyCreationsListItemsModule = require(BuildExperience.Flags.FFlagBuildExperienceStableMyCreationsListItems)
+local FFlagBuildWithGroupsModule = require(BuildExperience.Flags.FFlagBuildWithGroups)
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
+local _ = require(Parent.DataHydration.CreatorAgentChat)
+local _ = require(Parent.DataHydration.UniverseConfiguration)
+local _ = require(Parent.DataHydration.UniverseSearch)
+local Button = FoundationModule.Button
+local List = FoundationModule.List
+local View = FoundationModule.View
+local RefreshScrollingFrame = require(Parent.LuaSocialLibrariesDeps).SocialLibraries.config({}).Components.RefreshScrollingFrame
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local IconName = FoundationModule.Enums.IconName
+local InputSize = FoundationModule.Enums.InputSize
+local ListItemInputType = FoundationModule.Enums.ListItemInputType
+local MyCreationsTabNewGameRow = if FFlagBuildExperienceMyCreationsLongPressMenuModule then "MyCreationsTab.NewGameRow" else nil
+local SearchEmptyStateModule = require(BuildExperience.Components.SearchEmptyState.SearchEmptyState)
+local BuildEmptyStateModule = require(script.Parent.Parent.BuildEmptyState.BuildEmptyState)
+local ChatConstantsModule = require(script.Parent.Parent.Parent.Chat.chatConstants)
 local _ = require(script.Parent.Parent.Parent.Chat.chatTypes)
-local getSearchQueryStoreModule = require(script.Parent.Parent.Parent.Stores.GetSearchQueryStore)
+local GetMyCreationsFilterStoreModule = require(script.Parent.Parent.Parent.Stores.GetMyCreationsFilterStore)
+local GetSearchQueryStoreModule = require(script.Parent.Parent.Parent.Stores.GetSearchQueryStore)
 local _ = require(script.Parent.Parent.Parent.Stores.GetSearchQueryStore.createSearchQueryStore)
-local fFlagBuildDesktopReadinessModule = require(buildExperience.Flags.FFlagBuildDesktopReadiness)
-local useScrollPerformanceTrackerModule = require(script.Parent.Parent.Parent.Telemetry.useScrollPerformanceTracker)
-local experienceResultsListModule = require(script.Parent.ExperienceResultsList)
-local experienceResultsLoadingSkeletonModule = require(script.Parent.ExperienceResultsLoadingSkeleton)
-local useMyCreationsResultsModule = require(script.Parent.useMyCreationsResults)
+local UseScrollPerformanceTrackerModule = require(script.Parent.Parent.Parent.Telemetry.useScrollPerformanceTracker)
+local ExperienceResultsListModule = require(script.Parent.ExperienceResultsList)
+local ExperienceResultsLoadingSkeletonModule = require(script.Parent.ExperienceResultsLoadingSkeleton)
+local MyCreationsFilterContainerModule = require(BuildExperience.Components.MyCreationsFilter.MyCreationsFilterContainer)
+local UseMyCreationsResultsModule = require(script.Parent.useMyCreationsResults)
 
-return function(p1)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), getSearchQueryStoreModule (ref), reactModule (ref), useScrollPerformanceTrackerModule (ref), fFlagBuildExperienceMyCreationsUseUniverseListModule (ref), useMyCreationsResultsModule (ref), chatConstantsModule (ref), playersService (ref), experienceResultsLoadingSkeletonModule (ref), list (ref), iconName (ref), searchEmptyStateModule (ref), view (ref), inputSize (ref), buildEmptyStateModule (ref), experienceResultsListModule (ref), refreshScrollingFrame (ref), fFlagBuildDesktopReadinessModule (ref)
-	local var1
-	local var2 = useLocalization({
-		building = localizationStringsModule.MY_CREATIONS_BUILDING,
-		buildWithAI = localizationStringsModule.MY_CREATIONS_BUILD_WITH_AI,
-		inputNeeded = localizationStringsModule.MY_CREATIONS_INPUT_NEEDED,
-		loadError = localizationStringsModule.MY_CREATIONS_LOAD_ERROR,
-		newGame = localizationStringsModule.MY_CREATIONS_NEW_GAME,
-		private = localizationStringsModule.MY_CREATIONS_PRIVATE,
-		["public"] = localizationStringsModule.MY_CREATIONS_PUBLIC,
-		publiclyUnavailable = localizationStringsModule.MY_CREATIONS_PUBLICLY_UNAVAILABLE,
-		ready = localizationStringsModule.MY_CREATIONS_READY,
-		restricted = localizationStringsModule.MY_CREATIONS_RESTRICTED
+return function(Frame: Frame) --[[ Line: 133 | Named "MyCreationsTab" ]]
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagBuildExperienceMyCreationsCreateGameButtonModule (copy), GetSearchQueryStoreModule (copy), ReactModule (copy), UseScrollPerformanceTrackerModule (copy), FFlagBuildExperienceMyCreationsUseUniverseListModule (copy), FFlagBuildWithGroupsModule (copy), GetMyCreationsFilterStoreModule (copy), UseMyCreationsResultsModule (copy), ChatConstantsModule (copy), Players (copy), FFlagBuildExperienceMyCreationsLongPressMenuModule (copy), FFlagBuildExperienceStableMyCreationsListItemsModule (copy), ListItemInputType (copy), ExperienceResultsLoadingSkeletonModule (copy), List (copy), IconName (copy), MyCreationsTabNewGameRow (copy), SearchEmptyStateModule (copy), View (copy), InputSize (copy), BuildEmptyStateModule (copy), ExperienceResultsListModule (copy), RefreshScrollingFrame (copy), MyCreationsFilterContainerModule (copy), Button (copy), ButtonVariant (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
+		building = LocalizationStringsModule.MY_CREATIONS_BUILDING,
+		buildWithAI = LocalizationStringsModule.MY_CREATIONS_BUILD_WITH_AI,
+		createNewGame = if FFlagBuildExperienceMyCreationsCreateGameButtonModule then LocalizationStringsModule.MY_CREATIONS_CREATE_NEW_GAME else nil,
+		inputNeeded = LocalizationStringsModule.MY_CREATIONS_INPUT_NEEDED,
+		loadError = LocalizationStringsModule.MY_CREATIONS_LOAD_ERROR,
+		newGame = LocalizationStringsModule.MY_CREATIONS_NEW_GAME,
+		private = LocalizationStringsModule.MY_CREATIONS_PRIVATE,
+		public = LocalizationStringsModule.MY_CREATIONS_PUBLIC,
+		publiclyUnavailable = LocalizationStringsModule.MY_CREATIONS_PUBLICLY_UNAVAILABLE,
+		ready = LocalizationStringsModule.MY_CREATIONS_READY,
+		restricted = LocalizationStringsModule.MY_CREATIONS_RESTRICTED
 	})
-	local buildWithAI = var2.buildWithAI
-	local loadError = var2.loadError
-	local newGame = var2.newGame
-	local searchQueryStore = p1.searchQueryStore or getSearchQueryStoreModule()
-	local var3 = p1.isFocused ~= false
-	local var4 = reactModule.useRef(nil)
-	local var5 = reactModule.useRef(false)
-	useScrollPerformanceTrackerModule("LuaApp_Build_Home_Scroll", var4)
-	local var6 = searchQueryStore.useShowEmptyState()
-	local var7 = if fFlagBuildExperienceMyCreationsUseUniverseListModule then searchQueryStore.useDraftQuery() else nil
-	local var8 = useMyCreationsResultsModule({
-		creatorAgentChatStore = p1.creatorAgentChatStore,
-		configurationStore = p1.configurationStore,
-		searchStore = p1.searchStore,
-		searchQueryStore = searchQueryStore,
-		appLifecycleObserverService = p1.appLifecycleObserverService,
-		isFocused = var3,
-		pollingIntervalSeconds = p1.pollingIntervalSeconds,
-		userId = p1.userId
+	local BuildWithAI = UseLocalizationResult.buildWithAI
+	local CreateNewGame = UseLocalizationResult.createNewGame
+	local LoadError = UseLocalizationResult.loadError
+	local NewGame = UseLocalizationResult.newGame
+	local SearchQueryStore = Frame.searchQueryStore or GetSearchQueryStoreModule()
+	local IsIsFocused = Frame.isFocused ~= false
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(false)
+	UseScrollPerformanceTrackerModule("LuaApp_Build_Home_Scroll", UseRefResult)
+	local UseShowEmptyStateResult = SearchQueryStore.useShowEmptyState()
+	local UseDraftQueryResult = if FFlagBuildExperienceMyCreationsUseUniverseListModule then SearchQueryStore.useDraftQuery() else nil
+	local FilterStore = if FFlagBuildWithGroupsModule then Frame.filterStore or GetMyCreationsFilterStoreModule() else nil
+	local UseMyCreationsResultsModuleResult = UseMyCreationsResultsModule({
+		creatorAgentChatStore = Frame.creatorAgentChatStore,
+		creatorGroupsStore = Frame.creatorGroupsStore,
+		configurationStore = Frame.configurationStore,
+		searchStore = Frame.searchStore,
+		searchQueryStore = SearchQueryStore,
+		appLifecycleObserverService = Frame.appLifecycleObserverService,
+		isFocused = IsIsFocused,
+		pollingIntervalSeconds = Frame.pollingIntervalSeconds,
+		userId = Frame.userId,
+		filter = if FFlagBuildWithGroupsModule then FilterStore.useFilter() else nil
 	})
-	local displayedItems = var8.displayedItems
-	local items = var8.items
-	local hasPendingSummary = var8.hasPendingSummary
-	local listStatus = var8.listStatus
-	local sourceItemCount = var8.sourceItemCount
-	local hasDisplayedResult = var8.hasDisplayedResult
-	local failedLoadMore = var8.failedLoadMore
-	local retryLoadMore = var8.retryLoadMore
-	local refresh = var8.refresh
-	local loadMoreIfNeeded = var8.loadMoreIfNeeded
-	local var9 = reactModule.useCallback(function()
-		-- upvalues: var5 (ref), p1 (ref), chatConstantsModule (copy), playersService (copy)
-		var5.current = true
-		p1.onOpenChat({
+	local DisplayedItems = UseMyCreationsResultsModuleResult.displayedItems
+	local Items = UseMyCreationsResultsModuleResult.items
+	local HasPendingSummary = UseMyCreationsResultsModuleResult.hasPendingSummary
+	local ListStatus = UseMyCreationsResultsModuleResult.listStatus
+	local SourceItemCount = UseMyCreationsResultsModuleResult.sourceItemCount
+	local HasDisplayedResult = UseMyCreationsResultsModuleResult.hasDisplayedResult
+	local FailedLoadMore = UseMyCreationsResultsModuleResult.failedLoadMore
+	local RetryLoadMore = UseMyCreationsResultsModuleResult.retryLoadMore
+	local Refresh = UseMyCreationsResultsModuleResult.refresh
+	local LoadMoreIfNeeded = UseMyCreationsResultsModuleResult.loadMoreIfNeeded
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 192 ]]
+		-- upvalues: UseRefResult1 (copy), Frame (copy), ChatConstantsModule (upval), Players (upval)
+		UseRefResult1.current = true
+		Frame.onOpenChat({
 			isNewGameTarget = true,
-			experienceName = chatConstantsModule.BUILD_CHAT_PAGE_TITLE,
-			creatorName = if playersService.LocalPlayer then playersService.LocalPlayer.Name else nil
+			experienceName = ChatConstantsModule.BUILD_CHAT_PAGE_TITLE,
+			creatorName = if Players.LocalPlayer then Players.LocalPlayer.Name else nil
 		})
-	end, { p1.onOpenChat })
-	
-	if fFlagBuildExperienceMyCreationsUseUniverseListModule then
-		var1 = var8.hasCompletedFocusedRefresh
-		
-		if var1 then
-			var1 = false
-			
-			if var8.sessionListStatus == "Ready" then
-				var1 = false
-				
-				if var8.sessionCount == 0 then
-					var1 = var7 == ""
-					var1 = nil
-				end
-			end
+	end, { Frame.onOpenChat })
+	local IsUseDraftQueryResultMatch: boolean = if FFlagBuildExperienceMyCreationsUseUniverseListModule then UseMyCreationsResultsModuleResult.hasCompletedFocusedRefresh and (UseMyCreationsResultsModuleResult.sessionListStatus == "Ready" and UseMyCreationsResultsModuleResult.sessionCount == 0 and UseDraftQueryResult == "") else UseMyCreationsResultsModuleResult.hasCompletedFocusedRefresh and (ListStatus == "Ready" and SourceItemCount == 0)
+	ReactModule.useEffect(function() --[[ Line: 208 ]]
+		-- upvalues: Frame (copy), IsIsFocused (copy), IsUseDraftQueryResultMatch (copy), UseRefResult1 (copy), UseResult (copy)
+		if Frame.autoOpenNewGame ~= false and IsIsFocused and IsUseDraftQueryResultMatch and not UseRefResult1.current then
+			UseResult()
 		end
-	else
-		var1 = var8.hasCompletedFocusedRefresh and (listStatus == "Ready" and sourceItemCount == 0)
-	end
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var3 (ref), var1 (ref), var5 (ref), var9 (ref)
-		if p1.autoOpenNewGame ~= false and var3 and (var1 and not var5.current) then
-			var9()
-		end
-	end, { var1, var9, var3, p1.autoOpenNewGame })
-	local var10 = reactModule.useCallback(function()
-		-- upvalues: var8 (ref), reactModule (copy), experienceResultsLoadingSkeletonModule (copy)
-		return if var8.isLoadingMore then reactModule.createElement(experienceResultsLoadingSkeletonModule, {
-			LayoutOrder = 1,
-			index = 1,
-			testIdPrefix = "MyCreationsTab"
-		}) else nil
-	end, { var8.isLoadingMore })
-	local _ = nil
-	local var11 = reactModule.createElement(view, {
-		tag = "composition-content-body col size-full-0 auto-y",
-		testId = "MyCreationsTab.ContentBody"
-	}, if var6 then {
-		SearchEmptyState = reactModule.createElement(searchEmptyStateModule, { testId = "MyCreationsTab.SearchEmptyState" })
-	} elseif hasDisplayedResult and not hasPendingSummary and #displayedItems == 0 then {
-		EmptyContent = reactModule.createElement(view, { tag = "col size-full" }, {
-			CreateList = reactModule.createElement(list.Root, {
-				LayoutOrder = 1,
-				hasDivider = false,
-				isContained = { isContained = false, hasMargin = false },
-				size = inputSize.Large
-			}, {
-				CreateRow = reactModule.createElement(list.Item, {
-					LayoutOrder = 1,
-					leading = iconName.PlusLarge,
-					title = newGame,
-					description = buildWithAI,
-					onActivated = var9
-				})
-			}),
-			EmptyState = reactModule.createElement(view, {
-				LayoutOrder = 2,
-				tag = "col align-x-center align-y-center fill size-full-0 padding-large",
-				testId = "MyCreationsTab.Empty"
-			}, {
-				Content = reactModule.createElement(buildEmptyStateModule)
-			})
-		})
-	} else {
-		ExperienceList = reactModule.createElement(experienceResultsListModule, {
-			firstResultLayoutOrder = 2,
-			testIdPrefix = "MyCreationsTab",
-			items = items,
-			hasDisplayedItems = #displayedItems > 0,
-			hasDisplayedResult = hasDisplayedResult,
-			hasPendingSummary = hasPendingSummary,
-			listStatus = listStatus,
-			failedLoadMore = failedLoadMore,
-			retryLoadMore = retryLoadMore,
-			loadError = loadError,
-			onOpenChat = p1.onOpenChat,
-			leadingItems = reactModule.useMemo(function()
-				-- upvalues: reactModule (copy), list (copy), iconName (copy), newGame (ref), buildWithAI (ref), var9 (ref)
-				return {
-					CreateRow = reactModule.createElement(list.Item, {
-						LayoutOrder = 1,
-						leading = iconName.PlusLarge,
-						title = newGame,
-						description = buildWithAI,
-						onActivated = var9
-					})
-				}
-			end, { buildWithAI, var9, newGame })
-		})
+	end, {
+		IsUseDraftQueryResultMatch,
+		UseResult,
+		IsIsFocused,
+		Frame.autoOpenNewGame
 	})
-	
-	return reactModule.createElement(refreshScrollingFrame, {
+	local None = if FFlagBuildExperienceMyCreationsLongPressMenuModule and FFlagBuildExperienceStableMyCreationsListItemsModule and Frame.onOpenConfigurationPage ~= nil then ListItemInputType.None else nil
+	local UseMemoResult = if FFlagBuildExperienceMyCreationsCreateGameButtonModule then nil else ReactModule.useMemo(function() --[[ Line: 246 ]]
+		-- upvalues: ReactModule (upval), List (upval), IconName (upval), NewGame (copy), BuildWithAI (copy), MyCreationsTabNewGameRow (upval), UseResult (copy), None (copy)
+		return {
+			CreateRow = ReactModule.createElement(List.Item, {
+				LayoutOrder = 1,
+				leading = IconName.PlusLarge,
+				title = NewGame,
+				description = BuildWithAI,
+				testId = MyCreationsTabNewGameRow,
+				onActivated = UseResult,
+				input = None
+			})
+		}
+	end, { BuildWithAI, UseResult, NewGame, None })
+	local Element = ReactModule.createElement(RefreshScrollingFrame, {
 		usesBuilderIcon = true,
-		refresh = refresh,
-		ref = var4,
-		onCanvasPositionChangedCallback = loadMoreIfNeeded,
-		onCanvasSizeChangedCallback = loadMoreIfNeeded,
-		createFooter = var10,
+		refresh = Refresh,
+		ref = UseRefResult,
+		onCanvasPositionChangedCallback = LoadMoreIfNeeded,
+		onCanvasSizeChangedCallback = LoadMoreIfNeeded,
+		createFooter = ReactModule.useCallback(function() --[[ Line: 233 ]]
+			-- upvalues: UseMyCreationsResultsModuleResult (copy), ReactModule (upval), ExperienceResultsLoadingSkeletonModule (upval)
+			return if UseMyCreationsResultsModuleResult.isLoadingMore then ReactModule.createElement(ExperienceResultsLoadingSkeletonModule, {
+				LayoutOrder = 1,
+				index = 1,
+				testIdPrefix = "MyCreationsTab"
+			}) else nil
+		end, { UseMyCreationsResultsModuleResult.isLoadingMore }),
 		scrollingElementProps = {
-			LayoutOrder = p1.LayoutOrder,
+			LayoutOrder = if FFlagBuildExperienceMyCreationsCreateGameButtonModule or FFlagBuildWithGroupsModule then 1 else Frame.LayoutOrder,
 			ZIndex = 1,
 			Size = UDim2.fromScale(1, 1),
 			BackgroundTransparency = 1,
@@ -190,15 +144,101 @@ return function(p1)
 			CanvasSize = UDim2.new(1, 0, 1, 1),
 			AutomaticCanvasSize = Enum.AutomaticSize.XY,
 			ScrollingDirection = Enum.ScrollingDirection.Y,
-			[reactModule.Tag] = "fill"
+			[ReactModule.Tag] = "fill"
 		}
-	}, if fFlagBuildDesktopReadinessModule then {
-		ContentLayout = reactModule.createElement(view, {
+	}, {
+		ContentLayout = ReactModule.createElement(View, {
 			testId = "MyCreationsTab.ContentLayout",
 			tag = {
 				["composition-layout-detail"] = true,
 				["size-full-0 auto-y"] = true
 			}
-		}, { ContentBody = var11 })
-	} else { ContentBody = var11 })
+		}, {
+			ContentBody = ReactModule.createElement(View, {
+				tag = "composition-content-body col size-full-0 auto-y",
+				testId = "MyCreationsTab.ContentBody"
+			}, if UseShowEmptyStateResult then {
+				SearchEmptyState = ReactModule.createElement(SearchEmptyStateModule, { testId = "MyCreationsTab.SearchEmptyState" })
+			} elseif HasDisplayedResult and not HasPendingSummary and #DisplayedItems == 0 then {
+				EmptyContent = ReactModule.createElement(View, { tag = "col size-full" }, {
+					CreateList = if FFlagBuildExperienceMyCreationsCreateGameButtonModule then nil else ReactModule.createElement(List.Root, {
+						LayoutOrder = 1,
+						hasDivider = false,
+						isContained = { isContained = false, hasMargin = false },
+						size = InputSize.Large
+					}, {
+						CreateRow = ReactModule.createElement(List.Item, {
+							LayoutOrder = 1,
+							leading = IconName.PlusLarge,
+							title = NewGame,
+							description = BuildWithAI,
+							testId = MyCreationsTabNewGameRow,
+							onActivated = UseResult,
+							input = None
+						})
+					}),
+					EmptyState = ReactModule.createElement(View, {
+						LayoutOrder = 2,
+						tag = "col align-x-center align-y-center fill size-full-0 padding-large",
+						testId = "MyCreationsTab.Empty"
+					}, {
+						Content = ReactModule.createElement(BuildEmptyStateModule)
+					})
+				})
+			} else {
+				ExperienceList = ReactModule.createElement(ExperienceResultsListModule, {
+					firstResultLayoutOrder = 2,
+					testIdPrefix = "MyCreationsTab",
+					items = Items,
+					hasDisplayedItems = #DisplayedItems > 0,
+					hasDisplayedResult = HasDisplayedResult,
+					hasPendingSummary = HasPendingSummary,
+					listStatus = ListStatus,
+					failedLoadMore = FailedLoadMore,
+					retryLoadMore = RetryLoadMore,
+					loadError = LoadError,
+					onOpenChat = Frame.onOpenChat,
+					onOpenConfigurationPage = Frame.onOpenConfigurationPage,
+					leadingItems = UseMemoResult
+				})
+			})
+		})
+	})
+	local Element1 = if FFlagBuildWithGroupsModule then ReactModule.createElement(MyCreationsFilterContainerModule, {
+		LayoutOrder = 0,
+		filterStore = FilterStore,
+		creatorGroupsStore = Frame.creatorGroupsStore
+	}) else nil
+	
+	return if FFlagBuildExperienceMyCreationsCreateGameButtonModule then ReactModule.createElement(View, {
+		tag = "col fill size-full",
+		LayoutOrder = Frame.LayoutOrder
+	}, {
+		Filter = Element1,
+		Results = Element,
+		CreateGameFooter = ReactModule.createElement(View, {
+			LayoutOrder = 2,
+			testId = "MyCreationsTab.CreateGameLayout",
+			tag = {
+				["composition-layout-detail"] = true,
+				["size-full-0 auto-y"] = true
+			}
+		}, {
+			CreateGameBody = ReactModule.createElement(View, {
+				tag = "composition-content-body col size-full-0 auto-y padding-y-medium"
+			}, {
+				CreateGameButton = ReactModule.createElement(Button, {
+					testId = "MyCreationsTab.CreateGameButton",
+					text = CreateNewGame,
+					onActivated = UseResult,
+					variant = ButtonVariant.Emphasis,
+					size = InputSize.Medium,
+					width = UDim.new(1, 0)
+				})
+			})
+		})
+	}) elseif Element1 == nil then Element else ReactModule.createElement(View, {
+		tag = "col fill size-full",
+		LayoutOrder = Frame.LayoutOrder
+	}, { Filter = Element1, Results = Element })
 end

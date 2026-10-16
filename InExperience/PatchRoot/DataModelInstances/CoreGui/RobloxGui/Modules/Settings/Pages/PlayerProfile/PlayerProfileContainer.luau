@@ -1,69 +1,69 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local reactModule = require(corePackagesService.Packages.React)
-local roduxModule = require(corePackagesService.Packages.Rodux)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local view = require(corePackagesService.Packages.Foundation).View
-local responsiveModule = require(corePackagesService.Workspace.Packages.Responsive)
-local coreScriptsRootProvider = require(corePackagesService.Workspace.Packages.CoreScriptsRoactCommon).CoreScriptsRootProvider
-local roactAppPolicy = require(corePackagesService.Workspace.Packages.UniversalAppPolicy).RoactAppPolicy
-local appFeaturePolicies = require(corePackagesService.Workspace.Packages.UniversalAppPolicy).AppFeaturePolicies
-local chatPolicies = require(corePackagesService.Workspace.Packages.SocialPolicies).ChatPolicies
-local avatarPolicies = require(corePackagesService.Workspace.Packages.AvatarPolicies).AvatarPolicies
-local sharePolicies = require(corePackagesService.Workspace.Packages.SocialPolicies).SharePolicies
-local shareTargetGamePolicies = require(corePackagesService.Workspace.Packages.SocialPolicies).ShareTargetGamePolicies
-local enumsModule = require(corePackagesService.Workspace.Packages.ProfilePlatform.Enums)
-local installReducerModule = require(corePackagesService.Workspace.Packages.ProfilePlatform.installReducer)
-local constantsModule = require(corePackagesService.Workspace.Packages.ProfilePlatform.Constants)
-local profileTypes = enumsModule.ProfileTypes
-local profileWrapperContextModule = require(corePackagesService.Workspace.Packages.ProfilePlatform.ProfileWrapperContext)
-local playerProfileModule = require(script.Parent.PlayerProfile)
+﻿local CorePackages = game:GetService("CorePackages")
+local ReactModule = require(CorePackages.Packages.React)
+local RoduxModule = require(CorePackages.Packages.Rodux)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local View = require(CorePackages.Packages.Foundation).View
+local ResponsiveModule = require(CorePackages.Workspace.Packages.Responsive)
+local CoreScriptsRootProvider = require(CorePackages.Workspace.Packages.CoreScriptsRoactCommon).CoreScriptsRootProvider
+local RoactAppPolicy = require(CorePackages.Workspace.Packages.UniversalAppPolicy).RoactAppPolicy
+local AppFeaturePolicies = require(CorePackages.Workspace.Packages.UniversalAppPolicy).AppFeaturePolicies
+local ChatPolicies = require(CorePackages.Workspace.Packages.SocialPolicies).ChatPolicies
+local AvatarPolicies = require(CorePackages.Workspace.Packages.AvatarPolicies).AvatarPolicies
+local SharePolicies = require(CorePackages.Workspace.Packages.SocialPolicies).SharePolicies
+local ShareTargetGamePolicies = require(CorePackages.Workspace.Packages.SocialPolicies).ShareTargetGamePolicies
+local EnumsModule = require(CorePackages.Workspace.Packages.ProfilePlatform.Enums)
+local InstallReducerModule = require(CorePackages.Workspace.Packages.ProfilePlatform.installReducer)
+local ConstantsModule = require(CorePackages.Workspace.Packages.ProfilePlatform.Constants)
+local ProfileTypes = EnumsModule.ProfileTypes
+local ProfileWrapperContextModule = require(CorePackages.Workspace.Packages.ProfilePlatform.ProfileWrapperContext)
+local PlayerProfileModule = require(script.Parent.PlayerProfile)
 
-local function createStore(p1)
-	-- upvalues: roduxModule (ref), constantsModule (ref), installReducerModule (ref)
-	return roduxModule.Store.new(roduxModule.combineReducers({ [constantsModule.RODUX_KEY] = installReducerModule() }), p1 or {}, { roduxModule.thunkMiddleware })
+local function createStore(p1) --[[ Line: 29 ]]
+	-- upvalues: RoduxModule (copy), ConstantsModule (copy), InstallReducerModule (copy)
+	return RoduxModule.Store.new(RoduxModule.combineReducers({ [ConstantsModule.RODUX_KEY] = InstallReducerModule() }), p1 or {}, { RoduxModule.thunkMiddleware })
 end
 
-return function(p1)
-	-- upvalues: reactModule (ref), roactAppPolicy (ref), appFeaturePolicies (ref), chatPolicies (ref), avatarPolicies (ref), sharePolicies (ref), shareTargetGamePolicies (ref), profileWrapperContextModule (ref), profileTypes (ref), enumsModule (ref), coreScriptsRootProvider (ref), roactRoduxModule (ref), createStore (ref), responsiveModule (ref), view (ref), playerProfileModule (ref)
-	local var1 = reactModule.useRef(nil)
+return function(p1) --[[ Line: 42 | Named "PlayerProfileContainer" ]]
+	-- upvalues: ReactModule (copy), RoactAppPolicy (copy), AppFeaturePolicies (copy), ChatPolicies (copy), AvatarPolicies (copy), SharePolicies (copy), ShareTargetGamePolicies (copy), ProfileWrapperContextModule (copy), ProfileTypes (copy), EnumsModule (copy), CoreScriptsRootProvider (copy), RoactRoduxModule (copy), createStore (copy), ResponsiveModule (copy), View (copy), PlayerProfileModule (copy)
+	local UseRefResult = ReactModule.useRef(nil)
 	
-	return reactModule.createElement(roactAppPolicy.Provider, {
+	return ReactModule.createElement(RoactAppPolicy.Provider, {
 		policy = {
-			appFeaturePolicies,
-			chatPolicies,
-			avatarPolicies,
-			sharePolicies,
-			shareTargetGamePolicies
+			AppFeaturePolicies,
+			ChatPolicies,
+			AvatarPolicies,
+			SharePolicies,
+			ShareTargetGamePolicies
 		}
 	}, {
-		ProfileWrapperProvider = reactModule.createElement(profileWrapperContextModule.Provider, {
+		ProfileWrapperProvider = ReactModule.createElement(ProfileWrapperContextModule.Provider, {
 			value = {
 				profileId = tostring(p1.userId),
-				profileType = profileTypes.User,
+				profileType = ProfileTypes.User,
 				sourceInfo = {
 					contextualInfoType = "",
-					source = enumsModule.Sources.InExperienceProfile
+					source = EnumsModule.Sources.InExperienceProfile
 				},
 				navigateTo = {
-					qRCodePage = function() end,
-					previousView = function(_) end,
-					itemDetails = function(_) end,
-					itemOrBundleDetails = function(_, _) end,
-					catalogSearch = function(_) end,
-					tryOnItem = function(_, _, _, _) end,
+					qRCodePage = function() --[[ Line: 63 ]] end,
+					previousView = function(_) --[[ Line: 64 ]] end,
+					itemDetails = function(_) --[[ Line: 65 ]] end,
+					itemOrBundleDetails = function(_, _) --[[ Line: 66 ]] end,
+					catalogSearch = function(_) --[[ Line: 67 ]] end,
+					tryOnItem = function(_, _, _, _) --[[ Line: 68 ]] end,
 					inspectAvatar = p1.inspectAvatar,
-					editUsername = function() end,
-					openLeaveRobloxAlertUIBlox = function(_) end,
-					closeLeaveRobloxAlert = function() end
+					editUsername = function() --[[ Line: 76 ]] end,
+					openLeaveRobloxAlertUIBlox = function(_) --[[ Line: 77 ]] end,
+					closeLeaveRobloxAlert = function() --[[ Line: 78 ]] end
 				},
 				externalAnalytics = { catalogAnalytics = {} }
 			}
 		}, {
-			CoreScriptsRootProvider = reactModule.createElement(coreScriptsRootProvider, {}, {
-				RoduxStore = reactModule.createElement(roactRoduxModule.StoreProvider, { store = createStore() }, {
-					ResponsiveProvider = reactModule.createElement(responsiveModule.ContainerRef.Provider, { value = var1 }, {
-						PlayerProfileContainer = reactModule.createElement(view, { tag = "size-full", ref = var1 }, {
-							PlayerProfile = reactModule.createElement(playerProfileModule, { userId = p1.userId, closePage = p1.closePage })
+			CoreScriptsRootProvider = ReactModule.createElement(CoreScriptsRootProvider, {}, {
+				RoduxStore = ReactModule.createElement(RoactRoduxModule.StoreProvider, { store = createStore() }, {
+					ResponsiveProvider = ReactModule.createElement(ResponsiveModule.ContainerRef.Provider, { value = UseRefResult }, {
+						PlayerProfileContainer = ReactModule.createElement(View, { tag = "size-full", ref = UseRefResult }, {
+							PlayerProfile = ReactModule.createElement(PlayerProfileModule, { userId = p1.userId, closePage = p1.closePage })
 						})
 					})
 				})

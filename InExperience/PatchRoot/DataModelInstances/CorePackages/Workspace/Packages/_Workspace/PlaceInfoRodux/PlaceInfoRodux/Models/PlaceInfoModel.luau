@@ -1,11 +1,11 @@
 ﻿return {
-	new = function()
+	new = function() --[[ Line: 3 ]]
 		return {}
 	end,
-	fromWeb = function(p1)
-		p1 = p1 or {}
-		p1.placeId = tostring(p1.placeId)
+	fromWeb = function(p1) --[[ Line: 9 ]]
+		local P0 = p1 or {}
+		P0.placeId = tostring(P0.placeId)
 		
-		return p1
+		return P0
 	end
 }

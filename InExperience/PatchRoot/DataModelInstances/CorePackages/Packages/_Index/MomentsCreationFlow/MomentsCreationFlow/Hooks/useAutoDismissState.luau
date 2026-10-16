@@ -1,36 +1,36 @@
-﻿local reactModule = require(script:FindFirstAncestor("MomentsCreationFlow").Parent.React)
-local useCallback = reactModule.useCallback
-local useEffect = reactModule.useEffect
-local useRef = reactModule.useRef
-local useState = reactModule.useState
+﻿local ReactModule = require(script:FindFirstAncestor("MomentsCreationFlow").Parent.React)
+local UseCallbackFunction = ReactModule.useCallback
+local UseEffectFunction = ReactModule.useEffect
+local UseRefFunction = ReactModule.useRef
+local UseStateFunction = ReactModule.useState
 
-return function(p1, p2)
-	-- upvalues: useRef (ref), useState (ref), useCallback (ref), useEffect (ref)
-	local var1 = useRef(nil)
-	local var2, var3 = useState(p1 or true)
-	local var4 = useCallback(function()
-		-- upvalues: var1 (ref), var3 (ref), p2 (ref)
-		if var1.current then
-			task.cancel(var1.current)
+return function(p1, p2) --[[ Line: 13 | Named "useAutoDismissState" ]]
+	-- upvalues: UseRefFunction (copy), UseStateFunction (copy), UseCallbackFunction (copy), UseEffectFunction (copy)
+	local UseRefResult = UseRefFunction(nil)
+	local UseStateResult, UseStateResult2 = UseStateFunction(p1 or true)
+	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 17 ]]
+		-- upvalues: UseRefResult (copy), UseStateResult2 (copy), p2 (copy)
+		if UseRefResult.current then
+			task.cancel(UseRefResult.current)
 		end
-		var3(true)
-		var1.current = task.delay(p2 or 5, function()
-			-- upvalues: var3 (copy)
-			var3(false)
+		UseStateResult2(true)
+		UseRefResult.current = task.delay(p2 or 5, function() --[[ Line: 23 ]]
+			-- upvalues: UseStateResult2 (upval)
+			UseStateResult2(false)
 		end)
-	end, { p2, var2 })
-	useEffect(function()
-		-- upvalues: var4 (ref), var1 (ref)
-		var4()
+	end, { p2, UseStateResult })
+	UseEffectFunction(function() --[[ Line: 28 ]]
+		-- upvalues: UseCallbackResult (copy), UseRefResult (copy)
+		UseCallbackResult()
 		
-		return function()
-			-- upvalues: var1 (copy)
-			if var1.current then
-				task.cancel(var1.current)
-				var1.current = nil
+		return function() --[[ Line: 31 ]]
+			-- upvalues: UseRefResult (upval)
+			if UseRefResult.current then
+				task.cancel(UseRefResult.current)
+				UseRefResult.current = nil
 			end
 		end
 	end, { p2 })
 	
-	return var2, var4
+	return UseStateResult, UseCallbackResult
 end

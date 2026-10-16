@@ -1,37 +1,37 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local displayBackground = require(parent.EditProfileBackground).DisplayBackground
-local buyActionBar = require(parent.AvatarExperienceInspectAndBuy).Components.BuyActionBar
-local dashModule = require(parent.Dash)
-local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-local appFocusRoot = focusNavigationUtilsModule.AppFocusRoot
-local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
-local focusNavigationEventNameEnum = focusNavigationUtilsModule.FocusNavigationEventNameEnum
-local inputHandlersModule = require(parent.InputHandlers)
-local fFlagSocialEnableProfileInspectAndBuyConsoleFocusNav = require(parent.SharedFlags).FFlagSocialEnableProfileInspectAndBuyConsoleFocusNav
-local fFlagProfileInspectAvatarBuyAllModule = require(profilePlatform.Flags.FFlagProfileInspectAvatarBuyAll)
-local fFlagProfileInspectAvatarBackgroundModule = require(profilePlatform.Flags.FFlagProfileInspectAvatarBackground)
-local view = foundationModule.View
-local image = foundationModule.Image
-local text = foundationModule.Text
-local iconButton = foundationModule.IconButton
-local divider = foundationModule.Divider
-local skeleton = foundationModule.Skeleton
-local iconName = foundationModule.Enums.IconName
-local iconSize = foundationModule.Enums.IconSize
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local useTokens = foundationModule.Hooks.useTokens
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local _ = require(profilePlatform.Common.Types)
-local itemDisplayHelpersModule = require(script.Parent.ItemDisplayHelpers)
-local catalogItemRowCardContainerModule = require(script.Parent.CatalogItemRowCardContainer)
-local isItemPurchasable = require(script.Parent.InspectAvatarUtils).isItemPurchasable
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local DisplayBackground = require(Parent.EditProfileBackground).DisplayBackground
+local BuyActionBar = require(Parent.AvatarExperienceInspectAndBuy).Components.BuyActionBar
+local DashModule = require(Parent.Dash)
+local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
+local AppFocusRoot = FocusNavigationUtilsModule.AppFocusRoot
+local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
+local FocusNavigationEventNameEnum = FocusNavigationUtilsModule.FocusNavigationEventNameEnum
+local InputHandlersModule = require(Parent.InputHandlers)
+local FFlagSocialEnableProfileInspectAndBuyConsoleFocusNav = require(Parent.SharedFlags).FFlagSocialEnableProfileInspectAndBuyConsoleFocusNav
+local FFlagProfileInspectAvatarBuyAllModule = require(ProfilePlatform.Flags.FFlagProfileInspectAvatarBuyAll)
+local FFlagProfileInspectAvatarBackgroundModule = require(ProfilePlatform.Flags.FFlagProfileInspectAvatarBackground)
+local View = FoundationModule.View
+local Image = FoundationModule.Image
+local Text = FoundationModule.Text
+local IconButton = FoundationModule.IconButton
+local Divider = FoundationModule.Divider
+local Skeleton = FoundationModule.Skeleton
+local IconName = FoundationModule.Enums.IconName
+local IconSize = FoundationModule.Enums.IconSize
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local _ = require(ProfilePlatform.Common.Types)
+local ItemDisplayHelpersModule = require(script.Parent.ItemDisplayHelpers)
+local CatalogItemRowCardContainerModule = require(script.Parent.CatalogItemRowCardContainer)
+local IsItemPurchasableFunction = require(script.Parent.InspectAvatarUtils).isItemPurchasable
 
-return function(p1)
-	-- upvalues: useLocalization (ref), itemDisplayHelpersModule (ref), fFlagProfileInspectAvatarBackgroundModule (ref), useTokens (ref), reactModule (ref), dashModule (ref), catalogItemRowCardContainerModule (ref), isItemPurchasable (ref), fFlagSocialEnableProfileInspectAndBuyConsoleFocusNav (ref), inputHandlersModule (ref), view (ref), image (ref), displayBackground (ref), iconButton (ref), iconName (ref), iconSize (ref), buttonVariant (ref), text (ref), skeleton (ref), divider (ref), buyActionBar (ref), fFlagProfileInspectAvatarBuyAllModule (ref), appFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), focusNavigationEventNameEnum (ref)
-	local var1 = useLocalization({
+return function(p1) --[[ Line: 78 | Named "InspectAvatarSheet" ]]
+	-- upvalues: UseLocalizationFunction (copy), ItemDisplayHelpersModule (copy), FFlagProfileInspectAvatarBackgroundModule (copy), UseTokensFunction (copy), ReactModule (copy), DashModule (copy), CatalogItemRowCardContainerModule (copy), IsItemPurchasableFunction (copy), FFlagSocialEnableProfileInspectAndBuyConsoleFocusNav (copy), InputHandlersModule (copy), View (copy), Image (copy), DisplayBackground (copy), IconButton (copy), IconName (copy), IconSize (copy), ButtonVariant (copy), Text (copy), Skeleton (copy), Divider (copy), BuyActionBar (copy), FFlagProfileInspectAvatarBuyAllModule (copy), AppFocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), FocusNavigationEventNameEnum (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
 		buyItems = "Feature.Catalog.Label.BuyItems",
 		buyWholeLook = "Feature.Profile.Header.BuyWholeLook",
 		bundle = "Feature.Catalog.Label.Bundle",
@@ -45,77 +45,79 @@ return function(p1)
 			totalNumberOfItems = #p1.displayItems
 		}
 	})
-	local var2 = useLocalization(itemDisplayHelpersModule.PRICE_STATUS_LOCALIZATION_KEYS)
-	local var3 = if fFlagProfileInspectAvatarBackgroundModule then useTokens().Padding.XLarge else nil
-	local var4 = useLocalization(itemDisplayHelpersModule.ASSET_TYPE_LOCALIZATION_KEYS)
-	local var5 = useLocalization(itemDisplayHelpersModule.BUNDLE_TYPE_LOCALIZATION_KEYS)
-	local var6 = reactModule.useMemo(function()
-		-- upvalues: var1 (ref), dashModule (copy), var4 (ref), var5 (ref)
+	local UseLocalizationResult1 = UseLocalizationFunction(ItemDisplayHelpersModule.PRICE_STATUS_LOCALIZATION_KEYS)
+	local XLarge = if FFlagProfileInspectAvatarBackgroundModule then UseTokensFunction().Padding.XLarge else nil
+	local UseLocalizationResult2 = UseLocalizationFunction(ItemDisplayHelpersModule.ASSET_TYPE_LOCALIZATION_KEYS)
+	local UseLocalizationResult3 = UseLocalizationFunction(ItemDisplayHelpersModule.BUNDLE_TYPE_LOCALIZATION_KEYS)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 98 ]]
+		-- upvalues: UseLocalizationResult (copy), DashModule (upval), UseLocalizationResult2 (copy), UseLocalizationResult3 (copy)
 		return {
 			bundleParts = nil,
-			bundle = var1.bundle,
-			assetTypeNames = dashModule.join(var4, var5)
+			bundle = UseLocalizationResult.bundle,
+			assetTypeNames = DashModule.join(UseLocalizationResult2, UseLocalizationResult3)
 		}
-	end, { var1.bundle, var4, var5 })
-	local t = {}
+	end, {
+		UseLocalizationResult.bundle,
+		UseLocalizationResult2,
+		UseLocalizationResult3
+	})
+	local Elements = {}
 	
-	for i, v in p1.displayItems do
-		local id = v.id
-		t[`item_{id}`] = reactModule.createElement(catalogItemRowCardContainerModule, {
+	for Index, displayItem in p1.displayItems do
+		local Id = displayItem.id
+		Elements[`item_{Id}`] = ReactModule.createElement(CatalogItemRowCardContainerModule, {
 			rowHeight = 72,
-			asset = v,
-			index = i,
-			isChecked = p1.selectedItems[id] == true,
-			isPurchasable = isItemPurchasable(v),
-			localizedStrings = var6,
-			priceStatusLocalized = var2,
+			asset = displayItem,
+			index = Index,
+			isChecked = p1.selectedItems[Id] == true,
+			isPurchasable = IsItemPurchasableFunction(displayItem),
+			localizedStrings = UseMemoResult,
+			priceStatusLocalized = UseLocalizationResult1,
 			onToggleItem = p1.onToggleItem,
 			openItemDetails = p1.openItemDetails
 		})
 	end
-	local var7
-	local var8 = if fFlagSocialEnableProfileInspectAndBuyConsoleFocusNav then reactModule.useMemo(function()
-		-- upvalues: inputHandlersModule (copy), p1 (ref)
-		return inputHandlersModule.onRelease(function(p2)
-			-- upvalues: p1 (copy)
+	local UseMemoResult1 = if FFlagSocialEnableProfileInspectAndBuyConsoleFocusNav then ReactModule.useMemo(function() --[[ Line: 125 ]]
+		-- upvalues: InputHandlersModule (upval), p1 (copy)
+		return InputHandlersModule.onRelease(function(p2) --[[ Line: 126 ]]
+			-- upvalues: p1 (upval)
 			p2:cancel()
 			p1.onClose()
 		end)
 	end, { p1.onClose }) else nil
-	local t_1 = {
-		Scrim = reactModule.createElement("TextButton", {
+	local config = {
+		Scrim = ReactModule.createElement("TextButton", {
 			Size = UDim2.new(1, -p1.cardWidth, 1, 0),
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			Text = "",
 			AutoButtonColor = false,
-			Selectable = if fFlagSocialEnableProfileInspectAndBuyConsoleFocusNav then false else nil,
-			[reactModule.Event.Activated] = p1.onDismiss
+			Selectable = not FFlagSocialEnableProfileInspectAndBuyConsoleFocusNav and nil,
+			[ReactModule.Event.Activated] = p1.onDismiss
 		})
 	}
-	local createElement = reactModule.createElement
-	local var9 = view
-	local t_2 = {
+	local CreateElementFunction3 = ReactModule.createElement
+	local config1 = {
 		tag = "col position-top-right anchor-top-right margin-bottom-small padding-x-xlarge bg-surface-0",
 		Size = UDim2.new(0, p1.cardWidth, 1, 0)
 	}
-	local t_3 = {
-		StatusBarSpacer = if p1.topOffset > 0 then reactModule.createElement(view, {
+	local config2 = {
+		StatusBarSpacer = if p1.topOffset > 0 then ReactModule.createElement(View, {
 			tag = "bg-surface-0",
 			LayoutOrder = 0,
 			Size = UDim2.new(1, 0, 0, p1.topOffset)
 		}) else nil,
-		AvatarViewport = reactModule.createElement(view, {
+		AvatarViewport = ReactModule.createElement(View, {
 			LayoutOrder = 1,
 			Size = UDim2.new(1, 0, 0, p1.avatarViewportHeight)
 		}, {
-			BackgroundClipper = if fFlagProfileInspectAvatarBackgroundModule and p1.avatarBackgroundImage ~= nil then reactModule.createElement(view, {
+			BackgroundClipper = if FFlagProfileInspectAvatarBackgroundModule and p1.avatarBackgroundImage ~= nil then ReactModule.createElement(View, {
 				ClipsDescendants = true,
 				ZIndex = 1,
-				Size = UDim2.new(1, var3 * 2, 1, 0),
-				Position = UDim2.new(0, -var3, 0, 0)
+				Size = UDim2.new(1, XLarge * 2, 1, 0),
+				Position = UDim2.new(0, -XLarge, 0, 0)
 			}, {
-				BackgroundImage = reactModule.createElement(image, {
+				BackgroundImage = ReactModule.createElement(Image, {
 					Size = UDim2.fromScale(1.35, 1.35),
 					AnchorPoint = Vector2.new(0.5, 0.5),
 					Position = UDim2.fromScale(0.5, 0.5),
@@ -123,55 +125,55 @@ return function(p1)
 					ScaleType = Enum.ScaleType.Crop
 				})
 			}) else nil,
-			Background = reactModule.createElement(displayBackground, {
+			Background = ReactModule.createElement(DisplayBackground, {
 				height = p1.avatarViewportHeight,
 				userId = tonumber(p1.profileId),
 				userThumbnail = p1.avatarThumbnail
 			}),
-			TopBar = reactModule.createElement(view, {
+			TopBar = ReactModule.createElement(View, {
 				ZIndex = 2,
 				tag = {
-					["row align-y-center"] = fFlagProfileInspectAvatarBackgroundModule,
-					["row align-y-center size-full-0 auto-y padding-small"] = not fFlagProfileInspectAvatarBackgroundModule
+					["row align-y-center"] = FFlagProfileInspectAvatarBackgroundModule,
+					["row align-y-center size-full-0 auto-y padding-small"] = not FFlagProfileInspectAvatarBackgroundModule
 				},
-				Size = if fFlagProfileInspectAvatarBackgroundModule then UDim2.new(1, 0, 0, 56) else nil,
-				Position = if fFlagProfileInspectAvatarBackgroundModule then UDim2.new(0, 10 - var3, 0, 0) else nil
+				Size = if FFlagProfileInspectAvatarBackgroundModule then UDim2.new(1, 0, 0, 56) else nil,
+				Position = if FFlagProfileInspectAvatarBackgroundModule then UDim2.new(0, 10 - XLarge, 0, 0) else nil
 			}, {
-				BackButtonCircle = if fFlagProfileInspectAvatarBackgroundModule then reactModule.createElement(view, {
+				BackButtonCircle = if FFlagProfileInspectAvatarBackgroundModule then ReactModule.createElement(View, {
 					tag = "radius-circle bg-over-media-0",
 					Size = UDim2.fromOffset(36, 36)
 				}, {
-					BackButton = reactModule.createElement(iconButton, {
+					BackButton = ReactModule.createElement(IconButton, {
 						isCircular = true,
-						icon = iconName.ChevronLargeLeft,
-						size = iconSize.Small,
-						variant = buttonVariant.Utility,
+						icon = IconName.ChevronLargeLeft,
+						size = IconSize.Small,
+						variant = ButtonVariant.Utility,
 						onActivated = p1.onClose,
 						AnchorPoint = Vector2.new(0.5, 0.5),
 						Position = UDim2.fromScale(0.5, 0.5)
 					})
 				}) else nil,
-				BackButton = if not fFlagProfileInspectAvatarBackgroundModule then reactModule.createElement(iconButton, {
+				BackButton = if FFlagProfileInspectAvatarBackgroundModule then nil else ReactModule.createElement(IconButton, {
 					isCircular = true,
-					icon = iconName.ChevronLargeLeft,
-					size = iconSize.Medium,
-					variant = buttonVariant.Utility,
+					icon = IconName.ChevronLargeLeft,
+					size = IconSize.Medium,
+					variant = ButtonVariant.Utility,
 					onActivated = p1.onClose
-				}) else nil
+				})
 			})
 		}),
-		Title = reactModule.createElement(text, {
+		Title = ReactModule.createElement(Text, {
 			tag = "size-full-0 auto-y padding-y-small text-heading-small text-align-x-left",
 			LayoutOrder = 2,
-			Text = var1.title
+			Text = UseLocalizationResult.title
 		})
 	}
-	local createElement_1 = reactModule.createElement
-	local t_4 = { tag = "fill size-full-0", LayoutOrder = 3 }
-	local t_5 = {}
-	local createElement_2 = reactModule.createElement
-	local var10 = "ScrollingFrame"
-	local t_6 = {
+	local CreateElementFunction2 = ReactModule.createElement
+	local config3 = { tag = "fill size-full-0", LayoutOrder = 3 }
+	local t = {}
+	local CreateElementFunction1 = ReactModule.createElement
+	local v1 = "ScrollingFrame"
+	local config4 = {
 		ScrollBarThickness = 0,
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
@@ -179,51 +181,51 @@ return function(p1)
 		AutomaticCanvasSize = Enum.AutomaticSize.Y,
 		CanvasSize = UDim2.new(0, 0, 0, 0)
 	}
-	local t_7 = {
-		ItemList = if not p1.isLoading then reactModule.createElement(view, {
+	local config5 = {
+		ItemList = if p1.isLoading then nil else ReactModule.createElement(View, {
 			tag = "col gap-large size-full-0 auto-y padding-bottom-large padding-top-medium"
-		}, t) else nil
+		}, Elements)
 	}
+	local Element = nil
 	
 	if p1.isLoading then
-		var7 = reactModule.createElement
-		local var11 = view
-		local t_8 = { tag = "col size-full-0 auto-y" }
-		local t_9 = {}
+		local CreateElementFunction = ReactModule.createElement
+		local config6 = { tag = "col size-full-0 auto-y" }
+		local Elements1 = {}
 		
-		for i_1 = 1, 4 do
-			t_9[`Shimmer{i_1}`] = reactModule.createElement(skeleton, { Size = UDim2.new(1, 0, 0, 72), LayoutOrder = i_1 })
+		for i = 1, 4 do
+			Elements1[`Shimmer{i}`] = ReactModule.createElement(Skeleton, { Size = UDim2.new(1, 0, 0, 72), LayoutOrder = i })
 		end
-		var7 = var7(var11, t_8, t_9)
+		Element = CreateElementFunction(View, config6, Elements1)
 	else
-		var7 = nil
+		Element = nil
 	end
-	t_7.LoadingShimmer = var7
-	t_5.ScrollContent = createElement_2(var10, t_6, t_7)
-	t_3.ScrollWrapper = createElement_1(view, t_4, t_5)
-	t_3.FooterDivider = reactModule.createElement(divider, { LayoutOrder = 4, Size = UDim2.new(1, 0, 0, 1) })
-	t_3.Footer = reactModule.createElement(view, { tag = "size-full-2500 bg-surface-0", LayoutOrder = 5 }, {
-		ActionBar = reactModule.createElement(buyActionBar, {
+	config5.LoadingShimmer = Element
+	t.ScrollContent = CreateElementFunction1(v1, config4, config5)
+	config2.ScrollWrapper = CreateElementFunction2(View, config3, t)
+	config2.FooterDivider = ReactModule.createElement(Divider, { LayoutOrder = 4, Size = UDim2.new(1, 0, 0, 1) })
+	config2.Footer = ReactModule.createElement(View, { tag = "size-full-2500 bg-surface-0", LayoutOrder = 5 }, {
+		ActionBar = ReactModule.createElement(BuyActionBar, {
 			priceLabel = {
-				leftLabel = var1.buyHeader,
+				leftLabel = UseLocalizationResult.buyHeader,
 				priceInRobux = tostring(p1.purchaseSummary.totalPrice)
 			},
 			purchaseButtonProps = {
-				purchaseButtonText = if fFlagProfileInspectAvatarBuyAllModule then var1.buyWholeLook else var1.buyItems,
+				purchaseButtonText = if FFlagProfileInspectAvatarBuyAllModule then UseLocalizationResult.buyWholeLook else UseLocalizationResult.buyItems,
 				onPurchase = p1.onBuyAll,
 				isDisabled = p1.isLoading or p1.purchaseSummary.count == 0,
-				variant = buttonVariant.Emphasis
+				variant = ButtonVariant.Emphasis
 			}
 		})
 	})
-	t_1.Sheet = createElement(var9, t_2, t_3)
+	config.Sheet = CreateElementFunction3(View, config1, config2)
 	
-	return if fFlagSocialEnableProfileInspectAndBuyConsoleFocusNav then reactModule.createElement(appFocusRoot, {
+	return if FFlagSocialEnableProfileInspectAndBuyConsoleFocusNav then ReactModule.createElement(AppFocusRoot, {
 		isAutoFocusRoot = true,
 		isIsolated = true,
-		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.PopUp,
+		surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.PopUp,
 		customEventHandlers = {
-			[focusNavigationEventNameEnum.NavigateBack] = { handler = var8 }
+			[FocusNavigationEventNameEnum.NavigateBack] = { handler = UseMemoResult1 }
 		}
-	}, t_1) else reactModule.createElement(view, { Size = UDim2.fromScale(1, 1) }, t_1)
+	}, config) else ReactModule.createElement(View, { Size = UDim2.fromScale(1, 1) }, config)
 end

@@ -1,53 +1,56 @@
-﻿local groups = script:FindFirstAncestor("Groups")
-local parent = groups.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local view = foundationModule.View
-local button = foundationModule.Button
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local inputSize = foundationModule.Enums.InputSize
-local textKeysModule = require(groups.Common.TextKeys)
-local useGroupsWrapperContextModule = require(groups.Contexts.useGroupsWrapperContext)
-local useGroupsAnalyticsModule = require(groups.Hooks.useGroupsAnalytics)
-local eventNamesModule = require(groups.Analytics.EventNames)
-local searchBarWrapperModule = require(script.Parent.SearchBarWrapper)
+﻿local Groups = script:FindFirstAncestor("Groups")
+local Parent = Groups.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local View = FoundationModule.View
+local Button = FoundationModule.Button
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local InputSize = FoundationModule.Enums.InputSize
+local TextKeysModule = require(Groups.Common.TextKeys)
+local UseGroupsWrapperContextModule = require(Groups.Contexts.useGroupsWrapperContext)
+local UseGroupsAnalyticsModule = require(Groups.Hooks.useGroupsAnalytics)
+local EventNamesModule = require(Groups.Analytics.EventNames)
+local SearchBarWrapperModule = require(script.Parent.SearchBarWrapper)
 
-return function(p1)
-	-- upvalues: useGroupsWrapperContextModule (ref), useGroupsAnalyticsModule (ref), useLocalization (ref), textKeysModule (ref), reactModule (ref), eventNamesModule (ref), view (ref), searchBarWrapperModule (ref), button (ref), buttonVariant (ref), inputSize (ref)
-	local var1 = useGroupsWrapperContextModule()
-	local var2 = useGroupsAnalyticsModule()
-	local var3 = useLocalization({
-		searchPlaceholder = textKeysModule.LabelSearchMyGroups,
-		createGroup = textKeysModule.ActionCreateGroup
+return function(p1) --[[ Line: 26 | Named "GroupsListToolbar" ]]
+	-- upvalues: UseGroupsWrapperContextModule (copy), UseGroupsAnalyticsModule (copy), UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), EventNamesModule (copy), View (copy), SearchBarWrapperModule (copy), Button (copy), ButtonVariant (copy), InputSize (copy)
+	local UseGroupsWrapperContextModuleResult = UseGroupsWrapperContextModule()
+	local UseGroupsAnalyticsModuleResult = UseGroupsAnalyticsModule()
+	local UseLocalizationResult = UseLocalizationFunction({
+		searchPlaceholder = TextKeysModule.LabelSearchMyGroups,
+		createGroup = TextKeysModule.ActionCreateGroup
 	})
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "col size-full-0 auto-y align-x-left gap-medium",
 		LayoutOrder = p1.layoutOrder
 	}, {
-		Search = reactModule.createElement(searchBarWrapperModule, {
+		Search = ReactModule.createElement(SearchBarWrapperModule, {
 			LayoutOrder = 1,
-			placeholderText = p1.searchPlaceholder or var3.searchPlaceholder,
+			placeholderText = p1.searchPlaceholder or UseLocalizationResult.searchPlaceholder,
 			onTextChanged = p1.onSearchTextChanged
 		}),
-		CreateGroupButton = reactModule.createElement(view, {
+		CreateGroupButton = ReactModule.createElement(View, {
 			LayoutOrder = 2,
 			tag = "col",
 			Size = UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y
 		}, {
-			Button = reactModule.createElement(button, {
-				text = var3.createGroup,
-				variant = buttonVariant.Standard,
-				size = inputSize.Medium,
+			Button = ReactModule.createElement(Button, {
+				text = UseLocalizationResult.createGroup,
+				variant = ButtonVariant.Standard,
+				size = InputSize.Medium,
 				width = UDim.new(1, 0),
 				isDisabled = p1.canCreateGroup == false,
-				onActivated = reactModule.useCallback(function()
-					-- upvalues: var2 (ref), eventNamesModule (copy), var1 (ref)
-					var2.fireAnalyticsEvent(eventNamesModule.GroupsListCreateGroupClicked)
-					var1.navigateTo.createGroup()
-				end, { var1.navigateTo.createGroup, var2 })
+				onActivated = ReactModule.useCallback(function() --[[ Line: 36 ]]
+					-- upvalues: UseGroupsAnalyticsModuleResult (copy), EventNamesModule (upval), UseGroupsWrapperContextModuleResult (copy)
+					UseGroupsAnalyticsModuleResult.fireAnalyticsEvent(EventNamesModule.GroupsListCreateGroupClicked)
+					UseGroupsWrapperContextModuleResult.navigateTo.createGroup()
+				end, {
+					UseGroupsWrapperContextModuleResult.navigateTo.createGroup,
+					UseGroupsAnalyticsModuleResult
+				})
 			})
 		})
 	})

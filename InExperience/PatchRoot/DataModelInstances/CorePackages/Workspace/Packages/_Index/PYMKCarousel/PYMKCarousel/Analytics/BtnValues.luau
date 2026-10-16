@@ -1,10 +1,10 @@
-﻿local dependenciesModule = require(script.Parent.Parent.dependencies)
-local getFFlagPYMKAddFriendsEntry = dependenciesModule.getFFlagPYMKAddFriendsEntry
+﻿local DependenciesModule = require(script.Parent.Parent.dependencies)
+local GetFFlagPYMKAddFriendsEntryFunction = DependenciesModule.getFFlagPYMKAddFriendsEntry
 
-return dependenciesModule.enumerate(script.Name, {
+return DependenciesModule.enumerate(script.Name, {
 	RequestFriendship = "requestFriendship",
 	OpenPeopleList = "openPeopleList",
 	AcceptFriendship = "acceptFriendship",
-	FindFriends = if getFFlagPYMKAddFriendsEntry() then "findFriends" else "",
-	SeeAll = if getFFlagPYMKAddFriendsEntry() then "seeAll" else ""
+	FindFriends = if GetFFlagPYMKAddFriendsEntryFunction() then "findFriends" else "",
+	SeeAll = if GetFFlagPYMKAddFriendsEntryFunction() then "seeAll" else ""
 })

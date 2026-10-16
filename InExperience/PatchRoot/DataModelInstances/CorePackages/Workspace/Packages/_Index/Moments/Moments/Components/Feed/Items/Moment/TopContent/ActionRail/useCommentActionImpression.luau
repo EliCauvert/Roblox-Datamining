@@ -1,50 +1,53 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local momentsCommonModule = require(parent.MomentsCommon)
-local sharedFlagsModule = require(parent.SharedFlags)
-local momentsGetMomentsCommentsStoreModule = require(parent.DataHydration.MomentsGetMomentsCommentsStore)
-local fFlagMomentsComments = sharedFlagsModule.FFlagMomentsComments
-local fFlagMomentsCommentsIxpEnabled = sharedFlagsModule.FFlagMomentsCommentsIxpEnabled
-local useVerticalPager = require(moments.Components.VerticalPager).useVerticalPager
-local usePagerItem = require(moments.Components.VerticalPager).usePagerItem
-local useFeedOptional = require(moments.Components.Feed.FeedContext).useFeedOptional
-local fStringMomentsCommentsIxpLayerModule = require(moments.Flags.FStringMomentsCommentsIxpLayer)
-local fFlagMomentsCommentsCountAnalyticsModule = require(moments.Flags.FFlagMomentsCommentsCountAnalytics)
-local makeCommentCountFieldsModule = require(moments.Analytics.makeCommentCountFields)
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
+local MomentsCommonModule = require(Parent.MomentsCommon)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local MomentsGetMomentsCommentsStoreModule = require(Parent.DataHydration.MomentsGetMomentsCommentsStore)
+local FFlagMomentsComments = SharedFlagsModule.FFlagMomentsComments
+local FFlagMomentsCommentsIxpEnabled = SharedFlagsModule.FFlagMomentsCommentsIxpEnabled
+local UseVerticalPagerFunction = require(Moments.Components.VerticalPager).useVerticalPager
+local UsePagerItemFunction = require(Moments.Components.VerticalPager).usePagerItem
+local UseFeedOptionalFunction = require(Moments.Components.Feed.FeedContext).useFeedOptional
+local FStringMomentsCommentsIxpLayerModule = require(Moments.Flags.FStringMomentsCommentsIxpLayer)
+local FFlagMomentsCommentsCountAnalyticsModule = require(Moments.Flags.FFlagMomentsCommentsCountAnalytics)
+local MakeCommentCountFieldsModule = require(Moments.Analytics.makeCommentCountFields)
+local MomentImpressionMemoryModule = require(Moments.Components.Feed.Items.Moment.MomentImpressionMemory)
+local FFlagMomentsFixOverlayRemountImpressionsModule = require(Moments.Flags.FFlagMomentsFixOverlayRemountImpressions)
 
-return function(p1)
-	-- upvalues: useVerticalPager (ref), usePagerItem (ref), useFeedOptional (ref), reactModule (ref), signalsModule (ref), signalsReactModule (ref), fFlagMomentsComments (ref), fFlagMomentsCommentsCountAnalyticsModule (ref), makeCommentCountFieldsModule (ref), momentsGetMomentsCommentsStoreModule (ref), momentsCommonModule (ref), fFlagMomentsCommentsIxpEnabled (ref), fStringMomentsCommentsIxpLayerModule (ref)
-	local var1 = useVerticalPager()
-	local var2 = useFeedOptional()
-	local item = usePagerItem().item
-	local var3 = signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), item (ref), var1 (ref)
-		return signalsModule.createComputed(function(p2)
-			-- upvalues: item (copy), var1 (copy)
-			return item ~= nil and var1.store.getCurrentItem(p2) == item
+return function(p1) --[[ Line: 30 | Named "useCommentActionImpression" ]]
+	-- upvalues: UseVerticalPagerFunction (copy), UsePagerItemFunction (copy), UseFeedOptionalFunction (copy), ReactModule (copy), SignalsModule (copy), SignalsReactModule (copy), FFlagMomentsFixOverlayRemountImpressionsModule (copy), MomentImpressionMemoryModule (copy), FFlagMomentsComments (copy), FFlagMomentsCommentsCountAnalyticsModule (copy), MakeCommentCountFieldsModule (copy), MomentsGetMomentsCommentsStoreModule (copy), MomentsCommonModule (copy), FFlagMomentsCommentsIxpEnabled (copy), FStringMomentsCommentsIxpLayerModule (copy)
+	local UseVerticalPagerResult = UseVerticalPagerFunction()
+	local UsePagerItemResult = UsePagerItemFunction()
+	local UseFeedOptionalResult = UseFeedOptionalFunction()
+	local Item = UsePagerItemResult.item
+	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 36 ]]
+		-- upvalues: SignalsModule (upval), Item (copy), UseVerticalPagerResult (copy)
+		return SignalsModule.createComputed(function(p2): boolean --[[ Line: 37 ]]
+			-- upvalues: Item (upval), UseVerticalPagerResult (upval)
+			return Item ~= nil and UseVerticalPagerResult.store.getCurrentItem(p2) == Item
 		end)
-	end, { var1, item }))
-	local var4 = p1 and (var3 and (var2 ~= nil and var2.isActiveFeed))
-	local var5 = reactModule.useRef(false)
-	reactModule.useEffect(function()
-		-- upvalues: var5 (ref), var4 (ref), item (ref), fFlagMomentsComments (copy), fFlagMomentsCommentsCountAnalyticsModule (copy), makeCommentCountFieldsModule (copy), momentsGetMomentsCommentsStoreModule (copy), momentsCommonModule (copy), fFlagMomentsCommentsIxpEnabled (copy), fStringMomentsCommentsIxpLayerModule (copy)
-		local current = var5.current
-		var5.current = var4
+	end, { UseVerticalPagerResult, Item })))
+	local IsActiveFeed = p1 and (UseSignalStateResult and (UseFeedOptionalResult ~= nil and UseFeedOptionalResult.isActiveFeed))
+	local CommentAction = if FFlagMomentsFixOverlayRemountImpressionsModule then MomentImpressionMemoryModule.useImpressionRef("commentAction") else ReactModule.useRef(false)
+	ReactModule.useEffect(function() --[[ Line: 48 ]]
+		-- upvalues: CommentAction (copy), IsActiveFeed (copy), Item (copy), FFlagMomentsComments (upval), FFlagMomentsCommentsCountAnalyticsModule (upval), MakeCommentCountFieldsModule (upval), MomentsGetMomentsCommentsStoreModule (upval), MomentsCommonModule (upval), FFlagMomentsCommentsIxpEnabled (upval), FStringMomentsCommentsIxpLayerModule (upval)
+		local Current = CommentAction.current
+		CommentAction.current = IsActiveFeed
 		
-		if not var4 or current or (item == nil or item.kind ~= "moment") then return end
-		local recommendationMetadata = item.moment.recommendationMetadata
-		local var6 = if recommendationMetadata ~= nil then nil else recommendationMetadata.feedItemId
+		if not IsActiveFeed or Current or Item == nil or Item.kind ~= "moment" then return end
+		local RecommendationMetadata = Item.moment.recommendationMetadata
+		local FeedItemId = if RecommendationMetadata == nil then nil else RecommendationMetadata.feedItemId
 		
-		if fFlagMomentsComments and var6 ~= nil and var6 ~= "" then
-			local var7 = if fFlagMomentsCommentsCountAnalyticsModule then makeCommentCountFieldsModule(momentsGetMomentsCommentsStoreModule(false).getCachedMomentComments(var6).data(false)) else {}
-			var7.feedItemId = var6
-			momentsCommonModule.Analytics.fireAnalyticsEvent(momentsCommonModule.Analytics.EventNames.MomentCommentActionButtonImpression, var7)
+		if FFlagMomentsComments and FeedItemId ~= nil and FeedItemId ~= "" then
+			local CommentCountFieldsModule = if FFlagMomentsCommentsCountAnalyticsModule then MakeCommentCountFieldsModule(MomentsGetMomentsCommentsStoreModule(false).getCachedMomentComments(FeedItemId).data(false)) else {}
+			CommentCountFieldsModule.feedItemId = FeedItemId
+			MomentsCommonModule.Analytics.fireAnalyticsEvent(MomentsCommonModule.Analytics.EventNames.MomentCommentActionButtonImpression, CommentCountFieldsModule)
 		end
-		if fFlagMomentsCommentsIxpEnabled then
-			momentsCommonModule.Utils.logMomentsLayerExposure(fStringMomentsCommentsIxpLayerModule)
+		if FFlagMomentsCommentsIxpEnabled then
+			MomentsCommonModule.Utils.logMomentsLayerExposure(FStringMomentsCommentsIxpLayerModule)
 		end
-	end, { var4, item })
+	end, { IsActiveFeed, Item })
 end

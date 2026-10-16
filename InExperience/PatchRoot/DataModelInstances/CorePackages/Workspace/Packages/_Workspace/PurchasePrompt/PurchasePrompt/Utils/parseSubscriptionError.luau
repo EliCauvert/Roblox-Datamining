@@ -1,8 +1,8 @@
-﻿local purchasePrompt = script:FindFirstAncestor("PurchasePrompt")
-local purchaseErrorModule = require(purchasePrompt.Enums.PurchaseError)
-local isErrorReasonPrefixWithEconomicRestrictions = require(purchasePrompt.Parent.IAPExperience).Utility.isErrorReasonPrefixWithEconomicRestrictions
+﻿local PurchasePrompt = script:FindFirstAncestor("PurchasePrompt")
+local PurchaseErrorModule = require(PurchasePrompt.Enums.PurchaseError)
+local IsErrorReasonPrefixWithEconomicRestrictionsFunction = require(PurchasePrompt.Parent.IAPExperience).Utility.isErrorReasonPrefixWithEconomicRestrictions
 
-return function(p1)
-	-- upvalues: purchaseErrorModule (ref), isErrorReasonPrefixWithEconomicRestrictions (ref)
-	return if p1 == "UserHasSpendLimitSet" then purchaseErrorModule.SubscriptionExceededUserSpendLimit elseif p1 == "UnsupportedLocale" then purchaseErrorModule.SubscriptionUnsupportedLocale elseif p1 == "RestrictedUser" then purchaseErrorModule.RestrictedUser elseif p1 == "PurchasePlatformNotSupported" then purchaseErrorModule.SubscriptionPurchasePlatformNotSupported elseif p1 == "InvalidSaleLocation" then purchaseErrorModule.SubscriptionInvalidSaleLocation elseif p1 == "UserAlreadySubscribed" then purchaseErrorModule.AlreadySubscribed elseif p1 == "ProductNotForSale" then purchaseErrorModule.SubscriptionNotForSale elseif p1 == "VpcRequired" then purchaseErrorModule.VpcRequired elseif p1 == "ExceedParentalSpendLimit" then purchaseErrorModule.ExceedParentalSpendLimit elseif isErrorReasonPrefixWithEconomicRestrictions(p1) then p1 else purchaseErrorModule.UnknownFailure
+return function(p1) --[[ Line: 8 | Named "parseSubscriptionError" ]]
+	-- upvalues: PurchaseErrorModule (copy), IsErrorReasonPrefixWithEconomicRestrictionsFunction (copy)
+	return if p1 == "UserHasSpendLimitSet" then PurchaseErrorModule.SubscriptionExceededUserSpendLimit elseif p1 == "UnsupportedLocale" then PurchaseErrorModule.SubscriptionUnsupportedLocale elseif p1 == "RestrictedUser" then PurchaseErrorModule.RestrictedUser elseif p1 == "PurchasePlatformNotSupported" then PurchaseErrorModule.SubscriptionPurchasePlatformNotSupported elseif p1 == "InvalidSaleLocation" then PurchaseErrorModule.SubscriptionInvalidSaleLocation elseif p1 == "UserAlreadySubscribed" then PurchaseErrorModule.AlreadySubscribed elseif p1 == "ProductNotForSale" then PurchaseErrorModule.SubscriptionNotForSale elseif p1 == "VpcRequired" then PurchaseErrorModule.VpcRequired elseif p1 == "ExceedParentalSpendLimit" then PurchaseErrorModule.ExceedParentalSpendLimit elseif IsErrorReasonPrefixWithEconomicRestrictionsFunction(p1) then p1 else PurchaseErrorModule.UnknownFailure
 end

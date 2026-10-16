@@ -1,22 +1,22 @@
-﻿local httpService = game:GetService("HttpService")
-local http = script:FindFirstAncestor("Http")
-local urlModule = require(http.Url)
-local _ = require(http.RequestTypes)
+﻿local HttpService = game:GetService("HttpService")
+local Http = script:FindFirstAncestor("Http")
+local UrlModule = require(Http.Url)
+local _ = require(Http.RequestTypes)
 
-return function(p1, p2, p3, p4, p5, p6, p7)
-	-- upvalues: httpService (ref), urlModule (ref)
-	assert(p1, "requestImpl is required")
-	assert(p2, "conversationId is required")
-	assert(p3, "universeId is required")
+return function(Callback, ConversationId, UniverseId, Decorators, IsExperienceInvite, UserId, PlaceId) --[[ Line: 8 ]]
+	-- upvalues: HttpService (copy), UrlModule (copy)
+	assert(Callback, "requestImpl is required")
+	assert(ConversationId, "conversationId is required")
+	assert(UniverseId, "universeId is required")
 	
-	return p1(string.format("%s/send-game-link-message", urlModule.CHAT_URL), "POST", {
-		postBody = httpService:JSONEncode({
-			conversationId = p2,
-			universeId = p3,
-			decorators = p4,
-			isExperienceInvite = p5,
-			userId = p6,
-			placeId = p7
+	return Callback(string.format("%s/send-game-link-message", UrlModule.CHAT_URL), "POST", {
+		postBody = HttpService:JSONEncode({
+			conversationId = ConversationId,
+			universeId = UniverseId,
+			decorators = Decorators,
+			isExperienceInvite = IsExperienceInvite,
+			userId = UserId,
+			placeId = PlaceId
 		})
 	})
 end

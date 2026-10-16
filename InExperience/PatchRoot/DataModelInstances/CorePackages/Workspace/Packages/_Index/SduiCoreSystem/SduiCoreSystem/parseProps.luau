@@ -1,78 +1,76 @@
-﻿local sduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
-local parent = sduiCoreSystem.Parent
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local sduiBuilderTypesModule = require(sduiCoreSystem.SduiBuilderTypes)
-local _ = require(sduiCoreSystem.SduiComponentType)
-local _ = require(sduiCoreSystem.SduiConfigTypes)
-local sduiErrorType = require(sduiCoreSystem.SduiErrors).SduiErrorType
-local sduiParseHelpersModule = require(sduiCoreSystem.SduiParseHelpers)
-local sduiBuilderProcessingPhase = sduiBuilderTypesModule.SduiBuilderProcessingPhase
-local serverBindingPropMap = require(parent.SduiCompat).ServerBindingPropMap
+﻿local SduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
+local Parent = SduiCoreSystem.Parent
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local _ = require(SduiCoreSystem.SduiComponentType)
+local _ = require(SduiCoreSystem.SduiConfigTypes)
+local SduiErrorType = require(SduiCoreSystem.SduiErrors).SduiErrorType
+local SduiParseHelpersModule = require(SduiCoreSystem.SduiParseHelpers)
+local SduiBuilderProcessingPhase = require(SduiCoreSystem.SduiBuilderTypes).SduiBuilderProcessingPhase
+local ServerBindingPropMap = require(Parent.SduiCompat).ServerBindingPropMap
 
-local function parseProps(p1, p2, p3, p4, p5, p6, p7)
-	-- upvalues: sduiBuilderProcessingPhase (ref), serverBindingPropMap (ref), parseProps (ref), reactModule (ref), sduiErrorType (ref), cryoModule (ref), sduiParseHelpersModule (ref)
-	if not p2 then return end
-	assert(p2, "props must exist")
-	p6 = p6 or p4.componentDefinitions:getPropParsers(p1)
+local function parseProps(ComponentType, Messages, Name, p1, p2, p3, Render) --[[ Line: 32 ]]
+	-- upvalues: SduiBuilderProcessingPhase (copy), ServerBindingPropMap (copy), parseProps (copy), ReactModule (copy), SduiErrorType (copy), CryoModule (copy), SduiParseHelpersModule (copy)
+	if not Messages then return end
+	assert(Messages, "props must exist")
+	local P5 = p3 or p1.componentDefinitions:getPropParsers(ComponentType)
 	
-	if not p6 then return end
-	assert(p6, "componentInterface must exist")
+	if not P5 then return end
+	assert(P5, "componentInterface must exist")
 	
-	for i, v in p2 do
-		local var1 = p6[i]
+	for PropName, message in Messages do
+		local Callback = P5[PropName]
 		
-		if var1 and (p7 ~= sduiBuilderProcessingPhase.Render or p4.componentDefinitions:doesParserRequireRenderContext(var1)) then
-			local ok, status = pcall(function()
-				-- upvalues: var1 (ref), v (ref), serverBindingPropMap (copy), parseProps (copy), p1 (ref), p3 (ref), p4 (ref), p5 (ref), p7 (ref), reactModule (copy)
-				if typeof(var1) == "table" then
-					if typeof(v) ~= "table" then
-						error({
-							message = `Invalid input {typeof(v)} for prop. Expected table`
-						})
-					end
-					local var2 = nil
-					
-					for i, v_1 in v do
-						local var3 = serverBindingPropMap[i]
-						
-						if var3 then
-							var2 = var2 or {}
-							var2[i] = var3
-						end
-					end
-					if var2 then
-						for i_1, v_2 in var2 do
-							v[v_2] = v[i_1]
-						end
-					end
-					parseProps(p1, v, p3, p4, p5, var1, p7)
-					
-					return v
-				else
-					return if v == "NULL_PROP" then reactModule.None else var1(v, p4, p5, p7)
+		if Callback and (Render ~= SduiBuilderProcessingPhase.Render or p1.componentDefinitions:doesParserRequireRenderContext(Callback)) then
+			local Success, Result = pcall(function() --[[ Line: 66 ]]
+				-- upvalues: Callback (copy), message (copy), ServerBindingPropMap (upval), parseProps (upval), ComponentType (copy), Name (copy), p1 (copy), p2 (copy), Render (copy), ReactModule (upval)
+				if typeof(Callback) ~= "table" then
+					return if message == "NULL_PROP" then ReactModule.None else Callback(message, p1, p2, Render)
 				end
+				if typeof(message) ~= "table" then
+					error({
+						message = `Invalid input {typeof(message)} for prop. Expected table`
+					})
+				end
+				local v1 = nil
+				
+				for i, _ in message do
+					local ServerBindingProp = ServerBindingPropMap[i]
+					
+					if ServerBindingProp then
+						v1 = v1 or {}
+						v1[i] = ServerBindingProp
+					end
+				end
+				if v1 then
+					for i1, value in v1 do
+						message[value] = message[i1]
+					end
+				end
+				parseProps(ComponentType, message, Name, p1, p2, Callback, Render)
+				
+				return message
 			end)
 			
-			if not ok then
-				p4.dependencies.logger.reportError(sduiErrorType.FailedToParseProp, cryoModule.Dictionary.union({
-					name = p3,
-					componentType = p1,
-					propName = i,
-					value = sduiParseHelpersModule.stringifyValue(v)
-				}, if typeof(status) == "table" then status elseif typeof(status) == "string" then { message = status } else {}), p4.appPage)
+			if not Success then
+				p1.dependencies.logger.reportError(SduiErrorType.FailedToParseProp, CryoModule.Dictionary.union({
+					name = Name,
+					componentType = ComponentType,
+					propName = PropName,
+					value = SduiParseHelpersModule.stringifyValue(message)
+				}, if typeof(Result) == "table" then Result elseif typeof(Result) == "string" then { message = Result } else {}), p1.appPage)
 				
-				if typeof(status) == "table" then
-					if status.overrideValue then
-						p2[i] = status.overrideValue
+				if typeof(Result) == "table" then
+					if Result.overrideValue then
+						Messages[PropName] = Result.overrideValue
 					else
-						p2[i] = nil
+						Messages[PropName] = nil
 					end
 				end
-			elseif status == reactModule.None then
-				p2[i] = nil
+			elseif Result == ReactModule.None then
+				Messages[PropName] = nil
 			else
-				p2[i] = status
+				Messages[PropName] = Result
 			end
 		end
 	end

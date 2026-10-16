@@ -1,9 +1,9 @@
-﻿local signalsModule = require(game:GetService("CorePackages").Packages.Signals)
+﻿local SignalsModule = require(game:GetService("CorePackages").Packages.Signals)
 local _ = require(script.Parent.EnumReactPage)
 
-return signalsModule.createComputed(function()
-	-- upvalues: signalsModule (ref)
-	local var1, var2 = signalsModule.createSignal(nil)
+return SignalsModule.createComputed(function() --[[ Line: 11 | Named "ReactPageSignal" ]]
+	-- upvalues: SignalsModule (copy)
+	local Signal, Signal2 = SignalsModule.createSignal(nil)
 	
-	return { currentReactPage = var1, setCurrentReactPage = var2 }
+	return { currentReactPage = Signal, setCurrentReactPage = Signal2 }
 end)

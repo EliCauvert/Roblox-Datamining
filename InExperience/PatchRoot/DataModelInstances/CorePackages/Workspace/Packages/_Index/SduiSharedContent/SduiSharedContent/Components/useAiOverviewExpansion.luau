@@ -1,81 +1,91 @@
-﻿local parent = script:FindFirstAncestor("SduiSharedContent").Parent
-local reactModule = require(parent.React)
-local reactOtterModule = require(parent.ReactOtter)
-local t = { dampingRatio = 0.9, frequency = 6 }
+﻿local Parent = script:FindFirstAncestor("SduiSharedContent").Parent
+local ReactModule = require(Parent.React)
+local ReactOtterModule = require(Parent.ReactOtter)
+local config = { dampingRatio = 0.9, frequency = 6 }
 
-return function(p1)
-	-- upvalues: reactModule (ref), reactOtterModule (ref), t (ref)
-	local var1 = if p1.hasHeader and p1.hasExpandableBody then p1.sectionGap else 0
-	local var2, var3 = reactModule.useState(false)
-	local var4, var5 = reactModule.useState(false)
-	local var6 = reactModule.useRef(false)
-	local var7, var8 = reactModule.useState(nil)
-	local var9, var10 = reactModule.useState(nil)
-	local var11 = reactModule.useCallback(function(p2)
-		-- upvalues: var10 (ref)
-		var10(p2.AbsoluteSize.Y)
+return function(p1) --[[ Line: 32 | Named "useAiOverviewExpansion" ]]
+	-- upvalues: ReactModule (copy), ReactOtterModule (copy), config (copy)
+	local SectionGap = if p1.hasHeader and p1.hasExpandableBody then p1.sectionGap else 0
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
+	local UseRefResult = ReactModule.useRef(false)
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(nil)
+	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(nil)
+	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 40 ]]
+		-- upvalues: UseStateResult2_3 (copy)
+		UseStateResult2_3(Frame.AbsoluteSize.Y)
 	end, {})
-	local var12 = reactModule.useCallback(function(p2)
-		-- upvalues: var8 (ref)
-		var8(p2.AbsoluteSize.Y)
+	local UseResult1 = ReactModule.useCallback(function(Frame) --[[ Line: 43 ]]
+		-- upvalues: UseStateResult2_2 (copy)
+		UseStateResult2_2(Frame.AbsoluteSize.Y)
 	end, {})
-	local compactHeight = p1.compactHeight
-	local buttonHeight = p1.buttonHeight
-	local var13 = compactHeight ~= nil and compactHeight > 0
-	local var14 = if var13 then compactHeight else 0
-	local var15 = var7 or 0
-	local var16 = if p1.hasHeader then (var9 or 0) + var1 else 0
-	local var17 = buttonHeight + p1.sectionGap
-	local var18 = not var13 or (not p1.hasHeader or var9 ~= nil)
-	local var19 = not var13 or (not p1.hasExpandableBody or var7 ~= nil)
-	local var20 = if var13 then math.max(0, var14 - var16 - var17) else 0
-	local var21 = var13 and (var18 and (var19 and (var20 > 0 and var20 + 1 < var15)))
-	local var22 = var13 and (p1.hasExpandableBody and (not var2 and not (var18 and var19)))
-	local var23 = var21 and not var2
-	local var24 = var21 and (var2 and not var4)
-	local var25 = var22 or (var23 or var24)
-	local var26 = var22 or var23
-	local reducedMotion = p1.reducedMotion
-	local var27 = if var2 then var15 elseif var25 then var20 else 0
-	local var28, var29 = reactOtterModule.useAnimatedBinding(var27, reactModule.useCallback(function()
-		-- upvalues: var6 (ref), var5 (ref)
-		if var6.current then
-			var6.current = false
-			var5(true)
+	local CompactHeight: number = p1.compactHeight
+	local IsCompactHeightAbove: boolean = CompactHeight ~= nil and CompactHeight > 0
+	local CompactHeight1: number = if IsCompactHeightAbove then CompactHeight else 0
+	local UseStateResult3_1 = UseStateResult3 or 0
+	local NewSectionGap = if p1.hasHeader then (UseStateResult4 or 0) + SectionGap else 0
+	local NewButtonHeight = p1.buttonHeight + p1.sectionGap
+	local NoIsCompactHeightAbove: boolean = not IsCompactHeightAbove or (not p1.hasHeader or UseStateResult4 ~= nil)
+	local NoIsCompactHeightAbove1: boolean = not IsCompactHeightAbove or (not p1.hasExpandableBody or UseStateResult3 ~= nil)
+	local Largest: number = if IsCompactHeightAbove then math.max(0, CompactHeight1 - NewSectionGap - NewButtonHeight) else 0
+	local IsLargestBelow: boolean = IsCompactHeightAbove and (NoIsCompactHeightAbove and (NoIsCompactHeightAbove1 and (Largest > 0 and Largest + 1 < UseStateResult3_1)))
+	local Inverted: boolean = IsCompactHeightAbove and (p1.hasExpandableBody and (not UseStateResult and not (NoIsCompactHeightAbove and NoIsCompactHeightAbove1)))
+	local NoUseStateResult: boolean = IsLargestBelow and not UseStateResult
+	local NoUseStateResult1: boolean = IsLargestBelow and (UseStateResult and not UseStateResult1)
+	local Inverted1: boolean = Inverted or (NoUseStateResult or NoUseStateResult1)
+	local Inverted2: boolean = Inverted or NoUseStateResult
+	local ReducedMotion = p1.reducedMotion
+	local UseStateResult5 = if UseStateResult then UseStateResult3_1 elseif Inverted1 then Largest else 0
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(UseStateResult5, (ReactModule.useCallback(function() --[[ Line: 78 ]]
+		-- upvalues: UseRefResult (copy), UseStateResult2_1 (copy)
+		if UseRefResult.current then
+			UseRefResult.current = false
+			UseStateResult2_1(true)
 		end
-	end, {}))
-	local var30 = reactModule.useCallback(function()
-		-- upvalues: var3 (ref), var21 (ref), reducedMotion (ref), var6 (ref), var5 (ref), var29 (ref), reactOtterModule (copy), var15 (ref), t (copy)
-		var3(true)
+	end, {})))
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 88 ]]
+		-- upvalues: UseStateResult2 (copy), IsLargestBelow (copy), ReducedMotion (copy), UseRefResult (copy), UseStateResult2_1 (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), UseStateResult3_1 (copy), config (upval)
+		UseStateResult2(true)
 		
-		if not var21 then return end
-		if reducedMotion then
-			var6.current = false
-			var5(true)
-			var29(reactOtterModule.instant(var15))
+		if not IsLargestBelow then return end
+		if ReducedMotion then
+			UseRefResult.current = false
+			UseStateResult2_1(true)
+			UseAnimatedBindingResult2((ReactOtterModule.instant(UseStateResult3_1)))
+			
+			return
+		else
+			UseRefResult.current = true
+			UseStateResult2_1(false)
+			UseAnimatedBindingResult2((ReactOtterModule.spring(UseStateResult3_1, config)))
+		end
+	end, {
+		UseStateResult3_1,
+		IsLargestBelow,
+		ReducedMotion,
+		UseAnimatedBindingResult2
+	})
+	ReactModule.useLayoutEffect(function() --[[ Line: 110 ]]
+		-- upvalues: NoUseStateResult1 (copy), UseRefResult (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), UseStateResult5 (copy)
+		if not NoUseStateResult1 then
+			UseRefResult.current = false
+			UseAnimatedBindingResult2((ReactOtterModule.instant(UseStateResult5)))
 			
 			return
 		end
-		var6.current = true
-		var5(false)
-		var29(reactOtterModule.spring(var15, t))
-	end, { var15, var21, reducedMotion, var29 })
-	reactModule.useLayoutEffect(function()
-		-- upvalues: var24 (ref), var6 (ref), var29 (ref), reactOtterModule (copy), var27 (ref)
-		if var24 then
-			return
-		end
-		var6.current = false
-		var29(reactOtterModule.instant(var27))
-	end, { var27, var24, var29 })
+	end, {
+		UseStateResult5,
+		NoUseStateResult1,
+		UseAnimatedBindingResult2
+	})
 	
 	return {
-		isCompact = var23,
-		shouldReserveCompactHeight = var26,
-		useCompactViewport = var25,
-		animatedViewportHeight = var28,
-		onExpand = var30,
-		onHeaderAbsoluteSizeChanged = var11,
-		onContentAbsoluteSizeChanged = var12
+		isCompact = NoUseStateResult,
+		shouldReserveCompactHeight = Inverted2,
+		useCompactViewport = Inverted1,
+		animatedViewportHeight = UseAnimatedBindingResult,
+		onExpand = UseResult2,
+		onHeaderAbsoluteSizeChanged = UseResult,
+		onContentAbsoluteSizeChanged = UseResult1
 	}
 end

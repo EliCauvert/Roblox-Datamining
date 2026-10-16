@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.AppTopBanner.AppTopBanner)
+﻿return (require(script.Parent.Parent.Parent._Index.AppTopBanner.AppTopBanner))

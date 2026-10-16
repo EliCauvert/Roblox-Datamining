@@ -1,109 +1,113 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local reactModule = require(appChat.Parent.React)
-local frameModule = require(appChat.Components.Common.Frame)
-local UIListLayoutModule = require(appChat.Components.Common.UIListLayout)
-local avatarThumbnailModule = require(script.Parent.AvatarThumbnail)
-local circleMaskModule = require(script.Parent.CircleMask)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local ReactModule = require(AppChat.Parent.React)
+local FrameModule = require(AppChat.Components.Common.Frame)
+local UIListLayoutModule = require(AppChat.Components.Common.UIListLayout)
+local AvatarThumbnailModule = require(script.Parent.AvatarThumbnail)
+local CircleMaskModule = require(script.Parent.CircleMask)
 
-return function(p1)
-	-- upvalues: reactModule (ref), frameModule (ref), avatarThumbnailModule (ref), UIListLayoutModule (ref), circleMaskModule (ref)
-	local thumbnailsCount = #p1.thumbnails
-	local var1 = thumbnailsCount / 2
-	local var2 = if thumbnailsCount % 2 == 0 then var1 else math.floor(var1)
-	local var3 = thumbnailsCount - var2
+return function(Frame) --[[ Line: 26 | Named "AvatarGroup" ]]
+	-- upvalues: ReactModule (copy), FrameModule (copy), AvatarThumbnailModule (copy), UIListLayoutModule (copy), CircleMaskModule (copy)
+	local CountThumbnails = #Frame.thumbnails
+	local Value = CountThumbnails / 2
+	local Value1 = CountThumbnails % 2 == 0 and Value or math.floor(Value)
+	local CountThumbnailsDelta = CountThumbnails - Value1
 	local t = {}
-	local t_1 = {}
+	local t1 = {}
 	
-	for i, v in p1.thumbnails do
-		local uDim2, var4, var5
-		local _ = nil
-		local var6 = 0
-		local _ = nil
-		local _ = nil
+	for LayoutOrder, thumbnail in Frame.thumbnails do
+		local XScale = 0
+		local _UDim2 = nil
+		local Elements = nil
+		local Element = nil
 		
-		if i > var2 then
-			uDim2 = UDim2.new(1 / var3, 0, 1 / var3, 0)
-			var4 = t_1
+		if LayoutOrder <= Value1 then
+			_UDim2 = UDim2.new(1 / Value1, 0, 1 / Value1, 0)
+			Elements = t
 			
-			if thumbnailsCount == 2 then
-				var6 = -0.125
+			if CountThumbnails == 3 then
+				XScale = 0.125
+			elseif CountThumbnails == 2 then
+				XScale = 0.125
 			end
-			var5 = reactModule.createElement(frameModule, { ZIndex = 2 }, {
-				border = reactModule.createElement(frameModule, {
+			Element = ReactModule.createElement(FrameModule, { ZIndex = 2, Size = UDim2.fromScale(1, 1) }, {
+				border = ReactModule.createElement(FrameModule, {
 					Size = UDim2.new(1, 0, 0, 2),
-					Position = UDim2.new(0, 0, 0, -1),
-					BackgroundColor3 = p1.circleDividerColor3,
-					BackgroundTransparency = p1.circleDividerTransparency
+					Position = UDim2.new(0, 0, 1, -1),
+					BackgroundColor3 = Frame.circleDividerColor3,
+					BackgroundTransparency = Frame.circleDividerTransparency
 				}),
-				borderVertical = reactModule.createElement(frameModule, {
+				borderVertical = ReactModule.createElement(FrameModule, {
 					Size = UDim2.new(0, 2, 1, 0),
 					Position = UDim2.new(0, -1, 0, 0),
-					BackgroundColor3 = p1.circleDividerColor3,
-					BackgroundTransparency = p1.circleDividerTransparency
+					BackgroundColor3 = Frame.circleDividerColor3,
+					BackgroundTransparency = Frame.circleDividerTransparency
 				})
 			})
-			var4["thumbnail-" .. tostring(i)] = reactModule.createElement(frameModule, { ClipsDescendants = true, Size = uDim2, LayoutOrder = i }, {
-				headshotContainer = reactModule.createElement(frameModule, {
-					Size = UDim2.fromScale(1, 1),
-					Position = UDim2.new(var6, 0, 0, 0)
-				}, {
-					headshot = reactModule.createElement(avatarThumbnailModule, { thumbnail = v })
+		else
+			_UDim2 = UDim2.new(1 / CountThumbnailsDelta, 0, 1 / CountThumbnailsDelta, 0)
+			Elements = t1
+			
+			if CountThumbnails == 2 then
+				XScale = -0.125
+			end
+			Element = ReactModule.createElement(FrameModule, { ZIndex = 2 }, {
+				border = ReactModule.createElement(FrameModule, {
+					Size = UDim2.new(1, 0, 0, 2),
+					Position = UDim2.new(0, 0, 0, -1),
+					BackgroundColor3 = Frame.circleDividerColor3,
+					BackgroundTransparency = Frame.circleDividerTransparency
 				}),
-				borderObject = var5
+				borderVertical = ReactModule.createElement(FrameModule, {
+					Size = UDim2.new(0, 2, 1, 0),
+					Position = UDim2.new(0, -1, 0, 0),
+					BackgroundColor3 = Frame.circleDividerColor3,
+					BackgroundTransparency = Frame.circleDividerTransparency
+				})
 			})
 		end
-		uDim2 = UDim2.new(1 / var2, 0, 1 / var2, 0)
-		var4 = t
-		
-		if thumbnailsCount == 3 then
-			var6 = 0.125
-		elseif thumbnailsCount == 2 then
-			var6 = 0.125
-		end
-		var5 = reactModule.createElement(frameModule, { ZIndex = 2, Size = UDim2.fromScale(1, 1) }, {
-			border = reactModule.createElement(frameModule, {
-				Size = UDim2.new(1, 0, 0, 2),
-				Position = UDim2.new(0, 0, 1, -1),
-				BackgroundColor3 = p1.circleDividerColor3,
-				BackgroundTransparency = p1.circleDividerTransparency
+		Elements["thumbnail-" .. tostring(LayoutOrder)] = ReactModule.createElement(FrameModule, {
+			ClipsDescendants = true,
+			Size = _UDim2,
+			LayoutOrder = LayoutOrder
+		}, {
+			headshotContainer = ReactModule.createElement(FrameModule, {
+				Size = UDim2.fromScale(1, 1),
+				Position = UDim2.new(XScale, 0, 0, 0)
+			}, {
+				headshot = ReactModule.createElement(AvatarThumbnailModule, { thumbnail = thumbnail })
 			}),
-			borderVertical = reactModule.createElement(frameModule, {
-				Size = UDim2.new(0, 2, 1, 0),
-				Position = UDim2.new(0, -1, 0, 0),
-				BackgroundColor3 = p1.circleDividerColor3,
-				BackgroundTransparency = p1.circleDividerTransparency
-			})
+			borderObject = Element
 		})
 	end
-	return reactModule.createElement(circleMaskModule, {
-		circleColor3 = p1.circleColor3,
-		circleTransparency = p1.circleTransparency,
-		circleInteriorBackgroundColor3 = p1.circleInteriorBackgroundColor3,
-		circleInteriorBackgroundTransparency = p1.circleInteriorBackgroundTransparency,
-		circleDividerColor3 = p1.circleDividerColor3,
-		circleDividerTransparency = p1.circleDividerTransparency,
-		LayoutOrder = p1.LayoutOrder,
-		overlaySize = p1.overlaySize,
-		onActivated = p1.onActivated,
-		selectable = p1.selectable
+	return ReactModule.createElement(CircleMaskModule, {
+		circleColor3 = Frame.circleColor3,
+		circleTransparency = Frame.circleTransparency,
+		circleInteriorBackgroundColor3 = Frame.circleInteriorBackgroundColor3,
+		circleInteriorBackgroundTransparency = Frame.circleInteriorBackgroundTransparency,
+		circleDividerColor3 = Frame.circleDividerColor3,
+		circleDividerTransparency = Frame.circleDividerTransparency,
+		LayoutOrder = Frame.LayoutOrder,
+		overlaySize = Frame.overlaySize,
+		onActivated = Frame.onActivated,
+		selectable = Frame.selectable
 	}, {
-		fragment = reactModule.createElement(reactModule.Fragment, {}, {
-			uiCorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) }),
-			left = reactModule.createElement(frameModule, {
+		fragment = ReactModule.createElement(ReactModule.Fragment, {}, {
+			uiCorner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) }),
+			left = ReactModule.createElement(FrameModule, {
 				Size = UDim2.new(1, -1, 1, 0),
 				Position = UDim2.fromScale(-0.5, 0)
 			}, {
-				elementContainer = reactModule.createElement(frameModule, { Size = UDim2.fromScale(1, 1) }, {
-					layout = reactModule.createElement(UIListLayoutModule, { HorizontalAlignment = Enum.HorizontalAlignment.Right })
+				elementContainer = ReactModule.createElement(FrameModule, { Size = UDim2.fromScale(1, 1) }, {
+					layout = ReactModule.createElement(UIListLayoutModule, { HorizontalAlignment = Enum.HorizontalAlignment.Right })
 				}, t)
 			}),
-			right = reactModule.createElement(frameModule, {
+			right = ReactModule.createElement(FrameModule, {
 				Size = UDim2.new(1, -1, 1, 0),
 				Position = UDim2.new(0.5, -2, 0, 0)
 			}, {
-				elementContainer = reactModule.createElement(frameModule, { Size = UDim2.fromScale(1, 1) }, {
-					layout = reactModule.createElement(UIListLayoutModule, { HorizontalAlignment = Enum.HorizontalAlignment.Left })
-				}, t_1)
+				elementContainer = ReactModule.createElement(FrameModule, { Size = UDim2.fromScale(1, 1) }, {
+					layout = ReactModule.createElement(UIListLayoutModule, { HorizontalAlignment = Enum.HorizontalAlignment.Left })
+				}, t1)
 			})
 		})
 	})

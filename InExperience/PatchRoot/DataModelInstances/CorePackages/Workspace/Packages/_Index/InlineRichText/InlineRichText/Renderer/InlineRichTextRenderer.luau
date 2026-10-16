@@ -1,42 +1,38 @@
-﻿local inlineRichText = script:FindFirstAncestor("InlineRichText")
-local parent = inlineRichText.Parent
-local name = require(inlineRichText.Logger):new(script.Name)
-local cryoModule = require(parent.Cryo)
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local _ = require(inlineRichText.Types)
-local inlineLayout = require(parent.InlineLayout).Components.InlineLayout
-local nodeTypeModule = require(inlineRichText.Enums.NodeType)
-local parseXmlModule = require(inlineRichText.Parser.parseXml)
-local processChildrenModule = require(inlineRichText.Renderer.processChildren)
-local textSpanRendererModule = require(inlineRichText.Renderer.NodeRenderers.TextSpanRenderer)
-local linkRendererModule = require(inlineRichText.Renderer.NodeRenderers.LinkRenderer)
-local iconRendererModule = require(inlineRichText.Renderer.NodeRenderers.IconRenderer)
-local hardbreakRendererModule = require(inlineRichText.Renderer.NodeRenderers.HardbreakRenderer)
-local useLinkerOnActivatedModule = require(inlineRichText.Linker.useLinkerOnActivated)
-local linkTypeModule = require(inlineRichText.Enums.LinkType)
-local linkBehaviorModule = require(inlineRichText.Enums.LinkBehavior)
-local getLinkTypeModule = require(inlineRichText.Linker.getLinkType)
+﻿local InlineRichText = script:FindFirstAncestor("InlineRichText")
+local Parent = InlineRichText.Parent
+local NewResult = require(InlineRichText.Logger):new(script.Name)
+local CryoModule = require(Parent.Cryo)
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local _ = require(InlineRichText.Types)
+local InlineLayout = require(Parent.InlineLayout).Components.InlineLayout
+local NodeTypeModule = require(InlineRichText.Enums.NodeType)
+local ParseXmlModule = require(InlineRichText.Parser.parseXml)
+local ProcessChildrenModule = require(InlineRichText.Renderer.processChildren)
+local UseLinkerOnActivatedModule = require(InlineRichText.Linker.useLinkerOnActivated)
+local LinkTypeModule = require(InlineRichText.Enums.LinkType)
+local LinkBehaviorModule = require(InlineRichText.Enums.LinkBehavior)
+local GetLinkTypeModule = require(InlineRichText.Linker.getLinkType)
 
-local function createDefaultRootNode(p1)
-	-- upvalues: nodeTypeModule (ref)
+local function createDefaultRootNode(Text) --[[ Line: 56 ]]
+	-- upvalues: NodeTypeModule (copy)
 	return {
 		name = "ROOT",
 		text = "",
 		index = 0,
-		type = nodeTypeModule.Root,
+		type = NodeTypeModule.Root,
 		children = {
 			{
 				name = "TEXT",
 				text = "",
 				index = 1,
-				type = nodeTypeModule.InlineCustom,
+				type = NodeTypeModule.InlineCustom,
 				children = {
 					{
 						name = "PLAINTEXT",
 						index = 2,
-						text = p1,
-						type = nodeTypeModule.Plaintext,
+						text = Text,
+						type = NodeTypeModule.Plaintext,
 						children = {},
 						attributes = {}
 					}
@@ -48,99 +44,106 @@ local function createDefaultRootNode(p1)
 	}
 end
 
-local t = {
-	TEXT_SPAN = textSpanRendererModule,
-	LINK = linkRendererModule,
-	ICON = iconRendererModule,
-	BREAK = hardbreakRendererModule
+local config = {
+	TEXT_SPAN = require(InlineRichText.Renderer.NodeRenderers.TextSpanRenderer),
+	LINK = require(InlineRichText.Renderer.NodeRenderers.LinkRenderer),
+	ICON = require(InlineRichText.Renderer.NodeRenderers.IconRenderer),
+	BREAK = require(InlineRichText.Renderer.NodeRenderers.HardbreakRenderer)
 }
-local t_1 = {
-	[linkTypeModule.Http] = linkBehaviorModule.Webview,
-	[linkTypeModule.LinkingProtocolRegistered] = linkBehaviorModule.LinkingProtocol,
-	[linkTypeModule.Default] = linkBehaviorModule.ErrorToast
+local config1 = {
+	[LinkTypeModule.Http] = LinkBehaviorModule.Webview,
+	[LinkTypeModule.LinkingProtocolRegistered] = LinkBehaviorModule.LinkingProtocol,
+	[LinkTypeModule.Default] = LinkBehaviorModule.ErrorToast
 }
-local t_2 = {
+local config2 = {
 	errorToastText = nil,
 	onActivatedSubscriber = nil,
-	evaluateLinkBehavior = function(_, p1)
-		-- upvalues: t_1 (ref), linkBehaviorModule (ref)
-		return t_1[p1] or linkBehaviorModule.ErrorToast
+	evaluateLinkBehavior = function(_, p1) --[[ Line: 97 ]]
+		-- upvalues: config1 (copy), LinkBehaviorModule (copy)
+		return config1[p1] or LinkBehaviorModule.ErrorToast
 	end
 }
 
-return function(p1)
-	-- upvalues: reactModule (ref), parseXmlModule (ref), name (ref), createDefaultRootNode (ref), foundationModule (ref), cryoModule (ref), t_2 (ref), useLinkerOnActivatedModule (ref), getLinkTypeModule (ref), t (ref), processChildrenModule (ref), inlineLayout (ref)
-	local ast = p1.ast
-	local text = p1.text
-	local var1 = reactModule.useMemo(function()
-		-- upvalues: ast (ref), parseXmlModule (copy), text (ref), p1 (ref), name (copy), createDefaultRootNode (copy)
-		if ast then
-			return ast
+return function(p1) --[[ Line: 104 | Named "InlineRichTextRenderer" ]]
+	-- upvalues: ReactModule (copy), ParseXmlModule (copy), NewResult (copy), createDefaultRootNode (copy), FoundationModule (copy), CryoModule (copy), config2 (copy), UseLinkerOnActivatedModule (copy), GetLinkTypeModule (copy), config (copy), ProcessChildrenModule (copy), InlineLayout (copy)
+	local Ast = p1.ast
+	local Text = p1.text
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 107 ]]
+		-- upvalues: Ast (copy), ParseXmlModule (upval), Text (copy), p1 (copy), NewResult (upval), createDefaultRootNode (upval)
+		if Ast then
+			return Ast
 		end
-		local var2, var3 = parseXmlModule(text, p1.parserOptions)
+		local ParseXmlModuleResult, ParseXmlModuleResult2 = ParseXmlModule(Text, p1.parserOptions)
 		
-		if var2 then
-			return var3
+		if ParseXmlModuleResult then
+			return ParseXmlModuleResult2
+		else
+			NewResult:warning(`Error parsing XML input into AST: {ParseXmlModuleResult2}`)
+			
+			return (createDefaultRootNode(Text))
 		end
-		name:warning(`Error parsing XML input into AST: {var3}`)
-		
-		return createDefaultRootNode(text)
-	end, { text, ast })
-	local var2 = foundationModule.Hooks.useTokens()
-	local default = var2.Color.Content.Default
-	local t_1 = {
+	end, { Text, Ast })
+	local UseTokensResult = FoundationModule.Hooks.useTokens()
+	local Default = UseTokensResult.Color.Content.Default
+	local config1 = {
 		Font = Enum.Font.BuilderSans,
-		FontSize = var2.FontSize.FontSize_400,
-		LineHeight = var2.LineHeight.LineHeight_140
+		FontSize = UseTokensResult.FontSize.FontSize_400,
+		LineHeight = UseTokensResult.LineHeight.LineHeight_140
 	}
-	local var3 = cryoModule.Dictionary.union(t_2, p1.linkerOptions or {})
-	local var4 = useLinkerOnActivatedModule({ errorToastTextOverride = var3.errorToastText })
-	local var5 = reactModule.useCallback(function(p2)
-		-- upvalues: var4 (ref), var3 (ref), name (copy)
-		var4(p2)
+	local UnionResult = CryoModule.Dictionary.union(config2, p1.linkerOptions or {})
+	local UseLinkerOnActivatedModuleResult = UseLinkerOnActivatedModule({ errorToastTextOverride = UnionResult.errorToastText })
+	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 132 ]]
+		-- upvalues: UseLinkerOnActivatedModuleResult (copy), UnionResult (copy), NewResult (upval)
+		UseLinkerOnActivatedModuleResult(p2)
 		
-		if var3.onActivatedSubscriber then
-			local ok, status = pcall(function()
-				-- upvalues: var3 (copy), p2 (ref)
-				var3.onActivatedSubscriber(p2)
+		if UnionResult.onActivatedSubscriber then
+			local Success, Result = pcall(function(): boolean --[[ Line: 135 ]]
+				-- upvalues: UnionResult (upval), p2 (copy)
+				UnionResult.onActivatedSubscriber(p2)
 				
 				return true
 			end)
 			
-			if not ok then
-				name:warning(`Error notifying link activation subscriber: {tostring(status)}`)
+			if not Success then
+				NewResult:warning(`Error notifying link activation subscriber: {tostring(Result)}`)
 			end
 		end
-	end, { var3.onActivatedSubscriber, var4 })
-	local var6 = reactModule.useCallback(function(p2)
-		-- upvalues: var3 (ref), getLinkTypeModule (copy)
-		return var3.evaluateLinkBehavior(p2, getLinkTypeModule(p2))
-	end, { var3.evaluateLinkBehavior })
-	local var7 = reactModule.useMemo(function()
-		-- upvalues: cryoModule (copy), t (copy), p1 (ref), processChildrenModule (copy), default (ref), t_1 (ref), var2 (ref), var5 (ref), var6 (ref)
+	end, {
+		UnionResult.onActivatedSubscriber,
+		UseLinkerOnActivatedModuleResult
+	})
+	local UseResult1 = ReactModule.useCallback(function(p2) --[[ Line: 144 ]]
+		-- upvalues: UnionResult (copy), GetLinkTypeModule (upval)
+		return UnionResult.evaluateLinkBehavior(p2, GetLinkTypeModule(p2))
+	end, { UnionResult.evaluateLinkBehavior })
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 149 ]]
+		-- upvalues: CryoModule (upval), config (upval), p1 (copy), ProcessChildrenModule (upval), Default (copy), config1 (copy), UseTokensResult (copy), UseResult (copy), UseResult1 (copy)
 		return {
-			inlineCustomRenderers = cryoModule.Dictionary.join(t, p1.renderers or {}),
-			processChildren = processChildrenModule,
+			inlineCustomRenderers = CryoModule.Dictionary.join(config, p1.renderers or {}),
+			processChildren = ProcessChildrenModule,
 			nodeProps = p1.nodeProps or {},
 			styles = {
-				textStyle = cryoModule.Dictionary.union(default, p1.textStyle or {}),
-				fontStyle = cryoModule.Dictionary.union(t_1, p1.fontStyle or {})
+				textStyle = CryoModule.Dictionary.union(Default, p1.textStyle or {}),
+				fontStyle = CryoModule.Dictionary.union(config1, p1.fontStyle or {})
 			},
-			tokens = var2,
-			linker = { onActivated = var5, evaluateLinkBehavior = var6 }
+			tokens = UseTokensResult,
+			linker = {
+				onActivated = UseResult,
+				evaluateLinkBehavior = UseResult1
+			}
 		}
 	end, {
-		p1.renderers, p1.nodeProps, p1.textStyle, p1.fontStyle, var5, var6
+		p1.renderers, p1.nodeProps, p1.textStyle, p1.fontStyle, UseResult, UseResult1
 	})
 	
-	return reactModule.createElement(foundationModule.View, p1.wrapperProps, {
-		RichTextRoot = reactModule.createElement(inlineLayout, {
-			Elements = reactModule.useMemo(function()
-				-- upvalues: processChildrenModule (copy), var1 (ref), var7 (ref)
-				return processChildrenModule(var1, var7)
-			end, { var1 and var1.children, var7 }),
+	return ReactModule.createElement(FoundationModule.View, p1.wrapperProps, {
+		RichTextRoot = ReactModule.createElement(InlineLayout, {
+			Elements = ReactModule.useMemo(function() --[[ Line: 174 ]]
+				-- upvalues: ProcessChildrenModule (upval), UseMemoResult (copy), UseMemoResult1 (copy)
+				return ProcessChildrenModule(UseMemoResult, UseMemoResult1)
+			end, { UseMemoResult and UseMemoResult.children, UseMemoResult1 }),
 			HorizontalAlignment = p1.HorizontalAlignment,
-			VerticalPadding = UDim.new(0, var7.styles.fontStyle.FontSize * (var7.styles.fontStyle.LineHeight - 1) / 2)
+			VerticalPadding = UDim.new(0, UseMemoResult1.styles.fontStyle.FontSize * (UseMemoResult1.styles.fontStyle.LineHeight - 1) / 2)
 		})
 	})
 end

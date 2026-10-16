@@ -1,16 +1,15 @@
-﻿local expChat = script:FindFirstAncestor("ExpChat")
-local parent = expChat.Parent
-local roduxModule = require(parent.Rodux)
-local dictionary = require(parent.llama).Dictionary
-local actions = expChat.Actions
+﻿local ExpChat = script:FindFirstAncestor("ExpChat")
+local Parent = ExpChat.Parent
+local Dictionary = require(Parent.llama).Dictionary
+local Actions = ExpChat.Actions
 
-return roduxModule.createReducer({}, {
-	[require(actions.AddReverseNudgeToxicUser).name] = function(p1, p2)
-		-- upvalues: dictionary (ref)
-		return dictionary.join(p1, { [p2.toxicUserId] = p2.reverseNudgeType })
+return require(Parent.Rodux).createReducer({}, {
+	[require(Actions.AddReverseNudgeToxicUser).name] = function(p1, p2) --[[ Line: 16 ]]
+		-- upvalues: Dictionary (copy)
+		return Dictionary.join(p1, { [p2.toxicUserId] = p2.reverseNudgeType })
 	end,
-	[require(actions.RemoveReverseNudgeToxicUser).name] = function(p1, p2)
-		-- upvalues: dictionary (ref)
-		return dictionary.removeKey(p1, p2.toxicUserId)
+	[require(Actions.RemoveReverseNudgeToxicUser).name] = function(p1, p2) --[[ Line: 20 ]]
+		-- upvalues: Dictionary (copy)
+		return Dictionary.removeKey(p1, p2.toxicUserId)
 	end
 })

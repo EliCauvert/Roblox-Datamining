@@ -1,12 +1,12 @@
 ﻿local _ = require(script.Parent.types)
-local dEV = _G.__DEV__
+local DEV = _G.__DEV__
 
-return function(p1)
-	-- upvalues: dEV (ref)
-	local var1, var2 = next(p1)
+return function(p1) --[[ Line: 5 | Named "inspectRouteEntry" ]]
+	-- upvalues: DEV (copy)
+	local Key, Value = next(p1)
 	
-	if dEV then
-		assert(var1 and var2, "route entry should contain exactly one route config")
+	if DEV then
+		assert(Key and Value, "route entry should contain exactly one route config")
 	end
-	return var1, var2
+	return Key, Value
 end

@@ -1,146 +1,148 @@
-﻿local localizationService = game:GetService("LocalizationService")
-local parent = script:FindFirstAncestor("DataHydration").Parent
-local _ = require(parent.Signals)
-local createCurrentTimeSignal = require(parent.SignalsUtils).createCurrentTimeSignal
-local urlBuilder = require(parent.UrlBuilder).UrlBuilder
-local experienceEventTypesModule = require(script.Parent.ExperienceEventTypes)
-local eventStatusCheckIntervalSec = game:DefineFastInt("EventStatusCheckIntervalSec", 30)
+﻿local LocalizationService = game:GetService("LocalizationService")
+local Parent = script:FindFirstAncestor("DataHydration").Parent
+local _ = require(Parent.Signals)
+local CreateCurrentTimeSignalFunction = require(Parent.SignalsUtils).createCurrentTimeSignal
+local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
+local EventStatusCheckIntervalSec = game:DefineFastInt("EventStatusCheckIntervalSec", 30)
 
-local function _(p1)
-	if not p1 then
+local function _(p1) --[[ Line: 21 | Named "parseIsoDateTime" ]]
+	if p1 then
+		local Success, Result = pcall(DateTime.fromIsoDate, p1)
+		
+		return if Success and Result ~= nil then Result else nil
+	else
 		return nil
 	end
-	local ok, status = pcall(DateTime.fromIsoDate, p1)
-	
-	return if ok and status ~= nil then status else nil
 end
 
-local function enrichWithTimestamps(p1)
-	local var1, ok
-	local eventStart = p1.eventStart
+local function deriveFormattedStartDate(p1, p2) --[[ Line: 41 ]]
+	-- upvalues: LocalizationService (copy)
+	local EventStart = p1.eventStart
+	local v1 = nil
 	
-	if eventStart then
-		ok, status = pcall(DateTime.fromIsoDate, eventStart)
-		var1 = if ok and status ~= nil then status else nil
+	if EventStart then
+		local Success, Result = pcall(DateTime.fromIsoDate, EventStart)
+		v1 = if Success and Result ~= nil then Result else nil
 	else
-		var1 = nil
+		v1 = nil
 	end
-	local var2
-	ok = p1.eventEnd
-	
-	if ok then
-		local ok_1, status = pcall(DateTime.fromIsoDate, ok)
-		var2 = if ok_1 and status ~= nil then status else nil
-	else
-		var2 = nil
-	end
-	p1.eventStartTimestamp = if var1 then var1.UnixTimestamp else nil
-	p1.eventEndTimestamp = if var2 then var2.UnixTimestamp else nil
-	
-	return p1
-end
-
-local function deriveFormattedStartDate(p1, p2)
-	-- upvalues: localizationService (ref)
-	local var1
-	local eventStart = p1.eventStart
-	
-	if eventStart then
-		local ok, status = pcall(DateTime.fromIsoDate, eventStart)
-		var1 = if ok and status ~= nil then status else nil
-	else
-		var1 = nil
-	end
-	if var1 then
-		local robloxLocaleId = localizationService.RobloxLocaleId
+	if v1 then
+		local RobloxLocaleId = LocalizationService.RobloxLocaleId
 		
-		return p2:Format("Feature.VirtualEvents.Label.DateAtTime"):gsub("{date}", var1:FormatLocalTime(if var1:ToLocalTime().Year ~= DateTime.now():ToLocalTime().Year then "ddd, MMM DD" else "ll", robloxLocaleId)):gsub("{time}", var1:FormatLocalTime("LT", robloxLocaleId))
-	end
-	return nil
-end
-
-local eventStatus = experienceEventTypesModule.EventStatus
-
-local function deriveFormattedRelativeTime(p1, p2, p3)
-	-- upvalues: createCurrentTimeSignal (ref), eventStatusCheckIntervalSec (ref), deriveFormattedStartDate (ref)
-	local eventStartTimestamp = p1.eventStartTimestamp
-	local eventEndTimestamp = p1.eventEndTimestamp
-	
-	if not eventStartTimestamp and not eventEndTimestamp then
+		return p2:Format("Feature.VirtualEvents.Label.DateAtTime"):gsub("{date}", (v1:FormatLocalTime(if v1:ToLocalTime().Year == DateTime.now():ToLocalTime().Year then "ddd, MMM DD" else "ll", RobloxLocaleId))):gsub("{time}", (v1:FormatLocalTime("LT", RobloxLocaleId)))
+	else
 		return nil
 	end
-	local var1 = createCurrentTimeSignal(eventStatusCheckIntervalSec)(p2)
+end
+
+local EventStatus = require(script.Parent.ExperienceEventTypes).EventStatus
+
+local function deriveFormattedRelativeTime(p1, p2, p3) --[[ Line: 69 ]]
+	-- upvalues: CreateCurrentTimeSignalFunction (copy), EventStatusCheckIntervalSec (copy), deriveFormattedStartDate (copy)
+	local EventStartTimestamp = p1.eventStartTimestamp
+	local EventEndTimestamp = p1.eventEndTimestamp
 	
-	if eventStartTimestamp and var1 < eventStartTimestamp then
-		local var2 = eventStartTimestamp - var1
+	if not EventStartTimestamp and not EventEndTimestamp then
+		return nil
+	end
+	local v1 = CreateCurrentTimeSignalFunction(EventStatusCheckIntervalSec)(p2)
+	
+	if not EventStartTimestamp or v1 >= EventStartTimestamp then
+		return if EventEndTimestamp and EventEndTimestamp <= v1 then p3:Format("Feature.VirtualEvents.Label.Ended") else p3:Format("Feature.VirtualEvents.Label.HappeningNow")
+	end
+	local EventStartTimestampDelta = EventStartTimestamp - v1
+	
+	if EventStartTimestampDelta >= 604800 then
+		return deriveFormattedStartDate(p1, p3)
+	end
+	local Floored = math.floor(EventStartTimestampDelta / 86400)
+	
+	if Floored >= 2 then
+		return p3:Format("Feature.VirtualEvents.Label.InDays"):gsub("{number}", (tostring(Floored)))
+	elseif Floored == 1 then
+		return p3:Format("Feature.VirtualEvents.Label.StartsInOneDay")
+	else
+		local Floored1 = math.floor(EventStartTimestampDelta / 3600)
 		
-		if var2 >= 604800 then
-			return deriveFormattedStartDate(p1, p3)
-		end
-		local floored = math.floor(var2 / 86400)
-		
-		if floored >= 2 then
-			return p3:Format("Feature.VirtualEvents.Label.InDays"):gsub("{number}", tostring(floored))
-		elseif floored == 1 then
-			return p3:Format("Feature.VirtualEvents.Label.StartsInOneDay")
-		end
-		local floored_1 = math.floor(var2 / 3600)
-		
-		if floored_1 >= 2 then
-			return p3:Format("Feature.VirtualEvents.Label.StartsInHours"):gsub("{number}", tostring(floored_1))
-		elseif floored_1 == 1 then
+		if Floored1 >= 2 then
+			return p3:Format("Feature.VirtualEvents.Label.StartsInHours"):gsub("{number}", (tostring(Floored1)))
+		elseif Floored1 == 1 then
 			return p3:Format("Feature.VirtualEvents.Label.StartsInOneHour")
+		else
+			local Floored2 = math.floor(EventStartTimestampDelta / 60)
+			
+			return if Floored2 >= 2 then p3:Format("Feature.VirtualEvents.Label.StartsInMinutes"):gsub("{number}", (tostring(Floored2))) elseif Floored2 == 1 then p3:Format("Feature.VirtualEvents.Label.StartsInOneMin") else p3:Format("Feature.VirtualEvents.Label.StartsNow")
 		end
-		local floored_2 = math.floor(var2 / 60)
+	end
+end
+
+local function deriveEventStatus(p1, p2) --[[ Line: 122 ]]
+	-- upvalues: EventStatus (copy), CreateCurrentTimeSignalFunction (copy), EventStatusCheckIntervalSec (copy)
+	local EventStartTimestamp = p1.eventStartTimestamp
+	
+	if EventStartTimestamp then
+		local EventEndTimestamp = p1.eventEndTimestamp
+		local v1 = CreateCurrentTimeSignalFunction(EventStatusCheckIntervalSec)(p2)
 		
-		return if floored_2 >= 2 then p3:Format("Feature.VirtualEvents.Label.StartsInMinutes"):gsub("{number}", tostring(floored_2)) elseif floored_2 == 1 then p3:Format("Feature.VirtualEvents.Label.StartsInOneMin") else p3:Format("Feature.VirtualEvents.Label.StartsNow")
+		return if v1 < EventStartTimestamp then if EventStartTimestamp - v1 <= 14400 then EventStatus.UpcomingImminent else EventStatus.Upcoming elseif EventEndTimestamp and EventEndTimestamp <= v1 then EventStatus.Elapsed elseif EventEndTimestamp and EventEndTimestamp - v1 <= 14400 then EventStatus.ElapsedImminent else EventStatus.Ongoing
 	else
-		return if eventEndTimestamp and eventEndTimestamp <= var1 then p3:Format("Feature.VirtualEvents.Label.Ended") else p3:Format("Feature.VirtualEvents.Label.HappeningNow")
+		return EventStatus.Upcoming
 	end
 end
 
-local function deriveEventStatus(p1, p2)
-	-- upvalues: eventStatus (ref), createCurrentTimeSignal (ref), eventStatusCheckIntervalSec (ref)
-	local eventStartTimestamp = p1.eventStartTimestamp
+local _ = function(p1, p2): boolean --[[ Line: 145 | Named "deriveIsActive" ]]
+	-- upvalues: deriveEventStatus (copy), EventStatus (copy)
+	local DeriveEventStatusResult = deriveEventStatus(p1, p2)
 	
-	if not eventStartTimestamp then
-		return eventStatus.Upcoming
-	end
-	local eventEndTimestamp = p1.eventEndTimestamp
-	local var1 = createCurrentTimeSignal(eventStatusCheckIntervalSec)(p2)
-	
-	return if var1 < eventStartTimestamp then if eventStartTimestamp - var1 <= 14400 then eventStatus.UpcomingImminent else eventStatus.Upcoming elseif eventEndTimestamp and eventEndTimestamp <= var1 then eventStatus.Elapsed elseif eventEndTimestamp and eventEndTimestamp - var1 <= 14400 then eventStatus.ElapsedImminent else eventStatus.Ongoing
+	return DeriveEventStatusResult == EventStatus.Ongoing or DeriveEventStatusResult == EventStatus.ElapsedImminent
 end
 
-local _ = function(p1, p2)
-	-- upvalues: deriveEventStatus (ref), eventStatus (ref)
-	local var1 = deriveEventStatus(p1, p2)
+local function deriveShareUrl(p1) --[[ Line: 150 ]]
+	-- upvalues: UrlBuilder (copy)
+	local Id = p1.id
 	
-	return if var1 ~= eventStatus.Ongoing then var1 == eventStatus.ElapsedImminent else true
-end
-
-local function deriveShareUrl(p1)
-	-- upvalues: urlBuilder (ref)
-	local id = p1.id
-	
-	return if id then urlBuilder.virtualevents.appsflyer({ eventId = tostring(id) }) else nil
+	return if Id then UrlBuilder.virtualevents.appsflyer({ eventId = tostring(Id) }) else nil
 end
 
 return {
-	enrichWithTimestamps = enrichWithTimestamps,
-	calculateDerivedField = function(p1, p2, p3, p4)
-		-- upvalues: deriveFormattedStartDate (ref), deriveEventStatus (ref), eventStatus (ref), deriveFormattedRelativeTime (ref), deriveShareUrl (ref)
+	enrichWithTimestamps = function(p1) --[[ Line: 32 ]]
+		local EventStart = p1.eventStart
+		local v1 = nil
+		
+		if EventStart then
+			local Success, Result = pcall(DateTime.fromIsoDate, EventStart)
+			v1 = if Success and Result ~= nil then Result else nil
+		else
+			v1 = nil
+		end
+		local EventEnd = p1.eventEnd
+		local v2 = nil
+		
+		if EventEnd then
+			local Success1, Result1 = pcall(DateTime.fromIsoDate, EventEnd)
+			v2 = if Success1 and Result1 ~= nil then Result1 else nil
+		else
+			v2 = nil
+		end
+		p1.eventStartTimestamp = if v1 then v1.UnixTimestamp else nil
+		p1.eventEndTimestamp = if v2 then v2.UnixTimestamp else nil
+		
+		return p1
+	end,
+	calculateDerivedField = function(p1, p2, p3, p4) --[[ Line: 159 ]]
+		-- upvalues: deriveFormattedStartDate (copy), deriveEventStatus (copy), EventStatus (copy), deriveFormattedRelativeTime (copy), deriveShareUrl (copy)
 		if not p2 then
 			return nil
 		elseif p1 == "formattedStartDate" then
 			return deriveFormattedStartDate(p2, p4)
 		elseif p1 == "eventStatus" then
-			return deriveEventStatus(p2, p3)
+			return (deriveEventStatus(p2, p3))
 		elseif p1 == "isActive" then
-			local var1 = deriveEventStatus(p2, p3)
+			local DeriveEventStatusResult = deriveEventStatus(p2, p3)
 			
-			return if var1 ~= eventStatus.Ongoing then var1 == eventStatus.ElapsedImminent else true
+			return DeriveEventStatusResult == EventStatus.Ongoing or DeriveEventStatusResult == EventStatus.ElapsedImminent
+		else
+			return if p1 == "formattedRelativeTime" then deriveFormattedRelativeTime(p2, p3, p4) elseif p1 == "shareUrl" then deriveShareUrl(p2) else nil
 		end
-		return if p1 == "formattedRelativeTime" then deriveFormattedRelativeTime(p2, p3, p4) elseif p1 == "shareUrl" then deriveShareUrl(p2) else nil
 	end
 }

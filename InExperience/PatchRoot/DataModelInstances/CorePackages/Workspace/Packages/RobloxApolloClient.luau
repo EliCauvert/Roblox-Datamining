@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.RobloxApolloClient.RobloxApolloClient)
+﻿return (require(script.Parent._Workspace.RobloxApolloClient.RobloxApolloClient))

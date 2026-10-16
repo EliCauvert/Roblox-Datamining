@@ -1,17 +1,20 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local reactModule = require(parent.React)
-local reactRobloxModule = require(parent.ReactRoblox)
-local buildEventReceiverModule = require(buildExperience.BuildEventReceiver)
+﻿local CoreGui = game:GetService("CoreGui")
+local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local ReactModule = require(Parent.React)
+local ReactRobloxModule = require(Parent.ReactRoblox)
+local BuildEventReceiverModule = require(BuildExperience.BuildEventReceiver)
 
-return function(p1)
-	-- upvalues: coreGuiService (ref), reactRobloxModule (ref), reactModule (ref), buildEventReceiverModule (ref)
-	local buildEventReceiver = Instance.new("Folder")
-	buildEventReceiver.Name = "BuildEventReceiver"
-	buildEventReceiver.Parent = coreGuiService
-	local var1 = reactRobloxModule.createRoot(buildEventReceiver)
-	var1:render(reactModule.createElement(buildEventReceiverModule, { isInExperience = true, isBuildModeActive = p1 }))
+return function(IsBuildModeActive) --[[ Line: 11 | Named "mountCreatorAgentResumeToastReceiver" ]]
+	-- upvalues: CoreGui (copy), ReactRobloxModule (copy), ReactModule (copy), BuildEventReceiverModule (copy)
+	local BuildEventReceiver = Instance.new("Folder")
+	BuildEventReceiver.Name = "BuildEventReceiver"
+	BuildEventReceiver.Parent = CoreGui
+	local Root = ReactRobloxModule.createRoot(BuildEventReceiver)
+	Root:render(ReactModule.createElement(BuildEventReceiverModule, {
+		isInExperience = true,
+		isBuildModeActive = IsBuildModeActive
+	}))
 	
-	return var1
+	return Root
 end

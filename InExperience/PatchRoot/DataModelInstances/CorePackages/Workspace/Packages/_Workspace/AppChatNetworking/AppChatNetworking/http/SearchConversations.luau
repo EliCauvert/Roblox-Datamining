@@ -1,23 +1,23 @@
-﻿local httpService = game:GetService("HttpService")
-local appChatNetworking = script:FindFirstAncestor("AppChatNetworking")
-local parent = appChatNetworking.Parent
-local CHAT_PLATFORM_BASE_URLModule = require(appChatNetworking.url.CHAT_PLATFORM_BASE_URL)
-local default = require(appChatNetworking.url.HttpRequest).default
-local getFFlagIsSquadEnabled = require(parent.SharedFlags).GetFFlagIsSquadEnabled
-local getFFlagEnableSocialCards = require(parent.SharedFlags).GetFFlagEnableSocialCards
+﻿local HttpService = game:GetService("HttpService")
+local AppChatNetworking = script:FindFirstAncestor("AppChatNetworking")
+local Parent = AppChatNetworking.Parent
+local CHATPLATFORMBASEURLModule = require(AppChatNetworking.url.CHAT_PLATFORM_BASE_URL)
+local Default = require(AppChatNetworking.url.HttpRequest).default
+local GetFFlagIsSquadEnabledFunction = require(Parent.SharedFlags).GetFFlagIsSquadEnabled
+local GetFFlagEnableSocialCardsFunction = require(Parent.SharedFlags).GetFFlagEnableSocialCards
 
-return function(p1, p2, p3, p4)
-	-- upvalues: default (ref), httpService (ref), getFFlagEnableSocialCards (ref), getFFlagIsSquadEnabled (ref), CHAT_PLATFORM_BASE_URLModule (ref)
-	return (p1 or default)(`{CHAT_PLATFORM_BASE_URLModule}/v1/search-conversations`, "POST", {
-		postBody = httpService:JSONEncode({
+return function(p1, Query, p2, Limit) --[[ Line: 13 ]]
+	-- upvalues: Default (copy), HttpService (copy), GetFFlagEnableSocialCardsFunction (copy), GetFFlagIsSquadEnabledFunction (copy), CHATPLATFORMBASEURLModule (copy)
+	return (p1 or Default)(`{CHATPLATFORMBASEURLModule}/v1/search-conversations`, "POST", {
+		postBody = HttpService:JSONEncode({
 			include_user_data = true,
 			include_participants = true,
 			include_messages = true,
-			query = p2,
-			limit = p4,
-			cursor = if p3 == nil or p3 == "" then nil else p3,
-			include_cards = if getFFlagEnableSocialCards() then true else false,
-			check_for_group_up = if getFFlagIsSquadEnabled() then true else false
+			query = Query,
+			limit = Limit,
+			cursor = if p2 == nil or p2 == "" then nil else p2,
+			include_cards = if GetFFlagEnableSocialCardsFunction() then true else false,
+			check_for_group_up = if GetFFlagIsSquadEnabledFunction() then true else false
 		})
 	})
 end

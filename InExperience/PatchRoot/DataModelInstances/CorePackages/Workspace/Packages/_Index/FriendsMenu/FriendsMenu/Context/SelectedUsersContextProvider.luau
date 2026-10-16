@@ -1,68 +1,74 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent.Parent
-local selectedUsersContextModule = require(parent.SelectedUsersContext)
-local reactModule = require(parent_1.React)
-local cryoModule = require(parent_1.Cryo)
-local userProfilesModule = require(parent_1.UserProfiles)
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent.Parent
+local SelectedUsersContextModule = require(Parent.SelectedUsersContext)
+local ReactModule = require(Parent1.React)
+local CryoModule = require(Parent1.Cryo)
+local UserProfilesModule = require(Parent1.UserProfiles)
 
-return function(p1)
-	-- upvalues: userProfilesModule (ref), reactModule (ref), cryoModule (ref), selectedUsersContextModule (ref)
-	local var1 = userProfilesModule.Hooks.useUserProfilesFetch({
+return function(p1) --[[ Line: 19 ]]
+	-- upvalues: UserProfilesModule (copy), ReactModule (copy), CryoModule (copy), SelectedUsersContextModule (copy)
+	local UseUserProfilesFetchResult = UserProfilesModule.Hooks.useUserProfilesFetch({
 		userIds = p1.preselectedUsers or {},
-		query = userProfilesModule.Queries.userProfilesCombinedNameByUserIds
+		query = UserProfilesModule.Queries.userProfilesCombinedNameByUserIds
 	})
-	local var2 = reactModule.useRef(if p1.preselectedUsers then #p1.preselectedUsers else 0)
-	local var3, var4 = reactModule.useState(if p1.preselectedUsers then reactModule.useCallback(function(p2)
-		-- upvalues: var1 (ref), userProfilesModule (copy), p1 (ref)
+	local UseResult = ReactModule.useCallback(function(List) --[[ Line: 25 ]]
+		-- upvalues: UseUserProfilesFetchResult (copy), UserProfilesModule (upval), p1 (copy)
 		local t = {}
-		local var5 = ""
+		local CombinedNameFromId = ""
 		
-		for i, v in pairs(p2) do
-			if var1.data then
-				var5 = userProfilesModule.Selectors.getCombinedNameFromId(var1.data, v)
+		for _, value in pairs(List) do
+			if UseUserProfilesFetchResult.data then
+				CombinedNameFromId = UserProfilesModule.Selectors.getCombinedNameFromId(UseUserProfilesFetchResult.data, value)
 			end
-			t[v] = {
-				displayName = var5,
+			t[value] = {
+				displayName = CombinedNameFromId,
 				layoutOrder = #t + 1,
 				unremovable = p1.preselectedUsersUnremovable
 			}
 		end
 		return t
-	end, nil)(p1.preselectedUsers) else {})
-	local var6, var7 = reactModule.useState(if p1.preselectedUsers then #p1.preselectedUsers else 0)
-	local var8 = reactModule.useCallback(function(p3, p4)
-		-- upvalues: p1 (ref), var6 (ref), var4 (ref), cryoModule (copy), var3 (ref), var2 (ref), var7 (ref)
-		if p1.selectionLimit == nil or var6 < p1.selectionLimit then
-			var4(cryoModule.Dictionary.join(var3, { [p3] = { displayName = p4, layoutOrder = var2.current } }))
-			var2.current += 1
-			var7(var6 + 1)
+	end, nil)
+	local UseRefResult = ReactModule.useRef(if p1.preselectedUsers then #p1.preselectedUsers else 0)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(if p1.preselectedUsers then UseResult(p1.preselectedUsers) else {})
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(if p1.preselectedUsers then #p1.preselectedUsers else 0)
+	local UseResult1 = ReactModule.useCallback(function(p2, DisplayName) --[[ Line: 49 ]]
+		-- upvalues: p1 (copy), UseStateResult1 (copy), UseStateResult2 (copy), CryoModule (upval), UseStateResult (copy), UseRefResult (copy), UseStateResult2_1 (copy)
+		if p1.selectionLimit == nil or UseStateResult1 < p1.selectionLimit then
+			UseStateResult2(CryoModule.Dictionary.join(UseStateResult, {
+				[p2] = {
+					displayName = DisplayName,
+					layoutOrder = UseRefResult.current
+				}
+			}))
+			UseRefResult.current += 1
+			UseStateResult2_1(UseStateResult1 + 1)
 		end
-	end, { var3 })
-	local var9 = reactModule.useCallback(function(p3, p4)
-		-- upvalues: var4 (ref), cryoModule (copy), var3 (ref), var7 (ref), var6 (ref), p1 (ref)
-		var4(cryoModule.Dictionary.join(var3, { [p3] = cryoModule.None }))
-		var7(var6 - 1)
+	end, { UseStateResult })
+	local UseResult11 = ReactModule.useCallback(function(p2, p3) --[[ Line: 63 ]]
+		-- upvalues: UseStateResult2 (copy), CryoModule (upval), UseStateResult (copy), UseStateResult2_1 (copy), UseStateResult1 (copy), p1 (copy)
+		UseStateResult2(CryoModule.Dictionary.join(UseStateResult, { [p2] = CryoModule.None }))
+		UseStateResult2_1(UseStateResult1 - 1)
 		
 		if p1.onRemoveCallback then
-			p1.onRemoveCallback(p3, p4)
+			p1.onRemoveCallback(p2, p3)
 		end
-	end, { var3 })
-	local var10 = reactModule.useCallback(function(p3)
-		-- upvalues: var3 (ref)
-		return var3[p3] ~= nil
-	end, { var3 })
+	end, { UseStateResult })
+	local UseResult2 = ReactModule.useCallback(function(p2): boolean --[[ Line: 71 ]]
+		-- upvalues: UseStateResult (copy)
+		return UseStateResult[p2] ~= nil
+	end, { UseStateResult })
 	
-	return reactModule.createElement(selectedUsersContextModule.Provider, {
-		value = reactModule.useMemo(function()
-			-- upvalues: var6 (ref), var3 (ref), var8 (ref), var9 (ref), var10 (ref), p1 (ref)
+	return ReactModule.createElement(SelectedUsersContextModule.Provider, {
+		value = ReactModule.useMemo(function() --[[ Line: 76 ]]
+			-- upvalues: UseStateResult1 (copy), UseStateResult (copy), UseResult1 (copy), UseResult11 (copy), UseResult2 (copy), p1 (copy)
 			return {
-				selectedFriendsSize = var6,
-				selectedFriends = var3,
-				addFriend = var8,
-				removeFriend = var9,
-				isFriendSelected = var10,
+				selectedFriendsSize = UseStateResult1,
+				selectedFriends = UseStateResult,
+				addFriend = UseResult1,
+				removeFriend = UseResult11,
+				isFriendSelected = UseResult2,
 				preselectedUsers = p1.preselectedUsers
 			}
-		end, { var3, var8, var9, var10 })
+		end, { UseStateResult, UseResult1, UseResult11, UseResult2 })
 	}, p1.children)
 end

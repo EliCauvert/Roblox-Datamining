@@ -1,6 +1,6 @@
-﻿local playersService = game:GetService("Players")
-local chatConstantsModule = require(script.Parent:WaitForChild("ChatConstants"))
-local t = {
+﻿local Players = game:GetService("Players")
+local ChatConstantsModule = require(script.Parent:WaitForChild("ChatConstants"))
+local config = {
 	WindowDraggable = false,
 	WindowResizable = false,
 	ShowChannelsBar = false,
@@ -10,8 +10,8 @@ local t = {
 	ChatOnWithTopBarOff = false,
 	ScreenGuiDisplayOrder = 6,
 	ShowFriendJoinNotification = true,
-	BubbleChatEnabled = playersService.BubbleChat,
-	ClassicChatEnabled = playersService.ClassicChat,
+	BubbleChatEnabled = Players.BubbleChat,
+	ClassicChatEnabled = Players.ClassicChat,
 	ChatWindowTextSize = 18,
 	ChatChannelsTabTextSize = 18,
 	ChatBarTextSize = 18,
@@ -27,7 +27,7 @@ local t = {
 	ChatBarBoxColor = Color3.new(1, 1, 1),
 	ChatBarTextColor = Color3.new(0, 0, 0),
 	ChannelsTabUnselectedColor = Color3.new(0, 0, 0),
-	ChannelsTabSelectedColor = Color3.new(0.117647058824, 0.117647058824, 0.117647058824),
+	ChannelsTabSelectedColor = Color3.new(0.11764705882352941, 0.11764705882352941, 0.11764705882352941),
 	DefaultChannelNameColor = Color3.fromRGB(35, 76, 142),
 	WhisperChannelNameColor = Color3.fromRGB(102, 14, 102),
 	ErrorMessageTextColor = Color3.fromRGB(245, 50, 50),
@@ -61,25 +61,25 @@ local t = {
 	ClickOnPlayerNameToWhisper = true,
 	ClickOnChannelNameToSetMainChannel = true,
 	BubbleChatMessageTypes = {
-		chatConstantsModule.MessageTypeDefault,
-		chatConstantsModule.MessageTypeWhisper
+		ChatConstantsModule.MessageTypeDefault,
+		ChatConstantsModule.MessageTypeWhisper
 	},
 	WhisperCommandAutoCompletePlayerNames = true,
 	PlayerDisplayNamesEnabled = true,
 	WhisperByDisplayName = true
 }
-local bindableEvent = Instance.new("BindableEvent")
-local tbl = setmetatable({}, {
-	__index = function(_, p1)
-		-- upvalues: t (ref)
-		return t[p1]
+local BindableEvent = Instance.new("BindableEvent")
+local self = setmetatable({}, {
+	__index = function(_, p1) --[[ Line: 107 ]]
+		-- upvalues: config (copy)
+		return config[p1]
 	end,
-	__newindex = function(_, p1, p2)
-		-- upvalues: t (ref), bindableEvent (ref)
-		t[p1] = p2
-		bindableEvent:Fire(p1, p2)
+	__newindex = function(_, Key, p1) --[[ Line: 110 ]]
+		-- upvalues: config (copy), BindableEvent (copy)
+		config[Key] = p1
+		BindableEvent:Fire(Key, p1)
 	end
 })
-rawset(tbl, "SettingsChanged", bindableEvent.Event)
+rawset(self, "SettingsChanged", BindableEvent.Event)
 
-return tbl
+return self

@@ -1,70 +1,70 @@
-﻿local editProfile = script:FindFirstAncestor("EditProfile")
-local httpService = game:GetService("HttpService")
-local parent = editProfile.Parent
-local reactModule = require(parent.React)
-local roactNavigationModule = require(parent.RoactNavigation)
-local javascriptHybrid = require(editProfile.Common.Constants).JavascriptHybrid
-local urlBuilder = require(parent.UrlBuilder).UrlBuilder
-local userProfilesModule = require(parent.UserProfiles)
-local useLocalUserId = require(parent.RobloxAppHooks).useLocalUserId
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local textKeysModule = require(editProfile.Common.TextKeys)
-local analyticsModule = require(editProfile.Analytics)
-local eventNames = analyticsModule.EventNames
-local useAnalytics = analyticsModule.useAnalytics
+﻿local EditProfile = script:FindFirstAncestor("EditProfile")
+local HttpService = game:GetService("HttpService")
+local Parent = EditProfile.Parent
+local FFlagUserProfilePlatformProfile = require(Parent.SharedFlags).FFlagUserProfilePlatformProfile
+local ReactModule = require(Parent.React)
+local JavascriptHybrid = require(EditProfile.Common.Constants).JavascriptHybrid
+local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
+local UserProfilesModule = require(Parent.UserProfiles)
+local UseLocalUserIdFunction = require(Parent.RobloxAppHooks).useLocalUserId
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local TextKeysModule = require(EditProfile.Common.TextKeys)
+local AnalyticsModule = require(EditProfile.Analytics)
+local EventNames = AnalyticsModule.EventNames
+local UseAnalyticsFunction = AnalyticsModule.useAnalytics
 
-return roactNavigationModule.withNavigation(function(p1)
-	-- upvalues: useLocalUserId (ref), userProfilesModule (ref), useLocalization (ref), textKeysModule (ref), useAnalytics (ref), javascriptHybrid (ref), eventNames (ref), reactModule (ref), urlBuilder (ref), httpService (ref)
-	local var1 = userProfilesModule.Hooks.useUserProfilesFetch({
-		userIds = { useLocalUserId() },
-		query = userProfilesModule.Queries.userProfilesAllNamesByUserIds
+return require(Parent.RoactNavigation).withNavigation(function(p1) --[[ Line: 30 | Named "EditUsernameWrapper" ]]
+	-- upvalues: UseLocalUserIdFunction (copy), UserProfilesModule (copy), FFlagUserProfilePlatformProfile (copy), UseLocalizationFunction (copy), TextKeysModule (copy), UseAnalyticsFunction (copy), JavascriptHybrid (copy), EventNames (copy), ReactModule (copy), UrlBuilder (copy), HttpService (copy)
+	local UseUserProfilesFetchResult = UserProfilesModule.Hooks.useUserProfilesFetch({
+		userIds = { (UseLocalUserIdFunction()) },
+		query = if FFlagUserProfilePlatformProfile then UserProfilesModule.Queries.userProfilesBasicNamesByUserIds else UserProfilesModule.Queries.userProfilesAllNamesByUserIds
 	})
-	local var2 = useLocalization({ updated = textKeysModule.UsernameUpdated })
-	local var3 = useAnalytics()
+	local UseLocalizationResult = UseLocalizationFunction({ updated = TextKeysModule.UsernameUpdated })
+	local UseAnalyticsResult = UseAnalyticsFunction()
 	
-	local function _(p2)
-		-- upvalues: javascriptHybrid (copy)
-		return if p2.moduleID == javascriptHybrid.Module.Navigation and p2.functionName == javascriptHybrid.Function.navigateToFeature and (p2.params and p2.params.params) then p2.params.params.feature else nil
+	local function _(p2) --[[ Line: 44 | Named "getFeatureStringFromHybridEvent" ]]
+		-- upvalues: JavascriptHybrid (upval)
+		return if p2.moduleID == JavascriptHybrid.Module.Navigation and p2.functionName == JavascriptHybrid.Function.navigateToFeature and p2.params and p2.params.params then p2.params.params.feature else nil
 	end
 	
-	local _ = function(p2)
-		-- upvalues: javascriptHybrid (copy)
-		return (if p2.moduleID == javascriptHybrid.Module.Navigation and p2.functionName == javascriptHybrid.Function.navigateToFeature and (p2.params and p2.params.params) then p2.params.params.feature else nil) == javascriptHybrid.Feature.CloseUpdateUsernameModal
+	local _ = function(p2): boolean --[[ Line: 69 | Named "isCloseEditUsername" ]]
+		-- upvalues: JavascriptHybrid (upval)
+		return (if p2.moduleID == JavascriptHybrid.Module.Navigation and p2.functionName == JavascriptHybrid.Function.navigateToFeature and p2.params and p2.params.params then p2.params.params.feature else nil) == JavascriptHybrid.Feature.CloseUpdateUsernameModal
 	end
 	
-	local _ = function(p2)
-		-- upvalues: javascriptHybrid (copy)
-		return (if p2.moduleID == javascriptHybrid.Module.Navigation and p2.functionName == javascriptHybrid.Function.navigateToFeature and (p2.params and p2.params.params) then p2.params.params.feature else nil) == javascriptHybrid.Feature.UpdateUsernameModalSuccess
+	local _ = function(p2): boolean --[[ Line: 74 | Named "isCompletedEditUsername" ]]
+		-- upvalues: JavascriptHybrid (upval)
+		return (if p2.moduleID == JavascriptHybrid.Module.Navigation and p2.functionName == JavascriptHybrid.Function.navigateToFeature and p2.params and p2.params.params then p2.params.params.feature else nil) == JavascriptHybrid.Feature.UpdateUsernameModalSuccess
 	end
 	
-	local _ = function()
-		-- upvalues: var1 (ref), var3 (ref), eventNames (copy)
-		var1.refetch()
-		var3.fireAnalyticsEvent(eventNames.UsernameSaved)
+	local _ = function() --[[ Line: 79 | Named "updateUsername" ]]
+		-- upvalues: UseUserProfilesFetchResult (copy), UseAnalyticsResult (copy), EventNames (upval)
+		UseUserProfilesFetchResult.refetch()
+		UseAnalyticsResult.fireAnalyticsEvent(EventNames.UsernameSaved)
 	end
 	
-	return reactModule.createElement(p1.BrowserWrapperComponent, {
+	return ReactModule.createElement(p1.BrowserWrapperComponent, {
 		isVisible = true,
 		webViewVisible = true,
 		modal = false,
 		isGenericWebview = true,
-		url = urlBuilder.static.settings.account() .. "?changeusername",
-		javaScriptCallback = function(p2)
-			-- upvalues: httpService (copy), javascriptHybrid (copy), var1 (ref), var3 (ref), eventNames (copy), p1 (ref), var2 (ref)
-			local var4 = httpService:JSONDecode(p2)
+		url = UrlBuilder.static.settings.account() .. "?changeusername",
+		javaScriptCallback = function(Input) --[[ Line: 91 ]]
+			-- upvalues: HttpService (upval), JavascriptHybrid (upval), UseUserProfilesFetchResult (copy), UseAnalyticsResult (copy), EventNames (upval), p1 (copy), UseLocalizationResult (copy)
+			local Data = HttpService:JSONDecode(Input)
 			
-			if (if var4.moduleID == javascriptHybrid.Module.Navigation and var4.functionName == javascriptHybrid.Function.navigateToFeature and (var4.params and var4.params.params) then var4.params.params.feature else nil) == javascriptHybrid.Feature.UpdateUsernameModalSuccess then
-				var1.refetch()
-				var3.fireAnalyticsEvent(eventNames.UsernameSaved)
+			if (if Data.moduleID == JavascriptHybrid.Module.Navigation and Data.functionName == JavascriptHybrid.Function.navigateToFeature and Data.params and Data.params.params then Data.params.params.feature else nil) == JavascriptHybrid.Feature.UpdateUsernameModalSuccess then
+				UseUserProfilesFetchResult.refetch()
+				UseAnalyticsResult.fireAnalyticsEvent(EventNames.UsernameSaved)
 				
 				if p1.onUsernameChanged then
 					p1.onUsernameChanged()
 				end
 				p1.navigation.goBack()
-				p1.showToast(var2.updated)
+				p1.showToast(UseLocalizationResult.updated)
 				
 				return
-			elseif (if var4.moduleID == javascriptHybrid.Module.Navigation and var4.functionName == javascriptHybrid.Function.navigateToFeature and (var4.params and var4.params.params) then var4.params.params.feature else nil) == javascriptHybrid.Feature.CloseUpdateUsernameModal then
+			elseif (if Data.moduleID == JavascriptHybrid.Module.Navigation and Data.functionName == JavascriptHybrid.Function.navigateToFeature and Data.params and Data.params.params then Data.params.params.feature else nil) == JavascriptHybrid.Feature.CloseUpdateUsernameModal then
 				p1.navigation.goBack()
 			end
 		end

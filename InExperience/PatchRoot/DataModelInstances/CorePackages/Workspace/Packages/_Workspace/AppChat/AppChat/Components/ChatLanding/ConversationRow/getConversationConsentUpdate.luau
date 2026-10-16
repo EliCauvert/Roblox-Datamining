@@ -1,18 +1,18 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local constantsModule = require(appChat.Constants)
-local conversationChannelsModule = require(appChat.Models.ConversationChannels)
-local t = {
-	[constantsModule.OptInVariant.OsaContextCard] = {
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local ConstantsModule = require(AppChat.Constants)
+local ConversationChannelsModule = require(AppChat.Models.ConversationChannels)
+local config = {
+	[ConstantsModule.OptInVariant.OsaContextCard] = {
 		field = "osaAcknowledgementStatus",
-		value = conversationChannelsModule.OsaAcknowledgementStatus.Acknowledged
+		value = ConversationChannelsModule.OsaAcknowledgementStatus.Acknowledged
 	},
-	[constantsModule.OptInVariant.ChatOptInInfoCard] = {
+	[ConstantsModule.OptInVariant.ChatOptInInfoCard] = {
 		field = "userOptedIntoChatMessages",
-		value = conversationChannelsModule.UserOptedIntoChatMessagesStatus.OptedIn
+		value = ConversationChannelsModule.UserOptedIntoChatMessagesStatus.OptedIn
 	}
 }
 
-return function(p1)
-	-- upvalues: t (ref)
-	return if p1 == nil then nil else t[p1]
+return function(p1) --[[ Line: 29 ]]
+	-- upvalues: config (copy)
+	return if p1 == nil then nil else config[p1]
 end

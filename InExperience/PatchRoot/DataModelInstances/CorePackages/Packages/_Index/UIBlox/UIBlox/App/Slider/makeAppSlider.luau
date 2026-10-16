@@ -1,195 +1,189 @@
-﻿local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local parent_2 = parent_1.Parent
-local roactModule = require(parent_2.Roact)
-local otterModule = require(parent_2.Otter)
-local colorsModule = require(parent.Style.Colors)
-local genericSliderModule = require(parent_1.Core.Slider.GenericSlider)
-local imagesModule = require(parent.ImageSet.Images)
-local t = { frequency = 5 }
-local divideTransparencyModule = require(parent_1.Utility.divideTransparency)
-local lerpModule = require(parent_1.Utility.lerp)
+﻿local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local Parent2 = Parent1.Parent
+local RoactModule = require(Parent2.Roact)
+local OtterModule = require(Parent2.Otter)
+local ColorsModule = require(Parent.Style.Colors)
+local GenericSliderModule = require(Parent1.Core.Slider.GenericSlider)
+local ImagesModule = require(Parent.ImageSet.Images)
+local config = { frequency = 5 }
+local DivideTransparencyModule = require(Parent1.Utility.divideTransparency)
+local LerpModule = require(Parent1.Utility.lerp)
 
-return function(p1, p2)
-	-- upvalues: roactModule (ref), divideTransparencyModule (ref), colorsModule (ref), lerpModule (ref), otterModule (ref), t (ref), imagesModule (ref), genericSliderModule (ref)
-	local var1 = roactModule.PureComponent:extend("AppSliderFor" .. p0)
-	var1.defaultProps = {
+return function(Text, p1) --[[ Line: 21 | Named "makeAppSlider" ]]
+	-- upvalues: RoactModule (copy), DivideTransparencyModule (copy), ColorsModule (copy), LerpModule (copy), OtterModule (copy), config (copy), ImagesModule (copy), GenericSliderModule (copy)
+	local ExtendResult = RoactModule.PureComponent:extend("AppSliderFor" .. Text)
+	ExtendResult.defaultProps = {
 		textInputEnabled = false,
 		stepInterval = 1,
 		customPressedKnobShadowTransparencyLower = 1,
 		width = UDim.new(1, 0)
 	}
 	
-	function var8.init(p3)
-		-- upvalues: roactModule (copy), divideTransparencyModule (copy), p1 (ref), colorsModule (copy), lerpModule (copy), otterModule (copy), t (copy)
-		local _ = nil
-		local _ = nil
-		local var2, var3 = roactModule.createBinding(0)
-		p3.pressedProgressLower = var2
-		local var4, var5 = roactModule.createBinding(0)
-		p3.pressedProgressUpper = var4
-		local var6, var7 = roactModule.createBinding(p3.props.isDisabled)
-		p3.disabled = var6
-		p3.setDisabled = var7
-		local var8, var9 = roactModule.createBinding(p3.props.style)
-		p3.style = var8
-		p3.setStyle = var9
-		p3.wasUnmounted = false
-		local var10 = roactModule.joinBindings({
-			disabled = p3.disabled,
-			pressedProgressLower = p3.pressedProgressLower,
-			pressedProgressUpper = p3.pressedProgressUpper,
-			style = p3.style
+	function ExtendResult.init(p2) --[[ Line: 32 ]]
+		-- upvalues: RoactModule (upval), DivideTransparencyModule (upval), Text (copy), ColorsModule (upval), LerpModule (upval), OtterModule (upval), config (upval)
+		local Binding2
+		p2.pressedProgressLower, Binding2 = RoactModule.createBinding(0)
+		local Binding2_1
+		p2.pressedProgressUpper, Binding2_1 = RoactModule.createBinding(0)
+		p2.disabled, p2.setDisabled = RoactModule.createBinding(p2.props.isDisabled)
+		p2.style, p2.setStyle = RoactModule.createBinding(p2.props.style)
+		p2.wasUnmounted = false
+		local JoinBindingsResult = RoactModule.joinBindings({
+			disabled = p2.disabled,
+			pressedProgressLower = p2.pressedProgressLower,
+			pressedProgressUpper = p2.pressedProgressUpper,
+			style = p2.style
 		})
-		p3.trackColor = var10:map(function(p4)
-			return p4.style.Theme.UIMuted.Color
+		p2.trackColor = JoinBindingsResult:map(function(p3) --[[ Line: 48 ]]
+			return p3.style.Theme.UIMuted.Color
 		end)
-		p3.trackTransparency = var10:map(function(p4)
-			-- upvalues: divideTransparencyModule (copy)
-			return divideTransparencyModule(p4.style.Theme.UIMuted.Transparency, if p4.disabled then 2 else 1)
+		p2.trackTransparency = JoinBindingsResult:map(function(p3) --[[ Line: 52 ]]
+			-- upvalues: DivideTransparencyModule (upval)
+			return DivideTransparencyModule(p3.style.Theme.UIMuted.Transparency, if p3.disabled then 2 else 1)
 		end)
-		p3.trackFillColor = var10:map(function(p4)
-			-- upvalues: p1 (copy)
-			return p4.style.Theme[p1].Color
+		p2.trackFillColor = JoinBindingsResult:map(function(p3) --[[ Line: 56 ]]
+			-- upvalues: Text (upval)
+			return p3.style.Theme[Text].Color
 		end)
-		p3.trackFillTransparency = var10:map(function(p4)
-			-- upvalues: divideTransparencyModule (copy), p1 (copy)
-			return divideTransparencyModule(p4.style.Theme[p1].Transparency, if p4.disabled then 2 else 1)
+		p2.trackFillTransparency = JoinBindingsResult:map(function(p3) --[[ Line: 60 ]]
+			-- upvalues: DivideTransparencyModule (upval), Text (upval)
+			return DivideTransparencyModule(p3.style.Theme[Text].Transparency, if p3.disabled then 2 else 1)
 		end)
-		p3.knobColorLower = var10:map(function(p4)
-			-- upvalues: colorsModule (copy), p1 (copy)
-			return if p4.disabled then colorsModule.Pumice else Color3.new(1, 1, 1):lerp(if p1 ~= "SystemPrimaryDefault" then p4.style.Theme[p1].Color else colorsModule.Pumice, p4.pressedProgressLower)
+		p2.knobColorLower = JoinBindingsResult:map(function(p3) --[[ Line: 64 ]]
+			-- upvalues: ColorsModule (upval), Text (upval)
+			return if p3.disabled then ColorsModule.Pumice else Color3.new(1, 1, 1):lerp(if Text == "SystemPrimaryDefault" then ColorsModule.Pumice else p3.style.Theme[Text].Color, p3.pressedProgressLower)
 		end)
-		p3.knobColorUpper = var10:map(function(p4)
-			-- upvalues: colorsModule (copy), p1 (copy)
-			return if p4.disabled then colorsModule.Pumice else Color3.new(1, 1, 1):lerp(if p1 ~= "SystemPrimaryDefault" then p4.style.Theme[p1].Color else colorsModule.Pumice, p4.pressedProgressUpper)
+		p2.knobColorUpper = JoinBindingsResult:map(function(p3) --[[ Line: 79 ]]
+			-- upvalues: ColorsModule (upval), Text (upval)
+			return if p3.disabled then ColorsModule.Pumice else Color3.new(1, 1, 1):lerp(if Text == "SystemPrimaryDefault" then ColorsModule.Pumice else p3.style.Theme[Text].Color, p3.pressedProgressUpper)
 		end)
-		p3.knobTransparency = var10:map(function(p4)
-			-- upvalues: divideTransparencyModule (copy), p1 (copy)
-			return divideTransparencyModule(p4.style.Theme[p1].Transparency, if p4.disabled then 2 else 1)
+		p2.knobTransparency = JoinBindingsResult:map(function(p3) --[[ Line: 94 ]]
+			-- upvalues: DivideTransparencyModule (upval), Text (upval)
+			return DivideTransparencyModule(p3.style.Theme[Text].Transparency, if p3.disabled then 2 else 1)
 		end)
-		p3.knobShadowTransparencyLower = var10:map(function(p4)
-			-- upvalues: p3 (ref), lerpModule (copy)
-			return if p4.disabled then 1 else lerpModule(p4.style.Theme.DropShadow.Transparency, p3.props.customPressedKnobShadowTransparencyLower, p4.pressedProgressLower)
+		p2.knobShadowTransparencyLower = JoinBindingsResult:map(function(p3) --[[ Line: 98 ]]
+			-- upvalues: p2 (copy), LerpModule (upval)
+			return if p3.disabled then 1 else LerpModule(p3.style.Theme.DropShadow.Transparency, p2.props.customPressedKnobShadowTransparencyLower, p3.pressedProgressLower)
 		end)
-		p3.knobShadowTransparencyUpper = var10:map(function(p4)
-			-- upvalues: lerpModule (copy)
-			return if p4.disabled then 1 else lerpModule(p4.style.Theme.DropShadow.Transparency, 1, p4.pressedProgressUpper)
+		p2.knobShadowTransparencyUpper = JoinBindingsResult:map(function(p3) --[[ Line: 107 ]]
+			-- upvalues: LerpModule (upval)
+			return if p3.disabled then 1 else LerpModule(p3.style.Theme.DropShadow.Transparency, 1, p3.pressedProgressUpper)
 		end)
-		p3.pressedMotorLower = otterModule.createSingleMotor(0)
-		p3.pressedMotorLower:onStep(var3)
-		p3.pressedMotorUpper = otterModule.createSingleMotor(0)
-		p3.pressedMotorUpper:onStep(var5)
+		p2.pressedMotorLower = OtterModule.createSingleMotor(0)
+		p2.pressedMotorLower:onStep(Binding2)
+		p2.pressedMotorUpper = OtterModule.createSingleMotor(0)
+		p2.pressedMotorUpper:onStep(Binding2_1)
 		
-		function p2.onDragStartLower()
-			-- upvalues: p3 (ref), otterModule (copy), t (copy)
-			if p3.props.onDragStartLower then
-				p3.props.onDragStartLower()
+		function p2.onDragStartLower() --[[ Line: 121 ]]
+			-- upvalues: p2 (copy), OtterModule (upval), config (upval)
+			if p2.props.onDragStartLower then
+				p2.props.onDragStartLower()
 			end
-			if not p3.wasUnmounted then
-				p3.pressedMotorLower:setGoal(otterModule.spring(1, t))
+			if not p2.wasUnmounted then
+				p2.pressedMotorLower:setGoal(OtterModule.spring(1, config))
 			end
 		end
 		
-		function p2.onDragStartUpper()
-			-- upvalues: p3 (ref), otterModule (copy), t (copy)
-			if p3.props.onDragStartUpper then
-				p3.props.onDragStartUpper()
+		function p2.onDragStartUpper() --[[ Line: 131 ]]
+			-- upvalues: p2 (copy), OtterModule (upval), config (upval)
+			if p2.props.onDragStartUpper then
+				p2.props.onDragStartUpper()
 			end
-			if not p3.wasUnmounted then
-				p3.pressedMotorUpper:setGoal(otterModule.spring(1, t))
+			if not p2.wasUnmounted then
+				p2.pressedMotorUpper:setGoal(OtterModule.spring(1, config))
 			end
 		end
 		
-		function p2.onDragEnd()
-			-- upvalues: p3 (ref), otterModule (copy), t (copy)
-			if p3.props.onDragEnd then
-				p3.props.onDragEnd()
+		function p2.onDragEnd() --[[ Line: 141 ]]
+			-- upvalues: p2 (copy), OtterModule (upval), config (upval)
+			if p2.props.onDragEnd then
+				p2.props.onDragEnd()
 			end
-			if not p3.wasUnmounted then
-				p3.pressedMotorLower:setGoal(otterModule.spring(0, t))
-				p3.pressedMotorUpper:setGoal(otterModule.spring(0, t))
+			if not p2.wasUnmounted then
+				p2.pressedMotorLower:setGoal(OtterModule.spring(0, config))
+				p2.pressedMotorUpper:setGoal(OtterModule.spring(0, config))
 			end
 		end
 	end
 	
-	function var8.render(p3)
-		-- upvalues: imagesModule (copy), roactModule (copy), p2 (ref), genericSliderModule (copy)
-		local props = p3.props
-		local t = {
-			min = props.min,
-			max = props.max,
-			stepInterval = props.stepInterval,
-			isDisabled = props.isDisabled,
-			width = props.width,
-			position = props.position,
-			anchorPoint = props.anchorPoint,
-			layoutOrder = props.layoutOrder,
-			onValueChanged = props.onValueChanged,
-			onDragStartLower = p3.onDragStartLower,
-			onDragStartUpper = p3.onDragStartUpper,
-			onDragEnd = p3.onDragEnd,
-			trackImage = imagesModule["component_assets/circle_16"],
-			trackColor = p3.trackColor,
-			trackTransparency = p3.trackTransparency,
+	function ExtendResult.render(p2) --[[ Line: 153 ]]
+		-- upvalues: ImagesModule (upval), RoactModule (upval), p1 (copy), GenericSliderModule (upval)
+		local Props = p2.props
+		local config = {
+			min = Props.min,
+			max = Props.max,
+			stepInterval = Props.stepInterval,
+			isDisabled = Props.isDisabled,
+			width = Props.width,
+			position = Props.position,
+			anchorPoint = Props.anchorPoint,
+			layoutOrder = Props.layoutOrder,
+			onValueChanged = Props.onValueChanged,
+			onDragStartLower = p2.onDragStartLower,
+			onDragStartUpper = p2.onDragStartUpper,
+			onDragEnd = p2.onDragEnd,
+			trackImage = ImagesModule["component_assets/circle_16"],
+			trackColor = p2.trackColor,
+			trackTransparency = p2.trackTransparency,
 			trackSliceCenter = Rect.new(8, 8, 8, 8),
-			trackFillImage = imagesModule["component_assets/circle_16"],
-			trackFillColor = p3.trackFillColor,
-			trackFillTransparency = p3.trackFillTransparency,
+			trackFillImage = ImagesModule["component_assets/circle_16"],
+			trackFillColor = p2.trackFillColor,
+			trackFillTransparency = p2.trackFillTransparency,
 			trackFillSliceCenter = Rect.new(8, 8, 8, 8),
-			knobImage = imagesModule["component_assets/circle_28_padding_10"],
-			knobColorLower = props.customKnobColorLower or p3.knobColorLower,
-			knobColorUpper = p3.knobColorUpper,
-			knobTransparency = p3.knobTransparency,
+			knobImage = ImagesModule["component_assets/circle_28_padding_10"],
+			knobColorLower = Props.customKnobColorLower or p2.knobColorLower,
+			knobColorUpper = p2.knobColorUpper,
+			knobTransparency = p2.knobTransparency,
 			knobImagePadding = 10,
-			knobShadowImage = imagesModule["component_assets/dropshadow_28"],
-			knobShadowTransparencyLower = p3.knobShadowTransparencyLower,
-			knobShadowTransparencyUpper = p3.knobShadowTransparencyUpper,
-			[roactModule.Ref] = props.forwardedRef,
-			NextSelectionUp = props.NextSelectionUp,
-			NextSelectionDown = props.NextSelectionDown,
-			focusController = props.focusController,
-			customTrack = props.customTrack,
-			customKnobHeight = props.customKnobHeight,
-			customKnobBorderSize = props.customKnobBorderSize,
-			customKnobBorderColor = props.customKnobBorderColor,
-			containerRef = props.containerRef
+			knobShadowImage = ImagesModule["component_assets/dropshadow_28"],
+			knobShadowTransparencyLower = p2.knobShadowTransparencyLower,
+			knobShadowTransparencyUpper = p2.knobShadowTransparencyUpper,
+			[RoactModule.Ref] = Props.forwardedRef,
+			NextSelectionUp = Props.NextSelectionUp,
+			NextSelectionDown = Props.NextSelectionDown,
+			focusController = Props.focusController,
+			customTrack = Props.customTrack,
+			customKnobHeight = Props.customKnobHeight,
+			customKnobBorderSize = Props.customKnobBorderSize,
+			customKnobBorderColor = Props.customKnobBorderColor,
+			containerRef = Props.containerRef
 		}
 		
-		if p2 then
-			t.upperValue = props.upperValue
-			t.lowerValue = props.lowerValue
+		if p1 then
+			config.upperValue = Props.upperValue
+			config.lowerValue = Props.lowerValue
 		else
-			t.lowerValue = props.value
+			config.lowerValue = Props.value
 		end
-		return roactModule.createElement(genericSliderModule, t)
+		return RoactModule.createElement(GenericSliderModule, config)
 	end
 	
-	function var8.didMount(p3)
-		p3.pressedMotorLower:start()
-		p3.pressedMotorUpper:start()
+	function ExtendResult.didMount(p2) --[[ Line: 217 ]]
+		p2.pressedMotorLower:start()
+		p2.pressedMotorUpper:start()
 	end
 	
-	function var8.didUpdate(p3, p4)
-		-- upvalues: otterModule (copy), t (copy)
-		if p4.style ~= p3.props.style then
-			p3.setStyle(p3.props.style)
+	function ExtendResult.didUpdate(p2, p3) --[[ Line: 222 ]]
+		-- upvalues: OtterModule (upval), config (upval)
+		if p3.style ~= p2.props.style then
+			p2.setStyle(p2.props.style)
 		end
-		if p4.isDisabled ~= p3.props.isDisabled then
-			p3.setDisabled(p3.props.isDisabled)
+		if p3.isDisabled ~= p2.props.isDisabled then
+			p2.setDisabled(p2.props.isDisabled)
 			
-			if p3.props.isDisabled then
-				p3.pressedMotorLower:setGoal(otterModule.spring(0, t))
-				p3.pressedMotorUpper:setGoal(otterModule.spring(0, t))
+			if p2.props.isDisabled then
+				p2.pressedMotorLower:setGoal(OtterModule.spring(0, config))
+				p2.pressedMotorUpper:setGoal(OtterModule.spring(0, config))
 			end
 		end
 	end
 	
-	function var8.willUnmount(p3)
-		p3.wasUnmounted = true
-		p3.pressedMotorLower:destroy()
-		p3.pressedMotorUpper:destroy()
+	function ExtendResult.willUnmount(p2) --[[ Line: 237 ]]
+		p2.wasUnmounted = true
+		p2.pressedMotorLower:destroy()
+		p2.pressedMotorUpper:destroy()
 	end
 	
-	return var1
+	return ExtendResult
 end

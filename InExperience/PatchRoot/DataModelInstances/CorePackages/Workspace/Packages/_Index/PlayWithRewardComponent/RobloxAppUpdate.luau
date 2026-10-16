@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.RobloxAppUpdate.RobloxAppUpdate)
+﻿return (require(script.Parent.Parent.Parent._Index.RobloxAppUpdate.RobloxAppUpdate))

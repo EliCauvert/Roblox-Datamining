@@ -1,64 +1,58 @@
-﻿local parent = script:FindFirstAncestor("SduiSharedContent").Parent
-local navigationModule = require(parent.Navigation)
-local reactModule = require(parent.React)
-local playWithRewardComponentModule = require(parent.PlayWithRewardComponent)
-local gamePlayButtonModule = require(parent.GamePlayButton)
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local playWithRewardComponent = playWithRewardComponentModule.PlayWithRewardComponent
-local usePlayWithRewardData = playWithRewardComponentModule.usePlayWithRewardData
-local usePlayButtonState = gamePlayButtonModule.usePlayButtonState
-local playButtonStates = gamePlayButtonModule.PlayButtonStates
-local useNavigationFocus = navigationModule.useNavigationFocus
-local getSduiClientPageScope = sduiCoreSystemModule.getSduiClientPageScope
-local fFlagSduiPlayWithRewardGapFix = require(parent.SharedFlags).FFlagSduiPlayWithRewardGapFix
+﻿local Parent = script:FindFirstAncestor("SduiSharedContent").Parent
+local ReactModule = require(Parent.React)
+local PlayWithRewardComponentModule = require(Parent.PlayWithRewardComponent)
+local GamePlayButtonModule = require(Parent.GamePlayButton)
+local PlayWithRewardComponent = PlayWithRewardComponentModule.PlayWithRewardComponent
+local UsePlayWithRewardDataFunction = PlayWithRewardComponentModule.usePlayWithRewardData
+local UsePlayButtonStateFunction = GamePlayButtonModule.usePlayButtonState
+local PlayButtonStates = GamePlayButtonModule.PlayButtonStates
+local UseNavigationFocusFunction = require(Parent.Navigation).useNavigationFocus
+local GetSduiClientPageScopeFunction = require(Parent.SduiCoreSystem).getSduiClientPageScope
 
-return reactModule.memo(function(p1)
-	-- upvalues: useNavigationFocus (ref), reactModule (ref), usePlayButtonState (ref), playButtonStates (ref), usePlayWithRewardData (ref), fFlagSduiPlayWithRewardGapFix (ref), getSduiClientPageScope (ref), playWithRewardComponent (ref)
-	local var1 = useNavigationFocus()
-	local var2, var3 = reactModule.useState(false)
-	local var4 = usePlayButtonState(p1.sduiContext and (p1.sduiContext.dependencies and p1.sduiContext.dependencies.networking), p1.universeId)
-	local var5 = var4.playButtonState == playButtonStates.Playable
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), var3 (ref)
-		if var1 then
-			var3(true)
+return ReactModule.memo(function(p1) --[[ Line: 27 | Named "SduiPlayWithReward" ]]
+	-- upvalues: UseNavigationFocusFunction (copy), ReactModule (copy), UsePlayButtonStateFunction (copy), PlayButtonStates (copy), UsePlayWithRewardDataFunction (copy), GetSduiClientPageScopeFunction (copy), PlayWithRewardComponent (copy)
+	local UseNavigationFocusResult = UseNavigationFocusFunction()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UsePlayButtonStateResult = UsePlayButtonStateFunction(p1.sduiContext and (p1.sduiContext.dependencies and p1.sduiContext.dependencies.networking), p1.universeId)
+	local IsPlayButtonStateMatch = UsePlayButtonStateResult.playButtonState == PlayButtonStates.Playable
+	ReactModule.useEffect(function() --[[ Line: 37 ]]
+		-- upvalues: UseNavigationFocusResult (copy), UseStateResult2 (copy)
+		if UseNavigationFocusResult then
+			UseStateResult2(true)
 		end
-	end, { var1 })
-	local var6 = usePlayWithRewardData({
+	end, { UseNavigationFocusResult })
+	local UsePlayWithRewardDataResult = UsePlayWithRewardDataFunction({
 		universeId = p1.universeId,
-		shouldFetch = var2,
-		onFetchDispatched = function()
-			-- upvalues: var3 (ref)
-			var3(false)
+		shouldFetch = UseStateResult,
+		onFetchDispatched = function() --[[ Line: 46 ]]
+			-- upvalues: UseStateResult2 (copy)
+			UseStateResult2(false)
 		end
 	})
-	local playWithRewardData = var6.playWithRewardData
-	local showPlayWithReward = var6.showPlayWithReward
-	local playWithRewardData_1 = nil
+	local PlayWithRewardData = UsePlayWithRewardDataResult.playWithRewardData
+	local ShowPlayWithReward = UsePlayWithRewardDataResult.showPlayWithReward
+	local PlayWithRewardData1 = IsPlayButtonStateMatch and (ShowPlayWithReward and PlayWithRewardData)
+	local NoPlayWithRewardData1: boolean = UsePlayButtonStateResult.playButtonState ~= PlayButtonStates.Loading and (PlayWithRewardData and not PlayWithRewardData1)
+	local ConfigKey = p1.sduiContext and p1.sduiContext.configKey
+	ReactModule.useEffect(function() --[[ Line: 59 ]]
+		-- upvalues: ConfigKey (copy), NoPlayWithRewardData1 (copy), GetSduiClientPageScopeFunction (upval)
+		if ConfigKey and NoPlayWithRewardData1 then
+			GetSduiClientPageScopeFunction(ConfigKey).set("filterPlayWithReward", true)
+			
+			return
+		end
+	end, { ConfigKey, NoPlayWithRewardData1 })
 	
-	if fFlagSduiPlayWithRewardGapFix then
-		playWithRewardData_1 = var5 and (showPlayWithReward and playWithRewardData)
-		local var7 = var4.playButtonState ~= playButtonStates.Loading and (playWithRewardData and not playWithRewardData_1)
-		local configKey = p1.sduiContext and p1.sduiContext.configKey
-		reactModule.useEffect(function()
-			-- upvalues: configKey (ref), var7 (ref), getSduiClientPageScope (copy)
-			if configKey and var7 then
-				getSduiClientPageScope(configKey).set("filterPlayWithReward", true)
-				
-				return
-			end
-		end, { configKey, var7 })
-	end
-	return if fFlagSduiPlayWithRewardGapFix and not playWithRewardData_1 or (not var5 or not showPlayWithReward) or not playWithRewardData then nil else reactModule.createElement(playWithRewardComponent, {
+	return if PlayWithRewardData1 then ReactModule.createElement(PlayWithRewardComponent, {
 		universeId = p1.universeId,
 		placeId = p1.placeId,
 		placeIdOverride = p1.placeIdOverride,
 		experienceJoinData = p1.experienceJoinData,
-		flowId = playWithRewardData.flowId,
-		fetchedUniverseId = playWithRewardData.universeId,
-		isAdDataExpected = playWithRewardData.isAdDataExpected,
-		playWithRewardAdData = playWithRewardData.adData,
+		flowId = PlayWithRewardData.flowId,
+		fetchedUniverseId = PlayWithRewardData.universeId,
+		isAdDataExpected = PlayWithRewardData.isAdDataExpected,
+		playWithRewardAdData = PlayWithRewardData.adData,
 		useLargerStyles = p1.useLargerStyles,
 		layoutOrder = p1.layoutOrder
-	})
+	}) else nil
 end)

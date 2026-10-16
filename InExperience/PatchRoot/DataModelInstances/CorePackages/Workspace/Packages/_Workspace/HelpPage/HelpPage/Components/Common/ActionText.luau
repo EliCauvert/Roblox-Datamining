@@ -1,41 +1,41 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local reactModule = require(parent_1.React)
-local useLocalization = require(parent_1.Localization).Hooks.useLocalization
-local text = require(parent_1.Foundation).Text
-local escapeRichTextModule = require(parent.Utils.escapeRichText)
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
+local UseLocalizationFunction = require(Parent1.Localization).Hooks.useLocalization
+local Text = require(Parent1.Foundation).Text
+local EscapeRichTextModule = require(Parent.Utils.escapeRichText)
 
-return reactModule.memo(function(p1)
-	-- upvalues: useLocalization (ref), escapeRichTextModule (ref), reactModule (ref), text (ref)
-	local actionLabels = p1.actionLabels
-	local t = {}
+return (ReactModule.memo(function(Frame) --[[ Line: 23 ]]
+	-- upvalues: UseLocalizationFunction (copy), EscapeRichTextModule (copy), ReactModule (copy), Text (copy)
+	local ActionLabels = Frame.actionLabels
+	local Labels = {}
 	
-	for i, v in ipairs(actionLabels) do
-		t[tostring(i)] = v.label
+	for i, actionLabel in ipairs(ActionLabels) do
+		Labels[tostring(i)] = actionLabel.label
 	end
-	t.genericAction = "InGame.HelpMenu.GenericAction"
-	local var1 = useLocalization(t)
-	local t_1 = {}
+	Labels.genericAction = "InGame.HelpMenu.GenericAction"
+	local UseLocalizationResult = UseLocalizationFunction(Labels)
+	local List = {}
 	
-	for i_1, v_1 in ipairs(actionLabels) do
-		local var2 = var1[tostring(i_1)]
+	for i1, actionLabel1 in ipairs(ActionLabels) do
+		local UseLocalizationResultEntry = UseLocalizationResult[tostring(i1)]
 		
-		if var2 == nil or var2 == "" then
-			var2 = var1.genericAction
+		if UseLocalizationResultEntry == nil or UseLocalizationResultEntry == "" then
+			UseLocalizationResultEntry = UseLocalizationResult.genericAction
 		end
-		var2 = escapeRichTextModule(var2)
+		local EscapeRichTextModuleResult = EscapeRichTextModule(UseLocalizationResultEntry)
 		
-		if v_1.disabled then
-			var2 = "<font transparency=\"0.5\">" .. var5 .. "</font>"
+		if actionLabel1.disabled then
+			EscapeRichTextModuleResult = "<font transparency=\"0.5\">" .. EscapeRichTextModuleResult .. "</font>"
 		end
-		table.insert(t_1, var2)
+		table.insert(List, EscapeRichTextModuleResult)
 	end
-	return reactModule.createElement(text, {
+	return ReactModule.createElement(Text, {
 		tag = "size-full-0 auto-y text-title-large text-wrap",
 		RichText = true,
-		Text = table.concat(t_1, " / "),
-		TextXAlignment = p1.textXAlignment or Enum.TextXAlignment.Center,
-		LayoutOrder = p1.LayoutOrder,
-		testId = p1.testId
+		Text = table.concat(List, " / "),
+		TextXAlignment = Frame.textXAlignment or Enum.TextXAlignment.Center,
+		LayoutOrder = Frame.LayoutOrder,
+		testId = Frame.testId
 	})
-end)
+end))

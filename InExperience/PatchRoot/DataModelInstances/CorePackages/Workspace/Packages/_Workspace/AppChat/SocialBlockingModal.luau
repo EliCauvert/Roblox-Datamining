@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.SocialBlockingModal.SocialBlockingModal)
+﻿return (require(script.Parent.Parent.Parent._Index.SocialBlockingModal.SocialBlockingModal))

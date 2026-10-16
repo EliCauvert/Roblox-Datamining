@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent.Parent._Workspace.SquadsCore.SquadsCore.Analytics.EventNames)
+﻿return (require(script.Parent.Parent.Parent.Parent._Workspace.SquadsCore.SquadsCore.Analytics.EventNames))

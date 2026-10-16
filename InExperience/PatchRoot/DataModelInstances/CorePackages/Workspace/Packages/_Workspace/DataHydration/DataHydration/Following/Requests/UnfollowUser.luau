@@ -1,21 +1,21 @@
-﻿local parent = script:FindFirstAncestor("DataHydration").Parent
-local httpClientModule = require(parent.HttpClient)
-local httpModule = require(parent.Http)
+﻿local Parent = script:FindFirstAncestor("DataHydration").Parent
+local HttpClientModule = require(Parent.HttpClient)
+local HttpModule = require(Parent.Http)
 local _ = require(script.Parent.Parent.FollowingStoreTypes)
-local fetch = httpClientModule.fetch
-local asPromise = httpClientModule.asPromise
+local FetchFunction = HttpClientModule.fetch
+local AsPromiseFunction = HttpClientModule.asPromise
 
-return function(p1, p2)
-	-- upvalues: fetch (ref), httpModule (ref), asPromise (ref)
-	return asPromise(fetch({
+return function(p1, Network) --[[ Line: 16 ]]
+	-- upvalues: FetchFunction (copy), HttpModule (copy), AsPromiseFunction (copy)
+	return AsPromiseFunction((FetchFunction({
 		method = "POST",
 		analyticsKey = "friends.unfollow-user",
 		legacy = true,
-		url = `{httpModule.Url.FRIEND_URL}/users/{p1}/unfollow`,
+		url = `{HttpModule.Url.FRIEND_URL}/users/{p1}/unfollow`,
 		body = {},
-		network = p2,
-		decode = function()
+		network = Network,
+		decode = function() --[[ Line: 25 ]]
 			return nil
 		end
-	}))
+	})))
 end

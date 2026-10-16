@@ -1,15 +1,15 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent.Parent
-local roactModule = require(parent_1.Roact)
-local tModule = require(parent_1.t)
-local localeRoactContextModule = require(parent.LocaleRoactContext)
-local localization = require(parent_1.RobloxAppLocales).Localization
-local localeProvider = roactModule.Component:extend("LocaleProvider")
-localeProvider.validateProps = tModule.interface({ locale = tModule.string })
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent.Parent
+local RoactModule = require(Parent1.Roact)
+local TModule = require(Parent1.t)
+local LocaleRoactContextModule = require(Parent.LocaleRoactContext)
+local Localization = require(Parent1.RobloxAppLocales).Localization
+local LocaleProvider = RoactModule.Component:extend("LocaleProvider")
+LocaleProvider.validateProps = TModule.interface({ locale = TModule.string })
 
-function localeProvider.render(p1)
-	-- upvalues: localization (ref), roactModule (ref), localeRoactContextModule (ref)
-	return roactModule.createElement(localeRoactContextModule.Provider, { value = localization.new(p1.props.locale) }, p1.props[roactModule.Children])
+function LocaleProvider.render(p1) --[[ Line: 19 ]]
+	-- upvalues: Localization (copy), RoactModule (copy), LocaleRoactContextModule (copy)
+	return RoactModule.createElement(LocaleRoactContextModule.Provider, { value = Localization.new(p1.props.locale) }, p1.props[RoactModule.Children])
 end
 
-return localeProvider
+return LocaleProvider

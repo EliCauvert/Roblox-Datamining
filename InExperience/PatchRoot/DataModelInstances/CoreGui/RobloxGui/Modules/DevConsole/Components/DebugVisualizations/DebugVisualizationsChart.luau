@@ -1,406 +1,410 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local roactModule = require(corePackagesService.Packages.Roact)
-local linkingProtocol = require(corePackagesService.Workspace.Packages.LinkingProtocol).LinkingProtocol
-local components = script.Parent.Parent.Parent.Components
-local bannerButtonModule = require(components.BannerButton)
-local boxButtonModule = require(components.BoxButton)
-local cellCheckboxModule = require(components.CellCheckbox)
-local cellLabelModule = require(components.CellLabel)
-local dataConsumerModule = require(components.DataConsumer)
-local dropDownModule = require(components.DropDown)
-local headerButtonModule = require(components.HeaderButton)
-local constantsModule = require(script.Parent.Parent.Parent.Constants)
-local generalFormatting = constantsModule.GeneralFormatting
-local lineWidth = generalFormatting.LineWidth
-local lineColor = generalFormatting.LineColor
-local debugVisualizationsFormatting = constantsModule.DebugVisualizationsFormatting
-local chartHeaderNames = debugVisualizationsFormatting.ChartHeaderNames
-local chartCellWidths = debugVisualizationsFormatting.ChartCellWidths
-local headerFrameHeight = debugVisualizationsFormatting.HeaderFrameHeight
-local entryFrameHeight = debugVisualizationsFormatting.EntryFrameHeight
-local cellPadding = debugVisualizationsFormatting.CellPadding
-local minFrameWidth = debugVisualizationsFormatting.MinFrameWidth
-local learnMoreWidth = debugVisualizationsFormatting.LearnMoreWidth
-local mainWindow = constantsModule.DefaultFontSize.MainWindow
-local mainWindow_1 = constantsModule.Font.MainWindow
-local slimDevConsole2 = game:DefineFastFlag("SlimDevConsole2", false)
-local textService = slimDevConsole2 and game:GetService("TextService") or nil
+﻿local CorePackages = game:GetService("CorePackages")
+local RoactModule = require(CorePackages.Packages.Roact)
+local LinkingProtocol = require(CorePackages.Workspace.Packages.LinkingProtocol).LinkingProtocol
+local Components = script.Parent.Parent.Parent.Components
+local BannerButtonModule = require(Components.BannerButton)
+local BoxButtonModule = require(Components.BoxButton)
+local CellCheckboxModule = require(Components.CellCheckbox)
+local CellLabelModule = require(Components.CellLabel)
+local DataConsumerModule = require(Components.DataConsumer)
+local DropDownModule = require(Components.DropDown)
+local HeaderButtonModule = require(Components.HeaderButton)
+local ConstantsModule = require(script.Parent.Parent.Parent.Constants)
+local GeneralFormatting = ConstantsModule.GeneralFormatting
+local LineWidth = GeneralFormatting.LineWidth
+local LineColor = GeneralFormatting.LineColor
+local DebugVisualizationsFormatting = ConstantsModule.DebugVisualizationsFormatting
+local ChartHeaderNames = DebugVisualizationsFormatting.ChartHeaderNames
+local ChartCellWidths = DebugVisualizationsFormatting.ChartCellWidths
+local HeaderFrameHeight = DebugVisualizationsFormatting.HeaderFrameHeight
+local EntryFrameHeight = DebugVisualizationsFormatting.EntryFrameHeight
+local CellPadding = DebugVisualizationsFormatting.CellPadding
+local MinFrameWidth = DebugVisualizationsFormatting.MinFrameWidth
+local LearnMoreWidth = DebugVisualizationsFormatting.LearnMoreWidth
+local MainWindow = ConstantsModule.DefaultFontSize.MainWindow
+local MainWindow1 = ConstantsModule.Font.MainWindow
+local SlimDevConsole2 = game:DefineFastFlag("SlimDevConsole2", false)
+local TextService = SlimDevConsole2 and game:GetService("TextService") or nil
 
-local function _(p1, p2)
-	-- upvalues: learnMoreWidth (ref), cellPadding (ref)
-	return if p2 == nil then p1 - cellPadding * 2 else p1 - learnMoreWidth - cellPadding * 2
+local function _(p1, p2): number --[[ Line: 37 | Named "getDescriptionWidth" ]]
+	-- upvalues: LearnMoreWidth (copy), CellPadding (copy)
+	return if p2 == nil then p1 - CellPadding * 2 else p1 - LearnMoreWidth - CellPadding * 2
 end
 
-local _ = function(p1, p2)
-	-- upvalues: textService (ref), mainWindow (ref), mainWindow_1 (ref), entryFrameHeight (ref)
-	return math.max(textService:GetTextSize(p1, mainWindow, mainWindow_1, Vector2.new(p2, 1e999)).Y, entryFrameHeight)
+local _ = function(String1, X): number --[[ Line: 43 | Named "getDescriptionHeight" ]]
+	-- upvalues: TextService (copy), MainWindow (copy), MainWindow1 (copy), EntryFrameHeight (copy)
+	return (math.max(TextService:GetTextSize(String1, MainWindow, MainWindow1, Vector2.new(X, 1e999)).Y, EntryFrameHeight))
 end
 
-local var1 = 0
+local Total = 0
 
-for i, v in ipairs(chartCellWidths) do
-	var1 += v
+for _, chartCellWidth in ipairs(ChartCellWidths) do
+	Total += chartCellWidth
 end
-local var2 = -var1
+local List = {}
+local List1 = {}
+local List2 = {}
+local Total1 = -Total / 2
+table.insert(List, UDim2.fromOffset(CellPadding, 0))
+table.insert(List1, UDim2.new(0.5, Total1 - CellPadding, 0, HeaderFrameHeight))
+table.insert(List2, UDim2.new(0.5, Total1 - CellPadding, 0, EntryFrameHeight))
+
+for _, chartCellWidth1 in ipairs(ChartCellWidths) do
+	table.insert(List, UDim2.new(0.5, Total1 + CellPadding, 0, 0))
+	table.insert(List1, UDim2.fromOffset(chartCellWidth1 - CellPadding, HeaderFrameHeight))
+	table.insert(List2, UDim2.fromOffset(chartCellWidth1 - CellPadding, EntryFrameHeight))
+	Total1 += chartCellWidth1
+end
+table.insert(List, UDim2.new(0.5, Total1 + CellPadding, 0, 0))
+table.insert(List1, UDim2.new(0.5, -Total / 2 - CellPadding, 0, HeaderFrameHeight))
+table.insert(List2, UDim2.new(0.5, -Total / 2 - CellPadding, 0, EntryFrameHeight))
+assert(#ChartCellWidths == 2, "DebugVisualizationsChart expected DebugVisualizationsFormatting CELL_WIDTHS to have a length of 2")
+assert(#List == 4, "DebugVisualizationsChart expected cellOffset to have length " .. 4)
+assert(#List1 == 4, "DebugVisualizationsChart expected headerCellSize to have length " .. 4)
+assert(#List2 == 4, "DebugVisualizationsChart expected entryCellSize to have length " .. 4)
 local t = {}
-local t_1 = {}
-local t_2 = {}
-var2 /= 2
-table.insert(t, UDim2.fromOffset(cellPadding, 0))
-table.insert(t_1, UDim2.new(0.5, var2 - cellPadding, 0, headerFrameHeight))
-table.insert(t_2, UDim2.new(0.5, var2 - cellPadding, 0, entryFrameHeight))
 
-for i_1, v_1 in ipairs(chartCellWidths) do
-	table.insert(t, UDim2.new(0.5, var2 + cellPadding, 0, 0))
-	table.insert(t_1, UDim2.fromOffset(v_1 - cellPadding, headerFrameHeight))
-	table.insert(t_2, UDim2.fromOffset(v_1 - cellPadding, entryFrameHeight))
-	var2 += v_1
+for i, Vector in ipairs(List) do
+	t[i] = UDim2.new(Vector.X.Scale, Vector.X.Offset - CellPadding, Vector.Y.Scale, Vector.Y.Offset)
 end
-table.insert(t, UDim2.new(0.5, var2 + cellPadding, 0, 0))
-table.insert(t_1, UDim2.new(0.5, -var1 / 2 - cellPadding, 0, headerFrameHeight))
-table.insert(t_2, UDim2.new(0.5, -var1 / 2 - cellPadding, 0, entryFrameHeight))
-assert(#chartCellWidths == 2, "DebugVisualizationsChart expected DebugVisualizationsFormatting CELL_WIDTHS to have a length of 2")
-assert(#t == 4, "DebugVisualizationsChart expected cellOffset to have length " .. 4)
-assert(#t_1 == 4, "DebugVisualizationsChart expected headerCellSize to have length " .. 4)
-assert(#t_2 == 4, "DebugVisualizationsChart expected entryCellSize to have length " .. 4)
-local t_3 = {}
+local DebugVisualizationsChart = RoactModule.Component:extend("DebugVisualizationsChart")
 
-for i_2, v_2 in ipairs(t) do
-	t_3[i_2] = UDim2.new(v_2.X.Scale, v_2.X.Offset - cellPadding, v_2.Y.Scale, v_2.Y.Offset)
-end
-local debugVisualizationsChart = roactModule.Component:extend("DebugVisualizationsChart")
-
-local function constructHeader(p1, p2)
-	-- upvalues: chartHeaderNames (ref), roactModule (ref), headerButtonModule (ref), t_1 (ref), t (ref), lineWidth (ref), lineColor (ref), t_3 (ref), headerFrameHeight (ref)
-	local t_2 = {}
+local function constructHeader(Sortfunction, XOffset) --[[ Line: 106 ]]
+	-- upvalues: ChartHeaderNames (copy), RoactModule (copy), HeaderButtonModule (copy), List1 (copy), List (copy), LineWidth (copy), LineColor (copy), t (copy), HeaderFrameHeight (copy)
+	local Elements = {}
 	
-	for i, v in ipairs(chartHeaderNames) do
-		t_2[v] = roactModule.createElement(headerButtonModule, { text = v, size = t_1[i], pos = t[i], sortfunction = p1 })
+	for i, chartHeaderName in ipairs(ChartHeaderNames) do
+		Elements[chartHeaderName] = RoactModule.createElement(HeaderButtonModule, {
+			text = chartHeaderName,
+			size = List1[i],
+			pos = List[i],
+			sortfunction = Sortfunction
+		})
 	end
-	t_2.upperHorizontalLine = roactModule.createElement("Frame", {
+	Elements.upperHorizontalLine = RoactModule.createElement("Frame", {
 		BorderSizePixel = 0,
-		Size = UDim2.new(1, 0, 0, lineWidth),
+		Size = UDim2.new(1, 0, 0, LineWidth),
 		Position = UDim2.new(0, 0, 0, 0),
-		BackgroundColor3 = lineColor
+		BackgroundColor3 = LineColor
 	})
-	t_2.lowerHorizontalLine = roactModule.createElement("Frame", {
+	Elements.lowerHorizontalLine = RoactModule.createElement("Frame", {
 		BorderSizePixel = 0,
-		Size = UDim2.new(1, 0, 0, lineWidth),
-		Position = UDim2.new(0, 0, 1, -lineWidth),
-		BackgroundColor3 = lineColor
+		Size = UDim2.new(1, 0, 0, LineWidth),
+		Position = UDim2.new(0, 0, 1, -LineWidth),
+		BackgroundColor3 = LineColor
 	})
 	
-	for i_1 = 2, #t_3 do
-		t_2[string.format("VerticalLine_%d", i_1)] = roactModule.createElement("Frame", {
+	for i1 = 2, #t do
+		Elements[string.format("VerticalLine_%d", i1)] = RoactModule.createElement("Frame", {
 			BorderSizePixel = 0,
-			Size = UDim2.new(0, lineWidth, 1, 0),
-			Position = t_3[i_1],
-			BackgroundColor3 = lineColor
+			Size = UDim2.new(0, LineWidth, 1, 0),
+			Position = t[i1],
+			BackgroundColor3 = LineColor
 		})
 	end
-	return roactModule.createElement("Frame", {
+	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		Size = UDim2.new(0, p2, 0, headerFrameHeight)
-	}, t_2)
+		Size = UDim2.new(0, XOffset, 0, HeaderFrameHeight)
+	}, Elements)
 end
 
-local function constructEntry(p3, p4, p5, p6, p7, p8, p9, p10)
-	-- upvalues: t_3 (ref), roactModule (ref), lineWidth (ref), lineColor (ref), cellLabelModule (ref), t_2 (ref), t (ref), slimDevConsole2 (ref), dropDownModule (ref), cellPadding (ref), entryFrameHeight (ref), cellCheckboxModule (ref), learnMoreWidth (ref), bannerButtonModule (ref), boxButtonModule (ref)
-	local name = p3.name
-	local settingInfo = p3.settingInfo
-	local var3 = tostring(settingInfo.Name)
-	local t_1 = {}
+local function constructEntry(p1, XOffset, YOffset1, YOffset, LayoutOrder, IsExpanded, Callback, Callback1) --[[ Line: 148 ]]
+	-- upvalues: t (copy), RoactModule (copy), LineWidth (copy), LineColor (copy), CellLabelModule (copy), List2 (copy), List (copy), SlimDevConsole2 (copy), DropDownModule (copy), CellPadding (copy), EntryFrameHeight (copy), CellCheckboxModule (copy), LearnMoreWidth (copy), BannerButtonModule (copy), BoxButtonModule (copy)
+	local Name = p1.name
+	local SettingInfo = p1.settingInfo
+	local Text = tostring(SettingInfo.Name)
+	local Elements = {}
 	
-	for i = 2, #t_3 do
-		t_1[string.format("line_%d", i)] = roactModule.createElement("Frame", {
+	for i = 2, #t do
+		Elements[string.format("line_%d", i)] = RoactModule.createElement("Frame", {
 			BorderSizePixel = 0,
-			Size = UDim2.new(0, lineWidth, 1, 0),
-			Position = t_3[i],
-			BackgroundColor3 = lineColor
+			Size = UDim2.new(0, LineWidth, 1, 0),
+			Position = t[i],
+			BackgroundColor3 = LineColor
 		})
 	end
-	t_1[name] = roactModule.createElement(cellLabelModule, { text = var3, size = t_2[1], pos = t[1] })
+	Elements[Name] = RoactModule.createElement(CellLabelModule, { text = Text, size = List2[1], pos = List[1] })
 	
-	if slimDevConsole2 and settingInfo.Kind == "Dropdown" then
-		local enumItems = settingInfo.EnumItems
-		local var4 = 1
+	if SlimDevConsole2 and SettingInfo.Kind == "Dropdown" then
+		local EnumItems = SettingInfo.EnumItems
+		local SelectedIndex = 1
 		
-		for i_1, v in ipairs(enumItems) do
-			if v == settingInfo.Value then
-				var4 = i_1
+		for i1, enumItem in ipairs(EnumItems) do
+			if enumItem == SettingInfo.Value then
+				SelectedIndex = i1
 				break
 			end
 		end
-		t_1.checkbox = roactModule.createElement("Frame", {
+		Elements.checkbox = RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
-			Size = t_2[2],
-			Position = t[2]
+			Size = List2[2],
+			Position = List[2]
 		}, {
-			DropDown = roactModule.createElement(dropDownModule, {
-				buttonSize = UDim2.new(1, -cellPadding, 0, entryFrameHeight - 8),
+			DropDown = RoactModule.createElement(DropDownModule, {
+				buttonSize = UDim2.new(1, -CellPadding, 0, EntryFrameHeight - 8),
 				position = UDim2.new(0, 0, 0, 4),
-				dropDownList = settingInfo.DropDownList,
-				selectedIndex = var4,
-				onSelection = function(p11)
-					-- upvalues: p3 (ref), var3 (ref), enumItems (ref)
-					p3.valueChangeCallback(var3, enumItems[p11])
+				dropDownList = SettingInfo.DropDownList,
+				selectedIndex = SelectedIndex,
+				onSelection = function(p2) --[[ Line: 193 ]]
+					-- upvalues: p1 (copy), Text (copy), EnumItems (copy)
+					p1.valueChangeCallback(Text, EnumItems[p2])
 				end
 			})
 		})
 	else
-		t_1.checkbox = roactModule.createElement(cellCheckboxModule, {
-			name = var3,
-			isSelected = settingInfo.Value,
-			size = t_2[2],
-			pos = t[2],
-			OnCheckboxClicked = p3.valueChangeCallback
+		Elements.checkbox = RoactModule.createElement(CellCheckboxModule, {
+			name = Text,
+			isSelected = SettingInfo.Value,
+			size = List2[2],
+			pos = List[2],
+			OnCheckboxClicked = p1.valueChangeCallback
 		})
 	end
-	local var5, uDim2
-	t_1.visualType = roactModule.createElement(cellLabelModule, { text = settingInfo.Type, size = t_2[3], pos = t[3] })
-	t_1.tags = roactModule.createElement(cellLabelModule, {
-		text = tostring(settingInfo.Tagstring),
-		size = t_2[4],
-		pos = t[4]
+	Elements.visualType = RoactModule.createElement(CellLabelModule, { text = SettingInfo.Type, size = List2[3], pos = List[3] })
+	Elements.tags = RoactModule.createElement(CellLabelModule, {
+		text = tostring(SettingInfo.Tagstring),
+		size = List2[4],
+		pos = List[4]
 	})
-	t_1.lowerHorizontalLine = roactModule.createElement("Frame", {
+	Elements.lowerHorizontalLine = RoactModule.createElement("Frame", {
 		BorderSizePixel = 0,
-		Size = UDim2.new(1, 0, 0, lineWidth),
+		Size = UDim2.new(1, 0, 0, LineWidth),
 		Position = UDim2.new(0, 0, 1, 0),
-		BackgroundColor3 = lineColor
+		BackgroundColor3 = LineColor
 	})
-	local learnMoreUrl = nil
-	local _ = nil
-	local _ = nil
+	local LearnMoreUrl = nil
+	local _UDim2 = nil
+	local HasLearnMoreUrl = nil
 	
-	if slimDevConsole2 then
-		learnMoreUrl = settingInfo.LearnMoreUrl
-		var5 = learnMoreUrl ~= nil
-		uDim2 = UDim2.new(0, if learnMoreUrl ~= nil then p4 - cellPadding * 2 else p4 - learnMoreWidth - cellPadding * 2, 0, p6)
+	if SlimDevConsole2 then
+		LearnMoreUrl = SettingInfo.LearnMoreUrl
+		HasLearnMoreUrl = LearnMoreUrl ~= nil
+		_UDim2 = UDim2.new(0, if LearnMoreUrl == nil then XOffset - CellPadding * 2 else XOffset - LearnMoreWidth - CellPadding * 2, 0, YOffset)
 	else
-		var5 = true
-		uDim2 = UDim2.new(0, p4 - learnMoreWidth - cellPadding * 2, 0, entryFrameHeight)
+		HasLearnMoreUrl = true
+		_UDim2 = UDim2.new(0, XOffset - LearnMoreWidth - CellPadding * 2, 0, EntryFrameHeight)
 	end
-	return roactModule.createElement("Frame", {
+	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		Size = UDim2.new(0, p4, 0, p5),
-		LayoutOrder = p7
+		Size = UDim2.new(0, XOffset, 0, YOffset1),
+		LayoutOrder = LayoutOrder
 	}, {
-		Button = roactModule.createElement(bannerButtonModule, {
-			size = UDim2.new(1, 0, 0, entryFrameHeight),
+		Button = RoactModule.createElement(BannerButtonModule, {
+			size = UDim2.new(1, 0, 0, EntryFrameHeight),
 			pos = UDim2.new(),
-			isExpanded = p8,
-			onButtonPress = p9(name)
-		}, t_1),
-		DescriptionText = p8 and roactModule.createElement(cellLabelModule, {
-			pos = UDim2.new(0, cellPadding, 0, entryFrameHeight + cellPadding),
-			size = uDim2,
-			text = tostring(settingInfo.Description)
+			isExpanded = IsExpanded,
+			onButtonPress = Callback(Name)
+		}, Elements),
+		DescriptionText = IsExpanded and RoactModule.createElement(CellLabelModule, {
+			pos = UDim2.new(0, CellPadding, 0, EntryFrameHeight + CellPadding),
+			size = _UDim2,
+			text = tostring(SettingInfo.Description)
 		}),
-		LearnMoreButton = p8 and (var5 and roactModule.createElement(boxButtonModule, {
+		LearnMoreButton = IsExpanded and (HasLearnMoreUrl and RoactModule.createElement(BoxButtonModule, {
 			text = "Learn More",
-			size = UDim2.new(0, learnMoreWidth, 0, entryFrameHeight),
-			pos = UDim2.new(0, p4 - learnMoreWidth - cellPadding, 0, entryFrameHeight + cellPadding),
-			onClicked = if slimDevConsole2 then p10(name, learnMoreUrl) else p10(name)
+			size = UDim2.new(0, LearnMoreWidth, 0, EntryFrameHeight),
+			pos = UDim2.new(0, XOffset - LearnMoreWidth - CellPadding, 0, EntryFrameHeight + CellPadding),
+			onClicked = if SlimDevConsole2 then Callback1(Name, LearnMoreUrl) else Callback1(Name)
 		}))
 	})
 end
 
-function populateEntries(p11, p12, p13, p14, p15, p16, p17, p18, p19, p20)
-	-- upvalues: roactModule (ref), entryFrameHeight (ref), slimDevConsole2 (ref), learnMoreWidth (ref), cellPadding (ref), textService (ref), mainWindow (ref), mainWindow_1 (ref), constructEntry (ref), lineColor (ref)
-	local t = {
-		UIListLayout = roactModule.createElement("UIListLayout", {
+function populateEntries(Text, List, List1, p2, p3, p4, p5, Name, p6, p7) --[[ Line: 269 ]]
+	-- upvalues: RoactModule (copy), EntryFrameHeight (copy), SlimDevConsole2 (copy), LearnMoreWidth (copy), CellPadding (copy), TextService (copy), MainWindow (copy), MainWindow1 (copy), constructEntry (copy), LineColor (copy)
+	local config = {
+		UIListLayout = RoactModule.createElement("UIListLayout", {
 			HorizontalAlignment = Enum.HorizontalAlignment.Left,
 			VerticalAlignment = Enum.VerticalAlignment.Top,
 			SortOrder = Enum.SortOrder.LayoutOrder
 		})
 	}
-	local t_1 = {}
+	local List2 = {}
 	
-	for i, v in pairs(p12) do
-		if v then
-			table.insert(t_1, i)
+	for i, value in pairs(List) do
+		if value then
+			table.insert(List2, i)
 		end
 	end
-	local p17Count = #p13
-	local var6 = 0
+	local CountList1 = #List1
+	local Total = 0
 	
-	if p16 and p15 then
-		local var7
-		local var8 = -1
-		local var9 = 0
-		local var10 = 0
+	if p4 and p3 then
+		local YOffset = -1
+		local Total1 = 0
+		local Count = 0
+		local Flag = nil
 		
-		for i_1, v_1 in ipairs(p13) do
-			local var11 = false
+		for i1, value1 in ipairs(List1) do
+			local HasFoundAt: boolean = if Text then string.find(tostring(value1.settingInfo.Name):lower(), Text:lower()) ~= nil or string.find(value1.name:lower(), Text:lower()) ~= nil else false
 			
-			if p11 then
-				var11 = if string.find(tostring(v_1.settingInfo.Name):lower(), p11:lower()) == nil then string.find(v_1.name:lower(), p11:lower()) ~= nil else string.find(tostring(v_1.settingInfo.Name):lower(), p11:lower()) ~= nil
+			if #List2 > 0 then
+				Flag = false
+				
+				for _, value2 in pairs(List2) do
+					if table.find(value1.settingInfo.Tags, value2) ~= nil then
+						Flag = true
+						break
+					end
+				end
+				if Text then
+					HasFoundAt = HasFoundAt and Flag
+				else
+					Text = true
+					HasFoundAt = Flag
+				end
 			end
-			if #t_1 <= 0 then
-				if not p11 or var11 then
-					local var12
-					local var13 = p18 == v_1.name
-					local _ = nil
-					local var14 = entryFrameHeight
-					
-					if not slimDevConsole2 then
-						var12 = if var13 then entryFrameHeight * 2 + cellPadding * 2 else entryFrameHeight
-					elseif var13 then
-						var14 = math.max(textService:GetTextSize(tostring(v_1.settingInfo.Description), mainWindow, mainWindow_1, Vector2.new(if v_1.settingInfo.LearnMoreUrl ~= nil then p17 - cellPadding * 2 else p17 - learnMoreWidth - cellPadding * 2, 1e999)).Y, entryFrameHeight)
-						var12 = entryFrameHeight + var14 + cellPadding * 2
+			if not Text or HasFoundAt then
+				local IsNameMatch = Name == value1.name
+				local Largest: number = EntryFrameHeight
+				local NewEntryFrameHeight = nil
+				
+				if SlimDevConsole2 then
+					if IsNameMatch then
+						Largest = math.max(TextService:GetTextSize(tostring(value1.settingInfo.Description), MainWindow, MainWindow1, Vector2.new(if value1.settingInfo.LearnMoreUrl == nil then p5 - CellPadding * 2 else p5 - LearnMoreWidth - CellPadding * 2, 1e999)).Y, EntryFrameHeight)
+						NewEntryFrameHeight = EntryFrameHeight + Largest + CellPadding * 2
 					else
-						var12 = entryFrameHeight
+						NewEntryFrameHeight = EntryFrameHeight
 					end
-					if p15.Y <= var6 + entryFrameHeight then
-						if var9 < p16.Y then
-							t[i_1] = constructEntry(v_1, p17, var12, var14, (if p14 then p17Count - i_1 else i_1) + 1, var13, p19, p20)
-						end
-						if var8 < 0 then
-							var8 = var6
-						else
-							var9 += entryFrameHeight
-						end
-						var10 += 1
+				else
+					NewEntryFrameHeight = IsNameMatch and EntryFrameHeight * 2 + CellPadding * 2 or EntryFrameHeight
+				end
+				if p3.Y <= Total + EntryFrameHeight then
+					if Total1 < p4.Y then
+						config[i1] = constructEntry(value1, p5, NewEntryFrameHeight, Largest, (p2 and CountList1 - i1 or i1) + 1, IsNameMatch, p6, p7)
 					end
-					var6 += var12
+					if YOffset < 0 then
+						YOffset = Total
+					else
+						Total1 += EntryFrameHeight
+					end
+					Count += 1
 				end
-			end
-			var7 = false
-			
-			for i_2, v_2 in pairs(t_1) do
-				if table.find(v_1.settingInfo.Tags, v_2) ~= nil then
-					var7 = true
-					break
-				end
-			end
-			if p11 then
-				var11 = var11 and var7
-			else
-				p11 = true
-				var11 = var7
+				Total += NewEntryFrameHeight
 			end
 		end
-		if var10 == 0 then
-			t.NoneFound = roactModule.createElement("TextLabel", {
+		if Count == 0 then
+			config.NoneFound = RoactModule.createElement("TextLabel", {
 				Text = "No DebugVisualizations Found",
 				BackgroundTransparency = 1,
 				LayoutOrder = 1,
 				Size = UDim2.fromScale(1, 1),
-				TextColor3 = lineColor
+				TextColor3 = LineColor
 			})
 		else
-			t.WindowingPadding = roactModule.createElement("Frame", {
+			config.WindowingPadding = RoactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 1,
-				Size = UDim2.new(1, 0, 0, var8)
+				Size = UDim2.new(1, 0, 0, YOffset)
 			})
 		end
 	end
-	return t, var6
+	return config, Total
 end
 
-function debugVisualizationsChart.init(p21, p22)
-	-- upvalues: linkingProtocol (ref), slimDevConsole2 (ref), roactModule (ref)
-	local currentData = p22.DebugVisualizationsData:getCurrentData()
+function DebugVisualizationsChart.init(p8, p9) --[[ Line: 393 ]]
+	-- upvalues: LinkingProtocol (copy), SlimDevConsole2 (copy), RoactModule (copy)
+	local CurrentData = p9.DebugVisualizationsData:getCurrentData()
 	
-	function p25.getOnButtonPress(p23)
-		-- upvalues: p21 (ref)
-		return function(_, _)
-			-- upvalues: p21 (copy), p23 (ref)
-			p21:setState({ expandedEntry = p21.state.expandedEntry ~= p23 and p23 })
+	function p8.getOnButtonPress(ExpandedEntry) --[[ Line: 396 ]]
+		-- upvalues: p8 (copy)
+		return function(_, _) --[[ Line: 397 ]]
+			-- upvalues: p8 (upval), ExpandedEntry (copy)
+			p8:setState({
+				expandedEntry = p8.state.expandedEntry ~= ExpandedEntry and ExpandedEntry
+			})
 		end
 	end
 	
-	function p25.getLearnMorePress(p23, p24)
-		-- upvalues: linkingProtocol (copy), slimDevConsole2 (copy)
-		return function(_, _)
-			-- upvalues: linkingProtocol (copy), slimDevConsole2 (copy), p24 (ref), p23 (ref)
-			linkingProtocol.default:openURL(if slimDevConsole2 then p24 else "https://create.roblox.com/docs/reference/engine/classes/PhysicsSettings#" .. p28)
+	function p8.getLearnMorePress(p10, p11) --[[ Line: 404 ]]
+		-- upvalues: LinkingProtocol (upval), SlimDevConsole2 (upval)
+		return function(_, _) --[[ Line: 405 ]]
+			-- upvalues: LinkingProtocol (upval), SlimDevConsole2 (upval), p11 (copy), p10 (copy)
+			LinkingProtocol.default:openURL(if SlimDevConsole2 then p11 else "https://create.roblox.com/docs/reference/engine/classes/PhysicsSettings#" .. p10)
 		end
 	end
 	
-	function p25.onSortChanged(p23)
-		-- upvalues: p22 (ref), p21 (ref)
-		if p23 == p22.DebugVisualizationsData:getSortType() then
-			p21:setState(function(p24)
-				return { reverseSort = not p24.reverseSort }
+	function p8.onSortChanged(SortType) --[[ Line: 413 ]]
+		-- upvalues: p9 (copy), p8 (copy)
+		if SortType == p9.DebugVisualizationsData:getSortType() then
+			p8:setState(function(p10) --[[ Line: 416 ]]
+				return { reverseSort = not p10.reverseSort }
 			end)
 			
 			return
+		else
+			p9.DebugVisualizationsData:setSortType(SortType)
+			p8:setState({ reverseSort = false })
 		end
-		p22.DebugVisualizationsData:setSortType(p23)
-		p21:setState({ reverseSort = false })
 	end
 	
-	function p25.onCanvasPosChanged()
-		-- upvalues: p21 (ref)
-		p21:setState({ canvasPos = p21.scrollingRef.current.CanvasPosition })
+	function p8.onCanvasPosChanged() --[[ Line: 430 ]]
+		-- upvalues: p8 (copy)
+		p8:setState({ canvasPos = p8.scrollingRef.current.CanvasPosition })
 	end
 	
-	p21.scrollingRef = roactModule.createRef()
-	p21.state = {
+	p8.scrollingRef = RoactModule.createRef()
+	p8.state = {
 		reverseSort = false,
 		expandedEntry = nil,
-		visualizationEntries = currentData
+		visualizationEntries = CurrentData
 	}
 end
 
-function debugVisualizationsChart.didUpdate(p21)
-	if p21.scrollingRef.current then
-		local absoluteSize = p21.scrollingRef.current.AbsoluteSize
+function DebugVisualizationsChart.didUpdate(p8) --[[ Line: 446 ]]
+	if p8.scrollingRef.current then
+		local AbsoluteSize = p8.scrollingRef.current.AbsoluteSize
 		
-		if absoluteSize ~= p21.state.absScrollSize then
-			p21:setState({ absScrollSize = absoluteSize })
+		if AbsoluteSize ~= p8.state.absScrollSize then
+			p8:setState({ absScrollSize = AbsoluteSize })
 		end
 	end
 end
 
-function debugVisualizationsChart.didMount(p21)
-	p21.visualizationsUpdated = p21.props.DebugVisualizationsData:Signal():Connect(function(p22)
-		-- upvalues: p21 (ref)
-		p21:setState({ visualizationEntries = p22 })
+function DebugVisualizationsChart.didMount(p8) --[[ Line: 458 ]]
+	p8.visualizationsUpdated = p8.props.DebugVisualizationsData:Signal():Connect(function(VisualizationEntries) --[[ Line: 459 ]]
+		-- upvalues: p8 (copy)
+		p8:setState({ visualizationEntries = VisualizationEntries })
 	end)
 	
-	if p21.scrollingRef.current then
-		p21.canvasPosConnector = p21.scrollingRef.current:GetPropertyChangedSignal("CanvasPosition"):Connect(p21.onCanvasPosChanged)
-		p21:setState({
-			absScrollSize = p21.scrollingRef.current.AbsoluteSize,
-			canvasPos = p21.scrollingRef.current.CanvasPosition
+	if p8.scrollingRef.current then
+		p8.canvasPosConnector = p8.scrollingRef.current:GetPropertyChangedSignal("CanvasPosition"):Connect(p8.onCanvasPosChanged)
+		p8:setState({
+			absScrollSize = p8.scrollingRef.current.AbsoluteSize,
+			canvasPos = p8.scrollingRef.current.CanvasPosition
 		})
 	end
 end
 
-function debugVisualizationsChart.willUnmount(p21)
-	p21.visualizationsUpdated:Disconnect()
-	p21.visualizationsUpdated = nil
-	p21.canvasPosConnector:Disconnect()
-	p21.canvasPosConnector = nil
+function DebugVisualizationsChart.willUnmount(p8) --[[ Line: 476 ]]
+	p8.visualizationsUpdated:Disconnect()
+	p8.visualizationsUpdated = nil
+	p8.canvasPosConnector:Disconnect()
+	p8.canvasPosConnector = nil
 end
 
-function debugVisualizationsChart.render(p21)
-	-- upvalues: minFrameWidth (ref), roactModule (ref), constructHeader (ref), headerFrameHeight (ref), constantsModule (ref)
-	local absScrollSize = p21.state.absScrollSize
-	local x = absScrollSize and math.max(absScrollSize.X, minFrameWidth) or minFrameWidth
-	local var15, var16 = populateEntries(p21.props.searchTerm, p21.props.typeFilters, p21.state.visualizationEntries, p21.state.reverseSort, p21.state.canvasPos, absScrollSize, x, p21.state.expandedEntry, p21.getOnButtonPress, p21.getLearnMorePress)
+function DebugVisualizationsChart.render(p8) --[[ Line: 483 ]]
+	-- upvalues: MinFrameWidth (copy), RoactModule (copy), constructHeader (copy), HeaderFrameHeight (copy), ConstantsModule (copy)
+	local AbsScrollSize = p8.state.absScrollSize
+	local Largest = AbsScrollSize and math.max(AbsScrollSize.X, MinFrameWidth) or MinFrameWidth
+	local PopulateEntriesResult, PopulateEntriesResult2 = populateEntries(p8.props.searchTerm, p8.props.typeFilters, p8.state.visualizationEntries, p8.state.reverseSort, p8.state.canvasPos, AbsScrollSize, Largest, p8.state.expandedEntry, p8.getOnButtonPress, p8.getLearnMorePress)
 	
-	return roactModule.createElement("Frame", {
+	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		ClipsDescendants = true,
-		Size = p21.props.size,
-		LayoutOrder = p21.props.layoutOrder
+		Size = p8.props.size,
+		LayoutOrder = p8.props.layoutOrder
 	}, {
-		Header = constructHeader(p21.onSortChanged, x),
-		MainChart = roactModule.createElement("ScrollingFrame", {
-			Position = UDim2.fromOffset(0, headerFrameHeight),
-			Size = UDim2.new(1, 0, 1, -headerFrameHeight),
-			CanvasSize = UDim2.fromOffset(x, var16),
+		Header = constructHeader(p8.onSortChanged, Largest),
+		MainChart = RoactModule.createElement("ScrollingFrame", {
+			Position = UDim2.fromOffset(0, HeaderFrameHeight),
+			Size = UDim2.new(1, 0, 1, -HeaderFrameHeight),
+			CanvasSize = UDim2.fromOffset(Largest, PopulateEntriesResult2),
 			ScrollBarThickness = 6,
-			BackgroundColor3 = constantsModule.Color.BaseGray,
+			BackgroundColor3 = ConstantsModule.Color.BaseGray,
 			BackgroundTransparency = 1,
-			[roactModule.Ref] = p21.scrollingRef
-		}, var15)
+			[RoactModule.Ref] = p8.scrollingRef
+		}, PopulateEntriesResult)
 	})
 end
 
-return dataConsumerModule(debugVisualizationsChart, "DebugVisualizationsData")
+return DataConsumerModule(DebugVisualizationsChart, "DebugVisualizationsData")

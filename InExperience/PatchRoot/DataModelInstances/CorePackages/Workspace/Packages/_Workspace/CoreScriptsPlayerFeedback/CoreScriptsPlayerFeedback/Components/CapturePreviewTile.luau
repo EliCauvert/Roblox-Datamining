@@ -1,20 +1,23 @@
-﻿local coreScriptsPlayerFeedback = script:FindFirstAncestor("CoreScriptsPlayerFeedback")
-local parent = coreScriptsPlayerFeedback.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local icon = foundationModule.Icon
-local loading = foundationModule.Loading
-local iconSize = foundationModule.Enums.IconSize
-local builderIconsModule = require(parent.BuilderIcons)
-local iconVariant = builderIconsModule.IconVariant
-local _ = require(coreScriptsPlayerFeedback.CaptureTypes)
+﻿local CoreScriptsPlayerFeedback = script:FindFirstAncestor("CoreScriptsPlayerFeedback")
+local Parent = CoreScriptsPlayerFeedback.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local Icon = FoundationModule.Icon
+local Loading = FoundationModule.Loading
+local IconSize = FoundationModule.Enums.IconSize
+local BuilderIconsModule = require(Parent.BuilderIcons)
+local IconVariant = BuilderIconsModule.IconVariant
+local _ = require(CoreScriptsPlayerFeedback.CaptureTypes)
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), loading (ref), iconSize (ref), icon (ref), builderIconsModule (ref), iconVariant (ref)
-	local var1, var2 = reactModule.useState(false)
-	local var3, var4 = reactModule.useState(false)
+return (ReactModule.memo(function(p1) --[[ Line: 28 ]]
+	-- upvalues: ReactModule (copy), Loading (copy), IconSize (copy), Icon (copy), BuilderIconsModule (copy), IconVariant (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
+	local IsUploading = p1.status == "uploading"
+	local IsNotFailureReasonMatch: boolean = p1.status == "failed" and p1.failureReason ~= Enum.UploadCaptureResult.CaptureModerated
+	local TouchEnabled = game:GetService("UserInputService").TouchEnabled
 	
-	return reactModule.createElement("ImageButton", {
+	return ReactModule.createElement("ImageButton", {
 		BackgroundColor3 = Color3.fromRGB(30, 30, 30),
 		BackgroundTransparency = 0,
 		BorderSizePixel = 0,
@@ -22,30 +25,30 @@ return reactModule.memo(function(p1)
 		Image = "",
 		LayoutOrder = p1.layoutOrder,
 		Size = UDim2.new(0, 80, 0, 80),
-		[reactModule.Event.MouseEnter] = function()
-			-- upvalues: var2 (ref)
-			var2(true)
+		[ReactModule.Event.MouseEnter] = function() --[[ Line: 43 ]]
+			-- upvalues: UseStateResult2 (copy)
+			UseStateResult2(true)
 		end,
-		[reactModule.Event.MouseLeave] = function()
-			-- upvalues: var2 (ref)
-			var2(false)
+		[ReactModule.Event.MouseLeave] = function() --[[ Line: 46 ]]
+			-- upvalues: UseStateResult2 (copy)
+			UseStateResult2(false)
 		end,
-		[reactModule.Event.SelectionGained] = function()
-			-- upvalues: var4 (ref)
-			var4(true)
+		[ReactModule.Event.SelectionGained] = function() --[[ Line: 49 ]]
+			-- upvalues: UseStateResult2_1 (copy)
+			UseStateResult2_1(true)
 		end,
-		[reactModule.Event.SelectionLost] = function()
-			-- upvalues: var4 (ref)
-			var4(false)
+		[ReactModule.Event.SelectionLost] = function() --[[ Line: 52 ]]
+			-- upvalues: UseStateResult2_1 (copy)
+			UseStateResult2_1(false)
 		end
 	}, {
-		Corner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) }),
-		FailedStroke = if p1.status == "failed" and p1.failureReason ~= Enum.UploadCaptureResult.CaptureModerated then reactModule.createElement("UIStroke", {
+		Corner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) }),
+		FailedStroke = if IsNotFailureReasonMatch then ReactModule.createElement("UIStroke", {
 			Thickness = 1,
 			ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
 			Color = Color3.fromRGB(220, 50, 50)
 		}) else nil,
-		Thumbnail = reactModule.createElement("ImageLabel", {
+		Thumbnail = ReactModule.createElement("ImageLabel", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			ClipsDescendants = true,
@@ -54,9 +57,9 @@ return reactModule.memo(function(p1)
 			ScaleType = Enum.ScaleType.Crop,
 			Size = UDim2.fromScale(1, 1)
 		}, {
-			Corner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) })
+			Corner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) })
 		}),
-		UploadingOverlay = if p1.status == "uploading" then reactModule.createElement("Frame", {
+		UploadingOverlay = if IsUploading then ReactModule.createElement("Frame", {
 			BackgroundTransparency = 0.45,
 			BorderSizePixel = 0,
 			ClipsDescendants = true,
@@ -64,28 +67,28 @@ return reactModule.memo(function(p1)
 			BackgroundColor3 = Color3.fromRGB(0, 0, 0),
 			Size = UDim2.fromScale(1, 1)
 		}, {
-			Corner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) }),
-			Spinner = reactModule.createElement(loading, {
+			Corner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) }),
+			Spinner = ReactModule.createElement(Loading, {
 				ZIndex = 3,
-				size = iconSize.Medium,
+				size = IconSize.Medium,
 				AnchorPoint = Vector2.new(0.5, 0.5),
 				Position = UDim2.fromScale(0.5, 0.5)
 			})
 		}) else nil,
-		RemoveButton = if var1 or game:GetService("UserInputService").TouchEnabled or var3 then reactModule.createElement("ImageButton", {
+		RemoveButton = if UseStateResult or (TouchEnabled or UseStateResult1) then ReactModule.createElement("ImageButton", {
 			AnchorPoint = Vector2.new(1, 0),
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			Position = UDim2.new(1, -2, 0, 2),
 			Size = UDim2.new(0, 20, 0, 20),
 			ZIndex = 4,
-			[reactModule.Event.Activated] = p1.onRemove
+			[ReactModule.Event.Activated] = p1.onRemove
 		}, {
-			CircleXIcon = reactModule.createElement(icon, {
-				name = builderIconsModule.Icon.CircleX,
-				size = iconSize.Medium,
-				variant = iconVariant.Filled
+			CircleXIcon = ReactModule.createElement(Icon, {
+				name = BuilderIconsModule.Icon.CircleX,
+				size = IconSize.Medium,
+				variant = IconVariant.Filled
 			})
 		}) else nil
 	})
-end)
+end))

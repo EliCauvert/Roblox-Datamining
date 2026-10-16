@@ -1,64 +1,65 @@
-﻿local inExperienceShop = script:FindFirstAncestor("InExperienceShop")
-local parent = inExperienceShop.Parent
-local reactModule = require(parent.React)
-local signal = require(parent.AppCommonLib).Signal
-local categorySectionModule = require(inExperienceShop.Components.CategorySection)
-local fFlagEnableInExperienceShopUnifiedLoggingModule = require(inExperienceShop.Flags.FFlagEnableInExperienceShopUnifiedLogging)
-local fFlagEnableCategoryLoggingInShopModule = require(inExperienceShop.Flags.FFlagEnableCategoryLoggingInShop)
-local fFlagEnableShopRobuxBuyTelemetryModule = require(inExperienceShop.Flags.FFlagEnableShopRobuxBuyTelemetry)
-local _ = require(inExperienceShop.Types)
+﻿local InExperienceShop = script:FindFirstAncestor("InExperienceShop")
+local Parent = InExperienceShop.Parent
+local ReactModule = require(Parent.React)
+local Signal = require(Parent.AppCommonLib).Signal
+local CategorySectionModule = require(InExperienceShop.Components.CategorySection)
+local FFlagEnableInExperienceShopUnifiedLoggingModule = require(InExperienceShop.Flags.FFlagEnableInExperienceShopUnifiedLogging)
+local FFlagEnableCategoryLoggingInShopModule = require(InExperienceShop.Flags.FFlagEnableCategoryLoggingInShop)
+local FFlagEnableShopRobuxBuyTelemetryModule = require(InExperienceShop.Flags.FFlagEnableShopRobuxBuyTelemetry)
+local _ = require(InExperienceShop.Types)
 local _ = require(script.Parent.ShopHomePageView)
 
-return function(p1)
-	-- upvalues: reactModule (ref), fFlagEnableInExperienceShopUnifiedLoggingModule (ref), signal (ref), categorySectionModule (ref), fFlagEnableCategoryLoggingInShopModule (ref), fFlagEnableShopRobuxBuyTelemetryModule (ref)
-	local itemsPerRow = p1.itemsPerRow
-	local var1 = reactModule.useMemo(function()
-		-- upvalues: fFlagEnableInExperienceShopUnifiedLoggingModule (copy), signal (copy)
-		return if fFlagEnableInExperienceShopUnifiedLoggingModule then signal.new() else nil
+return function(Frame) --[[ Line: 34 | Named "useShopHomePageViewModel" ]]
+	-- upvalues: ReactModule (copy), FFlagEnableInExperienceShopUnifiedLoggingModule (copy), Signal (copy), CategorySectionModule (copy), FFlagEnableCategoryLoggingInShopModule (copy), FFlagEnableShopRobuxBuyTelemetryModule (copy)
+	local ItemsPerRow = Frame.itemsPerRow
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 36 ]]
+		-- upvalues: FFlagEnableInExperienceShopUnifiedLoggingModule (upval), Signal (upval)
+		return if FFlagEnableInExperienceShopUnifiedLoggingModule then Signal.new() else nil
 	end, {})
+	local UseResult = ReactModule.useCallback(function(_) --[[ Line: 43 ]]
+		-- upvalues: FFlagEnableInExperienceShopUnifiedLoggingModule (upval), UseMemoResult (copy)
+		if FFlagEnableInExperienceShopUnifiedLoggingModule and UseMemoResult then
+			UseMemoResult:fire()
+		end
+	end, { UseMemoResult })
 	
 	return {
-		data = p1.sections,
-		renderItem = reactModule.useCallback(function(p2)
-			-- upvalues: reactModule (copy), categorySectionModule (copy), fFlagEnableCategoryLoggingInShopModule (copy), fFlagEnableShopRobuxBuyTelemetryModule (copy), itemsPerRow (ref), p1 (ref), fFlagEnableInExperienceShopUnifiedLoggingModule (copy), var1 (ref)
-			local item = p2.item
+		data = Frame.sections,
+		renderItem = ReactModule.useCallback(function(p1) --[[ Line: 50 ]]
+			-- upvalues: ReactModule (upval), CategorySectionModule (upval), FFlagEnableCategoryLoggingInShopModule (upval), FFlagEnableShopRobuxBuyTelemetryModule (upval), ItemsPerRow (copy), Frame (copy), FFlagEnableInExperienceShopUnifiedLoggingModule (upval), UseMemoResult (copy)
+			local Item = p1.item
 			
-			return reactModule.createElement(categorySectionModule, {
-				sectionId = item.id,
-				categoryType = if fFlagEnableCategoryLoggingInShopModule or fFlagEnableShopRobuxBuyTelemetryModule then item.categoryType else nil,
-				stableCategoryId = if fFlagEnableCategoryLoggingInShopModule then item.stableCategoryId else nil,
-				categoryGroup = if fFlagEnableCategoryLoggingInShopModule then item.categoryGroup else nil,
-				categoryName = if fFlagEnableCategoryLoggingInShopModule then item.name else nil,
-				title = item.name,
-				items = item.items,
-				robuxPackages = item.robuxPackages,
-				featuredRobuxPackage = item.featuredRobuxPackage,
-				paymentSessionId = item.paymentSessionId,
-				bonusJwt = item.bonusJwt,
-				itemsPerRow = itemsPerRow,
-				onCategoryActivated = p1.onCategoryActivated,
-				onItemActivated = p1.onItemActivated,
-				isPageVisible = p1.Visible ~= false,
-				scrollImpressionsSignal = if fFlagEnableInExperienceShopUnifiedLoggingModule then var1 else nil,
-				LayoutOrder = p2.index
+			return ReactModule.createElement(CategorySectionModule, {
+				sectionId = Item.id,
+				categoryType = if FFlagEnableCategoryLoggingInShopModule or FFlagEnableShopRobuxBuyTelemetryModule then Item.categoryType else nil,
+				stableCategoryId = if FFlagEnableCategoryLoggingInShopModule then Item.stableCategoryId else nil,
+				categoryGroup = if FFlagEnableCategoryLoggingInShopModule then Item.categoryGroup else nil,
+				categoryName = if FFlagEnableCategoryLoggingInShopModule then Item.name else nil,
+				title = Item.name,
+				items = Item.items,
+				robuxPackages = Item.robuxPackages,
+				featuredRobuxPackage = Item.featuredRobuxPackage,
+				paymentSessionId = Item.paymentSessionId,
+				bonusJwt = Item.bonusJwt,
+				itemsPerRow = ItemsPerRow,
+				onCategoryActivated = Frame.onCategoryActivated,
+				onItemActivated = Frame.onItemActivated,
+				isPageVisible = Frame.Visible ~= false,
+				scrollImpressionsSignal = if FFlagEnableInExperienceShopUnifiedLoggingModule then UseMemoResult else nil,
+				LayoutOrder = p1.index
 			})
 		end, {
-			itemsPerRow,
-			p1.onCategoryActivated,
-			p1.onItemActivated,
-			p1.Visible,
-			var1
+			ItemsPerRow,
+			Frame.onCategoryActivated,
+			Frame.onItemActivated,
+			Frame.Visible,
+			UseMemoResult
 		}),
-		keyExtractor = reactModule.useCallback(function(p2)
-			return p2.id
+		keyExtractor = ReactModule.useCallback(function(p1) --[[ Line: 85 ]]
+			return p1.id
 		end, {}),
-		LayoutOrder = p1.LayoutOrder,
-		Visible = p1.Visible,
-		onScroll = if fFlagEnableInExperienceShopUnifiedLoggingModule then reactModule.useCallback(function(_)
-			-- upvalues: fFlagEnableInExperienceShopUnifiedLoggingModule (copy), var1 (ref)
-			if fFlagEnableInExperienceShopUnifiedLoggingModule and var1 then
-				var1:fire()
-			end
-		end, { var1 }) else nil
+		LayoutOrder = Frame.LayoutOrder,
+		Visible = Frame.Visible,
+		onScroll = if FFlagEnableInExperienceShopUnifiedLoggingModule then UseResult else nil
 	}
 end

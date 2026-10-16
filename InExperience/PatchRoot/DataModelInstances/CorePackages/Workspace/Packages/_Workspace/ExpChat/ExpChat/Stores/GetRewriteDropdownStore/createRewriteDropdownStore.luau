@@ -1,20 +1,20 @@
-﻿local createSignal = require(script:FindFirstAncestor("ExpChat").Parent.Signals).createSignal
+﻿local CreateSignalFunction = require(script:FindFirstAncestor("ExpChat").Parent.Signals).createSignal
 
-return function()
-	-- upvalues: createSignal (ref)
-	local var1, var2 = createSignal(nil)
-	local var3, var4 = createSignal(nil)
+return function() --[[ Line: 16 ]]
+	-- upvalues: CreateSignalFunction (copy)
+	local Signal, Signal2 = CreateSignalFunction(nil)
+	local Signal1, Signal2_1 = CreateSignalFunction(nil)
 	
 	return {
-		getOpenMessageId = var1,
-		getComponentId = var3,
-		toggleDropdown = function(p1)
-			-- upvalues: var2 (ref)
-			var2(function(p2)
-				-- upvalues: p1 (ref)
+		getOpenMessageId = Signal,
+		getComponentId = Signal1,
+		toggleDropdown = function(p1) --[[ Line: 20 ]]
+			-- upvalues: Signal2 (copy)
+			Signal2(function(p2) --[[ Line: 21 ]]
+				-- upvalues: p1 (copy)
 				return if p2 == p1 then nil else p1
 			end)
 		end,
-		setComponentId = var4
+		setComponentId = Signal2_1
 	}
 end

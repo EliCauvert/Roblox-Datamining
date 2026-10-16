@@ -1,233 +1,235 @@
-﻿local parent = script:FindFirstAncestor("VideoPlayer").Parent
-local runService = game:GetService("RunService")
-local userGameSettingsService = UserSettings():GetService("UserGameSettings")
-local reactModule = require(parent.React)
-local argCheckModule = require(parent.ArgCheck)
-local videoPlayerWrapperModule = require(script.Parent.VideoPlayerWrapper)
-local videoLoadingStateModule = require(script.Parent.VideoLoadingState)
-local luaAppFixStartPlaybackProgress = game:DefineFastFlag("LuaAppFixStartPlaybackProgress", false)
+﻿local Parent = script:FindFirstAncestor("VideoPlayer").Parent
+local RunService = game:GetService("RunService")
+local UserGameSettings = UserSettings():GetService("UserGameSettings")
+local ReactModule = require(Parent.React)
+local ArgCheckModule = require(Parent.ArgCheck)
+local VideoPlayerWrapperModule = require(script.Parent.VideoPlayerWrapper)
+local VideoLoadingStateModule = require(script.Parent.VideoLoadingState)
+local LuaAppFixStartPlaybackProgress = game:DefineFastFlag("LuaAppFixStartPlaybackProgress", false)
 
-return function(p1)
-	-- upvalues: reactModule (ref), videoLoadingStateModule (ref), luaAppFixStartPlaybackProgress (ref), userGameSettingsService (ref), argCheckModule (ref), runService (ref), videoPlayerWrapperModule (ref)
-	local var1 = reactModule.useRef(nil)
-	local videoPlayerRef = p1.videoPlayerRef or reactModule.useRef(nil)
-	local var2 = reactModule.useRef(0)
-	local var3 = reactModule.useRef(0)
-	local var4 = reactModule.useRef(false)
-	local var5, var6 = reactModule.useState(false)
-	local var7, var8 = reactModule.useState(videoLoadingStateModule.Idle)
-	local shouldStartPlayback = p1.shouldStartPlayback or p1.loadImmediately == true
-	local var9 = reactModule.useRef(nil)
-	var9.current = p1.onLoadingStateChanged
-	local var10 = reactModule.useRef(nil)
-	var10.current = p1.onVideoLoaded
-	local var11 = reactModule.useRef(nil)
-	var11.current = p1.onAspectRatioChanged
-	local var12 = reactModule.useRef(nil)
-	var12.current = p1.onVideoProgressChanged
-	local var13 = nil
-	local var14 = nil
+return function(Image) --[[ Line: 57 | Named "VideoDisplay" ]]
+	-- upvalues: ReactModule (copy), VideoLoadingStateModule (copy), LuaAppFixStartPlaybackProgress (copy), UserGameSettings (copy), ArgCheckModule (copy), RunService (copy), VideoPlayerWrapperModule (copy)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local VideoPlayerRef = Image.videoPlayerRef or UseRefResult1
+	local UseRefResult2 = ReactModule.useRef(0)
+	local UseRefResult3 = ReactModule.useRef(0)
+	local UseRefResult4 = ReactModule.useRef(false)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(VideoLoadingStateModule.Idle)
+	local ShouldStartPlayback = Image.shouldStartPlayback or Image.loadImmediately == true
+	local UseRefResult5 = ReactModule.useRef(nil)
+	UseRefResult5.current = Image.onLoadingStateChanged
+	local UseRefResult6 = ReactModule.useRef(nil)
+	UseRefResult6.current = Image.onVideoLoaded
+	local UseRefResult7 = ReactModule.useRef(nil)
+	UseRefResult7.current = Image.onAspectRatioChanged
+	local UseRefResult8 = ReactModule.useRef(nil)
+	UseRefResult8.current = Image.onVideoProgressChanged
+	local UseRefResult9 = nil
+	local UseRefResult10 = nil
 	
-	if luaAppFixStartPlaybackProgress then
-		var13 = reactModule.useRef(p1.startPlaybackProgress)
-		var13.current = p1.startPlaybackProgress
-		var14 = reactModule.useRef(false)
+	if LuaAppFixStartPlaybackProgress then
+		UseRefResult9 = ReactModule.useRef(Image.startPlaybackProgress)
+		UseRefResult9.current = Image.startPlaybackProgress
+		UseRefResult10 = ReactModule.useRef(false)
 	end
-	local var15 = reactModule.useCallback(function(p2)
-		-- upvalues: var8 (ref), var9 (ref)
-		var8(p2)
+	local UseResult = ReactModule.useCallback(function(p1) --[[ Line: 85 ]]
+		-- upvalues: UseStateResult2_1 (copy), UseRefResult5 (copy)
+		UseStateResult2_1(p1)
 		
-		if var9.current then
-			var9.current(p2)
+		if UseRefResult5.current then
+			UseRefResult5.current(p1)
 		end
 	end, {})
-	local var16 = reactModule.useCallback(function()
-		-- upvalues: var2 (ref), p1 (ref)
-		var2.current += 1
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 92 ]]
+		-- upvalues: UseRefResult2 (copy), Image (copy)
+		UseRefResult2.current += 1
 		
-		if p1.onVideoLooped then
-			p1.onVideoLooped()
+		if Image.onVideoLooped then
+			Image.onVideoLooped()
 		end
-	end, { p1.onVideoLooped })
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), var3 (ref), var4 (ref)
-		var2.current = 0
-		var3.current = 0
-		var4.current = false
-	end, { p1.video })
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), videoPlayerRef (ref), var2 (ref), var3 (ref), userGameSettingsService (copy)
-		local videoPlaybackStateRef = p1.videoPlaybackStateRef
+	end, { Image.onVideoLooped })
+	ReactModule.useEffect(function() --[[ Line: 99 ]]
+		-- upvalues: UseRefResult2 (copy), UseRefResult3 (copy), UseRefResult4 (copy)
+		UseRefResult2.current = 0
+		UseRefResult3.current = 0
+		UseRefResult4.current = false
+	end, { Image.video })
+	ReactModule.useEffect(function() --[[ Line: 105 ]]
+		-- upvalues: Image (copy), VideoPlayerRef (copy), UseRefResult2 (copy), UseRefResult3 (copy), UserGameSettings (upval)
+		local VideoPlaybackStateRef = Image.videoPlaybackStateRef
 		
-		if videoPlaybackStateRef == nil then
-			return
-		end
-		local var17 = function()
-			-- upvalues: videoPlayerRef (copy), var2 (copy), var3 (copy), userGameSettingsService (copy)
-			local current = videoPlayerRef.current
+		if VideoPlaybackStateRef == nil then return end
+		local function Current() --[[ Line: 111 ]]
+			-- upvalues: VideoPlayerRef (upval), UseRefResult2 (upval), UseRefResult3 (upval), UserGameSettings (upval)
+			local Current = VideoPlayerRef.current
 			
-			return if current then {
-				isPlaying = current.IsPlaying,
-				playbackPositionMs = math.round(math.max(0, current.TimePosition) * 1000),
-				videoLengthMs = if current.TimeLength > 0 then math.round(current.TimeLength * 1000) else nil,
-				loopCount = var2.current,
-				endedCount = var3.current,
-				audioLevel = math.clamp(current.Volume * userGameSettingsService.MasterVolume, 0, 1)
+			return if Current then {
+				isPlaying = Current.IsPlaying,
+				playbackPositionMs = math.round(math.max(0, Current.TimePosition) * 1000),
+				videoLengthMs = if Current.TimeLength > 0 then math.round(Current.TimeLength * 1000) else nil,
+				loopCount = UseRefResult2.current,
+				endedCount = UseRefResult3.current,
+				audioLevel = math.clamp(Current.Volume * UserGameSettings.MasterVolume, 0, 1)
 			} else nil
 		end
 		
-		videoPlaybackStateRef.current = var17
+		VideoPlaybackStateRef.current = Current
 		
-		return function()
-			-- upvalues: videoPlaybackStateRef (ref), var17 (ref)
-			if videoPlaybackStateRef.current == var17 then
-				videoPlaybackStateRef.current = nil
+		return function() --[[ Line: 128 ]]
+			-- upvalues: VideoPlaybackStateRef (copy), Current (copy)
+			if VideoPlaybackStateRef.current == Current then
+				VideoPlaybackStateRef.current = nil
 			end
 		end
-	end, { p1.videoPlaybackStateRef })
-	reactModule.useEffect(function()
-		-- upvalues: var6 (ref), shouldStartPlayback (ref), var15 (ref), videoLoadingStateModule (copy), videoPlayerRef (ref), argCheckModule (copy), luaAppFixStartPlaybackProgress (copy), var13 (write), var14 (write), p1 (ref), var10 (ref), var11 (ref)
-		var6(false)
+	end, { Image.videoPlaybackStateRef })
+	ReactModule.useEffect(function() --[[ Line: 137 ]]
+		-- upvalues: UseStateResult2 (copy), ShouldStartPlayback (copy), UseResult (copy), VideoLoadingStateModule (upval), VideoPlayerRef (copy), ArgCheckModule (upval), LuaAppFixStartPlaybackProgress (upval), UseRefResult9 (ref), UseRefResult10 (ref), Image (copy), UseRefResult6 (copy), UseRefResult7 (copy)
+		UseStateResult2(false)
 		
-		if shouldStartPlayback then
-			local current = videoPlayerRef.current
-			argCheckModule.assert(current ~= nil, "VideoDisplay expects videoPlayer ref to be set before loading")
-			var15(videoLoadingStateModule.Loading)
-			local var17 = false
-			task.spawn(function()
-				-- upvalues: current (ref), var17 (write), var15 (copy), videoLoadingStateModule (copy), luaAppFixStartPlaybackProgress (copy), var13 (copy), var14 (copy), p1 (copy), var10 (copy), var11 (copy), var6 (copy)
-				local currentTime = tick()
-				local ok, status = pcall(function()
-					-- upvalues: current (copy)
-					return current:LoadAsync()
-				end)
-				
-				if var17 then return end
-				if not ok or status ~= Enum.AssetFetchStatus.Success then
-					var15(videoLoadingStateModule.Failed)
-					
-					return
-				elseif luaAppFixStartPlaybackProgress then
-					local current_1 = var13.current
-					
-					if current_1 ~= nil then
-						current.TimePosition = math.clamp(current_1, 0, 1) * current.TimeLength
-						var14.current = true
-					end
-				elseif p1.startPlaybackProgress ~= nil then
-					current.TimePosition = math.clamp(p1.startPlaybackProgress, 0, 1) * current.TimeLength
-				end
-				if var10.current then
-					var10.current(current.TimeLength, tick() - currentTime)
-				end
-				local resolution = current.Resolution
-				
-				if var11.current and resolution and resolution.Y > 0 then
-					var11.current(resolution.X / resolution.Y)
-				end
-				var6(true)
-				var15(videoLoadingStateModule.Loaded)
-			end)
-			
-			return function()
-				-- upvalues: var17 (write)
-				var17 = true
-			end
-		end
-		var15(videoLoadingStateModule.Idle)
-	end, { p1.video, shouldStartPlayback })
-	local var17 = reactModule.useCallback(function()
-		-- upvalues: var4 (ref), var3 (ref), p1 (ref)
-		var4.current = true
-		var3.current += 1
-		
-		if p1.onVideoEnded then
-			p1.onVideoEnded()
-		end
-	end, { p1.onVideoEnded })
-	reactModule.useEffect(function()
-		-- upvalues: var5 (ref), videoPlayerRef (ref), argCheckModule (copy), luaAppFixStartPlaybackProgress (copy), var14 (write), var4 (ref), p1 (ref)
-		if not var5 then return end
-		local current = videoPlayerRef.current
-		argCheckModule.assert(current ~= nil, "VideoDisplay expects videoPlayer ref to be set before playback")
-		
-		if luaAppFixStartPlaybackProgress and var14.current then
-			var14.current = false
-		elseif var4.current and p1.shouldStartPlayback then
-			current.TimePosition = 0
-			var4.current = false
-		elseif p1.shouldStartPlayback and not p1.preservePlaybackPosition then
-			current.TimePosition = 0
-		end
-		if p1.shouldStartPlayback then
-			current:Play()
+		if not ShouldStartPlayback then
+			UseResult(VideoLoadingStateModule.Idle)
 			
 			return
 		end
-		current:Pause()
-	end, {
-		var5,
-		p1.preservePlaybackPosition,
-		p1.shouldStartPlayback
-	})
-	reactModule.useEffect(function()
-		-- upvalues: var5 (ref), videoPlayerRef (ref), argCheckModule (copy), runService (copy), var12 (ref)
-		if var5 then
-			local current = videoPlayerRef.current
-			argCheckModule.assert(current ~= nil, "VideoDisplay expects videoPlayer ref to be set before reporting progress")
-			local renderSteppedConnection = runService.RenderStepped:Connect(function()
-				-- upvalues: var12 (copy), current (ref)
-				local current_1 = var12.current
-				
-				if current_1 then
-					current_1(if current.TimeLength > 0 then current.TimePosition / current.TimeLength else 0)
-				end
+		local Current = VideoPlayerRef.current
+		ArgCheckModule.assert(Current ~= nil, "VideoDisplay expects videoPlayer ref to be set before loading")
+		UseResult(VideoLoadingStateModule.Loading)
+		local Flag = false
+		task.spawn(function() --[[ Line: 147 ]]
+			-- upvalues: Current (copy), Flag (ref), UseResult (upval), VideoLoadingStateModule (upval), LuaAppFixStartPlaybackProgress (upval), UseRefResult9 (upval), UseRefResult10 (upval), Image (upval), UseRefResult6 (upval), UseRefResult7 (upval), UseStateResult2 (upval)
+			local CurrentTime = tick()
+			local Success, Result = pcall(function() --[[ Line: 149 ]]
+				-- upvalues: Current (upval)
+				return Current:LoadAsync()
 			end)
 			
-			return function()
-				-- upvalues: renderSteppedConnection (ref)
-				renderSteppedConnection:Disconnect()
+			if Flag then return end
+			if not Success or Result ~= Enum.AssetFetchStatus.Success then
+				UseResult(VideoLoadingStateModule.Failed)
+				
+				return
 			end
+			if LuaAppFixStartPlaybackProgress then
+				local Current1: number = UseRefResult9.current
+				
+				if Current1 ~= nil then
+					Current.TimePosition = math.clamp(Current1, 0, 1) * Current.TimeLength
+					UseRefResult10.current = true
+				end
+			elseif Image.startPlaybackProgress ~= nil then
+				Current.TimePosition = math.clamp(Image.startPlaybackProgress, 0, 1) * Current.TimeLength
+			end
+			if UseRefResult6.current then
+				UseRefResult6.current(Current.TimeLength, tick() - CurrentTime)
+			end
+			local Resolution = Current.Resolution
+			
+			if UseRefResult7.current and Resolution and Resolution.Y > 0 then
+				UseRefResult7.current(Resolution.X / Resolution.Y)
+			end
+			UseStateResult2(true)
+			UseResult(VideoLoadingStateModule.Loaded)
+		end)
+		
+		return function() --[[ Line: 178 ]]
+			-- upvalues: Flag (ref)
+			Flag = true
 		end
-	end, { var5 })
+	end, { Image.video, ShouldStartPlayback })
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 183 ]]
+		-- upvalues: UseRefResult4 (copy), UseRefResult3 (copy), Image (copy)
+		UseRefResult4.current = true
+		UseRefResult3.current += 1
+		
+		if Image.onVideoEnded then
+			Image.onVideoEnded()
+		end
+	end, { Image.onVideoEnded })
+	ReactModule.useEffect(function() --[[ Line: 192 ]]
+		-- upvalues: UseStateResult (copy), VideoPlayerRef (copy), ArgCheckModule (upval), LuaAppFixStartPlaybackProgress (upval), UseRefResult10 (ref), UseRefResult4 (copy), Image (copy)
+		if not UseStateResult then return end
+		local Current = VideoPlayerRef.current
+		ArgCheckModule.assert(Current ~= nil, "VideoDisplay expects videoPlayer ref to be set before playback")
+		
+		if LuaAppFixStartPlaybackProgress and UseRefResult10.current then
+			UseRefResult10.current = false
+		elseif UseRefResult4.current and Image.shouldStartPlayback then
+			Current.TimePosition = 0
+			UseRefResult4.current = false
+		elseif Image.shouldStartPlayback and not Image.preservePlaybackPosition then
+			Current.TimePosition = 0
+		end
+		if Image.shouldStartPlayback then
+			Current:Play()
+			
+			return
+		else
+			Current:Pause()
+		end
+	end, {
+		UseStateResult,
+		Image.preservePlaybackPosition,
+		Image.shouldStartPlayback
+	})
+	ReactModule.useEffect(function() --[[ Line: 221 ]]
+		-- upvalues: UseStateResult (copy), VideoPlayerRef (copy), ArgCheckModule (upval), RunService (upval), UseRefResult8 (copy)
+		if not UseStateResult then return end
+		local Current = VideoPlayerRef.current
+		ArgCheckModule.assert(Current ~= nil, "VideoDisplay expects videoPlayer ref to be set before reporting progress")
+		local RenderSteppedConnection = RunService.RenderStepped:Connect(function() --[[ Line: 227 ]]
+			-- upvalues: UseRefResult8 (upval), Current (copy)
+			local CurrentFunction: (any) -> () = UseRefResult8.current
+			
+			if CurrentFunction then
+				CurrentFunction(if Current.TimeLength > 0 then Current.TimePosition / Current.TimeLength else 0)
+			end
+		end)
+		
+		return function() --[[ Line: 235 ]]
+			-- upvalues: RenderSteppedConnection (copy)
+			RenderSteppedConnection:Disconnect()
+		end
+	end, { UseStateResult })
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
 		ClipsDescendants = true,
 		Selectable = false,
-		Size = p1.Size,
-		ZIndex = p1.ZIndex
+		Size = Image.Size,
+		ZIndex = Image.ZIndex
 	}, {
-		Corner = if p1.cornerRadius then reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, p1.cornerRadius) }) else nil,
-		Thumbnail = if p1.thumbnail and p1.thumbnail ~= "" then reactModule.createElement("ImageLabel", {
+		Corner = if Image.cornerRadius then ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0, Image.cornerRadius) }) else nil,
+		Thumbnail = if Image.thumbnail and Image.thumbnail ~= "" then ReactModule.createElement("ImageLabel", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			ZIndex = 1,
-			Image = p1.thumbnail,
+			Image = Image.thumbnail,
 			Size = UDim2.fromScale(1, 1),
-			ScaleType = p1.ScaleType
+			ScaleType = Image.ScaleType
 		}, {
-			Corner = if p1.cornerRadius then reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, p1.cornerRadius) }) else nil
+			Corner = if Image.cornerRadius then ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0, Image.cornerRadius) }) else nil
 		}) else nil,
-		VideoDisplay = reactModule.createElement("VideoDisplay", {
+		VideoDisplay = ReactModule.createElement("VideoDisplay", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			ZIndex = 2,
 			Size = UDim2.fromScale(1, 1),
-			ScaleType = p1.ScaleType,
-			Visible = var7 ~= videoLoadingStateModule.Failed and (p1.shouldStartPlayback or p1.showVideoWhenPaused == true),
-			ref = var1
+			ScaleType = Image.ScaleType,
+			Visible = UseStateResult1 ~= VideoLoadingStateModule.Failed and (Image.shouldStartPlayback or Image.showVideoWhenPaused == true),
+			ref = UseRefResult
 		}, {
-			Corner = if p1.cornerRadius then reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, p1.cornerRadius) }) else nil,
-			VideoPlayer = reactModule.createElement(videoPlayerWrapperModule, {
-				video = p1.video,
-				muted = p1.muted,
-				looped = p1.looped,
-				videoPlayerRef = videoPlayerRef,
-				videoDisplayRef = var1,
-				onVideoLooped = var16,
-				onVideoEnded = var17
+			Corner = if Image.cornerRadius then ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0, Image.cornerRadius) }) else nil,
+			VideoPlayer = ReactModule.createElement(VideoPlayerWrapperModule, {
+				video = Image.video,
+				muted = Image.muted,
+				looped = Image.looped,
+				videoPlayerRef = VideoPlayerRef,
+				videoDisplayRef = UseRefResult,
+				onVideoLooped = UseResult1,
+				onVideoEnded = UseResult2
 			})
 		})
 	})

@@ -1,62 +1,61 @@
-﻿local roactModule = require(game:GetService("CorePackages").Packages.Roact)
-local immutableModule = require(script.Parent.Parent.Immutable)
-local constantsModule = require(script.Parent.Parent.Constants)
-local lineWidth = constantsModule.GeneralFormatting.LineWidth
-local lineColor = constantsModule.GeneralFormatting.LineColor
-local arrowWidth = constantsModule.GeneralFormatting.ArrowWidth
-local rightArrow = constantsModule.Image.RightArrow
-local downArrow = constantsModule.Image.DownArrow
-local bannerButton = roactModule.Component:extend("BannerButton")
+﻿local RoactModule = require(game:GetService("CorePackages").Packages.Roact)
+local ImmutableModule = require(script.Parent.Parent.Immutable)
+local ConstantsModule = require(script.Parent.Parent.Constants)
+local LineWidth = ConstantsModule.GeneralFormatting.LineWidth
+local LineColor = ConstantsModule.GeneralFormatting.LineColor
+local ArrowWidth = ConstantsModule.GeneralFormatting.ArrowWidth
+local RightArrow = ConstantsModule.Image.RightArrow
+local DownArrow = ConstantsModule.Image.DownArrow
+local BannerButton = RoactModule.Component:extend("BannerButton")
 
-function bannerButton.render(p1)
-	-- upvalues: roactModule (ref), downArrow (ref), rightArrow (ref), arrowWidth (ref), lineWidth (ref), lineColor (ref), immutableModule (ref)
-	local children = p1.props[roactModule.Children] or {}
-	local size = p1.props.size
-	local pos = p1.props.pos
-	local isExpandable = p1.props.isExpandable
-	local isExpanded = p1.props.isExpanded
-	local layoutOrder = p1.props.layoutOrder
-	local inset = p1.props.inset or 0
-	local hideLines = p1.props.hideLines
-	local onButtonPress = p1.props.onButtonPress
-	local onMouseEnter = p1.props.onMouseEnter
-	local onMouseLeave = p1.props.onMouseLeave
-	local onMouseMove = p1.props.onMouseMove
-	local onMouse2Click = p1.props.onMouse2Click
-	local t = {
-		BannerButtonArrow = onButtonPress and roactModule.createElement("ImageLabel", {
+function BannerButton.render(p1) --[[ Line: 14 ]]
+	-- upvalues: RoactModule (copy), DownArrow (copy), RightArrow (copy), ArrowWidth (copy), LineWidth (copy), LineColor (copy), ImmutableModule (copy)
+	local Prop = p1.props[RoactModule.Children] or {}
+	local Size = p1.props.size
+	local Pos = p1.props.pos
+	local IsExpandable = p1.props.isExpandable
+	local IsExpanded = p1.props.isExpanded
+	local LayoutOrder = p1.props.layoutOrder
+	local Inset = p1.props.inset or 0
+	local OnButtonPress = p1.props.onButtonPress
+	local OnMouseEnter = p1.props.onMouseEnter
+	local OnMouseLeave = p1.props.onMouseLeave
+	local OnMouseMove = p1.props.onMouseMove
+	local OnMouse2Click = p1.props.onMouse2Click
+	local config = {
+		BannerButtonArrow = OnButtonPress and RoactModule.createElement("ImageLabel", {
 			BackgroundTransparency = 1,
-			Visible = isExpandable,
-			Image = if isExpanded then downArrow else rightArrow,
-			Size = UDim2.new(0, arrowWidth, 0, arrowWidth),
-			Position = UDim2.new(0, inset, 0.5, -arrowWidth / 2)
+			Visible = IsExpandable,
+			Image = IsExpanded and DownArrow or RightArrow,
+			Size = UDim2.new(0, ArrowWidth, 0, ArrowWidth),
+			Position = UDim2.new(0, Inset, 0.5, -ArrowWidth / 2)
 		})
 	}
 	
-	if not hideLines then
-		t.HorizontalLineTop = roactModule.createElement("Frame", {
+	if not p1.props.hideLines then
+		config.HorizontalLineTop = RoactModule.createElement("Frame", {
 			BorderSizePixel = 0,
-			Size = UDim2.new(1, 0, 0, lineWidth),
-			BackgroundColor3 = lineColor
+			Size = UDim2.new(1, 0, 0, LineWidth),
+			BackgroundColor3 = LineColor
 		})
-		t.HorizontalLineBottom = roactModule.createElement("Frame", {
+		config.HorizontalLineBottom = RoactModule.createElement("Frame", {
 			BorderSizePixel = 0,
-			Size = UDim2.new(1, 0, 0, lineWidth),
-			Position = UDim2.new(0, 0, 1, -lineWidth),
-			BackgroundColor3 = lineColor
+			Size = UDim2.new(1, 0, 0, LineWidth),
+			Position = UDim2.new(0, 0, 1, -LineWidth),
+			BackgroundColor3 = LineColor
 		})
 	end
-	return roactModule.createElement("ImageButton", {
-		Size = size,
-		Position = pos,
+	return RoactModule.createElement("ImageButton", {
+		Size = Size,
+		Position = Pos,
 		BackgroundTransparency = 1,
-		LayoutOrder = layoutOrder,
-		[roactModule.Event.Activated] = onButtonPress,
-		[roactModule.Event.MouseEnter] = onMouseEnter,
-		[roactModule.Event.MouseLeave] = onMouseLeave,
-		[roactModule.Event.MouseMoved] = onMouseMove,
-		[roactModule.Event.MouseButton2Click] = onMouse2Click
-	}, immutableModule.JoinDictionaries(t, children))
+		LayoutOrder = LayoutOrder,
+		[RoactModule.Event.Activated] = OnButtonPress,
+		[RoactModule.Event.MouseEnter] = OnMouseEnter,
+		[RoactModule.Event.MouseLeave] = OnMouseLeave,
+		[RoactModule.Event.MouseMoved] = OnMouseMove,
+		[RoactModule.Event.MouseButton2Click] = OnMouse2Click
+	}, ImmutableModule.JoinDictionaries(config, Prop))
 end
 
-return bannerButton
+return BannerButton

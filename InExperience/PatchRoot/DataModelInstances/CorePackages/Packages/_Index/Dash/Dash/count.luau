@@ -1,16 +1,15 @@
-﻿local var1 = function()
+﻿local function v0(): boolean --[[ Line: 3 ]]
 	return true
 end
 
-return function(p1, p2)
-	-- upvalues: var1 (ref)
-	local var2 = 0
-	p2 = p2 or var1
-	
-	for i, v in p1 do
-		if p2(v, i) then
-			var2 += 1
+return function(List, p1): number --[[ Line: 39 | Named "count" ]]
+	-- upvalues: v0 (copy)
+	local Count = 0
+	local Callback = p1 or v0
+	for i, value in List do
+		if Callback(value, i) then
+			Count += 1
 		end
 	end
-	return var2
+	return Count
 end

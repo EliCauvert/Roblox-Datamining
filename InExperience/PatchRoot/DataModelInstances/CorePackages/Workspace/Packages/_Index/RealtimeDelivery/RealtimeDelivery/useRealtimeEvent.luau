@@ -1,12 +1,12 @@
 ﻿local _ = require(script:FindFirstAncestor("RealtimeDelivery").RealtimeTypes)
-local useRealtimeNamespaceModule = require(script.Parent.useRealtimeNamespace)
+local UseRealtimeNamespaceModule = require(script.Parent.useRealtimeNamespace)
 
-return function(p1, p2, p3, p4)
-	-- upvalues: useRealtimeNamespaceModule (ref)
-	useRealtimeNamespaceModule(p1, function(p5)
-		-- upvalues: p2 (ref), p3 (ref)
-		if p5.Type == p2 then
-			p3(p5)
+return function(p1, Type, Callback, p2) --[[ Line: 8 | Named "useRealtimeEvent" ]]
+	-- upvalues: UseRealtimeNamespaceModule (copy)
+	UseRealtimeNamespaceModule(p1, function(p3) --[[ Line: 14 ]]
+		-- upvalues: Type (copy), Callback (copy)
+		if p3.Type == Type then
+			Callback(p3)
 		end
-	end, p4)
+	end, p2)
 end

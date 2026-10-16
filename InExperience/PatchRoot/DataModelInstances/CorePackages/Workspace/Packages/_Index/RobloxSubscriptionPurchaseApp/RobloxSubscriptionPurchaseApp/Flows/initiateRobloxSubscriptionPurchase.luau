@@ -1,49 +1,52 @@
-﻿local robloxSubscriptionPurchaseApp = script:FindFirstAncestor("RobloxSubscriptionPurchaseApp")
-local initiateRobloxSubscriptionPurchaseInternalModule = require(robloxSubscriptionPurchaseApp.Actions.initiateRobloxSubscriptionPurchaseInternal)
-local robloxSubscriptionOverlayControllerModule = require(robloxSubscriptionPurchaseApp.Flows.RobloxSubscriptionOverlayController)
-local robloxSubscriptionStoreModule = require(robloxSubscriptionPurchaseApp.Store.RobloxSubscriptionStore)
-local surfaceContextModule = require(robloxSubscriptionPurchaseApp.Enums.SurfaceContext)
-local surfaceNameModule = require(robloxSubscriptionPurchaseApp.Enums.SurfaceName)
-local _ = require(robloxSubscriptionPurchaseApp.types)
-local fFlagEnablePlusReferralLandingSheet = require(robloxSubscriptionPurchaseApp.Parent.SharedFlags).FFlagEnablePlusReferralLandingSheet
+﻿local RobloxSubscriptionPurchaseApp = script:FindFirstAncestor("RobloxSubscriptionPurchaseApp")
+local InitiateRobloxSubscriptionPurchaseInternalModule = require(RobloxSubscriptionPurchaseApp.Actions.initiateRobloxSubscriptionPurchaseInternal)
+local RobloxSubscriptionOverlayControllerModule = require(RobloxSubscriptionPurchaseApp.Flows.RobloxSubscriptionOverlayController)
+local RobloxSubscriptionStoreModule = require(RobloxSubscriptionPurchaseApp.Store.RobloxSubscriptionStore)
+local SurfaceContextModule = require(RobloxSubscriptionPurchaseApp.Enums.SurfaceContext)
+local SurfaceNameModule = require(RobloxSubscriptionPurchaseApp.Enums.SurfaceName)
+local _ = require(RobloxSubscriptionPurchaseApp.types)
+local Parent = RobloxSubscriptionPurchaseApp.Parent
+local FFlagEnablePlusReferralLandingSheet = require(Parent.SharedFlags).FFlagEnablePlusReferralLandingSheet
+local FFlagEnablePlusReferralEntrypointTelemetry = require(Parent.SharedFlags).FFlagEnablePlusReferralEntrypointTelemetry
 
-return function(p1, p2, p3, p4, p5, p6, p7, p8)
-	-- upvalues: robloxSubscriptionStoreModule (ref), fFlagEnablePlusReferralLandingSheet (ref), surfaceContextModule (ref), surfaceNameModule (ref), initiateRobloxSubscriptionPurchaseInternalModule (ref), robloxSubscriptionOverlayControllerModule (ref)
-	local var1 = robloxSubscriptionStoreModule.get()
+return function(p1, p2, UniverseId, p3, p4, p5, p6, p7) --[[ Line: 21 | Named "initiateRobloxSubscriptionPurchase" ]]
+	-- upvalues: RobloxSubscriptionStoreModule (copy), FFlagEnablePlusReferralLandingSheet (copy), FFlagEnablePlusReferralEntrypointTelemetry (copy), SurfaceContextModule (copy), SurfaceNameModule (copy), InitiateRobloxSubscriptionPurchaseInternalModule (copy), RobloxSubscriptionOverlayControllerModule (copy)
+	local GetResult = RobloxSubscriptionStoreModule.get()
 	
 	if p2 then
 		if p2.onFlowComplete then
-			var1.setOnFlowComplete(p2.onFlowComplete)
+			GetResult.setOnFlowComplete(p2.onFlowComplete)
 		end
 		if p2.onBackButtonActivated then
-			var1.setOnBackButtonActivated(p2.onBackButtonActivated)
+			GetResult.setOnBackButtonActivated(p2.onBackButtonActivated)
 		end
 		if p2.onCtaOverride then
-			var1.setOnCtaOverride(p2.onCtaOverride)
+			GetResult.setOnCtaOverride(p2.onCtaOverride)
 		end
 	end
 	if p1 then
-		var1.setPurchaseUIOptions(p1)
+		GetResult.setPurchaseUIOptions(p1)
 	end
-	if p6 then
-		var1.setPurchaseFlowOptions(p6)
+	if p5 then
+		GetResult.setPurchaseFlowOptions(p5)
 	end
-	if fFlagEnablePlusReferralLandingSheet then
-		var1.setReferrerId(p8)
+	if FFlagEnablePlusReferralLandingSheet then
+		GetResult.setReferrerId(p7)
 	end
-	local t = {}
+	local Metadata = {}
 	
-	if p3 ~= nil then
-		t.universeId = p3
+	if UniverseId ~= nil then
+		Metadata.universeId = UniverseId
 	end
-	local t_1 = {
-		context = p5 or surfaceContextModule.Unspecified,
-		surfaceName = p4 or surfaceNameModule.Unspecified,
-		metadata = t,
-		clientSessionId = if p7 then p7.clientSessionId else nil
+	local config = {
+		context = p4 or SurfaceContextModule.Unspecified,
+		surfaceName = p3 or SurfaceNameModule.Unspecified,
+		metadata = Metadata,
+		clientSessionId = if p6 then p6.clientSessionId else nil,
+		entrypoint = if FFlagEnablePlusReferralEntrypointTelemetry and p6 then p6.entrypoint else nil
 	}
-	var1.setEntryContext(t_1)
-	initiateRobloxSubscriptionPurchaseInternalModule(t_1)
+	GetResult.setEntryContext(config)
+	InitiateRobloxSubscriptionPurchaseInternalModule(config)
 	
-	return robloxSubscriptionOverlayControllerModule.render()
+	return RobloxSubscriptionOverlayControllerModule.render()
 end

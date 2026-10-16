@@ -1,63 +1,63 @@
-﻿local avatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
-local parent = avatarExperienceInspectAndBuy.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local useTokens = foundationModule.Hooks.useTokens
-local avatarExperienceUIKitModule = require(parent.AvatarExperienceUIKit)
-local itemCardThumbnail = avatarExperienceUIKitModule.ItemCardComponents.ItemCardThumbnail
-local itemCardHeader = avatarExperienceUIKitModule.ItemCardComponents.ItemCardHeader
-local itemCard = avatarExperienceUIKitModule.ItemCardComponents.ItemCard
-local viewTypeModule = require(avatarExperienceInspectAndBuy.Enums.ViewType)
-local _ = require(avatarExperienceInspectAndBuy.Types)
-local getItemWidth = require(avatarExperienceInspectAndBuy.Utils.itemDetailsUtils).getItemWidth
+﻿local AvatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
+local Parent = AvatarExperienceInspectAndBuy.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local AvatarExperienceUIKitModule = require(Parent.AvatarExperienceUIKit)
+local ItemCardThumbnail = AvatarExperienceUIKitModule.ItemCardComponents.ItemCardThumbnail
+local ItemCardHeader = AvatarExperienceUIKitModule.ItemCardComponents.ItemCardHeader
+local ItemCard = AvatarExperienceUIKitModule.ItemCardComponents.ItemCard
+local ViewTypeModule = require(AvatarExperienceInspectAndBuy.Enums.ViewType)
+local _ = require(AvatarExperienceInspectAndBuy.Types)
+local GetItemWidthFunction = require(AvatarExperienceInspectAndBuy.Utils.itemDetailsUtils).getItemWidth
 
-return function(value)
-	-- upvalues: useTokens (ref), viewTypeModule (ref), reactModule (ref), itemCard (ref), getItemWidth (ref), itemCardHeader (ref), itemCardThumbnail (ref), foundationModule (ref)
-	local var1 = useTokens()
-	local itemData = value.itemData
-	local var2 = value.view == viewTypeModule.WideLandscape
-	local var3 = value.view == viewTypeModule.Compact
-	local var4, var5 = reactModule.useBinding(Vector2.new(0, 0))
-	local t = {}
-	local var6 = if var2 or var3 then 4 else 6
+return function(Frame) --[[ Line: 44 | Named "BundleAssetsList" ]]
+	-- upvalues: UseTokensFunction (copy), ViewTypeModule (copy), ReactModule (copy), ItemCard (copy), GetItemWidthFunction (copy), ItemCardHeader (copy), ItemCardThumbnail (copy), FoundationModule (copy)
+	local UseTokensResult = UseTokensFunction()
+	local ItemData = Frame.itemData
+	local IsViewMatch = Frame.view == ViewTypeModule.WideLandscape
+	local IsViewMatch1 = Frame.view == ViewTypeModule.Compact
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(Vector2.new(0, 0))
+	local Elements = {}
+	local v1: number = if IsViewMatch or IsViewMatch1 then 4 else 6
 	
-	if itemData.assetsInBundle then
-		for i, v in itemData.assetsInBundle do
-			t["AssetItemCard" .. i] = reactModule.createElement(itemCard, {
-				Size = var4:map(function(p1)
-					-- upvalues: getItemWidth (copy), var6 (ref), var1 (ref)
-					return UDim2.new(0, getItemWidth(p1.X, var6, var1.Gap.Medium), 1, 0)
+	if ItemData.assetsInBundle then
+		for i, value in ItemData.assetsInBundle do
+			Elements["AssetItemCard" .. i] = ReactModule.createElement(ItemCard, {
+				Size = UseBindingResult:map(function(p1): UDim2 --[[ Line: 57 ]]
+					-- upvalues: GetItemWidthFunction (upval), v1 (copy), UseTokensResult (copy)
+					return UDim2.new(0, GetItemWidthFunction(p1.X, v1, UseTokensResult.Gap.Medium), 1, 0)
 				end),
 				AutomaticSize = Enum.AutomaticSize.Y,
-				headerSlot = reactModule.createElement(itemCardHeader, { LayoutOrder = 1 }, reactModule.createElement(itemCardThumbnail, {
-					url = "rbxthumb://type=Asset&id=" .. v.id .. "&w=420&h=420"
+				headerSlot = ReactModule.createElement(ItemCardHeader, { LayoutOrder = 1 }, ReactModule.createElement(ItemCardThumbnail, {
+					url = "rbxthumb://type=Asset&id=" .. value.id .. "&w=420&h=420"
 				})),
-				footerSlot = if v.name then reactModule.createElement(foundationModule.Text, {
+				footerSlot = if value.name then ReactModule.createElement(FoundationModule.Text, {
 					tag = "auto-y text-body-small content-emphasis text-truncate-split text-align-x-left size-full-0 text-wrap",
 					LayoutOrder = 2,
-					Text = v.name
+					Text = value.name
 				}) else nil
 			})
 		end
 	end
-	return reactModule.createElement(foundationModule.View, {
+	return ReactModule.createElement(FoundationModule.View, {
 		tag = "auto-y size-full-0 col align-x-left align-y-top gap-small",
-		LayoutOrder = value.LayoutOrder or 5,
-		onAbsoluteSizeChanged = reactModule.useCallback(function(p1)
-			-- upvalues: var5 (ref)
-			var5(p1.AbsoluteSize)
+		LayoutOrder = Frame.LayoutOrder or 5,
+		onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame) --[[ Line: 81 ]]
+			-- upvalues: UseBindingResult2 (copy)
+			UseBindingResult2(Frame.AbsoluteSize)
 		end, {})
 	}, {
-		IncludedPartsLabel = reactModule.createElement(foundationModule.View, { tag = "auto-xy padding-top-xxlarge", LayoutOrder = 1 }, {
-			Label = reactModule.createElement(foundationModule.Text, {
+		IncludedPartsLabel = ReactModule.createElement(FoundationModule.View, { tag = "auto-xy padding-top-xxlarge", LayoutOrder = 1 }, {
+			Label = ReactModule.createElement(FoundationModule.Text, {
 				tag = "text-title-medium text-align-x-left content-emphasis",
 				LayoutOrder = 1,
-				Text = value.headerLabel
+				Text = Frame.headerLabel
 			})
 		}),
-		BundleAssets = reactModule.createElement(foundationModule.View, {
+		BundleAssets = ReactModule.createElement(FoundationModule.View, {
 			tag = "auto-y size-full-0 padding-y-small row align-x-left align-y-top gap-medium wrap",
 			LayoutOrder = 2
-		}, t)
+		}, Elements)
 	})
 end

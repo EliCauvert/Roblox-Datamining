@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Workspace.RobloxAppInteractionFeedbackConfig.RobloxAppInteractionFeedbackConfig)
+﻿return (require(script.Parent.Parent.Parent._Workspace.RobloxAppInteractionFeedbackConfig.RobloxAppInteractionFeedbackConfig))

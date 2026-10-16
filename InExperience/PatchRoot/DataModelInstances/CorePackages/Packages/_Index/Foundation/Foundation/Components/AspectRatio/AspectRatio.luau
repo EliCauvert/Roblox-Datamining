@@ -1,27 +1,31 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local reactModule = require(parent.React)
-local reactIsModule = require(parent.ReactIs)
-local getTestIdTagModule = require(foundation.Utility.getTestIdTag)
-local _ = require(foundation.Components.Types)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local ReactModule = require(Parent.React)
+local ReactIsModule = require(Parent.ReactIs)
+local GetTestIdTagModule = require(Foundation.Utility.getTestIdTag)
+local _ = require(Foundation.Components.Types)
 
-local function getAspectRatio(p1)
-	-- upvalues: reactIsModule (ref)
-	return if reactIsModule.isBinding(p1) or typeof(p1) == "number" then { AspectType = nil, DominantAxis = nil, AspectRatio = p1 } else {
-		AspectRatio = p1.AspectRatio,
-		AspectType = p1.AspectType,
-		DominantAxis = p1.DominantAxis
+local function getAspectRatio(AspectRatio) --[[ Line: 14 ]]
+	-- upvalues: ReactIsModule (copy)
+	return if ReactIsModule.isBinding(AspectRatio) or typeof(AspectRatio) == "number" then {
+		AspectType = nil,
+		DominantAxis = nil,
+		AspectRatio = AspectRatio
+	} else {
+		AspectRatio = AspectRatio.AspectRatio,
+		AspectType = AspectRatio.AspectType,
+		DominantAxis = AspectRatio.DominantAxis
 	}
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: getAspectRatio (ref), reactModule (ref), getTestIdTagModule (ref)
-	local var1 = getAspectRatio(p1.value)
+return ReactModule.memo(function(p1) --[[ Line: 41 | Named "AspectRatio" ]]
+	-- upvalues: getAspectRatio (copy), ReactModule (copy), GetTestIdTagModule (copy)
+	local AspectRatio = getAspectRatio(p1.value)
 	
-	return reactModule.createElement("UIAspectRatioConstraint", {
-		AspectRatio = var1.AspectRatio,
-		AspectType = var1.AspectType,
-		DominantAxis = var1.DominantAxis,
-		[reactModule.Tag] = getTestIdTagModule(p1.testId)
+	return ReactModule.createElement("UIAspectRatioConstraint", {
+		AspectRatio = AspectRatio.AspectRatio,
+		AspectType = AspectRatio.AspectType,
+		DominantAxis = AspectRatio.DominantAxis,
+		[ReactModule.Tag] = GetTestIdTagModule(p1.testId)
 	})
 end)

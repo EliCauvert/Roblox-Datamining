@@ -1,139 +1,140 @@
-﻿local genericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
-local parent = genericAbuseReporting.Parent
-local dashModule = require(parent.Dash)
-local reactModule = require(parent.React)
-local roactNetworking = require(parent.RoactServiceTags).RoactNetworking
-local useRoactService = require(parent.RobloxAppHooks).useRoactService
-local _ = require(genericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.AbuseSheetFlowTypes)
-local abuseVectorModule = require(genericAbuseReporting.Enums.AbuseVector)
-local analyticsServiceModule = require(genericAbuseReporting.BeduiV2.Analytics.analyticsService)
-local fetchConfigWithAttributesModule = require(genericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.fetchConfigWithAttributes)
-local _ = require(genericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.inExperienceConfig)
-local fFlagAbuseReportImproveErrorEventsModule = require(genericAbuseReporting.Flags.FFlagAbuseReportImproveErrorEvents)
-local formatErrorDetailForAnalytics = analyticsServiceModule.formatErrorDetailForAnalytics
-local getNewRunId = require(genericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.reducer).getNewRunId
-local sendAnalyticsEvent = analyticsServiceModule.sendAnalyticsEvent
-local telemetryEventType = analyticsServiceModule.TelemetryEventType
-local inExperience = abuseVectorModule.InExperience
+﻿local GenericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
+local Parent = GenericAbuseReporting.Parent
+local DashModule = require(Parent.Dash)
+local ReactModule = require(Parent.React)
+local RoactNetworking = require(Parent.RoactServiceTags).RoactNetworking
+local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
+local _ = require(GenericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.AbuseSheetFlowTypes)
+local AnalyticsServiceModule = require(GenericAbuseReporting.BeduiV2.Analytics.analyticsService)
+local FetchConfigWithAttributesModule = require(GenericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.fetchConfigWithAttributes)
+local _ = require(GenericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.inExperienceConfig)
+local FFlagAbuseReportImproveErrorEventsModule = require(GenericAbuseReporting.Flags.FFlagAbuseReportImproveErrorEvents)
+local FormatErrorDetailForAnalyticsFunction = AnalyticsServiceModule.formatErrorDetailForAnalytics
+local GetNewRunIdFunction = require(GenericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.reducer).getNewRunId
+local SendAnalyticsEventFunction = AnalyticsServiceModule.sendAnalyticsEvent
+local TelemetryEventType = AnalyticsServiceModule.TelemetryEventType
+local InExperience = require(GenericAbuseReporting.Enums.AbuseVector).InExperience
 
-local function getCacheKey(p1, p2)
-	local t = {}
+local function getCacheKey(InExperience, List): string --[[ Line: 38 ]]
+	local List1 = {}
 	
-	for i in pairs(p2) do
-		table.insert(t, i)
+	for i in pairs(List) do
+		table.insert(List1, i)
 	end
-	table.sort(t)
-	local list = { p1 }
+	table.sort(List1)
+	local List2 = { InExperience }
 	
-	for i_1, v in ipairs(t) do
-		table.insert(list, v .. "=" .. tostring(p2[v]))
+	for _, value in ipairs(List1) do
+		table.insert(List2, value .. "=" .. tostring(List[value]))
 	end
-	return table.concat(list, ":")
+	return table.concat(List2, ":")
 end
 
-local var1 = nil
+local v1 = nil
 
 return {
 	CONFIG_CACHE_TTL_MS = 1800000,
-	useDynamicInExpConfig = function(p3, p4)
-		-- upvalues: useRoactService (ref), roactNetworking (ref), getCacheKey (ref), inExperience (ref), reactModule (ref), var1 (write), sendAnalyticsEvent (ref), telemetryEventType (ref), fetchConfigWithAttributesModule (ref), getNewRunId (ref), fFlagAbuseReportImproveErrorEventsModule (ref), formatErrorDetailForAnalytics (ref), dashModule (ref)
-		local var2 = useRoactService(roactNetworking)
-		local var3 = getCacheKey(inExperience, p4)
-		local var4, var5 = reactModule.useState(nil)
-		local var6, var7 = reactModule.useState(false)
-		local var8 = reactModule.useRef(0)
-		local var9 = if var4 and var4.key ~= var3 then nil elseif var4 then var4.data else nil
-		reactModule.useEffect(function()
-			-- upvalues: p3 (ref), var5 (ref), p4 (ref), var1 (copy), var3 (ref), var7 (ref), sendAnalyticsEvent (copy), inExperience (copy), telemetryEventType (copy), var8 (ref), fetchConfigWithAttributesModule (copy), var2 (ref), getNewRunId (copy), fFlagAbuseReportImproveErrorEventsModule (copy), formatErrorDetailForAnalytics (copy), dashModule (copy)
-			if not p3 then
-				var5(nil)
+	useDynamicInExpConfig = function(p1, p2) --[[ Line: 77 ]]
+		-- upvalues: UseRoactServiceFunction (copy), RoactNetworking (copy), getCacheKey (copy), InExperience (copy), ReactModule (copy), v1 (ref), SendAnalyticsEventFunction (copy), TelemetryEventType (copy), FetchConfigWithAttributesModule (copy), GetNewRunIdFunction (copy), FFlagAbuseReportImproveErrorEventsModule (copy), FormatErrorDetailForAnalyticsFunction (copy), DashModule (copy)
+		local UseRoactServiceResult = UseRoactServiceFunction(RoactNetworking)
+		local CacheKey = getCacheKey(InExperience, p2)
+		local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+		local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
+		local UseRefResult = ReactModule.useRef(0)
+		local Data = if UseStateResult and UseStateResult.key ~= CacheKey then nil elseif UseStateResult then UseStateResult.data else nil
+		ReactModule.useEffect(function() --[[ Line: 92 ]]
+			-- upvalues: p1 (copy), UseStateResult2 (copy), p2 (copy), v1 (upval), CacheKey (copy), UseStateResult2_1 (copy), SendAnalyticsEventFunction (upval), InExperience (upval), TelemetryEventType (upval), UseRefResult (copy), FetchConfigWithAttributesModule (upval), UseRoactServiceResult (copy), GetNewRunIdFunction (upval), FFlagAbuseReportImproveErrorEventsModule (upval), FormatErrorDetailForAnalyticsFunction (upval), DashModule (upval)
+			if not p1 then
+				UseStateResult2(nil)
 				
 				return
 			end
-			local experienceTargetId = p4.experienceTargetId
+			local ExperienceTargetId = p2.experienceTargetId
+			local UnixTimestampMillis = DateTime.now().UnixTimestampMillis
 			
-			if var1 and var1.key == var3 and DateTime.now().UnixTimestampMillis - var1.fetchedAtMs <= 1800000 then
-				var5({ key = var3, data = var1.data })
-				var7(false)
-				sendAnalyticsEvent({
+			if v1 and v1.key == CacheKey and UnixTimestampMillis - v1.fetchedAtMs <= 1800000 then
+				UseStateResult2({ key = CacheKey, data = v1.data })
+				UseStateResult2_1(false)
+				SendAnalyticsEventFunction({
 					run_id = "unknown",
 					total_duration = 0,
-					abuse_vector = inExperience,
-					target_id = experienceTargetId,
+					abuse_vector = InExperience,
+					target_id = ExperienceTargetId,
 					path = {},
-					config_name = var1.data.name
+					config_name = v1.data.name
 				}, {
-					sub_event_type = telemetryEventType.ConfigLoaded,
+					sub_event_type = TelemetryEventType.ConfigLoaded,
 					config_load_detail = { load_duration_ms = 0, cache_hit = true, retry_count = 0 }
 				})
 				
 				return
+			else
+				local NewCurrent = UseRefResult.current + 1
+				UseRefResult.current = NewCurrent
+				UseStateResult2(nil)
+				UseStateResult2_1(false)
+				local UnixTimestampMillis1 = DateTime.now().UnixTimestampMillis
+				FetchConfigWithAttributesModule(UseRoactServiceResult, InExperience, p2):andThen(function(Result) --[[ Line: 140 ]]
+					-- upvalues: UseRefResult (upval), NewCurrent (copy), v1 (upval), CacheKey (upval), UseStateResult2 (upval), SendAnalyticsEventFunction (upval), InExperience (upval), ExperienceTargetId (copy), TelemetryEventType (upval), UnixTimestampMillis1 (copy)
+					if UseRefResult.current == NewCurrent then
+						local ResponseBody = Result.responseBody
+						v1 = {
+							key = CacheKey,
+							data = ResponseBody,
+							fetchedAtMs = DateTime.now().UnixTimestampMillis
+						}
+						UseStateResult2({ key = CacheKey, data = ResponseBody })
+						SendAnalyticsEventFunction({
+							run_id = "unknown",
+							total_duration = 0,
+							abuse_vector = InExperience,
+							target_id = ExperienceTargetId,
+							path = {},
+							config_name = ResponseBody.name
+						}, {
+							sub_event_type = TelemetryEventType.ConfigLoaded,
+							config_load_detail = {
+								cache_hit = false,
+								retry_count = 0,
+								load_duration_ms = DateTime.now().UnixTimestampMillis - UnixTimestampMillis1
+							}
+						})
+						
+						return
+					end
+				end):catch(function(Err) --[[ Line: 166 ]]
+					-- upvalues: UseRefResult (upval), NewCurrent (copy), UseStateResult2_1 (upval), SendAnalyticsEventFunction (upval), InExperience (upval), ExperienceTargetId (copy), GetNewRunIdFunction (upval), TelemetryEventType (upval), FFlagAbuseReportImproveErrorEventsModule (upval), FormatErrorDetailForAnalyticsFunction (upval), DashModule (upval)
+					if UseRefResult.current == NewCurrent then
+						warn("Failed to fetch Dynamic Report V2 config:", Err)
+						UseStateResult2_1(true)
+						SendAnalyticsEventFunction({
+							total_duration = 0,
+							abuse_vector = InExperience,
+							target_id = ExperienceTargetId,
+							run_id = GetNewRunIdFunction(),
+							path = {}
+						}, {
+							sub_event_type = TelemetryEventType.Error,
+							error_detail = if FFlagAbuseReportImproveErrorEventsModule then FormatErrorDetailForAnalyticsFunction("Failed to fetch config", Err) else {
+								error_message = "Failed to fetch config: " .. string.sub(DashModule.pretty(Err, { depth = 2 }), 1, 256)
+							}
+						})
+						
+						return
+					end
+				end)
 			end
-			local var10 = var8.current + 1
-			var8.current = var10
-			var5(nil)
-			var7(false)
-			local unixTimestampMillis = DateTime.now().UnixTimestampMillis
-			fetchConfigWithAttributesModule(var2, inExperience, p4):andThen(function(p5)
-				-- upvalues: var8 (copy), var10 (ref), var1 (copy), var3 (copy), var5 (copy), sendAnalyticsEvent (copy), inExperience (copy), experienceTargetId (ref), telemetryEventType (copy), unixTimestampMillis (ref)
-				if var8.current == var10 then
-					local responseBody = p5.responseBody
-					var1 = {
-						key = var3,
-						data = responseBody,
-						fetchedAtMs = DateTime.now().UnixTimestampMillis
-					}
-					var5({ key = var3, data = responseBody })
-					sendAnalyticsEvent({
-						run_id = "unknown",
-						total_duration = 0,
-						abuse_vector = inExperience,
-						target_id = experienceTargetId,
-						path = {},
-						config_name = responseBody.name
-					}, {
-						sub_event_type = telemetryEventType.ConfigLoaded,
-						config_load_detail = {
-							cache_hit = false,
-							retry_count = 0,
-							load_duration_ms = DateTime.now().UnixTimestampMillis - unixTimestampMillis
-						}
-					})
-					
-					return
-				end
-			end):catch(function(p5)
-				-- upvalues: var8 (copy), var10 (ref), var7 (copy), sendAnalyticsEvent (copy), inExperience (copy), experienceTargetId (ref), getNewRunId (copy), telemetryEventType (copy), fFlagAbuseReportImproveErrorEventsModule (copy), formatErrorDetailForAnalytics (copy), dashModule (copy)
-				if var8.current == var10 then
-					warn("Failed to fetch Dynamic Report V2 config:", p5)
-					var7(true)
-					sendAnalyticsEvent({
-						total_duration = 0,
-						abuse_vector = inExperience,
-						target_id = experienceTargetId,
-						run_id = getNewRunId(),
-						path = {}
-					}, {
-						sub_event_type = telemetryEventType.Error,
-						error_detail = if fFlagAbuseReportImproveErrorEventsModule then formatErrorDetailForAnalytics("Failed to fetch config", p5) else {
-							error_message = "Failed to fetch config: " .. string.sub(dashModule.pretty(p5, { depth = 2 }), 1, 256)
-						}
-					})
-					
-					return
-				end
-			end)
-		end, { var2, p3, p4, var3 })
+		end, { UseRoactServiceResult, p1, p2, CacheKey })
 		
 		return {
-			config = var9,
-			hasError = var6,
-			setHasError = var7,
-			abuseVector = inExperience
+			config = Data,
+			hasError = UseStateResult1,
+			setHasError = UseStateResult2_1,
+			abuseVector = InExperience
 		}
 	end,
-	clearCacheForTesting = function()
-		-- upvalues: var1 (write)
-		var1 = nil
+	clearCacheForTesting = function() --[[ Line: 54 ]]
+		-- upvalues: v1 (ref)
+		v1 = nil
 	end
 }

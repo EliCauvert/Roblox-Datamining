@@ -1,22 +1,22 @@
-﻿local var1 = nil
-local var2, var3 = require(script.Parent.Parent.Parent.Signals).createSignal(false)
+﻿local v1 = nil
+local Signal, Signal2 = require(script.Parent.Parent.Parent.Signals).createSignal(false)
 
-return (function()
-	-- upvalues: var1 (write), var2 (ref), var3 (ref)
+return ((function() --[[ Line: 11 | Named "createSettingsHubService" ]]
+	-- upvalues: v1 (ref), Signal (copy), Signal2 (copy)
 	return {
-		register = function(p1)
-			-- upvalues: var1 (copy)
-			var1 = p1
+		register = function(p1) --[[ Line: 14 ]]
+			-- upvalues: v1 (upval)
+			v1 = p1
 		end,
-		hubRef = function()
-			-- upvalues: var1 (copy)
-			return if var1 then var1.HubRef else nil
+		hubRef = function() --[[ Line: 19 ]]
+			-- upvalues: v1 (upval)
+			return v1 and v1.HubRef or nil
 		end,
-		pageRef = function()
-			-- upvalues: var1 (copy)
-			return if var1 then var1.Page else nil
+		pageRef = function() --[[ Line: 22 ]]
+			-- upvalues: v1 (upval)
+			return v1 and v1.Page or nil
 		end,
-		showMenuButtonsContainer = var2,
-		setShowMenuButtonsContainer = var3
+		showMenuButtonsContainer = Signal,
+		setShowMenuButtonsContainer = Signal2
 	}
-end)()
+end)())

@@ -1,124 +1,125 @@
-﻿local currencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
-local signalsModule = require(currencyTransfers.Parent.Signals)
-local promptStateModule = require(currencyTransfers.Enums.PromptState)
-local _ = require(currencyTransfers.types)
-local _ = require(currencyTransfers.Enums.TransferDirection)
-local _ = require(currencyTransfers.Enums.TransferOrigination)
-local _ = require(currencyTransfers.Models.ErrorTransferModel)
-local _ = require(currencyTransfers.Enums.TransferRetryOrigin)
+﻿local CurrencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
+local SignalsModule = require(CurrencyTransfers.Parent.Signals)
+local PromptStateModule = require(CurrencyTransfers.Enums.PromptState)
+local _ = require(CurrencyTransfers.types)
+local _ = require(CurrencyTransfers.Enums.TransferDirection)
+local _ = require(CurrencyTransfers.Enums.TransferOrigination)
+local _ = require(CurrencyTransfers.Models.ErrorTransferModel)
+local _ = require(CurrencyTransfers.Enums.TransferRetryOrigin)
 
-return function()
-	-- upvalues: signalsModule (ref), promptStateModule (ref)
-	local var1, var2 = signalsModule.createSignal(promptStateModule.Unspecified)
-	local var3, var4 = signalsModule.createSignal(nil)
-	local var5, var6 = signalsModule.createSignal(0)
-	local var7, var8 = signalsModule.createSignal(0)
-	local var9, var10 = signalsModule.createSignal(false)
-	local var11, var12 = signalsModule.createSignal(nil)
-	local var13, var14 = signalsModule.createSignal(nil)
-	local var15, var16 = signalsModule.createSignal(nil)
-	local var17, var18 = signalsModule.createSignal(nil)
-	local var19, var20 = signalsModule.createSignal(nil)
-	local var21, var22 = signalsModule.createSignal(nil)
-	local var23, var24 = signalsModule.createSignal(nil)
-	local var25, var26 = signalsModule.createSignal(false)
-	local var27, var28 = signalsModule.createSignal(nil)
-	local var29, var30 = signalsModule.createSignal(nil)
-	local var31, var32 = signalsModule.createSignal(nil)
-	local var33, var34 = signalsModule.createSignal(nil)
-	local var35, var36 = signalsModule.createSignal(nil)
-	local var37, var38 = signalsModule.createSignal("")
-	local var39, var40 = signalsModule.createSignal(nil)
-	local var41, var42 = signalsModule.createSignal(nil)
-	local var43 = nil
-	local var44 = nil
-	local var45 = nil
-	local var46 = false
-	local var47 = nil
+return function() --[[ Line: 77 ]]
+	-- upvalues: SignalsModule (copy), PromptStateModule (copy)
+	local Signal, Signal2 = SignalsModule.createSignal(PromptStateModule.Unspecified)
+	local Signal1, Signal2_1 = SignalsModule.createSignal(nil)
+	local Signal3, Signal2_2 = SignalsModule.createSignal(0)
+	local Signal4, Signal2_3 = SignalsModule.createSignal(0)
+	local Signal5, Signal2_4 = SignalsModule.createSignal(false)
+	local Signal6, Signal2_5 = SignalsModule.createSignal(nil)
+	local Signal7, Signal2_6 = SignalsModule.createSignal(nil)
+	local Signal8, Signal2_7 = SignalsModule.createSignal(nil)
+	local Signal9, Signal2_8 = SignalsModule.createSignal(nil)
+	local Signal10, Signal2_9 = SignalsModule.createSignal(nil)
+	local Signal11, Signal2_10 = SignalsModule.createSignal(nil)
+	local Signal12, Signal2_11 = SignalsModule.createSignal(nil)
+	local Signal13, Signal2_12 = SignalsModule.createSignal(false)
+	local Signal14, Signal2_13 = SignalsModule.createSignal(nil)
+	local Signal15, Signal2_14 = SignalsModule.createSignal(nil)
+	local Signal16, Signal2_15 = SignalsModule.createSignal(nil)
+	local Signal17, Signal2_16 = SignalsModule.createSignal(nil)
+	local Signal18, Signal2_17 = SignalsModule.createSignal(nil)
+	local Signal19, Signal2_18 = SignalsModule.createSignal("")
+	local Signal20, Signal2_19 = SignalsModule.createSignal(nil)
+	local Signal21, Signal2_20 = SignalsModule.createSignal(nil)
+	local Callback = nil
+	local Callback1 = nil
+	local Callback2 = nil
+	local Flag = false
+	local NetworkImpl = nil
 	
 	return {
-		getPromptState = var1,
-		setPromptState = var2,
-		getTransferRequestId = var3,
-		setTransferRequestId = var4,
-		getRecipientUserId = var5,
-		setRecipientUserId = var6,
-		getRobuxBalanceAmount = var7,
-		setRobuxBalanceAmount = var8,
-		getBalanceReceivedFromApi = var9,
-		setBalanceReceivedFromApi = var10,
-		getSelectedAmount = var11,
-		setSelectedAmount = var12,
-		getUserRelationshipDetail = var13,
-		setUserRelationshipDetail = var14,
-		getRecipient = var15,
-		setRecipient = var16,
-		getSender = var17,
-		setSender = var18,
-		getDirection = var19,
-		setDirection = var20,
-		getTransferOrigination = var21,
-		setTransferOrigination = var22,
-		getRobuxTransfer = var23,
-		setRobuxTransfer = var24,
-		getIsAlreadyAccepted = var25,
-		setIsAlreadyAccepted = var26,
-		getErrorTransferModel = var27,
-		setErrorTransferModel = var28,
-		getAmpRecourseActions = var29,
-		setAmpRecourseActions = var30,
-		getAmpFeatureCheck = var31,
-		setAmpFeatureCheck = var32,
-		getPreviousPromptState = var33,
-		setPreviousPromptState = var34,
-		getTransferRetryOrigin = var35,
-		setTransferRetryOrigin = var36,
-		getTransferClientSessionId = var37,
-		setTransferClientSessionId = var38,
-		getMinimumTransferAmount = var39,
-		setMinimumTransferAmount = var40,
-		getMaximumTransferAmount = var41,
-		setMaximumTransferAmount = var42,
-		setOnClose = function(value)
-			-- upvalues: var43 (write)
-			var43 = value
+		getPromptState = Signal,
+		setPromptState = Signal2,
+		getTransferRequestId = Signal1,
+		setTransferRequestId = Signal2_1,
+		getRecipientUserId = Signal3,
+		setRecipientUserId = Signal2_2,
+		getRobuxBalanceAmount = Signal4,
+		setRobuxBalanceAmount = Signal2_3,
+		getBalanceReceivedFromApi = Signal5,
+		setBalanceReceivedFromApi = Signal2_4,
+		getSelectedAmount = Signal6,
+		setSelectedAmount = Signal2_5,
+		getUserRelationshipDetail = Signal7,
+		setUserRelationshipDetail = Signal2_6,
+		getRecipient = Signal8,
+		setRecipient = Signal2_7,
+		getSender = Signal9,
+		setSender = Signal2_8,
+		getDirection = Signal10,
+		setDirection = Signal2_9,
+		getTransferOrigination = Signal11,
+		setTransferOrigination = Signal2_10,
+		getRobuxTransfer = Signal12,
+		setRobuxTransfer = Signal2_11,
+		getIsAlreadyAccepted = Signal13,
+		setIsAlreadyAccepted = Signal2_12,
+		getErrorTransferModel = Signal14,
+		setErrorTransferModel = Signal2_13,
+		getAmpRecourseActions = Signal15,
+		setAmpRecourseActions = Signal2_14,
+		getAmpFeatureCheck = Signal16,
+		setAmpFeatureCheck = Signal2_15,
+		getPreviousPromptState = Signal17,
+		setPreviousPromptState = Signal2_16,
+		getTransferRetryOrigin = Signal18,
+		setTransferRetryOrigin = Signal2_17,
+		getTransferClientSessionId = Signal19,
+		setTransferClientSessionId = Signal2_18,
+		getMinimumTransferAmount = Signal20,
+		setMinimumTransferAmount = Signal2_19,
+		getMaximumTransferAmount = Signal21,
+		setMaximumTransferAmount = Signal2_20,
+		setOnClose = function(Value) --[[ Line: 106 ]]
+			-- upvalues: Callback (ref)
+			Callback = Value
 		end,
-		triggerOnClose = function()
-			-- upvalues: var43 (write)
-			if var43 then
-				var43()
+		triggerOnClose = function() --[[ Line: 110 ]]
+			-- upvalues: Callback (ref)
+			if Callback then
+				Callback()
 			end
 		end,
-		setOnPromptOptimisticHide = function(value)
-			-- upvalues: var44 (write)
-			var44 = value
+		setOnPromptOptimisticHide = function(Value) --[[ Line: 116 ]]
+			-- upvalues: Callback1 (ref)
+			Callback1 = Value
 		end,
-		triggerOnPromptOptimisticHide = function()
-			-- upvalues: var44 (write)
-			if var44 then
-				var44()
+		triggerOnPromptOptimisticHide = function() --[[ Line: 120 ]]
+			-- upvalues: Callback1 (ref)
+			if Callback1 then
+				Callback1()
 			end
 		end,
-		setOnPromptDismissCommitted = function(value)
-			-- upvalues: var45 (write), var46 (write)
-			var45 = value
-			var46 = false
+		setOnPromptDismissCommitted = function(Value) --[[ Line: 126 ]]
+			-- upvalues: Callback2 (ref), Flag (ref)
+			Callback2 = Value
+			Flag = false
 		end,
-		triggerOnPromptDismissCommitted = function()
-			-- upvalues: var46 (write), var45 (write)
-			if var46 or var45 == nil then
+		triggerOnPromptDismissCommitted = function() --[[ Line: 131 ]]
+			-- upvalues: Flag (ref), Callback2 (ref)
+			if not Flag and Callback2 ~= nil then
+				Flag = true
+				Callback2()
+				
 				return
 			end
-			var46 = true
-			var45()
 		end,
-		getNetworkImpl = function()
-			-- upvalues: var47 (write)
-			return var47
+		getNetworkImpl = function() --[[ Line: 145 ]]
+			-- upvalues: NetworkImpl (ref)
+			return NetworkImpl
 		end,
-		setNetworkImpl = function(value)
-			-- upvalues: var47 (write)
-			var47 = value
+		setNetworkImpl = function(Value) --[[ Line: 142 ]]
+			-- upvalues: NetworkImpl (ref)
+			NetworkImpl = Value
 		end
 	}
 end

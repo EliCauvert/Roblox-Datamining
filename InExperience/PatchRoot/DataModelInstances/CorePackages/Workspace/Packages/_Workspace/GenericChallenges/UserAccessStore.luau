@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.UserAccessStore.UserAccessStore)
+﻿return (require(script.Parent.Parent.Parent._Index.UserAccessStore.UserAccessStore))

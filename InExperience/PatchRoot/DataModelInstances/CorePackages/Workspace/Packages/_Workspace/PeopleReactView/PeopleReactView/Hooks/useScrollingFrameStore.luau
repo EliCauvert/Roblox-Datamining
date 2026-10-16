@@ -1,25 +1,25 @@
-﻿local peopleReactView = script:FindFirstAncestor("PeopleReactView")
-local parent = peopleReactView.Parent
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local getScrollingFrameStoreModule = require(peopleReactView.Stores.GetScrollingFrameStore)
+﻿local PeopleReactView = script:FindFirstAncestor("PeopleReactView")
+local Parent = PeopleReactView.Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local GetScrollingFrameStoreModule = require(PeopleReactView.Stores.GetScrollingFrameStore)
 
-return function(p1)
-	-- upvalues: signalsReactModule (ref), getScrollingFrameStoreModule (ref), reactModule (ref)
-	local var1 = signalsReactModule.useSignalState(getScrollingFrameStoreModule)
-	local var2 = reactModule.useRef(false)
+return function(p1) --[[ Line: 9 | Named "useScrollingFrameStore" ]]
+	-- upvalues: SignalsReactModule (copy), GetScrollingFrameStoreModule (copy), ReactModule (copy)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(GetScrollingFrameStoreModule)
+	local UseRefResult = ReactModule.useRef(false)
 	
-	if not var2.current and p1 then
-		var1.setScrollingFrame(p1)
-		var2.current = true
+	if not UseRefResult.current and p1 then
+		UseSignalStateResult.setScrollingFrame(p1)
+		UseRefResult.current = true
 	end
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref)
-		return function()
-			-- upvalues: var1 (copy)
-			var1.cleanUp()
+	ReactModule.useEffect(function() --[[ Line: 18 ]]
+		-- upvalues: UseSignalStateResult (copy)
+		return function() --[[ Line: 19 ]]
+			-- upvalues: UseSignalStateResult (upval)
+			UseSignalStateResult.cleanUp()
 		end
-	end, { var1 })
+	end, { UseSignalStateResult })
 	
-	return var1
+	return UseSignalStateResult
 end

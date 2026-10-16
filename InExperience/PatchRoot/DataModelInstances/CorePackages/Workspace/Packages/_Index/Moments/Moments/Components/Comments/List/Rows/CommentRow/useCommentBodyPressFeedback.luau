@@ -1,54 +1,55 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local reactOtterModule = require(parent.ReactOtter)
-local getColorStyleWithTransparencyModule = require(moments.Utils.getColorStyleWithTransparency)
-local controlState = foundationModule.Enums.ControlState
-local useTokens = foundationModule.Hooks.useTokens
-local t = { duration = 0.08, easingStyle = Enum.EasingStyle.Quad }
-local t_1 = { duration = 0.15, easingStyle = Enum.EasingStyle.Quad }
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local ReactOtterModule = require(Parent.ReactOtter)
+local FFlagMomentsCommentRowRedesignModule = require(Moments.Flags.FFlagMomentsCommentRowRedesign)
+local GetColorStyleWithTransparencyModule = require(Moments.Utils.getColorStyleWithTransparency)
+local ControlState = FoundationModule.Enums.ControlState
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local config = { duration = 0.08, easingStyle = Enum.EasingStyle.Quad }
+local config1 = { duration = 0.15, easingStyle = Enum.EasingStyle.Quad }
 
-local function _(p1)
-	-- upvalues: controlState (ref)
-	return if p1 ~= controlState.Hover then p1 == controlState.Pressed else true
+local function _(Hover): boolean --[[ Line: 32 | Named "isFadingState" ]]
+	-- upvalues: ControlState (copy)
+	return Hover == ControlState.Hover or Hover == ControlState.Pressed
 end
 
-return function(p1, p2)
-	-- upvalues: useTokens (ref), reactOtterModule (ref), reactModule (ref), controlState (ref), t (ref), t_1 (ref), getColorStyleWithTransparencyModule (ref)
-	local var1 = useTokens()
-	local var2, var3 = reactOtterModule.useAnimatedBinding(0)
-	local var4 = reactModule.useRef(controlState.Default)
-	local var5 = reactModule.useRef(p2)
-	reactModule.useLayoutEffect(function()
-		-- upvalues: var5 (ref), p2 (ref), var4 (ref), controlState (copy), var3 (ref), reactOtterModule (copy)
-		var5.current = p2
-		local var6 = p2
+return function(p1, Current) --[[ Line: 37 | Named "useCommentBodyPressFeedback" ]]
+	-- upvalues: UseTokensFunction (copy), ReactOtterModule (copy), ReactModule (copy), ControlState (copy), config (copy), config1 (copy), FFlagMomentsCommentRowRedesignModule (copy), GetColorStyleWithTransparencyModule (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(0)
+	local UseRefResult = ReactModule.useRef(ControlState.Default)
+	local UseRefResult1 = ReactModule.useRef(Current)
+	ReactModule.useLayoutEffect(function() --[[ Line: 43 ]]
+		-- upvalues: UseRefResult1 (copy), Current (copy), UseRefResult (copy), ControlState (upval), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval)
+		UseRefResult1.current = Current
+		local IsHoverMatch: boolean = Current
 		
-		if var6 then
-			local current = var4.current
-			var6 = if current ~= controlState.Hover then current == controlState.Pressed else true
+		if IsHoverMatch then
+			local Current1 = UseRefResult.current
+			IsHoverMatch = Current1 == ControlState.Hover or Current1 == ControlState.Pressed
 		end
-		var3(reactOtterModule.instant(if var6 then 1 else 0))
-	end, { p1, p2 })
-	local emphasis = var1.Color.Content.Emphasis
+		UseAnimatedBindingResult2((ReactOtterModule.instant(if IsHoverMatch then 1 else 0)))
+	end, { p1, Current })
+	local Default = if FFlagMomentsCommentRowRedesignModule then UseTokensResult.Color.Content.Default else UseTokensResult.Color.Content.Emphasis
 	
 	return {
-		onStateChanged = reactModule.useCallback(function(p3)
-			-- upvalues: var4 (ref), var5 (ref), controlState (copy), var3 (ref), reactOtterModule (copy), t (copy), t_1 (copy)
-			var4.current = p3
+		onStateChanged = ReactModule.useCallback(function(Current) --[[ Line: 50 ]]
+			-- upvalues: UseRefResult (copy), UseRefResult1 (copy), ControlState (upval), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), config (upval), config1 (upval)
+			UseRefResult.current = Current
 			
-			if var5.current then
-				local var6 = if p3 ~= controlState.Hover then p3 == controlState.Pressed else true
-				var3(reactOtterModule.ease(if var6 then 1 else 0, if var6 then t else t_1))
+			if UseRefResult1.current then
+				local IsCurrentMatch: boolean = Current == ControlState.Hover or Current == ControlState.Pressed
+				UseAnimatedBindingResult2(ReactOtterModule.ease(if IsCurrentMatch then 1 else 0, if IsCurrentMatch then config else config1))
 			end
-		end, { var3 }),
-		textStyle = reactModule.useMemo(function()
-			-- upvalues: var2 (ref), getColorStyleWithTransparencyModule (copy), emphasis (ref)
-			return var2:map(function(p3)
-				-- upvalues: getColorStyleWithTransparencyModule (copy), emphasis (copy)
-				return getColorStyleWithTransparencyModule(emphasis, p3 * 0.4)
+		end, { UseAnimatedBindingResult2 }),
+		textStyle = ReactModule.useMemo(function() --[[ Line: 61 ]]
+			-- upvalues: UseAnimatedBindingResult (copy), GetColorStyleWithTransparencyModule (upval), Default (copy)
+			return UseAnimatedBindingResult:map(function(p2: number) --[[ Line: 62 ]]
+				-- upvalues: GetColorStyleWithTransparencyModule (upval), Default (upval)
+				return GetColorStyleWithTransparencyModule(Default, p2 * 0.4)
 			end)
-		end, { var2, emphasis })
+		end, { UseAnimatedBindingResult, Default })
 	}
 end

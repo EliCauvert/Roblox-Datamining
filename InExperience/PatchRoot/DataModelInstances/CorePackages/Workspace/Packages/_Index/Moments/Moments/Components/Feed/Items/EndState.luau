@@ -1,20 +1,20 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local reactModule = require(moments.Parent.React)
-local _ = require(moments.Components.Feed.FeedTypes)
-local momentsEndStateItemModule = require(script.MomentsEndStateItem)
+﻿local Moments = script:FindFirstAncestor("Moments")
+local ReactModule = require(Moments.Parent.React)
+local _ = require(Moments.Components.Feed.FeedTypes)
+local MomentsEndStateItemModule = require(script.MomentsEndStateItem)
 
 return {
 	{
 		kind = "endState",
-		getKey = function(_)
+		getKey = function(_): string --[[ Line: 29 ]]
 			return "__feed_end_state__"
 		end,
-		getAttribution = function(_)
+		getAttribution = function(_) --[[ Line: 34 ]]
 			return nil
 		end,
-		render = function(_, _)
-			-- upvalues: reactModule (ref), momentsEndStateItemModule (ref)
-			return reactModule.createElement(momentsEndStateItemModule)
+		render = function(_, _) --[[ Line: 38 ]]
+			-- upvalues: ReactModule (copy), MomentsEndStateItemModule (copy)
+			return ReactModule.createElement(MomentsEndStateItemModule)
 		end
 	}
 }

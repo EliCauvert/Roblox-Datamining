@@ -1,265 +1,266 @@
-﻿local httpService = game:GetService("HttpService")
-local runService = game:GetService("RunService")
-local adGuiInteractivity = script:FindFirstAncestor("AdGuiInteractivity")
-local parent = adGuiInteractivity.Parent
-local reactModule = require(parent.React)
-local UIBloxModule = require(parent.UIBlox)
-local linkingProtocolModule = require(parent.LinkingProtocol)
-local foundationModule = require(parent.Foundation)
-local colorMode = foundationModule.Enums.ColorMode
-local localizationModule = require(parent.Localization)
-local universalAppPolicyModule = require(parent.UniversalAppPolicy)
-local httpModule = require(parent.Http)
-local roactServicesModule = require(parent.RoactServices)
-local roactServiceTagsModule = require(parent.RoactServiceTags)
-local robloxAppHooksModule = require(parent.RobloxAppHooks)
-local screenshotModule = require(parent.Screenshot)
-local loggingProtocolModule = require(parent.LoggingProtocol)
-local urlBuilder = require(parent.UrlBuilder).UrlBuilder
-local adsInteractivityTelemetryModule = require(adGuiInteractivity.AdsInteractivityTelemetry)
-local useRoactService = robloxAppHooksModule.useRoactService
-local useAppPolicy = universalAppPolicyModule.useAppPolicy
-local appStyleProvider = UIBloxModule.App.Style.AppStyleProvider
-local constants = UIBloxModule.App.Style.Constants
-local defaultTwoStepReportFlowModule = require(parent.GenericAbuseReporting.DefaultTwoStepReportFlow)
-local button = foundationModule.Button
-local view = foundationModule.View
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local inputSize = foundationModule.Enums.InputSize
-local useLocalization = localizationModule.Hooks.useLocalization
-local default = linkingProtocolModule.LinkingProtocol.default
-local default_1 = loggingProtocolModule.default
-local url = httpModule.Url
-local list = {
+﻿local HttpService = game:GetService("HttpService")
+local RunService = game:GetService("RunService")
+local AdGuiInteractivity = script:FindFirstAncestor("AdGuiInteractivity")
+local Parent = AdGuiInteractivity.Parent
+local ReactModule = require(Parent.React)
+local UIBloxModule = require(Parent.UIBlox)
+local FoundationModule = require(Parent.Foundation)
+local ColorMode = FoundationModule.Enums.ColorMode
+local UniversalAppPolicyModule = require(Parent.UniversalAppPolicy)
+local HttpModule = require(Parent.Http)
+local RoactServicesModule = require(Parent.RoactServices)
+local RoactServiceTagsModule = require(Parent.RoactServiceTags)
+local ScreenshotModule = require(Parent.Screenshot)
+local LoggingProtocolModule = require(Parent.LoggingProtocol)
+local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
+local AdsInteractivityTelemetryModule = require(AdGuiInteractivity.AdsInteractivityTelemetry)
+local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
+local UseAppPolicyFunction = UniversalAppPolicyModule.useAppPolicy
+local AppStyleProvider = UIBloxModule.App.Style.AppStyleProvider
+local Constants = UIBloxModule.App.Style.Constants
+local DefaultTwoStepReportFlowModule = require(Parent.GenericAbuseReporting.DefaultTwoStepReportFlow)
+local Button = FoundationModule.Button
+local View = FoundationModule.View
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local InputSize = FoundationModule.Enums.InputSize
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local Default = require(Parent.LinkingProtocol).LinkingProtocol.default
+local Default1 = LoggingProtocolModule.default
+local Url = HttpModule.Url
+local ReportCategories = {
 	{
 		localizationKey = "CoreScripts.Ads.Label.InappropriateAd",
 		value = "ABUSE_CATEGORY_INAPPROPRIATE_AD"
 	}
 }
-local var1 = urlBuilder.new({ path = "illegal-content-reporting", base = url.BASE_URL })
-local var2 = urlBuilder.new({
+local NewUrlBuilder = UrlBuilder.new({ path = "illegal-content-reporting", base = Url.BASE_URL })
+local NewUrlBuilder1 = UrlBuilder.new({
 	path = "store/asset/{assetId}",
-	base = url.CREATOR_HUB_URL
+	base = Url.CREATOR_HUB_URL
 })
-local var3 = urlBuilder.new({
+local NewUrlBuilder2 = UrlBuilder.new({
 	path = "abuse-reporting/v1/abuse-report",
-	base = url.APIS_URL
+	base = Url.APIS_URL
 })
-local t = {
+local config = {
 	eventName = "ReportImmersiveBrandedAdTotalCounter",
 	description = "This event is fired when the user initiates submitting an immersive branded ad abuse report (before success or failure is known).",
-	backends = { loggingProtocolModule.TelemetryBackends.Counter },
+	backends = { LoggingProtocolModule.TelemetryBackends.Counter },
 	lastUpdated = { 26, 3, 11 }
 }
-local t_1 = {
+local config1 = {
 	eventName = "ReportImmersiveBrandedAdSuccessCounter",
 	description = "This event is fired when an immersive branded ad abuse report is successfully submitted to the server.",
-	backends = { loggingProtocolModule.TelemetryBackends.Counter },
+	backends = { LoggingProtocolModule.TelemetryBackends.Counter },
 	lastUpdated = { 26, 3, 11 }
 }
-local t_2 = {
+local config2 = {
 	eventName = "ReportImmersiveBrandedAdFailureCounter",
 	description = "This event is fired when submitting an immersive branded ad abuse report fails.",
-	backends = { loggingProtocolModule.TelemetryBackends.Counter },
+	backends = { LoggingProtocolModule.TelemetryBackends.Counter },
 	lastUpdated = { 26, 3, 11 }
 }
-local t_3 = {
+local config3 = {
 	eventName = "ReportImmersiveBrandedAdHttpFaulreEvent",
 	description = "This event is fired when the HTTP request to submit an immersive branded ad abuse report fails.",
-	backends = { loggingProtocolModule.TelemetryBackends.Points },
+	backends = { LoggingProtocolModule.TelemetryBackends.Points },
 	throttlingPercentage = game:DefineFastInt("ReportImmersiveBrandedAdHttpFaulreEventThrottleHundredthsPercent", 0),
 	lastUpdated = { 26, 11, 3 }
 }
 
-local function _()
-	-- upvalues: default_1 (ref), t (ref)
-	default_1:logRobloxTelemetryCounter(t)
+local function _() --[[ Line: 93 | Named "logReportImmersiveBrandedAdTotalCounter" ]]
+	-- upvalues: Default1 (copy), config (copy)
+	Default1:logRobloxTelemetryCounter(config)
 end
 
-local _ = function()
-	-- upvalues: default_1 (ref), t_1 (ref)
-	default_1:logRobloxTelemetryCounter(t_1)
+local _ = function() --[[ Line: 97 | Named "logReportImmersiveBrandedAdSuccessCounter" ]]
+	-- upvalues: Default1 (copy), config1 (copy)
+	Default1:logRobloxTelemetryCounter(config1)
 end
 
-local _ = function(p1)
-	-- upvalues: default_1 (ref), t_2 (ref)
-	default_1:logRobloxTelemetryCounter(t_2, 1, { reason = p1 })
+local _ = function(Reason) --[[ Line: 101 | Named "logReportImmersiveBrandedAdFailureCounter" ]]
+	-- upvalues: Default1 (copy), config2 (copy)
+	Default1:logRobloxTelemetryCounter(config2, 1, { reason = Reason })
 end
 
-local function logReportImmersiveBrandedAdHttpFailureEvent(p1)
-	-- upvalues: default_1 (ref), t_3 (ref)
+local function logReportImmersiveBrandedAdHttpFailureEvent(Text: string) --[[ Line: 107 ]]
+	-- upvalues: Default1 (copy), config3 (copy)
 	local t = {}
 	
-	if type(p1) == "string" then
-		t.error = p1:sub(1, 500)
-	elseif type(p1) == "table" then
-		if p1.Body and type(p1.Body) == "string" then
-			t.body = p1.Body:sub(1, 500)
+	if type(Text) == "string" then
+		t.error = Text:sub(1, 500)
+	elseif type(Text) == "table" then
+		if Text.Body and type(Text.Body) == "string" then
+			t.body = Text.Body:sub(1, 500)
 		end
-		if p1.StatusCode and type(p1.StatusCode) == "number" then
-			t.statusCode = tostring(p1.StatusCode)
+		if Text.StatusCode and type(Text.StatusCode) == "number" then
+			t.statusCode = tostring(Text.StatusCode)
 		end
 	end
-	default_1:logRobloxTelemetryEvent(t_3, nil, t)
+	Default1:logRobloxTelemetryEvent(config3, nil, t)
 end
 
-local function sendImmersiveBrandedAdAbuseReport(p1, p2)
-	-- upvalues: httpService (ref), default_1 (ref), t_2 (ref), var3 (ref), t_1 (ref), logReportImmersiveBrandedAdHttpFailureEvent (ref)
-	local t = {
+local function sendImmersiveBrandedAdAbuseReport(Callback, p1): boolean --[[ Line: 132 ]]
+	-- upvalues: HttpService (copy), Default1 (copy), config2 (copy), NewUrlBuilder2 (copy), config1 (copy), logReportImmersiveBrandedAdHttpFailureEvent (copy)
+	local config = {
 		abuseVector = "ad_v2",
 		targetType = "ad_v2",
-		category = p2.reason,
-		comment = p2.comment,
-		custom = { SCREENSHOT_ID = p2.screenshotId, PLACE_ID = p2.placeId },
-		submitterId = p2.userId,
-		targetIdStr = `immersiveBrandedAd/{p2.immersiveBrandedAdId}`
+		category = p1.reason,
+		comment = p1.comment,
+		custom = { SCREENSHOT_ID = p1.screenshotId, PLACE_ID = p1.placeId },
+		submitterId = p1.userId,
+		targetIdStr = `immersiveBrandedAd/{p1.immersiveBrandedAdId}`
 	}
-	local ok, status = pcall(function()
-		-- upvalues: httpService (copy), t (ref)
-		return httpService:JSONEncode(t)
+	local Success, Result = pcall(function() --[[ Line: 146 ]]
+		-- upvalues: HttpService (upval), config (copy)
+		return HttpService:JSONEncode(config)
 	end)
 	
-	if ok then
-		task.spawn(function()
-			-- upvalues: var3 (copy), p1 (ref), status (ref), default_1 (copy), t_1 (copy), t_2 (copy), logReportImmersiveBrandedAdHttpFailureEvent (copy)
-			p1(var3(), "POST", { postBody = status }):andThen(function(_)
-				-- upvalues: default_1 (copy), t_1 (copy)
-				default_1:logRobloxTelemetryCounter(t_1)
-			end, function(p3)
-				-- upvalues: default_1 (copy), t_2 (copy), logReportImmersiveBrandedAdHttpFailureEvent (copy)
-				default_1:logRobloxTelemetryCounter(t_2, 1, { reason = "http" })
-				logReportImmersiveBrandedAdHttpFailureEvent(p3)
+	if Success then
+		task.spawn(function() --[[ Line: 154 ]]
+			-- upvalues: NewUrlBuilder2 (upval), Callback (copy), Result (copy), Default1 (upval), config1 (upval), config2 (upval), logReportImmersiveBrandedAdHttpFailureEvent (upval)
+			Callback(NewUrlBuilder2(), "POST", { postBody = Result }):andThen(function(_) --[[ Line: 156 ]]
+				-- upvalues: Default1 (upval), config1 (upval)
+				Default1:logRobloxTelemetryCounter(config1)
+			end, function(p2) --[[ Line: 158 ]]
+				-- upvalues: Default1 (upval), config2 (upval), logReportImmersiveBrandedAdHttpFailureEvent (upval)
+				Default1:logRobloxTelemetryCounter(config2, 1, { reason = "http" })
+				logReportImmersiveBrandedAdHttpFailureEvent(p2)
 			end)
 		end)
 		
 		return true
-	end
-	default_1:logRobloxTelemetryCounter(t_2, 1, { reason = "jsonEncode" })
-	
-	return false
-end
-
-local function ImmersiveBrandedAdReportAdDialog(p1)
-	-- upvalues: useRoactService (ref), roactServiceTagsModule (ref), reactModule (ref), useLocalization (ref), useAppPolicy (ref), var2 (ref), urlBuilder (ref), var1 (ref), default (ref), adsInteractivityTelemetryModule (ref), view (ref), button (ref), buttonVariant (ref), inputSize (ref), runService (ref), default_1 (ref), t (ref), t_2 (ref), sendImmersiveBrandedAdAbuseReport (ref), screenshotModule (ref), defaultTwoStepReportFlowModule (ref), list (ref)
-	local immersiveBrandedAdId = p1.immersiveBrandedAdId
-	local var4 = useRoactService(roactServiceTagsModule.RoactNetworking)
-	local var5 = reactModule.useRef(nil)
-	local var6, var7 = reactModule.useState(false)
-	local var8 = useLocalization({
-		LinkText = "CoreScripts.Ads.Label.IllegalContentReportingLink"
-	})
-	local var9 = useAppPolicy(function(p2)
-		return p2.getShowIllegalContentReportingUI()
-	end)
-	local var10 = reactModule.useCallback(function()
-		-- upvalues: var2 (copy), immersiveBrandedAdId (ref), urlBuilder (copy), var1 (copy), default (copy), adsInteractivityTelemetryModule (copy), p1 (ref)
-		default:openURL(urlBuilder.addQueryString(var1(), { contentURL = var2({ assetId = immersiveBrandedAdId }) })):catch(function(_)
-			-- upvalues: adsInteractivityTelemetryModule (copy), p1 (copy)
-			adsInteractivityTelemetryModule.logImmersiveBrandedAdLinkingFailedCounter("reportAd.eudsaIllegalContent")
-			p1.onDismiss()
-		end)
-	end, { immersiveBrandedAdId, p1.onDismiss })
-	local var11 = reactModule.useCallback(function()
-		-- upvalues: reactModule (copy), view (copy), button (copy), var8 (ref), buttonVariant (copy), var10 (ref), inputSize (copy)
-		return reactModule.createElement(view, {
-			tag = "col margin-x-medium padding-top-medium size-full-0 auto-y"
-		}, {
-			linkButton = reactModule.createElement(button, {
-				icon = "icons/navigation/externallink",
-				text = var8.LinkText,
-				variant = buttonVariant.Link,
-				onActivated = var10,
-				size = inputSize.Small
-			})
-		})
-	end, { var10, var8.LinkText })
-	local var12 = reactModule.useCallback(function(p2, p3)
-		-- upvalues: runService (copy), default_1 (copy), t (copy), t_2 (copy), var5 (ref), sendImmersiveBrandedAdAbuseReport (copy), var4 (ref), immersiveBrandedAdId (ref)
-		if runService:IsStudio() or _G.__TESTEZ_RUNNING_TEST__ or _G.__TEST_SUITE_PACKAGE__ then
-			return true
-		end
-		default_1:logRobloxTelemetryCounter(t)
-		local localPlayer = game.Players.LocalPlayer
-		
-		if not localPlayer then
-			default_1:logRobloxTelemetryCounter(t_2, 1, { reason = "noPlayer" })
-			
-			return false
-		elseif var5.current then
-			return sendImmersiveBrandedAdAbuseReport(var4, {
-				reason = p2,
-				comment = p3,
-				immersiveBrandedAdId = immersiveBrandedAdId,
-				screenshotId = var5.current,
-				userId = localPlayer.UserId,
-				placeId = game.PlaceId
-			})
-		end
-		default_1:logRobloxTelemetryCounter(t_2, 1, { reason = "noScreenshot" })
+	else
+		Default1:logRobloxTelemetryCounter(config2, 1, { reason = "jsonEncode" })
 		
 		return false
-	end, { immersiveBrandedAdId, var4 })
-	reactModule.useEffect(function()
-		-- upvalues: runService (copy), screenshotModule (copy), var5 (ref), var7 (ref)
-		if not runService:IsStudio() and not _G.__TESTEZ_RUNNING_TEST__ and not _G.__TEST_SUITE_PACKAGE__ then
-			screenshotModule.ScreenshotManager:TakeScreenshotWithCallback(function(p2)
-				-- upvalues: var5 (copy)
-				var5.current = p2
+	end
+end
+
+local function ImmersiveBrandedAdReportAdDialog(p1) --[[ Line: 172 ]]
+	-- upvalues: UseRoactServiceFunction (copy), RoactServiceTagsModule (copy), ReactModule (copy), UseLocalizationFunction (copy), UseAppPolicyFunction (copy), NewUrlBuilder1 (copy), UrlBuilder (copy), NewUrlBuilder (copy), Default (copy), AdsInteractivityTelemetryModule (copy), View (copy), Button (copy), ButtonVariant (copy), InputSize (copy), RunService (copy), Default1 (copy), config (copy), config2 (copy), sendImmersiveBrandedAdAbuseReport (copy), ScreenshotModule (copy), DefaultTwoStepReportFlowModule (copy), ReportCategories (copy)
+	local ImmersiveBrandedAdId = p1.immersiveBrandedAdId
+	local UseRoactServiceResult = UseRoactServiceFunction(RoactServiceTagsModule.RoactNetworking)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseLocalizationResult = UseLocalizationFunction({
+		LinkText = "CoreScripts.Ads.Label.IllegalContentReportingLink"
+	})
+	local UseAppPolicyResult = UseAppPolicyFunction(function(p2) --[[ Line: 182 ]]
+		return p2.getShowIllegalContentReportingUI()
+	end)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 186 ]]
+		-- upvalues: NewUrlBuilder1 (upval), ImmersiveBrandedAdId (copy), UrlBuilder (upval), NewUrlBuilder (upval), Default (upval), AdsInteractivityTelemetryModule (upval), p1 (copy)
+		Default:openURL((UrlBuilder.addQueryString(NewUrlBuilder(), {
+			contentURL = NewUrlBuilder1({ assetId = ImmersiveBrandedAdId })
+		}))):catch(function(_) --[[ Line: 192 ]]
+			-- upvalues: AdsInteractivityTelemetryModule (upval), p1 (upval)
+			AdsInteractivityTelemetryModule.logImmersiveBrandedAdLinkingFailedCounter("reportAd.eudsaIllegalContent")
+			p1.onDismiss()
+		end)
+	end, { ImmersiveBrandedAdId, p1.onDismiss })
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 198 ]]
+		-- upvalues: ReactModule (upval), View (upval), Button (upval), UseLocalizationResult (copy), ButtonVariant (upval), UseResult (copy), InputSize (upval)
+		return ReactModule.createElement(View, {
+			tag = "col margin-x-medium padding-top-medium size-full-0 auto-y"
+		}, {
+			linkButton = ReactModule.createElement(Button, {
+				icon = "icons/navigation/externallink",
+				text = UseLocalizationResult.LinkText,
+				variant = ButtonVariant.Link,
+				onActivated = UseResult,
+				size = InputSize.Small
+			})
+		})
+	end, { UseResult, UseLocalizationResult.LinkText })
+	local UseResult2 = ReactModule.useCallback(function(Reason, Comment) --[[ Line: 212 ]]
+		-- upvalues: RunService (upval), Default1 (upval), config (upval), config2 (upval), UseRefResult (copy), sendImmersiveBrandedAdAbuseReport (upval), UseRoactServiceResult (copy), ImmersiveBrandedAdId (copy)
+		if RunService:IsStudio() or _G.__TESTEZ_RUNNING_TEST__ or _G.__TEST_SUITE_PACKAGE__ then
+			return true
+		end
+		Default1:logRobloxTelemetryCounter(config)
+		local LocalPlayer = game.Players.LocalPlayer
+		
+		if not LocalPlayer then
+			Default1:logRobloxTelemetryCounter(config2, 1, { reason = "noPlayer" })
+			
+			return false
+		elseif UseRefResult.current then
+			return (sendImmersiveBrandedAdAbuseReport(UseRoactServiceResult, {
+				reason = Reason,
+				comment = Comment,
+				immersiveBrandedAdId = ImmersiveBrandedAdId,
+				screenshotId = UseRefResult.current,
+				userId = LocalPlayer.UserId,
+				placeId = game.PlaceId
+			}))
+		else
+			Default1:logRobloxTelemetryCounter(config2, 1, { reason = "noScreenshot" })
+			
+			return false
+		end
+	end, { ImmersiveBrandedAdId, UseRoactServiceResult })
+	ReactModule.useEffect(function() --[[ Line: 241 ]]
+		-- upvalues: RunService (upval), ScreenshotModule (upval), UseRefResult (copy), UseStateResult2 (copy)
+		if not RunService:IsStudio() and not _G.__TESTEZ_RUNNING_TEST__ and not _G.__TEST_SUITE_PACKAGE__ then
+			ScreenshotModule.ScreenshotManager:TakeScreenshotWithCallback(function(Current) --[[ Line: 244 ]]
+				-- upvalues: UseRefResult (upval)
+				UseRefResult.current = Current
 			end, nil)
 		end
-		task.defer(function()
-			-- upvalues: var7 (copy)
-			var7(true)
+		task.defer(function() --[[ Line: 250 ]]
+			-- upvalues: UseStateResult2 (upval)
+			UseStateResult2(true)
 		end)
 	end, {})
 	
-	return if var6 then reactModule.createElement(reactModule.Fragment, {}, {
-		modal = reactModule.createElement("TextButton", {
+	return if UseStateResult then ReactModule.createElement(ReactModule.Fragment, {}, {
+		modal = ReactModule.createElement("TextButton", {
 			Text = "",
 			BackgroundTransparency = 1,
 			Modal = true,
 			Size = UDim2.new(0, 0, 0, 0)
 		}),
-		abuseReportFlow = reactModule.createElement(defaultTwoStepReportFlowModule, {
+		abuseReportFlow = ReactModule.createElement(DefaultTwoStepReportFlowModule, {
 			analyticsContext = "Ad",
 			isReportCategoryReadonly = true,
 			onCloseProps = { hasPreviousSteps = false, onAbandon = p1.onDismiss },
-			onSubmitProps = { hasNextSteps = false, onSubmit = var12 },
+			onSubmitProps = { hasNextSteps = false, onSubmit = UseResult2 },
 			onComplete = p1.onDismiss,
-			reportCategories = list,
-			reportCategoryDefaultKey = list[1].value,
+			reportCategories = ReportCategories,
+			reportCategoryDefaultKey = ReportCategories[1].value,
 			localizationKeys = {
 				formTitle = "CoreScripts.Ads.Label.ReportAd",
 				completeTitle = "Feature.ReportAbuse.Title.SelectInSceneThankYou",
 				completeDescription = "Feature.ReportAbuse.Label.SelectInSceneComplete"
 			},
-			footerContent = if var9 then var11 else nil
+			footerContent = if UseAppPolicyResult then UseResult1 else nil
 		})
 	}) else nil
 end
 
-return function(p1)
-	-- upvalues: reactModule (ref), roactServicesModule (ref), roactServiceTagsModule (ref), httpModule (ref), httpService (ref), universalAppPolicyModule (ref), appStyleProvider (ref), colorMode (ref), constants (ref), ImmersiveBrandedAdReportAdDialog (ref)
-	return reactModule.createElement(roactServicesModule.RoactServices.ServiceProvider, {
+return function(p1) --[[ Line: 291 ]]
+	-- upvalues: ReactModule (copy), RoactServicesModule (copy), RoactServiceTagsModule (copy), HttpModule (copy), HttpService (copy), UniversalAppPolicyModule (copy), AppStyleProvider (copy), ColorMode (copy), Constants (copy), ImmersiveBrandedAdReportAdDialog (copy)
+	return ReactModule.createElement(RoactServicesModule.RoactServices.ServiceProvider, {
 		services = {
-			[roactServiceTagsModule.RoactNetworking] = httpModule.NetworkLayers.requestInternalWrapper(httpService)
+			[RoactServiceTagsModule.RoactNetworking] = HttpModule.NetworkLayers.requestInternalWrapper(HttpService)
 		}
 	}, {
-		policyProvider = reactModule.createElement(universalAppPolicyModule.RoactAppPolicy.Provider, { policy = { universalAppPolicyModule.AppFeaturePolicies } }, {
-			appStyleProvider = reactModule.createElement(appStyleProvider, {
+		policyProvider = ReactModule.createElement(UniversalAppPolicyModule.RoactAppPolicy.Provider, { policy = { UniversalAppPolicyModule.AppFeaturePolicies } }, {
+			appStyleProvider = ReactModule.createElement(AppStyleProvider, {
 				style = {
-					themeName = colorMode.Dark,
-					fontName = constants.FontName.Gotham
+					themeName = ColorMode.Dark,
+					fontName = Constants.FontName.Gotham
 				}
 			}, {
-				resizeFrame = reactModule.createElement("Frame", {
+				resizeFrame = ReactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					Position = UDim2.fromScale(0.5, 0.5),
 					AnchorPoint = Vector2.new(0.5, 0.5),
 					Size = UDim2.fromScale(1, 0.6),
 					AutomaticSize = Enum.AutomaticSize.Y
 				}, {
-					reportAdDialog = reactModule.createElement(ImmersiveBrandedAdReportAdDialog, p1)
+					reportAdDialog = ReactModule.createElement(ImmersiveBrandedAdReportAdDialog, p1)
 				})
 			})
 		})

@@ -1,43 +1,45 @@
-﻿local parent = script:FindFirstAncestor("PromptsServerDrivenUi").Parent
-local sduiErrorType = require(parent.SduiCoreSystem).SduiErrors.SduiErrorType
-local serverTriggeredModalImpressionsModule = require(parent.ServerTriggeredModalImpressions)
-local postPromptImpression = serverTriggeredModalImpressionsModule.postPromptImpression
-local sendModalImpressionEvent = serverTriggeredModalImpressionsModule.sendModalImpressionEvent
+﻿local Parent = script:FindFirstAncestor("PromptsServerDrivenUi").Parent
+local SduiErrorType = require(Parent.SduiCoreSystem).SduiErrors.SduiErrorType
+local ServerTriggeredModalImpressionsModule = require(Parent.ServerTriggeredModalImpressions)
+local PostPromptImpressionFunction = ServerTriggeredModalImpressionsModule.postPromptImpression
+local SendModalImpressionEventFunction = ServerTriggeredModalImpressionsModule.sendModalImpressionEvent
 local t = {}
 
-return function(p1, p2, p3, _, _)
-	-- upvalues: t (ref), sduiErrorType (ref), postPromptImpression (ref), sendModalImpressionEvent (ref)
-	p3 = p3 or t
+return function(p1, List, p2, _, _) --[[ Line: 16 | Named "SduiPromptImpressionsHandler" ]]
+	-- upvalues: t (copy), SduiErrorType (copy), PostPromptImpressionFunction (copy), SendModalImpressionEventFunction (copy)
+	local P2 = p2 or t
 	
-	if #p2 == 0 or #p3 == 0 then
-		p1.dependencies.logger.reportError(sduiErrorType.FailedToLogPromptImpressions, {
+	if #List == 0 or #P2 == 0 then
+		p1.dependencies.logger.reportError(SduiErrorType.FailedToLogPromptImpressions, {
 			name = "SduiPromptImpressionsHandler",
-			message = `No entries to log: impressionIndexes={#p2}, itemAnalyticsDatas={#p3}`
+			message = `No entries to log: impressionIndexes={#List}, itemAnalyticsDatas={#P2}`
 		}, p1.appPage)
 		
 		return
 	end
-	for i, v in p2 do
-		local var1 = p3[v] or t
+	for _, value in List do
+		local Entry = P2[value] or t
 		
-		if typeof(var1.promptType) ~= "string" then
-			p1.dependencies.logger.reportError(sduiErrorType.FailedToLogPromptImpressions, {
+		if typeof(Entry.promptType) ~= "string" then
+			p1.dependencies.logger.reportError(SduiErrorType.FailedToLogPromptImpressions, {
 				name = "SduiPromptImpressionsHandler",
-				message = `Missing promptType at index {v}`
+				message = `Missing promptType at index {value}`
 			}, p1.appPage)
-		elseif typeof(var1.promptId) == "string" then
-			postPromptImpression(p1.dependencies.networking, var1.promptType, var1.promptId):catch(function()
-				-- upvalues: p1 (ref), sduiErrorType (copy), var1 (ref)
-				p1.dependencies.logger.reportError(sduiErrorType.FailedToLogPromptImpressions, {
+			continue
+		end
+		if typeof(Entry.promptId) == "string" then
+			PostPromptImpressionFunction(p1.dependencies.networking, Entry.promptType, Entry.promptId):catch(function() --[[ Line: 53 ]]
+				-- upvalues: p1 (copy), SduiErrorType (upval), Entry (copy)
+				p1.dependencies.logger.reportError(SduiErrorType.FailedToLogPromptImpressions, {
 					name = "SduiPromptImpressionsHandler",
-					message = `Failed to POST prompt impression for {var1.promptType}`
+					message = `Failed to POST prompt impression for {Entry.promptType}`
 				}, p1.appPage)
 			end)
-			sendModalImpressionEvent(var1.promptId, var1.promptType)
+			SendModalImpressionEventFunction(Entry.promptId, Entry.promptType)
 		else
-			p1.dependencies.logger.reportError(sduiErrorType.FailedToLogPromptImpressions, {
+			p1.dependencies.logger.reportError(SduiErrorType.FailedToLogPromptImpressions, {
 				name = "SduiPromptImpressionsHandler",
-				message = `Missing promptId at index {v}`
+				message = `Missing promptId at index {value}`
 			}, p1.appPage)
 		end
 	end

@@ -1,26 +1,26 @@
-﻿local parent = script:FindFirstAncestor("GraphQLServer").Parent
-local promiseModule = require(parent.Promise)
-local array = require(parent.LuauPolyfill).Array
+﻿local Parent = script:FindFirstAncestor("GraphQLServer").Parent
+local PromiseModule = require(Parent.Promise)
+local Array = require(Parent.LuauPolyfill).Array
 local _ = require(script.Parent.Parent.generatedTypes)
 
 return {
 	Experience = {
-		thumbnails = function(p1, _, p2)
-			-- upvalues: promiseModule (ref)
-			local thumbnails = p2.dataLoaders.thumbnails
+		thumbnails = function(p1, _, p2) --[[ Line: 10 ]]
+			-- upvalues: PromiseModule (copy)
+			local Thumbnails = p2.dataLoaders.thumbnails
 			
-			return if thumbnails then thumbnails:load(p1.universeId):andThen(function(p3)
-				return if p3 then { { url = p3.imageUrl } } else {}
-			end):catch(function()
+			return if Thumbnails then Thumbnails:load(p1.universeId):andThen(function(Result) --[[ Line: 17 ]]
+				return if Result then { { url = Result.imageUrl } } else {}
+			end):catch(function() --[[ Line: 23 ]]
 				return {}
-			end) else promiseModule.resolve({})
+			end) else PromiseModule.resolve({})
 		end
 	},
 	Query = {
-		experienceThumbnails = function(_, p1)
-			-- upvalues: array (ref)
-			return array.map(p1.universeIds, function(p2)
-				return { universeId = p2 }
+		experienceThumbnails = function(_, p1) --[[ Line: 30 ]]
+			-- upvalues: Array (copy)
+			return Array.map(p1.universeIds, function(UniverseId) --[[ Line: 31 ]]
+				return { universeId = UniverseId }
 			end)
 		end
 	}

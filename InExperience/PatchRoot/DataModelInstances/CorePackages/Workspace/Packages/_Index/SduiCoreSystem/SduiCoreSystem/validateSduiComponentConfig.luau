@@ -1,24 +1,25 @@
-﻿local sduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
-local sduiComponentTypeModule = require(sduiCoreSystem.SduiComponentType)
-local sduiErrorType = require(sduiCoreSystem.SduiErrors).SduiErrorType
-local uiComponentInterface = require(sduiCoreSystem.SduiConfigTypes).UiComponentInterface
-local validateInterfaceModule = require(sduiCoreSystem.validateInterface)
+﻿local SduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
+local SduiComponentTypeModule = require(SduiCoreSystem.SduiComponentType)
+local SduiErrorType = require(SduiCoreSystem.SduiErrors).SduiErrorType
+local UiComponentInterface = require(SduiCoreSystem.SduiConfigTypes).UiComponentInterface
+local ValidateInterfaceModule = require(SduiCoreSystem.validateInterface)
 
-return function(p1, p2)
-	-- upvalues: sduiErrorType (ref), validateInterfaceModule (ref), uiComponentInterface (ref), sduiComponentTypeModule (ref)
+return function(p1, p2) --[[ Line: 19 | Named "validateSduiComponentConfig" ]]
+	-- upvalues: SduiErrorType (copy), ValidateInterfaceModule (copy), UiComponentInterface (copy), SduiComponentTypeModule (copy)
 	if p1 == nil then
-		return false, { errorType = sduiErrorType.NilComponentConfig }
+		return false, { errorType = SduiErrorType.NilComponentConfig }
 	end
 	assert(p1, "componentConfig must exist")
-	local var1, var2 = validateInterfaceModule(p1, uiComponentInterface, p2)
+	local ValidateInterfaceModuleResult, ValidateInterfaceModuleResult2 = ValidateInterfaceModule(p1, UiComponentInterface, p2)
 	
-	if not var1 then
+	if not ValidateInterfaceModuleResult then
 		return false, {
-			errorType = sduiErrorType.InvalidComponentConfig,
-			message = var2
+			errorType = SduiErrorType.InvalidComponentConfig,
+			message = ValidateInterfaceModuleResult2
 		}
-	elseif sduiComponentTypeModule[p1.componentType] ~= nil then
+	elseif SduiComponentTypeModule[p1.componentType] ~= nil then
 		return true
+	else
+		return false, { errorType = SduiErrorType.ComponentTypeNotRecognized }
 	end
-	return false, { errorType = sduiErrorType.ComponentTypeNotRecognized }
 end

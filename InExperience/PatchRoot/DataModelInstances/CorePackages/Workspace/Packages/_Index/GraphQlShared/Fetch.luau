@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.Fetch.Fetch)
+﻿return (require(script.Parent.Parent.Parent._Index.Fetch.Fetch))

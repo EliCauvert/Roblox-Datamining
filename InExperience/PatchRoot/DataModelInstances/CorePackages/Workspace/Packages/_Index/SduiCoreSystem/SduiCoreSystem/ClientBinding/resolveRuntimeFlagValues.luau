@@ -1,47 +1,47 @@
-﻿local sduiRuntimeFlagNames = game:DefineFastString("SduiRuntimeFlagNames", "")
-local var1 = nil
-local var2 = 0
+﻿local SduiRuntimeFlagNames = game:DefineFastString("SduiRuntimeFlagNames", "")
+local v1 = nil
+local Count = 0
 
-local function getNames()
-	-- upvalues: var1 (write), var2 (write), sduiRuntimeFlagNames (ref)
-	if var1 ~= nil then
-		return var1, var2
+local function getNames() --[[ Line: 9 ]]
+	-- upvalues: v1 (ref), Count (ref), SduiRuntimeFlagNames (copy)
+	if v1 ~= nil then
+		return v1, Count
 	end
+	local List = {}
 	local t = {}
-	local t_1 = {}
 	
-	for i, v in string.split(sduiRuntimeFlagNames, ",") do
-		local var3 = string.match(v, "^%s*(.-)%s*$") or ""
+	for _, value in string.split(SduiRuntimeFlagNames, ",") do
+		local Match: string = string.match(value, "^%s*(.-)%s*$") or ""
 		
-		if var3 ~= "" and not t_1[var3] then
-			if #t >= 16 or #var3 > 128 or string.match(var3, "^[A-Za-z0-9_]+$") == nil then
-				var2 += 1
+		if Match ~= "" and not t[Match] then
+			if #List >= 16 or #Match > 128 or string.match(Match, "^[A-Za-z0-9_]+$") == nil then
+				Count += 1
 			else
-				t_1[var3] = true
-				table.insert(t, var3)
+				t[Match] = true
+				table.insert(List, Match)
 			end
 		end
 	end
-	table.sort(t)
-	var1 = t
+	table.sort(List)
+	v1 = List
 	
-	return t, var2
+	return List, Count
 end
 
-return function(p1)
-	-- upvalues: getNames (ref)
-	local var4, var5 = getNames()
+return function(Callback) --[[ Line: 36 | Named "resolveRuntimeFlagValues" ]]
+	-- upvalues: getNames (copy)
+	local Names, Names2 = getNames()
 	local t = {}
-	local var6 = 0
+	local Count = 0
 	
-	for i, v in var4 do
-		local var7, var8 = p1(v)
+	for _, name in Names do
+		local CallbackResult, CallbackResult2 = Callback(name)
 		
-		if var7 and type(var8) == "boolean" then
-			t[v] = var8
+		if CallbackResult and type(CallbackResult2) == "boolean" then
+			t[name] = CallbackResult2
 		else
-			var6 += 1
+			Count += 1
 		end
 	end
-	return t, var5, var6
+	return t, Names2, Count
 end

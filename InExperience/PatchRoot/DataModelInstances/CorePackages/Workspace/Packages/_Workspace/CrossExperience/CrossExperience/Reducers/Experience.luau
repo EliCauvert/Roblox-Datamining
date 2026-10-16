@@ -1,46 +1,46 @@
-﻿local crossExperience = script:FindFirstAncestor("CrossExperience")
-local dependenciesModule = require(crossExperience.dependencies)
-local rodux = dependenciesModule.Rodux
-local cryo = dependenciesModule.Cryo
-local sharedFlags = dependenciesModule.SharedFlags
-local experienceJoined = require(crossExperience.Actions).ExperienceJoined
-local experienceLeft = require(crossExperience.Actions).ExperienceLeft
-local restoreState = require(crossExperience.Actions).RestoreState
-local voiceStatusChanged = require(crossExperience.Actions).VoiceStatusChanged
-local _ = require(crossExperience.Types)
-local constantsModule = require(crossExperience.Constants)
-local fStringTimeoutLoadingLocalPlayerInBackgroundDM = sharedFlags.FStringTimeoutLoadingLocalPlayerInBackgroundDM
-local VOICE_STATUS = constantsModule.VOICE_STATUS
-local t = {
+﻿local CrossExperience = script:FindFirstAncestor("CrossExperience")
+local DependenciesModule = require(CrossExperience.dependencies)
+local Rodux = DependenciesModule.Rodux
+local Cryo = DependenciesModule.Cryo
+local SharedFlags = DependenciesModule.SharedFlags
+local ExperienceJoined = require(CrossExperience.Actions).ExperienceJoined
+local ExperienceLeft = require(CrossExperience.Actions).ExperienceLeft
+local RestoreState = require(CrossExperience.Actions).RestoreState
+local VoiceStatusChanged = require(CrossExperience.Actions).VoiceStatusChanged
+local _ = require(CrossExperience.Types)
+local ConstantsModule = require(CrossExperience.Constants)
+local FStringTimeoutLoadingLocalPlayerInBackgroundDM = SharedFlags.FStringTimeoutLoadingLocalPlayerInBackgroundDM
+local VOICESTATUS = ConstantsModule.VOICE_STATUS
+local config = {
 	jobId = nil,
 	gameId = nil,
 	placeId = nil,
 	voiceChannelId = nil,
 	voiceSessionId = nil,
-	voiceStatus = VOICE_STATUS.DISCONNECTED
+	voiceStatus = VOICESTATUS.DISCONNECTED
 }
 
-local function _(p1, p2)
-	-- upvalues: sharedFlags (ref), VOICE_STATUS (ref)
-	return if sharedFlags.GetFFlagFixPartyVoiceGetPermissions() and p1 == VOICE_STATUS.ERROR_VOICE_MIC_REJECTED then p2 == VOICE_STATUS.VOICE_CONNECTING else p1 ~= p2
+local function _(ERRORVOICEMICREJECTED, ERRORVOICEMICREJECTED1): boolean --[[ Line: 29 | Named "isAllowedVoiceStatusTransition" ]]
+	-- upvalues: SharedFlags (copy), VOICESTATUS (copy)
+	return if SharedFlags.GetFFlagFixPartyVoiceGetPermissions() and ERRORVOICEMICREJECTED == VOICESTATUS.ERROR_VOICE_MIC_REJECTED then ERRORVOICEMICREJECTED1 == VOICESTATUS.VOICE_CONNECTING else ERRORVOICEMICREJECTED ~= ERRORVOICEMICREJECTED1
 end
 
-return function(p1)
-	-- upvalues: rodux (ref), t (ref), experienceJoined (ref), cryo (ref), experienceLeft (ref), constantsModule (ref), fStringTimeoutLoadingLocalPlayerInBackgroundDM (ref), restoreState (ref), voiceStatusChanged (ref), sharedFlags (ref), VOICE_STATUS (ref)
-	return rodux.createReducer(p1 or t, {
-		[experienceJoined.name] = function(p2, p3)
-			-- upvalues: cryo (copy)
-			local payload = p3.payload
+return function(p1) --[[ Line: 43 ]]
+	-- upvalues: Rodux (copy), config (copy), ExperienceJoined (copy), Cryo (copy), ExperienceLeft (copy), ConstantsModule (copy), FStringTimeoutLoadingLocalPlayerInBackgroundDM (copy), RestoreState (copy), VoiceStatusChanged (copy), SharedFlags (copy), VOICESTATUS (copy)
+	return Rodux.createReducer(p1 or config, {
+		[ExperienceJoined.name] = function(p2, p3) --[[ Line: 46 ]]
+			-- upvalues: Cryo (upval)
+			local Payload = p3.payload
 			
-			return cryo.Dictionary.join(p2, {
-				jobId = payload.jobId,
-				gameId = payload.gameId,
-				placeId = payload.placeId
+			return Cryo.Dictionary.join(p2, {
+				jobId = Payload.jobId,
+				gameId = Payload.gameId,
+				placeId = Payload.placeId
 			})
 		end,
-		[experienceLeft.name] = function(p2)
-			-- upvalues: constantsModule (copy), fStringTimeoutLoadingLocalPlayerInBackgroundDM (copy)
-			local voiceStatus = p2.voiceStatus
+		[ExperienceLeft.name] = function(p2) --[[ Line: 55 ]]
+			-- upvalues: ConstantsModule (upval), FStringTimeoutLoadingLocalPlayerInBackgroundDM (upval)
+			local VoiceStatus = p2.voiceStatus
 			
 			return {
 				jobId = nil,
@@ -48,37 +48,30 @@ return function(p1)
 				placeId = nil,
 				voiceChannelId = nil,
 				voiceSessionId = nil,
-				voiceStatus = if not (voiceStatus == constantsModule.VOICE_STATUS.ERROR_VOICE_DISCONNECTED or voiceStatus == constantsModule.VOICE_STATUS.ERROR_START_BACKGROUND_DM or (voiceStatus == constantsModule.VOICE_STATUS.ERROR_RCC_CONNECTING or voiceStatus == constantsModule.VOICE_STATUS.ERROR_RCC_TIMEOUT) or fStringTimeoutLoadingLocalPlayerInBackgroundDM ~= constantsModule.LOCAL_PLAYER_LOADING_TIMEOUT_ENUM.Disable and voiceStatus == constantsModule.VOICE_STATUS.ERROR_BACKGROUND_DM_LOAD_LOCALPLAYER_TIMEOUT) then constantsModule.VOICE_STATUS.DISCONNECTED else p2.voiceStatus
+				voiceStatus = if VoiceStatus == ConstantsModule.VOICE_STATUS.ERROR_VOICE_DISCONNECTED or VoiceStatus == ConstantsModule.VOICE_STATUS.ERROR_START_BACKGROUND_DM or VoiceStatus == ConstantsModule.VOICE_STATUS.ERROR_RCC_CONNECTING or VoiceStatus == ConstantsModule.VOICE_STATUS.ERROR_RCC_TIMEOUT or FStringTimeoutLoadingLocalPlayerInBackgroundDM ~= ConstantsModule.LOCAL_PLAYER_LOADING_TIMEOUT_ENUM.Disable and VoiceStatus == ConstantsModule.VOICE_STATUS.ERROR_BACKGROUND_DM_LOAD_LOCALPLAYER_TIMEOUT then p2.voiceStatus else ConstantsModule.VOICE_STATUS.DISCONNECTED
 			}
 		end,
-		[restoreState.name] = function(p2, p3)
-			-- upvalues: cryo (copy)
-			return if p3.payload.Experience then cryo.Dictionary.join({}, p3.payload.Experience) else p2
+		[RestoreState.name] = function(p2, p3) --[[ Line: 84 ]]
+			-- upvalues: Cryo (upval)
+			return if p3.payload.Experience then Cryo.Dictionary.join({}, p3.payload.Experience) else p2
 		end,
-		[voiceStatusChanged.name] = function(p2, p3)
-			-- upvalues: sharedFlags (copy), VOICE_STATUS (copy), cryo (copy)
-			local var1
-			local voiceStatus = p2.voiceStatus
-			local status = p3.payload.status
+		[VoiceStatusChanged.name] = function(p2, p3) --[[ Line: 91 ]]
+			-- upvalues: SharedFlags (upval), VOICESTATUS (upval), Cryo (upval)
+			local VoiceStatus = p2.voiceStatus
+			local Status = p3.payload.status
 			
-			if sharedFlags.GetFFlagFixPartyVoiceGetPermissions() and voiceStatus == VOICE_STATUS.ERROR_VOICE_MIC_REJECTED then
-				var1 = status == VOICE_STATUS.VOICE_CONNECTING
-				var1 = nil
-			else
-				var1 = voiceStatus ~= status
-			end
-			if not var1 then
+			if not (if SharedFlags.GetFFlagFixPartyVoiceGetPermissions() and VoiceStatus == VOICESTATUS.ERROR_VOICE_MIC_REJECTED then Status == VOICESTATUS.VOICE_CONNECTING else VoiceStatus ~= Status) then
 				return p2
 			end
-			local var2 = cryo.Dictionary.join(p2, { voiceStatus = p3.payload.status })
+			local JoinResult = Cryo.Dictionary.join(p2, { voiceStatus = p3.payload.status })
 			
-			if p3.payload.status == VOICE_STATUS.VOICE_CONNECTED then
-				var2 = cryo.Dictionary.join(var2, {
+			if p3.payload.status == VOICESTATUS.VOICE_CONNECTED then
+				JoinResult = Cryo.Dictionary.join(JoinResult, {
 					voiceChannelId = p3.payload.voiceChannelId,
 					voiceSessionId = p3.payload.voiceSessionId
 				})
 			end
-			return var2
+			return JoinResult
 		end
 	})
 end

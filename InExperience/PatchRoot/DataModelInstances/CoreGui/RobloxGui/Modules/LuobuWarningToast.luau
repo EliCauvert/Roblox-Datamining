@@ -1,20 +1,20 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local roactModule = require(game:GetService("CorePackages").Packages.Roact)
-local luobuWarningToastComponentModule = require(script.LuobuWarningToastComponent)
-local t = {}
-t.__index = t
+﻿local CoreGui = game:GetService("CoreGui")
+local RoactModule = require(game:GetService("CorePackages").Packages.Roact)
+local LuobuWarningToastComponentModule = require(script.LuobuWarningToastComponent)
+local Module = {}
+Module.__index = Module
 
-function t.new()
-	-- upvalues: t (ref), roactModule (ref), luobuWarningToastComponentModule (ref), coreGuiService (ref)
-	local tbl = setmetatable({}, t)
-	tbl.element = roactModule.createElement(luobuWarningToastComponentModule)
-	tbl.root = roactModule.mount(tbl.element, coreGuiService, "LuobuWarningToast")
-	task.delay(10, function()
-		-- upvalues: roactModule (copy), tbl (ref)
-		roactModule.unmount(tbl.root)
+function Module.new() --[[ Line: 11 ]]
+	-- upvalues: Module (copy), RoactModule (copy), LuobuWarningToastComponentModule (copy), CoreGui (copy)
+	local self = setmetatable({}, Module)
+	self.element = RoactModule.createElement(LuobuWarningToastComponentModule)
+	self.root = RoactModule.mount(self.element, CoreGui, "LuobuWarningToast")
+	task.delay(10, function() --[[ Line: 18 ]]
+		-- upvalues: RoactModule (upval), self (copy)
+		RoactModule.unmount(self.root)
 	end)
 	
-	return tbl
+	return self
 end
 
-return t.new()
+return Module.new()

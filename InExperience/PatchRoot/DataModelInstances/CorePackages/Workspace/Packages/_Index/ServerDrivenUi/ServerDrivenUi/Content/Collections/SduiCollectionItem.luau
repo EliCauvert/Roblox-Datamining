@@ -1,69 +1,71 @@
-﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
-local reactModule = require(parent.React)
-local cryoModule = require(parent.Cryo)
-local impressionsTagUtility = require(parent.Impressions).ImpressionsTagUtility
+﻿local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
+local ReactModule = require(Parent.React)
+local CryoModule = require(Parent.Cryo)
+local ImpressionsTagUtility = require(Parent.Impressions).ImpressionsTagUtility
+local CombineReactTagsFunction = require(Parent.RoactUtils).combineReactTags
+local FFlagSduiOptionSelectorAnchorTag = require(Parent.SharedFlags).FFlagSduiOptionSelectorAnchorTag
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), impressionsTagUtility (ref), cryoModule (ref)
-	local layoutOrder = p1.layoutOrder
-	local size = p1.size
-	local position = p1.position
-	local anchorPoint = p1.anchorPoint
-	local zIndex = p1.zIndex
-	local automaticSize = p1.automaticSize
-	local innerWrapperSize = p1.innerWrapperSize
-	local var1 = reactModule.useRef(nil)
-	reactModule.useEffect(function()
-		-- upvalues: impressionsTagUtility (copy), var1 (ref), p1 (ref)
-		impressionsTagUtility.AddTag(var1, p1.impressionsTag, p1.index)
+return ReactModule.memo(function(p1) --[[ Line: 37 | Named "SduiCollectionItem" ]]
+	-- upvalues: ReactModule (copy), ImpressionsTagUtility (copy), CryoModule (copy), FFlagSduiOptionSelectorAnchorTag (copy), CombineReactTagsFunction (copy)
+	local LayoutOrder = p1.layoutOrder
+	local Size = p1.size
+	local Position = p1.position
+	local AnchorPoint = p1.anchorPoint
+	local ZIndex = p1.zIndex
+	local AutomaticSize = p1.automaticSize
+	local InnerWrapperSize = p1.innerWrapperSize
+	local UseRefResult = ReactModule.useRef(nil)
+	ReactModule.useEffect(function() --[[ Line: 46 ]]
+		-- upvalues: ImpressionsTagUtility (upval), UseRefResult (copy), p1 (copy)
+		ImpressionsTagUtility.AddTag(UseRefResult, p1.impressionsTag, p1.index)
 		
-		return function()
-			-- upvalues: impressionsTagUtility (copy), var1 (copy), p1 (copy)
-			impressionsTagUtility.RemoveTag(var1, p1.impressionsTag, p1.index)
+		return function() --[[ Line: 48 ]]
+			-- upvalues: ImpressionsTagUtility (upval), UseRefResult (upval), p1 (upval)
+			ImpressionsTagUtility.RemoveTag(UseRefResult, p1.impressionsTag, p1.index)
 		end
-	end, { var1, p1.impressionsTag, p1.index })
-	local var2 = reactModule.useCallback(function(p2)
-		-- upvalues: var1 (ref), impressionsTagUtility (copy), p1 (ref)
-		var1.current = p2
+	end, { UseRefResult, p1.impressionsTag, p1.index })
+	local UseResult = ReactModule.useCallback(function(Current) --[[ Line: 53 ]]
+		-- upvalues: UseRefResult (copy), ImpressionsTagUtility (upval), p1 (copy)
+		UseRefResult.current = Current
 		
-		if p2 then
-			impressionsTagUtility.AddTag(var1, p1.impressionsTag, p1.index)
+		if Current then
+			ImpressionsTagUtility.AddTag(UseRefResult, p1.impressionsTag, p1.index)
 		end
 	end, { p1.impressionsTag, p1.index })
-	local var3 = reactModule.useCallback(function(p2)
-		-- upvalues: p1 (ref)
+	local UseResult1 = ReactModule.useCallback(function(p2) --[[ Line: 60 ]]
+		-- upvalues: p1 (copy)
 		if p1.onItemSizeChanged then
 			p1.onItemSizeChanged(p1.index, p2)
 		end
 	end, { p1.onItemSizeChanged, p1.index })
-	local var4 = if innerWrapperSize ~= nil then p1.children else {
-		InnerWrapper = reactModule.createElement("Frame", {
+	local Children = if InnerWrapperSize == nil then p1.children else {
+		InnerWrapper = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
-			ref = var2,
-			Size = innerWrapperSize,
+			ref = UseResult,
+			Size = InnerWrapperSize,
 			Position = UDim2.fromScale(0, 0)
 		}, p1.children)
 	}
 	
 	if p1.minHeightBinding then
-		var4 = cryoModule.Dictionary.join(var4 or {}, {
-			SizeConstraint = reactModule.createElement("UISizeConstraint", {
-				MinSize = p1.minHeightBinding:map(function(p2)
+		Children = CryoModule.Dictionary.join(Children or {}, {
+			SizeConstraint = ReactModule.createElement("UISizeConstraint", {
+				MinSize = p1.minHeightBinding:map(function(p2: number): Vector2 --[[ Line: 87 ]]
 					return Vector2.new(0, if p2 and p2 > 0 then p2 else 0)
 				end)
 			})
 		})
 	end
-	return reactModule.createElement("Frame", {
-		ref = if innerWrapperSize ~= nil then var2 else nil,
-		AnchorPoint = anchorPoint,
-		Position = position,
-		Size = size,
-		LayoutOrder = layoutOrder or p1.index,
-		ZIndex = zIndex,
+	return ReactModule.createElement("Frame", {
+		ref = if InnerWrapperSize == nil then UseResult else nil,
+		AnchorPoint = AnchorPoint,
+		Position = Position,
+		Size = Size,
+		LayoutOrder = LayoutOrder or p1.index,
+		ZIndex = ZIndex,
 		BackgroundTransparency = 1,
-		AutomaticSize = automaticSize,
-		[reactModule.Change.AbsoluteSize] = if p1.onItemSizeChanged then var3 else nil,
-		[reactModule.Tag] = if p1.testId then `data-testid={p1.testId}` else nil
-	}, var4)
+		AutomaticSize = AutomaticSize,
+		[ReactModule.Change.AbsoluteSize] = if p1.onItemSizeChanged then UseResult1 else nil,
+		[ReactModule.Tag] = if FFlagSduiOptionSelectorAnchorTag then CombineReactTagsFunction(p1.tag, if p1.testId then `data-testid={p1.testId}` else nil) elseif p1.testId then `data-testid={p1.testId}` else nil
+	}, Children)
 end)

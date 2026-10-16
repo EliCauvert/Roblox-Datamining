@@ -1,64 +1,67 @@
-﻿local socialTabsPage = script:FindFirstAncestor("SocialTabsPage")
-local parent = socialTabsPage.Parent
-local reactModule = require(parent.React)
-local dashModule = require(parent.Dash)
-local foundationModule = require(parent.Foundation)
-local view = foundationModule.View
-local loading = foundationModule.Loading
-local userListModule = require(parent.UserList)
-local userListLayoutAdaptor = userListModule.UserListLayoutAdaptor
-local layoutMode = userListModule.Enums.LayoutMode
-local entityType = userListModule.Enums.EntityType
-local rowDataProviderModule = require(socialTabsPage.Components.RowDataProvider)
-local useSocialTabsContextModule = require(socialTabsPage.Contexts.useSocialTabsContext)
-local useMutualsListModule = require(socialTabsPage.Hooks.useMutualsList)
-local useSortedEntitiesByPresenceModule = require(socialTabsPage.Hooks.useSortedEntitiesByPresence)
-local useUserListCTAsModule = require(socialTabsPage.Hooks.useUserListCTAs)
-local useCTAActionHandlersModule = require(socialTabsPage.Hooks.useCTAActionHandlers)
-local socialTabsCtaConfigModule = require(socialTabsPage.Common.SocialTabsCtaConfig)
-local fFlagUserListCtaIntegrationEnabled = require(parent.SharedFlags).FFlagUserListCtaIntegrationEnabled
+﻿local SocialTabsPage = script:FindFirstAncestor("SocialTabsPage")
+local Parent = SocialTabsPage.Parent
+local ReactModule = require(Parent.React)
+local DashModule = require(Parent.Dash)
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local Loading = FoundationModule.Loading
+local UserListModule = require(Parent.UserList)
+local UserListLayoutAdaptor = UserListModule.UserListLayoutAdaptor
+local LayoutMode = UserListModule.Enums.LayoutMode
+local EntityType = UserListModule.Enums.EntityType
+local RowDataProviderModule = require(SocialTabsPage.Components.RowDataProvider)
+local UseSocialTabsContextModule = require(SocialTabsPage.Contexts.useSocialTabsContext)
+local UseMutualsListModule = require(SocialTabsPage.Hooks.useMutualsList)
+local UseSortedEntitiesByPresenceModule = require(SocialTabsPage.Hooks.useSortedEntitiesByPresence)
+local UseUserListCTAsModule = require(SocialTabsPage.Hooks.useUserListCTAs)
+local UseCTAActionHandlersModule = require(SocialTabsPage.Hooks.useCTAActionHandlers)
+local SocialTabsCtaConfigModule = require(SocialTabsPage.Common.SocialTabsCtaConfig)
+local FFlagUserListCtaIntegrationEnabled = require(Parent.SharedFlags).FFlagUserListCtaIntegrationEnabled
 
-return function()
-	-- upvalues: useSocialTabsContextModule (ref), useMutualsListModule (ref), reactModule (ref), dashModule (ref), entityType (ref), useSortedEntitiesByPresenceModule (ref), fFlagUserListCtaIntegrationEnabled (ref), useUserListCTAsModule (ref), useCTAActionHandlersModule (ref), rowDataProviderModule (ref), view (ref), loading (ref), userListLayoutAdaptor (ref), layoutMode (ref), socialTabsCtaConfigModule (ref)
-	local var1 = useMutualsListModule(useSocialTabsContextModule().profileId)
-	local var2 = reactModule.useMemo(function()
-		-- upvalues: dashModule (copy), var1 (ref), entityType (copy)
-		return dashModule.map(var1.mutualFriends, function(p1)
-			-- upvalues: entityType (copy)
-			return { id = p1.id, type = entityType.User }
+return function() --[[ Line: 24 | Named "MutualsTabContent" ]]
+	-- upvalues: UseSocialTabsContextModule (copy), UseMutualsListModule (copy), ReactModule (copy), DashModule (copy), EntityType (copy), UseSortedEntitiesByPresenceModule (copy), FFlagUserListCtaIntegrationEnabled (copy), UseUserListCTAsModule (copy), UseCTAActionHandlersModule (copy), RowDataProviderModule (copy), View (copy), Loading (copy), UserListLayoutAdaptor (copy), LayoutMode (copy), SocialTabsCtaConfigModule (copy)
+	local UseMutualsListModuleResult = UseMutualsListModule(UseSocialTabsContextModule().profileId)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 30 ]]
+		-- upvalues: DashModule (upval), UseMutualsListModuleResult (copy), EntityType (upval)
+		return DashModule.map(UseMutualsListModuleResult.mutualFriends, function(p1) --[[ Line: 31 ]]
+			-- upvalues: EntityType (upval)
+			return { id = p1.id, type = EntityType.User }
 		end)
-	end, { var1.mutualFriends })
-	local var3 = reactModule.useMemo(function()
-		-- upvalues: dashModule (copy), var2 (ref)
-		return dashModule.map(var2, function(p1)
+	end, { UseMutualsListModuleResult.mutualFriends })
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 36 ]]
+		-- upvalues: DashModule (upval), UseMemoResult (copy)
+		return DashModule.map(UseMemoResult, function(p1) --[[ Line: 37 ]]
 			return p1.id
 		end)
-	end, { var2 })
-	local var4 = useSortedEntitiesByPresenceModule(var2)
-	local var5 = nil
+	end, { UseMemoResult })
+	local UseSortedEntitiesByPresenceModuleResult = UseSortedEntitiesByPresenceModule(UseMemoResult)
+	local UseResult = nil
 	
-	if not fFlagUserListCtaIntegrationEnabled then
-		local var6 = useUserListCTAsModule(var3)
-		local var7 = useCTAActionHandlersModule()
-		var5 = reactModule.useCallback(function(p1, p2, _)
-			-- upvalues: reactModule (copy), rowDataProviderModule (copy), var6 (ref), var7 (ref)
-			return reactModule.createElement(rowDataProviderModule, {
-				createRow = p1,
-				entity = p2,
-				ctaResult = var6[p2.id],
-				actionHandlers = var7
+	if not FFlagUserListCtaIntegrationEnabled then
+		local UseUserListCTAsModuleResult = UseUserListCTAsModule(UseMemoResult1)
+		local UseCTAActionHandlersModuleResult = UseCTAActionHandlersModule()
+		UseResult = ReactModule.useCallback(function(CreateRow, Entity, _) --[[ Line: 49 ]]
+			-- upvalues: ReactModule (upval), RowDataProviderModule (upval), UseUserListCTAsModuleResult (copy), UseCTAActionHandlersModuleResult (copy)
+			return ReactModule.createElement(RowDataProviderModule, {
+				createRow = CreateRow,
+				entity = Entity,
+				ctaResult = UseUserListCTAsModuleResult[Entity.id],
+				actionHandlers = UseCTAActionHandlersModuleResult
 			})
-		end, { var6, var7 })
+		end, {
+			UseUserListCTAsModuleResult,
+			UseCTAActionHandlersModuleResult
+		})
 	end
-	return if var1.isLoading and #var2 == 0 then reactModule.createElement(view, { tag = "col align-x-center align-y-center size-full" }, { LoadingIndicator = reactModule.createElement(loading) }) else reactModule.createElement(view, { tag = "col size-full padding-x-xlarge" }, {
-		MutualsList = reactModule.createElement(userListLayoutAdaptor, {
+	return if UseMutualsListModuleResult.isLoading and #UseMemoResult == 0 then ReactModule.createElement(View, { tag = "col align-x-center align-y-center size-full" }, { LoadingIndicator = ReactModule.createElement(Loading) }) else ReactModule.createElement(View, { tag = "col size-full padding-x-xlarge" }, {
+		MutualsList = ReactModule.createElement(UserListLayoutAdaptor, {
 			isScrollEnabled = true,
-			entities = var4,
-			layoutMode = layoutMode.Vertical,
-			hasMore = var1.hasMore,
-			onLoadMore = if var1.hasMore then var1.loadMore else nil,
-			renderRow = var5,
-			ctaConfig = if fFlagUserListCtaIntegrationEnabled then socialTabsCtaConfigModule.Mutuals else nil
+			entities = UseSortedEntitiesByPresenceModuleResult,
+			layoutMode = LayoutMode.Vertical,
+			hasMore = UseMutualsListModuleResult.hasMore,
+			onLoadMore = if UseMutualsListModuleResult.hasMore then UseMutualsListModuleResult.loadMore else nil,
+			renderRow = UseResult,
+			ctaConfig = if FFlagUserListCtaIntegrationEnabled then SocialTabsCtaConfigModule.Mutuals else nil
 		})
 	})
 end

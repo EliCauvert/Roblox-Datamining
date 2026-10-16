@@ -1,6 +1,6 @@
-﻿local useIsWideMode = require(script:FindFirstAncestor("SocialTabsPage").Parent.SocialCommon).Hooks.useIsWideMode
+﻿local UseIsWideModeFunction = require(script:FindFirstAncestor("SocialTabsPage").Parent.SocialCommon).Hooks.useIsWideMode
 
-return function()
-	-- upvalues: useIsWideMode (ref)
-	return if useIsWideMode() then 50 else 25
+return function(): number --[[ Line: 10 | Named "usePageSize" ]]
+	-- upvalues: UseIsWideModeFunction (copy)
+	return if UseIsWideModeFunction() then 50 else 25
 end

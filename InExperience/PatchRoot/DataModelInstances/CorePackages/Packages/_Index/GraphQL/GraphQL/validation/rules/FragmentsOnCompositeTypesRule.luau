@@ -1,31 +1,31 @@
-﻿local parent = script.Parent.Parent.Parent
-local graphQLError = require(parent.error.GraphQLError).GraphQLError
-local print = require(parent.language.printer).print
-local isCompositeType = require(parent.type.definition).isCompositeType
-local typeFromAST = require(parent.utilities.typeFromAST).typeFromAST
+﻿local Parent = script.Parent.Parent.Parent
+local GraphQLError = require(Parent.error.GraphQLError).GraphQLError
+local PrintFunction = require(Parent.language.printer).print
+local IsCompositeTypeFunction = require(Parent.type.definition).isCompositeType
+local TypeFromASTFunction = require(Parent.utilities.typeFromAST).typeFromAST
 
 return {
-	FragmentsOnCompositeTypesRule = function(p1)
-		-- upvalues: typeFromAST (ref), isCompositeType (ref), print (ref), graphQLError (ref)
+	FragmentsOnCompositeTypesRule = function(p1) --[[ Line: 24 ]]
+		-- upvalues: TypeFromASTFunction (copy), IsCompositeTypeFunction (copy), PrintFunction (copy), GraphQLError (copy)
 		return {
-			InlineFragment = function(_, p2)
-				-- upvalues: typeFromAST (copy), p1 (ref), isCompositeType (copy), print (copy), graphQLError (copy)
-				local typeCondition = p2.typeCondition
+			InlineFragment = function(_, p2) --[[ Line: 26 ]]
+				-- upvalues: TypeFromASTFunction (upval), p1 (copy), IsCompositeTypeFunction (upval), PrintFunction (upval), GraphQLError (upval)
+				local TypeCondition = p2.typeCondition
 				
-				if typeCondition then
-					local var1 = typeFromAST(p1:getSchema(), typeCondition)
+				if TypeCondition then
+					local TypeFromASTResult = TypeFromASTFunction(p1:getSchema(), TypeCondition)
 					
-					if var1 and not isCompositeType(var1) then
-						p1:reportError(graphQLError.new(("Fragment cannot condition on non composite type \"%s\"."):format(print(typeCondition)), typeCondition))
+					if TypeFromASTResult and not IsCompositeTypeFunction(TypeFromASTResult) then
+						p1:reportError(GraphQLError.new(("Fragment cannot condition on non composite type \"%s\"."):format((PrintFunction(TypeCondition))), TypeCondition))
 					end
 				end
 			end,
-			FragmentDefinition = function(_, p2)
-				-- upvalues: typeFromAST (copy), p1 (ref), isCompositeType (copy), print (copy), graphQLError (copy)
-				local var1 = typeFromAST(p1:getSchema(), p2.typeCondition)
+			FragmentDefinition = function(_, p2) --[[ Line: 43 ]]
+				-- upvalues: TypeFromASTFunction (upval), p1 (copy), IsCompositeTypeFunction (upval), PrintFunction (upval), GraphQLError (upval)
+				local TypeFromASTResult = TypeFromASTFunction(p1:getSchema(), p2.typeCondition)
 				
-				if var1 and not isCompositeType(var1) then
-					p1:reportError(graphQLError.new(("Fragment \"%s\" cannot condition on non composite type \"%s\"."):format(p2.name.value, print(p2.typeCondition)), p2.typeCondition))
+				if TypeFromASTResult and not IsCompositeTypeFunction(TypeFromASTResult) then
+					p1:reportError(GraphQLError.new(("Fragment \"%s\" cannot condition on non composite type \"%s\"."):format(p2.name.value, (PrintFunction(p2.typeCondition))), p2.typeCondition))
 				end
 			end
 		}

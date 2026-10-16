@@ -1,5 +1,5 @@
-﻿return function(p1, p2)
-	local var1 = "--"
+﻿return function(p1: number, p2: number): string --[[ Line: 1 | Named "getGameStatsRatingPercentageText" ]]
+	local v1 = "--"
 	
 	if p1 == nil or p1 < 0 then
 		p1 = 0
@@ -7,10 +7,10 @@
 	if p2 == nil or p2 < 0 then
 		p2 = 0
 	end
-	local var2 = p1 + p2
+	local v2 = p1 + p2
 	
-	if var2 > 0 then
-		var1 = tostring(math.floor(p1 / var2 * 100))
+	if v2 > 0 then
+		v1 = tostring((math.floor(p1 / v2 * 100)))
 	end
-	return var1
+	return v1
 end

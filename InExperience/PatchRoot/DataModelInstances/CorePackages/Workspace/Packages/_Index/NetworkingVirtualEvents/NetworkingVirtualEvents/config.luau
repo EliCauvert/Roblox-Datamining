@@ -1,30 +1,30 @@
-﻿local networkingVirtualEvents = script:FindFirstAncestor("NetworkingVirtualEvents")
-local createCreateVirtualEventModule = require(networkingVirtualEvents.requests.createCreateVirtualEvent)
-local createUpdateVirtualEventModule = require(networkingVirtualEvents.requests.createUpdateVirtualEvent)
-local createDeleteVirtualEventModule = require(networkingVirtualEvents.requests.createDeleteVirtualEvent)
-local createGetVirtualEventModule = require(networkingVirtualEvents.requests.createGetVirtualEvent)
-local createGetMyVirtualEventsModule = require(networkingVirtualEvents.requests.createGetMyVirtualEvents)
-local createGetActiveVirtualEventsModule = require(networkingVirtualEvents.requests.createGetActiveVirtualEvents)
-local createGetVirtualEventRsvpsModule = require(networkingVirtualEvents.requests.createGetVirtualEventRsvps)
-local createUpdateMyRsvpStatusModule = require(networkingVirtualEvents.requests.createUpdateMyRsvpStatus)
-local createGetVirtualEventRsvpCountsModule = require(networkingVirtualEvents.requests.createGetVirtualEventRsvpCounts)
-local _ = require(networkingVirtualEvents.types)
+﻿local NetworkingVirtualEvents = script:FindFirstAncestor("NetworkingVirtualEvents")
+local CreateCreateVirtualEventModule = require(NetworkingVirtualEvents.requests.createCreateVirtualEvent)
+local CreateUpdateVirtualEventModule = require(NetworkingVirtualEvents.requests.createUpdateVirtualEvent)
+local CreateDeleteVirtualEventModule = require(NetworkingVirtualEvents.requests.createDeleteVirtualEvent)
+local CreateGetVirtualEventModule = require(NetworkingVirtualEvents.requests.createGetVirtualEvent)
+local CreateGetMyVirtualEventsModule = require(NetworkingVirtualEvents.requests.createGetMyVirtualEvents)
+local CreateGetActiveVirtualEventsModule = require(NetworkingVirtualEvents.requests.createGetActiveVirtualEvents)
+local CreateGetVirtualEventRsvpsModule = require(NetworkingVirtualEvents.requests.createGetVirtualEventRsvps)
+local CreateUpdateMyRsvpStatusModule = require(NetworkingVirtualEvents.requests.createUpdateMyRsvpStatus)
+local CreateGetVirtualEventRsvpCountsModule = require(NetworkingVirtualEvents.requests.createGetVirtualEventRsvpCounts)
+local _ = require(NetworkingVirtualEvents.types)
 
-return function(p1)
-	-- upvalues: createCreateVirtualEventModule (ref), createUpdateVirtualEventModule (ref), createDeleteVirtualEventModule (ref), createGetVirtualEventModule (ref), createGetMyVirtualEventsModule (ref), createGetActiveVirtualEventsModule (ref), createGetVirtualEventRsvpsModule (ref), createUpdateMyRsvpStatusModule (ref), createGetVirtualEventRsvpCountsModule (ref), networkingVirtualEvents (ref)
-	local roduxNetworking = p1.roduxNetworking
+return function(p1) --[[ Line: 14 ]]
+	-- upvalues: CreateCreateVirtualEventModule (copy), CreateUpdateVirtualEventModule (copy), CreateDeleteVirtualEventModule (copy), CreateGetVirtualEventModule (copy), CreateGetMyVirtualEventsModule (copy), CreateGetActiveVirtualEventsModule (copy), CreateGetVirtualEventRsvpsModule (copy), CreateUpdateMyRsvpStatusModule (copy), CreateGetVirtualEventRsvpCountsModule (copy), NetworkingVirtualEvents (copy)
+	local RoduxNetworking = p1.roduxNetworking
 	
 	return {
-		CreateVirtualEvent = createCreateVirtualEventModule(roduxNetworking),
-		UpdateVirtualEvent = createUpdateVirtualEventModule(roduxNetworking),
-		DeleteVirtualEvent = createDeleteVirtualEventModule(roduxNetworking),
-		GetVirtualEvent = createGetVirtualEventModule(roduxNetworking),
-		GetMyVirtualEvents = createGetMyVirtualEventsModule(roduxNetworking),
-		GetActiveVirtualEvents = createGetActiveVirtualEventsModule(roduxNetworking),
-		GetVirtualEventRsvps = createGetVirtualEventRsvpsModule(roduxNetworking),
-		UpdateMyRsvpStatus = createUpdateMyRsvpStatusModule(roduxNetworking),
-		GetVirtualEventRsvpCounts = createGetVirtualEventRsvpCountsModule(roduxNetworking),
-		VirtualEventModel = require(networkingVirtualEvents.models.VirtualEventModel),
-		createMockVirtualEventResponse = require(networkingVirtualEvents.createMockVirtualEventResponse)
+		CreateVirtualEvent = CreateCreateVirtualEventModule(RoduxNetworking),
+		UpdateVirtualEvent = CreateUpdateVirtualEventModule(RoduxNetworking),
+		DeleteVirtualEvent = CreateDeleteVirtualEventModule(RoduxNetworking),
+		GetVirtualEvent = CreateGetVirtualEventModule(RoduxNetworking),
+		GetMyVirtualEvents = CreateGetMyVirtualEventsModule(RoduxNetworking),
+		GetActiveVirtualEvents = CreateGetActiveVirtualEventsModule(RoduxNetworking),
+		GetVirtualEventRsvps = CreateGetVirtualEventRsvpsModule(RoduxNetworking),
+		UpdateMyRsvpStatus = CreateUpdateMyRsvpStatusModule(RoduxNetworking),
+		GetVirtualEventRsvpCounts = CreateGetVirtualEventRsvpCountsModule(RoduxNetworking),
+		VirtualEventModel = require(NetworkingVirtualEvents.models.VirtualEventModel),
+		createMockVirtualEventResponse = require(NetworkingVirtualEvents.createMockVirtualEventResponse)
 	}
 end

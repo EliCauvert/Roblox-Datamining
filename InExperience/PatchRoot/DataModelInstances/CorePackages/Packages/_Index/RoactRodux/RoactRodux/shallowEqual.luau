@@ -1,16 +1,17 @@
-﻿return function(p1, p2)
-	if p1 == nil then
-		return p2 == nil
-	elseif p2 == nil then
-		return p1 == nil
+﻿return function(List, List1): boolean --[[ Line: 1 | Named "shallowEqual" ]]
+	if List == nil then
+		return List1 == nil
 	end
-	for i, v in pairs(p1) do
-		if v ~= p2[i] then
+	if List1 == nil then
+		return List == nil
+	end
+	for i, value in pairs(List) do
+		if value ~= List1[i] then
 			return false
 		end
 	end
-	for i, v in pairs(p2) do
-		if v ~= p1[i] then
+	for i1, value1 in pairs(List1) do
+		if value1 ~= List[i1] then
 			return false
 		end
 	end

@@ -1,84 +1,87 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local promiseModule = require(parent.Promise)
-local sharedFlagsModule = require(parent.SharedFlags)
-local sources = require(parent.SocialLuaAnalytics).Analytics.Enums.Sources
-local getProfileTrustedFriendActionsModule = require(appChat.Http.getProfileTrustedFriendActions)
-local fFlagProfilePlatformAddTC = sharedFlagsModule.FFlagProfilePlatformAddTC
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local PromiseModule = require(Parent.Promise)
+local Sources = require(Parent.SocialLuaAnalytics).Analytics.Enums.Sources
+local GetProfileTrustedFriendActionsModule = require(AppChat.Http.getProfileTrustedFriendActions)
+local FFlagProfilePlatformAddTC = require(Parent.SharedFlags).FFlagProfilePlatformAddTC
 
-local function _(p1, p2, p3, p4)
+local function _(RawActionType, ActionType, IsDisabled, ModalVariantOverride) --[[ Line: 21 | Named "createTrustedFriendAction" ]]
 	return {
-		rawActionType = p1,
-		actionType = p2,
-		isDisabled = p3,
-		modalVariantOverride = p4
+		rawActionType = RawActionType,
+		actionType = ActionType,
+		isDisabled = IsDisabled,
+		modalVariantOverride = ModalVariantOverride
 	}
 end
 
-local function normalizeTrustedFriendAction(p1)
-	-- upvalues: fFlagProfilePlatformAddTC (ref), sources (ref)
-	for i, v in p1 do
-		if v ~= "RemoveTrustedConnection" then
-			if v == "AddTrustedConnection" then
-				if fFlagProfilePlatformAddTC then
-					return {
-						actionType = "AddTrustedConnection",
-						isDisabled = false,
-						modalVariantOverride = nil,
-						rawActionType = v
-					}
-				end
-			elseif v ~= "AddTrustedConnectionViaLink" then
-				if v == "PendingTrustedConnection" then
-					if fFlagProfilePlatformAddTC then
-						return {
-							actionType = "AddTrustedConnection",
-							isDisabled = true,
-							modalVariantOverride = nil,
-							rawActionType = v
-						}
-					end
-				elseif v == "AddIncomingTrustedConnection" then
-					if fFlagProfilePlatformAddTC then
-						return {
-							actionType = "AddIncomingTrustedConnection",
-							isDisabled = false,
-							modalVariantOverride = nil,
-							rawActionType = v
-						}
-					end
-				elseif v == "PendingIncomingTrustedConnection" then
-					return {
-						actionType = "AddIncomingTrustedConnection",
-						isDisabled = true,
-						modalVariantOverride = nil,
-						rawActionType = v
-					}
-				end
+local function normalizeTrustedFriendAction(List) --[[ Line: 35 ]]
+	-- upvalues: FFlagProfilePlatformAddTC (copy), Sources (copy)
+	for _, RawActionType in List do
+		if RawActionType == "RemoveTrustedConnection" then
+			return {
+				actionType = "RemoveTrustedConnection",
+				isDisabled = false,
+				modalVariantOverride = nil,
+				rawActionType = RawActionType
+			}
+		end
+		if RawActionType == "AddTrustedConnection" then
+			if FFlagProfilePlatformAddTC then
+				return {
+					actionType = "AddTrustedConnection",
+					isDisabled = false,
+					modalVariantOverride = nil,
+					rawActionType = RawActionType
+				}
 			end
+		elseif RawActionType == "AddTrustedConnectionViaLink" then
 			return {
 				actionType = "AddTrustedConnection",
 				isDisabled = false,
-				rawActionType = v,
-				modalVariantOverride = sources.ShareLinkSender
+				rawActionType = RawActionType,
+				modalVariantOverride = Sources.ShareLinkSender
 			}
+		else
+			if RawActionType == "PendingTrustedConnection" then
+				if FFlagProfilePlatformAddTC then
+					return {
+						actionType = "AddTrustedConnection",
+						isDisabled = true,
+						modalVariantOverride = nil,
+						rawActionType = RawActionType
+					}
+				end
+				continue
+			elseif RawActionType == "AddIncomingTrustedConnection" then
+				if FFlagProfilePlatformAddTC then
+					return {
+						actionType = "AddIncomingTrustedConnection",
+						isDisabled = false,
+						modalVariantOverride = nil,
+						rawActionType = RawActionType
+					}
+				end
+				continue
+			elseif RawActionType == "PendingIncomingTrustedConnection" then
+				return {
+					actionType = "AddIncomingTrustedConnection",
+					isDisabled = true,
+					modalVariantOverride = nil,
+					rawActionType = RawActionType
+				}
+			end
+			continue
 		end
-		return {
-			actionType = "RemoveTrustedConnection",
-			isDisabled = false,
-			modalVariantOverride = nil,
-			rawActionType = v
-		}
 	end
 	return nil
 end
 
-return function(p2)
-	-- upvalues: promiseModule (ref), getProfileTrustedFriendActionsModule (ref), normalizeTrustedFriendAction (ref)
-	return if p2 == "" then promiseModule.resolve(nil) else getProfileTrustedFriendActionsModule(p2):andThen(function(p3)
-		-- upvalues: normalizeTrustedFriendAction (copy)
-		return normalizeTrustedFriendAction(p3)
-	end):catch(function()
+return function(p1) --[[ Line: 61 | Named "getTrustedFriendAction" ]]
+	-- upvalues: PromiseModule (copy), GetProfileTrustedFriendActionsModule (copy), normalizeTrustedFriendAction (copy)
+	return if p1 == "" then PromiseModule.resolve(nil) else GetProfileTrustedFriendActionsModule(p1):andThen(function(Result) --[[ Line: 67 ]]
+		-- upvalues: normalizeTrustedFriendAction (upval)
+		return (normalizeTrustedFriendAction(Result))
+	end):catch(function() --[[ Line: 70 ]]
 		return nil
 	end)
 end

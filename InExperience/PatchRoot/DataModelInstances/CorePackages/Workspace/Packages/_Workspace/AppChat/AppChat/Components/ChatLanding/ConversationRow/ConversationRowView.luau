@@ -1,190 +1,191 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local _ = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local domLocatorsModule = require(appChat.Utils.DomLocators)
-local squadsModule = require(parent.Squads)
-local fFlagDebugAppChatEnableDomLocatorsModule = require(appChat.Flags.FFlagDebugAppChatEnableDomLocators)
-local fFlagAppChatExtendConversationListRowDividersModule = require(appChat.Flags.FFlagAppChatExtendConversationListRowDividers)
-local fFlagAppChatRemoveConversationListDividerModule = require(appChat.Flags.FFlagAppChatRemoveConversationListDivider)
-local fFlagAppChatUseBindingConversationFacePileModule = require(appChat.Flags.FFlagAppChatUseBindingConversationFacePile)
-local fFlagAppChatTimestampInSubtitleConversationRowModule = require(appChat.Flags.FFlagAppChatTimestampInSubtitleConversationRow)
-local conversationFacePileModule = require(appChat.Components.Cells.ConversationFacePile)
-local conversationFacePileBindingModule = require(script.Parent.ConversationFacePileBinding)
-local conversationRowSubtitleModule = require(script.Parent.ConversationRowSubtitle)
-local useGetOneToOneFriendIdFromConversationIdModule = require(appChat.Hooks.useGetOneToOneFriendIdFromConversationId)
-local useIsRobloxSubscriberBinding = require(parent.UserProfiles).Hooks.useIsRobloxSubscriberBinding
-local squadButtonSourceEnum = squadsModule.Enums.SquadButtonSourceEnum
-local squadComponentAccessWrapper = squadsModule.SquadComponentAccessWrapper
-local squadJoinButton = squadsModule.SquadJoinButton
-local var1 = reactModule.memo(conversationFacePileModule)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local _ = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
+local DomLocatorsModule = require(AppChat.Utils.DomLocators)
+local SquadsModule = require(Parent.Squads)
+local FFlagDebugAppChatEnableDomLocatorsModule = require(AppChat.Flags.FFlagDebugAppChatEnableDomLocators)
+local FFlagAppChatExtendConversationListRowDividersModule = require(AppChat.Flags.FFlagAppChatExtendConversationListRowDividers)
+local FFlagAppChatRemoveConversationListDividerModule = require(AppChat.Flags.FFlagAppChatRemoveConversationListDivider)
+local FFlagAppChatUseBindingConversationFacePileModule = require(AppChat.Flags.FFlagAppChatUseBindingConversationFacePile)
+local FFlagAppChatTimestampInSubtitleConversationRowModule = require(AppChat.Flags.FFlagAppChatTimestampInSubtitleConversationRow)
+local ConversationFacePileBindingModule = require(script.Parent.ConversationFacePileBinding)
+local ConversationRowSubtitleModule = require(script.Parent.ConversationRowSubtitle)
+local UseGetOneToOneFriendIdFromConversationIdModule = require(AppChat.Hooks.useGetOneToOneFriendIdFromConversationId)
+local UseIsRobloxSubscriberBindingFunction = require(Parent.UserProfiles).Hooks.useIsRobloxSubscriberBinding
+local SquadButtonSourceEnum = SquadsModule.Enums.SquadButtonSourceEnum
+local SquadComponentAccessWrapper = SquadsModule.SquadComponentAccessWrapper
+local SquadJoinButton = SquadsModule.SquadJoinButton
+local MemoResult = ReactModule.memo((require(AppChat.Components.Cells.ConversationFacePile)))
 
-local function SubscriptionBadge(p1)
-	-- upvalues: foundationModule (ref), reactModule (ref)
-	return reactModule.createElement(foundationModule.View, {
+local function SubscriptionBadge(p1) --[[ Line: 70 ]]
+	-- upvalues: FoundationModule (copy), ReactModule (copy)
+	return ReactModule.createElement(FoundationModule.View, {
 		tag = "size-400-400",
 		Name = "subscriptionBadge",
 		LayoutOrder = 2,
 		testId = "conversation-row-subscription-badge",
 		Visible = p1.visible
 	}, {
-		icon = reactModule.createElement(foundationModule.Icon, {
-			name = foundationModule.Enums.IconName.RobloxPlus,
-			size = foundationModule.Enums.IconSize.Small,
-			style = foundationModule.Hooks.useTokens().Color.Content.Emphasis
+		icon = ReactModule.createElement(FoundationModule.Icon, {
+			name = FoundationModule.Enums.IconName.RobloxPlus,
+			size = FoundationModule.Enums.IconSize.Small,
+			style = FoundationModule.Hooks.useTokens().Color.Content.Emphasis
 		})
 	})
 end
 
-local function LegacySubscriptionBadgeHost(p1)
-	-- upvalues: signalsReactModule (ref), useGetOneToOneFriendIdFromConversationIdModule (ref), useIsRobloxSubscriberBinding (ref), reactModule (ref), SubscriptionBadge (ref)
-	return reactModule.createElement(SubscriptionBadge, {
-		visible = useIsRobloxSubscriberBinding(useGetOneToOneFriendIdFromConversationIdModule(signalsReactModule.useSignalState(p1.itemSignal).id))
+local function LegacySubscriptionBadgeHost(p1) --[[ Line: 88 ]]
+	-- upvalues: SignalsReactModule (copy), UseGetOneToOneFriendIdFromConversationIdModule (copy), UseIsRobloxSubscriberBindingFunction (copy), ReactModule (copy), SubscriptionBadge (copy)
+	return ReactModule.createElement(SubscriptionBadge, {
+		visible = UseIsRobloxSubscriberBindingFunction((UseGetOneToOneFriendIdFromConversationIdModule(SignalsReactModule.useSignalState(p1.itemSignal).id)))
 	})
 end
 
-local function LegacyConversationFacePileHost(p1)
-	-- upvalues: signalsReactModule (ref), reactModule (ref), var1 (ref)
-	local var2 = signalsReactModule.useSignalState(p1.itemSignal)
+local function LegacyConversationFacePileHost(p1) --[[ Line: 100 ]]
+	-- upvalues: SignalsReactModule (copy), ReactModule (copy), MemoResult (copy)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(p1.itemSignal)
 	
-	return reactModule.createElement(var1, {
+	return ReactModule.createElement(MemoResult, {
 		selectable = false,
-		conversationId = var2.id,
+		conversationId = UseSignalStateResult.id,
 		onActivated = p1.onActivated,
-		localUserId = signalsReactModule.useSignalState(var2.presentationSignal).localUserId
+		localUserId = SignalsReactModule.useSignalState(UseSignalStateResult.presentationSignal).localUserId
 	})
 end
 
-local function SquadButtonHost(p1)
-	-- upvalues: signalsReactModule (ref), reactModule (ref), foundationModule (ref), squadComponentAccessWrapper (ref), squadJoinButton (ref), squadButtonSourceEnum (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref)
-	local var2 = signalsReactModule.useSignalState(p1.itemSignal)
+local function SquadButtonHost(p1) --[[ Line: 115 ]]
+	-- upvalues: SignalsReactModule (copy), ReactModule (copy), FoundationModule (copy), SquadComponentAccessWrapper (copy), SquadJoinButton (copy), SquadButtonSourceEnum (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), DomLocatorsModule (copy)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(p1.itemSignal)
 	
-	return reactModule.createElement(foundationModule.View, {
+	return ReactModule.createElement(FoundationModule.View, {
 		tag = "row align-x-right align-y-center auto-xy",
 		LayoutOrder = 0
 	}, {
-		wrapper = reactModule.createElement(squadComponentAccessWrapper, { parentChannelId = var2.id }, {
-			button = reactModule.createElement(squadJoinButton, {
+		wrapper = ReactModule.createElement(SquadComponentAccessWrapper, { parentChannelId = UseSignalStateResult.id }, {
+			button = ReactModule.createElement(SquadJoinButton, {
 				isFullWidth = false,
 				isInCard = false,
 				layoutOrder = 0,
 				Selectable = false,
 				shouldAnimate = false,
-				conversationId = var2.id,
+				conversationId = UseSignalStateResult.id,
 				onActivated = p1.onActivated,
-				squadButtonSource = squadButtonSourceEnum.ConversationEntry,
+				squadButtonSource = SquadButtonSourceEnum.ConversationEntry,
 				squadLocation = p1.squadLocation,
-				testId = if fFlagDebugAppChatEnableDomLocatorsModule and p1.locatorTitle then domLocatorsModule.chatLandingConversationEntrySquadButton(p1.locatorTitle) else nil
+				testId = if FFlagDebugAppChatEnableDomLocatorsModule and p1.locatorTitle then DomLocatorsModule.chatLandingConversationEntrySquadButton(p1.locatorTitle) else nil
 			})
 		})
 	})
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: foundationModule (ref), reactModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), fFlagAppChatExtendConversationListRowDividersModule (ref), fFlagAppChatUseBindingConversationFacePileModule (ref), conversationFacePileBindingModule (ref), LegacyConversationFacePileHost (ref), SubscriptionBadge (ref), LegacySubscriptionBadgeHost (ref), fFlagAppChatTimestampInSubtitleConversationRowModule (ref), conversationRowSubtitleModule (ref), SquadButtonHost (ref), fFlagAppChatRemoveConversationListDividerModule (ref)
-	local var2 = foundationModule.Hooks.useTokens()
-	local uDim = UDim.new(0, p1.pagePaddingLeft)
-	local uDim_1 = UDim.new(0, p1.pagePaddingRight)
-	local var3 = p1.showBackground ~= false
+return ReactModule.memo(function(p1) --[[ Line: 148 | Named "ConversationRowView" ]]
+	-- upvalues: FoundationModule (copy), ReactModule (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), FFlagAppChatExtendConversationListRowDividersModule (copy), FFlagAppChatUseBindingConversationFacePileModule (copy), ConversationFacePileBindingModule (copy), LegacyConversationFacePileHost (copy), SubscriptionBadge (copy), LegacySubscriptionBadgeHost (copy), FFlagAppChatTimestampInSubtitleConversationRowModule (copy), ConversationRowSubtitleModule (copy), SquadButtonHost (copy), FFlagAppChatRemoveConversationListDividerModule (copy)
+	local UseTokensResult = FoundationModule.Hooks.useTokens()
+	local _UDim = UDim.new(0, p1.pagePaddingRight)
+	local IsShowBackground = p1.showBackground ~= false
 	
-	return reactModule.createElement(foundationModule.View, {
+	return ReactModule.createElement(FoundationModule.View, {
 		BorderSizePixel = 0,
-		backgroundStyle = var2.Color.None,
+		backgroundStyle = UseTokensResult.Color.None,
 		Size = UDim2.new(1, 0, 0, p1.entryHeight),
-		testId = if fFlagDebugAppChatEnableDomLocatorsModule then p1.testId else nil
+		testId = if FFlagDebugAppChatEnableDomLocatorsModule then p1.testId else nil
 	}, {
-		cell = reactModule.createElement(foundationModule.View, {
+		cell = ReactModule.createElement(FoundationModule.View, {
 			Name = "cell",
-			tag = { ["size-full"] = true, ["bg-surface-0"] = var3 },
-			backgroundStyle = if var3 then nil else var2.Color.None,
+			tag = {
+				["size-full"] = true,
+				["bg-surface-0"] = IsShowBackground
+			},
+			backgroundStyle = if IsShowBackground then nil else UseTokensResult.Color.None,
 			selection = { Selectable = true },
 			onActivated = p1.onRowActivated,
-			stateLayer = if var3 then {
-				affordance = foundationModule.Enums.StateLayerAffordance.Background
+			stateLayer = if IsShowBackground then {
+				affordance = FoundationModule.Enums.StateLayerAffordance.Background
 			} else nil,
 			ref = p1.rowRef
 		}, {
-			debugCellContainer = if p1.debugCellValue then reactModule.createElement("Folder", {}, {
-				debugCell = reactModule.createElement("StringValue", { Value = p1.debugCellValue })
+			debugCellContainer = if p1.debugCellValue then ReactModule.createElement("Folder", {}, {
+				debugCell = ReactModule.createElement("StringValue", { Value = p1.debugCellValue })
 			}) else nil,
-			content = reactModule.createElement(foundationModule.View, {
+			content = ReactModule.createElement(FoundationModule.View, {
 				tag = "row align-y-center gap-small size-full",
 				padding = {
-					left = uDim,
-					right = if fFlagAppChatExtendConversationListRowDividersModule then nil else uDim_1
+					left = UDim.new(0, p1.pagePaddingLeft),
+					right = if FFlagAppChatExtendConversationListRowDividersModule then nil else _UDim
 				}
 			}, {
-				avatar = reactModule.createElement(foundationModule.View, { tag = "size-1000-1000", LayoutOrder = 0 }, {
-					facePile = if fFlagAppChatUseBindingConversationFacePileModule then reactModule.createElement(conversationFacePileBindingModule, { itemSignal = p1.itemSignal }) else reactModule.createElement(LegacyConversationFacePileHost, {
+				avatar = ReactModule.createElement(FoundationModule.View, { tag = "size-1000-1000", LayoutOrder = 0 }, {
+					facePile = if FFlagAppChatUseBindingConversationFacePileModule then ReactModule.createElement(ConversationFacePileBindingModule, { itemSignal = p1.itemSignal }) else ReactModule.createElement(LegacyConversationFacePileHost, {
 						itemSignal = p1.itemSignal,
 						onActivated = p1.onRowActivated
 					})
 				}),
-				body = reactModule.createElement(foundationModule.View, {
+				body = ReactModule.createElement(FoundationModule.View, {
 					tag = "col fill size-0-full clip",
 					Name = "body",
 					LayoutOrder = 1
 				}, {
-					mainContent = reactModule.createElement(foundationModule.View, {
+					mainContent = ReactModule.createElement(FoundationModule.View, {
 						tag = "row align-y-center fill gap-small size-full-0 clip",
 						Name = "mainContent",
 						LayoutOrder = 1,
-						padding = if fFlagAppChatExtendConversationListRowDividersModule then { right = uDim_1 } else nil
+						padding = if FFlagAppChatExtendConversationListRowDividersModule then { right = _UDim } else nil
 					}, {
-						info = reactModule.createElement(foundationModule.View, {
+						info = ReactModule.createElement(FoundationModule.View, {
 							tag = "col align-y-center fill gap-xxsmall size-0-full clip",
 							LayoutOrder = 1
 						}, {
-							titleContainer = reactModule.createElement(foundationModule.View, {
+							titleContainer = ReactModule.createElement(FoundationModule.View, {
 								tag = "row align-y-center gap-xxsmall size-full-0 auto-y clip",
 								Name = "titleContainer",
 								LayoutOrder = 1
 							}, {
-								title = reactModule.createElement(foundationModule.Text, {
+								title = ReactModule.createElement(FoundationModule.Text, {
 									tag = "shrink auto-xy text-title-large text-align-x-left text-truncate-split content-default",
 									Name = "title",
 									LayoutOrder = 1,
 									Text = p1.title
 								}),
-								subscriptionBadge = if fFlagAppChatUseBindingConversationFacePileModule then reactModule.createElement(SubscriptionBadge, { visible = p1.showSubscriptionBadge }) else reactModule.createElement(LegacySubscriptionBadgeHost, { itemSignal = p1.itemSignal })
+								subscriptionBadge = if FFlagAppChatUseBindingConversationFacePileModule then ReactModule.createElement(SubscriptionBadge, { visible = p1.showSubscriptionBadge }) else ReactModule.createElement(LegacySubscriptionBadgeHost, { itemSignal = p1.itemSignal })
 							}),
-							subtitle = if fFlagAppChatTimestampInSubtitleConversationRowModule then nil else reactModule.createElement(foundationModule.Text, {
+							subtitle = if FFlagAppChatTimestampInSubtitleConversationRowModule then nil else ReactModule.createElement(FoundationModule.Text, {
 								tag = "size-full-0 auto-y text-body-small text-align-x-left text-truncate-end content-default",
 								LayoutOrder = 2,
 								Text = p1.subtitleText
 							}),
-							subtitleRow = if fFlagAppChatTimestampInSubtitleConversationRowModule then reactModule.createElement(conversationRowSubtitleModule, {
+							subtitleRow = if FFlagAppChatTimestampInSubtitleConversationRowModule then ReactModule.createElement(ConversationRowSubtitleModule, {
 								LayoutOrder = 2,
 								subtitleText = p1.subtitleText,
 								timestampText = p1.timestampText
 							}) else nil
 						}),
-						rightContent = reactModule.createElement(foundationModule.View, {
+						rightContent = ReactModule.createElement(FoundationModule.View, {
 							tag = "row align-y-center size-0-full auto-x",
 							LayoutOrder = 2
 						}, {
-							squadButton = if p1.showSquadButton then reactModule.createElement(SquadButtonHost, {
+							squadButton = if p1.showSquadButton then ReactModule.createElement(SquadButtonHost, {
 								itemSignal = p1.itemSignal,
 								locatorTitle = p1.locatorTitle,
 								onActivated = p1.onSquadActivated,
 								squadLocation = p1.squadLocation
 							}) else nil,
-							timestampCluster = reactModule.createElement(foundationModule.View, {
+							timestampCluster = ReactModule.createElement(FoundationModule.View, {
 								tag = "row align-y-center gap-xsmall auto-xy",
 								Name = "timestampCluster",
 								LayoutOrder = 1,
 								Visible = p1.showTimestamp
 							}, {
-								timestamp = if fFlagAppChatTimestampInSubtitleConversationRowModule then nil else reactModule.createElement(foundationModule.Text, {
+								timestamp = if FFlagAppChatTimestampInSubtitleConversationRowModule then nil else ReactModule.createElement(FoundationModule.Text, {
 									tag = "auto-xy text-body-small content-default",
 									Name = "timeStamp",
 									LayoutOrder = 1,
 									testId = "conversation-row-timestamp",
 									Text = p1.timestampText
 								}),
-								unreadDot = reactModule.createElement(foundationModule.View, {
+								unreadDot = ReactModule.createElement(FoundationModule.View, {
 									tag = "size-200-200 radius-circle bg-action-emphasis",
 									Name = "unreadDot",
 									LayoutOrder = 2,
@@ -193,13 +194,13 @@ return reactModule.memo(function(p1)
 							})
 						})
 					}),
-					divider = if not fFlagAppChatRemoveConversationListDividerModule then reactModule.createElement(foundationModule.View, {
+					divider = if FFlagAppChatRemoveConversationListDividerModule then nil else ReactModule.createElement(FoundationModule.View, {
 						tag = "size-full-0 auto-y",
 						Name = "divider",
 						LayoutOrder = 2
 					}, {
-						line = reactModule.createElement(foundationModule.Divider)
-					}) else nil
+						line = ReactModule.createElement(FoundationModule.Divider)
+					})
 				})
 			})
 		})

@@ -1,25 +1,25 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local signalsReactModule = require(parent.SignalsReact)
-local dataHydrationModule = require(parent.DataHydration)
-local getGameInfoStore = dataHydrationModule.Game.getGameInfoStore
-local getVotesStore = dataHydrationModule.Game.getVotesStore
-local dataStatus = dataHydrationModule.DataStatus
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local SignalsReactModule = require(Parent.SignalsReact)
+local DataHydrationModule = require(Parent.DataHydration)
+local GetGameInfoStoreFunction = DataHydrationModule.Game.getGameInfoStore
+local GetVotesStoreFunction = DataHydrationModule.Game.getVotesStore
+local DataStatus = DataHydrationModule.DataStatus
 
-return function(p1)
-	-- upvalues: getGameInfoStore (ref), getVotesStore (ref), signalsReactModule (ref), dataStatus (ref)
-	local var1 = tostring(p1)
-	local andFetchGameInfo = getGameInfoStore(false).getAndFetchGameInfo(var1)
-	local andFetchVote = getVotesStore(false).getAndFetchVote(var1)
-	local var2 = signalsReactModule.useSignalState(andFetchGameInfo.data)
-	local var3 = signalsReactModule.useSignalState(andFetchVote.data)
-	local var4 = signalsReactModule.useSignalState(andFetchGameInfo.status) == dataStatus.NotReady
+return function(p1) --[[ Line: 33 | Named "useInstantStats" ]]
+	-- upvalues: GetGameInfoStoreFunction (copy), GetVotesStoreFunction (copy), SignalsReactModule (copy), DataStatus (copy)
+	local Text = tostring(p1)
+	local AndFetchGameInfo = GetGameInfoStoreFunction(false).getAndFetchGameInfo(Text)
+	local AndFetchVote = GetVotesStoreFunction(false).getAndFetchVote(Text)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(AndFetchGameInfo.data)
+	local UseSignalStateResult1 = SignalsReactModule.useSignalState(AndFetchVote.data)
+	local IsUseSignalStateResultMatch = SignalsReactModule.useSignalState(AndFetchGameInfo.status) == DataStatus.NotReady
 	
 	return {
-		visits = if var2 ~= nil then nil else var2.totalVisits,
-		players = if var2 ~= nil then nil else var2.playerCount,
-		likes = if var3 ~= nil then nil else var3.upVotes,
-		visitsLoading = var4,
-		playersLoading = var4,
-		likesLoading = signalsReactModule.useSignalState(andFetchVote.status) == dataStatus.NotReady
+		visits = if UseSignalStateResult == nil then nil else UseSignalStateResult.totalVisits,
+		players = if UseSignalStateResult == nil then nil else UseSignalStateResult.playerCount,
+		likes = if UseSignalStateResult1 == nil then nil else UseSignalStateResult1.upVotes,
+		visitsLoading = IsUseSignalStateResultMatch,
+		playersLoading = IsUseSignalStateResultMatch,
+		likesLoading = SignalsReactModule.useSignalState(AndFetchVote.status) == DataStatus.NotReady
 	}
 end

@@ -1,63 +1,63 @@
-﻿local whatsNew = script:FindFirstAncestor("WhatsNew")
-local parent = whatsNew.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local getWhatsNewStoreModule = require(whatsNew.store.GetWhatsNewStore)
-local view = foundationModule.View
+﻿local WhatsNew = script:FindFirstAncestor("WhatsNew")
+local Parent = WhatsNew.Parent
+local ReactModule = require(Parent.React)
+local GetWhatsNewStoreModule = require(WhatsNew.store.GetWhatsNewStore)
+local View = require(Parent.Foundation).View
 
-local function _(p1)
-	local absoluteSize = p1.AbsoluteSize
+local function _(Frame): boolean --[[ Line: 26 | Named "isGuiObjectReady" ]]
+	local AbsoluteSize = Frame.AbsoluteSize
 	
-	return absoluteSize.X > 0 and absoluteSize.Y > 0
+	return AbsoluteSize.X > 0 and AbsoluteSize.Y > 0
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: getWhatsNewStoreModule (ref), reactModule (ref), view (ref)
-	local var1 = getWhatsNewStoreModule()
-	local anchorId = p1.anchorId
-	local var2 = reactModule.useRef(nil)
-	local var3 = reactModule.useCallback(function(p2)
-		-- upvalues: var1 (ref), anchorId (ref)
-		if p2 == nil then
+return ReactModule.memo(function(Frame) --[[ Line: 31 | Named "WhatsNewAnchor" ]]
+	-- upvalues: GetWhatsNewStoreModule (copy), ReactModule (copy), View (copy)
+	local WhatsNewStoreModule = GetWhatsNewStoreModule()
+	local AnchorId = Frame.anchorId
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 36 ]]
+		-- upvalues: WhatsNewStoreModule (copy), AnchorId (copy)
+		if Frame ~= nil then
+			local AbsoluteSize = Frame.AbsoluteSize
+			WhatsNewStoreModule.setAnchorReady(AnchorId, AbsoluteSize.X > 0 and AbsoluteSize.Y > 0, Frame)
+			
 			return
 		end
-		local absoluteSize = p2.AbsoluteSize
-		var1.setAnchorReady(anchorId, absoluteSize.X > 0 and absoluteSize.Y > 0, p2)
-	end, { var1, anchorId })
-	local var4 = reactModule.useCallback(function(p2)
-		-- upvalues: var2 (ref), var1 (ref), anchorId (ref), var3 (ref)
-		if p2 == nil then
-			local current = var2.current
-			var2.current = nil
+	end, { WhatsNewStoreModule, AnchorId })
+	local UseResult1 = ReactModule.useCallback(function(Current) --[[ Line: 43 ]]
+		-- upvalues: UseRefResult (copy), WhatsNewStoreModule (copy), AnchorId (copy), UseResult (copy)
+		if Current == nil then
+			local Current1 = UseRefResult.current
+			UseRefResult.current = nil
 			
-			if current ~= nil then
-				var1.unregisterAnchor(anchorId, current)
+			if Current1 ~= nil then
+				WhatsNewStoreModule.unregisterAnchor(AnchorId, Current1)
 			end
 			return
 		else
-			var2.current = p2
-			var1.registerAnchor(anchorId, p2)
+			UseRefResult.current = Current
+			WhatsNewStoreModule.registerAnchor(AnchorId, Current)
 			
-			if var1.getAnchorRef(anchorId) == p2 then
-				var3(p2)
+			if WhatsNewStoreModule.getAnchorRef(AnchorId) == Current then
+				UseResult(Current)
 			end
 		end
-	end, { var1, anchorId, var3 })
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), anchorId (ref), var2 (ref)
-		return function()
-			-- upvalues: var1 (copy), anchorId (copy), var2 (copy)
-			var1.unregisterAnchor(anchorId, var2.current)
+	end, { WhatsNewStoreModule, AnchorId, UseResult })
+	ReactModule.useEffect(function() --[[ Line: 59 ]]
+		-- upvalues: WhatsNewStoreModule (copy), AnchorId (copy), UseRefResult (copy)
+		return function() --[[ Line: 60 ]]
+			-- upvalues: WhatsNewStoreModule (upval), AnchorId (upval), UseRefResult (upval)
+			WhatsNewStoreModule.unregisterAnchor(AnchorId, UseRefResult.current)
 		end
-	end, { var1, anchorId })
+	end, { WhatsNewStoreModule, AnchorId })
 	
-	return reactModule.createElement(view, {
-		ref = var4,
-		tag = p1.tag or "size-full-0 auto-y",
-		LayoutOrder = p1.LayoutOrder,
-		onAbsoluteSizeChanged = reactModule.useCallback(function(p2)
-			-- upvalues: var3 (ref)
-			var3(p2)
-		end, { var3 })
-	}, p1.children)
+	return ReactModule.createElement(View, {
+		ref = UseResult1,
+		tag = Frame.tag or "size-full-0 auto-y",
+		LayoutOrder = Frame.LayoutOrder,
+		onAbsoluteSizeChanged = ReactModule.useCallback(function(p1) --[[ Line: 65 ]]
+			-- upvalues: UseResult (copy)
+			UseResult(p1)
+		end, { UseResult })
+	}, Frame.children)
 end)

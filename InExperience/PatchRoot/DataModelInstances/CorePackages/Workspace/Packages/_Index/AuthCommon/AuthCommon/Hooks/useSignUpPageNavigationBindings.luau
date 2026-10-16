@@ -1,36 +1,35 @@
-﻿local parent = script:FindFirstAncestor("AuthCommon").Parent
-local reactModule = require(parent.React)
-local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
-local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-local inputHandlersModule = require(parent.InputHandlers)
-local fFlagEnableConfirmSignifierOnSignUpPage = require(parent.SharedFlags).FFlagEnableConfirmSignifierOnSignUpPage
-local focusNavigationEventNameEnum = focusNavigationUtilsModule.FocusNavigationEventNameEnum
-local t = {
-	[Enum.KeyCode.ButtonA] = focusNavigationEventNameEnum.Confirm,
-	[Enum.KeyCode.Return] = focusNavigationEventNameEnum.Confirm,
-	[Enum.KeyCode.ButtonB] = focusNavigationEventNameEnum.NavigateBack,
-	[Enum.KeyCode.Escape] = focusNavigationEventNameEnum.NavigateBack
+﻿local Parent = script:FindFirstAncestor("AuthCommon").Parent
+local ReactModule = require(Parent.React)
+local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
+local InputHandlersModule = require(Parent.InputHandlers)
+local FFlagEnableConfirmSignifierOnSignUpPage = require(Parent.SharedFlags).FFlagEnableConfirmSignifierOnSignUpPage
+local FocusNavigationEventNameEnum = require(Parent.FocusNavigationUtils).FocusNavigationEventNameEnum
+local config = {
+	[Enum.KeyCode.ButtonA] = FocusNavigationEventNameEnum.Confirm,
+	[Enum.KeyCode.Return] = FocusNavigationEventNameEnum.Confirm,
+	[Enum.KeyCode.ButtonB] = FocusNavigationEventNameEnum.NavigateBack,
+	[Enum.KeyCode.Escape] = FocusNavigationEventNameEnum.NavigateBack
 }
 
-return function(value)
-	-- upvalues: reactModule (ref), fFlagEnableConfirmSignifierOnSignUpPage (ref), reactFocusNavigationModule (ref), t (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref)
-	local var1 = reactModule.useCallback(function(p1)
-		-- upvalues: value (ref)
+return function(Callback) --[[ Line: 20 | Named "useSignUpPageNavigationBindings" ]]
+	-- upvalues: ReactModule (copy), FFlagEnableConfirmSignifierOnSignUpPage (copy), ReactFocusNavigationModule (copy), config (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy)
+	local UseResult = ReactModule.useCallback(function(p1) --[[ Line: 22 ]]
+		-- upvalues: Callback (copy)
 		p1:cancel()
 		
 		if p1.eventData and p1.eventData.KeyCode == Enum.KeyCode.None then return end
-		if value then
-			value()
+		if Callback then
+			Callback()
 		end
-	end, if value then { value } else {})
+	end, if Callback then { Callback } else {})
 	
-	return if fFlagEnableConfirmSignifierOnSignUpPage then reactFocusNavigationModule.useEventHandlerMap(reactModule.useMemo(function()
-		-- upvalues: focusNavigationEventNameEnum (copy), var1 (ref), inputHandlersModule (copy)
+	return if FFlagEnableConfirmSignifierOnSignUpPage then ReactFocusNavigationModule.useEventHandlerMap(ReactModule.useMemo(function() --[[ Line: 35 ]]
+		-- upvalues: FocusNavigationEventNameEnum (upval), UseResult (copy), InputHandlersModule (upval)
 		return {
-			[focusNavigationEventNameEnum.NavigateBack] = { handler = var1 },
-			[focusNavigationEventNameEnum.Confirm] = {
-				handler = inputHandlersModule.onRelease(function() end)
+			[FocusNavigationEventNameEnum.NavigateBack] = { handler = UseResult },
+			[FocusNavigationEventNameEnum.Confirm] = {
+				handler = InputHandlersModule.onRelease(function() --[[ Line: 41 ]] end)
 			}
 		}
-	end, {}), reactFocusNavigationModule.useEventMap(t)) else reactFocusNavigationModule.useEventHandler(focusNavigationEventNameEnum.NavigateBack, var1)
+	end, {}), (ReactFocusNavigationModule.useEventMap(config))) else ReactFocusNavigationModule.useEventHandler(FocusNavigationEventNameEnum.NavigateBack, UseResult)
 end

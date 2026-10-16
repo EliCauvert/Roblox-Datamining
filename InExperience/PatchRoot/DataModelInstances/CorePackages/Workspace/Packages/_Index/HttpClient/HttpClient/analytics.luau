@@ -1,33 +1,33 @@
-﻿local telemetryService = game:GetService("TelemetryService")
+﻿local TelemetryService = game:GetService("TelemetryService")
 local _ = require(script.Parent.types)
-local luaHttpClientRequestTimerEventHundredthsPercent = game:DefineFastInt("LuaHttpClientRequestTimerEventHundredthsPercent", 0)
+local LuaHttpClientRequestTimerEventHundredthsPercent = game:DefineFastInt("LuaHttpClientRequestTimerEventHundredthsPercent", 0)
 game:DefineFastInt("LuaHttpClientRequestStatusEventHundredthsPercent", 0)
 game:DefineFastInt("LuaHttpClientPayloadSizeEventHundredthsPercent", 0)
 
-local function _(p1)
-	return if p1 <= 0 then false else p1 >= 10000 or math.random(1, 10000) <= p1
+local function _(p1: number): boolean --[[ Line: 18 | Named "shouldSample" ]]
+	return p1 > 0 and (p1 >= 10000 or math.random(1, 10000) <= p1)
 end
 
-local t = {
+local config = {
 	eventName = "LuaHttpClient_RequestTimer",
 	description = "Duration for lua-apps http-client HTTP requests, bucketed by analyticsKey",
 	lastUpdated = { 26, 5, 29 },
 	backends = { "Points", "EventIngest" },
-	throttlingPercentage = luaHttpClientRequestTimerEventHundredthsPercent
+	throttlingPercentage = LuaHttpClientRequestTimerEventHundredthsPercent
 }
-local t_1 = {
+local config1 = {
 	eventName = "LuaHttpClient_RequestStatus",
 	description = "Status code + final state for lua-apps http-client HTTP requests",
 	lastUpdated = { 26, 5, 29 },
 	backends = { "RobloxTelemetryCounter" }
 }
-local t_2 = {
+local config2 = {
 	eventName = "LuaHttpClient_PayloadSize",
 	description = "Response payload size for lua-apps http-client HTTP requests",
 	lastUpdated = { 26, 5, 29 },
 	backends = { "RobloxTelemetryStat" }
 }
-local t_3 = {
+local config3 = {
 	[Enum.HttpError.OK] = "OK",
 	[Enum.HttpError.InvalidUrl] = "InvalidUrl",
 	[Enum.HttpError.DnsResolve] = "DnsResolve",
@@ -43,8 +43,8 @@ local t_3 = {
 	[Enum.HttpError.Unknown] = "Unknown"
 }
 
-local _ = function(p1)
-	return if typeof(p1) == "buffer" then buffer.len(p1) elseif typeof(p1) == "string" then string.len(p1) else nil
+local _ = function(Buf: string) --[[ Line: 66 | Named "payloadSizeOf" ]]
+	return if typeof(Buf) == "buffer" then buffer.len(Buf) elseif typeof(Buf) == "string" then string.len(Buf) else nil
 end
 
 local list = {
@@ -54,55 +54,58 @@ local list = {
 }
 
 return {
-	defaultAnalytics = function(p1, p2, _, p3, p4, p5)
-		-- upvalues: list (ref), telemetryService (ref), t (ref), t_1 (ref), t_3 (ref), t_2 (ref)
-		local t_4 = {
-			analyticsKey = p1,
-			method = p2,
-			durationMs = p4,
-			status = p5
+	defaultAnalytics = function(AnalyticsKey, Method, _, p1, DurationMs, Status) --[[ Line: 87 ]]
+		-- upvalues: list (copy), TelemetryService (copy), config (copy), config1 (copy), config3 (copy), config2 (copy)
+		local CustomFields = {
+			analyticsKey = AnalyticsKey,
+			method = Method,
+			durationMs = DurationMs,
+			status = Status
 		}
 		
-		if p3 and p3.stats then
-			for i, v in list do
-				local var1 = p3.stats[v]
+		if p1 and p1.stats then
+			for _, value in list do
+				local Stat: number = p1.stats[value]
 				
-				if typeof(var1) == "number" then
-					t_4[v] = var1 * 1000
+				if typeof(Stat) == "number" then
+					CustomFields[value] = Stat * 1000
 				end
 			end
-			local wasRequestRetried = p3.stats.WasRequestRetried
+			local WasRequestRetried = p1.stats.WasRequestRetried
 			
-			if typeof(wasRequestRetried) == "number" then
-				t_4.WasRequestRetried = wasRequestRetried
+			if typeof(WasRequestRetried) == "number" then
+				CustomFields.WasRequestRetried = WasRequestRetried
 			end
 		end
-		local var2
-		telemetryService:LogEvent(t, { customFields = t_4, standardizedFields = { "addOSInfo" } })
-		local luaHttpClientRequestStatusEventHundredthsPercentFastInt = game:GetFastInt("LuaHttpClientRequestStatusEventHundredthsPercent")
+		TelemetryService:LogEvent(config, {
+			customFields = CustomFields,
+			standardizedFields = { "addOSInfo" }
+		})
+		local LuaHttpClientRequestStatusEventHundredthsPercentFastInt: number = game:GetFastInt("LuaHttpClientRequestStatusEventHundredthsPercent")
 		
-		if if luaHttpClientRequestStatusEventHundredthsPercentFastInt <= 0 then false else luaHttpClientRequestStatusEventHundredthsPercentFastInt >= 10000 or math.random(1, 10000) <= luaHttpClientRequestStatusEventHundredthsPercentFastInt then
-			telemetryService:LogCounter(t_1, {
+		if LuaHttpClientRequestStatusEventHundredthsPercentFastInt > 0 and (LuaHttpClientRequestStatusEventHundredthsPercentFastInt >= 10000 or LuaHttpClientRequestStatusEventHundredthsPercentFastInt >= math.random(1, 10000)) then
+			TelemetryService:LogCounter(config1, {
 				customFields = {
-					analyticsKey = p1,
-					method = p2,
-					status = p5,
-					statusCode = if p3 then p3.statusCode else "unknown",
-					httpError = if p3 and p3.httpError then t_3[p3.httpError] else nil
+					analyticsKey = AnalyticsKey,
+					method = Method,
+					status = Status,
+					statusCode = p1 and p1.statusCode or "unknown",
+					httpError = if p1 and p1.httpError then config3[p1.httpError] else nil
 				}
 			})
 		end
-		if p3 then
-			local responseBody = p3.responseBody
-			var2 = if typeof(responseBody) == "buffer" then buffer.len(responseBody) elseif typeof(responseBody) == "string" then string.len(responseBody) else nil
+		local Length = nil
+		if p1 then
+			local ResponseBody: string = p1.responseBody
+			Length = if typeof(ResponseBody) == "buffer" then buffer.len(ResponseBody) elseif typeof(ResponseBody) == "string" then string.len(ResponseBody) else nil
 		else
-			var2 = nil
+			Length = nil
 		end
-		if var2 ~= nil then
-			local luaHttpClientPayloadSizeEventHundredthsPercentFastInt = game:GetFastInt("LuaHttpClientPayloadSizeEventHundredthsPercent")
+		if Length ~= nil then
+			local LuaHttpClientPayloadSizeEventHundredthsPercentFastInt: number = game:GetFastInt("LuaHttpClientPayloadSizeEventHundredthsPercent")
 			
-			if if luaHttpClientPayloadSizeEventHundredthsPercentFastInt <= 0 then false else luaHttpClientPayloadSizeEventHundredthsPercentFastInt >= 10000 or math.random(1, 10000) <= luaHttpClientPayloadSizeEventHundredthsPercentFastInt then
-				telemetryService:LogStat(t_2, { customFields = { analyticsKey = p1 } }, var2)
+			if LuaHttpClientPayloadSizeEventHundredthsPercentFastInt > 0 and (LuaHttpClientPayloadSizeEventHundredthsPercentFastInt >= 10000 or LuaHttpClientPayloadSizeEventHundredthsPercentFastInt >= math.random(1, 10000)) then
+				TelemetryService:LogStat(config2, { customFields = { analyticsKey = AnalyticsKey } }, Length)
 			end
 		end
 	end

@@ -1,33 +1,35 @@
 ﻿local _ = require(script:FindFirstAncestor("DataHydration").Moments.MomentsStoreTypes)
 
-local function _(p1)
-	local stats = p1.stats
+local function _(p1) --[[ Line: 13 | Named "extractShareInfo" ]]
+	local Stats = p1.stats
 	
-	return if stats == nil or type(stats.shareCount) ~= "number" then nil else {
+	return if Stats == nil or type(Stats.shareCount) ~= "number" then nil else {
 		hasShared = false,
-		shareCount = math.max(stats.shareCount, 0)
+		shareCount = math.max(Stats.shareCount, 0)
 	}
 end
 
-return function(p1)
+return function(List) --[[ Line: 25 | Named "extractShareInfoByMomentId" ]]
 	local t = {}
 	
-	if p1 == nil then
+	if List == nil then
 		return t
 	end
-	for i, v in p1 do
-		local entityId = v.entityId or v.id
+	for _, value in List do
+		local EntityId = value.entityId or value.id
+		local NoEntityId = EntityId == nil
+		local Config = nil
 		
-		if entityId ~= nil then
-			local stats = v.stats
-			local var1 = if stats == nil or type(stats.shareCount) ~= "number" then nil else {
+		if not NoEntityId then
+			local Stats = value.stats
+			Config = if Stats == nil or type(Stats.shareCount) ~= "number" then nil else {
 				hasShared = false,
-				shareCount = math.max(stats.shareCount, 0)
+				shareCount = math.max(Stats.shareCount, 0)
 			}
-			
-			if var1 ~= nil then
-				t[entityId] = var1
-			end
+			NoEntityId = Config == nil
+		end
+		if not NoEntityId then
+			t[EntityId] = Config
 		end
 	end
 	return t

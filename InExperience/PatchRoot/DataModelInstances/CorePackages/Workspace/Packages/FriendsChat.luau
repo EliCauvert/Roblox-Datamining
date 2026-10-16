@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.FriendsChat.FriendsChat)
+﻿return (require(script.Parent._Workspace.FriendsChat.FriendsChat))

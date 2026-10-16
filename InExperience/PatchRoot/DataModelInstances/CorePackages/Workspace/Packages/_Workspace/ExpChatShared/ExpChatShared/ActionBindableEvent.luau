@@ -1,1 +1,1 @@
-﻿return Instance.new("BindableEvent")
+﻿return (Instance.new("BindableEvent"))

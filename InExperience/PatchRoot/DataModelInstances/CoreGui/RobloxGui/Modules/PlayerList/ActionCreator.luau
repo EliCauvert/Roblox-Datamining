@@ -1,15 +1,15 @@
-﻿return function(p1, p2)
-	assert(type(p1) == "string", "A name must be provided to create an Action")
-	assert(type(p2) == "function", "A function must be provided to create an Action")
+﻿return function(Name, Callback) --[[ Line: 3 ]]
+	assert(type(Name) == "string", "A name must be provided to create an Action")
+	assert(type(Callback) == "function", "A function must be provided to create an Action")
 	
-	return setmetatable({ name = p1 }, {
-		__call = function(_, ...)
-			-- upvalues: p2 (ref), p1 (ref)
-			local var1 = p2(...)
-			assert(type(var1) == "table", "An action must return a table")
-			var1.type = p1
+	return (setmetatable({ name = Name }, {
+		__call = function(_, ...) --[[ Line: 10 ]]
+			-- upvalues: Callback (copy), Name (copy)
+			local CallbackResult = Callback(...)
+			assert(type(CallbackResult) == "table", "An action must return a table")
+			CallbackResult.type = Name
 			
-			return var1
+			return CallbackResult
 		end
-	})
+	}))
 end

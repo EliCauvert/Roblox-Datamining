@@ -1,5 +1,5 @@
-﻿return function(value, p1)
-	local userSpecificSettings = value and value.UserSpecificSettings
+﻿return function(p1, p2) --[[ Line: 3 | Named "getSettingsForMessage" ]]
+	local UserSpecificSettings = p1 and p1.UserSpecificSettings
 	
-	return if not (not p1 or not userSpecificSettings) then if userSpecificSettings[p1.userId] then userSpecificSettings[p1.userId] elseif p1.partOrModel and userSpecificSettings[p1.partOrModel:GetFullName()] then userSpecificSettings[p1.partOrModel:GetFullName()] else value else value
+	return if p2 and UserSpecificSettings then if UserSpecificSettings[p2.userId] then UserSpecificSettings[p2.userId] elseif p2.partOrModel and UserSpecificSettings[p2.partOrModel:GetFullName()] then UserSpecificSettings[p2.partOrModel:GetFullName()] else p1 else p1
 end

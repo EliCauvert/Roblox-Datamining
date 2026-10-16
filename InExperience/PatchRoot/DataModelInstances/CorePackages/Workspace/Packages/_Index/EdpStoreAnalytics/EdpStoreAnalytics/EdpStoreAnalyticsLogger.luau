@@ -1,54 +1,51 @@
-﻿local telemetryService = game:GetService("TelemetryService")
+﻿local TelemetryService = game:GetService("TelemetryService")
 local IXPService = game:GetService("IXPService")
-local edpStoreAnalytics = script:FindFirstAncestor("EdpStoreAnalytics")
-local appUserLayers = require(edpStoreAnalytics.Parent.ExperimentLayers).AppUserLayers
-local constantsModule = require(edpStoreAnalytics.Constants)
-local edpStoreClicksDetectorThrottlingHundredthsPercent = game:DefineFastInt("EdpStoreClicksDetectorThrottlingHundredthsPercent", 0)
-local edpStoreImpressionsDetectorThrottlingHundredthsPercent = game:DefineFastInt("EdpStoreImpressionsDetectorThrottlingHundredthsPercent", 0)
-local t = {}
+local EdpStoreAnalytics = script:FindFirstAncestor("EdpStoreAnalytics")
+local AppUserLayers = require(EdpStoreAnalytics.Parent.ExperimentLayers).AppUserLayers
+local ConstantsModule = require(EdpStoreAnalytics.Constants)
+local EdpStoreClicksDetectorThrottlingHundredthsPercent = game:DefineFastInt("EdpStoreClicksDetectorThrottlingHundredthsPercent", 0)
+local EdpStoreImpressionsDetectorThrottlingHundredthsPercent = game:DefineFastInt("EdpStoreImpressionsDetectorThrottlingHundredthsPercent", 0)
 
-local function sendLogEvent(p1)
-	-- upvalues: edpStoreClicksDetectorThrottlingHundredthsPercent (ref), telemetryService (ref)
-	telemetryService:LogEvent({
+local function sendLogEvent(CustomFields) --[[ Line: 17 ]]
+	-- upvalues: EdpStoreClicksDetectorThrottlingHundredthsPercent (copy), TelemetryService (copy)
+	TelemetryService:LogEvent({
 		eventName = "experienceStoreProducts",
 		description = "Event fired from the lua app for click events on the EDP store",
 		backends = { "EventIngest" },
-		throttlingPercentage = edpStoreClicksDetectorThrottlingHundredthsPercent,
+		throttlingPercentage = EdpStoreClicksDetectorThrottlingHundredthsPercent,
 		lastUpdated = { 25, 10, 23 }
-	}, { customFields = p1 })
+	}, { customFields = CustomFields })
 end
 
-local function sendImpressionLogEvent(p1)
-	-- upvalues: constantsModule (ref), edpStoreImpressionsDetectorThrottlingHundredthsPercent (ref), telemetryService (ref)
-	telemetryService:LogEvent({
+local function sendImpressionLogEvent(CustomFields) --[[ Line: 32 ]]
+	-- upvalues: ConstantsModule (copy), EdpStoreImpressionsDetectorThrottlingHundredthsPercent (copy), TelemetryService (copy)
+	TelemetryService:LogEvent({
 		description = "Event fired from the lua app for every impression on the EDP store or preview",
-		eventName = constantsModule.ExperienceStoreEventName,
+		eventName = ConstantsModule.ExperienceStoreEventName,
 		backends = { "EventIngest" },
-		throttlingPercentage = edpStoreImpressionsDetectorThrottlingHundredthsPercent,
+		throttlingPercentage = EdpStoreImpressionsDetectorThrottlingHundredthsPercent,
 		lastUpdated = { 25, 10, 23 }
-	}, { customFields = p1 })
+	}, { customFields = CustomFields })
 end
 
-function t.logEvent(p1, p2, p3, p4, p5, p6, _)
-	-- upvalues: sendLogEvent (ref)
-	sendLogEvent({
-		actionType = p1,
-		productType = p2,
-		locationType = p3,
-		universeId = p4,
-		productId = p5,
-		itemId = p6
-	})
-end
-
-function t.logImpression(p1)
-	-- upvalues: sendImpressionLogEvent (ref)
-	sendImpressionLogEvent(p1)
-end
-
-function t.logExperienceStoreExposure()
-	-- upvalues: IXPService (ref), appUserLayers (ref)
-	IXPService:LogUserLayerExposure(appUserLayers.EconomyDeveloperMonetizationEdpVirtualProductsRanking)
-end
-
-return t
+return {
+	logEvent = function(ActionType, ProductType, LocationType, UniverseId, ProductId, ItemId, _) --[[ Line: 45 ]]
+		-- upvalues: sendLogEvent (copy)
+		sendLogEvent({
+			actionType = ActionType,
+			productType = ProductType,
+			locationType = LocationType,
+			universeId = UniverseId,
+			productId = ProductId,
+			itemId = ItemId
+		})
+	end,
+	logImpression = function(CustomFields) --[[ Line: 69 ]]
+		-- upvalues: sendImpressionLogEvent (copy)
+		sendImpressionLogEvent(CustomFields)
+	end,
+	logExperienceStoreExposure = function() --[[ Line: 75 ]]
+		-- upvalues: IXPService (copy), AppUserLayers (copy)
+		IXPService:LogUserLayerExposure(AppUserLayers.EconomyDeveloperMonetizationEdpVirtualProductsRanking)
+	end
+}

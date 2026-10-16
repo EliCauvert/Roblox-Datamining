@@ -1,72 +1,75 @@
-﻿local parent = script:FindFirstAncestor("Moments").Parent
-local signalsModule = require(parent.Signals)
-local cryoModule = require(parent.Cryo)
-local createSignal = signalsModule.createSignal
-local createComputed = signalsModule.createComputed
+﻿local Parent = script:FindFirstAncestor("Moments").Parent
+local SignalsModule = require(Parent.Signals)
+local CryoModule = require(Parent.Cryo)
+local CreateSignalFunction = SignalsModule.createSignal
+local CreateComputedFunction = SignalsModule.createComputed
 
-return function()
-	-- upvalues: createSignal (ref), createComputed (ref), cryoModule (ref)
-	local var1, var2 = createSignal({})
+return function() --[[ Line: 31 | Named "createUsersStore" ]]
+	-- upvalues: CreateSignalFunction (copy), CreateComputedFunction (copy), CryoModule (copy)
+	local Signal, Signal2 = CreateSignalFunction({})
 	local t = {}
-	local t_1 = {}
+	local t1 = {}
 	
 	return {
-		getUsersByUserId = var1,
-		getUserProfile = function(p1)
-			-- upvalues: t (ref), createComputed (copy), var1 (ref), t_1 (ref)
-			if t[p1] == nil then
-				t[p1] = createComputed(function(p2)
-					-- upvalues: var1 (copy), p1 (ref), t_1 (copy)
-					return var1(p2)[p1] or t_1
+		getUsersByUserId = Signal,
+		getUserProfile = function(Key) --[[ Line: 37 ]]
+			-- upvalues: t (copy), CreateComputedFunction (upval), Signal (copy), t1 (copy)
+			if t[Key] == nil then
+				t[Key] = CreateComputedFunction(function(p1) --[[ Line: 39 ]]
+					-- upvalues: Signal (upval), Key (copy), t1 (upval)
+					return Signal(p1)[Key] or t1
 				end)
 			end
-			return t[p1]
+			return t[Key]
 		end,
-		updateUsername = function(p1, p2)
-			-- upvalues: var1 (ref), var2 (ref), cryoModule (copy)
-			local var3 = tostring(p1)
-			local var4 = var1(false)
-			var2(cryoModule.Dictionary.union(var4, {
-				[var3] = cryoModule.Dictionary.union(var4[var3] or {}, { username = p2 })
-			}))
+		updateUsername = function(p1, Username) --[[ Line: 46 ]]
+			-- upvalues: Signal (copy), Signal2 (copy), CryoModule (upval)
+			local Text = tostring(p1)
+			local SignalResult = Signal(false)
+			Signal2((CryoModule.Dictionary.union(SignalResult, {
+				[Text] = CryoModule.Dictionary.union(SignalResult[Text] or {}, { username = Username })
+			})))
 		end,
-		updateAvatar = function(p1, p2)
-			-- upvalues: var1 (ref), var2 (ref), cryoModule (copy)
-			local var3 = tostring(p1)
-			local var4 = var1(false)
-			var2(cryoModule.Dictionary.union(var4, {
-				[var3] = cryoModule.Dictionary.union(var4[var3] or {}, { avatarThumbnailUri = p2 })
-			}))
+		updateAvatar = function(p1, AvatarThumbnailUri) --[[ Line: 57 ]]
+			-- upvalues: Signal (copy), Signal2 (copy), CryoModule (upval)
+			local Text = tostring(p1)
+			local SignalResult = Signal(false)
+			Signal2((CryoModule.Dictionary.union(SignalResult, {
+				[Text] = CryoModule.Dictionary.union(SignalResult[Text] or {}, { avatarThumbnailUri = AvatarThumbnailUri })
+			})))
 		end,
-		updateMomentsCount = function(p1, p2)
-			-- upvalues: var1 (ref), var2 (ref), cryoModule (copy)
-			local var3 = tostring(p1)
-			local var4 = var1(false)
-			var2(cryoModule.Dictionary.union(var4, {
-				[var3] = cryoModule.Dictionary.union(var4[var3] or {}, { momentsCount = p2 })
-			}))
+		updateMomentsCount = function(p1, MomentsCount) --[[ Line: 68 ]]
+			-- upvalues: Signal (copy), Signal2 (copy), CryoModule (upval)
+			local Text = tostring(p1)
+			local SignalResult = Signal(false)
+			Signal2((CryoModule.Dictionary.union(SignalResult, {
+				[Text] = CryoModule.Dictionary.union(SignalResult[Text] or {}, { momentsCount = MomentsCount })
+			})))
 		end,
-		invalidateMomentsCount = function(p1)
-			-- upvalues: var1 (ref), var2 (ref), cryoModule (copy)
-			local var3 = tostring(p1)
-			local var4 = var1(false)
-			local var5 = var4[var3]
+		invalidateMomentsCount = function(p1) --[[ Line: 79 ]]
+			-- upvalues: Signal (copy), Signal2 (copy), CryoModule (upval)
+			local Text = tostring(p1)
+			local SignalResult = Signal(false)
+			local SignalResultEntry = SignalResult[Text]
 			
-			if var5 then
-				var2(cryoModule.Dictionary.union(var4, {
-					[var3] = cryoModule.Dictionary.join(var5, { momentsCount = cryoModule.None })
-				}))
+			if SignalResultEntry then
+				Signal2((CryoModule.Dictionary.union(SignalResult, {
+					[Text] = CryoModule.Dictionary.join(SignalResultEntry, { momentsCount = CryoModule.None })
+				})))
 				
 				return
 			end
 		end,
-		updateUserInfo = function(p1, p2, p3)
-			-- upvalues: var1 (ref), var2 (ref), cryoModule (copy)
-			local var3 = tostring(p1)
-			local var4 = var1(false)
-			var2(cryoModule.Dictionary.union(var4, {
-				[var3] = cryoModule.Dictionary.union(var4[var3] or {}, { displayName = p2, hasVerifiedBadge = p3 })
-			}))
+		updateUserInfo = function(p1, DisplayName, HasVerifiedBadge) --[[ Line: 93 ]]
+			-- upvalues: Signal (copy), Signal2 (copy), CryoModule (upval)
+			local Text = tostring(p1)
+			local SignalResult = Signal(false)
+			Signal2((CryoModule.Dictionary.union(SignalResult, {
+				[Text] = CryoModule.Dictionary.union(SignalResult[Text] or {}, {
+					displayName = DisplayName,
+					hasVerifiedBadge = HasVerifiedBadge
+				})
+			})))
 		end
 	}
 end

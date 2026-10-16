@@ -1,1 +1,3 @@
-﻿return game:DefineFastFlag("AXSduiProcessCatalogDeepLink", false) and require(script.Parent.FFlagAXMigrateAllTabToSduiDev)
+﻿local FFlagAXMigrateAllTabToSduiDevModule = require(script.Parent.FFlagAXMigrateAllTabToSduiDev)
+
+return game:DefineFastFlag("AXSduiProcessCatalogDeepLink", false) and FFlagAXMigrateAllTabToSduiDevModule

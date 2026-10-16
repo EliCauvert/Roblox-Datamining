@@ -1,100 +1,96 @@
-﻿local parent = script:FindFirstAncestor("AppBlox").Parent
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local foundationModule = require(parent.Foundation)
-local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-local inputHandlersModule = require(parent.InputHandlers)
-local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
-local dialog = foundationModule.Dialog
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local orientation = foundationModule.Enums.Orientation
-local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
-local focusNavigationEventNameEnum = focusNavigationUtilsModule.FocusNavigationEventNameEnum
-local useFocusRoot = focusNavigationUtilsModule.useFocusRoot
-local useDefaultFocusBehavior = reactFocusNavigationModule.useDefaultFocusBehavior
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagLuaAppPlayButtonPrivatePT = sharedFlagsModule.FFlagLuaAppPlayButtonPrivatePT
-local fFlagAppBloxConfirmationDialogFocusNav = sharedFlagsModule.FFlagAppBloxConfirmationDialogFocusNav
-local t = {
-	[Enum.KeyCode.ButtonB] = focusNavigationEventNameEnum.NavigateBack,
-	[Enum.KeyCode.Escape] = focusNavigationEventNameEnum.NavigateBack
+﻿local Parent = script:FindFirstAncestor("AppBlox").Parent
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local FoundationModule = require(Parent.Foundation)
+local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
+local InputHandlersModule = require(Parent.InputHandlers)
+local Dialog = FoundationModule.Dialog
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local Orientation = FoundationModule.Enums.Orientation
+local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
+local FocusNavigationEventNameEnum = FocusNavigationUtilsModule.FocusNavigationEventNameEnum
+local UseFocusRootFunction = FocusNavigationUtilsModule.useFocusRoot
+local UseDefaultFocusBehaviorFunction = require(Parent.ReactFocusNavigation).useDefaultFocusBehavior
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagLuaAppPlayButtonPrivatePT = SharedFlagsModule.FFlagLuaAppPlayButtonPrivatePT
+local FFlagAppBloxConfirmationDialogFocusNav = SharedFlagsModule.FFlagAppBloxConfirmationDialogFocusNav
+local EventMap = {
+	[Enum.KeyCode.ButtonB] = FocusNavigationEventNameEnum.NavigateBack,
+	[Enum.KeyCode.Escape] = FocusNavigationEventNameEnum.NavigateBack
 }
-local fFlagEnableSplitPane = require(parent.SharedFlags).FFlagEnableSplitPane
+local FFlagEnableSplitPane = require(Parent.SharedFlags).FFlagEnableSplitPane
 
-return function(p1)
-	-- upvalues: useLocalization (ref), fFlagAppBloxConfirmationDialogFocusNav (ref), reactModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), useFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), t (ref), useDefaultFocusBehavior (ref), fFlagLuaAppPlayButtonPrivatePT (ref), buttonVariant (ref), dialog (ref), fFlagEnableSplitPane (ref), orientation (ref)
-	local var1 = useLocalization({
+return function(p1) --[[ Line: 61 ]]
+	-- upvalues: UseLocalizationFunction (copy), FFlagAppBloxConfirmationDialogFocusNav (copy), ReactModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseFocusRootFunction (copy), FocusNavigableSurfaceIdentifierEnum (copy), EventMap (copy), UseDefaultFocusBehaviorFunction (copy), FFlagLuaAppPlayButtonPrivatePT (copy), ButtonVariant (copy), Dialog (copy), FFlagEnableSplitPane (copy), Orientation (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
 		confirmButtonText = "CommonUI.Controls.Action.Confirm",
 		cancelButtonText = "CommonUI.Controls.Action.Cancel"
 	})
-	local var2 = nil
-	local var3 = nil
+	local Ref = nil
+	local v1 = nil
 	
-	if fFlagAppBloxConfirmationDialogFocusNav then
-		local onCancel = p1.onCancel
-		local var4, var5 = useDefaultFocusBehavior(useFocusRoot({
+	if FFlagAppBloxConfirmationDialogFocusNav then
+		local OnCancelFunction = p1.onCancel
+		v1, Ref = UseDefaultFocusBehaviorFunction((UseFocusRootFunction({
 			isAutoFocusRoot = true,
 			shouldRestoreFocus = false,
-			surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.PopUp,
-			eventMap = t,
-			eventHandlers = reactModule.useMemo(function()
-				-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), onCancel (ref)
+			surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.PopUp,
+			eventMap = EventMap,
+			eventHandlers = ReactModule.useMemo(function() --[[ Line: 74 ]]
+				-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), OnCancelFunction (copy)
 				return {
-					[focusNavigationEventNameEnum.NavigateBack] = {
-						handler = inputHandlersModule.onRelease(function(p2)
-							-- upvalues: onCancel (copy)
-							onCancel()
+					[FocusNavigationEventNameEnum.NavigateBack] = {
+						handler = InputHandlersModule.onRelease(function(p2) --[[ Line: 80 ]]
+							-- upvalues: OnCancelFunction (upval)
+							OnCancelFunction()
 							p2:cancel()
 						end)
 					}
 				}
-			end, { onCancel })
-		}))
-		var3 = var4
-		var2 = var5
+			end, { OnCancelFunction })
+		})))
 	end
-	local var6 = nil
+	local Ref1 = v1
+	local v2 = nil
 	
-	if fFlagLuaAppPlayButtonPrivatePT then
-		local t_1 = {
-			variant = buttonVariant.Standard,
-			text = p1.cancelButtonText or var1.cancelButtonText,
+	if FFlagLuaAppPlayButtonPrivatePT then
+		local config = {
+			variant = ButtonVariant.Emphasis,
+			text = p1.confirmButtonText or UseLocalizationResult.confirmButtonText,
+			onActivated = p1.onConfirm,
+			ref = Ref1
+		}
+		local config1 = {
+			variant = ButtonVariant.Standard,
+			text = p1.cancelButtonText or UseLocalizationResult.cancelButtonText,
 			onActivated = p1.onCancel,
-			ref = if p1.hideConfirmButton then var3 else nil
+			ref = if p1.hideConfirmButton then Ref1 else nil
 		}
-		var6 = if p1.hideConfirmButton then { t_1 } else {
-			{
-				variant = buttonVariant.Emphasis,
-				text = p1.confirmButtonText or var1.confirmButtonText,
-				onActivated = p1.onConfirm,
-				ref = var3
-			},
-			t_1
-		}
+		v2 = if p1.hideConfirmButton then { config1 } else { config, config1 }
 	end
-	return reactModule.createElement(dialog.Root, {
-		hasBackdrop = if fFlagEnableSplitPane and p1.hasBackdrop ~= nil then p1.hasBackdrop else true,
+	return ReactModule.createElement(Dialog.Root, {
+		hasBackdrop = not FFlagEnableSplitPane or p1.hasBackdrop == nil or p1.hasBackdrop,
 		disablePortal = p1.disablePortal,
-		size = if fFlagLuaAppPlayButtonPrivatePT then p1.size else nil,
-		ref = var2,
-		onClose = if fFlagEnableSplitPane and p1.onClose ~= nil then p1.onClose elseif p1.showCloseButton then p1.onCancel else nil
+		size = if FFlagLuaAppPlayButtonPrivatePT then p1.size else nil,
+		ref = Ref,
+		onClose = if FFlagEnableSplitPane and p1.onClose ~= nil then p1.onClose elseif p1.showCloseButton then p1.onCancel else nil
 	}, {
-		DialogTitle = reactModule.createElement(dialog.Title, { text = p1.title }),
-		DialogContent = reactModule.createElement(dialog.Content, nil, {
-			DialogText = reactModule.createElement(dialog.Text, { Text = p1.body })
+		DialogTitle = ReactModule.createElement(Dialog.Title, { text = p1.title }),
+		DialogContent = ReactModule.createElement(Dialog.Content, nil, {
+			DialogText = ReactModule.createElement(Dialog.Text, { Text = p1.body })
 		}),
-		DialogActions = reactModule.createElement(dialog.Actions, {
-			orientation = if fFlagLuaAppPlayButtonPrivatePT and p1.orientButtonsVertically then orientation.Vertical else nil,
-			actions = if fFlagLuaAppPlayButtonPrivatePT then var6 else {
+		DialogActions = ReactModule.createElement(Dialog.Actions, {
+			orientation = if FFlagLuaAppPlayButtonPrivatePT and p1.orientButtonsVertically then Orientation.Vertical else nil,
+			actions = if FFlagLuaAppPlayButtonPrivatePT then v2 else {
 				{
-					variant = buttonVariant.Emphasis,
-					text = p1.confirmButtonText or var1.confirmButtonText,
+					variant = ButtonVariant.Emphasis,
+					text = p1.confirmButtonText or UseLocalizationResult.confirmButtonText,
 					onActivated = p1.onConfirm,
-					ref = var3
+					ref = Ref1
 				},
 				{
-					variant = buttonVariant.Standard,
-					text = p1.cancelButtonText or var1.cancelButtonText,
+					variant = ButtonVariant.Standard,
+					text = p1.cancelButtonText or UseLocalizationResult.cancelButtonText,
 					onActivated = p1.onCancel
 				}
 			}

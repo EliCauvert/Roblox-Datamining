@@ -1,7 +1,7 @@
-﻿local isSubjectToDesktopPolicies = require(script:FindFirstAncestor("GameDetail").Parent.SharedFlags).isSubjectToDesktopPolicies
-local playersService = game:GetService("Players")
+﻿local IsSubjectToDesktopPoliciesFunction = require(script:FindFirstAncestor("GameDetail").Parent.SharedFlags).isSubjectToDesktopPolicies
+local Players = game:GetService("Players")
 
-return function()
-	-- upvalues: playersService (ref), isSubjectToDesktopPolicies (ref)
-	return if playersService.LocalPlayer then isSubjectToDesktopPolicies() else false
+return function(): boolean --[[ Line: 6 ]]
+	-- upvalues: Players (copy), IsSubjectToDesktopPoliciesFunction (copy)
+	return if Players.LocalPlayer then not IsSubjectToDesktopPoliciesFunction() else false
 end

@@ -1,92 +1,91 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local gameSettings = UserSettings().GameSettings
-local luauPolyfillModule = require(corePackagesService.Packages.LuauPolyfill)
-local inGameMenuDependenciesModule = require(corePackagesService.Packages.InGameMenuDependencies)
-local roactModule = require(corePackagesService.Packages.Roact)
-local t = inGameMenuDependenciesModule.t
-local UIBlox = inGameMenuDependenciesModule.UIBlox
-local parent = script.Parent.Parent.Parent
-local themedTextLabelModule = require(parent.Components.ThemedTextLabel)
-local VRSafetyBubbleModePropertyChangedSignal = gameSettings:GetPropertyChangedSignal("VRSafetyBubbleMode")
-local externalEventConnectionModule = require(parent.Utility.ExternalEventConnection)
-local inputLabelModule = require(script.Parent.InputLabel)
-local radioButtonList = UIBlox.App.InputButton.RadioButtonList
-local withLocalizationModule = require(parent.Localization.withLocalization)
-local sendAnalyticsModule = require(parent.Utility.SendAnalytics)
-local constantsModule = require(parent.Resources.Constants)
-local var1 = require(parent.Flags.FFlagFixSafetyBubbleWidth)()
-local t_1 = {
+﻿local CorePackages = game:GetService("CorePackages")
+local GameSettings = UserSettings().GameSettings
+local LuauPolyfillModule = require(CorePackages.Packages.LuauPolyfill)
+local InGameMenuDependenciesModule = require(CorePackages.Packages.InGameMenuDependencies)
+local RoactModule = require(CorePackages.Packages.Roact)
+local T = InGameMenuDependenciesModule.t
+local Parent = script.Parent.Parent.Parent
+local ThemedTextLabelModule = require(Parent.Components.ThemedTextLabel)
+local VRSafetyBubbleModePropertyChangedSignal = GameSettings:GetPropertyChangedSignal("VRSafetyBubbleMode")
+local ExternalEventConnectionModule = require(Parent.Utility.ExternalEventConnection)
+local InputLabelModule = require(script.Parent.InputLabel)
+local RadioButtonList = InGameMenuDependenciesModule.UIBlox.App.InputButton.RadioButtonList
+local WithLocalizationModule = require(Parent.Localization.withLocalization)
+local SendAnalyticsModule = require(Parent.Utility.SendAnalytics)
+local ConstantsModule = require(Parent.Resources.Constants)
+local v1 = require(Parent.Flags.FFlagFixSafetyBubbleWidth)()
+local config = {
 	Title = "CoreScripts.InGameMenu.GameSettings.SafetyBubbleModeTitle",
 	Description = "CoreScripts.InGameMenu.GameSettings.SafetyBubbleModeDescription",
 	["Enum.VRSafetyBubbleMode.NoOne"] = "CoreScripts.InGameMenu.GameSettings.SafetyBubbleModeNoOne",
 	["Enum.VRSafetyBubbleMode.OnlyFriends"] = "CoreScripts.InGameMenu.GameSettings.SafetyBubbleModeOnlyFriends",
 	["Enum.VRSafetyBubbleMode.Anyone"] = "CoreScripts.InGameMenu.GameSettings.SafetyBubbleModeAnyone"
 }
-local enumItems = Enum.VRSafetyBubbleMode:GetEnumItems()
+local EnumItems = Enum.VRSafetyBubbleMode:GetEnumItems()
 
-local function _(p1)
-	-- upvalues: luauPolyfillModule (ref), enumItems (ref)
-	return luauPolyfillModule.Array.indexOf(enumItems, p1)
+local function _(p1) --[[ Line: 36 | Named "getSafetyBubbleModeIndex" ]]
+	-- upvalues: LuauPolyfillModule (copy), EnumItems (copy)
+	return LuauPolyfillModule.Array.indexOf(EnumItems, p1)
 end
 
-local _ = function(value)
-	-- upvalues: enumItems (ref), gameSettings (ref), sendAnalyticsModule (ref), constantsModule (ref)
-	local var2 = enumItems[value]
-	gameSettings.VRSafetyBubbleMode = var2
-	sendAnalyticsModule(constantsModule.AnalyticsSettingsChangeName, constantsModule.AnalyticsSettingsSafetyBubbleModeChangeName, { mode = tostring(var2) })
+local _ = function(p1) --[[ Line: 40 | Named "setSafetyBubbleModeByIndex" ]]
+	-- upvalues: EnumItems (copy), GameSettings (copy), SendAnalyticsModule (copy), ConstantsModule (copy)
+	local EnumItem = EnumItems[p1]
+	GameSettings.VRSafetyBubbleMode = EnumItem
+	SendAnalyticsModule(ConstantsModule.AnalyticsSettingsChangeName, ConstantsModule.AnalyticsSettingsSafetyBubbleModeChangeName, { mode = tostring(EnumItem) })
 end
 
-local safetyBubbleModeEntry = roactModule.PureComponent:extend("SafetyBubbleModeEntry")
-safetyBubbleModeEntry.validateProps = t.strictInterface({ LayoutOrder = t.optional(t.integer) })
+local SafetyBubbleModeEntry = RoactModule.PureComponent:extend("SafetyBubbleModeEntry")
+SafetyBubbleModeEntry.validateProps = T.strictInterface({ LayoutOrder = T.optional(T.integer) })
 
-function safetyBubbleModeEntry.init(p1)
-	-- upvalues: gameSettings (ref), luauPolyfillModule (ref), enumItems (ref)
+function SafetyBubbleModeEntry.init(p1) --[[ Line: 53 ]]
+	-- upvalues: GameSettings (copy), LuauPolyfillModule (copy), EnumItems (copy)
 	p1:setState({
-		selectedMode = luauPolyfillModule.Array.indexOf(enumItems, gameSettings.VRSafetyBubbleMode)
+		selectedMode = LuauPolyfillModule.Array.indexOf(EnumItems, GameSettings.VRSafetyBubbleMode)
 	})
 end
 
-function safetyBubbleModeEntry.render(p1)
-	-- upvalues: withLocalizationModule (ref), t_1 (ref), roactModule (ref), externalEventConnectionModule (ref), VRSafetyBubbleModePropertyChangedSignal (ref), gameSettings (ref), luauPolyfillModule (ref), enumItems (ref), inputLabelModule (ref), themedTextLabelModule (ref), radioButtonList (ref), sendAnalyticsModule (ref), constantsModule (ref), var1 (ref)
-	return withLocalizationModule(t_1)(function(p2)
-		-- upvalues: roactModule (copy), externalEventConnectionModule (copy), VRSafetyBubbleModePropertyChangedSignal (copy), p1 (ref), gameSettings (copy), luauPolyfillModule (copy), enumItems (copy), inputLabelModule (copy), t_1 (copy), themedTextLabelModule (copy), radioButtonList (copy), sendAnalyticsModule (copy), constantsModule (copy), var1 (copy)
-		return roactModule.createFragment({
-			VRSafetyBubbleModeListener = roactModule.createElement(externalEventConnectionModule, {
+function SafetyBubbleModeEntry.render(p1) --[[ Line: 59 ]]
+	-- upvalues: WithLocalizationModule (copy), config (copy), RoactModule (copy), ExternalEventConnectionModule (copy), VRSafetyBubbleModePropertyChangedSignal (copy), GameSettings (copy), LuauPolyfillModule (copy), EnumItems (copy), InputLabelModule (copy), ThemedTextLabelModule (copy), RadioButtonList (copy), SendAnalyticsModule (copy), ConstantsModule (copy), v1 (copy)
+	return WithLocalizationModule(config)(function(p2) --[[ Line: 60 ]]
+		-- upvalues: RoactModule (upval), ExternalEventConnectionModule (upval), VRSafetyBubbleModePropertyChangedSignal (upval), p1 (copy), GameSettings (upval), LuauPolyfillModule (upval), EnumItems (upval), InputLabelModule (upval), config (upval), ThemedTextLabelModule (upval), RadioButtonList (upval), SendAnalyticsModule (upval), ConstantsModule (upval), v1 (upval)
+		return RoactModule.createFragment({
+			VRSafetyBubbleModeListener = RoactModule.createElement(ExternalEventConnectionModule, {
 				event = VRSafetyBubbleModePropertyChangedSignal,
-				callback = function()
-					-- upvalues: p1 (copy), gameSettings (copy), luauPolyfillModule (copy), enumItems (copy)
+				callback = function() --[[ Line: 64 ]]
+					-- upvalues: p1 (upval), GameSettings (upval), LuauPolyfillModule (upval), EnumItems (upval)
 					p1:setState({
-						selectedMode = luauPolyfillModule.Array.indexOf(enumItems, gameSettings.VRSafetyBubbleMode)
+						selectedMode = LuauPolyfillModule.Array.indexOf(EnumItems, GameSettings.VRSafetyBubbleMode)
 					})
 				end
 			}),
-			SafetyBubbleModeEntrySelector = roactModule.createElement("Frame", {
+			SafetyBubbleModeEntrySelector = RoactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				ZIndex = 2,
 				Size = UDim2.new(1, 0, 0, 0),
 				AutomaticSize = Enum.AutomaticSize.Y,
 				LayoutOrder = p1.props.LayoutOrder
 			}, {
-				Padding = roactModule.createElement("UIPadding", {
+				Padding = RoactModule.createElement("UIPadding", {
 					PaddingLeft = UDim.new(0, 24),
 					PaddingRight = UDim.new(0, 24),
 					PaddingBottom = UDim.new(0, 15),
 					PaddingTop = UDim.new(0, 15)
 				}),
-				ListLayout = roactModule.createElement("UIListLayout", {
+				ListLayout = RoactModule.createElement("UIListLayout", {
 					FillDirection = Enum.FillDirection.Vertical,
 					HorizontalAlignment = Enum.HorizontalAlignment.Left,
 					SortOrder = Enum.SortOrder.LayoutOrder,
 					Padding = UDim.new(0, 20)
 				}),
-				InputLabel = roactModule.createElement(inputLabelModule, {
+				InputLabel = RoactModule.createElement(InputLabelModule, {
 					LayoutOrder = 1,
-					localizationKey = t_1.Title,
+					localizationKey = config.Title,
 					Size = UDim2.new(1, 0, 0, 0),
 					Position = UDim2.new(0, 0, 0, 0),
 					AnchorPoint = Vector2.new(0, 0)
 				}),
-				InputDescription = roactModule.createElement(themedTextLabelModule, {
+				InputDescription = RoactModule.createElement(ThemedTextLabelModule, {
 					themeKey = "TextDefault",
 					fontKey = "CaptionHeader",
 					TextWrapped = true,
@@ -96,26 +95,26 @@ function safetyBubbleModeEntry.render(p1)
 					AutomaticSize = Enum.AutomaticSize.Y,
 					TextXAlignment = Enum.TextXAlignment.Left
 				}),
-				RadioList = roactModule.createElement(radioButtonList, {
+				RadioList = RoactModule.createElement(RadioButtonList, {
 					layoutOrder = 3,
 					automaticSize = true,
-					radioButtons = luauPolyfillModule.Array.map(enumItems, function(p3, _)
-						-- upvalues: p2 (ref)
+					radioButtons = LuauPolyfillModule.Array.map(EnumItems, function(p3, _) --[[ Line: 108 ]]
+						-- upvalues: p2 (copy)
 						return { label = p2[tostring(p3)] }
 					end),
-					onActivated = function(p3)
-						-- upvalues: enumItems (copy), gameSettings (copy), sendAnalyticsModule (copy), constantsModule (copy)
-						local var2 = enumItems[p3]
-						gameSettings.VRSafetyBubbleMode = var2
-						sendAnalyticsModule(constantsModule.AnalyticsSettingsChangeName, constantsModule.AnalyticsSettingsSafetyBubbleModeChangeName, { mode = tostring(var2) })
+					onActivated = function(p3) --[[ Line: 113 ]]
+						-- upvalues: EnumItems (upval), GameSettings (upval), SendAnalyticsModule (upval), ConstantsModule (upval)
+						local EnumItem = EnumItems[p3]
+						GameSettings.VRSafetyBubbleMode = EnumItem
+						SendAnalyticsModule(ConstantsModule.AnalyticsSettingsChangeName, ConstantsModule.AnalyticsSettingsSafetyBubbleModeChangeName, { mode = tostring(EnumItem) })
 					end,
 					currentValue = p1.state.selectedMode,
 					padding = UDim.new(0, 20),
-					elementSize = if var1 then UDim2.new(1, 0, 0, 20) else UDim2.new(0, 0, 0, 20)
+					elementSize = if v1 then UDim2.new(1, 0, 0, 20) else UDim2.new(0, 0, 0, 20)
 				})
 			})
 		})
 	end)
 end
 
-return safetyBubbleModeEntry
+return SafetyBubbleModeEntry

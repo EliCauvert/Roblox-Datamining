@@ -1,14 +1,14 @@
-﻿local purchasePrompt = script:FindFirstAncestor("PurchasePrompt")
+﻿local PurchasePrompt = script:FindFirstAncestor("PurchasePrompt")
 
-return require(purchasePrompt.Parent.PurchasePromptDeps).Rodux.createReducer({}, {
-	[require(purchasePrompt.Actions.SetProduct).name] = function(_, p1)
+return (require(PurchasePrompt.Parent.PurchasePromptDeps).Rodux.createReducer({}, {
+	[require(PurchasePrompt.Actions.SetProduct).name] = function(_, p1) --[[ Line: 11 ]]
 		return {
 			id = p1.id,
 			infoType = p1.infoType,
 			equipIfPurchased = p1.equipIfPurchased
 		}
 	end,
-	[require(purchasePrompt.Actions.CompleteRequest).name] = function(_, _)
+	[require(PurchasePrompt.Actions.CompleteRequest).name] = function(_, _) --[[ Line: 18 ]]
 		return {}
 	end
-})
+}))

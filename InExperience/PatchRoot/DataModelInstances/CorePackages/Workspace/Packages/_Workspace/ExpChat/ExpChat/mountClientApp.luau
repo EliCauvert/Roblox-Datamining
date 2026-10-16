@@ -1,506 +1,520 @@
-﻿local chatService = game:GetService("Chat")
-local httpService = game:GetService("HttpService")
-local playersService = game:GetService("Players")
-local robloxReplicatedStorageService = game:GetService("RobloxReplicatedStorage")
-local textChatService = game:GetService("TextChatService")
-local userInputService = game:GetService("UserInputService")
-local starterGuiService = game:GetService("StarterGui")
-local expChat = script:FindFirstAncestor("ExpChat")
-local parent = expChat.Parent
-local promiseModule = require(parent.Promise)
-local roactModule = require(parent.Roact)
-local UIBloxModule = require(parent.UIBlox)
-local colorMode = require(parent.Foundation).Enums.ColorMode
-local dictionary = require(parent.llama).Dictionary
-local expChatSharedModule = require(parent.ExpChatShared)
-local notificationModalsManagerModule = require(parent.NotificationModalsManager)
-local sharedFlagsModule = require(parent.SharedFlags)
-local signalsModule = require(parent.Signals)
-local ampUpsellModule = require(parent.AmpUpsell)
-local ampApiProvider = ampUpsellModule.AmpApiProvider
-local accessResponseEnum = ampUpsellModule.AmpEnums.AccessResponseEnum
-local getAdorneeStoreModule = require(expChat.Stores.GetAdorneeStore)
-local getMessagesStoreModule = require(expChat.Stores.GetMessagesStore)
-local getChannelTabsStoreModule = require(expChat.Stores.GetChannelTabsStore)
-local getTransparencyStoreModule = require(expChat.Stores.GetTransparencyStore)
-local getCharacterStoreModule = require(expChat.Stores.GetCharacterStore)
-local getChatConfigurationStoreModule = require(expChat.Stores.GetChatConfigurationStore)
-local getChatStatusStoreModule = require(expChat.Stores.GetChatStatusStore)
-local getChatModerationStoreModule = require(expChat.Stores.GetChatModerationStore)
-local getUserChatSettingsStoreModule = require(expChat.Stores.GetUserChatSettingsStore)
-local getGlobalMutedUsersStoreModule = require(expChat.Stores.GetGlobalMutedUsersStore)
-local getPresetChatStoreModule = require(expChat.Stores.GetPresetChatStore)
-local getChatTooltipStoreModule = require(expChat.Stores.GetChatTooltipStore)
-local getChatWindowStatusStoreModule = require(expChat.Stores.GetChatWindowStatusStore)
-local initializePresetChatModule = require(expChat.PresetChat.initializePresetChat)
-local isMessageForOpenChannelModule = require(expChat.isMessageForOpenChannel)
-local fFlagExpChatPresetChatEnabled = expChatSharedModule.Flags.FFlagExpChatPresetChatEnabled
-local fFlagExpChatPresetChatLoadTestEnabled = expChatSharedModule.Flags.FFlagExpChatPresetChatLoadTestEnabled
-local fFlagExpChatUseUnifiedTooltipStore = expChatSharedModule.Flags.FFlagExpChatUseUnifiedTooltipStore
-local getFFlagExpChatProtectedChatInternalAPIs = sharedFlagsModule.getFFlagExpChatProtectedChatInternalAPIs
-local fFlagExpChatInitializeWindowFromGameSettings = sharedFlagsModule.FFlagExpChatInitializeWindowFromGameSettings
-local fFlagConnectionsToFriendsRename = sharedFlagsModule.FFlagConnectionsToFriendsRename
-local fFlagExpChatUseProximityStore = sharedFlagsModule.FFlagExpChatUseProximityStore
-local var1 = if fFlagExpChatUseProximityStore then require(expChat.Stores.GetProximityStore) else nil
-local analytics = expChatSharedModule.Analytics
-local countParticipantsInTextChannel = expChatSharedModule.countParticipantsInTextChannel
-local appModule = require(script.Parent.App)
-local var2 = expChatSharedModule.Logger:new("ExpChat/" .. script.Name)
-local createDispatchBindableEventModule = require(script.Parent.createDispatchBindableEvent)
-local bindableEventQueueModule = require(expChat.Events.bindableEventQueue)
-local createStoreModule = require(script.Parent.createStore)
-local getNameColorModule = require(script.Parent.GetNameColor)
-local reportMessageReceivedModule = require(script.Parent.reportMessageReceived)
-local canPlatformEnableChatModule = require(script.Parent.canPlatformEnableChat)
-local watchForErrors = expChatSharedModule.watchForErrors
-local commands = expChatSharedModule.Commands
-local actions = expChat.Actions
-local markChannelUnreadForIncomingMessageModule = require(actions.MarkChannelUnreadForIncomingMessage)
-local markChannelUnreadForSystemMessageModule = require(actions.MarkChannelUnreadForSystemMessage)
-local textChannelCreated = expChatSharedModule.Actions.TextChannelCreated
-local textChannelRemoved = expChatSharedModule.Actions.TextChannelRemoved
-local playerAdded = expChatSharedModule.Actions.PlayerAdded
-local playerRemoved = expChatSharedModule.Actions.PlayerRemoved
-local characterAdded = expChatSharedModule.Actions.CharacterAdded
-local localCharacterLoaded = expChatSharedModule.Actions.LocalCharacterLoaded
-local localTeamChanged = expChatSharedModule.Actions.LocalTeamChanged
-local clientAppLoaded = expChatSharedModule.Actions.ClientAppLoaded
-local lastInputTypeChangedModule = require(actions.LastInputTypeChanged)
-local chatTopBarButtonActivatedModule = require(actions.ChatTopBarButtonActivated)
-local commandAliasChanged = expChatSharedModule.Actions.CommandAliasChanged
-local humanoidDiedModule = require(actions.HumanoidDied)
-local adorneeAddedModule = require(actions.AdorneeAdded)
-local legacyBubbleChatEnabledChangedModule = require(actions.LegacyBubbleChatEnabledChanged)
-local legacyBubbleChatSettingsChangedModule = require(actions.LegacyBubbleChatSettingsChanged)
-local localTextChannelParticipantAddedModule = require(actions.LocalTextChannelParticipantAdded)
-local localTextChannelParticipantRemoved = expChatSharedModule.Actions.LocalTextChannelParticipantRemoved
-local universeChatChannelAddedModule = require(actions.UniverseChatChannelAdded)
-local universeChatChannelSelected = expChatSharedModule.Actions.UniverseChatChannelSelected
-local displaySystemMessageModule = require(expChat.displaySystemMessage)
-local generateRichSystemMessageTextFormatModule = require(expChat.generateRichSystemMessageTextFormat)
-local summaryMessageRichTextModule = require(expChat.summaryMessageRichText)
-local textChatMessageChatActionTypeModule = require(expChat.TextChatMessageChatActionType)
-local getExperienceChatVisualConfigModule = require(expChat.getExperienceChatVisualConfig)
-local getOtherDisplayNameInWhisperChannelModule = require(expChat.getOtherDisplayNameInWhisperChannel)
-local handleChannelWelcomeMessageModule = require(expChat.handleChannelWelcomeMessage)
-local isPlayerVerifiedModule = require(expChat.isPlayerVerified)
-local isChatRegionLockedModule = require(expChat.isChatRegionLocked)
-local isUserChatEnabledModule = require(expChat.isUserChatEnabled)
-local canOnlyChatInRegionModule = require(expChat.canOnlyChatInRegion)
-local shouldSendHighFrequencyTelemetryModule = require(expChat.shouldSendHighFrequencyTelemetry)
-local shouldShowFOMOUpsellModule = require(expChat.shouldShowFOMOUpsell)
-local shouldShowCrossAgeChatActivityModule = require(expChat.shouldShowCrossAgeChatActivity)
-local shouldSuppressUnreadForTabMetadataModule = require(expChat.shouldSuppressUnreadForTabMetadata)
-local expChatPerfTracker = require(parent.ChatUIPrimitives).Telemetry.ExpChatPerfTracker
-local fFlagExpChatPerfTrackerTabName = require(parent.ChatUIPrimitives).Flags.FFlagExpChatPerfTrackerTabName
-local selectSelectedTabNameModule = require(expChat.selectSelectedTabName)
-local flags = expChat.Flags
-local getEngineFeatureFlagEnableDisplayBubbleModule = require(flags.getEngineFeatureFlagEnableDisplayBubble)
-local getFFlagUnreduxLastInputTypeChangedModule = require(flags.getFFlagUnreduxLastInputTypeChanged)
-local getFFlagUseCharacterStore = expChatSharedModule.Flags.getFFlagUseCharacterStore
-local getFFlagExpChatSuppressWelcomeMessageTabUnread = expChatSharedModule.Flags.GetFFlagExpChatSuppressWelcomeMessageTabUnread
-local getFFlagExpChatTelemetryEventTriggerModule = require(expChat.Flags.getFFlagExpChatTelemetryEventTrigger)
-local fFlagExpChatWindowStatusEventFixesModule = require(flags.FFlagExpChatWindowStatusEventFixes)
-local expChatMessageResponseThrottlePermyriad = game:DefineFastInt("ExpChatMessageResponseThrottlePermyriad", 0)
-local expChatMessageResponseUserSamplePermyriad = game:DefineFastInt("ExpChatMessageResponseUserSamplePermyriad", 0)
-local expChatHiddenMessagesPromptThresholdLowerBound = game:DefineFastInt("ExpChatHiddenMessagesPromptThresholdLowerBound", 10)
-local expChatHiddenMessagesPromptThresholdUpperBound = game:DefineFastInt("ExpChatHiddenMessagesPromptThresholdUpperBound", 45)
-local fFlagExpChatEnableFOMOUpsellModule = require(flags.FFlagExpChatEnableFOMOUpsell)
-local fFlagExpChatClearHiddenMessagesPostAgeCheckModule = require(flags.FFlagExpChatClearHiddenMessagesPostAgeCheck)
-local fFlagEnableInExpChatSummaryOnLuaModule = require(flags.FFlagEnableInExpChatSummaryOnLua)
-local fFlagExpChatEnableCrossAgeChatActivityModule = require(flags.FFlagExpChatEnableCrossAgeChatActivity)
-local fFlagExpChatUnreadTabIndicatorV2WindowModule = require(flags.FFlagExpChatUnreadTabIndicatorV2Window)
-local expChatOnlyWakeTextForSelectedTab = game:DefineFastFlag("ExpChatOnlyWakeTextForSelectedTab", false)
-local fFlagExpChatFixOutgoingUniverseChatBubbleModule = require(flags.FFlagExpChatFixOutgoingUniverseChatBubble)
-local fFlagExpChatUseAdorneeStore = sharedFlagsModule.FFlagExpChatUseAdorneeStore
-local fFlagExpChatUseChannelTabsStore = sharedFlagsModule.FFlagExpChatUseChannelTabsStore
-local fFlagExpChatUseChatConfigStore = sharedFlagsModule.FFlagExpChatUseChatConfigStore
-local fFlagEnableModerateChatRemoteEvent = sharedFlagsModule.FFlagEnableModerateChatRemoteEvent
-local fFlagLuaSupportMicroGamepadPreferredInput = sharedFlagsModule.FFlagLuaSupportMicroGamepadPreferredInput
-local fFlagEnableClientSummarySystemMessageOnLua = sharedFlagsModule.FFlagEnableClientSummarySystemMessageOnLua
-local getFFlagTextChatEnableUniverseChatTabs = expChatSharedModule.Flags.GetFFlagTextChatEnableUniverseChatTabs
-local getFFlagEnableExpChatUniverseChatTabNames = expChatSharedModule.Flags.GetFFlagEnableExpChatUniverseChatTabNames
-local expChatRemoveSpaceFromTeamPrefix = game:DefineFastFlag("ExpChatRemoveSpaceFromTeamPrefix", false)
-local fFlagAIRephraseSettingEnabled = sharedFlagsModule.FFlagAIRephraseSettingEnabled
-local fFlagChatSummariesSettingEnabled = sharedFlagsModule.FFlagChatSummariesSettingEnabled
-local fFlagEnableGlobalChat3pSummaryLuaAppsModule = require(flags.FFlagEnableGlobalChat3pSummaryLuaApps)
-local fFlagExpChatEnableGlobalChatSummarySystemMessageModule = require(flags.FFlagExpChatEnableGlobalChatSummarySystemMessage)
-local expChatSuppressGlobalSummaryTabUnread = game:DefineFastFlag("ExpChatSuppressGlobalSummaryTabUnread", false)
-local fFlagExpChatRefactorEnabledMessageLogicModule = require(flags.FFlagExpChatRefactorEnabledMessageLogic)
-local fFlagExpChatVirtualizeSystemMessagesModule = require(flags.FFlagExpChatVirtualizeSystemMessages)
-local fStringExpChatChatWithTFAmpFeatureNameModule = require(flags.FStringExpChatChatWithTFAmpFeatureName)
-local fStringExpChatChatWithTFAmpNameSpaceModule = require(flags.FStringExpChatChatWithTFAmpNameSpace)
-local expChatNewSystemMessagesExperimentation = require(parent.SocialExperiments).ExpChatNewSystemMessagesExperimentation
-local expChatGlobalTabDefaultExperimentation = require(parent.SocialExperiments).ExpChatGlobalTabDefaultExperimentation
-local isGlobalTabFirstModule = require(expChat.isGlobalTabFirst)
-local getGlobalWelcomeMessageKeyModule = require(expChat.getGlobalWelcomeMessageKey)
-local fFlagExpChatGlobalTabDefaultModule = require(flags.FFlagExpChatGlobalTabDefault)
+﻿local Chat = game:GetService("Chat")
+local HttpService = game:GetService("HttpService")
+local Players = game:GetService("Players")
+local RobloxReplicatedStorage = game:GetService("RobloxReplicatedStorage")
+local TextChatService = game:GetService("TextChatService")
+local UserInputService = game:GetService("UserInputService")
+local StarterGui = game:GetService("StarterGui")
+local ExpChat = script:FindFirstAncestor("ExpChat")
+local Parent = ExpChat.Parent
+local PromiseModule = require(Parent.Promise)
+local RoactModule = require(Parent.Roact)
+local UIBloxModule = require(Parent.UIBlox)
+local ColorMode = require(Parent.Foundation).Enums.ColorMode
+local Dictionary = require(Parent.llama).Dictionary
+local ExpChatSharedModule = require(Parent.ExpChatShared)
+local NotificationModalsManagerModule = require(Parent.NotificationModalsManager)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local SignalsModule = require(Parent.Signals)
+local AmpUpsellModule = require(Parent.AmpUpsell)
+local AmpApiProvider = AmpUpsellModule.AmpApiProvider
+local AccessResponseEnum = AmpUpsellModule.AmpEnums.AccessResponseEnum
+local GetAdorneeStoreModule = require(ExpChat.Stores.GetAdorneeStore)
+local GetMessagesStoreModule = require(ExpChat.Stores.GetMessagesStore)
+local GetChannelTabsStoreModule = require(ExpChat.Stores.GetChannelTabsStore)
+local GetTransparencyStoreModule = require(ExpChat.Stores.GetTransparencyStore)
+local GetCharacterStoreModule = require(ExpChat.Stores.GetCharacterStore)
+local GetChatConfigurationStoreModule = require(ExpChat.Stores.GetChatConfigurationStore)
+local GetChatStatusStoreModule = require(ExpChat.Stores.GetChatStatusStore)
+local GetChatModerationStoreModule = require(ExpChat.Stores.GetChatModerationStore)
+local GetUserChatSettingsStoreModule = require(ExpChat.Stores.GetUserChatSettingsStore)
+local GetGlobalMutedUsersStoreModule = require(ExpChat.Stores.GetGlobalMutedUsersStore)
+local DictationSafetyReminderModule = require(ExpChat.ChatInput.UI.ChatInputBar.Dictation.DictationSafetyReminder)
+local GetPresetChatStoreModule = require(ExpChat.Stores.GetPresetChatStore)
+local GetChatTooltipStoreModule = require(ExpChat.Stores.GetChatTooltipStore)
+local GetChatWindowStatusStoreModule = require(ExpChat.Stores.GetChatWindowStatusStore)
+local InitializePresetChatModule = require(ExpChat.PresetChat.initializePresetChat)
+local IsMessageForOpenChannelModule = require(ExpChat.isMessageForOpenChannel)
+local FFlagExpChatPresetChatEnabled = ExpChatSharedModule.Flags.FFlagExpChatPresetChatEnabled
+local FFlagExpChatPresetChatLoadTestEnabled = ExpChatSharedModule.Flags.FFlagExpChatPresetChatLoadTestEnabled
+local FFlagExpChatUseUnifiedTooltipStore = ExpChatSharedModule.Flags.FFlagExpChatUseUnifiedTooltipStore
+local GetFFlagExpChatProtectedChatInternalAPIsFunction = SharedFlagsModule.getFFlagExpChatProtectedChatInternalAPIs
+local FFlagExpChatDictationContinuousSafetyReminder = SharedFlagsModule.FFlagExpChatDictationContinuousSafetyReminder
+local FFlagExpChatInitializeWindowFromGameSettings = SharedFlagsModule.FFlagExpChatInitializeWindowFromGameSettings
+local FFlagExpChatUseProximityStore = SharedFlagsModule.FFlagExpChatUseProximityStore
+local GetProximityStoreModule = if FFlagExpChatUseProximityStore then require(ExpChat.Stores.GetProximityStore) else nil
+local Analytics = ExpChatSharedModule.Analytics
+local CountParticipantsInTextChannelFunction = ExpChatSharedModule.countParticipantsInTextChannel
+local AppModule = require(script.Parent.App)
+local NewResult = ExpChatSharedModule.Logger:new("ExpChat/" .. script.Name)
+local CreateDispatchBindableEventModule = require(script.Parent.createDispatchBindableEvent)
+local BindableEventQueueModule = require(ExpChat.Events.bindableEventQueue)
+local CreateStoreModule = require(script.Parent.createStore)
+local GetNameColorModule = require(script.Parent.GetNameColor)
+local ReportMessageReceivedModule = require(script.Parent.reportMessageReceived)
+local CanPlatformEnableChatModule = require(script.Parent.canPlatformEnableChat)
+local WatchForErrorsFunction = ExpChatSharedModule.watchForErrors
+local Commands = ExpChatSharedModule.Commands
+local Actions = ExpChat.Actions
+local MarkChannelUnreadForIncomingMessageModule = require(Actions.MarkChannelUnreadForIncomingMessage)
+local MarkChannelUnreadForSystemMessageModule = require(Actions.MarkChannelUnreadForSystemMessage)
+local TextChannelCreatedFunction = ExpChatSharedModule.Actions.TextChannelCreated
+local TextChannelRemovedFunction = ExpChatSharedModule.Actions.TextChannelRemoved
+local PlayerAddedFunction = ExpChatSharedModule.Actions.PlayerAdded
+local PlayerRemovedFunction = ExpChatSharedModule.Actions.PlayerRemoved
+local CharacterAddedFunction = ExpChatSharedModule.Actions.CharacterAdded
+local LocalCharacterLoadedFunction = ExpChatSharedModule.Actions.LocalCharacterLoaded
+local LocalTeamChangedFunction = ExpChatSharedModule.Actions.LocalTeamChanged
+local ClientAppLoadedFunction = ExpChatSharedModule.Actions.ClientAppLoaded
+local LastInputTypeChangedModule = require(Actions.LastInputTypeChanged)
+local ChatTopBarButtonActivatedModule = require(Actions.ChatTopBarButtonActivated)
+local CommandAliasChangedFunction = ExpChatSharedModule.Actions.CommandAliasChanged
+local HumanoidDiedModule = require(Actions.HumanoidDied)
+local AdorneeAddedModule = require(Actions.AdorneeAdded)
+local LegacyBubbleChatEnabledChangedModule = require(Actions.LegacyBubbleChatEnabledChanged)
+local LegacyBubbleChatSettingsChangedModule = require(Actions.LegacyBubbleChatSettingsChanged)
+local LocalTextChannelParticipantAddedModule = require(Actions.LocalTextChannelParticipantAdded)
+local LocalTextChannelParticipantRemovedFunction = ExpChatSharedModule.Actions.LocalTextChannelParticipantRemoved
+local UniverseChatChannelAddedModule = require(Actions.UniverseChatChannelAdded)
+local UniverseChatChannelSelectedFunction = ExpChatSharedModule.Actions.UniverseChatChannelSelected
+local DisplaySystemMessageModule = require(ExpChat.displaySystemMessage)
+local GenerateRichSystemMessageTextFormatModule = require(ExpChat.generateRichSystemMessageTextFormat)
+local SummaryMessageRichTextModule = require(ExpChat.summaryMessageRichText)
+local TextChatMessageChatActionTypeModule = require(ExpChat.TextChatMessageChatActionType)
+local GetExperienceChatVisualConfigModule = require(ExpChat.getExperienceChatVisualConfig)
+local GetOtherDisplayNameInWhisperChannelModule = require(ExpChat.getOtherDisplayNameInWhisperChannel)
+local HandleChannelWelcomeMessageModule = require(ExpChat.handleChannelWelcomeMessage)
+local IsPlayerVerifiedModule = require(ExpChat.isPlayerVerified)
+local IsChatRegionLockedModule = require(ExpChat.isChatRegionLocked)
+local IsUserChatEnabledModule = require(ExpChat.isUserChatEnabled)
+local CanOnlyChatInRegionModule = require(ExpChat.canOnlyChatInRegion)
+local ShouldSendHighFrequencyTelemetryModule = require(ExpChat.shouldSendHighFrequencyTelemetry)
+local ShouldShowFOMOUpsellModule = require(ExpChat.shouldShowFOMOUpsell)
+local ShouldShowCrossAgeChatActivityModule = require(ExpChat.shouldShowCrossAgeChatActivity)
+local ShouldSuppressUnreadForTabMetadataModule = require(ExpChat.shouldSuppressUnreadForTabMetadata)
+local ExpChatPerfTracker = require(Parent.ChatUIPrimitives).Telemetry.ExpChatPerfTracker
+local ConnectHistoryReplayModule = require(ExpChat.connectHistoryReplay)
+local IsHistoricalMessageModule = require(ExpChat.isHistoricalMessage)
+local WhenFirstTrueModule = require(ExpChat.whenFirstTrue)
+local GetChannelsWithKeptHistoryModule = require(ExpChat.getChannelsWithKeptHistory)
+local FFlagExpChatPerfTrackerTabName = require(Parent.ChatUIPrimitives).Flags.FFlagExpChatPerfTrackerTabName
+local SelectSelectedTabNameModule = require(ExpChat.selectSelectedTabName)
+local Flags = ExpChat.Flags
+local GetEngineFeatureFlagEnableDisplayBubbleModule = require(Flags.getEngineFeatureFlagEnableDisplayBubble)
+local GetFFlagUnreduxLastInputTypeChangedModule = require(Flags.getFFlagUnreduxLastInputTypeChanged)
+local GetFFlagUseCharacterStoreFunction = ExpChatSharedModule.Flags.getFFlagUseCharacterStore
+local GetFFlagExpChatSuppressWelcomeMessageTabUnreadFunction = ExpChatSharedModule.Flags.GetFFlagExpChatSuppressWelcomeMessageTabUnread
+local GetFFlagExpChatTelemetryEventTriggerModule = require(ExpChat.Flags.getFFlagExpChatTelemetryEventTrigger)
+local FFlagExpChatWindowStatusEventFixesModule = require(Flags.FFlagExpChatWindowStatusEventFixes)
+local ExpChatMessageResponseThrottlePermyriad = game:DefineFastInt("ExpChatMessageResponseThrottlePermyriad", 0)
+local ExpChatMessageResponseUserSamplePermyriad = game:DefineFastInt("ExpChatMessageResponseUserSamplePermyriad", 0)
+local ExpChatHiddenMessagesPromptThresholdLowerBound = game:DefineFastInt("ExpChatHiddenMessagesPromptThresholdLowerBound", 10)
+local ExpChatHiddenMessagesPromptThresholdUpperBound = game:DefineFastInt("ExpChatHiddenMessagesPromptThresholdUpperBound", 45)
+local FFlagExpChatEnableFOMOUpsellModule = require(Flags.FFlagExpChatEnableFOMOUpsell)
+local FFlagExpChatClearHiddenMessagesPostAgeCheckModule = require(Flags.FFlagExpChatClearHiddenMessagesPostAgeCheck)
+local FFlagEnableInExpChatSummaryOnLuaModule = require(Flags.FFlagEnableInExpChatSummaryOnLua)
+local FFlagExpChatEnableCrossAgeChatActivityModule = require(Flags.FFlagExpChatEnableCrossAgeChatActivity)
+local FFlagExpChatUnreadTabIndicatorV2WindowModule = require(Flags.FFlagExpChatUnreadTabIndicatorV2Window)
+local ExpChatOnlyWakeTextForSelectedTab = game:DefineFastFlag("ExpChatOnlyWakeTextForSelectedTab", false)
+local FFlagExpChatFixOutgoingUniverseChatBubbleModule = require(Flags.FFlagExpChatFixOutgoingUniverseChatBubble)
+local FFlagExpChatHistoricalMessagesUnibarUnread = SharedFlagsModule.FFlagExpChatHistoricalMessagesUnibarUnread
+local FFlagExpChatRenderHistoricalMessages = SharedFlagsModule.FFlagExpChatRenderHistoricalMessages
+local FFlagExpChatUseAdorneeStore = SharedFlagsModule.FFlagExpChatUseAdorneeStore
+local FFlagExpChatUseChannelTabsStore = SharedFlagsModule.FFlagExpChatUseChannelTabsStore
+local FFlagExpChatUseChatConfigStore = SharedFlagsModule.FFlagExpChatUseChatConfigStore
+local FFlagEnableModerateChatRemoteEvent = SharedFlagsModule.FFlagEnableModerateChatRemoteEvent
+local FFlagLuaSupportMicroGamepadPreferredInput = SharedFlagsModule.FFlagLuaSupportMicroGamepadPreferredInput
+local FFlagEnableClientSummarySystemMessageOnLua = SharedFlagsModule.FFlagEnableClientSummarySystemMessageOnLua
+local GetFFlagTextChatEnableUniverseChatTabsFunction = ExpChatSharedModule.Flags.GetFFlagTextChatEnableUniverseChatTabs
+local GetFFlagEnableExpChatUniverseChatTabNamesFunction = ExpChatSharedModule.Flags.GetFFlagEnableExpChatUniverseChatTabNames
+local ExpChatRemoveSpaceFromTeamPrefix = game:DefineFastFlag("ExpChatRemoveSpaceFromTeamPrefix", false)
+local FFlagAIRephraseSettingEnabled = SharedFlagsModule.FFlagAIRephraseSettingEnabled
+local FFlagChatSummariesSettingEnabled = SharedFlagsModule.FFlagChatSummariesSettingEnabled
+local FFlagEnableGlobalChat3pSummaryLuaAppsModule = require(Flags.FFlagEnableGlobalChat3pSummaryLuaApps)
+local FFlagExpChatEnableGlobalChatSummarySystemMessageModule = require(Flags.FFlagExpChatEnableGlobalChatSummarySystemMessage)
+local ExpChatSuppressGlobalSummaryTabUnread = game:DefineFastFlag("ExpChatSuppressGlobalSummaryTabUnread", false)
+local FFlagExpChatRefactorEnabledMessageLogicModule = require(Flags.FFlagExpChatRefactorEnabledMessageLogic)
+local FFlagExpChatVirtualizeSystemMessagesModule = require(Flags.FFlagExpChatVirtualizeSystemMessages)
+local FStringExpChatChatWithTFAmpFeatureNameModule = require(Flags.FStringExpChatChatWithTFAmpFeatureName)
+local FStringExpChatChatWithTFAmpNameSpaceModule = require(Flags.FStringExpChatChatWithTFAmpNameSpace)
+local ExpChatNewSystemMessagesExperimentation = require(Parent.SocialExperiments).ExpChatNewSystemMessagesExperimentation
+local ExpChatGlobalTabDefaultExperimentation = require(Parent.SocialExperiments).ExpChatGlobalTabDefaultExperimentation
+local IsGlobalTabFirstModule = require(ExpChat.isGlobalTabFirst)
+local GetGlobalWelcomeMessageKeyModule = require(ExpChat.getGlobalWelcomeMessageKey)
+local FFlagExpChatGlobalTabDefaultModule = require(Flags.FFlagExpChatGlobalTabDefault)
 
-function getChatTranslationEnabled()
-	-- upvalues: textChatService (ref)
-	local ok, status = pcall(function()
-		-- upvalues: textChatService (copy)
-		return textChatService.ChatTranslationEnabled
+function getChatTranslationEnabled() --[[ Line: 170 ]]
+	-- upvalues: TextChatService (copy)
+	local Success, Result = pcall(function() --[[ Line: 171 ]]
+		-- upvalues: TextChatService (upval)
+		return TextChatService.ChatTranslationEnabled
 	end)
 	
-	return ok and status
+	return Success and Result
 end
 
-local t = {
+local config = {
 	eventName = "MessageResponse",
 	description = "When a client receives a text chat message through TextChatService.",
 	links = "https://github.rbx.com/Roblox/proto-schemas/blob/master/production/eventstream/social/message_response.proto",
 	backends = { "EventIngest" },
-	throttlingPercentage = expChatMessageResponseThrottlePermyriad,
+	throttlingPercentage = ExpChatMessageResponseThrottlePermyriad,
 	lastUpdated = { 25, 10, 8 }
 }
-local helpers = script.helpers
-local setUpConfigurationObjectsModule = require(helpers.setUpConfigurationObjects)
-local setUpClientSettingsModule = require(helpers.setUpClientSettings)
-local waitForFirstModule = require(helpers.waitForFirst)
-local shouldFilterGlobalMessageModule = require(helpers.shouldFilterGlobalMessage)
-local writeVirtualSystemMessageModule = require(helpers.writeVirtualSystemMessage)
-local shouldSkipHistoricalMessageModule = require(expChat.shouldSkipHistoricalMessage)
-local context = expChatSharedModule.context
-local reportVersionLoadedModule = require(script.reportVersionLoaded)
-local version = expChatSharedModule.Version
-local atomicBindingModule = require(expChat.AtomicBinding)
-local chatEnabledSystemMessageModule = require(script.SystemMessages.ChatEnabledSystemMessage)
+local Helpers = script.helpers
+local SetUpConfigurationObjectsModule = require(Helpers.setUpConfigurationObjects)
+local SetUpClientSettingsModule = require(Helpers.setUpClientSettings)
+local WaitForFirstModule = require(Helpers.waitForFirst)
+local ShouldFilterGlobalMessageModule = require(Helpers.shouldFilterGlobalMessage)
+local HasUserSelectedTabModule = require(Helpers.hasUserSelectedTab)
+local WriteVirtualSystemMessageModule = require(Helpers.writeVirtualSystemMessage)
+local ShouldSkipHistoricalMessageModule = require(ExpChat.shouldSkipHistoricalMessage)
+local Context = ExpChatSharedModule.context
+local ReportVersionLoadedModule = require(script.reportVersionLoaded)
+local Version = ExpChatSharedModule.Version
+local AtomicBindingModule = require(ExpChat.AtomicBinding)
+local ChatEnabledSystemMessageModule = require(script.SystemMessages.ChatEnabledSystemMessage)
 
-local function watchPlayersService(p1, p2, p3)
-	-- upvalues: var2 (ref), isPlayerVerifiedModule (ref), playerAdded (ref), playersService (ref), localTeamChanged (ref), fFlagExpChatUseAdorneeStore (ref), context (ref), adorneeAddedModule (ref), humanoidDiedModule (ref), atomicBindingModule (ref), waitForFirstModule (ref), localCharacterLoaded (ref), getFFlagUseCharacterStore (ref), characterAdded (ref), promiseModule (ref), displaySystemMessageModule (ref), fFlagConnectionsToFriendsRename (ref), fFlagExpChatWindowStatusEventFixesModule (ref), getChatWindowStatusStoreModule (ref), textChatService (ref), playerRemoved (ref)
-	var2:trace("Watching Players service")
+local function watchPlayersService(JoinResult, Store, MessagesStore) --[[ Line: 204 ]]
+	-- upvalues: NewResult (copy), IsPlayerVerifiedModule (copy), PlayerAddedFunction (copy), Players (copy), LocalTeamChangedFunction (copy), FFlagExpChatUseAdorneeStore (copy), Context (copy), AdorneeAddedModule (copy), HumanoidDiedModule (copy), AtomicBindingModule (copy), WaitForFirstModule (copy), LocalCharacterLoadedFunction (copy), GetFFlagUseCharacterStoreFunction (copy), CharacterAddedFunction (copy), PromiseModule (copy), DisplaySystemMessageModule (copy), FFlagExpChatWindowStatusEventFixesModule (copy), GetChatWindowStatusStoreModule (copy), TextChatService (copy), PlayerRemovedFunction (copy)
+	NewResult:trace("Watching Players service")
 	local t = {}
 	
-	local function onPlayerAdded(p4)
-		-- upvalues: var2 (copy), isPlayerVerifiedModule (copy), p2 (ref), playerAdded (copy), playersService (copy), localTeamChanged (copy), fFlagExpChatUseAdorneeStore (copy), context (copy), adorneeAddedModule (copy), humanoidDiedModule (copy), atomicBindingModule (copy), waitForFirstModule (copy), localCharacterLoaded (copy), getFFlagUseCharacterStore (copy), characterAdded (copy), t (ref)
-		var2:trace("Player added: {} {}", p4.Name, tostring(p4.UserId))
-		p2:dispatch(playerAdded(p4.UserId, p4.Name, p4.DisplayName, if isPlayerVerifiedModule(p4) then true else nil))
+	local function onPlayerAdded(Player: Player) --[[ Line: 208 ]]
+		-- upvalues: NewResult (upval), IsPlayerVerifiedModule (upval), Store (copy), PlayerAddedFunction (upval), Players (upval), LocalTeamChangedFunction (upval), FFlagExpChatUseAdorneeStore (upval), Context (upval), AdorneeAddedModule (upval), HumanoidDiedModule (upval), AtomicBindingModule (upval), WaitForFirstModule (upval), LocalCharacterLoadedFunction (upval), GetFFlagUseCharacterStoreFunction (upval), CharacterAddedFunction (upval), t (copy)
+		NewResult:trace("Player added: {} {}", Player.Name, (tostring(Player.UserId)))
+		Store:dispatch(PlayerAddedFunction(Player.UserId, Player.Name, Player.DisplayName, if IsPlayerVerifiedModule(Player) then true else nil))
 		
-		if p4 == playersService.LocalPlayer then
-			var2:trace("Found local player")
-			p4:GetPropertyChangedSignal("Team"):Connect(function()
-				-- upvalues: p2 (copy), localTeamChanged (copy), p4 (ref)
-				p2:dispatch(localTeamChanged(p4.Team))
+		if Player == Players.LocalPlayer then
+			NewResult:trace("Found local player")
+			Player:GetPropertyChangedSignal("Team"):Connect(function() --[[ Line: 217 ]]
+				-- upvalues: Store (upval), LocalTeamChangedFunction (upval), Player (copy)
+				Store:dispatch(LocalTeamChangedFunction(Player.Team))
 			end)
 		end
-		local function _()
-			-- upvalues: p4 (ref), fFlagExpChatUseAdorneeStore (copy), context (copy), p2 (copy), adorneeAddedModule (copy), humanoidDiedModule (copy), atomicBindingModule (copy)
-			return atomicBindingModule.new({
+		local function _() --[[ Line: 222 | Named "getHumanoidBinding" ]]
+			-- upvalues: Player (copy), FFlagExpChatUseAdorneeStore (upval), Context (upval), Store (upval), AdorneeAddedModule (upval), HumanoidDiedModule (upval), AtomicBindingModule (upval)
+			return (AtomicBindingModule.new({
 				humanoid = "Humanoid",
 				humanoidRootPart = "HumanoidRootPart"
-			}, function(p5)
-				-- upvalues: p4 (copy), fFlagExpChatUseAdorneeStore (copy), context (copy), p2 (copy), adorneeAddedModule (copy), humanoidDiedModule (copy)
-				local root = p5.root
-				local humanoid = p5.humanoid
-				local humanoidRootPart = p5.humanoidRootPart
+			}, function(p1) --[[ Line: 225 | Named "dispatchBubbleChatAdornee" ]]
+				-- upvalues: Player (upval), FFlagExpChatUseAdorneeStore (upval), Context (upval), Store (upval), AdorneeAddedModule (upval), HumanoidDiedModule (upval)
+				local Root = p1.root
+				local Humanoid = p1.humanoid
+				local HumanoidRootPart = p1.humanoidRootPart
 				
-				if not humanoid:IsA("Humanoid") or not humanoidRootPart:IsA("BasePart") then
-					return function() end
-				elseif root and humanoidRootPart and p4.Character == root then
-					if fFlagExpChatUseAdorneeStore then
-						context.adorneeStore.handleAdorneeAdded(p4.UserId, root, humanoid)
+				if not Humanoid:IsA("Humanoid") or not HumanoidRootPart:IsA("BasePart") then
+					return function() --[[ Line: 258 ]] end
+				end
+				if Root and HumanoidRootPart and Player.Character == Root then
+					if FFlagExpChatUseAdorneeStore then
+						Context.adorneeStore.handleAdorneeAdded(Player.UserId, Root, Humanoid)
 					else
-						p2:dispatch(adorneeAddedModule(p4.UserId, root, humanoid))
+						Store:dispatch(AdorneeAddedModule(Player.UserId, Root, Humanoid))
 					end
 				end
-				local diedConnection = humanoid.Died:Connect(function()
-					-- upvalues: fFlagExpChatUseAdorneeStore (copy), context (copy), p4 (copy), p2 (copy), humanoidDiedModule (copy)
-					if fFlagExpChatUseAdorneeStore then
-						context.adorneeStore.handleHumanoidDied(p4.UserId)
+				local DiedConnection = Humanoid.Died:Connect(function() --[[ Line: 239 ]]
+					-- upvalues: FFlagExpChatUseAdorneeStore (upval), Context (upval), Player (upval), Store (upval), HumanoidDiedModule (upval)
+					if FFlagExpChatUseAdorneeStore then
+						Context.adorneeStore.handleHumanoidDied(Player.UserId)
 						
 						return
+					else
+						Store:dispatch(HumanoidDiedModule(Player.UserId))
 					end
-					p2:dispatch(humanoidDiedModule(p4.UserId))
 				end)
 				
-				return function()
-					-- upvalues: diedConnection (ref)
-					if diedConnection then
-						diedConnection:Disconnect()
+				return function() --[[ Line: 247 | Named "disconnectHumanoidDied" ]]
+					-- upvalues: DiedConnection (copy)
+					if DiedConnection then
+						DiedConnection:Disconnect()
 					end
 				end
-			end)
+			end))
 		end
 		
-		local var3 = atomicBindingModule.new({
+		local NewAtomicBinding = AtomicBindingModule.new({
 			humanoid = "Humanoid",
 			humanoidRootPart = "HumanoidRootPart"
-		}, function(p5)
-			-- upvalues: p4 (ref), fFlagExpChatUseAdorneeStore (copy), context (copy), p2 (copy), adorneeAddedModule (copy), humanoidDiedModule (copy)
-			local root = p5.root
-			local humanoid = p5.humanoid
-			local humanoidRootPart = p5.humanoidRootPart
+		}, function(p1) --[[ Line: 225 | Named "dispatchBubbleChatAdornee" ]]
+			-- upvalues: Player (copy), FFlagExpChatUseAdorneeStore (upval), Context (upval), Store (upval), AdorneeAddedModule (upval), HumanoidDiedModule (upval)
+			local Root = p1.root
+			local Humanoid = p1.humanoid
+			local HumanoidRootPart = p1.humanoidRootPart
 			
-			if not humanoid:IsA("Humanoid") or not humanoidRootPart:IsA("BasePart") then
-				return function() end
-			elseif root and humanoidRootPart and p4.Character == root then
-				if fFlagExpChatUseAdorneeStore then
-					context.adorneeStore.handleAdorneeAdded(p4.UserId, root, humanoid)
+			if not Humanoid:IsA("Humanoid") or not HumanoidRootPart:IsA("BasePart") then
+				return function() --[[ Line: 258 ]] end
+			end
+			if Root and HumanoidRootPart and Player.Character == Root then
+				if FFlagExpChatUseAdorneeStore then
+					Context.adorneeStore.handleAdorneeAdded(Player.UserId, Root, Humanoid)
 				else
-					p2:dispatch(adorneeAddedModule(p4.UserId, root, humanoid))
+					Store:dispatch(AdorneeAddedModule(Player.UserId, Root, Humanoid))
 				end
 			end
-			local diedConnection = humanoid.Died:Connect(function()
-				-- upvalues: fFlagExpChatUseAdorneeStore (copy), context (copy), p4 (copy), p2 (copy), humanoidDiedModule (copy)
-				if fFlagExpChatUseAdorneeStore then
-					context.adorneeStore.handleHumanoidDied(p4.UserId)
+			local DiedConnection = Humanoid.Died:Connect(function() --[[ Line: 239 ]]
+				-- upvalues: FFlagExpChatUseAdorneeStore (upval), Context (upval), Player (upval), Store (upval), HumanoidDiedModule (upval)
+				if FFlagExpChatUseAdorneeStore then
+					Context.adorneeStore.handleHumanoidDied(Player.UserId)
 					
 					return
+				else
+					Store:dispatch(HumanoidDiedModule(Player.UserId))
 				end
-				p2:dispatch(humanoidDiedModule(p4.UserId))
 			end)
 			
-			return function()
-				-- upvalues: diedConnection (ref)
-				if diedConnection then
-					diedConnection:Disconnect()
+			return function() --[[ Line: 247 | Named "disconnectHumanoidDied" ]]
+				-- upvalues: DiedConnection (copy)
+				if DiedConnection then
+					DiedConnection:Disconnect()
 				end
 			end
 		end)
 		
-		local function onCharacterAdded(p5)
-			-- upvalues: waitForFirstModule (copy), p4 (ref), var2 (copy), playersService (copy), p2 (copy), localCharacterLoaded (copy), getFFlagUseCharacterStore (copy), context (copy), characterAdded (copy), var3 (ref)
-			if not p5.Parent then
-				waitForFirstModule(p5.AncestryChanged, p4.CharacterAdded)
+		local function onCharacterAdded(Character) --[[ Line: 269 ]]
+			-- upvalues: WaitForFirstModule (upval), Player (copy), NewResult (upval), Players (upval), Store (upval), LocalCharacterLoadedFunction (upval), GetFFlagUseCharacterStoreFunction (upval), Context (upval), CharacterAddedFunction (upval), NewAtomicBinding (copy)
+			if not Character.Parent then
+				WaitForFirstModule(Character.AncestryChanged, Player.CharacterAdded)
 			end
-			if p4.Character ~= p5 or not p5.Parent then
-				var2:debug("Mismatched or unparented character in onCharacterAdded for {}", tostring(p4.UserId))
+			if Player.Character ~= Character or not Character.Parent then
+				NewResult:debug("Mismatched or unparented character in onCharacterAdded for {}", (tostring(Player.UserId)))
 				
 				return
-			elseif p4 == playersService.LocalPlayer then
-				var2:debug("Local character loaded: {}", p5.Name)
-				p2:dispatch(localCharacterLoaded(p5))
 			end
-			if getFFlagUseCharacterStore() then
-				context.characterStore.handleCharacterAdded(p4.UserId, p5)
+			if Player == Players.LocalPlayer then
+				NewResult:debug("Local character loaded: {}", Character.Name)
+				Store:dispatch(LocalCharacterLoadedFunction(Character))
+			end
+			if GetFFlagUseCharacterStoreFunction() then
+				Context.characterStore.handleCharacterAdded(Player.UserId, Character)
 			else
-				p2:dispatch(characterAdded(p4.UserId, p5))
+				Store:dispatch(CharacterAddedFunction(Player.UserId, Character))
 			end
-			var3:bindRoot(p5)
+			NewAtomicBinding:bindRoot(Character)
 		end
 		
-		var3 = function(p5)
-			-- upvalues: var3 (ref)
-			var3:unbindRoot(p5)
+		local function onCharacterRemoving(Character) --[[ Line: 293 ]]
+			-- upvalues: NewAtomicBinding (copy)
+			NewAtomicBinding:unbindRoot(Character)
 		end
 		
-		if p4.Character then
-			onCharacterAdded(p4.Character)
+		if Player.Character then
+			onCharacterAdded(Player.Character)
 		end
-		local characterAddedConnection = p4.CharacterAdded:Connect(onCharacterAdded)
-		local characterRemovingConnection = p4.CharacterRemoving:Connect(var3)
+		local CharacterAddedConnection = Player.CharacterAdded:Connect(onCharacterAdded)
+		local CharacterRemovingConnection = Player.CharacterRemoving:Connect(onCharacterRemoving)
 		
-		if not t[p4.UserId] then
-			t[p4.UserId] = { characterAddedConnection, characterRemovingConnection }
+		if not t[Player.UserId] then
+			t[Player.UserId] = { CharacterAddedConnection, CharacterRemovingConnection }
 		end
 	end
 	
-	local function onNewPlayerAdded(p4)
-		-- upvalues: onPlayerAdded (ref), playersService (copy), promiseModule (copy), displaySystemMessageModule (copy), fFlagConnectionsToFriendsRename (copy), p1 (ref), var2 (copy)
-		onPlayerAdded(p4)
+	local function onNewPlayerAdded(Player: Player) --[[ Line: 311 ]]
+		-- upvalues: onPlayerAdded (copy), Players (upval), PromiseModule (upval), DisplaySystemMessageModule (upval), JoinResult (copy), NewResult (upval)
+		onPlayerAdded(Player)
 		
-		if playersService.LocalPlayer then
-			promiseModule.try(function()
-				-- upvalues: p4 (ref), playersService (copy)
-				return p4:IsFriendsWithAsync(playersService.LocalPlayer.UserId)
-			end):andThen(function(p5)
-				-- upvalues: displaySystemMessageModule (copy), fFlagConnectionsToFriendsRename (copy), p4 (ref), p1 (copy)
-				if p5 then
-					displaySystemMessageModule(if fFlagConnectionsToFriendsRename then "InGame.UnknownNamespace.GameChat.FriendChatNotifier.JoinMessage" else "InGame.UnknownNamespace.GameChat_FriendChatNotifier_JoinMessage", { RBX_NAME = p4.DisplayName }, "Roblox.Notification.Friend.Joined", p1.translator, p1.defaultSystemTextChannel)
+		if Players.LocalPlayer then
+			PromiseModule.try(function() --[[ Line: 315 ]]
+				-- upvalues: Player (copy), Players (upval)
+				return Player:IsFriendsWithAsync(Players.LocalPlayer.UserId)
+			end):andThen(function(Result) --[[ Line: 318 ]]
+				-- upvalues: DisplaySystemMessageModule (upval), Player (copy), JoinResult (upval)
+				if Result then
+					DisplaySystemMessageModule("InGame.UnknownNamespace.GameChat.FriendChatNotifier.JoinMessage", { RBX_NAME = Player.DisplayName }, "Roblox.Notification.Friend.Joined", JoinResult.translator, JoinResult.defaultSystemTextChannel)
 				end
-			end):catch(function(p5)
-				-- upvalues: var2 (copy)
-				var2:error("Could not fetch friendship status. Error: {}", tostring(p5))
+			end):catch(function(Err) --[[ Line: 329 ]]
+				-- upvalues: NewResult (upval)
+				NewResult:error("Could not fetch friendship status. Error: {}", (tostring(Err)))
 			end)
 		end
 	end
 	
-	for i, v in pairs(playersService:GetPlayers()) do
-		if v:IsA("Player") then
-			onPlayerAdded(v)
+	for _, player in pairs(Players:GetPlayers()) do
+		if player:IsA("Player") then
+			onPlayerAdded(player)
 		end
 	end
-	playersService.PlayerAdded:Connect(onNewPlayerAdded)
-	playersService.PlayerRemoving:Connect(function(p4)
-		-- upvalues: var2 (copy), fFlagExpChatWindowStatusEventFixesModule (copy), playersService (copy), getChatWindowStatusStoreModule (copy), textChatService (copy), p2 (ref), playerRemoved (copy), p3 (ref), fFlagExpChatUseAdorneeStore (copy), context (copy), getFFlagUseCharacterStore (copy), t (ref)
-		var2:trace("Player removed: {} {}", p4.Name, tostring(p4.UserId))
+	Players.PlayerAdded:Connect(onNewPlayerAdded)
+	Players.PlayerRemoving:Connect(function(Player: Player) --[[ Line: 344 ]]
+		-- upvalues: NewResult (upval), FFlagExpChatWindowStatusEventFixesModule (upval), Players (upval), GetChatWindowStatusStoreModule (upval), TextChatService (upval), Store (copy), PlayerRemovedFunction (upval), MessagesStore (copy), FFlagExpChatUseAdorneeStore (upval), Context (upval), GetFFlagUseCharacterStoreFunction (upval), t (copy)
+		NewResult:trace("Player removed: {} {}", Player.Name, (tostring(Player.UserId)))
 		
-		if fFlagExpChatWindowStatusEventFixesModule and p4 == playersService.LocalPlayer then
-			local var3, var4 = getChatWindowStatusStoreModule(false).flushFinalDuration(os.clock())
+		if FFlagExpChatWindowStatusEventFixesModule and Player == Players.LocalPlayer then
+			local FlushFinalDurationResult, FlushFinalDurationResult2 = GetChatWindowStatusStoreModule(false).flushFinalDuration(os.clock())
 			
-			if var4 then
-				textChatService:SendExpChatWindowStatusChange(var3.closedDuration, var3.openDuration, var3.backgroundIdleDuration, var3.textIdleDuration)
+			if FlushFinalDurationResult2 then
+				TextChatService:SendExpChatWindowStatusChange(FlushFinalDurationResult.closedDuration, FlushFinalDurationResult.openDuration, FlushFinalDurationResult.backgroundIdleDuration, FlushFinalDurationResult.textIdleDuration)
 			end
 		end
-		p2:dispatch(playerRemoved(p4.UserId))
-		p3.handlePlayerRemoved(p4.UserId)
+		Store:dispatch(PlayerRemovedFunction(Player.UserId))
+		MessagesStore.handlePlayerRemoved(Player.UserId)
 		
-		if fFlagExpChatUseAdorneeStore then
-			context.adorneeStore.handlePlayerRemoved(p4.UserId)
+		if FFlagExpChatUseAdorneeStore then
+			Context.adorneeStore.handlePlayerRemoved(Player.UserId)
 		end
-		if getFFlagUseCharacterStore() then
-			context.characterStore.handlePlayerRemoved(p4.UserId)
+		if GetFFlagUseCharacterStoreFunction() then
+			Context.characterStore.handlePlayerRemoved(Player.UserId)
 		end
-		local userId = t[p4.UserId]
+		local Entry = t[Player.UserId]
 		
-		if userId then
-			for i, v in ipairs(userId) do
-				v:Disconnect()
+		if Entry then
+			for _, Connection in ipairs(Entry) do
+				Connection:Disconnect()
 			end
-			t[p4.UserId] = nil
+			t[Player.UserId] = nil
 		end
 	end)
 end
 
-local t_1 = {
-	canUserChatAsync = function(p4)
-		-- upvalues: chatService (ref)
-		return chatService:CanUserChatAsync(p4)
+local config1 = {
+	canUserChatAsync = function(UserId) --[[ Line: 407 ]]
+		-- upvalues: Chat (copy)
+		return Chat:CanUserChatAsync(UserId)
 	end
 }
 
-local var3 = function(p4)
-	-- upvalues: getFFlagExpChatProtectedChatInternalAPIs (ref), var2 (ref), fFlagEnableInExpChatSummaryOnLuaModule (ref), generateRichSystemMessageTextFormatModule (ref), UIBloxModule (ref)
-	if getFFlagExpChatProtectedChatInternalAPIs() then
-		var2:trace("System OnIncomingMessage started: PrefixTextInternal: {} TextInternal: {}", p4.PrefixTextInternal, p4.TextInternal)
+local function OnIncomingMessage(TextChatMessage) --[[ Line: 412 ]]
+	-- upvalues: GetFFlagExpChatProtectedChatInternalAPIsFunction (copy), NewResult (copy), FFlagEnableInExpChatSummaryOnLuaModule (copy), GenerateRichSystemMessageTextFormatModule (copy), UIBloxModule (copy)
+	if GetFFlagExpChatProtectedChatInternalAPIsFunction() then
+		NewResult:trace("System OnIncomingMessage started: PrefixTextInternal: {} TextInternal: {}", TextChatMessage.PrefixTextInternal, TextChatMessage.TextInternal)
 	else
-		var2:trace("System OnIncomingMessage started: {} {}", p4.PrefixText, p4.Text)
+		NewResult:trace("System OnIncomingMessage started: {} {}", TextChatMessage.PrefixText, TextChatMessage.Text)
 	end
-	local textChatMessageProperties = Instance.new("TextChatMessageProperties")
-	textChatMessageProperties.Text = if fFlagEnableInExpChatSummaryOnLuaModule then generateRichSystemMessageTextFormatModule(if getFFlagExpChatProtectedChatInternalAPIs() then p4.TextInternal else p4.Text, not not string.find(p4.Metadata, "Error")) else string.format("<font color=\"#%s\">%s</font>", if string.find(p4.Metadata, "Error") then UIBloxModule.App.Style.Colors.Red:ToHex() else UIBloxModule.App.Style.Colors.LightGrey:ToHex(), if getFFlagExpChatProtectedChatInternalAPIs() then p4.TextInternal else p4.Text)
-	var2:trace("System OnIncomingMessage finished: {} {}", textChatMessageProperties.PrefixText, textChatMessageProperties.Text)
+	local TextChatMessageProperties = Instance.new("TextChatMessageProperties")
+	TextChatMessageProperties.Text = if FFlagEnableInExpChatSummaryOnLuaModule then GenerateRichSystemMessageTextFormatModule(if GetFFlagExpChatProtectedChatInternalAPIsFunction() then TextChatMessage.TextInternal else TextChatMessage.Text, not not string.find(TextChatMessage.Metadata, "Error")) else string.format("<font color=\"#%s\">%s</font>", if string.find(TextChatMessage.Metadata, "Error") then UIBloxModule.App.Style.Colors.Red:ToHex() else UIBloxModule.App.Style.Colors.LightGrey:ToHex(), if GetFFlagExpChatProtectedChatInternalAPIsFunction() then TextChatMessage.TextInternal else TextChatMessage.Text)
+	NewResult:trace("System OnIncomingMessage finished: {} {}", TextChatMessageProperties.PrefixText, TextChatMessageProperties.Text)
 	
-	return textChatMessageProperties
+	return TextChatMessageProperties
 end
 
-return function(p4)
-	-- upvalues: var2 (ref), dictionary (ref), t_1 (ref), createStoreModule (ref), createDispatchBindableEventModule (ref), bindableEventQueueModule (ref), watchForErrors (ref), context (ref), fFlagExpChatUseAdorneeStore (ref), getAdorneeStoreModule (ref), fFlagExpChatUseProximityStore (ref), var1 (ref), getMessagesStoreModule (ref), fFlagExpChatUseChannelTabsStore (ref), getChannelTabsStoreModule (ref), fFlagExpChatVirtualizeSystemMessagesModule (ref), getFFlagExpChatSuppressWelcomeMessageTabUnread (ref), expChatOnlyWakeTextForSelectedTab (ref), isMessageForOpenChannelModule (ref), getTransparencyStoreModule (ref), displaySystemMessageModule (ref), writeVirtualSystemMessageModule (ref), fFlagExpChatUseChatConfigStore (ref), getChatConfigurationStoreModule (ref), getChatStatusStoreModule (ref), getGlobalMutedUsersStoreModule (ref), getFFlagUseCharacterStore (ref), getCharacterStoreModule (ref), analytics (ref), getFFlagUnreduxLastInputTypeChangedModule (ref), userInputService (ref), lastInputTypeChangedModule (ref), var3 (ref), chatService (ref), textChatService (ref), setUpConfigurationObjectsModule (ref), setUpClientSettingsModule (ref), fFlagExpChatInitializeWindowFromGameSettings (ref), chatTopBarButtonActivatedModule (ref), playersService (ref), shouldSkipHistoricalMessageModule (ref), getFFlagExpChatProtectedChatInternalAPIs (ref), expChatPerfTracker (ref), fFlagExpChatPerfTrackerTabName (ref), selectSelectedTabNameModule (ref), reportMessageReceivedModule (ref), handleChannelWelcomeMessageModule (ref), fFlagExpChatUnreadTabIndicatorV2WindowModule (ref), markChannelUnreadForIncomingMessageModule (ref), shouldSuppressUnreadForTabMetadataModule (ref), markChannelUnreadForSystemMessageModule (ref), shouldSendHighFrequencyTelemetryModule (ref), expChatMessageResponseUserSamplePermyriad (ref), t (ref), textChannelCreated (ref), getNameColorModule (ref), expChatRemoveSpaceFromTeamPrefix (ref), getOtherDisplayNameInWhisperChannelModule (ref), getFFlagTextChatEnableUniverseChatTabs (ref), expChatNewSystemMessagesExperimentation (ref), summaryMessageRichTextModule (ref), fFlagExpChatEnableGlobalChatSummarySystemMessageModule (ref), expChatSuppressGlobalSummaryTabUnread (ref), fFlagEnableInExpChatSummaryOnLuaModule (ref), fFlagEnableClientSummarySystemMessageOnLua (ref), textChannelRemoved (ref), textChatMessageChatActionTypeModule (ref), fFlagEnableGlobalChat3pSummaryLuaAppsModule (ref), fFlagAIRephraseSettingEnabled (ref), fFlagChatSummariesSettingEnabled (ref), robloxReplicatedStorageService (ref), getUserChatSettingsStoreModule (ref), countParticipantsInTextChannel (ref), fFlagExpChatGlobalTabDefaultModule (ref), fFlagExpChatFixOutgoingUniverseChatBubbleModule (ref), localTextChannelParticipantAddedModule (ref), localTextChannelParticipantRemoved (ref), fFlagExpChatUseUnifiedTooltipStore (ref), getChatTooltipStoreModule (ref), expChatGlobalTabDefaultExperimentation (ref), universeChatChannelAddedModule (ref), isGlobalTabFirstModule (ref), universeChatChannelSelected (ref), getFFlagEnableExpChatUniverseChatTabNames (ref), getGlobalWelcomeMessageKeyModule (ref), shouldFilterGlobalMessageModule (ref), httpService (ref), legacyBubbleChatEnabledChangedModule (ref), legacyBubbleChatSettingsChangedModule (ref), getEngineFeatureFlagEnableDisplayBubbleModule (ref), commands (ref), commandAliasChanged (ref), promiseModule (ref), watchPlayersService (ref), UIBloxModule (ref), colorMode (ref), roactModule (ref), appModule (ref), getFFlagExpChatTelemetryEventTriggerModule (ref), clientAppLoaded (ref), starterGuiService (ref), fFlagLuaSupportMicroGamepadPreferredInput (ref), reportVersionLoadedModule (ref), version (ref), chatEnabledSystemMessageModule (ref), isChatRegionLockedModule (ref), canPlatformEnableChatModule (ref), fFlagExpChatRefactorEnabledMessageLogicModule (ref), fStringExpChatChatWithTFAmpFeatureNameModule (ref), fStringExpChatChatWithTFAmpNameSpaceModule (ref), ampApiProvider (ref), accessResponseEnum (ref), canOnlyChatInRegionModule (ref), expChatHiddenMessagesPromptThresholdLowerBound (ref), expChatHiddenMessagesPromptThresholdUpperBound (ref), isUserChatEnabledModule (ref), fFlagExpChatEnableFOMOUpsellModule (ref), shouldShowFOMOUpsellModule (ref), fFlagExpChatEnableCrossAgeChatActivityModule (ref), shouldShowCrossAgeChatActivityModule (ref), fFlagEnableModerateChatRemoteEvent (ref), getExperienceChatVisualConfigModule (ref), getChatModerationStoreModule (ref), signalsModule (ref), notificationModalsManagerModule (ref), fFlagConnectionsToFriendsRename (ref), fFlagExpChatPresetChatEnabled (ref), fFlagExpChatPresetChatLoadTestEnabled (ref), initializePresetChatModule (ref), getPresetChatStoreModule (ref), fFlagExpChatClearHiddenMessagesPostAgeCheckModule (ref)
-	var2:trace("mountClientApp started")
-	p4 = dictionary.join(t_1, p4)
-	local var4 = createStoreModule()
-	createDispatchBindableEventModule(var4)
-	bindableEventQueueModule:flush()
-	watchForErrors(game:GetService("ScriptContext"), p4.script, false)
-	context.translator = p4.translator
-	context.store = var4
+return function(p1) --[[ Line: 441 ]]
+	-- upvalues: NewResult (copy), Dictionary (copy), config1 (copy), CreateStoreModule (copy), CreateDispatchBindableEventModule (copy), BindableEventQueueModule (copy), WatchForErrorsFunction (copy), Context (copy), FFlagExpChatUseAdorneeStore (copy), GetAdorneeStoreModule (copy), FFlagExpChatUseProximityStore (copy), GetProximityStoreModule (copy), GetMessagesStoreModule (copy), FFlagExpChatUseChannelTabsStore (copy), GetChannelTabsStoreModule (copy), FFlagExpChatVirtualizeSystemMessagesModule (copy), GetFFlagExpChatSuppressWelcomeMessageTabUnreadFunction (copy), ExpChatOnlyWakeTextForSelectedTab (copy), IsMessageForOpenChannelModule (copy), GetTransparencyStoreModule (copy), DisplaySystemMessageModule (copy), WriteVirtualSystemMessageModule (copy), FFlagExpChatUseChatConfigStore (copy), GetChatConfigurationStoreModule (copy), GetChatStatusStoreModule (copy), GetGlobalMutedUsersStoreModule (copy), GetFFlagUseCharacterStoreFunction (copy), GetCharacterStoreModule (copy), Analytics (copy), GetFFlagUnreduxLastInputTypeChangedModule (copy), UserInputService (copy), LastInputTypeChangedModule (copy), OnIncomingMessage (copy), Chat (copy), TextChatService (copy), SetUpConfigurationObjectsModule (copy), SetUpClientSettingsModule (copy), FFlagExpChatInitializeWindowFromGameSettings (copy), ChatTopBarButtonActivatedModule (copy), Players (copy), FFlagExpChatRenderHistoricalMessages (copy), IsHistoricalMessageModule (copy), ShouldSkipHistoricalMessageModule (copy), GetFFlagExpChatProtectedChatInternalAPIsFunction (copy), ExpChatPerfTracker (copy), FFlagExpChatPerfTrackerTabName (copy), SelectSelectedTabNameModule (copy), ReportMessageReceivedModule (copy), HandleChannelWelcomeMessageModule (copy), FFlagExpChatUnreadTabIndicatorV2WindowModule (copy), MarkChannelUnreadForIncomingMessageModule (copy), ShouldSuppressUnreadForTabMetadataModule (copy), MarkChannelUnreadForSystemMessageModule (copy), ShouldSendHighFrequencyTelemetryModule (copy), ExpChatMessageResponseUserSamplePermyriad (copy), config (copy), TextChannelCreatedFunction (copy), GetNameColorModule (copy), ExpChatRemoveSpaceFromTeamPrefix (copy), GetOtherDisplayNameInWhisperChannelModule (copy), FFlagExpChatDictationContinuousSafetyReminder (copy), DictationSafetyReminderModule (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (copy), ExpChatNewSystemMessagesExperimentation (copy), SummaryMessageRichTextModule (copy), FFlagExpChatEnableGlobalChatSummarySystemMessageModule (copy), ExpChatSuppressGlobalSummaryTabUnread (copy), FFlagEnableInExpChatSummaryOnLuaModule (copy), FFlagEnableClientSummarySystemMessageOnLua (copy), TextChannelRemovedFunction (copy), TextChatMessageChatActionTypeModule (copy), FFlagEnableGlobalChat3pSummaryLuaAppsModule (copy), FFlagAIRephraseSettingEnabled (copy), FFlagChatSummariesSettingEnabled (copy), RobloxReplicatedStorage (copy), GetUserChatSettingsStoreModule (copy), GetChannelsWithKeptHistoryModule (copy), WhenFirstTrueModule (copy), ConnectHistoryReplayModule (copy), FFlagExpChatHistoricalMessagesUnibarUnread (copy), CountParticipantsInTextChannelFunction (copy), FFlagExpChatGlobalTabDefaultModule (copy), FFlagExpChatFixOutgoingUniverseChatBubbleModule (copy), LocalTextChannelParticipantAddedModule (copy), LocalTextChannelParticipantRemovedFunction (copy), FFlagExpChatUseUnifiedTooltipStore (copy), GetChatTooltipStoreModule (copy), ExpChatGlobalTabDefaultExperimentation (copy), UniverseChatChannelAddedModule (copy), IsGlobalTabFirstModule (copy), HasUserSelectedTabModule (copy), UniverseChatChannelSelectedFunction (copy), GetFFlagEnableExpChatUniverseChatTabNamesFunction (copy), GetGlobalWelcomeMessageKeyModule (copy), ShouldFilterGlobalMessageModule (copy), HttpService (copy), LegacyBubbleChatEnabledChangedModule (copy), LegacyBubbleChatSettingsChangedModule (copy), GetEngineFeatureFlagEnableDisplayBubbleModule (copy), Commands (copy), CommandAliasChangedFunction (copy), PromiseModule (copy), watchPlayersService (copy), UIBloxModule (copy), ColorMode (copy), RoactModule (copy), AppModule (copy), GetFFlagExpChatTelemetryEventTriggerModule (copy), ClientAppLoadedFunction (copy), StarterGui (copy), FFlagLuaSupportMicroGamepadPreferredInput (copy), ReportVersionLoadedModule (copy), Version (copy), ChatEnabledSystemMessageModule (copy), IsChatRegionLockedModule (copy), CanPlatformEnableChatModule (copy), FFlagExpChatRefactorEnabledMessageLogicModule (copy), FStringExpChatChatWithTFAmpFeatureNameModule (copy), FStringExpChatChatWithTFAmpNameSpaceModule (copy), AmpApiProvider (copy), AccessResponseEnum (copy), CanOnlyChatInRegionModule (copy), ExpChatHiddenMessagesPromptThresholdLowerBound (copy), ExpChatHiddenMessagesPromptThresholdUpperBound (copy), IsUserChatEnabledModule (copy), FFlagExpChatEnableFOMOUpsellModule (copy), ShouldShowFOMOUpsellModule (copy), FFlagExpChatEnableCrossAgeChatActivityModule (copy), ShouldShowCrossAgeChatActivityModule (copy), FFlagEnableModerateChatRemoteEvent (copy), GetExperienceChatVisualConfigModule (copy), GetChatModerationStoreModule (copy), SignalsModule (copy), NotificationModalsManagerModule (copy), FFlagExpChatPresetChatEnabled (copy), FFlagExpChatPresetChatLoadTestEnabled (copy), InitializePresetChatModule (copy), GetPresetChatStoreModule (copy), FFlagExpChatClearHiddenMessagesPostAgeCheckModule (copy)
+	NewResult:trace("mountClientApp started")
+	local JoinResult = Dictionary.join(config1, p1)
+	local StoreModule = CreateStoreModule()
+	CreateDispatchBindableEventModule(StoreModule)
+	BindableEventQueueModule:flush()
+	WatchForErrorsFunction(game:GetService("ScriptContext"), JoinResult.script, false)
+	Context.translator = JoinResult.translator
+	Context.store = StoreModule
 	
-	if fFlagExpChatUseAdorneeStore then
-		context.adorneeStore = getAdorneeStoreModule(false)
+	if FFlagExpChatUseAdorneeStore then
+		Context.adorneeStore = GetAdorneeStoreModule(false)
 	end
-	if fFlagExpChatUseProximityStore then
-		context.proximityStore = var1(false)
+	if FFlagExpChatUseProximityStore then
+		Context.proximityStore = GetProximityStoreModule(false)
 	end
-	local var5 = getMessagesStoreModule(false)
-	local var6 = if fFlagExpChatUseChannelTabsStore then getChannelTabsStoreModule(false) else nil
-	local var7 = fFlagExpChatVirtualizeSystemMessagesModule and var5 ~= nil
-	local t_2 = {
-		messagesStore = var5,
-		channelTabsStore = var6,
-		store = var4,
-		suppressWelcomeMessageTabUnread = getFFlagExpChatSuppressWelcomeMessageTabUnread(),
-		resetTextTransparency = function(value)
-			-- upvalues: expChatOnlyWakeTextForSelectedTab (copy), isMessageForOpenChannelModule (copy), var4 (ref), getTransparencyStoreModule (copy)
-			if not expChatOnlyWakeTextForSelectedTab or isMessageForOpenChannelModule(var4:getState(), nil, value) then
-				getTransparencyStoreModule(false).resetTextTransparency()
+	local MessagesStoreModule = GetMessagesStoreModule(false)
+	local ChannelTabsStoreModule = if FFlagExpChatUseChannelTabsStore then GetChannelTabsStoreModule(false) else nil
+	local HasMessagesStoreModule: boolean = FFlagExpChatVirtualizeSystemMessagesModule and MessagesStoreModule ~= nil
+	local config2 = {
+		messagesStore = MessagesStoreModule,
+		channelTabsStore = ChannelTabsStoreModule,
+		store = StoreModule,
+		suppressWelcomeMessageTabUnread = GetFFlagExpChatSuppressWelcomeMessageTabUnreadFunction(),
+		resetTextTransparency = function(p2) --[[ Line: 474 ]]
+			-- upvalues: ExpChatOnlyWakeTextForSelectedTab (upval), IsMessageForOpenChannelModule (upval), StoreModule (copy), GetTransparencyStoreModule (upval)
+			if not ExpChatOnlyWakeTextForSelectedTab or IsMessageForOpenChannelModule(StoreModule:getState(), nil, p2) then
+				GetTransparencyStoreModule(false).resetTextTransparency()
 			end
 		end
 	}
 	
-	local function showWelcomeSystemMessage(p5, p6)
-		-- upvalues: var7 (ref), displaySystemMessageModule (copy), p4 (write), writeVirtualSystemMessageModule (copy), t_2 (ref)
-		if not var7 then
-			displaySystemMessageModule(p5.key, p5.args, p5.metadata, p4.translator, p6)
+	local function showWelcomeSystemMessage(p2, TextChannel) --[[ Line: 482 ]]
+		-- upvalues: HasMessagesStoreModule (copy), DisplaySystemMessageModule (upval), JoinResult (ref), WriteVirtualSystemMessageModule (upval), config2 (copy)
+		if not HasMessagesStoreModule then
+			DisplaySystemMessageModule(p2.key, p2.args, p2.metadata, JoinResult.translator, TextChannel)
 			
 			return
-		elseif not p6 then return end
-		local ok, status = pcall(function()
-			-- upvalues: p4 (copy), p5 (ref)
-			return p4.translator:FormatByKey(p5.key, p5.args)
+		end
+		if not TextChannel then return end
+		local Success, Result = pcall(function() --[[ Line: 493 ]]
+			-- upvalues: JoinResult (upval), p2 (copy)
+			return JoinResult.translator:FormatByKey(p2.key, p2.args)
 		end)
 		
-		if ok and type(status) == "string" and status ~= "" then
-			writeVirtualSystemMessageModule(t_2, {
-				text = status,
-				channelName = p6.Name,
-				metadata = p5.metadata,
-				textChannel = p6
+		if Success and type(Result) == "string" and Result ~= "" then
+			WriteVirtualSystemMessageModule(config2, {
+				text = Result,
+				channelName = TextChannel.Name,
+				metadata = p2.metadata,
+				textChannel = TextChannel
 			})
 			
 			return
 		end
 	end
 	
-	local function showVirtualChatEnabledSystemMessage(p5, p6, p7)
-		-- upvalues: p4 (write), writeVirtualSystemMessageModule (copy), t_2 (ref)
-		local defaultSystemTextChannel = p4.defaultSystemTextChannel
+	local function showVirtualChatEnabledSystemMessage(p2, p3, p4) --[[ Line: 506 ]]
+		-- upvalues: JoinResult (ref), WriteVirtualSystemMessageModule (upval), config2 (copy)
+		local DefaultSystemTextChannel = JoinResult.defaultSystemTextChannel
 		
-		if not defaultSystemTextChannel then return end
-		local ok, status = pcall(function()
-			-- upvalues: p4 (copy), p5 (ref), p6 (ref)
-			return p4.translator:FormatByKey(p5, p6)
+		if not DefaultSystemTextChannel then return end
+		local Success, Result = pcall(function() --[[ Line: 511 ]]
+			-- upvalues: JoinResult (upval), p2 (copy), p3 (copy)
+			return JoinResult.translator:FormatByKey(p2, p3)
 		end)
 		
-		if not ok or type(status) ~= "string" or status == "" then
-			status = p7
+		if not Success or type(Result) ~= "string" or Result == "" then
+			Result = p4
 		end
-		writeVirtualSystemMessageModule(t_2, {
+		WriteVirtualSystemMessageModule(config2, {
 			channelName = "RBXGeneral",
 			metadata = "Roblox.ChatEnabled.Info",
-			text = status,
-			textChannel = defaultSystemTextChannel
+			text = Result,
+			textChannel = DefaultSystemTextChannel
 		})
 	end
 	
-	local var8 = if fFlagExpChatUseChatConfigStore then getChatConfigurationStoreModule(false) else nil
-	local var9 = getChatStatusStoreModule(false)
-	context.messagesStore = var5
-	context.globalMutedUsersStore = getGlobalMutedUsersStoreModule(false)
+	local ChatConfigurationStoreModule = if FFlagExpChatUseChatConfigStore then GetChatConfigurationStoreModule(false) else nil
+	local ChatStatusStoreModule = GetChatStatusStoreModule(false)
+	Context.messagesStore = MessagesStoreModule
+	Context.globalMutedUsersStore = GetGlobalMutedUsersStoreModule(false)
 	
-	if getFFlagUseCharacterStore() then
-		context.characterStore = getCharacterStoreModule(false)
+	if GetFFlagUseCharacterStoreFunction() then
+		Context.characterStore = GetCharacterStoreModule(false)
 	end
-	if p4.analytics then
-		analytics.with(p4.analytics)
+	if JoinResult.analytics then
+		Analytics.with(JoinResult.analytics)
 	end
-	if not getFFlagUnreduxLastInputTypeChangedModule() then
-		userInputService.LastInputTypeChanged:Connect(function(p5)
-			-- upvalues: var4 (ref), lastInputTypeChangedModule (copy)
-			var4:dispatch(lastInputTypeChangedModule(p5))
+	if not GetFFlagUnreduxLastInputTypeChangedModule() then
+		UserInputService.LastInputTypeChanged:Connect(function(LastInputType) --[[ Line: 541 ]]
+			-- upvalues: StoreModule (copy), LastInputTypeChangedModule (upval)
+			StoreModule:dispatch(LastInputTypeChangedModule(LastInputType))
 		end)
 	end
-	if p4.defaultSystemTextChannel then
-		p4.defaultSystemTextChannel.OnIncomingMessage = var3
+	if JoinResult.defaultSystemTextChannel then
+		JoinResult.defaultSystemTextChannel.OnIncomingMessage = OnIncomingMessage
 	else
-		chatService:GetPropertyChangedSignal("IsAutoMigrated"):Once(function()
-			-- upvalues: textChatService (copy), p4 (write), var3 (copy)
-			local RBXSystem = textChatService:FindFirstChild("RBXSystem", true)
+		Chat:GetPropertyChangedSignal("IsAutoMigrated"):Once(function() --[[ Line: 549 ]]
+			-- upvalues: TextChatService (upval), JoinResult (ref), OnIncomingMessage (upval)
+			local RBXSystem = TextChatService:FindFirstChild("RBXSystem", true)
 			
 			if RBXSystem and RBXSystem:IsA("TextChannel") then
-				p4.defaultSystemTextChannel = RBXSystem
-				RBXSystem.OnIncomingMessage = var3
+				JoinResult.defaultSystemTextChannel = RBXSystem
+				RBXSystem.OnIncomingMessage = OnIncomingMessage
 			end
 		end)
 	end
-	setUpConfigurationObjectsModule(var4, p4)
-	setUpClientSettingsModule(var4)
+	SetUpConfigurationObjectsModule(StoreModule, JoinResult)
+	SetUpClientSettingsModule(StoreModule)
 	
-	if fFlagExpChatInitializeWindowFromGameSettings then
-		var4:dispatch(chatTopBarButtonActivatedModule(UserSettings().GameSettings.ChatVisible))
+	if FFlagExpChatInitializeWindowFromGameSettings then
+		StoreModule:dispatch(ChatTopBarButtonActivatedModule(UserSettings().GameSettings.ChatVisible))
 	end
-	local localPlayer = playersService.LocalPlayer
+	local LocalPlayer = Players.LocalPlayer
 	
-	if localPlayer then
-		localPlayer:GetPropertyChangedSignal("Team"):Connect(function()
-			-- upvalues: localPlayer (ref), displaySystemMessageModule (copy), p4 (write)
-			local team = localPlayer.Team
+	if LocalPlayer then
+		LocalPlayer:GetPropertyChangedSignal("Team"):Connect(function() --[[ Line: 566 ]]
+			-- upvalues: LocalPlayer (copy), DisplaySystemMessageModule (upval), JoinResult (ref)
+			local Team = LocalPlayer.Team
 			
-			if team then
-				displaySystemMessageModule("InGame.UnknownNamespace.GameChat_TeamChat_NowInTeam", { RBX_NAME = team.Name }, "Roblox.Team.Success.NowInTeam", p4.translator, p4.defaultSystemTextChannel)
+			if Team then
+				DisplaySystemMessageModule("InGame.UnknownNamespace.GameChat_TeamChat_NowInTeam", { RBX_NAME = Team.Name }, "Roblox.Team.Success.NowInTeam", JoinResult.translator, JoinResult.defaultSystemTextChannel)
 			end
 		end)
 	end
-	local t_3 = {
+	local config3 = {
 		[Enum.TextChatMessageStatus.Floodchecked] = {
 			key = "CoreScripts.TextChat.MessageStatus.Warning.Floodchecked",
 			metadata = "Roblox.MessageStatus.Warning.Floodchecked"
@@ -527,70 +541,85 @@ return function(p4)
 		}
 	}
 	
-	local function _processIncomingMessageCore(a, b, p5)
-		-- upvalues: shouldSkipHistoricalMessageModule (copy), getFFlagExpChatProtectedChatInternalAPIs (copy), var2 (copy), localPlayer (ref), expChatPerfTracker (copy), fFlagExpChatPerfTrackerTabName (copy), selectSelectedTabNameModule (copy), var4 (ref), reportMessageReceivedModule (copy), handleChannelWelcomeMessageModule (copy), showWelcomeSystemMessage (ref), expChatOnlyWakeTextForSelectedTab (copy), isMessageForOpenChannelModule (copy), var5 (ref), getTransparencyStoreModule (copy), fFlagExpChatUseChannelTabsStore (copy), var6 (ref), fFlagExpChatUnreadTabIndicatorV2WindowModule (copy), markChannelUnreadForIncomingMessageModule (copy), t_3 (ref), p4 (write), getFFlagExpChatSuppressWelcomeMessageTabUnread (copy), shouldSuppressUnreadForTabMetadataModule (copy), markChannelUnreadForSystemMessageModule (copy), textChatService (copy), displaySystemMessageModule (copy), shouldSendHighFrequencyTelemetryModule (copy), expChatMessageResponseUserSamplePermyriad (copy), analytics (copy), t (copy)
-		if shouldSkipHistoricalMessageModule(a) then return end
-		if getFFlagExpChatProtectedChatInternalAPIs() then
-			var2:debug("Incoming MessageReceived Status: {} TextInternal: {}", a.Status.Name, a.TextInternal)
-		else
-			var2:debug("Incoming MessageReceived Status: {} Text: {}", a.Status.Name, a.Text)
-		end
-		if (if a.TextSource then a.TextSource.UserId else "UNKNOWN_TEXT_SOURCE_USER_ID") ~= (if localPlayer then localPlayer.UserId else "UNKNOWN_LOCAL_USER_ID") then
-			expChatPerfTracker.start(expChatPerfTracker.Events.MessageReceiveToWindowRenderInterval, { messageId = a.MessageId }, if fFlagExpChatPerfTrackerTabName then { tabName = selectSelectedTabNameModule(var4:getState()) } else nil)
-		end
-		if localPlayer then
-			reportMessageReceivedModule(localPlayer.UserId, a)
-		end
-		if localPlayer and a.TextSource and a.TextSource.UserId ~= localPlayer.UserId then
-			local var10 = handleChannelWelcomeMessageModule(a, localPlayer)
+	local function _(p2, p3, p4) --[[ Line: 612 | Named "processHistoricalMessage" ]]
+		-- upvalues: LocalPlayer (copy), MessagesStoreModule (copy)
+		MessagesStoreModule.handleIncomingOrOutgoingMessage(p2, LocalPlayer ~= nil and (p2.TextSource ~= nil and p2.TextSource.UserId == LocalPlayer.UserId), p3, p4, true)
+	end
+	
+	local function _processIncomingMessageCore(TextChatMessage, ChannelNameOverride, IsUniverseChat) --[[ Line: 629 ]]
+		-- upvalues: FFlagExpChatRenderHistoricalMessages (upval), IsHistoricalMessageModule (upval), LocalPlayer (copy), MessagesStoreModule (copy), ShouldSkipHistoricalMessageModule (upval), GetFFlagExpChatProtectedChatInternalAPIsFunction (upval), NewResult (upval), ExpChatPerfTracker (upval), FFlagExpChatPerfTrackerTabName (upval), SelectSelectedTabNameModule (upval), StoreModule (copy), ReportMessageReceivedModule (upval), HandleChannelWelcomeMessageModule (upval), showWelcomeSystemMessage (copy), ExpChatOnlyWakeTextForSelectedTab (upval), IsMessageForOpenChannelModule (upval), GetTransparencyStoreModule (upval), FFlagExpChatUseChannelTabsStore (upval), ChannelTabsStoreModule (copy), FFlagExpChatUnreadTabIndicatorV2WindowModule (upval), MarkChannelUnreadForIncomingMessageModule (upval), config3 (copy), JoinResult (ref), GetFFlagExpChatSuppressWelcomeMessageTabUnreadFunction (upval), ShouldSuppressUnreadForTabMetadataModule (upval), MarkChannelUnreadForSystemMessageModule (upval), TextChatService (upval), DisplaySystemMessageModule (upval), ShouldSendHighFrequencyTelemetryModule (upval), ExpChatMessageResponseUserSamplePermyriad (upval), Analytics (upval), config (upval)
+		if FFlagExpChatRenderHistoricalMessages and IsHistoricalMessageModule(TextChatMessage) then
+			MessagesStoreModule.handleIncomingOrOutgoingMessage(TextChatMessage, LocalPlayer ~= nil and (TextChatMessage.TextSource ~= nil and TextChatMessage.TextSource.UserId == LocalPlayer.UserId), ChannelNameOverride, IsUniverseChat, true)
 			
-			if var10 then
-				showWelcomeSystemMessage(var10, a.TextChannel)
+			return
+		end
+		if ShouldSkipHistoricalMessageModule(TextChatMessage) then return end
+		if GetFFlagExpChatProtectedChatInternalAPIsFunction() then
+			NewResult:debug("Incoming MessageReceived Status: {} TextInternal: {}", TextChatMessage.Status.Name, TextChatMessage.TextInternal)
+		else
+			NewResult:debug("Incoming MessageReceived Status: {} Text: {}", TextChatMessage.Status.Name, TextChatMessage.Text)
+		end
+		if (TextChatMessage.TextSource and TextChatMessage.TextSource.UserId or "UNKNOWN_TEXT_SOURCE_USER_ID") ~= (LocalPlayer and LocalPlayer.UserId or "UNKNOWN_LOCAL_USER_ID") then
+			ExpChatPerfTracker.start(ExpChatPerfTracker.Events.MessageReceiveToWindowRenderInterval, { messageId = TextChatMessage.MessageId }, if FFlagExpChatPerfTrackerTabName then {
+				tabName = SelectSelectedTabNameModule(StoreModule:getState())
+			} else nil)
+		end
+		if LocalPlayer then
+			ReportMessageReceivedModule(LocalPlayer.UserId, TextChatMessage)
+		end
+		if LocalPlayer and TextChatMessage.TextSource and TextChatMessage.TextSource.UserId ~= LocalPlayer.UserId then
+			local HandleChannelWelcomeMessageModuleResult = HandleChannelWelcomeMessageModule(TextChatMessage, LocalPlayer)
+			
+			if HandleChannelWelcomeMessageModuleResult then
+				showWelcomeSystemMessage(HandleChannelWelcomeMessageModuleResult, TextChatMessage.TextChannel)
 			end
 		end
-		local var11 = localPlayer and (a.TextSource and a.TextSource.UserId == localPlayer.UserId)
-		local var12 = if expChatOnlyWakeTextForSelectedTab then isMessageForOpenChannelModule(var4:getState(), a, b) else true
-		var5.handleIncomingOrOutgoingMessage(a, var11, b, p5)
+		local IsUserIdMatch: boolean = LocalPlayer and (TextChatMessage.TextSource and TextChatMessage.TextSource.UserId == LocalPlayer.UserId)
+		local NoExpChatOnlyWakeTextForSelectedTab = not ExpChatOnlyWakeTextForSelectedTab or IsMessageForOpenChannelModule(StoreModule:getState(), TextChatMessage, ChannelNameOverride)
+		MessagesStoreModule.handleIncomingOrOutgoingMessage(TextChatMessage, IsUserIdMatch, ChannelNameOverride, IsUniverseChat)
 		
-		if var12 then
-			getTransparencyStoreModule(false).resetTextTransparency()
+		if NoExpChatOnlyWakeTextForSelectedTab then
+			GetTransparencyStoreModule(false).resetTextTransparency()
 		end
-		if fFlagExpChatUseChannelTabsStore and var6 then
-			var6.handleIncomingOrOutgoingMessage(a, var11, b)
-		elseif fFlagExpChatUnreadTabIndicatorV2WindowModule then
-			var4:dispatch(markChannelUnreadForIncomingMessageModule(a, var11, b, p5))
+		if FFlagExpChatUseChannelTabsStore and ChannelTabsStoreModule then
+			ChannelTabsStoreModule.handleIncomingOrOutgoingMessage(TextChatMessage, IsUserIdMatch, ChannelNameOverride)
+		elseif FFlagExpChatUnreadTabIndicatorV2WindowModule then
+			StoreModule:dispatch(MarkChannelUnreadForIncomingMessageModule(TextChatMessage, IsUserIdMatch, ChannelNameOverride, IsUniverseChat))
 		end
-		local status = t_3[a.Status]
+		local Entry = config3[TextChatMessage.Status]
 		
-		if status then
-			local ok, status_1 = pcall(function()
-				-- upvalues: p4 (copy), status (ref)
-				return p4.translator:FormatByKey(status.key)
+		if Entry then
+			local Success, Result = pcall(function() --[[ Line: 709 ]]
+				-- upvalues: JoinResult (upval), Entry (copy)
+				return JoinResult.translator:FormatByKey(Entry.key)
 			end)
 			
-			if b and (ok and (status_1 and status_1 ~= "")) then
-				var5.addSystemMessage(status_1, b, if getFFlagExpChatSuppressWelcomeMessageTabUnread() then status.metadata else nil)
+			if Success then
+				Success = Result and Result ~= ""
+			end
+			if ChannelNameOverride and Success then
+				MessagesStoreModule.addSystemMessage(Result, ChannelNameOverride, if GetFFlagExpChatSuppressWelcomeMessageTabUnreadFunction() then Entry.metadata else nil)
 				
-				if fFlagExpChatUseChannelTabsStore and var6 and (not getFFlagExpChatSuppressWelcomeMessageTabUnread() or not shouldSuppressUnreadForTabMetadataModule(status.metadata)) then
-					var6.markChannelUnread(b)
-				elseif fFlagExpChatUnreadTabIndicatorV2WindowModule then
-					var4:dispatch(markChannelUnreadForSystemMessageModule(status_1, b, if getFFlagExpChatSuppressWelcomeMessageTabUnread() then status.metadata else nil))
+				if FFlagExpChatUseChannelTabsStore and ChannelTabsStoreModule and (not GetFFlagExpChatSuppressWelcomeMessageTabUnreadFunction() or not ShouldSuppressUnreadForTabMetadataModule(Entry.metadata)) then
+					ChannelTabsStoreModule.markChannelUnread(ChannelNameOverride)
+				elseif FFlagExpChatUnreadTabIndicatorV2WindowModule then
+					StoreModule:dispatch(MarkChannelUnreadForSystemMessageModule(Result, ChannelNameOverride, if GetFFlagExpChatSuppressWelcomeMessageTabUnreadFunction() then Entry.metadata else nil))
 				end
 			else
-				local defaultSystemTextChannel = p4.defaultSystemTextChannel
+				local DefaultSystemTextChannel = JoinResult.defaultSystemTextChannel
 				
-				if b then
-					local var13 = textChatService:FindFirstChild(b)
+				if ChannelNameOverride then
+					local ChannelNameOverride1 = TextChatService:FindFirstChild(ChannelNameOverride)
 					
-					if var13 and var13:IsA("TextChannel") then
-						defaultSystemTextChannel = var13
+					if ChannelNameOverride1 and ChannelNameOverride1:IsA("TextChannel") then
+						DefaultSystemTextChannel = ChannelNameOverride1
 					end
 				end
-				displaySystemMessageModule(status.key, nil, status.metadata, p4.translator, defaultSystemTextChannel)
+				DisplaySystemMessageModule(Entry.key, nil, Entry.metadata, JoinResult.translator, DefaultSystemTextChannel)
 			end
 		end
-		if shouldSendHighFrequencyTelemetryModule(expChatMessageResponseUserSamplePermyriad) then
-			analytics:TelemetryLogEvent(t, { messageStatus = a.Status.Name }, {
+		if ShouldSendHighFrequencyTelemetryModule(ExpChatMessageResponseUserSamplePermyriad) then
+			Analytics:TelemetryLogEvent(config, { messageStatus = TextChatMessage.Status.Name }, {
 				"addOsInfo",
 				"addSessionId",
 				"addUniverseId",
@@ -599,126 +628,132 @@ return function(p4)
 		end
 	end
 	
-	local function _(a, b)
-		-- upvalues: _processIncomingMessageCore (ref)
-		_processIncomingMessageCore(a, b, nil)
+	local _ = function(p2, ChildName) --[[ Line: 760 | Named "processIncomingMessage" ]]
+		-- upvalues: _processIncomingMessageCore (copy)
+		_processIncomingMessageCore(p2, ChildName, nil)
 	end
 	
-	local _ = function(a, b)
-		-- upvalues: _processIncomingMessageCore (ref)
-		_processIncomingMessageCore(a, b and b.channelNameOverride, b and b.isUniverseChat)
+	local _ = function(p2, p3) --[[ Line: 766 | Named "processIncomingMessageWithOptions" ]]
+		-- upvalues: _processIncomingMessageCore (copy)
+		_processIncomingMessageCore(p2, p3 and p3.channelNameOverride, p3 and p3.isUniverseChat)
 	end
 	
-	local function handleMessageReceived(p5)
-		-- upvalues: var4 (ref), textChannelCreated (copy), textChatService (copy), getNameColorModule (copy), getFFlagExpChatProtectedChatInternalAPIs (copy), var2 (copy), playersService (copy), expChatRemoveSpaceFromTeamPrefix (copy), localPlayer (ref), getOtherDisplayNameInWhisperChannelModule (copy), p4 (write), shouldSkipHistoricalMessageModule (copy), getFFlagTextChatEnableUniverseChatTabs (copy), _processIncomingMessageCore (ref), expChatPerfTracker (copy), fFlagExpChatPerfTrackerTabName (copy), selectSelectedTabNameModule (copy), reportMessageReceivedModule (copy), handleChannelWelcomeMessageModule (copy), showWelcomeSystemMessage (ref), var5 (ref), getTransparencyStoreModule (copy), fFlagExpChatUseChannelTabsStore (copy), var6 (ref), fFlagExpChatUnreadTabIndicatorV2WindowModule (copy), markChannelUnreadForIncomingMessageModule (copy), displaySystemMessageModule (copy), shouldSendHighFrequencyTelemetryModule (copy), expChatMessageResponseUserSamplePermyriad (copy), analytics (copy), t (copy)
-		var4:dispatch(textChannelCreated(p5))
-		local enabled = false
-		local channelTabsConfiguration = textChatService:FindFirstChildOfClass("ChannelTabsConfiguration")
+	local function handleMessageReceived(p2) --[[ Line: 774 ]]
+		-- upvalues: StoreModule (copy), TextChannelCreatedFunction (upval), TextChatService (upval), GetNameColorModule (upval), GetFFlagExpChatProtectedChatInternalAPIsFunction (upval), NewResult (upval), Players (upval), ExpChatRemoveSpaceFromTeamPrefix (upval), LocalPlayer (copy), GetOtherDisplayNameInWhisperChannelModule (upval), JoinResult (ref), ShouldSkipHistoricalMessageModule (upval), FFlagExpChatDictationContinuousSafetyReminder (upval), DictationSafetyReminderModule (upval), GetFFlagTextChatEnableUniverseChatTabsFunction (upval), _processIncomingMessageCore (copy), ExpChatPerfTracker (upval), FFlagExpChatPerfTrackerTabName (upval), SelectSelectedTabNameModule (upval), ReportMessageReceivedModule (upval), HandleChannelWelcomeMessageModule (upval), showWelcomeSystemMessage (copy), MessagesStoreModule (copy), GetTransparencyStoreModule (upval), FFlagExpChatUseChannelTabsStore (upval), ChannelTabsStoreModule (copy), FFlagExpChatUnreadTabIndicatorV2WindowModule (upval), MarkChannelUnreadForIncomingMessageModule (upval), DisplaySystemMessageModule (upval), ShouldSendHighFrequencyTelemetryModule (upval), ExpChatMessageResponseUserSamplePermyriad (upval), Analytics (upval), config (upval)
+		StoreModule:dispatch(TextChannelCreatedFunction(p2))
+		local Enabled = false
+		local ChannelTabsConfiguration = TextChatService:FindFirstChildOfClass("ChannelTabsConfiguration")
 		
-		if channelTabsConfiguration then
-			enabled = channelTabsConfiguration.Enabled
+		if ChannelTabsConfiguration then
+			Enabled = ChannelTabsConfiguration.Enabled
 		end
-		if string.find(p5.Name, "RBXGeneral") then
-			function p5.OnIncomingMessage(p6)
-				-- upvalues: getNameColorModule (copy), getFFlagExpChatProtectedChatInternalAPIs (copy)
-				local textChatMessageProperties = Instance.new("TextChatMessageProperties")
+		if string.find(p2.Name, "RBXGeneral") then
+			function p2.OnIncomingMessage(TextChatMessage) --[[ Line: 784 ]]
+				-- upvalues: GetNameColorModule (upval), GetFFlagExpChatProtectedChatInternalAPIsFunction (upval)
+				local TextChatMessageProperties = Instance.new("TextChatMessageProperties")
 				
-				if p6.TextSource then
-					local var10 = getNameColorModule(p6.TextSource.UserId)
+				if TextChatMessage.TextSource then
+					local NameColorModule = GetNameColorModule(TextChatMessage.TextSource.UserId)
 					
-					if not p6.ChatWindowMessageProperties then
-						textChatMessageProperties.PrefixText = string.format("<font color=\"#%s\">%s</font>", var10:ToHex(), if getFFlagExpChatProtectedChatInternalAPIs() then p6.PrefixTextInternal else p6.PrefixText)
+					if not TextChatMessage.ChatWindowMessageProperties then
+						TextChatMessageProperties.PrefixText = string.format("<font color=\"#%s\">%s</font>", NameColorModule:ToHex(), if GetFFlagExpChatProtectedChatInternalAPIsFunction() then TextChatMessage.PrefixTextInternal else TextChatMessage.PrefixText)
 					end
 				end
-				return textChatMessageProperties
+				return TextChatMessageProperties
 			end
-		elseif string.find(p5.Name, "^RBXTeam") then
-			function p5.OnIncomingMessage(p6)
-				-- upvalues: getFFlagExpChatProtectedChatInternalAPIs (copy), var2 (copy), playersService (copy), expChatRemoveSpaceFromTeamPrefix (copy), enabled (write)
-				local var10 = if getFFlagExpChatProtectedChatInternalAPIs() then p6.PrefixTextInternal else p6.PrefixText
+		elseif string.find(p2.Name, "^RBXTeam") then
+			function p2.OnIncomingMessage(TextChatMessage) --[[ Line: 801 ]]
+				-- upvalues: GetFFlagExpChatProtectedChatInternalAPIsFunction (upval), NewResult (upval), Players (upval), ExpChatRemoveSpaceFromTeamPrefix (upval), Enabled (ref)
+				local PrefixTextInternal = if GetFFlagExpChatProtectedChatInternalAPIsFunction() then TextChatMessage.PrefixTextInternal else TextChatMessage.PrefixText
 				
-				if getFFlagExpChatProtectedChatInternalAPIs() then
-					var2:trace("Team OnIncomingMessage started: PrefixTextInternal: {} TextInternal: {}", var10, p6.TextInternal)
+				if GetFFlagExpChatProtectedChatInternalAPIsFunction() then
+					NewResult:trace("Team OnIncomingMessage started: PrefixTextInternal: {} TextInternal: {}", PrefixTextInternal, TextChatMessage.TextInternal)
 				else
-					var2:trace("Team OnIncomingMessage started: {} {}", var10, p6.Text)
+					NewResult:trace("Team OnIncomingMessage started: {} {}", PrefixTextInternal, TextChatMessage.Text)
 				end
-				local textChatMessageProperties = Instance.new("TextChatMessageProperties")
+				local TextChatMessageProperties = Instance.new("TextChatMessageProperties")
 				
-				if playersService.LocalPlayer then
-					textChatMessageProperties.PrefixText = string.format("<font color=\"#%s\">%s%s</font>", playersService.LocalPlayer.TeamColor.Color:ToHex(), if expChatRemoveSpaceFromTeamPrefix then if enabled then "" elseif #(var10 or "") > 0 then "[Team] " else "[Team]" elseif enabled then "" else "[Team] ", var10)
+				if Players.LocalPlayer then
+					TextChatMessageProperties.PrefixText = string.format("<font color=\"#%s\">%s%s</font>", Players.LocalPlayer.TeamColor.Color:ToHex(), if ExpChatRemoveSpaceFromTeamPrefix then if Enabled then "" elseif #(PrefixTextInternal or "") > 0 then "[Team] " else "[Team]" elseif Enabled then "" else "[Team] ", PrefixTextInternal)
 				end
-				var2:trace("Team OnIncomingMessage finished: {} {}", textChatMessageProperties.PrefixText, textChatMessageProperties.Text)
+				NewResult:trace("Team OnIncomingMessage finished: {} {}", TextChatMessageProperties.PrefixText, TextChatMessageProperties.Text)
 				
-				return textChatMessageProperties
+				return TextChatMessageProperties
 			end
-		elseif string.find(p5.Name, "^RBXWhisper") and localPlayer then
-			function p5.OnIncomingMessage(p6)
-				-- upvalues: getOtherDisplayNameInWhisperChannelModule (copy), p5 (ref), localPlayer (copy), enabled (write), p4 (copy), getNameColorModule (copy), getFFlagExpChatProtectedChatInternalAPIs (copy)
-				local textSource = p6.TextSource
+		elseif string.find(p2.Name, "^RBXWhisper") and LocalPlayer then
+			function p2.OnIncomingMessage(TextChatMessage) --[[ Line: 838 ]]
+				-- upvalues: GetOtherDisplayNameInWhisperChannelModule (upval), p2 (copy), LocalPlayer (upval), Enabled (ref), JoinResult (upval), GetNameColorModule (upval), GetFFlagExpChatProtectedChatInternalAPIsFunction (upval)
+				local TextSource = TextChatMessage.TextSource
 				
-				if textSource then
-					local var10 = getOtherDisplayNameInWhisperChannelModule(p5, localPlayer)
+				if TextSource then
+					local OtherDisplayNameInWhisperChannelModule = GetOtherDisplayNameInWhisperChannelModule(p2, LocalPlayer)
 					
-					if not var10 then
-						return nil
+					if OtherDisplayNameInWhisperChannelModule then
+						local CoreScriptsTextChatWhisperChatPrefixTextOutgoing = if Enabled then nil elseif TextSource.UserId == LocalPlayer.UserId then JoinResult.translator:FormatByKey("CoreScripts.TextChat.WhisperChat.PrefixText.Outgoing", { RBX_NAME = OtherDisplayNameInWhisperChannelModule }) else JoinResult.translator:FormatByKey("CoreScripts.TextChat.WhisperChat.PrefixText.Incoming", { RBX_NAME = OtherDisplayNameInWhisperChannelModule })
+						local TextChatMessageProperties = Instance.new("TextChatMessageProperties")
+						TextChatMessageProperties.PrefixText = string.format("%s<font color=\"#%s\">%s</font>", if CoreScriptsTextChatWhisperChatPrefixTextOutgoing then CoreScriptsTextChatWhisperChatPrefixTextOutgoing .. " " else "", GetNameColorModule(TextSource.UserId):ToHex(), if GetFFlagExpChatProtectedChatInternalAPIsFunction() then TextChatMessage.PrefixTextInternal else TextChatMessage.PrefixText)
+						
+						return TextChatMessageProperties
 					end
-					local var11 = if not enabled then if textSource.UserId == localPlayer.UserId then p4.translator:FormatByKey("CoreScripts.TextChat.WhisperChat.PrefixText.Outgoing", { RBX_NAME = var10 }) else p4.translator:FormatByKey("CoreScripts.TextChat.WhisperChat.PrefixText.Incoming", { RBX_NAME = var10 }) else nil
-					local textChatMessageProperties = Instance.new("TextChatMessageProperties")
-					textChatMessageProperties.PrefixText = string.format("%s<font color=\"#%s\">%s</font>", if var11 then var11 .. " " else "", getNameColorModule(textSource.UserId):ToHex(), if getFFlagExpChatProtectedChatInternalAPIs() then p6.PrefixTextInternal else p6.PrefixText)
-					
-					return textChatMessageProperties
 				end
+				return nil
 			end
 		end
-		p5.MessageReceived:Connect(function(p6)
-			-- upvalues: shouldSkipHistoricalMessageModule (copy), getFFlagTextChatEnableUniverseChatTabs (copy), _processIncomingMessageCore (copy), getFFlagExpChatProtectedChatInternalAPIs (copy), var2 (copy), localPlayer (copy), expChatPerfTracker (copy), fFlagExpChatPerfTrackerTabName (copy), selectSelectedTabNameModule (copy), var4 (copy), reportMessageReceivedModule (copy), handleChannelWelcomeMessageModule (copy), showWelcomeSystemMessage (copy), var5 (copy), getTransparencyStoreModule (copy), fFlagExpChatUseChannelTabsStore (copy), var6 (copy), fFlagExpChatUnreadTabIndicatorV2WindowModule (copy), markChannelUnreadForIncomingMessageModule (copy), displaySystemMessageModule (copy), p4 (copy), shouldSendHighFrequencyTelemetryModule (copy), expChatMessageResponseUserSamplePermyriad (copy), analytics (copy), t (copy)
-			if shouldSkipHistoricalMessageModule(p6) then return end
-			if getFFlagTextChatEnableUniverseChatTabs() then
-				_processIncomingMessageCore(p6, nil, nil)
+		p2.MessageReceived:Connect(function(TextChatMessage) --[[ Line: 877 ]]
+			-- upvalues: ShouldSkipHistoricalMessageModule (upval), FFlagExpChatDictationContinuousSafetyReminder (upval), DictationSafetyReminderModule (upval), GetFFlagTextChatEnableUniverseChatTabsFunction (upval), _processIncomingMessageCore (upval), GetFFlagExpChatProtectedChatInternalAPIsFunction (upval), NewResult (upval), LocalPlayer (upval), ExpChatPerfTracker (upval), FFlagExpChatPerfTrackerTabName (upval), SelectSelectedTabNameModule (upval), StoreModule (upval), ReportMessageReceivedModule (upval), HandleChannelWelcomeMessageModule (upval), showWelcomeSystemMessage (upval), MessagesStoreModule (upval), GetTransparencyStoreModule (upval), FFlagExpChatUseChannelTabsStore (upval), ChannelTabsStoreModule (upval), FFlagExpChatUnreadTabIndicatorV2WindowModule (upval), MarkChannelUnreadForIncomingMessageModule (upval), DisplaySystemMessageModule (upval), JoinResult (upval), ShouldSendHighFrequencyTelemetryModule (upval), ExpChatMessageResponseUserSamplePermyriad (upval), Analytics (upval), config (upval)
+			if ShouldSkipHistoricalMessageModule(TextChatMessage) then return end
+			if FFlagExpChatDictationContinuousSafetyReminder then
+				DictationSafetyReminderModule.onIncomingMessage(TextChatMessage)
+			end
+			if GetFFlagTextChatEnableUniverseChatTabsFunction() then
+				_processIncomingMessageCore(TextChatMessage, nil, nil)
 				
 				return
-			elseif getFFlagExpChatProtectedChatInternalAPIs() then
-				var2:debug("Incoming MessageReceived Status: {} TextInternal: {}", p6.Status.Name, p6.TextInternal)
+			end
+			if GetFFlagExpChatProtectedChatInternalAPIsFunction() then
+				NewResult:debug("Incoming MessageReceived Status: {} TextInternal: {}", TextChatMessage.Status.Name, TextChatMessage.TextInternal)
 			else
-				var2:debug("Incoming MessageReceived Status: {} Text: {}", p6.Status.Name, p6.Text)
+				NewResult:debug("Incoming MessageReceived Status: {} Text: {}", TextChatMessage.Status.Name, TextChatMessage.Text)
 			end
-			if (if p6.TextSource then p6.TextSource.UserId else "UNKNOWN_TEXT_SOURCE_USER_ID") ~= (if localPlayer then localPlayer.UserId else "UNKNOWN_LOCAL_USER_ID") then
-				expChatPerfTracker.start(expChatPerfTracker.Events.MessageReceiveToWindowRenderInterval, { messageId = p6.MessageId }, if fFlagExpChatPerfTrackerTabName then { tabName = selectSelectedTabNameModule(var4:getState()) } else nil)
+			if (TextChatMessage.TextSource and TextChatMessage.TextSource.UserId or "UNKNOWN_TEXT_SOURCE_USER_ID") ~= (LocalPlayer and LocalPlayer.UserId or "UNKNOWN_LOCAL_USER_ID") then
+				ExpChatPerfTracker.start(ExpChatPerfTracker.Events.MessageReceiveToWindowRenderInterval, { messageId = TextChatMessage.MessageId }, if FFlagExpChatPerfTrackerTabName then {
+					tabName = SelectSelectedTabNameModule(StoreModule:getState())
+				} else nil)
 			end
-			if localPlayer then
-				reportMessageReceivedModule(localPlayer.UserId, p6)
+			if LocalPlayer then
+				ReportMessageReceivedModule(LocalPlayer.UserId, TextChatMessage)
 			end
-			if localPlayer and p6.TextSource and p6.TextSource.UserId ~= localPlayer.UserId then
-				local var10 = handleChannelWelcomeMessageModule(p6, localPlayer)
+			if LocalPlayer and TextChatMessage.TextSource and TextChatMessage.TextSource.UserId ~= LocalPlayer.UserId then
+				local HandleChannelWelcomeMessageModuleResult = HandleChannelWelcomeMessageModule(TextChatMessage, LocalPlayer)
 				
-				if var10 then
-					showWelcomeSystemMessage(var10, p6.TextChannel)
+				if HandleChannelWelcomeMessageModuleResult then
+					showWelcomeSystemMessage(HandleChannelWelcomeMessageModuleResult, TextChatMessage.TextChannel)
 				end
 			end
-			local var11 = localPlayer and (p6.TextSource and p6.TextSource.UserId == localPlayer.UserId)
-			var5.handleIncomingOrOutgoingMessage(p6, var11)
-			getTransparencyStoreModule(false).resetTextTransparency()
+			local IsUserIdMatch: boolean = LocalPlayer and (TextChatMessage.TextSource and TextChatMessage.TextSource.UserId == LocalPlayer.UserId)
+			MessagesStoreModule.handleIncomingOrOutgoingMessage(TextChatMessage, IsUserIdMatch)
+			GetTransparencyStoreModule(false).resetTextTransparency()
 			
-			if fFlagExpChatUseChannelTabsStore and var6 then
-				var6.handleIncomingOrOutgoingMessage(p6, var11)
-			elseif fFlagExpChatUnreadTabIndicatorV2WindowModule then
-				var4:dispatch(markChannelUnreadForIncomingMessageModule(p6, var11))
+			if FFlagExpChatUseChannelTabsStore and ChannelTabsStoreModule then
+				ChannelTabsStoreModule.handleIncomingOrOutgoingMessage(TextChatMessage, IsUserIdMatch)
+			elseif FFlagExpChatUnreadTabIndicatorV2WindowModule then
+				StoreModule:dispatch(MarkChannelUnreadForIncomingMessageModule(TextChatMessage, IsUserIdMatch))
 			end
-			if p6.Status == Enum.TextChatMessageStatus.Floodchecked then
-				displaySystemMessageModule("CoreScripts.TextChat.MessageStatus.Warning.Floodchecked", nil, "Roblox.MessageStatus.Warning.Floodchecked", p4.translator, p4.defaultSystemTextChannel)
-			elseif p6.Status == Enum.TextChatMessageStatus.TextFilterFailed then
-				displaySystemMessageModule("CoreScripts.TextChat.MessageStatus.Warning.TextFilterFailed", nil, "Roblox.MessageStatus.Warning.TextFilterFailed", p4.translator, p4.defaultSystemTextChannel)
-			elseif p6.Status == Enum.TextChatMessageStatus.InvalidPrivacySettings then
-				displaySystemMessageModule("CoreScripts.TextChat.MessageStatus.Warning.InvalidPrivacySettings", nil, "Roblox.MessageStatus.Warning.InvalidPrivacySettings", p4.translator, p4.defaultSystemTextChannel)
-			elseif p6.Status == Enum.TextChatMessageStatus.MessageTooLong then
-				displaySystemMessageModule("CoreScripts.TextChat.MessageStatus.Warning.MessageTooLong", nil, "Roblox.MessageStatus.Warning.MessageTooLong", p4.translator, p4.defaultSystemTextChannel)
-			elseif p6.Status == Enum.TextChatMessageStatus.ModerationTimeout then
-				displaySystemMessageModule("CoreScripts.TextChat.MessageStatus.Warning.ModerationTimeout", nil, "Roblox.MessageStatus.Warning.ModerationTimeout", p4.translator, p4.defaultSystemTextChannel)
-			elseif p6.Status == Enum.TextChatMessageStatus.Unknown then
-				displaySystemMessageModule("CoreScripts.TextChat.MessageStatus.Warning.Unknown", nil, "Roblox.MessageStatus.Warning.Unknown", p4.translator, p4.defaultSystemTextChannel)
+			if TextChatMessage.Status == Enum.TextChatMessageStatus.Floodchecked then
+				DisplaySystemMessageModule("CoreScripts.TextChat.MessageStatus.Warning.Floodchecked", nil, "Roblox.MessageStatus.Warning.Floodchecked", JoinResult.translator, JoinResult.defaultSystemTextChannel)
+			elseif TextChatMessage.Status == Enum.TextChatMessageStatus.TextFilterFailed then
+				DisplaySystemMessageModule("CoreScripts.TextChat.MessageStatus.Warning.TextFilterFailed", nil, "Roblox.MessageStatus.Warning.TextFilterFailed", JoinResult.translator, JoinResult.defaultSystemTextChannel)
+			elseif TextChatMessage.Status == Enum.TextChatMessageStatus.InvalidPrivacySettings then
+				DisplaySystemMessageModule("CoreScripts.TextChat.MessageStatus.Warning.InvalidPrivacySettings", nil, "Roblox.MessageStatus.Warning.InvalidPrivacySettings", JoinResult.translator, JoinResult.defaultSystemTextChannel)
+			elseif TextChatMessage.Status == Enum.TextChatMessageStatus.MessageTooLong then
+				DisplaySystemMessageModule("CoreScripts.TextChat.MessageStatus.Warning.MessageTooLong", nil, "Roblox.MessageStatus.Warning.MessageTooLong", JoinResult.translator, JoinResult.defaultSystemTextChannel)
+			elseif TextChatMessage.Status == Enum.TextChatMessageStatus.ModerationTimeout then
+				DisplaySystemMessageModule("CoreScripts.TextChat.MessageStatus.Warning.ModerationTimeout", nil, "Roblox.MessageStatus.Warning.ModerationTimeout", JoinResult.translator, JoinResult.defaultSystemTextChannel)
+			elseif TextChatMessage.Status == Enum.TextChatMessageStatus.Unknown then
+				DisplaySystemMessageModule("CoreScripts.TextChat.MessageStatus.Warning.Unknown", nil, "Roblox.MessageStatus.Warning.Unknown", JoinResult.translator, JoinResult.defaultSystemTextChannel)
 			end
-			if shouldSendHighFrequencyTelemetryModule(expChatMessageResponseUserSamplePermyriad) then
-				analytics:TelemetryLogEvent(t, { messageStatus = p6.Status.Name }, {
+			if ShouldSendHighFrequencyTelemetryModule(ExpChatMessageResponseUserSamplePermyriad) then
+				Analytics:TelemetryLogEvent(config, { messageStatus = TextChatMessage.Status.Name }, {
 					"addOsInfo",
 					"addSessionId",
 					"addUniverseId",
@@ -728,173 +763,176 @@ return function(p4)
 		end)
 	end
 	
-	local _ = function(p5)
-		-- upvalues: analytics (copy)
-		p5.Triggered:Connect(function()
-			-- upvalues: analytics (copy), p5 (ref)
-			analytics.FireClientAnalyticsWithEventName("CommandSent", { commandName = p5.Name })
+	local _ = function(Prompt) --[[ Line: 1006 | Named "watchTextChatCommand" ]]
+		-- upvalues: Analytics (upval)
+		Prompt.Triggered:Connect(function() --[[ Line: 1007 ]]
+			-- upvalues: Analytics (upval), Prompt (copy)
+			Analytics.FireClientAnalyticsWithEventName("CommandSent", { commandName = Prompt.Name })
 		end)
 	end
 	
-	for i, v in pairs(textChatService:GetDescendants()) do
-		if v:IsA("TextChannel") then
-			handleMessageReceived(v)
-		elseif v:IsA("TextChatCommand") then
-			v.Triggered:Connect(function()
-				-- upvalues: analytics (copy), v (ref)
-				analytics.FireClientAnalyticsWithEventName("CommandSent", { commandName = v.Name })
+	for _, descendant in pairs(TextChatService:GetDescendants()) do
+		if descendant:IsA("TextChannel") then
+			handleMessageReceived(descendant)
+		elseif descendant:IsA("TextChatCommand") then
+			descendant.Triggered:Connect(function() --[[ Line: 1007 ]]
+				-- upvalues: Analytics (upval), descendant (copy)
+				Analytics.FireClientAnalyticsWithEventName("CommandSent", { commandName = descendant.Name })
 			end)
 		end
 	end
-	local var10 = false
-	local var11 = false
-	local t_4 = {}
-	local var12 = false
+	local IsEnabled = false
+	local Flag = false
+	local t = {}
+	local Flag1 = false
 	
-	local _ = function()
-		-- upvalues: expChatNewSystemMessagesExperimentation (copy), var12 (write)
-		if expChatNewSystemMessagesExperimentation.isExperimentEnabled and not var12 then
-			var12 = true
-			expChatNewSystemMessagesExperimentation.logExposure()
+	local _ = function() --[[ Line: 1027 | Named "tryLogExposureNewSystemMessages" ]]
+		-- upvalues: ExpChatNewSystemMessagesExperimentation (upval), Flag1 (ref)
+		if ExpChatNewSystemMessagesExperimentation.isExperimentEnabled and not Flag1 then
+			Flag1 = true
+			ExpChatNewSystemMessagesExperimentation.logExposure()
 			
 			return
 		end
 	end
 	
-	local function postProcessSummarySystemMessage(p5)
-		-- upvalues: summaryMessageRichTextModule (copy)
-		return summaryMessageRichTextModule.wrapInSummaryMutedStyle(`{summaryMessageRichTextModule.getSummaryIconPrefix()} {p5}`)
+	local function postProcessSummarySystemMessage(p2) --[[ Line: 1036 ]]
+		-- upvalues: SummaryMessageRichTextModule (upval)
+		return SummaryMessageRichTextModule.wrapInSummaryMutedStyle(`{SummaryMessageRichTextModule.getSummaryIconPrefix()} {p2}`)
 	end
 	
-	local function tryShowSummarySystemMessageOnChannel(p5)
-		-- upvalues: var10 (write), t_4 (ref), expChatNewSystemMessagesExperimentation (copy), var12 (write), var7 (ref), p4 (write), writeVirtualSystemMessageModule (copy), t_2 (ref), postProcessSummarySystemMessage (ref), displaySystemMessageModule (copy)
-		if not p5 then return end
-		if not var10 then return end
-		if t_4[p5.Name] then return end
-		if p5.Name ~= "RBXGeneral" then return end
-		t_4[p5.Name] = true
+	local function tryShowSummarySystemMessageOnChannel(TextChannel) --[[ Line: 1042 ]]
+		-- upvalues: IsEnabled (ref), t (copy), ExpChatNewSystemMessagesExperimentation (upval), Flag1 (ref), HasMessagesStoreModule (copy), JoinResult (ref), WriteVirtualSystemMessageModule (upval), config2 (copy), postProcessSummarySystemMessage (copy), DisplaySystemMessageModule (upval)
+		if not TextChannel then return end
+		if not IsEnabled then return end
+		if t[TextChannel.Name] then return end
+		if TextChannel.Name ~= "RBXGeneral" then return end
+		t[TextChannel.Name] = true
 		
-		if expChatNewSystemMessagesExperimentation.isExperimentEnabled and expChatNewSystemMessagesExperimentation.isExperimentEnabled and not var12 then
-			var12 = true
-			expChatNewSystemMessagesExperimentation.logExposure()
+		if ExpChatNewSystemMessagesExperimentation.isExperimentEnabled and ExpChatNewSystemMessagesExperimentation.isExperimentEnabled and not Flag1 then
+			Flag1 = true
+			ExpChatNewSystemMessagesExperimentation.logExposure()
 		end
-		if not var7 then
-			displaySystemMessageModule(if expChatNewSystemMessagesExperimentation.getNewSystemMessagesEnabled() then "CoreScripts.TextChat.Description.RobloxSummarizesMessagesFromAllPlayers" else "CoreScripts.TextChat.ChatWindow.SummarySystemMessage", nil, "Roblox.Summary.Info", p4.translator, p5, if expChatNewSystemMessagesExperimentation.getNewSystemMessagesEnabled() then "Roblox summarizes messages from players of all ages." else "Roblox auto-generates summaries of players' messages.", postProcessSummarySystemMessage)
+		if not HasMessagesStoreModule then
+			DisplaySystemMessageModule(if ExpChatNewSystemMessagesExperimentation.getNewSystemMessagesEnabled() then "CoreScripts.TextChat.Description.RobloxSummarizesMessagesFromAllPlayers" else "CoreScripts.TextChat.ChatWindow.SummarySystemMessage", nil, "Roblox.Summary.Info", JoinResult.translator, TextChannel, if ExpChatNewSystemMessagesExperimentation.getNewSystemMessagesEnabled() then "Roblox summarizes messages from players of all ages." else "Roblox auto-generates summaries of players' messages.", postProcessSummarySystemMessage)
 			
 			return
 		end
-		local newSystemMessagesEnabled = expChatNewSystemMessagesExperimentation.getNewSystemMessagesEnabled()
-		local var13 = if newSystemMessagesEnabled then "CoreScripts.TextChat.Description.RobloxSummarizesMessagesFromAllPlayers" else "CoreScripts.TextChat.ChatWindow.SummarySystemMessage"
-		local var14 = if newSystemMessagesEnabled then "Roblox summarizes messages from players of all ages." else "Roblox auto-generates summaries of players' messages."
-		local ok, status = pcall(function()
-			-- upvalues: p4 (copy), var13 (ref)
-			return p4.translator:FormatByKey(var13)
+		local NewSystemMessagesEnabled = ExpChatNewSystemMessagesExperimentation.getNewSystemMessagesEnabled()
+		local CoreScriptsTextChatDescriptionRobloxSummarizesMessagesFromAllPlayers: string = if NewSystemMessagesEnabled then "CoreScripts.TextChat.Description.RobloxSummarizesMessagesFromAllPlayers" else "CoreScripts.TextChat.ChatWindow.SummarySystemMessage"
+		local RobloxSummarizesMessagesFromPlayersOfAllAges: string = if NewSystemMessagesEnabled then "Roblox summarizes messages from players of all ages." else "Roblox auto-generates summaries of players' messages."
+		local Success, Result = pcall(function() --[[ Line: 1072 ]]
+			-- upvalues: JoinResult (upval), CoreScriptsTextChatDescriptionRobloxSummarizesMessagesFromAllPlayers (copy)
+			return JoinResult.translator:FormatByKey(CoreScriptsTextChatDescriptionRobloxSummarizesMessagesFromAllPlayers)
 		end)
 		
-		if not ok or type(status) ~= "string" or status == "" then
-			status = var14
+		if not Success or type(Result) ~= "string" or Result == "" then
+			Result = RobloxSummarizesMessagesFromPlayersOfAllAges
 		end
-		writeVirtualSystemMessageModule(t_2, {
+		WriteVirtualSystemMessageModule(config2, {
 			metadata = "Roblox.Summary.Info",
-			text = status,
-			channelName = p5.Name,
+			text = Result,
+			channelName = TextChannel.Name,
 			postProcessMessage = postProcessSummarySystemMessage,
-			textChannel = p5
+			textChannel = TextChannel
 		})
 	end
 	
-	local function tryAddThirdPartySummaryGlobalSystemMessage()
-		-- upvalues: var11 (write), var10 (write), fFlagExpChatEnableGlobalChatSummarySystemMessageModule (copy), getFFlagTextChatEnableUniverseChatTabs (copy), textChatService (copy), p4 (write), expChatSuppressGlobalSummaryTabUnread (copy), var5 (ref), postProcessSummarySystemMessage (ref)
-		if var11 or not var10 or (not fFlagExpChatEnableGlobalChatSummarySystemMessageModule or not getFFlagTextChatEnableUniverseChatTabs()) or not textChatService:HasAllocatedUniverseChatContext("global") then
+	local function tryAddThirdPartySummaryGlobalSystemMessage() --[[ Line: 1102 ]]
+		-- upvalues: Flag (ref), IsEnabled (ref), FFlagExpChatEnableGlobalChatSummarySystemMessageModule (upval), GetFFlagTextChatEnableUniverseChatTabsFunction (upval), TextChatService (upval), JoinResult (ref), ExpChatSuppressGlobalSummaryTabUnread (upval), MessagesStoreModule (copy), postProcessSummarySystemMessage (copy)
+		if not Flag and IsEnabled and FFlagExpChatEnableGlobalChatSummarySystemMessageModule and GetFFlagTextChatEnableUniverseChatTabsFunction() and TextChatService:HasAllocatedUniverseChatContext("global") then
+			Flag = true
+			MessagesStoreModule.addSystemMessage(JoinResult.translator:FormatByKey("CoreScripts.TextChat.ChatWindow.SummarySystemMessage"), "RBXGlobal", if ExpChatSuppressGlobalSummaryTabUnread then "Roblox.Summary.GlobalChat" else nil, postProcessSummarySystemMessage)
+			
 			return
 		end
-		var11 = true
-		var5.addSystemMessage(p4.translator:FormatByKey("CoreScripts.TextChat.ChatWindow.SummarySystemMessage"), "RBXGlobal", if expChatSuppressGlobalSummaryTabUnread then "Roblox.Summary.GlobalChat" else nil, postProcessSummarySystemMessage)
 	end
 	
-	textChatService.DescendantAdded:Connect(function(p5)
-		-- upvalues: handleMessageReceived (ref), fFlagEnableInExpChatSummaryOnLuaModule (copy), fFlagEnableClientSummarySystemMessageOnLua (copy), tryShowSummarySystemMessageOnChannel (ref), analytics (copy)
-		if p5:IsA("TextChannel") then
-			handleMessageReceived(p5)
+	TextChatService.DescendantAdded:Connect(function(Descendant) --[[ Line: 1133 ]]
+		-- upvalues: handleMessageReceived (copy), FFlagEnableInExpChatSummaryOnLuaModule (upval), FFlagEnableClientSummarySystemMessageOnLua (upval), tryShowSummarySystemMessageOnChannel (copy), Analytics (upval)
+		if Descendant:IsA("TextChannel") then
+			handleMessageReceived(Descendant)
 			
-			if fFlagEnableInExpChatSummaryOnLuaModule and fFlagEnableClientSummarySystemMessageOnLua then
-				tryShowSummarySystemMessageOnChannel(p5)
+			if FFlagEnableInExpChatSummaryOnLuaModule and FFlagEnableClientSummarySystemMessageOnLua then
+				tryShowSummarySystemMessageOnChannel(Descendant)
 				
 				return
 			end
-		elseif p5:IsA("TextChatCommand") then
-			p5.Triggered:Connect(function()
-				-- upvalues: analytics (copy), p5 (ref)
-				analytics.FireClientAnalyticsWithEventName("CommandSent", { commandName = p5.Name })
+		elseif Descendant:IsA("TextChatCommand") then
+			Descendant.Triggered:Connect(function() --[[ Line: 1007 ]]
+				-- upvalues: Analytics (upval), Descendant (copy)
+				Analytics.FireClientAnalyticsWithEventName("CommandSent", { commandName = Descendant.Name })
 			end)
 		end
 	end)
-	textChatService.DescendantRemoving:Connect(function(p5)
-		-- upvalues: var4 (ref), textChannelRemoved (copy), fFlagExpChatUseChannelTabsStore (copy), var6 (ref)
-		if p5:IsA("TextChannel") then
-			var4:dispatch(textChannelRemoved(p5))
+	TextChatService.DescendantRemoving:Connect(function(Descendant) --[[ Line: 1144 ]]
+		-- upvalues: StoreModule (copy), TextChannelRemovedFunction (upval), FFlagExpChatUseChannelTabsStore (upval), ChannelTabsStoreModule (copy)
+		if Descendant:IsA("TextChannel") then
+			StoreModule:dispatch(TextChannelRemovedFunction(Descendant))
 			
-			if fFlagExpChatUseChannelTabsStore and var6 then
-				var6.handleChannelRemoved(p5.Name)
+			if FFlagExpChatUseChannelTabsStore and ChannelTabsStoreModule then
+				ChannelTabsStoreModule.handleChannelRemoved(Descendant.Name)
 			end
 		end
 	end)
 	
-	if fFlagEnableInExpChatSummaryOnLuaModule then
-		textChatService.ChatActionReceived:Connect(function(p5)
-			-- upvalues: getFFlagExpChatProtectedChatInternalAPIs (copy), var2 (copy), textChatMessageChatActionTypeModule (copy), fFlagEnableGlobalChat3pSummaryLuaAppsModule (copy), _processIncomingMessageCore (ref)
-			if getFFlagExpChatProtectedChatInternalAPIs() then
-				var2:debug("Incoming ChatActionReceived ChatActionType: {}, TextInternal: {}", p5.ChatActionType, p5.TextInternal)
+	if FFlagEnableInExpChatSummaryOnLuaModule then
+		TextChatService.ChatActionReceived:Connect(function(ChatActionMessage) --[[ Line: 1155 ]]
+			-- upvalues: GetFFlagExpChatProtectedChatInternalAPIsFunction (upval), NewResult (upval), TextChatMessageChatActionTypeModule (upval), FFlagEnableGlobalChat3pSummaryLuaAppsModule (upval), _processIncomingMessageCore (copy)
+			if GetFFlagExpChatProtectedChatInternalAPIsFunction() then
+				NewResult:debug("Incoming ChatActionReceived ChatActionType: {}, TextInternal: {}", ChatActionMessage.ChatActionType, ChatActionMessage.TextInternal)
 			else
-				var2:debug("Incoming ChatActionReceived ChatActionType: {}, Text: {}", p5.ChatActionType, p5.Text)
+				NewResult:debug("Incoming ChatActionReceived ChatActionType: {}, Text: {}", ChatActionMessage.ChatActionType, ChatActionMessage.Text)
 			end
-			if p5.ChatActionType ~= textChatMessageChatActionTypeModule.Summary then
-				var2:error("Unknown ChatActionType: {}", p5.ChatActionType)
-				
-				return
-			elseif fFlagEnableGlobalChat3pSummaryLuaAppsModule then
-				local var13 = if p5.TextChannel == nil then { channelNameOverride = "RBXGlobal", isUniverseChat = true } else nil
-				_processIncomingMessageCore(p5, var13 and var13.channelNameOverride, var13 and var13.isUniverseChat)
+			if ChatActionMessage.ChatActionType ~= TextChatMessageChatActionTypeModule.Summary then
+				NewResult:error("Unknown ChatActionType: {}", ChatActionMessage.ChatActionType)
 				
 				return
 			end
-			_processIncomingMessageCore(p5, nil, nil)
+			if FFlagEnableGlobalChat3pSummaryLuaAppsModule then
+				local Config = if ChatActionMessage.TextChannel == nil then { channelNameOverride = "RBXGlobal", isUniverseChat = true } else nil
+				_processIncomingMessageCore(ChatActionMessage, Config and Config.channelNameOverride, Config and Config.isUniverseChat)
+				
+				return
+			else
+				_processIncomingMessageCore(ChatActionMessage, nil, nil)
+			end
 		end)
 	end
-	if fFlagEnableInExpChatSummaryOnLuaModule or fFlagAIRephraseSettingEnabled or fFlagChatSummariesSettingEnabled then
-		coroutine.wrap(function()
-			-- upvalues: robloxReplicatedStorageService (copy), var2 (copy), localPlayer (ref), fFlagEnableClientSummarySystemMessageOnLua (copy), fFlagChatSummariesSettingEnabled (copy), var10 (write), textChatService (copy), tryShowSummarySystemMessageOnChannel (ref), tryAddThirdPartySummaryGlobalSystemMessage (ref), fFlagAIRephraseSettingEnabled (copy), getUserChatSettingsStoreModule (copy)
-			local expChatFeatureValueChanged = robloxReplicatedStorageService:WaitForChild("ExpChatFeatureValueChanged", 10)
+	if FFlagEnableInExpChatSummaryOnLuaModule or FFlagAIRephraseSettingEnabled or FFlagChatSummariesSettingEnabled then
+		coroutine.wrap(function() --[[ Line: 1190 ]]
+			-- upvalues: RobloxReplicatedStorage (upval), NewResult (upval), LocalPlayer (copy), FFlagEnableClientSummarySystemMessageOnLua (upval), FFlagChatSummariesSettingEnabled (upval), IsEnabled (ref), TextChatService (upval), tryShowSummarySystemMessageOnChannel (copy), tryAddThirdPartySummaryGlobalSystemMessage (copy), FFlagAIRephraseSettingEnabled (upval), GetUserChatSettingsStoreModule (upval)
+			local ExpChatFeatureValueChanged = RobloxReplicatedStorage:WaitForChild("ExpChatFeatureValueChanged", 10)
 			
-			if expChatFeatureValueChanged then
-				expChatFeatureValueChanged.OnClientEvent:Connect(function(p5, p6, p7)
-					-- upvalues: var2 (copy), localPlayer (copy), fFlagEnableClientSummarySystemMessageOnLua (copy), fFlagChatSummariesSettingEnabled (copy), var10 (copy), textChatService (copy), tryShowSummarySystemMessageOnChannel (copy), tryAddThirdPartySummaryGlobalSystemMessage (copy), fFlagAIRephraseSettingEnabled (copy), getUserChatSettingsStoreModule (copy)
-					var2:debug("Incoming ExpChatFeatureValueChanged userId: {}, featureName: {}, featureValue: {}", p5, p6, p7)
+			if ExpChatFeatureValueChanged then
+				ExpChatFeatureValueChanged.OnClientEvent:Connect(function(UserId, p2, p3) --[[ Line: 1193 ]]
+					-- upvalues: NewResult (upval), LocalPlayer (upval), FFlagEnableClientSummarySystemMessageOnLua (upval), FFlagChatSummariesSettingEnabled (upval), IsEnabled (upval), TextChatService (upval), tryShowSummarySystemMessageOnChannel (upval), tryAddThirdPartySummaryGlobalSystemMessage (upval), FFlagAIRephraseSettingEnabled (upval), GetUserChatSettingsStoreModule (upval)
+					NewResult:debug("Incoming ExpChatFeatureValueChanged userId: {}, featureName: {}, featureValue: {}", UserId, p2, p3)
 					
-					if localPlayer and p5 == localPlayer.UserId then
-						if fFlagEnableClientSummarySystemMessageOnLua and p6 == "EligibleForThirdPartySummary" and not fFlagChatSummariesSettingEnabled then
-							var10 = p7 == "true"
+					if LocalPlayer and UserId == LocalPlayer.UserId then
+						if FFlagEnableClientSummarySystemMessageOnLua and p2 == "EligibleForThirdPartySummary" and not FFlagChatSummariesSettingEnabled then
+							IsEnabled = p3 == "true"
 							
-							if var10 then
-								for i, v in textChatService:GetDescendants() do
-									if v:IsA("TextChannel") then
-										tryShowSummarySystemMessageOnChannel(v)
+							if IsEnabled then
+								for _, TextChannel in TextChatService:GetDescendants() do
+									if TextChannel:IsA("TextChannel") then
+										tryShowSummarySystemMessageOnChannel(TextChannel)
 									end
 								end
 								tryAddThirdPartySummaryGlobalSystemMessage()
 							end
 						end
-						if fFlagAIRephraseSettingEnabled and p6 == "AIRephraseSettingStatus" then
-							getUserChatSettingsStoreModule.updateExpChatFeatureValue(p6, p7)
+						if FFlagAIRephraseSettingEnabled and p2 == "AIRephraseSettingStatus" then
+							GetUserChatSettingsStoreModule.updateExpChatFeatureValue(p2, p3)
 						end
-						if fFlagChatSummariesSettingEnabled and p6 == "AllowThirdPartySummary" then
-							getUserChatSettingsStoreModule.updateExpChatFeatureValue(p6, p7)
-							var10 = p7 == "Enabled"
+						if FFlagChatSummariesSettingEnabled and p2 == "AllowThirdPartySummary" then
+							GetUserChatSettingsStoreModule.updateExpChatFeatureValue(p2, p3)
+							IsEnabled = p3 == "Enabled"
 							
-							if var10 then
-								for i, v in textChatService:GetDescendants() do
-									if v:IsA("TextChannel") then
-										tryShowSummarySystemMessageOnChannel(v)
+							if IsEnabled then
+								for _, TextChannel1 in TextChatService:GetDescendants() do
+									if TextChannel1:IsA("TextChannel") then
+										tryShowSummarySystemMessageOnChannel(TextChannel1)
 									end
 								end
 								tryAddThirdPartySummaryGlobalSystemMessage()
@@ -905,65 +943,107 @@ return function(p4)
 			end
 		end)()
 	end
-	textChatService.SendingMessage:Connect(function(p5)
-		-- upvalues: expChatPerfTracker (copy), fFlagExpChatPerfTrackerTabName (copy), selectSelectedTabNameModule (copy), var4 (ref), getFFlagExpChatProtectedChatInternalAPIs (copy), var2 (copy), localPlayer (ref), handleChannelWelcomeMessageModule (copy), showWelcomeSystemMessage (ref), var5 (ref), analytics (copy), countParticipantsInTextChannel (copy)
-		expChatPerfTracker.start(expChatPerfTracker.Events.MessageSendToWindowRenderInterval, { messageId = p5.MessageId }, if fFlagExpChatPerfTrackerTabName then { tabName = selectSelectedTabNameModule(var4:getState()) } else nil)
-		
-		if getFFlagExpChatProtectedChatInternalAPIs() then
-			var2:debug("Outgoing SendingMessage Status: {} TextInternal: {}", p5.Status.Name, p5.TextInternal)
-		else
-			var2:debug("Outgoing SendingMessage Status: {} Text: {}", p5.Status.Name, p5.Text)
-		end
-		if localPlayer then
-			local var13 = handleChannelWelcomeMessageModule(p5, localPlayer)
-			
-			if var13 and var13.key then
-				showWelcomeSystemMessage(var13, p5.TextChannel)
+	local function markChannelsUnreadForKeptHistory(p2) --[[ Line: 1238 ]]
+		-- upvalues: MessagesStoreModule (copy), GetChannelsWithKeptHistoryModule (upval), FFlagExpChatUseChannelTabsStore (upval), ChannelTabsStoreModule (copy), FFlagExpChatUnreadTabIndicatorV2WindowModule (upval), StoreModule (copy), MarkChannelUnreadForIncomingMessageModule (upval)
+		local GetHistoricalWindowMessageCountFunction = MessagesStoreModule.getHistoricalWindowMessageCount
+		local HistoricalWindowMessageCount = if GetHistoricalWindowMessageCountFunction then GetHistoricalWindowMessageCountFunction(false) else 0
+		for i, value in GetChannelsWithKeptHistoryModule(p2, HistoricalWindowMessageCount) do
+			if FFlagExpChatUseChannelTabsStore and ChannelTabsStoreModule then
+				ChannelTabsStoreModule.markChannelUnread(i)
+			elseif FFlagExpChatUnreadTabIndicatorV2WindowModule then
+				StoreModule:dispatch(MarkChannelUnreadForIncomingMessageModule(value, false))
 			end
 		end
-		var5.handleIncomingOrOutgoingMessage(p5, true)
-		local textChannel = p5.TextChannel
+	end
+	
+	if FFlagExpChatRenderHistoricalMessages then
+		WhenFirstTrueModule(MessagesStoreModule.getCanLocalUserChat, function() --[[ Line: 1253 ]]
+			-- upvalues: ConnectHistoryReplayModule (upval), MessagesStoreModule (copy), LocalPlayer (copy), FFlagExpChatHistoricalMessagesUnibarUnread (upval), markChannelsUnreadForKeptHistory (copy)
+			ConnectHistoryReplayModule(function(p3) --[[ Line: 1254 ]]
+				-- upvalues: MessagesStoreModule (upval), LocalPlayer (upval), FFlagExpChatHistoricalMessagesUnibarUnread (upval), markChannelsUnreadForKeptHistory (upval)
+				MessagesStoreModule.batchWrites(function() --[[ Line: 1255 ]]
+					-- upvalues: p3 (copy), LocalPlayer (upval), MessagesStoreModule (upval)
+					for _, value in p3 do
+						MessagesStoreModule.handleIncomingOrOutgoingMessage(value, LocalPlayer ~= nil and (value.TextSource ~= nil and value.TextSource.UserId == LocalPlayer.UserId), nil, nil, true)
+					end
+				end)
+				
+				if FFlagExpChatHistoricalMessagesUnibarUnread then
+					markChannelsUnreadForKeptHistory(p3)
+				end
+			end)
+		end)
+	end
+	TextChatService.SendingMessage:Connect(function(TextChatMessage) --[[ Line: 1268 ]]
+		-- upvalues: FFlagExpChatDictationContinuousSafetyReminder (upval), DictationSafetyReminderModule (upval), ExpChatPerfTracker (upval), FFlagExpChatPerfTrackerTabName (upval), SelectSelectedTabNameModule (upval), StoreModule (copy), GetFFlagExpChatProtectedChatInternalAPIsFunction (upval), NewResult (upval), LocalPlayer (copy), HandleChannelWelcomeMessageModule (upval), showWelcomeSystemMessage (copy), MessagesStoreModule (copy), Analytics (upval), CountParticipantsInTextChannelFunction (upval)
+		if FFlagExpChatDictationContinuousSafetyReminder then
+			DictationSafetyReminderModule.onOutgoingMessage(TextChatMessage)
+		end
+		ExpChatPerfTracker.start(ExpChatPerfTracker.Events.MessageSendToWindowRenderInterval, { messageId = TextChatMessage.MessageId }, if FFlagExpChatPerfTrackerTabName then {
+			tabName = SelectSelectedTabNameModule(StoreModule:getState())
+		} else nil)
 		
-		if textChannel then
-			analytics.FireClientAnalyticsWithEventName("MessageSent", {
-				channelName = textChannel.Name,
-				totalParticipants = countParticipantsInTextChannel(textChannel)
+		if GetFFlagExpChatProtectedChatInternalAPIsFunction() then
+			NewResult:debug("Outgoing SendingMessage Status: {} TextInternal: {}", TextChatMessage.Status.Name, TextChatMessage.TextInternal)
+		else
+			NewResult:debug("Outgoing SendingMessage Status: {} Text: {}", TextChatMessage.Status.Name, TextChatMessage.Text)
+		end
+		if LocalPlayer then
+			local HandleChannelWelcomeMessageModuleResult = HandleChannelWelcomeMessageModule(TextChatMessage, LocalPlayer)
+			
+			if HandleChannelWelcomeMessageModuleResult and HandleChannelWelcomeMessageModuleResult.key then
+				showWelcomeSystemMessage(HandleChannelWelcomeMessageModuleResult, TextChatMessage.TextChannel)
+			end
+		end
+		MessagesStoreModule.handleIncomingOrOutgoingMessage(TextChatMessage, true)
+		local TextChannel = TextChatMessage.TextChannel
+		
+		if TextChannel then
+			Analytics.FireClientAnalyticsWithEventName("MessageSent", {
+				channelName = TextChannel.Name,
+				totalParticipants = CountParticipantsInTextChannelFunction(TextChannel)
 			})
 		end
 	end)
 	
-	local _ = function()
-		-- upvalues: getFFlagTextChatEnableUniverseChatTabs (copy), textChatService (copy), expChatPerfTracker (copy), fFlagExpChatPerfTrackerTabName (copy), selectSelectedTabNameModule (copy), var4 (ref), getFFlagExpChatProtectedChatInternalAPIs (copy), var2 (copy), localPlayer (ref), handleChannelWelcomeMessageModule (copy), showWelcomeSystemMessage (ref), fFlagExpChatGlobalTabDefaultModule (copy), var5 (ref), fFlagExpChatFixOutgoingUniverseChatBubbleModule (copy), fFlagExpChatUseChannelTabsStore (copy), var6 (ref), analytics (copy), countParticipantsInTextChannel (copy)
-		if getFFlagTextChatEnableUniverseChatTabs() then
-			textChatService.SendingUniverseChatMessage:Connect(function(p5)
-				-- upvalues: expChatPerfTracker (copy), fFlagExpChatPerfTrackerTabName (copy), selectSelectedTabNameModule (copy), var4 (copy), getFFlagExpChatProtectedChatInternalAPIs (copy), var2 (copy), localPlayer (copy), handleChannelWelcomeMessageModule (copy), showWelcomeSystemMessage (copy), textChatService (copy), fFlagExpChatGlobalTabDefaultModule (copy), var5 (copy), fFlagExpChatFixOutgoingUniverseChatBubbleModule (copy), fFlagExpChatUseChannelTabsStore (copy), var6 (copy), analytics (copy), countParticipantsInTextChannel (copy)
-				expChatPerfTracker.start(expChatPerfTracker.Events.MessageSendToWindowRenderInterval, { messageId = p5.MessageId }, if fFlagExpChatPerfTrackerTabName then { tabName = selectSelectedTabNameModule(var4:getState()) } else nil)
-				
-				if getFFlagExpChatProtectedChatInternalAPIs() then
-					var2:debug("Outgoing SendingMessage Status: {} TextInternal: {}", p5.Status.Name, p5.TextInternal)
-				else
-					var2:debug("Outgoing SendingMessage Status: {} Text: {}", p5.Status.Name, p5.Text)
+	local _ = function() --[[ Line: 1307 | Named "connectSendingUniverseChatMessage" ]]
+		-- upvalues: GetFFlagTextChatEnableUniverseChatTabsFunction (upval), TextChatService (upval), FFlagExpChatDictationContinuousSafetyReminder (upval), DictationSafetyReminderModule (upval), ExpChatPerfTracker (upval), FFlagExpChatPerfTrackerTabName (upval), SelectSelectedTabNameModule (upval), StoreModule (copy), GetFFlagExpChatProtectedChatInternalAPIsFunction (upval), NewResult (upval), LocalPlayer (copy), HandleChannelWelcomeMessageModule (upval), showWelcomeSystemMessage (copy), FFlagExpChatGlobalTabDefaultModule (upval), MessagesStoreModule (copy), FFlagExpChatFixOutgoingUniverseChatBubbleModule (upval), FFlagExpChatUseChannelTabsStore (upval), ChannelTabsStoreModule (copy), Analytics (upval), CountParticipantsInTextChannelFunction (upval)
+		if GetFFlagTextChatEnableUniverseChatTabsFunction() then
+			TextChatService.SendingUniverseChatMessage:Connect(function(TextChatMessage) --[[ Line: 1311 ]]
+				-- upvalues: FFlagExpChatDictationContinuousSafetyReminder (upval), DictationSafetyReminderModule (upval), ExpChatPerfTracker (upval), FFlagExpChatPerfTrackerTabName (upval), SelectSelectedTabNameModule (upval), StoreModule (upval), GetFFlagExpChatProtectedChatInternalAPIsFunction (upval), NewResult (upval), LocalPlayer (upval), HandleChannelWelcomeMessageModule (upval), showWelcomeSystemMessage (upval), TextChatService (upval), FFlagExpChatGlobalTabDefaultModule (upval), MessagesStoreModule (upval), FFlagExpChatFixOutgoingUniverseChatBubbleModule (upval), FFlagExpChatUseChannelTabsStore (upval), ChannelTabsStoreModule (upval), Analytics (upval), CountParticipantsInTextChannelFunction (upval)
+				if FFlagExpChatDictationContinuousSafetyReminder then
+					DictationSafetyReminderModule.onOutgoingMessage(TextChatMessage)
 				end
-				if localPlayer then
-					local var13 = handleChannelWelcomeMessageModule(p5, localPlayer)
+				ExpChatPerfTracker.start(ExpChatPerfTracker.Events.MessageSendToWindowRenderInterval, { messageId = TextChatMessage.MessageId }, if FFlagExpChatPerfTrackerTabName then {
+					tabName = SelectSelectedTabNameModule(StoreModule:getState())
+				} else nil)
+				
+				if GetFFlagExpChatProtectedChatInternalAPIsFunction() then
+					NewResult:debug("Outgoing SendingMessage Status: {} TextInternal: {}", TextChatMessage.Status.Name, TextChatMessage.TextInternal)
+				else
+					NewResult:debug("Outgoing SendingMessage Status: {} Text: {}", TextChatMessage.Status.Name, TextChatMessage.Text)
+				end
+				if LocalPlayer then
+					local HandleChannelWelcomeMessageModuleResult = HandleChannelWelcomeMessageModule(TextChatMessage, LocalPlayer)
 					
-					if var13 and var13.key then
-						showWelcomeSystemMessage(var13, p5.TextChannel)
+					if HandleChannelWelcomeMessageModuleResult and HandleChannelWelcomeMessageModuleResult.key then
+						showWelcomeSystemMessage(HandleChannelWelcomeMessageModuleResult, TextChatMessage.TextChannel)
 					end
 				end
-				local chatInputBarConfiguration = textChatService:FindFirstChildOfClass("ChatInputBarConfiguration")
-				local var14 = if fFlagExpChatGlobalTabDefaultModule and selectSelectedTabNameModule(var4:getState()) == "RBXGlobal" then "RBXGlobal" elseif not (chatInputBarConfiguration and chatInputBarConfiguration.TargetTextChannel) then "RBXGlobal" else nil
-				var5.handleIncomingOrOutgoingMessage(p5, true, var14, if fFlagExpChatFixOutgoingUniverseChatBubbleModule then true else nil)
+				local ChatInputBarConfiguration = TextChatService:FindFirstChildOfClass("ChatInputBarConfiguration")
+				local TargetTextChannel = ChatInputBarConfiguration and ChatInputBarConfiguration.TargetTextChannel
+				local RBXGlobal = if FFlagExpChatGlobalTabDefaultModule and SelectSelectedTabNameModule(StoreModule:getState()) == "RBXGlobal" then "RBXGlobal" elseif TargetTextChannel then nil else "RBXGlobal"
+				MessagesStoreModule.handleIncomingOrOutgoingMessage(TextChatMessage, true, RBXGlobal, if FFlagExpChatFixOutgoingUniverseChatBubbleModule then true else nil)
 				
-				if fFlagExpChatUseChannelTabsStore and var6 then
-					var6.handleIncomingOrOutgoingMessage(p5, true, var14)
+				if FFlagExpChatUseChannelTabsStore and ChannelTabsStoreModule then
+					ChannelTabsStoreModule.handleIncomingOrOutgoingMessage(TextChatMessage, true, RBXGlobal)
 				end
-				local textChannel = p5.TextChannel
+				local TextChannel = TextChatMessage.TextChannel
 				
-				if textChannel then
-					analytics.FireClientAnalyticsWithEventName("MessageSent", {
-						channelName = textChannel.Name,
-						totalParticipants = countParticipantsInTextChannel(textChannel)
+				if TextChannel then
+					Analytics.FireClientAnalyticsWithEventName("MessageSent", {
+						channelName = TextChannel.Name,
+						totalParticipants = CountParticipantsInTextChannelFunction(TextChannel)
 					})
 				end
 			end)
@@ -972,258 +1052,263 @@ return function(p4)
 		end
 	end
 	
-	if getFFlagTextChatEnableUniverseChatTabs() then
-		textChatService.SendingUniverseChatMessage:Connect(function(p5)
-			-- upvalues: expChatPerfTracker (copy), fFlagExpChatPerfTrackerTabName (copy), selectSelectedTabNameModule (copy), var4 (ref), getFFlagExpChatProtectedChatInternalAPIs (copy), var2 (copy), localPlayer (ref), handleChannelWelcomeMessageModule (copy), showWelcomeSystemMessage (ref), textChatService (copy), fFlagExpChatGlobalTabDefaultModule (copy), var5 (ref), fFlagExpChatFixOutgoingUniverseChatBubbleModule (copy), fFlagExpChatUseChannelTabsStore (copy), var6 (ref), analytics (copy), countParticipantsInTextChannel (copy)
-			expChatPerfTracker.start(expChatPerfTracker.Events.MessageSendToWindowRenderInterval, { messageId = p5.MessageId }, if fFlagExpChatPerfTrackerTabName then { tabName = selectSelectedTabNameModule(var4:getState()) } else nil)
-			
-			if getFFlagExpChatProtectedChatInternalAPIs() then
-				var2:debug("Outgoing SendingMessage Status: {} TextInternal: {}", p5.Status.Name, p5.TextInternal)
-			else
-				var2:debug("Outgoing SendingMessage Status: {} Text: {}", p5.Status.Name, p5.Text)
+	if GetFFlagTextChatEnableUniverseChatTabsFunction() then
+		TextChatService.SendingUniverseChatMessage:Connect(function(TextChatMessage) --[[ Line: 1311 ]]
+			-- upvalues: FFlagExpChatDictationContinuousSafetyReminder (upval), DictationSafetyReminderModule (upval), ExpChatPerfTracker (upval), FFlagExpChatPerfTrackerTabName (upval), SelectSelectedTabNameModule (upval), StoreModule (copy), GetFFlagExpChatProtectedChatInternalAPIsFunction (upval), NewResult (upval), LocalPlayer (copy), HandleChannelWelcomeMessageModule (upval), showWelcomeSystemMessage (copy), TextChatService (upval), FFlagExpChatGlobalTabDefaultModule (upval), MessagesStoreModule (copy), FFlagExpChatFixOutgoingUniverseChatBubbleModule (upval), FFlagExpChatUseChannelTabsStore (upval), ChannelTabsStoreModule (copy), Analytics (upval), CountParticipantsInTextChannelFunction (upval)
+			if FFlagExpChatDictationContinuousSafetyReminder then
+				DictationSafetyReminderModule.onOutgoingMessage(TextChatMessage)
 			end
-			if localPlayer then
-				local var13 = handleChannelWelcomeMessageModule(p5, localPlayer)
+			ExpChatPerfTracker.start(ExpChatPerfTracker.Events.MessageSendToWindowRenderInterval, { messageId = TextChatMessage.MessageId }, if FFlagExpChatPerfTrackerTabName then {
+				tabName = SelectSelectedTabNameModule(StoreModule:getState())
+			} else nil)
+			
+			if GetFFlagExpChatProtectedChatInternalAPIsFunction() then
+				NewResult:debug("Outgoing SendingMessage Status: {} TextInternal: {}", TextChatMessage.Status.Name, TextChatMessage.TextInternal)
+			else
+				NewResult:debug("Outgoing SendingMessage Status: {} Text: {}", TextChatMessage.Status.Name, TextChatMessage.Text)
+			end
+			if LocalPlayer then
+				local HandleChannelWelcomeMessageModuleResult = HandleChannelWelcomeMessageModule(TextChatMessage, LocalPlayer)
 				
-				if var13 and var13.key then
-					showWelcomeSystemMessage(var13, p5.TextChannel)
+				if HandleChannelWelcomeMessageModuleResult and HandleChannelWelcomeMessageModuleResult.key then
+					showWelcomeSystemMessage(HandleChannelWelcomeMessageModuleResult, TextChatMessage.TextChannel)
 				end
 			end
-			local chatInputBarConfiguration = textChatService:FindFirstChildOfClass("ChatInputBarConfiguration")
-			local var14 = if fFlagExpChatGlobalTabDefaultModule and selectSelectedTabNameModule(var4:getState()) == "RBXGlobal" then "RBXGlobal" elseif not (chatInputBarConfiguration and chatInputBarConfiguration.TargetTextChannel) then "RBXGlobal" else nil
-			var5.handleIncomingOrOutgoingMessage(p5, true, var14, if fFlagExpChatFixOutgoingUniverseChatBubbleModule then true else nil)
+			local ChatInputBarConfiguration = TextChatService:FindFirstChildOfClass("ChatInputBarConfiguration")
+			local TargetTextChannel = ChatInputBarConfiguration and ChatInputBarConfiguration.TargetTextChannel
+			local RBXGlobal = if FFlagExpChatGlobalTabDefaultModule and SelectSelectedTabNameModule(StoreModule:getState()) == "RBXGlobal" then "RBXGlobal" elseif TargetTextChannel then nil else "RBXGlobal"
+			MessagesStoreModule.handleIncomingOrOutgoingMessage(TextChatMessage, true, RBXGlobal, if FFlagExpChatFixOutgoingUniverseChatBubbleModule then true else nil)
 			
-			if fFlagExpChatUseChannelTabsStore and var6 then
-				var6.handleIncomingOrOutgoingMessage(p5, true, var14)
+			if FFlagExpChatUseChannelTabsStore and ChannelTabsStoreModule then
+				ChannelTabsStoreModule.handleIncomingOrOutgoingMessage(TextChatMessage, true, RBXGlobal)
 			end
-			local textChannel = p5.TextChannel
+			local TextChannel = TextChatMessage.TextChannel
 			
-			if textChannel then
-				analytics.FireClientAnalyticsWithEventName("MessageSent", {
-					channelName = textChannel.Name,
-					totalParticipants = countParticipantsInTextChannel(textChannel)
+			if TextChannel then
+				Analytics.FireClientAnalyticsWithEventName("MessageSent", {
+					channelName = TextChannel.Name,
+					totalParticipants = CountParticipantsInTextChannelFunction(TextChannel)
 				})
 			end
 		end)
 	end
-	local _ = function(p5)
-		-- upvalues: playersService (copy)
-		return p5 and (p5:IsA("TextSource") and (playersService.LocalPlayer and playersService.LocalPlayer.UserId == p5.UserId))
+	local _ = function(TextSource): boolean --[[ Line: 1374 | Named "isInstanceALocalTextChannelParticipant" ]]
+		-- upvalues: Players (upval)
+		return TextSource and (TextSource:IsA("TextSource") and (Players.LocalPlayer and Players.LocalPlayer.UserId == TextSource.UserId))
 	end
 	
-	local _ = function(p5)
-		return if p5 == "RBXGeneral" then 1 elseif p5 == "RBXGlobal" then 2 else 3
+	local _ = function(p3): number --[[ Line: 1381 | Named "getChannelTabIndex" ]]
+		return if p3 == "RBXGeneral" then 1 elseif p3 == "RBXGlobal" then 2 else 3
 	end
 	
-	for i_1, v_1 in pairs(textChatService:GetDescendants()) do
-		if v_1.Parent and v_1.Parent:IsA("TextChannel") and (v_1 and (v_1:IsA("TextSource") and (playersService.LocalPlayer and playersService.LocalPlayer.UserId == v_1.UserId))) then
-			var4:dispatch(localTextChannelParticipantAddedModule(v_1.Parent))
-			
-			if fFlagExpChatUseChannelTabsStore and var6 then
-				var6.handleLocalTextChannelParticipantAdded(v_1.Parent)
+	for _, descendant1 in pairs(TextChatService:GetDescendants()) do
+		if descendant1.Parent and descendant1.Parent:IsA("TextChannel") and (descendant1 and (descendant1:IsA("TextSource") and (Players.LocalPlayer and Players.LocalPlayer.UserId == descendant1.UserId))) then
+			if FFlagExpChatUseChannelTabsStore and ChannelTabsStoreModule then
+				ChannelTabsStoreModule.handleLocalTextChannelParticipantAdded(descendant1.Parent)
+			else
+				StoreModule:dispatch(LocalTextChannelParticipantAddedModule(descendant1.Parent))
 			end
 		end
-		if v_1:IsA("TextChannel") then
-			v_1.DescendantRemoving:Connect(function(p5)
-				-- upvalues: playersService (copy), var4 (ref), localTextChannelParticipantRemoved (copy), v_1 (ref), fFlagExpChatUseChannelTabsStore (copy), var6 (ref)
-				if p5 and (p5:IsA("TextSource") and (playersService.LocalPlayer and playersService.LocalPlayer.UserId == p5.UserId)) then
-					var4:dispatch(localTextChannelParticipantRemoved(v_1))
+		if descendant1:IsA("TextChannel") then
+			descendant1.DescendantRemoving:Connect(function(Descendant) --[[ Line: 1405 ]]
+				-- upvalues: Players (upval), StoreModule (copy), LocalTextChannelParticipantRemovedFunction (upval), descendant1 (copy), FFlagExpChatUseChannelTabsStore (upval), ChannelTabsStoreModule (copy)
+				if Descendant and (Descendant:IsA("TextSource") and (Players.LocalPlayer and Players.LocalPlayer.UserId == Descendant.UserId)) then
+					StoreModule:dispatch(LocalTextChannelParticipantRemovedFunction(descendant1))
 					
-					if fFlagExpChatUseChannelTabsStore and var6 then
-						var6.handleChannelRemoved(v_1.Name)
+					if FFlagExpChatUseChannelTabsStore and ChannelTabsStoreModule then
+						ChannelTabsStoreModule.handleChannelRemoved(descendant1.Name)
 					end
 				end
 			end)
 		end
 	end
-	textChatService.DescendantAdded:Connect(function(p5)
-		-- upvalues: playersService (copy), var4 (ref), localTextChannelParticipantAddedModule (copy), fFlagExpChatUseChannelTabsStore (copy), var6 (ref), localTextChannelParticipantRemoved (copy)
-		if p5.Parent and p5.Parent:IsA("TextChannel") and (p5 and (p5:IsA("TextSource") and (playersService.LocalPlayer and playersService.LocalPlayer.UserId == p5.UserId))) then
-			var4:dispatch(localTextChannelParticipantAddedModule(p5.Parent))
-			
-			if fFlagExpChatUseChannelTabsStore and var6 then
-				var6.handleLocalTextChannelParticipantAdded(p5.Parent)
+	TextChatService.DescendantAdded:Connect(function(Descendant) --[[ Line: 1419 ]]
+		-- upvalues: Players (upval), FFlagExpChatUseChannelTabsStore (upval), ChannelTabsStoreModule (copy), StoreModule (copy), LocalTextChannelParticipantAddedModule (upval), LocalTextChannelParticipantRemovedFunction (upval)
+		if Descendant.Parent and Descendant.Parent:IsA("TextChannel") and (Descendant and (Descendant:IsA("TextSource") and (Players.LocalPlayer and Players.LocalPlayer.UserId == Descendant.UserId))) then
+			if FFlagExpChatUseChannelTabsStore and ChannelTabsStoreModule then
+				ChannelTabsStoreModule.handleLocalTextChannelParticipantAdded(Descendant.Parent)
+			else
+				StoreModule:dispatch(LocalTextChannelParticipantAddedModule(Descendant.Parent))
 			end
 		end
-		if p5:IsA("TextChannel") then
-			p5.DescendantRemoving:Connect(function(p6)
-				-- upvalues: playersService (copy), var4 (copy), localTextChannelParticipantRemoved (copy), p5 (ref), fFlagExpChatUseChannelTabsStore (copy), var6 (copy)
-				if p6 and (p6:IsA("TextSource") and (playersService.LocalPlayer and playersService.LocalPlayer.UserId == p6.UserId)) then
-					var4:dispatch(localTextChannelParticipantRemoved(p5))
+		if Descendant:IsA("TextChannel") then
+			Descendant.DescendantRemoving:Connect(function(Descendant1) --[[ Line: 1433 ]]
+				-- upvalues: Players (upval), StoreModule (upval), LocalTextChannelParticipantRemovedFunction (upval), Descendant (copy), FFlagExpChatUseChannelTabsStore (upval), ChannelTabsStoreModule (upval)
+				if Descendant1 and (Descendant1:IsA("TextSource") and (Players.LocalPlayer and Players.LocalPlayer.UserId == Descendant1.UserId)) then
+					StoreModule:dispatch(LocalTextChannelParticipantRemovedFunction(Descendant))
 					
-					if fFlagExpChatUseChannelTabsStore and var6 then
-						var6.handleChannelRemoved(p5.Name)
+					if FFlagExpChatUseChannelTabsStore and ChannelTabsStoreModule then
+						ChannelTabsStoreModule.handleChannelRemoved(Descendant.Name)
 					end
 				end
 			end)
 		end
 	end)
 	
-	if getFFlagTextChatEnableUniverseChatTabs() then
-		local t_5 = {}
+	if GetFFlagTextChatEnableUniverseChatTabsFunction() then
+		local t1 = {}
 		
-		local function handleUniverseChatChannelAllocated(p5)
-			-- upvalues: t_5 (ref), textChatService (copy), fFlagExpChatUseUnifiedTooltipStore (copy), getChatTooltipStoreModule (copy), fFlagExpChatGlobalTabDefaultModule (copy), expChatGlobalTabDefaultExperimentation (copy), var4 (ref), universeChatChannelAddedModule (copy), fFlagExpChatUseChannelTabsStore (copy), var6 (ref), isGlobalTabFirstModule (copy), universeChatChannelSelected (copy), getFFlagEnableExpChatUniverseChatTabNames (copy), p4 (write), getGlobalWelcomeMessageKeyModule (copy), getFFlagExpChatSuppressWelcomeMessageTabUnread (copy), var5 (ref), fFlagExpChatUnreadTabIndicatorV2WindowModule (copy), markChannelUnreadForSystemMessageModule (copy), tryAddThirdPartySummaryGlobalSystemMessage (ref)
-			if t_5[p5] then return end
-			t_5[p5] = true
-			local chatWindowConfiguration = textChatService:FindFirstChildOfClass("ChatWindowConfiguration")
-			local chatInputBarConfiguration = textChatService:FindFirstChildOfClass("ChatInputBarConfiguration")
+		local function handleUniverseChatChannelAllocated(Context) --[[ Line: 1451 ]]
+			-- upvalues: t1 (copy), TextChatService (upval), FFlagExpChatUseUnifiedTooltipStore (upval), GetChatTooltipStoreModule (upval), FFlagExpChatGlobalTabDefaultModule (upval), ExpChatGlobalTabDefaultExperimentation (upval), FFlagExpChatUseChannelTabsStore (upval), ChannelTabsStoreModule (copy), StoreModule (copy), UniverseChatChannelAddedModule (upval), IsGlobalTabFirstModule (upval), HasUserSelectedTabModule (upval), UniverseChatChannelSelectedFunction (upval), GetFFlagEnableExpChatUniverseChatTabNamesFunction (upval), JoinResult (ref), GetGlobalWelcomeMessageKeyModule (upval), GetFFlagExpChatSuppressWelcomeMessageTabUnreadFunction (upval), MessagesStoreModule (copy), FFlagExpChatUnreadTabIndicatorV2WindowModule (upval), MarkChannelUnreadForSystemMessageModule (upval), tryAddThirdPartySummaryGlobalSystemMessage (copy)
+			if t1[Context] then return end
+			t1[Context] = true
+			local ChatWindowConfiguration = TextChatService:FindFirstChildOfClass("ChatWindowConfiguration")
+			local ChatInputBarConfiguration = TextChatService:FindFirstChildOfClass("ChatInputBarConfiguration")
+			local NoChatInputBarConfiguration: boolean = not ChatInputBarConfiguration or ChatInputBarConfiguration.Enabled ~= false
 			
-			if chatWindowConfiguration and chatWindowConfiguration.Enabled == false or not (not chatInputBarConfiguration or chatInputBarConfiguration.Enabled ~= false) then return end
-			local var13 = ""
+			if ChatWindowConfiguration and ChatWindowConfiguration.Enabled == false or not NoChatInputBarConfiguration then return end
+			local Name = ""
 			
-			if p5 == "global" then
-				var13 = "RBXGlobal"
+			if Context == "global" then
+				Name = "RBXGlobal"
 				
-				if fFlagExpChatUseUnifiedTooltipStore then
-					getChatTooltipStoreModule(false).setIsGlobalChatAvailable(true)
+				if FFlagExpChatUseUnifiedTooltipStore then
+					GetChatTooltipStoreModule(false).setIsGlobalChatAvailable(true)
 				end
-				if fFlagExpChatGlobalTabDefaultModule then
-					expChatGlobalTabDefaultExperimentation.logExposure()
+				if FFlagExpChatGlobalTabDefaultModule then
+					ExpChatGlobalTabDefaultExperimentation.logExposure()
 				end
 			end
-			local ok
-			local var14 = var13
-			var4:dispatch(universeChatChannelAddedModule(var13, if var14 == "RBXGeneral" then 1 elseif var14 == "RBXGlobal" then 2 else 3))
-			
-			if fFlagExpChatUseChannelTabsStore and var6 then
-				var6.addChannelTab({ type = "UniverseChat", name = var13 }, nil)
+			if FFlagExpChatUseChannelTabsStore and ChannelTabsStoreModule then
+				ChannelTabsStoreModule.addChannelTab({ type = "UniverseChat", name = Name }, nil)
+			else
+				StoreModule:dispatch(UniverseChatChannelAddedModule(Name, if Name == "RBXGeneral" then 1 elseif Name == "RBXGlobal" then 2 else 3))
 			end
-			if fFlagExpChatGlobalTabDefaultModule and isGlobalTabFirstModule() and var13 == "RBXGlobal" then
-				ok = var4:getState().ChannelTabs
+			if FFlagExpChatGlobalTabDefaultModule and IsGlobalTabFirstModule() and Name == "RBXGlobal" and not HasUserSelectedTabModule(StoreModule) then
+				StoreModule:dispatch(UniverseChatChannelSelectedFunction(Name))
 				
-				if ok == nil or not ok.hasUserSelectedTab then
-					var4:dispatch(universeChatChannelSelected(var13))
-					
-					if fFlagExpChatUseChannelTabsStore and var6 then
-						var6.setTargetChannel(var13, false)
-					end
+				if FFlagExpChatUseChannelTabsStore and ChannelTabsStoreModule then
+					ChannelTabsStoreModule.setTargetChannel(Name, false)
 				end
 			end
-			if getFFlagEnableExpChatUniverseChatTabNames() and var13 ~= "" then
-				ok, status = pcall(function()
-					-- upvalues: fFlagExpChatGlobalTabDefaultModule (copy), p4 (copy), getGlobalWelcomeMessageKeyModule (copy)
-					return if fFlagExpChatGlobalTabDefaultModule then p4.translator:FormatByKey(getGlobalWelcomeMessageKeyModule()) else p4.translator:FormatByKey("CoreScripts.TextChat.ChatWindow.ChatEnabled.Global2")
+			if GetFFlagEnableExpChatUniverseChatTabNamesFunction() and Name ~= "" then
+				local Success, Result = pcall(function() --[[ Line: 1503 ]]
+					-- upvalues: FFlagExpChatGlobalTabDefaultModule (upval), JoinResult (upval), GetGlobalWelcomeMessageKeyModule (upval)
+					return if FFlagExpChatGlobalTabDefaultModule then JoinResult.translator:FormatByKey(GetGlobalWelcomeMessageKeyModule()) else JoinResult.translator:FormatByKey("CoreScripts.TextChat.ChatWindow.ChatEnabled.Global2")
 				end)
 				
-				if ok and status and status ~= "" then
-					if getFFlagExpChatSuppressWelcomeMessageTabUnread() then
-						var5.addSystemMessage(status, var13, "Roblox.Welcome.GlobalChat")
+				if Success and Result and Result ~= "" then
+					if GetFFlagExpChatSuppressWelcomeMessageTabUnreadFunction() then
+						MessagesStoreModule.addSystemMessage(Result, Name, "Roblox.Welcome.GlobalChat")
 					else
-						var5.addSystemMessage(status, var13)
+						MessagesStoreModule.addSystemMessage(Result, Name)
 					end
-					if fFlagExpChatUseChannelTabsStore and var6 and not getFFlagExpChatSuppressWelcomeMessageTabUnread() then
-						var6.markChannelUnread(var13)
-					elseif fFlagExpChatUnreadTabIndicatorV2WindowModule then
-						var4:dispatch(markChannelUnreadForSystemMessageModule(status, var13, if getFFlagExpChatSuppressWelcomeMessageTabUnread() then "Roblox.Welcome.GlobalChat" else nil))
+					if FFlagExpChatUseChannelTabsStore and ChannelTabsStoreModule and not GetFFlagExpChatSuppressWelcomeMessageTabUnreadFunction() then
+						ChannelTabsStoreModule.markChannelUnread(Name)
+					elseif FFlagExpChatUnreadTabIndicatorV2WindowModule then
+						StoreModule:dispatch(MarkChannelUnreadForSystemMessageModule(Result, Name, if GetFFlagExpChatSuppressWelcomeMessageTabUnreadFunction() then "Roblox.Welcome.GlobalChat" else nil))
 					end
 				end
 			end
 			tryAddThirdPartySummaryGlobalSystemMessage()
 		end
 		
-		if textChatService:HasAllocatedUniverseChatContext("global") then
+		if TextChatService:HasAllocatedUniverseChatContext("global") then
 			handleUniverseChatChannelAllocated("global")
 		end
-		textChatService.UniverseChatChannelAllocated:Connect(handleUniverseChatChannelAllocated)
-		textChatService.UniverseChatMessageReceived:Connect(function(p5)
-			-- upvalues: shouldFilterGlobalMessageModule (copy), getGlobalMutedUsersStoreModule (copy), localPlayer (ref), _processIncomingMessageCore (ref)
-			if shouldFilterGlobalMessageModule(p5, getGlobalMutedUsersStoreModule(false), localPlayer and localPlayer.UserId) then
-				return
+		TextChatService.UniverseChatChannelAllocated:Connect(handleUniverseChatChannelAllocated)
+		TextChatService.UniverseChatMessageReceived:Connect(function(TextChatMessage) --[[ Line: 1554 ]]
+			-- upvalues: FFlagExpChatDictationContinuousSafetyReminder (upval), DictationSafetyReminderModule (upval), ShouldFilterGlobalMessageModule (upval), GetGlobalMutedUsersStoreModule (upval), LocalPlayer (copy), _processIncomingMessageCore (copy)
+			if FFlagExpChatDictationContinuousSafetyReminder then
+				DictationSafetyReminderModule.onIncomingMessage(TextChatMessage)
 			end
-			local t = { channelNameOverride = "RBXGlobal", isUniverseChat = true }
-			_processIncomingMessageCore(p5, t and t.channelNameOverride, t and t.isUniverseChat)
-		end)
-	end
-	local function runOnBubbleDisplayed(p5, p6, p7)
-		-- upvalues: playersService (copy), httpService (copy), getFFlagExpChatProtectedChatInternalAPIs (copy), var5 (ref)
-		local var13 = if p5:IsA("Model") then playersService:GetPlayerFromCharacter(p5) else nil
-		local var14 = httpService:GenerateGUID(false)
-		local bubbleChatMessageProperties = nil
-		local var15 = nil
-		
-		if p7 then
-			var14 = p7.MessageId
-			bubbleChatMessageProperties = p7.BubbleChatMessageProperties
-			var15 = if getFFlagExpChatProtectedChatInternalAPIs() then p7.TranslationInternal else p7.Translation
-		end
-		var5.handleIncomingBubbleChatMessage({
-			message = p6,
-			translation = var15,
-			bubbleChatMessageId = var14,
-			bubbleChatMessageUserId = var13 and tostring(var13.UserId) or nil,
-			partOrModel = p5,
-			timestamp = DateTime.fromUnixTimestampMillis(workspace:GetServerTimeNow() * 1000),
-			bubbleChatMessageProperties = bubbleChatMessageProperties
-		})
-	end
-	
-	chatService.Chatted:Connect(function(p5, p6)
-		-- upvalues: textChatService (copy), chatService (copy), runOnBubbleDisplayed (ref)
-		if textChatService.ChatVersion ~= Enum.ChatVersion.LegacyChatService or chatService.BubbleChatEnabled then
-			runOnBubbleDisplayed(p5, p6)
-		end
-	end)
-	chatService:GetPropertyChangedSignal("BubbleChatEnabled"):Connect(function()
-		-- upvalues: chatService (copy), var4 (ref), legacyBubbleChatEnabledChangedModule (copy)
-		var4:dispatch(legacyBubbleChatEnabledChangedModule("Enabled", chatService.BubbleChatEnabled))
-	end)
-	var4:dispatch(legacyBubbleChatEnabledChangedModule("Enabled", chatService.BubbleChatEnabled))
-	chatService.BubbleChatSettingsChanged:Connect(function(p5)
-		-- upvalues: p4 (write), var8 (ref), var4 (ref), legacyBubbleChatSettingsChangedModule (copy)
-		if p4.validateLegacyBubbleChatSettings then
-			local var13, var14 = p4.validateLegacyBubbleChatSettings(p5)
-			assert(var13, "Bad settings object passed to Chat:SetBubbleChatSettings:\n inside consolidated BubbleChat " .. (var14 or ""))
-			
-			if var8 then
-				var8.setBubbleChatSettings(p5)
+			if not ShouldFilterGlobalMessageModule(TextChatMessage, GetGlobalMutedUsersStoreModule(false), LocalPlayer and LocalPlayer.UserId) then
+				local config = { channelNameOverride = "RBXGlobal", isUniverseChat = true }
+				_processIncomingMessageCore(TextChatMessage, config and config.channelNameOverride, config and config.isUniverseChat)
 				
 				return
 			end
-			var4:dispatch(legacyBubbleChatSettingsChangedModule(p5))
+		end)
+	end
+	local function runOnBubbleDisplayed(Model: Model, Message, TextChatMessage) --[[ Line: 1575 ]]
+		-- upvalues: Players (upval), HttpService (upval), GetFFlagExpChatProtectedChatInternalAPIsFunction (upval), MessagesStoreModule (copy)
+		local Player = if Model:IsA("Model") then Players:GetPlayerFromCharacter(Model) else nil
+		local Guid = HttpService:GenerateGUID(false)
+		local BubbleChatMessageProperties = nil
+		local TranslationInternal = nil
+		
+		if TextChatMessage then
+			Guid = TextChatMessage.MessageId
+			BubbleChatMessageProperties = TextChatMessage.BubbleChatMessageProperties
+			TranslationInternal = if GetFFlagExpChatProtectedChatInternalAPIsFunction() then TextChatMessage.TranslationInternal else TextChatMessage.Translation
+		end
+		MessagesStoreModule.handleIncomingBubbleChatMessage({
+			message = Message,
+			translation = TranslationInternal,
+			bubbleChatMessageId = Guid,
+			bubbleChatMessageUserId = Player and tostring(Player.UserId) or nil,
+			partOrModel = Model,
+			timestamp = DateTime.fromUnixTimestampMillis(workspace:GetServerTimeNow() * 1000),
+			bubbleChatMessageProperties = BubbleChatMessageProperties
+		})
+	end
+	
+	Chat.Chatted:Connect(function(Message, Recipient) --[[ Line: 1606 ]]
+		-- upvalues: TextChatService (upval), Chat (upval), runOnBubbleDisplayed (copy)
+		if TextChatService.ChatVersion ~= Enum.ChatVersion.LegacyChatService or Chat.BubbleChatEnabled then
+			runOnBubbleDisplayed(Message, Recipient)
+		end
+	end)
+	Chat:GetPropertyChangedSignal("BubbleChatEnabled"):Connect(function() --[[ Line: 1613 ]]
+		-- upvalues: Chat (upval), StoreModule (copy), LegacyBubbleChatEnabledChangedModule (upval)
+		StoreModule:dispatch(LegacyBubbleChatEnabledChangedModule("Enabled", Chat.BubbleChatEnabled))
+	end)
+	StoreModule:dispatch(LegacyBubbleChatEnabledChangedModule("Enabled", Chat.BubbleChatEnabled))
+	Chat.BubbleChatSettingsChanged:Connect(function(Settings) --[[ Line: 1622 ]]
+		-- upvalues: JoinResult (ref), ChatConfigurationStoreModule (copy), StoreModule (copy), LegacyBubbleChatSettingsChangedModule (upval)
+		if JoinResult.validateLegacyBubbleChatSettings then
+			local ValidateLegacyBubbleChatSettingsResult, ValidateLegacyBubbleChatSettingsResult2 = JoinResult.validateLegacyBubbleChatSettings(Settings)
+			assert(ValidateLegacyBubbleChatSettingsResult, "Bad settings object passed to Chat:SetBubbleChatSettings:\n inside consolidated BubbleChat " .. (ValidateLegacyBubbleChatSettingsResult2 or ""))
+			
+			if ChatConfigurationStoreModule then
+				ChatConfigurationStoreModule.setBubbleChatSettings(Settings)
+				
+				return
+			end
+			StoreModule:dispatch(LegacyBubbleChatSettingsChangedModule(Settings))
 		end
 	end)
 	
-	if getEngineFeatureFlagEnableDisplayBubbleModule() then
-		textChatService.BubbleDisplayed:Connect(function(p5, p6)
-			-- upvalues: getFFlagExpChatProtectedChatInternalAPIs (copy), runOnBubbleDisplayed (ref)
-			runOnBubbleDisplayed(p5, p6 and (if getFFlagExpChatProtectedChatInternalAPIs() then p6.TextInternal else p6.Text), p6)
+	if GetEngineFeatureFlagEnableDisplayBubbleModule() then
+		TextChatService.BubbleDisplayed:Connect(function(PartOrCharacter, TextChatMessage) --[[ Line: 1640 ]]
+			-- upvalues: GetFFlagExpChatProtectedChatInternalAPIsFunction (upval), runOnBubbleDisplayed (copy)
+			runOnBubbleDisplayed(PartOrCharacter, TextChatMessage and (if GetFFlagExpChatProtectedChatInternalAPIsFunction() then TextChatMessage.TextInternal else TextChatMessage.Text), TextChatMessage)
 		end)
 	end
-	local function findCommandInstance(p5)
-		-- upvalues: textChatService (copy)
-		for i, v in ipairs(textChatService:GetDescendants()) do
-			if v.Name == p5 and v:IsA("TextChatCommand") then
-				return v
+	local function findCommandInstance(Name) --[[ Line: 1651 ]]
+		-- upvalues: TextChatService (upval)
+		for _, TextChatCommand in ipairs(TextChatService:GetDescendants()) do
+			if TextChatCommand.Name == Name and TextChatCommand:IsA("TextChatCommand") then
+				return TextChatCommand
 			end
 		end
 		return nil
 	end
 	
-	local t_5 = {}
+	local t2 = {}
 	
-	local function setupTextChatCommands()
-		-- upvalues: commands (copy), findCommandInstance (ref), t_5 (ref), var4 (ref), context (copy), displaySystemMessageModule (copy), p4 (write), commandAliasChanged (copy)
-		for i, v in ipairs(commands.enabledCommands) do
-			if v.clientRun then
-				local var13 = findCommandInstance(v.name)
+	local function setupTextChatCommands() --[[ Line: 1662 ]]
+		-- upvalues: Commands (upval), findCommandInstance (copy), t2 (copy), StoreModule (copy), Context (upval), DisplaySystemMessageModule (upval), JoinResult (ref), CommandAliasChangedFunction (upval)
+		for _, enabledCommand in ipairs(Commands.enabledCommands) do
+			if enabledCommand.clientRun then
+				local CommandInstance = findCommandInstance(enabledCommand.name)
 				
-				if var13 and not t_5[var13] then
-					t_5[var13] = true
-					var13.Triggered:Connect(function(p6, ...)
-						-- upvalues: v (ref), var4 (copy), context (copy), displaySystemMessageModule (copy), p4 (copy)
-						local var14 = v.clientRun(var4, p6.UserId, ..., context)
+				if CommandInstance and not t2[CommandInstance] then
+					t2[CommandInstance] = true
+					CommandInstance.Triggered:Connect(function(Player, ...) --[[ Line: 1673 ]]
+						-- upvalues: enabledCommand (copy), StoreModule (upval), Context (upval), DisplaySystemMessageModule (upval), JoinResult (upval)
+						local ClientRunResult = enabledCommand.clientRun(StoreModule, Player.UserId, (...), Context)
 						
-						if var14 then
-							displaySystemMessageModule(var14.key, var14.args, var14.metadata, p4.translator, p4.defaultSystemTextChannel)
+						if ClientRunResult then
+							DisplaySystemMessageModule(ClientRunResult.key, ClientRunResult.args, ClientRunResult.metadata, JoinResult.translator, JoinResult.defaultSystemTextChannel)
 						end
 					end)
 					
-					if string.find(var13.Name, "RBXTeamCommand") or string.find(var13.Name, "RBXWhisperCommand") then
-						for i_1, v_1 in { "PrimaryAlias", "SecondaryAlias" } do
-							var13:GetPropertyChangedSignal(v_1):Connect(function()
-								-- upvalues: var4 (copy), commandAliasChanged (copy), var13 (ref)
-								var4:dispatch(commandAliasChanged(var13.Name, var13.PrimaryAlias, var13.SecondaryAlias))
+					if string.find(CommandInstance.Name, "RBXTeamCommand") or string.find(CommandInstance.Name, "RBXWhisperCommand") then
+						for _, PropertyName in { "PrimaryAlias", "SecondaryAlias" } do
+							CommandInstance:GetPropertyChangedSignal(PropertyName):Connect(function() --[[ Line: 1691 ]]
+								-- upvalues: StoreModule (upval), CommandAliasChangedFunction (upval), CommandInstance (copy)
+								StoreModule:dispatch(CommandAliasChangedFunction(CommandInstance.Name, CommandInstance.PrimaryAlias, CommandInstance.SecondaryAlias))
 							end)
 						end
 					end
@@ -1233,271 +1318,294 @@ return function(p4)
 	end
 	
 	setupTextChatCommands()
-	chatService:GetPropertyChangedSignal("IsAutoMigrated"):Once(setupTextChatCommands)
+	Chat:GetPropertyChangedSignal("IsAutoMigrated"):Once(setupTextChatCommands)
 	
-	if p4.canUserChatAsync and playersService.LocalPlayer then
-		promiseModule.try(function()
-			-- upvalues: p4 (write), playersService (copy)
-			return p4.canUserChatAsync(playersService.LocalPlayer.UserId)
-		end):andThen(function(p6)
-			-- upvalues: var5 (ref)
-			var5.setCanLocalUserChat(p6)
-		end):catch(function()
-			-- upvalues: var5 (ref)
-			var5.setCanLocalUserChat(false)
+	if JoinResult.canUserChatAsync and Players.LocalPlayer then
+		PromiseModule.try(function() --[[ Line: 1711 ]]
+			-- upvalues: JoinResult (ref), Players (upval)
+			return JoinResult.canUserChatAsync(Players.LocalPlayer.UserId)
+		end):andThen(function(Result) --[[ Line: 1714 ]]
+			-- upvalues: MessagesStoreModule (copy)
+			MessagesStoreModule.setCanLocalUserChat(Result)
+		end):catch(function() --[[ Line: 1717 ]]
+			-- upvalues: MessagesStoreModule (copy)
+			MessagesStoreModule.setCanLocalUserChat(false)
 		end)
 	end
-	watchPlayersService(p4, var4, var5)
-	local var14 = roactModule.createElement(UIBloxModule.App.Style.AppStyleProvider, {
+	watchPlayersService(JoinResult, StoreModule, MessagesStoreModule)
+	local Element = RoactModule.createElement(UIBloxModule.App.Style.AppStyleProvider, {
 		style = ({
 			Dark = {
-				themeName = colorMode.Dark,
+				themeName = ColorMode.Dark,
 				fontName = UIBloxModule.App.Style.Constants.FontName.Gotham
 			}
 		}).Dark
 	}, {
-		app = roactModule.createElement(appModule, {
+		app = RoactModule.createElement(AppModule, {
 			isChatWindowVisible = true,
 			isChatInputBarVisible = true,
 			isChannelBarVisible = false,
 			isDefaultChatEnabled = true,
-			store = var4,
-			translator = p4.translator,
-			gameTranslator = p4.gameTranslator,
-			getIconVoiceIndicator = p4.getIconVoiceIndicator,
-			onClickedVoiceIndicator = p4.onClickedVoiceIndicator,
-			onClickedCameraIndicator = p4.onClickedCameraIndicator,
-			selfViewListenerChanged = p4.selfViewListenerChanged,
-			getPermissions = p4.getPermissions,
-			displayCameraDeniedToast = p4.displayCameraDeniedToast,
-			isCamEnabledForUserAndPlace = p4.isCamEnabledForUserAndPlace,
-			isCameraOnlyUser = p4.isCameraOnlyUser,
-			isVoiceServiceInitialized = p4.isVoiceServiceInitialized,
-			isSpatialUIEnabled = p4.isSpatialUIEnabled,
-			expChatLoadStartTime = if getFFlagExpChatTelemetryEventTriggerModule() then os.clock() else nil
+			store = StoreModule,
+			translator = JoinResult.translator,
+			gameTranslator = JoinResult.gameTranslator,
+			getIconVoiceIndicator = JoinResult.getIconVoiceIndicator,
+			onClickedVoiceIndicator = JoinResult.onClickedVoiceIndicator,
+			onClickedCameraIndicator = JoinResult.onClickedCameraIndicator,
+			selfViewListenerChanged = JoinResult.selfViewListenerChanged,
+			getPermissions = JoinResult.getPermissions,
+			displayCameraDeniedToast = JoinResult.displayCameraDeniedToast,
+			isCamEnabledForUserAndPlace = JoinResult.isCamEnabledForUserAndPlace,
+			isCameraOnlyUser = JoinResult.isCameraOnlyUser,
+			isVoiceServiceInitialized = JoinResult.isVoiceServiceInitialized,
+			isSpatialUIEnabled = JoinResult.isSpatialUIEnabled,
+			expChatLoadStartTime = if GetFFlagExpChatTelemetryEventTriggerModule() then os.clock() else nil
 		})
 	})
-	var4:dispatch(clientAppLoaded({
-		team = playersService.LocalPlayer and playersService.LocalPlayer.Team,
-		isChatCoreGuiEnabled = starterGuiService:GetCoreGuiEnabled(Enum.CoreGuiType.Chat),
-		isTouchEnabled = userInputService.TouchEnabled,
-		isGamepadEnabled = if userInputService.PreferredInput ~= Enum.PreferredInput.Gamepad then fFlagLuaSupportMicroGamepadPreferredInput and userInputService.PreferredInput == Enum.PreferredInput.MicroGamepad else true
+	local RandomValue: boolean = UserInputService.PreferredInput == Enum.PreferredInput.Gamepad or FFlagLuaSupportMicroGamepadPreferredInput and UserInputService.PreferredInput == Enum.PreferredInput.MicroGamepad
+	StoreModule:dispatch(ClientAppLoadedFunction({
+		team = Players.LocalPlayer and Players.LocalPlayer.Team,
+		isChatCoreGuiEnabled = StarterGui:GetCoreGuiEnabled(Enum.CoreGuiType.Chat),
+		isTouchEnabled = UserInputService.TouchEnabled,
+		isGamepadEnabled = RandomValue
 	}))
-	reportVersionLoadedModule(analytics, version[1])
-	var2:trace("Roact.mount to {}", tostring(p4.parent))
-	local experienceChat = roactModule.mount(var14, p4.parent, "ExperienceChat")
-	local var15 = chatEnabledSystemMessageModule({
-		translator = p4.translator,
-		defaultSystemTextChannel = p4.defaultSystemTextChannel,
-		localPlayer = localPlayer,
-		displayVirtualSystemMessage = if var7 then showVirtualChatEnabledSystemMessage else nil
+	ReportVersionLoadedModule(Analytics, Version[1])
+	NewResult:trace("Roact.mount to {}", (tostring(JoinResult.parent)))
+	local ExperienceChat = RoactModule.mount(Element, JoinResult.parent, "ExperienceChat")
+	local ChatEnabledSystemMessageModuleResult = ChatEnabledSystemMessageModule({
+		translator = JoinResult.translator,
+		defaultSystemTextChannel = JoinResult.defaultSystemTextChannel,
+		localPlayer = LocalPlayer,
+		displayVirtualSystemMessage = if HasMessagesStoreModule then showVirtualChatEnabledSystemMessage else nil
 	})
 	
-	local function updateChatStatus(p6)
-		-- upvalues: var9 (ref), isChatRegionLockedModule (copy), displaySystemMessageModule (copy), p4 (write), expChatNewSystemMessagesExperimentation (copy), var12 (write), canPlatformEnableChatModule (copy), fFlagExpChatRefactorEnabledMessageLogicModule (copy), fStringExpChatChatWithTFAmpFeatureNameModule (copy), fStringExpChatChatWithTFAmpNameSpaceModule (copy), var2 (copy), ampApiProvider (copy), localPlayer (ref), accessResponseEnum (copy), var7 (ref), showVirtualChatEnabledSystemMessage (ref), canOnlyChatInRegionModule (copy), var15 (ref)
-		var9.setChatStatus(p6)
+	local function updateChatStatus(ChatAvailabilityStatus) --[[ Line: 1785 ]]
+		-- upvalues: ChatStatusStoreModule (copy), IsChatRegionLockedModule (upval), DisplaySystemMessageModule (upval), JoinResult (ref), ExpChatNewSystemMessagesExperimentation (upval), Flag1 (ref), CanPlatformEnableChatModule (upval), FFlagExpChatRefactorEnabledMessageLogicModule (upval), FStringExpChatChatWithTFAmpFeatureNameModule (upval), FStringExpChatChatWithTFAmpNameSpaceModule (upval), NewResult (upval), AmpApiProvider (upval), LocalPlayer (copy), AccessResponseEnum (upval), HasMessagesStoreModule (copy), showVirtualChatEnabledSystemMessage (copy), CanOnlyChatInRegionModule (upval), ChatEnabledSystemMessageModuleResult (copy)
+		ChatStatusStoreModule.setChatStatus(ChatAvailabilityStatus)
 		
-		if p6 == "GeoBlocked" or p6 ~= "Unknown" and isChatRegionLockedModule() then
-			displaySystemMessageModule("CoreScripts.TextChat.ChatWindow.ChatDisabled.RegionUnavailable", nil, "Roblox.ChatDisabled.Info", p4.translator, p4.defaultSystemTextChannel, "You can only view system messages here. Chat is not available in your region.")
+		if ChatAvailabilityStatus == "GeoBlocked" or ChatAvailabilityStatus ~= "Unknown" and IsChatRegionLockedModule() then
+			DisplaySystemMessageModule("CoreScripts.TextChat.ChatWindow.ChatDisabled.RegionUnavailable", nil, "Roblox.ChatDisabled.Info", JoinResult.translator, JoinResult.defaultSystemTextChannel, "You can only view system messages here. Chat is not available in your region.")
 			
 			return
-		elseif p6 == "AgeCheckGateExperiment" then
-			displaySystemMessageModule("CoreScripts.TextChat.ChatWindow.ChatDisabled.CheckAgeInAccountInfo", nil, "Roblox.ChatDisabled.Info", p4.translator, p4.defaultSystemTextChannel, "You can only view system messages here. Unlock chat with an age check at Settings > Account info.")
+		end
+		if ChatAvailabilityStatus == "AgeCheckGateExperiment" then
+			DisplaySystemMessageModule("CoreScripts.TextChat.ChatWindow.ChatDisabled.CheckAgeInAccountInfo", nil, "Roblox.ChatDisabled.Info", JoinResult.translator, JoinResult.defaultSystemTextChannel, "You can only view system messages here. Unlock chat with an age check at Settings > Account info.")
 			
 			return
-		elseif p6 == "SettingsDisabled" then
-			if expChatNewSystemMessagesExperimentation.isExperimentEnabled and expChatNewSystemMessagesExperimentation.isExperimentEnabled and not var12 then
-				var12 = true
-				expChatNewSystemMessagesExperimentation.logExposure()
+		end
+		if ChatAvailabilityStatus == "SettingsDisabled" then
+			if ExpChatNewSystemMessagesExperimentation.isExperimentEnabled and ExpChatNewSystemMessagesExperimentation.isExperimentEnabled and not Flag1 then
+				Flag1 = true
+				ExpChatNewSystemMessagesExperimentation.logExposure()
 			end
-			displaySystemMessageModule(if expChatNewSystemMessagesExperimentation.getNewSystemMessagesEnabled() then "CoreScripts.TextChat.Description.TurnOnChatInSettings" else "CoreScripts.TextChat.ChatWindow.ChatDisabled.SettingOff", nil, "Roblox.ChatDisabled.Info", p4.translator, p4.defaultSystemTextChannel, if expChatNewSystemMessagesExperimentation.getNewSystemMessagesEnabled() then "Chat with people of similar age groups and trusted friends." else "You can only view system messages here. Update your Communication settings to turn on chat.")
+			DisplaySystemMessageModule(if ExpChatNewSystemMessagesExperimentation.getNewSystemMessagesEnabled() then "CoreScripts.TextChat.Description.TurnOnChatInSettings" else "CoreScripts.TextChat.ChatWindow.ChatDisabled.SettingOff", nil, "Roblox.ChatDisabled.Info", JoinResult.translator, JoinResult.defaultSystemTextChannel, if ExpChatNewSystemMessagesExperimentation.getNewSystemMessagesEnabled() then "Chat with people of similar age groups and trusted friends." else "You can only view system messages here. Update your Communication settings to turn on chat.")
 			
 			return
-		elseif p6 == "SettingsDisabledVpc" then
-			if expChatNewSystemMessagesExperimentation.isExperimentEnabled and expChatNewSystemMessagesExperimentation.isExperimentEnabled and not var12 then
-				var12 = true
-				expChatNewSystemMessagesExperimentation.logExposure()
+		elseif ChatAvailabilityStatus == "SettingsDisabledVpc" then
+			if ExpChatNewSystemMessagesExperimentation.isExperimentEnabled and ExpChatNewSystemMessagesExperimentation.isExperimentEnabled and not Flag1 then
+				Flag1 = true
+				ExpChatNewSystemMessagesExperimentation.logExposure()
 			end
-			displaySystemMessageModule(if expChatNewSystemMessagesExperimentation.getNewSystemMessagesEnabled() then "CoreScripts.TextChat.Description.AskYourParentForPermissionToChat" else "CoreScripts.TextChat.ChatWindow.ChatDisabled.AskForPermission", nil, "Roblox.ChatDisabled.Info", p4.translator, p4.defaultSystemTextChannel, if expChatNewSystemMessagesExperimentation.getNewSystemMessagesEnabled() then "Ask your parent for permission to chat in Privacy>Communication settings." else "You can only view system messages here. Ask your parent for permission to chat in Communication settings.")
+			DisplaySystemMessageModule(if ExpChatNewSystemMessagesExperimentation.getNewSystemMessagesEnabled() then "CoreScripts.TextChat.Description.AskYourParentForPermissionToChat" else "CoreScripts.TextChat.ChatWindow.ChatDisabled.AskForPermission", nil, "Roblox.ChatDisabled.Info", JoinResult.translator, JoinResult.defaultSystemTextChannel, if ExpChatNewSystemMessagesExperimentation.getNewSystemMessagesEnabled() then "Ask your parent for permission to chat in Privacy>Communication settings." else "You can only view system messages here. Ask your parent for permission to chat in Communication settings.")
 			
 			return
-		elseif p6 == "AgeCheckVpc" then
-			if expChatNewSystemMessagesExperimentation.isExperimentEnabled and expChatNewSystemMessagesExperimentation.isExperimentEnabled and not var12 then
-				var12 = true
-				expChatNewSystemMessagesExperimentation.logExposure()
+		elseif ChatAvailabilityStatus == "AgeCheckVpc" then
+			if ExpChatNewSystemMessagesExperimentation.isExperimentEnabled and ExpChatNewSystemMessagesExperimentation.isExperimentEnabled and not Flag1 then
+				Flag1 = true
+				ExpChatNewSystemMessagesExperimentation.logExposure()
 			end
-			displaySystemMessageModule(if expChatNewSystemMessagesExperimentation.getNewSystemMessagesEnabled() then "CoreScripts.TextChat.Description.AskYourParentForPermissionToChat" else "CoreScripts.TextChat.ChatWindow.ChatDisabled.AskForPermissionToAgeCheck", nil, "Roblox.ChatDisabled.Info", p4.translator, p4.defaultSystemTextChannel, if expChatNewSystemMessagesExperimentation.getNewSystemMessagesEnabled() then "Ask your parent for permission to chat in Privacy>Communication settings." else "You can only view system messages here. Ask your parent for permission to age check in Communication settings.")
+			DisplaySystemMessageModule(if ExpChatNewSystemMessagesExperimentation.getNewSystemMessagesEnabled() then "CoreScripts.TextChat.Description.AskYourParentForPermissionToChat" else "CoreScripts.TextChat.ChatWindow.ChatDisabled.AskForPermissionToAgeCheck", nil, "Roblox.ChatDisabled.Info", JoinResult.translator, JoinResult.defaultSystemTextChannel, if ExpChatNewSystemMessagesExperimentation.getNewSystemMessagesEnabled() then "Ask your parent for permission to chat in Privacy>Communication settings." else "You can only view system messages here. Ask your parent for permission to age check in Communication settings.")
 			
 			return
-		elseif (canPlatformEnableChatModule() or p6 ~= "AgeVerificationRequired") and p6 ~= "IdVerificationRequired" then
-			if p6 == "AgeVerificationRequired" then
-				if expChatNewSystemMessagesExperimentation.isExperimentEnabled and expChatNewSystemMessagesExperimentation.isExperimentEnabled and not var12 then
-					var12 = true
-					expChatNewSystemMessagesExperimentation.logExposure()
+		elseif (CanPlatformEnableChatModule() or ChatAvailabilityStatus ~= "AgeVerificationRequired") and ChatAvailabilityStatus ~= "IdVerificationRequired" then
+			if ChatAvailabilityStatus == "AgeVerificationRequired" then
+				if ExpChatNewSystemMessagesExperimentation.isExperimentEnabled and ExpChatNewSystemMessagesExperimentation.isExperimentEnabled and not Flag1 then
+					Flag1 = true
+					ExpChatNewSystemMessagesExperimentation.logExposure()
 				end
-				displaySystemMessageModule(if expChatNewSystemMessagesExperimentation.getNewSystemMessagesEnabled() then "CoreScripts.TextChat.Description.UnlockChatWithAnAgeCheck" else "CoreScripts.TextChat.ChatWindow.ChatDisabled.GetAnAgeCheck", nil, "Roblox.ChatDisabled.Info", p4.translator, p4.defaultSystemTextChannel, if expChatNewSystemMessagesExperimentation.getNewSystemMessagesEnabled() then "Unlock chat with an age check." else "You can only view system messages here. Get an age check to chat.")
+				DisplaySystemMessageModule(if ExpChatNewSystemMessagesExperimentation.getNewSystemMessagesEnabled() then "CoreScripts.TextChat.Description.UnlockChatWithAnAgeCheck" else "CoreScripts.TextChat.ChatWindow.ChatDisabled.GetAnAgeCheck", nil, "Roblox.ChatDisabled.Info", JoinResult.translator, JoinResult.defaultSystemTextChannel, if ExpChatNewSystemMessagesExperimentation.getNewSystemMessagesEnabled() then "Unlock chat with an age check." else "You can only view system messages here. Get an age check to chat.")
 				
 				return
-			elseif fFlagExpChatRefactorEnabledMessageLogicModule and p6 == "Enabled" then
-				coroutine.wrap(function()
-					-- upvalues: fStringExpChatChatWithTFAmpFeatureNameModule (copy), fStringExpChatChatWithTFAmpNameSpaceModule (copy), var2 (copy), ampApiProvider (copy), localPlayer (copy), accessResponseEnum (copy), var7 (copy), showVirtualChatEnabledSystemMessage (copy), displaySystemMessageModule (copy), p4 (copy), canOnlyChatInRegionModule (copy), var15 (copy)
-					if fStringExpChatChatWithTFAmpFeatureNameModule == "" or fStringExpChatChatWithTFAmpNameSpaceModule == "" then
-						var2:error("AMP feature name or namespace are not set")
+			elseif FFlagExpChatRefactorEnabledMessageLogicModule and ChatAvailabilityStatus == "Enabled" then
+				coroutine.wrap(function() --[[ Line: 1905 ]]
+					-- upvalues: FStringExpChatChatWithTFAmpFeatureNameModule (upval), FStringExpChatChatWithTFAmpNameSpaceModule (upval), NewResult (upval), AmpApiProvider (upval), LocalPlayer (upval), AccessResponseEnum (upval), HasMessagesStoreModule (upval), showVirtualChatEnabledSystemMessage (upval), DisplaySystemMessageModule (upval), JoinResult (upval), CanOnlyChatInRegionModule (upval), ChatEnabledSystemMessageModuleResult (upval)
+					if FStringExpChatChatWithTFAmpFeatureNameModule == "" or FStringExpChatChatWithTFAmpNameSpaceModule == "" then
+						NewResult:error("AMP feature name or namespace are not set")
 						
 						return
 					end
-					local featureAccess = ampApiProvider.getFeatureAccess({ fStringExpChatChatWithTFAmpFeatureNameModule }, fStringExpChatChatWithTFAmpNameSpaceModule)
+					local FeatureAccess = AmpApiProvider.getFeatureAccess({ FStringExpChatChatWithTFAmpFeatureNameModule }, FStringExpChatChatWithTFAmpNameSpaceModule)
 					
-					if localPlayer.ChatAvailabilityStatus ~= "Enabled" then return end
-					local var16 = if featureAccess.featureAccessList and #featureAccess.featureAccessList > 0 and featureAccess.featureAccessList[1] then featureAccess.featureAccessList[1].access == accessResponseEnum.Granted else nil
+					if LocalPlayer.ChatAvailabilityStatus ~= "Enabled" then return end
+					local IsAccessMatch = if FeatureAccess.featureAccessList and #FeatureAccess.featureAccessList > 0 and FeatureAccess.featureAccessList[1] then FeatureAccess.featureAccessList[1].access == AccessResponseEnum.Granted else nil
 					
-					if var16 == nil then
-						var2:error("No feature access list found after AMP call")
+					if IsAccessMatch == nil then
+						NewResult:error("No feature access list found after AMP call")
 						
 						return
-					elseif var16 then
-						if var7 then
+					end
+					if IsAccessMatch then
+						if HasMessagesStoreModule then
 							showVirtualChatEnabledSystemMessage("CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithTF", nil, "Only your trusted friends can chat with you.")
 							
 							return
+						else
+							DisplaySystemMessageModule("CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithTF", nil, "Roblox.ChatEnabled.Info", JoinResult.translator, JoinResult.defaultSystemTextChannel, "Only your trusted friends can chat with you.")
+							
+							return
 						end
-						displaySystemMessageModule("CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatWithTF", nil, "Roblox.ChatEnabled.Info", p4.translator, p4.defaultSystemTextChannel, "Only your trusted friends can chat with you.")
+					elseif not CanOnlyChatInRegionModule() then
+						ChatEnabledSystemMessageModuleResult()
 						
 						return
-					elseif not canOnlyChatInRegionModule() then
-						var15()
-						
-						return
-					elseif var7 then
-						showVirtualChatEnabledSystemMessage("CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatInRegion", nil, "You can view system messages and chat with users in your region only.")
-						
-						return
+					else
+						if HasMessagesStoreModule then
+							showVirtualChatEnabledSystemMessage("CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatInRegion", nil, "You can view system messages and chat with users in your region only.")
+							
+							return
+						else
+							DisplaySystemMessageModule("CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatInRegion", nil, "Roblox.ChatEnabled.Info", JoinResult.translator, JoinResult.defaultSystemTextChannel, "You can view system messages and chat with users in your region only.")
+						end
 					end
-					displaySystemMessageModule("CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatInRegion", nil, "Roblox.ChatEnabled.Info", p4.translator, p4.defaultSystemTextChannel, "You can view system messages and chat with users in your region only.")
 				end)()
 				
 				return
-			elseif p6 == "EnabledBubble" or p6 == "Enabled" and canOnlyChatInRegionModule() then
-				if var7 then
-					showVirtualChatEnabledSystemMessage("CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatInRegion", nil, "You can view system messages and chat with users in your region only.")
+			else
+				if ChatAvailabilityStatus == "EnabledBubble" or ChatAvailabilityStatus == "Enabled" and CanOnlyChatInRegionModule() then
+					if HasMessagesStoreModule then
+						showVirtualChatEnabledSystemMessage("CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatInRegion", nil, "You can view system messages and chat with users in your region only.")
+						
+						return
+					else
+						DisplaySystemMessageModule("CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatInRegion", nil, "Roblox.ChatEnabled.Info", JoinResult.translator, JoinResult.defaultSystemTextChannel, "You can view system messages and chat with users in your region only.")
+						
+						return
+					end
+				elseif ChatAvailabilityStatus == "Enabled" then
+					ChatEnabledSystemMessageModuleResult()
 					
 					return
-				end
-				displaySystemMessageModule("CoreScripts.TextChat.ChatWindow.ChatEnabled.ChatInRegion", nil, "Roblox.ChatEnabled.Info", p4.translator, p4.defaultSystemTextChannel, "You can view system messages and chat with users in your region only.")
-				
-				return
-			elseif p6 == "Enabled" then
-				var15()
-				
-				return
-			elseif p6 == "AllUsers" or p6 == "NoOne" then
-				if getChatTranslationEnabled() then
-					displaySystemMessageModule("CoreScripts.TextChat.ChatTranslation.ChatWindow.SystemMessageNew", nil, "Roblox.ChatTranslation.ChatWindow.SystemMessage", p4.translator, p4.defaultSystemTextChannel, "Roblox automatically translates supported languages in chat")
-					
+				else
+					if ChatAvailabilityStatus == "AllUsers" or ChatAvailabilityStatus == "NoOne" then
+						if getChatTranslationEnabled() then
+							DisplaySystemMessageModule("CoreScripts.TextChat.ChatTranslation.ChatWindow.SystemMessageNew", nil, "Roblox.ChatTranslation.ChatWindow.SystemMessage", JoinResult.translator, JoinResult.defaultSystemTextChannel, "Roblox automatically translates supported languages in chat")
+							
+							return
+						end
+					elseif ChatAvailabilityStatus == "Ineligible" or ChatAvailabilityStatus ~= "Unknown" then
+						DisplaySystemMessageModule("CoreScripts.TextChat.ChatWindow.ChatDisabled.OnlyViewSystemMessages", nil, "Roblox.ChatDisabled.Info", JoinResult.translator, JoinResult.defaultSystemTextChannel, "You can only view system messages here.")
+					end
 					return
 				end
-			elseif p6 == "Ineligible" or p6 ~= "Unknown" then
-				displaySystemMessageModule("CoreScripts.TextChat.ChatWindow.ChatDisabled.OnlyViewSystemMessages", nil, "Roblox.ChatDisabled.Info", p4.translator, p4.defaultSystemTextChannel, "You can only view system messages here.")
 			end
-			return
-		elseif expChatNewSystemMessagesExperimentation.isExperimentEnabled and expChatNewSystemMessagesExperimentation.isExperimentEnabled and not var12 then
-			var12 = true
-			expChatNewSystemMessagesExperimentation.logExposure()
+		else
+			if ExpChatNewSystemMessagesExperimentation.isExperimentEnabled and ExpChatNewSystemMessagesExperimentation.isExperimentEnabled and not Flag1 then
+				Flag1 = true
+				ExpChatNewSystemMessagesExperimentation.logExposure()
+			end
+			DisplaySystemMessageModule(if ExpChatNewSystemMessagesExperimentation.getNewSystemMessagesEnabled() then "CoreScripts.TextChat.Description.UnlockChatPrivacyCommunications" else "CoreScripts.TextChat.ChatWindow.ChatDisabled.CheckAgeInSettings", nil, "Roblox.ChatDisabled.Info", JoinResult.translator, JoinResult.defaultSystemTextChannel, if ExpChatNewSystemMessagesExperimentation.getNewSystemMessagesEnabled() then "Unlock chat with an age check in Privacy>Communication settings." else "You can only view system messages here. To chat, get an age check in your Communication settings.")
 		end
-		displaySystemMessageModule(if expChatNewSystemMessagesExperimentation.getNewSystemMessagesEnabled() then "CoreScripts.TextChat.Description.UnlockChatPrivacyCommunications" else "CoreScripts.TextChat.ChatWindow.ChatDisabled.CheckAgeInSettings", nil, "Roblox.ChatDisabled.Info", p4.translator, p4.defaultSystemTextChannel, if expChatNewSystemMessagesExperimentation.getNewSystemMessagesEnabled() then "Unlock chat with an age check in Privacy>Communication settings." else "You can only view system messages here. To chat, get an age check in your Communication settings.")
 	end
 	
-	local var16 = 0
-	local randomValue = math.random(expChatHiddenMessagesPromptThresholdLowerBound, expChatHiddenMessagesPromptThresholdUpperBound)
+	local Count = 0
+	RandomValue = math.random(ExpChatHiddenMessagesPromptThresholdLowerBound, ExpChatHiddenMessagesPromptThresholdUpperBound)
 	
-	local function handleUserMessageIntentSent(p6)
-		-- upvalues: var2 (copy), var5 (ref), isUserChatEnabledModule (copy), localPlayer (ref), var16 (write), randomValue (write), expChatHiddenMessagesPromptThresholdLowerBound (copy), expChatHiddenMessagesPromptThresholdUpperBound (copy), displaySystemMessageModule (copy), p4 (write), getTransparencyStoreModule (copy)
-		var2:debug("Handling a message from UserMessageIntentSent")
-		var5.handleHiddenMessageReceived(p6)
+	local function handleUserMessageIntentSent(UserIntentMessage) --[[ Line: 2031 ]]
+		-- upvalues: NewResult (upval), MessagesStoreModule (copy), IsUserChatEnabledModule (upval), LocalPlayer (copy), Count (ref), RandomValue (ref), ExpChatHiddenMessagesPromptThresholdLowerBound (upval), ExpChatHiddenMessagesPromptThresholdUpperBound (upval), DisplaySystemMessageModule (upval), JoinResult (ref), GetTransparencyStoreModule (upval)
+		NewResult:debug("Handling a message from UserMessageIntentSent")
+		MessagesStoreModule.handleHiddenMessageReceived(UserIntentMessage)
 		
-		if not isUserChatEnabledModule(localPlayer.ChatAvailabilityStatus) then
-			var16 += 1
+		if not IsUserChatEnabledModule(LocalPlayer.ChatAvailabilityStatus) then
+			Count += 1
 			
-			if var16 == randomValue then
-				randomValue += math.random(expChatHiddenMessagesPromptThresholdLowerBound, expChatHiddenMessagesPromptThresholdUpperBound)
-				displaySystemMessageModule("CoreScripts.TextChat.ChatWindow.ChatDisabled.DontMissMessages", nil, "Roblox.ChatDisabled.Info", p4.translator, p4.defaultSystemTextChannel, "Don\226\128\153t miss messages. Unlock chat with an age check.")
+			if Count == RandomValue then
+				RandomValue += math.random(ExpChatHiddenMessagesPromptThresholdLowerBound, ExpChatHiddenMessagesPromptThresholdUpperBound)
+				DisplaySystemMessageModule("CoreScripts.TextChat.ChatWindow.ChatDisabled.DontMissMessages", nil, "Roblox.ChatDisabled.Info", JoinResult.translator, JoinResult.defaultSystemTextChannel, "Don’t miss messages. Unlock chat with an age check.")
 			end
 		end
-		getTransparencyStoreModule(false).resetTextTransparency()
+		GetTransparencyStoreModule(false).resetTextTransparency()
 	end
 	
-	local _ = function()
-		-- upvalues: fFlagExpChatEnableFOMOUpsellModule (copy), shouldShowFOMOUpsellModule (copy), fFlagExpChatEnableCrossAgeChatActivityModule (copy), shouldShowCrossAgeChatActivityModule (copy)
-		return fFlagExpChatEnableFOMOUpsellModule and shouldShowFOMOUpsellModule() or fFlagExpChatEnableCrossAgeChatActivityModule and shouldShowCrossAgeChatActivityModule()
+	local _ = function() --[[ Line: 2058 | Named "shouldConnectToUserMessageIntentSent" ]]
+		-- upvalues: FFlagExpChatEnableFOMOUpsellModule (upval), ShouldShowFOMOUpsellModule (upval), FFlagExpChatEnableCrossAgeChatActivityModule (upval), ShouldShowCrossAgeChatActivityModule (upval)
+		local ShouldShowFOMOUpsellModule1 = FFlagExpChatEnableFOMOUpsellModule and ShouldShowFOMOUpsellModule()
+		local ShouldShowCrossAgeChatActivityModule1 = FFlagExpChatEnableCrossAgeChatActivityModule and ShouldShowCrossAgeChatActivityModule()
+		
+		return ShouldShowFOMOUpsellModule1 or ShouldShowCrossAgeChatActivityModule1
 	end
 	
-	if localPlayer then
-		if fFlagEnableModerateChatRemoteEvent then
-			local var17 = getExperienceChatVisualConfigModule()
-			local var18 = getChatModerationStoreModule(false)
-			local var19 = false
-			p4.moderateChatStoreDisposeEffect = signalsModule.createEffect(function(p6)
-				-- upvalues: var18 (ref), var19 (write), displaySystemMessageModule (copy), p4 (write), notificationModalsManagerModule (copy), UIBloxModule (copy), var17 (ref), fFlagConnectionsToFriendsRename (copy)
-				local isSettingEnabled = var18.getIsSettingEnabled(p6)
+	if LocalPlayer then
+		if FFlagEnableModerateChatRemoteEvent then
+			local ExperienceChatVisualConfigModule = GetExperienceChatVisualConfigModule()
+			local ChatModerationStoreModule = GetChatModerationStoreModule(false)
+			local IsSettingEnabled = false
+			JoinResult.moderateChatStoreDisposeEffect = SignalsModule.createEffect(function(p3) --[[ Line: 2072 ]]
+				-- upvalues: ChatModerationStoreModule (copy), IsSettingEnabled (ref), DisplaySystemMessageModule (upval), JoinResult (ref), NotificationModalsManagerModule (upval), UIBloxModule (upval), ExperienceChatVisualConfigModule (copy)
+				local IsSettingEnabled1 = ChatModerationStoreModule.getIsSettingEnabled(p3)
 				
-				if isSettingEnabled ~= var19 then
-					if isSettingEnabled then
-						displaySystemMessageModule("CoreScripts.TextChat.MessageStatus.Warning.ModerateChatOn", nil, "Roblox.MessageStatus.Warning.ModerateChatOn", p4.translator, p4.defaultSystemTextChannel)
-						notificationModalsManagerModule.SetUIBloxToast({
-							iconImage = UIBloxModule.App.ImageSet.Images[var17.icon.off],
-							toastSubtitle = p4.translator:FormatByKey("CoreScripts.TextChat.Toast.ModerateChatOn.Subtitle"),
-							toastTitle = p4.translator:FormatByKey("CoreScripts.TextChat.Toast.ModerateChatOn.Title")
+				if IsSettingEnabled1 ~= IsSettingEnabled then
+					if IsSettingEnabled1 then
+						DisplaySystemMessageModule("CoreScripts.TextChat.MessageStatus.Warning.ModerateChatOn", nil, "Roblox.MessageStatus.Warning.ModerateChatOn", JoinResult.translator, JoinResult.defaultSystemTextChannel)
+						NotificationModalsManagerModule.SetUIBloxToast({
+							iconImage = UIBloxModule.App.ImageSet.Images[ExperienceChatVisualConfigModule.icon.off],
+							toastSubtitle = JoinResult.translator:FormatByKey("CoreScripts.TextChat.Toast.ModerateChatOn.Subtitle"),
+							toastTitle = JoinResult.translator:FormatByKey("CoreScripts.TextChat.Toast.ModerateChatOn.Title")
 						})
 					else
-						displaySystemMessageModule("CoreScripts.TextChat.MessageStatus.Warning.ModerateChatOff", nil, "Roblox.MessageStatus.Warning.ModerateChatOff", p4.translator, p4.defaultSystemTextChannel)
-						notificationModalsManagerModule.SetUIBloxToast({
-							iconImage = UIBloxModule.App.ImageSet.Images[var17.icon.off],
-							toastSubtitle = p4.translator:FormatByKey(if fFlagConnectionsToFriendsRename then "CoreScripts.TextChat.Toast.ModerateChatOff.Subtitle.FriendsRename" else "CoreScripts.TextChat.Toast.ModerateChatOff.Subtitle"),
-							toastTitle = p4.translator:FormatByKey("CoreScripts.TextChat.Toast.ModerateChatOff.Title")
+						DisplaySystemMessageModule("CoreScripts.TextChat.MessageStatus.Warning.ModerateChatOff", nil, "Roblox.MessageStatus.Warning.ModerateChatOff", JoinResult.translator, JoinResult.defaultSystemTextChannel)
+						NotificationModalsManagerModule.SetUIBloxToast({
+							iconImage = UIBloxModule.App.ImageSet.Images[ExperienceChatVisualConfigModule.icon.off],
+							toastSubtitle = JoinResult.translator:FormatByKey("CoreScripts.TextChat.Toast.ModerateChatOff.Subtitle.FriendsRename"),
+							toastTitle = JoinResult.translator:FormatByKey("CoreScripts.TextChat.Toast.ModerateChatOff.Title")
 						})
 					end
-					var19 = isSettingEnabled
+					IsSettingEnabled = IsSettingEnabled1
 				end
 			end)
 		end
-		local chatAvailabilityStatus = localPlayer.ChatAvailabilityStatus
-		var2:debug("Local player's initial ChatAvailabilityStatus is {}", chatAvailabilityStatus)
-		updateChatStatus(chatAvailabilityStatus)
-		local userMessageIntentSentConnection = nil
+		local ChatAvailabilityStatus = LocalPlayer.ChatAvailabilityStatus
+		NewResult:debug("Local player's initial ChatAvailabilityStatus is {}", ChatAvailabilityStatus)
+		updateChatStatus(ChatAvailabilityStatus)
+		local UserMessageIntentSentConnection = nil
+		local ShouldShowFOMOUpsellModule1 = FFlagExpChatEnableFOMOUpsellModule and ShouldShowFOMOUpsellModule()
+		local ShouldShowCrossAgeChatActivityModule1 = FFlagExpChatEnableCrossAgeChatActivityModule and ShouldShowCrossAgeChatActivityModule()
 		
-		if fFlagExpChatEnableFOMOUpsellModule and shouldShowFOMOUpsellModule() or fFlagExpChatEnableCrossAgeChatActivityModule and shouldShowCrossAgeChatActivityModule() then
-			var2:debug("Connecting to UserMessageIntentSent")
-			userMessageIntentSentConnection = textChatService.UserMessageIntentSent:Connect(handleUserMessageIntentSent)
+		if ShouldShowFOMOUpsellModule1 or ShouldShowCrossAgeChatActivityModule1 then
+			NewResult:debug("Connecting to UserMessageIntentSent")
+			UserMessageIntentSentConnection = TextChatService.UserMessageIntentSent:Connect(handleUserMessageIntentSent)
 		end
-		localPlayer:GetPropertyChangedSignal("ChatAvailabilityStatus"):Connect(function()
-			-- upvalues: chatAvailabilityStatus (write), localPlayer (ref), var2 (copy), updateChatStatus (ref), fFlagExpChatPresetChatEnabled (copy), fFlagExpChatPresetChatLoadTestEnabled (copy), isUserChatEnabledModule (copy), initializePresetChatModule (copy), getPresetChatStoreModule (copy), fFlagExpChatEnableFOMOUpsellModule (copy), shouldShowFOMOUpsellModule (copy), fFlagExpChatEnableCrossAgeChatActivityModule (copy), shouldShowCrossAgeChatActivityModule (copy), userMessageIntentSentConnection (write), textChatService (copy), handleUserMessageIntentSent (ref), fFlagExpChatClearHiddenMessagesPostAgeCheckModule (copy), var5 (ref), getTransparencyStoreModule (copy)
-			chatAvailabilityStatus = localPlayer.ChatAvailabilityStatus
-			var2:debug("Local player's ChatAvailabilityStatus has changed to {}", chatAvailabilityStatus)
-			updateChatStatus(chatAvailabilityStatus)
+		LocalPlayer:GetPropertyChangedSignal("ChatAvailabilityStatus"):Connect(function() --[[ Line: 2133 ]]
+			-- upvalues: ChatAvailabilityStatus (ref), LocalPlayer (copy), NewResult (upval), updateChatStatus (copy), FFlagExpChatPresetChatEnabled (upval), FFlagExpChatPresetChatLoadTestEnabled (upval), IsUserChatEnabledModule (upval), InitializePresetChatModule (upval), GetPresetChatStoreModule (upval), FFlagExpChatEnableFOMOUpsellModule (upval), ShouldShowFOMOUpsellModule (upval), FFlagExpChatEnableCrossAgeChatActivityModule (upval), ShouldShowCrossAgeChatActivityModule (upval), UserMessageIntentSentConnection (ref), TextChatService (upval), handleUserMessageIntentSent (copy), FFlagExpChatClearHiddenMessagesPostAgeCheckModule (upval), MessagesStoreModule (copy), GetTransparencyStoreModule (upval)
+			ChatAvailabilityStatus = LocalPlayer.ChatAvailabilityStatus
+			NewResult:debug("Local player's ChatAvailabilityStatus has changed to {}", ChatAvailabilityStatus)
+			updateChatStatus(ChatAvailabilityStatus)
 			
-			if (fFlagExpChatPresetChatEnabled or fFlagExpChatPresetChatLoadTestEnabled) and isUserChatEnabledModule(chatAvailabilityStatus) then
-				initializePresetChatModule(getPresetChatStoreModule(false), not fFlagExpChatPresetChatEnabled and fFlagExpChatPresetChatLoadTestEnabled)
+			if (FFlagExpChatPresetChatEnabled or FFlagExpChatPresetChatLoadTestEnabled) and IsUserChatEnabledModule(ChatAvailabilityStatus) then
+				InitializePresetChatModule(GetPresetChatStoreModule(false), not FFlagExpChatPresetChatEnabled and FFlagExpChatPresetChatLoadTestEnabled)
 			end
-			if (fFlagExpChatEnableFOMOUpsellModule and shouldShowFOMOUpsellModule() or fFlagExpChatEnableCrossAgeChatActivityModule and shouldShowCrossAgeChatActivityModule()) and not userMessageIntentSentConnection then
-				var2:debug("Connecting to UserMessageIntentSent")
-				userMessageIntentSentConnection = textChatService.UserMessageIntentSent:Connect(handleUserMessageIntentSent)
+			local ShouldShowFOMOUpsellModule1 = FFlagExpChatEnableFOMOUpsellModule and ShouldShowFOMOUpsellModule()
+			local ShouldShowCrossAgeChatActivityModule1 = FFlagExpChatEnableCrossAgeChatActivityModule and ShouldShowCrossAgeChatActivityModule()
+			
+			if (ShouldShowFOMOUpsellModule1 or ShouldShowCrossAgeChatActivityModule1) and not UserMessageIntentSentConnection then
+				NewResult:debug("Connecting to UserMessageIntentSent")
+				UserMessageIntentSentConnection = TextChatService.UserMessageIntentSent:Connect(handleUserMessageIntentSent)
 			end
-			if fFlagExpChatEnableFOMOUpsellModule and isUserChatEnabledModule(chatAvailabilityStatus) and userMessageIntentSentConnection and (not fFlagExpChatEnableCrossAgeChatActivityModule or not shouldShowCrossAgeChatActivityModule()) then
-				var2:debug("Disconnecting from UserMessageIntentSent")
-				userMessageIntentSentConnection:Disconnect()
+			if FFlagExpChatEnableFOMOUpsellModule and IsUserChatEnabledModule(ChatAvailabilityStatus) and UserMessageIntentSentConnection and (not FFlagExpChatEnableCrossAgeChatActivityModule or not ShouldShowCrossAgeChatActivityModule()) then
+				NewResult:debug("Disconnecting from UserMessageIntentSent")
+				UserMessageIntentSentConnection:Disconnect()
 				
-				if fFlagExpChatClearHiddenMessagesPostAgeCheckModule then
-					var5.handleHiddenMessagesCleared()
-					getTransparencyStoreModule(false).resetTextTransparency()
+				if FFlagExpChatClearHiddenMessagesPostAgeCheckModule then
+					MessagesStoreModule.handleHiddenMessagesCleared()
+					GetTransparencyStoreModule(false).resetTextTransparency()
 				end
 			end
-			var5.setCanLocalUserChat(isUserChatEnabledModule(chatAvailabilityStatus))
+			MessagesStoreModule.setCanLocalUserChat(IsUserChatEnabledModule(ChatAvailabilityStatus))
 		end)
-	elseif isChatRegionLockedModule() then
-		displaySystemMessageModule("CoreScripts.TextChat.ChatWindow.ChatDisabled.RegionUnavailable", nil, "Roblox.ChatDisabled.Info", p4.translator, p4.defaultSystemTextChannel, "You can only view system messages here. Chat is currently unavailable in your region.")
+	elseif IsChatRegionLockedModule() then
+		DisplaySystemMessageModule("CoreScripts.TextChat.ChatWindow.ChatDisabled.RegionUnavailable", nil, "Roblox.ChatDisabled.Info", JoinResult.translator, JoinResult.defaultSystemTextChannel, "You can only view system messages here. Chat is currently unavailable in your region.")
 	end
-	if fFlagExpChatPresetChatEnabled or fFlagExpChatPresetChatLoadTestEnabled then
-		initializePresetChatModule(getPresetChatStoreModule(false), not fFlagExpChatPresetChatEnabled and fFlagExpChatPresetChatLoadTestEnabled)
+	if FFlagExpChatPresetChatEnabled or FFlagExpChatPresetChatLoadTestEnabled then
+		InitializePresetChatModule(GetPresetChatStoreModule(false), not FFlagExpChatPresetChatEnabled and FFlagExpChatPresetChatLoadTestEnabled)
 	end
-	return { roactInstance = experienceChat }
+	return { roactInstance = ExperienceChat }
 end

@@ -1,72 +1,72 @@
-﻿local parent = script.Parent.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local cryoModule = require(parent_1.Cryo)
-local reactModule = require(parent_1.React)
-local object = require(parent_1.LuauPolyfill).Object
-local interactableListModule = require(parent.Core.Control.InteractableList)
-local selectionModeModule = require(parent.Core.Control.Enum.SelectionMode)
-local useCursorModule = require(parent.App.SelectionCursor.useCursor)
-local iconTabModule = require(script.Parent.IconTab)
-local horizontalContainerModule = require(script.Parent.HorizontalContainer)
+﻿local Parent = script.Parent.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local CryoModule = require(Parent1.Cryo)
+local ReactModule = require(Parent1.React)
+local Object = require(Parent1.LuauPolyfill).Object
+local InteractableListModule = require(Parent.Core.Control.InteractableList)
+local SelectionModeModule = require(Parent.Core.Control.Enum.SelectionMode)
+local UseCursorModule = require(Parent.App.SelectionCursor.useCursor)
+local IconTabModule = require(script.Parent.IconTab)
+local HorizontalContainerModule = require(script.Parent.HorizontalContainer)
 local _ = require(script.Parent.Types)
-local constantsModule = require(script.Parent.Constants)
-local t = {
+local ConstantsModule = require(script.Parent.Constants)
+local config = {
 	selection = { 1 },
 	items = {},
 	padding = {
-		left = constantsModule.ICON_TAB_PADDING,
-		right = constantsModule.ICON_TAB_PADDING
+		left = ConstantsModule.ICON_TAB_PADDING,
+		right = ConstantsModule.ICON_TAB_PADDING
 	},
-	itemSpacing = UDim.new(0, constantsModule.ICON_TAB_ITEM_SPACING),
+	itemSpacing = UDim.new(0, ConstantsModule.ICON_TAB_ITEM_SPACING),
 	itemPadding = {
-		left = constantsModule.ICON_TAB_ITEM_PADDING_LEFT,
-		right = constantsModule.ICON_TAB_ITEM_PADDING_RIGHT
+		left = ConstantsModule.ICON_TAB_ITEM_PADDING_LEFT,
+		right = ConstantsModule.ICON_TAB_ITEM_PADDING_RIGHT
 	}
 }
 
-return function(p1)
-	-- upvalues: object (ref), t (ref), useCursorModule (ref), horizontalContainerModule (ref), constantsModule (ref), reactModule (ref), interactableListModule (ref), cryoModule (ref), iconTabModule (ref), selectionModeModule (ref)
-	local var1 = object.assign({}, t, p1)
-	local var2 = useCursorModule(UDim.new(0.5, 0), 0)
+return function(p1) --[[ Line: 43 | Named "IconTabGroup" ]]
+	-- upvalues: Object (copy), config (copy), UseCursorModule (copy), HorizontalContainerModule (copy), ConstantsModule (copy), ReactModule (copy), InteractableListModule (copy), CryoModule (copy), IconTabModule (copy), SelectionModeModule (copy)
+	local AssignResult = Object.assign({}, config, p1)
+	local UseCursorModuleResult = UseCursorModule(UDim.new(0.5, 0), 0)
 	
-	return horizontalContainerModule({
+	return HorizontalContainerModule({
 		showRoundedBackground = false,
-		size = UDim2.new(0, 0, 0, constantsModule.ICON_TAB_GROUP_HEIGHT),
+		size = UDim2.new(0, 0, 0, ConstantsModule.ICON_TAB_GROUP_HEIGHT),
 		automaticSize = Enum.AutomaticSize.X,
-		padding = var1.padding
+		padding = AssignResult.padding
 	}, {
-		MainTabList = reactModule.createElement(interactableListModule, {
+		MainTabList = ReactModule.createElement(InteractableListModule, {
 			size = UDim2.new(0, 0, 1, 0),
 			automaticSize = Enum.AutomaticSize.X,
 			fillDirection = Enum.FillDirection.Horizontal,
 			horizontalAlignment = Enum.HorizontalAlignment.Left,
 			sortOrder = Enum.SortOrder.LayoutOrder,
-			itemList = var1.items,
+			itemList = AssignResult.items,
 			itemSize = UDim2.fromScale(0, 0),
-			renderItem = function(p2, p3, p4)
-				-- upvalues: cryoModule (copy), var1 (ref), var2 (ref), reactModule (copy), iconTabModule (copy)
-				return reactModule.createElement(iconTabModule, {
-					item = p2,
-					selected = p4,
-					controlState = p3,
-					padding = var1.itemPadding
+			renderItem = function(Item, ControlState, Selected) --[[ Line: 60 ]]
+				-- upvalues: CryoModule (upval), AssignResult (copy), UseCursorModuleResult (copy), ReactModule (upval), IconTabModule (upval)
+				return ReactModule.createElement(IconTabModule, {
+					item = Item,
+					selected = Selected,
+					controlState = ControlState,
+					padding = AssignResult.itemPadding
 				}), {
-					LayoutOrder = cryoModule.List.find(var1.items, p2),
+					LayoutOrder = CryoModule.List.find(AssignResult.items, Item),
 					AutomaticSize = Enum.AutomaticSize.XY,
-					SelectionImageObject = var2
+					SelectionImageObject = UseCursorModuleResult
 				}
 			end,
-			onSelectionChanged = function(p2)
-				-- upvalues: var1 (ref)
-				local var3 = var1.items[p2[1]]
+			onSelectionChanged = function(Entry) --[[ Line: 75 ]]
+				-- upvalues: AssignResult (copy)
+				local Item = AssignResult.items[Entry[1]]
 				
-				if var3 ~= nil and var3.onActivated ~= nil then
-					var3.onActivated()
+				if Item ~= nil and Item.onActivated ~= nil then
+					Item.onActivated()
 				end
 			end,
-			selection = var1.selection,
-			selectionMode = selectionModeModule.Single,
-			padding = var1.itemSpacing
+			selection = AssignResult.selection,
+			selectionMode = SelectionModeModule.Single,
+			padding = AssignResult.itemSpacing
 		})
 	})
 end

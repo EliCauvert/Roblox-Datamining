@@ -1,66 +1,65 @@
-﻿local parent = script:FindFirstAncestor("Moments").Parent
-local foundationModule = require(parent.Foundation)
-local localizationModule = require(parent.Localization)
-local reactModule = require(parent.React)
-local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-local useLocalization = localizationModule.Hooks.useLocalization
+﻿local Parent = script:FindFirstAncestor("Moments").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 local _ = require(script.Parent.FeedTypes)
-local focusRoot = focusNavigationUtilsModule.FocusRoot
-local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
-local button = foundationModule.Button
-local text = foundationModule.Text
-local view = foundationModule.View
-local t = {
+local FocusRoot = FocusNavigationUtilsModule.FocusRoot
+local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
+local Button = FoundationModule.Button
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local config = {
 	failedTitle = "Feature.Moments.Label.FeedFailedToLoad",
 	failedMessage = "Feature.Moments.Label.Error",
 	retryLabel = "Feature.Moments.Action.Retry"
 }
 
-local function CenteredOverlay(p1)
-	-- upvalues: reactModule (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), view (ref)
-	return reactModule.createElement(focusRoot, {
+local function CenteredOverlay(p1) --[[ Line: 60 ]]
+	-- upvalues: ReactModule (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), View (copy)
+	return ReactModule.createElement(FocusRoot, {
 		isAutoFocusRoot = true,
-		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.CentralOverlay,
-		frameProps = if p1.zIndex ~= nil then nil else { ZIndex = p1.zIndex }
+		surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.CentralOverlay,
+		frameProps = if p1.zIndex == nil then nil else { ZIndex = p1.zIndex }
 	}, {
-		Content = reactModule.createElement(view, {
+		Content = ReactModule.createElement(View, {
 			tag = "col align-x-center align-y-center gap-medium size-full padding-xlarge bg-surface-0"
 		}, p1.children)
 	})
 end
 
-return function(p1)
-	-- upvalues: useLocalization (ref), t (ref), reactModule (ref), CenteredOverlay (ref), text (ref), view (ref), button (ref), foundationModule (ref)
-	local var1 = useLocalization(t)
-	local status = p1.status
+return function(p1) --[[ Line: 74 | Named "FeedStateView" ]]
+	-- upvalues: UseLocalizationFunction (copy), config (copy), ReactModule (copy), CenteredOverlay (copy), Text (copy), View (copy), Button (copy), FoundationModule (copy)
+	local UseLocalizationResult = UseLocalizationFunction(config)
+	local Status = p1.status
 	
-	return if status == "Failed" then reactModule.createElement(CenteredOverlay, { zIndex = p1.zIndex }, {
-		Title = reactModule.createElement(text, {
+	return if Status == "Failed" then ReactModule.createElement(CenteredOverlay, { zIndex = p1.zIndex }, {
+		Title = ReactModule.createElement(Text, {
 			LayoutOrder = 1,
 			tag = "size-full-0 auto-y text-heading-medium text-wrap text-align-x-center content-emphasis",
-			Text = var1.failedTitle
+			Text = UseLocalizationResult.failedTitle
 		}),
-		Description = reactModule.createElement(text, {
+		Description = ReactModule.createElement(Text, {
 			LayoutOrder = 2,
 			tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-center content-default",
-			Text = var1.failedMessage
+			Text = UseLocalizationResult.failedMessage
 		})
-	}) elseif status == "Empty" then reactModule.createElement(CenteredOverlay, { zIndex = p1.zIndex }, {
-		Message = reactModule.createElement(text, {
+	}) elseif Status == "Empty" then ReactModule.createElement(CenteredOverlay, { zIndex = p1.zIndex }, {
+		Message = ReactModule.createElement(Text, {
 			LayoutOrder = 1,
 			tag = "size-full-0 auto-y text-body-large text-wrap text-align-x-center content-emphasis",
 			Text = "No moments yet"
 		}),
 		Cta = p1.emptyContent
-	}) elseif p1.loadMoreFailed then reactModule.createElement(view, {
+	}) elseif p1.loadMoreFailed then ReactModule.createElement(View, {
 		tag = "col align-x-center align-y-bottom size-full padding-large",
 		ZIndex = p1.zIndex
 	}, {
-		RetryButton = reactModule.createElement(button, {
+		RetryButton = ReactModule.createElement(Button, {
 			onActivated = p1.onRetry,
-			size = foundationModule.Enums.InputSize.Small,
-			text = var1.retryLabel,
-			variant = foundationModule.Enums.ButtonVariant.Standard
+			size = FoundationModule.Enums.InputSize.Small,
+			text = UseLocalizationResult.retryLabel,
+			variant = FoundationModule.Enums.ButtonVariant.Standard
 		})
 	}) else nil
 end

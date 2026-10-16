@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.HttpRequest.HttpRequest)
+﻿return (require(script.Parent.Parent.Parent._Index.HttpRequest.HttpRequest))

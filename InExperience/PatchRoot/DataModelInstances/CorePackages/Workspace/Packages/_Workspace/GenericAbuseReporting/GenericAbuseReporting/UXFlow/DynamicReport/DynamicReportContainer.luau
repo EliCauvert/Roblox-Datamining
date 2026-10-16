@@ -1,37 +1,39 @@
-﻿local genericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
-local parent = genericAbuseReporting.Parent
-local reactModule = require(parent.React)
-local layerCollectorProvider = require(parent.UIBlox).Core.Layout.LayerCollector.LayerCollectorProvider
-local abuseReportAnalyticsProviderModule = require(genericAbuseReporting.Bedui.Provider.AbuseReportAnalyticsProvider)
-local abuseReportBeduiProviderModule = require(genericAbuseReporting.Bedui.Provider.AbuseReportBeduiProvider)
-local abuseReportFormDataProviderModule = require(genericAbuseReporting.Bedui.Provider.AbuseReportFormDataProvider)
-local _ = require(genericAbuseReporting.Bedui.Provider.AbuseReportBeduiTypes)
-local _ = require(genericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.AbuseSheetFlowTypes)
-local abuseVectorModule = require(genericAbuseReporting.Enums.AbuseVector)
-local dynamicReportModule = require(genericAbuseReporting.UXFlow.DynamicReport.DynamicReport)
-local dynamicReportV2ContainerModule = require(genericAbuseReporting.UXFlow.DynamicReportV2.DynamicReportV2Container)
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagAddThumbnailSelectorReport = sharedFlagsModule.FFlagAddThumbnailSelectorReport
-local fFlagEnableReportingFlowForMomentsFeed = sharedFlagsModule.FFlagEnableReportingFlowForMomentsFeed
-local fFlagEnableMomentsCommentReporting = sharedFlagsModule.FFlagEnableMomentsCommentReporting
-local fFlagAbuseReportAttributes = sharedFlagsModule.FFlagAbuseReportAttributes
+﻿local GenericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
+local Parent = GenericAbuseReporting.Parent
+local ReactModule = require(Parent.React)
+local LayerCollectorProvider = require(Parent.UIBlox).Core.Layout.LayerCollector.LayerCollectorProvider
+local AbuseReportAnalyticsProviderModule = require(GenericAbuseReporting.Bedui.Provider.AbuseReportAnalyticsProvider)
+local AbuseReportBeduiProviderModule = require(GenericAbuseReporting.Bedui.Provider.AbuseReportBeduiProvider)
+local AbuseReportFormDataProviderModule = require(GenericAbuseReporting.Bedui.Provider.AbuseReportFormDataProvider)
+local _ = require(GenericAbuseReporting.Bedui.Provider.AbuseReportBeduiTypes)
+local _ = require(GenericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.AbuseSheetFlowTypes)
+local AbuseVectorModule = require(GenericAbuseReporting.Enums.AbuseVector)
+local DynamicReportModule = require(GenericAbuseReporting.UXFlow.DynamicReport.DynamicReport)
+local DynamicReportV2ContainerModule = require(GenericAbuseReporting.UXFlow.DynamicReportV2.DynamicReportV2Container)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagAddThumbnailSelectorReport = SharedFlagsModule.FFlagAddThumbnailSelectorReport
+local FFlagEnableMomentsCommentReporting = SharedFlagsModule.FFlagEnableMomentsCommentReporting
+local FFlagEnableNewReportFlowGameTile = SharedFlagsModule.FFlagEnableNewReportFlowGameTile
+local FFlagAbuseReportAttributes = SharedFlagsModule.FFlagAbuseReportAttributes
 
-local function DynamicReportV2Adapter(p1)
-	-- upvalues: reactModule (ref), dynamicReportV2ContainerModule (ref)
-	local targetId = p1.targetId
-	
-	return reactModule.createElement(dynamicReportV2ContainerModule, {
-		abuseVector = p1.abuseVector,
-		attributes = if targetId ~= nil then p1.attributes else reactModule.useMemo(function()
-			-- upvalues: targetId (ref)
-			if targetId == nil then
-				return nil
-			end
-			assert(type(targetId) == "string", "DynamicReportV2 requires a string targetId")
+local function DynamicReportV2Adapter(p1) --[[ Line: 52 ]]
+	-- upvalues: ReactModule (copy), DynamicReportV2ContainerModule (copy)
+	local TargetId = p1.targetId
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 54 ]]
+		-- upvalues: TargetId (copy)
+		if TargetId == nil then
+			return nil
+		else
+			assert(type(TargetId) == "string", "DynamicReportV2 requires a string targetId")
 			
-			return { targetId = targetId }
-		end, { targetId }),
-		analyticsTargetId = if targetId ~= nil then p1.analyticsTargetId else targetId,
+			return { targetId = TargetId }
+		end
+	end, { TargetId })
+	
+	return ReactModule.createElement(DynamicReportV2ContainerModule, {
+		abuseVector = p1.abuseVector,
+		attributes = if TargetId == nil then p1.attributes else UseMemoResult,
+		analyticsTargetId = if TargetId == nil then p1.analyticsTargetId else TargetId,
 		onClose = p1.onClose,
 		onSubmit = p1.onSubmit,
 		onCustomSubmit = p1.onCustomSubmit,
@@ -40,13 +42,13 @@ local function DynamicReportV2Adapter(p1)
 	})
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: fFlagAbuseReportAttributes (ref), abuseVectorModule (ref), fFlagEnableReportingFlowForMomentsFeed (ref), fFlagEnableMomentsCommentReporting (ref), reactModule (ref), DynamicReportV2Adapter (ref), dynamicReportV2ContainerModule (ref), layerCollectorProvider (ref), abuseReportBeduiProviderModule (ref), abuseReportFormDataProviderModule (ref), fFlagAddThumbnailSelectorReport (ref), abuseReportAnalyticsProviderModule (ref), dynamicReportModule (ref)
-	if fFlagAbuseReportAttributes and p1.targetId ~= nil and (p1.attributes ~= nil or p1.analyticsTargetId ~= nil) then
+return ReactModule.memo(function(p1) --[[ Line: 76 | Named "DynamicReportContainer" ]]
+	-- upvalues: FFlagAbuseReportAttributes (copy), AbuseVectorModule (copy), FFlagEnableMomentsCommentReporting (copy), FFlagEnableNewReportFlowGameTile (copy), ReactModule (copy), DynamicReportV2Adapter (copy), DynamicReportV2ContainerModule (copy), LayerCollectorProvider (copy), AbuseReportBeduiProviderModule (copy), AbuseReportFormDataProviderModule (copy), FFlagAddThumbnailSelectorReport (copy), AbuseReportAnalyticsProviderModule (copy), DynamicReportModule (copy)
+	if FFlagAbuseReportAttributes and p1.targetId ~= nil and (p1.attributes ~= nil or p1.analyticsTargetId ~= nil) then
 		error("targetId is mutually exclusive with attributes and analyticsTargetId")
 	end
-	if p1.abuseVector == abuseVectorModule.UserProfile or fFlagEnableReportingFlowForMomentsFeed and p1.abuseVector == abuseVectorModule.MomentsFeed or fFlagEnableMomentsCommentReporting and p1.abuseVector == abuseVectorModule.MomentComment then
-		return if fFlagAbuseReportAttributes then reactModule.createElement(DynamicReportV2Adapter, p1) else reactModule.createElement(dynamicReportV2ContainerModule, {
+	if p1.abuseVector == AbuseVectorModule.UserProfile or p1.abuseVector == AbuseVectorModule.MomentsFeed or FFlagEnableMomentsCommentReporting and p1.abuseVector == AbuseVectorModule.MomentComment or FFlagEnableNewReportFlowGameTile and p1.abuseVector == AbuseVectorModule.GameTile then
+		return if FFlagAbuseReportAttributes then ReactModule.createElement(DynamicReportV2Adapter, p1) else ReactModule.createElement(DynamicReportV2ContainerModule, {
 			abuseVector = p1.abuseVector,
 			targetId = p1.targetId,
 			onClose = p1.onClose,
@@ -55,16 +57,17 @@ return reactModule.memo(function(p1)
 			clientActionHandlers = p1.clientActionHandlers,
 			custom = p1.custom
 		})
-	elseif fFlagAbuseReportAttributes then
+	end
+	if FFlagAbuseReportAttributes then
 		assert(p1.targetId ~= nil, "attributes are only supported by the Dynamic Report V2 flow")
 	end
-	return reactModule.createElement(layerCollectorProvider, {}, {
-		AbuseReportBeduiProvider = reactModule.createElement(abuseReportBeduiProviderModule, { abuseVector = p1.abuseVector }, {
-			AbuseReportFormDataProvider = reactModule.createElement(abuseReportFormDataProviderModule, {
-				custom = if fFlagAddThumbnailSelectorReport then p1.custom else nil
+	return ReactModule.createElement(LayerCollectorProvider, {}, {
+		AbuseReportBeduiProvider = ReactModule.createElement(AbuseReportBeduiProviderModule, { abuseVector = p1.abuseVector }, {
+			AbuseReportFormDataProvider = ReactModule.createElement(AbuseReportFormDataProviderModule, {
+				custom = if FFlagAddThumbnailSelectorReport then p1.custom else nil
 			}, {
-				AbuseReportAnalyticsProvider = reactModule.createElement(abuseReportAnalyticsProviderModule, { abuseVector = p1.abuseVector }, {
-					DynamicReport = reactModule.createElement(dynamicReportModule, {
+				AbuseReportAnalyticsProvider = ReactModule.createElement(AbuseReportAnalyticsProviderModule, { abuseVector = p1.abuseVector }, {
+					DynamicReport = ReactModule.createElement(DynamicReportModule, {
 						abuseVector = p1.abuseVector,
 						targetId = p1.targetId,
 						onClose = p1.onClose,

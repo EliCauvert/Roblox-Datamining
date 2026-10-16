@@ -1,115 +1,118 @@
-﻿local serverDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
-local parent = serverDrivenUi.Parent
-local avatarExperienceAnalyticsModule = require(parent.AvatarExperienceAnalytics)
-local AXUnifiedEventFilter = avatarExperienceAnalyticsModule.AXUnifiedEventFilter
-local unifiedEventLogEnums = avatarExperienceAnalyticsModule.UnifiedEventLogEnums
-local sendUnifiedEventLog = avatarExperienceAnalyticsModule.sendUnifiedEventLog
-local unifiedEventLoggingUtils = avatarExperienceAnalyticsModule.Utils.UnifiedEventLoggingUtils
-local fFlagAXUnifiedEventCounters = avatarExperienceAnalyticsModule.Flags.FFlagAXUnifiedEventCounters
-local unifiedLoggingSurface = require(parent.AvatarExperienceNavigation).Enums.UnifiedLoggingSurface
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local sduiErrors = sduiCoreSystemModule.SduiErrors
-local sduiLogger = sduiCoreSystemModule.SduiLogger
-local findAnalyticsFieldInAncestors = sduiCoreSystemModule.findAnalyticsFieldInAncestors
-local findCollectionItemInstancesModule = require(serverDrivenUi.Analytics.findCollectionItemInstances)
+﻿local ServerDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
+local Parent = ServerDrivenUi.Parent
+local AvatarExperienceAnalyticsModule = require(Parent.AvatarExperienceAnalytics)
+local AXUnifiedEventFilter = AvatarExperienceAnalyticsModule.AXUnifiedEventFilter
+local UnifiedEventLogEnums = AvatarExperienceAnalyticsModule.UnifiedEventLogEnums
+local SendUnifiedEventLogFunction = AvatarExperienceAnalyticsModule.sendUnifiedEventLog
+local UnifiedEventLoggingUtils = AvatarExperienceAnalyticsModule.Utils.UnifiedEventLoggingUtils
+local FFlagAXUnifiedEventCounters = AvatarExperienceAnalyticsModule.Flags.FFlagAXUnifiedEventCounters
+local UnifiedLoggingSurface = require(Parent.AvatarExperienceNavigation).Enums.UnifiedLoggingSurface
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local SduiErrors = SduiCoreSystemModule.SduiErrors
+local SduiLogger = SduiCoreSystemModule.SduiLogger
+local FindAnalyticsFieldInAncestorsFunction = SduiCoreSystemModule.findAnalyticsFieldInAncestors
+local FindCollectionItemInstancesModule = require(ServerDrivenUi.Analytics.findCollectionItemInstances)
 local t = {}
-local marketplaceUnifiedAction = unifiedEventLogEnums.MarketplaceUnifiedAction
-local marketplaceUnifiedItemType = unifiedEventLogEnums.MarketplaceUnifiedItemType
+local MarketplaceUnifiedAction = UnifiedEventLogEnums.MarketplaceUnifiedAction
+local MarketplaceUnifiedItemType = UnifiedEventLogEnums.MarketplaceUnifiedItemType
 
-local function _(p1, p2)
+local function _(p1: number, p2: number) --[[ Line: 30 | Named "gridPosition" ]]
 	if p2 and p2 > 0 then
 		return math.ceil(p1 / p2), (p1 - 1) % p2 + 1
+	else
+		return 1, p1
 	end
-	return 1, p1
 end
 
-return function(p1, p2, p3, p4, p5, p6)
-	-- upvalues: t (ref), sduiLogger (ref), sduiErrors (ref), findAnalyticsFieldInAncestors (ref), unifiedLoggingSurface (ref), marketplaceUnifiedItemType (ref), findCollectionItemInstancesModule (ref), marketplaceUnifiedAction (ref), unifiedEventLoggingUtils (ref), fFlagAXUnifiedEventCounters (ref), AXUnifiedEventFilter (ref), sendUnifiedEventLog (ref)
-	if #p2 == 0 or #(p3 or t) == 0 then
-		sduiLogger.reportError(sduiErrors.SduiErrorType.FailedToLogMarketplaceItemImpressions, {
+return function(p1, List, p2, AnalyticsData, p3, p4): number --[[ Line: 48 | Named "SduiMarketplaceItemImpressionsHandler" ]]
+	-- upvalues: t (copy), SduiLogger (copy), SduiErrors (copy), FindAnalyticsFieldInAncestorsFunction (copy), UnifiedLoggingSurface (copy), MarketplaceUnifiedItemType (copy), FindCollectionItemInstancesModule (copy), MarketplaceUnifiedAction (copy), UnifiedEventLoggingUtils (copy), FFlagAXUnifiedEventCounters (copy), AXUnifiedEventFilter (copy), SendUnifiedEventLogFunction (copy)
+	if #List == 0 or #(p2 or t) == 0 then
+		SduiLogger.reportError(SduiErrors.SduiErrorType.FailedToLogMarketplaceItemImpressions, {
 			name = "SduiMarketplaceItemImpressionsHandler",
-			message = `No entries to log: impressionIndexes={#p2}, itemAnalyticsDatas={#(p3 or t)}`
+			message = `No entries to log: impressionIndexes={#List}, itemAnalyticsDatas={#(p2 or t)}`
 		}, p1.appPage)
 		
 		return 0
 	end
-	local t_1 = { analyticsData = p4 }
-	local var1 = findAnalyticsFieldInAncestors("surface", t_1)
-	local var2 = findAnalyticsFieldInAncestors("itemType", t_1)
-	local var3 = findAnalyticsFieldInAncestors("universeId", t_1)
-	local var4 = findAnalyticsFieldInAncestors("itemsPerRow", t_1)
-	local var5 = if var3 ~= nil then nil else tonumber(var3)
-	local var6 = if var4 ~= nil then nil else tonumber(var4)
-	local var7 = if var1 ~= nil then nil else unifiedLoggingSurface[var1]
-	local var8 = if var2 ~= nil then nil else marketplaceUnifiedItemType[var2]
+	local config = { analyticsData = AnalyticsData }
+	local Surface = FindAnalyticsFieldInAncestorsFunction("surface", config)
+	local ItemType = FindAnalyticsFieldInAncestorsFunction("itemType", config)
+	local UniverseId = FindAnalyticsFieldInAncestorsFunction("universeId", config)
+	local ItemsPerRow = FindAnalyticsFieldInAncestorsFunction("itemsPerRow", config)
+	local Number = if UniverseId == nil then nil else tonumber(UniverseId)
+	local Number1 = if ItemsPerRow == nil then nil else tonumber(ItemsPerRow)
+	local UnifiedLoggingSurfaceEntry = if Surface == nil then nil else UnifiedLoggingSurface[Surface]
+	local MarketplaceUnifiedItemTypeEntry = if ItemType == nil then nil else MarketplaceUnifiedItemType[ItemType]
 	
-	if not var7 then
-		sduiLogger.reportError(sduiErrors.SduiErrorType.FailedToLogMarketplaceItemImpressions, {
+	if not UnifiedLoggingSurfaceEntry then
+		SduiLogger.reportError(SduiErrors.SduiErrorType.FailedToLogMarketplaceItemImpressions, {
 			name = "SduiMarketplaceItemImpressionsHandler",
-			message = `Missing or unknown surface on analytics data: {tostring(var1)}`
-		}, p1.appPage)
-		
-		return 0
-	elseif not var8 then
-		sduiLogger.reportError(sduiErrors.SduiErrorType.FailedToLogMarketplaceItemImpressions, {
-			name = "SduiMarketplaceItemImpressionsHandler",
-			message = `Missing or unknown itemType on analytics data: {tostring(var2)}`
+			message = `Missing or unknown surface on analytics data: {tostring(Surface)}`
 		}, p1.appPage)
 		
 		return 0
 	end
-	local var9 = findCollectionItemInstancesModule(p6)
-	local var10 = 0
-	
-	for i, v in p2 do
-		local var11 = p3[v]
+	if not MarketplaceUnifiedItemTypeEntry then
+		SduiLogger.reportError(SduiErrors.SduiErrorType.FailedToLogMarketplaceItemImpressions, {
+			name = "SduiMarketplaceItemImpressionsHandler",
+			message = `Missing or unknown itemType on analytics data: {tostring(ItemType)}`
+		}, p1.appPage)
 		
-		if var11 ~= nil then
-			local var12, var13
-			local var14 = (p5 or 0) + v
+		return 0
+	end
+	local CollectionItemInstancesModule = FindCollectionItemInstancesModule(p4)
+	local Count = 0
+	
+	for _, value in List do
+		local v1 = p2[value]
+		
+		if v1 ~= nil then
+			local NewValue = (p3 or 0) + value
+			local Ceiled = nil
+			local GridPositionColumn = nil
 			
-			if var6 and var6 > 0 then
-				var12 = math.ceil(var14 / var6)
-				var13 = (var14 - 1) % var6 + 1
+			if Number1 and Number1 > 0 then
+				Ceiled = math.ceil(NewValue / Number1)
+				GridPositionColumn = (NewValue - 1) % Number1 + 1
 			else
-				var12 = 1
-				var13 = var14
+				Ceiled = 1
+				GridPositionColumn = NewValue
 			end
-			local t_2 = {
-				action = marketplaceUnifiedAction.ITEM_IMPRESSION,
-				surface = var7,
-				itemType = var8,
-				itemId = var11.id,
-				universeId = var5,
-				gridPositionRow = var12,
-				gridPositionColumn = var13
+			local config1 = {
+				action = MarketplaceUnifiedAction.ITEM_IMPRESSION,
+				surface = UnifiedLoggingSurfaceEntry,
+				itemType = MarketplaceUnifiedItemTypeEntry,
+				itemId = v1.id,
+				universeId = Number,
+				gridPositionRow = Ceiled,
+				gridPositionColumn = GridPositionColumn
 			}
-			local var15 = var9[v]
+			local CollectionItemInstancesModuleEntry = CollectionItemInstancesModule[value]
 			
-			if var15 then
-				for i_1, v_1 in unifiedEventLoggingUtils.getScreenSize(var15) do
-					t_2[i_1] = v_1
+			if CollectionItemInstancesModuleEntry then
+				for i, value1 in UnifiedEventLoggingUtils.getScreenSize(CollectionItemInstancesModuleEntry) do
+					config1[i] = value1
 				end
-				for i_1, v_1 in unifiedEventLoggingUtils.getElementSizeAndPosition(var15) do
-					t_2[i_1] = v_1
+				for i1, value2 in UnifiedEventLoggingUtils.getElementSizeAndPosition(CollectionItemInstancesModuleEntry) do
+					config1[i1] = value2
 				end
 			end
-			local var16 = nil
+			local FilterResult = nil
 			
-			if fFlagAXUnifiedEventCounters then
-				var16 = AXUnifiedEventFilter.filter(t_2)
+			if FFlagAXUnifiedEventCounters then
+				FilterResult = AXUnifiedEventFilter.filter(config1)
 			else
-				AXUnifiedEventFilter.filter(t_2)
+				AXUnifiedEventFilter.filter(config1)
 			end
-			sendUnifiedEventLog(t_2, nil, if fFlagAXUnifiedEventCounters then { filterPassed = var16 } else nil)
-			var10 += 1
+			SendUnifiedEventLogFunction(config1, nil, if FFlagAXUnifiedEventCounters then { filterPassed = FilterResult } else nil)
+			Count += 1
 		end
 	end
-	if var10 == 0 then
-		sduiLogger.reportError(sduiErrors.SduiErrorType.FailedToLogMarketplaceItemImpressions, {
+	if Count == 0 then
+		SduiLogger.reportError(SduiErrors.SduiErrorType.FailedToLogMarketplaceItemImpressions, {
 			name = "SduiMarketplaceItemImpressionsHandler",
 			message = "No valid items found for impression indexes"
 		}, p1.appPage)
 	end
-	return var10
+	return Count
 end

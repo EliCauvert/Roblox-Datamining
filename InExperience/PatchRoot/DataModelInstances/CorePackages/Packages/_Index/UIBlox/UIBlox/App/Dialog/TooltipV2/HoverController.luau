@@ -1,54 +1,56 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent.Parent.Parent
-local parent_2 = parent_1.Parent
-local reactModule = require(parent_2.React)
-local luauPolyfillModule = require(parent_2.LuauPolyfill)
-local _ = require(parent.Types)
-local constantsModule = require(parent.Constants)
-local tooltipControllerModule = require(parent.TooltipController)
-local controlStateModule = require(parent_1.Core.Control.Enum.ControlState)
-local UIBloxConfigModule = require(parent_1.UIBloxConfig)
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent.Parent.Parent
+local Parent2 = Parent1.Parent
+local ReactModule = require(Parent2.React)
+local LuauPolyfillModule = require(Parent2.LuauPolyfill)
+local _ = require(Parent.Types)
+local ConstantsModule = require(Parent.Constants)
+local TooltipControllerModule = require(Parent.TooltipController)
+local ControlStateModule = require(Parent1.Core.Control.Enum.ControlState)
+local UIBloxConfigModule = require(Parent1.UIBloxConfig)
 
-return function(p1)
-	-- upvalues: reactModule (ref), UIBloxConfigModule (ref), constantsModule (ref), controlStateModule (ref), luauPolyfillModule (ref), tooltipControllerModule (ref)
-	local var1, var2 = reactModule.useState(false)
-	local var3 = reactModule.useRef(tick())
-	reactModule.useEffect(function()
-		-- upvalues: var3 (ref)
-		return function()
-			-- upvalues: var3 (copy)
-			var3.current = tick()
+return function(p1) --[[ Line: 17 | Named "HoverController" ]]
+	-- upvalues: ReactModule (copy), UIBloxConfigModule (copy), ConstantsModule (copy), ControlStateModule (copy), LuauPolyfillModule (copy), TooltipControllerModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseRefResult = ReactModule.useRef(tick())
+	ReactModule.useEffect(function() --[[ Line: 21 ]]
+		-- upvalues: UseRefResult (copy)
+		return function() --[[ Line: 22 ]]
+			-- upvalues: UseRefResult (upval)
+			UseRefResult.current = tick()
 		end
 	end, if UIBloxConfigModule.enableTooltipV2HoverControllerReRenderFix then {} else nil)
-	local delayTime = p1.delayTime or constantsModule.DEFAULT_DELAY_TIME
-	local var4 = reactModule.useCallback(function(p2, p3)
-		-- upvalues: p1 (ref), var2 (ref), controlStateModule (copy), var3 (ref), delayTime (ref)
+	local DelayTime = p1.delayTime or ConstantsModule.DEFAULT_DELAY_TIME
+	local UseResult = ReactModule.useCallback(function(Hover, Hover1) --[[ Line: 30 ]]
+		-- upvalues: p1 (copy), UseStateResult2 (copy), ControlStateModule (upval), UseRefResult (copy), DelayTime (copy)
 		if p1.disabled then
-			var2(false)
+			UseStateResult2(false)
 			
 			return
-		elseif p3 == controlStateModule.Hover or p3 == controlStateModule.Selected then
-			local current = var3.current
-			delay(delayTime, function()
-				-- upvalues: var3 (copy), current (ref), var2 (copy)
-				if var3.current == current then
-					var2(true)
+		end
+		if Hover1 == ControlStateModule.Hover or Hover1 == ControlStateModule.Selected then
+			local Current = UseRefResult.current
+			delay(DelayTime, function() --[[ Line: 37 ]]
+				-- upvalues: UseRefResult (upval), Current (copy), UseStateResult2 (upval)
+				if UseRefResult.current == Current then
+					UseStateResult2(true)
 				end
 			end)
 			
 			return
-		elseif p2 == controlStateModule.Hover or p2 == controlStateModule.Selected then
-			var3.current = tick()
-			var2(false)
 		end
-	end, { delayTime })
+		if Hover == ControlStateModule.Hover or Hover == ControlStateModule.Selected then
+			UseRefResult.current = tick()
+			UseStateResult2(false)
+		end
+	end, { DelayTime })
 	
-	return reactModule.createElement(tooltipControllerModule, luauPolyfillModule.Object.assign({}, p1, {
-		delayTime = luauPolyfillModule.Object.None,
-		active = var1,
-		renderTriggerPoint = function(p2)
-			-- upvalues: p1 (ref), var4 (ref)
-			return p1.renderTriggerPoint(p2, var4)
+	return ReactModule.createElement(TooltipControllerModule, (LuauPolyfillModule.Object.assign({}, p1, {
+		delayTime = LuauPolyfillModule.Object.None,
+		active = UseStateResult,
+		renderTriggerPoint = function(p2) --[[ Line: 52 ]]
+			-- upvalues: p1 (copy), UseResult (copy)
+			return p1.renderTriggerPoint(p2, UseResult)
 		end
-	}))
+	})))
 end

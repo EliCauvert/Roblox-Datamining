@@ -1,31 +1,31 @@
-﻿local userInputService = game:GetService("UserInputService")
-local parent = script:FindFirstAncestor("RoactUtils").Parent
-local reactModule = require(parent.React)
-local useExternalEventModule = require(script.Parent.useExternalEvent)
-local getInputGroup = require(parent.InputType).getInputGroup
+﻿local UserInputService = game:GetService("UserInputService")
+local Parent = script:FindFirstAncestor("RoactUtils").Parent
+local ReactModule = require(Parent.React)
+local UseExternalEventModule = require(script.Parent.useExternalEvent)
+local GetInputGroupFunction = require(Parent.InputType).getInputGroup
 
-return function(p1)
-	-- upvalues: userInputService (ref), getInputGroup (ref), reactModule (ref), useExternalEventModule (ref)
-	p1 = p1 or userInputService
+return function(p1) --[[ Line: 13 | Named "useInputType" ]]
+	-- upvalues: UserInputService (copy), GetInputGroupFunction (copy), ReactModule (copy), UseExternalEventModule (copy)
+	local P0 = p1 or UserInputService
 	
-	local function getLastInputType()
-		-- upvalues: p1 (ref), getInputGroup (copy)
-		return getInputGroup(p1:GetLastInputType())
+	local function getLastInputType() --[[ Line: 16 ]]
+		-- upvalues: P0 (copy), GetInputGroupFunction (upval)
+		return GetInputGroupFunction((P0:GetLastInputType()))
 	end
 	
-	local var1, var2 = reactModule.useState(getLastInputType)
-	useExternalEventModule(p1.LastInputTypeChanged, reactModule.useCallback(function(p2)
-		-- upvalues: getInputGroup (copy), var2 (ref)
-		local var3 = getInputGroup(p2)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(getLastInputType)
+	UseExternalEventModule(P0.LastInputTypeChanged, (ReactModule.useCallback(function(p2) --[[ Line: 23 ]]
+		-- upvalues: GetInputGroupFunction (upval), UseStateResult2 (copy)
+		local InputGroup = GetInputGroupFunction(p2)
 		
-		if var3 ~= nil then
-			var2(var3)
+		if InputGroup ~= nil then
+			UseStateResult2(InputGroup)
 		end
-	end))
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), getLastInputType (ref)
-		var2(getLastInputType())
+	end)))
+	ReactModule.useEffect(function() --[[ Line: 34 ]]
+		-- upvalues: UseStateResult2 (copy), getLastInputType (copy)
+		UseStateResult2(getLastInputType())
 	end, {})
 	
-	return var1
+	return UseStateResult
 end

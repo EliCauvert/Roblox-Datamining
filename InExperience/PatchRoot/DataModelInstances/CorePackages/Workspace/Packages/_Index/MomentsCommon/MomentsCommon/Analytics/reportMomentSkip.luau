@@ -1,5 +1,5 @@
-﻿local loggingProtocolModule = require(script:FindFirstAncestor("MomentsCommon").Parent.LoggingProtocol)
-local t = {
+﻿local LoggingProtocolModule = require(script:FindFirstAncestor("MomentsCommon").Parent.LoggingProtocol)
+local config = {
 	eventName = "MomentsAnalyticsSkip",
 	throttlingPercentage = 10000,
 	description = "Counts schema-targeted moment-scoped analytics events skipped because the raw feedItemId was absent. Dimensioned by surface/reason/entry.",
@@ -7,25 +7,25 @@ local t = {
 	lastUpdated = { 2026, 9, 2 }
 }
 
-local function defaultEmit(p1, p2, p3)
-	-- upvalues: loggingProtocolModule (ref)
-	loggingProtocolModule.default:logRobloxTelemetryCounter(p1, p2, p3)
+local function defaultEmit(p1, p2, p3) --[[ Line: 62 ]]
+	-- upvalues: LoggingProtocolModule (copy)
+	LoggingProtocolModule.default:logRobloxTelemetryCounter(p1, p2, p3)
 end
 
-return function(p1, p2, p3, p4)
-	-- upvalues: defaultEmit (ref), t (ref)
-	local t_1 = { surface = p1, reason = p2 }
+return function(Surface, Reason, p1, p2) --[[ Line: 76 | Named "reportMomentSkip" ]]
+	-- upvalues: defaultEmit (copy), config (copy)
+	local config1 = { surface = Surface, reason = Reason }
 	
-	if p3 then
-		if p3.entry ~= nil then
-			t_1.entry = p3.entry
+	if p1 then
+		if p1.entry ~= nil then
+			config1.entry = p1.entry
 		end
-		if p3.action ~= nil then
-			t_1.action = p3.action
+		if p1.action ~= nil then
+			config1.action = p1.action
 		end
-		if p3.parentEntity ~= nil then
-			t_1.parentEntity = p3.parentEntity
+		if p1.parentEntity ~= nil then
+			config1.parentEntity = p1.parentEntity
 		end
 	end;
-	(p4 or defaultEmit)(t, 1, t_1)
+	(p2 or defaultEmit)(config, 1, config1)
 end

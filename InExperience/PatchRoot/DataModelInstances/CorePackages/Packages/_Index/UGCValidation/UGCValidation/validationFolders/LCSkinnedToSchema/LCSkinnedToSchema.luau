@@ -1,76 +1,76 @@
 ﻿local UGCValidationService = game:GetService("UGCValidationService")
-local parent = script.Parent.Parent.Parent
-local constantsModule = require(parent.Constants)
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
+local Parent = script.Parent.Parent.Parent
+local ConstantsModule = require(Parent.Constants)
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
 
 return {
-	fflag = require(parent.flags.getEngineFeatureEngineUGCValidationConsolidateAccessorySkinning),
+	fflag = require(Parent.flags.getEngineFeatureEngineUGCValidationConsolidateAccessorySkinning),
 	categories = {
-		validationEnumsModule.UploadCategory.LAYERED_CLOTHING,
-		validationEnumsModule.UploadCategory.EYEBROW_EYELASH
+		ValidationEnumsModule.UploadCategory.LAYERED_CLOTHING,
+		ValidationEnumsModule.UploadCategory.EYEBROW_EYELASH
 	},
-	requiredData = { validationEnumsModule.SharedDataMember.renderMeshesData },
-	run = function(p1, p2)
-		-- upvalues: UGCValidationService (ref), constantsModule (ref), errorSourceStringsModule (ref)
-		local handle = p2.rootInstance:FindFirstChild("Handle")
-		local handle_1 = p2.renderMeshesData.Handle
+	requiredData = { ValidationEnumsModule.SharedDataMember.renderMeshesData },
+	run = function(p1, p2) --[[ Line: 16 ]]
+		-- upvalues: UGCValidationService (copy), ConstantsModule (copy), ErrorSourceStringsModule (copy)
+		local Handle = p2.rootInstance:FindFirstChild("Handle")
+		local Handle1 = p2.renderMeshesData.Handle
 		
-		if handle == nil or handle_1 == nil then
+		if Handle == nil or Handle1 == nil then
 			error("Schema should have ensured data exists for handle")
 		end
-		local t = {}
+		local BoneNames = {}
 		
-		for i, v in handle_1.editable:GetBones() do
-			table.insert(t, handle_1.editable:GetBoneName(v))
+		for _, bone in Handle1.editable:GetBones() do
+			table.insert(BoneNames, Handle1.editable:GetBoneName(bone))
 		end
-		local list = {
-			UGCValidationService:GetSkinnedJointNamesFromEditableMesh(handle_1.editable)
+		local List = {
+			UGCValidationService:GetSkinnedJointNamesFromEditableMesh(Handle1.editable)
 		}
-		local editableEditableMeshSkinningTransferJointsInfo = UGCValidationService:GetEditableMeshSkinningTransferJointsInfo(handle_1.editable)
-		local wrapLayer = handle:FindFirstChildOfClass("WrapLayer")
-		assert(wrapLayer, "WrapLayer not found on handle")
-		local var1 = wrapLayer.AutoSkin == Enum.WrapLayerAutoSkin.EnabledOverride
-		p1:setReportingInstance(handle)
+		local EditableMeshSkinningTransferJointsInfo = UGCValidationService:GetEditableMeshSkinningTransferJointsInfo(Handle1.editable)
+		local WrapLayer = Handle:FindFirstChildOfClass("WrapLayer")
+		assert(WrapLayer, "WrapLayer not found on handle")
+		local IsAutoSkinMatch = WrapLayer.AutoSkin == Enum.WrapLayerAutoSkin.EnabledOverride
+		p1:setReportingInstance(Handle)
 		
-		for i_1, v_1 in t do
-			if constantsModule.ALLOWED_SKINNING_TRANSFER_JOINT_NAMES[v_1] then
-				if not var1 then
-					p1:fail(errorSourceStringsModule.Keys.AccessorySkinning_TransferJointWithoutAutoSkin, { jointName = v_1 })
+		for RequiredJointName, boneName in BoneNames do
+			if ConstantsModule.ALLOWED_SKINNING_TRANSFER_JOINT_NAMES[boneName] then
+				if not IsAutoSkinMatch then
+					p1:fail(ErrorSourceStringsModule.Keys.AccessorySkinning_TransferJointWithoutAutoSkin, { jointName = boneName })
 				end
-			elseif not constantsModule.R15_STANDARD_JOINT_NAMES[v_1] then
-				p1:fail(errorSourceStringsModule.Keys.AccessorySkinning_ExtraJoint, { jointName = v_1 })
+			elseif not ConstantsModule.R15_STANDARD_JOINT_NAMES[boneName] then
+				p1:fail(ErrorSourceStringsModule.Keys.AccessorySkinning_ExtraJoint, { jointName = boneName })
 			end
 		end
-		for i_2, v_2 in editableEditableMeshSkinningTransferJointsInfo do
-			if not v_2 then
-				p1:fail(errorSourceStringsModule.Keys.AccessorySkinning_WeightNotFull)
+		for RequiredJointName, value in EditableMeshSkinningTransferJointsInfo do
+			if not value then
+				p1:fail(ErrorSourceStringsModule.Keys.AccessorySkinning_WeightNotFull)
 				break
 			end
 		end
-		if constantsModule.SkinningTransferRequiredTypes[p2.uploadEnum.assetType] then
-			if not var1 then
-				p1:fail(errorSourceStringsModule.Keys.AccessorySkinning_RequiredSkinningTransfer, { assetType = p2.uploadEnum.assetType.Name })
+		if ConstantsModule.SkinningTransferRequiredTypes[p2.uploadEnum.assetType] then
+			if not IsAutoSkinMatch then
+				p1:fail(ErrorSourceStringsModule.Keys.AccessorySkinning_RequiredSkinningTransfer, { assetType = p2.uploadEnum.assetType.Name })
 			end
-			for i_3, v_2 in constantsModule.ALLOWED_SKINNING_TRANSFER_JOINT_NAMES do
-				if table.find(list, i_3) == nil then
-					p1:fail(errorSourceStringsModule.Keys.AccessorySkinning_MissingTransferJoint, {
+			for RequiredJointName, _ in ConstantsModule.ALLOWED_SKINNING_TRANSFER_JOINT_NAMES do
+				if table.find(List, RequiredJointName) == nil then
+					p1:fail(ErrorSourceStringsModule.Keys.AccessorySkinning_MissingTransferJoint, {
 						assetType = p2.uploadEnum.assetType.Name,
-						requiredJointName = i_3
+						requiredJointName = RequiredJointName
 					})
 				end
 			end
-			for i_4, v_2 in list do
-				if constantsModule.R15_STANDARD_JOINT_NAMES[v_2] then
-					local t_1 = {}
+			for _, JointName in List do
+				if ConstantsModule.R15_STANDARD_JOINT_NAMES[JointName] then
+					local List1 = {}
 					
-					for i_5, v_5 in constantsModule.ALLOWED_SKINNING_TRANSFER_JOINT_NAMES do
-						table.insert(t_1, i_5)
+					for i, _ in ConstantsModule.ALLOWED_SKINNING_TRANSFER_JOINT_NAMES do
+						table.insert(List1, i)
 					end
-					p1:fail(errorSourceStringsModule.Keys.AccessorySkinning_NotLeaderOrFollower, {
-						jointName = v_2,
-						validJointNameList = table.concat(t_1, ", ")
+					p1:fail(ErrorSourceStringsModule.Keys.AccessorySkinning_NotLeaderOrFollower, {
+						jointName = JointName,
+						validJointNameList = table.concat(List1, ", ")
 					})
 				end
 			end

@@ -1,34 +1,34 @@
-﻿local gameJoinCard = script:FindFirstAncestor("GameJoinCard")
-local parent = gameJoinCard.Parent
-local foundationModule = require(parent.Foundation)
-local userCtaAction = require(parent.UserCtaCommon).Enums.UserCtaAction
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local inputSize = foundationModule.Enums.InputSize
-local gameJoinCardButtonAction = require(gameJoinCard.Analytics.AnalyticsConstants).GameJoinCardButtonAction
-local useGameJoinCardAnalyticsModule = require(gameJoinCard.Analytics.useGameJoinCardAnalytics)
+﻿local GameJoinCard = script:FindFirstAncestor("GameJoinCard")
+local Parent = GameJoinCard.Parent
+local FoundationModule = require(Parent.Foundation)
+local UserCtaAction = require(Parent.UserCtaCommon).Enums.UserCtaAction
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local InputSize = FoundationModule.Enums.InputSize
+local GameJoinCardButtonAction = require(GameJoinCard.Analytics.AnalyticsConstants).GameJoinCardButtonAction
+local UseGameJoinCardAnalyticsModule = require(GameJoinCard.Analytics.useGameJoinCardAnalytics)
 local _ = require(script.Parent.Types)
-local getTelemetryFieldsModule = require(script.Parent.getTelemetryFields)
-local logGamePlayIntentModule = require(script.Parent.logGamePlayIntent)
+local GetTelemetryFieldsModule = require(script.Parent.getTelemetryFields)
+local LogGamePlayIntentModule = require(script.Parent.logGamePlayIntent)
 
 return {
-	[userCtaAction.PlayExperience] = function(p1)
-		-- upvalues: userCtaAction (ref), buttonVariant (ref), inputSize (ref), useGameJoinCardAnalyticsModule (ref), gameJoinCardButtonAction (ref), getTelemetryFieldsModule (ref), logGamePlayIntentModule (ref)
-		local experience = p1.experience
+	[UserCtaAction.PlayExperience] = function(p1) --[[ Line: 20 ]]
+		-- upvalues: UserCtaAction (copy), ButtonVariant (copy), InputSize (copy), UseGameJoinCardAnalyticsModule (copy), GameJoinCardButtonAction (copy), GetTelemetryFieldsModule (copy), LogGamePlayIntentModule (copy)
+		local Experience = p1.experience
 		
 		return {
-			id = userCtaAction.PlayExperience,
-			variant = buttonVariant.Emphasis,
-			inputSize = inputSize.Medium,
+			id = UserCtaAction.PlayExperience,
+			variant = ButtonVariant.Emphasis,
+			inputSize = InputSize.Medium,
 			width = UDim.new(1, 0),
-			isLoading = experience.isLoading,
-			text = p1.localized[userCtaAction.PlayExperience],
-			onActivated = function()
-				-- upvalues: p1 (ref), useGameJoinCardAnalyticsModule (copy), gameJoinCardButtonAction (copy), getTelemetryFieldsModule (copy), logGamePlayIntentModule (copy), experience (ref)
+			isLoading = Experience.isLoading,
+			text = p1.localized[UserCtaAction.PlayExperience],
+			onActivated = function() --[[ Line: 29 ]]
+				-- upvalues: p1 (copy), UseGameJoinCardAnalyticsModule (upval), GameJoinCardButtonAction (upval), GetTelemetryFieldsModule (upval), LogGamePlayIntentModule (upval), Experience (copy)
 				if p1.userId ~= "" then
-					useGameJoinCardAnalyticsModule.logGameJoinCardButtonEvent(gameJoinCardButtonAction.PlayExperience, getTelemetryFieldsModule(p1))
+					UseGameJoinCardAnalyticsModule.logGameJoinCardButtonEvent(GameJoinCardButtonAction.PlayExperience, GetTelemetryFieldsModule(p1))
 				end
-				logGamePlayIntentModule(p1)
-				experience.playExperience()
+				LogGamePlayIntentModule(p1)
+				Experience.playExperience()
 			end
 		}
 	end

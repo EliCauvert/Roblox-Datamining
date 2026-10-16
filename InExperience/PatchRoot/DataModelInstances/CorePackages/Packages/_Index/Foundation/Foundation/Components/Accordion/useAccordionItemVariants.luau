@@ -1,20 +1,20 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local flagsModule = require(foundation.Utility.Flags)
-local inputSizeModule = require(foundation.Enums.InputSize)
-local variantsContextModule = require(foundation.Providers.Style.VariantsContext)
-local composeStyleVariantModule = require(foundation.Utility.composeStyleVariant)
-local _ = require(foundation.Providers.Style.Tokens)
-local _ = require(foundation.Components.Types)
-local stateLayerAffordanceModule = require(foundation.Enums.StateLayerAffordance)
-local iconSizeModule = require(foundation.Enums.IconSize)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local FlagsModule = require(Foundation.Utility.Flags)
+local InputSizeModule = require(Foundation.Enums.InputSize)
+local VariantsContextModule = require(Foundation.Providers.Style.VariantsContext)
+local ComposeStyleVariantModule = require(Foundation.Utility.composeStyleVariant)
+local _ = require(Foundation.Providers.Style.Tokens)
+local _ = require(Foundation.Components.Types)
+local StateLayerAffordanceModule = require(Foundation.Enums.StateLayerAffordance)
+local IconSizeModule = require(Foundation.Enums.IconSize)
 
-local var1 = function(p1)
-	-- upvalues: stateLayerAffordanceModule (ref), inputSizeModule (ref), iconSizeModule (ref), flagsModule (ref)
+local function v9(p1) --[[ Line: 32 ]]
+	-- upvalues: StateLayerAffordanceModule (copy), InputSizeModule (copy), IconSizeModule (copy), FlagsModule (copy)
 	return {
 		common = {
 			container = {
 				tag = "col flex-y-between align-x-center size-full-0 auto-y",
-				stateLayer = { affordance = stateLayerAffordanceModule.None }
+				stateLayer = { affordance = StateLayerAffordanceModule.None }
 			},
 			header = { tag = "row flex-x-between align-y-center" },
 			content = { tag = "size-full-0 auto-y padding-top-xsmall" },
@@ -28,35 +28,35 @@ local var1 = function(p1)
 			}
 		},
 		sizes = {
-			[inputSizeModule.XSmall] = {
+			[InputSizeModule.XSmall] = {
 				container = { tag = "radius-small" },
 				header = { tag = "gap-small size-full-600" },
 				content = { tag = "padding-bottom-small" },
-				icon = { size = iconSizeModule.XSmall },
+				icon = { size = IconSizeModule.XSmall },
 				text = { tag = "text-title-small" },
 				description = { tag = "text-body-small" }
 			},
-			[inputSizeModule.Small] = {
+			[InputSizeModule.Small] = {
 				container = { tag = "radius-medium" },
 				header = { tag = "gap-small size-full-800" },
 				content = { tag = "padding-bottom-large" },
-				icon = { size = iconSizeModule.Small },
+				icon = { size = IconSizeModule.Small },
 				text = { tag = "text-title-small" },
 				description = { tag = "text-body-small" }
 			},
-			[inputSizeModule.Medium] = {
+			[InputSizeModule.Medium] = {
 				container = { tag = "radius-medium" },
 				header = { tag = "gap-small size-full-1000" },
 				content = { tag = "padding-bottom-xlarge" },
-				icon = { size = iconSizeModule.Medium },
+				icon = { size = IconSizeModule.Medium },
 				text = { tag = "text-title-medium" },
 				description = { tag = "text-body-medium" }
 			},
-			[inputSizeModule.Large] = {
+			[InputSizeModule.Large] = {
 				container = { tag = "radius-medium" },
 				header = { tag = "gap-small size-full-1200" },
 				content = { tag = "padding-bottom-xlarge" },
-				icon = { size = iconSizeModule.Large },
+				icon = { size = IconSizeModule.Large },
 				text = { tag = "text-title-large" },
 				description = { tag = "text-body-medium" }
 			}
@@ -64,7 +64,7 @@ local var1 = function(p1)
 		isContained = {
 			[false] = {
 				header = {
-					tag = if flagsModule.FoundationAccordionBeta then "" else "padding-x-xsmall"
+					tag = if FlagsModule.FoundationAccordionBeta then "" else "padding-x-xsmall"
 				}
 			},
 			[true] = {
@@ -75,9 +75,9 @@ local var1 = function(p1)
 	}
 end
 
-return function(p1, p2, p3)
-	-- upvalues: variantsContextModule (ref), var1 (ref), composeStyleVariantModule (ref)
-	local accordionItem = variantsContextModule.useVariants("AccordionItem", var1, p1)
+return function(p1, p2, p3) --[[ Line: 92 ]]
+	-- upvalues: VariantsContextModule (copy), v9 (copy), ComposeStyleVariantModule (copy)
+	local AccordionItem = VariantsContextModule.useVariants("AccordionItem", v9, p1)
 	
-	return composeStyleVariantModule(accordionItem.common, accordionItem.sizes[p2], accordionItem.isContained[p3])
+	return ComposeStyleVariantModule(AccordionItem.common, AccordionItem.sizes[p2], AccordionItem.isContained[p3])
 end

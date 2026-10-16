@@ -1,106 +1,103 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local runService = game:GetService("RunService")
-local userInputService = game:GetService("UserInputService")
-local reactModule = require(parent_1.React)
-local roactUtilsModule = require(parent_1.RoactUtils)
-local socialCommonModule = require(parent_1.SocialCommon)
-local UIBloxModule = require(parent_1.UIBlox)
-local reactUtilsModule = require(parent_1.ReactUtils)
-local images = UIBloxModule.App.ImageSet.Images
-local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
-local inputUtilities = socialCommonModule.Utils.InputUtilities
-local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
-local useEventConnection = reactUtilsModule.useEventConnection
-local useStyle = UIBloxModule.Core.Style.useStyle
-local carouselNavigatedModule = require(parent.Thunks.CarouselNavigated)
-local constantsModule = require(parent.Constants)
-local eventNamesModule = require(parent.Analytics.EventNames)
-local useAnalyticsModule = require(parent.Analytics.useAnalytics)
-local cycleLeft = images["icons/actions/cycleLeft"]
-local cycleRight = images["icons/actions/cycleRight"]
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
+local ReactModule = require(Parent1.React)
+local UIBloxModule = require(Parent1.UIBlox)
+local Images = UIBloxModule.App.ImageSet.Images
+local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
+local InputUtilities = require(Parent1.SocialCommon).Utils.InputUtilities
+local UseDispatchFunction = require(Parent1.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseEventConnectionFunction = require(Parent1.ReactUtils).useEventConnection
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local CarouselNavigatedModule = require(Parent.Thunks.CarouselNavigated)
+local ConstantsModule = require(Parent.Constants)
+local EventNamesModule = require(Parent.Analytics.EventNames)
+local UseAnalyticsModule = require(Parent.Analytics.useAnalytics)
+local IconsActionsCycleLeft = Images["icons/actions/cycleLeft"]
+local IconsActionsCycleRight = Images["icons/actions/cycleRight"]
 
-return function(p1)
-	-- upvalues: useAnalyticsModule (ref), useDispatch (ref), useStyle (ref), reactModule (ref), constantsModule (ref), cycleLeft (ref), cycleRight (ref), inputUtilities (ref), eventNamesModule (ref), carouselNavigatedModule (ref), runService (ref), useEventConnection (ref), userInputService (ref), imageSetLabel (ref)
-	local var1 = useAnalyticsModule()
-	local var2 = useDispatch()
-	local var3 = useStyle()
-	local var4 = reactModule.useRef(nil)
-	local var5 = p1.direction == constantsModule.CarouselDirection.Left
-	local var6 = if var5 then Vector2.new(0, 0.5) else Vector2.new(1, 0.5)
-	local var7 = if var5 then cycleLeft else cycleRight
-	local var8 = if var5 then UDim2.fromScale(0, 0.5) else UDim2.fromScale(1, 0.5)
-	reactModule.useEffect(function()
-		-- upvalues: var4 (ref)
-		return function()
-			-- upvalues: var4 (copy)
-			if var4.current then
-				var4.current:Disconnect()
-				var4.current = nil
+return function(p1) --[[ Line: 39 ]]
+	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), UseStyleFunction (copy), ReactModule (copy), ConstantsModule (copy), IconsActionsCycleLeft (copy), IconsActionsCycleRight (copy), InputUtilities (copy), EventNamesModule (copy), CarouselNavigatedModule (copy), RunService (copy), UseEventConnectionFunction (copy), UserInputService (copy), ImageSetLabel (copy)
+	local UseAnalyticsModuleResult = UseAnalyticsModule()
+	local UseDispatchResult = UseDispatchFunction()
+	local UseStyleResult = UseStyleFunction()
+	local UseRefResult = ReactModule.useRef(nil)
+	local IsDirectionMatch = p1.direction == ConstantsModule.CarouselDirection.Left
+	local _Vector2: Vector2 = if IsDirectionMatch then Vector2.new(0, 0.5) else Vector2.new(1, 0.5)
+	local IconsActionsCycleLeft1 = if IsDirectionMatch then IconsActionsCycleLeft else IconsActionsCycleRight
+	local _UDim2: UDim2 = if IsDirectionMatch then UDim2.fromScale(0, 0.5) else UDim2.fromScale(1, 0.5)
+	ReactModule.useEffect(function() --[[ Line: 52 ]]
+		-- upvalues: UseRefResult (copy)
+		return function() --[[ Line: 53 ]]
+			-- upvalues: UseRefResult (upval)
+			if UseRefResult.current then
+				UseRefResult.current:Disconnect()
+				UseRefResult.current = nil
 			end
 		end
 	end, {})
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var4 (ref)
-		if p1.isDisabled and var4.current then
-			var4.current:Disconnect()
-			var4.current = nil
+	ReactModule.useEffect(function() --[[ Line: 61 ]]
+		-- upvalues: p1 (copy), UseRefResult (copy)
+		if p1.isDisabled and UseRefResult.current then
+			UseRefResult.current:Disconnect()
+			UseRefResult.current = nil
 		end
 	end, { p1.isDisabled })
-	local var9 = reactModule.useCallback(function(_, p2)
-		-- upvalues: p1 (ref), inputUtilities (copy), var4 (ref), var1 (ref), eventNamesModule (copy), var2 (ref), carouselNavigatedModule (copy), runService (copy)
+	local UseResult = ReactModule.useCallback(function(_, Input) --[[ Line: 68 ]]
+		-- upvalues: p1 (copy), InputUtilities (upval), UseRefResult (copy), UseAnalyticsModuleResult (copy), EventNamesModule (upval), UseDispatchResult (copy), CarouselNavigatedModule (upval), RunService (upval)
 		if p1.isDisabled then return end
-		if p2.UserInputState ~= Enum.UserInputState.Begin then return end
-		if not inputUtilities.isActivationInput(p2) then return end
-		if var4.current then
-			var4.current:Disconnect()
-			var4.current = nil
+		if Input.UserInputState ~= Enum.UserInputState.Begin then return end
+		if not InputUtilities.isActivationInput(Input) then return end
+		if UseRefResult.current then
+			UseRefResult.current:Disconnect()
+			UseRefResult.current = nil
 		end
-		var1.fireEvent(eventNamesModule.CapturesCarouselNavigated, { direction = p1.direction })
-		var2(carouselNavigatedModule(p1.direction))
-		local currentTime = tick()
-		local var10 = currentTime
-		var4.current = runService.RenderStepped:Connect(function(_)
-			-- upvalues: var10 (ref), currentTime (write), var1 (copy), eventNamesModule (copy), p1 (copy), var2 (copy), carouselNavigatedModule (copy)
-			if math.max(0.5 / (tick() - var10), 0.15) < tick() - currentTime then
-				var1.fireEvent(eventNamesModule.CapturesCarouselNavigated, { direction = p1.direction })
-				var2(carouselNavigatedModule(p1.direction))
-				currentTime = tick()
+		UseAnalyticsModuleResult.fireEvent(EventNamesModule.CapturesCarouselNavigated, { direction = p1.direction })
+		UseDispatchResult(CarouselNavigatedModule(p1.direction))
+		local CurrentTime = tick()
+		local CurrentTime1: number = CurrentTime
+		UseRefResult.current = RunService.RenderStepped:Connect(function(_) --[[ Line: 94 ]]
+			-- upvalues: CurrentTime1 (copy), CurrentTime (ref), UseAnalyticsModuleResult (upval), EventNamesModule (upval), p1 (upval), UseDispatchResult (upval), CarouselNavigatedModule (upval)
+			if math.max(0.5 / (tick() - CurrentTime1), 0.15) < tick() - CurrentTime then
+				UseAnalyticsModuleResult.fireEvent(EventNamesModule.CapturesCarouselNavigated, { direction = p1.direction })
+				UseDispatchResult(CarouselNavigatedModule(p1.direction))
+				CurrentTime = tick()
 			end
 		end)
 	end, { p1.isDisabled })
-	local var10 = reactModule.useCallback(function(_, p2)
-		-- upvalues: inputUtilities (copy), var4 (ref)
-		if inputUtilities.isActivationInput(p2) and var4.current then
-			var4.current:Disconnect()
-			var4.current = nil
+	local UseResult1 = ReactModule.useCallback(function(_, p2) --[[ Line: 108 ]]
+		-- upvalues: InputUtilities (upval), UseRefResult (copy)
+		if InputUtilities.isActivationInput(p2) and UseRefResult.current then
+			UseRefResult.current:Disconnect()
+			UseRefResult.current = nil
 		end
 	end, {})
-	useEventConnection(userInputService.InputEnded, function(p2)
-		-- upvalues: inputUtilities (copy), var4 (ref)
-		if inputUtilities.isActivationInput(p2) and var4.current then
-			var4.current:Disconnect()
-			var4.current = nil
+	UseEventConnectionFunction(UserInputService.InputEnded, function(p2) --[[ Line: 117 ]]
+		-- upvalues: InputUtilities (upval), UseRefResult (copy)
+		if InputUtilities.isActivationInput(p2) and UseRefResult.current then
+			UseRefResult.current:Disconnect()
+			UseRefResult.current = nil
 		end
 	end)
 	
-	return reactModule.createElement("TextButton", {
-		AnchorPoint = var6,
+	return ReactModule.createElement("TextButton", {
+		AnchorPoint = _Vector2,
 		BackgroundTransparency = 1,
-		Position = var8,
+		Position = _UDim2,
 		Size = p1.Size,
 		Text = "",
 		ZIndex = p1.ZIndex,
 		Visible = not p1.isDisabled,
-		[reactModule.Event.InputBegan] = var9,
-		[reactModule.Event.InputEnded] = var10
+		[ReactModule.Event.InputBegan] = UseResult,
+		[ReactModule.Event.InputEnded] = UseResult1
 	}, {
-		Arrow = reactModule.createElement(imageSetLabel, {
+		Arrow = ReactModule.createElement(ImageSetLabel, {
 			BackgroundTransparency = 1,
 			AnchorPoint = Vector2.new(0.5, 0.5),
-			Image = var7,
-			ImageColor3 = var3.Theme.IconEmphasis.Color,
-			ImageTransparency = var3.Theme.IconEmphasis.Transparency,
+			Image = IconsActionsCycleLeft1,
+			ImageColor3 = UseStyleResult.Theme.IconEmphasis.Color,
+			ImageTransparency = UseStyleResult.Theme.IconEmphasis.Transparency,
 			Position = UDim2.fromScale(0.5, 0.5),
 			Size = UDim2.fromOffset(36, 36)
 		})

@@ -1,45 +1,45 @@
-﻿local squadsCore = script:FindFirstAncestor("SquadsCore")
-local parent = squadsCore.Parent
-local reactModule = require(parent.React)
-local cryoModule = require(parent.Cryo)
-local useLocalUserId = require(parent.RobloxAppHooks).useLocalUserId
-local squadExternalContractContextModule = require(squadsCore.Components.SquadExternalContractProvider.SquadExternalContractContext)
-local getLuckyRecommendationStoreModule = require(squadsCore.Stores.GetLuckyRecommendationStore)
+﻿local SquadsCore = script:FindFirstAncestor("SquadsCore")
+local Parent = SquadsCore.Parent
+local ReactModule = require(Parent.React)
+local CryoModule = require(Parent.Cryo)
+local UseLocalUserIdFunction = require(Parent.RobloxAppHooks).useLocalUserId
+local SquadExternalContractContextModule = require(SquadsCore.Components.SquadExternalContractProvider.SquadExternalContractContext)
+local GetLuckyRecommendationStoreModule = require(SquadsCore.Stores.GetLuckyRecommendationStore)
 
-return function(p1)
-	-- upvalues: getLuckyRecommendationStoreModule (ref), reactModule (ref), squadExternalContractContextModule (ref), useLocalUserId (ref), cryoModule (ref)
-	local var1 = getLuckyRecommendationStoreModule(false)
-	local var2 = reactModule.useContext(squadExternalContractContextModule)
-	local var3 = tonumber(useLocalUserId()) or 0
+return function(LuckyRecommendationSessionId) --[[ Line: 12 | Named "useLuckyRecommendationAnalytics" ]]
+	-- upvalues: GetLuckyRecommendationStoreModule (copy), ReactModule (copy), SquadExternalContractContextModule (copy), UseLocalUserIdFunction (copy), CryoModule (copy)
+	local LuckyRecommendationStoreModule = GetLuckyRecommendationStoreModule(false)
+	local UseContextResult = ReactModule.useContext(SquadExternalContractContextModule)
+	local Number: number = tonumber(UseLocalUserIdFunction()) or 0
 	
-	return reactModule.useMemo(function()
-		-- upvalues: var1 (ref), p1 (ref), var3 (ref), cryoModule (copy), var2 (ref)
+	return (ReactModule.useMemo(function() --[[ Line: 18 ]]
+		-- upvalues: LuckyRecommendationStoreModule (copy), LuckyRecommendationSessionId (copy), Number (copy), CryoModule (upval), UseContextResult (copy)
 		return {
-			fire = function(p2, p3)
-				-- upvalues: var1 (copy), p1 (copy), var3 (copy), cryoModule (copy), var2 (copy)
-				local analyticsContext = var1.getAnalyticsContext()
-				local t = {
-					luckyRecommendationSessionId = p1,
-					localUserId = var3,
-					pickRequestId = analyticsContext.pickRequestId,
-					revealType = analyticsContext.revealType,
+			fire = function(p1, p2) --[[ Line: 20 ]]
+				-- upvalues: LuckyRecommendationStoreModule (upval), LuckyRecommendationSessionId (upval), Number (upval), CryoModule (upval), UseContextResult (upval)
+				local AnalyticsContext = LuckyRecommendationStoreModule.getAnalyticsContext()
+				local JoinResult = {
+					luckyRecommendationSessionId = LuckyRecommendationSessionId,
+					localUserId = Number,
+					pickRequestId = AnalyticsContext.pickRequestId,
+					revealType = AnalyticsContext.revealType,
 					clientTimestamp = os.time()
 				}
 				
-				if p3 then
-					t = cryoModule.Dictionary.join(t, p3)
+				if p2 then
+					JoinResult = CryoModule.Dictionary.join(JoinResult, p2)
 				end
-				var2.fireSquadAnalytics(p2, t)
+				UseContextResult.fireSquadAnalytics(p1, JoinResult)
 			end,
-			getContext = function()
-				-- upvalues: var1 (copy)
-				return var1.getAnalyticsContext()
+			getContext = function() --[[ Line: 34 ]]
+				-- upvalues: LuckyRecommendationStoreModule (upval)
+				return LuckyRecommendationStoreModule.getAnalyticsContext()
 			end
 		}
 	end, {
-		p1,
-		var3,
-		var1.getAnalyticsContext,
-		var2.fireSquadAnalytics
-	})
+		LuckyRecommendationSessionId,
+		Number,
+		LuckyRecommendationStoreModule.getAnalyticsContext,
+		UseContextResult.fireSquadAnalytics
+	}))
 end

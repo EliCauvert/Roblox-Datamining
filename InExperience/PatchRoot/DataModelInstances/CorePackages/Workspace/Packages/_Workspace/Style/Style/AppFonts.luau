@@ -1,34 +1,34 @@
-﻿local t = {}
-t.__index = t
+﻿local AppFontsModule = {}
+AppFontsModule.__index = AppFontsModule
 
-function t.new(p1)
-	-- upvalues: t (ref)
-	local t_1 = { _enableNewFont = p1 }
-	setmetatable(t_1, t)
+function AppFontsModule.new(_enableNewFont) --[[ Line: 4 ]]
+	-- upvalues: AppFontsModule (copy)
+	local config = { _enableNewFont = _enableNewFont }
+	setmetatable(config, AppFontsModule)
 	
-	return t_1
+	return config
 end
 
-function t:getDefault()
-	return if self._enableNewFont then Enum.Font.BuilderSans else Enum.Font.Gotham
+function AppFontsModule.getDefault(p1) --[[ Line: 12 ]]
+	return if p1._enableNewFont then Enum.Font.BuilderSans else Enum.Font.Gotham
 end
 
-function t:getMedium()
-	return if self._enableNewFont then Enum.Font.BuilderSansMedium else Enum.Font.GothamMedium
+function AppFontsModule.getMedium(p1) --[[ Line: 21 ]]
+	return if p1._enableNewFont then Enum.Font.BuilderSansMedium else Enum.Font.GothamMedium
 end
 
-function t:getBlack()
-	return if self._enableNewFont then Enum.Font.BuilderSansExtraBold else Enum.Font.GothamBlack
+function AppFontsModule.getBlack(p1) --[[ Line: 30 ]]
+	return if p1._enableNewFont then Enum.Font.BuilderSansExtraBold else Enum.Font.GothamBlack
 end
 
-function t:getBold()
-	return if self._enableNewFont then Enum.Font.BuilderSansBold else Enum.Font.GothamBold
+function AppFontsModule.getBold(p1) --[[ Line: 39 ]]
+	return if p1._enableNewFont then Enum.Font.BuilderSansBold else Enum.Font.GothamBold
 end
 
-function t:getSemibold()
-	return if self._enableNewFont then Enum.Font.BuilderSansMedium else Enum.Font.GothamMedium
+function AppFontsModule.getSemibold(p1) --[[ Line: 48 ]]
+	return if p1._enableNewFont then Enum.Font.BuilderSansMedium else Enum.Font.GothamMedium
 end
 
-t.default = t.new(true)
+AppFontsModule.default = AppFontsModule.new(true)
 
-return t
+return AppFontsModule

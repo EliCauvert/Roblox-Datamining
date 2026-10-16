@@ -1,35 +1,36 @@
-﻿local expChat = script:FindFirstAncestor("ExpChat")
-local parent = expChat.Parent
-local signalsModule = require(parent.Signals)
-local sharedFlagsModule = require(parent.SharedFlags)
-local friendsChatChannelAddedModule = require(expChat.Actions.FriendsChatChannelAdded)
-local friendsChatChannelRemovedModule = require(expChat.Actions.FriendsChatChannelRemoved)
-local getChannelTabsStoreModule = require(expChat.Stores.GetChannelTabsStore)
-local getFriendsTabVisibilityStoreModule = require(parent.FriendsChat.GetFriendsTabVisibilityStore)
-local friendsChatTabNameModule = require(parent.FriendsChat.FriendsChatTabName)
-local fFlagExpChatUseChannelTabsStore = sharedFlagsModule.FFlagExpChatUseChannelTabsStore
+﻿local ExpChat = script:FindFirstAncestor("ExpChat")
+local Parent = ExpChat.Parent
+local SignalsModule = require(Parent.Signals)
+local FriendsChatChannelAddedModule = require(ExpChat.Actions.FriendsChatChannelAdded)
+local FriendsChatChannelRemovedModule = require(ExpChat.Actions.FriendsChatChannelRemoved)
+local GetChannelTabsStoreModule = require(ExpChat.Stores.GetChannelTabsStore)
+local GetFriendsTabVisibilityStoreModule = require(Parent.FriendsChat.GetFriendsTabVisibilityStore)
+local FriendsChatTabNameModule = require(Parent.FriendsChat.FriendsChatTabName)
+local FFlagExpChatUseChannelTabsStore = require(Parent.SharedFlags).FFlagExpChatUseChannelTabsStore
 
-return function(p1)
-	-- upvalues: getFriendsTabVisibilityStoreModule (ref), fFlagExpChatUseChannelTabsStore (ref), getChannelTabsStoreModule (ref), signalsModule (ref), friendsChatChannelAddedModule (ref), friendsChatTabNameModule (ref), friendsChatChannelRemovedModule (ref)
-	local var1 = getFriendsTabVisibilityStoreModule(false)
-	local var2 = if fFlagExpChatUseChannelTabsStore then getChannelTabsStoreModule(false) else nil
+return function(p1) --[[ Line: 15 | Named "syncFriendsTabVisibility" ]]
+	-- upvalues: GetFriendsTabVisibilityStoreModule (copy), FFlagExpChatUseChannelTabsStore (copy), GetChannelTabsStoreModule (copy), SignalsModule (copy), FriendsChatTabNameModule (copy), FriendsChatChannelAddedModule (copy), FriendsChatChannelRemovedModule (copy)
+	local FriendsTabVisibilityStoreModule = GetFriendsTabVisibilityStoreModule(false)
+	local ChannelTabsStoreModule = if FFlagExpChatUseChannelTabsStore then GetChannelTabsStoreModule(false) else nil
 	
-	return signalsModule.createEffect(function(p2)
-		-- upvalues: var1 (ref), p1 (ref), friendsChatChannelAddedModule (copy), friendsChatTabNameModule (copy), var2 (ref), friendsChatChannelRemovedModule (copy)
-		if var1.getIsFriendsTabVisible(p2) then
-			p1:dispatch(friendsChatChannelAddedModule(friendsChatTabNameModule))
-			
-			if var2 then
-				var2.addChannelTab({ type = "FriendsChat", name = friendsChatTabNameModule }, nil)
+	return SignalsModule.createEffect(function(p2) --[[ Line: 19 ]]
+		-- upvalues: FriendsTabVisibilityStoreModule (copy), ChannelTabsStoreModule (copy), FriendsChatTabNameModule (upval), p1 (copy), FriendsChatChannelAddedModule (upval), FriendsChatChannelRemovedModule (upval)
+		if FriendsTabVisibilityStoreModule.getIsFriendsTabVisible(p2) then
+			if ChannelTabsStoreModule then
+				ChannelTabsStoreModule.addChannelTab({ type = "FriendsChat", name = FriendsChatTabNameModule }, nil)
+				
+				return
+			else
+				p1:dispatch(FriendsChatChannelAddedModule(FriendsChatTabNameModule))
 				
 				return
 			end
-		else
-			p1:dispatch(friendsChatChannelRemovedModule(friendsChatTabNameModule))
+		elseif ChannelTabsStoreModule then
+			ChannelTabsStoreModule.handleChannelRemoved(FriendsChatTabNameModule)
 			
-			if var2 then
-				var2.handleChannelRemoved(friendsChatTabNameModule)
-			end
+			return
+		else
+			p1:dispatch(FriendsChatChannelRemovedModule(FriendsChatTabNameModule))
 		end
 	end)
 end

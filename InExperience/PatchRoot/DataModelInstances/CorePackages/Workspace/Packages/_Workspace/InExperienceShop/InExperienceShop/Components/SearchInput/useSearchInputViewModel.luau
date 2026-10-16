@@ -1,50 +1,50 @@
-﻿local reactModule = require(script:FindFirstAncestor("InExperienceShop").Parent.React)
+﻿local ReactModule = require(script:FindFirstAncestor("InExperienceShop").Parent.React)
 local _ = require(script.Parent.SearchInputView)
 
-return function(p1)
-	-- upvalues: reactModule (ref)
-	local var1 = reactModule.useRef(nil)
-	local var2 = reactModule.useRef(false)
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref)
-		if var1.current then
-			var1.current:CaptureFocus()
+return function(p1) --[[ Line: 17 | Named "useSearchInputViewModel" ]]
+	-- upvalues: ReactModule (copy)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(false)
+	ReactModule.useEffect(function() --[[ Line: 21 ]]
+		-- upvalues: UseRefResult (copy)
+		if UseRefResult.current then
+			UseRefResult.current:CaptureFocus()
 		end
 	end, {})
-	local var3 = reactModule.useRef(p1.onTextChanged)
-	var3.current = p1.onTextChanged
+	local UseRefResult2 = ReactModule.useRef(p1.onTextChanged)
+	UseRefResult2.current = p1.onTextChanged
 	
 	return {
-		onBack = reactModule.useCallback(function()
-			-- upvalues: var2 (ref), var1 (ref), p1 (ref)
-			var2.current = true
+		onBack = ReactModule.useCallback(function() --[[ Line: 45 ]]
+			-- upvalues: UseRefResult1 (copy), UseRefResult (copy), p1 (copy)
+			UseRefResult1.current = true
 			
-			if var1.current then
-				var1.current:ReleaseFocus()
+			if UseRefResult.current then
+				UseRefResult.current:ReleaseFocus()
 			end
 			task.defer(p1.onBack)
 		end, { p1.onBack }),
-		onClear = reactModule.useCallback(function()
-			-- upvalues: p1 (ref), var1 (ref)
+		onClear = ReactModule.useCallback(function() --[[ Line: 55 ]]
+			-- upvalues: p1 (copy), UseRefResult (copy)
 			p1.onTextChanged("")
 			
-			if var1.current then
-				var1.current:CaptureFocus()
+			if UseRefResult.current then
+				UseRefResult.current:CaptureFocus()
 			end
 		end, { p1.onTextChanged }),
-		onTextChanged = reactModule.useCallback(function(p2)
-			-- upvalues: var2 (ref), var3 (ref)
-			if not var2.current then
-				var3.current(p2.Text)
+		onTextChanged = ReactModule.useCallback(function(p2) --[[ Line: 33 ]]
+			-- upvalues: UseRefResult1 (copy), UseRefResult2 (copy)
+			if not UseRefResult1.current then
+				UseRefResult2.current(p2.Text)
 			end
 		end, {}),
-		onFocusLost = reactModule.useCallback(function(p2, p3)
-			-- upvalues: p1 (ref)
+		onFocusLost = ReactModule.useCallback(function(p2, p3) --[[ Line: 39 ]]
+			-- upvalues: p1 (copy)
 			if p3 then
 				p1.onSearchSubmit(p2.Text or "")
 			end
 		end, { p1.onSearchSubmit }),
 		text = p1.text,
-		textBoxRef = var1
+		textBoxRef = UseRefResult
 	}
 end

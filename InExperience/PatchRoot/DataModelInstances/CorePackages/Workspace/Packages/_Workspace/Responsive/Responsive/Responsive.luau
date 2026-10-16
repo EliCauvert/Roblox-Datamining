@@ -1,129 +1,78 @@
-﻿local guiService = game:GetService("GuiService")
+﻿local GuiService = game:GetService("GuiService")
 local VRService = game:GetService("VRService")
-local parent = script:FindFirstAncestor("Responsive").Parent
-local standardBreakpointsModule = require(script.Parent.CommonConfigs.StandardBreakpoints)
-local inputModeModule = require(script.Parent.InputMode)
-local signal = require(parent.AppCommonLib).Signal
-local findFirstAncestorWithTagModule = require(script.Parent.FindFirstAncestorWithTag)
-local tbl = setmetatable({}, { __mode = "k" })
-local t = {}
-t.__index = t
-local rules = standardBreakpointsModule.rules
-local t_1 = {}
-t_1.__index = t_1
+local InputModeModule = require(script.Parent.InputMode)
+local Signal = require(script:FindFirstAncestor("Responsive").Parent.AppCommonLib).Signal
+local FindFirstAncestorWithTagModule = require(script.Parent.FindFirstAncestorWithTag)
+local self = setmetatable({}, { __mode = "k" })
+local Module = {}
+Module.__index = Module
+local Rules = require(script.Parent.CommonConfigs.StandardBreakpoints).rules
+local Module1 = {}
+Module1.__index = Module1
 
-function t_1.new(p1)
-	-- upvalues: t_1 (ref)
-	local t = {
+function Module1.new(List) --[[ Line: 61 ]]
+	-- upvalues: Module1 (copy)
+	local config = {
 		_hasSizeRules = false,
 		_hasInputRules = false,
 		_currentKey = "Default",
-		_config = p1 or {},
+		_config = List or {},
 		_currentRule = { Key = "Default" }
 	}
-	local var1 = false
-	local var2 = false
+	local _hasSizeRules = false
+	local _hasInputRules = false
 	
-	for i, v in p1 do
-		var1 = var1 or (if v.minWidth == nil then if v.maxWidth == nil then if v.minHeight == nil then if v.maxHeight == nil then if v.maxRatio == nil then v.minRatio ~= nil else true else true else true else true else true)
-		var2 = var2 or (if v.preferredInput == nil then v.lastInput ~= nil else true)
+	for _, value in List do
+		_hasSizeRules = _hasSizeRules or (value.minWidth ~= nil or (value.maxWidth ~= nil or (value.minHeight ~= nil or (value.maxHeight ~= nil or value.maxRatio ~= nil))) or value.minRatio ~= nil)
+		_hasInputRules = _hasInputRules or (value.preferredInput ~= nil or value.lastInput ~= nil)
 	end
-	t._hasSizeRules = var1
-	t._hasInputRules = var2
+	config._hasSizeRules = _hasSizeRules
+	config._hasInputRules = _hasInputRules
 	
-	return setmetatable(t, t_1)
+	return (setmetatable(config, Module1))
 end
 
-function t_1:hasSizeRules()
+function Module1:hasSizeRules() --[[ Line: 97 ]]
 	return self._hasSizeRules
 end
 
-function t_1:hasInputRules()
+function Module1:hasInputRules() --[[ Line: 100 ]]
 	return self._hasInputRules
 end
 
-function t_1:currentRule()
+function Module1:currentRule() --[[ Line: 104 ]]
 	return self._currentRule
 end
 
-function t_1:currentKey()
+function Module1:currentKey() --[[ Line: 107 ]]
 	return self._currentKey
 end
 
-function t_1:resolve(p2, p3, p4, p5, p6)
-	local var3 = "Default"
-	local t = {}
-	local var4 = p2 / p3
+function Module1:resolve(p1, p2, PreferredInput, LastInput, Spatial): boolean --[[ Line: 113 ]]
+	local Key = "Default"
+	local _currentRule = {}
+	local v1 = p1 / p2
 	
-	for i, v in self._config do
-		local var5
-		if v.minWidth ~= nil then
-			var5 = false
-			
-			if v.minWidth <= p2 then
-				if v.maxWidth ~= nil then
-					var5 = false
-					
-					if p2 <= v.maxWidth then
-						if v.minHeight ~= nil then
-							var5 = false
-							
-							if v.minHeight <= p3 then
-								if v.maxHeight ~= nil then
-									var5 = false
-									
-									if p3 <= v.maxHeight then
-										if v.minRatio ~= nil then
-											var5 = false
-											
-											if v.minRatio <= var4 then
-												if v.maxRatio ~= nil then
-													var5 = false
-													
-													if var4 <= v.maxRatio then
-														if v.preferredInput ~= nil then
-															var5 = false
-															
-															if p4 == v.preferredInput then
-																if v.lastInput ~= nil then
-																	var5 = false
-																	
-																	if p5 == v.lastInput then
-																		var5 = if v.spatial ~= nil then p6 == v.spatial else true
-																	end
-																end
-															end
-														end
-													end
-												end
-											end
-										end
-									end
-								end
-							end
-						end
-					end
-				end
-			end
-			if var5 then
-				t = v
-				var3 = v.Key
-				break
-			end
+	for _, value in self._config do
+		if if value.minWidth == nil then if value.maxWidth == nil then if value.minHeight == nil then if value.maxHeight == nil then if value.minRatio == nil then if value.maxRatio == nil then if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial)) else v1 <= value.maxRatio and (if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial))) else value.minRatio <= v1 and (if value.maxRatio == nil then if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial)) else v1 <= value.maxRatio and (if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial)))) else p2 <= value.maxHeight and (if value.minRatio == nil then if value.maxRatio == nil then if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial)) else v1 <= value.maxRatio and (if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial))) else value.minRatio <= v1 and (if value.maxRatio == nil then if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial)) else v1 <= value.maxRatio and (if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial))))) else value.minHeight <= p2 and (if value.maxHeight == nil then if value.minRatio == nil then if value.maxRatio == nil then if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial)) else v1 <= value.maxRatio and (if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial))) else value.minRatio <= v1 and (if value.maxRatio == nil then if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial)) else v1 <= value.maxRatio and (if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial)))) else p2 <= value.maxHeight and (if value.minRatio == nil then if value.maxRatio == nil then if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial)) else v1 <= value.maxRatio and (if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial))) else value.minRatio <= v1 and (if value.maxRatio == nil then if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial)) else v1 <= value.maxRatio and (if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial)))))) else p1 <= value.maxWidth and (if value.minHeight == nil then if value.maxHeight == nil then if value.minRatio == nil then if value.maxRatio == nil then if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial)) else v1 <= value.maxRatio and (if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial))) else value.minRatio <= v1 and (if value.maxRatio == nil then if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial)) else v1 <= value.maxRatio and (if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial)))) else p2 <= value.maxHeight and (if value.minRatio == nil then if value.maxRatio == nil then if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial)) else v1 <= value.maxRatio and (if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial))) else value.minRatio <= v1 and (if value.maxRatio == nil then if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial)) else v1 <= value.maxRatio and (if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial))))) else value.minHeight <= p2 and (if value.maxHeight == nil then if value.minRatio == nil then if value.maxRatio == nil then if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial)) else v1 <= value.maxRatio and (if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial))) else value.minRatio <= v1 and (if value.maxRatio == nil then if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial)) else v1 <= value.maxRatio and (if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial)))) else p2 <= value.maxHeight and (if value.minRatio == nil then if value.maxRatio == nil then if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial)) else v1 <= value.maxRatio and (if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial))) else value.minRatio <= v1 and (if value.maxRatio == nil then if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial)) else v1 <= value.maxRatio and (if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial))))))) else value.minWidth <= p1 and (if value.maxWidth == nil then if value.minHeight == nil then if value.maxHeight == nil then if value.minRatio == nil then if value.maxRatio == nil then if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial)) else v1 <= value.maxRatio and (if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial))) else value.minRatio <= v1 and (if value.maxRatio == nil then if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial)) else v1 <= value.maxRatio and (if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial)))) else p2 <= value.maxHeight and (if value.minRatio == nil then if value.maxRatio == nil then if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial)) else v1 <= value.maxRatio and (if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial))) else value.minRatio <= v1 and (if value.maxRatio == nil then if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial)) else v1 <= value.maxRatio and (if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial))))) else value.minHeight <= p2 and (if value.maxHeight == nil then if value.minRatio == nil then if value.maxRatio == nil then if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial)) else v1 <= value.maxRatio and (if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial))) else value.minRatio <= v1 and (if value.maxRatio == nil then if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial)) else v1 <= value.maxRatio and (if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial)))) else p2 <= value.maxHeight and (if value.minRatio == nil then if value.maxRatio == nil then if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial)) else v1 <= value.maxRatio and (if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial))) else value.minRatio <= v1 and (if value.maxRatio == nil then if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial)) else v1 <= value.maxRatio and (if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial)))))) else p1 <= value.maxWidth and (if value.minHeight == nil then if value.maxHeight == nil then if value.minRatio == nil then if value.maxRatio == nil then if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial)) else v1 <= value.maxRatio and (if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial))) else value.minRatio <= v1 and (if value.maxRatio == nil then if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial)) else v1 <= value.maxRatio and (if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial)))) else p2 <= value.maxHeight and (if value.minRatio == nil then if value.maxRatio == nil then if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial)) else v1 <= value.maxRatio and (if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial))) else value.minRatio <= v1 and (if value.maxRatio == nil then if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial)) else v1 <= value.maxRatio and (if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial))))) else value.minHeight <= p2 and (if value.maxHeight == nil then if value.minRatio == nil then if value.maxRatio == nil then if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial)) else v1 <= value.maxRatio and (if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial))) else value.minRatio <= v1 and (if value.maxRatio == nil then if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial)) else v1 <= value.maxRatio and (if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial)))) else p2 <= value.maxHeight and (if value.minRatio == nil then if value.maxRatio == nil then if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial)) else v1 <= value.maxRatio and (if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial))) else value.minRatio <= v1 and (if value.maxRatio == nil then if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial)) else v1 <= value.maxRatio and (if value.preferredInput == nil then if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial) else PreferredInput == value.preferredInput and (if value.lastInput == nil then value.spatial == nil or Spatial == value.spatial else LastInput == value.lastInput and (value.spatial == nil or Spatial == value.spatial)))))))) then
+			_currentRule = value
+			Key = value.Key
+			break
 		end
 	end
-	if var3 == self._currentKey then
+	if Key == self._currentKey then
 		return false
+	else
+		self._currentKey = Key
+		self._currentRule = _currentRule
+		
+		return true
 	end
-	self._currentKey = var3
-	self._currentRule = t
-	
-	return true
 end
 
-function t.new()
-	-- upvalues: VRService (ref), signal (ref), t (ref), inputModeModule (ref)
-	local t_1 = {
+function Module.new() --[[ Line: 153 ]]
+	-- upvalues: VRService (copy), Signal (copy), Module (copy), InputModeModule (copy)
+	local config = {
 		_layerCollectorSizeConnection = nil,
 		_inputModeConnection = nil,
 		_vrEnabledConnection = nil,
@@ -131,37 +80,38 @@ function t.new()
 		_hasSizeRules = false,
 		_refCount = 1,
 		_vrEnabled = VRService.VREnabled,
-		_changed = signal.new(),
+		_changed = Signal.new(),
 		_absoluteSize = Vector2.zero,
 		_configResolvers = { default = {} }
 	}
-	local tbl = setmetatable(t_1, t)
-	t_1._inputModeConnection = inputModeModule.connect(function()
-		-- upvalues: t_1 (ref), tbl (ref)
-		if t_1._hasInputRules then
-			tbl:resolve()
+	local self = setmetatable(config, Module)
+	config._inputModeConnection = InputModeModule.connect(function() --[[ Line: 181 ]]
+		-- upvalues: config (copy), self (copy)
+		if config._hasInputRules then
+			self:resolve()
 		end
 	end)
-	t_1._vrEnabledConnection = VRService:GetPropertyChangedSignal("VREnabled"):Connect(function()
-		-- upvalues: t_1 (ref), VRService (copy), tbl (ref)
-		t_1._vrEnabled = VRService.VREnabled
-		tbl:resolve()
+	config._vrEnabledConnection = VRService:GetPropertyChangedSignal("VREnabled"):Connect(function() --[[ Line: 187 ]]
+		-- upvalues: config (copy), VRService (upval), self (copy)
+		config._vrEnabled = VRService.VREnabled
+		self:resolve()
 	end)
 	
-	return tbl
+	return self
 end
 
-function t:incRef()
+function Module:incRef() --[[ Line: 195 ]]
 	self._refCount += 1
 end
 
-function t:destroy()
-	-- upvalues: tbl (ref)
+function Module:destroy() --[[ Line: 200 ]]
+	-- upvalues: self (copy)
 	if self._refCount > 1 then
 		self._refCount -= 1
 		
 		return
-	elseif self._layerCollectorSizeConnection then
+	end
+	if self._layerCollectorSizeConnection then
 		self._layerCollectorSizeConnection:Disconnect()
 		self._layerCollectorSizeConnection = nil
 	end
@@ -175,45 +125,45 @@ function t:destroy()
 	end
 	self._changed = nil
 	
-	for i, v in tbl do
-		if v == self then
-			tbl[i] = nil
+	for i, value in self do
+		if value == self then
+			self[i] = nil
 		end
 	end
 end
 
-function t:connect(p7)
+function Module:connect(p3) --[[ Line: 227 ]]
 	if self._changed == nil then
 		error("Connecting to dead signal!")
 	end
-	return self._changed:connect(p7)
+	return self._changed:connect(p3)
 end
 
-function t:currentRule(p7)
-	return self._configResolvers[p7 or "default"]:currentRule()
+function Module:currentRule(p3) --[[ Line: 235 ]]
+	return self._configResolvers[p3 or "default"]:currentRule()
 end
 
-function t:currentKey(p7)
-	return self._configResolvers[p7 or "default"]:currentKey()
+function Module:currentKey(p3) --[[ Line: 240 ]]
+	return self._configResolvers[p3 or "default"]:currentKey()
 end
 
-function t:updateAbsoluteSize(p7)
-	-- upvalues: guiService (ref)
-	local absoluteSize = p7.AbsoluteSize
+function Module:updateAbsoluteSize(LayerCollector) --[[ Line: 246 ]]
+	-- upvalues: GuiService (copy)
+	local AbsoluteSize = LayerCollector.AbsoluteSize
 	
-	if p7:IsA("LayerCollector") then
-		local ok, status = pcall(function()
-			-- upvalues: p7 (ref)
-			return p7.IgnoreGuiInset
+	if LayerCollector:IsA("LayerCollector") then
+		local Success, Result = pcall(function() --[[ Line: 250 ]]
+			-- upvalues: LayerCollector (copy)
+			return LayerCollector.IgnoreGuiInset
 		end)
 		
-		if ok and status then
-			local guiInset, _ = guiService:GetGuiInset()
-			absoluteSize += guiInset
+		if Success and Result then
+			local GuiInset, _ = GuiService:GetGuiInset()
+			AbsoluteSize += GuiInset
 		end
 	end
-	if absoluteSize.X ~= self._absoluteSize.X or absoluteSize.Y ~= self._absoluteSize.Y then
-		self._absoluteSize = absoluteSize
+	if AbsoluteSize.X ~= self._absoluteSize.X or AbsoluteSize.Y ~= self._absoluteSize.Y then
+		self._absoluteSize = AbsoluteSize
 		
 		if self._hasSizeRules then
 			self:resolve()
@@ -221,96 +171,97 @@ function t:updateAbsoluteSize(p7)
 	end
 end
 
-function t:resolve()
-	-- upvalues: inputModeModule (ref)
+function Module:resolve() --[[ Line: 269 ]]
+	-- upvalues: InputModeModule (copy)
 	if not self._configResolvers then return end
-	local x = self._absoluteSize.X or 1
-	local y = self._absoluteSize.Y or 1
-	local var6 = inputModeModule.preferred()
-	local var7 = inputModeModule.last()
-	local vrEnabled = self._vrEnabled
-	local var8 = false
+	local X = self._absoluteSize.X or 1
+	local Y = self._absoluteSize.Y or 1
+	local PreferredResult = InputModeModule.preferred()
+	local LastResult = InputModeModule.last()
+	local VrEnabled = self._vrEnabled
+	local Flag = false
 	
-	for i, v in self._configResolvers do
-		if v:resolve(x, y, var6, var7, vrEnabled) then
-			var8 = true
+	for _, configResolver in self._configResolvers do
+		if configResolver:resolve(X, Y, PreferredResult, LastResult, VrEnabled) then
+			Flag = true
 		end
 	end
-	if var8 then
+	if Flag then
 		self._changed:fire()
 	end
 end
 
-function is_array(p7)
-	return type(p7) == "table" and p7[1] ~= nil
+function is_array(Entry): boolean --[[ Line: 292 ]]
+	return type(Entry) == "table" and Entry[1] ~= nil
 end
 
-function t:setConfig(p7)
-	-- upvalues: t_1 (ref)
-	if is_array(p7) then
-		p7 = { default = p7 }
+function Module:setConfig(Default) --[[ Line: 299 ]]
+	-- upvalues: Module1 (copy)
+	if is_array(Default) then
+		Default = { default = Default }
 	end
-	local var9 = false
-	local var10 = false
-	local t = {}
+	local _hasSizeRules = false
+	local _hasInputRules = false
+	local _configResolvers = {}
 	
-	if p7 then
-		for i, v in p7 do
-			t[i] = t_1.new(v)
-			var9 = var9 or t[i]:hasSizeRules()
-			var10 = var10 or t[i]:hasInputRules()
+	if Default then
+		for i, value in Default do
+			_configResolvers[i] = Module1.new(value)
+			_hasSizeRules = _hasSizeRules or _configResolvers[i]:hasSizeRules()
+			_hasInputRules = _hasInputRules or _configResolvers[i]:hasInputRules()
 		end
 	end
-	self._hasInputRules = var10
-	self._hasSizeRules = var9
-	self._configResolvers = t
+	self._hasInputRules = _hasInputRules
+	self._hasSizeRules = _hasSizeRules
+	self._configResolvers = _configResolvers
 	self:resolve()
 end
 
-function t:setLocalInstance(p8, p9)
-	-- upvalues: findFirstAncestorWithTagModule (ref)
-	if typeof(p8) ~= "Instance" then
+function Module:setLocalInstance(Key: Instance, Key1) --[[ Line: 327 ]]
+	-- upvalues: FindFirstAncestorWithTagModule (copy)
+	if typeof(Key) ~= "Instance" then
 		error("setLocalInstance arg1 expects Instance")
 		
 		return
 	end
-	local var11 = if typeof(p9) == "string" then findFirstAncestorWithTagModule(p8, p9) or p8 elseif typeof(p9) == "Instance" then p9 else p8:FindFirstAncestorWhichIsA("LayerCollector")
+	local FirstAncestorWithTagModule = nil
+	FirstAncestorWithTagModule = if typeof(Key1) == "string" then FindFirstAncestorWithTagModule(Key, Key1) or Key elseif typeof(Key1) == "Instance" then Key1 else Key:FindFirstAncestorWhichIsA("LayerCollector")
 	
-	if var11 == nil then
-		var11 = p8
+	if FirstAncestorWithTagModule == nil then
+		FirstAncestorWithTagModule = Key
 	end
 	if self._layerCollectorSizeConnection then
 		self._layerCollectorSizeConnection:Disconnect()
 		self._layerCollectorSizeConnection = nil
 	end
-	if var11 then
-		self._layerCollectorSizeConnection = var11:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
-			-- upvalues: self (ref), var11 (write)
-			self:updateAbsoluteSize(var11)
+	if FirstAncestorWithTagModule then
+		self._layerCollectorSizeConnection = FirstAncestorWithTagModule:GetPropertyChangedSignal("AbsoluteSize"):Connect(function() --[[ Line: 353 ]]
+			-- upvalues: self (copy), FirstAncestorWithTagModule (ref)
+			self:updateAbsoluteSize(FirstAncestorWithTagModule)
 		end)
-		self:updateAbsoluteSize(var11)
+		self:updateAbsoluteSize(FirstAncestorWithTagModule)
 	end
 end
 
 return {
 	DefaultKey = "Default",
-	bindContainer = function(p8, p9)
-		-- upvalues: tbl (ref), t (ref), rules (ref)
-		local var11 = tbl[p8]
-		local var12 = p9 == nil
+	bindContainer = function(Key, p3) --[[ Line: 362 ]]
+		-- upvalues: self (copy), Module (copy), Rules (copy)
+		local SelfEntry = self[Key]
+		local v2 = p3 == nil
 		
-		if var12 and var11 then
-			var11:incRef()
+		if v2 and SelfEntry then
+			SelfEntry:incRef()
 			
-			return var11
+			return SelfEntry
 		end
-		local var13 = t.new()
-		var13:setLocalInstance(p8, p8)
-		var13:setConfig(p9 or rules)
+		local NewModule = Module.new()
+		NewModule:setLocalInstance(Key, Key)
+		NewModule:setConfig(p3 or Rules)
 		
-		if var12 then
-			tbl[p8] = var13
+		if v2 then
+			self[Key] = NewModule
 		end
-		return var13
+		return NewModule
 	end
 }

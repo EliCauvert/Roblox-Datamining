@@ -1,9 +1,9 @@
-﻿return function(p1, p2, p3)
-	if string.len(p2) == 0 then
+﻿return function(Text1: string, Text: string, p1: number): boolean --[[ Line: 16 | Named "startsWith" ]]
+	if string.len(Text) == 0 then
 		return true
+	else
+		local StartIndex = if p1 == nil or p1 < 1 then 1 else p1
+		
+		return string.len(Text1) >= StartIndex and Text1:find(Text, StartIndex, true) == StartIndex
 	end
-	local _ = nil
-	local var1 = if p3 == nil or p3 < 1 then 1 else p3
-	
-	return if string.len(p1) < var1 then false else p1:find(p2, var1, true) == var1
 end

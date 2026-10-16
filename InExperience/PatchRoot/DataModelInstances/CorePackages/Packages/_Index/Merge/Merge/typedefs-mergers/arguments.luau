@@ -1,34 +1,34 @@
-﻿local parent = script.Parent.Parent.Parent
-local luauPolyfillModule = require(parent.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local boolean = luauPolyfillModule.Boolean
-local t = {}
-local _ = require(parent.GraphQL)
+﻿local Parent = script.Parent.Parent.Parent
+local LuauPolyfillModule = require(Parent.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local Boolean = LuauPolyfillModule.Boolean
+local _ = require(Parent.GraphQL)
 local _ = require(script.Parent["merge-typedefs_types"])
-local utilsModule = require(parent.Utils)
-local compareNodes = utilsModule.compareNodes
-local isSome = utilsModule.isSome
-local deduplicateArguments = nil
-
-function t.mergeArguments(p1, p2, p3)
-	-- upvalues: deduplicateArguments (write), array (ref), isSome (ref), compareNodes (ref)
-	local var1 = deduplicateArguments(array.filter(array.concat({}, p2, p1), isSome))
-	
-	if p3 and p3.sort then
-		array.sort(var1, compareNodes)
+local UtilsModule = require(Parent.Utils)
+local CompareNodes = UtilsModule.compareNodes
+local IsSome = UtilsModule.isSome
+local Callback = nil
+local ArgumentsModule = {
+	mergeArguments = function(p1, p2, p3) --[[ Line: 30 ]]
+		-- upvalues: Callback (ref), Array (copy), IsSome (copy), CompareNodes (copy)
+		local CallbackResult = Callback(Array.filter(Array.concat({}, p2, p1), IsSome))
+		
+		if p3 and p3.sort then
+			Array.sort(CallbackResult, CompareNodes)
+		end
+		return CallbackResult
 	end
-	return var1
-end
+}
 
-deduplicateArguments = function(p1)
-	-- upvalues: array (ref), boolean (ref)
-	return array.reduce(p1, function(p2, p3)
-		-- upvalues: array (copy), boolean (copy)
-		return if boolean.toJSBoolean(array.find(p2, function(p4)
-			-- upvalues: p3 (ref)
-			return p4.name.value == p3.name.value
-		end)) then p2 else array.concat(p2, { p3 })
+Callback = function(FilterResult) --[[ Line: 52 | Named "deduplicateArguments" ]]
+	-- upvalues: Array (copy), Boolean (copy)
+	return Array.reduce(FilterResult, function(p1, p2) --[[ Line: 56 ]]
+		-- upvalues: Array (upval), Boolean (upval)
+		return if Boolean.toJSBoolean((Array.find(p1, function(p3): boolean --[[ Line: 57 ]]
+			-- upvalues: p2 (copy)
+			return p3.name.value == p2.name.value
+		end))) then p1 else Array.concat(p1, { p2 })
 	end, {})
 end
 
-return t
+return ArgumentsModule

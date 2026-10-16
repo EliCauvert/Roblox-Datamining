@@ -1,10 +1,10 @@
-﻿local avatarViewport = script:FindFirstAncestor("AvatarViewport")
-local reactModule = require(avatarViewport.Parent.React)
-local _ = require(avatarViewport.Types)
+﻿local AvatarViewport = script:FindFirstAncestor("AvatarViewport")
+local ReactModule = require(AvatarViewport.Parent.React)
+local _ = require(AvatarViewport.Types)
 
-return function(p1)
-	-- upvalues: reactModule (ref)
-	return reactModule.createElement("Frame", {
+return function(p1) --[[ Line: 18 | Named "ViewportInteractionOverlay" ]]
+	-- upvalues: ReactModule (copy)
+	return ReactModule.createElement("Frame", {
 		Name = p1.name or "InteractionOverlay",
 		Size = p1.size,
 		Position = p1.position,
@@ -13,9 +13,9 @@ return function(p1)
 		Active = true,
 		Selectable = false,
 		ZIndex = p1.zIndex,
-		[reactModule.Event.InputBegan] = p1.inputHandlers.onInputBegan,
-		[reactModule.Event.InputChanged] = p1.inputHandlers.onInputChanged,
-		[reactModule.Event.InputEnded] = p1.inputHandlers.onInputEnded,
-		[reactModule.Event.TouchPinch] = p1.inputHandlers.onTouchPinch
+		[ReactModule.Event.InputBegan] = p1.inputHandlers.onInputBegan,
+		[ReactModule.Event.InputChanged] = p1.inputHandlers.onInputChanged,
+		[ReactModule.Event.InputEnded] = p1.inputHandlers.onInputEnded,
+		[ReactModule.Event.TouchPinch] = p1.inputHandlers.onTouchPinch
 	})
 end

@@ -1,26 +1,25 @@
-﻿local genericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
-local parent = genericAbuseReporting.Parent
-local reactModule = require(parent.React)
-local sharedFlagsModule = require(parent.SharedFlags)
-local abuseReportAnalyticsProvider = require(genericAbuseReporting.BeduiV2.Analytics.AbuseReportAnalyticsContext).AbuseReportAnalyticsProvider
-local abuseReportInlineModule = require(genericAbuseReporting.BeduiV2.Components.AbuseReportInline)
-local _ = require(genericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.AbuseSheetFlowTypes)
-local _ = require(genericAbuseReporting.Enums.AbuseVector)
-local arTranslationProvider = require(genericAbuseReporting.BeduiV2.Utils.Translate.arTranslation).ArTranslationProvider
-local layoutSlotsModule = require(genericAbuseReporting.BeduiV2.Components.LayoutSlots)
-local loaderContextModule = require(genericAbuseReporting.BeduiV2.Loaders.LoaderContext)
-local useAbuseSheetFlowModule = require(genericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.useAbuseSheetFlow)
-local voiceSpeakingSignalsModule = require(genericAbuseReporting.BeduiV2.Utils.Signals.voiceSpeakingSignals)
-local inlineSlots = layoutSlotsModule.inlineSlots
-local layoutSlotsProvider = layoutSlotsModule.LayoutSlotsProvider
-local overlaidControlsProvider = layoutSlotsModule.OverlaidControlsProvider
-local loaderProvider = loaderContextModule.LoaderProvider
-local fFlagAbuseReportInExpPlayerListV3 = sharedFlagsModule.FFlagAbuseReportInExpPlayerListV3
-local fFlagAbuseReportVoiceMute = sharedFlagsModule.FFlagAbuseReportVoiceMute
+﻿local GenericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
+local Parent = GenericAbuseReporting.Parent
+local ReactModule = require(Parent.React)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local AbuseReportAnalyticsProvider = require(GenericAbuseReporting.BeduiV2.Analytics.AbuseReportAnalyticsContext).AbuseReportAnalyticsProvider
+local AbuseReportInlineModule = require(GenericAbuseReporting.BeduiV2.Components.AbuseReportInline)
+local _ = require(GenericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.AbuseSheetFlowTypes)
+local _ = require(GenericAbuseReporting.Enums.AbuseVector)
+local ArTranslationProvider = require(GenericAbuseReporting.BeduiV2.Utils.Translate.arTranslation).ArTranslationProvider
+local LayoutSlotsModule = require(GenericAbuseReporting.BeduiV2.Components.LayoutSlots)
+local UseAbuseSheetFlowModule = require(GenericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.useAbuseSheetFlow)
+local VoiceSpeakingSignalsModule = require(GenericAbuseReporting.BeduiV2.Utils.Signals.voiceSpeakingSignals)
+local InlineSlots = LayoutSlotsModule.inlineSlots
+local LayoutSlotsProvider = LayoutSlotsModule.LayoutSlotsProvider
+local OverlaidControlsProvider = LayoutSlotsModule.OverlaidControlsProvider
+local LoaderProvider = require(GenericAbuseReporting.BeduiV2.Loaders.LoaderContext).LoaderProvider
+local FFlagAbuseReportInExpPlayerListV3 = SharedFlagsModule.FFlagAbuseReportInExpPlayerListV3
+local FFlagAbuseReportVoiceMute = SharedFlagsModule.FFlagAbuseReportVoiceMute
 
-return function(p1)
-	-- upvalues: useAbuseSheetFlowModule (ref), reactModule (ref), arTranslationProvider (ref), abuseReportAnalyticsProvider (ref), layoutSlotsProvider (ref), inlineSlots (ref), overlaidControlsProvider (ref), loaderProvider (ref), abuseReportInlineModule (ref), fFlagAbuseReportInExpPlayerListV3 (ref), fFlagAbuseReportVoiceMute (ref), voiceSpeakingSignalsModule (ref)
-	local var1 = useAbuseSheetFlowModule(p1.rawConfig, {
+return function(p1) --[[ Line: 53 | Named "AbuseReportContentInExp" ]]
+	-- upvalues: UseAbuseSheetFlowModule (copy), ReactModule (copy), ArTranslationProvider (copy), AbuseReportAnalyticsProvider (copy), LayoutSlotsProvider (copy), InlineSlots (copy), OverlaidControlsProvider (copy), LoaderProvider (copy), AbuseReportInlineModule (copy), FFlagAbuseReportInExpPlayerListV3 (copy), FFlagAbuseReportVoiceMute (copy), VoiceSpeakingSignalsModule (copy)
+	local UseAbuseSheetFlowModuleResult = UseAbuseSheetFlowModule(p1.rawConfig, {
 		open = true,
 		abuseVector = p1.abuseVector,
 		analyticsTargetId = p1.targetId,
@@ -31,20 +30,23 @@ return function(p1)
 		attemptTrigger = p1.attemptTrigger,
 		inlineAlertController = p1.inlineAlertController
 	})
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), p1 (ref)
-		if not var1 then
+	ReactModule.useEffect(function() --[[ Line: 66 ]]
+		-- upvalues: UseAbuseSheetFlowModuleResult (copy), p1 (copy)
+		if not UseAbuseSheetFlowModuleResult then
 			p1.onResolveError()
 		end
-	end, { var1, p1.onResolveError })
+	end, { UseAbuseSheetFlowModuleResult, p1.onResolveError })
 	
-	if not var1 then
+	if UseAbuseSheetFlowModuleResult then
+		local Element = ReactModule.createElement(ArTranslationProvider, {
+			translations = UseAbuseSheetFlowModuleResult.config.translations
+		}, ReactModule.createElement(AbuseReportAnalyticsProvider, { analytics = UseAbuseSheetFlowModuleResult.analytics }, ReactModule.createElement(LayoutSlotsProvider, { slots = InlineSlots }, ReactModule.createElement(OverlaidControlsProvider, { value = p1.shouldUseOverlaidControls }, ReactModule.createElement(LoaderProvider, { open = true, loaders = p1.loaders }, ReactModule.createElement(AbuseReportInlineModule, {
+			abuseReportFlow = UseAbuseSheetFlowModuleResult,
+			shouldUseOverlaidControls = p1.shouldUseOverlaidControls
+		}))))))
+		
+		return if FFlagAbuseReportInExpPlayerListV3 or FFlagAbuseReportVoiceMute then ReactModule.createElement(VoiceSpeakingSignalsModule.VoiceChatServiceManagerContext.Provider, { value = p1.voiceChatServiceManager }, Element) else Element
+	else
 		return nil
 	end
-	local var2 = reactModule.createElement(arTranslationProvider, { translations = var1.config.translations }, reactModule.createElement(abuseReportAnalyticsProvider, { analytics = var1.analytics }, reactModule.createElement(layoutSlotsProvider, { slots = inlineSlots }, reactModule.createElement(overlaidControlsProvider, { value = p1.shouldUseOverlaidControls }, reactModule.createElement(loaderProvider, { open = true, loaders = p1.loaders }, reactModule.createElement(abuseReportInlineModule, {
-		abuseReportFlow = var1,
-		shouldUseOverlaidControls = p1.shouldUseOverlaidControls
-	}))))))
-	
-	return if fFlagAbuseReportInExpPlayerListV3 or fFlagAbuseReportVoiceMute then reactModule.createElement(voiceSpeakingSignalsModule.VoiceChatServiceManagerContext.Provider, { value = p1.voiceChatServiceManager }, var2) else var2
 end

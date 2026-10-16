@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("ChatTranslationShowFTUX", false)
 
-return function()
+return function() --[[ Line: 3 ]]
 	return game:GetFastFlag("ChatTranslationShowFTUX")
 end

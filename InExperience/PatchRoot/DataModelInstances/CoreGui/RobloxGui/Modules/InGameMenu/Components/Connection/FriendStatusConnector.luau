@@ -1,59 +1,60 @@
-﻿local playersService = game:GetService("Players")
-local inGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
-local roact = inGameMenuDependenciesModule.Roact
-local roactRodux = inGameMenuDependenciesModule.RoactRodux
-local parent = script.Parent.Parent.Parent
-local setFriendStatusModule = require(parent.Actions.SetFriendStatus)
-local externalEventConnectionModule = require(parent.Utility.ExternalEventConnection)
-local friendStatusConnector = roact.PureComponent:extend("FriendStatusConnector")
+﻿local Players = game:GetService("Players")
+local InGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
+local Roact = InGameMenuDependenciesModule.Roact
+local RoactRodux = InGameMenuDependenciesModule.RoactRodux
+local Parent = script.Parent.Parent.Parent
+local SetFriendStatusModule = require(Parent.Actions.SetFriendStatus)
+local ExternalEventConnectionModule = require(Parent.Utility.ExternalEventConnection)
+local FriendStatusConnector = Roact.PureComponent:extend("FriendStatusConnector")
 
-function friendStatusConnector.init(p1)
-	-- upvalues: playersService (ref)
-	p1.state = { localPlayer = playersService.LocalPlayer }
+function FriendStatusConnector.init(p1) --[[ Line: 15 ]]
+	-- upvalues: Players (copy)
+	p1.state = { localPlayer = Players.LocalPlayer }
 end
 
-function friendStatusConnector.render(p1)
-	-- upvalues: roact (ref), externalEventConnectionModule (ref), playersService (ref)
-	local t = {
-		PlayerAdded = roact.createElement(externalEventConnectionModule, {
-			event = playersService.PlayerAdded,
-			callback = function(p2)
-				-- upvalues: playersService (copy), p1 (ref)
-				if p2 == playersService.LocalPlayer then
-					p1:setState({ localPlayer = p2 })
+function FriendStatusConnector.render(p1) --[[ Line: 21 ]]
+	-- upvalues: Roact (copy), ExternalEventConnectionModule (copy), Players (copy)
+	local config = {
+		PlayerAdded = Roact.createElement(ExternalEventConnectionModule, {
+			event = Players.PlayerAdded,
+			callback = function(LocalPlayer) --[[ Line: 25 ]]
+				-- upvalues: Players (upval), p1 (copy)
+				if LocalPlayer == Players.LocalPlayer then
+					p1:setState({ localPlayer = LocalPlayer })
 					
 					return
+				else
+					p1.props.setFriendStatus(LocalPlayer.UserId, Enum.FriendStatus.Unknown)
 				end
-				p1.props.setFriendStatus(p2.UserId, Enum.FriendStatus.Unknown)
 			end
 		}),
-		PlayerRemoving = roact.createElement(externalEventConnectionModule, {
-			event = playersService.PlayerRemoving,
-			callback = function(p2)
-				-- upvalues: p1 (ref)
-				p1.props.setFriendStatus(p2.UserId, nil)
+		PlayerRemoving = Roact.createElement(ExternalEventConnectionModule, {
+			event = Players.PlayerRemoving,
+			callback = function(Player) --[[ Line: 38 ]]
+				-- upvalues: p1 (copy)
+				p1.props.setFriendStatus(Player.UserId, nil)
 			end
 		})
 	}
 	
 	if p1.state.localPlayer then
-		t.FriendStatusChanged = roact.createElement(externalEventConnectionModule, {
-			event = playersService.LocalPlayer.FriendStatusChanged,
-			callback = function(p2, p3)
-				-- upvalues: p1 (ref)
-				p1.props.setFriendStatus(p2.UserId, p3)
+		config.FriendStatusChanged = Roact.createElement(ExternalEventConnectionModule, {
+			event = Players.LocalPlayer.FriendStatusChanged,
+			callback = function(Player, p2) --[[ Line: 47 ]]
+				-- upvalues: p1 (copy)
+				p1.props.setFriendStatus(Player.UserId, p2)
 			end
 		})
 	end
-	return roact.createFragment(t)
+	return Roact.createFragment(config)
 end
 
-return roactRodux.UNSTABLE_connect2(nil, function(p1)
-	-- upvalues: setFriendStatusModule (ref)
+return RoactRodux.UNSTABLE_connect2(nil, function(Callback) --[[ Line: 56 ]]
+	-- upvalues: SetFriendStatusModule (copy)
 	return {
-		setFriendStatus = function(value, p2)
-			-- upvalues: p1 (ref), setFriendStatusModule (copy)
-			return p1(setFriendStatusModule(value, p2))
+		setFriendStatus = function(p1, p2) --[[ Line: 58 ]]
+			-- upvalues: Callback (copy), SetFriendStatusModule (upval)
+			return Callback(SetFriendStatusModule(p1, p2))
 		end
 	}
-end)(friendStatusConnector)
+end)(FriendStatusConnector)

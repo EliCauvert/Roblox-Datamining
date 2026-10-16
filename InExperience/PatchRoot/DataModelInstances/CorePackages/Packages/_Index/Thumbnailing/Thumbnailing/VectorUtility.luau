@@ -1,17 +1,17 @@
-﻿local t = {
-	Vector3FromXYRotPlusDistance = function(p1, p2, p3)
-		return CFrame.fromEulerAnglesXYZ(math.rad(p1), math.rad(p2), 0).LookVector * p3
+﻿local VectorUtilityModule = {
+	Vector3FromXYRotPlusDistance = function(Degrees: number, Degrees1: number, Number) --[[ Line: 5 ]]
+		return CFrame.fromEulerAnglesXYZ(math.rad(Degrees), math.rad(Degrees1), 0).LookVector * Number
 	end
 }
 
-function t.Vector3FromJson(p1)
-	-- upvalues: t (ref)
-	local var1, var2, var3 = unpack(p1:split("/"))
-	local var4 = tonumber(var1)
-	local var5 = tonumber(var2)
-	local var6 = tonumber(var3)
+function VectorUtilityModule.Vector3FromJson(Text: string) --[[ Line: 11 ]]
+	-- upvalues: VectorUtilityModule (copy)
+	local Unpacked, Unpacked2, Unpacked3 = unpack(Text:split("/"))
+	local Number: number? = tonumber(Unpacked)
+	local Number1: number? = tonumber(Unpacked2)
+	local Number2: number? = tonumber(Unpacked3)
 	
-	return if var4 and var5 and var6 then t.Vector3FromXYRotPlusDistance(var4, var5, var6) else Vector3.new(0, 0, 0)
+	return if Number and Number1 and Number2 then VectorUtilityModule.Vector3FromXYRotPlusDistance(Number, Number1, Number2) else vector.create(0, 0, 0)
 end
 
-return t
+return VectorUtilityModule

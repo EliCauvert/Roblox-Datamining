@@ -1,36 +1,35 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local wrappersModule = require(foundation.Utility.Wrappers)
-local signal = wrappersModule.Signal
-local connection = wrappersModule.Connection
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local WrappersModule = require(Foundation.Utility.Wrappers)
+local Signal = WrappersModule.Signal
+local Connection = WrappersModule.Connection
 
-return function(p1)
-	-- upvalues: reactModule (ref), signal (ref), connection (ref)
-	local var1, var2 = reactModule.useBinding(Vector2.zero)
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var2 (ref), signal (copy), connection (copy)
-		if p1 then
-			local function setPositionFromInput(a)
-				-- upvalues: var2 (copy)
-				if a.Position.X > 0 or a.Position.Y > 0 then
-					var2(Vector2.new(a.Position.X, a.Position.Y))
-				end
+return function(p1) --[[ Line: 10 | Named "usePointerPosition" ]]
+	-- upvalues: ReactModule (copy), Signal (copy), Connection (copy)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(Vector2.zero)
+	ReactModule.useEffect(function() --[[ Line: 13 ]]
+		-- upvalues: p1 (copy), UseBindingResult2 (copy), Signal (upval), Connection (upval)
+		if not p1 then return end
+		local function setPositionFromInput(p2) --[[ Line: 18 ]]
+			-- upvalues: UseBindingResult2 (upval)
+			if p2.Position.X > 0 or p2.Position.Y > 0 then
+				UseBindingResult2(Vector2.new(p2.Position.X, p2.Position.Y))
 			end
-			
-			local list = {
-				signal.Connect(p1.InputBegan, setPositionFromInput),
-				signal.Connect(p1.InputChanged, setPositionFromInput),
-				signal.Connect(p1.InputEnded, setPositionFromInput)
-			}
-			
-			return function()
-				-- upvalues: list (ref), connection (copy)
-				for i, v in list do
-					connection.Disconnect(v)
-				end
+		end
+		
+		local list = {
+			Signal.Connect(p1.InputBegan, setPositionFromInput),
+			Signal.Connect(p1.InputChanged, setPositionFromInput),
+			Signal.Connect(p1.InputEnded, setPositionFromInput)
+		}
+		
+		return function() --[[ Line: 30 ]]
+			-- upvalues: list (copy), Connection (upval)
+			for _, value in list do
+				Connection.Disconnect(value)
 			end
 		end
 	end, { p1 })
 	
-	return var1
+	return UseBindingResult
 end

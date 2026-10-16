@@ -1,127 +1,128 @@
-﻿local guiService = game:GetService("GuiService")
-local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local reactModule = require(parent_1.React)
-local _ = require(parent_1.Signals)
-local useFocusGuiObject = require(parent_1.ReactFocusNavigation).useFocusGuiObject
-local focusNavHelperModule = require(parent.Common.FocusNavHelper)
-local _ = require(parent_1.LeaderboardStore)
-local constantsModule = require(parent.Common.Constants)
+﻿local GuiService = game:GetService("GuiService")
+local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
+local _ = require(Parent1.Signals)
+local UseFocusGuiObjectFunction = require(Parent1.ReactFocusNavigation).useFocusGuiObject
+local FocusNavHelperModule = require(Parent.Common.FocusNavHelper)
+local _ = require(Parent1.LeaderboardStore)
+local ConstantsModule = require(Parent.Common.Constants)
 
-return function()
-	-- upvalues: useFocusGuiObject (ref), reactModule (ref), focusNavHelperModule (ref), constantsModule (ref), guiService (ref)
-	local var1 = useFocusGuiObject()
-	local var2 = reactModule.useRef(nil)
-	local var3 = reactModule.useRef(nil)
-	local var4 = reactModule.useRef({})
-	local var5 = reactModule.useCallback(function(p1, p2)
-		-- upvalues: focusNavHelperModule (copy), var4 (ref), var1 (ref), var2 (ref)
-		local nextPlayerInstance = focusNavHelperModule.getNextPlayerInstance(var4.current, p1, p2)
+return function() --[[ Line: 57 | Named "usePlayerListFocusNavigation" ]]
+	-- upvalues: UseFocusGuiObjectFunction (copy), ReactModule (copy), FocusNavHelperModule (copy), ConstantsModule (copy), GuiService (copy)
+	local UseFocusGuiObjectResult = UseFocusGuiObjectFunction()
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseRefResult2 = ReactModule.useRef({})
+	local UseResult = ReactModule.useCallback(function(p1, p2) --[[ Line: 66 ]]
+		-- upvalues: FocusNavHelperModule (upval), UseRefResult2 (copy), UseFocusGuiObjectResult (copy), UseRefResult (copy)
+		local NextPlayerInstance = FocusNavHelperModule.getNextPlayerInstance(UseRefResult2.current, p1, p2)
 		
-		if nextPlayerInstance then
-			var1(nextPlayerInstance.object)
+		if NextPlayerInstance then
+			UseFocusGuiObjectResult(NextPlayerInstance.object)
 			
 			return
+		else
+			UseFocusGuiObjectResult(UseRefResult.current)
 		end
-		var1(var2.current)
 	end, {})
-	local var6 = reactModule.useCallback(function()
-		-- upvalues: var3 (ref), constantsModule (copy), var4 (ref), var1 (ref), var2 (ref), focusNavHelperModule (copy)
-		if var3.current and var3.current ~= constantsModule.SELECTED_TITLE_PLAYER_ID then
-			for i, v in var4.current do
-				for i_1, v_1 in v.players do
-					if v_1.userId == var3.current then
-						var1(v_1.object)
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 78 ]]
+		-- upvalues: UseRefResult1 (copy), ConstantsModule (upval), UseRefResult2 (copy), UseFocusGuiObjectResult (copy), UseRefResult (copy), FocusNavHelperModule (upval)
+		if UseRefResult1.current and UseRefResult1.current ~= ConstantsModule.SELECTED_TITLE_PLAYER_ID then
+			for _, value in UseRefResult2.current do
+				for _, player in value.players do
+					if player.userId == UseRefResult1.current then
+						UseFocusGuiObjectResult(player.object)
 						
 						return
 					end
 				end
 			end
 		end
-		if var2.current then
-			var1(var2.current)
+		if UseRefResult.current then
+			UseFocusGuiObjectResult(UseRefResult.current)
 			
 			return
 		end
-		local firstPlayerInstance = focusNavHelperModule.getFirstPlayerInstance(var4.current)
+		local FirstPlayerInstance = FocusNavHelperModule.getFirstPlayerInstance(UseRefResult2.current)
 		
-		if firstPlayerInstance then
-			var1(firstPlayerInstance.object)
+		if FirstPlayerInstance then
+			UseFocusGuiObjectResult(FirstPlayerInstance.object)
 		end
 	end, {})
-	local var7 = reactModule.useCallback(function(p1)
-		-- upvalues: var4 (ref)
-		return function(p2, p3, p4)
-			-- upvalues: var4 (copy), p1 (ref)
-			if p3 and var4.current[p1] then
-				var4.current[p1].players[p2] = { userId = p2, object = p3, order = p4 }
+	local UseResult2 = ReactModule.useCallback(function(p1) --[[ Line: 104 ]]
+		-- upvalues: UseRefResult2 (copy)
+		return function(UserId, Object, Order) --[[ Line: 105 ]]
+			-- upvalues: UseRefResult2 (upval), p1 (copy)
+			if Object and UseRefResult2.current[p1] then
+				UseRefResult2.current[p1].players[UserId] = { userId = UserId, object = Object, order = Order }
 				
 				return
 			end
 		end
 	end, {})
-	local var8 = reactModule.useCallback(function(p1)
-		-- upvalues: var4 (ref), guiService (copy), var5 (ref)
-		return function(p2)
-			-- upvalues: var4 (copy), p1 (ref), guiService (copy), var5 (copy)
-			local var9 = var4.current[p1]
+	local UseResult3 = ReactModule.useCallback(function(p1) --[[ Line: 118 ]]
+		-- upvalues: UseRefResult2 (copy), GuiService (upval), UseResult (copy)
+		return function(p2) --[[ Line: 119 ]]
+			-- upvalues: UseRefResult2 (upval), p1 (copy), GuiService (upval), UseResult (upval)
+			local CurrentEntry = UseRefResult2.current[p1]
 			
-			if not var9 then return end
-			local var10 = var9.players[p2]
+			if not CurrentEntry then return end
+			local Player = CurrentEntry.players[p2]
 			
-			if not var10 then return end
-			if guiService.SelectedCoreObject == var10.object then
-				var5(var10, p1)
+			if not Player then return end
+			if GuiService.SelectedCoreObject == Player.object then
+				UseResult(Player, p1)
 			end
-			var4.current[p1].players[p2] = nil
+			UseRefResult2.current[p1].players[p2] = nil
 		end
 	end, {})
-	local var9 = reactModule.useCallback(function(p1, p2)
-		-- upvalues: var7 (ref), var8 (ref), var4 (ref)
-		local t = {
-			teamId = p1,
-			order = p2,
+	local UseResult4 = ReactModule.useCallback(function(TeamId, Order) --[[ Line: 138 ]]
+		-- upvalues: UseResult2 (copy), UseResult3 (copy), UseRefResult2 (copy)
+		local config = {
+			teamId = TeamId,
+			order = Order,
 			players = {},
-			registerPlayerInstance = var7(p1),
-			unregisterPlayerInstance = var8(p1)
+			registerPlayerInstance = UseResult2(TeamId),
+			unregisterPlayerInstance = UseResult3(TeamId)
 		}
-		var4.current[p1] = t
+		UseRefResult2.current[TeamId] = config
 		
-		return t
+		return config
 	end, {})
-	local var10 = reactModule.useCallback(function(p1)
-		-- upvalues: var4 (ref)
-		var4.current[p1] = nil
+	local UseResult5 = ReactModule.useCallback(function(p1) --[[ Line: 152 ]]
+		-- upvalues: UseRefResult2 (copy)
+		UseRefResult2.current[p1] = nil
 	end, {})
-	local var11 = reactModule.useCallback(function(p1)
-		-- upvalues: var2 (ref)
-		var2.current = p1
+	local UseResult6 = ReactModule.useCallback(function(Current) --[[ Line: 156 ]]
+		-- upvalues: UseRefResult (copy)
+		UseRefResult.current = Current
 	end, {})
-	local var12 = reactModule.useCallback(function(p1)
-		-- upvalues: var3 (ref)
-		var3.current = p1
+	local UseResult7 = ReactModule.useCallback(function(Current) --[[ Line: 160 ]]
+		-- upvalues: UseRefResult1 (copy)
+		UseRefResult1.current = Current
 	end, {})
-	local var13 = reactModule.useCallback(function(p1)
-		-- upvalues: var1 (ref), var2 (ref), var3 (ref), var4 (ref)
+	local UseResult8 = ReactModule.useCallback(function(p1) --[[ Line: 164 ]]
+		-- upvalues: UseFocusGuiObjectResult (copy), UseRefResult (copy), UseRefResult1 (copy), UseRefResult2 (copy)
 		if p1 then
-			var1(nil)
+			UseFocusGuiObjectResult(nil)
 		end
-		var2.current = nil
-		var3.current = nil
-		var4.current = {}
+		UseRefResult.current = nil
+		UseRefResult1.current = nil
+		UseRefResult2.current = {}
 	end, {})
 	
-	return reactModule.useMemo(function()
-		-- upvalues: var6 (ref), var9 (ref), var10 (ref), var11 (ref), var12 (ref), var13 (ref)
+	return ReactModule.useMemo(function() --[[ Line: 175 ]]
+		-- upvalues: UseResult1 (copy), UseResult4 (copy), UseResult5 (copy), UseResult6 (copy), UseResult7 (copy), UseResult8 (copy)
 		return {
-			getFocus = var6,
-			registerTeamInstance = var9,
-			unregisterTeamInstance = var10,
-			setTitlePlayerInstance = var11,
-			setSelectedPlayerId = var12,
-			cleanup = var13
+			getFocus = UseResult1,
+			registerTeamInstance = UseResult4,
+			unregisterTeamInstance = UseResult5,
+			setTitlePlayerInstance = UseResult6,
+			setSelectedPlayerId = UseResult7,
+			cleanup = UseResult8
 		}
 	end, {
-		var6, var9, var10, var11, var12, var13
+		UseResult1, UseResult4, UseResult5, UseResult6, UseResult7, UseResult8
 	})
 end

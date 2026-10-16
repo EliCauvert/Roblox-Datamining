@@ -1,128 +1,132 @@
-﻿local parent = script:FindFirstAncestor("UserTile").Parent
-local reactModule = require(parent.React)
-local holdDetector = require(parent.HoldToPlay).HoldDetector
-local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
-local inputHandlersModule = require(parent.InputHandlers)
-local _ = require(parent.FocusNavigationUtils)
-local fFlagUserSearchCancelTileActivationOnHoldIntent = require(parent.SharedFlags).FFlagUserSearchCancelTileActivationOnHoldIntent
-local t = {
+﻿local Parent = script:FindFirstAncestor("UserTile").Parent
+local ReactModule = require(Parent.React)
+local HoldDetector = require(Parent.HoldToPlay).HoldDetector
+local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
+local InputHandlersModule = require(Parent.InputHandlers)
+local _ = require(Parent.FocusNavigationUtils)
+local FFlagUserSearchCancelTileActivationOnHoldIntent = require(Parent.SharedFlags).FFlagUserSearchCancelTileActivationOnHoldIntent
+local config = {
 	primary = Enum.KeyCode.ButtonA,
 	secondary = Enum.KeyCode.ButtonX
 }
 
-return function(p1)
-	-- upvalues: reactModule (ref), fFlagUserSearchCancelTileActivationOnHoldIntent (ref), t (ref), inputHandlersModule (ref), reactFocusNavigationModule (ref), holdDetector (ref)
-	local tileRef = p1.tileRef
-	local buttons = p1.buttons
-	local onTileActivated = p1.onTileActivated
-	local var1 = reactModule.useRef(false)
-	local var2 = reactModule.useCallback(function(p2)
-		-- upvalues: var1 (ref), fFlagUserSearchCancelTileActivationOnHoldIntent (copy), p1 (ref)
-		var1.current = p2
+return function(p1) --[[ Line: 34 | Named "UserTileEventHandlers" ]]
+	-- upvalues: ReactModule (copy), FFlagUserSearchCancelTileActivationOnHoldIntent (copy), config (copy), InputHandlersModule (copy), ReactFocusNavigationModule (copy), HoldDetector (copy)
+	local TileRef = p1.tileRef
+	local Buttons = p1.buttons
+	local OnTileActivatedFunction = p1.onTileActivated
+	local UseRefResult = ReactModule.useRef(false)
+	local UseResult = ReactModule.useCallback(function(Current) --[[ Line: 41 ]]
+		-- upvalues: UseRefResult (copy), FFlagUserSearchCancelTileActivationOnHoldIntent (upval), p1 (copy)
+		UseRefResult.current = Current
 		
-		if fFlagUserSearchCancelTileActivationOnHoldIntent and p1.setDisabledForHold then
-			p1.setDisabledForHold(p2)
+		if FFlagUserSearchCancelTileActivationOnHoldIntent and p1.setDisabledForHold then
+			p1.setDisabledForHold(Current)
 		end
-	end, if fFlagUserSearchCancelTileActivationOnHoldIntent then { p1.setDisabledForHold } else {})
-	local var3, var4 = reactModule.useMemo(function()
-		-- upvalues: buttons (ref)
-		if buttons then
-			return buttons[#buttons], buttons[#buttons - 1]
+	end, if FFlagUserSearchCancelTileActivationOnHoldIntent then { p1.setDisabledForHold } else {})
+	local UseMemoResult, UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 48 ]]
+		-- upvalues: Buttons (copy)
+		if Buttons then
+			return Buttons[#Buttons], Buttons[#Buttons - 1]
+		else
+			return nil, nil
 		end
-		return nil, nil
-	end, { buttons })
-	local var5 = reactModule.useCallback(function()
-		-- upvalues: var1 (ref), onTileActivated (ref)
-		if var1.current then
+	end, { Buttons })
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 55 ]]
+		-- upvalues: UseRefResult (copy), OnTileActivatedFunction (copy)
+		if not UseRefResult.current then
+			OnTileActivatedFunction()
+			
 			return
 		end
-		onTileActivated()
-	end, { onTileActivated })
-	local var6 = reactModule.useCallback(function()
-		-- upvalues: var3 (ref)
-		if var3 and var3.onActivated then
-			var3.onActivated()
+	end, { OnTileActivatedFunction })
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 62 ]]
+		-- upvalues: UseMemoResult (copy)
+		if UseMemoResult and UseMemoResult.onActivated then
+			UseMemoResult.onActivated()
 		end
-	end, { var3 })
-	local var7 = reactModule.useCallback(function()
-		-- upvalues: var4 (ref)
-		if var4 and var4.onActivated then
-			var4.onActivated()
+	end, { UseMemoResult })
+	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 68 ]]
+		-- upvalues: UseMemoResult2 (copy)
+		if UseMemoResult2 and UseMemoResult2.onActivated then
+			UseMemoResult2.onActivated()
 		end
-	end, { var4 })
-	local var8, var9 = reactModule.useMemo(function()
-		-- upvalues: var4 (ref), t (copy), inputHandlersModule (copy), var7 (ref)
-		local var10 = if var4 then var4.focusEventName else nil
+	end, { UseMemoResult2 })
+	local UseMemoResult1, UseMemoResult2_1 = ReactModule.useMemo(function() --[[ Line: 74 ]]
+		-- upvalues: UseMemoResult2 (copy), config (upval), InputHandlersModule (upval), UseResult3 (copy)
+		local FocusEventName = if UseMemoResult2 then UseMemoResult2.focusEventName else nil
 		
-		if var10 then
-			return { [t.secondary] = var10 }, {
-				[var10] = { handler = inputHandlersModule.onRelease(var7) }
+		if FocusEventName then
+			return { [config.secondary] = FocusEventName }, {
+				[FocusEventName] = { handler = InputHandlersModule.onRelease(UseResult3) }
 			}
+		else
+			return {}, {}
 		end
-		return {}, {}
-	end, { var4, var7 })
-	local var10 = reactFocusNavigationModule.useEventHandlerMap(var9, reactFocusNavigationModule.useEventMap(var8))
-	reactModule.useEffect(function()
-		-- upvalues: var10 (ref), tileRef (ref)
-		if var10 and tileRef then
-			var10(tileRef.current)
+	end, { UseMemoResult2, UseResult3 })
+	local UseEventHandlerMapResult = ReactFocusNavigationModule.useEventHandlerMap(UseMemoResult2_1, (ReactFocusNavigationModule.useEventMap(UseMemoResult1)))
+	ReactModule.useEffect(function() --[[ Line: 96 ]]
+		-- upvalues: UseEventHandlerMapResult (copy), TileRef (copy)
+		if UseEventHandlerMapResult and TileRef then
+			UseEventHandlerMapResult(TileRef.current)
 		end
-		return function()
-			-- upvalues: var10 (copy)
-			var10(nil)
+		return function() --[[ Line: 100 ]]
+			-- upvalues: UseEventHandlerMapResult (upval)
+			UseEventHandlerMapResult(nil)
 		end
 	end, {
-		var10,
-		if fFlagUserSearchCancelTileActivationOnHoldIntent then tileRef else nil
+		UseEventHandlerMapResult,
+		if FFlagUserSearchCancelTileActivationOnHoldIntent then TileRef else nil
 	})
 	
-	if fFlagUserSearchCancelTileActivationOnHoldIntent then
-		reactModule.useEffect(function()
-			-- upvalues: tileRef (ref), var1 (ref), p1 (ref), t (copy)
-			if not tileRef then return end
-			local current = tileRef.current
+	if FFlagUserSearchCancelTileActivationOnHoldIntent then
+		ReactModule.useEffect(function() --[[ Line: 113 ]]
+			-- upvalues: TileRef (copy), UseRefResult (copy), p1 (copy), config (upval)
+			if not TileRef then return end
+			local Current = TileRef.current
 			
-			if current then
-				local selectionLostConnection = current.SelectionLost:Connect(function()
-					-- upvalues: var1 (copy), p1 (copy)
-					if not var1.current then return end
-					var1.current = false
+			if not Current then return end
+			local SelectionLostConnection = Current.SelectionLost:Connect(function() --[[ Line: 121 | Named "clearHoldGuard" ]]
+				-- upvalues: UseRefResult (upval), p1 (upval)
+				if not UseRefResult.current then return end
+				UseRefResult.current = false
+				
+				if p1.setDisabledForHold then
+					p1.setDisabledForHold(false)
+				end
+			end)
+			local InputBeganConnection = Current.InputBegan:Connect(function(Input) --[[ Line: 131 ]]
+				-- upvalues: config (upval), UseRefResult (upval), p1 (upval)
+				local UserInputType = Input.UserInputType
+				local IsUserInputTypeMatch: boolean = UserInputType == Enum.UserInputType.MouseButton1 or UserInputType == Enum.UserInputType.Touch
+				local IsKeyCodeMatch = Input.KeyCode == config.primary
+				
+				if Input.UserInputState == Enum.UserInputState.Begin and (IsUserInputTypeMatch or IsKeyCodeMatch) then
+					if not UseRefResult.current then return end
+					UseRefResult.current = false
 					
 					if p1.setDisabledForHold then
 						p1.setDisabledForHold(false)
 					end
-				end)
-				local inputBeganConnection = current.InputBegan:Connect(function(p2)
-					-- upvalues: t (copy), var1 (copy), p1 (copy)
-					local userInputType = p2.UserInputType
-					
-					if p2.UserInputState == Enum.UserInputState.Begin and ((if userInputType ~= Enum.UserInputType.MouseButton1 then userInputType == Enum.UserInputType.Touch else true) or p2.KeyCode == t.primary) then
-						if not var1.current then return end
-						var1.current = false
-						
-						if p1.setDisabledForHold then
-							p1.setDisabledForHold(false)
-						end
-					end
-				end)
-				
-				return function()
-					-- upvalues: selectionLostConnection (ref), inputBeganConnection (ref)
-					selectionLostConnection:Disconnect()
-					inputBeganConnection:Disconnect()
 				end
+			end)
+			
+			return function() --[[ Line: 141 ]]
+				-- upvalues: SelectionLostConnection (copy), InputBeganConnection (copy)
+				SelectionLostConnection:Disconnect()
+				InputBeganConnection:Disconnect()
 			end
-		end, { p1.setDisabledForHold, tileRef })
+		end, { p1.setDisabledForHold, TileRef })
 	end
-	local var11 = if var3 then var3.focusEventName else nil
+	local FocusEventName = UseMemoResult and UseMemoResult.focusEventName or nil
 	
-	return if tileRef.current and var11 then reactModule.createElement(holdDetector, {
-		guiObject = tileRef.current,
-		onHoldDetected = var6,
-		onRegularActivated = var5,
-		setDisabledForHold = var2,
-		keyCode = t.primary,
-		focusNavigationEventName = var11,
+	return if TileRef.current and FocusEventName then ReactModule.createElement(HoldDetector, {
+		guiObject = TileRef.current,
+		onHoldDetected = UseResult2,
+		onRegularActivated = UseResult1,
+		setDisabledForHold = UseResult,
+		keyCode = config.primary,
+		focusNavigationEventName = FocusEventName,
 		disableRegularActionOnHoldIntent = p1.disableRegularActionOnHoldIntent
 	}) else nil
 end

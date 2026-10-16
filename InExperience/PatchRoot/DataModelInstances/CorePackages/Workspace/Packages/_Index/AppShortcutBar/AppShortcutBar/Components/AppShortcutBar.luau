@@ -1,44 +1,56 @@
-﻿local userInputService = game:GetService("UserInputService")
-local parent = script:FindFirstAncestor("AppShortcutBar").Parent
-local reactModule = require(parent.React)
-local responsiveModule = require(parent.Responsive)
-local useFocusedTextBox = require(parent.FocusNavigationUtils).useFocusedTextBox
-local shortcutBar = require(parent.UIBlox).App.Navigation.ShortcutBar
-local shortcutBarMinSize = game:DefineFastFlag("ShortcutBarMinSize", false)
-local disableAppShortcutBarAndroidTV = game:DefineFastFlag("DisableAppShortcutBarAndroidTV", false)
+﻿local UserInputService = game:GetService("UserInputService")
+local AppShortcutBar1 = script:FindFirstAncestor("AppShortcutBar")
+local Parent = AppShortcutBar1.Parent
+local ReactModule = require(Parent.React)
+local ResponsiveModule = require(Parent.Responsive)
+local UseFocusedTextBoxFunction = require(Parent.FocusNavigationUtils).useFocusedTextBox
+local ShortcutBar = require(Parent.UIBlox).App.Navigation.ShortcutBar
+local ShortcutBarMinSize = game:DefineFastFlag("ShortcutBarMinSize", false)
+local DisableAppShortcutBarAndroidTV = game:DefineFastFlag("DisableAppShortcutBarAndroidTV", false)
+local FFlagEnableStickyShortcutBarOnAllPlatformsIxpEnabled = require(AppShortcutBar1.Flags).FFlagEnableStickyShortcutBarOnAllPlatformsIxpEnabled
+local UseStickyShortcutBarExposureLoggingModule = require(AppShortcutBar1.Hooks.useStickyShortcutBarExposureLogging)
 
-function AppShortcutBar(p1)
-	-- upvalues: useFocusedTextBox (ref), responsiveModule (ref), reactModule (ref), userInputService (ref), disableAppShortcutBarAndroidTV (ref), shortcutBarMinSize (ref), shortcutBar (ref)
-	local var1 = if p1.Position then p1.Position else UDim2.fromScale(0.5, 0)
-	local var2 = if p1.AnchorPoint then p1.AnchorPoint else Vector2.new(0.5, 0)
-	local var3 = useFocusedTextBox()
-	local var4 = responsiveModule.useLastInput()
-	local var5, var6 = reactModule.useState(if var4 == responsiveModule.Input.Directional then userInputService:GamepadSupports(userInputService:GetLastInputType(), Enum.KeyCode.Thumbstick1) else true)
+function AppShortcutBar(Frame: Frame) --[[ Line: 26 ]]
+	-- upvalues: UseFocusedTextBoxFunction (copy), ResponsiveModule (copy), ReactModule (copy), UserInputService (copy), DisableAppShortcutBarAndroidTV (copy), ShortcutBarMinSize (copy), FFlagEnableStickyShortcutBarOnAllPlatformsIxpEnabled (copy), UseStickyShortcutBarExposureLoggingModule (copy), ShortcutBar (copy)
+	local Position = if Frame.Position then Frame.Position else UDim2.fromScale(0.5, 0)
+	local AnchorPoint = if Frame.AnchorPoint then Frame.AnchorPoint else Vector2.new(0.5, 0)
+	local UseFocusedTextBoxResult = UseFocusedTextBoxFunction()
+	local UseLastInputResult = ResponsiveModule.useLastInput()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(UseLastInputResult ~= ResponsiveModule.Input.Directional or UserInputService:GamepadSupports(UserInputService:GetLastInputType(), Enum.KeyCode.Thumbstick1))
 	
-	if disableAppShortcutBarAndroidTV then
-		reactModule.useEffect(function()
-			-- upvalues: userInputService (copy), var6 (ref), var4 (ref), responsiveModule (copy)
-			local lastInputTypeChangedConnection = userInputService.LastInputTypeChanged:Connect(function()
-				-- upvalues: var6 (copy), var4 (copy), responsiveModule (copy), userInputService (copy)
-				var6(if var4 == responsiveModule.Input.Directional then userInputService:GamepadSupports(userInputService:GetLastInputType(), Enum.KeyCode.Thumbstick1) else true)
+	if DisableAppShortcutBarAndroidTV then
+		ReactModule.useEffect(function() --[[ Line: 37 ]]
+			-- upvalues: UserInputService (upval), UseStateResult2 (copy), UseLastInputResult (copy), ResponsiveModule (upval)
+			local LastInputTypeChangedConnection = UserInputService.LastInputTypeChanged:Connect(function() --[[ Line: 38 ]]
+				-- upvalues: UseStateResult2 (upval), UseLastInputResult (upval), ResponsiveModule (upval), UserInputService (upval)
+				UseStateResult2(UseLastInputResult ~= ResponsiveModule.Input.Directional or UserInputService:GamepadSupports(UserInputService:GetLastInputType(), Enum.KeyCode.Thumbstick1))
 			end)
 			
-			return function()
-				-- upvalues: lastInputTypeChangedConnection (ref)
-				lastInputTypeChangedConnection:Disconnect()
+			return function() --[[ Line: 47 ]]
+				-- upvalues: LastInputTypeChangedConnection (copy)
+				LastInputTypeChangedConnection:Disconnect()
 			end
-		end, { var4 })
+		end, { UseLastInputResult })
 	end
-	local var7 = #p1.items > 0 and (not var3 and (not disableAppShortcutBarAndroidTV or var5))
+	local NoDisableAppShortcutBarAndroidTV = #Frame.items > 0 and (not UseFocusedTextBoxResult and (not DisableAppShortcutBarAndroidTV or UseStateResult))
 	
-	if shortcutBarMinSize then
-		var7 = var7 and (not responsiveModule.useBreakpointXOrSmaller(responsiveModule.Keys.Small) and not responsiveModule.useBreakpointYOrSmaller(responsiveModule.Keys.XSmall))
+	if ShortcutBarMinSize then
+		local Inverted = not ResponsiveModule.useBreakpointYOrSmaller(ResponsiveModule.Keys.XSmall)
+		local Inverted1: boolean = not ResponsiveModule.useBreakpointXOrSmaller(ResponsiveModule.Keys.Small) and Inverted
+		NoDisableAppShortcutBarAndroidTV = NoDisableAppShortcutBarAndroidTV and Inverted1
 	end
-	return reactModule.createElement("Frame", {
+	if FFlagEnableStickyShortcutBarOnAllPlatformsIxpEnabled then
+		UseStickyShortcutBarExposureLoggingModule(NoDisableAppShortcutBarAndroidTV)
+	end
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Position = UDim2.fromScale(0, 0),
-		Size = if shortcutBarMinSize and p1.Size then p1.Size else UDim2.fromScale(1, 1)
-	}, if var7 then reactModule.createElement(shortcutBar, { items = p1.items, position = var1, anchorPoint = var2 }) else nil)
+		Size = if ShortcutBarMinSize and Frame.Size then Frame.Size else UDim2.fromScale(1, 1)
+	}, if NoDisableAppShortcutBarAndroidTV then ReactModule.createElement(ShortcutBar, {
+		items = Frame.items,
+		position = Position,
+		anchorPoint = AnchorPoint
+	}) else nil)
 end
 
 return AppShortcutBar

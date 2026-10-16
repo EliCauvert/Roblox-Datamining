@@ -1,212 +1,206 @@
-﻿local coreScriptsPlayerFeedback = script:FindFirstAncestor("CoreScriptsPlayerFeedback")
-local parent = coreScriptsPlayerFeedback.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local dialog = foundationModule.Dialog
-local button = foundationModule.Button
-local checkbox = foundationModule.Checkbox
-local dropdown = foundationModule.Dropdown
-local icon = foundationModule.Icon
-local textArea = foundationModule.TextArea
-local text = foundationModule.Text
-local view = foundationModule.View
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local iconSize = foundationModule.Enums.IconSize
-local inputSize = foundationModule.Enums.InputSize
-local inputVariant = foundationModule.Enums.InputVariant
-local useTokens = foundationModule.Hooks.useTokens
-local builderIconsModule = require(parent.BuilderIcons)
-local iconVariant = builderIconsModule.IconVariant
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local constantsModule = require(coreScriptsPlayerFeedback.constants)
-local useEscapeDismissModule = require(coreScriptsPlayerFeedback.Hooks.useEscapeDismiss)
-local fFlagEnablePlayerSupportCaptureAttachmentsModule = require(coreScriptsPlayerFeedback.Flags.FFlagEnablePlayerSupportCaptureAttachments)
-local _ = require(coreScriptsPlayerFeedback.CaptureTypes)
-local useCaptureUploadsModule = require(coreScriptsPlayerFeedback.Hooks.useCaptureUploads)
-local useGalleryCapturesModule = require(coreScriptsPlayerFeedback.Hooks.useGalleryCaptures)
-local capturePreviewTileModule = require(coreScriptsPlayerFeedback.Components.CapturePreviewTile)
-local capturePickerGridModule = require(coreScriptsPlayerFeedback.Components.CapturePickerGrid)
-local capturePickerPreviewModule = require(coreScriptsPlayerFeedback.Components.CapturePickerPreview)
-local getCaptureKeyModule = require(coreScriptsPlayerFeedback.Utils.getCaptureKey)
-local var1 = reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), useLocalization (ref), reactModule (ref), capturePreviewTileModule (ref), icon (ref), builderIconsModule (ref), iconSize (ref), iconVariant (ref), text (ref), view (ref), button (ref), buttonVariant (ref), inputSize (ref)
-	local var2 = useTokens()
-	local var3 = 0
+﻿local CoreScriptsPlayerFeedback = script:FindFirstAncestor("CoreScriptsPlayerFeedback")
+local Parent = CoreScriptsPlayerFeedback.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local Dialog = FoundationModule.Dialog
+local Button = FoundationModule.Button
+local Checkbox = FoundationModule.Checkbox
+local Dropdown = FoundationModule.Dropdown
+local Icon = FoundationModule.Icon
+local TextArea = FoundationModule.TextArea
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local IconSize = FoundationModule.Enums.IconSize
+local InputSize = FoundationModule.Enums.InputSize
+local InputVariant = FoundationModule.Enums.InputVariant
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local BuilderIconsModule = require(Parent.BuilderIcons)
+local IconVariant = BuilderIconsModule.IconVariant
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local ConstantsModule = require(CoreScriptsPlayerFeedback.constants)
+local UseEscapeDismissModule = require(CoreScriptsPlayerFeedback.Hooks.useEscapeDismiss)
+local FFlagPlayerSupportPromptEventIngestModule = require(CoreScriptsPlayerFeedback.Flags.FFlagPlayerSupportPromptEventIngest)
+local PlayerSupportPromptTelemetryModule = require(CoreScriptsPlayerFeedback.Telemetry.PlayerSupportPromptTelemetry)
+local FFlagEnablePlayerSupportCaptureAttachmentsModule = require(CoreScriptsPlayerFeedback.Flags.FFlagEnablePlayerSupportCaptureAttachments)
+local FFlagEnablePlayerSupportSuggestionCategoryModule = require(CoreScriptsPlayerFeedback.Flags.FFlagEnablePlayerSupportSuggestionCategory)
+local _ = require(CoreScriptsPlayerFeedback.CaptureTypes)
+local UseCaptureUploadsModule = require(CoreScriptsPlayerFeedback.Hooks.useCaptureUploads)
+local UseGalleryCapturesModule = require(CoreScriptsPlayerFeedback.Hooks.useGalleryCaptures)
+local CapturePreviewTileModule = require(CoreScriptsPlayerFeedback.Components.CapturePreviewTile)
+local CapturePickerGridModule = require(CoreScriptsPlayerFeedback.Components.CapturePickerGrid)
+local CapturePickerPreviewModule = require(CoreScriptsPlayerFeedback.Components.CapturePickerPreview)
+local GetCaptureKeyModule = require(CoreScriptsPlayerFeedback.Utils.getCaptureKey)
+local MemoResult = ReactModule.memo(function(p1) --[[ Line: 55 ]]
+	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), CapturePreviewTileModule (copy), Icon (copy), BuilderIconsModule (copy), IconSize (copy), IconVariant (copy), Text (copy), View (copy), Button (copy), ButtonVariant (copy), InputSize (copy)
+	local UseTokensResult = UseTokensFunction()
+	local Count = 0
 	
-	for i in p1.uploadStatuses do
-		var3 += 1
+	for _ in p1.uploadStatuses do
+		Count += 1
 	end
-	local var4 = var3 > 0
-	local var5 = useLocalization({
+	local IsCountAbove = Count > 0
+	local UseLocalizationResult = UseLocalizationFunction({
 		CapturesAdd = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Add",
 		CapturesHint = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Hint",
 		CapturesEditSelection = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.EditSelection",
 		CapturesUploadError = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.UploadError",
 		CapturesHeading = {
 			"CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Heading",
-			count = tostring(var3),
+			count = tostring(Count),
 			max = tostring(p1.maxSelections)
 		}
 	})
-	local t = {
-		UIGridLayout = reactModule.createElement("UIGridLayout", {
+	local config = {
+		UIGridLayout = ReactModule.createElement("UIGridLayout", {
 			CellPadding = UDim2.new(0, 6, 0, 6),
 			CellSize = UDim2.new(0, 80, 0, 80),
 			FillDirection = Enum.FillDirection.Horizontal,
 			SortOrder = Enum.SortOrder.LayoutOrder
 		}),
-		UIPadding = reactModule.createElement("UIPadding", {
+		UIPadding = ReactModule.createElement("UIPadding", {
 			PaddingTop = UDim.new(0, 2),
 			PaddingBottom = UDim.new(0, 2),
 			PaddingLeft = UDim.new(0, 2),
 			PaddingRight = UDim.new(0, 2)
 		})
 	}
-	local t_1 = {}
+	local List = {}
 	
-	for i_1, v in p1.uploadStatuses do
-		table.insert(t_1, { key = i_1, captureStatus = v })
+	for Key, uploadStatus in p1.uploadStatuses do
+		table.insert(List, { key = Key, captureStatus = uploadStatus })
 	end
-	table.sort(t_1, function(p2, p3)
-		return (p2.captureStatus.order or 0) < (p3.captureStatus.order or 0)
+	table.sort(List, function(A, B): boolean --[[ Line: 101 ]]
+		return (A.captureStatus.order or 0) < (B.captureStatus.order or 0)
 	end)
-	local var6 = 0
+	local LayoutOrder = 0
 	
-	for i_2, v_1 in t_1 do
-		var6 += 1
-		local key = v_1.key
-		t[v_1.key] = reactModule.createElement(capturePreviewTileModule, {
-			capture = v_1.captureStatus.capture,
-			status = v_1.captureStatus.status,
-			failureReason = v_1.captureStatus.failureReason,
-			layoutOrder = var6,
-			onRemove = function()
-				-- upvalues: p1 (ref), key (ref)
-				p1.onCaptureRemoved(key)
+	for _, value in List do
+		LayoutOrder += 1
+		local Key1 = value.key
+		config[value.key] = ReactModule.createElement(CapturePreviewTileModule, {
+			capture = value.captureStatus.capture,
+			status = value.captureStatus.status,
+			failureReason = value.captureStatus.failureReason,
+			layoutOrder = LayoutOrder,
+			onRemove = function() --[[ Line: 113 ]]
+				-- upvalues: p1 (copy), Key1 (copy)
+				p1.onCaptureRemoved(Key1)
 			end
 		})
 	end
-	if var4 then
-		t.EditSelectionButton = reactModule.createElement("ImageButton", {
-			BackgroundColor3 = var2.Color.Surface.Surface_300.Color3,
+	if IsCountAbove then
+		config.EditSelectionButton = ReactModule.createElement("ImageButton", {
+			BackgroundColor3 = UseTokensResult.Color.Surface.Surface_300.Color3,
 			BackgroundTransparency = 0,
 			BorderSizePixel = 0,
 			Image = "",
-			LayoutOrder = var6 + 1,
+			LayoutOrder = LayoutOrder + 1,
 			Size = UDim2.new(0, 80, 0, 80),
-			[reactModule.Event.Activated] = p1.onPickerOpen
+			[ReactModule.Event.Activated] = p1.onPickerOpen
 		}, {
-			Corner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) }),
-			Layout = reactModule.createElement("UIListLayout", {
+			Corner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 8) }),
+			Layout = ReactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Vertical,
 				HorizontalAlignment = Enum.HorizontalAlignment.Center,
 				Padding = UDim.new(0, 4),
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				VerticalAlignment = Enum.VerticalAlignment.Center
 			}),
-			ImageIcon = reactModule.createElement(icon, {
+			ImageIcon = ReactModule.createElement(Icon, {
 				LayoutOrder = 1,
-				name = builderIconsModule.Icon.Image,
-				size = iconSize.Medium,
-				variant = iconVariant.Filled,
-				style = { Color3 = var2.Color.Content.Muted.Color3 }
+				name = BuilderIconsModule.Icon.Image,
+				size = IconSize.Medium,
+				variant = IconVariant.Filled,
+				style = { Color3 = UseTokensResult.Color.Content.Muted.Color3 }
 			}),
-			Label = reactModule.createElement(text, {
+			Label = ReactModule.createElement(Text, {
 				tag = "auto-xy text-caption-small text-wrap content-muted",
 				LayoutOrder = 2,
-				Text = var5.CapturesEditSelection
+				Text = UseLocalizationResult.CapturesEditSelection
 			})
 		})
 	end
-	local var7 = false
+	local Flag = false
 	
-	for i_3, v_2 in p1.uploadStatuses do
-		if v_2.status == "failed" and v_2.failureReason ~= Enum.UploadCaptureResult.CaptureModerated then
-			var7 = true
+	for _, uploadStatus1 in p1.uploadStatuses do
+		if uploadStatus1.status == "failed" and uploadStatus1.failureReason ~= Enum.UploadCaptureResult.CaptureModerated then
+			Flag = true
 		end
 	end
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "col gap-small size-full-0 auto-y",
 		LayoutOrder = 3,
 		GroupTransparency = if p1.category == "" then 0.75 else 0,
 		padding = { top = UDim.new(0, 4), bottom = UDim.new(0, 4) }
 	}, {
-		Heading = if var4 then reactModule.createElement(text, {
+		Heading = if IsCountAbove then ReactModule.createElement(Text, {
 			tag = "size-0 auto-xy text-title-medium text-wrap text-align-x-left text-align-y-top",
 			LayoutOrder = 1,
-			Text = var5.CapturesHeading,
-			textStyle = var2.Color.Content.Emphasis
+			Text = UseLocalizationResult.CapturesHeading,
+			textStyle = UseTokensResult.Color.Content.Emphasis
 		}) else nil,
-		PreviewGrid = if var4 then reactModule.createElement("Frame", {
+		PreviewGrid = if IsCountAbove then ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 2,
 			AutomaticSize = Enum.AutomaticSize.Y,
 			Size = UDim2.new(1, 0, 0, 0)
-		}, t) else nil,
-		ErrorHint = if var7 then reactModule.createElement(text, {
+		}, config) else nil,
+		ErrorHint = if Flag then ReactModule.createElement(Text, {
 			tag = "size-full-0 auto-y text-caption-small text-wrap text-align-x-left content-alert",
 			LayoutOrder = 3,
-			Text = var5.CapturesUploadError
+			Text = UseLocalizationResult.CapturesUploadError
 		}) else nil,
-		EmptyRow = if not var4 then reactModule.createElement(view, {
+		EmptyRow = if IsCountAbove then nil else ReactModule.createElement(View, {
 			tag = "row align-y-center gap-medium size-full-0 auto-y",
 			LayoutOrder = 2
 		}, {
-			AddButton = reactModule.createElement(button, {
+			AddButton = ReactModule.createElement(Button, {
 				LayoutOrder = 1,
-				text = var5.CapturesAdd,
-				variant = buttonVariant.Standard,
-				size = inputSize.Medium,
+				text = UseLocalizationResult.CapturesAdd,
+				variant = ButtonVariant.Standard,
+				size = InputSize.Medium,
 				onActivated = p1.onPickerOpen,
 				isDisabled = p1.category == ""
 			}),
-			Hint = reactModule.createElement(text, {
+			Hint = ReactModule.createElement(Text, {
 				tag = "fill size-full-0 text-body-medium text-wrap text-align-x-left content-muted",
 				LayoutOrder = 2,
-				Text = var5.CapturesHint
+				Text = UseLocalizationResult.CapturesHint
 			})
-		}) else nil
+		})
 	})
 end)
-local t = {
-	TICKET_CATEGORY_DATA_RESTORE_REQUEST = true,
-	TICKET_CATEGORY_PURCHASING_ISSUE = true
-}
+local PLAYERSUPPORTCATEGORIESREQUIRINGUSERID = ConstantsModule.PLAYER_SUPPORT_CATEGORIES_REQUIRING_USER_ID
 
-return reactModule.memo(function(p2)
-	-- upvalues: useTokens (ref), fFlagEnablePlayerSupportCaptureAttachmentsModule (ref), useCaptureUploadsModule (ref), useGalleryCapturesModule (ref), reactModule (ref), constantsModule (ref), useLocalization (ref), t (ref), getCaptureKeyModule (ref), useEscapeDismissModule (ref), dialog (ref), capturePickerPreviewModule (ref), capturePickerGridModule (ref), view (ref), text (ref), dropdown (ref), inputSize (ref), inputVariant (ref), textArea (ref), var1 (ref), checkbox (ref), buttonVariant (ref)
-	local var8 = useTokens()
-	local description = p2.description
-	local setDescription = p2.setDescription
-	local category = p2.category
-	local setCategory = p2.setCategory
-	local shareUserId = p2.shareUserId
-	local setShareUserId = p2.setShareUserId
-	local var9 = nil
-	local var10 = nil
-	local var11 = nil
-	local var12 = nil
-	local var13 = nil
-	local var14 = nil
-	local var15 = nil
-	local var16 = nil
+return (ReactModule.memo(function(p2) --[[ Line: 257 ]]
+	-- upvalues: UseTokensFunction (copy), FFlagEnablePlayerSupportCaptureAttachmentsModule (copy), UseCaptureUploadsModule (copy), UseGalleryCapturesModule (copy), ReactModule (copy), ConstantsModule (copy), UseLocalizationFunction (copy), FFlagEnablePlayerSupportSuggestionCategoryModule (copy), PLAYERSUPPORTCATEGORIESREQUIRINGUSERID (copy), GetCaptureKeyModule (copy), FFlagPlayerSupportPromptEventIngestModule (copy), PlayerSupportPromptTelemetryModule (copy), UseEscapeDismissModule (copy), Dialog (copy), CapturePickerPreviewModule (copy), CapturePickerGridModule (copy), View (copy), Text (copy), Dropdown (copy), InputSize (copy), InputVariant (copy), TextArea (copy), MemoResult (copy), Checkbox (copy), ButtonVariant (copy)
+	local UseTokensResult = UseTokensFunction()
+	local Description = p2.description
+	local SetDescription = p2.setDescription
+	local Category = p2.category
+	local SetCategoryFunction = p2.setCategory
+	local ShareUserId = p2.shareUserId
+	local SetShareUserIdFunction = p2.setShareUserId
+	local v1 = nil
+	local v2 = nil
+	local v3 = nil
+	local Callback1 = nil
+	local SelectedKeys = nil
+	local Callback = nil
+	local Capture = nil
+	local Callback2 = nil
 	
-	if fFlagEnablePlayerSupportCaptureAttachmentsModule then
-		var9 = useCaptureUploadsModule()
-		var10 = useGalleryCapturesModule()
-		local var17, var18 = reactModule.useState(false)
-		var11 = var17
-		var12 = var18
-		local var19, var20 = reactModule.useState({})
-		var13 = var19
-		var14 = var20
-		local var21, var22 = reactModule.useState(nil)
-		var15 = var21
-		var16 = var22
+	if FFlagEnablePlayerSupportCaptureAttachmentsModule then
+		v1 = UseCaptureUploadsModule()
+		v2 = UseGalleryCapturesModule()
+		v3, Callback1 = ReactModule.useState(false)
+		SelectedKeys, Callback = ReactModule.useState({})
+		Capture, Callback2 = ReactModule.useState(nil)
 	end
-	local MIN_FEEDBACK_LENGTH = constantsModule.MIN_FEEDBACK_LENGTH
-	local MAX_PLAYER_SUPPORT_LENGTH = constantsModule.MAX_PLAYER_SUPPORT_LENGTH
-	local var23 = useLocalization({
+	local MINFEEDBACKLENGTH = ConstantsModule.MIN_FEEDBACK_LENGTH
+	local MAXPLAYERSUPPORTLENGTH = ConstantsModule.MAX_PLAYER_SUPPORT_LENGTH
+	local UseLocalizationResult = UseLocalizationFunction({
 		Title = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Title",
 		ReportAbuseLead = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Lead",
 		ReportAbuseLink = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ReportAbuse.Link",
@@ -215,11 +209,13 @@ return reactModule.memo(function(p2)
 		CategoryItemBugReport = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.BugReport",
 		CategoryItemDataRestoreRequest = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.DataRestoreRequest",
 		CategoryItemPurchasingIssue = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.PurchasingIssue",
+		CategoryItemSuggestion = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Suggestion",
 		CategoryItemOther = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Category.Other",
 		DescriptionLabel = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.Label",
 		DescriptionPlaceholderBugReport = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.BugReport",
 		DescriptionPlaceholderDataRestoreRequest = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.DataRestoreRequest",
 		DescriptionPlaceholderPurchasingIssue = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.PurchasingIssue",
+		DescriptionPlaceholderSuggestion = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Suggestion",
 		DescriptionPlaceholderOther = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Placeholder.Other",
 		ShareUserIdLabel = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.Label",
 		ShareUserIdLabelRequired = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.ShareUserId.LabelRequired",
@@ -232,440 +228,527 @@ return reactModule.memo(function(p2)
 		CapturesAdd = "CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Add",
 		DescriptionHint = {
 			"CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Description.CharacterLimitHint",
-			MAX = tostring(MAX_PLAYER_SUPPORT_LENGTH)
+			MAX = tostring(MAXPLAYERSUPPORTLENGTH)
 		}
 	})
-	local list = {
+	local List = {
 		{
 			id = "TICKET_CATEGORY_BUG_REPORT",
-			text = var23.CategoryItemBugReport
+			text = UseLocalizationResult.CategoryItemBugReport
 		},
 		{
 			id = "TICKET_CATEGORY_DATA_RESTORE_REQUEST",
-			text = var23.CategoryItemDataRestoreRequest
+			text = UseLocalizationResult.CategoryItemDataRestoreRequest
 		},
 		{
 			id = "TICKET_CATEGORY_PURCHASING_ISSUE",
-			text = var23.CategoryItemPurchasingIssue
-		},
-		{
-			id = "TICKET_CATEGORY_OTHER",
-			text = var23.CategoryItemOther
+			text = UseLocalizationResult.CategoryItemPurchasingIssue
 		}
 	}
-	local t_1 = {
-		TICKET_CATEGORY_BUG_REPORT = var23.DescriptionPlaceholderBugReport,
-		TICKET_CATEGORY_DATA_RESTORE_REQUEST = var23.DescriptionPlaceholderDataRestoreRequest,
-		TICKET_CATEGORY_PURCHASING_ISSUE = var23.DescriptionPlaceholderPurchasingIssue,
-		TICKET_CATEGORY_OTHER = var23.DescriptionPlaceholderOther
-	}
-	local var24 = t[category] == true
-	local var25 = var24 or shareUserId
-	local _ = {}
-	local var26 = 0
-	local var27 = false
-	local var28 = nil
-	local var29 = nil
-	local var30 = nil
 	
-	if fFlagEnablePlayerSupportCaptureAttachmentsModule then
-		var28 = reactModule.useCallback(function()
-			-- upvalues: category (ref), var12 (write)
-			if category == "" then
+	if FFlagEnablePlayerSupportSuggestionCategoryModule then
+		table.insert(List, {
+			id = "TICKET_CATEGORY_SUGGESTION",
+			text = UseLocalizationResult.CategoryItemSuggestion
+		})
+	end
+	table.insert(List, {
+		id = "TICKET_CATEGORY_OTHER",
+		text = UseLocalizationResult.CategoryItemOther
+	})
+	local config = {
+		TICKET_CATEGORY_BUG_REPORT = UseLocalizationResult.DescriptionPlaceholderBugReport,
+		TICKET_CATEGORY_DATA_RESTORE_REQUEST = UseLocalizationResult.DescriptionPlaceholderDataRestoreRequest,
+		TICKET_CATEGORY_PURCHASING_ISSUE = UseLocalizationResult.DescriptionPlaceholderPurchasingIssue,
+		TICKET_CATEGORY_OTHER = UseLocalizationResult.DescriptionPlaceholderOther
+	}
+	
+	if FFlagEnablePlayerSupportSuggestionCategoryModule then
+		config.TICKET_CATEGORY_SUGGESTION = UseLocalizationResult.DescriptionPlaceholderSuggestion
+	end
+	local IsPLAYERSUPPORTCATEGORIESREQUIRINGUSERIDEntry = PLAYERSUPPORTCATEGORIESREQUIRINGUSERID[Category] == true
+	local IsPLAYERSUPPORTCATEGORIESREQUIRINGUSERIDEntry1 = IsPLAYERSUPPORTCATEGORIESREQUIRINGUSERIDEntry or ShareUserId
+	local UseMemoResult = {}
+	local Count = 0
+	local v4 = false
+	local UseResult = nil
+	local UseResult1 = nil
+	local OnActivated: (() -> ())? = nil
+	
+	if FFlagEnablePlayerSupportCaptureAttachmentsModule then
+		UseResult = ReactModule.useCallback(function() --[[ Line: 364 ]]
+			-- upvalues: Category (copy), Callback1 (ref)
+			if Category ~= "" then
+				Callback1(true)
+				
 				return
 			end
-			var12(true)
-		end, { category })
-		reactModule.useEffect(function()
-			-- upvalues: var11 (write), var14 (write), var16 (write), var9 (write), var10 (write)
-			if not var11 then
-				var14({})
-				var16(nil)
+		end, { Category })
+		ReactModule.useEffect(function() --[[ Line: 371 ]]
+			-- upvalues: v3 (ref), Callback (ref), Callback2 (ref), v1 (ref), v2 (ref)
+			if not v3 then
+				Callback({})
+				Callback2(nil)
 				
 				return
 			end
 			local t = {}
 			
-			for i in var9.uploadStatuses do
-				t[i] = true
+			for uploadStatus in v1.uploadStatuses do
+				t[uploadStatus] = true
 			end
-			var14(t)
-			var16(nil)
-			var10.load()
-		end, { var11 })
-		local var31 = reactModule.useMemo(function()
-			-- upvalues: var10 (write), var13 (write), getCaptureKeyModule (copy)
-			local t = {}
+			Callback(t)
+			Callback2(nil)
+			v2.load()
+		end, { v3 })
+		UseMemoResult = ReactModule.useMemo(function() --[[ Line: 387 ]]
+			-- upvalues: v2 (ref), SelectedKeys (ref), GetCaptureKeyModule (upval)
+			local List = {}
 			
-			for i, v in var10.captures do
-				if var13[getCaptureKeyModule(v)] then
-					table.insert(t, v)
+			for _, capture in v2.captures do
+				if SelectedKeys[GetCaptureKeyModule(capture)] then
+					table.insert(List, capture)
 				end
 			end
-			return t
-		end, { var10.captures, var13 })
-		var26 = #var31
-		var27 = var26 >= 5
-		var29 = reactModule.useCallback(function(p3)
-			-- upvalues: getCaptureKeyModule (copy), var14 (write), var27 (write)
-			local var32 = getCaptureKeyModule(p3)
-			var14(function(p4)
-				-- upvalues: var32 (ref), var27 (copy)
-				local var33 = p4[var32] == true
+			return List
+		end, { v2.captures, SelectedKeys })
+		Count = #UseMemoResult
+		v4 = Count >= 5
+		UseResult1 = ReactModule.useCallback(function(p3) --[[ Line: 400 ]]
+			-- upvalues: GetCaptureKeyModule (upval), Callback (ref), v4 (ref)
+			local CaptureKeyModule = GetCaptureKeyModule(p3)
+			Callback(function(Tbl) --[[ Line: 402 ]]
+				-- upvalues: CaptureKeyModule (copy), v4 (upval)
+				local IsEntry = Tbl[CaptureKeyModule] == true
 				
-				if not var33 and var27 then
-					return p4
+				if not IsEntry and v4 then
+					return Tbl
 				end
-				local cloned = table.clone(p4)
+				local Copy = table.clone(Tbl)
 				
-				if var33 then
-					cloned[var32] = nil
+				if IsEntry then
+					Copy[CaptureKeyModule] = nil
 					
-					return cloned
+					return Copy
+				else
+					Copy[CaptureKeyModule] = true
+					
+					return Copy
 				end
-				cloned[var32] = true
-				
-				return cloned
 			end)
-		end, { var27 })
-		local var32 = next(var9.uploadStatuses) ~= nil
+		end, { v4 })
+		local HasNextEntry = next(v1.uploadStatuses) ~= nil
 		
-		var30 = function()
-			-- upvalues: var26 (write), var32 (ref), var9 (write), var31 (write), var12 (write)
-			if var26 == 0 and not var32 then
+		OnActivated = function() --[[ Line: 418 ]]
+			-- upvalues: Count (ref), HasNextEntry (copy), v1 (ref), UseMemoResult (ref), Callback1 (ref)
+			if Count ~= 0 or HasNextEntry then
+				v1.onCapturesAdded(UseMemoResult)
+				Callback1(false)
+				
 				return
 			end
-			var9.onCapturesAdded(var31)
-			var12(false)
 		end
 	end
-	local var32 = nil
+	local v5 = nil
 	
-	if fFlagEnablePlayerSupportCaptureAttachmentsModule then
-		local var33 = if var15 then var15.CaptureTime else nil
-		local robloxLocaleId = game:GetService("LocalizationService").RobloxLocaleId
-		var32 = useLocalization({
+	if FFlagEnablePlayerSupportCaptureAttachmentsModule then
+		local CaptureTime = if Capture then Capture.CaptureTime else nil
+		local RobloxLocaleId = game:GetService("LocalizationService").RobloxLocaleId
+		v5 = UseLocalizationFunction({
 			dateTime = {
 				"CoreScripts.FeedbackPrompt.PlayerSupportPrompt.Captures.Picker.DateTime",
-				date = if var33 then var33:FormatLocalTime("L", robloxLocaleId) else "",
-				time = if var33 then var33:FormatLocalTime("LT", robloxLocaleId) else ""
+				date = if CaptureTime then CaptureTime:FormatLocalTime("L", RobloxLocaleId) else "",
+				time = if CaptureTime then CaptureTime:FormatLocalTime("LT", RobloxLocaleId) else ""
 			}
 		})
 	end
-	local var34
-	local var35 = MIN_FEEDBACK_LENGTH <= #description and (#description <= MAX_PLAYER_SUPPORT_LENGTH and (category ~= "" and (var9 and (not var9.anyUploading and (not var9 or not var9.hasNonModerationFailure)))))
-	local var36 = reactModule.useCallback(function()
-		-- upvalues: var35 (ref), description (ref), category (ref), var25 (ref), fFlagEnablePlayerSupportCaptureAttachmentsModule (copy), var9 (write), p2 (ref)
-		if var35 then
-			pcall(function()
-				-- upvalues: description (copy), category (copy), var25 (copy), fFlagEnablePlayerSupportCaptureAttachmentsModule (copy), var9 (copy)
-				local socialService = game:GetService("SocialService")
+	local NoV47: boolean = MINFEEDBACKLENGTH <= #Description and (#Description <= MAXPLAYERSUPPORTLENGTH and (Category ~= "" and (if v1 then not v1.anyUploading and (not v1 or not v1.hasNonModerationFailure) else not v1 or not v1.hasNonModerationFailure)))
+	
+	if FFlagPlayerSupportPromptEventIngestModule then
+		ReactModule.useEffect(function() --[[ Line: 449 ]]
+			-- upvalues: PlayerSupportPromptTelemetryModule (upval), Category (copy), IsPLAYERSUPPORTCATEGORIESREQUIRINGUSERIDEntry1 (copy), Description (copy)
+			PlayerSupportPromptTelemetryModule.log({
+				action = PlayerSupportPromptTelemetryModule.Action.Opened,
+				category = Category,
+				shareUserId = IsPLAYERSUPPORTCATEGORIESREQUIRINGUSERIDEntry1,
+				descriptionLength = #Description
+			})
+		end, {})
+	end
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 462 ]]
+		-- upvalues: NoV47 (copy), FFlagPlayerSupportPromptEventIngestModule (upval), PlayerSupportPromptTelemetryModule (upval), Category (copy), IsPLAYERSUPPORTCATEGORIESREQUIRINGUSERIDEntry1 (copy), IsPLAYERSUPPORTCATEGORIESREQUIRINGUSERIDEntry (copy), Description (copy), FFlagEnablePlayerSupportCaptureAttachmentsModule (upval), v1 (ref), p2 (copy)
+		if not NoV47 then return end
+		if FFlagPlayerSupportPromptEventIngestModule then
+			PlayerSupportPromptTelemetryModule.log({
+				action = PlayerSupportPromptTelemetryModule.Action.Submitted,
+				category = Category,
+				shareUserId = IsPLAYERSUPPORTCATEGORIESREQUIRINGUSERIDEntry1,
+				shareUserIdRequired = IsPLAYERSUPPORTCATEGORIESREQUIRINGUSERIDEntry,
+				descriptionLength = #Description
+			})
+		end
+		pcall(function() --[[ Line: 475 ]]
+			-- upvalues: Description (upval), Category (upval), IsPLAYERSUPPORTCATEGORIESREQUIRINGUSERIDEntry1 (upval), FFlagEnablePlayerSupportCaptureAttachmentsModule (upval), v1 (upval)
+			local SocialService = game:GetService("SocialService")
+			
+			if SocialService.SignalFeedbackSubmissionCompleted then
+				local config = {
+					Description = Description,
+					Category = Category,
+					ShareUserIdPreference = if IsPLAYERSUPPORTCATEGORIESREQUIRINGUSERIDEntry1 then "SHARE_USER_ID_PREFERENCE_SHARE" else "SHARE_USER_ID_PREFERENCE_DO_NOT_SHARE"
+				}
 				
-				if socialService.SignalFeedbackSubmissionCompleted then
-					local t = {
-						Description = description,
-						Category = category,
-						ShareUserIdPreference = if var25 then "SHARE_USER_ID_PREFERENCE_SHARE" else "SHARE_USER_ID_PREFERENCE_DO_NOT_SHARE"
-					}
+				if FFlagEnablePlayerSupportCaptureAttachmentsModule then
+					local AssetIds = {}
 					
-					if fFlagEnablePlayerSupportCaptureAttachmentsModule then
-						local t_1 = {}
-						
-						for i, v in var9.uploadStatuses do
-							if v.status == "succeeded" and v.assetId ~= nil then
-								table.insert(t_1, v.assetId)
-							end
-						end
-						if #t_1 > 0 then
-							t.AssetIds = t_1
+					for _, uploadStatus in v1.uploadStatuses do
+						if uploadStatus.status == "succeeded" and uploadStatus.assetId ~= nil then
+							table.insert(AssetIds, uploadStatus.assetId)
 						end
 					end
-					socialService:SignalFeedbackSubmissionCompleted("", t)
+					if #AssetIds > 0 then
+						config.AssetIds = AssetIds
+					end
 				end
-			end)
-			p2.closePrompt()
-			
-			return
-		end
-	end, {
-		description, category, var25, var35, var9 or false, p2.closePrompt
+				SocialService:SignalFeedbackSubmissionCompleted("", config)
+			end
+		end)
+		p2.closePrompt()
+	end, if FFlagPlayerSupportPromptEventIngestModule then {
+		Description, Category, IsPLAYERSUPPORTCATEGORIESREQUIRINGUSERIDEntry1,
+		IsPLAYERSUPPORTCATEGORIESREQUIRINGUSERIDEntry, NoV47, v1 or false,
+		p2.closePrompt
+	} else {
+		Description, Category, IsPLAYERSUPPORTCATEGORIESREQUIRINGUSERIDEntry1, NoV47,
+		v1 or false, p2.closePrompt
 	})
-	local var37 = reactModule.useCallback(function()
-		-- upvalues: p2 (ref)
-		pcall(function()
-			local socialService = game:GetService("SocialService")
+	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 525 ]]
+		-- upvalues: p2 (copy)
+		pcall(function() --[[ Line: 526 ]]
+			local SocialService = game:GetService("SocialService")
 			
-			if socialService.SignalFeedbackSubmissionPermissionDenied then
-				socialService:SignalFeedbackSubmissionPermissionDenied()
+			if SocialService.SignalFeedbackSubmissionPermissionDenied then
+				SocialService:SignalFeedbackSubmissionPermissionDenied()
 			end
 		end)
 		p2.onFormAbandoned()
 		p2.closePrompt()
 	end, { p2.closePrompt, p2.onFormAbandoned })
-	local var38 = reactModule.useCallback(function()
-		-- upvalues: p2 (ref)
-		pcall(function()
-			local socialService = game:GetService("SocialService")
+	local UseResult4 = if FFlagPlayerSupportPromptEventIngestModule then ReactModule.useCallback(function() --[[ Line: 537 ]]
+		-- upvalues: PlayerSupportPromptTelemetryModule (upval), Category (copy), IsPLAYERSUPPORTCATEGORIESREQUIRINGUSERIDEntry1 (copy), Description (copy), UseResult3 (copy)
+		PlayerSupportPromptTelemetryModule.log({
+			action = PlayerSupportPromptTelemetryModule.Action.Dismissed,
+			dismissMethod = PlayerSupportPromptTelemetryModule.DismissMethod.DialogClose,
+			category = Category,
+			shareUserId = IsPLAYERSUPPORTCATEGORIESREQUIRINGUSERIDEntry1,
+			descriptionLength = #Description
+		})
+		UseResult3()
+	end, {
+		UseResult3,
+		Category,
+		IsPLAYERSUPPORTCATEGORIESREQUIRINGUSERIDEntry1,
+		Description
+	}) else UseResult3
+	local UseResult5 = if FFlagPlayerSupportPromptEventIngestModule then ReactModule.useCallback(function() --[[ Line: 550 ]]
+		-- upvalues: PlayerSupportPromptTelemetryModule (upval), Category (copy), IsPLAYERSUPPORTCATEGORIESREQUIRINGUSERIDEntry1 (copy), Description (copy), UseResult3 (copy)
+		PlayerSupportPromptTelemetryModule.log({
+			action = PlayerSupportPromptTelemetryModule.Action.Dismissed,
+			dismissMethod = PlayerSupportPromptTelemetryModule.DismissMethod.Escape,
+			category = Category,
+			shareUserId = IsPLAYERSUPPORTCATEGORIESREQUIRINGUSERIDEntry1,
+			descriptionLength = #Description
+		})
+		UseResult3()
+	end, {
+		UseResult3,
+		Category,
+		IsPLAYERSUPPORTCATEGORIESREQUIRINGUSERIDEntry1,
+		Description
+	}) else UseResult3
+	local UseResult6 = ReactModule.useCallback(function() --[[ Line: 570 ]]
+		-- upvalues: FFlagPlayerSupportPromptEventIngestModule (upval), PlayerSupportPromptTelemetryModule (upval), Category (copy), IsPLAYERSUPPORTCATEGORIESREQUIRINGUSERIDEntry1 (copy), Description (copy), p2 (copy)
+		if FFlagPlayerSupportPromptEventIngestModule then
+			PlayerSupportPromptTelemetryModule.log({
+				action = PlayerSupportPromptTelemetryModule.Action.ReportAbuseClicked,
+				category = Category,
+				shareUserId = IsPLAYERSUPPORTCATEGORIESREQUIRINGUSERIDEntry1,
+				descriptionLength = #Description
+			})
+		end
+		pcall(function() --[[ Line: 579 ]]
+			local SocialService = game:GetService("SocialService")
 			
-			if socialService.SignalFeedbackSubmissionPermissionDenied then
-				socialService:SignalFeedbackSubmissionPermissionDenied()
+			if SocialService.SignalFeedbackSubmissionPermissionDenied then
+				SocialService:SignalFeedbackSubmissionPermissionDenied()
 			end
 		end)
 		p2.onFormAbandoned()
 		p2.closePrompt()
-		pcall(function()
-			local robloxGui = game:GetService("CoreGui"):FindFirstChild("RobloxGui")
-			local modules = robloxGui and robloxGui:FindFirstChild("Modules") or nil
-			local settings = modules and modules:FindFirstChild("Settings") or nil
-			local settingsHub = settings and settings:FindFirstChild("SettingsHub") or nil
+		pcall(function() --[[ Line: 587 ]]
+			local RobloxGui = game:GetService("CoreGui"):FindFirstChild("RobloxGui")
+			local Modules = RobloxGui and RobloxGui:FindFirstChild("Modules") or nil
+			local Settings = Modules and Modules:FindFirstChild("Settings") or nil
+			local SettingsHub = Settings and Settings:FindFirstChild("SettingsHub") or nil
 			
-			if settingsHub then
-				local unknownModule = require(settingsHub)
-				unknownModule:SetVisibility(true, false, unknownModule.Instance.ReportAbusePage)
+			if SettingsHub then
+				local Module = require(SettingsHub)
+				Module:SetVisibility(true, false, Module.Instance.ReportAbusePage)
 				
 				return
 			end
 		end)
-	end, { p2.closePrompt, p2.onFormAbandoned })
-	useEscapeDismissModule("PlayerSupportPromptCancel", if fFlagEnablePlayerSupportCaptureAttachmentsModule then reactModule.useCallback(function()
-		-- upvalues: var15 (write), var16 (write), var11 (write), var12 (write), var37 (ref)
-		if var15 then
-			var16(nil)
-			
-			return
-		elseif var11 then
-			var12(false)
+	end, if FFlagPlayerSupportPromptEventIngestModule then {
+		Category,
+		IsPLAYERSUPPORTCATEGORIESREQUIRINGUSERIDEntry1,
+		Description,
+		p2.closePrompt,
+		p2.onFormAbandoned
+	} else { p2.closePrompt, p2.onFormAbandoned })
+	UseEscapeDismissModule("PlayerSupportPromptCancel", if FFlagEnablePlayerSupportCaptureAttachmentsModule then ReactModule.useCallback(function() --[[ Line: 606 ]]
+		-- upvalues: Capture (ref), Callback2 (ref), v3 (ref), Callback1 (ref), UseResult5 (copy)
+		if Capture then
+			Callback2(nil)
 			
 			return
 		end
-		var37()
-	end, { var15, var11, var37 }) else var37)
-	local createElement = reactModule.createElement
-	local root = dialog.Root
-	local t_2 = { hasBackdrop = true, onClose = var37 }
-	local t_3 = {
-		Title = reactModule.createElement(dialog.Title, {
-			text = if fFlagEnablePlayerSupportCaptureAttachmentsModule and var11 and var15 ~= nil then if var15.CaptureTime ~= nil then var23.CapturesAdd else var32.dateTime elseif fFlagEnablePlayerSupportCaptureAttachmentsModule and var11 then var23.CapturesAdd else var23.Title
+		if v3 then
+			Callback1(false)
+			
+			return
+		else
+			UseResult5()
+		end
+	end, { Capture, v3, UseResult5 }) else UseResult5)
+	local CreateElementFunction = ReactModule.createElement
+	local Root = Dialog.Root
+	local config1 = { hasBackdrop = true, onClose = UseResult4 }
+	local config2 = {
+		Title = ReactModule.createElement(Dialog.Title, {
+			text = if FFlagEnablePlayerSupportCaptureAttachmentsModule and v3 and Capture ~= nil then if Capture.CaptureTime == nil then UseLocalizationResult.CapturesAdd else v5.dateTime elseif FFlagEnablePlayerSupportCaptureAttachmentsModule and v3 then UseLocalizationResult.CapturesAdd else UseLocalizationResult.Title
 		}),
-		Content = if fFlagEnablePlayerSupportCaptureAttachmentsModule and var11 then reactModule.createElement(dialog.Content, { LayoutOrder = 1 }, {
-			PickerBody = if var15 ~= nil then reactModule.createElement(capturePickerGridModule, {
+		Content = if FFlagEnablePlayerSupportCaptureAttachmentsModule and v3 then ReactModule.createElement(Dialog.Content, { LayoutOrder = 1 }, {
+			PickerBody = if Capture == nil then ReactModule.createElement(CapturePickerGridModule, {
 				maxSelections = 5,
-				captures = var10.captures,
-				isLoading = var10.isLoading,
-				hasMore = var10.hasMore,
-				selectedKeys = var13,
-				onToggle = var29,
-				onPreview = function(p3)
-					-- upvalues: var16 (write)
-					var16(p3)
+				captures = v2.captures,
+				isLoading = v2.isLoading,
+				hasMore = v2.hasMore,
+				selectedKeys = SelectedKeys,
+				onToggle = UseResult1,
+				onPreview = function(p3) --[[ Line: 647 ]]
+					-- upvalues: Callback2 (ref)
+					Callback2(p3)
 				end,
-				onLoadMore = var10.loadMore
-			}) else reactModule.createElement(capturePickerPreviewModule, { capture = var15 })
-		}) else reactModule.createElement(dialog.Content, { LayoutOrder = 1 }, {
-			Body = reactModule.createElement(view, {
+				onLoadMore = v2.loadMore
+			}) else ReactModule.createElement(CapturePickerPreviewModule, { capture = Capture })
+		}) else ReactModule.createElement(Dialog.Content, { LayoutOrder = 1 }, {
+			Body = ReactModule.createElement(View, {
 				tag = "col gap-medium size-full-0 auto-y",
-				padding = { top = UDim.new(0, -(var8.Gap.XLarge - var8.Gap.Large)) }
+				padding = {
+					top = UDim.new(0, -(UseTokensResult.Gap.XLarge - UseTokensResult.Gap.Large))
+				}
 			}, {
-				ReportAbuseRow = reactModule.createElement(view, { tag = "row gap-small auto-y", LayoutOrder = 0 }, {
-					Lead = reactModule.createElement(text, {
+				ReportAbuseRow = ReactModule.createElement(View, { tag = "row gap-small auto-y", LayoutOrder = 0 }, {
+					Lead = ReactModule.createElement(Text, {
 						tag = "auto-xy",
 						LayoutOrder = 1,
-						Text = var23.ReportAbuseLead
+						Text = UseLocalizationResult.ReportAbuseLead
 					}),
-					Link = reactModule.createElement(text, {
+					Link = ReactModule.createElement(Text, {
 						RichText = true,
 						tag = "auto-xy",
 						LayoutOrder = 2,
-						Text = var23.ReportAbuseLink,
-						onActivated = var38,
+						Text = UseLocalizationResult.ReportAbuseLink,
+						onActivated = UseResult6,
 						selection = { Selectable = true }
 					})
 				}),
-				CategorySection = reactModule.createElement(view, {
+				CategorySection = ReactModule.createElement(View, {
 					tag = "col gap-small size-full-0 auto-y",
 					LayoutOrder = 1
 				}, {
-					Label = reactModule.createElement(text, {
+					Label = ReactModule.createElement(Text, {
 						tag = "size-0 auto-xy text-title-medium text-wrap text-align-x-left text-align-y-top",
 						LayoutOrder = 1,
-						Text = var23.CategoryLabel,
-						textStyle = var8.Color.Content.Emphasis
+						Text = UseLocalizationResult.CategoryLabel,
+						textStyle = UseTokensResult.Color.Content.Emphasis
 					}),
-					DropdownBorder = reactModule.createElement(view, {
+					DropdownBorder = ReactModule.createElement(View, {
 						tag = "radius-medium",
 						LayoutOrder = 2,
-						Size = UDim2.new(1, -var8.Stroke.Standard * 2, 0, 0),
-						Position = UDim2.new(0, var8.Stroke.Standard, 0, 0),
+						Size = UDim2.new(1, -UseTokensResult.Stroke.Standard * 2, 0, 0),
+						Position = UDim2.new(0, UseTokensResult.Stroke.Standard, 0, 0),
 						AutomaticSize = Enum.AutomaticSize.Y,
 						stroke = {
-							Color = var8.Color.Stroke.Default.Color3,
-							Thickness = var8.Stroke.Standard,
-							Transparency = var8.Color.Stroke.Default.Transparency
+							Color = UseTokensResult.Color.Stroke.Default.Color3,
+							Thickness = UseTokensResult.Stroke.Standard,
+							Transparency = UseTokensResult.Color.Stroke.Default.Transparency
 						},
-						cornerRadius = UDim.new(0, var8.Radius.Medium)
+						cornerRadius = UDim.new(0, UseTokensResult.Radius.Medium)
 					}, {
-						Dropdown = reactModule.createElement(dropdown.Root, {
+						Dropdown = ReactModule.createElement(Dropdown.Root, {
 							label = "",
-							value = if category ~= "" then nil else category,
-							placeholder = var23.CategoryPlaceholder,
-							items = list,
-							size = inputSize.Medium,
-							variant = inputVariant.Utility,
+							value = if Category == "" then nil else Category,
+							placeholder = UseLocalizationResult.CategoryPlaceholder,
+							items = List,
+							size = InputSize.Medium,
+							variant = InputVariant.Utility,
 							width = UDim.new(1, 0),
-							onItemChanged = function(p3)
-								-- upvalues: setCategory (ref)
-								setCategory(tostring(p3))
+							onItemChanged = function(p3) --[[ Line: 710 ]]
+								-- upvalues: SetCategoryFunction (copy)
+								SetCategoryFunction((tostring(p3)))
 							end
 						})
 					})
 				}),
-				Description = reactModule.createElement(view, {
+				Description = ReactModule.createElement(View, {
 					tag = "col gap-small size-full-0 auto-y",
 					LayoutOrder = 2,
-					GroupTransparency = if category == "" then 0.75 else 0
+					GroupTransparency = if Category == "" then 0.75 else 0
 				}, {
-					Label = reactModule.createElement(text, {
+					Label = ReactModule.createElement(Text, {
 						tag = "size-0 auto-xy text-title-medium text-wrap text-align-x-left text-align-y-top",
 						LayoutOrder = 1,
-						Text = var23.DescriptionLabel,
-						textStyle = var8.Color.Content.Emphasis
+						Text = UseLocalizationResult.DescriptionLabel,
+						textStyle = UseTokensResult.Color.Content.Emphasis
 					}),
-					InputBorderSlot = reactModule.createElement(view, { tag = "size-full-0 auto-y", LayoutOrder = 2 }, {
-						InputBorder = reactModule.createElement(view, {
+					InputBorderSlot = ReactModule.createElement(View, { tag = "size-full-0 auto-y", LayoutOrder = 2 }, {
+						InputBorder = ReactModule.createElement(View, {
 							tag = "radius-medium",
-							Size = UDim2.new(1, -var8.Stroke.Standard * 2, 0, 0),
-							Position = UDim2.new(0, var8.Stroke.Standard, 0, 0),
+							Size = UDim2.new(1, -UseTokensResult.Stroke.Standard * 2, 0, 0),
+							Position = UDim2.new(0, UseTokensResult.Stroke.Standard, 0, 0),
 							AutomaticSize = Enum.AutomaticSize.Y,
 							stroke = {
-								Color = var8.Color.Stroke.Default.Color3,
-								Thickness = var8.Stroke.Standard,
-								Transparency = var8.Color.Stroke.Default.Transparency
+								Color = UseTokensResult.Color.Stroke.Default.Color3,
+								Thickness = UseTokensResult.Stroke.Standard,
+								Transparency = UseTokensResult.Color.Stroke.Default.Transparency
 							},
-							cornerRadius = UDim.new(0, var8.Radius.Medium)
+							cornerRadius = UDim.new(0, UseTokensResult.Radius.Medium)
 						}, {
-							Input = reactModule.createElement(textArea, {
+							Input = ReactModule.createElement(TextArea, {
 								label = "",
 								hint = "",
 								numLines = 4,
-								text = description,
-								onChanged = setDescription,
-								placeholder = t_1[category] or "",
+								text = Description,
+								onChanged = SetDescription,
+								placeholder = config[Category] or "",
 								width = UDim.new(1, 0),
-								variant = inputVariant.Utility,
-								size = inputSize.Medium,
-								isDisabled = category == ""
+								variant = InputVariant.Utility,
+								size = InputSize.Medium,
+								isDisabled = Category == ""
 							})
 						})
 					}),
-					Hint = reactModule.createElement(text, {
+					Hint = ReactModule.createElement(Text, {
 						tag = "size-full-0 auto-y text-caption-small text-wrap text-align-x-left text-align-y-top",
 						LayoutOrder = 3,
-						Text = var23.DescriptionHint,
-						textStyle = var8.Color.Content.Emphasis
+						Text = UseLocalizationResult.DescriptionHint,
+						textStyle = UseTokensResult.Color.Content.Emphasis
 					})
 				}),
-				CapturesSection = if fFlagEnablePlayerSupportCaptureAttachmentsModule then reactModule.createElement(var1, {
+				CapturesSection = if FFlagEnablePlayerSupportCaptureAttachmentsModule then ReactModule.createElement(MemoResult, {
 					maxSelections = 5,
-					uploadStatuses = var9.uploadStatuses,
-					category = category,
-					onCaptureRemoved = var9.onCaptureRemoved,
-					onPickerOpen = var28
+					uploadStatuses = v1.uploadStatuses,
+					category = Category,
+					onCaptureRemoved = v1.onCaptureRemoved,
+					onPickerOpen = UseResult
 				}) else nil,
-				ShareCheckboxRow = reactModule.createElement(view, {
+				ShareCheckboxRow = ReactModule.createElement(View, {
 					tag = "col gap-xsmall size-full-0 auto-y",
-					LayoutOrder = if fFlagEnablePlayerSupportCaptureAttachmentsModule then 4 else 3
+					LayoutOrder = if FFlagEnablePlayerSupportCaptureAttachmentsModule then 4 else 3
 				}, {
-					Checkbox = reactModule.createElement(checkbox, {
+					Checkbox = ReactModule.createElement(Checkbox, {
 						LayoutOrder = 1,
-						label = if var24 then var23.ShareUserIdLabelRequired else var23.ShareUserIdLabel,
-						isChecked = var25,
-						isDisabled = var24,
-						onActivated = function(p3)
-							-- upvalues: setShareUserId (ref)
-							setShareUserId(p3)
+						label = if IsPLAYERSUPPORTCATEGORIESREQUIRINGUSERIDEntry then UseLocalizationResult.ShareUserIdLabelRequired else UseLocalizationResult.ShareUserIdLabel,
+						isChecked = IsPLAYERSUPPORTCATEGORIESREQUIRINGUSERIDEntry1,
+						isDisabled = IsPLAYERSUPPORTCATEGORIESREQUIRINGUSERIDEntry,
+						onActivated = function(p3) --[[ Line: 786 ]]
+							-- upvalues: SetShareUserIdFunction (copy)
+							SetShareUserIdFunction(p3)
 						end,
-						size = inputSize.Medium
+						size = InputSize.Medium
 					}),
-					HintRow = reactModule.createElement(view, {
+					HintRow = ReactModule.createElement(View, {
 						tag = "size-full-0 auto-y",
 						LayoutOrder = 2,
 						padding = {
-							left = UDim.new(0, var8.Size.Size_600 + var8.Gap.Medium)
+							left = UDim.new(0, UseTokensResult.Size.Size_600 + UseTokensResult.Gap.Medium)
 						}
 					}, {
-						Hint = reactModule.createElement(text, {
+						Hint = ReactModule.createElement(Text, {
 							tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-muted",
-							Text = var23.ShareUserIdHint
+							Text = UseLocalizationResult.ShareUserIdHint
 						})
 					})
 				})
 			})
 		})
 	}
+	local Element = nil
 	
-	if fFlagEnablePlayerSupportCaptureAttachmentsModule and var11 then
-		local list_1
-		var34 = reactModule.createElement
-		local actions = dialog.Actions
-		local t_4 = { LayoutOrder = 2 }
+	if FFlagEnablePlayerSupportCaptureAttachmentsModule and v3 then
+		local CreateElementFunction1 = ReactModule.createElement
+		local Actions = Dialog.Actions
+		local config3 = { LayoutOrder = 2 }
+		local Actions1 = nil
 		
-		if var15 == nil then
-			list_1 = {
+		if Capture == nil then
+			Actions1 = {
 				{
-					text = var23.Add,
-					variant = if var26 > 0 then buttonVariant.Emphasis else buttonVariant.Standard,
-					isDisabled = var26 == 0 and not next(var9.uploadStatuses),
-					onActivated = var30
+					text = UseLocalizationResult.Add,
+					variant = if Count > 0 then ButtonVariant.Emphasis else ButtonVariant.Standard,
+					isDisabled = Count == 0 and not next(v1.uploadStatuses),
+					onActivated = OnActivated
 				},
 				{
-					text = var23.Cancel,
-					variant = buttonVariant.Standard,
-					onActivated = function()
-						-- upvalues: var12 (write)
-						var12(false)
+					text = UseLocalizationResult.Cancel,
+					variant = ButtonVariant.Standard,
+					onActivated = function() --[[ Line: 848 ]]
+						-- upvalues: Callback1 (ref)
+						Callback1(false)
 					end
 				}
 			}
 		else
-			local var39 = var13[getCaptureKeyModule(var15)] == true
-			local var40 = var39 or not var27
-			list_1 = {
+			local IsSelectedKey = SelectedKeys[GetCaptureKeyModule(Capture)] == true
+			local IsSelectedKey1: boolean = IsSelectedKey or not v4
+			Actions1 = {
 				{
-					text = if var39 then var23.Deselect else var23.Select,
-					variant = if var39 then buttonVariant.SoftEmphasis elseif var40 then buttonVariant.Emphasis else buttonVariant.Standard,
-					isDisabled = not var40 and not var39,
-					onActivated = function()
-						-- upvalues: var29 (write), var15 (write), var16 (write)
-						var29(var15)
-						var16(nil)
+					text = if IsSelectedKey then UseLocalizationResult.Deselect else UseLocalizationResult.Select,
+					variant = if IsSelectedKey then ButtonVariant.SoftEmphasis elseif IsSelectedKey1 then ButtonVariant.Emphasis else ButtonVariant.Standard,
+					isDisabled = not IsSelectedKey1 and not IsSelectedKey,
+					onActivated = function() --[[ Line: 822 ]]
+						-- upvalues: UseResult1 (ref), Capture (ref), Callback2 (ref)
+						UseResult1(Capture)
+						Callback2(nil)
 					end
 				},
 				{
-					text = var23.Cancel,
-					variant = buttonVariant.Standard,
-					onActivated = function()
-						-- upvalues: var16 (write)
-						var16(nil)
+					text = UseLocalizationResult.Cancel,
+					variant = ButtonVariant.Standard,
+					onActivated = function() --[[ Line: 830 ]]
+						-- upvalues: Callback2 (ref)
+						Callback2(nil)
 					end
 				}
 			}
 		end
-		t_4.actions = list_1
-		var34 = var34(actions, t_4)
+		config3.actions = Actions1
+		Element = CreateElementFunction1(Actions, config3)
 	else
-		var34 = reactModule.createElement(dialog.Actions, {
+		Element = ReactModule.createElement(Dialog.Actions, {
 			LayoutOrder = 2,
 			actions = {
 				{
-					text = var23.Send,
-					variant = if var35 then buttonVariant.Emphasis else buttonVariant.Standard,
-					onActivated = var36,
-					isDisabled = not var35
+					text = UseLocalizationResult.Send,
+					variant = if NoV47 then ButtonVariant.Emphasis else ButtonVariant.Standard,
+					onActivated = UseResult2,
+					isDisabled = not NoV47
 				}
 			}
 		})
 	end
-	t_3.Actions = var34
+	config2.Actions = Element
 	
-	return createElement(root, t_2, t_3)
-end)
+	return CreateElementFunction(Root, config1, config2)
+end))

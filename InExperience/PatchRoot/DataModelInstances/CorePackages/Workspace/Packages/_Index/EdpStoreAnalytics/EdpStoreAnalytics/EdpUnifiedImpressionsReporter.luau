@@ -1,20 +1,20 @@
-﻿local edpStoreAnalytics = script:FindFirstAncestor("EdpStoreAnalytics")
-local parent = edpStoreAnalytics.Parent
-local cryoModule = require(parent.Cryo)
-local avatarExperienceAnalyticsModule = require(parent.AvatarExperienceAnalytics)
-local unifiedEventLogEnums = avatarExperienceAnalyticsModule.UnifiedEventLogEnums
-local unifiedLoggingSurface = require(parent.AvatarExperienceNavigation).Enums.UnifiedLoggingSurface
-local sendUnifiedEventLogForInstance = avatarExperienceAnalyticsModule.sendUnifiedEventLogForInstance
-local constantsModule = require(edpStoreAnalytics.Constants)
+﻿local EdpStoreAnalytics = script:FindFirstAncestor("EdpStoreAnalytics")
+local Parent = EdpStoreAnalytics.Parent
+local CryoModule = require(Parent.Cryo)
+local AvatarExperienceAnalyticsModule = require(Parent.AvatarExperienceAnalytics)
+local UnifiedEventLogEnums = AvatarExperienceAnalyticsModule.UnifiedEventLogEnums
+local UnifiedLoggingSurface = require(Parent.AvatarExperienceNavigation).Enums.UnifiedLoggingSurface
+local SendUnifiedEventLogForInstanceFunction = AvatarExperienceAnalyticsModule.sendUnifiedEventLogForInstance
+local ConstantsModule = require(EdpStoreAnalytics.Constants)
 
-return function(p1)
-	-- upvalues: sendUnifiedEventLogForInstance (ref), cryoModule (ref), unifiedEventLogEnums (ref), constantsModule (ref), unifiedLoggingSurface (ref)
-	return function(p2)
-		-- upvalues: sendUnifiedEventLogForInstance (copy), cryoModule (copy), unifiedEventLogEnums (copy), p1 (ref), constantsModule (copy), unifiedLoggingSurface (copy)
-		local visibleInstance = p2.visibleInstance
-		sendUnifiedEventLogForInstance(visibleInstance, cryoModule.Dictionary.join(visibleInstance:GetAttributes() or {}, {
-			action = unifiedEventLogEnums.MarketplaceUnifiedAction.ITEM_IMPRESSION,
-			surface = if p1 == constantsModule.StoreEnums.LocationType.Edp then unifiedLoggingSurface.EDP_PREVIEW else unifiedLoggingSurface.EDP_STORE
+return function(Edp) --[[ Line: 14 | Named "EdpUnifiedImpressionsReporter" ]]
+	-- upvalues: SendUnifiedEventLogForInstanceFunction (copy), CryoModule (copy), UnifiedEventLogEnums (copy), ConstantsModule (copy), UnifiedLoggingSurface (copy)
+	return function(p1) --[[ Line: 15 ]]
+		-- upvalues: SendUnifiedEventLogForInstanceFunction (upval), CryoModule (upval), UnifiedEventLogEnums (upval), Edp (copy), ConstantsModule (upval), UnifiedLoggingSurface (upval)
+		local VisibleInstance = p1.visibleInstance
+		SendUnifiedEventLogForInstanceFunction(VisibleInstance, CryoModule.Dictionary.join(VisibleInstance:GetAttributes() or {}, {
+			action = UnifiedEventLogEnums.MarketplaceUnifiedAction.ITEM_IMPRESSION,
+			surface = if Edp == ConstantsModule.StoreEnums.LocationType.Edp then UnifiedLoggingSurface.EDP_PREVIEW else UnifiedLoggingSurface.EDP_STORE
 		}), {
 			includeScreenSize = true,
 			includeElementSizeAndPosition = true

@@ -1,49 +1,50 @@
-﻿local telemetryService = game:GetService("TelemetryService")
-local parent = script:FindFirstAncestor("UnifiedLogging").Parent
-local tModule = require(parent.t)
-local discoveryEventErrorLogger = require(parent.DiscoveryUtils).DiscoveryEventErrorLogger
-local t = {
+﻿local TelemetryService = game:GetService("TelemetryService")
+local Parent = script:FindFirstAncestor("UnifiedLogging").Parent
+local TModule = require(Parent.t)
+local DiscoveryEventErrorLogger = require(Parent.DiscoveryUtils).DiscoveryEventErrorLogger
+local config = {
 	eventName = "sduiFeedImpressions",
 	description = "Feed-level section impressions for SDUI feed containers (e.g. SduiVerticalFeed)",
 	backends = { "EventIngest" },
 	throttlingPercentage = game:DefineFastInt("LuaAppFeedImpressionsHundredthsPercent", 10000),
 	lastUpdated = { 26, 5, 11 }
 }
-local var1 = tModule.strictInterface({
-	pageContext = tModule.string,
-	feedItemPositions = tModule.string,
-	feedCollectionIds = tModule.string,
-	feedComponentTypes = tModule.string
+local StrictInterfaceResult = TModule.strictInterface({
+	pageContext = TModule.string,
+	feedItemPositions = TModule.string,
+	feedCollectionIds = TModule.string,
+	feedComponentTypes = TModule.string
 })
 
-return function(p1, p2, p3, p4)
-	-- upvalues: discoveryEventErrorLogger (ref), var1 (ref), telemetryService (ref), t (ref)
-	if #p1 == 0 then return end
-	if #p1 ~= #p2 or #p1 ~= #p3 then
-		discoveryEventErrorLogger.reportError("SendSduiFeedImpressionsArrayLengthMismatch", `feedItemPositions ({#p1}), feedCollectionIds ({#p2}), and feedComponentTypes ({#p3}) must have equal length`, {
-			feedItemPositionsCount = #p1,
-			feedCollectionIdsCount = #p2,
-			feedComponentTypesCount = #p3
+return function(List, List1, List2, EventContext) --[[ Line: 26 | Named "sendSduiFeedImpressions" ]]
+	-- upvalues: DiscoveryEventErrorLogger (copy), StrictInterfaceResult (copy), TelemetryService (copy), config (copy)
+	if #List == 0 then return end
+	if #List ~= #List1 or #List ~= #List2 then
+		DiscoveryEventErrorLogger.reportError("SendSduiFeedImpressionsArrayLengthMismatch", `feedItemPositions ({#List}), feedCollectionIds ({#List1}), and feedComponentTypes ({#List2}) must have equal length`, {
+			feedItemPositionsCount = #List,
+			feedCollectionIdsCount = #List1,
+			feedComponentTypesCount = #List2
 		})
 		
 		return
 	end
-	local t_1 = {
-		pageContext = p4,
-		feedItemPositions = table.concat(p1, ","),
-		feedCollectionIds = table.concat(p2, ","),
-		feedComponentTypes = table.concat(p3, ",")
+	local CustomFields = {
+		pageContext = EventContext,
+		feedItemPositions = table.concat(List, ","),
+		feedCollectionIds = table.concat(List1, ","),
+		feedComponentTypes = table.concat(List2, ",")
 	}
-	local var2, var3 = var1(t_1)
+	local StrictInterfaceResultResult, StrictInterfaceResultResult2 = StrictInterfaceResult(CustomFields)
 	
-	if var2 then
-		telemetryService:LogEvent(t, {
-			eventContext = p4,
+	if StrictInterfaceResultResult then
+		TelemetryService:LogEvent(config, {
+			eventContext = EventContext,
 			standardizedFields = { "addSessionInfo", "addSessionId", "addOSInfo" },
-			customFields = t_1
+			customFields = CustomFields
 		})
 		
 		return
+	else
+		DiscoveryEventErrorLogger.reportError("SduiFeedImpressionsEventInvalidInterface", StrictInterfaceResultResult2)
 	end
-	discoveryEventErrorLogger.reportError("SduiFeedImpressionsEventInvalidInterface", var3)
 end

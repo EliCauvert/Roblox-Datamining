@@ -1,72 +1,75 @@
-﻿local signalsModule = require(script:FindFirstAncestor("GamePlayButton").Parent.Signals)
+﻿local SignalsModule = require(script:FindFirstAncestor("GamePlayButton").Parent.Signals)
 
-local function createStore(p1)
-	-- upvalues: signalsModule (ref)
-	local var1, var2 = signalsModule.createSignal("")
-	local var3, var4 = signalsModule.createSignal(false)
-	local var5 = nil
+local function createStore(Callback) --[[ Line: 16 ]]
+	-- upvalues: SignalsModule (copy)
+	local Signal, Signal2 = SignalsModule.createSignal("")
+	local Signal1, Signal2_1 = SignalsModule.createSignal(false)
+	local PopLatencyService = nil
 	
-	local function refresh()
-		-- upvalues: p1 (ref), var5 (write), var2 (ref), var4 (ref)
-		local ok, status, var6 = pcall(function()
-			-- upvalues: p1 (copy)
-			local var7 = p1()
+	local function refresh() --[[ Line: 22 ]]
+		-- upvalues: Callback (copy), PopLatencyService (ref), Signal2 (copy), Signal2_1 (copy)
+		local Success, Result, Result3 = pcall(function() --[[ Line: 23 ]]
+			-- upvalues: Callback (upval)
+			local CallbackResult = Callback()
 			
-			if var7 and type(var7.SetForcedPop) == "function" then
-				return var7, var7:GetForcedPop()
+			if CallbackResult and type(CallbackResult.SetForcedPop) == "function" then
+				return CallbackResult, CallbackResult:GetForcedPop()
+			else
+				return nil, nil
 			end
-			return nil, nil
 		end)
 		
-		if ok and type(var6) == "string" then
-			var5 = status
-			var2(var6)
-			var4(true)
+		if Success and type(Result3) == "string" then
+			PopLatencyService = Result
+			Signal2(Result3)
+			Signal2_1(true)
 			
 			return
+		else
+			PopLatencyService = nil
+			Signal2_1(false)
 		end
-		var5 = nil
-		var4(false)
 	end
 	
 	return {
-		getSelection = var1,
-		getSupported = var3,
+		getSelection = Signal,
+		getSupported = Signal1,
 		refresh = refresh,
-		select = function(p2)
-			-- upvalues: var5 (write), refresh (ref), var3 (ref), var1 (ref)
-			if not var5 then
+		select = function(PopCode): boolean --[[ Line: 41 ]]
+			-- upvalues: PopLatencyService (ref), refresh (copy), Signal1 (copy), Signal (copy)
+			if not PopLatencyService then
 				refresh()
 			end
-			if var5 then
-				local ok = pcall(function()
-					-- upvalues: var5 (copy), p2 (ref)
-					var5:SetForcedPop(p2)
+			if PopLatencyService then
+				local Success = pcall(function() --[[ Line: 49 ]]
+					-- upvalues: PopLatencyService (upval), PopCode (copy)
+					PopLatencyService:SetForcedPop(PopCode)
 				end)
 				refresh()
 				
-				return ok and (var3(false) and var1(false) == p2)
+				return Success and (Signal1(false) and Signal(false) == PopCode)
+			else
+				return false
 			end
-			return false
 		end,
-		getSnapshot = function()
-			-- upvalues: var5 (write)
-			local ok, status = pcall(function()
-				-- upvalues: var5 (copy)
-				return var5:GetSnapshot()
+		getSnapshot = function() --[[ Line: 57 ]]
+			-- upvalues: PopLatencyService (ref)
+			local Success, Result = pcall(function() --[[ Line: 58 ]]
+				-- upvalues: PopLatencyService (upval)
+				return PopLatencyService:GetSnapshot()
 			end)
 			
-			return if ok and type(status) == "table" then status else nil
+			return if Success and type(Result) == "table" then Result else nil
 		end
 	}
 end
 
 return {
 	createStore = createStore,
-	getStore = signalsModule.createComputed(function()
-		-- upvalues: createStore (ref)
-		return createStore(function()
+	getStore = SignalsModule.createComputed(function() --[[ Line: 75 ]]
+		-- upvalues: createStore (copy)
+		return (createStore(function() --[[ Line: 76 ]]
 			return game:GetService("PopLatencyService")
-		end)
+		end))
 	end)
 }

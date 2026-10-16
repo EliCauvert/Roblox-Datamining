@@ -1,65 +1,74 @@
-﻿local avatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
-local parent = avatarExperienceInspectAndBuy.Parent
-local itemRestrictions = require(parent.AXCommon).Enums.ItemRestrictions
-local priceStatusModule = require(avatarExperienceInspectAndBuy.Enums.PriceStatus)
-local verifiedBadgesModule = require(parent.VerifiedBadges)
-local constantsModule = require(avatarExperienceInspectAndBuy.Constants)
-local _ = require(avatarExperienceInspectAndBuy.Types)
+﻿local AvatarExperienceInspectAndBuy = script:FindFirstAncestor("AvatarExperienceInspectAndBuy")
+local Parent = AvatarExperienceInspectAndBuy.Parent
+local ItemRestrictions = require(Parent.AXCommon).Enums.ItemRestrictions
+local PriceStatusModule = require(AvatarExperienceInspectAndBuy.Enums.PriceStatus)
+local VerifiedBadgesModule = require(Parent.VerifiedBadges)
+local ConstantsModule = require(AvatarExperienceInspectAndBuy.Constants)
+local _ = require(AvatarExperienceInspectAndBuy.Types)
 
 return {
-	isCollectible = function(p1)
-		-- upvalues: itemRestrictions (ref)
-		return if p1 then if p1.itemRestrictions then p1.itemRestrictions[itemRestrictions.Collectible] or p1.itemRestrictions[itemRestrictions.Limited] or p1.itemRestrictions[itemRestrictions.LimitedUnique] else false else false
+	isCollectible = function(p1): boolean --[[ Line: 17 ]]
+		-- upvalues: ItemRestrictions (copy)
+		if not p1 then
+			return false
+		elseif p1.itemRestrictions then
+			local ItemRestriction = p1.itemRestrictions[ItemRestrictions.Limited]
+			local ItemRestriction1 = p1.itemRestrictions[ItemRestrictions.LimitedUnique]
+			
+			return if p1.itemRestrictions[ItemRestrictions.Collectible] or ItemRestriction or ItemRestriction1 then true else false
+		else
+			return false
+		end
 	end,
-	isInExperienceCreationPlayable = function(p1)
-		-- upvalues: constantsModule (ref)
-		local var1 = if p1 then p1.playabilityStatus else nil
+	isInExperienceCreationPlayable = function(p1): boolean --[[ Line: 37 ]]
+		-- upvalues: ConstantsModule (copy)
+		local PlayabilityStatus = if p1 then p1.playabilityStatus else nil
 		
-		return var1 and constantsModule.ShowPlayableAttributionMapper[var1]
+		return if PlayabilityStatus and ConstantsModule.ShowPlayableAttributionMapper[PlayabilityStatus] then true else false
 	end,
-	isTradeable = function(p1)
-		-- upvalues: itemRestrictions (ref)
-		return p1 and (p1.itemRestrictions and (p1.itemRestrictions[itemRestrictions.Limited] or p1.itemRestrictions[itemRestrictions.LimitedUnique]))
+	isTradeable = function(p1) --[[ Line: 76 ]]
+		-- upvalues: ItemRestrictions (copy)
+		return p1 and (p1.itemRestrictions and (p1.itemRestrictions[ItemRestrictions.Limited] or p1.itemRestrictions[ItemRestrictions.LimitedUnique]))
 	end,
-	getPriceInRobux = function(p1, p2)
-		-- upvalues: priceStatusModule (ref)
-		return if p1 and p2 == priceStatusModule.PurchaseFromResale and p1.collectibleItemDetails then p1.collectibleItemDetails.lowestResalePrice elseif p1 then p1.priceInRobux else nil
+	getPriceInRobux = function(p1, PurchaseFromResale) --[[ Line: 85 ]]
+		-- upvalues: PriceStatusModule (copy)
+		return if p1 and PurchaseFromResale == PriceStatusModule.PurchaseFromResale and p1.collectibleItemDetails then p1.collectibleItemDetails.lowestResalePrice elseif p1 then p1.priceInRobux else nil
 	end,
-	getItemWidth = function(p1, p2, p3)
-		local floored = math.floor((p1 - (p2 - 1) * p3) / p2)
+	getItemWidth = function(p1, p2: number, p3): number --[[ Line: 93 ]]
+		local Floored = math.floor((p1 - (p2 - 1) * p3) / p2)
 		
-		return if floored < 0 then 0 else floored
+		return if Floored < 0 then 0 else Floored
 	end,
-	getCreatorName = function(p1)
-		-- upvalues: verifiedBadgesModule (ref)
-		return if p1 and p1.creator and (p1.creator.creatorHasVerifiedBadge and p1.creator.creatorName) then `{p1.creator.creatorName}{verifiedBadgesModule.emoji.verified}` elseif p1 and p1.creator and p1.creator.creatorName then p1.creator.creatorName else ""
+	getCreatorName = function(p1) --[[ Line: 103 ]]
+		-- upvalues: VerifiedBadgesModule (copy)
+		return if p1 and p1.creator and p1.creator.creatorHasVerifiedBadge and p1.creator.creatorName then `{p1.creator.creatorName}{VerifiedBadgesModule.emoji.verified}` elseif p1 and p1.creator and p1.creator.creatorName then p1.creator.creatorName else ""
 	end,
-	getOriginalPrice = function(p1, p2, p3)
-		return if p1 and p1.isOffSale then p2 elseif p1 and p1.priceInRobux then p3(p1.priceInRobux) else ""
+	getOriginalPrice = function(p1, p2, Callback) --[[ Line: 113 ]]
+		return if p1 and p1.isOffSale then p2 elseif p1 and p1.priceInRobux then Callback(p1.priceInRobux) else ""
 	end,
-	getQuantitySold = function(p1, p2)
-		return if p1 and p1.collectibleItemDetails and (p1.collectibleItemDetails.totalQuantity and p1.collectibleItemDetails.unitsAvailableForConsumption) then p2(p1.collectibleItemDetails.totalQuantity - p1.collectibleItemDetails.unitsAvailableForConsumption) .. "/" .. p13(p1.collectibleItemDetails.totalQuantity) else ""
+	getQuantitySold = function(p1, Callback): string --[[ Line: 123 ]]
+		return if p1 and p1.collectibleItemDetails and p1.collectibleItemDetails.totalQuantity and p1.collectibleItemDetails.unitsAvailableForConsumption then Callback(p1.collectibleItemDetails.totalQuantity - p1.collectibleItemDetails.unitsAvailableForConsumption) .. "/" .. Callback(p1.collectibleItemDetails.totalQuantity) else ""
 	end,
-	calculatePurchaseStatusForItem = function(p1, p2)
-		-- upvalues: priceStatusModule (ref)
-		local lowestResalePrice = nil
-		local collectibleLowestAvailableResaleProductId = nil
-		local collectibleLowestAvailableResaleItemInstanceId = nil
+	calculatePurchaseStatusForItem = function(p1, PurchaseFromResale) --[[ Line: 55 ]]
+		-- upvalues: PriceStatusModule (copy)
+		local LowestResalePrice = nil
+		local CollectibleLowestAvailableResaleProductId = nil
+		local CollectibleLowestAvailableResaleItemInstanceId = nil
 		
-		if p2 == priceStatusModule.PurchaseFromResale and p1.collectibleItemDetails then
-			lowestResalePrice = p1.collectibleItemDetails.lowestResalePrice
-			collectibleLowestAvailableResaleProductId = p1.collectibleItemDetails.collectibleLowestAvailableResaleProductId
-			collectibleLowestAvailableResaleItemInstanceId = p1.collectibleItemDetails.collectibleLowestAvailableResaleItemInstanceId
+		if PurchaseFromResale == PriceStatusModule.PurchaseFromResale and p1.collectibleItemDetails then
+			LowestResalePrice = p1.collectibleItemDetails.lowestResalePrice
+			CollectibleLowestAvailableResaleProductId = p1.collectibleItemDetails.collectibleLowestAvailableResaleProductId
+			CollectibleLowestAvailableResaleItemInstanceId = p1.collectibleItemDetails.collectibleLowestAvailableResaleItemInstanceId
 		end
 		return {
 			collectibleItemId = p1.collectibleItemId,
-			collectibleLowestResalePrice = lowestResalePrice,
-			collectibleLowestAvailableResaleProductId = collectibleLowestAvailableResaleProductId,
-			collectibleLowestAvailableResaleItemInstanceId = collectibleLowestAvailableResaleItemInstanceId
+			collectibleLowestResalePrice = LowestResalePrice,
+			collectibleLowestAvailableResaleProductId = CollectibleLowestAvailableResaleProductId,
+			collectibleLowestAvailableResaleItemInstanceId = CollectibleLowestAvailableResaleItemInstanceId
 		}
 	end,
-	shouldShowPriceLabel = function(p1)
-		-- upvalues: priceStatusModule (ref)
-		return if p1 ~= nil then if p1 ~= priceStatusModule.PurchaseFromResale then p1 == priceStatusModule.PurchaseFromRoblox else true else true
+	shouldShowPriceLabel = function(PurchaseFromResale): boolean --[[ Line: 147 ]]
+		-- upvalues: PriceStatusModule (copy)
+		return PurchaseFromResale == nil or (PurchaseFromResale == PriceStatusModule.PurchaseFromResale or PurchaseFromResale == PriceStatusModule.PurchaseFromRoblox)
 	end
 }

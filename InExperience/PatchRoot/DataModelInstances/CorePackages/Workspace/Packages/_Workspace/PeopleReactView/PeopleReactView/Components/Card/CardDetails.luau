@@ -1,130 +1,132 @@
-﻿local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
-local guiService = game:GetService("GuiService")
-local peopleReactView = script:FindFirstAncestor("PeopleReactView")
-local parent = peopleReactView.Parent
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local formatUsername = require(parent.UserProfiles).Formatters.formatUsername
-local foundationModule = require(parent.Foundation)
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local controlState = foundationModule.Enums.ControlState
-local iconName = foundationModule.Enums.IconName
-local iconVariant = foundationModule.Enums.IconVariant
-local inputSize = foundationModule.Enums.InputSize
-local stateLayerAffordance = foundationModule.Enums.StateLayerAffordance
-local iconButton = foundationModule.IconButton
-local text = foundationModule.Text
-local view = foundationModule.View
-local connectButtonModule = require(peopleReactView.Components.Card.ConnectButton)
-local personButtonConfigsModule = require(peopleReactView.Configs.PersonButtonConfigs)
-local useGetPeopleServiceModule = require(peopleReactView.Hooks.useGetPeopleService)
-local useInExperienceCombinedNameModule = require(peopleReactView.Hooks.useInExperienceCombinedName)
-local useIsComponentInputEndedModule = require(peopleReactView.Hooks.useIsComponentInputEnded)
-local rbxAnalyticsServiceExposePlaySessionIdEngineFeature = game:GetEngineFeature("RbxAnalyticsServiceExposePlaySessionId")
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagAddIEMProfilePage = sharedFlagsModule.FFlagAddIEMProfilePage
-local fFlagSideSheetOpenPeoplePage = sharedFlagsModule.FFlagSideSheetOpenPeoplePage
+﻿local RbxAnalyticsService = game:GetService("RbxAnalyticsService")
+local GuiService = game:GetService("GuiService")
+local PeopleReactView = script:FindFirstAncestor("PeopleReactView")
+local Parent = PeopleReactView.Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local FormatUsernameFunction = require(Parent.UserProfiles).Formatters.formatUsername
+local FoundationModule = require(Parent.Foundation)
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local ControlState = FoundationModule.Enums.ControlState
+local IconName = FoundationModule.Enums.IconName
+local IconVariant = FoundationModule.Enums.IconVariant
+local InputSize = FoundationModule.Enums.InputSize
+local StateLayerAffordance = FoundationModule.Enums.StateLayerAffordance
+local IconButton = FoundationModule.IconButton
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local ConnectButtonModule = require(PeopleReactView.Components.Card.ConnectButton)
+local PersonButtonConfigsModule = require(PeopleReactView.Configs.PersonButtonConfigs)
+local UseGetPeopleServiceModule = require(PeopleReactView.Hooks.useGetPeopleService)
+local UseInExperienceCombinedNameModule = require(PeopleReactView.Hooks.useInExperienceCombinedName)
+local UseIsComponentInputEndedModule = require(PeopleReactView.Hooks.useIsComponentInputEnded)
+local RbxAnalyticsServiceExposePlaySessionIdEngineFeature = game:GetEngineFeature("RbxAnalyticsServiceExposePlaySessionId")
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagAddIEMProfilePage = SharedFlagsModule.FFlagAddIEMProfilePage
+local FFlagSideSheetOpenPeoplePage = SharedFlagsModule.FFlagSideSheetOpenPeoplePage
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), fFlagAddIEMProfilePage (ref), useGetPeopleServiceModule (ref), useInExperienceCombinedNameModule (ref), useIsComponentInputEndedModule (ref), controlState (ref), fFlagSideSheetOpenPeoplePage (ref), personButtonConfigsModule (ref), signalsReactModule (ref), iconName (ref), iconVariant (ref), rbxAnalyticsServiceExposePlaySessionIdEngineFeature (ref), rbxAnalyticsService (ref), guiService (ref), connectButtonModule (ref), view (ref), stateLayerAffordance (ref), iconButton (ref), buttonVariant (ref), inputSize (ref), text (ref), formatUsername (ref)
-	local var1 = reactModule.useRef(nil)
-	local var2 = if fFlagAddIEMProfilePage then useGetPeopleServiceModule("PeopleAnalyticsManager") else nil
-	local var3 = if fFlagAddIEMProfilePage then useGetPeopleServiceModule("SettingsHubService") else nil
-	local var4 = useInExperienceCombinedNameModule(p1.person.UserId, p1.person.DisplayName)
-	local var5 = useIsComponentInputEndedModule(var1)
-	local var6, var7 = reactModule.useState(false)
-	local var8 = reactModule.useCallback(function(p2)
-		-- upvalues: var7 (ref), controlState (copy)
-		var7(if p2 ~= controlState.Hover then p2 == controlState.Pressed else true)
+return ReactModule.memo(function(p1) --[[ Line: 47 | Named "CardDetails" ]]
+	-- upvalues: ReactModule (copy), FFlagAddIEMProfilePage (copy), UseGetPeopleServiceModule (copy), UseInExperienceCombinedNameModule (copy), UseIsComponentInputEndedModule (copy), ControlState (copy), FFlagSideSheetOpenPeoplePage (copy), PersonButtonConfigsModule (copy), SignalsReactModule (copy), IconName (copy), IconVariant (copy), RbxAnalyticsServiceExposePlaySessionIdEngineFeature (copy), RbxAnalyticsService (copy), GuiService (copy), ConnectButtonModule (copy), View (copy), StateLayerAffordance (copy), IconButton (copy), ButtonVariant (copy), InputSize (copy), Text (copy), FormatUsernameFunction (copy)
+	local UseRefResult = ReactModule.useRef(nil)
+	local PeopleAnalyticsManager = if FFlagAddIEMProfilePage then UseGetPeopleServiceModule("PeopleAnalyticsManager") else nil
+	local SettingsHubService = if FFlagAddIEMProfilePage then UseGetPeopleServiceModule("SettingsHubService") else nil
+	local UseInExperienceCombinedNameModuleResult = UseInExperienceCombinedNameModule(p1.person.UserId, p1.person.DisplayName)
+	local UseIsComponentInputEndedModuleResult = UseIsComponentInputEndedModule(UseRefResult)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseResult = ReactModule.useCallback(function(Hover) --[[ Line: 63 ]]
+		-- upvalues: UseStateResult2 (copy), ControlState (upval)
+		UseStateResult2(Hover == ControlState.Hover or Hover == ControlState.Pressed)
 	end, {})
-	local var9 = nil
-	local var10 = nil
-	local var11 = nil
-	local var12 = nil
+	local UseMemoResult = nil
+	local UseMemoResult1 = nil
+	local UseSignalStateResult = nil
+	local UseResult1 = nil
 	
-	if not fFlagSideSheetOpenPeoplePage then
-		local var13 = useGetPeopleServiceModule("FriendStatusStore")
-		local var14 = useGetPeopleServiceModule("Constants")
-		local var15 = personButtonConfigsModule(p1.person.UserId)
-		var9 = reactModule.useMemo(function()
-			-- upvalues: var15 (ref), var14 (ref)
-			return var15[var14.PERSON_BUTTONS.ADD_FRIEND]
-		end, { var15 })
-		local var16 = signalsReactModule.useSignalState(var13.getFriendStatus(p1.person.UserId))
-		local var17 = signalsReactModule.useSignalState(var13.getIsFriendButtonGrayedOut(p1.person.UserId))
-		var10 = reactModule.useMemo(function()
-			-- upvalues: var16 (ref), iconName (copy), iconVariant (copy), var17 (ref)
-			return if var16 then {
-				name = iconName.PersonCheck,
-				variant = iconVariant.Filled
-			} elseif var17 then { name = iconName.Clock, variant = iconVariant.Filled } else {
-				name = iconName.PersonPlus,
-				variant = iconVariant.Regular
+	if not FFlagSideSheetOpenPeoplePage then
+		local FriendStatusStore = UseGetPeopleServiceModule("FriendStatusStore")
+		local Constants = UseGetPeopleServiceModule("Constants")
+		local PersonButtonConfigsModuleResult = PersonButtonConfigsModule(p1.person.UserId)
+		UseMemoResult = ReactModule.useMemo(function() --[[ Line: 74 ]]
+			-- upvalues: PersonButtonConfigsModuleResult (copy), Constants (copy)
+			return PersonButtonConfigsModuleResult[Constants.PERSON_BUTTONS.ADD_FRIEND]
+		end, { PersonButtonConfigsModuleResult })
+		local UseSignalStateResult1 = SignalsReactModule.useSignalState(FriendStatusStore.getFriendStatus(p1.person.UserId))
+		local UseSignalStateResult2 = SignalsReactModule.useSignalState(FriendStatusStore.getIsFriendButtonGrayedOut(p1.person.UserId))
+		UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 82 ]]
+			-- upvalues: UseSignalStateResult1 (copy), IconName (upval), IconVariant (upval), UseSignalStateResult2 (copy)
+			return if UseSignalStateResult1 then {
+				name = IconName.PersonCheck,
+				variant = IconVariant.Filled
+			} elseif UseSignalStateResult2 then { name = IconName.Clock, variant = IconVariant.Filled } else {
+				name = IconName.PersonPlus,
+				variant = IconVariant.Regular
 			}
-		end, { var16, var17 })
-		var11 = signalsReactModule.useSignalState(var13.getIsFriendButtonDisabled(p1.person.UserId))
-		var12 = reactModule.useCallback(function()
-			-- upvalues: var9 (write), var14 (ref)
-			var9.onActivated(var14.ANALYTICS.ENTRY_POINT.PEOPLE_CARD)
-		end, { var9.onActivated })
+		end, { UseSignalStateResult1, UseSignalStateResult2 })
+		UseSignalStateResult = SignalsReactModule.useSignalState(FriendStatusStore.getIsFriendButtonDisabled(p1.person.UserId))
+		UseResult1 = ReactModule.useCallback(function() --[[ Line: 104 ]]
+			-- upvalues: UseMemoResult (ref), Constants (copy)
+			UseMemoResult.onActivated(Constants.ANALYTICS.ENTRY_POINT.PEOPLE_CARD)
+		end, { UseMemoResult.onActivated })
 	end
-	return reactModule.createElement(view, {
+	local UseResult2 = if FFlagAddIEMProfilePage then ReactModule.useCallback(function() --[[ Line: 110 ]]
+		-- upvalues: SettingsHubService (copy), p1 (copy), RbxAnalyticsServiceExposePlaySessionIdEngineFeature (upval), RbxAnalyticsService (upval), PeopleAnalyticsManager (copy), GuiService (upval)
+		local HubRefResult = SettingsHubService.hubRef()
+		
+		if HubRefResult then
+			HubRefResult:SwitchToReactPage(HubRefResult.PlayerProfilePage, {
+				userId = p1.person.UserId,
+				inspectAvatar = function() --[[ Line: 115 ]]
+					-- upvalues: RbxAnalyticsServiceExposePlaySessionIdEngineFeature (upval), RbxAnalyticsService (upval), PeopleAnalyticsManager (upval), GuiService (upval), p1 (upval), HubRefResult (copy)
+					PeopleAnalyticsManager:trackInspectButton(game.GameId, if RbxAnalyticsServiceExposePlaySessionIdEngineFeature then RbxAnalyticsService:GetPlaySessionId() else nil, "player_profile")
+					GuiService:InspectPlayerFromUserIdWithCtx(p1.person.UserId, "playerProfile")
+					HubRefResult:SetVisibility(false)
+				end,
+				closePage = function() --[[ Line: 124 ]]
+					-- upvalues: HubRefResult (copy)
+					HubRefResult:CloseReactPage()
+				end
+			})
+		end
+	end, {}) else nil
+	
+	return ReactModule.createElement(View, {
 		tag = "row size-full-1400 align-y-center padding-x-small radius-medium",
 		LayoutOrder = p1.layoutOrder,
 		stateLayer = {
-			affordance = if var6 or var5 then stateLayerAffordance.None else stateLayerAffordance.Background
+			affordance = if UseStateResult or UseIsComponentInputEndedModuleResult then StateLayerAffordance.None else StateLayerAffordance.Background
 		},
-		onActivated = if fFlagAddIEMProfilePage then if fFlagAddIEMProfilePage then reactModule.useCallback(function()
-			-- upvalues: var3 (ref), p1 (ref), rbxAnalyticsServiceExposePlaySessionIdEngineFeature (copy), rbxAnalyticsService (copy), var2 (ref), guiService (copy)
-			local var18 = var3.hubRef()
-			
-			if var18 then
-				var18:SwitchToReactPage(var18.PlayerProfilePage, {
-					userId = p1.person.UserId,
-					inspectAvatar = function()
-						-- upvalues: rbxAnalyticsServiceExposePlaySessionIdEngineFeature (copy), rbxAnalyticsService (copy), var2 (copy), guiService (copy), p1 (copy), var18 (ref)
-						var2:trackInspectButton(game.GameId, if rbxAnalyticsServiceExposePlaySessionIdEngineFeature then rbxAnalyticsService:GetPlaySessionId() else nil, "player_profile")
-						guiService:InspectPlayerFromUserIdWithCtx(p1.person.UserId, "playerProfile")
-						var18:SetVisibility(false)
-					end,
-					closePage = function()
-						-- upvalues: var18 (ref)
-						var18:CloseReactPage()
-					end
-				})
-			end
-		end, {}) else nil else nil,
-		ref = var1
+		onActivated = if FFlagAddIEMProfilePage then UseResult2 else nil,
+		ref = UseRefResult
 	}, {
-		NameContainer = reactModule.createElement(view, { tag = "col fill auto-y", LayoutOrder = 1 }, {
-			Name = reactModule.createElement(text, {
+		NameContainer = ReactModule.createElement(View, { tag = "col fill auto-y", LayoutOrder = 1 }, {
+			Name = ReactModule.createElement(Text, {
 				tag = "size-full-0 auto-y content-emphasis text-title-medium text-align-x-left text-truncate-end padding-right-small",
 				LayoutOrder = 1,
-				Text = var4
+				Text = UseInExperienceCombinedNameModuleResult
 			}),
-			Handle = reactModule.createElement(text, {
+			Handle = ReactModule.createElement(Text, {
 				tag = "size-full-0 auto-y content-default text-body-medium text-align-x-left text-truncate-end padding-right-small",
 				LayoutOrder = 2,
-				Text = formatUsername(p1.person.Name)
+				Text = FormatUsernameFunction(p1.person.Name)
 			})
 		}),
-		ConnectButtonBackground = if fFlagSideSheetOpenPeoplePage then if p1.isCompactCardLayout then nil else reactModule.createElement(connectButtonModule, {
+		ConnectButtonBackground = if FFlagSideSheetOpenPeoplePage then if p1.isCompactCardLayout then nil else ReactModule.createElement(ConnectButtonModule, {
 			layoutOrder = 2,
 			person = p1.person,
-			onStateChanged = var8
-		}) else reactModule.createElement(view, {
+			onStateChanged = UseResult
+		}) else ReactModule.createElement(View, {
 			LayoutOrder = 2,
 			AutomaticSize = Enum.AutomaticSize.XY,
-			stateLayer = { affordance = stateLayerAffordance.None },
-			onStateChanged = var8
+			stateLayer = { affordance = StateLayerAffordance.None },
+			onStateChanged = UseResult
 		}, {
-			ConnectButton = reactModule.createElement(iconButton, {
-				icon = var10,
-				variant = if var11 then buttonVariant.Utility else buttonVariant.Standard,
-				size = inputSize.Medium,
-				isDisabled = var11,
-				Visible = var9.shouldShow(),
-				onActivated = var12
+			ConnectButton = ReactModule.createElement(IconButton, {
+				icon = UseMemoResult1,
+				variant = if UseSignalStateResult then ButtonVariant.Utility else ButtonVariant.Standard,
+				size = InputSize.Medium,
+				isDisabled = UseSignalStateResult,
+				Visible = UseMemoResult.shouldShow(),
+				onActivated = UseResult1
 			})
 		})
 	})

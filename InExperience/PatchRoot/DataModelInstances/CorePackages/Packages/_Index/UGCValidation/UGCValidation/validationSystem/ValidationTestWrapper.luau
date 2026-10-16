@@ -1,16 +1,16 @@
-﻿local parent = script.Parent.Parent
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local validationModuleLoaderModule = require(parent.validationSystem.ValidationModuleLoader)
-local fetchAllDesiredDataModule = require(parent.validationSystem.dataFetchModules.FetchAllDesiredData)
-local validationReporterModule = require(parent.validationSystem.ValidationReporter)
-local getFFlagDebugUGCValidationPrintNewStructureResultsModule = require(parent.flags.getFFlagDebugUGCValidationPrintNewStructureResults)
-local getFFlagUGCValidationFetchErrorMethodModule = require(parent.flags.getFFlagUGCValidationFetchErrorMethod)
-local validationConstantsModule = require(parent.validationSystem.ValidationConstants)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local telemetryService = game:GetService("TelemetryService")
+﻿local Parent = script.Parent.Parent
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ValidationModuleLoaderModule = require(Parent.validationSystem.ValidationModuleLoader)
+local FetchAllDesiredDataModule = require(Parent.validationSystem.dataFetchModules.FetchAllDesiredData)
+local ValidationReporterModule = require(Parent.validationSystem.ValidationReporter)
+local GetFFlagDebugUGCValidationPrintNewStructureResultsModule = require(Parent.flags.getFFlagDebugUGCValidationPrintNewStructureResults)
+local GetFFlagUGCValidationFetchErrorMethodModule = require(Parent.flags.getFFlagUGCValidationFetchErrorMethod)
+local ValidationConstantsModule = require(Parent.validationSystem.ValidationConstants)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
+local TelemetryService = game:GetService("TelemetryService")
 game:DefineFastInt("SingleValidationTelemetryThrottleHundrethsPercent", 10000)
-local t = {
+local config = {
 	eventName = "UgcSingleValidationFinished",
 	description = "Report single ugc validation result to EventIngest backend.",
 	links = "https://create.roblox.com/docs/art/validation-errors",
@@ -19,127 +19,128 @@ local t = {
 	lastUpdated = { 25, 9, 24 }
 }
 
-local function reportSingleResult(p1, p2, p3, p4, p5)
-	-- upvalues: telemetryService (ref), t (ref)
-	telemetryService:LogEvent(t, {
+local function reportSingleResult(ValidationEnum, p1, Status, TelemetryContext, Duration) --[[ Line: 42 ]]
+	-- upvalues: TelemetryService (copy), config (copy)
+	TelemetryService:LogEvent(config, {
 		customFields = {
-			validationJobId = p2.jobId,
-			validationSource = p2.consumerConfig.source,
-			validationEnum = p1,
-			status = p3,
-			durationMs = p5,
-			additional_info = p4
+			validationJobId = p1.jobId,
+			validationSource = p1.consumerConfig.source,
+			validationEnum = ValidationEnum,
+			status = Status,
+			durationMs = Duration,
+			additional_info = TelemetryContext
 		}
 	})
 end
 
-local function getMissingData(p1, p2)
-	-- upvalues: fetchAllDesiredDataModule (ref)
-	local t = {}
+local function getMissingData(p1, ConditionalData) --[[ Line: 61 ]]
+	-- upvalues: FetchAllDesiredDataModule (copy)
+	local List = {}
 	
-	for i, v in p2 do
-		if p1[v] == nil or p1[v] == fetchAllDesiredDataModule.DATA_FETCH_FAILURE then
-			table.insert(t, v)
+	for _, value in ConditionalData do
+		if p1[value] == nil or p1[value] == FetchAllDesiredDataModule.DATA_FETCH_FAILURE then
+			table.insert(List, value)
 		end
 	end
-	return t
+	return List
 end
 
-local function _(p3, p4, p5)
-	-- upvalues: reportSingleResult (ref)
-	local var1 = p5:complete()
-	reportSingleResult(p3, p4, var1.status, var1.telemetryContext, var1.duration)
+local function _(ValidationEnum, p2, p3) --[[ Line: 72 | Named "complete" ]]
+	-- upvalues: reportSingleResult (copy)
+	local CompleteResult = p3:complete()
+	reportSingleResult(ValidationEnum, p2, CompleteResult.status, CompleteResult.telemetryContext, CompleteResult.duration)
 	
-	return var1
+	return CompleteResult
 end
 
-return function(p3, p4, p5)
-	-- upvalues: validationModuleLoaderModule (ref), validationReporterModule (ref), validationEnumsModule (ref), reportSingleResult (ref), getMissingData (ref), validationConstantsModule (ref), errorSourceStringsModule (ref), getFFlagUGCValidationFetchErrorMethodModule (ref), getFFlagDebugUGCValidationPrintNewStructureResultsModule (ref)
-	local v
-	local validationModule = validationModuleLoaderModule.getValidationModule(p3)
-	local var1 = validationReporterModule.new(p3, p4)
+return function(ValidationEnum, p2, p3) --[[ Line: 78 | Named "ValidationTestWrapper" ]]
+	-- upvalues: ValidationModuleLoaderModule (copy), ValidationReporterModule (copy), ValidationEnumsModule (copy), reportSingleResult (copy), getMissingData (copy), ValidationConstantsModule (copy), ErrorSourceStringsModule (copy), GetFFlagUGCValidationFetchErrorMethodModule (copy), GetFFlagDebugUGCValidationPrintNewStructureResultsModule (copy)
+	local ValidationModule = ValidationModuleLoaderModule.getValidationModule(ValidationEnum)
+	local NewValidationReporter = ValidationReporterModule.new(ValidationEnum, p2)
 	
-	for i, v in validationModule.prereqTests do
-		if p5[v] ~= validationEnumsModule.Status.PASS then
-			local var2 = var1:complete()
-			reportSingleResult(p3, p4, var2.status, var2.telemetryContext, var2.duration)
+	for _, prereqTest in ValidationModule.prereqTests do
+		if p3[prereqTest] ~= ValidationEnumsModule.Status.PASS then
+			local CompleteResult = NewValidationReporter:complete()
+			reportSingleResult(ValidationEnum, p2, CompleteResult.status, CompleteResult.telemetryContext, CompleteResult.duration)
 			
-			return var2
+			return CompleteResult
 		end
 	end
-	local status
-	local var3 = getMissingData(p4, validationModule.requiredData)
+	local MissingData = getMissingData(p2, ValidationModule.requiredData)
 	
-	if #var3 > 0 then
-		var1:err(`Missing required data: {table.concat(var3, ", ")}`)
-		local var4 = var1:complete()
-		reportSingleResult(p3, p4, var4.status, var4.telemetryContext, var4.duration)
+	if #MissingData > 0 then
+		NewValidationReporter:err(`Missing required data: {table.concat(MissingData, ", ")}`)
+		local CompleteResult = NewValidationReporter:complete()
+		reportSingleResult(ValidationEnum, p2, CompleteResult.status, CompleteResult.telemetryContext, CompleteResult.duration)
 		
-		return var4
-	elseif validationModule.isAssetQualityModule then
-		local var5 = p4.aqsSummaryData[p3]
+		return CompleteResult
+	end
+	if ValidationModule.isAssetQualityModule then
+		local AqsSummary = p2.aqsSummaryData[ValidationEnum]
 		
-		if var5 and var5.Error then
-			status = false
+		if AqsSummary and AqsSummary.Error then
+			local Enabled = false
 			
-			for i_1, v_1 in var5.Error do
-				if validationModule.knownAqsUserErrors[v_1] == nil then
-					if table.find(validationConstantsModule.AQSInternalErrorEnum, v_1) ~= nil and status == false then
-						var1:fail(errorSourceStringsModule.Keys.AQSInternalError)
-						status = true
-						continue
-					end
-					var1:err(`Unexpected error enum {v_1}`)
-					local var6 = var1:complete()
-					reportSingleResult(p3, p4, var6.status, var6.telemetryContext, var6.duration)
-					
-					return var6
-				else
-					var1:fail(validationModule.knownAqsUserErrors[v_1])
+			for _, value in AqsSummary.Error do
+				if ValidationModule.knownAqsUserErrors[value] ~= nil then
+					NewValidationReporter:fail(ValidationModule.knownAqsUserErrors[value])
+					continue
 				end
+				if table.find(ValidationConstantsModule.AQSInternalErrorEnum, value) == nil or Enabled ~= false then
+					NewValidationReporter:err(`Unexpected error enum {value}`)
+					local CompleteResult = NewValidationReporter:complete()
+					reportSingleResult(ValidationEnum, p2, CompleteResult.status, CompleteResult.telemetryContext, CompleteResult.duration)
+					
+					return CompleteResult
+				end
+				NewValidationReporter:fail(ErrorSourceStringsModule.Keys.AQSInternalError)
+				Enabled = true
 			end
-			v = var1:complete()
-			reportSingleResult(p3, p4, v.status, v.telemetryContext, v.duration)
+			local CompleteResult = NewValidationReporter:complete()
+			reportSingleResult(ValidationEnum, p2, CompleteResult.status, CompleteResult.telemetryContext, CompleteResult.duration)
 			
-			return v
+			return CompleteResult
+		end
+	end
+	NewValidationReporter:begin()
+	
+	if #getMissingData(p2, ValidationModule.conditionalData) > 0 then
+		local CompleteResult = NewValidationReporter:complete()
+		reportSingleResult(ValidationEnum, p2, CompleteResult.status, CompleteResult.telemetryContext, CompleteResult.duration)
+		
+		return CompleteResult
+	end
+	local Success, Result = pcall(function() --[[ Line: 133 ]]
+		-- upvalues: ValidationModule (copy), NewValidationReporter (copy), p2 (copy)
+		ValidationModule.run(NewValidationReporter, p2)
+	end)
+	
+	if not Success then
+		if type(Result) == "table" and Result.__forceError then
+			error(Result.message, 0)
+		end
+		if GetFFlagUGCValidationFetchErrorMethodModule() and type(Result) == "table" and Result.__fetchError then
+			local Inverted: boolean = ValidationModule.shadowFlag() and not ValidationModule.fflag()
+			
+			if p2.consumerConfig.consumerEnv == ValidationEnumsModule.ConsumerEnv.Backend and not Inverted then
+				error(Result.message, 0)
+			end
+			NewValidationReporter:err(Result.message)
+			local CompleteResult = NewValidationReporter:complete()
+			reportSingleResult(ValidationEnum, p2, CompleteResult.status, CompleteResult.telemetryContext, CompleteResult.duration)
+			
+			return CompleteResult
 		else
-			var1:begin()
-			
-			if #getMissingData(p4, validationModule.conditionalData) > 0 then
-				status = var1:complete()
-				reportSingleResult(p3, p4, status.status, status.telemetryContext, status.duration)
-				
-				return status
+			if GetFFlagDebugUGCValidationPrintNewStructureResultsModule() then
+				print("Validation error:", Result)
+				print("As this is in debug mode, we will re-call the function for a full error trace: ")
+				ValidationModule.run(NewValidationReporter, p2)
 			end
-			ok, status = pcall(function()
-				-- upvalues: validationModule (ref), var1 (ref), p4 (ref)
-				validationModule.run(var1, p4)
-			end)
-			
-			if not ok then
-				if type(status) == "table" and status.__forceError then
-					error(status.message, 0)
-				end
-				if getFFlagUGCValidationFetchErrorMethodModule() and type(status) == "table" and status.__fetchError then
-					if p4.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.Backend then
-						error(status.message, 0)
-					end
-					var1:err(status.message)
-					v = var1:complete()
-					reportSingleResult(p3, p4, v.status, v.telemetryContext, v.duration)
-					
-					return v
-				elseif getFFlagDebugUGCValidationPrintNewStructureResultsModule() then
-					print("Validation error:", status)
-					print("As this is in debug mode, we will re-call the function for a full error trace: ")
-					validationModule.run(var1, p4)
-				end
-				var1:err(status)
-			end
-			v = var1:complete()
-			reportSingleResult(p3, p4, v.status, v.telemetryContext, v.duration)
-			
-			return v
+			NewValidationReporter:err(Result)
 		end
 	end
+	local CompleteResult = NewValidationReporter:complete()
+	reportSingleResult(ValidationEnum, p2, CompleteResult.status, CompleteResult.telemetryContext, CompleteResult.duration)
+	
+	return CompleteResult
 end

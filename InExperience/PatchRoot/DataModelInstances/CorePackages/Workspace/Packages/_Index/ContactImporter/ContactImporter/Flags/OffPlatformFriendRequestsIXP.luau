@@ -1,75 +1,57 @@
 ﻿game:DefineFastInt("OffPlatformFriendRequestsRolloutEnabled", 0)
-local contactImporter = script:FindFirstAncestor("ContactImporter")
-local dependenciesModule = require(contactImporter.dependencies)
-local parent = contactImporter.Parent
-local setupIsRolloutEnabledForUser = dependenciesModule.SocialLibraries.ReleaseHelpers.setupIsRolloutEnabledForUser
-local getFStringSocialFriendsLayer = dependenciesModule.getFStringSocialFriendsLayer
-local useUserExperiment = dependenciesModule.useUserExperiment
-local IXPVariantsModule = require(contactImporter.Common.IXPVariants)
-local var1 = require(script.Parent.getFStringOffPlatformIXPName)()
-local fFlagContactImporterIXPCleanup = require(parent.SharedFlags).FFlagContactImporterIXPCleanup
+local ContactImporter = script:FindFirstAncestor("ContactImporter")
+local DependenciesModule = require(ContactImporter.dependencies)
+local GetFStringSocialFriendsLayerFunction = DependenciesModule.getFStringSocialFriendsLayer
+local UseUserExperimentFunction = DependenciesModule.useUserExperiment
+local IXPVariantsModule = require(ContactImporter.Common.IXPVariants)
+local v1 = require(script.Parent.getFStringOffPlatformIXPName)()
 
-local var2 = function()
+local function _(p1) --[[ Line: 25 ]]
+	-- upvalues: v1 (copy)
+	return if p1 then p1[v1] else nil
+end
+
+local function GetExperimentVariant(p1) --[[ Line: 34 ]]
+	-- upvalues: GetFStringSocialFriendsLayerFunction (copy), v1 (copy)
+	local v2 = if p1 then p1[GetFStringSocialFriendsLayerFunction()] else nil
+	
+	return if v2 then v2[v1] else nil
+end
+
+local SetupIsRolloutEnabledForUserResult = DependenciesModule.SocialLibraries.ReleaseHelpers.setupIsRolloutEnabledForUser(function() --[[ Line: 21 ]]
 	return game:GetFastInt("OffPlatformFriendRequestsRolloutEnabled")
-end
+end)
 
-local _ = function(p1)
-	-- upvalues: var1 (ref)
-	return if p1 then p1[var1] else nil
-end
-
-local var3 = function(p1)
-	-- upvalues: getFStringSocialFriendsLayer (ref), var1 (ref)
-	local var4 = if p1 then p1[getFStringSocialFriendsLayer()] else nil
+local function ExperimentOrRolloutEnabled(p1) --[[ Line: 40 ]]
+	-- upvalues: GetFStringSocialFriendsLayerFunction (copy), v1 (copy), IXPVariantsModule (copy), SetupIsRolloutEnabledForUserResult (copy)
+	local v2 = if p1 then p1[GetFStringSocialFriendsLayerFunction()] else nil
+	local BLENDED = if v2 then v2[v1] else nil
 	
-	return if var4 then var4[var1] else nil
+	return (if BLENDED then BLENDED == IXPVariantsModule.INVITES_ONLY or BLENDED == IXPVariantsModule.BLENDED else false) or SetupIsRolloutEnabledForUserResult()
 end
 
-local var4 = setupIsRolloutEnabledForUser(var2)
-
-local var5 = function(p1)
-	-- upvalues: getFStringSocialFriendsLayer (ref), var1 (ref), IXPVariantsModule (ref), var4 (ref)
-	local var6 = if p1 then p1[getFStringSocialFriendsLayer()] else nil
-	local var7 = if var6 then var6[var1] else nil
-	local var8 = false
-	
-	if var7 then
-		var7 = true
-		
-		if var7 ~= IXPVariantsModule.INVITES_ONLY then
-			var7 = var7 == IXPVariantsModule.BLENDED
-		end
-		var8 = var7
-	end
-	return var8 or var4()
+local function UseOffPlatformFriendRequestsVariant() --[[ Line: 51 ]]
+	-- upvalues: UseUserExperimentFunction (copy), GetFStringSocialFriendsLayerFunction (copy), GetExperimentVariant (copy)
+	return UseUserExperimentFunction({ GetFStringSocialFriendsLayerFunction() }, GetExperimentVariant)
 end
 
-return if fFlagContactImporterIXPCleanup then nil else {
-	experimentOrRolloutEnabled = var5,
+local function UseOffPlatformFriendRequestsEnabled() --[[ Line: 57 ]]
+	-- upvalues: UseUserExperimentFunction (copy), GetFStringSocialFriendsLayerFunction (copy), ExperimentOrRolloutEnabled (copy)
+	return UseUserExperimentFunction({ GetFStringSocialFriendsLayerFunction() }, ExperimentOrRolloutEnabled)
+end
+
+return if require(ContactImporter.Parent.SharedFlags).FFlagContactImporterIXPCleanup then nil else {
+	experimentOrRolloutEnabled = ExperimentOrRolloutEnabled,
 	IXPVariants = IXPVariantsModule,
-	useOffPlatformFriendRequestsVariant = function()
-		-- upvalues: useUserExperiment (ref), getFStringSocialFriendsLayer (ref), var3 (ref)
-		return useUserExperiment({ getFStringSocialFriendsLayer() }, var3)
-	end,
-	useOffPlatformFriendRequestsEnabled = function()
-		-- upvalues: useUserExperiment (ref), getFStringSocialFriendsLayer (ref), var5 (ref)
-		return useUserExperiment({ getFStringSocialFriendsLayer() }, var5)
-	end,
-	getExperimentVariant = var3,
-	isRolloutEnabled = function(p1)
-		-- upvalues: getFStringSocialFriendsLayer (ref), var1 (ref), IXPVariantsModule (ref), var4 (ref)
-		local var6 = if p1 then p1[getFStringSocialFriendsLayer()] else nil
-		local var7 = if var6 then var6[var1] else nil
-		local var8 = false
+	useOffPlatformFriendRequestsVariant = UseOffPlatformFriendRequestsVariant,
+	useOffPlatformFriendRequestsEnabled = UseOffPlatformFriendRequestsEnabled,
+	getExperimentVariant = GetExperimentVariant,
+	isRolloutEnabled = function(p1) --[[ Line: 72 ]]
+		-- upvalues: GetFStringSocialFriendsLayerFunction (copy), v1 (copy), IXPVariantsModule (copy), SetupIsRolloutEnabledForUserResult (copy)
+		local v2 = if p1 then p1[GetFStringSocialFriendsLayerFunction()] else nil
+		local BLENDED = if v2 then v2[v1] else nil
+		local IsBLENDEDMatch = (if BLENDED then BLENDED == IXPVariantsModule.INVITES_ONLY or BLENDED == IXPVariantsModule.BLENDED else false) or SetupIsRolloutEnabledForUserResult()
 		
-		if var7 then
-			var7 = true
-			
-			if var7 ~= IXPVariantsModule.INVITES_ONLY then
-				var7 = var7 == IXPVariantsModule.BLENDED
-			end
-			var8 = var7
-		end
-		return if var8 or var4() then IXPVariantsModule.BLENDED else IXPVariantsModule.CONTROL
+		return if IsBLENDEDMatch then IXPVariantsModule.BLENDED else IXPVariantsModule.CONTROL
 	end
 }

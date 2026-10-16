@@ -1,170 +1,172 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local localizationService = game:GetService("LocalizationService")
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local useNavigation = require(parent.Navigation).useNavigation
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local numberLocalization = require(parent.Localization).NumberLocalization
-local useOpenRobuxUpsellModule = require(script.Parent.useOpenRobuxUpsell)
-local robloxAppHooksModule = require(parent.RobloxAppHooks)
-local eventNamesModule = require(profilePlatform.Analytics.EventNames)
-local useProfileAnalyticsContextModule = require(profilePlatform.Contexts.useProfileAnalyticsContext)
-local fFlagProfileInspectAndBuyRefreshBalanceAfterPurchaseModule = require(profilePlatform.Flags.FFlagProfileInspectAndBuyRefreshBalanceAfterPurchase)
-local fFlagProfileInspectAndBuyAutoFocusModule = require(profilePlatform.Flags.FFlagProfileInspectAndBuyAutoFocus)
-local fFlagProfileInspectAndBuyKeepUpsellDialogOpenModule = require(profilePlatform.Flags.FFlagProfileInspectAndBuyKeepUpsellDialogOpen)
-local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
-local fFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module = require(profilePlatform.Flags.FFlagSocialEnableProfileInspectAndBuyAnalyticsV2)
-local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-local appFocusRoot = focusNavigationUtilsModule.AppFocusRoot
-local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
-local focusNavigationEventNameEnum = focusNavigationUtilsModule.FocusNavigationEventNameEnum
-local inputHandlersModule = require(parent.InputHandlers)
-local view = foundationModule.View
-local text = foundationModule.Text
-local dialog = foundationModule.Dialog
-local dialogSize = foundationModule.Enums.DialogSize
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local orientation = foundationModule.Enums.Orientation
-local iconName = foundationModule.Enums.IconName
-local getIconRichText = foundationModule.Utility.getIconRichText
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local LocalizationService = game:GetService("LocalizationService")
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local NumberLocalization = require(Parent.Localization).NumberLocalization
+local UseOpenRobuxUpsellModule = require(script.Parent.useOpenRobuxUpsell)
+local RobloxAppHooksModule = require(Parent.RobloxAppHooks)
+local EventNamesModule = require(ProfilePlatform.Analytics.EventNames)
+local UseProfileAnalyticsContextModule = require(ProfilePlatform.Contexts.useProfileAnalyticsContext)
+local FFlagProfileInspectAndBuyRefreshBalanceAfterPurchaseModule = require(ProfilePlatform.Flags.FFlagProfileInspectAndBuyRefreshBalanceAfterPurchase)
+local FFlagProfileInspectAndBuyAutoFocusModule = require(ProfilePlatform.Flags.FFlagProfileInspectAndBuyAutoFocus)
+local FFlagProfileInspectAndBuyKeepUpsellDialogOpenModule = require(ProfilePlatform.Flags.FFlagProfileInspectAndBuyKeepUpsellDialogOpen)
+local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
+local FFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module = require(ProfilePlatform.Flags.FFlagSocialEnableProfileInspectAndBuyAnalyticsV2)
+local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
+local AppFocusRoot = FocusNavigationUtilsModule.AppFocusRoot
+local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
+local FocusNavigationEventNameEnum = FocusNavigationUtilsModule.FocusNavigationEventNameEnum
+local InputHandlersModule = require(Parent.InputHandlers)
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local Dialog = FoundationModule.Dialog
+local DialogSize = FoundationModule.Enums.DialogSize
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local Orientation = FoundationModule.Enums.Orientation
+local IconName = FoundationModule.Enums.IconName
+local GetIconRichTextFunction = FoundationModule.Utility.getIconRichText
 
-local function AmountLine(p1)
-	-- upvalues: numberLocalization (ref), localizationService (ref), reactModule (ref), view (ref), text (ref), getIconRichText (ref), iconName (ref)
-	local var1 = if p1.isAlert then "text-title-medium content-alert" else "text-body-medium content-default"
+local function AmountLine(p1) --[[ Line: 44 ]]
+	-- upvalues: NumberLocalization (copy), LocalizationService (copy), ReactModule (copy), View (copy), Text (copy), GetIconRichTextFunction (copy), IconName (copy)
+	local TextTitleMediumContentAlert: string = if p1.isAlert then "text-title-medium content-alert" else "text-body-medium content-default"
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "row align-y-center gap-large size-full-0 auto-y",
 		LayoutOrder = p1.layoutOrder
 	}, {
-		Label = reactModule.createElement(view, { LayoutOrder = 1, tag = "fill auto-y" }, {
-			Text = reactModule.createElement(text, {
+		Label = ReactModule.createElement(View, { LayoutOrder = 1, tag = "fill auto-y" }, {
+			Text = ReactModule.createElement(Text, {
 				Text = p1.label,
-				tag = `auto-xy text-align-x-left {var1}`
+				tag = `auto-xy text-align-x-left {TextTitleMediumContentAlert}`
 			})
 		}),
-		Amount = reactModule.createElement(view, { LayoutOrder = 2, tag = "auto-xy" }, {
-			Text = reactModule.createElement(text, {
+		Amount = ReactModule.createElement(View, { LayoutOrder = 2, tag = "auto-xy" }, {
+			Text = ReactModule.createElement(Text, {
 				RichText = true,
-				Text = `{getIconRichText(iconName.Robux)} {numberLocalization.localize(p1.amount, localizationService.RobloxLocaleId)}`,
-				tag = `auto-xy text-align-x-right {var1}`
+				Text = `{GetIconRichTextFunction(IconName.Robux)} {NumberLocalization.localize(p1.amount, LocalizationService.RobloxLocaleId)}`,
+				tag = `auto-xy text-align-x-right {TextTitleMediumContentAlert}`
 			})
 		})
 	})
 end
 
-return function(p1)
-	-- upvalues: useNavigation (ref), fFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module (ref), useProfileAnalyticsContextModule (ref), fFlagProfileInspectAndBuyRefreshBalanceAfterPurchaseModule (ref), robloxAppHooksModule (ref), reactModule (ref), eventNamesModule (ref), useLocalization (ref), useOpenRobuxUpsellModule (ref), fFlagProfileInspectAndBuyKeepUpsellDialogOpenModule (ref), fFlagProfileInspectAndBuyAutoFocusModule (ref), reactFocusNavigationModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), appFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), dialog (ref), dialogSize (ref), view (ref), AmountLine (ref), orientation (ref), buttonVariant (ref)
-	local var1 = useNavigation()
-	local var2 = if fFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module then useProfileAnalyticsContextModule() else nil
-	local params = p1.navigation.state.params or {}
-	local totalPrice = params.totalPrice or 0
-	local var3 = if fFlagProfileInspectAndBuyRefreshBalanceAfterPurchaseModule then robloxAppHooksModule.useLocalRobuxBalance() else nil
-	local var4 = if fFlagProfileInspectAndBuyRefreshBalanceAfterPurchaseModule and var3 ~= nil then var3 else params.robuxBalance or 0
-	local maxValue = math.max(totalPrice - var4, 0)
+return function(p1) --[[ Line: 83 | Named "InsufficientRobuxDialog" ]]
+	-- upvalues: UseNavigationFunction (copy), FFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module (copy), UseProfileAnalyticsContextModule (copy), FFlagProfileInspectAndBuyRefreshBalanceAfterPurchaseModule (copy), RobloxAppHooksModule (copy), ReactModule (copy), EventNamesModule (copy), UseLocalizationFunction (copy), UseOpenRobuxUpsellModule (copy), FFlagProfileInspectAndBuyKeepUpsellDialogOpenModule (copy), FFlagProfileInspectAndBuyAutoFocusModule (copy), ReactFocusNavigationModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), AppFocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), Dialog (copy), DialogSize (copy), View (copy), AmountLine (copy), Orientation (copy), ButtonVariant (copy)
+	local UseNavigationResult = UseNavigationFunction()
+	local UseProfileAnalyticsContextModuleResult = if FFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module then UseProfileAnalyticsContextModule() else nil
+	local Params = p1.navigation.state.params or {}
+	local TotalPrice = Params.totalPrice or 0
+	local UseLocalRobuxBalanceResult = if FFlagProfileInspectAndBuyRefreshBalanceAfterPurchaseModule then RobloxAppHooksModule.useLocalRobuxBalance() else nil
+	local UseLocalRobuxBalanceResult1 = if FFlagProfileInspectAndBuyRefreshBalanceAfterPurchaseModule and UseLocalRobuxBalanceResult ~= nil then UseLocalRobuxBalanceResult else Params.robuxBalance or 0
+	local Largest = math.max(TotalPrice - UseLocalRobuxBalanceResult1, 0)
 	
-	if fFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module then
-		reactModule.useEffect(function()
-			-- upvalues: var2 (ref), eventNamesModule (copy), totalPrice (ref)
-			var2.fireAnalyticsEvent(eventNamesModule.InspectAvatarInsufficientRobuxShown, { totalPrice = totalPrice })
-		end, { var2, totalPrice })
+	if FFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module then
+		ReactModule.useEffect(function() --[[ Line: 99 ]]
+			-- upvalues: UseProfileAnalyticsContextModuleResult (copy), EventNamesModule (upval), TotalPrice (copy)
+			UseProfileAnalyticsContextModuleResult.fireAnalyticsEvent(EventNamesModule.InspectAvatarInsufficientRobuxShown, { totalPrice = TotalPrice })
+		end, { UseProfileAnalyticsContextModuleResult, TotalPrice })
 	end
-	local var5 = useLocalization({
+	local UseLocalizationResult = UseLocalizationFunction({
 		title = "IAPExperience.InsufficientRobux.Title.InsufficientRobux",
 		currentBalance = "IAPExperience.InsufficientRobux.Text.CurrentBalance",
 		missingRobux = "IAPExperience.InsufficientRobux.Text.MissingRobux",
 		orderTotal = "IAPExperience.PurchasePrompt.Label.TotalPriceV2",
 		buyRobux = "IAPExperience.InsufficientRobux.Action.BuyRobux"
 	})
-	local var6 = reactModule.useCallback(function()
-		-- upvalues: var1 (ref)
-		var1.goBack()
-	end, { var1 })
-	local var7 = useOpenRobuxUpsellModule(totalPrice)
-	local var8 = if fFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module then reactModule.useCallback(function()
-		-- upvalues: var2 (ref), eventNamesModule (copy), totalPrice (ref), var7 (ref)
-		var2.fireAnalyticsEvent(eventNamesModule.InspectAvatarBuyRobuxClicked, { totalPrice = totalPrice })
-		var7()
-	end, { var7, var2, totalPrice }) else nil
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 114 ]]
+		-- upvalues: UseNavigationResult (copy)
+		UseNavigationResult.goBack()
+	end, { UseNavigationResult })
+	local UseOpenRobuxUpsellModuleResult = UseOpenRobuxUpsellModule(TotalPrice)
+	local UseResult1 = if FFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module then ReactModule.useCallback(function() --[[ Line: 120 ]]
+		-- upvalues: UseProfileAnalyticsContextModuleResult (copy), EventNamesModule (upval), TotalPrice (copy), UseOpenRobuxUpsellModuleResult (copy)
+		UseProfileAnalyticsContextModuleResult.fireAnalyticsEvent(EventNamesModule.InspectAvatarBuyRobuxClicked, { totalPrice = TotalPrice })
+		UseOpenRobuxUpsellModuleResult()
+	end, {
+		UseOpenRobuxUpsellModuleResult,
+		UseProfileAnalyticsContextModuleResult,
+		TotalPrice
+	}) else nil
 	
-	if fFlagProfileInspectAndBuyKeepUpsellDialogOpenModule then
-		reactModule.useEffect(function()
-			-- upvalues: var4 (ref), totalPrice (ref), var6 (ref)
-			if totalPrice <= var4 then
-				var6()
+	if FFlagProfileInspectAndBuyKeepUpsellDialogOpenModule then
+		ReactModule.useEffect(function() --[[ Line: 129 ]]
+			-- upvalues: UseLocalRobuxBalanceResult1 (copy), TotalPrice (copy), UseResult (copy)
+			if TotalPrice <= UseLocalRobuxBalanceResult1 then
+				UseResult()
 			end
-		end, { var4, totalPrice, var6 })
+		end, { UseLocalRobuxBalanceResult1, TotalPrice, UseResult })
 	end
-	local var9 = nil
-	local var10 = nil
+	local v1 = nil
+	local v2 = nil
 	
-	if fFlagProfileInspectAndBuyAutoFocusModule then
-		local var11, var12 = reactFocusNavigationModule.useDefaultFocusBehavior()
-		var9 = var11
-		var10 = var12
+	if FFlagProfileInspectAndBuyAutoFocusModule then
+		v1, v41 = ReactFocusNavigationModule.useDefaultFocusBehavior()
 	end
-	return reactModule.createElement(appFocusRoot, {
+	return ReactModule.createElement(AppFocusRoot, {
 		isAutoFocusRoot = true,
 		isIsolated = true,
-		surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.CentralOverlay,
-		customEventHandlers = reactModule.useMemo(function()
-			-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), var6 (ref)
+		surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.CentralOverlay,
+		customEventHandlers = ReactModule.useMemo(function() --[[ Line: 141 ]]
+			-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), UseResult (copy)
 			return {
-				[focusNavigationEventNameEnum.NavigateBack] = {
-					handler = inputHandlersModule.onRelease(function(p2)
-						-- upvalues: var6 (copy)
+				[FocusNavigationEventNameEnum.NavigateBack] = {
+					handler = InputHandlersModule.onRelease(function(p2) --[[ Line: 144 ]]
+						-- upvalues: UseResult (upval)
 						p2:cancel()
-						var6()
+						UseResult()
 					end)
 				}
 			}
-		end, { var6 })
+		end, { UseResult })
 	}, {
-		Dialog = reactModule.createElement(dialog.Root, {
+		Dialog = ReactModule.createElement(Dialog.Root, {
 			hasBackdrop = true,
-			size = dialogSize.Small,
-			onClose = var6,
-			ref = if fFlagProfileInspectAndBuyAutoFocusModule then var10 else nil
+			size = DialogSize.Small,
+			onClose = UseResult,
+			ref = if FFlagProfileInspectAndBuyAutoFocusModule then v2 else nil
 		}, {
-			Title = reactModule.createElement(dialog.Title, { LayoutOrder = 1, text = var5.title }),
-			Content = reactModule.createElement(dialog.Content, { LayoutOrder = 2 }, {
-				PriceBoxPadding = reactModule.createElement(view, { tag = "size-full-0 auto-y padding-xxsmall" }, {
-					PriceBox = reactModule.createElement(view, {
+			Title = ReactModule.createElement(Dialog.Title, { LayoutOrder = 1, text = UseLocalizationResult.title }),
+			Content = ReactModule.createElement(Dialog.Content, { LayoutOrder = 2 }, {
+				PriceBoxPadding = ReactModule.createElement(View, { tag = "size-full-0 auto-y padding-xxsmall" }, {
+					PriceBox = ReactModule.createElement(View, {
 						tag = "col gap-large size-full-0 auto-y padding-medium stroke-standard stroke-default radius-medium"
 					}, {
-						BalanceLines = reactModule.createElement(view, {
+						BalanceLines = ReactModule.createElement(View, {
 							LayoutOrder = 1,
 							tag = "col gap-xsmall size-full-0 auto-y"
 						}, {
-							CurrentBalance = reactModule.createElement(AmountLine, {
+							CurrentBalance = ReactModule.createElement(AmountLine, {
 								layoutOrder = 1,
-								label = var5.currentBalance,
-								amount = var4
+								label = UseLocalizationResult.currentBalance,
+								amount = UseLocalRobuxBalanceResult1
 							}),
-							MissingRobux = reactModule.createElement(AmountLine, {
+							MissingRobux = ReactModule.createElement(AmountLine, {
 								layoutOrder = 2,
 								isAlert = true,
-								label = var5.missingRobux,
-								amount = maxValue
+								label = UseLocalizationResult.missingRobux,
+								amount = Largest
 							})
 						}),
-						OrderTotal = reactModule.createElement(AmountLine, {
+						OrderTotal = ReactModule.createElement(AmountLine, {
 							layoutOrder = 2,
-							label = var5.orderTotal,
-							amount = totalPrice
+							label = UseLocalizationResult.orderTotal,
+							amount = TotalPrice
 						})
 					})
 				})
 			}),
-			Actions = reactModule.createElement(dialog.Actions, {
+			Actions = ReactModule.createElement(Dialog.Actions, {
 				LayoutOrder = 3,
-				orientation = orientation.Horizontal,
+				orientation = Orientation.Horizontal,
 				actions = {
 					{
-						text = var5.buyRobux,
-						variant = buttonVariant.Emphasis,
-						ref = if fFlagProfileInspectAndBuyAutoFocusModule then var9 else nil,
-						onActivated = if fFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module then var8 else var7
+						text = UseLocalizationResult.buyRobux,
+						variant = ButtonVariant.Emphasis,
+						ref = if FFlagProfileInspectAndBuyAutoFocusModule then v1 else nil,
+						onActivated = if FFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module then UseResult1 else UseOpenRobuxUpsellModuleResult
 					}
 				}
 			})

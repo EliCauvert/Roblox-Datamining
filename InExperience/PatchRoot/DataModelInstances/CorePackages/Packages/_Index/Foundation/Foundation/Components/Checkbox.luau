@@ -1,1 +1,1 @@
-﻿return require(script.Checkbox)
+﻿return (require(script.Checkbox))

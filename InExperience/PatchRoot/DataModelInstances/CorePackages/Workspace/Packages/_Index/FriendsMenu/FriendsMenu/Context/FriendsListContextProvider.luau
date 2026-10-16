@@ -1,207 +1,200 @@
-﻿local playersService = game:GetService("Players")
-local parent = script.Parent
-local parent_1 = parent.Parent
-local utils = parent_1.utils
-local parent_2 = parent_1.Parent
-local friendsMenuDependenciesModule = require(parent_1.FriendsMenuDependencies)
-local constantsModule = require(parent_1.Constants)
-local _ = require(parent_1.friendsMenuModalType)
-local reactModule = require(parent_2.React)
-local requests = require(parent_2.Http).Requests
-local userLibModule = require(parent_2.UserLib)
-local roactUtilsModule = require(parent_2.RoactUtils)
-local userProfilesModule = require(parent_2.UserProfiles)
-local getFFlagEnableFriendsListSearchNormalizationErrorFix = require(parent_2.SharedFlags).GetFFlagEnableFriendsListSearchNormalizationErrorFix
-local userModel = userLibModule.Models.UserModel
-local constants = userLibModule.Utils.Constants
-local apiFetchUsersPresences = userLibModule.Thunks.ApiFetchUsersPresences
-local updateUsers = userLibModule.Thunks.UpdateUsers
-local thumbnailRequest = userLibModule.Utils.ThumbnailRequest
-local preloadUsersThumbnail = userLibModule.Thunks.PreloadUsersThumbnail
-local networkImpl = friendsMenuDependenciesModule.networkImpl
-local sortFriendsByCorrectedPresenceAndRank = friendsMenuDependenciesModule.sortFriendsByCorrectedPresenceAndRank
-local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
-local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
-local friendsListContextModule = require(parent.FriendsListContext)
-local generateDummyFriendsModule = require(utils.generateDummyFriends)
-local DEPRECATED_UsersGetFriends = requests.DEPRECATED_UsersGetFriends
-local userSorts = constantsModule.UserSorts
-local t = {
-	InviteAvatarThumbnailType = constants.RbxAvatarThumbnailTypesFromEnum.HeadShot,
-	InviteAvatarThumbnailSize = constants.RbxThumbnailSizes.Size150x150,
-	InviteAvatarRbxthumbType = constants.RbxthumbTypes.AvatarHeadShot
+﻿local Players = game:GetService("Players")
+local Parent = script.Parent
+local Parent1 = Parent.Parent
+local Parent2 = Parent1.Parent
+local FriendsMenuDependenciesModule = require(Parent1.FriendsMenuDependencies)
+local _ = require(Parent1.friendsMenuModalType)
+local ReactModule = require(Parent2.React)
+local UserLibModule = require(Parent2.UserLib)
+local RoactUtilsModule = require(Parent2.RoactUtils)
+local UserProfilesModule = require(Parent2.UserProfiles)
+local GetFFlagEnableFriendsListSearchNormalizationErrorFixFunction = require(Parent2.SharedFlags).GetFFlagEnableFriendsListSearchNormalizationErrorFix
+local UserModel = UserLibModule.Models.UserModel
+local Constants = UserLibModule.Utils.Constants
+local ApiFetchUsersPresencesFunction = UserLibModule.Thunks.ApiFetchUsersPresences
+local UpdateUsersFunction = UserLibModule.Thunks.UpdateUsers
+local PreloadUsersThumbnailFunction = UserLibModule.Thunks.PreloadUsersThumbnail
+local NetworkImpl = FriendsMenuDependenciesModule.networkImpl
+local SortFriendsByCorrectedPresenceAndRank = FriendsMenuDependenciesModule.sortFriendsByCorrectedPresenceAndRank
+local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
+local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
+local FriendsListContextModule = require(Parent.FriendsListContext)
+local GenerateDummyFriendsModule = require(Parent1.utils.generateDummyFriends)
+local DEPRECATEDUsersGetFriendsFunction = require(Parent2.Http).Requests.DEPRECATED_UsersGetFriends
+local UserSorts = require(Parent1.Constants).UserSorts
+local config = {
+	InviteAvatarThumbnailType = Constants.RbxAvatarThumbnailTypesFromEnum.HeadShot,
+	InviteAvatarThumbnailSize = Constants.RbxThumbnailSizes.Size150x150,
+	InviteAvatarRbxthumbType = Constants.RbxthumbTypes.AvatarHeadShot
 }
-t.ThumbnailRequest = {
+config.ThumbnailRequest = {
 	InviteToGame = {
-		thumbnailRequest.fromData(t.InviteAvatarThumbnailType, t.InviteAvatarThumbnailSize)
+		UserLibModule.Utils.ThumbnailRequest.fromData(config.InviteAvatarThumbnailType, config.InviteAvatarThumbnailSize)
 	}
 }
 
-return function(p1)
-	-- upvalues: networkImpl (ref), reactModule (ref), generateDummyFriendsModule (ref), useDispatch (ref), userProfilesModule (ref), getFFlagEnableFriendsListSearchNormalizationErrorFix (ref), playersService (ref), DEPRECATED_UsersGetFriends (ref), userSorts (ref), userModel (ref), updateUsers (ref), preloadUsersThumbnail (ref), t (ref), apiFetchUsersPresences (ref), useSelector (ref), sortFriendsByCorrectedPresenceAndRank (ref), friendsListContextModule (ref)
-	local var1 = if p1.networkImplOverride then p1.networkImplOverride else networkImpl
-	local var2, var3 = reactModule.useState(false)
-	local var4, var5 = reactModule.useState(false)
-	local var6, var7 = reactModule.useState({})
-	local var8, var9 = reactModule.useState("")
-	local var10, var11 = reactModule.useState(generateDummyFriendsModule(7))
-	local var12 = useDispatch()
-	local _ = nil
-	local var13 = userProfilesModule.Hooks.useUserProfilesFetch({
-		userIds = var6,
-		query = userProfilesModule.Queries.userProfilesAllNamesByUserIds
+return function(p1) --[[ Line: 62 ]]
+	-- upvalues: NetworkImpl (copy), ReactModule (copy), GenerateDummyFriendsModule (copy), UseDispatchFunction (copy), UserProfilesModule (copy), GetFFlagEnableFriendsListSearchNormalizationErrorFixFunction (copy), Players (copy), DEPRECATEDUsersGetFriendsFunction (copy), UserSorts (copy), UserModel (copy), UpdateUsersFunction (copy), PreloadUsersThumbnailFunction (copy), config (copy), ApiFetchUsersPresencesFunction (copy), UseSelectorFunction (copy), SortFriendsByCorrectedPresenceAndRank (copy), FriendsListContextModule (copy)
+	local NetworkImplOverride = nil
+	NetworkImplOverride = if p1.networkImplOverride then p1.networkImplOverride else NetworkImpl
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState({})
+	local UseStateResult4, UseStateResult2_3 = ReactModule.useState("")
+	local UseStateResult5, UseStateResult2_4 = ReactModule.useState((GenerateDummyFriendsModule(7)))
+	local UseDispatchResult = UseDispatchFunction()
+	local UseUserProfilesFetchResult = nil
+	UseUserProfilesFetchResult = UserProfilesModule.Hooks.useUserProfilesFetch({
+		userIds = UseStateResult3,
+		query = UserProfilesModule.Queries.userProfilesAllNamesByUserIds
 	})
 	
-	local var14 = function(p2)
-		-- upvalues: p1 (ref), var8 (ref), var13 (write), userProfilesModule (copy), getFFlagEnableFriendsListSearchNormalizationErrorFix (copy)
+	local function v33(p2): boolean --[[ Line: 89 ]]
+		-- upvalues: p1 (copy), UseStateResult4 (copy), UseUserProfilesFetchResult (ref), UserProfilesModule (upval), GetFFlagEnableFriendsListSearchNormalizationErrorFixFunction (upval)
 		if not p2 or not p2.isFriend then
 			return false
-		elseif p1.excludedFriendsSet and p1.excludedFriendsSet[p2.id] then
+		end
+		if p1.excludedFriendsSet and p1.excludedFriendsSet[p2.id] then
 			return false
-		elseif var8 == nil or var8 == "" then
+		end
+		if UseStateResult4 == nil or UseStateResult4 == "" then
 			return true
 		end
-		local displayName = p2.displayName or ""
-		local name = p2.name or ""
-		local var15 = ""
-		local var16 = ""
-		local var17 = ""
+		local DisplayName = p2.displayName or ""
+		local Name = p2.name or ""
+		local Alias = ""
+		local ContactName = ""
+		local PlatformName = ""
 		
-		if var13 and var13.data then
-			local names = userProfilesModule.Selectors.getUserProfileFromId(var13.data, p2.id).names
+		if UseUserProfilesFetchResult and UseUserProfilesFetchResult.data then
+			local Names = UserProfilesModule.Selectors.getUserProfileFromId(UseUserProfilesFetchResult.data, p2.id).names
 			
-			if names then
-				var15 = names.alias or ""
-				displayName = names.displayName or ""
-				name = names.username or ""
-				var16 = names.contactName or ""
-				var17 = names.platformName or ""
+			if Names then
+				Alias = Names.alias or ""
+				DisplayName = Names.displayName or ""
+				Name = Names.username or ""
+				ContactName = Names.contactName or ""
+				PlatformName = Names.platformName or ""
 			end
 		end
-		local normalized = utf8.nfdnormalize(displayName)
-		local normalized_1 = utf8.nfdnormalize(var15)
-		local normalized_2 = utf8.nfdnormalize(var16)
-		local normalized_3 = utf8.nfdnormalize(var17)
-		local normalized_4 = nil
+		local NfdnormalizeResult: string = utf8.nfdnormalize(DisplayName)
+		local NfdnormalizeResult1: string = utf8.nfdnormalize(Alias)
+		local NfdnormalizeResult2: string = utf8.nfdnormalize(ContactName)
+		local NfdnormalizeResult3: string = utf8.nfdnormalize(PlatformName)
+		local NfdnormalizeResult4 = nil
 		
-		if getFFlagEnableFriendsListSearchNormalizationErrorFix() then
-			pcall(function()
-				-- upvalues: normalized_4 (write), var8 (copy)
-				normalized_4 = utf8.nfdnormalize(var8)
+		if GetFFlagEnableFriendsListSearchNormalizationErrorFixFunction() then
+			pcall(function() --[[ Line: 126 ]]
+				-- upvalues: NfdnormalizeResult4 (ref), UseStateResult4 (upval)
+				NfdnormalizeResult4 = utf8.nfdnormalize(UseStateResult4)
 			end)
 		else
-			normalized_4 = utf8.nfdnormalize(var8)
+			NfdnormalizeResult4 = utf8.nfdnormalize(UseStateResult4)
 		end
-		local var18
-		if not getFFlagEnableFriendsListSearchNormalizationErrorFix() then
-			return if string.find(normalized_1:lower(), normalized_4:lower(), 1, true) == nil then if string.find(normalized_2:lower(), normalized_4:lower(), 1, true) == nil then if string.find(normalized_3:lower(), normalized_4:lower(), 1, true) == nil then if string.find(normalized:lower(), normalized_4:lower(), 1, true) == nil then string.find(name:lower(), var8:lower(), 1, true) ~= nil else true else true else true else true
-		elseif normalized_4 then
-			var18 = if string.find(normalized_1:lower(), normalized_4:lower(), 1, true) == nil then if string.find(normalized_2:lower(), normalized_4:lower(), 1, true) == nil then if string.find(normalized_3:lower(), normalized_4:lower(), 1, true) == nil then if string.find(normalized:lower(), normalized_4:lower(), 1, true) == nil then string.find(name:lower(), var8:lower(), 1, true) ~= nil else true else true else true else true
-		end
-		return var18
+		return (if GetFFlagEnableFriendsListSearchNormalizationErrorFixFunction() then NfdnormalizeResult4 and (string.find(NfdnormalizeResult1:lower(), NfdnormalizeResult4:lower(), 1, true) ~= nil or (string.find(NfdnormalizeResult2:lower(), NfdnormalizeResult4:lower(), 1, true) ~= nil or (string.find(NfdnormalizeResult3:lower(), NfdnormalizeResult4:lower(), 1, true) ~= nil or string.find(NfdnormalizeResult:lower(), NfdnormalizeResult4:lower(), 1, true) ~= nil))) else string.find(NfdnormalizeResult1:lower(), NfdnormalizeResult4:lower(), 1, true) ~= nil or (string.find(NfdnormalizeResult2:lower(), NfdnormalizeResult4:lower(), 1, true) ~= nil or (string.find(NfdnormalizeResult3:lower(), NfdnormalizeResult4:lower(), 1, true) ~= nil or string.find(NfdnormalizeResult:lower(), NfdnormalizeResult4:lower(), 1, true) ~= nil))) or string.find(Name:lower(), UseStateResult4:lower(), 1, true) ~= nil
 	end
 	
-	local _ = function(p2)
-		-- upvalues: var13 (write), userProfilesModule (copy)
-		local var15 = if var13 and var13.data then userProfilesModule.Selectors.getCombinedNameFromId(var13.data, p2.id) else nil
+	local function _(p2) --[[ Line: 156 ]]
+		-- upvalues: UseUserProfilesFetchResult (ref), UserProfilesModule (upval)
+		local CombinedNameFromId = if UseUserProfilesFetchResult and UseUserProfilesFetchResult.data then UserProfilesModule.Selectors.getCombinedNameFromId(UseUserProfilesFetchResult.data, p2.id) else nil
 		
-		return if var15 == nil then p2.displayName else var15
+		return if CombinedNameFromId == nil then p2.displayName else CombinedNameFromId
 	end
 	
-	local _ = function(p2)
-		-- upvalues: var13 (write), userProfilesModule (copy)
-		local var15 = if var13 and var13.data then userProfilesModule.Selectors.getUsernameFromId(var13.data, p2.id) else nil
+	local _ = function(p2) --[[ Line: 168 ]]
+		-- upvalues: UseUserProfilesFetchResult (ref), UserProfilesModule (upval)
+		local UsernameFromId = if UseUserProfilesFetchResult and UseUserProfilesFetchResult.data then UserProfilesModule.Selectors.getUsernameFromId(UseUserProfilesFetchResult.data, p2.id) else nil
 		
-		return if var15 == nil then p2.name else var15
+		return if UsernameFromId == nil then p2.name else UsernameFromId
 	end
 	
-	reactModule.useEffect(function()
-		-- upvalues: playersService (copy), var2 (ref), var3 (ref), var5 (ref), DEPRECATED_UsersGetFriends (copy), var1 (write), userSorts (copy), userModel (copy), var12 (ref), updateUsers (copy), var7 (ref), preloadUsersThumbnail (copy), t (copy), apiFetchUsersPresences (copy)
-		local var15 = if playersService and playersService.LocalPlayer then tostring(playersService.LocalPlayer.UserId) else nil
+	ReactModule.useEffect(function() --[[ Line: 180 ]]
+		-- upvalues: Players (upval), UseStateResult (copy), UseStateResult2 (copy), UseStateResult2_1 (copy), DEPRECATEDUsersGetFriendsFunction (upval), NetworkImplOverride (ref), UserSorts (upval), UserModel (upval), UseDispatchResult (copy), UpdateUsersFunction (upval), UseStateResult2_2 (copy), PreloadUsersThumbnailFunction (upval), config (upval), ApiFetchUsersPresencesFunction (upval)
+		local Text = if Players and Players.LocalPlayer then tostring(Players.LocalPlayer.UserId) else nil
 		
-		if not var2 and var15 then
-			var3(true)
-			var5(false)
-			DEPRECATED_UsersGetFriends(var1, var15, userSorts.StatusFrequents):andThen(function(p2)
-				-- upvalues: userModel (copy), var12 (copy), updateUsers (copy), var7 (copy)
-				local responseBody = p2.responseBody
-				local t = {}
-				local t_1 = {}
+		if not UseStateResult and Text then
+			UseStateResult2(true)
+			UseStateResult2_1(false)
+			DEPRECATEDUsersGetFriendsFunction(NetworkImplOverride, Text, UserSorts.StatusFrequents):andThen(function(Result) --[[ Line: 190 ]]
+				-- upvalues: UserModel (upval), UseDispatchResult (upval), UpdateUsersFunction (upval), UseStateResult2_2 (upval)
+				local List = {}
+				local FromDataTableResults = {}
 				
-				for i, v in pairs(responseBody.data) do
-					local var16 = tostring(v.id)
-					v.isFriend = true
-					v.friendRank = i
-					v.name = ""
-					v.displayName = ""
-					local var17 = userModel.fromDataTable(v)
-					table.insert(t, var16)
-					t_1[var17.id] = var17
+				for FriendRank, entry in pairs(Result.responseBody.data) do
+					entry.isFriend = true
+					entry.friendRank = FriendRank
+					entry.name = ""
+					entry.displayName = ""
+					local FromDataTableResult = UserModel.fromDataTable(entry)
+					table.insert(List, (tostring(entry.id)))
+					FromDataTableResults[FromDataTableResult.id] = FromDataTableResult
 				end
-				var12(updateUsers(t_1))
-				var7(t)
+				UseDispatchResult(UpdateUsersFunction(FromDataTableResults))
+				UseStateResult2_2(List)
 				
-				return t
-			end, function(_)
-				-- upvalues: var3 (copy), var5 (copy)
-				var3(false)
-				var5(true)
+				return List
+			end, function(_) --[[ Line: 209 ]]
+				-- upvalues: UseStateResult2 (upval), UseStateResult2_1 (upval)
+				UseStateResult2(false)
+				UseStateResult2_1(true)
 				
 				return {}
-			end):andThen(function(p3)
-				-- upvalues: var12 (copy), preloadUsersThumbnail (copy), t (copy), apiFetchUsersPresences (copy), var1 (copy)
-				var12(preloadUsersThumbnail(p3, t.ThumbnailRequest.InviteToGame, nil))
+			end):andThen(function(Result) --[[ Line: 215 ]]
+				-- upvalues: UseDispatchResult (upval), PreloadUsersThumbnailFunction (upval), config (upval), ApiFetchUsersPresencesFunction (upval), NetworkImplOverride (upval)
+				UseDispatchResult(PreloadUsersThumbnailFunction(Result, config.ThumbnailRequest.InviteToGame, nil))
 				
-				return var12(apiFetchUsersPresences(var1, p3))
-			end):andThen(function(_)
-				-- upvalues: var3 (copy)
-				var3(false)
-			end, function(_)
-				-- upvalues: var3 (copy), var5 (copy)
-				var3(false)
-				var5(true)
+				return UseDispatchResult(ApiFetchUsersPresencesFunction(NetworkImplOverride, Result))
+			end):andThen(function(_) --[[ Line: 223 ]]
+				-- upvalues: UseStateResult2 (upval)
+				UseStateResult2(false)
+			end, function(_) --[[ Line: 225 ]]
+				-- upvalues: UseStateResult2 (upval), UseStateResult2_1 (upval)
+				UseStateResult2(false)
+				UseStateResult2_1(true)
 			end)
 		end
 	end, {})
-	local var16 = useSelector(function(p2)
+	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 232 ]]
 		return p2.Users
 	end)
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), var11 (ref), generateDummyFriendsModule (copy), var16 (ref), var14 (ref), var13 (write), userProfilesModule (copy), sortFriendsByCorrectedPresenceAndRank (copy)
-		if var2 then
-			var11(generateDummyFriendsModule(7))
+	ReactModule.useEffect(function() --[[ Line: 236 ]]
+		-- upvalues: UseStateResult (copy), UseStateResult2_4 (copy), GenerateDummyFriendsModule (upval), UseSelectorResult (copy), v33 (copy), UseUserProfilesFetchResult (ref), UserProfilesModule (upval), SortFriendsByCorrectedPresenceAndRank (upval)
+		if UseStateResult then
+			UseStateResult2_4(GenerateDummyFriendsModule(7))
 			
 			return
 		end
-		local t = {}
+		local List = {}
 		
-		for i, v in pairs(var16) do
-			if var14(v) then
-				t[#t + 1] = v
-				local var17 = if var13 and var13.data then userProfilesModule.Selectors.getCombinedNameFromId(var13.data, v.id) else nil
-				v.displayName = if var17 == nil then v.displayName else var17
-				local var18 = if var13 and var13.data then userProfilesModule.Selectors.getUsernameFromId(var13.data, v.id) else nil
-				v.name = if var18 == nil then v.name else var18
+		for _, value in pairs(UseSelectorResult) do
+			if v33(value) then
+				List[#List + 1] = value
+				local CombinedNameFromId = if UseUserProfilesFetchResult and UseUserProfilesFetchResult.data then UserProfilesModule.Selectors.getCombinedNameFromId(UseUserProfilesFetchResult.data, value.id) else nil
+				value.displayName = if CombinedNameFromId == nil then value.displayName else CombinedNameFromId
+				local UsernameFromId = if UseUserProfilesFetchResult and UseUserProfilesFetchResult.data then UserProfilesModule.Selectors.getUsernameFromId(UseUserProfilesFetchResult.data, value.id) else nil
+				value.name = if UsernameFromId == nil then value.name else UsernameFromId
 			end
 		end
-		table.sort(t, sortFriendsByCorrectedPresenceAndRank)
-		var11(t)
+		table.sort(List, SortFriendsByCorrectedPresenceAndRank)
+		UseStateResult2_4(List)
 	end, {
-		var16,
-		var8,
-		tostring(var2),
-		tostring(var13 and var13.loading)
+		UseSelectorResult,
+		UseStateResult4,
+		tostring(UseStateResult),
+		(tostring(UseUserProfilesFetchResult and UseUserProfilesFetchResult.loading))
 	})
 	
-	return reactModule.createElement(friendsListContextModule.Provider, {
+	return ReactModule.createElement(FriendsListContextModule.Provider, {
 		value = {
-			friends = var10,
-			hasFriends = #var6 > 0,
-			isFetchingFriends = var2 or p1.isLoadingCustomParams,
-			isFriendsListFetchFailed = var4,
-			friendsNames = { loading = var13 and var13.loading },
-			searchFriends = var9,
-			searchFriendsString = var8
+			friends = UseStateResult5,
+			hasFriends = #UseStateResult3 > 0,
+			isFetchingFriends = UseStateResult or p1.isLoadingCustomParams,
+			isFriendsListFetchFailed = UseStateResult1,
+			friendsNames = {
+				loading = UseUserProfilesFetchResult and UseUserProfilesFetchResult.loading
+			},
+			searchFriends = UseStateResult2_3,
+			searchFriendsString = UseStateResult4
 		}
 	}, p1.children)
 end

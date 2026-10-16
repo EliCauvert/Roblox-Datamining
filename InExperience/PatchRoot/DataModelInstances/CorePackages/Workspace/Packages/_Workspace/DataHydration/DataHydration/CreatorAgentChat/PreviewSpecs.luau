@@ -1,8 +1,8 @@
-﻿local previewSpecsTypesModule = require(script.PreviewSpecsTypes)
+﻿local PreviewSpecsTypesModule = require(script.PreviewSpecsTypes)
 
 return {
 	createPreviewSpecsStore = require(script.createPreviewSpecsStore),
 	getPreviewSpecsStore = require(script.getPreviewSpecsStore),
-	PreviewSpecStatus = previewSpecsTypesModule.PreviewSpecStatus,
-	PreviewSpecPinned = previewSpecsTypesModule.PreviewSpecPinned
+	PreviewSpecStatus = PreviewSpecsTypesModule.PreviewSpecStatus,
+	PreviewSpecPinned = PreviewSpecsTypesModule.PreviewSpecPinned
 }

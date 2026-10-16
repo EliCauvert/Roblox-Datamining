@@ -1,12 +1,12 @@
-﻿return function(p1, p2)
+﻿return function(List, p1) --[[ Line: 1 ]]
 	local t = {}
 	
-	for i, v in pairs(p1) do
-		local var1 = tostring(v)
-		local var2 = p2[var1]
+	for _, value in pairs(List) do
+		local Text = tostring(value)
+		local v1 = p1[Text]
 		
-		if var2 then
-			t[var1] = var2
+		if v1 then
+			t[Text] = v1
 		end
 	end
 	return t

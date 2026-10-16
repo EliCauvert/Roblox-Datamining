@@ -1,5 +1,5 @@
-﻿local httpService = game:GetService("HttpService")
-local debugModule = require(script.Parent.debug)
+﻿local HttpService = game:GetService("HttpService")
+local DebugModule = require(script.Parent.debug)
 local _ = require(script.Parent.types)
 local list = {
 	"studio_save_and_publish",
@@ -8,186 +8,178 @@ local list = {
 }
 local t = {}
 
-for i, v in list do
-	t[string.lower(string.gsub(v, "[_%-%s]", ""))] = true
+for _, value in list do
+	t[string.lower((string.gsub(value, "[_%-%s]", "")))] = true
 end
-local t_1 = {
+local config = {
 	save_and_publish = true,
 	cas_save_and_publish = true,
 	studio_save_and_publish = true
 }
 
-local function _(p1)
-	return string.lower(string.gsub(p1, "[_%-%s]", ""))
+local function _(Text: string): string --[[ Line: 44 | Named "normalizeToolIdentifier" ]]
+	return string.lower((string.gsub(Text, "[_%-%s]", "")))
 end
 
-local _ = function(p1)
-	-- upvalues: t (ref)
-	local lowerText = string.lower(string.gsub(p1, "[_%-%s]", ""))
+local _ = function(Text: string): boolean --[[ Line: 49 | Named "identifierMatchesPublish" ]]
+	-- upvalues: t (copy)
+	local Lowered = string.lower((string.gsub(Text, "[_%-%s]", "")))
 	
-	return if t[lowerText] then true else string.find(lowerText, "publishplace", 1, true) ~= nil
+	return if t[Lowered] then true else string.find(Lowered, "publishplace", 1, true) ~= nil
 end
 
-i = function(p1)
-	-- upvalues: t (ref)
-	local var1 = false
+local _ = function(Text: string): boolean --[[ Line: 57 | Named "valueLooksLikePublishTool" ]]
+	-- upvalues: t (copy)
+	local HasFoundAt = false
 	
-	if typeof(p1) == "string" then
-		var1 = false
+	if typeof(Text) == "string" then
+		HasFoundAt = false
 		
-		if p1 ~= "" then
-			local lowerText = string.lower(string.gsub(p1, "[_%-%s]", ""))
+		if Text ~= "" then
+			local Lowered = string.lower((string.gsub(Text, "[_%-%s]", "")))
 			
-			if t[lowerText] then
+			if t[Lowered] then
 				return true
 			end
-			var1 = string.find(lowerText, "publishplace", 1, true) ~= nil
+			HasFoundAt = string.find(Lowered, "publishplace", 1, true) ~= nil
 		end
 	end
-	return var1
+	return HasFoundAt
 end
 
-local _ = function(p1)
-	-- upvalues: t_1 (ref)
-	return typeof(p1) == "string" and t_1[string.lower(p1)] == true
+local _ = function(Text: string): boolean --[[ Line: 61 | Named "isSaveAndPublishValue" ]]
+	-- upvalues: config (copy)
+	return typeof(Text) == "string" and config[string.lower(Text)] == true
 end
 
-local function toolCallMatchesPublishPlace(p1)
-	-- upvalues: t (ref)
-	local kind = p1.kind
-	local rawInput = false
+local function toolCallMatchesPublishPlace(p1): boolean --[[ Line: 68 ]]
+	-- upvalues: t (copy)
+	local Kind: string = p1.kind
+	local HasFoundAt = false
 	
-	if typeof(kind) == "string" then
-		rawInput = false
+	if typeof(Kind) == "string" then
+		HasFoundAt = false
 		
-		if kind ~= "" then
-			local lowerText = string.lower(string.gsub(kind, "[_%-%s]", ""))
-			rawInput = if t[lowerText] then true else string.find(lowerText, "publishplace", 1, true) ~= nil
+		if Kind ~= "" then
+			local Lowered = string.lower((string.gsub(Kind, "[_%-%s]", "")))
+			HasFoundAt = if t[Lowered] then true else string.find(Lowered, "publishplace", 1, true) ~= nil
 		end
 	end
-	if not rawInput then
-		local title = p1.title
-		rawInput = false
+	if not HasFoundAt then
+		local Title: string = p1.title
+		local HasFoundAt1 = false
 		
-		if typeof(title) == "string" then
-			rawInput = false
+		if typeof(Title) == "string" then
+			HasFoundAt1 = false
 			
-			if title ~= "" then
-				local lowerText = string.lower(string.gsub(title, "[_%-%s]", ""))
-				rawInput = if t[lowerText] then true else string.find(lowerText, "publishplace", 1, true) ~= nil
+			if Title ~= "" then
+				local Lowered = string.lower((string.gsub(Title, "[_%-%s]", "")))
+				HasFoundAt1 = if t[Lowered] then true else string.find(Lowered, "publishplace", 1, true) ~= nil
 			end
 		end
-		if rawInput then
-			return true
-		end
-		rawInput = p1.rawInput
-		
-		if typeof(rawInput) ~= "table" then
-			return false
-		end
-		for i, v in {
-			"tool",
-			"name",
-			"action",
-			"command",
-			"toolName"
-		} do
-			local var1 = rawInput[v]
-			local var2 = false
+		if not HasFoundAt1 then
+			local RawInput = p1.rawInput
 			
-			if typeof(var1) == "string" then
-				var2 = false
+			if typeof(RawInput) ~= "table" then
+				return false
+			end
+			for _, value in {
+				"tool",
+				"name",
+				"action",
+				"command",
+				"toolName"
+			} do
+				local Text: string = RawInput[value]
+				local HasFoundAt2 = false
 				
-				if var1 ~= "" then
-					local lowerText = string.lower(string.gsub(var1, "[_%-%s]", ""))
-					var2 = if t[lowerText] then true else string.find(lowerText, "publishplace", 1, true) ~= nil
+				if typeof(Text) == "string" then
+					HasFoundAt2 = false
+					
+					if Text ~= "" then
+						local Lowered = string.lower((string.gsub(Text, "[_%-%s]", "")))
+						HasFoundAt2 = if t[Lowered] then true else string.find(Lowered, "publishplace", 1, true) ~= nil
+					end
+				end
+				if HasFoundAt2 then
+					return true
 				end
 			end
-			if var2 then
-				return true
-			end
-		end
-		return false
-	end
-end
-
-local function isSaveAndPublishToolCall(p2)
-	-- upvalues: t_1 (ref)
-	local title = p2.title
-	
-	if not (typeof(title) ~= "string" and t_1[string.lower(title)] == true) then
-		title = p2.kind
-		
-		if typeof(title) ~= "string" and t_1[string.lower(title)] == true then
-			return true
-		end
-		local rawInput = p2.rawInput
-		
-		if typeof(rawInput) ~= "table" then
 			return false
 		end
-		for i, v in {
-			"tool",
-			"name",
-			"action",
-			"command",
-			"toolName"
-		} do
-			local var3 = rawInput[v]
+	end
+	return true
+end
+
+local function isSaveAndPublishToolCall(p2): boolean --[[ Line: 87 ]]
+	-- upvalues: config (copy)
+	local Title: string = p2.title
+	
+	if typeof(Title) ~= "string" or config[string.lower(Title)] ~= true then
+		local Kind: string = p2.kind
+		
+		if typeof(Kind) ~= "string" or config[string.lower(Kind)] ~= true then
+			local RawInput = p2.rawInput
 			
-			if typeof(var3) ~= "string" and t_1[string.lower(var3)] == true then
-				return true
+			if typeof(RawInput) ~= "table" then
+				return false
 			end
+			for _, value in {
+				"tool",
+				"name",
+				"action",
+				"command",
+				"toolName"
+			} do
+				local Text: string = RawInput[value]
+				
+				if typeof(Text) == "string" and config[string.lower(Text)] == true then
+					return true
+				end
+			end
+			return false
 		end
-		return false
 	end
+	return true
 end
 
-local function includesPublishPlaceTool(p3)
-	-- upvalues: toolCallMatchesPublishPlace (ref)
-	for i, v in p3.toolCalls do
-		if v.status ~= "failed" and toolCallMatchesPublishPlace(v) then
-			return true
-		end
-	end
-	return false
-end
-
-local _ = function(p4)
-	local match = string.match(p4, "^%s*Saved as version%s+(%d+)%s*%.?%s*$")
+local _ = function(Text: string) --[[ Line: 116 | Named "parsePublishedVersionNumber" ]]
+	local Match: string? = string.match(Text, "^%s*Saved as version%s+(%d+)%s*%.?%s*$")
 	
-	return if match == nil then nil else tonumber(match)
+	return if Match == nil then nil else tonumber(Match)
 end
 
-local _ = function(value)
-	-- upvalues: httpService (ref)
-	local ok, status = pcall(httpService.JSONDecode, httpService, value)
+local _ = function(p3) --[[ Line: 124 | Named "parseTextResult" ]]
+	-- upvalues: HttpService (copy)
+	local Success, Result = pcall(HttpService.JSONDecode, HttpService, p3)
 	
-	return if not (not ok or typeof(status) ~= "table") then if status.type == "text" and typeof(status.text) == "string" then status else nil else nil
+	return if Success and typeof(Result) == "table" and (Result.type == "text" and typeof(Result.text) == "string") then Result else nil
 end
 
-local function getToolCallPublishedVersionNumber(p4, p5)
-	-- upvalues: httpService (ref)
-	local content = p4.content
+local function getToolCallPublishedVersionNumber(p3, p4) --[[ Line: 135 ]]
+	-- upvalues: HttpService (copy)
+	local Content = p3.content
 	
-	if typeof(content) ~= "table" then
+	if typeof(Content) ~= "table" then
 		return nil
 	end
-	for i, v in content do
-		local var4 = if typeof(v.content) == "table" then v.content.text else v.text
+	local Number = nil
+	for _, value in Content do
+		local Text = if typeof(value.content) == "table" then value.content.text else value.text
 		
-		if typeof(var4) == "string" then
-			local ok, status = pcall(httpService.JSONDecode, httpService, var4)
-			local var5 = if not ok or typeof(status) ~= "table" then if status.type == "text" and typeof(status.text) == "string" then status else nil else nil
-			ok = if var5 ~= nil then if p5 then var4 else nil else var5.text
+		if typeof(Text) == "string" then
+			local Success, Result = pcall(HttpService.JSONDecode, HttpService, Text)
+			local Result1 = if Success and typeof(Result) == "table" and (Result.type == "text" and typeof(Result.text) == "string") then Result else nil
+			local Text1 = if Result1 == nil then if p4 then Text else nil else Result1.text
+			local NoText = Text1 == nil
 			
-			if ok ~= nil then
-				local match = string.match(ok, "^%s*Saved as version%s+(%d+)%s*%.?%s*$")
-				status = if match == nil then nil else tonumber(match)
-				
-				if status ~= nil then
-					return status
-				end
+			if not NoText then
+				local Match: string? = string.match(Text1, "^%s*Saved as version%s+(%d+)%s*%.?%s*$")
+				Number = if Match == nil then nil else tonumber(Match)
+				NoText = Number == nil
+			end
+			if not NoText then
+				return Number
 			end
 		end
 	end
@@ -196,36 +188,44 @@ end
 
 return {
 	PUBLISH_PLACE_TOOL_IDENTIFIERS = list,
-	includesPublishPlaceTool = includesPublishPlaceTool,
+	includesPublishPlaceTool = function(p5): boolean --[[ Line: 104 ]]
+		-- upvalues: toolCallMatchesPublishPlace (copy)
+		for _, toolCall in p5.toolCalls do
+			if toolCall.status ~= "failed" and toolCallMatchesPublishPlace(toolCall) then
+				return true
+			end
+		end
+		return false
+	end,
 	toolCallMatchesPublishPlace = toolCallMatchesPublishPlace,
-	getLatestSuccessfulResult = function(p6, _)
-		-- upvalues: isSaveAndPublishToolCall (ref), getToolCallPublishedVersionNumber (ref), debugModule (ref)
+	getLatestSuccessfulResult = function(p6, _) --[[ Line: 164 ]]
+		-- upvalues: isSaveAndPublishToolCall (copy), getToolCallPublishedVersionNumber (copy), DebugModule (copy)
 		if p6 == nil then
 			return nil
 		end
-		local t = nil
+		local v1 = nil
 		
-		for i, v in p6.toolCalls do
-			if v.status == "completed" and isSaveAndPublishToolCall(v) then
-				local var6 = getToolCallPublishedVersionNumber(v, true)
+		for ToolCallId, toolCall in p6.toolCalls do
+			if toolCall.status == "completed" and isSaveAndPublishToolCall(toolCall) then
+				local ToolCallPublishedVersionNumber: number = getToolCallPublishedVersionNumber(toolCall, true)
 				
-				if var6 == nil then
-					debugModule.log("warn", "completed save_and_publish result is not parseable", {
-						toolCallId = v.toolCallId,
-						title = v.title,
-						status = v.status,
-						contentBlockCount = if typeof(v.content) == "table" then #v.content else 0,
-						hasRawOutput = v.rawOutput ~= nil
+				if ToolCallPublishedVersionNumber == nil then
+					DebugModule.log("warn", "completed save_and_publish result is not parseable", {
+						toolCallId = toolCall.toolCallId,
+						title = toolCall.title,
+						status = toolCall.status,
+						contentBlockCount = if typeof(toolCall.content) == "table" then #toolCall.content else 0,
+						hasRawOutput = toolCall.rawOutput ~= nil
 					})
 				else
-					t = {
-						toolCallId = i,
-						publishedVersionNumber = var6,
-						rollbackTargetVersionNumber = if var6 > 1 then var6 - 1 else nil
+					v1 = {
+						toolCallId = ToolCallId,
+						publishedVersionNumber = ToolCallPublishedVersionNumber,
+						rollbackTargetVersionNumber = if ToolCallPublishedVersionNumber > 1 then ToolCallPublishedVersionNumber - 1 else nil
 					}
 				end
 			end
 		end
-		return t
+		return v1
 	end
 }

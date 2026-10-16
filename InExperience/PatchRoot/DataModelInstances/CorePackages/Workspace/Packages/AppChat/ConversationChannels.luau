@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent._Workspace.AppChat.AppChat.Models.ConversationChannels)
+﻿return (require(script.Parent.Parent._Workspace.AppChat.AppChat.Models.ConversationChannels))

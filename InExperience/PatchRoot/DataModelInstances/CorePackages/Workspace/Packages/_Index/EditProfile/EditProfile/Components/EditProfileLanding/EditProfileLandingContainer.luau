@@ -1,240 +1,247 @@
-﻿local editProfile = script:FindFirstAncestor("EditProfile")
+﻿local EditProfile = script:FindFirstAncestor("EditProfile")
 local IXPService = game:GetService("IXPService")
-local parent = editProfile.Parent
-local editProfileLandingModule = require(editProfile.Components.EditProfileLanding.EditProfileLanding)
-local editProfileLandingV2Module = require(editProfile.Components.EditProfileLanding.EditProfileLandingV2)
-local fFlagEditProfileLandingV2EnabledModule = require(editProfile.Flags.FFlagEditProfileLandingV2Enabled)
-local reactModule = require(parent.React)
-local cryoModule = require(parent.Cryo)
-local useEffect = reactModule.useEffect
-local useLocalUserId = require(parent.RobloxAppHooks).useLocalUserId
-local var1 = require(parent.UserProfiles).Stores.UserProfileStore.get()
-local editProfileStoreModule = require(editProfile.Stores.EditProfileStore)
-local profileRefreshSignal = require(parent.ProfilePlatformCommon).Signals.ProfileRefreshSignal
-local enumsModule = require(editProfile.Common.Enums)
-local constantsModule = require(editProfile.Common.Constants)
-local useLocalRobuxBalance = require(parent.RobloxAppHooks).useLocalRobuxBalance
-local useRealNamesInDisplayNamesEnabledModule = require(editProfile.Hooks.useRealNamesInDisplayNamesEnabled)
-local focusNavigatorWrapperModule = require(editProfile.Utils.FocusNavigatorWrapper)
-local fFlagEditProfilePPEStartOnEmotesPageModule = require(editProfile.Flags.FFlagEditProfilePPEStartOnEmotesPage)
-local fFlagEditProfileUsernameServerPriceModule = require(editProfile.Flags.FFlagEditProfileUsernameServerPrice)
-local useSignalState = require(parent.SignalsReact).useSignalState
-local dataHydrationTypes = require(parent.DataHydration).DataHydrationTypes
-local var2 = require(parent.Signals).createSignal("")
-local analyticsServiceV2Module = require(editProfile.Analytics.AnalyticsServiceV2)
-local fFlagAXEnableProfileTab = require(parent.SharedFlags).FFlagAXEnableProfileTab
-local fFlagAXPPEReturnToEntrySurface = require(parent.SharedFlags).FFlagAXPPEReturnToEntrySurface
-local fFlagEditProfileImageV2Enabled = require(parent.SharedFlags).FFlagEditProfileImageV2Enabled
-local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
-local roactNavigationModule = require(parent.RoactNavigation)
-local navigationEvents = roactNavigationModule.NavigationEvents
-local editProfileIXPLayer = game:DefineFastString("EditProfileIXPLayer", "Social.EditProfilePage")
+local Parent = EditProfile.Parent
+local EditProfileLandingModule = require(EditProfile.Components.EditProfileLanding.EditProfileLanding)
+local EditProfileLandingV2Module = require(EditProfile.Components.EditProfileLanding.EditProfileLandingV2)
+local FFlagEditProfileLandingV2EnabledModule = require(EditProfile.Flags.FFlagEditProfileLandingV2Enabled)
+local ReactModule = require(Parent.React)
+local CryoModule = require(Parent.Cryo)
+local UseEffectFunction = ReactModule.useEffect
+local UseLocalUserIdFunction = require(Parent.RobloxAppHooks).useLocalUserId
+local GetResult = require(Parent.UserProfiles).Stores.UserProfileStore.get()
+local EditProfileStoreModule = require(EditProfile.Stores.EditProfileStore)
+local ProfileRefreshSignal = require(Parent.ProfilePlatformCommon).Signals.ProfileRefreshSignal
+local EnumsModule = require(EditProfile.Common.Enums)
+local ConstantsModule = require(EditProfile.Common.Constants)
+local UseLocalRobuxBalanceFunction = require(Parent.RobloxAppHooks).useLocalRobuxBalance
+local UseRealNamesInDisplayNamesEnabledModule = require(EditProfile.Hooks.useRealNamesInDisplayNamesEnabled)
+local FocusNavigatorWrapperModule = require(EditProfile.Utils.FocusNavigatorWrapper)
+local FFlagEditProfilePPEStartOnEmotesPageModule = require(EditProfile.Flags.FFlagEditProfilePPEStartOnEmotesPage)
+local FFlagEditProfileUsernameServerPriceModule = require(EditProfile.Flags.FFlagEditProfileUsernameServerPrice)
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local DataHydrationTypes = require(Parent.DataHydration).DataHydrationTypes
+local Signal = require(Parent.Signals).createSignal("")
+local AnalyticsServiceV2Module = require(EditProfile.Analytics.AnalyticsServiceV2)
+local FFlagAXEnableProfileTab = require(Parent.SharedFlags).FFlagAXEnableProfileTab
+local FFlagAXPPEReturnToEntrySurface = require(Parent.SharedFlags).FFlagAXPPEReturnToEntrySurface
+local FFlagEditProfileImageV2Enabled = require(Parent.SharedFlags).FFlagEditProfileImageV2Enabled
+local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
+local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
+local RoactNavigationModule = require(Parent.RoactNavigation)
+local NavigationEvents = RoactNavigationModule.NavigationEvents
+local EditProfileIXPLayer = game:DefineFastString("EditProfileIXPLayer", "Social.EditProfilePage")
 
-local function _(p1)
-	local var3 = p1._dangerouslyGetParent()
-	local state = var3 and var3.state
+local function _(p1) --[[ Line: 59 | Named "getHostRoute" ]]
+	local DangerouslyGetParentResult = p1._dangerouslyGetParent()
+	local State = DangerouslyGetParentResult and DangerouslyGetParentResult.state
 	
-	return if state and state.routeName then state else nil
+	return if State and State.routeName then State else nil
 end
 
-local function getCoveredPage(p1, p2)
-	local var3 = p1
-	local var4 = var3._dangerouslyGetParent()
-	while var4 do
-		var3 = var4
-		var4 = if var3._dangerouslyGetParent then var3._dangerouslyGetParent() else nil
+local function getCoveredPage(Navigation, p1) --[[ Line: 66 ]]
+	local Navigation1 = Navigation
+	local DangerouslyGetParentResult = Navigation1._dangerouslyGetParent()
+	while DangerouslyGetParentResult do
+		Navigation1 = DangerouslyGetParentResult
+		DangerouslyGetParentResult = if Navigation1._dangerouslyGetParent then Navigation1._dangerouslyGetParent() else nil
 	end
-	local routes = var3.state.routes
+	local Routes = Navigation1.state.routes
 	
-	if not routes then
+	if not Routes then
 		return nil, nil
 	end
-	for i, v in routes do
-		if v.routeName == p2.routeName and i > 1 then
-			local var5 = routes[i - 1]
-			local var6 = if var5.routes and var5.index then var5.routes[var5.index] else var5
+	for i, route in Routes do
+		if route.routeName == p1.routeName and i > 1 then
+			local Route = Routes[i - 1]
+			local Route1 = if Route.routes and Route.index then Route.routes[Route.index] else Route
 			
-			return var6.routeName, var6.params
+			return Route1.routeName, Route1.params
 		end
 	end
 	return nil, nil
 end
 
-local function openEditProfileImageFromProfilePlatform(p3, p4)
-	-- upvalues: fFlagAXEnableProfileTab (ref), enumsModule (ref)
+local function openEditProfileImageFromProfilePlatform(Navigation, p2) --[[ Line: 94 ]]
+	-- upvalues: FFlagAXEnableProfileTab (copy), EnumsModule (copy)
 	local t = {}
 	
-	if p4 and p4.mode then
-		t.mode = p4.mode
+	if p2 and p2.mode then
+		t.mode = p2.mode
 	end
-	if fFlagAXEnableProfileTab and p3.getParam and p3.getParam("fullBleed") == true then
+	if FFlagAXEnableProfileTab and Navigation.getParam and Navigation.getParam("fullBleed") == true then
 		t.fullBleed = true
 	end
 	if next(t) == nil then
-		p3.navigate(enumsModule.Screens.EditProfileImageProfilePlatform)
+		Navigation.navigate(EnumsModule.Screens.EditProfileImageProfilePlatform)
 		
 		return
+	else
+		Navigation.navigate(EnumsModule.Screens.EditProfileImageProfilePlatform, t)
 	end
-	p3.navigate(enumsModule.Screens.EditProfileImageProfilePlatform, t)
 end
 
-return function(p3)
-	-- upvalues: useLocalUserId (ref), useRealNamesInDisplayNamesEnabledModule (ref), profileRefreshSignal (ref), reactModule (ref), focusNavigationUtilsModule (ref), reactFocusNavigationModule (ref), useEffect (ref), fFlagAXEnableProfileTab (ref), analyticsServiceV2Module (ref), enumsModule (ref), constantsModule (ref), useLocalRobuxBalance (ref), fFlagEditProfileUsernameServerPriceModule (ref), editProfileStoreModule (ref), useSignalState (ref), fFlagEditProfileImageV2Enabled (ref), openEditProfileImageFromProfilePlatform (ref), fFlagAXPPEReturnToEntrySurface (ref), fFlagEditProfilePPEStartOnEmotesPageModule (ref), getCoveredPage (ref), roactNavigationModule (ref), var1 (ref), var2 (ref), dataHydrationTypes (ref), focusNavigatorWrapperModule (ref), navigationEvents (ref), IXPService (ref), editProfileIXPLayer (ref), fFlagEditProfileLandingV2EnabledModule (ref), editProfileLandingV2Module (ref), cryoModule (ref), editProfileLandingModule (ref)
-	local var7 = useLocalUserId()
-	local var8 = useRealNamesInDisplayNamesEnabledModule()
+return function(p2) --[[ Line: 114 | Named "EditProfileLandingContainer" ]]
+	-- upvalues: UseLocalUserIdFunction (copy), UseRealNamesInDisplayNamesEnabledModule (copy), ProfileRefreshSignal (copy), ReactModule (copy), FocusNavigationUtilsModule (copy), ReactFocusNavigationModule (copy), UseEffectFunction (copy), FFlagAXEnableProfileTab (copy), AnalyticsServiceV2Module (copy), EnumsModule (copy), ConstantsModule (copy), UseLocalRobuxBalanceFunction (copy), FFlagEditProfileUsernameServerPriceModule (copy), EditProfileStoreModule (copy), UseSignalStateFunction (copy), FFlagEditProfileImageV2Enabled (copy), openEditProfileImageFromProfilePlatform (copy), FFlagAXPPEReturnToEntrySurface (copy), FFlagEditProfilePPEStartOnEmotesPageModule (copy), getCoveredPage (copy), RoactNavigationModule (copy), GetResult (copy), Signal (copy), DataHydrationTypes (copy), FocusNavigatorWrapperModule (copy), NavigationEvents (copy), IXPService (copy), EditProfileIXPLayer (copy), FFlagEditProfileLandingV2EnabledModule (copy), EditProfileLandingV2Module (copy), CryoModule (copy), EditProfileLandingModule (copy)
+	local UseLocalUserIdResult = UseLocalUserIdFunction()
+	local UseRealNamesInDisplayNamesEnabledModuleResult = UseRealNamesInDisplayNamesEnabledModule()
 	
-	local var9 = function()
-		-- upvalues: profileRefreshSignal (copy), p3 (ref)
-		profileRefreshSignal.notifyProfileRefresh()
-		p3.navigation.pop()
+	local function OnClose() --[[ Line: 117 ]]
+		-- upvalues: ProfileRefreshSignal (upval), p2 (copy)
+		ProfileRefreshSignal.notifyProfileRefresh()
+		p2.navigation.pop()
 	end
 	
-	local var10 = reactModule.useRef(nil)
-	local t = {}
-	local var11 = focusNavigationUtilsModule.useAutoFocus(t, 0.1)
-	local var12 = reactModule.useContext(reactFocusNavigationModule.FocusNavigationContext)
-	useEffect(function()
-		-- upvalues: t (ref), var10 (ref), var12 (ref), var11 (ref)
-		t[1] = var10.current
-		local var13 = if var12 and var12.focusedGuiObject:getValue() ~= nil and var11 then var11() else nil
+	local UseRefResult = ReactModule.useRef(nil)
+	local Currents = {}
+	local UseAutoFocusResult = FocusNavigationUtilsModule.useAutoFocus(Currents, 0.1)
+	local UseContextResult = ReactModule.useContext(ReactFocusNavigationModule.FocusNavigationContext)
+	UseEffectFunction(function() --[[ Line: 127 ]]
+		-- upvalues: Currents (copy), UseRefResult (copy), UseContextResult (copy), UseAutoFocusResult (copy)
+		Currents[1] = UseRefResult.current
+		local UseAutoFocusResultResult = if UseContextResult and UseContextResult.focusedGuiObject:getValue() ~= nil and UseAutoFocusResult then UseAutoFocusResult() else nil
 		
-		return function()
-			-- upvalues: var13 (write)
-			if var13 then
-				var13.cancel()
+		return function() --[[ Line: 133 ]]
+			-- upvalues: UseAutoFocusResultResult (ref)
+			if UseAutoFocusResultResult then
+				UseAutoFocusResultResult.cancel()
 			end
 		end
-	end, { var11 })
-	local var13 = fFlagAXEnableProfileTab and p3.navigation.getParam("fullBleed") == true
+	end, { UseAutoFocusResult })
+	local IsFullBleedParam: boolean = FFlagAXEnableProfileTab and p2.navigation.getParam("fullBleed") == true
 	
-	local var14 = function()
-		-- upvalues: analyticsServiceV2Module (copy), p3 (ref), enumsModule (copy), var13 (ref)
-		analyticsServiceV2Module.sendDisplayNameModalOpened()
-		p3.navigation.navigate(enumsModule.Screens.EditProfileSubScreen, {
-			screen = enumsModule.Screens.EditDisplayName,
-			fullBleed = var13
+	local function DisplayName() --[[ Line: 145 ]]
+		-- upvalues: AnalyticsServiceV2Module (upval), p2 (copy), EnumsModule (upval), IsFullBleedParam (copy)
+		AnalyticsServiceV2Module.sendDisplayNameModalOpened()
+		p2.navigation.navigate(EnumsModule.Screens.EditProfileSubScreen, {
+			screen = EnumsModule.Screens.EditDisplayName,
+			fullBleed = IsFullBleedParam
 		})
 	end
 	
-	local function showToast(p4)
-		-- upvalues: p3 (ref), enumsModule (copy)
-		p3.navigation.goBack()
-		p3.navigation.navigate(enumsModule.Screens.EditProfileToast, { text = p4 })
+	local function showToast(Text) --[[ Line: 153 ]]
+		-- upvalues: p2 (copy), EnumsModule (upval)
+		p2.navigation.goBack()
+		p2.navigation.navigate(EnumsModule.Screens.EditProfileToast, { text = Text })
 	end
 	
-	local param = p3.navigation.getParam(constantsModule.EditUserNameWebView)
+	local Param = p2.navigation.getParam(ConstantsModule.EditUserNameWebView)
 	
-	local var15 = function()
-		-- upvalues: p3 (ref), enumsModule (copy)
-		p3.navigation.navigate(enumsModule.Screens.UsernameInsufficientFundsModal)
+	local function NavigateDownToPurchaseRobux() --[[ Line: 160 ]]
+		-- upvalues: p2 (copy), EnumsModule (upval)
+		p2.navigation.navigate(EnumsModule.Screens.UsernameInsufficientFundsModal)
 	end
 	
-	local var16 = useLocalRobuxBalance()
-	local var17 = if fFlagEditProfileUsernameServerPriceModule then useSignalState(editProfileStoreModule.getUsernameChangePrice(tostring(var7)).data) else nil
+	local UseLocalRobuxBalanceResult = UseLocalRobuxBalanceFunction()
+	local UseSignalStateResult = if FFlagEditProfileUsernameServerPriceModule then UseSignalStateFunction(EditProfileStoreModule.getUsernameChangePrice((tostring(UseLocalUserIdResult))).data) else nil
 	
-	local var18 = function()
-		-- upvalues: fFlagEditProfileUsernameServerPriceModule (copy), var17 (write), constantsModule (copy), var16 (ref), param (ref), showToast (ref), p3 (ref), enumsModule (copy), var15 (ref), analyticsServiceV2Module (copy)
-		local var19 = if fFlagEditProfileUsernameServerPriceModule then var17 and var17.priceInRobux else constantsModule.ChangeUsernamePrice
+	local function Username() --[[ Line: 171 ]]
+		-- upvalues: FFlagEditProfileUsernameServerPriceModule (upval), UseSignalStateResult (ref), ConstantsModule (upval), UseLocalRobuxBalanceResult (copy), Param (copy), showToast (copy), p2 (copy), EnumsModule (upval), NavigateDownToPurchaseRobux (copy), AnalyticsServiceV2Module (upval)
+		local PriceInRobux = if FFlagEditProfileUsernameServerPriceModule then UseSignalStateResult and UseSignalStateResult.priceInRobux else ConstantsModule.ChangeUsernamePrice
 		
-		if (fFlagEditProfileUsernameServerPriceModule and (var17 ~= nil and var17.isFreeUsernameChange)) or var19 == nil or var19 <= var16 then
-			param(showToast)
+		if FFlagEditProfileUsernameServerPriceModule and (UseSignalStateResult ~= nil and UseSignalStateResult.isFreeUsernameChange) or PriceInRobux == nil or PriceInRobux <= UseLocalRobuxBalanceResult then
+			Param(showToast)
 		else
-			p3.navigation.navigate(enumsModule.Screens.UsernameInsufficientFundsModal, {
-				robux = var19 - var16,
-				navigateDownToPurchaseRobux = var15
+			p2.navigation.navigate(EnumsModule.Screens.UsernameInsufficientFundsModal, {
+				robux = PriceInRobux - UseLocalRobuxBalanceResult,
+				navigateDownToPurchaseRobux = NavigateDownToPurchaseRobux
 			})
 		end
-		analyticsServiceV2Module.sendEditUsernameOpened()
+		AnalyticsServiceV2Module.sendEditUsernameOpened()
 	end
 	
-	local var19 = function()
-		-- upvalues: p3 (ref), enumsModule (copy), var13 (ref)
-		p3.navigation.navigate(enumsModule.Screens.EditProfileSubScreen, { screen = enumsModule.Screens.EditBio, fullBleed = var13 })
+	local function Bio() --[[ Line: 197 ]]
+		-- upvalues: p2 (copy), EnumsModule (upval), IsFullBleedParam (copy)
+		p2.navigation.navigate(EnumsModule.Screens.EditProfileSubScreen, {
+			screen = EnumsModule.Screens.EditBio,
+			fullBleed = IsFullBleedParam
+		})
 	end
 	
-	local var20 = function()
-		-- upvalues: analyticsServiceV2Module (copy), fFlagEditProfileImageV2Enabled (copy), openEditProfileImageFromProfilePlatform (copy), p3 (ref), fFlagAXPPEReturnToEntrySurface (copy), fFlagEditProfilePPEStartOnEmotesPageModule (copy), enumsModule (copy), getCoveredPage (copy), roactNavigationModule (copy)
-		analyticsServiceV2Module.sendOpenAvatarMarketplace()
+	local function Avatar() --[[ Line: 204 ]]
+		-- upvalues: AnalyticsServiceV2Module (upval), FFlagEditProfileImageV2Enabled (upval), openEditProfileImageFromProfilePlatform (upval), p2 (copy), FFlagAXPPEReturnToEntrySurface (upval), FFlagEditProfilePPEStartOnEmotesPageModule (upval), EnumsModule (upval), getCoveredPage (upval), RoactNavigationModule (upval)
+		AnalyticsServiceV2Module.sendOpenAvatarMarketplace()
 		
-		if fFlagEditProfileImageV2Enabled then
-			openEditProfileImageFromProfilePlatform(p3.navigation)
+		if FFlagEditProfileImageV2Enabled then
+			openEditProfileImageFromProfilePlatform(p2.navigation)
 			
 			return
-		elseif fFlagAXPPEReturnToEntrySurface then
-			local var21 = if fFlagEditProfilePPEStartOnEmotesPageModule then enumsModule.Screens.ProfilePictureEditorEmotes else enumsModule.Screens.ProfilePictureEditorCamera
-			local var22 = p3.navigation._dangerouslyGetParent()
-			local state = var22 and var22.state
-			local var23 = if state and state.routeName then state else nil
+		end
+		if FFlagAXPPEReturnToEntrySurface then
+			local ProfilePictureEditorEmotes = if FFlagEditProfilePPEStartOnEmotesPageModule then EnumsModule.Screens.ProfilePictureEditorEmotes else EnumsModule.Screens.ProfilePictureEditorCamera
+			local DangerouslyGetParentResult = p2.navigation._dangerouslyGetParent()
+			local State = DangerouslyGetParentResult and DangerouslyGetParentResult.state
+			local State1 = if State and State.routeName then State else nil
 			
-			if var23 then
-				local var24, var25 = getCoveredPage(p3.navigation, var23)
-				p3.navigation.navigate(var21, {
+			if State1 then
+				local CoveredPage, CoveredPage2 = getCoveredPage(p2.navigation, State1)
+				p2.navigation.navigate(ProfilePictureEditorEmotes, {
 					entryOrigin = {
-						screenName = var23.routeName,
-						screenParams = var23.params,
-						reopenAction = roactNavigationModule.Actions.navigate({
-							routeName = p3.navigation.state.routeName,
-							params = p3.navigation.state.params
+						screenName = State1.routeName,
+						screenParams = State1.params,
+						reopenAction = RoactNavigationModule.Actions.navigate({
+							routeName = p2.navigation.state.routeName,
+							params = p2.navigation.state.params
 						}),
-						coveredScreenName = var24,
-						coveredScreenParams = var25
+						coveredScreenName = CoveredPage,
+						coveredScreenParams = CoveredPage2
 					}
 				})
 				
 				return
-			elseif fFlagEditProfilePPEStartOnEmotesPageModule then
-				p3.navigation.navigate(enumsModule.Screens.ProfilePictureEditorEmotes)
-				
-				return
 			end
-			p3.navigation.navigate(enumsModule.Screens.ProfilePictureEditorCamera)
+		end
+		if FFlagEditProfilePPEStartOnEmotesPageModule then
+			p2.navigation.navigate(EnumsModule.Screens.ProfilePictureEditorEmotes)
+			
+			return
+		else
+			p2.navigation.navigate(EnumsModule.Screens.ProfilePictureEditorCamera)
 		end
 	end
 	
-	local var21 = reactModule.useMemo(function()
-		-- upvalues: var1 (copy), var7 (ref)
-		return var1.fetchNamesByUserIds({ tostring(var7) })
-	end, { var7 })
-	useEffect(function()
-		-- upvalues: analyticsServiceV2Module (copy)
-		analyticsServiceV2Module.sendEditProfileOpened()
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 241 ]]
+		-- upvalues: GetResult (upval), UseLocalUserIdResult (copy)
+		return GetResult.fetchNamesByUserIds({ (tostring(UseLocalUserIdResult)) })
+	end, { UseLocalUserIdResult })
+	UseEffectFunction(function() --[[ Line: 244 ]]
+		-- upvalues: AnalyticsServiceV2Module (upval)
+		AnalyticsServiceV2Module.sendEditProfileOpened()
 	end, {})
-	local var22 = useSignalState(var21)
-	local var23 = not var22 or var22.status ~= "success"
-	local var24 = var22 and (var22.data and var22.data[1])
-	local description = editProfileStoreModule.getDescription(var7)
-	local t_1 = {
-		userId = var7,
-		fullBleed = var13,
-		onClose = var9,
-		username = useSignalState(if var24 then var24.names.getUsername else var2) or "",
-		displayName = useSignalState(if var24 then var24.names.getDisplayName else var2) or "",
-		areNamesLoading = var23,
-		bioText = useSignalState(description.data) or "",
-		isBioLoading = useSignalState(description.status) == dataHydrationTypes.DataStatus.NotReady,
-		isPolicyEnabled = var8,
+	local UseSignalStateResult1 = UseSignalStateFunction(UseMemoResult)
+	local Entry = UseSignalStateResult1 and (UseSignalStateResult1.data and UseSignalStateResult1.data[1])
+	local Description = EditProfileStoreModule.getDescription(UseLocalUserIdResult)
+	
+	local function OnProfileFramesActivated() --[[ Line: 263 ]]
+		-- upvalues: openEditProfileImageFromProfilePlatform (upval), p2 (copy), EnumsModule (upval)
+		openEditProfileImageFromProfilePlatform(p2.navigation, { mode = EnumsModule.EditProfileImageMode.FramesOnly })
+	end
+	
+	local config = {
+		userId = UseLocalUserIdResult,
+		fullBleed = IsFullBleedParam,
+		onClose = OnClose,
+		username = UseSignalStateFunction(if Entry then Entry.names.getUsername else Signal) or "",
+		displayName = UseSignalStateFunction(if Entry then Entry.names.getDisplayName else Signal) or "",
+		areNamesLoading = not UseSignalStateResult1 or UseSignalStateResult1.status ~= "success",
+		bioText = UseSignalStateFunction(Description.data) or "",
+		isBioLoading = UseSignalStateFunction(Description.status) == DataHydrationTypes.DataStatus.NotReady,
+		isPolicyEnabled = UseRealNamesInDisplayNamesEnabledModuleResult,
 		settingButtonOnActivated = {
-			displayName = var14,
-			username = var18,
-			bio = var19,
-			avatar = var20
+			displayName = DisplayName,
+			username = Username,
+			bio = Bio,
+			avatar = Avatar
 		},
-		firstItemRef = var10
+		firstItemRef = UseRefResult
 	}
 	
-	return focusNavigatorWrapperModule({ onClose = var9 }, {
-		EditProfileLandingExposureLogger = reactModule.createElement(navigationEvents, {
-			onDidFocus = function()
-				-- upvalues: IXPService (copy), editProfileIXPLayer (copy)
-				IXPService:LogUserLayerExposure(editProfileIXPLayer)
+	return FocusNavigatorWrapperModule({ onClose = OnClose }, {
+		EditProfileLandingExposureLogger = ReactModule.createElement(NavigationEvents, {
+			onDidFocus = function() --[[ Line: 295 ]]
+				-- upvalues: IXPService (upval), EditProfileIXPLayer (upval)
+				IXPService:LogUserLayerExposure(EditProfileIXPLayer)
 			end
 		}),
-		EditProfileLanding = if fFlagEditProfileLandingV2EnabledModule then reactModule.createElement(editProfileLandingV2Module, cryoModule.Dictionary.join(t_1, {
-			onProfileFramesActivated = function()
-				-- upvalues: openEditProfileImageFromProfilePlatform (copy), p3 (ref), enumsModule (copy)
-				openEditProfileImageFromProfilePlatform(p3.navigation, { mode = enumsModule.EditProfileImageMode.FramesOnly })
-			end
-		})) else reactModule.createElement(editProfileLandingModule, t_1)
+		EditProfileLanding = if FFlagEditProfileLandingV2EnabledModule then ReactModule.createElement(EditProfileLandingV2Module, CryoModule.Dictionary.join(config, { onProfileFramesActivated = OnProfileFramesActivated })) else ReactModule.createElement(EditProfileLandingModule, config)
 	})
 end

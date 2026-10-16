@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent.Parent._Workspace.AppChat.AppChat.Telemetry.Layers.ChatLandingTelemetryLayer)
+﻿return (require(script.Parent.Parent.Parent.Parent._Workspace.AppChat.AppChat.Telemetry.Layers.ChatLandingTelemetryLayer))

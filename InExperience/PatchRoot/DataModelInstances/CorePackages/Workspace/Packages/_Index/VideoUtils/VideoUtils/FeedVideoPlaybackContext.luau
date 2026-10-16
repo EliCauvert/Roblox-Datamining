@@ -1,38 +1,33 @@
-﻿local videoUtils = script:FindFirstAncestor("VideoUtils")
-local parent = videoUtils.Parent
-local viewportVideoAutoplayModeModule = require(videoUtils.ViewportVideoAutoplayMode)
-local videoPlaybackCoordinatorModule = require(videoUtils.VideoPlaybackCoordinator)
-local videoPlaybackDetectionMethodModule = require(videoUtils.VideoPlaybackDetectionMethod)
-local viewportVideoAutoplayControllerModule = require(videoUtils.ViewportVideoAutoplayController)
-local fFlagLuaAppVideoAutoplayFeedElection = require(parent.SharedFlags).FFlagLuaAppVideoAutoplayFeedElection
-local fFlagLuaAppOneByTwoHoverIdleAutoplay = require(parent.SharedFlags).FFlagLuaAppOneByTwoHoverIdleAutoplay
-local t = {}
-t.__index = t
+﻿local VideoUtils = script:FindFirstAncestor("VideoUtils")
+local Parent = VideoUtils.Parent
+local ViewportVideoAutoplayModeModule = require(VideoUtils.ViewportVideoAutoplayMode)
+local VideoPlaybackCoordinatorModule = require(VideoUtils.VideoPlaybackCoordinator)
+local VideoPlaybackDetectionMethodModule = require(VideoUtils.VideoPlaybackDetectionMethod)
+local ViewportVideoAutoplayControllerModule = require(VideoUtils.ViewportVideoAutoplayController)
+local FFlagLuaAppVideoAutoplayFeedElection = require(Parent.SharedFlags).FFlagLuaAppVideoAutoplayFeedElection
+local FFlagLuaAppOneByTwoHoverIdleAutoplay = require(Parent.SharedFlags).FFlagLuaAppOneByTwoHoverIdleAutoplay
+local FeedVideoPlaybackContextModule = {}
+FeedVideoPlaybackContextModule.__index = FeedVideoPlaybackContextModule
 
-function t.new(p1, p2, p3, p4)
-	-- upvalues: videoPlaybackCoordinatorModule (ref), fFlagLuaAppOneByTwoHoverIdleAutoplay (ref), videoPlaybackDetectionMethodModule (ref), viewportVideoAutoplayModeModule (ref), viewportVideoAutoplayControllerModule (ref), fFlagLuaAppVideoAutoplayFeedElection (ref), t (ref)
-	local var1 = videoPlaybackCoordinatorModule.new()
-	local userIntentWithSelectiveAutoplay = nil
+function FeedVideoPlaybackContextModule.new(NewResult, p1, p2, AutoplayAllCandidates) --[[ Line: 30 ]]
+	-- upvalues: VideoPlaybackCoordinatorModule (copy), FFlagLuaAppOneByTwoHoverIdleAutoplay (copy), VideoPlaybackDetectionMethodModule (copy), ViewportVideoAutoplayModeModule (copy), ViewportVideoAutoplayControllerModule (copy), FFlagLuaAppVideoAutoplayFeedElection (copy), FeedVideoPlaybackContextModule (copy)
+	local NewVideoPlaybackCoordinator = VideoPlaybackCoordinatorModule.new()
+	local AutoplayAllCandidates1 = nil
 	
-	if fFlagLuaAppOneByTwoHoverIdleAutoplay then
-		if p4 == videoPlaybackDetectionMethodModule.Viewport then
-			userIntentWithSelectiveAutoplay = viewportVideoAutoplayModeModule.AutoplayAllCandidates
-		elseif p4 == videoPlaybackDetectionMethodModule.Hover then
-			userIntentWithSelectiveAutoplay = viewportVideoAutoplayModeModule.UserIntentWithSelectiveAutoplay
+	if FFlagLuaAppOneByTwoHoverIdleAutoplay then
+		if AutoplayAllCandidates == VideoPlaybackDetectionMethodModule.Viewport then
+			AutoplayAllCandidates1 = ViewportVideoAutoplayModeModule.AutoplayAllCandidates
+		elseif AutoplayAllCandidates == VideoPlaybackDetectionMethodModule.Hover then
+			AutoplayAllCandidates1 = ViewportVideoAutoplayModeModule.UserIntentWithSelectiveAutoplay
 		end
 	end
-	local var2 = if fFlagLuaAppOneByTwoHoverIdleAutoplay and userIntentWithSelectiveAutoplay ~= nil then viewportVideoAutoplayControllerModule.new(var1, if fFlagLuaAppVideoAutoplayFeedElection then p2 else nil, if fFlagLuaAppVideoAutoplayFeedElection then p3 else nil, userIntentWithSelectiveAutoplay) else nil
-	
-	if p1 then
-		var2 = viewportVideoAutoplayControllerModule.new(var1, if fFlagLuaAppVideoAutoplayFeedElection then p2 else nil, if fFlagLuaAppVideoAutoplayFeedElection then p3 else nil)
-	end
-	local t_1 = {
-		videoPlaybackCoordinator = var1,
-		viewportVideoAutoplayController = var2
+	local config = {
+		videoPlaybackCoordinator = NewVideoPlaybackCoordinator,
+		viewportVideoAutoplayController = if FFlagLuaAppOneByTwoHoverIdleAutoplay and AutoplayAllCandidates1 ~= nil then if NewResult then ViewportVideoAutoplayControllerModule.new(NewVideoPlaybackCoordinator, if FFlagLuaAppVideoAutoplayFeedElection then p1 else nil, if FFlagLuaAppVideoAutoplayFeedElection then p2 else nil) else ViewportVideoAutoplayControllerModule.new(NewVideoPlaybackCoordinator, if FFlagLuaAppVideoAutoplayFeedElection then p1 else nil, if FFlagLuaAppVideoAutoplayFeedElection then p2 else nil, AutoplayAllCandidates1) elseif NewResult then ViewportVideoAutoplayControllerModule.new(NewVideoPlaybackCoordinator, if FFlagLuaAppVideoAutoplayFeedElection then p1 else nil, if FFlagLuaAppVideoAutoplayFeedElection then p2 else nil) else nil
 	}
-	setmetatable(t_1, t)
+	setmetatable(config, FeedVideoPlaybackContextModule)
 	
-	return t_1
+	return config
 end
 
-return t
+return FeedVideoPlaybackContextModule

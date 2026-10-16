@@ -1,26 +1,25 @@
-﻿local parent = script:FindFirstAncestor("DataHydration").Parent
-local url = require(parent.Http).Url
-local urlBuilder = require(parent.UrlBuilder).UrlBuilder
-local getFStringEdpPlayerFeedbackServiceRoute = require(parent.SharedFlags).GetFStringEdpPlayerFeedbackServiceRoute
-local _ = { ExperienceDiscoveryPage = "experience-discovery-page" }
+﻿local Parent = script:FindFirstAncestor("DataHydration").Parent
+local Url = require(Parent.Http).Url
+local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
+local GetFStringEdpPlayerFeedbackServiceRouteFunction = require(Parent.SharedFlags).GetFStringEdpPlayerFeedbackServiceRoute
 
 return {
-	USER_VOTE_FEEDBACK_METADATA_URL = urlBuilder.new({
+	USER_VOTE_FEEDBACK_METADATA_URL = UrlBuilder.new({
 		path = "{serviceRoute}/v1/channels/{channel}/assets",
-		base = url.APIS_URL
+		base = Url.APIS_URL
 	})({
 		channel = "experience-discovery-page",
-		serviceRoute = getFStringEdpPlayerFeedbackServiceRoute()
+		serviceRoute = GetFStringEdpPlayerFeedbackServiceRouteFunction()
 	}),
-	buildUserVoteFeedbackMetadataUrl = function(p1)
-		-- upvalues: urlBuilder (ref), url (ref), getFStringEdpPlayerFeedbackServiceRoute (ref)
-		return urlBuilder.new({
+	buildUserVoteFeedbackMetadataUrl = function(RootPlaceId) --[[ Line: 22 ]]
+		-- upvalues: UrlBuilder (copy), Url (copy), GetFStringEdpPlayerFeedbackServiceRouteFunction (copy)
+		return UrlBuilder.new({
 			path = "{serviceRoute}/v1/channels/{channel}/assets/{rootPlaceId}",
-			base = url.APIS_URL
+			base = Url.APIS_URL
 		})({
 			channel = "experience-discovery-page",
-			serviceRoute = getFStringEdpPlayerFeedbackServiceRoute(),
-			rootPlaceId = p1
+			serviceRoute = GetFStringEdpPlayerFeedbackServiceRouteFunction(),
+			rootPlaceId = RootPlaceId
 		})
 	end
 }

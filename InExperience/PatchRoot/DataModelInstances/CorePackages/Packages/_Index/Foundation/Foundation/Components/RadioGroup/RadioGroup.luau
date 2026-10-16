@@ -1,49 +1,54 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local _ = require(foundation.Components.Types)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local internalInputGroupModule = require(foundation.Components.InternalInputGroup)
-local radioGroupContextModule = require(script.Parent.RadioGroupContext)
-local t = {
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local _ = require(Foundation.Components.Types)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local InternalInputGroupModule = require(Foundation.Components.InternalInputGroup)
+local RadioGroupContextModule = require(script.Parent.RadioGroupContext)
+local config = {
 	Selectable = true,
 	testId = "--foundation-radio-group",
-	size = require(foundation.Enums.InputSize).Medium,
-	placement = require(foundation.Enums.InputPlacement).Start
+	size = require(Foundation.Enums.InputSize).Medium,
+	placement = require(Foundation.Enums.InputPlacement).Start
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), internalInputGroupModule (ref), withCommonPropsModule (ref), radioGroupContextModule (ref)
-	local var1 = withDefaultsModule(p1, t)
-	local var2, var3 = reactModule.useState(var1.value)
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), var3 (ref)
-		if var1.value ~= nil then
-			var3(var1.value)
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 33 | Named "RadioGroup" ]]
+	-- upvalues: WithDefaultsModule (copy), config (copy), ReactModule (copy), InternalInputGroupModule (copy), WithCommonPropsModule (copy), RadioGroupContextModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(WithDefaultsModuleResult.value)
+	ReactModule.useEffect(function() --[[ Line: 37 ]]
+		-- upvalues: WithDefaultsModuleResult (copy), UseStateResult2 (copy)
+		if WithDefaultsModuleResult.value ~= nil then
+			UseStateResult2(WithDefaultsModuleResult.value)
 		end
-	end, { var1.value })
-	local var4 = reactModule.useCallback(function(p3)
-		-- upvalues: var3 (ref), var1 (ref)
-		var3(p3)
-		var1.onValueChanged(p3)
-	end, { var3, var1.onValueChanged })
+	end, { WithDefaultsModuleResult.value })
+	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 43 ]]
+		-- upvalues: UseStateResult2 (copy), WithDefaultsModuleResult (copy)
+		UseStateResult2(p2)
+		WithDefaultsModuleResult.onValueChanged(p2)
+	end, { UseStateResult2, WithDefaultsModuleResult.onValueChanged })
 	
-	return reactModule.createElement(internalInputGroupModule, withCommonPropsModule(var1, {
-		size = var1.size,
-		placement = var1.placement,
-		legend = var1.legend,
-		ref = p2
+	return (ReactModule.createElement(InternalInputGroupModule, WithCommonPropsModule(WithDefaultsModuleResult, {
+		size = WithDefaultsModuleResult.size,
+		placement = WithDefaultsModuleResult.placement,
+		legend = WithDefaultsModuleResult.legend,
+		ref = Ref
 	}), {
-		RadioGroupContext = reactModule.createElement(radioGroupContextModule.Provider, {
-			value = reactModule.useMemo(function()
-				-- upvalues: var2 (ref), var4 (ref), var1 (ref)
+		RadioGroupContext = ReactModule.createElement(RadioGroupContextModule.Provider, {
+			value = ReactModule.useMemo(function() --[[ Line: 48 ]]
+				-- upvalues: UseStateResult (copy), UseResult (copy), WithDefaultsModuleResult (copy)
 				return {
-					value = var2,
-					onValueChanged = var4,
-					Selectable = var1.Selectable,
-					testId = var1.testId
+					value = UseStateResult,
+					onValueChanged = UseResult,
+					Selectable = WithDefaultsModuleResult.Selectable,
+					testId = WithDefaultsModuleResult.testId
 				}
-			end, { var2, var4, var1.Selectable, var1.testId })
-		}, var1.children)
-	})
+			end, {
+				UseStateResult,
+				UseResult,
+				WithDefaultsModuleResult.Selectable,
+				WithDefaultsModuleResult.testId
+			})
+		}, WithDefaultsModuleResult.children)
+	}))
 end))

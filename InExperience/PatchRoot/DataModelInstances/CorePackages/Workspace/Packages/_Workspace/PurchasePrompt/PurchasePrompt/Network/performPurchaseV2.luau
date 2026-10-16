@@ -1,18 +1,18 @@
-﻿local parent = script.Parent.Parent
-local purchaseErrorModule = require(parent.Enums.PurchaseError)
-local constantsModule = require(parent.Misc.Constants)
-local promiseModule = require(parent.Promise)
-local isGenericChallengeResponseModule = require(parent.Utils.isGenericChallengeResponse)
-local isEconomicRestrictionResponse = require(parent.Parent.IAPExperience).Utility.isEconomicRestrictionResponse
-local fFlagEnablePriceChangedErrorHandlingModule = require(parent.Flags.FFlagEnablePriceChangedErrorHandling)
+﻿local Parent = script.Parent.Parent
+local PurchaseErrorModule = require(Parent.Enums.PurchaseError)
+local ConstantsModule = require(Parent.Misc.Constants)
+local PromiseModule = require(Parent.Promise)
+local IsGenericChallengeResponseModule = require(Parent.Utils.isGenericChallengeResponse)
+local IsEconomicRestrictionResponseFunction = require(Parent.Parent.IAPExperience).Utility.isEconomicRestrictionResponse
+local FFlagEnablePriceChangedErrorHandlingModule = require(Parent.Flags.FFlagEnablePriceChangedErrorHandling)
 
-return function(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12)
-	-- upvalues: promiseModule (ref), constantsModule (ref), purchaseErrorModule (ref), isGenericChallengeResponseModule (ref), isEconomicRestrictionResponse (ref), fFlagEnablePriceChangedErrorHandlingModule (ref)
-	return p1.performPurchaseV2(p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12):andThen(function(p13)
-		-- upvalues: promiseModule (copy), constantsModule (copy), purchaseErrorModule (copy), isGenericChallengeResponseModule (copy), isEconomicRestrictionResponse (copy), fFlagEnablePriceChangedErrorHandlingModule (copy)
-		return if p13.purchased or p13.reason == "AlreadyOwned" then promiseModule.resolve(p13) elseif p13.reason == constantsModule.PurchaseFailureReason.EconomyDisabled then promiseModule.reject(purchaseErrorModule.PurchaseDisabled) elseif p13.reason == constantsModule.PurchaseFailureReason.TwoStepVerificationRequired then promiseModule.reject(purchaseErrorModule.TwoFactorNeeded) elseif p13.transactionStatus == 24 then promiseModule.reject(purchaseErrorModule.TwoFactorNeeded) elseif isGenericChallengeResponseModule(p13) then promiseModule.reject(p13) elseif isEconomicRestrictionResponse(p13) then promiseModule.reject(p13) elseif fFlagEnablePriceChangedErrorHandlingModule and p13.reason == constantsModule.PurchaseFailureReason.PriceChanged then promiseModule.reject(purchaseErrorModule.PriceChanged) else promiseModule.reject(purchaseErrorModule.UnknownFailure)
-	end, function(_)
-		-- upvalues: promiseModule (copy), purchaseErrorModule (copy)
-		return promiseModule.reject(purchaseErrorModule.UnknownFailure)
+return function(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12) --[[ Line: 17 | Named "performPurchaseV2" ]]
+	-- upvalues: PromiseModule (copy), ConstantsModule (copy), PurchaseErrorModule (copy), IsGenericChallengeResponseModule (copy), IsEconomicRestrictionResponseFunction (copy), FFlagEnablePriceChangedErrorHandlingModule (copy)
+	return p1.performPurchaseV2(p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12):andThen(function(Result) --[[ Line: 45 ]]
+		-- upvalues: PromiseModule (upval), ConstantsModule (upval), PurchaseErrorModule (upval), IsGenericChallengeResponseModule (upval), IsEconomicRestrictionResponseFunction (upval), FFlagEnablePriceChangedErrorHandlingModule (upval)
+		return if Result.purchased or Result.reason == "AlreadyOwned" then PromiseModule.resolve(Result) elseif Result.reason == ConstantsModule.PurchaseFailureReason.EconomyDisabled then PromiseModule.reject(PurchaseErrorModule.PurchaseDisabled) elseif Result.reason == ConstantsModule.PurchaseFailureReason.TwoStepVerificationRequired then PromiseModule.reject(PurchaseErrorModule.TwoFactorNeeded) elseif Result.transactionStatus == 24 then PromiseModule.reject(PurchaseErrorModule.TwoFactorNeeded) elseif IsGenericChallengeResponseModule(Result) then PromiseModule.reject(Result) elseif IsEconomicRestrictionResponseFunction(Result) then PromiseModule.reject(Result) elseif FFlagEnablePriceChangedErrorHandlingModule and Result.reason == ConstantsModule.PurchaseFailureReason.PriceChanged then PromiseModule.reject(PurchaseErrorModule.PriceChanged) else PromiseModule.reject(PurchaseErrorModule.UnknownFailure)
+	end, function(_) --[[ Line: 73 ]]
+		-- upvalues: PromiseModule (upval), PurchaseErrorModule (upval)
+		return PromiseModule.reject(PurchaseErrorModule.UnknownFailure)
 	end)
 end

@@ -1,8 +1,8 @@
-﻿local useAppPolicy = require(script:FindFirstAncestor("Squads").Parent.UniversalAppPolicy).useAppPolicy
+﻿local UseAppPolicyFunction = require(script:FindFirstAncestor("Squads").Parent.UniversalAppPolicy).useAppPolicy
 
-return function()
-	-- upvalues: useAppPolicy (ref)
-	return useAppPolicy(function(p1)
+return function() --[[ Line: 5 ]]
+	-- upvalues: UseAppPolicyFunction (copy)
+	return UseAppPolicyFunction(function(p1) --[[ Line: 6 ]]
 		return p1.getCanAccessParty()
 	end)
 end

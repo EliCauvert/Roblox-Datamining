@@ -1,4 +1,4 @@
-﻿local t = {
+﻿local config = {
 	[10] = true,
 	[11] = true,
 	[12] = true,
@@ -7,7 +7,7 @@
 	[8232] = true,
 	[8233] = true
 }
-local t_1 = {
+local config1 = {
 	[9] = true,
 	[32] = true,
 	[160] = true,
@@ -27,55 +27,56 @@ local t_1 = {
 	[8287] = true,
 	[12288] = true
 }
-local t_2 = {
+local config2 = {
 	[6158] = true,
 	[8203] = true,
 	[8288] = true,
 	[65279] = true
 }
 
-local function normalizeAsciiWhitespace(p1)
-	return string.gsub(string.gsub(string.gsub(p1, "%s+", function(p2)
-		return if string.find(p2, "[\n\11\f\r]") then "\n" else " "
-	end), "^[ \n]", ""), "[ \n]$", "")
+local function normalizeAsciiWhitespace(Text: string): string --[[ Line: 48 ]]
+	return (string.gsub(string.gsub(string.gsub(Text, "%s+", function(Text: string): string --[[ Line: 49 ]]
+		return if string.find(Text, "[\n\11\f\r]") then "\n" else " "
+	end), "^[ \n]", ""), "[ \n]$", ""))
 end
 
-return function(p1)
-	-- upvalues: normalizeAsciiWhitespace (ref), t (ref), t_1 (ref), t_2 (ref)
-	if utf8.len(p1) == nil then
-		return normalizeAsciiWhitespace(p1)
+return function(Text: string) --[[ Line: 57 | Named "normalizeCommentText" ]]
+	-- upvalues: normalizeAsciiWhitespace (copy), config (copy), config1 (copy), config2 (copy)
+	if utf8.len(Text) == nil then
+		return (normalizeAsciiWhitespace(Text))
 	end
-	local t_3 = {}
-	local var1 = nil
-	local var2 = nil
+	local List = {}
+	local StartIndex: number? = nil
+	local v1: string? = nil
 	
-	for i, v in utf8.codes(p1) do
-		local var3 = t[v] == true
-		local var4 = t_1[v] == true
+	for i, value in utf8.codes(Text) do
+		local IsEntry = config[value] == true
+		local IsEntry1 = config1[value] == true
 		
-		if not var3 and not var4 and t_2[v] ~= true then
-			if var1 == nil then
-				if var2 ~= nil and #t_3 > 0 then
-					table.insert(t_3, var2)
+		if not IsEntry and not IsEntry1 and config2[value] ~= true then
+			if StartIndex == nil then
+				if v1 ~= nil and #List > 0 then
+					table.insert(List, v1)
 				end
-				var2 = nil
-				var1 = i
+				v1 = nil
+				StartIndex = i
 			end
+			continue
 		end
-		if var1 ~= nil then
-			table.insert(t_3, string.sub(p1, var1, i - 1))
-			var1 = nil
+		if StartIndex ~= nil then
+			table.insert(List, (string.sub(Text, StartIndex, i - 1)))
+			StartIndex = nil
 		end
-		if var3 then
-			var2 = "\n"
-		elseif var4 and var2 ~= "\n" then
-			var2 = " "
-		elseif var2 == nil then
-			var2 = ""
+		if IsEntry then
+			v1 = "\n"
+		elseif IsEntry1 and v1 ~= "\n" then
+			v1 = " "
+		elseif v1 == nil then
+			v1 = ""
 		end
 	end
-	if var1 ~= nil then
-		table.insert(t_3, string.sub(p1, var1))
+	if StartIndex ~= nil then
+		table.insert(List, (string.sub(Text, StartIndex)))
 	end
-	return table.concat(t_3)
+	return table.concat(List)
 end

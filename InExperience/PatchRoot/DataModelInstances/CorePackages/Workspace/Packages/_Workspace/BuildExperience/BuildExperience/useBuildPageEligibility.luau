@@ -1,23 +1,20 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local ampUpsellModule = require(parent.AmpUpsell)
-local navigationModule = require(parent.Navigation)
-local navigationRoduxModule = require(parent.NavigationRodux)
-local reactModule = require(parent.React)
-local robloxAppNavigationModule = require(parent.RobloxAppNavigation)
-local sharedFlagsModule = require(parent.SharedFlags)
-local universalAppPolicyModule = require(parent.UniversalAppPolicy)
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local useNavigationFocus = navigationModule.useNavigationFocus
-local accessResponseEnum = ampUpsellModule.AmpEnums.AccessResponseEnum
-local actionStatusEnum = ampUpsellModule.AmpEnums.ActionStatusEnum
-local openAmpWizardContainer = ampUpsellModule.OpenAmpWizardContainer
-local navigateBack = navigationRoduxModule.Thunks.NavigateBack
-local navigationCommands = robloxAppNavigationModule.NavigationCommands
-local fFlagSignalsNavP3Dispatch = sharedFlagsModule.FFlagSignalsNavP3Dispatch
-local fStringTriggerAgeCheckUpsellIncludingVPCAmpFeature = sharedFlagsModule.FStringTriggerAgeCheckUpsellIncludingVPCAmpFeature
-local fStringCoreContentAmpNameSpace = sharedFlagsModule.FStringCoreContentAmpNameSpace
-local buildPolicyRefreshTimeoutMs = game:DefineFastInt("BuildPolicyRefreshTimeoutMs", 4000)
-local frozen = table.freeze({
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local AmpUpsellModule = require(Parent.AmpUpsell)
+local ReactModule = require(Parent.React)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local UniversalAppPolicyModule = require(Parent.UniversalAppPolicy)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseNavigationFocusFunction = require(Parent.Navigation).useNavigationFocus
+local AccessResponseEnum = AmpUpsellModule.AmpEnums.AccessResponseEnum
+local ActionStatusEnum = AmpUpsellModule.AmpEnums.ActionStatusEnum
+local OpenAmpWizardContainerFunction = AmpUpsellModule.OpenAmpWizardContainer
+local NavigateBackFunction = require(Parent.NavigationRodux).Thunks.NavigateBack
+local NavigationCommands = require(Parent.RobloxAppNavigation).NavigationCommands
+local FFlagSignalsNavP3Dispatch = SharedFlagsModule.FFlagSignalsNavP3Dispatch
+local FStringTriggerAgeCheckUpsellIncludingVPCAmpFeature = SharedFlagsModule.FStringTriggerAgeCheckUpsellIncludingVPCAmpFeature
+local FStringCoreContentAmpNameSpace = SharedFlagsModule.FStringCoreContentAmpNameSpace
+local BuildPolicyRefreshTimeoutMs = game:DefineFastInt("BuildPolicyRefreshTimeoutMs", 4000)
+local Frozen = table.freeze({
 	Prompting = "Prompting",
 	Refreshing = "Refreshing",
 	Ineligible = "Ineligible",
@@ -25,13 +22,13 @@ local frozen = table.freeze({
 	Leaving = "Leaving"
 })
 
-local function _(p1)
-	-- upvalues: actionStatusEnum (ref)
-	if p1 == nil then
+local function _(List): boolean --[[ Line: 44 | Named "wasCancelled" ]]
+	-- upvalues: ActionStatusEnum (copy)
+	if List == nil then
 		return false
 	end
-	for i, v in p1 do
-		if v == actionStatusEnum.Cancelled then
+	for _, value in List do
+		if value == ActionStatusEnum.Cancelled then
 			return true
 		end
 	end
@@ -39,139 +36,150 @@ local function _(p1)
 end
 
 return {
-	Status = frozen,
-	useBuildPageEligibility = function(p2)
-		-- upvalues: universalAppPolicyModule (ref), useDispatch (ref), useNavigationFocus (ref), reactModule (ref), frozen (ref), fFlagSignalsNavP3Dispatch (ref), navigationCommands (ref), navigateBack (ref), buildPolicyRefreshTimeoutMs (ref), accessResponseEnum (ref), actionStatusEnum (ref), openAmpWizardContainer (ref), fStringTriggerAgeCheckUpsellIncludingVPCAmpFeature (ref), fStringCoreContentAmpNameSpace (ref)
-		local var1, var2 = universalAppPolicyModule.useAppPolicy(function(p3)
-			-- upvalues: p2 (ref)
-			if p2 then
-				return p3.getCanViewBuild(), p3.getCanUseBuild()
+	Status = Frozen,
+	useBuildPageEligibility = function(p1) --[[ Line: 58 ]]
+		-- upvalues: UniversalAppPolicyModule (copy), UseDispatchFunction (copy), UseNavigationFocusFunction (copy), ReactModule (copy), Frozen (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateBackFunction (copy), BuildPolicyRefreshTimeoutMs (copy), AccessResponseEnum (copy), ActionStatusEnum (copy), OpenAmpWizardContainerFunction (copy), FStringTriggerAgeCheckUpsellIncludingVPCAmpFeature (copy), FStringCoreContentAmpNameSpace (copy)
+		local UseAppPolicyResult, UseAppPolicyResult2 = UniversalAppPolicyModule.useAppPolicy(function(p2) --[[ Line: 59 ]]
+			-- upvalues: p1 (copy)
+			if p1 then
+				return p2.getCanViewBuild(), p2.getCanUseBuild()
+			else
+				return true, true
 			end
-			return true, true
 		end)
-		local var3 = useDispatch()
-		local var4 = useNavigationFocus()
-		local var5 = reactModule.useRef(false)
-		local var6 = reactModule.useRef(var4)
-		local var7 = reactModule.useRef(0)
-		local var8, var9 = reactModule.useState(false)
-		local var10, var11 = reactModule.useState(frozen.Prompting)
-		local var12 = reactModule.useCallback(function()
-			-- upvalues: var5 (ref), var7 (ref), var9 (ref), var11 (ref), frozen (copy), fFlagSignalsNavP3Dispatch (copy), navigationCommands (copy), var3 (ref), navigateBack (copy)
-			var5.current = false
-			var7.current += 1
-			var9(false)
-			var11(frozen.Leaving)
+		local UseDispatchResult = UseDispatchFunction()
+		local UseNavigationFocusResult = UseNavigationFocusFunction()
+		local UseRefResult = ReactModule.useRef(false)
+		local UseRefResult1 = ReactModule.useRef(UseNavigationFocusResult)
+		local UseRefResult2 = ReactModule.useRef(0)
+		local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+		local UseStateResult1, UseStateResult2_1 = ReactModule.useState(Frozen.Prompting)
+		local UseResult = ReactModule.useCallback(function() --[[ Line: 73 ]]
+			-- upvalues: UseRefResult (copy), UseRefResult2 (copy), UseStateResult2 (copy), UseStateResult2_1 (copy), Frozen (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateBackFunction (upval)
+			UseRefResult.current = false
+			UseRefResult2.current += 1
+			UseStateResult2(false)
+			UseStateResult2_1(Frozen.Leaving)
 			
-			if fFlagSignalsNavP3Dispatch then
-				navigationCommands.back(true)
+			if FFlagSignalsNavP3Dispatch then
+				NavigationCommands.back(true)
 				
 				return
+			else
+				UseDispatchResult(NavigateBackFunction(true))
 			end
-			var3(navigateBack(true))
-		end, { var3 })
-		local var13 = reactModule.useCallback(function()
-			-- upvalues: var9 (ref), var11 (ref), frozen (copy), var7 (ref), buildPolicyRefreshTimeoutMs (copy), universalAppPolicyModule (copy)
-			var9(false)
-			var11(frozen.Refreshing)
-			var7.current += 1
-			local current = var7.current
-			task.delay(buildPolicyRefreshTimeoutMs / 1000, function()
-				-- upvalues: var7 (copy), current (ref), universalAppPolicyModule (copy), var9 (copy), var11 (copy), frozen (copy)
-				if var7.current ~= current then return end
-				local appFeaturePolicies = universalAppPolicyModule.getAppFeaturePolicies()
-				local canViewBuild = appFeaturePolicies.getCanViewBuild()
+		end, { UseDispatchResult })
+		local UseResult1 = ReactModule.useCallback(function() --[[ Line: 85 ]]
+			-- upvalues: UseStateResult2 (copy), UseStateResult2_1 (copy), Frozen (upval), UseRefResult2 (copy), BuildPolicyRefreshTimeoutMs (upval), UniversalAppPolicyModule (upval)
+			UseStateResult2(false)
+			UseStateResult2_1(Frozen.Refreshing)
+			UseRefResult2.current += 1
+			local Current = UseRefResult2.current
+			task.delay(BuildPolicyRefreshTimeoutMs / 1000, function() --[[ Line: 91 ]]
+				-- upvalues: UseRefResult2 (upval), Current (copy), UniversalAppPolicyModule (upval), UseStateResult2 (upval), UseStateResult2_1 (upval), Frozen (upval)
+				if UseRefResult2.current ~= Current then return end
+				local AppFeaturePolicies = UniversalAppPolicyModule.getAppFeaturePolicies()
+				local CanViewBuild = AppFeaturePolicies.getCanViewBuild()
 				
-				if appFeaturePolicies.getCanUseBuild() then
-					var9(true)
-					
-					return
-				elseif canViewBuild then
-					var11(frozen.Error)
+				if AppFeaturePolicies.getCanUseBuild() then
+					UseStateResult2(true)
 					
 					return
 				end
-				var11(frozen.Ineligible)
+				if CanViewBuild then
+					UseStateResult2_1(Frozen.Error)
+					
+					return
+				else
+					UseStateResult2_1(Frozen.Ineligible)
+				end
 			end)
 		end, {})
-		local var14 = reactModule.useCallback(function(p3, p4)
-			-- upvalues: accessResponseEnum (copy), var13 (ref), actionStatusEnum (copy), var12 (ref), var11 (ref), frozen (copy)
-			local var15
-			if p3 == accessResponseEnum.Granted then
-				var13()
+		local UseResult2 = ReactModule.useCallback(function(Granted, List) --[[ Line: 110 ]]
+			-- upvalues: AccessResponseEnum (upval), UseResult1 (copy), ActionStatusEnum (upval), UseResult (copy), UseStateResult2_1 (copy), Frozen (upval)
+			if Granted == AccessResponseEnum.Granted then
+				UseResult1()
 				
 				return
-			elseif p4 == nil then
-				var15 = false
+			end
+			local Flag = nil
+			if List == nil then
+				Flag = false
 			else
-				for i, v in p4 do
-					if v == actionStatusEnum.Cancelled then
-						var15 = true
+				Flag = false
+				
+				for _, value in List do
+					if value == ActionStatusEnum.Cancelled then
+						Flag = true
+						break
 					end
 				end
-				var15 = false
 			end
-			if var15 then
-				var12()
+			if Flag then
+				UseResult()
 				
 				return
+			else
+				UseStateResult2_1(Frozen.Error)
 			end
-			var11(frozen.Error)
-		end, { var13, var12 })
-		reactModule.useEffect(function()
-			-- upvalues: var6 (ref), var4 (ref), var10 (ref), frozen (copy), var5 (ref), var11 (ref)
-			local current = var6.current
-			var6.current = var4
+		end, { UseResult1, UseResult })
+		ReactModule.useEffect(function() --[[ Line: 120 ]]
+			-- upvalues: UseRefResult1 (copy), UseNavigationFocusResult (copy), UseStateResult1 (copy), Frozen (upval), UseRefResult (copy), UseStateResult2_1 (copy)
+			local Current = UseRefResult1.current
+			UseRefResult1.current = UseNavigationFocusResult
 			
-			if var4 and not current and var10 == frozen.Prompting then
-				var5.current = false
+			if UseNavigationFocusResult and not Current and UseStateResult1 == Frozen.Prompting then
+				UseRefResult.current = false
 				
 				return
-			elseif var4 and not current and var10 == frozen.Leaving then
-				var5.current = false
-				var11(frozen.Prompting)
 			end
-		end, { var4, var10 })
-		reactModule.useEffect(function()
-			-- upvalues: p2 (ref), var2 (ref), var7 (ref), var5 (ref), var9 (ref), var11 (ref), frozen (copy), var1 (ref)
-			if not p2 then return end
-			if var2 then
-				var7.current += 1
-				var5.current = false
-				var9(false)
-				var11(frozen.Prompting)
+			if UseNavigationFocusResult and not Current and UseStateResult1 == Frozen.Leaving then
+				UseRefResult.current = false
+				UseStateResult2_1(Frozen.Prompting)
+			end
+		end, { UseNavigationFocusResult, UseStateResult1 })
+		ReactModule.useEffect(function() --[[ Line: 132 ]]
+			-- upvalues: p1 (copy), UseAppPolicyResult2 (copy), UseRefResult2 (copy), UseRefResult (copy), UseStateResult2 (copy), UseStateResult2_1 (copy), Frozen (upval), UseAppPolicyResult (copy)
+			if not p1 then return end
+			if UseAppPolicyResult2 then
+				UseRefResult2.current += 1
+				UseRefResult.current = false
+				UseStateResult2(false)
+				UseStateResult2_1(Frozen.Prompting)
 				
 				return
-			elseif not var1 then
-				var7.current += 1
-				var9(false)
-				var11(frozen.Ineligible)
 			end
-		end, { var1, var2, p2 })
-		reactModule.useEffect(function()
-			-- upvalues: p2 (ref), var4 (ref), var10 (ref), frozen (copy), var2 (ref), var1 (ref), var5 (ref), var3 (ref), openAmpWizardContainer (copy), fStringTriggerAgeCheckUpsellIncludingVPCAmpFeature (copy), var14 (ref), fStringCoreContentAmpNameSpace (copy)
-			if p2 and var4 and (var10 == frozen.Prompting and not var2) and (var1 and not var5.current) then
-				var5.current = true
-				var3(openAmpWizardContainer(fStringTriggerAgeCheckUpsellIncludingVPCAmpFeature, var14, nil, "BuildPage", nil, fStringCoreContentAmpNameSpace))
+			if not UseAppPolicyResult then
+				UseRefResult2.current += 1
+				UseStateResult2(false)
+				UseStateResult2_1(Frozen.Ineligible)
+			end
+		end, { UseAppPolicyResult, UseAppPolicyResult2, p1 })
+		ReactModule.useEffect(function() --[[ Line: 150 ]]
+			-- upvalues: p1 (copy), UseNavigationFocusResult (copy), UseStateResult1 (copy), Frozen (upval), UseAppPolicyResult2 (copy), UseAppPolicyResult (copy), UseRefResult (copy), UseDispatchResult (copy), OpenAmpWizardContainerFunction (upval), FStringTriggerAgeCheckUpsellIncludingVPCAmpFeature (upval), UseResult2 (copy), FStringCoreContentAmpNameSpace (upval)
+			if p1 and UseNavigationFocusResult and UseStateResult1 == Frozen.Prompting and not UseAppPolicyResult2 and UseAppPolicyResult and not UseRefResult.current then
+				UseRefResult.current = true
+				UseDispatchResult(OpenAmpWizardContainerFunction(FStringTriggerAgeCheckUpsellIncludingVPCAmpFeature, UseResult2, nil, "BuildPage", nil, FStringCoreContentAmpNameSpace))
 				
 				return
 			end
 		end, {
-			var1, var2, var3, p2, var14, var4, var10
+			UseAppPolicyResult, UseAppPolicyResult2, UseDispatchResult, p1, UseResult2,
+			UseNavigationFocusResult, UseStateResult1
 		})
-		reactModule.useEffect(function()
-			-- upvalues: var7 (ref)
-			return function()
-				-- upvalues: var7 (copy)
-				var7.current += 1
+		ReactModule.useEffect(function() --[[ Line: 185 ]]
+			-- upvalues: UseRefResult2 (copy)
+			return function() --[[ Line: 186 ]]
+				-- upvalues: UseRefResult2 (upval)
+				UseRefResult2.current += 1
 			end
 		end, {})
-		local var16 = not p2 or (var2 or var8)
+		local NoP1 = not p1 or (UseAppPolicyResult2 or UseStateResult)
 		
 		return {
-			canEnterBuild = var16,
-			status = if var16 or var1 then var10 else frozen.Ineligible,
-			onDialogDismiss = var12
+			canEnterBuild = NoP1,
+			status = if NoP1 or UseAppPolicyResult then UseStateResult1 else Frozen.Ineligible,
+			onDialogDismiss = UseResult
 		}
 	end
 }

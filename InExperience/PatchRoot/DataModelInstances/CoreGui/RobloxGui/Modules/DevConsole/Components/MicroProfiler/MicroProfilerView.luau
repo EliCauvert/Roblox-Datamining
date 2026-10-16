@@ -1,36 +1,36 @@
-﻿local immutableModule = require(script.Parent.Parent.Parent.Immutable)
-local roactModule = require(game:GetService("CorePackages").Packages.Roact)
-local localActionsViewModule = require(script.Parent.LocalActionsView)
-local recentlyCapturedDumpsViewModule = require(script.Parent.RecentlyCapturedDumpsView)
-local recordAndDumpViewModule = require(script.Parent.RecordAndDumpView)
-local column = roactModule.Component:extend("Column")
-local microProfilerView = roactModule.Component:extend("MicroProfilerView")
+﻿local ImmutableModule = require(script.Parent.Parent.Parent.Immutable)
+local RoactModule = require(game:GetService("CorePackages").Packages.Roact)
+local LocalActionsViewModule = require(script.Parent.LocalActionsView)
+local RecentlyCapturedDumpsViewModule = require(script.Parent.RecentlyCapturedDumpsView)
+local RecordAndDumpViewModule = require(script.Parent.RecordAndDumpView)
+local Column = RoactModule.Component:extend("Column")
+local MicroProfilerView = RoactModule.Component:extend("MicroProfilerView")
 
-function column.render(p1)
-	-- upvalues: roactModule (ref), immutableModule (ref)
-	return roactModule.createElement("Frame", {
+function Column.render(p1) --[[ Line: 13 ]]
+	-- upvalues: RoactModule (copy), ImmutableModule (copy)
+	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.new(0, 0, 1, 0),
 		LayoutOrder = p1.props.LayoutOrder
-	}, immutableModule.JoinDictionaries({
-		UIListLayout = roactModule.createElement("UIListLayout", {
+	}, ImmutableModule.JoinDictionaries({
+		UIListLayout = RoactModule.createElement("UIListLayout", {
 			Padding = UDim.new(0, 12),
 			FillDirection = Enum.FillDirection.Vertical,
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			HorizontalAlignment = Enum.HorizontalAlignment.Left,
 			VerticalAlignment = Enum.VerticalAlignment.Top
 		})
-	}, p1.props[roactModule.Children]))
+	}, p1.props[RoactModule.Children]))
 end
 
-function microProfilerView.render(p1)
-	-- upvalues: roactModule (ref), column (ref), localActionsViewModule (ref), recordAndDumpViewModule (ref), recentlyCapturedDumpsViewModule (ref)
-	return roactModule.createElement("Frame", {
+function MicroProfilerView.render(p1) --[[ Line: 35 ]]
+	-- upvalues: RoactModule (copy), Column (copy), LocalActionsViewModule (copy), RecordAndDumpViewModule (copy), RecentlyCapturedDumpsViewModule (copy)
+	return RoactModule.createElement("Frame", {
 		Size = p1.props.Size,
 		BackgroundTransparency = p1.props.BackgroundTransparency,
 		LayoutOrder = p1.props.LayoutOrder
 	}, {
-		UIListLayout = roactModule.createElement("UIListLayout", {
+		UIListLayout = RoactModule.createElement("UIListLayout", {
 			Padding = UDim.new(0, 8),
 			FillDirection = Enum.FillDirection.Horizontal,
 			SortOrder = Enum.SortOrder.LayoutOrder,
@@ -39,20 +39,20 @@ function microProfilerView.render(p1)
 			VerticalAlignment = Enum.VerticalAlignment.Top,
 			VerticalFlex = Enum.UIFlexAlignment.Fill
 		}),
-		UIPadding = roactModule.createElement("UIPadding", {
+		UIPadding = RoactModule.createElement("UIPadding", {
 			PaddingTop = UDim.new(0, 0),
 			PaddingBottom = UDim.new(0, 0),
 			PaddingLeft = UDim.new(0, 8),
 			PaddingRight = UDim.new(0, 8)
 		}),
-		LeftColumn = roactModule.createElement(column, { LayoutOrder = 1 }, {
-			LocalActionsView = roactModule.createElement(localActionsViewModule, { LayoutOrder = 1 }),
-			RecordAndDumpView = roactModule.createElement(recordAndDumpViewModule, { LayoutOrder = 2 })
+		LeftColumn = RoactModule.createElement(Column, { LayoutOrder = 1 }, {
+			LocalActionsView = RoactModule.createElement(LocalActionsViewModule, { LayoutOrder = 1 }),
+			RecordAndDumpView = RoactModule.createElement(RecordAndDumpViewModule, { LayoutOrder = 2 })
 		}),
-		RightColumn = roactModule.createElement(column, { LayoutOrder = 2 }, {
-			RecentlyCapturedDumpsView = roactModule.createElement(recentlyCapturedDumpsViewModule)
+		RightColumn = RoactModule.createElement(Column, { LayoutOrder = 2 }, {
+			RecentlyCapturedDumpsView = RoactModule.createElement(RecentlyCapturedDumpsViewModule)
 		})
 	})
 end
 
-return microProfilerView
+return MicroProfilerView

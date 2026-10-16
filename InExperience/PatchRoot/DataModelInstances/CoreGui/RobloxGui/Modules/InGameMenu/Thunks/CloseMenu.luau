@@ -1,15 +1,15 @@
-﻿local guiService = game:GetService("GuiService")
-local parent = script.Parent.Parent
-local setMenuOpenModule = require(parent.Actions.SetMenuOpen)
-local sendAnalyticsModule = require(parent.Utility.SendAnalytics)
-local constantsModule = require(parent.Resources.Constants)
-local setCurrentPageModule = require(parent.Actions.SetCurrentPage)
+﻿local GuiService = game:GetService("GuiService")
+local Parent = script.Parent.Parent
+local SetMenuOpenModule = require(Parent.Actions.SetMenuOpen)
+local SendAnalyticsModule = require(Parent.Utility.SendAnalytics)
+local ConstantsModule = require(Parent.Resources.Constants)
+local SetCurrentPageModule = require(Parent.Actions.SetCurrentPage)
 
-return function(p1)
-	-- upvalues: guiService (ref), setMenuOpenModule (ref), setCurrentPageModule (ref), constantsModule (ref), sendAnalyticsModule (ref)
-	guiService:SetMenuIsOpen(false, "InGameMenu")
-	guiService.SelectedCoreObject = nil
-	p1:dispatch(setMenuOpenModule(false))
-	p1:dispatch(setCurrentPageModule(constantsModule.InitalPageKey))
-	sendAnalyticsModule(constantsModule.AnalyticsMenuCloseName, constantsModule.AnalyticsMenuActionName, {})
+return function(p1) --[[ Line: 9 ]]
+	-- upvalues: GuiService (copy), SetMenuOpenModule (copy), SetCurrentPageModule (copy), ConstantsModule (copy), SendAnalyticsModule (copy)
+	GuiService:SetMenuIsOpen(false, "InGameMenu")
+	GuiService.SelectedCoreObject = nil
+	p1:dispatch(SetMenuOpenModule(false))
+	p1:dispatch(SetCurrentPageModule(ConstantsModule.InitalPageKey))
+	SendAnalyticsModule(ConstantsModule.AnalyticsMenuCloseName, ConstantsModule.AnalyticsMenuActionName, {})
 end

@@ -1,23 +1,30 @@
-﻿local diagEventTypes = require(script:FindFirstAncestor("SocialLuaAnalytics").Analytics.Enums).DiagEventTypes
+﻿local DiagEventTypes = require(script:FindFirstAncestor("SocialLuaAnalytics").Analytics.Enums).DiagEventTypes
 local _ = require(script.Parent.Parent.Types)
 
-local function _(p1, p2)
-	return if type(p1) == "function" then p1(p2) else p1
+local function _(Callback, p1) --[[ Line: 7 | Named "formatValue" ]]
+	return if type(Callback) == "function" then Callback(p1) else Callback
 end
 
-return function()
-	-- upvalues: diagEventTypes (ref)
-	return function(p1, p2)
-		-- upvalues: diagEventTypes (copy)
-		local name = p1.name
-		local var1 = if type(name) == "function" then name(p2) else name
-		local type = p1.type or diagEventTypes.Counter
-		local var2 = if type ~= diagEventTypes.Stats then p1.stats else nil
-		local var3 = type ~= diagEventTypes.Stats and ((if type(var2) == "function" then var2(p2) else var2) or 0)
+return function() --[[ Line: 11 | Named "getFormattedDiagEventInfo" ]]
+	-- upvalues: DiagEventTypes (copy)
+	return function(p1, p2) --[[ Line: 12 ]]
+		-- upvalues: DiagEventTypes (upval)
+		local NameFunction = p1.name
+		local NameResult = if type(NameFunction) == "function" then NameFunction(p2) else NameFunction
+		local Type = p1.type or DiagEventTypes.Counter
+		local StatsResult = nil
+		
+		if Type == DiagEventTypes.Stats then
+			local StatsFunction = p1.stats
+			StatsResult = (if type(StatsFunction) == "function" then StatsFunction(p2) else StatsFunction) or 0
+		else
+			local CountFunction = p1.count
+			StatsResult = (if type(CountFunction) == "function" then CountFunction(p2) else CountFunction) or 1
+		end
 		return {
-			type = type,
-			name = var1,
-			value = var3,
+			type = Type,
+			name = NameResult,
+			value = StatsResult,
 			platformSpecificity = p1.platformSpecificity
 		}
 	end

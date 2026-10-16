@@ -1,68 +1,72 @@
-﻿local trustedContacts = script:FindFirstAncestor("TrustedContacts")
-local parent = trustedContacts.Parent
-local reactModule = require(parent.React)
-local roactUtilsModule = require(parent.RoactUtils)
-local appPage = require(parent.RobloxAppEnums).AppPage
-local foundationModule = require(parent.Foundation)
-local iconSize = foundationModule.Enums.IconSize
-local useNavigation = require(parent.Navigation).useNavigation
-local trustedContactsModalContainerModule = require(script.Parent.TrustedContactsModalContainer)
-local useTrustedFriendActionModule = require(trustedContacts.TrustedFriendActions.useTrustedFriendAction)
-local TFActionsEnumModule = require(trustedContacts.TrustedFriendActions.TFActionsEnum)
-local analyticsModule = require(trustedContacts.Analytics)
-local useTCAnalytics = analyticsModule.useTCAnalytics
-local eventNames = analyticsModule.EventNames
-local fFlagTFUpdateAnalyticsModule = require(trustedContacts.Flags.FFlagTFUpdateAnalytics)
-local fFlagTFPassQRCodeSourceModule = require(trustedContacts.Flags.FFlagTFPassQRCodeSource)
-local _ = require(trustedContacts.Common.Types)
+﻿local TrustedContacts = script:FindFirstAncestor("TrustedContacts")
+local Parent = TrustedContacts.Parent
+local ReactModule = require(Parent.React)
+local RoactUtilsModule = require(Parent.RoactUtils)
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local FoundationModule = require(Parent.Foundation)
+local IconSize = FoundationModule.Enums.IconSize
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local TrustedContactsModalContainerModule = require(script.Parent.TrustedContactsModalContainer)
+local UseTrustedFriendActionModule = require(TrustedContacts.TrustedFriendActions.useTrustedFriendAction)
+local TFActionsEnumModule = require(TrustedContacts.TrustedFriendActions.TFActionsEnum)
+local AnalyticsModule = require(TrustedContacts.Analytics)
+local UseTCAnalyticsFunction = AnalyticsModule.useTCAnalytics
+local EventNames = AnalyticsModule.EventNames
+local FFlagTFUpdateAnalyticsModule = require(TrustedContacts.Flags.FFlagTFUpdateAnalytics)
+local FFlagTFPassQRCodeSourceModule = require(TrustedContacts.Flags.FFlagTFPassQRCodeSource)
+local _ = require(TrustedContacts.Common.Types)
 
-return function(p1)
-	-- upvalues: useNavigation (ref), useTrustedFriendActionModule (ref), fFlagTFPassQRCodeSourceModule (ref), fFlagTFUpdateAnalyticsModule (ref), useTCAnalytics (ref), reactModule (ref), eventNames (ref), appPage (ref), TFActionsEnumModule (ref), roactUtilsModule (ref), foundationModule (ref), iconSize (ref), trustedContactsModalContainerModule (ref)
-	local var1 = useNavigation()
-	local userId = p1.userId
-	local var2 = useTrustedFriendActionModule({
-		userId = userId,
+return function(p1) --[[ Line: 33 | Named "TrustedFriendsCardWithActionsCheck" ]]
+	-- upvalues: UseNavigationFunction (copy), UseTrustedFriendActionModule (copy), FFlagTFPassQRCodeSourceModule (copy), FFlagTFUpdateAnalyticsModule (copy), UseTCAnalyticsFunction (copy), ReactModule (copy), EventNames (copy), AppPage (copy), TFActionsEnumModule (copy), RoactUtilsModule (copy), FoundationModule (copy), IconSize (copy), TrustedContactsModalContainerModule (copy)
+	local UseNavigationResult = UseNavigationFunction()
+	local UserId = p1.userId
+	local UseTrustedFriendActionModuleResult = UseTrustedFriendActionModule({
+		userId = UserId,
 		tokens = p1.tokens,
-		sentFromQrCode = if fFlagTFPassQRCodeSourceModule then p1.sentFromQrCode else nil
+		sentFromQrCode = if FFlagTFPassQRCodeSourceModule then p1.sentFromQrCode else nil
 	})
-	local isLoading = var2.isLoading
-	local enum = var2.enum
-	local var3 = if fFlagTFUpdateAnalyticsModule then useTCAnalytics({
-		friendId = userId,
+	local IsLoading = UseTrustedFriendActionModuleResult.isLoading
+	local UseTrustedFriendActionModuleResultEnum = UseTrustedFriendActionModuleResult.enum
+	local FireAnalyticsEvent = if FFlagTFUpdateAnalyticsModule then UseTCAnalyticsFunction({
+		friendId = UserId,
 		source = p1.source,
-		tfActionsEnum = enum
+		tfActionsEnum = UseTrustedFriendActionModuleResultEnum
 	}).fireAnalyticsEvent else nil
-	local var4 = reactModule.useCallback(function()
-		-- upvalues: fFlagTFUpdateAnalyticsModule (copy), var3 (ref), eventNames (copy), p1 (ref), var1 (ref), appPage (copy)
-		if fFlagTFUpdateAnalyticsModule then
-			var3(eventNames.TCUpsellAgePrecheckTriggered)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 54 ]]
+		-- upvalues: FFlagTFUpdateAnalyticsModule (upval), FireAnalyticsEvent (copy), EventNames (upval), p1 (copy), UseNavigationResult (copy), AppPage (upval)
+		if FFlagTFUpdateAnalyticsModule then
+			FireAnalyticsEvent(EventNames.TCUpsellAgePrecheckTriggered)
 		end
 		p1.externalNavigation.openFacialAgeEstimationUpsell({
-			onSuccess = function()
-				-- upvalues: fFlagTFUpdateAnalyticsModule (copy), var3 (copy), eventNames (copy), var1 (copy), appPage (copy)
-				if fFlagTFUpdateAnalyticsModule then
-					var3(eventNames.TCUpsellAgePrecheckSucceeded)
+			onSuccess = function() --[[ Line: 60 ]]
+				-- upvalues: FFlagTFUpdateAnalyticsModule (upval), FireAnalyticsEvent (upval), EventNames (upval), UseNavigationResult (upval), AppPage (upval)
+				if FFlagTFUpdateAnalyticsModule then
+					FireAnalyticsEvent(EventNames.TCUpsellAgePrecheckSucceeded)
 				end
-				var1.replace(appPage.TrustedFriendsUserModal, {})
+				UseNavigationResult.replace(AppPage.TrustedFriendsUserModal, {})
 			end,
-			onFailure = function()
-				-- upvalues: fFlagTFUpdateAnalyticsModule (copy), var3 (copy), eventNames (copy), p1 (copy)
-				if fFlagTFUpdateAnalyticsModule then
-					var3(eventNames.TCUpsellAgePrecheckFailed)
+			onFailure = function() --[[ Line: 66 ]]
+				-- upvalues: FFlagTFUpdateAnalyticsModule (upval), FireAnalyticsEvent (upval), EventNames (upval), p1 (upval)
+				if FFlagTFUpdateAnalyticsModule then
+					FireAnalyticsEvent(EventNames.TCUpsellAgePrecheckFailed)
 				end
 				p1.externalNavigation.closeModal()
 			end
 		})
-	end, { var1, p1.externalNavigation, var3 })
-	local var5 = enum == TFActionsEnumModule.UnlockTrustedFriendByFAE
-	roactUtilsModule.Hooks.useEffectOnce(function()
-		-- upvalues: var4 (ref)
-		var4()
-	end, var5)
+	end, {
+		UseNavigationResult,
+		p1.externalNavigation,
+		FireAnalyticsEvent
+	})
+	local IsUseTrustedFriendActionModuleResultEnumMatch = UseTrustedFriendActionModuleResultEnum == TFActionsEnumModule.UnlockTrustedFriendByFAE
+	RoactUtilsModule.Hooks.useEffectOnce(function() --[[ Line: 77 ]]
+		-- upvalues: UseResult (copy)
+		UseResult()
+	end, IsUseTrustedFriendActionModuleResultEnumMatch)
 	
-	return if var5 then nil elseif isLoading then reactModule.createElement(foundationModule.View, { tag = "position-center-center auto-xy" }, {
-		LoadingIcon = reactModule.createElement(foundationModule.Loading, { LayoutOrder = 1, size = iconSize.Large })
-	}) else reactModule.createElement(trustedContactsModalContainerModule, {
+	return if IsUseTrustedFriendActionModuleResultEnumMatch then nil elseif IsLoading then ReactModule.createElement(FoundationModule.View, { tag = "position-center-center auto-xy" }, {
+		LoadingIcon = ReactModule.createElement(FoundationModule.Loading, { LayoutOrder = 1, size = IconSize.Large })
+	}) else ReactModule.createElement(TrustedContactsModalContainerModule, {
 		userId = p1.userId,
 		source = p1.source,
 		tokens = p1.tokens,
@@ -72,6 +76,6 @@ return function(p1)
 		onRequestAccepted = p1.onRequestAccepted,
 		onAcknowledged = p1.onAcknowledged,
 		externalNavigation = p1.externalNavigation,
-		tfActionsEnum = enum
+		tfActionsEnum = UseTrustedFriendActionModuleResultEnum
 	})
 end

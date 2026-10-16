@@ -1,26 +1,26 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local _ = require(buildExperience.Stores.BuildLibrary.createBuildLibraryStore)
-local _ = require(buildExperience.Chat.chatTypes)
-local clientDataModelCollectorModule = require(buildExperience.Chat.clientDataModelCollector)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local _ = require(BuildExperience.Stores.BuildLibrary.createBuildLibraryStore)
+local _ = require(BuildExperience.Chat.chatTypes)
+local ClientDataModelCollectorModule = require(BuildExperience.Chat.clientDataModelCollector)
 
 return {
-	toResourceUri = function(p1)
-		return "rbx-dm:" .. p0
+	toResourceUri = function(Text): string --[[ Line: 62 ]]
+		return "rbx-dm:" .. Text
 	end,
-	toResourceAttachment = function(p1)
+	toResourceAttachment = function(ChatResource) --[[ Line: 66 ]]
 		return {
 			type = "resource_link",
 			mimeType = "datamodel.instance/v1",
-			name = p1.displayName,
-			uri = "rbx-dm:" .. p1.path
+			name = ChatResource.displayName,
+			uri = "rbx-dm:" .. ChatResource.path
 		}
 	end,
-	toChatResource = function(p1)
-		-- upvalues: clientDataModelCollectorModule (ref)
+	toChatResource = function(ChatResource) --[[ Line: 30 ]]
+		-- upvalues: ClientDataModelCollectorModule (copy)
 		return {
-			path = if p1.instance ~= nil then p1.path else clientDataModelCollectorModule.getInstancePath(p1.instance),
-			displayName = p1.displayName,
-			className = p1.className
+			path = if ChatResource.instance == nil then ChatResource.path else ClientDataModelCollectorModule.getInstancePath(ChatResource.instance),
+			displayName = ChatResource.displayName,
+			className = ChatResource.className
 		}
 	end
 }

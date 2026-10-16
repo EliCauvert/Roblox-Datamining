@@ -1,123 +1,127 @@
-﻿local appPageShell = script:FindFirstAncestor("AppPageShell")
-local parent = appPageShell.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local useAnimateScrollViewToSelection = require(parent.AppBlox).useAnimateScrollViewToSelection
-local useLastInputMode = require(parent.FocusNavigationUtils).useLastInputMode
-local collectionLayoutStoreProvider = require(parent.CollectionViews).CollectionLayoutStoreProvider
-local _ = require(appPageShell.PageTypes)
-local _ = require(appPageShell.createPageScrollStore)
-local scrollView = foundationModule.ScrollView
-local view = foundationModule.View
-local useTokens = foundationModule.Hooks.useTokens
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagSduiFeedScrollBarFixes = sharedFlagsModule.FFlagSduiFeedScrollBarFixes
-local fFlagSduiPageCanvasCollectionLayout = sharedFlagsModule.FFlagSduiPageCanvasCollectionLayout
-local isSubjectToDesktopPolicies = sharedFlagsModule.isSubjectToDesktopPolicies
-local frozen = table.freeze({ Selectable = false })
+﻿local AppPageShell = script:FindFirstAncestor("AppPageShell")
+local Parent = AppPageShell.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local UseAnimateScrollViewToSelectionFunction = require(Parent.AppBlox).useAnimateScrollViewToSelection
+local UseLastInputModeFunction = require(Parent.FocusNavigationUtils).useLastInputMode
+local CollectionLayoutStoreProvider = require(Parent.CollectionViews).CollectionLayoutStoreProvider
+local _ = require(AppPageShell.PageTypes)
+local _ = require(AppPageShell.createPageScrollStore)
+local ScrollView = FoundationModule.ScrollView
+local View = FoundationModule.View
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagSduiFeedScrollBarFixes = SharedFlagsModule.FFlagSduiFeedScrollBarFixes
+local FFlagSduiPageCanvasCollectionLayout = SharedFlagsModule.FFlagSduiPageCanvasCollectionLayout
+local IsSubjectToDesktopPoliciesFunction = SharedFlagsModule.isSubjectToDesktopPolicies
+local Frozen = table.freeze({ Selectable = false })
 
-return reactModule.memo(function(p1)
-	-- upvalues: fFlagSduiFeedScrollBarFixes (ref), fFlagSduiPageCanvasCollectionLayout (ref), reactModule (ref), useAnimateScrollViewToSelection (ref), useLastInputMode (ref), useTokens (ref), isSubjectToDesktopPolicies (ref), view (ref), collectionLayoutStoreProvider (ref), scrollView (ref), frozen (ref)
-	local scrollStore = p1.scrollStore
-	local slots = p1.slots
-	local contentTopPadding = p1.contentTopPadding
-	local contentBottomPadding = p1.contentBottomPadding
-	local var1 = if fFlagSduiFeedScrollBarFixes then p1.chromeDisplacement else nil
-	local scrollingFrameRef = p1.scrollingFrameRef
-	local var2 = nil
-	local var3 = nil
+return ReactModule.memo(function(p1) --[[ Line: 57 | Named "PageWholeContent" ]]
+	-- upvalues: FFlagSduiFeedScrollBarFixes (copy), FFlagSduiPageCanvasCollectionLayout (copy), ReactModule (copy), UseAnimateScrollViewToSelectionFunction (copy), UseLastInputModeFunction (copy), UseTokensFunction (copy), IsSubjectToDesktopPoliciesFunction (copy), View (copy), CollectionLayoutStoreProvider (copy), ScrollView (copy), Frozen (copy)
+	local ScrollStore = p1.scrollStore
+	local Slots = p1.slots
+	local ContentTopPadding: number = p1.contentTopPadding
+	local ContentBottomPadding: number = p1.contentBottomPadding
+	local ChromeDisplacement = if FFlagSduiFeedScrollBarFixes then p1.chromeDisplacement else nil
+	local ScrollingFrameRef = p1.scrollingFrameRef
+	local Container = nil
+	local v1 = nil
 	
-	if fFlagSduiPageCanvasCollectionLayout then
-		local var4, var5 = reactModule.useState(nil)
-		var2 = var4
-		var3 = var5
+	if FFlagSduiPageCanvasCollectionLayout then
+		Container, v20 = ReactModule.useState(nil)
 	end
-	useAnimateScrollViewToSelection(scrollingFrameRef, 0.4)
-	local isNotCursor = useLastInputMode() ~= "Cursor"
-	local var6 = nil
-	local var7 = nil
-	local var8 = nil
+	UseAnimateScrollViewToSelectionFunction(ScrollingFrameRef, 0.4)
+	local IsNotCursor = UseLastInputModeFunction() ~= "Cursor"
+	local v2 = nil
+	local ScrollBarThickness: number? = nil
+	local UseMemoResult = nil
 	
-	if fFlagSduiFeedScrollBarFixes then
-		var6 = useTokens()
-		var7 = if isSubjectToDesktopPolicies() then 4 else 0
+	if FFlagSduiFeedScrollBarFixes then
+		v2 = UseTokensFunction()
+		ScrollBarThickness = if IsSubjectToDesktopPoliciesFunction() then 4 else 0
 	else
-		var8 = reactModule.useMemo(function()
-			-- upvalues: isNotCursor (ref)
+		UseMemoResult = ReactModule.useMemo(function() --[[ Line: 79 ]]
+			-- upvalues: IsNotCursor (copy)
 			return table.freeze({
 				AutomaticCanvasSize = Enum.AutomaticSize.Y,
 				CanvasSize = UDim2.new(1, 0, 0, 0),
 				ScrollingDirection = Enum.ScrollingDirection.Y,
-				ScrollingEnabled = not isNotCursor
+				ScrollingEnabled = not IsNotCursor
 			})
-		end, { isNotCursor })
+		end, { IsNotCursor })
 	end
-	local var9 = nil
-	local var10 = nil
+	local Callback = nil
+	local UseResult = nil
 	
-	if not fFlagSduiFeedScrollBarFixes then
-		var9 = reactModule.useCallback(function(p2)
-			-- upvalues: scrollStore (ref)
-			scrollStore.setViewportHeight(p2.AbsoluteWindowSize.Y)
-			scrollStore.setContentHeight(p2.AbsoluteCanvasSize.Y)
-		end, { scrollStore })
-		var10 = reactModule.useCallback(function(p2)
-			-- upvalues: var9 (write), scrollStore (ref)
-			if var9 ~= nil then
-				var9(p2)
+	if not FFlagSduiFeedScrollBarFixes then
+		Callback = ReactModule.useCallback(function(ScrollFrame) --[[ Line: 92 ]]
+			-- upvalues: ScrollStore (copy)
+			ScrollStore.setViewportHeight(ScrollFrame.AbsoluteWindowSize.Y)
+			ScrollStore.setContentHeight(ScrollFrame.AbsoluteCanvasSize.Y)
+		end, { ScrollStore })
+		UseResult = ReactModule.useCallback(function(ScrollFrame) --[[ Line: 97 ]]
+			-- upvalues: Callback (ref), ScrollStore (copy)
+			if Callback ~= nil then
+				Callback(ScrollFrame)
 			end
-			scrollStore.setCanvasPosition(p2.CanvasPosition.Y)
-		end, { scrollStore, var9 })
+			ScrollStore.setCanvasPosition(ScrollFrame.CanvasPosition.Y)
+		end, { ScrollStore, Callback })
 	end
-	local var11 = reactModule.useCallback(function(p2)
-		-- upvalues: scrollStore (ref), scrollingFrameRef (ref)
-		scrollStore.setScrollingFrame(p2)
-		scrollingFrameRef.current = p2
-	end, { scrollStore, scrollingFrameRef })
-	local t = {
-		TopSpacer = if contentTopPadding and contentTopPadding > 0 or var1 ~= nil then reactModule.createElement("Frame", {
+	local UseResult1 = ReactModule.useCallback(function(Current) --[[ Line: 106 ]]
+		-- upvalues: ScrollStore (copy), ScrollingFrameRef (copy)
+		ScrollStore.setScrollingFrame(Current)
+		ScrollingFrameRef.current = Current
+	end, { ScrollStore, ScrollingFrameRef })
+	local UseMemoResult1 = if FFlagSduiFeedScrollBarFixes then ReactModule.useMemo(function() --[[ Line: 126 ]]
+		-- upvalues: ChromeDisplacement (copy), ContentTopPadding (copy)
+		return if ChromeDisplacement == nil then UDim2.new(1, 0, 0, ContentTopPadding or 0) else ChromeDisplacement:map(function(p2): UDim2 --[[ Line: 130 ]]
+			-- upvalues: ContentTopPadding (upval)
+			return UDim2.new(1, 0, 0, (ContentTopPadding or 0) + p2)
+		end)
+	end, { ChromeDisplacement, ContentTopPadding }) else nil
+	local Element = {
+		TopSpacer = if ContentTopPadding and ContentTopPadding > 0 then ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			LayoutOrder = 1,
-			Size = if fFlagSduiFeedScrollBarFixes then if fFlagSduiFeedScrollBarFixes then reactModule.useMemo(function()
-				-- upvalues: var1 (ref), contentTopPadding (ref)
-				return if var1 == nil then UDim2.new(1, 0, 0, contentTopPadding or 0) else var1:map(function(p2)
-					-- upvalues: contentTopPadding (copy)
-					return UDim2.new(1, 0, 0, (contentTopPadding or 0) + p2)
-				end)
-			end, { var1, contentTopPadding }) else nil else UDim2.new(1, 0, 0, contentTopPadding)
-		}) else nil,
-		Content = reactModule.createElement(view, { tag = "col size-full-0 auto-y", LayoutOrder = 2 }, reactModule.useMemo(function()
-			-- upvalues: slots (ref)
-			if slots == nil then
+			Size = if FFlagSduiFeedScrollBarFixes then UseMemoResult1 else UDim2.new(1, 0, 0, ContentTopPadding)
+		}) elseif ChromeDisplacement == nil then nil else ReactModule.createElement("Frame", {
+			BackgroundTransparency = 1,
+			BorderSizePixel = 0,
+			LayoutOrder = 1,
+			Size = if FFlagSduiFeedScrollBarFixes then UseMemoResult1 else UDim2.new(1, 0, 0, ContentTopPadding)
+		}),
+		Content = ReactModule.createElement(View, { tag = "col size-full-0 auto-y", LayoutOrder = 2 }, (ReactModule.useMemo(function() --[[ Line: 113 ]]
+			-- upvalues: Slots (copy)
+			if Slots == nil then
 				return nil
 			end
 			local t = {}
 			
-			for i, v in slots do
-				t[`Content{i}`] = v
+			for i, slot in Slots do
+				t[`Content{i}`] = slot
 			end
 			return t
-		end, { slots })),
-		BottomSpacer = if contentBottomPadding and contentBottomPadding > 0 then reactModule.createElement("Frame", {
+		end, { Slots }))),
+		BottomSpacer = if ContentBottomPadding and ContentBottomPadding > 0 then ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			LayoutOrder = 3,
-			Size = UDim2.new(1, 0, 0, contentBottomPadding)
+			Size = UDim2.new(1, 0, 0, ContentBottomPadding)
 		}) else nil
 	}
 	
-	if fFlagSduiPageCanvasCollectionLayout then
-		t = reactModule.createElement(collectionLayoutStoreProvider, { container = var2 }, t)
+	if FFlagSduiPageCanvasCollectionLayout then
+		Element = ReactModule.createElement(CollectionLayoutStoreProvider, { container = Container }, Element)
 	end
-	local t_1 = {
-		Canvas = reactModule.createElement(view, {
+	local config = {
+		Canvas = ReactModule.createElement(View, {
 			tag = `col size-full-0 auto-y {p1.tag or ""}`,
-			ref = if fFlagSduiPageCanvasCollectionLayout then var3 else nil
-		}, t)
+			ref = if FFlagSduiPageCanvasCollectionLayout then v1 else nil
+		}, Element)
 	}
 	
-	return if fFlagSduiFeedScrollBarFixes then reactModule.createElement("ScrollingFrame", {
+	return if FFlagSduiFeedScrollBarFixes then ReactModule.createElement("ScrollingFrame", {
 		Size = p1.size or UDim2.fromScale(1, 1),
 		LayoutOrder = p1.layoutOrder,
 		ZIndex = p1.zIndex,
@@ -127,30 +131,30 @@ return reactModule.memo(function(p1)
 		AutomaticCanvasSize = Enum.AutomaticSize.Y,
 		CanvasSize = UDim2.new(1, 0, 0, 0),
 		ScrollingDirection = Enum.ScrollingDirection.Y,
-		ScrollingEnabled = not isNotCursor,
+		ScrollingEnabled = not IsNotCursor,
 		Selectable = false,
 		ClipsDescendants = true,
-		ScrollBarThickness = var7,
-		ScrollBarImageColor3 = var6.Color.Shift.Shift_400.Color3,
+		ScrollBarThickness = ScrollBarThickness,
+		ScrollBarImageColor3 = v2.Color.Shift.Shift_400.Color3,
 		ScrollBarImageTransparency = 0,
 		ElasticBehavior = Enum.ElasticBehavior.Always,
-		[reactModule.Change.CanvasPosition] = scrollStore.setCanvasPositionFromScrollingFrame,
-		[reactModule.Change.AbsoluteCanvasSize] = scrollStore.setExtentsFromScrollingFrame,
-		[reactModule.Change.AbsoluteWindowSize] = scrollStore.setExtentsFromScrollingFrame,
-		ref = var11
+		[ReactModule.Change.CanvasPosition] = ScrollStore.setCanvasPositionFromScrollingFrame,
+		[ReactModule.Change.AbsoluteCanvasSize] = ScrollStore.setExtentsFromScrollingFrame,
+		[ReactModule.Change.AbsoluteWindowSize] = ScrollStore.setExtentsFromScrollingFrame,
+		ref = UseResult1
 	}, {
-		FlexItem = if p1.flexMode ~= nil then nil else reactModule.createElement("UIFlexItem", { FlexMode = p1.flexMode }),
-		Canvas = t_1.Canvas
-	}) else reactModule.createElement(scrollView, {
+		FlexItem = if p1.flexMode == nil then nil else ReactModule.createElement("UIFlexItem", { FlexMode = p1.flexMode }),
+		Canvas = config.Canvas
+	}) else ReactModule.createElement(ScrollView, {
 		ClipsDescendants = false,
-		scrollingFrameRef = var11,
-		selection = frozen,
-		scroll = var8,
-		onCanvasPositionChanged = var10,
-		onAbsoluteCanvasSizeChanged = var9,
-		onAbsoluteWindowSizeChanged = var9,
+		scrollingFrameRef = UseResult1,
+		selection = Frozen,
+		scroll = UseMemoResult,
+		onCanvasPositionChanged = UseResult,
+		onAbsoluteCanvasSizeChanged = Callback,
+		onAbsoluteWindowSizeChanged = Callback,
 		tag = p1.containerTag or "size-full",
 		LayoutOrder = p1.layoutOrder,
 		ZIndex = p1.zIndex
-	}, t_1)
+	}, config)
 end)

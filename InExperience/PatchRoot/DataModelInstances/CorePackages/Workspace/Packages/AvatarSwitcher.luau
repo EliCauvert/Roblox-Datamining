@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.AvatarSwitcher.AvatarSwitcher)
+﻿return (require(script.Parent._Workspace.AvatarSwitcher.AvatarSwitcher))

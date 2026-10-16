@@ -1,7 +1,7 @@
-﻿local genericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
+﻿local GenericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
 
-return require(genericAbuseReporting.Parent.React).createContext({
+return require(GenericAbuseReporting.Parent.React).createContext({
 	isReportSubmitted = false,
-	abuseVector = require(genericAbuseReporting.Enums.AbuseVector).Invalid,
-	setIsReportSubmitted = function(_) end
+	abuseVector = require(GenericAbuseReporting.Enums.AbuseVector).Invalid,
+	setIsReportSubmitted = function(_) --[[ Line: 11 ]] end
 })

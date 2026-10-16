@@ -1,29 +1,29 @@
-﻿local parent = script:FindFirstAncestor("SduiSharedContent").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local tooltip = foundationModule.Tooltip
-local popoverSide = foundationModule.Enums.PopoverSide
-local popoverAlign = foundationModule.Enums.PopoverAlign
-local t = {
-	Top = popoverSide.Top,
-	Bottom = popoverSide.Bottom,
-	Left = popoverSide.Left,
-	Right = popoverSide.Right
+﻿local Parent = script:FindFirstAncestor("SduiSharedContent").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local Tooltip = FoundationModule.Tooltip
+local PopoverSide = FoundationModule.Enums.PopoverSide
+local PopoverAlign = FoundationModule.Enums.PopoverAlign
+local config = {
+	Top = PopoverSide.Top,
+	Bottom = PopoverSide.Bottom,
+	Left = PopoverSide.Left,
+	Right = PopoverSide.Right
 }
-local t_1 = {
-	Start = popoverAlign.Start,
-	Center = popoverAlign.Center,
-	End = popoverAlign.End
+local config1 = {
+	Start = PopoverAlign.Start,
+	Center = PopoverAlign.Center,
+	End = PopoverAlign.End
 }
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), tooltip (ref), t (ref), t_1 (ref)
-	return if p1.anchor == nil then nil else reactModule.createElement(tooltip, {
+return ReactModule.memo(function(p1) --[[ Line: 40 | Named "SduiTooltip" ]]
+	-- upvalues: ReactModule (copy), Tooltip (copy), config (copy), config1 (copy)
+	return if p1.anchor == nil then nil else ReactModule.createElement(Tooltip, {
 		title = p1.title or "",
 		text = p1.text,
 		shortcut = if p1.shortcut and #p1.shortcut > 0 then p1.shortcut else nil,
-		side = t[p1.side or ""],
-		align = t_1[p1.align or ""],
+		side = config[p1.side or ""],
+		align = config1[p1.align or ""],
 		LayoutOrder = p1.layoutOrder
 	}, p1.anchor)
 end)

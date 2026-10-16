@@ -1,35 +1,35 @@
-﻿local constantsModule = require(script:FindFirstAncestor("CrossExperience").Constants)
-local var1 = nil
-local var2 = false
+﻿local ConstantsModule = require(script:FindFirstAncestor("CrossExperience").Constants)
+local v1 = nil
+local Flag = false
 
-local _ = function()
-	-- upvalues: var2 (write), var1 (write)
-	if not var2 then
-		local ok, status = pcall(function()
+local function _() --[[ Line: 7 ]]
+	-- upvalues: Flag (ref), v1 (ref)
+	if not Flag then
+		local Success, Result = pcall(function() --[[ Line: 9 ]]
 			return game:GetService("AudioFocusService")
 		end)
 		
-		if ok and status then
-			var1 = status
+		if Success and Result then
+			v1 = Result
 		end
-		var2 = true
+		Flag = true
 	end
-	return var1
+	return v1
 end
 
-return function()
-	-- upvalues: var2 (write), var1 (write), constantsModule (ref)
-	if not var2 then
-		local ok, status = pcall(function()
+return function(): boolean --[[ Line: 20 ]]
+	-- upvalues: Flag (ref), v1 (ref), ConstantsModule (copy)
+	if not Flag then
+		local Success, Result = pcall(function() --[[ Line: 9 ]]
 			return game:GetService("AudioFocusService")
 		end)
 		
-		if ok and status then
-			var1 = status
+		if Success and Result then
+			v1 = Result
 		end
-		var2 = true
+		Flag = true
 	end
-	local var3 = var1
+	local AudioFocusService = v1
 	
-	return if var3 then var3:GetFocusedContextId() == constantsModule.AUDIO_FOCUS_MANAGEMENT.CEV.CONTEXT_ID else false
+	return if AudioFocusService then AudioFocusService:GetFocusedContextId() == ConstantsModule.AUDIO_FOCUS_MANAGEMENT.CEV.CONTEXT_ID else false
 end

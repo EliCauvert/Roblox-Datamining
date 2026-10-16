@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Workspace.MessageBus.MessageBus)
+﻿return (require(script.Parent.Parent.Parent._Workspace.MessageBus.MessageBus))

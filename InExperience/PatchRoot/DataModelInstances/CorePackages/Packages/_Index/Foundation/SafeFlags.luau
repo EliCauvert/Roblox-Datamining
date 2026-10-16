@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.SafeFlags.SafeFlags)
+﻿return (require(script.Parent.Parent.Parent._Index.SafeFlags.SafeFlags))

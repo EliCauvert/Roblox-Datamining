@@ -1,37 +1,41 @@
-﻿local parent = script:FindFirstAncestor("FlyoutSidePanel").Parent
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local foundationModule = require(parent.Foundation)
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local buttonSize = foundationModule.Enums.ButtonSize
-local flyoutAnalyticsModule = require(script.Parent.Parent.Analytics.FlyoutAnalytics)
-local useRoactService = require(parent.RobloxAppHooks).useRoactService
-local appEventIngestService = require(parent.RoactServiceTags).AppEventIngestService
-local flyoutContentSettingsModule = require(script.Parent.Parent.Config.FlyoutContentSettings)
-local fFlagCTAChangeMorePageFlyoutButtonText = require(parent.SharedFlags).FFlagCTAChangeMorePageFlyoutButtonText
+﻿local Parent = script:FindFirstAncestor("FlyoutSidePanel").Parent
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local FoundationModule = require(Parent.Foundation)
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local ButtonSize = FoundationModule.Enums.ButtonSize
+local FlyoutAnalyticsModule = require(script.Parent.Parent.Analytics.FlyoutAnalytics)
+local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
+local AppEventIngestService = require(Parent.RoactServiceTags).AppEventIngestService
+local FlyoutContentSettingsModule = require(script.Parent.Parent.Config.FlyoutContentSettings)
+local FFlagCTAChangeMorePageFlyoutButtonText = require(Parent.SharedFlags).FFlagCTAChangeMorePageFlyoutButtonText
 
-return function(p1)
-	-- upvalues: useRoactService (ref), appEventIngestService (ref), reactModule (ref), flyoutContentSettingsModule (ref), flyoutAnalyticsModule (ref), useLocalization (ref), fFlagCTAChangeMorePageFlyoutButtonText (ref), foundationModule (ref), buttonVariant (ref), buttonSize (ref)
-	local var1 = useRoactService(appEventIngestService)
+return function(p1) --[[ Line: 22 | Named "FlyoutReportLogs" ]]
+	-- upvalues: UseRoactServiceFunction (copy), AppEventIngestService (copy), ReactModule (copy), FlyoutContentSettingsModule (copy), FlyoutAnalyticsModule (copy), UseLocalizationFunction (copy), FFlagCTAChangeMorePageFlyoutButtonText (copy), FoundationModule (copy), ButtonVariant (copy), ButtonSize (copy)
+	local UseRoactServiceResult = UseRoactServiceFunction(AppEventIngestService)
 	
-	return reactModule.createElement(foundationModule.Button, {
+	return ReactModule.createElement(FoundationModule.Button, {
 		testId = "--core-ui-flyout-button-report-logs",
 		isDisabled = false,
-		text = useLocalization({
-			text = if fFlagCTAChangeMorePageFlyoutButtonText then "CommonUI.Features.Label.ReportLogsSentenceCase" else "CommonUI.Features.Label.ReportLogs"
+		text = UseLocalizationFunction({
+			text = if FFlagCTAChangeMorePageFlyoutButtonText then "CommonUI.Features.Label.ReportLogsSentenceCase" else "CommonUI.Features.Label.ReportLogs"
 		}).text,
-		variant = buttonVariant.Standard,
+		variant = ButtonVariant.Standard,
 		LayoutOrder = p1.layoutOrder,
-		size = buttonSize.Large,
+		size = ButtonSize.Large,
 		width = UDim.new(1, 0),
-		onActivated = reactModule.useCallback(function()
-			-- upvalues: p1 (ref), flyoutContentSettingsModule (copy), flyoutAnalyticsModule (copy), var1 (ref)
+		onActivated = ReactModule.useCallback(function() --[[ Line: 24 ]]
+			-- upvalues: p1 (copy), FlyoutContentSettingsModule (upval), FlyoutAnalyticsModule (upval), UseRoactServiceResult (copy)
 			p1.closeDrawer()
 			
 			if p1.openReportLogConfirmation then
 				p1.openReportLogConfirmation()
 			end
-			flyoutAnalyticsModule.sendMoreLegacyAndFlyoutItemClickEvent(var1, flyoutContentSettingsModule.ItemType.ReportLogs)
-		end, { p1.openReportLogConfirmation, p1.closeDrawer, var1 })
+			FlyoutAnalyticsModule.sendMoreLegacyAndFlyoutItemClickEvent(UseRoactServiceResult, FlyoutContentSettingsModule.ItemType.ReportLogs)
+		end, {
+			p1.openReportLogConfirmation,
+			p1.closeDrawer,
+			UseRoactServiceResult
+		})
 	})
 end

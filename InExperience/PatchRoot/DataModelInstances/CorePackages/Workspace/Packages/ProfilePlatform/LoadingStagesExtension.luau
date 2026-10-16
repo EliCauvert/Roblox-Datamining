@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent._Workspace.ProfilePlatform.ProfilePlatform.Analytics.LoadingStagesExtension)
+﻿return (require(script.Parent.Parent._Workspace.ProfilePlatform.ProfilePlatform.Analytics.LoadingStagesExtension))

@@ -1,26 +1,27 @@
 ﻿local _ = require(script.Parent.types)
-local default = require(script.Parent.assetSource).default
+local DefaultFunction = require(script.Parent.assetSource).default
 local t = {}
 
 return {
-	load = function(value)
-		-- upvalues: t (write), default (ref)
-		local var1 = t[value]
+	load = function(Key) --[[ Line: 14 ]]
+		-- upvalues: t (ref), DefaultFunction (copy)
+		local Entry = t[Key]
 		
-		if var1 then
-			return var1
+		if Entry then
+			return Entry
+		else
+			local v1 = DefaultFunction(Key):catch(function(Err) --[[ Line: 20 ]]
+				-- upvalues: t (upval), Key (copy)
+				t[Key] = nil
+				error(Err)
+			end)
+			t[Key] = v1
+			
+			return v1
 		end
-		local var2 = default(value):catch(function(p1)
-			-- upvalues: t (copy), value (ref)
-			t[value] = nil
-			error(p1)
-		end)
-		t[value] = var2
-		
-		return var2
 	end,
-	clearCache = function()
-		-- upvalues: t (write)
+	clearCache = function() --[[ Line: 28 ]]
+		-- upvalues: t (ref)
 		t = {}
 	end
 }

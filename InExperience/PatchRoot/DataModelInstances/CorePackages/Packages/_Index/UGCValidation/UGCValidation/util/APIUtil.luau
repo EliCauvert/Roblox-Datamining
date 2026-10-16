@@ -1,51 +1,49 @@
-﻿local httpRbxApiService = game:GetService("HttpRbxApiService")
-local contentProviderService = game:GetService("ContentProvider")
-local t = {
-	getBaseDomain = function()
-		-- upvalues: contentProviderService (ref)
-		local baseUrl = contentProviderService.BaseUrl
-		
-		if string.sub(baseUrl, #baseUrl) ~= "/" then
-			baseUrl ..= "/"
-		end
-		local _, matchIndex = string.find(baseUrl, "://")
-		local _, matchIndex_1 = string.find(baseUrl, "%.", matchIndex + 1)
-		
-		return string.sub(baseUrl, matchIndex_1 + 1)
-	end
-}
+﻿local HttpRbxApiService = game:GetService("HttpRbxApiService")
+local ContentProvider = game:GetService("ContentProvider")
 
-local function requestAndRetry(p1, p2)
-	-- upvalues: requestAndRetry (ref)
+local function requestAndRetry(p1, p2: number) --[[ Line: 21 ]]
+	-- upvalues: requestAndRetry (copy)
 	if p2 == nil then
 		p2 = 0
 	end
-	local ok, status = pcall(p1)
+	local Success, Result = pcall(p1)
 	
-	if ok then
-		return true, status
+	if Success then
+		return true, Result
 	elseif p2 >= 2 then
-		return false, status
+		return false, Result
+	else
+		wait(2 ^ (p2 - 1))
+		
+		return requestAndRetry(p1, p2 + 1)
 	end
-	wait(2 ^ (p2 - 1))
-	
-	return requestAndRetry(p1, p2 + 1)
 end
 
-function t.requestAndRetryPost(p1, p2)
-	-- upvalues: requestAndRetry (ref), httpRbxApiService (ref)
-	return requestAndRetry(function()
-		-- upvalues: httpRbxApiService (copy), p1 (ref), p2 (ref)
-		return httpRbxApiService:PostAsyncFullUrl(p1, p2)
-	end)
-end
-
-function t.requestAndRetryGet(p1)
-	-- upvalues: requestAndRetry (ref), httpRbxApiService (ref)
-	return requestAndRetry(function()
-		-- upvalues: httpRbxApiService (copy), p1 (ref)
-		return httpRbxApiService:GetAsyncFullUrl(p1)
-	end)
-end
-
-return t
+return {
+	getBaseDomain = function(): string --[[ Line: 10 ]]
+		-- upvalues: ContentProvider (copy)
+		local BaseUrl = ContentProvider.BaseUrl
+		
+		if string.sub(BaseUrl, #BaseUrl) ~= "/" then
+			BaseUrl ..= "/"
+		end
+		local _, EndIndex = string.find(BaseUrl, "://")
+		local _, EndIndex1 = string.find(BaseUrl, "%.", EndIndex + 1)
+		
+		return (string.sub(BaseUrl, EndIndex1 + 1))
+	end,
+	requestAndRetryPost = function(ApiUrl, Data) --[[ Line: 39 ]]
+		-- upvalues: requestAndRetry (copy), HttpRbxApiService (copy)
+		return requestAndRetry(function() --[[ Line: 40 ]]
+			-- upvalues: HttpRbxApiService (upval), ApiUrl (copy), Data (copy)
+			return HttpRbxApiService:PostAsyncFullUrl(ApiUrl, Data)
+		end)
+	end,
+	requestAndRetryGet = function(ApiUrl) --[[ Line: 45 ]]
+		-- upvalues: requestAndRetry (copy), HttpRbxApiService (copy)
+		return requestAndRetry(function() --[[ Line: 46 ]]
+			-- upvalues: HttpRbxApiService (upval), ApiUrl (copy)
+			return HttpRbxApiService:GetAsyncFullUrl(ApiUrl)
+		end)
+	end
+}

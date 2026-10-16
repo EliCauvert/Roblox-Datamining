@@ -1,41 +1,42 @@
-﻿local scriptProfilerService = game:GetService("ScriptProfilerService")
-local playersService = game:GetService("Players")
-local t = {}
-t.__index = t
+﻿local ScriptProfilerService = game:GetService("ScriptProfilerService")
+local Players = game:GetService("Players")
+local CoreScriptsProfilerModule = {}
+CoreScriptsProfilerModule.__index = CoreScriptsProfilerModule
 
-function t.new(p1)
-	-- upvalues: t (ref), playersService (ref), scriptProfilerService (ref)
-	local tbl = setmetatable({}, t)
-	tbl._isProfiling = false
-	tbl._isClient = false
-	tbl._player = playersService.LocalPlayer
-	tbl._connection = if p1 then scriptProfilerService.OnNewData:Connect(function(p2, p3)
-		-- upvalues: p1 (ref)
-		local var1 = p2 ~= nil
+function CoreScriptsProfilerModule.new(Callback) --[[ Line: 37 ]]
+	-- upvalues: CoreScriptsProfilerModule (copy), Players (copy), ScriptProfilerService (copy)
+	local self = setmetatable({}, CoreScriptsProfilerModule)
+	self._isProfiling = false
+	self._isClient = false
+	self._player = Players.LocalPlayer
+	self._connection = if Callback then ScriptProfilerService.OnNewData:Connect(function(Player, JsonString) --[[ Line: 45 ]]
+		-- upvalues: Callback (copy)
+		local HasPlayer = Player ~= nil
 		
-		if p1 then
-			p1(var1, p3)
+		if Callback then
+			Callback(HasPlayer, JsonString)
 		end
 	end) else nil
 	
-	return tbl
+	return self
 end
 
-function t:ClientStart(p1)
-	-- upvalues: scriptProfilerService (ref)
-	if self._isProfiling then
+function CoreScriptsProfilerModule:ClientStart(Player) --[[ Line: 58 ]]
+	-- upvalues: ScriptProfilerService (copy)
+	if not self._isProfiling then
+		ScriptProfilerService:ClientStart(self._player, Player or 1000)
+		self._isProfiling = true
+		self._isClient = true
+		
 		return
 	end
-	scriptProfilerService:ClientStart(self._player, p1 or 1000)
-	self._isProfiling = true
-	self._isClient = true
 end
 
-function t:ClientStop()
-	-- upvalues: scriptProfilerService (ref)
+function CoreScriptsProfilerModule:ClientStop() --[[ Line: 70 ]]
+	-- upvalues: ScriptProfilerService (copy)
 	if self._isProfiling and self._isClient then
-		scriptProfilerService:ClientStop(self._player)
-		scriptProfilerService:ClientRequestData(self._player)
+		ScriptProfilerService:ClientStop(self._player)
+		ScriptProfilerService:ClientRequestData(self._player)
 		self._isProfiling = false
 		self._isClient = false
 		
@@ -43,36 +44,37 @@ function t:ClientStop()
 	end
 end
 
-function t:ServerStart(p1)
-	-- upvalues: scriptProfilerService (ref)
-	if self._isProfiling then
+function CoreScriptsProfilerModule:ServerStart(p1) --[[ Line: 82 ]]
+	-- upvalues: ScriptProfilerService (copy)
+	if not self._isProfiling then
+		ScriptProfilerService:ServerStart(p1 or 1000)
+		self._isProfiling = true
+		self._isClient = false
+		
 		return
 	end
-	scriptProfilerService:ServerStart(p1 or 1000)
-	self._isProfiling = true
-	self._isClient = false
 end
 
-function t:ServerStop()
-	-- upvalues: scriptProfilerService (ref)
+function CoreScriptsProfilerModule:ServerStop() --[[ Line: 94 ]]
+	-- upvalues: ScriptProfilerService (copy)
 	if self._isProfiling and not self._isClient then
-		scriptProfilerService:ServerStop()
-		scriptProfilerService:ServerRequestData()
+		ScriptProfilerService:ServerStop()
+		ScriptProfilerService:ServerRequestData()
 		self._isProfiling = false
 		
 		return
 	end
 end
 
-function t:IsProfiling()
+function CoreScriptsProfilerModule:IsProfiling() --[[ Line: 105 ]]
 	return self._isProfiling
 end
 
-function t:Disconnect()
+function CoreScriptsProfilerModule:Disconnect() --[[ Line: 109 ]]
 	if self._connection then
 		self._connection:Disconnect()
 		self._connection = nil
 	end
 end
 
-return t
+return CoreScriptsProfilerModule

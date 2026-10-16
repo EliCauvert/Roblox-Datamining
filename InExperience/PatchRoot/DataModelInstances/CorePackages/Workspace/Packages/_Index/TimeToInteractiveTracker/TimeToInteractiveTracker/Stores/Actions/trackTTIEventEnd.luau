@@ -1,68 +1,83 @@
-﻿local timeToInteractiveTracker = script:FindFirstAncestor("TimeToInteractiveTracker")
-local name = require(timeToInteractiveTracker.Logger):new(script.Name)
+﻿local TimeToInteractiveTracker = script:FindFirstAncestor("TimeToInteractiveTracker")
+local NewResult = require(TimeToInteractiveTracker.Logger):new(script.Name)
 local _ = require(script.Parent.Parent.types)
-local nowModule = require(script.Parent.Parent.Parent.Utils.now)
-local sendTTIStatModule = require(timeToInteractiveTracker.Utils.sendTTIStat)
-local mergeTTIEventMetadataModule = require(timeToInteractiveTracker.Utils.mergeTTIEventMetadata)
-local utilModule = require(timeToInteractiveTracker.Utils.Util)
-local getMemoryMbModule = require(timeToInteractiveTracker.Utils.getMemoryMb)
-local fFlagTTITrackerMemoryTrackingModule = require(timeToInteractiveTracker.Utils.FFlagTTITrackerMemoryTracking)
+local NowModule = require(script.Parent.Parent.Parent.Utils.now)
+local SendTTIStatModule = require(TimeToInteractiveTracker.Utils.sendTTIStat)
+local MergeTTIEventMetadataModule = require(TimeToInteractiveTracker.Utils.mergeTTIEventMetadata)
+local UtilModule = require(TimeToInteractiveTracker.Utils.Util)
+local GetMemoryMbModule = require(TimeToInteractiveTracker.Utils.getMemoryMb)
+local FFlagTTITrackerMemoryTrackingModule = require(TimeToInteractiveTracker.Utils.FFlagTTITrackerMemoryTracking)
 
-return function(p1)
-	-- upvalues: name (ref), nowModule (ref), mergeTTIEventMetadataModule (ref), utilModule (ref), fFlagTTITrackerMemoryTrackingModule (ref), getMemoryMbModule (ref), sendTTIStatModule (ref)
-	return function(p2, p3)
-		-- upvalues: p1 (ref), name (copy), nowModule (copy), mergeTTIEventMetadataModule (copy), utilModule (copy), fFlagTTITrackerMemoryTrackingModule (copy), getMemoryMbModule (copy), sendTTIStatModule (copy)
-		local var1 = nil
-		local var2 = nil
-		local var3 = nil
-		local var4 = false
-		local var5 = if p3 and p3.cleanupAfterSend ~= nil then p3.cleanupAfterSend else true
-		local var6 = if p3 then p3.samplingRateOverride else nil
-		p1(function(p4)
-			-- upvalues: p2 (ref), name (copy), nowModule (copy), var1 (write), var4 (write), var2 (write), mergeTTIEventMetadataModule (copy), var3 (write), var5 (ref), utilModule (copy)
-			local var7 = p4[p2]
+return function(Callback) --[[ Line: 21 ]]
+	-- upvalues: NewResult (copy), NowModule (copy), MergeTTIEventMetadataModule (copy), UtilModule (copy), FFlagTTITrackerMemoryTrackingModule (copy), GetMemoryMbModule (copy), SendTTIStatModule (copy)
+	return function(StatName, p1) --[[ Line: 22 ]]
+		-- upvalues: Callback (copy), NewResult (upval), NowModule (upval), MergeTTIEventMetadataModule (upval), UtilModule (upval), FFlagTTITrackerMemoryTrackingModule (upval), GetMemoryMbModule (upval), SendTTIStatModule (upval)
+		local ScaledStartTime = nil
+		local MetaData = nil
+		local Milestones = nil
+		local IsNotSent = false
+		local NoP1 = not p1 or p1.cleanupAfterSend == nil or p1.cleanupAfterSend
+		local SamplingRateOverride = if p1 then p1.samplingRateOverride else nil
+		Callback(function(Tbl) --[[ Line: 32 ]]
+			-- upvalues: StatName (copy), NewResult (upval), NowModule (upval), ScaledStartTime (ref), IsNotSent (ref), MetaData (ref), MergeTTIEventMetadataModule (upval), Milestones (ref), NoP1 (copy), UtilModule (upval)
+			local Entry = Tbl[StatName]
 			
-			if var7 == nil then
-				name:warning(`called before trackStart for eventName={p2}`)
+			if Entry == nil then
+				NewResult:warning(`called before trackStart for eventName={StatName}`)
 				
-				return p4
-			elseif var7.startTime == nil then
-				name:warning(`called before trackStart for eventName={p2}`)
-				
-				return p4
+				return Tbl
 			end
-			local var8 = nowModule()
-			var1 = (var8 - var7.startTime) * 1000
-			var4 = var7.sent ~= true
+			if Entry.startTime == nil then
+				NewResult:warning(`called before trackStart for eventName={StatName}`)
+				
+				return Tbl
+			end
+			local NowModuleResult = NowModule()
+			ScaledStartTime = (NowModuleResult - Entry.startTime) * 1000
+			IsNotSent = Entry.sent ~= true
 			
-			if var4 then
-				var2 = mergeTTIEventMetadataModule(var7.metadata, {
-					startTime = var7.startTime,
-					endTime = var8,
-					deltaMs = var1
+			if IsNotSent then
+				MetaData = MergeTTIEventMetadataModule(Entry.metadata, {
+					startTime = Entry.startTime,
+					endTime = NowModuleResult,
+					deltaMs = ScaledStartTime
 				})
 				
-				if var7.milestones then
-					var3 = var7.milestones
+				if Entry.milestones then
+					Milestones = Entry.milestones
 				end
 			end
-			local cloned = table.clone(p4)
+			local Copy = table.clone(Tbl)
 			
-			if var4 and var5 then
-				cloned[p2] = nil
+			if IsNotSent and NoP1 then
+				Copy[StatName] = nil
 				
-				return cloned
+				return Copy
+			else
+				Copy[StatName] = {
+					sent = true,
+					startTime = Entry.startTime,
+					endTime = NowModuleResult,
+					deltaMs = ScaledStartTime,
+					metadata = table.clone(Entry.metadata),
+					milestones = if Entry.milestones then UtilModule.deepCloneMilestones(Entry.milestones) else nil
+				}
+				
+				return Copy
 			end
-			cloned[p2] = {
-				sent = true,
-				startTime = var7.startTime,
-				endTime = var8,
-				deltaMs = var1,
-				metadata = table.clone(var7.metadata),
-				milestones = if var7.milestones then utilModule.deepCloneMilestones(var7.milestones) else nil
-			}
-			
-			return cloned
 		end)
+		
+		if IsNotSent and ScaledStartTime ~= nil and MetaData ~= nil then
+			local MemoryMbModule = if FFlagTTITrackerMemoryTrackingModule then GetMemoryMbModule() else nil
+			SendTTIStatModule({
+				statName = StatName,
+				deltaMs = ScaledStartTime,
+				metaData = MetaData,
+				samplingRateOverride = SamplingRateOverride,
+				milestones = Milestones,
+				totalMemoryMB = if MemoryMbModule then MemoryMbModule.totalMemoryMB else nil,
+				luaHeapMB = if MemoryMbModule then MemoryMbModule.luaHeapMB else nil
+			})
+		end
 	end
 end

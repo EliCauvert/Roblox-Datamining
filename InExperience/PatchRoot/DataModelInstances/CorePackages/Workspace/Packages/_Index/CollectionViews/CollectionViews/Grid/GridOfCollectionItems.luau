@@ -1,14 +1,12 @@
-﻿local collectionViews = script:FindFirstAncestor("CollectionViews")
-local parent = collectionViews.Parent
-local reactModule = require(parent.React)
-local cryoModule = require(parent.Cryo)
-local argCheckModule = require(parent.ArgCheck)
-local calculateRelativeColumnGapModule = require(collectionViews.Grid.calculateRelativeColumnGap)
-local calculateSpacePerItemModule = require(collectionViews.calculateSpacePerItem)
-local fFlagCollectionViewMathChanges = require(parent.SharedFlags).FFlagCollectionViewMathChanges
-local luaAppFixCollectionGridWindowAbsoluteCanvasSize = game:DefineFastFlag("LuaAppFixCollectionGridWindowAbsoluteCanvasSize", false)
-local luaAppGridReuseUnchangedTileElements = game:DefineFastFlag("LuaAppGridReuseUnchangedTileElements", false)
-local t = {
+﻿local CollectionViews = script:FindFirstAncestor("CollectionViews")
+local Parent = CollectionViews.Parent
+local ReactModule = require(Parent.React)
+local CryoModule = require(Parent.Cryo)
+local ArgCheckModule = require(Parent.ArgCheck)
+local CalculateRelativeColumnGapModule = require(CollectionViews.Grid.calculateRelativeColumnGap)
+local LuaAppFixCollectionGridWindowAbsoluteCanvasSize = game:DefineFastFlag("LuaAppFixCollectionGridWindowAbsoluteCanvasSize", false)
+local LuaAppGridReuseUnchangedTileElements = game:DefineFastFlag("LuaAppGridReuseUnchangedTileElements", false)
+local config = {
 	maxNumRows = 1e999,
 	numColumns = 1,
 	bufferRowsBelowScreen = 4,
@@ -19,233 +17,213 @@ local t = {
 	thresholdRowsFromBottom = 0
 }
 
-return reactModule.memo(function(p1)
-	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), luaAppFixCollectionGridWindowAbsoluteCanvasSize (ref), luaAppGridReuseUnchangedTileElements (ref), argCheckModule (ref), fFlagCollectionViewMathChanges (ref), calculateSpacePerItemModule (ref), calculateRelativeColumnGapModule (ref)
-	local var1 = cryoModule.Dictionary.join(t, p1)
-	local var2 = reactModule.useRef(nil)
-	local minValue = math.min(math.ceil(#var1.items / var1.numColumns), var1.maxNumRows)
-	local var3 = var1.itemSizeBinding:map(function(p2)
-		-- upvalues: minValue (ref), var1 (ref)
-		return minValue * (p2.Y + var1.verticalPadding) - var1.verticalPadding
+return ReactModule.memo(function(p1) --[[ Line: 82 | Named "GridOfCollectionItems" ]]
+	-- upvalues: CryoModule (copy), config (copy), ReactModule (copy), LuaAppFixCollectionGridWindowAbsoluteCanvasSize (copy), LuaAppGridReuseUnchangedTileElements (copy), ArgCheckModule (copy), CalculateRelativeColumnGapModule (copy)
+	local JoinResult = CryoModule.Dictionary.join(config, p1)
+	local UseRefResult = ReactModule.useRef(nil)
+	local Smallest = math.min(math.ceil(#JoinResult.items / JoinResult.numColumns), JoinResult.maxNumRows)
+	local MapResult = JoinResult.itemSizeBinding:map(function(p2) --[[ Line: 90 ]]
+		-- upvalues: Smallest (copy), JoinResult (copy)
+		return Smallest * (p2.Y + JoinResult.verticalPadding) - JoinResult.verticalPadding
 	end)
-	local var4, var5 = reactModule.useState(-1)
-	local var6, var7 = reactModule.useState(-1)
-	local var8, var9 = reactModule.useState(var1.bufferRowsBelowScreen + var1.bufferRowsAboveScreen)
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), var2 (ref), minValue (ref), var5 (ref), var7 (ref), var9 (ref), luaAppFixCollectionGridWindowAbsoluteCanvasSize (copy)
-		local t = {}
+	local UseStateResult, UseStateResult2 = ReactModule.useState(-1)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(-1)
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(JoinResult.bufferRowsBelowScreen + JoinResult.bufferRowsAboveScreen)
+	ReactModule.useEffect(function() --[[ Line: 103 ]]
+		-- upvalues: JoinResult (copy), UseRefResult (copy), Smallest (copy), UseStateResult2 (copy), UseStateResult2_1 (copy), UseStateResult2_2 (copy), LuaAppFixCollectionGridWindowAbsoluteCanvasSize (upval)
+		local List = {}
 		
-		if var1.verticalScrollingFrameRef and var1.verticalScrollingFrameRef.current and var2.current then
-			local current = var2.current
-			local current_1 = var1.verticalScrollingFrameRef.current
-			local y = var1.itemSizeBinding:getValue().Y
-			local y_1 = current_1.AbsolutePosition.Y
-			local y_2 = current_1.AbsoluteWindowSize.Y
-			local var10 = math.ceil(y_2 / math.max(1, y + var1.verticalPadding)) + 1
+		if JoinResult.verticalScrollingFrameRef and JoinResult.verticalScrollingFrameRef.current and UseRefResult.current then
+			local Current = UseRefResult.current
+			local Current1 = JoinResult.verticalScrollingFrameRef.current
+			local Y = Current1.AbsolutePosition.Y
+			local Y1 = Current1.AbsoluteWindowSize.Y
+			local NewCeiled = math.ceil(Y1 / math.max(1, JoinResult.itemSizeBinding:getValue().Y + JoinResult.verticalPadding)) + 1
 			
-			local function _()
-				-- upvalues: current (ref), current_1 (ref), y_1 (write)
-				return current.AbsolutePosition.Y + current_1.CanvasPosition.Y - y_1
+			local function _() --[[ Line: 120 | Named "calculateOffsetOfGrid" ]]
+				-- upvalues: Current (copy), Current1 (copy), Y (ref)
+				return Current.AbsolutePosition.Y + Current1.CanvasPosition.Y - Y
 			end
 			
-			local var11 = current.AbsolutePosition.Y + current_1.CanvasPosition.Y - y_1
+			local YDelta = Current.AbsolutePosition.Y + Current1.CanvasPosition.Y - Y
 			
-			local function updateRowsToRender()
-				-- upvalues: current_1 (ref), var1 (copy), minValue (copy), var11 (write), y_2 (write), var10 (write), var5 (copy), var7 (copy)
-				local maxValue_1, minValue_1
-				local y = current_1.CanvasPosition.Y
-				local y_1 = var1.itemSizeBinding:getValue().Y
-				local maxValue = math.max(1, y_1 + var1.verticalPadding)
-				local var12 = minValue * (y_1 + var1.verticalPadding) - var1.verticalPadding
-				local var13 = var11 - y
-				local var14 = var1.bufferRowsAboveScreen * maxValue
-				local var15 = var1.bufferRowsBelowScreen * maxValue
-				local _ = nil
-				local _ = nil
+			local function updateRowsToRender() --[[ Line: 127 ]]
+				-- upvalues: Current1 (copy), JoinResult (upval), Smallest (upval), YDelta (ref), Y1 (ref), NewCeiled (ref), UseStateResult2 (upval), UseStateResult2_1 (upval)
+				local Y = JoinResult.itemSizeBinding:getValue().Y
+				local Largest = math.max(1, Y + JoinResult.verticalPadding)
+				local SmallestDelta = Smallest * (Y + JoinResult.verticalPadding) - JoinResult.verticalPadding
+				local YDeltaDelta = YDelta - Current1.CanvasPosition.Y
+				local ScaledBufferRowsAboveScreen = JoinResult.bufferRowsAboveScreen * Largest
+				local Smallest1 = nil
+				local Largest1 = nil
 				
-				if y_2 + var15 < var13 or var13 + var12 < -var14 then
-					maxValue_1 = -1
-					minValue_1 = -1
+				if Y1 + JoinResult.bufferRowsBelowScreen * Largest < YDeltaDelta or YDeltaDelta + SmallestDelta < -ScaledBufferRowsAboveScreen then
+					Largest1 = -1
+					Smallest1 = -1
 				else
-					local floored = math.floor(-var13 / maxValue)
-					maxValue_1 = math.max(1, floored + 1 - var1.bufferRowsAboveScreen)
-					local var16 = var10 + var1.bufferRowsBelowScreen
-					minValue_1 = math.min(minValue, maxValue_1 + math.max(1, if floored <= 0 then var16 + floored else var16 + math.min(floored, var1.bufferRowsAboveScreen)) - 1)
+					local Floored = math.floor(-YDeltaDelta / Largest)
+					Largest1 = math.max(1, Floored + 1 - JoinResult.bufferRowsAboveScreen)
+					local NewNewCeiled = NewCeiled + JoinResult.bufferRowsBelowScreen
+					Smallest1 = math.min(Smallest, Largest1 + math.max(1, if Floored <= 0 then NewNewCeiled + Floored else NewNewCeiled + math.min(Floored, JoinResult.bufferRowsAboveScreen)) - 1)
 				end
-				var5(maxValue_1)
-				var7(minValue_1)
+				UseStateResult2(Largest1)
+				UseStateResult2_1(Smallest1)
 			end
 			
-			local function updateWindowParams()
-				-- upvalues: var1 (copy), y_1 (write), current_1 (ref), y_2 (write), var11 (write), current (ref), var10 (write), var9 (copy), minValue (copy), updateRowsToRender (ref)
-				local maxValue = math.max(1, var1.itemSizeBinding:getValue().Y + var1.verticalPadding)
-				y_1 = current_1.AbsolutePosition.Y
-				y_2 = current_1.AbsoluteWindowSize.Y
-				var11 = current.AbsolutePosition.Y + current_1.CanvasPosition.Y - y_1
-				var10 = math.ceil(y_2 / maxValue) + 1
-				var9(math.min(minValue, var10 + var1.bufferRowsBelowScreen + var1.bufferRowsAboveScreen))
+			local function updateWindowParams() --[[ Line: 172 ]]
+				-- upvalues: JoinResult (upval), Y (ref), Current1 (copy), Y1 (ref), YDelta (ref), Current (copy), NewCeiled (ref), UseStateResult2_2 (upval), Smallest (upval), updateRowsToRender (copy)
+				Y = Current1.AbsolutePosition.Y
+				Y1 = Current1.AbsoluteWindowSize.Y
+				YDelta = Current.AbsolutePosition.Y + Current1.CanvasPosition.Y - Y
+				NewCeiled = math.ceil(Y1 / math.max(1, JoinResult.itemSizeBinding:getValue().Y + JoinResult.verticalPadding)) + 1
+				UseStateResult2_2((math.min(Smallest, NewCeiled + JoinResult.bufferRowsBelowScreen + JoinResult.bufferRowsAboveScreen)))
 				updateRowsToRender()
 			end
 			
-			table.insert(t, current_1:GetPropertyChangedSignal("AbsolutePosition"):Connect(updateWindowParams))
-			table.insert(t, current_1:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(updateWindowParams))
-			table.insert(t, current_1:GetPropertyChangedSignal(if luaAppFixCollectionGridWindowAbsoluteCanvasSize then "AbsoluteCanvasSize" else "CanvasSize"):Connect(updateWindowParams))
-			table.insert(t, current_1:GetPropertyChangedSignal("CanvasPosition"):Connect(updateRowsToRender))
+			table.insert(List, Current1:GetPropertyChangedSignal("AbsolutePosition"):Connect(updateWindowParams))
+			table.insert(List, Current1:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(updateWindowParams))
+			table.insert(List, Current1:GetPropertyChangedSignal(if LuaAppFixCollectionGridWindowAbsoluteCanvasSize then "AbsoluteCanvasSize" else "CanvasSize"):Connect(updateWindowParams))
+			table.insert(List, Current1:GetPropertyChangedSignal("CanvasPosition"):Connect(updateRowsToRender))
 			updateWindowParams()
 		else
-			var5(1)
-			var7(minValue)
-			var9(minValue)
+			UseStateResult2(1)
+			UseStateResult2_1(Smallest)
+			UseStateResult2_2(Smallest)
 		end
-		return function()
-			-- upvalues: t (ref)
-			for i, v in t do
-				v:Disconnect()
+		return function() --[[ Line: 219 ]]
+			-- upvalues: List (copy)
+			for _, Connection in List do
+				Connection:Disconnect()
 			end
 		end
 	end, {
-		var2, minValue, var1.itemSizeBinding, var1.verticalScrollingFrameRef,
-		var1.verticalPadding, var1.bufferRowsAboveScreen, var1.bufferRowsBelowScreen,
-		var1.onViewableItemsChanged
+		UseRefResult, Smallest, JoinResult.itemSizeBinding,
+		JoinResult.verticalScrollingFrameRef, JoinResult.verticalPadding,
+		JoinResult.bufferRowsAboveScreen, JoinResult.bufferRowsBelowScreen,
+		JoinResult.onViewableItemsChanged
 	})
-	var6 = math.min(var6, minValue)
-	local maxValue = math.max(-1, (var4 - 1) * var1.numColumns + 1)
-	local maxValue_1 = math.max(-1, math.min(#var1.items, var6 * var1.numColumns))
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), maxValue (ref), maxValue_1 (ref)
-		if var1.onViewableItemsChanged then
-			var1.onViewableItemsChanged(maxValue, maxValue_1)
+	local Smallest1 = math.min(UseStateResult1, Smallest)
+	local Largest = math.max(-1, (UseStateResult - 1) * JoinResult.numColumns + 1)
+	local Largest1 = math.max(-1, (math.min(#JoinResult.items, Smallest1 * JoinResult.numColumns)))
+	ReactModule.useEffect(function() --[[ Line: 244 ]]
+		-- upvalues: JoinResult (copy), Largest (copy), Largest1 (copy)
+		if JoinResult.onViewableItemsChanged then
+			JoinResult.onViewableItemsChanged(Largest, Largest1)
 		end
-	end, { maxValue, maxValue_1, var1.onViewableItemsChanged })
-	local var12 = reactModule.useRef(nil)
-	reactModule.useEffect(function()
-		-- upvalues: var6 (write), minValue (ref), var1 (ref), var12 (ref)
-		if minValue - var1.thresholdRowsFromBottom <= var6 and var12.current ~= var1.items and var1.onReachedThresholdFromEnd then
-			var1.onReachedThresholdFromEnd()
-			var12.current = var1.items
+	end, { Largest, Largest1, JoinResult.onViewableItemsChanged })
+	local UseRefResult1 = ReactModule.useRef(nil)
+	ReactModule.useEffect(function() --[[ Line: 252 ]]
+		-- upvalues: Smallest1 (ref), Smallest (copy), JoinResult (copy), UseRefResult1 (copy)
+		if Smallest - JoinResult.thresholdRowsFromBottom <= Smallest1 and UseRefResult1.current ~= JoinResult.items and JoinResult.onReachedThresholdFromEnd then
+			JoinResult.onReachedThresholdFromEnd()
+			UseRefResult1.current = JoinResult.items
 		end
 	end, {
-		var6,
-		minValue,
-		var1.thresholdRowsFromBottom,
-		var1.onReachedThresholdFromEnd,
-		var1.items
+		Smallest1,
+		Smallest,
+		JoinResult.thresholdRowsFromBottom,
+		JoinResult.onReachedThresholdFromEnd,
+		JoinResult.items
 	})
-	local var13 = if luaAppGridReuseUnchangedTileElements then reactModule.useRef({}) else nil
+	local UseRefResult2 = if LuaAppGridReuseUnchangedTileElements then ReactModule.useRef({}) else nil
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		ref = var2,
-		Size = var3:map(function(p2)
-			return UDim2.new(1, 0, 0, p2)
+		ref = UseRefResult,
+		Size = MapResult:map(function(YOffset): UDim2 --[[ Line: 400 ]]
+			return UDim2.new(1, 0, 0, YOffset)
 		end),
-		LayoutOrder = var1.LayoutOrder,
-		Position = var1.Position
-	}, reactModule.useMemo(function()
-		-- upvalues: var4 (ref), var6 (write), maxValue (ref), maxValue_1 (ref), var1 (ref), minValue (ref), argCheckModule (copy), reactModule (copy), fFlagCollectionViewMathChanges (copy), calculateSpacePerItemModule (copy), calculateRelativeColumnGapModule (copy), luaAppGridReuseUnchangedTileElements (copy), var13 (ref), var8 (ref)
-		local t = {}
+		LayoutOrder = JoinResult.LayoutOrder,
+		Position = JoinResult.Position
+	}, (ReactModule.useMemo(function() --[[ Line: 275 ]]
+		-- upvalues: UseStateResult (copy), Smallest1 (ref), Largest (copy), Largest1 (copy), JoinResult (copy), Smallest (copy), ArgCheckModule (upval), ReactModule (upval), CalculateRelativeColumnGapModule (upval), LuaAppGridReuseUnchangedTileElements (upval), UseRefResult2 (copy), UseStateResult3 (copy)
+		local Elements = {}
 		
-		if var4 <= 0 or var6 < var4 then
-			return nil
-		elseif maxValue <= 0 or maxValue_1 < maxValue then
-			return nil
-		elseif var1.numColumns <= 0 or minValue - var4 < 0 then
+		if UseStateResult <= 0 or Smallest1 < UseStateResult then
 			return nil
 		end
-		argCheckModule.assert(var4 >= 1)
-		argCheckModule.assert(var4 <= var6 and var6 <= minValue)
+		if Largest <= 0 or Largest1 < Largest then
+			return nil
+		end
+		if JoinResult.numColumns <= 0 or Smallest - UseStateResult < 0 then
+			return nil
+		end
+		ArgCheckModule.assert(UseStateResult >= 1)
+		ArgCheckModule.assert(UseStateResult <= Smallest1 and Smallest1 <= Smallest)
 		
-		if var4 > 1 then
-			local var14 = var4 - 1
-			t.Padding = reactModule.createElement("UIPadding", {
-				PaddingTop = var1.itemSizeBinding:map(function(p2)
-					-- upvalues: var14 (ref), var1 (copy)
-					return UDim.new(0, var14 * (p2.Y + var1.verticalPadding))
+		if UseStateResult > 1 then
+			local UseStateResultDelta = UseStateResult - 1
+			Elements.Padding = ReactModule.createElement("UIPadding", {
+				PaddingTop = JoinResult.itemSizeBinding:map(function(p2): UDim --[[ Line: 293 ]]
+					-- upvalues: UseStateResultDelta (copy), JoinResult (upval)
+					return UDim.new(0, UseStateResultDelta * (p2.Y + JoinResult.verticalPadding))
 				end)
 			})
 		end
-		local uDim2, var15
-		local var16 = minValue - var4 + 1
-		argCheckModule.assert(var16 >= 1)
-		argCheckModule.assert(var1.numColumns >= 1)
-		local _ = nil
-		local _ = nil
-		
-		if fFlagCollectionViewMathChanges then
-			local var17 = calculateSpacePerItemModule(var1.numColumns, var1.columnGap)
-			local var18 = calculateSpacePerItemModule(var16, var1.verticalPadding)
-			uDim2 = UDim2.new(1 / var1.numColumns, -var17.gapOffsetPerItem, 1 / var16, -var18.gapOffsetPerItem)
-			var15 = UDim2.new(0, var17.adjustedGap, 0, var18.adjustedGap)
-		else
-			local var19 = var1.numColumns - 1
-			uDim2 = UDim2.new(1 / var1.numColumns, math.floor(-(var19 / var1.numColumns) * var1.columnGap), 1 / var16, math.floor(-((var16 - 1) / var16) * var1.verticalPadding))
-			var15 = if var1.disableRelativeGap then UDim2.new(0, var1.columnGap + (math.floor(var19 / var1.numColumns * var1.columnGap) * var1.numColumns - var1.columnGap * var19) / var19, 0, var1.verticalPadding) else var1.itemSizeBinding:map(function(p2)
-				-- upvalues: calculateRelativeColumnGapModule (copy), var1 (copy)
-				return UDim2.new(calculateRelativeColumnGapModule(var1.numColumns, var1.columnGap, p2.X, var1.sideMargin), 0, 0, var1.verticalPadding)
-			end)
-		end
-		local var20
-		t.Layout = reactModule.createElement("UIGridLayout", {
-			FillDirectionMaxCells = var1.numColumns,
-			CellPadding = var15,
-			CellSize = uDim2,
+		local NewSmallest = Smallest - UseStateResult + 1
+		ArgCheckModule.assert(NewSmallest >= 1)
+		ArgCheckModule.assert(JoinResult.numColumns >= 1)
+		local NumColumnsDelta = JoinResult.numColumns - 1
+		local NewColumnGap = JoinResult.columnGap + (math.floor(NumColumnsDelta / JoinResult.numColumns * JoinResult.columnGap) * JoinResult.numColumns - JoinResult.columnGap * NumColumnsDelta) / NumColumnsDelta
+		Elements.Layout = ReactModule.createElement("UIGridLayout", {
+			FillDirectionMaxCells = JoinResult.numColumns,
+			CellPadding = if JoinResult.disableRelativeGap then UDim2.new(0, NewColumnGap, 0, JoinResult.verticalPadding) else JoinResult.itemSizeBinding:map(function(p2): UDim2 --[[ Line: 317 ]]
+				-- upvalues: CalculateRelativeColumnGapModule (upval), JoinResult (upval)
+				return UDim2.new(CalculateRelativeColumnGapModule(JoinResult.numColumns, JoinResult.columnGap, p2.X, JoinResult.sideMargin), 0, 0, JoinResult.verticalPadding)
+			end),
+			CellSize = UDim2.new(1 / JoinResult.numColumns, math.floor(-(NumColumnsDelta / JoinResult.numColumns) * JoinResult.columnGap), 1 / NewSmallest, (math.floor(-((NewSmallest - 1) / NewSmallest) * JoinResult.verticalPadding))),
 			FillDirection = Enum.FillDirection.Horizontal,
 			HorizontalAlignment = Enum.HorizontalAlignment.Left,
 			VerticalAlignment = Enum.VerticalAlignment.Top,
 			SortOrder = Enum.SortOrder.LayoutOrder
 		})
-		argCheckModule.assert(maxValue >= 1)
-		argCheckModule.assert(maxValue <= maxValue_1 and maxValue_1 <= #var1.items)
+		ArgCheckModule.assert(Largest >= 1)
+		ArgCheckModule.assert(Largest <= Largest1 and Largest1 <= #JoinResult.items)
 		
-		if luaAppGridReuseUnchangedTileElements then
-			local current = var13.current
-			local t_1 = {}
+		if LuaAppGridReuseUnchangedTileElements then
+			local Current = UseRefResult2.current
+			local Current1 = {}
 			
-			for i = maxValue, maxValue_1 do
-				if i > #var1.items then
-					continue
+			for i = Largest, Largest1 do
+				if i <= #JoinResult.items then
+					local Ceiled = math.ceil(i / JoinResult.numColumns)
+					local Item = JoinResult.items[i]
+					local CurrentEntry = Current[i]
+					local RenderItemResult = nil
+					local RenderItemResult2 = nil
+					
+					if CurrentEntry and CurrentEntry.entry == Item and CurrentEntry.renderItem == JoinResult.renderItem and CurrentEntry.rowNum == Ceiled then
+						RenderItemResult = CurrentEntry.element
+						RenderItemResult2 = CurrentEntry.keyPrefix
+					else
+						RenderItemResult, RenderItemResult2 = JoinResult.renderItem(Item, i, UDim2.fromScale(1, 1), Ceiled)
+					end
+					Current1[i] = {
+						entry = Item,
+						renderItem = JoinResult.renderItem,
+						rowNum = Ceiled,
+						element = RenderItemResult,
+						keyPrefix = RenderItemResult2
+					}
+					Elements[`{RenderItemResult2}{i % (UseStateResult3 * JoinResult.numColumns)}`] = RenderItemResult
 				end
-				local var21, var22
-				local ceiled = math.ceil(i / var1.numColumns)
-				var20 = var1.items[i]
-				local var23 = current[i]
-				local _ = nil
-				local _ = nil
-				
-				if var23 and var23.entry == var20 and (var23.renderItem == var1.renderItem and var23.rowNum == ceiled) then
-					var21 = var23.element
-					var22 = var23.keyPrefix
-				else
-					local var24, var25 = var1.renderItem(var20, i, UDim2.fromScale(1, 1), ceiled)
-					var21 = var24
-					var22 = var25
-				end
-				t_1[i] = {
-					entry = var20,
-					renderItem = var1.renderItem,
-					rowNum = ceiled,
-					element = var21,
-					keyPrefix = var22
-				}
-				t[`{var22}{i % (var8 * var1.numColumns)}`] = var21
 			end
-			var13.current = t_1
+			UseRefResult2.current = Current1
 			
-			return t
+			return Elements
 		else
-			for i_1 = maxValue, maxValue_1 do
-				if i_1 <= #var1.items then
-					var54, var48 = var1.renderItem(var1.items[i_1], i_1, UDim2.fromScale(1, 1), math.ceil(i_1 / var1.numColumns))
-					t[`{var20}{i_1 % (var8 * var1.numColumns)}`] = var54
+			for i1 = Largest, Largest1 do
+				if i1 <= #JoinResult.items then
+					local RenderItemResult2_1
+					Elements[`{RenderItemResult2_1}{i1 % (UseStateResult3 * JoinResult.numColumns)}`], RenderItemResult2_1 = JoinResult.renderItem(JoinResult.items[i1], i1, UDim2.fromScale(1, 1), (math.ceil(i1 / JoinResult.numColumns)))
 				end
 			end
-			return t
+			return Elements
 		end
 	end, {
-		var1.columnGap, var1.numColumns, var1.itemSizeBinding, var4, var6,
-		var1.items, var1.renderItem, var1.verticalPadding, var8, minValue,
-		if not fFlagCollectionViewMathChanges then var1.sideMargin else nil, maxValue,
-		maxValue_1,
-		if not fFlagCollectionViewMathChanges then var1.disableRelativeGap else nil
-	}))
+		JoinResult.columnGap, JoinResult.numColumns, JoinResult.itemSizeBinding,
+		UseStateResult, Smallest1, JoinResult.items, JoinResult.renderItem,
+		JoinResult.verticalPadding, UseStateResult3, Smallest, JoinResult.sideMargin,
+		Largest, Largest1, JoinResult.disableRelativeGap
+	})))
 end)

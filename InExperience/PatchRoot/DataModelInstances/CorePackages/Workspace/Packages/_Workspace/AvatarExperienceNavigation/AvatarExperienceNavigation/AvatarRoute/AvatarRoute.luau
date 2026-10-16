@@ -1,44 +1,44 @@
-﻿local tModule = require(script:FindFirstAncestor("AvatarExperienceNavigation").Parent.t)
-local routeInfoModule = require(script.Parent.RouteInfo)
+﻿local TModule = require(script:FindFirstAncestor("AvatarExperienceNavigation").Parent.t)
+local RouteInfoModule = require(script.Parent.RouteInfo)
 local _ = require(script.Parent.Types)
-local t = {}
-t.__index = t
-t.maxPreviousCount = 2
-t.Interface = tModule.strictInterface({
-	current = routeInfoModule.Interface,
-	previousPages = tModule.optional(tModule.array(routeInfoModule.Interface)),
-	opaque = routeInfoModule.Interface,
-	isVisible = tModule.boolean,
-	isOverlayVisible = tModule.boolean
+local AvatarRouteModule = {}
+AvatarRouteModule.__index = AvatarRouteModule
+AvatarRouteModule.maxPreviousCount = 2
+AvatarRouteModule.Interface = TModule.strictInterface({
+	current = RouteInfoModule.Interface,
+	previousPages = TModule.optional(TModule.array(RouteInfoModule.Interface)),
+	opaque = RouteInfoModule.Interface,
+	isVisible = TModule.boolean,
+	isOverlayVisible = TModule.boolean
 })
 
-function t.new(p1)
-	-- upvalues: routeInfoModule (ref), t (ref)
-	local t_1 = {
-		current = p1.current or routeInfoModule.EMPTY,
+function AvatarRouteModule.new(p1) --[[ Line: 40 ]]
+	-- upvalues: RouteInfoModule (copy), AvatarRouteModule (copy)
+	local config = {
+		current = p1.current or RouteInfoModule.EMPTY,
 		previousPages = p1.previousPages or {},
-		opaque = p1.opaque or routeInfoModule.EMPTY,
+		opaque = p1.opaque or RouteInfoModule.EMPTY,
 		isVisible = p1.isVisible or false,
 		isOverlayVisible = p1.isOverlayVisible or false
 	}
-	setmetatable(t_1, t)
+	setmetatable(config, AvatarRouteModule)
 	
-	return t_1
+	return config
 end
 
-function t:__tostring()
-	local current = self.current
-	local opaque = self.opaque
-	local text = (("AvatarRoute[" .. (if self.isVisible then "Visible" else "Not Visible")) .. (if self.isOverlayVisible then " *Overlay" else "")) .. ", " .. tostring(current)
+function AvatarRouteModule:__tostring(): string --[[ Line: 52 ]]
+	local Current = self.current
+	local Opaque = self.opaque
+	local Text = (("AvatarRoute[" .. (if self.isVisible then "Visible" else "Not Visible")) .. (if self.isOverlayVisible then " *Overlay" else "")) .. ", " .. tostring(Current)
 	
-	if current.name ~= opaque.name then
-		text ..= ", opaque: " .. tostring(opaque)
+	if Current.name ~= Opaque.name then
+		Text ..= ", opaque: " .. tostring(Opaque)
 	end
-	return text .. "]"
+	return Text .. "]"
 end
 
-function t:__eq(p1)
-	return not (not self or not p1) and (if rawequal(self, p1) then true else self.isVisible == p1.isVisible and (self.isOverlayVisible == p1.isOverlayVisible and (self.current == p1.current and self.opaque == p1.opaque)))
+function AvatarRouteModule.__eq(p1, p2): boolean --[[ Line: 67 ]]
+	return if p1 and p2 then if rawequal(p1, p2) then true else p1.isVisible == p2.isVisible and (p1.isOverlayVisible == p2.isOverlayVisible and p1.current == p2.current) and p1.opaque == p2.opaque else false
 end
 
-return t
+return AvatarRouteModule

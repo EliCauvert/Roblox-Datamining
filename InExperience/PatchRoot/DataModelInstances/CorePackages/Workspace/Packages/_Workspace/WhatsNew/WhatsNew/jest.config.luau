@@ -1,8 +1,8 @@
-﻿local whatsNew = script:FindFirstAncestor("WhatsNew")
+﻿local WhatsNew = script:FindFirstAncestor("WhatsNew")
 
 return {
 	projects = {
-		whatsNew["jest.main.config"],
-		whatsNew["jest.mockDataModel.config"]
+		WhatsNew["jest.main.config"],
+		WhatsNew["jest.mockDataModel.config"]
 	}
 }

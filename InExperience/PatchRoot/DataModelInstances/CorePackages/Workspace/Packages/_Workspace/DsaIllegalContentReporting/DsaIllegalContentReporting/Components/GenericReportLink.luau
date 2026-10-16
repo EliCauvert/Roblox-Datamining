@@ -1,47 +1,45 @@
-﻿local parent = script:FindFirstAncestor("DsaIllegalContentReporting").Parent
-local foundationModule = require(parent.Foundation)
-local default = require(parent.LinkingProtocol).LinkingProtocol.default
-local localizationModule = require(parent.Localization)
-local reactModule = require(parent.React)
-local controlState = foundationModule.Enums.ControlState
-local getIconRichText = foundationModule.Utility.getIconRichText
-local iconName = foundationModule.Enums.IconName
-local text = foundationModule.Text
-local useLocalization = localizationModule.Hooks.useLocalization
-local view = foundationModule.View
-local genericReportLink = game:DefineFastString("GenericReportLink", "https://www.roblox.com/illegal-content-reporting")
-local improveIllegalContentReportingLinkLook = game:DefineFastFlag("ImproveIllegalContentReportingLinkLook", false)
+﻿local Parent = script:FindFirstAncestor("DsaIllegalContentReporting").Parent
+local FoundationModule = require(Parent.Foundation)
+local Default = require(Parent.LinkingProtocol).LinkingProtocol.default
+local ReactModule = require(Parent.React)
+local ControlState = FoundationModule.Enums.ControlState
+local GetIconRichTextFunction = FoundationModule.Utility.getIconRichText
+local IconName = FoundationModule.Enums.IconName
+local Text = FoundationModule.Text
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local View = FoundationModule.View
+local GenericReportLink1 = game:DefineFastString("GenericReportLink", "https://www.roblox.com/illegal-content-reporting")
+local ImproveIllegalContentReportingLinkLook = game:DefineFastFlag("ImproveIllegalContentReportingLinkLook", false)
 
-function GenericReportLink()
-	-- upvalues: improveIllegalContentReportingLinkLook (ref), reactModule (ref), useLocalization (ref), getIconRichText (ref), iconName (ref), default (ref), genericReportLink (ref), controlState (ref), view (ref), text (ref)
-	local var1 = nil
-	local var2 = nil
+function GenericReportLink() --[[ Line: 22 ]]
+	-- upvalues: ImproveIllegalContentReportingLinkLook (copy), ReactModule (copy), UseLocalizationFunction (copy), GetIconRichTextFunction (copy), IconName (copy), Default (copy), GenericReportLink1 (copy), ControlState (copy), View (copy), Text (copy)
+	local v1 = nil
+	local Callback = nil
 	
-	if improveIllegalContentReportingLinkLook then
-		local var3, var4 = reactModule.useState(false)
-		var1 = var3
-		var2 = var4
+	if ImproveIllegalContentReportingLinkLook then
+		v1, Callback = ReactModule.useState(false)
 	end
-	local var5 = useLocalization({
+	local UseLocalizationResult = UseLocalizationFunction({
 		GenericReportLinkText = "Feature.ReportAbuse.Label.GenericReportIllegalContentMessage"
 	})
-	local var6 = if improveIllegalContentReportingLinkLook then `<b>{var5.GenericReportLinkText}</b> {getIconRichText(iconName.ArrowUpRightFromSquare)}` else nil
+	local Text1 = if ImproveIllegalContentReportingLinkLook then `<b>{UseLocalizationResult.GenericReportLinkText}</b> {GetIconRichTextFunction(IconName.ArrowUpRightFromSquare)}` else nil
+	local UseResult = if ImproveIllegalContentReportingLinkLook then ReactModule.useCallback(function(Hover) --[[ Line: 45 ]]
+		-- upvalues: Callback (ref), ControlState (upval)
+		Callback(Hover == ControlState.Hover)
+	end, {}) else nil
 	
-	return reactModule.createElement(view, { tag = "auto-xy col gap-small" }, {
-		reactModule.createElement(text, {
+	return ReactModule.createElement(View, { tag = "auto-xy col gap-small" }, {
+		ReactModule.createElement(Text, {
 			RichText = true,
 			tag = "auto-xy radius-small padding-xsmall text-wrap text-body-small",
-			Text = if improveIllegalContentReportingLinkLook then if var1 then `<u>{var6}</u>` else var6 else `<b>{var5.GenericReportLinkText}</b>`,
-			onActivated = reactModule.useCallback(function()
-				-- upvalues: default (copy), genericReportLink (copy)
-				default:openURL(genericReportLink)
+			Text = if ImproveIllegalContentReportingLinkLook then if v1 then `<u>{Text1}</u>` else Text1 else `<b>{UseLocalizationResult.GenericReportLinkText}</b>`,
+			onActivated = ReactModule.useCallback(function() --[[ Line: 39 ]]
+				-- upvalues: Default (upval), GenericReportLink1 (upval)
+				Default:openURL(GenericReportLink1)
 			end, {}),
-			onStateChanged = if improveIllegalContentReportingLinkLook then if improveIllegalContentReportingLinkLook then reactModule.useCallback(function(p1)
-				-- upvalues: var2 (write), controlState (copy)
-				var2(p1 == controlState.Hover)
-			end, {}) else nil else nil
+			onStateChanged = if ImproveIllegalContentReportingLinkLook then UseResult else nil
 		})
 	})
 end
 
-return reactModule.memo(GenericReportLink)
+return ReactModule.memo(GenericReportLink)

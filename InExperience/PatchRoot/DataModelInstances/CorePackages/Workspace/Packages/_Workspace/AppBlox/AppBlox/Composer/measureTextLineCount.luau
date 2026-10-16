@@ -1,62 +1,62 @@
-﻿local appBlox = script:FindFirstAncestor("AppBlox")
-local styleModule = require(appBlox.Parent.Style)
-local foundationModule = require(appBlox.Parent.Foundation)
-local getVisibleLineCountModule = require(script.Parent.getVisibleLineCount)
-local composerDebugModule = require(script.Parent.composerDebug)
-local textService = game:GetService("TextService")
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
+﻿local AppBlox = script:FindFirstAncestor("AppBlox")
+local StyleModule = require(AppBlox.Parent.Style)
+local GetVisibleLineCountModule = require(script.Parent.getVisibleLineCount)
+local ComposerDebugModule = require(script.Parent.composerDebug)
+local TextService = game:GetService("TextService")
+local FoundationFontFaceMigration = require(AppBlox.Parent.Foundation).Utility.Flags.FoundationFontFaceMigration
 
-return function(p1)
-	-- upvalues: getVisibleLineCountModule (ref), composerDebugModule (ref), foundationFontFaceMigration (ref), styleModule (ref), textService (ref)
-	local var1 = getVisibleLineCountModule(p1.text, p1.maxLines)
-	local var2 = 1
+return function(p1) --[[ Line: 28 | Named "measureTextLineCount" ]]
+	-- upvalues: GetVisibleLineCountModule (copy), ComposerDebugModule (copy), FoundationFontFaceMigration (copy), StyleModule (copy), TextService (copy)
+	local VisibleLineCountModule = GetVisibleLineCountModule(p1.text, p1.maxLines)
+	local Count = 1
 	
 	if p1.text ~= "" then
-		for i in string.gmatch(p1.text, "\n") do
-			var2 += 1
+		for _ in string.gmatch(p1.text, "\n") do
+			Count += 1
 		end
 	end
-	local layoutWidth = p1.layoutWidth or 0
-	local var3 = nil
-	local var4 = nil
-	local var5 = var1
-	local var6 = var2
+	local LayoutWidth = p1.layoutWidth or 0
+	local ScaledSingleLineHeight: number? = nil
+	local WrappedLineCount: number? = nil
+	local ClampedValue: number = VisibleLineCountModule
+	local UnclampedLineCount: number = Count
 	
 	if p1.text == "" then
-		local t = {
+		local config = {
 			lineCount = 1,
 			unclampedLineCount = 1,
 			newlineLineCount = 1,
 			wrappedLineCount = nil,
 			boundsY = nil,
-			layoutWidth = layoutWidth
+			layoutWidth = LayoutWidth
 		}
-		composerDebugModule.log("measure", `empty -> lineCount=1 layoutWidth={layoutWidth}`)
+		ComposerDebugModule.log("measure", `empty -> lineCount=1 layoutWidth={LayoutWidth}`)
 		
-		return t
-	elseif layoutWidth > 0 then
-		local var7 = if foundationFontFaceMigration then styleModule.GetTextSize("M", p1.fontSize, p1.font, Vector2.new(layoutWidth, 100000), { addTemporaryPadding = false }).Y else textService:GetTextSize("M", p1.fontSize, p1.font, Vector2.new(layoutWidth, 100000)).Y
-		local y = (if foundationFontFaceMigration then styleModule.GetTextSize(p1.text, p1.fontSize, p1.font, Vector2.new(layoutWidth, 100000), { addTemporaryPadding = false }) else textService:GetTextSize(p1.text, p1.fontSize, p1.font, Vector2.new(layoutWidth, 100000))).Y
-		var3 = y
+		return config
+	end
+	if LayoutWidth > 0 then
+		local Y = if FoundationFontFaceMigration then StyleModule.GetTextSize("M", p1.fontSize, p1.font, Vector2.new(LayoutWidth, 100000), { addTemporaryPadding = false }).Y else TextService:GetTextSize("M", p1.fontSize, p1.font, Vector2.new(LayoutWidth, 100000)).Y
+		local Y1: number = (if FoundationFontFaceMigration then StyleModule.GetTextSize(p1.text, p1.fontSize, p1.font, Vector2.new(LayoutWidth, 100000), { addTemporaryPadding = false }) else TextService:GetTextSize(p1.text, p1.fontSize, p1.font, Vector2.new(LayoutWidth, 100000))).Y
+		ScaledSingleLineHeight = Y1
 		
-		if y > 0 and var7 > 0 then
-			local ceiled = math.ceil(y / var7)
-			local maxValue = math.max(var2, ceiled)
-			var4 = ceiled
-			var5 = math.clamp(maxValue, 1, p1.maxLines)
-			var6 = maxValue
-			var3 = maxValue * p1.singleLineHeight
+		if Y1 > 0 and Y > 0 then
+			local Ceiled = math.ceil(Y1 / Y)
+			local Largest = math.max(Count, Ceiled)
+			WrappedLineCount = Ceiled
+			ClampedValue = math.clamp(Largest, 1, p1.maxLines)
+			UnclampedLineCount = Largest
+			ScaledSingleLineHeight = Largest * p1.singleLineHeight
 		end
 	end
-	local t = {
-		lineCount = var5,
-		unclampedLineCount = var6,
-		newlineLineCount = var1,
-		wrappedLineCount = var4,
-		layoutWidth = layoutWidth,
-		boundsY = var3
+	local config = {
+		lineCount = ClampedValue,
+		unclampedLineCount = UnclampedLineCount,
+		newlineLineCount = VisibleLineCountModule,
+		wrappedLineCount = WrappedLineCount,
+		layoutWidth = LayoutWidth,
+		boundsY = ScaledSingleLineHeight
 	}
-	composerDebugModule.log("measure", `lineCount={var5} newlines={var1} wrapped={var4 or "nil"} boundsY={var3 or "nil"} layoutWidth={layoutWidth} textLen={utf8.len(p1.text) or #p1.text}`)
+	ComposerDebugModule.log("measure", `lineCount={ClampedValue} newlines={VisibleLineCountModule} wrapped={WrappedLineCount or "nil"} boundsY={ScaledSingleLineHeight or "nil"} layoutWidth={LayoutWidth} textLen={utf8.len(p1.text) or #p1.text}`)
 	
-	return t
+	return config
 end

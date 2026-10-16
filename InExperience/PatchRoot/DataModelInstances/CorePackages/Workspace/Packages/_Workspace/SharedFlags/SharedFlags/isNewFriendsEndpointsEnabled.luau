@@ -1,7 +1,7 @@
-﻿local playersService = game:GetService("Players")
-local throttleUserId = require(script:FindFirstAncestor("SharedFlags").Parent.AppCommonLib).ThrottleUserId
+﻿local Players = game:GetService("Players")
+local ThrottleUserIdFunction = require(script:FindFirstAncestor("SharedFlags").Parent.AppCommonLib).ThrottleUserId
 
-return function()
-	-- upvalues: throttleUserId (ref), playersService (ref)
-	return throttleUserId(game:DefineFastInt("LuaChatUseNewFriendsEndpointsV2", 0), playersService.LocalPlayer.UserId)
+return function() --[[ Line: 7 ]]
+	-- upvalues: ThrottleUserIdFunction (copy), Players (copy)
+	return ThrottleUserIdFunction(game:DefineFastInt("LuaChatUseNewFriendsEndpointsV2", 0), Players.LocalPlayer.UserId)
 end

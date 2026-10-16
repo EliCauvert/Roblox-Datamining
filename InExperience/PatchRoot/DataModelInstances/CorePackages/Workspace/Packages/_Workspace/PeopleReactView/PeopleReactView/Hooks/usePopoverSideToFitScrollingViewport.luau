@@ -1,91 +1,92 @@
-﻿local peopleReactView = script:FindFirstAncestor("PeopleReactView")
-local parent = peopleReactView.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local getScrollingFrameStoreModule = require(peopleReactView.Stores.GetScrollingFrameStore)
-local popoverSide = foundationModule.Enums.PopoverSide
+﻿local PeopleReactView = script:FindFirstAncestor("PeopleReactView")
+local Parent = PeopleReactView.Parent
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
+local GetScrollingFrameStoreModule = require(PeopleReactView.Stores.GetScrollingFrameStore)
+local PopoverSide = require(Parent.Foundation).Enums.PopoverSide
 
-local function choosePopoverSideForViewport(p1, p2, p3, p4, p5, p6, p7, p8)
-	-- upvalues: popoverSide (ref)
-	if p7 <= 0 then
+local function choosePopoverSideForViewport(p1, p2, Y, NewY, AbsolutePositionY, p3, p4: number, p5: number) --[[ Line: 16 ]]
+	-- upvalues: PopoverSide (copy)
+	if p4 <= 0 then
 		return p1
 	end
-	local var1 = p7 + p8
-	local var2 = p3 - p5
-	local var3 = p6 - p4
+	local v1 = p4 + p5
+	local YDelta = Y - AbsolutePositionY
+	local v2 = p3 - NewY
 	
-	local function _(p9)
-		-- upvalues: popoverSide (copy), var2 (ref), var3 (ref)
-		return if p9 == popoverSide.Top then var2 else var3
+	local function _(Top) --[[ Line: 34 | Named "spaceFor" ]]
+		-- upvalues: PopoverSide (upval), YDelta (copy), v2 (copy)
+		return if Top == PopoverSide.Top then YDelta else v2
 	end
 	
-	local _ = function(p9)
-		-- upvalues: popoverSide (copy), var2 (ref), var3 (ref), var1 (ref)
-		return var1 <= (if p9 == popoverSide.Top then var2 else var3)
+	local _ = function(Top): boolean --[[ Line: 38 | Named "fits" ]]
+		-- upvalues: PopoverSide (upval), YDelta (copy), v2 (copy), v1 (copy)
+		return v1 <= (if Top == PopoverSide.Top then YDelta else v2)
 	end
 	
-	local var4 = if p2 ~= nil then p1 else p2
+	local Top = if p2 == nil then p1 else p2
 	
-	if var1 <= (if var4 == popoverSide.Top then var2 else var3) then
-		return var4
+	if v1 <= (if Top == PopoverSide.Top then YDelta else v2) then
+		return Top
+	else
+		local Bottom = if Top == PopoverSide.Top then PopoverSide.Bottom else PopoverSide.Top
+		
+		return if v1 <= (if Bottom == PopoverSide.Top then YDelta else v2) then Bottom elseif YDelta < v2 then PopoverSide.Bottom else PopoverSide.Top
 	end
-	local var5 = if var4 == popoverSide.Top then popoverSide.Bottom else popoverSide.Top
-	
-	return if var1 <= (if var5 == popoverSide.Top then var2 else var3) then var5 elseif var2 < var3 then popoverSide.Bottom else popoverSide.Top
 end
 
-return function(p1, p2, p3, p4, p5)
-	-- upvalues: signalsReactModule (ref), getScrollingFrameStoreModule (ref), reactModule (ref), choosePopoverSideForViewport (ref), signalsModule (ref)
-	local var1 = signalsReactModule.useSignalState(getScrollingFrameStoreModule)
-	local var2, var3 = reactModule.useState(nil)
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var3 (ref), p3 (ref), var1 (ref), choosePopoverSideForViewport (copy), p2 (ref), p4 (ref), p5 (ref), signalsModule (copy)
+return function(p1, p2, p3, p4, p5) --[[ Line: 55 | Named "usePopoverSideToFitScrollingViewport" ]]
+	-- upvalues: SignalsReactModule (copy), GetScrollingFrameStoreModule (copy), ReactModule (copy), choosePopoverSideForViewport (copy), SignalsModule (copy)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(GetScrollingFrameStoreModule)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	ReactModule.useEffect(function() --[[ Line: 65 ]]
+		-- upvalues: p1 (copy), UseStateResult2 (copy), p3 (copy), UseSignalStateResult (copy), choosePopoverSideForViewport (upval), p2 (copy), p4 (copy), p5 (copy), SignalsModule (upval)
 		if not p1 then
-			var3(nil)
+			UseStateResult2(nil)
 			
 			return
 		end
-		local function updateSide()
-			-- upvalues: p3 (copy), var1 (copy), var3 (copy), choosePopoverSideForViewport (copy), p2 (copy), p4 (copy), p5 (copy)
-			local current = p3.current
+		local function updateSide() --[[ Line: 71 ]]
+			-- upvalues: p3 (upval), UseSignalStateResult (upval), UseStateResult2 (upval), choosePopoverSideForViewport (upval), p2 (upval), p4 (upval), p5 (upval)
+			local Current = p3.current
 			
-			if not current then return end
-			local absolutePositionY = var1.getAbsolutePositionY(false)
-			local absoluteSizeY = var1.getAbsoluteSizeY(false)
+			if not Current then return end
+			local AbsolutePositionY: number = UseSignalStateResult.getAbsolutePositionY(false)
+			local AbsoluteSizeY: number = UseSignalStateResult.getAbsoluteSizeY(false)
 			
-			if absoluteSizeY <= 0 then
+			if AbsoluteSizeY > 0 then
+				local Y = Current.AbsolutePosition.Y
+				local NewY = Y + Current.AbsoluteSize.Y
+				local NewAbsolutePositionY = AbsolutePositionY + AbsoluteSizeY
+				UseStateResult2(function(p6) --[[ Line: 87 ]]
+					-- upvalues: choosePopoverSideForViewport (upval), p2 (upval), Y (copy), NewY (copy), AbsolutePositionY (copy), NewAbsolutePositionY (copy), p4 (upval), p5 (upval)
+					return (choosePopoverSideForViewport(p2, p6, Y, NewY, AbsolutePositionY, NewAbsolutePositionY, p4, p5))
+				end)
+				
 				return
 			end
-			local y = current.AbsolutePosition.Y
-			local var4 = y + current.AbsoluteSize.Y
-			local var5 = absolutePositionY + absoluteSizeY
-			var3(function(p6)
-				-- upvalues: choosePopoverSideForViewport (copy), p2 (copy), y (ref), var4 (ref), absolutePositionY (ref), var5 (ref), p4 (copy), p5 (copy)
-				return choosePopoverSideForViewport(p2, p6, y, var4, absolutePositionY, var5, p4, p5)
-			end)
 		end
 		
-		local var4 = signalsModule.createEffect(function(p6)
-			-- upvalues: var1 (copy), updateSide (ref)
-			local _ = var1.getCanvasPositionY(p6)
-			local _ = var1.getAbsolutePositionY(p6)
-			local _ = var1.getAbsoluteSizeY(p6)
+		local Effect = SignalsModule.createEffect(function(p6) --[[ Line: 101 ]]
+			-- upvalues: UseSignalStateResult (upval), updateSide (copy)
+			local _ = UseSignalStateResult.getCanvasPositionY(p6)
+			local _ = UseSignalStateResult.getAbsolutePositionY(p6)
+			local _ = UseSignalStateResult.getAbsoluteSizeY(p6)
 			updateSide()
 		end)
-		local t = {}
+		local List = {}
 		
 		if p3.current then
-			table.insert(t, p3.current:GetPropertyChangedSignal("AbsolutePosition"):Connect(updateSide))
-			table.insert(t, p3.current:GetPropertyChangedSignal("AbsoluteSize"):Connect(updateSide))
+			table.insert(List, p3.current:GetPropertyChangedSignal("AbsolutePosition"):Connect(updateSide))
+			table.insert(List, p3.current:GetPropertyChangedSignal("AbsoluteSize"):Connect(updateSide))
 		end
-		return function()
-			-- upvalues: var4 (ref), t (ref)
-			var4()
+		return function() --[[ Line: 121 ]]
+			-- upvalues: Effect (copy), List (copy)
+			Effect()
 			
-			for i, v in t do
-				v:Disconnect()
+			for _, Connection in List do
+				Connection:Disconnect()
 			end
 		end
 	end, {
@@ -93,8 +94,8 @@ return function(p1, p2, p3, p4, p5)
 		p2,
 		p4,
 		p5,
-		var1
+		UseSignalStateResult
 	})
 	
-	return if p1 then var2 or p2 else p2
+	return p1 and UseStateResult or p2
 end

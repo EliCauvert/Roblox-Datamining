@@ -1,130 +1,128 @@
-﻿local playersService = game:GetService("Players")
-local gameSettings = UserSettings().GameSettings
-local coreGuiService = game:GetService("CoreGui")
-local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
-local statsAggregatorManagerModule = require(coreGuiService.RobloxGui.Modules.Stats.StatsAggregatorManager)
-local statsButtonModule = require(coreGuiService.RobloxGui.Modules.Stats.StatsButton)
-local statsUtilsModule = require(coreGuiService.RobloxGui.Modules.Stats.StatsUtils)
-local statsViewerModule = require(coreGuiService.RobloxGui.Modules.Stats.StatsViewer)
-local var1 = require(coreGuiService.RobloxGui.Modules.Flags.GetFFlagLazyPerfStatsInit)()
-local performanceStats = nil
-local singleton = nil
-local var2 = nil
-local t = {}
-local var3 = nil
-local var4 = nil
+﻿local Players = game:GetService("Players")
+local GameSettings = UserSettings().GameSettings
+local CoreGui = game:GetService("CoreGui")
+local RbxAnalyticsService = game:GetService("RbxAnalyticsService")
+local StatsAggregatorManagerModule = require(CoreGui.RobloxGui.Modules.Stats.StatsAggregatorManager)
+local StatsButtonModule = require(CoreGui.RobloxGui.Modules.Stats.StatsButton)
+local StatsUtilsModule = require(CoreGui.RobloxGui.Modules.Stats.StatsUtils)
+local StatsViewerModule = require(CoreGui.RobloxGui.Modules.Stats.StatsViewer)
+local v1 = require(CoreGui.RobloxGui.Modules.Flags.GetFFlagLazyPerfStatsInit)()
+local PerformanceStats = nil
+local Singleton = nil
+local NewResult = nil
+local NewResults = {}
+local Label = nil
+local CurrentTime = nil
 
-if not var1 then
-	performanceStats = Instance.new("Frame")
-	performanceStats.Name = "PerformanceStats"
-	singleton = statsAggregatorManagerModule.getSingleton()
-	var2 = statsViewerModule.new()
+if not v1 then
+	PerformanceStats = Instance.new("Frame")
+	PerformanceStats.Name = "PerformanceStats"
+	Singleton = StatsAggregatorManagerModule.getSingleton()
+	NewResult = StatsViewerModule.new()
 	
-	for i, v in ipairs(statsUtilsModule.AllStatTypes) do
-		t[v] = statsButtonModule.new(v)
+	for _, allStatType in ipairs(StatsUtilsModule.AllStatTypes) do
+		NewResults[allStatType] = StatsButtonModule.new(allStatType)
 	end
 end
-function ShowMasterFrame()
-	-- upvalues: performanceStats (write), coreGuiService (ref)
-	performanceStats.Visible = true
-	performanceStats.Parent = coreGuiService.RobloxGui
+function ShowMasterFrame() --[[ Line: 48 ]]
+	-- upvalues: PerformanceStats (ref), CoreGui (copy)
+	PerformanceStats.Visible = true
+	PerformanceStats.Parent = CoreGui.RobloxGui
 end
 
-function HideMasterFrame()
-	-- upvalues: performanceStats (write)
-	performanceStats.Visible = false
-	performanceStats.Parent = nil
+function HideMasterFrame() --[[ Line: 53 ]]
+	-- upvalues: PerformanceStats (ref)
+	PerformanceStats.Visible = false
+	PerformanceStats.Parent = nil
 end
 
-function ConfigureMasterFrame()
-	-- upvalues: performanceStats (write)
-	performanceStats.Position = UDim2.new(0, 0, 0, 0)
-	performanceStats.Size = UDim2.new(1, 0, 1, 0)
-	performanceStats.Selectable = false
-	performanceStats.BackgroundTransparency = 1
-	performanceStats.Active = false
-	performanceStats.ZIndex = 0
+function ConfigureMasterFrame() --[[ Line: 59 ]]
+	-- upvalues: PerformanceStats (ref)
+	PerformanceStats.Position = UDim2.new(0, 0, 0, 0)
+	PerformanceStats.Size = UDim2.new(1, 0, 1, 0)
+	PerformanceStats.Selectable = false
+	PerformanceStats.BackgroundTransparency = 1
+	PerformanceStats.Active = false
+	PerformanceStats.ZIndex = 0
 	HideMasterFrame()
 end
 
-function ConfigureStatButtonsInMasterFrame()
-	-- upvalues: statsUtilsModule (ref)
-	for i, v in ipairs(statsUtilsModule.AllStatTypes) do
-		AddButton(v, i)
+function ConfigureStatButtonsInMasterFrame() --[[ Line: 77 ]]
+	-- upvalues: StatsUtilsModule (copy)
+	for i, allStatType in ipairs(StatsUtilsModule.AllStatTypes) do
+		AddButton(allStatType, i)
 	end
 end
 
-function OnButtonToggled(p1)
-	-- upvalues: t (write), var3 (write)
-	var3 = if t[p1]._isSelected then p1 else nil
+function OnButtonToggled(p1) --[[ Line: 84 ]]
+	-- upvalues: NewResults (ref), Label (ref)
+	Label = if not NewResults[p1]._isSelected then p1 else nil
 	UpdateButtonSelectedStates()
 	UpdateViewerVisibility()
 end
 
-function UpdateButtonSelectedStates()
-	-- upvalues: statsUtilsModule (ref), t (write), var3 (write)
-	for i, v in ipairs(statsUtilsModule.AllStatTypes) do
-		t[v]:SetIsSelected(v == var3)
+function UpdateButtonSelectedStates() --[[ Line: 99 ]]
+	-- upvalues: StatsUtilsModule (copy), NewResults (ref), Label (ref)
+	for _, allStatType in ipairs(StatsUtilsModule.AllStatTypes) do
+		NewResults[allStatType]:SetIsSelected(allStatType == Label)
 	end
 end
 
-function UpdateViewerVisibility()
-	-- upvalues: var3 (write), var2 (write), singleton (write), rbxAnalyticsService (ref)
-	if var3 == nil then
-		if var2:GetIsVisible() then
-			var2:SetVisible(false)
-			var2:SetStatsAggregator(nil)
-			
-			return
-		end
-	else
-		local var5 = false
+function UpdateViewerVisibility() --[[ Line: 106 ]]
+	-- upvalues: Label (ref), NewResult (ref), Singleton (ref), RbxAnalyticsService (copy)
+	if Label ~= nil then
+		local Flag = false
 		
-		if not var2:GetIsVisible() then
-			var5 = true
-			var2:SetVisible(true)
+		if not NewResult:GetIsVisible() then
+			Flag = true
+			NewResult:SetVisible(true)
 		end
-		if var3 ~= var2:GetStatType() then
-			var2:SetStatType(var3)
-			var2:SetStatsAggregator(singleton:GetAggregator(var3))
-			var5 = true
+		if Label ~= NewResult:GetStatType() then
+			NewResult:SetStatType(Label)
+			NewResult:SetStatsAggregator(Singleton:GetAggregator(Label))
+			Flag = true
 		end
-		if var5 then
-			rbxAnalyticsService:TrackEvent("Game", "Enlarge PerfStat", var3, 0)
+		if Flag then
+			RbxAnalyticsService:TrackEvent("Game", "Enlarge PerfStat", Label, 0)
 		end
+	elseif NewResult:GetIsVisible() then
+		NewResult:SetVisible(false)
+		NewResult:SetStatsAggregator(nil)
+		
+		return
 	end
 end
 
-function AddButton(p1, p2)
-	-- upvalues: t (write), performanceStats (write), singleton (write), statsUtilsModule (ref)
-	local var5 = t[p1]
-	var5:SetParent(performanceStats)
-	var5:SetStatsAggregator(singleton:GetAggregator(p1))
-	local var6 = 1 / statsUtilsModule.NumButtonTypes
-	var5:SetSizeAndPosition(UDim2.new(var6, 0, 0, statsUtilsModule.ButtonHeight), UDim2.new(var6 * (p2 - 1), 0, 0, 0))
-	var5:SetToggleCallbackFunction(OnButtonToggled)
+function AddButton(p1, p2: number) --[[ Line: 135 ]]
+	-- upvalues: NewResults (ref), PerformanceStats (ref), Singleton (ref), StatsUtilsModule (copy)
+	local NewResult = NewResults[p1]
+	NewResult:SetParent(PerformanceStats)
+	NewResult:SetStatsAggregator(Singleton:GetAggregator(p1))
+	local XScale = 1 / StatsUtilsModule.NumButtonTypes
+	NewResult:SetSizeAndPosition(UDim2.new(XScale, 0, 0, StatsUtilsModule.ButtonHeight), (UDim2.new(XScale * (p2 - 1), 0, 0, 0)))
+	NewResult:SetToggleCallbackFunction(OnButtonToggled)
 end
 
-function ConfigureStatViewerInMasterFrame()
-	-- upvalues: var2 (write), performanceStats (write), statsUtilsModule (ref)
-	var2:SetParent(performanceStats)
-	var2:SetSizeAndPosition(UDim2.new(0, statsUtilsModule.ViewerWidth, 0, statsUtilsModule.ViewerHeight), UDim2.new(1, -statsUtilsModule.ViewerWidth, 0, statsUtilsModule.ButtonHeight + statsUtilsModule.ViewerTopMargin))
+function ConfigureStatViewerInMasterFrame() --[[ Line: 154 ]]
+	-- upvalues: NewResult (ref), PerformanceStats (ref), StatsUtilsModule (copy)
+	NewResult:SetParent(PerformanceStats)
+	NewResult:SetSizeAndPosition(UDim2.new(0, StatsUtilsModule.ViewerWidth, 0, StatsUtilsModule.ViewerHeight), (UDim2.new(1, -StatsUtilsModule.ViewerWidth, 0, StatsUtilsModule.ButtonHeight + StatsUtilsModule.ViewerTopMargin)))
 end
 
-if var1 then
-	function CreatePerformanceStatsUI()
-		-- upvalues: singleton (write), statsAggregatorManagerModule (ref), performanceStats (write), t (write), statsUtilsModule (ref), statsButtonModule (ref), var2 (write), statsViewerModule (ref), var3 (write)
-		singleton = statsAggregatorManagerModule.getSingleton()
-		singleton:StartListening()
-		performanceStats = Instance.new("Frame")
-		performanceStats.Name = "PerformanceStats"
-		t = {}
+if v1 then
+	function CreatePerformanceStatsUI() --[[ Line: 166 ]]
+		-- upvalues: Singleton (ref), StatsAggregatorManagerModule (copy), PerformanceStats (ref), NewResults (ref), StatsUtilsModule (copy), StatsButtonModule (copy), NewResult (ref), StatsViewerModule (copy), Label (ref)
+		Singleton = StatsAggregatorManagerModule.getSingleton()
+		Singleton:StartListening()
+		PerformanceStats = Instance.new("Frame")
+		PerformanceStats.Name = "PerformanceStats"
+		NewResults = {}
 		
-		for i, v in statsUtilsModule.AllStatTypes do
-			t[v] = statsButtonModule.new(v)
+		for _, allStatType in StatsUtilsModule.AllStatTypes do
+			NewResults[allStatType] = StatsButtonModule.new(allStatType)
 		end
-		var2 = statsViewerModule.new()
-		var3 = nil
+		NewResult = StatsViewerModule.new()
+		Label = nil
 		ConfigureMasterFrame()
 		ConfigureStatButtonsInMasterFrame()
 		ConfigureStatViewerInMasterFrame()
@@ -133,83 +131,85 @@ if var1 then
 		ShowMasterFrame()
 	end
 	
-	function DestroyPerformanceStatsUI()
-		-- upvalues: var2 (write), statsUtilsModule (ref), t (write), performanceStats (write), var3 (write), singleton (write)
-		if var2 then
-			var2:OnPerformanceStatsShouldBeVisibleChanged()
+	function DestroyPerformanceStatsUI() --[[ Line: 192 ]]
+		-- upvalues: NewResult (ref), StatsUtilsModule (copy), NewResults (ref), PerformanceStats (ref), Label (ref), Singleton (ref)
+		if NewResult then
+			NewResult:OnPerformanceStatsShouldBeVisibleChanged()
 		end
-		for i, v in ipairs(statsUtilsModule.AllStatTypes) do
-			local var5 = t[v]
+		for _, allStatType in ipairs(StatsUtilsModule.AllStatTypes) do
+			local NewResult1 = NewResults[allStatType]
 			
-			if var5 then
-				var5:OnPerformanceStatsShouldBeVisibleChanged()
+			if NewResult1 then
+				NewResult1:OnPerformanceStatsShouldBeVisibleChanged()
 			end
 		end
-		if performanceStats then
-			performanceStats:Destroy()
-			performanceStats = nil
+		if PerformanceStats then
+			PerformanceStats:Destroy()
+			PerformanceStats = nil
 		end
-		var2 = nil
-		t = {}
-		var3 = nil
+		NewResult = nil
+		NewResults = {}
+		Label = nil
 		
-		if singleton then
-			singleton:StopListening()
+		if Singleton then
+			Singleton:StopListening()
 		end
 	end
 	
-	function UpdatePerformanceStatsVisibility()
-		-- upvalues: statsUtilsModule (ref), performanceStats (write), rbxAnalyticsService (ref), var4 (write)
-		local var6 = statsUtilsModule.PerformanceStatsShouldBeVisible()
+	function UpdatePerformanceStatsVisibility() --[[ Line: 218 ]]
+		-- upvalues: StatsUtilsModule (copy), PerformanceStats (ref), RbxAnalyticsService (copy), CurrentTime (ref)
+		local PerformanceStatsShouldBeVisibleResult = StatsUtilsModule.PerformanceStatsShouldBeVisible()
 		
-		if var6 == (performanceStats ~= nil) then return end
-		if var6 then
+		if PerformanceStatsShouldBeVisibleResult == (PerformanceStats ~= nil) then return end
+		if PerformanceStatsShouldBeVisibleResult then
 			CreatePerformanceStatsUI()
 		else
 			DestroyPerformanceStatsUI()
 		end
-		rbxAnalyticsService:TrackEvent("Game", if var6 then "Show PerfStats" else "Hide PerfStats", "", 0)
+		RbxAnalyticsService:TrackEvent("Game", if PerformanceStatsShouldBeVisibleResult then "Show PerfStats" else "Hide PerfStats", "", 0)
 		
-		if var6 then
-			var4 = time()
-			rbxAnalyticsService:ReportCounter("OpenPerformanceProfiler", 1)
+		if PerformanceStatsShouldBeVisibleResult then
+			CurrentTime = time()
+			RbxAnalyticsService:ReportCounter("OpenPerformanceProfiler", 1)
 			
 			return
-		elseif var4 then
-			rbxAnalyticsService:ReportStats("TimeOpenPerformanceProfiler", time() - var4)
+		end
+		if CurrentTime then
+			RbxAnalyticsService:ReportStats("TimeOpenPerformanceProfiler", time() - CurrentTime)
 		end
 	end
 else
-	function UpdatePerformanceStatsVisibility()
-		-- upvalues: statsUtilsModule (ref), performanceStats (write), var2 (write), t (write), rbxAnalyticsService (ref), var4 (write)
-		local var6 = statsUtilsModule.PerformanceStatsShouldBeVisible()
+	function UpdatePerformanceStatsVisibility() --[[ Line: 251 ]]
+		-- upvalues: StatsUtilsModule (copy), PerformanceStats (ref), NewResult (ref), NewResults (ref), RbxAnalyticsService (copy), CurrentTime (ref)
+		local PerformanceStatsShouldBeVisibleResult = StatsUtilsModule.PerformanceStatsShouldBeVisible()
 		
-		if var6 == performanceStats.Visible then return end
-		if var6 then
+		if PerformanceStatsShouldBeVisibleResult == PerformanceStats.Visible then return end
+		if PerformanceStatsShouldBeVisibleResult then
 			ShowMasterFrame()
 		else
 			HideMasterFrame()
 		end
-		var2:OnPerformanceStatsShouldBeVisibleChanged()
+		NewResult:OnPerformanceStatsShouldBeVisibleChanged()
 		
-		for i, v in ipairs(statsUtilsModule.AllStatTypes) do
-			t[v]:OnPerformanceStatsShouldBeVisibleChanged()
+		for _, allStatType in ipairs(StatsUtilsModule.AllStatTypes) do
+			NewResults[allStatType]:OnPerformanceStatsShouldBeVisibleChanged()
 		end
-		rbxAnalyticsService:TrackEvent("Game", if var6 then "Show PerfStats" else "Hide PerfStats", "", 0)
+		RbxAnalyticsService:TrackEvent("Game", if PerformanceStatsShouldBeVisibleResult then "Show PerfStats" else "Hide PerfStats", "", 0)
 		
-		if var6 then
-			var4 = time()
-			rbxAnalyticsService:ReportCounter("OpenPerformanceProfiler", 1)
+		if PerformanceStatsShouldBeVisibleResult then
+			CurrentTime = time()
+			RbxAnalyticsService:ReportCounter("OpenPerformanceProfiler", 1)
 			
 			return
-		elseif var4 then
-			rbxAnalyticsService:ReportStats("TimeOpenPerformanceProfiler", time() - var4)
+		end
+		if CurrentTime then
+			RbxAnalyticsService:ReportStats("TimeOpenPerformanceProfiler", time() - CurrentTime)
 		end
 	end
 end
-gameSettings.PerformanceStatsVisibleChanged:connect(UpdatePerformanceStatsVisibility)
+GameSettings.PerformanceStatsVisibleChanged:connect(UpdatePerformanceStatsVisibility)
 
-if not var1 then
+if not v1 then
 	ConfigureMasterFrame()
 	ConfigureStatButtonsInMasterFrame()
 	ConfigureStatViewerInMasterFrame()
@@ -217,12 +217,12 @@ if not var1 then
 	UpdateViewerVisibility()
 	UpdatePerformanceStatsVisibility()
 end
-spawn(function()
-	-- upvalues: playersService (ref)
-	local localPlayer = playersService.LocalPlayer
-	while not localPlayer do
-		playersService.PlayerAdded:wait()
-		localPlayer = playersService.LocalPlayer
+spawn(function() --[[ Line: 305 ]]
+	-- upvalues: Players (copy)
+	local LocalPlayer = Players.LocalPlayer
+	while not LocalPlayer do
+		Players.PlayerAdded:wait()
+		LocalPlayer = Players.LocalPlayer
 	end
 	UpdatePerformanceStatsVisibility()
 end)

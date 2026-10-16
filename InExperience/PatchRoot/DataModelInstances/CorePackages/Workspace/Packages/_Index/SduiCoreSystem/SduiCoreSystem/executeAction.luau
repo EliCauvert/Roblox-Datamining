@@ -1,21 +1,20 @@
-﻿local sduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
-local logActionTelemetryModule = require(sduiCoreSystem.Analytics.logActionTelemetry)
-local _ = require(sduiCoreSystem.SduiActionType)
-local _ = require(sduiCoreSystem.SduiBuilderTypes)
-local _ = require(sduiCoreSystem.SduiConfigTypes)
-local getSduiActionHandlerRegistryModule = require(sduiCoreSystem.getSduiActionHandlerRegistry)
+﻿local SduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
+local LogActionTelemetryModule = require(SduiCoreSystem.Analytics.logActionTelemetry)
+local _ = require(SduiCoreSystem.SduiActionType)
+local _ = require(SduiCoreSystem.SduiBuilderTypes)
+local _ = require(SduiCoreSystem.SduiConfigTypes)
+local GetSduiActionHandlerRegistryModule = require(SduiCoreSystem.getSduiActionHandlerRegistry)
 
-return function(p1, p2, p3, p4)
-	-- upvalues: getSduiActionHandlerRegistryModule (ref), logActionTelemetryModule (ref)
+return function(p1, p2, p3, p4) --[[ Line: 17 | Named "executeAction" ]]
+	-- upvalues: GetSduiActionHandlerRegistryModule (copy), LogActionTelemetryModule (copy)
 	if not p1 then return end
 	assert(p1, "actionConfig must exist")
-	local actionHandlerConfig = getSduiActionHandlerRegistryModule().getActionHandlerConfig(p1.actionType)
+	local ActionHandlerConfig = GetSduiActionHandlerRegistryModule().getActionHandlerConfig(p1.actionType)
 	
-	if not actionHandlerConfig then return end
-	assert(actionHandlerConfig, "actionHandlerConfig must exist")
-	logActionTelemetryModule(p1.telemetryHandler, actionHandlerConfig, p1, p2, p3)
+	if not ActionHandlerConfig then return end
+	assert(ActionHandlerConfig, "actionHandlerConfig must exist")
+	LogActionTelemetryModule(p1.telemetryHandler, ActionHandlerConfig, p1, p2, p3)
 	
-	if actionHandlerConfig.handler then
-		return actionHandlerConfig.handler(p1, p2, p3, p4)
-	end
+	if not ActionHandlerConfig.handler then return end
+	return ActionHandlerConfig.handler(p1, p2, p3, p4)
 end

@@ -1,116 +1,112 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local appChatNetworkingModule = require(appChat.Parent.AppChatNetworking)
-local var1 = require(appChat.Logger):new("AppChat.paginateForNewerMessages")
-local _ = require(appChat.Models.ConversationChannels)
-local appChatNewMessageFetchMaxDepth = game:DefineFastInt("AppChatNewMessageFetchMaxDepth", 10)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local AppChatNetworkingModule = require(AppChat.Parent.AppChatNetworking)
+local AppChatPaginateForNewerMessages = require(AppChat.Logger):new("AppChat.paginateForNewerMessages")
+local _ = require(AppChat.Models.ConversationChannels)
+local AppChatNewMessageFetchMaxDepth = game:DefineFastInt("AppChatNewMessageFetchMaxDepth", 10)
 
-local function _(p1, p2)
+local function _(p1, p2): boolean --[[ Line: 18 | Named "isMessageAlreadyInConversation" ]]
 	return p1.messages:Get(p2) ~= nil
 end
 
-local function fetchOlderMessages(p1, p2, p3)
-	-- upvalues: appChatNewMessageFetchMaxDepth (ref), var1 (ref), appChatNetworkingModule (ref), fetchOlderMessages (ref)
-	return function(p4)
-		-- upvalues: p3 (ref), appChatNewMessageFetchMaxDepth (copy), var1 (copy), p2 (ref), p1 (ref), appChatNetworkingModule (copy), fetchOlderMessages (copy)
-		if appChatNewMessageFetchMaxDepth <= p3 then
-			var1:warning("Reached max depth {} of fetching new messages", appChatNewMessageFetchMaxDepth)
+local function fetchOlderMessages(p1, p2, p3) --[[ Line: 23 ]]
+	-- upvalues: AppChatNewMessageFetchMaxDepth (copy), AppChatPaginateForNewerMessages (copy), AppChatNetworkingModule (copy), fetchOlderMessages (copy)
+	return function(p4) --[[ Line: 30 ]]
+		-- upvalues: p3 (copy), AppChatNewMessageFetchMaxDepth (upval), AppChatPaginateForNewerMessages (upval), p2 (copy), p1 (copy), AppChatNetworkingModule (upval), fetchOlderMessages (upval)
+		if AppChatNewMessageFetchMaxDepth <= p3 then
+			AppChatPaginateForNewerMessages:warning("Reached max depth {} of fetching new messages", AppChatNewMessageFetchMaxDepth)
 			
 			return
 		end
-		local responseBody = p2.responseBody
+		local ResponseBody = p2.responseBody
 		
-		if not responseBody then return end
-		local messages = responseBody.messages
-		local id = messages and (#messages <= 0 and (messages[#messages].id or nil))
+		if not ResponseBody then return end
+		local Messages = ResponseBody.messages
+		local Id = Messages and #Messages > 0 and Messages[#Messages].id or nil
 		
-		if id == nil then
-			var1:warning("No messages in response")
+		if Id == nil then
+			AppChatPaginateForNewerMessages:warning("No messages in response")
 			
 			return
 		end
-		local nextCursor
-		assert(id, "FFlagLuauTinyControlFlowAnalysis")
+		assert(Id, "FFlagLuauTinyControlFlowAnalysis")
+		local NextCursor = ResponseBody.next_cursor and ResponseBody.next_cursor ~= "" and ResponseBody.next_cursor or nil
 		
-		if responseBody.next_cursor and responseBody.next_cursor ~= "" then
-			nextCursor = responseBody.next_cursor or nil
-		end
-		if nextCursor == nil then
-			var1:debug("No more messages to fetch")
-			
-			return
-		elseif p1.messages:Get(id) ~= nil then
-			var1:debug("Last message already in conversation, we've caught up")
+		if NextCursor == nil then
+			AppChatPaginateForNewerMessages:debug("No more messages to fetch")
 			
 			return
 		end
-		var1:trace("Fetching for the next page of messages using cursor: {}", nextCursor)
+		if p1.messages:Get(Id) ~= nil then
+			AppChatPaginateForNewerMessages:debug("Last message already in conversation, we've caught up")
+			
+			return
+		end
+		AppChatPaginateForNewerMessages:trace("Fetching for the next page of messages using cursor: {}", NextCursor)
 		
-		return p4:dispatch(appChatNetworkingModule.rodux.GetOlderMessages.API(p1.id, nextCursor)):andThen(function(p5)
-			-- upvalues: p4 (ref), fetchOlderMessages (copy), p1 (copy), p3 (copy)
-			return p4:dispatch(fetchOlderMessages(p1, p5, p3 + 1))
-		end):catch(function(p5)
-			-- upvalues: var1 (copy)
-			var1:warning("AppChatNetworking failure in fetchOlderMessages of refreshing new messages: {}", p5)
+		return p4:dispatch(AppChatNetworkingModule.rodux.GetOlderMessages.API(p1.id, NextCursor)):andThen(function(Result) --[[ Line: 66 ]]
+			-- upvalues: p4 (copy), fetchOlderMessages (upval), p1 (upval), p3 (upval)
+			return p4:dispatch(fetchOlderMessages(p1, Result, p3 + 1))
+		end):catch(function(Err) --[[ Line: 69 ]]
+			-- upvalues: AppChatPaginateForNewerMessages (upval)
+			AppChatPaginateForNewerMessages:warning("AppChatNetworking failure in fetchOlderMessages of refreshing new messages: {}", Err)
 		end)
 	end
 end
 
-return function(p1)
-	-- upvalues: var1 (ref), appChatNetworkingModule (ref), appChatNewMessageFetchMaxDepth (ref), fetchOlderMessages (ref)
-	return function(p2)
-		-- upvalues: var1 (copy), p1 (ref), appChatNetworkingModule (copy), appChatNewMessageFetchMaxDepth (copy), fetchOlderMessages (copy)
-		var1:info("Starting to fetch newest messages for conversation: {}", p1.id)
+return function(p1) --[[ Line: 75 ]]
+	-- upvalues: AppChatPaginateForNewerMessages (copy), AppChatNetworkingModule (copy), AppChatNewMessageFetchMaxDepth (copy), fetchOlderMessages (copy)
+	return function(p2) --[[ Line: 76 ]]
+		-- upvalues: AppChatPaginateForNewerMessages (upval), p1 (copy), AppChatNetworkingModule (upval), AppChatNewMessageFetchMaxDepth (upval), fetchOlderMessages (upval)
+		AppChatPaginateForNewerMessages:info("Starting to fetch newest messages for conversation: {}", p1.id)
 		
-		return p2:dispatch(appChatNetworkingModule.rodux.GetOlderMessages.API(p1.id, nil)):andThen(function(p3)
-			-- upvalues: p2 (ref), p1 (copy), appChatNewMessageFetchMaxDepth (copy), var1 (copy), appChatNetworkingModule (copy), fetchOlderMessages (copy)
-			local var2 = 0
+		return p2:dispatch(AppChatNetworkingModule.rodux.GetOlderMessages.API(p1.id, nil)):andThen(function(Result) --[[ Line: 82 ]]
+			-- upvalues: p2 (copy), p1 (upval), AppChatNewMessageFetchMaxDepth (upval), AppChatPaginateForNewerMessages (upval), AppChatNetworkingModule (upval), fetchOlderMessages (upval)
+			local v1 = 0
 			
-			return p2:dispatch(function(p4)
-				-- upvalues: var2 (ref), appChatNewMessageFetchMaxDepth (copy), var1 (copy), p3 (ref), p1 (ref), appChatNetworkingModule (copy), fetchOlderMessages (copy)
-				if appChatNewMessageFetchMaxDepth <= var2 then
-					var1:warning("Reached max depth {} of fetching new messages", appChatNewMessageFetchMaxDepth)
+			return p2:dispatch(function(p3) --[[ Line: 30 ]]
+				-- upvalues: v1 (copy), AppChatNewMessageFetchMaxDepth (upval), AppChatPaginateForNewerMessages (upval), Result (copy), p1 (copy), AppChatNetworkingModule (upval), fetchOlderMessages (upval)
+				if AppChatNewMessageFetchMaxDepth <= v1 then
+					AppChatPaginateForNewerMessages:warning("Reached max depth {} of fetching new messages", AppChatNewMessageFetchMaxDepth)
 					
 					return
 				end
-				local responseBody = p3.responseBody
+				local ResponseBody = Result.responseBody
 				
-				if not responseBody then return end
-				local messages = responseBody.messages
-				local id = messages and (#messages <= 0 and (messages[#messages].id or nil))
+				if not ResponseBody then return end
+				local Messages = ResponseBody.messages
+				local Id = Messages and #Messages > 0 and Messages[#Messages].id or nil
 				
-				if id == nil then
-					var1:warning("No messages in response")
+				if Id == nil then
+					AppChatPaginateForNewerMessages:warning("No messages in response")
 					
 					return
 				end
-				local nextCursor
-				assert(id, "FFlagLuauTinyControlFlowAnalysis")
+				assert(Id, "FFlagLuauTinyControlFlowAnalysis")
+				local NextCursor = ResponseBody.next_cursor and ResponseBody.next_cursor ~= "" and ResponseBody.next_cursor or nil
 				
-				if responseBody.next_cursor and responseBody.next_cursor ~= "" then
-					nextCursor = responseBody.next_cursor or nil
-				end
-				if nextCursor == nil then
-					var1:debug("No more messages to fetch")
-					
-					return
-				elseif p1.messages:Get(id) ~= nil then
-					var1:debug("Last message already in conversation, we've caught up")
+				if NextCursor == nil then
+					AppChatPaginateForNewerMessages:debug("No more messages to fetch")
 					
 					return
 				end
-				var1:trace("Fetching for the next page of messages using cursor: {}", nextCursor)
+				if p1.messages:Get(Id) ~= nil then
+					AppChatPaginateForNewerMessages:debug("Last message already in conversation, we've caught up")
+					
+					return
+				end
+				AppChatPaginateForNewerMessages:trace("Fetching for the next page of messages using cursor: {}", NextCursor)
 				
-				return p4:dispatch(appChatNetworkingModule.rodux.GetOlderMessages.API(p1.id, nextCursor)):andThen(function(p5)
-					-- upvalues: p4 (ref), fetchOlderMessages (copy), p1 (copy), var2 (copy)
-					return p4:dispatch(fetchOlderMessages(p1, p5, var2 + 1))
-				end):catch(function(p5)
-					-- upvalues: var1 (copy)
-					var1:warning("AppChatNetworking failure in fetchOlderMessages of refreshing new messages: {}", p5)
+				return p3:dispatch(AppChatNetworkingModule.rodux.GetOlderMessages.API(p1.id, NextCursor)):andThen(function(Result) --[[ Line: 66 ]]
+					-- upvalues: p3 (copy), fetchOlderMessages (upval), p1 (upval), v1 (upval)
+					return p3:dispatch(fetchOlderMessages(p1, Result, v1 + 1))
+				end):catch(function(Err) --[[ Line: 69 ]]
+					-- upvalues: AppChatPaginateForNewerMessages (upval)
+					AppChatPaginateForNewerMessages:warning("AppChatNetworking failure in fetchOlderMessages of refreshing new messages: {}", Err)
 				end)
 			end)
-		end):catch(function(p3)
-			-- upvalues: var1 (copy)
-			var1:warning("AppChatNetworking failure in refreshing first batch of new messages: {}", p3)
+		end):catch(function(Err) --[[ Line: 85 ]]
+			-- upvalues: AppChatPaginateForNewerMessages (upval)
+			AppChatPaginateForNewerMessages:warning("AppChatNetworking failure in refreshing first batch of new messages: {}", Err)
 		end)
 	end
 end

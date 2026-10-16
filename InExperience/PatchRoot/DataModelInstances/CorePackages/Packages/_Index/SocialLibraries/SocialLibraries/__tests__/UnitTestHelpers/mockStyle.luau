@@ -1,8 +1,8 @@
-﻿local dependenciesModule = require(script.Parent.Parent.Parent.dependencies)
-local UIBlox = dependenciesModule.UIBlox
-local roact = dependenciesModule.Roact
+﻿local DependenciesModule = require(script.Parent.Parent.Parent.dependencies)
+local UIBlox = DependenciesModule.UIBlox
+local Roact = DependenciesModule.Roact
 
-return function(p1)
-	-- upvalues: roact (ref), UIBlox (ref)
-	return roact.createElement(UIBlox.App.Style.AppStyleProvider, { style = { themeName = "Dark", fontName = "Gotham" } }, { TestElement = p1 })
+return function(TestElement) --[[ Line: 5 ]]
+	-- upvalues: Roact (copy), UIBlox (copy)
+	return Roact.createElement(UIBlox.App.Style.AppStyleProvider, { style = { themeName = "Dark", fontName = "Gotham" } }, { TestElement = TestElement })
 end

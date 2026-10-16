@@ -1,22 +1,23 @@
-﻿local gameTile = script:FindFirstAncestor("GameTile")
-local parent = gameTile.Parent
-local gameInfosReducer = require(parent.GameInfosRodux).GameInfosReducer
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local getGameTileLayoutDataModule = require(gameTile.getGameTileLayoutData)
-local getLayoutDataVideoModule = require(gameTile.getLayoutDataVideo)
-local fFlagLuaAppHomeMomentVideoFallback = require(parent.SharedFlags).FFlagLuaAppHomeMomentVideoFallback
+﻿local GameTile = script:FindFirstAncestor("GameTile")
+local Parent = GameTile.Parent
+local GameInfosReducer = require(Parent.GameInfosRodux).GameInfosReducer
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local GetGameTileLayoutDataModule = require(GameTile.getGameTileLayoutData)
+local GetLayoutDataVideoModule = require(GameTile.getLayoutDataVideo)
+local FFlagLuaAppHomeMomentVideoFallback = require(Parent.SharedFlags).FFlagLuaAppHomeMomentVideoFallback
 
-return function(p1, p2)
-	-- upvalues: useSelector (ref), gameInfosReducer (ref), getGameTileLayoutDataModule (ref), fFlagLuaAppHomeMomentVideoFallback (ref), getLayoutDataVideoModule (ref)
-	local var1 = getGameTileLayoutDataModule(useSelector(function(p3)
-		-- upvalues: gameInfosReducer (copy), p1 (ref)
-		return p3.Personalization[gameInfosReducer.key][p1]
+return function(p1, p2): boolean --[[ Line: 13 | Named "useHasVideoThumbnailSelector" ]]
+	-- upvalues: UseSelectorFunction (copy), GameInfosReducer (copy), GetGameTileLayoutDataModule (copy), FFlagLuaAppHomeMomentVideoFallback (copy), GetLayoutDataVideoModule (copy)
+	local GameTileLayoutDataModule = GetGameTileLayoutDataModule(UseSelectorFunction(function(p3) --[[ Line: 14 ]]
+		-- upvalues: GameInfosReducer (upval), p1 (copy)
+		return p3.Personalization[GameInfosReducer.key][p1]
 	end), p2)
 	
-	if not fFlagLuaAppHomeMomentVideoFallback then
-		return (var1 and (var1.primaryMediaAsset and var1.primaryMediaAsset.wideVideoAssetId)) ~= nil
+	if FFlagLuaAppHomeMomentVideoFallback then
+		local LayoutDataVideoModule = GetLayoutDataVideoModule(GameTileLayoutDataModule)
+		
+		return LayoutDataVideoModule ~= nil and LayoutDataVideoModule.assetId ~= nil
+	else
+		return (GameTileLayoutDataModule and (GameTileLayoutDataModule.primaryMediaAsset and GameTileLayoutDataModule.primaryMediaAsset.wideVideoAssetId)) ~= nil
 	end
-	local var2 = getLayoutDataVideoModule(var1)
-	
-	return var2 ~= nil and var2.assetId ~= nil
 end

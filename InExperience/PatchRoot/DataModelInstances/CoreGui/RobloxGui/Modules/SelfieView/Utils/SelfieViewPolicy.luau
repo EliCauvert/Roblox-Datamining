@@ -1,16 +1,16 @@
-﻿local policyProviderModule = require(game:GetService("CorePackages").Packages.PolicyProvider)
-local var1 = policyProviderModule.GetPolicyImplementations.MemStorageService("app-policy")
-local var2 = policyProviderModule.withGetPolicyImplementation(var1)
+﻿local PolicyProviderModule = require(game:GetService("CorePackages").Packages.PolicyProvider)
+local AppPolicy = PolicyProviderModule.GetPolicyImplementations.MemStorageService("app-policy")
+local WithGetPolicyImplementationResult = PolicyProviderModule.withGetPolicyImplementation(AppPolicy)
 
-function var2.Mapper(p1)
+function WithGetPolicyImplementationResult.Mapper(p1) --[[ Line: 7 ]]
 	return {
-		eligibleForSelfieViewFeature = function()
-			-- upvalues: p1 (ref)
+		eligibleForSelfieViewFeature = function() --[[ Line: 9 ]]
+			-- upvalues: p1 (copy)
 			return p1.EligibleForSelfieViewFeature or false
 		end
 	}
 end
 
-var2.PolicyImplementation = var1
+WithGetPolicyImplementationResult.PolicyImplementation = AppPolicy
 
-return var2
+return WithGetPolicyImplementationResult

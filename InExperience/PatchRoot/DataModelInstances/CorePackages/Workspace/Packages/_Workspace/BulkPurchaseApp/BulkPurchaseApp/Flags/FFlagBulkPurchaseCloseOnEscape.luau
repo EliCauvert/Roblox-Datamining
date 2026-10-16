@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("BulkPurchaseCloseOnEscape", false)
+﻿return (game:DefineFastFlag("BulkPurchaseCloseOnEscape", false))

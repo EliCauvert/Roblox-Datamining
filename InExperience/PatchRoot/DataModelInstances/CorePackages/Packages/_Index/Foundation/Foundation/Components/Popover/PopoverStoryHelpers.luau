@@ -1,63 +1,40 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local dashModule = require(parent.Dash)
-local reactModule = require(parent.React)
-local overlayModule = require(foundation.Providers.Overlay)
-local overlayStoryAnchorModule = require(foundation.Utility.Stories.Shared.OverlayStoryAnchor)
-local popoverModule = require(foundation.Components.Popover)
-local popoverAlignModule = require(foundation.Enums.PopoverAlign)
-local popoverSideModule = require(foundation.Enums.PopoverSide)
-local radiusModule = require(foundation.Enums.Radius)
-local surfacePresetsModule = require(foundation.Utility.Stories.Shared.SurfacePresets)
-local textModule = require(foundation.Components.Text)
-local _ = require(foundation.Components.Types)
-local viewModule = require(foundation.Components.View)
-local useMeasurableRefModule = require(foundation.Components.Popover.useMeasurableRef)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local list = { "Children", "ExternalRef", "VirtualRef" }
-local list_1 = {
-	popoverSideModule.Top,
-	popoverSideModule.Bottom,
-	popoverSideModule.Left,
-	popoverSideModule.Right
-}
-local list_2 = {
-	popoverAlignModule.Start,
-	popoverAlignModule.Center,
-	popoverAlignModule.End
-}
-local list_3 = {
-	radiusModule.Small,
-	radiusModule.Medium,
-	radiusModule.Circle
-}
-local list_4 = { "Body", "Title + body", "Title + body + actions" }
-local list_5 = { "Default", "Surface_0", "Surface_300", "ActionEmphasis" }
-local list_6 = { 0, 8, 16, 32 }
-local TALL_SIZE = overlayStoryAnchorModule.TALL_SIZE
-local var1 = TALL_SIZE.Y.Offset + 240
-local var2 = TALL_SIZE.X.Offset + 368
-local uDim2 = UDim2.fromOffset(120, 52)
-local vector2 = Vector2.new(120, 52)
-local uDim2_1 = UDim2.fromScale(0.5, 0.5)
-local vector2_1 = Vector2.new(0.5, 0.5)
-local uDim2_2 = UDim2.fromOffset(12, 12)
-local zero = Vector2.zero
-local uDim2_3 = UDim2.new(0.5, 0, 0.5, -(TALL_SIZE.Y.Offset / 2 + 8))
-local vector2_2 = Vector2.new(0.5, 1)
-local PLAYGROUND_TAG = overlayStoryAnchorModule.PLAYGROUND_TAG
-local uDim2_4 = UDim2.new(1, 0, 0, var1)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local DashModule = require(Parent.Dash)
+local ReactModule = require(Parent.React)
+local OverlayModule = require(Foundation.Providers.Overlay)
+local OverlayStoryAnchorModule = require(Foundation.Utility.Stories.Shared.OverlayStoryAnchor)
+local PopoverModule = require(Foundation.Components.Popover)
+local PopoverAlignModule = require(Foundation.Enums.PopoverAlign)
+local PopoverSideModule = require(Foundation.Enums.PopoverSide)
+local RadiusModule = require(Foundation.Enums.Radius)
+local SurfacePresetsModule = require(Foundation.Utility.Stories.Shared.SurfacePresets)
+local TextModule = require(Foundation.Components.Text)
+local _ = require(Foundation.Components.Types)
+local ViewModule = require(Foundation.Components.View)
+local UseMeasurableRefModule = require(Foundation.Components.Popover.useMeasurableRef)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local TALLSIZE = OverlayStoryAnchorModule.TALL_SIZE
+local NewOffset = TALLSIZE.Y.Offset + 240
+local _UDim2 = UDim2.fromOffset(120, 52)
+local _Vector2 = Vector2.new(120, 52)
+local _UDim2_1 = UDim2.fromScale(0.5, 0.5)
+local _Vector2_1 = Vector2.new(0.5, 0.5)
+local _UDim2_2 = UDim2.fromOffset(12, 12)
+local ZeroVector = Vector2.zero
+local _UDim2_3 = UDim2.new(0.5, 0, 0.5, -(TALLSIZE.Y.Offset / 2 + 8))
+local _Vector2_2 = Vector2.new(0.5, 1)
 
-local function AnchorTarget(p1)
-	-- upvalues: reactModule (ref), viewModule (ref), uDim2_1 (ref), vector2_1 (ref), uDim2 (ref), textModule (ref)
-	return reactModule.createElement(viewModule, {
+local function AnchorTarget(p1) --[[ Line: 192 ]]
+	-- upvalues: ReactModule (copy), ViewModule (copy), _UDim2_1 (copy), _Vector2_1 (copy), _UDim2 (copy), TextModule (copy)
+	return ReactModule.createElement(ViewModule, {
 		tag = "row align-x-center align-y-center radius-medium stroke-neutral bg-surface-300",
-		Position = uDim2_1,
-		AnchorPoint = vector2_1,
-		Size = uDim2,
+		Position = _UDim2_1,
+		AnchorPoint = _Vector2_1,
+		Size = _UDim2,
 		ref = p1.instanceRef
 	}, {
-		Label = reactModule.createElement(textModule, {
+		Label = ReactModule.createElement(TextModule, {
 			LayoutOrder = 1,
 			tag = "auto-xy text-caption-small text-align-x-center content-muted",
 			Text = p1.label
@@ -65,13 +42,13 @@ local function AnchorTarget(p1)
 	})
 end
 
-local function PopoverPanel(p1)
-	-- upvalues: reactModule (ref), viewModule (ref), textModule (ref)
-	return reactModule.createElement(viewModule, {
+local function PopoverPanel(p1) --[[ Line: 215 ]]
+	-- upvalues: ReactModule (copy), ViewModule (copy), TextModule (copy)
+	return ReactModule.createElement(ViewModule, {
 		tag = "row align-x-center align-y-center padding-small",
 		Size = UDim2.fromOffset(160, 96)
 	}, {
-		Label = reactModule.createElement(textModule, {
+		Label = ReactModule.createElement(TextModule, {
 			LayoutOrder = 1,
 			tag = "auto-xy text-caption-small text-align-x-center content-default",
 			Text = p1.label or "Panel"
@@ -79,46 +56,44 @@ local function PopoverPanel(p1)
 	})
 end
 
-local function PanelSlot(p1)
-	-- upvalues: reactModule (ref), viewModule (ref), textModule (ref)
-	return reactModule.createElement(viewModule, {
+local function PanelSlot(Frame) --[[ Line: 233 ]]
+	-- upvalues: ReactModule (copy), ViewModule (copy), TextModule (copy)
+	return ReactModule.createElement(ViewModule, {
 		tag = "row align-x-center align-y-center radius-small bg-shift-200",
-		LayoutOrder = p1.LayoutOrder,
-		Size = UDim2.new(1, 0, 0, p1.height)
+		LayoutOrder = Frame.LayoutOrder,
+		Size = UDim2.new(1, 0, 0, Frame.height)
 	}, {
-		Label = reactModule.createElement(textModule, {
+		Label = ReactModule.createElement(TextModule, {
 			LayoutOrder = 1,
 			tag = "auto-xy text-caption-small content-muted",
-			Text = p1.label
+			Text = Frame.label
 		})
 	})
 end
 
-local function useCenteredRect(p1, p2)
-	-- upvalues: reactModule (ref)
-	local var3, var4 = reactModule.useState(Vector2.zero)
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var4 (ref), p2 (ref)
-		if p1 == nil then
-			return
-		end
-		local function update()
-			-- upvalues: var4 (copy), p1 (copy), p2 (copy)
-			var4(p1.AbsolutePosition + (p1.AbsoluteSize - p2) / 2)
+local function useCenteredRect(Frame: Frame, p1) --[[ Line: 278 ]]
+	-- upvalues: ReactModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(Vector2.zero)
+	ReactModule.useEffect(function() --[[ Line: 281 ]]
+		-- upvalues: Frame (copy), UseStateResult2 (copy), p1 (copy)
+		if Frame == nil then return end
+		local function update() --[[ Line: 286 ]]
+			-- upvalues: UseStateResult2 (upval), Frame (upval), p1 (upval)
+			UseStateResult2(Frame.AbsolutePosition + (Frame.AbsoluteSize - p1) / 2)
 		end
 		
-		var4(p1.AbsolutePosition + (p1.AbsoluteSize - p2) / 2)
-		local var5 = p1:GetPropertyChangedSignal("AbsolutePosition"):Connect(update)
-		local var6 = p1:GetPropertyChangedSignal("AbsoluteSize"):Connect(update)
+		UseStateResult2(Frame.AbsolutePosition + (Frame.AbsoluteSize - p1) / 2)
+		local Connection = Frame:GetPropertyChangedSignal("AbsolutePosition"):Connect(update)
+		local Connection1 = Frame:GetPropertyChangedSignal("AbsoluteSize"):Connect(update)
 		
-		return function()
-			-- upvalues: var5 (ref), var6 (ref)
-			var5:Disconnect()
-			var6:Disconnect()
+		return function() --[[ Line: 294 ]]
+			-- upvalues: Connection (copy), Connection1 (copy)
+			Connection:Disconnect()
+			Connection1:Disconnect()
 		end
-	end, { p1, p2 })
+	end, { Frame, p1 })
 	
-	return var3
+	return UseStateResult
 end
 
 return {
@@ -132,117 +107,135 @@ return {
 	STAGE_WIDTH = 280,
 	PAGE_TAG = "col gap-xxlarge size-full-0 auto-y padding-y-large bg-surface-0",
 	MATRIX_SECTION_TAG = "col gap-large size-full-0 auto-y",
-	ANCHOR_SOURCE_ORDER = list,
-	SIDE_ORDER = list_1,
-	ALIGN_ORDER = list_2,
-	RADIUS_ORDER = list_3,
-	COMPOSITION_ORDER = list_4,
-	makePanelChildren = function(p1)
-		-- upvalues: reactModule (ref), viewModule (ref), PanelSlot (ref)
-		return reactModule.createElement(viewModule, {
+	ANCHOR_SOURCE_ORDER = { "Children", "ExternalRef", "VirtualRef" },
+	SIDE_ORDER = {
+		PopoverSideModule.Top,
+		PopoverSideModule.Bottom,
+		PopoverSideModule.Left,
+		PopoverSideModule.Right
+	},
+	ALIGN_ORDER = {
+		PopoverAlignModule.Start,
+		PopoverAlignModule.Center,
+		PopoverAlignModule.End
+	},
+	RADIUS_ORDER = {
+		RadiusModule.Small,
+		RadiusModule.Medium,
+		RadiusModule.Circle
+	},
+	COMPOSITION_ORDER = { "Body", "Title + body", "Title + body + actions" },
+	makePanelChildren = function(p1) --[[ Line: 255 ]]
+		-- upvalues: ReactModule (copy), ViewModule (copy), PanelSlot (copy)
+		local IsNotBody = p1 ~= "Body"
+		local IsTitleBodyActions = p1 == "Title + body + actions"
+		
+		return ReactModule.createElement(ViewModule, {
 			tag = "col gap-small auto-y padding-medium",
 			Size = UDim2.fromOffset(240, 0)
 		}, {
-			Title = if p1 ~= "Body" then reactModule.createElement(PanelSlot, { LayoutOrder = 1, label = "Title", height = 20 }) else nil,
-			Body = reactModule.createElement(PanelSlot, { LayoutOrder = 2, label = "Body", height = 56 }),
-			Actions = if p1 == "Title + body + actions" then reactModule.createElement(PanelSlot, { LayoutOrder = 3, label = "Actions", height = 32 }) else nil
+			Title = if IsNotBody then ReactModule.createElement(PanelSlot, { LayoutOrder = 1, label = "Title", height = 20 }) else nil,
+			Body = ReactModule.createElement(PanelSlot, { LayoutOrder = 2, label = "Body", height = 56 }),
+			Actions = if IsTitleBodyActions then ReactModule.createElement(PanelSlot, { LayoutOrder = 3, label = "Actions", height = 32 }) else nil
 		})
 	end,
-	BACKGROUND_PRESET_ORDER = list_5,
-	OFFSET_OPTIONS = list_6,
-	STAGE_HEIGHT = var1,
-	WIDE_STAGE_WIDTH = var2,
-	TALL_ANCHOR_SIZE = TALL_SIZE,
-	PLAYGROUND_FRAME_SIZE = uDim2_4,
-	PLAYGROUND_TAG = PLAYGROUND_TAG,
-	PopoverStage = function(p1)
-		-- upvalues: reactModule (ref), useCenteredRect (ref), vector2 (ref), useMeasurableRefModule (ref), overlayStoryAnchorModule (ref), uDim2_2 (ref), zero (ref), popoverModule (ref), uDim2_1 (ref), vector2_1 (ref), PopoverPanel (ref), AnchorTarget (ref), textModule (ref), uDim2_3 (ref), vector2_2 (ref), viewModule (ref), var1 (ref), overlayModule (ref)
-		local var3, var4 = reactModule.useState(false)
-		local var5, var6 = reactModule.useState(nil)
-		local anchorSource = p1.anchorSource or "Children"
-		local var7 = reactModule.useRef(nil)
-		local var8 = if anchorSource == "ExternalRef" then var7 elseif anchorSource == "VirtualRef" then useMeasurableRefModule(useCenteredRect(var5, vector2), vector2) else nil
-		local var9 = reactModule.createElement(overlayStoryAnchorModule.Anchor, {
-			Position = if var8 then uDim2_2 else nil,
-			AnchorPoint = if var8 then zero else nil,
-			Size = p1.anchorSize,
-			onActivated = function()
-				-- upvalues: var4 (ref), var3 (ref)
-				var4(not var3)
+	BACKGROUND_PRESET_ORDER = { "Default", "Surface_0", "Surface_300", "ActionEmphasis" },
+	OFFSET_OPTIONS = { 0, 8, 16, 32 },
+	STAGE_HEIGHT = NewOffset,
+	WIDE_STAGE_WIDTH = TALLSIZE.X.Offset + 368,
+	TALL_ANCHOR_SIZE = TALLSIZE,
+	PLAYGROUND_FRAME_SIZE = UDim2.new(1, 0, 0, NewOffset),
+	PLAYGROUND_TAG = OverlayStoryAnchorModule.PLAYGROUND_TAG,
+	PopoverStage = function(Frame) --[[ Line: 328 ]]
+		-- upvalues: ReactModule (copy), useCenteredRect (copy), _Vector2 (copy), UseMeasurableRefModule (copy), OverlayStoryAnchorModule (copy), _UDim2_2 (copy), ZeroVector (copy), PopoverModule (copy), _UDim2_1 (copy), _Vector2_1 (copy), PopoverPanel (copy), AnchorTarget (copy), TextModule (copy), _UDim2_3 (copy), _Vector2_2 (copy), ViewModule (copy), NewOffset (copy), OverlayModule (copy)
+		local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+		local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
+		local AnchorSource = Frame.anchorSource or "Children"
+		local UseRefResult = ReactModule.useRef(nil)
+		local UseMeasurableRefModuleResult = UseMeasurableRefModule(useCenteredRect(UseStateResult1, _Vector2), _Vector2)
+		local UseRefResult1 = if AnchorSource == "ExternalRef" then UseRefResult elseif AnchorSource == "VirtualRef" then UseMeasurableRefModuleResult else nil
+		local Element = ReactModule.createElement(OverlayStoryAnchorModule.Anchor, {
+			Position = if UseRefResult1 then _UDim2_2 else nil,
+			AnchorPoint = if UseRefResult1 then ZeroVector else nil,
+			Size = Frame.anchorSize,
+			onActivated = function() --[[ Line: 345 ]]
+				-- upvalues: UseStateResult2 (copy), UseStateResult (copy)
+				UseStateResult2(not UseStateResult)
 			end
 		})
+		local config = {
+			Target = if AnchorSource == "ExternalRef" then ReactModule.createElement(AnchorTarget, { label = "Target (instance)", instanceRef = UseRefResult }) elseif AnchorSource == "VirtualRef" then ReactModule.createElement(AnchorTarget, { label = "Target (virtual)" }) else nil,
+			Popover = ReactModule.createElement(PopoverModule.Root, { isOpen = UseStateResult }, {
+				Anchor = if UseRefResult1 then ReactModule.createElement(PopoverModule.Anchor, { anchorRef = UseRefResult1 }) else ReactModule.createElement(PopoverModule.Anchor, { Position = _UDim2_1, AnchorPoint = _Vector2_1 }, { Anchor = Element }),
+				Content = ReactModule.createElement(PopoverModule.Content, {
+					side = Frame.side,
+					align = Frame.align,
+					hasArrow = Frame.hasArrow,
+					radius = Frame.radius,
+					backgroundStyle = Frame.backgroundStyle,
+					onPressedOutside = if Frame.hasOutsidePressDismiss then function() --[[ Line: 364 ]]
+						-- upvalues: UseStateResult2 (copy)
+						UseStateResult2(false)
+					end else nil
+				}, ReactModule.createElement(PopoverPanel, {}))
+			}),
+			Trigger = if UseRefResult1 then Element else nil,
+			OpenState = if Frame.hasOpenStateLabel then ReactModule.createElement(TextModule, {
+				tag = "auto-xy text-caption-small content-muted",
+				Text = `isOpen = {UseStateResult}`,
+				Position = _UDim2_3,
+				AnchorPoint = _Vector2_2
+			}) else nil
+		}
 		
-		return reactModule.createElement(viewModule, {
+		return ReactModule.createElement(ViewModule, {
 			tag = "radius-medium bg-surface-200",
-			Size = UDim2.fromOffset(p1.width or 280, p1.height or var1),
-			LayoutOrder = p1.LayoutOrder,
-			ref = var6
+			Size = UDim2.fromOffset(Frame.width or 280, Frame.height or NewOffset),
+			LayoutOrder = Frame.LayoutOrder,
+			ref = UseStateResult2_1
 		}, {
-			Overlay = if var5 then reactModule.createElement(overlayModule, { gui = var5 }, {
-				Fill = reactModule.createElement(viewModule, { tag = "size-full" }, {
-					Target = if anchorSource == "ExternalRef" then reactModule.createElement(AnchorTarget, { label = "Target (instance)", instanceRef = var7 }) elseif anchorSource == "VirtualRef" then reactModule.createElement(AnchorTarget, { label = "Target (virtual)" }) else nil,
-					Popover = reactModule.createElement(popoverModule.Root, { isOpen = var3 }, {
-						Anchor = if var8 then reactModule.createElement(popoverModule.Anchor, { anchorRef = var8 }) else reactModule.createElement(popoverModule.Anchor, { Position = uDim2_1, AnchorPoint = vector2_1 }, { Anchor = var9 }),
-						Content = reactModule.createElement(popoverModule.Content, {
-							side = p1.side,
-							align = p1.align,
-							hasArrow = p1.hasArrow,
-							radius = p1.radius,
-							backgroundStyle = p1.backgroundStyle,
-							onPressedOutside = if p1.hasOutsidePressDismiss then function()
-								-- upvalues: var4 (ref)
-								var4(false)
-							end else nil
-						}, reactModule.createElement(PopoverPanel, {}))
-					}),
-					Trigger = if var8 then var9 else nil,
-					OpenState = if p1.hasOpenStateLabel then reactModule.createElement(textModule, {
-						tag = "auto-xy text-caption-small content-muted",
-						Text = `isOpen = {var3}`,
-						Position = uDim2_3,
-						AnchorPoint = vector2_2
-					}) else nil
-				})
+			Overlay = if UseStateResult1 then ReactModule.createElement(OverlayModule, { gui = UseStateResult1 }, {
+				Fill = ReactModule.createElement(ViewModule, { tag = "size-full" }, config)
 			}) else nil
 		})
 	end,
-	PopoverTarget = function(p1)
-		-- upvalues: reactModule (ref), popoverModule (ref), overlayStoryAnchorModule (ref), PopoverPanel (ref)
-		local var3, var4 = reactModule.useState(false)
+	PopoverTarget = function(Frame) --[[ Line: 425 ]]
+		-- upvalues: ReactModule (copy), PopoverModule (copy), OverlayStoryAnchorModule (copy), PopoverPanel (copy)
+		local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 		
-		return reactModule.createElement(popoverModule.Root, { isOpen = var3 }, {
-			Anchor = reactModule.createElement(popoverModule.Anchor, { LayoutOrder = p1.LayoutOrder }, {
-				Anchor = reactModule.createElement(overlayStoryAnchorModule.Anchor, {
-					Size = p1.anchorSize,
-					onActivated = function()
-						-- upvalues: var4 (ref), var3 (ref)
-						var4(not var3)
+		return ReactModule.createElement(PopoverModule.Root, { isOpen = UseStateResult }, {
+			Anchor = ReactModule.createElement(PopoverModule.Anchor, { LayoutOrder = Frame.LayoutOrder }, {
+				Anchor = ReactModule.createElement(OverlayStoryAnchorModule.Anchor, {
+					Size = Frame.anchorSize,
+					onActivated = function() --[[ Line: 432 ]]
+						-- upvalues: UseStateResult2 (copy), UseStateResult (copy)
+						UseStateResult2(not UseStateResult)
 					end
 				})
 			}),
-			Content = reactModule.createElement(popoverModule.Content, {
-				side = p1.side,
-				align = p1.align,
-				hasArrow = p1.hasArrow,
-				radius = p1.radius,
-				backgroundStyle = p1.backgroundStyle,
-				onPressedOutside = function()
-					-- upvalues: var4 (ref)
-					var4(false)
+			Content = ReactModule.createElement(PopoverModule.Content, {
+				side = Frame.side,
+				align = Frame.align,
+				hasArrow = Frame.hasArrow,
+				radius = Frame.radius,
+				backgroundStyle = Frame.backgroundStyle,
+				onPressedOutside = function() --[[ Line: 443 ]]
+					-- upvalues: UseStateResult2 (copy)
+					UseStateResult2(false)
 				end
-			}, p1.panel or reactModule.createElement(PopoverPanel, {}))
+			}, Frame.panel or ReactModule.createElement(PopoverPanel, {}))
 		})
 	end,
-	headerLabels = function(p1)
-		-- upvalues: dashModule (ref)
-		return dashModule.map(p1, function(p2)
-			return tostring(p2)
+	headerLabels = function(p1) --[[ Line: 454 ]]
+		-- upvalues: DashModule (copy)
+		return DashModule.map(p1, function(p2): string --[[ Line: 455 ]]
+			return (tostring(p2))
 		end)
 	end,
-	useBackgroundStylePreset = function(value)
-		-- upvalues: useTokensModule (ref), surfacePresetsModule (ref)
-		local var3 = useTokensModule()
+	useBackgroundStylePreset = function(p1) --[[ Line: 460 ]]
+		-- upvalues: UseTokensModule (copy), SurfacePresetsModule (copy)
+		local UseTokensModuleResult = UseTokensModule()
 		
-		return if value == "ActionEmphasis" then var3.Color.ActionEmphasis.Background else surfacePresetsModule.resolveSurfacePreset(var3, value)
+		return if p1 == "ActionEmphasis" then UseTokensModuleResult.Color.ActionEmphasis.Background else SurfacePresetsModule.resolveSurfacePreset(UseTokensModuleResult, p1)
 	end
 }

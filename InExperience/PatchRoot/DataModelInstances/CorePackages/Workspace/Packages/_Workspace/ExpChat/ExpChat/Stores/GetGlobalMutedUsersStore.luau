@@ -1,44 +1,45 @@
-﻿local expChat = script:FindFirstAncestor("ExpChat")
-local parent = expChat.Parent
-local signalsModule = require(parent.Signals)
+﻿local ExpChat = script:FindFirstAncestor("ExpChat")
+local Parent = ExpChat.Parent
+local SignalsModule = require(Parent.Signals)
 
-if require(expChat.Flags.FFlagExpChatUseChatMuteStore) then
-	local chatMuteModule = require(parent.ChatMute)
+if require(ExpChat.Flags.FFlagExpChatUseChatMuteStore) then
+	local ChatMuteModule = require(Parent.ChatMute)
 	
-	return signalsModule.createComputed(function()
-		-- upvalues: chatMuteModule (ref)
+	return SignalsModule.createComputed(function() --[[ Line: 11 ]]
+		-- upvalues: ChatMuteModule (copy)
 		return {
-			getMutedGlobalUsernames = chatMuteModule.getMutedUsernames(),
-			getMutedGlobalDisplayNames = chatMuteModule.getMutedDisplayNames(),
-			getMutedGlobalUserIds = chatMuteModule.getMutedUserIds(),
-			muteGlobalUsername = function(p1)
-				-- upvalues: chatMuteModule (copy)
-				chatMuteModule.mutePlayer({ username = p1 })
+			getMutedGlobalUsernames = ChatMuteModule.getMutedUsernames(),
+			getMutedGlobalDisplayNames = ChatMuteModule.getMutedDisplayNames(),
+			getMutedGlobalUserIds = ChatMuteModule.getMutedUserIds(),
+			muteGlobalUsername = function(Username) --[[ Line: 16 ]]
+				-- upvalues: ChatMuteModule (upval)
+				ChatMuteModule.mutePlayer({ username = Username })
 			end,
-			unmuteGlobalUsername = function(p1)
-				-- upvalues: chatMuteModule (copy)
-				chatMuteModule.unmutePlayer({ username = p1 })
+			unmuteGlobalUsername = function(Username) --[[ Line: 19 ]]
+				-- upvalues: ChatMuteModule (upval)
+				ChatMuteModule.unmutePlayer({ username = Username })
 			end,
-			muteGlobalDisplayName = function(p1)
-				-- upvalues: chatMuteModule (copy)
-				chatMuteModule.mutePlayer({ displayName = p1 })
+			muteGlobalDisplayName = function(DisplayName) --[[ Line: 22 ]]
+				-- upvalues: ChatMuteModule (upval)
+				ChatMuteModule.mutePlayer({ displayName = DisplayName })
 			end,
-			unmuteGlobalDisplayName = function(p1)
-				-- upvalues: chatMuteModule (copy)
-				chatMuteModule.unmutePlayer({ displayName = p1 })
+			unmuteGlobalDisplayName = function(DisplayName) --[[ Line: 25 ]]
+				-- upvalues: ChatMuteModule (upval)
+				ChatMuteModule.unmutePlayer({ displayName = DisplayName })
 			end,
-			isUsernameMuted = chatMuteModule.isUsernameMuted,
-			isDisplayNameMuted = chatMuteModule.isDisplayNameMuted,
-			muteGlobalUserId = function(p1)
-				-- upvalues: chatMuteModule (copy)
-				chatMuteModule.mutePlayer({ userId = tostring(p1) })
+			isUsernameMuted = ChatMuteModule.isUsernameMuted,
+			isDisplayNameMuted = ChatMuteModule.isDisplayNameMuted,
+			muteGlobalUserId = function(p1) --[[ Line: 30 ]]
+				-- upvalues: ChatMuteModule (upval)
+				ChatMuteModule.mutePlayer({ userId = tostring(p1) })
 			end,
-			unmuteGlobalUserId = function(p1)
-				-- upvalues: chatMuteModule (copy)
-				chatMuteModule.unmutePlayer({ userId = tostring(p1) })
+			unmuteGlobalUserId = function(p1) --[[ Line: 33 ]]
+				-- upvalues: ChatMuteModule (upval)
+				ChatMuteModule.unmutePlayer({ userId = tostring(p1) })
 			end,
-			isUserIdMuted = chatMuteModule.isUserIdMuted
+			isUserIdMuted = ChatMuteModule.isUserIdMuted
 		}
 	end)
+else
+	return SignalsModule.createComputed((require(script.createGlobalMutedUsersStore)))
 end
-return signalsModule.createComputed(require(script.createGlobalMutedUsersStore))

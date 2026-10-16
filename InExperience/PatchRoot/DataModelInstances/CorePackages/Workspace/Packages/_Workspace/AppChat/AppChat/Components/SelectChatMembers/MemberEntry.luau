@@ -1,44 +1,45 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local fFlagAppChatUseProfileFrameThumbnailModule = require(appChat.Flags.FFlagAppChatUseProfileFrameThumbnail)
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local useTokens = foundationModule.Hooks.useTokens
-local useSignalState = require(parent.SignalsReact).useSignalState
-local getSelectedUsersStoreModule = require(appChat.Stores.GetSelectedUsersStore)
-local useUserDataModule = require(appChat.Hooks.useUserData)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local FFlagAppChatUseProfileFrameThumbnailModule = require(AppChat.Flags.FFlagAppChatUseProfileFrameThumbnail)
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local GetSelectedUsersStoreModule = require(AppChat.Stores.GetSelectedUsersStore)
+local UseUserDataModule = require(AppChat.Hooks.useUserData)
 
-return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), getSelectedUsersStoreModule (ref), useSignalState (ref), useUserDataModule (ref), reactModule (ref), foundationModule (ref), fFlagAppChatUseProfileFrameThumbnailModule (ref)
-	local var1 = useTokens()
-	local var2 = getSelectedUsersStoreModule(false)
-	local var3 = useSignalState(var2.getSelectedUserIdAtIndex(p1.index))
-	local var4 = useUserDataModule(var3 or "")
+return ReactModule.memo(function(p1) --[[ Line: 24 | Named "MemberEntry" ]]
+	-- upvalues: UseTokensFunction (copy), GetSelectedUsersStoreModule (copy), UseSignalStateFunction (copy), UseUserDataModule (copy), ReactModule (copy), FoundationModule (copy), FFlagAppChatUseProfileFrameThumbnailModule (copy)
+	local UseTokensResult = UseTokensFunction()
+	local SelectedUsersStoreModule = GetSelectedUsersStoreModule(false)
+	local UseSignalStateResult = UseSignalStateFunction(SelectedUsersStoreModule.getSelectedUserIdAtIndex(p1.index))
+	local UseUserDataModuleResult = UseUserDataModule(UseSignalStateResult or "")
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 31 ]]
+		-- upvalues: UseSignalStateResult (copy), SelectedUsersStoreModule (copy)
+		if UseSignalStateResult then
+			SelectedUsersStoreModule.removeUserId(UseSignalStateResult)
+		end
+	end, { UseSignalStateResult })
 	
-	return reactModule.createElement(foundationModule.View, {
+	return ReactModule.createElement(FoundationModule.View, {
 		tag = "auto-xy",
-		onActivated = if var3 then reactModule.useCallback(function()
-			-- upvalues: var3 (ref), var2 (ref)
-			if var3 then
-				var2.removeUserId(var3)
-			end
-		end, { var3 }) else nil,
+		onActivated = if UseSignalStateResult then UseResult else nil,
 		stateLayer = {
-			affordance = foundationModule.Enums.StateLayerAffordance.None
+			affordance = FoundationModule.Enums.StateLayerAffordance.None
 		},
 		LayoutOrder = p1.index
 	}, {
-		UserContainer = reactModule.createElement(foundationModule.View, {
+		UserContainer = ReactModule.createElement(FoundationModule.View, {
 			tag = "col size-0-full auto-x flex-x-fill align-x-center gap-xsmall"
 		}, {
-			Avatar = if var3 then reactModule.createElement(foundationModule.Avatar, {
+			Avatar = if UseSignalStateResult then ReactModule.createElement(FoundationModule.Avatar, {
 				LayoutOrder = 1,
-				userId = var4.id,
-				userPresence = var4.presence,
-				size = foundationModule.Enums.InputSize.Large,
-				backgroundStyle = var1.Color.Shift.Shift_300,
-				includeProfileFrame = fFlagAppChatUseProfileFrameThumbnailModule
-			}) else reactModule.createElement(foundationModule.Image, {
+				userId = UseUserDataModuleResult.id,
+				userPresence = UseUserDataModuleResult.presence,
+				size = FoundationModule.Enums.InputSize.Large,
+				backgroundStyle = UseTokensResult.Color.Shift.Shift_300,
+				includeProfileFrame = FFlagAppChatUseProfileFrameThumbnailModule
+			}) else ReactModule.createElement(FoundationModule.Image, {
 				tag = "content-emphasis",
 				Image = "rbxasset://textures/ui/LuaChatV2/ic-friend-empty-border.png",
 				LayoutOrder = 1,
@@ -47,26 +48,26 @@ return reactModule.memo(function(p1)
 					AspectType = Enum.AspectType.FitWithinMaxSize,
 					DominantAxis = Enum.DominantAxis.Height
 				},
-				Size = UDim2.fromOffset(var1.Size.Size_1200, var1.Size.Size_1200)
+				Size = UDim2.fromOffset(UseTokensResult.Size.Size_1200, UseTokensResult.Size.Size_1200)
 			}),
-			Label = reactModule.createElement(foundationModule.Text, {
+			Label = ReactModule.createElement(FoundationModule.Text, {
 				tag = "auto-y text-truncate-end text-caption-small",
 				LayoutOrder = 2,
-				Text = var4.combinedName,
-				textStyle = var1.Color.Content.Default,
-				fontStyle = var1.Typography.CaptionSmall
+				Text = UseUserDataModuleResult.combinedName,
+				textStyle = UseTokensResult.Color.Content.Default,
+				fontStyle = UseTokensResult.Typography.CaptionSmall
 			})
 		}),
-		RemoveIcon = if var3 then reactModule.createElement(foundationModule.View, {
+		RemoveIcon = if UseSignalStateResult then ReactModule.createElement(FoundationModule.View, {
 			tag = "auto-xy position-top-right anchor-top-right bg-over-media-0 radius-circle",
 			ZIndex = 2
 		}, {
-			Icon = reactModule.createElement(foundationModule.Icon, {
+			Icon = ReactModule.createElement(FoundationModule.Icon, {
 				ZIndex = 2,
-				style = var1.Color.Content.Emphasis,
-				name = foundationModule.Enums.IconName.CircleX,
-				variant = foundationModule.Enums.IconVariant.Filled,
-				size = foundationModule.Enums.IconSize.Small
+				style = UseTokensResult.Color.Content.Emphasis,
+				name = FoundationModule.Enums.IconName.CircleX,
+				variant = FoundationModule.Enums.IconVariant.Filled,
+				size = FoundationModule.Enums.IconSize.Small
 			})
 		}) else nil
 	})

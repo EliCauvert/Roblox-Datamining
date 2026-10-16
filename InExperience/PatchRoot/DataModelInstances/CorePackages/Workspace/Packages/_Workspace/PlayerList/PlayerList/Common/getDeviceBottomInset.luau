@@ -1,19 +1,20 @@
-﻿local guiService = game:GetService("GuiService")
+﻿local GuiService = game:GetService("GuiService")
 
-return function()
-	-- upvalues: guiService (ref)
-	local ok, status = pcall(function()
-		-- upvalues: guiService (copy)
-		return guiService:GetInsetArea(Enum.ScreenInsets.None).Max.Y - guiService:GetInsetArea(Enum.ScreenInsets.DeviceSafeInsets).Max.Y
+return function(): number --[[ Line: 4 | Named "getDeviceBottomInset" ]]
+	-- upvalues: GuiService (copy)
+	local Success, Result = pcall(function() --[[ Line: 5 ]]
+		-- upvalues: GuiService (upval)
+		return GuiService:GetInsetArea(Enum.ScreenInsets.None).Max.Y - GuiService:GetInsetArea(Enum.ScreenInsets.DeviceSafeInsets).Max.Y
 	end)
 	
-	if ok and typeof(status) == "number" then
-		return math.max(0, status)
+	if Success and typeof(Result) == "number" then
+		return (math.max(0, Result))
+	else
+		local Success1, _, Result3 = pcall(function() --[[ Line: 13 ]]
+			-- upvalues: GuiService (upval)
+			return GuiService:GetGuiInset()
+		end)
+		
+		return if Success1 and typeof(Result3) == "Vector2" then math.max(0, Result3.Y) else 0
 	end
-	local ok_1, _, var1 = pcall(function()
-		-- upvalues: guiService (copy)
-		return guiService:GetGuiInset()
-	end)
-	
-	return if ok_1 and typeof(var1) == "Vector2" then math.max(0, var1.Y) else 0
 end

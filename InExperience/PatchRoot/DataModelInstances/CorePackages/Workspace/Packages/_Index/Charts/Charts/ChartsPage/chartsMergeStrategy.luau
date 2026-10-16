@@ -1,25 +1,25 @@
-﻿local parent = script:FindFirstAncestor("Charts").Parent
-local fFlagSduiChartsRequestPlaceholders = require(parent.SharedFlags).FFlagSduiChartsRequestPlaceholders
-local _ = require(parent.SduiSharedUtilities)
+﻿local Parent = script:FindFirstAncestor("Charts").Parent
+local FFlagSduiChartsRequestPlaceholders = require(Parent.SharedFlags).FFlagSduiChartsRequestPlaceholders
+local _ = require(Parent.SduiSharedUtilities)
 
-local function hasAnyOverlap(p1, p2)
-	if p1 == nil or #p1 == 0 then
+local function hasAnyOverlap(List, List1): boolean --[[ Line: 10 ]]
+	if List == nil or #List == 0 then
 		return false
 	end
 	local t = {}
 	
-	for i, v in p1 do
-		t[v] = true
+	for _, value in List do
+		t[value] = true
 	end
-	for i, v_1 in p2 do
-		if t[v_1] then
+	for _, value1 in List1 do
+		if t[value1] then
 			return true
 		end
 	end
 	return false
 end
 
-return function(p3, p4, p5)
-	-- upvalues: fFlagSduiChartsRequestPlaceholders (ref), hasAnyOverlap (ref)
-	return if not (not fFlagSduiChartsRequestPlaceholders or #p3 ~= 1 or p3[1] ~= "entry_order") then if hasAnyOverlap(p5, p4) then "replace" else "append" else nil
+return function(Entry, p1, p2) --[[ Line: 41 | Named "chartsMergeStrategy" ]]
+	-- upvalues: FFlagSduiChartsRequestPlaceholders (copy), hasAnyOverlap (copy)
+	return if FFlagSduiChartsRequestPlaceholders and #Entry == 1 and Entry[1] == "entry_order" then if hasAnyOverlap(p2, p1) then "replace" else "append" else nil
 end

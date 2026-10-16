@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("EnableVpcForInExperienceSubscriptionPurchase", false)
 
-return function()
+return function() --[[ Line: 3 ]]
 	return game:GetFastFlag("EnableVpcForInExperienceSubscriptionPurchase")
 end

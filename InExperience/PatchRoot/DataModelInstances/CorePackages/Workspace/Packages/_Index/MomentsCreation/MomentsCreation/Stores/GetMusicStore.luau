@@ -1,7 +1,7 @@
-﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
-local createMusicStoreModule = require(momentsCreation.Stores.createMusicStore)
+﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
+local CreateMusicStoreModule = require(MomentsCreation.Stores.createMusicStore)
 
-return require(momentsCreation.Parent.Signals).createComputed(function()
-	-- upvalues: createMusicStoreModule (ref)
-	return createMusicStoreModule()
+return require(MomentsCreation.Parent.Signals).createComputed(function() --[[ Line: 15 ]]
+	-- upvalues: CreateMusicStoreModule (copy)
+	return CreateMusicStoreModule()
 end)

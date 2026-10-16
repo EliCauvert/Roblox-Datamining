@@ -1,84 +1,81 @@
-﻿local gameJoinCard = script:FindFirstAncestor("GameJoinCard")
-local parent = gameJoinCard.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local robloxAppEnumsModule = require(parent.RobloxAppEnums)
-local sharedFlagsModule = require(parent.SharedFlags)
-local userCtaAction = require(parent.UserCtaCommon).Enums.UserCtaAction
-local text = foundationModule.Text
-local view = foundationModule.View
-local controlState = foundationModule.Enums.ControlState
-local inputSize = foundationModule.Enums.InputSize
-local stateLayerAffordance = foundationModule.Enums.StateLayerAffordance
-local useTokens = foundationModule.Hooks.useTokens
-local appPage = robloxAppEnumsModule.AppPage
-local fFlagEnableSplitPane = sharedFlagsModule.FFlagEnableSplitPane
-local fFlagDesktopGameJoinCardUIImprovements = sharedFlagsModule.FFlagDesktopGameJoinCardUIImprovements
-local analyticsConstantsModule = require(gameJoinCard.Analytics.AnalyticsConstants)
-local gameJoinCardButtonAction = analyticsConstantsModule.GameJoinCardButtonAction
-local viewProfileSourceValues = analyticsConstantsModule.viewProfileSourceValues
-local useGameJoinCardAnalyticsModule = require(gameJoinCard.Analytics.useGameJoinCardAnalytics)
+﻿local GameJoinCard = script:FindFirstAncestor("GameJoinCard")
+local Parent = GameJoinCard.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local UserCtaAction = require(Parent.UserCtaCommon).Enums.UserCtaAction
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local ControlState = FoundationModule.Enums.ControlState
+local InputSize = FoundationModule.Enums.InputSize
+local StateLayerAffordance = FoundationModule.Enums.StateLayerAffordance
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local FFlagEnableSplitPane = require(Parent.SharedFlags).FFlagEnableSplitPane
+local AnalyticsConstantsModule = require(GameJoinCard.Analytics.AnalyticsConstants)
+local GameJoinCardButtonAction = AnalyticsConstantsModule.GameJoinCardButtonAction
+local ViewProfileSourceValues = AnalyticsConstantsModule.viewProfileSourceValues
+local UseGameJoinCardAnalyticsModule = require(GameJoinCard.Analytics.useGameJoinCardAnalytics)
 local _ = require(script.Parent.Types)
-local getTelemetryFieldsModule = require(script.Parent.getTelemetryFields)
+local GetTelemetryFieldsModule = require(script.Parent.getTelemetryFields)
 
-local function ViewProfileLink(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), controlState (ref), view (ref), fFlagDesktopGameJoinCardUIImprovements (ref), stateLayerAffordance (ref), text (ref)
-	local var1 = useTokens()
-	local var2, var3 = reactModule.useState(false)
+local function ViewProfileLink(Frame) --[[ Line: 32 ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), ControlState (copy), View (copy), StateLayerAffordance (copy), Text (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		Name = "ViewProfileButton",
 		tag = "row align-x-center align-y-center",
-		Size = UDim2.new(1, 0, 0, var1.Size.Size_600),
-		onActivated = p1.onActivated,
-		onStateChanged = if fFlagDesktopGameJoinCardUIImprovements then reactModule.useCallback(function(p2)
-			-- upvalues: var3 (ref), controlState (copy)
-			var3(p2 == controlState.Hover)
-		end, {}) else nil,
-		stateLayer = { affordance = stateLayerAffordance.None },
-		LayoutOrder = p1.LayoutOrder
+		Size = UDim2.new(1, 0, 0, UseTokensResult.Size.Size_600),
+		onActivated = Frame.onActivated,
+		onStateChanged = ReactModule.useCallback(function(Hover) --[[ Line: 35 ]]
+			-- upvalues: UseStateResult2 (copy), ControlState (upval)
+			UseStateResult2(Hover == ControlState.Hover)
+		end, {}),
+		stateLayer = { affordance = StateLayerAffordance.None },
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		Label = reactModule.createElement(text, {
+		Label = ReactModule.createElement(Text, {
+			RichText = true,
 			tag = "auto-xy text-title-medium text-align-x-center content-emphasis",
-			Text = if fFlagDesktopGameJoinCardUIImprovements and var2 then `<u>{p1.text}</u>` else p1.text,
-			RichText = fFlagDesktopGameJoinCardUIImprovements
+			Text = if UseStateResult then `<u>{Frame.text}</u>` else Frame.text
 		})
 	})
 end
 
 return {
-	[userCtaAction.ViewProfile] = function(p1)
-		-- upvalues: userCtaAction (ref), inputSize (ref), reactModule (ref), ViewProfileLink (ref), viewProfileSourceValues (ref), getTelemetryFieldsModule (ref), useGameJoinCardAnalyticsModule (ref), gameJoinCardButtonAction (ref), fFlagEnableSplitPane (ref), appPage (ref)
+	[UserCtaAction.ViewProfile] = function(p1) --[[ Line: 57 ]]
+		-- upvalues: UserCtaAction (copy), InputSize (copy), ReactModule (copy), ViewProfileLink (copy), ViewProfileSourceValues (copy), GetTelemetryFieldsModule (copy), UseGameJoinCardAnalyticsModule (copy), GameJoinCardButtonAction (copy), FFlagEnableSplitPane (copy), AppPage (copy)
 		return {
-			id = userCtaAction.ViewProfile,
-			inputSize = inputSize.Medium,
+			id = UserCtaAction.ViewProfile,
+			inputSize = InputSize.Medium,
 			width = UDim.new(1, 0),
-			text = p1.localized[userCtaAction.ViewProfile],
-			render = function(p2, p3)
-				-- upvalues: reactModule (copy), ViewProfileLink (copy), viewProfileSourceValues (copy)
-				return reactModule.createElement(ViewProfileLink, {
+			text = p1.localized[UserCtaAction.ViewProfile],
+			render = function(p2, LayoutOrder) --[[ Line: 63 ]]
+				-- upvalues: ReactModule (upval), ViewProfileLink (upval), ViewProfileSourceValues (upval)
+				return ReactModule.createElement(ViewProfileLink, {
 					text = p2.text,
-					onActivated = function()
-						-- upvalues: p2 (ref), viewProfileSourceValues (copy)
-						p2.onActivated(viewProfileSourceValues.ViewProfileButton)
+					onActivated = function() --[[ Line: 66 ]]
+						-- upvalues: p2 (copy), ViewProfileSourceValues (upval)
+						p2.onActivated(ViewProfileSourceValues.ViewProfileButton)
 					end,
-					LayoutOrder = p3
+					LayoutOrder = LayoutOrder
 				})
 			end,
-			onActivated = function(p2)
-				-- upvalues: viewProfileSourceValues (copy), p1 (ref), getTelemetryFieldsModule (copy), useGameJoinCardAnalyticsModule (copy), gameJoinCardButtonAction (copy), fFlagEnableSplitPane (copy), appPage (copy)
-				p2 = p2 or viewProfileSourceValues.ViewProfileButton
+			onActivated = function(p2) --[[ Line: 72 ]]
+				-- upvalues: ViewProfileSourceValues (upval), p1 (copy), GetTelemetryFieldsModule (upval), UseGameJoinCardAnalyticsModule (upval), GameJoinCardButtonAction (upval), FFlagEnableSplitPane (upval), AppPage (upval)
+				local P5 = p2 or ViewProfileSourceValues.ViewProfileButton
 				
 				if p1.userId ~= "" then
-					local var1 = getTelemetryFieldsModule(p1)
+					local TelemetryFieldsModule = GetTelemetryFieldsModule(p1)
 					
-					if p2 == viewProfileSourceValues.UserTile then
-						useGameJoinCardAnalyticsModule.logGameJoinCardButtonEvent(gameJoinCardButtonAction.OpenProfileFromUserTile, var1)
-					elseif p2 == viewProfileSourceValues.ViewProfileButton then
-						useGameJoinCardAnalyticsModule.logGameJoinCardButtonEvent(gameJoinCardButtonAction.OpenProfileFromViewProfile, var1)
+					if P5 == ViewProfileSourceValues.UserTile then
+						UseGameJoinCardAnalyticsModule.logGameJoinCardButtonEvent(GameJoinCardButtonAction.OpenProfileFromUserTile, TelemetryFieldsModule)
+					elseif P5 == ViewProfileSourceValues.ViewProfileButton then
+						UseGameJoinCardAnalyticsModule.logGameJoinCardButtonEvent(GameJoinCardButtonAction.OpenProfileFromViewProfile, TelemetryFieldsModule)
 					end
 				end;
-				(if fFlagEnableSplitPane then p1.navigation.push else p1.navigation.navigate)(appPage.ProfilePlatform, { detail = p1.userId })
+				(if FFlagEnableSplitPane then p1.navigation.push else p1.navigation.navigate)(AppPage.ProfilePlatform, { detail = p1.userId })
 			end
 		}
 	end

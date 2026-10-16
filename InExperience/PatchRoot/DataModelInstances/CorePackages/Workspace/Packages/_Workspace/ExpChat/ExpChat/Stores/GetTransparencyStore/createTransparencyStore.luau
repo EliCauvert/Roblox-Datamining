@@ -1,153 +1,157 @@
-﻿local expChat = script:FindFirstAncestor("ExpChat")
-local signalsModule = require(expChat.Parent.Signals)
-local createSignal = signalsModule.createSignal
-local fFlagExpChatDictationFadeOverrideModule = require(expChat.Flags.FFlagExpChatDictationFadeOverride)
+﻿local ExpChat = script:FindFirstAncestor("ExpChat")
+local SignalsModule = require(ExpChat.Parent.Signals)
+local CreateSignalFunction = SignalsModule.createSignal
+local FFlagExpChatDictationFadeOverrideModule = require(ExpChat.Flags.FFlagExpChatDictationFadeOverride)
 
-local var1 = function() end
+local function v3() --[[ Line: 28 ]] end
 
-return function()
-	-- upvalues: createSignal (ref), signalsModule (ref), fFlagExpChatDictationFadeOverrideModule (ref), var1 (ref)
-	local var2, var3 = createSignal(0)
-	local var4, var5 = createSignal(0)
-	local var6, var7 = createSignal(false)
-	local var8, var9 = createSignal(false)
-	local var10, var11 = createSignal(false)
-	local var12, var13 = createSignal(false)
+return function() --[[ Line: 30 ]]
+	-- upvalues: CreateSignalFunction (copy), SignalsModule (copy), FFlagExpChatDictationFadeOverrideModule (copy), v3 (copy)
+	local Signal, Signal2 = CreateSignalFunction(0)
+	local Signal1, Signal2_1 = CreateSignalFunction(0)
+	local Signal3, Signal2_2 = CreateSignalFunction(false)
+	local Signal4, Signal2_3 = CreateSignalFunction(false)
+	local Signal5, Signal2_4 = CreateSignalFunction(false)
+	local Signal6, Signal2_5 = CreateSignalFunction(false)
 	
-	local function _(value)
-		-- upvalues: var3 (ref), var5 (ref)
-		return function()
-			-- upvalues: value (ref), var3 (copy), var5 (copy)
-			value()
-			var3(os.clock())
-			var5(os.clock())
+	local function _(Callback) --[[ Line: 50 | Named "withResetAllTransparency" ]]
+		-- upvalues: Signal2 (copy), Signal2_1 (copy)
+		return function() --[[ Line: 51 ]]
+			-- upvalues: Callback (copy), Signal2 (upval), Signal2_1 (upval)
+			Callback()
+			Signal2(os.clock())
+			Signal2_1(os.clock())
 		end
 	end
 	
-	local t = {
-		getLastActivity = var2,
-		getLastMessageActivity = var4,
-		getIsTextBoxFocused = var6,
-		getIsFocused = signalsModule.createComputed(function(p1)
-			-- upvalues: var6 (ref), var8 (ref), var10 (ref), fFlagExpChatDictationFadeOverrideModule (copy), var12 (ref)
-			return var6(p1) or (var8(p1) or (var10(p1) or fFlagExpChatDictationFadeOverrideModule and var12(p1)))
+	local function v17() --[[ Line: 69 ]]
+		-- upvalues: Signal2_2 (copy)
+		Signal2_2(true)
+	end
+	
+	local function SetTextboxFocus() --[[ Line: 51 ]]
+		-- upvalues: v17 (copy), Signal2 (copy), Signal2_1 (copy)
+		v17()
+		Signal2(os.clock())
+		Signal2_1(os.clock())
+	end
+	
+	local function v19() --[[ Line: 72 ]]
+		-- upvalues: Signal2_2 (copy)
+		Signal2_2(false)
+	end
+	
+	local function ClearTextboxFocus() --[[ Line: 51 ]]
+		-- upvalues: v19 (copy), Signal2 (copy), Signal2_1 (copy)
+		v19()
+		Signal2(os.clock())
+		Signal2_1(os.clock())
+	end
+	
+	local function v21() --[[ Line: 75 ]]
+		-- upvalues: Signal2_3 (copy)
+		Signal2_3(true)
+	end
+	
+	local function SetWindowFocusInput() --[[ Line: 51 ]]
+		-- upvalues: v21 (copy), Signal2 (copy), Signal2_1 (copy)
+		v21()
+		Signal2(os.clock())
+		Signal2_1(os.clock())
+	end
+	
+	local function v23() --[[ Line: 78 ]]
+		-- upvalues: Signal2_3 (copy)
+		Signal2_3(false)
+	end
+	
+	local function ClearWindowFocusInput() --[[ Line: 51 ]]
+		-- upvalues: v23 (copy), Signal2 (copy), Signal2_1 (copy)
+		v23()
+		Signal2(os.clock())
+		Signal2_1(os.clock())
+	end
+	
+	local function v25() --[[ Line: 81 ]]
+		-- upvalues: Signal2_4 (copy)
+		Signal2_4(true)
+	end
+	
+	local function SetContextMenuOpen() --[[ Line: 51 ]]
+		-- upvalues: v25 (copy), Signal2 (copy), Signal2_1 (copy)
+		v25()
+		Signal2(os.clock())
+		Signal2_1(os.clock())
+	end
+	
+	local function v27() --[[ Line: 84 ]]
+		-- upvalues: Signal2_4 (copy)
+		Signal2_4(false)
+	end
+	
+	local config = {
+		getLastActivity = Signal,
+		getLastMessageActivity = Signal1,
+		getIsTextBoxFocused = Signal3,
+		getIsFocused = SignalsModule.createComputed(function(p1) --[[ Line: 38 ]]
+			-- upvalues: Signal3 (copy), Signal4 (copy), Signal5 (copy), FFlagExpChatDictationFadeOverrideModule (upval), Signal6 (copy)
+			return Signal3(p1) or (Signal4(p1) or (Signal5(p1) or FFlagExpChatDictationFadeOverrideModule and Signal6(p1)))
 		end),
-		resetAllTransparency = function()
-			-- upvalues: var3 (ref), var5 (ref)
-			var3(os.clock())
-			var5(os.clock())
+		resetAllTransparency = function() --[[ Line: 45 ]]
+			-- upvalues: Signal2 (copy), Signal2_1 (copy)
+			Signal2(os.clock())
+			Signal2_1(os.clock())
 		end,
-		resetTextTransparency = function()
-			-- upvalues: var5 (ref)
-			var5(os.clock())
+		resetTextTransparency = function() --[[ Line: 66 ]]
+			-- upvalues: Signal2_1 (copy)
+			Signal2_1(os.clock())
+		end,
+		setTextboxFocus = SetTextboxFocus,
+		clearTextboxFocus = ClearTextboxFocus,
+		setWindowFocusInput = SetWindowFocusInput,
+		clearWindowFocusInput = ClearWindowFocusInput,
+		setContextMenuOpen = SetContextMenuOpen,
+		clearContextMenuOpen = function() --[[ Line: 51 ]]
+			-- upvalues: v27 (copy), Signal2 (copy), Signal2_1 (copy)
+			v27()
+			Signal2(os.clock())
+			Signal2_1(os.clock())
 		end
 	}
 	
-	local var14 = function()
-		-- upvalues: var7 (ref)
-		var7(true)
-	end
-	
-	function t.setTextboxFocus()
-		-- upvalues: var14 (ref), var3 (ref), var5 (ref)
-		var14()
-		var3(os.clock())
-		var5(os.clock())
-	end
-	
-	local var15 = function()
-		-- upvalues: var7 (ref)
-		var7(false)
-	end
-	
-	function t.clearTextboxFocus()
-		-- upvalues: var15 (ref), var3 (ref), var5 (ref)
-		var15()
-		var3(os.clock())
-		var5(os.clock())
-	end
-	
-	local var16 = function()
-		-- upvalues: var9 (ref)
-		var9(true)
-	end
-	
-	function t.setWindowFocusInput()
-		-- upvalues: var16 (ref), var3 (ref), var5 (ref)
-		var16()
-		var3(os.clock())
-		var5(os.clock())
-	end
-	
-	local var17 = function()
-		-- upvalues: var9 (ref)
-		var9(false)
-	end
-	
-	function t.clearWindowFocusInput()
-		-- upvalues: var17 (ref), var3 (ref), var5 (ref)
-		var17()
-		var3(os.clock())
-		var5(os.clock())
-	end
-	
-	local var18 = function()
-		-- upvalues: var11 (ref)
-		var11(true)
-	end
-	
-	function t.setContextMenuOpen()
-		-- upvalues: var18 (ref), var3 (ref), var5 (ref)
-		var18()
-		var3(os.clock())
-		var5(os.clock())
-	end
-	
-	local var19 = function()
-		-- upvalues: var11 (ref)
-		var11(false)
-	end
-	
-	function t.clearContextMenuOpen()
-		-- upvalues: var19 (ref), var3 (ref), var5 (ref)
-		var19()
-		var3(os.clock())
-		var5(os.clock())
-	end
-	
-	if fFlagExpChatDictationFadeOverrideModule then
-		local var20 = function()
-			-- upvalues: var13 (ref)
-			var13(true)
+	if FFlagExpChatDictationFadeOverrideModule then
+		local function v29() --[[ Line: 88 ]]
+			-- upvalues: Signal2_5 (copy)
+			Signal2_5(true)
 		end
 		
-		local var21 = function()
-			-- upvalues: var20 (ref), var3 (ref), var5 (ref)
-			var20()
-			var3(os.clock())
-			var5(os.clock())
+		local function SetDictationActive() --[[ Line: 51 ]]
+			-- upvalues: v29 (copy), Signal2 (copy), Signal2_1 (copy)
+			v29()
+			Signal2(os.clock())
+			Signal2_1(os.clock())
 		end
 	else
-		local var21 = var1
+		local SetDictationActive: () -> () = v3
 	end
-	t.setDictationActive = var21
+	config.setDictationActive = SetDictationActive
 	
-	if fFlagExpChatDictationFadeOverrideModule then
-		local var22 = function()
-			-- upvalues: var13 (ref)
-			var13(false)
+	if FFlagExpChatDictationFadeOverrideModule then
+		local function v31() --[[ Line: 93 ]]
+			-- upvalues: Signal2_5 (copy)
+			Signal2_5(false)
 		end
 		
-		local var23 = function()
-			-- upvalues: var22 (ref), var3 (ref), var5 (ref)
-			var22()
-			var3(os.clock())
-			var5(os.clock())
+		local function ClearDictationActive() --[[ Line: 51 ]]
+			-- upvalues: v31 (copy), Signal2 (copy), Signal2_1 (copy)
+			v31()
+			Signal2(os.clock())
+			Signal2_1(os.clock())
 		end
 	else
-		local var23 = var1
+		local ClearDictationActive: () -> () = v3
 	end
-	t.clearDictationActive = var23
+	config.clearDictationActive = ClearDictationActive
 	
-	return t
+	return config
 end

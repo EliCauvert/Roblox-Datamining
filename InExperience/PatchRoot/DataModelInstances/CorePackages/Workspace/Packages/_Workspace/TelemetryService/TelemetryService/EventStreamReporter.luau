@@ -1,29 +1,29 @@
-﻿local t = {}
-t.__index = t
+﻿local EventStreamReporterModule = {}
+EventStreamReporterModule.__index = EventStreamReporterModule
 
-function t.new(p1)
-	-- upvalues: t (ref)
-	local t_1 = { _isEnabled = true, _reporter = p1 }
-	setmetatable(t_1, t)
+function EventStreamReporterModule.new(_reporter) --[[ Line: 9 ]]
+	-- upvalues: EventStreamReporterModule (copy)
+	local config = { _isEnabled = true, _reporter = _reporter }
+	setmetatable(config, EventStreamReporterModule)
 	
-	return t_1
+	return config
 end
 
-function t:setEnabled(p1)
-	self._isEnabled = p1
+function EventStreamReporterModule:setEnabled(_isEnabled) --[[ Line: 19 ]]
+	self._isEnabled = _isEnabled
 end
 
-function t:sendTelemetryEvent(p1, p2, p3)
-	p3 = p3 or {}
+function EventStreamReporterModule:sendTelemetryEvent(p1, EventName, p2) --[[ Line: 26 ]]
+	local P6 = p2 or {}
 	assert(type(p1) == "string", "Expected eventContext to be a string")
-	assert(type(p2) == "string", "Expected eventName to be a string")
-	assert(type(p3) == "table", "Expected additionalArgs to be a table")
+	assert(type(EventName) == "string", "Expected eventName to be a string")
+	assert(type(P6) == "table", "Expected additionalArgs to be a table")
 	assert(self._isEnabled, "This reporting service is disabled")
 	self._reporter:logRobloxTelemetryEvent({
 		throttlingPercentage = 10000,
-		eventName = p2,
+		eventName = EventName,
 		backends = { "EventIngest" }
-	}, { "addSessionId", "addSessionInfo" }, p3, p1)
+	}, { "addSessionId", "addSessionInfo" }, P6, p1)
 end
 
-return t
+return EventStreamReporterModule

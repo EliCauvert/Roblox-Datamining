@@ -1,5 +1,5 @@
-﻿local socialExperienceJoin = script:FindFirstAncestor("SocialExperienceJoin")
+﻿local SocialExperienceJoin = script:FindFirstAncestor("SocialExperienceJoin")
+local ConstantsModule = require(SocialExperienceJoin.Common.Constants)
+local LuaSocialLibrariesDepsModule = require(SocialExperienceJoin.Parent.LuaSocialLibrariesDeps)
 
-return if require(socialExperienceJoin.Flags.FFlagSocialExperienceJoinPresenceStoreMigration) then nil else require(socialExperienceJoin.Parent.LuaSocialLibrariesDeps).RoduxPresence.config({
-	keyPath = require(socialExperienceJoin.Common.Constants).RODUX_KEY .. ".Presence"
-})
+return if require(SocialExperienceJoin.Flags.FFlagSocialExperienceJoinPresenceStoreMigration) then nil else LuaSocialLibrariesDepsModule.RoduxPresence.config({ keyPath = ConstantsModule.RODUX_KEY .. ".Presence" })

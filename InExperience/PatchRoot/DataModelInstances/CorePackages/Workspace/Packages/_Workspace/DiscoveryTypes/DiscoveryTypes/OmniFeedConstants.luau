@@ -1,11 +1,11 @@
-﻿local parent = script:FindFirstAncestor("DiscoveryTypes").Parent
-local fFlagLuaAppHeaderButtonText = require(parent.SharedFlags).FFlagLuaAppHeaderButtonText
-local fFlagLuaAppRfySignalApportioningIxp = require(parent.SharedFlags).FFlagLuaAppRfySignalApportioningIxp
-local fFlagLuaAppEnableReportExperience = require(parent.SharedFlags).FFlagLuaAppEnableReportExperience
-local fFlagLuaAppUsePrevalidatedVideoGamePlayability = require(parent.SharedFlags).FFlagLuaAppUsePrevalidatedVideoGamePlayability
-local fFlagLuaAppRfyRevealRows = require(parent.SharedFlags).FFlagLuaAppRfyRevealRows
-local fFlagLuaAppSortHeaderAnchorTag = require(parent.SharedFlags).FFlagLuaAppSortHeaderAnchorTag
-local fFlagLuaAppContinueSortInstantPlay = require(parent.SharedFlags).FFlagLuaAppContinueSortInstantPlay
+﻿local Parent = script:FindFirstAncestor("DiscoveryTypes").Parent
+local FFlagLuaAppHeaderButtonText = require(Parent.SharedFlags).FFlagLuaAppHeaderButtonText
+local FFlagLuaAppRfySignalApportioningIxp = require(Parent.SharedFlags).FFlagLuaAppRfySignalApportioningIxp
+local FFlagLuaAppEnableReportExperience = require(Parent.SharedFlags).FFlagLuaAppEnableReportExperience
+local FFlagLuaAppUsePrevalidatedVideoGamePlayability = require(Parent.SharedFlags).FFlagLuaAppUsePrevalidatedVideoGamePlayability
+local FFlagLuaAppRfyRevealRows = require(Parent.SharedFlags).FFlagLuaAppRfyRevealRows
+local FFlagLuaAppSortHeaderAnchorTag = require(Parent.SharedFlags).FFlagLuaAppSortHeaderAnchorTag
+local FFlagLuaAppContinueSortInstantPlay = require(Parent.SharedFlags).FFlagLuaAppContinueSortInstantPlay
 local _ = require(script.Parent.RoduxTypes)
 
 return {
@@ -13,7 +13,7 @@ return {
 	OmniSortRetrievalStatus = { Exception = "Exception", Success = "Success" },
 	GlobalLayoutDataKeys = {
 		JYFRefresh = "JYFRefresh",
-		ShowBackToTop = if require(parent.SharedFlags).FFlagLuaAppSupportHomeBackToTop then "showBackToTop" else nil
+		ShowBackToTop = if require(Parent.SharedFlags).FFlagLuaAppSupportHomeBackToTop then "showBackToTop" else nil
 	},
 	TopicLayoutDataKeys = {
 		PYMKFindFriendsEnabled = "PYMKFindFriendsEnabled",
@@ -30,26 +30,26 @@ return {
 		CountdownString = "countdownString",
 		PlayButtonStyle = "playButtonStyle",
 		BackgroundImageAssetId = "backgroundImageAssetId",
-		HeaderButtonText = if fFlagLuaAppHeaderButtonText then "headerButtonText" else nil,
+		HeaderButtonText = if FFlagLuaAppHeaderButtonText then "headerButtonText" else nil,
 		HideTileMetadata = "hideTileMetadata",
 		HideTileTitle = "hideTileTitle",
 		ContainedTile = "containedTile",
-		HasPrevalidatedVideoGamePlayability = if fFlagLuaAppUsePrevalidatedVideoGamePlayability then "hasPrevalidatedVideoGamePlayability" else nil,
+		HasPrevalidatedVideoGamePlayability = if FFlagLuaAppUsePrevalidatedVideoGamePlayability then "hasPrevalidatedVideoGamePlayability" else nil,
 		EnableExplicitFeedback = "enableExplicitFeedback",
-		EnableSignalApportioning = if fFlagLuaAppRfySignalApportioningIxp then "enableSignalApportioning" else nil,
+		EnableSignalApportioning = if FFlagLuaAppRfySignalApportioningIxp then "enableSignalApportioning" else nil,
 		SponsoredUserCohort = "sponsoredUserCohort",
 		EnableSponsoredFeedback = "enableSponsoredFeedback",
 		EnableCollectionGrid = "enableCollectionGrid",
-		SortHeaderAnchorTag = if fFlagLuaAppSortHeaderAnchorTag then "sortHeaderAnchorTag" else nil,
-		InitialFeedVisibleRows = if fFlagLuaAppRfyRevealRows then "initialFeedVisibleRows" else nil,
-		VisibleRowsPerReveal = if fFlagLuaAppRfyRevealRows then "visibleRowsPerReveal" else nil,
+		SortHeaderAnchorTag = if FFlagLuaAppSortHeaderAnchorTag then "sortHeaderAnchorTag" else nil,
+		InitialFeedVisibleRows = if FFlagLuaAppRfyRevealRows then "initialFeedVisibleRows" else nil,
+		VisibleRowsPerReveal = if FFlagLuaAppRfyRevealRows then "visibleRowsPerReveal" else nil,
 		EnableReportAd = "enableReportAd",
-		EnableReportExperience = if fFlagLuaAppEnableReportExperience then "enableReportExperience" else nil,
+		EnableReportExperience = if FFlagLuaAppEnableReportExperience then "enableReportExperience" else nil,
 		IsSponsoredRatingFooterAllowed = "isSponsoredRatingFooterAllowed",
 		AmpUpsellFeatureName = "ampUpsellFeatureName",
 		AmpUpsellNamespace = "ampUpsellNamespace",
-		EnableInstantPlay = if fFlagLuaAppContinueSortInstantPlay then "enableInstantPlay" else nil,
-		InstantPlayTreatment = if fFlagLuaAppContinueSortInstantPlay then "instantPlayTreatment" else nil
+		EnableInstantPlay = if FFlagLuaAppContinueSortInstantPlay then "enableInstantPlay" else nil,
+		InstantPlayTreatment = if FFlagLuaAppContinueSortInstantPlay then "instantPlayTreatment" else nil
 	},
 	ComponentTypeDataKeys = {
 		EventTile = "EventTile",

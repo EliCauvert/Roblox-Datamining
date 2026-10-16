@@ -1,10 +1,10 @@
-﻿local imageSet = require(script:FindFirstAncestor("AppBlox").Parent.UIBlox).App.ImageSet
-local calcMediaGallerySizesFromWidthModule = require(script.Parent.calcMediaGallerySizesFromWidth)
-local iconSize = imageSet.getIconSize(imageSet.Enum.IconSize.Medium)
+﻿local ImageSet = require(script:FindFirstAncestor("AppBlox").Parent.UIBlox).App.ImageSet
+local CalcMediaGallerySizesFromWidthModule = require(script.Parent.calcMediaGallerySizesFromWidth)
+local IconSize = ImageSet.getIconSize(ImageSet.Enum.IconSize.Medium)
 
-function calcMediaGallerySizesFromHeight(p1, p2, p3)
-	-- upvalues: iconSize (ref), calcMediaGallerySizesFromWidthModule (ref)
-	return calcMediaGallerySizesFromWidthModule(math.floor((math.floor((p1 - 24) * 1.777777777778 * p2) + (p2 - 1) * 12 + iconSize * 2 + iconSize * 2 * p2) / (p2 + 1)), p2, p3)
+function calcMediaGallerySizesFromHeight(p1: number, p2: number, p3) --[[ Line: 17 ]]
+	-- upvalues: IconSize (copy), CalcMediaGallerySizesFromWidthModule (copy)
+	return CalcMediaGallerySizesFromWidthModule(math.floor((math.floor((p1 - 24) * 1.7777777777777777 * p2) + (p2 - 1) * 12 + IconSize * 2 + IconSize * 2 * p2) / (p2 + 1)), p2, p3)
 end
 
 return calcMediaGallerySizesFromHeight

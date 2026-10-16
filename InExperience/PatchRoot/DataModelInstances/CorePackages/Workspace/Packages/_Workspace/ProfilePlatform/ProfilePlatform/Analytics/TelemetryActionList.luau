@@ -1,585 +1,587 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local socialLuaAnalyticsModule = require(parent.SocialLuaAnalytics)
-local supportedTelemetryBackends = socialLuaAnalyticsModule.Analytics.Enums.SupportedTelemetryBackends
-local eventTypes = socialLuaAnalyticsModule.Analytics.Enums.EventTypes
-local contexts = socialLuaAnalyticsModule.Analytics.Enums.Contexts
-local eventNamesModule = require(script.Parent.EventNames)
-local analyticsConstantsModule = require(script.Parent.AnalyticsConstants)
-local fFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module = require(profilePlatform.Flags.FFlagSocialEnableProfileInspectAndBuyAnalyticsV2)
-local fFlagProfilePlatformEnableStore = require(parent.SharedFlags).FFlagProfilePlatformEnableStore
-local fFlagEnablePlatformProfileContextualMenuOption = require(parent.SharedFlags).FFlagEnablePlatformProfileContextualMenuOption
-local fFlagProfilePlatformUseCatalogItemOpenedNewFieldsModule = require(profilePlatform.Flags.FFlagProfilePlatformUseCatalogItemOpenedNewFields)
-local fFlagFriendsCallingClientGateDEV = require(parent.SharedFlags).FFlagFriendsCallingClientGate_DEV
-local fFlagProfilePlatformEnableCurrencyTransfer = require(parent.SharedFlags).FFlagProfilePlatformEnableCurrencyTransfer
-local fFlagProfilePlatformEnableTradeItemsModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableTradeItems)
-local fFlagProfilePlatformEnableEditAppearanceMenuModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableEditAppearanceMenu)
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local SocialLuaAnalyticsModule = require(Parent.SocialLuaAnalytics)
+local SupportedTelemetryBackends = SocialLuaAnalyticsModule.Analytics.Enums.SupportedTelemetryBackends
+local EventTypes = SocialLuaAnalyticsModule.Analytics.Enums.EventTypes
+local Contexts = SocialLuaAnalyticsModule.Analytics.Enums.Contexts
+local EventNamesModule = require(script.Parent.EventNames)
+local AnalyticsConstantsModule = require(script.Parent.AnalyticsConstants)
+local FFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module = require(ProfilePlatform.Flags.FFlagSocialEnableProfileInspectAndBuyAnalyticsV2)
+local FFlagProfilePlatformEnableStore = require(Parent.SharedFlags).FFlagProfilePlatformEnableStore
+local FFlagEnablePlatformProfileContextualMenuOption = require(Parent.SharedFlags).FFlagEnablePlatformProfileContextualMenuOption
+local FFlagProfilePlatformUseCatalogItemOpenedNewFieldsModule = require(ProfilePlatform.Flags.FFlagProfilePlatformUseCatalogItemOpenedNewFields)
+local FFlagFriendsCallingClientGateDEV = require(Parent.SharedFlags).FFlagFriendsCallingClientGate_DEV
+local FFlagProfilePlatformEnableCurrencyTransfer = require(Parent.SharedFlags).FFlagProfilePlatformEnableCurrencyTransfer
+local FFlagProfilePlatformEnableTradeItemsModule = require(ProfilePlatform.Flags.FFlagProfilePlatformEnableTradeItems)
+local FFlagProfileTradeItemsImpressionLoggingModule = require(ProfilePlatform.Flags.FFlagProfileTradeItemsImpressionLogging)
+local FFlagProfilePlatformEnableEditAppearanceMenuModule = require(ProfilePlatform.Flags.FFlagProfilePlatformEnableEditAppearanceMenu)
+local FFlagProfilePlatformEditBackgroundMenuItemModule = require(ProfilePlatform.Flags.FFlagProfilePlatformEditBackgroundMenuItem)
 
 return {
 	defaults = {
 		links = "",
 		throttlingThousandths = game:DefineFastInt("ProfilePlatformAnalyticsThrottlingThousandths", 1000)
 	},
-	[eventNamesModule.ProfileLoadingStage] = {
+	[EventNamesModule.ProfileLoadingStage] = {
 		description = "Stage of loading profile",
 		lastUpdated = { 24, 6, 6 },
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.RobloxTelemetryCounter,
+				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					status = function(p1)
+					status = function(p1) --[[ Line: 41 ]]
 						return p1
 					end
 				}
 			},
 			{
-				type = supportedTelemetryBackends.RobloxTelemetryStat,
-				overrideName = function(p1)
-					-- upvalues: eventNamesModule (ref)
-					return eventNamesModule.ProfileLoadingStage .. "Time" .. p1.status
+				type = SupportedTelemetryBackends.RobloxTelemetryStat,
+				overrideName = function(p1): string --[[ Line: 48 ]]
+					-- upvalues: EventNamesModule (copy)
+					return EventNamesModule.ProfileLoadingStage .. "Time" .. p1.status
 				end,
 				dynamicCustomFields = {
-					status = function(p1)
+					status = function(p1) --[[ Line: 52 ]]
 						return p1
 					end,
-					isProfilePlatform = function(p1)
+					isProfilePlatform = function(p1) --[[ Line: 55 ]]
 						return p1 or false
 					end
 				}
 			}
 		}
 	},
-	[eventNamesModule.ProfilePlatformPageReloaded] = {
+	[EventNamesModule.ProfilePlatformPageReloaded] = {
 		description = "ReloadedProfilePlatform",
 		lastUpdated = { 25, 4, 25 },
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.RobloxTelemetryCounter,
+				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					reloadCount = function(p1)
+					reloadCount = function(p1: number): string --[[ Line: 69 ]]
 						return if p1 <= 10 then `ReloadCount${p1}` else "ReloadCount5+"
 					end
 				}
 			}
 		}
 	},
-	[eventNamesModule.ProfileInExperienceUserLoadingStage] = {
+	[EventNamesModule.ProfileInExperienceUserLoadingStage] = {
 		description = "User in experience opened",
 		lastUpdated = { 24, 6, 10 },
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.RobloxTelemetryStat,
+				type = SupportedTelemetryBackends.RobloxTelemetryStat,
 				dynamicCustomFields = {
-					status = function(p1)
+					status = function(p1) --[[ Line: 89 ]]
 						return p1
 					end,
-					isInExperience = function(p1)
+					isInExperience = function(p1) --[[ Line: 92 ]]
 						return p1
 					end
 				}
 			}
 		}
 	},
-	[eventNamesModule.ProfilePageLoadedWithData] = {
+	[EventNamesModule.ProfilePageLoadedWithData] = {
 		description = "Profile page loaded with data",
 		lastUpdated = { 24, 7, 31 },
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.RobloxTelemetryCounter,
+				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					friendStatus = function(p1)
+					friendStatus = function(p1) --[[ Line: 106 ]]
 						return p1
 					end
 				}
 			}
 		}
 	},
-	[eventNamesModule.ProfilePresenceLoaded] = {
+	[EventNamesModule.ProfilePresenceLoaded] = {
 		description = "Profile presence loaded",
 		lastUpdated = { 25, 2, 19 },
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.RobloxTelemetryCounter,
+				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					presenceType = function(p1)
+					presenceType = function(p1) --[[ Line: 120 ]]
 						return p1
 					end
 				}
 			}
 		}
 	},
-	[eventNamesModule.ContextualMenuButtonCall] = if fFlagFriendsCallingClientGateDEV then {
+	[EventNamesModule.ContextualMenuButtonCall] = if FFlagFriendsCallingClientGateDEV then {
 		description = "Call button clicked from contextual menu",
 		lastUpdated = { 26, 9, 3 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	} else nil,
-	[eventNamesModule.ContextualMenuButtonChat] = {
+	[EventNamesModule.ContextualMenuButtonChat] = {
 		description = "Chat button clicked",
 		lastUpdated = { 24, 7, 31 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.ContextualMenuButtonIgnoreFriendRequest] = {
+	[EventNamesModule.ContextualMenuButtonIgnoreFriendRequest] = {
 		description = "Ignore friend request button clicked",
 		lastUpdated = { 24, 7, 31 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.ContextualMenuButtonReport] = {
+	[EventNamesModule.ContextualMenuButtonReport] = {
 		description = "Report button clicked",
 		lastUpdated = { 24, 7, 31 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.ContextualMenuButtonUnfriend] = {
+	[EventNamesModule.ContextualMenuButtonUnfriend] = {
 		description = "Unfriend button clicked",
 		lastUpdated = { 24, 7, 31 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.ContextualMenuButtonBlock] = {
+	[EventNamesModule.ContextualMenuButtonBlock] = {
 		description = "Block button clicked",
 		lastUpdated = { 24, 7, 31 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.ContextualMenuButtonSetAlias] = {
+	[EventNamesModule.ContextualMenuButtonSetAlias] = {
 		description = "Set alias button clicked",
 		lastUpdated = { 24, 7, 31 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.ContextualMenuButtonCopyLink] = {
+	[EventNamesModule.ContextualMenuButtonCopyLink] = {
 		description = "Copy Link button clicked",
 		lastUpdated = { 25, 3, 4 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.ContextualMenuButtonLeaveCommunity] = {
+	[EventNamesModule.ContextualMenuButtonLeaveCommunity] = {
 		description = "Leave Community button clicked",
 		lastUpdated = { 25, 3, 4 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.ContextualMenuButtonMakePrimaryCommunity] = {
+	[EventNamesModule.ContextualMenuButtonMakePrimaryCommunity] = {
 		description = "Make Primary Community button clicked",
 		lastUpdated = { 25, 3, 4 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.ContextualMenuButtonRemovePrimaryCommunity] = {
+	[EventNamesModule.ContextualMenuButtonRemovePrimaryCommunity] = {
 		description = "Remove Primary Community button clicked",
 		lastUpdated = { 25, 3, 4 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.ContextualMenuButtonRemoveTrustedConnection] = {
+	[EventNamesModule.ContextualMenuButtonRemoveTrustedConnection] = {
 		description = "Remove Trusted Connection button clicked",
 		lastUpdated = { 25, 6, 16 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.ContextualMenuButtonAddTrustedConnection] = {
+	[EventNamesModule.ContextualMenuButtonAddTrustedConnection] = {
 		description = "Add Trusted Connection button clicked",
 		lastUpdated = { 25, 9, 17 },
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.RobloxTelemetryCounter,
+				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					modalVariantOverride = function(p1)
+					modalVariantOverride = function(p1) --[[ Line: 244 ]]
 						return p1
 					end
 				}
 			}
 		}
 	},
-	[eventNamesModule.ContextualMenuButtonAddIncomingTrustedConnection] = {
+	[EventNamesModule.ContextualMenuButtonAddIncomingTrustedConnection] = {
 		description = "Accept Trusted Connection button clicked",
 		lastUpdated = { 25, 9, 17 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.CTAButtonOpenEditProfilePage] = {
+	[EventNamesModule.CTAButtonOpenEditProfilePage] = {
 		description = "Open edit profile page button clicked",
 		lastUpdated = { 24, 7, 31 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.CTAButtonCall] = if fFlagFriendsCallingClientGateDEV then {
+	[EventNamesModule.CTAButtonCall] = if FFlagFriendsCallingClientGateDEV then {
 		description = "Call CTA button clicked",
 		lastUpdated = { 26, 9, 3 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	} else nil,
-	[eventNamesModule.CTAButtonChat] = {
+	[EventNamesModule.CTAButtonChat] = {
 		description = "Chat button clicked",
 		lastUpdated = { 24, 7, 31 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.CTAButtonUnfriend] = {
+	[EventNamesModule.CTAButtonUnfriend] = {
 		description = "Unfriend button clicked",
 		lastUpdated = { 24, 7, 31 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.CTAButtonUnblock] = {
+	[EventNamesModule.CTAButtonUnblock] = {
 		description = "Unblock button clicked",
 		lastUpdated = { 24, 7, 31 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.CTAButtonAddFriend] = {
+	[EventNamesModule.CTAButtonAddFriend] = {
 		description = "Add friend button clicked",
 		lastUpdated = { 24, 7, 31 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.CTAButtonAddFriendFromContacts] = {
+	[EventNamesModule.CTAButtonAddFriendFromContacts] = {
 		description = "Add friend from contacts clicked",
 		lastUpdated = { 24, 9, 12 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.CTAButtonAcceptFriendRequest] = {
+	[EventNamesModule.CTAButtonAcceptFriendRequest] = {
 		description = "Accept friend request button clicked",
 		lastUpdated = { 24, 7, 31 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.CTAButtonEditAvatar] = {
+	[EventNamesModule.CTAButtonEditAvatar] = {
 		description = "Edit avatar button clicked",
 		lastUpdated = { 25, 9, 17 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.CTAButtonEditLook] = {
+	[EventNamesModule.CTAButtonEditLook] = {
 		description = "Edit look button clicked",
 		lastUpdated = { 26, 3, 18 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.CTAButtonShareProfile] = {
+	[EventNamesModule.CTAButtonShareProfile] = {
 		description = "Share profile button clicked",
 		lastUpdated = { 25, 3, 12 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.CTAButtonShareProfileQRCode] = {
+	[EventNamesModule.CTAButtonShareProfileQRCode] = {
 		description = "Share profile QR code button clicked",
 		lastUpdated = { 24, 7, 31 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.CTAButtonJoinCommunity] = {
+	[EventNamesModule.CTAButtonJoinCommunity] = {
 		description = "Join Community button clicked",
 		lastUpdated = { 25, 3, 4 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.CTAButtonViewCommunity] = {
+	[EventNamesModule.CTAButtonViewCommunity] = {
 		description = "View Community button clicked",
 		lastUpdated = { 25, 3, 4 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.CTAButtonCancelJoinCommunityRequest] = {
+	[EventNamesModule.CTAButtonCancelJoinCommunityRequest] = {
 		description = "Cancel Join Community Request button clicked",
 		lastUpdated = { 25, 3, 4 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.SchoolButton] = {
+	[EventNamesModule.SchoolButton] = {
 		description = "School button clicked",
 		lastUpdated = { 26, 7, 20 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.FriendsButton] = {
+	[EventNamesModule.FriendsButton] = {
 		description = "Friends button clicked",
 		lastUpdated = { 24, 7, 31 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.FollowersButton] = {
+	[EventNamesModule.FollowersButton] = {
 		description = "Followers button clicked",
 		lastUpdated = { 24, 7, 31 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.FollowingsButton] = {
+	[EventNamesModule.FollowingsButton] = {
 		description = "Following button clicked",
 		lastUpdated = { 24, 7, 31 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.MutualFriendsButton] = {
+	[EventNamesModule.MutualFriendsButton] = {
 		description = "Mutual friends button clicked",
 		lastUpdated = { 25, 8, 19 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.ViewPlayerProfileButton] = {
+	[EventNamesModule.ViewPlayerProfileButton] = {
 		description = "View player profile button clicked",
 		lastUpdated = { 24, 7, 31 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.ContextualMenuButton] = {
+	[EventNamesModule.ContextualMenuButton] = {
 		description = "Contextual menu button clicked",
 		lastUpdated = { 24, 7, 31 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.GameDetailsButton] = {
+	[EventNamesModule.GameDetailsButton] = {
 		description = "Game details button clicked",
 		lastUpdated = { 24, 7, 31 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.EditDisplayNameButton] = {
+	[EventNamesModule.EditDisplayNameButton] = {
 		description = "Edit display name button clicked",
 		lastUpdated = { 24, 7, 31 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.SetAliasButton] = {
+	[EventNamesModule.SetAliasButton] = {
 		description = "Set alias button clicked",
 		lastUpdated = { 24, 7, 31 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.ProfileClosed] = {
+	[EventNamesModule.ProfileClosed] = {
 		description = "Profile closed",
 		lastUpdated = { 24, 7, 31 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryStat }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryStat }
 		}
 	},
-	[eventNamesModule.StoreHeaderButton] = {
+	[EventNamesModule.StoreHeaderButton] = {
 		description = "Store header button clicked",
 		lastUpdated = { 25, 4, 23 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.CatalogItemOpened] = {
+	[EventNamesModule.CatalogItemOpened] = {
 		description = "Catalog item opened",
 		lastUpdated = { 24, 7, 31 },
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.RobloxTelemetryStat,
-				dynamicCustomFields = if fFlagProfilePlatformEnableStore then if fFlagProfilePlatformUseCatalogItemOpenedNewFieldsModule then {
-					btnContext = function(p1)
+				type = SupportedTelemetryBackends.RobloxTelemetryStat,
+				dynamicCustomFields = if FFlagProfilePlatformEnableStore then if FFlagProfilePlatformUseCatalogItemOpenedNewFieldsModule then {
+					btnContext = function(p1) --[[ Line: 514 ]]
 						return p1
 					end
 				} else {
-					source = function(p1)
+					source = function(p1) --[[ Line: 519 ]]
 						return p1
 					end
 				} else nil
 			}
 		}
 	},
-	[eventNamesModule.ProfileImpressionsSent] = {
+	[EventNamesModule.ProfileImpressionsSent] = {
 		description = "Impressions sent",
 		lastUpdated = { 25, 2, 24 },
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.RobloxTelemetryCounter,
+				type = SupportedTelemetryBackends.RobloxTelemetryCounter,
 				dynamicCustomFields = {
-					component = function(p1)
+					component = function(p1) --[[ Line: 534 ]]
 						return p1
 					end
 				}
 			}
 		}
 	},
-	[eventNamesModule.UsernameCopied] = {
+	[EventNamesModule.UsernameCopied] = {
 		description = "Username copied to clipboard",
 		lastUpdated = { 25, 8, 5 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	},
-	[eventNamesModule.ContextualMenuButtonViewPlatformProfile] = if fFlagEnablePlatformProfileContextualMenuOption then {
+	[EventNamesModule.ContextualMenuButtonViewPlatformProfile] = if FFlagEnablePlatformProfileContextualMenuOption then {
 		description = "View platform profile button clicked",
 		lastUpdated = { 25, 9, 11 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	} else nil,
-	[eventNamesModule.ContextualMenuButtonCurrencyTransfer] = if fFlagProfilePlatformEnableCurrencyTransfer then {
+	[EventNamesModule.ContextualMenuButtonCurrencyTransfer] = if FFlagProfilePlatformEnableCurrencyTransfer then {
 		description = "Currency transfer button clicked from contextual menu",
 		lastUpdated = { 26, 3, 24 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	} else nil,
-	[eventNamesModule.CTAButtonCurrencyTransfer] = if fFlagProfilePlatformEnableCurrencyTransfer then {
+	[EventNamesModule.CTAButtonCurrencyTransfer] = if FFlagProfilePlatformEnableCurrencyTransfer then {
 		description = "Currency transfer CTA button clicked",
 		lastUpdated = { 26, 3, 24 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	} else nil,
-	[eventNamesModule.ContextualMenuButtonTradeItems] = if fFlagProfilePlatformEnableTradeItemsModule then {
+	[EventNamesModule.ContextualMenuButtonTradeItems] = if FFlagProfilePlatformEnableTradeItemsModule then {
 		description = "Trade Items button clicked from contextual menu",
 		lastUpdated = { 26, 8, 13 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	} else nil,
-	[eventNamesModule.ContextualMenuTradeItemsImpression] = if fFlagProfilePlatformEnableTradeItemsModule and require(profilePlatform.Flags.FFlagProfileTradeItemsImpressionLogging) then {
+	[EventNamesModule.ContextualMenuTradeItemsImpression] = if FFlagProfilePlatformEnableTradeItemsModule and FFlagProfileTradeItemsImpressionLoggingModule then {
 		description = "Trade Items row shown in the profile overflow menu",
 		lastUpdated = { 26, 9, 3 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	} else nil,
-	[eventNamesModule.CTAButtonTradeItems] = if fFlagProfilePlatformEnableTradeItemsModule then {
+	[EventNamesModule.CTAButtonTradeItems] = if FFlagProfilePlatformEnableTradeItemsModule then {
 		description = "Trade Items CTA button clicked",
 		lastUpdated = { 26, 8, 13 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	} else nil,
-	[eventNamesModule.CTAButtonEditAppearance] = if fFlagProfilePlatformEnableEditAppearanceMenuModule then {
+	[EventNamesModule.CTAButtonEditAppearance] = if FFlagProfilePlatformEnableEditAppearanceMenuModule then {
 		description = "Edit appearance menu opened",
 		lastUpdated = { 26, 3, 30 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	} else nil,
-	[eventNamesModule.EditAppearanceMenuEditAvatar] = if fFlagProfilePlatformEnableEditAppearanceMenuModule then {
+	[EventNamesModule.EditAppearanceMenuEditAvatar] = if FFlagProfilePlatformEnableEditAppearanceMenuModule then {
 		description = "Edit avatar clicked from edit appearance menu",
 		lastUpdated = { 26, 3, 30 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	} else nil,
-	[eventNamesModule.EditAppearanceMenuEditEmote] = if fFlagProfilePlatformEnableEditAppearanceMenuModule then {
+	[EventNamesModule.EditAppearanceMenuEditEmote] = if FFlagProfilePlatformEnableEditAppearanceMenuModule then {
 		description = "Edit emote clicked from edit appearance menu",
 		lastUpdated = { 26, 3, 30 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	} else nil,
-	[eventNamesModule.EditAppearanceMenuSwitchAvatar] = if fFlagProfilePlatformEnableEditAppearanceMenuModule then {
+	[EventNamesModule.EditAppearanceMenuSwitchAvatar] = if FFlagProfilePlatformEnableEditAppearanceMenuModule then {
 		description = "Switch avatar clicked from edit appearance menu",
 		lastUpdated = { 26, 3, 30 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	} else nil,
-	[eventNamesModule.EditAppearanceMenuEditBackground] = if fFlagProfilePlatformEnableEditAppearanceMenuModule and require(profilePlatform.Flags.FFlagProfilePlatformEditBackgroundMenuItem) then {
+	[EventNamesModule.EditAppearanceMenuEditBackground] = if FFlagProfilePlatformEnableEditAppearanceMenuModule and FFlagProfilePlatformEditBackgroundMenuItemModule then {
 		description = "Edit background clicked from edit appearance menu",
 		lastUpdated = { 26, 5, 14 },
 		backendsList = {
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	} else nil,
-	[eventNamesModule.InspectAvatarInsufficientRobuxShown] = if fFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module then {
+	[EventNamesModule.InspectAvatarInsufficientRobuxShown] = if FFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module then {
 		description = "Insufficient Robux dialog shown from the Inspect Avatar sheet",
 		lastUpdated = { 26, 7, 31 },
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function()
-					-- upvalues: eventTypes (ref)
-					return eventTypes.UserSeen
+				type = SupportedTelemetryBackends.EventIngest,
+				overrideName = function() --[[ Line: 680 ]]
+					-- upvalues: EventTypes (copy)
+					return EventTypes.UserSeen
 				end,
 				staticCustomFields = {
-					eventContext = contexts.PlayerProfile,
-					btn = analyticsConstantsModule.Btns.InspectAvatarInsufficientRobux
+					eventContext = Contexts.PlayerProfile,
+					btn = AnalyticsConstantsModule.Btns.InspectAvatarInsufficientRobux
 				},
 				dynamicCustomFields = {
-					totalPrice = function(p1)
+					totalPrice = function(p1) --[[ Line: 688 ]]
 						return p1
 					end
 				}
 			},
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	} else nil,
-	[eventNamesModule.InspectAvatarBuyRobuxClicked] = if fFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module then {
+	[EventNamesModule.InspectAvatarBuyRobuxClicked] = if FFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module then {
 		description = "Buy Robux clicked on the insufficient Robux dialog",
 		lastUpdated = { 26, 7, 31 },
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function()
-					-- upvalues: eventTypes (ref)
-					return eventTypes.ButtonClick
+				type = SupportedTelemetryBackends.EventIngest,
+				overrideName = function() --[[ Line: 706 ]]
+					-- upvalues: EventTypes (copy)
+					return EventTypes.ButtonClick
 				end,
 				staticCustomFields = {
-					eventContext = contexts.PlayerProfile,
-					btn = analyticsConstantsModule.Btns.InspectAvatarBuyRobux
+					eventContext = Contexts.PlayerProfile,
+					btn = AnalyticsConstantsModule.Btns.InspectAvatarBuyRobux
 				},
 				dynamicCustomFields = {
-					totalPrice = function(p1)
+					totalPrice = function(p1) --[[ Line: 714 ]]
 						return p1
 					end
 				}
 			},
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	} else nil,
-	[eventNamesModule.CurrentlyWearingHeaderButton] = if fFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module then {
+	[EventNamesModule.CurrentlyWearingHeaderButton] = if FFlagSocialEnableProfileInspectAndBuyAnalyticsV2Module then {
 		description = "Currently Wearing header button clicked to open the Inspect Avatar sheet",
 		lastUpdated = { 26, 8, 3 },
 		backendsList = {
 			{
-				type = supportedTelemetryBackends.EventIngest,
-				overrideName = function()
-					-- upvalues: eventTypes (ref)
-					return eventTypes.ButtonClick
+				type = SupportedTelemetryBackends.EventIngest,
+				overrideName = function() --[[ Line: 732 ]]
+					-- upvalues: EventTypes (copy)
+					return EventTypes.ButtonClick
 				end,
 				staticCustomFields = {
-					eventContext = contexts.PlayerProfile,
-					btn = analyticsConstantsModule.Btns.CurrentlyWearingHeader
+					eventContext = Contexts.PlayerProfile,
+					btn = AnalyticsConstantsModule.Btns.CurrentlyWearingHeader
 				}
 			},
-			{ type = supportedTelemetryBackends.RobloxTelemetryCounter }
+			{ type = SupportedTelemetryBackends.RobloxTelemetryCounter }
 		}
 	} else nil
 }

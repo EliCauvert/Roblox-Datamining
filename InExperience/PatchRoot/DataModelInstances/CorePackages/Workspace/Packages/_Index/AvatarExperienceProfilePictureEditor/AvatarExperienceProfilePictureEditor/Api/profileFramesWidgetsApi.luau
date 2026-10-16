@@ -1,83 +1,81 @@
-﻿local avatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
-local parent = avatarExperienceProfilePictureEditor.Parent
-local httpModule = require(parent.Http)
-local httpService = game:GetService("HttpService")
-local promiseModule = require(parent.Promise)
-local enumsModule = require(avatarExperienceProfilePictureEditor.Common.Enums)
-local getWidgetListInfo = require(parent.AvatarExperienceCatalog).Api.getWidgetListInfo
+﻿local AvatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
+local Parent = AvatarExperienceProfilePictureEditor.Parent
+local HttpModule = require(Parent.Http)
+local HttpService = game:GetService("HttpService")
+local PromiseModule = require(Parent.Promise)
+local EnumsModule = require(AvatarExperienceProfilePictureEditor.Common.Enums)
+local GetWidgetListInfoFunction = require(Parent.AvatarExperienceCatalog).Api.getWidgetListInfo
 
-local function buildHydrateUrl()
-	-- upvalues: httpModule (ref)
-	return `{httpModule.Url.APIS_URL}marketplace-widgets/v1/widgets/hydrate`
-end
-
-local function extractWidgetContent(p1)
-	local t = {}
+local function extractWidgetContent(WidgetListInfo) --[[ Line: 35 ]]
+	local List = {}
 	
-	if p1 == nil then
-		return t
+	if WidgetListInfo == nil then
+		return List
 	end
-	local widgets = p1.widgets
+	local Widgets = WidgetListInfo.widgets
 	
-	if widgets == nil then
-		return t
+	if Widgets == nil then
+		return List
 	end
-	for i, v in pairs(widgets) do
-		local content = v.content
+	for _, widget in pairs(Widgets) do
+		local Content = widget.content
 		
-		if content ~= nil then
-			for i_1, v_1 in content do
-				table.insert(t, { type = v_1.type, id = v_1.id })
+		if Content ~= nil then
+			for _, value in Content do
+				table.insert(List, { type = value.type, id = value.id })
 			end
 		end
 	end
-	return t
+	return List
 end
 
-local function hydrateWidgetContent(p2, p3)
-	-- upvalues: httpService (ref), httpModule (ref), enumsModule (ref)
-	return if #p3 == 0 then nil else p2(`{httpModule.Url.APIS_URL}marketplace-widgets/v1/widgets/hydrate`, enumsModule.RequestMethods.POST, { postBody = httpService:JSONEncode({ Content = p3 }) }):andThen(function(p4)
-		return p4.responseBody
+local function hydrateWidgetContent(Callback, Content) --[[ Line: 63 ]]
+	-- upvalues: HttpService (copy), HttpModule (copy), EnumsModule (copy)
+	return if #Content == 0 then nil else Callback(`{HttpModule.Url.APIS_URL}marketplace-widgets/v1/widgets/hydrate`, EnumsModule.RequestMethods.POST, { postBody = HttpService:JSONEncode({ Content = Content }) }):andThen(function(Result) --[[ Line: 73 ]]
+		return Result.responseBody
 	end)
 end
 
-local function processWidgetsResponseAndHydrate(p2, p3)
-	-- upvalues: extractWidgetContent (ref), promiseModule (ref), hydrateWidgetContent (ref)
-	local var1 = extractWidgetContent(p3)
+local function processWidgetsResponseAndHydrate(p1, WidgetListInfo) --[[ Line: 79 ]]
+	-- upvalues: extractWidgetContent (copy), PromiseModule (copy), hydrateWidgetContent (copy)
+	local ExtractWidgetContentResult = extractWidgetContent(WidgetListInfo)
 	
-	return if #var1 == 0 then promiseModule.resolve({
+	return if #ExtractWidgetContentResult == 0 then PromiseModule.resolve({
 		hydrateResponseBody = nil,
-		widgetListInfo = p3,
-		widgetContent = var1
-	}) else hydrateWidgetContent(p2, var1):andThen(function(p4)
-		-- upvalues: p3 (ref), var1 (ref)
+		widgetListInfo = WidgetListInfo,
+		widgetContent = ExtractWidgetContentResult
+	}) else hydrateWidgetContent(p1, ExtractWidgetContentResult):andThen(function(Result) --[[ Line: 90 ]]
+		-- upvalues: WidgetListInfo (copy), ExtractWidgetContentResult (copy)
 		return {
-			widgetListInfo = p3,
-			hydrateResponseBody = p4,
-			widgetContent = var1
+			widgetListInfo = WidgetListInfo,
+			hydrateResponseBody = Result,
+			widgetContent = ExtractWidgetContentResult
 		}
 	end)
 end
 
-local function _(p2)
-	return function(p3, p4)
-		-- upvalues: p2 (ref)
-		return p2(p3, p4)
+local function _(p1) --[[ Line: 99 | Named "toGetWidgetListInfoRequestImpl" ]]
+	return function(p2, p3) --[[ Line: 100 ]]
+		-- upvalues: p1 (copy)
+		return p1(p2, p3)
 	end
 end
 
 return {
 	PROFILE_FRAMES_WIDGET_CONTEXT = "catalog-tab:profile-frames",
-	buildHydrateUrl = buildHydrateUrl,
+	buildHydrateUrl = function(): string --[[ Line: 31 ]]
+		-- upvalues: HttpModule (copy)
+		return `{HttpModule.Url.APIS_URL}marketplace-widgets/v1/widgets/hydrate`
+	end,
 	extractWidgetContent = extractWidgetContent,
-	fetchProfileFramesWidgets = function(p2, p3)
-		-- upvalues: httpService (ref), getWidgetListInfo (ref), processWidgetsResponseAndHydrate (ref)
-		return getWidgetListInfo(function(p4, p5)
-			-- upvalues: p2 (ref)
-			return p2(p4, p5)
-		end, if p3 and p3.requestId then p3.requestId else httpService:GenerateGUID(false), "catalog-tab:profile-frames", nil):andThen(function(p4)
-			-- upvalues: processWidgetsResponseAndHydrate (copy), p2 (ref)
-			return processWidgetsResponseAndHydrate(p2, p4)
+	fetchProfileFramesWidgets = function(Callback, p1) --[[ Line: 105 ]]
+		-- upvalues: HttpService (copy), GetWidgetListInfoFunction (copy), processWidgetsResponseAndHydrate (copy)
+		return GetWidgetListInfoFunction(function(p2, p3) --[[ Line: 100 ]]
+			-- upvalues: Callback (copy)
+			return Callback(p2, p3)
+		end, if p1 and p1.requestId then p1.requestId else HttpService:GenerateGUID(false), "catalog-tab:profile-frames", nil):andThen(function(Result) --[[ Line: 114 ]]
+			-- upvalues: processWidgetsResponseAndHydrate (upval), Callback (copy)
+			return processWidgetsResponseAndHydrate(Callback, Result)
 		end)
 	end
 }

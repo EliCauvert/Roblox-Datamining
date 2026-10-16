@@ -1,13 +1,13 @@
 ﻿return {
-	keysToString = function(p1, p2, p3)
-		local t = {}
+	keysToString = function(List, Separator: string, p1): string --[[ Line: 7 ]]
+		local List1 = {}
 		
-		for i in p1 do
-			table.insert(t, tostring(i))
+		for i in List do
+			table.insert(List1, (tostring(i)))
 		end
-		if p3 then
-			table.sort(t)
+		if p1 then
+			table.sort(List1)
 		end
-		return table.concat(t, p2)
+		return table.concat(List1, Separator)
 	end
 }

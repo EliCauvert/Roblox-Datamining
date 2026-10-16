@@ -1,51 +1,50 @@
-﻿local expChat = script:FindFirstAncestor("ExpChat")
-local parent = expChat.Parent
-local expChatSharedModule = require(parent.ExpChatShared)
-local sharedFlagsModule = require(parent.SharedFlags)
-local getMessagesStoreModule = require(expChat.Stores.GetMessagesStore)
-local getChannelTabsStoreModule = require(expChat.Stores.GetChannelTabsStore)
-local fFlagExpChatUseChannelTabsStore = sharedFlagsModule.FFlagExpChatUseChannelTabsStore
-local analytics = expChatSharedModule.Analytics
-local fFlagExpChatReportVirtualCommandTelemetry = expChatSharedModule.Flags.FFlagExpChatReportVirtualCommandTelemetry
-local context = expChatSharedModule.context
-local var1 = expChatSharedModule.Logger:new("ExpChat/" .. script.Name)
+﻿local ExpChat = script:FindFirstAncestor("ExpChat")
+local Parent = ExpChat.Parent
+local ExpChatSharedModule = require(Parent.ExpChatShared)
+local GetMessagesStoreModule = require(ExpChat.Stores.GetMessagesStore)
+local GetChannelTabsStoreModule = require(ExpChat.Stores.GetChannelTabsStore)
+local FFlagExpChatUseChannelTabsStore = require(Parent.SharedFlags).FFlagExpChatUseChannelTabsStore
+local Analytics = ExpChatSharedModule.Analytics
+local FFlagExpChatReportVirtualCommandTelemetry = ExpChatSharedModule.Flags.FFlagExpChatReportVirtualCommandTelemetry
+local Context = ExpChatSharedModule.context
+local NewResult = ExpChatSharedModule.Logger:new("ExpChat/" .. script.Name)
 
-return function(p1, p2, p3, p4)
-	-- upvalues: context (ref), var1 (ref), fFlagExpChatReportVirtualCommandTelemetry (ref), analytics (ref), getMessagesStoreModule (ref), fFlagExpChatUseChannelTabsStore (ref), getChannelTabsStoreModule (ref)
-	if not context.translator then
-		var1:warning("context.translator is nil, cannot execute command")
+return function(Text: string, p1, List, p2): boolean --[[ Line: 21 ]]
+	-- upvalues: Context (copy), NewResult (copy), FFlagExpChatReportVirtualCommandTelemetry (copy), Analytics (copy), GetMessagesStoreModule (copy), FFlagExpChatUseChannelTabsStore (copy), GetChannelTabsStoreModule (copy)
+	if not Context.translator then
+		NewResult:warning("context.translator is nil, cannot execute command")
 		
 		return false
 	end
-	for i, v in ipairs(p3) do
-		for i_1, v_1 in ipairs(v.alias) do
-			if p1 == v_1 or string.find(p1, "^" .. v_1 .. "%s") ~= nil then
-				if fFlagExpChatReportVirtualCommandTelemetry then
-					analytics:reportTextChatCommandClientSent(v.name)
+	for _, value in ipairs(List) do
+		for _, alia in ipairs(value.alias) do
+			if Text == alia or string.find(Text, "^" .. alia .. "%s") ~= nil then
+				if FFlagExpChatReportVirtualCommandTelemetry then
+					Analytics:reportTextChatCommandClientSent(value.name)
 				end
-				task.spawn(function()
-					-- upvalues: v (ref), context (copy), p2 (ref), p1 (ref), getMessagesStoreModule (copy), p4 (ref), fFlagExpChatUseChannelTabsStore (copy), getChannelTabsStoreModule (copy)
-					local var2 = v.clientRun(context.store, p2, p1, context)
+				task.spawn(function() --[[ Line: 38 ]]
+					-- upvalues: value (copy), Context (upval), p1 (copy), Text (copy), GetMessagesStoreModule (upval), p2 (copy), FFlagExpChatUseChannelTabsStore (upval), GetChannelTabsStoreModule (upval)
+					local ClientRunResult = value.clientRun(Context.store, p1, Text, Context)
 					
-					if var2 ~= nil then
-						local key = var2.key
-						local joined = nil
+					if ClientRunResult ~= nil then
+						local Key = ClientRunResult.key
+						local FormatByKeyResult = nil
 						
-						if type(key) == "string" and key ~= "" then
-							joined = context.translator:FormatByKey(key, var2.args)
-						elseif type(key) == "table" and #key > 0 then
-							local t = {}
+						if type(Key) == "string" and Key ~= "" then
+							FormatByKeyResult = Context.translator:FormatByKey(Key, ClientRunResult.args)
+						elseif type(Key) == "table" and #Key > 0 then
+							local List = {}
 							
-							for i, v_1 in key do
-								table.insert(t, context.translator:FormatByKey(v_1, var2.args))
+							for _, value1 in Key do
+								table.insert(List, Context.translator:FormatByKey(value1, ClientRunResult.args))
 							end
-							joined = table.concat(t, "\n")
+							FormatByKeyResult = table.concat(List, "\n")
 						end
-						if joined then
-							getMessagesStoreModule(false).addSystemMessage(joined, p4, var2.metadata)
+						if FormatByKeyResult then
+							GetMessagesStoreModule(false).addSystemMessage(FormatByKeyResult, p2, ClientRunResult.metadata)
 							
-							if fFlagExpChatUseChannelTabsStore then
-								getChannelTabsStoreModule(false).markChannelUnread(p4)
+							if FFlagExpChatUseChannelTabsStore then
+								GetChannelTabsStoreModule(false).markChannelUnread(p2)
 							end
 						end
 					end

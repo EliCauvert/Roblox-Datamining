@@ -1,13 +1,14 @@
-﻿local authCommon = script:FindFirstAncestor("AuthCommon")
-local useAdditionalAuditContent = require(authCommon.Stores.AuditContentContext.AuditContentContext).useAdditionalAuditContent
-local getFFlagEnableAuditSystemModule = require(authCommon.Flags.GetFFlagEnableAuditSystem)
+﻿local AuthCommon = script:FindFirstAncestor("AuthCommon")
+local UseAdditionalAuditContentFunction = require(AuthCommon.Stores.AuditContentContext.AuditContentContext).useAdditionalAuditContent
+local GetFFlagEnableAuditSystemModule = require(AuthCommon.Flags.GetFFlagEnableAuditSystem)
 
-return function(p1)
-	-- upvalues: getFFlagEnableAuditSystemModule (ref), useAdditionalAuditContent (ref)
-	if getFFlagEnableAuditSystemModule() then
-		useAdditionalAuditContent(p1.contentKey, p1.value)
+return function(p1) --[[ Line: 21 | Named "RegisterAdditionalAuditContent" ]]
+	-- upvalues: GetFFlagEnableAuditSystemModule (copy), UseAdditionalAuditContentFunction (copy)
+	if GetFFlagEnableAuditSystemModule() then
+		UseAdditionalAuditContentFunction(p1.contentKey, p1.value)
 		
 		return nil
+	else
+		return nil
 	end
-	return nil
 end

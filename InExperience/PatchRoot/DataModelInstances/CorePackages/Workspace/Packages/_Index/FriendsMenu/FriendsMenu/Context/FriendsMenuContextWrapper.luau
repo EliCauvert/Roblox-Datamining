@@ -1,26 +1,26 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent
-local parent_2 = parent_1.Parent
-local var1 = if require(parent_1.Flags.FFlagUpdateInvitesToUsePaginatedFriends) then require(parent.FriendsListContextProvider2) else require(parent.FriendsListContextProvider)
-local inviteCallbackProviderModule = require(parent.InviteCallbackProvider)
-local selectedUsersContextProviderModule = require(parent.SelectedUsersContextProvider)
-local cryoModule = require(parent_2.Cryo)
-local reactModule = require(parent_2.React)
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent
+local Parent2 = Parent1.Parent
+local FriendsListContextProvider2Module = if require(Parent1.Flags.FFlagUpdateInvitesToUsePaginatedFriends) then require(Parent.FriendsListContextProvider2) else require(Parent.FriendsListContextProvider)
+local InviteCallbackProviderModule = require(Parent.InviteCallbackProvider)
+local SelectedUsersContextProviderModule = require(Parent.SelectedUsersContextProvider)
+local CryoModule = require(Parent2.Cryo)
+local ReactModule = require(Parent2.React)
 
-return function(p1)
-	-- upvalues: cryoModule (ref), reactModule (ref), var1 (ref), inviteCallbackProviderModule (ref), selectedUsersContextProviderModule (ref)
-	local excludedFriendsSet = p1.excludedFriendsSet
+return function(p1) --[[ Line: 29 ]]
+	-- upvalues: CryoModule (copy), ReactModule (copy), FriendsListContextProvider2Module (copy), InviteCallbackProviderModule (copy), SelectedUsersContextProviderModule (copy)
+	local ExcludedFriendsSet = p1.excludedFriendsSet
 	
 	if p1.preselectedUsersUnremovable and p1.preselectedUsers then
-		excludedFriendsSet = cryoModule.Dictionary.union(excludedFriendsSet or {}, cryoModule.List.toSet(p1.preselectedUsers))
+		ExcludedFriendsSet = CryoModule.Dictionary.union(ExcludedFriendsSet or {}, CryoModule.List.toSet(p1.preselectedUsers))
 	end
-	return reactModule.createElement(var1, {
-		excludedFriendsSet = excludedFriendsSet,
+	return ReactModule.createElement(FriendsListContextProvider2Module, {
+		excludedFriendsSet = ExcludedFriendsSet,
 		isLoadingCustomParams = p1.isLoadingCustomParams
-	}, reactModule.createElement(inviteCallbackProviderModule, {
+	}, ReactModule.createElement(InviteCallbackProviderModule, {
 		inviteSingleFriend = p1.inviteSingleFriend,
 		inviteMultiFriends = p1.inviteMultiFriends
-	}, reactModule.createElement(selectedUsersContextProviderModule, {
+	}, ReactModule.createElement(SelectedUsersContextProviderModule, {
 		selectionLimit = p1.selectionLimit,
 		preselectedUsers = p1.preselectedUsers,
 		preselectedUsersUnremovable = p1.preselectedUsersUnremovable,

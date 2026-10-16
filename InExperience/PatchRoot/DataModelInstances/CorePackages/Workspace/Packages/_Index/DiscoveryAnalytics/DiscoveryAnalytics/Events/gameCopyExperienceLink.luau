@@ -1,31 +1,32 @@
-﻿local telemetryService = game:GetService("TelemetryService")
-local parent = script:FindFirstAncestor("DiscoveryAnalytics").Parent
-local tModule = require(parent.t)
-local discoveryEventErrorLogger = require(parent.DiscoveryUtils).DiscoveryEventErrorLogger
-local gameCopyExperienceLinkThrottleHundrethsPercent = game:DefineFastInt("GameCopyExperienceLinkThrottleHundrethsPercent", 10000)
-local var1 = tModule.strictInterface({
-	placeId = tModule.string,
-	uid = tModule.string,
-	ctx = tModule.string,
-	stamp = tModule.optional(tModule.string)
+﻿local TelemetryService = game:GetService("TelemetryService")
+local Parent = script:FindFirstAncestor("DiscoveryAnalytics").Parent
+local TModule = require(Parent.t)
+local DiscoveryEventErrorLogger = require(Parent.DiscoveryUtils).DiscoveryEventErrorLogger
+local GameCopyExperienceLinkThrottleHundrethsPercent = game:DefineFastInt("GameCopyExperienceLinkThrottleHundrethsPercent", 10000)
+local StrictInterfaceResult = TModule.strictInterface({
+	placeId = TModule.string,
+	uid = TModule.string,
+	ctx = TModule.string,
+	stamp = TModule.optional(TModule.string),
+	universeId = if require(Parent.SharedFlags).FFlagLuaAppAddUniverseIdToEngagementEvents then TModule.optional(TModule.string) else nil
 })
 
-return function(p1, p2)
-	-- upvalues: var1 (ref), discoveryEventErrorLogger (ref), gameCopyExperienceLinkThrottleHundrethsPercent (ref), telemetryService (ref)
-	local var2, var3 = var1(p1)
+return function(CustomFields, EventContext) --[[ Line: 22 ]]
+	-- upvalues: StrictInterfaceResult (copy), DiscoveryEventErrorLogger (copy), GameCopyExperienceLinkThrottleHundrethsPercent (copy), TelemetryService (copy)
+	local StrictInterfaceResultResult, StrictInterfaceResultResult2 = StrictInterfaceResult(CustomFields)
 	
-	if not var2 then
-		discoveryEventErrorLogger.reportError("GameCopyExperienceLinkInvalidInterface", var3)
+	if not StrictInterfaceResultResult then
+		DiscoveryEventErrorLogger.reportError("GameCopyExperienceLinkInvalidInterface", StrictInterfaceResultResult2)
 	end
-	telemetryService:LogEvent({
+	TelemetryService:LogEvent({
 		eventName = "copyExperienceLink",
 		description = "User has copied an experience link",
 		backends = { "EventIngest" },
-		throttlingPercentage = gameCopyExperienceLinkThrottleHundrethsPercent,
+		throttlingPercentage = GameCopyExperienceLinkThrottleHundrethsPercent,
 		lastUpdated = { 25, 11, 11 }
 	}, {
-		eventContext = p2,
+		eventContext = EventContext,
 		standardizedFields = { "addSessionInfo" },
-		customFields = p1
+		customFields = CustomFields
 	})
 end

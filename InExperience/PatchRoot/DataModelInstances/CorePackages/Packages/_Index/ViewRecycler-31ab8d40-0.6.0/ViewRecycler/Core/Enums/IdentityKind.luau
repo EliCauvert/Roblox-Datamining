@@ -1,1 +1,1 @@
-﻿return table.freeze({ Data = "data", Pinned = "pinned" })
+﻿return (table.freeze({ Data = "data", Pinned = "pinned" }))

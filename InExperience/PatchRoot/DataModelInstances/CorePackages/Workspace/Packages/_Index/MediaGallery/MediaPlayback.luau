@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.MediaPlayback.MediaPlayback)
+﻿return (require(script.Parent.Parent.Parent._Index.MediaPlayback.MediaPlayback))

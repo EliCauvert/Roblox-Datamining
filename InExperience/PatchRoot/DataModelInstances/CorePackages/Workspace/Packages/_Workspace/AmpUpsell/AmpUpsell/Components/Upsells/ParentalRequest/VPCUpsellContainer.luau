@@ -1,261 +1,262 @@
-﻿local ampUpsell = script:FindFirstAncestor("AmpUpsell")
-local parent = ampUpsell.Parent
-local reactModule = require(parent.React)
-local VPCApiProviderModule = require(ampUpsell.Common.VPCApiProvider)
-local ampApiProviderModule = require(ampUpsell.Common.AmpApiProvider)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local vpcConfirmationScreenStrings = require(ampUpsell.Common.LocalizationStrings).vpcConfirmationScreenStrings
-local vpcUpsellGatherEmailStrings = require(ampUpsell.Common.LocalizationStrings).vpcUpsellGatherEmailStrings
+﻿local AmpUpsell = script:FindFirstAncestor("AmpUpsell")
+local Parent = AmpUpsell.Parent
+local ReactModule = require(Parent.React)
+local VPCApiProviderModule = require(AmpUpsell.Common.VPCApiProvider)
+local AmpApiProviderModule = require(AmpUpsell.Common.AmpApiProvider)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local VpcConfirmationScreenStrings = require(AmpUpsell.Common.LocalizationStrings).vpcConfirmationScreenStrings
+local VpcUpsellGatherEmailStrings = require(AmpUpsell.Common.LocalizationStrings).vpcUpsellGatherEmailStrings
 local VPCErrorScreenModule = require(script.Parent.VPCErrorScreen)
 local VPCConfirmationScreenModule = require(script.Parent.VPCConfirmationScreen)
 local VPCNewParentUpsellModule = require(script.Parent.VPCNewParentUpsell)
-local isStringEmail = require(parent.AuthCommon).Utils.isStringEmail
-local appScreensModule = require(ampUpsell.Common.AppScreens)
-local getFStringPrivacyPolicyLinkModule = require(ampUpsell.Flags.GetFStringPrivacyPolicyLink)
-local useNavigation = require(parent.Navigation).useNavigation
-local enumsModule = require(ampUpsell.Common.Enums)
-local actionTypeEnum = enumsModule.ActionTypeEnum
-local VPCStepEnum = enumsModule.VPCStepEnum
-local accessResponseEnum = enumsModule.AccessResponseEnum
-local authAnalyticsModule = require(parent.AuthAnalytics)
-local authMsgShown = authAnalyticsModule.Events.authMsgShown
-local authButtonClick = authAnalyticsModule.Events.authButtonClick
-local authFormInteraction = authAnalyticsModule.Events.authFormInteraction
-local vpcEventConstants = require(ampUpsell.Common.EventConstants).vpcEventConstants
-local useAppPolicy = require(parent.UniversalAppPolicy).useAppPolicy
-local useRoactService = require(parent.RobloxAppHooks).useRoactService
-local argCheckModule = require(parent.ArgCheck)
-local appLinking = require(parent.RoactServiceTags).AppLinking
-local getFFlagEnableExternalBrowserForVPCPrivacyPolicyModule = require(ampUpsell.Flags.GetFFlagEnableExternalBrowserForVPCPrivacyPolicy)
-local roactNetworking = require(parent.RoactServiceTags).RoactNetworking
-local fFlagLuaAppOdpRequestSentToast = require(parent.SharedFlags).FFlagLuaAppOdpRequestSentToast
+local IsStringEmailFunction = require(Parent.AuthCommon).Utils.isStringEmail
+local AppScreensModule = require(AmpUpsell.Common.AppScreens)
+local GetFStringPrivacyPolicyLinkModule = require(AmpUpsell.Flags.GetFStringPrivacyPolicyLink)
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local EnumsModule = require(AmpUpsell.Common.Enums)
+local ActionTypeEnum = EnumsModule.ActionTypeEnum
+local VPCStepEnum = EnumsModule.VPCStepEnum
+local AccessResponseEnum = EnumsModule.AccessResponseEnum
+local AuthAnalyticsModule = require(Parent.AuthAnalytics)
+local AuthMsgShownFunction = AuthAnalyticsModule.Events.authMsgShown
+local AuthButtonClickFunction = AuthAnalyticsModule.Events.authButtonClick
+local AuthFormInteractionFunction = AuthAnalyticsModule.Events.authFormInteraction
+local VpcEventConstants = require(AmpUpsell.Common.EventConstants).vpcEventConstants
+local UseAppPolicyFunction = require(Parent.UniversalAppPolicy).useAppPolicy
+local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
+local ArgCheckModule = require(Parent.ArgCheck)
+local AppLinking = require(Parent.RoactServiceTags).AppLinking
+local GetFFlagEnableExternalBrowserForVPCPrivacyPolicyModule = require(AmpUpsell.Flags.GetFFlagEnableExternalBrowserForVPCPrivacyPolicy)
+local RoactNetworking = require(Parent.RoactServiceTags).RoactNetworking
+local FFlagLuaAppOdpRequestSentToast = require(Parent.SharedFlags).FFlagLuaAppOdpRequestSentToast
 
-return function(p1)
-	-- upvalues: VPCApiProviderModule (ref), ampApiProviderModule (ref), useRoactService (ref), roactNetworking (ref), getFFlagEnableExternalBrowserForVPCPrivacyPolicyModule (ref), useAppPolicy (ref), appLinking (ref), reactModule (ref), actionTypeEnum (ref), VPCStepEnum (ref), useLocalization (ref), vpcUpsellGatherEmailStrings (ref), useNavigation (ref), argCheckModule (ref), getFStringPrivacyPolicyLinkModule (ref), appScreensModule (ref), isStringEmail (ref), fFlagLuaAppOdpRequestSentToast (ref), accessResponseEnum (ref), authMsgShown (ref), vpcEventConstants (ref), VPCConfirmationScreenModule (ref), vpcConfirmationScreenStrings (ref), authButtonClick (ref), VPCNewParentUpsellModule (ref), authFormInteraction (ref), VPCErrorScreenModule (ref)
-	local onCancel = p1.onCancel
-	local onSuccess = p1.onSuccess
-	local var1 = if p1.vpcApiProvider then p1.vpcApiProvider else VPCApiProviderModule
-	local var2 = if p1.ampApiProvider then p1.ampApiProvider else ampApiProviderModule
-	local recourseAction = p1.recourseAction
-	local recourseData = p1.recourseData
-	local var3 = if p1.entryPointEventCtx then p1.entryPointEventCtx else ""
-	local parentConsentTypes = p1.parentConsentTypes
-	local var4 = if p1.disablePortal then p1.disablePortal else false
-	local var5 = if p1.isInExperienceEntry then p1.isInExperienceEntry else false
-	local onRequestSent = p1.onRequestSent
-	local var6 = useRoactService(roactNetworking)
-	local var7 = false
-	local var8 = nil
+return function(p1) --[[ Line: 52 | Named "VPCUpsellContainer" ]]
+	-- upvalues: VPCApiProviderModule (copy), AmpApiProviderModule (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), GetFFlagEnableExternalBrowserForVPCPrivacyPolicyModule (copy), UseAppPolicyFunction (copy), AppLinking (copy), ReactModule (copy), ActionTypeEnum (copy), VPCStepEnum (copy), UseLocalizationFunction (copy), VpcUpsellGatherEmailStrings (copy), UseNavigationFunction (copy), ArgCheckModule (copy), GetFStringPrivacyPolicyLinkModule (copy), AppScreensModule (copy), IsStringEmailFunction (copy), FFlagLuaAppOdpRequestSentToast (copy), AccessResponseEnum (copy), AuthMsgShownFunction (copy), VpcEventConstants (copy), VPCConfirmationScreenModule (copy), VpcConfirmationScreenStrings (copy), AuthButtonClickFunction (copy), VPCNewParentUpsellModule (copy), AuthFormInteractionFunction (copy), VPCErrorScreenModule (copy)
+	local OnCancelFunction = p1.onCancel
+	local OnSuccessFunction = p1.onSuccess
+	local VpcApiProvider = if p1.vpcApiProvider then p1.vpcApiProvider else VPCApiProviderModule
+	local AmpApiProvider = if p1.ampApiProvider then p1.ampApiProvider else AmpApiProviderModule
+	local RecourseAction = p1.recourseAction
+	local RecourseData = p1.recourseData
+	local EntryPointEventCtx = if p1.entryPointEventCtx then p1.entryPointEventCtx else ""
+	local ParentConsentTypes = p1.parentConsentTypes
+	local DisablePortal = if p1.disablePortal then p1.disablePortal else false
+	local IsInExperienceEntry = if p1.isInExperienceEntry then p1.isInExperienceEntry else false
+	local OnRequestSent = p1.onRequestSent
+	local AnalyticsSessionId = p1.analyticsSessionId
+	local UseRoactServiceResult = UseRoactServiceFunction(RoactNetworking)
+	local v1 = false
+	local v2 = nil
 	
-	if getFFlagEnableExternalBrowserForVPCPrivacyPolicyModule() then
-		var7 = useAppPolicy(function(p2)
+	if GetFFlagEnableExternalBrowserForVPCPrivacyPolicyModule() then
+		v1 = UseAppPolicyFunction(function(p2) --[[ Line: 71 ]]
 			return p2.shouldUseExternalBrowserForDisclaimerLinks()
 		end)
-		var8 = useRoactService(appLinking)
+		v2 = UseRoactServiceFunction(AppLinking)
 	end
-	local var9, var10 = reactModule.useState(if recourseAction == actionTypeEnum.ParentLink then VPCStepEnum.NewParentLoading else VPCStepEnum.AlreadyLinkedSendRequest)
-	local unknown, unknown_1 = reactModule.useState("Unknown")
-	local var11, var12 = reactModule.useState({})
-	local var13, var14 = reactModule.useState(true)
-	local var15 = useLocalization(vpcUpsellGatherEmailStrings)
-	local var16, var17 = reactModule.useState(false)
-	local var18, var19 = reactModule.useState("")
-	local var20, var21 = reactModule.useState("")
-	local var22 = useNavigation()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(if RecourseAction == ActionTypeEnum.ParentLink then VPCStepEnum.NewParentLoading else VPCStepEnum.AlreadyLinkedSendRequest)
+	local Unknown, Unknown2 = ReactModule.useState("Unknown")
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState({})
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(true)
+	local UseLocalizationResult = UseLocalizationFunction(VpcUpsellGatherEmailStrings)
+	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(false)
+	local UseStateResult5, UseStateResult2_4 = ReactModule.useState("")
+	local UseStateResult6, UseStateResult2_5 = ReactModule.useState("")
+	local UseNavigationResult = UseNavigationFunction()
 	
-	local function _(p2, p3)
-		-- upvalues: argCheckModule (copy)
-		argCheckModule.isNotNil(p2, "linking")
-		argCheckModule.isType(p3, "string", "url")
+	local function _(p2, p3) --[[ Line: 93 | Named "openExternalBrowser" ]]
+		-- upvalues: ArgCheckModule (upval)
+		ArgCheckModule.isNotNil(p2, "linking")
+		ArgCheckModule.isType(p3, "string", "url")
 		p2:openURL(p3)
 	end
 	
-	local var23 = function()
-		-- upvalues: getFFlagEnableExternalBrowserForVPCPrivacyPolicyModule (copy), var7 (write), var8 (write), getFStringPrivacyPolicyLinkModule (copy), argCheckModule (copy), var22 (ref), appScreensModule (copy), var15 (ref)
-		if getFFlagEnableExternalBrowserForVPCPrivacyPolicyModule() and var7 then
-			local var24 = var8
-			local var25 = getFStringPrivacyPolicyLinkModule()
-			argCheckModule.isNotNil(var24, "linking")
-			argCheckModule.isType(var25, "string", "url")
-			var24:openURL(var25)
+	local function OpenPrivacyPolicyLink() --[[ Line: 100 ]]
+		-- upvalues: GetFFlagEnableExternalBrowserForVPCPrivacyPolicyModule (upval), v1 (ref), v2 (ref), GetFStringPrivacyPolicyLinkModule (upval), ArgCheckModule (upval), UseNavigationResult (copy), AppScreensModule (upval), UseLocalizationResult (copy)
+		if GetFFlagEnableExternalBrowserForVPCPrivacyPolicyModule() and v1 then
+			local v3 = v2
+			local FStringPrivacyPolicyLinkModule = GetFStringPrivacyPolicyLinkModule()
+			ArgCheckModule.isNotNil(v3, "linking")
+			ArgCheckModule.isType(FStringPrivacyPolicyLinkModule, "string", "url")
+			v3:openURL(FStringPrivacyPolicyLinkModule)
 			
 			return
+		else
+			UseNavigationResult.navigate(AppScreensModule.GenericWebPage, {
+				detail = GetFStringPrivacyPolicyLinkModule(),
+				extraProps = {
+					transitionAnimation = "SlideInFromBottom",
+					title = UseLocalizationResult.privacyLinkText
+				}
+			})
 		end
-		var22.navigate(appScreensModule.GenericWebPage, {
-			detail = getFStringPrivacyPolicyLinkModule(),
-			extraProps = {
-				transitionAnimation = "SlideInFromBottom",
-				title = var15.privacyLinkText
-			}
-		})
 	end
 	
-	local function handleEmailInput(p2)
-		-- upvalues: var19 (ref), isStringEmail (copy), var17 (ref), var21 (ref), var15 (ref)
-		var19(p2)
+	local function handleEmailInput(p2) --[[ Line: 114 ]]
+		-- upvalues: UseStateResult2_4 (copy), IsStringEmailFunction (upval), UseStateResult2_3 (copy), UseStateResult2_5 (copy), UseLocalizationResult (copy)
+		UseStateResult2_4(p2)
 		
-		if isStringEmail(p2) then
-			var17(true)
-			var21("")
+		if IsStringEmailFunction(p2) then
+			UseStateResult2_3(true)
+			UseStateResult2_5("")
 			
 			return
 		end
-		var17(false)
+		UseStateResult2_3(false)
 		
 		if p2 == "" then
-			var21("")
+			UseStateResult2_5("")
 			
 			return
-		end
-		var21(var15.errorText)
-	end
-	
-	local var24, var25 = reactModule.useState(0)
-	local onRetryAmp = p1.onRetryAmp
-	
-	local function onRetryVPC()
-		-- upvalues: var25 (ref), var24 (ref), var12 (ref), unknown_1 (ref), var19 (ref), isStringEmail (copy), var17 (ref), var21 (ref), var10 (ref), recourseAction (ref), actionTypeEnum (copy), VPCStepEnum (copy)
-		var25(var24 + 1)
-		var12({})
-		unknown_1("Unknown")
-		var19("")
-		
-		if isStringEmail("") then
-			var17(true)
-			var21("")
 		else
-			var17(false)
-			var21("")
+			UseStateResult2_5(UseLocalizationResult.errorText)
 		end
-		var10(if recourseAction == actionTypeEnum.ParentLink then VPCStepEnum.NewParentCollectEmail else VPCStepEnum.AlreadyLinkedSendRequest)
 	end
 	
-	local function finishSuccessfulRequest(p2)
-		-- upvalues: var10 (ref), VPCStepEnum (copy), fFlagLuaAppOdpRequestSentToast (copy), onRequestSent (ref)
-		var10(VPCStepEnum.RequestSent)
+	local UseStateResult7, UseStateResult2_6 = ReactModule.useState(0)
+	local OnRetryAmpFunction = p1.onRetryAmp
+	
+	local function onRetryVPC() --[[ Line: 132 ]]
+		-- upvalues: UseStateResult2_6 (copy), UseStateResult7 (copy), UseStateResult2_1 (copy), Unknown2 (copy), UseStateResult2_4 (copy), IsStringEmailFunction (upval), UseStateResult2_3 (copy), UseStateResult2_5 (copy), UseStateResult2 (copy), RecourseAction (copy), ActionTypeEnum (upval), VPCStepEnum (upval)
+		UseStateResult2_6(UseStateResult7 + 1)
+		UseStateResult2_1({})
+		Unknown2("Unknown")
+		UseStateResult2_4("")
 		
-		if fFlagLuaAppOdpRequestSentToast and onRequestSent then
-			pcall(onRequestSent, if p2 then p2.sessionId else nil)
+		if IsStringEmailFunction("") then
+			UseStateResult2_3(true)
+			UseStateResult2_5("")
+		else
+			UseStateResult2_3(false)
+			UseStateResult2_5("")
+		end
+		UseStateResult2(if RecourseAction == ActionTypeEnum.ParentLink then VPCStepEnum.NewParentCollectEmail else VPCStepEnum.AlreadyLinkedSendRequest)
+	end
+	
+	local function finishSuccessfulRequest(Result) --[[ Line: 146 ]]
+		-- upvalues: UseStateResult2 (copy), VPCStepEnum (upval), FFlagLuaAppOdpRequestSentToast (upval), OnRequestSent (copy)
+		UseStateResult2(VPCStepEnum.RequestSent)
+		
+		if FFlagLuaAppOdpRequestSentToast and OnRequestSent then
+			pcall(OnRequestSent, if Result then Result.sessionId else nil)
 		end
 	end
 	
-	local function getLinkedParentEmailsAndSendRequestToAllParents()
-		-- upvalues: var1 (ref), var6 (ref), var12 (ref), parentConsentTypes (ref), recourseData (ref), finishSuccessfulRequest (ref), unknown_1 (ref), var10 (ref), VPCStepEnum (copy)
-		var1.getLinkedParentEmails(var6):andThen(function(p2)
-			-- upvalues: var12 (copy)
-			var12(p2.parentEmails)
-		end):catch(function(_) end)
-		var1.sendRequestToAllParents(var6, parentConsentTypes, recourseData):andThen(finishSuccessfulRequest):catch(function(p2)
-			-- upvalues: unknown_1 (copy), var10 (copy), VPCStepEnum (copy)
-			unknown_1(p2.code)
-			var10(VPCStepEnum.Error)
+	local function getLinkedParentEmailsAndSendRequestToAllParents() --[[ Line: 153 ]]
+		-- upvalues: VpcApiProvider (copy), UseRoactServiceResult (copy), UseStateResult2_1 (copy), ParentConsentTypes (copy), RecourseData (copy), AnalyticsSessionId (copy), finishSuccessfulRequest (copy), Unknown2 (copy), UseStateResult2 (copy), VPCStepEnum (upval)
+		VpcApiProvider.getLinkedParentEmails(UseRoactServiceResult):andThen(function(Result) --[[ Line: 156 ]]
+			-- upvalues: UseStateResult2_1 (upval)
+			UseStateResult2_1(Result.parentEmails)
+		end):catch(function(_) --[[ Line: 159 ]] end)
+		VpcApiProvider.sendRequestToAllParents(UseRoactServiceResult, ParentConsentTypes, RecourseData, AnalyticsSessionId):andThen(finishSuccessfulRequest):catch(function(Err) --[[ Line: 164 ]]
+			-- upvalues: Unknown2 (upval), UseStateResult2 (upval), VPCStepEnum (upval)
+			Unknown2(Err.code)
+			UseStateResult2(VPCStepEnum.Error)
 		end)
 	end
 	
-	local _ = function(p2)
-		-- upvalues: var1 (ref), var6 (ref), parentConsentTypes (ref), recourseData (ref), finishSuccessfulRequest (ref), unknown_1 (ref), var10 (ref), VPCStepEnum (copy)
-		var1.sendRequestToNewParent(var6, p2, parentConsentTypes, recourseData):andThen(finishSuccessfulRequest):catch(function(p3)
-			-- upvalues: unknown_1 (copy), var10 (copy), VPCStepEnum (copy)
-			unknown_1(p3.code)
-			var10(VPCStepEnum.Error)
+	local function sendRequestToNewParent(p2) --[[ Line: 170 ]]
+		-- upvalues: VpcApiProvider (copy), UseRoactServiceResult (copy), ParentConsentTypes (copy), RecourseData (copy), AnalyticsSessionId (copy), finishSuccessfulRequest (copy), Unknown2 (copy), UseStateResult2 (copy), VPCStepEnum (upval)
+		VpcApiProvider.sendRequestToNewParent(UseRoactServiceResult, p2, ParentConsentTypes, RecourseData, AnalyticsSessionId):andThen(finishSuccessfulRequest):catch(function(Err) --[[ Line: 174 ]]
+			-- upvalues: Unknown2 (upval), UseStateResult2 (upval), VPCStepEnum (upval)
+			Unknown2(Err.code)
+			UseStateResult2(VPCStepEnum.Error)
 		end)
 	end
 	
-	local function getIsChildSubjectToParentalControls()
-		-- upvalues: var2 (ref), accessResponseEnum (copy), var14 (ref), var10 (ref), VPCStepEnum (copy)
-		local featureAccess = var2.getFeatureAccess({ "IsChildSubjectToParentalControls" })
-		var14(if featureAccess.featureAccessList and featureAccess.featureAccessList[1] then featureAccess.featureAccessList[1].access ~= accessResponseEnum.Denied else true)
-		var10(VPCStepEnum.NewParentCollectEmail)
+	local function getIsChildSubjectToParentalControls() --[[ Line: 180 ]]
+		-- upvalues: AmpApiProvider (copy), AccessResponseEnum (upval), UseStateResult2_2 (copy), UseStateResult2 (copy), VPCStepEnum (upval)
+		local FeatureAccess = AmpApiProvider.getFeatureAccess({ "IsChildSubjectToParentalControls" })
+		UseStateResult2_2(not FeatureAccess.featureAccessList or not FeatureAccess.featureAccessList[1] or FeatureAccess.featureAccessList[1].access ~= AccessResponseEnum.Denied)
+		UseStateResult2(VPCStepEnum.NewParentCollectEmail)
 	end
 	
-	reactModule.useEffect(function()
-		-- upvalues: recourseAction (ref), actionTypeEnum (copy), getLinkedParentEmailsAndSendRequestToAllParents (ref), getIsChildSubjectToParentalControls (ref)
-		if recourseAction == actionTypeEnum.ParentConsent then
+	ReactModule.useEffect(function() --[[ Line: 191 ]]
+		-- upvalues: RecourseAction (copy), ActionTypeEnum (upval), getLinkedParentEmailsAndSendRequestToAllParents (copy), getIsChildSubjectToParentalControls (copy)
+		if RecourseAction == ActionTypeEnum.ParentConsent then
 			getLinkedParentEmailsAndSendRequestToAllParents()
 			
 			return
-		elseif recourseAction == actionTypeEnum.ParentLink then
+		end
+		if RecourseAction == ActionTypeEnum.ParentLink then
 			getIsChildSubjectToParentalControls()
 		end
-	end, { var24 })
+	end, { UseStateResult7 })
 	
-	if var9 == VPCStepEnum.RequestSent then
-		authMsgShown(var3, "", vpcEventConstants.confirmationPageLoadField, "")
+	if UseStateResult == VPCStepEnum.RequestSent then
+		AuthMsgShownFunction(EntryPointEventCtx, "", VpcEventConstants.confirmationPageLoadField, "")
 		
-		return reactModule.createElement(VPCConfirmationScreenModule, {
-			messageStrings = vpcConfirmationScreenStrings,
-			parentEmails = var11,
-			onAck = function()
-				-- upvalues: authButtonClick (copy), var3 (ref), vpcEventConstants (copy), onSuccess (ref)
-				authButtonClick(var3, vpcEventConstants.confirmationPageButton)
-				onSuccess()
+		return ReactModule.createElement(VPCConfirmationScreenModule, {
+			messageStrings = VpcConfirmationScreenStrings,
+			parentEmails = UseStateResult1,
+			onAck = function() --[[ Line: 204 ]]
+				-- upvalues: AuthButtonClickFunction (upval), EntryPointEventCtx (copy), VpcEventConstants (upval), OnSuccessFunction (copy)
+				AuthButtonClickFunction(EntryPointEventCtx, VpcEventConstants.confirmationPageButton)
+				OnSuccessFunction()
 			end,
-			disablePortal = var4,
-			isInExperienceEntry = var5
+			disablePortal = DisablePortal,
+			isInExperienceEntry = IsInExperienceEntry
 		})
-	elseif var9 == VPCStepEnum.NewParentCollectEmail then
-		authMsgShown(var3, "", vpcEventConstants.collectEmailPageLoadField, "")
+	elseif UseStateResult == VPCStepEnum.NewParentCollectEmail then
+		AuthMsgShownFunction(EntryPointEventCtx, "", VpcEventConstants.collectEmailPageLoadField, "")
 		
-		return reactModule.createElement(VPCNewParentUpsellModule, {
-			onCancel = onCancel,
-			onCollectEmailAndSendRequest = function(p2)
-				-- upvalues: authButtonClick (copy), var3 (ref), vpcEventConstants (copy), var12 (ref), var10 (ref), VPCStepEnum (copy), var1 (ref), var6 (ref), parentConsentTypes (ref), recourseData (ref), finishSuccessfulRequest (ref), unknown_1 (ref)
-				authButtonClick(var3, vpcEventConstants.collectEmailPageSubmitButton)
-				var12({ p2 })
-				var10(VPCStepEnum.NewParentSendRequest)
-				var1.sendRequestToNewParent(var6, p2, parentConsentTypes, recourseData):andThen(finishSuccessfulRequest):catch(function(p3)
-					-- upvalues: unknown_1 (copy), var10 (copy), VPCStepEnum (copy)
-					unknown_1(p3.code)
-					var10(VPCStepEnum.Error)
-				end)
+		return ReactModule.createElement(VPCNewParentUpsellModule, {
+			onCancel = OnCancelFunction,
+			onCollectEmailAndSendRequest = function(p2) --[[ Line: 215 ]]
+				-- upvalues: AuthButtonClickFunction (upval), EntryPointEventCtx (copy), VpcEventConstants (upval), UseStateResult2_1 (copy), UseStateResult2 (copy), VPCStepEnum (upval), sendRequestToNewParent (copy)
+				AuthButtonClickFunction(EntryPointEventCtx, VpcEventConstants.collectEmailPageSubmitButton)
+				UseStateResult2_1({ p2 })
+				UseStateResult2(VPCStepEnum.NewParentSendRequest)
+				sendRequestToNewParent(p2)
 			end,
-			onTextChange = function(p2)
-				-- upvalues: authFormInteraction (copy), var3 (ref), vpcEventConstants (copy), handleEmailInput (ref)
-				authFormInteraction(var3, vpcEventConstants.collectEmailPageInteractFormField)
+			onTextChange = function(p2) --[[ Line: 221 ]]
+				-- upvalues: AuthFormInteractionFunction (upval), EntryPointEventCtx (copy), VpcEventConstants (upval), handleEmailInput (copy)
+				AuthFormInteractionFunction(EntryPointEventCtx, VpcEventConstants.collectEmailPageInteractFormField)
 				handleEmailInput(p2)
 			end,
-			canSendRequest = var16,
-			textInput = var18,
-			openPrivacyPolicyLink = var23,
-			errorText = var20,
-			messageStrings = vpcUpsellGatherEmailStrings,
-			isChildSubjectToParentalControls = var13,
-			disablePortal = var4,
-			isInExperienceEntry = var5
+			canSendRequest = UseStateResult4,
+			textInput = UseStateResult5,
+			openPrivacyPolicyLink = OpenPrivacyPolicyLink,
+			errorText = UseStateResult6,
+			messageStrings = VpcUpsellGatherEmailStrings,
+			isChildSubjectToParentalControls = UseStateResult3,
+			disablePortal = DisablePortal,
+			isInExperienceEntry = IsInExperienceEntry
 		})
-	elseif var9 == VPCStepEnum.AlreadyLinkedSendRequest then
+	elseif UseStateResult == VPCStepEnum.AlreadyLinkedSendRequest then
 		return nil
-	elseif var9 == VPCStepEnum.NewParentSendRequest then
+	elseif UseStateResult == VPCStepEnum.NewParentSendRequest then
 		return nil
-	elseif var9 == VPCStepEnum.NewParentLoading then
+	elseif UseStateResult == VPCStepEnum.NewParentLoading then
 		return nil
+	else
+		AuthMsgShownFunction(EntryPointEventCtx, "", VpcEventConstants.errorPageLoadField, Unknown)
+		
+		return ReactModule.createElement(VPCErrorScreenModule, {
+			errorCode = Unknown,
+			onRetryAmp = function() --[[ Line: 244 ]]
+				-- upvalues: AuthButtonClickFunction (upval), EntryPointEventCtx (copy), VpcEventConstants (upval), OnRetryAmpFunction (copy)
+				AuthButtonClickFunction(EntryPointEventCtx, VpcEventConstants.errorPageRetryButton)
+				OnRetryAmpFunction()
+			end,
+			onRetryVPC = function() --[[ Line: 248 ]]
+				-- upvalues: AuthButtonClickFunction (upval), EntryPointEventCtx (copy), VpcEventConstants (upval), onRetryVPC (copy)
+				AuthButtonClickFunction(EntryPointEventCtx, VpcEventConstants.errorPageRetryButton)
+				onRetryVPC()
+			end,
+			onCancel = function() --[[ Line: 252 ]]
+				-- upvalues: AuthButtonClickFunction (upval), EntryPointEventCtx (copy), VpcEventConstants (upval), OnCancelFunction (copy)
+				AuthButtonClickFunction(EntryPointEventCtx, VpcEventConstants.errorPageCancelButton)
+				OnCancelFunction()
+			end,
+			onSuccess = function() --[[ Line: 256 ]]
+				-- upvalues: AuthButtonClickFunction (upval), EntryPointEventCtx (copy), VpcEventConstants (upval), OnSuccessFunction (copy)
+				AuthButtonClickFunction(EntryPointEventCtx, VpcEventConstants.confirmationPageButton)
+				OnSuccessFunction()
+			end,
+			retryNum = UseStateResult7,
+			disablePortal = DisablePortal,
+			isInExperienceEntry = IsInExperienceEntry
+		})
 	end
-	authMsgShown(var3, "", vpcEventConstants.errorPageLoadField, unknown)
-	
-	return reactModule.createElement(VPCErrorScreenModule, {
-		errorCode = unknown,
-		onRetryAmp = function()
-			-- upvalues: authButtonClick (copy), var3 (ref), vpcEventConstants (copy), onRetryAmp (ref)
-			authButtonClick(var3, vpcEventConstants.errorPageRetryButton)
-			onRetryAmp()
-		end,
-		onRetryVPC = function()
-			-- upvalues: authButtonClick (copy), var3 (ref), vpcEventConstants (copy), onRetryVPC (ref)
-			authButtonClick(var3, vpcEventConstants.errorPageRetryButton)
-			onRetryVPC()
-		end,
-		onCancel = function()
-			-- upvalues: authButtonClick (copy), var3 (ref), vpcEventConstants (copy), onCancel (ref)
-			authButtonClick(var3, vpcEventConstants.errorPageCancelButton)
-			onCancel()
-		end,
-		onSuccess = function()
-			-- upvalues: authButtonClick (copy), var3 (ref), vpcEventConstants (copy), onSuccess (ref)
-			authButtonClick(var3, vpcEventConstants.confirmationPageButton)
-			onSuccess()
-		end,
-		retryNum = var24,
-		disablePortal = var4,
-		isInExperienceEntry = var5
-	})
 end

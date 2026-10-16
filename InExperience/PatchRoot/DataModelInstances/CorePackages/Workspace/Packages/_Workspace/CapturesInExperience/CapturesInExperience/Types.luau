@@ -1,6 +1,6 @@
-﻿local parent = script.Parent
-local _ = require(parent.Parent.CapturesCommon)
-local _ = require(parent.Enums.CaptureType)
-local _ = require(parent.Enums.PromptType)
+﻿local Parent = script.Parent
+local _ = require(Parent.Parent.CapturesCommon)
+local _ = require(Parent.Enums.CaptureType)
+local _ = require(Parent.Enums.PromptType)
 
 return {}

@@ -1,130 +1,115 @@
-﻿local parent = script:FindFirstAncestor("SduiSharedContent").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local loadableImage = require(parent.UIBlox).App.Loading.LoadableImage
-local textSizeModule = require(parent.TextSize)
-local signalsReactModule = require(parent.SignalsReact)
-local _ = require(parent.SduiCompat)
-local view = foundationModule.View
-local text = foundationModule.Text
-local button = foundationModule.Button
-local useTokens = foundationModule.Hooks.useTokens
-local useCursor = foundationModule.Hooks.useCursor
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local inputSize = foundationModule.Enums.InputSize
-local cursorType = foundationModule.Enums.CursorType
-local stateLayerAffordance = foundationModule.Enums.StateLayerAffordance
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagFixSduiCardFocusNavScroll = sharedFlagsModule.FFlagFixSduiCardFocusNavScroll
-local fFlagLuaAppConfigureSduiCardImageScaleType = sharedFlagsModule.FFlagLuaAppConfigureSduiCardImageScaleType
-local fFlagSduiCardBackgroundClickable = sharedFlagsModule.FFlagSduiCardBackgroundClickable
+﻿local Parent = script:FindFirstAncestor("SduiSharedContent").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local LoadableImage = require(Parent.UIBlox).App.Loading.LoadableImage
+local TextSizeModule = require(Parent.TextSize)
+local SignalsReactModule = require(Parent.SignalsReact)
+local _ = require(Parent.SduiCompat)
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local Button = FoundationModule.Button
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UseCursorFunction = FoundationModule.Hooks.useCursor
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local InputSize = FoundationModule.Enums.InputSize
+local CursorType = FoundationModule.Enums.CursorType
+local StateLayerAffordance = FoundationModule.Enums.StateLayerAffordance
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagFixSduiCardFocusNavScroll = SharedFlagsModule.FFlagFixSduiCardFocusNavScroll
+local FFlagLuaAppConfigureSduiCardImageScaleType = SharedFlagsModule.FFlagLuaAppConfigureSduiCardImageScaleType
+local FFlagSduiCardBackgroundClickable = SharedFlagsModule.FFlagSduiCardBackgroundClickable
 
-local var1 = function() end
+local function v18() --[[ Line: 35 ]] end
 
-return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), fFlagFixSduiCardFocusNavScroll (ref), useCursor (ref), cursorType (ref), signalsReactModule (ref), textSizeModule (ref), reactModule (ref), view (ref), var1 (ref), fFlagSduiCardBackgroundClickable (ref), stateLayerAffordance (ref), text (ref), button (ref), buttonVariant (ref), inputSize (ref), loadableImage (ref), fFlagLuaAppConfigureSduiCardImageScaleType (ref)
-	local var2 = useTokens()
-	local var3 = if fFlagFixSduiCardFocusNavScroll then useCursor(cursorType.RoundedRect) else nil
-	local size2500 = var2.Size.Size_2500
-	local var4 = signalsReactModule.useSignalState(function(p2)
-		-- upvalues: textSizeModule (copy)
-		return textSizeModule.getTextSizeStore(p2).getTextSizeOffset(p2)
+return ReactModule.memo(function(p1) --[[ Line: 64 | Named "SduiCard" ]]
+	-- upvalues: UseTokensFunction (copy), FFlagFixSduiCardFocusNavScroll (copy), UseCursorFunction (copy), CursorType (copy), SignalsReactModule (copy), TextSizeModule (copy), ReactModule (copy), View (copy), v18 (copy), FFlagSduiCardBackgroundClickable (copy), StateLayerAffordance (copy), Text (copy), Button (copy), ButtonVariant (copy), InputSize (copy), LoadableImage (copy), FFlagLuaAppConfigureSduiCardImageScaleType (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseCursorResult = if FFlagFixSduiCardFocusNavScroll then UseCursorFunction(CursorType.RoundedRect) else nil
+	local Size2500 = UseTokensResult.Size.Size_2500
+	local UseSignalStateResult = SignalsReactModule.useSignalState(function(p2) --[[ Line: 69 ]]
+		-- upvalues: TextSizeModule (upval)
+		return TextSizeModule.getTextSizeStore(p2).getTextSizeOffset(p2)
 	end)
-	local ceiled = nil
+	local Y: number? = nil
 	
 	if p1.descriptionMaxLines and p1.descriptionMaxLines > 0 then
-		local bodyMedium = var2.Typography.BodyMedium
-		ceiled = math.ceil(p1.descriptionMaxLines * (bodyMedium.FontSize + var4) * bodyMedium.LineHeight)
+		local BodyMedium = UseTokensResult.Typography.BodyMedium
+		Y = math.ceil(p1.descriptionMaxLines * (BodyMedium.FontSize + UseSignalStateResult) * BodyMedium.LineHeight)
 	end
-	local var5
-	local var6, var7 = reactModule.useState(0)
-	local var8 = reactModule.useCallback(function(p2)
-		-- upvalues: var7 (ref)
-		var7(p2.AbsoluteSize.Y)
-	end, {})
-	local createElement = reactModule.createElement
-	local t = {
+	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
+	
+	return ReactModule.createElement(View, {
 		tag = "size-full-0 row auto-y stroke-default",
-		backgroundStyle = p1.backgroundStyle or var2.Color.Surface.Surface_100,
-		cornerRadius = p1.cornerRadius or UDim.new(0, var2.Radius.Medium),
-		selection = if fFlagFixSduiCardFocusNavScroll then reactModule.useMemo(function()
-			-- upvalues: var3 (ref), p1 (ref)
+		backgroundStyle = p1.backgroundStyle or UseTokensResult.Color.Surface.Surface_100,
+		cornerRadius = p1.cornerRadius or UDim.new(0, UseTokensResult.Radius.Medium),
+		selection = if FFlagFixSduiCardFocusNavScroll then ReactModule.useMemo(function() --[[ Line: 86 ]]
+			-- upvalues: UseCursorResult (copy), p1 (copy)
 			return {
 				Selectable = true,
-				SelectionImageObject = var3,
+				SelectionImageObject = UseCursorResult,
 				SelectionOrder = p1.selectionOrder
 			}
-		end, { var3, p1.selectionOrder }) else nil,
-		onStateChanged = if fFlagFixSduiCardFocusNavScroll then var1 else nil
-	}
-	
-	if fFlagFixSduiCardFocusNavScroll then
-		local var9
-		if fFlagSduiCardBackgroundClickable then
-			var9 = p1.backgroundOnActivated == nil
-			var9 = nil
-		else
-			var9 = true
-		end
-		var5 = if var9 then { affordance = stateLayerAffordance.None } else nil
-	end
-	t.stateLayer = var5
-	t.onActivated = if fFlagSduiCardBackgroundClickable then p1.backgroundOnActivated else nil
-	t.AnchorPoint = p1.anchorPoint
-	t.LayoutOrder = p1.layoutOrder
-	t.Position = p1.position
-	t.Size = p1.size
-	t.ZIndex = p1.zIndex
-	t.testId = p1.testId
-	
-	return createElement(view, t, {
-		ContentSection = reactModule.createElement(view, {
+		end, { UseCursorResult, p1.selectionOrder }) else nil,
+		onStateChanged = if FFlagFixSduiCardFocusNavScroll then v18 else nil,
+		stateLayer = if FFlagFixSduiCardFocusNavScroll and (not FFlagSduiCardBackgroundClickable or p1.backgroundOnActivated == nil) then { affordance = StateLayerAffordance.None } else nil,
+		onActivated = if FFlagSduiCardBackgroundClickable then p1.backgroundOnActivated else nil,
+		AnchorPoint = p1.anchorPoint,
+		LayoutOrder = p1.layoutOrder,
+		Position = p1.position,
+		Size = p1.size,
+		ZIndex = p1.zIndex,
+		testId = p1.testId
+	}, {
+		ContentSection = ReactModule.createElement(View, {
 			tag = "flex-between size-full-0 auto-y col gap-xsmall padding-top-large padding-bottom-large padding-left-large padding-right-small",
 			LayoutOrder = 1,
-			Size = UDim2.new(UDim.new(1, -size2500), if p1.size then p1.size.Height else UDim.new(0, 0)),
-			onAbsoluteSizeChanged = var8
+			Size = UDim2.new(UDim.new(1, -Size2500), p1.size and p1.size.Height or UDim.new(0, 0)),
+			onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame) --[[ Line: 81 ]]
+				-- upvalues: UseStateResult2 (copy)
+				UseStateResult2(Frame.AbsoluteSize.Y)
+			end, {})
 		}, {
-			TopContent = reactModule.createElement(view, {
+			TopContent = ReactModule.createElement(View, {
 				tag = "col size-full-0 auto-y gap-xsmall",
 				LayoutOrder = 1
 			}, {
-				Title = reactModule.createElement(text, {
+				Title = ReactModule.createElement(Text, {
 					tag = "size-full-0 auto-y text-align-x-left text-wrap text-label-large content-emphasis",
 					LayoutOrder = 1,
 					Text = p1.titleText
 				}),
-				Subtitle = p1.descriptionText and (reactModule.createElement(text, {
+				Subtitle = p1.descriptionText and ReactModule.createElement(Text, {
 					LayoutOrder = 2,
 					Text = p1.descriptionText,
-					fontStyle = var2.Typography.BodyMedium,
-					sizeConstraint = if ceiled then { MaxSize = Vector2.new(1e999, ceiled) } else nil,
+					fontStyle = UseTokensResult.Typography.BodyMedium,
+					sizeConstraint = if Y then { MaxSize = Vector2.new(1e999, Y) } else nil,
 					tag = {
 						["size-full-0 auto-y text-align-x-left text-wrap"] = true,
-						["text-truncate-split"] = if ceiled then true else false
+						["text-truncate-split"] = if Y then true else false
 					}
-				}) or nil)
+				}) or nil
 			}),
-			CTAContainer = if p1.ctaText and p1.ctaOnActivated then reactModule.createElement(view, { tag = "auto-xy padding-top-medium", LayoutOrder = 2 }, {
-				CTAButton = reactModule.createElement(button, {
+			CTAContainer = if p1.ctaText and p1.ctaOnActivated then ReactModule.createElement(View, { tag = "auto-xy padding-top-medium", LayoutOrder = 2 }, {
+				CTAButton = ReactModule.createElement(Button, {
 					text = p1.ctaText,
 					onActivated = p1.ctaOnActivated,
-					variant = p1.ctaVariant or buttonVariant.SoftEmphasis,
-					size = p1.ctaSize or inputSize.Small,
+					variant = p1.ctaVariant or ButtonVariant.SoftEmphasis,
+					size = p1.ctaSize or InputSize.Small,
 					testId = if p1.testId then `{p1.testId}--cta` else nil
 				})
 			}) else nil
 		}),
-		ImageSection = if p1.image then reactModule.createElement(loadableImage, {
+		ImageSection = if p1.image then ReactModule.createElement(LoadableImage, {
 			LayoutOrder = 2,
 			BackgroundTransparency = 1,
 			showFailedStateWhenLoadingFailed = false,
 			useShimmerAnimationWhileLoading = true,
 			Image = p1.image,
-			Size = UDim2.new(0, size2500, 0, var6),
-			ImageColor3 = if p1.imageStyle then p1.imageStyle.Color3 else var2.Color.Content.Emphasis.Color3,
-			ImageTransparency = if p1.imageStyle then p1.imageStyle.Transparency else 0,
-			ScaleType = if fFlagLuaAppConfigureSduiCardImageScaleType then p1.imageScaleType else Enum.ScaleType.Crop,
-			cornerRadius = p1.cornerRadius or UDim.new(0, var2.Radius.Medium)
+			Size = UDim2.new(0, Size2500, 0, UseStateResult),
+			ImageColor3 = p1.imageStyle and p1.imageStyle.Color3 or UseTokensResult.Color.Content.Emphasis.Color3,
+			ImageTransparency = p1.imageStyle and p1.imageStyle.Transparency or 0,
+			ScaleType = FFlagLuaAppConfigureSduiCardImageScaleType and p1.imageScaleType or Enum.ScaleType.Crop,
+			cornerRadius = p1.cornerRadius or UDim.new(0, UseTokensResult.Radius.Medium)
 		}) else nil
 	})
 end)

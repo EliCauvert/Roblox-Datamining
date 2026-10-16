@@ -1,15 +1,16 @@
-﻿local immutableModule = require(script.Parent.Parent.Immutable)
-local debugVisualizationsUpdateSearchFilterModule = require(script.Parent.Parent.Actions.DebugVisualizationsUpdateSearchFilter)
+﻿local ImmutableModule = require(script.Parent.Parent.Immutable)
+local DebugVisualizationsUpdateSearchFilterModule = require(script.Parent.Parent.Actions.DebugVisualizationsUpdateSearchFilter)
 
-return function(p1, p2)
-	-- upvalues: immutableModule (ref), debugVisualizationsUpdateSearchFilterModule (ref)
-	p1 = p1 or {
+return function(p1, p2) --[[ Line: 5 ]]
+	-- upvalues: ImmutableModule (copy), DebugVisualizationsUpdateSearchFilterModule (copy)
+	local P0 = p1 or {
 		debugVisualizationsSearchTerm = "",
 		debugVisualizationsTypeFilters = {}
 	}
+	local DebugVisualizationsTypeFilters = if p2.filterTypes == nil then P0.debugVisualizationsTypeFilters else ImmutableModule.JoinDictionaries(P0.debugVisualizationsTypeFilters, p2.filterTypes)
 	
-	return if p2.type == debugVisualizationsUpdateSearchFilterModule.name then immutableModule.JoinDictionaries(p1, {
+	return if p2.type == DebugVisualizationsUpdateSearchFilterModule.name then ImmutableModule.JoinDictionaries(P0, {
 		debugVisualizationsSearchTerm = p2.searchTerm,
-		debugVisualizationsTypeFilters = if p2.filterTypes == nil then p1.debugVisualizationsTypeFilters else immutableModule.JoinDictionaries(p1.debugVisualizationsTypeFilters, p2.filterTypes)
-	}) else p1
+		debugVisualizationsTypeFilters = DebugVisualizationsTypeFilters
+	}) else P0
 end

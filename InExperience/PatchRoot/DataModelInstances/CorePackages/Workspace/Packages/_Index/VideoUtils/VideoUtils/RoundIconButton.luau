@@ -1,25 +1,25 @@
-﻿local parent = script:FindFirstAncestor("VideoUtils").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local icon = foundationModule.Icon
-local iconSize = foundationModule.Enums.IconSize
-local view = foundationModule.View
-local useTokens = foundationModule.Hooks.useTokens
+﻿local Parent = script:FindFirstAncestor("VideoUtils").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local Icon = FoundationModule.Icon
+local IconSize = FoundationModule.Enums.IconSize
+local View = FoundationModule.View
+local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return function(value)
-	-- upvalues: useTokens (ref), reactModule (ref), view (ref), icon (ref), iconSize (ref)
-	return reactModule.createElement(view, {
+return function(Frame) --[[ Line: 21 | Named "RoundIconButton" ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Icon (copy), IconSize (copy)
+	return ReactModule.createElement(View, {
 		tag = "auto-xy bg-over-media-100 radius-circle padding-medium",
-		AnchorPoint = value.AnchorPoint,
-		Position = value.Position,
-		ZIndex = value.ZIndex,
-		onActivated = value.onActivated,
-		selection = if value.Selectable ~= nil then nil else { Selectable = value.Selectable }
+		AnchorPoint = Frame.AnchorPoint,
+		Position = Frame.Position,
+		ZIndex = Frame.ZIndex,
+		onActivated = Frame.onActivated,
+		selection = if Frame.Selectable == nil then nil else { Selectable = Frame.Selectable }
 	}, {
-		Icon = reactModule.createElement(icon, {
-			name = value.icon,
-			size = iconSize.Medium,
-			style = useTokens().Color.Content.Emphasis
+		Icon = ReactModule.createElement(Icon, {
+			name = Frame.icon,
+			size = IconSize.Medium,
+			style = UseTokensFunction().Color.Content.Emphasis
 		})
 	})
 end

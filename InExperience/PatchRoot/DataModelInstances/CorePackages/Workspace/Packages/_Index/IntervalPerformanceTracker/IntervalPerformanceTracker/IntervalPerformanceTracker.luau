@@ -1,600 +1,599 @@
-﻿local intervalPerformanceTracker = script:FindFirstAncestor("IntervalPerformanceTracker")
-local parent = intervalPerformanceTracker.Parent
-local default = require(parent.LoggingProtocol).default
-local runService = require(parent.MockableProxyServices).RunService
-local name = require(intervalPerformanceTracker.Logger):new(script.Name)
-local intervalPerformanceTrackerTelemetryConfigModule = require(script.Parent.IntervalPerformanceTrackerTelemetryConfig)
+﻿local IntervalPerformanceTracker = script:FindFirstAncestor("IntervalPerformanceTracker")
+local Parent = IntervalPerformanceTracker.Parent
+local Default = require(Parent.LoggingProtocol).default
+local RunService = require(Parent.MockableProxyServices).RunService
+local NewResult = require(IntervalPerformanceTracker.Logger):new(script.Name)
+local IntervalPerformanceTrackerTelemetryConfigModule = require(script.Parent.IntervalPerformanceTrackerTelemetryConfig)
 game:DefineFastFlag("DebugPrintIntervalPerformanceTrackerResults", false)
-local sendFPSStatModule = require(script.Parent.sendFPSStat)
-local sendScrollFrameCountersModule = require(script.Parent.sendScrollFrameCounters)
+local SendFPSStatModule = require(script.Parent.sendFPSStat)
+local SendScrollFrameCountersModule = require(script.Parent.sendScrollFrameCounters)
 local AXFixAverageFPSCasing = game:DefineFastFlag("AXFixAverageFPSCasing", false)
-local AXIntervalPerformanceTrackerFPSStandardDeviation = game:DefineFastFlag("AXIntervalPerformanceTrackerFPSStandardDeviation", false)
 local AXIntervalPerformanceTrackerScrollFrameCounters = game:DefineFastFlag("AXIntervalPerformanceTrackerScrollFrameCounters", false)
-local intervalPerformanceTrackerScrollPositionSamples = game:DefineFastFlag("IntervalPerformanceTrackerScrollPositionSamples", false)
-local var1 = math.random(0, 1000) < require(parent.SharedFlags).GetFIntIntervalPerformanceTrackerEventStream()
-local t = {
+local IntervalPerformanceTrackerScrollPositionSamples = game:DefineFastFlag("IntervalPerformanceTrackerScrollPositionSamples", false)
+local IsRandomValueBelow = math.random(0, 1000) < require(Parent.SharedFlags).GetFIntIntervalPerformanceTrackerEventStream()
+local config = {
 	averageFPS = {
-		reducer = function(p1)
+		reducer = function(p1) --[[ Line: 67 ]]
 			return {
 				framesCount = if p1.framesCount == nil then 0 else p1.framesCount + 1,
 				startTime = p1.startTime or tick()
 			}
 		end,
-		getResult = function(p1)
-			local currentTime = tick()
+		getResult = function(p1) --[[ Line: 73 ]]
+			local CurrentTime = tick()
 			
-			return if p1.framesCount == nil or p1.framesCount == 0 or (p1.startTime == nil or currentTime == p1.startTime) then nil else p1.framesCount / (currentTime - p1.startTime)
+			return if p1.framesCount == nil or p1.framesCount == 0 or p1.startTime == nil or CurrentTime == p1.startTime then nil else p1.framesCount / (CurrentTime - p1.startTime)
 		end
 	},
 	framesCount = {
-		reducer = function(p1)
+		reducer = function(p1) --[[ Line: 88 ]]
 			return {
 				framesCount = if p1.framesCount == nil then 0 else p1.framesCount + 1
 			}
 		end,
-		getResult = function(p1)
+		getResult = function(p1) --[[ Line: 93 ]]
 			return p1.framesCount
 		end
 	},
 	longestFrameTime = {
-		reducer = function(p1)
+		reducer = function(_metricsTrackers) --[[ Line: 98 ]]
 			return {
-				framesCount = if p1.framesCount == nil then 0 else p1.framesCount + 1,
-				longestFrameTime = if p1.longestFrameTime == nil or p1.previousTime == nil then 0 else math.max(p1.longestFrameTime, tick() - p1.previousTime),
+				framesCount = if _metricsTrackers.framesCount == nil then 0 else _metricsTrackers.framesCount + 1,
+				longestFrameTime = if _metricsTrackers.longestFrameTime == nil or _metricsTrackers.previousTime == nil then 0 else math.max(_metricsTrackers.longestFrameTime, tick() - _metricsTrackers.previousTime),
 				previousTime = tick()
 			}
 		end,
-		getResult = function(p1)
-			return if p1.framesCount < 1 then nil else p1.longestFrameTime
+		getResult = function(_metricsTrackers) --[[ Line: 107 ]]
+			return if _metricsTrackers.framesCount < 1 then nil else _metricsTrackers.longestFrameTime
 		end
 	},
 	duration = {
-		reducer = function(p1)
+		reducer = function(p1) --[[ Line: 115 ]]
 			return { startTime = p1.startTime or tick() }
 		end,
-		getResult = function(p1)
+		getResult = function(p1): number --[[ Line: 120 ]]
 			return tick() - p1.startTime
 		end
 	}
 }
 
-if AXIntervalPerformanceTrackerFPSStandardDeviation then
-	t.standardDeviationFPS = {
-		reducer = function(p1)
-			local currentTime = tick()
-			local framesCount = p1.framesCount or 0
-			local sumFPS = p1.sumFPS or 0
-			local sumSquaredFPS = p1.sumSquaredFPS or 0
+if game:DefineFastFlag("AXIntervalPerformanceTrackerFPSStandardDeviation", false) then
+	config.standardDeviationFPS = {
+		reducer = function(p1) --[[ Line: 128 ]]
+			local CurrentTime = tick()
+			local FramesCount = p1.framesCount or 0
+			local SumFPS = p1.sumFPS or 0
+			local SumSquaredFPS = p1.sumSquaredFPS or 0
 			
-			if p1.previousTime ~= nil and p1.previousTime < currentTime then
-				local var2 = 1 / (currentTime - p1.previousTime)
-				framesCount += 1
-				sumFPS += var2
-				sumSquaredFPS += var2 * var2
+			if p1.previousTime ~= nil and p1.previousTime < CurrentTime then
+				local Amount = 1 / (CurrentTime - p1.previousTime)
+				FramesCount += 1
+				SumFPS += Amount
+				SumSquaredFPS += Amount * Amount
 			end
 			return {
-				framesCount = framesCount,
-				previousTime = currentTime,
-				sumFPS = sumFPS,
-				sumSquaredFPS = sumSquaredFPS
+				framesCount = FramesCount,
+				previousTime = CurrentTime,
+				sumFPS = SumFPS,
+				sumSquaredFPS = SumSquaredFPS
 			}
 		end,
-		getResult = function(p1)
+		getResult = function(p1): number? --[[ Line: 148 ]]
 			if p1.framesCount == nil or p1.framesCount < 1 then
 				return nil
+			else
+				local v1 = (p1.sumFPS or 0) / p1.framesCount
+				
+				return (math.sqrt((math.max((p1.sumSquaredFPS or 0) / p1.framesCount - v1 * v1, 0))))
 			end
-			local var2 = (p1.sumFPS or 0) / p1.framesCount
-			
-			return math.sqrt(math.max((p1.sumSquaredFPS or 0) / p1.framesCount - var2 * var2, 0))
 		end
 	}
 end
-local t_1 = {}
-local t_2 = {}
+local AvailableMetricsEnum = {}
+local List = {}
 
-for i, v in t do
-	t_1[i] = i
-	table.insert(t_2, i)
+for i, _ in config do
+	AvailableMetricsEnum[i] = i
+	table.insert(List, i)
 end
-local var2 = if AXIntervalPerformanceTrackerScrollFrameCounters then require(script.Parent.ScrollFrameBands).FRAME_BUCKET_KEYS else {
+local FRAMEBUCKETKEYS = if AXIntervalPerformanceTrackerScrollFrameCounters then require(script.Parent.ScrollFrameBands).FRAME_BUCKET_KEYS else {
 	"under_16", "16_to_16_7", "16_7_to_17_5", "17_5_to_18", "18_to_21", "21_to_25",
 	"over_25"
 }
 local list = { "rawFrameTimesMs", "rawScrollPositionSamplesCsv" }
 
-local function _(p1)
-	return if p1 < 16 then "under_16" elseif p1 < 16.666666666667 then "16_to_16_7" elseif p1 < 17.5 then "16_7_to_17_5" elseif p1 < 18 then "17_5_to_18" elseif p1 < 21 then "18_to_21" elseif p1 < 25 then "21_to_25" else "over_25"
+local function _(p1: number): string --[[ Line: 204 | Named "bucketKeyForFrameTimeMs" ]]
+	return if p1 < 16 then "under_16" elseif p1 < 16.666666666666668 then "16_to_16_7" elseif p1 < 17.5 then "16_7_to_17_5" elseif p1 < 18 then "17_5_to_18" elseif p1 < 21 then "18_to_21" elseif p1 < 25 then "21_to_25" else "over_25"
 end
 
-local _ = function(p1, p2)
-	local p11Count = #p1
-	local ceiled = math.ceil(p2 / 100 * p11Count)
+local _ = function(p1, p2: number) --[[ Line: 223 | Named "percentile" ]]
+	local CountP11 = #p1
+	local Ceiled = math.ceil(p2 / 100 * CountP11)
 	
-	if ceiled < 1 then
-		ceiled = 1
-	elseif p11Count < ceiled then
-		ceiled = p11Count
+	if Ceiled < 1 then
+		Ceiled = 1
+	elseif CountP11 < Ceiled then
+		Ceiled = CountP11
 	end
-	return p1[ceiled]
+	return p1[Ceiled]
 end
 
-v = function(value, p1)
-	local var3 = 10 ^ p1
+local _ = function(p1, p2: number): number --[[ Line: 234 | Named "roundTo" ]]
+	local v1 = 10 ^ p2
 	
-	return math.round(value * var3) / var3
+	return math.round(p1 * v1) / v1
 end
 
-local _ = function(p1, p2, p3)
-	if p2 ~= nil then
-		table.insert(p1, (p3 - p2) * 1000)
+local _ = function(List, p1, p2) --[[ Line: 264 | Named "appendFrameSample" ]]
+	if p1 ~= nil then
+		table.insert(List, (p2 - p1) * 1000)
 	end
 end
 
-local httpService = game:GetService("HttpService")
-t.rawFrameTimesMs = {
-	reducer = function(p1, p2)
-		local frames = p1.frames or {}
-		local previousTime = p1.previousTime
+local HttpService = game:GetService("HttpService")
+config.rawFrameTimesMs = {
+	reducer = function(p1, PreviousTime) --[[ Line: 276 ]]
+		local Frames = p1.frames or {}
+		local PreviousTime1 = p1.previousTime
 		
-		if previousTime ~= nil then
-			table.insert(frames, (p2 - previousTime) * 1000)
+		if PreviousTime1 ~= nil then
+			table.insert(Frames, (PreviousTime - PreviousTime1) * 1000)
 		end
-		return { frames = frames, previousTime = p2 }
+		return { frames = Frames, previousTime = PreviousTime }
 	end,
-	getResult = function(p1)
-		-- upvalues: httpService (ref)
+	getResult = function(p1) --[[ Line: 284 ]]
+		-- upvalues: HttpService (copy)
 		if p1.frames == nil or #p1.frames < 1 then
 			return nil
 		end
-		local t = {}
+		local List = {}
 		
-		for i, v in p1.frames do
-			table.insert(t, math.round(v * 100) / 100)
+		for _, frame in p1.frames do
+			table.insert(List, math.round(frame * 100) / 100)
 		end
-		return httpService:JSONEncode(t)
+		return HttpService:JSONEncode(List)
 	end
 }
 
-if intervalPerformanceTrackerScrollPositionSamples then
-	t.rawScrollPositionSamplesCsv = {
-		reducer = function(p2, p3, p4)
-			local timestampsMs = p2.timestampsMs or {}
-			local positionsY = p2.positionsY or {}
+if IntervalPerformanceTrackerScrollPositionSamples then
+	config.rawScrollPositionSamplesCsv = {
+		reducer = function(p2, p3, p4) --[[ Line: 298 ]]
+			local TimestampsMs = p2.timestampsMs or {}
+			local PositionsY = p2.positionsY or {}
 			
 			if p2.startTime ~= nil and p4 ~= nil then
-				table.insert(timestampsMs, (p3 - p2.startTime) * 1000)
-				table.insert(positionsY, p4)
+				table.insert(TimestampsMs, (p3 - p2.startTime) * 1000)
+				table.insert(PositionsY, p4)
 			end
 			return {
-				timestampsMs = timestampsMs,
-				positionsY = positionsY,
+				timestampsMs = TimestampsMs,
+				positionsY = PositionsY,
 				startTime = p2.startTime or p3
 			}
 		end,
-		getResult = function(p2)
-			-- upvalues: httpService (ref)
-			local timestampsMs = p2.timestampsMs
-			local positionsY = p2.positionsY
+		getResult = function(p2) --[[ Line: 313 ]]
+			-- upvalues: HttpService (copy)
+			local TimestampsMs = p2.timestampsMs
+			local PositionsY = p2.positionsY
 			
-			if timestampsMs == nil or positionsY == nil or #timestampsMs < 1 then
+			if TimestampsMs == nil or PositionsY == nil or #TimestampsMs < 1 then
 				return nil
 			end
-			local list = table.create(#timestampsMs)
+			local Buffer = table.create(#TimestampsMs)
 			
-			for i, v in timestampsMs do
-				list[i] = `{math.round(v * 100) / 100},{math.round(positionsY[i] * 100) / 100}`
+			for i, timestampsM in TimestampsMs do
+				Buffer[i] = `{math.round(timestampsM * 100) / 100},{math.round(PositionsY[i] * 100) / 100}`
 			end
-			return httpService:JSONEncode(table.concat(list, "\n"))
+			return HttpService:JSONEncode(table.concat(Buffer, "\n"))
 		end
 	}
 end
-t.frameTimeAvgMs = {
-	reducer = function(p2, p3)
-		local framesCount = p2.framesCount or 0
-		local sumMs = p2.sumMs or 0
+config.frameTimeAvgMs = {
+	reducer = function(p2, PreviousTime) --[[ Line: 330 ]]
+		local FramesCount = p2.framesCount or 0
+		local SumMs = p2.sumMs or 0
 		
 		if p2.previousTime ~= nil then
-			framesCount += 1
-			sumMs += (p3 - p2.previousTime) * 1000
+			FramesCount += 1
+			SumMs += (PreviousTime - p2.previousTime) * 1000
 		end
 		return {
-			framesCount = framesCount,
-			sumMs = sumMs,
-			previousTime = p3
+			framesCount = FramesCount,
+			sumMs = SumMs,
+			previousTime = PreviousTime
 		}
 	end,
-	getResult = function(p2)
+	getResult = function(p2) --[[ Line: 343 ]]
 		return if p2.framesCount == nil or p2.framesCount < 1 then nil else p2.sumMs / p2.framesCount
 	end
 }
-t.frameTimeStdDevMs = {
-	reducer = function(p2, p3)
-		local framesCount = p2.framesCount or 0
-		local sumMs = p2.sumMs or 0
-		local sumSquaredMs = p2.sumSquaredMs or 0
+config.frameTimeStdDevMs = {
+	reducer = function(p2, PreviousTime) --[[ Line: 353 ]]
+		local FramesCount = p2.framesCount or 0
+		local SumMs = p2.sumMs or 0
+		local SumSquaredMs = p2.sumSquaredMs or 0
 		
 		if p2.previousTime ~= nil then
-			local var3 = (p3 - p2.previousTime) * 1000
-			framesCount += 1
-			sumMs += var3
-			sumSquaredMs += var3 * var3
+			local ScaledPreviousTime = (PreviousTime - p2.previousTime) * 1000
+			FramesCount += 1
+			SumMs += ScaledPreviousTime
+			SumSquaredMs += ScaledPreviousTime * ScaledPreviousTime
 		end
 		return {
-			framesCount = framesCount,
-			sumMs = sumMs,
-			sumSquaredMs = sumSquaredMs,
-			previousTime = p3
+			framesCount = FramesCount,
+			sumMs = SumMs,
+			sumSquaredMs = SumSquaredMs,
+			previousTime = PreviousTime
 		}
 	end,
-	getResult = function(p2)
+	getResult = function(p2): number? --[[ Line: 370 ]]
 		if p2.framesCount == nil or p2.framesCount < 1 then
 			return nil
+		else
+			local SumMsRatio = p2.sumMs / p2.framesCount
+			
+			return (math.sqrt((math.max(p2.sumSquaredMs / p2.framesCount - SumMsRatio * SumMsRatio, 0))))
 		end
-		local var3 = p2.sumMs / p2.framesCount
-		
-		return math.sqrt(math.max(p2.sumSquaredMs / p2.framesCount - var3 * var3, 0))
 	end
 }
-t.frameTimeDistributionMs = {
-	reducer = function(p2, p3)
-		local frames = p2.frames or {}
-		local previousTime = p2.previousTime
+config.frameTimeDistributionMs = {
+	reducer = function(p2, PreviousTime) --[[ Line: 383 ]]
+		local Frames = p2.frames or {}
+		local PreviousTime1 = p2.previousTime
 		
-		if previousTime ~= nil then
-			table.insert(frames, (p3 - previousTime) * 1000)
+		if PreviousTime1 ~= nil then
+			table.insert(Frames, (PreviousTime - PreviousTime1) * 1000)
 		end
-		return { frames = frames, previousTime = p3 }
+		return { frames = Frames, previousTime = PreviousTime }
 	end,
-	getResult = function(p2)
-		-- upvalues: httpService (ref)
+	getResult = function(p2) --[[ Line: 391 ]]
+		-- upvalues: HttpService (copy)
 		if p2.frames == nil or #p2.frames < 1 then
 			return nil
 		end
-		local cloned = table.clone(p2.frames)
-		table.sort(cloned)
-		local t = {}
-		local clonedCount = #cloned
-		local ceiled = math.ceil(clonedCount * 0.5)
+		local Copy = table.clone(p2.frames)
+		table.sort(Copy)
+		local Input = {}
+		local CountCopy = #Copy
+		local Ceiled = math.ceil(CountCopy * 0.5)
 		
-		if ceiled < 1 then
-			ceiled = 1
-		elseif clonedCount < ceiled then
-			ceiled = clonedCount
+		if Ceiled < 1 then
+			Ceiled = 1
+		elseif CountCopy < Ceiled then
+			Ceiled = CountCopy
 		end
-		t.p50 = math.round(cloned[ceiled] * 100) / 100
-		local clonedCount_1 = #cloned
-		local ceiled_1 = math.ceil(clonedCount_1 * 0.95)
+		Input.p50 = math.round(Copy[Ceiled] * 100) / 100
+		local CountCopy1 = #Copy
+		local Ceiled1 = math.ceil(CountCopy1 * 0.95)
 		
-		if ceiled_1 < 1 then
-			ceiled_1 = 1
-		elseif clonedCount_1 < ceiled_1 then
-			ceiled_1 = clonedCount_1
+		if Ceiled1 < 1 then
+			Ceiled1 = 1
+		elseif CountCopy1 < Ceiled1 then
+			Ceiled1 = CountCopy1
 		end
-		t.p95 = math.round(cloned[ceiled_1] * 100) / 100
-		local clonedCount_2 = #cloned
-		local ceiled_2 = math.ceil(clonedCount_2 * 0.99)
+		Input.p95 = math.round(Copy[Ceiled1] * 100) / 100
+		local CountCopy2 = #Copy
+		local Ceiled2 = math.ceil(CountCopy2 * 0.99)
 		
-		if ceiled_2 < 1 then
-			ceiled_2 = 1
-		elseif clonedCount_2 < ceiled_2 then
-			ceiled_2 = clonedCount_2
+		if Ceiled2 < 1 then
+			Ceiled2 = 1
+		elseif CountCopy2 < Ceiled2 then
+			Ceiled2 = CountCopy2
 		end
-		t.p99 = math.round(cloned[ceiled_2] * 100) / 100
+		Input.p99 = math.round(Copy[Ceiled2] * 100) / 100
 		
-		return httpService:JSONEncode(t)
+		return HttpService:JSONEncode(Input)
 	end
 }
-t.frameBuckets = {
-	reducer = function(p2, p3)
-		-- upvalues: var2 (ref)
-		local counts
-		local _ = nil
-		
+config.frameBuckets = {
+	reducer = function(p2, PreviousTime) --[[ Line: 407 ]]
+		-- upvalues: FRAMEBUCKETKEYS (copy)
+		local Counts = nil
 		if p2.counts == nil then
-			counts = {}
+			Counts = {}
 			
-			for i, v in var2 do
-				counts[v] = 0
+			for _, fRAMEBUCKETKEY in FRAMEBUCKETKEYS do
+				Counts[fRAMEBUCKETKEY] = 0
 			end
 		else
-			counts = p2.counts
+			Counts = p2.counts
 		end
 		if p2.previousTime ~= nil then
-			local var3 = (p3 - p2.previousTime) * 1000
-			counts[if var3 < 16 then "under_16" elseif var3 < 16.666666666667 then "16_to_16_7" elseif var3 < 17.5 then "16_7_to_17_5" elseif var3 < 18 then "17_5_to_18" elseif var3 < 21 then "18_to_21" elseif var3 < 25 then "21_to_25" else "over_25"] += 1
+			local ScaledPreviousTime = (PreviousTime - p2.previousTime) * 1000
+			local Under: string = if ScaledPreviousTime < 16 then "under_16" elseif ScaledPreviousTime < 16.666666666666668 then "16_to_16_7" elseif ScaledPreviousTime < 17.5 then "16_7_to_17_5" elseif ScaledPreviousTime < 18 then "17_5_to_18" elseif ScaledPreviousTime < 21 then "18_to_21" elseif ScaledPreviousTime < 25 then "21_to_25" else "over_25"
+			Counts[Under] += 1
 		end
-		return { counts = counts, previousTime = p3 }
+		return { counts = Counts, previousTime = PreviousTime }
 	end,
-	getResult = function(p4)
-		-- upvalues: httpService (ref)
-		return if p4.counts == nil then nil else httpService:JSONEncode(p4.counts)
+	getResult = function(p3) --[[ Line: 427 ]]
+		-- upvalues: HttpService (copy)
+		return if p3.counts == nil then nil else HttpService:JSONEncode(p3.counts)
 	end
 }
 
-for i_1, v_1 in {
+for _, value in {
 	"rawFrameTimesMs",
 	"frameTimeAvgMs",
 	"frameTimeStdDevMs",
 	"frameTimeDistributionMs",
 	"frameBuckets"
 } do
-	t_1[v_1] = v_1
+	AvailableMetricsEnum[value] = value
 end
-if intervalPerformanceTrackerScrollPositionSamples then
-	t_1.rawScrollPositionSamplesCsv = "rawScrollPositionSamplesCsv"
+if IntervalPerformanceTrackerScrollPositionSamples then
+	AvailableMetricsEnum.rawScrollPositionSamplesCsv = "rawScrollPositionSamplesCsv"
 end
-local t_3 = {}
-t_3.__index = t_3
+local Module = {}
+Module.__index = Module
 
-function t_3.new(p4, p5, p6, p7, p8, p9)
-	-- upvalues: t_3 (ref)
-	local t = {
+function Module.new(_timeout, _metricsToTrack, _countersEnabled, _eventStreamEnabled, _extraFields, _scrollFrame) --[[ Line: 462 ]]
+	-- upvalues: Module (copy)
+	local config = {
 		_startTime = nil,
 		_metricsData = {},
-		_timeout = p4,
-		_metricsToTrack = p5,
-		_countersEnabled = p6,
-		_eventStreamEnabled = p7,
-		_extraFields = p8,
-		_scrollFrame = p9
+		_timeout = _timeout,
+		_metricsToTrack = _metricsToTrack,
+		_countersEnabled = _countersEnabled,
+		_eventStreamEnabled = _eventStreamEnabled,
+		_extraFields = _extraFields,
+		_scrollFrame = _scrollFrame
 	}
-	setmetatable(t, t_3)
+	setmetatable(config, Module)
 	
-	return t
+	return config
 end
 
-function t_3:getMetricsToTrack()
-	-- upvalues: t_2 (ref)
-	return if self._metricsToTrack and #self._metricsToTrack > 0 then self._metricsToTrack else t_2
+function Module.getMetricsToTrack(p3) --[[ Line: 484 ]]
+	-- upvalues: List (copy)
+	return if p3._metricsToTrack and #p3._metricsToTrack > 0 then p3._metricsToTrack else List
 end
 
-function t_3:hasReachedTimeout()
-	return if self._timeout == nil or self._startTime == nil then false else self._timeout < tick() - self._startTime
+function Module:hasReachedTimeout(): boolean --[[ Line: 492 ]]
+	return self._timeout ~= nil and self._startTime ~= nil and self._timeout < tick() - self._startTime
 end
 
-function t_3:updateMetrics()
-	-- upvalues: intervalPerformanceTrackerScrollPositionSamples (ref), t (ref)
+function Module:updateMetrics() --[[ Line: 499 ]]
+	-- upvalues: IntervalPerformanceTrackerScrollPositionSamples (copy), config (copy)
 	if self._startTime == nil then
 		self._startTime = tick()
 	end
-	local currentTime = tick()
-	local var4 = if intervalPerformanceTrackerScrollPositionSamples and self._scrollFrame then self._scrollFrame.CanvasPosition.Y else nil
-	
-	for i, v in self:getMetricsToTrack() do
-		local var5 = t[v]
+	local CurrentTime = tick()
+	local Y = if IntervalPerformanceTrackerScrollPositionSamples and self._scrollFrame then self._scrollFrame.CanvasPosition.Y else nil
+	for _, value in self:getMetricsToTrack() do
+		local Entry = config[value]
 		
-		if var5 then
-			if not self._metricsData[v] then
-				self._metricsData[v] = {}
+		if Entry then
+			if not self._metricsData[value] then
+				self._metricsData[value] = {}
 			end
-			self._metricsData[v] = var5.reducer(self._metricsData[v], currentTime, var4)
+			self._metricsData[value] = Entry.reducer(self._metricsData[value], CurrentTime, Y)
 		end
 	end
 end
 
-function t_3:getResult()
-	-- upvalues: t (ref)
-	local t_1 = {}
+function Module:getResult() --[[ Line: 526 ]]
+	-- upvalues: config (copy)
+	local t = {}
 	
-	for i, v in self:getMetricsToTrack() do
-		local var6 = t[v]
+	for _, value in self:getMetricsToTrack() do
+		local Entry = config[value]
 		
-		if var6 then
-			t_1[v] = var6.getResult(self._metricsData[v])
+		if Entry then
+			t[value] = Entry.getResult(self._metricsData[value])
 		end
 	end
-	return t_1
+	return t
 end
 
-local t_4 = {}
-t_4.__index = t_4
+local Module1 = {}
+Module1.__index = Module1
 
-function t_4.DebugPrintIntervalPerformanceTrackerResults()
-	-- upvalues: t (ref), t_1 (ref), t_4 (ref)
-	local t_2 = {
+function Module1.new() --[[ Line: 554 ]]
+	-- upvalues: config (copy), AvailableMetricsEnum (copy), Module1 (copy)
+	local config1 = {
 		_renderSteppedConnection = nil,
-		_metricsTrackers = t,
+		_metricsTrackers = config,
 		_intervals = {},
-		availableMetricsEnum = t_1
+		availableMetricsEnum = AvailableMetricsEnum
 	}
-	setmetatable(t_2, t_4)
+	setmetatable(config1, Module1)
 	
-	return t_2
+	return config1
 end
 
-function t_4:_updateIntervals()
-	for i, v in self._intervals do
-		v:updateMetrics()
+function Module1:_updateIntervals() --[[ Line: 567 ]]
+	for i, interval in self._intervals do
+		interval:updateMetrics()
 		
-		if v:hasReachedTimeout() then
+		if interval:hasReachedTimeout() then
 			self:stopAndLogTracking(i)
 		end
 	end
 end
 
-function t_4:startTracking(p4, p5, p6, p7, p8, p9, p10)
-	-- upvalues: var1 (ref), t_3 (ref), runService (ref)
-	if not var1 then return end
-	if not self._intervals[p4] then
-		local var7 = t_3.new(p5, p6, p7, p8, p9, p10)
-		self._intervals[p4] = var7
-		var7:updateMetrics()
+function Module1:startTracking(p3, Timeout, MetricsToTrack, CountersEnabled, EventStreamEnabled, ExtraFields, ScrollFrame) --[[ Line: 577 ]]
+	-- upvalues: IsRandomValueBelow (copy), Module (copy), RunService (copy)
+	if not IsRandomValueBelow then return end
+	if not self._intervals[p3] then
+		local NewModule = Module.new(Timeout, MetricsToTrack, CountersEnabled, EventStreamEnabled, ExtraFields, ScrollFrame)
+		self._intervals[p3] = NewModule
+		NewModule:updateMetrics()
 	end
 	if not self._renderSteppedConnection then
-		self._renderSteppedConnection = runService.RenderStepped:Connect(function()
-			-- upvalues: self (ref)
+		self._renderSteppedConnection = RunService.RenderStepped:Connect(function() --[[ Line: 601 ]]
+			-- upvalues: self (copy)
 			self:_updateIntervals()
 		end)
 	end
 end
 
-function t_4:_fireStatsTracking(p4)
-	-- upvalues: name (ref), list (ref), intervalPerformanceTrackerScrollPositionSamples (ref), AXFixAverageFPSCasing (ref), sendFPSStatModule (ref), AXIntervalPerformanceTrackerScrollFrameCounters (ref), sendScrollFrameCountersModule (ref)
-	local averageFPS = p4.averageFPS
-	local framesCount = p4.framesCount
-	local longestFrameTime = p4.longestFrameTime
-	local intervalName = p4.intervalName
-	local var7 = self._intervals[intervalName]
+function Module1:_fireStatsTracking(Tbl) --[[ Line: 615 ]]
+	-- upvalues: NewResult (copy), list (copy), IntervalPerformanceTrackerScrollPositionSamples (copy), AXFixAverageFPSCasing (copy), SendFPSStatModule (copy), AXIntervalPerformanceTrackerScrollFrameCounters (copy), SendScrollFrameCountersModule (copy)
+	local AverageFPS = Tbl.averageFPS
+	local FramesCount = Tbl.framesCount
+	local LongestFrameTime = Tbl.longestFrameTime
+	local IntervalName = Tbl.intervalName
+	local Interval = self._intervals[IntervalName]
 	
-	if not var7 then
-		name:warning(`Missing interval {intervalName}`)
+	if not Interval then
+		NewResult:warning(`Missing interval {IntervalName}`)
 		
 		return
 	end
-	local countersEnabled = var7._countersEnabled
-	local eventStreamEnabled = var7._eventStreamEnabled
+	local CountersEnabled = Interval._countersEnabled
+	local EventStreamEnabled = Interval._eventStreamEnabled
 	
-	local function _(p5, p6)
-		return "IntervalPerformanceTracker_" .. p50 .. "_" .. p51
-	end
-	
-	local _ = function()
-		-- upvalues: p4 (ref), list (copy)
-		local cloned = table.clone(p4)
-		
-		for i, v in list do
-			cloned[v] = nil
-		end
-		return cloned
+	local function _(Text, Text1): string --[[ Line: 634 | Named "makeStatName" ]]
+		return "IntervalPerformanceTracker_" .. Text .. "_" .. Text1
 	end
 	
-	if not countersEnabled and not eventStreamEnabled or not intervalName then return end
-	if averageFPS then
-		local var8
-		local text = "IntervalPerformanceTracker_" .. "AverageFPS" .. "_" .. intervalName
+	local _ = function() --[[ Line: 640 | Named "cloneWithoutBulkSamples" ]]
+		-- upvalues: Tbl (copy), list (upval)
+		local Copy = table.clone(Tbl)
 		
-		if intervalPerformanceTrackerScrollPositionSamples then
-			local cloned = table.clone(p4)
-			
-			for i, v in list do
-				cloned[v] = nil
-			end
-			var8 = cloned
-		else
-			var8 = table.clone(p4)
+		for _, value in list do
+			Copy[value] = nil
 		end
-		var8.duration = averageFPS
-		var8.averageFps = if AXFixAverageFPSCasing then averageFPS else nil
-		sendFPSStatModule({
-			statName = text,
-			eventStreamName = intervalName,
-			metaData = var8,
-			interval = averageFPS,
-			excludeCounters = not countersEnabled,
-			excludeEventStream = not eventStreamEnabled
+		return Copy
+	end
+	
+	if not CountersEnabled and not EventStreamEnabled or not IntervalName then return end
+	if AverageFPS then
+		local Text = "IntervalPerformanceTracker_" .. "AverageFPS" .. "_" .. IntervalName
+		local Copy1 = nil
+		
+		if IntervalPerformanceTrackerScrollPositionSamples then
+			local Copy = table.clone(Tbl)
+			
+			for _, value in list do
+				Copy[value] = nil
+			end
+			Copy1 = Copy
+		else
+			Copy1 = table.clone(Tbl)
+		end
+		Copy1.duration = AverageFPS
+		Copy1.averageFps = if AXFixAverageFPSCasing then AverageFPS else nil
+		SendFPSStatModule({
+			statName = Text,
+			eventStreamName = IntervalName,
+			metaData = Copy1,
+			interval = AverageFPS,
+			excludeCounters = not CountersEnabled,
+			excludeEventStream = not EventStreamEnabled
 		})
 	end
-	if framesCount and countersEnabled then
-		local var9
-		local text = "IntervalPerformanceTracker_" .. "FramesCount" .. "_" .. intervalName
+	if FramesCount and CountersEnabled then
+		local Text = "IntervalPerformanceTracker_" .. "FramesCount" .. "_" .. IntervalName
+		local Copy2 = nil
 		
-		if intervalPerformanceTrackerScrollPositionSamples then
-			local cloned = table.clone(p4)
+		if IntervalPerformanceTrackerScrollPositionSamples then
+			local Copy = table.clone(Tbl)
 			
-			for i, v in list do
-				cloned[v] = nil
+			for _, value1 in list do
+				Copy[value1] = nil
 			end
-			var9 = cloned
+			Copy2 = Copy
 		else
-			var9 = table.clone(p4)
+			Copy2 = table.clone(Tbl)
 		end
-		var9.duration = framesCount
-		sendFPSStatModule({
-			statName = text,
-			metaData = var9,
-			interval = framesCount
+		Copy2.duration = FramesCount
+		SendFPSStatModule({
+			statName = Text,
+			metaData = Copy2,
+			interval = FramesCount
 		})
 	end
-	if longestFrameTime and var7._countersEnabled then
-		local var10
-		local text = "IntervalPerformanceTracker_" .. "LongestFrameTime" .. "_" .. intervalName
+	if LongestFrameTime and Interval._countersEnabled then
+		local Text = "IntervalPerformanceTracker_" .. "LongestFrameTime" .. "_" .. IntervalName
+		local Copy3 = nil
 		
-		if intervalPerformanceTrackerScrollPositionSamples then
-			local cloned = table.clone(p4)
+		if IntervalPerformanceTrackerScrollPositionSamples then
+			local Copy = table.clone(Tbl)
 			
-			for i, v in list do
-				cloned[v] = nil
+			for _, value2 in list do
+				Copy[value2] = nil
 			end
-			var10 = cloned
+			Copy3 = Copy
 		else
-			var10 = table.clone(p4)
+			Copy3 = table.clone(Tbl)
 		end
-		var10.duration = longestFrameTime
-		sendFPSStatModule({
-			statName = text,
-			metaData = var10,
-			interval = longestFrameTime
+		Copy3.duration = LongestFrameTime
+		SendFPSStatModule({
+			statName = Text,
+			metaData = Copy3,
+			interval = LongestFrameTime
 		})
 	end
-	if AXIntervalPerformanceTrackerScrollFrameCounters and countersEnabled then
-		local frameBuckets = p4.frameBuckets
+	if AXIntervalPerformanceTrackerScrollFrameCounters and CountersEnabled then
+		local FrameBuckets = Tbl.frameBuckets
 		
-		if frameBuckets then
-			sendScrollFrameCountersModule({
-				intervalName = intervalName,
-				scrollType = p4.scroll_type,
-				frameBucketsJson = frameBuckets
+		if FrameBuckets then
+			SendScrollFrameCountersModule({
+				intervalName = IntervalName,
+				scrollType = Tbl.scroll_type,
+				frameBucketsJson = FrameBuckets
 			})
 		end
 	end
 end
 
-function t_4:stopAndLogTracking(p5)
-	-- upvalues: var1 (ref), default (ref), intervalPerformanceTrackerTelemetryConfigModule (ref)
-	if not var1 then return end
-	local var11 = self._intervals[p5]
+function Module1:stopAndLogTracking(IntervalName) --[[ Line: 718 ]]
+	-- upvalues: IsRandomValueBelow (copy), Default (copy), IntervalPerformanceTrackerTelemetryConfigModule (copy)
+	if not IsRandomValueBelow then return end
+	local Interval = self._intervals[IntervalName]
 	
-	if var11 then
-		local result = var11:getResult()
-		local t = { intervalName = p5 }
+	if Interval then
+		local Result = Interval:getResult()
+		local config = { intervalName = IntervalName }
 		
-		if var11._extraFields then
-			for i, v in var11._extraFields do
-				t[i] = v
+		if Interval._extraFields then
+			for i, extraField in Interval._extraFields do
+				config[i] = extraField
 			end
 		end
-		local var12 = 0
+		local Count = 0
 		
-		for i, v in result do
-			if v ~= nil then
-				var12 += 1
+		for i1, value in Result do
+			if value ~= nil then
+				Count += 1
 			end
-			t[i] = v
+			config[i1] = value
 		end
-		if var12 > 0 then
-			default:logRobloxTelemetryEvent(intervalPerformanceTrackerTelemetryConfigModule, nil, t)
+		if Count > 0 then
+			Default:logRobloxTelemetryEvent(IntervalPerformanceTrackerTelemetryConfigModule, nil, config)
 			
 			if game:GetFastFlag("DebugPrintIntervalPerformanceTrackerResults") then
-				print("IntervalPerformanceTracker:" .. tostring(p5) .. " logged with results:")
+				print("IntervalPerformanceTracker:" .. tostring(IntervalName) .. " logged with results:")
 				
-				for i_1, v_1 in t do
-					print("\t" .. tostring(i_1) .. " = " .. tostring(v_1))
+				for i2, value1 in config do
+					print("\t" .. tostring(i2) .. " = " .. tostring(value1))
 				end
 			end
 		end
-		self:_fireStatsTracking(t)
-		self._intervals[p5] = nil
+		self:_fireStatsTracking(config)
+		self._intervals[IntervalName] = nil
 	end
 	self:disconnectUnusedRenderStepped()
 end
 
-function t_4:cancelTracking(p6)
-	-- upvalues: var1 (ref)
-	if var1 then
-		self._intervals[p6] = nil
+function Module1:cancelTracking(p3) --[[ Line: 770 ]]
+	-- upvalues: IsRandomValueBelow (copy)
+	if IsRandomValueBelow then
+		self._intervals[p3] = nil
 		self:disconnectUnusedRenderStepped()
 		
 		return
 	end
 end
 
-function t_4:disconnectUnusedRenderStepped()
+function Module1:disconnectUnusedRenderStepped() --[[ Line: 780 ]]
 	if not next(self._intervals) and self._renderSteppedConnection then
 		self._renderSteppedConnection:Disconnect()
 		self._renderSteppedConnection = nil
 	end
 end
 
-t_4.class = t_4
+Module1.class = Module1
 
-return t_4.new()
+return Module1.new()

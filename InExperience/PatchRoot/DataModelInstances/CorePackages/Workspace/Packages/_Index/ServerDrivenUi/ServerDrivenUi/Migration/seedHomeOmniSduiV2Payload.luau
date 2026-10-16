@@ -1,18 +1,18 @@
-﻿local serverDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
-local parent = serverDrivenUi.Parent
-local sduiSharedUtilitiesModule = require(parent.SduiSharedUtilities)
-local getSduiApiStore = sduiSharedUtilitiesModule.getSduiApiStore
-local sduiLoadTimer = sduiSharedUtilitiesModule.SduiLoadTimer
-local sduiV2OmniFeedConstantsModule = require(serverDrivenUi.Migration.SduiV2OmniFeedConstants)
+﻿local ServerDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
+local Parent = ServerDrivenUi.Parent
+local SduiSharedUtilitiesModule = require(Parent.SduiSharedUtilities)
+local GetSduiApiStoreFunction = SduiSharedUtilitiesModule.getSduiApiStore
+local SduiLoadTimer = SduiSharedUtilitiesModule.SduiLoadTimer
+local SduiV2OmniFeedConstantsModule = require(ServerDrivenUi.Migration.SduiV2OmniFeedConstants)
 
-return function(p1, p2, p3)
-	-- upvalues: sduiLoadTimer (ref), parent (ref), getSduiApiStore (ref), sduiV2OmniFeedConstantsModule (ref)
-	local homePageResponse = require(parent.ServiceContractsProto).apppageplatform.home.home_page.HomePageResponse
-	getSduiApiStore().seedFromDecodedResponse({
-		surfaceKey = p2,
-		configKey = sduiV2OmniFeedConstantsModule.HomeConfigKey,
-		decodedResponse = homePageResponse.jsonDecode(p1),
-		loadTimer = p3 or sduiLoadTimer.createLoadTimer(p2),
-		apiProto = homePageResponse
+return function(p1, SurfaceKey, p2) --[[ Line: 11 | Named "seedHomeOmniSduiV2Payload" ]]
+	-- upvalues: SduiLoadTimer (copy), Parent (copy), GetSduiApiStoreFunction (copy), SduiV2OmniFeedConstantsModule (copy)
+	local HomePageResponse = require(Parent.ServiceContractsProto).apppageplatform.home.home_page.HomePageResponse
+	GetSduiApiStoreFunction().seedFromDecodedResponse({
+		surfaceKey = SurfaceKey,
+		configKey = SduiV2OmniFeedConstantsModule.HomeConfigKey,
+		decodedResponse = HomePageResponse.jsonDecode(p1),
+		loadTimer = p2 or SduiLoadTimer.createLoadTimer(SurfaceKey),
+		apiProto = HomePageResponse
 	})
 end

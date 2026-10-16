@@ -1,3 +1,3 @@
-﻿return function(p1)
-	return if p1 == nil then 0 else utf8.len(p1) or p1:len()
+﻿return function(Text): number --[[ Line: 1 | Named "getCodePointLength" ]]
+	return if Text == nil then 0 else utf8.len(Text) or Text:len()
 end

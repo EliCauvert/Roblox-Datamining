@@ -1,70 +1,70 @@
-﻿local createSignal = require(script:FindFirstAncestor("ExpChat").Parent.Signals).createSignal
+﻿local CreateSignalFunction = require(script:FindFirstAncestor("ExpChat").Parent.Signals).createSignal
 
-local function findFirstChildByNameAndClass(p1, p2, p3)
-	if not p1 then
+local function findFirstChildByNameAndClass(Ter, Name, ClassName) --[[ Line: 20 ]]
+	if not Ter then
 		return nil
 	end
-	for i, v in ipairs(p1:GetChildren()) do
-		if v.Name == p2 and v:IsA(p3) then
-			return v
+	for _, child in ipairs(Ter:GetChildren()) do
+		if child.Name == Name and child:IsA(ClassName) then
+			return child
 		end
 	end
 	return nil
 end
 
-return function()
-	-- upvalues: createSignal (ref), findFirstChildByNameAndClass (ref)
+return function() --[[ Line: 32 | Named "createAdorneeStore" ]]
+	-- upvalues: CreateSignalFunction (copy), findFirstChildByNameAndClass (copy)
 	local t = {}
 	
-	local function _(p4)
-		return tostring(p4)
+	local function _(p1): string --[[ Line: 37 | Named "getKey" ]]
+		return (tostring(p1))
 	end
 	
 	return {
-		getAdornee = function(p4)
-			-- upvalues: t (ref), createSignal (copy)
-			local var1 = tostring(p4)
+		getAdornee = function(p1) --[[ Line: 41 ]]
+			-- upvalues: t (copy), CreateSignalFunction (upval)
+			local Text = tostring(p1)
 			
-			if not t[var1] then
-				local var2, var3 = createSignal(nil)
-				t[var1] = { getter = var2, setter = var3 }
+			if not t[Text] then
+				local Signal, Signal2 = CreateSignalFunction(nil)
+				t[Text] = { getter = Signal, setter = Signal2 }
 			end
-			return t[var1].getter
+			return t[Text].getter
 		end,
-		handleAdorneeAdded = function(p4, p5, p6)
-			-- upvalues: findFirstChildByNameAndClass (copy), t (ref), createSignal (copy)
-			local var1 = tostring(p4)
-			local var2 = if p6.Health == 0 then findFirstChildByNameAndClass(p5, "Head", "BasePart") else p5
+		handleAdorneeAdded = function(p1, p2, Humanoid) --[[ Line: 50 ]]
+			-- upvalues: findFirstChildByNameAndClass (upval), t (copy), CreateSignalFunction (upval)
+			local Text = tostring(p1)
+			local Head = findFirstChildByNameAndClass(p2, "Head", "BasePart")
+			local Head1 = if Humanoid.Health == 0 then Head else p2
 			
-			if not t[var1] then
-				local var3 = tostring(p4)
+			if not t[Text] then
+				local Text1 = tostring(p1)
 				
-				if not t[var3] then
-					local var4, var5 = createSignal(nil)
-					t[var3] = { getter = var4, setter = var5 }
+				if not t[Text1] then
+					local Signal, Signal2 = CreateSignalFunction(nil)
+					t[Text1] = { getter = Signal, setter = Signal2 }
 				end
-				local _ = t[var3].getter
+				local _ = t[Text1].getter
 			end
-			t[var1].setter(var2)
+			t[Text].setter(Head1)
 		end,
-		handleHumanoidDied = function(p4)
-			-- upvalues: t (ref), findFirstChildByNameAndClass (copy)
-			local var1 = tostring(p4)
-			local _ = nil
+		handleHumanoidDied = function(p1) --[[ Line: 61 ]]
+			-- upvalues: t (copy), findFirstChildByNameAndClass (upval)
+			local Text = tostring(p1)
 			
-			if t[var1] then
-				local ter = t[var1].getter(false)
-				t[var1].setter(if ter then findFirstChildByNameAndClass(ter, "Head", "BasePart") or ter else nil)
+			if t[Text] then
+				local Ter = t[Text].getter(false)
+				t[Text].setter(if Ter then findFirstChildByNameAndClass(Ter, "Head", "BasePart") or Ter else nil)
 			end
 		end,
-		handlePlayerRemoved = function(p4)
-			-- upvalues: t (ref)
-			local var1 = tostring(p4)
+		handlePlayerRemoved = function(p1) --[[ Line: 77 ]]
+			-- upvalues: t (copy)
+			local Text = tostring(p1)
 			
-			if t[var1] then
-				t[var1].setter(nil)
+			if t[Text] then
+				t[Text].setter(nil)
 			end
-			t[var1] = nil
+			t[Text] = nil
 		end
 	}
 end

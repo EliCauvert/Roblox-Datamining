@@ -1,36 +1,36 @@
-﻿local fFlagDevConsoleKeyCollisionFixModule = require(script.Parent.Flags.FFlagDevConsoleKeyCollisionFix)
-local signalModule = require(script.Parent.Parent.Parent.Signal)
-local soundService = game:GetService("SoundService")
-local textService = game:GetService("TextService")
-local meshContentProviderService = game:GetService("MeshContentProvider")
-local keyframeSequenceProviderService = game:GetService("KeyframeSequenceProvider")
-local statsService = game:GetService("Stats")
-local statsUtilsModule = require(script.Parent.Parent.Parent.Parent.Stats.StatsUtils)
-local circularBufferModule = require(script.Parent.Parent.Parent.CircularBuffer)
-local chartHeaderNames = require(script.Parent.Parent.Parent.Constants).MemoryFormatting.ChartHeaderNames
-local var1 = tonumber(settings():GetFVariable("NewDevConsoleMaxGraphCount"))
-local t = {
-	[chartHeaderNames[1]] = function(p1, p2)
+﻿local FFlagDevConsoleKeyCollisionFixModule = require(script.Parent.Flags.FFlagDevConsoleKeyCollisionFix)
+local SignalModule = require(script.Parent.Parent.Parent.Signal)
+local SoundService = game:GetService("SoundService")
+local TextService = game:GetService("TextService")
+local MeshContentProvider = game:GetService("MeshContentProvider")
+local KeyframeSequenceProvider = game:GetService("KeyframeSequenceProvider")
+local StatsService = game:GetService("Stats")
+local StatsUtilsModule = require(script.Parent.Parent.Parent.Parent.Stats.StatsUtils)
+local CircularBufferModule = require(script.Parent.Parent.Parent.CircularBuffer)
+local ChartHeaderNames = require(script.Parent.Parent.Parent.Constants).MemoryFormatting.ChartHeaderNames
+local Number: number? = tonumber(settings():GetFVariable("NewDevConsoleMaxGraphCount"))
+local config = {
+	[ChartHeaderNames[1]] = function(p1, p2): boolean --[[ Line: 24 ]]
 		return p1.name < p2.name
 	end,
-	[chartHeaderNames[2]] = function(p1, p2)
+	[ChartHeaderNames[2]] = function(p1, p2): boolean --[[ Line: 27 ]]
 		return p1.dataStats.dataSet:back().data < p2.dataStats.dataSet:back().data
 	end
 }
-local t_1 = {}
-t_1.__index = t_1
+local ClientMemoryDataModule = {}
+ClientMemoryDataModule.__index = ClientMemoryDataModule
 
-function t_1.new()
-	-- upvalues: t_1 (ref), signalModule (ref), chartHeaderNames (ref)
+function ClientMemoryDataModule.new() --[[ Line: 35 ]]
+	-- upvalues: ClientMemoryDataModule (copy), SignalModule (copy), ChartHeaderNames (copy)
 	local t = {}
-	setmetatable(t, t_1)
+	setmetatable(t, ClientMemoryDataModule)
 	t._pollingId = 0
 	t._totalMemory = 0
 	t._memoryData = {}
 	t._memoryDataSorted = {}
-	t._treeViewUpdatedSignal = signalModule.new()
-	t._totalMemoryUpdated = signalModule.new()
-	t._sortType = chartHeaderNames[1]
+	t._treeViewUpdatedSignal = SignalModule.new()
+	t._totalMemoryUpdated = SignalModule.new()
+	t._sortType = ChartHeaderNames[1]
 	t._isRunning = false
 	t._doGranularMemUpdate = {}
 	t._granularMemTable = {}
@@ -38,254 +38,243 @@ function t_1.new()
 	return t
 end
 
-local function _()
-	-- upvalues: statsService (ref), statsUtilsModule (ref)
-	local performanceStats = statsService and statsService:FindFirstChild("PerformanceStats")
+local function _() --[[ Line: 54 | Named "GetMemoryPerformanceStatsItem" ]]
+	-- upvalues: StatsService (copy), StatsUtilsModule (copy)
+	local PerformanceStats = StatsService and StatsService:FindFirstChild("PerformanceStats")
 	
-	return if performanceStats then performanceStats:FindFirstChild(statsUtilsModule.StatNames[statsUtilsModule.StatType_Memory]) else nil
+	return if PerformanceStats then PerformanceStats:FindFirstChild(StatsUtilsModule.StatNames[StatsUtilsModule.StatType_Memory]) else nil
 end
 
-local function fetchSoundMemoryData()
-	-- upvalues: soundService (ref)
-	local t = {}
+local function fetchSoundMemoryData() --[[ Line: 65 ]]
+	-- upvalues: SoundService (copy)
+	local List = {}
 	
-	for i, v in pairs(soundService:GetSoundMemoryData()) do
-		table.insert(t, { name = i, value = v })
+	for Name, Value in pairs((SoundService:GetSoundMemoryData())) do
+		table.insert(List, { name = Name, value = Value })
 	end
-	table.sort(t, function(p1, p2)
-		return p2.value < p1.value
+	table.sort(List, function(A, B): boolean --[[ Line: 79 ]]
+		return B.value < A.value
 	end)
 	
-	return t
+	return List
 end
 
-local function fetchGraphicsTextureMemoryData()
-	-- upvalues: statsService (ref)
-	local nonHumanoidPaginatedMemoryByTexture = statsService:GetPaginatedMemoryByTexture(Enum.TextureQueryType.NonHumanoid, 0, 100)
-	local nonHumanoidOrphanedPaginatedMemoryByTexture = statsService:GetPaginatedMemoryByTexture(Enum.TextureQueryType.NonHumanoidOrphaned, 0, 100)
-	local t = {}
+local function fetchGraphicsTextureMemoryData() --[[ Line: 86 ]]
+	-- upvalues: StatsService (copy)
+	local PaginatedMemoryByTexture = StatsService:GetPaginatedMemoryByTexture(Enum.TextureQueryType.NonHumanoidOrphaned, 0, 100)
+	local List = {}
 	
-	local function aggregateData(p1, p2)
-		for i, v in ipairs(p2.Results) do
-			table.insert(p1, { name = v.TextureId, value = v.MemoryInBytes / 1048576 })
+	local function aggregateData(List, PaginatedMemoryByTexture) --[[ Line: 91 ]]
+		for _, result in ipairs(PaginatedMemoryByTexture.Results) do
+			table.insert(List, {
+				name = result.TextureId,
+				value = result.MemoryInBytes / 1048576
+			})
 		end
 	end
 	
-	aggregateData(t, nonHumanoidPaginatedMemoryByTexture)
-	aggregateData(t, nonHumanoidOrphanedPaginatedMemoryByTexture)
-	table.sort(t, function(p3, p4)
-		return p4.value < p3.value
+	aggregateData(List, (StatsService:GetPaginatedMemoryByTexture(Enum.TextureQueryType.NonHumanoid, 0, 100)))
+	aggregateData(List, PaginatedMemoryByTexture)
+	table.sort(List, function(A, B): boolean --[[ Line: 104 ]]
+		return B.value < A.value
 	end)
 	
-	return t
+	return List
 end
 
-local function fetchGraphicsTextureCharacterMemoryData()
-	-- upvalues: statsService (ref), fFlagDevConsoleKeyCollisionFixModule (ref)
-	local humanoidPaginatedMemoryByTexture = statsService:GetPaginatedMemoryByTexture(Enum.TextureQueryType.Humanoid, 0, 100)
-	local humanoidOrphanedPaginatedMemoryByTexture = statsService:GetPaginatedMemoryByTexture(Enum.TextureQueryType.HumanoidOrphaned, 0, 100)
+local function fetchGraphicsTextureCharacterMemoryData() --[[ Line: 110 ]]
+	-- upvalues: StatsService (copy), FFlagDevConsoleKeyCollisionFixModule (copy)
+	local PaginatedMemoryByTexture = StatsService:GetPaginatedMemoryByTexture(Enum.TextureQueryType.HumanoidOrphaned, 0, 100)
 	local t = {}
 	
-	local function aggregateData(p1, p2)
-		-- upvalues: fFlagDevConsoleKeyCollisionFixModule (copy)
-		for i, v in ipairs(p2.Results) do
-			local var2 = v.MemoryInBytes / 1048576
+	local function aggregateData(List, PaginatedMemoryByTexture) --[[ Line: 115 ]]
+		-- upvalues: FFlagDevConsoleKeyCollisionFixModule (upval)
+		for _, result in ipairs(PaginatedMemoryByTexture.Results) do
+			local MemoryInBytesRatio = result.MemoryInBytes / 1048576
+			local MoreInfo = {}
+			local List1 = {}
+			
+			for _, value in pairs(string.split(result.TextureId, " ")) do
+				if string.sub(value, 1, 2) == "T[" then
+					table.insert(List1, value)
+				end
+			end
 			local t = {}
-			local t_1 = {}
 			
-			for i_1, v_1 in pairs(string.split(v.TextureId, " ")) do
-				if string.sub(v_1, 1, 2) == "T[" then
-					table.insert(t_1, v_1)
-				end
-			end
-			local _ = ""
-			local t_2 = {}
-			
-			for i_2, v_2 in pairs(t_1) do
-				local var3 = string.split(v_2, ".mesh:")[2]
-				local matchIndex = string.find(var3, ":", 12)
+			for _, value1 in pairs(List1) do
+				local Part: string = string.split(value1, ".mesh:")[2]
+				local FoundAt: number? = string.find(Part, ":", 12)
 				
-				if matchIndex ~= nil then
-					matchIndex -= 1
+				if FoundAt ~= nil then
+					FoundAt -= 1
 				end
-				t_2[string.sub(var3, 1, matchIndex)] = true
+				t[string.sub(Part, 1, FoundAt)] = true
 			end
-			for i_2, v_2 in pairs(t_2) do
-				table.insert(t, { name = i_2 })
+			for Name, _ in pairs(t) do
+				table.insert(MoreInfo, { name = Name })
 			end
-			table.sort(t, function(p3, p4)
-				return p3.name < p4.name
+			table.sort(MoreInfo, function(A, B): boolean --[[ Line: 157 ]]
+				return A.name < B.name
 			end)
 			
-			if fFlagDevConsoleKeyCollisionFixModule then
-				table.insert(p1, {
+			if FFlagDevConsoleKeyCollisionFixModule then
+				table.insert(List, {
 					name = "Composite Texture",
-					id = v.TextureId,
-					value = var2,
-					moreInfo = t
+					id = result.TextureId,
+					value = MemoryInBytesRatio,
+					moreInfo = MoreInfo
 				})
 			else
-				table.insert(p1, { name = "Composite Texture", value = var2, moreInfo = t })
+				table.insert(List, {
+					name = "Composite Texture",
+					value = MemoryInBytesRatio,
+					moreInfo = MoreInfo
+				})
 			end
 		end
 	end
 	
-	aggregateData(t, humanoidPaginatedMemoryByTexture)
-	aggregateData(t, humanoidOrphanedPaginatedMemoryByTexture)
+	aggregateData(t, (StatsService:GetPaginatedMemoryByTexture(Enum.TextureQueryType.Humanoid, 0, 100)))
+	aggregateData(t, PaginatedMemoryByTexture)
 	
 	return t
 end
 
-local function fetchGraphicsMeshPartsMemoryData()
-	-- upvalues: meshContentProviderService (ref)
-	local t = {}
+local function fetchGraphicsMeshPartsMemoryData() --[[ Line: 184 ]]
+	-- upvalues: MeshContentProvider (copy)
+	local List = {}
 	
-	for i, v in pairs(meshContentProviderService:getContentMemoryData()) do
-		table.insert(t, { name = i, value = v / 1048576 })
+	for Name, value in pairs((MeshContentProvider:getContentMemoryData())) do
+		table.insert(List, { name = Name, value = value / 1048576 })
 	end
-	table.sort(t, function(p3, p4)
-		return p4.value < p3.value
+	table.sort(List, function(A, B): boolean --[[ Line: 196 ]]
+		return B.value < A.value
 	end)
 	
-	return t
+	return List
 end
 
-local function fetchFuncAnimation()
-	-- upvalues: keyframeSequenceProviderService (ref)
-	local t = {}
+local function fetchFuncAnimation() --[[ Line: 203 ]]
+	-- upvalues: KeyframeSequenceProvider (copy)
+	local List = {}
 	
-	for i, v in pairs(keyframeSequenceProviderService:GetMemStats()) do
-		table.insert(t, { name = i, value = v / 1048576 })
+	for Name, memStat in pairs((KeyframeSequenceProvider:GetMemStats())) do
+		table.insert(List, { name = Name, value = memStat / 1048576 })
 	end
-	table.sort(t, function(p3, p4)
-		return p4.value < p3.value
+	table.sort(List, function(A, B): boolean --[[ Line: 215 ]]
+		return B.value < A.value
 	end)
 	
-	return t
+	return List
 end
 
-local function fetchFontMemoryData()
-	-- upvalues: textService (ref)
-	local t = {}
+local function fetchFontMemoryData() --[[ Line: 222 ]]
+	-- upvalues: TextService (copy)
+	local List = {}
 	
-	for i, v in pairs(textService:GetFontMemoryData()) do
-		table.insert(t, { name = i, value = v / 1048576 })
+	for Name, value in pairs((TextService:GetFontMemoryData())) do
+		table.insert(List, { name = Name, value = value / 1048576 })
 	end
-	table.sort(t, function(p3, p4)
-		return p4.value < p3.value
+	table.sort(List, function(A, B): boolean --[[ Line: 233 ]]
+		return B.value < A.value
 	end)
 	
-	return t
+	return List
 end
 
-function t_1:updateCachedData(p3, p4)
-	if self._doGranularMemUpdate[p3] then
-		self._doGranularMemUpdate[p3] = false
-		self._granularMemTable[p3] = p4()
+function ClientMemoryDataModule:updateCachedData(p1, Callback) --[[ Line: 240 ]]
+	if self._doGranularMemUpdate[p1] then
+		self._doGranularMemUpdate[p1] = false
+		self._granularMemTable[p1] = Callback()
 	end
 end
 
-function t_1.getAdditionalMemoryFunc(p3, p4)
-	-- upvalues: fetchSoundMemoryData (ref), fetchGraphicsTextureMemoryData (ref), fetchGraphicsTextureCharacterMemoryData (ref), fetchGraphicsMeshPartsMemoryData (ref), fetchFuncAnimation (ref), fetchFontMemoryData (ref)
-	local var4 = nil
+function ClientMemoryDataModule.getAdditionalMemoryFunc(p1, MemoryAnalyzerStatName) --[[ Line: 247 ]]
+	-- upvalues: fetchSoundMemoryData (copy), fetchGraphicsTextureMemoryData (copy), fetchGraphicsTextureCharacterMemoryData (copy), fetchGraphicsMeshPartsMemoryData (copy), fetchFuncAnimation (copy), fetchFontMemoryData (copy)
+	local FetchSoundMemoryData = if MemoryAnalyzerStatName == "Sounds" then fetchSoundMemoryData elseif MemoryAnalyzerStatName == "GraphicsTexture" then fetchGraphicsTextureMemoryData elseif MemoryAnalyzerStatName == "GraphicsTextureCharacter" then fetchGraphicsTextureCharacterMemoryData elseif MemoryAnalyzerStatName == "GraphicsMeshParts" then fetchGraphicsMeshPartsMemoryData elseif MemoryAnalyzerStatName == "csgDictionary" then nil elseif MemoryAnalyzerStatName == "Animation" then fetchFuncAnimation elseif MemoryAnalyzerStatName == "gui/FontData" and game:GetEngineFeature("TextServiceGetFontMemoryData") then fetchFontMemoryData else nil
 	
-	if p4 == "Sounds" then
-		var4 = fetchSoundMemoryData
-	elseif p4 == "GraphicsTexture" then
-		var4 = fetchGraphicsTextureMemoryData
-	elseif p4 == "GraphicsTextureCharacter" then
-		var4 = fetchGraphicsTextureCharacterMemoryData
-	elseif p4 == "GraphicsMeshParts" then
-		var4 = fetchGraphicsMeshPartsMemoryData
-	elseif p4 ~= "csgDictionary" then
-		if p4 == "Animation" then
-			var4 = fetchFuncAnimation
-		elseif p4 == "gui/FontData" and game:GetEngineFeature("TextServiceGetFontMemoryData") then
-			var4 = fetchFontMemoryData
-		end
-	end
-	return if var4 then function()
-		-- upvalues: p3 (ref), p4 (ref), var4 (write)
-		p3:updateCachedData(p4, var4)
+	return if FetchSoundMemoryData then function() --[[ Line: 269 ]]
+		-- upvalues: p1 (copy), MemoryAnalyzerStatName (copy), FetchSoundMemoryData (ref)
+		p1:updateCachedData(MemoryAnalyzerStatName, FetchSoundMemoryData)
 		
-		return p3._granularMemTable[p4]
+		return p1._granularMemTable[MemoryAnalyzerStatName]
 	end else nil
 end
 
-function t_1:recursiveUpdateEntry(p3, p4, p5)
-	-- upvalues: statsUtilsModule (ref), circularBufferModule (ref), var1 (ref)
-	local memoryAnalyzerStatName = statsUtilsModule.GetMemoryAnalyzerStatName(p5.DisplayName)
-	local value = p5:GetValue()
-	local children = p5:GetChildren()
+function ClientMemoryDataModule:recursiveUpdateEntry(Children, List, Player) --[[ Line: 278 ]]
+	-- upvalues: StatsUtilsModule (copy), CircularBufferModule (copy), Number (copy)
+	local MemoryAnalyzerStatName = StatsUtilsModule.GetMemoryAnalyzerStatName(Player.DisplayName)
+	local Value = Player:GetValue()
+	local Children1 = Player:GetChildren()
 	
-	if p3[memoryAnalyzerStatName] then
-		local max = p3[memoryAnalyzerStatName].max
-		local min = p3[memoryAnalyzerStatName].min
-		local t = { data = value, time = self._lastUpdate }
+	if Children[MemoryAnalyzerStatName] then
+		local Max = Children[MemoryAnalyzerStatName].max
+		local Min = Children[MemoryAnalyzerStatName].min
+		local config = { data = Value, time = self._lastUpdate }
 		
-		if p3[memoryAnalyzerStatName].additionalInfoFunc and p3[memoryAnalyzerStatName].dataSet:back().data ~= t.data then
-			self._doGranularMemUpdate[memoryAnalyzerStatName] = true
+		if Children[MemoryAnalyzerStatName].additionalInfoFunc and Children[MemoryAnalyzerStatName].dataSet:back().data ~= config.data then
+			self._doGranularMemUpdate[MemoryAnalyzerStatName] = true
 		end
-		local var4 = p3[memoryAnalyzerStatName].dataSet:push_back(t)
+		local Push_backResult = Children[MemoryAnalyzerStatName].dataSet:push_back(config)
 		
-		if var4 then
-			local var5 = p3[memoryAnalyzerStatName].dataSet:iterator()
-			local var6 = var5:next()
+		if Push_backResult then
+			local IteratorResult = Children[MemoryAnalyzerStatName].dataSet:iterator()
+			local Key = IteratorResult:next()
 			
-			if max == var4.data then
-				max = min
-				while var6 do
-					max = if var6.data < max then max else var6.data
-					var6 = var5:next()
+			if Max == Push_backResult.data then
+				Max = Min
+				while Key do
+					Max = Key.data < Max and Max or Key.data
+					Key = IteratorResult:next()
 				end
 			end
-			if min == var4.data then
-				min = max
-				while var6 do
-					min = if min < var6.data then min else var6.data
-					var6 = var5:next()
+			if Min == Push_backResult.data then
+				Min = Max
+				while Key do
+					Min = Min < Key.data and Min or Key.data
+					Key = IteratorResult:next()
 				end
 			end
 		end
-		p3[memoryAnalyzerStatName].max = if max < value then value else max
-		p3[memoryAnalyzerStatName].min = if min < value then min else value
+		Children[MemoryAnalyzerStatName].max = Max < Value and Value or Max
+		Children[MemoryAnalyzerStatName].min = Min < Value and Min or Value
 	else
-		local var7 = circularBufferModule.new(var1)
-		var7:push_back({ data = value, time = self._lastUpdate })
-		p3[memoryAnalyzerStatName] = {
-			min = value,
-			max = value,
-			dataSet = var7,
-			children = #children > 0 and {},
-			sortedChildren = #children > 0 and {}
+		local NewCircularBuffer = CircularBufferModule.new(Number)
+		NewCircularBuffer:push_back({ data = Value, time = self._lastUpdate })
+		Children[MemoryAnalyzerStatName] = {
+			min = Value,
+			max = Value,
+			dataSet = NewCircularBuffer,
+			children = #Children1 > 0 and {},
+			sortedChildren = #Children1 > 0 and {}
 		}
-		local var8 = self:getAdditionalMemoryFunc(memoryAnalyzerStatName)
+		local AdditionalMemoryFunc = self:getAdditionalMemoryFunc(MemoryAnalyzerStatName)
 		
-		if var8 then
-			p3[memoryAnalyzerStatName].additionalInfoFunc = var8
-			self._doGranularMemUpdate[memoryAnalyzerStatName] = true
+		if AdditionalMemoryFunc then
+			Children[MemoryAnalyzerStatName].additionalInfoFunc = AdditionalMemoryFunc
+			self._doGranularMemUpdate[MemoryAnalyzerStatName] = true
 		end
-		table.insert(p4, {
-			name = memoryAnalyzerStatName,
-			dataStats = p3[memoryAnalyzerStatName]
+		table.insert(List, {
+			name = MemoryAnalyzerStatName,
+			dataStats = Children[MemoryAnalyzerStatName]
 		})
 	end
-	local var9 = p3[memoryAnalyzerStatName]
+	local Child = Children[MemoryAnalyzerStatName]
 	local t = {}
 	
-	for i, v in ipairs(children) do
-		t[v.DisplayName] = true
-		self:recursiveUpdateEntry(var9.children, var9.sortedChildren, v)
+	for _, Player1 in ipairs(Children1) do
+		t[Player1.DisplayName] = true
+		self:recursiveUpdateEntry(Child.children, Child.sortedChildren, Player1)
 	end
-	if var9.children then
-		for i_1, v_1 in pairs(var9.children) do
-			if t[i_1] == nil then
-				var9.children[i_1] = nil
+	if Child.children then
+		for i, _ in pairs(Child.children) do
+			if t[i] == nil then
+				Child.children[i] = nil
 				
-				for i_2, v_2 in ipairs(var9.sortedChildren) do
-					if i_1 == v_2.name then
-						table.remove(var9.sortedChildren, i_2)
-						continue
+				for i1, value in ipairs(Child.sortedChildren) do
+					if i == value.name then
+						table.remove(Child.sortedChildren, i1)
+						break
 					end
 				end
 			end
@@ -293,78 +282,77 @@ function t_1:recursiveUpdateEntry(p3, p4, p5)
 	end
 end
 
-function t_1:totalMemSignal()
+function ClientMemoryDataModule:totalMemSignal() --[[ Line: 392 ]]
 	return self._totalMemoryUpdated
 end
 
-function t_1:treeUpdatedSignal()
+function ClientMemoryDataModule:treeUpdatedSignal() --[[ Line: 396 ]]
 	return self._treeViewUpdatedSignal
 end
 
-function t_1:getSortType()
+function ClientMemoryDataModule:getSortType() --[[ Line: 400 ]]
 	return self._sortType
 end
 
-local function recursiveSort(p6, p7)
-	-- upvalues: recursiveSort (ref)
-	table.sort(p6, p7)
+local function recursiveSort(List, p1) --[[ Line: 404 ]]
+	-- upvalues: recursiveSort (copy)
+	table.sort(List, p1)
 	
-	for i, v in pairs(p6) do
-		if v.dataStats.sortedChildren then
-			recursiveSort(v.dataStats.sortedChildren, p7)
+	for _, value in pairs(List) do
+		if value.dataStats.sortedChildren then
+			recursiveSort(value.dataStats.sortedChildren, p1)
 		end
 	end
 end
 
-function t_1:setSortType(p8)
-	-- upvalues: t (ref), recursiveSort (ref)
-	if t[p8] then
-		self._sortType = p8
-		recursiveSort(self._memoryDataSorted, t[self._sortType])
+function ClientMemoryDataModule:setSortType(_sortType) --[[ Line: 413 ]]
+	-- upvalues: config (copy), recursiveSort (copy)
+	if config[_sortType] then
+		self._sortType = _sortType
+		recursiveSort(self._memoryDataSorted, config[self._sortType])
 		
 		return
+	else
+		error(string.format("attempted to pass invalid sortType: %s", (tostring(_sortType))), 2)
 	end
-	error(string.format("attempted to pass invalid sortType: %s", tostring(p8)), 2)
 end
 
-function t_1:getMemoryData()
+function ClientMemoryDataModule:getMemoryData() --[[ Line: 423 ]]
 	return self._memoryDataSorted
 end
 
-function t_1:isRunning()
+function ClientMemoryDataModule:isRunning() --[[ Line: 427 ]]
 	return self._isRunning
 end
 
-function t_1.start(p8)
-	-- upvalues: statsService (ref), statsUtilsModule (ref)
-	spawn(function()
-		-- upvalues: p8 (ref), statsService (copy), statsUtilsModule (copy)
-		p8._pollingId += 1
-		local pollingId = p8._pollingId
-		p8._isRunning = true
-		while pollingId == p8._pollingId do
-			local performanceStats = statsService and statsService:FindFirstChild("PerformanceStats")
-			local var10 = if not performanceStats then nil else performanceStats:FindFirstChild(statsUtilsModule.StatNames[statsUtilsModule.StatType_Memory])
+function ClientMemoryDataModule.start(p2) --[[ Line: 431 ]]
+	-- upvalues: StatsService (copy), StatsUtilsModule (copy)
+	spawn(function() --[[ Line: 432 ]]
+		-- upvalues: p2 (copy), StatsService (upval), StatsUtilsModule (upval)
+		p2._pollingId += 1
+		local PollingId = p2._pollingId
+		p2._isRunning = true
+		while PollingId == p2._pollingId do
+			local PerformanceStats = StatsService and StatsService:FindFirstChild("PerformanceStats")
+			local Child = if PerformanceStats then PerformanceStats:FindFirstChild(StatsUtilsModule.StatNames[StatsUtilsModule.StatType_Memory]) else nil
 			
-			if var10 then
-				p8._lastUpdate = os.time()
-				p8:recursiveUpdateEntry(p8._memoryData, p8._memoryDataSorted, var10)
-				
-				if p8._totalMemory ~= var10:getValue() then
-					p8._totalMemory = var10:getValue()
-					p8._totalMemoryUpdated:Fire(p8._totalMemory)
-				end
-				p8._treeViewUpdatedSignal:Fire(p8._memoryDataSorted)
-				wait(3)
+			if not Child then return end
+			p2._lastUpdate = os.time()
+			p2:recursiveUpdateEntry(p2._memoryData, p2._memoryDataSorted, Child)
+			
+			if p2._totalMemory ~= Child:getValue() then
+				p2._totalMemory = Child:getValue()
+				p2._totalMemoryUpdated:Fire(p2._totalMemory)
 			end
-			return
+			p2._treeViewUpdatedSignal:Fire(p2._memoryDataSorted)
+			wait(3)
 		end
-		p8._isRunning = false
+		p2._isRunning = false
 	end)
 end
 
-function t_1:stop()
+function ClientMemoryDataModule:stop() --[[ Line: 457 ]]
 	self._pollingId += 1
 end
 
-return t_1
+return ClientMemoryDataModule

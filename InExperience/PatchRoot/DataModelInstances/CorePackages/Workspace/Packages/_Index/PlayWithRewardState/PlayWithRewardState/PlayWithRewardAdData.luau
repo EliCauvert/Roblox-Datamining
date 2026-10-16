@@ -1,14 +1,14 @@
-﻿local playWithRewardExperimentDataModule = require(script:FindFirstAncestor("PlayWithRewardState").PlayWithRewardExperimentData)
+﻿local PlayWithRewardExperimentDataModule = require(script:FindFirstAncestor("PlayWithRewardState").PlayWithRewardExperimentData)
 
 return {
-	new = function(p1, p2, p3, p4, p5)
-		-- upvalues: playWithRewardExperimentDataModule (ref)
+	new = function(AdAvailabilityResult, ProductId, ProductName, ProductImageAssetId, p1) --[[ Line: 16 ]]
+		-- upvalues: PlayWithRewardExperimentDataModule (copy)
 		return {
-			adAvailabilityResult = p1,
-			productId = p2,
-			productName = p3,
-			productImageAssetId = p4,
-			experimentVariantData = playWithRewardExperimentDataModule.fromJsonData(p5)
+			adAvailabilityResult = AdAvailabilityResult,
+			productId = ProductId,
+			productName = ProductName,
+			productImageAssetId = ProductImageAssetId,
+			experimentVariantData = PlayWithRewardExperimentDataModule.fromJsonData(p1)
 		}
 	end
 }

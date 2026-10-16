@@ -1,94 +1,94 @@
-﻿local parent = script:FindFirstAncestor("GameDetail").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local view = foundationModule.View
-local text = foundationModule.Text
-local buttonSize = foundationModule.Enums.ButtonSize
-local useTokens = foundationModule.Hooks.useTokens
-local gamePlayButtonModule = require(parent.GamePlayButton)
-local playButton = gamePlayButtonModule.PlayButton
-local usePlayButtonState = gamePlayButtonModule.usePlayButtonState
-local usePlayButtonContextualMessage = gamePlayButtonModule.usePlayButtonContextualMessage
-local playButtonContextualMessageImpressionsDetector = gamePlayButtonModule.PlayButtonContextualMessageImpressionsDetector
-local plusEarlyAccessUpsellBanner = gamePlayButtonModule.PlusEarlyAccessUpsellBanner
-local experienceDetailsPageConstantsModule = require(script.Parent.ExperienceDetailsPageConstants)
-local experienceDetailsFallbackActionBarModule = require(script.Parent.Fallback.ExperienceDetailsFallbackActionBar)
-local sduiFeatureEntryPoint = require(parent.SduiSharedUtilities).SduiFeatureEntryPoint
-local appPage = require(parent.RobloxAppEnums).AppPage
-local useRoactService = require(parent.RobloxAppHooks).useRoactService
-local roactServiceTagsModule = require(parent.RoactServiceTags)
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagLuaAppLaunchWhenLoadingEdp = sharedFlagsModule.FFlagLuaAppLaunchWhenLoadingEdp
-local fFlagEnableGameJoinEarlyAccess = sharedFlagsModule.FFlagEnableGameJoinEarlyAccess
-local fFlagEnableSplitPaneEDPFix = sharedFlagsModule.FFlagEnableSplitPaneEDPFix
-local var1 = if fFlagEnableSplitPaneEDPFix then "col size-full-0 auto-y gap-small bg-surface-0 align-x-center padding-x-medium padding-top-medium" else "col size-full-0 auto-y gap-small bg-surface-0 align-x-center padding-x-medium padding-top-medium stroke-default"
+﻿local Parent = script:FindFirstAncestor("GameDetail").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local ButtonSize = FoundationModule.Enums.ButtonSize
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local GamePlayButtonModule = require(Parent.GamePlayButton)
+local PlayButton = GamePlayButtonModule.PlayButton
+local UsePlayButtonStateFunction = GamePlayButtonModule.usePlayButtonState
+local UsePlayButtonContextualMessageFunction = GamePlayButtonModule.usePlayButtonContextualMessage
+local PlayButtonContextualMessageImpressionsDetector = GamePlayButtonModule.PlayButtonContextualMessageImpressionsDetector
+local PlusEarlyAccessUpsellBanner = GamePlayButtonModule.PlusEarlyAccessUpsellBanner
+local ExperienceDetailsPageConstantsModule = require(script.Parent.ExperienceDetailsPageConstants)
+local ExperienceDetailsFallbackActionBarModule = require(script.Parent.Fallback.ExperienceDetailsFallbackActionBar)
+local SduiFeatureEntryPoint = require(Parent.SduiSharedUtilities).SduiFeatureEntryPoint
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
+local RoactServiceTagsModule = require(Parent.RoactServiceTags)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagLuaAppLaunchWhenLoadingEdp = SharedFlagsModule.FFlagLuaAppLaunchWhenLoadingEdp
+local FFlagEnableGameJoinEarlyAccess = SharedFlagsModule.FFlagEnableGameJoinEarlyAccess
+local FFlagEnableSplitPaneEDPFix = SharedFlagsModule.FFlagEnableSplitPaneEDPFix
+local ColSizeFull0AutoYGapSmallBgSurface0AlignXCenterPaddingXMediumPaddingTopMedium: string = if FFlagEnableSplitPaneEDPFix then "col size-full-0 auto-y gap-small bg-surface-0 align-x-center padding-x-medium padding-top-medium" else "col size-full-0 auto-y gap-small bg-surface-0 align-x-center padding-x-medium padding-top-medium stroke-default"
 
-local function PersistentActionBarContextualMessage(p1)
-	-- upvalues: useRoactService (ref), roactServiceTagsModule (ref), useTokens (ref), reactModule (ref), usePlayButtonState (ref), usePlayButtonContextualMessage (ref), view (ref), text (ref), playButtonContextualMessageImpressionsDetector (ref), appPage (ref)
-	local var2 = useRoactService(roactServiceTagsModule.RoactNetworking)
-	local var3 = useTokens()
-	local var4 = reactModule.useRef(nil)
-	local var5 = usePlayButtonState(var2, p1.universeId)
-	local var6 = usePlayButtonContextualMessage(p1.universeId, var5.playButtonState, var5.playabilityStatus)
+local function PersistentActionBarContextualMessage(p1) --[[ Line: 51 ]]
+	-- upvalues: UseRoactServiceFunction (copy), RoactServiceTagsModule (copy), UseTokensFunction (copy), ReactModule (copy), UsePlayButtonStateFunction (copy), UsePlayButtonContextualMessageFunction (copy), View (copy), Text (copy), PlayButtonContextualMessageImpressionsDetector (copy), AppPage (copy)
+	local UseRoactServiceResult = UseRoactServiceFunction(RoactServiceTagsModule.RoactNetworking)
+	local UseTokensResult = UseTokensFunction()
+	local UseRefResult = ReactModule.useRef(nil)
+	local UsePlayButtonStateResult = UsePlayButtonStateFunction(UseRoactServiceResult, p1.universeId)
+	local UsePlayButtonContextualMessageResult = UsePlayButtonContextualMessageFunction(p1.universeId, UsePlayButtonStateResult.playButtonState, UsePlayButtonStateResult.playabilityStatus)
 	
-	return if var6 == nil or var6 == "" then nil else reactModule.createElement(view, {
+	return if UsePlayButtonContextualMessageResult == nil or UsePlayButtonContextualMessageResult == "" then nil else ReactModule.createElement(View, {
 		tag = "size-full-0 auto-xy",
 		LayoutOrder = 2,
 		testId = "--edp-persistent-action-bar-contextual-message"
 	}, {
-		Text = reactModule.createElement(text, {
+		Text = ReactModule.createElement(Text, {
 			tag = "auto-xy text-body-medium text-wrap text-align-x-left",
-			textStyle = var3.Color.Content.Emphasis,
-			Text = var6,
-			ref = var4
+			textStyle = UseTokensResult.Color.Content.Emphasis,
+			Text = UsePlayButtonContextualMessageResult,
+			ref = UseRefResult
 		}),
-		ImpressionsDetector = reactModule.createElement(playButtonContextualMessageImpressionsDetector, {
+		ImpressionsDetector = ReactModule.createElement(PlayButtonContextualMessageImpressionsDetector, {
 			scrollViewPositionChangedSignal = nil,
-			containerRef = var4,
+			containerRef = UseRefResult,
 			universeId = p1.universeId,
-			playabilityStatus = var5.playabilityStatus,
-			contextualMessage = var6,
-			pageContext = appPage.GameDetail
+			playabilityStatus = UsePlayButtonStateResult.playabilityStatus,
+			contextualMessage = UsePlayButtonContextualMessageResult,
+			pageContext = AppPage.GameDetail
 		})
 	})
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), playButton (ref), buttonSize (ref), foundationModule (ref), fFlagLuaAppLaunchWhenLoadingEdp (ref), fFlagEnableGameJoinEarlyAccess (ref), view (ref), fFlagEnableSplitPaneEDPFix (ref), var1 (ref), sduiFeatureEntryPoint (ref), appPage (ref), experienceDetailsPageConstantsModule (ref), experienceDetailsFallbackActionBarModule (ref), PersistentActionBarContextualMessage (ref), plusEarlyAccessUpsellBanner (ref)
-	return reactModule.createElement("Frame", {
+return ReactModule.memo(function(p1) --[[ Line: 89 | Named "ExperienceDetailsPersistentActionBar" ]]
+	-- upvalues: ReactModule (copy), PlayButton (copy), ButtonSize (copy), FoundationModule (copy), FFlagLuaAppLaunchWhenLoadingEdp (copy), FFlagEnableGameJoinEarlyAccess (copy), View (copy), FFlagEnableSplitPaneEDPFix (copy), ColSizeFull0AutoYGapSmallBgSurface0AlignXCenterPaddingXMediumPaddingTopMedium (copy), SduiFeatureEntryPoint (copy), AppPage (copy), ExperienceDetailsPageConstantsModule (copy), ExperienceDetailsFallbackActionBarModule (copy), PersistentActionBarContextualMessage (copy), PlusEarlyAccessUpsellBanner (copy)
+	return ReactModule.createElement("Frame", {
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
 		BackgroundTransparency = 1,
-		[reactModule.Change.AbsoluteSize] = p1.onAbsoluteSizeChange
+		[ReactModule.Change.AbsoluteSize] = p1.onAbsoluteSizeChange
 	}, {
-		Content = reactModule.createElement(view, {
+		Content = ReactModule.createElement(View, {
 			testId = "--edp-persistent-action-bar",
-			tag = if fFlagEnableSplitPaneEDPFix then {
-				[var1] = true,
+			tag = if FFlagEnableSplitPaneEDPFix then {
+				[ColSizeFull0AutoYGapSmallBgSurface0AlignXCenterPaddingXMediumPaddingTopMedium] = true,
 				["stroke-default"] = p1.showOutline ~= false,
-				["padding-bottom-xsmall"] = fFlagEnableGameJoinEarlyAccess
-			} elseif fFlagEnableGameJoinEarlyAccess then var1 .. " padding-bottom-xsmall" else var1
+				["padding-bottom-xsmall"] = FFlagEnableGameJoinEarlyAccess
+			} elseif FFlagEnableGameJoinEarlyAccess then ColSizeFull0AutoYGapSmallBgSurface0AlignXCenterPaddingXMediumPaddingTopMedium .. " padding-bottom-xsmall" else ColSizeFull0AutoYGapSmallBgSurface0AlignXCenterPaddingXMediumPaddingTopMedium
 		}, {
-			Row = reactModule.createElement(view, {
+			Row = ReactModule.createElement(View, {
 				tag = "row size-full-0 auto-y gap-small",
 				LayoutOrder = 1
 			}, {
-				EntryPoint = reactModule.createElement(sduiFeatureEntryPoint, {
+				EntryPoint = ReactModule.createElement(SduiFeatureEntryPoint, {
 					LayoutOrder = 1,
-					appPage = appPage.GameDetail,
+					appPage = AppPage.GameDetail,
 					configKey = p1.configKey,
-					identifier = experienceDetailsPageConstantsModule.EDP_ACTION_BAR_IDENTIFIER,
+					identifier = ExperienceDetailsPageConstantsModule.EDP_ACTION_BAR_IDENTIFIER,
 					loadTimer = p1.loadTimer,
 					Size = UDim2.fromScale(0, 0),
 					AutomaticSize = Enum.AutomaticSize.XY,
-					loadingSlot = reactModule.createElement(experienceDetailsFallbackActionBarModule.Skeleton, {
+					loadingSlot = ReactModule.createElement(ExperienceDetailsFallbackActionBarModule.Skeleton, {
 						universeId = p1.universeId,
 						launchSource = p1.launchSource,
 						referralSource = p1.referralSource,
 						experienceJoinData = p1.experienceJoinData,
 						placeIdOverride = p1.placeIdOverride
 					}),
-					errorSlot = reactModule.createElement(experienceDetailsFallbackActionBarModule.Error, {
+					errorSlot = ReactModule.createElement(ExperienceDetailsFallbackActionBarModule.Error, {
 						universeId = p1.universeId,
 						launchSource = p1.launchSource,
 						referralSource = p1.referralSource,
@@ -96,8 +96,8 @@ return reactModule.memo(function(p1)
 						placeIdOverride = p1.placeIdOverride
 					})
 				}),
-				PersistentPlayButton = reactModule.createElement(view, { tag = "grow auto-y", LayoutOrder = 2 }, {
-					PlayBtn = reactModule.createElement(playButton, {
+				PersistentPlayButton = ReactModule.createElement(View, { tag = "grow auto-y", LayoutOrder = 2 }, {
+					PlayBtn = ReactModule.createElement(PlayButton, {
 						useUIBloxButton = true,
 						launchOnReleaseAfterUnmount = true,
 						testId = "--edp-persistent-play-button",
@@ -106,16 +106,16 @@ return reactModule.memo(function(p1)
 						launchSource = p1.launchSource,
 						experienceJoinData = p1.experienceJoinData,
 						placeId = p1.placeIdOverride,
-						buttonSize = buttonSize.Large,
-						fillBehavior = foundationModule.Enums.FillBehavior.Fill,
-						launchWhenLoading = if fFlagLuaAppLaunchWhenLoadingEdp then true else nil,
-						enableEarlyAccessPlusTooltip = if fFlagEnableGameJoinEarlyAccess then true else nil,
-						enableEarlyAccessState = if fFlagEnableGameJoinEarlyAccess then true else nil
+						buttonSize = ButtonSize.Large,
+						fillBehavior = FoundationModule.Enums.FillBehavior.Fill,
+						launchWhenLoading = if FFlagLuaAppLaunchWhenLoadingEdp then true else nil,
+						enableEarlyAccessPlusTooltip = if FFlagEnableGameJoinEarlyAccess then true else nil,
+						enableEarlyAccessState = if FFlagEnableGameJoinEarlyAccess then true else nil
 					})
 				})
 			}),
-			ContextualMessage = reactModule.createElement(PersistentActionBarContextualMessage, { universeId = p1.universeId }),
-			PlusUpsell = if fFlagEnableGameJoinEarlyAccess then reactModule.createElement(plusEarlyAccessUpsellBanner, { LayoutOrder = 3, universeId = p1.universeId }) else nil
+			ContextualMessage = ReactModule.createElement(PersistentActionBarContextualMessage, { universeId = p1.universeId }),
+			PlusUpsell = if FFlagEnableGameJoinEarlyAccess then ReactModule.createElement(PlusEarlyAccessUpsellBanner, { LayoutOrder = 3, universeId = p1.universeId }) else nil
 		})
 	})
 end)

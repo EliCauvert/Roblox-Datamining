@@ -1,38 +1,38 @@
-﻿local httpService = game:GetService("HttpService")
+﻿local HttpService = game:GetService("HttpService")
 local _ = require(script.Parent.types)
 
-local function noopCancel() end
+local function noopCancel() --[[ Line: 12 ]] end
 
-local function normalizeResponse(p1)
-	-- upvalues: httpService (ref)
-	return if typeof(p1) == "string" then { statusCode = 200, responseBody = p1 } elseif typeof(p1) == "table" then if p1.statusCode == nil then {
+local function normalizeResponse(ResponseBody) --[[ Line: 14 ]]
+	-- upvalues: HttpService (copy)
+	return if typeof(ResponseBody) == "string" then { statusCode = 200, responseBody = ResponseBody } elseif typeof(ResponseBody) == "table" then if ResponseBody.statusCode == nil then {
 		statusCode = 200,
-		responseBody = httpService:JSONEncode(p1)
-	} else p1 else { statusCode = 200, responseBody = nil }
+		responseBody = HttpService:JSONEncode(ResponseBody)
+	} else ResponseBody else { statusCode = 200, responseBody = nil }
 end
 
-return function(p1)
-	-- upvalues: httpService (ref), noopCancel (ref), normalizeResponse (ref)
-	p1 = p1 or {}
-	local routes = p1.routes or {}
+return function(p1) --[[ Line: 27 | Named "createMockNetwork" ]]
+	-- upvalues: HttpService (copy), noopCancel (copy), normalizeResponse (copy)
+	local P1 = p1 or {}
+	local Routes = P1.routes or {}
 	
 	return {
-		request = function(p2, p3)
-			-- upvalues: routes (ref), p1 (ref), httpService (copy), noopCancel (copy), normalizeResponse (copy)
-			local respond = nil
+		request = function(p2, Callback: (any, any) -> ()) --[[ Line: 31 ]]
+			-- upvalues: Routes (copy), P1 (copy), HttpService (upval), noopCancel (upval), normalizeResponse (upval)
+			local Respond = nil
 			
-			for i, v in routes do
-				if string.find(p2.url, v.pattern, 1, true) then
-					respond = v.respond
+			for _, route in Routes do
+				if string.find(p2.url, route.pattern, 1, true) then
+					Respond = route.respond
 					break
 				end
 			end
-			local ok = respond or p1.fallback
+			local Respond1 = Respond or P1.fallback
 			
-			if ok == nil then
-				p3(true, {
+			if Respond1 == nil then
+				Callback(true, {
 					statusCode = 404,
-					responseBody = httpService:JSONEncode({
+					responseBody = HttpService:JSONEncode({
 						code = 5,
 						message = "createMockNetwork: no route matched " .. p2.url
 					})
@@ -40,12 +40,12 @@ return function(p1)
 				
 				return noopCancel
 			end
-			ok, status = pcall(ok, p2)
+			local Success, Result = pcall(Respond1, p2)
 			
-			if ok then
-				p3(true, normalizeResponse(status))
+			if Success then
+				Callback(true, (normalizeResponse(Result)))
 			else
-				p3(false, tostring(status))
+				Callback(false, (tostring(Result)))
 			end
 			return noopCancel
 		end

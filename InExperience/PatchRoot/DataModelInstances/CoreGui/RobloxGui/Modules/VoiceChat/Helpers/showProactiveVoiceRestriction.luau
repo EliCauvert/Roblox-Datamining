@@ -1,107 +1,104 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local localizationService = game:GetService("LocalizationService")
-local playersService = game:GetService("Players")
-local buildProactiveVoiceRestrictionDetailModule = require(script.Parent.buildProactiveVoiceRestrictionDetail)
-local _ = require(corePackagesService.Workspace.Packages.VoiceChat.createVoiceRestrictionController)
-local getRestrictionTypeModule = require(script.Parent.getRestrictionType)
-local localization = require(corePackagesService.Workspace.Packages.InExperienceLocales).Localization
-local universalFeatureRestrictionsModule = require(corePackagesService.Workspace.Packages.UniversalFeatureRestrictions)
-local voiceChatModule = require(corePackagesService.Workspace.Packages.VoiceChat)
-local var1 = localization.new(localizationService.RobloxLocaleId)
+﻿local CorePackages = game:GetService("CorePackages")
+local Players = game:GetService("Players")
+local BuildProactiveVoiceRestrictionDetailModule = require(script.Parent.buildProactiveVoiceRestrictionDetail)
+local _ = require(CorePackages.Workspace.Packages.VoiceChat.createVoiceRestrictionController)
+local GetRestrictionTypeModule = require(script.Parent.getRestrictionType)
+local UniversalFeatureRestrictionsModule = require(CorePackages.Workspace.Packages.UniversalFeatureRestrictions)
+local VoiceChatModule = require(CorePackages.Workspace.Packages.VoiceChat)
+local NewResult = require(CorePackages.Workspace.Packages.InExperienceLocales).Localization.new(game:GetService("LocalizationService").RobloxLocaleId)
 
-local function format(p1, p2)
-	-- upvalues: var1 (ref)
-	return var1:Format(p1, p2)
+local function format(p1, p2) --[[ Line: 25 ]]
+	-- upvalues: NewResult (copy)
+	return NewResult:Format(p1, p2)
 end
 
-return function(p1)
-	-- upvalues: playersService (ref), getRestrictionTypeModule (ref), buildProactiveVoiceRestrictionDetailModule (ref), format (ref), voiceChatModule (ref), universalFeatureRestrictionsModule (ref)
-	local localPlayer = playersService.LocalPlayer
+return function(p1) --[[ Line: 33 | Named "showProactiveVoiceRestriction" ]]
+	-- upvalues: Players (copy), GetRestrictionTypeModule (copy), BuildProactiveVoiceRestrictionDetailModule (copy), format (copy), VoiceChatModule (copy), UniversalFeatureRestrictionsModule (copy)
+	local LocalPlayer = Players.LocalPlayer
 	
-	if not localPlayer then return end
-	local userId = localPlayer.UserId
-	local manager = p1.manager
-	local settings = p1.settings
-	local origin = p1.origin
-	local isCurrent = p1.isCurrent
-	local var2 = if manager.service then manager.previousSessionId else ""
-	local analytics = manager.Analytics
-	local var3 = getRestrictionTypeModule(settings)
-	local var4 = if settings then settings.banReason else nil
-	local var5 = nil
-	local var6 = nil
+	if not LocalPlayer then return end
+	local UserId = LocalPlayer.UserId
+	local Manager = p1.manager
+	local Settings = p1.settings
+	local Origin = p1.origin
+	local IsCurrentFunction = p1.isCurrent
+	local PreviousSessionId = if Manager.service then Manager.previousSessionId else ""
+	local Analytics = Manager.Analytics
+	local RestrictionTypeModule = GetRestrictionTypeModule(Settings)
+	local BanReason = if Settings then Settings.banReason else nil
+	local v1 = nil
+	local v2 = nil
 	
-	if not settings then
-		local nudgeAnalyticsData, nudgeAnalyticsData_1 = manager:GetNudgeAnalyticsData()
-		var5 = nudgeAnalyticsData
-		var6 = nudgeAnalyticsData_1
+	if not Settings then
+		v1, v19 = Manager:GetNudgeAnalyticsData()
 	end
-	local var7 = buildProactiveVoiceRestrictionDetailModule({
-		settings = settings,
-		userId = userId,
+	local ProactiveVoiceRestrictionDetailModule = BuildProactiveVoiceRestrictionDetailModule({
+		settings = Settings,
+		userId = UserId,
 		now = DateTime.now().UnixTimestamp,
 		format = format
 	})
-	local var8 = false
-	local var9 = false
-	local var10 = false
+	local Flag = false
+	local Flag1 = false
+	local Flag2 = false
 	
-	local function _(p2)
-		-- upvalues: analytics (ref), var4 (ref), userId (ref), var2 (ref)
-		analytics:reportBanMessageEvent(p2)
-		analytics:reportBanMessageEventV2(p2, var4, userId, var2)
+	local function _(p2) --[[ Line: 67 | Named "reportBan" ]]
+		-- upvalues: Analytics (copy), BanReason (copy), UserId (copy), PreviousSessionId (copy)
+		Analytics:reportBanMessageEvent(p2)
+		Analytics:reportBanMessageEventV2(p2, BanReason, UserId, PreviousSessionId)
 	end
 	
-	universalFeatureRestrictionsModule.showFeatureRestrictionDirect(universalFeatureRestrictionsModule.AbuseVector.Voice, var7, {
-		onShown = function()
-			-- upvalues: var10 (write), var3 (ref), analytics (ref), var4 (ref), userId (ref), var2 (ref)
-			if not var10 then
-				var10 = true
+	local function onAppeal() --[[ Line: 81 ]]
+		-- upvalues: Flag1 (ref), RestrictionTypeModule (copy), Analytics (copy), v1 (ref), v2 (ref), BanReason (copy), UserId (copy), PreviousSessionId (copy)
+		Flag1 = true
+		
+		if RestrictionTypeModule == "Nudge" then
+			Analytics:reportDeniedNudge(v1, v2)
+			
+			return
+		else
+			Analytics:reportBanMessageEvent("Denied")
+			Analytics:reportBanMessageEventV2("Denied", BanReason, UserId, PreviousSessionId)
+		end
+	end
+	
+	UniversalFeatureRestrictionsModule.showFeatureRestrictionDirect(UniversalFeatureRestrictionsModule.AbuseVector.Voice, ProactiveVoiceRestrictionDetailModule, {
+		onShown = function() --[[ Line: 72 ]]
+			-- upvalues: Flag2 (ref), RestrictionTypeModule (copy), Analytics (copy), BanReason (copy), UserId (copy), PreviousSessionId (copy)
+			if not Flag2 then
+				Flag2 = true
 				
-				if var3 ~= "Nudge" then
-					analytics:reportBanMessageEvent("Shown")
-					analytics:reportBanMessageEventV2("Shown", var4, userId, var2)
+				if RestrictionTypeModule ~= "Nudge" then
+					Analytics:reportBanMessageEvent("Shown")
+					Analytics:reportBanMessageEventV2("Shown", BanReason, UserId, PreviousSessionId)
 				end
 			end
 		end,
-		onDismiss = function()
-			-- upvalues: var8 (write), var3 (ref), origin (ref), isCurrent (ref), voiceChatModule (copy), manager (ref), analytics (ref), var5 (write), var6 (write), var9 (write), var4 (ref), userId (ref), var2 (ref)
-			if var8 then return end
-			var8 = true
+		onDismiss = function() --[[ Line: 90 ]]
+			-- upvalues: Flag (ref), RestrictionTypeModule (copy), Origin (copy), IsCurrentFunction (copy), VoiceChatModule (upval), Manager (copy), Analytics (copy), v1 (ref), v2 (ref), Flag1 (ref), BanReason (copy), UserId (copy), PreviousSessionId (copy)
+			if Flag then return end
+			Flag = true
 			
-			if origin ~= "mic" and (if var3 ~= "TemporaryBan" then var3 == "NudgeBan" else true) and isCurrent() then
-				voiceChatModule.PostInformedOfBan(function(p2, p3, p4)
-					-- upvalues: manager (copy)
-					return manager:PostRequest(p2, p3, p4)
+			if Origin ~= "mic" and (RestrictionTypeModule == "TemporaryBan" or RestrictionTypeModule == "NudgeBan") and IsCurrentFunction() then
+				VoiceChatModule.PostInformedOfBan(function(p2, p3, p4) --[[ Line: 99 ]]
+					-- upvalues: Manager (upval)
+					return Manager:PostRequest(p2, p3, p4)
 				end, true)
 			end
-			if var3 == "Nudge" then
-				analytics:reportClosedNudge(var5, var6)
+			if RestrictionTypeModule == "Nudge" then
+				Analytics:reportClosedNudge(v1, v2)
 				
-				if var9 then
-					return
-				else
-					analytics:reportAcknowledgedNudge(var5, var6)
+				if not Flag1 then
+					Analytics:reportAcknowledgedNudge(v1, v2)
 					
 					return
 				end
-			elseif not var9 then
-				local var11 = if var3 == "NudgeBan" then "Understood" else "Acknowledged"
-				analytics:reportBanMessageEvent(var11)
-				analytics:reportBanMessageEventV2(var11, var4, userId, var2)
+			elseif not Flag1 then
+				local Understood: string = if RestrictionTypeModule == "NudgeBan" then "Understood" else "Acknowledged"
+				Analytics:reportBanMessageEvent(Understood)
+				Analytics:reportBanMessageEventV2(Understood, BanReason, UserId, PreviousSessionId)
 			end
 		end,
-		onAppeal = if var3 == "Nudge" or var3 == "NudgeBan" then function()
-			-- upvalues: var9 (write), var3 (ref), analytics (ref), var5 (write), var6 (write), var4 (ref), userId (ref), var2 (ref)
-			var9 = true
-			
-			if var3 == "Nudge" then
-				analytics:reportDeniedNudge(var5, var6)
-				
-				return
-			end
-			analytics:reportBanMessageEvent("Denied")
-			analytics:reportBanMessageEventV2("Denied", var4, userId, var2)
-		end else nil
+		onAppeal = if RestrictionTypeModule == "Nudge" or RestrictionTypeModule == "NudgeBan" then onAppeal else nil
 	})
 end

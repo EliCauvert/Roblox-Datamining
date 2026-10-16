@@ -1,39 +1,39 @@
-﻿local promiseModule = require(script:FindFirstAncestor("RobloxAppUpdate").Parent.Promise)
-local t = {}
-t.__index = t
+﻿local PromiseModule = require(script:FindFirstAncestor("RobloxAppUpdate").Parent.Promise)
+local AppUpdateServiceWrapperModule = {}
+AppUpdateServiceWrapperModule.__index = AppUpdateServiceWrapperModule
 
-function t.new(p1)
-	-- upvalues: t (ref)
-	local t_1 = { _appUpdate = p1 }
-	setmetatable(t_1, t)
+function AppUpdateServiceWrapperModule.new(_appUpdate) --[[ Line: 9 ]]
+	-- upvalues: AppUpdateServiceWrapperModule (copy)
+	local config = { _appUpdate = _appUpdate }
+	setmetatable(config, AppUpdateServiceWrapperModule)
 	
-	return t_1
+	return config
 end
 
-function t.checkForUpdate(p1)
-	-- upvalues: promiseModule (ref)
-	return promiseModule.new(function(p2, _)
-		-- upvalues: p1 (ref)
-		local ok, status = pcall(function()
-			-- upvalues: p1 (copy), p2 (ref)
-			p1._appUpdate:CheckForUpdate(function(p3)
-				-- upvalues: p2 (copy)
-				p2({ appUpdateStatus = p3 })
+function AppUpdateServiceWrapperModule.checkForUpdate(p1) --[[ Line: 18 ]]
+	-- upvalues: PromiseModule (copy)
+	return PromiseModule.new(function(Callback: (any) -> (), _) --[[ Line: 19 ]]
+		-- upvalues: p1 (copy)
+		local Success, Result = pcall(function() --[[ Line: 20 ]]
+			-- upvalues: p1 (upval), Callback (copy)
+			p1._appUpdate:CheckForUpdate(function(AppUpdateStatus) --[[ Line: 21 ]]
+				-- upvalues: Callback (upval)
+				Callback({ appUpdateStatus = AppUpdateStatus })
 			end)
 		end)
 		
-		if not ok then
-			p2({ errorMessage = status })
+		if not Success then
+			Callback({ errorMessage = Result })
 		end
 	end)
 end
 
-function t:performManagedUpdate()
+function AppUpdateServiceWrapperModule:performManagedUpdate() --[[ Line: 36 ]]
 	self._appUpdate:PerformManagedUpdate()
 end
 
-function t:canPerformBinaryUpdate()
+function AppUpdateServiceWrapperModule:canPerformBinaryUpdate() --[[ Line: 40 ]]
 	return self._appUpdate:CanPerformBinaryUpdate()
 end
 
-return t
+return AppUpdateServiceWrapperModule

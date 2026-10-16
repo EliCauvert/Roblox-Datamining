@@ -1,14 +1,14 @@
 ﻿local _ = require(script.Parent.AppLaunchTrackerTypes)
-local t = { __className = "Devtools" }
-t.__index = t
+local RoduxPerfTrackerModule = { __className = "Devtools" }
+RoduxPerfTrackerModule.__index = RoduxPerfTrackerModule
 
-local function _()
-	return table.create(100)
+local function _() --[[ Line: 43 | Named "createTable" ]]
+	return (table.create(100))
 end
 
-function t.new(p1, p2, p3)
-	-- upvalues: t (ref)
-	return setmetatable({
+function RoduxPerfTrackerModule.new(ReportTopAction, ReportTopThunk, StartImmediately) --[[ Line: 48 ]]
+	-- upvalues: RoduxPerfTrackerModule (copy)
+	return (setmetatable({
 		shouldTrack = false,
 		flushCount = 0,
 		totalFlushTimeMs = 0,
@@ -17,71 +17,71 @@ function t.new(p1, p2, p3)
 		maxListenerCount = 0,
 		totalThunkTimeMs = 0,
 		thunkCount = 0,
-		reportTopAction = p1,
-		reportTopThunk = p2,
-		startImmediately = p3,
-		actionCounts = if p1 then table.create(100) else nil,
-		actionTotalTimes = if p1 then table.create(100) else nil,
-		thunkCounts = if p2 then table.create(100) else nil,
-		thunkTotalTimes = if p2 then table.create(100) else nil
-	}, t)
+		reportTopAction = ReportTopAction,
+		reportTopThunk = ReportTopThunk,
+		startImmediately = StartImmediately,
+		actionCounts = if ReportTopAction then table.create(100) else nil,
+		actionTotalTimes = if ReportTopAction then table.create(100) else nil,
+		thunkCounts = if ReportTopThunk then table.create(100) else nil,
+		thunkTotalTimes = if ReportTopThunk then table.create(100) else nil
+	}, RoduxPerfTrackerModule))
 end
 
-function t:_hookIntoStore(p1)
-	self.store = p1
-	self.originalReducer = p1._reducer
-	self.originalFlushHandler = p1._flushHandler
+function RoduxPerfTrackerModule:_hookIntoStore(Store) --[[ Line: 80 ]]
+	self.store = Store
+	self.originalReducer = Store._reducer
+	self.originalFlushHandler = Store._flushHandler
 	
 	if self.startImmediately then
 		self:startTracking()
 	end
 end
 
-function t:trackingReducer(p1, p2)
+function RoduxPerfTrackerModule:trackingReducer(p1, p2) --[[ Line: 90 ]]
 	assert(self.originalReducer, "self.originalReducer must exist")
-	local var1 = self.originalReducer(p1, p2)
-	local var2 = (os.clock() - os.clock()) * 1000
-	self.totalReduceTimeMs += var2
+	local OriginalReducerResult = self.originalReducer(p1, p2)
+	local ScaledClockTime = (os.clock() - os.clock()) * 1000
+	self.totalReduceTimeMs += ScaledClockTime
 	self.reduceCount += 1
 	
 	if self.reportTopAction and self.actionCounts and self.actionTotalTimes then
-		local type = p2.type or tostring(p2)
+		local Type = p2.type or tostring(p2)
 		
-		if type then
-			self.actionCounts[type] = (self.actionCounts[type] or 0) + 1
-			self.actionTotalTimes[type] = (self.actionTotalTimes[type] or 0) + var2
+		if Type then
+			self.actionCounts[Type] = (self.actionCounts[Type] or 0) + 1
+			self.actionTotalTimes[Type] = (self.actionTotalTimes[Type] or 0) + ScaledClockTime
 		end
 	end
-	return var1
+	return OriginalReducerResult
 end
 
-function t:trackingFlush(...)
-	local processTime = os.clock()
+function RoduxPerfTrackerModule:trackingFlush(...) --[[ Line: 115 ]]
+	local ClockTime = os.clock()
 	self.originalFlushHandler(...)
-	self.totalFlushTimeMs += (os.clock() - processTime) * 1000
+	self.totalFlushTimeMs += (os.clock() - ClockTime) * 1000
 	self.flushCount += 1
-	local listenersCount = #self.store.changed._listeners
+	local CountListeners = #self.store.changed._listeners
 	
-	if self.maxListenerCount < listenersCount then
-		self.maxListenerCount = listenersCount
+	if self.maxListenerCount < CountListeners then
+		self.maxListenerCount = CountListeners
 	end
 end
 
-function t:startTracking()
-	function self.store._flushHandler(...)
-		-- upvalues: self (ref)
+function RoduxPerfTrackerModule:startTracking() --[[ Line: 130 ]]
+	function self.store._flushHandler(...) --[[ Line: 131 ]]
+		-- upvalues: self (copy)
 		return self:trackingFlush(...)
 	end
 	
-	function self.store._reducer(...)
-		-- upvalues: self (ref)
+	function self.store._reducer(...) --[[ Line: 134 ]]
+		-- upvalues: self (copy)
 		return self:trackingReducer(...)
 	end
 	
 	self.shouldTrack = true
 end
 
-function t:stopTracking()
+function RoduxPerfTrackerModule:stopTracking() --[[ Line: 140 ]]
 	if self.shouldTrack then
 		self.shouldTrack = false
 		self.store._flushHandler = self.originalFlushHandler
@@ -89,7 +89,7 @@ function t:stopTracking()
 	end
 end
 
-function t:clear()
+function RoduxPerfTrackerModule:clear() --[[ Line: 148 ]]
 	self.flushCount = 0
 	self.totalFlushTimeMs = 0
 	self.reduceCount = 0
@@ -108,129 +108,128 @@ function t:clear()
 	end
 end
 
-local function getRelevantLineFromTrace(p1)
-	local parts = string.split(p1, "\n")
+local function getRelevantLineFromTrace(Text: string): string? --[[ Line: 167 ]]
+	local Parts = string.split(Text, "\n")
+	local Text1 = nil
 	
-	for i = 3, #parts do
-		local var1 = parts[i]
+	for i = 3, #Parts do
+		Text1 = Parts[i]
 		
-		if string.find(var1, "AppLaunchTracker") or string.find(var1, "_Index.Rodux") or (string.find(var1, "_Index.RoactRodux") or string.find(var1, "_Index.Promise")) or string.find(var1, ".RoactRodux") then
-			continue
+		if not string.find(Text1, "AppLaunchTracker") and not string.find(Text1, "_Index.Rodux") and not string.find(Text1, "_Index.RoactRodux") and not string.find(Text1, "_Index.Promise") and not string.find(Text1, ".RoactRodux") then
+			return Text1
 		end
-		return var1
 	end
 	return nil
 end
 
-local _ = function(p2)
-	-- upvalues: getRelevantLineFromTrace (ref)
-	local var2 = getRelevantLineFromTrace(debug.traceback())
+local _ = function(p1) --[[ Line: 184 | Named "getThunkName" ]]
+	-- upvalues: getRelevantLineFromTrace (copy)
+	local RelevantLineFromTrace = getRelevantLineFromTrace(debug.traceback())
 	
-	return var2 or debug.info(p2, "slf")
+	return if RelevantLineFromTrace then RelevantLineFromTrace else debug.info(p1, "slf")
 end
 
-function t.makeThunkMiddleware(p2, p3)
-	-- upvalues: getRelevantLineFromTrace (ref)
-	local function tracebackReporter(p4)
-		return debug.traceback(p4)
+function RoduxPerfTrackerModule.makeThunkMiddleware(p1, p2) --[[ Line: 192 ]]
+	-- upvalues: getRelevantLineFromTrace (copy)
+	local function tracebackReporter(Err) --[[ Line: 193 ]]
+		return debug.traceback(Err)
 	end
 	
-	return function(p4, p5)
-		-- upvalues: p2 (ref), p3 (ref), getRelevantLineFromTrace (copy), tracebackReporter (ref)
-		return function(p6)
-			-- upvalues: p2 (copy), p5 (ref), p3 (copy), getRelevantLineFromTrace (copy), tracebackReporter (copy), p4 (ref)
-			if typeof(p6) ~= "function" then
-				return p4(p6)
+	return function(Callback, p3) --[[ Line: 196 | Named "thunkMiddleware" ]]
+		-- upvalues: p1 (copy), p2 (copy), getRelevantLineFromTrace (upval), tracebackReporter (copy)
+		return function(Callback1) --[[ Line: 197 ]]
+			-- upvalues: p1 (upval), p3 (copy), p2 (upval), getRelevantLineFromTrace (upval), tracebackReporter (upval), Callback (copy)
+			if typeof(Callback1) ~= "function" then
+				return Callback(Callback1)
 			end
-			local ok, status = xpcall(function()
-				-- upvalues: p2 (copy), p6 (ref), p5 (copy), p3 (copy), getRelevantLineFromTrace (copy)
-				if not p2.shouldTrack then
-					return p6(p5, p3)
+			local Success, Result = xpcall(function() --[[ Line: 199 ]]
+				-- upvalues: p1 (upval), Callback1 (copy), p3 (upval), p2 (upval), getRelevantLineFromTrace (upval)
+				if not p1.shouldTrack then
+					return Callback1(p3, p2)
 				end
-				local var2 = p6(p5, p3)
-				local var3 = (os.clock() - os.clock()) * 1000
-				p2.totalThunkTimeMs += var3
-				p2.thunkCount += 1
+				local CallbackResult = Callback1(p3, p2)
+				local ScaledClockTime = (os.clock() - os.clock()) * 1000
+				p1.totalThunkTimeMs += ScaledClockTime
+				p1.thunkCount += 1
 				
-				if p2.reportTopThunk and p2.thunkCounts and p2.thunkTotalTimes then
-					local var4 = getRelevantLineFromTrace(debug.traceback())
-					local var5 = var4 or debug.info(p6, "slf")
-					p2.thunkCounts[var5] = (p2.thunkCounts[var5] or 0) + 1
-					p2.thunkTotalTimes[var5] = (p2.thunkTotalTimes[var5] or 0) + var3
+				if p1.reportTopThunk and p1.thunkCounts and p1.thunkTotalTimes then
+					local RelevantLineFromTrace = getRelevantLineFromTrace(debug.traceback())
+					local RelevantLineFromTrace1 = if RelevantLineFromTrace then RelevantLineFromTrace else debug.info(Callback1, "slf")
+					p1.thunkCounts[RelevantLineFromTrace1] = (p1.thunkCounts[RelevantLineFromTrace1] or 0) + 1
+					p1.thunkTotalTimes[RelevantLineFromTrace1] = (p1.thunkTotalTimes[RelevantLineFromTrace1] or 0) + ScaledClockTime
 				end
-				return var2
+				return CallbackResult
 			end, tracebackReporter)
 			
-			if ok then
-				return status
+			if Success then
+				return Result
+			else
+				p3._errorReporter.reportReducerError(p3:getState(), Callback1, { message = "Caught error in thunk", thrownValue = Result })
+				
+				return nil
 			end
-			p5._errorReporter.reportReducerError(p5:getState(), p6, { message = "Caught error in thunk", thrownValue = status })
-			
-			return nil
 		end
 	end
 end
 
-local _ = function(p2)
-	local var2 = nil
-	local var3 = nil
+local _ = function(List) --[[ Line: 243 | Named "getTopValue" ]]
+	local v1 = nil
+	local v2 = nil
 	
-	for i, v in p2 do
-		if (var2 or -1) < v then
-			var2 = v
-			var3 = i
+	for i, value in List do
+		if (v1 or -1) < value then
+			v1 = value
+			v2 = i
 		end
 	end
-	return var3, var2
+	return v2, v1
 end
 
-local _ = function(p3)
-	return p3:gsub("CoreGui.RobloxGui.Modules.", ""):gsub("CorePackages.Workspace.Packages._Workspace.", "")
+local _ = function(Text: string) --[[ Line: 255 | Named "fixThunkName" ]]
+	return Text:gsub("CoreGui.RobloxGui.Modules.", ""):gsub("CorePackages.Workspace.Packages._Workspace.", "")
 end
 
-function t:getStats()
-	local var4 = nil
-	local var5 = nil
-	local var6 = nil
-	local var7 = nil
-	local var8 = nil
-	local var9 = nil
+function RoduxPerfTrackerModule:getStats() --[[ Line: 259 ]]
+	local TopActionName = nil
+	local TopActionDurationMs = nil
+	local ActionCount = nil
+	local Text = nil
+	local TopThunkDurationMs = nil
+	local ThunkCount = nil
 	
 	if self.reportTopAction and self.actionCounts and self.actionTotalTimes then
-		local actionTotalTimes = self.actionTotalTimes
-		local var10 = nil
-		local var11 = nil
+		local v3 = nil
+		local v4 = nil
 		
-		for i, v in actionTotalTimes do
-			if (var10 or -1) < v then
-				var10 = v
-				var11 = i
+		for i, actionTotalTime in self.actionTotalTimes do
+			if (v3 or -1) < actionTotalTime then
+				v3 = actionTotalTime
+				v4 = i
 			end
 		end
-		var4 = var11
-		var5 = var10
+		TopActionName = v4
+		TopActionDurationMs = v3
 		
-		if var4 then
-			var6 = self.actionCounts[var4]
+		if TopActionName then
+			ActionCount = self.actionCounts[TopActionName]
 		end
 	end
 	if self.reportTopThunk and self.thunkCounts and self.thunkTotalTimes then
-		local thunkTotalTimes = self.thunkTotalTimes
-		local var12 = nil
-		local var13 = nil
+		local v5 = nil
+		local v6 = nil
 		
-		for i, v in thunkTotalTimes do
-			if (var12 or -1) < v then
-				var12 = v
-				var13 = i
+		for i1, thunkTotalTime in self.thunkTotalTimes do
+			if (v5 or -1) < thunkTotalTime then
+				v5 = thunkTotalTime
+				v6 = i1
 			end
 		end
-		var7 = var13
-		var8 = var12
+		Text = v6
+		TopThunkDurationMs = v5
 		
-		if var7 then
-			var9 = self.thunkCounts[var7]
-			var7 = var7:gsub("CoreGui.RobloxGui.Modules.", ""):gsub("CorePackages.Workspace.Packages._Workspace.", "")
+		if Text then
+			ThunkCount = self.thunkCounts[Text]
+			Text = Text:gsub("CoreGui.RobloxGui.Modules.", ""):gsub("CorePackages.Workspace.Packages._Workspace.", "")
 		end
 	end
 	return {
@@ -241,13 +240,13 @@ function t:getStats()
 		maxListenerCount = self.maxListenerCount,
 		totalThunkTimeMs = self.totalThunkTimeMs,
 		thunkCount = self.thunkCount,
-		topActionName = var4,
-		topActionDurationMs = var5,
-		topActionCount = var6,
-		topThunkName = var7,
-		topThunkDurationMs = var8,
-		topThunkCount = var9
+		topActionName = TopActionName,
+		topActionDurationMs = TopActionDurationMs,
+		topActionCount = ActionCount,
+		topThunkName = Text,
+		topThunkDurationMs = TopThunkDurationMs,
+		topThunkCount = ThunkCount
 	}
 end
 
-return t
+return RoduxPerfTrackerModule

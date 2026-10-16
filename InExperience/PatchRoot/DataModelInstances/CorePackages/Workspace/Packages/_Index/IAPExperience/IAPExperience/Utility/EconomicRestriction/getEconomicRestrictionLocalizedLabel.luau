@@ -1,31 +1,35 @@
 ﻿local IAPExperience = script:FindFirstAncestor("IAPExperience")
-local economicRestrictionsViolationTypeModule = require(IAPExperience.Enums.EconomicRestrictionsViolationType)
-local loggerModule = require(IAPExperience.Utility.logger)
+local EconomicRestrictionsViolationTypeModule = require(IAPExperience.Enums.EconomicRestrictionsViolationType)
+local LoggerModule = require(IAPExperience.Utility.logger)
 
-return function(p1, p2)
-	-- upvalues: economicRestrictionsViolationTypeModule (ref), loggerModule (ref)
-	if p2 == economicRestrictionsViolationTypeModule.Chargeback then
+return function(p1, ViolationType) --[[ Line: 9 ]]
+	-- upvalues: EconomicRestrictionsViolationTypeModule (copy), LoggerModule (copy)
+	if ViolationType == EconomicRestrictionsViolationTypeModule.Chargeback then
 		return p1.chargebackViolationLabel
-	elseif p2 == economicRestrictionsViolationTypeModule.AbuseOfAffiliateSystem then
+	elseif ViolationType == EconomicRestrictionsViolationTypeModule.AbuseOfAffiliateSystem then
 		return p1.fraudAbuseOfAffiliateSystemViolationLabel
-	elseif p2 == economicRestrictionsViolationTypeModule.AttemptedUnauthorizedPaymentMethodUse then
+	elseif ViolationType == EconomicRestrictionsViolationTypeModule.AttemptedUnauthorizedPaymentMethodUse then
 		return p1.fraudAttemptedUnauthorizedPaymentMethodUseViolationLabel
-	elseif p2 == economicRestrictionsViolationTypeModule.PaymentAuthorizationAttempt then
+	elseif ViolationType == EconomicRestrictionsViolationTypeModule.PaymentAuthorizationAttempt then
 		return p1.fraudPaymentAbuseViolationLabel
-	elseif p2 == economicRestrictionsViolationTypeModule.RepeatedRefundRequests then
+	elseif ViolationType == EconomicRestrictionsViolationTypeModule.RepeatedRefundRequests then
 		return p1.fraudRepeatedRefundRequestsViolationLabel
-	elseif p2 == economicRestrictionsViolationTypeModule.SuspiciousAccountPatterns then
+	elseif ViolationType == EconomicRestrictionsViolationTypeModule.SuspiciousAccountPatterns then
 		return p1.fraudSuspiciousAccountPatternsViolationLabel
-	elseif p2 == economicRestrictionsViolationTypeModule.SuspiciousRefundRequests then
+	elseif ViolationType == EconomicRestrictionsViolationTypeModule.SuspiciousRefundRequests then
 		return p1.fraudSuspiciousRefundRequestsViolationLabel
-	elseif p2 == economicRestrictionsViolationTypeModule.UnauthorizedPurchase then
+	elseif ViolationType == EconomicRestrictionsViolationTypeModule.UnauthorizedPurchase then
 		return p1.fraudUnauthorizedPurchaseViolationLabel
-	elseif p2 == economicRestrictionsViolationTypeModule.UseOfUnauthorizedOffPlatformTransactions then
+	elseif ViolationType == EconomicRestrictionsViolationTypeModule.UseOfUnauthorizedOffPlatformTransactions then
 		return p1.fraudUseOfUnauthorizedOffPlatformTransactionsViolationLabel
-	elseif p2 == economicRestrictionsViolationTypeModule.VirtualEconomyAbuse then
+	elseif ViolationType == EconomicRestrictionsViolationTypeModule.VirtualEconomyAbuse then
 		return p1.fraudVirtualEconomyAbuseViolationLabel
+	else
+		LoggerModule.error({
+			message = "Invalid violation type",
+			violationType = ViolationType
+		})
+		
+		return ""
 	end
-	loggerModule.error({ message = "Invalid violation type", violationType = p2 })
-	
-	return ""
 end

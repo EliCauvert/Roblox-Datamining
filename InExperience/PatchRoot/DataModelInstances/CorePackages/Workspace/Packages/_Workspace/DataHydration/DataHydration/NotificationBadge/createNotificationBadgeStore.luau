@@ -1,27 +1,27 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local promiseModule = require(dataHydration.Parent.Promise)
-local createDataCacheModule = require(dataHydration.createDataCache)
-local _ = require(dataHydration.DataHydrationTypes)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local PromiseModule = require(DataHydration.Parent.Promise)
+local CreateDataCacheModule = require(DataHydration.createDataCache)
+local _ = require(DataHydration.DataHydrationTypes)
 local _ = require(script.Parent.NotificationBadgeStoreTypes)
-local createDataResolverModule = require(dataHydration.createDataResolver)
+local CreateDataResolverModule = require(DataHydration.createDataResolver)
 
-return function()
-	-- upvalues: createDataCacheModule (ref), createDataResolverModule (ref), promiseModule (ref)
-	local var1 = createDataCacheModule()
-	local var2 = createDataResolverModule({
-		cache = var1,
-		fetchFn = function(_)
-			-- upvalues: promiseModule (copy)
-			return promiseModule.resolve({})
+return function() --[[ Line: 10 | Named "createNotificationBadgeStore" ]]
+	-- upvalues: CreateDataCacheModule (copy), CreateDataResolverModule (copy), PromiseModule (copy)
+	local DataCacheModule = CreateDataCacheModule()
+	local DataResolverModule = CreateDataResolverModule({
+		cache = DataCacheModule,
+		fetchFn = function(_) --[[ Line: 15 ]]
+			-- upvalues: PromiseModule (upval)
+			return PromiseModule.resolve({})
 		end
 	})
 	
 	return {
-		getNotificationBadge = var2.getCachedItem,
-		getNotificationBadges = var2.getCachedItems,
-		updateNotificationBadge = var1.updateItem,
-		updateNotificationBadges = var1.updateItems,
-		clear = var2.clear,
-		dispose = var2.dispose
+		getNotificationBadge = DataResolverModule.getCachedItem,
+		getNotificationBadges = DataResolverModule.getCachedItems,
+		updateNotificationBadge = DataCacheModule.updateItem,
+		updateNotificationBadges = DataCacheModule.updateItems,
+		clear = DataResolverModule.clear,
+		dispose = DataResolverModule.dispose
 	}
 end

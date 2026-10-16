@@ -1,18 +1,18 @@
-﻿local httpService = game:GetService("HttpService")
+﻿local HttpService = game:GetService("HttpService")
 local _ = require(script.Parent.types)
 
 return {
-	encodeJson = function(p1)
-		-- upvalues: httpService (ref)
-		return httpService:JSONEncode(p1), "application/json"
+	encodeJson = function(Input) --[[ Line: 8 ]]
+		-- upvalues: HttpService (copy)
+		return HttpService:JSONEncode(Input), "application/json"
 	end,
-	encodeRaw = function(p1)
-		return function(p2)
-			-- upvalues: p1 (ref)
-			local var1 = typeof(p2)
+	encodeRaw = function(p1) --[[ Line: 13 ]]
+		return function(p2) --[[ Line: 14 ]]
+			-- upvalues: p1 (copy)
+			local ValueType = typeof(p2)
 			
-			if var1 ~= "string" and var1 ~= "buffer" then
-				error(`encodeRaw: expected string or buffer body, got {var1}`)
+			if ValueType ~= "string" and ValueType ~= "buffer" then
+				error(`encodeRaw: expected string or buffer body, got {ValueType}`)
 			end
 			return p2, p1
 		end

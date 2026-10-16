@@ -1,3 +1,3 @@
-﻿return require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator(script.Name, function(p1)
-	return { isSmallTouchScreen = p1 }
+﻿return require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator(script.Name, function(IsSmallTouchScreen) --[[ Line: 5 ]]
+	return { isSmallTouchScreen = IsSmallTouchScreen }
 end)

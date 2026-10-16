@@ -1,29 +1,28 @@
-﻿local expChat = script:FindFirstAncestor("ExpChat")
-local parent = expChat.Parent
-local expChatSharedModule = require(parent.ExpChatShared)
-local friendsChatFocusModule = require(parent.FriendsChat.FriendsChatFocus)
-local getFocusNavigationStoreModule = require(expChat.Stores.GetFocusNavigationStore)
-local tabTypes = expChatSharedModule.TabTypes
-local t = {
-	canOpenChat = function()
+﻿local ExpChat = script:FindFirstAncestor("ExpChat")
+local Parent = ExpChat.Parent
+local FriendsChatFocusModule = require(Parent.FriendsChat.FriendsChatFocus)
+local GetFocusNavigationStoreModule = require(ExpChat.Stores.GetFocusNavigationStore)
+local TabTypes = require(Parent.ExpChatShared).TabTypes
+local config = {
+	canOpenChat = function(): boolean --[[ Line: 44 ]]
 		return false
 	end,
-	focus = function(_)
-		-- upvalues: getFocusNavigationStoreModule (ref)
-		getFocusNavigationStoreModule(false).requestChatInputBarFocus()
+	focus = function(_) --[[ Line: 54 ]]
+		-- upvalues: GetFocusNavigationStoreModule (copy)
+		GetFocusNavigationStoreModule(false).requestChatInputBarFocus()
 		
 		return Enum.ContextActionResult.Sink
 	end
 }
-local t_1 = {
-	canOpenChat = friendsChatFocusModule.canFocus,
-	focus = function(p1)
-		-- upvalues: friendsChatFocusModule (ref)
-		return friendsChatFocusModule.focus(p1.keyCode)
+local config1 = {
+	canOpenChat = FriendsChatFocusModule.canFocus,
+	focus = function(p1) --[[ Line: 64 ]]
+		-- upvalues: FriendsChatFocusModule (copy)
+		return FriendsChatFocusModule.focus(p1.keyCode)
 	end
 }
 
-return function(value)
-	-- upvalues: t_1 (ref), t (ref), tabTypes (ref)
-	return if value == "FriendsChat" then t_1 elseif value == "TextChat" then t elseif value == "UniverseChat" then t else tabTypes.unreachable(value)
+return function(p1) --[[ Line: 69 | Named "getTabShortcutBehavior" ]]
+	-- upvalues: config1 (copy), config (copy), TabTypes (copy)
+	return if p1 == "FriendsChat" then config1 elseif p1 == "TextChat" then config elseif p1 == "UniverseChat" then config else TabTypes.unreachable(p1)
 end

@@ -1,6 +1,6 @@
-﻿local constantsModule = require(script:FindFirstAncestor("PeopleReactView").Constants)
+﻿local ConstantsModule = require(script:FindFirstAncestor("PeopleReactView").Constants)
 
-return function(p1)
-	-- upvalues: constantsModule (ref)
-	return p1 > 0 and math.round(p1) < constantsModule.PEOPLEPAGE.STACKED_ROW_MAX_WINDOW_WIDTH
+return function(Value: number): boolean --[[ Line: 7 ]]
+	-- upvalues: ConstantsModule (copy)
+	return Value > 0 and math.round(Value) < ConstantsModule.PEOPLEPAGE.STACKED_ROW_MAX_WINDOW_WIDTH
 end

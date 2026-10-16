@@ -1,13 +1,12 @@
-﻿local genericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
-local parent = genericAbuseReporting.Parent
-local reactModule = require(parent.React)
-local _ = require(genericAbuseReporting.Bedui.Provider.AbuseReportBeduiTypes)
-local fFlagAddThumbnailSelectorReport = require(parent.SharedFlags).FFlagAddThumbnailSelectorReport
+﻿local GenericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
+local Parent = GenericAbuseReporting.Parent
+local _ = require(GenericAbuseReporting.Bedui.Provider.AbuseReportBeduiTypes)
+local FFlagAddThumbnailSelectorReport = require(Parent.SharedFlags).FFlagAddThumbnailSelectorReport
 
-return reactModule.createContext({
-	custom = if fFlagAddThumbnailSelectorReport then {} else nil,
+return require(Parent.React).createContext({
+	custom = if FFlagAddThumbnailSelectorReport then {} else nil,
 	formData = {},
-	updateForm = function(_, _) end,
-	additionalReportTags = if fFlagAddThumbnailSelectorReport then {} else nil,
-	updateAdditionalReportTags = if fFlagAddThumbnailSelectorReport then function(_, _) end else nil
+	updateForm = function(_, _) --[[ Line: 16 ]] end,
+	additionalReportTags = if FFlagAddThumbnailSelectorReport then {} else nil,
+	updateAdditionalReportTags = if FFlagAddThumbnailSelectorReport then function(_, _) --[[ Line: 19 ]] end else nil
 })

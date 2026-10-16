@@ -1,100 +1,97 @@
-﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
-local centralOverlayModule = require(parent.CentralOverlay)
-local dataHydrationModule = require(parent.DataHydration)
-local playerFeedbackModule = require(parent.PlayerFeedback)
-local robloxAppEnumsModule = require(parent.RobloxAppEnums)
-local game = dataHydrationModule.Game
-local setCentralOverlay = centralOverlayModule.Actions.SetCentralOverlay
-local centralOverlayType = robloxAppEnumsModule.CentralOverlayType
-local playerFeedbackEvents = playerFeedbackModule.Analytics.Events.PlayerFeedbackEvents
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local sduiActionType = sduiCoreSystemModule.SduiActionType
-local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
-local getSduiClientPageScope = sduiCoreSystemModule.getSduiClientPageScope
-local t = { [true] = "Upvote", [false] = "Downvote" }
+﻿local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
+local Game = require(Parent.DataHydration).Game
+local SetCentralOverlayFunction = require(Parent.CentralOverlay).Actions.SetCentralOverlay
+local CentralOverlayType = require(Parent.RobloxAppEnums).CentralOverlayType
+local PlayerFeedbackEvents = require(Parent.PlayerFeedback).Analytics.Events.PlayerFeedbackEvents
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local SduiActionType = SduiCoreSystemModule.SduiActionType
+local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
+local GetSduiClientPageScopeFunction = SduiCoreSystemModule.getSduiClientPageScope
+local config = { [true] = "Upvote", [false] = "Downvote" }
 
-return function(p1, _, p2, _)
-	-- upvalues: sduiErrorType (ref), sduiActionType (ref), game (ref), t (ref), playerFeedbackEvents (ref), setCentralOverlay (ref), centralOverlayType (ref), getSduiClientPageScope (ref)
-	local var1 = if p1 then p1.actionParams else nil
+return function(p1, _, p2, _) --[[ Line: 32 | Named "SduiOpenGameFeedbackFormAction" ]]
+	-- upvalues: SduiErrorType (copy), SduiActionType (copy), Game (copy), config (copy), PlayerFeedbackEvents (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy), GetSduiClientPageScopeFunction (copy)
+	local ActionParams = p1 and p1.actionParams or nil
 	
-	if var1 == nil then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if ActionParams == nil then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			message = "Missing actionParams",
-			name = sduiActionType.OpenGameFeedbackForm
+			name = SduiActionType.OpenGameFeedbackForm
 		}, p2.appPage)
 		
 		return
 	end
-	local universeId = var1.universeId
+	local UniverseId = ActionParams.universeId
 	
-	if typeof(universeId) ~= "string" or universeId == "" then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if typeof(UniverseId) ~= "string" or UniverseId == "" then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			propName = "universeId",
-			name = sduiActionType.OpenGameFeedbackForm,
-			message = `Invalid or missing universeId: {tostring(universeId)}`
+			name = SduiActionType.OpenGameFeedbackForm,
+			message = `Invalid or missing universeId: {tostring(UniverseId)}`
 		}, p2.appPage)
 		
 		return
 	end
-	local rootPlaceId = var1.rootPlaceId
+	local RootPlaceId = ActionParams.rootPlaceId
 	
-	if typeof(rootPlaceId) ~= "string" or rootPlaceId == "" then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if typeof(RootPlaceId) ~= "string" or RootPlaceId == "" then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			propName = "rootPlaceId",
-			name = sduiActionType.OpenGameFeedbackForm,
-			message = `Invalid or missing rootPlaceId: {tostring(rootPlaceId)}`
+			name = SduiActionType.OpenGameFeedbackForm,
+			message = `Invalid or missing rootPlaceId: {tostring(RootPlaceId)}`
 		}, p2.appPage)
 		
 		return
 	end
-	local var2 = game.getUserVoteFeedbackMetadataStore(false).getUserVoteFeedbackMetadata(rootPlaceId).data(false)
-	local var3 = game.getVotesStore(false).getAndFetchUserVote(universeId).data(false)
+	local DataResult = Game.getUserVoteFeedbackMetadataStore(false).getUserVoteFeedbackMetadata(RootPlaceId).data(false)
+	local DataResult1 = Game.getVotesStore(false).getAndFetchUserVote(UniverseId).data(false)
 	
-	if not var2 or not var2.canSubmitReview or not var3 or var3.userVote ~= true and var3.userVote ~= false then
-		p2.dependencies.logger.reportError(sduiErrorType.FailedToExecuteAction, {
-			name = sduiActionType.OpenGameFeedbackForm,
-			message = `Missing or invalid feedback hydration: hasMetadata={tostring(var2 ~= nil)}, canSubmitReview={tostring(var2 and var2.canSubmitReview)}, hasUserVoteData={tostring(var3 ~= nil)}, userVote={tostring(var3 and var3.userVote)}`
+	if not DataResult or not DataResult.canSubmitReview or not DataResult1 or DataResult1.userVote ~= true and DataResult1.userVote ~= false then
+		p2.dependencies.logger.reportError(SduiErrorType.FailedToExecuteAction, {
+			name = SduiActionType.OpenGameFeedbackForm,
+			message = `Missing or invalid feedback hydration: hasMetadata={tostring(DataResult ~= nil)}, canSubmitReview={tostring(DataResult and DataResult.canSubmitReview)}, hasUserVoteData={tostring(DataResult1 ~= nil)}, userVote={tostring(DataResult1 and DataResult1.userVote)}`
 		}, p2.appPage)
 		
 		return
 	end
-	local userVote = t[var3.userVote]
-	local var4 = nil
+	local Entry = config[DataResult1.userVote]
+	local Category = nil
 	
-	for i, v in var2.categories do
-		if v.type == userVote then
-			var4 = v
+	for _, category in DataResult.categories do
+		if category.type == Entry then
+			Category = category
 			break
 		end
 	end
-	if var4 == nil then
-		p2.dependencies.logger.reportError(sduiErrorType.FailedToExecuteAction, {
-			name = sduiActionType.OpenGameFeedbackForm,
-			message = `No matching vote category found for type: {tostring(userVote)}`
+	if Category == nil then
+		p2.dependencies.logger.reportError(SduiErrorType.FailedToExecuteAction, {
+			name = SduiActionType.OpenGameFeedbackForm,
+			message = `No matching vote category found for type: {tostring(Entry)}`
 		}, p2.appPage)
 		
 		return
-	end
-	playerFeedbackEvents.ClickPlayerFeedbackPromptCta(p2.dependencies.eventIngest, rootPlaceId)
-	local configKey = p2.configKey
-	p2.dependencies.dispatch(setCentralOverlay(centralOverlayType.GamePlayerFeedbackForm, {
-		universeId = universeId,
-		playerFeedbackMetadata = {
-			rootPlaceId = var2.rootPlaceId,
-			canSubmitReview = var2.canSubmitReview,
-			canSubmitComment = var2.canSubmitComment,
-			categoryType = userVote,
-			category = var4,
-			comment = var2.comment,
-			metadata = var2.metadata
-		},
-		onSubmitted = function()
-			-- upvalues: game (copy), rootPlaceId (ref), configKey (ref), getSduiClientPageScope (copy)
-			game.getUserVoteFeedbackMetadataStore(false).clearItem(rootPlaceId)
-			
-			if configKey then
-				getSduiClientPageScope(configKey).set("showPlayerFeedback", false)
+	else
+		PlayerFeedbackEvents.ClickPlayerFeedbackPromptCta(p2.dependencies.eventIngest, RootPlaceId)
+		local ConfigKey = p2.configKey
+		p2.dependencies.dispatch(SetCentralOverlayFunction(CentralOverlayType.GamePlayerFeedbackForm, {
+			universeId = UniverseId,
+			playerFeedbackMetadata = {
+				rootPlaceId = DataResult.rootPlaceId,
+				canSubmitReview = DataResult.canSubmitReview,
+				canSubmitComment = DataResult.canSubmitComment,
+				categoryType = Entry,
+				category = Category,
+				comment = DataResult.comment,
+				metadata = DataResult.metadata
+			},
+			onSubmitted = function() --[[ Line: 123 ]]
+				-- upvalues: Game (upval), RootPlaceId (copy), ConfigKey (copy), GetSduiClientPageScopeFunction (upval)
+				Game.getUserVoteFeedbackMetadataStore(false).clearItem(RootPlaceId)
+				
+				if ConfigKey then
+					GetSduiClientPageScopeFunction(ConfigKey).set("showPlayerFeedback", false)
+				end
 			end
-		end
-	}))
+		}))
+	end
 end

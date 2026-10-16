@@ -1,70 +1,70 @@
-﻿local parent = script:FindFirstAncestor("AuthCommon").Parent
-local roactModule = require(parent.Roact)
-local UIBloxModule = require(parent.UIBlox)
-local withStyle = UIBloxModule.Style.withStyle
-local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
-local getImageData = require(parent.RobloxAppAssets).GetImageData
-local t = {
+﻿local Parent = script:FindFirstAncestor("AuthCommon").Parent
+local RoactModule = require(Parent.Roact)
+local UIBloxModule = require(Parent.UIBlox)
+local WithStyleFunction = UIBloxModule.Style.withStyle
+local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
+local GetImageDataFunction = require(Parent.RobloxAppAssets).GetImageData
+local BorderState = {
 	Hover = "Hover",
 	Focused = "Focused",
 	Error = "Error",
 	Default = "Default"
 }
-local authStatefulRoundCornerBorder = roactModule.PureComponent:extend("AuthStatefulRoundCornerBorder")
-authStatefulRoundCornerBorder.defaultProps = { borderState = t.Default }
+local AuthStatefulRoundCornerBorder = RoactModule.PureComponent:extend("AuthStatefulRoundCornerBorder")
+AuthStatefulRoundCornerBorder.defaultProps = { borderState = BorderState.Default }
 
-function authStatefulRoundCornerBorder.render(p1)
-	-- upvalues: withStyle (ref), roactModule (ref), t (ref), imageSetLabel (ref), getImageData (ref)
-	return withStyle(function(p2)
-		-- upvalues: p1 (ref), roactModule (copy), t (copy), imageSetLabel (copy), getImageData (copy)
-		local size = p1.props.size
-		local borderState = p1.props.borderState
-		local layoutOrder = p1.props.layoutOrder
-		local children = p1.props[roactModule.Children] or {}
-		local color = p2.Theme.UIDefault.Color
-		local transparency = p2.Theme.UIDefault.Transparency
+function AuthStatefulRoundCornerBorder.render(p1) --[[ Line: 27 ]]
+	-- upvalues: WithStyleFunction (copy), RoactModule (copy), BorderState (copy), ImageSetLabel (copy), GetImageDataFunction (copy)
+	return WithStyleFunction(function(p2) --[[ Line: 28 ]]
+		-- upvalues: p1 (copy), RoactModule (upval), BorderState (upval), ImageSetLabel (upval), GetImageDataFunction (upval)
+		local Size = p1.props.size
+		local BorderState1 = p1.props.borderState
+		local LayoutOrder = p1.props.layoutOrder
+		local Prop = p1.props[RoactModule.Children] or {}
+		local Color = p2.Theme.UIDefault.Color
+		local Transparency = p2.Theme.UIDefault.Transparency
 		
-		if borderState == t.Focused then
-			color = p2.Theme.IconEmphasis.Color
-			transparency = p2.Theme.IconEmphasis.Transparency
-		elseif borderState == t.Hover then
-			color = p2.Theme.IconDefault.Color
-			transparency = p2.Theme.IconDefault.Transparency
-		elseif borderState == t.Error then
-			color = p2.Theme.Alert.Color
-			transparency = p2.Theme.Alert.Transparency
+		if BorderState1 == BorderState.Focused then
+			Color = p2.Theme.IconEmphasis.Color
+			Transparency = p2.Theme.IconEmphasis.Transparency
+		elseif BorderState1 == BorderState.Hover then
+			Color = p2.Theme.IconDefault.Color
+			Transparency = p2.Theme.IconDefault.Transparency
+		elseif BorderState1 == BorderState.Error then
+			Color = p2.Theme.Alert.Color
+			Transparency = p2.Theme.Alert.Transparency
 		end
 		if p1.props.borderColorOverride ~= nil then
-			color = p1.props.borderColorOverride
+			Color = p1.props.borderColorOverride
 		end
 		if p1.props.borderTransparencyOverride ~= nil then
-			transparency = p1.props.borderTransparencyOverride
+			Transparency = p1.props.borderTransparencyOverride
 		end
-		return roactModule.createElement("Frame", {
+		return RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			ClipsDescendants = true,
-			Size = size,
-			LayoutOrder = layoutOrder
+			Size = Size,
+			LayoutOrder = LayoutOrder
 		}, {
-			Boundary = roactModule.createElement(imageSetLabel, {
+			Boundary = RoactModule.createElement(ImageSetLabel, {
 				ZIndex = 2,
 				BackgroundTransparency = 1,
 				Size = UDim2.new(1, 0, 1, 0),
 				ScaleType = Enum.ScaleType.Slice,
 				SliceCenter = Rect.new(9, 9, 9, 9),
-				Image = getImageData("LuaApp/buttons/buttonStroke") or "LuaApp/buttons/buttonStroke",
-				ImageColor3 = color,
-				ImageTransparency = transparency
+				Image = GetImageDataFunction("LuaApp/buttons/buttonStroke") or "LuaApp/buttons/buttonStroke",
+				ImageColor3 = Color,
+				ImageTransparency = Transparency
 			}),
-			ContentWrapper = roactModule.createElement("Frame", {
+			ContentWrapper = RoactModule.createElement("Frame", {
 				ZIndex = 1,
 				BackgroundTransparency = 1,
 				Size = UDim2.new(1, 0, 1, 0)
-			}, children)
+			}, Prop)
 		})
 	end)
 end
 
-authStatefulRoundCornerBorder.BorderState = t
+AuthStatefulRoundCornerBorder.BorderState = BorderState
 
-return authStatefulRoundCornerBorder
+return AuthStatefulRoundCornerBorder

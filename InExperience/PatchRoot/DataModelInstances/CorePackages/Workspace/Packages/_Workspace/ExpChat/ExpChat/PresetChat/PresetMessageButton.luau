@@ -1,92 +1,89 @@
-﻿local tweenService = game:GetService("TweenService")
-local parent = script:FindFirstAncestor("ExpChat").Parent
-local expChatSharedModule = require(parent.ExpChatShared)
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local presetCooldownContextModule = require(script.Parent.PresetCooldownContext)
-local var1 = expChatSharedModule.Flags.FIntPresetChatCooldownLuaMs / 1000
+﻿local TweenService = game:GetService("TweenService")
+local Parent = script:FindFirstAncestor("ExpChat").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local PresetCooldownContextModule = require(script.Parent.PresetCooldownContext)
+local FIntPresetChatCooldownLuaMsRatio = require(Parent.ExpChatShared).Flags.FIntPresetChatCooldownLuaMs / 1000
 
-return reactModule.memo(function(value)
-	-- upvalues: foundationModule (ref), reactModule (ref), presetCooldownContextModule (ref), var1 (ref), tweenService (ref)
-	local var2 = foundationModule.Hooks.useTokens()
-	local circle = var2.Radius.Circle
-	local var3 = reactModule.useContext(presetCooldownContextModule)
-	local var4 = var3 ~= nil and var3.isCooldownActive
-	local var5 = if var3 ~= nil then nil else var3.endsAt
-	local var6 = reactModule.useCallback(function()
-		-- upvalues: value (ref)
-		value.onActivated(value.presetId)
-	end, { value.onActivated, value.presetId })
-	local var7, var8 = reactModule.useState(nil)
-	local var9 = reactModule.useRef(nil)
-	local var10 = reactModule.useCallback(function(p1)
-		-- upvalues: var7 (ref), var8 (ref)
-		if var7 == nil and p1 and p1.AbsoluteSize.X > 0 then
-			var8(p1.AbsoluteSize)
+return ReactModule.memo(function(p1) --[[ Line: 21 | Named "PresetMessageButton" ]]
+	-- upvalues: FoundationModule (copy), ReactModule (copy), PresetCooldownContextModule (copy), FIntPresetChatCooldownLuaMsRatio (copy), TweenService (copy)
+	local UseTokensResult = FoundationModule.Hooks.useTokens()
+	local Circle = UseTokensResult.Radius.Circle
+	local UseContextResult = ReactModule.useContext(PresetCooldownContextModule)
+	local IsCooldownActive = UseContextResult ~= nil and UseContextResult.isCooldownActive
+	local EndsAt = if UseContextResult == nil then nil else UseContextResult.endsAt
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 28 ]]
+		-- upvalues: p1 (copy)
+		p1.onActivated(p1.presetId)
+	end, { p1.onActivated, p1.presetId })
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseResult1 = ReactModule.useCallback(function(Frame: Frame) --[[ Line: 35 ]]
+		-- upvalues: UseStateResult (copy), UseStateResult2 (copy)
+		if UseStateResult == nil and Frame and Frame.AbsoluteSize.X > 0 then
+			UseStateResult2(Frame.AbsoluteSize)
 		end
-	end, { var7 })
-	reactModule.useEffect(function()
-		-- upvalues: var5 (ref), var7 (ref), var9 (ref), var1 (copy), tweenService (copy)
-		if var5 == nil or var7 == nil then return end
-		local current = var9.current
+	end, { UseStateResult })
+	ReactModule.useEffect(function() --[[ Line: 41 ]]
+		-- upvalues: EndsAt (copy), UseStateResult (copy), UseRefResult (copy), FIntPresetChatCooldownLuaMsRatio (upval), TweenService (upval)
+		if EndsAt == nil or UseStateResult == nil then return end
+		local Current = UseRefResult.current
 		
-		if current == nil then return end
-		local var11 = var5 - os.clock()
+		if Current == nil then return end
+		local EndsAtDelta = EndsAt - os.clock()
 		
-		if var11 <= 0 then
-			return
+		if EndsAtDelta <= 0 then return end
+		Current.Size = UDim2.fromOffset(UseStateResult.X * math.clamp(EndsAtDelta / FIntPresetChatCooldownLuaMsRatio, 0, 1), UseStateResult.Y)
+		local Tween = TweenService:Create(Current, TweenInfo.new(EndsAtDelta, Enum.EasingStyle.Linear), { Size = UDim2.fromOffset(0, UseStateResult.Y) })
+		Tween:Play()
+		
+		return function() --[[ Line: 59 ]]
+			-- upvalues: Tween (copy)
+			Tween:Cancel()
+			Tween:Destroy()
 		end
-		current.Size = UDim2.fromOffset(var7.X * math.clamp(var11 / var1, 0, 1), var7.Y)
-		local var12 = tweenService:Create(current, TweenInfo.new(var11, Enum.EasingStyle.Linear), { Size = UDim2.fromOffset(0, var7.Y) })
-		var12:Play()
-		
-		return function()
-			-- upvalues: var12 (ref)
-			var12:Cancel()
-			var12:Destroy()
-		end
-	end, { var5, var7 })
+	end, { EndsAt, UseStateResult })
 	
-	return reactModule.createElement(foundationModule.View, {
+	return ReactModule.createElement(FoundationModule.View, {
 		tag = "size-0-800 auto-x radius-circle clip",
-		onAbsoluteSizeChanged = var10,
-		LayoutOrder = value.layoutOrder or 0,
-		backgroundStyle = var2.Color.ActionStandard.Background,
-		onActivated = var6,
-		isDisabled = var4,
+		onAbsoluteSizeChanged = UseResult1,
+		LayoutOrder = p1.layoutOrder or 0,
+		backgroundStyle = UseTokensResult.Color.ActionStandard.Background,
+		onActivated = UseResult,
+		isDisabled = IsCooldownActive,
 		cursor = {
-			radius = UDim.new(0, circle),
-			offset = math.floor(var2.Stroke.Thicker) * 2,
-			borderWidth = math.floor(var2.Stroke.Thicker)
+			radius = UDim.new(0, Circle),
+			offset = math.floor(UseTokensResult.Stroke.Thicker) * 2,
+			borderWidth = math.floor(UseTokensResult.Stroke.Thicker)
 		},
-		ref = value.buttonRef
+		ref = p1.buttonRef
 	}, {
-		CooldownClipFrame = if var4 and var5 ~= nil and var7 ~= nil then reactModule.createElement("Frame", {
+		CooldownClipFrame = if IsCooldownActive and EndsAt ~= nil and UseStateResult ~= nil then ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			ClipsDescendants = true,
 			BorderSizePixel = 0,
 			ZIndex = 1,
-			ref = var9,
-			Size = UDim2.fromOffset(var7.X, var7.Y)
+			ref = UseRefResult,
+			Size = UDim2.fromOffset(UseStateResult.X, UseStateResult.Y)
 		}, {
-			CooldownOverlay = reactModule.createElement("Frame", {
+			CooldownOverlay = ReactModule.createElement("Frame", {
 				BorderSizePixel = 0,
-				Size = UDim2.new(0, var7.X, 1, 0),
+				Size = UDim2.new(0, UseStateResult.X, 1, 0),
 				AutomaticSize = Enum.AutomaticSize.Y,
-				BackgroundColor3 = var2.Color.Shift.Shift_400.Color3,
-				BackgroundTransparency = var2.Color.Shift.Shift_400.Transparency
+				BackgroundColor3 = UseTokensResult.Color.Shift.Shift_400.Color3,
+				BackgroundTransparency = UseTokensResult.Color.Shift.Shift_400.Transparency
 			}, {
-				UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, circle) })
+				UICorner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0, Circle) })
 			})
 		}) else nil,
-		Text = reactModule.createElement(foundationModule.Text, {
+		Text = ReactModule.createElement(FoundationModule.Text, {
 			tag = "size-0-full auto-x text-label-medium",
 			ZIndex = 2,
-			Text = value.text,
-			textStyle = var2.Color.ActionStandard.Foreground,
+			Text = p1.text,
+			textStyle = UseTokensResult.Color.ActionStandard.Foreground,
 			padding = {
-				left = UDim.new(0, var2.Padding.Medium),
-				right = UDim.new(0, var2.Padding.Medium)
+				left = UDim.new(0, UseTokensResult.Padding.Medium),
+				right = UDim.new(0, UseTokensResult.Padding.Medium)
 			}
 		})
 	})

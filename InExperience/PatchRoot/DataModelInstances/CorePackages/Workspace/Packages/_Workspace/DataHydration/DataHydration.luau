@@ -1,13 +1,17 @@
-﻿local dataHydrationTypesModule = require(script.DataHydrationTypes)
+﻿local DataHydrationTypesModule = require(script.DataHydrationTypes)
+local SharedFlagsModule = require(script.Parent.SharedFlags)
+local FFlagSduiLeaderboardComponent = SharedFlagsModule.FFlagSduiLeaderboardComponent
+local NotificationBadgeModule = require(script.NotificationBadge)
+local LeaderboardStatsModule = require(script.LeaderboardStats)
 
 return {
 	["jest.config"] = script["jest.config"],
 	createDataResolver = require(script.createDataResolver),
 	createDataCache = require(script.createDataCache),
 	createMutationLayer = require(script.createMutationLayer),
-	DataHydrationTypes = dataHydrationTypesModule,
+	DataHydrationTypes = DataHydrationTypesModule,
 	DataHydrationUtils = require(script.DataHydrationUtils),
-	DataStatus = dataHydrationTypesModule.DataStatus,
+	DataStatus = DataHydrationTypesModule.DataStatus,
 	Badges = require(script.Badges),
 	Game = require(script.Game),
 	Creator = require(script.Creator),
@@ -29,5 +33,6 @@ return {
 	UserProfile = require(script.UserProfile),
 	Community = require(script.Community),
 	CommunityUserMembership = require(script.CommunityUserMembership),
-	NotificationBadge = if require(script.Parent.SharedFlags).FFlagSduiNotificationBadgeHydration then require(script.NotificationBadge) else nil
+	NotificationBadge = if SharedFlagsModule.FFlagSduiNotificationBadgeHydration then NotificationBadgeModule else nil,
+	LeaderboardStats = if FFlagSduiLeaderboardComponent then LeaderboardStatsModule else nil
 }

@@ -1,9 +1,9 @@
-﻿local dependenciesModule = require(script:FindFirstAncestor("SocialLibraries").dependencies)
-local roact = dependenciesModule.Roact
-local UIBlox = dependenciesModule.UIBlox
-local fitFrameVerticalModule = require(script.Parent.Parent.FitFrameVertical)
-local alertView = roact.Component:extend("AlertView")
-alertView.defaultProps = {
+﻿local DependenciesModule = require(script:FindFirstAncestor("SocialLibraries").dependencies)
+local Roact = DependenciesModule.Roact
+local UIBlox = DependenciesModule.UIBlox
+local FitFrameVerticalModule = require(script.Parent.Parent.FitFrameVertical)
+local AlertView = Roact.Component:extend("AlertView")
+AlertView.defaultProps = {
 	Visible = false,
 	contentPaddingLeft = 12,
 	contentPaddingRight = 12,
@@ -12,18 +12,18 @@ alertView.defaultProps = {
 	width = UDim.new(0.5, 0)
 }
 
-function alertView.render(p1)
-	-- upvalues: UIBlox (ref), roact (ref), fitFrameVerticalModule (ref)
-	return UIBlox.Style.withStyle(function(p2)
-		-- upvalues: roact (copy), fitFrameVerticalModule (copy), p1 (ref)
-		return roact.createElement(fitFrameVerticalModule, {
+function AlertView.render(p1) --[[ Line: 18 ]]
+	-- upvalues: UIBlox (copy), Roact (copy), FitFrameVerticalModule (copy)
+	return UIBlox.Style.withStyle(function(p2) --[[ Line: 19 ]]
+		-- upvalues: Roact (upval), FitFrameVerticalModule (upval), p1 (copy)
+		return Roact.createElement(FitFrameVerticalModule, {
 			Visible = p1.props.Visible,
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			BackgroundColor3 = p2.Theme.BackgroundUIDefault.Color,
 			Position = UDim2.new(0.5, 0, 0.5, 0),
 			width = p1.props.width
 		}, {
-			InnerFrame = roact.createElement(fitFrameVerticalModule, {
+			InnerFrame = Roact.createElement(FitFrameVerticalModule, {
 				BackgroundTransparency = 1,
 				margin = {
 					top = p1.props.contentPaddingTop,
@@ -33,9 +33,9 @@ function alertView.render(p1)
 				},
 				width = UDim.new(1, 0),
 				HorizontalAlignment = Enum.HorizontalAlignment.Center
-			}, p1.props[roact.Children])
+			}, p1.props[Roact.Children])
 		})
 	end)
 end
 
-return alertView
+return AlertView

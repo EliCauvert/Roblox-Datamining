@@ -1,112 +1,114 @@
-﻿local avatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
-local parent = avatarExperienceProfilePictureEditor.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local localizationModule = require(parent.Localization)
-local view = foundationModule.View
-local button = foundationModule.Button
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local fillBehavior = foundationModule.Enums.FillBehavior
-local inputSize = foundationModule.Enums.InputSize
-local useLocalization = localizationModule.Hooks.useLocalization
-local useTokens = foundationModule.Hooks.useTokens
-local scrollSectionModule = require(avatarExperienceProfilePictureEditor.Components.ScrollSection)
-local sectionHeaderModule = require(avatarExperienceProfilePictureEditor.Components.SectionTitle.SectionHeader)
-local assetPickerGridModule = require(avatarExperienceProfilePictureEditor.Components.AssetPicker.AssetPickerGrid)
-local virtualizedFeedContainerModule = require(avatarExperienceProfilePictureEditor.Components.AssetPicker.VirtualizedFeedContainer)
-local getAssetPickerStatusModule = require(avatarExperienceProfilePictureEditor.Utils.getAssetPickerStatus)
-local textKeysModule = require(avatarExperienceProfilePictureEditor.Common.TextKeys)
-local useEditProfileImageActions = require(avatarExperienceProfilePictureEditor.Context.EditProfileImageActionsContext).useEditProfileImageActions
+﻿local AvatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
+local Parent = AvatarExperienceProfilePictureEditor.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local Button = FoundationModule.Button
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local FillBehavior = FoundationModule.Enums.FillBehavior
+local InputSize = FoundationModule.Enums.InputSize
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local ScrollSectionModule = require(AvatarExperienceProfilePictureEditor.Components.ScrollSection)
+local SectionHeaderModule = require(AvatarExperienceProfilePictureEditor.Components.SectionTitle.SectionHeader)
+local AssetPickerGridModule = require(AvatarExperienceProfilePictureEditor.Components.AssetPicker.AssetPickerGrid)
+local VirtualizedFeedContainerModule = require(AvatarExperienceProfilePictureEditor.Components.AssetPicker.VirtualizedFeedContainer)
+local GetAssetPickerStatusModule = require(AvatarExperienceProfilePictureEditor.Utils.getAssetPickerStatus)
+local TextKeysModule = require(AvatarExperienceProfilePictureEditor.Common.TextKeys)
+local UseEditProfileImageActionsFunction = require(AvatarExperienceProfilePictureEditor.Context.EditProfileImageActionsContext).useEditProfileImageActions
 
-return function(p1)
-	-- upvalues: useTokens (ref), useEditProfileImageActions (ref), useLocalization (ref), textKeysModule (ref), reactModule (ref), getAssetPickerStatusModule (ref), view (ref), sectionHeaderModule (ref), scrollSectionModule (ref), assetPickerGridModule (ref), button (ref), buttonVariant (ref), inputSize (ref), fillBehavior (ref), virtualizedFeedContainerModule (ref)
-	local var1 = useTokens()
-	local var2 = useEditProfileImageActions()
-	local var3 = useLocalization({
-		emotes = textKeysModule.Emotes,
-		details = textKeysModule.DetailsButton,
-		recommendations = textKeysModule.Recommendations,
-		shopForMore = textKeysModule.ShopForMore
+return function(p1) --[[ Line: 50 | Named "ExpandedEmotesGridContent" ]]
+	-- upvalues: UseTokensFunction (copy), UseEditProfileImageActionsFunction (copy), UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), GetAssetPickerStatusModule (copy), View (copy), SectionHeaderModule (copy), ScrollSectionModule (copy), AssetPickerGridModule (copy), Button (copy), ButtonVariant (copy), InputSize (copy), FillBehavior (copy), VirtualizedFeedContainerModule (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseEditProfileImageActionsResult = UseEditProfileImageActionsFunction()
+	local UseLocalizationResult = UseLocalizationFunction({
+		emotes = TextKeysModule.Emotes,
+		details = TextKeysModule.DetailsButton,
+		recommendations = TextKeysModule.Recommendations,
+		shopForMore = TextKeysModule.ShopForMore
 	})
-	local var4 = reactModule.useMemo(function()
-		-- upvalues: var3 (ref)
-		return { details = var3.details }
-	end, { var3.details })
-	local var5 = getAssetPickerStatusModule(p1.emotesLoading, p1.emotesError)
-	local var6 = if var5 == "ready" then p1.useInternalScroll else true
-	local var7 = reactModule.createElement(view, {
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 59 ]]
+		-- upvalues: UseLocalizationResult (copy)
+		return { details = UseLocalizationResult.details }
+	end, { UseLocalizationResult.details })
+	local AssetPickerStatusModule = GetAssetPickerStatusModule(p1.emotesLoading, p1.emotesError)
+	local IsNotReady = AssetPickerStatusModule ~= "ready" or p1.useInternalScroll
+	local Element = ReactModule.createElement(View, {
 		tag = {
-			["auto-xy padding-x-xlarge"] = var6,
-			["auto-xy padding-x-xlarge padding-bottom-medium"] = not var6
+			["auto-xy padding-x-xlarge"] = IsNotReady,
+			["auto-xy padding-x-xlarge padding-bottom-medium"] = not IsNotReady
 		}
 	}, {
-		Title = reactModule.createElement(sectionHeaderModule, { title = var3.emotes, onBack = p1.onTitleBack })
+		Title = ReactModule.createElement(SectionHeaderModule, {
+			title = UseLocalizationResult.emotes,
+			onBack = p1.onTitleBack
+		})
 	})
 	
-	return if var5 == "ready" then reactModule.createElement(view, {
+	return if AssetPickerStatusModule == "ready" then ReactModule.createElement(View, {
 		tag = {
-			["col grow gap-medium size-full-0 padding-top-xlarge"] = var6,
-			["col grow size-full-0 padding-top-xlarge"] = not var6
+			["col grow gap-medium size-full-0 padding-top-xlarge"] = IsNotReady,
+			["col grow size-full-0 padding-top-xlarge"] = not IsNotReady
 		},
 		LayoutOrder = p1.layoutOrder
 	}, {
-		Header = if var6 then var7 else nil,
-		FeedContainer = reactModule.createElement(view, {
+		Header = if IsNotReady then Element else nil,
+		FeedContainer = ReactModule.createElement(View, {
 			tag = "grow size-full-0",
-			LayoutOrder = if var6 then 2 else 1
+			LayoutOrder = if IsNotReady then 2 else 1
 		}, {
-			Feed = reactModule.createElement(virtualizedFeedContainerModule, {
+			Feed = ReactModule.createElement(VirtualizedFeedContainerModule, {
 				items = p1.ownedEmoteItems,
 				selectedId = p1.selectedEmoteId,
 				onSelect = p1.onSelectEmote,
-				onDetailsActivated = var2.onOpenEmoteDetails,
-				labels = var4,
+				onDetailsActivated = UseEditProfileImageActionsResult.onOpenEmoteDetails,
+				labels = UseMemoResult,
 				minTileSize = p1.tileSize,
 				initialContainerWidth = p1.containerWidth,
-				gap = var1.Gap.Medium,
-				horizontalPadding = var1.Padding.XLarge,
-				strokeInset = var1.Padding.XSmall,
+				gap = UseTokensResult.Gap.Medium,
+				horizontalPadding = UseTokensResult.Padding.XLarge,
+				strokeInset = UseTokensResult.Padding.XSmall,
 				onMoreItems = p1.onMoreEmotes,
 				hasMoreItems = p1.hasMoreEmotes,
 				isLoadingMore = p1.isLoadingMoreEmotes,
 				hasLoadMoreError = p1.hasLoadMoreEmotesError,
 				onRetryLoadMore = p1.onMoreEmotes,
-				listHeaderComponent = if var6 then nil else var7,
-				listFooterComponent = if not (p1.hasMoreEmotes or p1.isLoadingMoreEmotes or p1.hasLoadMoreEmotesError) then reactModule.createElement(view, { tag = "col size-full-0 auto-y padding-top-xlarge" }, {
-					Recommendations = reactModule.createElement(assetPickerGridModule, {
+				listHeaderComponent = if IsNotReady then nil else Element,
+				listFooterComponent = if p1.hasMoreEmotes or p1.isLoadingMoreEmotes or p1.hasLoadMoreEmotesError then nil else ReactModule.createElement(View, { tag = "col size-full-0 auto-y padding-top-xlarge" }, {
+					Recommendations = ReactModule.createElement(AssetPickerGridModule, {
 						layoutOrder = 2,
-						title = var3.recommendations,
+						title = UseLocalizationResult.recommendations,
 						items = p1.recommendedEmoteItems,
 						selectedId = p1.selectedEmoteId,
 						onSelect = p1.onSelectEmote,
-						onDetailsActivated = var2.onOpenEmoteDetails,
-						footerComponent = reactModule.createElement(button, {
-							text = var3.shopForMore,
-							variant = buttonVariant.Standard,
-							size = inputSize.Medium,
-							fillBehavior = fillBehavior.Fill,
-							onActivated = var2.onShopForMoreEmotes
+						onDetailsActivated = UseEditProfileImageActionsResult.onOpenEmoteDetails,
+						footerComponent = ReactModule.createElement(Button, {
+							text = UseLocalizationResult.shopForMore,
+							variant = ButtonVariant.Standard,
+							size = InputSize.Medium,
+							fillBehavior = FillBehavior.Fill,
+							onActivated = UseEditProfileImageActionsResult.onShopForMoreEmotes
 						}),
 						tileSize = p1.tileSize,
 						containerWidth = p1.containerWidth
 					})
-				}) else nil
+				})
 			})
 		})
-	}) else reactModule.createElement(scrollSectionModule, {
+	}) else ReactModule.createElement(ScrollSectionModule, {
 		pinHeader = true,
 		useInternalScroll = true,
 		layoutOrder = p1.layoutOrder,
-		header = var7
+		header = Element
 	}, {
-		OwnedEmotes = reactModule.createElement(assetPickerGridModule, {
+		OwnedEmotes = ReactModule.createElement(AssetPickerGridModule, {
 			layoutOrder = 1,
-			status = var5,
+			status = AssetPickerStatusModule,
 			items = p1.ownedEmoteItems,
 			onRetry = p1.onRetryEmotes,
 			selectedId = p1.selectedEmoteId,
 			onSelect = p1.onSelectEmote,
-			onDetailsActivated = var2.onOpenEmoteDetails,
+			onDetailsActivated = UseEditProfileImageActionsResult.onOpenEmoteDetails,
 			tileSize = p1.tileSize,
 			containerWidth = p1.containerWidth
 		})

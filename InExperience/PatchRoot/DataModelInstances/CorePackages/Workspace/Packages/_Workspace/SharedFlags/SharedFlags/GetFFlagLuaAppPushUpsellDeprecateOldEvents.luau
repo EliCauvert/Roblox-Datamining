@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("LuaAppPushUpsellDeprecateOldEvents", false)
 
-return function()
+return function() --[[ Line: 3 ]]
 	return game:GetFastFlag("LuaAppPushUpsellDeprecateOldEvents")
 end

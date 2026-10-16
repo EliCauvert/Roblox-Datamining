@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent._Workspace.AuthAnalytics.AuthAnalytics.RobloxTelemetry.TimeToLoginTracker)
+﻿return (require(script.Parent.Parent._Workspace.AuthAnalytics.AuthAnalytics.RobloxTelemetry.TimeToLoginTracker))

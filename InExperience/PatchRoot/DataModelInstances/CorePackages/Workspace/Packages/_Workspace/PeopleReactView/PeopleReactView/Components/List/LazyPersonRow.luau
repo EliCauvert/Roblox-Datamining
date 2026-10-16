@@ -1,102 +1,103 @@
-﻿local peopleReactView = script:FindFirstAncestor("PeopleReactView")
-local parent = peopleReactView.Parent
-local reactModule = require(parent.React)
-local robloxAppEnumsModule = require(parent.RobloxAppEnums)
-local useDeviceOrientation = require(parent.RobloxAppHooks).useDeviceOrientation
-local foundationModule = require(parent.Foundation)
-local radius = foundationModule.Enums.Radius
-local useTokens = foundationModule.Hooks.useTokens
-local skeleton = foundationModule.Skeleton
-local view = foundationModule.View
-local peopleServiceModule = require(parent.PeopleService)
-local fFlagPeopleListButtonOverflowModule = require(peopleReactView.Flags.FFlagPeopleListButtonOverflow)
-local _ = require(peopleReactView.Stores.GetScrollingFrameStore)
-local personRowModule = require(peopleReactView.Components.List.PersonRow)
-local peoplePageLayoutContextModule = require(peopleReactView.PeoplePageLayoutContext)
-local lazyScrollingComponentModule = require(peopleReactView.Components.Common.LazyScrollingComponent)
-local flags = peopleServiceModule.getService("Flags")
-local fFlagPeoplePageRemoveSkeletons = flags.FFlagPeoplePageRemoveSkeletons
-local fFlagPeoplePageRemoveUseMemoElements = flags.FFlagPeoplePageRemoveUseMemoElements
-local var1 = reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), fFlagPeoplePageRemoveSkeletons (ref), reactModule (ref), view (ref), skeleton (ref), radius (ref)
-	local var2 = useTokens()
+﻿local PeopleReactView = script:FindFirstAncestor("PeopleReactView")
+local Parent = PeopleReactView.Parent
+local ReactModule = require(Parent.React)
+local RobloxAppEnumsModule = require(Parent.RobloxAppEnums)
+local UseDeviceOrientationFunction = require(Parent.RobloxAppHooks).useDeviceOrientation
+local FoundationModule = require(Parent.Foundation)
+local Radius = FoundationModule.Enums.Radius
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local Skeleton = FoundationModule.Skeleton
+local View = FoundationModule.View
+local FFlagPeopleListButtonOverflowModule = require(PeopleReactView.Flags.FFlagPeopleListButtonOverflow)
+local _ = require(PeopleReactView.Stores.GetScrollingFrameStore)
+local PersonRowModule = require(PeopleReactView.Components.List.PersonRow)
+local PeoplePageLayoutContextModule = require(PeopleReactView.PeoplePageLayoutContext)
+local LazyScrollingComponentModule = require(PeopleReactView.Components.Common.LazyScrollingComponent)
+local FlagsService = require(Parent.PeopleService).getService("Flags")
+local FFlagPeoplePageRemoveSkeletons = FlagsService.FFlagPeoplePageRemoveSkeletons
+local FFlagPeoplePageRemoveUseMemoElements = FlagsService.FFlagPeoplePageRemoveUseMemoElements
+local MemoResult = ReactModule.memo(function(p1) --[[ Line: 35 ]]
+	-- upvalues: UseTokensFunction (copy), FFlagPeoplePageRemoveSkeletons (copy), ReactModule (copy), View (copy), Skeleton (copy), Radius (copy)
+	local UseTokensResult = UseTokensFunction()
 	
-	return if fFlagPeoplePageRemoveSkeletons then reactModule.createElement(view, {
+	return if FFlagPeoplePageRemoveSkeletons then ReactModule.createElement(View, {
 		tag = {
 			["bg-surface-200 radius-medium"] = true,
 			["size-full-2600"] = p1.isPortrait,
 			["size-full-1500"] = not p1.isPortrait
 		}
-	}) else reactModule.createElement(view, {
+	}) else ReactModule.createElement(View, {
 		tag = {
 			["row bg-surface-200 gap-medium padding-small radius-medium"] = true,
 			["size-full-2600"] = p1.isPortrait,
 			["size-full-1500"] = not p1.isPortrait
 		}
 	}, {
-		ThumbnailContainer = reactModule.createElement(view, { tag = "size-1200", LayoutOrder = 1 }, {
-			ThumbnailSkeleton = reactModule.createElement(skeleton, { Size = UDim2.fromScale(1, 1), radius = radius.Circle })
+		ThumbnailContainer = ReactModule.createElement(View, { tag = "size-1200", LayoutOrder = 1 }, {
+			ThumbnailSkeleton = ReactModule.createElement(Skeleton, { Size = UDim2.fromScale(1, 1), radius = Radius.Circle })
 		}),
-		Details = reactModule.createElement(view, { tag = "col grow size-0-full gap-medium", LayoutOrder = 2 }, {
-			NameSkeleton = reactModule.createElement(skeleton, {
+		Details = ReactModule.createElement(View, { tag = "col grow size-0-full gap-medium", LayoutOrder = 2 }, {
+			NameSkeleton = ReactModule.createElement(Skeleton, {
 				LayoutOrder = 1,
-				Size = UDim2.new(0.9, 0, 0, var2.Size.Size_350),
-				radius = radius.Small
+				Size = UDim2.new(0.9, 0, 0, UseTokensResult.Size.Size_350),
+				radius = Radius.Small
 			}),
-			HandleSkeleton = reactModule.createElement(skeleton, {
+			HandleSkeleton = ReactModule.createElement(Skeleton, {
 				LayoutOrder = 2,
-				Size = UDim2.new(0.6, 0, 0, var2.Size.Size_350),
-				radius = radius.Small
+				Size = UDim2.new(0.6, 0, 0, UseTokensResult.Size.Size_350),
+				radius = Radius.Small
 			})
 		})
 	})
 end)
 
-return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), useDeviceOrientation (ref), robloxAppEnumsModule (ref), reactModule (ref), peoplePageLayoutContextModule (ref), fFlagPeopleListButtonOverflowModule (ref), fFlagPeoplePageRemoveUseMemoElements (ref), personRowModule (ref), var1 (ref), fFlagPeoplePageRemoveSkeletons (ref), view (ref), skeleton (ref), radius (ref), lazyScrollingComponentModule (ref)
-	local var2 = useTokens()
-	local var3 = useDeviceOrientation() == robloxAppEnumsModule.DeviceOrientationMode.Portrait or fFlagPeopleListButtonOverflowModule and reactModule.useContext(peoplePageLayoutContextModule).isCompact
-	local var4 = if fFlagPeoplePageRemoveUseMemoElements then reactModule.createElement(personRowModule, { person = p1.person, layoutOrder = p1.layoutOrder }) else reactModule.useMemo(function()
-		-- upvalues: reactModule (copy), personRowModule (copy), p1 (ref)
-		return reactModule.createElement(personRowModule, { person = p1.person, layoutOrder = p1.layoutOrder })
+return ReactModule.memo(function(p1) --[[ Line: 90 ]]
+	-- upvalues: UseTokensFunction (copy), UseDeviceOrientationFunction (copy), RobloxAppEnumsModule (copy), ReactModule (copy), PeoplePageLayoutContextModule (copy), FFlagPeopleListButtonOverflowModule (copy), FFlagPeoplePageRemoveUseMemoElements (copy), PersonRowModule (copy), MemoResult (copy), FFlagPeoplePageRemoveSkeletons (copy), View (copy), Skeleton (copy), Radius (copy), LazyScrollingComponentModule (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseContextResult = ReactModule.useContext(PeoplePageLayoutContextModule)
+	local IsUseDeviceOrientationResultMatch = UseDeviceOrientationFunction() == RobloxAppEnumsModule.DeviceOrientationMode.Portrait or FFlagPeopleListButtonOverflowModule and UseContextResult.isCompact
+	local Element = if FFlagPeoplePageRemoveUseMemoElements then ReactModule.createElement(PersonRowModule, { person = p1.person, layoutOrder = p1.layoutOrder }) else ReactModule.useMemo(function() --[[ Line: 104 ]]
+		-- upvalues: ReactModule (upval), PersonRowModule (upval), p1 (copy)
+		return ReactModule.createElement(PersonRowModule, { person = p1.person, layoutOrder = p1.layoutOrder })
 	end, { p1.person, p1.layoutOrder })
+	local Element1 = if FFlagPeoplePageRemoveUseMemoElements then ReactModule.createElement(MemoResult, { isPortrait = IsUseDeviceOrientationResultMatch }) else ReactModule.useMemo(function() --[[ Line: 120 ]]
+		-- upvalues: FFlagPeoplePageRemoveSkeletons (upval), ReactModule (upval), View (upval), IsUseDeviceOrientationResultMatch (copy), Skeleton (upval), Radius (upval), UseTokensResult (copy)
+		return if FFlagPeoplePageRemoveSkeletons then ReactModule.createElement(View, {
+			tag = {
+				["bg-surface-200 radius-medium"] = true,
+				["size-full-2600"] = IsUseDeviceOrientationResultMatch,
+				["size-full-1500"] = not IsUseDeviceOrientationResultMatch
+			}
+		}) else ReactModule.createElement(View, {
+			tag = {
+				["row bg-surface-200 gap-medium padding-small radius-medium"] = true,
+				["size-full-2600"] = IsUseDeviceOrientationResultMatch,
+				["size-full-1500"] = not IsUseDeviceOrientationResultMatch
+			}
+		}, {
+			ThumbnailContainer = ReactModule.createElement(View, { tag = "size-1200", LayoutOrder = 1 }, {
+				ThumbnailSkeleton = ReactModule.createElement(Skeleton, { Size = UDim2.fromScale(1, 1), radius = Radius.Circle })
+			}),
+			Details = ReactModule.createElement(View, { tag = "col grow size-0-full gap-medium", LayoutOrder = 2 }, {
+				NameSkeleton = ReactModule.createElement(Skeleton, {
+					LayoutOrder = 1,
+					Size = UDim2.new(0.9, 0, 0, UseTokensResult.Size.Size_350),
+					radius = Radius.Small
+				}),
+				HandleSkeleton = ReactModule.createElement(Skeleton, {
+					LayoutOrder = 2,
+					Size = UDim2.new(0.6, 0, 0, UseTokensResult.Size.Size_350),
+					radius = Radius.Small
+				})
+			})
+		})
+	end, { IsUseDeviceOrientationResultMatch, UseTokensResult })
 	
-	return if p1.scrollingFrameStore then reactModule.createElement(lazyScrollingComponentModule, {
+	return if p1.scrollingFrameStore then ReactModule.createElement(LazyScrollingComponentModule, {
 		scrollingFrameAbsolutePositionY = p1.scrollingFrameStore.getAbsolutePositionY,
 		scrollingFrameAbsoluteSizeY = p1.scrollingFrameStore.getAbsoluteSizeY,
 		scrollingFrameCanvasPositionY = p1.scrollingFrameStore.getCanvasPositionY,
-		placeholder = if fFlagPeoplePageRemoveUseMemoElements then reactModule.createElement(var1, { isPortrait = var3 }) else reactModule.useMemo(function()
-			-- upvalues: fFlagPeoplePageRemoveSkeletons (copy), reactModule (copy), view (copy), var3 (ref), skeleton (copy), radius (copy), var2 (ref)
-			return if fFlagPeoplePageRemoveSkeletons then reactModule.createElement(view, {
-				tag = {
-					["bg-surface-200 radius-medium"] = true,
-					["size-full-2600"] = var3,
-					["size-full-1500"] = not var3
-				}
-			}) else reactModule.createElement(view, {
-				tag = {
-					["row bg-surface-200 gap-medium padding-small radius-medium"] = true,
-					["size-full-2600"] = var3,
-					["size-full-1500"] = not var3
-				}
-			}, {
-				ThumbnailContainer = reactModule.createElement(view, { tag = "size-1200", LayoutOrder = 1 }, {
-					ThumbnailSkeleton = reactModule.createElement(skeleton, { Size = UDim2.fromScale(1, 1), radius = radius.Circle })
-				}),
-				Details = reactModule.createElement(view, { tag = "col grow size-0-full gap-medium", LayoutOrder = 2 }, {
-					NameSkeleton = reactModule.createElement(skeleton, {
-						LayoutOrder = 1,
-						Size = UDim2.new(0.9, 0, 0, var2.Size.Size_350),
-						radius = radius.Small
-					}),
-					HandleSkeleton = reactModule.createElement(skeleton, {
-						LayoutOrder = 2,
-						Size = UDim2.new(0.6, 0, 0, var2.Size.Size_350),
-						radius = radius.Small
-					})
-				})
-			})
-		end, { var3, var2 }),
+		placeholder = Element1,
 		placeholderLayoutOrder = p1.layoutOrder
-	}, { PersonRow = var4 }) else var4
+	}, { PersonRow = Element }) else Element
 end)

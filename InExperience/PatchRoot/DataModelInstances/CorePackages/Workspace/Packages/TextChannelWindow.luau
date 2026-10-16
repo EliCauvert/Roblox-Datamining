@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.TextChannelWindow.TextChannelWindow)
+﻿return (require(script.Parent._Workspace.TextChannelWindow.TextChannelWindow))

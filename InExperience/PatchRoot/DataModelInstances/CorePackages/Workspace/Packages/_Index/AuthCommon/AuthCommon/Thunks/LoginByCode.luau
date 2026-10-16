@@ -1,116 +1,115 @@
-﻿local authCommon = script:FindFirstAncestor("AuthCommon")
-local parent = authCommon.Parent
-local httpService = game:GetService("HttpService")
-local promiseModule = require(parent.Promise)
-local loginRequestsModule = require(authCommon.Http.Requests.LoginRequests)
-local appPage = require(parent.RobloxAppEnums).AppPage
-local navigateDown = require(parent.NavigationRodux).Thunks.NavigateDown
-local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
-local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
-local loginResultModule = require(authCommon.Models.LoginResult)
-local loginErrorCodesModule = require(authCommon.Enums.LoginErrorCodes)
-local loggingProtocolModule = require(parent.LoggingProtocol)
-local loginByUsernameSSOErrorsTelemetryModule = require(authCommon.Utils.LoginByUsernameSSOErrorsTelemetry)
-local getLoginByUsernameErrorMessageModule = require(authCommon.Utils.GetLoginByUsernameErrorMessage)
-local loginMethodsModule = require(authCommon.Enums.LoginMethods)
-local appStorageUtilitiesModule = require(authCommon.Utils.AppStorageUtilities)
-local recordLoginModule = require(authCommon.Utils.recordLogin)
-local getAppFeaturePolicies = require(parent.UniversalAppPolicy).getAppFeaturePolicies
-local getDxBlobModule = require(authCommon.Utils.GetDxBlob)
-local getCaptchaDataJsonModule = require(authCommon.Utils.GetCaptchaDataJson)
-local getFFlagLuaAppUsingSecurityQuestionsForLuaLogin = require(parent.SharedFlags).GetFFlagLuaAppUsingSecurityQuestionsForLuaLogin
-local fFlagEnableLastLoginMethodTracking = require(parent.SharedFlags).FFlagEnableLastLoginMethodTracking
-local fFlagEnableRecordLogin = require(parent.SharedFlags).FFlagEnableRecordLogin
-local enableIllegalChildAccountLinkingErrorMessageOnLoginByCode = game:DefineFastFlag("EnableIllegalChildAccountLinkingErrorMessageOnLoginByCode", false)
+﻿local AuthCommon = script:FindFirstAncestor("AuthCommon")
+local Parent = AuthCommon.Parent
+local HttpService = game:GetService("HttpService")
+local PromiseModule = require(Parent.Promise)
+local LoginRequestsModule = require(AuthCommon.Http.Requests.LoginRequests)
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local NavigateDownFunction = require(Parent.NavigationRodux).Thunks.NavigateDown
+local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3Dispatch
+local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
+local LoginResultModule = require(AuthCommon.Models.LoginResult)
+local LoginErrorCodesModule = require(AuthCommon.Enums.LoginErrorCodes)
+local LoggingProtocolModule = require(Parent.LoggingProtocol)
+local LoginByUsernameSSOErrorsTelemetryModule = require(AuthCommon.Utils.LoginByUsernameSSOErrorsTelemetry)
+local GetLoginByUsernameErrorMessageModule = require(AuthCommon.Utils.GetLoginByUsernameErrorMessage)
+local LoginMethodsModule = require(AuthCommon.Enums.LoginMethods)
+local AppStorageUtilitiesModule = require(AuthCommon.Utils.AppStorageUtilities)
+local RecordLoginModule = require(AuthCommon.Utils.recordLogin)
+local GetAppFeaturePoliciesFunction = require(Parent.UniversalAppPolicy).getAppFeaturePolicies
+local GetDxBlobModule = require(AuthCommon.Utils.GetDxBlob)
+local GetCaptchaDataJsonModule = require(AuthCommon.Utils.GetCaptchaDataJson)
+local GetFFlagLuaAppUsingSecurityQuestionsForLuaLoginFunction = require(Parent.SharedFlags).GetFFlagLuaAppUsingSecurityQuestionsForLuaLogin
+local FFlagEnableLastLoginMethodTracking = require(Parent.SharedFlags).FFlagEnableLastLoginMethodTracking
+local FFlagEnableRecordLogin = require(Parent.SharedFlags).FFlagEnableRecordLogin
+local EnableIllegalChildAccountLinkingErrorMessageOnLoginByCode = game:DefineFastFlag("EnableIllegalChildAccountLinkingErrorMessageOnLoginByCode", false)
 
-local function _(p1, p2, p3, p4, p5)
-	-- upvalues: getAppFeaturePolicies (ref), loginRequestsModule (ref)
-	return if getAppFeaturePolicies().getUseSingleSignOn() then loginRequestsModule.singleSignOnConnectWithCode(p1, p2, p3) else loginRequestsModule.loginWithCode(p1, p2, p3, p4, p5)
+local function _(p1, p2, p3, p4, p5) --[[ Line: 35 | Named "loginRequest" ]]
+	-- upvalues: GetAppFeaturePoliciesFunction (copy), LoginRequestsModule (copy)
+	return if GetAppFeaturePoliciesFunction().getUseSingleSignOn() then LoginRequestsModule.singleSignOnConnectWithCode(p1, p2, p3) else LoginRequestsModule.loginWithCode(p1, p2, p3, p4, p5)
 end
 
-return function(p1, p2, p3, p4, p5, p6, p7)
-	-- upvalues: getAppFeaturePolicies (ref), loginRequestsModule (ref), loginResultModule (ref), fFlagEnableLastLoginMethodTracking (ref), appStorageUtilitiesModule (ref), loginMethodsModule (ref), fFlagEnableRecordLogin (ref), recordLoginModule (ref), httpService (ref), loginErrorCodesModule (ref), getDxBlobModule (ref), getCaptchaDataJsonModule (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), getFFlagLuaAppUsingSecurityQuestionsForLuaLogin (ref), enableIllegalChildAccountLinkingErrorMessageOnLoginByCode (ref), getLoginByUsernameErrorMessageModule (ref), loggingProtocolModule (ref), loginByUsernameSSOErrorsTelemetryModule (ref), promiseModule (ref)
-	return function(p8)
-		-- upvalues: getAppFeaturePolicies (copy), p1 (ref), p2 (ref), p3 (ref), p5 (ref), p7 (ref), loginRequestsModule (copy), loginResultModule (copy), fFlagEnableLastLoginMethodTracking (copy), appStorageUtilitiesModule (copy), loginMethodsModule (copy), fFlagEnableRecordLogin (copy), recordLoginModule (copy), httpService (copy), loginErrorCodesModule (copy), getDxBlobModule (copy), getCaptchaDataJsonModule (copy), appPage (copy), p4 (ref), fFlagSignalsNavP3Dispatch (copy), var1 (copy), navigateDown (copy), getFFlagLuaAppUsingSecurityQuestionsForLuaLogin (copy), enableIllegalChildAccountLinkingErrorMessageOnLoginByCode (copy), getLoginByUsernameErrorMessageModule (copy), loggingProtocolModule (copy), loginByUsernameSSOErrorsTelemetryModule (copy), promiseModule (copy), p6 (ref)
-		local useSingleSignOn = getAppFeaturePolicies().getUseSingleSignOn()
+return function(p1, Cvalue, p2, CaptchaCallback, p3, SecurityQuestionsCallback, p4) --[[ Line: 44 | Named "loginByCode" ]]
+	-- upvalues: GetAppFeaturePoliciesFunction (copy), LoginRequestsModule (copy), LoginResultModule (copy), FFlagEnableLastLoginMethodTracking (copy), AppStorageUtilitiesModule (copy), LoginMethodsModule (copy), FFlagEnableRecordLogin (copy), RecordLoginModule (copy), HttpService (copy), LoginErrorCodesModule (copy), GetDxBlobModule (copy), GetCaptchaDataJsonModule (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), GetFFlagLuaAppUsingSecurityQuestionsForLuaLoginFunction (copy), EnableIllegalChildAccountLinkingErrorMessageOnLoginByCode (copy), GetLoginByUsernameErrorMessageModule (copy), LoggingProtocolModule (copy), LoginByUsernameSSOErrorsTelemetryModule (copy), PromiseModule (copy)
+	return function(p5) --[[ Line: 53 ]]
+		-- upvalues: GetAppFeaturePoliciesFunction (upval), p1 (copy), Cvalue (copy), p2 (copy), p3 (copy), p4 (copy), LoginRequestsModule (upval), LoginResultModule (upval), FFlagEnableLastLoginMethodTracking (upval), AppStorageUtilitiesModule (upval), LoginMethodsModule (upval), FFlagEnableRecordLogin (upval), RecordLoginModule (upval), HttpService (upval), LoginErrorCodesModule (upval), GetDxBlobModule (upval), GetCaptchaDataJsonModule (upval), AppPage (upval), CaptchaCallback (copy), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), NavigateDownFunction (upval), GetFFlagLuaAppUsingSecurityQuestionsForLuaLoginFunction (upval), EnableIllegalChildAccountLinkingErrorMessageOnLoginByCode (upval), GetLoginByUsernameErrorMessageModule (upval), LoggingProtocolModule (upval), LoginByUsernameSSOErrorsTelemetryModule (upval), PromiseModule (upval), SecurityQuestionsCallback (copy)
+		local UseSingleSignOn = GetAppFeaturePoliciesFunction().getUseSingleSignOn()
 		
-		return (if getAppFeaturePolicies().getUseSingleSignOn() then loginRequestsModule.singleSignOnConnectWithCode(p1, p2, p3) else loginRequestsModule.loginWithCode(p1, p2, p3, p5, p7)):andThen(function(p9)
-			-- upvalues: loginResultModule (copy), fFlagEnableLastLoginMethodTracking (copy), appStorageUtilitiesModule (copy), loginMethodsModule (copy), fFlagEnableRecordLogin (copy), recordLoginModule (copy)
-			assert(p9, "no login attempt result")
-			assert(#p9 == 1, "no result or more than one result")
-			assert(loginResultModule.fromJsonData(p9[1]), "result invalid")
+		return (if GetAppFeaturePoliciesFunction().getUseSingleSignOn() then LoginRequestsModule.singleSignOnConnectWithCode(p1, Cvalue, p2) else LoginRequestsModule.loginWithCode(p1, Cvalue, p2, p3, p4)):andThen(function(Entry) --[[ Line: 56 ]]
+			-- upvalues: LoginResultModule (upval), FFlagEnableLastLoginMethodTracking (upval), AppStorageUtilitiesModule (upval), LoginMethodsModule (upval), FFlagEnableRecordLogin (upval), RecordLoginModule (upval)
+			assert(Entry, "no login attempt result")
+			assert(#Entry == 1, "no result or more than one result")
+			assert(LoginResultModule.fromJsonData(Entry[1]), "result invalid")
 			
-			if fFlagEnableLastLoginMethodTracking then
-				appStorageUtilitiesModule.setLastSuccessfulSignInMethod(loginMethodsModule.QuickLogin)
+			if FFlagEnableLastLoginMethodTracking then
+				AppStorageUtilitiesModule.setLastSuccessfulSignInMethod(LoginMethodsModule.QuickLogin)
 			end
-			local var2 = loginResultModule.fromJsonData(p9[1])
+			local FromJsonDataResult = LoginResultModule.fromJsonData(Entry[1])
 			
-			if fFlagEnableRecordLogin then
-				pcall(function()
-					-- upvalues: recordLoginModule (copy), var2 (ref), loginMethodsModule (copy)
-					recordLoginModule(var2, loginMethodsModule.QuickLogin, var2.user.name)
+			if FFlagEnableRecordLogin then
+				pcall(function() --[[ Line: 65 ]]
+					-- upvalues: RecordLoginModule (upval), FromJsonDataResult (copy), LoginMethodsModule (upval)
+					RecordLoginModule(FromJsonDataResult, LoginMethodsModule.QuickLogin, FromJsonDataResult.user.name)
 				end)
 			end
-			return var2
-		end, function(p9)
-			-- upvalues: httpService (copy), loginErrorCodesModule (copy), getDxBlobModule (copy), getCaptchaDataJsonModule (copy), appPage (copy), p4 (copy), p2 (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), p8 (ref), navigateDown (copy), getFFlagLuaAppUsingSecurityQuestionsForLuaLogin (copy), enableIllegalChildAccountLinkingErrorMessageOnLoginByCode (copy), useSingleSignOn (ref), getLoginByUsernameErrorMessageModule (copy), loggingProtocolModule (copy), loginByUsernameSSOErrorsTelemetryModule (copy), promiseModule (copy), p6 (copy)
-			local body = httpService:JSONDecode(p9.Body)
-			local code = body and (body.errors and (body.errors[1] and body.errors[1].code))
-			local var2 = nil
-			local var3 = nil
-			local userFacingMessage = body and (body.errors and (body.errors[1] and body.errors[1].userFacingMessage))
+			return FromJsonDataResult
+		end, function(p6) --[[ Line: 71 ]]
+			-- upvalues: HttpService (upval), LoginErrorCodesModule (upval), GetDxBlobModule (upval), GetCaptchaDataJsonModule (upval), AppPage (upval), CaptchaCallback (upval), Cvalue (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), p5 (copy), NavigateDownFunction (upval), GetFFlagLuaAppUsingSecurityQuestionsForLuaLoginFunction (upval), EnableIllegalChildAccountLinkingErrorMessageOnLoginByCode (upval), UseSingleSignOn (copy), GetLoginByUsernameErrorMessageModule (upval), LoggingProtocolModule (upval), LoginByUsernameSSOErrorsTelemetryModule (upval), PromiseModule (upval), SecurityQuestionsCallback (upval)
+			local Data = HttpService:JSONDecode(p6.Body)
+			local Code = Data and (Data.errors and (Data.errors[1] and Data.errors[1].code))
+			local SecurityQuestionsData = nil
+			local Entry = nil
+			local UserFacingMessage = Data and (Data.errors and (Data.errors[1] and Data.errors[1].userFacingMessage))
 			
-			if code == loginErrorCodesModule.Captcha then
-				local _ = getDxBlobModule(body)
-				local _ = nil
-				local var4, var5 = getCaptchaDataJsonModule(body)
-				var4 = {
+			if Code == LoginErrorCodesModule.Captcha then
+				local _ = GetDxBlobModule(Data)
+				local CaptchaDataJsonModule, CaptchaDataJsonModule2 = GetCaptchaDataJsonModule(Data)
+				local config = {
 					detail = "",
-					name = appPage.CaptchaNative,
+					name = AppPage.CaptchaNative,
 					extraProps = {
 						captchaType = "login",
 						cvalueType = "authToken",
 						backNavigationDisabledWhileLoading = true,
-						captchaCallback = p4,
-						captchaId = var4,
-						cvalue = p2,
-						dxBlob = var5
+						captchaCallback = CaptchaCallback,
+						captchaId = CaptchaDataJsonModule,
+						cvalue = Cvalue,
+						dxBlob = CaptchaDataJsonModule2
 					}
 				}
 				
-				if fFlagSignalsNavP3Dispatch then
-					var1.down(var1.fromLegacyPage(var4))
+				if FFlagSignalsNavP3Dispatch then
+					NavigationCommands.down(NavigationCommands.fromLegacyPage(config))
 				else
-					p8:dispatch(navigateDown(var4))
+					p5:dispatch(NavigateDownFunction(config))
 				end
-			elseif getFFlagLuaAppUsingSecurityQuestionsForLuaLogin() and code == loginErrorCodesModule.SecurityQuestions then
-				var3 = "Authentication.Login.Response.SomethingWentWrong"
+			elseif GetFFlagLuaAppUsingSecurityQuestionsForLuaLoginFunction() and Code == LoginErrorCodesModule.SecurityQuestions then
+				Entry = "Authentication.Login.Response.SomethingWentWrong"
 				
-				if body.errors[1].fieldData then
-					local fieldData = httpService:JSONDecode(body.errors[1].fieldData)
+				if Data.errors[1].fieldData then
+					local Data1 = HttpService:JSONDecode(Data.errors[1].fieldData)
 					
-					if fieldData.sessionId and fieldData.userId then
-						var2 = fieldData
-						var3 = nil
+					if Data1.sessionId and Data1.userId then
+						SecurityQuestionsData = Data1
+						Entry = nil
 					end
 				end
-			elseif enableIllegalChildAccountLinkingErrorMessageOnLoginByCode and code == loginErrorCodesModule.IllegalChildAccountLinking then
-				var3 = "Authentication.Login.LinkIllegalChildAccountLinking"
+			elseif EnableIllegalChildAccountLinkingErrorMessageOnLoginByCode and Code == LoginErrorCodesModule.IllegalChildAccountLinking then
+				Entry = "Authentication.Login.LinkIllegalChildAccountLinking"
 			end
-			if useSingleSignOn then
-				warn("Login ErrorCode:", code)
-				var3 = getLoginByUsernameErrorMessageModule(code)
-				loggingProtocolModule.default:logRobloxTelemetryEvent(loginByUsernameSSOErrorsTelemetryModule, nil, {
-					ssoErrorCode = code,
-					msgShown = if var3[1] then var3[1] else var3
+			if UseSingleSignOn then
+				warn("Login ErrorCode:", Code)
+				Entry = GetLoginByUsernameErrorMessageModule(Code)
+				LoggingProtocolModule.default:logRobloxTelemetryEvent(LoginByUsernameSSOErrorsTelemetryModule, nil, {
+					ssoErrorCode = Code,
+					msgShown = if Entry[1] then Entry[1] else Entry
 				})
 			end
-			return promiseModule.reject({
-				errorKey = var3,
-				errorCode = code,
-				securityQuestionsData = var2,
-				securityQuestionsCallback = p6,
-				userFacingMessage = userFacingMessage
+			return PromiseModule.reject({
+				errorKey = Entry,
+				errorCode = Code,
+				securityQuestionsData = SecurityQuestionsData,
+				securityQuestionsCallback = SecurityQuestionsCallback,
+				userFacingMessage = UserFacingMessage
 			})
 		end)
 	end

@@ -1,7 +1,7 @@
-﻿local inExperienceShop = script:FindFirstAncestor("InExperienceShop")
-local promiseModule = require(inExperienceShop.Parent.Promise)
-local _ = require(inExperienceShop.Types)
-local _ = require(inExperienceShop.Api.multiGetProductInfo)
+﻿local InExperienceShop = script:FindFirstAncestor("InExperienceShop")
+local PromiseModule = require(InExperienceShop.Parent.Promise)
+local _ = require(InExperienceShop.Types)
+local _ = require(InExperienceShop.Api.multiGetProductInfo)
 local list = {
 	{
 		id = "101",
@@ -178,7 +178,7 @@ local list = {
 	{
 		id = "115",
 		name = "Emoji Happy",
-		displayName = "\240\159\152\138 Happy Emoji",
+		displayName = "😊 Happy Emoji",
 		thumbnail = "rbxassetid://6789",
 		price = 10,
 		isOwned = false,
@@ -201,7 +201,7 @@ local list = {
 		creator = { name = "MockCreator", hasVerifiedBadge = false }
 	}
 }
-local list_1 = {
+local list1 = {
 	{
 		id = "201",
 		name = "pass5",
@@ -229,7 +229,7 @@ local list_1 = {
 	{
 		id = "203",
 		name = "Thanks's` <3",
-		displayName = "Thanks \226\157\164\239\184\143",
+		displayName = "Thanks ❤️",
 		thumbnail = "rbxassetid://6789",
 		price = 1,
 		isOwned = false,
@@ -241,7 +241,7 @@ local list_1 = {
 	},
 	{
 		id = "204",
-		name = "Thanks\226\128\153s <3 :heart::victory_hand:t2:",
+		name = "Thanks’s <3 :heart::victory_hand:t2:",
 		thumbnail = "rbxassetid://6789",
 		price = 1,
 		isOwned = false,
@@ -324,106 +324,106 @@ local list_1 = {
 		creator = { name = "MockCreator", hasVerifiedBadge = false }
 	}
 }
-local var1 = (function()
-	-- upvalues: list (ref), list_1 (ref)
+local v1 = (function() --[[ Line: 443 | Named "buildLookup" ]]
+	-- upvalues: list (copy), list1 (copy)
 	local t = {}
 	
-	for i, v in ipairs(list) do
-		t["Product:" .. v.id] = v
+	for _, value in ipairs(list) do
+		t["Product:" .. value.id] = value
 	end
-	for i, v_1 in ipairs(list_1) do
-		t["GamePass:" .. v_1.id] = v_1
+	for _, value1 in ipairs(list1) do
+		t["GamePass:" .. value1.id] = value1
 	end
 	return t
 end)()
 
-local function _(value)
-	return if value then tonumber(string.match(value, "rbxassetid://(%d+)")) or 0 else 0
+local function _(Text: string): number --[[ Line: 457 | Named "parseIconImageAssetId" ]]
+	return Text and tonumber((string.match(Text, "rbxassetid://(%d+)"))) or 0
 end
 
-local function shopItemToProductInfo(p1)
-	local id = tonumber(p1.id) or 0
-	local creator = p1.creator or { name = "", hasVerifiedBadge = false }
-	local t = {
+local function shopItemToProductInfo(p1) --[[ Line: 465 ]]
+	local Number: number = tonumber(p1.id) or 0
+	local Creator = p1.creator or { name = "", hasVerifiedBadge = false }
+	local Thumbnail: string = p1.thumbnail
+	
+	return {
 		IsForSale = true,
 		Name = p1.name,
 		DisplayName = p1.displayName,
 		Description = p1.description or "",
 		PriceInRobux = p1.price or 0,
 		UserBasePriceInRobux = p1.userBasePriceInRobux,
-		ProductId = id,
-		AssetId = id,
-		Updated = p1.updated
+		ProductId = Number,
+		AssetId = Number,
+		Updated = p1.updated,
+		IconImageAssetId = Thumbnail and tonumber((string.match(Thumbnail, "rbxassetid://(%d+)"))) or 0,
+		Creator = {
+			Name = Creator.name,
+			HasVerifiedBadge = Creator.hasVerifiedBadge
+		}
 	}
-	local thumbnail = p1.thumbnail
-	t.IconImageAssetId = if not thumbnail then 0 else tonumber(string.match(thumbnail, "rbxassetid://(%d+)")) or 0
-	t.Creator = {
-		Name = creator.name,
-		HasVerifiedBadge = creator.hasVerifiedBadge
-	}
-	
-	return t
 end
 
-local function resolveRequest(p1)
-	-- upvalues: var1 (ref), shopItemToProductInfo (ref)
-	local var2 = var1[p1.infoType.Name .. ":" .. tostring(p1.id)]
+local function resolveRequest(Request) --[[ Line: 487 ]]
+	-- upvalues: v1 (copy), shopItemToProductInfo (copy)
+	local v2 = v1[Request.infoType.Name .. ":" .. tostring(Request.id)]
 	
-	return if var2 == nil then {
+	return if v2 == nil then {
 		ok = false,
-		request = p1,
-		err = string.format("Mock product info not found for %s id %s", p1.infoType.Name, tostring(p1.id))
+		request = Request,
+		err = string.format("Mock product info not found for %s id %s", Request.infoType.Name, (tostring(Request.id)))
 	} else {
 		ok = true,
-		request = p1,
-		value = shopItemToProductInfo(var2)
+		request = Request,
+		value = shopItemToProductInfo(v2)
 	}
 end
 
-local _ = function(p1)
+local _ = function(p1) --[[ Line: 509 | Named "resolveStreamDelaySeconds" ]]
 	return if p1 == nil then math.random() * 0.5 elseif p1 == 0 then 0 else math.random() * p1
 end
 
 return {
 	MOCK_PRODUCT_ITEMS_FOR_TESTING = list,
-	MOCK_GAMEPASS_ITEMS_FOR_TESTING = list_1,
-	multiGetProductInfo = function(p1, p2)
-		-- upvalues: promiseModule (ref), resolveRequest (ref)
-		return promiseModule.delay(if p2 ~= nil then 0.5 else p2):andThen(function()
-			-- upvalues: p1 (ref), resolveRequest (copy)
-			local list = table.create(#p1)
+	MOCK_GAMEPASS_ITEMS_FOR_TESTING = list1,
+	multiGetProductInfo = function(p1, p2) --[[ Line: 531 ]]
+		-- upvalues: PromiseModule (copy), resolveRequest (copy)
+		return PromiseModule.delay(if p2 == nil then 0.5 else p2):andThen(function() --[[ Line: 536 ]]
+			-- upvalues: p1 (copy), resolveRequest (upval)
+			local Buffer = table.create(#p1)
 			
-			for i, v in ipairs(p1) do
-				list[i] = resolveRequest(v)
+			for i, value in ipairs(p1) do
+				Buffer[i] = resolveRequest(value)
 			end
-			return list
+			return Buffer
 		end)
 	end,
-	streamMultiGetProductInfo = function(p3, p4, p5)
-		-- upvalues: promiseModule (ref), resolveRequest (ref)
-		local p5Count = #p3
+	streamMultiGetProductInfo = function(p3, p4, p5) --[[ Line: 552 ]]
+		-- upvalues: PromiseModule (copy), resolveRequest (copy)
+		local CountP5 = #p3
 		
-		if p5Count == 0 then
-			return promiseModule.resolve({})
+		if CountP5 == 0 then
+			return PromiseModule.resolve({})
+		else
+			local Buffer = table.create(CountP5)
+			local Count = 0
+			
+			return PromiseModule.new(function(Callback) --[[ Line: 565 ]]
+				-- upvalues: p3 (copy), PromiseModule (upval), p5 (copy), resolveRequest (upval), Buffer (copy), p4 (copy), Count (ref), CountP5 (copy)
+				for i, value in ipairs(p3) do
+					PromiseModule.delay(if p5 == nil then math.random() * 0.5 elseif p5 == 0 then 0 else math.random() * p5):andThen(function() --[[ Line: 567 ]]
+						-- upvalues: resolveRequest (upval), value (copy), Buffer (upval), i (copy), p4 (upval), Count (upval), CountP5 (upval), Callback (copy)
+						local ResolveRequestResult = resolveRequest(value)
+						Buffer[i] = ResolveRequestResult
+						p4.onResult(ResolveRequestResult)
+						Count += 1
+						
+						if Count == CountP5 then
+							Callback(Buffer)
+						end
+					end)
+				end
+			end)
 		end
-		local list = table.create(p5Count)
-		local var2 = 0
-		
-		return promiseModule.new(function(p6)
-			-- upvalues: p3 (ref), promiseModule (copy), p5 (ref), resolveRequest (copy), list (ref), p4 (ref), var2 (write), p5Count (ref)
-			for i, v in ipairs(p3) do
-				promiseModule.delay(if p5 ~= nil then math.random() * 0.5 elseif p5 == 0 then 0 else math.random() * p5):andThen(function()
-					-- upvalues: resolveRequest (copy), v (ref), list (copy), i (ref), p4 (copy), var2 (copy), p5Count (copy), p6 (ref)
-					local var3 = resolveRequest(v)
-					list[i] = var3
-					p4.onResult(var3)
-					var2 += 1
-					
-					if var2 == p5Count then
-						p6(list)
-					end
-				end)
-			end
-		end)
 	end
 }

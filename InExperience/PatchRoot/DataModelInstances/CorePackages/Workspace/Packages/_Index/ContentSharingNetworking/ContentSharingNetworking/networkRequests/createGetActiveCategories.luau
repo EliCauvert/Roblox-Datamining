@@ -1,9 +1,9 @@
-﻿local API_URLModule = require(script.Parent.Parent.API_URL)
+﻿local APIURLModule = require(script.Parent.Parent.API_URL)
 
-return function(p1)
-	-- upvalues: API_URLModule (ref)
-	return p1.roduxNetworking.GET("GetPostsByUserId", function(p2)
-		-- upvalues: API_URLModule (copy)
-		return p2(API_URLModule):path("posts-api"):path("v1"):path("content-posts"):path("getActiveCategories")
+return function(p1) --[[ Line: 4 ]]
+	-- upvalues: APIURLModule (copy)
+	return p1.roduxNetworking.GET("GetPostsByUserId", function(Callback) --[[ Line: 7 ]]
+		-- upvalues: APIURLModule (upval)
+		return Callback(APIURLModule):path("posts-api"):path("v1"):path("content-posts"):path("getActiveCategories")
 	end)
 end

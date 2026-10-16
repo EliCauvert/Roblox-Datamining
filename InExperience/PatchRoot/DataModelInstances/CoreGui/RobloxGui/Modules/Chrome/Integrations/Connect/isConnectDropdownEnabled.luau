@@ -1,7 +1,7 @@
-﻿local getFFlagEnableAppChatInExperience = require(game:GetService("CorePackages").Workspace.Packages.SharedFlags).GetFFlagEnableAppChatInExperience
-local getShouldShowPlatformChatBasedOnPolicyModule = require(script:FindFirstAncestor("Chrome").Flags.GetShouldShowPlatformChatBasedOnPolicy)
+﻿local GetFFlagEnableAppChatInExperienceFunction = require(game:GetService("CorePackages").Workspace.Packages.SharedFlags).GetFFlagEnableAppChatInExperience
+local GetShouldShowPlatformChatBasedOnPolicyModule = require(script:FindFirstAncestor("Chrome").Flags.GetShouldShowPlatformChatBasedOnPolicy)
 
-return function()
-	-- upvalues: getFFlagEnableAppChatInExperience (ref), getShouldShowPlatformChatBasedOnPolicyModule (ref)
-	return getFFlagEnableAppChatInExperience() and getShouldShowPlatformChatBasedOnPolicyModule()
+return function() --[[ Line: 9 ]]
+	-- upvalues: GetFFlagEnableAppChatInExperienceFunction (copy), GetShouldShowPlatformChatBasedOnPolicyModule (copy)
+	return GetFFlagEnableAppChatInExperienceFunction() and GetShouldShowPlatformChatBasedOnPolicyModule()
 end

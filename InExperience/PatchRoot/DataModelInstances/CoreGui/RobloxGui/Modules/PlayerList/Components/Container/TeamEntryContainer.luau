@@ -1,31 +1,30 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local coreGuiService = game:GetService("CoreGui")
-local robloxGui = coreGuiService:WaitForChild("RobloxGui")
-local parent = script.Parent.Parent.Parent
-local reactModule = require(corePackagesService.Packages.React)
-local playerListModule = require(corePackagesService.Workspace.Packages.PlayerList)
-local _ = require(corePackagesService.Workspace.Packages.LeaderboardStore)
-local signalsReactModule = require(corePackagesService.Packages.SignalsReact)
-local gameTranslatorModule = require(robloxGui.Modules.GameTranslator)
-local useLeaderboardStore = playerListModule.Hooks.useLeaderboardStore
-local teamEntryViewModule = require(parent.Components.PresentationCommon.TeamEntryView)
-local fFlagPlayerListFixLeaderstatsStacking = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagPlayerListFixLeaderstatsStacking
+﻿local CorePackages = game:GetService("CorePackages")
+local CoreGui = game:GetService("CoreGui")
+local ReactModule = require(CorePackages.Packages.React)
+local _ = require(CorePackages.Workspace.Packages.LeaderboardStore)
+local SignalsReactModule = require(CorePackages.Packages.SignalsReact)
+local GameTranslatorModule = require(CoreGui:WaitForChild("RobloxGui").Modules.GameTranslator)
+local UseLeaderboardStoreFunction = require(CorePackages.Workspace.Packages.PlayerList).Hooks.useLeaderboardStore
+local TeamEntryViewModule = require(script.Parent.Parent.Parent.Components.PresentationCommon.TeamEntryView)
+local FFlagPlayerListFixLeaderstatsStacking = require(CorePackages.Workspace.Packages.SharedFlags).FFlagPlayerListFixLeaderstatsStacking
 
-return reactModule.memo(function(p1)
-	-- upvalues: useLeaderboardStore (ref), signalsReactModule (ref), gameTranslatorModule (ref), coreGuiService (ref), fFlagPlayerListFixLeaderstatsStacking (ref), reactModule (ref), teamEntryViewModule (ref)
-	local gameStatsList = useLeaderboardStore().getGameStatsList()
-	local stats = p1.teamData.stats
+return ReactModule.memo(function(p1) --[[ Line: 44 | Named "TeamEntryContainer" ]]
+	-- upvalues: UseLeaderboardStoreFunction (copy), SignalsReactModule (copy), GameTranslatorModule (copy), CoreGui (copy), FFlagPlayerListFixLeaderstatsStacking (copy), ReactModule (copy), TeamEntryViewModule (copy)
+	local GameStatsList = UseLeaderboardStoreFunction().getGameStatsList()
+	local Stats = p1.teamData.stats
+	local UseSignalStateResult = if FFlagPlayerListFixLeaderstatsStacking then nil else SignalsReactModule.useSignalState(GameStatsList.getCount)
+	local UseSignalStateResult1 = if FFlagPlayerListFixLeaderstatsStacking then nil else SignalsReactModule.useSignalState(Stats.getCount)
 	
-	return reactModule.createElement(teamEntryViewModule, {
-		teamName = signalsReactModule.useSignalBinding(function(p2)
-			-- upvalues: gameTranslatorModule (copy), coreGuiService (copy), p1 (ref)
-			return gameTranslatorModule:TranslateGameText(coreGuiService, p1.teamData.name(p2))
+	return ReactModule.createElement(TeamEntryViewModule, {
+		teamName = SignalsReactModule.useSignalBinding(function(p2) --[[ Line: 50 ]]
+			-- upvalues: GameTranslatorModule (upval), CoreGui (upval), p1 (copy)
+			return GameTranslatorModule:TranslateGameText(CoreGui, p1.teamData.name(p2))
 		end),
-		teamColor = signalsReactModule.useSignalState(p1.teamData.color),
-		gameStatsCount = if fFlagPlayerListFixLeaderstatsStacking then nil elseif fFlagPlayerListFixLeaderstatsStacking then nil else signalsReactModule.useSignalState(gameStatsList.getCount),
-		teamStatsCount = if fFlagPlayerListFixLeaderstatsStacking then nil elseif fFlagPlayerListFixLeaderstatsStacking then nil else signalsReactModule.useSignalState(stats.getCount),
-		gameStats = gameStatsList,
-		teamStats = stats,
+		teamColor = SignalsReactModule.useSignalState(p1.teamData.color),
+		gameStatsCount = if FFlagPlayerListFixLeaderstatsStacking then nil else UseSignalStateResult,
+		teamStatsCount = if FFlagPlayerListFixLeaderstatsStacking then nil else UseSignalStateResult1,
+		gameStats = GameStatsList,
+		teamStats = Stats,
 		size = p1.size,
 		entrySizeX = p1.entrySizeX,
 		layoutOrder = p1.layoutOrder,

@@ -1,33 +1,33 @@
-﻿local telemetryService = game:GetService("TelemetryService")
-local parent = script:FindFirstAncestor("DiscoveryAnalytics").Parent
-local tModule = require(parent.t)
-local discoveryEventErrorLogger = require(parent.DiscoveryUtils).DiscoveryEventErrorLogger
-local t = {
+﻿local TelemetryService = game:GetService("TelemetryService")
+local Parent = script:FindFirstAncestor("DiscoveryAnalytics").Parent
+local TModule = require(Parent.t)
+local DiscoveryEventErrorLogger = require(Parent.DiscoveryUtils).DiscoveryEventErrorLogger
+local config = {
 	eventName = "showMoreClick",
 	description = "User clicked the show more button to reveal additional rows in a home game grid",
 	backends = { "EventIngest", "Points" },
 	throttlingPercentage = game:DefineFastInt("LuaAppShowMoreClickEventThrottlingHundredthsPercent", 10000),
 	lastUpdated = { 26, 5, 12 }
 }
-local var1 = tModule.strictInterface({
-	topicId = tModule.string,
-	sortIndex = tModule.number,
-	previousVisibleRows = tModule.number,
-	newVisibleRows = tModule.number,
-	visibleRowsPerReveal = tModule.number,
-	totalNumberOfRows = tModule.number
+local StrictInterfaceResult = TModule.strictInterface({
+	topicId = TModule.string,
+	sortIndex = TModule.number,
+	previousVisibleRows = TModule.number,
+	newVisibleRows = TModule.number,
+	visibleRowsPerReveal = TModule.number,
+	totalNumberOfRows = TModule.number
 })
 
-return function(p1, p2)
-	-- upvalues: var1 (ref), discoveryEventErrorLogger (ref), telemetryService (ref), t (ref)
-	local var2, var3 = var1(p2)
+return function(EventContext, CustomFields) --[[ Line: 28 ]]
+	-- upvalues: StrictInterfaceResult (copy), DiscoveryEventErrorLogger (copy), TelemetryService (copy), config (copy)
+	local StrictInterfaceResultResult, StrictInterfaceResultResult2 = StrictInterfaceResult(CustomFields)
 	
-	if not var2 then
-		discoveryEventErrorLogger.reportError("ShowMoreClickEventInvalidInterface", var3)
+	if not StrictInterfaceResultResult then
+		DiscoveryEventErrorLogger.reportError("ShowMoreClickEventInvalidInterface", StrictInterfaceResultResult2)
 	end
-	telemetryService:LogEvent(t, {
-		eventContext = p1,
+	TelemetryService:LogEvent(config, {
+		eventContext = EventContext,
 		standardizedFields = { "addSessionInfo", "addSessionId", "addOSInfo" },
-		customFields = p2
+		customFields = CustomFields
 	})
 end

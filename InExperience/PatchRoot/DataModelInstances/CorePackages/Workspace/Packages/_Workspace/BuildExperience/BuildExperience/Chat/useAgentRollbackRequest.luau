@@ -1,97 +1,102 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local _ = require(parent.DataHydration.CreatorAgentChat)
-local reactModule = require(parent.React)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local _ = require(Parent.DataHydration.CreatorAgentChat)
+local ReactModule = require(Parent.React)
 local _ = require(script.Parent.chatTypes)
-local getAgentRollbackRequestStoreModule = require(buildExperience.Stores.GetAgentRollbackRequestStore)
+local GetAgentRollbackRequestStoreModule = require(BuildExperience.Stores.GetAgentRollbackRequestStore)
 
-return function(p1)
-	-- upvalues: getAgentRollbackRequestStoreModule (ref), reactModule (ref)
-	local var1 = getAgentRollbackRequestStoreModule(false)
-	local var2 = reactModule.useRef({})
-	local var3 = reactModule.useRef(nil)
-	local var4 = reactModule.useCallback(function(p2)
-		-- upvalues: var3 (ref)
-		local current = var3.current
+return function(p1) --[[ Line: 36 | Named "useAgentRollbackRequest" ]]
+	-- upvalues: GetAgentRollbackRequestStoreModule (copy), ReactModule (copy)
+	local AgentRollbackRequestStoreModule = GetAgentRollbackRequestStoreModule(false)
+	local UseRefResult = ReactModule.useRef({})
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseResult = ReactModule.useCallback(function(p2): boolean --[[ Line: 40 ]]
+		-- upvalues: UseRefResult1 (copy)
+		local Current = UseRefResult1.current
 		
-		if current == nil then
+		if Current == nil then
 			return false
+		else
+			UseRefResult1.current = nil
+			p2.stop()
+			Current.rejectStartup()
+			
+			return true
 		end
-		var3.current = nil
-		p2.stop()
-		current.rejectStartup()
-		
-		return true
 	end, {})
-	local var5 = reactModule.useCallback(function(p2, p3, p4)
-		-- upvalues: p1 (ref), var3 (ref)
+	local UseResult1 = ReactModule.useCallback(function(p2, Callback, Callback1): boolean --[[ Line: 54 ]]
+		-- upvalues: p1 (copy), UseRefResult1 (copy)
 		if p1.session == nil or p1.activeTurnHandleRef.current ~= nil then
 			return false
+		else
+			UseRefResult1.current = { requestId = p2.id, rejectStartup = Callback1 }
+			p1.startRollbackTurn(p2, function() --[[ Line: 63 ]]
+				-- upvalues: UseRefResult1 (upval), p2 (copy), Callback (copy)
+				local Current = UseRefResult1.current
+				
+				if Current ~= nil and Current.requestId == p2.id then
+					UseRefResult1.current = nil
+					Callback()
+					
+					return
+				end
+			end, function() --[[ Line: 70 ]]
+				-- upvalues: UseRefResult1 (upval), p2 (copy), Callback1 (copy)
+				local Current = UseRefResult1.current
+				
+				if Current ~= nil and Current.requestId == p2.id then
+					UseRefResult1.current = nil
+					Callback1()
+					
+					return
+				end
+			end)
+			
+			return true
 		end
-		var3.current = { requestId = p2.id, rejectStartup = p4 }
-		p1.startRollbackTurn(p2, function()
-			-- upvalues: var3 (copy), p2 (ref), p3 (ref)
-			local current = var3.current
-			
-			if current == nil or current.requestId ~= p2.id then
-				return
-			end
-			var3.current = nil
-			p3()
-		end, function()
-			-- upvalues: var3 (copy), p2 (ref), p4 (ref)
-			local current = var3.current
-			
-			if current == nil or current.requestId ~= p2.id then
-				return
-			end
-			var3.current = nil
-			p4()
-		end)
-		
-		return true
 	end, { p1.session, p1.activeTurnHandleRef, p1.startRollbackTurn })
-	reactModule.useLayoutEffect(function()
-		-- upvalues: p1 (ref), var1 (ref), var2 (ref), var5 (ref)
+	ReactModule.useLayoutEffect(function() --[[ Line: 84 ]]
+		-- upvalues: p1 (copy), AgentRollbackRequestStoreModule (copy), UseRefResult (copy), UseResult1 (copy)
 		if p1.session == nil or p1.placeId == nil then
-			var1.unregisterTurnStarter(var2.current)
+			AgentRollbackRequestStoreModule.unregisterTurnStarter(UseRefResult.current)
 			
 			return
+		else
+			AgentRollbackRequestStoreModule.registerTurnStarter({ universeId = p1.universeId, placeId = p1.placeId }, UseRefResult.current, UseResult1)
 		end
-		var1.registerTurnStarter({ universeId = p1.universeId, placeId = p1.placeId }, var2.current, var5)
 	end, {
 		p1.universeId,
 		p1.placeId,
 		p1.session,
-		var5,
-		var1
+		UseResult1,
+		AgentRollbackRequestStoreModule
 	})
-	reactModule.useLayoutEffect(function()
-		-- upvalues: var2 (ref), var1 (ref)
-		local current = var2.current
+	ReactModule.useLayoutEffect(function() --[[ Line: 103 ]]
+		-- upvalues: UseRefResult (copy), AgentRollbackRequestStoreModule (copy)
+		local Current = UseRefResult.current
 		
-		return function()
-			-- upvalues: var1 (copy), current (ref)
-			var1.unregisterTurnStarter(current)
+		return function() --[[ Line: 105 ]]
+			-- upvalues: AgentRollbackRequestStoreModule (upval), Current (copy)
+			AgentRollbackRequestStoreModule.unregisterTurnStarter(Current)
 		end
-	end, { var1 })
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var4 (ref)
-		return function()
-			-- upvalues: p1 (copy), var4 (copy)
-			local current = p1.activeTurnHandleRef.current
+	end, { AgentRollbackRequestStoreModule })
+	ReactModule.useEffect(function() --[[ Line: 110 ]]
+		-- upvalues: p1 (copy), UseResult (copy)
+		return function() --[[ Line: 111 ]]
+			-- upvalues: p1 (upval), UseResult (upval)
+			local Current = p1.activeTurnHandleRef.current
 			
-			if current ~= nil then
-				var4(current)
+			if Current ~= nil then
+				UseResult(Current)
 			end
 		end
-	end, { p1.activeTurnHandleRef, var4 })
+	end, { p1.activeTurnHandleRef, UseResult })
 	
 	return {
-		stopRequestBeforeReceipt = var4,
-		cancelRequestBeforeTurnStarts = reactModule.useCallback(function()
-			-- upvalues: var3 (ref), p1 (ref), var1 (ref)
-			return var3.current == nil and (p1.placeId ~= nil and var1.cancelRequestForPlaceId(p1.placeId))
-		end, { p1.placeId, var1 })
+		stopRequestBeforeReceipt = UseResult,
+		cancelRequestBeforeTurnStarts = ReactModule.useCallback(function() --[[ Line: 119 ]]
+			-- upvalues: UseRefResult1 (copy), p1 (copy), AgentRollbackRequestStoreModule (copy)
+			return UseRefResult1.current == nil and (p1.placeId ~= nil and AgentRollbackRequestStoreModule.cancelRequestForPlaceId(p1.placeId))
+		end, { p1.placeId, AgentRollbackRequestStoreModule })
 	}
 end

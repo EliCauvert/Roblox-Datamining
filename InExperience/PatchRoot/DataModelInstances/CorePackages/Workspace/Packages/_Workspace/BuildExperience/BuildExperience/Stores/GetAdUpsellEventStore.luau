@@ -1,6 +1,6 @@
-﻿local createAdUpsellEventStoreModule = require(script.createAdUpsellEventStore)
+﻿local CreateAdUpsellEventStoreModule = require(script.createAdUpsellEventStore)
 
-return require(script:FindFirstAncestor("BuildExperience").Parent.Signals).createComputed(function()
-	-- upvalues: createAdUpsellEventStoreModule (ref)
-	return createAdUpsellEventStoreModule()
+return require(script:FindFirstAncestor("BuildExperience").Parent.Signals).createComputed(function() --[[ Line: 9 ]]
+	-- upvalues: CreateAdUpsellEventStoreModule (copy)
+	return CreateAdUpsellEventStoreModule()
 end)

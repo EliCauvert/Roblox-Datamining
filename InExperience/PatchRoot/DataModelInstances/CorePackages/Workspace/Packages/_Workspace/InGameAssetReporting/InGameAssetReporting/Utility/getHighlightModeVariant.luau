@@ -1,23 +1,24 @@
-﻿local inGameAssetReporting = script:FindFirstAncestor("InGameAssetReporting")
+﻿local InGameAssetReporting = script:FindFirstAncestor("InGameAssetReporting")
 local IXPService = game:GetService("IXPService")
-local sharedFlagsModule = require(inGameAssetReporting.Parent.SharedFlags)
-local fStringReportMenuIXPLayer = sharedFlagsModule.FStringReportMenuIXPLayer
-local fFlagHighlightModePreciseSelectionEnabled = sharedFlagsModule.FFlagHighlightModePreciseSelectionEnabled
-local fStringHighlightModePreciseSelectionIXPField = sharedFlagsModule.FStringHighlightModePreciseSelectionIXPField
-local fStringHighlightModePreciseSelectionForceVariant = sharedFlagsModule.FStringHighlightModePreciseSelectionForceVariant
-local constantsModule = require(inGameAssetReporting.InGameAssetReportUI.Resources.Constants)
+local SharedFlagsModule = require(InGameAssetReporting.Parent.SharedFlags)
+local FStringReportMenuIXPLayer = SharedFlagsModule.FStringReportMenuIXPLayer
+local FFlagHighlightModePreciseSelectionEnabled = SharedFlagsModule.FFlagHighlightModePreciseSelectionEnabled
+local FStringHighlightModePreciseSelectionIXPField = SharedFlagsModule.FStringHighlightModePreciseSelectionIXPField
+local FStringHighlightModePreciseSelectionForceVariant = SharedFlagsModule.FStringHighlightModePreciseSelectionForceVariant
+local ConstantsModule = require(InGameAssetReporting.InGameAssetReportUI.Resources.Constants)
 
-return function()
-	-- upvalues: fFlagHighlightModePreciseSelectionEnabled (ref), constantsModule (ref), fStringHighlightModePreciseSelectionForceVariant (ref), IXPService (ref), fStringReportMenuIXPLayer (ref), fStringHighlightModePreciseSelectionIXPField (ref)
-	if not fFlagHighlightModePreciseSelectionEnabled then
-		return constantsModule.HighlightModeVariants.Default
-	elseif fStringHighlightModePreciseSelectionForceVariant ~= "" then
-		return fStringHighlightModePreciseSelectionForceVariant
+return function() --[[ Line: 15 | Named "getHighlightModeVariant" ]]
+	-- upvalues: FFlagHighlightModePreciseSelectionEnabled (copy), ConstantsModule (copy), FStringHighlightModePreciseSelectionForceVariant (copy), IXPService (copy), FStringReportMenuIXPLayer (copy), FStringHighlightModePreciseSelectionIXPField (copy)
+	if not FFlagHighlightModePreciseSelectionEnabled then
+		return ConstantsModule.HighlightModeVariants.Default
+	elseif FStringHighlightModePreciseSelectionForceVariant == "" then
+		local Success, Result = pcall(function() --[[ Line: 24 ]]
+			-- upvalues: IXPService (upval), FStringReportMenuIXPLayer (upval)
+			return IXPService:GetUserLayerVariables(FStringReportMenuIXPLayer)
+		end)
+		
+		return if Success and Result and Result[FStringHighlightModePreciseSelectionIXPField] ~= nil then Result[FStringHighlightModePreciseSelectionIXPField] else ConstantsModule.HighlightModeVariants.Default
+	else
+		return FStringHighlightModePreciseSelectionForceVariant
 	end
-	local ok, status = pcall(function()
-		-- upvalues: IXPService (copy), fStringReportMenuIXPLayer (copy)
-		return IXPService:GetUserLayerVariables(fStringReportMenuIXPLayer)
-	end)
-	
-	return if ok and status and status[fStringHighlightModePreciseSelectionIXPField] ~= nil then status[fStringHighlightModePreciseSelectionIXPField] else constantsModule.HighlightModeVariants.Default
 end

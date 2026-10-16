@@ -1,7 +1,7 @@
-﻿local avatarExperienceRodux = script:FindFirstAncestor("AvatarExperienceRodux")
+﻿local AvatarExperienceRodux = script:FindFirstAncestor("AvatarExperienceRodux")
 
-return require(avatarExperienceRodux.Parent.Rodux).createReducer(false, {
-	[require(avatarExperienceRodux.Actions.AvatarExperienceLoaded).name] = function(_, _)
+return require(AvatarExperienceRodux.Parent.Rodux).createReducer(false, {
+	[require(AvatarExperienceRodux.Actions.AvatarExperienceLoaded).name] = function(_, _): boolean --[[ Line: 10 ]]
 		return true
 	end
 })

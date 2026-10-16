@@ -1,111 +1,105 @@
-﻿local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local formatNumberModule = require(parent.Utility.formatNumber)
-local loggerModule = require(parent.Utility.logger)
-local reactModule = require(parent_1.React)
-local UIBloxModule = require(parent_1.UIBlox)
-local images = UIBloxModule.App.ImageSet.Images
-local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
-local foundationModule = require(parent_1.Foundation)
-local useTokens = foundationModule.Hooks.useTokens
-local text = foundationModule.Text
-local view = foundationModule.View
-local virtualItemBadgeTypeModule = require(parent.Enums.VirtualItemBadgeType)
-local modelViewportModule = require(parent.Generic.ModelViewport)
-local yellowBadgeModule = require(parent.Generic.YellowBadge)
-local localizationService = game:GetService("LocalizationService")
-local useLocalization = require(parent_1.Localization).Hooks.useLocalization
-local default = require(parent_1.LoggingProtocol).default
-local virtualItemBadgeShownCounter = require(parent.Generic.Events.VirtualItemBadgeCounter).VirtualItemBadgeShownCounter
-local imageunavailable = images["icons/status/imageunavailable"]
+﻿local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local FormatNumberModule = require(Parent.Utility.formatNumber)
+local LoggerModule = require(Parent.Utility.logger)
+local ReactModule = require(Parent1.React)
+local UIBloxModule = require(Parent1.UIBlox)
+local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
+local FoundationModule = require(Parent1.Foundation)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local VirtualItemBadgeTypeModule = require(Parent.Enums.VirtualItemBadgeType)
+local ModelViewportModule = require(Parent.Generic.ModelViewport)
+local YellowBadgeModule = require(Parent.Generic.YellowBadge)
+local LocalizationService = game:GetService("LocalizationService")
+local UseLocalizationFunction = require(Parent1.Localization).Hooks.useLocalization
+local Default = require(Parent1.LoggingProtocol).default
+local VirtualItemBadgeShownCounter = require(Parent.Generic.Events.VirtualItemBadgeCounter).VirtualItemBadgeShownCounter
+local IconsStatusImageunavailable = UIBloxModule.App.ImageSet.Images["icons/status/imageunavailable"]
 
-local function _(a)
-	return if #a > 50 then a:sub(1, 50) .. "..." else a
+local function _(Text: string): string --[[ Line: 41 | Named "withMaxLength" ]]
+	return if #Text > 50 then Text:sub(1, 50) .. "..." else Text
 end
 
-return function(p1)
-	-- upvalues: useLocalization (ref), useTokens (ref), reactModule (ref), modelViewportModule (ref), imageSetLabel (ref), imageunavailable (ref), virtualItemBadgeTypeModule (ref), yellowBadgeModule (ref), loggerModule (ref), default (ref), virtualItemBadgeShownCounter (ref), view (ref), text (ref), formatNumberModule (ref), localizationService (ref)
-	local var1 = useLocalization({ Popular = "IAPExperience.RobuxUpsell.Text.PopularItem" })
-	local var2 = useTokens()
-	local var3 = if p1.isPortrait then 128 else 80
-	local var4, var5 = reactModule.useState(0)
+return function(p1) --[[ Line: 57 ]]
+	-- upvalues: UseLocalizationFunction (copy), UseTokensFunction (copy), ReactModule (copy), ModelViewportModule (copy), ImageSetLabel (copy), IconsStatusImageunavailable (copy), VirtualItemBadgeTypeModule (copy), YellowBadgeModule (copy), LoggerModule (copy), Default (copy), VirtualItemBadgeShownCounter (copy), View (copy), Text (copy), FormatNumberModule (copy), LocalizationService (copy)
+	local UseLocalizationResult = UseLocalizationFunction({ Popular = "IAPExperience.RobuxUpsell.Text.PopularItem" })
+	local UseTokensResult = UseTokensFunction()
+	local XOffset: number = if p1.isPortrait then 128 else 80
+	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
 	
-	local function updateComponentWidth(p2)
-		-- upvalues: var3 (ref), var4 (ref), var5 (ref)
-		if not p2 then return end
-		local var6 = p2.AbsoluteSize.X - var3 - 6
+	local function updateComponentWidth(Frame) --[[ Line: 66 ]]
+		-- upvalues: XOffset (copy), UseStateResult (copy), UseStateResult2 (copy)
+		if not Frame then return end
+		local XDelta = Frame.AbsoluteSize.X - XOffset - 6
 		
-		if var6 ~= var4 then
-			var5(var6)
+		if XDelta ~= UseStateResult then
+			UseStateResult2(XDelta)
 		end
 	end
 	
-	local var6 = if p1.model ~= nil then reactModule.createElement(imageSetLabel, {
+	local Element = if p1.model == nil then ReactModule.createElement(ImageSetLabel, {
 		BackgroundTransparency = 1,
 		Position = UDim2.new(0, 5, 0, 5),
-		Size = UDim2.new(0, var3, 0, var3),
+		Size = UDim2.new(0, XOffset, 0, XOffset),
 		ScaleType = Enum.ScaleType.Stretch,
-		Image = if p1.itemIcon then p1.itemIcon else imageunavailable,
-		ImageColor3 = if p1.itemIcon then nil else var2.Color.Content.Default.Color3,
-		ImageTransparency = if p1.itemIcon then nil else var2.Color.Content.Default.Transparency
-	}) else reactModule.createElement(modelViewportModule, {
+		Image = if p1.itemIcon then p1.itemIcon else IconsStatusImageunavailable,
+		ImageColor3 = if p1.itemIcon then nil else UseTokensResult.Color.Content.Default.Color3,
+		ImageTransparency = if p1.itemIcon then nil else UseTokensResult.Color.Content.Default.Transparency
+	}) else ReactModule.createElement(ModelViewportModule, {
 		model = p1.model,
 		Position = UDim2.fromOffset(5, 5),
-		Size = UDim2.fromOffset(var3, var3)
+		Size = UDim2.fromOffset(XOffset, XOffset)
 	})
-	local var7 = if p1.badgeType and p1.badgeType == virtualItemBadgeTypeModule.Popular then reactModule.createElement(yellowBadgeModule, {
+	local Element1 = if p1.badgeType and p1.badgeType == VirtualItemBadgeTypeModule.Popular then ReactModule.createElement(YellowBadgeModule, {
 		LayoutOrder = 2,
 		Icon = "icons/menu/fire_fill",
-		Text = var1.Popular
+		Text = UseLocalizationResult.Popular
 	}) else nil
-	reactModule.useEffect(function()
-		-- upvalues: var7 (ref), loggerModule (copy), p1 (ref), default (copy), virtualItemBadgeShownCounter (copy)
-		if var7 then
-			loggerModule.debug({
+	ReactModule.useEffect(function() --[[ Line: 102 ]]
+		-- upvalues: Element1 (copy), LoggerModule (upval), p1 (copy), Default (upval), VirtualItemBadgeShownCounter (upval)
+		if Element1 then
+			LoggerModule.debug({
 				message = "Virtual Item Badge Shown",
 				badgeType = p1.badgeType
 			})
-			default:logRobloxTelemetryCounter(virtualItemBadgeShownCounter, 1, { badgeType = p1.badgeType })
+			Default:logRobloxTelemetryCounter(VirtualItemBadgeShownCounter, 1, { badgeType = p1.badgeType })
 			
 			return
 		end
 	end, {})
-	local createElement = reactModule.createElement
-	local t = {
+	local ItemName: string = p1.itemName
+	
+	return ReactModule.createElement(View, {
 		tag = "auto-y row gap-small align-y-center align-x-left",
 		LayoutOrder = p1.layoutOrder,
 		Size = UDim2.new(1, 0, 0, 0)
-	}
-	local t_1 = { ItemIcon = var6 }
-	local createElement_1 = reactModule.createElement
-	local t_2 = {
-		LayoutOrder = 2,
-		tag = "col auto-y gap-small",
-		onAbsoluteSizeChanged = updateComponentWidth,
-		Size = UDim2.new(1, 0, 0, 0)
-	}
-	local t_3 = {}
-	local createElement_2 = reactModule.createElement
-	local t_4 = {
-		LayoutOrder = 1,
-		tag = "auto-y text-align-x-left text-wrap text-title-medium content-emphasis",
-		Size = UDim2.new(0, var4, 0, 0)
-	}
-	local itemName = p1.itemName
-	t_4.Text = if #itemName > 50 then itemName:sub(1, 50) .. "..." else itemName
-	t_3.ItemName = createElement_2(text, t_4)
-	t_3.ItemDetails = reactModule.createElement(view, {
-		LayoutOrder = 2,
-		tag = if p1.isPortrait then "auto-xy col gap-small align-y-center" else "auto-xy row gap-small align-y-center"
 	}, {
-		ItemCost = if p1.itemRobuxCost then reactModule.createElement(text, {
-			LayoutOrder = 1,
-			tag = "auto-xy text-align-x-left text-wrap text-title-medium content-emphasis",
-			Text = utf8.char(57346) .. " " .. formatNumberModule(localizationService.RobloxLocaleId, p1.itemRobuxCost)
-		}) else nil,
-		ItemBadge = var7
+		ItemIcon = Element,
+		ItemDetailsFrame = ReactModule.createElement(View, {
+			LayoutOrder = 2,
+			tag = "col auto-y gap-small",
+			onAbsoluteSizeChanged = updateComponentWidth,
+			Size = UDim2.new(1, 0, 0, 0)
+		}, {
+			ItemName = ReactModule.createElement(Text, {
+				LayoutOrder = 1,
+				tag = "auto-y text-align-x-left text-wrap text-title-medium content-emphasis",
+				Size = UDim2.new(0, UseStateResult, 0, 0),
+				Text = if #ItemName > 50 then ItemName:sub(1, 50) .. "..." else ItemName
+			}),
+			ItemDetails = ReactModule.createElement(View, {
+				LayoutOrder = 2,
+				tag = if p1.isPortrait then "auto-xy col gap-small align-y-center" else "auto-xy row gap-small align-y-center"
+			}, {
+				ItemCost = if p1.itemRobuxCost then ReactModule.createElement(Text, {
+					LayoutOrder = 1,
+					tag = "auto-xy text-align-x-left text-wrap text-title-medium content-emphasis",
+					Text = utf8.char(57346) .. " " .. FormatNumberModule(LocalizationService.RobloxLocaleId, p1.itemRobuxCost)
+				}) else nil,
+				ItemBadge = Element1
+			})
+		})
 	})
-	t_1.ItemDetailsFrame = createElement_1(view, t_2, t_3)
-	
-	return createElement(view, t, t_1)
 end

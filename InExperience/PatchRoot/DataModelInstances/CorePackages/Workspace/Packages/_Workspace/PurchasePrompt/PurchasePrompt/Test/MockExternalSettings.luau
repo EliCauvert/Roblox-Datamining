@@ -1,56 +1,55 @@
 ﻿local _ = script.Parent.Parent
-local cryo = require(script:FindFirstAncestor("PurchasePrompt").Parent.PurchasePromptDeps).Cryo
-local t = { RestrictSales2 = false, Order66 = false }
+local Cryo = require(script:FindFirstAncestor("PurchasePrompt").Parent.PurchasePromptDeps).Cryo
+local config = { RestrictSales2 = false, Order66 = false }
 
 return {
-	new = function(p1, p2, p3, p4)
-		-- upvalues: cryo (ref), t (ref)
-		local t_1 = {
-			getPlatform = function()
-				-- upvalues: p4 (ref)
-				return p4 or Enum.Platform.Windows
-			end,
-			isStudio = function()
-				-- upvalues: p1 (ref)
-				return p1 or false
-			end,
-			isThirdPartyPurchaseAllowed = function()
-				-- upvalues: p3 (write)
-				return p3.PermissionsServiceIsThirdPartyPurchaseAllowed
-			end,
-			getLuaUseThirdPartyPermissions = function()
-				-- upvalues: p3 (write)
-				local luaUseThirdPartyPermissions = p3.LuaUseThirdPartyPermissions
-				
-				return luaUseThirdPartyPermissions == nil or luaUseThirdPartyPermissions
-			end,
-			getFlagBypassThirdPartySettingForRobloxPurchase = function()
-				-- upvalues: p3 (write)
-				return p3.BypassThirdPartySettingForRobloxPurchase
-			end,
-			getFlagRestrictSales2 = function()
-				-- upvalues: p3 (write)
-				return p3.RestrictSales2
-			end,
-			getFlagOrder66 = function()
-				-- upvalues: p3 (write)
-				return p3.Order66
-			end,
-			isTenFootInterface = function()
-				-- upvalues: p2 (ref)
-				return p2
-			end,
-			getFFlagDisableRobuxUpsell = function()
-				-- upvalues: p3 (write)
-				return p3.DisableRobuxUpsell
-			end
-		}
-		p3 = cryo.Dictionary.join(t, p3 or {})
+	new = function(p1, p2, p3, p4) --[[ Line: 23 ]]
+		-- upvalues: Cryo (copy), config (copy)
+		local JoinResult = Cryo.Dictionary.join(config, p3 or {})
 		
-		local function _(p5, p6)
+		local function _(p5, p6) --[[ Line: 34 | Named "getMockFlag" ]]
 			return if p5 == nil then p6 else p5
 		end
 		
-		return t_1
+		return {
+			getPlatform = function() --[[ Line: 41 ]]
+				-- upvalues: p4 (copy)
+				return p4 or Enum.Platform.Windows
+			end,
+			isStudio = function() --[[ Line: 45 ]]
+				-- upvalues: p1 (copy)
+				return p1 or false
+			end,
+			isThirdPartyPurchaseAllowed = function() --[[ Line: 49 ]]
+				-- upvalues: JoinResult (ref)
+				return JoinResult.PermissionsServiceIsThirdPartyPurchaseAllowed
+			end,
+			getLuaUseThirdPartyPermissions = function() --[[ Line: 53 ]]
+				-- upvalues: JoinResult (ref)
+				local LuaUseThirdPartyPermissions = JoinResult.LuaUseThirdPartyPermissions
+				
+				return LuaUseThirdPartyPermissions == nil or LuaUseThirdPartyPermissions
+			end,
+			getFlagBypassThirdPartySettingForRobloxPurchase = function() --[[ Line: 57 ]]
+				-- upvalues: JoinResult (ref)
+				return JoinResult.BypassThirdPartySettingForRobloxPurchase
+			end,
+			getFlagRestrictSales2 = function() --[[ Line: 62 ]]
+				-- upvalues: JoinResult (ref)
+				return JoinResult.RestrictSales2
+			end,
+			getFlagOrder66 = function() --[[ Line: 66 ]]
+				-- upvalues: JoinResult (ref)
+				return JoinResult.Order66
+			end,
+			isTenFootInterface = function() --[[ Line: 70 ]]
+				-- upvalues: p2 (copy)
+				return p2
+			end,
+			getFFlagDisableRobuxUpsell = function() --[[ Line: 74 ]]
+				-- upvalues: JoinResult (ref)
+				return JoinResult.DisableRobuxUpsell
+			end
+		}
 	end
 }

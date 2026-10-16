@@ -1,26 +1,26 @@
-﻿local avatarExperienceUIKit = script:FindFirstAncestor("AvatarExperienceUIKit")
-local parent = avatarExperienceUIKit.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local view = foundationModule.View
-local useTokens = foundationModule.Hooks.useTokens
-local backgroundLayersModule = require(avatarExperienceUIKit.BackgroundLayers.BackgroundLayers)
+﻿local AvatarExperienceUIKit = script:FindFirstAncestor("AvatarExperienceUIKit")
+local Parent = AvatarExperienceUIKit.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local BackgroundLayersModule = require(AvatarExperienceUIKit.BackgroundLayers.BackgroundLayers)
 
-return function(value)
-	-- upvalues: useTokens (ref), reactModule (ref), backgroundLayersModule (ref), view (ref)
-	return reactModule.createElement(reactModule.Fragment, nil, {
-		ItemCardBackgrounds = reactModule.createElement(backgroundLayersModule, {
+return function(p1) --[[ Line: 17 | Named "ItemCardBackgroundsWrapper" ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), BackgroundLayersModule (copy), View (copy)
+	return ReactModule.createElement(ReactModule.Fragment, nil, {
+		ItemCardBackgrounds = ReactModule.createElement(BackgroundLayersModule, {
 			ZIndex = 0,
-			backgroundLayers = value.backgroundLayers,
-			cornerRadius = UDim.new(0, useTokens().Radius.Medium),
-			imageScaleType = value.imageScaleType
+			backgroundLayers = p1.backgroundLayers,
+			cornerRadius = UDim.new(0, UseTokensFunction().Radius.Medium),
+			imageScaleType = p1.imageScaleType
 		}),
-		ItemCardContent = reactModule.createElement(view, {
+		ItemCardContent = ReactModule.createElement(View, {
 			tag = "col gap-small size-full-0 auto-y padding-small",
 			ZIndex = 1
 		}, {
-			ItemCardHeaderSlot = value.headerSlot,
-			ItemCardFooterSlot = value.footerSlot
+			ItemCardHeaderSlot = p1.headerSlot,
+			ItemCardFooterSlot = p1.footerSlot
 		})
 	})
 end

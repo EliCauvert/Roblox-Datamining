@@ -1,20 +1,20 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local userProfileModule = require(parent.DataHydration.UserProfile)
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local UserProfileModule = require(Parent.DataHydration.UserProfile)
 
-return function(p1)
-	-- upvalues: reactModule (ref), userProfileModule (ref), signalsReactModule (ref)
-	local var1 = reactModule.useMemo(function()
-		-- upvalues: userProfileModule (copy), p1 (ref)
-		return userProfileModule.getAndFetchUserInfo(p1)
+return function(p1) --[[ Line: 21 | Named "useUserProfileInfo" ]]
+	-- upvalues: ReactModule (copy), UserProfileModule (copy), SignalsReactModule (copy)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 22 ]]
+		-- upvalues: UserProfileModule (upval), p1 (copy)
+		return UserProfileModule.getAndFetchUserInfo(p1)
 	end, { p1 })
-	local var2 = signalsReactModule.useSignalState(var1.info)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(UseMemoResult.info)
 	
 	return {
-		displayName = if var2 ~= nil then "" else var2.displayName,
-		username = if var2 ~= nil then "" else var2.username,
-		hasVerifiedBadge = if var2 ~= nil then false else var2.hasVerifiedBadge,
-		isLoading = signalsReactModule.useSignalState(var1.status) ~= "Ready"
+		displayName = if UseSignalStateResult == nil then "" else UseSignalStateResult.displayName,
+		username = if UseSignalStateResult == nil then "" else UseSignalStateResult.username,
+		hasVerifiedBadge = UseSignalStateResult ~= nil and UseSignalStateResult.hasVerifiedBadge,
+		isLoading = SignalsReactModule.useSignalState(UseMemoResult.status) ~= "Ready"
 	}
 end

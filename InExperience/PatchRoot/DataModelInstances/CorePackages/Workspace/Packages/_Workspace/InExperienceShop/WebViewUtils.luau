@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.WebViewUtils.WebViewUtils)
+﻿return (require(script.Parent.Parent.Parent._Index.WebViewUtils.WebViewUtils))

@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("AppChatFullPlaintextBeforeGameCards", false)
+﻿return (game:DefineFastFlag("AppChatFullPlaintextBeforeGameCards", false))

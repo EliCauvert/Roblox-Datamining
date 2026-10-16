@@ -1,39 +1,40 @@
-﻿local parent = script:FindFirstAncestor("GameHydrationReact").Parent
-local signalsModule = require(parent.Signals)
-local dataHydrationModule = require(parent.DataHydration)
+﻿local Parent = script:FindFirstAncestor("GameHydrationReact").Parent
+local SignalsModule = require(Parent.Signals)
+local DataHydrationModule = require(Parent.DataHydration)
 
-local function _(p1)
+local function _(p1) --[[ Line: 27 | Named "toId" ]]
 	return if p1 == nil then nil else tostring(p1)
 end
 
-return function(p1)
-	-- upvalues: dataHydrationModule (ref), signalsModule (ref)
-	local gameIconStore = dataHydrationModule.Game.getGameIconStore(false)
-	local universeId = p1.universeId
-	universeId, var3 = signalsModule.createSignal(if universeId ~= nil then nil else tostring(universeId))
-	local var1 = nil
-	local var2 = true
+return function(p1) --[[ Line: 39 | Named "subscribeGameIcon" ]]
+	-- upvalues: DataHydrationModule (copy), SignalsModule (copy)
+	local GameIconStore = DataHydrationModule.Game.getGameIconStore(false)
+	local UniverseId = p1.universeId
+	local Signal, Signal2 = SignalsModule.createSignal(if UniverseId == nil then nil else tostring(UniverseId))
+	local DataResult = nil
+	local Flag = true
 	
 	return {
-		getCurrent = function()
-			-- upvalues: var1 (write)
-			return var1
+		getCurrent = function() --[[ Line: 66 ]]
+			-- upvalues: DataResult (ref)
+			return DataResult
 		end,
-		update = function(p2)
-			-- upvalues: var3 (ref)
-			var3(if p2 ~= nil then nil else tostring(p2))
+		update = function(p2) --[[ Line: 69 ]]
+			-- upvalues: Signal2 (copy)
+			Signal2(if p2 == nil then nil else tostring(p2))
 		end,
-		dispose = signalsModule.createEffect(function(p2)
-			-- upvalues: universeId (ref), var1 (write), gameIconStore (ref), p1 (ref), var2 (write)
-			local var3 = universeId(p2)
-			var1 = if var3 == nil then nil else gameIconStore.getGameIcon(var3, p1.size).data(p2)
+		dispose = SignalsModule.createEffect(function(p2) --[[ Line: 47 ]]
+			-- upvalues: Signal (copy), DataResult (ref), GameIconStore (copy), p1 (copy), Flag (ref)
+			local SignalResult = Signal(p2)
+			DataResult = if SignalResult == nil then nil else GameIconStore.getGameIcon(SignalResult, p1.size).data(p2)
 			
-			if var2 then
-				var2 = false
+			if Flag then
+				Flag = false
 				
 				return
+			else
+				p1.onChange(DataResult)
 			end
-			p1.onChange(var1)
 		end)
 	}
 end

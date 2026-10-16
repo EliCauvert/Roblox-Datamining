@@ -1,10 +1,10 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local cryoModule = require(profilePlatform.Parent.Cryo)
-local _ = require(profilePlatform.Common.Types)
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local CryoModule = require(ProfilePlatform.Parent.Cryo)
+local _ = require(ProfilePlatform.Common.Types)
 
-return function(p1)
-	-- upvalues: cryoModule (ref)
-	return if p1 then cryoModule.Dictionary.map(p1, function(p2)
+return function(p1) --[[ Line: 9 ]]
+	-- upvalues: CryoModule (copy)
+	return if p1 then CryoModule.Dictionary.map(p1, function(p2) --[[ Line: 14 ]]
 		return {
 			id = p2.experienceId,
 			universeId = tonumber(p2.experienceId),

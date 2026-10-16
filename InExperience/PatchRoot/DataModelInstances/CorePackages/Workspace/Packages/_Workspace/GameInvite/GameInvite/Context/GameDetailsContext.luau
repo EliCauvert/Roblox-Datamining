@@ -1,10 +1,10 @@
-﻿local parent = script.Parent.Parent
-local _ = require(parent.gameInviteModalType)
+﻿local Parent = script.Parent.Parent
+local _ = require(Parent.gameInviteModalType)
 
-return require(parent.Parent.React).createContext({
+return (require(Parent.Parent.React).createContext({
 	serverType = "",
 	promptMessage = "",
 	trigger = "",
 	isCoreScript = false,
 	gameDetails = {}
-})
+}))

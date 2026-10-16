@@ -1,36 +1,36 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local useNavigation = require(parent.Navigation).useNavigation
-local openGameDetails = require(parent.GameDetail).OpenGameDetails
-local experienceTileModule = require(profilePlatform.BaseComponents.Tiles.ExperienceTile)
-local _ = require(profilePlatform.Common.Types)
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local OpenGameDetailsFunction = require(Parent.GameDetail).OpenGameDetails
+local ExperienceTileModule = require(ProfilePlatform.BaseComponents.Tiles.ExperienceTile)
+local _ = require(ProfilePlatform.Common.Types)
 
-return function(p1, p2, p3, p4)
-	-- upvalues: useDispatch (ref), useNavigation (ref), reactModule (ref), openGameDetails (ref), experienceTileModule (ref)
-	local var1 = useDispatch()
-	local var2 = useNavigation()
-	p2 = p2 or "ProfileExperienceTile_"
-	local var3 = reactModule.useCallback(function(p5, p6, p7)
-		-- upvalues: p3 (ref), var1 (ref), openGameDetails (copy), var2 (ref)
-		return function()
-			-- upvalues: p3 (copy), p5 (ref), p6 (ref), p7 (ref), var1 (copy), openGameDetails (copy), var2 (copy)
-			if p3 then
-				p3(p5, p6, p7)
+return function(ImpressionsTag, p1, Callback, ShowFooter) --[[ Line: 19 | Named "useRenderExperienceTile" ]]
+	-- upvalues: UseDispatchFunction (copy), UseNavigationFunction (copy), ReactModule (copy), OpenGameDetailsFunction (copy), ExperienceTileModule (copy)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseNavigationResult = UseNavigationFunction()
+	local P1 = p1 or "ProfileExperienceTile_"
+	local UseResult = ReactModule.useCallback(function(p2, p3, p4) --[[ Line: 29 ]]
+		-- upvalues: Callback (copy), UseDispatchResult (copy), OpenGameDetailsFunction (upval), UseNavigationResult (copy)
+		return function() --[[ Line: 30 ]]
+			-- upvalues: Callback (upval), p2 (copy), p3 (copy), p4 (copy), UseDispatchResult (upval), OpenGameDetailsFunction (upval), UseNavigationResult (upval)
+			if Callback then
+				Callback(p2, p3, p4)
 			end
-			var1(openGameDetails(p5.experienceId, var2, { mountAsFullView = false, showBackButton = true }))
+			UseDispatchResult(OpenGameDetailsFunction(p2.experienceId, UseNavigationResult, { mountAsFullView = false, showBackButton = true }))
 		end
-	end, { p3, var1, var2 })
+	end, { Callback, UseDispatchResult, UseNavigationResult })
 	
-	return reactModule.useCallback(function(p5, p6, _, p7)
-		-- upvalues: reactModule (copy), experienceTileModule (copy), var3 (ref), p1 (ref), p4 (ref), p2 (write)
-		return reactModule.createElement(experienceTileModule, {
-			item = p5,
-			index = p6,
-			onActivated = var3(p5, p6, p7),
-			impressionsTag = p1,
-			showFooter = p4
-		}), `{p2}{p5.experienceId}_`
-	end, { p1, var3, p2 })
+	return (ReactModule.useCallback(function(Item, Index, _, p2) --[[ Line: 51 ]]
+		-- upvalues: ReactModule (upval), ExperienceTileModule (upval), UseResult (copy), ImpressionsTag (copy), ShowFooter (copy), P1 (ref)
+		return ReactModule.createElement(ExperienceTileModule, {
+			item = Item,
+			index = Index,
+			onActivated = UseResult(Item, Index, p2),
+			impressionsTag = ImpressionsTag,
+			showFooter = ShowFooter
+		}), `{P1}{Item.experienceId}_`
+	end, { ImpressionsTag, UseResult, P1 }))
 end

@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.HttpSignals.HttpSignals)
+﻿return (require(script.Parent.Parent.Parent._Index.HttpSignals.HttpSignals))

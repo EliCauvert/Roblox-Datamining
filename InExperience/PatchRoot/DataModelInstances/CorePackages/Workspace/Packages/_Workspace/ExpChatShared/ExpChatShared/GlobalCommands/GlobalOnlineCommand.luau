@@ -1,28 +1,29 @@
-﻿local textChatService = game:GetService("TextChatService")
-local expChatShared = script:FindFirstAncestor("ExpChatShared")
-local online = require(expChatShared.Logger):new("ExpChat/GlobalCommand/Online")
+﻿local TextChatService = game:GetService("TextChatService")
+local ExpChatShared = script:FindFirstAncestor("ExpChatShared")
+local Online = require(ExpChatShared.Logger):new("ExpChat/GlobalCommand/Online")
 local _ = require(script.Parent.types)
-local fFlagExpChatUseUpdatedUserCountStringsModule = require(expChatShared.Flags.FFlagExpChatUseUpdatedUserCountStrings)
+local FFlagExpChatUseUpdatedUserCountStringsModule = require(ExpChatShared.Flags.FFlagExpChatUseUpdatedUserCountStrings)
 
 return {
 	name = script.Name,
 	alias = { "/online" },
-	clientRun = function(_, p1, _, _)
-		-- upvalues: textChatService (ref), online (ref), fFlagExpChatUseUpdatedUserCountStringsModule (ref)
-		local ok, status = pcall(function()
-			-- upvalues: textChatService (copy), p1 (ref)
-			return textChatService:GetChatableUserCountAsync(p1, "global")
+	clientRun = function(_, UserId, _, _) --[[ Line: 15 ]]
+		-- upvalues: TextChatService (copy), Online (copy), FFlagExpChatUseUpdatedUserCountStringsModule (copy)
+		local Success, Result = pcall(function() --[[ Line: 16 ]]
+			-- upvalues: TextChatService (upval), UserId (copy)
+			return TextChatService:GetChatableUserCountAsync(UserId, "global")
 		end)
 		
-		if ok then
+		if Success then
 			return {
 				metadata = "Roblox.GlobalOnline.Info",
-				key = if fFlagExpChatUseUpdatedUserCountStringsModule then if status == 1 then "CoreScripts.TextChat.Online.Success.Singular3" else "CoreScripts.TextChat.Online.Success.Plural2" elseif status == 1 then "CoreScripts.TextChat.Online.Success.Singular" else "CoreScripts.TextChat.Online.Success.Plural",
-				args = { RBX_COUNT = status }
+				key = if FFlagExpChatUseUpdatedUserCountStringsModule then if Result == 1 then "CoreScripts.TextChat.Online.Success.Singular3" else "CoreScripts.TextChat.Online.Success.Plural2" elseif Result == 1 then "CoreScripts.TextChat.Online.Success.Singular" else "CoreScripts.TextChat.Online.Success.Plural",
+				args = { RBX_COUNT = Result }
 			}
+		else
+			Online:warning("GetChatableUserCountAsync ({}) failed: {}", "global", (tostring(Result)))
+			
+			return nil
 		end
-		online:warning("GetChatableUserCountAsync ({}) failed: {}", "global", tostring(status))
-		
-		return nil
 	end
 }

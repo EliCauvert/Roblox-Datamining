@@ -1,78 +1,78 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local parent = dataHydration.Parent
-local httpClientModule = require(parent.HttpClient)
-local urlBuilderModule = require(parent.UrlBuilder)
-local urlBase = urlBuilderModule.UrlBase
-local withCsrfRetryModule = require(dataHydration.withCsrfRetry)
-local experienceGenreStoreTypesModule = require(script.Parent.ExperienceGenreStoreTypes)
-local fetch = httpClientModule.fetch
-local asPromise = httpClientModule.asPromise
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local Parent = DataHydration.Parent
+local HttpClientModule = require(Parent.HttpClient)
+local UrlBuilderModule = require(Parent.UrlBuilder)
+local UrlBase = UrlBuilderModule.UrlBase
+local WithCsrfRetryModule = require(DataHydration.withCsrfRetry)
+local ExperienceGenreStoreTypesModule = require(script.Parent.ExperienceGenreStoreTypes)
+local FetchFunction = HttpClientModule.fetch
+local AsPromiseFunction = HttpClientModule.asPromise
 
-local function _(p1)
-	-- upvalues: withCsrfRetryModule (ref), httpClientModule (ref)
-	return (p1 or {}).network or withCsrfRetryModule(httpClientModule.createRequestInternalNetwork())
+local function _(p1) --[[ Line: 21 | Named "resolveMutatingNetwork" ]]
+	-- upvalues: WithCsrfRetryModule (copy), HttpClientModule (copy)
+	return (p1 or {}).network or WithCsrfRetryModule(HttpClientModule.createRequestInternalNetwork())
 end
 
 return {
-	fetchExperienceGenre = function(p1, p2, p3)
-		-- upvalues: urlBase (ref), experienceGenreStoreTypesModule (ref), fetch (ref), urlBuilderModule (ref), asPromise (ref)
-		p3 = p3 or {}
-		local baseUrl = p3.baseUrl or urlBase.APIS
-		p2 = p2 or {}
-		local t = {
-			universeId = p1,
-			genreTaxonomyVersion = p2.genreTaxonomyVersion or experienceGenreStoreTypesModule.DEFAULT_TAXONOMY_VERSION
+	fetchExperienceGenre = function(UniverseId, p1, p2) --[[ Line: 29 ]]
+		-- upvalues: UrlBase (copy), ExperienceGenreStoreTypesModule (copy), FetchFunction (copy), UrlBuilderModule (copy), AsPromiseFunction (copy)
+		local P3 = p2 or {}
+		local BaseUrl = P3.baseUrl or UrlBase.APIS
+		local P2 = p1 or {}
+		local config = {
+			universeId = UniverseId,
+			genreTaxonomyVersion = P2.genreTaxonomyVersion or ExperienceGenreStoreTypesModule.DEFAULT_TAXONOMY_VERSION
 		}
 		
-		if p2.includeGenreTaxonomyVersion then
-			t["responseOptions.includeGenreTaxonomyVersion"] = "true"
+		if P2.includeGenreTaxonomyVersion then
+			config["responseOptions.includeGenreTaxonomyVersion"] = "true"
 		end
-		if p2.includeUpdateLockExpirationTime then
-			t["responseOptions.includeUpdateLockExpirationTime"] = "true"
+		if P2.includeUpdateLockExpirationTime then
+			config["responseOptions.includeUpdateLockExpirationTime"] = "true"
 		end
-		if p2.includeVerificationState then
-			t["responseOptions.includeVerificationState"] = "true"
+		if P2.includeVerificationState then
+			config["responseOptions.includeVerificationState"] = "true"
 		end
-		if p2.includeAppealState then
-			t["responseOptions.includeAppealState"] = "true"
+		if P2.includeAppealState then
+			config["responseOptions.includeAppealState"] = "true"
 		end
-		if p2.includeCreatorSelectedGenre then
-			t["responseOptions.includeCreatorSelectedGenre"] = "true"
+		if P2.includeCreatorSelectedGenre then
+			config["responseOptions.includeCreatorSelectedGenre"] = "true"
 		end
-		if p2.includeNotifyGenreChange then
-			t["responseOptions.includeNotifyGenreChange"] = "true"
+		if P2.includeNotifyGenreChange then
+			config["responseOptions.includeNotifyGenreChange"] = "true"
 		end
-		return asPromise(fetch({
+		return AsPromiseFunction((FetchFunction({
 			method = "GET",
 			analyticsKey = "experience-genre.get",
-			network = p3.network,
-			url = urlBuilderModule.UrlBuilder.addQueryString(baseUrl .. "/experience-genre-api/v1/Creator/ExperienceGenre", t),
-			decode = function(p4)
-				return p4
+			network = P3.network,
+			url = UrlBuilderModule.UrlBuilder.addQueryString(BaseUrl .. "/experience-genre-api/v1/Creator/ExperienceGenre", config),
+			decode = function(p3) --[[ Line: 66 ]]
+				return p3
 			end
-		}))
+		})))
 	end,
-	setExperienceGenre = function(value, p1)
-		-- upvalues: urlBase (ref), experienceGenreStoreTypesModule (ref), fetch (ref), withCsrfRetryModule (ref), httpClientModule (ref), asPromise (ref)
-		local baseUrl = (p1 or {}).baseUrl or urlBase.APIS
-		local t = {
-			universeId = value.universeId,
-			genre = value.genre,
-			genreTaxonomyVersion = value.genreTaxonomyVersion or experienceGenreStoreTypesModule.DEFAULT_TAXONOMY_VERSION
+	setExperienceGenre = function(Body, p1) --[[ Line: 73 ]]
+		-- upvalues: UrlBase (copy), ExperienceGenreStoreTypesModule (copy), FetchFunction (copy), WithCsrfRetryModule (copy), HttpClientModule (copy), AsPromiseFunction (copy)
+		local BaseUrl = (p1 or {}).baseUrl or UrlBase.APIS
+		local Body1 = {
+			universeId = Body.universeId,
+			genre = Body.genre,
+			genreTaxonomyVersion = Body.genreTaxonomyVersion or ExperienceGenreStoreTypesModule.DEFAULT_TAXONOMY_VERSION
 		}
 		
-		if value.responseOptions then
-			t.responseOptions = value.responseOptions
+		if Body.responseOptions then
+			Body1.responseOptions = Body.responseOptions
 		end
-		return asPromise(fetch({
+		return AsPromiseFunction((FetchFunction({
 			method = "POST",
 			analyticsKey = "experience-genre.set",
-			network = (p1 or {}).network or withCsrfRetryModule(httpClientModule.createRequestInternalNetwork()),
-			url = baseUrl .. "/experience-genre-api/v1/Creator/ExperienceGenre",
-			body = t,
-			decode = function(p2)
+			network = (p1 or {}).network or WithCsrfRetryModule(HttpClientModule.createRequestInternalNetwork()),
+			url = BaseUrl .. "/experience-genre-api/v1/Creator/ExperienceGenre",
+			body = Body1,
+			decode = function(p2) --[[ Line: 95 ]]
 				return p2
 			end
-		}))
+		})))
 	end
 }

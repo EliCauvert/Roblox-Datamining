@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.CachedPolicyService.CachedPolicyService)
+﻿return (require(script.Parent._Workspace.CachedPolicyService.CachedPolicyService))

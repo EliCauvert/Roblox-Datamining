@@ -1,52 +1,51 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local _ = require(dataHydration.Parent.MomentsTypes)
-local getFStringMomentsEmojiFallbackCatalogJSONModule = require(dataHydration.Moments.Flags.GetFStringMomentsEmojiFallbackCatalogJSON)
-local fFlagMomentsEmojiSetsApiModule = require(dataHydration.Moments.FFlagMomentsEmojiSetsApi)
-local fFlagMomentsReactToFeedItemV2Module = require(dataHydration.Moments.FFlagMomentsReactToFeedItemV2)
-local compiledMomentsEmojiFallbackCatalogModule = require(dataHydration.Moments.Util.compiledMomentsEmojiFallbackCatalog)
-local decodeEmojiSetsModule = require(dataHydration.Moments.Util.decodeEmojiSets)
-local hardcodedMomentsEmojisModule = require(dataHydration.Moments.Util.hardcodedMomentsEmojis)
-local parseMomentsEmojiFallbackCatalogModule = require(dataHydration.Moments.Util.parseMomentsEmojiFallbackCatalog)
-local validateMomentsEmojiCatalogModule = require(dataHydration.Moments.Util.validateMomentsEmojiCatalog)
-local var1 = decodeEmojiSetsModule.flattenEmojis(decodeEmojiSetsModule.decodeGetEmojiSetsResponse(compiledMomentsEmojiFallbackCatalogModule.COMPILED_MOMENTS_EMOJI_FALLBACK_API_PAYLOAD))
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local _ = require(DataHydration.Parent.MomentsTypes)
+local GetFStringMomentsEmojiFallbackCatalogJSONModule = require(DataHydration.Moments.Flags.GetFStringMomentsEmojiFallbackCatalogJSON)
+local FFlagMomentsEmojiSetsApiModule = require(DataHydration.Moments.FFlagMomentsEmojiSetsApi)
+local FFlagMomentsReactToFeedItemV2Module = require(DataHydration.Moments.FFlagMomentsReactToFeedItemV2)
+local DecodeEmojiSetsModule = require(DataHydration.Moments.Util.decodeEmojiSets)
+local HardcodedMomentsEmojisModule = require(DataHydration.Moments.Util.hardcodedMomentsEmojis)
+local ParseMomentsEmojiFallbackCatalogModule = require(DataHydration.Moments.Util.parseMomentsEmojiFallbackCatalog)
+local ValidateMomentsEmojiCatalogModule = require(DataHydration.Moments.Util.validateMomentsEmojiCatalog)
+local FlattenEmojisResult = DecodeEmojiSetsModule.flattenEmojis((DecodeEmojiSetsModule.decodeGetEmojiSetsResponse(require(DataHydration.Moments.Util.compiledMomentsEmojiFallbackCatalog).COMPILED_MOMENTS_EMOJI_FALLBACK_API_PAYLOAD)))
 
-local function shouldUseLegacyWireStringCatalog()
-	-- upvalues: fFlagMomentsEmojiSetsApiModule (ref)
-	return not fFlagMomentsEmojiSetsApiModule
+local function _(p1) --[[ Line: 43 | Named "resolveFromCachedResponse" ]]
+	-- upvalues: ValidateMomentsEmojiCatalogModule (copy), DecodeEmojiSetsModule (copy)
+	return if ValidateMomentsEmojiCatalogModule.isValidCachedGetEmojiSetsResponse(p1) then DecodeEmojiSetsModule.flattenEmojis(p1) else nil
 end
 
-local function shouldUseUuidFallbackCatalog()
-	-- upvalues: fFlagMomentsReactToFeedItemV2Module (ref)
-	return fFlagMomentsReactToFeedItemV2Module
-end
-
-local function _(p1)
-	-- upvalues: validateMomentsEmojiCatalogModule (ref), decodeEmojiSetsModule (ref)
-	return if validateMomentsEmojiCatalogModule.isValidCachedGetEmojiSetsResponse(p1) then decodeEmojiSetsModule.flattenEmojis(p1) else nil
-end
-
-local _ = function()
-	-- upvalues: parseMomentsEmojiFallbackCatalogModule (ref), getFStringMomentsEmojiFallbackCatalogJSONModule (ref)
-	return parseMomentsEmojiFallbackCatalogModule.parseMomentsEmojiFallbackCatalogJson(getFStringMomentsEmojiFallbackCatalogJSONModule())
+local _ = function() --[[ Line: 50 | Named "resolveFromFString" ]]
+	-- upvalues: ParseMomentsEmojiFallbackCatalogModule (copy), GetFStringMomentsEmojiFallbackCatalogJSONModule (copy)
+	return ParseMomentsEmojiFallbackCatalogModule.parseMomentsEmojiFallbackCatalogJson(GetFStringMomentsEmojiFallbackCatalogJSONModule())
 end
 
 return {
-	resolveMomentsEmojiCatalog = function(p1)
-		-- upvalues: fFlagMomentsEmojiSetsApiModule (ref), hardcodedMomentsEmojisModule (ref), validateMomentsEmojiCatalogModule (ref), decodeEmojiSetsModule (ref), fFlagMomentsReactToFeedItemV2Module (ref), parseMomentsEmojiFallbackCatalogModule (ref), getFStringMomentsEmojiFallbackCatalogJSONModule (ref), var1 (ref)
-		if fFlagMomentsEmojiSetsApiModule then
-			return { source = "legacy", emojis = hardcodedMomentsEmojisModule }
+	resolveMomentsEmojiCatalog = function(p1) --[[ Line: 56 ]]
+		-- upvalues: FFlagMomentsEmojiSetsApiModule (copy), HardcodedMomentsEmojisModule (copy), ValidateMomentsEmojiCatalogModule (copy), DecodeEmojiSetsModule (copy), FFlagMomentsReactToFeedItemV2Module (copy), ParseMomentsEmojiFallbackCatalogModule (copy), GetFStringMomentsEmojiFallbackCatalogJSONModule (copy), FlattenEmojisResult (copy)
+		if not FFlagMomentsEmojiSetsApiModule then
+			return { source = "legacy", emojis = HardcodedMomentsEmojisModule }
 		end
-		local var2 = if not validateMomentsEmojiCatalogModule.isValidCachedGetEmojiSetsResponse(p1) then nil else decodeEmojiSetsModule.flattenEmojis(p1)
+		local FlattenEmojisResult1 = if ValidateMomentsEmojiCatalogModule.isValidCachedGetEmojiSetsResponse(p1) then DecodeEmojiSetsModule.flattenEmojis(p1) else nil
 		
-		if var2 ~= nil then
-			return { source = "cache", emojis = var2 }
-		elseif not fFlagMomentsReactToFeedItemV2Module then
-			return { source = "legacy", emojis = hardcodedMomentsEmojisModule }
+		if FlattenEmojisResult1 ~= nil then
+			return { source = "cache", emojis = FlattenEmojisResult1 }
+		elseif FFlagMomentsReactToFeedItemV2Module then
+			local ParseMomentsEmojiFallbackCatalogJsonResult = ParseMomentsEmojiFallbackCatalogModule.parseMomentsEmojiFallbackCatalogJson(GetFStringMomentsEmojiFallbackCatalogJSONModule())
+			
+			return if ParseMomentsEmojiFallbackCatalogJsonResult == nil then { source = "compiled", emojis = FlattenEmojisResult } else {
+				source = "fstring",
+				emojis = ParseMomentsEmojiFallbackCatalogJsonResult
+			}
+		else
+			return { source = "legacy", emojis = HardcodedMomentsEmojisModule }
 		end
-		local var3 = parseMomentsEmojiFallbackCatalogModule.parseMomentsEmojiFallbackCatalogJson(getFStringMomentsEmojiFallbackCatalogJSONModule())
-		
-		return if var3 == nil then { source = "compiled", emojis = var1 } else { source = "fstring", emojis = var3 }
 	end,
-	shouldUseLegacyWireStringCatalog = shouldUseLegacyWireStringCatalog,
-	shouldUseUuidFallbackCatalog = shouldUseUuidFallbackCatalog
+	shouldUseLegacyWireStringCatalog = function(): boolean --[[ Line: 35 ]]
+		-- upvalues: FFlagMomentsEmojiSetsApiModule (copy)
+		return not FFlagMomentsEmojiSetsApiModule
+	end,
+	shouldUseUuidFallbackCatalog = function() --[[ Line: 39 ]]
+		-- upvalues: FFlagMomentsReactToFeedItemV2Module (copy)
+		return FFlagMomentsReactToFeedItemV2Module
+	end
 }

@@ -1,14 +1,15 @@
-﻿local reactModule = require(script:FindFirstAncestor("AvatarExperienceCommon").Parent.React)
-local animatedVisibilityContextModule = require(script.Parent.AnimatedVisibilityContext)
+﻿local ReactModule = require(script:FindFirstAncestor("AvatarExperienceCommon").Parent.React)
+local AnimatedVisibilityContextModule = require(script.Parent.AnimatedVisibilityContext)
 
-return function()
-	-- upvalues: reactModule (ref), animatedVisibilityContextModule (ref)
-	local var1 = reactModule.useContext(animatedVisibilityContextModule)
+return function() --[[ Line: 11 | Named "useAnimatedVisibility" ]]
+	-- upvalues: ReactModule (copy), AnimatedVisibilityContextModule (copy)
+	local UseContextResult = ReactModule.useContext(AnimatedVisibilityContextModule)
 	
-	if var1 then
-		return var1
+	if UseContextResult then
+		return UseContextResult
+	else
+		warn("useAnimatedVisibility must be used within a AnimatedVisibilityProvider")
+		
+		return nil
 	end
-	warn("useAnimatedVisibility must be used within a AnimatedVisibilityProvider")
-	
-	return nil
 end

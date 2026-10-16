@@ -1,28 +1,28 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local roactNavigationModule = require(appChat.Parent.RoactNavigation)
-local conversationChannelsModule = require(appChat.Models.ConversationChannels)
-local getConversationStoreModule = require(appChat.Stores.GetConversationStore)
-local receivedConversationModule = require(appChat.Conversations.Actions.ReceivedConversation)
-local enumScreensModule = require(appChat.EnumScreens)
-local getFFlagAppChatEnableRootedNavigationModule = require(appChat.Flags.getFFlagAppChatEnableRootedNavigation)
-local conversationRoduxSeedModule = require(appChat.Utils.ConversationRoduxSeed)
-local isFriendsPlaceholderConversationId = conversationRoduxSeedModule.isFriendsPlaceholderConversationId
-local normalizeStoreConversationForRodux = conversationRoduxSeedModule.normalizeStoreConversationForRodux
-local t = {
-	navigateToRootedChatDetails = function(p1, p2)
-		-- upvalues: roactNavigationModule (ref), enumScreensModule (ref)
-		return roactNavigationModule.Actions.navigate({
-			routeName = enumScreensModule.ChatLandingStack,
-			params = { conversationId = p1 },
-			action = roactNavigationModule.StackActions.reset({
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local RoactNavigationModule = require(AppChat.Parent.RoactNavigation)
+local ConversationChannelsModule = require(AppChat.Models.ConversationChannels)
+local GetConversationStoreModule = require(AppChat.Stores.GetConversationStore)
+local ReceivedConversationModule = require(AppChat.Conversations.Actions.ReceivedConversation)
+local EnumScreensModule = require(AppChat.EnumScreens)
+local GetFFlagAppChatEnableRootedNavigationModule = require(AppChat.Flags.getFFlagAppChatEnableRootedNavigation)
+local ConversationRoduxSeedModule = require(AppChat.Utils.ConversationRoduxSeed)
+local IsFriendsPlaceholderConversationIdFunction = ConversationRoduxSeedModule.isFriendsPlaceholderConversationId
+local NormalizeStoreConversationForRoduxFunction = ConversationRoduxSeedModule.normalizeStoreConversationForRodux
+local RootedChatDetailsNavigationModule = {
+	navigateToRootedChatDetails = function(ConversationId, RootedNavigationRequestId) --[[ Line: 17 ]]
+		-- upvalues: RoactNavigationModule (copy), EnumScreensModule (copy)
+		return RoactNavigationModule.Actions.navigate({
+			routeName = EnumScreensModule.ChatLandingStack,
+			params = { conversationId = ConversationId },
+			action = RoactNavigationModule.StackActions.reset({
 				index = 1,
 				actions = {
-					roactNavigationModule.Actions.navigate({
-						routeName = enumScreensModule.ChatDetails,
+					RoactNavigationModule.Actions.navigate({
+						routeName = EnumScreensModule.ChatDetails,
 						params = {
 							isRooted = true,
-							conversationId = p1,
-							rootedNavigationRequestId = p2
+							conversationId = ConversationId,
+							rootedNavigationRequestId = RootedNavigationRequestId
 						}
 					})
 				}
@@ -31,24 +31,24 @@ local t = {
 	end
 }
 
-function t.tryNavigateToRootedChatDetails(p1, p2)
-	-- upvalues: getFFlagAppChatEnableRootedNavigationModule (ref), getConversationStoreModule (ref), receivedConversationModule (ref), normalizeStoreConversationForRodux (ref), isFriendsPlaceholderConversationId (ref), conversationChannelsModule (ref), t (ref)
-	local conversationId = p2 and p2.conversationId
+function RootedChatDetailsNavigationModule.tryNavigateToRootedChatDetails(p1, p2): boolean --[[ Line: 44 ]]
+	-- upvalues: GetFFlagAppChatEnableRootedNavigationModule (copy), GetConversationStoreModule (copy), ReceivedConversationModule (copy), NormalizeStoreConversationForRoduxFunction (copy), IsFriendsPlaceholderConversationIdFunction (copy), ConversationChannelsModule (copy), RootedChatDetailsNavigationModule (copy)
+	local ConversationId = p2 and p2.conversationId
 	
-	if not conversationId or p2.rooted ~= true or not getFFlagAppChatEnableRootedNavigationModule() then
+	if not ConversationId or p2.rooted ~= true or not GetFFlagAppChatEnableRootedNavigationModule() then
 		return false
 	end
-	local conversation = getConversationStoreModule(false).getConversation(conversationId, false)
+	local Conversation = GetConversationStoreModule(false).getConversation(ConversationId, false)
 	
-	if conversation then
-		p1.dispatch(receivedConversationModule(normalizeStoreConversationForRodux(conversation)))
+	if Conversation then
+		p1.dispatch(ReceivedConversationModule(NormalizeStoreConversationForRoduxFunction(Conversation)))
 	end
-	if conversation == nil and not isFriendsPlaceholderConversationId(conversationId) or conversation ~= nil and conversation.source ~= conversationChannelsModule.Source.Friends then
-		p1.fetchLatestConversationDetails(conversationId)
+	if Conversation == nil and not IsFriendsPlaceholderConversationIdFunction(ConversationId) or Conversation ~= nil and Conversation.source ~= ConversationChannelsModule.Source.Friends then
+		p1.fetchLatestConversationDetails(ConversationId)
 	end
-	p1.callback(t.navigateToRootedChatDetails(conversationId, p2.rootedNavigationRequestId))
+	p1.callback(RootedChatDetailsNavigationModule.navigateToRootedChatDetails(ConversationId, p2.rootedNavigationRequestId))
 	
 	return true
 end
 
-return t
+return RootedChatDetailsNavigationModule

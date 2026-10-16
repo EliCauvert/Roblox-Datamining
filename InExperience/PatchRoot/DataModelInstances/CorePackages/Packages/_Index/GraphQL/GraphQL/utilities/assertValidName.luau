@@ -1,28 +1,33 @@
-﻿local parent = script.Parent.Parent
-local devAssert = require(parent.jsutils.devAssert).devAssert
-local graphQLError = require(parent.error.GraphQLError).GraphQLError
-local var1 = nil
-local _ = nil
+﻿local Parent = script.Parent.Parent
+local DevAssertFunction = require(Parent.jsutils.devAssert).devAssert
+local GraphQLError = require(Parent.error.GraphQLError).GraphQLError
+local Callback = nil
+
+local function assertValidName(p1) --[[ Line: 23 ]]
+	-- upvalues: Callback (ref)
+	local CallbackResult = Callback(p1)
+	
+	if CallbackResult then
+		error(CallbackResult)
+	end
+	return p1
+end
+
+Callback = function(Text: string) --[[ Line: 34 | Named "isValidNameError" ]]
+	-- upvalues: DevAssertFunction (copy), GraphQLError (copy)
+	DevAssertFunction(type(Text) == "string", "Expected name to be a string.")
+	
+	if string.len(Text) > 1 and Text:sub(1, 1) == "_" and Text:sub(2, 2) == "_" then
+		return GraphQLError.new("Name \"" .. Text .. "\" must not begin with \"__\", which is reserved by GraphQL introspection.")
+	else
+		local StartIndex, EndIndex = string.find(Text, "[_%a][_%a%d]*")
+		local IsLengthMatch: boolean = StartIndex == 1 and string.len(Text) == EndIndex
+		
+		return if IsLengthMatch then nil else GraphQLError.new("Names must match [_%a][_%a%d]* but \"" .. Text .. "\" does not.")
+	end
+end
 
 return {
-	assertValidName = function(p1)
-		-- upvalues: var1 (write)
-		local var2 = var1(p1)
-		
-		if var2 then
-			error(var2)
-		end
-		return p1
-	end,
-	isValidNameError = function(p1)
-		-- upvalues: devAssert (ref), graphQLError (ref)
-		devAssert(type(p1) == "string", "Expected name to be a string.")
-		
-		if string.len(p1) > 1 and p1:sub(1, 1) == "_" and p1:sub(2, 2) == "_" then
-			return graphQLError.new("Name \"" .. p1 .. "\" must not begin with \"__\", which is reserved by GraphQL introspection.")
-		end
-		local matchIndex, matchIndex_1 = string.find(p1, "[_%a][_%a%d]*")
-		
-		return if matchIndex == 1 and string.len(p1) == matchIndex_1 then nil else graphQLError.new("Names must match [_%a][_%a%d]* but \"" .. p1 .. "\" does not.")
-	end
+	assertValidName = assertValidName,
+	isValidNameError = Callback
 }

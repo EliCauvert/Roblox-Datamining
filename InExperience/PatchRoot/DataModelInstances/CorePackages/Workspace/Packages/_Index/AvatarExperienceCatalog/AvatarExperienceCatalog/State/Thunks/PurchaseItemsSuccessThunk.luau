@@ -1,121 +1,118 @@
-﻿local avatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
-local parent = avatarExperienceCatalog.Parent
-local mutedError = require(parent.Loggers).mutedError
-local purchaseItemsSuccessModule = require(avatarExperienceCatalog.State.Actions.PurchaseItemsSuccess)
-local avatarExperienceAnalyticsModule = require(parent.AvatarExperienceAnalytics)
-local avatarExperienceNavigationModule = require(parent.AvatarExperienceNavigation)
-local unifiedSelectionListStore = avatarExperienceAnalyticsModule.Store.UnifiedSelectionListStore
-local sendUnifiedEventsForMultiItemShopping = avatarExperienceAnalyticsModule.sendUnifiedEventsForMultiItemShopping
-local unifiedEventLogEnums = avatarExperienceAnalyticsModule.UnifiedEventLogEnums
-local getUnifiedEventsForMIS = avatarExperienceAnalyticsModule.Utils.getUnifiedEventsForMIS
-local cartIdService = avatarExperienceAnalyticsModule.Lib.CartIdService
-local avatarScreenProperties = avatarExperienceNavigationModule.AvatarRoute.AvatarScreenProperties
-local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
-local fFlagAXMISEnableMultiShoppingUnifiedEvents = avatarExperienceFlagsModule.FFlagAXMISEnableMultiShoppingUnifiedEvents
-local fFlagAXMISSaveWearFix = avatarExperienceFlagsModule.FFlagAXMISSaveWearFix
-local fFlagAXBackgroundsCustomizeHydration = avatarExperienceFlagsModule.FFlagAXBackgroundsCustomizeHydration
-local applyProfileConfiguration = require(parent.AvatarExperienceRodux).Actions.ApplyProfileConfiguration
-local avatarBackground = require(parent.AvatarExperienceCommon).Constants.ASSET_TYPE_NAME_TO_ID_STRING.AvatarBackground
+﻿local AvatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
+local Parent = AvatarExperienceCatalog.Parent
+local MutedErrorFunction = require(Parent.Loggers).mutedError
+local PurchaseItemsSuccessModule = require(AvatarExperienceCatalog.State.Actions.PurchaseItemsSuccess)
+local AvatarExperienceAnalyticsModule = require(Parent.AvatarExperienceAnalytics)
+local UnifiedSelectionListStore = AvatarExperienceAnalyticsModule.Store.UnifiedSelectionListStore
+local SendUnifiedEventsForMultiItemShoppingFunction = AvatarExperienceAnalyticsModule.sendUnifiedEventsForMultiItemShopping
+local UnifiedEventLogEnums = AvatarExperienceAnalyticsModule.UnifiedEventLogEnums
+local GetUnifiedEventsForMISFunction = AvatarExperienceAnalyticsModule.Utils.getUnifiedEventsForMIS
+local CartIdService = AvatarExperienceAnalyticsModule.Lib.CartIdService
+local AvatarScreenProperties = require(Parent.AvatarExperienceNavigation).AvatarRoute.AvatarScreenProperties
+local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
+local FFlagAXMISSaveWearFix = AvatarExperienceFlagsModule.FFlagAXMISSaveWearFix
+local FFlagAXBackgroundsCustomizeHydration = AvatarExperienceFlagsModule.FFlagAXBackgroundsCustomizeHydration
+local ApplyProfileConfigurationFunction = require(Parent.AvatarExperienceRodux).Actions.ApplyProfileConfiguration
+local AvatarBackground = require(Parent.AvatarExperienceCommon).Constants.ASSET_TYPE_NAME_TO_ID_STRING.AvatarBackground
 
-local function maybeApplyPurchasedBackground(value, p1)
-	-- upvalues: avatarBackground (ref), applyProfileConfiguration (ref)
-	local var1 = nil
+local function maybeApplyPurchasedBackground(p1, EquippableAssets) --[[ Line: 32 ]]
+	-- upvalues: AvatarBackground (copy), ApplyProfileConfigurationFunction (copy)
+	local Number: number? = nil
 	
-	for i, v in p1 do
-		if v.assetTypeId == avatarBackground then
-			var1 = tonumber(v.assetId)
+	for _, equippableAsset in EquippableAssets do
+		if equippableAsset.assetTypeId == AvatarBackground then
+			Number = tonumber(equippableAsset.assetId)
 		end
 	end
-	if var1 then
-		value:dispatch(applyProfileConfiguration({ BackgroundAssetId = var1 }))
+	if Number then
+		p1:dispatch(ApplyProfileConfigurationFunction({ BackgroundAssetId = Number }))
 	end
 end
 
-local fFlagSignalsNavP3gAvatarExperience = require(parent.SharedFlags).FFlagSignalsNavP3gAvatarExperience
-local getLegacyNavigationStore = require(parent.NavigationRodux).GetLegacyNavigationStore
+local FFlagSignalsNavP3gAvatarExperience = require(Parent.SharedFlags).FFlagSignalsNavP3gAvatarExperience
+local GetLegacyNavigationStoreFunction = require(Parent.NavigationRodux).GetLegacyNavigationStore
 
-return if fFlagAXMISEnableMultiShoppingUnifiedEvents then function(p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13)
-	-- upvalues: fFlagSignalsNavP3gAvatarExperience (ref), getLegacyNavigationStore (ref), avatarScreenProperties (ref), sendUnifiedEventsForMultiItemShopping (ref), getUnifiedEventsForMIS (ref), unifiedEventLogEnums (ref), mutedError (ref), cartIdService (ref), unifiedSelectionListStore (ref), fFlagAXMISSaveWearFix (ref), purchaseItemsSuccessModule (ref), fFlagAXBackgroundsCustomizeHydration (ref), maybeApplyPurchasedBackground (ref)
-	return function(p14, _)
-		-- upvalues: fFlagSignalsNavP3gAvatarExperience (copy), getLegacyNavigationStore (copy), avatarScreenProperties (copy), p11 (ref), p12 (ref), sendUnifiedEventsForMultiItemShopping (copy), getUnifiedEventsForMIS (copy), p2 (ref), p8 (ref), unifiedEventLogEnums (copy), mutedError (copy), cartIdService (copy), unifiedSelectionListStore (copy), fFlagAXMISSaveWearFix (copy), p13 (ref), p6 (write), p9 (ref), purchaseItemsSuccessModule (copy), p3 (ref), p4 (ref), p10 (ref), p5 (ref), p7 (ref), fFlagAXBackgroundsCustomizeHydration (copy), maybeApplyPurchasedBackground (copy)
-		local var2
-		local state = p14:getState()
-		local _ = nil
+return if AvatarExperienceFlagsModule.FFlagAXMISEnableMultiShoppingUnifiedEvents then function(Items, EquippableAssets, ReplaceAllEquippedAssets, BodyColor3s, BodyScales, BodyPartColorRangeIds, p2, Callback1, p3, p4, p5, Callback) --[[ Line: 48 ]]
+	-- upvalues: FFlagSignalsNavP3gAvatarExperience (copy), GetLegacyNavigationStoreFunction (copy), AvatarScreenProperties (copy), SendUnifiedEventsForMultiItemShoppingFunction (copy), GetUnifiedEventsForMISFunction (copy), UnifiedEventLogEnums (copy), MutedErrorFunction (copy), CartIdService (copy), UnifiedSelectionListStore (copy), FFlagAXMISSaveWearFix (copy), PurchaseItemsSuccessModule (copy), FFlagAXBackgroundsCustomizeHydration (copy), maybeApplyPurchasedBackground (copy)
+	return function(p6, _) --[[ Line: 62 ]]
+		-- upvalues: FFlagSignalsNavP3gAvatarExperience (upval), GetLegacyNavigationStoreFunction (upval), AvatarScreenProperties (upval), p4 (copy), p5 (copy), SendUnifiedEventsForMultiItemShoppingFunction (upval), GetUnifiedEventsForMISFunction (upval), Items (copy), p2 (copy), UnifiedEventLogEnums (upval), MutedErrorFunction (upval), CartIdService (upval), UnifiedSelectionListStore (upval), FFlagAXMISSaveWearFix (upval), Callback (copy), BodyScales (ref), Callback1 (copy), PurchaseItemsSuccessModule (upval), EquippableAssets (copy), ReplaceAllEquippedAssets (copy), p3 (copy), BodyColor3s (copy), BodyPartColorRangeIds (copy), FFlagAXBackgroundsCustomizeHydration (upval), maybeApplyPurchasedBackground (upval)
+		local State = p6:getState()
+		local RouteName = nil
 		
-		if fFlagSignalsNavP3gAvatarExperience then
-			local currentRoute = getLegacyNavigationStore(false).getCurrentRoute(false)
-			var2 = currentRoute and currentRoute.routeName
+		if FFlagSignalsNavP3gAvatarExperience then
+			local CurrentRoute = GetLegacyNavigationStoreFunction(false).getCurrentRoute(false)
+			RouteName = CurrentRoute and CurrentRoute.routeName
 		else
-			var2 = state.Navigation and (state.Navigation.currentRoute and state.Navigation.currentRoute.routeName)
+			RouteName = State.Navigation and (State.Navigation.currentRoute and State.Navigation.currentRoute.routeName)
 		end
-		local var3 = avatarScreenProperties[var2]
-		local var4 = if var3 and var3.analyticsData then var3.analyticsData.unifiedLoggingSurface else nil
+		local AvatarScreenProperty = AvatarScreenProperties[RouteName]
+		local UnifiedLoggingSurface = if AvatarScreenProperty and AvatarScreenProperty.analyticsData then AvatarScreenProperty.analyticsData.unifiedLoggingSurface else nil
 		
-		if not pcall(function()
-			-- upvalues: p11 (copy), state (ref), p12 (copy), sendUnifiedEventsForMultiItemShopping (copy), getUnifiedEventsForMIS (copy), p2 (copy), p8 (copy), unifiedEventLogEnums (copy), var4 (ref)
-			if p11 then
-				p11.isOrganicLook = state.AvatarExperience.AvatarScene.OutfitTryOn.LookAnalyticsInfo == nil
+		if not pcall(function() --[[ Line: 79 ]]
+			-- upvalues: p4 (upval), State (copy), p5 (upval), SendUnifiedEventsForMultiItemShoppingFunction (upval), GetUnifiedEventsForMISFunction (upval), Items (upval), p2 (upval), UnifiedEventLogEnums (upval), UnifiedLoggingSurface (copy)
+			if p4 then
+				p4.isOrganicLook = State.AvatarExperience.AvatarScene.OutfitTryOn.LookAnalyticsInfo == nil
 			end
-			if p12 then
-				p12.isOrganicLook = state.AvatarExperience.AvatarScene.OutfitTryOn.MakeupLookAnalyticsInfo == nil
+			if p5 then
+				p5.isOrganicLook = State.AvatarExperience.AvatarScene.OutfitTryOn.MakeupLookAnalyticsInfo == nil
 			end
-			sendUnifiedEventsForMultiItemShopping(getUnifiedEventsForMIS(p2, p8, p11, p12, unifiedEventLogEnums.MarketplaceUnifiedAction.PURCHASE_SUCCESS), var4)
+			SendUnifiedEventsForMultiItemShoppingFunction(GetUnifiedEventsForMISFunction(Items, p2, p4, p5, UnifiedEventLogEnums.MarketplaceUnifiedAction.PURCHASE_SUCCESS), UnifiedLoggingSurface)
 		end) then
-			mutedError("Failed to send unified events for multi-item shopping purchase success")
+			MutedErrorFunction("Failed to send unified events for multi-item shopping purchase success")
 		end
-		cartIdService.refreshCartId()
-		unifiedSelectionListStore.clearSelectionList()
-		local var5 = if fFlagAXMISSaveWearFix and p13 then p13(state, p8) else nil
-		local t = {}
+		CartIdService.refreshCartId()
+		UnifiedSelectionListStore.clearSelectionList()
+		local CallbackResult = if FFlagAXMISSaveWearFix and Callback then Callback(State, p2) else nil
+		local Orders = {}
 		
-		if fFlagAXMISSaveWearFix and var5 then
-			for i, v in var5:GetChildren() do
-				if v:IsA("MakeupDescription") then
-					t[tostring(v.assetId)] = v.order
+		if FFlagAXMISSaveWearFix and CallbackResult then
+			for _, MakeupDescription in CallbackResult:GetChildren() do
+				if MakeupDescription:IsA("MakeupDescription") then
+					Orders[tostring(MakeupDescription.assetId)] = MakeupDescription.order
 				end
 			end
 		end
-		if p6 == nil then
-			local var6 = p9(state, p8)
-			p6 = if var6 then var6.scales else nil
+		if BodyScales == nil then
+			local CallbackResult1 = Callback1(State, p2)
+			BodyScales = if CallbackResult1 then CallbackResult1.scales else nil
 		end
-		p14:dispatch(purchaseItemsSuccessModule({
-			items = p2,
-			equippableAssets = p3,
-			replaceAllEquippedAssets = p4,
-			shouldClearEquippedMakeup = if fFlagAXMISSaveWearFix then p10 else nil,
-			bodyColor3s = p5,
-			bodyScales = p6,
-			bodyPartColorRangeIds = p7,
-			makeupAssetsOnHumanoid = if fFlagAXMISSaveWearFix then t else nil
+		p6:dispatch(PurchaseItemsSuccessModule({
+			items = Items,
+			equippableAssets = EquippableAssets,
+			replaceAllEquippedAssets = ReplaceAllEquippedAssets,
+			shouldClearEquippedMakeup = if FFlagAXMISSaveWearFix then p3 else nil,
+			bodyColor3s = BodyColor3s,
+			bodyScales = BodyScales,
+			bodyPartColorRangeIds = BodyPartColorRangeIds,
+			makeupAssetsOnHumanoid = if FFlagAXMISSaveWearFix then Orders else nil
 		}))
 		
-		if fFlagAXBackgroundsCustomizeHydration then
-			maybeApplyPurchasedBackground(p14, p3)
+		if FFlagAXBackgroundsCustomizeHydration then
+			maybeApplyPurchasedBackground(p6, EquippableAssets)
 		end
 	end
-end else function(p14, p15, p16, p17, p18, p19, p20, p21, p22)
-	-- upvalues: purchaseItemsSuccessModule (ref), fFlagAXBackgroundsCustomizeHydration (ref), maybeApplyPurchasedBackground (ref)
-	return function(p23, _)
-		-- upvalues: p18 (write), p21 (ref), p20 (ref), purchaseItemsSuccessModule (copy), p14 (ref), p15 (ref), p16 (ref), p22 (ref), p17 (ref), p19 (ref), fFlagAXBackgroundsCustomizeHydration (copy), maybeApplyPurchasedBackground (copy)
-		local state = p23:getState()
+end else function(Items, EquippableAssets, ReplaceAllEquippedAssets, BodyColor3s, BodyScales, BodyPartColorRangeIds, p6, Callback, ShouldClearEquippedMakeup) --[[ Line: 154 ]]
+	-- upvalues: PurchaseItemsSuccessModule (copy), FFlagAXBackgroundsCustomizeHydration (copy), maybeApplyPurchasedBackground (copy)
+	return function(p7, _) --[[ Line: 165 ]]
+		-- upvalues: BodyScales (ref), Callback (copy), p6 (copy), PurchaseItemsSuccessModule (upval), Items (copy), EquippableAssets (copy), ReplaceAllEquippedAssets (copy), ShouldClearEquippedMakeup (copy), BodyColor3s (copy), BodyPartColorRangeIds (copy), FFlagAXBackgroundsCustomizeHydration (upval), maybeApplyPurchasedBackground (upval)
+		local State = p7:getState()
 		
-		if p18 == nil then
-			local var2 = p21(state, p20)
-			p18 = if var2 then var2.scales else nil
+		if BodyScales == nil then
+			local CallbackResult = Callback(State, p6)
+			BodyScales = if CallbackResult then CallbackResult.scales else nil
 		end
-		p23:dispatch(purchaseItemsSuccessModule({
-			items = p14,
-			equippableAssets = p15,
-			replaceAllEquippedAssets = p16,
-			shouldClearEquippedMakeup = p22,
-			bodyColor3s = p17,
-			bodyScales = p18,
-			bodyPartColorRangeIds = p19
+		p7:dispatch(PurchaseItemsSuccessModule({
+			items = Items,
+			equippableAssets = EquippableAssets,
+			replaceAllEquippedAssets = ReplaceAllEquippedAssets,
+			shouldClearEquippedMakeup = ShouldClearEquippedMakeup,
+			bodyColor3s = BodyColor3s,
+			bodyScales = BodyScales,
+			bodyPartColorRangeIds = BodyPartColorRangeIds
 		}))
 		
-		if fFlagAXBackgroundsCustomizeHydration then
-			maybeApplyPurchasedBackground(p23, p15)
+		if FFlagAXBackgroundsCustomizeHydration then
+			maybeApplyPurchasedBackground(p7, EquippableAssets)
 		end
 	end
 end

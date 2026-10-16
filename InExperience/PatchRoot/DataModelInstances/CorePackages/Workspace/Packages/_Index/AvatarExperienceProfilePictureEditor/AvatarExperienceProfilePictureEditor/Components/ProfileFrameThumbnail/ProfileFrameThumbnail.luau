@@ -1,38 +1,39 @@
-﻿local avatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
-local parent = avatarExperienceProfilePictureEditor.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local view = foundationModule.View
-local icon = foundationModule.Icon
-local image = foundationModule.Image
-local skeleton = foundationModule.Skeleton
-local iconName = foundationModule.Enums.IconName
-local iconSize = foundationModule.Enums.IconSize
-local radius = foundationModule.Enums.Radius
-local useTokens = foundationModule.Hooks.useTokens
-local mapWidgetContentToFrameItemsModule = require(avatarExperienceProfilePictureEditor.Utils.mapWidgetContentToFrameItems)
+﻿local AvatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
+local Parent = AvatarExperienceProfilePictureEditor.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local Icon = FoundationModule.Icon
+local Image = FoundationModule.Image
+local Skeleton = FoundationModule.Skeleton
+local IconName = FoundationModule.Enums.IconName
+local IconSize = FoundationModule.Enums.IconSize
+local Radius = FoundationModule.Enums.Radius
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local MapWidgetContentToFrameItemsModule = require(AvatarExperienceProfilePictureEditor.Utils.mapWidgetContentToFrameItems)
 
-return function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), skeleton (ref), radius (ref), view (ref), icon (ref), iconName (ref), iconSize (ref), mapWidgetContentToFrameItemsModule (ref), image (ref)
-	local previewSize = p1.previewSize or useTokens().Size.Size_800
+return function(p1) --[[ Line: 25 | Named "ProfileFramePreviewThumbnail" ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), Skeleton (copy), Radius (copy), View (copy), Icon (copy), IconName (copy), IconSize (copy), MapWidgetContentToFrameItemsModule (copy), Image (copy)
+	local UseTokensResult = UseTokensFunction()
+	local PreviewSize = p1.previewSize or UseTokensResult.Size.Size_800
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		testId = "profile-frame-preview-thumbnail",
 		tag = "align-x-center align-y-center radius-medium bg-surface-100",
-		Size = UDim2.fromOffset(previewSize, previewSize)
+		Size = UDim2.fromOffset(PreviewSize, PreviewSize)
 	}, {
-		Content = if p1.isLoading then reactModule.createElement(skeleton, {
-			Size = UDim2.fromOffset(previewSize, previewSize),
-			radius = radius.Medium
-		}) elseif p1.frameAssetId == nil then reactModule.createElement(view, { testId = "none-frame-icon", tag = "auto-xy" }, {
-			Icon = reactModule.createElement(icon, { name = iconName.CircleSlash, size = iconSize.Medium })
-		}) else reactModule.createElement(view, {
+		Content = if p1.isLoading then ReactModule.createElement(Skeleton, {
+			Size = UDim2.fromOffset(PreviewSize, PreviewSize),
+			radius = Radius.Medium
+		}) elseif p1.frameAssetId == nil then ReactModule.createElement(View, { testId = "none-frame-icon", tag = "auto-xy" }, {
+			Icon = ReactModule.createElement(Icon, { name = IconName.CircleSlash, size = IconSize.Medium })
+		}) else ReactModule.createElement(View, {
 			testId = "frame-preview-image",
 			tag = "size-full-full padding-xsmall"
 		}, {
-			Image = reactModule.createElement(image, {
+			Image = ReactModule.createElement(Image, {
 				tag = "size-full-full",
-				Image = mapWidgetContentToFrameItemsModule.getProfileFramePickerImage(p1.frameAssetId)
+				Image = MapWidgetContentToFrameItemsModule.getProfileFramePickerImage(p1.frameAssetId)
 			})
 		})
 	})

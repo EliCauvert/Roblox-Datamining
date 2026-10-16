@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.Squads.Squads)
+﻿return (require(script.Parent.Parent.Parent._Index.Squads.Squads))

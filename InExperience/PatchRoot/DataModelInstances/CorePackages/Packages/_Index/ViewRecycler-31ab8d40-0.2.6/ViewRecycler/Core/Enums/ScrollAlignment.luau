@@ -1,1 +1,1 @@
-﻿return table.freeze({ Start = "start", Center = "center", End = "end" })
+﻿return (table.freeze({ Start = "start", Center = "center", End = "end" }))

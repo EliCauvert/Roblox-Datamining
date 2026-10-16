@@ -1,47 +1,47 @@
-﻿local parent = script:FindFirstAncestor("AppChat").Parent
-local reactModule = require(parent.React)
-local cryoModule = require(parent.Cryo)
+﻿local Parent = script:FindFirstAncestor("AppChat").Parent
+local ReactModule = require(Parent.React)
+local CryoModule = require(Parent.Cryo)
 
-return function(p1)
-	-- upvalues: reactModule (ref), cryoModule (ref)
-	local var1 = reactModule.createContext({
-		get = function()
-			-- upvalues: cryoModule (copy), p1 (ref)
-			return cryoModule.Dictionary.union({}, p1)
+return function(p1) --[[ Line: 18 | Named "createStateContext" ]]
+	-- upvalues: ReactModule (copy), CryoModule (copy)
+	local Context = ReactModule.createContext({
+		get = function() --[[ Line: 20 ]]
+			-- upvalues: CryoModule (upval), p1 (copy)
+			return CryoModule.Dictionary.union({}, p1)
 		end,
-		set = function() end
+		set = function() --[[ Line: 23 ]] end
 	})
 	
 	return {
-		Provider = var1.Provider,
-		useClearState = function()
-			-- upvalues: reactModule (copy), var1 (ref), p1 (ref)
-			local set = reactModule.useContext(var1).set
+		Provider = Context.Provider,
+		useClearState = function() --[[ Line: 28 ]]
+			-- upvalues: ReactModule (upval), Context (copy), p1 (copy)
+			local SetFunction = ReactModule.useContext(Context).set
 			
-			return reactModule.useCallback(function()
-				-- upvalues: set (ref), p1 (copy)
-				set(p1)
-			end, { set })
+			return ReactModule.useCallback(function() --[[ Line: 30 ]]
+				-- upvalues: SetFunction (copy), p1 (upval)
+				SetFunction(p1)
+			end, { SetFunction })
 		end,
-		useGetState = function()
-			-- upvalues: reactModule (copy), var1 (ref)
-			return reactModule.useContext(var1).get
+		useGetState = function() --[[ Line: 34 ]]
+			-- upvalues: ReactModule (upval), Context (copy)
+			return ReactModule.useContext(Context).get
 		end,
-		useMergeState = function()
-			-- upvalues: reactModule (copy), var1 (ref), cryoModule (copy)
-			local set = reactModule.useContext(var1).set
+		useMergeState = function() --[[ Line: 37 ]]
+			-- upvalues: ReactModule (upval), Context (copy), CryoModule (upval)
+			local SetFunction = ReactModule.useContext(Context).set
 			
-			return reactModule.useCallback(function(p2)
-				-- upvalues: set (ref), cryoModule (copy)
-				set(function(p3)
-					-- upvalues: cryoModule (copy), p2 (ref)
-					return cryoModule.Dictionary.join(p3, p2)
+			return ReactModule.useCallback(function(p2) --[[ Line: 39 ]]
+				-- upvalues: SetFunction (copy), CryoModule (upval)
+				SetFunction(function(p3) --[[ Line: 40 ]]
+					-- upvalues: CryoModule (upval), p2 (copy)
+					return CryoModule.Dictionary.join(p3, p2)
 				end)
-			end, { set })
+			end, { SetFunction })
 		end,
-		useSetState = function()
-			-- upvalues: reactModule (copy), var1 (ref)
-			return reactModule.useContext(var1).set
+		useSetState = function() --[[ Line: 45 ]]
+			-- upvalues: ReactModule (upval), Context (copy)
+			return ReactModule.useContext(Context).set
 		end
 	}
 end

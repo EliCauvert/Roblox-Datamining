@@ -1,11 +1,11 @@
-﻿local inExperienceShop = script:FindFirstAncestor("InExperienceShop")
-local constantsModule = require(inExperienceShop.Constants)
-local _ = require(inExperienceShop.Types)
+﻿local InExperienceShop = script:FindFirstAncestor("InExperienceShop")
+local ConstantsModule = require(InExperienceShop.Constants)
+local _ = require(InExperienceShop.Types)
 
-return function(p1)
-	-- upvalues: constantsModule (ref)
-	for i, v in p1 do
-		if v.id ~= constantsModule.HOME_CATEGORY_ID and v.name ~= constantsModule.ROBUX_CATEGORY_NAME then
+return function(List): boolean --[[ Line: 11 | Named "hasOfferEligibleCategory" ]]
+	-- upvalues: ConstantsModule (copy)
+	for _, value in List do
+		if value.id ~= ConstantsModule.HOME_CATEGORY_ID and value.name ~= ConstantsModule.ROBUX_CATEGORY_NAME then
 			return true
 		end
 	end

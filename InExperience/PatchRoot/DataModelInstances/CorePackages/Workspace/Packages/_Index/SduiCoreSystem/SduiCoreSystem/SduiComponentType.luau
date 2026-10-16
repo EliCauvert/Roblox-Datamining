@@ -1,4 +1,6 @@
 ﻿return {
+	Accordion = "Accordion",
+	AccordionItem = "AccordionItem",
 	ActionBar = "ActionBar",
 	AgeCheckUpsellRow = "AgeCheckUpsellRow",
 	AiOverview = "AiOverview",
@@ -95,6 +97,7 @@
 	TextPill = "TextPill",
 	Tile = "Tile",
 	TileFooter = "TileFooter",
+	UserSearchTile = "UserSearchTile",
 	Tooltip = "Tooltip",
 	Skeleton = "Skeleton",
 	Unknown = "Unknown",

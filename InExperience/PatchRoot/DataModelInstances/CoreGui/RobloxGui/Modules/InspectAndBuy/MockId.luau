@@ -1,8 +1,8 @@
-﻿local var1 = 0
+﻿local Count = 0
 
-return function()
-	-- upvalues: var1 (write)
-	var1 += 1
+return function(): string --[[ Line: 7 ]]
+	-- upvalues: Count (ref)
+	Count += 1
 	
-	return ("MOCK-%d"):format(var1)
+	return ("MOCK-%d"):format(Count)
 end

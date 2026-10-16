@@ -1,13 +1,13 @@
-﻿local t = require(script:FindFirstAncestor("FriendsLanding").dependencies).t
-local var1 = t.interface({
-	width = t.number,
-	itemSize = t.number,
-	minimumItemsPerRow = t.optional(t.number)
+﻿local T = require(script:FindFirstAncestor("FriendsLanding").dependencies).t
+local InterfaceResult = T.interface({
+	width = T.number,
+	itemSize = T.number,
+	minimumItemsPerRow = T.optional(T.number)
 })
 
-return function(p1)
-	-- upvalues: var1 (ref)
-	assert(var1(p1))
+return function(p1): number --[[ Line: 13 ]]
+	-- upvalues: InterfaceResult (copy)
+	assert(InterfaceResult(p1))
 	
-	return math.max(math.floor(p1.width / p1.itemSize), p1.minimumItemsPerRow or 2)
+	return (math.max(math.floor(p1.width / p1.itemSize), p1.minimumItemsPerRow or 2))
 end

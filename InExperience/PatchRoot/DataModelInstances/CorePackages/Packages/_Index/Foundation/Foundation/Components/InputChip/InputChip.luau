@@ -1,54 +1,54 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local closeAffordanceModule = require(foundation.Components.CloseAffordance)
-local closeAffordanceVariantModule = require(foundation.Enums.CloseAffordanceVariant)
-local inputSizeModule = require(foundation.Enums.InputSize)
-local constantsModule = require(foundation.Constants)
-local textModule = require(foundation.Components.Text)
-local _ = require(foundation.Components.Types)
-local viewModule = require(foundation.Components.View)
-local useInputChipVariantsModule = require(script.Parent.useInputChipVariants)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local t = {
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local CloseAffordanceModule = require(Foundation.Components.CloseAffordance)
+local CloseAffordanceVariantModule = require(Foundation.Enums.CloseAffordanceVariant)
+local InputSizeModule = require(Foundation.Enums.InputSize)
+local ConstantsModule = require(Foundation.Constants)
+local TextModule = require(Foundation.Components.Text)
+local _ = require(Foundation.Components.Types)
+local ViewModule = require(Foundation.Components.View)
+local UseInputChipVariantsModule = require(script.Parent.useInputChipVariants)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local config = {
 	isDisabled = false,
 	testId = "--foundation-input-chip",
-	size = inputSizeModule.Medium
+	size = InputSizeModule.Medium
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), useInputChipVariantsModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), constantsModule (ref), textModule (ref), closeAffordanceModule (ref), inputSizeModule (ref), closeAffordanceVariantModule (ref)
-	local var1 = withDefaultsModule(p1, t)
-	local var2 = useInputChipVariantsModule(useTokensModule(), var1.size)
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 32 | Named "InputChip" ]]
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UseInputChipVariantsModule (copy), ReactModule (copy), ViewModule (copy), WithCommonPropsModule (copy), ConstantsModule (copy), TextModule (copy), CloseAffordanceModule (copy), InputSizeModule (copy), CloseAffordanceVariantModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
+	local UseInputChipVariantsModuleResult = UseInputChipVariantsModule(UseTokensModule(), WithDefaultsModuleResult.size)
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var1, {
-		tag = var2.container.tag,
-		GroupTransparency = if var1.isDisabled then constantsModule.DISABLED_TRANSPARENCY else nil,
-		ref = p2
+	return ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, {
+		tag = UseInputChipVariantsModuleResult.container.tag,
+		GroupTransparency = if WithDefaultsModuleResult.isDisabled then ConstantsModule.DISABLED_TRANSPARENCY else nil,
+		ref = Ref
 	}), {
-		Text = reactModule.createElement(textModule, {
+		Text = ReactModule.createElement(TextModule, {
 			LayoutOrder = 1,
-			Text = var1.text,
-			textStyle = var2.text.contentStyle,
-			tag = var2.text.tag,
-			padding = var2.text.padding,
-			testId = `{var1.testId}--text`
+			Text = WithDefaultsModuleResult.text,
+			textStyle = UseInputChipVariantsModuleResult.text.contentStyle,
+			tag = UseInputChipVariantsModuleResult.text.tag,
+			padding = UseInputChipVariantsModuleResult.text.padding,
+			testId = `{WithDefaultsModuleResult.testId}--text`
 		}),
-		Close = reactModule.createElement(viewModule, {
+		Close = ReactModule.createElement(ViewModule, {
 			LayoutOrder = 2,
-			tag = var2.close.tag,
-			padding = var2.close.padding,
-			testId = `{var1.testId}--close-container`
+			tag = UseInputChipVariantsModuleResult.close.tag,
+			padding = UseInputChipVariantsModuleResult.close.padding,
+			testId = `{WithDefaultsModuleResult.testId}--close-container`
 		}, {
-			CloseAffordance = reactModule.createElement(closeAffordanceModule, {
+			CloseAffordance = ReactModule.createElement(CloseAffordanceModule, {
 				hasPadding = false,
 				LayoutOrder = 1,
-				onActivated = if var1.isDisabled then nil else var1.onClose,
-				size = inputSizeModule.XSmall,
-				variant = closeAffordanceVariantModule.Utility,
-				Selectable = if var1.isDisabled then false else nil,
-				testId = `{var1.testId}--close`
+				onActivated = if WithDefaultsModuleResult.isDisabled then nil else WithDefaultsModuleResult.onClose,
+				size = InputSizeModule.XSmall,
+				variant = CloseAffordanceVariantModule.Utility,
+				Selectable = not WithDefaultsModuleResult.isDisabled and nil,
+				testId = `{WithDefaultsModuleResult.testId}--close`
 			})
 		})
 	})

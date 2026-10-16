@@ -1,13 +1,13 @@
 ﻿game:DefineFastString("UGCValidateAnimationHeightTol", "-3.1")
-local t = {
-	asString = function()
+local GetFStringUGCValidateAnimationHeightTolModule = {
+	asString = function() --[[ Line: 9 ]]
 		return game:GetFastString("UGCValidateAnimationHeightTol")
 	end
 }
 
-function t.asNumber()
-	-- upvalues: t (ref)
-	return tonumber(t.asString())
+function GetFStringUGCValidateAnimationHeightTolModule.asNumber(): number --[[ Line: 13 ]]
+	-- upvalues: GetFStringUGCValidateAnimationHeightTolModule (copy)
+	return (tonumber(GetFStringUGCValidateAnimationHeightTolModule.asString()))
 end
 
-return t
+return GetFStringUGCValidateAnimationHeightTolModule

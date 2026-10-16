@@ -1,19 +1,20 @@
 ﻿local _ = require(script:FindFirstAncestor("PurchasePrompt").types)
-local t = {
+local config = {
 	[Enum.InfoType.GamePass] = "GamePass",
 	[Enum.InfoType.Product] = "DeveloperProduct"
 }
 
-return function(p1, p2)
-	-- upvalues: t (ref)
-	local var1 = t[p1]
+return function(p1, p2) --[[ Line: 22 | Named "getInGameItemProductIdentifier" ]]
+	-- upvalues: config (copy)
+	local Entry = config[p1]
 	
-	if var1 == nil then
+	if Entry == nil then
 		return nil
 	elseif p2 == nil then
 		return nil
+	else
+		local Text = tostring(p2)
+		
+		return if Text == "" then nil else { namespace = Entry, targetIdentifier = Text }
 	end
-	local var2 = tostring(p2)
-	
-	return if var2 == "" then nil else { namespace = var1, targetIdentifier = var2 }
 end

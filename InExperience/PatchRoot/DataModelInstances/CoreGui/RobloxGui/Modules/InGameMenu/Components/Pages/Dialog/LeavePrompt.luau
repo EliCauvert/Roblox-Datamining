@@ -1,48 +1,47 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local guiService = game:GetService("GuiService")
-local contextActionService = game:GetService("ContextActionService")
-local robloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
-local inGameMenuDependenciesModule = require(corePackagesService.Packages.InGameMenuDependencies)
-local roact = inGameMenuDependenciesModule.Roact
-local UIBlox = inGameMenuDependenciesModule.UIBlox
-local t = inGameMenuDependenciesModule.t
-local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local gameIconModule = require(parent.GameIcon)
-local button = UIBlox.App.Button.Button
-local buttonType = UIBlox.App.Button.Enum.ButtonType
-local themedTextLabelModule = require(parent.ThemedTextLabel)
-local withFoundationOrUIBloxStyle = require(corePackagesService.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
-local focusHandlerModule = require(parent.Connection.FocusHandler)
-local zonePortalModule = require(parent.ZonePortal)
-local directionModule = require(parent_1.Enums.Direction)
-local getFFlagEnableVRFTUXExperienceModule = require(robloxGui.Modules.FTUX.Flags.GetFFlagEnableVRFTUXExperience)
-local isFTUXExperienceModule = require(robloxGui.Modules.FTUX.Utility.IsFTUXExperience)
-local platformEnumModule = require(robloxGui.Modules.FTUX.Enums.PlatformEnum)
-local leavePrompt = roact.PureComponent:extend("LeavePrompt")
-leavePrompt.validateProps = t.strictInterface({
-	titleText = t.string,
-	bodyText = t.string,
-	confirmText = t.string,
-	cancelText = t.string,
-	onConfirm = t.callback,
-	onCancel = t.callback,
-	canGamepadCaptureFocus = t.boolean,
-	canKeyboardCaptureFocus = t.boolean
+﻿local CorePackages = game:GetService("CorePackages")
+local GuiService = game:GetService("GuiService")
+local ContextActionService = game:GetService("ContextActionService")
+local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
+local InGameMenuDependenciesModule = require(CorePackages.Packages.InGameMenuDependencies)
+local Roact = InGameMenuDependenciesModule.Roact
+local UIBlox = InGameMenuDependenciesModule.UIBlox
+local T = InGameMenuDependenciesModule.t
+local Parent = script.Parent.Parent.Parent
+local GameIconModule = require(Parent.GameIcon)
+local Button = UIBlox.App.Button.Button
+local ButtonType = UIBlox.App.Button.Enum.ButtonType
+local ThemedTextLabelModule = require(Parent.ThemedTextLabel)
+local WithFoundationOrUIBloxStyleFunction = require(CorePackages.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
+local FocusHandlerModule = require(Parent.Connection.FocusHandler)
+local ZonePortalModule = require(Parent.ZonePortal)
+local DirectionModule = require(Parent.Parent.Enums.Direction)
+local GetFFlagEnableVRFTUXExperienceModule = require(RobloxGui.Modules.FTUX.Flags.GetFFlagEnableVRFTUXExperience)
+local IsFTUXExperienceModule = require(RobloxGui.Modules.FTUX.Utility.IsFTUXExperience)
+local PlatformEnumModule = require(RobloxGui.Modules.FTUX.Enums.PlatformEnum)
+local LeavePrompt = Roact.PureComponent:extend("LeavePrompt")
+LeavePrompt.validateProps = T.strictInterface({
+	titleText = T.string,
+	bodyText = T.string,
+	confirmText = T.string,
+	cancelText = T.string,
+	onConfirm = T.callback,
+	onCancel = T.callback,
+	canGamepadCaptureFocus = T.boolean,
+	canKeyboardCaptureFocus = T.boolean
 })
-leavePrompt.defaultProps = {
+LeavePrompt.defaultProps = {
 	canGamepadCaptureFocus = false,
 	canKeyboardCaptureFocus = false
 }
 
-function leavePrompt.init(p1)
-	-- upvalues: roact (ref)
-	p1.leaveButtonRef = roact.createRef()
+function LeavePrompt.init(p1) --[[ Line: 58 ]]
+	-- upvalues: Roact (copy)
+	p1.leaveButtonRef = Roact.createRef()
 end
 
-function leavePrompt.render(p1)
-	-- upvalues: withFoundationOrUIBloxStyle (ref), roact (ref), gameIconModule (ref), themedTextLabelModule (ref), getFFlagEnableVRFTUXExperienceModule (ref), isFTUXExperienceModule (ref), platformEnumModule (ref), button (ref), buttonType (ref), focusHandlerModule (ref), guiService (ref), zonePortalModule (ref), directionModule (ref), contextActionService (ref)
-	return withFoundationOrUIBloxStyle(function(p2)
+function LeavePrompt.render(p1) --[[ Line: 62 ]]
+	-- upvalues: WithFoundationOrUIBloxStyleFunction (copy), Roact (copy), GameIconModule (copy), ThemedTextLabelModule (copy), GetFFlagEnableVRFTUXExperienceModule (copy), IsFTUXExperienceModule (copy), PlatformEnumModule (copy), Button (copy), ButtonType (copy), FocusHandlerModule (copy), GuiService (copy), ZonePortalModule (copy), DirectionModule (copy), ContextActionService (copy)
+	return WithFoundationOrUIBloxStyleFunction(function(p2) --[[ Line: 63 ]]
 		return {
 			Theme = {
 				BackgroundDefault = {
@@ -62,62 +61,62 @@ function leavePrompt.render(p1)
 				}
 			}
 		}
-	end, function(p2)
-		-- upvalues: roact (copy), gameIconModule (copy), themedTextLabelModule (copy), p1 (ref), getFFlagEnableVRFTUXExperienceModule (copy), isFTUXExperienceModule (copy), platformEnumModule (copy), button (copy), buttonType (copy), focusHandlerModule (copy), guiService (copy), zonePortalModule (copy), directionModule (copy), contextActionService (copy)
-		local font = p2.Font
+	end, function(p2) --[[ Line: 74 ]]
+		-- upvalues: Roact (upval), GameIconModule (upval), ThemedTextLabelModule (upval), p1 (copy), GetFFlagEnableVRFTUXExperienceModule (upval), IsFTUXExperienceModule (upval), PlatformEnumModule (upval), Button (upval), ButtonType (upval), FocusHandlerModule (upval), GuiService (upval), ZonePortalModule (upval), DirectionModule (upval), ContextActionService (upval)
+		local _Font = p2.Font
 		
-		return roact.createElement("ImageButton", {
+		return Roact.createElement("ImageButton", {
 			AutoButtonColor = false,
 			Selectable = false,
 			Size = UDim2.fromScale(1, 1),
 			BackgroundColor3 = p2.Theme.BackgroundDefault.Color,
 			BackgroundTransparency = p2.Theme.BackgroundDefault.Transparency
 		}, {
-			Content = roact.createElement("Frame", {
+			Content = Roact.createElement("Frame", {
 				BackgroundTransparency = 1,
 				Selectable = false,
 				Size = UDim2.fromScale(1, 1)
 			}, {
-				Layout = roact.createElement("UIListLayout", {
+				Layout = Roact.createElement("UIListLayout", {
 					FillDirection = Enum.FillDirection.Vertical,
 					HorizontalAlignment = Enum.HorizontalAlignment.Center,
 					VerticalAlignment = Enum.VerticalAlignment.Center,
 					Padding = UDim.new(0, 24),
 					SortOrder = Enum.SortOrder.LayoutOrder
 				}),
-				GameThumbnail = roact.createElement(gameIconModule, { iconSize = 100, layoutOrder = 1, gameId = game.GameId }),
-				TitleText = roact.createElement(themedTextLabelModule, {
+				GameThumbnail = Roact.createElement(GameIconModule, { iconSize = 100, layoutOrder = 1, gameId = game.GameId }),
+				TitleText = Roact.createElement(ThemedTextLabelModule, {
 					fontKey = "Header1",
 					themeKey = "TextEmphasis",
 					LayoutOrder = 2,
-					Size = UDim2.new(1, 0, 0, font.Header1.RelativeSize * font.BaseSize + 4),
+					Size = UDim2.new(1, 0, 0, _Font.Header1.RelativeSize * _Font.BaseSize + 4),
 					Text = p1.props.titleText
 				}),
-				BodyText = roact.createElement(themedTextLabelModule, {
+				BodyText = Roact.createElement(ThemedTextLabelModule, {
 					fontKey = "Body",
 					themeKey = "TextDefault",
 					LayoutOrder = 3,
 					TextWrapped = true,
-					Size = if getFFlagEnableVRFTUXExperienceModule() and isFTUXExperienceModule(platformEnumModule.QuestVR) then UDim2.fromOffset(353, 4 * (font.Body.RelativeSize * font.BaseSize + 4)) else UDim2.fromOffset(353, 2 * (font.Body.RelativeSize * font.BaseSize + 4)),
+					Size = if GetFFlagEnableVRFTUXExperienceModule() and IsFTUXExperienceModule(PlatformEnumModule.QuestVR) then UDim2.fromOffset(353, 4 * (_Font.Body.RelativeSize * _Font.BaseSize + 4)) else UDim2.fromOffset(353, 2 * (_Font.Body.RelativeSize * _Font.BaseSize + 4)),
 					Text = p1.props.bodyText
 				}),
-				ButtonGroup = roact.createElement("Frame", {
+				ButtonGroup = Roact.createElement("Frame", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 4,
 					Size = UDim2.fromOffset(353, 84)
 				}, {
-					ConfirmButton = roact.createElement(button, {
+					ConfirmButton = Roact.createElement(Button, {
 						layoutOrder = 4,
-						buttonType = buttonType.PrimarySystem,
+						buttonType = ButtonType.PrimarySystem,
 						position = UDim2.fromOffset(0, 0),
 						size = UDim2.fromOffset(353, 36),
 						onActivated = p1.props.onConfirm,
 						text = p1.props.confirmText,
 						buttonRef = p1.leaveButtonRef
 					}),
-					CancelButton = roact.createElement(button, {
+					CancelButton = Roact.createElement(Button, {
 						layoutOrder = 5,
-						buttonType = buttonType.Secondary,
+						buttonType = ButtonType.Secondary,
 						position = UDim2.fromOffset(0, 48),
 						size = UDim2.fromOffset(353, 36),
 						onActivated = p1.props.onCancel,
@@ -125,35 +124,36 @@ function leavePrompt.render(p1)
 					})
 				})
 			}),
-			FocusHandler = roact.createElement(focusHandlerModule, {
+			FocusHandler = Roact.createElement(FocusHandlerModule, {
 				isFocused = p1.props.canGamepadCaptureFocus,
-				didFocus = function()
-					-- upvalues: guiService (copy), p1 (copy)
-					guiService.SelectedCoreObject = p1.leaveButtonRef.current
+				didFocus = function() --[[ Line: 141 ]]
+					-- upvalues: GuiService (upval), p1 (upval)
+					GuiService.SelectedCoreObject = p1.leaveButtonRef.current
 				end
 			}),
-			ZonePortal = roact.createElement(zonePortalModule, { targetZone = 0, direction = directionModule.Left }),
-			KeyboardFocusHandler = roact.createElement(focusHandlerModule, {
+			ZonePortal = Roact.createElement(ZonePortalModule, { targetZone = 0, direction = DirectionModule.Left }),
+			KeyboardFocusHandler = Roact.createElement(FocusHandlerModule, {
 				isFocused = p1.props.canKeyboardCaptureFocus,
-				didFocus = function()
-					-- upvalues: contextActionService (copy), p1 (copy)
-					contextActionService:BindCoreAction("LeavePromptConfirm", function(_, p3)
-						-- upvalues: p1 (copy)
-						if p3 == Enum.UserInputState.End then
+				didFocus = function() --[[ Line: 152 ]]
+					-- upvalues: ContextActionService (upval), p1 (upval)
+					ContextActionService:BindCoreAction("LeavePromptConfirm", function(_, UserInputState) --[[ Line: 153 ]]
+						-- upvalues: p1 (upval)
+						if UserInputState == Enum.UserInputState.End then
 							p1.props.onConfirm()
 							
 							return Enum.ContextActionResult.Sink
+						else
+							return Enum.ContextActionResult.Pass
 						end
-						return Enum.ContextActionResult.Pass
 					end, false, Enum.KeyCode.Return)
 				end,
-				didBlur = function()
-					-- upvalues: contextActionService (copy)
-					contextActionService:UnbindCoreAction("LeavePromptConfirm")
+				didBlur = function() --[[ Line: 162 ]]
+					-- upvalues: ContextActionService (upval)
+					ContextActionService:UnbindCoreAction("LeavePromptConfirm")
 				end
 			}) or nil
 		})
 	end)
 end
 
-return leavePrompt
+return LeavePrompt

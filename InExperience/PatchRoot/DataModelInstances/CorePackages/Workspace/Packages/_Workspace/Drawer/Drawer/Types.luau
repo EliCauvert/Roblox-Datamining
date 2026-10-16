@@ -1,5 +1,5 @@
-﻿local parent = script:FindFirstAncestor("Drawer").Parent
-local _ = require(parent.React)
-local _ = require(parent.Foundation)
+﻿local Parent = script:FindFirstAncestor("Drawer").Parent
+local _ = require(Parent.React)
+local _ = require(Parent.Foundation)
 
 return {}

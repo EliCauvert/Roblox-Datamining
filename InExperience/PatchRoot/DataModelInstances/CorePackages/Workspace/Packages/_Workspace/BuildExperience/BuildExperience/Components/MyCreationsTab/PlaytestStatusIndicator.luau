@@ -1,33 +1,33 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local _ = require(parent.BuildExperiencePlaytestLaunch.createPlaytestLoadingStore)
-local icon = foundationModule.Icon
-local progress = foundationModule.Progress
-local view = foundationModule.View
-local iconName = foundationModule.Enums.IconName
-local iconVariant = foundationModule.Enums.IconVariant
-local progressShape = foundationModule.Enums.ProgressShape
-local progressSize = foundationModule.Enums.ProgressSize
-local useTokens = foundationModule.Hooks.useTokens
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local _ = require(Parent.BuildExperiencePlaytestLaunch.createPlaytestLoadingStore)
+local Icon = FoundationModule.Icon
+local Progress = FoundationModule.Progress
+local View = FoundationModule.View
+local IconName = FoundationModule.Enums.IconName
+local IconVariant = FoundationModule.Enums.IconVariant
+local ProgressShape = FoundationModule.Enums.ProgressShape
+local ProgressSize = FoundationModule.Enums.ProgressSize
+local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), view (ref), progress (ref), progressShape (ref), progressSize (ref), icon (ref), iconName (ref), iconVariant (ref)
-	local size400 = useTokens().Size.Size_400
+return function(Frame: Frame) --[[ Line: 26 | Named "PlaytestStatusIndicator" ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), Progress (copy), ProgressShape (copy), ProgressSize (copy), Icon (copy), IconName (copy), IconVariant (copy)
+	local Size400 = UseTokensFunction().Size.Size_400
 	
-	return if p1.status == "Loading" then reactModule.createElement(view, {
+	return if Frame.status == "Loading" then ReactModule.createElement(View, {
 		tag = "row align-x-center align-y-center",
 		testId = "MyCreationsTab.StatusIndicator.Loading",
-		LayoutOrder = p1.LayoutOrder,
-		Size = UDim2.fromOffset(size400, size400)
+		LayoutOrder = Frame.LayoutOrder,
+		Size = UDim2.fromOffset(Size400, Size400)
 	}, {
-		Progress = reactModule.createElement(progress, { shape = progressShape.Circle, size = progressSize.Small })
-	}) elseif p1.status == "Completed" then reactModule.createElement(icon, {
+		Progress = ReactModule.createElement(Progress, { shape = ProgressShape.Circle, size = ProgressSize.Small })
+	}) elseif Frame.status == "Completed" then ReactModule.createElement(Icon, {
 		tag = "auto-xy content-system-success",
 		testId = "MyCreationsTab.StatusIndicator.Completed",
-		LayoutOrder = p1.LayoutOrder,
-		name = iconName.CircleCheck,
-		size = size400,
-		variant = iconVariant.Filled
+		LayoutOrder = Frame.LayoutOrder,
+		name = IconName.CircleCheck,
+		size = Size400,
+		variant = IconVariant.Filled
 	}) else nil
 end

@@ -1,1 +1,1 @@
-﻿return require(game:GetService("CorePackages").Packages._Index.Foundation.Foundation.Utility.createUseModalNavigation)(require(script.Parent.SheetContext))
+﻿return require(game:GetService("CorePackages").Packages._Index.Foundation.Foundation.Utility.createUseModalNavigation)((require(script.Parent.SheetContext)))

@@ -1,44 +1,45 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local corePackagesService = game:GetService("CorePackages")
-local signalsModule = require(corePackagesService.Packages.Signals)
-local displayModule = require(corePackagesService.Workspace.Packages.Display)
-local inGameMenuDependenciesModule = require(corePackagesService.Packages.InGameMenuDependencies)
-local roact = inGameMenuDependenciesModule.Roact
-local roactRodux = inGameMenuDependenciesModule.RoactRodux
-local t = inGameMenuDependenciesModule.t
-local UIBlox = inGameMenuDependenciesModule.UIBlox
-local parent = script.Parent.Parent
-local withLocalizationModule = require(parent.Localization.withLocalization)
-local setMenuIconTooltipOpenModule = require(parent.Actions.SetMenuIconTooltipOpen)
-local constantsModule = require(parent.Parent.TopBar.Constants)
-local tooltip = UIBlox.App.Dialog.Tooltip
-local menuIconTooltip = roact.PureComponent:extend("MenuIconTooltip")
-menuIconTooltip.validateProps = t.strictInterface({ isTooltipOpen = t.boolean, onDismiss = t.callback })
+﻿local CoreGui = game:GetService("CoreGui")
+local CorePackages = game:GetService("CorePackages")
+local SignalsModule = require(CorePackages.Packages.Signals)
+local DisplayModule = require(CorePackages.Workspace.Packages.Display)
+local InGameMenuDependenciesModule = require(CorePackages.Packages.InGameMenuDependencies)
+local Roact = InGameMenuDependenciesModule.Roact
+local RoactRodux = InGameMenuDependenciesModule.RoactRodux
+local T = InGameMenuDependenciesModule.t
+local Parent = script.Parent.Parent
+local WithLocalizationModule = require(Parent.Localization.withLocalization)
+local SetMenuIconTooltipOpenModule = require(Parent.Actions.SetMenuIconTooltipOpen)
+local ConstantsModule = require(Parent.Parent.TopBar.Constants)
+local Tooltip = InGameMenuDependenciesModule.UIBlox.App.Dialog.Tooltip
+local MenuIconTooltip = Roact.PureComponent:extend("MenuIconTooltip")
+MenuIconTooltip.validateProps = T.strictInterface({ isTooltipOpen = T.boolean, onDismiss = T.callback })
 
-function menuIconTooltip.init(p1)
-	-- upvalues: signalsModule (ref), displayModule (ref)
-	p1.disposeUiScaleEffect = signalsModule.createEffect(function(p2)
-		-- upvalues: displayModule (copy), p1 (ref)
+function MenuIconTooltip.init(p1) --[[ Line: 28 ]]
+	-- upvalues: SignalsModule (copy), DisplayModule (copy)
+	p1.disposeUiScaleEffect = SignalsModule.createEffect(function(p2) --[[ Line: 29 ]]
+		-- upvalues: DisplayModule (upval), p1 (copy)
 		p1:setState({
-			UiScale = displayModule.GetDisplayStore(p2).getUIScale(p2)
+			UiScale = DisplayModule.GetDisplayStore(p2).getUIScale(p2)
 		})
 	end)
 end
 
-function menuIconTooltip.render(p1)
-	-- upvalues: withLocalizationModule (ref), constantsModule (ref), roact (ref), coreGuiService (ref), tooltip (ref)
-	return withLocalizationModule({
+function MenuIconTooltip.render(p1) --[[ Line: 37 ]]
+	-- upvalues: WithLocalizationModule (copy), ConstantsModule (copy), Roact (copy), CoreGui (copy), Tooltip (copy)
+	return WithLocalizationModule({
 		bodyText = "CoreScripts.InGameMenu.EducationalPopup.MenuIconTooltip"
-	})(function(p2)
-		-- upvalues: constantsModule (copy), p1 (ref), roact (copy), coreGuiService (copy), tooltip (copy)
-		return p1.props.isTooltipOpen and roact.createElement(roact.Portal, { target = coreGuiService }, {
-			TooltipScreenGui = roact.createElement("ScreenGui", {
+	})(function(p2) --[[ Line: 40 ]]
+		-- upvalues: ConstantsModule (upval), p1 (copy), Roact (upval), CoreGui (upval), Tooltip (upval)
+		local _Vector2 = Vector2.new(ConstantsModule.ScreenSideOffset * p1.state.UiScale, ConstantsModule.TopBarHeight * p1.state.UiScale - 32)
+		
+		return p1.props.isTooltipOpen and Roact.createElement(Roact.Portal, { target = CoreGui }, {
+			TooltipScreenGui = Roact.createElement("ScreenGui", {
 				IgnoreGuiInset = true,
 				ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 			}, {
-				Tooltip = roact.createElement(tooltip, {
+				Tooltip = Roact.createElement(Tooltip, {
 					forceClickTriggerPoint = true,
-					triggerPosition = Vector2.new(constantsModule.ScreenSideOffset * p1.state.UiScale, constantsModule.TopBarHeight * p1.state.UiScale - 32),
+					triggerPosition = _Vector2,
 					triggerSize = Vector2.new(32, 32),
 					bodyText = p2.bodyText,
 					onDismiss = p1.props.onDismiss
@@ -48,20 +49,20 @@ function menuIconTooltip.render(p1)
 	end)
 end
 
-function menuIconTooltip.willUnmount(p1)
+function MenuIconTooltip.willUnmount(p1) --[[ Line: 65 ]]
 	if p1.disposeUiScaleEffect then
 		p1.disposeUiScaleEffect()
 	end
 end
 
-return roactRodux.UNSTABLE_connect2(function(p1, _)
+return RoactRodux.UNSTABLE_connect2(function(p1, _) --[[ Line: 72 ]]
 	return { isTooltipOpen = p1.nativeClosePrompt.menuIconTooltipOpen }
-end, function(p1)
-	-- upvalues: setMenuIconTooltipOpenModule (ref)
+end, function(Callback) --[[ Line: 76 ]]
+	-- upvalues: SetMenuIconTooltipOpenModule (copy)
 	return {
-		onDismiss = function()
-			-- upvalues: p1 (ref), setMenuIconTooltipOpenModule (copy)
-			p1(setMenuIconTooltipOpenModule(false))
+		onDismiss = function() --[[ Line: 78 ]]
+			-- upvalues: Callback (copy), SetMenuIconTooltipOpenModule (upval)
+			Callback(SetMenuIconTooltipOpenModule(false))
 		end
 	}
-end)(menuIconTooltip)
+end)(MenuIconTooltip)

@@ -1,43 +1,43 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local reactModule = require(parent.React)
-local useRefCache = require(parent.ReactUtils).useRefCache
-local _ = require(foundation.Components.Types)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local ReactModule = require(Parent.React)
+local UseRefCacheFunction = require(Parent.ReactUtils).useRefCache
+local _ = require(Foundation.Components.Types)
 
-return function(p1, p2, p3)
-	-- upvalues: useRefCache (ref), reactModule (ref)
-	local var1 = useRefCache()
-	local var2 = p1[1]
-	local var3 = reactModule.useCallback(function(p4)
-		-- upvalues: var1 (ref), var2 (ref), p3 (ref)
-		local var4 = var1[p4]
+return function(List, Gui, Callback) --[[ Line: 22 | Named "usePaginationSelectionChain" ]]
+	-- upvalues: UseRefCacheFunction (copy), ReactModule (copy)
+	local UseRefCacheResult = UseRefCacheFunction()
+	local Entry = List[1]
+	local UseResult = ReactModule.useCallback(function(FirstSlotId) --[[ Line: 30 ]]
+		-- upvalues: UseRefCacheResult (copy), Entry (copy), Callback (copy)
+		local UseRefCacheResultEntry = UseRefCacheResult[FirstSlotId]
 		
-		return if var2 == p4 and p3 ~= nil then function(p5)
-			-- upvalues: var4 (ref), p3 (copy)
-			var4.current = p5
-			p3(p5)
-		end else var4
-	end, { var2, p3, var1 })
-	local var4 = reactModule.useCallback(function(p4)
-		-- upvalues: p1 (ref), var1 (ref), p2 (ref)
-		local index = table.find(p1, p4)
+		return if Entry == FirstSlotId and Callback ~= nil then function(Current) --[[ Line: 36 ]]
+			-- upvalues: UseRefCacheResultEntry (copy), Callback (upval)
+			UseRefCacheResultEntry.current = Current
+			Callback(Current)
+		end else UseRefCacheResultEntry
+	end, { Entry, Callback, UseRefCacheResult })
+	local UseResult1 = ReactModule.useCallback(function(Value) --[[ Line: 42 ]]
+		-- upvalues: List (copy), UseRefCacheResult (copy), Gui (copy)
+		local FoundIndex: number? = table.find(List, Value)
 		
-		return if index == nil then { Selectable = false, ref = var1[p4] } else {
+		return if FoundIndex == nil then { Selectable = false, ref = UseRefCacheResult[Value] } else {
 			Selectable = true,
-			ref = var1[p4],
-			NextSelectionLeft = if index > 1 then var1[p1[index - 1]] else nil,
-			NextSelectionRight = if index < #p1 then var1[p1[index + 1]] else nil,
-			NextSelectionUp = p2 and p2.NextSelectionUp,
-			NextSelectionDown = p2 and p2.NextSelectionDown
+			ref = UseRefCacheResult[Value],
+			NextSelectionLeft = if FoundIndex > 1 then UseRefCacheResult[List[FoundIndex - 1]] else nil,
+			NextSelectionRight = if FoundIndex < #List then UseRefCacheResult[List[FoundIndex + 1]] else nil,
+			NextSelectionUp = Gui and Gui.NextSelectionUp,
+			NextSelectionDown = Gui and Gui.NextSelectionDown
 		}
-	end, { p1, var1, p2 })
+	end, { List, UseRefCacheResult, Gui })
 	
-	return reactModule.useMemo(function()
-		-- upvalues: var2 (ref), var4 (ref), var3 (ref)
+	return ReactModule.useMemo(function() --[[ Line: 61 ]]
+		-- upvalues: Entry (copy), UseResult1 (copy), UseResult (copy)
 		return {
-			firstSlotId = var2,
-			getSlotBindings = var4,
-			getSlotRef = var3
+			firstSlotId = Entry,
+			getSlotBindings = UseResult1,
+			getSlotRef = UseResult
 		}
-	end, { var2, var4, var3 })
+	end, { Entry, UseResult1, UseResult })
 end

@@ -1,22 +1,22 @@
-﻿local squadsCore = script:FindFirstAncestor("SquadsCore")
-local squadPromptTypeModule = require(squadsCore.Enums.SquadPromptType)
-local deleteScheduledSquadModule = require(squadsCore.NetworkRequests.deleteScheduledSquad)
+﻿local SquadsCore = script:FindFirstAncestor("SquadsCore")
+local SquadPromptTypeModule = require(SquadsCore.Enums.SquadPromptType)
+local DeleteScheduledSquadModule = require(SquadsCore.NetworkRequests.deleteScheduledSquad)
 
-return function(p1, p2, p3)
-	-- upvalues: squadPromptTypeModule (ref), deleteScheduledSquadModule (ref)
-	return function(p4)
-		-- upvalues: p2 (ref), squadPromptTypeModule (copy), deleteScheduledSquadModule (copy), p1 (ref), p3 (ref)
-		local var1 = function()
-			-- upvalues: p2 (copy), p4 (ref), squadPromptTypeModule (copy)
-			p2(p4, { promptType = squadPromptTypeModule.Error })
+return function(ScheduledGroupUpId, Callback, p1) --[[ Line: 6 ]]
+	-- upvalues: SquadPromptTypeModule (copy), DeleteScheduledSquadModule (copy)
+	return function(p2) --[[ Line: 11 ]]
+		-- upvalues: Callback (copy), SquadPromptTypeModule (upval), DeleteScheduledSquadModule (upval), ScheduledGroupUpId (copy), p1 (copy)
+		local function v3() --[[ Line: 12 ]]
+			-- upvalues: Callback (upval), p2 (copy), SquadPromptTypeModule (upval)
+			Callback(p2, { promptType = SquadPromptTypeModule.Error })
 		end
 		
-		return p2(p4, {
-			onConfirm = function()
-				-- upvalues: deleteScheduledSquadModule (copy), p1 (copy), p3 (copy), var1 (ref)
-				deleteScheduledSquadModule({ scheduledGroupUpId = p1 }, p3, var1)
+		return Callback(p2, {
+			onConfirm = function() --[[ Line: 19 ]]
+				-- upvalues: DeleteScheduledSquadModule (upval), ScheduledGroupUpId (upval), p1 (upval), v3 (copy)
+				DeleteScheduledSquadModule({ scheduledGroupUpId = ScheduledGroupUpId }, p1, v3)
 			end,
-			promptType = squadPromptTypeModule.ConfirmDeleteScheduledSquad
+			promptType = SquadPromptTypeModule.ConfirmDeleteScheduledSquad
 		})
 	end
 end

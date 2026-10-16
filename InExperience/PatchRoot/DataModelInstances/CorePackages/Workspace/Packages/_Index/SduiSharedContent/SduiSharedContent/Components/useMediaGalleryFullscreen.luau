@@ -1,142 +1,142 @@
-﻿local parent = script:FindFirstAncestor("SduiSharedContent").Parent
-local reactModule = require(parent.React)
-local view = require(parent.Foundation).View
-local detailsPageLayoutContext = require(parent.AppBlox).DetailsPageLayout.DetailsPageLayoutContext
-local sendMediaGalleryFullscreenEvent = require(parent.DiscoveryAnalytics).Events.sendMediaGalleryFullscreenEvent
-local _ = require(parent.VideoUtils)
-local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-local focusNavigableSurfaceWrapper = focusNavigationUtilsModule.FocusNavigableSurfaceWrapper
-local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
-local sduiSharedUtilitiesModule = require(parent.SduiSharedUtilities)
-local sduiFocusTags = sduiSharedUtilitiesModule.SduiFocusTags
-local useOnNavigateBack = sduiSharedUtilitiesModule.useOnNavigateBack
-local mediaGalleryModule = require(parent.MediaGallery)
-local mediaGalleryCarousel = mediaGalleryModule.MediaGalleryCarousel
-local mediaGalleryConstants = mediaGalleryModule.MediaGalleryConstants
-local isValidIdentifier = mediaGalleryModule.isValidIdentifier
-local isYouTubeVideo = mediaGalleryModule.isYouTubeVideo
-local ITEM_ASPECT_RATIO = mediaGalleryConstants.ITEM_ASPECT_RATIO
+﻿local Parent = script:FindFirstAncestor("SduiSharedContent").Parent
+local ReactModule = require(Parent.React)
+local View = require(Parent.Foundation).View
+local DetailsPageLayoutContext = require(Parent.AppBlox).DetailsPageLayout.DetailsPageLayoutContext
+local SendMediaGalleryFullscreenEventFunction = require(Parent.DiscoveryAnalytics).Events.sendMediaGalleryFullscreenEvent
+local _ = require(Parent.VideoUtils)
+local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
+local FocusNavigableSurfaceWrapper = FocusNavigationUtilsModule.FocusNavigableSurfaceWrapper
+local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
+local SduiSharedUtilitiesModule = require(Parent.SduiSharedUtilities)
+local SduiFocusTags = SduiSharedUtilitiesModule.SduiFocusTags
+local UseOnNavigateBackFunction = SduiSharedUtilitiesModule.useOnNavigateBack
+local MediaGalleryModule = require(Parent.MediaGallery)
+local MediaGalleryCarousel = MediaGalleryModule.MediaGalleryCarousel
+local IsValidIdentifierFunction = MediaGalleryModule.isValidIdentifier
+local IsYouTubeVideoFunction = MediaGalleryModule.isYouTubeVideo
+local ITEMASPECTRATIO = MediaGalleryModule.MediaGalleryConstants.ITEM_ASPECT_RATIO
 
-return function(p1)
-	-- upvalues: reactModule (ref), detailsPageLayoutContext (ref), useOnNavigateBack (ref), isValidIdentifier (ref), isYouTubeVideo (ref), sendMediaGalleryFullscreenEvent (ref), view (ref), ITEM_ASPECT_RATIO (ref), mediaGalleryCarousel (ref), focusNavigableSurfaceWrapper (ref), focusNavigableSurfaceIdentifierEnum (ref), sduiFocusTags (ref)
-	local var1 = reactModule.useContext(detailsPageLayoutContext)
-	local setFullscreenContent = var1.setFullscreenContent
-	local setOnExitFullscreenOverlay = var1.setOnExitFullscreenOverlay
-	local var2, var3 = reactModule.useState(false)
-	local var4, var5 = reactModule.useState(1)
-	local var6 = reactModule.useRef(1)
-	local var7 = reactModule.useRef(nil)
-	local var8 = useOnNavigateBack(reactModule.useCallback(function()
-		-- upvalues: var7 (ref), var6 (ref)
-		if var7.current then
-			var7.current(var6.current)
+return function(p1) --[[ Line: 56 | Named "useMediaGalleryFullscreen" ]]
+	-- upvalues: ReactModule (copy), DetailsPageLayoutContext (copy), UseOnNavigateBackFunction (copy), IsValidIdentifierFunction (copy), IsYouTubeVideoFunction (copy), SendMediaGalleryFullscreenEventFunction (copy), View (copy), ITEMASPECTRATIO (copy), MediaGalleryCarousel (copy), FocusNavigableSurfaceWrapper (copy), FocusNavigableSurfaceIdentifierEnum (copy), SduiFocusTags (copy)
+	local UseContextResult = ReactModule.useContext(DetailsPageLayoutContext)
+	local SetFullscreenContentFunction = UseContextResult.setFullscreenContent
+	local SetOnExitFullscreenOverlayFunction = UseContextResult.setOnExitFullscreenOverlay
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(1)
+	local UseRefResult = ReactModule.useRef(1)
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseOnNavigateBackResult = UseOnNavigateBackFunction((ReactModule.useCallback(function() --[[ Line: 68 ]]
+		-- upvalues: UseRefResult1 (copy), UseRefResult (copy)
+		if UseRefResult1.current then
+			UseRefResult1.current(UseRefResult.current)
 		end
-	end, {}))
-	local var9 = reactModule.useCallback(function(p2, p3)
-		-- upvalues: var6 (ref), p1 (ref)
-		var6.current = p2
+	end, {})))
+	local UseResult = ReactModule.useCallback(function(Current, p2) --[[ Line: 75 ]]
+		-- upvalues: UseRefResult (copy), p1 (copy)
+		UseRefResult.current = Current
 		
 		if p1.onFullscreenMediaChanged then
-			p1.onFullscreenMediaChanged(p2, p3)
+			p1.onFullscreenMediaChanged(Current, p2)
 		end
 	end, { p1.onFullscreenMediaChanged })
-	local var10 = reactModule.useRef(setFullscreenContent)
-	var10.current = setFullscreenContent
-	local var11 = reactModule.useRef(setOnExitFullscreenOverlay)
-	var11.current = setOnExitFullscreenOverlay
-	reactModule.useEffect(function()
-		-- upvalues: var10 (ref), var11 (ref)
-		return function()
-			-- upvalues: var10 (copy), var11 (copy)
-			if var10.current then
-				var10.current(nil)
+	local UseRefResult2 = ReactModule.useRef(SetFullscreenContentFunction)
+	UseRefResult2.current = SetFullscreenContentFunction
+	local UseRefResult3 = ReactModule.useRef(SetOnExitFullscreenOverlayFunction)
+	UseRefResult3.current = SetOnExitFullscreenOverlayFunction
+	ReactModule.useEffect(function() --[[ Line: 87 ]]
+		-- upvalues: UseRefResult2 (copy), UseRefResult3 (copy)
+		return function() --[[ Line: 88 ]]
+			-- upvalues: UseRefResult2 (upval), UseRefResult3 (upval)
+			if UseRefResult2.current then
+				UseRefResult2.current(nil)
 			end
-			if var11.current then
-				var11.current(nil)
+			if UseRefResult3.current then
+				UseRefResult3.current(nil)
 			end
 		end
 	end, {})
-	local var12 = reactModule.useCallback(function(p2)
-		-- upvalues: var7 (ref), var5 (ref), setFullscreenContent (ref), setOnExitFullscreenOverlay (ref), var3 (ref), p1 (ref), isValidIdentifier (copy), isYouTubeVideo (copy), sendMediaGalleryFullscreenEvent (copy)
-		var7.current = nil
-		var5(p2)
+	local UseResult1 = ReactModule.useCallback(function(p2) --[[ Line: 99 ]]
+		-- upvalues: UseRefResult1 (copy), UseStateResult2_1 (copy), SetFullscreenContentFunction (copy), SetOnExitFullscreenOverlayFunction (copy), UseStateResult2 (copy), p1 (copy), IsValidIdentifierFunction (upval), IsYouTubeVideoFunction (upval), SendMediaGalleryFullscreenEventFunction (upval)
+		UseRefResult1.current = nil
+		UseStateResult2_1(p2)
 		
-		if setFullscreenContent then
-			setFullscreenContent(nil)
+		if SetFullscreenContentFunction then
+			SetFullscreenContentFunction(nil)
 		end
-		if setOnExitFullscreenOverlay then
-			setOnExitFullscreenOverlay(nil)
+		if SetOnExitFullscreenOverlayFunction then
+			SetOnExitFullscreenOverlayFunction(nil)
 		end
-		var3(false)
-		local var13 = p1.filteredItems[p2]
-		sendMediaGalleryFullscreenEvent(p1.eventIngest, p1.mediaGalleryAnalyticsContext, "mediaGalleryExitFullscreen", p1.placeId, p1.universeId, p2, var13 ~= nil and (isValidIdentifier(var13.videoId) or isYouTubeVideo(var13.assetTypeId)))
+		UseStateResult2(false)
+		local FilteredItem = p1.filteredItems[p2]
+		SendMediaGalleryFullscreenEventFunction(p1.eventIngest, p1.mediaGalleryAnalyticsContext, "mediaGalleryExitFullscreen", p1.placeId, p1.universeId, p2, FilteredItem ~= nil and (IsValidIdentifierFunction(FilteredItem.videoId) or IsYouTubeVideoFunction(FilteredItem.assetTypeId)))
 	end, {
-		setFullscreenContent, setOnExitFullscreenOverlay, p1.filteredItems,
-		p1.eventIngest, p1.placeId, p1.universeId, p1.mediaGalleryAnalyticsContext
+		SetFullscreenContentFunction, SetOnExitFullscreenOverlayFunction,
+		p1.filteredItems, p1.eventIngest, p1.placeId, p1.universeId,
+		p1.mediaGalleryAnalyticsContext
 	})
-	local var13 = reactModule.useCallback(function()
-		-- upvalues: var7 (ref), var6 (ref)
-		if var7.current then
-			var7.current(var6.current)
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 132 ]]
+		-- upvalues: UseRefResult1 (copy), UseRefResult (copy)
+		if UseRefResult1.current then
+			UseRefResult1.current(UseRefResult.current)
 		end
 	end, {})
 	
 	return {
-		isFullscreen = var2,
-		onFullscreenToggle = reactModule.useCallback(function(p2)
-			-- upvalues: p1 (ref), setFullscreenContent (ref), var7 (ref), var12 (ref), var5 (ref), var6 (ref), var3 (ref), setOnExitFullscreenOverlay (ref), var13 (ref), reactModule (copy), view (copy), ITEM_ASPECT_RATIO (copy), mediaGalleryCarousel (copy), var9 (ref), focusNavigableSurfaceWrapper (copy), focusNavigableSurfaceIdentifierEnum (copy), var8 (ref), sduiFocusTags (copy), isValidIdentifier (copy), isYouTubeVideo (copy), sendMediaGalleryFullscreenEvent (copy)
-			if p1.fullscreenEnabled == false or not setFullscreenContent then return end
-			var7.current = var12
-			var5(p2)
-			var6.current = p2
-			var3(true)
+		isFullscreen = UseStateResult,
+		onFullscreenToggle = ReactModule.useCallback(function(Current) --[[ Line: 139 ]]
+			-- upvalues: p1 (copy), SetFullscreenContentFunction (copy), UseRefResult1 (copy), UseResult1 (copy), UseStateResult2_1 (copy), UseRefResult (copy), UseStateResult2 (copy), SetOnExitFullscreenOverlayFunction (copy), UseResult2 (copy), ReactModule (upval), View (upval), ITEMASPECTRATIO (upval), MediaGalleryCarousel (upval), UseResult (copy), FocusNavigableSurfaceWrapper (upval), FocusNavigableSurfaceIdentifierEnum (upval), UseOnNavigateBackResult (copy), SduiFocusTags (upval), IsValidIdentifierFunction (upval), IsYouTubeVideoFunction (upval), SendMediaGalleryFullscreenEventFunction (upval)
+			if p1.fullscreenEnabled == false or not SetFullscreenContentFunction then return end
+			UseRefResult1.current = UseResult1
+			UseStateResult2_1(Current)
+			UseRefResult.current = Current
+			UseStateResult2(true)
 			
-			if setOnExitFullscreenOverlay then
-				setOnExitFullscreenOverlay(function()
-					-- upvalues: var13 (copy)
-					return var13
+			if SetOnExitFullscreenOverlayFunction then
+				SetOnExitFullscreenOverlayFunction(function() --[[ Line: 148 ]]
+					-- upvalues: UseResult2 (upval)
+					return UseResult2
 				end)
 			end
-			local var14, var15 = reactModule.createBinding(UDim2.fromOffset(0, 0))
-			setFullscreenContent(reactModule.createElement(focusNavigableSurfaceWrapper, {
+			local Binding, Binding2 = ReactModule.createBinding(UDim2.fromOffset(0, 0))
+			SetFullscreenContentFunction(ReactModule.createElement(FocusNavigableSurfaceWrapper, {
 				isIsolated = true,
-				surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.PopUp
+				surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.PopUp
 			}, {
-				NavigateBackFrame = reactModule.createElement("Frame", {
-					ref = var8,
+				NavigateBackFrame = ReactModule.createElement("Frame", {
+					ref = UseOnNavigateBackResult,
 					Size = UDim2.fromScale(1, 1),
 					BackgroundTransparency = 1,
-					[reactModule.Tag] = sduiFocusTags.SuppressBindings
+					[ReactModule.Tag] = SduiFocusTags.SuppressBindings
 				}, {
-					Content = reactModule.createElement(view, {
+					Content = ReactModule.createElement(View, {
 						tag = "size-full bg-surface-0",
-						onAbsoluteSizeChanged = function(value)
-							-- upvalues: ITEM_ASPECT_RATIO (copy), var15 (ref)
-							local x = value.AbsoluteSize.X
-							local y = value.AbsoluteSize.Y
-							local floored = math.floor(y * ITEM_ASPECT_RATIO)
+						onAbsoluteSizeChanged = function(Frame: Frame) --[[ Line: 157 ]]
+							-- upvalues: ITEMASPECTRATIO (upval), Binding2 (copy)
+							local X = Frame.AbsoluteSize.X
+							local Y = Frame.AbsoluteSize.Y
+							local Floored = math.floor(Y * ITEMASPECTRATIO)
 							
-							if x < floored then
-								floored = x
-								y = math.floor(floored / ITEM_ASPECT_RATIO)
+							if X < Floored then
+								Floored = X
+								Y = math.floor(Floored / ITEMASPECTRATIO)
 							end
-							var15(UDim2.fromOffset(floored, y))
+							Binding2(UDim2.fromOffset(Floored, Y))
 						end
 					}, {
-						MediaGallery = reactModule.createElement(mediaGalleryCarousel, {
+						MediaGallery = ReactModule.createElement(MediaGalleryCarousel, {
 							itemPadding = 0,
 							isFullscreen = true,
 							showGradient = false,
 							showPlayButton = true,
 							showProgressBar = true,
 							items = p1.filteredItems,
-							Size = var14,
+							Size = Binding,
 							AnchorPoint = Vector2.new(0.5, 0.5),
 							Position = UDim2.fromScale(0.5, 0.5),
-							startIndex = p2,
+							startIndex = Current,
 							onYouTubeVideoPlay = p1.onYouTubeVideoPlay,
-							onFullscreenToggle = var12,
-							onMediaChanged = var9,
+							onFullscreenToggle = UseResult1,
+							onMediaChanged = UseResult,
 							videoPlaybackCoordinator = p1.videoPlaybackCoordinator,
 							videoAnalytics = p1.videoAnalytics,
 							analyticsSourceId = p1.universeId,
@@ -146,14 +146,15 @@ return function(p1)
 					})
 				})
 			}))
-			local var16 = p1.filteredItems[p2]
-			sendMediaGalleryFullscreenEvent(p1.eventIngest, p1.mediaGalleryAnalyticsContext, "mediaGalleryEnterFullscreen", p1.placeId, p1.universeId, p2, var16 ~= nil and (isValidIdentifier(var16.videoId) or isYouTubeVideo(var16.assetTypeId)))
+			local FilteredItem = p1.filteredItems[Current]
+			SendMediaGalleryFullscreenEventFunction(p1.eventIngest, p1.mediaGalleryAnalyticsContext, "mediaGalleryEnterFullscreen", p1.placeId, p1.universeId, Current, FilteredItem ~= nil and (IsValidIdentifierFunction(FilteredItem.videoId) or IsYouTubeVideoFunction(FilteredItem.assetTypeId)))
 		end, {
-			p1.fullscreenEnabled, setFullscreenContent, setOnExitFullscreenOverlay, var13,
-			p1.filteredItems, p1.universeId, var12, p1.onYouTubeVideoPlay,
-			p1.videoPlaybackCoordinator, p1.videoAnalytics, var9, p1.cornerRadius,
-			p1.overlay, p1.eventIngest, p1.placeId, p1.mediaGalleryAnalyticsContext, var8
+			p1.fullscreenEnabled, SetFullscreenContentFunction,
+			SetOnExitFullscreenOverlayFunction, UseResult2, p1.filteredItems,
+			p1.universeId, UseResult1, p1.onYouTubeVideoPlay, p1.videoPlaybackCoordinator,
+			p1.videoAnalytics, UseResult, p1.cornerRadius, p1.overlay, p1.eventIngest,
+			p1.placeId, p1.mediaGalleryAnalyticsContext, UseOnNavigateBackResult
 		}),
-		previewStartIndex = math.clamp(var4, 1, math.max(1, #p1.filteredItems))
+		previewStartIndex = math.clamp(UseStateResult1, 1, (math.max(1, #p1.filteredItems)))
 	}
 end

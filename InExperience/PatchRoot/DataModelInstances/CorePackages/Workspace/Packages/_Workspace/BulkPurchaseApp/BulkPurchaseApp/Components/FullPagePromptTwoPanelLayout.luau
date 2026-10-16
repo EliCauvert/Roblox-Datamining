@@ -1,43 +1,43 @@
-﻿local bulkPurchaseApp = script:FindFirstAncestor("BulkPurchaseApp")
-local parent = bulkPurchaseApp.Parent
-local reactModule = require(parent.React)
-local useDesignTokens = require(parent.Style).useDesignTokens
-local useScreenSize = require(parent.EconomyCommonCoreScriptHooks).useScreenSize
-local constantsModule = require(bulkPurchaseApp.constants)
+﻿local BulkPurchaseApp = script:FindFirstAncestor("BulkPurchaseApp")
+local Parent = BulkPurchaseApp.Parent
+local ReactModule = require(Parent.React)
+local UseDesignTokensFunction = require(Parent.Style).useDesignTokens
+local UseScreenSizeFunction = require(Parent.EconomyCommonCoreScriptHooks).useScreenSize
+local ConstantsModule = require(BulkPurchaseApp.constants)
 
-return function(p1)
-	-- upvalues: reactModule (ref), useScreenSize (ref), useDesignTokens (ref), constantsModule (ref)
-	local var1, var2 = reactModule.useBinding(Vector2.new(0, 0))
-	local var3 = useScreenSize()
-	local var4 = useDesignTokens()
-	local size300 = var4.Size.Size_300
-	local var5 = var3.X < constantsModule.MOBILE_BREAKPOINT and var3.X < var3.Y
+return function(Frame) --[[ Line: 16 | Named "FullPagePromptTwoPanelLayout" ]]
+	-- upvalues: ReactModule (copy), UseScreenSizeFunction (copy), UseDesignTokensFunction (copy), ConstantsModule (copy)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(Vector2.new(0, 0))
+	local UseScreenSizeResult = UseScreenSizeFunction()
+	local UseDesignTokensResult = UseDesignTokensFunction()
+	local Size300 = UseDesignTokensResult.Size.Size_300
+	local IsXBelow: boolean = UseScreenSizeResult.X < ConstantsModule.MOBILE_BREAKPOINT and UseScreenSizeResult.X < UseScreenSizeResult.Y
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
-		Size = p1.size,
-		LayoutOrder = p1.LayoutOrder
+		Size = Frame.size,
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		StartSlot = reactModule.createElement("Frame", {
+		StartSlot = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
-			Size = var1:map(function(p2)
-				-- upvalues: var5 (ref), var4 (ref), size300 (ref)
-				return if var5 then UDim2.new(1, 0, 1, -(p2.Y + var4.Size.Size_600)) else UDim2.new(0.5, -size300, 1, 0)
+			Size = UseBindingResult:map(function(p1): UDim2 --[[ Line: 30 ]]
+				-- upvalues: IsXBelow (copy), UseDesignTokensResult (copy), Size300 (copy)
+				return if IsXBelow then UDim2.new(1, 0, 1, -(p1.Y + UseDesignTokensResult.Size.Size_600)) else UDim2.new(0.5, -Size300, 1, 0)
 			end)
-		}, p1.startSlot),
-		EndSlot = reactModule.createElement("Frame", {
-			Size = if var5 then UDim2.new(1, 0, 0, 0) else UDim2.new(0.5, -size300, 0, 0),
-			Position = if var5 then UDim2.new(0, 0, 1, 0) else UDim2.new(0.5, size300, 0, 0),
-			AnchorPoint = if var5 then Vector2.new(0, 1) else Vector2.new(0, 0),
+		}, Frame.startSlot),
+		EndSlot = ReactModule.createElement("Frame", {
+			Size = if IsXBelow then UDim2.new(1, 0, 0, 0) else UDim2.new(0.5, -Size300, 0, 0),
+			Position = if IsXBelow then UDim2.new(0, 0, 1, 0) else UDim2.new(0.5, Size300, 0, 0),
+			AnchorPoint = if IsXBelow then Vector2.new(0, 1) else Vector2.new(0, 0),
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			AutomaticSize = Enum.AutomaticSize.Y,
-			[reactModule.Change.AbsoluteSize] = function(p2)
-				-- upvalues: var2 (ref)
-				var2(p2.AbsoluteSize)
+			[ReactModule.Change.AbsoluteSize] = function(Frame) --[[ Line: 45 ]]
+				-- upvalues: UseBindingResult2 (copy)
+				UseBindingResult2(Frame.AbsoluteSize)
 			end
-		}, p1.endSlot)
+		}, Frame.endSlot)
 	})
 end

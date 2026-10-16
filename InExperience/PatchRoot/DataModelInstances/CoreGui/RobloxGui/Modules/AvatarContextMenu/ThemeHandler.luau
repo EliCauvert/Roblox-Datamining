@@ -1,5 +1,5 @@
-﻿local starterGuiService = game:GetService("StarterGui")
-local t = {
+﻿local StarterGui = game:GetService("StarterGui")
+local Theme = {
 	BackgroundImage = "rbxasset://textures/blackBkg_round.png",
 	BackgroundImageTransparency = 0,
 	BackgroundTransparency = 1,
@@ -33,54 +33,54 @@ local t = {
 	OnScreenPosition = UDim2.new(0.5, 0, 0.98, 0),
 	OffScreenPosition = UDim2.new(0.5, 0, 1, 300)
 }
-local t_1 = {}
-t_1.__index = t_1
+local Module = {}
+Module.__index = Module
 
-function t_1:UpdateTheme(p1)
-	-- upvalues: t (ref)
-	local t_1 = {}
+function Module:UpdateTheme(p1) --[[ Line: 56 ]]
+	-- upvalues: Theme (copy)
+	local Theme1 = {}
 	
-	for i, v in pairs(t) do
-		if typeof(p1[i]) == typeof(v) then
-			t_1[i] = p1[i]
+	for i, value in pairs(Theme) do
+		if typeof(p1[i]) == typeof(value) then
+			Theme1[i] = p1[i]
 		elseif p1[i] == nil then
-			t_1[i] = v
+			Theme1[i] = value
 		else
-			error(string.format("AvatarContextMenuTheme wrong type for key %s: %s. Expected type %s", i, typeof(p1[i]), typeof(v)), 2)
+			error(string.format("AvatarContextMenuTheme wrong type for key %s: %s. Expected type %s", i, typeof(p1[i]), (typeof(value))), 2)
 		end
 	end
-	self.Theme = t_1
+	self.Theme = Theme1
 end
 
-function t_1.RegisterCoreMethods(p2)
-	-- upvalues: t (ref), starterGuiService (ref)
-	starterGuiService:RegisterSetCore("AvatarContextMenuTheme", function(value)
-		-- upvalues: t (copy), p2 (ref)
-		if type(value) ~= "table" then
+function Module.RegisterCoreMethods(p2) --[[ Line: 75 ]]
+	-- upvalues: Theme (copy), StarterGui (copy)
+	StarterGui:RegisterSetCore("AvatarContextMenuTheme", function(List) --[[ Line: 76 | Named "setMenuTheme" ]]
+		-- upvalues: Theme (upval), p2 (copy)
+		if type(List) ~= "table" then
 			error("AvatarContextMenuTheme argument must be a table")
 			
 			return
 		end
-		for i in pairs(value) do
-			if t[i] == nil then
+		for i in pairs(List) do
+			if Theme[i] == nil then
 				error(string.format("AvatarContextMenuTheme got invalid key: %s", i))
 			end
 		end
-		p2:UpdateTheme(value)
+		p2:UpdateTheme(List)
 	end)
 end
 
-function t_1:GetTheme()
+function Module:GetTheme() --[[ Line: 93 ]]
 	return self.Theme
 end
 
-function t_1.new()
-	-- upvalues: t_1 (ref), t (ref)
-	local tbl = setmetatable({}, t_1)
-	tbl.Theme = t
-	tbl:RegisterCoreMethods()
+function Module.new() --[[ Line: 97 ]]
+	-- upvalues: Module (copy), Theme (copy)
+	local self = setmetatable({}, Module)
+	self.Theme = Theme
+	self:RegisterCoreMethods()
 	
-	return tbl
+	return self
 end
 
-return t_1.new()
+return Module.new()

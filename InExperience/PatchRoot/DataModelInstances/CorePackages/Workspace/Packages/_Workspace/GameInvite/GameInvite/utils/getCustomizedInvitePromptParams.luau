@@ -1,35 +1,34 @@
-﻿local gameInvite = script:FindFirstAncestor("GameInvite")
-local parent = gameInvite.Parent
-local getCustomizedInvitePromptUserIdModule = require(script.Parent.getCustomizedInvitePromptUserId)
-local _ = require(gameInvite.gameInviteModalType)
-local fFlagFixPromptGameInviteUIMissingDisplayName = require(parent.SharedFlags).FFlagFixPromptGameInviteUIMissingDisplayName
+﻿local GameInvite = script:FindFirstAncestor("GameInvite")
+local GetCustomizedInvitePromptUserIdModule = require(script.Parent.getCustomizedInvitePromptUserId)
+local _ = require(GameInvite.gameInviteModalType)
+local FFlagFixPromptGameInviteUIMissingDisplayName = require(GameInvite.Parent.SharedFlags).FFlagFixPromptGameInviteUIMissingDisplayName
 
-return function(p1, p2, p3)
-	-- upvalues: getCustomizedInvitePromptUserIdModule (ref), fFlagFixPromptGameInviteUIMissingDisplayName (ref)
-	local var1 = getCustomizedInvitePromptUserIdModule(p1)
-	local var2, var3 = p3(p2, var1)
+return function(ExperienceInviteOptions, Trigger, Callback) --[[ Line: 12 ]]
+	-- upvalues: GetCustomizedInvitePromptUserIdModule (copy), FFlagFixPromptGameInviteUIMissingDisplayName (copy)
+	local CustomizedInvitePromptUserIdModule = GetCustomizedInvitePromptUserIdModule(ExperienceInviteOptions)
+	local CallbackResult, CallbackResult2 = Callback(Trigger, CustomizedInvitePromptUserIdModule)
 	
-	if not var2 then
+	if not CallbackResult then
 		return nil
 	end
-	local t = { trigger = p2 }
+	local config = { trigger = Trigger }
 	
-	if fFlagFixPromptGameInviteUIMissingDisplayName and var1 then
-		t.inviteUserId = var1
+	if FFlagFixPromptGameInviteUIMissingDisplayName and CustomizedInvitePromptUserIdModule then
+		config.inviteUserId = CustomizedInvitePromptUserIdModule
 	end
-	if var3 and p1 then
-		if p1.InviteMessageId ~= "" then
-			t.inviteMessageId = p1.InviteMessageId
+	if CallbackResult2 and ExperienceInviteOptions then
+		if ExperienceInviteOptions.InviteMessageId ~= "" then
+			config.inviteMessageId = ExperienceInviteOptions.InviteMessageId
 		end
-		if var1 then
-			t.inviteUserId = var1
+		if CustomizedInvitePromptUserIdModule then
+			config.inviteUserId = CustomizedInvitePromptUserIdModule
 		end
-		if p1.PromptMessage ~= "" then
-			t.promptMessage = p1.PromptMessage
+		if ExperienceInviteOptions.PromptMessage ~= "" then
+			config.promptMessage = ExperienceInviteOptions.PromptMessage
 		end
-		if p1.LaunchData ~= "" then
-			t.launchData = p1.LaunchData
+		if ExperienceInviteOptions.LaunchData ~= "" then
+			config.launchData = ExperienceInviteOptions.LaunchData
 		end
 	end
-	return t
+	return config
 end

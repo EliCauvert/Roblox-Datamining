@@ -1,4 +1,4 @@
-﻿return table.freeze({
+﻿return (table.freeze({
 	ReadyOnAssignment = "ReadyOnAssignment",
 	ReadyOnCommit = "ReadyOnCommit"
-})
+}))

@@ -1,21 +1,21 @@
-﻿local collectionService = game:GetService("CollectionService")
-local itemIndex = require(script:FindFirstAncestor("ServerDrivenUi").Parent.Impressions).Constants.ItemIndex
+﻿local CollectionService = game:GetService("CollectionService")
+local ItemIndex = require(script:FindFirstAncestor("ServerDrivenUi").Parent.Impressions).Constants.ItemIndex
 
-return function(a)
-	-- upvalues: collectionService (ref), itemIndex (ref)
-	local t = {}
+return function(Tag) --[[ Line: 14 | Named "findCollectionItemInstances" ]]
+	-- upvalues: CollectionService (copy), ItemIndex (copy)
+	local Guis = {}
 	
-	if not a then
-		return t
+	if not Tag then
+		return Guis
 	end
-	for i, v in collectionService:GetTagged(a) do
-		if v:IsA("GuiObject") then
-			local var1 = v:GetAttribute(itemIndex)
+	for _, Gui in CollectionService:GetTagged(Tag) do
+		if Gui:IsA("GuiObject") then
+			local Attribute = Gui:GetAttribute(ItemIndex)
 			
-			if typeof(var1) == "number" then
-				t[var1] = v
+			if typeof(Attribute) == "number" then
+				Guis[Attribute] = Gui
 			end
 		end
 	end
-	return t
+	return Guis
 end

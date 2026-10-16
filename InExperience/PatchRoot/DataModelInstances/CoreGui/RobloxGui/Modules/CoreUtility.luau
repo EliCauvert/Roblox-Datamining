@@ -1,32 +1,32 @@
-﻿local t = {}
-local waitForChildOfClassTimeout = game:DefineFastInt("WaitForChildOfClassTimeout", 0)
+﻿local CoreUtilityModule = {}
+local WaitForChildOfClassTimeout: number = game:DefineFastInt("WaitForChildOfClassTimeout", 0)
 
-if waitForChildOfClassTimeout > 0 then
-	function t.waitForChildOfClass(p1, p2)
-		-- upvalues: waitForChildOfClassTimeout (ref)
-		local var1 = p1:FindFirstChildOfClass(p2)
-		local var2 = tick() + waitForChildOfClassTimeout
-		while not var1 and tick() < var2 do
+if WaitForChildOfClassTimeout > 0 then
+	function CoreUtilityModule.waitForChildOfClass(Object, ClassName) --[[ Line: 5 ]]
+		-- upvalues: WaitForChildOfClassTimeout (copy)
+		local ClassName1 = Object:FindFirstChildOfClass(ClassName)
+		local NewCurrentTime = tick() + WaitForChildOfClassTimeout
+		while not ClassName1 and tick() < NewCurrentTime do
 			task.wait()
-			var1 = p1:FindFirstChildOfClass(p2)
+			ClassName1 = Object:FindFirstChildOfClass(ClassName)
 		end
-		return var1
+		return ClassName1
 	end
 else
-	function t.waitForChildOfClass(p3, p4)
-		local var3 = p3:FindFirstChildOfClass(p4)
-		while not var3 or var3.ClassName ~= p4 do
-			var3 = p3.ChildAdded:Wait()
+	function CoreUtilityModule.waitForChildOfClass(Object, ClassName) --[[ Line: 15 ]]
+		local ClassName1 = Object:FindFirstChildOfClass(ClassName)
+		while not ClassName1 or ClassName1.ClassName ~= ClassName do
+			ClassName1 = Object.ChildAdded:Wait()
 		end
-		return var3
+		return ClassName1
 	end
 end
-function t.waitForChildWhichIsA(p3, p4)
-	local var3 = p3:FindFirstChildWhichIsA(p4)
-	while not var3 or not var3:IsA(p4) do
-		var3 = p3.ChildAdded:Wait()
+function CoreUtilityModule.waitForChildWhichIsA(Object, ClassName) --[[ Line: 24 ]]
+	local ClassName1 = Object:FindFirstChildWhichIsA(ClassName)
+	while not ClassName1 or not ClassName1:IsA(ClassName) do
+		ClassName1 = Object.ChildAdded:Wait()
 	end
-	return var3
+	return ClassName1
 end
 
-return t
+return CoreUtilityModule

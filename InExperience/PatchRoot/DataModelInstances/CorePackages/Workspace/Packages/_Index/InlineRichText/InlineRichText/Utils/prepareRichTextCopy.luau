@@ -1,47 +1,44 @@
-﻿local fFlagInlineRichTextSkipPlaintextEscape = require(script:FindFirstAncestor("InlineRichText").Parent.SharedFlags).FFlagInlineRichTextSkipPlaintextEscape
-local char = utf8.char(8220)
-local char_1 = utf8.char(8221)
-local char_2 = utf8.char(8217)
+﻿local FFlagInlineRichTextSkipPlaintextEscape = require(script:FindFirstAncestor("InlineRichText").Parent.SharedFlags).FFlagInlineRichTextSkipPlaintextEscape
+local Character = utf8.char(8220)
+local Character1 = utf8.char(8221)
+local Character2 = utf8.char(8217)
 
-local function decodeQuoteEntities(p1)
-	return p1:gsub("&amp;quot;", "\""):gsub("&amp;apos;", "'"):gsub("&quot;", "\""):gsub("&apos;", "'"):gsub("&#34;", "\""):gsub("&#39;", "'")
+local function decodeQuoteEntities(Text: string) --[[ Line: 24 ]]
+	return Text:gsub("&amp;quot;", "\""):gsub("&amp;apos;", "'"):gsub("&quot;", "\""):gsub("&apos;", "'"):gsub("&#34;", "\""):gsub("&#39;", "'")
 end
 
-local function toTypographicQuotesOutsideTags(p1)
-	-- upvalues: char (ref), char_1 (ref), char_2 (ref)
-	local var1
-	local t = {}
-	local var2 = false
-	local var3 = true
+local function toTypographicQuotesOutsideTags(Text: string): string --[[ Line: 31 ]]
+	-- upvalues: Character (copy), Character1 (copy), Character2 (copy)
+	local List = {}
+	local Flag = false
+	local v1 = true
 	
-	for i = 1, #p1 do
-		var1 = p1:sub(i, i)
+	for i = 1, #Text do
+		local Segment = Text:sub(i, i)
 		
-		if var1 == "<" then
-			var2 = true
-			table.insert(t, var1)
-			continue
-		end
-		if var1 == ">" then
-			var2 = false
-			table.insert(t, var1)
-		elseif var2 then
-			table.insert(t, var1)
-		elseif var1 == "\"" then
-			table.insert(t, if var3 then char else char_1)
-			var3 = not var3
-		elseif var1 == "'" then
-			table.insert(t, char_2)
+		if Segment == "<" then
+			Flag = true
+			table.insert(List, Segment)
+		elseif Segment == ">" then
+			Flag = false
+			table.insert(List, Segment)
+		elseif Flag then
+			table.insert(List, Segment)
+		elseif Segment == "\"" then
+			table.insert(List, if v1 then Character else Character1)
+			v1 = not v1
+		elseif Segment == "'" then
+			table.insert(List, Character2)
 		else
-			table.insert(t, var1)
+			table.insert(List, Segment)
 		end
 	end
-	return table.concat(t)
+	return table.concat(List)
 end
 
-return function(p2)
-	-- upvalues: decodeQuoteEntities (ref), fFlagInlineRichTextSkipPlaintextEscape (ref), toTypographicQuotesOutsideTags (ref)
-	local var4 = decodeQuoteEntities(p2)
+return function(p1) --[[ Line: 60 | Named "prepareRichTextCopy" ]]
+	-- upvalues: decodeQuoteEntities (copy), FFlagInlineRichTextSkipPlaintextEscape (copy), toTypographicQuotesOutsideTags (copy)
+	local DecodeQuoteEntitiesResult = decodeQuoteEntities(p1)
 	
-	return if fFlagInlineRichTextSkipPlaintextEscape then var4 else toTypographicQuotesOutsideTags(var4)
+	return if FFlagInlineRichTextSkipPlaintextEscape then DecodeQuoteEntitiesResult else toTypographicQuotesOutsideTags(DecodeQuoteEntitiesResult)
 end

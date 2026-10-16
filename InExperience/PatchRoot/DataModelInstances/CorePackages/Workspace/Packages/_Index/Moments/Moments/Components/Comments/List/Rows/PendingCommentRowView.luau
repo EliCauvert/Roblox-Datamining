@@ -1,62 +1,61 @@
-﻿local parent = script:FindFirstAncestor("Moments").Parent
-local foundationModule = require(parent.Foundation)
-local localizationModule = require(parent.Localization)
-local reactModule = require(parent.React)
-local commentRowViewModule = require(script.Parent.CommentRow.CommentRowView)
-local useLocalization = localizationModule.Hooks.useLocalization
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local inputSize = foundationModule.Enums.InputSize
-local t = {
+﻿local Parent = script:FindFirstAncestor("Moments").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local CommentRowViewModule = require(script.Parent.CommentRow.CommentRowView)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local InputSize = FoundationModule.Enums.InputSize
+local config = {
 	retry = "Feature.Moments.Action.Retry",
 	edit = "Feature.Moments.Action.Edit",
 	sending = "Feature.Moments.Label.CommentSending",
 	sendStatusUnknown = "Feature.Moments.Label.CommentSendStatusUnknown"
 }
 
-return function(p1)
-	-- upvalues: useLocalization (ref), t (ref), reactModule (ref), foundationModule (ref), inputSize (ref), buttonVariant (ref), commentRowViewModule (ref)
-	local var1 = useLocalization(t)
-	local var2 = if p1.status == "Sending" then 0.5 else 0
-	local var3, var4 = reactModule.useBinding(var2)
-	reactModule.useEffect(function()
-		-- upvalues: var4 (ref), var2 (ref)
-		var4(var2)
-	end, { var2 })
-	local var5 = if p1.status == "OutcomeUnknown" and p1.onEdit ~= nil then reactModule.createElement(foundationModule.View, { tag = "row align-y-center gap-small auto-xy" }, {
-		Retry = if p1.onRetry ~= nil then nil else reactModule.createElement(foundationModule.Button, {
+return function(Frame) --[[ Line: 34 | Named "PendingCommentRowView" ]]
+	-- upvalues: UseLocalizationFunction (copy), config (copy), ReactModule (copy), FoundationModule (copy), InputSize (copy), ButtonVariant (copy), CommentRowViewModule (copy)
+	local UseLocalizationResult = UseLocalizationFunction(config)
+	local v1: number = if Frame.status == "Sending" then 0.5 else 0
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(v1)
+	ReactModule.useEffect(function() --[[ Line: 38 ]]
+		-- upvalues: UseBindingResult2 (copy), v1 (copy)
+		UseBindingResult2(v1)
+	end, { v1 })
+	local Element = if Frame.status == "OutcomeUnknown" and Frame.onEdit ~= nil then ReactModule.createElement(FoundationModule.View, { tag = "row align-y-center gap-small auto-xy" }, {
+		Retry = if Frame.onRetry == nil then nil else ReactModule.createElement(FoundationModule.Button, {
 			LayoutOrder = 1,
-			text = var1.retry,
-			size = inputSize.XSmall,
-			variant = buttonVariant.Link,
-			onActivated = p1.onRetry,
-			testId = `moments-comment-retry-{p1.rowKey}`
+			text = UseLocalizationResult.retry,
+			size = InputSize.XSmall,
+			variant = ButtonVariant.Link,
+			onActivated = Frame.onRetry,
+			testId = `moments-comment-retry-{Frame.rowKey}`
 		}),
-		Edit = reactModule.createElement(foundationModule.Button, {
+		Edit = ReactModule.createElement(FoundationModule.Button, {
 			LayoutOrder = 2,
-			text = var1.edit,
-			size = inputSize.XSmall,
-			variant = buttonVariant.Link,
-			onActivated = p1.onEdit,
-			testId = `moments-comment-edit-{p1.rowKey}`
+			text = UseLocalizationResult.edit,
+			size = InputSize.XSmall,
+			variant = ButtonVariant.Link,
+			onActivated = Frame.onEdit,
+			testId = `moments-comment-edit-{Frame.rowKey}`
 		})
 	}) else nil
 	
-	return reactModule.createElement(commentRowViewModule, {
+	return ReactModule.createElement(CommentRowViewModule, {
 		avatarUserId = nil,
 		isAuthorLoading = false,
-		LayoutOrder = p1.LayoutOrder,
-		commentId = p1.rowKey,
-		authorLabel = p1.viewerUsername,
-		text = p1.text,
-		metadataLabel = if p1.status == "Sending" then var1.sending else var1.sendStatusUnknown,
-		avatarBackgroundStyle = p1.avatarBackgroundStyle,
-		GroupTransparency = var3,
-		headerAction = if var5 ~= nil then if p1.status == "OutcomeUnknown" and p1.onRetry ~= nil then reactModule.createElement(foundationModule.Button, {
-			text = var1.retry,
-			size = inputSize.XSmall,
-			variant = buttonVariant.Link,
-			onActivated = p1.onRetry,
-			testId = `moments-comment-retry-{p1.rowKey}`
-		}) else nil else var5
+		LayoutOrder = Frame.LayoutOrder,
+		commentId = Frame.rowKey,
+		authorLabel = Frame.viewerUsername,
+		text = Frame.text,
+		metadataLabel = if Frame.status == "Sending" then UseLocalizationResult.sending else UseLocalizationResult.sendStatusUnknown,
+		avatarBackgroundStyle = Frame.avatarBackgroundStyle,
+		GroupTransparency = UseBindingResult,
+		headerAction = if Element == nil then if Frame.status == "OutcomeUnknown" and Frame.onRetry ~= nil then ReactModule.createElement(FoundationModule.Button, {
+			text = UseLocalizationResult.retry,
+			size = InputSize.XSmall,
+			variant = ButtonVariant.Link,
+			onActivated = Frame.onRetry,
+			testId = `moments-comment-retry-{Frame.rowKey}`
+		}) else nil else Element
 	})
 end

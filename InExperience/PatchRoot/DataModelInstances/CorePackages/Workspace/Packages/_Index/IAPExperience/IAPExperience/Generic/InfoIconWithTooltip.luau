@@ -1,48 +1,47 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local parent = script.Parent.Parent.Parent
-local UIBloxModule = require(parent.UIBlox)
-local roactModule = require(parent.Roact)
-local withHoverTooltip = UIBloxModule.App.Dialog.TooltipV2.withHoverTooltip
-local tooltipOrientation = UIBloxModule.App.Dialog.Enum.TooltipOrientation
-local images = UIBloxModule.App.ImageSet.Images
-local interactable = UIBloxModule.Core.Control.Interactable
-local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
-local info = images["icons/actions/info"]
+﻿local CoreGui = game:GetService("CoreGui")
+local Parent = script.Parent.Parent.Parent
+local UIBloxModule = require(Parent.UIBlox)
+local RoactModule = require(Parent.Roact)
+local WithHoverTooltipFunction = UIBloxModule.App.Dialog.TooltipV2.withHoverTooltip
+local TooltipOrientation = UIBloxModule.App.Dialog.Enum.TooltipOrientation
+local Interactable = UIBloxModule.Core.Control.Interactable
+local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
+local IconsActionsInfo = UIBloxModule.App.ImageSet.Images["icons/actions/info"]
 
-function InfoIconWithTooltip(p1)
-	-- upvalues: withHoverTooltip (ref), tooltipOrientation (ref), coreGuiService (ref), roactModule (ref), imageSetLabel (ref), info (ref), interactable (ref)
-	local uDim2 = UDim2.new(0, 18, 0, 18)
+function InfoIconWithTooltip(p1) --[[ Line: 22 ]]
+	-- upvalues: WithHoverTooltipFunction (copy), TooltipOrientation (copy), CoreGui (copy), RoactModule (copy), ImageSetLabel (copy), IconsActionsInfo (copy), Interactable (copy)
+	local _UDim2 = UDim2.new(0, 18, 0, 18)
 	
-	return withHoverTooltip({ bodyText = p1.text }, {
+	return WithHoverTooltipFunction({ bodyText = p1.text }, {
 		DisplayOrder = 10,
 		delayTime = 0.2,
 		triggerPointName = "BonusBannerInfoIcon",
-		preferredOrientation = tooltipOrientation.Bottom,
-		guiTarget = coreGuiService
-	}, function(p2, p3)
-		-- upvalues: roactModule (copy), uDim2 (ref), p1 (ref), imageSetLabel (copy), info (copy), interactable (copy)
-		return roactModule.createElement("Frame", {
-			Size = uDim2,
+		preferredOrientation = TooltipOrientation.Bottom,
+		guiTarget = CoreGui
+	}, function(p2, OnStateChanged) --[[ Line: 32 ]]
+		-- upvalues: RoactModule (upval), _UDim2 (copy), p1 (copy), ImageSetLabel (upval), IconsActionsInfo (upval), Interactable (upval)
+		return RoactModule.createElement("Frame", {
+			Size = _UDim2,
 			BackgroundTransparency = 1,
 			LayoutOrder = p1.layoutOrder,
 			AnchorPoint = Vector2.new(1, 0),
-			[roactModule.Change.AbsolutePosition] = p2,
-			[roactModule.Change.AbsoluteSize] = p2
+			[RoactModule.Change.AbsolutePosition] = p2,
+			[RoactModule.Change.AbsoluteSize] = p2
 		}, {
-			TooltipIcon = roactModule.createElement(imageSetLabel, {
+			TooltipIcon = RoactModule.createElement(ImageSetLabel, {
 				BackgroundTransparency = 1,
 				ZIndex = 1,
-				Size = uDim2,
-				Image = info,
+				Size = _UDim2,
+				Image = IconsActionsInfo,
 				ImageColor3 = p1.color
 			}),
-			Hitbox = roactModule.createElement(interactable, {
+			Hitbox = RoactModule.createElement(Interactable, {
 				Size = UDim2.fromScale(1, 1),
 				BackgroundTransparency = 1,
 				AnchorPoint = Vector2.new(0.5, 0.5),
 				Position = UDim2.fromScale(0.5, 0.5),
-				onStateChanged = p3,
-				[roactModule.Event.Activated] = p1.eventActivated,
+				onStateChanged = OnStateChanged,
+				[RoactModule.Event.Activated] = p1.eventActivated,
 				ZIndex = 2
 			})
 		})

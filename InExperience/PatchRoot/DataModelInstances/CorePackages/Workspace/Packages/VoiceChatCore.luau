@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.VoiceChatCore.VoiceChatCore)
+﻿return (require(script.Parent._Workspace.VoiceChatCore.VoiceChatCore))

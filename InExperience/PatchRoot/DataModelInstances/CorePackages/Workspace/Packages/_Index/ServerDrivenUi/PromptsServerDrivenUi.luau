@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.PromptsServerDrivenUi.PromptsServerDrivenUi)
+﻿return (require(script.Parent.Parent.Parent._Index.PromptsServerDrivenUi.PromptsServerDrivenUi))

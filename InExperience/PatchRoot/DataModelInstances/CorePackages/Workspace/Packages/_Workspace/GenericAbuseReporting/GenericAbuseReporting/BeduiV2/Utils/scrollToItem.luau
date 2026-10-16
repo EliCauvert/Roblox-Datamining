@@ -1,32 +1,28 @@
-﻿local tweenService = game:GetService("TweenService")
+﻿local TweenService = game:GetService("TweenService")
 local _ = require(script:FindFirstAncestor("GenericAbuseReporting").Parent.React)
 
-return function(p1, p2)
-	-- upvalues: tweenService (ref)
+return function(p1, p2) --[[ Line: 13 | Named "scrollToItem" ]]
+	-- upvalues: TweenService (copy)
 	if not p1 or not p1.current or not p2 then return end
-	local scrollingFrame = p1.current:FindFirstChildWhichIsA("ScrollingFrame", true)
+	local ScrollingFrame = p1.current:FindFirstChildWhichIsA("ScrollingFrame", true)
 	
-	if not scrollingFrame then return end
+	if not ScrollingFrame then return end
 	task.wait()
-	local current = p2.current
+	local Current = p2.current
 	
-	if not current then return end
-	local y = current.AbsolutePosition.Y
-	local var1 = y + current.AbsoluteSize.Y
-	local y_1 = scrollingFrame.AbsolutePosition.Y
-	local var2 = y_1 + scrollingFrame.AbsoluteWindowSize.Y
+	if not Current then return end
+	local Y = Current.AbsolutePosition.Y
+	local NewY = Y + Current.AbsoluteSize.Y
+	local Y1 = ScrollingFrame.AbsolutePosition.Y
+	local NewY1 = Y1 + ScrollingFrame.AbsoluteWindowSize.Y
 	
-	if y_1 <= y and var1 <= var2 then return end
-	local var3 = y - scrollingFrame.AbsolutePosition.Y + scrollingFrame.CanvasPosition.Y
-	local var4 = var1 - scrollingFrame.AbsolutePosition.Y + scrollingFrame.CanvasPosition.Y
-	local y_2 = scrollingFrame.CanvasPosition.Y
-	
-	if y < y_1 then
-		y_2 = var3
-	elseif var2 < var1 then
-		y_2 = var4 - scrollingFrame.AbsoluteWindowSize.Y
+	if Y1 > Y or NewY > NewY1 then
+		local NewY2 = Y - ScrollingFrame.AbsolutePosition.Y + ScrollingFrame.CanvasPosition.Y
+		local NewNewY = NewY - ScrollingFrame.AbsolutePosition.Y + ScrollingFrame.CanvasPosition.Y
+		TweenService:Create(ScrollingFrame, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
+			CanvasPosition = Vector2.new(0, (math.max(0, (math.min(if Y < Y1 then NewY2 elseif NewY1 < NewY then NewNewY - ScrollingFrame.AbsoluteWindowSize.Y else ScrollingFrame.CanvasPosition.Y, ScrollingFrame.AbsoluteCanvasSize.Y - ScrollingFrame.AbsoluteWindowSize.Y)))))
+		}):Play()
+		
+		return
 	end
-	tweenService:Create(scrollingFrame, TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {
-		CanvasPosition = Vector2.new(0, math.max(0, math.min(y_2, scrollingFrame.AbsoluteCanvasSize.Y - scrollingFrame.AbsoluteWindowSize.Y)))
-	}):Play()
 end

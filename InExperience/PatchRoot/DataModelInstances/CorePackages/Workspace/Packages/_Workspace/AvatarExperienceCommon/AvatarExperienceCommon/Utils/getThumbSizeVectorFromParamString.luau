@@ -1,10 +1,13 @@
-﻿return function(p1)
-	local parts = string.split(p1, "&")
+﻿return function(Text: string): Vector2? --[[ Line: 9 | Named "getThumbSizeVectorFromParamString" ]]
+	local Parts = string.split(Text, "&")
 	
-	if #parts == 2 then
-		local match = string.match(parts[1], "%d[%d.]*")
-		local match_1 = string.match(parts[2], "%d[%d.]*")
+	if #Parts == 2 then
+		local Match: string? = string.match(Parts[1], "%d[%d.]*")
+		local Match1: string? = string.match(Parts[2], "%d[%d.]*")
 		
-		return if match and match_1 then Vector2.new(tonumber(match), tonumber(match_1)) else nil
+		if Match and Match1 then
+			return Vector2.new(tonumber(Match), (tonumber(Match1)))
+		end
 	end
+	return nil
 end

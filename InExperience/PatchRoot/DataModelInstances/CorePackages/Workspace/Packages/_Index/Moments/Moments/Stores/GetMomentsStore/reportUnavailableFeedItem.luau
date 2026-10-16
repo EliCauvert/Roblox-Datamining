@@ -1,14 +1,15 @@
-﻿local parent = script:FindFirstAncestor("Moments").Parent
-local analytics = require(parent.MomentsCommon).Analytics
-local momentStatus = require(parent.MomentsTypes).Enums.MomentStatus
+﻿local Parent = script:FindFirstAncestor("Moments").Parent
+local Analytics = require(Parent.MomentsCommon).Analytics
+local MomentStatus = require(Parent.MomentsTypes).Enums.MomentStatus
 
-return function(p1, p2)
-	-- upvalues: momentStatus (ref), analytics (ref)
-	if p1.status == momentStatus.Deleted then
-		analytics.reportMomentsFeedItemFiltered("deleted", p2)
+return function(p1, p2) --[[ Line: 24 | Named "reportUnavailableFeedItem" ]]
+	-- upvalues: MomentStatus (copy), Analytics (copy)
+	if p1.status == MomentStatus.Deleted then
+		Analytics.reportMomentsFeedItemFiltered("deleted", p2)
 		
 		return
-	elseif p1.isModerated == true then
-		analytics.reportMomentsFeedItemFiltered("moderated", p2)
+	end
+	if p1.isModerated == true then
+		Analytics.reportMomentsFeedItemFiltered("moderated", p2)
 	end
 end

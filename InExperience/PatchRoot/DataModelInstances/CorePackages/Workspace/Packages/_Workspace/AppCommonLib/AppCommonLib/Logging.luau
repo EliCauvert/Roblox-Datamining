@@ -1,51 +1,49 @@
 ﻿game:DefineFastFlag("LoggingRethrowUsingError", false)
 
-local function _()
+local function _() --[[ Line: 8 | Named "GetFFlagLoggingRethrowUsingError" ]]
 	return game:GetFastFlag("LoggingRethrowUsingError")
 end
 
-local var1 = true
+local Flag = true
 local t = {}
 
-local function createLogInfo()
-	local t = { warnings = {} }
-	setmetatable(t, {
-		__tostring = function(p1)
+local function createLogInfo() --[[ Line: 15 ]]
+	local config = { warnings = {} }
+	setmetatable(config, {
+		__tostring = function(p1): string --[[ Line: 21 ]]
 			return ("LogInfo\n\tWarnings (%d):\n\t\t%s"):format(#p1.warnings, table.concat(p1.warnings, "\n\t\t"))
 		end
 	})
 	
-	return t
+	return config
 end
 
 return {
-	capture = function(p1)
-		-- upvalues: createLogInfo (ref), var1 (write), t (ref)
-		local var2 = createLogInfo()
-		var1 = false
-		t[var2] = true
-		local ok, status = pcall(p1)
-		t[var2] = nil
-		var1 = var1
+	capture = function(p1) --[[ Line: 31 ]]
+		-- upvalues: createLogInfo (copy), Flag (ref), t (copy)
+		local LogInfo = createLogInfo()
+		local Flag1: boolean = Flag
+		Flag = false
+		t[LogInfo] = true
+		local Success, Result = pcall(p1)
+		t[LogInfo] = nil
+		Flag = Flag1
 		
-		if game:GetFastFlag("LoggingRethrowUsingError") then
-			if ok then
-				return var2
-			else
-				error(status)
-				
-				return var2
-			end
-		else
-			assert(ok, status)
+		if not game:GetFastFlag("LoggingRethrowUsingError") then
+			assert(Success, Result)
+		elseif not Success then
+			error(Result)
+			
+			return LogInfo
 		end
+		return LogInfo
 	end,
-	warn = function(p1)
-		-- upvalues: t (ref), var1 (write)
+	warn = function(p1) --[[ Line: 54 ]]
+		-- upvalues: t (copy), Flag (ref)
 		for i in pairs(t) do
 			table.insert(i.warnings, p1)
 		end
-		if var1 then
+		if Flag then
 			warn(p1)
 		end
 	end

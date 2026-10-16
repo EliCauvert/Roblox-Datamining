@@ -1,91 +1,94 @@
-﻿local httpService = game:GetService("HttpService")
-local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local dependenciesModule = require(parent.dependencies)
-local promise = dependenciesModule.Promise
-local urlBuilder = dependenciesModule.UrlBuilder
-local urlBase = dependenciesModule.UrlBase
-local fetch = dependenciesModule.Fetch
-local fetch_1 = fetch.fetch
-local response = fetch.Response
-local userSettingModule = require(parent.Enums.UserSetting)
-local var1 = urlBuilder.new({
+﻿local HttpService = game:GetService("HttpService")
+local Parent = script.Parent.Parent
+local DependenciesModule = require(Parent.dependencies)
+local Promise = DependenciesModule.Promise
+local Fetch = DependenciesModule.Fetch
+local FetchFunction = Fetch.fetch
+local Response = Fetch.Response
+local UserSettingModule = require(Parent.Enums.UserSetting)
+local NewResult = DependenciesModule.UrlBuilder.new({
 	path = "user-settings-api/v1/user-settings",
-	base = urlBase.APIS
+	base = DependenciesModule.UrlBase.APIS
 })
 
-return {
-	updateUserSetting = function(value, p1, p2)
-		-- upvalues: var1 (ref), promise (ref), fetch_1 (ref), httpService (ref), response (ref)
-		local var2 = var1()
+local function updateUserSettings(List, p1) --[[ Line: 72 ]]
+	-- upvalues: UserSettingModule (copy), Promise (copy), NewResult (copy), FetchFunction (copy), HttpService (copy), Response (copy)
+	for i, _ in List do
+		if not UserSettingModule[i] then
+			return Promise.reject(`Invalid setting name: {i}`)
+		end
+	end
+	local Result = NewResult()
+	
+	return Promise.new(function(Callback1: (any) -> (), Callback: (any) -> ()) --[[ Line: 80 ]]
+		-- upvalues: FetchFunction (upval), Result (copy), HttpService (upval), List (copy), p1 (copy), Response (upval)
+		local Success, Result1 = pcall(function() --[[ Line: 81 ]]
+			-- upvalues: FetchFunction (upval), Result (upval), HttpService (upval), List (upval), p1 (upval), Response (upval)
+			return FetchFunction(Result, {
+				method = "POST",
+				body = HttpService:JSONEncode(List),
+				headers = {
+					["Content-Type"] = "application/json",
+					Accept = "application/json",
+					["rbx-audit-data"] = p1
+				}
+			}):catch(function(_) --[[ Line: 91 ]]
+				-- upvalues: Response (upval)
+				return Response.error()
+			end):expect()
+		end)
 		
-		return promise.new(function(p3, p4)
-			-- upvalues: fetch_1 (copy), var2 (ref), httpService (copy), value (ref), p1 (ref), p2 (ref), response (copy)
-			local ok, status = pcall(function()
-				-- upvalues: fetch_1 (copy), var2 (copy), httpService (copy), value (copy), p1 (copy), p2 (copy), response (copy)
-				return fetch_1(var2, {
+		if not Success or not Result1 then
+			Callback(`Failed to make request: {Result1}`)
+			
+			return
+		end
+		if Result1.ok then
+			Callback1(Result1)
+			
+			return
+		else
+			Callback(`Got update user setting HTTP Response: {Result1.status} - {Result1.statusText}`)
+		end
+	end)
+end
+
+return {
+	updateUserSetting = function(p2, p3, p4) --[[ Line: 28 ]]
+		-- upvalues: NewResult (copy), Promise (copy), FetchFunction (copy), HttpService (copy), Response (copy)
+		local Result = NewResult()
+		
+		return Promise.new(function(Callback1: () -> (), Callback: (any) -> ()) --[[ Line: 30 ]]
+			-- upvalues: FetchFunction (upval), Result (copy), HttpService (upval), p2 (copy), p3 (copy), p4 (copy), Response (upval)
+			local Success, Result1 = pcall(function() --[[ Line: 31 ]]
+				-- upvalues: FetchFunction (upval), Result (upval), HttpService (upval), p2 (upval), p3 (upval), p4 (upval), Response (upval)
+				return FetchFunction(Result, {
 					method = "POST",
-					body = httpService:JSONEncode({ [value] = p1 }),
+					body = HttpService:JSONEncode({ [p2] = p3 }),
 					headers = {
 						["Content-Type"] = "application/json",
 						Accept = "application/json",
-						["rbx-audit-data"] = p2
+						["rbx-audit-data"] = p4
 					}
-				}):catch(function(_)
-					-- upvalues: response (copy)
-					return response.error()
+				}):catch(function(_) --[[ Line: 43 ]]
+					-- upvalues: Response (upval)
+					return Response.error()
 				end):expect()
 			end)
 			
-			if not ok then
-				p4("Failed to make request: " .. tostring(status))
-				
-				return
-			elseif status.ok then
-				p3()
+			if not Success then
+				Callback("Failed to make request: " .. tostring(Result1))
 				
 				return
 			end
-			p4(string.format("Got update user setting HTTP Response: %d - %s", status.status, status.statusText))
+			if Result1.ok then
+				Callback1()
+				
+				return
+			else
+				Callback((string.format("Got update user setting HTTP Response: %d - %s", Result1.status, Result1.statusText)))
+			end
 		end)
 	end,
-	updateUserSettings = if require(parent_1.SharedFlags).FFlagLuaAppSduiUpdateUserSettingsAction then function(value, p1)
-		-- upvalues: userSettingModule (ref), promise (ref), var1 (ref), fetch_1 (ref), httpService (ref), response (ref)
-		for i, v in value do
-			if not userSettingModule[i] then
-				return promise.reject(`Invalid setting name: {i}`)
-			end
-		end
-		local var2 = var1()
-		
-		return promise.new(function(p2, p3)
-			-- upvalues: fetch_1 (copy), var2 (ref), httpService (copy), value (ref), p1 (ref), response (copy)
-			local ok, status = pcall(function()
-				-- upvalues: fetch_1 (copy), var2 (copy), httpService (copy), value (copy), p1 (copy), response (copy)
-				return fetch_1(var2, {
-					method = "POST",
-					body = httpService:JSONEncode(value),
-					headers = {
-						["Content-Type"] = "application/json",
-						Accept = "application/json",
-						["rbx-audit-data"] = p1
-					}
-				}):catch(function(_)
-					-- upvalues: response (copy)
-					return response.error()
-				end):expect()
-			end)
-			
-			if not ok or not status then
-				p3(`Failed to make request: {status}`)
-				
-				return
-			elseif status.ok then
-				p2(status)
-				
-				return
-			end
-			p3(`Got update user setting HTTP Response: {status.status} - {status.statusText}`)
-		end)
-	end else nil
+	updateUserSettings = if require(Parent.Parent.SharedFlags).FFlagLuaAppSduiUpdateUserSettingsAction then updateUserSettings else nil
 }

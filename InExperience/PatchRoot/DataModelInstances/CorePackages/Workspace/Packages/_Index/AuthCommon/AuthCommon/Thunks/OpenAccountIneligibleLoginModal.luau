@@ -1,18 +1,18 @@
-﻿local parent = script:FindFirstAncestor("AuthCommon").Parent
-local centralOverlayType = require(parent.RobloxAppEnums).CentralOverlayType
-local setCentralOverlay = require(parent.CentralOverlay).Actions.SetCentralOverlay
+﻿local Parent = script:FindFirstAncestor("AuthCommon").Parent
+local CentralOverlayType = require(Parent.RobloxAppEnums).CentralOverlayType
+local SetCentralOverlayFunction = require(Parent.CentralOverlay).Actions.SetCentralOverlay
 
-return function(p1, p2, p3)
-	-- upvalues: setCentralOverlay (ref), centralOverlayType (ref)
-	return function(p4)
-		-- upvalues: p3 (ref), setCentralOverlay (copy), centralOverlayType (copy), p1 (ref), p2 (ref)
-		local p5 = p3 or {}
-		p4:dispatch(setCentralOverlay(centralOverlayType.AccountIneligibleLoginModal, {
-			onDismiss = p1,
-			portalToFoundationOverlay = p2,
-			titleKey = p5.titleKey,
-			descriptionKey = p5.descriptionKey,
-			actionKey = p5.actionKey
+return function(OnDismiss, PortalToFoundationOverlay, p1) --[[ Line: 13 ]]
+	-- upvalues: SetCentralOverlayFunction (copy), CentralOverlayType (copy)
+	return function(p2) --[[ Line: 14 ]]
+		-- upvalues: p1 (copy), SetCentralOverlayFunction (upval), CentralOverlayType (upval), OnDismiss (copy), PortalToFoundationOverlay (copy)
+		local P2 = p1 or {}
+		p2:dispatch(SetCentralOverlayFunction(CentralOverlayType.AccountIneligibleLoginModal, {
+			onDismiss = OnDismiss,
+			portalToFoundationOverlay = PortalToFoundationOverlay,
+			titleKey = P2.titleKey,
+			descriptionKey = P2.descriptionKey,
+			actionKey = P2.actionKey
 		}))
 	end
 end

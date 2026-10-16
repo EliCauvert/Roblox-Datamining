@@ -1,138 +1,139 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local roactModule = require(corePackagesService.Packages.Roact)
-local tModule = require(corePackagesService.Packages.t)
-local withStyle = require(corePackagesService.Packages.UIBlox).Style.withStyle
-local cameraUtility = require(corePackagesService.Packages.Thumbnailing).CameraUtility
-local mannequinUtility = require(corePackagesService.Packages.Thumbnailing).MannequinUtility
-local constantsModule = require(script.Parent.Parent.Parent.Parent.Constants)
-local makeupPreviewUtilsModule = require(script.Parent.Parent.Parent.Parent.MakeupPreviewUtils)
-local getFFlagSingleUploadMakeupSupportModule = require(script.Parent.Parent.Parent.Parent.Flags.GetFFlagSingleUploadMakeupSupport)
-local avatarPartViewport = roactModule.PureComponent:extend("AvatarPartViewport")
-avatarPartViewport.validateProps = tModule.strictInterface({
-	LayoutOrder = tModule.optional(tModule.number),
-	asset = tModule.union(tModule.table, tModule.instanceOf("MeshPart"), tModule.instanceOf("Accessory"), tModule.instanceIsA("Decal")),
-	assetType = tModule.optional(tModule.EnumItem),
-	viewportSize = tModule.optional(tModule.Vector2)
+﻿local CorePackages = game:GetService("CorePackages")
+local RoactModule = require(CorePackages.Packages.Roact)
+local TModule = require(CorePackages.Packages.t)
+local WithStyleFunction = require(CorePackages.Packages.UIBlox).Style.withStyle
+local CameraUtility = require(CorePackages.Packages.Thumbnailing).CameraUtility
+local MannequinUtility = require(CorePackages.Packages.Thumbnailing).MannequinUtility
+local ConstantsModule = require(script.Parent.Parent.Parent.Parent.Constants)
+local MakeupPreviewUtilsModule = require(script.Parent.Parent.Parent.Parent.MakeupPreviewUtils)
+local GetFFlagSingleUploadMakeupSupportModule = require(script.Parent.Parent.Parent.Parent.Flags.GetFFlagSingleUploadMakeupSupport)
+local AvatarPartViewport = RoactModule.PureComponent:extend("AvatarPartViewport")
+AvatarPartViewport.validateProps = TModule.strictInterface({
+	LayoutOrder = TModule.optional(TModule.number),
+	asset = TModule.union(TModule.table, TModule.instanceOf("MeshPart"), TModule.instanceOf("Accessory"), TModule.instanceIsA("Decal")),
+	assetType = TModule.optional(TModule.EnumItem),
+	viewportSize = TModule.optional(TModule.Vector2)
 })
 
-function avatarPartViewport.init(p1)
-	-- upvalues: roactModule (ref)
+function AvatarPartViewport.init(p1) --[[ Line: 38 ]]
+	-- upvalues: RoactModule (copy)
 	p1.camera = nil
-	p1.modelRef = roactModule.createRef()
-	local var1, var2 = roactModule.createBinding(nil)
-	p1.camera = var1
-	p1.updateCamera = var2
+	p1.modelRef = RoactModule.createRef()
+	p1.camera, p1.updateCamera = RoactModule.createBinding(nil)
 end
 
-function avatarPartViewport.createViewportCamera(p1)
-	local camera = Instance.new("Camera")
-	camera.Parent = p1.modelRef:getValue()
-	camera.CameraType = Enum.CameraType.Scriptable
-	camera.HeadLocked = true
-	camera.VRTiltAndRollEnabled = true
+function AvatarPartViewport.createViewportCamera(p1) --[[ Line: 44 ]]
+	local Camera = Instance.new("Camera")
+	Camera.Parent = p1.modelRef:getValue()
+	Camera.CameraType = Enum.CameraType.Scriptable
+	Camera.HeadLocked = true
+	Camera.VRTiltAndRollEnabled = true
 	
-	return camera
+	return Camera
 end
 
-function avatarPartViewport.addBodyPartMannequinToViewport(p1)
-	-- upvalues: mannequinUtility (ref), cameraUtility (ref)
-	local var1, var2, var3 = mannequinUtility.CreateBodyPartMannequin(p1.props.asset, false)
-	local var4, var5 = mannequinUtility.SetupBodyPartMannequin(var1, var2, var3, p1.props.asset)
-	var3.Parent = p1.modelRef:getValue()
-	local var6 = p1:createViewportCamera()
-	cameraUtility.SetupBodyPartCamera(var3, var4, var5, var6)
-	p1.updateCamera(var6)
+function AvatarPartViewport.addBodyPartMannequinToViewport(p1) --[[ Line: 55 ]]
+	-- upvalues: MannequinUtility (copy), CameraUtility (copy)
+	local BodyPartMannequin, BodyPartMannequin2, BodyPartMannequin3 = MannequinUtility.CreateBodyPartMannequin(p1.props.asset, false)
+	local SetupBodyPartMannequinResult, SetupBodyPartMannequinResult2 = MannequinUtility.SetupBodyPartMannequin(BodyPartMannequin, BodyPartMannequin2, BodyPartMannequin3, p1.props.asset)
+	BodyPartMannequin3.Parent = p1.modelRef:getValue()
+	local ViewportCamera = p1:createViewportCamera()
+	CameraUtility.SetupBodyPartCamera(BodyPartMannequin3, SetupBodyPartMannequinResult, SetupBodyPartMannequinResult2, ViewportCamera)
+	p1.updateCamera(ViewportCamera)
 end
 
-function avatarPartViewport.addHeadModelToViewport(p1)
-	-- upvalues: mannequinUtility (ref), cameraUtility (ref)
-	local var1 = mannequinUtility.CreateHeadModel(p1.props.asset)
-	var1.Parent = p1.modelRef:getValue()
-	local var2 = p1:createViewportCamera()
-	cameraUtility.SetupHeadCamera(var1, var2)
-	p1.updateCamera(var2)
+function AvatarPartViewport.addHeadModelToViewport(p1) --[[ Line: 67 ]]
+	-- upvalues: MannequinUtility (copy), CameraUtility (copy)
+	local HeadModel = MannequinUtility.CreateHeadModel(p1.props.asset)
+	HeadModel.Parent = p1.modelRef:getValue()
+	local ViewportCamera = p1:createViewportCamera()
+	CameraUtility.SetupHeadCamera(HeadModel, ViewportCamera)
+	p1.updateCamera(ViewportCamera)
 end
 
-function avatarPartViewport.addAccessoryToViewport(p1)
-	-- upvalues: cameraUtility (ref)
-	local model = Instance.new("Model")
-	p1.props.asset.Parent = model
-	model.Parent = p1.modelRef:getValue()
-	local var1 = p1:createViewportCamera()
-	cameraUtility.SetupAccessoryCamera(model, var1)
-	p1.updateCamera(var1)
+function AvatarPartViewport.addAccessoryToViewport(p1) --[[ Line: 76 ]]
+	-- upvalues: CameraUtility (copy)
+	local Model = Instance.new("Model")
+	p1.props.asset.Parent = Model
+	Model.Parent = p1.modelRef:getValue()
+	local ViewportCamera = p1:createViewportCamera()
+	CameraUtility.SetupAccessoryCamera(Model, ViewportCamera)
+	p1.updateCamera(ViewportCamera)
 end
 
-function avatarPartViewport.addMakeupDecalToViewport(p1)
-	-- upvalues: makeupPreviewUtilsModule (ref)
-	local var1 = makeupPreviewUtilsModule.createMakeupThumbnailPreview(p1.props.asset, p1.props.assetType)
+function AvatarPartViewport.addMakeupDecalToViewport(p1) --[[ Line: 86 ]]
+	-- upvalues: MakeupPreviewUtilsModule (copy)
+	local MakeupThumbnailPreview = MakeupPreviewUtilsModule.createMakeupThumbnailPreview(p1.props.asset, p1.props.assetType)
 	
-	if not var1 then return end
-	var1.Parent = p1.modelRef:getValue()
-	local var2 = p1:createViewportCamera()
+	if not MakeupThumbnailPreview then return end
+	MakeupThumbnailPreview.Parent = p1.modelRef:getValue()
+	local ViewportCamera = p1:createViewportCamera()
 	
-	if makeupPreviewUtilsModule.setupMakeupThumbnailCamera(var1, var2, p1.props.assetType) then
-		p1.updateCamera(var2)
+	if MakeupPreviewUtilsModule.setupMakeupThumbnailCamera(MakeupThumbnailPreview, ViewportCamera, p1.props.assetType) then
+		p1.updateCamera(ViewportCamera)
 	end
 end
 
-function avatarPartViewport.didMount(p1)
-	-- upvalues: getFFlagSingleUploadMakeupSupportModule (ref), makeupPreviewUtilsModule (ref)
-	local asset = p1.props.asset
+function AvatarPartViewport.didMount(p1) --[[ Line: 99 ]]
+	-- upvalues: GetFFlagSingleUploadMakeupSupportModule (copy), MakeupPreviewUtilsModule (copy)
+	local Asset = p1.props.asset
 	
-	if typeof(asset) ~= "Instance" then
+	if typeof(Asset) ~= "Instance" then
 		p1:addBodyPartMannequinToViewport()
 		
 		return
-	elseif asset:IsA("MeshPart") then
+	end
+	if Asset:IsA("MeshPart") then
 		p1:addHeadModelToViewport()
 		
 		return
-	elseif getFFlagSingleUploadMakeupSupportModule() and (asset:IsA("Decal") or p1.props.assetType and makeupPreviewUtilsModule.isMakeupAssetType(p1.props.assetType)) then
+	end
+	if GetFFlagSingleUploadMakeupSupportModule() and (Asset:IsA("Decal") or p1.props.assetType and MakeupPreviewUtilsModule.isMakeupAssetType(p1.props.assetType)) then
 		p1:addMakeupDecalToViewport()
 		
 		return
+	else
+		p1:addAccessoryToViewport()
 	end
-	p1:addAccessoryToViewport()
 end
 
-function avatarPartViewport.render(p1)
-	-- upvalues: withStyle (ref), constantsModule (ref), roactModule (ref)
-	return withStyle(function(p2)
-		-- upvalues: p1 (ref), constantsModule (copy), roactModule (copy)
-		local theme = p2.Theme
-		local var1 = if p1.props.viewportSize then p1.props.viewportSize else constantsModule.ItemCardWidthLandscape
+function AvatarPartViewport.render(p1) --[[ Line: 120 ]]
+	-- upvalues: WithStyleFunction (copy), ConstantsModule (copy), RoactModule (copy)
+	return WithStyleFunction(function(p2) --[[ Line: 121 ]]
+		-- upvalues: p1 (copy), ConstantsModule (upval), RoactModule (upval)
+		local Theme = p2.Theme
+		local ViewportSize = if p1.props.viewportSize then p1.props.viewportSize else ConstantsModule.ItemCardWidthLandscape
 		
-		return roactModule.createElement("Frame", {
+		return RoactModule.createElement("Frame", {
 			BorderSizePixel = 0,
 			ZIndex = 0,
 			LayoutOrder = p1.props.LayoutOrder,
-			BackgroundColor3 = theme.PlaceHolder.Color,
-			BackgroundTransparency = theme.PlaceHolder.Transparency,
-			Size = UDim2.fromOffset(var1, var1)
+			BackgroundColor3 = Theme.PlaceHolder.Color,
+			BackgroundTransparency = Theme.PlaceHolder.Transparency,
+			Size = UDim2.fromOffset(ViewportSize, ViewportSize)
 		}, {
-			UICorner = roactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 10) }),
-			AspectRatioConstraint = roactModule.createElement("UIAspectRatioConstraint", {
+			UICorner = RoactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 10) }),
+			AspectRatioConstraint = RoactModule.createElement("UIAspectRatioConstraint", {
 				AspectRatio = 1,
 				AspectType = Enum.AspectType.FitWithinMaxSize,
 				DominantAxis = Enum.DominantAxis.Width
 			}),
-			ViewportFrame = roactModule.createElement("ViewportFrame", {
+			ViewportFrame = RoactModule.createElement("ViewportFrame", {
 				ImageTransparency = 0,
 				BackgroundTransparency = 1,
 				Size = UDim2.fromScale(1, 1),
 				Position = UDim2.fromScale(0.5, 0.5),
 				AnchorPoint = Vector2.new(0.5, 0.5),
-				LightColor = constantsModule.ViewportLightColor,
-				Ambient = constantsModule.ViewportLightAmbient,
-				LightDirection = constantsModule.ViewportLightDirection,
+				LightColor = ConstantsModule.ViewportLightColor,
+				Ambient = ConstantsModule.ViewportLightAmbient,
+				LightDirection = ConstantsModule.ViewportLightDirection,
 				CurrentCamera = p1.camera
 			}, {
-				UICorner = roactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 10) }),
-				WorldModel = roactModule.createElement("WorldModel", { [roactModule.Ref] = p1.modelRef })
+				UICorner = RoactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 10) }),
+				WorldModel = RoactModule.createElement("WorldModel", { [RoactModule.Ref] = p1.modelRef })
 			})
 		})
 	end)
 end
 
-return avatarPartViewport
+return AvatarPartViewport

@@ -1,21 +1,21 @@
-﻿local parent = script:FindFirstAncestor("RobloxSubscriptionPurchaseApp").Parent
-local promiseModule = require(parent.Promise)
-local url = require(parent.Http).Url
-local httpRequestModule = require(script.Parent.HttpRequest)
-local robloxPlusAmpFeatureName = game:DefineFastString("RobloxPlusAmpFeatureName", "IsRobloxPlusSubscribed")
-local robloxPlusAmpNamespace = game:DefineFastString("RobloxPlusAmpNamespace", "subscriptions/PlusSubscription")
+﻿local Parent = script:FindFirstAncestor("RobloxSubscriptionPurchaseApp").Parent
+local PromiseModule = require(Parent.Promise)
+local Url = require(Parent.Http).Url
+local HttpRequestModule = require(script.Parent.HttpRequest)
+local RobloxPlusAmpFeatureName = game:DefineFastString("RobloxPlusAmpFeatureName", "IsRobloxPlusSubscribed")
+local RobloxPlusAmpNamespace = game:DefineFastString("RobloxPlusAmpNamespace", "subscriptions/PlusSubscription")
 
-return function()
-	-- upvalues: url (ref), robloxPlusAmpFeatureName (ref), robloxPlusAmpNamespace (ref), httpRequestModule (ref), promiseModule (ref)
-	return httpRequestModule.new():get(url.APIS_URL .. "access-management/v1/feature-access?" .. url:makeQueryString({
-		featureNames = robloxPlusAmpFeatureName,
-		namespace = robloxPlusAmpNamespace
-	})):andThen(function(p1)
-		local features = p1 and p1.features
+return function() --[[ Line: 12 | Named "getAmpFeatureAccess" ]]
+	-- upvalues: Url (copy), RobloxPlusAmpFeatureName (copy), RobloxPlusAmpNamespace (copy), HttpRequestModule (copy), PromiseModule (copy)
+	return HttpRequestModule.new():get(Url.APIS_URL .. "access-management/v1/feature-access?" .. Url:makeQueryString({
+		featureNames = RobloxPlusAmpFeatureName,
+		namespace = RobloxPlusAmpNamespace
+	})):andThen(function(Result) --[[ Line: 23 ]]
+		local Features = Result and Result.features
 		
-		return if type(features) == "table" and #features > 0 then features[1].access else nil
-	end):catch(function()
-		-- upvalues: promiseModule (copy)
-		return promiseModule.resolve(nil)
+		return if type(Features) == "table" and #Features > 0 then Features[1].access else nil
+	end):catch(function() --[[ Line: 30 ]]
+		-- upvalues: PromiseModule (upval)
+		return PromiseModule.resolve(nil)
 	end)
 end

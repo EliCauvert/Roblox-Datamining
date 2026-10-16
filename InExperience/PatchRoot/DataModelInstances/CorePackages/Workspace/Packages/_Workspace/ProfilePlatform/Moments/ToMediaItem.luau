@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent.Parent._Index.Moments.Moments.Components.Feed.Media.toMediaItem)
+﻿return (require(script.Parent.Parent.Parent.Parent._Index.Moments.Moments.Components.Feed.Media.toMediaItem))

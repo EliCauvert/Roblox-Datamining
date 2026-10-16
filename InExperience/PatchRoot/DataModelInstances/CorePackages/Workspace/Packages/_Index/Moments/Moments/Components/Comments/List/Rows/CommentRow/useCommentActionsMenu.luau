@@ -1,108 +1,105 @@
-﻿local parent = script:FindFirstAncestor("Moments").Parent
-local _ = require(parent.Foundation)
-local localizationModule = require(parent.Localization)
-local reactModule = require(parent.React)
+﻿local Parent = script:FindFirstAncestor("Moments").Parent
+local _ = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
 local _ = require(script.Parent.CommentRowView)
-local useLocalization = localizationModule.Hooks.useLocalization
-local t = {
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local config = {
 	report = "Feature.Moments.Action.Report",
 	block = "Feature.Moments.Action.Block",
 	delete = "Feature.Moments.Action.Delete"
 }
 
-return function(p1)
-	-- upvalues: useLocalization (ref), t (ref), reactModule (ref)
-	local var1 = useLocalization(t)
-	local report = var1.report
-	local block = var1.block
-	local delete = var1.delete
-	local var2, var3 = reactModule.useState(nil)
-	local var4, var5 = reactModule.useState(nil)
-	local commentId = p1.commentId
-	reactModule.useLayoutEffect(function()
-		-- upvalues: var3 (ref), var5 (ref)
-		var3(nil)
-		var5(nil)
-	end, { commentId })
-	local authorUserId = p1.authorUserId
-	local onReportComment = p1.onReportComment
-	local onBlockCommentAuthor = p1.onBlockCommentAuthor
-	local onDeleteComment = p1.onDeleteComment
-	local var6 = not p1.isAuthoredByViewer and (authorUserId ~= nil and onReportComment ~= nil)
-	local var7 = not p1.isAuthoredByViewer and (authorUserId ~= nil and onBlockCommentAuthor ~= nil)
-	local var8 = p1.isAuthoredByViewer and onDeleteComment ~= nil
-	local var9 = reactModule.useCallback(function()
-		-- upvalues: var3 (ref), commentId (ref)
-		var3(commentId)
-	end, { commentId })
-	local var10 = reactModule.useCallback(function()
-		-- upvalues: var3 (ref)
-		var3(nil)
+return function(p1) --[[ Line: 39 | Named "useCommentActionsMenu" ]]
+	-- upvalues: UseLocalizationFunction (copy), config (copy), ReactModule (copy)
+	local UseLocalizationResult = UseLocalizationFunction(config)
+	local Report = UseLocalizationResult.report
+	local Block = UseLocalizationResult.block
+	local Delete = UseLocalizationResult.delete
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
+	local CommentId = p1.commentId
+	ReactModule.useLayoutEffect(function() --[[ Line: 51 ]]
+		-- upvalues: UseStateResult2 (copy), UseStateResult2_1 (copy)
+		UseStateResult2(nil)
+		UseStateResult2_1(nil)
+	end, { CommentId })
+	local AuthorUserId = p1.authorUserId
+	local OnReportCommentFunction = p1.onReportComment
+	local OnBlockCommentAuthorFunction = p1.onBlockCommentAuthor
+	local OnDeleteCommentFunction = p1.onDeleteComment
+	local HasOnReportCommentFunction: boolean = not p1.isAuthoredByViewer and (AuthorUserId ~= nil and OnReportCommentFunction ~= nil)
+	local HasOnBlockCommentAuthorFunction: boolean = not p1.isAuthoredByViewer and (AuthorUserId ~= nil and OnBlockCommentAuthorFunction ~= nil)
+	local HasOnDeleteCommentFunction: boolean = p1.isAuthoredByViewer and OnDeleteCommentFunction ~= nil
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 74 ]]
+		-- upvalues: UseStateResult2 (copy), OnReportCommentFunction (copy), AuthorUserId (copy), CommentId (copy)
+		UseStateResult2(nil)
+		
+		if OnReportCommentFunction ~= nil and AuthorUserId ~= nil then
+			OnReportCommentFunction(CommentId, AuthorUserId)
+		end
+	end, { OnReportCommentFunction, CommentId, AuthorUserId })
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 80 ]]
+		-- upvalues: UseStateResult2 (copy), OnBlockCommentAuthorFunction (copy), AuthorUserId (copy), CommentId (copy)
+		UseStateResult2(nil)
+		
+		if OnBlockCommentAuthorFunction ~= nil and AuthorUserId ~= nil then
+			OnBlockCommentAuthorFunction(CommentId, AuthorUserId)
+		end
+	end, { OnBlockCommentAuthorFunction, CommentId, AuthorUserId })
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 86 ]]
+		-- upvalues: UseStateResult2 (copy), UseStateResult2_1 (copy), CommentId (copy)
+		UseStateResult2(nil)
+		UseStateResult2_1(CommentId)
+	end, { CommentId })
+	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 90 ]]
+		-- upvalues: UseStateResult2_1 (copy), OnDeleteCommentFunction (copy), UseStateResult1 (copy)
+		UseStateResult2_1(nil)
+		
+		if OnDeleteCommentFunction ~= nil and UseStateResult1 ~= nil then
+			OnDeleteCommentFunction(UseStateResult1)
+		end
+	end, { OnDeleteCommentFunction, UseStateResult1 })
+	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 96 ]]
+		-- upvalues: UseStateResult2_1 (copy)
+		UseStateResult2_1(nil)
 	end, {})
-	local var11 = reactModule.useCallback(function()
-		-- upvalues: var3 (ref), commentId (ref)
-		var3(function(p2)
-			-- upvalues: commentId (copy)
-			return if p2 == commentId then nil else commentId
-		end)
-	end, { commentId })
-	local var12 = reactModule.useCallback(function()
-		-- upvalues: var3 (ref), onReportComment (ref), authorUserId (ref), commentId (ref)
-		var3(nil)
-		
-		if onReportComment ~= nil and authorUserId ~= nil then
-			onReportComment(commentId, authorUserId)
-		end
-	end, { onReportComment, commentId, authorUserId })
-	local var13 = reactModule.useCallback(function()
-		-- upvalues: var3 (ref), onBlockCommentAuthor (ref), authorUserId (ref), commentId (ref)
-		var3(nil)
-		
-		if onBlockCommentAuthor ~= nil and authorUserId ~= nil then
-			onBlockCommentAuthor(commentId, authorUserId)
-		end
-	end, { onBlockCommentAuthor, commentId, authorUserId })
-	local var14 = reactModule.useCallback(function()
-		-- upvalues: var3 (ref), var5 (ref), commentId (ref)
-		var3(nil)
-		var5(commentId)
-	end, { commentId })
 	
 	return {
-		items = reactModule.useMemo(function()
-			-- upvalues: var6 (ref), report (ref), var12 (ref), var7 (ref), block (ref), var13 (ref), var8 (ref), delete (ref), var14 (ref)
-			local t = {}
+		items = ReactModule.useMemo(function() --[[ Line: 101 ]]
+			-- upvalues: HasOnReportCommentFunction (copy), Report (copy), UseResult (copy), HasOnBlockCommentAuthorFunction (copy), Block (copy), UseResult1 (copy), HasOnDeleteCommentFunction (copy), Delete (copy), UseResult2 (copy)
+			local List = {}
 			
-			if var6 then
-				table.insert(t, { id = "report", text = report, onActivated = var12 })
+			if HasOnReportCommentFunction then
+				table.insert(List, { id = "report", text = Report, onActivated = UseResult })
 			end
-			if var7 then
-				table.insert(t, { id = "block", text = block, onActivated = var13 })
+			if HasOnBlockCommentAuthorFunction then
+				table.insert(List, { id = "block", text = Block, onActivated = UseResult1 })
 			end
-			if var8 then
-				table.insert(t, { id = "delete", text = delete, onActivated = var14 })
+			if HasOnDeleteCommentFunction then
+				table.insert(List, { id = "delete", text = Delete, onActivated = UseResult2 })
 			end
-			return t
+			return List
 		end, {
-			var6, var7, var8, var12, var13, var14, report, block, delete
+			HasOnReportCommentFunction, HasOnBlockCommentAuthorFunction,
+			HasOnDeleteCommentFunction, UseResult, UseResult1, UseResult2, Report, Block,
+			Delete
 		}),
-		isOpen = var2 == commentId,
-		openMenu = var9,
-		closeMenu = var10,
-		toggleMenu = var11,
-		deleteConfirmation = if var8 and var4 == commentId then {
-			onConfirm = reactModule.useCallback(function()
-				-- upvalues: var5 (ref), onDeleteComment (ref), var4 (ref)
-				var5(nil)
-				
-				if onDeleteComment ~= nil and var4 ~= nil then
-					onDeleteComment(var4)
-				end
-			end, { onDeleteComment, var4 }),
-			onCancel = reactModule.useCallback(function()
-				-- upvalues: var5 (ref)
-				var5(nil)
-			end, {})
-		} else nil
+		isOpen = UseStateResult == CommentId,
+		openMenu = ReactModule.useCallback(function() --[[ Line: 63 ]]
+			-- upvalues: UseStateResult2 (copy), CommentId (copy)
+			UseStateResult2(CommentId)
+		end, { CommentId }),
+		closeMenu = ReactModule.useCallback(function() --[[ Line: 66 ]]
+			-- upvalues: UseStateResult2 (copy)
+			UseStateResult2(nil)
+		end, {}),
+		toggleMenu = ReactModule.useCallback(function() --[[ Line: 69 ]]
+			-- upvalues: UseStateResult2 (copy), CommentId (copy)
+			UseStateResult2(function(CommentId1) --[[ Line: 70 ]]
+				-- upvalues: CommentId (upval)
+				return if CommentId1 == CommentId then nil else CommentId
+			end)
+		end, { CommentId }),
+		deleteConfirmation = if HasOnDeleteCommentFunction and UseStateResult1 == CommentId then { onConfirm = UseResult3, onCancel = UseResult4 } else nil
 	}
 end

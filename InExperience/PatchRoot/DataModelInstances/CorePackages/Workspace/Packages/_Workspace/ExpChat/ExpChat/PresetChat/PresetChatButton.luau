@@ -1,58 +1,81 @@
-﻿local expChat = script:FindFirstAncestor("ExpChat")
-local parent = expChat.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local expChatSharedModule = require(parent.ExpChatShared)
-local signalsReactModule = require(parent.SignalsReact)
-local configModule = require(expChat.Config)
-local constantsModule = require(expChat.PresetChat.Constants)
-local getPresetChatStoreModule = require(expChat.Stores.GetPresetChatStore)
-local getChatTooltipStoreModule = require(expChat.Stores.GetChatTooltipStore)
-local localizationModule = require(expChat.Localization)
-local presetChatTooltipModule = require(script.Parent.PresetChatTooltip)
-local setIsPresetTrayOpenModule = require(script.Parent.Thunks.setIsPresetTrayOpen)
-local fFlagExpChatUseUnifiedTooltipStore = expChatSharedModule.Flags.FFlagExpChatUseUnifiedTooltipStore
+﻿local ExpChat = script:FindFirstAncestor("ExpChat")
+local Parent = ExpChat.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local ExpChatSharedModule = require(Parent.ExpChatShared)
+local SignalsReactModule = require(Parent.SignalsReact)
+local ConfigModule = require(ExpChat.Config)
+local ConstantsModule = require(ExpChat.PresetChat.Constants)
+local GetPresetChatStoreModule = require(ExpChat.Stores.GetPresetChatStore)
+local GetChatTooltipStoreModule = require(ExpChat.Stores.GetChatTooltipStore)
+local LocalizationModule = require(ExpChat.Localization)
+local PresetChatTooltipModule = require(script.Parent.PresetChatTooltip)
+local HasPresetEmojiModule = require(script.Parent.hasPresetEmoji)
+local SetIsPresetTrayOpenModule = require(script.Parent.Thunks.setIsPresetTrayOpen)
+local FFlagExpChatUseUnifiedTooltipStore = ExpChatSharedModule.Flags.FFlagExpChatUseUnifiedTooltipStore
+local FFlagExpChatCenterMobilePresetButtonModule = require(ExpChat.Flags.FFlagExpChatCenterMobilePresetButton)
+local FFlagExpChatPresetChatCircleFaceEmojiEntryPointRolloutEnabledModule = require(ExpChat.Flags.FFlagExpChatPresetChatCircleFaceEmojiEntryPointRolloutEnabled)
+local ExpChatPresetChatEmojiTabExperimentation = require(Parent.SocialExperiments).ExpChatPresetChatEmojiTabExperimentation
 
-return reactModule.memo(function(value)
-	-- upvalues: reactModule (ref), localizationModule (ref), getPresetChatStoreModule (ref), signalsReactModule (ref), fFlagExpChatUseUnifiedTooltipStore (ref), getChatTooltipStoreModule (ref), setIsPresetTrayOpenModule (ref), expChatSharedModule (ref), constantsModule (ref), foundationModule (ref), configModule (ref), presetChatTooltipModule (ref)
-	local var1 = reactModule.useRef(false)
-	local var2 = localizationModule.useLocalization({
+return ReactModule.memo(function(p1) --[[ Line: 31 | Named "PresetChatButton" ]]
+	-- upvalues: ReactModule (copy), LocalizationModule (copy), GetPresetChatStoreModule (copy), SignalsReactModule (copy), FFlagExpChatPresetChatCircleFaceEmojiEntryPointRolloutEnabledModule (copy), HasPresetEmojiModule (copy), ExpChatPresetChatEmojiTabExperimentation (copy), FFlagExpChatUseUnifiedTooltipStore (copy), GetChatTooltipStoreModule (copy), SetIsPresetTrayOpenModule (copy), ExpChatSharedModule (copy), ConstantsModule (copy), FoundationModule (copy), ConfigModule (copy), PresetChatTooltipModule (copy), FFlagExpChatCenterMobilePresetButtonModule (copy)
+	local UseRefResult = ReactModule.useRef(false)
+	local UseLocalizationResult = LocalizationModule.useLocalization({
 		sendQuickWords = "CoreScripts.TextChat.Action.SendQuickWords"
 	})
-	local var3 = getPresetChatStoreModule(false)
-	local var4 = reactModule.useCallback(function()
-		-- upvalues: fFlagExpChatUseUnifiedTooltipStore (copy), getChatTooltipStoreModule (copy), var1 (ref), setIsPresetTrayOpenModule (copy), var3 (ref), expChatSharedModule (copy), constantsModule (copy)
-		if fFlagExpChatUseUnifiedTooltipStore then
-			local var5 = getChatTooltipStoreModule(false)
-			
-			if not var1.current then
-				var1.current = true
-				var5.reportImpression("PresetChatTooltip")
-			end
-			var5.setIsDismissed("PresetChatTooltip", true)
-		end
-		setIsPresetTrayOpenModule(var3, not var3.getIsTrayOpen(false))
-		expChatSharedModule.Analytics:TelemetryLogEvent(expChatSharedModule.Analytics.ExpChatPresetActionConfig, {
-			event_type = constantsModule.Analytics.EventTypes.Click,
-			component = constantsModule.Analytics.Components.PresetEntryPointButton
-		}, expChatSharedModule.Analytics.DefaultStandardizedFields)
-	end, { var3 })
+	local PresetChatStoreModule = GetPresetChatStoreModule(false)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(PresetChatStoreModule.getIsTrayOpen)
+	local IsEmojiIconEnabled = false
 	
-	return reactModule.createElement(presetChatTooltipModule, { targetTextChannel = value.targetTextChannel }, if value.fullWidth then reactModule.createElement(foundationModule.Button, {
-		fillBehavior = foundationModule.Enums.FillBehavior.Fit,
-		onActivated = var4,
-		text = var2.sendQuickWords,
-		variant = foundationModule.Enums.ButtonVariant.Standard,
+	if FFlagExpChatPresetChatCircleFaceEmojiEntryPointRolloutEnabledModule then
+		local UseSignalStateResult1 = SignalsReactModule.useSignalState(PresetChatStoreModule.getCategoryGroups)
+		IsEmojiIconEnabled = ReactModule.useMemo(function() --[[ Line: 44 ]]
+			-- upvalues: HasPresetEmojiModule (upval), UseSignalStateResult1 (copy)
+			return HasPresetEmojiModule(UseSignalStateResult1)
+		end, { UseSignalStateResult1 })
+	elseif ExpChatPresetChatEmojiTabExperimentation.isExperimentEnabled then
+		IsEmojiIconEnabled = ExpChatPresetChatEmojiTabExperimentation.getIsEmojiIconEnabled()
+	end
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 51 ]]
+		-- upvalues: FFlagExpChatUseUnifiedTooltipStore (upval), GetChatTooltipStoreModule (upval), UseRefResult (copy), SetIsPresetTrayOpenModule (upval), PresetChatStoreModule (copy), ExpChatSharedModule (upval), ConstantsModule (upval)
+		if FFlagExpChatUseUnifiedTooltipStore then
+			local ChatTooltipStoreModule = GetChatTooltipStoreModule(false)
+			
+			if not UseRefResult.current then
+				UseRefResult.current = true
+				ChatTooltipStoreModule.reportImpression("PresetChatTooltip")
+			end
+			ChatTooltipStoreModule.setIsDismissed("PresetChatTooltip", true)
+		end
+		SetIsPresetTrayOpenModule(PresetChatStoreModule, not PresetChatStoreModule.getIsTrayOpen(false))
+		ExpChatSharedModule.Analytics:TelemetryLogEvent(ExpChatSharedModule.Analytics.ExpChatPresetActionConfig, {
+			event_type = ConstantsModule.Analytics.EventTypes.Click,
+			component = ConstantsModule.Analytics.Components.PresetEntryPointButton
+		}, ExpChatSharedModule.Analytics.DefaultStandardizedFields)
+	end, { PresetChatStoreModule })
+	local Element = ReactModule.createElement(PresetChatTooltipModule, { targetTextChannel = p1.targetTextChannel }, if p1.fullWidth then ReactModule.createElement(FoundationModule.Button, {
+		fillBehavior = FoundationModule.Enums.FillBehavior.Fit,
+		onActivated = UseResult,
+		text = UseLocalizationResult.sendQuickWords,
+		variant = FoundationModule.Enums.ButtonVariant.Standard,
 		width = UDim.new(1, 0)
-	}) else reactModule.createElement(foundationModule.IconButton, {
+	}) else ReactModule.createElement(FoundationModule.IconButton, {
 		isDisabled = false,
 		icon = {
-			name = configModule.PresetChat.Icon,
-			variant = if signalsReactModule.useSignalState(var3.getIsTrayOpen) then configModule.PresetChat.IconVariantActive else configModule.PresetChat.IconVariant
+			name = if IsEmojiIconEnabled then ConfigModule.PresetChat.EmojiIcon else ConfigModule.PresetChat.Icon,
+			variant = if UseSignalStateResult then ConfigModule.PresetChat.IconVariantActive else ConfigModule.PresetChat.IconVariant
 		},
-		variant = foundationModule.Enums.ButtonVariant.Standard,
-		size = if value.size ~= nil then foundationModule.Enums.InputSize.Small else value.size,
-		isCircular = value.isCircular ~= nil or value.isCircular,
-		onActivated = var4
+		variant = FoundationModule.Enums.ButtonVariant.Standard,
+		size = if p1.size == nil then FoundationModule.Enums.InputSize.Small else p1.size,
+		isCircular = p1.isCircular == nil or p1.isCircular,
+		onActivated = UseResult
 	}))
+	
+	return if FFlagExpChatCenterMobilePresetButtonModule and p1.addTopPadding ~= nil then ReactModule.createElement(FoundationModule.View, {
+		tag = "auto-xy",
+		padding = {
+			top = UDim.new(0, if p1.addTopPadding then 8 else 0),
+			bottom = UDim.new(0, 1)
+		}
+	}, Element) else Element
 end)

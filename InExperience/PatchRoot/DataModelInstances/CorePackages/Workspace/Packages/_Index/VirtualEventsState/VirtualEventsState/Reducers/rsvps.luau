@@ -1,1 +1,1 @@
-﻿return require(script.Parent["rsvps.impl"])(require(script:FindFirstAncestor("VirtualEventsState").network).NetworkingVirtualEvents, game:GetService("Players"))
+﻿return require(script.Parent["rsvps.impl"])(require(script:FindFirstAncestor("VirtualEventsState").network).NetworkingVirtualEvents, (game:GetService("Players")))

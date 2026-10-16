@@ -1,47 +1,47 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local experienceStateCaptureService = game:GetService("ExperienceStateCaptureService")
-local userInputService = game:GetService("UserInputService")
-local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local reactRobloxModule = require(parent.ReactRoblox)
-local buildExperienceCompositionStyleSheetModule = require(buildExperience.Components.BuildExperienceCompositionStyleSheet)
-local instanceSelectionShellModule = require(script.Parent.InstanceSelectionShell)
+﻿local CoreGui = game:GetService("CoreGui")
+local ExperienceStateCaptureService = game:GetService("ExperienceStateCaptureService")
+local UserInputService = game:GetService("UserInputService")
+local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local ReactRobloxModule = require(Parent.ReactRoblox)
+local BuildExperienceCompositionStyleSheetModule = require(BuildExperience.Components.BuildExperienceCompositionStyleSheet)
+local InstanceSelectionShellModule = require(script.Parent.InstanceSelectionShell)
 
-local function isTouchInput()
-	-- upvalues: userInputService (ref)
-	return userInputService.PreferredInput == Enum.PreferredInput.Touch
+local function isTouchInput(): boolean --[[ Line: 15 ]]
+	-- upvalues: UserInputService (copy)
+	return UserInputService.PreferredInput == Enum.PreferredInput.Touch
 end
 
-return function()
-	-- upvalues: experienceStateCaptureService (ref), coreGuiService (ref), reactRobloxModule (ref), reactModule (ref), foundationModule (ref), buildExperienceCompositionStyleSheetModule (ref), instanceSelectionShellModule (ref), isTouchInput (ref)
-	local experienceStateCaptureSelectionMode = Enum.ExperienceStateCaptureSelectionMode
+return function() --[[ Line: 19 | Named "mountInstanceSelection" ]]
+	-- upvalues: ExperienceStateCaptureService (copy), CoreGui (copy), ReactRobloxModule (copy), ReactModule (copy), FoundationModule (copy), BuildExperienceCompositionStyleSheetModule (copy), InstanceSelectionShellModule (copy), isTouchInput (copy)
+	local ExperienceStateCaptureSelectionMode = Enum.ExperienceStateCaptureSelectionMode
 	
-	if experienceStateCaptureSelectionMode ~= nil then
-		experienceStateCaptureService.SelectionMode = experienceStateCaptureSelectionMode.SafetyHighlightMode
+	if ExperienceStateCaptureSelectionMode ~= nil then
+		ExperienceStateCaptureService.SelectionMode = ExperienceStateCaptureSelectionMode.SafetyHighlightMode
 	end
 	if game:GetEngineFeature("ExperienceStateCaptureHiddenSelection") then
-		experienceStateCaptureService.HiddenSelectionEnabled = true
+		ExperienceStateCaptureService.HiddenSelectionEnabled = true
 	end
-	local buildExperienceInstanceSelection = Instance.new("ScreenGui")
-	buildExperienceInstanceSelection.Name = "BuildExperienceInstanceSelection"
-	buildExperienceInstanceSelection.ClipToDeviceSafeArea = false
-	buildExperienceInstanceSelection.DisplayOrder = 9
-	buildExperienceInstanceSelection.IgnoreGuiInset = true
-	buildExperienceInstanceSelection.ResetOnSpawn = false
-	buildExperienceInstanceSelection.SafeAreaCompatibility = Enum.SafeAreaCompatibility.None
-	buildExperienceInstanceSelection.ScreenInsets = Enum.ScreenInsets.None
-	buildExperienceInstanceSelection.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-	buildExperienceInstanceSelection.Parent = coreGuiService
-	local var1 = reactRobloxModule.createRoot(buildExperienceInstanceSelection)
-	var1:render(reactModule.createElement(foundationModule.FoundationProvider, { colorMode = foundationModule.Enums.ColorMode.Dark }, {
-		CompositionStyleSheet = reactModule.createElement(buildExperienceCompositionStyleSheetModule),
-		Shell = reactModule.createElement(instanceSelectionShellModule, {
-			itemSelected = experienceStateCaptureService.ItemSelectedInCaptureMode,
+	local BuildExperienceInstanceSelection = Instance.new("ScreenGui")
+	BuildExperienceInstanceSelection.Name = "BuildExperienceInstanceSelection"
+	BuildExperienceInstanceSelection.ClipToDeviceSafeArea = false
+	BuildExperienceInstanceSelection.DisplayOrder = 9
+	BuildExperienceInstanceSelection.IgnoreGuiInset = true
+	BuildExperienceInstanceSelection.ResetOnSpawn = false
+	BuildExperienceInstanceSelection.SafeAreaCompatibility = Enum.SafeAreaCompatibility.None
+	BuildExperienceInstanceSelection.ScreenInsets = Enum.ScreenInsets.None
+	BuildExperienceInstanceSelection.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+	BuildExperienceInstanceSelection.Parent = CoreGui
+	local Root = ReactRobloxModule.createRoot(BuildExperienceInstanceSelection)
+	Root:render(ReactModule.createElement(FoundationModule.FoundationProvider, { colorMode = FoundationModule.Enums.ColorMode.Dark }, {
+		CompositionStyleSheet = ReactModule.createElement(BuildExperienceCompositionStyleSheetModule),
+		Shell = ReactModule.createElement(InstanceSelectionShellModule, {
+			itemSelected = ExperienceStateCaptureService.ItemSelectedInCaptureMode,
 			isTouchInput = isTouchInput
 		})
 	}))
 	
-	return var1
+	return Root
 end

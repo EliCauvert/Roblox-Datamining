@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent.Parent._Workspace.AppChat.AppChat.Contexts.TelemetryState.ChatLandingTelemetryState)
+﻿return (require(script.Parent.Parent.Parent.Parent._Workspace.AppChat.AppChat.Contexts.TelemetryState.ChatLandingTelemetryState))

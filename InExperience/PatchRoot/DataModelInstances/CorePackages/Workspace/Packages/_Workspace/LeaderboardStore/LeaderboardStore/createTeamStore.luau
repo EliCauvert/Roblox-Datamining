@@ -1,165 +1,176 @@
-﻿local parent = script.Parent.Parent
-local signalsModule = require(parent.Signals)
-local createSignalMap = require(parent.CoreScriptsRoactCommon).Utilities.createSignalMap
+﻿local Parent = script.Parent.Parent
+local SignalsModule = require(Parent.Signals)
+local CreateSignalMapFunction = require(Parent.CoreScriptsRoactCommon).Utilities.createSignalMap
 local _ = require(script.Parent.LeaderboardStoreTypes)
 
-return function(p1, _)
-	-- upvalues: createSignalMap (ref), signalsModule (ref)
-	local var1, var2, var3
+return function(p1, _) --[[ Line: 40 | Named "createTeamStore" ]]
+	-- upvalues: CreateSignalMapFunction (copy), SignalsModule (copy)
+	local Connections = {}
+	local Signal2 = nil
+	local Signal2_1 = nil
+	local Signal2_2 = nil
+	local SignalMap = CreateSignalMapFunction()
+	local SignalMap1 = CreateSignalMapFunction()
 	local t = {}
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local var4 = createSignalMap()
-	local var5 = createSignalMap()
-	local t_1 = {}
+	local Signal1 = nil
+	local Signal = nil
+	local Neutral = nil
 	
 	if p1 == "Neutral" then
-		local neutral, neutral_1 = signalsModule.createSignal("Neutral")
-		var1 = neutral
-		local _ = neutral_1
-		local var6, var7 = signalsModule.createSignal(BrickColor.White().Color)
-		var2 = var6
-		local _ = var7
-		local var8, var9 = signalsModule.createSignal(1000)
-		var3 = var8
-		local _ = var9
+		local _
+		Neutral, _ = SignalsModule.createSignal("Neutral")
+		local _
+		Signal, _ = SignalsModule.createSignal(BrickColor.White().Color)
+		local _
+		Signal1, _ = SignalsModule.createSignal(1000)
 	else
-		local var10, var11 = signalsModule.createSignal(p1.Name)
-		var1 = var10
-		local var12 = var11
-		local var13, var14 = signalsModule.createSignal(p1.TeamColor.Color)
-		var2 = var13
-		local var15 = var14
-		local var16, var17 = signalsModule.createSignal(p1.ChildOrder)
-		var3 = var16
-		local var18 = var17
-		t.teamPropChanged = p1.Changed:Connect(function(p2)
-			-- upvalues: var12 (write), p1 (ref), var15 (write), var18 (write)
+		Neutral, Signal2 = SignalsModule.createSignal(p1.Name)
+		Signal, Signal2_1 = SignalsModule.createSignal(p1.TeamColor.Color)
+		Signal1, Signal2_2 = SignalsModule.createSignal(p1.ChildOrder)
+		Connections.teamPropChanged = p1.Changed:Connect(function(p2) --[[ Line: 72 ]]
+			-- upvalues: Signal2 (ref), p1 (copy), Signal2_1 (ref), Signal2_2 (ref)
 			if p2 == "Name" then
-				var12(p1.Name)
+				Signal2(p1.Name)
 				
 				return
-			elseif p2 == "TeamColor" then
-				var15(p1.TeamColor.Color)
+			end
+			if p2 == "TeamColor" then
+				Signal2_1(p1.TeamColor.Color)
 				
 				return
-			elseif p2 == "ChildOrder" then
-				var18(p1.ChildOrder)
+			end
+			if p2 == "ChildOrder" then
+				Signal2_2(p1.ChildOrder)
 			end
 		end)
 	end
-	local function _()
-		-- upvalues: t_1 (write), signalsModule (copy), var5 (ref), var4 (ref)
-		for i, v in pairs(t_1) do
-			var4.setData(i, signalsModule.createComputed(function(p2)
-				-- upvalues: var5 (copy), v (ref), i (ref)
-				local var19 = nil
-				local allData = var5.getAllData(p2)
+	local function _() --[[ Line: 108 | Named "updateAllStats" ]]
+		-- upvalues: t (ref), SignalsModule (upval), SignalMap1 (copy), SignalMap (copy)
+		for i, value in pairs(t) do
+			SignalMap.setData(i, SignalsModule.createComputed(function(p2) --[[ Line: 85 ]]
+				-- upvalues: SignalMap1 (upval), value (copy), i (copy)
+				local Total = nil
+				local AllData = SignalMap1.getAllData(p2)
 				
-				if typeof(allData) == "table" then
-					for i_1, v_1 in pairs(allData) do
-						local var20 = v(i_1, i, p2)
+				if typeof(AllData) == "table" then
+					for i, _ in pairs(AllData) do
+						local Amount = value(i, i, p2)
 						
-						if var20 and type(var20) == "number" then
-							var19 = if var19 then var19 + var20 else var20
+						if Amount and type(Amount) == "number" then
+							if Total then
+								Total += Amount
+							else
+								Total = Amount
+							end
 						end
 					end
 				end
-				return var19
+				return Total
 			end), false)
-			t_1[i] = v
+			t[i] = value
 		end
 	end
 	
 	return {
-		getName = var1,
-		getColor = var2,
-		getOrder = var3,
-		getStats = var4,
-		getPlayers = var5,
-		updateStat = function(p2, p3)
-			-- upvalues: signalsModule (copy), var5 (ref), var4 (ref), t_1 (write)
-			var4.setData(p2, signalsModule.createComputed(function(p4)
-				-- upvalues: var5 (copy), p3 (ref), p2 (ref)
-				local var19 = nil
+		getName = Neutral,
+		getColor = Signal,
+		getOrder = Signal1,
+		getStats = SignalMap,
+		getPlayers = SignalMap1,
+		updateStat = function(Key, p2) --[[ Line: 84 ]]
+			-- upvalues: SignalsModule (upval), SignalMap1 (copy), SignalMap (copy), t (ref)
+			SignalMap.setData(Key, SignalsModule.createComputed(function(p3) --[[ Line: 85 ]]
+				-- upvalues: SignalMap1 (upval), p2 (copy), Key (copy)
+				local Total = nil
+				local AllData = SignalMap1.getAllData(p3)
 				
-				if typeof(var5.getAllData(p4)) == "table" then
-					for i_1, v_1 in pairs(allData) do
-						local var20 = p3(i_1, p2, p4)
+				if typeof(AllData) == "table" then
+					for i, _ in pairs(AllData) do
+						local Amount = p2(i, Key, p3)
 						
-						if var20 and type(var20) == "number" then
-							var19 = if var19 then var19 + var20 else var20
+						if Amount and type(Amount) == "number" then
+							if Total then
+								Total += Amount
+							else
+								Total = Amount
+							end
 						end
 					end
 				end
-				return var19
+				return Total
 			end), false)
-			t_1[p2] = p3
+			t[Key] = p2
 		end,
-		removeStat = function(p4)
-			-- upvalues: var4 (ref), t_1 (write)
-			var4.removeData(p4, false)
-			t_1[p4] = nil
+		removeStat = function(Key) --[[ Line: 115 ]]
+			-- upvalues: SignalMap (copy), t (ref)
+			SignalMap.removeData(Key, false)
+			t[Key] = nil
 		end,
-		addPlayer = function(p4)
-			-- upvalues: var5 (ref), t_1 (write), signalsModule (copy), var4 (ref)
-			var5.setData(p4, p4.UserId, false)
+		addPlayer = function(Player) --[[ Line: 122 ]]
+			-- upvalues: SignalMap1 (copy), t (ref), SignalsModule (upval), SignalMap (copy)
+			SignalMap1.setData(Player, Player.UserId, false)
 			
-			for i, v in pairs(t_1) do
-				var4.setData(i, signalsModule.createComputed(function(p5)
-					-- upvalues: var5 (copy), v (ref), i (ref)
-					local var19 = nil
+			for i, value in pairs(t) do
+				SignalMap.setData(i, SignalsModule.createComputed(function(p3) --[[ Line: 85 ]]
+					-- upvalues: SignalMap1 (upval), value (copy), i (copy)
+					local Total = nil
+					local AllData = SignalMap1.getAllData(p3)
 					
-					if typeof(var5.getAllData(p5)) == "table" then
-						for i_1, v_1 in pairs(allData) do
-							local var20 = v(i_1, i, p5)
+					if typeof(AllData) == "table" then
+						for i, _ in pairs(AllData) do
+							local Amount = value(i, i, p3)
 							
-							if var20 and type(var20) == "number" then
-								var19 = if var19 then var19 + var20 else var20
+							if Amount and type(Amount) == "number" then
+								if Total then
+									Total += Amount
+								else
+									Total = Amount
+								end
 							end
 						end
 					end
-					return var19
+					return Total
 				end), false)
-				t_1[i] = v
+				t[i] = value
 			end
 		end,
-		removePlayer = function(p5)
-			-- upvalues: var5 (ref), t_1 (write), signalsModule (copy), var4 (ref)
-			var5.removeData(p5, false)
+		removePlayer = function(p3) --[[ Line: 128 ]]
+			-- upvalues: SignalMap1 (copy), t (ref), SignalsModule (upval), SignalMap (copy)
+			SignalMap1.removeData(p3, false)
 			
-			for i, v in pairs(t_1) do
-				var4.setData(i, signalsModule.createComputed(function(p6)
-					-- upvalues: var5 (copy), v (ref), i (ref)
-					local var19 = nil
+			for i, value in pairs(t) do
+				SignalMap.setData(i, SignalsModule.createComputed(function(p4) --[[ Line: 85 ]]
+					-- upvalues: SignalMap1 (upval), value (copy), i (copy)
+					local Total = nil
+					local AllData = SignalMap1.getAllData(p4)
 					
-					if typeof(var5.getAllData(p6)) == "table" then
-						for i_1, v_1 in pairs(allData) do
-							local var20 = v(i_1, i, p6)
+					if typeof(AllData) == "table" then
+						for i, _ in pairs(AllData) do
+							local Amount = value(i, i, p4)
 							
-							if var20 and type(var20) == "number" then
-								var19 = if var19 then var19 + var20 else var20
+							if Amount and type(Amount) == "number" then
+								if Total then
+									Total += Amount
+								else
+									Total = Amount
+								end
 							end
 						end
 					end
-					return var19
+					return Total
 				end), false)
-				t_1[i] = v
+				t[i] = value
 			end
 		end,
-		destroy = function()
-			-- upvalues: t (write), t_1 (write)
-			for i, v in pairs(t) do
-				if v.Disconnect then
-					v:Disconnect()
+		destroy = function() --[[ Line: 134 ]]
+			-- upvalues: Connections (ref), t (ref)
+			for _, connection in pairs(Connections) do
+				if connection.Disconnect then
+					connection:Disconnect()
 				end
 			end
+			Connections = {}
 			t = {}
-			t_1 = {}
 		end
 	}
 end

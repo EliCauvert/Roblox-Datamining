@@ -1,1 +1,3 @@
-﻿return game:DefineFastFlag("EnableRecentActivityInspectAndBuy", false) and require(script.Parent.FFlagSocialEnableProfileInspectAndBuy)
+﻿local FFlagSocialEnableProfileInspectAndBuyModule = require(script.Parent.FFlagSocialEnableProfileInspectAndBuy)
+
+return game:DefineFastFlag("EnableRecentActivityInspectAndBuy", false) and FFlagSocialEnableProfileInspectAndBuyModule

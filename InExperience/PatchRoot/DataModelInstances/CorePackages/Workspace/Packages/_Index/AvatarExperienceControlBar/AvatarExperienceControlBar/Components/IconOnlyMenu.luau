@@ -1,114 +1,114 @@
-﻿local avatarExperienceControlBar = script:FindFirstAncestor("AvatarExperienceControlBar")
-local parent = avatarExperienceControlBar.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local useSemanticTokensModule = require(avatarExperienceControlBar.Hooks.useSemanticTokens)
-local _ = require(avatarExperienceControlBar.ControlBarTypes)
-local iconItemModule = require(avatarExperienceControlBar.Components.Items.IconItem)
-local imageItemModule = require(avatarExperienceControlBar.Components.Items.ImageItem)
-local imageItemWithTooltipModule = require(avatarExperienceControlBar.Components.Items.ImageItemWithTooltip)
-local colorItemModule = require(avatarExperienceControlBar.Components.Items.ColorItem)
-local fFlagAXAddToolTipToIconItemMenu = require(parent.AvatarExperienceFlags).FFlagAXAddToolTipToIconItemMenu
-local fFlagAXMigrateBuilderIcons = require(parent.AvatarExperienceFlags).FFlagAXMigrateBuilderIcons
-local fFlagAXResetAvatarButton = require(parent.AvatarExperienceFlags).FFlagAXResetAvatarButton
-local fFlagMeProfileEntryTooltipEnabled = require(parent.AvatarExperienceFlags).FFlagMeProfileEntryTooltipEnabled
+﻿local AvatarExperienceControlBar = script:FindFirstAncestor("AvatarExperienceControlBar")
+local Parent = AvatarExperienceControlBar.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UseSemanticTokensModule = require(AvatarExperienceControlBar.Hooks.useSemanticTokens)
+local _ = require(AvatarExperienceControlBar.ControlBarTypes)
+local IconItemModule = require(AvatarExperienceControlBar.Components.Items.IconItem)
+local ImageItemModule = require(AvatarExperienceControlBar.Components.Items.ImageItem)
+local ImageItemWithTooltipModule = require(AvatarExperienceControlBar.Components.Items.ImageItemWithTooltip)
+local ColorItemModule = require(AvatarExperienceControlBar.Components.Items.ColorItem)
+local FFlagAXAddToolTipToIconItemMenu = require(Parent.AvatarExperienceFlags).FFlagAXAddToolTipToIconItemMenu
+local FFlagAXMigrateBuilderIcons = require(Parent.AvatarExperienceFlags).FFlagAXMigrateBuilderIcons
+local FFlagAXResetAvatarButton = require(Parent.AvatarExperienceFlags).FFlagAXResetAvatarButton
+local FFlagMeProfileEntryTooltipEnabled = require(Parent.AvatarExperienceFlags).FFlagMeProfileEntryTooltipEnabled
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useSemanticTokensModule (ref), reactModule (ref), fFlagAXResetAvatarButton (ref), fFlagMeProfileEntryTooltipEnabled (ref), imageItemWithTooltipModule (ref), imageItemModule (ref), iconItemModule (ref), fFlagAXMigrateBuilderIcons (ref), fFlagAXAddToolTipToIconItemMenu (ref), colorItemModule (ref), foundationModule (ref)
-	local var1 = useSemanticTokensModule()
-	local var2 = reactModule.useCallback(function(p3)
-		-- upvalues: fFlagAXResetAvatarButton (copy), reactModule (copy), fFlagMeProfileEntryTooltipEnabled (copy), imageItemWithTooltipModule (copy), imageItemModule (copy), iconItemModule (copy), fFlagAXMigrateBuilderIcons (copy), fFlagAXAddToolTipToIconItemMenu (copy), p1 (ref), colorItemModule (copy), foundationModule (copy)
-		local item = p3.item
-		local isActive = p3.isActive
-		local onItemActivated = p3.onItemActivated
-		local var3 = if fFlagAXResetAvatarButton and item.type == "divider" then nil else function()
-			-- upvalues: onItemActivated (ref), item (ref)
-			if onItemActivated then
-				onItemActivated(item.id)
+return ReactModule.memo(ReactModule.forwardRef(function(Frame, Ref) --[[ Line: 29 | Named "IconOnlyMenu" ]]
+	-- upvalues: UseSemanticTokensModule (copy), ReactModule (copy), FFlagAXResetAvatarButton (copy), FFlagMeProfileEntryTooltipEnabled (copy), ImageItemWithTooltipModule (copy), ImageItemModule (copy), IconItemModule (copy), FFlagAXMigrateBuilderIcons (copy), FFlagAXAddToolTipToIconItemMenu (copy), ColorItemModule (copy), FoundationModule (copy)
+	local UseSemanticTokensModuleResult = UseSemanticTokensModule()
+	local UseResult = ReactModule.useCallback(function(p1) --[[ Line: 32 ]]
+		-- upvalues: FFlagAXResetAvatarButton (upval), ReactModule (upval), FFlagMeProfileEntryTooltipEnabled (upval), ImageItemWithTooltipModule (upval), ImageItemModule (upval), IconItemModule (upval), FFlagAXMigrateBuilderIcons (upval), FFlagAXAddToolTipToIconItemMenu (upval), Frame (copy), ColorItemModule (upval), FoundationModule (upval)
+		local Item = p1.item
+		local IsActive = p1.isActive
+		local OnItemActivatedFunction = p1.onItemActivated
+		local OnActivated = if FFlagAXResetAvatarButton and Item.type == "divider" then nil else function() --[[ Line: 45 ]]
+			-- upvalues: OnItemActivatedFunction (copy), Item (copy)
+			if OnItemActivatedFunction then
+				OnItemActivatedFunction(Item.id)
 			end
-			if item.onActivated then
-				item.onActivated()
+			if Item.onActivated then
+				Item.onActivated()
 			end
 		end
 		
-		return if item.type == "image" then reactModule.createElement(if fFlagMeProfileEntryTooltipEnabled and item.toolTipConfig then imageItemWithTooltipModule else imageItemModule, {
-			thumbnailUrl = item.thumbnailUrl,
-			isActive = isActive,
-			onActivated = var3,
-			disabled = item.disabled,
-			ref = item.ref,
-			enableFocusAnimation = item.enableFocusAnimation,
-			Visible = item.visible,
-			LayoutOrder = p3.index,
-			hideIndicator = item.hideIndicator,
-			toolTipConfig = if fFlagMeProfileEntryTooltipEnabled then item.toolTipConfig else nil
-		}) elseif item.type == "icon" then reactModule.createElement(iconItemModule, {
-			icon = item.icon,
-			activeIcon = item.activeIcon,
-			iconSize = item.iconSize,
-			iconVariant = if fFlagAXMigrateBuilderIcons then item.iconVariant else nil,
-			activeIconVariant = if fFlagAXMigrateBuilderIcons then item.activeIconVariant else nil,
-			isActive = isActive,
-			animate = not item.disableAnimation,
-			onActivated = var3,
-			disabled = item.disabled,
-			toolTipConfig = if fFlagAXAddToolTipToIconItemMenu and p1.activeItemId ~= "" and item.toolTipConfig then nil else item.toolTipConfig,
-			ref = item.ref,
-			Visible = item.visible,
-			LayoutOrder = p3.index
-		}) elseif item.type == "color" then reactModule.createElement(colorItemModule, {
-			colors = item.colors,
-			colorSize = item.colorSize,
-			isActive = item.isActive,
-			size = item.size,
-			onActivated = var3,
-			disabled = item.disabled,
-			ref = item.ref,
-			Visible = item.visible,
-			LayoutOrder = p3.index,
-			Selectable = item.Selectable
-		}) elseif fFlagAXResetAvatarButton and item.type == "divider" then reactModule.createElement(foundationModule.Divider, {
-			variant = item.variant,
-			ref = item.ref,
-			Visible = item.visible,
-			LayoutOrder = p3.index
+		return if Item.type == "image" then ReactModule.createElement(if FFlagMeProfileEntryTooltipEnabled and Item.toolTipConfig then ImageItemWithTooltipModule else ImageItemModule, {
+			thumbnailUrl = Item.thumbnailUrl,
+			isActive = IsActive,
+			onActivated = OnActivated,
+			disabled = Item.disabled,
+			ref = Item.ref,
+			enableFocusAnimation = Item.enableFocusAnimation,
+			Visible = Item.visible,
+			LayoutOrder = p1.index,
+			hideIndicator = Item.hideIndicator,
+			toolTipConfig = if FFlagMeProfileEntryTooltipEnabled then Item.toolTipConfig else nil
+		}) elseif Item.type == "icon" then ReactModule.createElement(IconItemModule, {
+			icon = Item.icon,
+			activeIcon = Item.activeIcon,
+			iconSize = Item.iconSize,
+			iconVariant = if FFlagAXMigrateBuilderIcons then Item.iconVariant else nil,
+			activeIconVariant = if FFlagAXMigrateBuilderIcons then Item.activeIconVariant else nil,
+			isActive = IsActive,
+			animate = not Item.disableAnimation,
+			onActivated = OnActivated,
+			disabled = Item.disabled,
+			toolTipConfig = if FFlagAXAddToolTipToIconItemMenu and Frame.activeItemId ~= "" and Item.toolTipConfig then nil else Item.toolTipConfig,
+			ref = Item.ref,
+			Visible = Item.visible,
+			LayoutOrder = p1.index
+		}) elseif Item.type == "color" then ReactModule.createElement(ColorItemModule, {
+			colors = Item.colors,
+			colorSize = Item.colorSize,
+			isActive = Item.isActive,
+			size = Item.size,
+			onActivated = OnActivated,
+			disabled = Item.disabled,
+			ref = Item.ref,
+			Visible = Item.visible,
+			LayoutOrder = p1.index,
+			Selectable = Item.Selectable
+		}) elseif FFlagAXResetAvatarButton and Item.type == "divider" then ReactModule.createElement(FoundationModule.Divider, {
+			variant = Item.variant,
+			ref = Item.ref,
+			Visible = Item.visible,
+			LayoutOrder = p1.index
 		}) else nil
 	end, {
-		if fFlagAXAddToolTipToIconItemMenu then p1.activeItemId else nil
+		if FFlagAXAddToolTipToIconItemMenu then Frame.activeItemId else nil
 	})
 	
-	return reactModule.createElement(foundationModule.View, {
+	return ReactModule.createElement(FoundationModule.View, {
 		tag = "auto-xy radius-circle padding-xsmall",
-		backgroundStyle = var1.menuBackgroundStyle,
-		ref = p2,
-		Visible = #p1.items > 0,
-		LayoutOrder = p1.LayoutOrder,
-		onAbsoluteSizeChanged = p1.onAbsoluteSizeChanged,
-		Position = p1.Position
-	}, reactModule.useMemo(function()
-		-- upvalues: reactModule (copy), p1 (ref), var1 (ref), var2 (ref)
-		local t = {
-			IconOnlyMenuListLayout = reactModule.createElement("UIListLayout", {
-				FillDirection = if p1.direction == "horizontal" then Enum.FillDirection.Horizontal else Enum.FillDirection.Vertical,
+		backgroundStyle = UseSemanticTokensModuleResult.menuBackgroundStyle,
+		ref = Ref,
+		Visible = #Frame.items > 0,
+		LayoutOrder = Frame.LayoutOrder,
+		onAbsoluteSizeChanged = Frame.onAbsoluteSizeChanged,
+		Position = Frame.Position
+	}, (ReactModule.useMemo(function() --[[ Line: 116 ]]
+		-- upvalues: ReactModule (upval), Frame (copy), UseSemanticTokensModuleResult (copy), UseResult (copy)
+		local config = {
+			IconOnlyMenuListLayout = ReactModule.createElement("UIListLayout", {
+				FillDirection = if Frame.direction == "horizontal" then Enum.FillDirection.Horizontal else Enum.FillDirection.Vertical,
 				SortOrder = Enum.SortOrder.LayoutOrder,
-				Padding = UDim.new(0, var1.iconOnlyMenuItemGap)
+				Padding = UDim.new(0, UseSemanticTokensModuleResult.iconOnlyMenuItemGap)
 			})
 		}
 		
-		for i, v in p1.items do
-			t[`MenuItem-{v.id}`] = var2({
-				item = v,
-				isActive = if v.type == "divider" then nil elseif v.isActive ~= nil then v.id == p1.activeItemId else v.isActive,
-				onItemActivated = p1.onItemActivated,
-				index = i
+		for Index, item in Frame.items do
+			config[`MenuItem-{item.id}`] = UseResult({
+				item = item,
+				isActive = if item.type == "divider" then nil elseif item.isActive == nil then item.id == Frame.activeItemId else item.isActive,
+				onItemActivated = Frame.onItemActivated,
+				index = Index
 			})
 		end
-		return t
+		return config
 	end, {
-		p1.items,
-		p1.activeItemId,
-		p1.onItemActivated,
-		p1.direction,
-		var2
-	}))
+		Frame.items,
+		Frame.activeItemId,
+		Frame.onItemActivated,
+		Frame.direction,
+		UseResult
+	})))
 end))

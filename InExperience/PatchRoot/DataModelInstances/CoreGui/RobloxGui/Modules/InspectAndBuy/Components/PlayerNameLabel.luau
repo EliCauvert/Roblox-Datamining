@@ -1,53 +1,54 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local playersService = game:GetService("Players")
-local parent = script.Parent.Parent
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local appFonts = require(corePackagesService.Workspace.Packages.Style).AppFonts
-local colorsModule = require(parent.Colors)
-local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
-local verifiedBadgesModule = require(corePackagesService.Workspace.Packages.VerifiedBadges)
-local userLibModule = require(corePackagesService.Workspace.Packages.UserLib)
-local inspectAndBuyContextModule = require(parent.Components.InspectAndBuyContext)
-local playerNameLabel = roactModule.PureComponent:extend("PlayerNameLabel")
-local verified = verifiedBadgesModule.emoji.verified
+﻿local CorePackages = game:GetService("CorePackages")
+local Players = game:GetService("Players")
+local Parent = script.Parent.Parent
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local AppFonts = require(CorePackages.Workspace.Packages.Style).AppFonts
+local ColorsModule = require(Parent.Colors)
+local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
+local UserLibModule = require(CorePackages.Workspace.Packages.UserLib)
+local InspectAndBuyContextModule = require(Parent.Components.InspectAndBuyContext)
+local PlayerNameLabel = RoactModule.PureComponent:extend("PlayerNameLabel")
+local Verified = require(CorePackages.Workspace.Packages.VerifiedBadges).emoji.verified
 
-function playerNameLabel.render(p1)
-	-- upvalues: playersService (ref), userLibModule (ref), robloxTranslatorModule (ref), verified (ref), roactModule (ref), inspectAndBuyContextModule (ref), colorsModule (ref), appFonts (ref)
-	local locale = p1.props.locale
-	local view = p1.props.view
-	local playerName = p1.props.playerName
-	local var1 = tonumber(p1.props.playerId)
-	local var2 = var1 and playersService:GetPlayerByUserId(var1)
-	local var3 = if playerName == "" then "" elseif if var2 then userLibModule.Utils.isPlayerVerified(var2) else false then robloxTranslatorModule:FormatByKeyForLocale("InGame.InspectMenu.Label.VerifiedAvatar", locale, { PLAYER_NAME = playerName, VERIFIED_BADGE = verified }) else robloxTranslatorModule:FormatByKeyForLocale("InGame.InspectMenu.Label.Avatar", locale, { PLAYER_NAME = playerName })
+function PlayerNameLabel.render(p1) --[[ Line: 21 ]]
+	-- upvalues: Players (copy), UserLibModule (copy), RobloxTranslatorModule (copy), Verified (copy), RoactModule (copy), InspectAndBuyContextModule (copy), ColorsModule (copy), AppFonts (copy)
+	local Locale = p1.props.locale
+	local View = p1.props.view
+	local PlayerName = p1.props.playerName
+	local Number: number? = tonumber(p1.props.playerId)
+	local Player = Number and Players:GetPlayerByUserId(Number)
+	local IsPlayerVerified = if Player then UserLibModule.Utils.isPlayerVerified(Player) else false
+	local InGameInspectMenuLabelVerifiedAvatar = nil
+	InGameInspectMenuLabelVerifiedAvatar = if PlayerName == "" then "" elseif IsPlayerVerified then RobloxTranslatorModule:FormatByKeyForLocale("InGame.InspectMenu.Label.VerifiedAvatar", Locale, { PLAYER_NAME = PlayerName, VERIFIED_BADGE = Verified }) else RobloxTranslatorModule:FormatByKeyForLocale("InGame.InspectMenu.Label.Avatar", Locale, { PLAYER_NAME = PlayerName })
 	
-	return roactModule.createElement(inspectAndBuyContextModule.Consumer, {
-		render = function(p2)
-			-- upvalues: view (ref), roactModule (copy), colorsModule (copy), var3 (write), appFonts (copy)
-			local var4 = p2[view]
+	return RoactModule.createElement(InspectAndBuyContextModule.Consumer, {
+		render = function(p2) --[[ Line: 43 ]]
+			-- upvalues: View (copy), RoactModule (upval), ColorsModule (upval), InGameInspectMenuLabelVerifiedAvatar (ref), AppFonts (upval)
+			local v1 = p2[View]
 			
-			return roactModule.createElement("TextLabel", {
+			return RoactModule.createElement("TextLabel", {
 				BackgroundTransparency = 1,
 				TextScaled = true,
 				TextSize = 36,
 				LayoutOrder = 2,
-				Size = UDim2.new(1, -(var4.AvatarHeadShotSize + var4.BorderPaddingSize * 2 + 10), 0, var4.TopSizeY),
-				TextColor3 = colorsModule.White,
-				Text = var3,
-				Font = appFonts.default:getBlack(),
+				Size = UDim2.new(1, -(v1.AvatarHeadShotSize + v1.BorderPaddingSize * 2 + 10), 0, v1.TopSizeY),
+				TextColor3 = ColorsModule.White,
+				Text = InGameInspectMenuLabelVerifiedAvatar,
+				Font = AppFonts.default:getBlack(),
 				TextXAlignment = Enum.TextXAlignment.Left
 			}, {
-				TextSizeConstraint = roactModule.createElement("UITextSizeConstraint", { MaxTextSize = 36 })
+				TextSizeConstraint = RoactModule.createElement("UITextSizeConstraint", { MaxTextSize = 36 })
 			})
 		end
 	})
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p1, _)
+return RoactRoduxModule.UNSTABLE_connect2(function(p1, _) --[[ Line: 66 ]]
 	return {
 		view = p1.view,
 		playerName = p1.playerName,
 		playerId = p1.playerId,
 		locale = p1.locale
 	}
-end)(playerNameLabel)
+end)(PlayerNameLabel)

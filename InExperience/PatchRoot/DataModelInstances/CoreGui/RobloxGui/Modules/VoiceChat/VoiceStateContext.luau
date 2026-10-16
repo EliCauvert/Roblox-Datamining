@@ -1,75 +1,75 @@
-﻿local var1 = if game:GetEngineFeature("VoiceChatSupported") then Enum.VoiceChatState.Ended else nil
-local t = { voiceEnabled = false, voiceState = var1 }
-local reactModule = require(game:GetService("CorePackages").Packages.React)
-local default = require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.VoiceChat.VoiceChatServiceManager).default
-local var2 = reactModule.createContext(t)
+﻿local Ended = game:GetEngineFeature("VoiceChatSupported") and Enum.VoiceChatState.Ended or nil
+local config = { voiceEnabled = false, voiceState = Ended }
+local ReactModule = require(game:GetService("CorePackages").Packages.React)
+local Default = require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.VoiceChat.VoiceChatServiceManager).default
+local Context = ReactModule.createContext(config)
 
 return {
-	Provider = function(p1)
-		-- upvalues: reactModule (ref), t (ref), default (ref), var1 (ref), var2 (ref)
-		local var3, var4 = reactModule.useState(t)
+	Provider = function(p1) --[[ Line: 49 ]]
+		-- upvalues: ReactModule (copy), config (copy), Default (copy), Ended (copy), Context (copy)
+		local UseStateResult, UseStateResult2 = ReactModule.useState(config)
 		
-		local function updateVoiceState(_, p2)
-			-- upvalues: var3 (ref), var4 (ref)
-			if p2 ~= var3.voiceState then
-				var4({
-					voiceEnabled = p2 ~= Enum.VoiceChatState.Ended,
-					voiceState = p2
+		local function updateVoiceState(_, NewState) --[[ Line: 52 ]]
+			-- upvalues: UseStateResult (copy), UseStateResult2 (copy)
+			if NewState ~= UseStateResult.voiceState then
+				UseStateResult2({
+					voiceEnabled = NewState ~= Enum.VoiceChatState.Ended,
+					voiceState = NewState
 				})
 			end
 		end
 		
-		reactModule.useEffect(function()
-			-- upvalues: default (copy), var3 (ref), var4 (ref), updateVoiceState (ref), var1 (copy)
-			local var5 = true
-			local var6 = nil
+		ReactModule.useEffect(function() --[[ Line: 62 ]]
+			-- upvalues: Default (upval), UseStateResult (copy), UseStateResult2 (copy), updateVoiceState (copy), Ended (upval)
+			local Flag = true
+			local StateChangedConnection = nil
 			
 			if game:GetEngineFeature("VoiceChatSupported") then
-				default:asyncInit():andThen(function()
-					-- upvalues: var5 (write), default (copy), var3 (copy), var4 (copy), var6 (write), updateVoiceState (copy)
-					if var5 then
-						default:SetupParticipantListeners()
-						local service = default:getService()
+				Default:asyncInit():andThen(function() --[[ Line: 67 ]]
+					-- upvalues: Flag (ref), Default (upval), UseStateResult (upval), UseStateResult2 (upval), StateChangedConnection (ref), updateVoiceState (upval)
+					if Flag then
+						Default:SetupParticipantListeners()
+						local Service = Default:getService()
 						
-						if service then
-							local voiceChatState = service.VoiceChatState
+						if Service then
+							local VoiceChatState = Service.VoiceChatState
 							
-							if voiceChatState ~= var3.voiceState then
-								var4({
-									voiceEnabled = voiceChatState ~= Enum.VoiceChatState.Ended,
-									voiceState = voiceChatState
+							if VoiceChatState ~= UseStateResult.voiceState then
+								UseStateResult2({
+									voiceEnabled = VoiceChatState ~= Enum.VoiceChatState.Ended,
+									voiceState = VoiceChatState
 								})
 							end
-							var6 = service.StateChanged:Connect(updateVoiceState)
+							StateChangedConnection = Service.StateChanged:Connect(updateVoiceState)
 						end
 					end
-				end):catch(function()
-					-- upvalues: var1 (copy), var3 (copy), var4 (copy)
-					if var1 ~= var3.voiceState then
-						var4({
-							voiceEnabled = var1 ~= Enum.VoiceChatState.Ended,
-							voiceState = var1
+				end):catch(function() --[[ Line: 77 ]]
+					-- upvalues: Ended (upval), UseStateResult (upval), UseStateResult2 (upval)
+					if Ended ~= UseStateResult.voiceState then
+						UseStateResult2({
+							voiceEnabled = Ended ~= Enum.VoiceChatState.Ended,
+							voiceState = Ended
 						})
 					end
 				end)
 			end
-			return function()
-				-- upvalues: var5 (write), var6 (write)
-				var5 = false
+			return function() --[[ Line: 82 ]]
+				-- upvalues: Flag (ref), StateChangedConnection (ref)
+				Flag = false
 				
-				if var6 then
-					var6:Disconnect()
-					var6 = nil
+				if StateChangedConnection then
+					StateChangedConnection:Disconnect()
+					StateChangedConnection = nil
 				end
 			end
 		end, {})
 		
-		return reactModule.createElement(var2.Provider, { value = var3 }, p1.children)
+		return ReactModule.createElement(Context.Provider, { value = UseStateResult }, p1.children)
 	end,
-	Consumer = var2.Consumer,
-	Context = var2,
-	withVoiceState = function(p1)
-		-- upvalues: reactModule (ref), var2 (ref)
-		return reactModule.createElement(var2.Consumer, { render = p1 })
+	Consumer = Context.Consumer,
+	Context = Context,
+	withVoiceState = function(Render) --[[ Line: 100 ]]
+		-- upvalues: ReactModule (copy), Context (copy)
+		return ReactModule.createElement(Context.Consumer, { render = Render })
 	end
 }

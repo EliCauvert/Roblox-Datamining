@@ -1,32 +1,34 @@
-﻿local enableVRUpdate3EngineFeature = game:GetEngineFeature("EnableVRUpdate3")
+﻿local EnableVRUpdate3EngineFeature = game:GetEngineFeature("EnableVRUpdate3")
 local VRService = require(script:FindFirstAncestor("VrCommon").Parent.MockableProxyServices).VRService
 
 return {
-	RayPlaneIntersection = function(p1, p2, p3)
-		p2 = p2.unit
-		p1 = p1.Unit
-		local direction = p2:Dot(p1.Direction)
+	RayPlaneIntersection = function(Direction, p1, p2) --[[ Line: 17 ]]
+		local Unit = p1.unit
+		local Direction1 = Direction.Unit
+		local DotProduct = Unit:Dot(Direction1.Direction)
 		
-		if direction == 0 then
+		if DotProduct == 0 then
 			return nil
+		else
+			local DotProductRatio = Unit:Dot(p2 - Direction1.Origin) / DotProduct
+			
+			return if DotProductRatio < 0 then nil else Direction1.Origin + Direction1.Direction * DotProductRatio
 		end
-		local var1 = p2:Dot(p3 - p1.Origin) / direction
-		
-		return if var1 < 0 then nil else p1.Origin + p1.Direction * var1
 	end,
-	GetUserCFrameWorldSpace = function(p1)
-		-- upvalues: VRService (ref)
-		local var1 = VRService:GetUserCFrame(p1)
+	GetUserCFrameWorldSpace = function(p1): CFrame --[[ Line: 35 ]]
+		-- upvalues: VRService (copy)
+		local UserCFrame = VRService:GetUserCFrame(p1)
 		
 		if not workspace.CurrentCamera.HeadLocked then
-			var1 = VRService:GetUserCFrame(Enum.UserCFrame.Head):Inverse() * var1
+			UserCFrame = VRService:GetUserCFrame(Enum.UserCFrame.Head):Inverse() * UserCFrame
 		end
-		return workspace.CurrentCamera.CFrame * (CFrame.new(var1.p * workspace.CurrentCamera.HeadScale) * (var1 - var1.p))
+		return workspace.CurrentCamera.CFrame * (CFrame.new(UserCFrame.p * workspace.CurrentCamera.HeadScale) * (UserCFrame - UserCFrame.p))
 	end,
-	getCurrentControllerType = function()
-		-- upvalues: enableVRUpdate3EngineFeature (ref), VRService (ref)
-		local var1 = if enableVRUpdate3EngineFeature then VRService.VRDeviceName else nil
+	getCurrentControllerType = function(): string --[[ Line: 47 ]]
+		-- upvalues: EnableVRUpdate3EngineFeature (copy), VRService (copy)
+		local VRDeviceName = EnableVRUpdate3EngineFeature and VRService.VRDeviceName or nil
+		local Oculus = VRDeviceName:match("Oculus") or (VRDeviceName:match("Meta") or (VRDeviceName:match("OpenXr") or VRDeviceName:match("OpenXR")))
 		
-		return if var1:match("Vive") then "Vive" elseif var1:match("Rift") then "Rift" elseif var1:match("Index") then "Index" elseif var1:match("Oculus") or (var1:match("Meta") or (var1:match("OpenXr") or var1:match("OpenXR"))) then "Touch" else "Rift"
+		return if VRDeviceName:match("Vive") then "Vive" elseif VRDeviceName:match("Rift") then "Rift" elseif VRDeviceName:match("Index") then "Index" elseif Oculus then "Touch" else "Rift"
 	end
 }

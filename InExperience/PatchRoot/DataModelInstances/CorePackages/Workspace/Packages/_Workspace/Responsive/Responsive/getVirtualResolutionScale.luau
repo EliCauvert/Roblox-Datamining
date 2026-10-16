@@ -1,10 +1,10 @@
-﻿local parent = script:FindFirstAncestor("Responsive").Parent
-local isTenFootInterface = require(parent.AppCommonLib).isTenFootInterface
-local getFFlagApplyResolutionScale = require(parent.SharedFlags).GetFFlagApplyResolutionScale
+﻿local Parent = script:FindFirstAncestor("Responsive").Parent
+local IsTenFootInterfaceFunction = require(Parent.AppCommonLib).isTenFootInterface
+local GetFFlagApplyResolutionScaleFunction = require(Parent.SharedFlags).GetFFlagApplyResolutionScale
 
-function getVirtualResolutionScale()
-	-- upvalues: getFFlagApplyResolutionScale (ref), isTenFootInterface (ref)
-	return if getFFlagApplyResolutionScale() then if isTenFootInterface() then 1.5 else 1 else nil
+function getVirtualResolutionScale() --[[ Line: 7 ]]
+	-- upvalues: GetFFlagApplyResolutionScaleFunction (copy), IsTenFootInterfaceFunction (copy)
+	return if GetFFlagApplyResolutionScaleFunction() then if IsTenFootInterfaceFunction() then 1.5 else 1 else nil
 end
 
 return getVirtualResolutionScale

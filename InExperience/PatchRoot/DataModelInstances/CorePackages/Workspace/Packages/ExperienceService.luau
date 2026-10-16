@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.ExperienceService.ExperienceService)
+﻿return (require(script.Parent._Workspace.ExperienceService.ExperienceService))

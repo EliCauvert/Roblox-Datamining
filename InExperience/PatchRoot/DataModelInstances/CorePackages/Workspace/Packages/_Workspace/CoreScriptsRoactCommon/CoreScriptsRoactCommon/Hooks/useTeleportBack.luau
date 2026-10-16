@@ -1,11 +1,11 @@
-﻿local coreScriptsRoactCommon = script:FindFirstAncestor("CoreScriptsRoactCommon")
-local teleportBackModule = require(coreScriptsRoactCommon.Traversal.TeleportBack)
-local reactModule = require(coreScriptsRoactCommon.Parent.React)
+﻿local CoreScriptsRoactCommon = script:FindFirstAncestor("CoreScriptsRoactCommon")
+local TeleportBackModule = require(CoreScriptsRoactCommon.Traversal.TeleportBack)
+local ReactModule = require(CoreScriptsRoactCommon.Parent.React)
 
-return function(value)
-	-- upvalues: reactModule (ref), teleportBackModule (ref)
-	return reactModule.useCallback(function()
-		-- upvalues: teleportBackModule (copy), value (ref)
-		teleportBackModule(value)
+return function(p1) --[[ Line: 7 | Named "useTeleportBack" ]]
+	-- upvalues: ReactModule (copy), TeleportBackModule (copy)
+	return ReactModule.useCallback(function() --[[ Line: 8 ]]
+		-- upvalues: TeleportBackModule (upval), p1 (copy)
+		TeleportBackModule(p1)
 	end, {})
 end

@@ -1,1 +1,1 @@
-﻿return require(game:GetService("CorePackages").Workspace.Packages.SettingsService).SettingsService.new()
+﻿return (require(game:GetService("CorePackages").Workspace.Packages.SettingsService).SettingsService.new())

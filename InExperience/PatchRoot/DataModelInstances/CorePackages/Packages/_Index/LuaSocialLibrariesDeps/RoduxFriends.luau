@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.RoduxFriends.RoduxFriends)
+﻿return (require(script.Parent.Parent.Parent._Index.RoduxFriends.RoduxFriends))

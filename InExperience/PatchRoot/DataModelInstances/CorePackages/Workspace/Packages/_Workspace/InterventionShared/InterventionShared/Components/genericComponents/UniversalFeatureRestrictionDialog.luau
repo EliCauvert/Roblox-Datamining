@@ -1,79 +1,79 @@
-﻿local interventionShared = script:FindFirstAncestor("InterventionShared")
-local parent = interventionShared.Parent
+﻿local InterventionShared = script:FindFirstAncestor("InterventionShared")
+local Parent = InterventionShared.Parent
 local IXPService = game:GetService("IXPService")
-local reactModule = require(parent.React)
-local useCallback = reactModule.useCallback
-local useEffect = reactModule.useEffect
-local appUserLayers = require(parent.ExperimentLayers).AppUserLayers
-local constantsModule = require(interventionShared.Utils.Constants)
-local determineAppealsStateModule = require(interventionShared.Utils.determineAppealsState)
-local determineUFRInterventionTypeModule = require(interventionShared.Utils.determineUFRInterventionType)
-local genericInterventionDialogModule = require(interventionShared.Components.genericComponents.GenericInterventionDialog)
-local _ = require(interventionShared.Utils.Types)
-local useParsedBadUtterancesModule = require(interventionShared.Hooks.useParsedBadUtterances)
-local useRestrictionEndDateInfoModule = require(interventionShared.Hooks.useRestrictionEndDateInfo)
-local fFlagUFRAppealsAndModNoteFixModule = require(interventionShared.Flags.FFlagUFRAppealsAndModNoteFix)
-local fFlagUFRFriendsChatIXPExposureModule = require(interventionShared.Flags.FFlagUFRFriendsChatIXPExposure)
-local fFlagUFRImprovementsModule = require(interventionShared.Flags.FFlagUFRImprovements)
+local ReactModule = require(Parent.React)
+local UseCallbackFunction = ReactModule.useCallback
+local UseEffectFunction = ReactModule.useEffect
+local AppUserLayers = require(Parent.ExperimentLayers).AppUserLayers
+local ConstantsModule = require(InterventionShared.Utils.Constants)
+local DetermineAppealsStateModule = require(InterventionShared.Utils.determineAppealsState)
+local DetermineUFRInterventionTypeModule = require(InterventionShared.Utils.determineUFRInterventionType)
+local GenericInterventionDialogModule = require(InterventionShared.Components.genericComponents.GenericInterventionDialog)
+local _ = require(InterventionShared.Utils.Types)
+local UseParsedBadUtterancesModule = require(InterventionShared.Hooks.useParsedBadUtterances)
+local UseRestrictionEndDateInfoModule = require(InterventionShared.Hooks.useRestrictionEndDateInfo)
+local FFlagUFRAppealsAndModNoteFixModule = require(InterventionShared.Flags.FFlagUFRAppealsAndModNoteFix)
+local FFlagUFRFriendsChatIXPExposureModule = require(InterventionShared.Flags.FFlagUFRFriendsChatIXPExposure)
+local FFlagUFRImprovementsModule = require(InterventionShared.Flags.FFlagUFRImprovements)
 
-return reactModule.memo(function(p1)
-	-- upvalues: fFlagUFRAppealsAndModNoteFixModule (ref), constantsModule (ref), determineUFRInterventionTypeModule (ref), useParsedBadUtterancesModule (ref), useRestrictionEndDateInfoModule (ref), determineAppealsStateModule (ref), useEffect (ref), fFlagUFRFriendsChatIXPExposureModule (ref), IXPService (ref), appUserLayers (ref), fFlagUFRImprovementsModule (ref), useCallback (ref), reactModule (ref), genericInterventionDialogModule (ref)
-	local moderationDetail = p1.moderationDetail
-	local consequenceTransparencyMessage = moderationDetail.consequenceTransparencyMessage
-	local interventionId = moderationDetail.interventionId
-	local acknowledgeable = moderationDetail.acknowledgeable
-	local badUtterances = moderationDetail.badUtterances
-	local labelTranslationKey = moderationDetail.labelTranslationKey
-	local violation = moderationDetail.violation
-	local var1 = if fFlagUFRAppealsAndModNoteFixModule and p1.abuseVector ~= constantsModule.AbuseVectorType.RobloxExperienceKick then nil else moderationDetail.messageToUser
-	local var2 = determineUFRInterventionTypeModule(moderationDetail.punishmentTypeDescription)
-	local var3 = useParsedBadUtterancesModule(badUtterances or {}, { labelTranslationKey = labelTranslationKey })
-	local joined = table.concat(var3.textItems, "\n")
-	local joined_1 = table.concat(var3.abuseTypes, ", ")
-	local var4 = useRestrictionEndDateInfoModule(moderationDetail.endDate)
-	local var5 = determineAppealsStateModule({
+return ReactModule.memo(function(p1) --[[ Line: 57 | Named "UniversalFeatureRestrictionDialog" ]]
+	-- upvalues: FFlagUFRAppealsAndModNoteFixModule (copy), ConstantsModule (copy), DetermineUFRInterventionTypeModule (copy), UseParsedBadUtterancesModule (copy), UseRestrictionEndDateInfoModule (copy), DetermineAppealsStateModule (copy), UseEffectFunction (copy), FFlagUFRFriendsChatIXPExposureModule (copy), IXPService (copy), AppUserLayers (copy), FFlagUFRImprovementsModule (copy), UseCallbackFunction (copy), ReactModule (copy), GenericInterventionDialogModule (copy)
+	local ModerationDetail = p1.moderationDetail
+	local ConsequenceTransparencyMessage = ModerationDetail.consequenceTransparencyMessage
+	local InterventionId = ModerationDetail.interventionId
+	local Acknowledgeable = ModerationDetail.acknowledgeable
+	local BadUtterances = ModerationDetail.badUtterances
+	local LabelTranslationKey = ModerationDetail.labelTranslationKey
+	local Violation = ModerationDetail.violation
+	local MessageToUser = if FFlagUFRAppealsAndModNoteFixModule and p1.abuseVector ~= ConstantsModule.AbuseVectorType.RobloxExperienceKick then nil else ModerationDetail.messageToUser
+	local DetermineUFRInterventionTypeModuleResult = DetermineUFRInterventionTypeModule(ModerationDetail.punishmentTypeDescription)
+	local UseParsedBadUtterancesModuleResult = UseParsedBadUtterancesModule(BadUtterances or {}, { labelTranslationKey = LabelTranslationKey })
+	local Joined = table.concat(UseParsedBadUtterancesModuleResult.textItems, "\n")
+	local Joined1 = table.concat(UseParsedBadUtterancesModuleResult.abuseTypes, ", ")
+	local UseRestrictionEndDateInfoModuleResult = UseRestrictionEndDateInfoModule(ModerationDetail.endDate)
+	local DetermineAppealsStateModuleResult = DetermineAppealsStateModule({
 		onAppeal = p1.onAppeal,
-		beginDate = moderationDetail.beginDate,
-		endDate = moderationDetail.endDate,
-		acknowledgeable = acknowledgeable
+		beginDate = ModerationDetail.beginDate,
+		endDate = ModerationDetail.endDate,
+		acknowledgeable = Acknowledgeable
 	})
-	useEffect(function()
-		-- upvalues: fFlagUFRFriendsChatIXPExposureModule (copy), p1 (ref), constantsModule (copy), IXPService (copy), appUserLayers (copy), fFlagUFRImprovementsModule (copy)
-		if fFlagUFRFriendsChatIXPExposureModule and p1.abuseVector == constantsModule.AbuseVectorType.PartyChat and game:GetEngineFeature("EnableLogFlagLinkedUserLayerExposure") then
-			IXPService:LogFlagLinkedUserLayerExposure(appUserLayers.FriendsChatRestrictionUserIDLayer)
+	UseEffectFunction(function() --[[ Line: 92 ]]
+		-- upvalues: FFlagUFRFriendsChatIXPExposureModule (upval), p1 (copy), ConstantsModule (upval), IXPService (upval), AppUserLayers (upval), FFlagUFRImprovementsModule (upval)
+		if FFlagUFRFriendsChatIXPExposureModule and p1.abuseVector == ConstantsModule.AbuseVectorType.PartyChat and game:GetEngineFeature("EnableLogFlagLinkedUserLayerExposure") then
+			IXPService:LogFlagLinkedUserLayerExposure(AppUserLayers.FriendsChatRestrictionUserIDLayer)
 		end
-		if fFlagUFRImprovementsModule and p1.onShownCallback then
+		if FFlagUFRImprovementsModule and p1.onShownCallback then
 			p1.onShownCallback()
 		end
 	end, {})
 	
-	return reactModule.createElement(genericInterventionDialogModule, {
+	return ReactModule.createElement(GenericInterventionDialogModule, {
 		useDetailedLayout = true,
-		titleText = p1.titleOverride or (if fFlagUFRImprovementsModule then moderationDetail.title or "" else "Chat suspended for 2 days"),
-		bodyText = p1.bodyOverride or (if fFlagUFRImprovementsModule then moderationDetail.body or "" else "You can't use chat because one or more of your messages broke the rules. If you break the rules again, you could be banned."),
-		userNote = var1,
-		isAppealable = var5.isAppealable,
-		evidence = joined,
-		violationReason = joined_1,
-		onDismiss = useCallback(function()
-			-- upvalues: p1 (ref)
+		titleText = p1.titleOverride or (if FFlagUFRImprovementsModule then ModerationDetail.title or "" else "Chat suspended for 2 days"),
+		bodyText = p1.bodyOverride or (if FFlagUFRImprovementsModule then ModerationDetail.body or "" else "You can't use chat because one or more of your messages broke the rules. If you break the rules again, you could be banned."),
+		userNote = MessageToUser,
+		isAppealable = DetermineAppealsStateModuleResult.isAppealable,
+		evidence = Joined,
+		violationReason = Joined1,
+		onDismiss = UseCallbackFunction(function() --[[ Line: 107 ]]
+			-- upvalues: p1 (copy)
 			p1.onDismiss()
 			
 			if p1.onDismissCallback then
 				p1.onDismissCallback()
 			end
 		end, { p1.onDismiss, p1.onDismissCallback }),
-		dsaMessage = consequenceTransparencyMessage,
-		interventionId = interventionId,
-		acknowledgeable = acknowledgeable,
-		eventId = p1.analyticsEventId or interventionId,
-		interventionTypeForAnalytics = var2,
+		dsaMessage = ConsequenceTransparencyMessage,
+		interventionId = InterventionId,
+		acknowledgeable = Acknowledgeable,
+		eventId = p1.analyticsEventId or InterventionId,
+		interventionTypeForAnalytics = DetermineUFRInterventionTypeModuleResult,
 		abuseVectorForAnalytics = p1.abuseVector,
-		formattedEndDate = var4.formattedEndDate,
-		countdownText = var4.countdownText,
+		formattedEndDate = UseRestrictionEndDateInfoModuleResult.formattedEndDate,
+		countdownText = UseRestrictionEndDateInfoModuleResult.countdownText,
 		onAppeal = p1.onAppeal,
 		onAcknowledgementSuccess = p1.onAcknowledgementSuccess,
-		shouldOpenAppealsPortal = var5.shouldOpenAppealsPortal,
-		violationUid = if violation then violation.uid else nil
+		shouldOpenAppealsPortal = DetermineAppealsStateModuleResult.shouldOpenAppealsPortal,
+		violationUid = if Violation then Violation.uid else nil
 	})
 end)

@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent.Chrome.Flags.EnrolledConsoleExperienceControls)
+﻿return (require(script.Parent.Parent.Parent.Chrome.Flags.EnrolledConsoleExperienceControls))

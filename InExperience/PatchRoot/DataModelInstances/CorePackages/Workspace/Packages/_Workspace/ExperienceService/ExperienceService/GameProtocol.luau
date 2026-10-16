@@ -1,61 +1,61 @@
-﻿local httpService = game:GetService("HttpService")
-local parent = script.Parent.Parent
-local messageBus = require(parent.MessageBus).MessageBus
-local tModule = require(parent.t)
-local cryoModule = require(parent.Cryo)
-local default = require(parent.LoggingProtocol).default
+﻿local HttpService = game:GetService("HttpService")
+local Parent = script.Parent.Parent
+local MessageBus = require(Parent.MessageBus).MessageBus
+local TModule = require(Parent.t)
+local CryoModule = require(Parent.Cryo)
+local Default = require(Parent.LoggingProtocol).default
 local _ = require(script.Parent.GameProtocolTypes)
-local getFFlagMoveLuaExpLaunchBeginModule = require(script.Parent.Flags.GetFFlagMoveLuaExpLaunchBegin)
-local t = {
+local GetFFlagMoveLuaExpLaunchBeginModule = require(script.Parent.Flags.GetFFlagMoveLuaExpLaunchBegin)
+local GameProtocolModule = {
 	GAME_LAUNCH_DESCRIPTOR = {
-		mid = messageBus.getMessageId("Game", "launch"),
-		validateParams = tModule.intersection(tModule.strictInterface({
-			placeId = tModule.optional(tModule.number),
-			userId = tModule.optional(tModule.number),
-			accessCode = tModule.optional(tModule.string),
-			gameInstanceId = tModule.optional(tModule.string),
-			linkCode = tModule.optional(tModule.string),
-			referralPage = tModule.optional(tModule.string),
-			launchData = tModule.optional(tModule.string),
-			eventId = tModule.optional(tModule.string),
-			referredByPlayerId = tModule.optional(tModule.number),
-			joinAttemptOrigin = tModule.optional(tModule.string),
-			joinAttemptId = tModule.string
-		}), function(p1)
+		mid = MessageBus.getMessageId("Game", "launch"),
+		validateParams = TModule.intersection(TModule.strictInterface({
+			placeId = TModule.optional(TModule.number),
+			userId = TModule.optional(TModule.number),
+			accessCode = TModule.optional(TModule.string),
+			gameInstanceId = TModule.optional(TModule.string),
+			linkCode = TModule.optional(TModule.string),
+			referralPage = TModule.optional(TModule.string),
+			launchData = TModule.optional(TModule.string),
+			eventId = TModule.optional(TModule.string),
+			referredByPlayerId = TModule.optional(TModule.number),
+			joinAttemptOrigin = TModule.optional(TModule.string),
+			joinAttemptId = TModule.string
+		}), function(p1) --[[ Line: 45 | Named "checkRequiredParams" ]]
 			return p1.placeId or p1.userId
 		end)
 	}
 }
-t.__index = t
+GameProtocolModule.__index = GameProtocolModule
 
-function t.new()
-	-- upvalues: messageBus (ref), t (ref)
-	return setmetatable({ subscriber = messageBus.Subscriber.new() }, t)
+function GameProtocolModule.new() --[[ Line: 57 ]]
+	-- upvalues: MessageBus (copy), GameProtocolModule (copy)
+	return (setmetatable({ subscriber = MessageBus.Subscriber.new() }, GameProtocolModule))
 end
 
-function t:launchGame(p1, p2, p3)
-	-- upvalues: httpService (ref), cryoModule (ref), getFFlagMoveLuaExpLaunchBeginModule (ref), default (ref), messageBus (ref)
+function GameProtocolModule:launchGame(p1, p2, Callback: (any) -> ()) --[[ Line: 64 ]]
+	-- upvalues: HttpService (copy), CryoModule (copy), GetFFlagMoveLuaExpLaunchBeginModule (copy), Default (copy), MessageBus (copy)
 	if type(p1.placeId) == "string" then
 		p1.placeId = tonumber(p1.placeId)
 	end
 	if type(p1.userId) == "string" then
 		p1.userId = tonumber(p1.userId)
 	end
-	local var1 = if p1.joinAttemptId ~= nil then httpService:GenerateGUID(false) else p1.joinAttemptId
-	local var2 = cryoModule.Dictionary.join(p1, {
-		joinAttemptId = var1,
-		joinAttemptOrigin = if p2 ~= nil then p1.joinAttemptOrigin else p2
+	local Guid = if p1.joinAttemptId == nil then HttpService:GenerateGUID(false) else p1.joinAttemptId
+	local JoinResult = CryoModule.Dictionary.join(p1, {
+		joinAttemptId = Guid,
+		joinAttemptOrigin = if p2 == nil then p1.joinAttemptOrigin else p2
 	})
 	
-	if p3 then
-		p3(var1)
+	if Callback then
+		Callback(Guid)
 	end
-	if getFFlagMoveLuaExpLaunchBeginModule() then
-		default:logEvent("experience_launch_begin")
+	if GetFFlagMoveLuaExpLaunchBeginModule() then
+		Default:logEvent("experience_launch_begin")
 	end
-	messageBus.publish(self.GAME_LAUNCH_DESCRIPTOR, var2)
+	MessageBus.publish(self.GAME_LAUNCH_DESCRIPTOR, JoinResult)
 end
 
-t.default = t.new()
+GameProtocolModule.default = GameProtocolModule.new()
 
-return t
+return GameProtocolModule

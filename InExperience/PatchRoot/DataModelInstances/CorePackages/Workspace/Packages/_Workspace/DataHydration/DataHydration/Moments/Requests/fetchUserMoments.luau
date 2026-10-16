@@ -1,48 +1,53 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local parent = dataHydration.Parent
-local httpModule = require(parent.Http)
-local httpClientModule = require(parent.HttpClient)
-local sharedFlagsModule = require(parent.SharedFlags)
-local _ = require(dataHydration.Moments.MomentsStoreTypes)
-local convertApiMomentsToMomentItemsModule = require(dataHydration.Moments.Util.convertApiMomentsToMomentItems)
-local extractCommentsByFeedItemIdModule = require(dataHydration.Moments.Util.extractCommentsByFeedItemId)
-local extractReactionsByMomentIdModule = require(dataHydration.Moments.Util.extractReactionsByMomentId)
-local extractShareInfoByMomentIdModule = require(dataHydration.Moments.Util.extractShareInfoByMomentId)
-local constructApiUrlModule = require(dataHydration.Moments.Util.constructApiUrl)
-local fFlagMomentsComments = sharedFlagsModule.FFlagMomentsComments
-local fFlagMomentsResolvePublishedPostFeedItem = sharedFlagsModule.FFlagMomentsResolvePublishedPostFeedItem
-local fFlagProfileMomentsOrderingAndReactions = sharedFlagsModule.FFlagProfileMomentsOrderingAndReactions
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local Parent = DataHydration.Parent
+local HttpModule = require(Parent.Http)
+local HttpClientModule = require(Parent.HttpClient)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local _ = require(DataHydration.Moments.MomentsStoreTypes)
+local ConvertApiMomentsToMomentItemsModule = require(DataHydration.Moments.Util.convertApiMomentsToMomentItems)
+local ExtractCommentsByFeedItemIdModule = require(DataHydration.Moments.Util.extractCommentsByFeedItemId)
+local ExtractReactionsByMomentIdModule = require(DataHydration.Moments.Util.extractReactionsByMomentId)
+local ExtractShareInfoByMomentIdModule = require(DataHydration.Moments.Util.extractShareInfoByMomentId)
+local ConstructApiUrlModule = require(DataHydration.Moments.Util.constructApiUrl)
+local FFlagMomentsComments = SharedFlagsModule.FFlagMomentsComments
+local FFlagMomentsResolvePublishedPostFeedItem = SharedFlagsModule.FFlagMomentsResolvePublishedPostFeedItem
+local FFlagProfileMomentsOrderingAndReactions = SharedFlagsModule.FFlagProfileMomentsOrderingAndReactions
 
-local function collectExcludedMomentIds(p1)
-	local cloned = table.clone(p1.moderatedMomentIds or {})
-	
-	for i, v in p1.failedMomentIds or {} do
-		table.insert(cloned, v)
+local function collectExcludedMomentIds(p1) --[[ Line: 26 ]]
+	local Copy = table.clone(p1.moderatedMomentIds or {})
+	local FailedMomentIds = p1.failedMomentIds or {}
+	for _, failedMomentId in FailedMomentIds do
+		table.insert(Copy, failedMomentId)
 	end
-	return cloned
+	return Copy
 end
 
-return function(p2, p3, p4)
-	-- upvalues: constructApiUrlModule (ref), httpModule (ref), httpClientModule (ref), convertApiMomentsToMomentItemsModule (ref), fFlagProfileMomentsOrderingAndReactions (ref), extractReactionsByMomentIdModule (ref), extractShareInfoByMomentIdModule (ref), fFlagMomentsComments (ref), extractCommentsByFeedItemIdModule (ref), fFlagMomentsResolvePublishedPostFeedItem (ref), collectExcludedMomentIds (ref)
-	local var1, var2 = constructApiUrlModule("content-captures-api/v2/moments/get-users-moments")
+return function(TargetUserId, PaginationContext, Network) --[[ Line: 35 | Named "fetchUserMoments" ]]
+	-- upvalues: ConstructApiUrlModule (copy), HttpModule (copy), HttpClientModule (copy), ConvertApiMomentsToMomentItemsModule (copy), FFlagProfileMomentsOrderingAndReactions (copy), ExtractReactionsByMomentIdModule (copy), ExtractShareInfoByMomentIdModule (copy), FFlagMomentsComments (copy), ExtractCommentsByFeedItemIdModule (copy), FFlagMomentsResolvePublishedPostFeedItem (copy), collectExcludedMomentIds (copy)
+	local GetUsersMoments, GetUsersMoments2 = ConstructApiUrlModule("content-captures-api/v2/moments/get-users-moments")
 	
-	return httpClientModule.fetch({
+	return HttpClientModule.fetch({
 		method = "GET",
 		analyticsKey = "moments.get-users-moments",
-		url = `{var1}?{httpModule.Url:makeQueryString({ count = 18, targetUserId = p2, paginationContext = p3 })}`,
-		headers = var2,
-		network = p4,
-		decode = function(p5)
-			-- upvalues: convertApiMomentsToMomentItemsModule (copy), p3 (ref), fFlagProfileMomentsOrderingAndReactions (copy), extractReactionsByMomentIdModule (copy), extractShareInfoByMomentIdModule (copy), fFlagMomentsComments (copy), extractCommentsByFeedItemIdModule (copy), fFlagMomentsResolvePublishedPostFeedItem (copy), collectExcludedMomentIds (copy)
-			local items = p5.items
+		url = `{GetUsersMoments}?{HttpModule.Url:makeQueryString({
+			count = 18,
+			targetUserId = TargetUserId,
+			paginationContext = PaginationContext
+		})}`,
+		headers = GetUsersMoments2,
+		network = Network,
+		decode = function(p2) --[[ Line: 54 ]]
+			-- upvalues: ConvertApiMomentsToMomentItemsModule (upval), PaginationContext (copy), FFlagProfileMomentsOrderingAndReactions (upval), ExtractReactionsByMomentIdModule (upval), ExtractShareInfoByMomentIdModule (upval), FFlagMomentsComments (upval), ExtractCommentsByFeedItemIdModule (upval), FFlagMomentsResolvePublishedPostFeedItem (upval), collectExcludedMomentIds (upval)
+			local Items = p2.items
+			local v1: boolean = Items ~= nil and #Items >= 18
 			
 			return {
-				moments = convertApiMomentsToMomentItemsModule(items),
-				nextCursor = if items ~= nil and #items >= 18 then p5.paginationContext or p3 else nil,
-				reactionsByMomentId = if fFlagProfileMomentsOrderingAndReactions then extractReactionsByMomentIdModule(items) else nil,
-				shareInfoByMomentId = if fFlagProfileMomentsOrderingAndReactions then extractShareInfoByMomentIdModule(items) else nil,
-				commentsByFeedItemId = if fFlagMomentsComments then extractCommentsByFeedItemIdModule(items) else nil,
-				excludedMomentIds = if fFlagMomentsResolvePublishedPostFeedItem then collectExcludedMomentIds(p5) else nil
+				moments = ConvertApiMomentsToMomentItemsModule(Items),
+				nextCursor = if v1 then p2.paginationContext or PaginationContext else nil,
+				reactionsByMomentId = if FFlagProfileMomentsOrderingAndReactions then ExtractReactionsByMomentIdModule(Items) else nil,
+				shareInfoByMomentId = if FFlagProfileMomentsOrderingAndReactions then ExtractShareInfoByMomentIdModule(Items) else nil,
+				commentsByFeedItemId = if FFlagMomentsComments then ExtractCommentsByFeedItemIdModule(Items) else nil,
+				excludedMomentIds = if FFlagMomentsResolvePublishedPostFeedItem then collectExcludedMomentIds(p2) else nil
 			}
 		end
 	})

@@ -1,13 +1,16 @@
-﻿local reactModule = require(script:FindFirstAncestor("UserRelationshipModals").Parent.React)
-local analyticsSetupModule = require(script.Parent.AnalyticsSetup)
+﻿local ReactModule = require(script:FindFirstAncestor("UserRelationshipModals").Parent.React)
+local AnalyticsSetupModule = require(script.Parent.AnalyticsSetup)
 local _ = require(script.Parent.RelationshipTypes)
 
-return function(p1, p2, p3)
-	-- upvalues: reactModule (ref), analyticsSetupModule (ref)
-	return reactModule.useMemo(function()
-		-- upvalues: analyticsSetupModule (copy), p1 (ref), p3 (ref)
-		return analyticsSetupModule({
-			infoForAllEvents = { relationshipType = p1, targetUserId = p3 }
+return function(RelationshipType, p1, TargetUserId) --[[ Line: 14 | Named "useUserRelationshipModalAnalytics" ]]
+	-- upvalues: ReactModule (copy), AnalyticsSetupModule (copy)
+	return (ReactModule.useMemo(function() --[[ Line: 19 ]]
+		-- upvalues: AnalyticsSetupModule (upval), RelationshipType (copy), TargetUserId (copy)
+		return AnalyticsSetupModule({
+			infoForAllEvents = {
+				relationshipType = RelationshipType,
+				targetUserId = TargetUserId
+			}
 		})
-	end, { p1, p2, p3 })
+	end, { RelationshipType, p1, TargetUserId }))
 end

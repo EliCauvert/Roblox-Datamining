@@ -1,189 +1,196 @@
-﻿local playersService = game:GetService("Players")
-local textChatService = game:GetService("TextChatService")
-local expChat = script:FindFirstAncestor("ExpChat")
-local getTransparencyStoreModule = require(expChat.Stores.GetTransparencyStore)
-local getMessagesStoreModule = require(expChat.Stores.GetMessagesStore)
-local runGlobalChatCommandModule = require(expChat.runGlobalChatCommand)
-local runVirtualChatCommandModule = require(expChat.runVirtualChatCommand)
-local parent = expChat.Parent
-local promiseModule = require(parent.Promise)
-local list = require(parent.llama).List
-local expChatSharedModule = require(parent.ExpChatShared)
-local analytics = expChatSharedModule.Analytics
-local loggerModule = require(script.Parent.Logger)
-local configModule = require(expChat.Config)
-local dictationAnalyticsModule = require(expChat.ChatInput.UI.ChatInputBar.Dictation.DictationAnalytics)
-local computeEditDistanceModule = require(expChat.ChatInput.UI.ChatInputBar.Dictation.computeEditDistance)
-local expChatFlipDictationPriorityV2 = game:DefineFastFlag("ExpChatFlipDictationPriorityV2", false)
+﻿local Players = game:GetService("Players")
+local TextChatService = game:GetService("TextChatService")
+local ExpChat = script:FindFirstAncestor("ExpChat")
+local GetTransparencyStoreModule = require(ExpChat.Stores.GetTransparencyStore)
+local GetMessagesStoreModule = require(ExpChat.Stores.GetMessagesStore)
+local RunGlobalChatCommandModule = require(ExpChat.runGlobalChatCommand)
+local RunVirtualChatCommandModule = require(ExpChat.runVirtualChatCommand)
+local Parent = ExpChat.Parent
+local PromiseModule = require(Parent.Promise)
+local List = require(Parent.llama).List
+local ExpChatSharedModule = require(Parent.ExpChatShared)
+local Analytics = ExpChatSharedModule.Analytics
+local LoggerModule = require(script.Parent.Logger)
+local ConfigModule = require(ExpChat.Config)
+local DictationAnalyticsModule = require(ExpChat.ChatInput.UI.ChatInputBar.Dictation.DictationAnalytics)
+local ComputeEditDistanceModule = require(ExpChat.ChatInput.UI.ChatInputBar.Dictation.computeEditDistance)
+local ExpChatFlipDictationPriorityV2 = game:DefineFastFlag("ExpChatFlipDictationPriorityV2", false)
 
-local function _(p1)
-	-- upvalues: configModule (ref)
-	if configModule.MessageCharacterLimit < #p1 then
-		return string.sub(p1, 1, configModule.MessageCharacterLimit), true
+local function _(Text: string) --[[ Line: 29 | Named "truncateToCharLimit" ]]
+	-- upvalues: ConfigModule (copy)
+	if ConfigModule.MessageCharacterLimit < #Text then
+		return string.sub(Text, 1, ConfigModule.MessageCharacterLimit), true
+	else
+		return Text, false
 	end
-	return p1, false
 end
 
-local commands = expChatSharedModule.Commands
-local globalCommands = expChatSharedModule.GlobalCommands
-local autoCastCommand = expChatSharedModule.Commands.autoCastCommand
-local RBXWhisperCommand = expChatSharedModule.Commands.Whisper.RBXWhisperCommand
-local chatInputBarResetTargetChannel = expChatSharedModule.Actions.ChatInputBarResetTargetChannel
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagExpChatFixBackspaceNilTargetChannel = expChatSharedModule.Flags.FFlagExpChatFixBackspaceNilTargetChannel
-local fFlagExpChatDictatedSpeechEnabledModule = require(expChat.Flags.FFlagExpChatDictatedSpeechEnabled)
-local expChatUseVirtualCommandRunner = game:DefineFastFlag("ExpChatUseVirtualCommandRunner", false)
-local getFFlagExpChatProtectedChatInternalAPIs = sharedFlagsModule.getFFlagExpChatProtectedChatInternalAPIs
-local fFlagExpChatDictation = sharedFlagsModule.FFlagExpChatDictation
-local fFlagExpChatDictationGrafanaMetricsModule = require(expChat.Flags.FFlagExpChatDictationGrafanaMetrics)
+local Commands = ExpChatSharedModule.Commands
+local GlobalCommands = ExpChatSharedModule.GlobalCommands
+local AutoCastCommandFunction = ExpChatSharedModule.Commands.autoCastCommand
+local RBXWhisperCommand = ExpChatSharedModule.Commands.Whisper.RBXWhisperCommand
+local ChatInputBarResetTargetChannelFunction = ExpChatSharedModule.Actions.ChatInputBarResetTargetChannel
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagExpChatFixBackspaceNilTargetChannel = ExpChatSharedModule.Flags.FFlagExpChatFixBackspaceNilTargetChannel
+local FFlagExpChatDictatedSpeechEnabledModule = require(ExpChat.Flags.FFlagExpChatDictatedSpeechEnabled)
+local ExpChatUseVirtualCommandRunner = game:DefineFastFlag("ExpChatUseVirtualCommandRunner", false)
+local GetFFlagExpChatProtectedChatInternalAPIsFunction = SharedFlagsModule.getFFlagExpChatProtectedChatInternalAPIs
+local FFlagExpChatDictation = SharedFlagsModule.FFlagExpChatDictation
+local FFlagExpChatDictationGrafanaMetricsModule = require(ExpChat.Flags.FFlagExpChatDictationGrafanaMetrics)
 
-return function(p1)
-	-- upvalues: playersService (ref), autoCastCommand (ref), RBXWhisperCommand (ref), promiseModule (ref), loggerModule (ref), getMessagesStoreModule (ref), analytics (ref), chatInputBarResetTargetChannel (ref), fFlagExpChatFixBackspaceNilTargetChannel (ref), getTransparencyStoreModule (ref), runVirtualChatCommandModule (ref), commands (ref), textChatService (ref), expChatFlipDictationPriorityV2 (ref), fFlagExpChatDictatedSpeechEnabledModule (ref), getFFlagExpChatProtectedChatInternalAPIs (ref), list (ref), configModule (ref), fFlagExpChatDictation (ref), dictationAnalyticsModule (ref), computeEditDistanceModule (ref), fFlagExpChatDictationGrafanaMetricsModule (ref), expChatUseVirtualCommandRunner (ref), globalCommands (ref), runGlobalChatCommandModule (ref)
+return function(Callback) --[[ Line: 53 ]]
+	-- upvalues: Players (copy), AutoCastCommandFunction (copy), RBXWhisperCommand (copy), PromiseModule (copy), LoggerModule (copy), GetMessagesStoreModule (copy), Analytics (copy), ChatInputBarResetTargetChannelFunction (copy), FFlagExpChatFixBackspaceNilTargetChannel (copy), GetTransparencyStoreModule (copy), RunVirtualChatCommandModule (copy), Commands (copy), TextChatService (copy), ExpChatFlipDictationPriorityV2 (copy), FFlagExpChatDictatedSpeechEnabledModule (copy), GetFFlagExpChatProtectedChatInternalAPIsFunction (copy), List (copy), ConfigModule (copy), FFlagExpChatDictation (copy), DictationAnalyticsModule (copy), ComputeEditDistanceModule (copy), FFlagExpChatDictationGrafanaMetricsModule (copy), ExpChatUseVirtualCommandRunner (copy), GlobalCommands (copy), RunGlobalChatCommandModule (copy)
 	return {
-		activateWhisperMode = function(p2)
-			-- upvalues: playersService (copy), autoCastCommand (copy), RBXWhisperCommand (copy), promiseModule (copy), loggerModule (copy)
-			local var1 = playersService:GetPlayerByUserId(p2)
-			local localPlayer = playersService.LocalPlayer
+		activateWhisperMode = function(UserId) --[[ Line: 55 ]]
+			-- upvalues: Players (upval), AutoCastCommandFunction (upval), RBXWhisperCommand (upval), PromiseModule (upval), LoggerModule (upval)
+			local Player = Players:GetPlayerByUserId(UserId)
+			local LocalPlayer = Players.LocalPlayer
 			
-			if not var1 then return end
-			if var1 == localPlayer then
+			if not Player then return end
+			if Player ~= LocalPlayer then
+				assert(LocalPlayer, "Players.LocalPlayer should be non-nil")
+				PromiseModule.any({
+					AutoCastCommandFunction(RBXWhisperCommand, LocalPlayer.UserId, "/w @" .. Player.Name)
+				}):catch(function(Err) --[[ Line: 71 ]]
+					-- upvalues: LoggerModule (upval)
+					LoggerModule:debug("Could not send autoCastCommand. Error: {}", Err)
+				end)
+				
 				return
 			end
-			assert(localPlayer, "Players.LocalPlayer should be non-nil")
-			promiseModule.any({
-				autoCastCommand(RBXWhisperCommand, localPlayer.UserId, "/w @" .. var1.Name)
-			}):catch(function(p3)
-				-- upvalues: loggerModule (copy)
-				loggerModule:debug("Could not send autoCastCommand. Error: {}", p3)
-			end)
 		end,
-		onToggleTranslation = function(p2)
-			-- upvalues: getMessagesStoreModule (copy)
-			getMessagesStoreModule(false).toggleGlobalTranslation(p2)
+		onToggleTranslation = function(p1) --[[ Line: 76 ]]
+			-- upvalues: GetMessagesStoreModule (upval)
+			GetMessagesStoreModule(false).toggleGlobalTranslation(p1)
 		end,
-		onToggleIndividualTranslation = function(p2, p3)
-			-- upvalues: playersService (copy), analytics (copy), getMessagesStoreModule (copy)
-			analytics.FireClientAnalyticsWithEventName("MessageTranslationToggled", {
-				useTranslation = p2,
-				senderUserId = if playersService.LocalPlayer then playersService.LocalPlayer.UserId else nil,
-				localeId = if playersService.LocalPlayer then playersService.LocalPlayer.LocaleId else nil
+		onToggleIndividualTranslation = function(UseTranslation, p1) --[[ Line: 81 ]]
+			-- upvalues: Players (upval), Analytics (upval), GetMessagesStoreModule (upval)
+			Analytics.FireClientAnalyticsWithEventName("MessageTranslationToggled", {
+				useTranslation = UseTranslation,
+				senderUserId = if Players.LocalPlayer then Players.LocalPlayer.UserId else nil,
+				localeId = if Players.LocalPlayer then Players.LocalPlayer.LocaleId else nil
 			})
-			getMessagesStoreModule(false).toggleMessageTranslation(p2, p3)
+			GetMessagesStoreModule(false).toggleMessageTranslation(UseTranslation, p1)
 		end,
-		resetTargetChannel = function(value)
-			-- upvalues: p1 (ref), chatInputBarResetTargetChannel (copy), fFlagExpChatFixBackspaceNilTargetChannel (copy)
-			p1(chatInputBarResetTargetChannel(if fFlagExpChatFixBackspaceNilTargetChannel then value else nil))
+		resetTargetChannel = function(p1) --[[ Line: 94 ]]
+			-- upvalues: Callback (copy), ChatInputBarResetTargetChannelFunction (upval), FFlagExpChatFixBackspaceNilTargetChannel (upval)
+			Callback(ChatInputBarResetTargetChannelFunction(if FFlagExpChatFixBackspaceNilTargetChannel then p1 else nil))
 		end,
-		onHovered = function()
-			-- upvalues: getTransparencyStoreModule (copy)
-			getTransparencyStoreModule(false).resetAllTransparency()
+		onHovered = function() --[[ Line: 102 ]]
+			-- upvalues: GetTransparencyStoreModule (upval)
+			GetTransparencyStoreModule(false).resetAllTransparency()
 		end,
-		onUnhovered = function()
-			-- upvalues: getTransparencyStoreModule (copy)
-			getTransparencyStoreModule(false).resetAllTransparency()
+		onUnhovered = function() --[[ Line: 106 ]]
+			-- upvalues: GetTransparencyStoreModule (upval)
+			GetTransparencyStoreModule(false).resetAllTransparency()
 		end,
-		onSendChat = function(p2, p3, p4)
-			-- upvalues: runVirtualChatCommandModule (copy), playersService (copy), commands (copy), textChatService (copy), loggerModule (copy), promiseModule (copy), expChatFlipDictationPriorityV2 (copy), fFlagExpChatDictatedSpeechEnabledModule (copy), getFFlagExpChatProtectedChatInternalAPIs (copy), list (copy), configModule (copy), fFlagExpChatDictation (copy), dictationAnalyticsModule (copy), analytics (copy), computeEditDistanceModule (copy), fFlagExpChatDictationGrafanaMetricsModule (copy)
-			if string.sub(p2, 1, 1) == "/" and runVirtualChatCommandModule(p2, if playersService.LocalPlayer then playersService.LocalPlayer.UserId else 0, commands.getVirtualLocalEnabledCommands(), "RBXGeneral") then return end
-			local chatInputBarConfiguration = textChatService:FindFirstChildOfClass("ChatInputBarConfiguration")
-			local var1 = if chatInputBarConfiguration then chatInputBarConfiguration.TargetTextChannel else nil
-			loggerModule:debug("onSendChat: {} to {}", p2, if var1 then var1.Name else "nil")
+		onSendChat = function(Text: string, p1, p2, TargetTextChannel) --[[ Line: 110 ]]
+			-- upvalues: RunVirtualChatCommandModule (upval), Players (upval), Commands (upval), TextChatService (upval), LoggerModule (upval), PromiseModule (upval), ExpChatFlipDictationPriorityV2 (upval), FFlagExpChatDictatedSpeechEnabledModule (upval), GetFFlagExpChatProtectedChatInternalAPIsFunction (upval), List (upval), ConfigModule (upval), FFlagExpChatDictation (upval), DictationAnalyticsModule (upval), Analytics (upval), ComputeEditDistanceModule (upval), FFlagExpChatDictationGrafanaMetricsModule (upval)
+			if string.sub(Text, 1, 1) == "/" and RunVirtualChatCommandModule(Text, Players.LocalPlayer and Players.LocalPlayer.UserId or 0, Commands.getVirtualLocalEnabledCommands(), "RBXGeneral") then return end
+			local ChatInputBarConfiguration = TextChatService:FindFirstChildOfClass("ChatInputBarConfiguration")
+			local TargetTextChannel1 = TargetTextChannel
 			
-			if var1 then
-				promiseModule.try(function()
-					-- upvalues: expChatFlipDictationPriorityV2 (copy), fFlagExpChatDictatedSpeechEnabledModule (copy), p4 (ref), var1 (write), p2 (ref), getFFlagExpChatProtectedChatInternalAPIs (copy), list (copy), playersService (copy), configModule (copy), fFlagExpChatDictation (copy), p3 (ref), dictationAnalyticsModule (copy), analytics (copy), computeEditDistanceModule (copy), fFlagExpChatDictationGrafanaMetricsModule (copy)
-					if expChatFlipDictationPriorityV2 then
-						if fFlagExpChatDictatedSpeechEnabledModule and p4 then
-							var1:SendDictatedSpeechAsync(p2)
-						elseif getFFlagExpChatProtectedChatInternalAPIs() then
-							var1:SendInternalAsync(p2)
+			if TargetTextChannel1 == nil and ChatInputBarConfiguration then
+				TargetTextChannel1 = ChatInputBarConfiguration.TargetTextChannel
+			end
+			LoggerModule:debug("onSendChat: {} to {}", Text, if TargetTextChannel1 then TargetTextChannel1.Name else "nil")
+			
+			if TargetTextChannel1 then
+				PromiseModule.try(function() --[[ Line: 136 ]]
+					-- upvalues: ExpChatFlipDictationPriorityV2 (upval), FFlagExpChatDictatedSpeechEnabledModule (upval), p2 (copy), TargetTextChannel1 (ref), Text (copy), GetFFlagExpChatProtectedChatInternalAPIsFunction (upval), List (upval), Players (upval), ConfigModule (upval), FFlagExpChatDictation (upval), p1 (copy), DictationAnalyticsModule (upval), Analytics (upval), ComputeEditDistanceModule (upval), FFlagExpChatDictationGrafanaMetricsModule (upval)
+					if ExpChatFlipDictationPriorityV2 then
+						if FFlagExpChatDictatedSpeechEnabledModule and p2 then
+							TargetTextChannel1:SendDictatedSpeechAsync(Text)
+						elseif GetFFlagExpChatProtectedChatInternalAPIsFunction() then
+							TargetTextChannel1:SendInternalAsync(Text)
 						else
-							var1:SendAsync(p2)
+							TargetTextChannel1:SendAsync(Text)
 						end
-					elseif getFFlagExpChatProtectedChatInternalAPIs() then
-						var1:SendInternalAsync(p2)
-					elseif fFlagExpChatDictatedSpeechEnabledModule and p4 then
-						var1:SendDictatedSpeechAsync(p2)
+					elseif GetFFlagExpChatProtectedChatInternalAPIsFunction() then
+						TargetTextChannel1:SendInternalAsync(Text)
+					elseif FFlagExpChatDictatedSpeechEnabledModule and p2 then
+						TargetTextChannel1:SendDictatedSpeechAsync(Text)
 					else
-						var1:SendAsync(p2)
+						TargetTextChannel1:SendAsync(Text)
 					end
-					local t = {
-						channelName = var1.Name,
-						senderUserId = if playersService.LocalPlayer then playersService.LocalPlayer.UserId else nil,
-						numParticipants = list.count(var1:GetChildren(), function(p5)
-							return p5:IsA("TextSource")
+					local config = {
+						channelName = TargetTextChannel1.Name,
+						senderUserId = if Players.LocalPlayer then Players.LocalPlayer.UserId else nil,
+						numParticipants = List.count(TargetTextChannel1:GetChildren(), function(TextSource) --[[ Line: 155 ]]
+							return TextSource:IsA("TextSource")
 						end),
-						isDefaultChannel = if configModule[var1.Name] then "true" else "false"
+						isDefaultChannel = if ConfigModule[TargetTextChannel1.Name] then "true" else "false"
 					}
 					
-					if fFlagExpChatDictation and p3 then
-						t[dictationAnalyticsModule.Properties.SttMode] = p3.mode
-						t[dictationAnalyticsModule.Properties.SttOutcome] = p3.outcome
+					if FFlagExpChatDictation and p1 then
+						config[DictationAnalyticsModule.Properties.SttMode] = p1.mode
+						config[DictationAnalyticsModule.Properties.SttOutcome] = p1.outcome
 					end
-					analytics.FireClientAnalyticsWithEventName("LuaMessageSent", t)
+					Analytics.FireClientAnalyticsWithEventName("LuaMessageSent", config)
 					
-					if fFlagExpChatDictation and p3 then
-						local substring, var2
-						local textStt = p3.textStt or ""
-						local textSent = p3.textSent or p2
+					if FFlagExpChatDictation and p1 then
+						local TextStt = p1.textStt or ""
+						local TextSent = p1.textSent or Text
+						local Segment = nil
+						local Flag = nil
 						
-						if configModule.MessageCharacterLimit < #textStt then
-							substring = string.sub(textStt, 1, configModule.MessageCharacterLimit)
-							var2 = true
+						if ConfigModule.MessageCharacterLimit < #TextStt then
+							Segment = string.sub(TextStt, 1, ConfigModule.MessageCharacterLimit)
+							Flag = true
 						else
-							substring = textStt
-							var2 = false
+							Segment = TextStt
+							Flag = false
 						end
-						local substring_1, var3
-						if configModule.MessageCharacterLimit < #textSent then
-							substring_1 = string.sub(textSent, 1, configModule.MessageCharacterLimit)
-							var3 = true
+						local Segment1 = nil
+						local Flag1 = nil
+						if ConfigModule.MessageCharacterLimit < #TextSent then
+							Segment1 = string.sub(TextSent, 1, ConfigModule.MessageCharacterLimit)
+							Flag1 = true
 						else
-							substring_1 = textSent
-							var3 = false
+							Segment1 = TextSent
+							Flag1 = false
 						end
-						dictationAnalyticsModule.fire(dictationAnalyticsModule.Events.MessageSent, {
-							[dictationAnalyticsModule.Properties.SttMode] = p3.mode,
-							[dictationAnalyticsModule.Properties.SttOutcome] = p3.outcome,
-							[dictationAnalyticsModule.Properties.FinalCharCount] = #textSent,
-							[dictationAnalyticsModule.Properties.WasEdited] = textStt ~= textSent,
-							[dictationAnalyticsModule.Properties.EditDistance] = computeEditDistanceModule(textStt, textSent),
-							[dictationAnalyticsModule.Properties.TextStt] = substring,
-							[dictationAnalyticsModule.Properties.TextSent] = substring_1,
-							[dictationAnalyticsModule.Properties.TextSttTruncated] = var2,
-							[dictationAnalyticsModule.Properties.TextSentTruncated] = var3
+						DictationAnalyticsModule.fire(DictationAnalyticsModule.Events.MessageSent, {
+							[DictationAnalyticsModule.Properties.SttMode] = p1.mode,
+							[DictationAnalyticsModule.Properties.SttOutcome] = p1.outcome,
+							[DictationAnalyticsModule.Properties.FinalCharCount] = #TextSent,
+							[DictationAnalyticsModule.Properties.WasEdited] = TextStt ~= TextSent,
+							[DictationAnalyticsModule.Properties.EditDistance] = ComputeEditDistanceModule(TextStt, TextSent),
+							[DictationAnalyticsModule.Properties.TextStt] = Segment,
+							[DictationAnalyticsModule.Properties.TextSent] = Segment1,
+							[DictationAnalyticsModule.Properties.TextSttTruncated] = Flag,
+							[DictationAnalyticsModule.Properties.TextSentTruncated] = Flag1
 						})
 						
-						if fFlagExpChatDictationGrafanaMetricsModule then
-							dictationAnalyticsModule.reportMessageSentCounter(p3.mode)
+						if FFlagExpChatDictationGrafanaMetricsModule then
+							DictationAnalyticsModule.reportMessageSentCounter(p1.mode)
 						end
 					end
-				end):catch(function(p5)
-					warn(p5.error)
+				end):catch(function(Err) --[[ Line: 192 ]]
+					warn(Err.error)
 				end)
 			else
-				loggerModule:warning("TargetTextChannel was nil!")
+				LoggerModule:warning("TargetTextChannel was nil!")
 			end
 		end,
-		onSendGlobalChat = function(p2, _, p3)
-			-- upvalues: playersService (copy), expChatUseVirtualCommandRunner (copy), runVirtualChatCommandModule (copy), globalCommands (copy), runGlobalChatCommandModule (copy), promiseModule (copy), fFlagExpChatDictatedSpeechEnabledModule (copy), textChatService (copy)
-			if string.sub(p2, 1, 1) == "/" then
-				local var1 = if playersService.LocalPlayer then playersService.LocalPlayer.UserId else 0
+		onSendGlobalChat = function(Text: string, _, p1) --[[ Line: 200 ]]
+			-- upvalues: Players (upval), ExpChatUseVirtualCommandRunner (upval), RunVirtualChatCommandModule (upval), GlobalCommands (upval), RunGlobalChatCommandModule (upval), PromiseModule (upval), FFlagExpChatDictatedSpeechEnabledModule (upval), TextChatService (upval)
+			if string.sub(Text, 1, 1) == "/" then
+				local UserId = Players.LocalPlayer and Players.LocalPlayer.UserId or 0
 				
-				if if expChatUseVirtualCommandRunner then runVirtualChatCommandModule(p2, var1, globalCommands.getGlobalEnabledCommands(), "RBXGlobal") else runGlobalChatCommandModule(p2, var1) then
-					return
-				end
+				if if ExpChatUseVirtualCommandRunner then RunVirtualChatCommandModule(Text, UserId, GlobalCommands.getGlobalEnabledCommands(), "RBXGlobal") else RunGlobalChatCommandModule(Text, UserId) then return end
 			end
-			promiseModule.try(function()
-				-- upvalues: fFlagExpChatDictatedSpeechEnabledModule (copy), p3 (ref), textChatService (copy), p2 (ref)
-				if fFlagExpChatDictatedSpeechEnabledModule and p3 then
-					textChatService:SendDictatedSpeechUniverseChatAsync(p2)
+			PromiseModule.try(function() --[[ Line: 218 ]]
+				-- upvalues: FFlagExpChatDictatedSpeechEnabledModule (upval), p1 (copy), TextChatService (upval), Text (copy)
+				if FFlagExpChatDictatedSpeechEnabledModule and p1 then
+					TextChatService:SendDictatedSpeechUniverseChatAsync(Text)
 					
 					return
+				else
+					TextChatService:SendUniverseChatMessageAsync(Text, "")
 				end
-				textChatService:SendUniverseChatMessageAsync(p2, "")
-			end):catch(function(p4)
-				warn(p4.error)
+			end):catch(function(Err) --[[ Line: 224 ]]
+				warn(Err.error)
 			end)
 		end
 	}

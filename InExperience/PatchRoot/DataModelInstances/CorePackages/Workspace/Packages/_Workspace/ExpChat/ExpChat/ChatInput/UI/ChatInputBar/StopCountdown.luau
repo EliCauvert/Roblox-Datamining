@@ -1,30 +1,30 @@
-﻿local parent = script:FindFirstAncestor("ExpChat").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
+﻿local Parent = script:FindFirstAncestor("ExpChat").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), foundationModule (ref)
-	return reactModule.createElement(foundationModule.View, {
+return ReactModule.memo(function(Frame) --[[ Line: 17 | Named "StopCountdown" ]]
+	-- upvalues: ReactModule (copy), FoundationModule (copy)
+	return ReactModule.createElement(FoundationModule.View, {
 		tag = "auto-xy radius-circle",
-		Visible = p1.Visible,
-		LayoutOrder = p1.LayoutOrder,
-		GroupTransparency = p1.transparencyValue
+		Visible = Frame.Visible,
+		LayoutOrder = Frame.LayoutOrder,
+		GroupTransparency = Frame.transparencyValue
 	}, {
-		Progress = reactModule.createElement(foundationModule.Progress, {
+		Progress = ReactModule.createElement(FoundationModule.Progress, {
 			tag = "position-center-center anchor-center-center",
 			ZIndex = 2,
-			shape = foundationModule.Enums.ProgressShape.Circle,
-			size = foundationModule.Enums.ProgressSize.Medium,
-			value = p1.countdownProgress:map(function(p2)
-				return math.clamp(p2, 0, 1) * 100
+			shape = FoundationModule.Enums.ProgressShape.Circle,
+			size = FoundationModule.Enums.ProgressSize.Medium,
+			value = Frame.countdownProgress:map(function(Value: number): number --[[ Line: 28 ]]
+				return math.clamp(Value, 0, 1) * 100
 			end)
 		}),
-		Icon = reactModule.createElement(foundationModule.IconButton, {
+		Icon = ReactModule.createElement(FoundationModule.IconButton, {
 			isCircular = true,
-			icon = foundationModule.Enums.IconName.StopSmall,
-			size = foundationModule.Enums.InputSize.Small,
-			variant = foundationModule.Enums.ButtonVariant.Utility,
-			onActivated = p1.onActivated
+			icon = FoundationModule.Enums.IconName.StopSmall,
+			size = FoundationModule.Enums.InputSize.Small,
+			variant = FoundationModule.Enums.ButtonVariant.Utility,
+			onActivated = Frame.onActivated
 		})
 	})
 end)

@@ -1,70 +1,71 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local chatCardPriorityModule = require(script.Parent.ChatCardEmphasis.ChatCardPriority)
-local useChatCardEmphasisModule = require(script.Parent.ChatCardEmphasis.useChatCardEmphasis)
-local fFlagBuildExperienceDontAskAgainPushUpsellModule = require(buildExperience.Flags.FFlagBuildExperienceDontAskAgainPushUpsell)
-local fFlagBuildExperienceChatCardEmphasisModule = require(buildExperience.Flags.FFlagBuildExperienceChatCardEmphasis)
-local button = foundationModule.Button
-local text = foundationModule.Text
-local view = foundationModule.View
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local fillBehavior = foundationModule.Enums.FillBehavior
-local inputSize = foundationModule.Enums.InputSize
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
+local ChatCardPriorityModule = require(script.Parent.ChatCardEmphasis.ChatCardPriority)
+local UseChatCardEmphasisModule = require(script.Parent.ChatCardEmphasis.useChatCardEmphasis)
+local FFlagBuildExperienceDontAskAgainPushUpsellModule = require(BuildExperience.Flags.FFlagBuildExperienceDontAskAgainPushUpsell)
+local FFlagBuildExperienceChatCardEmphasisModule = require(BuildExperience.Flags.FFlagBuildExperienceChatCardEmphasis)
+local Button = FoundationModule.Button
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local FillBehavior = FoundationModule.Enums.FillBehavior
+local InputSize = FoundationModule.Enums.InputSize
 
-return function(p1)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), fFlagBuildExperienceChatCardEmphasisModule (ref), useChatCardEmphasisModule (ref), chatCardPriorityModule (ref), reactModule (ref), view (ref), text (ref), button (ref), inputSize (ref), buttonVariant (ref), fillBehavior (ref), fFlagBuildExperienceDontAskAgainPushUpsellModule (ref)
-	local var1 = useLocalization({
-		disabledDescription = localizationStringsModule.CHAT_NOTIFICATION_DISABLED_DESCRIPTION,
-		dontAskAgain = localizationStringsModule.CHAT_DONT_ASK_AGAIN,
-		notNow = localizationStringsModule.CHAT_NOT_NOW,
-		notifyMe = localizationStringsModule.CHAT_NOTIFY_ME,
-		openSettings = localizationStringsModule.CHAT_OPEN_SETTINGS,
-		promptDescription = localizationStringsModule.CHAT_NOTIFICATION_PROMPT_DESCRIPTION,
-		promptTitle = localizationStringsModule.CHAT_NOTIFICATION_PROMPT_TITLE
+return function(Frame) --[[ Line: 32 | Named "PushNotificationsUpsellCard" ]]
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagBuildExperienceChatCardEmphasisModule (copy), UseChatCardEmphasisModule (copy), ChatCardPriorityModule (copy), ReactModule (copy), View (copy), Text (copy), Button (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy), FFlagBuildExperienceDontAskAgainPushUpsellModule (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
+		disabledDescription = LocalizationStringsModule.CHAT_NOTIFICATION_DISABLED_DESCRIPTION,
+		dontAskAgain = LocalizationStringsModule.CHAT_DONT_ASK_AGAIN,
+		notNow = LocalizationStringsModule.CHAT_NOT_NOW,
+		notifyMe = LocalizationStringsModule.CHAT_NOTIFY_ME,
+		openSettings = LocalizationStringsModule.CHAT_OPEN_SETTINGS,
+		promptDescription = LocalizationStringsModule.CHAT_NOTIFICATION_PROMPT_DESCRIPTION,
+		promptTitle = LocalizationStringsModule.CHAT_NOTIFICATION_PROMPT_TITLE
 	})
-	local var2 = p1.shouldOpenSettings == true
+	local IsShouldOpenSettings = Frame.shouldOpenSettings == true
+	local UseChatCardEmphasisModuleResult = if FFlagBuildExperienceChatCardEmphasisModule then UseChatCardEmphasisModule(ChatCardPriorityModule.PushNotificationsUpsell) else nil
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "col gap-medium size-full-0 auto-y padding-large stroke-standard stroke-default radius-large",
 		testId = "PushNotificationsUpsellCard",
-		LayoutOrder = p1.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		Title = reactModule.createElement(text, {
+		Title = ReactModule.createElement(Text, {
 			LayoutOrder = 1,
 			tag = "size-full-0 auto-y text-title-medium text-wrap text-align-x-left content-emphasis",
-			Text = var1.promptTitle
+			Text = UseLocalizationResult.promptTitle
 		}),
-		Description = reactModule.createElement(text, {
+		Description = ReactModule.createElement(Text, {
 			LayoutOrder = 2,
 			tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-emphasis",
-			Text = if var2 then var1.disabledDescription else var1.promptDescription
+			Text = if IsShouldOpenSettings then UseLocalizationResult.disabledDescription else UseLocalizationResult.promptDescription
 		}),
-		Actions = reactModule.createElement(view, {
+		Actions = ReactModule.createElement(View, {
 			LayoutOrder = 3,
 			tag = "row gap-small size-full-0 auto-y"
 		}, {
-			PrimaryAction = reactModule.createElement(button, {
+			PrimaryAction = ReactModule.createElement(Button, {
 				LayoutOrder = 1,
-				text = if var2 then var1.openSettings else var1.notifyMe,
-				size = inputSize.Small,
-				variant = if (if fFlagBuildExperienceChatCardEmphasisModule then useChatCardEmphasisModule(chatCardPriorityModule.PushNotificationsUpsell) else nil) == false then buttonVariant.SoftEmphasis else buttonVariant.Emphasis,
-				fillBehavior = fillBehavior.Fill,
-				isLoading = p1.isRequestPending == true,
-				onActivated = if var2 then p1.onOpenSettings else p1.onNotifyMe,
-				testId = if var2 then "PushNotificationsUpsellCard.OpenSettings" else "PushNotificationsUpsellCard.NotifyMe"
+				text = if IsShouldOpenSettings then UseLocalizationResult.openSettings else UseLocalizationResult.notifyMe,
+				size = InputSize.Small,
+				variant = if UseChatCardEmphasisModuleResult == false then ButtonVariant.SoftEmphasis else ButtonVariant.Emphasis,
+				fillBehavior = FillBehavior.Fill,
+				isLoading = Frame.isRequestPending == true,
+				onActivated = if IsShouldOpenSettings then Frame.onOpenSettings else Frame.onNotifyMe,
+				testId = if IsShouldOpenSettings then "PushNotificationsUpsellCard.OpenSettings" else "PushNotificationsUpsellCard.NotifyMe"
 			}),
-			NotNow = reactModule.createElement(button, {
+			NotNow = ReactModule.createElement(Button, {
 				LayoutOrder = 2,
 				testId = "PushNotificationsUpsellCard.NotNow",
-				text = if fFlagBuildExperienceDontAskAgainPushUpsellModule then var1.dontAskAgain else var1.notNow,
-				size = inputSize.Small,
-				variant = buttonVariant.Standard,
-				fillBehavior = fillBehavior.Fill,
-				onActivated = p1.onNotNow
+				text = if FFlagBuildExperienceDontAskAgainPushUpsellModule then UseLocalizationResult.dontAskAgain else UseLocalizationResult.notNow,
+				size = InputSize.Small,
+				variant = ButtonVariant.Standard,
+				fillBehavior = FillBehavior.Fill,
+				onActivated = Frame.onNotNow
 			})
 		})
 	})

@@ -1,83 +1,83 @@
-﻿local parent = script.Parent.Parent
-local playersService = game:GetService("Players")
-local marketplaceService = game:GetService("MarketplaceService")
+﻿local Parent = script.Parent.Parent
+local Players = game:GetService("Players")
+local MarketplaceService = game:GetService("MarketplaceService")
 local _ = game:GetService("CoreGui"):WaitForChild("RobloxGui")
-local completeRequestModule = require(parent.Actions.CompleteRequest)
-local promptStateModule = require(parent.Enums.PromptState)
-local requestTypeModule = require(parent.Enums.RequestType)
-local purchaseErrorModule = require(parent.Enums.PurchaseError)
-local selectedRobuxPackageModule = require(parent.Utils.SelectedRobuxPackage)
-local counterModule = require(parent.Enums.Counter)
-local sendCounterModule = require(parent.Thunks.sendCounter)
-local analyticsModule = require(parent.Services.Analytics)
-local publicBindablesModule = require(parent.Services.PublicBindables)
-local thunkModule = require(parent.Thunk)
-local fFlagEnableUnifiedPurchaseFlowForDevSubs = require(parent.Parent.SharedFlags).FFlagEnableUnifiedPurchaseFlowForDevSubs
-local list = { analyticsModule, publicBindablesModule }
+local CompleteRequestModule = require(Parent.Actions.CompleteRequest)
+local PromptStateModule = require(Parent.Enums.PromptState)
+local RequestTypeModule = require(Parent.Enums.RequestType)
+local PurchaseErrorModule = require(Parent.Enums.PurchaseError)
+local SelectedRobuxPackageModule = require(Parent.Utils.SelectedRobuxPackage)
+local CounterModule = require(Parent.Enums.Counter)
+local SendCounterModule = require(Parent.Thunks.sendCounter)
+local AnalyticsModule = require(Parent.Services.Analytics)
+local PublicBindablesModule = require(Parent.Services.PublicBindables)
+local ThunkModule = require(Parent.Thunk)
+local FFlagEnableUnifiedPurchaseFlowForDevSubs = require(Parent.Parent.SharedFlags).FFlagEnableUnifiedPurchaseFlowForDevSubs
+local list = { AnalyticsModule, PublicBindablesModule }
 
-return function()
-	-- upvalues: thunkModule (ref), list (ref), analyticsModule (ref), selectedRobuxPackageModule (ref), promptStateModule (ref), sendCounterModule (ref), counterModule (ref), requestTypeModule (ref), playersService (ref), marketplaceService (ref), purchaseErrorModule (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref), publicBindablesModule (ref), completeRequestModule (ref)
-	return thunkModule.new(script.Name, list, function(p1, p2)
-		-- upvalues: analyticsModule (copy), selectedRobuxPackageModule (copy), promptStateModule (copy), sendCounterModule (copy), counterModule (copy), requestTypeModule (copy), playersService (copy), marketplaceService (copy), purchaseErrorModule (copy), fFlagEnableUnifiedPurchaseFlowForDevSubs (copy), publicBindablesModule (copy), completeRequestModule (copy)
-		local var1 = p2[analyticsModule]
-		local state = p1:getState()
-		local requestType = state.promptRequest.requestType
-		local purchaseError = state.purchaseError
-		local id = state.promptRequest.id
-		local hasCompletedPurchase = state.hasCompletedPurchase
-		local robuxProductId = selectedRobuxPackageModule.getRobuxProductId(state)
-		local productId = state.productInfo and state.productInfo.productId
+return function() --[[ Line: 30 | Named "completeRequest" ]]
+	-- upvalues: ThunkModule (copy), list (copy), AnalyticsModule (copy), SelectedRobuxPackageModule (copy), PromptStateModule (copy), SendCounterModule (copy), CounterModule (copy), RequestTypeModule (copy), Players (copy), MarketplaceService (copy), PurchaseErrorModule (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (copy), PublicBindablesModule (copy), CompleteRequestModule (copy)
+	return ThunkModule.new(script.Name, list, function(p1, p2) --[[ Line: 31 ]]
+		-- upvalues: AnalyticsModule (upval), SelectedRobuxPackageModule (upval), PromptStateModule (upval), SendCounterModule (upval), CounterModule (upval), RequestTypeModule (upval), Players (upval), MarketplaceService (upval), PurchaseErrorModule (upval), FFlagEnableUnifiedPurchaseFlowForDevSubs (upval), PublicBindablesModule (upval), CompleteRequestModule (upval)
+		local v1 = p2[AnalyticsModule]
+		local State = p1:getState()
+		local RequestType = State.promptRequest.requestType
+		local PurchaseError = State.purchaseError
+		local Id = State.promptRequest.id
+		local HasCompletedPurchase = State.hasCompletedPurchase
+		local RobuxProductId = SelectedRobuxPackageModule.getRobuxProductId(State)
+		local ProductId = State.productInfo and State.productInfo.productId
 		
-		if state.promptState == promptStateModule.U13PaymentModal then
-			var1.signalScaryModalCanceled(productId, "U13PaymentModal", robuxProductId)
-		elseif state.promptState == promptStateModule.U13MonthlyThreshold1Modal then
-			var1.signalScaryModalCanceled(productId, "U13MonthlyThreshold1Modal", robuxProductId)
-		elseif state.promptState == promptStateModule.U13MonthlyThreshold2Modal then
-			var1.signalScaryModalCanceled(productId, "U13MonthlyThreshold2Modal", robuxProductId)
-		elseif state.promptState == promptStateModule.ParentalConsentWarningPaymentModal13To17 then
-			var1.signalScaryModalCanceled(productId, "ParentalConsentWarningPaymentModal13To17", robuxProductId)
+		if State.promptState == PromptStateModule.U13PaymentModal then
+			v1.signalScaryModalCanceled(ProductId, "U13PaymentModal", RobuxProductId)
+		elseif State.promptState == PromptStateModule.U13MonthlyThreshold1Modal then
+			v1.signalScaryModalCanceled(ProductId, "U13MonthlyThreshold1Modal", RobuxProductId)
+		elseif State.promptState == PromptStateModule.U13MonthlyThreshold2Modal then
+			v1.signalScaryModalCanceled(ProductId, "U13MonthlyThreshold2Modal", RobuxProductId)
+		elseif State.promptState == PromptStateModule.ParentalConsentWarningPaymentModal13To17 then
+			v1.signalScaryModalCanceled(ProductId, "ParentalConsentWarningPaymentModal13To17", RobuxProductId)
 		end
-		if state.promptState == promptStateModule.PurchaseComplete then
-			p1:dispatch(sendCounterModule(counterModule.Success))
-		elseif state.promptState == promptStateModule.Error then
-			p1:dispatch(sendCounterModule(counterModule.Failed))
+		if State.promptState == PromptStateModule.PurchaseComplete then
+			p1:dispatch(SendCounterModule(CounterModule.Success))
+		elseif State.promptState == PromptStateModule.Error then
+			p1:dispatch(SendCounterModule(CounterModule.Failed))
 		else
-			p1:dispatch(sendCounterModule(counterModule.Cancelled))
+			p1:dispatch(SendCounterModule(CounterModule.Cancelled))
 		end
-		if requestType == requestTypeModule.Product then
-			marketplaceService:SignalPromptProductPurchaseFinished(playersService.LocalPlayer.UserId, id, hasCompletedPurchase)
-		elseif requestType == requestTypeModule.GamePass then
-			marketplaceService:SignalPromptGamePassPurchaseFinished(playersService.LocalPlayer, id, hasCompletedPurchase)
-		elseif requestType == requestTypeModule.Bundle then
-			marketplaceService:SignalPromptBundlePurchaseFinished(playersService.LocalPlayer, id, hasCompletedPurchase)
-		elseif requestType == requestTypeModule.Asset then
-			marketplaceService:SignalPromptPurchaseFinished(playersService.LocalPlayer, id, hasCompletedPurchase)
-			local assetTypeId = state.productInfo.assetTypeId
+		if RequestType == RequestTypeModule.Product then
+			MarketplaceService:SignalPromptProductPurchaseFinished(Players.LocalPlayer.UserId, Id, HasCompletedPurchase)
+		elseif RequestType == RequestTypeModule.GamePass then
+			MarketplaceService:SignalPromptGamePassPurchaseFinished(Players.LocalPlayer, Id, HasCompletedPurchase)
+		elseif RequestType == RequestTypeModule.Bundle then
+			MarketplaceService:SignalPromptBundlePurchaseFinished(Players.LocalPlayer, Id, HasCompletedPurchase)
+		elseif RequestType == RequestTypeModule.Asset then
+			MarketplaceService:SignalPromptPurchaseFinished(Players.LocalPlayer, Id, HasCompletedPurchase)
+			local AssetTypeId = State.productInfo.assetTypeId
 			
-			if hasCompletedPurchase and assetTypeId then
-				pcall(function()
-					-- upvalues: marketplaceService (copy), playersService (copy), assetTypeId (ref)
-					marketplaceService:SignalAssetTypePurchased(playersService.LocalPlayer, assetTypeId)
+			if HasCompletedPurchase and AssetTypeId then
+				pcall(function() --[[ Line: 74 ]]
+					-- upvalues: MarketplaceService (upval), Players (upval), AssetTypeId (copy)
+					MarketplaceService:SignalAssetTypePurchased(Players.LocalPlayer, AssetTypeId)
 				end)
 			end
-		elseif requestType == requestTypeModule.Premium then
-			marketplaceService:SignalPromptPremiumPurchaseFinished(hasCompletedPurchase or purchaseError == purchaseErrorModule.AlreadyPremium)
-		elseif requestType == requestTypeModule.Subscription then
-			marketplaceService:SignalPromptSubscriptionPurchaseFinished(id, hasCompletedPurchase or purchaseError == purchaseErrorModule.AlreadySubscribed)
-		elseif fFlagEnableUnifiedPurchaseFlowForDevSubs and requestType == requestTypeModule.DeveloperSubscription then
-			marketplaceService:SignalPromptSubscriptionPurchaseFinished(state.promptRequest.subscriptionId, hasCompletedPurchase or purchaseError == purchaseErrorModule.AlreadySubscribed)
+		elseif RequestType == RequestTypeModule.Premium then
+			MarketplaceService:SignalPromptPremiumPurchaseFinished(HasCompletedPurchase or PurchaseError == PurchaseErrorModule.AlreadyPremium)
+		elseif RequestType == RequestTypeModule.Subscription then
+			MarketplaceService:SignalPromptSubscriptionPurchaseFinished(Id, HasCompletedPurchase or PurchaseError == PurchaseErrorModule.AlreadySubscribed)
+		elseif FFlagEnableUnifiedPurchaseFlowForDevSubs and RequestType == RequestTypeModule.DeveloperSubscription then
+			MarketplaceService:SignalPromptSubscriptionPurchaseFinished(State.promptRequest.subscriptionId, HasCompletedPurchase or PurchaseError == PurchaseErrorModule.AlreadySubscribed)
 		end
-		local windowStateChangedBindable = p2[publicBindablesModule].getWindowStateChangedBindable()
+		local WindowStateChangedBindable = p2[PublicBindablesModule].getWindowStateChangedBindable()
 		
-		if windowStateChangedBindable then
-			windowStateChangedBindable:Fire({
+		if WindowStateChangedBindable then
+			WindowStateChangedBindable:Fire({
 				isShown = false,
-				hasCompletedPurchase = hasCompletedPurchase
+				hasCompletedPurchase = HasCompletedPurchase
 			})
 		end
-		if state.purchaseCallbacks.onFlowComplete then
-			state.purchaseCallbacks.onFlowComplete()
+		if State.purchaseCallbacks.onFlowComplete then
+			State.purchaseCallbacks.onFlowComplete()
 		end
-		return p1:dispatch(completeRequestModule())
+		return p1:dispatch(CompleteRequestModule())
 	end)
 end

@@ -1,90 +1,90 @@
-﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
-local playersService = game:GetService("Players")
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local localizationModule = require(parent.Localization)
-local signalsReactModule = require(parent.SignalsReact)
-local game = require(parent.DataHydration).Game
-local sduiChip = require(parent.SduiSharedContent).SduiChip
-local navigateDown = require(parent.NavigationRodux).Thunks.NavigateDown
-local appPage = require(parent.RobloxAppEnums).AppPage
-local gameConnectionsPlayedChipClicked = require(parent.DiscoveryAnalytics).Events.gameConnectionsPlayedChipClicked
-local avatarGroupType = foundationModule.Enums.AvatarGroupType
-local useLocalization = localizationModule.Hooks.useLocalization
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagConnectionsToFriendsRename = sharedFlagsModule.FFlagConnectionsToFriendsRename
-local fFlagSignalsNavP3Dispatch = sharedFlagsModule.FFlagSignalsNavP3Dispatch
-local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
+﻿local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
+local Players = game:GetService("Players")
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local Game1 = require(Parent.DataHydration).Game
+local SduiChip = require(Parent.SduiSharedContent).SduiChip
+local NavigateDownFunction = require(Parent.NavigationRodux).Thunks.NavigateDown
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local GameConnectionsPlayedChipClickedFunction = require(Parent.DiscoveryAnalytics).Events.gameConnectionsPlayedChipClicked
+local AvatarGroupType = require(Parent.Foundation).Enums.AvatarGroupType
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3Dispatch
+local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
 
-return reactModule.memo(function(p1)
-	-- upvalues: useDispatch (ref), signalsReactModule (ref), game (ref), useLocalization (ref), fFlagConnectionsToFriendsRename (ref), reactModule (ref), playersService (ref), gameConnectionsPlayedChipClicked (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), sduiChip (ref), avatarGroupType (ref)
-	local layoutOrder = p1.layoutOrder
-	local universeId = p1.universeId
-	local var2 = useDispatch()
-	local var3 = signalsReactModule.useSignalState(game.getConnectionsPlayedStore(false).getConnectionsPlayed(universeId).data)
-	local var4 = signalsReactModule.useSignalState(game.getGameInfoStore(false).getAndFetchGameInfo(universeId).data)
-	local var5 = if var3 then var3.userIds else {}
-	local var6 = if var3 then var3.totalCount else 0
-	local var7 = useLocalization({
+return ReactModule.memo(function(p1) --[[ Line: 39 | Named "ExperienceDetailsConnectionsPlayedChip" ]]
+	-- upvalues: UseDispatchFunction (copy), SignalsReactModule (copy), Game1 (copy), UseLocalizationFunction (copy), ReactModule (copy), Players (copy), GameConnectionsPlayedChipClickedFunction (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), SduiChip (copy), AvatarGroupType (copy)
+	local LayoutOrder = p1.layoutOrder
+	local UniverseId = p1.universeId
+	local UseDispatchResult = UseDispatchFunction()
+	local UseSignalStateResult = SignalsReactModule.useSignalState(Game1.getConnectionsPlayedStore(false).getConnectionsPlayed(UniverseId).data)
+	local UseSignalStateResult1 = SignalsReactModule.useSignalState(Game1.getGameInfoStore(false).getAndFetchGameInfo(UniverseId).data)
+	local UserIds = if UseSignalStateResult then UseSignalStateResult.userIds else {}
+	local TotalCount = if UseSignalStateResult then UseSignalStateResult.totalCount else 0
+	local UseLocalizationResult = UseLocalizationFunction({
 		connectionsPlayed = {
-			if fFlagConnectionsToFriendsRename then "Feature.Friends.Label.FriendsPlayed" else "Feature.Friends.Label.ConnectionsPlayed",
-			numberOfConnections = var6
+			"Feature.Friends.Label.FriendsPlayed",
+			numberOfConnections = TotalCount
 		},
 		connectionsRecentlyPlayed = {
-			if fFlagConnectionsToFriendsRename then "Feature.Friends.Label.FriendsRecentlyPlayed" else "Feature.Friends.Label.ConnectionsRecentlyPlayed",
-			numberOfConnections = var6
+			"Feature.Friends.Label.FriendsRecentlyPlayed",
+			numberOfConnections = TotalCount
 		},
-		connectionRecentlyPlayed = {
-			if fFlagConnectionsToFriendsRename then "Feature.Friends.Label.FriendRecentlyPlayed" else "Feature.Friends.Label.ConnectionRecentlyPlayed"
-		}
+		connectionRecentlyPlayed = { "Feature.Friends.Label.FriendRecentlyPlayed" }
 	})
-	local var8 = reactModule.useCallback(function()
-		-- upvalues: var4 (ref), playersService (copy), gameConnectionsPlayedChipClicked (copy), universeId (ref), var6 (ref), appPage (copy), var5 (ref), var7 (ref), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var2 (ref), navigateDown (copy)
-		local rootPlaceId = var4 and var4.rootPlaceId
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 67 ]]
+		-- upvalues: UseSignalStateResult1 (copy), Players (upval), GameConnectionsPlayedChipClickedFunction (upval), UniverseId (copy), TotalCount (copy), AppPage (upval), UserIds (copy), UseLocalizationResult (copy), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval)
+		local RootPlaceId = UseSignalStateResult1 and UseSignalStateResult1.rootPlaceId
 		
-		if rootPlaceId then
-			gameConnectionsPlayedChipClicked({
-				uid = tostring(playersService.LocalPlayer and playersService.LocalPlayer.UserId),
-				universeId = universeId,
-				placeId = tostring(rootPlaceId),
-				totalConnections = var6
+		if RootPlaceId then
+			GameConnectionsPlayedChipClickedFunction({
+				uid = tostring(Players.LocalPlayer and Players.LocalPlayer.UserId),
+				universeId = UniverseId,
+				placeId = tostring(RootPlaceId),
+				totalConnections = TotalCount
 			}, "ExperienceDetailsConnectionsPlayedChip")
 		end
-		local t = {
-			name = appPage.SocialProofVerticalUserListSheet,
+		local config = {
+			name = AppPage.SocialProofVerticalUserListSheet,
 			extraProps = {
-				userIds = var5,
-				title = if var6 == 1 then var7.connectionRecentlyPlayed else var7.connectionsRecentlyPlayed
+				userIds = UserIds,
+				title = if TotalCount == 1 then UseLocalizationResult.connectionRecentlyPlayed else UseLocalizationResult.connectionsRecentlyPlayed
 			}
 		}
 		
-		if fFlagSignalsNavP3Dispatch then
-			var1.down(var1.fromLegacyPage(t))
+		if FFlagSignalsNavP3Dispatch then
+			NavigationCommands.down(NavigationCommands.fromLegacyPage(config))
 			
 			return
+		else
+			UseDispatchResult(NavigateDownFunction(config))
 		end
-		var2(navigateDown(t))
 	end, {
-		var2, universeId, var4, var6, var7, playersService.LocalPlayer
+		UseDispatchResult, UniverseId, UseSignalStateResult1, TotalCount,
+		UseLocalizationResult, Players.LocalPlayer
 	})
 	
-	if var6 == 0 then
+	if TotalCount == 0 then
 		return nil
 	end
-	local connectionsPlayed = var7.connectionsPlayed
-	local t = {}
+	local ConnectionsPlayed = UseLocalizationResult.connectionsPlayed
+	local Avatars = {}
 	
-	for i = 1, math.min(2, #var5) do
-		table.insert(t, var5[i])
+	for i = 1, math.min(2, #UserIds) do
+		table.insert(Avatars, UserIds[i])
 	end
-	return reactModule.createElement(sduiChip, {
-		text = connectionsPlayed,
+	return ReactModule.createElement(SduiChip, {
+		text = ConnectionsPlayed,
 		leading = {
 			type = "AvatarGroup",
-			props = { max = 2, avatars = t, type = avatarGroupType.Stacked }
+			props = {
+				max = 2,
+				avatars = Avatars,
+				type = AvatarGroupType.Stacked
+			}
 		},
-		onActivated = var8,
-		layoutOrder = layoutOrder
+		onActivated = UseResult,
+		layoutOrder = LayoutOrder
 	})
 end)

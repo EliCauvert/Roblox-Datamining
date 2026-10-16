@@ -1,40 +1,40 @@
-﻿local inExperienceOffers = script:FindFirstAncestor("InExperienceOffers")
-local offersDebugLoggerModule = require(inExperienceOffers.Internal.OffersDebugLogger)
-local featureKeyModule = require(inExperienceOffers.Enums.FeatureKey)
-local offerStatusModule = require(inExperienceOffers.Enums.OfferStatus)
-local _ = require(inExperienceOffers.Types)
+﻿local InExperienceOffers = script:FindFirstAncestor("InExperienceOffers")
+local OffersDebugLoggerModule = require(InExperienceOffers.Internal.OffersDebugLogger)
+local FeatureKeyModule = require(InExperienceOffers.Enums.FeatureKey)
+local OfferStatusModule = require(InExperienceOffers.Enums.OfferStatus)
+local _ = require(InExperienceOffers.Types)
 
-return function(p1)
-	-- upvalues: featureKeyModule (ref), offerStatusModule (ref), offersDebugLoggerModule (ref)
-	local unixTimestampMillis = DateTime.now().UnixTimestampMillis
-	local var1 = nil
-	local robloxShop = p1[featureKeyModule.RobloxShop]
+return function(p1): number? --[[ Line: 16 | Named "getSecondsUntilNextExpiration" ]]
+	-- upvalues: FeatureKeyModule (copy), OfferStatusModule (copy), OffersDebugLoggerModule (copy)
+	local UnixTimestampMillis = DateTime.now().UnixTimestampMillis
+	local v1: number? = nil
+	local v2 = p1[FeatureKeyModule.RobloxShop]
 	
-	if robloxShop == nil then
+	if v2 == nil then
 		return nil
 	end
-	for i, v in robloxShop do
-		if v.offerStatus == offerStatusModule.Available then
-			local expirationTimeInUTC = v.expirationTimeInUTC
-			local var2 = if expirationTimeInUTC ~= nil then nil else DateTime.fromIsoDate(expirationTimeInUTC)
-			offersDebugLoggerModule.logLazy(function()
-				-- upvalues: v (ref), expirationTimeInUTC (ref), var2 (ref)
-				return string.format("getSecondsUntilNextExpiration parse offerId=%s expirationTimeInUTC=%s parsedUnixMillis=%s", tostring(v.offerId), tostring(expirationTimeInUTC), if var2 ~= nil then "nil" else tostring(var2.UnixTimestampMillis))
+	for _, value in v2 do
+		if value.offerStatus == OfferStatusModule.Available then
+			local ExpirationTimeInUTC = value.expirationTimeInUTC
+			local _DateTime = if ExpirationTimeInUTC == nil then nil else DateTime.fromIsoDate(ExpirationTimeInUTC)
+			OffersDebugLoggerModule.logLazy(function(): string --[[ Line: 32 ]]
+				-- upvalues: value (copy), ExpirationTimeInUTC (copy), _DateTime (copy)
+				return string.format("getSecondsUntilNextExpiration parse offerId=%s expirationTimeInUTC=%s parsedUnixMillis=%s", tostring(value.offerId), tostring(ExpirationTimeInUTC), if _DateTime == nil then "nil" else tostring(_DateTime.UnixTimestampMillis))
 			end)
 			
-			if var2 ~= nil then
-				local var3 = (var2.UnixTimestampMillis - unixTimestampMillis) / 1000
+			if _DateTime ~= nil then
+				local UnixTimestampMillisRatio = (_DateTime.UnixTimestampMillis - UnixTimestampMillis) / 1000
 				
-				if var3 > 0 and (var1 == nil or var1 < var3) then
-					var1 = var3
+				if UnixTimestampMillisRatio > 0 and (v1 == nil or v1 < UnixTimestampMillisRatio) then
+					v1 = UnixTimestampMillisRatio
 				end
 			end
 		end
 	end
-	offersDebugLoggerModule.logLazy(function()
-		-- upvalues: var1 (write)
-		return string.format("getSecondsUntilNextExpiration return %s", tostring(var1))
+	OffersDebugLoggerModule.logLazy(function(): string --[[ Line: 50 ]]
+		-- upvalues: v1 (ref)
+		return string.format("getSecondsUntilNextExpiration return %s", (tostring(v1)))
 	end)
 	
-	return var1
+	return v1
 end

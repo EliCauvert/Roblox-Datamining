@@ -1,20 +1,21 @@
-﻿local playersService = game:GetService("Players")
-local promiseModule = require(game:GetService("CorePackages").Packages.Promise)
+﻿local Players = game:GetService("Players")
+local PromiseModule = require(game:GetService("CorePackages").Packages.Promise)
 
-return function()
-	-- upvalues: promiseModule (ref), playersService (ref)
-	return promiseModule.new(function(p1, p2)
-		-- upvalues: playersService (copy)
-		local ok, status = pcall(function()
-			-- upvalues: playersService (copy)
-			return playersService:GetHumanoidDescriptionFromUserIdAsync(playersService.LocalPlayer.UserId)
+return function() --[[ Line: 6 ]]
+	-- upvalues: PromiseModule (copy), Players (copy)
+	return PromiseModule.new(function(Callback: (any) -> (), Callback1: () -> ()) --[[ Line: 7 ]]
+		-- upvalues: Players (upval)
+		local Success, Result = pcall(function() --[[ Line: 8 ]]
+			-- upvalues: Players (upval)
+			return Players:GetHumanoidDescriptionFromUserIdAsync(Players.LocalPlayer.UserId)
 		end)
 		
-		if ok then
-			p1(status)
+		if Success then
+			Callback(Result)
 			
 			return
+		else
+			Callback1()
 		end
-		p2()
 	end)
 end

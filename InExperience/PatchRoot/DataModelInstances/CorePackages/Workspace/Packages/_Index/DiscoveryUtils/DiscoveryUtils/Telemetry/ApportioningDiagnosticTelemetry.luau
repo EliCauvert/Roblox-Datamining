@@ -1,20 +1,20 @@
-﻿local telemetryService = game:GetService("TelemetryService")
-local cryoModule = require(script:FindFirstAncestor("DiscoveryUtils").Parent.Cryo)
-local t = {
+﻿local TelemetryService = game:GetService("TelemetryService")
+local CryoModule = require(script:FindFirstAncestor("DiscoveryUtils").Parent.Cryo)
+local config = {
 	eventName = "NxmApportioningDiagnostic",
 	description = "Diagnostic events for the NxM apportioning dry-run",
 	lastUpdated = { 26, 7, 7 },
 	backends = { "EventIngest", "Points" },
 	throttlingPercentage = game:DefineFastInt("LuaAppNxMApportioningDiagnosticThrottleHundredthsPercent", 0)
 }
-local list = { "addOSInfo", "addSessionInfo", "addSessionId" }
+local StandardizedFields = { "addOSInfo", "addSessionInfo", "addSessionId" }
 
 return {
-	log = function(p1, p2)
-		-- upvalues: cryoModule (ref), telemetryService (ref), t (ref), list (ref)
-		telemetryService:LogEvent(t, {
-			standardizedFields = list,
-			customFields = cryoModule.Dictionary.join(p2 or {}, { eventKind = p1 })
+	log = function(EventKind, p1) --[[ Line: 33 ]]
+		-- upvalues: CryoModule (copy), TelemetryService (copy), config (copy), StandardizedFields (copy)
+		TelemetryService:LogEvent(config, {
+			standardizedFields = StandardizedFields,
+			customFields = CryoModule.Dictionary.join(p1 or {}, { eventKind = EventKind })
 		})
 	end
 }

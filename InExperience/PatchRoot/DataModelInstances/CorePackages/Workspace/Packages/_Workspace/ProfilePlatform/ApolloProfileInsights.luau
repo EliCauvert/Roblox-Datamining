@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.ApolloProfileInsights.ApolloProfileInsights)
+﻿return (require(script.Parent.Parent.Parent._Index.ApolloProfileInsights.ApolloProfileInsights))

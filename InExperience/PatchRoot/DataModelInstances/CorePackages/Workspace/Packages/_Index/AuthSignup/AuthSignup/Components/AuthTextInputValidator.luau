@@ -1,224 +1,234 @@
-﻿local authSignup = script:FindFirstAncestor("AuthSignup")
-local parent = authSignup.Parent
-local reactModule = require(parent.React)
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local useRoactService = require(parent.RobloxAppHooks).useRoactService
-local roactNetworking = require(parent.RoactServiceTags).RoactNetworking
-local UIBloxModule = require(parent.UIBlox)
-local useDesignTokens = require(parent.Style).useDesignTokens
-local useStyle = UIBloxModule.Core.Style.useStyle
-local styledTextLabel = UIBloxModule.App.Text.StyledTextLabel
-local foundationModule = require(parent.Foundation)
-local textInput = foundationModule.TextInput
-local text = foundationModule.Text
-local useTokens = foundationModule.Hooks.useTokens
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local authCommonModule = require(parent.AuthCommon)
-local inputValidity = authCommonModule.Enums.InputValidity
-local issueCondition = authCommonModule.Enums.IssueCondition
-local UIConstants = authCommonModule.Common.UIConstants
-local debounceModule = require(authSignup.Util.debounce)
-local sharedFlagsModule = require(parent.SharedFlags)
-local getFFlagEnableMultiPageSignupV2Updates = sharedFlagsModule.GetFFlagEnableMultiPageSignupV2Updates
-local getFFlagEnableLuafiedRecoveryFlow = sharedFlagsModule.GetFFlagEnableLuafiedRecoveryFlow
+﻿local AuthSignup = script:FindFirstAncestor("AuthSignup")
+local Parent = AuthSignup.Parent
+local ReactModule = require(Parent.React)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
+local RoactNetworking = require(Parent.RoactServiceTags).RoactNetworking
+local UIBloxModule = require(Parent.UIBlox)
+local UseDesignTokensFunction = require(Parent.Style).useDesignTokens
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local StyledTextLabel = UIBloxModule.App.Text.StyledTextLabel
+local FoundationModule = require(Parent.Foundation)
+local TextInput = FoundationModule.TextInput
+local Text = FoundationModule.Text
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local AuthCommonModule = require(Parent.AuthCommon)
+local InputValidity = AuthCommonModule.Enums.InputValidity
+local IssueCondition = AuthCommonModule.Enums.IssueCondition
+local UIConstants = AuthCommonModule.Common.UIConstants
+local DebounceModule = require(AuthSignup.Util.debounce)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local GetFFlagEnableMultiPageSignupV2UpdatesFunction = SharedFlagsModule.GetFFlagEnableMultiPageSignupV2Updates
+local GetFFlagEnableLuafiedRecoveryFlowFunction = SharedFlagsModule.GetFFlagEnableLuafiedRecoveryFlow
 
-return function(p1)
-	-- upvalues: useDesignTokens (ref), useTokens (ref), useDispatch (ref), useRoactService (ref), roactNetworking (ref), useStyle (ref), reactModule (ref), inputValidity (ref), debounceModule (ref), getFFlagEnableLuafiedRecoveryFlow (ref), issueCondition (ref), getFFlagEnableMultiPageSignupV2Updates (ref), UIConstants (ref), useLocalization (ref), text (ref), styledTextLabel (ref), textInput (ref)
-	local var1 = useDesignTokens()
-	local var2 = useTokens()
-	local var3 = useDispatch()
-	local var4 = useRoactService(roactNetworking)
-	local var5 = useStyle()
-	local var6, var7 = reactModule.useState("")
-	local var8, var9 = reactModule.useState("")
-	local var10, var11 = reactModule.useState(p1.validator.getDefaultIssues())
-	local var12, var13 = reactModule.useState(true)
-	local var14, var15 = reactModule.useState(inputValidity.Unvalidated)
-	local var16, var17 = reactModule.useState(nil)
-	local var18, var19 = reactModule.useState(false)
-	local var20 = reactModule.useCallback(debounceModule(function(p2)
-		-- upvalues: var9 (ref)
-		var9(p2)
-	end, p1.debounceTime or 0.5), { var9 })
-	reactModule.useEffect(function()
-		-- upvalues: var8 (ref), var6 (ref), var20 (ref)
-		if var8 ~= var6 then
-			var20(var6)
+return function(p1) --[[ Line: 68 | Named "AuthTextInputValidator" ]]
+	-- upvalues: UseDesignTokensFunction (copy), UseTokensFunction (copy), UseDispatchFunction (copy), UseRoactServiceFunction (copy), RoactNetworking (copy), UseStyleFunction (copy), ReactModule (copy), InputValidity (copy), DebounceModule (copy), GetFFlagEnableLuafiedRecoveryFlowFunction (copy), IssueCondition (copy), GetFFlagEnableMultiPageSignupV2UpdatesFunction (copy), UIConstants (copy), UseLocalizationFunction (copy), Text (copy), StyledTextLabel (copy), TextInput (copy)
+	local UseDesignTokensResult = UseDesignTokensFunction()
+	local UseTokensResult = UseTokensFunction()
+	local UseDispatchResult = UseDispatchFunction()
+	local UseRoactServiceResult = UseRoactServiceFunction(RoactNetworking)
+	local UseStyleResult = UseStyleFunction()
+	local UseStateResult, UseStateResult2 = ReactModule.useState("")
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState("")
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(p1.validator.getDefaultIssues())
+	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(true)
+	local UseStateResult5, UseStateResult2_4 = ReactModule.useState(InputValidity.Unvalidated)
+	local UseStateResult6, UseStateResult2_5 = ReactModule.useState(nil)
+	local UseStateResult7, UseStateResult2_6 = ReactModule.useState(false)
+	local UseResult = ReactModule.useCallback(DebounceModule(function(p2) --[[ Line: 87 ]]
+		-- upvalues: UseStateResult2_1 (copy)
+		UseStateResult2_1(p2)
+	end, p1.debounceTime or 0.5), { UseStateResult2_1 })
+	ReactModule.useEffect(function() --[[ Line: 92 ]]
+		-- upvalues: UseStateResult1 (copy), UseStateResult (copy), UseResult (copy)
+		if UseStateResult1 ~= UseStateResult then
+			UseResult(UseStateResult)
 		end
-	end, { var6 })
-	local list = { var8 }
+	end, { UseStateResult })
+	local list = { UseStateResult1 }
 	
-	if getFFlagEnableLuafiedRecoveryFlow() then
-		local validationDependencies = p1.validationDependencies
+	if GetFFlagEnableLuafiedRecoveryFlowFunction() then
+		local ValidationDependencies = p1.validationDependencies
 		
-		if validationDependencies then
-			for i = 1, #validationDependencies do
-				list[#list + 1] = validationDependencies[i]
+		if ValidationDependencies then
+			for i = 1, #ValidationDependencies do
+				list[#list + 1] = ValidationDependencies[i]
 			end
 		end
 	end
-	reactModule.useEffect(function()
-		-- upvalues: var8 (ref), var15 (ref), inputValidity (copy), var11 (ref), p1 (ref), var3 (ref), var4 (ref), var10 (ref), var6 (ref), var7 (ref)
-		if #var8 == 0 then
-			var15(inputValidity.Unvalidated)
-			var11(p1.validator.getDefaultIssues())
+	ReactModule.useEffect(function() --[[ Line: 108 ]]
+		-- upvalues: UseStateResult1 (copy), UseStateResult2_4 (copy), InputValidity (upval), UseStateResult2_2 (copy), p1 (copy), UseDispatchResult (copy), UseRoactServiceResult (copy), UseStateResult3 (copy), UseStateResult (copy), UseStateResult2 (copy)
+		if #UseStateResult1 == 0 then
+			UseStateResult2_4(InputValidity.Unvalidated)
+			UseStateResult2_2(p1.validator.getDefaultIssues())
 			
 			return
+		else
+			UseDispatchResult(p1.validator.validateFunction(UseRoactServiceResult, UseStateResult1, UseStateResult3, p1.validatorAdditionalProps)):andThen(function(Result) --[[ Line: 117 ]]
+				-- upvalues: InputValidity (upval), UseStateResult (upval), p1 (upval), UseStateResult2_2 (upval), UseStateResult2_4 (upval), UseStateResult2 (upval)
+				local Valid = if Result.InputValid then InputValidity.Valid else InputValidity.Invalid
+				
+				if UseStateResult == Result.Input and p1.onTextChanged then
+					p1.onTextChanged(Result.Input, Valid)
+				end
+				UseStateResult2_2(Result.IssueCondition)
+				UseStateResult2_4(Valid)
+				UseStateResult2(Result.Input)
+			end)
 		end
-		var3(p1.validator.validateFunction(var4, var8, var10, p1.validatorAdditionalProps)):andThen(function(p2)
-			-- upvalues: inputValidity (copy), var6 (copy), p1 (copy), var11 (copy), var15 (copy), var7 (copy)
-			local var21 = if p2.InputValid then inputValidity.Valid else inputValidity.Invalid
-			
-			if var6 == p2.Input and p1.onTextChanged then
-				p1.onTextChanged(p2.Input, var21)
-			end
-			var11(p2.IssueCondition)
-			var15(var21)
-			var7(p2.Input)
-		end)
 	end, list)
-	reactModule.useEffect(function()
-		-- upvalues: var14 (ref), inputValidity (copy), var17 (ref), p1 (ref), var10 (ref), issueCondition (copy)
-		if var14 ~= inputValidity.Invalid then
-			var17(nil)
+	ReactModule.useEffect(function() --[[ Line: 131 ]]
+		-- upvalues: UseStateResult5 (copy), InputValidity (upval), UseStateResult2_5 (copy), p1 (copy), UseStateResult3 (copy), IssueCondition (upval)
+		if UseStateResult5 ~= InputValidity.Invalid then
+			UseStateResult2_5(nil)
 			
 			return
 		end
-		local var21 = nil
-		
-		if p1.validatorIssuePriorityList then
-			for i, v in ipairs(p1.validatorIssuePriorityList) do
-				if var10[v] == issueCondition.Problematic then
-					var21 = v
+		local v1 = nil
+		repeat
+			if p1.validatorIssuePriorityList then
+				for _, value in ipairs(p1.validatorIssuePriorityList) do
+					if UseStateResult3[value] == IssueCondition.Problematic then
+						v1 = value
+						break
+					end
+				end
+				break
+			end
+			for i, value1 in pairs(UseStateResult3) do
+				if value1 == IssueCondition.Problematic then
+					v1 = i
+				else
+					continue
+				end
+			end
+			break
+		until true
+		if v1 == nil then
+			UseStateResult2_5(nil)
+			
+			return
+		end
+		if p1.onErrorShown then
+			p1.onErrorShown(v1)
+		end
+		if p1.validatorIssueMessageList then
+			UseStateResult2_5(p1.validatorIssueMessageList[v1])
+			
+			return
+		else
+			UseStateResult2_5(p1.validator.getIssueMessageList()[v1])
+		end
+	end, { UseStateResult5 })
+	ReactModule.useEffect(function() --[[ Line: 172 ]]
+		-- upvalues: GetFFlagEnableMultiPageSignupV2UpdatesFunction (upval), UseStateResult7 (copy), p1 (copy), UseStateResult2_6 (copy)
+		if GetFFlagEnableMultiPageSignupV2UpdatesFunction() and UseStateResult7 then
+			local TextBoxRef = p1.textBoxRef
+			
+			if TextBoxRef.current and TextBoxRef.current.focus then
+				TextBoxRef.current.focus()
+			end
+			UseStateResult2_6(false)
+		end
+	end, { UseStateResult7 })
+	
+	local function OnChanged(p2) --[[ Line: 185 ]]
+		-- upvalues: p1 (copy), InputValidity (upval), UseStateResult2_4 (copy), UseStateResult2 (copy)
+		p1.onTextChanged(p2, InputValidity.Unvalidated)
+		UseStateResult2_4(InputValidity.Unvalidated)
+		UseStateResult2(p2)
+	end
+	
+	local function _() --[[ Line: 191 | Named "getTextInputType" ]]
+		-- upvalues: p1 (copy), UseStateResult4 (copy)
+		return if p1.textInputType == Enum.TextInputType.Password then if UseStateResult4 then Enum.TextInputType.Password else Enum.TextInputType.PasswordShown else p1.textInputType
+	end
+	
+	local function getShowPasswordIconButton() --[[ Line: 201 ]]
+		-- upvalues: p1 (copy), UseStateResult4 (copy), UIConstants (upval), UseStateResult2_3 (copy), GetFFlagEnableMultiPageSignupV2UpdatesFunction (upval), UseStateResult2_6 (copy)
+		if p1.textInputType ~= Enum.TextInputType.Password then
+			return nil, nil
+		elseif UseStateResult4 then
+			return UIConstants.HIDE_PASSWORD_ICON, function() --[[ Line: 205 ]]
+				-- upvalues: UseStateResult2_3 (upval), GetFFlagEnableMultiPageSignupV2UpdatesFunction (upval), UseStateResult2_6 (upval)
+				UseStateResult2_3(false)
+				
+				if GetFFlagEnableMultiPageSignupV2UpdatesFunction() then
+					UseStateResult2_6(true)
 				end
 			end
 		else
-			for i, v in pairs(var10) do
-				if v == issueCondition.Problematic then
-					var21 = i
-					break
-				end
-			end
-		end
-		if var21 == nil then
-			var17(nil)
-			
-			return
-		elseif p1.onErrorShown then
-			p1.onErrorShown(var21)
-		end
-		if p1.validatorIssueMessageList then
-			var17(p1.validatorIssueMessageList[var21])
-			
-			return
-		end
-		var17(p1.validator.getIssueMessageList()[var21])
-	end, { var14 })
-	reactModule.useEffect(function()
-		-- upvalues: getFFlagEnableMultiPageSignupV2Updates (copy), var18 (ref), p1 (ref), var19 (ref)
-		if getFFlagEnableMultiPageSignupV2Updates() and var18 then
-			local textBoxRef = p1.textBoxRef
-			
-			if textBoxRef.current and textBoxRef.current.focus then
-				textBoxRef.current.focus()
-			end
-			var19(false)
-		end
-	end, { var18 })
-	
-	local var22 = function(p2)
-		-- upvalues: p1 (ref), inputValidity (copy), var15 (ref), var7 (ref)
-		p1.onTextChanged(p2, inputValidity.Unvalidated)
-		var15(inputValidity.Unvalidated)
-		var7(p2)
-	end
-	
-	local function _()
-		-- upvalues: p1 (ref), var12 (ref)
-		return if p1.textInputType == Enum.TextInputType.Password then if var12 then Enum.TextInputType.Password else Enum.TextInputType.PasswordShown else p1.textInputType
-	end
-	
-	local var23 = useLocalization({ errorText = var16 })
-	local var24, var25 = (function()
-		-- upvalues: p1 (ref), var12 (ref), UIConstants (copy), var13 (ref), getFFlagEnableMultiPageSignupV2Updates (copy), var19 (ref)
-		if p1.textInputType ~= Enum.TextInputType.Password then
-			return nil, nil
-		elseif var12 then
-			return UIConstants.HIDE_PASSWORD_ICON, function()
-				-- upvalues: var13 (copy), getFFlagEnableMultiPageSignupV2Updates (copy), var19 (copy)
-				var13(false)
+			return UIConstants.SHOW_PASSWORD_ICON, function() --[[ Line: 213 ]]
+				-- upvalues: UseStateResult2_3 (upval), GetFFlagEnableMultiPageSignupV2UpdatesFunction (upval), UseStateResult2_6 (upval)
+				UseStateResult2_3(true)
 				
-				if getFFlagEnableMultiPageSignupV2Updates() then
-					var19(true)
+				if GetFFlagEnableMultiPageSignupV2UpdatesFunction() then
+					UseStateResult2_6(true)
 				end
 			end
 		end
-		return UIConstants.SHOW_PASSWORD_ICON, function()
-			-- upvalues: var13 (copy), getFFlagEnableMultiPageSignupV2Updates (copy), var19 (copy)
-			var13(true)
-			
-			if getFFlagEnableMultiPageSignupV2Updates() then
-				var19(true)
-			end
-		end
-	end)()
-	local var26 = if var14 == inputValidity.Invalid and getFFlagEnableLuafiedRecoveryFlow() and p1.useFoundationTextForIssue then reactModule.createElement("Frame", {
-		BackgroundTransparency = 1,
-		Size = UDim2.new(1, 0, 0, var2.Size.Size_200)
-	}, {
-		IssuePadding = reactModule.createElement("UIPadding", {
-			PaddingTop = UDim.new(0, p1.foundationIssueTextPadding or 0)
-		}),
-		IssueText = reactModule.createElement(text, {
-			Text = var23.errorText or "",
-			fontStyle = var2.Typography.CaptionSmall,
-			textStyle = var2.Color.System.Alert,
-			Size = UDim2.new(1, 0, 0, 0),
-			AutomaticSize = Enum.AutomaticSize.Y,
-			TextXAlignment = Enum.TextXAlignment.Left,
-			TextYAlignment = Enum.TextYAlignment.Center
-		})
-	}) elseif var14 == inputValidity.Invalid then reactModule.createElement(styledTextLabel, {
-		textWrapped = true,
-		text = var23.errorText or "",
-		fontStyle = var5.Font.BodySmall,
-		colorStyle = var5.Theme.Alert,
-		automaticSize = Enum.AutomaticSize.XY
-	}) else nil
-	local size100 = var1.Size.Size_100
-	
-	if getFFlagEnableLuafiedRecoveryFlow() then
-		size100 = p1.customPadding or var1.Size.Size_100
 	end
-	return reactModule.createElement("Frame", {
+	
+	local UseLocalizationResult = UseLocalizationFunction({ errorText = UseStateResult6 })
+	local ShowPasswordIconButton, ShowPasswordIconButton2 = getShowPasswordIconButton()
+	
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		LayoutOrder = p1.layoutOrder,
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y
 	}, {
-		UIListLayout = reactModule.createElement("UIListLayout", {
+		UIListLayout = ReactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
 			SortOrder = Enum.SortOrder.LayoutOrder,
-			Padding = UDim.new(0, size100),
+			Padding = UDim.new(0, GetFFlagEnableLuafiedRecoveryFlowFunction() and p1.customPadding or UseDesignTokensResult.Size.Size_100),
 			HorizontalFlex = Enum.UIFlexAlignment.Fill
 		}),
-		TextInputBox = reactModule.createElement(textInput, {
+		TextInputBox = ReactModule.createElement(TextInput, {
 			LayoutOrder = 1,
 			label = "",
-			textInputType = if p1.textInputType == Enum.TextInputType.Password then if var12 then Enum.TextInputType.Password else Enum.TextInputType.PasswordShown else p1.textInputType,
+			textInputType = if p1.textInputType == Enum.TextInputType.Password then if UseStateResult4 then Enum.TextInputType.Password else Enum.TextInputType.PasswordShown else p1.textInputType,
 			width = UDim.new(1, 0),
 			text = p1.initialText or "",
 			placeholder = p1.placeholder,
-			onChanged = var22,
-			iconTrailing = if getFFlagEnableLuafiedRecoveryFlow() and p1.hideIconButton then nil elseif var24 then { name = var24, onActivated = var25 } else nil,
-			hasError = var14 == inputValidity.Invalid and #var6 > 0,
+			onChanged = OnChanged,
+			iconTrailing = if GetFFlagEnableLuafiedRecoveryFlowFunction() and p1.hideIconButton then nil elseif ShowPasswordIconButton then {
+				name = ShowPasswordIconButton,
+				onActivated = ShowPasswordIconButton2
+			} else nil,
+			hasError = UseStateResult5 == InputValidity.Invalid and #UseStateResult > 0,
 			textBoxRef = p1.textBoxRef,
 			size = p1.size
 		}),
-		IssueWrapper = reactModule.createElement("Frame", {
+		IssueWrapper = ReactModule.createElement("Frame", {
 			LayoutOrder = 3,
 			BackgroundTransparency = 1,
-			Size = UDim2.new(1, 0, 0, if getFFlagEnableLuafiedRecoveryFlow() then p1.issueHeight else var1.Size.Size_400)
-		}, { Issue = var26 })
+			Size = UDim2.new(1, 0, 0, GetFFlagEnableLuafiedRecoveryFlowFunction() and p1.issueHeight or UseDesignTokensResult.Size.Size_400)
+		}, {
+			Issue = if UseStateResult5 == InputValidity.Invalid and GetFFlagEnableLuafiedRecoveryFlowFunction() and p1.useFoundationTextForIssue then ReactModule.createElement("Frame", {
+				BackgroundTransparency = 1,
+				Size = UDim2.new(1, 0, 0, UseTokensResult.Size.Size_200)
+			}, {
+				IssuePadding = ReactModule.createElement("UIPadding", {
+					PaddingTop = UDim.new(0, p1.foundationIssueTextPadding or 0)
+				}),
+				IssueText = ReactModule.createElement(Text, {
+					Text = UseLocalizationResult.errorText or "",
+					fontStyle = UseTokensResult.Typography.CaptionSmall,
+					textStyle = UseTokensResult.Color.System.Alert,
+					Size = UDim2.new(1, 0, 0, 0),
+					AutomaticSize = Enum.AutomaticSize.Y,
+					TextXAlignment = Enum.TextXAlignment.Left,
+					TextYAlignment = Enum.TextYAlignment.Center
+				})
+			}) elseif UseStateResult5 == InputValidity.Invalid then ReactModule.createElement(StyledTextLabel, {
+				textWrapped = true,
+				text = UseLocalizationResult.errorText or "",
+				fontStyle = UseStyleResult.Font.BodySmall,
+				colorStyle = UseStyleResult.Theme.Alert,
+				automaticSize = Enum.AutomaticSize.XY
+			}) else nil
+		})
 	})
 end

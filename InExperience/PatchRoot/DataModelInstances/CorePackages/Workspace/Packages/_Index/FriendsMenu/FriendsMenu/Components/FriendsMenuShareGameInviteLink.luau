@@ -1,86 +1,87 @@
-﻿local parent = script:FindFirstAncestor("FriendsMenu").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local iconSize = foundationModule.Enums.IconSize
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local reducerDependencies = require(parent.NotificationsCommon).ReducerDependencies
-local shareLinksNetworking = reducerDependencies.ShareLinksNetworking
-local shareLinksRodux = reducerDependencies.ShareLinksRodux
-local default = require(parent.ExternalContentSharingProtocol).ExternalContentSharingProtocol.default
-local deviceInfo = require(parent.NotificationsCommon).DeviceInfo
-local throttle = require(parent.NotificationsCommon).Throttle
-local popover = foundationModule.Popover
-local popoverAlign = foundationModule.Enums.PopoverAlign
+﻿local Parent = script:FindFirstAncestor("FriendsMenu").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local IconSize = FoundationModule.Enums.IconSize
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local ReducerDependencies = require(Parent.NotificationsCommon).ReducerDependencies
+local ShareLinksNetworking = ReducerDependencies.ShareLinksNetworking
+local ShareLinksRodux = ReducerDependencies.ShareLinksRodux
+local Default = require(Parent.ExternalContentSharingProtocol).ExternalContentSharingProtocol.default
+local DeviceInfo = require(Parent.NotificationsCommon).DeviceInfo
+local ThrottleFunction = require(Parent.NotificationsCommon).Throttle
+local Popover = FoundationModule.Popover
+local PopoverAlign = FoundationModule.Enums.PopoverAlign
 
-return function(p1)
-	-- upvalues: useDispatch (ref), deviceInfo (ref), reactModule (ref), shareLinksNetworking (ref), shareLinksRodux (ref), default (ref), useLocalization (ref), foundationModule (ref), throttle (ref), popover (ref), iconSize (ref), popoverAlign (ref)
-	local var1 = useDispatch()
-	local var2 = deviceInfo.isDesktopDevice()
-	local var3, var4 = reactModule.useState(false)
+return function(p1) --[[ Line: 27 ]]
+	-- upvalues: UseDispatchFunction (copy), DeviceInfo (copy), ReactModule (copy), ShareLinksNetworking (copy), ShareLinksRodux (copy), Default (copy), UseLocalizationFunction (copy), FoundationModule (copy), ThrottleFunction (copy), Popover (copy), IconSize (copy), PopoverAlign (copy)
+	local UseDispatchResult = UseDispatchFunction()
+	local IsDesktopDevice = DeviceInfo.isDesktopDevice()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	
-	local var5 = function()
-		-- upvalues: var2 (ref), var3 (ref), var1 (ref), shareLinksNetworking (copy), shareLinksRodux (copy), default (copy)
-		if var2 and var3 then
+	local function v15() --[[ Line: 31 ]]
+		-- upvalues: IsDesktopDevice (copy), UseStateResult (copy), UseDispatchResult (copy), ShareLinksNetworking (upval), ShareLinksRodux (upval), Default (upval)
+		if not IsDesktopDevice or not UseStateResult then
+			UseDispatchResult(ShareLinksNetworking.GenerateLink.API({
+				linkType = ShareLinksRodux.Enums.LinkType.ExperienceInvite.rawValue()
+			})):andThen(function(Result) --[[ Line: 40 ]]
+				-- upvalues: Default (upval)
+				if Result and Result.responseBody and Result.responseBody.shortUrl and Default then
+					Default:shareUrl({ context = "V1Menu", url = Result.responseBody.shortUrl })
+				end
+			end):catch(function(Err) --[[ Line: 53 ]]
+				warn(Err)
+			end)
+			
 			return
 		end
-		var1(shareLinksNetworking.GenerateLink.API({
-			linkType = shareLinksRodux.Enums.LinkType.ExperienceInvite.rawValue()
-		})):andThen(function(p2)
-			-- upvalues: default (copy)
-			if p2 and p2.responseBody and (p2.responseBody.shortUrl and default) then
-				default:shareUrl({ context = "V1Menu", url = p2.responseBody.shortUrl })
-			end
-		end):catch(function(p2)
-			warn(p2)
-		end)
 	end
 	
-	local var6 = useLocalization({
+	local UseLocalizationResult = UseLocalizationFunction({
 		copied = "Feature.SocialShare.Label.Copied",
-		copyLink = if not var2 then "Feature.SocialShare.ShareWithPeopleYouKnow" else "Feature.SocialShare.Label.CopyLinkToShareWithPeople"
+		copyLink = if IsDesktopDevice then "Feature.SocialShare.Label.CopyLinkToShareWithPeople" else "Feature.SocialShare.ShareWithPeopleYouKnow"
 	})
 	
-	return reactModule.createElement(foundationModule.View, {
+	return ReactModule.createElement(FoundationModule.View, {
 		tag = "row size-full-1400 padding-x-xxlarge gap-medium align-y-center",
 		LayoutOrder = p1.layoutOrder,
-		onActivated = throttle(function()
-			-- upvalues: var5 (ref), var2 (ref), var4 (ref)
-			var5()
+		onActivated = ThrottleFunction(function() --[[ Line: 66 ]]
+			-- upvalues: v15 (copy), IsDesktopDevice (copy), UseStateResult2 (copy)
+			v15()
 			
-			if var2 then
-				var4(true)
-				task.delay(2, function()
-					-- upvalues: var4 (copy)
-					var4(false)
+			if IsDesktopDevice then
+				UseStateResult2(true)
+				task.delay(2, function() --[[ Line: 70 ]]
+					-- upvalues: UseStateResult2 (upval)
+					UseStateResult2(false)
 				end)
 			end
 		end)
 	}, {
-		PopoverRoot = reactModule.createElement(popover.Root, { isOpen = var3 }, {
-			ShareIconContainer = reactModule.createElement(foundationModule.View, {
+		PopoverRoot = ReactModule.createElement(Popover.Root, { isOpen = UseStateResult }, {
+			ShareIconContainer = ReactModule.createElement(FoundationModule.View, {
 				tag = "col radius-circle bg-surface-300 align-x-center align-y-center",
 				Size = UDim2.fromOffset(56, 56)
 			}, {
-				ShareIcon = reactModule.createElement(foundationModule.Icon, {
-					name = if not var2 then "icons/actions/share" else "icons/menu/link",
-					size = iconSize.Medium
+				ShareIcon = ReactModule.createElement(FoundationModule.Icon, {
+					name = if IsDesktopDevice then "icons/menu/link" else "icons/actions/share",
+					size = IconSize.Medium
 				})
 			}),
-			PopoverAnchor = reactModule.createElement(popover.Anchor, nil, {
-				LabelText = reactModule.createElement(foundationModule.Text, {
+			PopoverAnchor = ReactModule.createElement(Popover.Anchor, nil, {
+				LabelText = ReactModule.createElement(FoundationModule.Text, {
 					tag = "text-title-large size-full align-x-left text-align-x-left",
-					Text = var6.copyLink
+					Text = UseLocalizationResult.copyLink
 				})
 			}),
-			Content = reactModule.createElement(popover.Content, {
+			Content = ReactModule.createElement(Popover.Content, {
 				tags = "size-full auto-y",
 				hasArrow = false,
-				align = popoverAlign.End
+				align = PopoverAlign.End
 			}, {
-				CopiedPopoverText = reactModule.createElement(foundationModule.Text, {
+				CopiedPopoverText = ReactModule.createElement(FoundationModule.Text, {
 					tag = "auto-xy text-title-small text-align-x-center padding-medium",
-					Text = var6.copied
+					Text = UseLocalizationResult.copied
 				})
 			})
 		})

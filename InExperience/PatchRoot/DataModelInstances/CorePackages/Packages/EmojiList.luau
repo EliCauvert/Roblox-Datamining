@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Index.EmojiList.EmojiList)
+﻿return (require(script.Parent._Index.EmojiList.EmojiList))

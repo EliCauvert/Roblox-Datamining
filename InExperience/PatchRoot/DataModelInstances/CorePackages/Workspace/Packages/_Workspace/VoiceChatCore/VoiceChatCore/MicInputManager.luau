@@ -1,263 +1,260 @@
-﻿local parent = script.Parent.Parent
-local playersService = game:GetService("Players")
-local soundService = game:GetService("SoundService")
-local voiceChatService = game:GetService("VoiceChatService")
-local coreGuiService = game:GetService("CoreGui")
-local constantsModule = require(script.Parent.Constants)
-local flags = script.Parent.Flags
-local promiseModule = require(parent.Promise)
-local permissionsProtocol = require(parent.PermissionsProtocol).PermissionsProtocol
-local getFFlagJoinWithoutMicPermissions = require(parent.SharedFlags).GetFFlagJoinWithoutMicPermissions
-local getFFlagLocalMutedNilFix = require(parent.SharedFlags).GetFFlagLocalMutedNilFix
-local getFFlagDebugVoiceChatMicPermissionCliBypassModule = require(flags.GetFFlagDebugVoiceChatMicPermissionCliBypass)
-local getFFlagEnableExpJoinMicPermAnalyticsModule = require(flags.GetFFlagEnableExpJoinMicPermAnalytics)
-local fFlagExpChatDictation = require(parent.SharedFlags).FFlagExpChatDictation
-local var1 = require(flags.GetFFlagTalkingChangedWithDebounceV2)()
-local var2 = require(flags.GetFIntTalkingChangedDebounceTime)()
-local var3 = require(flags.GetFFlagUseAudioAnalyzerForLocalMetering2)()
-local getFFlagMicConsumerRegistryModule = require(flags.GetFFlagMicConsumerRegistry)
-local PERMISSION_STATE = constantsModule.PERMISSION_STATE
-local MIN_VOICE_CHAT_API_VERSION_LOCAL_MIC_ACTIVITY = constantsModule.MIN_VOICE_CHAT_API_VERSION_LOCAL_MIC_ACTIVITY
-local _ = {
-	VoiceChat = "VoiceChat",
-	STT = "STT",
-	DeveloperAudioDevice = "DeveloperAudioDevice"
-}
-local t = {}
-t.__index = t
+﻿local Parent = script.Parent.Parent
+local Players = game:GetService("Players")
+local SoundService = game:GetService("SoundService")
+local VoiceChatService = game:GetService("VoiceChatService")
+local CoreGui = game:GetService("CoreGui")
+local ConstantsModule = require(script.Parent.Constants)
+local Flags = script.Parent.Flags
+local PromiseModule = require(Parent.Promise)
+local PermissionsProtocol = require(Parent.PermissionsProtocol).PermissionsProtocol
+local GetFFlagJoinWithoutMicPermissionsFunction = require(Parent.SharedFlags).GetFFlagJoinWithoutMicPermissions
+local GetFFlagLocalMutedNilFixFunction = require(Parent.SharedFlags).GetFFlagLocalMutedNilFix
+local GetFFlagDebugVoiceChatMicPermissionCliBypassModule = require(Flags.GetFFlagDebugVoiceChatMicPermissionCliBypass)
+local GetFFlagEnableExpJoinMicPermAnalyticsModule = require(Flags.GetFFlagEnableExpJoinMicPermAnalytics)
+local FFlagExpChatDictation = require(Parent.SharedFlags).FFlagExpChatDictation
+local v1 = require(Flags.GetFFlagTalkingChangedWithDebounceV2)()
+local v2 = require(Flags.GetFIntTalkingChangedDebounceTime)()
+local v3 = require(Flags.GetFFlagUseAudioAnalyzerForLocalMetering2)()
+local GetFFlagMicConsumerRegistryModule = require(Flags.GetFFlagMicConsumerRegistry)
+local PERMISSIONSTATE = ConstantsModule.PERMISSION_STATE
+local MINVOICECHATAPIVERSIONLOCALMICACTIVITY = ConstantsModule.MIN_VOICE_CHAT_API_VERSION_LOCAL_MIC_ACTIVITY
+local MicInputManager = {}
+MicInputManager.__index = MicInputManager
 
-function t.new(p1)
-	-- upvalues: t (ref), getFFlagJoinWithoutMicPermissions (ref), PERMISSION_STATE (ref), getFFlagMicConsumerRegistryModule (ref)
-	local tbl = setmetatable({}, t)
-	tbl.log = p1.log
-	tbl.callbacks = p1.callbacks
-	tbl.localMuted = nil
-	tbl.isTalking = false
-	tbl.permissionState = if getFFlagJoinWithoutMicPermissions() then PERMISSION_STATE.IDLE else nil
-	tbl.muteChanged = Instance.new("BindableEvent")
-	tbl.talkingChanged = Instance.new("BindableEvent")
-	tbl.permissionPromise = nil
-	tbl.isPlayerWatchingAd = false
-	tbl._lastTalkingChangedFireTime = 0
-	tbl._lastTalkingChangedFireValue = nil
-	tbl._connections = {}
-	tbl.localMeteringTask = nil
+function MicInputManager.new(p1) --[[ Line: 85 ]]
+	-- upvalues: MicInputManager (copy), GetFFlagJoinWithoutMicPermissionsFunction (copy), PERMISSIONSTATE (copy), GetFFlagMicConsumerRegistryModule (copy)
+	local self = setmetatable({}, MicInputManager)
+	self.log = p1.log
+	self.callbacks = p1.callbacks
+	self.localMuted = nil
+	self.isTalking = false
+	self.permissionState = if GetFFlagJoinWithoutMicPermissionsFunction() then PERMISSIONSTATE.IDLE else nil
+	self.muteChanged = Instance.new("BindableEvent")
+	self.talkingChanged = Instance.new("BindableEvent")
+	self.permissionPromise = nil
+	self.isPlayerWatchingAd = false
+	self._lastTalkingChangedFireTime = 0
+	self._lastTalkingChangedFireValue = nil
+	self._connections = {}
+	self.localMeteringTask = nil
 	
-	if getFFlagMicConsumerRegistryModule() then
-		tbl._consumers = {}
-		tbl._consumerCount = 0
-		tbl.hasConsumersChanged = Instance.new("BindableEvent")
-		tbl._activeConsumerType = nil
-		tbl._levelDetectionTask = nil
-		tbl._hasShownPrivacyToast = false
-		tbl._hasShownPermDeniedToast = false
-		tbl._micIndicatorReady = false
-		tbl._developerDeviceConnections = {}
-		tbl._developerAudioInstancesFolder = nil
-		tbl.levelChanged = Instance.new("BindableEvent")
-		tbl._lastLevel = 0
+	if GetFFlagMicConsumerRegistryModule() then
+		self._consumers = {}
+		self._consumerCount = 0
+		self.hasConsumersChanged = Instance.new("BindableEvent")
+		self._activeConsumerType = nil
+		self._levelDetectionTask = nil
+		self._hasShownPrivacyToast = false
+		self._hasShownPermDeniedToast = false
+		self._micIndicatorReady = false
+		self._developerDeviceConnections = {}
+		self._developerAudioInstancesFolder = nil
+		self.levelChanged = Instance.new("BindableEvent")
+		self._lastLevel = 0
 	end
-	return tbl
+	return self
 end
 
-local function _(value)
-	-- upvalues: coreGuiService (ref)
-	return value:IsDescendantOf(coreGuiService)
+local function _(Object) --[[ Line: 125 | Named "isIgnoredAudioInput" ]]
+	-- upvalues: CoreGui (copy)
+	return Object:IsDescendantOf(CoreGui)
 end
 
-function t:SetMicActive(p1, p2)
-	-- upvalues: getFFlagJoinWithoutMicPermissions (ref), PERMISSION_STATE (ref), permissionsProtocol (ref), voiceChatService (ref), getFFlagMicConsumerRegistryModule (ref), playersService (ref)
+function MicInputManager:SetMicActive(p1, Context) --[[ Line: 129 ]]
+	-- upvalues: GetFFlagJoinWithoutMicPermissionsFunction (copy), PERMISSIONSTATE (copy), PermissionsProtocol (copy), VoiceChatService (copy), GetFFlagMicConsumerRegistryModule (copy), Players (copy)
 	if self.localMuted == nil then
-		self.log:trace("SetMicActive context: {} - Voice not connected yet", p2)
+		self.log:trace("SetMicActive context: {} - Voice not connected yet", Context)
 		
 		return
-	elseif self.localMuted == not p1 then return end
-	self.log:trace("SetMicActive active: {} context: {}", p1, p2)
+	end
+	if self.localMuted == not p1 then return end
+	self.log:trace("SetMicActive active: {} context: {}", p1, Context)
 	
-	if getFFlagJoinWithoutMicPermissions() then
-		if self.permissionState == PERMISSION_STATE.PENDING_MIC then
+	if GetFFlagJoinWithoutMicPermissionsFunction() then
+		if self.permissionState == PERMISSIONSTATE.PENDING_MIC then
 			self.log:debug("In pending mic mode, requesting permission")
-			self.callbacks.emitGetPermissions(function(p3)
-				-- upvalues: self (ref), PERMISSION_STATE (copy), p1 (ref), p2 (ref)
-				self.permissionState = if p3.hasMicPermissions then PERMISSION_STATE.LISTEN_AND_TALK else PERMISSION_STATE.LISTEN_ONLY
+			self.callbacks.emitGetPermissions(function(p2) --[[ Line: 144 ]]
+				-- upvalues: self (copy), PERMISSIONSTATE (upval), p1 (copy), Context (copy)
+				self.permissionState = if p2.hasMicPermissions then PERMISSIONSTATE.LISTEN_AND_TALK else PERMISSIONSTATE.LISTEN_ONLY
 				self.log:debug("Got permissions, setting state to {}", self.permissionState)
-				self:SetMicActive(p1, p2)
-			end, { permissionsProtocol.Permissions.MICROPHONE_ACCESS }, false)
+				self:SetMicActive(p1, Context)
+			end, { PermissionsProtocol.Permissions.MICROPHONE_ACCESS }, false)
 			
 			return
-		elseif self.permissionState == PERMISSION_STATE.LISTEN_ONLY then
+		end
+		if self.permissionState == PERMISSIONSTATE.LISTEN_ONLY then
 			self.log:debug("User tried to unmute despite being in listen only mode")
 			self.callbacks.emitOnPermissionRequested()
 			
 			return
-		elseif self.isPlayerWatchingAd then
-			self.log:trace("User is watching an ad, skipping mic state change")
-			
-			return
-		elseif voiceChatService.UseNewAudioApi then
-			self.localMuted = not p1
-			self.log:trace("Setting self mute to {} context: {}", p1, p2)
-			local sendMuteEvent = self.callbacks.getSendMuteEvent()
-			
-			if sendMuteEvent then
-				sendMuteEvent:FireServer(p1)
-				local var4 = p1 and (not getFFlagMicConsumerRegistryModule() or self._micIndicatorReady)
-				
-				for i in self.callbacks.getAudioDevices() do
-					if i.Player and i.Player == playersService.LocalPlayer then
-						i.Active = var4
-					end
-				end
-				if getFFlagMicConsumerRegistryModule() then
-					for i_1, v in self._consumers do
-						if v.device and v.consumerType ~= "VoiceChat" then
-							v.device.Active = var4
-						end
-					end
-				end
-				self.muteChanged:Fire(self.localMuted)
-			else
-				self.log:error("Could not find SendMuteEvent")
-			end
-		else
-			local service = self.callbacks.getService()
-			self.log:trace("Setting self mute to {} context: {}", not p1, p2)
-			service:PublishPause(not p1)
-			self.localMuted = not p1
-			self.muteChanged:Fire(self.localMuted)
 		end
-		if not self.localMuted then
-			self.talkingChanged:Fire(self.isTalking)
-			self.callbacks.emitOnShowDataConsentToast()
-		elseif getFFlagMicConsumerRegistryModule() and self._lastLevel ~= 0 then
+	end
+	if self.isPlayerWatchingAd then
+		self.log:trace("User is watching an ad, skipping mic state change")
+		
+		return
+	end
+	if VoiceChatService.UseNewAudioApi then
+		self.localMuted = not p1
+		self.log:trace("Setting self mute to {} context: {}", p1, Context)
+		local SendMuteEvent = self.callbacks.getSendMuteEvent()
+		
+		if SendMuteEvent then
+			SendMuteEvent:FireServer(p1)
+			local Inverted = p1 and (not GetFFlagMicConsumerRegistryModule() or self._micIndicatorReady)
+			for i in self.callbacks.getAudioDevices() do
+				if i.Player and i.Player == Players.LocalPlayer then
+					i.Active = Inverted
+				end
+			end
+			if GetFFlagMicConsumerRegistryModule() then
+				for _, consumer in self._consumers do
+					if consumer.device and consumer.consumerType ~= "VoiceChat" then
+						consumer.device.Active = Inverted
+					end
+				end
+			end
+			self.muteChanged:Fire(self.localMuted)
+		else
+			self.log:error("Could not find SendMuteEvent")
+		end
+	else
+		local Service = self.callbacks.getService()
+		self.log:trace("Setting self mute to {} context: {}", not p1, Context)
+		Service:PublishPause(not p1)
+		self.localMuted = not p1
+		self.muteChanged:Fire(self.localMuted)
+	end
+	if self.localMuted then
+		if GetFFlagMicConsumerRegistryModule() and self._lastLevel ~= 0 then
 			self._lastLevel = 0
 			self.levelChanged:Fire(0)
 		end
-		if p2 then
-			self.callbacks.reportVoiceMuteSelf(self.callbacks.getJoinWithVoiceMuteData({ context = p2, muted = self.localMuted }))
-		end
-		self:_assertDeviceStateConsistency()
+	else
+		self.talkingChanged:Fire(self.isTalking)
+		self.callbacks.emitOnShowDataConsentToast()
 	end
+	if Context then
+		self.callbacks.reportVoiceMuteSelf(self.callbacks.getJoinWithVoiceMuteData({ context = Context, muted = self.localMuted }))
+	end
+	self:_assertDeviceStateConsistency()
 end
 
-function t:SetLocalMuted(p3)
-	self.localMuted = p3
+function MicInputManager:SetLocalMuted(LocalMuted) --[[ Line: 217 ]]
+	self.localMuted = LocalMuted
 end
 
-function t:SyncLocalAudioDeviceActive()
-	-- upvalues: voiceChatService (ref), getFFlagMicConsumerRegistryModule (ref), playersService (ref)
-	if not voiceChatService.UseNewAudioApi then return end
-	local var5 = self.localMuted == false and (not getFFlagMicConsumerRegistryModule() or self._micIndicatorReady)
-	
+function MicInputManager:SyncLocalAudioDeviceActive() --[[ Line: 221 ]]
+	-- upvalues: VoiceChatService (copy), GetFFlagMicConsumerRegistryModule (copy), Players (copy)
+	if not VoiceChatService.UseNewAudioApi then return end
+	local Inverted = self.localMuted == false and (not GetFFlagMicConsumerRegistryModule() or self._micIndicatorReady)
 	for i in self.callbacks.getAudioDevices() do
-		if i.Player and i.Player == playersService.LocalPlayer then
-			i.Active = var5
+		if i.Player and i.Player == Players.LocalPlayer then
+			i.Active = Inverted
 		end
 	end
 	self:_assertDeviceStateConsistency()
 end
 
-function t:SetupEarlyAudioDeviceGuard()
-	-- upvalues: voiceChatService (ref), fFlagExpChatDictation (ref), coreGuiService (ref), playersService (ref), soundService (ref)
-	local function _(p3)
-		-- upvalues: voiceChatService (copy), fFlagExpChatDictation (copy), coreGuiService (copy), playersService (copy), self (ref)
-		return voiceChatService.UseNewAudioApi and (not (fFlagExpChatDictation and p3:IsDescendantOf(coreGuiService)) and (p3.Player == playersService.LocalPlayer and (p3.Active and self.localMuted == nil)))
+function MicInputManager:SetupEarlyAudioDeviceGuard() --[[ Line: 234 ]]
+	-- upvalues: VoiceChatService (copy), FFlagExpChatDictation (copy), CoreGui (copy), Players (copy), SoundService (copy)
+	local function _(Object): boolean --[[ Line: 235 | Named "shouldDeactivate" ]]
+		-- upvalues: VoiceChatService (upval), FFlagExpChatDictation (upval), CoreGui (upval), Players (upval), self (copy)
+		return VoiceChatService.UseNewAudioApi and (not (FFlagExpChatDictation and Object:IsDescendantOf(CoreGui)) and (Object.Player == Players.LocalPlayer and (Object.Active and self.localMuted == nil)))
 	end
 	
-	local function guardDevice(p3)
-		-- upvalues: voiceChatService (copy), fFlagExpChatDictation (copy), coreGuiService (copy), playersService (copy), self (ref)
-		if voiceChatService.UseNewAudioApi and (not (fFlagExpChatDictation and p3:IsDescendantOf(coreGuiService)) and (p3.Player == playersService.LocalPlayer and (p3.Active and self.localMuted == nil))) then
-			p3.Active = false
+	local function guardDevice(Object) --[[ Line: 243 ]]
+		-- upvalues: VoiceChatService (upval), FFlagExpChatDictation (upval), CoreGui (upval), Players (upval), self (copy)
+		if VoiceChatService.UseNewAudioApi and (not (FFlagExpChatDictation and Object:IsDescendantOf(CoreGui)) and (Object.Player == Players.LocalPlayer and (Object.Active and self.localMuted == nil))) then
+			Object.Active = false
 		end
-		table.insert(self._connections, p3:GetPropertyChangedSignal("Player"):Connect(function()
-			-- upvalues: p3 (ref), voiceChatService (copy), fFlagExpChatDictation (copy), coreGuiService (copy), playersService (copy), self (copy)
-			local var6 = p3
-			
-			if voiceChatService.UseNewAudioApi and (not (fFlagExpChatDictation and var6:IsDescendantOf(coreGuiService)) and (var6.Player == playersService.LocalPlayer and (var6.Active and self.localMuted == nil))) then
-				p3.Active = false
+		table.insert(self._connections, (Object:GetPropertyChangedSignal("Player"):Connect(function() --[[ Line: 248 ]]
+			-- upvalues: Object (copy), VoiceChatService (upval), FFlagExpChatDictation (upval), CoreGui (upval), Players (upval), self (upval)
+			if VoiceChatService.UseNewAudioApi and (not (FFlagExpChatDictation and Object:IsDescendantOf(CoreGui)) and (Object.Player == Players.LocalPlayer and (Object.Active and self.localMuted == nil))) then
+				Object.Active = false
 			end
-		end))
-		table.insert(self._connections, p3:GetPropertyChangedSignal("Active"):Connect(function()
-			-- upvalues: p3 (ref), voiceChatService (copy), fFlagExpChatDictation (copy), coreGuiService (copy), playersService (copy), self (copy)
-			local var6 = p3
-			
-			if voiceChatService.UseNewAudioApi and (not (fFlagExpChatDictation and var6:IsDescendantOf(coreGuiService)) and (var6.Player == playersService.LocalPlayer and (var6.Active and self.localMuted == nil))) then
-				p3.Active = false
+		end)))
+		table.insert(self._connections, (Object:GetPropertyChangedSignal("Active"):Connect(function() --[[ Line: 255 ]]
+			-- upvalues: Object (copy), VoiceChatService (upval), FFlagExpChatDictation (upval), CoreGui (upval), Players (upval), self (upval)
+			if VoiceChatService.UseNewAudioApi and (not (FFlagExpChatDictation and Object:IsDescendantOf(CoreGui)) and (Object.Player == Players.LocalPlayer and (Object.Active and self.localMuted == nil))) then
+				Object.Active = false
 			end
-		end))
+		end)))
 	end
 	
-	table.insert(self._connections, soundService.AudioInstanceAdded:Connect(function(p3)
-		-- upvalues: guardDevice (ref)
-		if p3:IsA("AudioDeviceInput") then
-			guardDevice(p3)
+	table.insert(self._connections, (SoundService.AudioInstanceAdded:Connect(function(AudioDeviceInput) --[[ Line: 263 ]]
+		-- upvalues: guardDevice (copy)
+		if AudioDeviceInput:IsA("AudioDeviceInput") then
+			guardDevice(AudioDeviceInput)
 		end
-	end))
+	end)))
 	
-	for i, v in game:GetDescendants() do
-		if v:IsA("AudioDeviceInput") then
-			guardDevice(v)
+	for _, AudioDeviceInput in game:GetDescendants() do
+		if AudioDeviceInput:IsA("AudioDeviceInput") then
+			guardDevice(AudioDeviceInput)
 		end
 	end
 end
 
-function t:SetAndSyncActive(p3, p4)
-	-- upvalues: playersService (ref)
-	p3.Active = p4
-	local sendMuteEvent = self.callbacks.getSendMuteEvent()
+function MicInputManager:SetAndSyncActive(p2, Active) --[[ Line: 277 ]]
+	-- upvalues: Players (copy)
+	p2.Active = Active
+	local SendMuteEvent = self.callbacks.getSendMuteEvent()
 	
-	if sendMuteEvent and p3.Player == playersService.LocalPlayer then
-		sendMuteEvent:FireServer(p4)
+	if SendMuteEvent and p2.Player == Players.LocalPlayer then
+		SendMuteEvent:FireServer(Active)
 	end
 end
 
-function t:RequestMicPermission()
-	-- upvalues: getFFlagDebugVoiceChatMicPermissionCliBypassModule (ref), PERMISSION_STATE (ref), promiseModule (ref), permissionsProtocol (ref), getFFlagEnableExpJoinMicPermAnalyticsModule (ref)
-	if getFFlagDebugVoiceChatMicPermissionCliBypassModule() then
-		self.permissionState = PERMISSION_STATE.LISTEN_AND_TALK
+function MicInputManager:RequestMicPermission() --[[ Line: 285 ]]
+	-- upvalues: GetFFlagDebugVoiceChatMicPermissionCliBypassModule (copy), PERMISSIONSTATE (copy), PromiseModule (copy), PermissionsProtocol (copy), GetFFlagEnableExpJoinMicPermAnalyticsModule (copy)
+	if GetFFlagDebugVoiceChatMicPermissionCliBypassModule() then
+		self.permissionState = PERMISSIONSTATE.LISTEN_AND_TALK
 		
-		return promiseModule.resolve()
+		return PromiseModule.resolve()
 	elseif self.permissionPromise then
 		self.log:trace("PermissionProtocol already invoked")
 		
 		return self.permissionPromise
-	end
-	self.permissionPromise = self.callbacks.requestPermissions({ permissionsProtocol.Permissions.MICROPHONE_ACCESS }):andThen(function(p3)
-		-- upvalues: getFFlagEnableExpJoinMicPermAnalyticsModule (copy), self (ref), promiseModule (copy), permissionsProtocol (copy)
-		if getFFlagEnableExpJoinMicPermAnalyticsModule() then
-			self.callbacks.recordExperienceJoinMicPerm(p3)
-		end
-		if p3 or p3.status then
-			self.log:debug("Permission status {}", p3.status)
-			local var6 = p3.status == permissionsProtocol.Status.AUTHORIZED
+	else
+		self.permissionPromise = self.callbacks.requestPermissions({ PermissionsProtocol.Permissions.MICROPHONE_ACCESS }):andThen(function(Result) --[[ Line: 299 ]]
+			-- upvalues: GetFFlagEnableExpJoinMicPermAnalyticsModule (upval), self (copy), PromiseModule (upval), PermissionsProtocol (upval)
+			if GetFFlagEnableExpJoinMicPermAnalyticsModule() then
+				self.callbacks.recordExperienceJoinMicPerm(Result)
+			end
+			if Result or Result.status then
+				self.log:debug("Permission status {}", Result.status)
+				local IsStatusMatch = Result.status == PermissionsProtocol.Status.AUTHORIZED
+				
+				return if self.callbacks.getPassInitErrorInPromiseReject() and not IsStatusMatch then PromiseModule.reject({ code = "INIT_ERROR_PERM_NOT_GRANTED" }) else IsStatusMatch and PromiseModule.resolve() or PromiseModule.reject()
+			else
+				self.log:debug("No permission response, rejecting access")
+				self.callbacks.reportJoinFailed("noPermissionResponse", nil)
+				
+				return if self.callbacks.getPassInitErrorInPromiseReject() then PromiseModule.reject({ code = "INIT_ERROR_NO_PERM_RESPONSE" }) else PromiseModule.reject()
+			end
+		end):andThen(function() --[[ Line: 319 ]]
+			-- upvalues: self (copy), PromiseModule (upval)
+			self.callbacks.emitOnRequestMicPermissionResolved()
 			
-			return if self.callbacks.getPassInitErrorInPromiseReject() and not var6 then promiseModule.reject({ code = "INIT_ERROR_PERM_NOT_GRANTED" }) else var6 and promiseModule.resolve() or promiseModule.reject()
-		end
-		self.log:debug("No permission response, rejecting access")
-		self.callbacks.reportJoinFailed("noPermissionResponse", nil)
+			return PromiseModule.resolve()
+		end):catch(function() --[[ Line: 323 ]]
+			-- upvalues: self (copy), PromiseModule (upval)
+			self.callbacks.emitOnRequestMicPermissionRejected()
+			
+			return if self.callbacks.getPassInitErrorInPromiseReject() then PromiseModule.reject({ code = "INIT_ERROR_MIC_PERM_REJECTED" }) else PromiseModule.reject()
+		end)
 		
-		return if self.callbacks.getPassInitErrorInPromiseReject() then promiseModule.reject({ code = "INIT_ERROR_NO_PERM_RESPONSE" }) else promiseModule.reject()
-	end):andThen(function()
-		-- upvalues: self (ref), promiseModule (copy)
-		self.callbacks.emitOnRequestMicPermissionResolved()
-		
-		return promiseModule.resolve()
-	end):catch(function()
-		-- upvalues: self (ref), promiseModule (copy)
-		self.callbacks.emitOnRequestMicPermissionRejected()
-		
-		return if self.callbacks.getPassInitErrorInPromiseReject() then promiseModule.reject({ code = "INIT_ERROR_MIC_PERM_REJECTED" }) else promiseModule.reject()
-	end)
-	
-	return self.permissionPromise
+		return self.permissionPromise
+	end
 end
 
-function t:UpdateLocalMetering()
-	-- upvalues: playersService (ref), var1 (ref)
-	self.isTalking = self.callbacks.isSignalActive(playersService.LocalPlayer.UserId)
+function MicInputManager:UpdateLocalMetering() --[[ Line: 333 ]]
+	-- upvalues: Players (copy), v1 (copy)
+	self.isTalking = self.callbacks.isSignalActive(Players.LocalPlayer.UserId)
 	
 	if self.localMuted == false then
-		if var1 then
+		if v1 then
 			self:FireTalkingChangedDebounced(self.isTalking)
 			
 			return
@@ -266,25 +263,24 @@ function t:UpdateLocalMetering()
 	end
 end
 
-function t:FireTalkingChangedDebounced(p3)
-	-- upvalues: var2 (ref)
-	local var6 = tick() * 1000
+function MicInputManager:FireTalkingChangedDebounced(IsTalking) --[[ Line: 344 ]]
+	-- upvalues: v2 (copy)
+	local ScaledCurrentTime = tick() * 1000
+	local IsScaledCurrentTimeAbove = v2 < ScaledCurrentTime - self._lastTalkingChangedFireTime
 	
-	if p3 ~= self._lastTalkingChangedFireValue or var2 < var6 - self._lastTalkingChangedFireTime then
-		self._lastTalkingChangedFireTime = var6
-		self._lastTalkingChangedFireValue = p3
-		self.talkingChanged:Fire(p3)
+	if IsTalking ~= self._lastTalkingChangedFireValue or IsScaledCurrentTimeAbove then
+		self._lastTalkingChangedFireTime = ScaledCurrentTime
+		self._lastTalkingChangedFireValue = IsTalking
+		self.talkingChanged:Fire(IsTalking)
 	end
 end
 
-function t:SetupMicActivityListener(p3)
-	-- upvalues: var3 (ref), voiceChatService (ref), MIN_VOICE_CHAT_API_VERSION_LOCAL_MIC_ACTIVITY (ref), getFFlagLocalMutedNilFix (ref), var1 (ref)
-	if var3 and voiceChatService.UseNewAudioApi then
-		if self.localMeteringTask then
-			return
-		else
-			self.localMeteringTask = task.spawn(function()
-				-- upvalues: self (ref)
+function MicInputManager:SetupMicActivityListener(VoiceChatInternal) --[[ Line: 358 ]]
+	-- upvalues: v3 (copy), VoiceChatService (copy), MINVOICECHATAPIVERSIONLOCALMICACTIVITY (copy), GetFFlagLocalMutedNilFixFunction (copy), v1 (copy)
+	if v3 and VoiceChatService.UseNewAudioApi then
+		if not self.localMeteringTask then
+			self.localMeteringTask = task.spawn(function() --[[ Line: 361 ]]
+				-- upvalues: self (copy)
 				while true do
 					self:UpdateLocalMetering()
 					task.wait()
@@ -293,51 +289,54 @@ function t:SetupMicActivityListener(p3)
 			
 			return
 		end
-	elseif MIN_VOICE_CHAT_API_VERSION_LOCAL_MIC_ACTIVITY <= p3:GetVoiceChatApiVersion() then
-		table.insert(self._connections, p3.PlayerMicActivitySignalChange:Connect(function(p4)
-			-- upvalues: self (ref), getFFlagLocalMutedNilFix (copy), var1 (copy)
-			self.callbacks.onVoiceCapturedDuringVideoCapture(p4.isActive)
-			self.isTalking = p4.isActive
+	elseif MINVOICECHATAPIVERSIONLOCALMICACTIVITY <= VoiceChatInternal:GetVoiceChatApiVersion() then
+		table.insert(self._connections, (VoiceChatInternal.PlayerMicActivitySignalChange:Connect(function(ActivityInfo) --[[ Line: 370 ]]
+			-- upvalues: self (copy), GetFFlagLocalMutedNilFixFunction (upval), v1 (upval)
+			self.callbacks.onVoiceCapturedDuringVideoCapture(ActivityInfo.isActive)
+			self.isTalking = ActivityInfo.isActive
 			
-			if getFFlagLocalMutedNilFix() then
-				if self.localMuted ~= false then return end
-				if var1 then
-					self:FireTalkingChangedDebounced(self.isTalking)
-					
-					return
+			if GetFFlagLocalMutedNilFixFunction() then
+				if self.localMuted == false then
+					if v1 then
+						self:FireTalkingChangedDebounced(self.isTalking)
+						
+						return
+					else
+						self.talkingChanged:Fire(self.isTalking)
+						
+						return
+					end
 				end
-				self.talkingChanged:Fire(self.isTalking)
-				
-				return
 			elseif not self.localMuted then
-				if var1 then
+				if v1 then
 					self:FireTalkingChangedDebounced(self.isTalking)
 					
 					return
 				end
 				self.talkingChanged:Fire(self.isTalking)
 			end
-		end))
+		end)))
 	end
 end
 
-function t:SetAdMuteBlocked(p4)
-	self.isPlayerWatchingAd = p4
+function MicInputManager:SetAdMuteBlocked(IsPlayerWatchingAd) --[[ Line: 396 ]]
+	self.isPlayerWatchingAd = IsPlayerWatchingAd
 end
 
-function t:RegisterConsumer(p4)
-	-- upvalues: getFFlagMicConsumerRegistryModule (ref), PERMISSION_STATE (ref)
-	if not getFFlagMicConsumerRegistryModule() then
+function MicInputManager:RegisterConsumer(p2): boolean --[[ Line: 402 ]]
+	-- upvalues: GetFFlagMicConsumerRegistryModule (copy), PERMISSIONSTATE (copy)
+	if not GetFFlagMicConsumerRegistryModule() then
 		return false
-	elseif self._consumers[p4.id] then
-		self.log:trace("Consumer already registered: {}", p4.id)
+	end
+	if self._consumers[p2.id] then
+		self.log:trace("Consumer already registered: {}", p2.id)
 		
 		return true
 	end
-	local isVoiceChat = p4.consumerType == "VoiceChat"
+	local IsVoiceChat = p2.consumerType == "VoiceChat"
 	
-	if self.permissionState == PERMISSION_STATE.LISTEN_ONLY and isVoiceChat then
-		self.log:debug("RegisterConsumer rejected for {}: voice chat permission denied", p4.id)
+	if self.permissionState == PERMISSIONSTATE.LISTEN_ONLY and IsVoiceChat then
+		self.log:debug("RegisterConsumer rejected for {}: voice chat permission denied", p2.id)
 		
 		if not self._hasShownPermDeniedToast and self.callbacks.emitOnMicPermissionDeniedToast then
 			self._hasShownPermDeniedToast = true
@@ -345,299 +344,302 @@ function t:RegisterConsumer(p4)
 		end
 		return false
 	else
-		local var6 = false
+		local HasConsumer = false
 		
-		if isVoiceChat and p4.device then
-			local text = "dev_" .. tostring(p4.device:GetDebugId())
-			var6 = self._consumers[text] ~= nil
+		if IsVoiceChat and p2.device then
+			local Text = "dev_" .. tostring(p2.device:GetDebugId())
+			HasConsumer = self._consumers[Text] ~= nil
 			
-			if var6 then
-				self:UnregisterConsumer(text, true)
+			if HasConsumer then
+				self:UnregisterConsumer(Text, true)
 			end
 		end
-		self._consumers[p4.id] = p4
-		local consumerCount = self._consumerCount
+		self._consumers[p2.id] = p2
+		local ConsumerCount = self._consumerCount
 		self._consumerCount += 1
 		self:_updateActiveConsumerType()
 		
-		if consumerCount == 0 and not var6 then
+		if ConsumerCount == 0 and not HasConsumer then
 			self._micIndicatorReady = false
 		end
 		self.hasConsumersChanged:Fire(self._consumerCount)
 		
-		if p4.device then
-			local var7 = self.localMuted == false and self._micIndicatorReady
+		if p2.device then
+			local MicIndicatorReady = self.localMuted == false and self._micIndicatorReady
 			
-			if p4.device.Active ~= var7 then
-				p4.device.Active = var7
+			if p2.device.Active ~= MicIndicatorReady then
+				p2.device.Active = MicIndicatorReady
 			end
 		end
-		self.log:trace("Consumer registered: {} type={} count={}", p4.id, p4.consumerType, self._consumerCount)
+		self.log:trace("Consumer registered: {} type={} count={}", p2.id, p2.consumerType, self._consumerCount)
 		self:_assertDeviceStateConsistency()
 		
 		return true
 	end
 end
 
-function t:UnregisterConsumer(p4, p5)
-	-- upvalues: getFFlagMicConsumerRegistryModule (ref)
-	if not getFFlagMicConsumerRegistryModule() then return end
-	local var6 = self._consumers[p4]
+function MicInputManager:UnregisterConsumer(p2, p3) --[[ Line: 454 ]]
+	-- upvalues: GetFFlagMicConsumerRegistryModule (copy)
+	if not GetFFlagMicConsumerRegistryModule() then return end
+	local Consumer = self._consumers[p2]
 	
-	if not var6 then return end
-	if var6.wire then
-		var6.wire:Destroy()
+	if not Consumer then return end
+	if Consumer.wire then
+		Consumer.wire:Destroy()
 	end
-	if var6.analyzer then
-		var6.analyzer:Destroy()
+	if Consumer.analyzer then
+		Consumer.analyzer:Destroy()
 	end
-	if var6.device and var6.device.Active then
-		var6.device.Active = false
+	if Consumer.device and Consumer.device.Active then
+		Consumer.device.Active = false
 	end
-	self._consumers[p4] = nil
+	self._consumers[p2] = nil
 	self._consumerCount -= 1
 	self:_updateActiveConsumerType()
 	
-	if self._consumerCount == 0 and not p5 then
+	if self._consumerCount == 0 and not p3 then
 		self.localMuted = nil
 		self._micIndicatorReady = false
 		self:_stopLevelDetectionTask()
 	end
-	if not p5 then
+	if not p3 then
 		self.hasConsumersChanged:Fire(self._consumerCount)
 	end
-	self.log:trace("Consumer unregistered: {} count={}", p4, self._consumerCount)
+	self.log:trace("Consumer unregistered: {} count={}", p2, self._consumerCount)
 end
 
-function t:SetMicIndicatorReady(p4)
-	-- upvalues: getFFlagMicConsumerRegistryModule (ref)
-	if not getFFlagMicConsumerRegistryModule() or self._micIndicatorReady == p4 then return end
-	self._micIndicatorReady = p4
-	local var6 = p4 and self.localMuted == false
-	
-	for i, v in self._consumers do
-		if v.device and v.device.Active ~= var6 then
-			v.device.Active = var6
+function MicInputManager:SetMicIndicatorReady(_micIndicatorReady) --[[ Line: 492 ]]
+	-- upvalues: GetFFlagMicConsumerRegistryModule (copy)
+	if not GetFFlagMicConsumerRegistryModule() or self._micIndicatorReady == _micIndicatorReady then return end
+	self._micIndicatorReady = _micIndicatorReady
+	local IsNotLocalMuted: boolean = _micIndicatorReady and self.localMuted == false
+	for _, consumer in self._consumers do
+		if consumer.device and consumer.device.Active ~= IsNotLocalMuted then
+			consumer.device.Active = IsNotLocalMuted
 		end
 	end
 	self:_assertDeviceStateConsistency()
 end
 
-function t:GetConsumerCount()
-	-- upvalues: getFFlagMicConsumerRegistryModule (ref)
-	return if getFFlagMicConsumerRegistryModule() then self._consumerCount else 0
+function MicInputManager.GetConsumerCount(p2) --[[ Line: 508 ]]
+	-- upvalues: GetFFlagMicConsumerRegistryModule (copy)
+	return if GetFFlagMicConsumerRegistryModule() then p2._consumerCount else 0
 end
 
-function t:HasConsumer(p5)
-	-- upvalues: getFFlagMicConsumerRegistryModule (ref)
-	return if getFFlagMicConsumerRegistryModule() then self._consumers[p5] ~= nil else false
+function MicInputManager.HasConsumer(p2, p3): boolean --[[ Line: 515 ]]
+	-- upvalues: GetFFlagMicConsumerRegistryModule (copy)
+	return if GetFFlagMicConsumerRegistryModule() then p2._consumers[p3] ~= nil else false
 end
 
-function t:GetActiveConsumerType()
-	-- upvalues: getFFlagMicConsumerRegistryModule (ref)
-	return if getFFlagMicConsumerRegistryModule() then self._activeConsumerType else nil
+function MicInputManager.GetActiveConsumerType(p2) --[[ Line: 522 ]]
+	-- upvalues: GetFFlagMicConsumerRegistryModule (copy)
+	return if GetFFlagMicConsumerRegistryModule() then p2._activeConsumerType else nil
 end
 
-function t:_updateActiveConsumerType()
+function MicInputManager:_updateActiveConsumerType() --[[ Line: 529 ]]
 	self._activeConsumerType = nil
 	
-	for i, v in self._consumers do
-		if v.consumerType ~= "VoiceChat" then
-			if self._activeConsumerType == nil then
-				self._activeConsumerType = v.consumerType
-			end
+	for _, consumer in self._consumers do
+		if consumer.consumerType == "VoiceChat" then
+			self._activeConsumerType = "VoiceChat"
+			self:_stopLevelDetectionTask()
+			
+			return
 		end
-		self._activeConsumerType = "VoiceChat"
-		self:_stopLevelDetectionTask()
-		
-		return
+		if self._activeConsumerType == nil then
+			self._activeConsumerType = consumer.consumerType
+		end
 	end
 	if self._activeConsumerType and self._activeConsumerType ~= "VoiceChat" then
 		self:_startLevelDetectionTask()
 	end
 end
 
-function t:_startLevelDetectionTask()
-	if self._levelDetectionTask then
+function MicInputManager:_startLevelDetectionTask() --[[ Line: 547 ]]
+	if not self._levelDetectionTask then
+		self._levelDetectionTask = task.spawn(function() --[[ Line: 551 ]]
+			-- upvalues: self (copy)
+			while true do
+				self:_updateCustomLevelDetection()
+				task.wait()
+			end
+		end)
+		
 		return
 	end
-	self._levelDetectionTask = task.spawn(function()
-		-- upvalues: self (ref)
-		while true do
-			self:_updateCustomLevelDetection()
-			task.wait()
-		end
-	end)
 end
 
-function t:_stopLevelDetectionTask()
+function MicInputManager:_stopLevelDetectionTask() --[[ Line: 559 ]]
 	if self._levelDetectionTask then
 		task.cancel(self._levelDetectionTask)
 		self._levelDetectionTask = nil
 	end
 end
 
-function t:_updateCustomLevelDetection()
-	-- upvalues: var1 (ref), getFFlagMicConsumerRegistryModule (ref)
+function MicInputManager:_updateCustomLevelDetection() --[[ Line: 566 ]]
+	-- upvalues: v1 (copy), GetFFlagMicConsumerRegistryModule (copy)
 	if self.localMuted ~= false then return end
-	local var7 = 0
+	local v4 = 0
 	
-	for i, v in self._consumers do
-		if v.analyzer then
-			local peakLevel = v.analyzer.PeakLevel
+	for _, consumer in self._consumers do
+		if consumer.analyzer then
+			local PeakLevel: number = consumer.analyzer.PeakLevel
 			
-			if peakLevel > 0 then
-				local var8 = math.log10(peakLevel) * 20
+			if PeakLevel > 0 then
+				local ScaledLog10Result = math.log10(PeakLevel) * 20
 				
-				if var8 > -36 then
-					local clampedValue = math.clamp((var8 - -36) / 36, 0, 1)
+				if ScaledLog10Result > -36 then
+					local ClampedValue = math.clamp((ScaledLog10Result - -36) / 36, 0, 1)
 					
-					if var7 < clampedValue then
-						var7 = clampedValue
+					if v4 < ClampedValue then
+						v4 = ClampedValue
 					end
 				end
 			end
 		end
 	end
-	local clampedValue = math.clamp(math.floor(var7 * 100 / 20 + 0.5) * 20, 0, 100)
-	self.isTalking = clampedValue > 0
+	local ClampedValue = math.clamp(math.floor(v4 * 100 / 20 + 0.5) * 20, 0, 100)
+	self.isTalking = ClampedValue > 0
 	
-	if var1 then
+	if v1 then
 		self:FireTalkingChangedDebounced(self.isTalking)
 	else
 		self.talkingChanged:Fire(self.isTalking)
 	end
-	if getFFlagMicConsumerRegistryModule() and clampedValue ~= self._lastLevel then
-		self._lastLevel = clampedValue
-		self.levelChanged:Fire(clampedValue)
+	if GetFFlagMicConsumerRegistryModule() and ClampedValue ~= self._lastLevel then
+		self._lastLevel = ClampedValue
+		self.levelChanged:Fire(ClampedValue)
 	end
 end
 
-function t:_isVoiceChatDevice(p5)
-	-- upvalues: playersService (ref)
-	for i, v in self._consumers do
-		if v.consumerType == "VoiceChat" then
-			if v.device ~= p5 then
-				if v.device == nil and p5.Player == playersService.LocalPlayer then
-					v.device = p5
-					p5.Active = self.localMuted == false and self._micIndicatorReady
-					
-					return true
-				end
+function MicInputManager:_isVoiceChatDevice(Device): boolean --[[ Line: 603 ]]
+	-- upvalues: Players (copy)
+	for _, consumer in self._consumers do
+		if consumer.consumerType == "VoiceChat" then
+			if consumer.device == Device then
+				return true
+			elseif consumer.device == nil and Device.Player == Players.LocalPlayer then
+				consumer.device = Device
+				Device.Active = self.localMuted == false and self._micIndicatorReady
+				
+				return true
 			end
-			return true
+			continue
 		end
 	end
 	return false
 end
 
-function t:_isDeveloperDevice(p6)
-	-- upvalues: coreGuiService (ref), playersService (ref)
-	return if p6:IsDescendantOf(coreGuiService) then false elseif self:_isVoiceChatDevice(p6) then false else p6.Player == playersService.LocalPlayer
+function MicInputManager:_isDeveloperDevice(Device): boolean --[[ Line: 619 ]]
+	-- upvalues: CoreGui (copy), Players (copy)
+	return not Device:IsDescendantOf(CoreGui) and (not self:_isVoiceChatDevice(Device) and Device.Player == Players.LocalPlayer)
 end
 
-function t:_getDeveloperAudioInstancesFolder()
-	-- upvalues: coreGuiService (ref)
+function MicInputManager:_getDeveloperAudioInstancesFolder() --[[ Line: 631 ]]
+	-- upvalues: CoreGui (copy)
 	if self._developerAudioInstancesFolder then
 		return self._developerAudioInstancesFolder
+	else
+		local MicConsumerRegistry = Instance.new("Folder")
+		MicConsumerRegistry.Name = "MicConsumerRegistry"
+		MicConsumerRegistry.Parent = CoreGui
+		self._developerAudioInstancesFolder = MicConsumerRegistry
+		
+		return MicConsumerRegistry
 	end
-	local micConsumerRegistry = Instance.new("Folder")
-	micConsumerRegistry.Name = "MicConsumerRegistry"
-	micConsumerRegistry.Parent = coreGuiService
-	self._developerAudioInstancesFolder = micConsumerRegistry
-	
-	return micConsumerRegistry
 end
 
-function t:_registerDeveloperDevice(p6)
-	local text = "dev_" .. tostring(p6:GetDebugId())
+function MicInputManager:_registerDeveloperDevice(Device) --[[ Line: 643 ]]
+	local Text = "dev_" .. tostring(Device:GetDebugId())
 	
-	if self._consumers[text] then return end
-	local developerAudioInstancesFolder = self:_getDeveloperAudioInstancesFolder()
-	local audioAnalyzer = Instance.new("AudioAnalyzer")
-	audioAnalyzer.Parent = developerAudioInstancesFolder
-	local wire = Instance.new("Wire")
-	wire.SourceInstance = p6
-	wire.TargetInstance = audioAnalyzer
-	wire.Parent = developerAudioInstancesFolder
+	if self._consumers[Text] then return end
+	local DeveloperAudioInstancesFolder = self:_getDeveloperAudioInstancesFolder()
+	local AudioAnalyzer = Instance.new("AudioAnalyzer")
+	AudioAnalyzer.Parent = DeveloperAudioInstancesFolder
+	local Wire = Instance.new("Wire")
+	Wire.SourceInstance = Device
+	Wire.TargetInstance = AudioAnalyzer
+	Wire.Parent = DeveloperAudioInstancesFolder
 	
 	if not self:RegisterConsumer({
 		consumerType = "DeveloperAudioDevice",
-		id = text,
-		device = p6,
-		analyzer = audioAnalyzer,
-		wire = wire
+		id = Text,
+		device = Device,
+		analyzer = AudioAnalyzer,
+		wire = Wire
 	}) then
-		wire:Destroy()
-		audioAnalyzer:Destroy()
+		Wire:Destroy()
+		AudioAnalyzer:Destroy()
 	end
 end
 
-function t:_unregisterDeveloperDevice(p6)
-	self:UnregisterConsumer("dev_" .. tostring(p6:GetDebugId()))
+function MicInputManager:_unregisterDeveloperDevice(Device) --[[ Line: 673 ]]
+	self:UnregisterConsumer("dev_" .. tostring(Device:GetDebugId()))
 end
 
-function t:SetupDeveloperDeviceTracking()
-	-- upvalues: getFFlagMicConsumerRegistryModule (ref), coreGuiService (ref), soundService (ref)
-	if not getFFlagMicConsumerRegistryModule() then return end
-	local function onDeviceAdded(p6)
-		-- upvalues: self (ref), coreGuiService (copy)
-		if self._developerDeviceConnections[p6] then return end
-		if p6:IsDescendantOf(coreGuiService) then return end
-		if self:_isDeveloperDevice(p6) then
-			self:_registerDeveloperDevice(p6)
+function MicInputManager:SetupDeveloperDeviceTracking() --[[ Line: 678 ]]
+	-- upvalues: GetFFlagMicConsumerRegistryModule (copy), CoreGui (copy), SoundService (copy)
+	if not GetFFlagMicConsumerRegistryModule() then return end
+	local function onDeviceAdded(AudioDeviceInput) --[[ Line: 683 ]]
+		-- upvalues: self (copy), CoreGui (upval)
+		if self._developerDeviceConnections[AudioDeviceInput] then return end
+		if AudioDeviceInput:IsDescendantOf(CoreGui) then return end
+		if self:_isDeveloperDevice(AudioDeviceInput) then
+			self:_registerDeveloperDevice(AudioDeviceInput)
 		end
-		local t = {}
-		table.insert(t, p6:GetPropertyChangedSignal("Player"):Connect(function()
-			-- upvalues: self (copy), p6 (ref)
-			if self:_isDeveloperDevice(p6) then
-				self:_registerDeveloperDevice(p6)
+		local List = {}
+		table.insert(List, (AudioDeviceInput:GetPropertyChangedSignal("Player"):Connect(function() --[[ Line: 698 ]]
+			-- upvalues: self (upval), AudioDeviceInput (copy)
+			if self:_isDeveloperDevice(AudioDeviceInput) then
+				self:_registerDeveloperDevice(AudioDeviceInput)
 				
 				return
+			else
+				self:_unregisterDeveloperDevice(AudioDeviceInput)
 			end
-			self:_unregisterDeveloperDevice(p6)
-		end))
-		table.insert(t, p6.AncestryChanged:Connect(function(_, p7)
-			-- upvalues: self (copy), p6 (ref)
-			if p7 == nil then
-				self:_unregisterDeveloperDevice(p6)
-				local var9 = self._developerDeviceConnections[p6]
+		end)))
+		table.insert(List, (AudioDeviceInput.AncestryChanged:Connect(function(_, NewParent) --[[ Line: 707 ]]
+			-- upvalues: self (upval), AudioDeviceInput (copy)
+			if NewParent == nil then
+				self:_unregisterDeveloperDevice(AudioDeviceInput)
+				local DeveloperDeviceConnection = self._developerDeviceConnections[AudioDeviceInput]
 				
-				if var9 then
-					for i, v in var9 do
-						v:Disconnect()
+				if DeveloperDeviceConnection then
+					for _, Connection in DeveloperDeviceConnection do
+						Connection:Disconnect()
 					end
-					self._developerDeviceConnections[p6] = nil
+					self._developerDeviceConnections[AudioDeviceInput] = nil
 				end
 			end
-		end))
-		self._developerDeviceConnections[p6] = t
+		end)))
+		self._developerDeviceConnections[AudioDeviceInput] = List
 	end
 	
-	table.insert(self._connections, soundService.AudioInstanceAdded:Connect(function(p7)
-		-- upvalues: onDeviceAdded (ref)
-		if p7:IsA("AudioDeviceInput") then
-			onDeviceAdded(p7)
+	table.insert(self._connections, (SoundService.AudioInstanceAdded:Connect(function(AudioDeviceInput) --[[ Line: 724 ]]
+		-- upvalues: onDeviceAdded (copy)
+		if AudioDeviceInput:IsA("AudioDeviceInput") then
+			onDeviceAdded(AudioDeviceInput)
 		end
-	end))
+	end)))
 	
-	for i, v in game:GetDescendants() do
-		if v:IsA("AudioDeviceInput") then
-			onDeviceAdded(v)
+	for _, AudioDeviceInput in game:GetDescendants() do
+		if AudioDeviceInput:IsA("AudioDeviceInput") then
+			onDeviceAdded(AudioDeviceInput)
 		end
 	end
 end
 
-function t:SetMicActiveForAllConsumers(p7, p8)
-	-- upvalues: getFFlagMicConsumerRegistryModule (ref), getFFlagJoinWithoutMicPermissions (ref), PERMISSION_STATE (ref), permissionsProtocol (ref)
-	if not getFFlagMicConsumerRegistryModule() then return end
-	if p7 then
+function MicInputManager:SetMicActiveForAllConsumers(p2, p3) --[[ Line: 738 ]]
+	-- upvalues: GetFFlagMicConsumerRegistryModule (copy), GetFFlagJoinWithoutMicPermissionsFunction (copy), PERMISSIONSTATE (copy), PermissionsProtocol (copy)
+	if not GetFFlagMicConsumerRegistryModule() then return end
+	if p2 then
 		if self.isPlayerWatchingAd then
 			self.log:trace("SetMicActiveForAllConsumers: blocked by ad-mute")
 			
 			return
-		elseif getFFlagJoinWithoutMicPermissions() then
-			if self.permissionState == PERMISSION_STATE.LISTEN_ONLY then
+		end
+		if GetFFlagJoinWithoutMicPermissionsFunction() then
+			if self.permissionState == PERMISSIONSTATE.LISTEN_ONLY then
 				self.log:debug("SetMicActiveForAllConsumers: permission denied")
 				
 				if not self._hasShownPermDeniedToast and self.callbacks.emitOnMicPermissionDeniedToast then
@@ -645,43 +647,42 @@ function t:SetMicActiveForAllConsumers(p7, p8)
 					self.callbacks.emitOnMicPermissionDeniedToast()
 				end
 				return
-			elseif self.permissionState == PERMISSION_STATE.PENDING_MIC then
+			elseif self.permissionState == PERMISSIONSTATE.PENDING_MIC then
 				self.log:debug("SetMicActiveForAllConsumers: requesting permission")
-				self.callbacks.emitGetPermissions(function(p9)
-					-- upvalues: self (ref), PERMISSION_STATE (copy), p7 (ref), p8 (ref)
-					self.permissionState = if p9.hasMicPermissions then PERMISSION_STATE.LISTEN_AND_TALK else PERMISSION_STATE.LISTEN_ONLY
-					self:SetMicActiveForAllConsumers(p7, p8)
-				end, { permissionsProtocol.Permissions.MICROPHONE_ACCESS }, false)
+				self.callbacks.emitGetPermissions(function(p4) --[[ Line: 759 ]]
+					-- upvalues: self (copy), PERMISSIONSTATE (upval), p2 (copy), p3 (copy)
+					self.permissionState = if p4.hasMicPermissions then PERMISSIONSTATE.LISTEN_AND_TALK else PERMISSIONSTATE.LISTEN_ONLY
+					self:SetMicActiveForAllConsumers(p2, p3)
+				end, { PermissionsProtocol.Permissions.MICROPHONE_ACCESS }, false)
 				
 				return
 			end
 		end
 	end
-	local micIndicatorReady = p7 and self._micIndicatorReady
-	
-	for i, v in self._consumers do
-		if v.device then
-			v.device.Active = micIndicatorReady
+	local MicIndicatorReady = p2 and self._micIndicatorReady
+	for _, consumer in self._consumers do
+		if consumer.device then
+			consumer.device.Active = MicIndicatorReady
 		end
 	end
-	self.localMuted = not p7
+	self.localMuted = not p2
 	self.muteChanged:Fire(self.localMuted)
 	
-	if p7 and not self._hasShownPrivacyToast then
-		local var9 = false
+	if p2 and not self._hasShownPrivacyToast then
+		local Flag = false
 		
-		for i_1, v_1 in self._consumers do
-			if v_1.consumerType == "VoiceChat" then
-				var9 = true
+		for _, consumer1 in self._consumers do
+			if consumer1.consumerType == "VoiceChat" then
+				Flag = true
 				break
 			end
 		end
-		if not var9 and self.callbacks.emitOnMicFirstUnmutePrivacy then
+		if not Flag and self.callbacks.emitOnMicFirstUnmutePrivacy then
 			self._hasShownPrivacyToast = true
 			self.callbacks.emitOnMicFirstUnmutePrivacy()
 		end
 	end
-	if p7 then
+	if p2 then
 		self.talkingChanged:Fire(self.isTalking)
 		self.callbacks.emitOnShowDataConsentToast()
 	elseif self._lastLevel ~= 0 then
@@ -691,10 +692,10 @@ function t:SetMicActiveForAllConsumers(p7, p8)
 	self:_assertDeviceStateConsistency()
 end
 
-function t:Disconnect()
-	-- upvalues: getFFlagMicConsumerRegistryModule (ref)
-	for i, v in self._connections do
-		v:Disconnect()
+function MicInputManager:Disconnect() --[[ Line: 812 ]]
+	-- upvalues: GetFFlagMicConsumerRegistryModule (copy)
+	for _, connection in self._connections do
+		connection:Disconnect()
 	end
 	self._connections = {}
 	
@@ -702,22 +703,22 @@ function t:Disconnect()
 		task.cancel(self.localMeteringTask)
 		self.localMeteringTask = nil
 	end
-	if getFFlagMicConsumerRegistryModule() then
+	if GetFFlagMicConsumerRegistryModule() then
 		self:_stopLevelDetectionTask()
 		
-		for i, v_1 in self._developerDeviceConnections do
-			for i_3, v_2 in v_1 do
-				v_2:Disconnect()
+		for _, developerDeviceConnection in self._developerDeviceConnections do
+			for _, Connection in developerDeviceConnection do
+				Connection:Disconnect()
 			end
 		end
 		self._developerDeviceConnections = {}
 		
-		for i, v_2 in self._consumers do
-			if v_2.wire then
-				v_2.wire:Destroy()
+		for _, consumer in self._consumers do
+			if consumer.wire then
+				consumer.wire:Destroy()
 			end
-			if v_2.analyzer then
-				v_2.analyzer:Destroy()
+			if consumer.analyzer then
+				consumer.analyzer:Destroy()
 			end
 		end
 		self._consumers = {}
@@ -730,19 +731,18 @@ function t:Disconnect()
 	end
 end
 
-function t:_assertDeviceStateConsistency()
-	-- upvalues: getFFlagMicConsumerRegistryModule (ref), playersService (ref)
-	local var10 = self.localMuted == false and (not getFFlagMicConsumerRegistryModule() or self._micIndicatorReady)
-	
+function MicInputManager:_assertDeviceStateConsistency() --[[ Line: 847 ]]
+	-- upvalues: GetFFlagMicConsumerRegistryModule (copy), Players (copy)
+	local Inverted = self.localMuted == false and (not GetFFlagMicConsumerRegistryModule() or self._micIndicatorReady)
 	for i in self.callbacks.getAudioDevices() do
-		if i.Player and i.Player == playersService.LocalPlayer and i.Active ~= var10 then
-			self.log:warning("MicManager consistency: device.Active={} expected={} localMuted={}", i.Active, var10, self.localMuted)
+		if i.Player and i.Player == Players.LocalPlayer and i.Active ~= Inverted then
+			self.log:warning("MicManager consistency: device.Active={} expected={} localMuted={}", i.Active, Inverted, self.localMuted)
 		end
 	end
-	if getFFlagMicConsumerRegistryModule() then
-		for i_1, v in self._consumers do
-			if v.device and v.device.Active ~= var10 then
-				self.log:warning("MicManager consistency (consumer {}): device.Active={} expected={} localMuted={}", v.id, v.device.Active, var10, self.localMuted)
+	if GetFFlagMicConsumerRegistryModule() then
+		for _, consumer in self._consumers do
+			if consumer.device and consumer.device.Active ~= Inverted then
+				self.log:warning("MicManager consistency (consumer {}): device.Active={} expected={} localMuted={}", consumer.id, consumer.device.Active, Inverted, self.localMuted)
 			end
 		end
 		if self._consumerCount == 0 and self.localMuted ~= nil then
@@ -751,4 +751,4 @@ function t:_assertDeviceStateConsistency()
 	end
 end
 
-return t
+return MicInputManager

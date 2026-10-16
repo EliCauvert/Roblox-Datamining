@@ -1,138 +1,137 @@
-﻿local authCommon = script:FindFirstAncestor("AuthCommon")
-local parent = authCommon.Parent
-local roactModule = require(parent.Roact)
-local UIBloxModule = require(parent.UIBlox)
-local foundationModule = require(parent.Foundation)
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local withStyle = UIBloxModule.Style.withStyle
-local passwordBoxModule = require(authCommon.Components.PasswordBox)
-local genericTextBoxModule = require(authCommon.Components.GenericTextBox)
-local authStatefulRoundCornerBorderModule = require(authCommon.Components.AuthStatefulRoundCornerBorder)
-local getFFlagEnableAuthStatefulTextInputUpdates = require(parent.SharedFlags).GetFFlagEnableAuthStatefulTextInputUpdates
-local name = roactModule.PureComponent:extend(script.Name)
-name.defaultProps = {
+﻿local AuthCommon = script:FindFirstAncestor("AuthCommon")
+local Parent = AuthCommon.Parent
+local RoactModule = require(Parent.Roact)
+local FoundationModule = require(Parent.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local WithStyleFunction = require(Parent.UIBlox).Style.withStyle
+local PasswordBoxModule = require(AuthCommon.Components.PasswordBox)
+local GenericTextBoxModule = require(AuthCommon.Components.GenericTextBox)
+local AuthStatefulRoundCornerBorderModule = require(AuthCommon.Components.AuthStatefulRoundCornerBorder)
+local GetFFlagEnableAuthStatefulTextInputUpdatesFunction = require(Parent.SharedFlags).GetFFlagEnableAuthStatefulTextInputUpdates
+local ExtendResult = RoactModule.PureComponent:extend(script.Name)
+ExtendResult.defaultProps = {
 	text = "",
 	textInputHeight = 30,
 	textInputListPadding = 12,
 	textInputType = Enum.TextInputType.NoSuggestions,
-	borderState = authStatefulRoundCornerBorderModule.BorderState.Default
+	borderState = AuthStatefulRoundCornerBorderModule.BorderState.Default
 }
 
-function name.render(p1)
-	-- upvalues: getFFlagEnableAuthStatefulTextInputUpdates (ref), withStyle (ref), roactModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), authStatefulRoundCornerBorderModule (ref), passwordBoxModule (ref), genericTextBoxModule (ref)
-	local text = p1.props.text
-	local textInputType = p1.props.textInputType
-	local textInputHeight = p1.props.textInputHeight
-	local var1 = if getFFlagEnableAuthStatefulTextInputUpdates() then p1.props.textInputListPadding else 12
-	local layoutOrder = p1.props.layoutOrder
-	local borderState = p1.props.borderState
-	local placeholderText = p1.props.placeholderText
-	local onChangeTextCallback = p1.props.onChangeTextCallback
-	local onFocused = p1.props.onFocused
-	local onFocusLost = p1.props.onFocusLost
-	local labelText = p1.props.labelText
-	local errorText = p1.props.errorText
-	local maxLength = p1.props.maxLength
-	local var2 = p1.props.textInputType == Enum.TextInputType.Password
+function ExtendResult.render(p1) --[[ Line: 32 ]]
+	-- upvalues: GetFFlagEnableAuthStatefulTextInputUpdatesFunction (copy), WithStyleFunction (copy), RoactModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), AuthStatefulRoundCornerBorderModule (copy), PasswordBoxModule (copy), GenericTextBoxModule (copy)
+	local Text = p1.props.text
+	local TextInputType = p1.props.textInputType
+	local TextInputHeight = p1.props.textInputHeight
+	local TextInputListPadding = if GetFFlagEnableAuthStatefulTextInputUpdatesFunction() then p1.props.textInputListPadding else 12
+	local LayoutOrder = p1.props.layoutOrder
+	local BorderState = p1.props.borderState
+	local PlaceholderText = p1.props.placeholderText
+	local OnChangeTextCallback = p1.props.onChangeTextCallback
+	local OnFocused = p1.props.onFocused
+	local OnFocusLost = p1.props.onFocusLost
+	local LabelText = p1.props.labelText
+	local ErrorText = p1.props.errorText
+	local MaxLength = p1.props.maxLength
+	local IsTextInputTypeMatch = p1.props.textInputType == Enum.TextInputType.Password
 	
-	return withStyle(function(p2)
-		-- upvalues: p1 (ref), roactModule (copy), layoutOrder (ref), var1 (ref), labelText (ref), foundationFontFaceMigration (copy), normalizeFontFace (copy), authStatefulRoundCornerBorderModule (copy), textInputHeight (ref), getFFlagEnableAuthStatefulTextInputUpdates (copy), borderState (ref), var2 (ref), passwordBoxModule (copy), text (ref), placeholderText (ref), onChangeTextCallback (ref), genericTextBoxModule (copy), textInputType (ref), onFocused (ref), onFocusLost (ref), maxLength (ref), errorText (ref)
-		local font = p2.Font.Body.Font
-		local var3 = p2.Font.BaseSize * p2.Font.Body.RelativeSize
-		local color = p2.Theme.TextDefault.Color
-		local transparency = p2.Theme.TextDefault.Transparency
-		local color_1 = p2.Theme.BackgroundUIContrast.Color
-		local transparency_1 = p2.Theme.BackgroundUIContrast.Transparency
-		local color_2 = p2.Theme.UIDefault.Color
-		local color_3 = p2.Theme.TextEmphasis.Color
+	return WithStyleFunction(function(p2) --[[ Line: 51 ]]
+		-- upvalues: p1 (copy), RoactModule (upval), LayoutOrder (copy), TextInputListPadding (copy), LabelText (copy), FoundationFontFaceMigration (upval), NormalizeFontFaceFunction (upval), AuthStatefulRoundCornerBorderModule (upval), TextInputHeight (copy), GetFFlagEnableAuthStatefulTextInputUpdatesFunction (upval), BorderState (copy), IsTextInputTypeMatch (copy), PasswordBoxModule (upval), Text (copy), PlaceholderText (copy), OnChangeTextCallback (copy), GenericTextBoxModule (upval), TextInputType (copy), OnFocused (copy), OnFocusLost (copy), MaxLength (copy), ErrorText (copy)
+		local BodyFont = p2.Font.Body.Font
+		local ScaledBaseSize = p2.Font.BaseSize * p2.Font.Body.RelativeSize
+		local Color = p2.Theme.TextDefault.Color
+		local Transparency = p2.Theme.TextDefault.Transparency
+		local Color1 = p2.Theme.BackgroundUIContrast.Color
+		local Transparency1 = p2.Theme.BackgroundUIContrast.Transparency
+		local Color2 = p2.Theme.UIDefault.Color
+		local Color3 = p2.Theme.TextEmphasis.Color
 		
 		if p1.props.placeholderTextColor then
-			color_2 = p1.props.placeholderTextColor
+			Color2 = p1.props.placeholderTextColor
 		end
 		if p1.props.labelTextColor then
-			color_3 = p1.props.labelTextColor
+			Color3 = p1.props.labelTextColor
 		end
 		if p1.props.textBarColor then
-			color_1 = p1.props.textBarColor
+			Color1 = p1.props.textBarColor
 		end
-		return roactModule.createElement("Frame", {
+		return RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			AutomaticSize = Enum.AutomaticSize.Y,
-			LayoutOrder = layoutOrder,
+			LayoutOrder = LayoutOrder,
 			Size = UDim2.new(1, 0, 0, 0)
 		}, {
-			ListLayout = roactModule.createElement("UIListLayout", {
+			ListLayout = RoactModule.createElement("UIListLayout", {
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				HorizontalAlignment = Enum.HorizontalAlignment.Center,
-				Padding = UDim.new(0, var1)
+				Padding = UDim.new(0, TextInputListPadding)
 			}),
-			TextBoxLabel = labelText and roactModule.createElement("TextLabel", {
+			TextBoxLabel = LabelText and RoactModule.createElement("TextLabel", {
 				LayoutOrder = 1,
 				BackgroundTransparency = 1,
 				TextWrapped = true,
 				Size = UDim2.new(1, 0, 0, 0),
 				AutomaticSize = Enum.AutomaticSize.Y,
-				Text = labelText,
-				Font = if foundationFontFaceMigration then nil else p2.Font.CaptionHeader.Font,
-				FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.CaptionLarge.Font) else nil,
+				Text = LabelText,
+				Font = if FoundationFontFaceMigration then nil else p2.Font.CaptionHeader.Font,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Tokens.Typography.CaptionLarge.Font) else nil,
 				TextSize = p2.Font.BaseSize * p2.Font.CaptionHeader.RelativeSize,
-				TextColor3 = color_3,
+				TextColor3 = Color3,
 				TextTransparency = p2.Theme.TextEmphasis.Transparency,
 				TextXAlignment = Enum.TextXAlignment.Left
 			}),
-			TextBox = roactModule.createElement(authStatefulRoundCornerBorderModule, {
-				size = UDim2.new(1, 0, 0, textInputHeight),
-				layoutOrder = if getFFlagEnableAuthStatefulTextInputUpdates() then 2 else layoutOrder,
-				borderState = borderState
+			TextBox = RoactModule.createElement(AuthStatefulRoundCornerBorderModule, {
+				size = UDim2.new(1, 0, 0, TextInputHeight),
+				layoutOrder = if GetFFlagEnableAuthStatefulTextInputUpdatesFunction() then 2 else LayoutOrder,
+				borderState = BorderState
 			}, {
-				PasswordBox = var2 and roactModule.createElement(passwordBoxModule, {
+				PasswordBox = IsTextInputTypeMatch and RoactModule.createElement(PasswordBoxModule, {
 					ManualFocusRelease = false,
 					CaptureFocusOnTapStart = true,
-					LayoutOrder = if not getFFlagEnableAuthStatefulTextInputUpdates() then 2 else nil,
+					LayoutOrder = if GetFFlagEnableAuthStatefulTextInputUpdatesFunction() then nil else 2,
 					Size = UDim2.new(1, 0, 1, 0),
-					Color = color_1,
-					Transparency = transparency_1,
-					TextSize = var3,
-					TextColor = color,
-					TextTransparency = transparency,
+					Color = Color1,
+					Transparency = Transparency1,
+					TextSize = ScaledBaseSize,
+					TextColor = Color,
+					TextTransparency = Transparency,
 					TextXAlignment = Enum.TextXAlignment.Left,
-					Text = text,
-					PlaceholderText = placeholderText,
-					PlaceholderColor3 = color_2,
-					onChangeText = onChangeTextCallback
+					Text = Text,
+					PlaceholderText = PlaceholderText,
+					PlaceholderColor3 = Color2,
+					onChangeText = OnChangeTextCallback
 				}),
-				GenericTextBox = not var2 and roactModule.createElement(genericTextBoxModule, {
+				GenericTextBox = not IsTextInputTypeMatch and RoactModule.createElement(GenericTextBoxModule, {
 					ClearTextOnFocus = false,
 					PaddingX = 12,
-					LayoutOrder = if not getFFlagEnableAuthStatefulTextInputUpdates() then 2 else nil,
+					LayoutOrder = if GetFFlagEnableAuthStatefulTextInputUpdatesFunction() then nil else 2,
 					Size = UDim2.new(1, 0, 1, 0),
-					Text = text,
-					Font = font,
-					TextSize = var3,
-					TextColor = color,
-					TextTransparency = transparency,
+					Text = Text,
+					Font = BodyFont,
+					TextSize = ScaledBaseSize,
+					TextColor = Color,
+					TextTransparency = Transparency,
 					TextXAlignment = Enum.TextXAlignment.Left,
-					Color = color_1,
-					Transparency = transparency_1,
-					TextInputType = textInputType,
-					onChangeText = onChangeTextCallback,
-					PlaceholderText = placeholderText,
-					PlaceholderColor = color_2,
-					onFocused = onFocused,
-					onFocusLost = onFocusLost,
-					TextBoxRef = if getFFlagEnableAuthStatefulTextInputUpdates then p1.props.textBoxRef else nil,
-					maxLength = maxLength
+					Color = Color1,
+					Transparency = Transparency1,
+					TextInputType = TextInputType,
+					onChangeText = OnChangeTextCallback,
+					PlaceholderText = PlaceholderText,
+					PlaceholderColor = Color2,
+					onFocused = OnFocused,
+					onFocusLost = OnFocusLost,
+					TextBoxRef = if GetFFlagEnableAuthStatefulTextInputUpdatesFunction then p1.props.textBoxRef else nil,
+					maxLength = MaxLength
 				})
 			}),
-			ErrorText = errorText and roactModule.createElement("TextLabel", {
+			ErrorText = ErrorText and RoactModule.createElement("TextLabel", {
 				LayoutOrder = 3,
 				BackgroundTransparency = 1,
 				TextWrapped = true,
-				Text = errorText,
+				Text = ErrorText,
 				TextSize = p2.Font.CaptionBody.RelativeSize * p2.Font.BaseSize,
-				Font = if foundationFontFaceMigration then nil else p2.Font.SubHeader1.Font,
-				FontFace = if foundationFontFaceMigration then normalizeFontFace(p2.Tokens.Typography.TitleLarge.Font) else nil,
+				Font = if FoundationFontFaceMigration then nil else p2.Font.SubHeader1.Font,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(p2.Tokens.Typography.TitleLarge.Font) else nil,
 				TextColor3 = p2.Theme.Alert.Color,
 				TextXAlignment = Enum.TextXAlignment.Left,
 				AutomaticSize = Enum.AutomaticSize.Y,
@@ -142,4 +141,4 @@ function name.render(p1)
 	end)
 end
 
-return name
+return ExtendResult

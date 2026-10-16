@@ -1,34 +1,37 @@
-﻿local parent = script:FindFirstAncestor("GenericAbuseReporting").Parent
-local httpService = game:GetService("HttpService")
-local url = require(parent.Http).Url
-local fFlagAddThumbnailSelectorReport = require(parent.SharedFlags).FFlagAddThumbnailSelectorReport
+﻿local Parent = script:FindFirstAncestor("GenericAbuseReporting").Parent
+local HttpService = game:GetService("HttpService")
+local Url = require(Parent.Http).Url
+local FFlagAddThumbnailSelectorReport = require(Parent.SharedFlags).FFlagAddThumbnailSelectorReport
 
-return function(p1, p2)
-	-- upvalues: fFlagAddThumbnailSelectorReport (ref), httpService (ref), url (ref)
-	if fFlagAddThumbnailSelectorReport and p2 == nil then
-		p2 = {}
+return function(Callback, List) --[[ Line: 9 ]]
+	-- upvalues: FFlagAddThumbnailSelectorReport (copy), HttpService (copy), Url (copy)
+	if FFlagAddThumbnailSelectorReport and List == nil then
+		List = {}
 	end
-	local t = { tags = {} }
+	local config = { tags = {} }
 	
-	for i, v in p2 do
-		local v
-		if typeof(v) ~= "table" then
-			v = if fFlagAddThumbnailSelectorReport then tostring(v):split(",") else { tostring(v) }
+	for i, value in List do
+		if typeof(value) ~= "table" then
+			if FFlagAddThumbnailSelectorReport then
+				value = tostring(value):split(",")
+			else
+				value = { (tostring(value)) }
+			end
 		end
-		local t_1 = {}
+		local ValueList = {}
 		
-		for i_1, v_1 in v do
-			table.insert(t_1, { data = tostring(v_1) })
+		for _, value1 in value do
+			table.insert(ValueList, { data = tostring(value1) })
 		end
-		t.tags[i] = { valueList = t_1 }
+		config.tags[i] = { valueList = ValueList }
 	end
-	local ok, status = pcall(function()
-		-- upvalues: httpService (copy), t (ref)
-		return httpService:JSONEncode(t)
+	local Success, Result = pcall(function() --[[ Line: 46 ]]
+		-- upvalues: HttpService (upval), config (copy)
+		return HttpService:JSONEncode(config)
 	end)
 	
-	if not ok then
+	if not Success then
 		warn("Failed to encode report data")
 	end
-	return p1(url.APIS_URL .. "abuse-reporting/v2/abuse-report", "POST", { postBody = status })
+	return Callback(Url.APIS_URL .. "abuse-reporting/v2/abuse-report", "POST", { postBody = Result })
 end

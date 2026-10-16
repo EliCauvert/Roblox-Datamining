@@ -1,34 +1,32 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local coreGuiService = game:GetService("CoreGui")
-local parent = script.Parent.Parent
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local colorsModule = require(parent.Colors)
-local avatarHeadShot = roactModule.PureComponent:extend("AvatarHeadShot")
-local headshot = require(coreGuiService:WaitForChild("RobloxGui"):WaitForChild("Modules").Common.LegacyThumbnailUrls).Headshot
+﻿local CorePackages = game:GetService("CorePackages")
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local ColorsModule = require(script.Parent.Parent.Colors)
+local AvatarHeadShot = RoactModule.PureComponent:extend("AvatarHeadShot")
+local Headshot = require(game:GetService("CoreGui"):WaitForChild("RobloxGui"):WaitForChild("Modules").Common.LegacyThumbnailUrls).Headshot
 
-function avatarHeadShot.render(p1)
-	-- upvalues: headshot (ref), roactModule (ref), colorsModule (ref)
-	local playerId = p1.props.playerId
-	local var1 = if playerId and playerId ~= "" then headshot:format(playerId, 48, 48) else nil
+function AvatarHeadShot.render(p1) --[[ Line: 19 ]]
+	-- upvalues: Headshot (copy), RoactModule (copy), ColorsModule (copy)
+	local PlayerId = p1.props.playerId
+	local FormatResult = if PlayerId and PlayerId ~= "" then Headshot:format(PlayerId, 48, 48) else nil
 	
-	return if var1 then roactModule.createElement("ImageLabel", {
+	return if FormatResult then RoactModule.createElement("ImageLabel", {
 		BorderSizePixel = 0,
 		LayoutOrder = 1,
 		Size = UDim2.new(0, 48, 0, 48),
-		BackgroundColor3 = colorsModule.GrayBackground,
-		Image = var1
+		BackgroundColor3 = ColorsModule.GrayBackground,
+		Image = FormatResult
 	}, {
-		MaskFrame = roactModule.createElement("ImageLabel", {
+		MaskFrame = RoactModule.createElement("ImageLabel", {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			Image = "rbxasset://textures/ui/LuaApp/graphic/gr-avatar mask-90x90.png",
 			Size = UDim2.new(1, 0, 1, 0),
-			ImageColor3 = colorsModule.Carbon
+			ImageColor3 = ColorsModule.Carbon
 		})
 	}) else nil
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p1, _)
+return RoactRoduxModule.UNSTABLE_connect2(function(p1, _) --[[ Line: 50 ]]
 	return { playerId = p1.playerId }
-end)(avatarHeadShot)
+end)(AvatarHeadShot)

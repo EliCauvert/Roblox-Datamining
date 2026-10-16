@@ -1,12 +1,12 @@
-﻿local networkRequests = script.Parent.networkRequests
-local createGetTagsFromUserIdsModule = require(networkRequests.createGetTagsFromUserIds)
-local createSetUserTagModule = require(networkRequests.createSetUserTag)
+﻿local NetworkRequests = script.Parent.networkRequests
+local CreateGetTagsFromUserIdsModule = require(NetworkRequests.createGetTagsFromUserIds)
+local CreateSetUserTagModule = require(NetworkRequests.createSetUserTag)
 local _ = require(script.Parent.networkingAliasesTypes)
 
-return function(p1)
-	-- upvalues: createGetTagsFromUserIdsModule (ref), createSetUserTagModule (ref)
+return function(p1) --[[ Line: 6 ]]
+	-- upvalues: CreateGetTagsFromUserIdsModule (copy), CreateSetUserTagModule (copy)
 	return {
-		GetTagsFromUserIds = createGetTagsFromUserIdsModule(p1),
-		SetUserTag = createSetUserTagModule(p1)
+		GetTagsFromUserIds = CreateGetTagsFromUserIdsModule(p1),
+		SetUserTag = CreateSetUserTagModule(p1)
 	}
 end

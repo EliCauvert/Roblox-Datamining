@@ -1,79 +1,78 @@
-﻿local parent = script:FindFirstAncestor("AppBlox").Parent
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local UIBloxModule = require(parent.UIBlox)
-local button = UIBloxModule.App.Button.Button
-local buttonType = UIBloxModule.App.Button.Enum.ButtonType
-local images = UIBloxModule.App.ImageSet.Images
-local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
+﻿local Parent = script:FindFirstAncestor("AppBlox").Parent
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local UIBloxModule = require(Parent.UIBlox)
+local Button = UIBloxModule.App.Button.Button
+local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
+local Images = UIBloxModule.App.ImageSet.Images
+local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
 local _ = require(script.Parent.MediaGalleryTypes)
-local uDim2 = UDim2.fromScale(0.4, 0.512)
-local uDim2_1 = UDim2.fromScale(0.25, 0.33)
-local t = {
+local _UDim2 = UDim2.fromScale(0.4, 0.512)
+local _UDim2_1 = UDim2.fromScale(0.25, 0.33)
+local config = {
 	numItemsShown = 3.5,
-	itemAspectRatio = 1.777777777778,
+	itemAspectRatio = 1.7777777777777777,
 	itemPadding = 16,
 	borderRadius = UDim.new(0, 8)
 }
 
-return function(p1)
-	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), button (ref), buttonType (ref), uDim2 (ref), imageSetLabel (ref), uDim2_1 (ref), images (ref)
-	local var1 = cryoModule.Dictionary.join(t, p1)
-	local var2, var3 = reactModule.useState(Vector2.zero)
-	local var4 = reactModule.useCallback(function(p2)
-		-- upvalues: var1 (ref), var3 (ref)
-		local var5 = (p2.AbsoluteSize.X - var1.itemPadding * (var1.numItemsShown - 1)) / var1.numItemsShown
-		var3(Vector2.new(var5, var5 / var1.itemAspectRatio))
-	end, { var1.itemAspectRatio, var1.numItemsShown })
-	local var5 = reactModule.useCallback(function(p2)
-		-- upvalues: var1 (ref)
-		if var1.onVideoPlayActivated and var1.items[p2].isYouTubeVideo then
-			return var1.onVideoPlayActivated(p2)
-		elseif var1.onPreviewActivated then
-			return var1.onPreviewActivated(p2)
-		end
+return function(p1) --[[ Line: 40 | Named "MediaGalleryCarousel" ]]
+	-- upvalues: CryoModule (copy), config (copy), ReactModule (copy), Button (copy), ButtonType (copy), _UDim2 (copy), ImageSetLabel (copy), _UDim2_1 (copy), Images (copy)
+	local JoinResult = CryoModule.Dictionary.join(config, p1)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(Vector2.zero)
+	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 44 ]]
+		-- upvalues: JoinResult (copy), UseStateResult2 (copy)
+		local XRatio = (Frame.AbsoluteSize.X - JoinResult.itemPadding * (JoinResult.numItemsShown - 1)) / JoinResult.numItemsShown
+		UseStateResult2(Vector2.new(XRatio, XRatio / JoinResult.itemAspectRatio))
+	end, { JoinResult.itemAspectRatio, JoinResult.numItemsShown })
+	local UseResult1 = ReactModule.useCallback(function(p2) --[[ Line: 55 ]]
+		-- upvalues: JoinResult (copy)
+		if JoinResult.onVideoPlayActivated and JoinResult.items[p2].isYouTubeVideo then
+			return JoinResult.onVideoPlayActivated(p2)
+		elseif not JoinResult.onPreviewActivated then return end
+		return JoinResult.onPreviewActivated(p2)
 	end, {
-		var1.items,
-		var1.onVideoPlayActivated,
-		var1.onPreviewActivated
+		JoinResult.items,
+		JoinResult.onVideoPlayActivated,
+		JoinResult.onPreviewActivated
 	})
-	local t_1 = {}
+	local ImageButtons = {}
 	
-	for i, v in var1.items do
-		t_1["Item" .. i] = reactModule.createElement("ImageButton", {
-			LayoutOrder = i,
-			Size = UDim2.fromOffset(var2.X, var2.Y),
-			Image = v.imageId,
+	for LayoutOrder, item in JoinResult.items do
+		ImageButtons["Item" .. LayoutOrder] = ReactModule.createElement("ImageButton", {
+			LayoutOrder = LayoutOrder,
+			Size = UDim2.fromOffset(UseStateResult.X, UseStateResult.Y),
+			Image = item.imageId,
 			ScaleType = Enum.ScaleType.Crop,
 			BackgroundTransparency = 1,
 			AutoButtonColor = false,
-			[reactModule.Event.Activated] = function()
-				-- upvalues: var5 (ref), i (ref)
-				var5(i)
+			[ReactModule.Event.Activated] = function() --[[ Line: 82 ]]
+				-- upvalues: UseResult1 (copy), LayoutOrder (copy)
+				UseResult1(LayoutOrder)
 			end
 		}, {
-			Corner = reactModule.createElement("UICorner", { CornerRadius = var1.borderRadius }),
-			PlayButton = if v.isYouTubeVideo then reactModule.createElement(button, {
-				buttonType = buttonType.PrimaryContextual,
-				size = uDim2,
+			Corner = ReactModule.createElement("UICorner", { CornerRadius = JoinResult.borderRadius }),
+			PlayButton = if item.isYouTubeVideo then ReactModule.createElement(Button, {
+				buttonType = ButtonType.PrimaryContextual,
+				size = _UDim2,
 				anchorPoint = Vector2.new(0.5, 0.5),
 				position = UDim2.fromScale(0.5, 0.5),
-				onActivated = function()
-					-- upvalues: var5 (ref), i (ref)
-					var5(i)
+				onActivated = function() --[[ Line: 95 ]]
+					-- upvalues: UseResult1 (copy), LayoutOrder (copy)
+					UseResult1(LayoutOrder)
 				end
 			}) else nil,
-			PlayIcon = if v.isYouTubeVideo then reactModule.createElement(imageSetLabel, {
+			PlayIcon = if item.isYouTubeVideo then ReactModule.createElement(ImageSetLabel, {
 				BackgroundTransparency = 1,
 				ZIndex = 2,
-				Size = uDim2_1,
+				Size = _UDim2_1,
 				AnchorPoint = Vector2.new(0.5, 0.5),
 				Position = UDim2.fromScale(0.5, 0.5),
-				Image = images["icons/common/play"]
+				Image = Images["icons/common/play"]
 			}) else nil
 		})
 	end
-	return reactModule.createElement("ScrollingFrame", {
+	return ReactModule.createElement("ScrollingFrame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.fromScale(1, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
@@ -81,13 +80,13 @@ return function(p1)
 		ScrollBarImageTransparency = 1,
 		ScrollingDirection = Enum.ScrollingDirection.X,
 		ClipsDescendants = false,
-		[reactModule.Change.AbsoluteSize] = var4
+		[ReactModule.Change.AbsoluteSize] = UseResult
 	}, {
-		Layout = reactModule.createElement("UIListLayout", {
+		Layout = ReactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			FillDirection = Enum.FillDirection.Horizontal,
-			Padding = UDim.new(0, var1.itemPadding)
+			Padding = UDim.new(0, JoinResult.itemPadding)
 		}),
-		Items = reactModule.createElement(reactModule.Fragment, {}, t_1)
+		Items = ReactModule.createElement(ReactModule.Fragment, {}, ImageButtons)
 	})
 end

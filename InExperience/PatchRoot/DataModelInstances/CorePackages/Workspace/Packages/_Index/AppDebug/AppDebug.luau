@@ -1,8 +1,8 @@
-﻿local var1 = function() end
+﻿local function v0() --[[ Line: 26 ]] end
 
-local devOnly = script:FindFirstChild("DevOnly")
-local var2 = false
-local var3 = nil
+local DevOnly = script:FindFirstChild("DevOnly")
+local Flag = false
+local v1 = nil
 
 return {
 	["jest.config"] = script["jest.config"],
@@ -11,25 +11,26 @@ return {
 	littleTraceback = require(script.littleTraceback),
 	logTreeGraphviz = require(script.logTreeGraphviz),
 	LogTree = require(script.LogTree),
-	register = function()
-		-- upvalues: devOnly (ref), var1 (ref), var2 (write), var3 (write)
-		if _G.ENVIRONMENT == "PRODUCTION" or devOnly == nil then
-			return var1
-		elseif var2 then
-			return var3 or var1
-		end
-		var2 = true
-		local list = { require(devOnly.TagAnnotation.TagAnnotationSection) }
-		
-		var3 = function()
-			-- upvalues: list (ref), var2 (copy), var3 (copy)
-			for i, v in list do
-				v()
+	register = function() --[[ Line: 33 ]]
+		-- upvalues: DevOnly (copy), v0 (copy), Flag (ref), v1 (ref)
+		if _G.ENVIRONMENT == "PRODUCTION" or DevOnly == nil then
+			return v0
+		elseif Flag then
+			return v1 or v0
+		else
+			Flag = true
+			local list = { (require(DevOnly.TagAnnotation.TagAnnotationSection)) }
+			
+			v1 = function() --[[ Line: 47 ]]
+				-- upvalues: list (copy), Flag (upval), v1 (upval)
+				for _, value in list do
+					value()
+				end
+				Flag = false
+				v1 = nil
 			end
-			var2 = false
-			var3 = nil
+			
+			return v1
 		end
-		
-		return var3
 	end
 }

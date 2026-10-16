@@ -1,11 +1,12 @@
-﻿local jestConfigsModule = require(game:GetService("CorePackages").Workspace.Packages.JestConfigs)
+﻿local JestConfigsModule = require(game:GetService("CorePackages").Workspace.Packages.JestConfigs)
 
 return {
 	displayName = "AvatarContextMenu",
 	testMatch = { "**/*.test" },
+	testPathIgnorePatterns = { "ContextMenuItems.test" },
 	setupFilesAfterEnv = {
-		jestConfigsModule.setupFiles.UIBloxInitializer,
-		jestConfigsModule.setupFiles.createPromiseRejectionHandler(10, 10),
-		jestConfigsModule.setupFiles.RetryTimes
+		JestConfigsModule.setupFiles.UIBloxInitializer,
+		JestConfigsModule.setupFiles.createPromiseRejectionHandler(10, 10),
+		JestConfigsModule.setupFiles.RetryTimes
 	}
 }

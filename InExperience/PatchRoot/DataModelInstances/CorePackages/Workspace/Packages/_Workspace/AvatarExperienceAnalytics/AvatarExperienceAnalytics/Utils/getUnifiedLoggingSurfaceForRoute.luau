@@ -1,14 +1,15 @@
-﻿local avatarScreenProperties = require(script:FindFirstAncestor("AvatarExperienceAnalytics").Parent.AvatarExperienceNavigation).AvatarRoute.AvatarScreenProperties
-local getUnifiedLoggingSurfaceModule = require(script.Parent.getUnifiedLoggingSurface)
+﻿local AvatarScreenProperties = require(script:FindFirstAncestor("AvatarExperienceAnalytics").Parent.AvatarExperienceNavigation).AvatarRoute.AvatarScreenProperties
+local GetUnifiedLoggingSurfaceModule = require(script.Parent.getUnifiedLoggingSurface)
 
-return function(p1)
-	-- upvalues: avatarScreenProperties (ref), getUnifiedLoggingSurfaceModule (ref)
+return function(p1) --[[ Line: 29 | Named "getUnifiedLoggingSurfaceForRoute" ]]
+	-- upvalues: AvatarScreenProperties (copy), GetUnifiedLoggingSurfaceModule (copy)
 	if p1 == nil then
 		return nil
+	else
+		local Name = if p1.current then p1.current.name else nil
+		local AvatarScreenProperty = if Name then AvatarScreenProperties[Name] else nil
+		local UnifiedLoggingSurface = if AvatarScreenProperty and AvatarScreenProperty.analyticsData then AvatarScreenProperty.analyticsData.unifiedLoggingSurface else nil
+		
+		return if AvatarScreenProperty and AvatarScreenProperty.isTransparent and UnifiedLoggingSurface ~= nil then UnifiedLoggingSurface else GetUnifiedLoggingSurfaceModule(p1) or UnifiedLoggingSurface
 	end
-	local var1 = if p1.current then p1.current.name else nil
-	local var2 = if var1 then avatarScreenProperties[var1] else nil
-	local var3 = if var2 and var2.analyticsData then var2.analyticsData.unifiedLoggingSurface else nil
-	
-	return if var2 and var2.isTransparent and var3 ~= nil then var3 else getUnifiedLoggingSurfaceModule(p1) or var3
 end

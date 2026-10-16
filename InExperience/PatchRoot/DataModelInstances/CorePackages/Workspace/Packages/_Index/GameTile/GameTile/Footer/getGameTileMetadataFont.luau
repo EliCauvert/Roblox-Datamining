@@ -1,8 +1,8 @@
-﻿local parent = script:FindFirstAncestor("GameTile").Parent
-local _ = require(parent.Foundation)
-local fFlagLuaAppMigrateGameTileFixConsoleMetadataText = require(parent.SharedFlags).FFlagLuaAppMigrateGameTileFixConsoleMetadataText
+﻿local Parent = script:FindFirstAncestor("GameTile").Parent
+local _ = require(Parent.Foundation)
+local FFlagLuaAppMigrateGameTileFixConsoleMetadataText = require(Parent.SharedFlags).FFlagLuaAppMigrateGameTileFixConsoleMetadataText
 
-return function(p1, p2, p3, p4, p5)
-	-- upvalues: fFlagLuaAppMigrateGameTileFixConsoleMetadataText (ref)
-	return if p4 and p3 then if p5 or fFlagLuaAppMigrateGameTileFixConsoleMetadataText and p1 == false then p3.Typography.BodySmall else p3.Typography.BodyMedium elseif p1 then p2.Typography.BodyLarge else p2.Typography.CaptionMedium
+return function(Enabled, p1, p2, p3, p4) --[[ Line: 10 | Named "getGameTileMetadataFont" ]]
+	-- upvalues: FFlagLuaAppMigrateGameTileFixConsoleMetadataText (copy)
+	return if p3 and p2 then if p4 or FFlagLuaAppMigrateGameTileFixConsoleMetadataText and Enabled == false then p2.Typography.BodySmall else p2.Typography.BodyMedium elseif Enabled then p1.Typography.BodyLarge else p1.Typography.CaptionMedium
 end

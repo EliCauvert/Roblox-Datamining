@@ -1,52 +1,36 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local coreGuiService = game:GetService("CoreGui")
-local userInputService = game:GetService("UserInputService")
-local guiService = game:GetService("GuiService")
-local roactModule = require(corePackagesService.Packages.Roact)
-local reactModule = require(corePackagesService.Packages.React)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local playerListModule = require(corePackagesService.Workspace.Packages.PlayerList)
-local tenFootInterfaceModule = require(coreGuiService:WaitForChild("RobloxGui").Modules.TenFootInterface)
-local parent = script.Parent.Parent.Parent
-local fFlagPlayerListReduceRerendersModule = require(parent.Flags.FFlagPlayerListReduceRerenders)
-local fFlagPlayerListRemoveTopStatModule = require(parent.Flags.FFlagPlayerListRemoveTopStat)
-local fFlagEnableMobilePlayerListOnConsole = playerListModule.Flags.FFlagEnableMobilePlayerListOnConsole
-local playerListTopStatCheckGamepad = game:DefineFastFlag("PlayerListTopStatCheckGamepad", false)
-local fFlagLuaSupportMicroGamepadPreferredInput = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagLuaSupportMicroGamepadPreferredInput
-local var1 = nil
+﻿local CorePackages = game:GetService("CorePackages")
+local UserInputService = game:GetService("UserInputService")
+local GuiService = game:GetService("GuiService")
+local RoactModule = require(CorePackages.Packages.Roact)
+local ReactModule = require(CorePackages.Packages.React)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local TenFootInterfaceModule = require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.TenFootInterface)
+local Parent = script.Parent.Parent.Parent
+local FFlagPlayerListReduceRerendersModule = require(Parent.Flags.FFlagPlayerListReduceRerenders)
+local FFlagEnableMobilePlayerListOnConsole = require(CorePackages.Workspace.Packages.PlayerList).Flags.FFlagEnableMobilePlayerListOnConsole
+local PlayerListTopStatCheckGamepad = game:DefineFastFlag("PlayerListTopStatCheckGamepad", false)
+local FFlagLuaSupportMicroGamepadPreferredInput = require(CorePackages.Workspace.Packages.SharedFlags).FFlagLuaSupportMicroGamepadPreferredInput
+local SetupTopStatResult = nil
 
-if not fFlagPlayerListRemoveTopStatModule then
-	local var2
-	if playerListTopStatCheckGamepad then
-		var2 = true
-		
-		if userInputService.PreferredInput ~= Enum.PreferredInput.Gamepad then
-			var2 = fFlagLuaSupportMicroGamepadPreferredInput
-			
-			if var2 then
-				var2 = userInputService.PreferredInput == Enum.PreferredInput.MicroGamepad
-				var2 = nil
-			end
-		end
-	else
-		var2 = true
-	end
-	if if fFlagEnableMobilePlayerListOnConsole then guiService.ViewportDisplaySize == Enum.DisplaySize.Large and var2 else tenFootInterfaceModule:IsEnabled() then
-		var1 = tenFootInterfaceModule:SetupTopStat()
+if not require(Parent.Flags.FFlagPlayerListRemoveTopStat) then
+	local NoPlayerListTopStatCheckGamepad: boolean = not PlayerListTopStatCheckGamepad or (UserInputService.PreferredInput == Enum.PreferredInput.Gamepad or FFlagLuaSupportMicroGamepadPreferredInput and UserInputService.PreferredInput == Enum.PreferredInput.MicroGamepad)
+	
+	if if FFlagEnableMobilePlayerListOnConsole then GuiService.ViewportDisplaySize == Enum.DisplaySize.Large and NoPlayerListTopStatCheckGamepad else TenFootInterfaceModule:IsEnabled() then
+		SetupTopStatResult = TenFootInterfaceModule:SetupTopStat()
 	end
 end
-local topStatConnector = roactModule.PureComponent:extend("TopStatConnector")
+local TopStatConnector = RoactModule.PureComponent:extend("TopStatConnector")
 
-function topStatConnector.render(p1)
-	-- upvalues: var1 (write)
-	if var1 then
-		var1:SetTopStatEnabled(p1.props.displayOptions.playerlistCoreGuiEnabled)
+function TopStatConnector.render(p1) --[[ Line: 44 ]]
+	-- upvalues: SetupTopStatResult (ref)
+	if SetupTopStatResult then
+		SetupTopStatResult:SetTopStatEnabled(p1.props.displayOptions.playerlistCoreGuiEnabled)
 	end
 	return nil
 end
 
-local function mapStateToProps(p1)
+local function mapStateToProps(p1) --[[ Line: 51 ]]
 	return { displayOptions = p1.displayOptions }
 end
 
-return if fFlagPlayerListReduceRerendersModule then reactModule.memo(roactRoduxModule.connect(mapStateToProps, nil)(topStatConnector)) else roactRoduxModule.connect(mapStateToProps, nil)(topStatConnector)
+return if FFlagPlayerListReduceRerendersModule then ReactModule.memo(RoactRoduxModule.connect(mapStateToProps, nil)(TopStatConnector)) else RoactRoduxModule.connect(mapStateToProps, nil)(TopStatConnector)

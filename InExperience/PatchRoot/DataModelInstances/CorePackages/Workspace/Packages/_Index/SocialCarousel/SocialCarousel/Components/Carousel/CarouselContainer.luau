@@ -1,52 +1,51 @@
-﻿local socialCarousel = script:FindFirstAncestor("SocialCarousel")
-local parent = socialCarousel.Parent
-local reactModule = require(parent.React)
-local robloxAppEnumsModule = require(parent.RobloxAppEnums)
-local roactUtilsModule = require(parent.RoactUtils)
-local carouselModule = require(script.Parent.Carousel)
-local navigateDown = require(parent.NavigationRodux).Thunks.NavigateDown
-local navigationModule = require(parent.Navigation)
-local useSocialCarouselAnalyticsModule = require(socialCarousel.Analytics.useSocialCarouselAnalytics)
-local useTilesSeenCollectionModule = require(socialCarousel.Analytics.useTilesSeenCollection)
-local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
-local appPage = robloxAppEnumsModule.AppPage
-local useNavigation = navigationModule.useNavigation
-local fFlagCreateConnectionsHub = require(parent.SharedFlags).FFlagCreateConnectionsHub
-local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
-local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
+﻿local SocialCarousel = script:FindFirstAncestor("SocialCarousel")
+local Parent = SocialCarousel.Parent
+local ReactModule = require(Parent.React)
+local CarouselModule = require(script.Parent.Carousel)
+local NavigateDownFunction = require(Parent.NavigationRodux).Thunks.NavigateDown
+local UseSocialCarouselAnalyticsModule = require(SocialCarousel.Analytics.useSocialCarouselAnalytics)
+local UseTilesSeenCollectionModule = require(SocialCarousel.Analytics.useTilesSeenCollection)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local FFlagCreateConnectionsHub = require(Parent.SharedFlags).FFlagCreateConnectionsHub
+local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3Dispatch
+local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
 
-return function(p1)
-	-- upvalues: useSocialCarouselAnalyticsModule (ref), useTilesSeenCollectionModule (ref), useDispatch (ref), useNavigation (ref), reactModule (ref), fFlagCreateConnectionsHub (ref), appPage (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), carouselModule (ref)
-	local var2 = useSocialCarouselAnalyticsModule()
-	local var3 = useTilesSeenCollectionModule()
-	local var4 = useDispatch()
-	local var5 = useNavigation()
-	local var6 = reactModule.useRef({ startIndex = 1, endIndex = 1 })
+return function(p1) --[[ Line: 26 | Named "CarouselContainer" ]]
+	-- upvalues: UseSocialCarouselAnalyticsModule (copy), UseTilesSeenCollectionModule (copy), UseDispatchFunction (copy), UseNavigationFunction (copy), ReactModule (copy), FFlagCreateConnectionsHub (copy), AppPage (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), CarouselModule (copy)
+	local UseSocialCarouselAnalyticsModuleResult = UseSocialCarouselAnalyticsModule()
+	local UseTilesSeenCollectionModuleResult = UseTilesSeenCollectionModule()
+	local UseDispatchResult = UseDispatchFunction()
+	local UseNavigationResult = UseNavigationFunction()
+	local UseRefResult = ReactModule.useRef({ startIndex = 1, endIndex = 1 })
 	
-	return reactModule.createElement(carouselModule, {
-		onActivateHeader = reactModule.useCallback(function()
-			-- upvalues: var2 (ref), fFlagCreateConnectionsHub (copy), var5 (ref), appPage (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var4 (ref), navigateDown (copy)
-			var2.friendsHeaderPressed()
+	return ReactModule.createElement(CarouselModule, {
+		onActivateHeader = ReactModule.useCallback(function() --[[ Line: 33 ]]
+			-- upvalues: UseSocialCarouselAnalyticsModuleResult (copy), FFlagCreateConnectionsHub (upval), UseNavigationResult (copy), AppPage (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval)
+			UseSocialCarouselAnalyticsModuleResult.friendsHeaderPressed()
 			
-			if fFlagCreateConnectionsHub then
-				var5.navigate(appPage.CoHubMyConnections)
-				
-				return
-			elseif fFlagSignalsNavP3Dispatch then
-				var1.down(var1.fromLegacyPage({ name = appPage.ViewFriends }))
+			if FFlagCreateConnectionsHub then
+				UseNavigationResult.navigate(AppPage.CoHubMyConnections)
 				
 				return
 			end
-			var4(navigateDown({ name = appPage.ViewFriends }))
-		end, { var4, var5 }),
-		onTileContentChanged = reactModule.useCallback(function(p2, p3, p4)
-			-- upvalues: var6 (ref), var3 (ref)
-			local current = var6.current
-			
-			if current.startIndex <= p3 and p3 <= current.endIndex then
-				var3.addTileToCollection(p2, p3, p4)
+			if FFlagSignalsNavP3Dispatch then
+				NavigationCommands.down(NavigationCommands.fromLegacyPage({ name = AppPage.ViewFriends }))
+				
+				return
+			else
+				UseDispatchResult(NavigateDownFunction({ name = AppPage.ViewFriends }))
 			end
-		end, { var3 }),
+		end, { UseDispatchResult, UseNavigationResult }),
+		onTileContentChanged = ReactModule.useCallback(function(p2, p3, p4) --[[ Line: 44 ]]
+			-- upvalues: UseRefResult (copy), UseTilesSeenCollectionModuleResult (copy)
+			local Current = UseRefResult.current
+			
+			if Current.startIndex <= p3 and p3 <= Current.endIndex then
+				UseTilesSeenCollectionModuleResult.addTileToCollection(p2, p3, p4)
+			end
+		end, { UseTilesSeenCollectionModuleResult }),
 		appCompositionEnabled = p1.appCompositionEnabled
 	})
 end

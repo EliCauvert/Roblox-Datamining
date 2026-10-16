@@ -1,85 +1,88 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local populateUserWithStateModule = require(appChat.Users.populateUserWithState)
-local _ = require(appChat.types)
-local appChatNetworkingModule = require(parent.AppChatNetworking)
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local memo = reactModule.memo
-local useCallback = reactModule.useCallback
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local useState = reactModule.useState
-local removeUserDialogLayoutModule = require(script.Parent.RemoveUserDialogLayout)
-local getFFlagIsSquadEnabled = require(parent.SharedFlags).GetFFlagIsSquadEnabled
-local t = {
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local PopulateUserWithStateModule = require(AppChat.Users.populateUserWithState)
+local _ = require(AppChat.types)
+local AppChatNetworkingModule = require(Parent.AppChatNetworking)
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local MemoFunction = ReactModule.memo
+local UseCallbackFunction = ReactModule.useCallback
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local UseStateFunction = ReactModule.useState
+local RemoveUserDialogLayoutModule = require(script.Parent.RemoveUserDialogLayout)
+local GetFFlagIsSquadEnabledFunction = require(Parent.SharedFlags).GetFFlagIsSquadEnabled
+local config = {
 	participantId = nil,
 	titleKey = "Feature.Chat.Action.RemoveUser",
 	cancelTitleKey = "Feature.Chat.Action.Cancel",
 	confirmationTitleKey = "Feature.Chat.Action.Remove",
 	failureTitleKey = "Feature.Chat.Heading.FailedToRemoveUser",
 	failureButtonKey = "Feature.Chat.Action.Confirm",
-	onModalClose = function() end,
-	messageKey = if getFFlagIsSquadEnabled() then "Feature.Chat.Message.RemoveUser.V2" else "Feature.Chat.Message.RemoveUser",
-	failureBodyKey = if getFFlagIsSquadEnabled() then "Feature.Chat.Message.FailedToRemoveUser.V2" else "Feature.Chat.Message.FailedToRemoveUser"
+	onModalClose = function() --[[ Line: 40 ]] end,
+	messageKey = if GetFFlagIsSquadEnabledFunction() then "Feature.Chat.Message.RemoveUser.V2" else "Feature.Chat.Message.RemoveUser",
+	failureBodyKey = if GetFFlagIsSquadEnabledFunction() then "Feature.Chat.Message.FailedToRemoveUser.V2" else "Feature.Chat.Message.FailedToRemoveUser"
 }
 
-function RemoveUserDialogContainer(p1)
-	-- upvalues: cryoModule (ref), t (ref), useState (ref), useDispatch (ref), useCallback (ref), appChatNetworkingModule (ref), useSelector (ref), populateUserWithStateModule (ref), useLocalization (ref), reactModule (ref), removeUserDialogLayoutModule (ref)
-	local var1 = cryoModule.Dictionary.join(t, p1)
-	local var2, var3 = useState(true)
-	local var4, var5 = useState(false)
-	local var6, var7 = useState(false)
-	local var8 = useDispatch()
-	local var9 = useCallback(function(p2, p3)
-		-- upvalues: var8 (ref), appChatNetworkingModule (copy)
-		return var8(appChatNetworkingModule.rodux.RemoveUserFromConversation.API(p3, p2))
-	end, { var8 })
-	local var10 = useSelector(function(p2)
-		-- upvalues: var1 (ref), populateUserWithStateModule (copy)
+function RemoveUserDialogContainer(p1) --[[ Line: 57 ]]
+	-- upvalues: CryoModule (copy), config (copy), UseStateFunction (copy), UseDispatchFunction (copy), UseCallbackFunction (copy), AppChatNetworkingModule (copy), UseSelectorFunction (copy), PopulateUserWithStateModule (copy), UseLocalizationFunction (copy), ReactModule (copy), RemoveUserDialogLayoutModule (copy)
+	local JoinResult = CryoModule.Dictionary.join(config, p1)
+	local UseStateResult, UseStateResult2 = UseStateFunction(true)
+	local UseStateResult1, UseStateResult2_1 = UseStateFunction(false)
+	local UseStateResult3, UseStateResult2_2 = UseStateFunction(false)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseCallbackResult = UseCallbackFunction(function(p2, p3) --[[ Line: 64 ]]
+		-- upvalues: UseDispatchResult (copy), AppChatNetworkingModule (upval)
+		return UseDispatchResult(AppChatNetworkingModule.rodux.RemoveUserFromConversation.API(p3, p2))
+	end, { UseDispatchResult })
+	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 68 ]]
+		-- upvalues: JoinResult (copy), PopulateUserWithStateModule (upval)
 		return {
-			conversationTitle = (p2.ChatAppReducer.Conversations[var1.conversationId] or { title = nil }).title,
-			targetUser = populateUserWithStateModule(p2, p2.Users[var1.participantId])
+			conversationTitle = (p2.ChatAppReducer.Conversations[JoinResult.conversationId] or { title = nil }).title,
+			targetUser = PopulateUserWithStateModule(p2, p2.Users[JoinResult.participantId])
 		}
 	end)
 	
-	return reactModule.createElement(removeUserDialogLayoutModule, cryoModule.Dictionary.join(var1, useLocalization({
+	return ReactModule.createElement(RemoveUserDialogLayoutModule, CryoModule.Dictionary.join(JoinResult, UseLocalizationFunction({
 		failureTitleText = "Feature.Chat.Heading.FailedToRemoveUser",
 		failureButtonText = "Feature.Chat.Action.Confirm",
-		titleText = var1.titleKey,
-		bodyText = { var1.messageKey, USERNAME = var10.targetUser.displayName },
-		cancelText = var1.cancelTitleKey,
-		confirmText = var1.confirmationTitleKey,
+		titleText = JoinResult.titleKey,
+		bodyText = {
+			JoinResult.messageKey,
+			USERNAME = UseSelectorResult.targetUser.displayName
+		},
+		cancelText = JoinResult.cancelTitleKey,
+		confirmText = JoinResult.confirmationTitleKey,
 		failureBodyText = {
-			var1.failureBodyKey,
-			USERNAME = var10.targetUser.displayName,
-			CONVERSATION_TITLE = var10.conversationTitle
+			JoinResult.failureBodyKey,
+			USERNAME = UseSelectorResult.targetUser.displayName,
+			CONVERSATION_TITLE = UseSelectorResult.conversationTitle
 		}
-	}), var10, {
-		onActivated = useCallback(function()
-			-- upvalues: var5 (ref), var3 (ref), var1 (ref), var9 (ref), var7 (ref)
-			var5(true)
-			var3(false)
-			local conversationId = var1.conversationId
+	}), UseSelectorResult, {
+		onActivated = UseCallbackFunction(function(): boolean --[[ Line: 80 ]]
+			-- upvalues: UseStateResult2_1 (copy), UseStateResult2 (copy), JoinResult (copy), UseCallbackResult (copy), UseStateResult2_2 (copy)
+			UseStateResult2_1(true)
+			UseStateResult2(false)
+			local ConversationId = JoinResult.conversationId
 			
-			if conversationId then
-				var9(var1.participantId, conversationId):andThen(function()
-					-- upvalues: var1 (copy)
-					var1.onModalClose()
-				end):catch(function()
-					-- upvalues: var5 (copy), var3 (copy), var7 (copy)
-					var5(false)
-					var3(true)
-					var7(true)
+			if ConversationId then
+				UseCallbackResult(JoinResult.participantId, ConversationId):andThen(function() --[[ Line: 87 ]]
+					-- upvalues: JoinResult (upval)
+					JoinResult.onModalClose()
+				end):catch(function() --[[ Line: 90 ]]
+					-- upvalues: UseStateResult2_1 (upval), UseStateResult2 (upval), UseStateResult2_2 (upval)
+					UseStateResult2_1(false)
+					UseStateResult2(true)
+					UseStateResult2_2(true)
 				end)
 			end
 			return true
-		end, { var1.participantId, var1.conversationId }),
-		displayFailed = var6,
-		isModalVisible = var2,
-		isLoading = var4
+		end, { JoinResult.participantId, JoinResult.conversationId }),
+		displayFailed = UseStateResult3,
+		isModalVisible = UseStateResult,
+		isLoading = UseStateResult1
 	}))
 end
 
-return memo(RemoveUserDialogContainer)
+return MemoFunction(RemoveUserDialogContainer)

@@ -1,1 +1,1 @@
-﻿return require(script.ScrollSection)
+﻿return (require(script.ScrollSection))

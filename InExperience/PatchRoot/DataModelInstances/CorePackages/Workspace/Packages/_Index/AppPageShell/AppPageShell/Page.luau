@@ -1,163 +1,160 @@
-﻿local appPageShell = script:FindFirstAncestor("AppPageShell")
-local parent = appPageShell.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local responsiveModule = require(parent.Responsive)
-local signalsModule = require(parent.Signals)
-local view = foundationModule.View
-local useDeviceInsets = responsiveModule.useDeviceInsets
-local pageConstantsModule = require(appPageShell.PageConstants)
-local pageContextModule = require(appPageShell.PageContext)
-local pageStickyHeaderModule = require(appPageShell.PageStickyHeader)
-local _ = require(appPageShell.PageTypes)
-local pageWholeContentModule = require(appPageShell.PageWholeContent)
-local pullToRefreshSpinnerModule = require(appPageShell.PullToRefreshSpinner)
-local createFeedContextAdapterModule = require(appPageShell.createFeedContextAdapter)
-local createPageScrollStoreModule = require(appPageShell.createPageScrollStore)
-local resolveCompositionTagsModule = require(appPageShell.resolveCompositionTags)
-local computeStickyOffsetModule = require(appPageShell.computeStickyOffset)
-local fFlagSduiFeedScrollBarFixes = require(parent.SharedFlags).FFlagSduiFeedScrollBarFixes
-local frozen = table.freeze({
-	contentMode = pageConstantsModule.PageContentMode.Scroll,
+﻿local AppPageShell = script:FindFirstAncestor("AppPageShell")
+local Parent = AppPageShell.Parent
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local View = require(Parent.Foundation).View
+local UseDeviceInsetsFunction = require(Parent.Responsive).useDeviceInsets
+local PageContextModule = require(AppPageShell.PageContext)
+local PageStickyHeaderModule = require(AppPageShell.PageStickyHeader)
+local _ = require(AppPageShell.PageTypes)
+local PageWholeContentModule = require(AppPageShell.PageWholeContent)
+local PullToRefreshSpinnerModule = require(AppPageShell.PullToRefreshSpinner)
+local CreateFeedContextAdapterModule = require(AppPageShell.createFeedContextAdapter)
+local CreatePageScrollStoreModule = require(AppPageShell.createPageScrollStore)
+local ResolveCompositionTagsModule = require(AppPageShell.resolveCompositionTags)
+local ComputeStickyOffsetModule = require(AppPageShell.computeStickyOffset)
+local FFlagSduiFeedScrollBarFixes = require(Parent.SharedFlags).FFlagSduiFeedScrollBarFixes
+local Frozen = table.freeze({
+	contentMode = require(AppPageShell.PageConstants).PageContentMode.Scroll,
 	content = table.freeze({})
 })
 
-local function _(p1, p2)
+local function _(p1, p2) --[[ Line: 78 | Named "buildTag" ]]
 	return if p2 then `{p1} {p2}` else p1
 end
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: frozen (ref), fFlagSduiFeedScrollBarFixes (ref), useDeviceInsets (ref), reactModule (ref), computeStickyOffsetModule (ref), createPageScrollStoreModule (ref), createFeedContextAdapterModule (ref), signalsModule (ref), resolveCompositionTagsModule (ref), pageWholeContentModule (ref), pullToRefreshSpinnerModule (ref), pageContextModule (ref), view (ref), pageStickyHeaderModule (ref)
-	local contentConfig = p1.contentConfig or frozen
-	local contentMode = contentConfig.contentMode
-	local onScrollToEnd = p1.onScrollToEnd
-	local onScrollToEndThreshold = p1.onScrollToEndThreshold
-	local composition = p1.composition
-	local chrome = p1.chrome
-	local stickyHeaderSlot = p1.stickyHeaderSlot
-	local var1 = if chrome then chrome.height else 0
-	local var2 = if chrome then chrome.scrollAwayHeight or chrome.height else 0
-	local var3 = if chrome then chrome.liveHeightBinding else nil
-	local var4 = nil
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 89 | Named "Page" ]]
+	-- upvalues: Frozen (copy), FFlagSduiFeedScrollBarFixes (copy), UseDeviceInsetsFunction (copy), ReactModule (copy), ComputeStickyOffsetModule (copy), CreatePageScrollStoreModule (copy), CreateFeedContextAdapterModule (copy), SignalsModule (copy), ResolveCompositionTagsModule (copy), PageWholeContentModule (copy), PullToRefreshSpinnerModule (copy), PageContextModule (copy), View (copy), PageStickyHeaderModule (copy)
+	local ContentConfig = p1.contentConfig or Frozen
+	local ContentMode = ContentConfig.contentMode
+	local OnScrollToEnd = p1.onScrollToEnd
+	local OnScrollToEndThreshold = p1.onScrollToEndThreshold
+	local Composition = p1.composition
+	local Chrome = p1.chrome
+	local StickyHeaderSlot = p1.stickyHeaderSlot
+	local Height = if Chrome then Chrome.height else 0
+	local ScrollAwayHeight = if Chrome then Chrome.scrollAwayHeight or Chrome.height else 0
+	local LiveHeightBinding = if Chrome then Chrome.liveHeightBinding else nil
+	local UseMemoResult = nil
 	
-	if fFlagSduiFeedScrollBarFixes then
-		local top = useDeviceInsets().top
-		var4 = reactModule.useMemo(function()
-			-- upvalues: var3 (ref), var1 (ref), computeStickyOffsetModule (copy), var2 (ref), top (ref)
-			return if var3 == nil or var1 <= 0 then nil else var3:map(function(p3)
-				-- upvalues: computeStickyOffsetModule (copy), var2 (copy), top (copy), var1 (copy)
-				return math.clamp(-computeStickyOffsetModule(p3, var2, top), 0, var1)
+	if FFlagSduiFeedScrollBarFixes then
+		local Top = UseDeviceInsetsFunction().top
+		UseMemoResult = ReactModule.useMemo(function() --[[ Line: 104 ]]
+			-- upvalues: LiveHeightBinding (copy), Height (copy), ComputeStickyOffsetModule (upval), ScrollAwayHeight (copy), Top (copy)
+			return if LiveHeightBinding == nil or Height <= 0 then nil else LiveHeightBinding:map(function(p2): number --[[ Line: 108 ]]
+				-- upvalues: ComputeStickyOffsetModule (upval), ScrollAwayHeight (upval), Top (upval), Height (upval)
+				return (math.clamp(-ComputeStickyOffsetModule(p2, ScrollAwayHeight, Top), 0, Height))
 			end)
-		end, { var3, var1, var2, top })
+		end, { LiveHeightBinding, Height, ScrollAwayHeight, Top })
 	end
-	local var5
-	local var6 = reactModule.useRef(onScrollToEnd)
-	var6.current = onScrollToEnd
-	local var7 = reactModule.useMemo(createPageScrollStoreModule, {})
-	local var8 = reactModule.useRef(nil)
-	local var9 = reactModule.useMemo(function()
-		-- upvalues: createFeedContextAdapterModule (copy), var7 (ref), var8 (ref)
-		return createFeedContextAdapterModule(var7, var8)
-	end, { var7, var8 })
-	reactModule.useEffect(function()
-		-- upvalues: var9 (ref)
-		return function()
-			-- upvalues: var9 (copy)
-			var9.destroy()
+	local UseRefResult = ReactModule.useRef(OnScrollToEnd)
+	UseRefResult.current = OnScrollToEnd
+	local UseMemoResult1 = ReactModule.useMemo(CreatePageScrollStoreModule, {})
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 127 ]]
+		-- upvalues: CreateFeedContextAdapterModule (upval), UseMemoResult1 (copy), UseRefResult1 (copy)
+		return CreateFeedContextAdapterModule(UseMemoResult1, UseRefResult1)
+	end, { UseMemoResult1, UseRefResult1 })
+	ReactModule.useEffect(function() --[[ Line: 131 ]]
+		-- upvalues: UseMemoResult2 (copy)
+		return function() --[[ Line: 132 ]]
+			-- upvalues: UseMemoResult2 (upval)
+			UseMemoResult2.destroy()
 		end
-	end, { var9 })
-	reactModule.useEffect(function()
-		-- upvalues: var7 (ref), onScrollToEndThreshold (ref)
-		var7.setEndReachedThreshold(onScrollToEndThreshold)
-	end, { var7, onScrollToEndThreshold })
-	reactModule.useEffect(function()
-		-- upvalues: signalsModule (copy), var7 (ref), var6 (ref)
-		return signalsModule.createEffect(function(p3)
-			-- upvalues: var7 (copy), var6 (copy)
-			if var7.getIsEndReached(p3) and var6.current ~= nil then
-				var6.current()
+	end, { UseMemoResult2 })
+	ReactModule.useEffect(function() --[[ Line: 138 ]]
+		-- upvalues: UseMemoResult1 (copy), OnScrollToEndThreshold (copy)
+		UseMemoResult1.setEndReachedThreshold(OnScrollToEndThreshold)
+	end, { UseMemoResult1, OnScrollToEndThreshold })
+	ReactModule.useEffect(function() --[[ Line: 142 ]]
+		-- upvalues: SignalsModule (upval), UseMemoResult1 (copy), UseRefResult (copy)
+		return SignalsModule.createEffect(function(p2) --[[ Line: 143 ]]
+			-- upvalues: UseMemoResult1 (upval), UseRefResult (upval)
+			if UseMemoResult1.getIsEndReached(p2) and UseRefResult.current ~= nil then
+				UseRefResult.current()
 			end
 		end)
-	end, { var7 })
-	local var10 = reactModule.useMemo(function()
-		-- upvalues: var1 (ref), fFlagSduiFeedScrollBarFixes (copy), var4 (write)
-		return if var1 <= 0 then nil elseif fFlagSduiFeedScrollBarFixes and var4 ~= nil then table.freeze({
-			top = var4:map(function(p3)
-				-- upvalues: var1 (copy)
-				return UDim.new(0, var1 - p3)
-			end)
-		}) else table.freeze({ top = UDim.new(0, var1) })
-	end, { var1, var4 })
-	local var11 = reactModule.useMemo(function()
-		-- upvalues: var9 (ref), var7 (ref), contentMode (ref)
-		return {
-			scrollViewPositionChangedSignal = var9.scrollViewPositionChangedSignal,
-			verticalScrollingFrameRef = var9.verticalScrollingFrameRef,
-			scrollStore = var7,
-			contentMode = contentMode
-		}
-	end, { var7, var9, contentMode })
-	local var12 = reactModule.useMemo(function()
-		-- upvalues: resolveCompositionTagsModule (copy), composition (ref)
-		return resolveCompositionTagsModule(composition)
-	end, { composition })
-	local var13 = reactModule.createElement(pageWholeContentModule, {
+	end, { UseMemoResult1 })
+	local UseMemoResult3 = ReactModule.useMemo(function() --[[ Line: 174 ]]
+		-- upvalues: ResolveCompositionTagsModule (upval), Composition (copy)
+		return ResolveCompositionTagsModule(Composition)
+	end, { Composition })
+	local Element = ReactModule.createElement(PageWholeContentModule, {
 		layoutOrder = 3,
 		zIndex = 1,
-		scrollStore = var7,
-		scrollingFrameRef = var8,
-		slots = contentConfig.content.contentSlot,
+		scrollStore = UseMemoResult1,
+		scrollingFrameRef = UseRefResult1,
+		slots = ContentConfig.content.contentSlot,
 		contentTopPadding = p1.contentTopPadding,
 		contentBottomPadding = p1.contentBottomPadding,
-		chromeDisplacement = if fFlagSduiFeedScrollBarFixes then var4 else nil,
-		tag = var12.body,
-		containerTag = if fFlagSduiFeedScrollBarFixes then nil else "fill size-full-0",
-		size = if fFlagSduiFeedScrollBarFixes then UDim2.new(1, 0, 0, 0) else nil,
-		flexMode = if fFlagSduiFeedScrollBarFixes then Enum.UIFlexMode.Fill else nil
+		chromeDisplacement = if FFlagSduiFeedScrollBarFixes then UseMemoResult else nil,
+		tag = UseMemoResult3.body,
+		containerTag = if FFlagSduiFeedScrollBarFixes then nil else "fill size-full-0",
+		size = if FFlagSduiFeedScrollBarFixes then UDim2.new(1, 0, 0, 0) else nil,
+		flexMode = if FFlagSduiFeedScrollBarFixes then Enum.UIFlexMode.Fill else nil
 	})
-	local onRefresh = p1.onRefresh
-	local var14 = if onRefresh ~= nil then nil else reactModule.createElement(pullToRefreshSpinnerModule, {
+	local OnRefresh = p1.onRefresh
+	local Element1 = if OnRefresh == nil then nil else ReactModule.createElement(PullToRefreshSpinnerModule, {
 		LayoutOrder = 2,
-		onRefresh = onRefresh,
-		scrollingFrameRef = var8,
+		onRefresh = OnRefresh,
+		scrollingFrameRef = UseRefResult1,
 		appEventName = p1.appEventName
 	})
-	local var15 = stickyHeaderSlot ~= nil and next(stickyHeaderSlot) ~= nil
-	local createElement = reactModule.createElement
-	local provider = pageContextModule.Provider
-	local t = { value = var11 }
-	local t_1 = {}
-	local createElement_1 = reactModule.createElement
-	local t_2 = { tag = "col size-full", padding = var10 }
-	local t_3 = {}
-	local createElement_2 = reactModule.createElement
-	local t_4 = {}
-	local root = var12.root
-	t_4.tag = if root then `col size-full {root}` else "col size-full"
-	t_4.ref = p2
-	local t_5 = {}
+	local CreateElementFunction2 = ReactModule.createElement
+	local Provider = PageContextModule.Provider
+	local config = {
+		value = ReactModule.useMemo(function() --[[ Line: 165 ]]
+			-- upvalues: UseMemoResult2 (copy), UseMemoResult1 (copy), ContentMode (copy)
+			return {
+				scrollViewPositionChangedSignal = UseMemoResult2.scrollViewPositionChangedSignal,
+				verticalScrollingFrameRef = UseMemoResult2.verticalScrollingFrameRef,
+				scrollStore = UseMemoResult1,
+				contentMode = ContentMode
+			}
+		end, { UseMemoResult1, UseMemoResult2, ContentMode })
+	}
+	local t = {}
+	local CreateElementFunction1 = ReactModule.createElement
+	local config1 = {
+		tag = "col size-full",
+		padding = ReactModule.useMemo(function() --[[ Line: 150 ]]
+			-- upvalues: Height (copy), FFlagSduiFeedScrollBarFixes (upval), UseMemoResult (ref)
+			return if Height <= 0 then nil elseif FFlagSduiFeedScrollBarFixes and UseMemoResult ~= nil then table.freeze({
+				top = UseMemoResult:map(function(p2): UDim --[[ Line: 157 ]]
+					-- upvalues: Height (upval)
+					return UDim.new(0, Height - p2)
+				end)
+			}) else table.freeze({ top = UDim.new(0, Height) })
+		end, { Height, UseMemoResult })
+	}
+	local t1 = {}
+	local CreateElementFunction = ReactModule.createElement
+	local Root = UseMemoResult3.root
+	local config2 = {
+		tag = if Root then `col size-full {Root}` else "col size-full",
+		ref = Ref
+	}
+	local t2 = {}
+	local Element2 = nil
 	
-	if var15 then
-		var5 = reactModule.createElement
-		local var16 = pageStickyHeaderModule
-		local t_6 = {
-			slots = stickyHeaderSlot,
-			chromeHeight = var2,
-			liveChromeHeightBinding = if fFlagSduiFeedScrollBarFixes then nil else var3,
-			backgroundStyle = p1.stickyBackgroundStyle
-		}
-		local header = var12.header
-		t_6.tag = if header then `col size-full-0 auto-y {header}` else "col size-full-0 auto-y"
-		t_6.topPadding = p1.stickyTopPadding
-		var5 = var5(var16, t_6)
+	if StickyHeaderSlot ~= nil and next(StickyHeaderSlot) ~= nil then
+		local Header = UseMemoResult3.header
+		Element2 = ReactModule.createElement(PageStickyHeaderModule, {
+			slots = StickyHeaderSlot,
+			chromeHeight = ScrollAwayHeight,
+			liveChromeHeightBinding = if FFlagSduiFeedScrollBarFixes then nil else LiveHeightBinding,
+			backgroundStyle = p1.stickyBackgroundStyle,
+			tag = if Header then `col size-full-0 auto-y {Header}` else "col size-full-0 auto-y",
+			topPadding = p1.stickyTopPadding
+		})
 	else
-		var5 = nil
+		Element2 = nil
 	end
-	t_5.Sticky = var5
-	t_5.Refresh = var14
-	t_5.Content = var13
-	t_3.Root = createElement_2(view, t_4, t_5)
-	t_1.ChromeInset = createElement_1(view, t_2, t_3)
+	t2.Sticky = Element2
+	t2.Refresh = Element1
+	t2.Content = Element
+	t1.Root = CreateElementFunction(View, config2, t2)
+	t.ChromeInset = CreateElementFunction1(View, config1, t1)
 	
-	return createElement(provider, t, t_1)
+	return CreateElementFunction2(Provider, config, t)
 end))

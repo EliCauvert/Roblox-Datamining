@@ -1,47 +1,47 @@
-﻿local reactModule = require(script:FindFirstAncestor("AppBlox").Parent.React)
+﻿local ReactModule = require(script:FindFirstAncestor("AppBlox").Parent.React)
 local _ = require(script.Parent.Parent.Types)
 
-return function(p1, p2, p3, p4)
-	-- upvalues: reactModule (ref)
-	local var1 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref)
-		local t = {}
+return function(p1, HeaderContainer, Vector, Vector1) --[[ Line: 9 | Named "useDetailsPageRenderItems" ]]
+	-- upvalues: ReactModule (copy)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 15 ]]
+		-- upvalues: p1 (copy)
+		local List = {}
 		
-		for i, v in p1 do
-			table.insert(t, {
-				index = v.portraitLayoutOrder + 1,
-				renderComponent = v.renderComponent,
-				showCornerGradient = v.showCornerGradient,
-				useSelectionBumper = v.useSelectionBumper,
-				key = i
+		for Key, value in p1 do
+			table.insert(List, {
+				index = value.portraitLayoutOrder + 1,
+				renderComponent = value.renderComponent,
+				showCornerGradient = value.showCornerGradient,
+				useSelectionBumper = value.useSelectionBumper,
+				key = Key
 			})
 		end
-		table.sort(t, function(p5, p6)
-			return if p6.index then if p5.index then p5.index <= p6.index else false else true
+		table.sort(List, function(A, B): boolean --[[ Line: 27 ]]
+			return not B.index or (if A.index then A.index <= B.index else false)
 		end)
 		
-		return t
+		return List
 	end, { p1 })
 	
-	return reactModule.useMemo(function()
-		-- upvalues: var1 (ref), reactModule (copy), p3 (ref), p4 (ref), p2 (ref)
-		local cloned = table.clone(var1)
-		table.insert(cloned, 1, {
+	return (ReactModule.useMemo(function() --[[ Line: 40 ]]
+		-- upvalues: UseMemoResult (copy), ReactModule (upval), Vector (copy), Vector1 (copy), HeaderContainer (copy)
+		local Copy = table.clone(UseMemoResult)
+		table.insert(Copy, 1, {
 			index = 1,
 			key = "Header",
 			showCornerGradient = true,
-			renderComponent = function()
-				-- upvalues: reactModule (copy), p3 (copy), p4 (copy), p2 (copy)
-				return reactModule.createElement("Frame", {
+			renderComponent = function() --[[ Line: 47 ]]
+				-- upvalues: ReactModule (upval), Vector (upval), Vector1 (upval), HeaderContainer (upval)
+				return ReactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
-					Size = UDim2.new(1, 0, 0, p3.Y - p4.Y * 2)
+					Size = UDim2.new(1, 0, 0, Vector.Y - Vector1.Y * 2)
 				}, {
-					Layout = reactModule.createElement("UIListLayout", { VerticalAlignment = Enum.VerticalAlignment.Bottom }),
-					HeaderContainer = p2
+					Layout = ReactModule.createElement("UIListLayout", { VerticalAlignment = Enum.VerticalAlignment.Bottom }),
+					HeaderContainer = HeaderContainer
 				})
 			end
 		})
 		
-		return cloned
-	end, { var1, p2, p3.Y, p4.Y })
+		return Copy
+	end, { UseMemoResult, HeaderContainer, Vector.Y, Vector1.Y }))
 end

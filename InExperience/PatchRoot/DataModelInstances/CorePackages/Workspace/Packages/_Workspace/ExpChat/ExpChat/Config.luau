@@ -1,7 +1,6 @@
-﻿local guiService = game:GetService("GuiService")
-local expChat = script:FindFirstAncestor("ExpChat")
-local parent = expChat.Parent
-local t = {
+﻿local ExpChat = script:FindFirstAncestor("ExpChat")
+local Parent = ExpChat.Parent
+local Config = {
 	ChatInputBarFont = Enum.Font.BuilderSansMedium,
 	ChatInputBarFontFace = Font.new("rbxasset://fonts/families/BuilderSans.json", Enum.FontWeight.Medium, Enum.FontStyle.Normal),
 	ChatInputBarTextColor3 = Color3.fromRGB(255, 255, 255),
@@ -51,15 +50,15 @@ local t = {
 		UnreadDotColor3 = Color3.fromRGB(255, 255, 255),
 		DividerColor3 = Color3.fromRGB(255, 255, 255),
 		BorderColor3 = Color3.fromRGB(100, 100, 100),
-		MinTabWidth = if require(expChat.Flags.FFlagExpChatChannelTabSizingUpdate) then 72 else 100
+		MinTabWidth = if require(ExpChat.Flags.FFlagExpChatChannelTabSizingUpdate) then 72 else 100
 	},
-	DefaultChannelNames = require(parent.ExpChatShared).Config.DefaultChannelNames,
+	DefaultChannelNames = require(Parent.ExpChatShared).Config.DefaultChannelNames,
 	MessageCharacterLimit = 200,
 	VERIFIED_EMOJI = utf8.char(57344),
 	LOCK_EMOJI = utf8.char(128274),
 	DOT_TEXT = utf8.char(8226),
-	INTERPUNCT_TEXT = "\226\151\143",
-	TopBarVerticalOffset = guiService:GetGuiInset().Y,
+	INTERPUNCT_TEXT = "●",
+	TopBarVerticalOffset = game:GetService("GuiService"):GetGuiInset().Y,
 	DefaultBubbleChatChildrenCustomizationProperties = {
 		ImageLabel = {
 			Image = "",
@@ -148,15 +147,16 @@ local t = {
 	},
 	PresetChat = {
 		Icon = "lightning-bolt",
+		EmojiIcon = "circle-face-emoji",
 		IconVariant = "Regular",
 		IconVariantActive = "Filled",
 		ButtonWidth = 32
 	}
 }
 
-if require(parent.AppCommonLib).isTenFootInterface() then
-	t.ChatWindowSize = UDim2.fromScale(0.4, 0.4)
-	t.ChatWindowMaxWidth = 768
-	t.ChatWindowMaxHeight = 432
+if require(Parent.AppCommonLib).isTenFootInterface() then
+	Config.ChatWindowSize = UDim2.fromScale(0.4, 0.4)
+	Config.ChatWindowMaxWidth = 768
+	Config.ChatWindowMaxHeight = 432
 end
-return t
+return Config

@@ -1,45 +1,41 @@
-﻿local parent = script.Parent.Parent
-local dependenciesModule = require(parent.dependencies)
-local setContactImporterDisplayLogicModule = require(parent.Actions.SetContactImporterDisplayLogic)
-local updateContactImporterModalLogic = dependenciesModule.SocialModalsCommon.Actions.UpdateContactImporterModalLogic
-local setIsPhoneVerifiedModule = require(parent.Actions.SetIsPhoneVerified)
-local updateIsDiscoverabilityUnset = dependenciesModule.SocialModalsCommon.Actions.UpdateIsDiscoverabilityUnset
-local rodux = dependenciesModule.Rodux
-local llama = dependenciesModule.llama
-local constantsModule = require(parent.Common.Constants)
+﻿local Parent = script.Parent.Parent
+local DependenciesModule = require(Parent.dependencies)
+local Llama = DependenciesModule.llama
+local ConstantsModule = require(Parent.Common.Constants)
 
-return rodux.createReducer({
-	[constantsModule.SHOULD_SHOW_CONTACT_IMPORTER_FEATURE] = false,
-	[constantsModule.SHOULD_SHOW_CONTACT_IMPORTER_UPSELL_MODAL] = false,
+return DependenciesModule.Rodux.createReducer({
+	[ConstantsModule.SHOULD_SHOW_CONTACT_IMPORTER_FEATURE] = false,
+	[ConstantsModule.SHOULD_SHOW_CONTACT_IMPORTER_UPSELL_MODAL] = false,
 	hasOSPermissions = false,
 	isPhoneVerified = false,
 	isDiscoverabilityUnset = false
 }, {
-	[setContactImporterDisplayLogicModule.name] = function(_, p1)
-		-- upvalues: constantsModule (ref)
-		local hasOSPermissions = p1.hasOSPermissions
+	[require(Parent.Actions.SetContactImporterDisplayLogic).name] = function(_, p1) --[[ Line: 40 ]]
+		-- upvalues: ConstantsModule (copy)
+		local HasOSPermissions = p1.hasOSPermissions
+		local ShouldShowContactImporterUpsellAgain = p1.shouldShowContactImporterUpsellAgain
 		
 		return {
-			[constantsModule.SHOULD_SHOW_CONTACT_IMPORTER_FEATURE] = true,
-			[constantsModule.SHOULD_SHOW_CONTACT_IMPORTER_UPSELL_MODAL] = not (hasOSPermissions and p1.isUserOptedInLocalStorage) and p1.shouldShowContactImporterUpsellAgain,
-			hasOSPermissions = hasOSPermissions,
+			[ConstantsModule.SHOULD_SHOW_CONTACT_IMPORTER_FEATURE] = true,
+			[ConstantsModule.SHOULD_SHOW_CONTACT_IMPORTER_UPSELL_MODAL] = not (HasOSPermissions and p1.isUserOptedInLocalStorage) and ShouldShowContactImporterUpsellAgain,
+			hasOSPermissions = HasOSPermissions,
 			isPhoneVerified = p1.isPhoneVerified,
-			isDiscoverabilityUnset = p1.phoneNumberDiscoverability == constantsModule.DISCOVERABILITY_UNSET
+			isDiscoverabilityUnset = p1.phoneNumberDiscoverability == ConstantsModule.DISCOVERABILITY_UNSET
 		}
 	end,
-	[updateContactImporterModalLogic.name] = function(p1, p2)
-		-- upvalues: llama (ref), constantsModule (ref)
-		return llama.Dictionary.join(p1, {
+	[DependenciesModule.SocialModalsCommon.Actions.UpdateContactImporterModalLogic.name] = function(p1, p2) --[[ Line: 60 ]]
+		-- upvalues: Llama (copy), ConstantsModule (copy)
+		return (Llama.Dictionary.join(p1, {
 			hasOSPermissions = p2.hasOSPermissions,
-			[constantsModule.SHOULD_SHOW_CONTACT_IMPORTER_UPSELL_MODAL] = p2[constantsModule.SHOULD_SHOW_CONTACT_IMPORTER_UPSELL_MODAL]
-		})
+			[ConstantsModule.SHOULD_SHOW_CONTACT_IMPORTER_UPSELL_MODAL] = p2[ConstantsModule.SHOULD_SHOW_CONTACT_IMPORTER_UPSELL_MODAL]
+		}))
 	end,
-	[setIsPhoneVerifiedModule.name] = function(p1, p2)
-		-- upvalues: llama (ref)
-		return llama.Dictionary.join(p1, { isPhoneVerified = p2.isPhoneVerified })
+	[require(Parent.Actions.SetIsPhoneVerified).name] = function(p1, p2) --[[ Line: 68 ]]
+		-- upvalues: Llama (copy)
+		return Llama.Dictionary.join(p1, { isPhoneVerified = p2.isPhoneVerified })
 	end,
-	[updateIsDiscoverabilityUnset.name] = function(p1, p2)
-		-- upvalues: llama (ref)
-		return llama.Dictionary.join(p1, { isDiscoverabilityUnset = p2.isDiscoverabilityUnset })
+	[DependenciesModule.SocialModalsCommon.Actions.UpdateIsDiscoverabilityUnset.name] = function(p1, p2) --[[ Line: 73 ]]
+		-- upvalues: Llama (copy)
+		return Llama.Dictionary.join(p1, { isDiscoverabilityUnset = p2.isDiscoverabilityUnset })
 	end
 })

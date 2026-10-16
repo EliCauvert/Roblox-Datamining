@@ -1,25 +1,24 @@
-﻿local function _(value, minValue, maxValue)
-	return if maxValue <= minValue then (minValue + maxValue) / 2 else math.clamp(value, minValue, maxValue)
+﻿local function _(Value: number, MinValue: number, MaxValue: number): number --[[ Line: 11 | Named "clampAxis" ]]
+	return if MaxValue <= MinValue then (MinValue + MaxValue) / 2 else math.clamp(Value, MinValue, MaxValue)
 end
 
 return {
-	hasPositiveSize = function(p1)
-		return p1.X > 0 and p1.Y > 0
+	hasPositiveSize = function(Vector): boolean --[[ Line: 3 ]]
+		return Vector.X > 0 and Vector.Y > 0
 	end,
-	resolveCenter = function(p1, p2)
-		return Vector2.new(p1.X.Scale * p2.X + p1.X.Offset, p1.Y.Scale * p2.Y + p1.Y.Offset)
+	resolveCenter = function(Vector, Vector1): Vector2 --[[ Line: 7 ]]
+		return Vector2.new(Vector.X.Scale * Vector1.X + Vector.X.Offset, Vector.Y.Scale * Vector1.Y + Vector.Y.Offset)
 	end,
-	clampCenter = function(value, minValue, maxValue)
-		local var1 = maxValue / 2
-		local new = Vector2.new
-		local x = value.X
-		local x_1 = var1.X
-		local var2 = minValue.X - var1.X
-		local var3 = if var2 <= x_1 then (x_1 + var2) / 2 else math.clamp(x, x_1, var2)
-		local y = value.Y
-		local y_1 = var1.Y
-		local var4 = minValue.Y - var1.Y
+	clampCenter = function(Vector, Vector1, p1: number): Vector2 --[[ Line: 18 ]]
+		local Vector3 = p1 / 2
+		local X: number = Vector.X
+		local X1: number = Vector3.X
+		local XDelta = Vector1.X - Vector3.X
+		local XRatio = if XDelta <= X1 then (X1 + XDelta) / 2 else math.clamp(X, X1, XDelta)
+		local Y: number = Vector.Y
+		local Y1: number = Vector3.Y
+		local YDelta = Vector1.Y - Vector3.Y
 		
-		return new(var3, if var4 <= y_1 then (y_1 + var4) / 2 else math.clamp(y, y_1, var4))
+		return Vector2.new(XRatio, if YDelta <= Y1 then (Y1 + YDelta) / 2 else math.clamp(Y, Y1, YDelta))
 	end
 }

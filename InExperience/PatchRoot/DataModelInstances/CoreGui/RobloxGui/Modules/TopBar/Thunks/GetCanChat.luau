@@ -1,36 +1,36 @@
-﻿local chatService = game:GetService("Chat")
-local runService = game:GetService("RunService")
-local playersService = game:GetService("Players")
-local coreGuiService = game:GetService("CoreGui")
-local parent = script.Parent.Parent
-local setCanChatModule = require(parent.Actions.SetCanChat)
+﻿local Chat = game:GetService("Chat")
+local RunService = game:GetService("RunService")
+local Players = game:GetService("Players")
+local CoreGui = game:GetService("CoreGui")
+local Parent = script.Parent.Parent
+local SetCanChatModule = require(Parent.Actions.SetCanChat)
 
-if require(parent.Flags.FFlagTopBarDeprecateChatRodux) then
+if require(Parent.Flags.FFlagTopBarDeprecateChatRodux) then
 	return nil
 end
-local chatSelectorModule = require(coreGuiService:WaitForChild("RobloxGui").Modules.ChatSelector)
-local localPlayer = playersService.LocalPlayer
-while not localPlayer do
-	playersService:GetPropertyChangedSignal("LocalPlayer"):Wait()
-	localPlayer = playersService.LocalPlayer
+local ChatSelectorModule = require(CoreGui:WaitForChild("RobloxGui").Modules.ChatSelector)
+local LocalPlayer = Players.LocalPlayer
+while not LocalPlayer do
+	Players:GetPropertyChangedSignal("LocalPlayer"):Wait()
+	LocalPlayer = Players.LocalPlayer
 end
-return function(p1)
-	-- upvalues: runService (ref), chatService (ref), localPlayer (write), setCanChatModule (ref), chatSelectorModule (ref)
-	coroutine.wrap(function()
-		-- upvalues: runService (copy), chatService (copy), localPlayer (copy), p1 (ref), setCanChatModule (copy), chatSelectorModule (copy)
-		local var1 = true
+return function(p1) --[[ Line: 26 ]]
+	-- upvalues: RunService (copy), Chat (copy), LocalPlayer (ref), SetCanChatModule (copy), ChatSelectorModule (copy)
+	coroutine.wrap(function() --[[ Line: 27 ]]
+		-- upvalues: RunService (upval), Chat (upval), LocalPlayer (upval), p1 (copy), SetCanChatModule (upval), ChatSelectorModule (upval)
+		local v1 = true
 		
-		if not runService:IsStudio() then
-			local ok, status = pcall(function()
-				-- upvalues: chatService (copy), localPlayer (copy)
-				return chatService:CanUserChatAsync(localPlayer.UserId)
+		if not RunService:IsStudio() then
+			local Success, Result = pcall(function() --[[ Line: 30 ]]
+				-- upvalues: Chat (upval), LocalPlayer (upval)
+				return Chat:CanUserChatAsync(LocalPlayer.UserId)
 			end)
-			var1 = ok and status
+			v1 = Success and Result
 		end
-		p1:dispatch(setCanChatModule(var1))
+		p1:dispatch(SetCanChatModule(v1))
 		
-		if not var1 then
-			chatSelectorModule:SetVisible(false)
+		if not v1 then
+			ChatSelectorModule:SetVisible(false)
 		end
 	end)()
 end

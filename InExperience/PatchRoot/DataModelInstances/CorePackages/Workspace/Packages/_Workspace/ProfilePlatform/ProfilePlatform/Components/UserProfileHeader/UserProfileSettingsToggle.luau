@@ -1,50 +1,50 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local toggle = foundationModule.Toggle
-local toggleSize = foundationModule.Enums.ToggleSize
-local UIBloxModule = require(parent.UIBlox)
-local useStyle = UIBloxModule.Core.Style.useStyle
-local horizontalPageMargin = UIBloxModule.App.Container.HorizontalPageMargin
-local styledTextLabel = UIBloxModule.App.Text.StyledTextLabel
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local useProfileWrapperContextModule = require(profilePlatform.Contexts.useProfileWrapperContext)
-local userProfileSettingsNetworkingModule = require(profilePlatform.Networking.UserProfileSettingsNetworking)
-local refreshProfilePlatformUserProfileHeaderModule = require(profilePlatform.Networking.refreshProfilePlatformUserProfileHeader)
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local Toggle = FoundationModule.Toggle
+local ToggleSize = FoundationModule.Enums.ToggleSize
+local UIBloxModule = require(Parent.UIBlox)
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local HorizontalPageMargin = UIBloxModule.App.Container.HorizontalPageMargin
+local StyledTextLabel = UIBloxModule.App.Text.StyledTextLabel
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseProfileWrapperContextModule = require(ProfilePlatform.Contexts.useProfileWrapperContext)
+local UserProfileSettingsNetworkingModule = require(ProfilePlatform.Networking.UserProfileSettingsNetworking)
+local RefreshProfilePlatformUserProfileHeaderModule = require(ProfilePlatform.Networking.refreshProfilePlatformUserProfileHeader)
 
-return function(value)
-	-- upvalues: useProfileWrapperContextModule (ref), useStyle (ref), useDispatch (ref), reactModule (ref), userProfileSettingsNetworkingModule (ref), refreshProfilePlatformUserProfileHeaderModule (ref), horizontalPageMargin (ref), styledTextLabel (ref), toggle (ref), toggleSize (ref)
-	local var1 = useProfileWrapperContextModule()
-	local var2 = useStyle()
-	local var3 = useDispatch()
+return function(p1) --[[ Line: 27 | Named "UserProfileSettingsToggle" ]]
+	-- upvalues: UseProfileWrapperContextModule (copy), UseStyleFunction (copy), UseDispatchFunction (copy), ReactModule (copy), UserProfileSettingsNetworkingModule (copy), RefreshProfilePlatformUserProfileHeaderModule (copy), HorizontalPageMargin (copy), StyledTextLabel (copy), Toggle (copy), ToggleSize (copy)
+	local UseProfileWrapperContextModuleResult = UseProfileWrapperContextModule()
+	local UseStyleResult = UseStyleFunction()
+	local UseDispatchResult = UseDispatchFunction()
 	
-	return reactModule.createElement(horizontalPageMargin, {
+	return ReactModule.createElement(HorizontalPageMargin, {
 		backgroundTransparency = 1,
-		size = value.size,
-		layoutOrder = value.layoutOrder
+		size = p1.size,
+		layoutOrder = p1.layoutOrder
 	}, {
-		UIListLayout = reactModule.createElement("UIListLayout", {
+		UIListLayout = ReactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Horizontal,
 			VerticalAlignment = Enum.VerticalAlignment.Center,
 			Padding = UDim.new(0, 8)
 		}),
-		Label = reactModule.createElement(styledTextLabel, {
+		Label = ReactModule.createElement(StyledTextLabel, {
 			text = "In-experience name:",
-			fontStyle = var2.Font.CaptionHeader,
-			colorStyle = var2.Theme.TextEmphasis,
+			fontStyle = UseStyleResult.Font.CaptionHeader,
+			colorStyle = UseStyleResult.Theme.TextEmphasis,
 			automaticSize = Enum.AutomaticSize.XY
 		}),
-		Toggle = reactModule.createElement(toggle, {
+		Toggle = ReactModule.createElement(Toggle, {
 			label = "",
-			size = toggleSize.Medium,
-			isChecked = value.isInExperienceNameEnabled,
-			onActivated = reactModule.useCallback(function(p1)
-				-- upvalues: var3 (ref), userProfileSettingsNetworkingModule (copy), refreshProfilePlatformUserProfileHeaderModule (copy), var1 (ref)
-				var3(userProfileSettingsNetworkingModule.SetUserProfileSettings.API({ isInExperienceNameEnabled = p1 })):andThen(function(p2)
-					-- upvalues: var3 (copy), refreshProfilePlatformUserProfileHeaderModule (copy), var1 (copy)
-					if p2.responseBody.successfullyUpdated then
-						var3(refreshProfilePlatformUserProfileHeaderModule(var1.profileId))
+			size = ToggleSize.Medium,
+			isChecked = p1.isInExperienceNameEnabled,
+			onActivated = ReactModule.useCallback(function(IsInExperienceNameEnabled) --[[ Line: 32 ]]
+				-- upvalues: UseDispatchResult (copy), UserProfileSettingsNetworkingModule (upval), RefreshProfilePlatformUserProfileHeaderModule (upval), UseProfileWrapperContextModuleResult (copy)
+				UseDispatchResult(UserProfileSettingsNetworkingModule.SetUserProfileSettings.API({ isInExperienceNameEnabled = IsInExperienceNameEnabled })):andThen(function(Result) --[[ Line: 35 ]]
+					-- upvalues: UseDispatchResult (upval), RefreshProfilePlatformUserProfileHeaderModule (upval), UseProfileWrapperContextModuleResult (upval)
+					if Result.responseBody.successfullyUpdated then
+						UseDispatchResult(RefreshProfilePlatformUserProfileHeaderModule(UseProfileWrapperContextModuleResult.profileId))
 					end
 				end)
 			end)

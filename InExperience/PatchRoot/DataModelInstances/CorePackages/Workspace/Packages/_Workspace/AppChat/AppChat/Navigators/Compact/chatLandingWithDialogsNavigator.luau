@@ -1,351 +1,373 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local reactModule = require(parent.React)
-local roactModule = require(parent.Roact)
-local roactNavigationModule = require(parent.RoactNavigation)
-local enumScreensModule = require(appChat.EnumScreens)
-local sharedFlagsModule = require(parent.SharedFlags)
-local appNavBarModule = require(parent.AppNavBar)
-local memoize = require(parent.AppCommonLib).memoize
-local chatDetails = appChat.Components.ChatDetails
-local genericDialogTypeModule = require(chatDetails.Dialogs.GenericDialogType)
-local editChatGroupNameDialogScreenModule = require(chatDetails.EditChatGroupNameDialog.EditChatGroupNameDialogScreen)
-local leaveGroupDialogScreenModule = require(chatDetails.LeaveGroupDialog.LeaveGroupDialogScreen)
-local participantDialogScreenDeprecatedModule = require(chatDetails.ParticipantDialog.ParticipantDialogScreenDeprecated)
-local removeUserDialogScreenModule = require(chatDetails.RemoveUserDialog.RemoveUserDialogScreen)
-local abuseReportScreenModule = require(appChat.Components.ChatAbuseReport.AbuseReportScreen)
-local fFlagAppChatEnableTrustedFriendEntryPointModule = require(appChat.Flags.FFlagAppChatEnableTrustedFriendEntryPoint)
-local trustedContactsModalScreenModule = require(appChat.Components.TrustedContactsModal.TrustedContactsModalScreen)
-local messageContextMenuScreenModule = require(appChat.Components.ChatConversation.MessageInteraction.MessageContextMenuScreen)
-local squadVoiceChangerOverlayModule = require(parent.Squads.SquadVoiceChangerOverlay)
-local chatLandingTelemetryLayerModule = require(appChat.Telemetry.Layers.ChatLandingTelemetryLayer)
-local chatLandingTelemetryStateModule = require(appChat.Contexts.TelemetryState.ChatLandingTelemetryState)
-local chatConversationTelemetryLayerModule = require(appChat.Telemetry.Layers.ChatConversationTelemetryLayer)
-local chatConversationTelemetryStateModule = require(appChat.Contexts.TelemetryState.ChatConversationTelemetryState)
-local useGetAndSetRefModule = require(appChat.Hooks.useGetAndSetRef)
-local trustedConnectionsUpsellScreenModule = require(appChat.Components.TrustedConnectionsUpsell.TrustedConnectionsUpsellScreen)
-local trustedFriendsUpsellScreenModule = require(appChat.Components.TrustedFriendsUpsell.TrustedFriendsUpsellScreen)
-local groupOSADialogScreenModule = require(appChat.Components.OSA.GroupOSADialogScreen)
-local chatConversation = appChat.Components.ChatConversation
-local createUnfilteredChatPartialModalScreenModule = require(chatConversation.PartialModal.CreateUnfilteredChatPartialModalScreen)
-local learnMorePartialModalScreenModule = require(chatConversation.PartialModal.LearnMorePartialModalScreen)
-local conversationOverlayScreenModule = require(chatConversation.PartialModal.ConversationOverlayScreen)
-local makeDialogScreenTelemetryWrapperModule = require(appChat.Navigators.makeDialogScreenTelemetryWrapper)
-local configureTopBarWithNavigationOptionsModule = require(appChat.configureTopBarWithNavigationOptions)
-local getChatLandingStackNavigatorModule = require(script.Parent.getChatLandingStackNavigator)
-local squadVoiceAbuseReportScreenModule = require(parent.Squads.SquadVoiceAbuseReportScreen)
-local systemMenuTopBarModule = require(appChat.Components.TopBar.SystemMenuTopBar)
-local chatConversationTopBarModule = require(appChat.Components.TopBar.ChatConversationTopBar)
-local chatLandingTopBarModule = require(appChat.Components.TopBar.ChatLandingTopBar)
-local chatTopBarBaseModule = require(appChat.Components.TopBar.ChatTopBarBase)
-local squadAddFriendsIconButtonModule = require(appChat.Components.Squads.SquadAddFriendsIconButton)
-local providerModule = require(appChat.Contexts.ChatPagePadding.Provider)
-local chatDetailsTelemetryLayerModule = require(appChat.Telemetry.Layers.ChatDetailsTelemetryLayer)
-local chatDetailsTelemetryStateModule = require(appChat.Contexts.TelemetryState.ChatDetailsTelemetryState)
-local fFlagAppChatPerfTrackingModule = require(appChat.Flags.FFlagAppChatPerfTracking)
-local appChatPerfTrackerModule = require(appChat.Telemetry.AppChatPerfTracker)
-local blockingModal = require(parent.SocialBlockingModal).BlockingModal
-local getFFlagEnableCrossExpVoice = sharedFlagsModule.GetFFlagEnableCrossExpVoice
-local getFFlagIsSquadEnabled = sharedFlagsModule.GetFFlagIsSquadEnabled
-local fFlagAppIaScrollAway = sharedFlagsModule.FFlagAppIaScrollAway
-local fFlagAppIaScrollAwayFixSocial = sharedFlagsModule.FFlagAppIaScrollAwayFixSocial
-local fFlagEnablePartyVoiceChangersInLua = sharedFlagsModule.FFlagEnablePartyVoiceChangersInLua
-local fFlagAppChatEnableDoubleOptIn = require(parent.SharedFlags).FFlagAppChatEnableDoubleOptIn
-local fFlagAppChatConsolidateTrustedFriendsModalModule = require(appChat.Flags.FFlagAppChatConsolidateTrustedFriendsModal)
-local fFlagAppChatDisableAbsorbInputSelectableModule = require(appChat.Flags.FFlagAppChatDisableAbsorbInputSelectable)
-local fFlagAppChatConsoleFocusFixesModule = require(appChat.Flags.FFlagAppChatConsoleFocusFixes)
-local userGameSettingsService = UserSettings():GetService("UserGameSettings")
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local ReactModule = require(Parent.React)
+local RoactModule = require(Parent.Roact)
+local RoactNavigationModule = require(Parent.RoactNavigation)
+local EnumScreensModule = require(AppChat.EnumScreens)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local AppNavBarModule = require(Parent.AppNavBar)
+local MemoizeFunction = require(Parent.AppCommonLib).memoize
+local ChatDetails = AppChat.Components.ChatDetails
+local GenericDialogTypeModule = require(ChatDetails.Dialogs.GenericDialogType)
+local EditChatGroupNameDialogScreenModule = require(ChatDetails.EditChatGroupNameDialog.EditChatGroupNameDialogScreen)
+local LeaveGroupDialogScreenModule = require(ChatDetails.LeaveGroupDialog.LeaveGroupDialogScreen)
+local ParticipantDialogScreenDeprecatedModule = require(ChatDetails.ParticipantDialog.ParticipantDialogScreenDeprecated)
+local RemoveUserDialogScreenModule = require(ChatDetails.RemoveUserDialog.RemoveUserDialogScreen)
+local AbuseReportScreenModule = require(AppChat.Components.ChatAbuseReport.AbuseReportScreen)
+local FFlagAppChatEnableTrustedFriendEntryPointModule = require(AppChat.Flags.FFlagAppChatEnableTrustedFriendEntryPoint)
+local TrustedContactsModalScreenModule = require(AppChat.Components.TrustedContactsModal.TrustedContactsModalScreen)
+local MessageContextMenuScreenModule = require(AppChat.Components.ChatConversation.MessageInteraction.MessageContextMenuScreen)
+local SquadVoiceChangerOverlayModule = require(Parent.Squads.SquadVoiceChangerOverlay)
+local ChatLandingTelemetryLayerModule = require(AppChat.Telemetry.Layers.ChatLandingTelemetryLayer)
+local ChatLandingTelemetryStateModule = require(AppChat.Contexts.TelemetryState.ChatLandingTelemetryState)
+local ChatConversationTelemetryLayerModule = require(AppChat.Telemetry.Layers.ChatConversationTelemetryLayer)
+local ChatConversationTelemetryStateModule = require(AppChat.Contexts.TelemetryState.ChatConversationTelemetryState)
+local UseGetAndSetRefModule = require(AppChat.Hooks.useGetAndSetRef)
+local TrustedConnectionsUpsellScreenModule = require(AppChat.Components.TrustedConnectionsUpsell.TrustedConnectionsUpsellScreen)
+local TrustedFriendsUpsellScreenModule = require(AppChat.Components.TrustedFriendsUpsell.TrustedFriendsUpsellScreen)
+local GroupOSADialogScreenModule = require(AppChat.Components.OSA.GroupOSADialogScreen)
+local ChatConversation = AppChat.Components.ChatConversation
+local CreateUnfilteredChatPartialModalScreenModule = require(ChatConversation.PartialModal.CreateUnfilteredChatPartialModalScreen)
+local LearnMorePartialModalScreenModule = require(ChatConversation.PartialModal.LearnMorePartialModalScreen)
+local ConversationOverlayScreenModule = require(ChatConversation.PartialModal.ConversationOverlayScreen)
+local MakeDialogScreenTelemetryWrapperModule = require(AppChat.Navigators.makeDialogScreenTelemetryWrapper)
+local ConfigureTopBarWithNavigationOptionsModule = require(AppChat.configureTopBarWithNavigationOptions)
+local GetChatLandingStackNavigatorModule = require(script.Parent.getChatLandingStackNavigator)
+local SquadVoiceAbuseReportScreenModule = require(Parent.Squads.SquadVoiceAbuseReportScreen)
+local SystemMenuTopBarModule = require(AppChat.Components.TopBar.SystemMenuTopBar)
+local ChatConversationTopBarModule = require(AppChat.Components.TopBar.ChatConversationTopBar)
+local ChatLandingTopBarModule = require(AppChat.Components.TopBar.ChatLandingTopBar)
+local ChatTopBarBaseModule = require(AppChat.Components.TopBar.ChatTopBarBase)
+local SquadAddFriendsIconButtonModule = require(AppChat.Components.Squads.SquadAddFriendsIconButton)
+local ProviderModule = require(AppChat.Contexts.ChatPagePadding.Provider)
+local ChatDetailsTelemetryLayerModule = require(AppChat.Telemetry.Layers.ChatDetailsTelemetryLayer)
+local ChatDetailsTelemetryStateModule = require(AppChat.Contexts.TelemetryState.ChatDetailsTelemetryState)
+local FFlagAppChatPerfTrackingModule = require(AppChat.Flags.FFlagAppChatPerfTracking)
+local AppChatPerfTrackerModule = require(AppChat.Telemetry.AppChatPerfTracker)
+local BlockingModal = require(Parent.SocialBlockingModal).BlockingModal
+local GetFFlagEnableCrossExpVoiceFunction = SharedFlagsModule.GetFFlagEnableCrossExpVoice
+local GetFFlagIsSquadEnabledFunction = SharedFlagsModule.GetFFlagIsSquadEnabled
+local FFlagAppIaScrollAway = SharedFlagsModule.FFlagAppIaScrollAway
+local FFlagAppIaScrollAwayFixSocial = SharedFlagsModule.FFlagAppIaScrollAwayFixSocial
+local FFlagEnablePartyVoiceChangersInLua = SharedFlagsModule.FFlagEnablePartyVoiceChangersInLua
+local FFlagAppChatEnableDoubleOptIn = require(Parent.SharedFlags).FFlagAppChatEnableDoubleOptIn
+local FFlagAppChatConsolidateTrustedFriendsModalModule = require(AppChat.Flags.FFlagAppChatConsolidateTrustedFriendsModal)
+local FFlagAppChatDisableAbsorbInputSelectableModule = require(AppChat.Flags.FFlagAppChatDisableAbsorbInputSelectable)
+local FFlagAppChatConsoleFocusFixesModule = require(AppChat.Flags.FFlagAppChatConsoleFocusFixes)
+local UserGameSettings = UserSettings():GetService("UserGameSettings")
 
-local function AppChatNavigatorTelemetryProviders(p1)
-	-- upvalues: useGetAndSetRefModule (ref), reactModule (ref), chatDetailsTelemetryStateModule (ref), chatDetailsTelemetryLayerModule (ref), chatLandingTelemetryStateModule (ref), chatLandingTelemetryLayerModule (ref), chatConversationTelemetryStateModule (ref), chatConversationTelemetryLayerModule (ref)
-	local var1, var2 = useGetAndSetRefModule({})
-	local var3 = reactModule.useCallback(function()
-		-- upvalues: var1 (ref)
-		local var4 = var1()
+local function AppChatNavigatorTelemetryProviders(p1) --[[ Line: 73 ]]
+	-- upvalues: UseGetAndSetRefModule (copy), ReactModule (copy), ChatDetailsTelemetryStateModule (copy), ChatDetailsTelemetryLayerModule (copy), ChatLandingTelemetryStateModule (copy), ChatLandingTelemetryLayerModule (copy), ChatConversationTelemetryStateModule (copy), ChatConversationTelemetryLayerModule (copy)
+	local UseGetAndSetRefModuleResult, UseGetAndSetRefModuleResult2 = UseGetAndSetRefModule({})
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 76 ]]
+		-- upvalues: UseGetAndSetRefModuleResult (copy)
+		local UseGetAndSetRefModuleResultResult = UseGetAndSetRefModuleResult()
 		
 		return {
-			chatLandingListCount = var4.chatLandingListCount,
-			pendingConversationCount = var4.pendingConversationCount,
-			unfilteredConversationCount = var4.unfilteredConversationCount,
-			searchSessionId = var4.searchSessionId,
-			activeFilters = var4.activeFilters
+			chatLandingListCount = UseGetAndSetRefModuleResultResult.chatLandingListCount,
+			pendingConversationCount = UseGetAndSetRefModuleResultResult.pendingConversationCount,
+			unfilteredConversationCount = UseGetAndSetRefModuleResultResult.unfilteredConversationCount,
+			searchSessionId = UseGetAndSetRefModuleResultResult.searchSessionId,
+			activeFilters = UseGetAndSetRefModuleResultResult.activeFilters
 		}
-	end, { var1 })
-	local var4, var5 = useGetAndSetRefModule({})
-	local var6 = reactModule.useCallback(function()
-		-- upvalues: var4 (ref)
-		local var7 = var4()
+	end, { UseGetAndSetRefModuleResult })
+	local UseGetAndSetRefModuleResult1, UseGetAndSetRefModuleResult2_1 = UseGetAndSetRefModule({})
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 88 ]]
+		-- upvalues: UseGetAndSetRefModuleResult1 (copy)
+		local UseGetAndSetRefModuleResultResult = UseGetAndSetRefModuleResult1()
 		
 		return {
-			conversationId = var7.conversationId,
-			moderationType = var7.moderationType,
-			userPendingStatus = var7.userPendingStatus
+			conversationId = UseGetAndSetRefModuleResultResult.conversationId,
+			moderationType = UseGetAndSetRefModuleResultResult.moderationType,
+			userPendingStatus = UseGetAndSetRefModuleResultResult.userPendingStatus
 		}
-	end, { var4 })
+	end, { UseGetAndSetRefModuleResult1 })
 	local _ = p1.children
-	local var7, var8 = useGetAndSetRefModule({})
+	local UseGetAndSetRefModuleResult3, UseGetAndSetRefModuleResult2_2 = UseGetAndSetRefModule({})
 	
-	return reactModule.createElement(chatLandingTelemetryStateModule.Provider, {
-		value = reactModule.useMemo(function()
-			-- upvalues: var1 (ref), var2 (ref)
-			return { get = var1, set = var2 }
-		end, { var1, var2 })
+	return ReactModule.createElement(ChatLandingTelemetryStateModule.Provider, {
+		value = ReactModule.useMemo(function() --[[ Line: 113 ]]
+			-- upvalues: UseGetAndSetRefModuleResult (copy), UseGetAndSetRefModuleResult2 (copy)
+			return {
+				get = UseGetAndSetRefModuleResult,
+				set = UseGetAndSetRefModuleResult2
+			}
+		end, {
+			UseGetAndSetRefModuleResult,
+			UseGetAndSetRefModuleResult2
+		})
 	}, {
-		reactModule.createElement(chatLandingTelemetryLayerModule.Provider, { value = var3 }, {
-			reactModule.createElement(chatConversationTelemetryStateModule.Provider, {
-				value = reactModule.useMemo(function()
-					-- upvalues: var4 (ref), var5 (ref)
-					return { get = var4, set = var5 }
-				end, { var4, var5 })
+		ReactModule.createElement(ChatLandingTelemetryLayerModule.Provider, { value = UseResult }, {
+			ReactModule.createElement(ChatConversationTelemetryStateModule.Provider, {
+				value = ReactModule.useMemo(function() --[[ Line: 119 ]]
+					-- upvalues: UseGetAndSetRefModuleResult1 (copy), UseGetAndSetRefModuleResult2_1 (copy)
+					return {
+						get = UseGetAndSetRefModuleResult1,
+						set = UseGetAndSetRefModuleResult2_1
+					}
+				end, {
+					UseGetAndSetRefModuleResult1,
+					UseGetAndSetRefModuleResult2_1
+				})
 			}, {
-				reactModule.createElement(chatConversationTelemetryLayerModule.Provider, { value = var6 }, reactModule.createElement(chatDetailsTelemetryStateModule.Provider, {
-					value = reactModule.useMemo(function()
-						-- upvalues: var7 (ref), var8 (ref)
-						return { get = var7, set = var8 }
-					end, { var7, var8 })
-				}, reactModule.createElement(chatDetailsTelemetryLayerModule.Provider, {
-					value = reactModule.useCallback(function()
-						-- upvalues: var7 (ref)
-						local var9 = var7()
+				ReactModule.createElement(ChatConversationTelemetryLayerModule.Provider, { value = UseResult1 }, (ReactModule.createElement(ChatDetailsTelemetryStateModule.Provider, {
+					value = ReactModule.useMemo(function() --[[ Line: 107 ]]
+						-- upvalues: UseGetAndSetRefModuleResult3 (copy), UseGetAndSetRefModuleResult2_2 (copy)
+						return {
+							get = UseGetAndSetRefModuleResult3,
+							set = UseGetAndSetRefModuleResult2_2
+						}
+					end, {
+						UseGetAndSetRefModuleResult3,
+						UseGetAndSetRefModuleResult2_2
+					})
+				}, ReactModule.createElement(ChatDetailsTelemetryLayerModule.Provider, {
+					value = ReactModule.useCallback(function() --[[ Line: 100 ]]
+						-- upvalues: UseGetAndSetRefModuleResult3 (copy)
+						local UseGetAndSetRefModuleResultResult = UseGetAndSetRefModuleResult3()
 						
 						return {
-							participantsCount = var9.participantsCount,
-							isGroupOwner = var9.isGroupOwner
+							participantsCount = UseGetAndSetRefModuleResultResult.participantsCount,
+							isGroupOwner = UseGetAndSetRefModuleResultResult.isGroupOwner
 						}
-					end, { var7, var4 })
-				}, p1.children)))
+					end, {
+						UseGetAndSetRefModuleResult3,
+						UseGetAndSetRefModuleResult1
+					})
+				}, p1.children))))
 			})
 		})
 	})
 end
 
-local chatLandingStackNavigatorConnector = roactModule.Component:extend("ChatLandingStackNavigatorConnector")
-chatLandingStackNavigatorConnector.router = getChatLandingStackNavigatorModule(userGameSettingsService.ReducedMotion).router
+local ChatLandingStackNavigatorConnector = RoactModule.Component:extend("ChatLandingStackNavigatorConnector")
+ChatLandingStackNavigatorConnector.router = GetChatLandingStackNavigatorModule(UserGameSettings.ReducedMotion).router
 
-function chatLandingStackNavigatorConnector.init(p1)
-	-- upvalues: userGameSettingsService (ref), memoize (ref), getChatLandingStackNavigatorModule (ref), chatLandingStackNavigatorConnector (ref)
-	p1.state = {
-		shouldReduceMotion = userGameSettingsService.ReducedMotion
-	}
-	p1.getNavigator = memoize(function(p2)
-		-- upvalues: getChatLandingStackNavigatorModule (copy), chatLandingStackNavigatorConnector (copy)
-		local var1 = getChatLandingStackNavigatorModule(p2)
-		chatLandingStackNavigatorConnector.router = var1.router
+function ChatLandingStackNavigatorConnector.init(p1) --[[ Line: 156 ]]
+	-- upvalues: UserGameSettings (copy), MemoizeFunction (copy), GetChatLandingStackNavigatorModule (copy), ChatLandingStackNavigatorConnector (copy)
+	p1.state = { shouldReduceMotion = UserGameSettings.ReducedMotion }
+	p1.getNavigator = MemoizeFunction(function(p2) --[[ Line: 161 ]]
+		-- upvalues: GetChatLandingStackNavigatorModule (upval), ChatLandingStackNavigatorConnector (upval)
+		local ChatLandingStackNavigatorModule = GetChatLandingStackNavigatorModule(p2)
+		ChatLandingStackNavigatorConnector.router = ChatLandingStackNavigatorModule.router
 		
-		return var1
+		return ChatLandingStackNavigatorModule
 	end)
 	
-	function p1.updateSettings()
-		-- upvalues: p1 (ref), userGameSettingsService (copy)
-		p1:setState({
-			shouldReduceMotion = userGameSettingsService.ReducedMotion
-		})
+	function p1.updateSettings() --[[ Line: 168 ]]
+		-- upvalues: p1 (copy), UserGameSettings (upval)
+		p1:setState({ shouldReduceMotion = UserGameSettings.ReducedMotion })
 	end
 	
-	p1.reducedMotionConnection = userGameSettingsService:GetPropertyChangedSignal("ReducedMotion"):Connect(p1.updateSettings)
+	p1.reducedMotionConnection = UserGameSettings:GetPropertyChangedSignal("ReducedMotion"):Connect(p1.updateSettings)
 end
 
-function chatLandingStackNavigatorConnector.willUnmount(p1)
+function ChatLandingStackNavigatorConnector.willUnmount(p1) --[[ Line: 177 ]]
 	if p1.reducedMotionConnection then
 		p1.reducedMotionConnection:Disconnect()
 	end
 end
 
-local function _(p1)
-	local state = p1 and p1.state
+local function _(p1) --[[ Line: 183 | Named "getActiveRouteName" ]]
+	local State = p1 and p1.state
 	
-	if not state or not state.routes or not state.index then
+	if not State or not State.routes or not State.index then
 		return nil
 	end
-	local index = state.routes[state.index]
+	local Route = State.routes[State.index]
 	
-	if not index then
+	if not Route then
 		return nil
-	elseif index.routes and index.index then
-		local index_1 = index.routes[index.index]
+	elseif Route.routes and Route.index then
+		local Route1 = Route.routes[Route.index]
 		
-		return if index_1 then index_1.routeName else index.routeName
+		return Route1 and Route1.routeName or Route.routeName
+	else
+		return Route.routeName
 	end
-	return index.routeName
 end
 
-function chatLandingStackNavigatorConnector.render(p1)
-	-- upvalues: fFlagAppIaScrollAway (ref), appNavBarModule (ref), fFlagAppIaScrollAwayFixSocial (ref), roactNavigationModule (ref), fFlagAppChatPerfTrackingModule (ref), appChatPerfTrackerModule (ref), enumScreensModule (ref), roactModule (ref), systemMenuTopBarModule (ref), chatConversationTopBarModule (ref), chatLandingTopBarModule (ref), chatTopBarBaseModule (ref), reactModule (ref), squadAddFriendsIconButtonModule (ref), configureTopBarWithNavigationOptionsModule (ref), AppChatNavigatorTelemetryProviders (ref), providerModule (ref), fFlagAppChatConsoleFocusFixesModule (ref)
-	local var1 = fFlagAppIaScrollAway and (not (if fFlagAppIaScrollAway then p1.props.navigation.getScreenProps("isInExperience", false) else nil) and appNavBarModule.getScrollAwayEnabled())
+function ChatLandingStackNavigatorConnector.render(p1) --[[ Line: 200 ]]
+	-- upvalues: FFlagAppIaScrollAway (copy), AppNavBarModule (copy), FFlagAppIaScrollAwayFixSocial (copy), RoactNavigationModule (copy), FFlagAppChatPerfTrackingModule (copy), AppChatPerfTrackerModule (copy), EnumScreensModule (copy), RoactModule (copy), SystemMenuTopBarModule (copy), ChatConversationTopBarModule (copy), ChatLandingTopBarModule (copy), ChatTopBarBaseModule (copy), ReactModule (copy), SquadAddFriendsIconButtonModule (copy), ConfigureTopBarWithNavigationOptionsModule (copy), AppChatNavigatorTelemetryProviders (copy), ProviderModule (copy), FFlagAppChatConsoleFocusFixesModule (copy)
+	local IsInExperienceScreenProps = if FFlagAppIaScrollAway then p1.props.navigation.getScreenProps("isInExperience", false) else nil
+	local ScrollAwayEnabled = FFlagAppIaScrollAway and (not IsInExperienceScreenProps and AppNavBarModule.getScrollAwayEnabled())
 	
-	if fFlagAppIaScrollAwayFixSocial then
-		var1 = var1 and roactNavigationModule.getActiveChildNavigationOptions(p1.props.navigation).tabBarVisible
+	if FFlagAppIaScrollAwayFixSocial then
+		local ActiveChildNavigationOptions = RoactNavigationModule.getActiveChildNavigationOptions(p1.props.navigation)
+		ScrollAwayEnabled = ScrollAwayEnabled and ActiveChildNavigationOptions.tabBarVisible
 	end
-	local var2 = nil
+	local Element = nil
 	
-	if fFlagAppChatPerfTrackingModule then
-		appChatPerfTrackerModule.start(appChatPerfTrackerModule.Events.TopBarRenderInterval)
+	if FFlagAppChatPerfTrackingModule then
+		AppChatPerfTrackerModule.start(AppChatPerfTrackerModule.Events.TopBarRenderInterval)
 	end
-	local var3, index
-	local navigation = p1.props.navigation
-	local state = navigation and navigation.state
+	local Navigation = p1.props.navigation
+	local State = Navigation and Navigation.state
+	local RouteName = nil
 	
-	if state and state.routes and state.index then
-		index = state.routes[state.index]
+	if State and State.routes and State.index then
+		local Route = State.routes[State.index]
 		
-		if not index then
-			var3 = nil
-		elseif index.routes and index.index then
-			local index_1 = index.routes[index.index]
-			var3 = if index_1 then index_1.routeName else index.routeName
+		if Route then
+			if Route.routes and Route.index then
+				local Route1 = Route.routes[Route.index]
+				RouteName = Route1 and Route1.routeName or Route.routeName
+			else
+				RouteName = Route.routeName
+			end
 		else
-			var3 = index.routeName
+			RouteName = nil
 		end
 	else
-		var3 = nil
+		RouteName = nil
 	end
-	if var3 == enumScreensModule.CreateNewChat or var3 == enumScreensModule.EditChatMembers then
-		var2 = roactModule.createElement(systemMenuTopBarModule, { screenName = var3, navigation = p1.props.navigation })
-	elseif var3 == enumScreensModule.ChatConversation then
-		var2 = roactModule.createElement(chatConversationTopBarModule, {
-			screenName = enumScreensModule.ChatConversation,
+	if RouteName == EnumScreensModule.CreateNewChat or RouteName == EnumScreensModule.EditChatMembers then
+		Element = RoactModule.createElement(SystemMenuTopBarModule, { screenName = RouteName, navigation = p1.props.navigation })
+	elseif RouteName == EnumScreensModule.ChatConversation then
+		Element = RoactModule.createElement(ChatConversationTopBarModule, {
+			screenName = EnumScreensModule.ChatConversation,
 			navigation = p1.props.navigation
 		})
-	elseif var3 == enumScreensModule.ChatLanding then
-		var2 = roactModule.createElement(chatLandingTopBarModule, {
-			screenName = enumScreensModule.ChatLanding,
+	elseif RouteName == EnumScreensModule.ChatLanding then
+		Element = RoactModule.createElement(ChatLandingTopBarModule, {
+			screenName = EnumScreensModule.ChatLanding,
 			navigation = p1.props.navigation
 		})
-	elseif var3 == enumScreensModule.ChatDetails then
-		var2 = roactModule.createElement(chatTopBarBaseModule, {
-			screenName = enumScreensModule.ChatDetails,
+	elseif RouteName == EnumScreensModule.ChatDetails then
+		Element = RoactModule.createElement(ChatTopBarBaseModule, {
+			screenName = EnumScreensModule.ChatDetails,
 			navigation = p1.props.navigation
 		})
-	elseif var3 == enumScreensModule.SquadLobby then
-		var2 = roactModule.createElement(chatTopBarBaseModule, {
-			screenName = enumScreensModule.SquadLobby,
+	elseif RouteName == EnumScreensModule.SquadLobby then
+		Element = RoactModule.createElement(ChatTopBarBaseModule, {
+			screenName = EnumScreensModule.SquadLobby,
 			navigation = p1.props.navigation,
-			renderRight = function()
-				-- upvalues: reactModule (copy), squadAddFriendsIconButtonModule (copy), p1 (ref)
-				return reactModule.createElement(squadAddFriendsIconButtonModule, { navigation = p1.props.navigation })
+			renderRight = function() --[[ Line: 239 ]]
+				-- upvalues: ReactModule (upval), SquadAddFriendsIconButtonModule (upval), p1 (copy)
+				return ReactModule.createElement(SquadAddFriendsIconButtonModule, { navigation = p1.props.navigation })
 			end
 		})
-	elseif var3 == enumScreensModule.SquadInviteFriends then
-		var2 = roactModule.createElement(chatTopBarBaseModule, {
-			screenName = enumScreensModule.SquadInviteFriends,
+	elseif RouteName == EnumScreensModule.SquadInviteFriends then
+		Element = RoactModule.createElement(ChatTopBarBaseModule, {
+			screenName = EnumScreensModule.SquadInviteFriends,
 			navigation = p1.props.navigation
 		})
-	elseif var3 == enumScreensModule.QuickStartSquadInviteFriends then
-		var2 = roactModule.createElement(chatTopBarBaseModule, {
-			screenName = enumScreensModule.QuickStartSquadInviteFriends,
+	elseif RouteName == EnumScreensModule.QuickStartSquadInviteFriends then
+		Element = RoactModule.createElement(ChatTopBarBaseModule, {
+			screenName = EnumScreensModule.QuickStartSquadInviteFriends,
 			navigation = p1.props.navigation
 		})
 	end
-	var2 = var2 or configureTopBarWithNavigationOptionsModule(p1.props.navigation)
-	index = {}
-	
-	return roactModule.createElement("Frame", {
+	if not Element then
+		Element = ConfigureTopBarWithNavigationOptionsModule(p1.props.navigation)
+	end
+	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
 		Size = UDim2.new(1, 0, 1, 0),
-		ClipsDescendants = if fFlagAppChatConsoleFocusFixesModule then nil else true
+		ClipsDescendants = not FFlagAppChatConsoleFocusFixesModule or nil
 	}, {
-		ChatLandingStackNavigator = roactModule.createElement(AppChatNavigatorTelemetryProviders, index, {
-			layout = if fFlagAppIaScrollAway and var1 then nil else roactModule.createElement("UIListLayout", { SortOrder = Enum.SortOrder.LayoutOrder }),
-			topBar = var2,
-			content = roactModule.createElement(providerModule, {
+		ChatLandingStackNavigator = RoactModule.createElement(AppChatNavigatorTelemetryProviders, {}, {
+			layout = if FFlagAppIaScrollAway and ScrollAwayEnabled then nil else RoactModule.createElement("UIListLayout", { SortOrder = Enum.SortOrder.LayoutOrder }),
+			topBar = Element,
+			content = RoactModule.createElement(ProviderModule, {
 				value = {
 					left = p1.props.navigation.getScreenProps("appChatOuterPadding", 12),
 					right = p1.props.navigation.getScreenProps("appChatOuterPadding", 12)
 				}
 			}, {
-				navigatorFrame = roactModule.createElement("Frame", {
+				navigatorFrame = RoactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					BorderSizePixel = 0,
-					Size = if fFlagAppIaScrollAway and var1 then UDim2.fromScale(1, 1) else UDim2.new(1, 0, 1, -p1.props.navigation.getScreenProps("topBarHeight", 0))
+					Size = if FFlagAppIaScrollAway and ScrollAwayEnabled then UDim2.fromScale(1, 1) else UDim2.new(1, 0, 1, -p1.props.navigation.getScreenProps("topBarHeight", 0))
 				}, {
-					navigator = roactModule.createElement(p1.getNavigator(p1.state.shouldReduceMotion), p1.props)
+					navigator = RoactModule.createElement(p1.getNavigator(p1.state.shouldReduceMotion), p1.props)
 				})
 			})
 		})
 	})
 end
 
-local list = {
+local List = {
 	{
-		[enumScreensModule.ChatLandingStack] = chatLandingStackNavigatorConnector
+		[EnumScreensModule.ChatLandingStack] = ChatLandingStackNavigatorConnector
 	},
 	{
-		[genericDialogTypeModule.EditChatGroupNameDialog] = {
-			screen = editChatGroupNameDialogScreenModule,
+		[GenericDialogTypeModule.EditChatGroupNameDialog] = {
+			screen = EditChatGroupNameDialogScreenModule,
 			navigationOptions = { backButtonEnabled = true, overlayEnabled = true }
 		}
 	},
 	{
-		[genericDialogTypeModule.LeaveGroupDialog] = {
-			screen = makeDialogScreenTelemetryWrapperModule(leaveGroupDialogScreenModule),
+		[GenericDialogTypeModule.LeaveGroupDialog] = {
+			screen = MakeDialogScreenTelemetryWrapperModule(LeaveGroupDialogScreenModule),
 			navigationOptions = { backButtonEnabled = true, overlayEnabled = true }
 		}
 	},
 	{
-		[genericDialogTypeModule.ParticipantDialog] = {
-			screen = makeDialogScreenTelemetryWrapperModule(participantDialogScreenDeprecatedModule),
+		[GenericDialogTypeModule.ParticipantDialog] = {
+			screen = MakeDialogScreenTelemetryWrapperModule(ParticipantDialogScreenDeprecatedModule),
 			navigationOptions = { backButtonEnabled = true, overlayEnabled = true }
 		}
 	},
 	{
-		[genericDialogTypeModule.RemoveUserDialog] = {
-			screen = removeUserDialogScreenModule,
+		[GenericDialogTypeModule.RemoveUserDialog] = {
+			screen = RemoveUserDialogScreenModule,
 			navigationOptions = { backButtonEnabled = true, overlayEnabled = true }
 		}
 	},
 	{
-		[enumScreensModule.CreateUnfilteredChatPartialModal] = {
-			screen = createUnfilteredChatPartialModalScreenModule,
+		[EnumScreensModule.CreateUnfilteredChatPartialModal] = {
+			screen = CreateUnfilteredChatPartialModalScreenModule,
 			navigationOptions = { backButtonEnabled = true, overlayEnabled = true }
 		}
 	},
 	{
-		[enumScreensModule.LearnMorePartialModal] = {
-			screen = learnMorePartialModalScreenModule,
+		[EnumScreensModule.LearnMorePartialModal] = {
+			screen = LearnMorePartialModalScreenModule,
 			navigationOptions = { backButtonEnabled = true, overlayEnabled = true }
 		}
 	}
 }
-table.insert(list, {
-	[enumScreensModule.AppChatReportAbuse] = {
-		screen = abuseReportScreenModule,
+table.insert(List, {
+	[EnumScreensModule.AppChatReportAbuse] = {
+		screen = AbuseReportScreenModule,
 		navigationOptions = { backButtonEnabled = true, overlayEnabled = true }
 	}
 })
 
-if fFlagAppChatEnableTrustedFriendEntryPointModule then
-	table.insert(list, {
-		[enumScreensModule.AppChatTrustedContactsModal] = {
-			screen = trustedContactsModalScreenModule,
+if FFlagAppChatEnableTrustedFriendEntryPointModule then
+	table.insert(List, {
+		[EnumScreensModule.AppChatTrustedContactsModal] = {
+			screen = TrustedContactsModalScreenModule,
 			navigationOptions = { backButtonEnabled = true, overlayEnabled = true }
 		}
 	})
 end
-table.insert(list, {
-	[enumScreensModule.BlockingModal] = {
-		screen = blockingModal,
+table.insert(List, {
+	[EnumScreensModule.BlockingModal] = {
+		screen = BlockingModal,
 		navigationOptions = { backButtonEnabled = true, overlayEnabled = true }
 	}
 })
-table.insert(list, {
-	[enumScreensModule.MessageContextMenu] = {
-		screen = messageContextMenuScreenModule,
+table.insert(List, {
+	[EnumScreensModule.MessageContextMenu] = {
+		screen = MessageContextMenuScreenModule,
 		navigationOptions = { backButtonEnabled = true, overlayEnabled = true }
 	}
 })
 
-if getFFlagIsSquadEnabled() and getFFlagEnableCrossExpVoice() then
-	table.insert(list, {
-		[enumScreensModule.SquadVoiceReportAbuse] = {
-			screen = squadVoiceAbuseReportScreenModule,
+if GetFFlagIsSquadEnabledFunction() and GetFFlagEnableCrossExpVoiceFunction() then
+	table.insert(List, {
+		[EnumScreensModule.SquadVoiceReportAbuse] = {
+			screen = SquadVoiceAbuseReportScreenModule,
 			navigationOptions = { backButtonEnabled = true, overlayEnabled = true }
 		}
 	})
 end
-table.insert(list, {
-	[enumScreensModule.ConversationOverlay] = {
-		screen = conversationOverlayScreenModule,
+table.insert(List, {
+	[EnumScreensModule.ConversationOverlay] = {
+		screen = ConversationOverlayScreenModule,
 		navigationOptions = {
 			transparent = true,
 			overlayTransparency = 0.5,
@@ -355,10 +377,10 @@ table.insert(list, {
 	}
 })
 
-if fFlagAppChatEnableDoubleOptIn or fFlagAppChatConsolidateTrustedFriendsModalModule then
-	table.insert(list, {
-		[enumScreensModule.TrustedConnectionsUpsell] = {
-			screen = if fFlagAppChatConsolidateTrustedFriendsModalModule then trustedFriendsUpsellScreenModule else trustedConnectionsUpsellScreenModule,
+if FFlagAppChatEnableDoubleOptIn or FFlagAppChatConsolidateTrustedFriendsModalModule then
+	table.insert(List, {
+		[EnumScreensModule.TrustedConnectionsUpsell] = {
+			screen = if FFlagAppChatConsolidateTrustedFriendsModalModule then TrustedFriendsUpsellScreenModule else TrustedConnectionsUpsellScreenModule,
 			navigationOptions = {
 				transparent = true,
 				overlayTransparency = 0.5,
@@ -368,9 +390,9 @@ if fFlagAppChatEnableDoubleOptIn or fFlagAppChatConsolidateTrustedFriendsModalMo
 		}
 	})
 end
-table.insert(list, {
-	[enumScreensModule.GroupOSADialog] = {
-		screen = groupOSADialogScreenModule,
+table.insert(List, {
+	[EnumScreensModule.GroupOSADialog] = {
+		screen = GroupOSADialogScreenModule,
 		navigationOptions = {
 			transparent = true,
 			overlayTransparency = 0.5,
@@ -380,15 +402,15 @@ table.insert(list, {
 	}
 })
 
-if fFlagEnablePartyVoiceChangersInLua then
-	table.insert(list, {
-		[enumScreensModule.SquadVoiceChangers] = {
-			screen = squadVoiceChangerOverlayModule,
+if FFlagEnablePartyVoiceChangersInLua then
+	table.insert(List, {
+		[EnumScreensModule.SquadVoiceChangers] = {
+			screen = SquadVoiceChangerOverlayModule,
 			navigationOptions = { overlayEnabled = true, overlayTransparency = 0.5 }
 		}
 	})
 end
-return roactNavigationModule.createRobloxStackNavigator(list, {
-	defaultNavigationOptions = if fFlagAppChatDisableAbsorbInputSelectableModule then { absorbInputSelectable = false } else nil,
-	mode = roactNavigationModule.StackPresentationStyle.Overlay
+return RoactNavigationModule.createRobloxStackNavigator(List, {
+	defaultNavigationOptions = if FFlagAppChatDisableAbsorbInputSelectableModule then { absorbInputSelectable = false } else nil,
+	mode = RoactNavigationModule.StackPresentationStyle.Overlay
 })

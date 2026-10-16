@@ -1,116 +1,118 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local assetService = game:GetService("AssetService")
-local playersService = game:GetService("Players")
-local httpClientModule = require(parent.HttpClient)
-local promiseModule = require(parent.Promise)
-local getAssetUserAuthStore = require(parent.DataHydration.AssetUserAuth).getAssetUserAuthStore
-local debug = require(parent.DataHydration.CreatorAgentChat).debug
-local fetch = httpClientModule.fetch
-local asPromise = httpClientModule.asPromise
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local AssetService = game:GetService("AssetService")
+local Players = game:GetService("Players")
+local HttpClientModule = require(Parent.HttpClient)
+local PromiseModule = require(Parent.Promise)
+local GetAssetUserAuthStoreFunction = require(Parent.DataHydration.AssetUserAuth).getAssetUserAuthStore
+local Debug = require(Parent.DataHydration.CreatorAgentChat).debug
+local FetchFunction = HttpClientModule.fetch
+local AsPromiseFunction = HttpClientModule.asPromise
 
-local function cropToSquareAsync(p1)
-	-- upvalues: promiseModule (ref), assetService (ref)
-	return promiseModule.new(function(p2, p3)
-		-- upvalues: assetService (copy), p1 (ref)
-		local ok, status = pcall(function()
-			-- upvalues: assetService (copy), p1 (copy)
-			return assetService:CreateEditableImageAsync(Content.fromUri(p1))
+local function cropToSquareAsync(Url) --[[ Line: 19 ]]
+	-- upvalues: PromiseModule (copy), AssetService (copy)
+	return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ()) --[[ Line: 20 ]]
+		-- upvalues: AssetService (upval), Url (copy)
+		local Success, Result = pcall(function() --[[ Line: 21 ]]
+			-- upvalues: AssetService (upval), Url (upval)
+			return AssetService:CreateEditableImageAsync(Content.fromUri(Url))
 		end)
 		
-		if not ok or not status then
-			p3(`Failed to create EditableImage: {tostring(status)}`)
+		if not Success or not Result then
+			Callback(`Failed to create EditableImage: {tostring(Result)}`)
 			
 			return
 		end
-		local size = status.Size
-		local x = size.X
-		local y = size.Y
-		local minValue = math.min(x, y)
-		local var1 = status:ReadPixelsBuffer(Vector2.new(math.floor((x - minValue) / 2), math.floor((y - minValue) / 2)), Vector2.new(minValue, minValue))
-		status:Destroy()
-		local var2 = minValue * minValue * 4
-		local var3 = var2 + 54
-		local buff = buffer.create(var3)
-		buffer.writeu8(buff, 0, 66)
-		buffer.writeu8(buff, 1, 77)
-		buffer.writeu32(buff, 2, var3)
-		buffer.writeu32(buff, 6, 0)
-		buffer.writeu32(buff, 10, 54)
-		buffer.writeu32(buff, 14, 40)
-		buffer.writei32(buff, 18, minValue)
-		buffer.writei32(buff, 22, -minValue)
-		buffer.writeu16(buff, 26, 1)
-		buffer.writeu16(buff, 28, 32)
-		buffer.writeu32(buff, 30, 0)
-		buffer.writeu32(buff, 34, var2)
-		buffer.writeu32(buff, 38, 2835)
-		buffer.writeu32(buff, 42, 2835)
-		buffer.writeu32(buff, 46, 0)
-		buffer.writeu32(buff, 50, 0)
+		local Size = Result.Size
+		local X: number = Size.X
+		local Y: number = Size.Y
+		local Smallest = math.min(X, Y)
+		local PixelsBuffer = Result:ReadPixelsBuffer(Vector2.new(math.floor((X - Smallest) / 2), (math.floor((Y - Smallest) / 2))), Vector2.new(Smallest, Smallest))
+		Result:Destroy()
+		local Value1 = Smallest * Smallest * 4
+		local Value = Value1 + 54
+		local Buf = buffer.create(Value)
+		buffer.writeu8(Buf, 0, 66)
+		buffer.writeu8(Buf, 1, 77)
+		buffer.writeu32(Buf, 2, Value)
+		buffer.writeu32(Buf, 6, 0)
+		buffer.writeu32(Buf, 10, 54)
+		buffer.writeu32(Buf, 14, 40)
+		buffer.writei32(Buf, 18, Smallest)
+		buffer.writei32(Buf, 22, -Smallest)
+		buffer.writeu16(Buf, 26, 1)
+		buffer.writeu16(Buf, 28, 32)
+		buffer.writeu32(Buf, 30, 0)
+		buffer.writeu32(Buf, 34, Value1)
+		buffer.writeu32(Buf, 38, 2835)
+		buffer.writeu32(Buf, 42, 2835)
+		buffer.writeu32(Buf, 46, 0)
+		buffer.writeu32(Buf, 50, 0)
 		
-		for i = 0, minValue * minValue - 1 do
-			local var4 = i * 4
-			local var5 = i * 4 + 54
-			local value = buffer.readu8(var1, var4)
-			local value_1 = buffer.readu8(var1, var4 + 1)
-			local value_2 = buffer.readu8(var1, var4 + 3)
-			buffer.writeu8(buff, var5, buffer.readu8(var1, var4 + 2))
-			buffer.writeu8(buff, var5 + 1, value_1)
-			buffer.writeu8(buff, var5 + 2, value)
-			buffer.writeu8(buff, var5 + 3, value_2)
+		for i = 0, Smallest * Smallest - 1 do
+			local Offset = i * 4
+			local Offset1 = i * 4 + 54
+			local ByteValue = buffer.readu8(PixelsBuffer, Offset)
+			local ByteValue1 = buffer.readu8(PixelsBuffer, Offset + 1)
+			local ByteValue2 = buffer.readu8(PixelsBuffer, Offset + 3)
+			buffer.writeu8(Buf, Offset1, (buffer.readu8(PixelsBuffer, Offset + 2)))
+			buffer.writeu8(Buf, Offset1 + 1, ByteValue1)
+			buffer.writeu8(Buf, Offset1 + 2, ByteValue)
+			buffer.writeu8(Buf, Offset1 + 3, ByteValue2)
 		end
-		p2(buffer.tostring(buff))
+		Callback1(buffer.tostring(Buf))
 	end)
 end
 
-return function(value, p2, p3, p4)
-	-- upvalues: playersService (ref), promiseModule (ref), cropToSquareAsync (ref), fetch (ref), asPromise (ref), debug (ref), getAssetUserAuthStore (ref)
-	local localPlayer = playersService.LocalPlayer
+return function(Url, p1, CropSquare, p2) --[[ Line: 87 | Named "createImageAssetAsync" ]]
+	-- upvalues: Players (copy), PromiseModule (copy), cropToSquareAsync (copy), FetchFunction (copy), AsPromiseFunction (copy), Debug (copy), GetAssetUserAuthStoreFunction (copy)
+	local LocalPlayer = Players.LocalPlayer
 	
-	if localPlayer then
-		local function getImageContent()
-			-- upvalues: p3 (ref), cropToSquareAsync (copy), value (ref), fetch (copy), asPromise (copy)
-			return if p3 then cropToSquareAsync(value) else asPromise(fetch({
+	if LocalPlayer then
+		local function getImageContent() --[[ Line: 98 ]]
+			-- upvalues: CropSquare (copy), cropToSquareAsync (upval), Url (copy), FetchFunction (upval), AsPromiseFunction (upval)
+			return if CropSquare then cropToSquareAsync(Url) else AsPromiseFunction((FetchFunction({
 				method = "GET",
 				analyticsKey = "build-experience.download-thumbnail",
 				responseEncoding = "protobuf",
-				url = value,
-				decode = function(p5)
-					return p5
+				url = Url,
+				decode = function(p3) --[[ Line: 107 ]]
+					return p3
 				end
-			})):andThen(function(p5)
-				return buffer.tostring(p5)
+			}))):andThen(function(Buf): string --[[ Line: 111 ]]
+				return buffer.tostring(Buf)
 			end)
 		end
 		
-		debug.log("info", "create_image_asset starting", { cropSquare = p3 })
+		Debug.log("info", "create_image_asset starting", { cropSquare = CropSquare })
 		
-		return getImageContent():andThen(function(p5)
-			-- upvalues: p3 (ref), getAssetUserAuthStore (copy), p2 (ref), p4 (ref), localPlayer (ref)
-			local var1 = if p3 then "image/bmp" else "image/png"
-			local var2 = getAssetUserAuthStore()
-			local t = { displayName = p2 or "Game Thumbnail" }
+		return getImageContent():andThen(function(Result) --[[ Line: 120 ]]
+			-- upvalues: CropSquare (copy), GetAssetUserAuthStoreFunction (upval), p1 (copy), p2 (copy), LocalPlayer (copy)
+			local Bmp: string = if CropSquare then "image/bmp" else "image/png"
+			local AssetUserAuthStore = GetAssetUserAuthStoreFunction()
+			local config = { displayName = p1 or "Game Thumbnail" }
 			
-			if p4 and p4.creatorType == "Group" then
-				t.groupId = tostring(p4.creatorTargetId)
+			if p2 and p2.creatorType == "Group" then
+				config.groupId = tostring(p2.creatorTargetId)
 			else
-				t.userId = tostring(localPlayer.UserId)
+				config.userId = tostring(LocalPlayer.UserId)
 			end
-			return var2.createImageAsset(p5, var1, t)
-		end):andThen(function(p5)
-			-- upvalues: getAssetUserAuthStore (copy)
-			return getAssetUserAuthStore().pollUntilDone(p5)
-		end):andThen(function(p5)
-			-- upvalues: promiseModule (copy), debug (copy)
-			if typeof(p5) == "table" and p5.status == "timed_out" then
-				return promiseModule.reject("Operation did not complete in time")
+			return AssetUserAuthStore.createImageAsset(Result, Bmp, config)
+		end):andThen(function(Result) --[[ Line: 133 ]]
+			-- upvalues: GetAssetUserAuthStoreFunction (upval)
+			return GetAssetUserAuthStoreFunction().pollUntilDone(Result)
+		end):andThen(function(Result) --[[ Line: 137 ]]
+			-- upvalues: PromiseModule (upval), Debug (upval)
+			if typeof(Result) == "table" and Result.status == "timed_out" then
+				return PromiseModule.reject("Operation did not complete in time")
+			else
+				local Operation = if Result.status == "done" then Result.operation else Result
+				local Response = Operation.response or Operation
+				Debug.log("info", "create_image_asset succeeded", { assetId = Response.assetId })
+				
+				return { assetId = Response.assetId }
 			end
-			local var1 = if p5.status == "done" then p5.operation else p5
-			local response = var1.response or var1
-			debug.log("info", "create_image_asset succeeded", { assetId = response.assetId })
-			
-			return { assetId = response.assetId }
 		end)
+	else
+		return PromiseModule.reject("No local player")
 	end
-	return promiseModule.reject("No local player")
 end

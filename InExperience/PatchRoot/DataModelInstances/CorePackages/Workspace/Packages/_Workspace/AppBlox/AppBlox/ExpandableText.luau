@@ -1,202 +1,211 @@
-﻿local parent = script:FindFirstAncestor("AppBlox").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local text = foundationModule.Text
-local view = foundationModule.View
-local controlState = foundationModule.Enums.ControlState
-local useProperty = require(parent.GuiObjectUtils).useProperty
-local useTokens = foundationModule.Hooks.useTokens
-local signalsReactModule = require(parent.SignalsReact)
-local textSizeModule = require(parent.TextSize)
-local cryoModule = require(parent.Cryo)
-local luaAppExpandableTextNewLineStrip = game:DefineFastFlag("LuaAppExpandableTextNewLineStrip", true)
-local t = { Selectable = true }
+﻿local Parent = script:FindFirstAncestor("AppBlox").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local ControlState = FoundationModule.Enums.ControlState
+local UsePropertyFunction = require(Parent.GuiObjectUtils).useProperty
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local SignalsReactModule = require(Parent.SignalsReact)
+local TextSizeModule = require(Parent.TextSize)
+local CryoModule = require(Parent.Cryo)
+local LuaAppExpandableTextNewLineStrip = game:DefineFastFlag("LuaAppExpandableTextNewLineStrip", true)
+local config = { Selectable = true }
 
-local var1 = function() end
+local function v11() --[[ Line: 20 ]] end
 
-local t_1 = {
-	affordance = foundationModule.Enums.StateLayerAffordance.None
+local config1 = {
+	affordance = FoundationModule.Enums.StateLayerAffordance.None
 }
 
-local function getCompactLineMeasureText(p1)
-	if p1 <= 0 then
+local function getCompactLineMeasureText(CompactNumberOfLines: number): string --[[ Line: 48 ]]
+	if CompactNumberOfLines <= 0 then
 		return ""
 	end
-	local t = {}
+	local List = {}
 	
-	for _ = 1, p1 do
-		table.insert(t, "A")
+	for _ = 1, CompactNumberOfLines do
+		table.insert(List, "A")
 	end
-	return table.concat(t, "\n")
+	return (table.concat(List, "\n"))
 end
 
-local function _(p2, p3, p4, p5)
-	local var2 = if p3 > 0 and p2 > 0 then p2 / p3 else 0
+local function _(p1: number, NewFloored: number, p2: number, p3): number --[[ Line: 63 | Named "calculateBlankLineAdjustedHeight" ]]
+	local v1 = if NewFloored > 0 and p1 > 0 then p1 / NewFloored else 0
 	
-	if var2 > 0 and p4 > 0 and math.floor(p4 / var2 + 0.5) + 1 == p3 then
-		local var3 = p2 + var2
+	if v1 > 0 and p2 > 0 and math.floor(p2 / v1 + 0.5) + 1 == NewFloored then
+		local Value = p1 + v1
 		
-		return if var3 < p5 then math.ceil(var3) else p2
+		if Value < p3 then
+			return (math.ceil(Value))
+		end
 	end
+	return p1
 end
 
-return reactModule.memo(function(p2)
-	-- upvalues: luaAppExpandableTextNewLineStrip (ref), signalsReactModule (ref), textSizeModule (ref), useTokens (ref), cryoModule (ref), reactModule (ref), controlState (ref), useLocalization (ref), useProperty (ref), view (ref), t (ref), var1 (ref), t_1 (ref), text (ref), getCompactLineMeasureText (ref)
-	local var2
-	local var3 = if luaAppExpandableTextNewLineStrip then (p2.text or ""):gsub("[\r\n]+$", "") else p2.text
-	local var4 = signalsReactModule.useSignalState(function(p3)
-		-- upvalues: textSizeModule (copy)
-		return textSizeModule.getTextSizeStore(p3).getTextSizeOffset(p3)
+return ReactModule.memo(function(Frame) --[[ Line: 83 | Named "ExpandableText" ]]
+	-- upvalues: LuaAppExpandableTextNewLineStrip (copy), SignalsReactModule (copy), TextSizeModule (copy), UseTokensFunction (copy), CryoModule (copy), ReactModule (copy), ControlState (copy), UseLocalizationFunction (copy), UsePropertyFunction (copy), View (copy), config (copy), v11 (copy), config1 (copy), Text (copy), getCompactLineMeasureText (copy)
+	local Text1 = if LuaAppExpandableTextNewLineStrip then (Frame.text or ""):gsub("[\r\n]+$", "") else Frame.text
+	local UseSignalStateResult = SignalsReactModule.useSignalState(function(p1) --[[ Line: 87 ]]
+		-- upvalues: TextSizeModule (upval)
+		return TextSizeModule.getTextSizeStore(p1).getTextSizeOffset(p1)
 	end)
-	local var5 = useTokens()
-	local fontStyle = p2.fontStyle or var5.Typography.CaptionLarge
-	local var6 = cryoModule.Dictionary.join(fontStyle, { FontSize = fontStyle.FontSize + var4 })
-	local textStyle = p2.textStyle or var5.Color.Content.Default
-	local compactNumberOfLines = p2.compactNumberOfLines or 3
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local pressedTextStyle = p2.pressedTextStyle or var5.Color.Content.Muted
-	local var7, var8 = reactModule.useBinding(controlState.Default)
-	var7 = var7:map(function(p3)
-		-- upvalues: controlState (copy), pressedTextStyle (ref), textStyle (ref)
-		return if p3 == controlState.Pressed or p3 == controlState.SelectedPressed then pressedTextStyle else textStyle
+	local UseTokensResult = UseTokensFunction()
+	local FontStyle = Frame.fontStyle or UseTokensResult.Typography.CaptionLarge
+	local JoinResult = CryoModule.Dictionary.join(FontStyle, { FontSize = FontStyle.FontSize + UseSignalStateResult })
+	local TextStyle = Frame.textStyle or UseTokensResult.Color.Content.Default
+	local CompactNumberOfLines = Frame.compactNumberOfLines or 3
+	local PressedTextStyle = Frame.pressedTextStyle or UseTokensResult.Color.Content.Muted
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(ControlState.Default)
+	local MapResult = UseBindingResult:map(function(Pressed) --[[ Line: 104 ]]
+		-- upvalues: ControlState (upval), PressedTextStyle (copy), TextStyle (copy)
+		return if Pressed == ControlState.Pressed or Pressed == ControlState.SelectedPressed then PressedTextStyle else TextStyle
 	end)
-	local var9, var10 = reactModule.useState(p2.expandedInitially or false)
-	local var11 = reactModule.useCallback(function()
-		-- upvalues: var10 (ref), p2 (ref)
-		var10(function(p3)
-			-- upvalues: p2 (copy)
-			local var12 = not p3
+	local UseStateResult, UseStateResult2 = ReactModule.useState(Frame.expandedInitially or false)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 113 ]]
+		-- upvalues: UseStateResult2 (copy), Frame (copy)
+		UseStateResult2(function(p1): boolean --[[ Line: 114 ]]
+			-- upvalues: Frame (upval)
+			local NoP8 = not p1
 			
-			if p2.onExpandChanged then
-				p2.onExpandChanged(var12)
+			if Frame.onExpandChanged then
+				Frame.onExpandChanged(NoP8)
 			end
-			return var12
+			return NoP8
 		end)
-	end, { p2.onExpandChanged })
-	local var12 = useLocalization({
+	end, { Frame.onExpandChanged })
+	local UseLocalizationResult = UseLocalizationFunction({
 		moreText = "CommonUI.Features.Action.MoreLowercase",
 		lessText = "CommonUI.Features.Action.LessLowercase"
 	})
-	local var13 = reactModule.useRef(nil)
-	local var14 = useProperty(var13, "AbsoluteSize")
-	local var15 = reactModule.useRef(nil)
-	local var16 = useProperty(var15, "AbsoluteSize")
-	local var17 = reactModule.useRef(nil)
-	local var18 = useProperty(var17, "AbsoluteSize")
-	local var19 = var14 and var14.X > 0
-	local var20 = if var18 then var18.Y else 0
-	local var21 = if var16 then var16.Y else 0
-	local var22 = var21
-	local _ = nil
-	local _ = nil
-	local var23 = reactModule.useRef(nil)
-	var23 = useProperty(var23, "AbsoluteSize")
-	local var24 = reactModule.useMemo(function()
-		-- upvalues: p2 (ref), var3 (ref)
-		if not p2.avoidBlankLineClip then
+	local UseRefResult = ReactModule.useRef(nil)
+	local AbsoluteSize = UsePropertyFunction(UseRefResult, "AbsoluteSize")
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local AbsoluteSize1 = UsePropertyFunction(UseRefResult1, "AbsoluteSize")
+	local UseRefResult2 = ReactModule.useRef(nil)
+	local AbsoluteSize2 = UsePropertyFunction(UseRefResult2, "AbsoluteSize")
+	local IsXAbove: boolean = AbsoluteSize and AbsoluteSize.X > 0
+	local Y = AbsoluteSize2 and AbsoluteSize2.Y or 0
+	local Y1 = AbsoluteSize1 and AbsoluteSize1.Y or 0
+	local Ceiled: number = Y1
+	local UseRefResult3 = ReactModule.useRef(nil)
+	local AbsoluteSize3 = UsePropertyFunction(UseRefResult3, "AbsoluteSize")
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 150 ]]
+		-- upvalues: Frame (copy), Text1 (copy)
+		if Frame.avoidBlankLineClip then
+			local v1: number = Text1:find("\n\n")
+			
+			return if v1 then Text1:sub(1, v1 - 1) else nil
+		else
 			return nil
 		end
-		local var25 = var3:find("\n\n")
+	end, { Text1, Frame.avoidBlankLineClip })
+	repeat
+		if not UseMemoResult then break end
+		local Y2 = AbsoluteSize3 and AbsoluteSize3.Y or 0
+		local YRatio = if CompactNumberOfLines > 0 and Y1 > 0 then Y1 / CompactNumberOfLines else 0
 		
-		return if var25 then var3:sub(1, var25 - 1) else nil
-	end, { var3, p2.avoidBlankLineClip })
-	
-	if var24 then
-		var24 = if var23 then var23.Y else 0
-		var2 = if compactNumberOfLines > 0 and var21 > 0 then var21 / compactNumberOfLines else 0
-		
-		if var2 > 0 and var24 > 0 and math.floor(var24 / var2 + 0.5) + 1 == compactNumberOfLines then
-			local var25 = var21 + var2
-			var22 = if var25 < var20 then math.ceil(var25) else var21
+		if YRatio > 0 and Y2 > 0 and math.floor(Y2 / YRatio + 0.5) + 1 == CompactNumberOfLines then
+			local Value = Y1 + YRatio
+			
+			if Value < Y then
+				Ceiled = math.ceil(Value)
+				break
+			end
 		end
-	end
-	var24 = not p2.expandedInitially and var22 + 1 < var20
-	var2 = var9 or not var24
-	local var26 = var20
-	local lessText = var12.lessText
+		Ceiled = Y1
+	until true
+	local IsCeiledBelow: boolean = not Frame.expandedInitially and Ceiled + 1 < Y
+	local UseStateResult1 = UseStateResult or not IsCeiledBelow
+	local Value1: number = Y
+	local LessText = UseLocalizationResult.lessText
 	
-	if var24 and not var9 then
-		var26 = var22
-		lessText = var12.moreText
+	if IsCeiledBelow and not UseStateResult then
+		Value1 = Ceiled
+		LessText = UseLocalizationResult.moreText
 	end
-	return if var3 == "" then nil else reactModule.createElement(view, {
-		tag = "col size-full-0 auto-y",
-		LayoutOrder = p2.LayoutOrder,
-		selection = if p2.selectable ~= false then nil else t,
-		onActivated = if p2.selectable ~= false then nil else var1,
-		stateLayer = if p2.selectable ~= false then nil else t_1,
-		ref = var13
-	}, {
-		TextContent = if var19 and (var2 or var26 > 0) then reactModule.createElement(text, cryoModule.Dictionary.join({
-			LayoutOrder = 1,
-			TextWrapped = true,
-			Text = var3,
-			fontStyle = var6,
-			textStyle = if var24 then var7 else textStyle,
-			TextXAlignment = Enum.TextXAlignment.Left,
-			TextYAlignment = Enum.TextYAlignment.Top,
-			ClipsDescendants = if var24 then not var9 else nil,
-			onActivated = if var24 then var11 else nil,
-			onStateChanged = if var24 then var8 else nil,
-			selection = if var24 then { Selectable = false } else nil,
-			stateLayer = if var24 then t_1 else nil
-		}, if var2 then {
+	if Text1 == "" then
+		return nil
+	else
+		local Config = if UseStateResult1 then {
 			Size = UDim2.new(1, 0, 0, 0),
 			AutomaticSize = Enum.AutomaticSize.Y
-		} else { Size = UDim2.new(1, 0, 0, math.ceil(var26)) })) else nil,
-		ToggleExpandButton = if var24 then reactModule.createElement(text, {
-			LayoutOrder = 2,
-			tag = "auto-xy radius-small",
-			RichText = true,
-			Text = `<u><b>{lessText}</b></u>`,
-			fontStyle = var6,
-			textStyle = var5.Color.Content.Emphasis,
-			onActivated = var11
-		}) else nil,
-		CompactTextMeasure = reactModule.createElement(text, {
-			Visible = false,
-			IgnoreLayout = true,
-			LayoutOrder = 3,
-			TextWrapped = true,
-			ref = var15,
-			Size = UDim2.new(1, 0, 0, 0),
-			AutomaticSize = Enum.AutomaticSize.Y,
-			Text = getCompactLineMeasureText(compactNumberOfLines),
-			fontStyle = var6,
-			textStyle = textStyle,
-			TextXAlignment = Enum.TextXAlignment.Left,
-			TextYAlignment = Enum.TextYAlignment.Top
-		}),
-		FullTextMeasure = reactModule.createElement(text, {
-			Visible = false,
-			IgnoreLayout = true,
-			LayoutOrder = 4,
-			TextWrapped = true,
-			ref = var17,
-			Size = UDim2.new(1, 0, 0, 0),
-			AutomaticSize = Enum.AutomaticSize.Y,
-			Text = var3,
-			fontStyle = var6,
-			textStyle = textStyle,
-			TextXAlignment = Enum.TextXAlignment.Left,
-			TextYAlignment = Enum.TextYAlignment.Top
-		}),
-		PrefixMeasure = if var24 then reactModule.createElement(text, {
-			Visible = false,
-			IgnoreLayout = true,
-			LayoutOrder = 5,
-			textColor = nil,
-			TextWrapped = true,
-			ref = var23,
-			Size = UDim2.new(1, 0, 0, 0),
-			AutomaticSize = Enum.AutomaticSize.Y,
-			Text = var24,
-			fontStyle = var6,
-			TextXAlignment = Enum.TextXAlignment.Left,
-			TextYAlignment = Enum.TextYAlignment.Top
-		}) else nil
-	})
+		} else { Size = UDim2.new(1, 0, 0, (math.ceil(Value1))) }
+		
+		return ReactModule.createElement(View, {
+			tag = "col size-full-0 auto-y",
+			LayoutOrder = Frame.LayoutOrder,
+			selection = if Frame.selectable == false then nil else config,
+			onActivated = if Frame.selectable == false then nil else v11,
+			stateLayer = if Frame.selectable == false then nil else config1,
+			ref = UseRefResult
+		}, {
+			TextContent = if IsXAbove and (UseStateResult1 or Value1 > 0) then ReactModule.createElement(Text, CryoModule.Dictionary.join({
+				LayoutOrder = 1,
+				TextWrapped = true,
+				Text = Text1,
+				fontStyle = JoinResult,
+				textStyle = if IsCeiledBelow then MapResult else TextStyle,
+				TextXAlignment = Enum.TextXAlignment.Left,
+				TextYAlignment = Enum.TextYAlignment.Top,
+				ClipsDescendants = if IsCeiledBelow then not UseStateResult else nil,
+				onActivated = if IsCeiledBelow then UseResult else nil,
+				onStateChanged = if IsCeiledBelow then UseBindingResult2 else nil,
+				selection = if IsCeiledBelow then { Selectable = false } else nil,
+				stateLayer = if IsCeiledBelow then config1 else nil
+			}, Config)) else nil,
+			ToggleExpandButton = if IsCeiledBelow then ReactModule.createElement(Text, {
+				LayoutOrder = 2,
+				tag = "auto-xy radius-small",
+				RichText = true,
+				Text = `<u><b>{LessText}</b></u>`,
+				fontStyle = JoinResult,
+				textStyle = UseTokensResult.Color.Content.Emphasis,
+				onActivated = UseResult
+			}) else nil,
+			CompactTextMeasure = ReactModule.createElement(Text, {
+				Visible = false,
+				IgnoreLayout = true,
+				LayoutOrder = 3,
+				TextWrapped = true,
+				ref = UseRefResult1,
+				Size = UDim2.new(1, 0, 0, 0),
+				AutomaticSize = Enum.AutomaticSize.Y,
+				Text = getCompactLineMeasureText(CompactNumberOfLines),
+				fontStyle = JoinResult,
+				textStyle = TextStyle,
+				TextXAlignment = Enum.TextXAlignment.Left,
+				TextYAlignment = Enum.TextYAlignment.Top
+			}),
+			FullTextMeasure = ReactModule.createElement(Text, {
+				Visible = false,
+				IgnoreLayout = true,
+				LayoutOrder = 4,
+				TextWrapped = true,
+				ref = UseRefResult2,
+				Size = UDim2.new(1, 0, 0, 0),
+				AutomaticSize = Enum.AutomaticSize.Y,
+				Text = Text1,
+				fontStyle = JoinResult,
+				textStyle = TextStyle,
+				TextXAlignment = Enum.TextXAlignment.Left,
+				TextYAlignment = Enum.TextYAlignment.Top
+			}),
+			PrefixMeasure = if UseMemoResult then ReactModule.createElement(Text, {
+				Visible = false,
+				IgnoreLayout = true,
+				LayoutOrder = 5,
+				textColor = nil,
+				TextWrapped = true,
+				ref = UseRefResult3,
+				Size = UDim2.new(1, 0, 0, 0),
+				AutomaticSize = Enum.AutomaticSize.Y,
+				Text = UseMemoResult,
+				fontStyle = JoinResult,
+				TextXAlignment = Enum.TextXAlignment.Left,
+				TextYAlignment = Enum.TextYAlignment.Top
+			}) else nil
+		})
+	end
 end)

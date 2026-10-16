@@ -1,52 +1,52 @@
-﻿local sessionService = game:GetService("SessionService")
-local avatarExperienceAnalytics = script:FindFirstAncestor("AvatarExperienceAnalytics")
-local parent = avatarExperienceAnalytics.Parent
-local cryoModule = require(parent.Cryo)
-local unifiedEventLogConstantsModule = require(script.Parent.UnifiedEventLogConstants)
-local unifiedEventLoggingUtilsModule = require(avatarExperienceAnalytics.Utils.UnifiedEventLoggingUtils)
-local sendUnifiedEventLogModule = require(script.Parent.sendUnifiedEventLog)
-local unifiedEventPageStoreModule = require(script.Parent.Store.UnifiedEventPageStore)
-local isRunningInStudio = require(parent.AppCommonLib).isRunningInStudio
-local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
-local fFlagAXMISEnableMultiShoppingUnifiedEvents = avatarExperienceFlagsModule.FFlagAXMISEnableMultiShoppingUnifiedEvents
-local fFlagAXSendUnifiedEventLogWithInstance = avatarExperienceFlagsModule.FFlagAXSendUnifiedEventLogWithInstance
-local fFlagAXUnifiedEventPageContext = avatarExperienceFlagsModule.FFlagAXUnifiedEventPageContext
-local fFlagAXUnifiedEventCounters = avatarExperienceFlagsModule.FFlagAXUnifiedEventCounters
-local fFlagAllowCustomUnifiedEventFilterModule = require(script.Parent.FFlagAllowCustomUnifiedEventFilter)
+﻿local SessionService = game:GetService("SessionService")
+local AvatarExperienceAnalytics = script:FindFirstAncestor("AvatarExperienceAnalytics")
+local Parent = AvatarExperienceAnalytics.Parent
+local CryoModule = require(Parent.Cryo)
+local UnifiedEventLogConstantsModule = require(script.Parent.UnifiedEventLogConstants)
+local UnifiedEventLoggingUtilsModule = require(AvatarExperienceAnalytics.Utils.UnifiedEventLoggingUtils)
+local SendUnifiedEventLogModule = require(script.Parent.sendUnifiedEventLog)
+local UnifiedEventPageStoreModule = require(script.Parent.Store.UnifiedEventPageStore)
+local IsRunningInStudioFunction = require(Parent.AppCommonLib).isRunningInStudio
+local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
+local FFlagAXMISEnableMultiShoppingUnifiedEvents = AvatarExperienceFlagsModule.FFlagAXMISEnableMultiShoppingUnifiedEvents
+local FFlagAXSendUnifiedEventLogWithInstance = AvatarExperienceFlagsModule.FFlagAXSendUnifiedEventLogWithInstance
+local FFlagAXUnifiedEventPageContext = AvatarExperienceFlagsModule.FFlagAXUnifiedEventPageContext
+local FFlagAXUnifiedEventCounters = AvatarExperienceFlagsModule.FFlagAXUnifiedEventCounters
+local FFlagAllowCustomUnifiedEventFilterModule = require(script.Parent.FFlagAllowCustomUnifiedEventFilter)
 local AXUnifiedEventFilterModule = require(script.Parent.AXUnifiedEventFilter)
 
-return function(p1, p2, p3)
-	-- upvalues: sessionService (ref), unifiedEventLogConstantsModule (ref), fFlagAXUnifiedEventPageContext (ref), isRunningInStudio (ref), fFlagAXMISEnableMultiShoppingUnifiedEvents (ref), unifiedEventLoggingUtilsModule (ref), cryoModule (ref), unifiedEventPageStoreModule (ref), fFlagAllowCustomUnifiedEventFilterModule (ref), AXUnifiedEventFilterModule (ref), sendUnifiedEventLogModule (ref), fFlagAXSendUnifiedEventLogWithInstance (ref), fFlagAXUnifiedEventCounters (ref)
-	local session_tag_nameAttribute = p1:GetAttribute(unifiedEventLogConstantsModule.SESSION_TAG_NAME)
+return function(Object, p1, p2) --[[ Line: 30 ]]
+	-- upvalues: SessionService (copy), UnifiedEventLogConstantsModule (copy), FFlagAXUnifiedEventPageContext (copy), IsRunningInStudioFunction (copy), FFlagAXMISEnableMultiShoppingUnifiedEvents (copy), UnifiedEventLoggingUtilsModule (copy), CryoModule (copy), UnifiedEventPageStoreModule (copy), FFlagAllowCustomUnifiedEventFilterModule (copy), AXUnifiedEventFilterModule (copy), SendUnifiedEventLogModule (copy), FFlagAXSendUnifiedEventLogWithInstance (copy), FFlagAXUnifiedEventCounters (copy)
+	local Level2aSessionTag = SessionService:GetSessionTag("level2a")
+	local Attribute = Object:GetAttribute(UnifiedEventLogConstantsModule.SESSION_TAG_NAME)
 	
-	if not fFlagAXUnifiedEventPageContext and sessionService:GetSessionTag("level2a") ~= session_tag_nameAttribute and not isRunningInStudio() then return end
-	p3 = p3 or {}
-	local t = {}
-	local attributes = p1:GetAttributes()
+	if not FFlagAXUnifiedEventPageContext and Level2aSessionTag ~= Attribute and not IsRunningInStudioFunction() then return end
+	local P2 = p2 or {}
+	local JoinResult = {}
+	local Attributes = Object:GetAttributes()
 	
-	if fFlagAXMISEnableMultiShoppingUnifiedEvents then
-		t = unifiedEventLoggingUtilsModule.getFieldsToSendFromInstanceAttributes(attributes)
+	if FFlagAXMISEnableMultiShoppingUnifiedEvents then
+		JoinResult = UnifiedEventLoggingUtilsModule.getFieldsToSendFromInstanceAttributes(Attributes)
 	else
-		for i, v in attributes do
-			if unifiedEventLoggingUtilsModule.isUnifiedLoggingAttribute(i) then
-				t[unifiedEventLoggingUtilsModule.getUnifiedLoggingFieldName(i)] = v
+		for i, attribute in Attributes do
+			if UnifiedEventLoggingUtilsModule.isUnifiedLoggingAttribute(i) then
+				JoinResult[UnifiedEventLoggingUtilsModule.getUnifiedLoggingFieldName(i)] = attribute
 			end
 		end
 	end
-	if p3.includeScreenSize then
-		t = cryoModule.Dictionary.join(t, unifiedEventLoggingUtilsModule.getScreenSize(p1))
+	if P2.includeScreenSize then
+		JoinResult = CryoModule.Dictionary.join(JoinResult, UnifiedEventLoggingUtilsModule.getScreenSize(Object))
 	end
-	if p3.includeElementSizeAndPosition then
-		t = cryoModule.Dictionary.join(t, unifiedEventLoggingUtilsModule.getElementSizeAndPosition(p1))
+	if P2.includeElementSizeAndPosition then
+		JoinResult = CryoModule.Dictionary.join(JoinResult, UnifiedEventLoggingUtilsModule.getElementSizeAndPosition(Object))
 	end
-	local var1 = cryoModule.Dictionary.join(t, p2)
+	local JoinResult1 = CryoModule.Dictionary.join(JoinResult, p1)
 	
-	if fFlagAXUnifiedEventPageContext then
-		var1 = cryoModule.Dictionary.join(var1, {
-			elementSessionTag = if session_tag_nameAttribute == nil or session_tag_nameAttribute == "" then unifiedEventPageStoreModule.UNKNOWN else session_tag_nameAttribute
+	if FFlagAXUnifiedEventPageContext then
+		JoinResult1 = CryoModule.Dictionary.join(JoinResult1, {
+			elementSessionTag = if Attribute == nil or Attribute == "" then UnifiedEventPageStoreModule.UNKNOWN else Attribute
 		})
 	end
-	sendUnifiedEventLogModule(var1, if fFlagAXSendUnifiedEventLogWithInstance then p1 else nil, if fFlagAXUnifiedEventCounters then {
-		filterPassed = (if fFlagAllowCustomUnifiedEventFilterModule and p3.filter then p3.filter else AXUnifiedEventFilterModule.filter)(var1)
-	} else nil)
+	local FilterPassed = (if FFlagAllowCustomUnifiedEventFilterModule and P2.filter then P2.filter else AXUnifiedEventFilterModule.filter)(JoinResult1)
+	SendUnifiedEventLogModule(JoinResult1, if FFlagAXSendUnifiedEventLogWithInstance then Object else nil, if FFlagAXUnifiedEventCounters then { filterPassed = FilterPassed } else nil)
 end

@@ -1,24 +1,24 @@
-﻿local currencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
-local parent = currencyTransfers.Parent
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local promptStateModule = require(currencyTransfers.Enums.PromptState)
-local transferRobuxInputSheetModule = require(currencyTransfers.Components.Send.TransferRobuxInputSheet)
-local transferRobuxConfirmSheetModule = require(currencyTransfers.Components.Send.TransferRobuxConfirmSheet)
-local transferRobuxErrorSheetModule = require(currencyTransfers.Components.Send.TransferRobuxErrorSheet)
-local insufficientBalanceSheetModule = require(currencyTransfers.Components.Send.InsufficientBalanceSheet)
-local transferRobuxSuccessToastModule = require(currencyTransfers.Components.Send.TransferRobuxSuccessToast)
-local transferRobuxSuccessModalModule = require(currencyTransfers.Components.Send.TransferRobuxSuccessModal)
-local transferBlockSheetModule = require(currencyTransfers.Components.Send.TransferBlockSheet)
-local receiveRobuxSuccessToastModule = require(currencyTransfers.Components.Receive.ReceiveRobuxSuccessToast)
-local receiveBlockSheetModule = require(currencyTransfers.Components.Receive.ReceiveBlockSheet)
-local receiveErrorSheetModule = require(currencyTransfers.Components.Receive.ReceiveErrorSheet)
-local getFFlagCurrencyTransferSuccessModalModule = require(currencyTransfers.Flags.GetFFlagCurrencyTransferSuccessModal)
-local useTransferStoreModule = require(currencyTransfers.Hooks.useTransferStore)
+﻿local CurrencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
+local Parent = CurrencyTransfers.Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local PromptStateModule = require(CurrencyTransfers.Enums.PromptState)
+local TransferRobuxInputSheetModule = require(CurrencyTransfers.Components.Send.TransferRobuxInputSheet)
+local TransferRobuxConfirmSheetModule = require(CurrencyTransfers.Components.Send.TransferRobuxConfirmSheet)
+local TransferRobuxErrorSheetModule = require(CurrencyTransfers.Components.Send.TransferRobuxErrorSheet)
+local InsufficientBalanceSheetModule = require(CurrencyTransfers.Components.Send.InsufficientBalanceSheet)
+local TransferRobuxSuccessToastModule = require(CurrencyTransfers.Components.Send.TransferRobuxSuccessToast)
+local TransferRobuxSuccessModalModule = require(CurrencyTransfers.Components.Send.TransferRobuxSuccessModal)
+local TransferBlockSheetModule = require(CurrencyTransfers.Components.Send.TransferBlockSheet)
+local ReceiveRobuxSuccessToastModule = require(CurrencyTransfers.Components.Receive.ReceiveRobuxSuccessToast)
+local ReceiveBlockSheetModule = require(CurrencyTransfers.Components.Receive.ReceiveBlockSheet)
+local ReceiveErrorSheetModule = require(CurrencyTransfers.Components.Receive.ReceiveErrorSheet)
+local GetFFlagCurrencyTransferSuccessModalModule = require(CurrencyTransfers.Flags.GetFFlagCurrencyTransferSuccessModal)
+local UseTransferStoreModule = require(CurrencyTransfers.Hooks.useTransferStore)
 
-return function(_)
-	-- upvalues: useTransferStoreModule (ref), signalsReactModule (ref), promptStateModule (ref), reactModule (ref), transferRobuxInputSheetModule (ref), insufficientBalanceSheetModule (ref), transferRobuxConfirmSheetModule (ref), getFFlagCurrencyTransferSuccessModalModule (ref), transferRobuxSuccessModalModule (ref), transferRobuxSuccessToastModule (ref), transferRobuxErrorSheetModule (ref), transferBlockSheetModule (ref), receiveRobuxSuccessToastModule (ref), receiveBlockSheetModule (ref), receiveErrorSheetModule (ref)
-	local var1 = signalsReactModule.useSignalState(useTransferStoreModule().getPromptState)
+return function(_) --[[ Line: 30 | Named "TransferRobuxContainer" ]]
+	-- upvalues: UseTransferStoreModule (copy), SignalsReactModule (copy), PromptStateModule (copy), ReactModule (copy), TransferRobuxInputSheetModule (copy), InsufficientBalanceSheetModule (copy), TransferRobuxConfirmSheetModule (copy), GetFFlagCurrencyTransferSuccessModalModule (copy), TransferRobuxSuccessModalModule (copy), TransferRobuxSuccessToastModule (copy), TransferRobuxErrorSheetModule (copy), TransferBlockSheetModule (copy), ReceiveRobuxSuccessToastModule (copy), ReceiveBlockSheetModule (copy), ReceiveErrorSheetModule (copy)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(UseTransferStoreModule().getPromptState)
 	
-	return if var1 == promptStateModule.TransferInput then reactModule.createElement(transferRobuxInputSheetModule, {}) elseif var1 == promptStateModule.TransferInsufficientBalance then reactModule.createElement(insufficientBalanceSheetModule, {}) elseif var1 == promptStateModule.TransferConfirm then reactModule.createElement(transferRobuxConfirmSheetModule, {}) elseif var1 == promptStateModule.TransferSuccess then if getFFlagCurrencyTransferSuccessModalModule() then reactModule.createElement(transferRobuxSuccessModalModule, {}) else reactModule.createElement(transferRobuxSuccessToastModule, {}) elseif var1 == promptStateModule.TransferError then reactModule.createElement(transferRobuxErrorSheetModule, {}) elseif var1 == promptStateModule.TransferBlocked then reactModule.createElement(transferBlockSheetModule) elseif var1 == promptStateModule.ReceiveSuccess then reactModule.createElement(receiveRobuxSuccessToastModule, {}) elseif var1 == promptStateModule.ReceiveBlocked then reactModule.createElement(receiveBlockSheetModule) elseif var1 == promptStateModule.ReceiveError then reactModule.createElement(receiveErrorSheetModule, {}) else nil
+	return if UseSignalStateResult == PromptStateModule.TransferInput then ReactModule.createElement(TransferRobuxInputSheetModule, {}) elseif UseSignalStateResult == PromptStateModule.TransferInsufficientBalance then ReactModule.createElement(InsufficientBalanceSheetModule, {}) elseif UseSignalStateResult == PromptStateModule.TransferConfirm then ReactModule.createElement(TransferRobuxConfirmSheetModule, {}) elseif UseSignalStateResult == PromptStateModule.TransferSuccess then if GetFFlagCurrencyTransferSuccessModalModule() then ReactModule.createElement(TransferRobuxSuccessModalModule, {}) else ReactModule.createElement(TransferRobuxSuccessToastModule, {}) elseif UseSignalStateResult == PromptStateModule.TransferError then ReactModule.createElement(TransferRobuxErrorSheetModule, {}) elseif UseSignalStateResult == PromptStateModule.TransferBlocked then ReactModule.createElement(TransferBlockSheetModule) elseif UseSignalStateResult == PromptStateModule.ReceiveSuccess then ReactModule.createElement(ReceiveRobuxSuccessToastModule, {}) elseif UseSignalStateResult == PromptStateModule.ReceiveBlocked then ReactModule.createElement(ReceiveBlockSheetModule) elseif UseSignalStateResult == PromptStateModule.ReceiveError then ReactModule.createElement(ReceiveErrorSheetModule, {}) else nil
 end

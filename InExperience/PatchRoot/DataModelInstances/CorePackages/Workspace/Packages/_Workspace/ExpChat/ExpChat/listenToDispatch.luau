@@ -1,6 +1,6 @@
-﻿return function(p1)
-	return function(p2)
-		-- upvalues: p1 (ref)
-		p1.Event:Connect(p2)
+﻿return function(BindableEvent) --[[ Line: 1 ]]
+	return function(Callback) --[[ Line: 2 ]]
+		-- upvalues: BindableEvent (copy)
+		BindableEvent.Event:Connect(Callback)
 	end
 end

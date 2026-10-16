@@ -1,7 +1,7 @@
-﻿local robloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
+﻿local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
 
-if not robloxGui:FindFirstChild("SendNotificationInfo") then
-	local sendNotificationInfo = Instance.new("BindableEvent")
-	sendNotificationInfo.Name = "SendNotificationInfo"
-	sendNotificationInfo.Parent = robloxGui
+if not RobloxGui:FindFirstChild("SendNotificationInfo") then
+	local SendNotificationInfo = Instance.new("BindableEvent")
+	SendNotificationInfo.Name = "SendNotificationInfo"
+	SendNotificationInfo.Parent = RobloxGui
 end

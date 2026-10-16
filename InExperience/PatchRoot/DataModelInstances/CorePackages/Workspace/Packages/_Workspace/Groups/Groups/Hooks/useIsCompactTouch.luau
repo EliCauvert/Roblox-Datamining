@@ -1,8 +1,8 @@
-﻿local groups = script:FindFirstAncestor("Groups")
-local signalsReactModule = require(groups.Parent.SignalsReact)
-local communityListRoutingModule = require(groups.CommunityListRouting)
+﻿local Groups = script:FindFirstAncestor("Groups")
+local SignalsReactModule = require(Groups.Parent.SignalsReact)
+local CommunityListRoutingModule = require(Groups.CommunityListRouting)
 
-return function()
-	-- upvalues: signalsReactModule (ref), communityListRoutingModule (ref)
-	return signalsReactModule.useSignalState(communityListRoutingModule.getIsCompactTouch)
+return function() --[[ Line: 7 | Named "useIsCompactTouch" ]]
+	-- upvalues: SignalsReactModule (copy), CommunityListRoutingModule (copy)
+	return SignalsReactModule.useSignalState(CommunityListRoutingModule.getIsCompactTouch)
 end

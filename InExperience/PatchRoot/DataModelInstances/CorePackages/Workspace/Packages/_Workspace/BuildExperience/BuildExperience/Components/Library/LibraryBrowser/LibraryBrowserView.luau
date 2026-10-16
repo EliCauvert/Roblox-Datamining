@@ -1,202 +1,204 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local appCompositionModule = require(parent.AppComposition)
-local displayModule = require(parent.Display)
-local signalsReactModule = require(parent.SignalsReact)
-local libraryTileModule = require(script.Parent.Parent.LibraryTile)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local AppCompositionModule = require(Parent.AppComposition)
+local DisplayModule = require(Parent.Display)
+local SignalsReactModule = require(Parent.SignalsReact)
+local LibraryTileModule = require(script.Parent.Parent.LibraryTile)
 local _ = require(script.Parent.Parent.LibraryTypes)
-local libraryWorldCutoutViewModule = require(script.Parent.Parent.LibraryWorldCutout.LibraryWorldCutoutView)
-local useHardwareInsetsModule = require(buildExperience.Components.ChatSheet.useHardwareInsets)
-local icon = foundationModule.Icon
-local scrollView = foundationModule.ScrollView
-local skeleton = foundationModule.Skeleton
-local text = foundationModule.Text
-local view = foundationModule.View
-local iconName = foundationModule.Enums.IconName
-local iconSize = foundationModule.Enums.IconSize
-local radius = foundationModule.Enums.Radius
-local scrollBarVisibility = foundationModule.Enums.ScrollBarVisibility
+local LibraryWorldCutoutViewModule = require(script.Parent.Parent.LibraryWorldCutout.LibraryWorldCutoutView)
+local UseHardwareInsetsModule = require(BuildExperience.Components.ChatSheet.useHardwareInsets)
+local Icon = FoundationModule.Icon
+local ScrollView = FoundationModule.ScrollView
+local Skeleton = FoundationModule.Skeleton
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local IconName = FoundationModule.Enums.IconName
+local IconSize = FoundationModule.Enums.IconSize
+local Radius = FoundationModule.Enums.Radius
+local ScrollBarVisibility = FoundationModule.Enums.ScrollBarVisibility
 
-local function renderLoadingTiles(p1, p2, p3, p4)
-	-- upvalues: reactModule (ref), view (ref), skeleton (ref), radius (ref), scrollView (ref), scrollBarVisibility (ref)
-	local t = {}
+local function renderLoadingTiles(CategoryKey, Offset, XOffset, UseTokensResult) --[[ Line: 38 ]]
+	-- upvalues: ReactModule (copy), View (copy), Skeleton (copy), Radius (copy), ScrollView (copy), ScrollBarVisibility (copy)
+	local Elements = {}
 	
 	for i = 1, 4 do
-		t[tostring(i)] = reactModule.createElement(view, {
+		Elements[tostring(i)] = ReactModule.createElement(View, {
 			tag = "col gap-small",
 			LayoutOrder = i,
-			Size = UDim2.fromOffset(p3, p3 + p4.Size.Size_1000),
-			testId = `Library.Category.{p1}.Skeleton.{i}`
+			Size = UDim2.fromOffset(XOffset, XOffset + UseTokensResult.Size.Size_1000),
+			testId = `Library.Category.{CategoryKey}.Skeleton.{i}`
 		}, {
-			Thumbnail = reactModule.createElement(skeleton, {
+			Thumbnail = ReactModule.createElement(Skeleton, {
 				LayoutOrder = 1,
-				Size = UDim2.fromOffset(p3, p3),
-				radius = radius.Medium
+				Size = UDim2.fromOffset(XOffset, XOffset),
+				radius = Radius.Medium
 			}),
-			Title = reactModule.createElement(skeleton, {
+			Title = ReactModule.createElement(Skeleton, {
 				LayoutOrder = 2,
-				Size = UDim2.fromOffset(p4.Size.Size_1800, p4.Size.Size_400),
-				radius = radius.Small
+				Size = UDim2.fromOffset(UseTokensResult.Size.Size_1800, UseTokensResult.Size.Size_400),
+				radius = Radius.Small
 			})
 		})
 	end
-	return reactModule.createElement(scrollView, {
-		Size = UDim2.new(1, 0, 0, p3 + p4.Size.Size_1000),
+	return ReactModule.createElement(ScrollView, {
+		Size = UDim2.new(1, 0, 0, XOffset + UseTokensResult.Size.Size_1000),
 		scroll = {
 			AutomaticCanvasSize = Enum.AutomaticSize.X,
 			CanvasSize = UDim2.fromOffset(0, 0),
 			ScrollingDirection = Enum.ScrollingDirection.X,
-			scrollBarVisibility = scrollBarVisibility.None
+			scrollBarVisibility = ScrollBarVisibility.None
 		},
-		testId = `Library.Category.{p1}.Skeleton`
+		testId = `Library.Category.{CategoryKey}.Skeleton`
 	}, {
-		Content = reactModule.createElement(view, {
+		Content = ReactModule.createElement(View, {
 			tag = "row gap-small size-0-full auto-x",
-			padding = { left = UDim.new(0, p2), right = UDim.new(0, p2) }
-		}, t)
+			padding = { left = UDim.new(0, Offset), right = UDim.new(0, Offset) }
+		}, Elements)
 	})
 end
 
-local function renderCategory(p5, p6, p7, p8, p9)
-	-- upvalues: reactModule (ref), libraryTileModule (ref), renderLoadingTiles (ref), scrollView (ref), scrollBarVisibility (ref), view (ref), foundationModule (ref), text (ref), icon (ref), iconName (ref), iconSize (ref)
-	local var1 = p8 + p9.Size.Size_1000
-	local t = {}
-	local categoryKey = p5.categoryKey or p5.itemKind
-	
-	for i, v in p5.items do
-		t[v.tileKey or (v.itemId or tostring(i))] = reactModule.createElement(libraryTileModule, {
+local function renderCategory(p1, LayoutOrder, Offset, XOffset, UseTokensResult) --[[ Line: 82 ]]
+	-- upvalues: ReactModule (copy), LibraryTileModule (copy), renderLoadingTiles (copy), ScrollView (copy), ScrollBarVisibility (copy), View (copy), FoundationModule (copy), Text (copy), Icon (copy), IconName (copy), IconSize (copy)
+	local NewXOffset = XOffset + UseTokensResult.Size.Size_1000
+	local Elements = {}
+	local CategoryKey = p1.categoryKey or p1.itemKind
+	for LayoutOrder1, item in p1.items do
+		Elements[item.tileKey or (item.itemId or tostring(LayoutOrder1))] = ReactModule.createElement(LibraryTileModule, {
 			compact = true,
-			tileKey = v.tileKey,
-			itemId = v.itemId,
-			itemKind = v.itemKind,
-			isFolder = v.isFolder,
-			folderPreview = v.folderPreview,
-			displayName = v.displayName,
-			unavailableText = v.unavailableText,
-			thumbnail = v.thumbnail,
-			model = v.model,
-			onActivated = v.onActivated,
-			LayoutOrder = i,
-			Size = UDim2.fromOffset(p8, var1),
-			mediaSize = UDim2.fromOffset(p8, p8)
+			tileKey = item.tileKey,
+			itemId = item.itemId,
+			itemKind = item.itemKind,
+			isFolder = item.isFolder,
+			folderPreview = item.folderPreview,
+			displayName = item.displayName,
+			unavailableText = item.unavailableText,
+			thumbnail = item.thumbnail,
+			model = item.model,
+			onActivated = item.onActivated,
+			LayoutOrder = LayoutOrder1,
+			Size = UDim2.fromOffset(XOffset, NewXOffset),
+			mediaSize = UDim2.fromOffset(XOffset, XOffset)
 		})
 	end
-	local var2 = if p5.status == "Ready" then p5.onOpenCategory else nil
-	local _ = nil
+	local IsReady = p1.status == "Ready"
+	local OnOpenCategory = if IsReady then p1.onOpenCategory else nil
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "col gap-large size-full-0 auto-y",
-		LayoutOrder = p6,
-		testId = `Library.Category.{categoryKey}`
+		LayoutOrder = LayoutOrder,
+		testId = `Library.Category.{CategoryKey}`
 	}, {
-		Header = reactModule.createElement(view, {
+		Header = ReactModule.createElement(View, {
 			LayoutOrder = 1,
 			tag = "row align-y-center gap-xsmall size-full-600",
-			onActivated = var2,
-			selection = { Selectable = var2 ~= nil },
+			onActivated = OnOpenCategory,
+			selection = { Selectable = OnOpenCategory ~= nil },
 			stateLayer = {
-				affordance = foundationModule.Enums.StateLayerAffordance.None
+				affordance = FoundationModule.Enums.StateLayerAffordance.None
 			},
-			padding = { left = UDim.new(0, p7), right = UDim.new(0, p7) },
-			testId = `Library.Category.{categoryKey}.Header`
+			padding = { left = UDim.new(0, Offset), right = UDim.new(0, Offset) },
+			testId = `Library.Category.{CategoryKey}.Header`
 		}, {
-			Title = reactModule.createElement(text, {
+			Title = ReactModule.createElement(Text, {
 				LayoutOrder = 1,
 				tag = "auto-xy text-heading-small text-align-x-left content-emphasis",
-				Text = p5.title,
-				testId = `Library.Section.{categoryKey}.Title`
+				Text = p1.title,
+				testId = `Library.Section.{CategoryKey}.Title`
 			}),
-			Chevron = if var2 ~= nil then nil else reactModule.createElement(icon, {
+			Chevron = if OnOpenCategory == nil then nil else ReactModule.createElement(Icon, {
 				LayoutOrder = 2,
-				name = iconName.ChevronLargeRight,
-				size = iconSize.Small,
-				style = p9.Color.Content.Default,
-				testId = `Library.Category.{categoryKey}.Header.Chevron`
+				name = IconName.ChevronLargeRight,
+				size = IconSize.Small,
+				style = UseTokensResult.Color.Content.Default,
+				testId = `Library.Category.{CategoryKey}.Header.Chevron`
 			})
 		}),
-		Cells = reactModule.createElement(view, {
+		Cells = ReactModule.createElement(View, {
 			LayoutOrder = 2,
-			Size = UDim2.new(1, 0, 0, var1),
-			testId = `Library.Category.{categoryKey}.Cells`
+			Size = UDim2.new(1, 0, 0, NewXOffset),
+			testId = `Library.Category.{CategoryKey}.Cells`
 		}, {
-			Content = if p5.status == "Loading" or p5.status == "NotReady" then renderLoadingTiles(categoryKey, p7, p8, p9) else reactModule.createElement(scrollView, {
-				onCanvasPositionChanged = p5.onScrollChanged,
-				onAbsoluteCanvasSizeChanged = p5.onScrollChanged,
-				onAbsoluteWindowSizeChanged = p5.onScrollChanged,
-				Size = UDim2.new(1, 0, 0, var1),
+			Content = if p1.status == "Loading" or p1.status == "NotReady" then renderLoadingTiles(CategoryKey, Offset, XOffset, UseTokensResult) else ReactModule.createElement(ScrollView, {
+				onCanvasPositionChanged = p1.onScrollChanged,
+				onAbsoluteCanvasSizeChanged = p1.onScrollChanged,
+				onAbsoluteWindowSizeChanged = p1.onScrollChanged,
+				Size = UDim2.new(1, 0, 0, NewXOffset),
 				scroll = {
 					AutomaticCanvasSize = Enum.AutomaticSize.X,
 					CanvasSize = UDim2.fromOffset(0, 0),
 					ScrollingDirection = Enum.ScrollingDirection.X,
-					scrollBarVisibility = scrollBarVisibility.None
+					scrollBarVisibility = ScrollBarVisibility.None
 				},
-				testId = `Library.Section.{categoryKey}.Carousel`
+				testId = `Library.Section.{CategoryKey}.Carousel`
 			}, {
-				Content = reactModule.createElement(view, {
+				Content = ReactModule.createElement(View, {
 					tag = "row gap-small size-0-full auto-x",
-					padding = { left = UDim.new(0, p7), right = UDim.new(0, p7) }
-				}, t)
+					padding = { left = UDim.new(0, Offset), right = UDim.new(0, Offset) }
+				}, Elements)
 			})
 		})
 	})
 end
 
-return function(p10)
-	-- upvalues: appCompositionModule (ref), useHardwareInsetsModule (ref), foundationModule (ref), signalsReactModule (ref), displayModule (ref), renderCategory (ref), reactModule (ref), view (ref), skeleton (ref), radius (ref), renderLoadingTiles (ref), text (ref), libraryWorldCutoutViewModule (ref), scrollView (ref)
-	local margin = appCompositionModule.useCompositionLayout().margin
-	local bottom = useHardwareInsetsModule().bottom
-	local var3 = foundationModule.Hooks.useTokens()
-	local var4 = if signalsReactModule.useSignalState(displayModule.GetDisplayStore(false).getDisplaySize) == Enum.DisplaySize.Small then var3.Size.Size_2400 else foundationModule.Hooks.useScaledValue(160)
-	local t = {}
+return function(p2) --[[ Line: 176 | Named "LibraryBrowserView" ]]
+	-- upvalues: AppCompositionModule (copy), UseHardwareInsetsModule (copy), FoundationModule (copy), SignalsReactModule (copy), DisplayModule (copy), renderCategory (copy), ReactModule (copy), View (copy), Skeleton (copy), Radius (copy), renderLoadingTiles (copy), Text (copy), LibraryWorldCutoutViewModule (copy), ScrollView (copy)
+	local Margin = AppCompositionModule.useCompositionLayout().margin
+	local Bottom = UseHardwareInsetsModule().bottom
+	local UseTokensResult = FoundationModule.Hooks.useTokens()
+	local UseScaledValueResult = FoundationModule.Hooks.useScaledValue(160)
+	local Size2400 = if SignalsReactModule.useSignalState(DisplayModule.GetDisplayStore(false).getDisplaySize) == Enum.DisplaySize.Small then UseTokensResult.Size.Size_2400 else UseScaledValueResult
+	local Elements = {}
 	
-	for i, v in p10.categories do
-		t[v.categoryKey or v.itemKind] = renderCategory(v, i, margin, var4, var3)
+	for i, category in p2.categories do
+		Elements[category.categoryKey or category.itemKind] = renderCategory(category, i, Margin, Size2400, UseTokensResult)
 	end
-	if p10.status == "Loading" or p10.status == "NotReady" then
-		t = {}
+	if p2.status == "Loading" or p2.status == "NotReady" then
+		Elements = {}
 		
-		for i_1, v_1 in { "Model", "Image", "Sound" } do
-			t[v_1] = reactModule.createElement(view, {
+		for LayoutOrder, value in { "Model", "Image", "Sound" } do
+			Elements[value] = ReactModule.createElement(View, {
 				tag = "col gap-large size-full-0 auto-y",
-				LayoutOrder = i_1,
-				testId = `Library.Section.{v_1}.Skeleton`
+				LayoutOrder = LayoutOrder,
+				testId = `Library.Section.{value}.Skeleton`
 			}, {
-				Heading = reactModule.createElement(view, {
+				Heading = ReactModule.createElement(View, {
 					LayoutOrder = 1,
 					tag = "size-full-0 auto-y",
-					padding = { left = UDim.new(0, margin), right = UDim.new(0, margin) }
+					padding = { left = UDim.new(0, Margin), right = UDim.new(0, Margin) }
 				}, {
-					Skeleton = reactModule.createElement(skeleton, {
-						Size = UDim2.fromOffset(var3.Size.Size_2800, var3.Size.Size_600),
-						radius = radius.Small,
-						testId = `Library.Section.{v_1}.HeadingSkeleton`
+					Skeleton = ReactModule.createElement(Skeleton, {
+						Size = UDim2.fromOffset(UseTokensResult.Size.Size_2800, UseTokensResult.Size.Size_600),
+						radius = Radius.Small,
+						testId = `Library.Section.{value}.HeadingSkeleton`
 					})
 				}),
-				Cards = reactModule.createElement(view, { LayoutOrder = 2, tag = "size-full-0 auto-y" }, { Content = renderLoadingTiles(v_1, margin, var4, var3) })
+				Cards = ReactModule.createElement(View, { LayoutOrder = 2, tag = "size-full-0 auto-y" }, {
+					Content = renderLoadingTiles(value, Margin, Size2400, UseTokensResult)
+				})
 			})
 		end
-	elseif #p10.categories == 0 then
-		t.Empty = reactModule.createElement(text, {
+	elseif #p2.categories == 0 then
+		Elements.Empty = ReactModule.createElement(Text, {
 			tag = "size-full-0 auto-y padding-large text-body-medium text-align-x-center content-muted",
-			Text = p10.strings.empty
+			Text = p2.strings.empty
 		})
 	end
-	local worldCutout = p10.worldCutout
+	local WorldCutout = p2.worldCutout
 	
-	if worldCutout ~= nil then
-		t.WorldCutout = reactModule.createElement(libraryWorldCutoutViewModule, {
+	if WorldCutout ~= nil then
+		Elements.WorldCutout = ReactModule.createElement(LibraryWorldCutoutViewModule, {
 			LayoutOrder = 0,
-			inset = margin,
-			isLoading = if p10.status ~= "Loading" then p10.status == "NotReady" else true,
-			title = worldCutout.title,
-			onActivated = worldCutout.onActivated,
-			onRectChanged = worldCutout.onRectChanged
+			inset = Margin,
+			isLoading = p2.status == "Loading" or p2.status == "NotReady",
+			title = WorldCutout.title,
+			onActivated = WorldCutout.onActivated,
+			onRectChanged = WorldCutout.onRectChanged
 		})
 	end
-	return reactModule.createElement(view, { tag = "col size-full", testId = "Library.Browser" }, {
-		Body = reactModule.createElement(scrollView, {
+	return ReactModule.createElement(View, { tag = "col size-full", testId = "Library.Browser" }, {
+		Body = ReactModule.createElement(ScrollView, {
 			LayoutOrder = 1,
 			tag = "fill size-full-0",
 			scroll = {
@@ -205,15 +207,17 @@ return function(p10)
 				ScrollingDirection = Enum.ScrollingDirection.Y
 			}
 		}, {
-			Content = reactModule.createElement(view, {
+			Content = ReactModule.createElement(View, {
 				tag = "col size-full-0 auto-y padding-top-medium",
 				testId = "Library.Browser.Content",
-				padding = { bottom = UDim.new(0, var3.Padding.Small + bottom) }
+				padding = {
+					bottom = UDim.new(0, UseTokensResult.Padding.Small + Bottom)
+				}
 			}, {
-				Categories = reactModule.createElement(view, {
+				Categories = ReactModule.createElement(View, {
 					LayoutOrder = 1,
 					tag = "col gap-large size-full-0 auto-y"
-				}, t)
+				}, Elements)
 			})
 		})
 	})

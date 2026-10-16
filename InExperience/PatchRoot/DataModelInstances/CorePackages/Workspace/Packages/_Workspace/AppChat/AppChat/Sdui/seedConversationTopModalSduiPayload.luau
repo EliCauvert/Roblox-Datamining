@@ -1,41 +1,31 @@
-﻿local parent = script:FindFirstAncestor("AppChat").Parent
-local sduiSharedUtilitiesModule = require(parent.SduiSharedUtilities)
-local getSduiApiStore = sduiSharedUtilitiesModule.getSduiApiStore
-local sduiLoadTimer = sduiSharedUtilitiesModule.SduiLoadTimer
-local sduiConstantsModule = require(script.Parent.SduiConstants)
+﻿local Parent = script:FindFirstAncestor("AppChat").Parent
+local SduiSharedUtilitiesModule = require(Parent.SduiSharedUtilities)
+local GetSduiApiStoreFunction = SduiSharedUtilitiesModule.getSduiApiStore
+local SduiLoadTimer = SduiSharedUtilitiesModule.SduiLoadTimer
+local SduiConstantsModule = require(script.Parent.SduiConstants)
 
-local function _(p1)
-	return p1 == nil or (if typeof(p1) == "string" then string.match(p1, "^%s*$") ~= nil else typeof(p1) == "table" and next(p1) == nil)
+local function _(Text: string): boolean --[[ Line: 12 | Named "isBlankPayload" ]]
+	return Text == nil or (if typeof(Text) == "string" then string.match(Text, "^%s*$") ~= nil else typeof(Text) == "table" and next(Text) == nil)
 end
 
-return function(p1, p2)
-	-- upvalues: sduiConstantsModule (ref), getSduiApiStore (ref), parent (ref), sduiLoadTimer (ref)
-	local var1
-	local conversationTopModalConfigKey = sduiConstantsModule.getConversationTopModalConfigKey(p2)
-	local var2 = getSduiApiStore()
+return function(Text: string, p1) --[[ Line: 23 | Named "seedConversationTopModalSduiPayload" ]]
+	-- upvalues: SduiConstantsModule (copy), GetSduiApiStoreFunction (copy), Parent (copy), SduiLoadTimer (copy)
+	local ConversationTopModalConfigKey = SduiConstantsModule.getConversationTopModalConfigKey(p1)
+	local SduiApiStore = GetSduiApiStoreFunction()
 	
-	if p1 == nil then
-		var1 = true
-	elseif typeof(p1) == "string" then
-		local _ = string.match(p1, "^%s*$") ~= nil
-	elseif typeof(p1) == "table" then
-		var1 = next(p1) == nil
-		var1 = nil
-	else
-		var1 = false
-	end
-	if var1 then
-		var2.clearConfigEntries(conversationTopModalConfigKey)
+	if Text == nil or (if typeof(Text) == "string" then string.match(Text, "^%s*$") ~= nil else typeof(Text) == "table" and next(Text) == nil) then
+		SduiApiStore.clearConfigEntries(ConversationTopModalConfigKey)
 		
 		return
+	else
+		local PartyChatResponse = require(Parent.ServiceContractsProto).apppageplatform.partychat.party_chat.PartyChatResponse
+		SduiApiStore.seedFromDecodedResponse({
+			replace = true,
+			surfaceKey = SduiConstantsModule.SurfaceKey,
+			configKey = ConversationTopModalConfigKey,
+			decodedResponse = PartyChatResponse.jsonDecode(Text),
+			loadTimer = SduiLoadTimer.createLoadTimer(SduiConstantsModule.SurfaceKey),
+			apiProto = PartyChatResponse
+		})
 	end
-	local partyChatResponse = require(parent.ServiceContractsProto).apppageplatform.partychat.party_chat.PartyChatResponse
-	var2.seedFromDecodedResponse({
-		replace = true,
-		surfaceKey = sduiConstantsModule.SurfaceKey,
-		configKey = conversationTopModalConfigKey,
-		decodedResponse = partyChatResponse.jsonDecode(p1),
-		loadTimer = sduiLoadTimer.createLoadTimer(sduiConstantsModule.SurfaceKey),
-		apiProto = partyChatResponse
-	})
 end

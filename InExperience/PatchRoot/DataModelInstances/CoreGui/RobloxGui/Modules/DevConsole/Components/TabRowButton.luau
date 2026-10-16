@@ -1,39 +1,36 @@
-﻿local roactModule = require(game:GetService("CorePackages").Packages.Roact)
-local constantsModule = require(script.Parent.Parent.Constants)
-local highlightHeight = constantsModule.TabRowFormatting.HighlightHeight
-local frameHeight = constantsModule.TabRowFormatting.FrameHeight
+﻿local RoactModule = require(game:GetService("CorePackages").Packages.Roact)
+local ConstantsModule = require(script.Parent.Parent.Constants)
+local HighlightHeight = ConstantsModule.TabRowFormatting.HighlightHeight
+local FrameHeight = ConstantsModule.TabRowFormatting.FrameHeight
 
-return function(p1)
-	-- upvalues: constantsModule (ref), roactModule (ref), frameHeight (ref), highlightHeight (ref)
-	local index = p1.index
-	local name = p1.name
-	local textWidth = p1.textWidth
-	local padding = p1.padding
-	local isSelected = p1.isSelected
-	local onTabButtonClicked = p1.onTabButtonClicked
+return function(p1) --[[ Line: 10 | Named "TabRowButton" ]]
+	-- upvalues: ConstantsModule (copy), RoactModule (copy), FrameHeight (copy), HighlightHeight (copy)
+	local Index = p1.index
+	local IsSelected = p1.isSelected
+	local OnTabButtonClickedFunction = p1.onTabButtonClicked
 	
-	return roactModule.createElement("TextButton", {
-		Text = name,
-		TextSize = constantsModule.DefaultFontSize.TabBar,
-		Font = constantsModule.Font.TabBar,
+	return RoactModule.createElement("TextButton", {
+		Text = p1.name,
+		TextSize = ConstantsModule.DefaultFontSize.TabBar,
+		Font = ConstantsModule.Font.TabBar,
 		TextScaled = false,
-		TextTransparency = if isSelected then constantsModule.TabRowFormatting.SelectedTextTransparency else constantsModule.TabRowFormatting.UnselectedTextTransparency,
-		Size = UDim2.new(0, textWidth + padding, 0, frameHeight),
+		TextTransparency = if IsSelected then ConstantsModule.TabRowFormatting.SelectedTextTransparency else ConstantsModule.TabRowFormatting.UnselectedTextTransparency,
+		Size = UDim2.new(0, p1.textWidth + p1.padding, 0, FrameHeight),
 		AutoButtonColor = false,
-		TextColor3 = constantsModule.Color.Text,
-		BackgroundColor3 = constantsModule.Color.UnselectedGray,
+		TextColor3 = ConstantsModule.Color.Text,
+		BackgroundColor3 = ConstantsModule.Color.UnselectedGray,
 		BorderSizePixel = 0,
 		LayoutOrder = p1.layoutOrder,
-		[roactModule.Event.Activated] = function(_)
-			-- upvalues: onTabButtonClicked (ref), index (ref)
-			onTabButtonClicked(index)
+		[RoactModule.Event.Activated] = function(_) --[[ Line: 38 ]]
+			-- upvalues: OnTabButtonClickedFunction (copy), Index (copy)
+			OnTabButtonClickedFunction(Index)
 		end
 	}, {
-		BlueHighlight = isSelected and roactModule.createElement("Frame", {
+		BlueHighlight = IsSelected and RoactModule.createElement("Frame", {
 			BorderSizePixel = 0,
-			Size = UDim2.new(1, 0, 0, -highlightHeight),
+			Size = UDim2.new(1, 0, 0, -HighlightHeight),
 			Position = UDim2.new(0, 0, 1, 0),
-			BackgroundColor3 = constantsModule.Color.HighlightBlue
+			BackgroundColor3 = ConstantsModule.Color.HighlightBlue
 		})
 	})
 end

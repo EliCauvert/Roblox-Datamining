@@ -1,591 +1,621 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local analyticsConstantsModule = require(script.Parent.AnalyticsConstants)
-local enums = require(parent.SocialLuaAnalytics).Analytics.Enums
-local contexts = enums.Contexts
-local eventTypes = enums.EventTypes
-local eventNamesModule = require(script.Parent.EventNames)
-local fFlagProfilePlatformUseProfileTypeContextModule = require(profilePlatform.Flags.FFlagProfilePlatformUseProfileTypeContext)
-local fFlagEnablePlatformProfileContextualMenuOption = require(parent.SharedFlags).FFlagEnablePlatformProfileContextualMenuOption
-local fFlagProfilePlatformUseCatalogItemOpenedNewFieldsModule = require(profilePlatform.Flags.FFlagProfilePlatformUseCatalogItemOpenedNewFields)
-local fFlagFriendsCallingClientGateDEV = require(parent.SharedFlags).FFlagFriendsCallingClientGate_DEV
-local fFlagProfilePlatformEnableCurrencyTransfer = require(parent.SharedFlags).FFlagProfilePlatformEnableCurrencyTransfer
-local fFlagProfilePlatformEnableTradeItemsModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableTradeItems)
-local fFlagProfileTradeItemsImpressionLoggingModule = require(profilePlatform.Flags.FFlagProfileTradeItemsImpressionLogging)
-local fFlagProfilePlatformEnableEditAppearanceMenuModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableEditAppearanceMenu)
-local fFlagProfilePlatformEditBackgroundMenuItemModule = require(profilePlatform.Flags.FFlagProfilePlatformEditBackgroundMenuItem)
-local fFlagSocialEnableProfileInspectAndBuyAnalytics = require(parent.SharedFlags).FFlagSocialEnableProfileInspectAndBuyAnalytics
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local AnalyticsConstantsModule = require(script.Parent.AnalyticsConstants)
+local Enums = require(Parent.SocialLuaAnalytics).Analytics.Enums
+local Contexts = Enums.Contexts
+local EventTypes = Enums.EventTypes
+local EventNamesModule = require(script.Parent.EventNames)
+local FFlagProfilePlatformUseProfileTypeContextModule = require(ProfilePlatform.Flags.FFlagProfilePlatformUseProfileTypeContext)
+local FFlagEnablePlatformProfileContextualMenuOption = require(Parent.SharedFlags).FFlagEnablePlatformProfileContextualMenuOption
+local FFlagProfilePlatformUseCatalogItemOpenedNewFieldsModule = require(ProfilePlatform.Flags.FFlagProfilePlatformUseCatalogItemOpenedNewFields)
+local FFlagFriendsCallingClientGateDEV = require(Parent.SharedFlags).FFlagFriendsCallingClientGate_DEV
+local FFlagProfilePlatformEnableCurrencyTransfer = require(Parent.SharedFlags).FFlagProfilePlatformEnableCurrencyTransfer
+local FFlagProfilePlatformEnableTradeItemsModule = require(ProfilePlatform.Flags.FFlagProfilePlatformEnableTradeItems)
+local FFlagProfileTradeItemsImpressionLoggingModule = require(ProfilePlatform.Flags.FFlagProfileTradeItemsImpressionLogging)
+local FFlagProfilePlatformEnableEditAppearanceMenuModule = require(ProfilePlatform.Flags.FFlagProfilePlatformEnableEditAppearanceMenu)
+local FFlagProfilePlatformEditBackgroundMenuItemModule = require(ProfilePlatform.Flags.FFlagProfilePlatformEditBackgroundMenuItem)
+local FFlagSocialEnableProfileInspectAndBuyAnalytics = require(Parent.SharedFlags).FFlagSocialEnableProfileInspectAndBuyAnalytics
 
-local var1 = function(p1)
+local function ButtonSurface(p1) --[[ Line: 30 ]]
 	return p1
 end
 
 return {
-	[eventNamesModule.ProfilePageLoadedWithData] = {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.PageLoad,
+	[EventNamesModule.ProfilePageLoadedWithData] = {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.PageLoad,
 		formatRulesForAdditionalInfo = {
-			friendStatus = var1,
-			playerPresence = var1,
-			absolutePosition = var1,
-			isHomePageCarousel = var1,
-			isRecommendation = var1,
-			recommendationContextType = var1,
-			recommendationRank = var1,
-			recommendationSessionId = var1,
-			source = var1,
-			profileType = var1,
-			shareLinkId = var1,
-			primaryAction = var1
+			friendStatus = ButtonSurface,
+			playerPresence = ButtonSurface,
+			absolutePosition = ButtonSurface,
+			isHomePageCarousel = ButtonSurface,
+			isRecommendation = ButtonSurface,
+			recommendationContextType = ButtonSurface,
+			recommendationRank = ButtonSurface,
+			recommendationSessionId = ButtonSurface,
+			source = ButtonSurface,
+			profileType = ButtonSurface,
+			shareLinkId = ButtonSurface,
+			primaryAction = ButtonSurface
 		}
 	},
-	[eventNamesModule.ProfilePresenceLoaded] = {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.PresenceLoaded,
-		formatRulesForAdditionalInfo = { presenceType = var1, universeId = var1 }
+	[EventNamesModule.ProfilePresenceLoaded] = {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.PresenceLoaded,
+		formatRulesForAdditionalInfo = { presenceType = ButtonSurface, universeId = ButtonSurface }
 	},
-	[eventNamesModule.ContextualMenuButtonCall] = if fFlagFriendsCallingClientGateDEV then {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
+	[EventNamesModule.ContextualMenuButtonCall] = if FFlagFriendsCallingClientGateDEV then {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
 		additionalInfo = {
 			optionType = "CTAType",
-			btn = analyticsConstantsModule.ContextualMenuButtons.Call
+			btn = AnalyticsConstantsModule.ContextualMenuButtons.Call
 		},
-		formatRulesForAdditionalInfo = { buttonSurface = var1 }
+		formatRulesForAdditionalInfo = { buttonSurface = ButtonSurface }
 	} else nil,
-	[eventNamesModule.ContextualMenuButtonChat] = {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
+	[EventNamesModule.ContextualMenuButtonChat] = {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
 		additionalInfo = {
 			optionType = "CTAType",
-			btn = analyticsConstantsModule.ContextualMenuButtons.Chat
+			btn = AnalyticsConstantsModule.ContextualMenuButtons.Chat
 		},
-		formatRulesForAdditionalInfo = { buttonSurface = var1 }
+		formatRulesForAdditionalInfo = { buttonSurface = ButtonSurface }
 	},
-	[eventNamesModule.ContextualMenuButtonIgnoreFriendRequest] = {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
+	[EventNamesModule.ContextualMenuButtonIgnoreFriendRequest] = {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
 		additionalInfo = {
 			optionType = "CTAType",
-			btn = analyticsConstantsModule.ContextualMenuButtons.IgnoreFriendRequest
+			btn = AnalyticsConstantsModule.ContextualMenuButtons.IgnoreFriendRequest
 		},
-		formatRulesForAdditionalInfo = { buttonSurface = var1 }
+		formatRulesForAdditionalInfo = { buttonSurface = ButtonSurface }
 	},
-	[eventNamesModule.ContextualMenuButtonReport] = {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
+	[EventNamesModule.ContextualMenuButtonReport] = {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
 		additionalInfo = {
 			optionType = "CTAType",
-			btn = analyticsConstantsModule.ContextualMenuButtons.Report
+			btn = AnalyticsConstantsModule.ContextualMenuButtons.Report
 		},
-		formatRulesForAdditionalInfo = { buttonSurface = var1 }
+		formatRulesForAdditionalInfo = { buttonSurface = ButtonSurface }
 	},
-	[eventNamesModule.ContextualMenuButtonUnfriend] = {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
+	[EventNamesModule.ContextualMenuButtonUnfriend] = {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
 		additionalInfo = {
 			optionType = "CTAType",
-			btn = analyticsConstantsModule.ContextualMenuButtons.Unfriend
+			btn = AnalyticsConstantsModule.ContextualMenuButtons.Unfriend
 		},
-		formatRulesForAdditionalInfo = { buttonSurface = var1 }
+		formatRulesForAdditionalInfo = { buttonSurface = ButtonSurface }
 	},
-	[eventNamesModule.ContextualMenuButtonBlock] = {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
+	[EventNamesModule.ContextualMenuButtonBlock] = {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
 		additionalInfo = {
 			optionType = "CTAType",
-			btn = analyticsConstantsModule.ContextualMenuButtons.Block
+			btn = AnalyticsConstantsModule.ContextualMenuButtons.Block
 		},
-		formatRulesForAdditionalInfo = { buttonSurface = var1 }
+		formatRulesForAdditionalInfo = { buttonSurface = ButtonSurface }
 	},
-	[eventNamesModule.ContextualMenuButtonSetAlias] = {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
+	[EventNamesModule.ContextualMenuButtonSetAlias] = {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
 		additionalInfo = {
 			optionType = "CTAType",
-			btn = analyticsConstantsModule.ContextualMenuButtons.SetAlias
+			btn = AnalyticsConstantsModule.ContextualMenuButtons.SetAlias
 		},
-		formatRulesForAdditionalInfo = { buttonSurface = var1 }
+		formatRulesForAdditionalInfo = { buttonSurface = ButtonSurface }
 	},
-	[eventNamesModule.ContextualMenuButtonCopyLink] = {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
+	[EventNamesModule.ContextualMenuButtonCopyLink] = {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
 		additionalInfo = {
 			optionType = "CTAType",
-			btn = analyticsConstantsModule.ContextualMenuButtons.CopyLink
+			btn = AnalyticsConstantsModule.ContextualMenuButtons.CopyLink
 		},
-		formatRulesForAdditionalInfo = { buttonSurface = var1 }
+		formatRulesForAdditionalInfo = { buttonSurface = ButtonSurface }
 	},
-	[eventNamesModule.ContextualMenuButtonLeaveCommunity] = {
-		context = if fFlagProfilePlatformUseProfileTypeContextModule then contexts.CommunityProfile else contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
+	[EventNamesModule.ContextualMenuButtonLeaveCommunity] = {
+		context = if FFlagProfilePlatformUseProfileTypeContextModule then Contexts.CommunityProfile else Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
 		additionalInfo = {
 			optionType = "CTAType",
-			btn = analyticsConstantsModule.ContextualMenuButtons.LeaveCommunity
-		},
-		formatRulesForAdditionalInfo = { buttonSurface = var1, btnContext = var1 }
-	},
-	[eventNamesModule.ContextualMenuButtonUnfollow] = {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = {
-			optionType = "CTAType",
-			btn = analyticsConstantsModule.ContextualMenuButtons.Unfollow
-		},
-		formatRulesForAdditionalInfo = { buttonSurface = var1 }
-	},
-	[eventNamesModule.ContextualMenuButtonRemoveTrustedConnection] = {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = {
-			optionType = "CTAType",
-			btn = analyticsConstantsModule.ContextualMenuButtons.RemoveTrustedConnection
-		},
-		formatRulesForAdditionalInfo = { buttonSurface = var1 }
-	},
-	[eventNamesModule.ContextualMenuButtonAddTrustedConnection] = {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = {
-			optionType = "CTAType",
-			btn = analyticsConstantsModule.ContextualMenuButtons.AddTrustedConnection
-		},
-		formatRulesForAdditionalInfo = { buttonSurface = var1, modalVariantOverride = var1 }
-	},
-	[eventNamesModule.ContextualMenuButtonAddIncomingTrustedConnection] = {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = {
-			optionType = "CTAType",
-			btn = analyticsConstantsModule.ContextualMenuButtons.AddIncomingTrustedConnection
-		},
-		formatRulesForAdditionalInfo = { buttonSurface = var1 }
-	},
-	[eventNamesModule.ContextualMenuButtonMakePrimaryCommunity] = {
-		context = if fFlagProfilePlatformUseProfileTypeContextModule then contexts.CommunityProfile else contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = {
-			optionType = "CTAType",
-			btn = analyticsConstantsModule.ContextualMenuButtons.MakePrimaryCommunity
-		},
-		formatRulesForAdditionalInfo = { buttonSurface = var1, btnContext = var1 }
-	},
-	[eventNamesModule.ContextualMenuButtonRemovePrimaryCommunity] = {
-		context = if fFlagProfilePlatformUseProfileTypeContextModule then contexts.CommunityProfile else contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = {
-			optionType = "CTAType",
-			btn = analyticsConstantsModule.ContextualMenuButtons.RemovePrimaryCommunity
-		},
-		formatRulesForAdditionalInfo = { buttonSurface = var1, btnContext = var1 }
-	},
-	[eventNamesModule.ContextualMenuButtonCurrencyTransfer] = if fFlagProfilePlatformEnableCurrencyTransfer then {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = {
-			optionType = "CTAType",
-			btn = analyticsConstantsModule.ContextualMenuButtons.CurrencyTransfer
-		},
-		formatRulesForAdditionalInfo = { buttonSurface = var1 }
-	} else nil,
-	[eventNamesModule.ContextualMenuButtonTradeItems] = if fFlagProfilePlatformEnableTradeItemsModule then {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = {
-			optionType = "CTAType",
-			btn = analyticsConstantsModule.ContextualMenuButtons.TradeItems
-		},
-		formatRulesForAdditionalInfo = { buttonSurface = var1 }
-	} else nil,
-	[eventNamesModule.ContextualMenuTradeItemsImpression] = if fFlagProfilePlatformEnableTradeItemsModule and fFlagProfileTradeItemsImpressionLoggingModule then {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.UserSeen,
-		additionalInfo = {
-			optionType = "CTAType",
-			btn = analyticsConstantsModule.ContextualMenuButtons.TradeItems
-		},
-		formatRulesForAdditionalInfo = { buttonSurface = var1 }
-	} else nil,
-	[eventNamesModule.CTAButtonOpenEditProfilePage] = {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = {
-			btn = analyticsConstantsModule.CTAButtons.OpenEditProfilePage
-		},
-		formatRulesForAdditionalInfo = { buttonSurface = var1 }
-	},
-	[eventNamesModule.CTAButtonCall] = if fFlagFriendsCallingClientGateDEV then {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = { btn = analyticsConstantsModule.CTAButtons.Call },
-		formatRulesForAdditionalInfo = { buttonSurface = var1 }
-	} else nil,
-	[eventNamesModule.CTAButtonChat] = {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = { btn = analyticsConstantsModule.CTAButtons.Chat },
-		formatRulesForAdditionalInfo = { buttonSurface = var1 }
-	},
-	[eventNamesModule.CTAButtonUnlockChat] = {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = { btn = analyticsConstantsModule.CTAButtons.UnlockChat },
-		formatRulesForAdditionalInfo = { buttonSurface = var1 }
-	},
-	[eventNamesModule.CTAButtonUnfriend] = {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = { btn = analyticsConstantsModule.CTAButtons.Unfriend },
-		formatRulesForAdditionalInfo = { buttonSurface = var1 }
-	},
-	[eventNamesModule.CTAButtonUnblock] = {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = { btn = analyticsConstantsModule.CTAButtons.Unblock },
-		formatRulesForAdditionalInfo = { buttonSurface = var1 }
-	},
-	[eventNamesModule.CTAButtonAddFriend] = {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = { btn = analyticsConstantsModule.CTAButtons.AddFriend },
-		formatRulesForAdditionalInfo = {
-			absolutePosition = var1,
-			isHomePageCarousel = var1,
-			isRecommendation = var1,
-			recommendationContextType = var1,
-			recommendationRank = var1,
-			recommendationSessionId = var1,
-			source = var1,
-			contextualInfoType = var1,
-			shareLinkId = var1,
-			profileType = var1
-		}
-	},
-	[eventNamesModule.CTAButtonAddFriendFromContacts] = {
-		context = contexts.ContactImport,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = {
-			btn = analyticsConstantsModule.CTAButtons.AddFriendFromContacts
-		},
-		formatRulesForAdditionalInfo = { shareLinkId = var1 }
-	},
-	[eventNamesModule.CTAButtonAcceptFriendRequest] = {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = {
-			btn = analyticsConstantsModule.CTAButtons.AcceptFriendRequest
+			btn = AnalyticsConstantsModule.ContextualMenuButtons.LeaveCommunity
 		},
 		formatRulesForAdditionalInfo = {
-			absolutePosition = var1,
-			contextualInfoType = var1,
-			isHomePageCarousel = var1,
-			isRecommendation = var1,
-			recommendationContextType = var1,
-			recommendationRank = var1,
-			recommendationSessionId = var1,
-			source = var1,
-			buttonSurface = var1,
-			shareLinkId = var1,
-			profileType = var1
+			buttonSurface = ButtonSurface,
+			btnContext = ButtonSurface
 		}
 	},
-	[eventNamesModule.CTAButtonEditAvatar] = {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = { btn = analyticsConstantsModule.CTAButtons.EditAvatar },
-		formatRulesForAdditionalInfo = { buttonSurface = var1 }
-	},
-	[eventNamesModule.CTAButtonEditLook] = {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = { btn = analyticsConstantsModule.CTAButtons.EditLook },
-		formatRulesForAdditionalInfo = { buttonSurface = var1 }
-	},
-	[eventNamesModule.CTAButtonShareProfile] = {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = { btn = analyticsConstantsModule.CTAButtons.ShareProfile },
-		formatRulesForAdditionalInfo = { buttonSurface = var1 }
-	},
-	[eventNamesModule.CTAButtonShareProfileQRCode] = {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = {
-			btn = analyticsConstantsModule.CTAButtons.ShareProfileQRCode
-		},
-		formatRulesForAdditionalInfo = { buttonSurface = var1 }
-	},
-	[eventNamesModule.CTAButtonJoinCommunity] = {
-		context = if fFlagProfilePlatformUseProfileTypeContextModule then contexts.CommunityProfile else contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
+	[EventNamesModule.ContextualMenuButtonUnfollow] = {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
 		additionalInfo = {
 			optionType = "CTAType",
-			btn = analyticsConstantsModule.CTAButtons.JoinCommunity
+			btn = AnalyticsConstantsModule.ContextualMenuButtons.Unfollow
 		},
-		formatRulesForAdditionalInfo = { buttonSurface = var1, btnContext = var1 }
+		formatRulesForAdditionalInfo = { buttonSurface = ButtonSurface }
 	},
-	[eventNamesModule.CTAButtonFollow] = {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
+	[EventNamesModule.ContextualMenuButtonRemoveTrustedConnection] = {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
 		additionalInfo = {
 			optionType = "CTAType",
-			btn = analyticsConstantsModule.CTAButtons.Follow
+			btn = AnalyticsConstantsModule.ContextualMenuButtons.RemoveTrustedConnection
 		},
-		formatRulesForAdditionalInfo = { buttonSurface = var1 }
+		formatRulesForAdditionalInfo = { buttonSurface = ButtonSurface }
 	},
-	[eventNamesModule.CTAButtonViewCommunity] = {
-		context = if fFlagProfilePlatformUseProfileTypeContextModule then contexts.CommunityProfile else contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
+	[EventNamesModule.ContextualMenuButtonAddTrustedConnection] = {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
 		additionalInfo = {
 			optionType = "CTAType",
-			btn = analyticsConstantsModule.CTAButtons.ViewCommunity
+			btn = AnalyticsConstantsModule.ContextualMenuButtons.AddTrustedConnection
 		},
-		formatRulesForAdditionalInfo = { buttonSurface = var1, btnContext = var1 }
-	},
-	[eventNamesModule.CTAButtonViewFullProfile] = {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = {
-			optionType = "CTAType",
-			btn = analyticsConstantsModule.CTAButtons.ViewFullProfile
-		},
-		formatRulesForAdditionalInfo = { buttonSurface = var1, btnContext = var1 }
-	},
-	[eventNamesModule.CTAButtonCurrencyTransfer] = if fFlagProfilePlatformEnableCurrencyTransfer then {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = {
-			optionType = "CTAType",
-			btn = analyticsConstantsModule.CTAButtons.CurrencyTransfer
-		},
-		formatRulesForAdditionalInfo = { buttonSurface = var1 }
-	} else nil,
-	[eventNamesModule.CTAButtonTradeItems] = if fFlagProfilePlatformEnableTradeItemsModule then {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = {
-			optionType = "CTAType",
-			btn = analyticsConstantsModule.CTAButtons.TradeItems
-		},
-		formatRulesForAdditionalInfo = { buttonSurface = var1 }
-	} else nil,
-	[eventNamesModule.CTAButtonCancelJoinCommunityRequest] = {
-		context = if fFlagProfilePlatformUseProfileTypeContextModule then contexts.CommunityProfile else contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = {
-			optionType = "CTAType",
-			btn = analyticsConstantsModule.CTAButtons.CancelJoinCommunityRequest
-		},
-		formatRulesForAdditionalInfo = { buttonSurface = var1, btnContext = var1 }
-	},
-	[eventNamesModule.SchoolButton] = {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = { btn = analyticsConstantsModule.Btns.School }
-	},
-	[eventNamesModule.FriendsButton] = {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = { btn = analyticsConstantsModule.Btns.Friends }
-	},
-	[eventNamesModule.FollowersButton] = {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = { btn = analyticsConstantsModule.Btns.Followers }
-	},
-	[eventNamesModule.FollowingsButton] = {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = { btn = analyticsConstantsModule.Btns.Following }
-	},
-	[eventNamesModule.MutualFriendsButton] = {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = { btn = analyticsConstantsModule.Btns.MutualFriends }
-	},
-	[eventNamesModule.ViewPlayerProfileButton] = {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = { btn = analyticsConstantsModule.Btns.ViewPlayerProfile },
 		formatRulesForAdditionalInfo = {
-			absolutePosition = var1,
-			friendStatus = var1,
-			isHomePageCarousel = var1,
-			isRecommendation = var1,
-			recommendationContextType = var1,
-			recommendationRank = var1,
-			recommendationSessionId = var1,
-			source = var1,
-			buttonSurface = var1
+			buttonSurface = ButtonSurface,
+			modalVariantOverride = ButtonSurface
 		}
 	},
-	[eventNamesModule.ContextualMenuButton] = {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = { btn = analyticsConstantsModule.Btns.ContextualMenu }
-	},
-	[eventNamesModule.GameDetailsButton] = {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = { btn = analyticsConstantsModule.Btns.GameDetails }
-	},
-	[eventNamesModule.EditDisplayNameButton] = {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = { btn = analyticsConstantsModule.Btns.EditDisplayName },
-		formatRulesForAdditionalInfo = { canSetDisplayName = var1 }
-	},
-	[eventNamesModule.SetAliasButton] = {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = { btn = analyticsConstantsModule.Btns.SetAlias }
-	},
-	[eventNamesModule.ProfileClosed] = {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.Dismissed
-	},
-	[eventNamesModule.StoreHeaderButton] = {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = { btn = analyticsConstantsModule.Btns.StoreHeader }
-	},
-	[eventNamesModule.FavoriteExperienceOpened] = {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = { btn = analyticsConstantsModule.Btns.FavoriteExperience },
-		formatRulesForAdditionalInfo = { experienceId = var1, positionInComponent = var1 }
-	},
-	[eventNamesModule.FavoriteExperienceSeeAll] = {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
+	[EventNamesModule.ContextualMenuButtonAddIncomingTrustedConnection] = {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
 		additionalInfo = {
-			btn = analyticsConstantsModule.Btns.FavoriteExperienceSeeAll
+			optionType = "CTAType",
+			btn = AnalyticsConstantsModule.ContextualMenuButtons.AddIncomingTrustedConnection
+		},
+		formatRulesForAdditionalInfo = { buttonSurface = ButtonSurface }
+	},
+	[EventNamesModule.ContextualMenuButtonMakePrimaryCommunity] = {
+		context = if FFlagProfilePlatformUseProfileTypeContextModule then Contexts.CommunityProfile else Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = {
+			optionType = "CTAType",
+			btn = AnalyticsConstantsModule.ContextualMenuButtons.MakePrimaryCommunity
+		},
+		formatRulesForAdditionalInfo = {
+			buttonSurface = ButtonSurface,
+			btnContext = ButtonSurface
 		}
 	},
-	[eventNamesModule.ExperienceOpened] = {
-		context = if fFlagProfilePlatformUseProfileTypeContextModule then contexts.CommunityProfile else contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = { btn = analyticsConstantsModule.Btns.Experience },
-		formatRulesForAdditionalInfo = { experienceId = var1, positionInComponent = var1 }
+	[EventNamesModule.ContextualMenuButtonRemovePrimaryCommunity] = {
+		context = if FFlagProfilePlatformUseProfileTypeContextModule then Contexts.CommunityProfile else Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = {
+			optionType = "CTAType",
+			btn = AnalyticsConstantsModule.ContextualMenuButtons.RemovePrimaryCommunity
+		},
+		formatRulesForAdditionalInfo = {
+			buttonSurface = ButtonSurface,
+			btnContext = ButtonSurface
+		}
 	},
-	[eventNamesModule.EventOpened] = {
-		context = contexts.CommunityProfile,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = { btn = analyticsConstantsModule.Btns.Event },
-		formatRulesForAdditionalInfo = { virtualEventId = var1 }
+	[EventNamesModule.ContextualMenuButtonCurrencyTransfer] = if FFlagProfilePlatformEnableCurrencyTransfer then {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = {
+			optionType = "CTAType",
+			btn = AnalyticsConstantsModule.ContextualMenuButtons.CurrencyTransfer
+		},
+		formatRulesForAdditionalInfo = { buttonSurface = ButtonSurface }
+	} else nil,
+	[EventNamesModule.ContextualMenuButtonTradeItems] = if FFlagProfilePlatformEnableTradeItemsModule then {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = {
+			optionType = "CTAType",
+			btn = AnalyticsConstantsModule.ContextualMenuButtons.TradeItems
+		},
+		formatRulesForAdditionalInfo = { buttonSurface = ButtonSurface }
+	} else nil,
+	[EventNamesModule.ContextualMenuTradeItemsImpression] = if FFlagProfilePlatformEnableTradeItemsModule and FFlagProfileTradeItemsImpressionLoggingModule then {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.UserSeen,
+		additionalInfo = {
+			optionType = "CTAType",
+			btn = AnalyticsConstantsModule.ContextualMenuButtons.TradeItems
+		},
+		formatRulesForAdditionalInfo = { buttonSurface = ButtonSurface }
+	} else nil,
+	[EventNamesModule.CTAButtonOpenEditProfilePage] = {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = {
+			btn = AnalyticsConstantsModule.CTAButtons.OpenEditProfilePage
+		},
+		formatRulesForAdditionalInfo = { buttonSurface = ButtonSurface }
 	},
-	[eventNamesModule.EventRSVP] = {
-		context = contexts.CommunityProfile,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = { btn = analyticsConstantsModule.Btns.EventRSVP },
-		formatRulesForAdditionalInfo = { virtualEventId = var1, status = var1 }
+	[EventNamesModule.CTAButtonCall] = if FFlagFriendsCallingClientGateDEV then {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = { btn = AnalyticsConstantsModule.CTAButtons.Call },
+		formatRulesForAdditionalInfo = { buttonSurface = ButtonSurface }
+	} else nil,
+	[EventNamesModule.CTAButtonChat] = {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = { btn = AnalyticsConstantsModule.CTAButtons.Chat },
+		formatRulesForAdditionalInfo = { buttonSurface = ButtonSurface }
 	},
-	[eventNamesModule.EventJoined] = {
-		context = contexts.CommunityProfile,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = { btn = analyticsConstantsModule.Btns.EventJoin },
-		formatRulesForAdditionalInfo = { virtualEventId = var1 }
+	[EventNamesModule.CTAButtonUnlockChat] = {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = { btn = AnalyticsConstantsModule.CTAButtons.UnlockChat },
+		formatRulesForAdditionalInfo = { buttonSurface = ButtonSurface }
 	},
-	[eventNamesModule.CatalogItemOpened] = {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = { btn = analyticsConstantsModule.Btns.ViewCatalogItem },
-		formatRulesForAdditionalInfo = if fFlagProfilePlatformUseCatalogItemOpenedNewFieldsModule then {
-			btnContext = var1,
-			btnUnitId = var1,
-			btnSortPosition = var1
+	[EventNamesModule.CTAButtonUnfriend] = {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = { btn = AnalyticsConstantsModule.CTAButtons.Unfriend },
+		formatRulesForAdditionalInfo = { buttonSurface = ButtonSurface }
+	},
+	[EventNamesModule.CTAButtonUnblock] = {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = { btn = AnalyticsConstantsModule.CTAButtons.Unblock },
+		formatRulesForAdditionalInfo = { buttonSurface = ButtonSurface }
+	},
+	[EventNamesModule.CTAButtonAddFriend] = {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = { btn = AnalyticsConstantsModule.CTAButtons.AddFriend },
+		formatRulesForAdditionalInfo = {
+			absolutePosition = ButtonSurface,
+			isHomePageCarousel = ButtonSurface,
+			isRecommendation = ButtonSurface,
+			recommendationContextType = ButtonSurface,
+			recommendationRank = ButtonSurface,
+			recommendationSessionId = ButtonSurface,
+			source = ButtonSurface,
+			contextualInfoType = ButtonSurface,
+			shareLinkId = ButtonSurface,
+			profileType = ButtonSurface
+		}
+	},
+	[EventNamesModule.CTAButtonAddFriendFromContacts] = {
+		context = Contexts.ContactImport,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = {
+			btn = AnalyticsConstantsModule.CTAButtons.AddFriendFromContacts
+		},
+		formatRulesForAdditionalInfo = { shareLinkId = ButtonSurface }
+	},
+	[EventNamesModule.CTAButtonAcceptFriendRequest] = {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = {
+			btn = AnalyticsConstantsModule.CTAButtons.AcceptFriendRequest
+		},
+		formatRulesForAdditionalInfo = {
+			absolutePosition = ButtonSurface,
+			contextualInfoType = ButtonSurface,
+			isHomePageCarousel = ButtonSurface,
+			isRecommendation = ButtonSurface,
+			recommendationContextType = ButtonSurface,
+			recommendationRank = ButtonSurface,
+			recommendationSessionId = ButtonSurface,
+			source = ButtonSurface,
+			buttonSurface = ButtonSurface,
+			shareLinkId = ButtonSurface,
+			profileType = ButtonSurface
+		}
+	},
+	[EventNamesModule.CTAButtonEditAvatar] = {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = { btn = AnalyticsConstantsModule.CTAButtons.EditAvatar },
+		formatRulesForAdditionalInfo = { buttonSurface = ButtonSurface }
+	},
+	[EventNamesModule.CTAButtonEditLook] = {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = { btn = AnalyticsConstantsModule.CTAButtons.EditLook },
+		formatRulesForAdditionalInfo = { buttonSurface = ButtonSurface }
+	},
+	[EventNamesModule.CTAButtonShareProfile] = {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = { btn = AnalyticsConstantsModule.CTAButtons.ShareProfile },
+		formatRulesForAdditionalInfo = { buttonSurface = ButtonSurface }
+	},
+	[EventNamesModule.CTAButtonShareProfileQRCode] = {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = {
+			btn = AnalyticsConstantsModule.CTAButtons.ShareProfileQRCode
+		},
+		formatRulesForAdditionalInfo = { buttonSurface = ButtonSurface }
+	},
+	[EventNamesModule.CTAButtonJoinCommunity] = {
+		context = if FFlagProfilePlatformUseProfileTypeContextModule then Contexts.CommunityProfile else Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = {
+			optionType = "CTAType",
+			btn = AnalyticsConstantsModule.CTAButtons.JoinCommunity
+		},
+		formatRulesForAdditionalInfo = {
+			buttonSurface = ButtonSurface,
+			btnContext = ButtonSurface
+		}
+	},
+	[EventNamesModule.CTAButtonFollow] = {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = {
+			optionType = "CTAType",
+			btn = AnalyticsConstantsModule.CTAButtons.Follow
+		},
+		formatRulesForAdditionalInfo = { buttonSurface = ButtonSurface }
+	},
+	[EventNamesModule.CTAButtonViewCommunity] = {
+		context = if FFlagProfilePlatformUseProfileTypeContextModule then Contexts.CommunityProfile else Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = {
+			optionType = "CTAType",
+			btn = AnalyticsConstantsModule.CTAButtons.ViewCommunity
+		},
+		formatRulesForAdditionalInfo = {
+			buttonSurface = ButtonSurface,
+			btnContext = ButtonSurface
+		}
+	},
+	[EventNamesModule.CTAButtonViewFullProfile] = {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = {
+			optionType = "CTAType",
+			btn = AnalyticsConstantsModule.CTAButtons.ViewFullProfile
+		},
+		formatRulesForAdditionalInfo = {
+			buttonSurface = ButtonSurface,
+			btnContext = ButtonSurface
+		}
+	},
+	[EventNamesModule.CTAButtonCurrencyTransfer] = if FFlagProfilePlatformEnableCurrencyTransfer then {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = {
+			optionType = "CTAType",
+			btn = AnalyticsConstantsModule.CTAButtons.CurrencyTransfer
+		},
+		formatRulesForAdditionalInfo = { buttonSurface = ButtonSurface }
+	} else nil,
+	[EventNamesModule.CTAButtonTradeItems] = if FFlagProfilePlatformEnableTradeItemsModule then {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = {
+			optionType = "CTAType",
+			btn = AnalyticsConstantsModule.CTAButtons.TradeItems
+		},
+		formatRulesForAdditionalInfo = { buttonSurface = ButtonSurface }
+	} else nil,
+	[EventNamesModule.CTAButtonCancelJoinCommunityRequest] = {
+		context = if FFlagProfilePlatformUseProfileTypeContextModule then Contexts.CommunityProfile else Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = {
+			optionType = "CTAType",
+			btn = AnalyticsConstantsModule.CTAButtons.CancelJoinCommunityRequest
+		},
+		formatRulesForAdditionalInfo = {
+			buttonSurface = ButtonSurface,
+			btnContext = ButtonSurface
+		}
+	},
+	[EventNamesModule.SchoolButton] = {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = { btn = AnalyticsConstantsModule.Btns.School }
+	},
+	[EventNamesModule.FriendsButton] = {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = { btn = AnalyticsConstantsModule.Btns.Friends }
+	},
+	[EventNamesModule.FollowersButton] = {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = { btn = AnalyticsConstantsModule.Btns.Followers }
+	},
+	[EventNamesModule.FollowingsButton] = {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = { btn = AnalyticsConstantsModule.Btns.Following }
+	},
+	[EventNamesModule.MutualFriendsButton] = {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = { btn = AnalyticsConstantsModule.Btns.MutualFriends }
+	},
+	[EventNamesModule.ViewPlayerProfileButton] = {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = { btn = AnalyticsConstantsModule.Btns.ViewPlayerProfile },
+		formatRulesForAdditionalInfo = {
+			absolutePosition = ButtonSurface,
+			friendStatus = ButtonSurface,
+			isHomePageCarousel = ButtonSurface,
+			isRecommendation = ButtonSurface,
+			recommendationContextType = ButtonSurface,
+			recommendationRank = ButtonSurface,
+			recommendationSessionId = ButtonSurface,
+			source = ButtonSurface,
+			buttonSurface = ButtonSurface
+		}
+	},
+	[EventNamesModule.ContextualMenuButton] = {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = { btn = AnalyticsConstantsModule.Btns.ContextualMenu }
+	},
+	[EventNamesModule.GameDetailsButton] = {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = { btn = AnalyticsConstantsModule.Btns.GameDetails }
+	},
+	[EventNamesModule.EditDisplayNameButton] = {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = { btn = AnalyticsConstantsModule.Btns.EditDisplayName },
+		formatRulesForAdditionalInfo = { canSetDisplayName = ButtonSurface }
+	},
+	[EventNamesModule.SetAliasButton] = {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = { btn = AnalyticsConstantsModule.Btns.SetAlias }
+	},
+	[EventNamesModule.ProfileClosed] = {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.Dismissed
+	},
+	[EventNamesModule.StoreHeaderButton] = {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = { btn = AnalyticsConstantsModule.Btns.StoreHeader }
+	},
+	[EventNamesModule.FavoriteExperienceOpened] = {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = { btn = AnalyticsConstantsModule.Btns.FavoriteExperience },
+		formatRulesForAdditionalInfo = {
+			experienceId = ButtonSurface,
+			positionInComponent = ButtonSurface
+		}
+	},
+	[EventNamesModule.FavoriteExperienceSeeAll] = {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = {
+			btn = AnalyticsConstantsModule.Btns.FavoriteExperienceSeeAll
+		}
+	},
+	[EventNamesModule.ExperienceOpened] = {
+		context = if FFlagProfilePlatformUseProfileTypeContextModule then Contexts.CommunityProfile else Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = { btn = AnalyticsConstantsModule.Btns.Experience },
+		formatRulesForAdditionalInfo = {
+			experienceId = ButtonSurface,
+			positionInComponent = ButtonSurface
+		}
+	},
+	[EventNamesModule.EventOpened] = {
+		context = Contexts.CommunityProfile,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = { btn = AnalyticsConstantsModule.Btns.Event },
+		formatRulesForAdditionalInfo = { virtualEventId = ButtonSurface }
+	},
+	[EventNamesModule.EventRSVP] = {
+		context = Contexts.CommunityProfile,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = { btn = AnalyticsConstantsModule.Btns.EventRSVP },
+		formatRulesForAdditionalInfo = { virtualEventId = ButtonSurface, status = ButtonSurface }
+	},
+	[EventNamesModule.EventJoined] = {
+		context = Contexts.CommunityProfile,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = { btn = AnalyticsConstantsModule.Btns.EventJoin },
+		formatRulesForAdditionalInfo = { virtualEventId = ButtonSurface }
+	},
+	[EventNamesModule.CatalogItemOpened] = {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = { btn = AnalyticsConstantsModule.Btns.ViewCatalogItem },
+		formatRulesForAdditionalInfo = if FFlagProfilePlatformUseCatalogItemOpenedNewFieldsModule then {
+			btnContext = ButtonSurface,
+			btnUnitId = ButtonSurface,
+			btnSortPosition = ButtonSurface
 		} else {
-			itemId = var1,
-			positionInComponent = var1,
-			component = var1
+			itemId = ButtonSurface,
+			positionInComponent = ButtonSurface,
+			component = ButtonSurface
 		}
 	},
-	[eventNamesModule.UsernameCopied] = {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = { btn = analyticsConstantsModule.Btns.Username }
+	[EventNamesModule.UsernameCopied] = {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = { btn = AnalyticsConstantsModule.Btns.Username }
 	},
-	[eventNamesModule.ContextualMenuButtonViewPlatformProfile] = if fFlagEnablePlatformProfileContextualMenuOption then {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
+	[EventNamesModule.ContextualMenuButtonViewPlatformProfile] = if FFlagEnablePlatformProfileContextualMenuOption then {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
 		additionalInfo = {
 			optionType = "CTAType",
-			btn = analyticsConstantsModule.ContextualMenuButtons.ViewPlatformProfile
+			btn = AnalyticsConstantsModule.ContextualMenuButtons.ViewPlatformProfile
 		},
-		formatRulesForAdditionalInfo = { buttonSurface = var1 }
+		formatRulesForAdditionalInfo = { buttonSurface = ButtonSurface }
 	} else nil,
-	[eventNamesModule.CTAButtonEditAppearance] = if fFlagProfilePlatformEnableEditAppearanceMenuModule then {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = { btn = analyticsConstantsModule.CTAButtons.EditAppearance },
-		formatRulesForAdditionalInfo = { buttonSurface = var1 }
+	[EventNamesModule.CTAButtonEditAppearance] = if FFlagProfilePlatformEnableEditAppearanceMenuModule then {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = { btn = AnalyticsConstantsModule.CTAButtons.EditAppearance },
+		formatRulesForAdditionalInfo = { buttonSurface = ButtonSurface }
 	} else nil,
-	[eventNamesModule.EditAppearanceMenuEditAvatar] = if fFlagProfilePlatformEnableEditAppearanceMenuModule then {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
+	[EventNamesModule.EditAppearanceMenuEditAvatar] = if FFlagProfilePlatformEnableEditAppearanceMenuModule then {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
 		additionalInfo = {
-			btn = analyticsConstantsModule.Btns.EditAppearanceEditAvatar
+			btn = AnalyticsConstantsModule.Btns.EditAppearanceEditAvatar
 		},
-		formatRulesForAdditionalInfo = { buttonSurface = var1 }
+		formatRulesForAdditionalInfo = { buttonSurface = ButtonSurface }
 	} else nil,
-	[eventNamesModule.EditAppearanceMenuEditEmote] = if fFlagProfilePlatformEnableEditAppearanceMenuModule then {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
+	[EventNamesModule.EditAppearanceMenuEditEmote] = if FFlagProfilePlatformEnableEditAppearanceMenuModule then {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
 		additionalInfo = {
-			btn = analyticsConstantsModule.Btns.EditAppearanceEditEmote
+			btn = AnalyticsConstantsModule.Btns.EditAppearanceEditEmote
 		},
-		formatRulesForAdditionalInfo = { buttonSurface = var1 }
+		formatRulesForAdditionalInfo = { buttonSurface = ButtonSurface }
 	} else nil,
-	[eventNamesModule.EditAppearanceMenuSwitchAvatar] = if fFlagProfilePlatformEnableEditAppearanceMenuModule then {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
+	[EventNamesModule.EditAppearanceMenuSwitchAvatar] = if FFlagProfilePlatformEnableEditAppearanceMenuModule then {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
 		additionalInfo = {
-			btn = analyticsConstantsModule.Btns.EditAppearanceSwitchAvatar
+			btn = AnalyticsConstantsModule.Btns.EditAppearanceSwitchAvatar
 		},
-		formatRulesForAdditionalInfo = { buttonSurface = var1 }
+		formatRulesForAdditionalInfo = { buttonSurface = ButtonSurface }
 	} else nil,
-	[eventNamesModule.EditAppearanceMenuEditBackground] = if fFlagProfilePlatformEnableEditAppearanceMenuModule and fFlagProfilePlatformEditBackgroundMenuItemModule then {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
+	[EventNamesModule.EditAppearanceMenuEditBackground] = if FFlagProfilePlatformEnableEditAppearanceMenuModule and FFlagProfilePlatformEditBackgroundMenuItemModule then {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
 		additionalInfo = {
-			btn = analyticsConstantsModule.Btns.EditAppearanceEditBackground
+			btn = AnalyticsConstantsModule.Btns.EditAppearanceEditBackground
 		},
-		formatRulesForAdditionalInfo = { buttonSurface = var1 }
+		formatRulesForAdditionalInfo = { buttonSurface = ButtonSurface }
 	} else nil,
-	[eventNamesModule.InspectAvatarOpened] = if fFlagSocialEnableProfileInspectAndBuyAnalytics then {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = { btn = analyticsConstantsModule.Btns.InspectAvatar },
-		formatRulesForAdditionalInfo = { profileSessionId = var1 }
+	[EventNamesModule.InspectAvatarOpened] = if FFlagSocialEnableProfileInspectAndBuyAnalytics then {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = { btn = AnalyticsConstantsModule.Btns.InspectAvatar },
+		formatRulesForAdditionalInfo = { profileSessionId = ButtonSurface }
 	} else nil,
-	[eventNamesModule.InspectAvatarBuyClicked] = if fFlagSocialEnableProfileInspectAndBuyAnalytics then {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
+	[EventNamesModule.InspectAvatarBuyClicked] = if FFlagSocialEnableProfileInspectAndBuyAnalytics then {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
 		additionalInfo = {
-			btn = analyticsConstantsModule.Btns.InspectAvatarBuyItems
+			btn = AnalyticsConstantsModule.Btns.InspectAvatarBuyItems
 		},
 		formatRulesForAdditionalInfo = {
-			profileSessionId = var1,
-			itemIds = var1,
-			totalPrice = var1
+			profileSessionId = ButtonSurface,
+			itemIds = ButtonSurface,
+			totalPrice = ButtonSurface
 		}
 	} else nil,
-	[eventNamesModule.InspectAvatarPurchaseConfirmed] = if fFlagSocialEnableProfileInspectAndBuyAnalytics then {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
+	[EventNamesModule.InspectAvatarPurchaseConfirmed] = if FFlagSocialEnableProfileInspectAndBuyAnalytics then {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
 		additionalInfo = {
-			btn = analyticsConstantsModule.Btns.InspectAvatarConfirmBuy
+			btn = AnalyticsConstantsModule.Btns.InspectAvatarConfirmBuy
 		},
-		formatRulesForAdditionalInfo = { profileSessionId = var1 }
+		formatRulesForAdditionalInfo = { profileSessionId = ButtonSurface }
 	} else nil,
-	[eventNamesModule.MomentsSeeAll] = {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = { btn = analyticsConstantsModule.Btns.MomentsSeeAll }
+	[EventNamesModule.MomentsSeeAll] = {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = { btn = AnalyticsConstantsModule.Btns.MomentsSeeAll }
 	},
-	[eventNamesModule.MomentOpened] = {
-		context = contexts.PlayerProfile,
-		eventType = eventTypes.ButtonClick,
-		additionalInfo = { btn = analyticsConstantsModule.Btns.Moment }
+	[EventNamesModule.MomentOpened] = {
+		context = Contexts.PlayerProfile,
+		eventType = EventTypes.ButtonClick,
+		additionalInfo = { btn = AnalyticsConstantsModule.Btns.Moment }
 	}
 }

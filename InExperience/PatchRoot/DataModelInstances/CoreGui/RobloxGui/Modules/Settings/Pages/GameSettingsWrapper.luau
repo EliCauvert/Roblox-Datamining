@@ -1,48 +1,49 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local modules = game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules
-local builderIconsModule = require(corePackagesService.Packages.BuilderIcons)
-local foundationModule = require(corePackagesService.Packages.Foundation)
-local reactModule = require(corePackagesService.Packages.React)
-local reactRobloxModule = require(corePackagesService.Packages.ReactRoblox)
-local settingsPageFactoryModule = require(modules.Settings.SettingsPageFactory)
-local fFlagRefactorInExpSettingsInDevelopment = require(modules.Settings.Flags).FFlagRefactorInExpSettingsInDevelopment
-local _ = nil
-local utils = nil
-local constants = nil
+﻿local CorePackages = game:GetService("CorePackages")
+local Modules = game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules
+local BuilderIconsModule = require(CorePackages.Packages.BuilderIcons)
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local ReactModule = require(CorePackages.Packages.React)
+local ReactRobloxModule = require(CorePackages.Packages.ReactRoblox)
+local SettingsPageFactoryModule = require(Modules.Settings.SettingsPageFactory)
+local FFlagRefactorInExpSettingsInDevelopment = require(Modules.Settings.Flags).FFlagRefactorInExpSettingsInDevelopment
+local Utils = nil
+local Constants = nil
 
-if fFlagRefactorInExpSettingsInDevelopment then
-	local integrationsModule = require(modules.Settings.Integrations)
-	utils = integrationsModule.Utils
-	constants = integrationsModule.Constants
+if FFlagRefactorInExpSettingsInDevelopment then
+	local IntegrationsModule = require(Modules.Settings.Integrations)
+	Utils = IntegrationsModule.Utils
+	Constants = IntegrationsModule.Constants
 end
-local foundationProvider = foundationModule.FoundationProvider
-local migration = builderIconsModule.Migration
+local FoundationProvider = FoundationModule.FoundationProvider
+local Migration = BuilderIconsModule.Migration
 
-return if fFlagRefactorInExpSettingsInDevelopment then (function()
-	-- upvalues: settingsPageFactoryModule (ref), constants (write), migration (ref), builderIconsModule (ref), reactModule (ref), foundationProvider (ref), foundationModule (ref), utils (write), reactRobloxModule (ref)
-	local var1 = settingsPageFactoryModule:CreateNewPage()
-	var1.TabHeader.Name = constants.GAMESETTINGS.TAB_HEADER.NAME
-	local settings = migration.uiblox["icons/common/settings"]
-	var1.TabHeader.TabLabel.Icon.Text = settings.name
-	var1.TabHeader.TabLabel.Icon.FontFace = builderIconsModule.Font[settings.variant]
-	var1.TabHeader.TabLabel.Title.Text = constants.GAMESETTINGS.TAB_HEADER.TEXT
-	var1.Page:ClearAllChildren()
-	var1.PageOpen = false
+local function createGameSettings() --[[ Line: 27 ]]
+	-- upvalues: SettingsPageFactoryModule (copy), Constants (ref), Migration (copy), BuilderIconsModule (copy), ReactModule (copy), FoundationProvider (copy), FoundationModule (copy), Utils (ref), ReactRobloxModule (copy)
+	local NewPage = SettingsPageFactoryModule:CreateNewPage()
+	NewPage.TabHeader.Name = Constants.GAMESETTINGS.TAB_HEADER.NAME
+	local IconsCommonSettings = Migration.uiblox["icons/common/settings"]
+	NewPage.TabHeader.TabLabel.Icon.Text = IconsCommonSettings.name
+	NewPage.TabHeader.TabLabel.Icon.FontFace = BuilderIconsModule.Font[IconsCommonSettings.variant]
+	NewPage.TabHeader.TabLabel.Title.Text = Constants.GAMESETTINGS.TAB_HEADER.TEXT
+	NewPage.Page:ClearAllChildren()
+	NewPage.PageOpen = false
 	
-	function var7.OpenSettingsPage()
-		-- upvalues: var1 (ref)
-		var1.PageOpen = true
+	function NewPage.OpenSettingsPage() --[[ Line: 41 ]]
+		-- upvalues: NewPage (copy)
+		NewPage.PageOpen = true
 	end
 	
-	function var7.CloseSettingsPage()
-		-- upvalues: var1 (ref)
-		var1.PageOpen = false
+	function NewPage.CloseSettingsPage() --[[ Line: 44 ]]
+		-- upvalues: NewPage (copy)
+		NewPage.PageOpen = false
 	end
 	
-	reactRobloxModule.createRoot(var1.Page):render(reactModule.createElement(foundationProvider, {
-		colorMode = foundationModule.Enums.ColorMode.Dark,
-		device = utils.getDeviceType()
-	}, {}))
+	ReactRobloxModule.createRoot(NewPage.Page):render((ReactModule.createElement(FoundationProvider, {
+		colorMode = FoundationModule.Enums.ColorMode.Dark,
+		device = Utils.getDeviceType()
+	}, {})))
 	
-	return var1
-end)() else require(modules.Settings.Pages.GameSettings)
+	return NewPage
+end
+
+return if FFlagRefactorInExpSettingsInDevelopment then createGameSettings() else require(Modules.Settings.Pages.GameSettings)

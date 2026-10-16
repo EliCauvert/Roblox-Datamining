@@ -1,4 +1,4 @@
-﻿local t = {
+﻿local config = {
 	month = {
 		singular = "Feature.RobloxSubscription.Label.month",
 		plural = "Feature.RobloxSubscription.Label.months"
@@ -12,14 +12,14 @@
 		plural = "Feature.RobloxSubscription.label.weeks"
 	}
 }
-local t_1 = {
+local config1 = {
 	singular = "Feature.RobloxSubscription.Label.month",
 	plural = "Feature.RobloxSubscription.Label.months"
 }
 
-return function(p1, p2)
-	-- upvalues: t (ref), t_1 (ref)
-	local var1 = t[string.lower(p1)] or t_1
+return function(Text: string, p1) --[[ Line: 37 | Named "getPeriodTypeDisplayLabel" ]]
+	-- upvalues: config (copy), config1 (copy)
+	local Entry = config[string.lower(Text)] or config1
 	
-	return if p2 then var1.plural else var1.singular
+	return if p1 then Entry.plural else Entry.singular
 end

@@ -1,26 +1,26 @@
-﻿local t = {
-	new = function()
+﻿local ThumbnailModule = {
+	new = function() --[[ Line: 12 ]]
 		return {}
 	end
 }
 
-function t.fromThumbnailData(p1, p2)
-	-- upvalues: t (ref)
-	local var1 = t.new()
-	var1.universeId = tostring(p1.targetId)
-	var1.state = p1.state
-	var1.url = p1.imageUrl
-	var1.size = p2
+function ThumbnailModule.fromThumbnailData(p1, Size) --[[ Line: 18 ]]
+	-- upvalues: ThumbnailModule (copy)
+	local NewThumbnail = ThumbnailModule.new()
+	NewThumbnail.universeId = tostring(p1.targetId)
+	NewThumbnail.state = p1.state
+	NewThumbnail.url = p1.imageUrl
+	NewThumbnail.size = Size
 	
-	return var1
+	return NewThumbnail
 end
 
-function t.isCompleteThumbnailData(p1)
-	return type(p1) == "table" and (type(p1.targetId) == "number" and (type(p1.state) == "string" and (if type(p1.imageUrl) ~= "string" then p1.imageUrl == nil else true)))
+function ThumbnailModule.isCompleteThumbnailData(p1): boolean --[[ Line: 29 ]]
+	return type(p1) == "table" and (type(p1.targetId) == "number" and type(p1.state) == "string") and (type(p1.imageUrl) == "string" or p1.imageUrl == nil)
 end
 
-function t.checkStateIsFinal(p1)
+function ThumbnailModule.checkStateIsFinal(p1): boolean --[[ Line: 36 ]]
 	return p1 ~= "Pending"
 end
 
-return t
+return ThumbnailModule

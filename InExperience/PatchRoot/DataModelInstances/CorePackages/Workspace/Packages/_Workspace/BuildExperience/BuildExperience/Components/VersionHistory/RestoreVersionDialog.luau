@@ -1,72 +1,74 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local sharedFlagsModule = require(parent.SharedFlags)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local dialog = foundationModule.Dialog
-local dialogSize = foundationModule.Enums.DialogSize
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local fFlagEnableTeamTestLua = sharedFlagsModule.FFlagEnableTeamTestLua
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
+local Dialog = FoundationModule.Dialog
+local DialogSize = FoundationModule.Enums.DialogSize
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local FFlagEnableTeamTestLua = require(Parent.SharedFlags).FFlagEnableTeamTestLua
 
-return function(p1)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), reactModule (ref), fFlagEnableTeamTestLua (ref), buttonVariant (ref), dialog (ref), dialogSize (ref)
-	local var1 = useLocalization({
-		cancel = localizationStringsModule.VERSION_HISTORY_CANCEL,
-		revert = localizationStringsModule.CHAT_REVERT_CONFIRMATION_ACTION,
-		restore = localizationStringsModule.VERSION_HISTORY_RESTORE
+return function(p1) --[[ Line: 27 | Named "RestoreVersionDialog" ]]
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), ReactModule (copy), FFlagEnableTeamTestLua (copy), ButtonVariant (copy), Dialog (copy), DialogSize (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
+		cancel = LocalizationStringsModule.VERSION_HISTORY_CANCEL,
+		revert = LocalizationStringsModule.CHAT_REVERT_CONFIRMATION_ACTION,
+		restore = LocalizationStringsModule.VERSION_HISTORY_RESTORE
 	})
-	local cancel = var1.cancel
-	local revert = var1.revert
-	local restore = var1.restore
-	local var2 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref)
-		if p1.isLoading then
+	local Cancel = UseLocalizationResult.cancel
+	local Revert = UseLocalizationResult.revert
+	local Restore = UseLocalizationResult.restore
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 36 ]]
+		-- upvalues: p1 (copy)
+		if not p1.isLoading then
+			p1.onRestore()
+			
 			return
 		end
-		p1.onRestore()
 	end, { p1.isLoading, p1.onRestore })
-	local var3 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref)
-		if p1.isLoading then
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 42 ]]
+		-- upvalues: p1 (copy)
+		if not p1.isLoading then
+			p1.onCancel()
+			
 			return
 		end
-		p1.onCancel()
 	end, { p1.isLoading, p1.onCancel })
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 49 ]]
+		-- upvalues: FFlagEnableTeamTestLua (upval), Revert (copy), Restore (copy), ButtonVariant (upval), p1 (copy), UseResult (copy), Cancel (copy), UseResult1 (copy)
+		return {
+			LayoutOrder = 3,
+			actions = {
+				{
+					text = if FFlagEnableTeamTestLua then Revert else Restore,
+					variant = ButtonVariant.Emphasis,
+					isDisabled = p1.isLoading,
+					isLoading = p1.isLoading,
+					onActivated = UseResult
+				},
+				{
+					text = Cancel,
+					variant = ButtonVariant.Standard,
+					isDisabled = p1.isLoading,
+					onActivated = UseResult1
+				}
+			}
+		}
+	end, {
+		Cancel, UseResult, UseResult1, p1.isLoading, Restore, Revert
+	})
 	
-	return if p1.isOpen == false then nil else reactModule.createElement(dialog.Root, {
+	return if p1.isOpen == false then nil else ReactModule.createElement(Dialog.Root, {
 		disablePortal = false,
 		hasBackdrop = true,
 		testId = "restore-version-dialog",
-		size = dialogSize.Small
+		size = DialogSize.Small
 	}, {
-		Title = reactModule.createElement(dialog.Title, { LayoutOrder = 1, text = p1.title }),
-		Content = reactModule.createElement(dialog.Content, { LayoutOrder = 2 }, {
-			Description = reactModule.createElement(dialog.Text, { Text = p1.description })
+		Title = ReactModule.createElement(Dialog.Title, { LayoutOrder = 1, text = p1.title }),
+		Content = ReactModule.createElement(Dialog.Content, { LayoutOrder = 2 }, {
+			Description = ReactModule.createElement(Dialog.Text, { Text = p1.description })
 		}),
-		Actions = reactModule.createElement(dialog.Actions, reactModule.useMemo(function()
-			-- upvalues: fFlagEnableTeamTestLua (copy), revert (ref), restore (ref), buttonVariant (copy), p1 (ref), var2 (ref), cancel (ref), var3 (ref)
-			return {
-				LayoutOrder = 3,
-				actions = {
-					{
-						text = if fFlagEnableTeamTestLua then revert else restore,
-						variant = buttonVariant.Emphasis,
-						isDisabled = p1.isLoading,
-						isLoading = p1.isLoading,
-						onActivated = var2
-					},
-					{
-						text = cancel,
-						variant = buttonVariant.Standard,
-						isDisabled = p1.isLoading,
-						onActivated = var3
-					}
-				}
-			}
-		end, {
-			cancel, var2, var3, p1.isLoading, restore, revert
-		}))
+		Actions = ReactModule.createElement(Dialog.Actions, UseMemoResult)
 	})
 end

@@ -1,8 +1,11 @@
-﻿local t = { ClearScreens = "ClearScreens" }
+﻿local AvatarExperienceActionsModule = { ClearScreens = "ClearScreens" }
 
-function t.clearScreens(p1)
-	-- upvalues: t (ref)
-	return { type = t.ClearScreens, routeNames = p1 }
+function AvatarExperienceActionsModule.clearScreens(RouteNames) --[[ Line: 9 ]]
+	-- upvalues: AvatarExperienceActionsModule (copy)
+	return {
+		type = AvatarExperienceActionsModule.ClearScreens,
+		routeNames = RouteNames
+	}
 end
 
-return t
+return AvatarExperienceActionsModule

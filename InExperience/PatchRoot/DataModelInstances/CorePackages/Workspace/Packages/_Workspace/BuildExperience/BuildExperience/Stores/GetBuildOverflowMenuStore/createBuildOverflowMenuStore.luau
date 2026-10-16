@@ -1,221 +1,221 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local publishStatusModule = require(buildExperience.Chat.PublishStatus)
-local universeConfigurationModule = require(parent.DataHydration.UniverseConfiguration)
-local gameConfigurationLabelsModule = require(buildExperience.utils.GameConfigurationLabels)
-local launchPlaytestWithLoadingStateModule = require(parent.BuildExperiencePlaytestLaunch.launchPlaytestWithLoadingState)
-local getPrivatePlaytestersStore = require(parent.DataHydration.PrivatePlaytesters).getPrivatePlaytestersStore
-local sendBuildExperienceEventModule = require(buildExperience.Telemetry.sendBuildExperienceEvent)
-local fFlagBuildExperiencePrivateInvitesModule = require(buildExperience.Flags.FFlagBuildExperiencePrivateInvites)
-local fFlagBuildShareDisabledOnPrivateModule = require(buildExperience.Flags.FFlagBuildShareDisabledOnPrivate)
-local fFlagBuildExperienceManageDevProductModule = require(buildExperience.Flags.FFlagBuildExperienceManageDevProduct)
-local fFlagEnableBuildAdPromotionModule = require(buildExperience.Flags.FFlagEnableBuildAdPromotion)
-local fFlagBuildExperienceMenuImprovementsModule = require(buildExperience.Flags.FFlagBuildExperienceMenuImprovements)
-local fFlagBuildExperienceAnalytics = require(parent.SharedFlags).FFlagBuildExperienceAnalytics
-local privacyType = universeConfigurationModule.PrivacyType
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
+local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
+local PublishStatusModule = require(BuildExperience.Chat.PublishStatus)
+local UniverseConfigurationModule = require(Parent.DataHydration.UniverseConfiguration)
+local GameConfigurationLabelsModule = require(BuildExperience.utils.GameConfigurationLabels)
+local LaunchPlaytestWithLoadingStateModule = require(Parent.BuildExperiencePlaytestLaunch.launchPlaytestWithLoadingState)
+local GetPrivatePlaytestersStoreFunction = require(Parent.DataHydration.PrivatePlaytesters).getPrivatePlaytestersStore
+local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
+local FFlagBuildExperiencePrivateInvitesModule = require(BuildExperience.Flags.FFlagBuildExperiencePrivateInvites)
+local FFlagBuildExperienceManageDevProductModule = require(BuildExperience.Flags.FFlagBuildExperienceManageDevProduct)
+local FFlagEnableBuildAdPromotionModule = require(BuildExperience.Flags.FFlagEnableBuildAdPromotion)
+local FFlagBuildExperienceMenuImprovementsModule = require(BuildExperience.Flags.FFlagBuildExperienceMenuImprovements)
+local FFlagBuildExperienceAnalytics = require(Parent.SharedFlags).FFlagBuildExperienceAnalytics
+local PrivacyType = UniverseConfigurationModule.PrivacyType
 
-local function _()
+local function _(): boolean --[[ Line: 84 | Named "isInApp" ]]
 	return game.GameId == 0
 end
 
-local _ = function()
+local _ = function(): boolean --[[ Line: 88 | Named "isInGame" ]]
 	return not (game.GameId == 0)
 end
 
-local function isAssistantDisabled(_)
+local function isAssistantDisabled(_): boolean --[[ Line: 92 ]]
 	return not not (game.GameId == 0)
 end
 
-local function isPlaytestDisabled(p1)
-	return if game.GameId == 0 then if p1.placeId ~= nil then p1.isNewGameTarget and not p1.hasPublishedTurn else true else not (game.GameId == 0)
+local function isPlaytestDisabled(p1): boolean --[[ Line: 96 ]]
+	return not (game.GameId == 0) or (p1.placeId == nil or p1.isNewGameTarget and not p1.hasPublishedTurn)
 end
 
-local function isVersionHistoryDisabled(p1)
+local function isVersionHistoryDisabled(p1): boolean --[[ Line: 100 ]]
 	return p1.placeId == nil
 end
 
-local _ = function(p1)
-	-- upvalues: getPrivatePlaytestersStore (ref)
-	local andFetchInvitedPlayers = getPrivatePlaytestersStore(false).getAndFetchInvitedPlayers(p1.universeId)
+local _ = function(p1): boolean --[[ Line: 105 | Named "hasExistingRoster" ]]
+	-- upvalues: GetPrivatePlaytestersStoreFunction (copy)
+	local AndFetchInvitedPlayers = GetPrivatePlaytestersStoreFunction(false).getAndFetchInvitedPlayers(p1.universeId)
 	
-	return andFetchInvitedPlayers.status(false) == "Ready" and #andFetchInvitedPlayers.players(false) > 0
+	return AndFetchInvitedPlayers.status(false) == "Ready" and #AndFetchInvitedPlayers.players(false) > 0
 end
 
-local function isInviteToPlaytestDisabled(p1)
-	-- upvalues: getPrivatePlaytestersStore (ref)
-	local andFetchInvitedPlayers = getPrivatePlaytestersStore(false).getAndFetchInvitedPlayers(p1.universeId)
+local function isInviteToPlaytestDisabled(p1): boolean --[[ Line: 110 ]]
+	-- upvalues: GetPrivatePlaytestersStoreFunction (copy)
+	local AndFetchInvitedPlayers = GetPrivatePlaytestersStoreFunction(false).getAndFetchInvitedPlayers(p1.universeId)
 	
-	if andFetchInvitedPlayers.status(false) == "Ready" and #andFetchInvitedPlayers.players(false) > 0 then
+	if AndFetchInvitedPlayers.status(false) == "Ready" and #AndFetchInvitedPlayers.players(false) > 0 then
 		return false
+	else
+		local PrivatePlaytestersStore = GetPrivatePlaytestersStoreFunction(false)
+		
+		return PrivatePlaytestersStore.MAX_INVITES <= #PrivatePlaytestersStore.getAndFetchInvitedPlayers(p1.universeId).players(false)
 	end
-	local var1 = getPrivatePlaytestersStore(false)
-	
-	return var1.MAX_INVITES <= #var1.getAndFetchInvitedPlayers(p1.universeId).players(false)
 end
 
-local function getPublishText(p1)
-	-- upvalues: publishStatusModule (ref), localizationStringsModule (ref)
-	return if publishStatusModule.isPublishLatest(p1.hasPublishedVersion, p1.hasPublishedTurn) then localizationStringsModule.BUILD_MENU_PUBLISH_LATEST else localizationStringsModule.BUILD_MENU_PUBLISH
+local function getPublishText(p1) --[[ Line: 120 ]]
+	-- upvalues: PublishStatusModule (copy), LocalizationStringsModule (copy)
+	return if PublishStatusModule.isPublishLatest(p1.hasPublishedVersion, p1.hasPublishedTurn) then LocalizationStringsModule.BUILD_MENU_PUBLISH_LATEST else LocalizationStringsModule.BUILD_MENU_PUBLISH
 end
 
-local _ = function(p1)
-	-- upvalues: universeConfigurationModule (ref), gameConfigurationLabelsModule (ref)
-	return gameConfigurationLabelsModule.getAudience(universeConfigurationModule.getUniverseConfigurationStore().getAndFetchSummary(p1.universeId).data())
+local _ = function(p1) --[[ Line: 126 | Named "getShareAudience" ]]
+	-- upvalues: UniverseConfigurationModule (copy), GameConfigurationLabelsModule (copy)
+	return GameConfigurationLabelsModule.getAudience((UniverseConfigurationModule.getUniverseConfigurationStore().getAndFetchSummary(p1.universeId).data()))
 end
 
-local function isShareUnavailable(p1)
-	-- upvalues: privacyType (ref)
-	return if p1.shareAudience ~= nil then p1.shareAudience == privacyType.Private else true
+local function isShareUnavailable(p1): boolean --[[ Line: 132 ]]
+	-- upvalues: PrivacyType (copy)
+	return p1.shareAudience == nil or p1.shareAudience == PrivacyType.Private
 end
 
-local function onShareActivated(p1)
-	-- upvalues: fFlagBuildShareDisabledOnPrivateModule (ref), privacyType (ref), universeConfigurationModule (ref), gameConfigurationLabelsModule (ref)
+local function onShareActivated(p1) --[[ Line: 137 ]]
+	-- upvalues: PrivacyType (copy), UniverseConfigurationModule (copy), GameConfigurationLabelsModule (copy)
 	if p1.placeId == nil then
 		return nil
-	elseif fFlagBuildShareDisabledOnPrivateModule then
-		if if p1.shareAudience ~= nil then p1.shareAudience == privacyType.Private else true then
-			return nil
-		end
+	elseif p1.shareAudience == nil or p1.shareAudience == PrivacyType.Private then
+		return nil
+	else
+		local Audience = GameConfigurationLabelsModule.getAudience((UniverseConfigurationModule.getUniverseConfigurationStore().getAndFetchSummary(p1.universeId).data()))
+		
+		return if Audience == PrivacyType.FriendsOnly then { type = "confirmFriendsShare", placeId = p1.placeId } elseif Audience == PrivacyType.Public then { type = "share", placeId = p1.placeId } else nil
 	end
-	local audience = gameConfigurationLabelsModule.getAudience(universeConfigurationModule.getUniverseConfigurationStore().getAndFetchSummary(p1.universeId).data())
-	
-	return if audience == privacyType.Private then { type = "showPrivateShareTooltip" } elseif audience == privacyType.FriendsOnly then { type = "confirmFriendsShare", placeId = p1.placeId } elseif audience == privacyType.Public then { type = "share", placeId = p1.placeId } else nil
 end
 
-local function onAssistantActivated(_)
-	return if game.GameId == 0 then nil else { type = "leaveExperience" }
+local function onAssistantActivated(_) --[[ Line: 153 ]]
+	return if not not (game.GameId == 0) then nil else { type = "leaveExperience" }
 end
 
-local function onPlaytestActivated(p1)
-	-- upvalues: sendBuildExperienceEventModule (ref), launchPlaytestWithLoadingStateModule (ref)
-	if (if game.GameId == 0 then if p1.placeId ~= nil then p1.isNewGameTarget and not p1.hasPublishedTurn else true else not (game.GameId == 0)) or p1.placeId == nil then
+local function onPlaytestActivated(p1) --[[ Line: 161 ]]
+	-- upvalues: SendBuildExperienceEventModule (copy), LaunchPlaytestWithLoadingStateModule (copy)
+	if not (game.GameId == 0) or (p1.placeId == nil or p1.isNewGameTarget and not p1.hasPublishedTurn) or p1.placeId == nil then
+		return nil
+	else
+		SendBuildExperienceEventModule("PLAYTEST_CLICK", {
+			universeId = p1.universeId,
+			placeId = p1.placeId,
+			conversationId = p1.sessionId
+		}, { context = "overflow_menu" })
+		LaunchPlaytestWithLoadingStateModule(p1.placeId, "BuildOverflowMenu", true)
+		
 		return nil
 	end
-	sendBuildExperienceEventModule("PLAYTEST_CLICK", {
-		universeId = p1.universeId,
-		placeId = p1.placeId,
-		conversationId = p1.sessionId
-	}, { context = "overflow_menu" })
-	launchPlaytestWithLoadingStateModule(p1.placeId, "BuildOverflowMenu", true)
-	
-	return nil
 end
 
-local function onVersionHistoryActivated(p1)
+local function onVersionHistoryActivated(p1) --[[ Line: 175 ]]
 	return if p1.placeId == nil then nil else { type = "openVersionHistory" }
 end
 
-local t = {
+local config = {
 	id = "get-users",
-	text = localizationStringsModule.BUILD_MENU_GET_USERS,
-	isDisabled = function(p1)
+	text = LocalizationStringsModule.BUILD_MENU_GET_USERS,
+	isDisabled = function(p1): boolean --[[ Line: 192 ]]
 		return p1.getUsersUniverseEligible ~= true
 	end,
-	getTrailingText = function(p1)
-		-- upvalues: localizationStringsModule (ref)
-		return if (p1.getUsersFreeCreditsRemaining or 0) > 0 then localizationStringsModule.BUILD_MENU_GET_USERS_FREE_TAG else nil
+	getTrailingText = function(p1) --[[ Line: 196 ]]
+		-- upvalues: LocalizationStringsModule (copy)
+		return if (p1.getUsersFreeCreditsRemaining or 0) > 0 then LocalizationStringsModule.BUILD_MENU_GET_USERS_FREE_TAG else nil
 	end,
-	onActivated = function()
+	onActivated = function() --[[ Line: 201 ]]
 		return { type = "openGetUsers" }
 	end
 }
 
-return function()
-	-- upvalues: localizationStringsModule (ref), fFlagBuildShareDisabledOnPrivateModule (ref), fFlagBuildExperiencePrivateInvitesModule (ref), isShareUnavailable (ref), onShareActivated (ref), isVersionHistoryDisabled (ref), onVersionHistoryActivated (ref), isInviteToPlaytestDisabled (ref), sendBuildExperienceEventModule (ref), getPrivatePlaytestersStore (ref), fFlagBuildExperienceMenuImprovementsModule (ref), isAssistantDisabled (ref), onAssistantActivated (ref), isPlaytestDisabled (ref), onPlaytestActivated (ref), getPublishText (ref), fFlagBuildExperienceAnalytics (ref), fFlagBuildExperienceManageDevProductModule (ref), signalsModule (ref), reactModule (ref), signalsReactModule (ref), universeConfigurationModule (ref), gameConfigurationLabelsModule (ref), fFlagEnableBuildAdPromotionModule (ref), privacyType (ref), t (ref)
-	local list
-	local t_1 = {
+return function() --[[ Line: 206 | Named "createBuildOverflowMenuStore" ]]
+	-- upvalues: LocalizationStringsModule (copy), FFlagBuildExperiencePrivateInvitesModule (copy), isShareUnavailable (copy), onShareActivated (copy), isVersionHistoryDisabled (copy), onVersionHistoryActivated (copy), isInviteToPlaytestDisabled (copy), SendBuildExperienceEventModule (copy), GetPrivatePlaytestersStoreFunction (copy), FFlagBuildExperienceMenuImprovementsModule (copy), isAssistantDisabled (copy), onAssistantActivated (copy), isPlaytestDisabled (copy), onPlaytestActivated (copy), getPublishText (copy), FFlagBuildExperienceAnalytics (copy), FFlagBuildExperienceManageDevProductModule (copy), SignalsModule (copy), ReactModule (copy), SignalsReactModule (copy), UniverseConfigurationModule (copy), GameConfigurationLabelsModule (copy), FFlagEnableBuildAdPromotionModule (copy), PrivacyType (copy), config (copy)
+	local config1 = {
 		id = "settings",
-		text = localizationStringsModule.BUILD_MENU_SETTINGS,
-		onActivated = function()
+		text = LocalizationStringsModule.BUILD_MENU_SETTINGS,
+		onActivated = function() --[[ Line: 211 ]]
 			return { type = "openPage", page = "settings" }
 		end
 	}
-	local t_2 = {
+	local config2 = {
 		id = "share",
-		text = localizationStringsModule.BUILD_MENU_SHARE,
-		isDisabled = if fFlagBuildShareDisabledOnPrivateModule and not fFlagBuildExperiencePrivateInvitesModule then isShareUnavailable else nil,
-		onActivated = function(p1)
-			-- upvalues: fFlagBuildExperiencePrivateInvitesModule (copy), onShareActivated (copy)
-			return if fFlagBuildExperiencePrivateInvitesModule then { type = "share" } else onShareActivated(p1)
+		text = LocalizationStringsModule.BUILD_MENU_SHARE,
+		isDisabled = if FFlagBuildExperiencePrivateInvitesModule then nil else isShareUnavailable,
+		onActivated = function(p1) --[[ Line: 223 ]]
+			-- upvalues: FFlagBuildExperiencePrivateInvitesModule (upval), onShareActivated (upval)
+			return if FFlagBuildExperiencePrivateInvitesModule then { type = "share" } else onShareActivated(p1)
 		end
 	}
-	local t_3 = {
+	local config3 = {
 		id = "version-history",
-		text = localizationStringsModule.BUILD_MENU_VERSIONS,
+		text = LocalizationStringsModule.BUILD_MENU_VERSIONS,
 		isDisabled = isVersionHistoryDisabled,
 		onActivated = onVersionHistoryActivated
 	}
-	local t_4 = {
+	local config4 = {
 		id = "invite-to-playtest",
-		text = localizationStringsModule.BUILD_MENU_INVITE_TO_PLAYTEST,
+		text = LocalizationStringsModule.BUILD_MENU_INVITE_TO_PLAYTEST,
 		isDisabled = isInviteToPlaytestDisabled,
-		onActivated = function(p1)
-			-- upvalues: sendBuildExperienceEventModule (copy), getPrivatePlaytestersStore (copy)
-			sendBuildExperienceEventModule("ADD_TO_PLAYTEST_CLICK", {
+		onActivated = function(p1) --[[ Line: 242 ]]
+			-- upvalues: SendBuildExperienceEventModule (upval), GetPrivatePlaytestersStoreFunction (upval)
+			SendBuildExperienceEventModule("ADD_TO_PLAYTEST_CLICK", {
 				universeId = p1.universeId,
 				placeId = p1.placeId,
 				conversationId = p1.sessionId
 			}, { source = "overflow_menu" })
-			local andFetchInvitedPlayers = getPrivatePlaytestersStore(false).getAndFetchInvitedPlayers(p1.universeId)
+			local AndFetchInvitedPlayers = GetPrivatePlaytestersStoreFunction(false).getAndFetchInvitedPlayers(p1.universeId)
+			local v1: boolean = AndFetchInvitedPlayers.status(false) == "Ready" and #AndFetchInvitedPlayers.players(false) > 0
 			
-			return if andFetchInvitedPlayers.status(false) == "Ready" and #andFetchInvitedPlayers.players(false) > 0 then { type = "openInviteManagement" } else { type = "openInvitePicker" }
+			return if v1 then { type = "openInviteManagement" } else { type = "openInvitePicker" }
 		end
 	}
-	local t_5 = {
+	local config5 = {
 		id = "stats",
-		text = localizationStringsModule.BUILD_MENU_STATS,
-		onActivated = function()
+		text = LocalizationStringsModule.BUILD_MENU_STATS,
+		onActivated = function() --[[ Line: 257 ]]
 			return { type = "openPage", page = "stats" }
 		end
 	}
-	local t_6 = {
+	local config6 = {
 		id = "monetization",
-		text = localizationStringsModule.BUILD_MENU_MONETIZATION,
-		onActivated = function()
+		text = LocalizationStringsModule.BUILD_MENU_MONETIZATION,
+		onActivated = function() --[[ Line: 267 ]]
 			return { type = "openPage", page = "monetization" }
 		end
 	}
-	local _ = nil
-	local t_7 = nil
+	local Value = nil
+	local List = nil
 	
-	if fFlagBuildExperienceMenuImprovementsModule then
-		list = {
+	if FFlagBuildExperienceMenuImprovementsModule then
+		List = {
 			{
 				items = {
 					{
 						id = "publish",
-						text = localizationStringsModule.BUILD_MENU_PUBLISH,
-						onActivated = function()
+						text = LocalizationStringsModule.BUILD_MENU_PUBLISH,
+						onActivated = function() --[[ Line: 293 ]]
 							return { type = "openPage", page = "publish" }
 						end
 					},
-					t_2,
-					t_3,
-					t_1
+					config2,
+					config3,
+					config1
 				}
 			}
 		}
 		
-		if fFlagBuildExperiencePrivateInvitesModule then
-			table.insert(list[1].items, 3, t_4)
+		if FFlagBuildExperiencePrivateInvitesModule then
+			table.insert(List[1].items, 3, config4)
 		end
 	else
-		list = {
+		List = {
 			{
 				items = {
 					{
 						id = "assistant",
-						text = localizationStringsModule.BUILD_MENU_BACK_TO_BUILD,
+						text = LocalizationStringsModule.BUILD_MENU_BACK_TO_BUILD,
 						isDisabled = isAssistantDisabled,
 						onActivated = onAssistantActivated
 					},
 					{
 						id = "playtest",
-						text = localizationStringsModule.BUILD_MENU_PLAYTEST,
+						text = LocalizationStringsModule.BUILD_MENU_PLAYTEST,
 						isDisabled = isPlaytestDisabled,
 						onActivated = onPlaytestActivated
 					}
@@ -223,106 +223,111 @@ return function()
 			},
 			{
 				items = {
-					t_1,
+					config1,
 					{
 						id = "publish",
-						text = localizationStringsModule.BUILD_MENU_PUBLISH,
+						text = LocalizationStringsModule.BUILD_MENU_PUBLISH,
 						getText = getPublishText,
-						onActivated = function()
+						onActivated = function() --[[ Line: 335 ]]
 							return { type = "openPage", page = "publish" }
 						end
 					},
-					t_2,
-					t_3
+					config2,
+					config3
 				}
 			}
 		}
 		
-		if fFlagBuildExperiencePrivateInvitesModule then
-			table.insert(list[2].items, 2, t_4)
+		if FFlagBuildExperiencePrivateInvitesModule then
+			table.insert(List[2].items, 2, config4)
 		end
-		if fFlagBuildExperienceAnalytics then
-			t_7 = { items = { t_5 } }
-			table.insert(list, t_7)
+		if FFlagBuildExperienceAnalytics then
+			Value = { items = { config5 } }
+			table.insert(List, Value)
 		end
 	end
-	if fFlagBuildExperienceManageDevProductModule and not fFlagBuildExperienceMenuImprovementsModule then
-		table.insert(list, 1, { items = { t_6 } })
+	if FFlagBuildExperienceManageDevProductModule and not FFlagBuildExperienceMenuImprovementsModule then
+		table.insert(List, 1, { items = { config6 } })
 	end
-	local var1 = signalsModule.createSignal(list)
+	local Signal = SignalsModule.createSignal(List)
 	
 	return {
-		getItems = var1,
-		useItems = function(p1)
-			-- upvalues: reactModule (copy), signalsModule (copy), fFlagBuildExperiencePrivateInvitesModule (copy), getPrivatePlaytestersStore (copy), signalsReactModule (copy), fFlagBuildExperienceAnalytics (copy), universeConfigurationModule (copy), gameConfigurationLabelsModule (copy), var1 (ref), fFlagEnableBuildAdPromotionModule (copy), fFlagBuildExperienceMenuImprovementsModule (copy), privacyType (copy), t_5 (ref), fFlagBuildExperienceManageDevProductModule (copy), t_6 (ref), t (copy), t_7 (write)
-			local var2 = if p1 ~= nil then nil else p1.universeId
-			local var3 = signalsReactModule.useSignalState(reactModule.useMemo(function()
-				-- upvalues: signalsModule (copy), fFlagBuildExperiencePrivateInvitesModule (copy), var2 (ref), getPrivatePlaytestersStore (copy)
-				return signalsModule.createComputed(function(p2)
-					-- upvalues: fFlagBuildExperiencePrivateInvitesModule (copy), var2 (copy), getPrivatePlaytestersStore (copy)
-					return if fFlagBuildExperiencePrivateInvitesModule and var2 ~= nil then #getPrivatePlaytestersStore(false).getAndFetchInvitedPlayers(var2).players(p2) else 0
+		getItems = Signal,
+		useItems = function(p1) --[[ Line: 366 ]]
+			-- upvalues: ReactModule (upval), SignalsModule (upval), FFlagBuildExperiencePrivateInvitesModule (upval), GetPrivatePlaytestersStoreFunction (upval), SignalsReactModule (upval), FFlagBuildExperienceAnalytics (upval), UniverseConfigurationModule (upval), GameConfigurationLabelsModule (upval), Signal (copy), FFlagEnableBuildAdPromotionModule (upval), FFlagBuildExperienceMenuImprovementsModule (upval), PrivacyType (upval), config5 (copy), FFlagBuildExperienceManageDevProductModule (upval), config6 (copy), config (upval), Value (ref)
+			local UniverseId = if p1 == nil then nil else p1.universeId
+			local UseSignalStateResult = if FFlagBuildExperienceAnalytics then SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 388 ]]
+				-- upvalues: SignalsModule (upval), UniverseId (copy), UniverseConfigurationModule (upval), GameConfigurationLabelsModule (upval)
+				return SignalsModule.createComputed(function(p2) --[[ Line: 389 ]]
+					-- upvalues: UniverseId (upval), UniverseConfigurationModule (upval), GameConfigurationLabelsModule (upval)
+					return if UniverseId == nil then nil else GameConfigurationLabelsModule.getAudience((UniverseConfigurationModule.getUniverseConfigurationStore().getAndFetchSummary(UniverseId).data(p2)))
 				end)
-			end, { var2 }))
-			local var4 = if fFlagBuildExperienceAnalytics then signalsReactModule.useSignalState(reactModule.useMemo(function()
-				-- upvalues: signalsModule (copy), var2 (ref), universeConfigurationModule (copy), gameConfigurationLabelsModule (copy)
-				return signalsModule.createComputed(function(p2)
-					-- upvalues: var2 (copy), universeConfigurationModule (copy), gameConfigurationLabelsModule (copy)
-					return if var2 == nil then nil else gameConfigurationLabelsModule.getAudience(universeConfigurationModule.getUniverseConfigurationStore().getAndFetchSummary(var2).data(p2))
-				end)
-			end, { var2 })) else nil
-			local var5 = signalsReactModule.useSignalState(var1)
-			local var6 = fFlagEnableBuildAdPromotionModule and (p1 ~= nil and (p1.canOpenGetUsers == true and p1.getUsersUserEligible == true))
-			
-			return if p1 == nil then {} else reactModule.useMemo(function()
-				-- upvalues: fFlagBuildExperienceMenuImprovementsModule (copy), fFlagBuildExperienceAnalytics (copy), var4 (write), privacyType (copy), t_5 (copy), fFlagBuildExperienceManageDevProductModule (copy), t_6 (copy), var6 (ref), t (copy), fFlagBuildExperiencePrivateInvitesModule (copy), var5 (ref), t_7 (copy)
-				if fFlagBuildExperienceMenuImprovementsModule then
-					local t_1 = {}
+			end, { UniverseId }))) else nil
+			local UseSignalStateResult1 = SignalsReactModule.useSignalState(Signal)
+			local IsGetUsersUserEligible: boolean = FFlagEnableBuildAdPromotionModule and (p1 ~= nil and (p1.canOpenGetUsers == true and p1.getUsersUserEligible == true))
+			local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 411 ]]
+				-- upvalues: FFlagBuildExperienceMenuImprovementsModule (upval), FFlagBuildExperienceAnalytics (upval), UseSignalStateResult (ref), PrivacyType (upval), config5 (upval), FFlagBuildExperienceManageDevProductModule (upval), config6 (upval), IsGetUsersUserEligible (copy), config (upval), FFlagBuildExperiencePrivateInvitesModule (upval), UseSignalStateResult1 (copy), Value (upval)
+				if FFlagBuildExperienceMenuImprovementsModule then
+					local List = {}
 					
-					if fFlagBuildExperienceAnalytics and var4 == privacyType.Public then
-						table.insert(t_1, t_5)
+					if FFlagBuildExperienceAnalytics and UseSignalStateResult == PrivacyType.Public then
+						table.insert(List, config5)
 					end
-					if fFlagBuildExperienceManageDevProductModule then
-						table.insert(t_1, t_6)
+					if FFlagBuildExperienceManageDevProductModule then
+						table.insert(List, config6)
 					end
-					if var6 then
-						table.insert(t_1, t)
+					if IsGetUsersUserEligible then
+						table.insert(List, config)
 					end
-					if #t_1 == 0 and not fFlagBuildExperiencePrivateInvitesModule then
-						return var5
+					if #List == 0 and not FFlagBuildExperiencePrivateInvitesModule then
+						return UseSignalStateResult1
 					end
-					local cloned = table.clone(var5)
+					local Copy = table.clone(UseSignalStateResult1)
 					
-					if #t_1 > 0 then
-						table.insert(cloned, 1, { items = t_1 })
+					if #List > 0 then
+						table.insert(Copy, 1, { items = List })
 					end
-					return cloned
+					return Copy
 				else
-					local var7 = fFlagBuildExperienceAnalytics and var4 ~= privacyType.Public
+					local IsNotUseSignalStateResultMatch: boolean = FFlagBuildExperienceAnalytics and UseSignalStateResult ~= PrivacyType.Public
 					
-					if not fFlagBuildExperiencePrivateInvitesModule and not var7 and not var6 then
-						return var5
+					if not FFlagBuildExperiencePrivateInvitesModule and not IsNotUseSignalStateResultMatch and not IsGetUsersUserEligible then
+						return UseSignalStateResult1
 					end
-					local cloned = table.clone(var5)
+					local Copy = table.clone(UseSignalStateResult1)
 					
-					if var7 then
-						local index = table.find(cloned, t_7)
+					if IsNotUseSignalStateResultMatch then
+						local FoundIndex: number? = table.find(Copy, Value)
 						
-						if index ~= nil then
-							table.remove(cloned, index)
+						if FoundIndex ~= nil then
+							table.remove(Copy, FoundIndex)
 						end
 					end
-					if var6 then
-						local var8 = cloned[1]
+					if IsGetUsersUserEligible then
+						local Entry = Copy[1]
 						
-						if var8 ~= nil then
-							local cloned_1 = table.clone(var8.items)
-							table.insert(cloned_1, t)
-							cloned[1] = { items = cloned_1 }
+						if Entry ~= nil then
+							local Copy1 = table.clone(Entry.items)
+							table.insert(Copy1, config)
+							Copy[1] = { items = Copy1 }
 						end
 					end
-					return cloned
+					return Copy
 				end
-			end, { var5, var3, var4, var6 })
+			end, {
+				UseSignalStateResult1,
+				SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 372 ]]
+					-- upvalues: SignalsModule (upval), FFlagBuildExperiencePrivateInvitesModule (upval), UniverseId (copy), GetPrivatePlaytestersStoreFunction (upval)
+					return SignalsModule.createComputed(function(p2): number --[[ Line: 373 ]]
+						-- upvalues: FFlagBuildExperiencePrivateInvitesModule (upval), UniverseId (upval), GetPrivatePlaytestersStoreFunction (upval)
+						return if FFlagBuildExperiencePrivateInvitesModule and UniverseId ~= nil then #GetPrivatePlaytestersStoreFunction(false).getAndFetchInvitedPlayers(UniverseId).players(p2) else 0
+					end)
+				end, { UniverseId }))),
+				UseSignalStateResult,
+				IsGetUsersUserEligible
+			})
+			
+			return if p1 == nil then {} else UseMemoResult
 		end
 	}
 end

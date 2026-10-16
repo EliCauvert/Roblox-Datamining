@@ -1,55 +1,57 @@
-﻿local parent = script:FindFirstAncestor("Moments").Parent
-local foundationModule = require(parent.Foundation)
-local localizationModule = require(parent.Localization)
-local reactModule = require(parent.React)
-local dialog = foundationModule.Dialog
-local text = foundationModule.Text
-local view = foundationModule.View
-local useLocalization = localizationModule.Hooks.useLocalization
-local t = {
+﻿local Parent = script:FindFirstAncestor("Moments").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local Dialog = FoundationModule.Dialog
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local config = {
 	ipReportCodeLabel = "Feature.ReportAbuse.Label.YourReportCode",
 	ipReportSubmittedBody = "Feature.ReportAbuse.Description.IpInfringementReportModal",
 	ipReportSubmittedClose = "Feature.ReportAbuse.Action.Close",
 	ipReportSubmittedTitle = "Feature.ReportAbuse.Title.SelectInSceneIpReport"
 }
 
-return function(p1)
-	-- upvalues: useLocalization (ref), t (ref), reactModule (ref), dialog (ref), foundationModule (ref), view (ref), text (ref)
-	local var1 = useLocalization(t)
+return function(p1) --[[ Line: 33 | Named "IpReportConfirmationDialog" ]]
+	-- upvalues: UseLocalizationFunction (copy), config (copy), ReactModule (copy), Dialog (copy), FoundationModule (copy), View (copy), Text (copy)
+	local UseLocalizationResult = UseLocalizationFunction(config)
 	
-	return reactModule.createElement(dialog.Root, {
+	return ReactModule.createElement(Dialog.Root, {
 		disablePortal = false,
 		hasBackdrop = true,
 		onClose = p1.onClose,
-		size = foundationModule.Enums.DialogSize.Medium
+		size = FoundationModule.Enums.DialogSize.Medium
 	}, {
-		DialogTitle = reactModule.createElement(dialog.Title, { LayoutOrder = 1, text = var1.ipReportSubmittedTitle }),
-		DialogContent = reactModule.createElement(dialog.Content, { LayoutOrder = 2 }, {
-			ReportCodeContent = reactModule.createElement(view, { tag = "col align-x-center gap-small size-full-0 auto-y" }, {
-				ReportCodeLabel = reactModule.createElement(text, {
+		DialogTitle = ReactModule.createElement(Dialog.Title, {
+			LayoutOrder = 1,
+			text = UseLocalizationResult.ipReportSubmittedTitle
+		}),
+		DialogContent = ReactModule.createElement(Dialog.Content, { LayoutOrder = 2 }, {
+			ReportCodeContent = ReactModule.createElement(View, { tag = "col align-x-center gap-small size-full-0 auto-y" }, {
+				ReportCodeLabel = ReactModule.createElement(Text, {
 					tag = "auto-xy text-title-medium text-align-x-center content-default",
 					LayoutOrder = 1,
-					Text = var1.ipReportCodeLabel
+					Text = UseLocalizationResult.ipReportCodeLabel
 				}),
-				ReportCode = reactModule.createElement(text, {
+				ReportCode = ReactModule.createElement(Text, {
 					tag = "auto-xy text-heading-medium text-align-x-center content-emphasis",
 					LayoutOrder = 2,
 					Text = p1.reportCode
 				}),
-				ReportSubmittedBody = reactModule.createElement(text, {
+				ReportSubmittedBody = ReactModule.createElement(Text, {
 					tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-center content-default",
 					RichText = true,
 					LayoutOrder = 3,
-					Text = var1.ipReportSubmittedBody
+					Text = UseLocalizationResult.ipReportSubmittedBody
 				})
 			})
 		}),
-		DialogActions = reactModule.createElement(dialog.Actions, {
+		DialogActions = ReactModule.createElement(Dialog.Actions, {
 			LayoutOrder = 3,
 			actions = {
 				{
-					text = var1.ipReportSubmittedClose,
-					variant = foundationModule.Enums.ButtonVariant.Emphasis,
+					text = UseLocalizationResult.ipReportSubmittedClose,
+					variant = FoundationModule.Enums.ButtonVariant.Emphasis,
 					onActivated = p1.onClose
 				}
 			}

@@ -1,27 +1,28 @@
-﻿local parent = script:FindFirstAncestor("MomentsCommon").Parent
-local reactModule = require(parent.React)
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local appPage = require(parent.RobloxAppEnums).AppPage
-local setCurrentToastMessage = require(parent.ToastRodux).Actions.SetCurrentToastMessage
-local images = require(parent.UIBlox).App.ImageSet.Images
+﻿local Parent = script:FindFirstAncestor("MomentsCommon").Parent
+local ReactModule = require(Parent.React)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local SetCurrentToastMessageFunction = require(Parent.ToastRodux).Actions.SetCurrentToastMessage
+local Images = require(Parent.UIBlox).App.ImageSet.Images
+local FFlagMomentsBlockingModalInOverlay = require(Parent.SharedFlags).FFlagMomentsBlockingModalInOverlay
 
-return function(p1)
-	-- upvalues: useDispatch (ref), reactModule (ref), appPage (ref), setCurrentToastMessage (ref), images (ref)
-	local var1 = useDispatch()
-	
-	return if p1 == nil then nil else reactModule.useCallback(function(p2)
-		-- upvalues: p1 (ref), appPage (copy), var1 (ref), setCurrentToastMessage (copy), images (copy)
-		p1.push(appPage.BlockingModal, {
+return function(p1) --[[ Line: 36 | Named "useOpenBlockingModal" ]]
+	-- upvalues: UseDispatchFunction (copy), ReactModule (copy), AppPage (copy), FFlagMomentsBlockingModalInOverlay (copy), SetCurrentToastMessageFunction (copy), Images (copy)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 38 ]]
+		-- upvalues: p1 (copy), AppPage (upval), FFlagMomentsBlockingModalInOverlay (upval), UseDispatchResult (copy), SetCurrentToastMessageFunction (upval), Images (upval)
+		p1.push(AppPage.BlockingModal, {
 			navProps = {
 				userId = p2.userId,
 				onBlockConfirmed = p2.onBlockConfirmed,
 				onBlockFailed = p2.onBlockFailed,
 				openReportUser = p2.openReportUser,
-				onBlockSuccess = function()
-					-- upvalues: var1 (copy), setCurrentToastMessage (copy), images (copy), p2 (ref)
-					var1(setCurrentToastMessage({
+				presentInOverlay = if FFlagMomentsBlockingModalInOverlay then true else nil,
+				onBlockSuccess = function() --[[ Line: 47 ]]
+					-- upvalues: UseDispatchResult (upval), SetCurrentToastMessageFunction (upval), Images (upval), p2 (copy)
+					UseDispatchResult(SetCurrentToastMessageFunction({
 						toastMessage = "Feature.Profile.Action.UserBlocked",
-						toastIcon = images["icons/actions/block"]
+						toastIcon = Images["icons/actions/block"]
 					}))
 					
 					if p2.onBlockSucceeded ~= nil then
@@ -30,5 +31,7 @@ return function(p1)
 				end
 			}
 		})
-	end, { p1, var1 })
+	end, { p1, UseDispatchResult })
+	
+	return if p1 == nil then nil else UseResult
 end

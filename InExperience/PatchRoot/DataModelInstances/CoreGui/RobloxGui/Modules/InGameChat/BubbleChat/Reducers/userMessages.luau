@@ -1,26 +1,26 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local cryoModule = require(corePackagesService.Packages.Cryo)
+﻿local CorePackages = game:GetService("CorePackages")
+local CryoModule = require(CorePackages.Packages.Cryo)
 
-return require(corePackagesService.Packages.Rodux).createReducer({}, {
-	[require(script.Parent.Parent.Actions.AddMessage).name] = function(p1, p2)
-		-- upvalues: cryoModule (ref)
-		return cryoModule.Dictionary.join(p1, {
-			[p2.message.userId] = cryoModule.List.join(p1[p2.message.userId] or {}, { p2.message.id })
+return (require(CorePackages.Packages.Rodux).createReducer({}, {
+	[require(script.Parent.Parent.Actions.AddMessage).name] = function(p1, p2) --[[ Line: 18 ]]
+		-- upvalues: CryoModule (copy)
+		return CryoModule.Dictionary.join(p1, {
+			[p2.message.userId] = CryoModule.List.join(p1[p2.message.userId] or {}, { p2.message.id })
 		})
 	end,
-	[require(script.Parent.Parent.Actions.RemoveMessage).name] = function(p1, p2)
-		-- upvalues: cryoModule (ref)
-		local userId = p1[p2.message.userId]
+	[require(script.Parent.Parent.Actions.RemoveMessage).name] = function(p1, p2) --[[ Line: 26 ]]
+		-- upvalues: CryoModule (copy)
+		local v1 = p1[p2.message.userId]
 		
-		return if userId then if #userId == 1 and userId[1] == p2.message.id then cryoModule.Dictionary.join(p1, { [p2.message.userId] = cryoModule.None }) else cryoModule.Dictionary.join(p1, {
-			[p2.message.userId] = cryoModule.List.filter(userId, function(p3)
-				-- upvalues: p2 (ref)
-				return p3 ~= p2.message.id
+		return if v1 then if #v1 == 1 and v1[1] == p2.message.id then CryoModule.Dictionary.join(p1, { [p2.message.userId] = CryoModule.None }) else CryoModule.Dictionary.join(p1, {
+			[p2.message.userId] = CryoModule.List.filter(v1, function(Id): boolean --[[ Line: 36 ]]
+				-- upvalues: p2 (copy)
+				return Id ~= p2.message.id
 			end)
 		}) else p1
 	end,
-	[require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.VoiceChat.Actions.PlayerRemoved).name] = function(p1, p2)
-		-- upvalues: cryoModule (ref)
-		return if p1[p2.userId] then cryoModule.Dictionary.join(p1, { [p2.userId] = cryoModule.None }) else p1
+	[require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.VoiceChat.Actions.PlayerRemoved).name] = function(p1, p2) --[[ Line: 46 ]]
+		-- upvalues: CryoModule (copy)
+		return if p1[p2.userId] then CryoModule.Dictionary.join(p1, { [p2.userId] = CryoModule.None }) else p1
 	end
-})
+}))

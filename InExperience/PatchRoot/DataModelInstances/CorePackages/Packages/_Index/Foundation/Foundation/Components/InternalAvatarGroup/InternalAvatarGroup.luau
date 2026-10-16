@@ -1,90 +1,93 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local builderIconsModule = require(parent.BuilderIcons)
-local reactModule = require(parent.React)
-local reactIsModule = require(parent.ReactIs)
-local icon = builderIconsModule.Icon
-local colorNamespaceModule = require(foundation.Enums.ColorNamespace)
-local iconModule = require(foundation.Components.Icon)
-local iconSizeModule = require(foundation.Enums.IconSize)
-local textModule = require(foundation.Components.Text)
-local _ = require(foundation.Components.Types)
-local viewModule = require(foundation.Components.View)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local avatarGroupTypeModule = require(foundation.Enums.AvatarGroupType)
-local _ = require(foundation.Enums.UserPresence)
-local usePresentationContext = require(foundation.Providers.Style.PresentationContext).usePresentationContext
-local getBindableValueModule = require(foundation.Utility.getBindableValue)
-local useCumulativeBackgroundModule = require(foundation.Utility.useCumulativeBackground)
-local t = {
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local ReactModule = require(Parent.React)
+local ReactIsModule = require(Parent.ReactIs)
+local Icon = require(Parent.BuilderIcons).Icon
+local ColorNamespaceModule = require(Foundation.Enums.ColorNamespace)
+local IconModule = require(Foundation.Components.Icon)
+local IconSizeModule = require(Foundation.Enums.IconSize)
+local TextModule = require(Foundation.Components.Text)
+local _ = require(Foundation.Components.Types)
+local ViewModule = require(Foundation.Components.View)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local _ = require(Foundation.Enums.UserPresence)
+local UsePresentationContextFunction = require(Foundation.Providers.Style.PresentationContext).usePresentationContext
+local GetBindableValueModule = require(Foundation.Utility.getBindableValue)
+local UseCumulativeBackgroundModule = require(Foundation.Utility.useCumulativeBackground)
+local config = {
 	isEllipsedOverflow = false,
 	max = 1e999,
 	testId = "--foundation-avatar-group",
-	type = avatarGroupTypeModule.Spread
+	type = require(Foundation.Enums.AvatarGroupType).Spread
 }
 
-local function AvatarOverflow(p1)
-	-- upvalues: useTokensModule (ref), usePresentationContext (ref), useCumulativeBackgroundModule (ref), colorNamespaceModule (ref), reactModule (ref), viewModule (ref), withCommonPropsModule (ref), iconModule (ref), icon (ref), iconSizeModule (ref), textModule (ref)
-	local emphasis = useTokensModule()[usePresentationContext().colorNamespace or colorNamespaceModule.Color].Content.Emphasis
+local function AvatarOverflow(p1) --[[ Line: 61 ]]
+	-- upvalues: UseTokensModule (copy), UsePresentationContextFunction (copy), UseCumulativeBackgroundModule (copy), ColorNamespaceModule (copy), ReactModule (copy), ViewModule (copy), WithCommonPropsModule (copy), IconModule (copy), Icon (copy), IconSizeModule (copy), TextModule (copy)
+	local TextCaptionSmall: string = if p1.isEllipsed then "text-caption-small" else "text-caption-medium"
+	local Emphasis = UseTokensModule()[UsePresentationContextFunction().colorNamespace or ColorNamespaceModule.Color].Content.Emphasis
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(p1, {
+	return ReactModule.createElement(ViewModule, WithCommonPropsModule(p1, {
 		tag = "row align-x-center align-y-center radius-circle",
 		Size = p1.Size,
-		backgroundStyle = useCumulativeBackgroundModule(p1.backplateStyle, p1.backgroundStyle)
-	}), if p1.isEllipsed then reactModule.createElement(iconModule, {
-		name = icon.ThreeDotsHorizontal,
-		size = iconSizeModule.XSmall,
-		style = emphasis,
+		backgroundStyle = UseCumulativeBackgroundModule(p1.backplateStyle, p1.backgroundStyle)
+	}), if p1.isEllipsed then ReactModule.createElement(IconModule, {
+		name = Icon.ThreeDotsHorizontal,
+		size = IconSizeModule.XSmall,
+		style = Emphasis,
 		testId = `{p1.testId}--ellipses`
-	}) else reactModule.createElement(textModule, {
+	}) else ReactModule.createElement(TextModule, {
 		Text = `+{p1.count}`,
-		tag = `auto-xy text-align-x-center {if p1.isEllipsed then "text-caption-small" else "text-caption-medium"}`,
-		textStyle = emphasis,
+		tag = `auto-xy text-align-x-center {TextCaptionSmall}`,
+		textStyle = Emphasis,
 		testId = `{p1.testId}--text`
 	}))
 end
 
-return reactModule.memo(reactModule.forwardRef(function(p2, p3)
-	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), usePresentationContext (ref), colorNamespaceModule (ref), reactIsModule (ref), getBindableValueModule (ref), reactModule (ref), AvatarOverflow (ref), viewModule (ref), withCommonPropsModule (ref)
-	local var1 = withDefaultsModule(p2, t)
-	local var2 = useTokensModule()
-	local shift300 = var2[usePresentationContext().colorNamespace or colorNamespaceModule.Color].Shift.Shift_300
-	local backplateStyle = var1.backplateStyle or var2.Color.Surface.Surface_0
-	local resolvedSize = var1.resolvedSize
-	local var3 = resolvedSize + var1.gap
-	local t_1 = {}
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 96 | Named "InternalAvatarGroup" ]]
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), UsePresentationContextFunction (copy), ColorNamespaceModule (copy), ReactIsModule (copy), GetBindableValueModule (copy), ReactModule (copy), AvatarOverflow (copy), ViewModule (copy), WithCommonPropsModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
+	local UseTokensModuleResult = UseTokensModule()
+	local Shift300 = UseTokensModuleResult[UsePresentationContextFunction().colorNamespace or ColorNamespaceModule.Color].Shift.Shift_300
+	local BackplateStyle = WithDefaultsModuleResult.backplateStyle or UseTokensModuleResult.Color.Surface.Surface_0
+	local ResolvedSize = WithDefaultsModuleResult.resolvedSize
+	local NewResolvedSize = ResolvedSize + WithDefaultsModuleResult.gap
+	local Elements = {}
+	local _UDim2 = nil
+	local ZIndex = nil
 	
-	for i, v in var1.avatars do
-		local var4 = tostring(getBindableValueModule(if reactIsModule.isBinding(v) or typeof(v) == "number" then v elseif typeof(v) == "table" then v.userId else v))
-		local uDim2 = UDim2.fromOffset(var3 * (i - 1), 0)
-		local var5 = #var1.avatars - (i - 1)
+	for LayoutOrder, avatar in WithDefaultsModuleResult.avatars do
+		local Text = tostring(GetBindableValueModule(if ReactIsModule.isBinding(avatar) or typeof(avatar) == "number" then avatar elseif typeof(avatar) == "table" then avatar.userId else avatar))
+		_UDim2 = UDim2.fromOffset(NewResolvedSize * (LayoutOrder - 1), 0)
+		ZIndex = #WithDefaultsModuleResult.avatars - (LayoutOrder - 1)
 		
-		if var1.max < i then
-			t_1[i] = reactModule.createElement(AvatarOverflow, {
+		if WithDefaultsModuleResult.max < LayoutOrder then
+			Elements[LayoutOrder] = ReactModule.createElement(AvatarOverflow, {
 				key = "overflow",
-				count = #var1.avatars - var1.max,
-				isEllipsed = var1.isEllipsedOverflow,
-				Size = UDim2.fromOffset(resolvedSize, resolvedSize),
-				LayoutOrder = i,
-				Position = uDim2,
-				ZIndex = var5,
-				backgroundStyle = shift300,
-				backplateStyle = backplateStyle,
-				testId = `{var1.testId}--avatar-overflow`
+				count = #WithDefaultsModuleResult.avatars - WithDefaultsModuleResult.max,
+				isEllipsed = WithDefaultsModuleResult.isEllipsedOverflow,
+				Size = UDim2.fromOffset(ResolvedSize, ResolvedSize),
+				LayoutOrder = LayoutOrder,
+				Position = _UDim2,
+				ZIndex = ZIndex,
+				backgroundStyle = Shift300,
+				backplateStyle = BackplateStyle,
+				testId = `{WithDefaultsModuleResult.testId}--avatar-overflow`
 			})
 			break
+		else
+			Elements[LayoutOrder] = WithDefaultsModuleResult.renderAvatar(avatar, {
+				key = Text,
+				LayoutOrder = LayoutOrder,
+				Position = _UDim2,
+				ZIndex = ZIndex,
+				testId = `{WithDefaultsModuleResult.testId}--avatar-{Text}`,
+				backgroundStyle = Shift300,
+				backplateStyle = BackplateStyle
+			})
+			continue
 		end
-		t_1[i] = var1.renderAvatar(v, {
-			key = var4,
-			LayoutOrder = i,
-			Position = uDim2,
-			ZIndex = var5,
-			testId = `{var1.testId}--avatar-{var22}`,
-			backgroundStyle = shift300,
-			backplateStyle = backplateStyle
-		})
 	end
-	return reactModule.createElement(viewModule, withCommonPropsModule(var1, { tag = "auto-xy", ref = p3 }), t_1)
+	return ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, { tag = "auto-xy", ref = Ref }), Elements)
 end))

@@ -1,22 +1,22 @@
-﻿local httpService = game:GetService("HttpService")
-local appStorageService = game:GetService("AppStorageService")
+﻿local HttpService = game:GetService("HttpService")
+local AppStorageService = game:GetService("AppStorageService")
 
 return {
-	getTableAppStorageKey = function(p1)
-		-- upvalues: appStorageService (ref), httpService (ref)
-		local ok, status = pcall(function()
-			-- upvalues: appStorageService (copy), p1 (ref)
-			return appStorageService:GetItem(p1)
+	getTableAppStorageKey = function(Key) --[[ Line: 4 ]]
+		-- upvalues: AppStorageService (copy), HttpService (copy)
+		local Success, Result = pcall(function() --[[ Line: 5 ]]
+			-- upvalues: AppStorageService (upval), Key (copy)
+			return AppStorageService:GetItem(Key)
 		end)
 		
-		return if ok and status ~= nil then httpService:JSONDecode(status) else {}
+		return if Success and Result ~= nil then HttpService:JSONDecode(Result) else {}
 	end,
-	setTableAppStorageKey = function(value, p1)
-		-- upvalues: appStorageService (ref)
-		pcall(function()
-			-- upvalues: appStorageService (copy), value (ref), p1 (ref)
-			appStorageService:SetItem(value, tostring(p1))
-			appStorageService:Flush()
+	setTableAppStorageKey = function(Key, p1) --[[ Line: 16 ]]
+		-- upvalues: AppStorageService (copy)
+		pcall(function() --[[ Line: 17 ]]
+			-- upvalues: AppStorageService (upval), Key (copy), p1 (copy)
+			AppStorageService:SetItem(Key, (tostring(p1)))
+			AppStorageService:Flush()
 		end)
 	end
 }

@@ -1,15 +1,15 @@
-﻿local cryoModule = require(game:GetService("CorePackages").Packages.Cryo)
-local var1 = 0
+﻿local CryoModule = require(game:GetService("CorePackages").Packages.Cryo)
+local Timestamp = 0
 
-return function(p1)
-	-- upvalues: var1 (write), cryoModule (ref)
-	var1 += 1
+return function(p1) --[[ Line: 7 | Named "createMockMessage" ]]
+	-- upvalues: Timestamp (ref), CryoModule (copy)
+	Timestamp += 1
 	
-	return cryoModule.Dictionary.join({
+	return CryoModule.Dictionary.join({
 		name = "Foo",
 		userId = "1",
 		text = "Hello, World!",
-		id = tostring(var1),
-		timestamp = var1
+		id = tostring(Timestamp),
+		timestamp = Timestamp
 	}, p1)
 end

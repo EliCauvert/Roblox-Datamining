@@ -1,206 +1,209 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local playersService = game:GetService("Players")
-local contextActionService = game:GetService("ContextActionService")
-local guiService = game:GetService("GuiService")
-local userInputService = game:GetService("UserInputService")
-local robloxReplicatedStorageService = game:GetService("RobloxReplicatedStorage")
-local corePackagesService = game:GetService("CorePackages")
-local isTenFootInterface = require(corePackagesService.Workspace.Packages.AppCommonLib).isTenFootInterface
-local _ = require(coreGuiService:WaitForChild("RobloxGui"):WaitForChild("Modules"):WaitForChild("AvatarContextMenu").ThemeHandler)
-local blockingUtilityModule = require(corePackagesService.Workspace.Packages.BlockingUtility)
-local localPlayer = playersService.LocalPlayer
-while not localPlayer do
-	playersService.PlayerAdded:Wait()
-	localPlayer = playersService.LocalPlayer
+﻿local Players = game:GetService("Players")
+local ContextActionService = game:GetService("ContextActionService")
+local GuiService = game:GetService("GuiService")
+local UserInputService = game:GetService("UserInputService")
+local RobloxReplicatedStorage = game:GetService("RobloxReplicatedStorage")
+local CorePackages = game:GetService("CorePackages")
+local IsTenFootInterfaceFunction = require(CorePackages.Workspace.Packages.AppCommonLib).isTenFootInterface
+local _ = require(game:GetService("CoreGui"):WaitForChild("RobloxGui"):WaitForChild("Modules"):WaitForChild("AvatarContextMenu").ThemeHandler)
+local BlockingUtilityModule = require(CorePackages.Workspace.Packages.BlockingUtility)
+local LocalPlayer = Players.LocalPlayer
+while not LocalPlayer do
+	Players.PlayerAdded:Wait()
+	LocalPlayer = Players.LocalPlayer
 end
-local t = {}
-t.__index = t
+local Module = {}
+Module.__index = Module
 
-function t.GetHeadshotForPlayer(_, p1)
-	return "rbxthumb://type=AvatarHeadShot&id=" .. p0.UserId .. "&w=150&h=150"
+function Module:GetHeadshotForPlayer(Player): string --[[ Line: 49 ]]
+	return "rbxthumb://type=AvatarHeadShot&id=" .. Player.UserId .. "&w=150&h=150"
 end
 
-function t:HasOrGettingHeadShot(p1)
+function Module:HasOrGettingHeadShot(p1): boolean --[[ Line: 53 ]]
 	return self.HeadShotUrlCache[p1] ~= nil
 end
 
-function t.FindPlayerFromPart(_, p1)
-	-- upvalues: playersService (ref)
-	if p1 and p1.Parent then
-		local var1 = p1
-		while var1 and not var1:IsA("Model") do
-			var1 = var1.Parent
+function Module:FindPlayerFromPart(Character) --[[ Line: 57 ]]
+	-- upvalues: Players (copy)
+	if Character and Character.Parent then
+		local Character1 = Character
+		while Character1 and not Character1:IsA("Model") do
+			Character1 = Character1.Parent
 		end
-		return if var1 then playersService:GetPlayerFromCharacter(var1) else nil
+		if Character1 then
+			return Players:GetPlayerFromCharacter(Character1)
+		end
 	end
+	return nil
 end
 
-function t.GetPlayerPosition(_, p2)
-	if p2.Character then
-		local humanoidRootPart = p2.Character:FindFirstChild("HumanoidRootPart")
+function Module:GetPlayerPosition(Player: Player) --[[ Line: 70 ]]
+	if Player.Character then
+		local HumanoidRootPart = Player.Character:FindFirstChild("HumanoidRootPart")
 		
-		return if humanoidRootPart then humanoidRootPart.Position else nil
+		if HumanoidRootPart then
+			return HumanoidRootPart.Position
+		end
 	end
+	return nil
 end
 
-local var2 = true
+local Flag = true
 
-function t.DisablePlayerMovement(_)
-	-- upvalues: var2 (write), contextActionService (ref)
-	if var2 then
-		var2 = false
-		contextActionService:BindCoreActionAtPriority("AvatarContextMenuStopInput", function(_, p2)
-			return if p2 == Enum.UserInputState.End then Enum.ContextActionResult.Pass else Enum.ContextActionResult.Sink
+function Module:DisablePlayerMovement() --[[ Line: 82 ]]
+	-- upvalues: Flag (ref), ContextActionService (copy)
+	if Flag then
+		Flag = false
+		ContextActionService:BindCoreActionAtPriority("AvatarContextMenuStopInput", function(_, UserInputState) --[[ Line: 86 ]]
+			return if UserInputState == Enum.UserInputState.End then Enum.ContextActionResult.Pass else Enum.ContextActionResult.Sink
 		end, false, Enum.ContextActionPriority.Low.Value, Enum.PlayerActions.CharacterForward, Enum.PlayerActions.CharacterBackward, Enum.PlayerActions.CharacterLeft, Enum.PlayerActions.CharacterRight, Enum.PlayerActions.CharacterJump, Enum.UserInputType.Gamepad1, Enum.UserInputType.Gamepad2, Enum.UserInputType.Gamepad3, Enum.UserInputType.Gamepad4)
 		
 		return
 	end
 end
 
-function t.EnablePlayerMovement(_)
-	-- upvalues: var2 (write), contextActionService (ref)
-	if var2 then
+function Module:EnablePlayerMovement() --[[ Line: 103 ]]
+	-- upvalues: Flag (ref), ContextActionService (copy)
+	if not Flag then
+		Flag = true
+		ContextActionService:UnbindCoreAction("AvatarContextMenuStopInput")
+		
 		return
 	end
-	var2 = true
-	contextActionService:UnbindCoreAction("AvatarContextMenuStopInput")
 end
 
-function t.GetFriendStatus(_, p2)
-	-- upvalues: localPlayer (write)
-	local ok, status = pcall(function()
-		-- upvalues: localPlayer (copy), p2 (ref)
-		return localPlayer:GetFriendStatus(p2)
+function Module:GetFriendStatus(Player) --[[ Line: 110 ]]
+	-- upvalues: LocalPlayer (ref)
+	local Success, Result = pcall(function() --[[ Line: 111 ]]
+		-- upvalues: LocalPlayer (upval), Player (copy)
+		return LocalPlayer:GetFriendStatus(Player)
 	end)
 	
-	return if ok then status else Enum.FriendStatus.NotFriend
+	return if Success then Result else Enum.FriendStatus.NotFriend
 end
 
-local t_1 = {}
-coroutine.wrap(function()
-	-- upvalues: robloxReplicatedStorageService (ref), t_1 (ref)
-	robloxReplicatedStorageService:WaitForChild("CanChatWith", 1e999).OnClientEvent:Connect(function(...)
-		-- upvalues: t_1 (copy)
+local t = {}
+coroutine.wrap(function() --[[ Line: 123 ]]
+	-- upvalues: RobloxReplicatedStorage (copy), t (copy)
+	RobloxReplicatedStorage:WaitForChild("CanChatWith", 1e999).OnClientEvent:Connect(function(...) --[[ Line: 126 ]]
+		-- upvalues: t (upval)
 		local list = { ... }
 		
 		if #list == 1 then
-			for i, v in pairs(list[1]) do
-				t_1[i] = v
+			for i, value in pairs(list[1]) do
+				t[i] = value
 			end
 			return
 		elseif #list == 2 then
-			t_1[list[1]] = list[2]
+			t[list[1]] = list[2]
 		end
 	end)
 end)()
 
-function t.GetCanChatWith(_, p2)
-	-- upvalues: blockingUtilityModule (ref), t_1 (ref)
-	return if blockingUtilityModule:IsPlayerBlockedByUserId(p2.UserId) then false else t_1[p2.UserId] == nil or t_1[p2.UserId]
+function Module:GetCanChatWith(Player: Player) --[[ Line: 142 ]]
+	-- upvalues: BlockingUtilityModule (copy), t (copy)
+	return not BlockingUtilityModule:IsPlayerBlockedByUserId(Player.UserId) and (t[Player.UserId] == nil or t[Player.UserId])
 end
 
-local imageLabel = Instance.new("ImageLabel")
-imageLabel.Image = ""
-imageLabel.BackgroundTransparency = 1
+local Image = Instance.new("ImageLabel")
+Image.Image = ""
+Image.BackgroundTransparency = 1
 
-local function MakeDefaultButton(p2, p3, p4, p5)
-	-- upvalues: imageLabel (ref), userInputService (ref), guiService (ref)
-	local imageButton = Instance.new("ImageButton")
-	imageButton.Name = p2
-	imageButton.Image = p5.ButtonImage
-	imageButton.ScaleType = p5.ButtonImageScaleType
-	imageButton.SliceCenter = p5.ButtonImageSliceCenter
-	imageButton.BackgroundColor3 = p5.ButtonColor
-	imageButton.BackgroundTransparency = p5.ButtonTransparency
-	imageButton.AutoButtonColor = false
-	imageButton.Size = p3
-	imageButton.ZIndex = 2
-	imageButton.SelectionImageObject = imageLabel
-	imageButton.BorderSizePixel = 0
-	local underline = Instance.new("Frame")
-	underline.Name = "Underline"
-	underline.BackgroundColor3 = p5.ButtonUnderlineColor
-	underline.AnchorPoint = Vector2.new(0.5, 1)
-	underline.BorderSizePixel = 0
-	underline.Position = UDim2.new(0.5, 0, 1, 0)
-	underline.Size = UDim2.new(0.95, 0, 0, 1)
-	underline.Parent = imageButton
+local function MakeDefaultButton(Name, Size, Callback, p1) --[[ Line: 158 ]]
+	-- upvalues: Image (copy), UserInputService (copy), GuiService (copy)
+	local ImageButton = Instance.new("ImageButton")
+	ImageButton.Name = Name
+	ImageButton.Image = p1.ButtonImage
+	ImageButton.ScaleType = p1.ButtonImageScaleType
+	ImageButton.SliceCenter = p1.ButtonImageSliceCenter
+	ImageButton.BackgroundColor3 = p1.ButtonColor
+	ImageButton.BackgroundTransparency = p1.ButtonTransparency
+	ImageButton.AutoButtonColor = false
+	ImageButton.Size = Size
+	ImageButton.ZIndex = 2
+	ImageButton.SelectionImageObject = Image
+	ImageButton.BorderSizePixel = 0
+	local Underline = Instance.new("Frame")
+	Underline.Name = "Underline"
+	Underline.BackgroundColor3 = p1.ButtonUnderlineColor
+	Underline.AnchorPoint = Vector2.new(0.5, 1)
+	Underline.BorderSizePixel = 0
+	Underline.Position = UDim2.new(0.5, 0, 1, 0)
+	Underline.Size = UDim2.new(0.95, 0, 0, 1)
+	Underline.Parent = ImageButton
 	
-	if p4 then
-		imageButton.MouseButton1Click:Connect(function()
-			-- upvalues: p4 (ref), userInputService (copy)
-			p4(userInputService:GetLastInputType())
+	if Callback then
+		ImageButton.MouseButton1Click:Connect(function() --[[ Line: 183 ]]
+			-- upvalues: Callback (copy), UserInputService (upval)
+			Callback(UserInputService:GetLastInputType())
 		end)
 	end
-	local function _(p6)
-		return if p6.UserInputType ~= Enum.UserInputType.MouseMovement then p6.UserInputType == Enum.UserInputType.Touch else true
+	local function _(Input): boolean --[[ Line: 188 | Named "isPointerInput" ]]
+		return Input.UserInputType == Enum.UserInputType.MouseMovement or Input.UserInputType == Enum.UserInputType.Touch
 	end
 	
-	local _ = function()
-		-- upvalues: imageButton (ref), p5 (ref)
-		imageButton.BackgroundColor3 = p5.ButtonHoverColor
-		imageButton.BackgroundTransparency = p5.ButtonHoverTransparency
+	local _ = function() --[[ Line: 192 | Named "selectButton" ]]
+		-- upvalues: ImageButton (copy), p1 (copy)
+		ImageButton.BackgroundColor3 = p1.ButtonHoverColor
+		ImageButton.BackgroundTransparency = p1.ButtonHoverTransparency
 	end
 	
-	local _ = function()
-		-- upvalues: imageButton (ref), p5 (ref)
-		imageButton.BackgroundColor3 = p5.ButtonColor
-		imageButton.BackgroundTransparency = p5.ButtonTransparency
+	local _ = function() --[[ Line: 197 | Named "deselectButton" ]]
+		-- upvalues: ImageButton (copy), p1 (copy)
+		ImageButton.BackgroundColor3 = p1.ButtonColor
+		ImageButton.BackgroundTransparency = p1.ButtonTransparency
 	end
 	
-	imageButton.InputBegan:Connect(function(p6)
-		-- upvalues: imageButton (ref), p5 (ref)
-		if imageButton.Selectable then
-			if if p6.UserInputType ~= Enum.UserInputType.MouseMovement then p6.UserInputType == Enum.UserInputType.Touch else true then
-				imageButton.BackgroundColor3 = p5.ButtonHoverColor
-				imageButton.BackgroundTransparency = p5.ButtonHoverTransparency
-				p6:GetPropertyChangedSignal("UserInputState"):connect(function()
-					-- upvalues: p6 (ref), imageButton (copy), p5 (copy)
-					if p6.UserInputState == Enum.UserInputState.End then
-						imageButton.BackgroundColor3 = p5.ButtonColor
-						imageButton.BackgroundTransparency = p5.ButtonTransparency
-					end
-				end)
-			end
+	ImageButton.InputBegan:Connect(function(Input) --[[ Line: 202 ]]
+		-- upvalues: ImageButton (copy), p1 (copy)
+		if ImageButton.Selectable and (Input.UserInputType == Enum.UserInputType.MouseMovement or Input.UserInputType == Enum.UserInputType.Touch) then
+			ImageButton.BackgroundColor3 = p1.ButtonHoverColor
+			ImageButton.BackgroundTransparency = p1.ButtonHoverTransparency
+			Input:GetPropertyChangedSignal("UserInputState"):connect(function() --[[ Line: 205 ]]
+				-- upvalues: Input (copy), ImageButton (upval), p1 (upval)
+				if Input.UserInputState == Enum.UserInputState.End then
+					ImageButton.BackgroundColor3 = p1.ButtonColor
+					ImageButton.BackgroundTransparency = p1.ButtonTransparency
+				end
+			end)
 		end
 	end)
-	imageButton.InputEnded:Connect(function(p6)
-		-- upvalues: imageButton (ref), guiService (copy), p5 (ref)
-		if imageButton.Selectable and guiService.SelectedCoreObject ~= imageButton then
-			if if p6.UserInputType ~= Enum.UserInputType.MouseMovement then p6.UserInputType == Enum.UserInputType.Touch else true then
-				imageButton.BackgroundColor3 = p5.ButtonColor
-				imageButton.BackgroundTransparency = p5.ButtonTransparency
-			end
+	ImageButton.InputEnded:Connect(function(Input) --[[ Line: 212 ]]
+		-- upvalues: ImageButton (copy), GuiService (upval), p1 (copy)
+		if ImageButton.Selectable and GuiService.SelectedCoreObject ~= ImageButton and (Input.UserInputType == Enum.UserInputType.MouseMovement or Input.UserInputType == Enum.UserInputType.Touch) then
+			ImageButton.BackgroundColor3 = p1.ButtonColor
+			ImageButton.BackgroundTransparency = p1.ButtonTransparency
 		end
 	end)
-	imageButton.SelectionGained:Connect(function()
-		-- upvalues: imageButton (ref), p5 (ref)
-		imageButton.BackgroundColor3 = p5.ButtonHoverColor
-		imageButton.BackgroundTransparency = p5.ButtonHoverTransparency
+	ImageButton.SelectionGained:Connect(function() --[[ Line: 218 ]]
+		-- upvalues: ImageButton (copy), p1 (copy)
+		ImageButton.BackgroundColor3 = p1.ButtonHoverColor
+		ImageButton.BackgroundTransparency = p1.ButtonHoverTransparency
 	end)
-	imageButton.SelectionLost:Connect(function()
-		-- upvalues: imageButton (ref), p5 (ref)
-		imageButton.BackgroundColor3 = p5.ButtonColor
-		imageButton.BackgroundTransparency = p5.ButtonTransparency
+	ImageButton.SelectionLost:Connect(function() --[[ Line: 221 ]]
+		-- upvalues: ImageButton (copy), p1 (copy)
+		ImageButton.BackgroundColor3 = p1.ButtonColor
+		ImageButton.BackgroundTransparency = p1.ButtonTransparency
 	end)
-	local _ = guiService.Changed:Connect(function(p6)
-		-- upvalues: guiService (copy), imageButton (ref), p5 (ref)
-		if p6 ~= "SelectedCoreObject" then return end
-		if guiService.SelectedCoreObject == nil or guiService.SelectedCoreObject ~= imageButton then
-			imageButton.BackgroundColor3 = p5.ButtonColor
-			imageButton.BackgroundTransparency = p5.ButtonTransparency
+	local _ = GuiService.Changed:Connect(function(p2) --[[ Line: 225 ]]
+		-- upvalues: GuiService (upval), ImageButton (copy), p1 (copy)
+		if p2 ~= "SelectedCoreObject" then return end
+		if GuiService.SelectedCoreObject == nil or GuiService.SelectedCoreObject ~= ImageButton then
+			ImageButton.BackgroundColor3 = p1.ButtonColor
+			ImageButton.BackgroundTransparency = p1.ButtonTransparency
 			
 			return
-		elseif imageButton.Selectable then
-			imageButton.BackgroundColor3 = p5.ButtonHoverColor
-			imageButton.BackgroundTransparency = p5.ButtonHoverTransparency
+		end
+		if ImageButton.Selectable then
+			ImageButton.BackgroundColor3 = p1.ButtonHoverColor
+			ImageButton.BackgroundTransparency = p1.ButtonHoverTransparency
 		end
 	end)
 	
-	return imageButton
+	return ImageButton
 end
 
-local function getViewportSize()
+local function getViewportSize() --[[ Line: 241 ]]
 	while not workspace.CurrentCamera do
 		workspace.Changed:Wait()
 	end
@@ -211,46 +214,46 @@ local function getViewportSize()
 	return workspace.CurrentCamera.ViewportSize
 end
 
-local function _()
-	-- upvalues: getViewportSize (ref), userInputService (ref)
-	local var3 = getViewportSize()
+local function _(): boolean --[[ Line: 257 | Named "isSmallTouchScreen" ]]
+	-- upvalues: getViewportSize (copy), UserInputService (copy)
+	local ViewportSize = getViewportSize()
 	
-	return userInputService.TouchEnabled and (if var3.Y >= 500 then var3.X < 700 else true)
+	return UserInputService.TouchEnabled and (ViewportSize.Y < 500 or ViewportSize.X < 700)
 end
 
-function t.MakeStyledButton(_, p2, p3, p4, p5, p6)
-	-- upvalues: MakeDefaultButton (ref), getViewportSize (ref), userInputService (ref), isTenFootInterface (ref)
-	local var3 = MakeDefaultButton(p2, p4, p5, p6)
-	local textLabel = Instance.new("TextLabel")
-	textLabel.Name = p2 .. "TextLabel"
-	textLabel.BackgroundTransparency = 1
-	textLabel.BorderSizePixel = 0
-	textLabel.Size = UDim2.new(1, 0, 1, -8)
-	textLabel.Position = UDim2.new(0, 0, 0, 0)
-	textLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-	textLabel.TextYAlignment = Enum.TextYAlignment.Center
-	textLabel.Font = p6.Font
-	textLabel.TextSize = 24 * p6.TextScale
-	local var4 = getViewportSize()
+function Module:MakeStyledButton(Name, Text, Size, p1, p2) --[[ Line: 262 ]]
+	-- upvalues: MakeDefaultButton (copy), getViewportSize (copy), UserInputService (copy), IsTenFootInterfaceFunction (copy)
+	local DefaultButton = MakeDefaultButton(Name, Size, p1, p2)
+	local Label = Instance.new("TextLabel")
+	Label.Name = Name .. "TextLabel"
+	Label.BackgroundTransparency = 1
+	Label.BorderSizePixel = 0
+	Label.Size = UDim2.new(1, 0, 1, -8)
+	Label.Position = UDim2.new(0, 0, 0, 0)
+	Label.TextColor3 = Color3.fromRGB(255, 255, 255)
+	Label.TextYAlignment = Enum.TextYAlignment.Center
+	Label.Font = p2.Font
+	Label.TextSize = 24 * p2.TextScale
+	local ViewportSize = getViewportSize()
 	
-	if userInputService.TouchEnabled and (if var4.Y >= 500 then var4.X < 700 else true) then
-		textLabel.TextSize = 18 * p6.TextScale
-	elseif isTenFootInterface() then
-		textLabel.TextSize = 36 * p6.TextScale
+	if UserInputService.TouchEnabled and (ViewportSize.Y < 500 or ViewportSize.X < 700) then
+		Label.TextSize = 18 * p2.TextScale
+	elseif IsTenFootInterfaceFunction() then
+		Label.TextSize = 36 * p2.TextScale
 	end
-	textLabel.Text = p3
-	textLabel.TextScaled = true
-	textLabel.TextWrapped = true
-	textLabel.ZIndex = 2
-	textLabel.Parent = var3
-	Instance.new("UITextSizeConstraint", textLabel).MaxTextSize = textLabel.TextSize
+	Label.Text = Text
+	Label.TextScaled = true
+	Label.TextWrapped = true
+	Label.ZIndex = 2
+	Label.Parent = DefaultButton
+	Instance.new("UITextSizeConstraint", Label).MaxTextSize = Label.TextSize
 	
-	return var3, textLabel
+	return DefaultButton, Label
 end
 
-function t.new()
-	-- upvalues: t (ref)
-	return setmetatable({}, t)
+function Module.new() --[[ Line: 292 ]]
+	-- upvalues: Module (copy)
+	return (setmetatable({}, Module))
 end
 
-return t.new()
+return Module.new()

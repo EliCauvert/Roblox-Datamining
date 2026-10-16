@@ -1,16 +1,16 @@
-﻿local textService = game:GetService("TextService")
-local userInputService = game:GetService("UserInputService")
-local inGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
-local roact = inGameMenuDependenciesModule.Roact
-local UIBlox = inGameMenuDependenciesModule.UIBlox
-local t = inGameMenuDependenciesModule.t
-local withStyle = UIBlox.Core.Style.withStyle
-local parent = script.Parent.Parent
-local assetsModule = require(parent.Resources.Assets)
-local globalConfigModule = require(parent.GlobalConfig)
-local themedTextLabelModule = require(parent.Components.ThemedTextLabel)
-local imageSetLabel = UIBlox.Core.ImageSet.ImageSetLabel
-local t_1 = {
+﻿local TextService = game:GetService("TextService")
+local UserInputService = game:GetService("UserInputService")
+local InGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
+local Roact = InGameMenuDependenciesModule.Roact
+local UIBlox = InGameMenuDependenciesModule.UIBlox
+local T = InGameMenuDependenciesModule.t
+local WithStyleFunction = UIBlox.Core.Style.withStyle
+local Parent = script.Parent.Parent
+local AssetsModule = require(Parent.Resources.Assets)
+local GlobalConfigModule = require(Parent.GlobalConfig)
+local ThemedTextLabelModule = require(Parent.Components.ThemedTextLabel)
+local ImageSetLabel = UIBlox.Core.ImageSet.ImageSetLabel
+local config = {
 	[Enum.KeyCode.Escape] = { text = "ESC", fontKey = "Footer", width = 36 },
 	[Enum.KeyCode.Space] = { text = "Space", width = 92 },
 	[Enum.KeyCode.LeftShift] = {
@@ -29,96 +29,93 @@ local t_1 = {
 	[Enum.KeyCode.Tilde] = { text = "~", fontKey = "CaptionHeader" },
 	[Enum.KeyCode.F10] = { fontKey = "CaptionHeader", width = 36 },
 	[Enum.KeyCode.F11] = { fontKey = "CaptionHeader", width = 36 },
-	[Enum.KeyCode.Up] = { image = assetsModule.Images.UpArrow },
-	[Enum.KeyCode.Down] = { image = assetsModule.Images.DownArrow },
-	[Enum.KeyCode.Left] = { image = assetsModule.Images.LeftArrow },
-	[Enum.KeyCode.Right] = { image = assetsModule.Images.RightArrow }
+	[Enum.KeyCode.Up] = { image = AssetsModule.Images.UpArrow },
+	[Enum.KeyCode.Down] = { image = AssetsModule.Images.DownArrow },
+	[Enum.KeyCode.Left] = { image = AssetsModule.Images.LeftArrow },
+	[Enum.KeyCode.Right] = { image = AssetsModule.Images.RightArrow }
 }
-local var1 = t.strictInterface({
-	input = t.enum(Enum.KeyCode),
-	borderThemeKey = t.optional(t.string),
-	textThemeKey = t.optional(t.string),
-	AnchorPoint = t.optional(t.Vector2),
-	Position = t.optional(t.UDim2),
-	LayoutOrder = t.optional(t.integer),
-	ZIndex = t.optional(t.integer)
+local StrictInterfaceResult = T.strictInterface({
+	input = T.enum(Enum.KeyCode),
+	borderThemeKey = T.optional(T.string),
+	textThemeKey = T.optional(T.string),
+	AnchorPoint = T.optional(T.Vector2),
+	Position = T.optional(T.UDim2),
+	LayoutOrder = T.optional(T.integer),
+	ZIndex = T.optional(T.integer)
 })
 
-local function getLabelWidthAndContent(p1, p2, p3)
-	-- upvalues: t_1 (ref), roact (ref), imageSetLabel (ref), userInputService (ref), textService (ref), themedTextLabelModule (ref)
-	local var2 = t_1[p1]
+local function getLabelWidthAndContent(Input, p1, TextThemeKey) --[[ Line: 71 ]]
+	-- upvalues: config (copy), Roact (copy), ImageSetLabel (copy), UserInputService (copy), TextService (copy), ThemedTextLabelModule (copy)
+	local Entry = config[Input]
 	
-	if var2 and var2.image then
-		return 36, roact.createElement(imageSetLabel, {
+	if Entry and Entry.image then
+		return 36, (Roact.createElement(ImageSetLabel, {
 			BackgroundTransparency = 1,
 			AnchorPoint = Vector2.new(0.5, 0.5),
-			Image = var2.image,
-			ImageColor3 = p2.Theme.IconEmphasis.Color,
-			ImageTransparency = p2.Theme.IconEmphasis.Transparency,
+			Image = Entry.image,
+			ImageColor3 = p1.Theme.IconEmphasis.Color,
+			ImageTransparency = p1.Theme.IconEmphasis.Transparency,
 			Position = UDim2.new(0.5, 0, 0.5, -1),
 			Size = UDim2.new(0, 16, 0, 16)
-		})
+		}))
 	end
-	local var3
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local alignment = nil
-	local var4 = userInputService:GetStringForKeyCode(p1)
-	local var5 = if var2 and var2.text then var2.text elseif var4 and var4 ~= "" then var4 else p1.Name
-	local var6 = var5:len() < 3
-	local var7 = if var2 and var2.fontKey then var2.fontKey elseif var6 then "CaptionHeader" else "Footer"
+	local Alignment = nil
+	local StringForKeyCode = UserInputService:GetStringForKeyCode(Input)
+	local Text = if Entry and Entry.text then Entry.text elseif StringForKeyCode and StringForKeyCode ~= "" then StringForKeyCode else Input.Name
+	local IsLengthBelow = Text:len() < 3
+	local FontKey = if Entry and Entry.fontKey then Entry.fontKey elseif IsLengthBelow then "CaptionHeader" else "Footer"
+	local Width = nil
 	
-	if var2 and var2.width then
-		var3 = var2.width
-	elseif var6 then
-		var3 = 36
+	if Entry and Entry.width then
+		Width = Entry.width
+	elseif IsLengthBelow then
+		Width = 36
 	else
-		local var8 = p2.Font[var7]
-		var3 = textService:GetTextSize(var5, var8.RelativeSize * p2.Font.BaseSize, var8.Font, Vector2.new(1e999, 36)).X + 28
+		local v1 = p1.Font[FontKey]
+		Width = TextService:GetTextSize(Text, v1.RelativeSize * p1.Font.BaseSize, v1.Font, Vector2.new(1e999, 36)).X + 28
 	end
-	if var2 and var2.alignment then
-		alignment = var2.alignment
+	if Entry and Entry.alignment then
+		Alignment = Entry.alignment
 	end
-	return var3, roact.createElement(themedTextLabelModule, {
-		fontKey = var7,
-		themeKey = p3 or "TextEmphasis",
-		Text = var5,
+	return Width, Roact.createElement(ThemedTextLabelModule, {
+		fontKey = FontKey,
+		themeKey = TextThemeKey or "TextEmphasis",
+		Text = Text,
 		Size = UDim2.new(1, 0, 1, 0),
 		Position = UDim2.new(0, 0, 0, -1),
-		TextXAlignment = alignment
-	}), alignment
+		TextXAlignment = Alignment
+	}), Alignment
 end
 
-return function(p1)
-	-- upvalues: globalConfigModule (ref), var1 (ref), withStyle (ref), getLabelWidthAndContent (ref), roact (ref), imageSetLabel (ref), assetsModule (ref)
-	if globalConfigModule.propValidation then
-		assert(var1(p1))
+return function(Frame: Frame) --[[ Line: 142 | Named "KeyLabel" ]]
+	-- upvalues: GlobalConfigModule (copy), StrictInterfaceResult (copy), WithStyleFunction (copy), getLabelWidthAndContent (copy), Roact (copy), ImageSetLabel (copy), AssetsModule (copy)
+	if GlobalConfigModule.propValidation then
+		assert(StrictInterfaceResult(Frame))
 	end
-	return withStyle(function(p2)
-		-- upvalues: p1 (ref), getLabelWidthAndContent (copy), roact (copy), imageSetLabel (copy), assetsModule (copy)
-		local var2 = p2.Theme[p1.borderThemeKey or "UIEmphasis"]
-		local var3, var4, var5 = getLabelWidthAndContent(p1.input, p2, p1.textThemeKey)
-		local var6 = if var5 then 9 else nil
+	return WithStyleFunction(function(p1) --[[ Line: 147 ]]
+		-- upvalues: Frame (copy), getLabelWidthAndContent (upval), Roact (upval), ImageSetLabel (upval), AssetsModule (upval)
+		local ThemeEntry = p1.Theme[Frame.borderThemeKey or "UIEmphasis"]
+		local LabelWidthAndContent, LabelWidthAndContent2, LabelWidthAndContent3 = getLabelWidthAndContent(Frame.input, p1, Frame.textThemeKey)
+		local Offset = if LabelWidthAndContent3 then 9 else nil
 		
-		return roact.createElement(imageSetLabel, {
+		return Roact.createElement(ImageSetLabel, {
 			BackgroundTransparency = 1,
-			ImageTransparency = var2.Transparency,
-			ImageColor3 = var2.Color,
-			Image = assetsModule.Images.KeyBorder,
+			ImageTransparency = ThemeEntry.Transparency,
+			ImageColor3 = ThemeEntry.Color,
+			Image = AssetsModule.Images.KeyBorder,
 			ScaleType = Enum.ScaleType.Slice,
 			SliceCenter = Rect.new(Vector2.new(9, 7), Vector2.new(26, 26)),
-			Size = UDim2.new(0, var3, 0, 36),
-			Position = p1.Position,
-			AnchorPoint = p1.AnchorPoint,
-			LayoutOrder = p1.LayoutOrder,
-			ZIndex = p1.ZIndex
+			Size = UDim2.new(0, LabelWidthAndContent, 0, 36),
+			Position = Frame.Position,
+			AnchorPoint = Frame.AnchorPoint,
+			LayoutOrder = Frame.LayoutOrder,
+			ZIndex = Frame.ZIndex
 		}, {
-			Padding = var6 and roact.createElement("UIPadding", {
-				PaddingLeft = UDim.new(0, var6),
-				PaddingRight = UDim.new(0, var6)
+			Padding = Offset and Roact.createElement("UIPadding", {
+				PaddingLeft = UDim.new(0, Offset),
+				PaddingRight = UDim.new(0, Offset)
 			}),
-			LabelContent = var4
+			LabelContent = LabelWidthAndContent2
 		})
 	end)
 end

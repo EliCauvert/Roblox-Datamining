@@ -1,16 +1,16 @@
-﻿local gameTile = script:FindFirstAncestor("GameTile")
-local gridTileIconTextFooterModule = require(gameTile.Footer.GridTileIconTextFooter)
-local getGameStatsRatingPercentageTextModule = require(gameTile.Footer.getGameStatsRatingPercentageText)
-local parent = gameTile.Parent
-local reactModule = require(parent.React)
-local ratingSmall = require(parent.UIBlox).App.ImageSet.Images["icons/status/games/rating_small"]
+﻿local GameTile = script:FindFirstAncestor("GameTile")
+local GridTileIconTextFooterModule = require(GameTile.Footer.GridTileIconTextFooter)
+local GetGameStatsRatingPercentageTextModule = require(GameTile.Footer.getGameStatsRatingPercentageText)
+local Parent = GameTile.Parent
+local ReactModule = require(Parent.React)
+local IconsStatusGamesRatingSmall = require(Parent.UIBlox).App.ImageSet.Images["icons/status/games/rating_small"]
 
-return reactModule.memo(function(p1)
-	-- upvalues: getGameStatsRatingPercentageTextModule (ref), reactModule (ref), gridTileIconTextFooterModule (ref), ratingSmall (ref)
-	return reactModule.createElement(gridTileIconTextFooterModule, {
+return ReactModule.memo(function(p1) --[[ Line: 22 | Named "RatingWithGenreFooter" ]]
+	-- upvalues: GetGameStatsRatingPercentageTextModule (copy), ReactModule (copy), GridTileIconTextFooterModule (copy), IconsStatusGamesRatingSmall (copy)
+	return ReactModule.createElement(GridTileIconTextFooterModule, {
 		Position = p1.Position,
-		icon = ratingSmall,
-		text = `{getGameStatsRatingPercentageTextModule(p1.totalUpVotes, p1.totalDownVotes) .. "%"} \226\128\162 {p1.genreText}`,
+		icon = IconsStatusGamesRatingSmall,
+		text = `{GetGameStatsRatingPercentageTextModule(p1.totalUpVotes, p1.totalDownVotes) .. "%"} • {p1.genreText}`,
 		useLargerFont = p1.useLargerFont,
 		isUnifiedGameTile = p1.isUnifiedGameTile
 	})

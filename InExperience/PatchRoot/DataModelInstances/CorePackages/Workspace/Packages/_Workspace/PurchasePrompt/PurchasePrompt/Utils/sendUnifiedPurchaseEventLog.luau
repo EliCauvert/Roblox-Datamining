@@ -1,12 +1,12 @@
-﻿local purchasePrompt = script:FindFirstAncestor("PurchasePrompt")
-local default = require(purchasePrompt.Parent.LoggingProtocol).default
-local unifiedPurchaseTelemetryModule = require(purchasePrompt.Events.UnifiedPurchaseTelemetry)
+﻿local PurchasePrompt = script:FindFirstAncestor("PurchasePrompt")
+local Default = require(PurchasePrompt.Parent.LoggingProtocol).default
+local UnifiedPurchaseTelemetryModule = require(PurchasePrompt.Events.UnifiedPurchaseTelemetry)
 
-function sendUnifiedPurchaseEventLog(p1)
-	-- upvalues: default (ref), unifiedPurchaseTelemetryModule (ref)
-	default:logRobloxTelemetryEvent(unifiedPurchaseTelemetryModule.UnifiedProductPurchaseFlowEvent, {
-		default.StandardizedFields.addOsInfo,
-		default.StandardizedFields.addSessionId,
+function sendUnifiedPurchaseEventLog(p1) --[[ Line: 7 ]]
+	-- upvalues: Default (copy), UnifiedPurchaseTelemetryModule (copy)
+	Default:logRobloxTelemetryEvent(UnifiedPurchaseTelemetryModule.UnifiedProductPurchaseFlowEvent, {
+		Default.StandardizedFields.addOsInfo,
+		Default.StandardizedFields.addSessionId,
 		"addSessionInfo"
 	}, p1)
 end

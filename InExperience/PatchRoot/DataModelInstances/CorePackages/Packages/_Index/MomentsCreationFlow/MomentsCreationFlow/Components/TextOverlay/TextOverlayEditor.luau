@@ -1,116 +1,121 @@
-﻿local momentsCreationFlow = script:FindFirstAncestor("MomentsCreationFlow")
-local parent = momentsCreationFlow.Parent
-local textService = game:GetService("TextService")
-local dashModule = require(parent.Dash)
-local foundationModule = require(parent.Foundation)
-local momentsCommonModule = require(parent.MomentsCommon)
-local reactModule = require(parent.React)
-local useBinding = reactModule.useBinding
-local useCallback = reactModule.useCallback
-local useDeviceInsets = momentsCommonModule.Hooks.useDeviceInsets
-local useEffectOnceModule = require(momentsCreationFlow.Hooks.useEffectOnce)
-local useOnScreenKeyboardHeightModule = require(momentsCreationFlow.Hooks.useOnScreenKeyboardHeight)
-local useRef = reactModule.useRef
-local useState = reactModule.useState
-local useTokens = foundationModule.Hooks.useTokens
-local knob = foundationModule.Knob
-local slider = foundationModule.Slider
-local view = foundationModule.View
-local textOverlay = momentsCommonModule.TextOverlay
+﻿local MomentsCreationFlow = script:FindFirstAncestor("MomentsCreationFlow")
+local Parent = MomentsCreationFlow.Parent
+local TextService = game:GetService("TextService")
+local DashModule = require(Parent.Dash)
+local FoundationModule = require(Parent.Foundation)
+local MomentsCommonModule = require(Parent.MomentsCommon)
+local ReactModule = require(Parent.React)
+local UseBindingFunction = ReactModule.useBinding
+local UseCallbackFunction = ReactModule.useCallback
+local UseDeviceInsetsFunction = MomentsCommonModule.Hooks.useDeviceInsets
+local UseEffectOnceModule = require(MomentsCreationFlow.Hooks.useEffectOnce)
+local UseOnScreenKeyboardHeightModule = require(MomentsCreationFlow.Hooks.useOnScreenKeyboardHeight)
+local UseRefFunction = ReactModule.useRef
+local UseStateFunction = ReactModule.useState
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local Knob = FoundationModule.Knob
+local Slider = FoundationModule.Slider
+local View = FoundationModule.View
+local TextOverlay = MomentsCommonModule.TextOverlay
 
-return function(p1)
-	-- upvalues: useDeviceInsets (ref), useTokens (ref), useRef (ref), useBinding (ref), useState (ref), useOnScreenKeyboardHeightModule (ref), useCallback (ref), dashModule (ref), useEffectOnceModule (ref), reactModule (ref), textService (ref), view (ref), foundationModule (ref), slider (ref), knob (ref), textOverlay (ref)
-	local var1 = useDeviceInsets()
-	local var2 = useTokens()
-	local var3 = useRef(nil)
-	local var4, var5 = useBinding(UDim2.fromOffset(0, 0))
-	local var6, var7 = useState(Vector2.new(0, 0))
-	local var8 = useOnScreenKeyboardHeightModule()
-	local var9 = p1.textOverlayEdits and p1.textOverlayEdits[1]
-	local var10 = useCallback(function()
-		-- upvalues: var3 (ref)
-		if var3.current then
-			var3.current:CaptureFocus()
+return function(p1) --[[ Line: 41 | Named "TextOverlayEditor" ]]
+	-- upvalues: UseDeviceInsetsFunction (copy), UseTokensFunction (copy), UseRefFunction (copy), UseBindingFunction (copy), UseStateFunction (copy), UseOnScreenKeyboardHeightModule (copy), UseCallbackFunction (copy), DashModule (copy), UseEffectOnceModule (copy), ReactModule (copy), TextService (copy), View (copy), FoundationModule (copy), Slider (copy), Knob (copy), TextOverlay (copy)
+	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
+	local UseTokensResult = UseTokensFunction()
+	local UseRefResult = UseRefFunction(nil)
+	local UseBindingResult, UseBindingResult2 = UseBindingFunction(UDim2.fromOffset(0, 0))
+	local UseStateResult, UseStateResult2 = UseStateFunction(Vector2.new(0, 0))
+	local UseOnScreenKeyboardHeightModuleResult = UseOnScreenKeyboardHeightModule()
+	local TextOverlayEdit = p1.textOverlayEdits and p1.textOverlayEdits[1]
+	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 51 ]]
+		-- upvalues: UseRefResult (copy)
+		if UseRefResult.current then
+			UseRefResult.current:CaptureFocus()
 		end
 	end, {})
-	local var11 = useCallback(function(p2)
-		-- upvalues: p1 (ref), dashModule (copy), var9 (ref)
-		local charCount = utf8.len(p2.Text)
+	local UseCallbackResult1 = UseCallbackFunction(function(p2) --[[ Line: 57 ]]
+		-- upvalues: p1 (copy), DashModule (upval), TextOverlayEdit (copy)
+		local Length = utf8.len(p2.Text)
 		
-		if charCount ~= nil and charCount >= 100 then
+		if Length ~= nil and Length >= 100 then
 			p2.Text = string.sub(p2.Text, 1, utf8.offset(p2.Text, 101) - 1)
 		end
-		p1.onTextOverlayUpdated({ dashModule.joinDeep(var9, { text = p2.Text }) })
-	end, { var9, p1.onTextOverlayUpdated })
-	local var12 = useCallback(function(p2)
-		-- upvalues: p1 (ref), dashModule (copy), var9 (ref)
+		p1.onTextOverlayUpdated({ DashModule.joinDeep(TextOverlayEdit, { text = p2.Text }) })
+	end, { TextOverlayEdit, p1.onTextOverlayUpdated })
+	local UseCallbackResult2 = UseCallbackFunction(function(FontSize) --[[ Line: 69 ]]
+		-- upvalues: p1 (copy), DashModule (upval), TextOverlayEdit (copy)
 		if p1.textOverlayEdits then
 			p1.onTextOverlayUpdated({
-				dashModule.joinDeep(var9, { textOverlayStyle = { fontSize = p2 } })
+				(DashModule.joinDeep(TextOverlayEdit, { textOverlayStyle = { fontSize = FontSize } }))
 			})
 			
 			return
 		end
-	end, { p1.onTextOverlayUpdated, var9 })
-	local var13 = useCallback(function(p2)
-		-- upvalues: var7 (ref)
-		var7(p2.AbsoluteSize)
+	end, { p1.onTextOverlayUpdated, TextOverlayEdit })
+	local UseCallbackResult3 = UseCallbackFunction(function(Frame) --[[ Line: 82 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(Frame.AbsoluteSize)
 	end, {})
-	useEffectOnceModule(function()
-		-- upvalues: var10 (ref)
-		var10()
-	end, var3.current ~= nil and p1.textOverlayEdits ~= nil)
-	reactModule.useEffect(function()
-		-- upvalues: var9 (ref), var8 (ref), var5 (ref), textService (copy), var6 (ref)
-		if not var9 then return end
-		if var8 == 0 then
-			var5(UDim2.fromOffset(0, 0))
+	UseEffectOnceModule(function() --[[ Line: 86 ]]
+		-- upvalues: UseCallbackResult (copy)
+		UseCallbackResult()
+	end, UseRefResult.current ~= nil and p1.textOverlayEdits ~= nil)
+	ReactModule.useEffect(function() --[[ Line: 90 ]]
+		-- upvalues: TextOverlayEdit (copy), UseOnScreenKeyboardHeightModuleResult (copy), UseBindingResult2 (copy), TextService (upval), UseStateResult (copy)
+		if not TextOverlayEdit then return end
+		if UseOnScreenKeyboardHeightModuleResult == 0 then
+			UseBindingResult2(UDim2.fromOffset(0, 0))
 			
 			return
+		else
+			local WTextSize = TextService:GetTextSize("W", TextOverlayEdit.textOverlayStyle.fontSize, TextOverlayEdit.textOverlayStyle.font, Vector2.new(UseStateResult.X, UseStateResult.Y))
+			UseBindingResult2(UDim2.fromOffset(math.min(WTextSize.X * 30, UseStateResult.X / 2), (math.min(WTextSize.Y * 5, UseStateResult.Y / 2))))
 		end
-		local wTextSize = textService:GetTextSize("W", var9.textOverlayStyle.fontSize, var9.textOverlayStyle.font, Vector2.new(var6.X, var6.Y))
-		var5(UDim2.fromOffset(math.min(wTextSize.X * 30, var6.X / 2), math.min(wTextSize.Y * 5, var6.Y / 2)))
-	end, { var6, var9, var8 })
+	end, {
+		UseStateResult,
+		TextOverlayEdit,
+		UseOnScreenKeyboardHeightModuleResult
+	})
 	
-	return if p1.textOverlayEdits then reactModule.createElement(view, {
+	return if p1.textOverlayEdits then ReactModule.createElement(View, {
 		tag = "bg-over-media-0 size-full",
-		onAbsoluteSizeChanged = var13,
+		onAbsoluteSizeChanged = UseCallbackResult3,
 		stateLayer = {
-			affordance = foundationModule.Enums.StateLayerAffordance.None
+			affordance = FoundationModule.Enums.StateLayerAffordance.None
 		},
 		ZIndex = p1.zIndex or 1
 	}, {
-		Controls = if var8 == 0 then reactModule.createElement(view, {
+		Controls = if UseOnScreenKeyboardHeightModuleResult == 0 then ReactModule.createElement(View, {
 			tag = "auto-y anchor-bottom-center col gap-large position-bottom-center size-full-0"
 		}, {
-			Padding = reactModule.createElement("UIPadding", {
-				PaddingTop = UDim.new(0, var2.Padding.XLarge),
-				PaddingBottom = UDim.new(0, var2.Padding.XLarge),
-				PaddingLeft = UDim.new(0, math.max(var1.left, var2.Padding.XLarge)),
-				PaddingRight = UDim.new(0, math.max(var1.right, var2.Padding.XLarge))
+			Padding = ReactModule.createElement("UIPadding", {
+				PaddingTop = UDim.new(0, UseTokensResult.Padding.XLarge),
+				PaddingBottom = UDim.new(0, UseTokensResult.Padding.XLarge),
+				PaddingLeft = UDim.new(0, (math.max(UseDeviceInsetsResult.left, UseTokensResult.Padding.XLarge))),
+				PaddingRight = UDim.new(0, (math.max(UseDeviceInsetsResult.right, UseTokensResult.Padding.XLarge)))
 			}),
-			FontSizeSlider = reactModule.createElement(slider, {
+			FontSizeSlider = ReactModule.createElement(Slider, {
 				LayoutOrder = 2,
-				knob = reactModule.createElement(knob, { size = foundationModule.Enums.InputSize.Large }),
-				knobVisibility = foundationModule.Enums.Visibility.Always,
-				onValueChanged = var12,
-				size = foundationModule.Enums.InputSize.XSmall,
+				knob = ReactModule.createElement(Knob, { size = FoundationModule.Enums.InputSize.Large }),
+				knobVisibility = FoundationModule.Enums.Visibility.Always,
+				onValueChanged = UseCallbackResult2,
+				size = FoundationModule.Enums.InputSize.XSmall,
 				range = NumberRange.new(10, 32),
 				value = p1.textOverlayEdits[1].textOverlayStyle.fontSize,
-				variant = foundationModule.Enums.SliderVariant.Standard
+				variant = FoundationModule.Enums.SliderVariant.Standard
 			})
 		}) else nil,
-		TextOverlay = reactModule.createElement(textOverlay, {
+		TextOverlay = ReactModule.createElement(TextOverlay, {
 			editable = true,
-			onActivated = var10,
-			size = var4,
-			textOverlayEdit = dashModule.joinDeep(var9, {
+			onActivated = UseCallbackResult,
+			size = UseBindingResult,
+			textOverlayEdit = DashModule.joinDeep(TextOverlayEdit, {
 				rotation = 0,
 				scale = 1,
 				position = UDim2.fromScale(0.5, 0.5)
 			}),
-			onTextChanged = var11,
-			textBoxRef = var3
+			onTextChanged = UseCallbackResult1,
+			textBoxRef = UseRefResult
 		})
 	}) else nil
 end

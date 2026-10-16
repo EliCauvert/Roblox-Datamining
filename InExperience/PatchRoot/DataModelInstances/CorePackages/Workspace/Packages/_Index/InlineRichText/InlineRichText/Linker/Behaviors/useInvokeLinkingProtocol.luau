@@ -1,29 +1,29 @@
-﻿local inlineRichText = script:FindFirstAncestor("InlineRichText")
-local runService = game:GetService("RunService")
-local parent = inlineRichText.Parent
-local reactModule = require(parent.React)
-local default = require(parent.LinkingProtocol).LinkingProtocol.default
-local name = require(inlineRichText.Logger):new(script.Name)
-local _ = require(inlineRichText.Types)
-local var1 = runService:IsStudio()
+﻿local InlineRichText = script:FindFirstAncestor("InlineRichText")
+local Parent = InlineRichText.Parent
+local ReactModule = require(Parent.React)
+local Default = require(Parent.LinkingProtocol).LinkingProtocol.default
+local NewResult = require(InlineRichText.Logger):new(script.Name)
+local _ = require(InlineRichText.Types)
+local IsStudio = game:GetService("RunService"):IsStudio()
 
-return function(_)
-	-- upvalues: reactModule (ref), default (ref), var1 (ref), name (ref)
-	return reactModule.useCallback(function(p1)
-		-- upvalues: default (copy), var1 (copy), name (copy)
-		default:isURLRegistered(p1):andThen(function(p2)
-			-- upvalues: var1 (copy), p1 (ref), default (copy), name (copy)
-			if not p2 then
-				default:openURL(p1):catch(function(p3)
-					-- upvalues: name (copy), p1 (copy)
-					name:error("Failed to open URL: ", p1, " with error: ", p3)
+return function(_) --[[ Line: 15 ]]
+	-- upvalues: ReactModule (copy), Default (copy), IsStudio (copy), NewResult (copy)
+	return ReactModule.useCallback(function(p1) --[[ Line: 16 ]]
+		-- upvalues: Default (upval), IsStudio (upval), NewResult (upval)
+		Default:isURLRegistered(p1):andThen(function(Result) --[[ Line: 17 ]]
+			-- upvalues: IsStudio (upval), p1 (copy), Default (upval), NewResult (upval)
+			if not Result then
+				Default:openURL(p1):catch(function(Err) --[[ Line: 24 ]]
+					-- upvalues: NewResult (upval), p1 (upval)
+					NewResult:error("Failed to open URL: ", p1, " with error: ", Err)
 				end)
 				
 				return
-			elseif var1 then
+			end
+			if IsStudio then
 				print(`[OnActivated Debug] Detected URL with LinkingProtocol: {p1}`)
 			end
-			default:detectURL(p1)
+			Default:detectURL(p1)
 		end)
 	end, {})
 end

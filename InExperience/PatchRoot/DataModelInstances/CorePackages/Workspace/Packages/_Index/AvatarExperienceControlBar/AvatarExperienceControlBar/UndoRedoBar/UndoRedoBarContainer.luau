@@ -1,23 +1,23 @@
-﻿local avatarExperienceControlBar = script:FindFirstAncestor("AvatarExperienceControlBar")
-local parent = avatarExperienceControlBar.Parent
-local reactModule = require(parent.React)
-local _ = require(avatarExperienceControlBar.ControlBarTypes)
-local useUndoRedoBarViewModelModule = require(script.Parent.useUndoRedoBarViewModel)
-local iconOnlyMenuModule = require(avatarExperienceControlBar.Components.IconOnlyMenu)
-local baseControlBarContainerModule = require(avatarExperienceControlBar.BaseControlBarContainer)
-local fFlagAXResetAvatarButton = require(parent.AvatarExperienceFlags).FFlagAXResetAvatarButton
+﻿local AvatarExperienceControlBar = script:FindFirstAncestor("AvatarExperienceControlBar")
+local Parent = AvatarExperienceControlBar.Parent
+local ReactModule = require(Parent.React)
+local _ = require(AvatarExperienceControlBar.ControlBarTypes)
+local UseUndoRedoBarViewModelModule = require(script.Parent.useUndoRedoBarViewModel)
+local IconOnlyMenuModule = require(AvatarExperienceControlBar.Components.IconOnlyMenu)
+local BaseControlBarContainerModule = require(AvatarExperienceControlBar.BaseControlBarContainer)
+local FFlagAXResetAvatarButton = require(Parent.AvatarExperienceFlags).FFlagAXResetAvatarButton
 
-return reactModule.memo(function(p1)
-	-- upvalues: useUndoRedoBarViewModelModule (ref), fFlagAXResetAvatarButton (ref), reactModule (ref), baseControlBarContainerModule (ref), iconOnlyMenuModule (ref)
-	local var1 = useUndoRedoBarViewModelModule()
+return ReactModule.memo(function(Frame: Frame) --[[ Line: 19 | Named "UndoRedoBarContainer" ]]
+	-- upvalues: UseUndoRedoBarViewModelModule (copy), FFlagAXResetAvatarButton (copy), ReactModule (copy), BaseControlBarContainerModule (copy), IconOnlyMenuModule (copy)
+	local UseUndoRedoBarViewModelModuleResult = UseUndoRedoBarViewModelModule()
 	
-	return if fFlagAXResetAvatarButton then reactModule.createElement(baseControlBarContainerModule, {
-		config = var1.items,
-		onActiveMenuItemChanged = function() end,
-		LayoutOrder = p1.LayoutOrder
-	}) else reactModule.createElement(iconOnlyMenuModule, {
-		items = var1.items,
-		direction = if p1.direction then p1.direction else "horizontal",
-		LayoutOrder = p1.LayoutOrder
+	return if FFlagAXResetAvatarButton then ReactModule.createElement(BaseControlBarContainerModule, {
+		config = UseUndoRedoBarViewModelModuleResult.items,
+		onActiveMenuItemChanged = function() --[[ Line: 24 ]] end,
+		LayoutOrder = Frame.LayoutOrder
+	}) else ReactModule.createElement(IconOnlyMenuModule, {
+		items = UseUndoRedoBarViewModelModuleResult.items,
+		direction = if Frame.direction then Frame.direction else "horizontal",
+		LayoutOrder = Frame.LayoutOrder
 	})
 end)

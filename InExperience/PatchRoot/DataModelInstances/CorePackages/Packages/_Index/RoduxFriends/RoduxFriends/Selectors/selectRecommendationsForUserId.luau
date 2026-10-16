@@ -1,19 +1,19 @@
-﻿local parent = script.Parent.Parent
-local getDeepValueModule = require(parent.getDeepValue)
-local _ = require(parent.roduxFriendsTypes)
-local filterByKeysModule = require(script.Parent.filterByKeys)
+﻿local Parent = script.Parent.Parent
+local GetDeepValueModule = require(Parent.getDeepValue)
+local _ = require(Parent.roduxFriendsTypes)
+local FilterByKeysModule = require(script.Parent.filterByKeys)
 
-return function(p1)
-	-- upvalues: getDeepValueModule (ref), filterByKeysModule (ref)
-	local keyPath = p1.keyPath
+return function(p1) --[[ Line: 10 ]]
+	-- upvalues: GetDeepValueModule (copy), FilterByKeysModule (copy)
+	local KeyPath = p1.keyPath
 	
-	return function(p2)
-		-- upvalues: getDeepValueModule (copy), keyPath (ref), filterByKeysModule (copy)
-		return function(p3, p4)
-			-- upvalues: getDeepValueModule (copy), p2 (ref), keyPath (copy), filterByKeysModule (copy)
-			local var1 = getDeepValueModule(p2, string.format("%s.recommendations.byUserId.%s", keyPath, p3 or "")) or {}
+	return function(p2) --[[ Line: 12 ]]
+		-- upvalues: GetDeepValueModule (upval), KeyPath (copy), FilterByKeysModule (upval)
+		return function(p3, p4) --[[ Line: 13 ]]
+			-- upvalues: GetDeepValueModule (upval), p2 (copy), KeyPath (upval), FilterByKeysModule (upval)
+			local DeepValueModule = GetDeepValueModule(p2, string.format("%s.recommendations.byUserId.%s", KeyPath, p3 or "")) or {}
 			
-			return if p4 then filterByKeysModule(p4, var1) else var1
+			return if p4 then FilterByKeysModule(p4, DeepValueModule) else DeepValueModule
 		end
 	end
 end

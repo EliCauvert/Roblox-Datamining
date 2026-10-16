@@ -1,35 +1,35 @@
-﻿local currencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
-local parent = currencyTransfers.Parent
-local urlBuilderModule = require(parent.UrlBuilder)
-local tModule = require(parent.t)
-local promiseModule = require(parent.Promise)
-local acceptTransferModelModule = require(currencyTransfers.Models.AcceptTransferModel)
-local httpRequestModule = require(currencyTransfers.NetworkRequests.HttpRequest)
-local urlBuilder = urlBuilderModule.UrlBuilder
-local urlBase = urlBuilderModule.UrlBase
+﻿local CurrencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
+local Parent = CurrencyTransfers.Parent
+local UrlBuilderModule = require(Parent.UrlBuilder)
+local TModule = require(Parent.t)
+local PromiseModule = require(Parent.Promise)
+local AcceptTransferModelModule = require(CurrencyTransfers.Models.AcceptTransferModel)
+local HttpRequestModule = require(CurrencyTransfers.NetworkRequests.HttpRequest)
+local UrlBuilder = UrlBuilderModule.UrlBuilder
+local UrlBase = UrlBuilderModule.UrlBase
 
-local function _(p1)
-	-- upvalues: urlBuilder (ref), urlBase (ref)
-	return urlBuilder.new({
-		base = urlBase.APIS,
+local function _(p1) --[[ Line: 20 | Named "acceptTransferUrl" ]]
+	-- upvalues: UrlBuilder (copy), UrlBase (copy)
+	return UrlBuilder.new({
+		base = UrlBase.APIS,
 		path = `transfer/v1/robux-transfer/accept-transfer/{p1}`
 	})()
 end
 
-local var1 = tModule.strictInterface({ transferRequestId = tModule.string })
+local StrictInterfaceResult = TModule.strictInterface({ transferRequestId = TModule.string })
 
-return function(p1, p2, p3)
-	-- upvalues: var1 (ref), httpRequestModule (ref), urlBuilder (ref), urlBase (ref), acceptTransferModelModule (ref), promiseModule (ref)
-	assert(var1(p1))
+return function(p1, p2, p3) --[[ Line: 31 | Named "acceptTransferRequest" ]]
+	-- upvalues: StrictInterfaceResult (copy), HttpRequestModule (copy), UrlBuilder (copy), UrlBase (copy), AcceptTransferModelModule (copy), PromiseModule (copy)
+	assert(StrictInterfaceResult(p1))
 	
-	return (if p3 ~= nil then httpRequestModule.new(p2) else httpRequestModule.fromNetworkImpl(p3)):post(urlBuilder.new({
-		base = urlBase.APIS,
+	return (if p3 == nil then HttpRequestModule.new(p2) else HttpRequestModule.fromNetworkImpl(p3)):post(UrlBuilder.new({
+		base = UrlBase.APIS,
 		path = `transfer/v1/robux-transfer/accept-transfer/{p1.transferRequestId}`
-	})(), { recipientId = 0 }):andThen(function(p4)
-		-- upvalues: acceptTransferModelModule (copy)
-		return acceptTransferModelModule.format(p4)
-	end):catch(function(p4)
-		-- upvalues: promiseModule (copy)
-		return promiseModule.reject(p4)
+	})(), { recipientId = 0 }):andThen(function(Result) --[[ Line: 39 ]]
+		-- upvalues: AcceptTransferModelModule (upval)
+		return AcceptTransferModelModule.format(Result)
+	end):catch(function(Err) --[[ Line: 42 ]]
+		-- upvalues: PromiseModule (upval)
+		return PromiseModule.reject(Err)
 	end)
 end

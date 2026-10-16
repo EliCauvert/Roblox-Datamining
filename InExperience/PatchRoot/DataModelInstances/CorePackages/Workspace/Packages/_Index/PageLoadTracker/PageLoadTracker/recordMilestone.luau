@@ -1,11 +1,10 @@
-﻿local loggingProtocolModule = require(script:FindFirstAncestor("PageLoadTracker").Parent.LoggingProtocol)
-local pageLoadConfigModule = require(script.Parent.PageLoadConfig)
+﻿local PageLoadConfigModule = require(script.Parent.PageLoadConfig)
 local _ = require(script.Parent.PageLoadTypes)
-local default = loggingProtocolModule.default
+local Default = require(script:FindFirstAncestor("PageLoadTracker").Parent.LoggingProtocol).default
 
-function recordMilestone(p1)
-	-- upvalues: default (ref), pageLoadConfigModule (ref)
-	default:logRobloxTelemetryEvent(pageLoadConfigModule.PAGE_LOAD_SUMMARY_CONFIG, { default.StandardizedFields.addOsInfo }, p1)
+function recordMilestone(p1) --[[ Line: 10 ]]
+	-- upvalues: Default (copy), PageLoadConfigModule (copy)
+	Default:logRobloxTelemetryEvent(PageLoadConfigModule.PAGE_LOAD_SUMMARY_CONFIG, { Default.StandardizedFields.addOsInfo }, p1)
 end
 
 return recordMilestone

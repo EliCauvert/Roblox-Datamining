@@ -1,23 +1,23 @@
-﻿local t = {}
-local userConnectorModule = require(script.Parent.Parent.connectors.UserConnector)
-local findUserById = userConnectorModule.findUserById
-local findMe = userConnectorModule.findMe
-t.default = {
-	User = {
-		__resolveType = function()
-			return "Player"
-		end
-	},
-	Query = {
-		me = function(_, _, p1)
-			-- upvalues: findMe (ref)
-			return findMe(p1.fetchImpl)
-		end,
-		user = function(_, p1, p2)
-			-- upvalues: findUserById (ref)
-			return findUserById(p1.id, p2.fetchImpl)
-		end
+﻿local UserConnectorModule = require(script.Parent.Parent.connectors.UserConnector)
+local FindUserByIdFunction = UserConnectorModule.findUserById
+local FindMeFunction = UserConnectorModule.findMe
+
+return {
+	default = {
+		User = {
+			__resolveType = function(): string --[[ Line: 8 ]]
+				return "Player"
+			end
+		},
+		Query = {
+			me = function(_, _, p1) --[[ Line: 14 ]]
+				-- upvalues: FindMeFunction (copy)
+				return FindMeFunction(p1.fetchImpl)
+			end,
+			user = function(_, p1, p2) --[[ Line: 17 ]]
+				-- upvalues: FindUserByIdFunction (copy)
+				return FindUserByIdFunction(p1.id, p2.fetchImpl)
+			end
+		}
 	}
 }
-
-return t

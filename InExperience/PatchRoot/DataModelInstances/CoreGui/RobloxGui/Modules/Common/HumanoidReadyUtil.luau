@@ -1,73 +1,73 @@
-﻿local playersService = game:GetService("Players")
+﻿local Players = game:GetService("Players")
 
-local function waitForFirst(...)
-	local bindableEvent = Instance.new("BindableEvent")
-	local list = { ... }
+local function waitForFirst(...) --[[ Line: 5 ]]
+	local BindableEvent = Instance.new("BindableEvent")
+	local Connections = { ... }
 	
-	local function fire(...)
-		-- upvalues: list (ref), bindableEvent (ref)
-		for i = 1, #list do
-			list[i]:Disconnect()
+	local function fire(...) --[[ Line: 9 ]]
+		-- upvalues: Connections (copy), BindableEvent (copy)
+		for i = 1, #Connections do
+			Connections[i]:Disconnect()
 		end
-		return bindableEvent:Fire(...)
+		return BindableEvent:Fire(...)
 	end
 	
-	for i = 1, #list do
-		list[i] = list[i]:Connect(fire)
+	for i = 1, #Connections do
+		Connections[i] = Connections[i]:Connect(fire)
 	end
-	return bindableEvent.Event:Wait()
+	return BindableEvent.Event:Wait()
 end
 
 return {
-	registerHumanoidReady = function(p1)
-		-- upvalues: waitForFirst (ref), playersService (ref)
-		local function characterAdded(p2, p3)
-			-- upvalues: waitForFirst (copy), p1 (ref)
-			if not p3.Parent then
-				waitForFirst(p3.AncestryChanged, p2.CharacterAdded)
+	registerHumanoidReady = function(Callback) --[[ Line: 37 ]]
+		-- upvalues: waitForFirst (copy), Players (copy)
+		local function characterAdded(Player: Player, Object) --[[ Line: 39 ]]
+			-- upvalues: waitForFirst (upval), Callback (copy)
+			if not Object.Parent then
+				waitForFirst(Object.AncestryChanged, Player.CharacterAdded)
 			end
-			if p2.Character ~= p3 or not p3.Parent then return end
-			local humanoid = p3:FindFirstChildOfClass("Humanoid")
-			while p3:IsDescendantOf(game) and not humanoid do
-				waitForFirst(p3.ChildAdded, p3.AncestryChanged, p2.CharacterAdded)
-				humanoid = p3:FindFirstChildOfClass("Humanoid")
+			if Player.Character ~= Object or not Object.Parent then return end
+			local Humanoid = Object:FindFirstChildOfClass("Humanoid")
+			while Object:IsDescendantOf(game) and not Humanoid do
+				waitForFirst(Object.ChildAdded, Object.AncestryChanged, Player.CharacterAdded)
+				Humanoid = Object:FindFirstChildOfClass("Humanoid")
 			end
-			if p2.Character ~= p3 or not p3:IsDescendantOf(game) then return end
-			local humanoidRootPart = p3:FindFirstChild("HumanoidRootPart")
-			while p3:IsDescendantOf(game) and not humanoidRootPart do
-				waitForFirst(p3.ChildAdded, p3.AncestryChanged, humanoid.AncestryChanged, p2.CharacterAdded)
-				humanoidRootPart = p3:FindFirstChild("HumanoidRootPart")
+			if Player.Character ~= Object or not Object:IsDescendantOf(game) then return end
+			local HumanoidRootPart = Object:FindFirstChild("HumanoidRootPart")
+			while Object:IsDescendantOf(game) and not HumanoidRootPart do
+				waitForFirst(Object.ChildAdded, Object.AncestryChanged, Humanoid.AncestryChanged, Player.CharacterAdded)
+				HumanoidRootPart = Object:FindFirstChild("HumanoidRootPart")
 			end
-			if humanoidRootPart and humanoid:IsDescendantOf(game) and (p3:IsDescendantOf(game) and p2.Character == p3) then
-				p1(p2, p3, humanoid)
+			if HumanoidRootPart and Humanoid:IsDescendantOf(game) and Object:IsDescendantOf(game) and Player.Character == Object then
+				Callback(Player, Object, Humanoid)
 			end
 		end
 		
-		local function playerAdded(p4)
-			-- upvalues: characterAdded (ref)
-			local characterAddedConnection = p4.CharacterAdded:Connect(function(p5)
-				-- upvalues: characterAdded (copy), p4 (ref)
-				characterAdded(p4, p5)
+		local function playerAdded(Player: Player) --[[ Line: 79 ]]
+			-- upvalues: characterAdded (copy)
+			local CharacterAddedConnection = Player.CharacterAdded:Connect(function(Character) --[[ Line: 80 ]]
+				-- upvalues: characterAdded (upval), Player (copy)
+				characterAdded(Player, Character)
 			end)
-			local ancestryChangedConnection = nil
-			ancestryChangedConnection = p4.AncestryChanged:Connect(function(_, p5)
-				-- upvalues: ancestryChangedConnection (write), characterAddedConnection (ref)
-				if not game:IsAncestorOf(p5) then
-					ancestryChangedConnection:Disconnect()
-					characterAddedConnection:Disconnect()
+			local Connection = nil
+			Connection = Player.AncestryChanged:Connect(function(_, NewParent) --[[ Line: 86 ]]
+				-- upvalues: Connection (ref), CharacterAddedConnection (copy)
+				if not game:IsAncestorOf(NewParent) then
+					Connection:Disconnect()
+					CharacterAddedConnection:Disconnect()
 				end
 			end)
-			local character = p4.Character
+			local Character = Player.Character
 			
-			if character then
-				characterAdded(p4, character)
+			if Character then
+				characterAdded(Player, Character)
 			end
 		end
 		
-		playersService.PlayerAdded:Connect(playerAdded)
+		Players.PlayerAdded:Connect(playerAdded)
 		
-		for i, v in pairs(playersService:GetPlayers()) do
-			playerAdded(v)
+		for _, player in pairs(Players:GetPlayers()) do
+			playerAdded(player)
 		end
 	end
 }

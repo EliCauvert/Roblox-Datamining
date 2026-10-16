@@ -1,14 +1,14 @@
 ﻿return {
-	named = function(p1)
+	named = function(p1) --[[ Line: 16 ]]
 		assert(type(p1) == "string", "Symbols must be created using a string name!")
-		local var1 = newproxy(true)
-		local var2 = ("Symbol(%s)"):format(p1)
+		local Proxy = newproxy(true)
+		local SymbolName: string = ("Symbol(%s)"):format(p1)
 		
-		getmetatable(var1).__tostring = function()
-			-- upvalues: var2 (ref)
-			return var2
+		getmetatable(Proxy).__tostring = function() --[[ Line: 23 ]]
+			-- upvalues: SymbolName (copy)
+			return SymbolName
 		end
 		
-		return var1
+		return Proxy
 	end
 }

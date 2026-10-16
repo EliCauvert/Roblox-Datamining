@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.ExperimentCacheManager.ExperimentCacheManager)
+﻿return (require(script.Parent._Workspace.ExperimentCacheManager.ExperimentCacheManager))

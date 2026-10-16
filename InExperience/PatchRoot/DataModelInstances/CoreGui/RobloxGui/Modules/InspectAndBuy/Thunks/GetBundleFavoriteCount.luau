@@ -1,36 +1,37 @@
-﻿local performFetch = require(game:GetService("CorePackages").Workspace.Packages.Http).PerformFetch
-local parent = script.Parent.Parent
-local thunkModule = require(parent.Thunk)
-local networkModule = require(parent.Services.Network)
-local setBundlesModule = require(parent.Actions.SetBundles)
-local bundleInfoModule = require(parent.Models.BundleInfo)
-local createInspectAndBuyKeyMapperModule = require(parent.createInspectAndBuyKeyMapper)
-local sendCounterModule = require(parent.Thunks.SendCounter)
-local constantsModule = require(parent.Constants)
-local list = { networkModule }
-local var1 = createInspectAndBuyKeyMapperModule("getBundleFavoriteCount")
+﻿local PerformFetch = require(game:GetService("CorePackages").Workspace.Packages.Http).PerformFetch
+local Parent = script.Parent.Parent
+local ThunkModule = require(Parent.Thunk)
+local NetworkModule = require(Parent.Services.Network)
+local SetBundlesModule = require(Parent.Actions.SetBundles)
+local BundleInfoModule = require(Parent.Models.BundleInfo)
+local SendCounterModule = require(Parent.Thunks.SendCounter)
+local ConstantsModule = require(Parent.Constants)
+local list = { NetworkModule }
+local GetBundleFavoriteCount = require(Parent.createInspectAndBuyKeyMapper)("getBundleFavoriteCount")
 
-return function(p1)
-	-- upvalues: thunkModule (ref), list (ref), networkModule (ref), var1 (ref), performFetch (ref), bundleInfoModule (ref), setBundlesModule (ref), sendCounterModule (ref), constantsModule (ref)
-	return thunkModule.new(script.Name, list, function(p2, p3)
-		-- upvalues: networkModule (copy), var1 (copy), p1 (ref), performFetch (copy), bundleInfoModule (copy), setBundlesModule (copy), sendCounterModule (copy), constantsModule (copy)
-		local var2 = p3[networkModule]
+return function(p1) --[[ Line: 21 | Named "GetBundleFavoriteCount" ]]
+	-- upvalues: ThunkModule (copy), list (copy), NetworkModule (copy), GetBundleFavoriteCount (copy), PerformFetch (copy), BundleInfoModule (copy), SetBundlesModule (copy), SendCounterModule (copy), ConstantsModule (copy)
+	return ThunkModule.new(script.Name, list, function(p2, p3) --[[ Line: 22 ]]
+		-- upvalues: NetworkModule (upval), GetBundleFavoriteCount (upval), p1 (copy), PerformFetch (upval), BundleInfoModule (upval), SetBundlesModule (upval), SendCounterModule (upval), ConstantsModule (upval)
+		local v1 = p3[NetworkModule]
 		
-		return performFetch.Single(var1(p2:getState().storeId, p1), function(_)
-			-- upvalues: var2 (ref), p1 (copy), bundleInfoModule (copy), p2 (ref), setBundlesModule (copy), sendCounterModule (copy), constantsModule (copy)
-			return var2.getBundleFavoriteCount(p1):andThen(function(p4)
-				-- upvalues: bundleInfoModule (copy), p1 (copy), p2 (copy), setBundlesModule (copy), sendCounterModule (copy), constantsModule (copy)
-				if p4 then
-					p2:dispatch(setBundlesModule({ bundleInfoModule.fromGetBundleFavoriteCount(p1, p4) }))
+		return PerformFetch.Single(GetBundleFavoriteCount(p2:getState().storeId, p1), function(_) --[[ Line: 27 ]]
+			-- upvalues: v1 (copy), p1 (upval), BundleInfoModule (upval), p2 (copy), SetBundlesModule (upval), SendCounterModule (upval), ConstantsModule (upval)
+			return v1.getBundleFavoriteCount(p1):andThen(function(Result) --[[ Line: 28 ]]
+				-- upvalues: BundleInfoModule (upval), p1 (upval), p2 (upval), SetBundlesModule (upval), SendCounterModule (upval), ConstantsModule (upval)
+				if Result then
+					p2:dispatch(SetBundlesModule({
+						(BundleInfoModule.fromGetBundleFavoriteCount(p1, Result))
+					}))
 				end
-				p2:dispatch(sendCounterModule(constantsModule.Counters.GetBundleFavoriteCount .. constantsModule.CounterSuffix.RequestSucceeded))
-			end, function(_)
-				-- upvalues: p2 (copy), sendCounterModule (copy), constantsModule (copy)
-				p2:dispatch(sendCounterModule(constantsModule.Counters.GetBundleFavoriteCount .. constantsModule.CounterSuffix.RequestRejected))
+				p2:dispatch(SendCounterModule(ConstantsModule.Counters.GetBundleFavoriteCount .. ConstantsModule.CounterSuffix.RequestSucceeded))
+			end, function(_) --[[ Line: 36 ]]
+				-- upvalues: p2 (upval), SendCounterModule (upval), ConstantsModule (upval)
+				p2:dispatch(SendCounterModule(ConstantsModule.Counters.GetBundleFavoriteCount .. ConstantsModule.CounterSuffix.RequestRejected))
 			end)
-		end)(p2):catch(function(_)
-			-- upvalues: p2 (ref), sendCounterModule (copy), constantsModule (copy)
-			p2:dispatch(sendCounterModule(constantsModule.Counters.GetBundleFavoriteCount .. constantsModule.CounterSuffix.RequestFailed))
+		end)(p2):catch(function(_) --[[ Line: 41 ]]
+			-- upvalues: p2 (copy), SendCounterModule (upval), ConstantsModule (upval)
+			p2:dispatch(SendCounterModule(ConstantsModule.Counters.GetBundleFavoriteCount .. ConstantsModule.CounterSuffix.RequestFailed))
 		end)
 	end)
 end

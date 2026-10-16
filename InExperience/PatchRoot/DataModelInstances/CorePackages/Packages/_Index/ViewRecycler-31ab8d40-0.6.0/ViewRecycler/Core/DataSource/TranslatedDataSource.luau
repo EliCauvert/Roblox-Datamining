@@ -1,41 +1,41 @@
-﻿local viewRecycler = script:FindFirstAncestor("ViewRecycler")
-local _ = require(viewRecycler.Core.Types)
-local createEventModule = require(viewRecycler.Internal.createEvent)
-local readDenseRangeModule = require(script.Parent.readDenseRange)
+﻿local ViewRecycler = script:FindFirstAncestor("ViewRecycler")
+local _ = require(ViewRecycler.Core.Types)
+local CreateEventModule = require(ViewRecycler.Internal.createEvent)
+local ReadDenseRangeModule = require(script.Parent.readDenseRange)
 
-return function(p1, p2, p3, p4)
-	-- upvalues: createEventModule (ref), readDenseRangeModule (ref)
-	local var1 = createEventModule()
-	local var2 = 0
-	local var3 = nil
+return function(Callback2, GetItem, GetItemKey, Callback1) --[[ Line: 16 | Named "createTranslatedDataSource" ]]
+	-- upvalues: CreateEventModule (copy), ReadDenseRangeModule (copy)
+	local EventModule = CreateEventModule()
+	local Count = 0
+	local Callback = nil
 	
 	return {
-		getItemCount = p1,
-		getItem = p2,
-		getItemKey = p3,
-		getItems = function(p5, p6)
-			-- upvalues: readDenseRangeModule (copy), p1 (ref), p2 (ref)
-			return readDenseRangeModule(p1(), p2, p5, p6)
+		getItemCount = Callback2,
+		getItem = GetItem,
+		getItemKey = GetItemKey,
+		getItems = function(p1, p2) --[[ Line: 51 ]]
+			-- upvalues: ReadDenseRangeModule (upval), Callback2 (copy), GetItem (copy)
+			return ReadDenseRangeModule(Callback2(), GetItem, p1, p2)
 		end,
-		subscribe = function(p5)
-			-- upvalues: var2 (write), var3 (write), p4 (ref), var1 (ref)
-			if var2 == 0 then
-				var3 = p4(var1.fire)
+		subscribe = function(p1) --[[ Line: 26 ]]
+			-- upvalues: Count (ref), Callback (ref), Callback1 (copy), EventModule (copy)
+			if Count == 0 then
+				Callback = Callback1(EventModule.fire)
 			end
-			var2 += 1
-			local var4 = var1.connect(p5)
-			local var5 = true
+			Count += 1
+			local ConnectResult = EventModule.connect(p1)
+			local Flag = true
 			
-			return function()
-				-- upvalues: var5 (write), var4 (ref), var2 (copy), var3 (copy)
-				if not var5 then return end
-				var5 = false
-				var4()
-				var2 -= 1
+			return function() --[[ Line: 33 ]]
+				-- upvalues: Flag (ref), ConnectResult (copy), Count (upval), Callback (upval)
+				if not Flag then return end
+				Flag = false
+				ConnectResult()
+				Count -= 1
 				
-				if var2 == 0 and var3 ~= nil then
-					var3()
-					var3 = nil
+				if Count == 0 and Callback ~= nil then
+					Callback()
+					Callback = nil
 				end
 			end
 		end

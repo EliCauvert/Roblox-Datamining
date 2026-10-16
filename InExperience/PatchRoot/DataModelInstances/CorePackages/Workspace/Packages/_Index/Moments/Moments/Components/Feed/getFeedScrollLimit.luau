@@ -1,8 +1,9 @@
-﻿return function(p1, p2, p3)
+﻿return function(p1, p2, Callback) --[[ Line: 7 | Named "getFeedScrollLimit" ]]
 	if p1 and not p2 then
 		return nil
+	else
+		local CallbackResult = Callback()
+		
+		return if CallbackResult.getIsInfiniteScrollEnabled(false) then nil else CallbackResult.getMaxMomentsBeforeEndState(false)
 	end
-	local var1 = p3()
-	
-	return if var1.getIsInfiniteScrollEnabled(false) then nil else var1.getMaxMomentsBeforeEndState(false)
 end

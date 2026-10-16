@@ -1,11 +1,10 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent.Parent
-local parent_2 = parent_1.Parent
-local _ = require(parent_1.App.Style.StyleTypes)
-local styleContextModule = require(parent.StyleContext)
-local reactModule = require(parent_2.React)
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent.Parent
+local _ = require(Parent1.App.Style.StyleTypes)
+local StyleContextModule = require(Parent.StyleContext)
+local ReactModule = require(Parent1.Parent.React)
 
-return function()
-	-- upvalues: reactModule (ref), styleContextModule (ref)
-	return reactModule.useContext(styleContextModule).style
+return function() --[[ Line: 15 | Named "useStyle" ]]
+	-- upvalues: ReactModule (copy), StyleContextModule (copy)
+	return ReactModule.useContext(StyleContextModule).style
 end

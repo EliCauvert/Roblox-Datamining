@@ -1,6 +1,6 @@
-﻿local universalAppPolicyModule = require(script:FindFirstAncestor("FriendsMenu").Parent.UniversalAppPolicy)
+﻿local UniversalAppPolicyModule = require(script:FindFirstAncestor("FriendsMenu").Parent.UniversalAppPolicy)
 
-return function()
-	-- upvalues: universalAppPolicyModule (ref)
-	return universalAppPolicyModule.getAppFeaturePolicies().getRenameFriendsToConnections()
+return function() --[[ Line: 6 | Named "getRenameFriendsToConnectionsEnabledFriendsMenu" ]]
+	-- upvalues: UniversalAppPolicyModule (copy)
+	return UniversalAppPolicyModule.getAppFeaturePolicies().getRenameFriendsToConnections()
 end

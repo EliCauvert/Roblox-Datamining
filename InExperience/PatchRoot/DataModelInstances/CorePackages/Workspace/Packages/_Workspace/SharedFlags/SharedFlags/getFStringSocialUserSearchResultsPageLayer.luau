@@ -1,5 +1,5 @@
 ﻿game:DefineFastString("LuaAppSocialUserSearchResultsPageLayer", "Social.UserSearchResultsPage")
 
-return function()
+return function() --[[ Line: 3 ]]
 	return game:GetFastString("LuaAppSocialUserSearchResultsPageLayer")
 end

@@ -1,92 +1,94 @@
-﻿local starterGuiService = game:GetService("StarterGui")
-local playersService = game:GetService("Players")
-local corePackagesService = game:GetService("CorePackages")
-local robloxGui = game:GetService("CoreGui").RobloxGui
-local localPlayer = playersService.LocalPlayer
-while localPlayer == nil do
-	playersService.ChildAdded:wait()
-	localPlayer = playersService.LocalPlayer
+﻿local StarterGui = game:GetService("StarterGui")
+local Players = game:GetService("Players")
+local CorePackages = game:GetService("CorePackages")
+local RobloxGui = game:GetService("CoreGui").RobloxGui
+local LocalPlayer = Players.LocalPlayer
+while LocalPlayer == nil do
+	Players.ChildAdded:wait()
+	LocalPlayer = Players.LocalPlayer
 end
-local modules = robloxGui.Modules
-local promptCreatorModule = require(modules.PromptCreator)
-local socialUtilModule = require(modules.SocialUtil)
-local blockingUtilityModule = require(corePackagesService.Workspace.Packages.BlockingUtility)
-local onBlockButtonActivatedModule = require(modules.Settings.onBlockButtonActivated)
-local size150x150 = Enum.ThumbnailSize.Size150x150
-local size352x352 = Enum.ThumbnailSize.Size352x352
-local headShot = Enum.ThumbnailType.HeadShot
-local avatarThumbnail = Enum.ThumbnailType.AvatarThumbnail
+local Modules = RobloxGui.Modules
+local PromptCreatorModule = require(Modules.PromptCreator)
+local SocialUtilModule = require(Modules.SocialUtil)
+local BlockingUtilityModule = require(CorePackages.Workspace.Packages.BlockingUtility)
+local OnBlockButtonActivatedModule = require(Modules.Settings.onBlockButtonActivated)
+local Size150x150 = Enum.ThumbnailSize.Size150x150
+local Size352x352 = Enum.ThumbnailSize.Size352x352
+local HeadShot = Enum.ThumbnailType.HeadShot
+local AvatarThumbnail = Enum.ThumbnailType.AvatarThumbnail
 
-function createFetchImageFunction(...)
-	-- upvalues: socialUtilModule (ref)
+function createFetchImageFunction(...) --[[ Line: 33 ]]
+	-- upvalues: SocialUtilModule (copy)
 	local list = { ... }
 	
-	return function(p1)
-		-- upvalues: socialUtilModule (copy), list (ref)
-		spawn(function()
-			-- upvalues: socialUtilModule (copy), list (copy), p1 (ref)
-			local playerImage = socialUtilModule.GetPlayerImage(unpack(list))
+	return function(p1) --[[ Line: 35 ]]
+		-- upvalues: SocialUtilModule (upval), list (copy)
+		spawn(function() --[[ Line: 36 ]]
+			-- upvalues: SocialUtilModule (upval), list (upval), p1 (copy)
+			local PlayerImage = SocialUtilModule.GetPlayerImage(unpack(list))
 			
 			if p1 and p1.Parent then
-				p1.Image = playerImage
+				p1.Image = PlayerImage
 			end
 		end)
 	end
 end
 
-function DoPromptBlockPlayer(p1)
-	-- upvalues: blockingUtilityModule (ref), onBlockButtonActivatedModule (ref)
-	if blockingUtilityModule:IsPlayerBlockedByUserId(p1.UserId) then
+function DoPromptBlockPlayer(Player) --[[ Line: 45 ]]
+	-- upvalues: BlockingUtilityModule (copy), OnBlockButtonActivatedModule (copy)
+	if not BlockingUtilityModule:IsPlayerBlockedByUserId(Player.UserId) then
+		OnBlockButtonActivatedModule(Player)
+		
 		return
 	end
-	onBlockButtonActivatedModule(p1)
 end
 
-function PromptBlockPlayer(p1)
-	-- upvalues: localPlayer (write)
-	if localPlayer.UserId < 0 then
+function PromptBlockPlayer(Player: Player) --[[ Line: 53 ]]
+	-- upvalues: LocalPlayer (ref)
+	if LocalPlayer.UserId < 0 then
 		error("PromptBlockPlayer can not be called for guests!")
 	end
-	if typeof(p1) ~= "Instance" or not p1:IsA("Player") then
+	if typeof(Player) ~= "Instance" or not Player:IsA("Player") then
 		error("Invalid argument to PromptBlockPlayer")
 		
 		return
-	elseif p1.UserId < 0 then
+	end
+	if Player.UserId < 0 then
 		error("PromptBlockPlayer can not be called on guests!")
 	end
-	if p1 == localPlayer then
+	if Player == LocalPlayer then
 		error("PromptBlockPlayer: A user can not block themselves!")
 	end
-	DoPromptBlockPlayer(p1)
+	DoPromptBlockPlayer(Player)
 end
 
-function DoPromptUnblockPlayer(p1)
-	-- upvalues: blockingUtilityModule (ref), promptCreatorModule (ref), size150x150 (ref), headShot (ref), size352x352 (ref), avatarThumbnail (ref)
-	local _ = not blockingUtilityModule:IsPlayerBlockedByUserId(p1.UserId)
-	promptCreatorModule:CreatePrompt({
+function DoPromptUnblockPlayer(Player: Player) --[[ Line: 70 ]]
+	-- upvalues: BlockingUtilityModule (copy), PromptCreatorModule (copy), Size150x150 (copy), HeadShot (copy), Size352x352 (copy), AvatarThumbnail (copy)
+	local _ = not BlockingUtilityModule:IsPlayerBlockedByUserId(Player.UserId)
+	PromptCreatorModule:CreatePrompt({
 		WindowTitle = "Confirm Unblock",
 		ConfirmationText = "Unblock",
 		CancelText = "Cancel",
 		CancelActive = true,
 		Image = "",
 		ImageConsoleVR = "",
-		MainText = string.format("Would you like to unblock %s?", p1.Name),
-		FetchImageFunction = createFetchImageFunction(p1.UserId, size150x150, headShot),
-		FetchImageFunctionConsoleVR = createFetchImageFunction(p1.UserId, size352x352, avatarThumbnail),
-		PromptCompletedCallback = function(p2)
-			-- upvalues: blockingUtilityModule (copy), p1 (ref), promptCreatorModule (copy), size150x150 (copy), headShot (copy), size352x352 (copy), avatarThumbnail (copy)
-			if p2 and not blockingUtilityModule:UnblockPlayerAsync(p1) then
-				while promptCreatorModule:IsCurrentlyPrompting() do
+		MainText = string.format("Would you like to unblock %s?", Player.Name),
+		FetchImageFunction = createFetchImageFunction(Player.UserId, Size150x150, HeadShot),
+		FetchImageFunctionConsoleVR = createFetchImageFunction(Player.UserId, Size352x352, AvatarThumbnail),
+		PromptCompletedCallback = function(p1) --[[ Line: 78 ]]
+			-- upvalues: BlockingUtilityModule (upval), Player (copy), PromptCreatorModule (upval), Size150x150 (upval), HeadShot (upval), Size352x352 (upval), AvatarThumbnail (upval)
+			if p1 and not BlockingUtilityModule:UnblockPlayerAsync(Player) then
+				while PromptCreatorModule:IsCurrentlyPrompting() do
 					wait()
 				end
-				promptCreatorModule:CreatePrompt({
+				PromptCreatorModule:CreatePrompt({
 					WindowTitle = "Error Unblocking User",
 					ConfirmationText = "Okay",
 					Image = "",
 					ImageConsoleVR = "",
-					MainText = string.format("An error occurred while unblocking %s. Please try again later.", p1.Name),
-					FetchImageFunction = createFetchImageFunction(p1.UserId, size150x150, headShot),
-					FetchImageFunctionConsoleVR = createFetchImageFunction(p1.UserId, size352x352, avatarThumbnail),
+					MainText = string.format("An error occurred while unblocking %s. Please try again later.", Player.Name),
+					FetchImageFunction = createFetchImageFunction(Player.UserId, Size150x150, HeadShot),
+					FetchImageFunctionConsoleVR = createFetchImageFunction(Player.UserId, Size352x352, AvatarThumbnail),
 					StripeColor = Color3.fromRGB(183, 34, 54)
 				})
 			end
@@ -94,32 +96,33 @@ function DoPromptUnblockPlayer(p1)
 	})
 end
 
-function PromptUnblockPlayer(p2)
-	-- upvalues: localPlayer (write)
-	if localPlayer.UserId < 0 then
+function PromptUnblockPlayer(Player: Player) --[[ Line: 113 ]]
+	-- upvalues: LocalPlayer (ref)
+	if LocalPlayer.UserId < 0 then
 		error("PromptUnblockPlayer can not be called for guests!")
 	end
-	if typeof(p2) ~= "Instance" or not p2:IsA("Player") then
+	if typeof(Player) ~= "Instance" or not Player:IsA("Player") then
 		error("Invalid argument to PromptUnblockPlayer")
 		
 		return
-	elseif p2.UserId < 0 then
+	end
+	if Player.UserId < 0 then
 		error("PromptUnblockPlayer can not be called on guests!")
 	end
-	if p2 == localPlayer then
+	if Player == LocalPlayer then
 		error("PromptUnblockPlayer: A user can not block themselves!")
 	end
-	DoPromptUnblockPlayer(p2)
+	DoPromptUnblockPlayer(Player)
 end
 
-function GetBlockedUserIds()
-	-- upvalues: localPlayer (write), blockingUtilityModule (ref)
-	if localPlayer.UserId < 0 then
+function GetBlockedUserIds() --[[ Line: 130 ]]
+	-- upvalues: LocalPlayer (ref), BlockingUtilityModule (copy)
+	if LocalPlayer.UserId < 0 then
 		error("GetBlockedUserIds can not be called for guests!")
 	end
-	return blockingUtilityModule:GetBlockedUserIdsAsync()
+	return BlockingUtilityModule:GetBlockedUserIdsAsync()
 end
 
-starterGuiService:RegisterSetCore("PromptBlockPlayer", PromptBlockPlayer)
-starterGuiService:RegisterSetCore("PromptUnblockPlayer", PromptUnblockPlayer)
-starterGuiService:RegisterGetCore("GetBlockedUserIds", GetBlockedUserIds)
+StarterGui:RegisterSetCore("PromptBlockPlayer", PromptBlockPlayer)
+StarterGui:RegisterSetCore("PromptUnblockPlayer", PromptUnblockPlayer)
+StarterGui:RegisterGetCore("GetBlockedUserIds", GetBlockedUserIds)

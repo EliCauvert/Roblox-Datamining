@@ -1,118 +1,110 @@
-﻿local parent = script:FindFirstAncestor("PinShortcut").Parent
-local appBloxModule = require(parent.AppBlox)
-local centralOverlayModule = require(parent.CentralOverlay)
-local localizationModule = require(parent.Localization)
-local loggingProtocolModule = require(parent.LoggingProtocol)
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local roactUtilsModule = require(parent.RoactUtils)
-local sharedFlagsModule = require(parent.SharedFlags)
-local universalAppPolicyModule = require(parent.UniversalAppPolicy)
-local closeCentralOverlay = centralOverlayModule.Thunks.CloseCentralOverlay
-local enums = foundationModule.Enums
-local getAppFeaturePolicies = universalAppPolicyModule.getAppFeaturePolicies
-local snackbarWrapper = appBloxModule.SnackbarWrapper
-local telemetryCountersModule = require(script.Parent.TelemetryCounters)
-local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
-local useLocalization = localizationModule.Hooks.useLocalization
-local fFlagAddPinExperienceTargetDestinationGUACPolicy = sharedFlagsModule.FFlagAddPinExperienceTargetDestinationGUACPolicy
-local fFlagPinShortcutSnackbarTelemetryEnabledModule = require(script.Parent.Flags.FFlagPinShortcutSnackbarTelemetryEnabled)
+﻿local Parent = script:FindFirstAncestor("PinShortcut").Parent
+local LoggingProtocolModule = require(Parent.LoggingProtocol)
+local ReactModule = require(Parent.React)
+local CloseCentralOverlayFunction = require(Parent.CentralOverlay).Thunks.CloseCentralOverlay
+local Enums = require(Parent.Foundation).Enums
+local GetAppFeaturePoliciesFunction = require(Parent.UniversalAppPolicy).getAppFeaturePolicies
+local SnackbarWrapper = require(Parent.AppBlox).SnackbarWrapper
+local TelemetryCountersModule = require(script.Parent.TelemetryCounters)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local FFlagAddPinExperienceTargetDestinationGUACPolicy = require(Parent.SharedFlags).FFlagAddPinExperienceTargetDestinationGUACPolicy
+local FFlagPinShortcutSnackbarTelemetryEnabledModule = require(script.Parent.Flags.FFlagPinShortcutSnackbarTelemetryEnabled)
 
-return reactModule.memo(function(p1)
-	-- upvalues: useDispatch (ref), reactModule (ref), closeCentralOverlay (ref), useLocalization (ref), fFlagAddPinExperienceTargetDestinationGUACPolicy (ref), getAppFeaturePolicies (ref), enums (ref), fFlagPinShortcutSnackbarTelemetryEnabledModule (ref), loggingProtocolModule (ref), telemetryCountersModule (ref), snackbarWrapper (ref)
-	local alreadyExists, t
-	local var1 = useDispatch()
-	local var2 = reactModule.useCallback(function()
-		-- upvalues: var1 (ref), closeCentralOverlay (copy)
-		var1(closeCentralOverlay())
-	end, { var1 })
-	local var3 = p1.status == Enum.PinExperienceStatus.Success
-	local var4 = p1.status == Enum.PinExperienceStatus.AlreadyExists
-	local experienceName = p1.experienceName
-	local var5 = useLocalization({
+return ReactModule.memo(function(p1) --[[ Line: 35 | Named "PinExperienceResultSnackbar" ]]
+	-- upvalues: UseDispatchFunction (copy), ReactModule (copy), CloseCentralOverlayFunction (copy), UseLocalizationFunction (copy), FFlagAddPinExperienceTargetDestinationGUACPolicy (copy), GetAppFeaturePoliciesFunction (copy), Enums (copy), FFlagPinShortcutSnackbarTelemetryEnabledModule (copy), LoggingProtocolModule (copy), TelemetryCountersModule (copy), SnackbarWrapper (copy)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 38 ]]
+		-- upvalues: UseDispatchResult (copy), CloseCentralOverlayFunction (upval)
+		UseDispatchResult(CloseCentralOverlayFunction())
+	end, { UseDispatchResult })
+	local IsStatusMatch = p1.status == Enum.PinExperienceStatus.Success
+	local IsStatusMatch1 = p1.status == Enum.PinExperienceStatus.AlreadyExists
+	local ExperienceName = p1.experienceName
+	local UseLocalizationResult = UseLocalizationFunction({
 		successDesktop = {
 			"InstantApps.Shortcuts.Label.SuccessAddingExperienceToDesktop",
-			experience_name = experienceName
+			experience_name = ExperienceName
 		},
 		successHomeScreen = {
 			"InstantApps.Shortcuts.Label.SuccessAddingExperienceToHomeScreen",
-			experience_name = experienceName
+			experience_name = ExperienceName
 		},
 		alreadyExists = {
 			"InstantApps.Shortcuts.Label.ShortcutAlreadyExists",
-			experience_name = experienceName
+			experience_name = ExperienceName
 		},
 		failedDesktop = {
 			"InstantApps.Shortcuts.Label.FailedToAddExperienceToDesktop",
-			experience_name = experienceName
+			experience_name = ExperienceName
 		},
 		failedHomeScreen = {
 			"InstantApps.Shortcuts.Label.FailedToAddExperienceToHomeScreen",
-			experience_name = experienceName
+			experience_name = ExperienceName
 		},
 		viewShortcut = { "InstantApps.Shortcuts.Label.ViewShortcut" },
 		tryAgain = { "InstantApps.Shortcuts.Label.TryAgain" }
 	})
-	local _ = nil
-	local _ = nil
-	local var6 = if fFlagAddPinExperienceTargetDestinationGUACPolicy then getAppFeaturePolicies().getPinExperienceTargetDestination() else "HomeScreen"
+	local PinExperienceTargetDestination = if FFlagAddPinExperienceTargetDestinationGUACPolicy then GetAppFeaturePoliciesFunction().getPinExperienceTargetDestination() else "HomeScreen"
+	local SuccessDesktop = nil
+	local Icon = nil
 	
-	if var3 then
-		alreadyExists = if var6 == "Desktop" then var5.successDesktop else var5.successHomeScreen
-		t = {
-			name = enums.IconName.CircleCheck,
-			variant = enums.IconVariant.Filled
+	if IsStatusMatch then
+		SuccessDesktop = if PinExperienceTargetDestination == "Desktop" then UseLocalizationResult.successDesktop else UseLocalizationResult.successHomeScreen
+		Icon = {
+			name = Enums.IconName.CircleCheck,
+			variant = Enums.IconVariant.Filled
 		}
-	elseif var4 then
-		alreadyExists = var5.alreadyExists
-		t = { name = enums.IconName.CircleI }
+	elseif IsStatusMatch1 then
+		SuccessDesktop = UseLocalizationResult.alreadyExists
+		Icon = { name = Enums.IconName.CircleI }
 	else
-		alreadyExists = if var6 == "Desktop" then var5.failedDesktop else var5.failedHomeScreen
-		t = { name = enums.IconName.TriangleExclamation }
+		SuccessDesktop = if PinExperienceTargetDestination == "Desktop" then UseLocalizationResult.failedDesktop else UseLocalizationResult.failedHomeScreen
+		Icon = { name = Enums.IconName.TriangleExclamation }
 	end
-	if fFlagPinShortcutSnackbarTelemetryEnabledModule then
-		reactModule.useEffect(function()
-			-- upvalues: var3 (ref), var4 (ref), loggingProtocolModule (copy), telemetryCountersModule (copy)
-			loggingProtocolModule.default:logRobloxTelemetryCounter(telemetryCountersModule.SnackbarShown, 1, {
-				action = if var3 then "Success" elseif var4 then "AlreadyExists" else "Failure"
+	if FFlagPinShortcutSnackbarTelemetryEnabledModule then
+		ReactModule.useEffect(function() --[[ Line: 88 ]]
+			-- upvalues: IsStatusMatch (copy), IsStatusMatch1 (copy), LoggingProtocolModule (upval), TelemetryCountersModule (upval)
+			LoggingProtocolModule.default:logRobloxTelemetryCounter(TelemetryCountersModule.SnackbarShown, 1, {
+				action = if IsStatusMatch then "Success" elseif IsStatusMatch1 then "AlreadyExists" else "Failure"
 			})
 		end, {})
 	end
-	local tryAgain = nil
-	local var7 = nil
+	local TryAgain = nil
+	local OnButtonActivated: (() -> ())? = nil
 	
-	if var3 and p1.onViewShortcut then
-		tryAgain = var5.viewShortcut
+	if IsStatusMatch and p1.onViewShortcut then
+		TryAgain = UseLocalizationResult.viewShortcut
 		
-		var7 = function()
-			-- upvalues: fFlagPinShortcutSnackbarTelemetryEnabledModule (copy), loggingProtocolModule (copy), telemetryCountersModule (copy), var2 (ref), p1 (ref)
-			if fFlagPinShortcutSnackbarTelemetryEnabledModule then
-				loggingProtocolModule.default:logRobloxTelemetryCounter(telemetryCountersModule.SnackbarButtonPressed, 1, { action = "ViewShortcut" })
+		OnButtonActivated = function() --[[ Line: 99 ]]
+			-- upvalues: FFlagPinShortcutSnackbarTelemetryEnabledModule (upval), LoggingProtocolModule (upval), TelemetryCountersModule (upval), UseResult (copy), p1 (copy)
+			if FFlagPinShortcutSnackbarTelemetryEnabledModule then
+				LoggingProtocolModule.default:logRobloxTelemetryCounter(TelemetryCountersModule.SnackbarButtonPressed, 1, { action = "ViewShortcut" })
 			end
-			var2()
+			UseResult()
 			p1.onViewShortcut()
 		end
-	elseif not var3 and not var4 and p1.onRetry then
-		tryAgain = var5.tryAgain
+	elseif not IsStatusMatch and not IsStatusMatch1 and p1.onRetry then
+		TryAgain = UseLocalizationResult.tryAgain
 		
-		var7 = function()
-			-- upvalues: fFlagPinShortcutSnackbarTelemetryEnabledModule (copy), loggingProtocolModule (copy), telemetryCountersModule (copy), var2 (ref), p1 (ref)
-			if fFlagPinShortcutSnackbarTelemetryEnabledModule then
-				loggingProtocolModule.default:logRobloxTelemetryCounter(telemetryCountersModule.SnackbarButtonPressed, 1, { action = "TryAgain" })
+		OnButtonActivated = function() --[[ Line: 112 ]]
+			-- upvalues: FFlagPinShortcutSnackbarTelemetryEnabledModule (upval), LoggingProtocolModule (upval), TelemetryCountersModule (upval), UseResult (copy), p1 (copy)
+			if FFlagPinShortcutSnackbarTelemetryEnabledModule then
+				LoggingProtocolModule.default:logRobloxTelemetryCounter(TelemetryCountersModule.SnackbarButtonPressed, 1, { action = "TryAgain" })
 			end
-			var2()
+			UseResult()
 			p1.onRetry()
 		end
 	end
-	local var8 = var3 or var4
+	local IsStatusMatch2: boolean = IsStatusMatch or IsStatusMatch1
 	
-	return reactModule.createElement(snackbarWrapper, {
-		titleText = alreadyExists,
-		icon = t,
-		buttonText = tryAgain,
-		onButtonActivated = var7,
-		closeSnackbar = var2,
-		autoDismissDelaySeconds = if var8 then 5 else nil,
-		hideCloseAffordance = if var8 then true else false
+	return ReactModule.createElement(SnackbarWrapper, {
+		titleText = SuccessDesktop,
+		icon = Icon,
+		buttonText = TryAgain,
+		onButtonActivated = OnButtonActivated,
+		closeSnackbar = UseResult,
+		autoDismissDelaySeconds = if IsStatusMatch2 then 5 else nil,
+		hideCloseAffordance = if IsStatusMatch2 then true else false
 	})
 end)

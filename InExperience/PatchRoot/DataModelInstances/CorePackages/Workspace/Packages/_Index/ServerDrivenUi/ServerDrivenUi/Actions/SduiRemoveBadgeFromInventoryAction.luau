@@ -1,53 +1,54 @@
-﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
-local sduiActionType = sduiCoreSystemModule.SduiActionType
-local closeCentralOverlay = require(parent.CentralOverlay).Thunks.CloseCentralOverlay
-local setCentralOverlay = require(parent.CentralOverlay).Actions.SetCentralOverlay
-local centralOverlayType = require(parent.RobloxAppEnums).CentralOverlayType
-local dataHydrationModule = require(parent.DataHydration)
-local localizeStrings = require(parent.Localization).localizeStrings
+﻿local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
+local SduiActionType = SduiCoreSystemModule.SduiActionType
+local CloseCentralOverlayFunction = require(Parent.CentralOverlay).Thunks.CloseCentralOverlay
+local SetCentralOverlayFunction = require(Parent.CentralOverlay).Actions.SetCentralOverlay
+local CentralOverlayType = require(Parent.RobloxAppEnums).CentralOverlayType
+local DataHydrationModule = require(Parent.DataHydration)
+local LocalizeStringsFunction = require(Parent.Localization).localizeStrings
 
-return function(p1, _, p2, _)
-	-- upvalues: sduiErrorType (ref), sduiActionType (ref), localizeStrings (ref), setCentralOverlay (ref), centralOverlayType (ref), dataHydrationModule (ref), closeCentralOverlay (ref)
-	local var1 = if p1 then p1.actionParams else nil
+return function(p1, _, p2, _) --[[ Line: 16 ]]
+	-- upvalues: SduiErrorType (copy), SduiActionType (copy), LocalizeStringsFunction (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy), DataHydrationModule (copy), CloseCentralOverlayFunction (copy)
+	local ActionParams = p1 and p1.actionParams or nil
 	
-	if var1 == nil then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if ActionParams == nil then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			message = "Missing action params",
-			name = sduiActionType.RemoveBadgeFromInventory
+			name = SduiActionType.RemoveBadgeFromInventory
 		}, p2.appPage)
 		
 		return
 	end
-	assert(var1, "actionParams must exist")
+	assert(ActionParams, "actionParams must exist")
 	
-	if var1.assetId == nil then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if ActionParams.assetId == nil then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			message = "Missing actionParam: assetId",
-			name = sduiActionType.RemoveBadgeFromInventory
+			name = SduiActionType.RemoveBadgeFromInventory
 		}, p2.appPage)
 		
 		return
+	else
+		local AssetId = ActionParams.assetId
+		local LocalizeStringsResult = LocalizeStringsFunction(p2.dependencies.localization, {
+			RemoveBadgeTitle = "Feature.Item.Label.DeleteItemUndercase",
+			RemoveBadgeBody = "Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete"
+		})
+		local DispatchFunction: (any) -> () = p2.dependencies.dispatch
+		DispatchFunction(SetCentralOverlayFunction(CentralOverlayType.ConfirmationDialog, {
+			disablePortal = false,
+			title = LocalizeStringsResult.RemoveBadgeTitle,
+			body = LocalizeStringsResult.RemoveBadgeBody,
+			onConfirm = function() --[[ Line: 53 ]]
+				-- upvalues: DataHydrationModule (upval), AssetId (copy), DispatchFunction (copy), CloseCentralOverlayFunction (upval)
+				DataHydrationModule.Badges.getBadgeInfoStore(false).removeBadge((tostring(AssetId)))
+				DispatchFunction(CloseCentralOverlayFunction())
+			end,
+			onCancel = function() --[[ Line: 58 ]]
+				-- upvalues: DispatchFunction (copy), CloseCentralOverlayFunction (upval)
+				DispatchFunction(CloseCentralOverlayFunction())
+			end
+		}))
 	end
-	local assetId = var1.assetId
-	local var2 = localizeStrings(p2.dependencies.localization, {
-		RemoveBadgeTitle = "Feature.Item.Label.DeleteItemUndercase",
-		RemoveBadgeBody = "Feature.Item.Label.DeleteFromInventoryConfirmUndercaseDelete"
-	})
-	local dispatch = p2.dependencies.dispatch
-	dispatch(setCentralOverlay(centralOverlayType.ConfirmationDialog, {
-		disablePortal = false,
-		title = var2.RemoveBadgeTitle,
-		body = var2.RemoveBadgeBody,
-		onConfirm = function()
-			-- upvalues: dataHydrationModule (copy), assetId (ref), dispatch (ref), closeCentralOverlay (copy)
-			dataHydrationModule.Badges.getBadgeInfoStore(false).removeBadge(tostring(assetId))
-			dispatch(closeCentralOverlay())
-		end,
-		onCancel = function()
-			-- upvalues: dispatch (ref), closeCentralOverlay (copy)
-			dispatch(closeCentralOverlay())
-		end
-	}))
 end

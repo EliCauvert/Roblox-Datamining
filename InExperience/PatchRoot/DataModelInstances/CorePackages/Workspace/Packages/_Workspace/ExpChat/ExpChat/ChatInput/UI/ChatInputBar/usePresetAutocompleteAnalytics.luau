@@ -1,112 +1,121 @@
-﻿local httpService = game:GetService("HttpService")
-local expChat = script:FindFirstAncestor("ExpChat")
-local parent = expChat.Parent
-local reactModule = require(parent.React)
-local expChatSharedModule = require(parent.ExpChatShared)
-local getPresetChatStoreModule = require(expChat.Stores.GetPresetChatStore)
-local constantsModule = require(expChat.PresetChat.Constants)
-local presetSearchModule = require(expChat.Autocomplete.PresetSearch)
-local getEnableChatInputBarConfigurationAutocompleteEnabledModule = require(expChat.Flags.getEnableChatInputBarConfigurationAutocompleteEnabled)
-local extendedStandardizedFields = constantsModule.Analytics.ExtendedStandardizedFields
+﻿local HttpService = game:GetService("HttpService")
+local ExpChat = script:FindFirstAncestor("ExpChat")
+local Parent = ExpChat.Parent
+local ReactModule = require(Parent.React)
+local ExpChatSharedModule = require(Parent.ExpChatShared)
+local GetPresetChatStoreModule = require(ExpChat.Stores.GetPresetChatStore)
+local ConstantsModule = require(ExpChat.PresetChat.Constants)
+local PresetSearchModule = require(ExpChat.Autocomplete.PresetSearch)
+local GetEnableChatInputBarConfigurationAutocompleteEnabledModule = require(ExpChat.Flags.getEnableChatInputBarConfigurationAutocompleteEnabled)
+local ExtendedStandardizedFields = ConstantsModule.Analytics.ExtendedStandardizedFields
 local t = {}
 
-return function(value)
-	-- upvalues: t (ref), getEnableChatInputBarConfigurationAutocompleteEnabledModule (ref), reactModule (ref), expChatSharedModule (ref), constantsModule (ref), httpService (ref), extendedStandardizedFields (ref), presetSearchModule (ref), getPresetChatStoreModule (ref)
-	local autocompleteDropdownReducer = value.autocompleteDropdownReducer
-	local var1 = if autocompleteDropdownReducer ~= nil then t else autocompleteDropdownReducer.results
-	local var2 = autocompleteDropdownReducer ~= nil and (autocompleteDropdownReducer.activated and (autocompleteDropdownReducer.autocompleteType == "presets" and (#var1 > 0 and (value.isFocused and (value.autocompleteEnabled == true and getEnableChatInputBarConfigurationAutocompleteEnabledModule())))))
-	local var3 = reactModule.useRef(nil)
-	local var4 = reactModule.useRef({})
-	local var5 = reactModule.useRef({})
-	local var6 = reactModule.useRef({})
-	local var7 = reactModule.useRef(nil)
-	local var8 = reactModule.useCallback(function()
-		-- upvalues: var3 (ref), var6 (ref), var4 (ref), var7 (ref), var5 (ref), expChatSharedModule (copy), constantsModule (copy), httpService (copy), extendedStandardizedFields (copy)
-		local current = var3.current
+return function(p1) --[[ Line: 74 | Named "usePresetAutocompleteAnalytics" ]]
+	-- upvalues: t (copy), GetEnableChatInputBarConfigurationAutocompleteEnabledModule (copy), ReactModule (copy), ExpChatSharedModule (copy), ConstantsModule (copy), HttpService (copy), ExtendedStandardizedFields (copy), PresetSearchModule (copy), GetPresetChatStoreModule (copy)
+	local AutocompleteDropdownReducer = p1.autocompleteDropdownReducer
+	local T = if AutocompleteDropdownReducer == nil then t else AutocompleteDropdownReducer.results
+	local EnableChatInputBarConfigurationAutocompleteEnabledModule = AutocompleteDropdownReducer ~= nil and (AutocompleteDropdownReducer.activated and (AutocompleteDropdownReducer.autocompleteType == "presets" and #T > 0 and (p1.isFocused and (p1.autocompleteEnabled == true and GetEnableChatInputBarConfigurationAutocompleteEnabledModule()))))
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef({})
+	local UseRefResult2 = ReactModule.useRef({})
+	local UseRefResult3 = ReactModule.useRef({})
+	local UseRefResult4 = ReactModule.useRef(nil)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 103 ]]
+		-- upvalues: UseRefResult (copy), UseRefResult3 (copy), UseRefResult1 (copy), UseRefResult4 (copy), UseRefResult2 (copy), ExpChatSharedModule (upval), ConstantsModule (upval), HttpService (upval), ExtendedStandardizedFields (upval)
+		local Current = UseRefResult.current
 		
-		if current == nil then return end
+		if Current == nil then return end
 		local t = {}
 		
-		for i, v in var6.current do
-			t[v] = i - 1
+		for i, value in UseRefResult3.current do
+			t[value] = i - 1
 		end
-		local t_1 = {}
+		local List = {}
 		
-		for i_1, v_1 in var4.current do
-			local var9 = t[v_1]
-			table.insert(t_1, {
-				preset_id = v_1,
-				index = if var9 ~= nil then -1 else var9,
-				click = if var7.current == v_1 then 1 else 0
+		for _, Preset_id in UseRefResult1.current do
+			local Entry = t[Preset_id]
+			table.insert(List, {
+				preset_id = Preset_id,
+				index = if Entry == nil then -1 else Entry,
+				click = if UseRefResult4.current == Preset_id then 1 else 0
 			})
 		end
-		var3.current = nil
-		var4.current = {}
-		var5.current = {}
-		var6.current = {}
-		var7.current = nil
-		expChatSharedModule.Analytics:TelemetryLogEvent(expChatSharedModule.Analytics.ExpChatPresetActionConfig, {
-			event_type = constantsModule.Analytics.EventTypes.Dismiss,
-			component = constantsModule.Analytics.Components.AutocompleteDropdown,
-			autocomplete_session_id = current,
-			preset_items = httpService:JSONEncode(t_1)
-		}, extendedStandardizedFields)
+		UseRefResult.current = nil
+		UseRefResult1.current = {}
+		UseRefResult2.current = {}
+		UseRefResult3.current = {}
+		UseRefResult4.current = nil
+		ExpChatSharedModule.Analytics:TelemetryLogEvent(ExpChatSharedModule.Analytics.ExpChatPresetActionConfig, {
+			event_type = ConstantsModule.Analytics.EventTypes.Dismiss,
+			component = ConstantsModule.Analytics.Components.AutocompleteDropdown,
+			autocomplete_session_id = Current,
+			preset_items = HttpService:JSONEncode(List)
+		}, ExtendedStandardizedFields)
 	end, {})
-	local var10 = reactModule.useCallback(function(p1)
-		-- upvalues: var3 (ref), presetSearchModule (copy), getPresetChatStoreModule (copy), var7 (ref)
-		if var3.current == nil then return end
-		local presetIdForValue = presetSearchModule.getPresetIdForValue(getPresetChatStoreModule(false), p1)
+	local UseResult1 = ReactModule.useCallback(function(p2) --[[ Line: 150 ]]
+		-- upvalues: UseRefResult (copy), PresetSearchModule (upval), GetPresetChatStoreModule (upval), UseRefResult4 (copy)
+		if UseRefResult.current == nil then return end
+		local PresetIdForValue = PresetSearchModule.getPresetIdForValue(GetPresetChatStoreModule(false), p2)
 		
-		if presetIdForValue == nil then
+		if PresetIdForValue ~= nil then
+			UseRefResult4.current = PresetIdForValue
+			
 			return
 		end
-		var7.current = presetIdForValue
 	end, {})
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), getPresetChatStoreModule (copy), var1 (ref), presetSearchModule (copy), var5 (ref), var4 (ref), var6 (ref)
-		if not var2 then return end
-		local var11 = getPresetChatStoreModule(false)
-		local t = {}
+	ReactModule.useEffect(function() --[[ Line: 163 ]]
+		-- upvalues: EnableChatInputBarConfigurationAutocompleteEnabledModule (copy), GetPresetChatStoreModule (upval), T (copy), PresetSearchModule (upval), UseRefResult2 (copy), UseRefResult1 (copy), UseRefResult3 (copy)
+		if not EnableChatInputBarConfigurationAutocompleteEnabledModule then return end
+		local PresetChatStoreModule = GetPresetChatStoreModule(false)
+		local Current = {}
 		
-		for i, v in var1 do
-			local presetIdForValue = presetSearchModule.getPresetIdForValue(var11, v)
+		for _, value in T do
+			local PresetIdForValue = PresetSearchModule.getPresetIdForValue(PresetChatStoreModule, value)
+			local NoPresetIdForValue = PresetIdForValue == nil
 			
-			if presetIdForValue ~= nil then
-				table.insert(t, presetIdForValue)
-				
-				if not var5.current[presetIdForValue] then
-					var5.current[presetIdForValue] = true
-					table.insert(var4.current, presetIdForValue)
-				end
+			if not NoPresetIdForValue then
+				table.insert(Current, PresetIdForValue)
+				NoPresetIdForValue = UseRefResult2.current[PresetIdForValue]
+			end
+			if not NoPresetIdForValue then
+				UseRefResult2.current[PresetIdForValue] = true
+				table.insert(UseRefResult1.current, PresetIdForValue)
 			end
 		end
-		var6.current = t
-	end, { var2, var1 })
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), var8 (ref), var3 (ref), httpService (copy), expChatSharedModule (copy), constantsModule (copy), extendedStandardizedFields (copy)
-		if not var2 then
-			var8()
-			
-			return
-		elseif var3.current == nil then
-			local var12 = httpService:GenerateGUID(false)
-			var3.current = var12
-			expChatSharedModule.Analytics:TelemetryLogEvent(expChatSharedModule.Analytics.ExpChatPresetActionConfig, {
-				event_type = constantsModule.Analytics.EventTypes.Show,
-				component = constantsModule.Analytics.Components.AutocompleteDropdown,
-				autocomplete_session_id = var12
-			}, extendedStandardizedFields)
+		UseRefResult3.current = Current
+	end, {
+		EnableChatInputBarConfigurationAutocompleteEnabledModule,
+		T
+	})
+	ReactModule.useEffect(function() --[[ Line: 183 ]]
+		-- upvalues: EnableChatInputBarConfigurationAutocompleteEnabledModule (copy), UseResult (copy), UseRefResult (copy), HttpService (upval), ExpChatSharedModule (upval), ConstantsModule (upval), ExtendedStandardizedFields (upval)
+		if not EnableChatInputBarConfigurationAutocompleteEnabledModule then
+			UseResult()
 			
 			return
 		end
-	end, { var2, var8 })
-	reactModule.useEffect(function()
-		-- upvalues: var8 (ref)
-		return function()
-			-- upvalues: var8 (copy)
-			var8()
+		if UseRefResult.current == nil then
+			local Guid = HttpService:GenerateGUID(false)
+			UseRefResult.current = Guid
+			ExpChatSharedModule.Analytics:TelemetryLogEvent(ExpChatSharedModule.Analytics.ExpChatPresetActionConfig, {
+				event_type = ConstantsModule.Analytics.EventTypes.Show,
+				component = ConstantsModule.Analytics.Components.AutocompleteDropdown,
+				autocomplete_session_id = Guid
+			}, ExtendedStandardizedFields)
+			
+			return
 		end
-	end, { var8 })
+	end, {
+		EnableChatInputBarConfigurationAutocompleteEnabledModule,
+		UseResult
+	})
+	ReactModule.useEffect(function() --[[ Line: 205 ]]
+		-- upvalues: UseResult (copy)
+		return function() --[[ Line: 206 ]]
+			-- upvalues: UseResult (upval)
+			UseResult()
+		end
+	end, { UseResult })
 	
-	return { recordPresetChosen = var10 }
+	return { recordPresetChosen = UseResult1 }
 end

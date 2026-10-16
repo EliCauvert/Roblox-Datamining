@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.ContentSharingNetworking.ContentSharingNetworking)
+﻿return (require(script.Parent.Parent.Parent._Index.ContentSharingNetworking.ContentSharingNetworking))

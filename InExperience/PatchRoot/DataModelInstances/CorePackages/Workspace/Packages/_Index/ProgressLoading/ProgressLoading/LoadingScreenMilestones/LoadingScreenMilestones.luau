@@ -1,99 +1,203 @@
-﻿local parent = script:FindFirstAncestor("ProgressLoading").Parent
-local constantsModule = require(script.Parent.Constants)
+﻿local Parent = script:FindFirstAncestor("ProgressLoading").Parent
+local ConstantsModule = require(script.Parent.Constants)
 local _ = require(script.Parent.Types)
-local loadingMilestoneTelemetryModule = require(script.Parent.LoadingMilestoneTelemetry)
-local reportMilestoneError = loadingMilestoneTelemetryModule.reportMilestoneError
-local abortReason = constantsModule.AbortReason
-local outcome = constantsModule.Outcome
-local TILT_EVENT_NAME = constantsModule.TILT_EVENT_NAME
-local var1 = nil
+local LoadingMilestoneTelemetryModule = require(script.Parent.LoadingMilestoneTelemetry)
+local LoadingMilestoneTrackerModule = require(script.Parent.LoadingMilestoneTracker)
+local TryMilestoneOperationModule = require(script.Parent.tryMilestoneOperation)
+local AbortReason = ConstantsModule.AbortReason
+local Outcome = ConstantsModule.Outcome
+local Milestone = ConstantsModule.Milestone
+local v1 = nil
 
-local function _(p1)
-	return (if p1.reducedMotion then "ReducedMotion_" else "") .. (if p1.holdEnabled then "HoldOn" else "HoldOff")
+local function _(p1): string --[[ Line: 24 | Named "getTreatmentSubcategory" ]]
+	-- upvalues: ConstantsModule (copy)
+	return (if p1.host == ConstantsModule.Host.DeferredJoin then "DeferredJoin_" else "") .. (if p1.reducedMotion then "ReducedMotion_" else "") .. (if p1.holdEnabled then "HoldOn" else "HoldOff")
 end
 
 return {
-	start = function(p1)
-		-- upvalues: var1 (write), abortReason (ref), constantsModule (ref), loadingMilestoneTelemetryModule (ref), outcome (ref), parent (ref), TILT_EVENT_NAME (ref), reportMilestoneError (ref)
-		if var1 then
-			var1.abort(abortReason.Replaced)
+	start = function(p1) --[[ Line: 30 ]]
+		-- upvalues: v1 (ref), AbortReason (copy), ConstantsModule (copy), LoadingMilestoneTrackerModule (copy), LoadingMilestoneTelemetryModule (copy), Outcome (copy), Milestone (copy), TryMilestoneOperationModule (copy), Parent (copy)
+		if v1 then
+			v1.abort(AbortReason.Replaced)
 		end
-		local var2 = nil
-		local t = nil
-		local text = (if p1.reducedMotion then "ReducedMotion_" else "") .. (if p1.holdEnabled then "HoldOn" else "HoldOff")
-		local t_1 = {
-			category = constantsModule.CATEGORY,
-			page = constantsModule.PAGE,
-			subcategory = text
+		local v2 = nil
+		local v3 = nil
+		local NormalReady = nil
+		local t = {}
+		local Text = (if p1.host == ConstantsModule.Host.DeferredJoin then "DeferredJoin_" else "") .. (if p1.reducedMotion then "ReducedMotion_" else "") .. (if p1.holdEnabled then "HoldOn" else "HoldOff")
+		local MilestoneSessionMetadata = {
+			category = ConstantsModule.CATEGORY,
+			page = ConstantsModule.PAGE,
+			subcategory = Text
 		}
 		
-		local function _()
-			-- upvalues: var2 (write), loadingMilestoneTelemetryModule (copy)
-			var2 = nil
+		local function _() --[[ Line: 46 | Named "discard" ]]
+			-- upvalues: v2 (ref), LoadingMilestoneTrackerModule (upval)
+			local v4 = v2
+			v2 = nil
 			
-			return if var2 then loadingMilestoneTelemetryModule.discardMilestoneTracker(var2) else true
+			return not v4 or LoadingMilestoneTrackerModule.discardMilestoneTracker(v4)
 		end
 		
-		local _ = function(p2)
-			-- upvalues: loadingMilestoneTelemetryModule (copy), t_1 (write)
-			loadingMilestoneTelemetryModule.countMilestonesOutcome(t_1, p2)
+		local _ = function(p2) --[[ Line: 55 | Named "reportOutcome" ]]
+			-- upvalues: LoadingMilestoneTelemetryModule (upval), MilestoneSessionMetadata (ref)
+			LoadingMilestoneTelemetryModule.countMilestonesOutcome(MilestoneSessionMetadata, p2)
 		end
 		
-		t = {
-			complete = function()
-				-- upvalues: var1 (copy), t (write), outcome (copy), var2 (write), loadingMilestoneTelemetryModule (copy), t_1 (write)
-				if var1 ~= t then return end
-				var1 = nil
-				local completed = outcome.Completed
+		local _ = function(Text, Text1) --[[ Line: 59 | Named "record" ]]
+			-- upvalues: v1 (upval), v3 (ref), t (copy), v2 (ref), LoadingMilestoneTrackerModule (upval), Outcome (upval), LoadingMilestoneTelemetryModule (upval), MilestoneSessionMetadata (ref)
+			local Text2 = if Text1 then Text .. "/" .. Text1 else Text
+			
+			if v1 ~= v3 or t[Text2] then return end
+			t[Text2] = true
+			local v4 = v2
+			
+			if v4 and not LoadingMilestoneTrackerModule.recordMilestone(v4, Text, Text1) then
+				v1 = nil
+				local v5 = v2
+				v2 = nil
 				
-				if var2 and not loadingMilestoneTelemetryModule.completeMilestoneTracker(var2) then
-					var2 = nil
-					
-					if var2 then
-						local _ = loadingMilestoneTelemetryModule.discardMilestoneTracker(var2)
-					end
-					completed = outcome.InstrumentationError
+				if v5 then
+					local _ = LoadingMilestoneTrackerModule.discardMilestoneTracker(v5)
 				end
-				var2 = nil
-				loadingMilestoneTelemetryModule.countMilestonesOutcome(t_1, completed)
+				LoadingMilestoneTelemetryModule.countMilestonesOutcome(MilestoneSessionMetadata, Outcome.InstrumentationError)
+			end
+		end
+		
+		v3 = {
+			dismissRequested = function(Text) --[[ Line: 74 ]]
+				-- upvalues: v1 (upval), v3 (ref), NormalReady (ref), Milestone (upval), t (copy), v2 (ref), LoadingMilestoneTrackerModule (upval), Outcome (upval), LoadingMilestoneTelemetryModule (upval), MilestoneSessionMetadata (ref)
+				if v1 == v3 then
+					NormalReady = NormalReady or Text
+				end
+				local DismissRequested = Milestone.DismissRequested
+				local Text1 = if Text then DismissRequested .. "/" .. Text else DismissRequested
+				
+				if v1 == v3 then
+					if t[Text1] then return end
+					t[Text1] = true
+					local v4 = v2
+					
+					if v4 and not LoadingMilestoneTrackerModule.recordMilestone(v4, DismissRequested, Text) then
+						v1 = nil
+						local v5 = v2
+						v2 = nil
+						
+						if v5 then
+							local _ = LoadingMilestoneTrackerModule.discardMilestoneTracker(v5)
+						end
+						LoadingMilestoneTelemetryModule.countMilestonesOutcome(MilestoneSessionMetadata, Outcome.InstrumentationError)
+					end
+				end
 			end,
-			abort = function(p2)
-				-- upvalues: var1 (copy), t (write), var2 (write), loadingMilestoneTelemetryModule (copy), outcome (copy), t_1 (write)
-				if var1 == t then
-					var1 = nil
-					var2 = nil
-					loadingMilestoneTelemetryModule.countMilestonesOutcome(t_1, if if var2 then loadingMilestoneTelemetryModule.discardMilestoneTracker(var2) else true then p2 else outcome.InstrumentationError)
+			contentVisible = function(Text) --[[ Line: 80 ]]
+				-- upvalues: t (copy), Milestone (upval), v1 (upval), v3 (ref), v2 (ref), LoadingMilestoneTrackerModule (upval), Outcome (upval), LoadingMilestoneTelemetryModule (upval), MilestoneSessionMetadata (ref)
+				if not t[Milestone.ScreenVisible] or t[Milestone.DismissStarted] then return end
+				local ContentVisible = Milestone.ContentVisible
+				local Text1 = if Text then ContentVisible .. "/" .. Text else ContentVisible
+				
+				if v1 == v3 then
+					if t[Text1] then return end
+					t[Text1] = true
+					local v4 = v2
+					
+					if v4 and not LoadingMilestoneTrackerModule.recordMilestone(v4, ContentVisible, Text) then
+						v1 = nil
+						local v5 = v2
+						v2 = nil
+						
+						if v5 then
+							local _ = LoadingMilestoneTrackerModule.discardMilestoneTracker(v5)
+						end
+						LoadingMilestoneTelemetryModule.countMilestonesOutcome(MilestoneSessionMetadata, Outcome.InstrumentationError)
+					end
+				end
+			end,
+			record = function(Key) --[[ Line: 86 ]]
+				-- upvalues: v1 (upval), v3 (ref), t (copy), v2 (ref), LoadingMilestoneTrackerModule (upval), Outcome (upval), LoadingMilestoneTelemetryModule (upval), MilestoneSessionMetadata (ref)
+				if v1 == v3 then
+					if t[Key] then return end
+					t[Key] = true
+					local v4 = v2
+					
+					if v4 and not LoadingMilestoneTrackerModule.recordMilestone(v4, Key, nil) then
+						v1 = nil
+						local v5 = v2
+						v2 = nil
+						
+						if v5 then
+							local _ = LoadingMilestoneTrackerModule.discardMilestoneTracker(v5)
+						end
+						LoadingMilestoneTelemetryModule.countMilestonesOutcome(MilestoneSessionMetadata, Outcome.InstrumentationError)
+					end
+				end
+			end,
+			complete = function() --[[ Line: 89 ]]
+				-- upvalues: v1 (upval), v3 (ref), Outcome (upval), v2 (ref), LoadingMilestoneTrackerModule (upval), NormalReady (ref), t (copy), Milestone (upval), Text (copy), ConstantsModule (upval), LoadingMilestoneTelemetryModule (upval), MilestoneSessionMetadata (ref)
+				if v1 ~= v3 then return end
+				v1 = nil
+				local Completed = Outcome.Completed
+				local v4 = v2
+				
+				if v4 then
+					local CompleteMilestoneTrackerResult, CompleteMilestoneTrackerResult2, CompleteMilestoneTrackerResult3 = LoadingMilestoneTrackerModule.completeMilestoneTracker(v4, NormalReady ~= nil and t[Milestone.DismissStarted] == true, NormalReady, Text == "HoldOn" and NormalReady == ConstantsModule.DismissSource.NormalReady)
+					
+					if CompleteMilestoneTrackerResult and CompleteMilestoneTrackerResult2 ~= nil and NormalReady then
+						CompleteMilestoneTrackerResult = LoadingMilestoneTelemetryModule.reportAddedWait(MilestoneSessionMetadata, CompleteMilestoneTrackerResult2, NormalReady)
+					end
+					if CompleteMilestoneTrackerResult and t[Milestone.ScreenVisible] and t[Milestone.DismissStarted] then
+						CompleteMilestoneTrackerResult = LoadingMilestoneTelemetryModule.reportContentVisibility(MilestoneSessionMetadata, t[Milestone.ContentVisible .. "/" .. ConstantsModule.ContentId.Title] == true, t[Milestone.ContentVisible .. "/" .. ConstantsModule.ContentId.Creator] == true, t[Milestone.ContentVisible .. "/" .. ConstantsModule.ContentId.Thumbnail] == true)
+					end
+					if CompleteMilestoneTrackerResult and CompleteMilestoneTrackerResult3 ~= nil then
+						CompleteMilestoneTrackerResult = LoadingMilestoneTelemetryModule.reportHoldGateHit(MilestoneSessionMetadata, CompleteMilestoneTrackerResult3)
+					end
+					if not CompleteMilestoneTrackerResult then
+						local v5 = v2
+						v2 = nil
+						
+						if v5 then
+							local _ = LoadingMilestoneTrackerModule.discardMilestoneTracker(v5)
+						end
+						Completed = Outcome.InstrumentationError
+					end
+				end
+				v2 = nil
+				LoadingMilestoneTelemetryModule.countMilestonesOutcome(MilestoneSessionMetadata, Completed)
+			end,
+			abort = function(InitializationFailed) --[[ Line: 129 ]]
+				-- upvalues: v1 (upval), v3 (ref), v2 (ref), LoadingMilestoneTrackerModule (upval), Outcome (upval), LoadingMilestoneTelemetryModule (upval), MilestoneSessionMetadata (ref)
+				if v1 == v3 then
+					v1 = nil
+					local v4 = v2
+					v2 = nil
+					local NoV46 = not v4 or LoadingMilestoneTrackerModule.discardMilestoneTracker(v4)
+					LoadingMilestoneTelemetryModule.countMilestonesOutcome(MilestoneSessionMetadata, if NoV46 then InitializationFailed else Outcome.InstrumentationError)
 					
 					return
 				end
 			end
 		}
-		var1 = t
-		local ok, status = xpcall(function()
-			-- upvalues: t_1 (write), loadingMilestoneTelemetryModule (copy), text (ref), parent (copy), var2 (write), TILT_EVENT_NAME (copy)
-			t_1 = loadingMilestoneTelemetryModule.getMilestoneSessionMetadata(text)
+		v1 = v3
+		local StartMilestoneTrackerResult = false
+		
+		if TryMilestoneOperationModule(function() --[[ Line: 141 ]]
+			-- upvalues: MilestoneSessionMetadata (ref), LoadingMilestoneTelemetryModule (upval), Text (copy), Parent (upval), v2 (ref), StartMilestoneTrackerResult (ref), LoadingMilestoneTrackerModule (upval)
+			MilestoneSessionMetadata = LoadingMilestoneTelemetryModule.getMilestoneSessionMetadata(Text)
 			
-			if loadingMilestoneTelemetryModule.countMilestonesStarted(t_1) then
-				local timeToInteractiveTracker = require(parent.TimeToInteractiveTracker).TimeToInteractiveTracker
-				var2 = timeToInteractiveTracker
-				timeToInteractiveTracker.trackStart(TILT_EVENT_NAME)
-				timeToInteractiveTracker.updateMetadata(TILT_EVENT_NAME, {
-					category = t_1.category,
-					page = t_1.page,
-					subcategory = t_1.subcategory
-				})
+			if LoadingMilestoneTelemetryModule.countMilestonesStarted(MilestoneSessionMetadata) then
+				local TimeToInteractiveTracker = require(Parent.TimeToInteractiveTracker).TimeToInteractiveTracker
+				v2 = TimeToInteractiveTracker
+				StartMilestoneTrackerResult = LoadingMilestoneTrackerModule.startMilestoneTracker(TimeToInteractiveTracker, MilestoneSessionMetadata)
 				
-				return true
+				return
 			end
-			return false
-		end, reportMilestoneError)
-		
-		if ok and status then
-			return t
+		end) and StartMilestoneTrackerResult then
+			return v3
+		else
+			v3.abort(AbortReason.InitializationFailed)
+			
+			return nil
 		end
-		t.abort(abortReason.InitializationFailed)
-		
-		return nil
 	end,
-	AbortReason = abortReason
+	AbortReason = AbortReason
 }

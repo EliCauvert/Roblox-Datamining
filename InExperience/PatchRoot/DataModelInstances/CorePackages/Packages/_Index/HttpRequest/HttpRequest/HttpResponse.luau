@@ -1,25 +1,25 @@
-﻿local t = {}
-t.__index = t
+﻿local HttpResponseModule = {}
+HttpResponseModule.__index = HttpResponseModule
 
-function t:__tostring()
-	local t = {}
+function HttpResponseModule.__tostring(List): string --[[ Line: 3 ]]
+	local List1 = {}
 	
-	for i, v in pairs(self) do
-		table.insert(t, string.format("%s = %s", tostring(i), tostring(v)))
+	for i, value in pairs(List) do
+		table.insert(List1, string.format("%s = %s", tostring(i), (tostring(value))))
 	end
-	table.sort(t)
+	table.sort(List1)
 	
-	return "<HttpResponse: " .. table.concat(t, ", ") .. ">"
+	return "<HttpResponse: " .. table.concat(List1, ", ") .. ">"
 end
 
-function t.success(p1, p2)
-	-- upvalues: t (ref)
-	return setmetatable({ responseCode = p1, responseBody = p2 }, t)
+function HttpResponseModule.success(ResponseCode, ResponseBody) --[[ Line: 14 ]]
+	-- upvalues: HttpResponseModule (copy)
+	return (setmetatable({ responseCode = ResponseCode, responseBody = ResponseBody }, HttpResponseModule))
 end
 
-function t.error(p1)
-	-- upvalues: t (ref)
-	return setmetatable({ HttpError = p1 }, t)
+function HttpResponseModule.error(HttpError) --[[ Line: 21 ]]
+	-- upvalues: HttpResponseModule (copy)
+	return (setmetatable({ HttpError = HttpError }, HttpResponseModule))
 end
 
-return t
+return HttpResponseModule

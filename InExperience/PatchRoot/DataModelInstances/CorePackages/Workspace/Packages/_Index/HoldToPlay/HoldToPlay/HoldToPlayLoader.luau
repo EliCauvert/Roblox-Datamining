@@ -1,38 +1,40 @@
-﻿local parent = script:FindFirstAncestor("HoldToPlay").Parent
-local reactModule = require(parent.React)
-local useRoactService = require(parent.RobloxAppHooks).useRoactService
-local roactServiceTagsModule = require(parent.RoactServiceTags)
-local roactNetworking = roactServiceTagsModule.RoactNetworking
-local appSessionService = roactServiceTagsModule.AppSessionService
-local gamePlayButtonModule = require(parent.GamePlayButton)
-local useOnPlayButtonCallback = gamePlayButtonModule.useOnPlayButtonCallback
-local usePlayButtonState = gamePlayButtonModule.usePlayButtonState
-local playButtonStates = gamePlayButtonModule.PlayButtonStates
-local robloxAppSessionizationModule = require(parent.RobloxAppSessionization)
-local setGamePlaySession = robloxAppSessionizationModule.SetGamePlaySession
-local sessionType = robloxAppSessionizationModule.SessionType
-local holdToPlayLauncher = require(parent.ExperienceAnalytics).Constants.Context.HoldToPlayLauncher
+﻿local Parent = script:FindFirstAncestor("HoldToPlay").Parent
+local ReactModule = require(Parent.React)
+local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
+local RoactServiceTagsModule = require(Parent.RoactServiceTags)
+local RoactNetworking = RoactServiceTagsModule.RoactNetworking
+local AppSessionService = RoactServiceTagsModule.AppSessionService
+local GamePlayButtonModule = require(Parent.GamePlayButton)
+local UseOnPlayButtonCallbackFunction = GamePlayButtonModule.useOnPlayButtonCallback
+local UsePlayButtonStateFunction = GamePlayButtonModule.usePlayButtonState
+local PlayButtonStates = GamePlayButtonModule.PlayButtonStates
+local RobloxAppSessionizationModule = require(Parent.RobloxAppSessionization)
+local SetGamePlaySessionFunction = RobloxAppSessionizationModule.SetGamePlaySession
+local SessionType = RobloxAppSessionizationModule.SessionType
+local HoldToPlayLauncher = require(Parent.ExperienceAnalytics).Constants.Context.HoldToPlayLauncher
 
-return function(p1)
-	-- upvalues: useRoactService (ref), roactNetworking (ref), appSessionService (ref), usePlayButtonState (ref), useOnPlayButtonCallback (ref), holdToPlayLauncher (ref), reactModule (ref), setGamePlaySession (ref), sessionType (ref), playButtonStates (ref)
-	local var1 = useRoactService(appSessionService)
-	local var2 = usePlayButtonState(useRoactService(roactNetworking), p1.universeId)
-	local var3 = useOnPlayButtonCallback(p1.universeId, nil, holdToPlayLauncher, nil, nil)
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), p1 (ref), setGamePlaySession (copy), var1 (ref), sessionType (copy), var3 (ref), playButtonStates (copy)
-		local playButtonState = var2.playButtonState
+return function(p1) --[[ Line: 33 | Named "HoldToPlayLoader" ]]
+	-- upvalues: UseRoactServiceFunction (copy), RoactNetworking (copy), AppSessionService (copy), UsePlayButtonStateFunction (copy), UseOnPlayButtonCallbackFunction (copy), HoldToPlayLauncher (copy), ReactModule (copy), SetGamePlaySessionFunction (copy), SessionType (copy), PlayButtonStates (copy)
+	local UseRoactServiceResult = UseRoactServiceFunction(RoactNetworking)
+	local UseRoactServiceResult1 = UseRoactServiceFunction(AppSessionService)
+	local UsePlayButtonStateResult = UsePlayButtonStateFunction(UseRoactServiceResult, p1.universeId)
+	local UseOnPlayButtonCallbackResult = UseOnPlayButtonCallbackFunction(p1.universeId, nil, HoldToPlayLauncher, nil, nil)
+	ReactModule.useEffect(function() --[[ Line: 40 ]]
+		-- upvalues: UsePlayButtonStateResult (copy), p1 (copy), SetGamePlaySessionFunction (upval), UseRoactServiceResult1 (copy), SessionType (upval), UseOnPlayButtonCallbackResult (copy), PlayButtonStates (upval)
+		local PlayButtonState = UsePlayButtonStateResult.playButtonState
 		
 		if p1.shouldAttemptLaunch then
-			setGamePlaySession(var1, sessionType.StructuralIdentifier.GamePlayFromHoldToPlay, true)
-			var3(playButtonState, p1.reportExperienceLaunched)
+			SetGamePlaySessionFunction(UseRoactServiceResult1, SessionType.StructuralIdentifier.GamePlayFromHoldToPlay, true)
+			UseOnPlayButtonCallbackResult(PlayButtonState, p1.reportExperienceLaunched)
 			
-			if p1.onLaunched and playButtonState == playButtonStates.Playable then
+			if p1.onLaunched and PlayButtonState == PlayButtonStates.Playable then
 				p1.onLaunched()
 			end
 		end
 	end, {
-		p1.shouldAttemptLaunch, p1.onLaunched, var2.playButtonState, var1,
-		p1.reportExperienceLaunched, var3
+		p1.shouldAttemptLaunch, p1.onLaunched,
+		UsePlayButtonStateResult.playButtonState, UseRoactServiceResult1,
+		p1.reportExperienceLaunched, UseOnPlayButtonCallbackResult
 	})
 	
 	return nil

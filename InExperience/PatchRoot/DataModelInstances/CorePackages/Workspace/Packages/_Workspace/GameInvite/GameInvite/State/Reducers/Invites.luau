@@ -1,19 +1,20 @@
-﻿local parent = script.Parent.Parent
-local actions = parent.Actions
-local immutable = require(parent.Parent.Parent.AppCommonLib).Immutable
-local receivedUserInviteStatusModule = require(actions.ReceivedUserInviteStatus)
-local resetUserInviteStatusModule = require(actions.ResetUserInviteStatus)
+﻿local Parent = script.Parent.Parent
+local Actions = Parent.Actions
+local Immutable = require(Parent.Parent.Parent.AppCommonLib).Immutable
+local ReceivedUserInviteStatusModule = require(Actions.ReceivedUserInviteStatus)
+local ResetUserInviteStatusModule = require(Actions.ResetUserInviteStatus)
 
-return function(p1, p2)
-	-- upvalues: receivedUserInviteStatusModule (ref), immutable (ref), resetUserInviteStatusModule (ref)
-	p1 = p1 or {}
+return function(p1, p2) --[[ Line: 11 ]]
+	-- upvalues: ReceivedUserInviteStatusModule (copy), Immutable (copy), ResetUserInviteStatusModule (copy)
+	local P0 = p1 or {}
 	
-	if p2.type == receivedUserInviteStatusModule.name then
-		p1 = immutable.Set(p1, p2.userId, p2.inviteStatus)
+	if p2.type == ReceivedUserInviteStatusModule.name then
+		P0 = Immutable.Set(P0, p2.userId, p2.inviteStatus)
 		
-		return p1
-	elseif p2.type == resetUserInviteStatusModule.name then
-		p1 = {}
+		return P0
 	end
-	return p1
+	if p2.type == ResetUserInviteStatusModule.name then
+		P0 = {}
+	end
+	return P0
 end

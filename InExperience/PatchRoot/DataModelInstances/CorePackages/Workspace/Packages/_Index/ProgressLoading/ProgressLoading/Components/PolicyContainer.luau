@@ -1,14 +1,14 @@
-﻿local parent = script:FindFirstAncestor("ProgressLoading").Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
+﻿local Parent = script:FindFirstAncestor("ProgressLoading").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 
-return function(p1)
-	-- upvalues: useLocalization (ref), reactModule (ref), foundationModule (ref)
-	return reactModule.createElement(foundationModule.Text, {
+return function(p1) --[[ Line: 14 | Named "PolicyContainer" ]]
+	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), FoundationModule (copy)
+	return ReactModule.createElement(FoundationModule.Text, {
 		tag = "size-full-0 auto-y text-title-medium text-wrap text-align-x-center content-system-contrast",
 		Position = p1.position,
-		Text = useLocalization({
+		Text = UseLocalizationFunction({
 			antiAddictionText = "Authentication.Login.WeChat.AntiAddictionText"
 		}).antiAddictionText
 	})

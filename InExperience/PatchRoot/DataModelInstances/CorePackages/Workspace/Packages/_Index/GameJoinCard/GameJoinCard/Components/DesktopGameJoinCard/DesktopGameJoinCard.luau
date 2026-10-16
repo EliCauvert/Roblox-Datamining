@@ -1,40 +1,48 @@
-﻿local gameJoinCard = script:FindFirstAncestor("GameJoinCard")
-local parent = gameJoinCard.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local useTokens = foundationModule.Hooks.useTokens
-local useScaledValue = foundationModule.Hooks.useScaledValue
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local view = foundationModule.View
-local text = foundationModule.Text
-local image = foundationModule.Image
-local icon = foundationModule.Icon
-local button = foundationModule.Button
-local skeleton = foundationModule.Skeleton
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local iconSize = foundationModule.Enums.IconSize
-local inputSize = foundationModule.Enums.InputSize
-local radius = foundationModule.Enums.Radius
-local getBuilderIconForCurrentPlatform = foundationModule.Utility.getBuilderIconForCurrentPlatform
-local stateLayerAffordance = foundationModule.Enums.StateLayerAffordance
-local controlState = foundationModule.Enums.ControlState
-local analyticsConstantsModule = require(script.Parent.Parent.Parent.Analytics.AnalyticsConstants)
-local viewEDPsourceValues = analyticsConstantsModule.viewEDPsourceValues
-local viewProfileSourceValues = analyticsConstantsModule.viewProfileSourceValues
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagEnableConsoleGameJoinCard = sharedFlagsModule.FFlagEnableConsoleGameJoinCard
-local fFlagBlockEDPClickthrough = sharedFlagsModule.FFlagBlockEDPClickthrough
-local fFlagDesktopGameJoinCardUIImprovements = sharedFlagsModule.FFlagDesktopGameJoinCardUIImprovements
-local fFlagJoinabilityCTARefactor = sharedFlagsModule.FFlagJoinabilityCTARefactor
-local ageCheckUpsellCTAModule = require(script.Parent.Parent.AgeCheckUpsellCTA)
-local _ = require(gameJoinCard.Components.Actions.Types)
-local buildJoinCardActionsComponentModule = require(gameJoinCard.Components.Actions.buildJoinCardActionsComponent)
+﻿local GameJoinCard = script:FindFirstAncestor("GameJoinCard")
+local Parent = GameJoinCard.Parent
+local ReactModule = require(Parent.React)
+local UseComposedRefFunction = require(Parent.ReactUtils).useComposedRef
+local FoundationModule = require(Parent.Foundation)
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UseScaledValueFunction = FoundationModule.Hooks.useScaledValue
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local Image = FoundationModule.Image
+local Icon = FoundationModule.Icon
+local Button = FoundationModule.Button
+local Skeleton = FoundationModule.Skeleton
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local IconSize = FoundationModule.Enums.IconSize
+local InputSize = FoundationModule.Enums.InputSize
+local Radius = FoundationModule.Enums.Radius
+local GetBuilderIconForCurrentPlatformFunction = FoundationModule.Utility.getBuilderIconForCurrentPlatform
+local StateLayerAffordance = FoundationModule.Enums.StateLayerAffordance
+local ControlState = FoundationModule.Enums.ControlState
+local AnalyticsConstantsModule = require(script.Parent.Parent.Parent.Analytics.AnalyticsConstants)
+local ViewEDPsourceValues = AnalyticsConstantsModule.viewEDPsourceValues
+local ViewProfileSourceValues = AnalyticsConstantsModule.viewProfileSourceValues
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagBlockEDPClickthrough = SharedFlagsModule.FFlagBlockEDPClickthrough
+local FFlagJoinabilityCTARefactor = SharedFlagsModule.FFlagJoinabilityCTARefactor
+local FFlagDesktopGameJoinCardGamepadSupport = SharedFlagsModule.FFlagDesktopGameJoinCardGamepadSupport
+local UseGameJoinCardGamepadNavigationFunction = nil
+local AssignPrimaryFocusRefFunction = nil
 
-return function(p1)
-	-- upvalues: useTokens (ref), useScaledValue (ref), useLocalization (ref), reactModule (ref), getBuilderIconForCurrentPlatform (ref), viewEDPsourceValues (ref), viewProfileSourceValues (ref), fFlagDesktopGameJoinCardUIImprovements (ref), controlState (ref), fFlagJoinabilityCTARefactor (ref), skeleton (ref), radius (ref), buildJoinCardActionsComponentModule (ref), button (ref), view (ref), fFlagEnableConsoleGameJoinCard (ref), image (ref), fFlagBlockEDPClickthrough (ref), stateLayerAffordance (ref), text (ref), icon (ref), iconSize (ref), ageCheckUpsellCTAModule (ref), buttonVariant (ref), inputSize (ref), foundationModule (ref)
-	local var1 = useTokens()
-	local var2 = useScaledValue(260)
-	local var3 = useLocalization({
+if FFlagDesktopGameJoinCardGamepadSupport then
+	local UseGameJoinCardGamepadNavigationModule = require(GameJoinCard.Hooks.useGameJoinCardGamepadNavigation)
+	UseGameJoinCardGamepadNavigationFunction = UseGameJoinCardGamepadNavigationModule.useGameJoinCardGamepadNavigation
+	AssignPrimaryFocusRefFunction = UseGameJoinCardGamepadNavigationModule.assignPrimaryFocusRef
+end
+local AgeCheckUpsellCTAModule = require(script.Parent.Parent.AgeCheckUpsellCTA)
+local _ = require(GameJoinCard.Components.Actions.Types)
+local BuildJoinCardActionsComponentModule = require(GameJoinCard.Components.Actions.buildJoinCardActionsComponent)
+
+return function(p1) --[[ Line: 78 | Named "DesktopGameJoinCard" ]]
+	-- upvalues: UseTokensFunction (copy), UseScaledValueFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), GetBuilderIconForCurrentPlatformFunction (copy), ViewEDPsourceValues (copy), ViewProfileSourceValues (copy), ControlState (copy), FFlagDesktopGameJoinCardGamepadSupport (copy), UseGameJoinCardGamepadNavigationFunction (ref), UseComposedRefFunction (copy), FFlagJoinabilityCTARefactor (copy), Skeleton (copy), Radius (copy), AssignPrimaryFocusRefFunction (ref), BuildJoinCardActionsComponentModule (copy), Button (copy), View (copy), Image (copy), FFlagBlockEDPClickthrough (copy), StateLayerAffordance (copy), Text (copy), Icon (copy), IconSize (copy), AgeCheckUpsellCTAModule (copy), ButtonVariant (copy), InputSize (copy), FoundationModule (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseScaledValueResult = UseScaledValueFunction(260)
+	local UseLocalizationResult = UseLocalizationFunction({
 		isPlaying = "Feature.Friends.Text.IsPlaying",
 		joinButton = "Feature.Profile.Action.JoinGame",
 		chat = "Feature.Profile.Action.Chat",
@@ -43,67 +51,64 @@ return function(p1)
 		playTogetherSoon = "Feature.GameJoin.Label.PlayTogetherSoon",
 		differentServer = "Feature.GameJoin.Description.DifferentServer"
 	})
-	local layoutOrder = p1.layoutOrder
-	local playerName = p1.playerName
-	local experienceName = p1.experienceName
-	local gameIconUrl = p1.gameIconUrl
-	local isLoading = p1.isLoading
-	local var4 = if p1.isConsole then var1.Size.Size_1500 else var1.Size.Size_1000
-	local var5 = reactModule.useMemo(function()
-		-- upvalues: getBuilderIconForCurrentPlatform (copy)
-		return getBuilderIconForCurrentPlatform()
+	local LayoutOrder = p1.layoutOrder
+	local PlayerName = p1.playerName
+	local ExperienceName = p1.experienceName
+	local GameIconUrl = p1.gameIconUrl
+	local IsLoading = p1.isLoading
+	local Size1500 = if p1.isConsole then UseTokensResult.Size.Size_1500 else UseTokensResult.Size.Size_1000
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 97 ]]
+		-- upvalues: GetBuilderIconForCurrentPlatformFunction (upval)
+		return GetBuilderIconForCurrentPlatformFunction()
 	end, {})
-	local var6 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref), viewEDPsourceValues (copy)
-		p1.onViewExperienceDetails(viewEDPsourceValues.Thumbnail)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 101 ]]
+		-- upvalues: p1 (copy), ViewEDPsourceValues (upval)
+		p1.onViewExperienceDetails(ViewEDPsourceValues.Thumbnail)
 	end, { p1 })
-	local var7 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref), viewEDPsourceValues (copy)
-		p1.onViewExperienceDetails(viewEDPsourceValues.Title)
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 105 ]]
+		-- upvalues: p1 (copy), ViewEDPsourceValues (upval)
+		p1.onViewExperienceDetails(ViewEDPsourceValues.Title)
 	end, { p1 })
-	local var8 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref), viewProfileSourceValues (copy)
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 109 ]]
+		-- upvalues: p1 (copy), ViewProfileSourceValues (upval)
 		if p1.onViewProfile then
-			p1.onViewProfile(viewProfileSourceValues.ViewProfileButton)
+			p1.onViewProfile(ViewProfileSourceValues.ViewProfileButton)
 		end
 	end, { p1 })
-	local var9 = nil
-	local _ = nil
-	local var10 = nil
-	
-	if fFlagDesktopGameJoinCardUIImprovements then
-		local var11, var12 = reactModule.useState(false)
-		var9 = var11
-		local var13 = var12
-		var10 = reactModule.useCallback(function(p2)
-			-- upvalues: var13 (write), controlState (copy)
-			var13(p2 == controlState.Hover)
-		end, {})
-	end
-	local var14 = if fFlagDesktopGameJoinCardUIImprovements and var9 then `<u>{var3.viewProfile}</u>` else var3.viewProfile
-	local var15 = p1.ageCheckRequired == true
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseResult3 = ReactModule.useCallback(function(Hover) --[[ Line: 116 ]]
+		-- upvalues: UseStateResult2 (copy), ControlState (upval)
+		UseStateResult2(Hover == ControlState.Hover)
+	end, {})
+	local Text1 = if UseStateResult then `<u>{UseLocalizationResult.viewProfile}</u>` else UseLocalizationResult.viewProfile
+	local UseGameJoinCardGamepadNavigationResult = if FFlagDesktopGameJoinCardGamepadSupport then UseGameJoinCardGamepadNavigationFunction(p1.onClose, p1.isOpen ~= false) else nil
+	local PrimaryButtonFocusRef = if UseGameJoinCardGamepadNavigationResult == nil or p1.isConsole then nil else UseGameJoinCardGamepadNavigationResult.primaryButtonFocusRef
+	local RootRef = if UseGameJoinCardGamepadNavigationResult == nil or p1.isConsole then nil else UseGameJoinCardGamepadNavigationResult.rootRef
+	local UseComposedRefResult = if FFlagDesktopGameJoinCardGamepadSupport then UseComposedRefFunction(RootRef, p1.focusRootRef) else nil
+	local IsAgeCheckRequired = p1.ageCheckRequired == true
 	local t = {}
-	local var16 = nil
+	local v1 = nil
 	
-	if fFlagJoinabilityCTARefactor then
+	if FFlagJoinabilityCTARefactor then
 		if p1.areActionsLoading then
-			t.ActionsLoading = reactModule.createElement(skeleton, {
+			t.ActionsLoading = ReactModule.createElement(Skeleton, {
 				LayoutOrder = 1,
-				Size = UDim2.new(1, 0, 0, var1.Size.Size_600),
-				radius = radius.Medium
+				Size = UDim2.new(1, 0, 0, UseTokensResult.Size.Size_600),
+				radius = Radius.Medium
 			})
 		else
-			local var17, var18 = buildJoinCardActionsComponentModule(p1.actions, {
-				playTogether = var3.playTogether,
-				playTogetherSoon = var3.playTogetherSoon,
-				differentServer = var3.differentServer
-			}, p1.onClose, function(p2, p3)
-				-- upvalues: reactModule (copy), button (copy)
-				return reactModule.createElement(button, {
+			t, v50 = BuildJoinCardActionsComponentModule(PrimaryButtonFocusRef and AssignPrimaryFocusRefFunction(p1.actions, PrimaryButtonFocusRef) or p1.actions, {
+				playTogether = UseLocalizationResult.playTogether,
+				playTogetherSoon = UseLocalizationResult.playTogetherSoon,
+				differentServer = UseLocalizationResult.differentServer
+			}, p1.onClose, function(p2, LayoutOrder) --[[ Line: 158 ]]
+				-- upvalues: ReactModule (upval), Button (upval)
+				return ReactModule.createElement(Button, {
 					tag = "align-x-center fill size-full-0",
+					ref = p2.focusRef,
 					text = p2.text,
-					onActivated = function()
-						-- upvalues: p2 (ref)
+					onActivated = function() --[[ Line: 162 ]]
+						-- upvalues: p2 (copy)
 						p2.onActivated()
 					end,
 					isLoading = p2.isLoading,
@@ -111,210 +116,180 @@ return function(p1)
 					variant = p2.variant,
 					size = p2.inputSize,
 					width = p2.width,
-					LayoutOrder = p3
+					LayoutOrder = LayoutOrder
 				})
 			end)
-			t = var17
-			var16 = var18
 		end
 	end
-	local createElement_2
-	local createElement = reactModule.createElement
-	local t_1 = {
-		tag = "col gap-medium padding-large radius-medium stroke-thin stroke-muted",
-		Size = UDim2.fromOffset(var2, 0),
-		AutomaticSize = Enum.AutomaticSize.Y,
-		LayoutOrder = layoutOrder,
-		backgroundStyle = var1.Color.OverMedia.OverMedia_300,
-		ref = if fFlagEnableConsoleGameJoinCard then p1.focusRootRef else nil
-	}
-	local t_2 = {}
-	local createElement_1 = reactModule.createElement
-	local t_3 = {
-		tag = "row gap-small items-center size-full-0 auto-y align-x-left",
-		LayoutOrder = 1
-	}
-	local t_4 = {}
-	
-	if isLoading then
-		createElement_2 = reactModule.createElement(skeleton, {
-			LayoutOrder = 1,
-			Size = UDim2.fromOffset(var4, var4),
-			radius = radius.Small
-		})
-	else
-		createElement_2 = reactModule.createElement
-		createElement_2 = createElement_2(view, {
-			LayoutOrder = 1,
-			ClipsDescendants = true,
-			Size = UDim2.fromOffset(var4, var4)
-		}, {
-			Thumbnail = reactModule.createElement(image, {
-				tag = "radius-small",
-				Image = gameIconUrl,
-				Size = UDim2.fromScale(1, 1),
-				ScaleType = Enum.ScaleType.Fit,
-				onActivated = if fFlagBlockEDPClickthrough then nil else var6,
-				stateLayer = if fFlagBlockEDPClickthrough or not p1.onViewExperienceDetails then nil else { affordance = stateLayerAffordance.None }
-			})
-		})
-	end
-	local var19
-	t_4.GameIcon = createElement_2
-	local createElement_3 = reactModule.createElement
-	local var20 = view
-	local t_5 = {
-		tag = "col size-full-0 auto-y gap-xxsmall shrink align-x-left items-start",
-		LayoutOrder = 2,
-		AutomaticSize = Enum.AutomaticSize.Y
-	}
-	local t_6 = {
-		GameInfo = reactModule.createElement(view, {
-			tag = "col size-full-0 auto-y shrink align-x-left items-start",
-			LayoutOrder = 1,
-			AutomaticSize = Enum.AutomaticSize.Y
-		}, {
-			GameTitle = if not isLoading then reactModule.createElement(view, {
-				tag = "row auto-y gap-xxsmall size-full-0 align-x-left align-y-center text-body-medium content-default text-align-x-left",
-				LayoutOrder = 1
-			}, {
-				PlayerName = reactModule.createElement(text, {
-					tag = "shrink auto-xy text-body-medium content-default text-no-wrap text-truncate-end text-align-x-left",
-					LayoutOrder = 1,
-					Text = playerName
-				}),
-				IsPlaying = reactModule.createElement(text, {
-					tag = "shrink-0 auto-xy text-body-medium content-default text-align-x-left",
-					LayoutOrder = 2,
-					Text = var3.isPlaying
-				})
-			}) else reactModule.createElement(skeleton, {
-				LayoutOrder = 1,
-				Size = UDim2.new(0.7, 0, 0, var1.Typography.BodyMedium.FontSize),
-				radius = radius.Small
-			}),
-			GameName = if not isLoading then reactModule.createElement(view, {
-				tag = "size-full-0 auto-y",
-				LayoutOrder = 2,
-				onActivated = if fFlagBlockEDPClickthrough then nil else var7,
-				stateLayer = if fFlagBlockEDPClickthrough then nil else { affordance = stateLayerAffordance.None }
-			}, {
-				Label = reactModule.createElement(text, {
-					Text = experienceName,
-					tag = {
-						["size-full-0 auto-y text-title-medium text-no-wrap text-align-x-left content-emphasis"] = true,
-						["text-truncate-split"] = fFlagDesktopGameJoinCardUIImprovements,
-						["text-truncate-end"] = not fFlagDesktopGameJoinCardUIImprovements
-					}
-				})
-			}) else reactModule.createElement(skeleton, {
-				LayoutOrder = 2,
-				Size = UDim2.new(0.5, 0, 0, var1.Typography.TitleMedium.FontSize),
-				radius = radius.Small
-			})
-		})
-	}
-	
-	if not p1.isConsole then
-		var19 = nil
-	elseif isLoading then
-		var19 = reactModule.createElement(skeleton, {
-			LayoutOrder = 2,
-			Size = UDim2.new(0.6, 0, 0, var1.Typography.BodySmall.FontSize),
-			radius = radius.Small
-		})
-	else
-		var19 = reactModule.createElement
-		var19 = var19(view, {
-			LayoutOrder = 2,
-			tag = "row align-x-left items-center gap-small size-full-0 auto-y",
-			onActivated = if fFlagEnableConsoleGameJoinCard then p1.onPlatformProfilePressed else nil,
-			selection = if fFlagEnableConsoleGameJoinCard and p1.onPlatformProfilePressed then { Selectable = true } else nil,
-			stateLayer = if fFlagEnableConsoleGameJoinCard and p1.onPlatformProfilePressed then { affordance = stateLayerAffordance.Background } else nil
-		}, {
-			PlatformLogo = reactModule.createElement(view, { tag = "auto-xy shrink", LayoutOrder = 1 }, {
-				LogoImage = reactModule.createElement(icon, { name = var5, size = iconSize.XSmall })
-			}),
-			PlatformNameLabel = reactModule.createElement(text, {
-				tag = "fill shrink auto-y text-body-small content-default text-no-wrap text-truncate-end text-align-x-left",
-				LayoutOrder = 2,
-				Text = p1.consolePlatformLabel
-			})
-		})
-	end
-	t_6.PlatformName = var19
-	t_4.TextContainer = createElement_3(var20, t_5, t_6)
-	t_2.GameInfoRow = createElement_1(view, t_3, t_4)
-	t_2.CtaContext = if fFlagJoinabilityCTARefactor and var16 ~= nil and not p1.isConsole then reactModule.createElement(view, {
-		tag = "col align-x-left items-start gap-xxsmall size-full-0 auto-y",
-		LayoutOrder = 2
-	}, {
-		CtaContextTitle = reactModule.createElement(text, {
-			tag = "auto-xy text-body-medium text-align-x-left content-emphasis",
-			LayoutOrder = 1,
-			Text = var16.title
-		}),
-		CtaContextSubtitle = if var16.subtitle ~= nil then nil else reactModule.createElement(text, {
-			tag = "auto-xy text-label-small text-align-x-left content-muted",
-			LayoutOrder = 2,
-			Text = var16.subtitle
-		})
-	}) else nil
-	t_2.Actions = if not p1.isConsole then reactModule.createElement(view, {
-		tag = "col gap-small size-full-0 auto-y",
-		LayoutOrder = 3
-	}, if fFlagJoinabilityCTARefactor then t else {
-		JoinButton = if var15 then reactModule.createElement(ageCheckUpsellCTAModule, {
-			LayoutOrder = 1,
-			onUnlockPressed = p1.onAgeCheckPressed or function() end
-		}) else reactModule.createElement(button, {
-			tag = "align-x-center fill size-full-0",
-			LayoutOrder = 1,
-			text = var3.joinButton,
-			onActivated = p1.onJoin,
-			isLoading = isLoading,
-			variant = buttonVariant.Emphasis,
-			size = inputSize.Medium,
-			width = UDim.new(1, 0)
-		}),
-		ChatButton = if p1.onChat ~= nil then nil else reactModule.createElement(button, {
-			tag = "align-x-center fill size-full-0",
-			LayoutOrder = 2,
-			text = var3.chat,
-			onActivated = p1.onChat,
-			variant = buttonVariant.Standard,
-			size = inputSize.Medium,
-			width = UDim.new(1, 0)
-		}),
-		ViewProfileButton = if p1.onViewProfile ~= nil then nil else reactModule.createElement(view, {
-			tag = "row align-x-center align-y-center",
-			LayoutOrder = 3,
-			Size = UDim2.new(1, 0, 0, var1.Size.Size_600),
-			onActivated = var8,
-			onStateChanged = if fFlagDesktopGameJoinCardUIImprovements then var10 else nil,
-			stateLayer = { affordance = stateLayerAffordance.None }
-		}, {
-			Label = reactModule.createElement(text, {
-				tag = "auto-xy text-title-medium text-align-x-center content-emphasis",
-				Text = var14,
-				RichText = fFlagDesktopGameJoinCardUIImprovements
-			})
-		})
-	}) else nil
-	createElement = createElement(view, t_1, t_2)
-	
-	return reactModule.createElement(foundationModule.Popover.Root, { isOpen = p1.isOpen }, {
-		Anchor = reactModule.createElement(foundationModule.Popover.Anchor, { anchorRef = p1.anchorRef }),
-		Content = reactModule.createElement(foundationModule.Popover.Content, {
+	return ReactModule.createElement(FoundationModule.Popover.Root, { isOpen = p1.isOpen }, {
+		Anchor = ReactModule.createElement(FoundationModule.Popover.Anchor, { anchorRef = p1.anchorRef }),
+		Content = ReactModule.createElement(FoundationModule.Popover.Content, {
 			hasArrow = false,
-			align = foundationModule.Enums.PopoverAlign.Center,
-			side = if fFlagEnableConsoleGameJoinCard and p1.isConsole then {
-				position = foundationModule.Enums.PopoverSide.Bottom,
-				offset = var1.Padding.Small
-			} else foundationModule.Enums.PopoverSide.Bottom,
-			radius = foundationModule.Enums.Radius.Medium,
-			backgroundStyle = var1.Color.None,
+			align = FoundationModule.Enums.PopoverAlign.Center,
+			side = if p1.isConsole then {
+				position = FoundationModule.Enums.PopoverSide.Bottom,
+				offset = UseTokensResult.Padding.Small
+			} else FoundationModule.Enums.PopoverSide.Bottom,
+			radius = FoundationModule.Enums.Radius.Medium,
+			backgroundStyle = UseTokensResult.Color.None,
 			onPressedOutside = p1.onClose
-		}, { GameJoinCard = createElement })
+		}, {
+			GameJoinCard = ReactModule.createElement(View, {
+				tag = "col gap-medium padding-large radius-medium stroke-thin stroke-muted",
+				Size = UDim2.fromOffset(UseScaledValueResult, 0),
+				AutomaticSize = Enum.AutomaticSize.Y,
+				LayoutOrder = LayoutOrder,
+				backgroundStyle = UseTokensResult.Color.OverMedia.OverMedia_300,
+				ref = if RootRef == nil then p1.focusRootRef else UseComposedRefResult
+			}, {
+				GameInfoRow = ReactModule.createElement(View, {
+					tag = "row gap-small items-center size-full-0 auto-y align-x-left",
+					LayoutOrder = 1
+				}, {
+					GameIcon = if IsLoading then ReactModule.createElement(Skeleton, {
+						LayoutOrder = 1,
+						Size = UDim2.fromOffset(Size1500, Size1500),
+						radius = Radius.Small
+					}) else ReactModule.createElement(View, {
+						LayoutOrder = 1,
+						ClipsDescendants = true,
+						Size = UDim2.fromOffset(Size1500, Size1500)
+					}, {
+						Thumbnail = ReactModule.createElement(Image, {
+							tag = "radius-small",
+							Image = GameIconUrl,
+							Size = UDim2.fromScale(1, 1),
+							ScaleType = Enum.ScaleType.Fit,
+							onActivated = if FFlagBlockEDPClickthrough then nil else UseResult,
+							stateLayer = if FFlagBlockEDPClickthrough or not p1.onViewExperienceDetails then nil else { affordance = StateLayerAffordance.None }
+						})
+					}),
+					TextContainer = ReactModule.createElement(View, {
+						tag = "col size-full-0 auto-y gap-xxsmall shrink align-x-left items-start",
+						LayoutOrder = 2,
+						AutomaticSize = Enum.AutomaticSize.Y
+					}, {
+						GameInfo = ReactModule.createElement(View, {
+							tag = "col size-full-0 auto-y shrink align-x-left items-start",
+							LayoutOrder = 1,
+							AutomaticSize = Enum.AutomaticSize.Y
+						}, {
+							GameTitle = if IsLoading then ReactModule.createElement(Skeleton, {
+								LayoutOrder = 1,
+								Size = UDim2.new(0.7, 0, 0, UseTokensResult.Typography.BodyMedium.FontSize),
+								radius = Radius.Small
+							}) else ReactModule.createElement(View, {
+								tag = "row auto-y gap-xxsmall size-full-0 align-x-left align-y-center text-body-medium content-default text-align-x-left",
+								LayoutOrder = 1
+							}, {
+								PlayerName = ReactModule.createElement(Text, {
+									tag = "shrink auto-xy text-body-medium content-default text-no-wrap text-truncate-end text-align-x-left",
+									LayoutOrder = 1,
+									Text = PlayerName
+								}),
+								IsPlaying = ReactModule.createElement(Text, {
+									tag = "shrink-0 auto-xy text-body-medium content-default text-align-x-left",
+									LayoutOrder = 2,
+									Text = UseLocalizationResult.isPlaying
+								})
+							}),
+							GameName = if IsLoading then ReactModule.createElement(Skeleton, {
+								LayoutOrder = 2,
+								Size = UDim2.new(0.5, 0, 0, UseTokensResult.Typography.TitleMedium.FontSize),
+								radius = Radius.Small
+							}) else ReactModule.createElement(View, {
+								tag = "size-full-0 auto-y",
+								LayoutOrder = 2,
+								onActivated = if FFlagBlockEDPClickthrough then nil else UseResult1,
+								stateLayer = if FFlagBlockEDPClickthrough then nil else { affordance = StateLayerAffordance.None }
+							}, {
+								Label = ReactModule.createElement(Text, {
+									tag = "size-full-0 auto-y text-title-medium text-no-wrap text-align-x-left text-truncate-split content-emphasis",
+									Text = ExperienceName
+								})
+							})
+						}),
+						PlatformName = if p1.isConsole then if IsLoading then ReactModule.createElement(Skeleton, {
+							LayoutOrder = 2,
+							Size = UDim2.new(0.6, 0, 0, UseTokensResult.Typography.BodySmall.FontSize),
+							radius = Radius.Small
+						}) else ReactModule.createElement(View, {
+							LayoutOrder = 2,
+							tag = "row align-x-left items-center gap-small size-full-0 auto-y",
+							onActivated = p1.onPlatformProfilePressed,
+							selection = if p1.onPlatformProfilePressed then { Selectable = true } else nil,
+							stateLayer = if p1.onPlatformProfilePressed then { affordance = StateLayerAffordance.Background } else nil
+						}, {
+							PlatformLogo = ReactModule.createElement(View, { tag = "auto-xy shrink", LayoutOrder = 1 }, {
+								LogoImage = ReactModule.createElement(Icon, { name = UseMemoResult, size = IconSize.XSmall })
+							}),
+							PlatformNameLabel = ReactModule.createElement(Text, {
+								tag = "fill shrink auto-y text-body-small content-default text-no-wrap text-truncate-end text-align-x-left",
+								LayoutOrder = 2,
+								Text = p1.consolePlatformLabel
+							})
+						}) else nil
+					})
+				}),
+				CtaContext = if FFlagJoinabilityCTARefactor and (v1 ~= nil and not p1.isConsole) then ReactModule.createElement(View, {
+					tag = "col align-x-left items-start gap-xxsmall size-full-0 auto-y",
+					LayoutOrder = 2
+				}, {
+					CtaContextTitle = ReactModule.createElement(Text, {
+						tag = "auto-xy text-body-medium text-align-x-left content-emphasis",
+						LayoutOrder = 1,
+						Text = v1.title
+					}),
+					CtaContextSubtitle = if v1.subtitle == nil then nil else ReactModule.createElement(Text, {
+						tag = "auto-xy text-label-small text-align-x-left content-muted",
+						LayoutOrder = 2,
+						Text = v1.subtitle
+					})
+				}) else nil,
+				Actions = if p1.isConsole then nil else ReactModule.createElement(View, {
+					tag = "col gap-small size-full-0 auto-y",
+					LayoutOrder = 3
+				}, if FFlagJoinabilityCTARefactor then t else {
+					JoinButton = if IsAgeCheckRequired then ReactModule.createElement(AgeCheckUpsellCTAModule, {
+						LayoutOrder = 1,
+						onUnlockPressed = p1.onAgeCheckPressed or function() --[[ Line: 345 ]] end,
+						focusRef = PrimaryButtonFocusRef
+					}) else ReactModule.createElement(Button, {
+						tag = "align-x-center fill size-full-0",
+						LayoutOrder = 1,
+						ref = PrimaryButtonFocusRef,
+						text = UseLocalizationResult.joinButton,
+						onActivated = p1.onJoin,
+						isLoading = IsLoading,
+						variant = ButtonVariant.Emphasis,
+						size = InputSize.Medium,
+						width = UDim.new(1, 0)
+					}),
+					ChatButton = if p1.onChat == nil then nil else ReactModule.createElement(Button, {
+						tag = "align-x-center fill size-full-0",
+						LayoutOrder = 2,
+						text = UseLocalizationResult.chat,
+						onActivated = p1.onChat,
+						variant = ButtonVariant.Standard,
+						size = InputSize.Medium,
+						width = UDim.new(1, 0)
+					}),
+					ViewProfileButton = if p1.onViewProfile == nil then nil else ReactModule.createElement(View, {
+						tag = "row align-x-center align-y-center",
+						LayoutOrder = 3,
+						Size = UDim2.new(1, 0, 0, UseTokensResult.Size.Size_600),
+						onActivated = UseResult2,
+						onStateChanged = UseResult3,
+						stateLayer = { affordance = StateLayerAffordance.None }
+					}, {
+						Label = ReactModule.createElement(Text, {
+							RichText = true,
+							tag = "auto-xy text-title-medium text-align-x-center content-emphasis",
+							Text = Text1
+						})
+					})
+				})
+			})
+		})
 	})
 end

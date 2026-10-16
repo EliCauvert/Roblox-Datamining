@@ -1,19 +1,19 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local textKeysModule = require(profilePlatform.Common.TextKeys)
-local playerContext = require(parent.UIBlox).App.Indicator.PlayerContext
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local TextKeysModule = require(ProfilePlatform.Common.TextKeys)
+local PlayerContext = require(Parent.UIBlox).App.Indicator.PlayerContext
 
-return function(p1)
-	-- upvalues: useLocalization (ref), textKeysModule (ref), reactModule (ref), playerContext (ref)
-	local experienceName = p1.experienceName
+return function(p1) --[[ Line: 16 | Named "ContextualPlayedTogether" ]]
+	-- upvalues: UseLocalizationFunction (copy), TextKeysModule (copy), ReactModule (copy), PlayerContext (copy)
+	local ExperienceName = p1.experienceName
 	
-	return reactModule.createElement(playerContext, {
-		text = useLocalization({
-			playedTogetherText = if experienceName ~= "" then textKeysModule.PlayedTogether else {
-				textKeysModule.PlayedTogetherInGameDescription,
-				experience_name = experienceName
+	return ReactModule.createElement(PlayerContext, {
+		text = UseLocalizationFunction({
+			playedTogetherText = if ExperienceName == "" then TextKeysModule.PlayedTogether else {
+				TextKeysModule.PlayedTogetherInGameDescription,
+				experience_name = ExperienceName
 			}
 		}).playedTogetherText
 	})

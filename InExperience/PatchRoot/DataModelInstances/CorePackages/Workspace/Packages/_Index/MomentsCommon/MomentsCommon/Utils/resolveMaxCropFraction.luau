@@ -1,12 +1,13 @@
-﻿local function _(p1)
-	return p1.Y < p1.X
+﻿local function _(Vector): boolean --[[ Line: 14 | Named "isLandscape" ]]
+	return Vector.Y < Vector.X
 end
 
-return function(a, b, p1, p2)
-	if b == nil or a.X == 0 or a.Y == 0 then
+return function(Vector, Vector1, p1, p2) --[[ Line: 18 | Named "resolveMaxCropFraction" ]]
+	if Vector1 == nil or Vector.X == 0 or Vector.Y == 0 then
 		return 0
+	else
+		local IsYBelow = Vector1.Y < Vector1.X
+		
+		return if IsYBelow == (Vector.X > Vector.Y) then if IsYBelow and not p2 then 0 else p1 else 0
 	end
-	local var1 = b.Y < b.X
-	
-	return if var1 == (a.Y < a.X) then if var1 and not p2 then 0 else p1 else 0
 end

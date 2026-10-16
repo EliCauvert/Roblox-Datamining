@@ -1,27 +1,27 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local tModule = require(corePackagesService.Packages.t)
-local toast = UIBloxModule.App.Dialog.Toast
-local images = UIBloxModule.App.ImageSet.Images
-local toast_1 = roactModule.PureComponent:extend("Toast")
-toast_1.validateProps = tModule.strictInterface({
-	toastTitle = tModule.optional(tModule.string),
-	toastSubtitle = tModule.optional(tModule.string)
+﻿local CorePackages = game:GetService("CorePackages")
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local UIBloxModule = require(CorePackages.Packages.UIBlox)
+local TModule = require(CorePackages.Packages.t)
+local Toast = UIBloxModule.App.Dialog.Toast
+local Images = UIBloxModule.App.ImageSet.Images
+local Toast1 = RoactModule.PureComponent:extend("Toast")
+Toast1.validateProps = TModule.strictInterface({
+	toastTitle = TModule.optional(TModule.string),
+	toastSubtitle = TModule.optional(TModule.string)
 })
 
-function toast_1.render(p1)
-	-- upvalues: roactModule (ref), toast (ref), images (ref)
-	return if p1.props.toastTitle then roactModule.createElement("Frame", {
+function Toast1.render(p1) --[[ Line: 18 ]]
+	-- upvalues: RoactModule (copy), Toast (copy), Images (copy)
+	return if p1.props.toastTitle then RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		ZIndex = 100,
 		Size = UDim2.fromScale(1, 1)
 	}, {
-		Toast = roactModule.createElement(toast, {
+		Toast = RoactModule.createElement(Toast, {
 			duration = 3,
 			toastContent = {
-				iconImage = images["icons/status/success"],
+				iconImage = Images["icons/status/success"],
 				toastTitle = p1.props.toastTitle,
 				toastSubtitle = p1.props.toastSubtitle
 			}
@@ -29,9 +29,9 @@ function toast_1.render(p1)
 	}) else nil
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p1, _)
+return RoactRoduxModule.UNSTABLE_connect2(function(p1, _) --[[ Line: 38 ]]
 	return {
 		toastTitle = p1.common.toastTitle,
 		toastSubtitle = p1.common.toastSubtitle
 	}
-end, nil)(toast_1)
+end, nil)(Toast1)

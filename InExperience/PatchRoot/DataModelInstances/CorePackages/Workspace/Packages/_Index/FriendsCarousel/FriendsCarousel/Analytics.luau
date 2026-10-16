@@ -1,14 +1,14 @@
-﻿local friendsCarousel = script:FindFirstAncestor("FriendsCarousel")
-local _ = friendsCarousel.Parent
-local context = require(friendsCarousel.dependencies).SocialLibraries.Context
-local friendsCarouselAnalyticsContextModule = require(script.FriendsCarouselAnalyticsContext)
+﻿local FriendsCarousel = script:FindFirstAncestor("FriendsCarousel")
+local _ = FriendsCarousel.Parent
+local Context = require(FriendsCarousel.dependencies).SocialLibraries.Context
+local FriendsCarouselAnalyticsContextModule = require(script.FriendsCarouselAnalyticsContext)
 
 return {
 	EventNames = require(script.EventNames),
 	Analytics = require(script.AnalyticsSetup),
 	setupFireEvent = require(script.setupFireEvent),
-	Context = friendsCarouselAnalyticsContextModule,
-	connect = context.getConnect(friendsCarouselAnalyticsContextModule),
-	with = context.getWith(friendsCarouselAnalyticsContextModule),
+	Context = FriendsCarouselAnalyticsContextModule,
+	connect = Context.getConnect(FriendsCarouselAnalyticsContextModule),
+	with = Context.getWith(FriendsCarouselAnalyticsContextModule),
 	useAnalytics = require(script.useAnalytics)
 }

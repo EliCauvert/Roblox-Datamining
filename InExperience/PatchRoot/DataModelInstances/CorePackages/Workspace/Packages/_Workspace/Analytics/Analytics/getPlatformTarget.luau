@@ -1,1 +1,1 @@
-﻿return require(script.Parent["getPlatformTarget.impl"])(game:GetService("UserInputService"))
+﻿return require(script.Parent["getPlatformTarget.impl"])((game:GetService("UserInputService")))

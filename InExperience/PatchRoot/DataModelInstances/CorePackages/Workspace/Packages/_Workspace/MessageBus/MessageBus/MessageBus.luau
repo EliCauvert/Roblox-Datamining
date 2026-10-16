@@ -1,141 +1,144 @@
-﻿local messageBusService = game:GetService("MessageBusService")
+﻿local MessageBusService = game:GetService("MessageBusService")
 local _ = require(script.Parent.MessageBusTypes)
-local disableMessageBusUnSubscribeError = game:DefineFastFlag("DisableMessageBusUnSubscribeError", false)
-local enableMessageBusUnSubscribeErrorTelemetry = game:DefineFastFlag("EnableMessageBusUnSubscribeErrorTelemetry", false)
-local t = {}
-t.__index = t
+local DisableMessageBusUnSubscribeError = game:DefineFastFlag("DisableMessageBusUnSubscribeError", false)
+local EnableMessageBusUnSubscribeErrorTelemetry = game:DefineFastFlag("EnableMessageBusUnSubscribeErrorTelemetry", false)
+local MessageBusModule = {}
+MessageBusModule.__index = MessageBusModule
 
-function t.publish(p1, p2)
-	-- upvalues: messageBusService (ref)
+function MessageBusModule.publish(p1, p2) --[[ Line: 41 ]]
+	-- upvalues: MessageBusService (copy)
 	assert(p1.validateParams(p2))
-	messageBusService:Publish(p1.mid, p2)
+	MessageBusService:Publish(p1.mid, p2)
 end
 
-function t.publishProtocolMethodRequest(p1, p2, p3)
-	-- upvalues: messageBusService (ref)
-	assert(p1.validateParams(p2))
-	messageBusService:PublishProtocolMethodRequest(p1.protocolName, p1.methodName, p2, p3)
+function MessageBusModule.publishProtocolMethodRequest(p1, Message, CustomTelemetryData) --[[ Line: 46 ]]
+	-- upvalues: MessageBusService (copy)
+	assert(p1.validateParams(Message))
+	MessageBusService:PublishProtocolMethodRequest(p1.protocolName, p1.methodName, Message, CustomTelemetryData)
 end
 
-function t.publishProtocolMethodResponse(p1, p2, p3, p4)
-	-- upvalues: messageBusService (ref)
-	assert(p1.validateParams(p2))
-	messageBusService:PublishProtocolMethodResponse(p1.protocolName, p1.methodName, p2, p3, p4)
+function MessageBusModule.publishProtocolMethodResponse(p1, Message, ResponseCode, CustomTelemetryData) --[[ Line: 55 ]]
+	-- upvalues: MessageBusService (copy)
+	assert(p1.validateParams(Message))
+	MessageBusService:PublishProtocolMethodResponse(p1.protocolName, p1.methodName, Message, ResponseCode, CustomTelemetryData)
 end
 
-function t.getLast(p1)
-	-- upvalues: messageBusService (ref)
-	local midLast = messageBusService:GetLast(p1.mid)
+function MessageBusModule.getLast(p1) --[[ Line: 71 ]]
+	-- upvalues: MessageBusService (copy)
+	local Last = MessageBusService:GetLast(p1.mid)
 	
-	if midLast == nil then
+	if Last == nil then
 		return nil
+	else
+		assert(p1.validateParams(Last))
+		
+		return Last
 	end
-	assert(p1.validateParams(midLast))
+end
+
+function MessageBusModule.getMessageId(DomainName, MessageName) --[[ Line: 80 ]]
+	-- upvalues: MessageBusService (copy)
+	return MessageBusService:GetMessageId(DomainName, MessageName)
+end
+
+function MessageBusModule.getProtocolMethodRequestMessageId(ProtocolName, MethodName) --[[ Line: 84 ]]
+	-- upvalues: MessageBusService (copy)
+	return MessageBusService:GetProtocolMethodRequestMessageId(ProtocolName, MethodName)
+end
+
+function MessageBusModule.getProtocolMethodResponseMessageId(ProtocolName, MethodName) --[[ Line: 88 ]]
+	-- upvalues: MessageBusService (copy)
+	return MessageBusService:GetProtocolMethodResponseMessageId(ProtocolName, MethodName)
+end
+
+function MessageBusModule.call(p1, Input) --[[ Line: 92 ]]
+	-- upvalues: MessageBusService (copy)
+	assert(p1.validateParams(Input))
 	
-	return midLast
+	return MessageBusService:Call(p1.fid, Input)
 end
 
-function t.getMessageId(p1, p2)
-	-- upvalues: messageBusService (ref)
-	return messageBusService:GetMessageId(p1, p2)
+local Module = {}
+Module.__index = Module
+
+function Module.new() --[[ Line: 100 ]]
+	-- upvalues: Module (copy)
+	return (setmetatable({ connections = {} }, Module))
 end
 
-function t.getProtocolMethodRequestMessageId(p1, p2)
-	-- upvalues: messageBusService (ref)
-	return messageBusService:GetProtocolMethodRequestMessageId(p1, p2)
-end
-
-function t.getProtocolMethodResponseMessageId(p1, p2)
-	-- upvalues: messageBusService (ref)
-	return messageBusService:GetProtocolMethodResponseMessageId(p1, p2)
-end
-
-function t.call(p1, p2)
-	-- upvalues: messageBusService (ref)
-	assert(p1.validateParams(p2))
+function Module.getSubscriptionCount(p1): number --[[ Line: 107 ]]
+	local Count = 0
 	
-	return messageBusService:Call(p1.fid, p2)
-end
-
-local t_1 = {}
-t_1.__index = t_1
-
-function t_1.new()
-	-- upvalues: t_1 (ref)
-	return setmetatable({ connections = {} }, t_1)
-end
-
-function t_1:getSubscriptionCount()
-	local var1 = 0
-	
-	for i in pairs(self.connections) do
-		var1 += 1
+	for _ in pairs(p1.connections) do
+		Count += 1
 	end
-	return var1
+	return Count
 end
 
-function t_1:subscribe(p1, p2, p3, p4)
-	-- upvalues: messageBusService (ref)
-	local var2 = if p3 ~= nil then p3 else true
-	local var3 = p4 ~= nil and p4
-	local mid = p1.mid
+function Module:subscribe(p2, Callback, p3, p4) --[[ Line: 115 ]]
+	-- upvalues: MessageBusService (copy)
+	local Sticky = p3 == nil or p3
+	local P23 = p4 ~= nil and p4
+	local Mid = p2.mid
 	
-	if self.connections[mid] ~= nil then
-		self:unsubscribe(p1)
+	if self.connections[Mid] ~= nil then
+		self:unsubscribe(p2)
 	end
-	self.connections[mid] = messageBusService:Subscribe(mid, p2, var3, var2)
+	self.connections[Mid] = MessageBusService:Subscribe(Mid, Callback, P23, Sticky)
 end
 
-function t_1:subscribeProtocolMethodRequest(p1, p2, p3, p4)
-	-- upvalues: t (ref), messageBusService (ref)
-	local var2 = if p3 ~= nil then p3 else true
-	local var3 = p4 ~= nil and p4
-	local protocolName = p1.protocolName
-	local methodName = p1.methodName
-	local protocolMethodRequestMessageId = t.getProtocolMethodRequestMessageId(protocolName, methodName)
+function Module:subscribeProtocolMethodRequest(p2, Callback, p3, p4) --[[ Line: 128 ]]
+	-- upvalues: MessageBusModule (copy), MessageBusService (copy)
+	local Sticky = p3 == nil or p3
+	local P28 = p4 ~= nil and p4
+	local ProtocolName = p2.protocolName
+	local MethodName = p2.methodName
+	local ProtocolMethodRequestMessageId = MessageBusModule.getProtocolMethodRequestMessageId(ProtocolName, MethodName)
 	
-	if self.connections[protocolMethodRequestMessageId] ~= nil then
-		self:unsubscribeWithMsgId(protocolMethodRequestMessageId)
+	if self.connections[ProtocolMethodRequestMessageId] ~= nil then
+		self:unsubscribeWithMsgId(ProtocolMethodRequestMessageId)
 	end
-	self.connections[protocolMethodRequestMessageId] = messageBusService:SubscribeToProtocolMethodRequest(protocolName, methodName, p2, var3, var2)
+	self.connections[ProtocolMethodRequestMessageId] = MessageBusService:SubscribeToProtocolMethodRequest(ProtocolName, MethodName, Callback, P28, Sticky)
 end
 
-function t_1:subscribeProtocolMethodResponse(p1, p2, p3, p4)
-	-- upvalues: t (ref), messageBusService (ref)
-	local var2 = if p3 ~= nil then p3 else true
-	local var3 = p4 ~= nil and p4
-	local protocolName = p1.protocolName
-	local methodName = p1.methodName
-	local protocolMethodResponseMessageId = t.getProtocolMethodResponseMessageId(protocolName, methodName)
+function Module:subscribeProtocolMethodResponse(p2, Callback, p3, p4) --[[ Line: 148 ]]
+	-- upvalues: MessageBusModule (copy), MessageBusService (copy)
+	local Sticky = p3 == nil or p3
+	local P33 = p4 ~= nil and p4
+	local ProtocolName = p2.protocolName
+	local MethodName = p2.methodName
+	local ProtocolMethodResponseMessageId = MessageBusModule.getProtocolMethodResponseMessageId(ProtocolName, MethodName)
 	
-	if self.connections[protocolMethodResponseMessageId] ~= nil then
-		self:unsubscribeWithMsgId(protocolMethodResponseMessageId)
+	if self.connections[ProtocolMethodResponseMessageId] ~= nil then
+		self:unsubscribeWithMsgId(ProtocolMethodResponseMessageId)
 	end
-	self.connections[protocolMethodResponseMessageId] = messageBusService:SubscribeToProtocolMethodResponse(protocolName, methodName, p2, var3, var2)
+	self.connections[ProtocolMethodResponseMessageId] = MessageBusService:SubscribeToProtocolMethodResponse(ProtocolName, MethodName, Callback, P33, Sticky)
 end
 
-function t_1:unsubscribeToProtocolMethodRequest(p1)
-	-- upvalues: messageBusService (ref)
-	self:unsubscribeWithMsgId(messageBusService:GetProtocolMethodRequestMessageId(p1.protocolName, p1.methodName))
+function Module:unsubscribeToProtocolMethodRequest(p2) --[[ Line: 168 ]]
+	-- upvalues: MessageBusService (copy)
+	self:unsubscribeWithMsgId(MessageBusService:GetProtocolMethodRequestMessageId(p2.protocolName, p2.methodName))
 end
 
-function t_1:unsubscribeToProtocolMethodResponse(p1)
-	-- upvalues: messageBusService (ref)
-	self:unsubscribeWithMsgId(messageBusService:GetProtocolMethodResponseMessageId(p1.protocolName, p1.methodName))
+function Module:unsubscribeToProtocolMethodResponse(p2) --[[ Line: 172 ]]
+	-- upvalues: MessageBusService (copy)
+	self:unsubscribeWithMsgId(MessageBusService:GetProtocolMethodResponseMessageId(p2.protocolName, p2.methodName))
 end
 
-function t_1:unsubscribe(p1)
-	self:unsubscribeWithMsgId(p1.mid)
+function Module:unsubscribe(p2) --[[ Line: 176 ]]
+	self:unsubscribeWithMsgId(p2.mid)
 end
 
-function t_1:unsubscribeWithMsgId(p1)
-	-- upvalues: disableMessageBusUnSubscribeError (ref), enableMessageBusUnSubscribeErrorTelemetry (ref), messageBusService (ref)
-	local var2 = self.connections[p1]
+function Module:unsubscribeWithMsgId(ProtocolMethodRequestMessageId) --[[ Line: 180 ]]
+	-- upvalues: DisableMessageBusUnSubscribeError (copy), EnableMessageBusUnSubscribeErrorTelemetry (copy), MessageBusService (copy)
+	local Connection = self.connections[ProtocolMethodRequestMessageId]
 	
-	if var2 == nil then
-		if disableMessageBusUnSubscribeError then
-			if enableMessageBusUnSubscribeErrorTelemetry then
-				messageBusService:Call("Telemetry.logEventFromLua", {
+	if Connection == nil then
+		if not DisableMessageBusUnSubscribeError then
+			error("unsubscribing from a message id not subscribed to: " .. ProtocolMethodRequestMessageId)
+		else
+			if EnableMessageBusUnSubscribeErrorTelemetry then
+				MessageBusService:Call("Telemetry.logEventFromLua", {
 					eventType = "RobloxTelemetry",
 					config = {
 						eventName = "MessageBusErrorEvent",
@@ -149,27 +152,25 @@ function t_1:unsubscribeWithMsgId(p1)
 						standardizedFields = nil,
 						eventContext = nil,
 						customFields = {
-							err = "unsubscribing from a message id not subscribed to: " .. p33
+							err = "unsubscribing from a message id not subscribed to: " .. ProtocolMethodRequestMessageId
 						}
 					}
 				})
 			end
 			return
-		else
-			error("unsubscribing from a message id not subscribed to: " .. p33)
 		end
 	end
-	self.connections[p1] = nil
-	var2:Disconnect()
+	self.connections[ProtocolMethodRequestMessageId] = nil
+	Connection:Disconnect()
 end
 
-function t_1:unsubscribeFromAllMessages()
-	for i, v in pairs(self.connections) do
+function Module:unsubscribeFromAllMessages() --[[ Line: 223 ]]
+	for i, connection in pairs(self.connections) do
 		self.connections[i] = nil
-		v:Disconnect()
+		connection:Disconnect()
 	end
 end
 
-t.Subscriber = t_1
+MessageBusModule.Subscriber = Module
 
-return t
+return MessageBusModule

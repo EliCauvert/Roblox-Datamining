@@ -1,172 +1,161 @@
-﻿local httpService = game:GetService("HttpService")
-local parent = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor").Parent
-local avatarExperienceAnalyticsModule = require(parent.AvatarExperienceAnalytics)
-local avatarExperienceNavigationModule = require(parent.AvatarExperienceNavigation)
-local sharedFlagsModule = require(parent.SharedFlags)
-local sendUnifiedEventLog = avatarExperienceAnalyticsModule.sendUnifiedEventLog
-local sendAXCounterV2 = avatarExperienceAnalyticsModule.sendAXCounterV2
-local reportAvatarEventCounterV1 = avatarExperienceAnalyticsModule.reportAvatarEventCounterV1
-local unifiedEventLogEnums = avatarExperienceAnalyticsModule.UnifiedEventLogEnums
-local unifiedLoggingSurface = avatarExperienceNavigationModule.Enums.UnifiedLoggingSurface
-local constants = avatarExperienceAnalyticsModule.Constants
-local fFlagEditProfileImageV2Telemetry = sharedFlagsModule.FFlagEditProfileImageV2Telemetry
-local t = {
-	logPageView = function(p1)
-		-- upvalues: fFlagEditProfileImageV2Telemetry (ref), sendUnifiedEventLog (ref), unifiedEventLogEnums (ref), unifiedLoggingSurface (ref), httpService (ref), sendAXCounterV2 (ref)
-		if fFlagEditProfileImageV2Telemetry then
-			sendUnifiedEventLog({
-				action = unifiedEventLogEnums.MarketplaceUnifiedAction.PAGE_VIEW,
-				surface = unifiedLoggingSurface.EDIT_PROFILE_IMAGE,
-				elementMetadata = httpService:JSONEncode({ mode = p1.mode })
-			})
-			sendAXCounterV2("EditProfileImagePageView", { mode = p1.mode })
-			
-			return
-		end
-	end
-}
-local t_1 = {
+﻿local HttpService = game:GetService("HttpService")
+local Parent = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor").Parent
+local AvatarExperienceAnalyticsModule = require(Parent.AvatarExperienceAnalytics)
+local SendUnifiedEventLogFunction = AvatarExperienceAnalyticsModule.sendUnifiedEventLog
+local SendAXCounterV2Function = AvatarExperienceAnalyticsModule.sendAXCounterV2
+local ReportAvatarEventCounterV1Function = AvatarExperienceAnalyticsModule.reportAvatarEventCounterV1
+local UnifiedEventLogEnums = AvatarExperienceAnalyticsModule.UnifiedEventLogEnums
+local UnifiedLoggingSurface = require(Parent.AvatarExperienceNavigation).Enums.UnifiedLoggingSurface
+local Constants = AvatarExperienceAnalyticsModule.Constants
+local FFlagEditProfileImageV2Telemetry = require(Parent.SharedFlags).FFlagEditProfileImageV2Telemetry
+local config = {
 	confirm = "R15_UPGRADE_CONFIRM",
 	cancel = "R15_UPGRADE_CANCEL"
 }
 
-local function buildSaveElementMetadata(p1)
-	-- upvalues: httpService (ref)
-	local t = {
+local function buildSaveElementMetadata(p1) --[[ Line: 75 ]]
+	-- upvalues: HttpService (copy)
+	local config = {
 		mode = p1.mode,
 		is_plus_subscriber = tostring(p1.isPlusSubscriber)
 	}
 	
 	if p1.emoteAssetId ~= nil then
-		t.emote_asset_id = p1.emoteAssetId
+		config.emote_asset_id = p1.emoteAssetId
 	end
 	if p1.frameAssetId ~= nil then
-		t.frame_asset_id = tostring(p1.frameAssetId)
+		config.frame_asset_id = tostring(p1.frameAssetId)
 	end
-	return httpService:JSONEncode(t)
+	return HttpService:JSONEncode(config)
 end
 
-local function buildSubscribeElementMetadata(p1)
-	-- upvalues: httpService (ref)
-	local t = {
-		mode = p1.mode,
-		purchase_flow_uuid = p1.purchaseFlowUuid,
-		source = p1.source
+local function buildSubscribeElementMetadata(Input) --[[ Line: 92 ]]
+	-- upvalues: HttpService (copy)
+	local config = {
+		mode = Input.mode,
+		purchase_flow_uuid = Input.purchaseFlowUuid,
+		source = Input.source
 	}
 	
-	if p1.frameAssetId ~= nil then
-		t.frame_asset_id = tostring(p1.frameAssetId)
+	if Input.frameAssetId ~= nil then
+		config.frame_asset_id = tostring(Input.frameAssetId)
 	end
-	return httpService:JSONEncode(t)
+	return HttpService:JSONEncode(config)
 end
 
-function t.logSave(p1)
-	-- upvalues: fFlagEditProfileImageV2Telemetry (ref), sendAXCounterV2 (ref), sendUnifiedEventLog (ref), unifiedEventLogEnums (ref), unifiedLoggingSurface (ref), buildSaveElementMetadata (ref), reportAvatarEventCounterV1 (ref), constants (ref)
-	if not fFlagEditProfileImageV2Telemetry then return end
-	sendAXCounterV2("EditProfileImageSave", {
-		mode = p1.mode,
-		is_plus_subscriber = if p1.isPlusSubscriber then "true" else "false",
-		result = tostring(p1.result)
-	})
-	
-	if p1.result == "success" then
-		sendUnifiedEventLog({
-			elementName = "SAVE",
-			action = unifiedEventLogEnums.MarketplaceUnifiedAction.UI_ELEMENT_CLICK,
-			surface = unifiedLoggingSurface.EDIT_PROFILE_IMAGE,
-			elementMetadata = buildSaveElementMetadata(p1)
-		})
-		reportAvatarEventCounterV1(constants.AVATAR_EVENT_COUNTER_NAME.AXUpdateProfilePicture)
-		
-		return
-	end
-end
-
-function t.logSubscribe(p1)
-	-- upvalues: fFlagEditProfileImageV2Telemetry (ref), sendUnifiedEventLog (ref), unifiedEventLogEnums (ref), unifiedLoggingSurface (ref), buildSubscribeElementMetadata (ref), sendAXCounterV2 (ref)
-	if fFlagEditProfileImageV2Telemetry then
-		sendUnifiedEventLog({
-			elementName = "SUBSCRIBE",
-			action = unifiedEventLogEnums.MarketplaceUnifiedAction.UI_ELEMENT_CLICK,
-			surface = unifiedLoggingSurface.EDIT_PROFILE_IMAGE,
-			elementMetadata = buildSubscribeElementMetadata(p1)
-		})
-		sendAXCounterV2("EditProfileImageSubscribe", { mode = p1.mode, source = tostring(p1.source) })
-		
-		return
-	end
-end
-
-function t.logClose(p1)
-	-- upvalues: fFlagEditProfileImageV2Telemetry (ref), sendUnifiedEventLog (ref), unifiedEventLogEnums (ref), unifiedLoggingSurface (ref), httpService (ref), sendAXCounterV2 (ref)
-	if fFlagEditProfileImageV2Telemetry then
-		sendUnifiedEventLog({
-			elementName = "CLOSE",
-			action = unifiedEventLogEnums.MarketplaceUnifiedAction.UI_ELEMENT_CLICK,
-			surface = unifiedLoggingSurface.EDIT_PROFILE_IMAGE,
-			elementMetadata = httpService:JSONEncode({ mode = p1.mode, active_view = p1.activeView })
-		})
-		sendAXCounterV2("EditProfileImageClose", { mode = p1.mode })
-		
-		return
-	end
-end
-
-function t.logBack(p1)
-	-- upvalues: fFlagEditProfileImageV2Telemetry (ref), sendUnifiedEventLog (ref), unifiedEventLogEnums (ref), unifiedLoggingSurface (ref), httpService (ref), sendAXCounterV2 (ref)
-	if fFlagEditProfileImageV2Telemetry then
-		sendUnifiedEventLog({
-			elementName = "BACK",
-			action = unifiedEventLogEnums.MarketplaceUnifiedAction.UI_ELEMENT_CLICK,
-			surface = unifiedLoggingSurface.EDIT_PROFILE_IMAGE,
-			elementMetadata = httpService:JSONEncode({
-				mode = p1.mode,
-				active_view = p1.activeView,
-				outcome = p1.outcome
+return {
+	logPageView = function(p1) --[[ Line: 106 ]]
+		-- upvalues: FFlagEditProfileImageV2Telemetry (copy), SendUnifiedEventLogFunction (copy), UnifiedEventLogEnums (copy), UnifiedLoggingSurface (copy), HttpService (copy), SendAXCounterV2Function (copy)
+		if FFlagEditProfileImageV2Telemetry then
+			SendUnifiedEventLogFunction({
+				action = UnifiedEventLogEnums.MarketplaceUnifiedAction.PAGE_VIEW,
+				surface = UnifiedLoggingSurface.EDIT_PROFILE_IMAGE,
+				elementMetadata = HttpService:JSONEncode({ mode = p1.mode })
 			})
+			SendAXCounterV2Function("EditProfileImagePageView", { mode = p1.mode })
+			
+			return
+		end
+	end,
+	logSave = function(p1) --[[ Line: 124 ]]
+		-- upvalues: FFlagEditProfileImageV2Telemetry (copy), SendAXCounterV2Function (copy), SendUnifiedEventLogFunction (copy), UnifiedEventLogEnums (copy), UnifiedLoggingSurface (copy), buildSaveElementMetadata (copy), ReportAvatarEventCounterV1Function (copy), Constants (copy)
+		if not FFlagEditProfileImageV2Telemetry then return end
+		SendAXCounterV2Function("EditProfileImageSave", {
+			mode = p1.mode,
+			is_plus_subscriber = if p1.isPlusSubscriber then "true" else "false",
+			result = tostring(p1.result)
 		})
-		sendAXCounterV2("EditProfileImageBack", { mode = p1.mode, outcome = tostring(p1.outcome) })
 		
-		return
+		if p1.result == "success" then
+			SendUnifiedEventLogFunction({
+				elementName = "SAVE",
+				action = UnifiedEventLogEnums.MarketplaceUnifiedAction.UI_ELEMENT_CLICK,
+				surface = UnifiedLoggingSurface.EDIT_PROFILE_IMAGE,
+				elementMetadata = buildSaveElementMetadata(p1)
+			})
+			ReportAvatarEventCounterV1Function(Constants.AVATAR_EVENT_COUNTER_NAME.AXUpdateProfilePicture)
+			
+			return
+		end
+	end,
+	logSubscribe = function(Input) --[[ Line: 149 ]]
+		-- upvalues: FFlagEditProfileImageV2Telemetry (copy), SendUnifiedEventLogFunction (copy), UnifiedEventLogEnums (copy), UnifiedLoggingSurface (copy), buildSubscribeElementMetadata (copy), SendAXCounterV2Function (copy)
+		if FFlagEditProfileImageV2Telemetry then
+			SendUnifiedEventLogFunction({
+				elementName = "SUBSCRIBE",
+				action = UnifiedEventLogEnums.MarketplaceUnifiedAction.UI_ELEMENT_CLICK,
+				surface = UnifiedLoggingSurface.EDIT_PROFILE_IMAGE,
+				elementMetadata = buildSubscribeElementMetadata(Input)
+			})
+			SendAXCounterV2Function("EditProfileImageSubscribe", { mode = Input.mode, source = tostring(Input.source) })
+			
+			return
+		end
+	end,
+	logClose = function(p1) --[[ Line: 167 ]]
+		-- upvalues: FFlagEditProfileImageV2Telemetry (copy), SendUnifiedEventLogFunction (copy), UnifiedEventLogEnums (copy), UnifiedLoggingSurface (copy), HttpService (copy), SendAXCounterV2Function (copy)
+		if FFlagEditProfileImageV2Telemetry then
+			SendUnifiedEventLogFunction({
+				elementName = "CLOSE",
+				action = UnifiedEventLogEnums.MarketplaceUnifiedAction.UI_ELEMENT_CLICK,
+				surface = UnifiedLoggingSurface.EDIT_PROFILE_IMAGE,
+				elementMetadata = HttpService:JSONEncode({ mode = p1.mode, active_view = p1.activeView })
+			})
+			SendAXCounterV2Function("EditProfileImageClose", { mode = p1.mode })
+			
+			return
+		end
+	end,
+	logBack = function(p1) --[[ Line: 187 ]]
+		-- upvalues: FFlagEditProfileImageV2Telemetry (copy), SendUnifiedEventLogFunction (copy), UnifiedEventLogEnums (copy), UnifiedLoggingSurface (copy), HttpService (copy), SendAXCounterV2Function (copy)
+		if FFlagEditProfileImageV2Telemetry then
+			SendUnifiedEventLogFunction({
+				elementName = "BACK",
+				action = UnifiedEventLogEnums.MarketplaceUnifiedAction.UI_ELEMENT_CLICK,
+				surface = UnifiedLoggingSurface.EDIT_PROFILE_IMAGE,
+				elementMetadata = HttpService:JSONEncode({
+					mode = p1.mode,
+					active_view = p1.activeView,
+					outcome = p1.outcome
+				})
+			})
+			SendAXCounterV2Function("EditProfileImageBack", { mode = p1.mode, outcome = tostring(p1.outcome) })
+			
+			return
+		end
+	end,
+	logFetchFailure = function(p1) --[[ Line: 209 ]]
+		-- upvalues: FFlagEditProfileImageV2Telemetry (copy), SendAXCounterV2Function (copy)
+		if FFlagEditProfileImageV2Telemetry then
+			SendAXCounterV2Function("EditProfileImageFetchFailure", { asset_type = tostring(p1.assetType) })
+			
+			return
+		end
+	end,
+	logRetry = function(p1) --[[ Line: 219 ]]
+		-- upvalues: FFlagEditProfileImageV2Telemetry (copy), SendAXCounterV2Function (copy)
+		if FFlagEditProfileImageV2Telemetry then
+			SendAXCounterV2Function("EditProfileImageRetry", { mode = p1.mode, asset_type = tostring(p1.assetType) })
+			
+			return
+		end
+	end,
+	logR15UpgradePromptShown = function() --[[ Line: 230 ]]
+		-- upvalues: SendUnifiedEventLogFunction (copy), UnifiedEventLogEnums (copy), UnifiedLoggingSurface (copy), SendAXCounterV2Function (copy)
+		SendUnifiedEventLogFunction({
+			elementName = "R15_UPGRADE_PROMPT",
+			action = UnifiedEventLogEnums.MarketplaceUnifiedAction.UI_ELEMENT_IMPRESSION,
+			surface = UnifiedLoggingSurface.EDIT_PROFILE_IMAGE
+		})
+		SendAXCounterV2Function("EditProfileImageR15UpgradePromptShown")
+	end,
+	logR15UpgradePromptInteraction = function(p1) --[[ Line: 240 ]]
+		-- upvalues: SendUnifiedEventLogFunction (copy), UnifiedEventLogEnums (copy), UnifiedLoggingSurface (copy), config (copy), SendAXCounterV2Function (copy)
+		SendUnifiedEventLogFunction({
+			action = UnifiedEventLogEnums.MarketplaceUnifiedAction.UI_ELEMENT_CLICK,
+			surface = UnifiedLoggingSurface.EDIT_PROFILE_IMAGE,
+			elementName = config[p1]
+		})
+		SendAXCounterV2Function("EditProfileImageR15UpgradePromptInteraction", { action = tostring(p1) })
 	end
-end
-
-function t.logFetchFailure(p1)
-	-- upvalues: fFlagEditProfileImageV2Telemetry (ref), sendAXCounterV2 (ref)
-	if fFlagEditProfileImageV2Telemetry then
-		sendAXCounterV2("EditProfileImageFetchFailure", { asset_type = tostring(p1.assetType) })
-		
-		return
-	end
-end
-
-function t.logRetry(p1)
-	-- upvalues: fFlagEditProfileImageV2Telemetry (ref), sendAXCounterV2 (ref)
-	if fFlagEditProfileImageV2Telemetry then
-		sendAXCounterV2("EditProfileImageRetry", { mode = p1.mode, asset_type = tostring(p1.assetType) })
-		
-		return
-	end
-end
-
-function t.logR15UpgradePromptShown()
-	-- upvalues: sendUnifiedEventLog (ref), unifiedEventLogEnums (ref), unifiedLoggingSurface (ref), sendAXCounterV2 (ref)
-	sendUnifiedEventLog({
-		elementName = "R15_UPGRADE_PROMPT",
-		action = unifiedEventLogEnums.MarketplaceUnifiedAction.UI_ELEMENT_IMPRESSION,
-		surface = unifiedLoggingSurface.EDIT_PROFILE_IMAGE
-	})
-	sendAXCounterV2("EditProfileImageR15UpgradePromptShown")
-end
-
-function t.logR15UpgradePromptInteraction(p1)
-	-- upvalues: sendUnifiedEventLog (ref), unifiedEventLogEnums (ref), unifiedLoggingSurface (ref), t_1 (ref), sendAXCounterV2 (ref)
-	sendUnifiedEventLog({
-		action = unifiedEventLogEnums.MarketplaceUnifiedAction.UI_ELEMENT_CLICK,
-		surface = unifiedLoggingSurface.EDIT_PROFILE_IMAGE,
-		elementName = t_1[p1]
-	})
-	sendAXCounterV2("EditProfileImageR15UpgradePromptInteraction", { action = tostring(p1) })
-end
-
-return t
+}

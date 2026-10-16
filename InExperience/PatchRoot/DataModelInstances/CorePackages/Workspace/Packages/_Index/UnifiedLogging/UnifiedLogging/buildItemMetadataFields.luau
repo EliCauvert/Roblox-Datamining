@@ -1,7 +1,7 @@
-﻿local parent = script:FindFirstAncestor("UnifiedLogging").Parent
-local discoveryEventErrorLogger = require(parent.DiscoveryUtils).DiscoveryEventErrorLogger
-local fFlagUnifiedLoggingCoerceMetadataFieldValues = require(parent.SharedFlags).FFlagUnifiedLoggingCoerceMetadataFieldValues
-local t = {
+﻿local Parent = script:FindFirstAncestor("UnifiedLogging").Parent
+local DiscoveryEventErrorLogger = require(Parent.DiscoveryUtils).DiscoveryEventErrorLogger
+local FFlagUnifiedLoggingCoerceMetadataFieldValues = require(Parent.SharedFlags).FFlagUnifiedLoggingCoerceMetadataFieldValues
+local config = {
 	collectionId = true,
 	collectionPosition = true,
 	contentType = true,
@@ -12,49 +12,48 @@ local t = {
 	totalNumberOfItems = true
 }
 
-local function _(p1)
-	-- upvalues: t (ref)
-	return t[p1]
+local function _(p1) --[[ Line: 20 | Named "shouldIgnoreKey" ]]
+	-- upvalues: config (copy)
+	return config[p1]
 end
 
-return function(p1, p2, p3)
-	-- upvalues: t (ref), fFlagUnifiedLoggingCoerceMetadataFieldValues (ref), discoveryEventErrorLogger (ref)
-	local v_2
-	local t_1 = {}
+return function(EntryIndexes, p1, CollectionId) --[[ Line: 24 | Named "buildItemMetadataFields" ]]
+	-- upvalues: config (copy), FFlagUnifiedLoggingCoerceMetadataFieldValues (copy), DiscoveryEventErrorLogger (copy)
+	local t = {}
 	
-	for i, v in p1 do
-		v_2 = if p2 then p2[v] else nil
+	for i, entryIndex in EntryIndexes do
+		local v1 = p1 and p1[entryIndex] or nil
 		
-		if v_2 == nil then
-			discoveryEventErrorLogger.reportError("buildMetadataFields", "Entry was nil when building item metadataFields for collection", { entryIndex = v, collectionId = p3 })
+		if v1 == nil then
+			DiscoveryEventErrorLogger.reportError("buildMetadataFields", "Entry was nil when building item metadataFields for collection", { entryIndex = entryIndex, collectionId = CollectionId })
 			continue
 		end
-		for i_1, v_1 in v_2 do
-			if not t[i_1] then
-				if t_1[i_1] == nil then
-					t_1[i_1] = {}
+		for i1, value in v1 do
+			if not config[i1] then
+				if t[i1] == nil then
+					t[i1] = {}
 				end
-				local var1 = t_1[i_1]
+				local Entry = t[i1]
 				
-				if fFlagUnifiedLoggingCoerceMetadataFieldValues then
-					var1[i] = tostring(v_1)
+				if FFlagUnifiedLoggingCoerceMetadataFieldValues then
+					Entry[i] = tostring(value)
 				else
-					var1[i] = v_1
+					Entry[i] = value
 				end
 			end
 		end
 	end
-	for i_1, v_1 in t_1 do
-		for i_2 = 1, #p1 do
-			if t_1[i_1][i_2] == nil then
-				t_1[i_1][i_2] = ""
+	for i3, _ in t do
+		for i2 = 1, #EntryIndexes do
+			if t[i3][i2] == nil then
+				t[i3][i2] = ""
 			end
 		end
 	end
-	local t_2 = {}
+	local t1 = {}
 	
-	for i_2, v_2 in t_1 do
-		t_2[`{i_2}_arr`] = table.concat(v_2, ",")
+	for i4, value1 in t do
+		t1[`{i4}_arr`] = table.concat(value1, ",")
 	end
-	return t_2
+	return t1
 end

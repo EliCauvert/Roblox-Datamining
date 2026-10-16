@@ -1,29 +1,31 @@
-﻿local groups = script:FindFirstAncestor("Groups")
-local parent = groups.Parent
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local createGroupsListStoreModule = require(groups.Stores.createGroupsListStore)
-local _ = require(groups.Common.Types)
+﻿local Groups = script:FindFirstAncestor("Groups")
+local Parent = Groups.Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local CreateGroupsListStoreModule = require(Groups.Stores.createGroupsListStore)
+local _ = require(Groups.Common.Types)
 
-return function(p1)
-	-- upvalues: reactModule (ref), createGroupsListStoreModule (ref), signalsReactModule (ref)
-	local var1 = reactModule.useMemo(function()
-		-- upvalues: createGroupsListStoreModule (copy)
-		return createGroupsListStoreModule()
+return function(p1) --[[ Line: 31 | Named "useGroupsListData" ]]
+	-- upvalues: ReactModule (copy), CreateGroupsListStoreModule (copy), SignalsReactModule (copy)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 33 ]]
+		-- upvalues: CreateGroupsListStoreModule (upval)
+		return CreateGroupsListStoreModule()
 	end, {})
-	local var2 = signalsReactModule.useSignalState(var1.getState)
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var1 (ref)
-		if p1 and p1 ~= "" then
-			var1.fetchGroups(p1)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(UseMemoResult.getState)
+	ReactModule.useEffect(function() --[[ Line: 41 ]]
+		-- upvalues: p1 (copy), UseMemoResult (copy)
+		if not p1 or p1 == "" then
+			UseMemoResult.reset()
 			
-			return function()
-				-- upvalues: var1 (copy)
-				var1.reset()
-			end
+			return
 		end
-		var1.reset()
-	end, { var1, p1 })
+		UseMemoResult.fetchGroups(p1)
+		
+		return function() --[[ Line: 49 ]]
+			-- upvalues: UseMemoResult (upval)
+			UseMemoResult.reset()
+		end
+	end, { UseMemoResult, p1 })
 	
-	return var2
+	return UseSignalStateResult
 end

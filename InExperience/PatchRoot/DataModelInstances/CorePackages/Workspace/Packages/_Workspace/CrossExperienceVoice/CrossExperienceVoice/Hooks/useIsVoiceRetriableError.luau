@@ -1,10 +1,10 @@
-﻿local crossExperienceVoice = script:FindFirstAncestor("CrossExperienceVoice")
-local utils = require(crossExperienceVoice.dependencies).CrossExperience.Utils
-local useVoiceStatusModule = require(crossExperienceVoice.Hooks.useVoiceStatus)
+﻿local CrossExperienceVoice = script:FindFirstAncestor("CrossExperienceVoice")
+local Utils = require(CrossExperienceVoice.dependencies).CrossExperience.Utils
+local UseVoiceStatusModule = require(CrossExperienceVoice.Hooks.useVoiceStatus)
 
-return function()
-	-- upvalues: useVoiceStatusModule (ref), utils (ref)
-	local var1 = useVoiceStatusModule()
+return function() --[[ Line: 10 ]]
+	-- upvalues: UseVoiceStatusModule (copy), Utils (copy)
+	local UseVoiceStatusModuleResult = UseVoiceStatusModule()
 	
-	return if var1 == nil then false else utils.VoiceStatus.isVoiceRetriableError(var1)
+	return UseVoiceStatusModuleResult ~= nil and Utils.VoiceStatus.isVoiceRetriableError(UseVoiceStatusModuleResult)
 end

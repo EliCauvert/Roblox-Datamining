@@ -1,27 +1,29 @@
-﻿local socialCarousel = script:FindFirstAncestor("SocialCarousel")
-local parent = socialCarousel.Parent
-local reactModule = require(parent.React)
-local roactAppExperimentModule = require(parent.RoactAppExperiment)
-local getDeepValueModule = require(socialCarousel.Utils.getDeepValue)
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local useSignalState = require(parent.SignalsReact).useSignalState
-local friendsRequestsStore = require(parent.DataHydration.FriendsRequests).FriendsRequestsStore
-local fStringNewFriendRequestsBadgeLayer = require(parent.SharedFlags).FStringNewFriendRequestsBadgeLayer
-local fFlagAddFriendsPageUseSections = require(parent.SharedFlags).FFlagAddFriendsPageUseSections
-local fFlagSocialCarouselEnableNewFriendRequestsBadgeForAllModule = require(socialCarousel.Flags.FFlagSocialCarouselEnableNewFriendRequestsBadgeForAll)
+﻿local SocialCarousel = script:FindFirstAncestor("SocialCarousel")
+local Parent = SocialCarousel.Parent
+local ReactModule = require(Parent.React)
+local RoactAppExperimentModule = require(Parent.RoactAppExperiment)
+local GetDeepValueModule = require(SocialCarousel.Utils.getDeepValue)
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local FriendsRequestsStore = require(Parent.DataHydration.FriendsRequests).FriendsRequestsStore
+local FStringNewFriendRequestsBadgeLayer = require(Parent.SharedFlags).FStringNewFriendRequestsBadgeLayer
+local FFlagAddFriendsPageUseSections = require(Parent.SharedFlags).FFlagAddFriendsPageUseSections
+local FFlagSocialCarouselEnableNewFriendRequestsBadgeForAllModule = require(SocialCarousel.Flags.FFlagSocialCarouselEnableNewFriendRequestsBadgeForAll)
 
-return function()
-	-- upvalues: fFlagSocialCarouselEnableNewFriendRequestsBadgeForAllModule (ref), roactAppExperimentModule (ref), fStringNewFriendRequestsBadgeLayer (ref), fFlagAddFriendsPageUseSections (ref), reactModule (ref), friendsRequestsStore (ref), useSignalState (ref), useSelector (ref), getDeepValueModule (ref)
-	local var1 = if fFlagAddFriendsPageUseSections then useSignalState((if fFlagAddFriendsPageUseSections then reactModule.useMemo(function()
-		-- upvalues: friendsRequestsStore (copy)
-		return friendsRequestsStore.get().getNewFriendsRequestCount()
-	end, {}) else nil).data) or 0 else useSelector(function(p1)
-		-- upvalues: getDeepValueModule (copy)
-		return getDeepValueModule(p1, "FriendsCarousel.Friends.requests.newFriendRequestsCount") or 0
+return function() --[[ Line: 15 ]]
+	-- upvalues: FFlagSocialCarouselEnableNewFriendRequestsBadgeForAllModule (copy), RoactAppExperimentModule (copy), FStringNewFriendRequestsBadgeLayer (copy), FFlagAddFriendsPageUseSections (copy), ReactModule (copy), FriendsRequestsStore (copy), UseSignalStateFunction (copy), UseSelectorFunction (copy), GetDeepValueModule (copy)
+	local UseMemoResult = if FFlagAddFriendsPageUseSections then ReactModule.useMemo(function() --[[ Line: 30 ]]
+		-- upvalues: FriendsRequestsStore (upval)
+		return FriendsRequestsStore.get().getNewFriendsRequestCount()
+	end, {}) else nil
+	local UseSignalStateResult = if FFlagAddFriendsPageUseSections then UseSignalStateFunction(UseMemoResult.data) or 0 else UseSelectorFunction(function(p1) --[[ Line: 37 ]]
+		-- upvalues: GetDeepValueModule (upval)
+		return GetDeepValueModule(p1, "FriendsCarousel.Friends.requests.newFriendRequestsCount") or 0
 	end)
+	local Text = tostring(UseSignalStateResult)
 	
-	return if (if fFlagSocialCarouselEnableNewFriendRequestsBadgeForAllModule then true else roactAppExperimentModule.useUserExperiment({ fStringNewFriendRequestsBadgeLayer }, function(p1)
-		-- upvalues: fStringNewFriendRequestsBadgeLayer (copy)
-		return (p1[fStringNewFriendRequestsBadgeLayer] or {}).showNewFriendRequestsBadge
-	end)) and var1 > 0 then tostring(var1) else nil
+	return if (if FFlagSocialCarouselEnableNewFriendRequestsBadgeForAllModule then true else RoactAppExperimentModule.useUserExperiment({ FStringNewFriendRequestsBadgeLayer }, function(p1) --[[ Line: 23 ]]
+		-- upvalues: FStringNewFriendRequestsBadgeLayer (upval)
+		return (p1[FStringNewFriendRequestsBadgeLayer] or {}).showNewFriendRequestsBadge
+	end)) and UseSignalStateResult > 0 then Text else nil
 end

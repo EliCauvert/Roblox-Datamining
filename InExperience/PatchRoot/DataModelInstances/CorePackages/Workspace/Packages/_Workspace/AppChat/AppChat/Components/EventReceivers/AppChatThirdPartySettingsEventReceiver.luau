@@ -1,23 +1,27 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local reactModule = require(parent.React)
-local responsiveModule = require(parent.Responsive)
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local useProperty = require(parent.GuiObjectUtils).useProperty
-local thirdPartyChatSettingsLoadedModule = require(appChat.Actions.ThirdPartyChatSettingsLoaded)
-local thirdPartyUserService = game:GetService("ThirdPartyUserService")
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local ReactModule = require(Parent.React)
+local ResponsiveModule = require(Parent.Responsive)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UsePropertyFunction = require(Parent.GuiObjectUtils).useProperty
+local ThirdPartyChatSettingsLoadedModule = require(AppChat.Actions.ThirdPartyChatSettingsLoaded)
+local ThirdPartyUserService = game:GetService("ThirdPartyUserService")
 
-return function()
-	-- upvalues: useDispatch (ref), useProperty (ref), thirdPartyUserService (ref), responsiveModule (ref), reactModule (ref), thirdPartyChatSettingsLoadedModule (ref)
-	local var1 = useDispatch()
-	local var2 = useProperty(thirdPartyUserService, "FriendCommunicationRestrictionStatus")
-	local var3 = responsiveModule.usePreferredInput()
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), var2 (ref), var3 (ref), responsiveModule (copy), thirdPartyChatSettingsLoadedModule (copy)
-		if var1 and var2 then
-			var1(thirdPartyChatSettingsLoadedModule(if not (var3 == responsiveModule.Input.Directional or var2 ~= Enum.ChatRestrictionStatus.Unknown) then Enum.ChatRestrictionStatus.NotRestricted else var2))
+return function() --[[ Line: 10 | Named "AppChatThirdPartySettingsEventReceiver" ]]
+	-- upvalues: UseDispatchFunction (copy), UsePropertyFunction (copy), ThirdPartyUserService (copy), ResponsiveModule (copy), ReactModule (copy), ThirdPartyChatSettingsLoadedModule (copy)
+	local UseDispatchResult = UseDispatchFunction()
+	local FriendCommunicationRestrictionStatus = UsePropertyFunction(ThirdPartyUserService, "FriendCommunicationRestrictionStatus")
+	local UsePreferredInputResult = ResponsiveModule.usePreferredInput()
+	ReactModule.useEffect(function() --[[ Line: 14 ]]
+		-- upvalues: UseDispatchResult (copy), FriendCommunicationRestrictionStatus (copy), UsePreferredInputResult (copy), ResponsiveModule (upval), ThirdPartyChatSettingsLoadedModule (upval)
+		if UseDispatchResult and FriendCommunicationRestrictionStatus then
+			UseDispatchResult(ThirdPartyChatSettingsLoadedModule(if UsePreferredInputResult == ResponsiveModule.Input.Directional or FriendCommunicationRestrictionStatus ~= Enum.ChatRestrictionStatus.Unknown then FriendCommunicationRestrictionStatus else Enum.ChatRestrictionStatus.NotRestricted))
 		end
-	end, { var1, var2, var3 })
+	end, {
+		UseDispatchResult,
+		FriendCommunicationRestrictionStatus,
+		UsePreferredInputResult
+	})
 	
 	return nil
 end

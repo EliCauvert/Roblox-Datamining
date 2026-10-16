@@ -1,211 +1,213 @@
-﻿local avatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
-local normalize = require(avatarExperienceCatalog.Parent.AvatarExperienceCommon).Utils.normalize
-local normalizeBoolean = normalize.normalizeBoolean
-local normalizeString = normalize.normalizeString
-local normalizeNumber = normalize.normalizeNumber
-local normalizeStringToBoolean = normalize.normalizeStringToBoolean
-local makeNormalizeTableFn = normalize.makeNormalizeTableFn
-local makeNormalizeListFn = normalize.makeNormalizeListFn
-local makeNormalizeUnionFn = normalize.makeNormalizeUnionFn
-local makeNormalizeValueFn = normalize.makeNormalizeValueFn
-local makeRequired = normalize.makeRequired
-local _ = require(avatarExperienceCatalog.Models.WidgetListInfo)
+﻿local AvatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
+local Normalize = require(AvatarExperienceCatalog.Parent.AvatarExperienceCommon).Utils.normalize
+local NormalizeBoolean = Normalize.normalizeBoolean
+local NormalizeString = Normalize.normalizeString
+local NormalizeNumber = Normalize.normalizeNumber
+local NormalizeStringToBoolean = Normalize.normalizeStringToBoolean
+local MakeNormalizeTableFnFunction = Normalize.makeNormalizeTableFn
+local MakeNormalizeListFnFunction = Normalize.makeNormalizeListFn
+local MakeNormalizeUnionFnFunction = Normalize.makeNormalizeUnionFn
+local MakeNormalizeValueFnFunction = Normalize.makeNormalizeValueFn
+local MakeRequiredFunction = Normalize.makeRequired
+local _ = require(AvatarExperienceCatalog.Models.WidgetListInfo)
 
-local function _(p1)
-	-- upvalues: makeNormalizeTableFn (ref)
-	return makeNormalizeTableFn({
-		default = p1,
-		xSmall = p1,
-		small = p1,
-		medium = p1,
-		large = p1,
-		xLarge = p1,
-		x2Large = p1,
-		landscape = p1,
-		portrait = p1
+local function _(Default) --[[ Line: 27 | Named "makeNormalizeResponsiveValueFn" ]]
+	-- upvalues: MakeNormalizeTableFnFunction (copy)
+	return MakeNormalizeTableFnFunction({
+		default = Default,
+		xSmall = Default,
+		small = Default,
+		medium = Default,
+		large = Default,
+		xLarge = Default,
+		x2Large = Default,
+		landscape = Default,
+		portrait = Default
 	})
 end
 
-local _ = function(p1)
-	-- upvalues: makeNormalizeTableFn (ref)
-	return makeNormalizeTableFn({ default = p1, light = p1, dark = p1 })
+local _ = function(Dark) --[[ Line: 41 | Named "makeNormalizedThemeValueFn" ]]
+	-- upvalues: MakeNormalizeTableFnFunction (copy)
+	return MakeNormalizeTableFnFunction({ default = Dark, light = Dark, dark = Dark })
 end
 
-local var1 = makeNormalizeTableFn({
-	default = normalizeNumber,
-	xSmall = normalizeNumber,
-	small = normalizeNumber,
-	medium = normalizeNumber,
-	large = normalizeNumber,
-	xLarge = normalizeNumber,
-	x2Large = normalizeNumber,
-	landscape = normalizeNumber,
-	portrait = normalizeNumber
+local NormalizeTableFn = MakeNormalizeTableFnFunction({
+	default = NormalizeNumber,
+	xSmall = NormalizeNumber,
+	small = NormalizeNumber,
+	medium = NormalizeNumber,
+	large = NormalizeNumber,
+	xLarge = NormalizeNumber,
+	x2Large = NormalizeNumber,
+	landscape = NormalizeNumber,
+	portrait = NormalizeNumber
 })
-local var2 = makeNormalizeTableFn({
-	r = makeRequired(normalizeNumber),
-	g = makeRequired(normalizeNumber),
-	b = makeRequired(normalizeNumber)
+local NormalizeTableFn1 = MakeNormalizeTableFnFunction({
+	r = MakeRequiredFunction(NormalizeNumber),
+	g = MakeRequiredFunction(NormalizeNumber),
+	b = MakeRequiredFunction(NormalizeNumber)
 })
-local var3 = makeNormalizeTableFn({
-	x = makeRequired(normalizeNumber),
-	y = makeRequired(normalizeNumber)
+local NormalizeTableFn2 = MakeNormalizeTableFnFunction({
+	x = MakeRequiredFunction(NormalizeNumber),
+	y = MakeRequiredFunction(NormalizeNumber)
 })
-local var4 = makeNormalizeTableFn({
-	default = var3,
-	xSmall = var3,
-	small = var3,
-	medium = var3,
-	large = var3,
-	xLarge = var3,
-	x2Large = var3,
-	landscape = var3,
-	portrait = var3
+local NormalizeTableFn3 = MakeNormalizeTableFnFunction({
+	default = NormalizeTableFn2,
+	xSmall = NormalizeTableFn2,
+	small = NormalizeTableFn2,
+	medium = NormalizeTableFn2,
+	large = NormalizeTableFn2,
+	xLarge = NormalizeTableFn2,
+	x2Large = NormalizeTableFn2,
+	landscape = NormalizeTableFn2,
+	portrait = NormalizeTableFn2
 })
-local var5 = makeNormalizeListFn(makeNormalizeUnionFn({
-	makeNormalizeTableFn({
-		type = makeRequired(makeNormalizeValueFn({ "ImageBackground" })),
-		color = var2,
-		resourceIdentifier = makeNormalizeTableFn({
-			default = normalizeString,
-			xSmall = normalizeString,
-			small = normalizeString,
-			medium = normalizeString,
-			large = normalizeString,
-			xLarge = normalizeString,
-			x2Large = normalizeString,
-			landscape = normalizeString,
-			portrait = normalizeString
+local NormalizeListFn = MakeNormalizeListFnFunction((MakeNormalizeUnionFnFunction({
+	MakeNormalizeTableFnFunction({
+		type = MakeRequiredFunction(MakeNormalizeValueFnFunction({ "ImageBackground" })),
+		color = NormalizeTableFn1,
+		resourceIdentifier = MakeNormalizeTableFnFunction({
+			default = NormalizeString,
+			xSmall = NormalizeString,
+			small = NormalizeString,
+			medium = NormalizeString,
+			large = NormalizeString,
+			xLarge = NormalizeString,
+			x2Large = NormalizeString,
+			landscape = NormalizeString,
+			portrait = NormalizeString
 		}),
-		anchorPoint = var4,
-		position = var4,
-		transparency = var1
+		anchorPoint = NormalizeTableFn3,
+		position = NormalizeTableFn3,
+		transparency = NormalizeTableFn
 	}),
-	makeNormalizeTableFn({
-		type = makeRequired(makeNormalizeValueFn({ "GradientBackground" })),
-		colorSequence = makeRequired(makeNormalizeListFn(makeNormalizeTableFn({
-			time = makeRequired(normalizeNumber),
-			color = makeRequired(var2)
-		}))),
-		rotation = normalizeNumber,
-		transparency = makeNormalizeUnionFn({
-			normalizeNumber,
-			makeNormalizeListFn(makeNormalizeTableFn({
-				time = makeRequired(normalizeNumber),
-				number = makeRequired(normalizeNumber)
-			}))
+	(MakeNormalizeTableFnFunction({
+		type = MakeRequiredFunction(MakeNormalizeValueFnFunction({ "GradientBackground" })),
+		colorSequence = MakeRequiredFunction(MakeNormalizeListFnFunction((MakeNormalizeTableFnFunction({
+			time = MakeRequiredFunction(NormalizeNumber),
+			color = MakeRequiredFunction(NormalizeTableFn1)
+		})))),
+		rotation = NormalizeNumber,
+		transparency = MakeNormalizeUnionFnFunction({
+			NormalizeNumber,
+			MakeNormalizeListFnFunction((MakeNormalizeTableFnFunction({
+				time = MakeRequiredFunction(NormalizeNumber),
+				number = MakeRequiredFunction(NormalizeNumber)
+			})))
 		}),
-		offset = var3
-	})
-}))
-local var6 = makeNormalizeTableFn({ default = var5, light = var5, dark = var5 })
-local var7 = makeNormalizeTableFn({ backgroundLayers = var6 })
-local var8 = makeNormalizeTableFn({
-	backgroundLayers = var6,
-	thumbnailAspectRatio = makeNormalizeUnionFn({
-		makeNormalizeValueFn({ "Wide", "Tall", "Square" }),
-		function(p1)
+		offset = NormalizeTableFn2
+	}))
+})))
+local NormalizeTableFn4 = MakeNormalizeTableFnFunction({
+	default = NormalizeListFn,
+	light = NormalizeListFn,
+	dark = NormalizeListFn
+})
+local NormalizeTableFn5 = MakeNormalizeTableFnFunction({ backgroundLayers = NormalizeTableFn4 })
+local NormalizeTableFn6 = MakeNormalizeTableFnFunction({
+	backgroundLayers = NormalizeTableFn4,
+	thumbnailAspectRatio = MakeNormalizeUnionFnFunction({
+		MakeNormalizeValueFnFunction({ "Wide", "Tall", "Square" }),
+		function(p1) --[[ Line: 102 ]]
 			return if p1 then tonumber(p1) else nil
 		end
 	})
 })
-local var9 = makeNormalizeListFn(makeNormalizeTableFn({
-	contentType = makeNormalizeValueFn({ "ItemName", "AgentName", "Price", "PriceRange" })
-}))
-local var10 = makeNormalizeTableFn({
-	continueBrowsingTitle = normalizeString,
-	shouldUseDefaultTemplatesAcrossTabs = normalizeString,
-	creatorNameTileFooterEnabled = normalizeString,
-	hydrateOnlyVisibleItems = normalizeStringToBoolean,
-	disableOrganicContentFetch = normalizeStringToBoolean
+local NormalizeListFn1 = MakeNormalizeListFnFunction((MakeNormalizeTableFnFunction({
+	contentType = MakeNormalizeValueFnFunction({ "ItemName", "AgentName", "Price", "PriceRange" })
+})))
+local NormalizeTableFn7 = MakeNormalizeTableFnFunction({
+	continueBrowsingTitle = NormalizeString,
+	shouldUseDefaultTemplatesAcrossTabs = NormalizeString,
+	creatorNameTileFooterEnabled = NormalizeString,
+	hydrateOnlyVisibleItems = NormalizeStringToBoolean,
+	disableOrganicContentFetch = NormalizeStringToBoolean
 })
-local var11 = makeNormalizeTableFn({
-	type = makeRequired(makeNormalizeValueFn({ "Carousel" })),
-	numItemsToShow = normalizeNumber,
-	seeAllButton = normalizeBoolean,
-	title = normalizeString,
-	localizedTitle = normalizeString,
-	description = normalizeString,
-	localizedDescription = normalizeString,
-	widgetStyle = var7,
-	cardStyle = var8,
-	itemFooters = var9,
-	previewRows = var1,
-	previewColumns = var1
+local NormalizeTableFn8 = MakeNormalizeTableFnFunction({
+	type = MakeRequiredFunction(MakeNormalizeValueFnFunction({ "Carousel" })),
+	numItemsToShow = NormalizeNumber,
+	seeAllButton = NormalizeBoolean,
+	title = NormalizeString,
+	localizedTitle = NormalizeString,
+	description = NormalizeString,
+	localizedDescription = NormalizeString,
+	widgetStyle = NormalizeTableFn5,
+	cardStyle = NormalizeTableFn6,
+	itemFooters = NormalizeListFn1,
+	previewRows = NormalizeTableFn,
+	previewColumns = NormalizeTableFn
 })
-local var12 = makeNormalizeTableFn({
-	type = makeRequired(makeNormalizeValueFn({ "ItemGroup" })),
-	seeAllButton = normalizeBoolean,
-	title = normalizeString,
-	localizedTitle = normalizeString,
-	description = normalizeString,
-	localizedDescription = normalizeString,
-	widgetStyle = var7,
-	cardStyle = var8,
-	itemFooters = var9,
-	previewRows = var1,
-	previewColumns = var1
+local NormalizeTableFn9 = MakeNormalizeTableFnFunction({
+	type = MakeRequiredFunction(MakeNormalizeValueFnFunction({ "ItemGroup" })),
+	seeAllButton = NormalizeBoolean,
+	title = NormalizeString,
+	localizedTitle = NormalizeString,
+	description = NormalizeString,
+	localizedDescription = NormalizeString,
+	widgetStyle = NormalizeTableFn5,
+	cardStyle = NormalizeTableFn6,
+	itemFooters = NormalizeListFn1,
+	previewRows = NormalizeTableFn,
+	previewColumns = NormalizeTableFn
 })
-local var13 = makeNormalizeTableFn({
-	id = makeRequired(normalizeString),
-	type = makeRequired(normalizeString),
-	content = makeRequired(makeNormalizeListFn(makeNormalizeUnionFn({
-		makeNormalizeTableFn({
-			id = makeRequired(normalizeNumber),
-			type = makeRequired(makeNormalizeValueFn({ "Bundle" }))
+local NormalizeTableFn10 = MakeNormalizeTableFnFunction({
+	type = MakeRequiredFunction(MakeNormalizeValueFnFunction({ "HeroUnit" })),
+	numItemsToShow = NormalizeNumber,
+	seeAllButton = NormalizeBoolean,
+	title = NormalizeString,
+	localizedTitle = NormalizeString,
+	description = NormalizeString,
+	localizedDescription = NormalizeString,
+	widgetStyle = NormalizeTableFn5,
+	cardStyle = NormalizeTableFn6,
+	itemFooters = NormalizeListFn1,
+	previewRows = NormalizeTableFn,
+	previewColumns = NormalizeTableFn,
+	availableUntil = NormalizeString
+})
+local NormalizeTableFn11 = MakeNormalizeTableFnFunction({
+	customizedDataMap = NormalizeTableFn7,
+	defaultItemCarouselTemplate = NormalizeTableFn8,
+	defaultItemGroupTemplate = NormalizeTableFn9,
+	defaultTemplate = NormalizeTableFn9
+})
+local NormalizeTableFn111 = MakeNormalizeTableFnFunction({
+	id = MakeRequiredFunction(NormalizeString),
+	type = MakeRequiredFunction(NormalizeString),
+	content = MakeRequiredFunction((MakeNormalizeListFnFunction(MakeNormalizeUnionFnFunction({
+		MakeNormalizeTableFnFunction({
+			id = MakeRequiredFunction(NormalizeNumber),
+			type = MakeRequiredFunction(MakeNormalizeValueFnFunction({ "Bundle" }))
 		}),
-		makeNormalizeTableFn({
-			id = makeRequired(normalizeNumber),
-			type = makeRequired(makeNormalizeValueFn({ "Asset" }))
+		MakeNormalizeTableFnFunction({
+			id = MakeRequiredFunction(NormalizeNumber),
+			type = MakeRequiredFunction(MakeNormalizeValueFnFunction({ "Asset" }))
 		}),
-		makeNormalizeTableFn({
-			id = makeRequired(normalizeString),
-			type = makeRequired(makeNormalizeValueFn({ "Look" })),
-			displayProperties = makeNormalizeTableFn({ animatedAvatarEmoteAssetIds = normalizeString })
-		})
-	}))),
-	template = makeRequired(makeNormalizeUnionFn({
-		var12,
-		var11,
-		makeNormalizeTableFn({
-			type = makeRequired(makeNormalizeValueFn({ "HeroUnit" })),
-			numItemsToShow = normalizeNumber,
-			seeAllButton = normalizeBoolean,
-			title = normalizeString,
-			localizedTitle = normalizeString,
-			description = normalizeString,
-			localizedDescription = normalizeString,
-			widgetStyle = var7,
-			cardStyle = var8,
-			itemFooters = var9,
-			previewRows = var1,
-			previewColumns = var1,
-			availableUntil = normalizeString
-		})
-	})),
-	tagId = normalizeString
+		(MakeNormalizeTableFnFunction({
+			id = MakeRequiredFunction(NormalizeString),
+			type = MakeRequiredFunction(MakeNormalizeValueFnFunction({ "Look" })),
+			displayProperties = MakeNormalizeTableFnFunction({ animatedAvatarEmoteAssetIds = NormalizeString })
+		}))
+	})))),
+	template = MakeRequiredFunction(MakeNormalizeUnionFnFunction({ NormalizeTableFn9, NormalizeTableFn8, NormalizeTableFn10 })),
+	tagId = NormalizeString
 })
 
-return makeNormalizeTableFn({
-	configuration = makeNormalizeTableFn({
-		customizedDataMap = var10,
-		defaultItemCarouselTemplate = var11,
-		defaultItemGroupTemplate = var12,
-		defaultTemplate = var12
-	}),
-	widgets = function(p1)
-		-- upvalues: var13 (ref)
-		if typeof(p1) ~= "table" then
+return (MakeNormalizeTableFnFunction({
+	configuration = NormalizeTableFn11,
+	widgets = function(List) --[[ Line: 215 ]]
+		-- upvalues: NormalizeTableFn111 (copy)
+		if typeof(List) ~= "table" then
 			return nil, nil
 		end
 		local t = {}
-		local t_1 = {}
+		local List1 = {}
 		
-		for i, v in p1 do
-			local var14, var15 = var13(v)
-			table.insert(t_1, var15)
-			t[tostring(tonumber(i) + 1)] = var14
+		for i, value in List do
+			local NormalizeTableFnResult, NormalizeTableFnResult2 = NormalizeTableFn111(value)
+			table.insert(List1, NormalizeTableFnResult2)
+			t[tostring(tonumber(i) + 1)] = NormalizeTableFnResult
 		end
-		return t, if next(t_1) then table.concat(t_1, " ") else nil
+		return t, if next(List1) then table.concat(List1, " ") else nil
 	end
-})
+}))

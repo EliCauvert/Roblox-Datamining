@@ -1,84 +1,86 @@
-﻿local authCommon = script:FindFirstAncestor("AuthCommon")
-local parent = authCommon.Parent
-local guiService = game:GetService("GuiService")
-local notificationType = require(parent.RobloxAppEnums).NotificationType
-local promiseModule = require(parent.Promise)
-local experienceService = require(parent.ExperienceService).ExperienceService
-local gameParams = require(parent.ExperienceService).GameParams
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagEnableLuaAccountSwitch = sharedFlagsModule.FFlagEnableLuaAccountSwitch
-local fFlagLuaEnableLoginAndSignupDifferentiatedStatusValues = sharedFlagsModule.FFlagLuaEnableLoginAndSignupDifferentiatedStatusValues
-local appStorageUtilitiesModule = require(authCommon.Utils.AppStorageUtilities)
-local userModule = require(authCommon.Thunks.User)
-local accountSwitcherConstantsModule = require(authCommon.Common.AccountSwitcherConstants)
-local redeemAuthenticationTicketModule = require(authCommon.Http.Requests.RedeemAuthenticationTicket)
+﻿local AuthCommon = script:FindFirstAncestor("AuthCommon")
+local Parent = AuthCommon.Parent
+local GuiService = game:GetService("GuiService")
+local NotificationType = require(Parent.RobloxAppEnums).NotificationType
+local PromiseModule = require(Parent.Promise)
+local ExperienceService = require(Parent.ExperienceService).ExperienceService
+local GameParams = require(Parent.ExperienceService).GameParams
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagEnableLuaAccountSwitch = SharedFlagsModule.FFlagEnableLuaAccountSwitch
+local FFlagLuaEnableLoginAndSignupDifferentiatedStatusValues = SharedFlagsModule.FFlagLuaEnableLoginAndSignupDifferentiatedStatusValues
+local AppStorageUtilitiesModule = require(AuthCommon.Utils.AppStorageUtilities)
+local UserModule = require(AuthCommon.Thunks.User)
+local AccountSwitcherConstantsModule = require(AuthCommon.Common.AccountSwitcherConstants)
+local RedeemAuthenticationTicketModule = require(AuthCommon.Http.Requests.RedeemAuthenticationTicket)
 
-local function _(p1)
-	local var1 = tonumber(p1)
+local function _(p1) --[[ Line: 21 | Named "castStringToInferredType" ]]
+	local Number: number? = tonumber(p1)
 	
-	return var1 or (p1 == "true" or (if p1 == "false" then false else p1))
+	return if Number then Number else p1 == "true" or p1 ~= "false" and p1
 end
 
-local function parsePlaceLauncherUrl(p1)
-	if not p1 or p1 == "" then
+local function parsePlaceLauncherUrl(Text: string) --[[ Line: 40 ]]
+	if not Text or Text == "" then
 		return {}
 	end
-	local var1 = p1:gsub("%%(%x%x)", function(p2)
-		return string.char(tonumber(p2, 16))
+	local XX: string = Text:gsub("%%(%x%x)", function(p1): string --[[ Line: 46 ]]
+		return (string.char((tonumber(p1, 16))))
 	end)
 	local t = {}
-	local _, matchIndex = string.find(var1, "?")
+	local _, EndIndex = string.find(XX, "?")
 	
-	if not matchIndex then
+	if not EndIndex then
 		return t
 	end
-	for i in string.gmatch(string.sub(var1, matchIndex + 1), "[^&]+") do
-		local match, match_1 = string.match(i, "([^=]+)=?(.*)")
+	for i in string.gmatch(string.sub(XX, EndIndex + 1), "[^&]+") do
+		local Match, Match2 = string.match(i, "([^=]+)=?(.*)")
 		
-		if match then
-			t[match] = match_1
+		if Match then
+			t[Match] = Match2
 		end
 	end
 	return t
 end
 
-return function(p2, p3, p4, p5, p6)
-	-- upvalues: redeemAuthenticationTicketModule (ref), parsePlaceLauncherUrl (ref), gameParams (ref), appStorageUtilitiesModule (ref), userModule (ref), fFlagEnableLuaAccountSwitch (ref), promiseModule (ref), fFlagLuaEnableLoginAndSignupDifferentiatedStatusValues (ref), accountSwitcherConstantsModule (ref), guiService (ref), notificationType (ref), experienceService (ref)
-	return redeemAuthenticationTicketModule(p2, p3):andThen(function(p7)
-		-- upvalues: parsePlaceLauncherUrl (copy), p4 (ref), gameParams (copy), appStorageUtilitiesModule (copy), userModule (copy), fFlagEnableLuaAccountSwitch (copy), promiseModule (copy), p6 (ref), fFlagLuaEnableLoginAndSignupDifferentiatedStatusValues (copy), accountSwitcherConstantsModule (copy), guiService (copy), notificationType (copy), p5 (ref), experienceService (copy)
-		local var2 = parsePlaceLauncherUrl(p4)
-		local var3 = tonumber(var2.placeId)
+return function(p1, p2, p3, Callback, Callback1) --[[ Line: 71 ]]
+	-- upvalues: RedeemAuthenticationTicketModule (copy), parsePlaceLauncherUrl (copy), GameParams (copy), AppStorageUtilitiesModule (copy), UserModule (copy), FFlagEnableLuaAccountSwitch (copy), PromiseModule (copy), FFlagLuaEnableLoginAndSignupDifferentiatedStatusValues (copy), AccountSwitcherConstantsModule (copy), GuiService (copy), NotificationType (copy), ExperienceService (copy)
+	return (RedeemAuthenticationTicketModule(p1, p2):andThen(function(Result) --[[ Line: 73 ]]
+		-- upvalues: parsePlaceLauncherUrl (upval), p3 (copy), GameParams (upval), AppStorageUtilitiesModule (upval), UserModule (upval), FFlagEnableLuaAccountSwitch (upval), PromiseModule (upval), Callback1 (copy), FFlagLuaEnableLoginAndSignupDifferentiatedStatusValues (upval), AccountSwitcherConstantsModule (upval), GuiService (upval), NotificationType (upval), Callback (copy), ExperienceService (upval)
+		local ParsePlaceLauncherUrlResult = parsePlaceLauncherUrl(p3)
+		local Number: number? = tonumber(ParsePlaceLauncherUrlResult.placeId)
 		
-		if var3 then
-			local var4 = gameParams.fromPlaceId(var3)
+		if Number then
+			local FromPlaceIdResult = GameParams.fromPlaceId(Number)
 			
-			for i, v in pairs(var2) do
+			for i, value in pairs(ParsePlaceLauncherUrlResult) do
 				if i ~= "placeId" then
-					local var5 = tonumber(v)
-					var4[i] = var5 or (v == "true" or (if v == "false" then false else v))
+					local Number1: number? = tonumber(value)
+					FromPlaceIdResult[i] = if Number1 then Number1 else value == "true" or value ~= "false" and value
 				end
 			end
-			if fFlagEnableLuaAccountSwitch and (userModule.fromLocalStorage().userId ~= -1 or appStorageUtilitiesModule.getAccountBlob() ~= "") then
-				promiseModule.resolve(p6()):andThen(function()
-					-- upvalues: fFlagLuaEnableLoginAndSignupDifferentiatedStatusValues (copy), accountSwitcherConstantsModule (copy), appStorageUtilitiesModule (copy), p7 (ref), var2 (ref), guiService (copy), notificationType (copy)
-					appStorageUtilitiesModule.setAccountSwitchStatus(if fFlagLuaEnableLoginAndSignupDifferentiatedStatusValues then accountSwitcherConstantsModule.AccountSwitcherSwitchedFromLoginStatus else accountSwitcherConstantsModule.AccountSwitcherSwitchedStatus)
-					appStorageUtilitiesModule.setAccountBlob(p7.responseBody.accountBlob)
-					appStorageUtilitiesModule.setAccountSwitchStartupQueryParams(var2)
-					appStorageUtilitiesModule.flush()
-					guiService:BroadcastNotification("", notificationType.DID_SWITCH_ACCOUNT)
-				end, function(p8)
-					print("error: ", p8)
-				end)
-			else
-				return promiseModule.resolve(p5()):andThen(function()
-					-- upvalues: experienceService (copy), var4 (ref)
-					experienceService:LaunchExperience(var4, "AuthTicket", nil)
+			local AccountBlob = AppStorageUtilitiesModule.getAccountBlob()
+			local IsNotUserIdMatch = UserModule.fromLocalStorage().userId ~= -1
+			
+			if not FFlagEnableLuaAccountSwitch or not IsNotUserIdMatch and AccountBlob == "" then
+				return PromiseModule.resolve(Callback()):andThen(function() --[[ Line: 104 ]]
+					-- upvalues: ExperienceService (upval), FromPlaceIdResult (copy)
+					ExperienceService:LaunchExperience(FromPlaceIdResult, "AuthTicket", nil)
 				end)
 			end
+			PromiseModule.resolve(Callback1()):andThen(function() --[[ Line: 90 ]]
+				-- upvalues: FFlagLuaEnableLoginAndSignupDifferentiatedStatusValues (upval), AccountSwitcherConstantsModule (upval), AppStorageUtilitiesModule (upval), Result (copy), ParsePlaceLauncherUrlResult (copy), GuiService (upval), NotificationType (upval)
+				AppStorageUtilitiesModule.setAccountSwitchStatus(if FFlagLuaEnableLoginAndSignupDifferentiatedStatusValues then AccountSwitcherConstantsModule.AccountSwitcherSwitchedFromLoginStatus else AccountSwitcherConstantsModule.AccountSwitcherSwitchedStatus)
+				AppStorageUtilitiesModule.setAccountBlob(Result.responseBody.accountBlob)
+				AppStorageUtilitiesModule.setAccountSwitchStartupQueryParams(ParsePlaceLauncherUrlResult)
+				AppStorageUtilitiesModule.flush()
+				GuiService:BroadcastNotification("", NotificationType.DID_SWITCH_ACCOUNT)
+			end, function(p4) --[[ Line: 100 ]]
+				print("error: ", p4)
+			end)
 		end
-		return promiseModule.resolve()
-	end, function(p8)
-		-- upvalues: promiseModule (copy)
-		return promiseModule.reject(p8)
-	end)
+		return PromiseModule.resolve()
+	end, function(p4) --[[ Line: 111 ]]
+		-- upvalues: PromiseModule (upval)
+		return PromiseModule.reject(p4)
+	end))
 end

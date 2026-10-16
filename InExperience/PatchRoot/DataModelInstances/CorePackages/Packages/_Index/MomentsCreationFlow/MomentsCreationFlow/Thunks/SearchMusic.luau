@@ -1,66 +1,67 @@
-﻿local momentsCreationFlow = script:FindFirstAncestor("MomentsCreationFlow")
-local parent = momentsCreationFlow.Parent
-local assetService = game:GetService("AssetService")
-local dashModule = require(parent.Dash)
-local _ = require(parent.MomentsCommon)
-local creationFlowMusicInfoRetrievedModule = require(momentsCreationFlow.Actions.CreationFlowMusicInfoRetrieved)
-local musicSearchRetrievedModule = require(momentsCreationFlow.Actions.MusicSearchRetrieved)
-local constantsModule = require(momentsCreationFlow.Constants)
+﻿local MomentsCreationFlow = script:FindFirstAncestor("MomentsCreationFlow")
+local Parent = MomentsCreationFlow.Parent
+local AssetService = game:GetService("AssetService")
+local DashModule = require(Parent.Dash)
+local _ = require(Parent.MomentsCommon)
+local CreationFlowMusicInfoRetrievedModule = require(MomentsCreationFlow.Actions.CreationFlowMusicInfoRetrieved)
+local MusicSearchRetrievedModule = require(MomentsCreationFlow.Actions.MusicSearchRetrieved)
+local ConstantsModule = require(MomentsCreationFlow.Constants)
 
-local function filterCreator(p1)
-	-- upvalues: dashModule (ref), constantsModule (ref)
-	return not dashModule.includes(constantsModule.SearchMusicCreatorFilter, p1.Creator.Id)
+local function filterCreator(p1): boolean --[[ Line: 18 ]]
+	-- upvalues: DashModule (copy), ConstantsModule (copy)
+	return not DashModule.includes(ConstantsModule.SearchMusicCreatorFilter, p1.Creator.Id)
 end
 
-local function filterRecordingCode(p1)
+local function filterRecordingCode(p1): boolean --[[ Line: 22 ]]
 	return p1.RecordingCode ~= nil
 end
 
-local function formatMusic(p1)
+local function formatMusic(FilterResult) --[[ Line: 26 ]]
 	local t = {}
 	
-	for i, v in ipairs(p1) do
-		if v.Id ~= nil then
-			t[v.Id] = {
-				Artist = v.Artist,
-				AssetId = v.Id,
-				AudioType = v.AudioType,
-				Duration = v.Duration,
-				RecordingCode = v.RecordingCode,
-				Title = v.Title
+	for _, value in ipairs(FilterResult) do
+		if value.Id ~= nil then
+			t[value.Id] = {
+				Artist = value.Artist,
+				AssetId = value.Id,
+				AudioType = value.AudioType,
+				Duration = value.Duration,
+				RecordingCode = value.RecordingCode,
+				Title = value.Title
 			}
 		end
 	end
 	return t
 end
 
-return function(p2, p3)
-	-- upvalues: assetService (ref), dashModule (ref), filterCreator (ref), filterRecordingCode (ref), creationFlowMusicInfoRetrievedModule (ref), formatMusic (ref), musicSearchRetrievedModule (ref)
-	return function(p4)
-		-- upvalues: p2 (ref), p3 (ref), assetService (copy), dashModule (copy), filterCreator (copy), filterRecordingCode (copy), creationFlowMusicInfoRetrievedModule (copy), formatMusic (copy), musicSearchRetrievedModule (copy)
-		local audioSearchParams = Instance.new("AudioSearchParams")
-		audioSearchParams.SearchKeyword = p2
-		audioSearchParams.AudioSubType = Enum.AudioSubType.Music
-		audioSearchParams.MinDuration = p3 or 30
-		task.spawn(function()
-			-- upvalues: assetService (copy), audioSearchParams (ref), dashModule (copy), filterCreator (copy), filterRecordingCode (copy), p4 (ref), creationFlowMusicInfoRetrievedModule (copy), formatMusic (copy), musicSearchRetrievedModule (copy)
-			local ok, status = pcall(function()
-				-- upvalues: assetService (copy), audioSearchParams (copy)
-				return assetService:SearchAudio(audioSearchParams)
+return function(SearchKeyword, p1) --[[ Line: 45 | Named "SearchMusic" ]]
+	-- upvalues: AssetService (copy), DashModule (copy), filterCreator (copy), filterRecordingCode (copy), CreationFlowMusicInfoRetrievedModule (copy), formatMusic (copy), MusicSearchRetrievedModule (copy)
+	return function(p2) --[[ Line: 46 ]]
+		-- upvalues: SearchKeyword (copy), p1 (copy), AssetService (upval), DashModule (upval), filterCreator (upval), filterRecordingCode (upval), CreationFlowMusicInfoRetrievedModule (upval), formatMusic (upval), MusicSearchRetrievedModule (upval)
+		local AudioSearchParams = Instance.new("AudioSearchParams")
+		AudioSearchParams.SearchKeyword = SearchKeyword
+		AudioSearchParams.AudioSubType = Enum.AudioSubType.Music
+		AudioSearchParams.MinDuration = p1 or 30
+		task.spawn(function() --[[ Line: 52 ]]
+			-- upvalues: AssetService (upval), AudioSearchParams (copy), DashModule (upval), filterCreator (upval), filterRecordingCode (upval), p2 (copy), CreationFlowMusicInfoRetrievedModule (upval), formatMusic (upval), MusicSearchRetrievedModule (upval)
+			local Success, Result = pcall(function() --[[ Line: 53 ]]
+				-- upvalues: AssetService (upval), AudioSearchParams (upval)
+				return AssetService:SearchAudio(AudioSearchParams)
 			end)
 			
-			if ok then
-				local var1 = dashModule.filter(assetService:GetAudioMetadataAsync(dashModule.map(dashModule.filter(status:GetCurrentPage(), filterCreator), function(p5)
-					return p5.Id
-				end)), filterRecordingCode)
-				p4:dispatch(creationFlowMusicInfoRetrievedModule(formatMusic(var1)))
-				p4:dispatch(musicSearchRetrievedModule(dashModule.map(var1, function(p5)
-					return tonumber(p5.AssetId)
+			if Success then
+				local FilterResult = DashModule.filter(AssetService:GetAudioMetadataAsync((DashModule.map(DashModule.filter(Result:GetCurrentPage(), filterCreator), function(p3) --[[ Line: 65 ]]
+					return p3.Id
+				end))), filterRecordingCode)
+				p2:dispatch(CreationFlowMusicInfoRetrievedModule((formatMusic(FilterResult))))
+				p2:dispatch(MusicSearchRetrievedModule(DashModule.map(FilterResult, function(p3): number --[[ Line: 72 ]]
+					return (tonumber(p3.AssetId))
 				end)))
 				
 				return
+			else
+				warn("Failed to retrieve musics: " .. Result)
 			end
-			warn("Failed to retrieve musics: " .. status)
 		end)
 	end
 end

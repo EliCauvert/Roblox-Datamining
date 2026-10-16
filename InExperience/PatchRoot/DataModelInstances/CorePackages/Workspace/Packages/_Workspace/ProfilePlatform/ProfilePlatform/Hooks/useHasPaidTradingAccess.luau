@@ -1,22 +1,29 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local useIsRobloxSubscriber = require(parent.UserProfiles).Hooks.useIsRobloxSubscriber
-local fFlagEnableBlackbirdCheck = require(parent.SharedFlags).FFlagEnableBlackbirdCheck
-local enumsModule = require(profilePlatform.Common.Enums)
-local useProfileJsonComponentModule = require(profilePlatform.Hooks.useProfileJsonComponent)
-local useProfileWrapperContextModule = require(profilePlatform.Contexts.useProfileWrapperContext)
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local UseIsRobloxSubscriberFunction = require(Parent.UserProfiles).Hooks.useIsRobloxSubscriber
+local FFlagEnableBlackbirdCheck = require(Parent.SharedFlags).FFlagEnableBlackbirdCheck
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local UseProfileJsonComponentModule = require(ProfilePlatform.Hooks.useProfileJsonComponent)
+local UseProfileWrapperContextModule = require(ProfilePlatform.Contexts.useProfileWrapperContext)
 
-return function(p1)
-	-- upvalues: useIsRobloxSubscriber (ref), useSelector (ref), useProfileWrapperContextModule (ref), useProfileJsonComponentModule (ref), enumsModule (ref), fFlagEnableBlackbirdCheck (ref)
-	return useSelector(function(p2)
-		-- upvalues: p1 (ref)
-		if not p1 then
+return function(p1) --[[ Line: 15 | Named "useHasPaidTradingAccess" ]]
+	-- upvalues: UseIsRobloxSubscriberFunction (copy), UseSelectorFunction (copy), UseProfileWrapperContextModule (copy), UseProfileJsonComponentModule (copy), EnumsModule (copy), FFlagEnableBlackbirdCheck (copy)
+	local UseIsRobloxSubscriberResult = UseIsRobloxSubscriberFunction(p1)
+	local UseSelectorResult = UseSelectorFunction(function(p2): boolean --[[ Line: 17 ]]
+		-- upvalues: p1 (copy)
+		if p1 then
+			local Users = p2.Users
+			local User = Users and Users[p1]
+			
+			return if User then User.membership == Enum.MembershipType.Premium else false
+		else
 			return false
 		end
-		local users = p2.Users
-		local var1 = users and users[p1]
-		
-		return if var1 then var1.membership == Enum.MembershipType.Premium else false
-	end) or ((tostring(useProfileWrapperContextModule().profileId) == tostring(p1) and useProfileJsonComponentModule(enumsModule.Components.UserProfileHeader).isPremium == true) or fFlagEnableBlackbirdCheck and useIsRobloxSubscriber(p1))
+	end)
+	local UseProfileWrapperContextModuleResult = UseProfileWrapperContextModule()
+	local UseProfileJsonComponentModuleResult = UseProfileJsonComponentModule(EnumsModule.Components.UserProfileHeader)
+	local IsIsPremium: boolean = tostring(UseProfileWrapperContextModuleResult.profileId) == tostring(p1) and UseProfileJsonComponentModuleResult.isPremium == true
+	
+	return UseSelectorResult or (IsIsPremium or FFlagEnableBlackbirdCheck and UseIsRobloxSubscriberResult)
 end

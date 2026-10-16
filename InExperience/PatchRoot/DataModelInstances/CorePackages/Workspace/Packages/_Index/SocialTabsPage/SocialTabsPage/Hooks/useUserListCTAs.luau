@@ -1,26 +1,27 @@
-﻿local parent = script:FindFirstAncestor("SocialTabsPage").Parent
-local reactModule = require(parent.React)
-local profileCTAService = require(parent.ProfileCtaService).ProfileCTAService
+﻿local Parent = script:FindFirstAncestor("SocialTabsPage").Parent
+local ReactModule = require(Parent.React)
+local ProfileCTAService = require(Parent.ProfileCtaService).ProfileCTAService
 
-return function(p1)
-	-- upvalues: reactModule (ref), profileCTAService (ref)
-	local var1, var2 = reactModule.useState({})
-	reactModule.useEffect(function()
-		-- upvalues: profileCTAService (copy)
-		local var3 = profileCTAService.connectRealTimeUpdates()
+return function(p1) --[[ Line: 8 | Named "useUserListCTAs" ]]
+	-- upvalues: ReactModule (copy), ProfileCTAService (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState({})
+	ReactModule.useEffect(function() --[[ Line: 11 ]]
+		-- upvalues: ProfileCTAService (upval)
+		local ConnectRealTimeUpdatesResult = ProfileCTAService.connectRealTimeUpdates()
 		
-		return function()
-			-- upvalues: var3 (ref)
-			var3.Disconnect()
+		return function() --[[ Line: 13 ]]
+			-- upvalues: ConnectRealTimeUpdatesResult (copy)
+			ConnectRealTimeUpdatesResult.Disconnect()
 		end
 	end, {})
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), profileCTAService (copy), var2 (ref)
-		if #p1 == 0 then
+	ReactModule.useEffect(function() --[[ Line: 18 ]]
+		-- upvalues: p1 (copy), ProfileCTAService (upval), UseStateResult2 (copy)
+		if #p1 ~= 0 then
+			UseStateResult2((ProfileCTAService.getProfileCTAs(p1)))
+			
 			return
 		end
-		var2(profileCTAService.getProfileCTAs(p1))
 	end, { p1 })
 	
-	return var1
+	return UseStateResult
 end

@@ -1,3 +1,3 @@
-﻿return require(script.Parent.Parent.Parent.Rodux).makeActionCreator(script.Name, function(p1, p2)
-	return { universeId = p1, isEligible = p2 }
+﻿return require(script.Parent.Parent.Parent.Rodux).makeActionCreator(script.Name, function(UniverseId, IsEligible) --[[ Line: 11 ]]
+	return { universeId = UniverseId, isEligible = IsEligible }
 end)

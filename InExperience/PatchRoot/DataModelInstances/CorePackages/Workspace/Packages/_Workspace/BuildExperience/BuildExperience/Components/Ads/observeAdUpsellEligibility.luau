@@ -1,15 +1,15 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local signalsModule = require(parent.Signals)
-local adCampaignEligibilityModule = require(parent.DataHydration.AdCampaignEligibility)
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local SignalsModule = require(Parent.Signals)
+local AdCampaignEligibilityModule = require(Parent.DataHydration.AdCampaignEligibility)
 
-return function(p1, p2, p3)
-	-- upvalues: adCampaignEligibilityModule (ref), signalsModule (ref)
-	local andFetchEligibility = (p3 or adCampaignEligibilityModule.getAdCampaignEligibilityStore(false)).getAndFetchEligibility(p1)
+return function(p1, Callback, p2) --[[ Line: 23 | Named "observeAdUpsellEligibility" ]]
+	-- upvalues: AdCampaignEligibilityModule (copy), SignalsModule (copy)
+	local AndFetchEligibility = (p2 or AdCampaignEligibilityModule.getAdCampaignEligibilityStore(false)).getAndFetchEligibility(p1)
 	
-	return signalsModule.createEffect(function(p4)
-		-- upvalues: andFetchEligibility (ref), p2 (ref)
-		andFetchEligibility.data(p4)
-		andFetchEligibility.status(p4)
-		p2()
+	return SignalsModule.createEffect(function(p3) --[[ Line: 33 ]]
+		-- upvalues: AndFetchEligibility (copy), Callback (copy)
+		AndFetchEligibility.data(p3)
+		AndFetchEligibility.status(p3)
+		Callback()
 	end)
 end

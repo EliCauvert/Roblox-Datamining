@@ -1,4 +1,4 @@
-﻿return function(p1)
+﻿return function(Scale: number) --[[ Line: 1 ]]
 	return {
 		Color = {
 			ActionAlert = {
@@ -360,36 +360,36 @@
 		Component = {
 			BaseMenu = {
 				BackgroundColor = { Transparency = 0, Color3 = Color3.fromRGB(214, 235, 163) },
-				BorderRadius = 8 * p1
+				BorderRadius = 8 * Scale
 			},
 			ControllerBar = {
 				BackgroundColor = { Transparency = 0.96, Color3 = Color3.fromRGB(51, 60, 33) },
 				BorderRadius = {
-					LeadingBottom = 9999 * p1,
-					LeadingTop = 9999 * p1,
-					TrailingBottom = 9999 * p1,
-					TrailingTop = 9999 * p1
+					LeadingBottom = 9999 * Scale,
+					LeadingTop = 9999 * Scale,
+					TrailingBottom = 9999 * Scale,
+					TrailingTop = 9999 * Scale
 				},
-				Gap = 16 * p1,
+				Gap = 16 * Scale,
 				Spacing = {
-					Bottom = 8 * p1,
-					Leading = 12 * p1,
-					Top = 8 * p1,
-					Trailing = 12 * p1
+					Bottom = 8 * Scale,
+					Leading = 12 * Scale,
+					Top = 8 * Scale,
+					Trailing = 12 * Scale
 				}
 			},
 			ControllerBarShortcut = {
 				Container = {
 					ContentColor = { Transparency = 0, Color3 = Color3.fromRGB(23, 25, 19) },
-					Gap = 4 * p1
+					Gap = 4 * Scale
 				},
-				Icon = { Size = 36 * p1 },
+				Icon = { Size = 36 * Scale },
 				Label = {
 					Typography = {
 						LetterSpacing = 0,
 						LineHeight = 1.111,
 						Font = Enum.Font.BuilderSansMedium,
-						FontSize = 18 * p1
+						FontSize = 18 * Scale
 					}
 				}
 			},
@@ -397,36 +397,36 @@
 				Badge = {
 					BackgroundColor = { Transparency = 0, Color3 = Color3.fromRGB(51, 95, 255) },
 					BorderColor = { Transparency = 0, Color3 = Color3.fromRGB(214, 235, 163) },
-					BorderRadius = 9999 * p1,
-					BorderWidth = 2 * p1,
+					BorderRadius = 9999 * Scale,
+					BorderWidth = 2 * Scale,
 					ContentColor = { Transparency = 0, Color3 = Color3.fromRGB(247, 247, 248) },
-					Height = 16 * p1,
-					MinWidth = 16 * p1,
-					Spacing = 4 * p1,
+					Height = 16 * Scale,
+					MinWidth = 16 * Scale,
+					Spacing = 4 * Scale,
 					Typography = {
 						LetterSpacing = 0,
 						LineHeight = 1.077,
 						Font = Enum.Font.BuilderSansMedium,
-						FontSize = 13 * p1
+						FontSize = 13 * Scale
 					}
 				},
-				Container = { Gap = 4 * p1 },
+				Container = { Gap = 4 * Scale },
 				Face = {
 					BackgroundColor = { Transparency = 0, Color3 = Color3.fromRGB(80, 84, 72) },
 					BorderColor = { Transparency = 0, Color3 = Color3.fromRGB(214, 235, 163) },
-					BorderRadius = 9999 * p1,
-					BorderWidth = 2 * p1,
-					Height = 16 * p1,
-					Width = 16 * p1
+					BorderRadius = 9999 * Scale,
+					BorderWidth = 2 * Scale,
+					Height = 16 * Scale,
+					Width = 16 * Scale
 				},
-				FaceGroup = { Gap = -6 * p1 },
+				FaceGroup = { Gap = -6 * Scale },
 				Label = {
 					ContentColor = { Transparency = 0, Color3 = Color3.fromRGB(97, 101, 90) },
 					Typography = {
 						LetterSpacing = 0,
 						LineHeight = 1.2,
 						Font = Enum.Font.BuilderSans,
-						FontSize = 15 * p1
+						FontSize = 15 * Scale
 					}
 				}
 			},
@@ -434,12 +434,12 @@
 				Base = {
 					Opacity = 1,
 					ContentColor = { Transparency = 0, Color3 = Color3.fromRGB(80, 84, 72) },
-					Padding = { Top = 4 * p1 },
+					Padding = { Top = 4 * Scale },
 					Typography = {
 						LetterSpacing = 0,
 						LineHeight = 1.077,
 						Font = Enum.Font.BuilderSansMedium,
-						FontSize = 13 * p1
+						FontSize = 13 * Scale
 					}
 				},
 				Error = {
@@ -450,23 +450,23 @@
 				Base = {
 					Opacity = 1,
 					ContentColor = { Transparency = 0, Color3 = Color3.fromRGB(80, 84, 72) },
-					Spacing = { Bottom = 4 * p1 },
+					Spacing = { Bottom = 4 * Scale },
 					Typography = {
 						LetterSpacing = 0,
 						LineHeight = 1.2,
 						Font = Enum.Font.BuilderSans,
-						FontSize = 15 * p1
+						FontSize = 15 * Scale
 					}
 				},
 				Disabled = { Opacity = 0.32 }
 			},
 			MediaTile = {
-				Container = { BorderRadius = 8 * p1 },
-				Icon = { Size = 36 * p1 }
+				Container = { BorderRadius = 8 * Scale },
+				Icon = { Size = 36 * Scale }
 			},
 			MenuCell = {
 				Base = {
-					CheckFrame = { Size = 32 * p1 },
+					CheckFrame = { Size = 32 * Scale },
 					Container = {
 						BorderWidth = 0,
 						BackgroundColor = { Transparency = 0, Color3 = Color3.fromRGB(214, 235, 163) },
@@ -478,29 +478,29 @@
 							TopTrailing = 0
 						},
 						ContentColor = { Transparency = 0, Color3 = Color3.fromRGB(23, 25, 19) },
-						Height = 56 * p1,
+						Height = 56 * Scale,
 						Spacing = {
 							Bottom = 0,
 							Top = 0,
-							Leading = 12 * p1,
-							Trailing = 12 * p1
+							Leading = 12 * Scale,
+							Trailing = 12 * Scale
 						}
 					},
-					IconFrame = { Size = 32 * p1 },
+					IconFrame = { Size = 32 * Scale },
 					Text = {
 						Typography = {
 							LetterSpacing = 0,
 							LineHeight = 1.1,
 							Font = Enum.Font.BuilderSansBold,
-							FontSize = 20 * p1
+							FontSize = 20 * Scale
 						}
 					},
 					TextFrame = {
 						Spacing = {
 							Bottom = 0,
 							Top = 0,
-							Leading = 12 * p1,
-							Trailing = 12 * p1
+							Leading = 12 * Scale,
+							Trailing = 12 * Scale
 						}
 					}
 				},
@@ -509,15 +509,15 @@
 						ContentColor = { Transparency = 0.5, Color3 = Color3.fromRGB(23, 25, 19) }
 					}
 				},
-				Divider = { Container = { BorderWidth = 1 * p1 } },
+				Divider = { Container = { BorderWidth = 1 * Scale } },
 				HasRoundBottom = {
 					Container = {
-						BorderRadius = { BottomLeading = 8 * p1, BottomTrailing = 8 * p1 }
+						BorderRadius = { BottomLeading = 8 * Scale, BottomTrailing = 8 * Scale }
 					}
 				},
 				HasRoundTop = {
 					Container = {
-						BorderRadius = { TopLeading = 8 * p1, TopTrailing = 8 * p1 }
+						BorderRadius = { TopLeading = 8 * Scale, TopTrailing = 8 * Scale }
 					}
 				}
 			},
@@ -525,37 +525,37 @@
 				Container = {
 					BorderRadius = 0,
 					BackgroundColor = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) },
-					Spacing = 8 * p1
+					Spacing = 8 * Scale
 				}
 			},
 			PlayerTileSmall = {
 				Base = {
 					Container = {
-						Gap = 8 * p1,
+						Gap = 8 * Scale,
 						Spacing = {
-							Bottom = 8 * p1,
-							Leading = 8 * p1,
-							Top = 8 * p1,
-							Trailing = 8 * p1
+							Bottom = 8 * Scale,
+							Leading = 8 * Scale,
+							Top = 8 * Scale,
+							Trailing = 8 * Scale
 						}
 					},
 					Content = {
 						ContentColor = { Transparency = 0, Color3 = Color3.fromRGB(23, 25, 19) },
-						Gap = 2 * p1,
+						Gap = 2 * Scale,
 						Typography = {
 							LetterSpacing = 0,
 							LineHeight = 1.111,
 							Font = Enum.Font.BuilderSansMedium,
-							FontSize = 18 * p1
+							FontSize = 18 * Scale
 						}
 					},
-					Icon = { Size = 16 * p1 },
+					Icon = { Size = 16 * Scale },
 					Image = {
 						BackgroundColor = { Transparency = 0, Color3 = Color3.fromRGB(214, 235, 163) },
 						BorderColor = { Transparency = 0.84, Color3 = Color3.fromRGB(52, 60, 33) },
-						BorderRadius = 9999 * p1,
-						BorderWidth = 3 * p1,
-						Size = 96 * p1
+						BorderRadius = 9999 * Scale,
+						BorderWidth = 3 * Scale,
+						Size = 96 * Scale
 					},
 					Presence = {
 						ContentColor = { Transparency = 0, Color3 = Color3.fromRGB(80, 84, 72) }
@@ -563,71 +563,71 @@
 					Status = {
 						BackgroundColor = { Transparency = 0, Color3 = Color3.fromRGB(57, 197, 130) },
 						BorderColor = { Transparency = 0, Color3 = Color3.fromRGB(223, 241, 180) },
-						BorderWidth = 2.5 * p1,
-						Size = 16 * p1
+						BorderWidth = 2.5 * Scale,
+						Size = 16 * Scale
 					}
 				}
 			},
 			RateCount = {
-				ButtonGroup = { Gap = 8 * p1 },
+				ButtonGroup = { Gap = 8 * Scale },
 				Container = {
 					BackgroundColor = { Transparency = 0.84, Color3 = Color3.fromRGB(51, 60, 33) },
-					BorderRadius = 8 * p1,
-					Gap = 8 * p1,
-					Spacing = 8 * p1
+					BorderRadius = 8 * Scale,
+					Gap = 8 * Scale,
+					Spacing = 8 * Scale
 				}
 			},
 			SelectionCursor = {
 				Inset = 0,
-				BorderWidth = 3 * p1,
+				BorderWidth = 3 * Scale,
 				Gradient = {
 					End = { Transparency = 0, Color3 = Color3.fromRGB(51, 95, 255) },
 					Start = { Transparency = 0, Color3 = Color3.fromRGB(51, 95, 255) }
 				},
-				Offset = 6 * p1
+				Offset = 6 * Scale
 			},
-			StatGroup = { Gap = 8 * p1 },
+			StatGroup = { Gap = 8 * Scale },
 			StatItem = {
 				Container = {
 					ContentColor = { Transparency = 0, Color3 = Color3.fromRGB(97, 101, 90) },
-					Gap = 2 * p1
+					Gap = 2 * Scale
 				},
-				Icon = { Size = 16 * p1 },
+				Icon = { Size = 16 * Scale },
 				Label = {
 					Typography = {
 						LetterSpacing = 0,
 						LineHeight = 1.2,
 						Font = Enum.Font.BuilderSans,
-						FontSize = 15 * p1
+						FontSize = 15 * Scale
 					}
 				}
 			},
 			StatWidget = {
 				Container = {
 					ContentColor = { Transparency = 0, Color3 = Color3.fromRGB(23, 25, 19) },
-					Gap = 8 * p1
+					Gap = 8 * Scale
 				},
 				Data = {
 					Typography = {
 						LetterSpacing = -0.01,
 						LineHeight = 0.971,
 						Font = Enum.Font.BuilderSansBold,
-						FontSize = 35 * p1
+						FontSize = 35 * Scale
 					}
 				},
 				DataGroup = { Gap = 0 },
-				Icon = { Size = 48 * p1 },
+				Icon = { Size = 48 * Scale },
 				Label = {
 					Typography = {
 						LetterSpacing = 0,
 						LineHeight = 1.1,
 						Font = Enum.Font.BuilderSansBold,
-						FontSize = 20 * p1
+						FontSize = 20 * Scale
 					}
 				}
 			},
 			StateLayer = {
-				Base = { BorderWidth = 1 * p1 },
+				Base = { BorderWidth = 1 * Scale },
 				Darken = {
 					Default = {
 						Color = { Transparency = 1, Color3 = Color3.fromRGB(0, 0, 0) }
@@ -744,14 +744,14 @@
 					Field = {
 						Opacity = 1,
 						BorderColor = { Transparency = 0.84, Color3 = Color3.fromRGB(52, 60, 33) },
-						BorderRadius = 8 * p1,
-						Gap = 8 * p1,
-						Spacing = { Leading = 12 * p1, Trailing = 12 * p1 },
+						BorderRadius = 8 * Scale,
+						Gap = 8 * Scale,
+						Spacing = { Leading = 12 * Scale, Trailing = 12 * Scale },
 						Typography = {
 							LetterSpacing = 0,
 							LineHeight = 1.1,
 							Font = Enum.Font.BuilderSans,
-							FontSize = 20 * p1
+							FontSize = 20 * Scale
 						}
 					},
 					FieldValue = {
@@ -759,7 +759,7 @@
 					},
 					IconLeading = {
 						ContentColor = { Transparency = 0, Color3 = Color3.fromRGB(97, 101, 90) },
-						Size = 16 * p1
+						Size = 16 * Scale
 					},
 					PlaceholderText = {
 						ContentColor = { Transparency = 0, Color3 = Color3.fromRGB(97, 101, 90) }
@@ -776,18 +776,27 @@
 				Base = {
 					Handle = {
 						BackgroundColor = { Transparency = 0.84, Color3 = Color3.fromRGB(51, 60, 33) },
-						BorderRadius = 9999 * p1,
+						BorderRadius = 9999 * Scale,
 						ContentColor = { Transparency = 0, Color3 = Color3.fromRGB(23, 25, 19) }
 					},
-					Icon = { Size = 36 * p1 },
-					Track = { Opacity = 0, Spacing = { Bottom = 4 * p1, Top = 4 * p1 } }
+					Icon = { Size = 36 * Scale },
+					Track = {
+						Opacity = 0,
+						Spacing = { Bottom = 4 * Scale, Top = 4 * Scale }
+					}
 				},
-				Compact = { Handle = { Width = 2 * p1 }, Track = { Width = 12 * p1 } },
+				Compact = {
+					Handle = { Width = 2 * Scale },
+					Track = { Width = 12 * Scale }
+				},
 				Gamepad = {
-					Handle = { Width = 16 * p1 },
-					Track = { Width = 16 * p1 }
+					Handle = { Width = 16 * Scale },
+					Track = { Width = 16 * Scale }
 				},
-				Wide = { Handle = { Width = 8 * p1 }, Track = { Width = 16 * p1 } }
+				Wide = {
+					Handle = { Width = 8 * Scale },
+					Track = { Width = 16 * Scale }
+				}
 			},
 			VerticalTile = {
 				Base = {
@@ -795,25 +804,25 @@
 						Background = { Transparency = 0, Color3 = Color3.fromRGB(214, 235, 163) },
 						BorderColor = { Transparency = 0.84, Color3 = Color3.fromRGB(52, 60, 33) },
 						BorderRadius = {
-							LeadingBottom = 8 * p1,
-							LeadingTop = 8 * p1,
-							TrailingBottom = 8 * p1,
-							TrailingTop = 8 * p1
+							LeadingBottom = 8 * Scale,
+							LeadingTop = 8 * Scale,
+							TrailingBottom = 8 * Scale,
+							TrailingTop = 8 * Scale
 						},
-						BorderWidth = 1 * p1,
+						BorderWidth = 1 * Scale,
 						DropShadow = {
 							X = 0,
-							Blur = 8 * p1,
+							Blur = 8 * Scale,
 							Color = { Transparency = 0.5, Color3 = Color3.fromRGB(10, 10, 14) },
-							Y = 4 * p1
+							Y = 4 * Scale
 						}
 					},
 					ContentBottom = {
 						Spacing = {
-							Bottom = 8 * p1,
-							Leading = 8 * p1,
-							Top = 8 * p1,
-							Trailing = 8 * p1
+							Bottom = 8 * Scale,
+							Leading = 8 * Scale,
+							Top = 8 * Scale,
+							Trailing = 8 * Scale
 						}
 					},
 					ContentTop = {
@@ -826,10 +835,10 @@
 			ColorMode = { Name = "Light", IsDark = "false", IsLight = "true" },
 			Text = {
 				Font = "Builder Sans",
-				InverseScale = 0.793650793651,
+				InverseScale = 0.7936507936507936,
 				NominalScale = 1.26,
-				Interval = 5.04 * p1,
-				Scale = p1
+				Interval = 5.04 * Scale,
+				Scale = Scale
 			},
 			Theme = {
 				Name = "ElectricLime",
@@ -851,7 +860,7 @@
 					}
 				}
 			},
-			UI = { Interval = 4, StrokeBase = 1, Scale = p1 }
+			UI = { Interval = 4, StrokeBase = 1, Scale = Scale }
 		},
 		DarkMode = {
 			ActionAlert = {
@@ -999,37 +1008,37 @@
 			StandardOut = { 0.2, 0, 0, 1 }
 		},
 		FontSize = {
-			FontSize_200 = 10 * p1,
-			FontSize_250 = 13 * p1,
-			FontSize_300 = 15 * p1,
-			FontSize_350 = 18 * p1,
-			FontSize_400 = 20 * p1,
-			FontSize_500 = 25 * p1,
-			FontSize_600 = 30 * p1,
-			FontSize_700 = 35 * p1,
-			FontSize_800 = 40 * p1,
-			FontSize_900 = 45 * p1,
-			FontSize_1000 = 50 * p1,
-			FontSize_1100 = 55 * p1,
-			FontSize_1200 = 60 * p1,
-			FontSize_1300 = 66 * p1,
-			FontSize_1400 = 71 * p1,
-			FontSize_1500 = 76 * p1,
-			FontSize_1600 = 81 * p1,
-			FontSize_1700 = 86 * p1,
-			FontSize_1800 = 91 * p1,
-			FontSize_1900 = 96 * p1,
-			FontSize_2000 = 101 * p1,
-			FontSize_2100 = 106 * p1,
-			FontSize_2200 = 111 * p1,
-			FontSize_2300 = 116 * p1,
-			FontSize_2400 = 121 * p1,
-			FontSize_2500 = 126 * p1,
-			FontSize_2600 = 131 * p1,
-			FontSize_2700 = 136 * p1,
-			FontSize_2800 = 141 * p1,
-			FontSize_2900 = 146 * p1,
-			FontSize_3000 = 151 * p1
+			FontSize_200 = 10 * Scale,
+			FontSize_250 = 13 * Scale,
+			FontSize_300 = 15 * Scale,
+			FontSize_350 = 18 * Scale,
+			FontSize_400 = 20 * Scale,
+			FontSize_500 = 25 * Scale,
+			FontSize_600 = 30 * Scale,
+			FontSize_700 = 35 * Scale,
+			FontSize_800 = 40 * Scale,
+			FontSize_900 = 45 * Scale,
+			FontSize_1000 = 50 * Scale,
+			FontSize_1100 = 55 * Scale,
+			FontSize_1200 = 60 * Scale,
+			FontSize_1300 = 66 * Scale,
+			FontSize_1400 = 71 * Scale,
+			FontSize_1500 = 76 * Scale,
+			FontSize_1600 = 81 * Scale,
+			FontSize_1700 = 86 * Scale,
+			FontSize_1800 = 91 * Scale,
+			FontSize_1900 = 96 * Scale,
+			FontSize_2000 = 101 * Scale,
+			FontSize_2100 = 106 * Scale,
+			FontSize_2200 = 111 * Scale,
+			FontSize_2300 = 116 * Scale,
+			FontSize_2400 = 121 * Scale,
+			FontSize_2500 = 126 * Scale,
+			FontSize_2600 = 131 * Scale,
+			FontSize_2700 = 136 * Scale,
+			FontSize_2800 = 141 * Scale,
+			FontSize_2900 = 146 * Scale,
+			FontSize_3000 = 151 * Scale
 		},
 		FontWeight = {
 			FontWeight_300 = "Light",
@@ -1041,13 +1050,13 @@
 		},
 		Gap = {
 			None = 0,
-			Large = 16 * p1,
-			Medium = 12 * p1,
-			Small = 8 * p1,
-			XLarge = 20 * p1,
-			XSmall = 4 * p1,
-			XXLarge = 24 * p1,
-			XXSmall = 2 * p1
+			Large = 16 * Scale,
+			Medium = 12 * Scale,
+			Small = 8 * Scale,
+			XLarge = 20 * Scale,
+			XSmall = 4 * Scale,
+			XXLarge = 24 * Scale,
+			XXSmall = 2 * Scale
 		},
 		Global = {
 			Color = {
@@ -1069,19 +1078,19 @@
 				White = { Transparency = 0, Color3 = Color3.fromRGB(255, 255, 255) }
 			},
 			Family = { Standard = "Builder Sans" },
-			FontSize_25 = 10 * p1,
-			FontSize_50 = 13 * p1,
-			FontSize_75 = 15 * p1,
-			FontSize_100 = 18 * p1,
-			FontSize_200 = 20 * p1,
-			FontSize_300 = 25 * p1,
-			FontSize_400 = 30 * p1,
-			FontSize_500 = 35 * p1,
-			FontSize_600 = 40 * p1,
-			FontSize_700 = 50 * p1,
-			FontSize_800 = 60 * p1,
-			FontSize_900 = 71 * p1,
-			FontSize_1000 = 86 * p1,
+			FontSize_25 = 10 * Scale,
+			FontSize_50 = 13 * Scale,
+			FontSize_75 = 15 * Scale,
+			FontSize_100 = 18 * Scale,
+			FontSize_200 = 20 * Scale,
+			FontSize_300 = 25 * Scale,
+			FontSize_400 = 30 * Scale,
+			FontSize_500 = 35 * Scale,
+			FontSize_600 = 40 * Scale,
+			FontSize_700 = 50 * Scale,
+			FontSize_800 = 60 * Scale,
+			FontSize_900 = 71 * Scale,
+			FontSize_1000 = 86 * Scale,
 			LetterSpacing = { Default = 0 },
 			LineHeight_100 = 0.794,
 			LineHeight_200 = 0.952,
@@ -1098,48 +1107,48 @@
 			Opacity_92 = 0.08,
 			Opacity_100 = 0,
 			Size_0 = 0,
-			Size_25 = 2 * p1,
-			Size_50 = 4 * p1,
-			Size_75 = 6 * p1,
-			Size_100 = 8 * p1,
-			Size_150 = 12 * p1,
-			Size_200 = 16 * p1,
-			Size_250 = 20 * p1,
-			Size_300 = 24 * p1,
-			Size_350 = 28 * p1,
-			Size_400 = 32 * p1,
-			Size_450 = 36 * p1,
-			Size_500 = 40 * p1,
-			Size_600 = 48 * p1,
-			Size_700 = 56 * p1,
-			Size_800 = 64 * p1,
-			Size_900 = 72 * p1,
-			Size_1000 = 80 * p1,
-			Size_1100 = 88 * p1,
-			Size_1200 = 96 * p1,
-			Size_1300 = 104 * p1,
-			Size_1400 = 112 * p1,
+			Size_25 = 2 * Scale,
+			Size_50 = 4 * Scale,
+			Size_75 = 6 * Scale,
+			Size_100 = 8 * Scale,
+			Size_150 = 12 * Scale,
+			Size_200 = 16 * Scale,
+			Size_250 = 20 * Scale,
+			Size_300 = 24 * Scale,
+			Size_350 = 28 * Scale,
+			Size_400 = 32 * Scale,
+			Size_450 = 36 * Scale,
+			Size_500 = 40 * Scale,
+			Size_600 = 48 * Scale,
+			Size_700 = 56 * Scale,
+			Size_800 = 64 * Scale,
+			Size_900 = 72 * Scale,
+			Size_1000 = 80 * Scale,
+			Size_1100 = 88 * Scale,
+			Size_1200 = 96 * Scale,
+			Size_1300 = 104 * Scale,
+			Size_1400 = 112 * Scale,
 			Space_0 = 0,
-			Space_25 = 2 * p1,
-			Space_50 = 4 * p1,
-			Space_75 = 6 * p1,
-			Space_100 = 8 * p1,
-			Space_150 = 12 * p1,
-			Space_200 = 16 * p1,
-			Space_250 = 20 * p1,
-			Space_300 = 24 * p1,
-			Space_400 = 32 * p1,
-			Space_500 = 40 * p1,
-			Space_600 = 48 * p1,
-			Space_800 = 64 * p1,
-			Space_1000 = 80 * p1,
-			Stroke_50 = 0.5 * p1,
-			Stroke_100 = 1 * p1,
-			Stroke_150 = 1.5 * p1,
-			Stroke_200 = 2 * p1,
-			Stroke_250 = 2.5 * p1,
-			Stroke_300 = 3 * p1,
-			Stroke_400 = 4 * p1,
+			Space_25 = 2 * Scale,
+			Space_50 = 4 * Scale,
+			Space_75 = 6 * Scale,
+			Space_100 = 8 * Scale,
+			Space_150 = 12 * Scale,
+			Space_200 = 16 * Scale,
+			Space_250 = 20 * Scale,
+			Space_300 = 24 * Scale,
+			Space_400 = 32 * Scale,
+			Space_500 = 40 * Scale,
+			Space_600 = 48 * Scale,
+			Space_800 = 64 * Scale,
+			Space_1000 = 80 * Scale,
+			Stroke_50 = 0.5 * Scale,
+			Stroke_100 = 1 * Scale,
+			Stroke_150 = 1.5 * Scale,
+			Stroke_200 = 2 * Scale,
+			Stroke_250 = 2.5 * Scale,
+			Stroke_300 = 3 * Scale,
+			Stroke_400 = 4 * Scale,
 			Weight_300 = "Light",
 			Weight_400 = "Regular",
 			Weight_600 = "Medium",
@@ -1148,25 +1157,25 @@
 		},
 		Gutter = {
 			None = 0,
-			Large = 16 * p1,
-			Medium = 12 * p1,
-			Small = 8 * p1,
-			XLarge = 20 * p1,
-			XXLarge = 24 * p1
+			Large = 16 * Scale,
+			Medium = 12 * Scale,
+			Small = 8 * Scale,
+			XLarge = 20 * Scale,
+			XXLarge = 24 * Scale
 		},
 		IconSize = {
-			Large = 24 * p1,
-			Medium = 20 * p1,
-			Small = 16 * p1,
-			XLarge = 28 * p1,
-			XSmall = 12 * p1,
-			XXLarge = 32 * p1
+			Large = 24 * Scale,
+			Medium = 20 * Scale,
+			Small = 16 * Scale,
+			XLarge = 28 * Scale,
+			XSmall = 12 * Scale,
+			XXLarge = 32 * Scale
 		},
 		InputSize = {
-			Large = 48 * p1,
-			Medium = 40 * p1,
-			Small = 32 * p1,
-			XSmall = 24 * p1
+			Large = 48 * Scale,
+			Medium = 40 * Scale,
+			Small = 32 * Scale,
+			XSmall = 24 * Scale
 		},
 		Inverse = {
 			ActionAlert = {
@@ -1429,28 +1438,28 @@
 		},
 		Margin = {
 			None = 0,
-			Large = 48 * p1,
-			Medium = 24 * p1,
-			Small = 20 * p1
+			Large = 48 * Scale,
+			Medium = 24 * Scale,
+			Small = 20 * Scale
 		},
 		Padding = {
 			None = 0,
-			Large = 16 * p1,
-			Medium = 12 * p1,
-			Small = 8 * p1,
-			XLarge = 20 * p1,
-			XSmall = 4 * p1,
-			XXLarge = 24 * p1,
-			XXSmall = 2 * p1
+			Large = 16 * Scale,
+			Medium = 12 * Scale,
+			Small = 8 * Scale,
+			XLarge = 20 * Scale,
+			XSmall = 4 * Scale,
+			XXLarge = 24 * Scale,
+			XXSmall = 2 * Scale
 		},
-		Platform = { Base = 4, Rem = 8 * p1, Scale = 1 * p1 },
+		Platform = { Base = 4, Rem = 8 * Scale, Scale = 1 * Scale },
 		Radius = {
 			None = 0,
-			Circle = 9999 * p1,
-			Large = 16 * p1,
-			Medium = 8 * p1,
-			Small = 4 * p1,
-			XSmall = 2 * p1
+			Circle = 9999 * Scale,
+			Large = 16 * Scale,
+			Medium = 8 * Scale,
+			Small = 4 * Scale,
+			XSmall = 2 * Scale
 		},
 		Semantic = {
 			Color = {
@@ -1567,14 +1576,14 @@
 			},
 			Icon = {
 				Size = {
-					Large = 48 * p1,
-					Medium = 36 * p1,
-					Small = 16 * p1,
-					XLarge = 96 * p1,
-					XXLarge = 192 * p1
+					Large = 48 * Scale,
+					Medium = 36 * Scale,
+					Small = 16 * Scale,
+					XLarge = 96 * Scale,
+					XXLarge = 192 * Scale
 				}
 			},
-			Offset = { Focus = { Inset = 0, Standard = 6 * p1 } },
+			Offset = { Focus = { Inset = 0, Standard = 6 * Scale } },
 			Opacity = {
 				State = {
 					Darken = { Hover = 0.88, Pressed = 0.8 },
@@ -1583,104 +1592,104 @@
 			},
 			Radius = {
 				None = 0,
-				Circle = 9999 * p1,
-				Large = 12 * p1,
-				Medium = 8 * p1,
-				Small = 4 * p1,
-				XLarge = 16 * p1
+				Circle = 9999 * Scale,
+				Large = 12 * Scale,
+				Medium = 8 * Scale,
+				Small = 4 * Scale,
+				XLarge = 16 * Scale
 			},
-			Stroke = { Focus = 3 * p1, Input = 1 * p1 },
+			Stroke = { Focus = 3 * Scale, Input = 1 * Scale },
 			Typography = {
 				Body = {
 					LetterSpacing = 0,
 					LineHeight = 1.1,
 					Font = Enum.Font.BuilderSans,
-					FontSize = 20 * p1
+					FontSize = 20 * Scale
 				},
 				CaptionBody = {
 					LetterSpacing = 0,
 					LineHeight = 1.2,
 					Font = Enum.Font.BuilderSans,
-					FontSize = 15 * p1
+					FontSize = 15 * Scale
 				},
 				CaptionHeader = {
 					LetterSpacing = 0,
 					LineHeight = 1.111,
 					Font = Enum.Font.BuilderSansMedium,
-					FontSize = 18 * p1
+					FontSize = 18 * Scale
 				},
 				Footer = {
 					LetterSpacing = 0,
 					LineHeight = 1.077,
 					Font = Enum.Font.BuilderSansMedium,
-					FontSize = 13 * p1
+					FontSize = 13 * Scale
 				},
 				Header = {
 					LetterSpacing = -0.01,
 					LineHeight = 0.96,
 					Font = Enum.Font.BuilderSansBold,
-					FontSize = 25 * p1
+					FontSize = 25 * Scale
 				},
 				Subheader = {
 					LetterSpacing = 0,
 					LineHeight = 1.1,
 					Font = Enum.Font.BuilderSansBold,
-					FontSize = 20 * p1
+					FontSize = 20 * Scale
 				},
 				Title = {
 					LetterSpacing = -0.01,
 					LineHeight = 0.971,
 					Font = Enum.Font.BuilderSansBold,
-					FontSize = 35 * p1
+					FontSize = 35 * Scale
 				}
 			}
 		},
 		Size = {
 			Size_0 = 0,
-			Size_50 = 2 * p1,
-			Size_100 = 4 * p1,
-			Size_150 = 6 * p1,
-			Size_200 = 8 * p1,
-			Size_250 = 10 * p1,
-			Size_300 = 12 * p1,
-			Size_350 = 14 * p1,
-			Size_400 = 16 * p1,
-			Size_450 = 18 * p1,
-			Size_500 = 20 * p1,
-			Size_550 = 22 * p1,
-			Size_600 = 24 * p1,
-			Size_700 = 28 * p1,
-			Size_800 = 32 * p1,
-			Size_850 = 34 * p1,
-			Size_900 = 36 * p1,
-			Size_1000 = 40 * p1,
-			Size_1100 = 44 * p1,
-			Size_1200 = 48 * p1,
-			Size_1300 = 52 * p1,
-			Size_1400 = 56 * p1,
-			Size_1500 = 60 * p1,
-			Size_1600 = 64 * p1,
-			Size_1700 = 68 * p1,
-			Size_1800 = 72 * p1,
-			Size_1900 = 76 * p1,
-			Size_2000 = 80 * p1,
-			Size_2100 = 84 * p1,
-			Size_2200 = 88 * p1,
-			Size_2300 = 92 * p1,
-			Size_2400 = 96 * p1,
-			Size_2500 = 100 * p1,
-			Size_2600 = 104 * p1,
-			Size_2700 = 108 * p1,
-			Size_2800 = 112 * p1,
-			Size_2900 = 116 * p1,
-			Size_3000 = 120 * p1
+			Size_50 = 2 * Scale,
+			Size_100 = 4 * Scale,
+			Size_150 = 6 * Scale,
+			Size_200 = 8 * Scale,
+			Size_250 = 10 * Scale,
+			Size_300 = 12 * Scale,
+			Size_350 = 14 * Scale,
+			Size_400 = 16 * Scale,
+			Size_450 = 18 * Scale,
+			Size_500 = 20 * Scale,
+			Size_550 = 22 * Scale,
+			Size_600 = 24 * Scale,
+			Size_700 = 28 * Scale,
+			Size_800 = 32 * Scale,
+			Size_850 = 34 * Scale,
+			Size_900 = 36 * Scale,
+			Size_1000 = 40 * Scale,
+			Size_1100 = 44 * Scale,
+			Size_1200 = 48 * Scale,
+			Size_1300 = 52 * Scale,
+			Size_1400 = 56 * Scale,
+			Size_1500 = 60 * Scale,
+			Size_1600 = 64 * Scale,
+			Size_1700 = 68 * Scale,
+			Size_1800 = 72 * Scale,
+			Size_1900 = 76 * Scale,
+			Size_2000 = 80 * Scale,
+			Size_2100 = 84 * Scale,
+			Size_2200 = 88 * Scale,
+			Size_2300 = 92 * Scale,
+			Size_2400 = 96 * Scale,
+			Size_2500 = 100 * Scale,
+			Size_2600 = 104 * Scale,
+			Size_2700 = 108 * Scale,
+			Size_2800 = 112 * Scale,
+			Size_2900 = 116 * Scale,
+			Size_3000 = 120 * Scale
 		},
 		Stroke = {
 			None = 0,
-			Standard = 1 * p1,
-			Thick = 1.5 * p1,
-			Thicker = 3 * p1,
-			Thin = 0.5 * p1
+			Standard = 1 * Scale,
+			Thick = 1.5 * Scale,
+			Thicker = 3 * Scale,
+			Thin = 0.5 * Scale
 		},
 		Time = {
 			Time_50 = 0.05,
@@ -1696,119 +1705,119 @@
 			Time_1000 = 1
 		},
 		ToggleSize = {
-			Large = 28 * p1,
-			Medium = 24 * p1,
-			Small = 20 * p1,
-			XSmall = 16 * p1
+			Large = 28 * Scale,
+			Medium = 24 * Scale,
+			Small = 20 * Scale,
+			XSmall = 16 * Scale
 		},
 		Typography = {
 			BodyLarge = {
 				LetterSpacing = 0,
 				LineHeight = 1.1,
 				Font = Enum.Font.BuilderSans,
-				FontSize = 20 * p1
+				FontSize = 20 * Scale
 			},
 			BodyMedium = {
 				LetterSpacing = 0,
 				LineHeight = 1.111,
 				Font = Enum.Font.BuilderSans,
-				FontSize = 18 * p1
+				FontSize = 18 * Scale
 			},
 			BodySmall = {
 				LetterSpacing = 0,
 				LineHeight = 1.2,
 				Font = Enum.Font.BuilderSans,
-				FontSize = 15 * p1
+				FontSize = 15 * Scale
 			},
 			CaptionLarge = {
 				LetterSpacing = 0,
 				LineHeight = 1.111,
 				Font = Enum.Font.BuilderSansMedium,
-				FontSize = 18 * p1
+				FontSize = 18 * Scale
 			},
 			CaptionMedium = {
 				LetterSpacing = 0,
 				LineHeight = 1.2,
 				Font = Enum.Font.BuilderSansMedium,
-				FontSize = 15 * p1
+				FontSize = 15 * Scale
 			},
 			CaptionSmall = {
 				LetterSpacing = 0,
 				LineHeight = 1.077,
 				Font = Enum.Font.BuilderSansMedium,
-				FontSize = 13 * p1
+				FontSize = 13 * Scale
 			},
 			DisplayLarge = {
 				LetterSpacing = -0.01,
 				LineHeight = 0.951,
 				Font = Enum.Font.BuilderSansBold,
-				FontSize = 101 * p1
+				FontSize = 101 * Scale
 			},
 			DisplayMedium = {
 				LetterSpacing = -0.01,
 				LineHeight = 0.958,
 				Font = Enum.Font.BuilderSansBold,
-				FontSize = 71 * p1
+				FontSize = 71 * Scale
 			},
 			DisplaySmall = {
 				LetterSpacing = -0.01,
 				LineHeight = 0.96,
 				Font = Enum.Font.BuilderSansBold,
-				FontSize = 50 * p1
+				FontSize = 50 * Scale
 			},
 			HeadingLarge = {
 				LetterSpacing = -0.01,
 				LineHeight = 0.971,
 				Font = Enum.Font.BuilderSansBold,
-				FontSize = 35 * p1
+				FontSize = 35 * Scale
 			},
 			HeadingMedium = {
 				LetterSpacing = -0.01,
 				LineHeight = 1.067,
 				Font = Enum.Font.BuilderSansBold,
-				FontSize = 30 * p1
+				FontSize = 30 * Scale
 			},
 			HeadingSmall = {
 				LetterSpacing = -0.01,
 				LineHeight = 0.96,
 				Font = Enum.Font.BuilderSansBold,
-				FontSize = 25 * p1
+				FontSize = 25 * Scale
 			},
 			LabelLarge = {
 				LetterSpacing = 0,
 				LineHeight = 0.8,
 				Font = Enum.Font.BuilderSansMedium,
-				FontSize = 20 * p1
+				FontSize = 20 * Scale
 			},
 			LabelMedium = {
 				LetterSpacing = 0,
 				LineHeight = 0.778,
 				Font = Enum.Font.BuilderSansMedium,
-				FontSize = 18 * p1
+				FontSize = 18 * Scale
 			},
 			LabelSmall = {
 				LetterSpacing = 0,
 				LineHeight = 0.8,
 				Font = Enum.Font.BuilderSansMedium,
-				FontSize = 15 * p1
+				FontSize = 15 * Scale
 			},
 			TitleLarge = {
 				LetterSpacing = 0,
 				LineHeight = 1.1,
 				Font = Enum.Font.BuilderSansBold,
-				FontSize = 20 * p1
+				FontSize = 20 * Scale
 			},
 			TitleMedium = {
 				LetterSpacing = 0,
 				LineHeight = 1.111,
 				Font = Enum.Font.BuilderSansBold,
-				FontSize = 18 * p1
+				FontSize = 18 * Scale
 			},
 			TitleSmall = {
 				LetterSpacing = 0,
 				LineHeight = 1.2,
 				Font = Enum.Font.BuilderSansBold,
-				FontSize = 15 * p1
+				FontSize = 15 * Scale
 			}
 		}
 	}

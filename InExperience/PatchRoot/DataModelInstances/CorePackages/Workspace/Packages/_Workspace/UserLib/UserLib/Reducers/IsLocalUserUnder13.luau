@@ -1,6 +1,8 @@
-﻿local setLocalUserUnder13Module = require(script:FindFirstAncestor("UserLib").Actions.SetLocalUserUnder13)
+﻿local SetLocalUserUnder13Module = require(script:FindFirstAncestor("UserLib").Actions.SetLocalUserUnder13)
 
-return function(p1, p2)
-	-- upvalues: setLocalUserUnder13Module (ref)
-	return if p2.type == setLocalUserUnder13Module.name then p2.isUnder13 elseif p1 ~= true then false else true
+return function(Enabled, p1) --[[ Line: 4 ]]
+	-- upvalues: SetLocalUserUnder13Module (copy)
+	local IsEnabled = Enabled == true
+	
+	return if p1.type == SetLocalUserUnder13Module.name then p1.isUnder13 else IsEnabled
 end

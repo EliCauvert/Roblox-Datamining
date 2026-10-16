@@ -1,32 +1,32 @@
-﻿local parent = script:FindFirstAncestor("RobloxAppHooks").Parent
-local experienceService = require(parent.ExperienceService).ExperienceService
-local reactModule = require(parent.React)
+﻿local Parent = script:FindFirstAncestor("RobloxAppHooks").Parent
+local ExperienceService = require(Parent.ExperienceService).ExperienceService
+local ReactModule = require(Parent.React)
 
-return function(p1)
-	-- upvalues: reactModule (ref), experienceService (ref)
-	local var1, var2 = reactModule.useState(p1 or false)
-	reactModule.useEffect(function()
-		-- upvalues: experienceService (copy), var2 (ref)
-		local list = {
-			experienceService:RegisterForExperienceJoin(function()
-				-- upvalues: var2 (copy)
-				var2(true)
+return function(p1) --[[ Line: 10 | Named "useIsUserInExperience" ]]
+	-- upvalues: ReactModule (copy), ExperienceService (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(p1 or false)
+	ReactModule.useEffect(function() --[[ Line: 12 ]]
+		-- upvalues: ExperienceService (upval), UseStateResult2 (copy)
+		local Connections = {
+			ExperienceService:RegisterForExperienceJoin(function() --[[ Line: 14 ]]
+				-- upvalues: UseStateResult2 (upval)
+				UseStateResult2(true)
 			end),
-			experienceService:RegisterForExperienceLeave(function()
-				-- upvalues: var2 (copy)
-				var2(false)
+			ExperienceService:RegisterForExperienceLeave(function() --[[ Line: 17 ]]
+				-- upvalues: UseStateResult2 (upval)
+				UseStateResult2(false)
 			end)
 		}
 		
-		return function()
-			-- upvalues: list (ref)
-			for i, v in list do
-				if v and v.Disconnect then
-					v:Disconnect()
+		return function() --[[ Line: 22 ]]
+			-- upvalues: Connections (copy)
+			for _, connection in Connections do
+				if connection and connection.Disconnect then
+					connection:Disconnect()
 				end
 			end
 		end
 	end, {})
 	
-	return var1
+	return UseStateResult
 end

@@ -1,33 +1,33 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local getConversationListStoreModule = require(appChat.Stores.GetConversationListStore)
-local t = {
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
+local GetConversationListStoreModule = require(AppChat.Stores.GetConversationListStore)
+local config = {
 	oldestConversationIsFetched = false,
 	isFetchingConversations = false
 }
 
-return function(p1)
-	-- upvalues: getConversationListStoreModule (ref), reactModule (ref), signalsModule (ref), t (ref), signalsReactModule (ref)
-	local var1 = getConversationListStoreModule(false)
-	local var2 = p1 ~= false
+return function(Enabled) --[[ Line: 21 | Named "useConversationList" ]]
+	-- upvalues: GetConversationListStoreModule (copy), ReactModule (copy), SignalsModule (copy), config (copy), SignalsReactModule (copy)
+	local ConversationListStoreModule = GetConversationListStoreModule(false)
+	local IsEnabled = Enabled ~= false
 	
 	return {
-		items = signalsReactModule.useSignalState(reactModule.useMemo(function()
-			-- upvalues: signalsModule (copy), var2 (ref), var1 (ref)
-			return signalsModule.createComputed(function(p2)
-				-- upvalues: var2 (copy), var1 (copy)
-				return if var2 then var1.getConversations(p2) else {}
+		items = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 25 ]]
+			-- upvalues: SignalsModule (upval), IsEnabled (copy), ConversationListStoreModule (copy)
+			return SignalsModule.createComputed(function(p1) --[[ Line: 26 ]]
+				-- upvalues: IsEnabled (upval), ConversationListStoreModule (upval)
+				return if IsEnabled then ConversationListStoreModule.getConversations(p1) else {}
 			end)
-		end, { var1, var2 })),
-		listStatus = signalsReactModule.useSignalState(reactModule.useMemo(function()
-			-- upvalues: signalsModule (copy), var2 (ref), t (copy), var1 (ref)
-			return signalsModule.createComputed(function(p2)
-				-- upvalues: var2 (copy), t (copy), var1 (copy)
-				return if var2 then var1.getListStatus(p2) else t
+		end, { ConversationListStoreModule, IsEnabled }))),
+		listStatus = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 35 ]]
+			-- upvalues: SignalsModule (upval), IsEnabled (copy), config (upval), ConversationListStoreModule (copy)
+			return SignalsModule.createComputed(function(p1) --[[ Line: 36 ]]
+				-- upvalues: IsEnabled (upval), config (upval), ConversationListStoreModule (upval)
+				return if IsEnabled then ConversationListStoreModule.getListStatus(p1) else config
 			end)
-		end, { var1, var2 }))
+		end, { ConversationListStoreModule, IsEnabled })))
 	}
 end

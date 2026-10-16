@@ -1,35 +1,34 @@
-﻿local parent = script:FindFirstAncestor("UserProfiles").Parent
-local lumberyakModule = require(parent.Lumberyak)
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagUserProfilePlatformProfile = sharedFlagsModule.FFlagUserProfilePlatformProfile
-local platformProfileRequestModule = require(parent.GraphQLServer.PlatformProfileRequest)
-local signalsModule = require(parent.Signals)
-local createSignal = signalsModule.createSignal
-local createComputed = signalsModule.createComputed
-local userProfileStoreMaxLoggingLevel = game:DefineFastString("UserProfileStoreMaxLoggingLevel", lumberyakModule.Logger.Levels.Error)
-local userProfileStoreHttpTimeout = game:DefineFastInt("UserProfileStoreHttpTimeout", 1500)
-local fIntUserProfileStoreBatchSize = sharedFlagsModule.FIntUserProfileStoreBatchSize
-local userProfileStoreQueueProcessDelay = game:DefineFastInt("UserProfileStoreQueueProcessDelay", 1)
-local fFlagEnableVerifiedBadgeStore = sharedFlagsModule.FFlagEnableVerifiedBadgeStore
-local fFlagEnableBlackbirdCheck = sharedFlagsModule.FFlagEnableBlackbirdCheck
-local userProfileModelModule = require(script.Parent.UserProfileModel)
-local var1 = createComputed(function(_)
-	-- upvalues: parent (ref), lumberyakModule (ref), userProfileStoreMaxLoggingLevel (ref), userProfileStoreHttpTimeout (ref), fFlagEnableVerifiedBadgeStore (ref), fFlagEnableBlackbirdCheck (ref), userProfileModelModule (ref), fIntUserProfileStoreBatchSize (ref), fFlagUserProfilePlatformProfile (ref), platformProfileRequestModule (ref), createSignal (ref), userProfileStoreQueueProcessDelay (ref)
-	local urlBuilderModule = require(parent.UrlBuilder)
-	local urlBuilder = urlBuilderModule.UrlBuilder
-	local urlBase = urlBuilderModule.UrlBase
-	local userProfileStore = lumberyakModule.Logger.new(nil, "UserProfileStore")
-	userProfileStore:setContext({ prefix = "[UserProfileStore] " })
-	userProfileStore:addSink({
-		maxLevel = userProfileStoreMaxLoggingLevel,
-		log = function(_, _, _) end
+﻿local Parent = script:FindFirstAncestor("UserProfiles").Parent
+local LumberyakModule = require(Parent.Lumberyak)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagUserProfilePlatformProfile = SharedFlagsModule.FFlagUserProfilePlatformProfile
+local PlatformProfileRequestModule = require(Parent.GraphQLServer.PlatformProfileRequest)
+local SignalsModule = require(Parent.Signals)
+local CreateSignalFunction = SignalsModule.createSignal
+local UserProfileStoreMaxLoggingLevel = game:DefineFastString("UserProfileStoreMaxLoggingLevel", LumberyakModule.Logger.Levels.Error)
+local UserProfileStoreHttpTimeout = game:DefineFastInt("UserProfileStoreHttpTimeout", 1500)
+local FIntUserProfileStoreBatchSize = SharedFlagsModule.FIntUserProfileStoreBatchSize
+local UserProfileStoreQueueProcessDelay = game:DefineFastInt("UserProfileStoreQueueProcessDelay", 1)
+local FFlagEnableVerifiedBadgeStore = SharedFlagsModule.FFlagEnableVerifiedBadgeStore
+local FFlagEnableBlackbirdCheck = SharedFlagsModule.FFlagEnableBlackbirdCheck
+local UserProfileModelModule = require(script.Parent.UserProfileModel)
+local Computed = SignalsModule.createComputed(function(_) --[[ Line: 41 ]]
+	-- upvalues: Parent (copy), LumberyakModule (copy), UserProfileStoreMaxLoggingLevel (copy), UserProfileStoreHttpTimeout (copy), FFlagEnableVerifiedBadgeStore (copy), FFlagEnableBlackbirdCheck (copy), UserProfileModelModule (copy), FIntUserProfileStoreBatchSize (copy), FFlagUserProfilePlatformProfile (copy), PlatformProfileRequestModule (copy), CreateSignalFunction (copy), UserProfileStoreQueueProcessDelay (copy)
+	local UrlBuilderModule = require(Parent.UrlBuilder)
+	local UrlBuilder = UrlBuilderModule.UrlBuilder
+	local UrlBase = UrlBuilderModule.UrlBase
+	local UserProfileStore = LumberyakModule.Logger.new(nil, "UserProfileStore")
+	UserProfileStore:setContext({ prefix = "[UserProfileStore] " })
+	UserProfileStore:addSink({
+		maxLevel = UserProfileStoreMaxLoggingLevel,
+		log = function(_, _, _) --[[ Line: 59 ]] end
 	})
-	local httpService = game:GetService("HttpService")
-	local var2 = urlBuilder.new({
+	local HttpService = game:GetService("HttpService")
+	local Url = UrlBuilder.new({
 		path = "user-profile-api/v1/user/profiles/get-profiles",
-		base = urlBase.APIS
+		base = UrlBase.APIS
 	})()
-	local t = {
+	local config = {
 		USERNAME = "names.username",
 		DISPLAY_NAME = "names.displayName",
 		COMBINED_NAME = "names.combinedName",
@@ -38,341 +37,342 @@ local var1 = createComputed(function(_)
 		CONTACT_NAME = "names.contactName",
 		ALIAS = "names.alias",
 		PLATFORM_PROFILE_ID = "platformProfileId",
-		IS_VERIFIED = if fFlagEnableVerifiedBadgeStore then "isVerified" else nil,
-		HAS_ROBLOX_SUBSCRIPTION = if fFlagEnableBlackbirdCheck then "hasRobloxSubscription" else nil
+		IS_VERIFIED = if FFlagEnableVerifiedBadgeStore then "isVerified" else nil,
+		HAS_ROBLOX_SUBSCRIPTION = if FFlagEnableBlackbirdCheck then "hasRobloxSubscription" else nil
 	}
-	local t_1 = {}
-	local t_2 = {}
-	local t_3 = {}
-	local var3 = false
+	local CreateResults = {}
+	local t = {}
+	local t1 = {}
+	local Flag = false
 	
-	local function _(p1)
-		-- upvalues: t_1 (ref), userProfileStore (ref), userProfileModelModule (copy)
-		local var4 = t_1[p1]
+	local function _(Key) --[[ Line: 90 | Named "getOrCreateByUserId" ]]
+		-- upvalues: CreateResults (copy), UserProfileStore (copy), UserProfileModelModule (upval)
+		local CreateResult = CreateResults[Key]
 		
-		if var4 == nil then
-			userProfileStore:trace("Creating profile: {}", p1)
-			local var5 = userProfileModelModule.create(p1)
-			t_1[p1] = var5
+		if CreateResult == nil then
+			UserProfileStore:trace("Creating profile: {}", Key)
+			local NewUserProfileModel = UserProfileModelModule.create(Key)
+			CreateResults[Key] = NewUserProfileModel
 			
-			return var5
+			return NewUserProfileModel
+		else
+			UserProfileStore:trace("Found profile: {}", Key)
+			
+			return CreateResult
 		end
-		userProfileStore:trace("Found profile: {}", p1)
-		
-		return var4
 	end
 	
-	local function performBatchFetch(p1, p2, p3, p4)
-		-- upvalues: userProfileStore (ref), t_2 (ref), fIntUserProfileStoreBatchSize (copy), fFlagUserProfilePlatformProfile (copy), platformProfileRequestModule (copy), httpService (ref), var2 (ref), userProfileStoreHttpTimeout (ref), t_1 (ref), userProfileModelModule (copy), performBatchFetch (ref)
+	local function performBatchFetch(p1, Text: string, List, p2) --[[ Line: 103 ]]
+		-- upvalues: UserProfileStore (copy), t (copy), FIntUserProfileStoreBatchSize (upval), FFlagUserProfilePlatformProfile (upval), PlatformProfileRequestModule (upval), HttpService (copy), Url (copy), UserProfileStoreHttpTimeout (copy), CreateResults (copy), UserProfileModelModule (upval), performBatchFetch (copy)
 		if #p1 == 0 then
-			userProfileStore:trace("No more ids to fetch. Setting result.")
+			UserProfileStore:trace("No more ids to fetch. Setting result.")
 			
-			for i, v in ipairs(p3) do
-				local t = {}
-				local var4 = t_2[p2]
+			for _, value in ipairs(List) do
+				local Data = {}
+				local Entry = t[Text]
 				
-				for i_1, v_1 in v.userIds do
-					local var5 = var4[v_1]
+				for _, userId in value.userIds do
+					local Entry1 = Entry[userId]
 					
-					if var5 then
-						userProfileStore:trace("Found cached profile: {}", v_1)
-						table.insert(t, var5)
+					if Entry1 then
+						UserProfileStore:trace("Found cached profile: {}", userId)
+						table.insert(Data, Entry1)
 					else
-						userProfileStore:debug("Expected cached profile: {}", v_1)
+						UserProfileStore:debug("Expected cached profile: {}", userId)
 					end
 				end
-				local t_3 = { status = if p4 then "success" else "failed", data = t }
-				v.setResult(t_3)
-				local callback = v.callback
+				local config = { status = if p2 then "success" else "failed", data = Data }
+				value.setResult(config)
+				local CallbackFunction: (any) -> () = value.callback
 				
-				if callback ~= nil then
-					callback(t_3)
+				if CallbackFunction ~= nil then
+					CallbackFunction(config)
 				end
 			end
 			return
 		else
-			local t_3
-			local _ = {}
-			local t = {}
+			local List1 = {}
+			local UserIds = nil
 			
-			if fIntUserProfileStoreBatchSize < #p1 then
-				t_3 = {}
+			if FIntUserProfileStoreBatchSize < #p1 then
+				UserIds = {}
 				
-				for i = 1, fIntUserProfileStoreBatchSize do
-					table.insert(t_3, p1[i])
+				for i = 1, FIntUserProfileStoreBatchSize do
+					table.insert(UserIds, p1[i])
 				end
-				for i_1 = fIntUserProfileStoreBatchSize + 1, #p1 do
-					table.insert(t, p1[i_1])
+				for i1 = FIntUserProfileStoreBatchSize + 1, #p1 do
+					table.insert(List1, p1[i1])
 				end
 			else
-				t_3 = p1
+				UserIds = p1
 			end
-			local parts = string.split(p2, ",")
-			local var6 = httpService:JSONEncode({
-				userIds = t_3,
-				fields = parts,
-				includePlatformProfile = if fFlagUserProfilePlatformProfile and platformProfileRequestModule.hasPlatformFields(parts) then true else nil
+			local Parts = string.split(Text, ",")
+			local Json = HttpService:JSONEncode({
+				userIds = UserIds,
+				fields = Parts,
+				includePlatformProfile = if FFlagUserProfilePlatformProfile and PlatformProfileRequestModule.hasPlatformFields(Parts) then true else nil
 			})
-			userProfileStore:debug("Fetching: {}", var6)
-			httpService:RequestInternal({
+			UserProfileStore:debug("Fetching: {}", Json)
+			HttpService:RequestInternal({
 				Method = "POST",
 				Priority = 0,
-				Url = var2,
-				Body = var6,
-				Timeout = userProfileStoreHttpTimeout,
+				Url = Url,
+				Body = Json,
+				Timeout = UserProfileStoreHttpTimeout,
 				CachePolicy = Enum.HttpCachePolicy.None,
 				Headers = {
 					["Content-Type"] = "application/json",
 					Accept = "application/json"
 				},
 				RequestType = Enum.HttpRequestType.Default
-			}):Start(function(p5, p6)
-				-- upvalues: httpService (copy), userProfileStore (copy), var6 (ref), fFlagUserProfilePlatformProfile (copy), platformProfileRequestModule (copy), parts (ref), t_2 (copy), p2 (ref), t_1 (copy), userProfileModelModule (copy), performBatchFetch (copy), t (ref), p3 (ref), p4 (ref)
-				if p5 == true then
-					local body = p6.Body
+			}):Start(function(Enabled, p3) --[[ Line: 178 ]]
+				-- upvalues: HttpService (upval), UserProfileStore (upval), Json (copy), FFlagUserProfilePlatformProfile (upval), PlatformProfileRequestModule (upval), Parts (copy), t (upval), Text (copy), CreateResults (upval), UserProfileModelModule (upval), performBatchFetch (upval), List1 (copy), List (copy), p2 (copy)
+				if Enabled == true then
+					local Body = p3.Body
 					
-					if body ~= nil then
-						local _, status = pcall(function()
-							-- upvalues: httpService (copy), body (ref)
-							return httpService:JSONDecode(body)
+					if Body ~= nil then
+						local _, Result = pcall(function() --[[ Line: 182 ]]
+							-- upvalues: HttpService (upval), Body (copy)
+							return HttpService:JSONDecode(Body)
 						end)
 						
-						if status ~= nil then
-							userProfileStore:trace("Fetched: {}\nresponse: {}", var6, body)
-							local profileDetails = status.profileDetails
+						if Result ~= nil then
+							UserProfileStore:trace("Fetched: {}\nresponse: {}", Json, Body)
+							local ProfileDetails = Result.profileDetails
 							
-							if profileDetails ~= nil then
-								if fFlagUserProfilePlatformProfile then
-									profileDetails = platformProfileRequestModule.normalizeProfiles(profileDetails, parts)
+							if ProfileDetails ~= nil then
+								if FFlagUserProfilePlatformProfile then
+									ProfileDetails = PlatformProfileRequestModule.normalizeProfiles(ProfileDetails, Parts)
 								end
-								local var7 = t_2[p2]
+								local Entry = t[Text]
 								
-								for i, v in ipairs(profileDetails) do
-									local var8
-									local var9 = tostring(v.userId)
-									local var10 = t_1[var9]
+								for _, profileDetail in ipairs(ProfileDetails) do
+									local Text1 = tostring(profileDetail.userId)
+									local CreateResult = CreateResults[Text1]
+									local CreateResult1 = nil
 									
-									if var10 == nil then
-										userProfileStore:trace("Creating profile: {}", var9)
-										var10 = userProfileModelModule.create(var9)
-										t_1[var9] = var10
-										var8 = var10
+									if CreateResult == nil then
+										UserProfileStore:trace("Creating profile: {}", Text1)
+										local NewUserProfileModel = UserProfileModelModule.create(Text1)
+										CreateResults[Text1] = NewUserProfileModel
+										CreateResult1 = NewUserProfileModel
 									else
-										userProfileStore:trace("Found profile: {}", var9)
-										var8 = var10
+										UserProfileStore:trace("Found profile: {}", Text1)
+										CreateResult1 = CreateResult
 									end
-									if v then
-										userProfileStore:trace("Updating profile: {}", var9)
-										userProfileModelModule.update(var8, v)
+									if profileDetail then
+										UserProfileStore:trace("Updating profile: {}", Text1)
+										UserProfileModelModule.update(CreateResult1, profileDetail)
 									end
-									var7[var9] = var8
+									Entry[Text1] = CreateResult1
 								end
 							end
 						end
 					end
 				else
-					userProfileStore:error("Error fetching")
+					UserProfileStore:error("Error fetching")
 				end
-				performBatchFetch(t, p2, p3, if p5 == false then false else p4)
+				performBatchFetch(List1, Text, List, Enabled ~= false and p2)
 			end)
 		end
 	end
 	
-	local function processQueuedRequests()
-		-- upvalues: t_3 (write), userProfileStore (ref), t_2 (ref), performBatchFetch (ref)
-		for i, v in pairs(t_3) do
-			userProfileStore:trace("Processing requests ({}) for fields: {}", #v, i)
-			local t = {}
-			local t_1 = {}
-			local var7 = t_2[i]
+	local function processQueuedRequests() --[[ Line: 213 ]]
+		-- upvalues: t1 (ref), UserProfileStore (copy), t (copy), performBatchFetch (copy)
+		for i, value in pairs(t1) do
+			UserProfileStore:trace("Processing requests ({}) for fields: {}", #value, i)
+			local t2 = {}
+			local List = {}
+			local Entry = t[i]
 			
-			for i_1, v_1 in ipairs(v) do
-				for i_2, v_2 in ipairs(v_1.userIds) do
-					if t[v_2] == nil then
-						t[v_2] = v_2
+			for _, value1 in ipairs(value) do
+				for _, userId in ipairs(value1.userIds) do
+					if t2[userId] == nil then
+						t2[userId] = userId
 						
-						if var7[v_2] == nil then
-							table.insert(t_1, v_2)
+						if Entry[userId] == nil then
+							table.insert(List, userId)
 						end
 					end
 				end
 			end
-			performBatchFetch(t_1, i, table.clone(v), true)
+			performBatchFetch(List, i, table.clone(value), true)
 		end
-		t_3 = {}
+		t1 = {}
 	end
 	
-	local function fetchByUserIds(p5, p6, p7)
-		-- upvalues: t_2 (ref), t_1 (ref), userProfileStore (ref), userProfileModelModule (copy), createSignal (copy), t_3 (write), var3 (write), fFlagEnableBlackbirdCheck (copy), processQueuedRequests (ref), userProfileStoreQueueProcessDelay (copy)
-		table.sort(p6)
-		local joined = table.concat(p6, ",")
-		local var8 = t_2[joined]
+	local function fetchByUserIds(UserIds, List, Callback: (any) -> ()) --[[ Line: 235 ]]
+		-- upvalues: t (copy), CreateResults (copy), UserProfileStore (copy), UserProfileModelModule (upval), CreateSignalFunction (upval), t1 (ref), Flag (ref), FFlagEnableBlackbirdCheck (upval), processQueuedRequests (copy), UserProfileStoreQueueProcessDelay (upval)
+		table.sort(List)
+		local Joined = table.concat(List, ",")
+		local Entry = t[Joined]
 		
-		if var8 == nil then
-			var8 = {}
-			t_2[joined] = var8
+		if Entry == nil then
+			Entry = {}
+			t[Joined] = Entry
 		end
-		local t = {}
-		local var9 = false
+		local Data = {}
+		local Enabled = false
 		
-		for i, v in p5 do
-			local var10 = var8[v]
+		for _, userId in UserIds do
+			local Entry1 = Entry[userId]
 			
-			if var10 == nil and var9 == false then
-				var9 = true
+			if Entry1 == nil and Enabled == false then
+				Enabled = true
 			end
-			local var11 = var10
+			local Entry2 = Entry1
 			
-			if not var11 then
-				local var12 = t_1[v]
+			if not Entry2 then
+				local CreateResult = CreateResults[userId]
 				
-				if var12 == nil then
-					userProfileStore:trace("Creating profile: {}", v)
-					var12 = userProfileModelModule.create(v)
-					t_1[v] = var12
-					var11 = var12
+				if CreateResult == nil then
+					UserProfileStore:trace("Creating profile: {}", userId)
+					local NewUserProfileModel = UserProfileModelModule.create(userId)
+					CreateResults[userId] = NewUserProfileModel
+					Entry2 = NewUserProfileModel
 				else
-					userProfileStore:trace("Found profile: {}", v)
-					var11 = var12
+					UserProfileStore:trace("Found profile: {}", userId)
+					Entry2 = CreateResult
 				end
 			end
-			table.insert(t, var11)
+			table.insert(Data, Entry2)
 		end
-		if var9 == false then
-			userProfileStore:trace("All requested profiles are cached. Calling back early")
-			local t_4 = { status = "success", data = t }
-			local var13 = createSignal(t_4)
+		if Enabled == false then
+			UserProfileStore:trace("All requested profiles are cached. Calling back early")
+			local config = { status = "success", data = Data }
+			local Signal = CreateSignalFunction(config)
 			
-			if p7 ~= nil then
-				p7(t_4)
+			if Callback ~= nil then
+				Callback(config)
 			end
-			return var13
+			return Signal
 		else
-			local t_4 = { status = "fetching", data = t }
-			local var14, var15 = createSignal(t_4)
-			local var16 = t_3[joined]
+			local config1 = { status = "fetching", data = Data }
+			local Signal1, Signal2 = CreateSignalFunction(config1)
+			local Entry3 = t1[Joined]
 			
-			if var16 == nil then
-				var16 = {}
-				t_3[joined] = var16
+			if Entry3 == nil then
+				Entry3 = {}
+				t1[Joined] = Entry3
 			end
-			table.insert(var16, {
-				userIds = p5,
-				getResult = var14,
-				setResult = var15,
-				callback = p7
+			table.insert(Entry3, {
+				userIds = UserIds,
+				getResult = Signal1,
+				setResult = Signal2,
+				callback = Callback
 			})
 			
-			if not var3 then
-				var3 = true
+			if not Flag then
+				Flag = true
 				
-				if fFlagEnableBlackbirdCheck then
-					task.defer(function()
-						-- upvalues: processQueuedRequests (copy), var3 (copy)
+				if FFlagEnableBlackbirdCheck then
+					task.defer(function() --[[ Line: 298 ]]
+						-- upvalues: processQueuedRequests (upval), Flag (upval)
 						processQueuedRequests()
-						var3 = false
+						Flag = false
 					end)
 				else
-					task.delay(userProfileStoreQueueProcessDelay, function()
-						-- upvalues: processQueuedRequests (copy), var3 (copy)
+					task.delay(UserProfileStoreQueueProcessDelay, function() --[[ Line: 303 ]]
+						-- upvalues: processQueuedRequests (upval), Flag (upval)
 						processQueuedRequests()
-						var3 = false
+						Flag = false
 					end)
 				end
 			end
-			if p7 ~= nil then
-				p7(t_4)
+			if Callback ~= nil then
+				Callback(config1)
 			end
-			return var14
+			return Signal1
 		end
 	end
 	
-	local function getNameFields(p8)
-		-- upvalues: t (ref), fFlagUserProfilePlatformProfile (copy), fFlagEnableVerifiedBadgeStore (copy), fFlagEnableBlackbirdCheck (copy)
-		local list = {
-			t.COMBINED_NAME, t.DISPLAY_NAME, t.USERNAME, t.IN_EXPERIENCE_COMBINED_NAME,
-			t.CONTACT_NAME, t.ALIAS
+	local function getNameFields(p3) --[[ Line: 315 ]]
+		-- upvalues: config (copy), FFlagUserProfilePlatformProfile (upval), FFlagEnableVerifiedBadgeStore (upval), FFlagEnableBlackbirdCheck (upval)
+		local List = {
+			config.COMBINED_NAME, config.DISPLAY_NAME, config.USERNAME,
+			config.IN_EXPERIENCE_COMBINED_NAME, config.CONTACT_NAME, config.ALIAS
 		}
 		
-		if not fFlagUserProfilePlatformProfile or p8 then
-			table.insert(list, t.PLATFORM_NAME)
-			table.insert(list, t.PLATFORM_PROFILE_ID)
+		if not FFlagUserProfilePlatformProfile or p3 then
+			table.insert(List, config.PLATFORM_NAME)
+			table.insert(List, config.PLATFORM_PROFILE_ID)
 		end
-		if fFlagEnableVerifiedBadgeStore then
-			table.insert(list, t.IS_VERIFIED)
+		if FFlagEnableVerifiedBadgeStore then
+			table.insert(List, config.IS_VERIFIED)
 		end
-		if fFlagEnableBlackbirdCheck then
-			table.insert(list, t.HAS_ROBLOX_SUBSCRIPTION)
+		if FFlagEnableBlackbirdCheck then
+			table.insert(List, config.HAS_ROBLOX_SUBSCRIPTION)
 		end
-		return list
+		return List
 	end
 	
-	local function invalidateCachedProfiles(p8, p9)
-		-- upvalues: t_2 (ref)
-		table.sort(p8)
-		local var17 = t_2[table.concat(p8, ",")]
+	local function invalidateCachedProfiles(List, List1) --[[ Line: 363 ]]
+		-- upvalues: t (copy)
+		table.sort(List)
+		local Entry = t[table.concat(List, ",")]
 		
-		if var17 == nil then return end
-		if p9 == nil then
-			local _ = {}
-			
-			return
-		end
-		for i, v in p9 do
-			var17[v] = nil
+		if Entry == nil then return end
+		if List1 == nil then return end
+		for _, value in List1 do
+			Entry[value] = nil
 		end
 	end
 	
 	return {
-		fetchNamesByUserIds = function(p10, p11, p12)
-			-- upvalues: fetchByUserIds (ref), getNameFields (ref)
-			return fetchByUserIds(p10, getNameFields(p12), p11)
+		fetchNamesByUserIds = function(UserIds, Callback, p3) --[[ Line: 341 ]]
+			-- upvalues: fetchByUserIds (copy), getNameFields (copy)
+			return (fetchByUserIds(UserIds, getNameFields(p3), Callback))
 		end,
-		updateFromHydration = function(p10)
-			-- upvalues: t_1 (ref), userProfileStore (ref), userProfileModelModule (copy)
-			for i, v in p10 do
-				local var18
-				local var19 = if v.userId ~= nil then i else tostring(v.userId)
-				local var20 = t_1[var19]
+		updateFromHydration = function(List) --[[ Line: 349 ]]
+			-- upvalues: CreateResults (copy), UserProfileStore (copy), UserProfileModelModule (upval)
+			for i, value in List do
+				local Text = if value.userId == nil then i else tostring(value.userId)
+				local CreateResult = CreateResults[Text]
+				local CreateResult1 = nil
 				
-				if var20 == nil then
-					userProfileStore:trace("Creating profile: {}", var19)
-					var20 = userProfileModelModule.create(var19)
-					t_1[var19] = var20
-					var18 = var20
+				if CreateResult == nil then
+					UserProfileStore:trace("Creating profile: {}", Text)
+					local NewUserProfileModel = UserProfileModelModule.create(Text)
+					CreateResults[Text] = NewUserProfileModel
+					CreateResult1 = NewUserProfileModel
 				else
-					userProfileStore:trace("Found profile: {}", var19)
-					var18 = var20
+					UserProfileStore:trace("Found profile: {}", Text)
+					CreateResult1 = CreateResult
 				end
-				userProfileModelModule.update(var18, {
-					names = { username = v.username, displayName = v.displayName },
-					isVerified = v.isVerified
+				UserProfileModelModule.update(CreateResult1, {
+					names = {
+						username = value.username,
+						displayName = value.displayName
+					},
+					isVerified = value.isVerified
 				})
 			end
 		end,
-		getProfileByUserId = function(p11)
-			-- upvalues: t_1 (ref)
-			return t_1[p11]
+		getProfileByUserId = function(p3) --[[ Line: 400 ]]
+			-- upvalues: CreateResults (copy)
+			return CreateResults[p3]
 		end,
-		invalidateCachedNamesForUserIds = function(p11)
-			-- upvalues: fFlagUserProfilePlatformProfile (copy), invalidateCachedProfiles (ref), getNameFields (ref), t (ref)
-			if fFlagUserProfilePlatformProfile then
-				invalidateCachedProfiles(getNameFields(false), p11)
-				invalidateCachedProfiles(getNameFields(true), p11)
+		invalidateCachedNamesForUserIds = function(p3) --[[ Line: 381 ]]
+			-- upvalues: FFlagUserProfilePlatformProfile (upval), invalidateCachedProfiles (copy), getNameFields (copy), config (copy)
+			if FFlagUserProfilePlatformProfile then
+				invalidateCachedProfiles(getNameFields(false), p3)
+				invalidateCachedProfiles(getNameFields(true), p3)
 				
 				return
+			else
+				invalidateCachedProfiles({
+					config.COMBINED_NAME, config.DISPLAY_NAME, config.USERNAME,
+					config.IN_EXPERIENCE_COMBINED_NAME, config.CONTACT_NAME, config.ALIAS,
+					config.PLATFORM_NAME, config.PLATFORM_PROFILE_ID
+				}, p3)
 			end
-			invalidateCachedProfiles({
-				t.COMBINED_NAME, t.DISPLAY_NAME, t.USERNAME, t.IN_EXPERIENCE_COMBINED_NAME,
-				t.CONTACT_NAME, t.ALIAS, t.PLATFORM_NAME, t.PLATFORM_PROFILE_ID
-			}, p11)
 		end
 	}
 end)
 
 return {
-	get = function()
-		-- upvalues: var1 (ref)
-		return var1(false)
+	get = function() --[[ Line: 413 ]]
+		-- upvalues: Computed (copy)
+		return Computed(false)
 	end
 }

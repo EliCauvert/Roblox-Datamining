@@ -1,173 +1,229 @@
-﻿local function _(p1)
+﻿local function _(p1) --[[ Line: 3 | Named "rine" ]]
 	return p1 and (#p1 > 0 and p1)
 end
 
-local _ = function(p1)
+local _ = function(p1) --[[ Line: 6 | Named "rit" ]]
 	return type(p1) == "table" and p1
 end
 
-local _ = function()
+local _ = function(): boolean --[[ Line: 10 | Named "dont_crash" ]]
 	if math.random() <= 0.004 then
 		wait()
 	end
 	return true
 end
 
-local var1 = function() end
+local function v3() --[[ Line: 18 ]] end
 
-local _ = function(p1)
-	return string.gsub(p1, "([%^%$%(%)%%%.%[%]%*%+%-%?])", "%%%1")
+local _ = function(Text: string): string --[[ Line: 19 ]]
+	return string.gsub(Text, "([%^%$%(%)%%%.%[%]%*%+%-%?])", "%%%1")
 end
 
-local _tostring = tostring
-local char = string.char
+local Callback1 = tostring
+local CharFunction = string.char
 local t = {}
-local var2 = if t.silent then var1 else function(p1, p2, ...)
-	-- upvalues: t (ref)
-	local _ = if p1 == "i" then "stdout" else "stderr"
-	print("[HTMLParser]" .. (" [%s] "):format(p1:upper()) .. p4:format(...) .. (t.nonl or "\n"))
+local Callback = t.silent and v3 or function(Text: string, p1: string, ...) --[[ Line: 26 ]]
+	-- upvalues: t (copy)
+	print("[HTMLParser]" .. (" [%s] "):format(Text:upper()) .. p1:format(...) .. (t.nonl or "\n"))
 end
-local var3 = if t.noerr then var1 else function(p1, ...)
-	-- upvalues: var2 (ref)
-	var2("e", p1, ...)
+local Callback3 = t.noerr and v3 or function(p1, ...) --[[ Line: 32 ]]
+	-- upvalues: Callback (copy)
+	Callback("e", p1, ...)
 end
-local _ = if t.noout then var1 else function(p1, ...)
-	-- upvalues: var2 (ref)
-	var2("i", p1, ...)
+
+if not t.noout or not v3 then
+	local _ = function(p1, ...) --[[ Line: 36 ]]
+		-- upvalues: Callback (copy)
+		Callback("i", p1, ...)
+	end
 end
-local var4 = if t.debug then function(p1, ...)
-	-- upvalues: var2 (ref), var1 (ref), _tostring (ref)
-	var2("d", p1:gsub("#LINE#", _tostring(var1(3))), ...)
-end else var1
-local elementNodeModule = require(script.ElementNode)
-local voidelementsModule = require(script.voidelements)
+local Callback2 = t.debug and function(Text: string, ...) --[[ Line: 41 ]]
+	-- upvalues: Callback (copy), v3 (copy), Callback1 (copy)
+	Callback("d", Text:gsub("#LINE#", (Callback1(v3(3)))), ...)
+end or v3
+local ElementNodeModule = require(script.ElementNode)
+local VoidelementsModule = require(script.voidelements)
 
 return {
-	parse = function(p1, p2, p3)
-		-- upvalues: t (ref), _tostring (ref), char (ref), var4 (ref), var3 (ref), elementNodeModule (ref), voidelementsModule (ref)
-		local var5 = t and (#t > 0 and t) or ({} or {})
-		var5.looplimit = var5.looplimit or 100000000
-		local var6 = _tostring(p1)
-		p2 = p2 or (var5.looplimit or 100000000)
-		local var7 = false
+	parse = function(p1, p2, Page_url) --[[ Line: 53 ]]
+		-- upvalues: t (copy), Callback1 (copy), CharFunction (copy), Callback2 (copy), Callback3 (copy), ElementNodeModule (copy), VoidelementsModule (copy)
+		local T = (if t then #t > 0 and t else t) or ({} or {})
+		T.looplimit = T.looplimit or 100000000
+		local CallbackResult = Callback1(p1)
+		local P8 = p2 or (T.looplimit or 100000000)
+		local Flag = false
 		
-		if not var5.keep_comments then
-			var6 = var6:gsub("<!%-%-.-%-%->", "")
+		if not T.keep_comments then
+			CallbackResult = CallbackResult:gsub("<!%-%-.-%-%->", "")
 		end
-		local t_1 = {}
+		local t1 = {}
 		
-		if not var5.keep_danger_placeholders then
-			local t_2 = {}
-			local var8 = 0
-			-- [0.001s] <RUNTIME-ERROR> : Error block 44 analysis at pc 0 (34)
+		if not T.keep_danger_placeholders then
+			local t2 = {}
+			local Total = 0
+			repeat
+				local CharResult: string = CharFunction(Total)
+				if CallbackResult:match(CharResult) then
+					Callback2("[FindPH]:#LINE# Text contains this byte! || i=%d", Total)
+				else
+					if t1["<"] and t1[">"] then
+						Callback2("[FindPH]:#LINE# Done!", Total)
+						break
+					end
+					if t2[Total] then
+						Callback2("[FindPH]:#LINE# Busy! || i=%d", Total)
+					else
+						if t1["<"] then
+							if not t1[">"] then
+								t1[">"] = CharResult
+							end
+						else
+							t1["<"] = CharResult
+						end
+						t2[Total] = true
+						Callback2("c:{%s}||cc:{%d}||tpr[c]:{%s}", Callback1(c), CharResult:byte(), (Callback1(t1[c])))
+						Callback2("busy[i]:{%s},i:{%d}", Callback1(t2[Total]), Total)
+						Callback2("[FindPH]:#LINE# Success! || i=%d", Total)
+					end
+					Callback2("c:{%s}||cc:{%d}||tpr[c]:{%s}", c, CharResult:byte(), (Callback1(t1[c])))
+					Callback2("%s", (Callback1(t2[Total])))
+				end
+				Total += if Total == 31 then 96 else 1
+			until Total == 255
+			if t1["<"] and t1[">"] then
+				Callback2("[FindPH]:#LINE# Found! || '<'=%d, '>'=%d", t1["<"]:byte(), t1[">"]:byte())
+			else
+				Callback3("Impossible to find at least two unused byte codes in this HTML-code. We need it to escape bracket-contained placeholders inside tags.")
+				Callback3("Consider enabling 'keep_danger_placeholders' option (to silence this error, if parser wasn't failed with current HTML-code) or manually replace few random bytes, to free up the codes.")
+			end
+			local function g(Key, ...): string --[[ Line: 124 ]]
+				-- upvalues: t1 (copy), Flag (ref), Callback2 (upval), Callback1 (upval)
+				local List = { ... }
+				local Entry = List[Key]
+				List[Key] = List[Key]:gsub("(.)", t1)
+				
+				if List[Key] ~= Entry then
+					Flag = true
+					Callback2("[g]:#LINE# orig: %s", (Callback1(Entry)))
+					Callback2("[g]:#LINE# replaced: %s", (Callback1(List[Key])))
+				end
+				Callback2("[g]:#LINE# called, id: %s, arg[id]: %s, args { " .. ("{%s}, "):rep(#List):gsub(", $", "") .. " }", Key, List[Key], ...)
+				Callback2("[g]:#LINE# concat(arg): %s", table.concat(List))
+				
+				return table.concat(List)
+			end
+			
+			CallbackResult = CallbackResult:gsub("(=[%s]-)(%b'')", function(...) --[[ Line: 144 ]]
+				-- upvalues: g (copy)
+				return g(2, ...)
+			end):gsub("(=[%s]-)(%b\"\")", function(...) --[[ Line: 146 ]]
+				-- upvalues: g (copy)
+				return g(2, ...)
+			end):gsub("(<" .. (T.tpl_skip_pattern or "[^!]") .. ")([^>]+)" .. "(>)", function(...) --[[ Line: 150 ]]
+				-- upvalues: g (copy)
+				return g(2, ...)
+			end):gsub("(" .. (t1["<"] or "__FAILED__") .. ")(" .. (T.tpl_marker_pattern or "[^%w%s]") .. ")([%g%s]-)" .. "(%2)(>)" .. "([^>]*>)", function(...) --[[ Line: 156 ]]
+				-- upvalues: g (copy)
+				return g(5, ...)
+			end)
 		end
-		local var9 = 0
-		local var10 = elementNodeModule:new(var9, _tostring(var6))
-		var10.page_url = p3
-		local var11 = var10
-		local var12 = true
-		local var13 = 1
-		local t_2 = {}
+		local Count = 0
+		local NewResult = ElementNodeModule:new(Count, (Callback1(CallbackResult)))
+		NewResult.page_url = Page_url
+		local Parent = NewResult
+		local Flag1 = true
+		local v1 = 1
+		local t3 = {}
 		while true do
 			if math.random() <= 0.004 then
 				wait()
 			end
-			if var9 == p2 then
-				var3("Main loop reached loop limit (%d). Consider either increasing it or checking HTML-code for syntax errors", p2)
+			if Count == P8 then
+				Callback3("Main loop reached loop limit (%d). Consider either increasing it or checking HTML-code for syntax errors", P8)
 				break
 			end
-			local _ = nil
-			local var14 = nil
-			local var15, var16, var17 = var10._text:find("<([%w-]+)[^>]*>", var13)
-			local var18 = var15
-			var13 = var16
-			var14 = var17
-			var4("[MainLoop]:#LINE# openstart=%s || tpos=%s || name=%s", _tostring(var18), _tostring(var13), _tostring(var14))
+			local StartIndex, W3
+			StartIndex, v1, W3 = NewResult._text:find("<([%w-]+)[^>]*>", v1)
+			Callback2("[MainLoop]:#LINE# openstart=%s || tpos=%s || name=%s", Callback1(StartIndex), Callback1(v1), (Callback1(W3)))
 			
-			if not var14 then break end
-			var9 += 1
-			local var19 = elementNodeModule:new(var9, _tostring(var14), var11 or {}, var12, var18, var13)
-			var19.page_url = p3
-			local var11 = var19
-			local var20 = nil
-			local text = var19:gettext()
-			local var21 = 1
+			if not W3 then break end
+			Count += 1
+			local NewResult1 = ElementNodeModule:new(Count, Callback1(W3), Parent or {}, Flag1, StartIndex, v1)
+			NewResult1.page_url = Page_url
+			Parent = NewResult1
+			local Count1: number? = nil
+			local Text: string = NewResult1:gettext()
+			local v2 = 1
 			while true do
 				if math.random() <= 0.004 then
 					wait()
 				end
-				if var20 == p2 then
-					var3("Tag parsing loop reached loop limit (%d). Consider either increasing it or checking HTML-code for syntax errors", p2)
+				if Count1 == P8 then
+					Callback3("Tag parsing loop reached loop limit (%d). Consider either increasing it or checking HTML-code for syntax errors", P8)
 					break
 				end
-				local _ = nil
-				local var22 = nil
-				local _ = nil
-				local _ = nil
-				local var23 = nil
-				local _ = nil
-				local var24, var25, var26, _, var27, var28, var29 = text:find("%s+([^%s=/>]+)([%s]-)(=?)([%s]-)(['\"]?)", var21)
-				local var30 = var24
-				var21 = var25
-				var22 = var26
-				local var31 = var27
-				local var32 = var29
-				var4("[TagLoop]:#LINE# start=%s || apos=%s || k=%s || zsp='%s' || eq='%s', quote=[%s]", _tostring(var30), _tostring(var21), _tostring(var22), _tostring(var28), _tostring(var31), _tostring(var32))
+				local v3 = nil
+				local StartIndex1, SS3, _, SS5, SS6, SS7
+				StartIndex1, v2, SS3, _, SS5, SS6, SS7 = Text:find("%s+([^%s=/>]+)([%s]-)(=?)([%s]-)(['\"]?)", v2)
+				Callback2("[TagLoop]:#LINE# start=%s || apos=%s || k=%s || zsp='%s' || eq='%s', quote=[%s]", Callback1(StartIndex1), Callback1(v2), Callback1(SS3), Callback1(SS6), Callback1(SS5), (Callback1(SS7)))
 				
-				if not var22 or var22 == "/>" or var22 == ">" then break end
-				if var31 == "=" then
-					local var33 = if var32 ~= "" then var32 .. "([^" .. var40 .. "]*)" .. var40 else "=([^%s>]*)"
-					local var34, var35, var36 = text:find(var33, var21)
-					local var37 = var34
-					var21 = var35
-					var23 = var36
-					var4("[TagLoop]:#LINE# start=%s || apos=%s || v=%s || pattern=%s", _tostring(var37), _tostring(var21), _tostring(var23), _tostring(var33))
+				if not SS3 or SS3 == "/>" or SS3 == ">" then break end
+				if SS5 == "=" then
+					local S: string = if SS7 == "" then "=([^%s>]*)" else SS7 .. "([^" .. SS7 .. "]*)" .. SS7
+					local StartIndex2
+					StartIndex2, v2, v30 = Text:find(S, v2)
+					Callback2("[TagLoop]:#LINE# start=%s || apos=%s || v=%s || pattern=%s", Callback1(StartIndex2), Callback1(v2), Callback1(v3), (Callback1(S)))
 				end
-				var23 = var23 or ""
-				var4("[TagLoop]:#LINE# k=%s || v=%s", _tostring(var22), _tostring(var23))
-				var19:addattribute(var22, var23)
-				var20 = (var20 or 0) + 1
-				if voidelementsModule[var19.name:lower()] then
-					var12 = false
-					var19:close()
-				else
-					t_2[var19.name] = t_2[var19.name] or {}
-					table.insert(t_2[var19.name], var19)
+				local V30 = v3 or ""
+				
+				if Flag then
+					for i1, value1 in pairs(t1) do
+						V30 = V30:gsub(value1, i1)
+						Callback2("[TagLoop]:#LINE# rv=%s || rk=%s", Callback1(value1), (Callback1(i1)))
+					end
 				end
-				local var38 = var13
-				local var39 = nil
-				while true do
-					if math.random() <= 0.004 then
-						wait()
-					end
-					if var39 == p2 then
-						var3("Tag closing loop reached loop limit (%d). Consider either increasing it or checking HTML-code for syntax errors", p2)
-						break
-					end
-					local _ = nil
-					local var40 = nil
-					local _ = nil
-					local var41, var42, var43, var44 = var10._text:find("[^<]*<(/?)([%w-]+)", var38)
-					local var45 = var41
-					var38 = var42
-					var40 = var43
-					local var46 = var44
-					var4("[TagCloseLoop]:#LINE# closestart=%s || closeend=%s || closing=%s || closename=%s", _tostring(var45), _tostring(var38), _tostring(var40), _tostring(var46))
-					
-					if not var40 or var40 == "" then
-						continue
-						break
-					end
-					var19 = table.remove(t_2[var46] or {}) or var19
-					var45 = var10._text:find("<", var45)
-					var4("[TagCloseLoop]:#LINE# closestart=%s", _tostring(var45))
-					var19:close(var45, var38 + 1)
-					local var11 = var19.parent
-					var12 = true
-					var39 = (var39 or 0) + 1
-				end
+				Callback2("[TagLoop]:#LINE# k=%s || v=%s", Callback1(SS3), (Callback1(V30)))
+				NewResult1:addattribute(SS3, V30)
+				Count1 = (Count1 or 0) + 1
 			end
-			return var10
+			if VoidelementsModule[NewResult1.name:lower()] then
+				Flag1 = false
+				NewResult1:close()
+			else
+				t3[NewResult1.name] = t3[NewResult1.name] or {}
+				table.insert(t3[NewResult1.name], NewResult1)
+			end
+			local v4: number = v1
+			local Count2: number? = nil
+			while true do
+				if math.random() <= 0.004 then
+					wait()
+				end
+				if Count2 == P8 then
+					Callback3("Tag closing loop reached loop limit (%d). Consider either increasing it or checking HTML-code for syntax errors", P8)
+					break
+				end
+				local StartIndex3, W3_1, W4
+				StartIndex3, v4, W3_1, W4 = NewResult._text:find("[^<]*<(/?)([%w-]+)", v4)
+				Callback2("[TagCloseLoop]:#LINE# closestart=%s || closeend=%s || closing=%s || closename=%s", Callback1(StartIndex3), Callback1(v4), Callback1(W3_1), (Callback1(W4)))
+				
+				if not W3_1 or W3_1 == "" then break end
+				NewResult1 = table.remove(t3[W4] or {}) or NewResult1
+				local v5 = NewResult._text:find("<", StartIndex3)
+				Callback2("[TagCloseLoop]:#LINE# closestart=%s", (Callback1(v5)))
+				NewResult1:close(v5, v4 + 1)
+				Parent = NewResult1.parent
+				Flag1 = true
+				Count2 = (Count2 or 0) + 1
+			end
 		end
+		if Flag then
+			Callback2("tpl")
+			
+			for i, value in pairs(t1) do
+				NewResult._text = NewResult._text:gsub(value, i)
+			end
+		end
+		return NewResult
 	end
 }

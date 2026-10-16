@@ -1,41 +1,41 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceRodux").Parent
-local constants = require(parent.AvatarExperienceCommon).Constants
-local fFlagAXCatalogMakeupSupport = require(parent.AvatarExperienceFlags).FFlagAXCatalogMakeupSupport
-local assetTypeToAssetCategory = require(script.Parent.Parent.Constants).AssetTypeToAssetCategory
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceRodux").Parent
+local FFlagAXCatalogMakeupSupport = require(Parent.AvatarExperienceFlags).FFlagAXCatalogMakeupSupport
+local AssetTypeToAssetCategory = require(script.Parent.Parent.Constants).AssetTypeToAssetCategory
 local _ = require(script.Parent.Parent.Types.BodyColors)
 local _ = require(script.Parent.Parent.Types.OutfitTryOn)
-local LOOK_TYPE = constants.LOOK_TYPE
+local LOOKTYPE = require(Parent.AvatarExperienceCommon).Constants.LOOK_TYPE
 
 return {
-	filterTryOns = function(p1, p2)
-		-- upvalues: assetTypeToAssetCategory (ref)
+	filterTryOns = function(List, p1) --[[ Line: 42 ]]
+		-- upvalues: AssetTypeToAssetCategory (copy)
 		local t = {}
-		local var1 = nil
+		local v1 = nil
 		
-		for i, v in p1 do
-			local itemSubType = assetTypeToAssetCategory[p2.itemSubType]
+		for i, value in List do
+			local AssetTypeToAssetCategoryEntry = AssetTypeToAssetCategory[p1.itemSubType]
+			local NoAssetTypeToAssetCategoryEntry: boolean = not AssetTypeToAssetCategoryEntry or AssetTypeToAssetCategory[value.itemSubType] ~= AssetTypeToAssetCategoryEntry
 			
-			if v.itemSubType == p2.itemSubType or not (not itemSubType or assetTypeToAssetCategory[v.itemSubType] ~= itemSubType) then
-				var1 = v
+			if value.itemSubType == p1.itemSubType or not NoAssetTypeToAssetCategoryEntry then
+				v1 = value
 			else
-				t[i] = v
+				t[i] = value
 			end
 		end
-		return t, var1
+		return t, v1
 	end,
-	convertDefaultBodyColorRanges = function(p3)
-		local t = {}
+	convertDefaultBodyColorRanges = function(List) --[[ Line: 62 ]]
+		local List1 = {}
 		
-		for i, v in p3 do
-			table.insert(t, { rangeId = v[1]:ToHex(), range = v })
+		for _, Range in List do
+			table.insert(List1, { rangeId = Range[1]:ToHex(), range = Range })
 		end
-		return t
+		return List1
 	end,
-	generateTryOnItemIdKey = function(p4, p5, p6)
-		-- upvalues: LOOK_TYPE (ref), fFlagAXCatalogMakeupSupport (ref)
-		return if p6 == nil or p6 ~= LOOK_TYPE.Avatar and (not fFlagAXCatalogMakeupSupport or p6 ~= LOOK_TYPE.Makeup) then p4 else tostring(p4) .. "-" .. p4
+	generateTryOnItemIdKey = function(p2, Text, Avatar) --[[ Line: 76 ]]
+		-- upvalues: LOOKTYPE (copy), FFlagAXCatalogMakeupSupport (copy)
+		return if Avatar == nil or Avatar ~= LOOKTYPE.Avatar and (not FFlagAXCatalogMakeupSupport or Avatar ~= LOOKTYPE.Makeup) then p2 else tostring(p2) .. "-" .. Text
 	end,
-	generateRecommendedItemsKey = function(p4, p5)
-		return (p5 or "") .. "-" .. (p4 or "")
+	generateRecommendedItemsKey = function(p2, p3): string --[[ Line: 89 ]]
+		return (p3 or "") .. "-" .. (p2 or "")
 	end
 }

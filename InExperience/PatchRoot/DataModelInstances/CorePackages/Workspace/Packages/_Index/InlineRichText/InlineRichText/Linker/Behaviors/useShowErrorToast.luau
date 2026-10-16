@@ -1,21 +1,22 @@
-﻿local inlineRichText = script:FindFirstAncestor("InlineRichText")
-local parent = inlineRichText.Parent
-local notificationModalsManagerModule = require(parent.NotificationModalsManager)
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local _ = require(inlineRichText.Types)
+﻿local InlineRichText = script:FindFirstAncestor("InlineRichText")
+local Parent = InlineRichText.Parent
+local NotificationModalsManagerModule = require(Parent.NotificationModalsManager)
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local _ = require(InlineRichText.Types)
 
-return function(p1)
-	-- upvalues: useLocalization (ref), reactModule (ref), notificationModalsManagerModule (ref)
-	local var1 = if p1.errorToastTextOverride and p1.errorToastTextOverride ~= "" then p1.errorToastTextOverride else useLocalization({
+return function(p1) --[[ Line: 14 ]]
+	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), NotificationModalsManagerModule (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
 		errorToastText = "CommonUI.Messages.Response.SomethingWentWrong"
-	}).errorToastText
+	})
+	local ErrorToastTextOverride = if p1.errorToastTextOverride and p1.errorToastTextOverride ~= "" then p1.errorToastTextOverride else UseLocalizationResult.errorToastText
 	
-	return reactModule.useCallback(function()
-		-- upvalues: notificationModalsManagerModule (copy), var1 (ref)
-		notificationModalsManagerModule.SetUIBloxToast({
-			toastTitle = var1,
+	return ReactModule.useCallback(function() --[[ Line: 22 ]]
+		-- upvalues: NotificationModalsManagerModule (upval), ErrorToastTextOverride (copy)
+		NotificationModalsManagerModule.SetUIBloxToast({
+			toastTitle = ErrorToastTextOverride,
 			sequenceNumber = DateTime.now().UnixTimestamp
 		})
-	end, { var1 })
+	end, { ErrorToastTextOverride })
 end

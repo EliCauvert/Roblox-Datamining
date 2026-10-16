@@ -1,30 +1,31 @@
-﻿local reactModule = require(script:FindFirstAncestor("ShareSheet").Parent.React)
+﻿local ReactModule = require(script:FindFirstAncestor("ShareSheet").Parent.React)
 
-return function()
-	-- upvalues: reactModule (ref)
-	local var1, var2 = reactModule.useState({})
+return function() --[[ Line: 14 | Named "useShareSheetSelection" ]]
+	-- upvalues: ReactModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState({})
 	
 	return {
-		onConversationActivated = reactModule.useCallback(function(p1)
-			-- upvalues: var2 (ref)
-			var2(function(p2)
-				-- upvalues: p1 (ref)
-				local cloned = table.clone(p2)
+		onConversationActivated = ReactModule.useCallback(function(p1) --[[ Line: 16 ]]
+			-- upvalues: UseStateResult2 (copy)
+			UseStateResult2(function(Tbl) --[[ Line: 18 ]]
+				-- upvalues: p1 (copy)
+				local Copy = table.clone(Tbl)
 				
-				if cloned[p1] then
-					cloned[p1] = nil
+				if Copy[p1] then
+					Copy[p1] = nil
 					
-					return cloned
+					return Copy
+				else
+					Copy[p1] = true
+					
+					return Copy
 				end
-				cloned[p1] = true
-				
-				return cloned
 			end)
 		end, {}),
-		onSendActivated = reactModule.useCallback(function()
-			-- upvalues: var2 (ref)
-			var2({})
+		onSendActivated = ReactModule.useCallback(function() --[[ Line: 29 ]]
+			-- upvalues: UseStateResult2 (copy)
+			UseStateResult2({})
 		end, {}),
-		selectedConversationIds = var1
+		selectedConversationIds = UseStateResult
 	}
 end

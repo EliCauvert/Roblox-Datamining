@@ -1,21 +1,20 @@
-﻿local parent = script:FindFirstAncestor("Moments").Parent
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
+﻿local Parent = script:FindFirstAncestor("Moments").Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
 local _ = require(script.Parent.FeedTypes)
-local navigationBarModule = require(script.Parent.NavigationBar)
+local NavigationBarModule = require(script.Parent.NavigationBar)
 
-return function(p1)
-	-- upvalues: signalsReactModule (ref), reactModule (ref), navigationBarModule (ref)
-	local var1 = signalsReactModule.useSignalState(p1.pager.getItems)
-	local var2 = signalsReactModule.useSignalState(p1.pager.getCurrentIndex)
-	local var3Count = #var1
-	local var3 = var1[var3Count]
-	local var4 = if var3 == nil or var3.kind ~= "skeleton" then var3Count else var3Count - 1
+return function(p1) --[[ Line: 35 | Named "FeedNavigationBar" ]]
+	-- upvalues: SignalsReactModule (copy), ReactModule (copy), NavigationBarModule (copy)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(p1.pager.getItems)
+	local CountUseSignalStateResult = #UseSignalStateResult
+	local UseSignalStateResultEntry = UseSignalStateResult[CountUseSignalStateResult]
+	local CountUseSignalStateResult1: number = if UseSignalStateResultEntry == nil or UseSignalStateResultEntry.kind ~= "skeleton" then CountUseSignalStateResult else CountUseSignalStateResult - 1
 	
-	return reactModule.createElement(navigationBarModule, {
+	return ReactModule.createElement(NavigationBarModule, {
 		active = p1.active,
-		currentIndex = math.min(var2, math.max(var4, 1)),
-		numItems = var4,
+		currentIndex = math.min(SignalsReactModule.useSignalState(p1.pager.getCurrentIndex), (math.max(CountUseSignalStateResult1, 1))),
+		numItems = CountUseSignalStateResult1,
 		onScrollToNext = p1.onScrollToNext,
 		onScrollToPrevious = p1.onScrollToPrevious,
 		zIndex = p1.zIndex

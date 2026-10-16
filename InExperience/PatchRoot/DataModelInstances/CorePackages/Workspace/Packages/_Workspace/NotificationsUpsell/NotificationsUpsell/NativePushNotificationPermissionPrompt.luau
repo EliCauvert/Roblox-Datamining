@@ -1,39 +1,40 @@
-﻿local parent = script.Parent.Parent
-local default = require(parent.LoggingProtocol).default
-local notificationsCommonModule = require(parent.NotificationsCommon)
-local sharedFlagsModule = require(parent.SharedFlags)
-local modalEventConstantsModule = require(script.Parent.Analytics.ModalEventConstants)
-local pushUpsellEventNameModule = require(script.Parent.Analytics.RobloxTelemetryConfigs.PushUpsellEventName)
-local notificationsUpsellConstantsModule = require(script.Parent.NotificationsUpsellConstants)
-local setupPushNotificationsUpsellModule = require(script.Parent.setupPushNotificationsUpsell)
-local fFlagPushNotificationsUpsellHomePromptsExperiment = sharedFlagsModule.FFlagPushNotificationsUpsellHomePromptsExperiment
-local var1 = false
+﻿local Parent = script.Parent.Parent
+local Default = require(Parent.LoggingProtocol).default
+local NotificationsCommonModule = require(Parent.NotificationsCommon)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local ModalEventConstantsModule = require(script.Parent.Analytics.ModalEventConstants)
+local PushUpsellEventNameModule = require(script.Parent.Analytics.RobloxTelemetryConfigs.PushUpsellEventName)
+local NotificationsUpsellConstantsModule = require(script.Parent.NotificationsUpsellConstants)
+local SetupPushNotificationsUpsellModule = require(script.Parent.setupPushNotificationsUpsell)
+local FFlagPushNotificationsUpsellHomePromptsExperiment = SharedFlagsModule.FFlagPushNotificationsUpsellHomePromptsExperiment
+local Flag = false
 
-local function requestPermission()
-	-- upvalues: var1 (write), notificationsCommonModule (ref), sharedFlagsModule (ref), default (ref), pushUpsellEventNameModule (ref), modalEventConstantsModule (ref), setupPushNotificationsUpsellModule (ref), notificationsUpsellConstantsModule (ref)
-	if var1 then
+local function requestPermission() --[[ Line: 19 ]]
+	-- upvalues: Flag (ref), NotificationsCommonModule (copy), SharedFlagsModule (copy), Default (copy), PushUpsellEventNameModule (copy), ModalEventConstantsModule (copy), SetupPushNotificationsUpsellModule (copy), NotificationsUpsellConstantsModule (copy)
+	if not Flag then
+		Flag = true
+		NotificationsCommonModule.ixpHelper.logUserLayerExposure(SharedFlagsModule.FStringPushNotificationsUpsellHomePromptsExperimentLayer)
+		Default:logRobloxTelemetryEvent(PushUpsellEventNameModule, {}, {
+			[ModalEventConstantsModule.ActionType] = ModalEventConstantsModule.ShouldRequest,
+			[ModalEventConstantsModule.EntryPoint] = "Home"
+		}, ModalEventConstantsModule.ModalContextSysUpsell)
+		SetupPushNotificationsUpsellModule.OpenModal(NotificationsUpsellConstantsModule.ModalKey.PushUpsellHome, false, "Home")
+		
 		return
 	end
-	var1 = true
-	notificationsCommonModule.ixpHelper.logUserLayerExposure(sharedFlagsModule.FStringPushNotificationsUpsellHomePromptsExperimentLayer)
-	default:logRobloxTelemetryEvent(pushUpsellEventNameModule, {}, {
-		[modalEventConstantsModule.ActionType] = modalEventConstantsModule.ShouldRequest,
-		[modalEventConstantsModule.EntryPoint] = "Home"
-	}, modalEventConstantsModule.ModalContextSysUpsell)
-	setupPushNotificationsUpsellModule.OpenModal(notificationsUpsellConstantsModule.ModalKey.PushUpsellHome, false, "Home")
 end
 
 return {
-	isEnabled = function()
-		-- upvalues: fFlagPushNotificationsUpsellHomePromptsExperiment (ref), sharedFlagsModule (ref)
-		return fFlagPushNotificationsUpsellHomePromptsExperiment and sharedFlagsModule.FFlagNotificationsUpsellUseRequestPushPermissionHelper
+	isEnabled = function() --[[ Line: 14 ]]
+		-- upvalues: FFlagPushNotificationsUpsellHomePromptsExperiment (copy), SharedFlagsModule (copy)
+		return FFlagPushNotificationsUpsellHomePromptsExperiment and SharedFlagsModule.FFlagNotificationsUpsellUseRequestPushPermissionHelper
 	end,
-	handlePromptsResponse = function(p1)
-		-- upvalues: fFlagPushNotificationsUpsellHomePromptsExperiment (ref), sharedFlagsModule (ref), requestPermission (ref)
-		if not fFlagPushNotificationsUpsellHomePromptsExperiment or not sharedFlagsModule.FFlagNotificationsUpsellUseRequestPushPermissionHelper or type(p1) ~= "table" then return end
-		local customPrompts = p1.custom_prompts
+	handlePromptsResponse = function(p1) --[[ Line: 35 ]]
+		-- upvalues: FFlagPushNotificationsUpsellHomePromptsExperiment (copy), SharedFlagsModule (copy), requestPermission (copy)
+		if not FFlagPushNotificationsUpsellHomePromptsExperiment or not SharedFlagsModule.FFlagNotificationsUpsellUseRequestPushPermissionHelper or type(p1) ~= "table" then return end
+		local CustomPrompts = p1.custom_prompts
 		
-		if type(customPrompts) == "table" and customPrompts[sharedFlagsModule.FStringPushNotificationsUpsellHomeCustomPromptName] ~= nil then
+		if type(CustomPrompts) == "table" and CustomPrompts[SharedFlagsModule.FStringPushNotificationsUpsellHomeCustomPromptName] ~= nil then
 			requestPermission()
 			
 			return

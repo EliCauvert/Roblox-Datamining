@@ -1,24 +1,24 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local modules = game:GetService("CoreGui").RobloxGui.Modules
-local roactModule = require(corePackagesService.Packages.Roact)
-local roduxModule = require(corePackagesService.Packages.Rodux)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local shareGame = modules.Settings.Pages.ShareGame
-local appModule = require(shareGame.Components.App)
-local appReducerModule = require(shareGame.AppReducer)
-local inviteStoreModule = require(shareGame.InviteStore)
-local getFFlagEnableSharedInviteStoreModule = require(modules.Flags.GetFFlagEnableSharedInviteStore)
+﻿local CorePackages = game:GetService("CorePackages")
+local Modules = game:GetService("CoreGui").RobloxGui.Modules
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoduxModule = require(CorePackages.Packages.Rodux)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local ShareGame = Modules.Settings.Pages.ShareGame
+local AppModule = require(ShareGame.Components.App)
+local AppReducerModule = require(ShareGame.AppReducer)
+local InviteStoreModule = require(ShareGame.InviteStore)
+local GetFFlagEnableSharedInviteStoreModule = require(Modules.Flags.GetFFlagEnableSharedInviteStore)
 
 return {
-	createApp = function(p1, p2)
-		-- upvalues: getFFlagEnableSharedInviteStoreModule (ref), inviteStoreModule (ref), roduxModule (ref), appReducerModule (ref), roactModule (ref), roactRoduxModule (ref), appModule (ref)
-		local t = {
-			store = if getFFlagEnableSharedInviteStoreModule() then inviteStoreModule else roduxModule.Store.new(appReducerModule, nil, { roduxModule.thunkMiddleware })
+	createApp = function(PageTarget, Analytics) --[[ Line: 17 ]]
+		-- upvalues: GetFFlagEnableSharedInviteStoreModule (copy), InviteStoreModule (copy), RoduxModule (copy), AppReducerModule (copy), RoactModule (copy), RoactRoduxModule (copy), AppModule (copy)
+		local config = {
+			store = if GetFFlagEnableSharedInviteStoreModule() then InviteStoreModule else RoduxModule.Store.new(AppReducerModule, nil, { RoduxModule.thunkMiddleware })
 		}
-		t._instanceHandle = roactModule.mount(roactModule.createElement(roactRoduxModule.StoreProvider, { store = t.store }, {
-			App = roactModule.createElement(appModule, { analytics = p2, pageTarget = p1 })
+		config._instanceHandle = RoactModule.mount(RoactModule.createElement(RoactRoduxModule.StoreProvider, { store = config.store }, {
+			App = RoactModule.createElement(AppModule, { analytics = Analytics, pageTarget = PageTarget })
 		}))
 		
-		return t
+		return config
 	end
 }

@@ -1,126 +1,127 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent
-local reactModule = require(parent_1.React)
-local reactRobloxModule = require(parent_1.ReactRoblox)
-local behaviorKindModule = require(parent.BehaviorKind)
-local behaviorsModule = require(parent.Behaviors)
-local geometryModule = require(parent.Geometry)
-local _ = require(parent.Types)
-local uDim2 = UDim2.fromScale(0.5, 0.5)
-local t = { bottom = 0, left = 0, right = 0, top = 0 }
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
+local ReactRobloxModule = require(Parent1.ReactRoblox)
+local BehaviorKindModule = require(Parent.BehaviorKind)
+local BehaviorsModule = require(Parent.Behaviors)
+local GeometryModule = require(Parent.Geometry)
+local _ = require(Parent.Types)
+local _UDim2 = UDim2.fromScale(0.5, 0.5)
+local config = { bottom = 0, left = 0, right = 0, top = 0 }
 
-return function(p1)
-	-- upvalues: behaviorsModule (ref), behaviorKindModule (ref), t (ref), reactModule (ref), geometryModule (ref), uDim2 (ref), reactRobloxModule (ref)
-	assert((p1.behavior or behaviorsModule.Contained).kind == behaviorKindModule.Contained, "FloatingWindow only supports Contained behavior")
-	local boundsInsets = p1.boundsInsets or t
-	local var1 = reactModule.useRef(nil)
-	local var2 = reactModule.useRef(Vector2.zero)
-	local var3 = reactModule.useRef(Vector2.zero)
-	local var4 = reactModule.useRef(false)
-	local var5 = reactModule.useRef(false)
-	local var6 = reactModule.useRef(Vector2.zero)
-	local var7 = reactModule.useRef(Vector2.zero)
-	local var8 = reactModule.useRef(Vector2.zero)
-	local var9 = reactModule.useRef(false)
-	local var10, var11 = reactModule.useState(false)
-	local var12, var13 = reactModule.useBinding(Vector2.zero)
-	local var14 = reactModule.useCallback(function()
-		-- upvalues: var2 (ref), var3 (ref), geometryModule (copy), var4 (ref), p1 (ref), uDim2 (copy), var8 (ref), var13 (ref), var11 (ref), var5 (ref)
-		local current = var2.current
-		local current_1 = var3.current
+return function(p1) --[[ Line: 20 | Named "Window" ]]
+	-- upvalues: BehaviorsModule (copy), BehaviorKindModule (copy), config (copy), ReactModule (copy), GeometryModule (copy), _UDim2 (copy), ReactRobloxModule (copy)
+	assert((p1.behavior or BehaviorsModule.Contained).kind == BehaviorKindModule.Contained, "FloatingWindow only supports Contained behavior")
+	local BoundsInsets = p1.boundsInsets or config
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(Vector2.zero)
+	local UseRefResult2 = ReactModule.useRef(Vector2.zero)
+	local UseRefResult3 = ReactModule.useRef(false)
+	local UseRefResult4 = ReactModule.useRef(false)
+	local UseRefResult5 = ReactModule.useRef(Vector2.zero)
+	local UseRefResult6 = ReactModule.useRef(Vector2.zero)
+	local UseRefResult7 = ReactModule.useRef(Vector2.zero)
+	local UseRefResult8 = ReactModule.useRef(false)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(Vector2.zero)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 41 ]]
+		-- upvalues: UseRefResult1 (copy), UseRefResult2 (copy), GeometryModule (upval), UseRefResult3 (copy), p1 (copy), _UDim2 (upval), UseRefResult7 (copy), UseBindingResult2 (copy), UseStateResult2 (copy), UseRefResult4 (copy)
+		local Current = UseRefResult1.current
+		local Current1 = UseRefResult2.current
 		
-		if not geometryModule.hasPositiveSize(current) or not geometryModule.hasPositiveSize(current_1) then return end
-		if var4.current then
-			if not var5.current then
-				var13(geometryModule.clampCenter(var8.current, current, current_1))
-			end
+		if not GeometryModule.hasPositiveSize(Current) or not GeometryModule.hasPositiveSize(Current1) then return end
+		if not UseRefResult3.current then
+			UseRefResult3.current = true
+			local ResolveCenterResult = GeometryModule.resolveCenter(p1.initialCenter or _UDim2, Current)
+			UseRefResult7.current = ResolveCenterResult
+			UseBindingResult2((GeometryModule.clampCenter(ResolveCenterResult, Current, Current1)))
+			UseStateResult2(true)
+			
 			return
-		else
-			var4.current = true
-			local var15 = geometryModule.resolveCenter(p1.initialCenter or uDim2, current)
-			var8.current = var15
-			var13(geometryModule.clampCenter(var15, current, current_1))
-			var11(true)
+		elseif not UseRefResult4.current then
+			UseBindingResult2((GeometryModule.clampCenter(UseRefResult7.current, Current, Current1)))
 		end
-	end, { p1.initialCenter, var13 })
-	local var15 = reactModule.useCallback(function(p2)
-		-- upvalues: var2 (ref), var14 (ref)
-		local absoluteSize = p2.AbsoluteSize
+	end, { p1.initialCenter, UseBindingResult2 })
+	local UseResult1 = ReactModule.useCallback(function(Frame) --[[ Line: 61 ]]
+		-- upvalues: UseRefResult1 (copy), UseResult (copy)
+		local AbsoluteSize = Frame.AbsoluteSize
 		
-		if absoluteSize == var2.current then
-			return
-		end
-		var2.current = absoluteSize
-		var14()
-	end, { var14 })
-	local var16 = reactModule.useCallback(function(p2)
-		-- upvalues: var3 (ref), var14 (ref)
-		local absoluteSize = p2.AbsoluteSize
-		
-		if absoluteSize == var3.current then
-			return
-		end
-		var3.current = absoluteSize
-		var14()
-	end, { var14 })
-	local var17 = reactModule.useCallback(function(p2)
-		-- upvalues: var5 (ref), var6 (ref), p1 (ref), var9 (ref), var7 (ref), var8 (ref), geometryModule (copy), var2 (ref), var3 (ref), var13 (ref)
-		if not var5.current then return end
-		local var18 = p2 - var6.current
-		
-		if (p1.dragThreshold or 25) < var18.Magnitude then
-			var9.current = true
-		end
-		local var19 = var7.current + var18
-		var8.current = var19
-		var13(geometryModule.clampCenter(var19, var2.current, var3.current))
-	end, { p1.dragThreshold, var13 })
-	local var18 = reactModule.useCallback(function(_, p2)
-		-- upvalues: var4 (ref), var5 (ref), var9 (ref), var6 (ref), var7 (ref), var12 (ref)
-		if var4.current then
-			var5.current = true
-			var9.current = false
-			var6.current = p2
-			var7.current = var12:getValue()
+		if AbsoluteSize ~= UseRefResult1.current then
+			UseRefResult1.current = AbsoluteSize
+			UseResult()
 			
 			return
 		end
-	end, { var12 })
-	local var19 = reactModule.useCallback(function(_, p2)
-		-- upvalues: var17 (ref)
-		var17(p2)
-	end, { var17 })
-	local var20 = reactModule.useCallback(function(_, p2)
-		-- upvalues: var17 (ref), var5 (ref), var9 (ref), p1 (ref)
-		var17(p2)
-		var5.current = false
+	end, { UseResult })
+	local UseResult2 = ReactModule.useCallback(function(Frame) --[[ Line: 70 ]]
+		-- upvalues: UseRefResult2 (copy), UseResult (copy)
+		local AbsoluteSize = Frame.AbsoluteSize
 		
-		if not var9.current and p1.onActivated ~= nil then
+		if AbsoluteSize ~= UseRefResult2.current then
+			UseRefResult2.current = AbsoluteSize
+			UseResult()
+			
+			return
+		end
+	end, { UseResult })
+	local UseResult3 = ReactModule.useCallback(function(p2) --[[ Line: 79 ]]
+		-- upvalues: UseRefResult4 (copy), UseRefResult5 (copy), p1 (copy), UseRefResult8 (copy), UseRefResult6 (copy), UseRefResult7 (copy), GeometryModule (upval), UseRefResult1 (copy), UseRefResult2 (copy), UseBindingResult2 (copy)
+		if not UseRefResult4.current then return end
+		local Offset = p2 - UseRefResult5.current
+		
+		if (p1.dragThreshold or 25) < Offset.Magnitude then
+			UseRefResult8.current = true
+		end
+		local NewCurrent = UseRefResult6.current + Offset
+		UseRefResult7.current = NewCurrent
+		UseBindingResult2((GeometryModule.clampCenter(NewCurrent, UseRefResult1.current, UseRefResult2.current)))
+	end, { p1.dragThreshold, UseBindingResult2 })
+	local UseResult4 = ReactModule.useCallback(function(_, Current) --[[ Line: 95 ]]
+		-- upvalues: UseRefResult3 (copy), UseRefResult4 (copy), UseRefResult8 (copy), UseRefResult5 (copy), UseRefResult6 (copy), UseBindingResult (copy)
+		if UseRefResult3.current then
+			UseRefResult4.current = true
+			UseRefResult8.current = false
+			UseRefResult5.current = Current
+			UseRefResult6.current = UseBindingResult:getValue()
+			
+			return
+		end
+	end, { UseBindingResult })
+	local UseResult5 = ReactModule.useCallback(function(_, p2) --[[ Line: 106 ]]
+		-- upvalues: UseResult3 (copy)
+		UseResult3(p2)
+	end, { UseResult3 })
+	local UseResult6 = ReactModule.useCallback(function(_, p2) --[[ Line: 110 ]]
+		-- upvalues: UseResult3 (copy), UseRefResult4 (copy), UseRefResult8 (copy), p1 (copy)
+		UseResult3(p2)
+		UseRefResult4.current = false
+		
+		if not UseRefResult8.current and p1.onActivated ~= nil then
 			p1.onActivated()
 		end
-	end, { var12, p1.onActivated, var17 })
-	reactModule.useLayoutEffect(function()
-		-- upvalues: p1 (ref), var5 (ref), var9 (ref), var14 (ref)
+	end, { UseBindingResult, p1.onActivated, UseResult3 })
+	ReactModule.useLayoutEffect(function() --[[ Line: 123 ]]
+		-- upvalues: p1 (copy), UseRefResult4 (copy), UseRefResult8 (copy), UseResult (copy)
 		if p1.draggable == false then
-			var5.current = false
-			var9.current = false
-			var14()
+			UseRefResult4.current = false
+			UseRefResult8.current = false
+			UseResult()
 			
 			return
 		end
-	end, { p1.draggable, var14 })
-	local UIDragDetector = reactModule.createElement("UIDragDetector", {
-		[reactModule.Tag] = if p1.testId ~= nil then nil else `data-testid={p1.testId}-drag-detector`,
-		BoundingUI = var1,
+	end, { p1.draggable, UseResult })
+	local UIDragDetector = ReactModule.createElement("UIDragDetector", {
+		[ReactModule.Tag] = if p1.testId == nil then nil else `data-testid={p1.testId}-drag-detector`,
+		BoundingUI = UseRefResult,
 		DragStyle = Enum.UIDragDetectorDragStyle.Scriptable,
 		ResponseStyle = Enum.UIDragDetectorResponseStyle.CustomOffset,
-		[reactModule.Event.DragContinue] = var19,
-		[reactModule.Event.DragEnd] = var20,
-		[reactModule.Event.DragStart] = var18
+		[ReactModule.Event.DragContinue] = UseResult5,
+		[ReactModule.Event.DragEnd] = UseResult6,
+		[ReactModule.Event.DragStart] = UseResult4
 	})
 	
-	return reactModule.createElement("ScreenGui", {
-		[reactModule.Tag] = if p1.testId ~= nil then nil else `data-testid={p1.testId}-screen`,
+	return ReactModule.createElement("ScreenGui", {
+		[ReactModule.Tag] = if p1.testId == nil then nil else `data-testid={p1.testId}-screen`,
 		DisplayOrder = p1.displayOrder or 0,
 		Enabled = p1.enabled ~= false,
 		Name = "FloatingWindow",
@@ -128,29 +129,29 @@ return function(p1)
 		ScreenInsets = p1.screenInsets or Enum.ScreenInsets.CoreUISafeInsets,
 		ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 	}, {
-		Bounds = reactModule.createElement("Frame", {
-			[reactModule.Change.AbsoluteSize] = var15,
-			[reactModule.Tag] = if p1.testId ~= nil then nil else `data-testid={p1.testId}-bounds`,
+		Bounds = ReactModule.createElement("Frame", {
+			[ReactModule.Change.AbsoluteSize] = UseResult1,
+			[ReactModule.Tag] = if p1.testId == nil then nil else `data-testid={p1.testId}-bounds`,
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
-			Position = UDim2.fromOffset(boundsInsets.left, boundsInsets.top),
-			ref = var1,
-			Size = UDim2.new(1, -(boundsInsets.left + boundsInsets.right), 1, -(boundsInsets.top + boundsInsets.bottom))
+			Position = UDim2.fromOffset(BoundsInsets.left, BoundsInsets.top),
+			ref = UseRefResult,
+			Size = UDim2.new(1, -(BoundsInsets.left + BoundsInsets.right), 1, -(BoundsInsets.top + BoundsInsets.bottom))
 		}, {
-			Window = reactModule.createElement("Frame", {
-				[reactModule.Change.AbsoluteSize] = var16,
-				[reactModule.Tag] = if p1.testId ~= nil then nil else `data-testid={p1.testId}`,
+			Window = ReactModule.createElement("Frame", {
+				[ReactModule.Change.AbsoluteSize] = UseResult2,
+				[ReactModule.Tag] = if p1.testId == nil then nil else `data-testid={p1.testId}`,
 				Active = true,
 				AnchorPoint = Vector2.new(0.5, 0.5),
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
-				Position = var12:map(function(p2)
-					return UDim2.fromOffset(p2.X, p2.Y)
+				Position = UseBindingResult:map(function(Vector): UDim2 --[[ Line: 132 ]]
+					return UDim2.fromOffset(Vector.X, Vector.Y)
 				end),
 				Size = p1.size,
-				Visible = var10
+				Visible = UseStateResult
 			}, {
-				DragDetector = if p1.draggable == false then nil elseif p1.dragInputTarget ~= nil then UIDragDetector else reactRobloxModule.createPortal({ DragDetector = UIDragDetector }, p1.dragInputTarget),
+				DragDetector = if p1.draggable == false then nil elseif p1.dragInputTarget == nil then UIDragDetector else ReactRobloxModule.createPortal({ DragDetector = UIDragDetector }, p1.dragInputTarget),
 				Content = p1.children
 			})
 		})

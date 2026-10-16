@@ -1,174 +1,173 @@
-﻿local parent = script.Parent.Parent.Parent
-local constantsModule = require(parent.Constants)
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local boundsCalculatorModule = require(parent.util.BoundsCalculator)
-local r15plusUtilsModule = require(parent.util.R15plusUtils)
-local getAttachmentCFrameInPartSpaceModule = require(parent.util.getAttachmentCFrameInPartSpace)
-local getFFlagUGCValidateHeadAboveTorsoModule = require(parent.flags.getFFlagUGCValidateHeadAboveTorso)
-local sharedDataMember = validationEnumsModule.SharedDataMember
-local t = {
-	categories = { validationEnumsModule.UploadCategory.TORSO_AND_LIMBS }
+﻿local Parent = script.Parent.Parent.Parent
+local ConstantsModule = require(Parent.Constants)
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
+local BoundsCalculatorModule = require(Parent.util.BoundsCalculator)
+local R15plusUtilsModule = require(Parent.util.R15plusUtils)
+local GetAttachmentCFrameInPartSpaceModule = require(Parent.util.getAttachmentCFrameInPartSpace)
+local GetFFlagUGCValidateHeadAboveTorsoModule = require(Parent.flags.getFFlagUGCValidateHeadAboveTorso)
+local SharedDataMember = ValidationEnumsModule.SharedDataMember
+local ExtentsWithinParentModule = {
+	categories = { ValidationEnumsModule.UploadCategory.TORSO_AND_LIMBS }
 }
 
-if getFFlagUGCValidateHeadAboveTorsoModule() then
-	table.insert(t.categories, validationEnumsModule.UploadCategory.FULL_BODY)
+if GetFFlagUGCValidateHeadAboveTorsoModule() then
+	table.insert(ExtentsWithinParentModule.categories, ValidationEnumsModule.UploadCategory.FULL_BODY)
 end
-t.requiredData = {
-	validationEnumsModule.SharedDataMember.rootInstance,
-	validationEnumsModule.SharedDataMember.uploadEnum
+ExtentsWithinParentModule.requiredData = {
+	ValidationEnumsModule.SharedDataMember.rootInstance,
+	ValidationEnumsModule.SharedDataMember.uploadEnum
 }
-t.conditionalData = { sharedDataMember.renderMeshesData }
+ExtentsWithinParentModule.conditionalData = { SharedDataMember.renderMeshesData }
 
-if getFFlagUGCValidateHeadAboveTorsoModule() then
-	table.insert(t.conditionalData, sharedDataMember.fullBodyPartsMetrics)
+if GetFFlagUGCValidateHeadAboveTorsoModule() then
+	table.insert(ExtentsWithinParentModule.conditionalData, SharedDataMember.fullBodyPartsMetrics)
 end
-t.expectedFailures = {}
-local t_1 = {
+ExtentsWithinParentModule.expectedFailures = {}
+local config = {
 	[Enum.AssetType.Torso] = true,
 	[Enum.AssetType.LeftArm] = true,
 	[Enum.AssetType.RightArm] = true,
 	[Enum.AssetType.RightLeg] = true,
 	[Enum.AssetType.LeftLeg] = true
 }
-local t_2 = { UpperTorso = true }
-local t_3 = {
+local config1 = { UpperTorso = true }
+local config2 = {
 	[Enum.AssetType.LeftLeg] = true,
 	[Enum.AssetType.RightLeg] = true
 }
 
-local function validateBasedOnBBoxes(p1, p2, p3, p4, p5)
-	-- upvalues: errorSourceStringsModule (ref)
-	local boundsData = p3[p1.Name].boundsData
-	local boundsData_1 = p3[p2.Name].boundsData
-	local var1 = true
+local function validateBasedOnBBoxes(Child, Child1, p1, AttachmentName, p2): boolean --[[ Line: 52 ]]
+	-- upvalues: ErrorSourceStringsModule (copy)
+	local BoundsData = p1[Child.Name].boundsData
+	local BoundsData1 = p1[Child1.Name].boundsData
+	local Flag = true
 	
-	if boundsData_1.maxOverall and boundsData.maxOverall and boundsData.maxOverall.Y < boundsData_1.maxOverall.Y then
-		p5:fail(errorSourceStringsModule.Keys.Extents_PartAboveParent, {
-			lowerPart = p2.Name,
-			upperPart = p1.Name,
-			attachmentName = p4
-		}, p2)
-		var1 = false
+	if BoundsData1.maxOverall and BoundsData.maxOverall and BoundsData.maxOverall.Y < BoundsData1.maxOverall.Y then
+		p2:fail(ErrorSourceStringsModule.Keys.Extents_PartAboveParent, {
+			lowerPart = Child1.Name,
+			upperPart = Child.Name,
+			attachmentName = AttachmentName
+		}, Child1)
+		Flag = false
 	end
-	if boundsData.minOverall and boundsData_1.minOverall and boundsData.minOverall.Y < boundsData_1.minOverall.Y then
-		p5:fail(errorSourceStringsModule.Keys.Extents_ParentBelowPart, {
-			upperPart = p1.Name,
-			lowerPart = p2.Name,
-			attachmentName = p4
-		}, p1)
-		var1 = false
+	if BoundsData.minOverall and BoundsData1.minOverall and BoundsData.minOverall.Y < BoundsData1.minOverall.Y then
+		p2:fail(ErrorSourceStringsModule.Keys.Extents_ParentBelowPart, {
+			upperPart = Child.Name,
+			lowerPart = Child1.Name,
+			attachmentName = AttachmentName
+		}, Child)
+		Flag = false
 	end
-	return var1
+	return Flag
 end
 
-local function validateBasedOnAttachmentYPos(p1, p2, p3, p4)
-	-- upvalues: r15plusUtilsModule (ref), getAttachmentCFrameInPartSpaceModule (ref), errorSourceStringsModule (ref)
-	local var1 = p2:FindFirstChild(p3, r15plusUtilsModule.checkFlagEnabledForAllowHrd())
-	local var2 = p1:FindFirstChild(p3, r15plusUtilsModule.checkFlagEnabledForAllowHrd())
+local function validateBasedOnAttachmentYPos(Child, Child1, ChildName, p1) --[[ Line: 84 ]]
+	-- upvalues: R15plusUtilsModule (copy), GetAttachmentCFrameInPartSpaceModule (copy), ErrorSourceStringsModule (copy)
+	local ChildName1 = Child1:FindFirstChild(ChildName, R15plusUtilsModule.checkFlagEnabledForAllowHrd())
+	local ChildName2 = Child:FindFirstChild(ChildName, R15plusUtilsModule.checkFlagEnabledForAllowHrd())
 	
-	if not var1 or not var2 then return end
-	local size = p2.Size
-	local size_1 = p1.Size
-	local position = getAttachmentCFrameInPartSpaceModule(var1).Position
-	local position_1 = getAttachmentCFrameInPartSpaceModule(var2).Position
-	local y = (size / 2 - position).Y
-	local y_1 = (size / 2 + position).Y
-	local y_2 = (size_1 / 2 + position_1).Y
+	if not ChildName1 or not ChildName2 then return end
+	local Size: number = Child1.Size
+	local Size1: number = Child.Size
+	local Position = GetAttachmentCFrameInPartSpaceModule(ChildName1).Position
+	local Position1 = GetAttachmentCFrameInPartSpaceModule(ChildName2).Position
+	local Y = (Size / 2 + Position).Y
+	local Y1 = (Size1 / 2 + Position1).Y
 	
-	if (size_1 / 2 - position_1).Y < y then
-		p4:fail(errorSourceStringsModule.Keys.Extents_PartAboveParent, {
-			lowerPart = p2.Name,
-			upperPart = p1.Name,
-			attachmentName = p3
-		}, p2)
+	if (Size1 / 2 - Position1).Y < (Size / 2 - Position).Y then
+		p1:fail(ErrorSourceStringsModule.Keys.Extents_PartAboveParent, {
+			lowerPart = Child1.Name,
+			upperPart = Child.Name,
+			attachmentName = ChildName
+		}, Child1)
 	end
-	if y_1 < y_2 then
-		p4:fail(errorSourceStringsModule.Keys.Extents_ParentBelowPart, {
-			upperPart = p1.Name,
-			lowerPart = p2.Name,
-			attachmentName = p3
-		}, p1)
+	if Y < Y1 then
+		p1:fail(ErrorSourceStringsModule.Keys.Extents_ParentBelowPart, {
+			upperPart = Child.Name,
+			lowerPart = Child1.Name,
+			attachmentName = ChildName
+		}, Child)
 	end
 end
 
-local function validateHeadAboveTorso(p1, p2)
-	-- upvalues: constantsModule (ref), errorSourceStringsModule (ref)
-	local fullBodyPartsMetrics = p2.fullBodyPartsMetrics
+local function validateHeadAboveTorso(p1, p2) --[[ Line: 124 ]]
+	-- upvalues: ConstantsModule (copy), ErrorSourceStringsModule (copy)
+	local FullBodyPartsMetrics = p2.fullBodyPartsMetrics
 	
-	if not fullBodyPartsMetrics or not next(fullBodyPartsMetrics) then return end
-	local head = fullBodyPartsMetrics[constantsModule.NAMED_R15_BODY_PARTS.Head]
-	local upperTorso = fullBodyPartsMetrics[constantsModule.NAMED_R15_BODY_PARTS.UpperTorso]
+	if not FullBodyPartsMetrics or not next(FullBodyPartsMetrics) then return end
+	local FullBodyPartsMetric = FullBodyPartsMetrics[ConstantsModule.NAMED_R15_BODY_PARTS.Head]
+	local FullBodyPartsMetric1 = FullBodyPartsMetrics[ConstantsModule.NAMED_R15_BODY_PARTS.UpperTorso]
 	
-	if not head or not upperTorso then return end
-	local boundsData = head.boundsData
-	local boundsData_1 = upperTorso.boundsData
+	if not FullBodyPartsMetric or not FullBodyPartsMetric1 then return end
+	local BoundsData = FullBodyPartsMetric.boundsData
+	local BoundsData1 = FullBodyPartsMetric1.boundsData
 	
-	if not boundsData.maxOverall or not boundsData.minOverall or (not boundsData_1.maxOverall or not boundsData_1.minOverall) then return end
-	local head_1 = p2.rootInstance:FindFirstChild(constantsModule.NAMED_R15_BODY_PARTS.Head)
+	if not BoundsData.maxOverall or not BoundsData.minOverall or not BoundsData1.maxOverall or not BoundsData1.minOverall then return end
+	local Head = p2.rootInstance:FindFirstChild(ConstantsModule.NAMED_R15_BODY_PARTS.Head)
 	
-	if boundsData.minOverall.Y < boundsData_1.minOverall.Y then
-		p1:fail(errorSourceStringsModule.Keys.Extents_ParentBelowPart, {
+	if BoundsData.minOverall.Y < BoundsData1.minOverall.Y then
+		p1:fail(ErrorSourceStringsModule.Keys.Extents_ParentBelowPart, {
 			upperPart = "Head",
 			lowerPart = "UpperTorso",
 			attachmentName = "NeckRigAttachment"
-		}, head_1)
+		}, Head)
 	end
-	if boundsData_1.maxOverall.Y >= (boundsData.maxOverall.Y + boundsData.minOverall.Y) / 2 and not ((boundsData.maxOverall.Z + boundsData.minOverall.Z) / 2 < boundsData_1.minOverall.Z) then
-		p1:fail(errorSourceStringsModule.Keys.Extents_HeadBelowTorso, {}, head_1)
+	local IsZBelow = (BoundsData.maxOverall.Z + BoundsData.minOverall.Z) / 2 < BoundsData1.minOverall.Z
+	
+	if BoundsData1.maxOverall.Y >= (BoundsData.maxOverall.Y + BoundsData.minOverall.Y) / 2 and not IsZBelow then
+		p1:fail(ErrorSourceStringsModule.Keys.Extents_HeadBelowTorso, {}, Head)
 	end
 end
 
-function t.run(p1, p2)
-	-- upvalues: validationEnumsModule (ref), getFFlagUGCValidateHeadAboveTorsoModule (ref), validateHeadAboveTorso (ref), t_1 (ref), constantsModule (ref), boundsCalculatorModule (ref), t_2 (ref), validateBasedOnBBoxes (ref), t_3 (ref), validateBasedOnAttachmentYPos (ref)
-	if p2.uploadCategory == validationEnumsModule.UploadCategory.FULL_BODY then
-		if getFFlagUGCValidateHeadAboveTorsoModule() then
-			validateHeadAboveTorso(p1, p2)
-		end
-		return
-	else
-		local rootInstance = p2.rootInstance
-		local assetType = p2.uploadEnum.assetType
+function ExtentsWithinParentModule.run(p1, p2) --[[ Line: 169 ]]
+	-- upvalues: ValidationEnumsModule (copy), GetFFlagUGCValidateHeadAboveTorsoModule (copy), validateHeadAboveTorso (copy), config (copy), ConstantsModule (copy), BoundsCalculatorModule (copy), config1 (copy), validateBasedOnBBoxes (copy), config2 (copy), validateBasedOnAttachmentYPos (copy)
+	if p2.uploadCategory ~= ValidationEnumsModule.UploadCategory.FULL_BODY then
+		local RootInstance = p2.rootInstance
+		local AssetType = p2.uploadEnum.assetType
 		
-		if not t_1[assetType] then return end
-		local var1 = constantsModule.ASSET_TYPE_INFO[assetType]
+		if not config[AssetType] then return end
+		local ASSETTYPE = ConstantsModule.ASSET_TYPE_INFO[AssetType]
 		
-		if not var1 then return end
-		local renderMeshesData = p2.renderMeshesData
+		if not ASSETTYPE then return end
+		local RenderMeshesData = p2.renderMeshesData
 		
-		if not renderMeshesData then return end
-		local var2, _, var3 = boundsCalculatorModule.calculateIndividualAssetPartsDataFromData(rootInstance, assetType, renderMeshesData)
+		if not RenderMeshesData then return end
+		local IndividualAssetPartsDataFromData, _, IndividualAssetPartsDataFromData3 = BoundsCalculatorModule.calculateIndividualAssetPartsDataFromData(RootInstance, AssetType, RenderMeshesData)
 		
-		if not var2 then
-			p1:fetchError("Failed to calculate asset bounds data for extents check on " .. assetType.Name)
+		if not IndividualAssetPartsDataFromData then
+			p1:fetchError("Failed to calculate asset bounds data for extents check on " .. AssetType.Name)
 			
 			return
 		end
-		for i, v in pairs(var1.subParts) do
-			local var4 = constantsModule.BODYPART_TO_PARENT[i]
+		for ChildName, subPart in pairs(ASSETTYPE.subParts) do
+			local BODYPARTTOPARENTEntry = ConstantsModule.BODYPART_TO_PARENT[ChildName]
 			
-			if var4 ~= nil then
-				local var5 = rootInstance:FindFirstChild(i)
-				local var6 = rootInstance:FindFirstChild(var4)
+			if BODYPARTTOPARENTEntry ~= nil then
+				local ChildName1 = RootInstance:FindFirstChild(ChildName)
+				local BODYPARTTOPARENTEntry1 = RootInstance:FindFirstChild(BODYPARTTOPARENTEntry)
 				
-				if var5 and var6 then
-					local var7 = var6
-					local var8 = var5
+				if ChildName1 and BODYPARTTOPARENTEntry1 then
+					local Child = BODYPARTTOPARENTEntry1
+					local Child1 = ChildName1
 					
-					if t_2[i] then
-						var7 = var5
-						var8 = var6
+					if config1[ChildName] then
+						Child = ChildName1
+						Child1 = BODYPARTTOPARENTEntry1
 					end
-					local name = v.rigAttachmentToParent.name
+					local Name = subPart.rigAttachmentToParent.name
 					
-					if (if var3[var7.Name] and var3[var8.Name] then validateBasedOnBBoxes(var7, var8, var3, name, p1) else true) and t_3[assetType] then
-						validateBasedOnAttachmentYPos(var7, var8, name, p1)
+					if (not IndividualAssetPartsDataFromData3[Child.Name] or not IndividualAssetPartsDataFromData3[Child1.Name] or validateBasedOnBBoxes(Child, Child1, IndividualAssetPartsDataFromData3, Name, p1)) and config2[AssetType] then
+						validateBasedOnAttachmentYPos(Child, Child1, Name, p1)
 					end
 				end
 			end
 		end
+		return
+	elseif GetFFlagUGCValidateHeadAboveTorsoModule() then
+		validateHeadAboveTorso(p1, p2)
 	end
 end
 
-return t
+return ExtentsWithinParentModule

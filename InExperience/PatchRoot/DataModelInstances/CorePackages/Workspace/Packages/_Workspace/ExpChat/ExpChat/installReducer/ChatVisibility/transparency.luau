@@ -1,16 +1,8 @@
-﻿local expChat = script:FindFirstAncestor("ExpChat")
-local parent = expChat.Parent
-local expChatSharedModule = require(parent.ExpChatShared)
-local roduxModule = require(parent.Rodux)
-local dictionary = require(parent.llama).Dictionary
-local actions = expChat.Actions
-local chatInputBarConfigurationEnabledModule = require(actions.ChatInputBarConfigurationEnabled)
-local chatTopBarButtonActivatedModule = require(actions.ChatTopBarButtonActivated)
-local setCoreGuiEnabledChangedModule = require(actions.SetCoreGuiEnabledChanged)
-local clientAppLoaded = expChatSharedModule.Actions.ClientAppLoaded
-local userInteractionModule = require(expChat.Actions.UserInteraction)
-local incomingMessageReceivedModule = require(actions.IncomingMessageReceived)
-local t = {
+﻿local ExpChat = script:FindFirstAncestor("ExpChat")
+local Parent = ExpChat.Parent
+local Dictionary = require(Parent.llama).Dictionary
+local Actions = ExpChat.Actions
+local config = {
 	textDurationUntilFadeout = 30,
 	backgroundDurationUntilFadeout = 3.5,
 	lastGeneralActivityTimestamp = 0,
@@ -18,65 +10,66 @@ local t = {
 	isTextBoxFocused = false
 }
 
-local function reset(value)
-	-- upvalues: dictionary (ref), t (ref)
-	local processTime = os.clock()
+local function reset(p1) --[[ Line: 31 ]]
+	-- upvalues: Dictionary (copy), config (copy)
+	local ClockTime = os.clock()
 	
-	return dictionary.join(t, {
-		isTextBoxFocused = value.isTextBoxFocused,
-		lastGeneralActivityTimestamp = processTime,
-		lastMessageActivityTimestamp = processTime
+	return Dictionary.join(config, {
+		isTextBoxFocused = p1.isTextBoxFocused,
+		lastGeneralActivityTimestamp = ClockTime,
+		lastMessageActivityTimestamp = ClockTime
 	})
 end
 
-local function resetTextOnly(value)
-	-- upvalues: dictionary (ref)
-	return dictionary.join(value, {
-		isTextBoxFocused = value.isTextBoxFocused,
+local function resetTextOnly(p1) --[[ Line: 41 ]]
+	-- upvalues: Dictionary (copy)
+	return Dictionary.join(p1, {
+		isTextBoxFocused = p1.isTextBoxFocused,
 		lastMessageActivityTimestamp = os.clock()
 	})
 end
 
-return roduxModule.createReducer(t, {
-	[chatInputBarConfigurationEnabledModule.name] = function(p1, p2)
-		-- upvalues: reset (ref)
+return require(Parent.Rodux).createReducer(config, {
+	[require(Actions.ChatInputBarConfigurationEnabled).name] = function(p1, p2) --[[ Line: 51 ]]
+		-- upvalues: reset (copy)
 		return if p2.enabled then reset(p1) else p1
 	end,
-	[chatTopBarButtonActivatedModule.name] = function(p1, p2)
-		-- upvalues: reset (ref)
+	[require(Actions.ChatTopBarButtonActivated).name] = function(p1, p2) --[[ Line: 59 ]]
+		-- upvalues: reset (copy)
 		return if p2.isVisible then reset(p1) else p1
 	end,
-	[setCoreGuiEnabledChangedModule.name] = function(p1, p2)
-		-- upvalues: reset (ref)
+	[require(Actions.SetCoreGuiEnabledChanged).name] = function(p1, p2) --[[ Line: 67 ]]
+		-- upvalues: reset (copy)
 		return if p2.enabled then reset(p1) else p1
 	end,
-	[clientAppLoaded.name] = function(p1, _)
-		-- upvalues: reset (ref)
+	[require(Parent.ExpChatShared).Actions.ClientAppLoaded.name] = function(p1, _) --[[ Line: 75 ]]
+		-- upvalues: reset (copy)
 		return reset(p1)
 	end,
-	[userInteractionModule.name] = function(p1, p2)
-		-- upvalues: dictionary (ref), t (ref), reset (ref)
+	[require(ExpChat.Actions.UserInteraction).name] = function(p1, p2) --[[ Line: 79 ]]
+		-- upvalues: Dictionary (copy), config (copy), reset (copy)
 		if p2.interaction == "focus" then
-			local processTime = os.clock()
+			local ClockTime = os.clock()
 			
-			return dictionary.join(dictionary.join(t, {
+			return Dictionary.join(Dictionary.join(config, {
 				isTextBoxFocused = p1.isTextBoxFocused,
-				lastGeneralActivityTimestamp = processTime,
-				lastMessageActivityTimestamp = processTime
+				lastGeneralActivityTimestamp = ClockTime,
+				lastMessageActivityTimestamp = ClockTime
 			}), { isTextBoxFocused = true })
 		elseif p2.interaction == "unfocus" then
-			local processTime = os.clock()
+			local ClockTime = os.clock()
 			
-			return dictionary.join(dictionary.join(t, {
+			return Dictionary.join(Dictionary.join(config, {
 				isTextBoxFocused = p1.isTextBoxFocused,
-				lastGeneralActivityTimestamp = processTime,
-				lastMessageActivityTimestamp = processTime
+				lastGeneralActivityTimestamp = ClockTime,
+				lastMessageActivityTimestamp = ClockTime
 			}), { isTextBoxFocused = false })
+		else
+			return reset(p1)
 		end
-		return reset(p1)
 	end,
-	[incomingMessageReceivedModule.name] = function(p1, _)
-		-- upvalues: resetTextOnly (ref)
+	[require(Actions.IncomingMessageReceived).name] = function(p1, _) --[[ Line: 93 ]]
+		-- upvalues: resetTextOnly (copy)
 		return resetTextOnly(p1)
 	end
 })

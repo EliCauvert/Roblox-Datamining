@@ -1,6 +1,6 @@
-﻿local createReactionsStoreModule = require(script.createReactionsStore)
+﻿local CreateReactionsStoreModule = require(script.createReactionsStore)
 
-return require(script:FindFirstAncestor("Moments").Parent.Signals).createComputed(function()
-	-- upvalues: createReactionsStoreModule (ref)
-	return createReactionsStoreModule()
+return require(script:FindFirstAncestor("Moments").Parent.Signals).createComputed(function() --[[ Line: 7 ]]
+	-- upvalues: CreateReactionsStoreModule (copy)
+	return CreateReactionsStoreModule()
 end)

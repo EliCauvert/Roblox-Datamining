@@ -1,24 +1,24 @@
-﻿local userLib = script:FindFirstAncestor("UserLib")
-local constantsModule = require(userLib.Utils.Constants)
-local thumbnailRequestModule = require(userLib.Utils.ThumbnailRequest)
+﻿local UserLib = script:FindFirstAncestor("UserLib")
+local ConstantsModule = require(UserLib.Utils.Constants)
+local ThumbnailRequestModule = require(UserLib.Utils.ThumbnailRequest)
 
 return {
 	USER_CAROUSEL = {
-		thumbnailRequestModule.fromData(constantsModule.RbxAvatarThumbnailTypesFromEnum.AvatarThumbnail, constantsModule.RbxThumbnailSizes.Size100x100)
+		ThumbnailRequestModule.fromData(ConstantsModule.RbxAvatarThumbnailTypesFromEnum.AvatarThumbnail, ConstantsModule.RbxThumbnailSizes.Size100x100)
 	},
 	USER_CAROUSEL_HEAD_SHOT = {
-		thumbnailRequestModule.fromData(constantsModule.RbxAvatarThumbnailTypesFromEnum.HeadShot, constantsModule.RbxThumbnailSizes.Size150x150)
+		ThumbnailRequestModule.fromData(ConstantsModule.RbxAvatarThumbnailTypesFromEnum.HeadShot, ConstantsModule.RbxThumbnailSizes.Size150x150)
 	},
 	USER_CAROUSEL_AVATAR_THUMBNAIL = {
-		thumbnailRequestModule.fromData(constantsModule.RbxAvatarThumbnailTypesFromEnum.AvatarThumbnail, constantsModule.RbxThumbnailSizes.Size150x150)
+		ThumbnailRequestModule.fromData(ConstantsModule.RbxAvatarThumbnailTypesFromEnum.AvatarThumbnail, ConstantsModule.RbxThumbnailSizes.Size150x150)
 	},
 	HOME_HEADER_USER = {
-		thumbnailRequestModule.fromData(constantsModule.RbxAvatarThumbnailTypesFromEnum.HeadShot, constantsModule.RbxThumbnailSizes.Size150x150)
+		ThumbnailRequestModule.fromData(ConstantsModule.RbxAvatarThumbnailTypesFromEnum.HeadShot, ConstantsModule.RbxThumbnailSizes.Size150x150)
 	},
 	FRIEND_CAROUSEL = {
-		thumbnailRequestModule.fromData(constantsModule.RbxAvatarThumbnailTypesFromEnum.HeadShot, constantsModule.RbxThumbnailSizes.Size48x48)
+		ThumbnailRequestModule.fromData(ConstantsModule.RbxAvatarThumbnailTypesFromEnum.HeadShot, ConstantsModule.RbxThumbnailSizes.Size48x48)
 	},
 	CUSTOMIZE_BUTTON = {
-		thumbnailRequestModule.fromData(constantsModule.RbxAvatarThumbnailTypesFromEnum.AvatarThumbnail, constantsModule.RbxThumbnailSizes.Size720x720)
+		ThumbnailRequestModule.fromData(ConstantsModule.RbxAvatarThumbnailTypesFromEnum.AvatarThumbnail, ConstantsModule.RbxThumbnailSizes.Size720x720)
 	}
 }

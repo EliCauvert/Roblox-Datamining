@@ -1,49 +1,47 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local signalsModule = require(corePackagesService.Packages.Signals)
-local sharedFlagsModule = require(corePackagesService.Workspace.Packages.SharedFlags)
-local getFFlagExpChatGuacChatDisabledReason = sharedFlagsModule.GetFFlagExpChatGuacChatDisabledReason
-local fFlagExpChatWindowSyncUnibar = sharedFlagsModule.FFlagExpChatWindowSyncUnibar
-local fFlagEnableAEGIS2CommsFAEUpsell = sharedFlagsModule.FFlagEnableAEGIS2CommsFAEUpsell
-local expChatOnShowIconChatAvailabilityStatus = game:DefineFastFlag("ExpChatOnShowIconChatAvailabilityStatus", false)
-local var1 = if expChatOnShowIconChatAvailabilityStatus then require(corePackagesService.Workspace.Packages.ExpChat).Stores.GetChatStatusStore else nil
-local var2 = if getFFlagExpChatGuacChatDisabledReason() then require(corePackagesService.Workspace.Packages.UniversalAppPolicy) else nil
+﻿local CorePackages = game:GetService("CorePackages")
+local SignalsModule = require(CorePackages.Packages.Signals)
+local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
+local GetFFlagExpChatGuacChatDisabledReasonFunction = SharedFlagsModule.GetFFlagExpChatGuacChatDisabledReason
+local FFlagExpChatWindowSyncUnibar = SharedFlagsModule.FFlagExpChatWindowSyncUnibar
+local FFlagEnableAEGIS2CommsFAEUpsell = SharedFlagsModule.FFlagEnableAEGIS2CommsFAEUpsell
+local ExpChatOnShowIconChatAvailabilityStatus = game:DefineFastFlag("ExpChatOnShowIconChatAvailabilityStatus", false)
+local GetChatStatusStore = if ExpChatOnShowIconChatAvailabilityStatus then require(CorePackages.Workspace.Packages.ExpChat).Stores.GetChatStatusStore else nil
+local UniversalAppPolicyModule = if GetFFlagExpChatGuacChatDisabledReasonFunction() then require(CorePackages.Workspace.Packages.UniversalAppPolicy) else nil
 
-local function new(p1)
-	-- upvalues: signalsModule (ref), fFlagExpChatWindowSyncUnibar (ref), getFFlagExpChatGuacChatDisabledReason (ref), var2 (write), fFlagEnableAEGIS2CommsFAEUpsell (ref), expChatOnShowIconChatAvailabilityStatus (ref)
-	local var3, var4 = signalsModule.createSignal(true)
-	local var5, var6 = signalsModule.createSignal(false)
-	local var7, var8 = signalsModule.createSignal(false)
-	local var9, var10 = signalsModule.createSignal(false)
-	local var11 = nil
-	local var12 = nil
+local function new(p1) --[[ Line: 23 ]]
+	-- upvalues: SignalsModule (copy), FFlagExpChatWindowSyncUnibar (copy), GetFFlagExpChatGuacChatDisabledReasonFunction (copy), UniversalAppPolicyModule (ref), FFlagEnableAEGIS2CommsFAEUpsell (copy), ExpChatOnShowIconChatAvailabilityStatus (copy)
+	local Signal, Signal2 = SignalsModule.createSignal(true)
+	local Signal1, Signal2_1 = SignalsModule.createSignal(false)
+	local Signal3, Signal2_2 = SignalsModule.createSignal(false)
+	local Signal4, Signal2_3 = SignalsModule.createSignal(false)
+	local Callback = nil
+	local SetGameSettingsChatVisible = nil
 	
-	if fFlagExpChatWindowSyncUnibar then
-		local var13, var14 = signalsModule.createSignal(false)
-		var11 = var13
-		var12 = var14
+	if FFlagExpChatWindowSyncUnibar then
+		Callback, SetGameSettingsChatVisible = SignalsModule.createSignal(false)
 	end
-	local var15 = if getFFlagExpChatGuacChatDisabledReason() and var2 then var2.getAppFeaturePolicies().getExperienceChatAvailability() == "regionLocked" else false
-	local expChatOnShowIconChatAvailabilityStatus_1 = fFlagEnableAEGIS2CommsFAEUpsell and expChatOnShowIconChatAvailabilityStatus
-	local var16 = signalsModule.createComputed(function(p2)
-		-- upvalues: var3 (ref), expChatOnShowIconChatAvailabilityStatus_1 (ref), var5 (ref), fFlagExpChatWindowSyncUnibar (copy), var9 (ref), var7 (ref), var11 (write), p1 (ref), getFFlagExpChatGuacChatDisabledReason (copy), var15 (write)
-		return if var3(p2) then if not (not expChatOnShowIconChatAvailabilityStatus_1 and var5(p2)) then if not (not fFlagExpChatWindowSyncUnibar and var9(p2)) then if not (not fFlagExpChatWindowSyncUnibar and var7(p2)) then if fFlagExpChatWindowSyncUnibar and var11(p2) then true elseif expChatOnShowIconChatAvailabilityStatus_1 and p1.getChatStatus(p2) ~= "NoOne" then true else getFFlagExpChatGuacChatDisabledReason() and var15 else true else true else true else false
+	local IsRegionLocked: boolean = if GetFFlagExpChatGuacChatDisabledReasonFunction() and UniversalAppPolicyModule then UniversalAppPolicyModule.getAppFeaturePolicies().getExperienceChatAvailability() == "regionLocked" else false
+	local ExpChatOnShowIconChatAvailabilityStatus1 = FFlagEnableAEGIS2CommsFAEUpsell and ExpChatOnShowIconChatAvailabilityStatus
+	local Computed = SignalsModule.createComputed(function(p2) --[[ Line: 41 ]]
+		-- upvalues: Signal (copy), ExpChatOnShowIconChatAvailabilityStatus1 (copy), Signal1 (copy), FFlagExpChatWindowSyncUnibar (upval), Signal4 (copy), Signal3 (copy), Callback (ref), p1 (copy), GetFFlagExpChatGuacChatDisabledReasonFunction (upval), IsRegionLocked (ref)
+		return if Signal(p2) then not ExpChatOnShowIconChatAvailabilityStatus1 and Signal1(p2) or (not FFlagExpChatWindowSyncUnibar and Signal4(p2) or not FFlagExpChatWindowSyncUnibar and Signal3(p2)) or (if FFlagExpChatWindowSyncUnibar and Callback(p2) then true else ExpChatOnShowIconChatAvailabilityStatus1 and p1.getChatStatus(p2) ~= "NoOne" or (if GetFFlagExpChatGuacChatDisabledReasonFunction() and IsRegionLocked then true else false)) else false
 	end)
 	
 	return {
-		getIsChatIconVisible = var16,
-		getIsChatWindowVisible = if fFlagExpChatWindowSyncUnibar then signalsModule.createComputed(function(p2)
-			-- upvalues: var16 (ref), var11 (write)
-			return var16(p2) and var11(p2)
+		getIsChatIconVisible = Computed,
+		getIsChatWindowVisible = if FFlagExpChatWindowSyncUnibar then SignalsModule.createComputed(function(p2): boolean --[[ Line: 73 ]]
+			-- upvalues: Computed (copy), Callback (ref)
+			return if Computed(p2) and Callback(p2) then true else false
 		end) else nil,
-		setCoreGuiEnabled = var4,
-		setLocalUserChat = var6,
-		setChatActiveCalledByDeveloper = var8,
-		setVisibleViaChatSelector = var10,
-		setGameSettingsChatVisible = var12
+		setCoreGuiEnabled = Signal2,
+		setLocalUserChat = Signal2_1,
+		setChatActiveCalledByDeveloper = Signal2_2,
+		setVisibleViaChatSelector = Signal2_3,
+		setGameSettingsChatVisible = SetGameSettingsChatVisible
 	}
 end
 
 return {
 	new = new,
-	default = new(if expChatOnShowIconChatAvailabilityStatus then var1(false) else nil)
+	default = new(if ExpChatOnShowIconChatAvailabilityStatus then GetChatStatusStore(false) else nil)
 }

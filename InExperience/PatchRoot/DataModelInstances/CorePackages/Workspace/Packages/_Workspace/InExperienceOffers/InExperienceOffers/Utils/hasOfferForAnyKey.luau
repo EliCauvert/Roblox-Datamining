@@ -1,11 +1,11 @@
-﻿local inExperienceOffers = script:FindFirstAncestor("InExperienceOffers")
-local getOffersForKeyModule = require(inExperienceOffers.Utils.getOffersForKey)
-local _ = require(inExperienceOffers.Types)
+﻿local InExperienceOffers = script:FindFirstAncestor("InExperienceOffers")
+local GetOffersForKeyModule = require(InExperienceOffers.Utils.getOffersForKey)
+local _ = require(InExperienceOffers.Types)
 
-return function(p1, p2)
-	-- upvalues: getOffersForKeyModule (ref)
-	for i, v in p2 do
-		if getOffersForKeyModule(p1, v) ~= nil then
+return function(p1, List): boolean --[[ Line: 12 | Named "hasOfferForAnyKey" ]]
+	-- upvalues: GetOffersForKeyModule (copy)
+	for _, value in List do
+		if GetOffersForKeyModule(p1, value) ~= nil then
 			return true
 		end
 	end

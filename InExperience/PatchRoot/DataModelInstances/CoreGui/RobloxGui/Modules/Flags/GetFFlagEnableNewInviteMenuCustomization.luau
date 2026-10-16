@@ -1,9 +1,9 @@
 ﻿local _ = game:GetService("Players")
-local newInviteMenuExperimentManagerModule = require(game:GetService("CoreGui").RobloxGui.Modules.Settings.Pages.ShareGame.NewInviteMenuExperimentManager)
+local NewInviteMenuExperimentManagerModule = require(game:GetService("CoreGui").RobloxGui.Modules.Settings.Pages.ShareGame.NewInviteMenuExperimentManager)
 game:DefineFastFlag("EnableNewInviteMenuCustomization2", false)
 game:DefineFastFlag("EnableNewInviteMenuCustomizationIXP2", false)
 
-return function()
-	-- upvalues: newInviteMenuExperimentManagerModule (ref)
-	return game:GetFastFlag("EnableNewInviteMenuCustomization2") or game:GetFastFlag("EnableNewInviteMenuCustomizationIXP2") and newInviteMenuExperimentManagerModule.default:getCustomizationEnabled()
+return function() --[[ Line: 10 ]]
+	-- upvalues: NewInviteMenuExperimentManagerModule (copy)
+	return game:GetFastFlag("EnableNewInviteMenuCustomization2") or game:GetFastFlag("EnableNewInviteMenuCustomizationIXP2") and NewInviteMenuExperimentManagerModule.default:getCustomizationEnabled()
 end

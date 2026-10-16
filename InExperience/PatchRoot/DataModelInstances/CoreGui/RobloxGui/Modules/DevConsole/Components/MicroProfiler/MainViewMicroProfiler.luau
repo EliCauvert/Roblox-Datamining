@@ -1,93 +1,92 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local _ = game:GetService("LogService")
-local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
-local gameSettings = UserSettings().GameSettings
-local roactModule = require(corePackagesService.Packages.Roact)
-local utilAndTabModule = require(script.Parent.Parent.Parent.Components.UtilAndTab)
-local serverProfilerInterfaceModule = require(script.Parent.ServerProfilerInterface)
-local microProfilerViewModule = require(script.Parent.MicroProfilerView)
-local constantsModule = require(script.Parent.Parent.Parent.Constants)
-local mainRowPadding = constantsModule.GeneralFormatting.MainRowPadding
-local buttonWidth = constantsModule.MicroProfilerFormatting.ButtonWidth
-local buttonTextSize = constantsModule.MicroProfilerFormatting.ButtonTextSize
-local _ = constantsModule.Font.MainWindow
-local mainWindowHeader = constantsModule.Font.MainWindowHeader
-local unselectedGray = constantsModule.Color.UnselectedGray
-local selectedBlue = constantsModule.Color.SelectedBlue
-local unselectedGray_1 = constantsModule.Color.UnselectedGray
-local fFlagDevConsoleMicroProfilerImproveWordingModule = require(script.Parent.Flags.FFlagDevConsoleMicroProfilerImproveWording)
-local devConsoleMicroProfilerNewLayout = game:DefineFastFlag("DevConsoleMicroProfilerNewLayout", false)
-local mainViewProfiler = roactModule.Component:extend("MainViewProfiler")
+﻿local _ = game:GetService("LogService")
+local RbxAnalyticsService = game:GetService("RbxAnalyticsService")
+local GameSettings = UserSettings().GameSettings
+local RoactModule = require(game:GetService("CorePackages").Packages.Roact)
+local UtilAndTabModule = require(script.Parent.Parent.Parent.Components.UtilAndTab)
+local ServerProfilerInterfaceModule = require(script.Parent.ServerProfilerInterface)
+local MicroProfilerViewModule = require(script.Parent.MicroProfilerView)
+local ConstantsModule = require(script.Parent.Parent.Parent.Constants)
+local MainRowPadding = ConstantsModule.GeneralFormatting.MainRowPadding
+local ButtonWidth = ConstantsModule.MicroProfilerFormatting.ButtonWidth
+local ButtonTextSize = ConstantsModule.MicroProfilerFormatting.ButtonTextSize
+local _ = ConstantsModule.Font.MainWindow
+local MainWindowHeader = ConstantsModule.Font.MainWindowHeader
+local UnselectedGray = ConstantsModule.Color.UnselectedGray
+local SelectedBlue = ConstantsModule.Color.SelectedBlue
+local UnselectedGray1 = ConstantsModule.Color.UnselectedGray
+local FFlagDevConsoleMicroProfilerImproveWordingModule = require(script.Parent.Flags.FFlagDevConsoleMicroProfilerImproveWording)
+local DevConsoleMicroProfilerNewLayout = game:DefineFastFlag("DevConsoleMicroProfilerNewLayout", false)
+local MainViewProfiler = RoactModule.Component:extend("MainViewProfiler")
 
-function mainViewProfiler.init(p1)
-	-- upvalues: gameSettings (ref), rbxAnalyticsService (ref), roactModule (ref)
-	function p0.onUtilTabHeightChanged(p2)
-		-- upvalues: p1 (ref)
-		p1:setState({ utilTabHeight = p2 })
+function MainViewProfiler.init(p1) --[[ Line: 35 ]]
+	-- upvalues: GameSettings (copy), RbxAnalyticsService (copy), RoactModule (copy)
+	function p1.onUtilTabHeightChanged(UtilTabHeight) --[[ Line: 36 ]]
+		-- upvalues: p1 (copy)
+		p1:setState({ utilTabHeight = UtilTabHeight })
 	end
 	
-	function p0.changeProfilerState(p2)
-		-- upvalues: gameSettings (copy), p1 (ref), rbxAnalyticsService (copy)
-		return function()
-			-- upvalues: gameSettings (copy), p2 (ref), p1 (copy), rbxAnalyticsService (copy)
-			gameSettings.OnScreenProfilerEnabled = p2
-			p1:setState({ clientProfilerEnabled = p2 })
-			rbxAnalyticsService:ReportCounter("MicroprofilerDevConsolePressed")
+	function p1.changeProfilerState(ClientProfilerEnabled) --[[ Line: 42 ]]
+		-- upvalues: GameSettings (upval), p1 (copy), RbxAnalyticsService (upval)
+		return function() --[[ Line: 43 ]]
+			-- upvalues: GameSettings (upval), ClientProfilerEnabled (copy), p1 (upval), RbxAnalyticsService (upval)
+			GameSettings.OnScreenProfilerEnabled = ClientProfilerEnabled
+			p1:setState({ clientProfilerEnabled = ClientProfilerEnabled })
+			RbxAnalyticsService:ReportCounter("MicroprofilerDevConsolePressed")
 		end
 	end
 	
-	p1.microProfilerChangedConnection = gameSettings:GetPropertyChangedSignal("OnScreenProfilerEnabled"):Connect(function()
-		-- upvalues: p1 (ref), gameSettings (copy)
+	p1.microProfilerChangedConnection = GameSettings:GetPropertyChangedSignal("OnScreenProfilerEnabled"):Connect(function() --[[ Line: 54 ]]
+		-- upvalues: p1 (copy), GameSettings (upval)
 		p1:setState({
-			clientProfilerEnabled = gameSettings.OnScreenProfilerEnabled
+			clientProfilerEnabled = GameSettings.OnScreenProfilerEnabled
 		})
 	end)
-	p1.utilRef = roactModule.createRef()
+	p1.utilRef = RoactModule.createRef()
 	p1.state = { utilTabHeight = 0 }
 end
 
-function mainViewProfiler.didMount(p1)
+function MainViewProfiler.didMount(p1) --[[ Line: 67 ]]
 	p1:setState({ utilTabHeight = p1.utilRef.current.Size.Y.Offset })
 end
 
-function mainViewProfiler.willUnmount(p1)
+function MainViewProfiler.willUnmount(p1) --[[ Line: 75 ]]
 	if p1.microProfilerChangedConnection then
 		p1.microProfilerChangedConnection:Disconnect()
 		p1.microProfilerChangedConnection = nil
 	end
 end
 
-function mainViewProfiler.didUpdate(p1)
-	local size = p1.utilRef.current.Size
+function MainViewProfiler.didUpdate(p1) --[[ Line: 82 ]]
+	local Size = p1.utilRef.current.Size
 	
-	if size.Y.Offset ~= p1.state.utilTabHeight then
-		p1:setState({ utilTabHeight = size.Y.Offset })
+	if Size.Y.Offset ~= p1.state.utilTabHeight then
+		p1:setState({ utilTabHeight = Size.Y.Offset })
 	end
 end
 
-function mainViewProfiler.renderNewLayout(p1)
-	-- upvalues: roactModule (ref), constantsModule (ref), mainRowPadding (ref), utilAndTabModule (ref), microProfilerViewModule (ref)
-	local size = p1.props.size
+function MainViewProfiler.renderNewLayout(p1) --[[ Line: 91 ]]
+	-- upvalues: RoactModule (copy), ConstantsModule (copy), MainRowPadding (copy), UtilAndTabModule (copy), MicroProfilerViewModule (copy)
+	local Size = p1.props.size
 	
-	return roactModule.createElement("Frame", {
+	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		LayoutOrder = 3,
-		Size = size,
-		BackgroundColor3 = constantsModule.Color.BaseGray
+		Size = Size,
+		BackgroundColor3 = ConstantsModule.Color.BaseGray
 	}, {
-		UIListLayout = roactModule.createElement("UIListLayout", {
-			Padding = UDim.new(0, mainRowPadding),
+		UIListLayout = RoactModule.createElement("UIListLayout", {
+			Padding = UDim.new(0, MainRowPadding),
 			SortOrder = Enum.SortOrder.LayoutOrder
 		}),
-		UtilAndTab = roactModule.createElement(utilAndTabModule, {
+		UtilAndTab = RoactModule.createElement(UtilAndTabModule, {
 			layoutOrder = 1,
-			windowWidth = size.X.Offset,
+			windowWidth = Size.X.Offset,
 			formFactor = p1.props.formFactor,
 			tabList = p1.props.tabList,
 			refForParent = p1.utilRef,
 			onHeightChanged = p1.onUtilTabHeightChanged
 		}),
-		MicroProfilerView = roactModule.createElement(microProfilerViewModule, {
+		MicroProfilerView = RoactModule.createElement(MicroProfilerViewModule, {
 			BackgroundTransparency = 1,
 			LayoutOrder = 2,
 			Size = UDim2.new(1, 0, 1, -p1.state.utilTabHeight)
@@ -95,114 +94,113 @@ function mainViewProfiler.renderNewLayout(p1)
 	})
 end
 
-function mainViewProfiler.render(p1)
-	-- upvalues: devConsoleMicroProfilerNewLayout (ref), buttonWidth (ref), roactModule (ref), constantsModule (ref), mainRowPadding (ref), utilAndTabModule (ref), fFlagDevConsoleMicroProfilerImproveWordingModule (ref), mainWindowHeader (ref), buttonTextSize (ref), unselectedGray_1 (ref), unselectedGray (ref), selectedBlue (ref), serverProfilerInterfaceModule (ref)
-	if devConsoleMicroProfilerNewLayout then
+function MainViewProfiler.render(p1) --[[ Line: 123 ]]
+	-- upvalues: DevConsoleMicroProfilerNewLayout (copy), ButtonWidth (copy), RoactModule (copy), ConstantsModule (copy), MainRowPadding (copy), UtilAndTabModule (copy), FFlagDevConsoleMicroProfilerImproveWordingModule (copy), MainWindowHeader (copy), ButtonTextSize (copy), UnselectedGray1 (copy), UnselectedGray (copy), SelectedBlue (copy), ServerProfilerInterfaceModule (copy)
+	if DevConsoleMicroProfilerNewLayout then
 		return p1:renderNewLayout()
-	end
-	local size = p1.props.size
-	local formFactor = p1.props.formFactor
-	local tabList = p1.props.tabList
-	local utilTabHeight = p1.state.utilTabHeight
-	local _ = p1.state.frameRate
-	local _ = p1.state.timeFrame
-	local _ = p1.state.waitingForData
-	local clientProfilerEnabled = p1.state.clientProfilerEnabled
-	local _ = p1.state.outputPath
-	local _ = UDim2.new(0.8, -buttonWidth, 0, 30)
-	local _ = UDim2.new(0.6, buttonWidth, 0, 0)
-	
-	return roactModule.createElement("Frame", {
-		BackgroundTransparency = 1,
-		LayoutOrder = 3,
-		Size = size,
-		BackgroundColor3 = constantsModule.Color.BaseGray
-	}, {
-		UIListLayout = roactModule.createElement("UIListLayout", {
-			Padding = UDim.new(0, mainRowPadding),
-			SortOrder = Enum.SortOrder.LayoutOrder
-		}),
-		UtilAndTab = roactModule.createElement(utilAndTabModule, {
-			layoutOrder = 1,
-			windowWidth = size.X.Offset,
-			formFactor = formFactor,
-			tabList = tabList,
-			refForParent = p1.utilRef,
-			onHeightChanged = p1.onUtilTabHeightChanged
-		}),
-		MainFrame = roactModule.createElement("ScrollingFrame", {
+	else
+		local Size = p1.props.size
+		local UtilTabHeight = p1.state.utilTabHeight
+		local _ = p1.state.frameRate
+		local _ = p1.state.timeFrame
+		local _ = p1.state.waitingForData
+		local ClientProfilerEnabled = p1.state.clientProfilerEnabled
+		local _ = p1.state.outputPath
+		local _ = UDim2.new(0.8, -ButtonWidth, 0, 30)
+		local _ = UDim2.new(0.6, ButtonWidth, 0, 0)
+		
+		return RoactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
-			LayoutOrder = 2,
-			Size = UDim2.new(1, 0, 1, -utilTabHeight),
-			CanvasSize = UDim2.new(1, 0, 1, -utilTabHeight)
+			LayoutOrder = 3,
+			Size = Size,
+			BackgroundColor3 = ConstantsModule.Color.BaseGray
 		}, {
-			UIListLayout = roactModule.createElement("UIListLayout", {
-				Padding = UDim.new(0, mainRowPadding * 2),
+			UIListLayout = RoactModule.createElement("UIListLayout", {
+				Padding = UDim.new(0, MainRowPadding),
 				SortOrder = Enum.SortOrder.LayoutOrder
 			}),
-			MicroProfilerRow = roactModule.createElement("Frame", {
+			UtilAndTab = RoactModule.createElement(UtilAndTabModule, {
+				layoutOrder = 1,
+				windowWidth = Size.X.Offset,
+				formFactor = p1.props.formFactor,
+				tabList = p1.props.tabList,
+				refForParent = p1.utilRef,
+				onHeightChanged = p1.onUtilTabHeightChanged
+			}),
+			MainFrame = RoactModule.createElement("ScrollingFrame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 2,
-				Size = UDim2.new(1, 0, 0, 90)
+				Size = UDim2.new(1, 0, 1, -UtilTabHeight),
+				CanvasSize = UDim2.new(1, 0, 1, -UtilTabHeight)
 			}, {
-				Label = roactModule.createElement("TextLabel", {
-					BackgroundTransparency = 1,
-					Size = UDim2.new(0, buttonWidth, 0, 30),
-					Position = UDim2.new(0.1, 0, 0, 0),
-					Text = if fFlagDevConsoleMicroProfilerImproveWordingModule then "Client MicroProfiler" else "MicroProfiler",
-					Font = mainWindowHeader,
-					TextSize = buttonTextSize,
-					TextColor3 = constantsModule.Color.Text,
-					TextXAlignment = Enum.TextXAlignment.Left,
-					TextYAlignment = Enum.TextYAlignment.Center,
-					BackgroundColor3 = unselectedGray_1
+				UIListLayout = RoactModule.createElement("UIListLayout", {
+					Padding = UDim.new(0, MainRowPadding * 2),
+					SortOrder = Enum.SortOrder.LayoutOrder
 				}),
-				HorizontalLine = roactModule.createElement("Frame", {
-					Size = UDim2.new(1, 0, 0, 1),
-					Position = UDim2.new(0, 0, 0, 30)
-				}),
-				ToggleButton = roactModule.createElement("TextLabel", {
+				MicroProfilerRow = RoactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
-					Size = UDim2.new(0.8, -buttonWidth, 0, 30),
-					Position = UDim2.new(0.1, buttonWidth, 0, 37.5)
+					LayoutOrder = 2,
+					Size = UDim2.new(1, 0, 0, 90)
 				}, {
-					OffButton = roactModule.createElement("TextButton", {
-						Size = UDim2.new(0.5, 0, 1, 0),
-						Text = "Off",
-						Font = mainWindowHeader,
-						TextSize = buttonTextSize,
-						TextColor3 = constantsModule.Color.Text,
-						TextXAlignment = Enum.TextXAlignment.Center,
+					Label = RoactModule.createElement("TextLabel", {
+						BackgroundTransparency = 1,
+						Size = UDim2.new(0, ButtonWidth, 0, 30),
+						Position = UDim2.new(0.1, 0, 0, 0),
+						Text = if FFlagDevConsoleMicroProfilerImproveWordingModule then "Client MicroProfiler" else "MicroProfiler",
+						Font = MainWindowHeader,
+						TextSize = ButtonTextSize,
+						TextColor3 = ConstantsModule.Color.Text,
+						TextXAlignment = Enum.TextXAlignment.Left,
 						TextYAlignment = Enum.TextYAlignment.Center,
-						BackgroundColor3 = if clientProfilerEnabled then unselectedGray else selectedBlue,
-						[roactModule.Event.Activated] = p1.changeProfilerState(false)
+						BackgroundColor3 = UnselectedGray1
 					}),
-					ClientButton = roactModule.createElement("TextButton", {
-						Size = UDim2.new(0.5, 0, 1, 0),
-						Position = UDim2.new(0.5, 0, 0, 0),
-						Text = if fFlagDevConsoleMicroProfilerImproveWordingModule then "On" else "Client",
-						Font = mainWindowHeader,
-						TextSize = buttonTextSize,
-						TextColor3 = constantsModule.Color.Text,
-						TextXAlignment = Enum.TextXAlignment.Center,
-						TextYAlignment = Enum.TextYAlignment.Center,
-						BackgroundColor3 = if clientProfilerEnabled then selectedBlue else unselectedGray,
-						[roactModule.Event.Activated] = p1.changeProfilerState(true)
+					HorizontalLine = RoactModule.createElement("Frame", {
+						Size = UDim2.new(1, 0, 0, 1),
+						Position = UDim2.new(0, 0, 0, 30)
+					}),
+					ToggleButton = RoactModule.createElement("TextLabel", {
+						BackgroundTransparency = 1,
+						Size = UDim2.new(0.8, -ButtonWidth, 0, 30),
+						Position = UDim2.new(0.09999999999999998, ButtonWidth, 0, 37.5)
+					}, {
+						OffButton = RoactModule.createElement("TextButton", {
+							Size = UDim2.new(0.5, 0, 1, 0),
+							Text = "Off",
+							Font = MainWindowHeader,
+							TextSize = ButtonTextSize,
+							TextColor3 = ConstantsModule.Color.Text,
+							TextXAlignment = Enum.TextXAlignment.Center,
+							TextYAlignment = Enum.TextYAlignment.Center,
+							BackgroundColor3 = ClientProfilerEnabled and UnselectedGray or SelectedBlue,
+							[RoactModule.Event.Activated] = p1.changeProfilerState(false)
+						}),
+						ClientButton = RoactModule.createElement("TextButton", {
+							Size = UDim2.new(0.5, 0, 1, 0),
+							Position = UDim2.new(0.5, 0, 0, 0),
+							Text = if FFlagDevConsoleMicroProfilerImproveWordingModule then "On" else "Client",
+							Font = MainWindowHeader,
+							TextSize = ButtonTextSize,
+							TextColor3 = ConstantsModule.Color.Text,
+							TextXAlignment = Enum.TextXAlignment.Center,
+							TextYAlignment = Enum.TextYAlignment.Center,
+							BackgroundColor3 = ClientProfilerEnabled and SelectedBlue or UnselectedGray,
+							[RoactModule.Event.Activated] = p1.changeProfilerState(true)
+						})
 					})
+				}),
+				HorizontalLine = RoactModule.createElement("Frame", {
+					BackgroundTransparency = 1,
+					LayoutOrder = 3,
+					Size = UDim2.new(1, 0, 0, MainRowPadding)
+				}),
+				ServerProfiler = RoactModule.createElement(ServerProfilerInterfaceModule, {
+					BackgroundTransparency = 1,
+					LayoutOrder = 4,
+					Size = UDim2.new(1, 0, 0, 135)
 				})
-			}),
-			HorizontalLine = roactModule.createElement("Frame", {
-				BackgroundTransparency = 1,
-				LayoutOrder = 3,
-				Size = UDim2.new(1, 0, 0, mainRowPadding)
-			}),
-			ServerProfiler = roactModule.createElement(serverProfilerInterfaceModule, {
-				BackgroundTransparency = 1,
-				LayoutOrder = 4,
-				Size = UDim2.new(1, 0, 0, 135)
 			})
 		})
-	})
+	end
 end
 
-return mainViewProfiler
+return MainViewProfiler

@@ -1,58 +1,58 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local dateTimeEqualityUtilitiesModule = require(script.Parent.Parent.Utilities.DateTimeEqualityUtilities)
-local dateTimePickerDateRangePresetModule = require(foundation.Enums.DateTimePickerDateRangePreset)
-local dateTimePresetRangesUtilitiesModule = require(script.Parent.Parent.Utilities.DateTimePresetRangesUtilities)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local DateTimeEqualityUtilitiesModule = require(script.Parent.Parent.Utilities.DateTimeEqualityUtilities)
+local DateTimePickerDateRangePresetModule = require(Foundation.Enums.DateTimePickerDateRangePreset)
+local DateTimePresetRangesUtilitiesModule = require(script.Parent.Parent.Utilities.DateTimePresetRangesUtilities)
 local _ = require(script.Parent.Parent.DateTimeUtilities)
-local chipGroupModule = require(foundation.Components.ChipGroup)
-local chipSizeModule = require(foundation.Enums.ChipSize)
-local translatorModule = require(foundation.Utility.Localization.Translator)
+local ChipGroupModule = require(Foundation.Components.ChipGroup)
+local ChipSizeModule = require(Foundation.Enums.ChipSize)
+local TranslatorModule = require(Foundation.Utility.Localization.Translator)
 local list = {
-	dateTimePickerDateRangePresetModule.Today,
-	dateTimePickerDateRangePresetModule.ThisWeek,
-	dateTimePickerDateRangePresetModule.LastWeek,
-	dateTimePickerDateRangePresetModule.ThisMonth,
-	dateTimePickerDateRangePresetModule.ThisYear,
-	dateTimePickerDateRangePresetModule.LastYear
+	DateTimePickerDateRangePresetModule.Today,
+	DateTimePickerDateRangePresetModule.ThisWeek,
+	DateTimePickerDateRangePresetModule.LastWeek,
+	DateTimePickerDateRangePresetModule.ThisMonth,
+	DateTimePickerDateRangePresetModule.ThisYear,
+	DateTimePickerDateRangePresetModule.LastYear
 }
 
-local function buildPresetChip(value, p1, p2, p3, p4)
-	-- upvalues: dateTimePresetRangesUtilitiesModule (ref), dateTimeEqualityUtilitiesModule (ref), translatorModule (ref)
-	local var1 = dateTimePresetRangesUtilitiesModule.resolvePresetRange(value, p2)
+local function buildPresetChip(p1, SelectedDates, ReferenceDate, SelectableDateRange, Callback) --[[ Line: 39 ]]
+	-- upvalues: DateTimePresetRangesUtilitiesModule (copy), DateTimeEqualityUtilitiesModule (copy), TranslatorModule (copy)
+	local ResolvePresetRangeResult = DateTimePresetRangesUtilitiesModule.resolvePresetRange(p1, ReferenceDate)
 	
-	return if p3 and not dateTimeEqualityUtilitiesModule.isRangeWithinSelectableRange(var1, p3) then nil else {
-		text = translatorModule:FormatByKey(`CommonUI.Controls.Label.{value}`),
-		isChecked = dateTimeEqualityUtilitiesModule.areDatesSameDayAsRange(p1, var1),
-		onActivated = function()
-			-- upvalues: p4 (ref), var1 (ref)
-			p4(var1)
+	return if SelectableDateRange and not DateTimeEqualityUtilitiesModule.isRangeWithinSelectableRange(ResolvePresetRangeResult, SelectableDateRange) then nil else {
+		text = TranslatorModule:FormatByKey(`CommonUI.Controls.Label.{p1}`),
+		isChecked = DateTimeEqualityUtilitiesModule.areDatesSameDayAsRange(SelectedDates, ResolvePresetRangeResult),
+		onActivated = function() --[[ Line: 56 ]]
+			-- upvalues: Callback (copy), ResolvePresetRangeResult (copy)
+			Callback(ResolvePresetRangeResult)
 		end
 	}
 end
 
-return function(value)
-	-- upvalues: reactModule (ref), list (ref), buildPresetChip (ref), chipGroupModule (ref), chipSizeModule (ref)
-	return reactModule.createElement(chipGroupModule, {
-		chips = reactModule.useMemo(function()
-			-- upvalues: list (copy), buildPresetChip (copy), value (ref)
-			local t = {}
+return function(Frame) --[[ Line: 62 | Named "DateRangePresets" ]]
+	-- upvalues: ReactModule (copy), list (copy), buildPresetChip (copy), ChipGroupModule (copy), ChipSizeModule (copy)
+	return ReactModule.createElement(ChipGroupModule, {
+		chips = ReactModule.useMemo(function() --[[ Line: 63 ]]
+			-- upvalues: list (upval), buildPresetChip (upval), Frame (copy)
+			local List = {}
 			
 			for i = 1, #list do
-				local var1 = buildPresetChip(list[i], value.selectedDates, value.referenceDate, value.selectableDateRange, value.onPresetSelected)
+				local PresetChip = buildPresetChip(list[i], Frame.selectedDates, Frame.referenceDate, Frame.selectableDateRange, Frame.onPresetSelected)
 				
-				if var1 then
-					table.insert(t, var1)
+				if PresetChip then
+					table.insert(List, PresetChip)
 				end
 			end
-			return t
+			return List
 		end, {
-			value.selectedDates,
-			value.referenceDate,
-			value.onPresetSelected,
-			value.selectableDateRange
+			Frame.selectedDates,
+			Frame.referenceDate,
+			Frame.onPresetSelected,
+			Frame.selectableDateRange
 		}),
-		LayoutOrder = value.LayoutOrder,
-		size = chipSizeModule.Small,
-		testId = value.testId
+		LayoutOrder = Frame.LayoutOrder,
+		size = ChipSizeModule.Small,
+		testId = Frame.testId
 	})
 end

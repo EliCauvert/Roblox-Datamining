@@ -1,80 +1,78 @@
-﻿local dependenciesModule = require(script:FindFirstAncestor("SocialLibraries").dependencies)
-local roduxPresence = dependenciesModule.RoduxPresence
-local userModel = dependenciesModule.UserModel
-local t = dependenciesModule.t
-local presenceType = roduxPresence.Enums.PresenceType
-local _ = { InGame = 3, Online = 2, InStudio = 1, Offline = 0 }
-local t_1 = {
-	[presenceType.InGame.rawValue()] = 3,
-	[presenceType.Online.rawValue()] = 2,
-	[presenceType.InStudio.rawValue()] = 1,
-	[presenceType.Offline.rawValue()] = 0
+﻿local DependenciesModule = require(script:FindFirstAncestor("SocialLibraries").dependencies)
+local UserModel = DependenciesModule.UserModel
+local T = DependenciesModule.t
+local PresenceType = DependenciesModule.RoduxPresence.Enums.PresenceType
+local config = {
+	[PresenceType.InGame.rawValue()] = 3,
+	[PresenceType.Online.rawValue()] = 2,
+	[PresenceType.InStudio.rawValue()] = 1,
+	[PresenceType.Offline.rawValue()] = 0
 }
-local t_2 = {
-	[userModel.PresenceType.IN_GAME] = 3,
-	[userModel.PresenceType.ONLINE] = 2,
-	[userModel.PresenceType.IN_STUDIO] = 1,
-	[userModel.PresenceType.OFFLINE] = 0
+local config1 = {
+	[UserModel.PresenceType.IN_GAME] = 3,
+	[UserModel.PresenceType.ONLINE] = 2,
+	[UserModel.PresenceType.IN_STUDIO] = 1,
+	[UserModel.PresenceType.OFFLINE] = 0
 }
 
-local _ = function(p1)
-	-- upvalues: t (ref), t_1 (ref), presenceType (ref)
-	return if t.number(p1) then t_1[p1] else t_1[presenceType.Offline]
+local function _(p1) --[[ Line: 43 ]]
+	-- upvalues: T (copy), config (copy), PresenceType (copy)
+	return T.number(p1) and config[p1] or config[PresenceType.Offline]
 end
 
-local _ = function(p1)
-	-- upvalues: t (ref), t_2 (ref), userModel (ref)
-	return if t.string(p1) then t_2[p1] else t_2[userModel.PresenceType.OFFLINE]
+local _ = function(p1) --[[ Line: 48 ]]
+	-- upvalues: T (copy), config1 (copy), UserModel (copy)
+	return T.string(p1) and config1[p1] or config1[UserModel.PresenceType.OFFLINE]
 end
 
-local var1 = function(p1, p2)
-	-- upvalues: t (ref), t_1 (ref), presenceType (ref), t_2 (ref), userModel (ref)
-	local var2 = 0
-	local var3 = 0
-	
-	if p1.userPresenceType and p2.userPresenceType then
-		local var4 = p1.userPresenceType.rawValue()
-		var2 = if t.number(var4) then t_1[var4] else t_1[presenceType.Offline]
-		local var5 = p2.userPresenceType.rawValue()
-		
-		if t.number(var5) then
-			var3 = t_1[var5]
+local function v8(p1, p2) --[[ Line: 53 ]]
+	-- upvalues: T (copy), config (copy), PresenceType (copy), config1 (copy), UserModel (copy)
+	local v1 = 0
+	local v2 = 0
+	repeat
+		if p1.userPresenceType and p2.userPresenceType then
+			local RawValueResult = p1.userPresenceType.rawValue()
+			v1 = T.number(RawValueResult) and config[RawValueResult] or config[PresenceType.Offline]
+			local RawValueResult1 = p2.userPresenceType.rawValue()
 			
-			if var3 then
-				return var2, var3
-			else
-				var3 = t_1[presenceType.Offline]
+			if T.number(RawValueResult1) then
+				v2 = config[RawValueResult1]
 				
-				return var2, var3
+				if v2 then break end
 			end
+			v2 = config[PresenceType.Offline]
+			
+			return v1, v2
 		end
-	elseif p1.presence and p2.presence then
-		local presence = p1.presence
-		var2 = if t.string(presence) then t_2[presence] else t_2[userModel.PresenceType.OFFLINE]
-		local presence_1 = p2.presence
-		var3 = if t.string(presence_1) then t_2[presence_1] else t_2[userModel.PresenceType.OFFLINE]
-	end
+		if not p1.presence or not p2.presence then break end
+		local Presence = p1.presence
+		v1 = T.string(Presence) and config1[Presence] or config1[UserModel.PresenceType.OFFLINE]
+		local Presence1 = p2.presence
+		v2 = T.string(Presence1) and config1[Presence1] or config1[UserModel.PresenceType.OFFLINE]
+	until true
+	return v1, v2
 end
 
-local _ = function(p1, p2)
+local _ = function(p1, p2) --[[ Line: 68 ]]
 	return p1.username or (p1.name or ""), p2.username or (p2.name or "")
 end
 
-return function(p1, p2)
-	-- upvalues: var1 (ref), t (ref)
-	local var2, var3 = var1(p1, p2)
+return function(p1, p2): boolean --[[ Line: 72 ]]
+	-- upvalues: v8 (copy), T (copy)
+	local v1, v2 = v8(p1, p2)
 	
-	if var2 ~= var3 then
-		return var3 < var2
+	if v1 ~= v2 then
+		return v2 < v1
 	end
-	local var4 = if t.number(p1.friendRank) then p1.friendRank else 0
-	local var5 = if t.number(p2.friendRank) then p2.friendRank else 0
+	local FriendRank = T.number(p1.friendRank) and p1.friendRank or 0
+	local FriendRank1 = T.number(p2.friendRank) and p2.friendRank or 0
 	
-	if var4 ~= var5 then
-		return var4 < var5
+	if FriendRank == FriendRank1 then
+		local DisplayName = T.string(p1.displayName) and p1.displayName or ""
+		local DisplayName1 = T.string(p2.displayName) and p2.displayName or ""
+		
+		return if string.lower(DisplayName) == string.lower(DisplayName1) then string.lower(p1.username or (p1.name or "")) < string.lower(p2.username or (p2.name or "")) else string.lower(DisplayName) < string.lower(DisplayName1)
+	else
+		return FriendRank < FriendRank1
 	end
-	local var6 = if t.string(p1.displayName) then p1.displayName else ""
-	local var7 = if t.string(p2.displayName) then p2.displayName else ""
-	
-	return if string.lower(var6) == string.lower(var7) then string.lower(p1.username or (p1.name or "")) < string.lower(p2.username or (p2.name or "")) else string.lower(var6) < string.lower(var7)
 end

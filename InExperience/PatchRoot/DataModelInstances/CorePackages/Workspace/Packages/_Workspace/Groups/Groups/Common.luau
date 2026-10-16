@@ -1,6 +1,6 @@
-﻿local _script = script
+﻿local v1 = script
 
 return {
-	TextKeys = require(_script.TextKeys),
-	Types = require(_script.Types)
+	TextKeys = require(v1.TextKeys),
+	Types = require(v1.Types)
 }

@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.ServerDrivenUi.ServerDrivenUi)
+﻿return (require(script.Parent.Parent.Parent._Index.ServerDrivenUi.ServerDrivenUi))

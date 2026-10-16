@@ -1,29 +1,32 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local userInputService = game:GetService("UserInputService")
-local eventIngestService = game:GetService("EventIngestService")
-local var1 = if require(corePackagesService.Workspace.Packages.SharedFlags).GetFFlagShareGetPlatformTargetImpl() then require(corePackagesService.Workspace.Packages.Analytics).getPlatformTarget else function()
-	-- upvalues: userInputService (ref)
-	local var2 = "unknownLua"
-	local none = Enum.Platform.None
-	pcall(function()
-		-- upvalues: none (write), userInputService (copy)
-		none = userInputService:GetPlatform()
+﻿local CorePackages = game:GetService("CorePackages")
+local UserInputService = game:GetService("UserInputService")
+local EventIngestService = game:GetService("EventIngestService")
+local GetPlatformTarget = nil
+GetPlatformTarget = if require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagShareGetPlatformTargetImpl() then require(CorePackages.Workspace.Packages.Analytics).getPlatformTarget else function(): string --[[ Line: 12 | Named "getPlatformTarget" ]]
+	-- upvalues: UserInputService (copy)
+	local v1 = "unknownLua"
+	local None = Enum.Platform.None
+	pcall(function() --[[ Line: 18 ]]
+		-- upvalues: None (ref), UserInputService (upval)
+		None = UserInputService:GetPlatform()
 	end)
-	local var3 = if none ~= Enum.Platform.XBox360 then none == Enum.Platform.XBoxOne else true
+	local IsNoneMatch: boolean = None == Enum.Platform.Windows or None == Enum.Platform.OSX
+	local IsNoneMatch1: boolean = None == Enum.Platform.IOS or None == Enum.Platform.Android or None == Enum.Platform.UWP
+	local IsNoneMatch2: boolean = None == Enum.Platform.XBox360 or None == Enum.Platform.XBoxOne or (None == Enum.Platform.PS3 or None == Enum.Platform.PS4) or None == Enum.Platform.WiiU
 	
-	return if if none ~= Enum.Platform.Windows then none == Enum.Platform.OSX else true then "client" elseif (if none ~= Enum.Platform.IOS then none == Enum.Platform.Android else true) or none == Enum.Platform.UWP then "mobile" elseif (var3 or (if none ~= Enum.Platform.PS3 then none == Enum.Platform.PS4 else true)) or none == Enum.Platform.WiiU then "console" else var2 .. tostring(none)
+	return if IsNoneMatch then "client" elseif IsNoneMatch1 then "mobile" elseif IsNoneMatch2 then "console" else v1 .. tostring(None)
 end
 
-return function(p1, p2, p3)
-	-- upvalues: var1 (write), eventIngestService (ref)
+return function(p1, p2, p3) --[[ Line: 49 ]]
+	-- upvalues: GetPlatformTarget (ref), EventIngestService (copy)
 	assert(type(p1) == "string", "Expected eventContext to be a string")
 	assert(type(p2) == "string", "Expected eventName to be a string")
 	assert(type(p3) == "table", "Expected eventTable to be a table")
-	local var2 = var1()
+	local PlatformTarget = GetPlatformTarget()
 	
 	if not p3 then
 		p3 = {}
 	end
 	p3.universeId = tostring(game.GameId)
-	eventIngestService:sendEventDeferred(var2, p1, p2, p3)
+	EventIngestService:sendEventDeferred(PlatformTarget, p1, p2, p3)
 end

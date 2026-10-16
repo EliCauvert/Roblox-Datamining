@@ -1,1 +1,1 @@
-﻿return require(script:FindFirstAncestor("AvatarExperienceCatalog").Parent.Signals).createComputed(require(script.createCatalogPageRequestIdStore))
+﻿return require(script:FindFirstAncestor("AvatarExperienceCatalog").Parent.Signals).createComputed((require(script.createCatalogPageRequestIdStore)))

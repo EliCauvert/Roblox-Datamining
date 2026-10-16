@@ -1,85 +1,81 @@
-﻿local roactModule = require(game:GetService("CorePackages").Packages.Roact)
-local components = script.Parent.Parent.Parent.Components
-local cellLabelModule = require(components.CellLabel)
-local bannerButtonModule = require(components.BannerButton)
-local lineGraphModule = require(components.LineGraph)
-local constantsModule = require(script.Parent.Parent.Parent.Constants)
-local lineWidth = constantsModule.GeneralFormatting.LineWidth
-local lineColor = constantsModule.GeneralFormatting.LineColor
-local valueCellWidth = constantsModule.MemoryFormatting.ValueCellWidth
-local cellPadding = constantsModule.MemoryFormatting.CellPadding
-local valuePadding = constantsModule.MemoryFormatting.ValuePadding
-local entryFrameHeight = constantsModule.GeneralFormatting.EntryFrameHeight
-local depthIndent = constantsModule.MemoryFormatting.DepthIndent
-local convertTimeStampModule = require(script.Parent.Parent.Parent.Util.convertTimeStamp)
+﻿local RoactModule = require(game:GetService("CorePackages").Packages.Roact)
+local Components = script.Parent.Parent.Parent.Components
+local CellLabelModule = require(Components.CellLabel)
+local BannerButtonModule = require(Components.BannerButton)
+local LineGraphModule = require(Components.LineGraph)
+local ConstantsModule = require(script.Parent.Parent.Parent.Constants)
+local LineWidth = ConstantsModule.GeneralFormatting.LineWidth
+local LineColor = ConstantsModule.GeneralFormatting.LineColor
+local ValueCellWidth = ConstantsModule.MemoryFormatting.ValueCellWidth
+local CellPadding = ConstantsModule.MemoryFormatting.CellPadding
+local ValuePadding = ConstantsModule.MemoryFormatting.ValuePadding
+local EntryFrameHeight = ConstantsModule.GeneralFormatting.EntryFrameHeight
+local DepthIndent = ConstantsModule.MemoryFormatting.DepthIndent
+local ConvertTimeStampModule = require(script.Parent.Parent.Parent.Util.convertTimeStamp)
 
-return function(p1)
-	-- upvalues: depthIndent (ref), valueCellWidth (ref), roactModule (ref), bannerButtonModule (ref), entryFrameHeight (ref), cellLabelModule (ref), cellPadding (ref), lineWidth (ref), lineColor (ref), valuePadding (ref), lineGraphModule (ref), convertTimeStampModule (ref)
-	local size = p1.size
-	local depth = p1.depth
-	local showGraph = p1.showGraph
-	local dataStats = p1.dataStats
-	local layoutOrder = p1.layoutOrder
-	local onButtonPress = p1.onButtonPress
-	local formatValueStr = p1.formatValueStr
-	local getX = p1.getX
-	local getY = p1.getY
-	local var1 = depth * depthIndent
-	local name = p1.name
-	local var2 = if dataStats then dataStats.dataSet:back().data else p1.value
+return function(p1) --[[ Line: 22 ]]
+	-- upvalues: DepthIndent (copy), ValueCellWidth (copy), RoactModule (copy), BannerButtonModule (copy), EntryFrameHeight (copy), CellLabelModule (copy), CellPadding (copy), LineWidth (copy), LineColor (copy), ValuePadding (copy), LineGraphModule (copy), ConvertTimeStampModule (copy)
+	local ShowGraph = p1.showGraph
+	local DataStats = p1.dataStats
+	local FormatValueStrFunction = p1.formatValueStr
+	local GetX = p1.getX
+	local GetY = p1.getY
+	local ScaledDepth = p1.depth * DepthIndent
+	local Name = p1.name
+	local Data = if DataStats then DataStats.dataSet:back().data else p1.value
 	
-	return roactModule.createElement("Frame", {
+	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		Size = size,
-		LayoutOrder = layoutOrder
+		Size = p1.size,
+		LayoutOrder = p1.layoutOrder
 	}, {
-		button = roactModule.createElement(bannerButtonModule, {
-			size = UDim2.new(1, -var1, 0, entryFrameHeight),
-			pos = UDim2.new(0, var1, 0, 0),
-			isExpanded = showGraph,
-			onButtonPress = onButtonPress
+		button = RoactModule.createElement(BannerButtonModule, {
+			size = UDim2.new(1, -ScaledDepth, 0, EntryFrameHeight),
+			pos = UDim2.new(0, ScaledDepth, 0, 0),
+			isExpanded = ShowGraph,
+			onButtonPress = p1.onButtonPress
 		}, {
-			name = roactModule.createElement(cellLabelModule, {
-				text = name,
-				size = UDim2.new(UDim.new(1 - valueCellWidth, -var1), UDim.new(1, 0)),
-				pos = UDim2.new(0, cellPadding, 0, 0)
+			name = RoactModule.createElement(CellLabelModule, {
+				text = Name,
+				size = UDim2.new(UDim.new(1 - ValueCellWidth, -ScaledDepth), UDim.new(1, 0)),
+				pos = UDim2.new(0, CellPadding, 0, 0)
 			}),
-			horizonal1 = roactModule.createElement("Frame", {
+			horizonal1 = RoactModule.createElement("Frame", {
 				BorderSizePixel = 0,
-				Size = UDim2.new(1, -var1, 0, lineWidth),
-				Position = UDim2.new(0, var1, 0, 0),
-				BackgroundColor3 = lineColor
+				Size = UDim2.new(1, -ScaledDepth, 0, LineWidth),
+				Position = UDim2.new(0, ScaledDepth, 0, 0),
+				BackgroundColor3 = LineColor
 			}),
-			horizonal2 = roactModule.createElement("Frame", {
+			horizonal2 = RoactModule.createElement("Frame", {
 				BorderSizePixel = 0,
-				Size = UDim2.new(1, -var1, 0, lineWidth),
-				Position = UDim2.new(0, var1, 1, 0),
-				BackgroundColor3 = lineColor
+				Size = UDim2.new(1, -ScaledDepth, 0, LineWidth),
+				Position = UDim2.new(0, ScaledDepth, 1, 0),
+				BackgroundColor3 = LineColor
 			})
 		}),
-		value = var2 and roactModule.createElement(cellLabelModule, {
-			text = formatValueStr(var2),
-			size = UDim2.new(valueCellWidth, -valuePadding, 0, entryFrameHeight),
-			pos = UDim2.new(1 - valueCellWidth, valuePadding, 0, 0)
+		value = Data and RoactModule.createElement(CellLabelModule, {
+			text = FormatValueStrFunction(Data),
+			size = UDim2.new(ValueCellWidth, -ValuePadding, 0, EntryFrameHeight),
+			pos = UDim2.new(1 - ValueCellWidth, ValuePadding, 0, 0)
 		}),
-		vertical = roactModule.createElement("Frame", {
+		vertical = RoactModule.createElement("Frame", {
 			BorderSizePixel = 0,
-			Size = UDim2.new(0, 1, 0, entryFrameHeight),
-			Position = UDim2.new(1 - valueCellWidth, 0, 0, 0),
-			BackgroundColor3 = lineColor
+			Size = UDim2.new(0, 1, 0, EntryFrameHeight),
+			Position = UDim2.new(1 - ValueCellWidth, 0, 0, 0),
+			BackgroundColor3 = LineColor
 		}),
-		Graph = showGraph and roactModule.createElement(lineGraphModule, {
+		Graph = ShowGraph and RoactModule.createElement(LineGraphModule, {
 			axisLabelX = "Timestamp",
-			pos = UDim2.new(0, 0, 0, entryFrameHeight),
-			size = UDim2.new(1, 0, 1, -entryFrameHeight),
-			graphData = dataStats.dataSet,
-			maxY = dataStats.max,
-			minY = dataStats.min,
-			getX = getX,
-			getY = getY,
-			stringFormatX = convertTimeStampModule,
-			stringFormatY = formatValueStr,
-			axisLabelY = name
+			pos = UDim2.new(0, 0, 0, EntryFrameHeight),
+			size = UDim2.new(1, 0, 1, -EntryFrameHeight),
+			graphData = DataStats.dataSet,
+			maxY = DataStats.max,
+			minY = DataStats.min,
+			getX = GetX,
+			getY = GetY,
+			stringFormatX = ConvertTimeStampModule,
+			stringFormatY = FormatValueStrFunction,
+			axisLabelY = Name
 		})
 	})
 end

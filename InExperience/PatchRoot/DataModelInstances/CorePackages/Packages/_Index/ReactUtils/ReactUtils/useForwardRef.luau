@@ -1,24 +1,24 @@
-﻿local reactModule = require(script:FindFirstAncestor("ReactUtils").Parent.React)
+﻿local ReactModule = require(script:FindFirstAncestor("ReactUtils").Parent.React)
 
-return function(p1, p2)
-	-- upvalues: reactModule (ref)
-	local var1 = reactModule.useRef(nil)
-	local var2 = reactModule.useRef(nil)
-	local var3 = reactModule.useCallback(function(p3)
-		-- upvalues: var2 (ref), var1 (ref), p2 (ref)
-		if var2.current then
-			var2.current()
-			var2.current = nil
+return function(p1, Callback) --[[ Line: 29 | Named "useForwardRef" ]]
+	-- upvalues: ReactModule (copy)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseResult = ReactModule.useCallback(function(Current) --[[ Line: 33 ]]
+		-- upvalues: UseRefResult1 (copy), UseRefResult (copy), Callback (copy)
+		if UseRefResult1.current then
+			UseRefResult1.current()
+			UseRefResult1.current = nil
 		end
-		if p3 then
-			var1.current = p3
-			var2.current = p2(p3)
+		if Current then
+			UseRefResult.current = Current
+			UseRefResult1.current = Callback(Current)
 		end
-	end, { p2 })
-	reactModule.useImperativeHandle(p1, function()
-		-- upvalues: var1 (ref)
-		return var1.current
+	end, { Callback })
+	ReactModule.useImperativeHandle(p1, function() --[[ Line: 44 ]]
+		-- upvalues: UseRefResult (copy)
+		return UseRefResult.current
 	end)
 	
-	return var3
+	return UseResult
 end

@@ -1,61 +1,61 @@
-﻿local t = {}
-local mouse = game:GetService("Players").LocalPlayer:GetMouse()
-local tweenService = game:GetService("TweenService")
+﻿local Mouse = game:GetService("Players").LocalPlayer:GetMouse()
+local TweenService = game:GetService("TweenService")
 
-function t.setupControl(value)
-	-- upvalues: mouse (ref), tweenService (ref)
-	local timestamp = os.time()
-	local var1 = false
-	local var2 = false
-	mouse.Move:Connect(function()
-		-- upvalues: timestamp (write)
-		timestamp = os.time()
-	end)
-	value.ControlBarContainer.MouseEnter:Connect(function()
-		-- upvalues: var1 (write)
-		var1 = true
-	end)
-	value.ControlBarContainer.MouseLeave:Connect(function()
-		-- upvalues: var1 (write)
-		var1 = false
-	end)
-	local var3 = nil
-	
-	local function createTween()
-		-- upvalues: var3 (write), tweenService (copy), value (ref), createTween (ref)
-		var3 = tweenService:Create(value.ControlBarContainer, TweenInfo.new(2), { Position = value.ControlBarContainerNonVisiblePosition })
+return {
+	setupControl = function(p1) --[[ Line: 10 ]]
+		-- upvalues: Mouse (copy), TweenService (copy)
+		local Timestamp = os.time()
+		local Flag = false
+		local Flag1 = false
+		Mouse.Move:Connect(function() --[[ Line: 15 ]]
+			-- upvalues: Timestamp (ref)
+			Timestamp = os.time()
+		end)
+		p1.ControlBarContainer.MouseEnter:Connect(function() --[[ Line: 19 ]]
+			-- upvalues: Flag (ref)
+			Flag = true
+		end)
+		p1.ControlBarContainer.MouseLeave:Connect(function() --[[ Line: 23 ]]
+			-- upvalues: Flag (ref)
+			Flag = false
+		end)
+		local CreateResult = nil
 		
-		if var3 then
-			var3.Completed:Connect(function()
-				-- upvalues: createTween (copy)
-				createTween()
-			end)
+		local function createTween() --[[ Line: 29 ]]
+			-- upvalues: CreateResult (ref), TweenService (upval), p1 (copy), createTween (copy)
+			CreateResult = TweenService:Create(p1.ControlBarContainer, TweenInfo.new(2), { Position = p1.ControlBarContainerNonVisiblePosition })
 			
-			return
-		end
-		error("Failed to create tween for control visibility")
-	end
-	
-	createTween()
-	task.spawn(function()
-		-- upvalues: var3 (write), var1 (write), timestamp (write), var2 (write), value (ref)
-		while true do
-			if not var3 then
-				error("No current tween for control visibility")
+			if CreateResult then
+				CreateResult.Completed:Connect(function() --[[ Line: 36 ]]
+					-- upvalues: createTween (upval)
+					createTween()
+				end)
+				
+				return
+			else
+				error("Failed to create tween for control visibility")
 			end
-			if var1 or os.time() - timestamp <= 2 then
-				if var2 then
-					var2 = false
-					var3:Cancel()
-					value.ControlBarContainer.Position = value.ControlBarContainerVisiblePosition
+		end
+		
+		createTween()
+		task.spawn(function() --[[ Line: 45 ]]
+			-- upvalues: CreateResult (ref), Flag (ref), Timestamp (ref), Flag1 (ref), p1 (copy)
+			while true do
+				if not CreateResult then
+					error("No current tween for control visibility")
 				end
-			elseif not var2 then
-				var2 = true
-				var3:Play()
+				if Flag or os.time() - Timestamp <= 2 then
+					if Flag1 then
+						Flag1 = false
+						CreateResult:Cancel()
+						p1.ControlBarContainer.Position = p1.ControlBarContainerVisiblePosition
+					end
+				elseif not Flag1 then
+					Flag1 = true
+					CreateResult:Play()
+				end
+				task.wait(0.1)
 			end
-			task.wait(0.1)
-		end
-	end)
-end
-
-return t
+		end)
+	end
+}

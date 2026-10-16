@@ -1,82 +1,80 @@
-﻿local httpService = game:GetService("HttpService")
-local parent = script:FindFirstAncestor("GraphQLServer").Parent
-local graphQLModule = require(parent.GraphQL)
-local promiseModule = require(parent.Promise)
-local object = require(parent.LuauPolyfill).Object
-local fetch = require(parent.Fetch).fetch
-local _ = require(parent.DataLoader)
-local responseModule = require(script.Parent.Response)
-local graphqlModule = require(script.Parent.graphql)
-local typeDefs = graphqlModule.typeDefs
-local resolvers = graphqlModule.resolvers
-local dataLoaders = graphqlModule.dataLoaders
-local buildTypeResolverModule = require(script.Parent.schemaUtils.buildTypeResolver)
-local buildRootValueModule = require(script.Parent.schemaUtils.buildRootValue)
-local buildFieldResolverModule = require(script.Parent.schemaUtils.buildFieldResolver)
-local addMockResolversModule = require(script.Parent.schemaUtils.addMockResolvers)
-local getFFlagUserProfilesDataLoaderEnabled = require(parent.SharedFlags).getFFlagUserProfilesDataLoaderEnabled
-local t = {}
-t.__index = t
+﻿local HttpService = game:GetService("HttpService")
+local Parent = script:FindFirstAncestor("GraphQLServer").Parent
+local GraphQLModule = require(Parent.GraphQL)
+local PromiseModule = require(Parent.Promise)
+local Object = require(Parent.LuauPolyfill).Object
+local Fetch = require(Parent.Fetch).fetch
+local _ = require(Parent.DataLoader)
+local ResponseModule = require(script.Parent.Response)
+local GraphqlModule = require(script.Parent.graphql)
+local TypeDefs = GraphqlModule.typeDefs
+local Resolvers = GraphqlModule.resolvers
+local DataLoaders = GraphqlModule.dataLoaders
+local BuildTypeResolverModule = require(script.Parent.schemaUtils.buildTypeResolver)
+local BuildRootValueModule = require(script.Parent.schemaUtils.buildRootValue)
+local BuildFieldResolverModule = require(script.Parent.schemaUtils.buildFieldResolver)
+local AddMockResolversModule = require(script.Parent.schemaUtils.addMockResolvers)
+local GetFFlagUserProfilesDataLoaderEnabledFunction = require(Parent.SharedFlags).getFFlagUserProfilesDataLoaderEnabled
+local ServerModule = {}
+ServerModule.__index = ServerModule
 
-function t.new(p1)
-	-- upvalues: graphQLModule (ref), typeDefs (ref), resolvers (ref), addMockResolversModule (ref), buildRootValueModule (ref), buildTypeResolverModule (ref), buildFieldResolverModule (ref), fetch (ref), getFFlagUserProfilesDataLoaderEnabled (ref), object (ref), dataLoaders (ref), t (ref)
-	local t_1 = { port = if p1.port then p1.port else 4000 }
-	local var1 = false
-	local var2 = nil
+function ServerModule.new(p1) --[[ Line: 71 ]]
+	-- upvalues: GraphQLModule (copy), TypeDefs (copy), Resolvers (copy), AddMockResolversModule (copy), BuildRootValueModule (copy), BuildTypeResolverModule (copy), BuildFieldResolverModule (copy), Fetch (copy), GetFFlagUserProfilesDataLoaderEnabledFunction (copy), Object (copy), DataLoaders (copy), ServerModule (copy)
+	local config = { port = if p1.port then p1.port else 4000 }
+	local v1 = false
+	local v2 = nil
 	
 	if not p1.typeDefs then
-		local ok, status = pcall(function()
+		v1, v18 = pcall(function() --[[ Line: 78 ]]
 			return require(script.Parent.compiled_schema)
 		end)
-		var1 = ok
-		var2 = status
 	end
-	if var1 and var2 then
-		t_1.schema = graphQLModule.buildASTSchema(var2, { assumeValid = true, assumeValidSDL = true })
+	if v1 and v2 then
+		config.schema = GraphQLModule.buildASTSchema(v2, { assumeValid = true, assumeValidSDL = true })
 	else
-		t_1.schema = graphQLModule.buildSchema(if p1.typeDefs then p1.typeDefs else typeDefs)
+		config.schema = GraphQLModule.buildSchema(if p1.typeDefs then p1.typeDefs else TypeDefs)
 	end
-	local var3 = if p1.resolvers then p1.resolvers else resolvers
+	local Resolvers1 = if p1.resolvers then p1.resolvers else Resolvers
 	
 	if type(p1.mockResolvers) == "table" then
-		var3 = addMockResolversModule(var3, p1.mockResolvers)
+		Resolvers1 = AddMockResolversModule(Resolvers1, p1.mockResolvers)
 	end
-	t_1.rootValue = buildRootValueModule(var3)
-	t_1.typeResolver = buildTypeResolverModule(var3)
-	t_1.fieldResolver = buildFieldResolverModule(var3)
-	t_1.fetchImpl = if p1.fetchImpl then p1.fetchImpl else fetch
+	config.rootValue = BuildRootValueModule(Resolvers1)
+	config.typeResolver = BuildTypeResolverModule(Resolvers1)
+	config.fieldResolver = BuildFieldResolverModule(Resolvers1)
+	config.fetchImpl = if p1.fetchImpl then p1.fetchImpl else Fetch
 	
-	if getFFlagUserProfilesDataLoaderEnabled() then
-		t_1.clientLoaders = object.assign({}, { userProfiles = dataLoaders.userProfilesDataLoader.new() }, p1.dataLoaderInitializers or {})
+	if GetFFlagUserProfilesDataLoaderEnabledFunction() then
+		config.clientLoaders = Object.assign({}, { userProfiles = DataLoaders.userProfilesDataLoader.new() }, p1.dataLoaderInitializers or {})
 	end
-	setmetatable(t_1, t)
+	setmetatable(config, ServerModule)
 	
-	return t_1
+	return config
 end
 
-function t.fetchLocal(p1, p2)
-	-- upvalues: httpService (ref), promiseModule (ref), graphQLModule (ref), getFFlagUserProfilesDataLoaderEnabled (ref), object (ref), responseModule (ref)
-	local var1 = if p2 then httpService:JSONDecode(p2.body) else {}
+function ServerModule.fetchLocal(p1, p2) --[[ Line: 115 ]]
+	-- upvalues: HttpService (copy), PromiseModule (copy), GraphQLModule (copy), GetFFlagUserProfilesDataLoaderEnabledFunction (copy), Object (copy), ResponseModule (copy)
+	local Data = if p2 then HttpService:JSONDecode(p2.body) else {}
 	local t = {}
 	
-	return promiseModule.new(function(p3, _)
-		-- upvalues: graphQLModule (copy), p1 (ref), var1 (ref), getFFlagUserProfilesDataLoaderEnabled (copy), object (copy), t (ref), responseModule (copy)
-		graphQLModule.graphql({
+	return PromiseModule.new(function(Callback, _) --[[ Line: 119 ]]
+		-- upvalues: GraphQLModule (upval), p1 (copy), Data (copy), GetFFlagUserProfilesDataLoaderEnabledFunction (upval), Object (upval), t (copy), ResponseModule (upval)
+		GraphQLModule.graphql({
 			schema = p1.schema,
-			source = var1.query or var1.mutation,
+			source = Data.query or Data.mutation,
 			rootValue = p1.rootValue,
 			contextValue = {
 				fetchImpl = p1.fetchImpl,
-				dataLoaders = if getFFlagUserProfilesDataLoaderEnabled() then object.assign({}, t, p1.clientLoaders) else t
+				dataLoaders = if GetFFlagUserProfilesDataLoaderEnabledFunction() then Object.assign({}, t, p1.clientLoaders) else t
 			},
 			typeResolver = p1.typeResolver,
 			fieldResolver = p1.fieldResolver,
-			variableValues = var1.variables
-		}):andThen(function(p4)
-			-- upvalues: p3 (ref), responseModule (copy)
-			p3(responseModule.new(p4))
+			variableValues = Data.variables
+		}):andThen(function(Result) --[[ Line: 133 ]]
+			-- upvalues: Callback (copy), ResponseModule (upval)
+			Callback(ResponseModule.new(Result))
 		end)
 	end)
 end
 
-return t
+return ServerModule

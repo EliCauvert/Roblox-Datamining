@@ -1,189 +1,207 @@
-﻿local squads = script:FindFirstAncestor("Squads")
-local parent = squads.Parent
-local responsiveModule = require(parent.Responsive)
-local useLocalUserId = require(parent.RobloxAppHooks).useLocalUserId
-local dependenciesModule = require(squads.dependencies)
-local foundation = dependenciesModule.Foundation
-local react = dependenciesModule.React
-local networkingSquads = dependenciesModule.NetworkingSquads
-local networkStatus = dependenciesModule.RoduxNetworking.Enum.NetworkStatus
-local useEffectOnce = dependenciesModule.Hooks.useEffectOnce
-local useDispatch = dependenciesModule.Hooks.useDispatch
-local useSelector = dependenciesModule.Hooks.useSelector
-local useTokens = foundation.Hooks.useTokens
-local useCurrentSquadSelector = dependenciesModule.Hooks.useCurrentSquadSelector
-local useLocalization = dependenciesModule.Hooks.useLocalization
-local reinviteToSquad = require(parent.SquadsCore.Thunks).reinviteToSquad
-local eventNamesModule = require(parent.SquadsCore.EventNames)
-local squadExternalContractContext = require(parent.SquadsCore.SquadExternalContractProvider).SquadExternalContractContext
-local useCurrentSquadId = require(parent.SquadsCore.Hooks).useCurrentSquadId
-local avatarGroup = foundation.AvatarGroup
-local avatarGroupType = foundation.Enums.AvatarGroupType
-local inputSize = foundation.Enums.InputSize
-local noResponseInviteAgainOrAddOthersEnumModule = require(squads.Enums.NoResponseInviteAgainOrAddOthersEnum)
-local squadInvitePageNavSourceEnumModule = require(squads.Enums.SquadInvitePageNavSourceEnum)
+﻿local Squads = script:FindFirstAncestor("Squads")
+local Parent = Squads.Parent
+local FFlagSquadsEnableFoundationTestIdsModule = require(Squads.Flags.FFlagSquadsEnableFoundationTestIds)
+local ResponsiveModule = require(Parent.Responsive)
+local UseLocalUserIdFunction = require(Parent.RobloxAppHooks).useLocalUserId
+local DependenciesModule = require(Squads.dependencies)
+local Foundation = DependenciesModule.Foundation
+local React = DependenciesModule.React
+local NetworkingSquads = DependenciesModule.NetworkingSquads
+local NetworkStatus = DependenciesModule.RoduxNetworking.Enum.NetworkStatus
+local UseEffectOnceFunction = DependenciesModule.Hooks.useEffectOnce
+local UseDispatchFunction = DependenciesModule.Hooks.useDispatch
+local UseSelectorFunction = DependenciesModule.Hooks.useSelector
+local UseTokensFunction = Foundation.Hooks.useTokens
+local UseCurrentSquadSelectorFunction = DependenciesModule.Hooks.useCurrentSquadSelector
+local UseLocalizationFunction = DependenciesModule.Hooks.useLocalization
+local ReinviteToSquadFunction = require(Parent.SquadsCore.Thunks).reinviteToSquad
+local EventNamesModule = require(Parent.SquadsCore.EventNames)
+local SquadExternalContractContext = require(Parent.SquadsCore.SquadExternalContractProvider).SquadExternalContractContext
+local UseCurrentSquadIdFunction = require(Parent.SquadsCore.Hooks).useCurrentSquadId
+local AvatarGroup = Foundation.AvatarGroup
+local AvatarGroupType = Foundation.Enums.AvatarGroupType
+local InputSize = Foundation.Enums.InputSize
+local NoResponseInviteAgainOrAddOthersEnumModule = require(Squads.Enums.NoResponseInviteAgainOrAddOthersEnum)
+local SquadInvitePageNavSourceEnumModule = require(Squads.Enums.SquadInvitePageNavSourceEnum)
 
-return function(p1)
-	-- upvalues: useDispatch (ref), useTokens (ref), responsiveModule (ref), useLocalUserId (ref), useLocalization (ref), useCurrentSquadSelector (ref), useCurrentSquadId (ref), react (ref), networkingSquads (ref), useSelector (ref), squadExternalContractContext (ref), foundation (ref), avatarGroup (ref), inputSize (ref), avatarGroupType (ref), useEffectOnce (ref), eventNamesModule (ref), noResponseInviteAgainOrAddOthersEnumModule (ref), reinviteToSquad (ref), squadInvitePageNavSourceEnumModule (ref), networkStatus (ref)
-	local var1 = useDispatch()
-	local var2 = useTokens()
-	local var3 = responsiveModule.useBreakpointXOrSmaller(responsiveModule.Keys.XSmall)
-	local var4 = responsiveModule.useBreakpointYOrSmaller(responsiveModule.Keys.XSmall)
-	local var5 = useLocalUserId()
-	local var6 = useLocalization({
+return function(p1) --[[ Line: 46 ]]
+	-- upvalues: UseDispatchFunction (copy), UseTokensFunction (copy), ResponsiveModule (copy), UseLocalUserIdFunction (copy), UseLocalizationFunction (copy), UseCurrentSquadSelectorFunction (copy), UseCurrentSquadIdFunction (copy), React (copy), NetworkingSquads (copy), UseSelectorFunction (copy), SquadExternalContractContext (copy), Foundation (copy), FFlagSquadsEnableFoundationTestIdsModule (copy), AvatarGroup (copy), InputSize (copy), AvatarGroupType (copy), UseEffectOnceFunction (copy), EventNamesModule (copy), NoResponseInviteAgainOrAddOthersEnumModule (copy), ReinviteToSquadFunction (copy), SquadInvitePageNavSourceEnumModule (copy), NetworkStatus (copy)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseTokensResult = UseTokensFunction()
+	local UseBreakpointXOrSmallerResult = ResponsiveModule.useBreakpointXOrSmaller(ResponsiveModule.Keys.XSmall)
+	local UseBreakpointYOrSmallerResult = ResponsiveModule.useBreakpointYOrSmaller(ResponsiveModule.Keys.XSmall)
+	local UseLocalUserIdResult = UseLocalUserIdFunction()
+	local UseLocalizationResult = UseLocalizationFunction({
 		addOthers = "Feature.Squads.Action.AddOthers",
 		upsellText = "Feature.Squads.Description.upsellInviteText",
 		inviteText = "Feature.Squads.Action.Invite",
 		inviteAgain = "Feature.Squads.Action.InviteAgain"
 	})
-	local var7 = useCurrentSquadSelector()
-	local var8 = if var7 and var7.parentChannelId then var7.parentChannelId else nil
-	local var9 = useCurrentSquadId()
-	local var10 = useSelector(react.useCallback(function(p2)
-		-- upvalues: networkingSquads (copy), var9 (ref)
-		return networkingSquads.ReinviteToSquad.getStatus(p2, { squadId = var9 })
-	end, { var9 }))
-	local var11 = react.useContext(squadExternalContractContext)
-	local var12 = var11.useGetConversationFromId(var8 or "")
-	local var13 = react.useMemo(function()
-		-- upvalues: react (copy), foundation (copy), var2 (ref), var6 (ref)
-		return react.createElement(foundation.Text, {
+	local UseCurrentSquadSelectorResult = UseCurrentSquadSelectorFunction()
+	local ParentChannelId = if UseCurrentSquadSelectorResult and UseCurrentSquadSelectorResult.parentChannelId then UseCurrentSquadSelectorResult.parentChannelId else nil
+	local UseCurrentSquadIdResult = UseCurrentSquadIdFunction()
+	local UseSelectorResult = UseSelectorFunction((React.useCallback(function(p2) --[[ Line: 66 ]]
+		-- upvalues: NetworkingSquads (upval), UseCurrentSquadIdResult (copy)
+		return NetworkingSquads.ReinviteToSquad.getStatus(p2, { squadId = UseCurrentSquadIdResult })
+	end, { UseCurrentSquadIdResult })))
+	local UseContextResult = React.useContext(SquadExternalContractContext)
+	local UseGetConversationFromIdResult = UseContextResult.useGetConversationFromId(ParentChannelId or "")
+	local UseMemoResult = React.useMemo(function() --[[ Line: 74 ]]
+		-- upvalues: React (upval), Foundation (upval), UseTokensResult (copy), UseLocalizationResult (copy), FFlagSquadsEnableFoundationTestIdsModule (upval)
+		return React.createElement(Foundation.Text, {
 			LayoutOrder = 1,
 			TextWrapped = true,
 			AutomaticSize = Enum.AutomaticSize.Y,
 			Size = UDim2.fromScale(1, 0),
-			fontStyle = var2.Typography.BodyLarge,
-			Text = var6.upsellText,
-			textStyle = var2.Color.Content.Default,
-			TextXAlignment = Enum.TextXAlignment.Center
+			fontStyle = UseTokensResult.Typography.BodyLarge,
+			Text = UseLocalizationResult.upsellText,
+			textStyle = UseTokensResult.Color.Content.Default,
+			TextXAlignment = Enum.TextXAlignment.Center,
+			testId = if FFlagSquadsEnableFoundationTestIdsModule then "--social-squad-lobby-upsell-card--label" else nil
 		})
-	end, { var2, var6.upsellText })
-	local var14 = react.useMemo(function()
-		-- upvalues: var12 (ref), var5 (ref), var4 (ref), var3 (ref), react (copy), avatarGroup (copy), inputSize (copy), avatarGroupType (copy), var2 (ref)
-		local t = {}
+	end, { UseTokensResult, UseLocalizationResult.upsellText })
+	local UseMemoResult1 = React.useMemo(function() --[[ Line: 88 ]]
+		-- upvalues: UseGetConversationFromIdResult (copy), UseLocalUserIdResult (copy), UseBreakpointYOrSmallerResult (copy), UseBreakpointXOrSmallerResult (copy), React (upval), AvatarGroup (upval), InputSize (upval), AvatarGroupType (upval), UseTokensResult (copy), FFlagSquadsEnableFoundationTestIdsModule (upval)
+		local Avatars = {}
 		
-		if var12 and var12.participants then
-			for i, v in ipairs(var12.participants) do
-				if v ~= var5 then
-					table.insert(t, v)
+		if UseGetConversationFromIdResult and UseGetConversationFromIdResult.participants then
+			for _, participant in ipairs(UseGetConversationFromIdResult.participants) do
+				if participant ~= UseLocalUserIdResult then
+					table.insert(Avatars, participant)
 				end
 			end
 		end
-		return if var4 or var3 then nil else react.createElement(avatarGroup, {
+		return if UseBreakpointYOrSmallerResult or UseBreakpointXOrSmallerResult then nil else React.createElement(AvatarGroup, {
 			max = 4,
 			layoutOrder = 0,
-			avatars = t,
-			size = inputSize.Medium,
-			type = avatarGroupType.Stacked,
+			avatars = Avatars,
+			size = InputSize.Medium,
+			type = AvatarGroupType.Stacked,
 			imageBackgroundStyle = {
-				Color3 = var2.Color.OverMedia.OverMedia_300.Color3,
-				Transparency = var2.Color.OverMedia.OverMedia_300.Transparency
+				Color3 = UseTokensResult.Color.OverMedia.OverMedia_300.Color3,
+				Transparency = UseTokensResult.Color.OverMedia.OverMedia_300.Transparency
 			},
 			imageBorderStyle = {
-				Color = var2.Color.Surface.Surface_0.Color3,
-				Transparency = var2.Color.Surface.Surface_0.Transparency
-			}
+				Color = UseTokensResult.Color.Surface.Surface_0.Color3,
+				Transparency = UseTokensResult.Color.Surface.Surface_0.Transparency
+			},
+			testId = if FFlagSquadsEnableFoundationTestIdsModule then "--social-squad-lobby-upsell-card--facepile" else nil
 		})
-	end, { var12 and var12.participants, var5, var4, var3 })
-	useEffectOnce(function()
-		-- upvalues: var11 (ref), eventNamesModule (copy), noResponseInviteAgainOrAddOthersEnumModule (copy), var8 (ref)
-		var11.fireSquadAnalytics(eventNamesModule.NoResponseInviteAgainOrAddOthers, {
-			actionType = noResponseInviteAgainOrAddOthersEnumModule.Impression,
-			button = noResponseInviteAgainOrAddOthersEnumModule.InviteAgain,
-			conversationId = var8
+	end, {
+		UseGetConversationFromIdResult and UseGetConversationFromIdResult.participants,
+		UseLocalUserIdResult,
+		UseBreakpointYOrSmallerResult,
+		UseBreakpointXOrSmallerResult
+	})
+	UseEffectOnceFunction(function() --[[ Line: 118 ]]
+		-- upvalues: UseContextResult (copy), EventNamesModule (upval), NoResponseInviteAgainOrAddOthersEnumModule (upval), ParentChannelId (copy)
+		UseContextResult.fireSquadAnalytics(EventNamesModule.NoResponseInviteAgainOrAddOthers, {
+			actionType = NoResponseInviteAgainOrAddOthersEnumModule.Impression,
+			button = NoResponseInviteAgainOrAddOthersEnumModule.InviteAgain,
+			conversationId = ParentChannelId
 		})
-		var11.fireSquadAnalytics(eventNamesModule.NoResponseInviteAgainOrAddOthers, {
-			actionType = noResponseInviteAgainOrAddOthersEnumModule.Impression,
-			button = noResponseInviteAgainOrAddOthersEnumModule.AddOthers,
-			conversationId = var8
+		UseContextResult.fireSquadAnalytics(EventNamesModule.NoResponseInviteAgainOrAddOthers, {
+			actionType = NoResponseInviteAgainOrAddOthersEnumModule.Impression,
+			button = NoResponseInviteAgainOrAddOthersEnumModule.AddOthers,
+			conversationId = ParentChannelId
 		})
-	end, var8)
-	local var15 = react.useCallback(function()
-		-- upvalues: var1 (ref), reinviteToSquad (copy), var9 (ref), var11 (ref), eventNamesModule (copy), noResponseInviteAgainOrAddOthersEnumModule (copy), var8 (ref)
-		var1(reinviteToSquad(var9, var11.setSquadPrompt))
-		var11.fireSquadAnalytics(eventNamesModule.NoResponseInviteAgainOrAddOthers, {
-			actionType = noResponseInviteAgainOrAddOthersEnumModule.Click,
-			button = noResponseInviteAgainOrAddOthersEnumModule.InviteAgain,
-			conversationId = var8
+	end, ParentChannelId)
+	local UseResult = React.useCallback(function() --[[ Line: 131 ]]
+		-- upvalues: UseDispatchResult (copy), ReinviteToSquadFunction (upval), UseCurrentSquadIdResult (copy), UseContextResult (copy), EventNamesModule (upval), NoResponseInviteAgainOrAddOthersEnumModule (upval), ParentChannelId (copy)
+		UseDispatchResult(ReinviteToSquadFunction(UseCurrentSquadIdResult, UseContextResult.setSquadPrompt))
+		UseContextResult.fireSquadAnalytics(EventNamesModule.NoResponseInviteAgainOrAddOthers, {
+			actionType = NoResponseInviteAgainOrAddOthersEnumModule.Click,
+			button = NoResponseInviteAgainOrAddOthersEnumModule.InviteAgain,
+			conversationId = ParentChannelId
 		})
-	end, { var11.fireSquadAnalytics, var8 })
-	local var16 = react.useCallback(function()
-		-- upvalues: var11 (ref), eventNamesModule (copy), noResponseInviteAgainOrAddOthersEnumModule (copy), var8 (ref), squadInvitePageNavSourceEnumModule (copy), p1 (ref)
-		var11.fireSquadAnalytics(eventNamesModule.NoResponseInviteAgainOrAddOthers, {
-			actionType = noResponseInviteAgainOrAddOthersEnumModule.Click,
-			button = noResponseInviteAgainOrAddOthersEnumModule.AddOthers,
-			conversationId = var8
+	end, { UseContextResult.fireSquadAnalytics, ParentChannelId })
+	local UseResult1 = React.useCallback(function() --[[ Line: 142 ]]
+		-- upvalues: UseContextResult (copy), EventNamesModule (upval), NoResponseInviteAgainOrAddOthersEnumModule (upval), ParentChannelId (copy), SquadInvitePageNavSourceEnumModule (upval), p1 (copy)
+		UseContextResult.fireSquadAnalytics(EventNamesModule.NoResponseInviteAgainOrAddOthers, {
+			actionType = NoResponseInviteAgainOrAddOthersEnumModule.Click,
+			button = NoResponseInviteAgainOrAddOthersEnumModule.AddOthers,
+			conversationId = ParentChannelId
 		})
-		var11.fireSquadAnalytics(eventNamesModule.SquadInvitePageNavSource, {
-			inviteNavSource = squadInvitePageNavSourceEnumModule.SquadLobbyUpsellCardClicked,
-			parentChannelId = var8
+		UseContextResult.fireSquadAnalytics(EventNamesModule.SquadInvitePageNavSource, {
+			inviteNavSource = SquadInvitePageNavSourceEnumModule.SquadLobbyUpsellCardClicked,
+			parentChannelId = ParentChannelId
 		})
 		p1.navigateToSquadInviteFriends()
 	end, {
-		var8,
-		var11.fireSquadAnalytics,
+		ParentChannelId,
+		UseContextResult.fireSquadAnalytics,
 		p1.navigateToSquadInviteFriends
 	})
 	
-	return react.createElement("Frame", {
+	return React.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = p1.size,
 		LayoutOrder = p1.layoutOrder
 	}, {
-		react.createElement(foundation.View, {
+		React.createElement(Foundation.View, {
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			Position = UDim2.fromScale(0.5, 0.5),
-			Size = UDim2.new(1, -2 * var2.Stroke.Standard, 1, -2 * var2.Stroke.Standard),
-			cornerRadius = UDim.new(0, var2.Radius.Medium),
-			padding = var2.Padding.XXLarge,
+			Size = UDim2.new(1, -2 * UseTokensResult.Stroke.Standard, 1, -2 * UseTokensResult.Stroke.Standard),
+			cornerRadius = UDim.new(0, UseTokensResult.Radius.Medium),
+			padding = UseTokensResult.Padding.XXLarge,
 			layout = {
 				FillDirection = Enum.FillDirection.Vertical,
 				HorizontalAlignment = Enum.HorizontalAlignment.Center,
-				Padding = UDim.new(0, if var4 or var3 then var2.Padding.Medium else var2.Padding.XXLarge),
+				Padding = UDim.new(0, if UseBreakpointYOrSmallerResult or UseBreakpointXOrSmallerResult then UseTokensResult.Padding.Medium else UseTokensResult.Padding.XXLarge),
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				VerticalAlignment = Enum.VerticalAlignment.Center
 			},
 			stroke = {
-				Color = var2.Color.Stroke.Default.Color3,
-				Transparency = var2.Color.Stroke.Default.Transparency,
-				Thickness = var2.Stroke.Standard
-			}
+				Color = UseTokensResult.Color.Stroke.Default.Color3,
+				Transparency = UseTokensResult.Color.Stroke.Default.Transparency,
+				Thickness = UseTokensResult.Stroke.Standard
+			},
+			testId = if FFlagSquadsEnableFoundationTestIdsModule then "--social-squad-lobby-upsell-card" else nil
 		}, {
-			UpsellInformation = react.createElement(foundation.View, {
+			UpsellInformation = React.createElement(Foundation.View, {
 				LayoutOrder = 1,
 				tag = "size-full-0 gap-medium align-x-center auto-y col"
-			}, { UpsellFacepile = var14, UpsellLabel = var13 }),
-			Buttons = react.createElement(foundation.View, {
+			}, {
+				UpsellFacepile = UseMemoResult1,
+				UpsellLabel = UseMemoResult
+			}),
+			Buttons = React.createElement(Foundation.View, {
 				LayoutOrder = 2,
 				tag = {
 					["size-full-0 gap-small align-x-center flex-fill align-y-center auto-y"] = true,
-					col = var3,
-					row = not var3
+					col = UseBreakpointXOrSmallerResult,
+					row = not UseBreakpointXOrSmallerResult
 				}
 			}, {
-				InviteAgainButton = react.useMemo(function()
-					-- upvalues: react (copy), foundation (copy), var10 (ref), networkStatus (copy), var15 (ref), var6 (ref)
-					return react.createElement(foundation.Button, {
+				InviteAgainButton = React.useMemo(function() --[[ Line: 161 ]]
+					-- upvalues: React (upval), Foundation (upval), UseSelectorResult (copy), NetworkStatus (upval), UseResult (copy), UseLocalizationResult (copy), FFlagSquadsEnableFoundationTestIdsModule (upval)
+					return React.createElement(Foundation.Button, {
 						LayoutOrder = 1,
-						fillBehavior = foundation.Enums.FillBehavior.Fill,
-						isDisabled = var10 == networkStatus.Fetching,
-						onActivated = var15,
-						text = var6.inviteAgain,
-						size = foundation.Enums.InputSize.Medium,
-						variant = foundation.Enums.ButtonVariant.Standard
+						fillBehavior = Foundation.Enums.FillBehavior.Fill,
+						isDisabled = UseSelectorResult == NetworkStatus.Fetching,
+						onActivated = UseResult,
+						text = UseLocalizationResult.inviteAgain,
+						size = Foundation.Enums.InputSize.Medium,
+						variant = Foundation.Enums.ButtonVariant.Standard,
+						testId = if FFlagSquadsEnableFoundationTestIdsModule then "--social-squad-lobby-upsell-card--invite-again-button" else nil
 					})
-				end, { var15, var6.inviteAgain, var10 }),
-				AddOthersButton = react.useMemo(function()
-					-- upvalues: react (copy), foundation (copy), var16 (ref), var6 (ref)
-					return react.createElement(foundation.Button, {
+				end, {
+					UseResult,
+					UseLocalizationResult.inviteAgain,
+					UseSelectorResult
+				}),
+				AddOthersButton = React.useMemo(function() --[[ Line: 178 ]]
+					-- upvalues: React (upval), Foundation (upval), UseResult1 (copy), UseLocalizationResult (copy), FFlagSquadsEnableFoundationTestIdsModule (upval)
+					return React.createElement(Foundation.Button, {
 						LayoutOrder = 2,
-						fillBehavior = foundation.Enums.FillBehavior.Fill,
-						onActivated = var16,
-						text = var6.addOthers,
-						size = foundation.Enums.ButtonSize.Medium,
-						variant = foundation.Enums.ButtonVariant.Standard
+						fillBehavior = Foundation.Enums.FillBehavior.Fill,
+						onActivated = UseResult1,
+						text = UseLocalizationResult.addOthers,
+						size = Foundation.Enums.ButtonSize.Medium,
+						variant = Foundation.Enums.ButtonVariant.Standard,
+						testId = if FFlagSquadsEnableFoundationTestIdsModule then "--social-squad-lobby-upsell-card--add-others-button" else nil
 					})
-				end, { var16, var6.addOthers })
+				end, { UseResult1, UseLocalizationResult.addOthers })
 			})
 		})
 	})

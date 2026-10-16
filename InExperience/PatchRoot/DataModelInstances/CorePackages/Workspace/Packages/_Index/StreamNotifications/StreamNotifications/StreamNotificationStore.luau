@@ -1,14 +1,14 @@
-﻿local signalsModule = require(script:FindFirstAncestor("StreamNotifications").Parent.Signals)
-local var1, var2 = signalsModule.createSignal(false)
-local var3, var4 = signalsModule.createSignal(nil)
+﻿local SignalsModule = require(script:FindFirstAncestor("StreamNotifications").Parent.Signals)
+local Signal, Signal2 = SignalsModule.createSignal(false)
+local Signal1, Signal2_1 = SignalsModule.createSignal(nil)
 
 return {
 	PrimaryBellId = "StreamNotificationPrimaryBell",
-	setStreamPresented = var2,
-	getStreamPresented = var1,
-	getActiveBellId = var3,
-	setActiveBellId = var4,
-	isBellActive = function(p1, p2, p3, p4, p5)
-		return not (not p1 or p5 == false) and (if p2 == "StreamNotificationPrimaryBell" then p4 == true else p2 == p3 or (p2 == nil and p4 == true))
+	setStreamPresented = Signal2,
+	getStreamPresented = Signal,
+	getActiveBellId = Signal1,
+	setActiveBellId = Signal2_1,
+	isBellActive = function(p1, p2, p3, Enabled1, Enabled): boolean --[[ Line: 26 ]]
+		return if p1 and Enabled ~= false then if p2 == "StreamNotificationPrimaryBell" then Enabled1 == true else p2 == p3 or p2 == nil and Enabled1 == true else false
 	end
 }

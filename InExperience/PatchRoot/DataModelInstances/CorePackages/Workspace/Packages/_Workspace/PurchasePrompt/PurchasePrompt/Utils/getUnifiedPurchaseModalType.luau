@@ -1,13 +1,14 @@
-﻿local purchasePrompt = script:FindFirstAncestor("PurchasePrompt")
-local parent = purchasePrompt.Parent
-local sharedFlagsModule = require(parent.SharedFlags)
-local unifiedPurchaseModalTypeEnum = require(parent.IAPExperience).Enums.UnifiedPurchaseModalTypeEnum
-local isMultiItemPurchaseModule = require(purchasePrompt.Utils.isMultiItemPurchase)
-local requestTypeModule = require(purchasePrompt.Enums.RequestType)
-local fFlagEnableUnifiedPurchaseFlowForDevSubs = require(purchasePrompt.Parent.SharedFlags).FFlagEnableUnifiedPurchaseFlowForDevSubs
-local fFlagAXMISWithBlackbird = sharedFlagsModule.FFlagAXMISWithBlackbird
+﻿local PurchasePrompt = script:FindFirstAncestor("PurchasePrompt")
+local Parent = PurchasePrompt.Parent
+local SharedFlagsModule = require(Parent.SharedFlags)
+local UnifiedPurchaseModalTypeEnum = require(Parent.IAPExperience).Enums.UnifiedPurchaseModalTypeEnum
+local IsMultiItemPurchaseModule = require(PurchasePrompt.Utils.isMultiItemPurchase)
+local RequestTypeModule = require(PurchasePrompt.Enums.RequestType)
+local FFlagEnableUnifiedPurchaseFlowForDevSubs = require(PurchasePrompt.Parent.SharedFlags).FFlagEnableUnifiedPurchaseFlowForDevSubs
+local FFlagAXMISWithBlackbird = SharedFlagsModule.FFlagAXMISWithBlackbird
+local FFlagLuaAppsEnablePromptVIPServerPurchase = SharedFlagsModule.FFlagLuaAppsEnablePromptVIPServerPurchase
 
-return function(p1)
-	-- upvalues: requestTypeModule (ref), unifiedPurchaseModalTypeEnum (ref), fFlagAXMISWithBlackbird (ref), isMultiItemPurchaseModule (ref), fFlagEnableUnifiedPurchaseFlowForDevSubs (ref)
-	return if p1 == requestTypeModule.Experience then unifiedPurchaseModalTypeEnum.Experience elseif fFlagAXMISWithBlackbird and p1 == requestTypeModule.RobuxUpsell then unifiedPurchaseModalTypeEnum.MultiItem elseif isMultiItemPurchaseModule(p1) then unifiedPurchaseModalTypeEnum.MultiItem elseif fFlagEnableUnifiedPurchaseFlowForDevSubs and p1 == requestTypeModule.DeveloperSubscription then unifiedPurchaseModalTypeEnum.DeveloperSubscription else unifiedPurchaseModalTypeEnum.SingleItem
+return function(DeveloperSubscription) --[[ Line: 15 | Named "getUnifiedPurchaseModalType" ]]
+	-- upvalues: RequestTypeModule (copy), UnifiedPurchaseModalTypeEnum (copy), FFlagAXMISWithBlackbird (copy), IsMultiItemPurchaseModule (copy), FFlagEnableUnifiedPurchaseFlowForDevSubs (copy), FFlagLuaAppsEnablePromptVIPServerPurchase (copy)
+	return if DeveloperSubscription == RequestTypeModule.Experience then UnifiedPurchaseModalTypeEnum.Experience elseif FFlagAXMISWithBlackbird and DeveloperSubscription == RequestTypeModule.RobuxUpsell then UnifiedPurchaseModalTypeEnum.MultiItem elseif IsMultiItemPurchaseModule(DeveloperSubscription) then UnifiedPurchaseModalTypeEnum.MultiItem elseif FFlagEnableUnifiedPurchaseFlowForDevSubs and DeveloperSubscription == RequestTypeModule.DeveloperSubscription then UnifiedPurchaseModalTypeEnum.DeveloperSubscription elseif FFlagLuaAppsEnablePromptVIPServerPurchase and DeveloperSubscription == RequestTypeModule.VIPServer then UnifiedPurchaseModalTypeEnum.VIPServer else UnifiedPurchaseModalTypeEnum.SingleItem
 end

@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent.Parent._Index.AvatarExperienceProfilePictureEditor.AvatarExperienceProfilePictureEditor.Components.ProfileFrameThumbnail.ProfileFrameThumbnail)
+﻿return (require(script.Parent.Parent.Parent.Parent._Index.AvatarExperienceProfilePictureEditor.AvatarExperienceProfilePictureEditor.Components.ProfileFrameThumbnail.ProfileFrameThumbnail))

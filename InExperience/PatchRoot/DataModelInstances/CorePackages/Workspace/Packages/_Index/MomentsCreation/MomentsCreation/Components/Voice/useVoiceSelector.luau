@@ -1,202 +1,209 @@
-﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
-local parent = momentsCreation.Parent
-local momentsCommonModule = require(parent.MomentsCommon)
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local useCallback = reactModule.useCallback
-local useEffect = reactModule.useEffect
-local useMemo = reactModule.useMemo
-local fireAnalyticsEventModule = require(momentsCreation.Analytics.fireAnalyticsEvent)
-local makeCreationEventFieldsModule = require(momentsCreation.Analytics.makeCreationEventFields)
-local voiceCatalogModule = require(momentsCreation.Components.Voice.voiceCatalog)
-local createTTSAudioManagerModule = require(momentsCreation.Audio.createTTSAudioManager)
-local dialogTypeModule = require(momentsCreation.Enums.DialogType)
-local _ = require(momentsCreation.Types.CreationFlowTypes)
-local eventNames = momentsCommonModule.Analytics.EventNames
-local fStringMomentsTTSPreviewTextModule = require(momentsCreation.Flags.FStringMomentsTTSPreviewText)
+﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
+local Parent = MomentsCreation.Parent
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local UseCallbackFunction = ReactModule.useCallback
+local UseEffectFunction = ReactModule.useEffect
+local UseMemoFunction = ReactModule.useMemo
+local FireAnalyticsEventModule = require(MomentsCreation.Analytics.fireAnalyticsEvent)
+local MakeCreationEventFieldsModule = require(MomentsCreation.Analytics.makeCreationEventFields)
+local VoiceCatalogModule = require(MomentsCreation.Components.Voice.voiceCatalog)
+local CreateTTSAudioManagerModule = require(MomentsCreation.Audio.createTTSAudioManager)
+local DialogTypeModule = require(MomentsCreation.Enums.DialogType)
+local _ = require(MomentsCreation.Types.CreationFlowTypes)
+local EventNames = require(Parent.MomentsCommon).Analytics.EventNames
+local FStringMomentsTTSPreviewTextModule = require(MomentsCreation.Flags.FStringMomentsTTSPreviewText)
 
-local function _(p1)
-	return p1:gsub("^%s*(.-)%s*$", "%1")
+local function _(Text: string): string --[[ Line: 34 | Named "trimWhitespace" ]]
+	return (Text:gsub("^%s*(.-)%s*$", "%1"))
 end
 
-return function(p1)
-	-- upvalues: createTTSAudioManagerModule (ref), reactModule (ref), useMemo (ref), signalsModule (ref), useEffect (ref), useCallback (ref), fireAnalyticsEventModule (ref), eventNames (ref), makeCreationEventFieldsModule (ref), fStringMomentsTTSPreviewTextModule (ref), dialogTypeModule (ref), voiceCatalogModule (ref)
-	local controller = p1.controller
-	local playback = controller.preview.playback
-	local ttsAudio = controller.ttsAudio
-	assert(ttsAudio ~= nil, "useVoiceSelector requires controller.ttsAudio")
-	local setSelectedVoiceId = controller.setSelectedVoiceId
-	local selectedVoiceId = p1.selectedVoiceId
-	local text = p1.text
-	local canGenerate = p1.canGenerate
-	local onCreateVoiceover = p1.onCreateVoiceover
-	local lastGeneratedTextRef = p1.lastGeneratedTextRef
-	local createPreviewAudio = p1.createPreviewAudio or createTTSAudioManagerModule
-	local var1 = reactModule.useRef(nil)
-	local var2 = reactModule.useRef(nil)
-	local var3 = reactModule.useRef(false)
-	local var4 = useMemo(function()
-		-- upvalues: signalsModule (copy)
-		local var5, var6 = signalsModule.createSignal(nil)
+return function(p1) --[[ Line: 60 | Named "useVoiceSelector" ]]
+	-- upvalues: CreateTTSAudioManagerModule (copy), ReactModule (copy), UseMemoFunction (copy), SignalsModule (copy), UseEffectFunction (copy), UseCallbackFunction (copy), FireAnalyticsEventModule (copy), EventNames (copy), MakeCreationEventFieldsModule (copy), FStringMomentsTTSPreviewTextModule (copy), DialogTypeModule (copy), VoiceCatalogModule (copy)
+	local Controller = p1.controller
+	local Playback = Controller.preview.playback
+	local TtsAudio = Controller.ttsAudio
+	assert(TtsAudio ~= nil, "useVoiceSelector requires controller.ttsAudio")
+	local SetSelectedVoiceIdFunction = Controller.setSelectedVoiceId
+	local SelectedVoiceId = p1.selectedVoiceId
+	local Text = p1.text
+	local CanGenerate = p1.canGenerate
+	local OnCreateVoiceoverFunction = p1.onCreateVoiceover
+	local LastGeneratedTextRef = p1.lastGeneratedTextRef
+	local CreatePreviewAudio = p1.createPreviewAudio or function() --[[ Line: 75 ]]
+		-- upvalues: CreateTTSAudioManagerModule (upval), Controller (copy)
+		return CreateTTSAudioManagerModule(nil, Controller.ttsAudioParent)
+	end
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseRefResult2 = ReactModule.useRef(false)
+	local UseMemoResult = UseMemoFunction(function() --[[ Line: 85 ]]
+		-- upvalues: SignalsModule (upval)
+		local Signal, Signal2 = SignalsModule.createSignal(nil)
 		
-		return { get = var5, set = var6 }
+		return { get = Signal, set = Signal2 }
 	end, {})
 	
-	local function _()
-		-- upvalues: var1 (ref), createPreviewAudio (ref), var2 (ref), signalsModule (copy), var3 (ref), var4 (ref)
-		local current = var1.current
+	local function _() --[[ Line: 90 | Named "ensurePreviewAudio" ]]
+		-- upvalues: UseRefResult (copy), CreatePreviewAudio (copy), UseRefResult1 (copy), SignalsModule (upval), UseRefResult2 (copy), UseMemoResult (copy)
+		local Current = UseRefResult.current
 		
-		if current == nil then
-			local var5 = createPreviewAudio()
-			var1.current = var5
-			var2.current = signalsModule.createEffect(function(p2)
-				-- upvalues: var5 (ref), var3 (copy), var4 (copy)
-				local state = var5.getState(p2)
+		if Current == nil then
+			local PreviewAudio = CreatePreviewAudio()
+			UseRefResult.current = PreviewAudio
+			UseRefResult1.current = SignalsModule.createEffect(function(p2) --[[ Line: 97 ]]
+				-- upvalues: PreviewAudio (copy), UseRefResult2 (upval), UseMemoResult (upval)
+				local State = PreviewAudio.getState(p2)
 				
-				if state == "ready" and var3.current then
-					var3.current = false
-					var5.seek(0)
-					var5.play()
+				if State == "ready" and UseRefResult2.current then
+					UseRefResult2.current = false
+					PreviewAudio.seek(0)
+					PreviewAudio.play()
 				end
-				if state ~= "loading" then
-					var4.set(nil)
+				if State ~= "loading" then
+					UseMemoResult.set(nil)
 				end
 			end)
 			
-			return var5
+			return PreviewAudio
+		else
+			return Current
 		end
-		return current
 	end
 	
-	useEffect(function()
-		-- upvalues: var2 (ref), var1 (ref)
-		return function()
-			-- upvalues: var2 (copy), var1 (copy)
-			if var2.current ~= nil then
-				var2.current()
-				var2.current = nil
+	UseEffectFunction(function() --[[ Line: 112 ]]
+		-- upvalues: UseRefResult1 (copy), UseRefResult (copy)
+		return function() --[[ Line: 113 ]]
+			-- upvalues: UseRefResult1 (upval), UseRefResult (upval)
+			if UseRefResult1.current ~= nil then
+				UseRefResult1.current()
+				UseRefResult1.current = nil
 			end
-			if var1.current ~= nil then
-				var1.current.destroy()
-				var1.current = nil
+			if UseRefResult.current ~= nil then
+				UseRefResult.current.destroy()
+				UseRefResult.current = nil
 			end
 		end
 	end, {})
-	local var5 = useCallback(function(p2)
-		-- upvalues: fireAnalyticsEventModule (copy), eventNames (copy), makeCreationEventFieldsModule (copy), text (ref), fStringMomentsTTSPreviewTextModule (copy), ttsAudio (ref), var1 (ref), createPreviewAudio (ref), var2 (ref), signalsModule (copy), var3 (ref), var4 (ref)
-		fireAnalyticsEventModule(eventNames.EditingFlowVoicePreviewPlayed, makeCreationEventFieldsModule.makeVoiceEventFields({ voice_id = tostring(p2) }))
-		local var6 = text:gsub("^%s*(.-)%s*$", "%1")
+	local UseCallbackResult = UseCallbackFunction(function(LoadedVoiceId) --[[ Line: 128 ]]
+		-- upvalues: FireAnalyticsEventModule (upval), EventNames (upval), MakeCreationEventFieldsModule (upval), Text (copy), FStringMomentsTTSPreviewTextModule (upval), TtsAudio (copy), UseRefResult (copy), CreatePreviewAudio (copy), UseRefResult1 (copy), SignalsModule (upval), UseRefResult2 (copy), UseMemoResult (copy)
+		FireAnalyticsEventModule(EventNames.EditingFlowVoicePreviewPlayed, MakeCreationEventFieldsModule.makeVoiceEventFields({ voice_id = tostring(LoadedVoiceId) }))
+		local SS = Text:gsub("^%s*(.-)%s*$", "%1")
 		
-		if var6 == "" then
-			var6 = fStringMomentsTTSPreviewTextModule
+		if SS == "" then
+			SS = FStringMomentsTTSPreviewTextModule
 		end
-		local var7
-		ttsAudio.pause()
-		local current = var1.current
+		TtsAudio.pause()
+		local Current = UseRefResult.current
+		local Current1 = nil
 		
-		if current == nil then
-			local var8 = createPreviewAudio()
-			var1.current = var8
-			var2.current = signalsModule.createEffect(function(p3)
-				-- upvalues: var8 (ref), var3 (copy), var4 (copy)
-				local state = var8.getState(p3)
+		if Current == nil then
+			local PreviewAudio = CreatePreviewAudio()
+			UseRefResult.current = PreviewAudio
+			UseRefResult1.current = SignalsModule.createEffect(function(p2) --[[ Line: 97 ]]
+				-- upvalues: PreviewAudio (copy), UseRefResult2 (upval), UseMemoResult (upval)
+				local State = PreviewAudio.getState(p2)
 				
-				if state == "ready" and var3.current then
-					var3.current = false
-					var8.seek(0)
-					var8.play()
+				if State == "ready" and UseRefResult2.current then
+					UseRefResult2.current = false
+					PreviewAudio.seek(0)
+					PreviewAudio.play()
 				end
-				if state ~= "loading" then
-					var4.set(nil)
+				if State ~= "loading" then
+					UseMemoResult.set(nil)
 				end
 			end)
-			var7 = var8
+			Current1 = PreviewAudio
 		else
-			var7 = current
+			Current1 = Current
 		end
-		if var7.getState(false) == "loading" or var7.getLoadedVoiceId(false) ~= p2 or var7.getLoadedText(false) ~= var6 then
-			var3.current = true
-			var4.set(p2)
-			var7.generate(var6, p2)
+		if Current1.getState(false) == "loading" or Current1.getLoadedVoiceId(false) ~= LoadedVoiceId or Current1.getLoadedText(false) ~= SS then
+			UseRefResult2.current = true
+			UseMemoResult.set(LoadedVoiceId)
+			Current1.generate(SS, LoadedVoiceId)
+			
+			return
+		else
+			Current1.seek(0)
+			Current1.play()
+		end
+	end, { Text })
+	local UseCallbackResult1 = UseCallbackFunction(function() --[[ Line: 156 ]]
+		-- upvalues: UseRefResult2 (copy), UseRefResult (copy), UseMemoResult (copy)
+		UseRefResult2.current = false
+		
+		if UseRefResult.current ~= nil then
+			UseRefResult.current.pause()
+		end
+		UseMemoResult.set(nil)
+	end, { UseMemoResult })
+	local UseRefResult3 = ReactModule.useRef(false)
+	local UseCallbackResult2 = UseCallbackFunction(function() --[[ Line: 167 ]]
+		-- upvalues: UseCallbackResult1 (copy), Controller (copy), UseRefResult3 (copy), Playback (copy)
+		UseCallbackResult1()
+		Controller.dismissModal()
+		
+		if UseRefResult3.current then
+			UseRefResult3.current = false
+			Playback.play()
+		end
+	end, { Controller, Playback, UseCallbackResult1 })
+	local UseCallbackResult3 = UseCallbackFunction(function(SelectedVoiceId1) --[[ Line: 182 ]]
+		-- upvalues: SelectedVoiceId (copy), SetSelectedVoiceIdFunction (copy), FireAnalyticsEventModule (upval), EventNames (upval), MakeCreationEventFieldsModule (upval), CanGenerate (copy), Text (copy), UseCallbackResult1 (copy), Controller (copy), UseRefResult3 (copy), OnCreateVoiceoverFunction (copy), LastGeneratedTextRef (copy), UseCallbackResult2 (copy)
+		local IsNotSelectedVoiceIdMatch = SelectedVoiceId1 ~= SelectedVoiceId
+		
+		if IsNotSelectedVoiceIdMatch then
+			SetSelectedVoiceIdFunction(SelectedVoiceId1)
+			FireAnalyticsEventModule(EventNames.EditingFlowVoiceSelected, MakeCreationEventFieldsModule.makeVoiceEventFields({ voice_id = tostring(SelectedVoiceId1) }))
+		end
+		if CanGenerate and Text:gsub("^%s*(.-)%s*$", "%1") ~= "" then
+			UseCallbackResult1()
+			Controller.dismissModal()
+			UseRefResult3.current = false
+			OnCreateVoiceoverFunction(SelectedVoiceId1, UseRefResult3.current)
 			
 			return
 		end
-		var7.seek(0)
-		var7.play()
-	end, { text })
-	local var6 = useCallback(function()
-		-- upvalues: var3 (ref), var1 (ref), var4 (ref)
-		var3.current = false
-		
-		if var1.current ~= nil then
-			var1.current.pause()
-		end
-		var4.set(nil)
-	end, { var4 })
-	local var7 = reactModule.useRef(false)
-	local var8 = useCallback(function()
-		-- upvalues: var6 (ref), controller (ref), var7 (ref), playback (ref)
-		var6()
-		controller.dismissModal()
-		
-		if var7.current then
-			var7.current = false
-			playback.play()
-		end
-	end, { controller, playback, var6 })
-	local var9 = useCallback(function(p2)
-		-- upvalues: selectedVoiceId (ref), setSelectedVoiceId (ref), fireAnalyticsEventModule (copy), eventNames (copy), makeCreationEventFieldsModule (copy), canGenerate (ref), text (ref), var6 (ref), controller (ref), var7 (ref), onCreateVoiceover (ref), lastGeneratedTextRef (ref), var8 (ref)
-		local var10 = p2 ~= selectedVoiceId
-		
-		if var10 then
-			setSelectedVoiceId(p2)
-			fireAnalyticsEventModule(eventNames.EditingFlowVoiceSelected, makeCreationEventFieldsModule.makeVoiceEventFields({ voice_id = tostring(p2) }))
-		end
-		if canGenerate and text:gsub("^%s*(.-)%s*$", "%1") ~= "" then
-			var6()
-			controller.dismissModal()
-			local current = var7.current
-			var7.current = false
-			onCreateVoiceover(p2, current)
+		if IsNotSelectedVoiceIdMatch and LastGeneratedTextRef.current ~= "" then
+			UseCallbackResult1()
+			Controller.dismissModal()
+			UseRefResult3.current = false
+			OnCreateVoiceoverFunction(SelectedVoiceId1, false, LastGeneratedTextRef.current, true)
 			
 			return
-		elseif var10 and lastGeneratedTextRef.current ~= "" then
-			var6()
-			controller.dismissModal()
-			var7.current = false
-			onCreateVoiceover(p2, false, lastGeneratedTextRef.current, true)
-			
-			return
+		else
+			UseCallbackResult2()
 		end
-		var8()
 	end, {
-		controller, canGenerate, selectedVoiceId, var8, onCreateVoiceover, var6, text
+		Controller, CanGenerate, SelectedVoiceId, UseCallbackResult2,
+		OnCreateVoiceoverFunction, UseCallbackResult1, Text
 	})
 	
 	return {
-		onOpenVoiceSelector = useCallback(function()
-			-- upvalues: fireAnalyticsEventModule (copy), eventNames (copy), makeCreationEventFieldsModule (copy), playback (ref), var7 (ref), controller (ref), dialogTypeModule (copy), voiceCatalogModule (copy), selectedVoiceId (ref), var9 (ref), var8 (ref), var5 (ref), var4 (ref)
-			fireAnalyticsEventModule(eventNames.EditingFlowVoiceSelectorOpened, makeCreationEventFieldsModule.makeVoiceEventFields())
+		onOpenVoiceSelector = UseCallbackFunction(function() --[[ Line: 230 ]]
+			-- upvalues: FireAnalyticsEventModule (upval), EventNames (upval), MakeCreationEventFieldsModule (upval), Playback (copy), UseRefResult3 (copy), Controller (copy), DialogTypeModule (upval), VoiceCatalogModule (upval), SelectedVoiceId (copy), UseCallbackResult3 (copy), UseCallbackResult2 (copy), UseCallbackResult (copy), UseMemoResult (copy)
+			FireAnalyticsEventModule(EventNames.EditingFlowVoiceSelectorOpened, MakeCreationEventFieldsModule.makeVoiceEventFields())
 			
-			if playback.getIsPlaying(false) then
-				var7.current = true
-				playback.pause()
+			if Playback.getIsPlaying(false) then
+				UseRefResult3.current = true
+				Playback.pause()
 			else
-				var7.current = false
+				UseRefResult3.current = false
 			end
-			controller.showModal({
-				modalType = dialogTypeModule.VoiceSelector,
+			Controller.showModal({
+				modalType = DialogTypeModule.VoiceSelector,
 				modalProps = {
-					voices = voiceCatalogModule.getOrderedVoices(),
-					selectedVoiceId = selectedVoiceId,
-					onSelect = var9,
-					onClose = var8,
-					onAudition = var5,
-					getAuditioningVoiceId = var4.get
+					voices = VoiceCatalogModule.getOrderedVoices(),
+					selectedVoiceId = SelectedVoiceId,
+					onSelect = UseCallbackResult3,
+					onClose = UseCallbackResult2,
+					onAudition = UseCallbackResult,
+					getAuditioningVoiceId = UseMemoResult.get
 				}
 			})
 		end, {
-			controller, playback, selectedVoiceId, var9, var5, var8
+			Controller, Playback, SelectedVoiceId, UseCallbackResult3, UseCallbackResult,
+			UseCallbackResult2
 		})
 	}
 end

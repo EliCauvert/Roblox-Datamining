@@ -1,52 +1,52 @@
-﻿local t = {}
+﻿local CurveUtil = {}
 
-function t.Expt(_, p1, p2, p3, p4)
-	-- upvalues: t (ref)
-	return if math.abs(p2 - p1) < 0.01 then p2 else p1 + (p2 - p1) * t:Expty(p1, p2, p3, p4)
+function CurveUtil:Expt(p1, p2, p3, p4) --[[ Line: 5 ]]
+	-- upvalues: CurveUtil (copy)
+	return if math.abs(p2 - p1) < 0.01 then p2 else p1 + (p2 - p1) * CurveUtil:Expty(p1, p2, p3, p4)
 end
 
-function t.Expty(_, _, _, p1, p2)
+function CurveUtil:Expty(_, _, p1: number, p2): number --[[ Line: 17 ]]
 	return 1 - math.exp(-(-math.log(1 - p1)) * p2)
 end
 
-function t.Sign(_, p1)
+function CurveUtil:Sign(p1: number): number --[[ Line: 24 ]]
 	return if p1 > 0 then 1 elseif p1 < 0 then -1 else 0
 end
 
-function t.BezierValForT(_, p1, p2, p3, p4, p5)
+function CurveUtil:BezierValForT(p1, p2, p3, p4, p5: number) --[[ Line: 34 ]]
 	return (1 - p5) * (1 - p5) * (1 - p5) * p1 + 3 * p5 * (1 - p5) * (1 - p5) * p2 + 3 * p5 * p5 * (1 - p5) * p3 + p5 * p5 * p5 * p4
 end
 
-t._BezierPt2ForT = { x = 0, y = 0 }
+CurveUtil._BezierPt2ForT = { x = 0, y = 0 }
 
-function t.BezierPt2ForT(_, p1, p2, p3, p4, p5, p6, p7, p8, p9)
-	-- upvalues: t (ref)
-	t._BezierPt2ForT.x = t:BezierValForT(p1, p3, p5, p7, p9)
-	t._BezierPt2ForT.y = t:BezierValForT(p2, p4, p6, p8, p9)
+function CurveUtil:BezierPt2ForT(p1, p2, p3, p4, p5, p6, p7, p8, p9) --[[ Line: 43 ]]
+	-- upvalues: CurveUtil (copy)
+	CurveUtil._BezierPt2ForT.x = CurveUtil:BezierValForT(p1, p3, p5, p7, p9)
+	CurveUtil._BezierPt2ForT.y = CurveUtil:BezierValForT(p2, p4, p6, p8, p9)
 	
-	return t._BezierPt2ForT
+	return CurveUtil._BezierPt2ForT
 end
 
-function t.YForPointOf2PtLine(_, p1, p2, p3)
-	local var1 = (p1.y - p2.y) / (p1.x - p2.x)
+function CurveUtil:YForPointOf2PtLine(Vector, _BezierPt2ForT, p1) --[[ Line: 55 ]]
+	local YRatio = (Vector.y - _BezierPt2ForT.y) / (Vector.x - _BezierPt2ForT.x)
 	
-	return var1 * p3 + (p1.y - var1 * p1.x)
+	return YRatio * p1 + (Vector.y - YRatio * Vector.x)
 end
 
-function t.DeltaTimeToTimescale(_, p1)
-	return p1 / 0.016666666667
+function CurveUtil:DeltaTimeToTimescale(p1: number): number --[[ Line: 63 ]]
+	return p1 / 0.016666666666666666
 end
 
-function t.SecondsToTick(_, p1)
-	return 0.016666666667 / p1
+function CurveUtil:SecondsToTick(p1: number): number --[[ Line: 67 ]]
+	return 0.016666666666666666 / p1
 end
 
-function t.ExptValueInSeconds(_, p1, p2, p3)
+function CurveUtil:ExptValueInSeconds(p1, p2, p3: number): number --[[ Line: 71 ]]
 	return 1 - math.pow(p1 / p2, 1 / (60 * p3))
 end
 
-function t.NormalizedDefaultExptValueInSeconds(p1, p2)
+function CurveUtil.NormalizedDefaultExptValueInSeconds(p1, p2) --[[ Line: 75 ]]
 	return p1:ExptValueInSeconds(0.01, 1, p2)
 end
 
-return t
+return CurveUtil

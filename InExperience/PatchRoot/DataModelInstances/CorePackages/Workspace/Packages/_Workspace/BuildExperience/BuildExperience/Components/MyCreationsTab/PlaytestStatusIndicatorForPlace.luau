@@ -1,22 +1,22 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local getPlaytestLoadingStoreModule = require(parent.BuildExperiencePlaytestLaunch.GetPlaytestLoadingStore)
-local _ = require(parent.BuildExperiencePlaytestLaunch.createPlaytestLoadingStore)
-local playtestStatusIndicatorModule = require(script.Parent.PlaytestStatusIndicator)
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local GetPlaytestLoadingStoreModule = require(Parent.BuildExperiencePlaytestLaunch.GetPlaytestLoadingStore)
+local _ = require(Parent.BuildExperiencePlaytestLaunch.createPlaytestLoadingStore)
+local PlaytestStatusIndicatorModule = require(script.Parent.PlaytestStatusIndicator)
 
-local function getStatusForPlaceId(p1, p2, p3)
-	-- upvalues: getPlaytestLoadingStoreModule (ref)
-	return (p3 or getPlaytestLoadingStoreModule(p1)).getStatusForPlaceId(p2)(p1)
+local function getStatusForPlaceId(p1, PlaceId, PlaytestLoadingStore) --[[ Line: 20 ]]
+	-- upvalues: GetPlaytestLoadingStoreModule (copy)
+	return (PlaytestLoadingStore or GetPlaytestLoadingStoreModule(p1)).getStatusForPlaceId(PlaceId)(p1)
 end
 
-return function(p1)
-	-- upvalues: reactModule (ref), getStatusForPlaceId (ref), signalsReactModule (ref), playtestStatusIndicatorModule (ref)
-	return reactModule.createElement(playtestStatusIndicatorModule, {
-		LayoutOrder = p1.LayoutOrder,
-		status = signalsReactModule.useSignalState(reactModule.useCallback(function(p2)
-			-- upvalues: getStatusForPlaceId (copy), p1 (ref)
-			return getStatusForPlaceId(p2, p1.placeId, p1.playtestLoadingStore)
-		end, { p1.placeId, p1.playtestLoadingStore }))
+return function(Frame) --[[ Line: 29 | Named "PlaytestStatusIndicatorForPlace" ]]
+	-- upvalues: ReactModule (copy), getStatusForPlaceId (copy), SignalsReactModule (copy), PlaytestStatusIndicatorModule (copy)
+	return ReactModule.createElement(PlaytestStatusIndicatorModule, {
+		LayoutOrder = Frame.LayoutOrder,
+		status = SignalsReactModule.useSignalState((ReactModule.useCallback(function(p1) --[[ Line: 30 ]]
+			-- upvalues: getStatusForPlaceId (upval), Frame (copy)
+			return getStatusForPlaceId(p1, Frame.placeId, Frame.playtestLoadingStore)
+		end, { Frame.placeId, Frame.playtestLoadingStore })))
 	})
 end

@@ -1,29 +1,30 @@
-﻿local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local dashModule = require(parent_1.Dash)
-local roduxModule = require(parent_1.Rodux)
-local capturesToastTypeModule = require(parent.Enums.CapturesToastType)
-local _ = require(parent.Types)
+﻿local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local DashModule = require(Parent1.Dash)
+local CapturesToastTypeModule = require(Parent.Enums.CapturesToastType)
+local _ = require(Parent.Types)
 
-return roduxModule.createReducer({
+return require(Parent1.Rodux).createReducer({
 	IsDismissed = false,
 	ToastConfig = nil,
-	ToastType = capturesToastTypeModule.None
+	ToastType = CapturesToastTypeModule.None
 }, {
-	[require(parent.Actions.ToastVanished).name] = function(p1, _)
-		-- upvalues: capturesToastTypeModule (ref)
-		return if p1.ToastType == capturesToastTypeModule.None then p1 else {
+	[require(Parent.Actions.ToastVanished).name] = function(p1, _) --[[ Line: 26 ]]
+		-- upvalues: CapturesToastTypeModule (copy)
+		return if p1.ToastType == CapturesToastTypeModule.None then p1 else {
 			IsDismissed = false,
-			ToastType = capturesToastTypeModule.None
+			ToastType = CapturesToastTypeModule.None
 		}
 	end,
-	[require(parent.Actions.ToastDismissed).name] = function(p1, _)
-		-- upvalues: capturesToastTypeModule (ref), dashModule (ref)
-		return if p1.IsDismissed then p1 elseif p1.ToastType == capturesToastTypeModule.None then p1 else dashModule.join(p1, { IsDismissed = true })
+	[require(Parent.Actions.ToastDismissed).name] = function(p1, _) --[[ Line: 37 ]]
+		-- upvalues: CapturesToastTypeModule (copy), DashModule (copy)
+		return if p1.IsDismissed then p1 elseif p1.ToastType == CapturesToastTypeModule.None then p1 else DashModule.join(p1, { IsDismissed = true })
 	end,
-	[require(parent.Actions.ToastTriggered).name] = function(p1, p2)
-		-- upvalues: dashModule (ref)
-		return if p1.ToastType == p2.toastType and not p1.IsDismissed and dashModule.shallowEqual(p1.ToastConfig, p2.toastConfig) then p1 else {
+	[require(Parent.Actions.ToastTriggered).name] = function(p1, p2) --[[ Line: 51 ]]
+		-- upvalues: DashModule (copy)
+		local ShallowEqualResult = DashModule.shallowEqual(p1.ToastConfig, p2.toastConfig)
+		
+		return if p1.ToastType == p2.toastType and not p1.IsDismissed and ShallowEqualResult then p1 else {
 			IsDismissed = false,
 			ToastType = p2.toastType,
 			ToastConfig = p2.toastConfig

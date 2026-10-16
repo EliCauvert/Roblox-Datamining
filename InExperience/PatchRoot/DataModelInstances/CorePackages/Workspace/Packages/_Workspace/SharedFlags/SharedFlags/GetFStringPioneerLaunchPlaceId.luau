@@ -1,7 +1,7 @@
 ﻿game:DefineFastString("PioneerLaunchPlaceId", "")
 
-return function()
-	local var1 = tonumber(game:GetFastString("PioneerLaunchPlaceId"))
+return function() --[[ Line: 3 ]]
+	local Number: number? = tonumber(game:GetFastString("PioneerLaunchPlaceId"))
 	
-	return if var1 and var1 > 0 then var1 else nil
+	return if Number and Number > 0 then Number else nil
 end

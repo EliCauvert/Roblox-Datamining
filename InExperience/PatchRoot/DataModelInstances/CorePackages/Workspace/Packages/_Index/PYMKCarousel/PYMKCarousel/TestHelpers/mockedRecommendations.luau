@@ -1,13 +1,11 @@
 ﻿local PYMKCarousel = script:FindFirstAncestor("PYMKCarousel")
-local dependenciesModule = require(PYMKCarousel.dependencies)
-local dash = dependenciesModule.Dash
-local roduxFriends = dependenciesModule.RoduxFriends
-local roduxUsers = dependenciesModule.RoduxUsers
-local socialCommon = dependenciesModule.SocialCommon
-local recommendation = roduxFriends.Models.Recommendation
-local recommendationContextType = roduxFriends.Enums.RecommendationContextType
-local user = roduxUsers.Models.User
-local t = {
+local DependenciesModule = require(PYMKCarousel.dependencies)
+local Dash = DependenciesModule.Dash
+local RoduxFriends = DependenciesModule.RoduxFriends
+local Recommendation = RoduxFriends.Models.Recommendation
+local RecommendationContextType = RoduxFriends.Enums.RecommendationContextType
+local User = DependenciesModule.RoduxUsers.Models.User
+local RecommendationIds = {
 	longName = "1_longName",
 	noContext = "2_noContext",
 	mutualContextPlural = "3_mutualContextPlural",
@@ -20,7 +18,7 @@ local t = {
 }
 
 return {
-	recommendationIds = t,
+	recommendationIds = RecommendationIds,
 	state = {
 		LocalUserId = "123456",
 		ScreenSize = Vector2.new(1920, 1080),
@@ -30,72 +28,72 @@ return {
 			NetworkStatus = {},
 			Users = {
 				byUserId = {
-					[t.longName] = user.mock({ displayName = "Very Long Display Name" }),
-					[t.noContext] = user.mock(),
-					[t.mutualContextPlural] = user.mock(),
-					[t.mutualContextSingle] = user.mock(),
-					[t.mutualContextNone] = user.mock(),
-					[t.frequentContext] = user.mock(),
-					[t.pendingFriendRequest] = user.mock(),
-					[t.incomingFriendRequest] = user.mock(),
-					[t.contact] = user.mock()
+					[RecommendationIds.longName] = User.mock({ displayName = "Very Long Display Name" }),
+					[RecommendationIds.noContext] = User.mock(),
+					[RecommendationIds.mutualContextPlural] = User.mock(),
+					[RecommendationIds.mutualContextSingle] = User.mock(),
+					[RecommendationIds.mutualContextNone] = User.mock(),
+					[RecommendationIds.frequentContext] = User.mock(),
+					[RecommendationIds.pendingFriendRequest] = User.mock(),
+					[RecommendationIds.incomingFriendRequest] = User.mock(),
+					[RecommendationIds.contact] = User.mock()
 				}
 			},
 			Friends = {
 				recommendations = {
 					bySource = {
-						[socialCommon.Enums.RecommendationSourceEnum.HomepagePYMKCarousel] = {
-							[t.longName] = true,
-							[t.noContext] = true,
-							[t.mutualContextPlural] = true,
-							[t.mutualContextSingle] = true,
-							[t.mutualContextNone] = true,
-							[t.frequentContext] = true,
-							[t.pendingFriendRequest] = true,
-							[t.incomingFriendRequest] = true,
-							[t.contact] = true
+						[DependenciesModule.SocialCommon.Enums.RecommendationSourceEnum.HomepagePYMKCarousel] = {
+							[RecommendationIds.longName] = true,
+							[RecommendationIds.noContext] = true,
+							[RecommendationIds.mutualContextPlural] = true,
+							[RecommendationIds.mutualContextSingle] = true,
+							[RecommendationIds.mutualContextNone] = true,
+							[RecommendationIds.frequentContext] = true,
+							[RecommendationIds.pendingFriendRequest] = true,
+							[RecommendationIds.incomingFriendRequest] = true,
+							[RecommendationIds.contact] = true
 						}
 					},
 					byUserId = {
 						["123456"] = {
-							[t.longName] = recommendation.mock({ rank = 5, id = t.longName }),
-							[t.noContext] = recommendation.mock({
+							[RecommendationIds.longName] = Recommendation.mock({ rank = 5, id = RecommendationIds.longName }),
+							[RecommendationIds.noContext] = Recommendation.mock({
 								rank = 6,
-								id = t.noContext,
-								contextType = recommendationContextType.None
+								id = RecommendationIds.noContext,
+								contextType = RecommendationContextType.None
 							}),
-							[t.mutualContextPlural] = recommendation.mock({
+							[RecommendationIds.mutualContextPlural] = Recommendation.mock({
 								rank = 10,
-								id = t.mutualContextPlural,
-								contextType = recommendationContextType.MutualFriends,
+								id = RecommendationIds.mutualContextPlural,
+								contextType = RecommendationContextType.MutualFriends,
 								mutualFriendsList = { "111", "222", "333" }
 							}),
-							[t.mutualContextSingle] = recommendation.mock({
+							[RecommendationIds.mutualContextSingle] = Recommendation.mock({
 								rank = 12,
-								id = t.mutualContextSingle,
-								contextType = recommendationContextType.MutualFriends,
+								id = RecommendationIds.mutualContextSingle,
+								contextType = RecommendationContextType.MutualFriends,
 								mutualFriendsList = { "111" }
 							}),
-							[t.mutualContextNone] = recommendation.mock({
+							[RecommendationIds.mutualContextNone] = Recommendation.mock({
 								rank = 1,
-								id = t.mutualContextNone,
-								contextType = recommendationContextType.MutualFriends,
+								id = RecommendationIds.mutualContextNone,
+								contextType = RecommendationContextType.MutualFriends,
 								mutualFriendsList = {}
 							}),
-							[t.frequentContext] = recommendation.mock({
+							[RecommendationIds.frequentContext] = Recommendation.mock({
 								rank = 0,
-								id = t.frequentContext,
-								contextType = recommendationContextType.Frequents,
+								id = RecommendationIds.frequentContext,
+								contextType = RecommendationContextType.Frequents,
 								mutualFriendsList = {}
 							}),
-							[t.pendingFriendRequest] = recommendation.mock({ rank = 70, id = t.pendingFriendRequest }),
-							[t.incomingFriendRequest] = recommendation.mock({ rank = 71, id = t.incomingFriendRequest }),
-							[t.contact] = recommendation.new({
+							[RecommendationIds.pendingFriendRequest] = Recommendation.mock({ rank = 70, id = RecommendationIds.pendingFriendRequest }),
+							[RecommendationIds.incomingFriendRequest] = Recommendation.mock({ rank = 71, id = RecommendationIds.incomingFriendRequest }),
+							[RecommendationIds.contact] = Recommendation.new({
 								rank = 80,
 								entityId = "contact_entity_1",
 								entityDisplayName = "Contact Display Name",
-								id = t.contact,
-								contextType = recommendationContextType.Contacts,
+								id = RecommendationIds.contact,
+								contextType = RecommendationContextType.Contacts,
 								thumbnailEntities = {
 									avatarImageUrl = "https://example.com/contact-avatar.png",
 									headshotImageUrl = ""
@@ -103,10 +101,10 @@ return {
 							})
 						}
 					},
-					hasIncomingFriendRequest = { [t.incomingFriendRequest] = true }
+					hasIncomingFriendRequest = { [RecommendationIds.incomingFriendRequest] = true }
 				},
 				friendshipStatus = {
-					[t.pendingFriendRequest] = Enum.FriendStatus.FriendRequestSent
+					[RecommendationIds.pendingFriendRequest] = Enum.FriendStatus.FriendRequestSent
 				}
 			},
 			Analytics = {
@@ -116,14 +114,14 @@ return {
 			},
 			Presence = {
 				byUserId = {
-					[t.noContext] = {
+					[RecommendationIds.noContext] = {
 						userPresenceType = require(PYMKCarousel.installReducer.RoduxPresence).Enums.PresenceType.Online
 					}
 				}
 			}
 		}
 	},
-	recommendationIdsList = dash.map(dash.values(t), function(p1)
-		return { id = p1 }
+	recommendationIdsList = Dash.map(Dash.values(RecommendationIds), function(Id) --[[ Line: 32 ]]
+		return { id = Id }
 	end)
 }

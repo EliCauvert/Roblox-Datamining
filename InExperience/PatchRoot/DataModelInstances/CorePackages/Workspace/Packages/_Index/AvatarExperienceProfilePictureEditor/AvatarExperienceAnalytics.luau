@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Workspace.AvatarExperienceAnalytics.AvatarExperienceAnalytics)
+﻿return (require(script.Parent.Parent.Parent._Workspace.AvatarExperienceAnalytics.AvatarExperienceAnalytics))

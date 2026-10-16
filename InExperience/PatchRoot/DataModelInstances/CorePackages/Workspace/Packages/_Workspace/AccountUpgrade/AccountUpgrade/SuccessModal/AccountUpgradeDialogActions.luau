@@ -1,27 +1,27 @@
-﻿local parent = script:FindFirstAncestor("AccountUpgrade").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local buttonGroup = foundationModule.ButtonGroup
-local _ = foundationModule.Enums.ButtonVariant
-local orientation = foundationModule.Enums.Orientation
+﻿local Parent = script:FindFirstAncestor("AccountUpgrade").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local ButtonGroup = FoundationModule.ButtonGroup
+local _ = FoundationModule.Enums.ButtonVariant
+local Orientation = FoundationModule.Enums.Orientation
 
-return function(p1)
-	-- upvalues: reactModule (ref), buttonGroup (ref), orientation (ref)
-	local t = {}
+return function(Frame) --[[ Line: 30 | Named "AccountUpgradeDialogActions" ]]
+	-- upvalues: ReactModule (copy), ButtonGroup (copy), Orientation (copy)
+	local Buttons = {}
 	
-	for i, v in p1.buttons do
-		table.insert(t, {
-			text = v.text,
-			variant = v.variant,
-			onActivated = v.onActivated,
-			isDisabled = v.isDisabled,
-			isLoading = v.isLoading
+	for _, button in Frame.buttons do
+		table.insert(Buttons, {
+			text = button.text,
+			variant = button.variant,
+			onActivated = button.onActivated,
+			isDisabled = button.isDisabled,
+			isLoading = button.isLoading
 		})
 	end
-	return reactModule.createElement(buttonGroup, {
-		buttons = t,
-		orientation = orientation.Vertical,
-		LayoutOrder = p1.LayoutOrder or 3,
-		testId = p1.testId or "account-upgrade-dialog-actions"
+	return ReactModule.createElement(ButtonGroup, {
+		buttons = Buttons,
+		orientation = Orientation.Vertical,
+		LayoutOrder = Frame.LayoutOrder or 3,
+		testId = Frame.testId or "account-upgrade-dialog-actions"
 	})
 end

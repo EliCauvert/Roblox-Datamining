@@ -1,59 +1,58 @@
-﻿local textService = game:GetService("TextService")
-local roactModule = require(game:GetService("CorePackages").Packages.Roact)
-local constantsModule = require(script.Parent.Parent.Constants)
-local checkboxInnerPadding = constantsModule.UtilityBarFormatting.CheckboxInnerPadding
-local checkbox = roactModule.Component:extend("Checkbox")
+﻿local TextService = game:GetService("TextService")
+local RoactModule = require(game:GetService("CorePackages").Packages.Roact)
+local ConstantsModule = require(script.Parent.Parent.Constants)
+local CheckboxInnerPadding = ConstantsModule.UtilityBarFormatting.CheckboxInnerPadding
+local Checkbox = RoactModule.Component:extend("Checkbox")
 
-function checkbox.render(p1)
-	-- upvalues: constantsModule (ref), textService (ref), roactModule (ref), checkboxInnerPadding (ref)
-	local checkboxHeight = p1.props.checkboxHeight
-	local frameHeight = p1.props.frameHeight
-	local layoutOrder = p1.props.layoutOrder
-	local name = p1.props.name
-	local font = p1.props.font
-	local fontSize = p1.props.fontSize
-	local isSelected = p1.props.isSelected
-	local selectedColor = p1.props.selectedColor
-	local unselectedColor = p1.props.unselectedColor
-	local onCheckboxClicked = p1.props.onCheckboxClicked
-	local var1 = ""
-	local var2 = 1
-	local var3 = unselectedColor
+function Checkbox.render(p1) --[[ Line: 10 ]]
+	-- upvalues: ConstantsModule (copy), TextService (copy), RoactModule (copy), CheckboxInnerPadding (copy)
+	local CheckboxHeight: number = p1.props.checkboxHeight
+	local FrameHeight = p1.props.frameHeight
+	local LayoutOrder = p1.props.layoutOrder
+	local Name = p1.props.name
+	local PropsFont = p1.props.font
+	local FontSize = p1.props.fontSize
+	local IsSelected = p1.props.isSelected
+	local SelectedColor = p1.props.selectedColor
+	local OnCheckboxClickedFunction = p1.props.onCheckboxClicked
+	local Check = ""
+	local BorderSizePixel = 1
+	local UnselectedColor = p1.props.unselectedColor
 	
-	if isSelected then
-		var1 = constantsModule.Image.Check
-		var2 = 0
-		var3 = selectedColor
+	if IsSelected then
+		Check = ConstantsModule.Image.Check
+		BorderSizePixel = 0
+		UnselectedColor = SelectedColor
 	end
-	return roactModule.createElement("ImageButton", {
-		Size = UDim2.new(0, checkboxHeight + textService:GetTextSize(name, fontSize, font, Vector2.new(0, frameHeight)).X + checkboxInnerPadding * 2, 0, frameHeight),
+	return RoactModule.createElement("ImageButton", {
+		Size = UDim2.new(0, CheckboxHeight + TextService:GetTextSize(Name, FontSize, PropsFont, Vector2.new(0, FrameHeight)).X + CheckboxInnerPadding * 2, 0, FrameHeight),
 		BackgroundTransparency = 1,
-		LayoutOrder = layoutOrder,
-		[roactModule.Event.Activated] = function(_)
-			-- upvalues: onCheckboxClicked (ref), name (ref), isSelected (ref)
-			onCheckboxClicked(name, not isSelected)
+		LayoutOrder = LayoutOrder,
+		[RoactModule.Event.Activated] = function(_) --[[ Line: 43 ]]
+			-- upvalues: OnCheckboxClickedFunction (copy), Name (copy), IsSelected (copy)
+			OnCheckboxClickedFunction(Name, not IsSelected)
 		end
 	}, {
-		Icon = roactModule.createElement("ImageLabel", {
+		Icon = RoactModule.createElement("ImageLabel", {
 			BackgroundTransparency = 0,
-			Image = var1,
-			Size = UDim2.new(0, checkboxHeight, 0, checkboxHeight),
-			Position = UDim2.new(0, 0, 0.5, -checkboxHeight / 2),
-			BackgroundColor3 = var3,
-			BorderColor3 = constantsModule.Color.Text,
-			BorderSizePixel = var2
+			Image = Check,
+			Size = UDim2.new(0, CheckboxHeight, 0, CheckboxHeight),
+			Position = UDim2.new(0, 0, 0.5, -CheckboxHeight / 2),
+			BackgroundColor3 = UnselectedColor,
+			BorderColor3 = ConstantsModule.Color.Text,
+			BorderSizePixel = BorderSizePixel
 		}),
-		Text = roactModule.createElement("TextLabel", {
+		Text = RoactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
-			Text = name,
-			TextColor3 = constantsModule.Color.Text,
+			Text = Name,
+			TextColor3 = ConstantsModule.Color.Text,
 			TextXAlignment = Enum.TextXAlignment.Left,
-			Font = font,
-			TextSize = fontSize,
-			Size = UDim2.new(1, -frameHeight, 1, 0),
-			Position = UDim2.new(0, checkboxHeight + checkboxInnerPadding, 0, 0)
+			Font = PropsFont,
+			TextSize = FontSize,
+			Size = UDim2.new(1, -FrameHeight, 1, 0),
+			Position = UDim2.new(0, CheckboxHeight + CheckboxInnerPadding, 0, 0)
 		})
 	})
 end
 
-return checkbox
+return Checkbox

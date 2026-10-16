@@ -1,8 +1,8 @@
-﻿local parent = script.Parent
+﻿local Parent = script.Parent
 
-return function(p1, p2, p3)
-	-- upvalues: parent (ref)
-	if p1 ~= p2 then
-		require(parent.Error).new("AssertError", p3 or `Left "{p0}" does not equal right "{p1}"`):throw({ left = p1, right = p2 })
+return function(Left, Right, p1) --[[ Line: 12 | Named "assertEqual" ]]
+	-- upvalues: Parent (copy)
+	if Left ~= Right then
+		require(Parent.Error).new("AssertError", p1 or `Left "{Left}" does not equal right "{Right}"`):throw({ left = Left, right = Right })
 	end
 end

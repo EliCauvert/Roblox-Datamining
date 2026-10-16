@@ -1,174 +1,181 @@
-﻿local t = {}
-t.__index = t
+﻿local OrderedMapModule = {}
+OrderedMapModule.__index = OrderedMapModule
 
-function t.new(p1, p2, ...)
-	-- upvalues: t (ref)
-	local t_1 = { keys = {}, values = {}, getId = p1, sortPredicate = p2 }
-	setmetatable(t_1, t)
-	t._InsertInPlace(t_1, ...)
+function OrderedMapModule.new(GetId, SortPredicate, ...) --[[ Line: 51 ]]
+	-- upvalues: OrderedMapModule (copy)
+	local config = {
+		keys = {},
+		values = {},
+		getId = GetId,
+		sortPredicate = SortPredicate
+	}
+	setmetatable(config, OrderedMapModule)
+	OrderedMapModule._InsertInPlace(config, ...)
 	
-	return t_1
+	return config
 end
 
-function t:Get(p1)
-	return self.values[p1]
+function OrderedMapModule:Get(Key) --[[ Line: 69 ]]
+	return self.values[Key]
 end
 
-function t:GetByIndex(p1)
-	local var1 = self.keys[p1]
+function OrderedMapModule:GetByIndex(p1) --[[ Line: 76 ]]
+	local Key = self.keys[p1]
 	
-	return if var1 == nil then nil else self.values[var1]
+	return if Key == nil then nil else self.values[Key]
 end
 
-function t:GetIds()
+function OrderedMapModule:GetIds() --[[ Line: 89 ]]
 	return self.keys
 end
 
-function t:Length()
+function OrderedMapModule:Length(): number --[[ Line: 96 ]]
 	return #self.keys
 end
 
-function t:Delete(...)
-	-- upvalues: t (ref)
-	local var1 = t.new(self.getId, self.sortPredicate)
-	local var2 = select("#", ...)
+function OrderedMapModule:Delete(...) --[[ Line: 109 ]]
+	-- upvalues: OrderedMapModule (copy)
+	local NewOrderedMap = OrderedMapModule.new(self.getId, self.sortPredicate)
+	local Selected = select("#", ...)
 	
-	for i, v in pairs(self.values) do
-		var1.values[i] = v
+	for i, value in pairs(self.values) do
+		NewOrderedMap.values[i] = value
 	end
-	for i_1 = 1, var2 do
-		var1.values[select(i_1, ...)] = nil
+	for i1 = 1, Selected do
+		NewOrderedMap.values[select(i1, ...)] = nil
 	end
-	for i_2, v_1 in ipairs(self.keys) do
-		if var1.values[v_1] ~= nil then
-			var1.keys[#var1.keys + 1] = v_1
+	for _, key in ipairs(self.keys) do
+		if NewOrderedMap.values[key] ~= nil then
+			NewOrderedMap.keys[#NewOrderedMap.keys + 1] = key
 		end
 	end
-	return var1
+	return NewOrderedMap
 end
 
-function t:Insert(...)
-	-- upvalues: t (ref)
-	local var3 = self:_Copy()
-	t._InsertInPlace(var3, ...)
+function OrderedMapModule:Insert(...) --[[ Line: 143 ]]
+	-- upvalues: OrderedMapModule (copy)
+	local CopyResult = self:_Copy()
+	OrderedMapModule._InsertInPlace(CopyResult, ...)
 	
-	return var3
+	return CopyResult
 end
 
-function t:First()
-	return if self.keys[1] then self:Get(self.keys[1]) else nil
+function OrderedMapModule.First(p1) --[[ Line: 154 ]]
+	return if p1.keys[1] then p1:Get(p1.keys[1]) else nil
 end
 
-function t:Last()
-	local keysCount = #self.keys
+function OrderedMapModule:Last() --[[ Line: 164 ]]
+	local CountKeys = #self.keys
 	
-	return if self.keys[keysCount] then self:Get(self.keys[keysCount]) else nil
+	return if self.keys[CountKeys] then self:Get(self.keys[CountKeys]) else nil
 end
 
-function t:CreateIterator()
-	local var3 = 0
-	local keysCount = #self.keys
+function OrderedMapModule:CreateIterator() --[[ Line: 181 ]]
+	local Count = 0
+	local CountKeys = #self.keys
 	
-	return function()
-		-- upvalues: var3 (write), keysCount (ref), self (ref)
-		var3 += 1
+	return function() --[[ Line: 186 ]]
+		-- upvalues: Count (ref), CountKeys (copy), self (copy)
+		Count += 1
 		
-		if var3 <= keysCount then
-			local var4 = self.keys[var3]
+		if Count <= CountKeys then
+			local Key = self.keys[Count]
 			
-			return var4, self.values[var4], var3
+			return Key, self.values[Key], Count
+		else
+			return nil, nil, nil
 		end
-		return nil, nil, nil
 	end
 end
 
-function t:CreateReverseIterator()
-	local var3 = #self.keys + 1
+function OrderedMapModule:CreateReverseIterator() --[[ Line: 206 ]]
+	local Count = #self.keys + 1
 	
-	return function()
-		-- upvalues: var3 (write), self (ref)
-		var3 -= 1
+	return function() --[[ Line: 210 ]]
+		-- upvalues: Count (ref), self (copy)
+		Count -= 1
 		
-		if var3 > 0 then
-			local var4 = self.keys[var3]
+		if Count > 0 then
+			local Key = self.keys[Count]
 			
-			return var4, self.values[var4], var3
+			return Key, self.values[Key], Count
+		else
+			return nil, nil, nil
 		end
-		return nil, nil, nil
 	end
 end
 
-function t:Map(p1)
-	-- upvalues: t (ref)
-	local var3 = t.new(self.getId, self.sortPredicate)
+function OrderedMapModule:Map(Callback) --[[ Line: 233 ]]
+	-- upvalues: OrderedMapModule (copy)
+	local NewOrderedMap = OrderedMapModule.new(self.getId, self.sortPredicate)
 	
-	for i, v in self:CreateIterator() do
-		var3:_InsertInPlaceUnsorted(p1(v, i))
+	for i, value in self:CreateIterator() do
+		NewOrderedMap:_InsertInPlaceUnsorted(Callback(value, i))
 	end
-	var3:_Sort()
+	NewOrderedMap:_Sort()
 	
-	return var3
+	return NewOrderedMap
 end
 
-function t:Merge(...)
-	local var4 = nil
+function OrderedMapModule:Merge(...) --[[ Line: 260 ]]
+	local CopyResult = nil
 	
 	for i = 1, select("#", ...) do
-		local var5 = select(i, ...)
+		local Selected = select(i, ...)
 		
-		if var5:Length() <= 0 then
-			continue
-		end
-		if not var4 then
-			var4 = self:_Copy()
-		end
-		for i, v in var5:CreateIterator() do
-			var4:_InsertInPlaceUnsorted(v)
+		if Selected:Length() > 0 then
+			if not CopyResult then
+				CopyResult = self:_Copy()
+			end
+			for _, value in Selected:CreateIterator() do
+				CopyResult:_InsertInPlaceUnsorted(value)
+			end
 		end
 	end
-	if var4 then
-		var4:_Sort()
+	if CopyResult then
+		CopyResult:_Sort()
 		
-		return var4
+		return CopyResult
+	else
+		return self
 	end
-	return self
 end
 
-function t:_Copy()
-	-- upvalues: t (ref)
-	local var6 = t.new(self.getId, self.sortPredicate)
+function OrderedMapModule:_Copy() --[[ Line: 289 ]]
+	-- upvalues: OrderedMapModule (copy)
+	local NewOrderedMap = OrderedMapModule.new(self.getId, self.sortPredicate)
 	
-	for i, v in ipairs(self.keys) do
-		var6.keys[i] = v
+	for i, key in ipairs(self.keys) do
+		NewOrderedMap.keys[i] = key
 	end
-	for i_1, v_1 in pairs(self.values) do
-		var6.values[i_1] = v_1
+	for i1, value in pairs(self.values) do
+		NewOrderedMap.values[i1] = value
 	end
-	return var6
+	return NewOrderedMap
 end
 
-function t:_InsertInPlaceUnsorted(...)
+function OrderedMapModule:_InsertInPlaceUnsorted(...) --[[ Line: 309 ]]
 	for i = 1, select("#", ...) do
-		local var7 = select(i, ...)
-		local id = self.getId(var7)
+		local Selected = select(i, ...)
+		local Id = self.getId(Selected)
 		
-		if not self.values[id] then
-			table.insert(self.keys, id)
+		if not self.values[Id] then
+			table.insert(self.keys, Id)
 		end
-		self.values[id] = var7
+		self.values[Id] = Selected
 	end
 end
 
-function t:_Sort()
-	table.sort(self.keys, function(p2, p3)
-		-- upvalues: self (ref)
-		return self.sortPredicate(self.values[p2], self.values[p3])
+function OrderedMapModule:_Sort() --[[ Line: 328 ]]
+	table.sort(self.keys, function(A, B) --[[ Line: 329 ]]
+		-- upvalues: self (copy)
+		return self.sortPredicate(self.values[A], self.values[B])
 	end)
 end
 
-function t:_InsertInPlace(...)
+function OrderedMapModule:_InsertInPlace(...) --[[ Line: 342 ]]
 	self:_InsertInPlaceUnsorted(...)
 	self:_Sort()
 end
 
-return t
+return OrderedMapModule

@@ -1,46 +1,40 @@
-﻿local expChat = script:FindFirstAncestor("ExpChat")
-local parent = expChat.Parent
-local expChatSharedModule = require(parent.ExpChatShared)
-local roduxModule = require(parent.Rodux)
-local dictionary = require(parent.llama).Dictionary
-local actions = expChat.Actions
+﻿local ExpChat = script:FindFirstAncestor("ExpChat")
+local Parent = ExpChat.Parent
+local Dictionary = require(Parent.llama).Dictionary
+local Actions = ExpChat.Actions
 
-return roduxModule.createReducer({
+return require(Parent.Rodux).createReducer({
 	_propertyEnabled = true,
 	_coreGuiEnabled = true,
 	_devTextBoxEnabled = false,
 	value = true
 }, {
-	[require(actions.ChatInputBarConfigurationEnabled).name] = function(p1, p2)
-		-- upvalues: dictionary (ref)
-		return dictionary.join(p1, {
+	[require(Actions.ChatInputBarConfigurationEnabled).name] = function(p1, p2) --[[ Line: 28 ]]
+		-- upvalues: Dictionary (copy)
+		return Dictionary.join(p1, {
 			_propertyEnabled = p2.enabled,
 			value = p1._coreGuiEnabled and (not p1._devTextBoxEnabled and p2.enabled)
 		})
 	end,
-	[require(actions.SetCoreGuiEnabledChanged).name] = function(p1, p2)
-		-- upvalues: dictionary (ref)
-		return dictionary.join(p1, {
+	[require(Actions.SetCoreGuiEnabledChanged).name] = function(p1, p2) --[[ Line: 37 ]]
+		-- upvalues: Dictionary (copy)
+		return Dictionary.join(p1, {
 			_coreGuiEnabled = p2.enabled,
 			value = p1._propertyEnabled and (not p1._devTextBoxEnabled and p2.enabled)
 		})
 	end,
-	[require(actions.DevTextBoxEnabledChanged).name] = function(p1, p2)
-		-- upvalues: dictionary (ref)
-		return dictionary.join(p1, {
+	[require(Actions.DevTextBoxEnabledChanged).name] = function(p1, p2) --[[ Line: 46 ]]
+		-- upvalues: Dictionary (copy)
+		return Dictionary.join(p1, {
 			_devTextBoxEnabled = p2.enabled,
 			value = p1._coreGuiEnabled and p2.enabled
 		})
 	end,
-	[expChatSharedModule.Actions.ClientAppLoaded.name] = function(p1, p2)
-		-- upvalues: dictionary (ref)
-		local isChatCoreGuiEnabled
-		if not p1._propertyEnabled then
-			isChatCoreGuiEnabled = p1._devTextBoxEnabled and p2.isChatCoreGuiEnabled
-		end
-		return dictionary.join(p1, {
+	[require(Parent.ExpChatShared).Actions.ClientAppLoaded.name] = function(p1, p2) --[[ Line: 55 ]]
+		-- upvalues: Dictionary (copy)
+		return Dictionary.join(p1, {
 			_coreGuiEnabled = p2.isChatCoreGuiEnabled,
-			value = isChatCoreGuiEnabled
+			value = if p1._propertyEnabled then p2.isChatCoreGuiEnabled else p1._devTextBoxEnabled and p2.isChatCoreGuiEnabled
 		})
 	end
 })

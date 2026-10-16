@@ -1,70 +1,72 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
-local foundationModule = require(parent.Foundation)
-local momentsCommonModule = require(parent.MomentsCommon)
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local toast = foundationModule.Toast
-local view = foundationModule.View
-local useDeviceInsets = momentsCommonModule.Hooks.useDeviceInsets
-local useScreenSize = momentsCommonModule.Hooks.useScreenSize
-local useTokens = foundationModule.Hooks.useTokens
-local getToastStoreModule = require(moments.Stores.GetToastStore)
-local constantsModule = require(moments.Constants)
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
+local FoundationModule = require(Parent.Foundation)
+local MomentsCommonModule = require(Parent.MomentsCommon)
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local Snackbar = FoundationModule.Snackbar
+local Toast = FoundationModule.Toast
+local View = FoundationModule.View
+local UseDeviceInsetsFunction = MomentsCommonModule.Hooks.useDeviceInsets
+local UseScreenSizeFunction = MomentsCommonModule.Hooks.useScreenSize
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local GetToastStoreModule = require(Moments.Stores.GetToastStore)
+local _ = require(Moments.Stores.GetToastStore.createToastStore)
+local ConstantsModule = require(Moments.Constants)
 
-local function ToastItem(p1)
-	-- upvalues: reactModule (ref), toast (ref)
-	local entry = p1.entry
-	local onDismiss = p1.onDismiss
-	reactModule.useEffect(function()
-		-- upvalues: onDismiss (ref), entry (ref)
-		local delayedThread = task.delay(3, function()
-			-- upvalues: onDismiss (copy), entry (copy)
-			onDismiss(entry.id)
+local function ToastItem(p1) --[[ Line: 34 ]]
+	-- upvalues: ReactModule (copy), Snackbar (copy), Toast (copy)
+	local Entry = p1.entry
+	local OnDismissFunction = p1.onDismiss
+	ReactModule.useEffect(function() --[[ Line: 40 ]]
+		-- upvalues: OnDismissFunction (copy), Entry (copy)
+		local DelayedThread = task.delay(3, function() --[[ Line: 41 ]]
+			-- upvalues: OnDismissFunction (upval), Entry (upval)
+			OnDismissFunction(Entry.id)
 		end)
 		
-		return function()
-			-- upvalues: delayedThread (ref)
-			task.cancel(delayedThread)
+		return function() --[[ Line: 44 ]]
+			-- upvalues: DelayedThread (copy)
+			task.cancel(DelayedThread)
 		end
-	end, { entry.id, onDismiss })
+	end, { Entry.id, OnDismissFunction })
 	
-	return reactModule.createElement(toast, {
-		title = entry.data.title,
-		text = if entry.data.text ~= "" then nil else entry.data.text,
-		LayoutOrder = entry.id,
+	return if Entry.data.variant == "snackbar" then ReactModule.createElement(Snackbar, { title = Entry.data.title, LayoutOrder = Entry.id }) else ReactModule.createElement(Toast, {
+		title = Entry.data.title,
+		text = if Entry.data.text == "" then nil else Entry.data.text,
+		LayoutOrder = Entry.id,
 		width = p1.toastWidth
 	})
 end
 
-return function()
-	-- upvalues: getToastStoreModule (ref), signalsReactModule (ref), useDeviceInsets (ref), useScreenSize (ref), useTokens (ref), reactModule (ref), ToastItem (ref), view (ref), constantsModule (ref)
-	local var1 = getToastStoreModule(false)
-	local var2 = signalsReactModule.useSignalState(var1.getToasts)
-	local var3 = useDeviceInsets()
-	local var4 = useScreenSize()
-	local var5 = useTokens()
-	local var6 = reactModule.useCallback(function(p1)
-		-- upvalues: var1 (ref)
-		var1.dismissToast(p1)
-	end, { var1.dismissToast })
+return function() --[[ Line: 64 | Named "ToastOverlay" ]]
+	-- upvalues: GetToastStoreModule (copy), SignalsReactModule (copy), UseDeviceInsetsFunction (copy), UseScreenSizeFunction (copy), UseTokensFunction (copy), ReactModule (copy), ToastItem (copy), View (copy), ConstantsModule (copy)
+	local ToastStoreModule = GetToastStoreModule(false)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(ToastStoreModule.getToasts)
+	local UseDeviceInsetsResult = UseDeviceInsetsFunction()
+	local UseScreenSizeResult = UseScreenSizeFunction()
+	local UseTokensResult = UseTokensFunction()
+	local UseResult = ReactModule.useCallback(function(p1) --[[ Line: 71 ]]
+		-- upvalues: ToastStoreModule (copy)
+		ToastStoreModule.dismissToast(p1)
+	end, { ToastStoreModule.dismissToast })
 	
-	if #var2 == 0 then
+	if #UseSignalStateResult == 0 then
 		return nil
 	end
-	local uDim = UDim.new(0, math.min(400, var4.X - 40))
-	local t = {}
+	local _UDim = UDim.new(0, (math.min(400, UseScreenSizeResult.X - 40)))
+	local Elements = {}
 	
-	for i, v in var2 do
-		t["Toast_" .. tostring(v.id)] = reactModule.createElement(ToastItem, { entry = v, onDismiss = var6, toastWidth = uDim })
+	for _, Entry in UseSignalStateResult do
+		Elements["Toast_" .. tostring(Entry.id)] = ReactModule.createElement(ToastItem, { entry = Entry, onDismiss = UseResult, toastWidth = _UDim })
 	end
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "col gap-small position-top-center anchor-top-center auto-xy",
-		ZIndex = constantsModule.ZIndex.Toasts,
+		ZIndex = ConstantsModule.ZIndex.Toasts,
 		padding = {
-			top = UDim.new(0, var3.top + var5.Padding.Large),
-			left = UDim.new(0, var3.left + var5.Padding.Large),
-			right = UDim.new(0, var3.right + var5.Padding.Large)
+			top = UDim.new(0, UseDeviceInsetsResult.top + UseTokensResult.Padding.Large),
+			left = UDim.new(0, UseDeviceInsetsResult.left + UseTokensResult.Padding.Large),
+			right = UDim.new(0, UseDeviceInsetsResult.right + UseTokensResult.Padding.Large)
 		}
-	}, t)
+	}, Elements)
 end

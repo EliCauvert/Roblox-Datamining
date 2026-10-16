@@ -1,36 +1,33 @@
-﻿local sduiSharedUtilities = script:FindFirstAncestor("SduiSharedUtilities")
-local parent = sduiSharedUtilities.Parent
-local collectionViewsModule = require(parent.CollectionViews)
-local displayModule = require(parent.Display)
-local sharedFlagsModule = require(parent.SharedFlags)
-local getPreferredTextSizeLineBudgetModule = require(sduiSharedUtilities.getPreferredTextSizeLineBudget)
-local fIntLuaAppSduiCarouselPlaceholderHeaderHeightPx = sharedFlagsModule.FIntLuaAppSduiCarouselPlaceholderHeaderHeightPx
-local fFlagSduiPreferredTextSizeLineBudgets = sharedFlagsModule.FFlagSduiPreferredTextSizeLineBudgets
+﻿local SduiSharedUtilities = script:FindFirstAncestor("SduiSharedUtilities")
+local Parent = SduiSharedUtilities.Parent
+local CollectionViewsModule = require(Parent.CollectionViews)
+local DisplayModule = require(Parent.Display)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local GetPreferredTextSizeLineBudgetModule = require(SduiSharedUtilities.getPreferredTextSizeLineBudget)
+local FIntLuaAppSduiCarouselPlaceholderHeaderHeightPx = SharedFlagsModule.FIntLuaAppSduiCarouselPlaceholderHeaderHeightPx
+local FFlagSduiPreferredTextSizeLineBudgets = SharedFlagsModule.FFlagSduiPreferredTextSizeLineBudgets
 
-return function(p1, p2, p3)
-	-- upvalues: displayModule (ref), collectionViewsModule (ref), fFlagSduiPreferredTextSizeLineBudgets (ref), parent (ref), getPreferredTextSizeLineBudgetModule (ref), fIntLuaAppSduiCarouselPlaceholderHeaderHeightPx (ref)
-	local displayStore = displayModule.GetDisplayStore(false)
-	local mainCollectionLayoutStore = collectionViewsModule.getMainCollectionLayoutStore(false)
-	local viewportSize = displayStore.getViewportSize(false)
-	local topBarHeight = displayStore.getTopBarHeight(false)
-	local platformScale = displayStore.getPlatformScale(false)
-	local var1 = if platformScale and platformScale > 0 then platformScale else 1
-	local designSpaceContainerWidth = mainCollectionLayoutStore.getDesignSpaceContainerWidth(false)
-	local numItemsForAllCategories = mainCollectionLayoutStore.getNumItemsForAllCategories(false)
-	local var2 = (viewportSize.Y - topBarHeight) / var1
-	local var3 = designSpaceContainerWidth / math.max(1, numItemsForAllCategories[p1] or 1) * p2.Scale + p2.Offset
+return function(p1, p2, p3) --[[ Line: 30 | Named "buildSduiCollectionInfo" ]]
+	-- upvalues: DisplayModule (copy), CollectionViewsModule (copy), FFlagSduiPreferredTextSizeLineBudgets (copy), Parent (copy), GetPreferredTextSizeLineBudgetModule (copy), FIntLuaAppSduiCarouselPlaceholderHeaderHeightPx (copy)
+	local DisplayStore = DisplayModule.GetDisplayStore(false)
+	local MainCollectionLayoutStore = CollectionViewsModule.getMainCollectionLayoutStore(false)
+	local PlatformScale: number = DisplayStore.getPlatformScale(false)
+	local PlatformScale1 = if PlatformScale and PlatformScale > 0 then PlatformScale else 1
+	local NumItemsForAllCategories = MainCollectionLayoutStore.getNumItemsForAllCategories(false)
+	local YRatio = (DisplayStore.getViewportSize(false).Y - DisplayStore.getTopBarHeight(false)) / PlatformScale1
+	local NewDesignSpaceContainerWidth = MainCollectionLayoutStore.getDesignSpaceContainerWidth(false) / math.max(1, NumItemsForAllCategories[p1] or 1) * p2.Scale + p2.Offset
 	
-	if fFlagSduiPreferredTextSizeLineBudgets then
-		local maxValue = math.max(p3 or 0, 0)
+	if FFlagSduiPreferredTextSizeLineBudgets then
+		local Largest = math.max(p3 or 0, 0)
 		
-		if maxValue > 0 then
-			var3 += getPreferredTextSizeLineBudgetModule(require(parent.TextSize).getTextSizeStore(false).getTextSizeOffset(false) or 0, maxValue) / var1
+		if Largest > 0 then
+			NewDesignSpaceContainerWidth += GetPreferredTextSizeLineBudgetModule(require(Parent.TextSize).getTextSizeStore(false).getTextSizeOffset(false) or 0, Largest) / PlatformScale1
 		end
 	end
-	local var4 = fIntLuaAppSduiCarouselPlaceholderHeaderHeightPx + 12 + var3 + 16
+	local NewFIntLuaAppSduiCarouselPlaceholderHeaderHeightPx = FIntLuaAppSduiCarouselPlaceholderHeaderHeightPx + 12 + NewDesignSpaceContainerWidth + 16
 	
 	return {
-		items_per_row = numItemsForAllCategories,
-		rows_above_fold = if var4 > 0 then math.max(1, math.floor(var2 / var4)) + 1 else 1
+		items_per_row = NumItemsForAllCategories,
+		rows_above_fold = if NewFIntLuaAppSduiCarouselPlaceholderHeaderHeightPx > 0 then math.max(1, (math.floor(YRatio / NewFIntLuaAppSduiCarouselPlaceholderHeaderHeightPx))) + 1 else 1
 	}
 end

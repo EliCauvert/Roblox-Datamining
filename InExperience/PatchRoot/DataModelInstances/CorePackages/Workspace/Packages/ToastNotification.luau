@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.ToastNotification.ToastNotification)
+﻿return (require(script.Parent._Workspace.ToastNotification.ToastNotification))

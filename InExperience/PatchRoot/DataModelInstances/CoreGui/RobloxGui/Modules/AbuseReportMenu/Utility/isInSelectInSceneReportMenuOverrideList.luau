@@ -1,15 +1,15 @@
-﻿local playersService = game:GetService("Players")
+﻿local Players = game:GetService("Players")
 game:DefineFastString("SelectInSceneReportMenuOverrideUserIds", "")
 
-function isInSelectInSceneReportMenuOverrideList()
-	-- upvalues: playersService (ref)
-	local localPlayer = playersService.LocalPlayer
-	while not localPlayer do
-		playersService:GetPropertyChangedSignal("LocalPlayer"):Wait()
-		localPlayer = playersService.LocalPlayer
+function isInSelectInSceneReportMenuOverrideList(): boolean --[[ Line: 5 ]]
+	-- upvalues: Players (copy)
+	local LocalPlayer = Players.LocalPlayer
+	while not LocalPlayer do
+		Players:GetPropertyChangedSignal("LocalPlayer"):Wait()
+		LocalPlayer = Players.LocalPlayer
 	end
 	for i in game:GetFastString("SelectInSceneReportMenuOverrideUserIds"):gmatch("%d+") do
-		if localPlayer and tonumber(i) == localPlayer.UserId then
+		if LocalPlayer and tonumber(i) == LocalPlayer.UserId then
 			return true
 		end
 	end

@@ -1,39 +1,39 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local roactModule = require(corePackagesService.Packages.Roact)
-local coreGuiService = game:GetService("CoreGui")
-local constantsModule = require(coreGuiService:WaitForChild("RobloxGui").Modules.TopBar.Constants)
-local appStyleProvider = require(corePackagesService.Packages.UIBlox).App.Style.AppStyleProvider
-local dark = require(corePackagesService.Packages.Foundation).Enums.ColorMode.Dark
-local promiseModule = require(corePackagesService.Packages.Promise)
-local selfViewTooltipFTUXModule = require(script.Parent.SelfViewTooltipFTUX)
+﻿local CorePackages = game:GetService("CorePackages")
+local RoactModule = require(CorePackages.Packages.Roact)
+local CoreGui = game:GetService("CoreGui")
+local ConstantsModule = require(CoreGui:WaitForChild("RobloxGui").Modules.TopBar.Constants)
+local AppStyleProvider = require(CorePackages.Packages.UIBlox).App.Style.AppStyleProvider
+local Dark = require(CorePackages.Packages.Foundation).Enums.ColorMode.Dark
+local PromiseModule = require(CorePackages.Packages.Promise)
+local SelfViewTooltipFTUXModule = require(script.Parent.SelfViewTooltipFTUX)
 
-return function(p1)
-	-- upvalues: coreGuiService (ref), constantsModule (ref), roactModule (ref), appStyleProvider (ref), dark (ref), selfViewTooltipFTUXModule (ref), promiseModule (ref)
-	local selfViewTooltipOnCloseGui = Instance.new("ScreenGui")
-	selfViewTooltipOnCloseGui.Name = "SelfViewTooltipOnCloseGui"
-	selfViewTooltipOnCloseGui.DisplayOrder = -1
-	selfViewTooltipOnCloseGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-	selfViewTooltipOnCloseGui.Parent = coreGuiService
-	local var1 = constantsModule.useDisplayScaleState(constantsModule.TopBarButtonHeight)
-	local selfViewTooltipOnClose = roactModule.mount(roactModule.createElement(appStyleProvider, { style = { themeName = dark } }, {
-		frame = roactModule.createElement("Frame", {
+return function(p1) --[[ Line: 17 ]]
+	-- upvalues: CoreGui (copy), ConstantsModule (copy), RoactModule (copy), AppStyleProvider (copy), Dark (copy), SelfViewTooltipFTUXModule (copy), PromiseModule (copy)
+	local SelfViewTooltipOnCloseGui = Instance.new("ScreenGui")
+	SelfViewTooltipOnCloseGui.Name = "SelfViewTooltipOnCloseGui"
+	SelfViewTooltipOnCloseGui.DisplayOrder = -1
+	SelfViewTooltipOnCloseGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+	SelfViewTooltipOnCloseGui.Parent = CoreGui
+	local UseDisplayScaleStateResult = ConstantsModule.useDisplayScaleState(ConstantsModule.TopBarButtonHeight)
+	local SelfViewTooltipOnClose = RoactModule.mount(RoactModule.createElement(AppStyleProvider, { style = { themeName = Dark } }, {
+		frame = RoactModule.createElement("Frame", {
 			BackgroundTransparency = 0,
 			Visible = false,
-			Position = UDim2.fromOffset(constantsModule.useDisplayScaleState(constantsModule.ScreenSideOffset), -var1),
-			Size = UDim2.fromOffset(var1, var1)
+			Position = UDim2.fromOffset(ConstantsModule.useDisplayScaleState(ConstantsModule.ScreenSideOffset), -UseDisplayScaleStateResult),
+			Size = UDim2.fromOffset(UseDisplayScaleStateResult, UseDisplayScaleStateResult)
 		}, {
-			tooltip = roactModule.createElement(selfViewTooltipFTUXModule, {
+			tooltip = RoactModule.createElement(SelfViewTooltipFTUXModule, {
 				fallbackText = p1.fallbackText,
 				translationKey = p1.translationKey,
 				tooltipLifetime = p1.tooltipLifetime
 			})
 		})
-	}), selfViewTooltipOnCloseGui, "SelfViewTooltipOnClose")
-	promiseModule.delay(p1.tooltipLifetime + 5):andThen(function()
-		-- upvalues: roactModule (copy), selfViewTooltipOnClose (ref)
-		pcall(function()
-			-- upvalues: roactModule (copy), selfViewTooltipOnClose (copy)
-			roactModule.unmount(selfViewTooltipOnClose)
+	}), SelfViewTooltipOnCloseGui, "SelfViewTooltipOnClose")
+	PromiseModule.delay(p1.tooltipLifetime + 5):andThen(function() --[[ Line: 48 ]]
+		-- upvalues: RoactModule (upval), SelfViewTooltipOnClose (copy)
+		pcall(function() --[[ Line: 49 ]]
+			-- upvalues: RoactModule (upval), SelfViewTooltipOnClose (upval)
+			RoactModule.unmount(SelfViewTooltipOnClose)
 		end)
 	end)
 end

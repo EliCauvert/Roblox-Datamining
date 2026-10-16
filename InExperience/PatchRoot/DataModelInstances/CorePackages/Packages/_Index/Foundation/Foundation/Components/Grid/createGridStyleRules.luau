@@ -1,49 +1,50 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local _ = require(foundation.Enums.Breakpoint)
-local _ = require(foundation.Enums.BreakpointShortName)
-local reactModule = require(parent.React)
-local _ = require(foundation.Providers.Responsive.ResponsiveContext)
-local styleRuleModule = require(foundation.StyleSheet.StyleRule)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local _ = require(Foundation.Enums.Breakpoint)
+local _ = require(Foundation.Enums.BreakpointShortName)
+local ReactModule = require(Foundation.Parent.React)
+local _ = require(Foundation.Providers.Responsive.ResponsiveContext)
+local StyleRuleModule = require(Foundation.StyleSheet.StyleRule)
 
-local function createGridStyleRule(p1, p2)
-	-- upvalues: reactModule (ref), styleRuleModule (ref)
-	return reactModule.createElement(styleRuleModule, {
-		Selector = `{if p2 then `.{p2}-col-{p1}` else `.col-{p1}`} ::UISizeConstraint`,
+local function createGridStyleRule(p1, ShortName) --[[ Line: 13 ]]
+	-- upvalues: ReactModule (copy), StyleRuleModule (copy)
+	return ReactModule.createElement(StyleRuleModule, {
+		Selector = `{if ShortName then `.{ShortName}-col-{p1}` else `.col-{p1}`} ::UISizeConstraint`,
 		properties = { MinSize = `$ColMin{p1}`, MaxSize = `$ColMax{p1}` }
 	})
 end
 
-return function(p3)
-	-- upvalues: createGridStyleRule (ref), reactModule (ref), styleRuleModule (ref)
-	local breakpoint = p3.breakpoint
-	local grid = p3.grid
-	local var1 = grid.columns[breakpoint.order[#breakpoint.order]]
-	local t = {}
-	local t_1 = {}
+return function(p2) --[[ Line: 24 | Named "createGridStyleRules" ]]
+	-- upvalues: createGridStyleRule (copy), ReactModule (copy), StyleRuleModule (copy)
+	local Breakpoint = p2.breakpoint
+	local Grid = p2.grid
+	local RulesByBreakpoint = {}
+	local BaseRules = {}
 	
-	for i = 0, var1 do
-		t_1[`Col{i}`] = createGridStyleRule(i)
+	for i = 0, Grid.columns[Breakpoint.order[#Breakpoint.order]] do
+		BaseRules[`Col{i}`] = createGridStyleRule(i)
 		
 		if i == 0 then
-			t_1.ColVisible0 = reactModule.createElement(styleRuleModule, { Selector = ".col-0", properties = { Visible = false } })
+			BaseRules.ColVisible0 = ReactModule.createElement(StyleRuleModule, { Selector = ".col-0", properties = { Visible = false } })
 		end
 	end
-	for i_1, v in breakpoint.order do
-		local var2 = breakpoint.shortNames[v]
-		local t_2 = {}
+	for _, value in Breakpoint.order do
+		local ShortName = Breakpoint.shortNames[value]
+		local Elements = {}
 		
-		for i_2 = 0, grid.columns[v] do
-			t_2[`{v}Col{i_2}`] = createGridStyleRule(i_2, var2)
+		for i1 = 0, Grid.columns[value] do
+			Elements[`{value}Col{i1}`] = createGridStyleRule(i1, ShortName)
 			
-			if i_2 == 0 then
-				t_2[`{v}ColVisible0`] = reactModule.createElement(styleRuleModule, {
-					Selector = `.{var2}-col-0`,
+			if i1 == 0 then
+				Elements[`{value}ColVisible0`] = ReactModule.createElement(StyleRuleModule, {
+					Selector = `.{ShortName}-col-0`,
 					properties = { Visible = false }
 				})
 			end
 		end
-		t[v] = t_2
+		RulesByBreakpoint[value] = Elements
 	end
-	return { baseRules = t_1, rulesByBreakpoint = t }
+	return {
+		baseRules = BaseRules,
+		rulesByBreakpoint = RulesByBreakpoint
+	}
 end

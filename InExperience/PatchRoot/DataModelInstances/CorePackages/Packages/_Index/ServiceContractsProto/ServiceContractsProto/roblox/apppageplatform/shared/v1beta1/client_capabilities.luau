@@ -1,382 +1,328 @@
-﻿local protoModule = require(script.Parent.Parent.Parent.Parent.Parent.proto)
-local typeRegistryModule = require(script.Parent.Parent.Parent.Parent.Parent.proto.typeRegistry)
+﻿local ProtoModule = require(script.Parent.Parent.Parent.Parent.Parent.proto)
+local TypeRegistryModule = require(script.Parent.Parent.Parent.Parent.Parent.proto.typeRegistry)
 local t = {}
-local actionsModule = require(script.Parent.actions)
-local capabilityModule = require(script.Parent.capability)
-local uiComponentTypeModule = require(script.Parent.ui_component_type)
-local t_1 = {}
-t_1.__index = t_1
+local ActionsModule = require(script.Parent.actions)
+local CapabilityModule = require(script.Parent.capability)
+local UiComponentTypeModule = require(script.Parent.ui_component_type)
+local Module = {}
+Module.__index = Module
 
-function t_1.new(p1)
-	-- upvalues: t (ref), t_1 (ref)
-	return setmetatable({
+function Module.new(p1) --[[ Line: 89 ]]
+	-- upvalues: t (copy), Module (copy)
+	return (setmetatable({
 		enabled_capabilities = if p1 == nil or p1.enabled_capabilities == nil then {} else p1.enabled_capabilities,
 		proto_version = if p1 == nil or p1.proto_version == nil then "" else p1.proto_version,
 		platform = if p1 == nil or p1.platform == nil then assert(t.Platform.fromNumber(0), "Enum has no 0 default") else p1.platform,
 		registered_ui_component_types = if p1 == nil or p1.registered_ui_component_types == nil then {} else p1.registered_ui_component_types,
 		registered_action_types = if p1 == nil or p1.registered_action_types == nil then {} else p1.registered_action_types,
 		runtime_flag_values = if p1 == nil or p1.runtime_flag_values == nil then {} else p1.runtime_flag_values
-	}, t_1)
+	}, Module))
 end
 
-function t_1:encode()
-	-- upvalues: protoModule (ref), capabilityModule (ref), t (ref), uiComponentTypeModule (ref), actionsModule (ref)
-	local buff = buffer.create(0)
-	local var1 = 0
+function Module:encode() --[[ Line: 110 ]]
+	-- upvalues: ProtoModule (copy), CapabilityModule (copy), t (copy), UiComponentTypeModule (copy), ActionsModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.enabled_capabilities ~= nil and #self.enabled_capabilities > 0 then
-		for i, v in self.enabled_capabilities do
-			local var2, var3 = protoModule.writeTag(buff, var1, 1, protoModule.wireTypes.varint)
-			var2, var11 = protoModule.writeVarInt(var2, var3, capabilityModule.Capability.toNumber(v))
-			buff = var2
-			var1 = var3
+		for _, enabledCapability in self.enabled_capabilities do
+			local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult, WriteTagResult2, CapabilityModule.Capability.toNumber(enabledCapability))
 		end
 	end
 	if self.proto_version ~= nil and self.proto_version ~= "" then
-		local var4, var5 = protoModule.writeTag(buff, var1, 2, protoModule.wireTypes.lengthDelimited)
-		var4, var13 = protoModule.writeString(var4, var5, self.proto_version)
-		buff = var4
-		var1 = var5
+		local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult1, WriteTagResult2_1, self.proto_version)
 	end
 	if self.platform ~= nil and (self.platform ~= nil and self.platform ~= 0 or self.platform ~= t.Platform.fromNumber(0)) then
-		local var6, var7 = protoModule.writeTag(buff, var1, 3, protoModule.wireTypes.varint)
-		var6, var15 = protoModule.writeVarInt(var6, var7, t.Platform.toNumber(self.platform))
-		buff = var6
-		var1 = var7
+		local WriteTagResult3, WriteTagResult2_2 = ProtoModule.writeTag(Buf, Count, 3, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult3, WriteTagResult2_2, t.Platform.toNumber(self.platform))
 	end
 	if self.registered_ui_component_types ~= nil and #self.registered_ui_component_types > 0 then
-		for i, v in self.registered_ui_component_types do
-			local var8, var9 = protoModule.writeTag(buff, var1, 4, protoModule.wireTypes.varint)
-			var8, var17 = protoModule.writeVarInt(var8, var9, uiComponentTypeModule.UiComponentType.toNumber(v))
-			buff = var8
-			var1 = var9
+		for _, registeredUiComponentType in self.registered_ui_component_types do
+			local WriteTagResult4, WriteTagResult2_3 = ProtoModule.writeTag(Buf, Count, 4, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult4, WriteTagResult2_3, UiComponentTypeModule.UiComponentType.toNumber(registeredUiComponentType))
 		end
 	end
 	if self.registered_action_types ~= nil and #self.registered_action_types > 0 then
-		for i, v in self.registered_action_types do
-			local var10, var11 = protoModule.writeTag(buff, var1, 5, protoModule.wireTypes.varint)
-			var10, var19 = protoModule.writeVarInt(var10, var11, actionsModule.ActionType.toNumber(v))
-			buff = var10
-			var1 = var11
+		for _, registeredActionType in self.registered_action_types do
+			local WriteTagResult5, WriteTagResult2_4 = ProtoModule.writeTag(Buf, Count, 5, ProtoModule.wireTypes.varint)
+			Buf, Count = ProtoModule.writeVarInt(WriteTagResult5, WriteTagResult2_4, ActionsModule.ActionType.toNumber(registeredActionType))
 		end
 	end
 	if self.runtime_flag_values ~= nil and next(self.runtime_flag_values) ~= nil then
-		for i, v in self.runtime_flag_values do
-			local var12, var13 = protoModule.writeTag(buffer.create(0), 0, 1, protoModule.wireTypes.lengthDelimited)
-			var12, var21 = protoModule.writeString(var12, var13, i)
-			var12, var21 = protoModule.writeTag(var12, var13, 2, protoModule.wireTypes.varint)
-			var12, var21 = protoModule.writeVarInt(var12, var13, if v then 1 else 0)
-			local var14 = var12
-			local var15 = var13
-			local var16, var17 = protoModule.writeTag(buff, var1, 7, protoModule.wireTypes.lengthDelimited)
-			var16, var25 = protoModule.writeBuffer(var16, var17, var14, var15)
-			buff = var16
-			var1 = var17
+		for i, runtimeFlagValue in self.runtime_flag_values do
+			local WriteTagResult6, WriteTagResult2_5 = ProtoModule.writeTag(buffer.create(0), 0, 1, ProtoModule.wireTypes.lengthDelimited)
+			local WriteStringResult, WriteStringResult2 = ProtoModule.writeString(WriteTagResult6, WriteTagResult2_5, i)
+			local WriteTagResult7, WriteTagResult2_6 = ProtoModule.writeTag(WriteStringResult, WriteStringResult2, 2, ProtoModule.wireTypes.varint)
+			local WriteVarIntResult, WriteVarIntResult2 = ProtoModule.writeVarInt(WriteTagResult7, WriteTagResult2_6, if runtimeFlagValue then 1 else 0)
+			local WriteTagResult8, WriteTagResult2_7 = ProtoModule.writeTag(Buf, Count, 7, ProtoModule.wireTypes.lengthDelimited)
+			Buf, Count = ProtoModule.writeBuffer(WriteTagResult8, WriteTagResult2_7, WriteVarIntResult, WriteVarIntResult2)
 		end
 	end
-	local buff_1 = buffer.create(var1)
-	buffer.copy(buff_1, 0, buff, 0, var1)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_1.decode(p1)
-	-- upvalues: t_1 (ref), protoModule (ref), capabilityModule (ref), t (ref), uiComponentTypeModule (ref), actionsModule (ref)
-	local var18 = t_1.new()
-	local var19 = 0
-	while var19 < buffer.len(p1) do
-		local _ = nil
-		local var20 = nil
-		local var21, var22, var23 = protoModule.readTag(p1, var19)
-		local var24 = var21
-		var20 = var22
-		var19 = var23
+function Module.decode(Buf) --[[ Line: 178 ]]
+	-- upvalues: Module (copy), ProtoModule (copy), CapabilityModule (copy), t (copy), UiComponentTypeModule (copy), ActionsModule (copy)
+	local NewModule = Module.new()
+	local v1 = 0
+	while v1 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v31 = ProtoModule.readTag(Buf, v1)
 		
-		if var20 == protoModule.wireTypes.varint then
-			if var24 == 1 then
-				local _ = nil
-				local var25, var26 = protoModule.readVarIntI32(p1, var19)
-				local var27 = var25
-				var19 = var26
-				table.insert(var18.enabled_capabilities, capabilityModule.Capability.fromNumber(var27) or var27)
-			elseif var24 == 3 then
-				local _ = nil
-				local var28, var29 = protoModule.readVarIntI32(p1, var19)
-				local var30 = var28
-				var19 = var29
-				var18.platform = t.Platform.fromNumber(var30) or var30
-			elseif var24 == 4 then
-				local _ = nil
-				local var31, var32 = protoModule.readVarIntI32(p1, var19)
-				local var33 = var31
-				var19 = var32
-				table.insert(var18.registered_ui_component_types, uiComponentTypeModule.UiComponentType.fromNumber(var33) or var33)
-			elseif var24 == 5 then
-				local _ = nil
-				local var34, var35 = protoModule.readVarIntI32(p1, var19)
-				local var36 = var34
-				var19 = var35
-				table.insert(var18.registered_action_types, actionsModule.ActionType.fromNumber(var36) or var36)
+		if Tag2 == ProtoModule.wireTypes.varint then
+			if Tag == 1 then
+				local VarIntI32
+				VarIntI32, v31 = ProtoModule.readVarIntI32(Buf, v1)
+				table.insert(NewModule.enabled_capabilities, CapabilityModule.Capability.fromNumber(VarIntI32) or VarIntI32)
+			elseif Tag == 3 then
+				local VarIntI32_1
+				VarIntI32_1, v31 = ProtoModule.readVarIntI32(Buf, v1)
+				NewModule.platform = t.Platform.fromNumber(VarIntI32_1) or VarIntI32_1
+			elseif Tag == 4 then
+				local VarIntI32_2
+				VarIntI32_2, v31 = ProtoModule.readVarIntI32(Buf, v1)
+				table.insert(NewModule.registered_ui_component_types, UiComponentTypeModule.UiComponentType.fromNumber(VarIntI32_2) or VarIntI32_2)
+			elseif Tag == 5 then
+				local VarIntI32_3
+				VarIntI32_3, v31 = ProtoModule.readVarIntI32(Buf, v1)
+				table.insert(NewModule.registered_action_types, ActionsModule.ActionType.fromNumber(VarIntI32_3) or VarIntI32_3)
 			else
-				local _ = nil
-				local var37, var38 = protoModule.readVarInt(p1, var19)
-				local _ = var37
-				var19 = var38
+				local _
+				_, v31 = ProtoModule.readVarInt(Buf, v1)
 			end
-		end
-		if var20 == protoModule.wireTypes.lengthDelimited then
-			if var24 == 2 then
-				local _ = nil
-				local var39, var40 = protoModule.readBuffer(p1, var19)
-				var19 = var40
-				var18.proto_version = buffer.tostring(var39)
-			elseif var24 == 7 then
-				local _ = nil
-				local var41, var42 = protoModule.readBuffer(p1, var19)
-				var19 = var42
-				var41 = t.ClientCapabilities_RuntimeFlagValuesEntry.decode(var41)
-				var18.runtime_flag_values[var41.key or ""] = var41.value or false
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 2 then
+				local Buffer1
+				Buffer1, v31 = ProtoModule.readBuffer(Buf, v1)
+				NewModule.proto_version = buffer.tostring(Buffer1)
+			elseif Tag == 7 then
+				local Buffer2
+				Buffer2, v31 = ProtoModule.readBuffer(Buf, v1)
+				local DecodeResult = t.ClientCapabilities_RuntimeFlagValuesEntry.decode(Buffer2)
+				NewModule.runtime_flag_values[DecodeResult.key or ""] = DecodeResult.value or false
 			else
-				local _ = nil
-				local var43, var44 = protoModule.readVarInt(p1, var19)
-				var19 = var44 + var43
+				local VarInt, VarInt2 = ProtoModule.readVarInt(Buf, v1)
+				v1 = VarInt2 + VarInt
 			end
-		elseif var20 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var45, var46 = protoModule.readFixed32(p1, var19)
-			local _ = var45
-			var19 = var46
-		elseif var20 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var47, var48 = protoModule.readFixed64(p1, var19)
-			local _ = var47
-			var19 = var48
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v31 = ProtoModule.readFixed32(Buf, v1)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v31 = ProtoModule.readFixed64(Buf, v1)
 		else
-			error("Unsupported wire type: " .. var29)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var18
+	return NewModule
 end
 
-function t_1:jsonEncode()
-	-- upvalues: capabilityModule (ref), t (ref), uiComponentTypeModule (ref), actionsModule (ref)
-	local t_1 = {}
+function Module:jsonEncode() --[[ Line: 266 ]]
+	-- upvalues: CapabilityModule (copy), t (copy), UiComponentTypeModule (copy), ActionsModule (copy)
+	local t1 = {}
 	
 	if self.enabled_capabilities ~= nil and #self.enabled_capabilities > 0 then
-		local t_2 = {}
+		local EnabledCapabilities = {}
 		
-		for i, v in self.enabled_capabilities do
-			table.insert(t_2, if typeof(v) == "number" then v else capabilityModule.Capability.toNumber(v))
+		for _, enabledCapability in self.enabled_capabilities do
+			table.insert(EnabledCapabilities, if typeof(enabledCapability) == "number" then enabledCapability else CapabilityModule.Capability.toNumber(enabledCapability))
 		end
-		t_1.enabledCapabilities = t_2
+		t1.enabledCapabilities = EnabledCapabilities
 	end
 	if self.proto_version ~= nil and self.proto_version ~= "" then
-		t_1.protoVersion = self.proto_version
+		t1.protoVersion = self.proto_version
 	end
 	if self.platform ~= nil and (self.platform ~= nil and self.platform ~= 0 or self.platform ~= t.Platform.fromNumber(0)) then
-		t_1.platform = if typeof(self.platform) == "number" then self.platform else t.Platform.toNumber(self.platform)
+		t1.platform = if typeof(self.platform) == "number" then self.platform else t.Platform.toNumber(self.platform)
 	end
 	if self.registered_ui_component_types ~= nil and #self.registered_ui_component_types > 0 then
-		local t_2 = {}
+		local RegisteredUiComponentTypes = {}
 		
-		for i, v in self.registered_ui_component_types do
-			table.insert(t_2, if typeof(v) == "number" then v else uiComponentTypeModule.UiComponentType.toNumber(v))
+		for _, registeredUiComponentType in self.registered_ui_component_types do
+			table.insert(RegisteredUiComponentTypes, if typeof(registeredUiComponentType) == "number" then registeredUiComponentType else UiComponentTypeModule.UiComponentType.toNumber(registeredUiComponentType))
 		end
-		t_1.registeredUiComponentTypes = t_2
+		t1.registeredUiComponentTypes = RegisteredUiComponentTypes
 	end
 	if self.registered_action_types ~= nil and #self.registered_action_types > 0 then
-		local t_2 = {}
+		local RegisteredActionTypes = {}
 		
-		for i, v in self.registered_action_types do
-			table.insert(t_2, if typeof(v) == "number" then v else actionsModule.ActionType.toNumber(v))
+		for _, registeredActionType in self.registered_action_types do
+			table.insert(RegisteredActionTypes, if typeof(registeredActionType) == "number" then registeredActionType else ActionsModule.ActionType.toNumber(registeredActionType))
 		end
-		t_1.registeredActionTypes = t_2
+		t1.registeredActionTypes = RegisteredActionTypes
 	end
 	if self.runtime_flag_values ~= nil and next(self.runtime_flag_values) ~= nil then
-		local t_2 = {}
+		local RuntimeFlagValues = {}
 		
-		for i, v in self.runtime_flag_values do
-			t_2[i] = v
+		for i, runtimeFlagValue in self.runtime_flag_values do
+			RuntimeFlagValues[i] = runtimeFlagValue
 		end
-		t_1.runtimeFlagValues = t_2
+		t1.runtimeFlagValues = RuntimeFlagValues
 	end
-	return t_1
+	return t1
 end
 
-function t_1:jsonDecode()
-	-- upvalues: t_1 (ref), capabilityModule (ref), t (ref), uiComponentTypeModule (ref), actionsModule (ref)
-	local var49 = t_1.new()
+function Module:jsonDecode() --[[ Line: 334 ]]
+	-- upvalues: Module (copy), CapabilityModule (copy), t (copy), UiComponentTypeModule (copy), ActionsModule (copy)
+	local NewModule = Module.new()
 	
 	if self.enabled_capabilities ~= nil then
-		local t_2 = {}
+		local Enabled_capabilities = {}
 		
-		for i, v in self.enabled_capabilities do
-			table.insert(t_2, if typeof(v) == "number" then capabilityModule.Capability.fromNumber(v) or v else capabilityModule.Capability.fromName(v) or v)
+		for _, enabledCapability in self.enabled_capabilities do
+			table.insert(Enabled_capabilities, (if typeof(enabledCapability) == "number" then CapabilityModule.Capability.fromNumber(enabledCapability) else CapabilityModule.Capability.fromName(enabledCapability)) or enabledCapability)
 		end
-		var49.enabled_capabilities = t_2
+		NewModule.enabled_capabilities = Enabled_capabilities
 	end
 	if self.enabledCapabilities ~= nil then
-		local t_2 = {}
+		local Enabled_capabilities = {}
 		
-		for i, v in self.enabledCapabilities do
-			table.insert(t_2, if typeof(v) == "number" then capabilityModule.Capability.fromNumber(v) or v else capabilityModule.Capability.fromName(v) or v)
+		for _, enabledCapability1 in self.enabledCapabilities do
+			table.insert(Enabled_capabilities, (if typeof(enabledCapability1) == "number" then CapabilityModule.Capability.fromNumber(enabledCapability1) else CapabilityModule.Capability.fromName(enabledCapability1)) or enabledCapability1)
 		end
-		var49.enabled_capabilities = t_2
+		NewModule.enabled_capabilities = Enabled_capabilities
 	end
 	if self.proto_version ~= nil then
-		var49.proto_version = self.proto_version
+		NewModule.proto_version = self.proto_version
 	end
 	if self.protoVersion ~= nil then
-		var49.proto_version = self.protoVersion
+		NewModule.proto_version = self.protoVersion
 	end
 	if self.platform ~= nil then
-		var49.platform = if typeof(self.platform) == "number" then t.Platform.fromNumber(self.platform) or self.platform else t.Platform.fromName(self.platform) or self.platform
+		NewModule.platform = (if typeof(self.platform) == "number" then t.Platform.fromNumber(self.platform) else t.Platform.fromName(self.platform)) or self.platform
 	end
 	if self.registered_ui_component_types ~= nil then
-		local t_2 = {}
+		local Registered_ui_component_types = {}
 		
-		for i, v in self.registered_ui_component_types do
-			table.insert(t_2, if typeof(v) == "number" then uiComponentTypeModule.UiComponentType.fromNumber(v) or v else uiComponentTypeModule.UiComponentType.fromName(v) or v)
+		for _, registeredUiComponentType in self.registered_ui_component_types do
+			table.insert(Registered_ui_component_types, (if typeof(registeredUiComponentType) == "number" then UiComponentTypeModule.UiComponentType.fromNumber(registeredUiComponentType) else UiComponentTypeModule.UiComponentType.fromName(registeredUiComponentType)) or registeredUiComponentType)
 		end
-		var49.registered_ui_component_types = t_2
+		NewModule.registered_ui_component_types = Registered_ui_component_types
 	end
 	if self.registeredUiComponentTypes ~= nil then
-		local t_2 = {}
+		local Registered_ui_component_types = {}
 		
-		for i, v in self.registeredUiComponentTypes do
-			table.insert(t_2, if typeof(v) == "number" then uiComponentTypeModule.UiComponentType.fromNumber(v) or v else uiComponentTypeModule.UiComponentType.fromName(v) or v)
+		for _, registeredUiComponentType1 in self.registeredUiComponentTypes do
+			table.insert(Registered_ui_component_types, (if typeof(registeredUiComponentType1) == "number" then UiComponentTypeModule.UiComponentType.fromNumber(registeredUiComponentType1) else UiComponentTypeModule.UiComponentType.fromName(registeredUiComponentType1)) or registeredUiComponentType1)
 		end
-		var49.registered_ui_component_types = t_2
+		NewModule.registered_ui_component_types = Registered_ui_component_types
 	end
 	if self.registered_action_types ~= nil then
-		local t_2 = {}
+		local Registered_action_types1 = {}
 		
-		for i, v in self.registered_action_types do
-			table.insert(t_2, if typeof(v) == "number" then actionsModule.ActionType.fromNumber(v) or v else actionsModule.ActionType.fromName(v) or v)
+		for _, registeredActionType1 in self.registered_action_types do
+			table.insert(Registered_action_types1, (if typeof(registeredActionType1) == "number" then ActionsModule.ActionType.fromNumber(registeredActionType1) else ActionsModule.ActionType.fromName(registeredActionType1)) or registeredActionType1)
 		end
-		var49.registered_action_types = t_2
+		NewModule.registered_action_types = Registered_action_types1
 	end
 	if self.registeredActionTypes ~= nil then
-		local t_2 = {}
+		local Registered_action_types = {}
 		
-		for i, v in self.registeredActionTypes do
-			table.insert(t_2, if typeof(v) == "number" then actionsModule.ActionType.fromNumber(v) or v else actionsModule.ActionType.fromName(v) or v)
+		for _, registeredActionType in self.registeredActionTypes do
+			table.insert(Registered_action_types, (if typeof(registeredActionType) == "number" then ActionsModule.ActionType.fromNumber(registeredActionType) else ActionsModule.ActionType.fromName(registeredActionType)) or registeredActionType)
 		end
-		var49.registered_action_types = t_2
+		NewModule.registered_action_types = Registered_action_types
 	end
 	if self.runtime_flag_values ~= nil then
-		local t_2 = {}
+		local Runtime_flag_values = {}
 		
-		for i, v in self.runtime_flag_values do
-			t_2[i] = v
+		for i, runtimeFlagValue in self.runtime_flag_values do
+			Runtime_flag_values[i] = runtimeFlagValue
 		end
-		var49.runtime_flag_values = t_2
+		NewModule.runtime_flag_values = Runtime_flag_values
 	end
 	if self.runtimeFlagValues ~= nil then
-		local t_2 = {}
+		local Runtime_flag_values = {}
 		
-		for i, v in self.runtimeFlagValues do
-			t_2[i] = v
+		for i1, runtimeFlagValue1 in self.runtimeFlagValues do
+			Runtime_flag_values[i1] = runtimeFlagValue1
 		end
-		var49.runtime_flag_values = t_2
+		NewModule.runtime_flag_values = Runtime_flag_values
 	end
-	return var49
+	return NewModule
 end
 
-t_1.descriptor = {
+Module.descriptor = {
 	name = "ClientCapabilities",
 	fullName = "roblox.apppageplatform.shared.v1beta1.ClientCapabilities"
 }
-t.ClientCapabilities = t_1
-typeRegistryModule.default:register(t.ClientCapabilities)
-local t_2 = {}
-t_2.__index = t_2
+t.ClientCapabilities = Module
+TypeRegistryModule.default:register(t.ClientCapabilities)
+local Module1 = {}
+Module1.__index = Module1
 
-function t_2.new(p2)
-	-- upvalues: t_2 (ref)
-	return setmetatable({
-		key = if p2 == nil or p2.key == nil then "" else p2.key,
-		value = if p2 == nil or p2.value == nil then false else p2.value
-	}, t_2)
+function Module1.new(p1) --[[ Line: 480 ]]
+	-- upvalues: Module1 (copy)
+	return (setmetatable({
+		key = if p1 == nil or p1.key == nil then "" else p1.key,
+		value = p1 ~= nil and p1.value ~= nil and p1.value
+	}, Module1))
 end
 
-function t_2:encode()
-	-- upvalues: protoModule (ref)
-	local buff = buffer.create(0)
-	local var50 = 0
+function Module1:encode() --[[ Line: 489 ]]
+	-- upvalues: ProtoModule (copy)
+	local Buf = buffer.create(0)
+	local Count = 0
 	
 	if self.key ~= nil and self.key ~= "" then
-		local var51, var52 = protoModule.writeTag(buff, var50, 1, protoModule.wireTypes.lengthDelimited)
-		var51, var75 = protoModule.writeString(var51, var52, self.key)
-		buff = var51
-		var50 = var52
+		local WriteTagResult, WriteTagResult2 = ProtoModule.writeTag(Buf, Count, 1, ProtoModule.wireTypes.lengthDelimited)
+		Buf, Count = ProtoModule.writeString(WriteTagResult, WriteTagResult2, self.key)
 	end
 	if self.value then
-		local var53, var54 = protoModule.writeTag(buff, var50, 2, protoModule.wireTypes.varint)
-		var53, var77 = protoModule.writeVarInt(var53, var54, if self.value then 1 else 0)
-		buff = var53
-		var50 = var54
+		local WriteTagResult1, WriteTagResult2_1 = ProtoModule.writeTag(Buf, Count, 2, ProtoModule.wireTypes.varint)
+		Buf, Count = ProtoModule.writeVarInt(WriteTagResult1, WriteTagResult2_1, if self.value then 1 else 0)
 	end
-	local buff_1 = buffer.create(var50)
-	buffer.copy(buff_1, 0, buff, 0, var50)
+	local Buf1 = buffer.create(Count)
+	buffer.copy(Buf1, 0, Buf, 0, Count)
 	
-	return buff_1
+	return Buf1
 end
 
-function t_2.decode(p2)
-	-- upvalues: t_2 (ref), protoModule (ref)
-	local var50 = t_2.new()
-	local var51 = 0
-	while var51 < buffer.len(p2) do
-		local _ = nil
-		local var52 = nil
-		local var53, var54, var55 = protoModule.readTag(p2, var51)
-		local var56 = var53
-		var52 = var54
-		var51 = var55
+function Module1.decode(Buf) --[[ Line: 510 ]]
+	-- upvalues: Module1 (copy), ProtoModule (copy)
+	local NewModule = Module1.new()
+	local v2 = 0
+	while v2 < buffer.len(Buf) do
+		local Tag, Tag2
+		Tag, Tag2, v67 = ProtoModule.readTag(Buf, v2)
 		
-		if var52 == protoModule.wireTypes.varint then
-			if var56 == 2 then
-				local _ = nil
-				local var57, var58 = protoModule.readVarInt(p2, var51)
-				var51 = var58
-				var50.value = var57 ~= 0
+		if Tag2 == ProtoModule.wireTypes.varint then
+			if Tag == 2 then
+				local VarInt
+				VarInt, v67 = ProtoModule.readVarInt(Buf, v2)
+				NewModule.value = VarInt ~= 0
 			else
-				local _ = nil
-				local var59, var60 = protoModule.readVarInt(p2, var51)
-				local _ = var59
-				var51 = var60
+				local _
+				_, v67 = ProtoModule.readVarInt(Buf, v2)
 			end
-		end
-		if var52 == protoModule.wireTypes.lengthDelimited then
-			if var56 == 1 then
-				local _ = nil
-				local var61, var62 = protoModule.readBuffer(p2, var51)
-				var51 = var62
-				var50.key = buffer.tostring(var61)
+		elseif Tag2 == ProtoModule.wireTypes.lengthDelimited then
+			if Tag == 1 then
+				local Buffer1
+				Buffer1, v67 = ProtoModule.readBuffer(Buf, v2)
+				NewModule.key = buffer.tostring(Buffer1)
 			else
-				local _ = nil
-				local var63, var64 = protoModule.readVarInt(p2, var51)
-				var51 = var64 + var63
+				local VarInt1, VarInt2 = ProtoModule.readVarInt(Buf, v2)
+				v2 = VarInt2 + VarInt1
 			end
-		elseif var52 == protoModule.wireTypes.i32 then
-			local _ = nil
-			local var65, var66 = protoModule.readFixed32(p2, var51)
-			local _ = var65
-			var51 = var66
-		elseif var52 == protoModule.wireTypes.i64 then
-			local _ = nil
-			local var67, var68 = protoModule.readFixed64(p2, var51)
-			local _ = var67
-			var51 = var68
+		elseif Tag2 == ProtoModule.wireTypes.i32 then
+			local _
+			_, v67 = ProtoModule.readFixed32(Buf, v2)
+		elseif Tag2 == ProtoModule.wireTypes.i64 then
+			local _
+			_, v67 = ProtoModule.readFixed64(Buf, v2)
 		else
-			error("Unsupported wire type: " .. var81)
+			error("Unsupported wire type: " .. Tag2)
 		end
 	end
-	return var50
+	return NewModule
 end
 
-function t_2:jsonEncode()
+function Module1:jsonEncode() --[[ Line: 560 ]]
 	local t = {}
 	
 	if self.key ~= nil and self.key ~= "" then
@@ -388,34 +334,34 @@ function t_2:jsonEncode()
 	return t
 end
 
-function t_2:jsonDecode()
-	-- upvalues: t_2 (ref)
-	local var69 = t_2.new()
+function Module1:jsonDecode() --[[ Line: 576 ]]
+	-- upvalues: Module1 (copy)
+	local NewModule = Module1.new()
 	
 	if self.key ~= nil then
-		var69.key = self.key
+		NewModule.key = self.key
 	end
 	if self.value ~= nil then
-		var69.value = self.value
+		NewModule.value = self.value
 	end
-	return var69
+	return NewModule
 end
 
-t_2.descriptor = {
+Module1.descriptor = {
 	name = "ClientCapabilities_RuntimeFlagValuesEntry",
 	fullName = "roblox.apppageplatform.shared.v1beta1.RuntimeFlagValuesEntry"
 }
-t.ClientCapabilities_RuntimeFlagValuesEntry = t_2
-typeRegistryModule.default:register(t.ClientCapabilities_RuntimeFlagValuesEntry)
+t.ClientCapabilities_RuntimeFlagValuesEntry = Module1
+TypeRegistryModule.default:register(t.ClientCapabilities_RuntimeFlagValuesEntry)
 t.Platform = {
-	fromNumber = function(p3)
-		return if p3 == 0 then "PLATFORM_INVALID" elseif p3 == 1 then "PLATFORM_WEB" elseif p3 == 2 then "PLATFORM_APP" else nil
+	fromNumber = function(p1) --[[ Line: 603 ]]
+		return if p1 == 0 then "PLATFORM_INVALID" elseif p1 == 1 then "PLATFORM_WEB" elseif p1 == 2 then "PLATFORM_APP" else nil
 	end,
-	toNumber = function(p3)
-		return if p3 == "PLATFORM_INVALID" then 0 elseif p3 == "PLATFORM_WEB" then 1 elseif p3 == "PLATFORM_APP" then 2 else p3
+	toNumber = function(p1) --[[ Line: 615 ]]
+		return if p1 == "PLATFORM_INVALID" then 0 elseif p1 == "PLATFORM_WEB" then 1 elseif p1 == "PLATFORM_APP" then 2 else p1
 	end,
-	fromName = function(p3)
-		return if p3 == "PLATFORM_INVALID" then "PLATFORM_INVALID" elseif p3 == "PLATFORM_WEB" then "PLATFORM_WEB" elseif p3 == "PLATFORM_APP" then "PLATFORM_APP" else nil
+	fromName = function(p1) --[[ Line: 627 ]]
+		return if p1 == "PLATFORM_INVALID" then "PLATFORM_INVALID" elseif p1 == "PLATFORM_WEB" then "PLATFORM_WEB" elseif p1 == "PLATFORM_APP" then "PLATFORM_APP" else nil
 	end
 }
 

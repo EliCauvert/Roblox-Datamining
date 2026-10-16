@@ -1,18 +1,18 @@
-﻿local robuxUpsellModule = require(script.Parent.Parent.Models.RobuxUpsell)
-local t = {
-	new = function(p1)
-		return { products = p1 }
+﻿local RobuxUpsellModule = require(script.Parent.Parent.Models.RobuxUpsell)
+local RobuxUpsellSuggestionsModule = {
+	new = function(Products) --[[ Line: 17 ]]
+		return { products = Products }
 	end
 }
 
-function t.fromJson(p1)
-	-- upvalues: robuxUpsellModule (ref), t (ref)
-	local t_1 = {}
+function RobuxUpsellSuggestionsModule.fromJson(p1) --[[ Line: 25 ]]
+	-- upvalues: RobuxUpsellModule (copy), RobuxUpsellSuggestionsModule (copy)
+	local FromJsonResults = {}
 	
-	for i, v in pairs(p1.products) do
-		t_1[i] = robuxUpsellModule.fromJson(v)
+	for i, product in pairs(p1.products) do
+		FromJsonResults[i] = RobuxUpsellModule.fromJson(product)
 	end
-	return t.new(t_1)
+	return RobuxUpsellSuggestionsModule.new(FromJsonResults)
 end
 
-return t
+return RobuxUpsellSuggestionsModule

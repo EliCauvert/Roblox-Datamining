@@ -1,25 +1,25 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local systemScrim = script:FindFirstAncestor("SystemScrim")
-local parent = systemScrim.Parent
-local reactModule = require(parent.React)
-local reactRobloxModule = require(parent.ReactRoblox)
-local systemScrimModule = require(systemScrim.SystemScrim)
-local systemScrimSignalStoreModule = require(systemScrim["data-model"].SystemScrimSignalStore)
+﻿local CoreGui = game:GetService("CoreGui")
+local SystemScrim = script:FindFirstAncestor("SystemScrim")
+local Parent = SystemScrim.Parent
+local ReactModule = require(Parent.React)
+local ReactRobloxModule = require(Parent.ReactRoblox)
+local SystemScrimModule = require(SystemScrim.SystemScrim)
+local SystemScrimSignalStoreModule = require(SystemScrim["data-model"].SystemScrimSignalStore)
 
-return function()
-	-- upvalues: systemScrimSignalStoreModule (ref), coreGuiService (ref), reactModule (ref), systemScrimModule (ref), reactRobloxModule (ref)
-	local var1 = systemScrimSignalStoreModule(false)
-	local systemScrim = Instance.new("ScreenGui")
-	systemScrim.Name = "SystemScrim"
-	systemScrim.DisplayOrder = -2147483648
-	systemScrim.IgnoreGuiInset = true
-	systemScrim.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-	systemScrim.ClipToDeviceSafeArea = false
-	systemScrim.ScreenInsets = Enum.ScreenInsets.None
-	systemScrim.SafeAreaCompatibility = Enum.SafeAreaCompatibility.None
-	systemScrim.Parent = coreGuiService
-	local var2 = reactRobloxModule.createRoot(systemScrim)
-	var2:render(reactModule.createElement(systemScrimModule, { store = var1 }))
+return function() --[[ Line: 13 | Named "renderSystemScrim" ]]
+	-- upvalues: SystemScrimSignalStoreModule (copy), CoreGui (copy), ReactModule (copy), SystemScrimModule (copy), ReactRobloxModule (copy)
+	local SystemScrimSignalStoreModuleResult = SystemScrimSignalStoreModule(false)
+	local SystemScrim = Instance.new("ScreenGui")
+	SystemScrim.Name = "SystemScrim"
+	SystemScrim.DisplayOrder = -2147483648
+	SystemScrim.IgnoreGuiInset = true
+	SystemScrim.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+	SystemScrim.ClipToDeviceSafeArea = false
+	SystemScrim.ScreenInsets = Enum.ScreenInsets.None
+	SystemScrim.SafeAreaCompatibility = Enum.SafeAreaCompatibility.None
+	SystemScrim.Parent = CoreGui
+	local Root = ReactRobloxModule.createRoot(SystemScrim)
+	Root:render((ReactModule.createElement(SystemScrimModule, { store = SystemScrimSignalStoreModuleResult })))
 	
-	return { root = var2, store = var1 }
+	return { root = Root, store = SystemScrimSignalStoreModuleResult }
 end

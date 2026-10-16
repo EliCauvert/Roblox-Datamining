@@ -1,3 +1,3 @@
-﻿return require(script.Parent.Parent.Parent.Rodux).makeActionCreator(script.Name, function(p1)
-	return { promptId = p1 }
+﻿return require(script.Parent.Parent.Parent.Rodux).makeActionCreator(script.Name, function(PromptId) --[[ Line: 10 ]]
+	return { promptId = PromptId }
 end)

@@ -1,46 +1,49 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local dashModule = require(parent.Dash)
-local reactModule = require(parent.React)
-local buttonModule = require(foundation.Components.Button)
-local inputSizeModule = require(foundation.Enums.InputSize)
-local loggerModule = require(foundation.Utility.Logger)
-local _ = require(foundation.Components.Types)
-local viewModule = require(foundation.Components.View)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local MAX_ACTION_COUNT = require(script.Parent.AlertConstants).MAX_ACTION_COUNT
-local t = { testId = "--foundation-alert-actions" }
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local DashModule = require(Parent.Dash)
+local ReactModule = require(Parent.React)
+local ButtonModule = require(Foundation.Components.Button)
+local InputSizeModule = require(Foundation.Enums.InputSize)
+local LoggerModule = require(Foundation.Utility.Logger)
+local _ = require(Foundation.Components.Types)
+local ViewModule = require(Foundation.Components.View)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local MAXACTIONCOUNT = require(script.Parent.AlertConstants).MAX_ACTION_COUNT
+local config = { testId = "--foundation-alert-actions" }
 
-return reactModule.memo(function(p1)
-	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), MAX_ACTION_COUNT (ref), loggerModule (ref), dashModule (ref), inputSizeModule (ref), buttonModule (ref), viewModule (ref), withCommonPropsModule (ref)
-	local var1 = withDefaultsModule(p1, t)
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), MAX_ACTION_COUNT (copy), loggerModule (copy)
-		if var1.actions and MAX_ACTION_COUNT < #var1.actions then
-			loggerModule:warning(`Alert components only support up to {MAX_ACTION_COUNT} actions`)
+return ReactModule.memo(function(p1) --[[ Line: 33 | Named "AlertActions" ]]
+	-- upvalues: WithDefaultsModule (copy), config (copy), ReactModule (copy), MAXACTIONCOUNT (copy), LoggerModule (copy), DashModule (copy), InputSizeModule (copy), ButtonModule (copy), ViewModule (copy), WithCommonPropsModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
+	ReactModule.useEffect(function() --[[ Line: 35 ]]
+		-- upvalues: WithDefaultsModuleResult (copy), MAXACTIONCOUNT (upval), LoggerModule (upval)
+		if WithDefaultsModuleResult.actions and MAXACTIONCOUNT < #WithDefaultsModuleResult.actions then
+			LoggerModule:warning(`Alert components only support up to {MAXACTIONCOUNT} actions`)
 		end
-	end, { var1.actions })
-	local var2 = reactModule.useMemo(function()
-		-- upvalues: var1 (ref), MAX_ACTION_COUNT (copy), dashModule (copy), inputSizeModule (copy), reactModule (copy), buttonModule (copy)
-		if not var1.actions or #var1.actions <= 0 then
+	end, { WithDefaultsModuleResult.actions })
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 41 ]]
+		-- upvalues: WithDefaultsModuleResult (copy), MAXACTIONCOUNT (upval), DashModule (upval), InputSizeModule (upval), ReactModule (upval), ButtonModule (upval)
+		if not WithDefaultsModuleResult.actions or #WithDefaultsModuleResult.actions <= 0 then
 			return nil
 		end
-		local t = {}
+		local Elements = {}
 		
-		for i, v in var1.actions do
-			if MAX_ACTION_COUNT < i then break end
-			t["ActionButton" .. i] = reactModule.createElement(buttonModule, dashModule.join(v, {
-				LayoutOrder = i,
-				size = inputSizeModule.Small,
-				testId = `{var1.testId}--action-{i}`
-			}))
+		for LayoutOrder, action in WithDefaultsModuleResult.actions do
+			if MAXACTIONCOUNT < LayoutOrder then break end
+			Elements["ActionButton" .. LayoutOrder] = ReactModule.createElement(ButtonModule, (DashModule.join(action, {
+				LayoutOrder = LayoutOrder,
+				size = InputSizeModule.Small,
+				testId = `{WithDefaultsModuleResult.testId}--action-{LayoutOrder}`
+			})))
 		end
-		return t
-	end, { var1.actions, var1.testId })
+		return Elements
+	end, {
+		WithDefaultsModuleResult.actions,
+		WithDefaultsModuleResult.testId
+	})
 	
-	return if var2 then reactModule.createElement(viewModule, withCommonPropsModule(var1, {
-		tag = var1.tag or "auto-xy row gap-small",
-		padding = var1.padding
-	}), var2) else nil
+	return if UseMemoResult then ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, {
+		tag = WithDefaultsModuleResult.tag or "auto-xy row gap-small",
+		padding = WithDefaultsModuleResult.padding
+	}), UseMemoResult) else nil
 end)

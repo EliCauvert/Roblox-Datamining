@@ -1,3 +1,3 @@
-﻿local ampUpsellModule = require(script:FindFirstAncestor("GamePlayButton").Parent.AmpUpsell)
+﻿local AmpUpsellModule = require(script:FindFirstAncestor("GamePlayButton").Parent.AmpUpsell)
 
-return game:DefineFastFlag("EnablePlayButtonWizardVPCPrologue", false) and (ampUpsellModule.GetFFlagEnableAmpVPCPrologue() and (ampUpsellModule.GetFFlagEnableReusableVPCPrologue() and ampUpsellModule.GetFFlagEnableAmpWizardVPCNavigationFix()))
+return game:DefineFastFlag("EnablePlayButtonWizardVPCPrologue", false) and (AmpUpsellModule.GetFFlagEnableAmpVPCPrologue() and (AmpUpsellModule.GetFFlagEnableReusableVPCPrologue() and AmpUpsellModule.GetFFlagEnableAmpWizardVPCNavigationFix()))

@@ -1,59 +1,58 @@
-﻿local appDebug = script:FindFirstAncestor("AppDebug")
-local logTreeModule = require(appDebug.LogTree)
-local levels = require(appDebug.Parent.Lumberyak).Logger.Levels
-local t = {
-	[levels.Error] = "pink",
-	[levels.Warning] = "orange",
-	[levels.Info] = "yellow",
-	[levels.Debug] = "cyan",
-	[levels.Trace] = "green"
+﻿local AppDebug = script:FindFirstAncestor("AppDebug")
+local LogTreeModule = require(AppDebug.LogTree)
+local Levels = require(AppDebug.Parent.Lumberyak).Logger.Levels
+local config = {
+	[Levels.Error] = "pink",
+	[Levels.Warning] = "orange",
+	[Levels.Info] = "yellow",
+	[Levels.Debug] = "cyan",
+	[Levels.Trace] = "green"
 }
-local t_1 = {
-	[levels.Error] = 1,
-	[levels.Warning] = 2,
-	[levels.Info] = 3,
-	[levels.Debug] = 4,
-	[levels.Trace] = 5
+local config1 = {
+	[Levels.Error] = 1,
+	[Levels.Warning] = 2,
+	[Levels.Info] = 3,
+	[Levels.Debug] = 4,
+	[Levels.Trace] = 5
 }
 
-local function _(a)
-	-- upvalues: t (ref)
-	local var1 = t[a]
+local function _(p1): string --[[ Line: 28 | Named "maxLevelToGraphvizAttr" ]]
+	-- upvalues: config (copy)
+	local Entry = config[p1]
 	
-	return var1 and string.format(" fillcolor=%s style=filled", var1) or ""
+	return Entry and string.format(" fillcolor=%s style=filled", Entry) or ""
 end
 
-local _ = function(p1)
-	-- upvalues: t_1 (ref)
-	return t_1[p1] or 0
+local _ = function(p1) --[[ Line: 33 | Named "getLevelRank" ]]
+	-- upvalues: config1 (copy)
+	return config1[p1] or 0
 end
 
-local _ = function(a, b)
-	-- upvalues: t_1 (ref)
-	return if (t_1[b] or 0) < (t_1[a] or 0) then a else b
+local _ = function(p1, p2) --[[ Line: 37 | Named "maxLogLevel" ]]
+	-- upvalues: config1 (copy)
+	return (config1[p2] or 0) < (config1[p1] or 0) and p1 or p2
 end
 
-local function dfsGraphviz(p1, p2)
-	-- upvalues: t_1 (ref), t (ref), dfsGraphviz (ref)
-	local var1 = ""
-	local var2 = tostring(p1.name)
+local function dfsGraphviz(p1, p2): string --[[ Line: 41 ]]
+	-- upvalues: config1 (copy), config (copy), dfsGraphviz (copy)
+	local v1 = ""
+	local Text = tostring(p1.name)
 	
-	for i, v in p1.sinks do
-		var2 ..= "\\n(sink: " .. tostring(v.maxLevel) .. ")"
-		local var3 = p2
-		local maxLevel = v.maxLevel
-		p2 = if (t_1[maxLevel] or 0) < (t_1[var3] or 0) then var3 else maxLevel
+	for _, sink in p1.sinks do
+		Text ..= "\\n(sink: " .. tostring(sink.maxLevel) .. ")"
+		local MaxLevel = sink.maxLevel
+		p2 = (config1[MaxLevel] or 0) < (config1[p2] or 0) and p2 or MaxLevel
 	end
-	local var4 = t[p2]
-	var1 ..= string.format("\"%s\" [label=\"%s\"%s];\n", p1.name, var2, if var4 then string.format(" fillcolor=%s style=filled", var4) else "")
+	local Entry = config[p2]
+	local Text1 = v1 .. string.format("\"%s\" [label=\"%s\"%s];\n", p1.name, Text, Entry and string.format(" fillcolor=%s style=filled", Entry) or "")
 	
-	for i_1, v_1 in p1.children do
-		var1 = (var1 .. string.format("\"%s\" -> \"%s\"\n", tostring(i_1.name), p1.name)) .. dfsGraphviz(i_1, p2)
+	for i, _ in p1.children do
+		Text1 = (Text1 .. string.format("\"%s\" -> \"%s\"\n", tostring(i.name), p1.name)) .. dfsGraphviz(i, p2)
 	end
-	return var1
+	return Text1
 end
 
-return function()
-	-- upvalues: logTreeModule (ref), dfsGraphviz (ref)
-	return "digraph {\n" .. dfsGraphviz(logTreeModule.logger("*")) .. "}\n"
+return function(): string --[[ Line: 56 ]]
+	-- upvalues: LogTreeModule (copy), dfsGraphviz (copy)
+	return "digraph {\n" .. dfsGraphviz((LogTreeModule.logger("*"))) .. "}\n"
 end

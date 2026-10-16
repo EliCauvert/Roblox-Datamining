@@ -1,9 +1,9 @@
-﻿local reactModule = require(script:FindFirstAncestor("ReactUtils").Parent.React)
-local useDebounceModule = require(script.Parent.useDebounce)
+﻿local ReactModule = require(script:FindFirstAncestor("ReactUtils").Parent.React)
+local UseDebounceModule = require(script.Parent.useDebounce)
 
-return function(p1, p2)
-	-- upvalues: reactModule (ref), useDebounceModule (ref)
-	local var1, var2 = reactModule.useState(p1)
+return function(p1, p2) --[[ Line: 9 | Named "useDebouncedState" ]]
+	-- upvalues: ReactModule (copy), UseDebounceModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(p1)
 	
-	return useDebounceModule(var1, p2), var2
+	return UseDebounceModule(UseStateResult, p2), UseStateResult2
 end

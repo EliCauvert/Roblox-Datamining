@@ -1,33 +1,32 @@
-﻿local dependenciesModule = require(script:FindFirstAncestor("SocialLibraries").dependencies)
-local roact = dependenciesModule.Roact
-local llama = dependenciesModule.llama
-local UIBlox = dependenciesModule.UIBlox
-local styledTextLabel = UIBlox.App.Text.StyledTextLabel
-local style = UIBlox.Style
-local getTextHeightModule = require(script.Parent.getTextHeight)
+﻿local DependenciesModule = require(script:FindFirstAncestor("SocialLibraries").dependencies)
+local Roact = DependenciesModule.Roact
+local Llama = DependenciesModule.llama
+local UIBlox = DependenciesModule.UIBlox
+local StyledTextLabel = UIBlox.App.Text.StyledTextLabel
+local Style = UIBlox.Style
+local GetTextHeightModule = require(script.Parent.getTextHeight)
 local _ = require(script.Parent.StyleTypes)
-local foundationFontFaceMigration = dependenciesModule.Foundation.Utility.Flags.FoundationFontFaceMigration
-local t = { width = require(script.Parent.Constants).TILE_SIZE }
+local FoundationFontFaceMigration = DependenciesModule.Foundation.Utility.Flags.FoundationFontFaceMigration
+local config = { width = require(script.Parent.Constants).TILE_SIZE }
 
-return function(p1)
-	-- upvalues: llama (ref), t (ref), style (ref), foundationFontFaceMigration (ref), getTextHeightModule (ref), roact (ref), styledTextLabel (ref)
-	local var1 = llama.Dictionary.join(t, p1)
+return function(p1) --[[ Line: 27 ]]
+	-- upvalues: Llama (copy), config (copy), Style (copy), FoundationFontFaceMigration (copy), GetTextHeightModule (copy), Roact (copy), StyledTextLabel (copy)
+	local JoinResult = Llama.Dictionary.join(config, p1)
 	
-	return style.withStyle(function(p2)
-		-- upvalues: foundationFontFaceMigration (copy), getTextHeightModule (copy), var1 (ref), roact (copy), styledTextLabel (copy)
-		local theme = p2.Theme
-		local font = p2.Font
-		local var2 = font.BaseSize * font.CaptionHeader.RelativeSize
+	return Style.withStyle(function(p2) --[[ Line: 30 ]]
+		-- upvalues: FoundationFontFaceMigration (upval), GetTextHeightModule (upval), JoinResult (copy), Roact (upval), StyledTextLabel (upval)
+		local _Font = p2.Font
+		local ScaledBaseSize = _Font.BaseSize * _Font.CaptionHeader.RelativeSize
 		
-		return roact.createElement(styledTextLabel, {
+		return Roact.createElement(StyledTextLabel, {
 			lineHeight = 1,
 			fluidSizing = false,
 			richText = false,
-			layoutOrder = var1.layoutOrder,
-			text = var1.name,
-			fontStyle = font.CaptionHeader,
-			colorStyle = theme.TextEmphasis,
-			size = UDim2.fromOffset(var1.width, if foundationFontFaceMigration then var2 else getTextHeightModule(var1.name, font.CaptionHeader.Font, var2)),
+			layoutOrder = JoinResult.layoutOrder,
+			text = JoinResult.name,
+			fontStyle = _Font.CaptionHeader,
+			colorStyle = p2.Theme.TextEmphasis,
+			size = UDim2.fromOffset(JoinResult.width, if FoundationFontFaceMigration then ScaledBaseSize else GetTextHeightModule(JoinResult.name, _Font.CaptionHeader.Font, ScaledBaseSize)),
 			textTruncate = Enum.TextTruncate.AtEnd,
 			textXAlignment = Enum.TextXAlignment.Left,
 			textYAlignment = Enum.TextYAlignment.Center

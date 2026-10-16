@@ -1,108 +1,108 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local components = script.Parent.Parent.Parent.Components
-local serverScriptsModule = require(components.Scripts.ServerScripts)
-local utilAndTabModule = require(components.UtilAndTab)
-local serverScriptsUpdateSearchFilterModule = require(script.Parent.Parent.Parent.Actions.ServerScriptsUpdateSearchFilter)
-local constantsModule = require(script.Parent.Parent.Parent.Constants)
-local mainRowPadding = constantsModule.GeneralFormatting.MainRowPadding
-local list = { "Active", "Inactive" }
-local mainViewScripts = roactModule.PureComponent:extend("MainViewScripts")
+﻿local CorePackages = game:GetService("CorePackages")
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local Components = script.Parent.Parent.Parent.Components
+local ServerScriptsModule = require(Components.Scripts.ServerScripts)
+local UtilAndTabModule = require(Components.UtilAndTab)
+local ServerScriptsUpdateSearchFilterModule = require(script.Parent.Parent.Parent.Actions.ServerScriptsUpdateSearchFilter)
+local ConstantsModule = require(script.Parent.Parent.Parent.Constants)
+local MainRowPadding = ConstantsModule.GeneralFormatting.MainRowPadding
+local Names = { "Active", "Inactive" }
+local MainViewScripts = RoactModule.PureComponent:extend("MainViewScripts")
 
-function mainViewScripts.init(p1)
-	-- upvalues: roactModule (ref)
-	function p0.onUtilTabHeightChanged(p2)
-		-- upvalues: p1 (ref)
-		p1:setState({ utilTabHeight = p2 })
+function MainViewScripts.init(p1) --[[ Line: 22 ]]
+	-- upvalues: RoactModule (copy)
+	function p1.onUtilTabHeightChanged(UtilTabHeight) --[[ Line: 23 ]]
+		-- upvalues: p1 (copy)
+		p1:setState({ utilTabHeight = UtilTabHeight })
 	end
 	
-	function p0.onCheckboxChanged(p2, p3)
-		-- upvalues: p1 (ref)
+	function p1.onCheckboxChanged(p2, p3) --[[ Line: 29 ]]
+		-- upvalues: p1 (copy)
 		p1.props.dispatchServerScriptsUpdateSearchFilter(nil, { [p2] = p3 })
 	end
 	
-	function p0.onSearchTermChanged(p2)
-		-- upvalues: p1 (ref)
+	function p1.onSearchTermChanged(p2) --[[ Line: 36 ]]
+		-- upvalues: p1 (copy)
 		p1.props.dispatchServerScriptsUpdateSearchFilter(p2, {})
 	end
 	
-	p1.utilRef = roactModule.createRef()
+	p1.utilRef = RoactModule.createRef()
 	p1.state = { utilTabHeight = 0, isClientView = true }
 end
 
-function mainViewScripts.didMount(p1)
+function MainViewScripts.didMount(p1) --[[ Line: 48 ]]
 	p1:setState({ utilTabHeight = p1.utilRef.current.Size.Y.Offset })
 end
 
-function mainViewScripts.didUpdate(p1)
-	local size = p1.utilRef.current.Size
+function MainViewScripts.didUpdate(p1) --[[ Line: 55 ]]
+	local Size = p1.utilRef.current.Size
 	
-	if size.Y.Offset ~= p1.state.utilTabHeight then
-		p1:setState({ utilTabHeight = size.Y.Offset })
+	if Size.Y.Offset ~= p1.state.utilTabHeight then
+		p1:setState({ utilTabHeight = Size.Y.Offset })
 	end
 end
 
-function mainViewScripts.render(p1)
-	-- upvalues: list (ref), roactModule (ref), constantsModule (ref), mainRowPadding (ref), utilAndTabModule (ref), serverScriptsModule (ref)
-	local size = p1.props.size
-	local formFactor = p1.props.formFactor
-	local tabList = p1.props.tabList
-	local serverTypeFilters = p1.props.serverTypeFilters
-	local utilTabHeight = p1.state.utilTabHeight
-	local serverSearchTerm = p1.props.serverSearchTerm
-	local t = {}
+function MainViewScripts.render(p1) --[[ Line: 64 ]]
+	-- upvalues: Names (copy), RoactModule (copy), ConstantsModule (copy), MainRowPadding (copy), UtilAndTabModule (copy), ServerScriptsModule (copy)
+	local Size = p1.props.size
+	local FormFactor = p1.props.formFactor
+	local TabList = p1.props.tabList
+	local ServerTypeFilters = p1.props.serverTypeFilters
+	local UtilTabHeight: number = p1.state.utilTabHeight
+	local ServerSearchTerm = p1.props.serverSearchTerm
+	local OrderedCheckboxState = {}
 	
-	for i, v in ipairs(list) do
-		local var1 = serverTypeFilters[v]
+	for i, name in ipairs(Names) do
+		local ServerTypeFilter = ServerTypeFilters[name]
 		
-		if var1 == nil then
-			var1 = true
+		if ServerTypeFilter == nil then
+			ServerTypeFilter = true
 		end
-		t[i] = { name = v, state = var1 }
+		OrderedCheckboxState[i] = { name = name, state = ServerTypeFilter }
 	end
-	return roactModule.createElement("Frame", {
+	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		LayoutOrder = 3,
-		Size = size,
-		BackgroundColor3 = constantsModule.Color.BaseGray
+		Size = Size,
+		BackgroundColor3 = ConstantsModule.Color.BaseGray
 	}, {
-		UIListLayout = roactModule.createElement("UIListLayout", {
-			Padding = UDim.new(0, mainRowPadding),
+		UIListLayout = RoactModule.createElement("UIListLayout", {
+			Padding = UDim.new(0, MainRowPadding),
 			SortOrder = Enum.SortOrder.LayoutOrder
 		}),
-		UtilAndTab = roactModule.createElement(utilAndTabModule, {
+		UtilAndTab = RoactModule.createElement(UtilAndTabModule, {
 			layoutOrder = 1,
-			windowWidth = size.X.Offset,
-			formFactor = formFactor,
-			tabList = tabList,
-			orderedCheckboxState = t,
-			searchTerm = serverSearchTerm,
+			windowWidth = Size.X.Offset,
+			formFactor = FormFactor,
+			tabList = TabList,
+			orderedCheckboxState = OrderedCheckboxState,
+			searchTerm = ServerSearchTerm,
 			refForParent = p1.utilRef,
 			onHeightChanged = p1.onUtilTabHeightChanged,
 			onCheckboxChanged = p1.onCheckboxChanged,
 			onSearchTermChanged = p1.onSearchTermChanged
 		}),
-		ServerScripts = utilTabHeight > 0 and roactModule.createElement(serverScriptsModule, {
+		ServerScripts = UtilTabHeight > 0 and RoactModule.createElement(ServerScriptsModule, {
 			layoutOrder = 2,
-			size = UDim2.new(1, 0, 1, -utilTabHeight),
-			searchTerm = serverSearchTerm,
-			scriptFilters = serverTypeFilters
+			size = UDim2.new(1, 0, 1, -UtilTabHeight),
+			searchTerm = ServerSearchTerm,
+			scriptFilters = ServerTypeFilters
 		})
 	})
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p2, _)
+return RoactRoduxModule.UNSTABLE_connect2(function(p2, _) --[[ Line: 121 | Named "mapStateToProps" ]]
 	return {
 		serverSearchTerm = p2.ScriptsData.serverSearchTerm,
 		serverTypeFilters = p2.ScriptsData.serverTypeFilters
 	}
-end, function(p2)
-	-- upvalues: serverScriptsUpdateSearchFilterModule (ref)
+end, function(Callback) --[[ Line: 128 | Named "mapDispatchToProps" ]]
+	-- upvalues: ServerScriptsUpdateSearchFilterModule (copy)
 	return {
-		dispatchServerScriptsUpdateSearchFilter = function(p3, p4)
-			-- upvalues: p2 (ref), serverScriptsUpdateSearchFilterModule (copy)
-			p2(serverScriptsUpdateSearchFilterModule(p3, p4))
+		dispatchServerScriptsUpdateSearchFilter = function(p2, p3) --[[ Line: 130 ]]
+			-- upvalues: Callback (copy), ServerScriptsUpdateSearchFilterModule (upval)
+			Callback(ServerScriptsUpdateSearchFilterModule(p2, p3))
 		end
 	}
-end)(mainViewScripts)
+end)(MainViewScripts)

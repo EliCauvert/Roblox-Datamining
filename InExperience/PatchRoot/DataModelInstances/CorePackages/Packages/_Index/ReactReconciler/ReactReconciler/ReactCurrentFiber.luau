@@ -1,57 +1,59 @@
-﻿local parent = script.Parent.Parent
-local dEV = require(parent.ReactGlobals).__DEV__
+﻿local Parent = script.Parent.Parent
+local DEV = require(Parent.ReactGlobals).__DEV__
 local _ = require(script.Parent.ReactInternalTypes)
-local reactSharedInternals = require(parent.Shared).ReactSharedInternals
-local getStackByFiberInDevAndProd = require(script.Parent.ReactFiberComponentStack).getStackByFiberInDevAndProd
-local getComponentName = require(parent.Shared).getComponentName
-local reactDebugCurrentFrame = reactSharedInternals.ReactDebugCurrentFrame
-local t = { current = nil, isRendering = false }
+local GetStackByFiberInDevAndProdFunction = require(script.Parent.ReactFiberComponentStack).getStackByFiberInDevAndProd
+local GetComponentNameFunction = require(Parent.Shared).getComponentName
+local ReactDebugCurrentFrame = require(Parent.Shared).ReactSharedInternals.ReactDebugCurrentFrame
+local ReactCurrentFiberModule = { current = nil, isRendering = false }
 
-function t.getCurrentFiberOwnerNameInDevOrNull()
-	-- upvalues: dEV (ref), t (ref), getComponentName (ref)
-	if dEV then
-		if t.current == nil then
+function ReactCurrentFiberModule.getCurrentFiberOwnerNameInDevOrNull() --[[ Line: 39 ]]
+	-- upvalues: DEV (copy), ReactCurrentFiberModule (copy), GetComponentNameFunction (copy)
+	if DEV then
+		if ReactCurrentFiberModule.current == nil then
 			return nil
 		end
-		local debugOwner = t.current._debugOwner
+		local DebugOwner = ReactCurrentFiberModule.current._debugOwner
 		
-		return if debugOwner then getComponentName(debugOwner.type) else nil
+		if DebugOwner then
+			return GetComponentNameFunction(DebugOwner.type)
+		end
+	end
+	return nil
+end
+
+local function getCurrentFiberStackInDev() --[[ Line: 53 ]]
+	-- upvalues: DEV (copy), ReactCurrentFiberModule (copy), GetStackByFiberInDevAndProdFunction (copy)
+	return if DEV then if ReactCurrentFiberModule.current == nil then "" else GetStackByFiberInDevAndProdFunction(ReactCurrentFiberModule.current) else ""
+end
+
+function ReactCurrentFiberModule.resetCurrentFiber() --[[ Line: 66 ]]
+	-- upvalues: DEV (copy), ReactDebugCurrentFrame (copy), ReactCurrentFiberModule (copy)
+	if DEV then
+		ReactDebugCurrentFrame.getCurrentStack = nil
+		ReactCurrentFiberModule.current = nil
+		ReactCurrentFiberModule.isRendering = false
 	end
 end
 
-local function getCurrentFiberStackInDev()
-	-- upvalues: dEV (ref), t (ref), getStackByFiberInDevAndProd (ref)
-	return if dEV then if t.current == nil then "" else getStackByFiberInDevAndProd(t.current) else ""
-end
-
-function t.resetCurrentFiber()
-	-- upvalues: dEV (ref), reactDebugCurrentFrame (ref), t (ref)
-	if dEV then
-		reactDebugCurrentFrame.getCurrentStack = nil
-		t.current = nil
-		t.isRendering = false
+function ReactCurrentFiberModule.setCurrentFiber(Current) --[[ Line: 75 ]]
+	-- upvalues: DEV (copy), ReactDebugCurrentFrame (copy), getCurrentFiberStackInDev (copy), ReactCurrentFiberModule (copy)
+	if DEV then
+		ReactDebugCurrentFrame.getCurrentStack = getCurrentFiberStackInDev
+		ReactCurrentFiberModule.current = Current
+		ReactCurrentFiberModule.isRendering = false
 	end
 end
 
-function t.setCurrentFiber(p1)
-	-- upvalues: dEV (ref), reactDebugCurrentFrame (ref), getCurrentFiberStackInDev (ref), t (ref)
-	if dEV then
-		reactDebugCurrentFrame.getCurrentStack = getCurrentFiberStackInDev
-		t.current = p1
-		t.isRendering = false
+function ReactCurrentFiberModule.setIsRendering(IsRendering) --[[ Line: 84 ]]
+	-- upvalues: DEV (copy), ReactCurrentFiberModule (copy)
+	if DEV then
+		ReactCurrentFiberModule.isRendering = IsRendering
 	end
 end
 
-function t.setIsRendering(p1)
-	-- upvalues: dEV (ref), t (ref)
-	if dEV then
-		t.isRendering = p1
-	end
+function ReactCurrentFiberModule.getIsRendering() --[[ Line: 90 ]]
+	-- upvalues: DEV (copy), ReactCurrentFiberModule (copy)
+	return if DEV then ReactCurrentFiberModule.isRendering else false
 end
 
-function t.getIsRendering()
-	-- upvalues: dEV (ref), t (ref)
-	return if dEV then t.isRendering else false
-end
-
-return t
+return ReactCurrentFiberModule

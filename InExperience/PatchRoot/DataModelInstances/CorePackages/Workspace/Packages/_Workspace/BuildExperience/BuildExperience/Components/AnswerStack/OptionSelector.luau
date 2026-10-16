@@ -1,59 +1,59 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local text = foundationModule.Text
-local view = foundationModule.View
-local useTokens = foundationModule.Hooks.useTokens
-local t = {
-	affordance = foundationModule.Enums.StateLayerAffordance.None
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local config = {
+	affordance = FoundationModule.Enums.StateLayerAffordance.None
 }
 
-return function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), view (ref), t (ref), text (ref)
-	local var1 = useTokens()
-	local var2 = p1.isSelected == true
-	local selectionStyle = p1.selectionStyle or "committed"
-	local createElement = reactModule.createElement
-	createElement = createElement(view, {
+return function(Frame: Frame) --[[ Line: 24 | Named "OptionSelector" ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), config (copy), Text (copy)
+	local UseTokensResult = UseTokensFunction()
+	local IsIsSelected = Frame.isSelected == true
+	local SelectionStyle = Frame.selectionStyle or "committed"
+	local IsIntermediate: boolean = IsIsSelected and SelectionStyle == "intermediate"
+	local Element = ReactModule.createElement(View, {
 		ZIndex = 3,
-		LayoutOrder = p1.LayoutOrder,
-		onActivated = p1.onActivated,
-		stateLayer = if var2 and selectionStyle == "committed" then t else nil,
-		testId = p1.testId,
-		tag = if var2 and selectionStyle == "intermediate" then "col gap-large size-full-0 auto-y padding-large stroke-standard stroke-contrast radius-large bg-surface-0" else "col gap-large size-full-0 auto-y padding-large stroke-standard stroke-default radius-large bg-surface-0"
+		LayoutOrder = Frame.LayoutOrder,
+		onActivated = Frame.onActivated,
+		stateLayer = if IsIsSelected and SelectionStyle == "committed" then config else nil,
+		testId = Frame.testId,
+		tag = if IsIntermediate then "col gap-large size-full-0 auto-y padding-large stroke-standard stroke-contrast radius-large bg-surface-0" else "col gap-large size-full-0 auto-y padding-large stroke-standard stroke-default radius-large bg-surface-0"
 	}, {
-		Content = reactModule.createElement(view, { LayoutOrder = 1, tag = "col size-full-0 auto-y" }, {
-			Title = reactModule.createElement(text, {
+		Content = ReactModule.createElement(View, { LayoutOrder = 1, tag = "col size-full-0 auto-y" }, {
+			Title = ReactModule.createElement(Text, {
 				LayoutOrder = 1,
 				tag = "size-full-0 auto-y text-title-small text-wrap text-align-x-left content-emphasis",
-				Text = p1.title
+				Text = Frame.title
 			}),
-			Description = reactModule.createElement(text, {
+			Description = ReactModule.createElement(Text, {
 				LayoutOrder = 2,
 				tag = "size-full-0 auto-y text-body-small text-wrap text-align-x-left content-default",
-				Text = p1.description
+				Text = Frame.description
 			})
 		})
 	})
 	
-	return if var2 and selectionStyle == "committed" then reactModule.createElement(view, {
+	return if IsIsSelected and SelectionStyle == "committed" then ReactModule.createElement(View, {
 		tag = "col size-full-0 auto-y",
-		LayoutOrder = p1.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		Card = reactModule.cloneElement(createElement, { LayoutOrder = 1 }),
-		StackLayers = reactModule.createElement(view, { LayoutOrder = 2, tag = "size-full-400", ZIndex = 1 }, {
-			FirstLayer = reactModule.createElement(view, {
+		Card = ReactModule.cloneElement(Element, { LayoutOrder = 1 }),
+		StackLayers = ReactModule.createElement(View, { LayoutOrder = 2, tag = "size-full-400", ZIndex = 1 }, {
+			FirstLayer = ReactModule.createElement(View, {
 				tag = "stroke-standard stroke-default radius-medium bg-surface-0",
 				ZIndex = 2,
-				Position = UDim2.new(0, var1.Size.Size_400, 0, -var1.Size.Size_200),
-				Size = UDim2.new(1, -2 * var1.Size.Size_400, 0, var1.Size.Size_400)
+				Position = UDim2.new(0, UseTokensResult.Size.Size_400, 0, -UseTokensResult.Size.Size_200),
+				Size = UDim2.new(1, -2 * UseTokensResult.Size.Size_400, 0, UseTokensResult.Size.Size_400)
 			}),
-			SecondLayer = reactModule.createElement(view, {
+			SecondLayer = ReactModule.createElement(View, {
 				tag = "stroke-standard stroke-default radius-medium bg-surface-0",
 				ZIndex = 1,
-				Position = UDim2.new(0, var1.Size.Size_800, 0, 0),
-				Size = UDim2.new(1, -2 * var1.Size.Size_800, 0, var1.Size.Size_400)
+				Position = UDim2.new(0, UseTokensResult.Size.Size_800, 0, 0),
+				Size = UDim2.new(1, -2 * UseTokensResult.Size.Size_800, 0, UseTokensResult.Size.Size_400)
 			})
 		})
-	}) else createElement
+	}) else Element
 end

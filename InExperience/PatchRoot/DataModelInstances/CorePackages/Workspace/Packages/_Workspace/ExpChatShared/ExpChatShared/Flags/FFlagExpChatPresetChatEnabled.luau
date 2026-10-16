@@ -1,21 +1,21 @@
-﻿local userInputService = game:GetService("UserInputService")
-local fFlagExpChatPresetChatVREnabledModule = require(script.Parent.FFlagExpChatPresetChatVREnabled)
+﻿local UserInputService = game:GetService("UserInputService")
+local FFlagExpChatPresetChatVREnabledModule = require(script.Parent.FFlagExpChatPresetChatVREnabled)
 
-local function _()
-	-- upvalues: userInputService (ref), fFlagExpChatPresetChatVREnabledModule (ref)
-	return if userInputService.VREnabled then fFlagExpChatPresetChatVREnabledModule else true
+local function _() --[[ Line: 5 | Named "isSupportedPlatform" ]]
+	-- upvalues: UserInputService (copy), FFlagExpChatPresetChatVREnabledModule (copy)
+	return not UserInputService.VREnabled or FFlagExpChatPresetChatVREnabledModule
 end
 
-local expChatPresetChatEnabled10 = game:DefineFastFlag("ExpChatPresetChatEnabled10", false)
+local ExpChatPresetChatEnabled10 = game:DefineFastFlag("ExpChatPresetChatEnabled10", false)
 
-if expChatPresetChatEnabled10 then
-	expChatPresetChatEnabled10 = game:GetEngineFeature("TextChatPresetsEnabled")
+if ExpChatPresetChatEnabled10 then
+	ExpChatPresetChatEnabled10 = game:GetEngineFeature("TextChatPresetsEnabled")
 	
-	if expChatPresetChatEnabled10 then
-		if userInputService.VREnabled then
-			return fFlagExpChatPresetChatVREnabledModule
+	if ExpChatPresetChatEnabled10 then
+		if UserInputService.VREnabled then
+			return FFlagExpChatPresetChatVREnabledModule
 		end
-		expChatPresetChatEnabled10 = true
+		ExpChatPresetChatEnabled10 = true
 	end
 end
-return expChatPresetChatEnabled10
+return ExpChatPresetChatEnabled10

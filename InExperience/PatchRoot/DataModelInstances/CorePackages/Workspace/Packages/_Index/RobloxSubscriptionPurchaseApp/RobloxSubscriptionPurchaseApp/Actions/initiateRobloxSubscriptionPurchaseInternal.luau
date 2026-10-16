@@ -1,73 +1,90 @@
-﻿local robloxSubscriptionPurchaseApp = script:FindFirstAncestor("RobloxSubscriptionPurchaseApp")
-local parent = robloxSubscriptionPurchaseApp.Parent
-local promiseModule = require(parent.Promise)
-local robloxSubscriptionStoreModule = require(robloxSubscriptionPurchaseApp.Store.RobloxSubscriptionStore)
-local promptStateModule = require(robloxSubscriptionPurchaseApp.Enums.PromptState)
-local _ = require(robloxSubscriptionPurchaseApp.types)
-local _ = require(robloxSubscriptionPurchaseApp.Models.GetRobloxSubscriptionProductsModel)
-local createPaymentSessionModule = require(robloxSubscriptionPurchaseApp.Network.createPaymentSession)
-local getRobloxSubscriptionProductsModule = require(robloxSubscriptionPurchaseApp.Network.getRobloxSubscriptionProducts)
-local getRobloxSubscriptionProductsDirectModule = require(robloxSubscriptionPurchaseApp.Network.getRobloxSubscriptionProductsDirect)
-local fFlagRobloxSubscriptionProductsDirectFetchModule = require(robloxSubscriptionPurchaseApp.Flags.FFlagRobloxSubscriptionProductsDirectFetch)
-local getAmpFeatureAccessModule = require(robloxSubscriptionPurchaseApp.Network.getAmpFeatureAccess)
-local logRobloxSubscriptionUpsellCounterModule = require(robloxSubscriptionPurchaseApp.Utils.logRobloxSubscriptionUpsellCounter)
-local logSubscriptionPurchaseFlowEventModule = require(robloxSubscriptionPurchaseApp.Utils.logSubscriptionPurchaseFlowEvent)
-local fFlagEnableSubscriptionPurchaseFlowEventIngestModule = require(robloxSubscriptionPurchaseApp.Flags.FFlagEnableSubscriptionPurchaseFlowEventIngest)
-local robloxSubscriptionUpsellTelemetryModule = require(robloxSubscriptionPurchaseApp.Events.RobloxSubscriptionUpsellTelemetry)
-local transitionToErrorModule = require(robloxSubscriptionPurchaseApp.Actions.transitionToError)
-local fFlagRobloxPlusAmpSubscriptionCheckModule = require(robloxSubscriptionPurchaseApp.Flags.FFlagRobloxPlusAmpSubscriptionCheck)
-local fFlagEnablePlusReferralLandingSheet = require(parent.SharedFlags).FFlagEnablePlusReferralLandingSheet
-local errorReasonModule = require(robloxSubscriptionPurchaseApp.Enums.ErrorReason)
-local ampAccessResponseModule = require(robloxSubscriptionPurchaseApp.Enums.AmpAccessResponse)
-local getAppFeaturePolicies = require(parent.UniversalAppPolicy).getAppFeaturePolicies
+﻿local RobloxSubscriptionPurchaseApp = script:FindFirstAncestor("RobloxSubscriptionPurchaseApp")
+local Parent = RobloxSubscriptionPurchaseApp.Parent
+local PromiseModule = require(Parent.Promise)
+local RobloxSubscriptionStoreModule = require(RobloxSubscriptionPurchaseApp.Store.RobloxSubscriptionStore)
+local PromptStateModule = require(RobloxSubscriptionPurchaseApp.Enums.PromptState)
+local _ = require(RobloxSubscriptionPurchaseApp.types)
+local _ = require(RobloxSubscriptionPurchaseApp.Models.GetRobloxSubscriptionProductsModel)
+local CreatePaymentSessionModule = require(RobloxSubscriptionPurchaseApp.Network.createPaymentSession)
+local GetRobloxSubscriptionProductsModule = require(RobloxSubscriptionPurchaseApp.Network.getRobloxSubscriptionProducts)
+local GetRobloxSubscriptionProductsDirectModule = require(RobloxSubscriptionPurchaseApp.Network.getRobloxSubscriptionProductsDirect)
+local FFlagRobloxSubscriptionProductsDirectFetchModule = require(RobloxSubscriptionPurchaseApp.Flags.FFlagRobloxSubscriptionProductsDirectFetch)
+local GetAmpFeatureAccessModule = require(RobloxSubscriptionPurchaseApp.Network.getAmpFeatureAccess)
+local LogRobloxSubscriptionUpsellCounterModule = require(RobloxSubscriptionPurchaseApp.Utils.logRobloxSubscriptionUpsellCounter)
+local LogSubscriptionPurchaseFlowEventModule = require(RobloxSubscriptionPurchaseApp.Utils.logSubscriptionPurchaseFlowEvent)
+local FFlagEnableSubscriptionPurchaseFlowEventIngestModule = require(RobloxSubscriptionPurchaseApp.Flags.FFlagEnableSubscriptionPurchaseFlowEventIngest)
+local RobloxSubscriptionUpsellTelemetryModule = require(RobloxSubscriptionPurchaseApp.Events.RobloxSubscriptionUpsellTelemetry)
+local TransitionToErrorModule = require(RobloxSubscriptionPurchaseApp.Actions.transitionToError)
+local FFlagRobloxPlusAmpSubscriptionCheckModule = require(RobloxSubscriptionPurchaseApp.Flags.FFlagRobloxPlusAmpSubscriptionCheck)
+local FFlagEnablePlusReferralLandingSheet = require(Parent.SharedFlags).FFlagEnablePlusReferralLandingSheet
+local FetchReferralEligibilityModule = require(RobloxSubscriptionPurchaseApp.Network.fetchReferralEligibility)
+local ErrorReasonModule = require(RobloxSubscriptionPurchaseApp.Enums.ErrorReason)
+local AmpAccessResponseModule = require(RobloxSubscriptionPurchaseApp.Enums.AmpAccessResponse)
+local GetAppFeaturePoliciesFunction = require(Parent.UniversalAppPolicy).getAppFeaturePolicies
+local config = {
+	[require(RobloxSubscriptionPurchaseApp.Enums.ReferralIneligibilityReason).RecipientSelfReferral] = ErrorReasonModule.ReferralSelfReferral
+}
 
-function initiateRobloxSubscriptionPurchaseInternal(p1)
-	-- upvalues: logRobloxSubscriptionUpsellCounterModule (ref), robloxSubscriptionUpsellTelemetryModule (ref), robloxSubscriptionStoreModule (ref), getAppFeaturePolicies (ref), transitionToErrorModule (ref), errorReasonModule (ref), promptStateModule (ref), fFlagEnableSubscriptionPurchaseFlowEventIngestModule (ref), logSubscriptionPurchaseFlowEventModule (ref), createPaymentSessionModule (ref), fFlagEnablePlusReferralLandingSheet (ref), fFlagRobloxSubscriptionProductsDirectFetchModule (ref), getRobloxSubscriptionProductsDirectModule (ref), getRobloxSubscriptionProductsModule (ref), fFlagRobloxPlusAmpSubscriptionCheckModule (ref), getAmpFeatureAccessModule (ref), promiseModule (ref), ampAccessResponseModule (ref)
-	logRobloxSubscriptionUpsellCounterModule(robloxSubscriptionUpsellTelemetryModule.RobloxSubscriptionUpsellModalInitiatedCounter)
-	local var1 = robloxSubscriptionStoreModule.get()
-	local purchaseUIOptions = var1.getPurchaseUIOptions()
+function initiateRobloxSubscriptionPurchaseInternal(p1) --[[ Line: 42 ]]
+	-- upvalues: LogRobloxSubscriptionUpsellCounterModule (copy), RobloxSubscriptionUpsellTelemetryModule (copy), RobloxSubscriptionStoreModule (copy), GetAppFeaturePoliciesFunction (copy), TransitionToErrorModule (copy), ErrorReasonModule (copy), PromptStateModule (copy), FFlagEnableSubscriptionPurchaseFlowEventIngestModule (copy), LogSubscriptionPurchaseFlowEventModule (copy), CreatePaymentSessionModule (copy), FFlagEnablePlusReferralLandingSheet (copy), FFlagRobloxSubscriptionProductsDirectFetchModule (copy), GetRobloxSubscriptionProductsDirectModule (copy), GetRobloxSubscriptionProductsModule (copy), FFlagRobloxPlusAmpSubscriptionCheckModule (copy), GetAmpFeatureAccessModule (copy), FetchReferralEligibilityModule (copy), PromiseModule (copy), AmpAccessResponseModule (copy), config (copy)
+	LogRobloxSubscriptionUpsellCounterModule(RobloxSubscriptionUpsellTelemetryModule.RobloxSubscriptionUpsellModalInitiatedCounter)
+	local GetResult = RobloxSubscriptionStoreModule.get()
+	local PurchaseUIOptions = GetResult.getPurchaseUIOptions()
 	
-	if if not (purchaseUIOptions == nil or not purchaseUIOptions.skipGuacPolicy) then false else getAppFeaturePolicies().getDisableBlackbirdEntrypoints() then
-		transitionToErrorModule(errorReasonModule.UnsupportedPlatform, "initiateRobloxSubscriptionPurchaseInternal")
+	if (PurchaseUIOptions == nil or not PurchaseUIOptions.skipGuacPolicy) and GetAppFeaturePoliciesFunction().getDisableBlackbirdEntrypoints() then
+		TransitionToErrorModule(ErrorReasonModule.UnsupportedPlatform, "initiateRobloxSubscriptionPurchaseInternal")
 		
 		return
 	end
-	var1.setPromptState(promptStateModule.SubscriptionPurchaseRequested)
+	GetResult.setPromptState(PromptStateModule.SubscriptionPurchaseRequested)
 	
-	if fFlagEnableSubscriptionPurchaseFlowEventIngestModule then
-		logSubscriptionPurchaseFlowEventModule("SubscriptionUpsellModalOpen")
+	if FFlagEnableSubscriptionPurchaseFlowEventIngestModule then
+		LogSubscriptionPurchaseFlowEventModule("SubscriptionUpsellModalOpen")
 	end
-	local list = {
-		createPaymentSessionModule(p1),
-		if fFlagRobloxSubscriptionProductsDirectFetchModule then getRobloxSubscriptionProductsDirectModule(if fFlagEnablePlusReferralLandingSheet then var1.getReferrerId() else nil) else getRobloxSubscriptionProductsModule()
+	local ReferrerId = if FFlagEnablePlusReferralLandingSheet then GetResult.getReferrerId() else nil
+	local ReferrerId1 = if ReferrerId and ReferrerId > 0 then ReferrerId else nil
+	local List = {
+		CreatePaymentSessionModule(p1),
+		if FFlagRobloxSubscriptionProductsDirectFetchModule then GetRobloxSubscriptionProductsDirectModule(ReferrerId1) else GetRobloxSubscriptionProductsModule()
 	}
 	
-	if fFlagRobloxPlusAmpSubscriptionCheckModule then
-		table.insert(list, getAmpFeatureAccessModule())
+	if FFlagRobloxPlusAmpSubscriptionCheckModule then
+		table.insert(List, GetAmpFeatureAccessModule())
 	end
-	promiseModule.all(list):andThen(function(p2)
-		-- upvalues: fFlagRobloxPlusAmpSubscriptionCheckModule (copy), ampAccessResponseModule (copy), transitionToErrorModule (copy), errorReasonModule (copy), var1 (ref), promptStateModule (copy)
-		local var2 = p2[1]
-		local var3 = p2[2]
+	if FFlagEnablePlusReferralLandingSheet and ReferrerId1 then
+		table.insert(List, FetchReferralEligibilityModule(ReferrerId1))
+	end
+	PromiseModule.all(List):andThen(function(Entry) --[[ Line: 83 ]]
+		-- upvalues: FFlagRobloxPlusAmpSubscriptionCheckModule (upval), AmpAccessResponseModule (upval), TransitionToErrorModule (upval), ErrorReasonModule (upval), FFlagEnablePlusReferralLandingSheet (upval), ReferrerId1 (copy), config (upval), GetResult (copy), PromptStateModule (upval)
+		local Entry1 = Entry[1]
+		local Entry2 = Entry[2]
 		
-		if fFlagRobloxPlusAmpSubscriptionCheckModule and p2[3] == ampAccessResponseModule.Granted then
-			transitionToErrorModule(errorReasonModule.AlreadySubscribed, "initiateRobloxSubscriptionPurchaseInternal")
+		if FFlagRobloxPlusAmpSubscriptionCheckModule and Entry[3] == AmpAccessResponseModule.Granted then
+			TransitionToErrorModule(ErrorReasonModule.AlreadySubscribed, "initiateRobloxSubscriptionPurchaseInternal")
 			
 			return
 		end
-		var1.setPaymentSessionId(var2)
+		if FFlagEnablePlusReferralLandingSheet and ReferrerId1 then
+			local Entry3 = Entry[if FFlagRobloxPlusAmpSubscriptionCheckModule then 4 else 3]
+			
+			if not Entry3.eligible then
+				TransitionToErrorModule(config[Entry3.reason] or ErrorReasonModule.ReferralIneligible, "initiateRobloxSubscriptionPurchaseInternal")
+				
+				return
+			end
+		end
+		GetResult.setPaymentSessionId(Entry1)
 		
-		if #var3 > 0 then
-			var1.setRobloxSubscriptionProduct(var3[1])
-		else
-			transitionToErrorModule(errorReasonModule.AlreadySubscribed, "initiateRobloxSubscriptionPurchaseInternal")
+		if #Entry2 <= 0 then
+			TransitionToErrorModule(ErrorReasonModule.AlreadySubscribed, "initiateRobloxSubscriptionPurchaseInternal")
 			
 			return
 		end
-		var1.setPromptState(promptStateModule.SubscriptionPurchaseUIReady)
-	end, function(_)
-		-- upvalues: transitionToErrorModule (copy), errorReasonModule (copy)
-		transitionToErrorModule(errorReasonModule.GenericError, "initiateRobloxSubscriptionPurchaseInternal")
+		GetResult.setRobloxSubscriptionProduct(Entry2[1])
+		GetResult.setPromptState(PromptStateModule.SubscriptionPurchaseUIReady)
+	end, function(_) --[[ Line: 120 ]]
+		-- upvalues: TransitionToErrorModule (upval), ErrorReasonModule (upval)
+		TransitionToErrorModule(ErrorReasonModule.GenericError, "initiateRobloxSubscriptionPurchaseInternal")
 	end)
 end
 

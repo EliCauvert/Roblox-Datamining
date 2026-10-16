@@ -1,75 +1,54 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local reactModule = require(buildExperience.Parent.React)
-local chatTypesModule = require(buildExperience.Chat.chatTypes)
-local adCampaignEligibilityToolModule = require(buildExperience.Chat.adCampaignEligibilityTool)
-local fFlagBuildAgentAdCampaignCardModule = require(buildExperience.Flags.FFlagBuildAgentAdCampaignCard)
-local fFlagBuildExperienceSinglePlaytestCardModule = require(buildExperience.Flags.FFlagBuildExperienceSinglePlaytestCard)
-local chatTurnBlockModule = require(script.Parent.ChatTurnBlock)
-local chatUserMessageModule = require(script.Parent.ChatUserMessage)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local ReactModule = require(BuildExperience.Parent.React)
+local ChatTypesModule = require(BuildExperience.Chat.chatTypes)
+local AdCampaignEligibilityToolModule = require(BuildExperience.Chat.adCampaignEligibilityTool)
+local FFlagBuildAgentAdCampaignCardModule = require(BuildExperience.Flags.FFlagBuildAgentAdCampaignCard)
+local FFlagBuildExperienceSinglePlaytestCardModule = require(BuildExperience.Flags.FFlagBuildExperienceSinglePlaytestCard)
+local ChatTurnBlockModule = require(script.Parent.ChatTurnBlock)
+local ChatUserMessageModule = require(script.Parent.ChatUserMessage)
 
-local function ChatMessageItem(p1)
-	-- upvalues: reactModule (ref), chatUserMessageModule (ref), chatTurnBlockModule (ref), fFlagBuildAgentAdCampaignCardModule (ref)
-	local message = p1.message
+local function areUserImagesEqual(Images, Images1): boolean --[[ Line: 58 ]]
+	local Images2 = Images or {}
+	local Images1_1 = Images1 or {}
 	
-	return if message.kind == "user_message" then reactModule.createElement(chatUserMessageModule, { message = message, LayoutOrder = p1.LayoutOrder }) else reactModule.createElement(chatTurnBlockModule, {
-		turn = message,
-		LayoutOrder = p1.LayoutOrder,
-		clockBinding = p1.clockBinding,
-		localToolActions = p1.localToolActions,
-		onPlaytest = p1.onPlaytest,
-		isPlaytestLoading = p1.isPlaytestLoading,
-		onAgentAdCampaignOfferSelected = if fFlagBuildAgentAdCampaignCardModule then p1.onAgentAdCampaignOfferSelected else nil,
-		isPageVisible = p1.isPageVisible,
-		scrollingFrameRef = p1.scrollingFrameRef,
-		isAgentAdCampaignCreateDisabled = p1.isAgentAdCampaignCreateDisabled,
-		getAgentAdCampaignCardState = if fFlagBuildAgentAdCampaignCardModule then p1.getAgentAdCampaignCardState else nil,
-		onAgentAdCampaignActive = if fFlagBuildAgentAdCampaignCardModule then p1.onAgentAdCampaignActive else nil
-	})
-end
-
-local function areUserImagesEqual(p1, p2)
-	p1 = p1 or {}
-	p2 = p2 or {}
-	
-	if #p1 ~= #p2 then
+	if #Images2 ~= #Images1_1 then
 		return false
 	end
-	for i, v in p1 do
-		local var1 = p2[i]
+	for i, value in Images2 do
+		local Image = Images1_1[i]
 		
-		if var1 == nil or v.capture ~= var1.capture or v.uri ~= var1.uri then
+		if Image == nil or value.capture ~= Image.capture or value.uri ~= Image.uri then
 			return false
 		end
 	end
 	return true
 end
 
-local function areResourceAttachmentsEqual(p3, p4)
-	-- upvalues: chatTypesModule (ref)
-	p3 = p3 or {}
-	p4 = p4 or {}
+local function areResourceAttachmentsEqual(ResourceAttachments, ResourceAttachments1): boolean --[[ Line: 73 ]]
+	-- upvalues: ChatTypesModule (copy)
+	local ResourceAttachments2 = ResourceAttachments or {}
+	local ResourceAttachments1_1 = ResourceAttachments1 or {}
 	
-	if #p3 ~= #p4 then
+	if #ResourceAttachments2 ~= #ResourceAttachments1_1 then
 		return false
 	end
-	for i, v in p3 do
-		local var2 = p4[i]
+	for i, value in ResourceAttachments2 do
+		local ResourceAttachment = ResourceAttachments1_1[i]
 		
-		if var2 ~= nil and v.type == var2.type and chatTypesModule.getResourceAttachmentUri(v) == chatTypesModule.getResourceAttachmentUri(var2) then
-			if v.type == "resource_link" and var2.type == "resource_link" and v.name ~= var2.name then
-				return false
-			end
+		if ResourceAttachment == nil or value.type ~= ResourceAttachment.type or ChatTypesModule.getResourceAttachmentUri(value) ~= ChatTypesModule.getResourceAttachmentUri(ResourceAttachment) then
+			return false
+		elseif value.type == "resource_link" and ResourceAttachment.type == "resource_link" and value.name ~= ResourceAttachment.name then
+			return false
 		end
-		return false
 	end
 	return true
 end
 
-local function hasCampaignCard(p5)
-	-- upvalues: adCampaignEligibilityToolModule (ref)
-	if p5.turnState ~= nil and p5.turnState.toolCalls ~= nil then
-		for i, v in p5.turnState.toolCalls do
-			if adCampaignEligibilityToolModule.isCompletedEligibilityToolCall(v) then
+local function hasCampaignCard(Message): boolean --[[ Line: 104 ]]
+	-- upvalues: AdCampaignEligibilityToolModule (copy)
+	if Message.turnState ~= nil and Message.turnState.toolCalls ~= nil then
+		for _, toolCall in Message.turnState.toolCalls do
+			if AdCampaignEligibilityToolModule.isCompletedEligibilityToolCall(toolCall) then
 				return true
 			end
 		end
@@ -77,10 +56,47 @@ local function hasCampaignCard(p5)
 	return false
 end
 
-return reactModule.memo(ChatMessageItem, function(p6, p7)
-	-- upvalues: areUserImagesEqual (ref), areResourceAttachmentsEqual (ref), fFlagBuildAgentAdCampaignCardModule (ref), hasCampaignCard (ref), fFlagBuildExperienceSinglePlaytestCardModule (ref)
-	local message = p6.message
-	local message_1 = p7.message
+return ReactModule.memo(function(Frame: Frame) --[[ Line: 30 | Named "ChatMessageItem" ]]
+	-- upvalues: ReactModule (copy), ChatUserMessageModule (copy), ChatTurnBlockModule (copy), FFlagBuildAgentAdCampaignCardModule (copy)
+	local Message = Frame.message
 	
-	return if message.id == nil or message.id ~= message_1.id then false else message.kind == message_1.kind and (p6.LayoutOrder == p7.LayoutOrder and (if message_1.kind == "user_message" then message.text == message_1.text and (areUserImagesEqual(message.images, message_1.images) and areResourceAttachmentsEqual(message.resourceAttachments, message_1.resourceAttachments)) else p6.isPlaytestLoading == p7.isPlaytestLoading and (if fFlagBuildAgentAdCampaignCardModule and (hasCampaignCard(message) or hasCampaignCard(message_1)) and (p6.onAgentAdCampaignOfferSelected ~= p7.onAgentAdCampaignOfferSelected or p6.getAgentAdCampaignCardState ~= p7.getAgentAdCampaignCardState or (p6.onAgentAdCampaignActive ~= p7.onAgentAdCampaignActive or p6.isPageVisible ~= p7.isPageVisible) or (p6.scrollingFrameRef ~= p7.scrollingFrameRef or p6.isAgentAdCampaignCreateDisabled ~= p7.isAgentAdCampaignCreateDisabled)) then false elseif fFlagBuildExperienceSinglePlaytestCardModule and message.isLatestPublishTurn ~= message_1.isLatestPublishTurn then false else message.isDone == true and message_1.isDone == true)))
+	return if Message.kind == "user_message" then ReactModule.createElement(ChatUserMessageModule, { message = Message, LayoutOrder = Frame.LayoutOrder }) else ReactModule.createElement(ChatTurnBlockModule, {
+		turn = Message,
+		LayoutOrder = Frame.LayoutOrder,
+		clockBinding = Frame.clockBinding,
+		localToolActions = Frame.localToolActions,
+		onPlaytest = Frame.onPlaytest,
+		onPublish = Frame.onPublish,
+		isPlaytestLoading = Frame.isPlaytestLoading,
+		onAgentAdCampaignOfferSelected = if FFlagBuildAgentAdCampaignCardModule then Frame.onAgentAdCampaignOfferSelected else nil,
+		isPageVisible = Frame.isPageVisible,
+		scrollingFrameRef = Frame.scrollingFrameRef,
+		isAgentAdCampaignCreateDisabled = Frame.isAgentAdCampaignCreateDisabled,
+		getAgentAdCampaignCardState = if FFlagBuildAgentAdCampaignCardModule then Frame.getAgentAdCampaignCardState else nil,
+		onAgentAdCampaignActive = if FFlagBuildAgentAdCampaignCardModule then Frame.onAgentAdCampaignActive else nil
+	})
+end, function(Frame, Frame1) --[[ Line: 115 | Named "arePropsEqual" ]]
+	-- upvalues: areUserImagesEqual (copy), areResourceAttachmentsEqual (copy), FFlagBuildAgentAdCampaignCardModule (copy), hasCampaignCard (copy), FFlagBuildExperienceSinglePlaytestCardModule (copy)
+	local Message = Frame.message
+	local Message1 = Frame1.message
+	
+	if Message.id == nil or Message.id ~= Message1.id then
+		return false
+	elseif Message.kind ~= Message1.kind then
+		return false
+	elseif Frame.LayoutOrder ~= Frame1.LayoutOrder then
+		return false
+	elseif Message1.kind == "user_message" then
+		return Message.text == Message1.text and (areUserImagesEqual(Message.images, Message1.images) and areResourceAttachmentsEqual(Message.resourceAttachments, Message1.resourceAttachments))
+	elseif Frame.isPlaytestLoading ~= Frame1.isPlaytestLoading then
+		return false
+	elseif FFlagBuildAgentAdCampaignCardModule and (hasCampaignCard(Message) or hasCampaignCard(Message1)) and (Frame.onAgentAdCampaignOfferSelected ~= Frame1.onAgentAdCampaignOfferSelected or Frame.getAgentAdCampaignCardState ~= Frame1.getAgentAdCampaignCardState or Frame.onAgentAdCampaignActive ~= Frame1.onAgentAdCampaignActive or Frame.isPageVisible ~= Frame1.isPageVisible or Frame.scrollingFrameRef ~= Frame1.scrollingFrameRef or Frame.isAgentAdCampaignCreateDisabled ~= Frame1.isAgentAdCampaignCreateDisabled) then
+		return false
+	elseif FFlagBuildExperienceSinglePlaytestCardModule and Message.isLatestPublishTurn ~= Message1.isLatestPublishTurn then
+		return false
+	else
+		local IsIsDone = Message1.isDone == true
+		
+		return Message.isDone == true and IsIsDone
+	end
 end)

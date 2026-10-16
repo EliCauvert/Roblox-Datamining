@@ -1,21 +1,21 @@
-﻿local userInputService = game:GetService("UserInputService")
-local reactModule = require(script:FindFirstAncestor("BuildExperience").Parent.React)
+﻿local UserInputService = game:GetService("UserInputService")
+local ReactModule = require(script:FindFirstAncestor("BuildExperience").Parent.React)
 
-return function()
-	-- upvalues: reactModule (ref), userInputService (ref)
-	local var1, var2 = reactModule.useState(userInputService.OnScreenKeyboardVisible)
-	reactModule.useEffect(function()
-		-- upvalues: userInputService (copy), var2 (ref)
-		local var3 = userInputService:GetPropertyChangedSignal("OnScreenKeyboardVisible"):Connect(function()
-			-- upvalues: var2 (copy), userInputService (copy)
-			var2(userInputService.OnScreenKeyboardVisible)
+return function() --[[ Line: 5 | Named "useOnScreenKeyboardVisible" ]]
+	-- upvalues: ReactModule (copy), UserInputService (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(UserInputService.OnScreenKeyboardVisible)
+	ReactModule.useEffect(function() --[[ Line: 8 ]]
+		-- upvalues: UserInputService (upval), UseStateResult2 (copy)
+		local Connection = UserInputService:GetPropertyChangedSignal("OnScreenKeyboardVisible"):Connect(function() --[[ Line: 9 ]]
+			-- upvalues: UseStateResult2 (upval), UserInputService (upval)
+			UseStateResult2(UserInputService.OnScreenKeyboardVisible)
 		end)
 		
-		return function()
-			-- upvalues: var3 (ref)
-			var3:Disconnect()
+		return function() --[[ Line: 13 ]]
+			-- upvalues: Connection (copy)
+			Connection:Disconnect()
 		end
 	end, {})
 	
-	return var1
+	return UseStateResult
 end

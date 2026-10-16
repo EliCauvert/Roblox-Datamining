@@ -1,9 +1,9 @@
-﻿return function()
-	local gameId = game.GameId
-	local placeId = game.PlaceId
+﻿return function() --[[ Line: 9 | Named "getCurrentExperienceProject" ]]
+	local GameId = game.GameId
+	local PlaceId = game.PlaceId
 	
 	return {
-		universeId = if gameId == 0 then nil else gameId,
-		placeId = if placeId == 0 then nil else placeId
+		universeId = if GameId == 0 then nil else GameId,
+		placeId = if PlaceId == 0 then nil else PlaceId
 	}
 end

@@ -1,24 +1,23 @@
-﻿local parent = script:FindFirstAncestor("DsaIllegalContentReporting").Parent
-local guiService = game:GetService("GuiService")
-local httpService = game:GetService("HttpService")
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local localizationModule = require(parent.Localization)
-local responsiveModule = require(parent.Responsive)
-local usePreferredInput = responsiveModule.usePreferredInput
-local controlState = foundationModule.Enums.ControlState
-local text = foundationModule.Text
-local useLocalization = localizationModule.Hooks.useLocalization
-local useTokens = foundationModule.Hooks.useTokens
-local view = foundationModule.View
-local _ = { OPEN_CUSTOM_WEBVIEW = 20 }
+﻿local Parent = script:FindFirstAncestor("DsaIllegalContentReporting").Parent
+local GuiService = game:GetService("GuiService")
+local HttpService = game:GetService("HttpService")
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local ResponsiveModule = require(Parent.Responsive)
+local UsePreferredInputFunction = ResponsiveModule.usePreferredInput
+local ControlState = FoundationModule.Enums.ControlState
+local Text = FoundationModule.Text
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local View = FoundationModule.View
 
-return reactModule.memo(function()
-	-- upvalues: useTokens (ref), reactModule (ref), usePreferredInput (ref), responsiveModule (ref), useLocalization (ref), httpService (ref), guiService (ref), controlState (ref), view (ref), text (ref)
-	local var1 = useTokens()
-	local var2, var3 = reactModule.useState(nil)
-	local var4 = usePreferredInput() == responsiveModule.Input.Directional or responsiveModule.useIsSpatial()
-	local var5 = useLocalization({
+return ReactModule.memo(function() --[[ Line: 24 | Named "OSAReportLink" ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), UsePreferredInputFunction (copy), ResponsiveModule (copy), UseLocalizationFunction (copy), HttpService (copy), GuiService (copy), ControlState (copy), View (copy), Text (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	local UseIsSpatialResult = ResponsiveModule.useIsSpatial()
+	local IsUsePreferredInputResultMatch = UsePreferredInputFunction() == ResponsiveModule.Input.Directional or UseIsSpatialResult
+	local UseLocalizationResult = UseLocalizationFunction({
 		HelpPageTitle = "Feature.ReportAbuse.DSAIllegal.ReportPageTitle",
 		OSACopy1 = "Feature.ReportAbuse.Message.OSACopy1",
 		OSACopy2 = "Feature.ReportAbuse.Message.OSACopy2",
@@ -26,40 +25,44 @@ return reactModule.memo(function()
 		OSACopy4 = "Feature.ReportAbuse.Message.OSACopy4",
 		OSACopyReadOnly = "Feature.ReportAbuse.Message.OSACopyReadOnly"
 	})
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 40 ]]
+		-- upvalues: HttpService (upval), UseLocalizationResult (copy), GuiService (upval)
+		GuiService:BroadcastNotification(HttpService:JSONEncode({
+			presentationStyle = nil,
+			visible = true,
+			url = "https://www.roblox.com/illegal-content-reporting",
+			title = UseLocalizationResult.HelpPageTitle
+		}), 20)
+	end, {})
+	local UseResult1 = ReactModule.useCallback(function(Hover) --[[ Line: 50 ]]
+		-- upvalues: ControlState (upval), UseStateResult2 (copy), UseTokensResult (copy)
+		if Hover == ControlState.Hover then
+			UseStateResult2(UseTokensResult.Color.State.Hover)
+			
+			return
+		end
+		if Hover == ControlState.Pressed then
+			UseStateResult2(UseTokensResult.Color.State.Press)
+			
+			return
+		else
+			UseStateResult2(nil)
+		end
+	end, {})
 	
-	return reactModule.createElement(view, { tag = "size-full col gap-small" }, {
-		OSALink = reactModule.createElement(text, {
+	return ReactModule.createElement(View, { tag = "size-full col gap-small" }, {
+		OSALink = ReactModule.createElement(Text, {
 			RichText = true,
 			TextWrapped = true,
 			tag = "auto-xy radius-small padding-xsmall",
 			LayoutOrder = 2,
-			Text = if var4 then `<b>{var5.OSACopyReadOnly}</b>` else `<b>{var5.OSACopy4}</b>`,
-			backgroundStyle = var2,
-			fontStyle = var1.Typography.BodySmall,
-			textStyle = var1.Color.Content.Emphasis,
+			Text = if IsUsePreferredInputResultMatch then `<b>{UseLocalizationResult.OSACopyReadOnly}</b>` else `<b>{UseLocalizationResult.OSACopy4}</b>`,
+			backgroundStyle = UseStateResult,
+			fontStyle = UseTokensResult.Typography.BodySmall,
+			textStyle = UseTokensResult.Color.Content.Emphasis,
 			TextXAlignment = Enum.TextXAlignment.Left,
-			onActivated = if var4 then nil else reactModule.useCallback(function()
-				-- upvalues: httpService (copy), var5 (ref), guiService (copy)
-				guiService:BroadcastNotification(httpService:JSONEncode({
-					presentationStyle = nil,
-					visible = true,
-					url = "https://www.roblox.com/illegal-content-reporting",
-					title = var5.HelpPageTitle
-				}), 20)
-			end, {}),
-			onStateChanged = if var4 then nil else reactModule.useCallback(function(p1)
-				-- upvalues: controlState (copy), var3 (ref), var1 (ref)
-				if p1 == controlState.Hover then
-					var3(var1.Color.State.Hover)
-					
-					return
-				elseif p1 == controlState.Pressed then
-					var3(var1.Color.State.Press)
-					
-					return
-				end
-				var3(nil)
-			end, {})
+			onActivated = if IsUsePreferredInputResultMatch then nil else UseResult,
+			onStateChanged = if IsUsePreferredInputResultMatch then nil else UseResult1
 		})
 	})
 end)

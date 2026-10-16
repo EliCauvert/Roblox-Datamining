@@ -1,10 +1,10 @@
-﻿local createDeepLinkStoreModule = require(script.createDeepLinkStore)
-local var1 = nil
+﻿local CreateDeepLinkStoreModule = require(script.createDeepLinkStore)
+local v1 = nil
 
-return function()
-	-- upvalues: var1 (write), createDeepLinkStoreModule (ref)
-	if var1 == nil then
-		var1 = createDeepLinkStoreModule()
+return function() --[[ Line: 6 | Named "getDeepLinkStore" ]]
+	-- upvalues: v1 (ref), CreateDeepLinkStoreModule (copy)
+	if v1 == nil then
+		v1 = CreateDeepLinkStoreModule()
 	end
-	return var1
+	return v1
 end

@@ -1,14 +1,14 @@
-﻿local parent = script.Parent
-local jestConfigsModule = require(parent.Parent.Dev.JestConfigs)
+﻿local Parent = script.Parent
+local JestConfigsModule = require(Parent.Parent.Dev.JestConfigs)
 
 return {
 	displayName = "GameJoinCard",
-	rootDir = parent,
+	rootDir = Parent,
 	testMatch = { "**/*.test" },
 	setupFilesAfterEnv = {
-		jestConfigsModule.setupFiles.LogHandler,
-		jestConfigsModule.setupFiles.UIBloxInitializer,
-		jestConfigsModule.setupFiles.createPromiseRejectionHandler(),
-		jestConfigsModule.setupFiles.RetryTimes
+		JestConfigsModule.setupFiles.LogHandler,
+		JestConfigsModule.setupFiles.UIBloxInitializer,
+		JestConfigsModule.setupFiles.createPromiseRejectionHandler(),
+		JestConfigsModule.setupFiles.RetryTimes
 	}
 }

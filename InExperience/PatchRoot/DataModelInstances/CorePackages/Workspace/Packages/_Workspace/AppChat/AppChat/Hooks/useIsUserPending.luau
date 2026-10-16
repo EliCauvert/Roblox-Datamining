@@ -1,8 +1,8 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local conversationModule = require(appChat.Models.Conversation)
-local conversationChannelsModule = require(appChat.Models.ConversationChannels)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local ConversationModule = require(AppChat.Models.Conversation)
+local ConversationChannelsModule = require(AppChat.Models.ConversationChannels)
 
-return function(p1)
-	-- upvalues: conversationModule (ref), conversationChannelsModule (ref)
-	return p1.conversationType == conversationModule.Type.MULTI_USER_CONVERSATION and (p1.userPendingStatus == conversationChannelsModule.UserPendingStatus.Pending or p1.userPendingStatus == conversationChannelsModule.UserPendingStatus.Invalid and p1.moderationType == conversationChannelsModule.ModerationType.TrustedComms)
+return function(p1): boolean --[[ Line: 12 ]]
+	-- upvalues: ConversationModule (copy), ConversationChannelsModule (copy)
+	return p1.conversationType == ConversationModule.Type.MULTI_USER_CONVERSATION and (p1.userPendingStatus == ConversationChannelsModule.UserPendingStatus.Pending or p1.userPendingStatus == ConversationChannelsModule.UserPendingStatus.Invalid and p1.moderationType == ConversationChannelsModule.ModerationType.TrustedComms)
 end

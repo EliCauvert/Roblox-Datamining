@@ -1,71 +1,71 @@
-﻿local chrome = script:FindFirstAncestor("Chrome")
-local corePackagesService = game:GetService("CorePackages")
-local partyIconModule = require(script.Parent.PartyIcon)
-local serviceModule = require(chrome.Service)
-local chromeIntegrationUtilsModule = require(chrome.Integrations.ChromeIntegrationUtils)
-local getFStringConnectTooltipLocalStorageKeyModule = require(chrome.Flags.GetFStringConnectTooltipLocalStorageKey)
-local localStoreModule = require(chrome.ChromeShared.Service.LocalStore)
-local mappedSignal = require(chrome.ChromeShared.Service.ChromeUtils).MappedSignal
-local focusUtils = require(corePackagesService.Workspace.Packages.Chrome).FocusUtils
-local chromeModule = require(corePackagesService.Workspace.Packages.Chrome)
-local inExperienceAppChatModalModule = require(corePackagesService.Workspace.Packages.AppChat.InExperienceAppChatModal)
-local mouseIconOverrideService = require(corePackagesService.Workspace.Packages.CoreScriptsCommon).MouseIconOverrideService
-local reactModule = require(corePackagesService.Packages.React)
-local responsiveModule = require(corePackagesService.Workspace.Packages.Responsive)
-local symbol = require(corePackagesService.Workspace.Packages.AppCommonLib).Symbol
-local chatEntryPointNames = require(corePackagesService.Workspace.Packages.SocialCommon).Enums.ChatEntryPointNames
-local fFlagAppChatDistinctUnibarEntryPoint = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagAppChatDistinctUnibarEntryPoint
-local sideSheetPlacement = chromeModule.Enums.SideSheetPlacement
-local var1 = mappedSignal.new(inExperienceAppChatModalModule.default.visibilitySignal.Event, function()
-	-- upvalues: inExperienceAppChatModalModule (ref)
-	return inExperienceAppChatModalModule:getVisible()
+﻿local Chrome = script:FindFirstAncestor("Chrome")
+local CorePackages = game:GetService("CorePackages")
+local PartyIconModule = require(script.Parent.PartyIcon)
+local ServiceModule = require(Chrome.Service)
+local ChromeIntegrationUtilsModule = require(Chrome.Integrations.ChromeIntegrationUtils)
+local GetFStringConnectTooltipLocalStorageKeyModule = require(Chrome.Flags.GetFStringConnectTooltipLocalStorageKey)
+local LocalStoreModule = require(Chrome.ChromeShared.Service.LocalStore)
+local FocusUtils = require(CorePackages.Workspace.Packages.Chrome).FocusUtils
+local InExperienceAppChatModalModule = require(CorePackages.Workspace.Packages.AppChat.InExperienceAppChatModal)
+local MouseIconOverrideService = require(CorePackages.Workspace.Packages.CoreScriptsCommon).MouseIconOverrideService
+local ReactModule = require(CorePackages.Packages.React)
+local ResponsiveModule = require(CorePackages.Workspace.Packages.Responsive)
+local Symbol = require(CorePackages.Workspace.Packages.AppCommonLib).Symbol
+local ChatEntryPointNames = require(CorePackages.Workspace.Packages.SocialCommon).Enums.ChatEntryPointNames
+local FFlagAppChatDistinctUnibarEntryPoint = require(CorePackages.Workspace.Packages.SharedFlags).FFlagAppChatDistinctUnibarEntryPoint
+local SideSheetPlacement = require(CorePackages.Workspace.Packages.Chrome).Enums.SideSheetPlacement
+local NewResult = require(Chrome.ChromeShared.Service.ChromeUtils).MappedSignal.new(InExperienceAppChatModalModule.default.visibilitySignal.Event, function() --[[ Line: 30 ]]
+	-- upvalues: InExperienceAppChatModalModule (copy)
+	return InExperienceAppChatModalModule:getVisible()
 end)
 
-return function(p1, p2)
-	-- upvalues: serviceModule (ref), sideSheetPlacement (ref), inExperienceAppChatModalModule (ref), chromeIntegrationUtilsModule (ref), responsiveModule (ref), focusUtils (ref), fFlagAppChatDistinctUnibarEntryPoint (ref), chatEntryPointNames (ref), localStoreModule (ref), getFStringConnectTooltipLocalStorageKeyModule (ref), var1 (ref), reactModule (ref), partyIconModule (ref), symbol (ref), mouseIconOverrideService (ref)
-	local var2 = serviceModule:register({
+return function(Id, InitialAvailability) --[[ Line: 34 ]]
+	-- upvalues: ServiceModule (copy), SideSheetPlacement (copy), InExperienceAppChatModalModule (copy), ChromeIntegrationUtilsModule (copy), ResponsiveModule (copy), FocusUtils (copy), FFlagAppChatDistinctUnibarEntryPoint (copy), ChatEntryPointNames (copy), LocalStoreModule (copy), GetFStringConnectTooltipLocalStorageKeyModule (copy), NewResult (copy), ReactModule (copy), PartyIconModule (copy), Symbol (copy), MouseIconOverrideService (copy)
+	local RegisterResult = ServiceModule:register({
 		label = "Feature.Squads.Label.Party",
-		id = p1,
-		sideSheetPlacement = sideSheetPlacement.None,
-		activated = function()
-			-- upvalues: inExperienceAppChatModalModule (copy), chromeIntegrationUtilsModule (copy), responsiveModule (copy), focusUtils (copy), fFlagAppChatDistinctUnibarEntryPoint (copy), chatEntryPointNames (copy), localStoreModule (copy), getFStringConnectTooltipLocalStorageKeyModule (copy)
-			if inExperienceAppChatModalModule:getVisible() then
-				inExperienceAppChatModalModule.default:setVisible(false)
+		id = Id,
+		sideSheetPlacement = SideSheetPlacement.None,
+		activated = function() --[[ Line: 39 ]]
+			-- upvalues: InExperienceAppChatModalModule (upval), ChromeIntegrationUtilsModule (upval), ResponsiveModule (upval), FocusUtils (upval), FFlagAppChatDistinctUnibarEntryPoint (upval), ChatEntryPointNames (upval), LocalStoreModule (upval), GetFStringConnectTooltipLocalStorageKeyModule (upval)
+			if InExperienceAppChatModalModule:getVisible() then
+				InExperienceAppChatModalModule.default:setVisible(false)
 			else
-				chromeIntegrationUtilsModule.dismissRobloxMenuAndRun(function()
-					-- upvalues: responsiveModule (copy), focusUtils (copy), fFlagAppChatDistinctUnibarEntryPoint (copy), inExperienceAppChatModalModule (copy), chatEntryPointNames (copy)
-					if responsiveModule.GetInputModeStore(false).getLastInputType(false) == responsiveModule.Input.Directional then
-						focusUtils.FocusOffChrome()
+				ChromeIntegrationUtilsModule.dismissRobloxMenuAndRun(function() --[[ Line: 43 ]]
+					-- upvalues: ResponsiveModule (upval), FocusUtils (upval), FFlagAppChatDistinctUnibarEntryPoint (upval), InExperienceAppChatModalModule (upval), ChatEntryPointNames (upval)
+					if ResponsiveModule.GetInputModeStore(false).getLastInputType(false) == ResponsiveModule.Input.Directional then
+						FocusUtils.FocusOffChrome()
 					end
-					if fFlagAppChatDistinctUnibarEntryPoint then
-						inExperienceAppChatModalModule.default:setVisible(true, chatEntryPointNames.ChromeUnibar)
+					if FFlagAppChatDistinctUnibarEntryPoint then
+						InExperienceAppChatModalModule.default:setVisible(true, ChatEntryPointNames.ChromeUnibar)
 						
 						return
+					else
+						InExperienceAppChatModalModule.default:setVisible(true)
 					end
-					inExperienceAppChatModalModule.default:setVisible(true)
 				end)
 			end
-			localStoreModule.storeForLocalPlayer(getFStringConnectTooltipLocalStorageKeyModule(), true)
+			LocalStoreModule.storeForLocalPlayer(GetFStringConnectTooltipLocalStorageKeyModule(), true)
 		end,
-		isActivated = var1,
+		isActivated = NewResult,
 		components = {
-			Icon = function(p3)
-				-- upvalues: reactModule (copy), partyIconModule (copy), p1 (ref)
-				return reactModule.createElement(partyIconModule, { integrationId = p1, isIconVisible = p3.visible })
+			Icon = function(p1) --[[ Line: 59 ]]
+				-- upvalues: ReactModule (upval), PartyIconModule (upval), Id (copy)
+				return ReactModule.createElement(PartyIconModule, { integrationId = Id, isIconVisible = p1.visible })
 			end
 		},
-		initialAvailability = p2
+		initialAvailability = InitialAvailability
 	})
-	local inExperienceRobloxParty = symbol.named("InExperienceRobloxParty")
-	inExperienceAppChatModalModule.default.visibilitySignal.Event:Connect(function(p3)
-		-- upvalues: mouseIconOverrideService (copy), inExperienceRobloxParty (ref)
-		if p3 then
-			mouseIconOverrideService.push(inExperienceRobloxParty, Enum.OverrideMouseIconBehavior.ForceShow)
+	local InExperienceRobloxParty = Symbol.named("InExperienceRobloxParty")
+	InExperienceAppChatModalModule.default.visibilitySignal.Event:Connect(function(p1) --[[ Line: 71 ]]
+		-- upvalues: MouseIconOverrideService (upval), InExperienceRobloxParty (copy)
+		if p1 then
+			MouseIconOverrideService.push(InExperienceRobloxParty, Enum.OverrideMouseIconBehavior.ForceShow)
 			
 			return
+		else
+			MouseIconOverrideService.pop(InExperienceRobloxParty)
 		end
-		mouseIconOverrideService.pop(inExperienceRobloxParty)
 	end)
 	
-	return var2
+	return RegisterResult
 end

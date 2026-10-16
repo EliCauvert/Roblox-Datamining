@@ -1,13 +1,13 @@
-﻿local parent = script.Parent.Parent
-local capturesToastTypeModule = require(parent.Enums.CapturesToastType)
-local toastTriggeredModule = require(parent.Actions.ToastTriggered)
+﻿local Parent = script.Parent.Parent
+local CapturesToastTypeModule = require(Parent.Enums.CapturesToastType)
+local ToastTriggeredModule = require(Parent.Actions.ToastTriggered)
 
-return function(p1)
-	-- upvalues: toastTriggeredModule (ref), capturesToastTypeModule (ref)
-	return function(p2)
-		-- upvalues: p1 (ref), toastTriggeredModule (copy), capturesToastTypeModule (copy)
-		if p2 == Enum.VideoCaptureResult.OtherError then
-			p1(toastTriggeredModule(capturesToastTypeModule.VideoCaptureOtherError))
+return function(Callback) --[[ Line: 6 | Named "makeVideoCaptureFailedHandler" ]]
+	-- upvalues: ToastTriggeredModule (copy), CapturesToastTypeModule (copy)
+	return function(VideoCaptureResult) --[[ Line: 7 | Named "videoCaptureFailedHandler" ]]
+		-- upvalues: Callback (copy), ToastTriggeredModule (upval), CapturesToastTypeModule (upval)
+		if VideoCaptureResult == Enum.VideoCaptureResult.OtherError then
+			Callback(ToastTriggeredModule(CapturesToastTypeModule.VideoCaptureOtherError))
 		end
 	end
 end

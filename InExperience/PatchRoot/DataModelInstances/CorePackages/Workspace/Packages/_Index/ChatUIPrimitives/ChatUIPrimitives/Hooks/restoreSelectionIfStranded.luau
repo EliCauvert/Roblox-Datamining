@@ -1,30 +1,31 @@
-﻿local function _(p1)
+﻿local function _(p1) --[[ Line: 8 | Named "isSelectionOnScreen" ]]
 	if p1 == nil then
 		return false
+	else
+		local Success, Result = pcall(function() --[[ Line: 12 ]]
+			-- upvalues: p1 (copy)
+			return p1:IsDescendantOf(game)
+		end)
+		
+		return Success and Result
 	end
-	local ok, status = pcall(function()
-		-- upvalues: p1 (ref)
-		return p1:IsDescendantOf(game)
-	end)
-	
-	return ok and status
 end
 
-return function(p1, p2)
-	if p2 == nil then return end
-	local var1
-	local selectedCoreObject = p1.SelectedCoreObject
+return function(p1, SelectedCoreObject) --[[ Line: 18 | Named "restoreSelectionIfStranded" ]]
+	if SelectedCoreObject == nil then return end
+	local SelectedCoreObject1 = p1.SelectedCoreObject
+	local v1 = nil
 	
-	if selectedCoreObject == nil then
-		var1 = false
+	if SelectedCoreObject1 == nil then
+		v1 = false
 	else
-		local ok, status = pcall(function()
-			-- upvalues: selectedCoreObject (ref)
-			return selectedCoreObject:IsDescendantOf(game)
+		local Success, Result = pcall(function() --[[ Line: 12 ]]
+			-- upvalues: SelectedCoreObject1 (copy)
+			return SelectedCoreObject1:IsDescendantOf(game)
 		end)
-		var1 = ok and status
+		v1 = Success and Result
 	end
-	if not var1 then
-		p1.SelectedCoreObject = p2
+	if not v1 then
+		p1.SelectedCoreObject = SelectedCoreObject
 	end
 end

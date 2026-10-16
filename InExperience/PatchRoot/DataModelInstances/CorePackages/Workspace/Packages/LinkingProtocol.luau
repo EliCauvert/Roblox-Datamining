@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.LinkingProtocol.LinkingProtocol)
+﻿return (require(script.Parent._Workspace.LinkingProtocol.LinkingProtocol))

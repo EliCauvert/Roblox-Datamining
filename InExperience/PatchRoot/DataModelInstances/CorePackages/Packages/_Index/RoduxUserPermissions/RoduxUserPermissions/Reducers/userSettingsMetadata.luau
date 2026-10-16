@@ -1,12 +1,12 @@
-﻿local parent = script.Parent.Parent
-local roduxModule = require(parent.Parent.Rodux)
-local _ = require(parent.Types.ReducerTypes)
-local t = { prefillDiscoverabilitySetting = false }
+﻿local Parent = script.Parent.Parent
+local RoduxModule = require(Parent.Parent.Rodux)
+local _ = require(Parent.Types.ReducerTypes)
+local config = { prefillDiscoverabilitySetting = false }
 
-return function(p1)
-	-- upvalues: roduxModule (ref), t (ref)
-	return roduxModule.createReducer(t, {
-		[p1.networkingUserSettings.GetUserSettingsMetadata.Succeeded.name] = function(_, p2)
+return function(p1) --[[ Line: 10 ]]
+	-- upvalues: RoduxModule (copy), config (copy)
+	return RoduxModule.createReducer(config, {
+		[p1.networkingUserSettings.GetUserSettingsMetadata.Succeeded.name] = function(_, p2) --[[ Line: 14 ]]
 			return {
 				prefillDiscoverabilitySetting = p2.responseBody and p2.responseBody.prefillDiscoverabilitySetting
 			}

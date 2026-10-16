@@ -1,64 +1,63 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local guiService = game:GetService("GuiService")
-local contextActionService = game:GetService("ContextActionService")
-local inGameMenuDependenciesModule = require(corePackagesService.Packages.InGameMenuDependencies)
-local roact = inGameMenuDependenciesModule.Roact
-local roactRodux = inGameMenuDependenciesModule.RoactRodux
-local t = inGameMenuDependenciesModule.t
-local parent = script.Parent.Parent.Parent
-local assetsModule = require(parent.Resources.Assets)
-local closeReportSentDialogModule = require(parent.Actions.CloseReportSentDialog)
-local constantsModule = require(parent.Resources.Constants)
-local withLocalizationModule = require(parent.Localization.withLocalization)
-local infoDialogModule = require(parent.Components.InfoDialog)
-local focusHandlerModule = require(script.Parent.Parent.Connection.FocusHandler)
-local reportSentDialog = roact.PureComponent:extend("ReportSentDialog")
-reportSentDialog.validateProps = t.strictInterface({
-	isReportSentOpen = t.boolean,
-	onDismiss = t.callback,
-	inputType = t.optional(t.string)
+﻿local GuiService = game:GetService("GuiService")
+local ContextActionService = game:GetService("ContextActionService")
+local InGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
+local Roact = InGameMenuDependenciesModule.Roact
+local RoactRodux = InGameMenuDependenciesModule.RoactRodux
+local T = InGameMenuDependenciesModule.t
+local Parent = script.Parent.Parent.Parent
+local AssetsModule = require(Parent.Resources.Assets)
+local CloseReportSentDialogModule = require(Parent.Actions.CloseReportSentDialog)
+local ConstantsModule = require(Parent.Resources.Constants)
+local WithLocalizationModule = require(Parent.Localization.withLocalization)
+local InfoDialogModule = require(Parent.Components.InfoDialog)
+local FocusHandlerModule = require(script.Parent.Parent.Connection.FocusHandler)
+local ReportSentDialog = Roact.PureComponent:extend("ReportSentDialog")
+ReportSentDialog.validateProps = T.strictInterface({
+	isReportSentOpen = T.boolean,
+	onDismiss = T.callback,
+	inputType = T.optional(T.string)
 })
 
-function reportSentDialog.init(p1)
-	-- upvalues: roact (ref)
-	p1.buttonRef = roact.createRef()
+function ReportSentDialog.init(p1) --[[ Line: 34 ]]
+	-- upvalues: Roact (copy)
+	p1.buttonRef = Roact.createRef()
 end
 
-function reportSentDialog.renderFocusHandler(p1)
-	-- upvalues: roact (ref), focusHandlerModule (ref), constantsModule (ref), guiService (ref), contextActionService (ref)
-	return roact.createElement(focusHandlerModule, {
-		isFocused = p1.props.inputType == constantsModule.InputType.Gamepad and p1.props.isReportSentOpen,
-		didFocus = function()
-			-- upvalues: guiService (copy), p1 (ref), contextActionService (copy)
-			guiService:RemoveSelectionGroup("ReportSentDialogGroup")
-			guiService:AddSelectionParent("ReportSentDialogGroup", p1.buttonRef:getValue())
-			guiService.SelectedCoreObject = p1.buttonRef:getValue()
-			contextActionService:BindCoreAction("ReporSentDialogSinkAction", function(_, _)
+function ReportSentDialog.renderFocusHandler(p1) --[[ Line: 38 ]]
+	-- upvalues: Roact (copy), FocusHandlerModule (copy), ConstantsModule (copy), GuiService (copy), ContextActionService (copy)
+	return Roact.createElement(FocusHandlerModule, {
+		isFocused = p1.props.inputType == ConstantsModule.InputType.Gamepad and p1.props.isReportSentOpen,
+		didFocus = function() --[[ Line: 41 ]]
+			-- upvalues: GuiService (upval), p1 (copy), ContextActionService (upval)
+			GuiService:RemoveSelectionGroup("ReportSentDialogGroup")
+			GuiService:AddSelectionParent("ReportSentDialogGroup", p1.buttonRef:getValue())
+			GuiService.SelectedCoreObject = p1.buttonRef:getValue()
+			ContextActionService:BindCoreAction("ReporSentDialogSinkAction", function(_, _) --[[ Line: 47 ]]
 				return Enum.ContextActionResult.Sink
 			end, false, Enum.KeyCode.ButtonB, Enum.KeyCode.ButtonY, Enum.KeyCode.ButtonX)
 		end,
-		didBlur = function()
-			-- upvalues: contextActionService (copy), guiService (copy)
-			contextActionService:UnbindCoreAction("ReporSentDialogSinkAction")
-			guiService:RemoveSelectionGroup("ReportSentDialogGroup")
+		didBlur = function() --[[ Line: 51 ]]
+			-- upvalues: ContextActionService (upval), GuiService (upval)
+			ContextActionService:UnbindCoreAction("ReporSentDialogSinkAction")
+			GuiService:RemoveSelectionGroup("ReportSentDialogGroup")
 		end
 	})
 end
 
-function reportSentDialog.render(p1)
-	-- upvalues: withLocalizationModule (ref), roact (ref), infoDialogModule (ref), assetsModule (ref)
-	return withLocalizationModule({
+function ReportSentDialog.render(p1) --[[ Line: 58 ]]
+	-- upvalues: WithLocalizationModule (copy), Roact (copy), InfoDialogModule (copy), AssetsModule (copy)
+	return WithLocalizationModule({
 		titleText = "CoreScripts.InGameMenu.Report.ThanksForReport",
 		bodyText = "CoreScripts.InGameMenu.Report.WillReviewBody",
 		dismissText = "CoreScripts.InGameMenu.Ok"
-	})(function(p2)
-		-- upvalues: roact (copy), infoDialogModule (copy), assetsModule (copy), p1 (ref)
-		return roact.createFragment({
-			Dialog = roact.createElement(infoDialogModule, {
+	})(function(p2) --[[ Line: 63 ]]
+		-- upvalues: Roact (upval), InfoDialogModule (upval), AssetsModule (upval), p1 (copy)
+		return Roact.createFragment({
+			Dialog = Roact.createElement(InfoDialogModule, {
 				titleText = p2.titleText,
 				bodyText = p2.bodyText,
 				dismissText = p2.dismissText,
-				iconImage = assetsModule.Images.SuccessTick,
+				iconImage = AssetsModule.Images.SuccessTick,
 				buttonRef = p1.buttonRef,
 				onDismiss = p1.props.onDismiss,
 				visible = p1.props.isReportSentOpen
@@ -68,17 +67,17 @@ function reportSentDialog.render(p1)
 	end)
 end
 
-return roactRodux.UNSTABLE_connect2(function(p1, _)
+return RoactRodux.UNSTABLE_connect2(function(p1, _) --[[ Line: 79 ]]
 	return {
 		isReportSentOpen = p1.report.reportSentOpen,
 		inputType = p1.displayOptions.inputType
 	}
-end, function(p1)
-	-- upvalues: closeReportSentDialogModule (ref)
+end, function(Callback) --[[ Line: 84 ]]
+	-- upvalues: CloseReportSentDialogModule (copy)
 	return {
-		onDismiss = function()
-			-- upvalues: p1 (ref), closeReportSentDialogModule (copy)
-			p1(closeReportSentDialogModule())
+		onDismiss = function() --[[ Line: 86 ]]
+			-- upvalues: Callback (copy), CloseReportSentDialogModule (upval)
+			Callback(CloseReportSentDialogModule())
 		end
 	}
-end)(reportSentDialog)
+end)(ReportSentDialog)

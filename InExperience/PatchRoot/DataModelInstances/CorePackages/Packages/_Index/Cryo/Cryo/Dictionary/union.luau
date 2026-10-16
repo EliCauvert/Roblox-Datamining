@@ -1,8 +1,8 @@
-﻿return function(p1, p2)
-	local cloned = table.clone(p1)
+﻿return function(Tbl, List) --[[ Line: 2 | Named "union" ]]
+	local Copy = table.clone(Tbl)
 	
-	for i, v in p2 do
-		cloned[i] = v
+	for i, value in List do
+		Copy[i] = value
 	end
-	return cloned
+	return Copy
 end

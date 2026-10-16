@@ -1,117 +1,125 @@
-﻿local parent = script:FindFirstAncestor("CurrencyTransfers").Parent
-local setPromptDismissedInPageScope = require(parent.PromptsServerDrivenUi).setPromptDismissedInPageScope
-local fFlagSduiDismissPromptPageScope = require(parent.SharedFlags).FFlagSduiDismissPromptPageScope
+﻿local Parent = script:FindFirstAncestor("CurrencyTransfers").Parent
+local SetPromptDismissedInPageScopeFunction = require(Parent.PromptsServerDrivenUi).setPromptDismissedInPageScope
+local FFlagSduiDismissPromptPageScope = require(Parent.SharedFlags).FFlagSduiDismissPromptPageScope
 local list = {
 	"HomeIncomingRobuxTransferParentalGateBanner",
 	"HomeIncomingRobuxTransferAgeGateBanner"
 }
 
-local function dismissPromptTypes(p1, p2)
+local function dismissPromptTypes(Callback, List) --[[ Line: 27 ]]
 	local t = {}
-	local t_1 = {}
+	local List1 = {}
 	
-	for i, v in p2 do
-		for i_1, v_1 in p1(v) do
-			if not t[v_1] then
-				t[v_1] = true
-				table.insert(t_1, v_1)
+	for _, value in List do
+		for _, value1 in Callback(value) do
+			if not t[value1] then
+				t[value1] = true
+				table.insert(List1, value1)
 			end
 		end
 	end
-	return t_1
+	return List1
 end
 
-local var1 = if fFlagSduiDismissPromptPageScope then function(p3, p4)
-	-- upvalues: setPromptDismissedInPageScope (ref)
-	if typeof(p3) ~= "string" or p3 == "" then return end
-	for i, v in p4 do
-		setPromptDismissedInPageScope(p3, v)
+local Callback = if FFlagSduiDismissPromptPageScope then function(p1, List) --[[ Line: 44 ]]
+	-- upvalues: SetPromptDismissedInPageScopeFunction (copy)
+	if typeof(p1) ~= "string" or p1 == "" then return end
+	for _, value in List do
+		SetPromptDismissedInPageScopeFunction(p1, value)
 	end
 end else nil
 
-local function reportDismissForAllPromptTypes(p5, p6, p7, p8)
-	local var2 = nil
+local function reportDismissForAllPromptTypes(Callback, Networking, List, PromptId) --[[ Line: 55 ]]
+	local Promise = nil
 	
-	for i, v in p7 do
-		local var3 = p5(p6, v, p8)
-		var2 = if var2 == nil then var3 else var2:andThen(function()
-			-- upvalues: var3 (ref)
-			return var3
-		end)
+	for _, value in List do
+		local CallbackResult = Callback(Networking, value, PromptId)
+		
+		if Promise == nil then
+			Promise = CallbackResult
+		else
+			Promise = Promise:andThen(function() --[[ Line: 67 ]]
+				-- upvalues: CallbackResult (copy)
+				return CallbackResult
+			end)
+		end
 	end
-	return var2
+	return Promise
 end
 
 return {
-	createCallbacks = function(p9)
-		-- upvalues: list (ref), parent (ref), fFlagSduiDismissPromptPageScope (ref), var1 (write), dismissPromptTypes (ref), reportDismissForAllPromptTypes (ref)
-		local promptId = p9.promptId
-		local onReportPromptDismissFailed = p9.onReportPromptDismissFailed
+	createCallbacks = function(p2) --[[ Line: 75 ]]
+		-- upvalues: list (copy), Parent (copy), FFlagSduiDismissPromptPageScope (copy), Callback (ref), dismissPromptTypes (copy), reportDismissForAllPromptTypes (copy)
+		local PromptId = p2.promptId
+		local OnReportPromptDismissFailedFunction = p2.onReportPromptDismissFailed
 		
 		return {
-			optimisticHide = function()
-				-- upvalues: parent (copy), fFlagSduiDismissPromptPageScope (copy), p9 (ref), var1 (copy), dismissPromptTypes (copy), list (ref)
-				local dismissEntry = require(parent.SduiSharedUtilities).getSduiApiStore().dismissEntry
+			optimisticHide = function() --[[ Line: 80 ]]
+				-- upvalues: Parent (upval), FFlagSduiDismissPromptPageScope (upval), p2 (copy), Callback (upval), dismissPromptTypes (upval), list (copy)
+				local DismissEntryFunction: (any) -> () = require(Parent.SduiSharedUtilities).getSduiApiStore().dismissEntry
 				
-				if not fFlagSduiDismissPromptPageScope and dismissEntry == nil then return end
-				local optimisticHidePromptType = p9.optimisticHidePromptType
+				if not FFlagSduiDismissPromptPageScope and DismissEntryFunction == nil then return end
+				local OptimisticHidePromptType = p2.optimisticHidePromptType
 				
-				if typeof(optimisticHidePromptType) == "string" and optimisticHidePromptType ~= "" then
-					if fFlagSduiDismissPromptPageScope then
-						if dismissEntry ~= nil then
-							dismissEntry(optimisticHidePromptType)
-						end
-						var1(p9.configKey, { optimisticHidePromptType })
-						
-						return
-					else
-						dismissEntry(optimisticHidePromptType)
+				if typeof(OptimisticHidePromptType) == "string" and OptimisticHidePromptType ~= "" then
+					if not FFlagSduiDismissPromptPageScope then
+						DismissEntryFunction(OptimisticHidePromptType)
 						
 						return
 					end
-				elseif not fFlagSduiDismissPromptPageScope then
-					dismissPromptTypes(dismissEntry, list)
+					if DismissEntryFunction ~= nil then
+						DismissEntryFunction(OptimisticHidePromptType)
+					end
+					Callback(p2.configKey, { OptimisticHidePromptType })
 					
 					return
-				elseif dismissEntry ~= nil then
-					dismissPromptTypes(dismissEntry, list)
+				else
+					if not FFlagSduiDismissPromptPageScope then
+						dismissPromptTypes(DismissEntryFunction, list)
+						
+						return
+					end
+					if DismissEntryFunction ~= nil then
+						dismissPromptTypes(DismissEntryFunction, list)
+					end
+					Callback(p2.configKey, list)
 				end
-				var1(p9.configKey, list)
 			end,
-			commitDismiss = function()
-				-- upvalues: parent (copy), fFlagSduiDismissPromptPageScope (copy), var1 (copy), p9 (ref), list (ref), dismissPromptTypes (copy), reportDismissForAllPromptTypes (copy), promptId (ref), onReportPromptDismissFailed (ref)
-				local sduiSharedUtilitiesModule = require(parent.SduiSharedUtilities)
-				local sduiApiStore = sduiSharedUtilitiesModule.getSduiApiStore()
-				local dismissEntry = sduiApiStore.dismissEntry
-				local t = {}
+			commitDismiss = function() --[[ Line: 111 ]]
+				-- upvalues: Parent (upval), FFlagSduiDismissPromptPageScope (upval), Callback (upval), p2 (copy), list (copy), dismissPromptTypes (upval), reportDismissForAllPromptTypes (upval), PromptId (copy), OnReportPromptDismissFailedFunction (copy)
+				local SduiSharedUtilitiesModule = require(Parent.SduiSharedUtilities)
+				local SduiApiStore = SduiSharedUtilitiesModule.getSduiApiStore()
+				local DismissEntry = SduiApiStore.dismissEntry
+				local ConfigKeys = {}
 				
-				if fFlagSduiDismissPromptPageScope then
-					var1(p9.configKey, list)
+				if FFlagSduiDismissPromptPageScope then
+					Callback(p2.configKey, list)
 				end
-				if dismissEntry ~= nil then
-					t = dismissPromptTypes(dismissEntry, list)
+				if DismissEntry ~= nil then
+					ConfigKeys = dismissPromptTypes(DismissEntry, list)
 				end
-				local networking = p9.networking
+				local Networking = p2.networking
 				
-				if networking == nil then
+				if Networking ~= nil then
+					reportDismissForAllPromptTypes(require(Parent.SduiSharedContent).reportPromptDismiss, Networking, list, PromptId):andThen(function() --[[ Line: 131 ]]
+						-- upvalues: DismissEntry (copy), ConfigKeys (ref), SduiApiStore (copy), SduiSharedUtilitiesModule (copy)
+						if DismissEntry ~= nil then
+							for _, configKey in ConfigKeys do
+								SduiApiStore.refreshFromApi({
+									configKey = configKey,
+									loadTimer = SduiSharedUtilitiesModule.SduiLoadTimer.createLoadTimer(configKey)
+								})
+							end
+						end
+					end):catch(function(Err) --[[ Line: 141 ]]
+						-- upvalues: OnReportPromptDismissFailedFunction (upval)
+						if OnReportPromptDismissFailedFunction then
+							OnReportPromptDismissFailedFunction(Err)
+						end
+					end)
+					
 					return
 				end
-				reportDismissForAllPromptTypes(require(parent.SduiSharedContent).reportPromptDismiss, networking, list, promptId):andThen(function()
-					-- upvalues: dismissEntry (ref), t (write), sduiApiStore (ref), sduiSharedUtilitiesModule (ref)
-					if dismissEntry ~= nil then
-						for i, v in t do
-							sduiApiStore.refreshFromApi({
-								configKey = v,
-								loadTimer = sduiSharedUtilitiesModule.SduiLoadTimer.createLoadTimer(v)
-							})
-						end
-					end
-				end):catch(function(p10)
-					-- upvalues: onReportPromptDismissFailed (copy)
-					if onReportPromptDismissFailed then
-						onReportPromptDismissFailed(p10)
-					end
-				end)
 			end
 		}
 	end,

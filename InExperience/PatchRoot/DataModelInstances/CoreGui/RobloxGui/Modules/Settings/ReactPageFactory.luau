@@ -1,26 +1,25 @@
-﻿local reactModule = require(game:GetService("CorePackages").Packages.React)
-local t = {}
+﻿local ReactModule = require(game:GetService("CorePackages").Packages.React)
 
-local function createNewPage(p1)
-	-- upvalues: reactModule (ref)
-	local t = { page = nil, hubRef = nil, name = p1 }
+local function createNewPage(Name) --[[ Line: 19 ]]
+	-- upvalues: ReactModule (copy)
+	local config = { page = nil, hubRef = nil, name = Name }
 	
-	function t.setPage(_, p2)
-		-- upvalues: t (ref)
-		t.page = p2
+	function config:setPage(Page) --[[ Line: 26 ]]
+		-- upvalues: config (copy)
+		config.page = Page
 	end
 	
-	function t.createPage(_, p2)
-		-- upvalues: t (ref), reactModule (copy)
-		return if t.page then reactModule.createElement(t.page, p2) else nil
+	function config:createPage(p1) --[[ Line: 30 ]]
+		-- upvalues: config (copy), ReactModule (upval)
+		return if config.page then ReactModule.createElement(config.page, p1) else nil
 	end
 	
-	return t
+	return config
 end
 
-function t.createNewPage(_, p1)
-	-- upvalues: createNewPage (ref)
-	return createNewPage(p1)
-end
-
-return t
+return {
+	createNewPage = function(_, Name) --[[ Line: 41 ]]
+		-- upvalues: createNewPage (copy)
+		return (createNewPage(Name))
+	end
+}

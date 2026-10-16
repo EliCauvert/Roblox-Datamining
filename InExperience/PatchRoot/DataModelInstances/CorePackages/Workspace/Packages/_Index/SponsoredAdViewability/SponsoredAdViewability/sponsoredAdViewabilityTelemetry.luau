@@ -1,31 +1,30 @@
-﻿local telemetryService = game:GetService("TelemetryService")
-local sharedFlagsModule = require(script:FindFirstAncestor("SponsoredAdViewability").Parent.SharedFlags)
+﻿local TelemetryService = game:GetService("TelemetryService")
 local _ = require(script.Parent.sponsoredAdViewabilityState)
 local _ = require(script.Parent.sponsoredAdViewabilityTypes)
-local fFlagLuaAppSponsoredAdVideoViewabilityEnabled = sharedFlagsModule.FFlagLuaAppSponsoredAdVideoViewabilityEnabled
-local list = { "addSessionInfo", "addSessionId", "addOSInfo" }
-local t = {
+local FFlagLuaAppSponsoredAdVideoViewabilityEnabled = require(script:FindFirstAncestor("SponsoredAdViewability").Parent.SharedFlags).FFlagLuaAppSponsoredAdVideoViewabilityEnabled
+local StandardizedFields = { "addSessionInfo", "addSessionId", "addOSInfo" }
+local config = {
 	eventName = "SponsoredAdLoad",
 	description = "\t\tFires once per served sponsored ad when its tile begins to render on a surface.\n\t",
 	backends = { "EventIngest", "Points" },
 	throttlingPercentage = game:DefineFastInt("LuaAppSponsoredAdLoadTelemetryThrottlingHundredthsPercent", 0),
 	lastUpdated = { 26, 6, 11 }
 }
-local t_1 = {
+local config1 = {
 	eventName = "SponsoredAdViewableImpression",
 	backends = { "EventIngest", "Points" },
 	throttlingPercentage = game:DefineFastInt("LuaAppSponsoredAdViewableImpressionTelemetryThrottlingHundredthsPercent", 0),
 	lastUpdated = { 26, 6, 16 },
-	description = if fFlagLuaAppSponsoredAdVideoViewabilityEnabled then "\t\t\tFires once per IAB viewable-impression milestone reached by a served sponsored ad\n\t\t\t(image: standard 50% / 1s, large 30% / 1s, full 100% / 1s;\n\t\t\tvideo: standard 50% / 2s while playing, full 100% / 1s while playing).\n\t\t" else "\t\t\tFires once per IAB viewable-impression milestone reached by a served sponsored ad\n\t\t\t(standard 50% / 1s, large display 30% / 1s, full view 100% / 1s).\n\t\t"
+	description = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then "\t\t\tFires once per IAB viewable-impression milestone reached by a served sponsored ad\n\t\t\t(image: standard 50% / 1s, large 30% / 1s, full 100% / 1s;\n\t\t\tvideo: standard 50% / 2s while playing, full 100% / 1s while playing).\n\t\t" else "\t\t\tFires once per IAB viewable-impression milestone reached by a served sponsored ad\n\t\t\t(standard 50% / 1s, large display 30% / 1s, full view 100% / 1s).\n\t\t"
 }
-local t_2 = {
+local config2 = {
 	eventName = "SponsoredAdUnload",
 	description = "\t\tFires once per served sponsored ad when its viewability session reaches a terminal\n\t\tboundary, carrying the session's dwell and in-view duration summary.\n\t",
 	backends = { "EventIngest", "Points" },
 	throttlingPercentage = game:DefineFastInt("LuaAppSponsoredAdUnloadTelemetryThrottlingHundredthsPercent", 0),
 	lastUpdated = { 26, 6, 25 }
 }
-local var1 = if fFlagLuaAppSponsoredAdVideoViewabilityEnabled then {
+local Config = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then {
 	eventName = "SponsoredAdVideoProgress",
 	description = "\t\t\tFires once for each 0 / 25 / 50 / 75 / 100 video-progress milestone reached\n\t\t\twithin a served sponsored ad session.\n\t\t",
 	backends = { "EventIngest", "Points" },
@@ -33,141 +32,152 @@ local var1 = if fFlagLuaAppSponsoredAdVideoViewabilityEnabled then {
 	lastUpdated = { 26, 7, 21 }
 } else nil
 
-local function buildGeometryFields(p1)
-	local adSize = p1.adSize
-	local viewportBounds = p1.viewportBounds
+local function buildGeometryFields(Geometry) --[[ Line: 91 ]]
+	local AdSize = Geometry.adSize
+	local ViewportBounds = Geometry.viewportBounds
 	
 	return {
-		adWidth = if adSize.X > 0 then adSize.X else nil,
-		adHeight = if adSize.Y > 0 then adSize.Y else nil,
-		viewportWidth = viewportBounds.max.X - viewportBounds.min.X,
-		viewportHeight = viewportBounds.max.Y - viewportBounds.min.Y
+		adWidth = if AdSize.X > 0 then AdSize.X else nil,
+		adHeight = if AdSize.Y > 0 then AdSize.Y else nil,
+		viewportWidth = ViewportBounds.max.X - ViewportBounds.min.X,
+		viewportHeight = ViewportBounds.max.Y - ViewportBounds.min.Y
 	}
 end
 
+local function logSponsoredAdVideoProgress(CustomFields, CustomFields1) --[[ Line: 166 ]]
+	-- upvalues: buildGeometryFields (copy), TelemetryService (copy), Config (copy), StandardizedFields (copy)
+	local GeometryFields = buildGeometryFields(CustomFields1.geometry)
+	TelemetryService:LogEvent(Config, {
+		standardizedFields = StandardizedFields,
+		customFields = {
+			encryptedAdTrackingData = CustomFields.encryptedAdTrackingData,
+			tileType = CustomFields.tileType,
+			isFullScreen = CustomFields1.isFullScreen,
+			adWidth = GeometryFields.adWidth,
+			adHeight = GeometryFields.adHeight,
+			viewportWidth = GeometryFields.viewportWidth,
+			viewportHeight = GeometryFields.viewportHeight,
+			viewabilitySessionStartTimestampMs = CustomFields1.viewabilitySessionStartTimestampMs,
+			cumulative30PercentInViewDurationMs = CustomFields1.cumulative30PercentInViewDurationMs,
+			cumulative50PercentInViewDurationMs = CustomFields1.cumulative50PercentInViewDurationMs,
+			cumulative100PercentInViewDurationMs = CustomFields1.cumulative100PercentInViewDurationMs,
+			maxContinuous30PercentInViewDurationMs = CustomFields1.maxContinuous30PercentInViewDurationMs,
+			maxContinuous50PercentInViewDurationMs = CustomFields1.maxContinuous50PercentInViewDurationMs,
+			maxContinuous100PercentInViewDurationMs = CustomFields1.maxContinuous100PercentInViewDurationMs,
+			videoProgress = CustomFields1.videoProgress,
+			videoLengthMs = CustomFields1.videoLengthMs,
+			videoCumulativePlaytimeMs = CustomFields1.videoCumulativePlaytimeMs,
+			cumulativeAudioPlaybackDurationMs = CustomFields1.cumulativeAudioPlaybackDurationMs,
+			cumulative100PercentAudibleTimeMs = CustomFields1.cumulative100PercentAudibleTimeMs,
+			maxAudioLevel = CustomFields1.maxAudioLevel,
+			audioOnAtEvent = CustomFields1.audioOnAtEvent,
+			cumulativeInGridViewDurationMs = CustomFields1.cumulativeInGridViewDurationMs,
+			cumulativeFullScreenViewDurationMs = CustomFields1.cumulativeFullScreenViewDurationMs
+		}
+	})
+end
+
 return {
-	logSponsoredAdLoad = function(p1, p2, p3, p4)
-		-- upvalues: buildGeometryFields (ref), fFlagLuaAppSponsoredAdVideoViewabilityEnabled (ref), telemetryService (ref), t (ref), list (ref)
-		local var2 = buildGeometryFields(p2)
-		local t_1 = {
-			encryptedAdTrackingData = p1.encryptedAdTrackingData,
-			tileType = p1.tileType,
-			viewabilitySessionStartTimestampMs = p3,
-			adWidth = var2.adWidth,
-			adHeight = var2.adHeight,
-			viewportWidth = var2.viewportWidth,
-			viewportHeight = var2.viewportHeight
+	logSponsoredAdLoad = function(CustomFields, p1, ViewabilitySessionStartTimestampMs, p2) --[[ Line: 103 ]]
+		-- upvalues: buildGeometryFields (copy), FFlagLuaAppSponsoredAdVideoViewabilityEnabled (copy), TelemetryService (copy), config (copy), StandardizedFields (copy)
+		local GeometryFields = buildGeometryFields(p1)
+		local CustomFields1 = {
+			encryptedAdTrackingData = CustomFields.encryptedAdTrackingData,
+			tileType = CustomFields.tileType,
+			viewabilitySessionStartTimestampMs = ViewabilitySessionStartTimestampMs,
+			adWidth = GeometryFields.adWidth,
+			adHeight = GeometryFields.adHeight,
+			viewportWidth = GeometryFields.viewportWidth,
+			viewportHeight = GeometryFields.viewportHeight
 		}
 		
-		if fFlagLuaAppSponsoredAdVideoViewabilityEnabled then
-			if p1.mediaType == "video" then
-				t_1.isFullScreen = p1.isFullscreen == true
+		if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then
+			if CustomFields.mediaType == "video" then
+				CustomFields1.isFullScreen = CustomFields.isFullscreen == true
 			end
-			if p4 ~= nil then
-				t_1.videoLengthMs = p4.videoLengthMs
+			if p2 ~= nil then
+				CustomFields1.videoLengthMs = p2.videoLengthMs
 			end
 		end
-		telemetryService:LogEvent(t, { standardizedFields = list, customFields = t_1 })
-	end,
-	logSponsoredAdViewableImpression = function(p1, p2)
-		-- upvalues: buildGeometryFields (ref), fFlagLuaAppSponsoredAdVideoViewabilityEnabled (ref), telemetryService (ref), t_1 (ref), list (ref)
-		local var2 = buildGeometryFields(p2.geometry)
-		local t = {
-			encryptedAdTrackingData = p1.encryptedAdTrackingData,
-			tileType = p1.tileType,
-			milestoneLabel = p2.milestoneLabel,
-			viewabilitySessionStartTimestampMs = p2.viewabilitySessionStartTimestampMs,
-			adWidth = var2.adWidth,
-			adHeight = var2.adHeight,
-			viewportWidth = var2.viewportWidth,
-			viewportHeight = var2.viewportHeight,
-			cumulative30PercentInViewDurationMs = p2.cumulative30PercentInViewDurationMs,
-			cumulative50PercentInViewDurationMs = p2.cumulative50PercentInViewDurationMs,
-			cumulative100PercentInViewDurationMs = p2.cumulative100PercentInViewDurationMs,
-			maxContinuous30PercentInViewDurationMs = p2.maxContinuous30PercentInViewDurationMs,
-			maxContinuous50PercentInViewDurationMs = p2.maxContinuous50PercentInViewDurationMs,
-			maxContinuous100PercentInViewDurationMs = p2.maxContinuous100PercentInViewDurationMs
-		}
-		
-		if fFlagLuaAppSponsoredAdVideoViewabilityEnabled then
-			t.isFullScreen = p2.isFullScreen
-			t.videoLengthMs = p2.videoLengthMs
-			t.maxAudioLevel = p2.maxAudioLevel
-			t.cumulativeInGridViewDurationMs = p2.cumulativeInGridViewDurationMs
-			t.cumulativeFullScreenViewDurationMs = p2.cumulativeFullScreenViewDurationMs
-		end
-		telemetryService:LogEvent(t_1, { standardizedFields = list, customFields = t })
-	end,
-	logSponsoredAdVideoProgress = if fFlagLuaAppSponsoredAdVideoViewabilityEnabled then function(p1, p2)
-		-- upvalues: buildGeometryFields (ref), telemetryService (ref), var1 (ref), list (ref)
-		local var2 = buildGeometryFields(p2.geometry)
-		telemetryService:LogEvent(var1, {
-			standardizedFields = list,
-			customFields = {
-				encryptedAdTrackingData = p1.encryptedAdTrackingData,
-				tileType = p1.tileType,
-				isFullScreen = p2.isFullScreen,
-				adWidth = var2.adWidth,
-				adHeight = var2.adHeight,
-				viewportWidth = var2.viewportWidth,
-				viewportHeight = var2.viewportHeight,
-				viewabilitySessionStartTimestampMs = p2.viewabilitySessionStartTimestampMs,
-				cumulative30PercentInViewDurationMs = p2.cumulative30PercentInViewDurationMs,
-				cumulative50PercentInViewDurationMs = p2.cumulative50PercentInViewDurationMs,
-				cumulative100PercentInViewDurationMs = p2.cumulative100PercentInViewDurationMs,
-				maxContinuous30PercentInViewDurationMs = p2.maxContinuous30PercentInViewDurationMs,
-				maxContinuous50PercentInViewDurationMs = p2.maxContinuous50PercentInViewDurationMs,
-				maxContinuous100PercentInViewDurationMs = p2.maxContinuous100PercentInViewDurationMs,
-				videoProgress = p2.videoProgress,
-				videoLengthMs = p2.videoLengthMs,
-				videoCumulativePlaytimeMs = p2.videoCumulativePlaytimeMs,
-				cumulativeAudioPlaybackDurationMs = p2.cumulativeAudioPlaybackDurationMs,
-				cumulative100PercentAudibleTimeMs = p2.cumulative100PercentAudibleTimeMs,
-				maxAudioLevel = p2.maxAudioLevel,
-				audioOnAtEvent = p2.audioOnAtEvent,
-				cumulativeInGridViewDurationMs = p2.cumulativeInGridViewDurationMs,
-				cumulativeFullScreenViewDurationMs = p2.cumulativeFullScreenViewDurationMs
-			}
+		TelemetryService:LogEvent(config, {
+			standardizedFields = StandardizedFields,
+			customFields = CustomFields1
 		})
-	end else nil,
-	logSponsoredAdUnload = function(p1, p2, p3)
-		-- upvalues: buildGeometryFields (ref), fFlagLuaAppSponsoredAdVideoViewabilityEnabled (ref), telemetryService (ref), t_2 (ref), list (ref)
-		local var2 = buildGeometryFields(p2.geometry)
-		local t = {
-			encryptedAdTrackingData = p1.encryptedAdTrackingData,
-			tileType = p1.tileType,
-			adWidth = var2.adWidth,
-			adHeight = var2.adHeight,
-			viewportWidth = var2.viewportWidth,
-			viewportHeight = var2.viewportHeight,
-			viewabilitySessionStartTimestampMs = p2.viewabilitySessionStartTimestampMs,
-			cumulative30PercentInViewDurationMs = p2.cumulative30PercentInViewDurationMs,
-			cumulative50PercentInViewDurationMs = p2.cumulative50PercentInViewDurationMs,
-			cumulative100PercentInViewDurationMs = p2.cumulative100PercentInViewDurationMs,
-			maxContinuous30PercentInViewDurationMs = p2.maxContinuous30PercentInViewDurationMs,
-			maxContinuous50PercentInViewDurationMs = p2.maxContinuous50PercentInViewDurationMs,
-			maxContinuous100PercentInViewDurationMs = p2.maxContinuous100PercentInViewDurationMs,
-			dwellDurationMs = p2.dwellDurationMs,
-			averagePercentSeen = p2.averagePercentSeen,
-			minPercentSeen = p2.minPercentSeen,
-			maxPercentSeen = p2.maxPercentSeen,
-			averageOnScreenRealEstate = p2.averageOnScreenRealEstate,
-			viewabilitySessionEndTimestampMs = p2.viewabilitySessionEndTimestampMs,
-			unloadReason = p3
+	end,
+	logSponsoredAdViewableImpression = function(CustomFields, CustomFields1) --[[ Line: 134 ]]
+		-- upvalues: buildGeometryFields (copy), FFlagLuaAppSponsoredAdVideoViewabilityEnabled (copy), TelemetryService (copy), config1 (copy), StandardizedFields (copy)
+		local GeometryFields = buildGeometryFields(CustomFields1.geometry)
+		local CustomFields2 = {
+			encryptedAdTrackingData = CustomFields.encryptedAdTrackingData,
+			tileType = CustomFields.tileType,
+			milestoneLabel = CustomFields1.milestoneLabel,
+			viewabilitySessionStartTimestampMs = CustomFields1.viewabilitySessionStartTimestampMs,
+			adWidth = GeometryFields.adWidth,
+			adHeight = GeometryFields.adHeight,
+			viewportWidth = GeometryFields.viewportWidth,
+			viewportHeight = GeometryFields.viewportHeight,
+			cumulative30PercentInViewDurationMs = CustomFields1.cumulative30PercentInViewDurationMs,
+			cumulative50PercentInViewDurationMs = CustomFields1.cumulative50PercentInViewDurationMs,
+			cumulative100PercentInViewDurationMs = CustomFields1.cumulative100PercentInViewDurationMs,
+			maxContinuous30PercentInViewDurationMs = CustomFields1.maxContinuous30PercentInViewDurationMs,
+			maxContinuous50PercentInViewDurationMs = CustomFields1.maxContinuous50PercentInViewDurationMs,
+			maxContinuous100PercentInViewDurationMs = CustomFields1.maxContinuous100PercentInViewDurationMs
 		}
 		
-		if fFlagLuaAppSponsoredAdVideoViewabilityEnabled then
-			t.isFullScreen = p2.isFullScreen
-			t.videoProgress = p2.videoProgress
-			t.videoLengthMs = p2.videoLengthMs
-			t.videoCumulativePlaytimeMs = p2.videoCumulativePlaytimeMs
-			t.cumulativeAudioPlaybackDurationMs = p2.cumulativeAudioPlaybackDurationMs
-			t.cumulative100PercentAudibleTimeMs = p2.cumulative100PercentAudibleTimeMs
-			t.maxAudioLevel = p2.maxAudioLevel
-			t.audioOnAtEvent = p2.audioOnAtEvent
-			t.cumulativeInGridViewDurationMs = p2.cumulativeInGridViewDurationMs
-			t.cumulativeFullScreenViewDurationMs = p2.cumulativeFullScreenViewDurationMs
+		if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then
+			CustomFields2.isFullScreen = CustomFields1.isFullScreen
+			CustomFields2.videoLengthMs = CustomFields1.videoLengthMs
+			CustomFields2.maxAudioLevel = CustomFields1.maxAudioLevel
+			CustomFields2.cumulativeInGridViewDurationMs = CustomFields1.cumulativeInGridViewDurationMs
+			CustomFields2.cumulativeFullScreenViewDurationMs = CustomFields1.cumulativeFullScreenViewDurationMs
 		end
-		telemetryService:LogEvent(t_2, { standardizedFields = list, customFields = t })
+		TelemetryService:LogEvent(config1, {
+			standardizedFields = StandardizedFields,
+			customFields = CustomFields2
+		})
+	end,
+	logSponsoredAdVideoProgress = if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then logSponsoredAdVideoProgress else nil,
+	logSponsoredAdUnload = function(CustomFields, CustomFields1, UnloadReason) --[[ Line: 199 ]]
+		-- upvalues: buildGeometryFields (copy), FFlagLuaAppSponsoredAdVideoViewabilityEnabled (copy), TelemetryService (copy), config2 (copy), StandardizedFields (copy)
+		local GeometryFields = buildGeometryFields(CustomFields1.geometry)
+		local CustomFields2 = {
+			encryptedAdTrackingData = CustomFields.encryptedAdTrackingData,
+			tileType = CustomFields.tileType,
+			adWidth = GeometryFields.adWidth,
+			adHeight = GeometryFields.adHeight,
+			viewportWidth = GeometryFields.viewportWidth,
+			viewportHeight = GeometryFields.viewportHeight,
+			viewabilitySessionStartTimestampMs = CustomFields1.viewabilitySessionStartTimestampMs,
+			cumulative30PercentInViewDurationMs = CustomFields1.cumulative30PercentInViewDurationMs,
+			cumulative50PercentInViewDurationMs = CustomFields1.cumulative50PercentInViewDurationMs,
+			cumulative100PercentInViewDurationMs = CustomFields1.cumulative100PercentInViewDurationMs,
+			maxContinuous30PercentInViewDurationMs = CustomFields1.maxContinuous30PercentInViewDurationMs,
+			maxContinuous50PercentInViewDurationMs = CustomFields1.maxContinuous50PercentInViewDurationMs,
+			maxContinuous100PercentInViewDurationMs = CustomFields1.maxContinuous100PercentInViewDurationMs,
+			dwellDurationMs = CustomFields1.dwellDurationMs,
+			averagePercentSeen = CustomFields1.averagePercentSeen,
+			minPercentSeen = CustomFields1.minPercentSeen,
+			maxPercentSeen = CustomFields1.maxPercentSeen,
+			averageOnScreenRealEstate = CustomFields1.averageOnScreenRealEstate,
+			viewabilitySessionEndTimestampMs = CustomFields1.viewabilitySessionEndTimestampMs,
+			unloadReason = UnloadReason
+		}
+		
+		if FFlagLuaAppSponsoredAdVideoViewabilityEnabled then
+			CustomFields2.isFullScreen = CustomFields1.isFullScreen
+			CustomFields2.videoProgress = CustomFields1.videoProgress
+			CustomFields2.videoLengthMs = CustomFields1.videoLengthMs
+			CustomFields2.videoCumulativePlaytimeMs = CustomFields1.videoCumulativePlaytimeMs
+			CustomFields2.cumulativeAudioPlaybackDurationMs = CustomFields1.cumulativeAudioPlaybackDurationMs
+			CustomFields2.cumulative100PercentAudibleTimeMs = CustomFields1.cumulative100PercentAudibleTimeMs
+			CustomFields2.maxAudioLevel = CustomFields1.maxAudioLevel
+			CustomFields2.audioOnAtEvent = CustomFields1.audioOnAtEvent
+			CustomFields2.cumulativeInGridViewDurationMs = CustomFields1.cumulativeInGridViewDurationMs
+			CustomFields2.cumulativeFullScreenViewDurationMs = CustomFields1.cumulativeFullScreenViewDurationMs
+		end
+		TelemetryService:LogEvent(config2, {
+			standardizedFields = StandardizedFields,
+			customFields = CustomFields2
+		})
 	end
 }

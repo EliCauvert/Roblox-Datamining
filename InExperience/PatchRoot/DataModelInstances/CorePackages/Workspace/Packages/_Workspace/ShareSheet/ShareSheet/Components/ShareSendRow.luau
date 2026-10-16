@@ -1,59 +1,51 @@
-﻿local shareSheet = script:FindFirstAncestor("ShareSheet")
-local parent = shareSheet.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local button = foundationModule.Button
-local textInput = foundationModule.TextInput
-local view = foundationModule.View
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local fillBehavior = foundationModule.Enums.FillBehavior
-local inputSize = foundationModule.Enums.InputSize
-local fFlagShareSheetPeoplePickerEnabledModule = require(shareSheet.Flags.FFlagShareSheetPeoplePickerEnabled)
+﻿local ShareSheet = script:FindFirstAncestor("ShareSheet")
+local Parent = ShareSheet.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local Button = FoundationModule.Button
+local TextInput = FoundationModule.TextInput
+local View = FoundationModule.View
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local FillBehavior = FoundationModule.Enums.FillBehavior
+local InputSize = FoundationModule.Enums.InputSize
+local FFlagShareSheetPeoplePickerEnabledModule = require(ShareSheet.Flags.FFlagShareSheetPeoplePickerEnabled)
 
-return function(p1)
-	-- upvalues: reactModule (ref), view (ref), fFlagShareSheetPeoplePickerEnabledModule (ref), textInput (ref), inputSize (ref), button (ref), buttonVariant (ref), fillBehavior (ref)
-	local var1
-	local var2, var3 = reactModule.useState("")
-	local var4 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref), var2 (ref)
-		p1.onActivated(var2)
-	end, { var2, p1.onActivated })
-	local createElement = reactModule.createElement
-	local t = { testId = "share-send-row" }
-	local t_1 = { ["col gap-medium size-full-0 auto-y"] = true }
+return function(Frame) --[[ Line: 27 | Named "ShareSendRow" ]]
+	-- upvalues: ReactModule (copy), View (copy), FFlagShareSheetPeoplePickerEnabledModule (copy), TextInput (copy), InputSize (copy), Button (copy), ButtonVariant (copy), FillBehavior (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState("")
 	
-	if fFlagShareSheetPeoplePickerEnabledModule then
-		var1 = p1.hasHorizontalPadding ~= false
-		var1 = nil
-	else
-		var1 = true
-	end
-	t_1["padding-x-xlarge padding-bottom-medium"] = var1
-	t.tag = t_1
-	t.LayoutOrder = p1.LayoutOrder
-	
-	return createElement(view, t, {
-		MessageInput = reactModule.createElement(textInput, {
+	return ReactModule.createElement(View, {
+		testId = "share-send-row",
+		tag = {
+			["col gap-medium size-full-0 auto-y"] = true,
+			["padding-x-xlarge padding-bottom-medium"] = not FFlagShareSheetPeoplePickerEnabledModule or Frame.hasHorizontalPadding ~= false
+		},
+		LayoutOrder = Frame.LayoutOrder
+	}, {
+		MessageInput = ReactModule.createElement(TextInput, {
 			label = "",
 			LayoutOrder = 1,
 			testId = "share-message-input",
-			isDisabled = p1.isLoading,
-			onChanged = var3,
-			onFocusGained = p1.onFocusGained,
-			placeholder = p1.messagePlaceholder,
-			size = inputSize.Medium,
-			text = var2,
+			isDisabled = Frame.isLoading,
+			onChanged = UseStateResult2,
+			onFocusGained = Frame.onFocusGained,
+			placeholder = Frame.messagePlaceholder,
+			size = InputSize.Medium,
+			text = UseStateResult,
 			width = UDim.new(1, 0)
 		}),
-		SendButton = reactModule.createElement(button, {
+		SendButton = ReactModule.createElement(Button, {
 			LayoutOrder = 2,
 			testId = "share-send-button",
-			text = p1.label,
-			variant = buttonVariant.Emphasis,
-			fillBehavior = if fFlagShareSheetPeoplePickerEnabledModule and p1.shouldFillButton == false then nil else fillBehavior.Fill,
-			isLoading = p1.isLoading,
-			size = inputSize.Medium,
-			onActivated = var4,
+			text = Frame.label,
+			variant = ButtonVariant.Emphasis,
+			fillBehavior = if FFlagShareSheetPeoplePickerEnabledModule and Frame.shouldFillButton == false then nil else FillBehavior.Fill,
+			isLoading = Frame.isLoading,
+			size = InputSize.Medium,
+			onActivated = ReactModule.useCallback(function() --[[ Line: 29 ]]
+				-- upvalues: Frame (copy), UseStateResult (copy)
+				Frame.onActivated(UseStateResult)
+			end, { UseStateResult, Frame.onActivated }),
 			width = UDim.new(1, 0)
 		})
 	})

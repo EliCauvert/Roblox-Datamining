@@ -1,17 +1,16 @@
-﻿return function(p1, p2, p3)
+﻿return function(p1, p2, p3) --[[ Line: 12 | Named "tryGetPathFromData" ]]
 	if p1 == nil or p2 == nil then
 		return false, nil
 	end
-	local var1 = p1
+	local v1 = p1
 	
 	for i = p3 or 1, #p2 do
-		local var2 = p2[i]
+		local v2 = p2[i]
 		
-		if var1 ~= nil then
-			var1 = var1[var2]
-			continue
+		if v1 == nil then
+			return false, nil
 		end
-		return false, nil
+		v1 = v1[v2]
 	end
-	return var1 ~= nil, var1
+	return v1 ~= nil, v1
 end

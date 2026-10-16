@@ -1,608 +1,612 @@
 ﻿local _ = require(script.Parent.types)
 
-local function createEmptyTurnState(p1, p2)
-	return {
-		status = "queued",
-		assistantText = "",
-		pendingAgentMessageId = nil,
-		pendingAgentMessageSequenceIndex = nil,
-		toolCallCount = 0,
-		infoUpdate = nil,
-		stopReason = nil,
-		error = nil,
-		errorCode = nil,
-		isDone = false,
-		sessionId = p1,
-		requestId = p2,
-		assistantMessages = {},
-		assistantMessageOrder = {},
-		pendingAgentMessageContent = {},
-		activitySlots = {},
-		activityItems = {},
-		toolCalls = {},
-		eventMetaBySequenceId = {}
-	}
+local function _(p1) --[[ Line: 42 | Named "getSequenceIndex" ]]
+	local SequenceNumber = if p1 == nil then nil else p1.sequenceNumber
+	
+	return if typeof(SequenceNumber) == "number" and SequenceNumber >= 0 then SequenceNumber + 1 else nil
 end
 
-local function _(p1)
-	local var1 = if p1 ~= nil then nil else p1.sequenceNumber
+local _ = function(p1) --[[ Line: 50 | Named "getMessageId" ]]
+	local MessageId = p1.messageId
 	
-	return if typeof(var1) == "number" and var1 >= 0 then var1 + 1 else nil
+	return if typeof(MessageId) == "string" and MessageId ~= "" then MessageId else nil
 end
 
-local _ = function(p1)
-	local messageId = p1.messageId
+local _ = function(List) --[[ Line: 55 | Named "cloneArray" ]]
+	local List1 = {}
 	
-	return if typeof(messageId) == "string" and messageId ~= "" then messageId else nil
-end
-
-local _ = function(p1)
-	local t = {}
-	
-	for i, v in p1 do
-		table.insert(t, v)
+	for _, value in List do
+		table.insert(List1, value)
 	end
-	return t
+	return List1
 end
 
-local function contentBlocksToText(p2)
-	local t = {}
+local function contentBlocksToText(PendingAgentMessageContent): string --[[ Line: 63 ]]
+	local List = {}
 	
-	for i, v in p2 do
-		if v.type == "text" and typeof(v.text) == "string" then
-			table.insert(t, v.text)
+	for _, value in PendingAgentMessageContent do
+		if value.type == "text" and typeof(value.text) == "string" then
+			table.insert(List, value.text)
 		end
 	end
-	return table.concat(t)
+	return table.concat(List)
 end
 
-local function messageMapToText(p3, p4)
-	-- upvalues: contentBlocksToText (ref)
-	local t = {}
+local function messageMapToText(AssistantMessages, AssistantMessageOrder): string --[[ Line: 73 ]]
+	-- upvalues: contentBlocksToText (copy)
+	local List = {}
 	
-	for i, v in p4 do
-		local var1 = p3[v]
+	for _, value in AssistantMessageOrder do
+		local AssistantMessage = AssistantMessages[value]
 		
-		if var1 ~= nil then
-			table.insert(t, contentBlocksToText(var1))
+		if AssistantMessage ~= nil then
+			table.insert(List, contentBlocksToText(AssistantMessage))
 		end
 	end
-	return table.concat(t)
+	return table.concat(List)
 end
 
-local _ = function(p5, p6)
-	for i, v in p5 do
-		if v == p6 then
-			return p5
+local _ = function(List, p1) --[[ Line: 84 | Named "ensureMessageOrder" ]]
+	for _, value in List do
+		if value == p1 then
+			return List
 		end
 	end
-	local t = {}
+	local List1 = {}
 	
-	for i_1, v_1 in p5 do
-		table.insert(t, v_1)
+	for _, value1 in List do
+		table.insert(List1, value1)
 	end
-	table.insert(t, p6)
+	table.insert(List1, p1)
 	
-	return t
+	return List1
 end
 
-local _ = function(p7, p8, p9, p10)
-	local cloned = table.clone(p7)
-	local t = {}
+local _ = function(Tbl, List, Key, List1) --[[ Line: 95 | Named "replaceMessageContent" ]]
+	local Copy = table.clone(Tbl)
+	local List2 = {}
 	
-	for i, v in p10 do
-		table.insert(t, v)
+	for _, value in List1 do
+		table.insert(List2, value)
 	end
-	cloned[p9] = t
+	Copy[Key] = List2
 	
-	for i, v_1 in p8 do
-		if v_1 == p9 then
-			return cloned, p8
+	for _, value1 in List do
+		if value1 == Key then
+			return Copy, List
 		end
 	end
-	local t_1 = {}
+	local List3 = {}
 	
-	for i_2, v_2 in p8 do
-		table.insert(t_1, v_2)
+	for _, value2 in List do
+		table.insert(List3, value2)
 	end
-	table.insert(t_1, p9)
+	table.insert(List3, Key)
 	
-	return cloned, t_1
+	return Copy, List3
 end
 
-local function appendMessageContent(p11, p12, p13, p14)
-	local var2
-	local cloned = table.clone(p11)
-	local var3 = cloned[p13]
+local function appendMessageContent(Tbl, List, Key, p2) --[[ Line: 106 ]]
+	local Copy = table.clone(Tbl)
+	local Entry = Copy[Key]
+	local List2 = nil
 	
-	if var3 == nil then
-		var2 = {}
+	if Entry == nil then
+		List2 = {}
 	else
-		local t = {}
+		local List1 = {}
 		
-		for i, v in var3 do
-			table.insert(t, v)
+		for _, value in Entry do
+			table.insert(List1, value)
 		end
-		var2 = t
+		List2 = List1
 	end
-	table.insert(var2, p14)
-	cloned[p13] = var2
+	table.insert(List2, p2)
+	Copy[Key] = List2
 	
-	for i, v in p12 do
-		if v == p13 then
-			return cloned, p12
+	for _, value1 in List do
+		if value1 == Key then
+			return Copy, List
 		end
 	end
-	local t = {}
+	local List3 = {}
 	
-	for i_1, v_1 in p12 do
-		table.insert(t, v_1)
+	for _, value2 in List do
+		table.insert(List3, value2)
 	end
-	table.insert(t, p13)
+	table.insert(List3, Key)
 	
-	return cloned, t
+	return Copy, List3
 end
 
-local function buildActivityItems(p15, p16)
-	local t = {}
-	local t_1 = {}
+local function buildActivityItems(ActivitySlots, ToolCalls) --[[ Line: 120 ]]
+	local List = {}
+	local List1 = {}
 	
-	for i in p15 do
-		table.insert(t_1, i)
+	for activitySlot in ActivitySlots do
+		table.insert(List1, activitySlot)
 	end
-	table.sort(t_1)
+	table.sort(List1)
 	
-	for i_1, v in t_1 do
-		local var4 = p15[v]
+	for _, value in List1 do
+		local ActivitySlot = ActivitySlots[value]
 		
-		if var4.kind == "agent_message" then
-			table.insert(t, { kind = "agent_message", text = var4.text })
-		elseif var4.kind == "tool_call" then
-			local toolCallId = p16[var4.toolCallId]
-			table.insert(t, {
+		if ActivitySlot.kind == "agent_message" then
+			table.insert(List, { kind = "agent_message", text = ActivitySlot.text })
+		elseif ActivitySlot.kind == "tool_call" then
+			local ToolCall = ToolCalls[ActivitySlot.toolCallId]
+			table.insert(List, {
 				kind = "tool_call",
-				toolCallId = var4.toolCallId,
-				title = if toolCallId then toolCallId.title else nil,
-				status = if toolCallId then toolCallId.status else nil
+				toolCallId = ActivitySlot.toolCallId,
+				title = if ToolCall then ToolCall.title else nil,
+				status = if ToolCall then ToolCall.status else nil
 			})
 		end
 	end
-	return t
+	return List
 end
 
-local _ = function(p17)
-	-- upvalues: buildActivityItems (ref)
-	p17.activityItems = buildActivityItems(p17.activitySlots, p17.toolCalls)
+local _ = function(EmptyTurnState) --[[ Line: 153 | Named "refreshActivityItems" ]]
+	-- upvalues: buildActivityItems (copy)
+	EmptyTurnState.activityItems = buildActivityItems(EmptyTurnState.activitySlots, EmptyTurnState.toolCalls)
 end
 
-local _ = function(p17, p18, p19)
-	-- upvalues: buildActivityItems (ref)
-	if p18 <= 0 then
+local _ = function(EmptyTurnState, Key: number, p3) --[[ Line: 157 | Named "recordActivitySlotAtIndex" ]]
+	-- upvalues: buildActivityItems (copy)
+	if Key > 0 then
+		local Copy = table.clone(EmptyTurnState.activitySlots)
+		Copy[Key] = p3
+		EmptyTurnState.activitySlots = Copy
+		EmptyTurnState.activityItems = buildActivityItems(EmptyTurnState.activitySlots, EmptyTurnState.toolCalls)
+		
 		return
 	end
-	local cloned = table.clone(p17.activitySlots)
-	cloned[p18] = p19
-	p17.activitySlots = cloned
-	p17.activityItems = buildActivityItems(p17.activitySlots, p17.toolCalls)
 end
 
-local _ = function(p17, p18, p19)
-	-- upvalues: buildActivityItems (ref)
-	local var5 = if p18 ~= nil then nil else p18.sequenceNumber
-	local var6 = if typeof(var5) == "number" and var5 >= 0 then var5 + 1 else nil
+local _ = function(EmptyTurnState, p3, p4) --[[ Line: 168 | Named "recordActivitySlot" ]]
+	-- upvalues: buildActivityItems (copy)
+	local SequenceNumber = if p3 == nil then nil else p3.sequenceNumber
+	local NewSequenceNumber = if typeof(SequenceNumber) == "number" and SequenceNumber >= 0 then SequenceNumber + 1 else nil
 	
-	if var6 == nil then return end
-	if var6 <= 0 then
+	if NewSequenceNumber == nil then return end
+	if NewSequenceNumber > 0 then
+		local Copy = table.clone(EmptyTurnState.activitySlots)
+		Copy[NewSequenceNumber] = p4
+		EmptyTurnState.activitySlots = Copy
+		EmptyTurnState.activityItems = buildActivityItems(EmptyTurnState.activitySlots, EmptyTurnState.toolCalls)
+		
 		return
 	end
-	var5 = table.clone(p17.activitySlots)
-	var5[var6] = p19
-	p17.activitySlots = var5
-	p17.activityItems = buildActivityItems(p17.activitySlots, p17.toolCalls)
 end
 
-local _ = function(p17, p18, p19)
-	-- upvalues: buildActivityItems (ref)
-	local t = { kind = "tool_call", toolCallId = p19 }
-	local var5 = if p18 ~= nil then nil else p18.sequenceNumber
-	local var6 = if typeof(var5) == "number" and var5 >= 0 then var5 + 1 else nil
+local _ = function(EmptyTurnState, p3, ToolCallId) --[[ Line: 177 | Named "recordToolCallSequenceSlot" ]]
+	-- upvalues: buildActivityItems (copy)
+	local config = { kind = "tool_call", toolCallId = ToolCallId }
+	local SequenceNumber = if p3 == nil then nil else p3.sequenceNumber
+	local NewSequenceNumber = if typeof(SequenceNumber) == "number" and SequenceNumber >= 0 then SequenceNumber + 1 else nil
 	
-	if var6 == nil then return end
-	if var6 <= 0 then
+	if NewSequenceNumber == nil then return end
+	if NewSequenceNumber > 0 then
+		local Copy = table.clone(EmptyTurnState.activitySlots)
+		Copy[NewSequenceNumber] = config
+		EmptyTurnState.activitySlots = Copy
+		EmptyTurnState.activityItems = buildActivityItems(EmptyTurnState.activitySlots, EmptyTurnState.toolCalls)
+		
 		return
 	end
-	var5 = table.clone(p17.activitySlots)
-	var5[var6] = t
-	p17.activitySlots = var5
-	p17.activityItems = buildActivityItems(p17.activitySlots, p17.toolCalls)
 end
 
-local _ = function(p17, p18)
-	for i, v in p17.activitySlots do
-		if v.kind == "tool_call" and v.toolCallId == p18 then
+local _ = function(p3, ToolCallId): boolean --[[ Line: 181 | Named "hasToolCallActivitySlot" ]]
+	for _, activitySlot in p3.activitySlots do
+		if activitySlot.kind == "tool_call" and activitySlot.toolCallId == ToolCallId then
 			return true
 		end
 	end
 	return false
 end
 
-local _ = function(p19)
-	p19.pendingAgentMessageId = nil
-	p19.pendingAgentMessageContent = {}
-	p19.pendingAgentMessageSequenceIndex = nil
+local _ = function(EmptyTurnState) --[[ Line: 190 | Named "clearPendingAgentMessage" ]]
+	EmptyTurnState.pendingAgentMessageId = nil
+	EmptyTurnState.pendingAgentMessageContent = {}
+	EmptyTurnState.pendingAgentMessageSequenceIndex = nil
 end
 
-local function appendPendingAgentMessage(p19, p20, p21, p22)
-	-- upvalues: contentBlocksToText (ref), buildActivityItems (ref)
-	if p19.pendingAgentMessageId ~= nil and p19.pendingAgentMessageId ~= p20 then
-		local var5 = contentBlocksToText(p19.pendingAgentMessageContent)
+local function appendPendingAgentMessage(EmptyTurnState, PendingAgentMessageId, Content, p4) --[[ Line: 196 ]]
+	-- upvalues: contentBlocksToText (copy), buildActivityItems (copy)
+	if EmptyTurnState.pendingAgentMessageId ~= nil and EmptyTurnState.pendingAgentMessageId ~= PendingAgentMessageId then
+		local ContentBlocksToTextResult = contentBlocksToText(EmptyTurnState.pendingAgentMessageContent)
 		
-		if var5 ~= "" then
-			local pendingAgentMessageSequenceIndex = p19.pendingAgentMessageSequenceIndex
+		if ContentBlocksToTextResult ~= "" then
+			local PendingAgentMessageSequenceIndex: number = EmptyTurnState.pendingAgentMessageSequenceIndex
 			
-			if pendingAgentMessageSequenceIndex ~= nil then
-				local t = { kind = "agent_message", text = var5 }
+			if PendingAgentMessageSequenceIndex ~= nil then
+				local config = { kind = "agent_message", text = ContentBlocksToTextResult }
 				
-				if pendingAgentMessageSequenceIndex > 0 then
-					local cloned = table.clone(p19.activitySlots)
-					cloned[pendingAgentMessageSequenceIndex] = t
-					p19.activitySlots = cloned
-					p19.activityItems = buildActivityItems(p19.activitySlots, p19.toolCalls)
+				if PendingAgentMessageSequenceIndex > 0 then
+					local Copy = table.clone(EmptyTurnState.activitySlots)
+					Copy[PendingAgentMessageSequenceIndex] = config
+					EmptyTurnState.activitySlots = Copy
+					EmptyTurnState.activityItems = buildActivityItems(EmptyTurnState.activitySlots, EmptyTurnState.toolCalls)
 				end
 			end
 		end
-		p19.pendingAgentMessageId = nil
-		p19.pendingAgentMessageContent = {}
-		p19.pendingAgentMessageSequenceIndex = nil
+		EmptyTurnState.pendingAgentMessageId = nil
+		EmptyTurnState.pendingAgentMessageContent = {}
+		EmptyTurnState.pendingAgentMessageSequenceIndex = nil
 	end
-	local t = {}
+	local List = {}
 	
-	for i, v in p19.pendingAgentMessageContent do
-		table.insert(t, v)
+	for _, value in EmptyTurnState.pendingAgentMessageContent do
+		table.insert(List, value)
 	end
-	table.insert(t, p21)
-	p19.pendingAgentMessageId = p20
-	p19.pendingAgentMessageContent = t
+	table.insert(List, Content)
+	EmptyTurnState.pendingAgentMessageId = PendingAgentMessageId
+	EmptyTurnState.pendingAgentMessageContent = List
 	
-	if p19.pendingAgentMessageSequenceIndex == nil then
-		local var6 = if p22 ~= nil then nil else p22.sequenceNumber
-		p19.pendingAgentMessageSequenceIndex = if typeof(var6) == "number" and var6 >= 0 then var6 + 1 else nil
+	if EmptyTurnState.pendingAgentMessageSequenceIndex == nil then
+		local SequenceNumber = if p4 == nil then nil else p4.sequenceNumber
+		EmptyTurnState.pendingAgentMessageSequenceIndex = if typeof(SequenceNumber) == "number" and SequenceNumber >= 0 then SequenceNumber + 1 else nil
 	end
 end
 
-local function flushPendingAgentMessageToActivity(p23)
-	-- upvalues: contentBlocksToText (ref), buildActivityItems (ref)
-	local var7 = contentBlocksToText(p23.pendingAgentMessageContent)
+local function flushPendingAgentMessageToActivity(EmptyTurnState) --[[ Line: 222 ]]
+	-- upvalues: contentBlocksToText (copy), buildActivityItems (copy)
+	local ContentBlocksToTextResult = contentBlocksToText(EmptyTurnState.pendingAgentMessageContent)
 	
-	if var7 ~= "" then
-		local pendingAgentMessageSequenceIndex = p23.pendingAgentMessageSequenceIndex
+	if ContentBlocksToTextResult ~= "" then
+		local PendingAgentMessageSequenceIndex: number = EmptyTurnState.pendingAgentMessageSequenceIndex
 		
-		if pendingAgentMessageSequenceIndex ~= nil then
-			local t = { kind = "agent_message", text = var7 }
+		if PendingAgentMessageSequenceIndex ~= nil then
+			local config = { kind = "agent_message", text = ContentBlocksToTextResult }
 			
-			if pendingAgentMessageSequenceIndex > 0 then
-				local cloned = table.clone(p23.activitySlots)
-				cloned[pendingAgentMessageSequenceIndex] = t
-				p23.activitySlots = cloned
-				p23.activityItems = buildActivityItems(p23.activitySlots, p23.toolCalls)
+			if PendingAgentMessageSequenceIndex > 0 then
+				local Copy = table.clone(EmptyTurnState.activitySlots)
+				Copy[PendingAgentMessageSequenceIndex] = config
+				EmptyTurnState.activitySlots = Copy
+				EmptyTurnState.activityItems = buildActivityItems(EmptyTurnState.activitySlots, EmptyTurnState.toolCalls)
 			end
 		end
 	end
-	p23.pendingAgentMessageId = nil
-	p23.pendingAgentMessageContent = {}
-	p23.pendingAgentMessageSequenceIndex = nil
+	EmptyTurnState.pendingAgentMessageId = nil
+	EmptyTurnState.pendingAgentMessageContent = {}
+	EmptyTurnState.pendingAgentMessageSequenceIndex = nil
 end
 
-local function flushPendingAgentMessageToAssistant(p23)
-	-- upvalues: appendMessageContent (ref), messageMapToText (ref)
-	local pendingAgentMessageId = p23.pendingAgentMessageId
+local function flushPendingAgentMessageToAssistant(EmptyTurnState) --[[ Line: 233 ]]
+	-- upvalues: appendMessageContent (copy), messageMapToText (copy)
+	local PendingAgentMessageId = EmptyTurnState.pendingAgentMessageId
 	
-	if pendingAgentMessageId == nil then
-		p23.pendingAgentMessageId = nil
-		p23.pendingAgentMessageContent = {}
-		p23.pendingAgentMessageSequenceIndex = nil
+	if PendingAgentMessageId == nil then
+		EmptyTurnState.pendingAgentMessageId = nil
+		EmptyTurnState.pendingAgentMessageContent = {}
+		EmptyTurnState.pendingAgentMessageSequenceIndex = nil
 		
 		return
 	end
-	local assistantMessages = p23.assistantMessages
-	local assistantMessageOrder = p23.assistantMessageOrder
+	local AssistantMessages = EmptyTurnState.assistantMessages
+	local AssistantMessageOrder = EmptyTurnState.assistantMessageOrder
 	
-	for i, v in p23.pendingAgentMessageContent do
-		local var7, var8 = appendMessageContent(assistantMessages, assistantMessageOrder, pendingAgentMessageId, v)
-		assistantMessages = var7
-		assistantMessageOrder = var8
+	for _, value in EmptyTurnState.pendingAgentMessageContent do
+		AssistantMessages, AssistantMessageOrder = appendMessageContent(AssistantMessages, AssistantMessageOrder, PendingAgentMessageId, value)
 	end
-	p23.assistantMessages = assistantMessages
-	p23.assistantMessageOrder = assistantMessageOrder
-	p23.assistantText = messageMapToText(assistantMessages, assistantMessageOrder)
-	p23.pendingAgentMessageId = nil
-	p23.pendingAgentMessageContent = {}
-	p23.pendingAgentMessageSequenceIndex = nil
+	EmptyTurnState.assistantMessages = AssistantMessages
+	EmptyTurnState.assistantMessageOrder = AssistantMessageOrder
+	EmptyTurnState.assistantText = messageMapToText(AssistantMessages, AssistantMessageOrder)
+	EmptyTurnState.pendingAgentMessageId = nil
+	EmptyTurnState.pendingAgentMessageContent = {}
+	EmptyTurnState.pendingAgentMessageSequenceIndex = nil
 end
 
-local _ = function(p24)
-	local roblox = p24._meta and p24._meta._roblox
+local _ = function(p5) --[[ Line: 251 | Named "extractRobloxMeta" ]]
+	local Roblox = p5._meta and p5._meta._roblox
 	
-	return if typeof(roblox) == "table" then roblox else nil
+	return if typeof(Roblox) == "table" then Roblox else nil
 end
 
-local function recordEventMeta(p24, p25, p26)
-	if typeof(p25) ~= "number" or p25 < 0 then return end
-	local roblox = p26._meta and p26._meta._roblox
-	local var9 = if typeof(roblox) == "table" then roblox else nil
+local function recordEventMeta(p5, SequenceNumber: number, p6) --[[ Line: 256 ]]
+	if typeof(SequenceNumber) ~= "number" or SequenceNumber < 0 then return end
+	local Roblox = p6._meta and p6._meta._roblox
+	local Roblox1 = if typeof(Roblox) == "table" then Roblox else nil
 	
-	if var9 == nil then return end
-	local turnId = var9.turnId
-	local emittedTime = var9.emittedTime
-	local referenceId = var9.referenceId
-	local var10 = typeof(turnId) == "number" and turnId > 0
-	local var11 = typeof(emittedTime) == "string" and emittedTime ~= ""
-	local var12 = typeof(referenceId) == "string" and referenceId ~= ""
+	if Roblox1 == nil then return end
+	local TurnId: number = Roblox1.turnId
+	local EmittedTime = Roblox1.emittedTime
+	local ReferenceId = Roblox1.referenceId
+	local IsTurnIdAbove: boolean = typeof(TurnId) == "number" and TurnId > 0
+	local IsNotEmittedTimeMatch: boolean = typeof(EmittedTime) == "string" and EmittedTime ~= ""
+	local IsNotReferenceIdMatch: boolean = typeof(ReferenceId) == "string" and ReferenceId ~= ""
 	
-	if not var10 and not var11 and not var12 then return end
-	local var13 = if p24.eventMetaBySequenceId ~= nil then {} else table.clone(p24.eventMetaBySequenceId)
-	local var14 = if var13[p25] ~= nil then {} else table.clone(var13[p25])
+	if not IsTurnIdAbove and not IsNotEmittedTimeMatch and not IsNotReferenceIdMatch then return end
+	local T = if p5.eventMetaBySequenceId == nil then {} else table.clone(p5.eventMetaBySequenceId)
+	local T1 = if T[SequenceNumber] == nil then {} else table.clone(T[SequenceNumber])
 	
-	if var10 then
-		var14.turnId = turnId
+	if IsTurnIdAbove then
+		T1.turnId = TurnId
 	end
-	if var11 then
-		var14.emittedTime = emittedTime
+	if IsNotEmittedTimeMatch then
+		T1.emittedTime = EmittedTime
 	end
-	if var12 then
-		var14.referenceId = referenceId
+	if IsNotReferenceIdMatch then
+		T1.referenceId = ReferenceId
 	end
-	var13[p25] = var14
-	p24.eventMetaBySequenceId = var13
+	T[SequenceNumber] = T1
+	p5.eventMetaBySequenceId = T
 end
 
-local function extractTurnId(p24)
-	local roblox = p24._meta and p24._meta._roblox
-	local var9 = if typeof(roblox) == "table" then roblox else nil
-	local var10 = if typeof(var9) == "table" then var9.turnId else nil
+local _ = function(p5) --[[ Line: 301 | Named "extractReferenceId" ]]
+	local Roblox = p5._meta and p5._meta._roblox
+	local Roblox1 = if typeof(Roblox) == "table" then Roblox else nil
+	local ReferenceId = if typeof(Roblox1) == "table" then Roblox1.referenceId else nil
 	
-	return if typeof(var10) == "number" and var10 > 0 then var10 else nil
+	return if typeof(ReferenceId) == "string" and ReferenceId ~= "" then ReferenceId else nil
 end
 
-local _ = function(p24)
-	local roblox = p24._meta and p24._meta._roblox
-	local var9 = if typeof(roblox) == "table" then roblox else nil
-	local var10 = if typeof(var9) == "table" then var9.referenceId else nil
+local function applyToolCallUpdate(EmptyTurnState, p5, p6) --[[ Line: 307 ]]
+	-- upvalues: buildActivityItems (copy)
+	local ToolCallId = p5.toolCallId
 	
-	return if typeof(var10) == "string" and var10 ~= "" then var10 else nil
-end
-
-local function applyToolCallUpdate(p24, p25, p26)
-	-- upvalues: buildActivityItems (ref)
-	local toolCallId = p25.toolCallId
+	if typeof(ToolCallId) ~= "string" or ToolCallId == "" then return end
+	local ToolCall = EmptyTurnState.toolCalls[ToolCallId]
+	local NoToolCall = ToolCall == nil
+	local Config = if ToolCall == nil then { toolCallId = ToolCallId } else table.clone(ToolCall)
 	
-	if typeof(toolCallId) ~= "string" or toolCallId == "" then return end
-	local var9 = p24.toolCalls[toolCallId]
-	local var10 = var9 == nil
-	local var11 = if var9 ~= nil then { toolCallId = toolCallId } else table.clone(var9)
+	if p5.title ~= nil then
+		Config.title = p5.title
+	end
+	if p5.kind ~= nil then
+		Config.kind = p5.kind
+	end
+	if p5.status ~= nil then
+		Config.status = p5.status
+	end
+	if p5.rawInput ~= nil then
+		Config.rawInput = p5.rawInput
+	end
+	if p5.rawOutput ~= nil then
+		Config.rawOutput = p5.rawOutput
+	end
+	if p5.content ~= nil then
+		Config.content = p5.content
+	end
+	local Roblox = p5._meta and p5._meta._roblox
+	local Roblox1 = if typeof(Roblox) == "table" then Roblox else nil
+	local TurnId = if typeof(Roblox1) == "table" then Roblox1.turnId else nil
+	local TurnId1 = if typeof(TurnId) == "number" and TurnId > 0 then TurnId else nil
 	
-	if p25.title ~= nil then
-		var11.title = p25.title
+	if TurnId1 ~= nil then
+		Config.turnId = TurnId1
 	end
-	if p25.kind ~= nil then
-		var11.kind = p25.kind
-	end
-	if p25.status ~= nil then
-		var11.status = p25.status
-	end
-	if p25.rawInput ~= nil then
-		var11.rawInput = p25.rawInput
-	end
-	if p25.rawOutput ~= nil then
-		var11.rawOutput = p25.rawOutput
-	end
-	if p25.content ~= nil then
-		var11.content = p25.content
-	end
-	local roblox = p25._meta and p25._meta._roblox
-	local var12 = if typeof(roblox) == "table" then roblox else nil
-	local var13 = if typeof(var12) == "table" then var12.turnId else nil
-	local var14 = if typeof(var13) == "number" and var13 > 0 then var13 else nil
+	local Roblox2 = p5._meta and p5._meta._roblox
+	local Roblox21 = if typeof(Roblox2) == "table" then Roblox2 else nil
+	local ReferenceId = if typeof(Roblox21) == "table" then Roblox21.referenceId else nil
+	local ReferenceId1 = if typeof(ReferenceId) == "string" and ReferenceId ~= "" then ReferenceId else nil
 	
-	if var14 ~= nil then
-		var11.turnId = var14
+	if ReferenceId1 ~= nil then
+		Config.referenceId = ReferenceId1
 	end
-	local roblox_1 = p25._meta and p25._meta._roblox
-	var13 = if typeof(roblox_1) == "table" then roblox_1 else nil
-	local var15 = if typeof(var13) == "table" then var13.referenceId else nil
-	local var16 = if typeof(var15) == "string" and var15 ~= "" then var15 else nil
+	local Copy = table.clone(EmptyTurnState.toolCalls)
+	Copy[ToolCallId] = Config
+	EmptyTurnState.toolCalls = Copy
 	
-	if var16 ~= nil then
-		var11.referenceId = var16
+	if NoToolCall then
+		EmptyTurnState.toolCallCount += 1
 	end
-	var13 = table.clone(p24.toolCalls)
-	var13[toolCallId] = var11
-	p24.toolCalls = var13
-	
-	if var10 then
-		p24.toolCallCount += 1
-	end
-	if not var10 then
-		for i, v in p24.activitySlots do
-			if v.kind == "tool_call" and v.toolCallId == toolCallId then
-				var15 = true
-				if var15 then
-					p24.activityItems = buildActivityItems(p24.activitySlots, p24.toolCalls)
-					
-					return
-				end
+	if not NoToolCall then
+		local Flag = false
+		
+		for _, activitySlot in EmptyTurnState.activitySlots do
+			if activitySlot.kind == "tool_call" and activitySlot.toolCallId == ToolCallId then
+				Flag = true
+				break
 			end
 		end
-		var15 = false
+		if Flag then
+			EmptyTurnState.activityItems = buildActivityItems(EmptyTurnState.activitySlots, EmptyTurnState.toolCalls)
+			
+			return
+		end
 	end
-	var15 = { kind = "tool_call", toolCallId = toolCallId }
-	local var17 = if p26 ~= nil then nil else p26.sequenceNumber
-	local var18 = if typeof(var17) == "number" and var17 >= 0 then var17 + 1 else nil
+	local config = { kind = "tool_call", toolCallId = ToolCallId }
+	local SequenceNumber = if p6 == nil then nil else p6.sequenceNumber
+	local NewSequenceNumber = if typeof(SequenceNumber) == "number" and SequenceNumber >= 0 then SequenceNumber + 1 else nil
 	
-	if var18 == nil then return end
-	if var18 <= 0 then
+	if NewSequenceNumber == nil then return end
+	if NewSequenceNumber > 0 then
+		local Copy1 = table.clone(EmptyTurnState.activitySlots)
+		Copy1[NewSequenceNumber] = config
+		EmptyTurnState.activitySlots = Copy1
+		EmptyTurnState.activityItems = buildActivityItems(EmptyTurnState.activitySlots, EmptyTurnState.toolCalls)
+		
 		return
 	end
-	var17 = table.clone(p24.activitySlots)
-	var17[var18] = var15
-	p24.activitySlots = var17
-	p24.activityItems = buildActivityItems(p24.activitySlots, p24.toolCalls)
 end
 
-local function applyToolCallContentChunk(p27, p28, p29)
-	-- upvalues: buildActivityItems (ref)
-	local toolCallId = p28.toolCallId
-	local content = p28.content
+local function applyToolCallContentChunk(EmptyTurnState, p7, p8) --[[ Line: 356 ]]
+	-- upvalues: buildActivityItems (copy)
+	local ToolCallId = p7.toolCallId
+	local Content = p7.content
 	
-	if typeof(toolCallId) ~= "string" or toolCallId == "" or typeof(content) ~= "table" then return end
-	local var19
-	local var20 = p27.toolCalls[toolCallId]
-	local var21 = var20 == nil
-	local var22 = if var20 ~= nil then { toolCallId = toolCallId } else table.clone(var20)
-	local content_1 = var22.content
+	if typeof(ToolCallId) ~= "string" or ToolCallId == "" or typeof(Content) ~= "table" then return end
+	local ToolCall = EmptyTurnState.toolCalls[ToolCallId]
+	local NoToolCall = ToolCall == nil
+	local Config = if ToolCall == nil then { toolCallId = ToolCallId } else table.clone(ToolCall)
+	local Content1 = Config.content
+	local Content2 = nil
 	
-	if content_1 == nil then
-		var19 = {}
+	if Content1 == nil then
+		Content2 = {}
 	else
-		local t = {}
+		local List = {}
 		
-		for i, v in content_1 do
-			table.insert(t, v)
+		for _, value in Content1 do
+			table.insert(List, value)
 		end
-		var19 = t
+		Content2 = List
 	end
-	table.insert(var19, content)
-	var22.content = var19
-	local cloned = table.clone(p27.toolCalls)
-	cloned[toolCallId] = var22
-	p27.toolCalls = cloned
+	table.insert(Content2, Content)
+	Config.content = Content2
+	local Copy = table.clone(EmptyTurnState.toolCalls)
+	Copy[ToolCallId] = Config
+	EmptyTurnState.toolCalls = Copy
 	
-	if var21 then
-		p27.toolCallCount += 1
+	if NoToolCall then
+		EmptyTurnState.toolCallCount += 1
 	end
-	if not var21 then
-		local var23
-		for i, v in p27.activitySlots do
-			if v.kind == "tool_call" and v.toolCallId == toolCallId then
-				var23 = true
-				if var23 then
-					p27.activityItems = buildActivityItems(p27.activitySlots, p27.toolCalls)
-					
-					return
-				end
+	if not NoToolCall then
+		local Flag = false
+		
+		for _, activitySlot in EmptyTurnState.activitySlots do
+			if activitySlot.kind == "tool_call" and activitySlot.toolCallId == ToolCallId then
+				Flag = true
+				break
 			end
 		end
-		var23 = false
+		if Flag then
+			EmptyTurnState.activityItems = buildActivityItems(EmptyTurnState.activitySlots, EmptyTurnState.toolCalls)
+			
+			return
+		end
 	end
-	local t = { kind = "tool_call", toolCallId = toolCallId }
-	local var24 = if p29 ~= nil then nil else p29.sequenceNumber
-	local var25 = if typeof(var24) == "number" and var24 >= 0 then var24 + 1 else nil
+	local config = { kind = "tool_call", toolCallId = ToolCallId }
+	local SequenceNumber = if p8 == nil then nil else p8.sequenceNumber
+	local NewSequenceNumber = if typeof(SequenceNumber) == "number" and SequenceNumber >= 0 then SequenceNumber + 1 else nil
 	
-	if var25 == nil then return end
-	if var25 <= 0 then
+	if NewSequenceNumber == nil then return end
+	if NewSequenceNumber > 0 then
+		local Copy1 = table.clone(EmptyTurnState.activitySlots)
+		Copy1[NewSequenceNumber] = config
+		EmptyTurnState.activitySlots = Copy1
+		EmptyTurnState.activityItems = buildActivityItems(EmptyTurnState.activitySlots, EmptyTurnState.toolCalls)
+		
 		return
 	end
-	var24 = table.clone(p27.activitySlots)
-	var24[var25] = t
-	p27.activitySlots = var24
-	p27.activityItems = buildActivityItems(p27.activitySlots, p27.toolCalls)
 end
 
 return {
-	applySessionUpdate = function(p30, p31, p32)
-		-- upvalues: recordEventMeta (ref), flushPendingAgentMessageToAssistant (ref), flushPendingAgentMessageToActivity (ref), messageMapToText (ref), appendPendingAgentMessage (ref), applyToolCallUpdate (ref), applyToolCallContentChunk (ref)
-		local messageId, var26
-		local sessionUpdate = p31.sessionUpdate
-		local cloned = table.clone(p30)
-		recordEventMeta(cloned, if p32 ~= nil then nil else p32.sequenceNumber, p31)
+	applySessionUpdate = function(Tbl, p9, p10) --[[ Line: 385 ]]
+		-- upvalues: recordEventMeta (copy), flushPendingAgentMessageToAssistant (copy), flushPendingAgentMessageToActivity (copy), messageMapToText (copy), appendPendingAgentMessage (copy), applyToolCallUpdate (copy), applyToolCallContentChunk (copy)
+		local SessionUpdate = p9.sessionUpdate
+		local Copy = table.clone(Tbl)
+		recordEventMeta(Copy, if p10 == nil then nil else p10.sequenceNumber, p9)
 		
-		if cloned.status == "queued" then
-			cloned.status = "streaming"
+		if Copy.status == "queued" then
+			Copy.status = "streaming"
 		end
-		if sessionUpdate ~= "agent_message_chunk" then
-			if sessionUpdate == "state_change" and p31.state == "idle" then
-				flushPendingAgentMessageToAssistant(cloned)
+		if SessionUpdate ~= "agent_message_chunk" then
+			if SessionUpdate == "state_change" and p9.state == "idle" then
+				flushPendingAgentMessageToAssistant(Copy)
 			else
-				flushPendingAgentMessageToActivity(cloned)
+				flushPendingAgentMessageToActivity(Copy)
 			end
 		end
-		if sessionUpdate == "agent_message" then
-			messageId = p31.messageId
-			var26 = if typeof(messageId) == "string" and messageId ~= "" then messageId else nil
-			messageId = p31.content
+		if SessionUpdate == "agent_message" then
+			local MessageId = p9.messageId
+			local MessageId1 = if typeof(MessageId) == "string" and MessageId ~= "" then MessageId else nil
+			local Content = p9.content
 			
-			if var26 == nil or typeof(messageId) ~= "table" then
-				return cloned
-			end
-			local assistantMessageOrder = cloned.assistantMessageOrder
-			local cloned_1 = table.clone(cloned.assistantMessages)
-			local t = {}
-			
-			for i, v in messageId do
-				table.insert(t, v)
-			end
-			local var27
-			cloned_1[var26] = t
-			
-			for i_1, v_1 in assistantMessageOrder do
-				if v_1 == var26 then
-					var27 = assistantMessageOrder
-					cloned.assistantMessages = cloned_1
-					cloned.assistantMessageOrder = var27
-					cloned.assistantText = messageMapToText(cloned.assistantMessages, cloned.assistantMessageOrder)
-					
-					return cloned
+			if MessageId1 ~= nil and typeof(Content) == "table" then
+				local AssistantMessageOrder = Copy.assistantMessageOrder
+				local Copy1 = table.clone(Copy.assistantMessages)
+				local List = {}
+				
+				for _, value in Content do
+					table.insert(List, value)
 				end
-			end
-			local t_1 = {}
-			
-			for i, v_2 in assistantMessageOrder do
-				table.insert(t_1, v_2)
-			end
-			local var28 = t_1
-			table.insert(var28, var26)
-			var27 = var28
-		elseif sessionUpdate == "agent_message_chunk" then
-			messageId = p31.messageId
-			var26 = if typeof(messageId) == "string" and messageId ~= "" then messageId else nil
-			messageId = p31.content
-			
-			if var26 == nil or typeof(messageId) ~= "table" then
-			else
-				appendPendingAgentMessage(cloned, var26, messageId, p32)
+				Copy1[MessageId1] = List
+				local AssistantMessageOrder1 = nil
 				
-				return cloned
-			end
-		elseif sessionUpdate == "tool_call_update" then
-			applyToolCallUpdate(cloned, p31, p32)
-			
-			return cloned
-		elseif sessionUpdate == "tool_call_content_chunk" then
-			applyToolCallContentChunk(cloned, p31, p32)
-			
-			return cloned
-		elseif sessionUpdate == "state_change" then
-			if p31.state == "running" or p31.state == "requires_action" then
-				cloned.status = "streaming"
+				for _, value1 in AssistantMessageOrder do
+					if value1 == MessageId1 then
+						AssistantMessageOrder1 = AssistantMessageOrder
+						Copy.assistantMessages = Copy1
+						Copy.assistantMessageOrder = AssistantMessageOrder1
+						Copy.assistantText = messageMapToText(Copy.assistantMessages, Copy.assistantMessageOrder)
+						
+						return Copy
+					end
+				end
+				local List1 = {}
 				
-				return cloned
-			elseif p31.state ~= "idle" then
+				for _, value2 in AssistantMessageOrder do
+					table.insert(List1, value2)
+				end
+				table.insert(List1, MessageId1)
+				AssistantMessageOrder1 = List1
 			end
-			var26 = p31.stop_reason
+		elseif SessionUpdate == "agent_message_chunk" then
+			local MessageId = p9.messageId
+			local MessageId2 = if typeof(MessageId) == "string" and MessageId ~= "" then MessageId else nil
+			local Content = p9.content
 			
-			if typeof(var26) == "string" then
-				cloned.stopReason = var26
-			else
-				cloned.stopReason = "end_turn"
+			if MessageId2 ~= nil and typeof(Content) == "table" then
+				appendPendingAgentMessage(Copy, MessageId2, Content, p10)
+				
+				return Copy
 			end
-			cloned.status = if cloned.stopReason == "cancelled" then "cancelled" else "succeeded"
-			cloned.isDone = true
-			
-			return cloned
-		elseif sessionUpdate == "session_info_update" then
-			cloned.infoUpdate = { title = p31.title }
+		else
+			if SessionUpdate == "tool_call_update" then
+				applyToolCallUpdate(Copy, p9, p10)
+				
+				return Copy
+			end
+			if SessionUpdate == "tool_call_content_chunk" then
+				applyToolCallContentChunk(Copy, p9, p10)
+				
+				return Copy
+			end
+			if SessionUpdate == "state_change" then
+				if p9.state == "running" or p9.state == "requires_action" then
+					Copy.status = "streaming"
+					
+					return Copy
+				end
+				if p9.state == "idle" then
+					local StopReason = p9.stop_reason
+					
+					if typeof(StopReason) == "string" then
+						Copy.stopReason = StopReason
+					else
+						Copy.stopReason = "end_turn"
+					end
+					Copy.status = if Copy.stopReason == "cancelled" then "cancelled" else "succeeded"
+					Copy.isDone = true
+					
+					return Copy
+				end
+			elseif SessionUpdate == "session_info_update" then
+				Copy.infoUpdate = { title = p9.title }
+			end
 		end
+		return Copy
 	end,
-	createEmptyTurnState = createEmptyTurnState,
-	extractTurnId = extractTurnId
+	createEmptyTurnState = function(SessionId, RequestId) --[[ Line: 18 ]]
+		return {
+			status = "queued",
+			assistantText = "",
+			pendingAgentMessageId = nil,
+			pendingAgentMessageSequenceIndex = nil,
+			toolCallCount = 0,
+			infoUpdate = nil,
+			stopReason = nil,
+			error = nil,
+			errorCode = nil,
+			isDone = false,
+			sessionId = SessionId,
+			requestId = RequestId,
+			assistantMessages = {},
+			assistantMessageOrder = {},
+			pendingAgentMessageContent = {},
+			activitySlots = {},
+			activityItems = {},
+			toolCalls = {},
+			eventMetaBySequenceId = {}
+		}
+	end,
+	extractTurnId = function(p11) --[[ Line: 295 ]]
+		local Roblox = p11._meta and p11._meta._roblox
+		local Roblox1 = if typeof(Roblox) == "table" then Roblox else nil
+		local TurnId = if typeof(Roblox1) == "table" then Roblox1.turnId else nil
+		
+		return if typeof(TurnId) == "number" and TurnId > 0 then TurnId else nil
+	end
 }

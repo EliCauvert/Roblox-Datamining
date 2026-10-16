@@ -1,15 +1,15 @@
-﻿local genericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
-local parent = genericAbuseReporting.Parent
-local centralOverlayType = require(parent.RobloxAppEnums).CentralOverlayType
-local setCentralOverlay = require(parent.CentralOverlay).Actions.SetCentralOverlay
-local _ = require(genericAbuseReporting.Bedui.Provider.AbuseReportBeduiTypes)
-local _ = require(genericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.AbuseSheetFlowTypes)
-local _ = require(genericAbuseReporting.Enums.AbuseVector)
+﻿local GenericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
+local Parent = GenericAbuseReporting.Parent
+local CentralOverlayType = require(Parent.RobloxAppEnums).CentralOverlayType
+local SetCentralOverlayFunction = require(Parent.CentralOverlay).Actions.SetCentralOverlay
+local _ = require(GenericAbuseReporting.Bedui.Provider.AbuseReportBeduiTypes)
+local _ = require(GenericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.AbuseSheetFlowTypes)
+local _ = require(GenericAbuseReporting.Enums.AbuseVector)
 
-return function(p1)
-	-- upvalues: setCentralOverlay (ref), centralOverlayType (ref)
-	return function(p2)
-		-- upvalues: setCentralOverlay (copy), centralOverlayType (copy), p1 (ref)
-		p2:dispatch(setCentralOverlay(centralOverlayType.DynamicAbuseReport, p1))
+return function(p1) --[[ Line: 41 ]]
+	-- upvalues: SetCentralOverlayFunction (copy), CentralOverlayType (copy)
+	return function(p2) --[[ Line: 42 ]]
+		-- upvalues: SetCentralOverlayFunction (upval), CentralOverlayType (upval), p1 (copy)
+		p2:dispatch(SetCentralOverlayFunction(CentralOverlayType.DynamicAbuseReport, p1))
 	end
 end

@@ -1,269 +1,269 @@
-﻿local eventNamesModule = require(script.Parent.EventNames)
-local diagEventTypes = require(script:FindFirstAncestor("AppChat").Parent.SocialLuaAnalytics).Analytics.Enums.DiagEventTypes
+﻿local EventNamesModule = require(script.Parent.EventNames)
+local DiagEventTypes = require(script:FindFirstAncestor("AppChat").Parent.SocialLuaAnalytics).Analytics.Enums.DiagEventTypes
 
 return {
-	[eventNamesModule.ChatLandingScreenRendered] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ChatLandingScreenRendered] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ChatLandingScreenRenderedCounter", "ChatLandingScreenRendered")
 	},
-	[eventNamesModule.AppChatVisible] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.AppChatVisible] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("AppChatVisibleCounter", "AppChatVisible")
 	},
-	[eventNamesModule.AppChatClosed] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.AppChatClosed] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("AppChatClosedCounter", "AppChatClosed")
 	},
-	[eventNamesModule.ChatLandingSearchBtnClicked] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ChatLandingSearchBtnClicked] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ChatLandingSearchBtnClickedCounter", "ChatLandingSearchBtnClicked")
 	},
-	[eventNamesModule.ChatLandingComposeBtnClicked] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ChatLandingComposeBtnClicked] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ChatLandingComposeBtnClickedCounter", "ChatLandingComposeBtnClicked")
 	},
-	[eventNamesModule.ChatLandingNotifBtnClicked] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ChatLandingNotifBtnClicked] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ChatLandingNotifBtnClickedCounter", "ChatLandingNotifBtnClicked")
 	},
-	[eventNamesModule.ChatLandingConversationClicked] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ChatLandingConversationClicked] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ChatLandingConversationClickedCounter", "ChatLandingConversationClicked")
 	},
-	[eventNamesModule.ChatLandingGroupsBtnClicked] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ChatLandingGroupsBtnClicked] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ChatLandingGroupsBtnClicked", "ChatLandingGroupsBtnClicked")
 	},
-	[eventNamesModule.ChatLandingPvUpsellRendered] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ChatLandingPvUpsellRendered] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ChatLandingPvUpsellRenderedCounter", "ChatLandingPvUpsellRendered")
 	},
-	[eventNamesModule.ChatLandingPvUpsellDismissed] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ChatLandingPvUpsellDismissed] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ChatLandingPvUpsellDismissedCounter", "ChatLandingPvUpsellDismissed")
 	},
-	[eventNamesModule.ChatLandingPvUpsellContinueClicked] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ChatLandingPvUpsellContinueClicked] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ChatLandingPvUpsellContinueClickedCounter", "ChatLandingPvUpsellContinueClicked")
 	},
-	[eventNamesModule.ChatLandingPvUpsellSucceeded] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ChatLandingPvUpsellSucceeded] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ChatLandingPvUpsellSucceededCounter", "ChatLandingPvUpsellSucceeded")
 	},
-	[eventNamesModule.ChatLandingPvUpsellFailed] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ChatLandingPvUpsellFailed] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ChatLandingPvUpsellFailedCounter", "ChatLandingPvUpsellFailed")
 	},
-	[eventNamesModule.ChatLandingUnfilteredThreadsFtuxRendered] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ChatLandingUnfilteredThreadsFtuxRendered] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ChatLandingUnfilteredThreadsFtuxRenderedCounter", "ChatLandingUnfilteredThreadsFtuxRendered")
 	},
-	[eventNamesModule.ChatLandingUnfilteredThreadsFtuxDismissed] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ChatLandingUnfilteredThreadsFtuxDismissed] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ChatLandingUnfilteredThreadsFtuxDismissedCounter", "ChatLandingUnfilteredThreadsFtuxDismissed")
 	},
-	[eventNamesModule.ChatLandingUnfilteredThreadsFtuxLearnMoreClicked] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ChatLandingUnfilteredThreadsFtuxLearnMoreClicked] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ChatLandingUnfilteredThreadsFtuxLearnMoreClickedCounter", "ChatLandingUnfilteredThreadsFtuxLearnMoreClicked")
 	},
-	[eventNamesModule.ConversationScreenRendered] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ConversationScreenRendered] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ConversationScreenRenderedCounter", "ConversationScreenRendered")
 	},
-	[eventNamesModule.ConversationSendBtnClicked] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ConversationSendBtnClicked] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ConversationSendBtnClickedCounter", "ConversationSendBtnClicked")
 	},
-	[eventNamesModule.ConversationScreenExit] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ConversationScreenExit] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ConversationScreenExitCounter", "ConversationScreenExit")
 	},
-	[eventNamesModule.ConversationInfoBtnClicked] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ConversationInfoBtnClicked] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ConversationInfoBtnClickedCounter", "ConversationInfoBtnClicked")
 	},
-	[eventNamesModule.ConversationMessageSent] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ConversationMessageSent] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ConversationMessageSentCounter", "ConversationMessageSent")
 	},
-	[eventNamesModule.ConversationPvUpsellRendered] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ConversationPvUpsellRendered] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ConversationPvUpsellRenderedCounter", "ConversationPvUpsellRendered")
 	},
-	[eventNamesModule.ConversationPvUpsellLeftGroup] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ConversationPvUpsellLeftGroup] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ConversationPvUpsellLeftGroupCounter", "ConversationPvUpsellLeftGroup")
 	},
-	[eventNamesModule.ConversationPvUpsellContinueClicked] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ConversationPvUpsellContinueClicked] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ConversationPvUpsellContinueClickedCounter", "ConversationPvUpsellContinueClicked")
 	},
-	[eventNamesModule.ConversationPvUpsellSucceeded] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ConversationPvUpsellSucceeded] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ConversationPvUpsellSucceededCounter", "ConversationPvUpsellSucceeded")
 	},
-	[eventNamesModule.ConversationPvUpsellFailed] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ConversationPvUpsellFailed] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ConversationPvUpsellFailedCounter", "ConversationPvUpsellFailed")
 	},
-	[eventNamesModule.ConversationIneligibleModalRendered] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ConversationIneligibleModalRendered] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ConversationIneligibleModalRenderedCounter", "ConversationIneligibleModalRendered")
 	},
-	[eventNamesModule.ConversationIneligibleModalLeftGroup] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ConversationIneligibleModalLeftGroup] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ConversationIneligibleModalLeftGroupCounter", "ConversationIneligibleModalLeftGroup")
 	},
-	[eventNamesModule.ConversationIneligibleModalLearnMoreClicked] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ConversationIneligibleModalLearnMoreClicked] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ConversationIneligibleModalLearnMoreClickedCounter", "ConversationIneligibleModalLearnMoreClicked")
 	},
-	[eventNamesModule.ConversationPvBannerRendered] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ConversationPvBannerRendered] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ConversationPvBannerRenderedCounter", "ConversationPvBannerRendered")
 	},
-	[eventNamesModule.ConversationPvBannerActionClicked] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ConversationPvBannerActionClicked] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ConversationPvBannerActionClickedCounter", "ConversationPvBannerActionClicked")
 	},
-	[eventNamesModule.ConversationUpgradeBannerRendered] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ConversationUpgradeBannerRendered] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ConversationUpgradeBannerRenderedCounter", "ConversationUpgradeBannerRendered")
 	},
-	[eventNamesModule.ConversationUpgradeBannerActionClicked] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ConversationUpgradeBannerActionClicked] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ConversationUpgradeBannerActionClickedCounter", "ConversationUpgradeBannerActionClicked")
 	},
-	[eventNamesModule.ConversationLearnMoreBannerRendered] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ConversationLearnMoreBannerRendered] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ConversationLearnMoreBannerRenderedCounter", "ConversationLearnMoreBannerRendered")
 	},
-	[eventNamesModule.ConversationLearnMoreBannerActionClicked] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ConversationLearnMoreBannerActionClicked] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ConversationLearnMoreBannerActionClickedCounter", "ConversationLearnMoreBannerActionClicked")
 	},
-	[eventNamesModule.ConversationPvDialogRendered] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ConversationPvDialogRendered] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ConversationPvDialogRenderedCounter", "ConversationPvDialogRendered")
 	},
-	[eventNamesModule.ConversationPvDialogActionClicked] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ConversationPvDialogActionClicked] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ConversationPvDialogActionClickedCounter", "ConversationPvDialogActionClicked")
 	},
-	[eventNamesModule.ConversationPvDialogDismissed] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ConversationPvDialogDismissed] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ConversationPvDialogDismissedCounter", "ConversationPvDialogDismissed")
 	},
-	[eventNamesModule.ConversationPvDialogSucceeded] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ConversationPvDialogSucceeded] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ConversationPvDialogSucceededCounter", "ConversationPvDialogSucceeded")
 	},
-	[eventNamesModule.ConversationPvDialogFailed] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ConversationPvDialogFailed] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ConversationPvDialogFailedCounter", "ConversationPvDialogFailed")
 	},
-	[eventNamesModule.ConversationUpgradeDialogRendered] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ConversationUpgradeDialogRendered] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ConversationUpgradeDialogRenderedCounter", "ConversationUpgradeDialogRendered")
 	},
-	[eventNamesModule.ConversationUpgradeDialogActionClicked] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ConversationUpgradeDialogActionClicked] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ConversationUpgradeDialogActionClickedCounter", "ConversationUpgradeDialogActionClicked")
 	},
-	[eventNamesModule.ConversationUpgradeDialogDismissed] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ConversationUpgradeDialogDismissed] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ConversationUpgradeDialogDismissedCounter", "ConversationUpgradeDialogDismissed")
 	},
-	[eventNamesModule.ConversationLearnMoreDialogRendered] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ConversationLearnMoreDialogRendered] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ConversationLearnMoreDialogRenderedCounter", "ConversationLearnMoreDialogRendered")
 	},
-	[eventNamesModule.ConversationLearnMoreDialogDismissed] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ConversationLearnMoreDialogDismissed] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ConversationLearnMoreDialogDismissedCounter", "ConversationLearnMoreDialogDismissed")
 	},
-	[eventNamesModule.NewConversationCreated] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.NewConversationCreated] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("NewConversationCreatedCounter", "NewConversationCreated")
 	},
-	[eventNamesModule.ChatMessagePressed] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ChatMessagePressed] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ChatMessagePressedCounter", "ChatMessagePressed")
 	},
-	[eventNamesModule.ChatMessageLongPressed] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ChatMessageLongPressed] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ChatMessageLongPressedCounter", "ChatMessageLongPressed")
 	},
-	[eventNamesModule.ChatMessageOpenMenuIconClicked] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ChatMessageOpenMenuIconClicked] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ChatMessageOpenMenuIconClickedCounter", "ChatMessageOpenMenuIconClicked")
 	},
-	[eventNamesModule.ChatMessageReplyIconClicked] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ChatMessageReplyIconClicked] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ChatMessageReplyIconClickedCounter", "ChatMessageReplyIconClicked")
 	},
-	[eventNamesModule.ChatMessageMenuOpened] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ChatMessageMenuOpened] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ChatMessageMenuOpenedCounter", "ChatMessageMenuOpened")
 	},
-	[eventNamesModule.ChatMessageMenuReplyBtnActivated] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ChatMessageMenuReplyBtnActivated] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ChatMessageMenuReplyBtnActivatedCounter", "ChatMessageMenuReplyBtnActivated")
 	},
-	[eventNamesModule.ChatMessageMenuCopyBtnActivated] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ChatMessageMenuCopyBtnActivated] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ChatMessageMenuCopyBtnActivatedCounter", "ChatMessageMenuCopyBtnActivated")
 	},
-	[eventNamesModule.ChatInputBarReplyComposeRendered] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ChatInputBarReplyComposeRendered] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ChatInputBarReplyComposeRenderedCounter", "ChatInputBarReplyComposeRendered")
 	},
-	[eventNamesModule.ChatInputBarReplyComposeCancelBtnActivated] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ChatInputBarReplyComposeCancelBtnActivated] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ChatInputBarReplyComposeCancelBtnActivatedCounter", "ChatInputBarReplyComposeCancelBtnActivated")
 	},
-	[eventNamesModule.ChatDetailsRendered] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ChatDetailsRendered] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ChatDetailsRenderedCounter", "ChatDetailsRendered")
 	},
-	[eventNamesModule.ChatEmptyStateScreenRendered] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ChatEmptyStateScreenRendered] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ChatEmptyStateScreenRenderedCounter", "ChatEmptyStateScreenRendered")
 	},
-	[eventNamesModule.ChatAddFriendsBtnClicked] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ChatAddFriendsBtnClicked] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ChatAddFriendsBtnClickedCounter", "ChatAddFriendsBtnClicked")
 	},
-	[eventNamesModule.ChatDetailsAddFriendsBtnClicked] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ChatDetailsAddFriendsBtnClicked] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ChatDetailsAddFriendsBtnClickedCounter", "ChatDetailsAddFriendsBtnClicked")
 	},
-	[eventNamesModule.ChatDetailsLeaveGroupBtnClicked] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ChatDetailsLeaveGroupBtnClicked] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ChatDetailsLeaveGroupBtnClickedCounter", "ChatDetailsLeaveGroupBtnClicked")
 	},
-	[eventNamesModule.ChatDetailsLeaveGroupDialogRendered] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ChatDetailsLeaveGroupDialogRendered] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ChatDetailsLeaveGroupDialogRenderedCounter", "ChatDetailsLeaveGroupDialogRendered")
 	},
-	[eventNamesModule.ChatDetailsLeaveGroupDialogStayClicked] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ChatDetailsLeaveGroupDialogStayClicked] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ChatDetailsLeaveGroupDialogStayClickedCounter", "ChatDetailsLeaveGroupDialogStayClicked")
 	},
-	[eventNamesModule.ChatDetailsLeaveGroupDialogLeaveClicked] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ChatDetailsLeaveGroupDialogLeaveClicked] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ChatDetailsLeaveGroupDialogLeaveClickedCounter", "ChatDetailsLeaveGroupDialogLeaveClicked")
 	},
-	[eventNamesModule.ChatDetailsReportUserClicked] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ChatDetailsReportUserClicked] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ChatDetailsReportUserClickedCounter", "ChatDetailsReportUserClicked")
 	},
-	[eventNamesModule.ChatDetailsCreateUnfilteredChatCellRendered] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ChatDetailsCreateUnfilteredChatCellRendered] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ChatDetailsCreateUnfilteredChatCellRenderedCounter", "ChatDetailsCreateUnfilteredChatCellRendered")
 	},
-	[eventNamesModule.ChatDetailsCreateUnfilteredChatCellClicked] = {
-		type = diagEventTypes.Counter,
+	[EventNamesModule.ChatDetailsCreateUnfilteredChatCellClicked] = {
+		type = DiagEventTypes.Counter,
 		name = game:DefineFastString("ChatDetailsCreateUnfilteredChatCellClickedCounter", "ChatDetailsCreateUnfilteredChatCellClicked")
 	}
 }

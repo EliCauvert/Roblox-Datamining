@@ -1,7 +1,7 @@
-﻿return function(p1)
-	for i, v in p1:GetChildren() do
-		if v:IsA("MakeupDescription") then
-			v:Destroy()
+﻿return function(Object) --[[ Line: 5 | Named "destroyMakeupDescriptions" ]]
+	for _, MakeupDescription in Object:GetChildren() do
+		if MakeupDescription:IsA("MakeupDescription") then
+			MakeupDescription:Destroy()
 		end
 	end
 end

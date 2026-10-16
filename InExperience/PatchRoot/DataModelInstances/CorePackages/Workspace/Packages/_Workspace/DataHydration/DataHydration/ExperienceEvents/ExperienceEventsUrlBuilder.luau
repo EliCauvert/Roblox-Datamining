@@ -1,17 +1,17 @@
-﻿local parent = script:FindFirstAncestor("DataHydration").Parent
-local urlBuilder = require(parent.UrlBuilder).UrlBuilder
-local url = require(parent.Http).Url
+﻿local Parent = script:FindFirstAncestor("DataHydration").Parent
+local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
+local Url = require(Parent.Http).Url
 
 return {
-	buildRsvpUpdateUrl = function(p1)
-		-- upvalues: urlBuilder (ref), url (ref)
-		return urlBuilder.new({
+	buildRsvpUpdateUrl = function(Id) --[[ Line: 14 ]]
+		-- upvalues: UrlBuilder (copy), Url (copy)
+		return UrlBuilder.new({
 			path = "virtual-events/v1/virtual-events/{id}/rsvps",
-			base = url.APIS_URL
-		})({ id = p1 })
+			base = Url.APIS_URL
+		})({ id = Id })
 	end,
-	RSVP_UPDATE_URL = urlBuilder.new({
+	RSVP_UPDATE_URL = UrlBuilder.new({
 		path = "virtual-events/v1/virtual-events/rsvps",
-		base = url.APIS_URL
+		base = Url.APIS_URL
 	})
 }

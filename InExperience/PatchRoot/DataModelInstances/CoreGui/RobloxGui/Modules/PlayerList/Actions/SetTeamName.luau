@@ -1,3 +1,3 @@
-﻿return require(script.Parent.Parent.ActionCreator)("SetTeamName", function(p1, p2)
-	return { isTeamAction = true, team = p1, teamName = p2 }
+﻿return require(script.Parent.Parent.ActionCreator)("SetTeamName", function(Team, TeamName) --[[ Line: 4 ]]
+	return { isTeamAction = true, team = Team, teamName = TeamName }
 end)

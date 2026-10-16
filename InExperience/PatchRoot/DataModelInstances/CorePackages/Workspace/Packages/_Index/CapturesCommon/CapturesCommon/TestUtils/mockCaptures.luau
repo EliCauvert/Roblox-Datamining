@@ -1,20 +1,20 @@
-﻿local parent = script.Parent.Parent
-local dashModule = require(parent.Parent.Dash)
-local captureTypeModule = require(parent.Enums.CaptureType)
-local _ = require(parent.Types)
+﻿local Parent = script.Parent.Parent
+local DashModule = require(Parent.Parent.Dash)
+local CaptureTypeModule = require(Parent.Enums.CaptureType)
+local _ = require(Parent.Types)
 local list = {
 	{
 		contentId = "rbxasset://textures/AvatarEditorImages/AvatarEditor.png",
 		filePath = "c://some/path/to/2231221_1818_1234598400000.png",
-		type = captureTypeModule.Screenshot
+		type = CaptureTypeModule.Screenshot
 	},
 	{
 		contentId = "rbxasset://textures/AvatarEditorImages/AvatarEditor_LightTheme.png",
 		filePath = "c://some/path/to/2231221_14375697_1653030000000.png",
-		type = captureTypeModule.Screenshot
+		type = CaptureTypeModule.Screenshot
 	}
 }
-local list_1 = {
+local list1 = {
 	{
 		SourceUniverseId = 1,
 		SourcePlaceId = 1,
@@ -32,21 +32,21 @@ local list_1 = {
 	}
 }
 
-return function(p1, p2)
-	-- upvalues: dashModule (ref), list_1 (ref), list (ref)
-	local t = {}
+return function(p1, p2) --[[ Line: 52 ]]
+	-- upvalues: DashModule (copy), list1 (copy), list (copy)
+	local JoinDeepResults = {}
 	
 	if p2 then
 		for i = 1, p1 do
-			table.insert(t, dashModule.joinDeep(list_1[i % #list_1 + 1], {}))
+			table.insert(JoinDeepResults, (DashModule.joinDeep(list1[i % #list1 + 1], {})))
 		end
-		return t
+		return JoinDeepResults
 	else
-		for i_1 = 1, p1 do
-			local var1 = dashModule.joinDeep(list[i_1 % #list + 1], {})
-			var1.contentId = "rbxasset://textures/" .. ("/./"):rep(math.floor(i_1 / #list)) .. string.sub(var1.contentId, 21)
-			table.insert(t, var1)
+		for i1 = 1, p1 do
+			local JoinDeepResult = DashModule.joinDeep(list[i1 % #list + 1], {})
+			JoinDeepResult.contentId = "rbxasset://textures/" .. ("/./"):rep((math.floor(i1 / #list))) .. string.sub(JoinDeepResult.contentId, 21)
+			table.insert(JoinDeepResults, JoinDeepResult)
 		end
-		return t
+		return JoinDeepResults
 	end
 end

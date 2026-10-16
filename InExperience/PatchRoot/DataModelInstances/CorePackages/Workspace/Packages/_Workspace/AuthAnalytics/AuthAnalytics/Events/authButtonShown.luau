@@ -1,14 +1,14 @@
-﻿local checkAndSendEventModule = require(script.Parent.Parent.Utils.checkAndSendEvent)
+﻿local CheckAndSendEventModule = require(script.Parent.Parent.Utils.checkAndSendEvent)
 
-return function(p1, p2, p3, p4)
-	-- upvalues: checkAndSendEventModule (ref)
-	local t = { btn = p2 }
+return function(p1, Btn, State, Origin) --[[ Line: 4 ]]
+	-- upvalues: CheckAndSendEventModule (copy)
+	local config = { btn = Btn }
 	
-	if p3 then
-		t.state = p3
+	if State then
+		config.state = State
 	end
-	if p4 then
-		t.origin = p4
+	if Origin then
+		config.origin = Origin
 	end
-	checkAndSendEventModule(p1, "authButtonShown", t)
+	CheckAndSendEventModule(p1, "authButtonShown", config)
 end

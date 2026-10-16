@@ -1,12 +1,11 @@
-﻿local parent = script.Parent.Parent.Parent.Parent.Parent
-local foundationModule = require(parent.Foundation)
-local tModule = require(parent.t)
-local validateFontFaceModule = require(script.Parent.validateFontFace)
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
+﻿local Parent = script.Parent.Parent.Parent.Parent.Parent
+local TModule = require(Parent.t)
+local ValidateFontFaceModule = require(script.Parent.validateFontFace)
+local FoundationFontFaceMigration = require(Parent.Foundation).Utility.Flags.FoundationFontFaceMigration
 
-return tModule.strictInterface({
-	RelativeSize = tModule.numberMinExclusive(0),
-	RelativeMinSize = tModule.numberMinExclusive(0),
-	Font = if foundationFontFaceMigration then tModule.union(tModule.EnumItem, validateFontFaceModule) else tModule.EnumItem,
-	FontFace = if foundationFontFaceMigration then tModule.optional(validateFontFaceModule) else nil
+return TModule.strictInterface({
+	RelativeSize = TModule.numberMinExclusive(0),
+	RelativeMinSize = TModule.numberMinExclusive(0),
+	Font = if FoundationFontFaceMigration then TModule.union(TModule.EnumItem, ValidateFontFaceModule) else TModule.EnumItem,
+	FontFace = if FoundationFontFaceMigration then TModule.optional(ValidateFontFaceModule) else nil
 })

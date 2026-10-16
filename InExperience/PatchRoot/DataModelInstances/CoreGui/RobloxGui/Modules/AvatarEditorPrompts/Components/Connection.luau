@@ -1,12 +1,12 @@
-﻿local roactModule = require(game:GetService("CorePackages").Packages.Roact)
-local contextActionsBinderModule = require(script.ContextActionsBinder)
-local connection = roactModule.PureComponent:extend("Connection")
+﻿local RoactModule = require(game:GetService("CorePackages").Packages.Roact)
+local ContextActionsBinderModule = require(script.ContextActionsBinder)
+local Connection = RoactModule.PureComponent:extend("Connection")
 
-function connection.render(_)
-	-- upvalues: roactModule (ref), contextActionsBinderModule (ref)
-	return roactModule.createFragment({
-		ContextActionsBinder = roactModule.createElement(contextActionsBinderModule)
+function Connection:render() --[[ Line: 9 ]]
+	-- upvalues: RoactModule (copy), ContextActionsBinderModule (copy)
+	return RoactModule.createFragment({
+		ContextActionsBinder = RoactModule.createElement(ContextActionsBinderModule)
 	})
 end
 
-return connection
+return Connection

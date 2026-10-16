@@ -1,138 +1,138 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local reactModule = require(corePackagesService.Packages.React)
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local styledTextLabel = UIBloxModule.App.Text.StyledTextLabel
-local button = UIBloxModule.App.Button.Button
-local buttonType = UIBloxModule.App.Button.Enum.ButtonType
-local standardButtonSize = UIBloxModule.App.Button.Enum.StandardButtonSize
-local useStyle = UIBloxModule.Core.Style.useStyle
-local robloxTranslatorModule = require(corePackagesService.Workspace.Packages.RobloxTranslator)
-local cryoModule = require(corePackagesService.Packages.Cryo)
-local highlightModeVariants = require(corePackagesService.Workspace.Packages.InGameAssetReporting).HighlightModeVariants
-local var1 = if require(corePackagesService.Workspace.Packages.SharedFlags).FFlagHighlightModePreciseSelectionEnabled then require(corePackagesService.Workspace.Packages.InExperienceLocales).Localization.new(game:GetService("LocalizationService").RobloxLocaleId) else nil
+﻿local CorePackages = game:GetService("CorePackages")
+local ReactModule = require(CorePackages.Packages.React)
+local UIBloxModule = require(CorePackages.Packages.UIBlox)
+local StyledTextLabel = UIBloxModule.App.Text.StyledTextLabel
+local Button = UIBloxModule.App.Button.Button
+local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
+local StandardButtonSize = UIBloxModule.App.Button.Enum.StandardButtonSize
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local RobloxTranslatorModule = require(CorePackages.Workspace.Packages.RobloxTranslator)
+local CryoModule = require(CorePackages.Packages.Cryo)
+local HighlightModeVariants = require(CorePackages.Workspace.Packages.InGameAssetReporting).HighlightModeVariants
+local NewResult = if require(CorePackages.Workspace.Packages.SharedFlags).FFlagHighlightModePreciseSelectionEnabled then require(CorePackages.Workspace.Packages.InExperienceLocales).Localization.new(game:GetService("LocalizationService").RobloxLocaleId) else nil
 
-local var2 = function(p1, p2)
-	-- upvalues: robloxTranslatorModule (ref), highlightModeVariants (ref), var1 (write), cryoModule (ref), reactModule (ref), styledTextLabel (ref)
-	local t = {
-		Layout = reactModule.createElement("UIListLayout", {
+local function v11(Variant, p1) --[[ Line: 30 ]]
+	-- upvalues: RobloxTranslatorModule (copy), HighlightModeVariants (copy), NewResult (ref), CryoModule (copy), ReactModule (copy), StyledTextLabel (copy)
+	local config = {
+		Layout = ReactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			Padding = UDim.new(0, 30)
 		})
 	}
 	
-	for i, v in ipairs(cryoModule.List.map(if p1 ~= highlightModeVariants.Default then {
-		var1:Format("Feature.ReportAbuse.Label.SelectInSceneDescriptionPrecise1"),
-		robloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Label.SelectInSceneDescription2"),
-		robloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Label.SelectInSceneDescription3")
+	for i, value in ipairs((CryoModule.List.map(if Variant == HighlightModeVariants.Default then {
+		RobloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Label.SelectInSceneDescription1"),
+		RobloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Label.SelectInSceneDescription2"),
+		RobloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Label.SelectInSceneDescription3")
 	} else {
-		robloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Label.SelectInSceneDescription1"),
-		robloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Label.SelectInSceneDescription2"),
-		robloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Label.SelectInSceneDescription3")
-	}, function(p3, p4)
-		-- upvalues: reactModule (copy), styledTextLabel (copy), p2 (ref)
-		return reactModule.createElement(styledTextLabel, {
-			text = "\226\128\162 " .. p2,
-			fontStyle = p2.Font.Body,
-			colorStyle = p2.Theme.TextEmphasis,
-			layoutOrder = p4,
+		NewResult:Format("Feature.ReportAbuse.Label.SelectInSceneDescriptionPrecise1"),
+		RobloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Label.SelectInSceneDescription2"),
+		RobloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Label.SelectInSceneDescription3")
+	}, function(Text, LayoutOrder) --[[ Line: 45 ]]
+		-- upvalues: ReactModule (upval), StyledTextLabel (upval), p1 (copy)
+		return ReactModule.createElement(StyledTextLabel, {
+			text = "• " .. Text,
+			fontStyle = p1.Font.Body,
+			colorStyle = p1.Theme.TextEmphasis,
+			layoutOrder = LayoutOrder,
 			automaticSize = Enum.AutomaticSize.XY
 		})
-	end)) do
-		t["Subheading" .. i] = v
+	end))) do
+		config["Subheading" .. i] = value
 	end
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		LayoutOrder = 1,
 		AutomaticSize = Enum.AutomaticSize.XY,
 		Position = UDim2.new(0.5, 0, 0, 0),
 		AnchorPoint = Vector2.new(0.5, 0)
-	}, t)
+	}, config)
 end
 
-return function(p3)
-	-- upvalues: useStyle (ref), reactModule (ref), styledTextLabel (ref), robloxTranslatorModule (ref), var2 (ref), button (ref), buttonType (ref), standardButtonSize (ref)
-	local var3 = useStyle()
+return function(p2) --[[ Line: 73 | Named "SelectInSceneReportMenu" ]]
+	-- upvalues: UseStyleFunction (copy), ReactModule (copy), StyledTextLabel (copy), RobloxTranslatorModule (copy), v11 (copy), Button (copy), ButtonType (copy), StandardButtonSize (copy)
+	local UseStyleResult = UseStyleFunction()
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		AutomaticSize = Enum.AutomaticSize.Y,
 		Size = UDim2.new(1, 0, 0, 0)
 	}, {
-		Layout = reactModule.createElement("UIListLayout", {
+		Layout = ReactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			HorizontalAlignment = Enum.HorizontalAlignment.Center,
 			Padding = UDim.new(0, 30)
 		}),
-		Padding = reactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, 15) }),
-		Title = reactModule.createElement(styledTextLabel, {
+		Padding = ReactModule.createElement("UIPadding", { PaddingTop = UDim.new(0, 15) }),
+		Title = ReactModule.createElement(StyledTextLabel, {
 			layoutOrder = 0,
-			text = robloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Heading.ReportUsingSelectInScene"),
-			fontStyle = var3.Font.Header1,
-			colorStyle = var3.Theme.TextEmphasis,
+			text = RobloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Heading.ReportUsingSelectInScene"),
+			fontStyle = UseStyleResult.Font.Header1,
+			colorStyle = UseStyleResult.Theme.TextEmphasis,
 			automaticSize = Enum.AutomaticSize.XY
 		}),
-		SubheadingFrame = if p3.variant then var2(p3.variant, var3) else reactModule.createElement("Frame", {
+		SubheadingFrame = if p2.variant then v11(p2.variant, UseStyleResult) else ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			LayoutOrder = 1,
 			AutomaticSize = Enum.AutomaticSize.XY,
 			Position = UDim2.new(0.5, 0, 0, 0),
 			AnchorPoint = Vector2.new(0.5, 0)
 		}, {
-			Layout = reactModule.createElement("UIListLayout", {
+			Layout = ReactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Vertical,
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				Padding = UDim.new(0, 30)
 			}),
-			Subheading1 = reactModule.createElement(styledTextLabel, {
+			Subheading1 = ReactModule.createElement(StyledTextLabel, {
 				layoutOrder = 0,
-				text = "\226\128\162 " .. robloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Label.SelectInSceneDescription1"),
-				fontStyle = var3.Font.Body,
-				colorStyle = var3.Theme.TextEmphasis,
+				text = "• " .. RobloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Label.SelectInSceneDescription1"),
+				fontStyle = UseStyleResult.Font.Body,
+				colorStyle = UseStyleResult.Theme.TextEmphasis,
 				automaticSize = Enum.AutomaticSize.XY
 			}),
-			Subheading2 = reactModule.createElement(styledTextLabel, {
+			Subheading2 = ReactModule.createElement(StyledTextLabel, {
 				layoutOrder = 1,
-				text = "\226\128\162 " .. robloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Label.SelectInSceneDescription2"),
-				fontStyle = var3.Font.Body,
-				colorStyle = var3.Theme.TextEmphasis,
+				text = "• " .. RobloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Label.SelectInSceneDescription2"),
+				fontStyle = UseStyleResult.Font.Body,
+				colorStyle = UseStyleResult.Theme.TextEmphasis,
 				automaticSize = Enum.AutomaticSize.XY
 			}),
-			Subheading3 = reactModule.createElement(styledTextLabel, {
+			Subheading3 = ReactModule.createElement(StyledTextLabel, {
 				layoutOrder = 2,
-				text = "\226\128\162 " .. robloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Label.SelectInSceneDescription3"),
-				fontStyle = var3.Font.Body,
-				colorStyle = var3.Theme.TextEmphasis,
+				text = "• " .. RobloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Label.SelectInSceneDescription3"),
+				fontStyle = UseStyleResult.Font.Body,
+				colorStyle = UseStyleResult.Theme.TextEmphasis,
 				automaticSize = Enum.AutomaticSize.XY
 			})
 		}),
-		EnterSelectInSceneButton = reactModule.createElement(button, {
+		EnterSelectInSceneButton = ReactModule.createElement(Button, {
 			layoutOrder = 2,
 			fitContent = true,
-			text = robloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Action.EnterSceneReporting"),
-			buttonType = buttonType.PrimarySystem,
-			standardSize = standardButtonSize.Small,
+			text = RobloxTranslatorModule:FormatByKey("Feature.ReportAbuse.Action.EnterSceneReporting"),
+			buttonType = ButtonType.PrimarySystem,
+			standardSize = StandardButtonSize.Small,
 			position = UDim2.new(0.5, 0, 0, 0),
 			anchorPoint = Vector2.new(0.5, 0),
-			onActivated = function()
-				-- upvalues: p3 (ref)
-				local safetyService = game:GetService("SafetyService")
-				local experienceStateCaptureService = game:GetService("ExperienceStateCaptureService")
+			onActivated = function() --[[ Line: 144 ]]
+				-- upvalues: p2 (copy)
+				local SafetyService = game:GetService("SafetyService")
+				local ExperienceStateCaptureService = game:GetService("ExperienceStateCaptureService")
 				
 				if game:GetEngineFeature("ExperienceStateCaptureIsInBackground") then
-					local var4 = nil
-					var4 = experienceStateCaptureService:GetPropertyChangedSignal("IsInBackground"):Connect(function()
-						-- upvalues: var4 (write), experienceStateCaptureService (ref), p3 (copy)
-						if not var4.Connected then return end
-						if not experienceStateCaptureService.IsInBackground then
-							p3.hideReportTab()
-							var4:Disconnect()
+					local Connection = nil
+					Connection = ExperienceStateCaptureService:GetPropertyChangedSignal("IsInBackground"):Connect(function() --[[ Line: 151 ]]
+						-- upvalues: Connection (ref), ExperienceStateCaptureService (copy), p2 (upval)
+						if not Connection.Connected then return end
+						if not ExperienceStateCaptureService.IsInBackground then
+							p2.hideReportTab()
+							Connection:Disconnect()
 						end
 					end)
 				end
-				safetyService.IsCaptureModeForReport = true
-				experienceStateCaptureService:ToggleCaptureMode()
+				SafetyService.IsCaptureModeForReport = true
+				ExperienceStateCaptureService:ToggleCaptureMode()
 			end
 		})
 	})

@@ -1,66 +1,63 @@
-﻿local socialCarousel = script:FindFirstAncestor("SocialCarousel")
-local parent = socialCarousel.Parent
-local reactModule = require(parent.React)
-local roactUtilsModule = require(parent.RoactUtils)
-local appEventIngestService = require(parent.RoactServiceTags).AppEventIngestService
-local roactAnalytics = require(parent.RoactServiceTags).RoactAnalytics
-local useRoactService = require(parent.RobloxAppHooks).useRoactService
-local useThrottledCallback = roactUtilsModule.Hooks.useThrottledCallback
-local _ = require(socialCarousel.Common.Enums)
-local socialCarouselContextModule = require(socialCarousel.Contexts.SocialCarouselContext)
-local useSocialCarouselListModule = require(socialCarousel.Hooks.useSocialCarouselList)
-local useSocialCarouselUnifiedLoggingModule = require(socialCarousel.Analytics.useSocialCarouselUnifiedLogging)
-local useSocialCarouselAnalyticsModule = require(socialCarousel.Analytics.useSocialCarouselAnalytics)
-local useSocialCarouselLoadTimerModule = require(socialCarousel.Analytics.useSocialCarouselLoadTimer)
-local _ = require(socialCarousel.Analytics.AnalyticsTypes)
-local friendCarouselRefreshThrottleInterval = game:DefineFastInt("FriendCarouselRefreshThrottleInterval", 3)
-local fFlagSocialCarouselShareQREnabled = require(parent.SharedFlags).FFlagSocialCarouselShareQREnabled
-local carouselModule = require(socialCarousel.Components.Carousel)
+﻿local SocialCarousel = script:FindFirstAncestor("SocialCarousel")
+local Parent = SocialCarousel.Parent
+local ReactModule = require(Parent.React)
+local AppEventIngestService = require(Parent.RoactServiceTags).AppEventIngestService
+local RoactAnalytics = require(Parent.RoactServiceTags).RoactAnalytics
+local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
+local UseThrottledCallbackFunction = require(Parent.RoactUtils).Hooks.useThrottledCallback
+local _ = require(SocialCarousel.Common.Enums)
+local SocialCarouselContextModule = require(SocialCarousel.Contexts.SocialCarouselContext)
+local UseSocialCarouselListModule = require(SocialCarousel.Hooks.useSocialCarouselList)
+local UseSocialCarouselUnifiedLoggingModule = require(SocialCarousel.Analytics.useSocialCarouselUnifiedLogging)
+local UseSocialCarouselAnalyticsModule = require(SocialCarousel.Analytics.useSocialCarouselAnalytics)
+local UseSocialCarouselLoadTimerModule = require(SocialCarousel.Analytics.useSocialCarouselLoadTimer)
+local _ = require(SocialCarousel.Analytics.AnalyticsTypes)
+local FriendCarouselRefreshThrottleInterval = game:DefineFastInt("FriendCarouselRefreshThrottleInterval", 3)
+local FFlagSocialCarouselShareQREnabled = require(Parent.SharedFlags).FFlagSocialCarouselShareQREnabled
+local CarouselModule = require(SocialCarousel.Components.Carousel)
 
-return function(p1)
-	-- upvalues: useRoactService (ref), roactAnalytics (ref), appEventIngestService (ref), useSocialCarouselAnalyticsModule (ref), useSocialCarouselLoadTimerModule (ref), reactModule (ref), useSocialCarouselListModule (ref), useSocialCarouselUnifiedLoggingModule (ref), useThrottledCallback (ref), friendCarouselRefreshThrottleInterval (ref), socialCarouselContextModule (ref), fFlagSocialCarouselShareQREnabled (ref), carouselModule (ref)
-	local var1 = useRoactService(roactAnalytics)
-	local var2 = useRoactService(appEventIngestService)
-	local var3 = useSocialCarouselLoadTimerModule(useSocialCarouselAnalyticsModule().reportLoadingEvent)
-	local var4 = reactModule.useRef(os.clock())
-	local var5 = useSocialCarouselListModule(p1.roduxKey, p1.customTileList)
-	local _ = nil
-	local _ = nil
-	local var6, var7 = reactModule.useState(nil)
-	local var8 = useSocialCarouselUnifiedLoggingModule(var1, var2, p1.unifiedLogging, var5, var4)
-	local var9 = useThrottledCallback(function()
-		-- upvalues: var5 (ref)
-		var5.refreshFriendsList()
-	end, friendCarouselRefreshThrottleInterval)
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var9 (ref)
+return function(p1) --[[ Line: 51 ]]
+	-- upvalues: UseRoactServiceFunction (copy), RoactAnalytics (copy), AppEventIngestService (copy), UseSocialCarouselAnalyticsModule (copy), UseSocialCarouselLoadTimerModule (copy), ReactModule (copy), UseSocialCarouselListModule (copy), UseSocialCarouselUnifiedLoggingModule (copy), UseThrottledCallbackFunction (copy), FriendCarouselRefreshThrottleInterval (copy), SocialCarouselContextModule (copy), FFlagSocialCarouselShareQREnabled (copy), CarouselModule (copy)
+	local UseRoactServiceResult = UseRoactServiceFunction(RoactAnalytics)
+	local UseRoactServiceResult1 = UseRoactServiceFunction(AppEventIngestService)
+	local UseSocialCarouselLoadTimerModuleResult = UseSocialCarouselLoadTimerModule(UseSocialCarouselAnalyticsModule().reportLoadingEvent)
+	local UseRefResult = ReactModule.useRef(os.clock())
+	local UseSocialCarouselListModuleResult = UseSocialCarouselListModule(p1.roduxKey, p1.customTileList)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	local UseSocialCarouselUnifiedLoggingModuleResult = UseSocialCarouselUnifiedLoggingModule(UseRoactServiceResult, UseRoactServiceResult1, p1.unifiedLogging, UseSocialCarouselListModuleResult, UseRefResult)
+	local UseThrottledCallbackResult = UseThrottledCallbackFunction(function() --[[ Line: 68 ]]
+		-- upvalues: UseSocialCarouselListModuleResult (copy)
+		UseSocialCarouselListModuleResult.refreshFriendsList()
+	end, FriendCarouselRefreshThrottleInterval)
+	ReactModule.useEffect(function() --[[ Line: 72 ]]
+		-- upvalues: p1 (copy), UseThrottledCallbackResult (copy)
 		if p1.refreshSignal then
-			p1.refreshSignal:connect(var9)
+			p1.refreshSignal:connect(UseThrottledCallbackResult)
 			
 			return
 		end
 	end, { p1.refreshSignal })
 	
-	return reactModule.createElement(socialCarouselContextModule.Provider, {
+	return ReactModule.createElement(SocialCarouselContextModule.Provider, {
 		value = {
-			eventIngest = var2,
-			appAnalytics = var1,
+			eventIngest = UseRoactServiceResult1,
+			appAnalytics = UseRoactServiceResult,
 			hideCarouselHeader = p1.hideCarouselHeader,
-			openGameJoinCardUserId = var6,
-			setOpenGameJoinCardUserId = var7,
-			unifiedLogging = var8,
+			openGameJoinCardUserId = UseStateResult,
+			setOpenGameJoinCardUserId = UseStateResult2,
+			unifiedLogging = UseSocialCarouselUnifiedLoggingModuleResult,
 			sortAnalyticsData = p1.sortAnalyticsData,
-			friendRequestCount = var5.friendRequestCount,
-			recommendationCount = var5.recommendationCount,
-			friendCount = var5.friendCount,
-			tiles = var5.tiles,
-			isLoading = var5.isLoading,
-			onSuccessfulRender = var3.onSuccessfulRender,
+			friendRequestCount = UseSocialCarouselListModuleResult.friendRequestCount,
+			recommendationCount = UseSocialCarouselListModuleResult.recommendationCount,
+			friendCount = UseSocialCarouselListModuleResult.friendCount,
+			tiles = UseSocialCarouselListModuleResult.tiles,
+			isLoading = UseSocialCarouselListModuleResult.isLoading,
+			onSuccessfulRender = UseSocialCarouselLoadTimerModuleResult.onSuccessfulRender,
 			selectionOrderBase = p1.selectionOrderBase,
 			source = p1.source,
-			navigateToQRCodePage = if fFlagSocialCarouselShareQREnabled then p1.navigateToQRCodePage else nil
+			navigateToQRCodePage = if FFlagSocialCarouselShareQREnabled then p1.navigateToQRCodePage else nil
 		}
 	}, {
-		Carousel = reactModule.createElement(carouselModule, { appCompositionEnabled = p1.appCompositionEnabled })
+		Carousel = ReactModule.createElement(CarouselModule, { appCompositionEnabled = p1.appCompositionEnabled })
 	})
 end

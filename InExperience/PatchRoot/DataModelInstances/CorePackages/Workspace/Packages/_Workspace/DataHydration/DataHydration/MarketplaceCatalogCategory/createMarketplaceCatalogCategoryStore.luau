@@ -1,60 +1,63 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local parent = dataHydration.Parent
-local promiseModule = require(parent.Promise)
-local signalsModule = require(parent.Signals)
-local sharedFlagsModule = require(parent.SharedFlags)
-local createDataCacheModule = require(dataHydration.createDataCache)
-local createDataResolverModule = require(dataHydration.createDataResolver)
-local _ = require(dataHydration.DataHydrationTypes)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local Parent = DataHydration.Parent
+local PromiseModule = require(Parent.Promise)
+local SignalsModule = require(Parent.Signals)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local CreateDataCacheModule = require(DataHydration.createDataCache)
+local CreateDataResolverModule = require(DataHydration.createDataResolver)
+local _ = require(DataHydration.DataHydrationTypes)
 local _ = require(script.Parent.MarketplaceCatalogCategoryStoreTypes)
-local fFlagMarketplaceCatalogCategoryTrackLastReceived = sharedFlagsModule.FFlagMarketplaceCatalogCategoryTrackLastReceived
-local fFlagSduiSkipEmptyCatalogCategoryHydration = sharedFlagsModule.FFlagSduiSkipEmptyCatalogCategoryHydration
+local FFlagMarketplaceCatalogCategoryTrackLastReceived = SharedFlagsModule.FFlagMarketplaceCatalogCategoryTrackLastReceived
+local FFlagSduiSkipEmptyCatalogCategoryHydration = SharedFlagsModule.FFlagSduiSkipEmptyCatalogCategoryHydration
 
-return function()
-	-- upvalues: fFlagMarketplaceCatalogCategoryTrackLastReceived (ref), signalsModule (ref), createDataCacheModule (ref), createDataResolverModule (ref), promiseModule (ref), fFlagSduiSkipEmptyCatalogCategoryHydration (ref)
-	local var1 = nil
-	local var2 = nil
+return function() --[[ Line: 23 | Named "createMarketplaceCatalogCategoryStore" ]]
+	-- upvalues: FFlagMarketplaceCatalogCategoryTrackLastReceived (copy), SignalsModule (copy), CreateDataCacheModule (copy), CreateDataResolverModule (copy), PromiseModule (copy), FFlagSduiSkipEmptyCatalogCategoryHydration (copy)
+	local GetLastReceivedCategories = nil
+	local Callback = nil
 	
-	if fFlagMarketplaceCatalogCategoryTrackLastReceived then
-		local var3, var4 = signalsModule.createSignal({})
-		var1 = var3
-		var2 = var4
+	if FFlagMarketplaceCatalogCategoryTrackLastReceived then
+		GetLastReceivedCategories, Callback = SignalsModule.createSignal({})
 	end
-	local var5 = createDataCacheModule()
-	local var6 = createDataResolverModule({
-		cache = var5,
-		fetchFn = function(_)
-			-- upvalues: promiseModule (copy)
-			return promiseModule.resolve({})
+	local DataCacheModule = CreateDataCacheModule()
+	local DataResolverModule = CreateDataResolverModule({
+		cache = DataCacheModule,
+		fetchFn = function(_) --[[ Line: 37 ]]
+			-- upvalues: PromiseModule (upval)
+			return PromiseModule.resolve({})
 		end,
-		onClear = if fFlagSduiSkipEmptyCatalogCategoryHydration then function()
-			-- upvalues: var2 (write)
-			if var2 then
-				var2({})
+		onClear = if FFlagSduiSkipEmptyCatalogCategoryHydration then function() --[[ Line: 46 ]]
+			-- upvalues: Callback (ref)
+			if Callback then
+				Callback({})
 			end
 		end else nil
 	})
 	
+	local function updateMarketplaceCatalogCategories(p1) --[[ Line: 60 ]]
+		-- upvalues: FFlagSduiSkipEmptyCatalogCategoryHydration (upval), Callback (ref), DataCacheModule (copy)
+		if not FFlagSduiSkipEmptyCatalogCategoryHydration or next(p1) ~= nil then
+			Callback(p1)
+			DataCacheModule.updateItems(p1)
+			
+			return
+		end
+	end
+	
+	local function clear() --[[ Line: 73 ]]
+		-- upvalues: Callback (ref), DataResolverModule (copy)
+		if Callback then
+			Callback({})
+		end
+		DataResolverModule.clear()
+	end
+	
 	return {
-		getMarketplaceCatalogCategory = var6.getCachedItem,
-		getMarketplaceCatalogCategories = var6.getCachedItems,
-		updateMarketplaceCatalogCategories = if fFlagMarketplaceCatalogCategoryTrackLastReceived then function(p1)
-			-- upvalues: fFlagSduiSkipEmptyCatalogCategoryHydration (copy), var2 (write), var5 (ref)
-			if fFlagSduiSkipEmptyCatalogCategoryHydration and next(p1) == nil then
-				return
-			end
-			var2(p1)
-			var5.updateItems(p1)
-		end else var5.updateItems,
-		updateMarketplaceCatalogCategory = var5.updateItem,
-		getLastReceivedCategories = var1,
-		clear = if fFlagMarketplaceCatalogCategoryTrackLastReceived then function()
-			-- upvalues: var2 (write), var6 (ref)
-			if var2 then
-				var2({})
-			end
-			var6.clear()
-		end else var6.clear,
-		dispose = var6.dispose
+		getMarketplaceCatalogCategory = DataResolverModule.getCachedItem,
+		getMarketplaceCatalogCategories = DataResolverModule.getCachedItems,
+		updateMarketplaceCatalogCategories = if FFlagMarketplaceCatalogCategoryTrackLastReceived then updateMarketplaceCatalogCategories else DataCacheModule.updateItems,
+		updateMarketplaceCatalogCategory = DataCacheModule.updateItem,
+		getLastReceivedCategories = GetLastReceivedCategories,
+		clear = if FFlagMarketplaceCatalogCategoryTrackLastReceived then clear else DataResolverModule.clear,
+		dispose = DataResolverModule.dispose
 	}
 end

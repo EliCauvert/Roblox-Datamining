@@ -1,16 +1,15 @@
-﻿local parent = script.Parent.Parent.Parent
-local t = { useApolloClient = useApolloClient }
-local reactModule = require(parent.Parent.React)
-local invariant = require(parent.jsutils.invariant).invariant
-local getApolloContext = require(parent.react.context).getApolloContext
-local _ = require(parent.core)
+﻿local Parent = script.Parent.Parent.Parent
+local ReactModule = require(Parent.Parent.React)
+local InvariantFunction = require(Parent.jsutils.invariant).invariant
+local GetApolloContextFunction = require(Parent.react.context).getApolloContext
+local _ = require(Parent.core)
 
-function useApolloClient()
-	-- upvalues: reactModule (ref), getApolloContext (ref), invariant (ref)
-	local client = reactModule.useContext(getApolloContext()).client
-	invariant(client, "No Apollo Client instance can be found. Please ensure that you have called `ApolloProvider` higher up in your tree.")
+function useApolloClient() --[[ Line: 21 ]]
+	-- upvalues: ReactModule (copy), GetApolloContextFunction (copy), InvariantFunction (copy)
+	local Client = ReactModule.useContext(GetApolloContextFunction()).client
+	InvariantFunction(Client, "No Apollo Client instance can be found. Please ensure that you have called `ApolloProvider` higher up in your tree.")
 	
-	return client
+	return Client
 end
 
-return t
+return { useApolloClient = useApolloClient }

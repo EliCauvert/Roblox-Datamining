@@ -1,64 +1,63 @@
-﻿local array = require(script.Parent.Parent.LuauPolyfill).Array
-local t = {}
-t.__index = t
+﻿local Array = require(script.Parent.Parent.LuauPolyfill).Array
+local Module = {}
+Module.__index = Module
 
-function t.new(p1)
-	-- upvalues: array (ref), t (ref)
-	local t_2
-	local t_1 = {}
-	local _ = nil
+function Module.new(List) --[[ Line: 36 ]]
+	-- upvalues: Array (copy), Module (copy)
+	local t = {}
+	local HeaderList = nil
 	
-	if array.isArray(p1) then
-		t_2 = {}
+	if Array.isArray(List) then
+		HeaderList = {}
 		
-		for i, v in p1 do
-			t_2[v[1]] = v[2]
+		for _, value in List do
+			HeaderList[value[1]] = value[2]
 		end
 	else
-		t_2 = p1 or {}
+		HeaderList = List or {}
 	end
-	t_1.headerList = t_2
-	t_1.guard = "none"
-	setmetatable(t_1, t)
+	t.headerList = HeaderList
+	t.guard = "none"
+	setmetatable(t, Module)
 	
-	return t_1
+	return t
 end
 
-function t:append(p2, p3)
+function Module:append(p1, p2) --[[ Line: 56 ]]
 	if self.guard == "immutable" then
 		error("TypeError: tried to append header to immutable Headers object")
 	end
-	self.headerList[p2] = p3
+	self.headerList[p1] = p2
 end
 
-function t:delete(p2)
+function Module:delete(p1) --[[ Line: 64 ]]
 	if self.guard == "immutable" then
 		error("TypeError: tried to delete key on immutable Headers object")
 	end
-	if self:has(p2) then
-		self.headerList[p2] = nil
+	if self:has(p1) then
+		self.headerList[p1] = nil
 		
 		return
 	end
 end
 
-function t:get(p2)
-	return self.headerList[p2]
+function Module:get(p1) --[[ Line: 76 ]]
+	return self.headerList[p1]
 end
 
-function t:has(p2)
-	return self.headerList[p2] ~= nil
+function Module:has(p1): boolean --[[ Line: 80 ]]
+	return self.headerList[p1] ~= nil
 end
 
-function t:set(p2, p3)
+function Module:set(p1, p2) --[[ Line: 84 ]]
 	if self.guard == "immutable" then
 		error("TypeError: tried to set key on immutable Headers object")
 	end
-	self.headerList[p2] = p3
+	self.headerList[p1] = p2
 end
 
-function t:__iter()
+function Module:__iter() --[[ Line: 91 ]]
 	return next, self.headerList
 end
 
-return { Headers = t }
+return { Headers = Module }

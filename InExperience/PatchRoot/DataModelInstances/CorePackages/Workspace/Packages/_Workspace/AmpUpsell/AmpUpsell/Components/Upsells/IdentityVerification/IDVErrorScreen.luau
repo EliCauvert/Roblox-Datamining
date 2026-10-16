@@ -1,79 +1,80 @@
-﻿local parent = script:FindFirstAncestor("AmpUpsell").Parent
-local UIBloxModule = require(parent.UIBlox)
-local reactModule = require(parent.React)
-local iconSize = UIBloxModule.App.Constant.IconSize
-local images = UIBloxModule.App.ImageSet.Images
-local useStyle = UIBloxModule.Core.Style.useStyle
-local styledTextLabel = UIBloxModule.App.Text.StyledTextLabel
-local partialPageModal = UIBloxModule.App.Dialog.Modal.PartialPageModal
-local buttonType = UIBloxModule.App.Button.Enum.ButtonType
-local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
+﻿local Parent = script:FindFirstAncestor("AmpUpsell").Parent
+local UIBloxModule = require(Parent.UIBlox)
+local ReactModule = require(Parent.React)
+local IconSize = UIBloxModule.App.Constant.IconSize
+local Images = UIBloxModule.App.ImageSet.Images
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local StyledTextLabel = UIBloxModule.App.Text.StyledTextLabel
+local PartialPageModal = UIBloxModule.App.Dialog.Modal.PartialPageModal
+local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
+local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
 
-return function(p1)
-	-- upvalues: useStyle (ref), useSelector (ref), reactModule (ref), partialPageModal (ref), buttonType (ref), imageSetLabel (ref), iconSize (ref), images (ref), styledTextLabel (ref)
-	local errorTitle = p1.errorTitle
-	local errorDescription = p1.errorDescription
-	local onClose = p1.onClose
-	local var1 = useStyle()
+return function(p1) --[[ Line: 26 | Named "IDVErrorScreen" ]]
+	-- upvalues: UseStyleFunction (copy), UseSelectorFunction (copy), ReactModule (copy), PartialPageModal (copy), ButtonType (copy), ImageSetLabel (copy), IconSize (copy), Images (copy), StyledTextLabel (copy)
+	local ErrorTitle = p1.errorTitle
+	local ErrorDescription = p1.errorDescription
+	local OnCloseFunction = p1.onClose
+	local ButtonText = p1.buttonText
+	local UseStyleResult = UseStyleFunction()
 	
-	return reactModule.createElement(partialPageModal, {
+	return ReactModule.createElement(PartialPageModal, {
 		bottomPadding = 20,
-		title = errorTitle,
-		screenSize = useSelector(function(p2)
+		title = ErrorTitle,
+		screenSize = UseSelectorFunction(function(p2) --[[ Line: 32 ]]
 			return p2.ScreenSize
 		end),
-		onCloseClicked = function()
-			-- upvalues: onClose (ref)
-			onClose()
+		onCloseClicked = function() --[[ Line: 39 ]]
+			-- upvalues: OnCloseFunction (copy)
+			OnCloseFunction()
 		end,
 		buttonStackProps = {
 			buttonHeight = 48,
 			forcedFillDirection = Enum.FillDirection.Horizontal,
 			buttons = {
 				{
-					buttonType = buttonType.PrimarySystem,
+					buttonType = ButtonType.PrimarySystem,
 					props = {
 						isDisabled = false,
-						onActivated = function()
-							-- upvalues: onClose (ref)
-							onClose()
+						onActivated = function() --[[ Line: 51 ]]
+							-- upvalues: OnCloseFunction (copy)
+							OnCloseFunction()
 						end,
-						text = p1.buttonText
+						text = ButtonText
 					}
 				}
 			}
 		}
 	}, {
-		ViewFrame = reactModule.createElement("Frame", {
+		ViewFrame = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			AutomaticSize = Enum.AutomaticSize.XY
 		}, {
-			UIPadding = reactModule.createElement("UIPadding", {
+			UIPadding = ReactModule.createElement("UIPadding", {
 				PaddingTop = UDim.new(0, 24),
 				PaddingBottom = UDim.new(0, 24)
 			}),
-			UIListLayout = reactModule.createElement("UIListLayout", {
+			UIListLayout = ReactModule.createElement("UIListLayout", {
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				FillDirection = Enum.FillDirection.Vertical,
 				HorizontalAlignment = Enum.HorizontalAlignment.Center,
 				VerticalAlignment = Enum.VerticalAlignment.Center,
 				Padding = UDim.new(0, 20)
 			}),
-			ImageIcon = reactModule.createElement(imageSetLabel, {
+			ImageIcon = ReactModule.createElement(ImageSetLabel, {
 				LayoutOrder = 1,
 				BackgroundTransparency = 1,
-				Size = UDim2.new(0, iconSize.XXLarge, 0, iconSize.XXLarge),
+				Size = UDim2.new(0, IconSize.XXLarge, 0, IconSize.XXLarge),
 				ScaleType = Enum.ScaleType.Fit,
-				Image = images["icons/graphic/error_xlarge"],
-				ImageTransparency = var1.Theme.SystemPrimaryDefault.Transparency
+				Image = Images["icons/graphic/error_xlarge"],
+				ImageTransparency = UseStyleResult.Theme.SystemPrimaryDefault.Transparency
 			}),
-			ErrorText = reactModule.createElement(styledTextLabel, {
+			ErrorText = ReactModule.createElement(StyledTextLabel, {
 				lineHeight = 1,
 				layoutOrder = 2,
-				text = errorDescription,
-				fontStyle = var1.Font.CaptionBody,
-				colorStyle = var1.Theme.TextEmphasis,
+				text = ErrorDescription,
+				fontStyle = UseStyleResult.Font.CaptionBody,
+				colorStyle = UseStyleResult.Theme.TextEmphasis,
 				size = UDim2.new(1, 0, 0, 0),
 				textTruncate = Enum.TextTruncate.AtEnd,
 				textXAlignment = Enum.TextXAlignment.Center,

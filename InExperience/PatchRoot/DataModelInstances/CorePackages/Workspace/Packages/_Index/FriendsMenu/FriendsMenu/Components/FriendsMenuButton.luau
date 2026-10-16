@@ -1,91 +1,81 @@
-﻿local friendsMenu = script:FindFirstAncestor("FriendsMenu")
-local parent = friendsMenu.Parent
-local context = friendsMenu.Context
-local reactModule = require(parent.React)
-local UIBloxModule = require(parent.UIBlox)
-local foundationModule = require(parent.Foundation)
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local roactUtilsModule = require(parent.RoactUtils)
-local signalsModule = require(parent.Signals)
-local useSignalState = require(parent.SignalsReact).useSignalState
-local fFlagUseSignalsForGameInvitesStatus = require(parent.SharedFlags).FFlagUseSignalsForGameInvitesStatus
-local var1 = if fFlagUseSignalsForGameInvitesStatus then require(parent.NotificationsCommon).GetGameInvitesStatusStore else nil
-local localizationHelper = require(parent.NotificationsCommon).LocalizationHelper
-local constantsModule = require(friendsMenu.Constants)
-local friendsListContextModule = require(context.FriendsListContext)
-local _ = require(friendsMenu.friendsMenuModalType)
-local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
-local button = UIBloxModule.App.Button.Button
-local buttonType = UIBloxModule.App.Button.Enum.ButtonType
-local standardButtonSize = UIBloxModule.App.Button.Enum.StandardButtonSize
-local useStyle = UIBloxModule.Core.Style.useStyle
-local inviteStatus = constantsModule.InviteStatus
-local getLocalizedStrings = localizationHelper.getLocalizedStrings
-local t = {
+﻿local FriendsMenu = script:FindFirstAncestor("FriendsMenu")
+local Parent = FriendsMenu.Parent
+local ReactModule = require(Parent.React)
+local UIBloxModule = require(Parent.UIBlox)
+local FoundationModule = require(Parent.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local SignalsModule = require(Parent.Signals)
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local FFlagUseSignalsForGameInvitesStatus = require(Parent.SharedFlags).FFlagUseSignalsForGameInvitesStatus
+local GetGameInvitesStatusStore = if FFlagUseSignalsForGameInvitesStatus then require(Parent.NotificationsCommon).GetGameInvitesStatusStore else nil
+local FriendsListContextModule = require(FriendsMenu.Context.FriendsListContext)
+local _ = require(FriendsMenu.friendsMenuModalType)
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local Button = UIBloxModule.App.Button.Button
+local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
+local StandardButtonSize = UIBloxModule.App.Button.Enum.StandardButtonSize
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local InviteStatus = require(FriendsMenu.Constants).InviteStatus
+local GetLocalizedStringsFunction = require(Parent.NotificationsCommon).LocalizationHelper.getLocalizedStrings
+local config = {
 	inviteFriend = "Feature.SettingsHub.Action.InviteFriend",
-	[inviteStatus.Success] = "Feature.SettingsHub.Label.Invited",
-	[inviteStatus.Moderated] = "Feature.SettingsHub.Label.Moderated",
-	[inviteStatus.Pending] = "Feature.SettingsHub.Label.Sending"
+	[InviteStatus.Success] = "Feature.SettingsHub.Label.Invited",
+	[InviteStatus.Moderated] = "Feature.SettingsHub.Label.Moderated",
+	[InviteStatus.Pending] = "Feature.SettingsHub.Label.Sending"
 }
 
-return function(p1)
-	-- upvalues: fFlagUseSignalsForGameInvitesStatus (ref), reactModule (ref), signalsModule (ref), var1 (ref), useSignalState (ref), useSelector (ref), getLocalizedStrings (ref), t (ref), friendsListContextModule (ref), useStyle (ref), inviteStatus (ref), button (ref), buttonType (ref), standardButtonSize (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
-	local var2
-	local _ = nil
-	
-	if fFlagUseSignalsForGameInvitesStatus then
-		local id = p1.friend and p1.friend.id
-		var2 = useSignalState(reactModule.useMemo(function()
-			-- upvalues: signalsModule (copy), var1 (copy), id (ref)
-			return signalsModule.createComputed(function(p2)
-				-- upvalues: var1 (copy), id (copy)
-				return var1(false).getGameInvitesStatus(p2)[id]
+return function(p1) --[[ Line: 50 ]]
+	-- upvalues: FFlagUseSignalsForGameInvitesStatus (copy), ReactModule (copy), SignalsModule (copy), GetGameInvitesStatusStore (copy), UseSignalStateFunction (copy), UseSelectorFunction (copy), GetLocalizedStringsFunction (copy), config (copy), FriendsListContextModule (copy), UseStyleFunction (copy), InviteStatus (copy), Button (copy), ButtonType (copy), StandardButtonSize (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	local UseSignalStateResult = nil
+	if FFlagUseSignalsForGameInvitesStatus then
+		local Id = p1.friend and p1.friend.id
+		UseSignalStateResult = UseSignalStateFunction((ReactModule.useMemo(function() --[[ Line: 54 ]]
+			-- upvalues: SignalsModule (upval), GetGameInvitesStatusStore (upval), Id (copy)
+			return SignalsModule.createComputed(function(p2) --[[ Line: 55 ]]
+				-- upvalues: GetGameInvitesStatusStore (upval), Id (upval)
+				return GetGameInvitesStatusStore(false).getGameInvitesStatus(p2)[Id]
 			end)
-		end, { id }))
+		end, { Id })))
 	else
-		var2 = useSelector(function(p2)
-			-- upvalues: p1 (ref)
-			local friend = p1.friend
-			assert(friend, "friend should be non-nil. Silence type checker.")
+		UseSignalStateResult = UseSelectorFunction(function(p2) --[[ Line: 61 ]]
+			-- upvalues: p1 (copy)
+			local Friend = p1.friend
+			assert(Friend, "friend should be non-nil. Silence type checker.")
 			
-			return p2.GameInvitesStatus[friend.id]
+			return p2.GameInvitesStatus[Friend.id]
 		end)
 	end
-	local var3
-	local var4 = getLocalizedStrings(t)
-	local var5 = reactModule.useContext(friendsListContextModule)
-	local var6 = useStyle()
-	local theme = var6 and var6.Theme
-	local font = var6 and var6.Font
-	local isFetchingFriends = var5.isFetchingFriends
-	local var7 = font.BaseSize * font.CaptionHeader.RelativeSize
+	local LocalizedStrings = GetLocalizedStringsFunction(config)
+	local UseContextResult = ReactModule.useContext(FriendsListContextModule)
+	local UseStyleResult = UseStyleFunction()
+	local Theme = UseStyleResult and UseStyleResult.Theme
+	local _Font = UseStyleResult and UseStyleResult.Font
+	local IsFetchingFriends = UseContextResult.isFetchingFriends
+	local ScaledBaseSize = _Font.BaseSize * _Font.CaptionHeader.RelativeSize
 	
-	if var2 then
-		var3 = var2 == inviteStatus.Failed and not p1.isFullRowActivatable
-	end
-	return if var3 then reactModule.createElement(button, {
+	return if if UseSignalStateResult then UseSignalStateResult == InviteStatus.Failed and not p1.isFullRowActivatable else not p1.isFullRowActivatable then ReactModule.createElement(Button, {
 		isLoading = false,
 		fitContent = true,
-		buttonType = buttonType.Secondary,
-		isDisabled = isFetchingFriends,
+		buttonType = ButtonType.Secondary,
+		isDisabled = IsFetchingFriends,
 		onActivated = p1.onInvite,
-		standardSize = standardButtonSize.XSmall,
+		standardSize = StandardButtonSize.XSmall,
 		anchorPoint = p1.anchorPoint,
 		position = p1.position,
-		text = var4.inviteFriend,
+		text = LocalizedStrings.inviteFriend,
 		layoutOrder = p1.layoutOrder
-	}) else reactModule.createElement("TextLabel", {
+	}) else ReactModule.createElement("TextLabel", {
 		BackgroundTransparency = 1,
 		TextWrapped = true,
-		Text = var4[var2] or var4.inviteFriend,
-		TextSize = var7,
+		Text = LocalizedStrings[UseSignalStateResult] or LocalizedStrings.inviteFriend,
+		TextSize = ScaledBaseSize,
 		Size = p1.size,
 		AnchorPoint = p1.anchorPoint,
 		Position = p1.position,
-		TextColor3 = theme.TextDefault.Color,
-		Font = if foundationFontFaceMigration then nil else font.CaptionHeader.Font,
-		FontFace = if foundationFontFaceMigration then normalizeFontFace(var6.Tokens.Typography.CaptionLarge.Font) else nil,
+		TextColor3 = Theme.TextDefault.Color,
+		Font = if FoundationFontFaceMigration then nil else _Font.CaptionHeader.Font,
+		FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.CaptionLarge.Font) else nil,
 		LayoutOrder = p1.layoutOrder
 	})
 end

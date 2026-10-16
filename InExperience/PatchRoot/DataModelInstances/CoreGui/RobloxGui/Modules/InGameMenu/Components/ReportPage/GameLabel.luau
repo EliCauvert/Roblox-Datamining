@@ -1,75 +1,76 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local inGameMenuDependenciesModule = require(corePackagesService.Packages.InGameMenuDependencies)
-local roact = inGameMenuDependenciesModule.Roact
-local UIBlox = inGameMenuDependenciesModule.UIBlox
-local t = inGameMenuDependenciesModule.t
-local cryo = inGameMenuDependenciesModule.Cryo
-local withFoundationOrUIBloxStyle = require(corePackagesService.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
-local foundationModule = require(corePackagesService.Packages.Foundation)
-local fFlagCoreUiMigrateUIBloxToFoundation = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
-local var1 = if fFlagCoreUiMigrateUIBloxToFoundation then foundationModule.UNSTABLE.withCursorMigration else UIBlox.App.SelectionImage.withSelectionCursorProvider
-local var2 = if fFlagCoreUiMigrateUIBloxToFoundation then foundationModule.Enums.CursorType else UIBlox.App.SelectionImage.CursorKind
-local parent = script.Parent.Parent.Parent
-local themedTextLabelModule = require(parent.Components.ThemedTextLabel)
-local assetsModule = require(parent.Resources.Assets)
-local reactModule = require(corePackagesService.Packages.React)
-local imageSetLabel = UIBlox.Core.ImageSet.ImageSetLabel
-local image = foundationModule.Image
-local gameLabel = roact.PureComponent:extend("GameLabel")
-gameLabel.validateProps = t.strictInterface({
-	gameId = t.number,
-	gameName = t.string,
-	LayoutOrder = t.integer,
-	onActivated = t.optional(t.callback),
-	[roact.Children] = t.optional(t.table),
-	buttonRef = t.optional(t.table)
+﻿local CorePackages = game:GetService("CorePackages")
+local InGameMenuDependenciesModule = require(CorePackages.Packages.InGameMenuDependencies)
+local Roact = InGameMenuDependenciesModule.Roact
+local UIBlox = InGameMenuDependenciesModule.UIBlox
+local T = InGameMenuDependenciesModule.t
+local Cryo = InGameMenuDependenciesModule.Cryo
+local WithFoundationOrUIBloxStyleFunction = require(CorePackages.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local FFlagCoreUiMigrateUIBloxToFoundation = require(CorePackages.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
+local WithCursorMigration = if FFlagCoreUiMigrateUIBloxToFoundation then FoundationModule.UNSTABLE.withCursorMigration else UIBlox.App.SelectionImage.withSelectionCursorProvider
+local CursorType = if FFlagCoreUiMigrateUIBloxToFoundation then FoundationModule.Enums.CursorType else UIBlox.App.SelectionImage.CursorKind
+local Parent = script.Parent.Parent.Parent
+local ThemedTextLabelModule = require(Parent.Components.ThemedTextLabel)
+local AssetsModule = require(Parent.Resources.Assets)
+local ReactModule = require(CorePackages.Packages.React)
+local ImageSetLabel = UIBlox.Core.ImageSet.ImageSetLabel
+local Image = FoundationModule.Image
+local GameLabel = Roact.PureComponent:extend("GameLabel")
+GameLabel.validateProps = T.strictInterface({
+	gameId = T.number,
+	gameName = T.string,
+	LayoutOrder = T.integer,
+	onActivated = T.optional(T.callback),
+	[Roact.Children] = T.optional(T.table),
+	buttonRef = T.optional(T.table)
 })
 
-function gameLabel.renderButtons(p1)
-	-- upvalues: roact (ref), cryo (ref)
-	return cryo.Dictionary.join(p1.props[roact.Children] or {}, {
-		List = roact.createElement("UIListLayout", {
+function GameLabel.renderButtons(p1) --[[ Line: 51 ]]
+	-- upvalues: Roact (copy), Cryo (copy)
+	return (Cryo.Dictionary.join(p1.props[Roact.Children] or {}, {
+		List = Roact.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Horizontal,
 			HorizontalAlignment = Enum.HorizontalAlignment.Right,
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			VerticalAlignment = Enum.VerticalAlignment.Center,
 			Padding = UDim.new(0, 12)
 		})
-	})
+	}))
 end
 
-function gameLabel.renderWithSelectionCursor(p1, p2)
-	-- upvalues: assetsModule (ref), withFoundationOrUIBloxStyle (ref), roact (ref), reactModule (ref), var2 (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), image (ref), imageSetLabel (ref), themedTextLabelModule (ref)
-	local var3 = if p1.props.gameId > 0 then "rbxthumb://type=GameIcon&id=" .. p1.props.gameId .. "&w=150&h=150" else assetsModule.Images.PlaceholderGameIcon
+function GameLabel.renderWithSelectionCursor(p1, Callback) --[[ Line: 66 ]]
+	-- upvalues: AssetsModule (copy), WithFoundationOrUIBloxStyleFunction (copy), Roact (copy), ReactModule (copy), CursorType (copy), FFlagCoreUiMigrateUIBloxToFoundation (copy), Image (copy), ImageSetLabel (copy), ThemedTextLabelModule (copy)
+	local GameId = p1.props.gameId
+	local Text = if p1.props.gameId > 0 then "rbxthumb://type=GameIcon&id=" .. GameId .. "&w=150&h=150" else AssetsModule.Images.PlaceholderGameIcon
 	
-	return withFoundationOrUIBloxStyle(function(_)
+	return WithFoundationOrUIBloxStyleFunction(function(_) --[[ Line: 73 ]]
 		return {}
-	end, function(_)
-		-- upvalues: roact (copy), reactModule (copy), p1 (ref), p2 (ref), var2 (copy), fFlagCoreUiMigrateUIBloxToFoundation (copy), image (copy), var3 (write), imageSetLabel (copy), themedTextLabelModule (copy)
-		return roact.createElement("TextButton", {
-			[reactModule.Tag] = "data-testid=experienceLabel",
+	end, function(_) --[[ Line: 75 ]]
+		-- upvalues: Roact (upval), ReactModule (upval), p1 (copy), Callback (copy), CursorType (upval), FFlagCoreUiMigrateUIBloxToFoundation (upval), Image (upval), Text (ref), ImageSetLabel (upval), ThemedTextLabelModule (upval)
+		return Roact.createElement("TextButton", {
+			[ReactModule.Tag] = "data-testid=experienceLabel",
 			BackgroundTransparency = 1,
 			LayoutOrder = p1.props.LayoutOrder,
 			Size = UDim2.new(1, 0, 0, 70),
 			Text = "",
 			AutoButtonColor = false,
-			SelectionImageObject = p2(var2.Square),
-			[roact.Ref] = p1.props.buttonRef,
-			[roact.Event.Activated] = p1.props.onActivated
+			SelectionImageObject = Callback(CursorType.Square),
+			[Roact.Ref] = p1.props.buttonRef,
+			[Roact.Event.Activated] = p1.props.onActivated
 		}, {
-			GameIcon = if fFlagCoreUiMigrateUIBloxToFoundation then roact.createElement(image, {
+			GameIcon = if FFlagCoreUiMigrateUIBloxToFoundation then Roact.createElement(Image, {
 				AnchorPoint = Vector2.new(0, 0.5),
 				Position = UDim2.new(0, 24, 0.5, 0),
 				Size = UDim2.new(0, 44, 0, 44),
-				Image = var3
-			}) else roact.createElement(imageSetLabel, {
+				Image = Text
+			}) else Roact.createElement(ImageSetLabel, {
 				BackgroundTransparency = 1,
 				AnchorPoint = Vector2.new(0, 0.5),
 				Position = UDim2.new(0, 24, 0.5, 0),
 				Size = UDim2.new(0, 44, 0, 44),
-				Image = var3
+				Image = Text
 			}),
-			GameNameLabel = roact.createElement(themedTextLabelModule, {
+			GameNameLabel = Roact.createElement(ThemedTextLabelModule, {
 				fontKey = "Header2",
 				themeKey = "TextEmphasis",
 				AnchorPoint = Vector2.new(0, 0.5),
@@ -79,7 +80,7 @@ function gameLabel.renderWithSelectionCursor(p1, p2)
 				TextXAlignment = Enum.TextXAlignment.Left,
 				TextTruncate = Enum.TextTruncate.AtEnd
 			}),
-			ButtonContainer = roact.createElement("Frame", {
+			ButtonContainer = Roact.createElement("Frame", {
 				BackgroundTransparency = 1,
 				AnchorPoint = Vector2.new(1, 0),
 				Position = UDim2.new(1, -24, 0, 0),
@@ -89,15 +90,15 @@ function gameLabel.renderWithSelectionCursor(p1, p2)
 	end)
 end
 
-function gameLabel.render(p1)
-	-- upvalues: var1 (ref)
-	return var1(function(p2)
-		-- upvalues: p1 (ref)
+function GameLabel.render(p1) --[[ Line: 124 ]]
+	-- upvalues: WithCursorMigration (copy)
+	return WithCursorMigration(function(p2) --[[ Line: 125 ]]
+		-- upvalues: p1 (copy)
 		return p1:renderWithSelectionCursor(p2)
 	end)
 end
 
-return roact.forwardRef(function(p1, p2)
-	-- upvalues: roact (ref), gameLabel (ref), cryo (ref)
-	return roact.createElement(gameLabel, cryo.Dictionary.join(p1, { buttonRef = p2 }))
+return Roact.forwardRef(function(p1, ButtonRef) --[[ Line: 130 ]]
+	-- upvalues: Roact (copy), GameLabel (copy), Cryo (copy)
+	return Roact.createElement(GameLabel, Cryo.Dictionary.join(p1, { buttonRef = ButtonRef }))
 end)

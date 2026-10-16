@@ -1,11 +1,12 @@
-﻿local appPage = require(script:FindFirstAncestor("AppStartup").Parent.RobloxAppEnums).AppPage
+﻿local AppPage = require(script:FindFirstAncestor("AppStartup").Parent.RobloxAppEnums).AppPage
 
-return function(p1, p2)
-	-- upvalues: appPage (ref)
+return function(p1, Callback: (any) -> ()) --[[ Line: 8 | Named "navigateWithPlatformAccount" ]]
+	-- upvalues: AppPage (copy)
 	if p1 then
-		p2(appPage.SingleSignOnContainer)
+		Callback(AppPage.SingleSignOnContainer)
 		
 		return
+	else
+		Callback(AppPage.Startup)
 	end
-	p2(appPage.Startup)
 end

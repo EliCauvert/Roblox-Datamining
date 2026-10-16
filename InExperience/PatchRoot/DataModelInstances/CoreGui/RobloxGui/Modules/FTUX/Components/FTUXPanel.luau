@@ -1,34 +1,33 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local reactModule = require(corePackagesService.Packages.React)
-local useStyle = require(corePackagesService.Packages.UIBlox).Core.Style.useStyle
-local parent = script.Parent.Parent
-local FTUXSlideshowModule = require(parent.Components.FTUXSlideshow)
-local FTUXConstantsModule = require(parent.Resources.FTUXConstants)
-local _ = require(parent.Enums.PlatformEnum)
+﻿local CorePackages = game:GetService("CorePackages")
+local ReactModule = require(CorePackages.Packages.React)
+local UseStyleFunction = require(CorePackages.Packages.UIBlox).Core.Style.useStyle
+local Parent = script.Parent.Parent
+local FTUXSlideshowModule = require(Parent.Components.FTUXSlideshow)
+local FTUXConstantsModule = require(Parent.Resources.FTUXConstants)
+local _ = require(Parent.Enums.PlatformEnum)
 local FTUXPanelXOffset = game:DefineFastInt("FTUXPanelXOffset", 50)
 
-return function(p1)
-	-- upvalues: useStyle (ref), FTUXConstantsModule (ref), reactModule (ref), FTUXPanelXOffset (ref), FTUXSlideshowModule (ref)
-	local var1 = useStyle()
-	local panelConstants = FTUXConstantsModule[p1.platform].PanelConstants
-	local MAIN_SCREEN_SIZE_WIDTH = panelConstants.MAIN_SCREEN_SIZE_WIDTH
-	local MAIN_SCREEN_SIZE_HEIGHT = panelConstants.MAIN_SCREEN_SIZE_HEIGHT
+return function(p1) --[[ Line: 20 | Named "FTUXPanel" ]]
+	-- upvalues: UseStyleFunction (copy), FTUXConstantsModule (copy), ReactModule (copy), FTUXPanelXOffset (copy), FTUXSlideshowModule (copy)
+	local PanelConstants = FTUXConstantsModule[p1.platform].PanelConstants
+	local MAINSCREENSIZEWIDTH = PanelConstants.MAIN_SCREEN_SIZE_WIDTH
+	local MAINSCREENSIZEHEIGHT = PanelConstants.MAIN_SCREEN_SIZE_HEIGHT
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.new(1, 0, 1, 0),
 		Position = UDim2.new(0, FTUXPanelXOffset, 0, 0)
 	}, {
-		Slideshow = reactModule.createElement("Frame", {
+		Slideshow = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 0,
 			BorderSizePixel = 0,
 			ClipsDescendants = true,
-			BackgroundColor3 = var1.Theme.BackgroundDefault.Color,
-			Size = UDim2.new(panelConstants.SLIDESHOW_FRAME_WIDTH / MAIN_SCREEN_SIZE_WIDTH, 0, panelConstants.SLIDESHOW_FRAME_HEIGHT / MAIN_SCREEN_SIZE_HEIGHT, 0),
-			Position = UDim2.new(panelConstants.SLIDESHOW_FRAME_X / MAIN_SCREEN_SIZE_WIDTH, 0, panelConstants.SLIDESHOW_FRAME_Y / MAIN_SCREEN_SIZE_HEIGHT, 0)
+			BackgroundColor3 = UseStyleFunction().Theme.BackgroundDefault.Color,
+			Size = UDim2.new(PanelConstants.SLIDESHOW_FRAME_WIDTH / MAINSCREENSIZEWIDTH, 0, PanelConstants.SLIDESHOW_FRAME_HEIGHT / MAINSCREENSIZEHEIGHT, 0),
+			Position = UDim2.new(PanelConstants.SLIDESHOW_FRAME_X / MAINSCREENSIZEWIDTH, 0, PanelConstants.SLIDESHOW_FRAME_Y / MAINSCREENSIZEHEIGHT, 0)
 		}, {
-			UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0.02, 0) }),
-			Slideshow = reactModule.createElement(FTUXSlideshowModule, { platform = p1.platform }, {})
+			UICorner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0.02, 0) }),
+			Slideshow = ReactModule.createElement(FTUXSlideshowModule, { platform = p1.platform }, {})
 		})
 	})
 end

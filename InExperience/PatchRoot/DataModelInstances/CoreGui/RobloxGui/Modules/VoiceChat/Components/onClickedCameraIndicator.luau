@@ -1,17 +1,18 @@
-﻿local faceAnimatorService = game:GetService("FaceAnimatorService")
-local modules = game:GetService("CoreGui").RobloxGui.Modules
-local var1 = require(modules.SelfView.Analytics).new()
-local publicApiModule = require(modules.SelfView.publicApi)
-local toggleSelfViewSignalModule = require(modules.SelfView.toggleSelfViewSignal)
+﻿local FaceAnimatorService = game:GetService("FaceAnimatorService")
+local Modules = game:GetService("CoreGui").RobloxGui.Modules
+local NewResult = require(Modules.SelfView.Analytics).new()
+local PublicApiModule = require(Modules.SelfView.publicApi)
+local ToggleSelfViewSignalModule = require(Modules.SelfView.toggleSelfViewSignal)
 
-return function()
-	-- upvalues: faceAnimatorService (ref), var1 (ref), publicApiModule (ref), toggleSelfViewSignalModule (ref)
-	if faceAnimatorService and faceAnimatorService:IsStarted() then
-		faceAnimatorService.VideoAnimationEnabled = not faceAnimatorService.VideoAnimationEnabled
-		var1:setLastCtx("bubbleChatToggle")
+return function() --[[ Line: 9 ]]
+	-- upvalues: FaceAnimatorService (copy), NewResult (copy), PublicApiModule (copy), ToggleSelfViewSignalModule (copy)
+	if FaceAnimatorService and FaceAnimatorService:IsStarted() then
+		FaceAnimatorService.VideoAnimationEnabled = not FaceAnimatorService.VideoAnimationEnabled
+		NewResult:setLastCtx("bubbleChatToggle")
+		local SelfViewIsOpenAndVisible = PublicApiModule.getSelfViewIsOpenAndVisible()
 		
-		if faceAnimatorService.VideoAnimationEnabled and not publicApiModule.getSelfViewIsOpenAndVisible() then
-			toggleSelfViewSignalModule:fire()
+		if FaceAnimatorService.VideoAnimationEnabled and not SelfViewIsOpenAndVisible then
+			ToggleSelfViewSignalModule:fire()
 		end
 	end
 end

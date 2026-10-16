@@ -1,41 +1,41 @@
-﻿local serverDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
-local parent = serverDrivenUi.Parent
-local edpStoreAnalyticsModule = require(parent.EdpStoreAnalytics)
-local edpStoreAnalyticsLogger = edpStoreAnalyticsModule.EdpStoreAnalyticsLogger
-local storeEnums = edpStoreAnalyticsModule.Constants.StoreEnums
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local sduiErrors = sduiCoreSystemModule.SduiErrors
-local sduiLogger = sduiCoreSystemModule.SduiLogger
-local findAnalyticsFieldInAncestors = sduiCoreSystemModule.findAnalyticsFieldInAncestors
-local sduiMarketplaceItemImpressionsHandlerModule = require(serverDrivenUi.Impressions.SduiMarketplaceItemImpressionsHandler)
+﻿local ServerDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
+local Parent = ServerDrivenUi.Parent
+local EdpStoreAnalyticsModule = require(Parent.EdpStoreAnalytics)
+local EdpStoreAnalyticsLogger = EdpStoreAnalyticsModule.EdpStoreAnalyticsLogger
+local StoreEnums = EdpStoreAnalyticsModule.Constants.StoreEnums
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local SduiErrors = SduiCoreSystemModule.SduiErrors
+local SduiLogger = SduiCoreSystemModule.SduiLogger
+local FindAnalyticsFieldInAncestorsFunction = SduiCoreSystemModule.findAnalyticsFieldInAncestors
+local SduiMarketplaceItemImpressionsHandlerModule = require(ServerDrivenUi.Impressions.SduiMarketplaceItemImpressionsHandler)
 
-return function(p1, p2, p3, p4, p5, p6)
-	-- upvalues: sduiMarketplaceItemImpressionsHandlerModule (ref), findAnalyticsFieldInAncestors (ref), sduiLogger (ref), sduiErrors (ref), edpStoreAnalyticsLogger (ref), storeEnums (ref)
-	if sduiMarketplaceItemImpressionsHandlerModule(p1, p2, p3, p4, p5, p6) == 0 then return end
-	local t = { analyticsData = p4 }
-	local var1 = findAnalyticsFieldInAncestors("itemType", t)
-	local var2 = findAnalyticsFieldInAncestors("edpLocationType", t)
-	local var3 = findAnalyticsFieldInAncestors("universeId", t)
-	local var4 = if var3 ~= nil then nil else tonumber(var3)
+return function(p1, List, p2, AnalyticsData, p3, p4) --[[ Line: 27 | Named "SduiEdpStoreImpressionsHandler" ]]
+	-- upvalues: SduiMarketplaceItemImpressionsHandlerModule (copy), FindAnalyticsFieldInAncestorsFunction (copy), SduiLogger (copy), SduiErrors (copy), EdpStoreAnalyticsLogger (copy), StoreEnums (copy)
+	if SduiMarketplaceItemImpressionsHandlerModule(p1, List, p2, AnalyticsData, p3, p4) == 0 then return end
+	local config = { analyticsData = AnalyticsData }
+	local ItemType = FindAnalyticsFieldInAncestorsFunction("itemType", config)
+	local EdpLocationType = FindAnalyticsFieldInAncestorsFunction("edpLocationType", config)
+	local UniverseId = FindAnalyticsFieldInAncestorsFunction("universeId", config)
+	local Number = if UniverseId == nil then nil else tonumber(UniverseId)
 	
-	if not var1 then
-		sduiLogger.reportError(sduiErrors.SduiErrorType.FailedToLogExperienceStoreImpressions, {
+	if not ItemType then
+		SduiLogger.reportError(SduiErrors.SduiErrorType.FailedToLogExperienceStoreImpressions, {
 			name = "SduiEdpStoreImpressionsHandler",
 			message = "Missing itemType on collectionAnalyticsData"
 		}, p1.appPage)
 		
 		return
 	end
-	for i, v in p2 do
-		if p3[v] ~= nil then
-			edpStoreAnalyticsLogger.logImpression({
-				actionType = storeEnums.ActionType.Impression,
-				productType = var1,
-				locationType = var2,
-				universeId = var4,
-				layoutOrder = (p5 or 0) + v
+	for _, value in List do
+		if p2[value] ~= nil then
+			EdpStoreAnalyticsLogger.logImpression({
+				actionType = StoreEnums.ActionType.Impression,
+				productType = ItemType,
+				locationType = EdpLocationType,
+				universeId = Number,
+				layoutOrder = (p3 or 0) + value
 			})
 		end
 	end
-	edpStoreAnalyticsLogger.logExperienceStoreExposure()
+	EdpStoreAnalyticsLogger.logExperienceStoreExposure()
 end

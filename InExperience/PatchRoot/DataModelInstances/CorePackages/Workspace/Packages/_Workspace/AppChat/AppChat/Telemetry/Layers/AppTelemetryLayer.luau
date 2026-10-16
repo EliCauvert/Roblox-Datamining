@@ -1,11 +1,11 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
+﻿local AppChat = script:FindFirstAncestor("AppChat")
 
-return require(appChat.Telemetry.createReactTelemetryLayer)(require(appChat.Parent.React).createContext(function()
+return require(AppChat.Telemetry.createReactTelemetryLayer)(require(AppChat.Parent.React).createContext(function() --[[ Line: 21 ]]
 	return {}
 end), {
 	context = "platformChat",
 	locale = "unknown",
 	entryPoint = "unknown",
 	userId = "unknown",
-	placement = require(appChat.Contexts.ChatPlacementContext).Enum.Unknown
+	placement = require(AppChat.Contexts.ChatPlacementContext).Enum.Unknown
 })

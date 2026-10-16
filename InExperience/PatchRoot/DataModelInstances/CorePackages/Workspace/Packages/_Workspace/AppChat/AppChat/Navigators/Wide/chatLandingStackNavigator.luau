@@ -1,73 +1,69 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local roactNavigationModule = require(parent.RoactNavigation)
-local squadQuickStartExperimentation = require(parent.SocialExperiments).SquadQuickStartExperimentation
-local enumScreensModule = require(appChat.EnumScreens)
-local chatLandingScreenWithSwitchNavigatorModule = require(appChat.Components.ChatLanding.ChatLandingScreenWithSwitchNavigator)
-local createNewChatScreenModule = require(appChat.Components.CreateNewChat.CreateNewChatScreen)
-local editChatMembersScreenModule = require(appChat.Components.EditChatMembers.EditChatMembersScreen)
-local quickStartSquadInviteFriendsScreenModule = require(appChat.Components.Squads.QuickStartSquadInviteFriendsScreen)
-local createOverlayTopBarStackNavigatorWithFocusModule = require(appChat.Navigators.createOverlayTopBarStackNavigatorWithFocus)
-local getFFlagAppChatRemoveDynamicRequiresModule = require(appChat.Flags.getFFlagAppChatRemoveDynamicRequires)
-local fFlagEnablePartyQuickStartButton = require(parent.SharedFlags).FFlagEnablePartyQuickStartButton
-local fFlagAppChatDisableAbsorbInputSelectableModule = require(appChat.Flags.FFlagAppChatDisableAbsorbInputSelectable)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local RoactNavigationModule = require(Parent.RoactNavigation)
+local SquadQuickStartExperimentation = require(Parent.SocialExperiments).SquadQuickStartExperimentation
+local EnumScreensModule = require(AppChat.EnumScreens)
+local QuickStartSquadInviteFriendsScreenModule = require(AppChat.Components.Squads.QuickStartSquadInviteFriendsScreen)
+local CreateOverlayTopBarStackNavigatorWithFocusModule = require(AppChat.Navigators.createOverlayTopBarStackNavigatorWithFocus)
+local FFlagEnablePartyQuickStartButton = require(Parent.SharedFlags).FFlagEnablePartyQuickStartButton
+local FFlagAppChatDisableAbsorbInputSelectableModule = require(AppChat.Flags.FFlagAppChatDisableAbsorbInputSelectable)
 
-local function _(p1, p2)
-	-- upvalues: createOverlayTopBarStackNavigatorWithFocusModule (ref)
-	return createOverlayTopBarStackNavigatorWithFocusModule({ { [p1] = p2 } })
+local function _(p1, p2) --[[ Line: 23 | Named "wrapScreenInOverlayNavigator" ]]
+	-- upvalues: CreateOverlayTopBarStackNavigatorWithFocusModule (copy)
+	return CreateOverlayTopBarStackNavigatorWithFocusModule({ { [p1] = p2 } })
 end
 
-local t = {
+local NavigationOptions = {
 	backButtonEnabled = true,
 	tabBarVisible = true,
 	overlayEnabled = true,
 	overlayTransparency = 0.5,
 	absorbInput = true
 }
-local list = {
+local List = {
 	{
-		[enumScreensModule.ChatLanding] = {
-			screen = chatLandingScreenWithSwitchNavigatorModule,
-			navigationOptions = if getFFlagAppChatRemoveDynamicRequiresModule() then function()
+		[EnumScreensModule.ChatLanding] = {
+			screen = require(AppChat.Components.ChatLanding.ChatLandingScreenWithSwitchNavigator),
+			navigationOptions = if require(AppChat.Flags.getFFlagAppChatRemoveDynamicRequires)() then function() --[[ Line: 45 ]]
 				return { backButtonEnabled = false, tabBarVisible = true }
 			end else { backButtonEnabled = false, tabBarVisible = true }
 		}
 	},
 	{
 		CreateNewChatScreenWrapper = {
-			screen = createOverlayTopBarStackNavigatorWithFocusModule({
+			screen = CreateOverlayTopBarStackNavigatorWithFocusModule({
 				{
-					[enumScreensModule.CreateNewChat] = createNewChatScreenModule
+					[EnumScreensModule.CreateNewChat] = require(AppChat.Components.CreateNewChat.CreateNewChatScreen)
 				}
 			}),
-			navigationOptions = t
+			navigationOptions = NavigationOptions
 		}
 	},
 	{
 		EditChatMembersScreenWrapper = {
-			screen = createOverlayTopBarStackNavigatorWithFocusModule({
+			screen = CreateOverlayTopBarStackNavigatorWithFocusModule({
 				{
-					[enumScreensModule.EditChatMembers] = editChatMembersScreenModule
+					[EnumScreensModule.EditChatMembers] = require(AppChat.Components.EditChatMembers.EditChatMembersScreen)
 				}
 			}),
-			navigationOptions = t
+			navigationOptions = NavigationOptions
 		}
 	}
 }
 
-if squadQuickStartExperimentation.getPartyQuickStartChangesEnabled() and fFlagEnablePartyQuickStartButton then
-	table.insert(list, {
+if SquadQuickStartExperimentation.getPartyQuickStartChangesEnabled() and FFlagEnablePartyQuickStartButton then
+	table.insert(List, {
 		CreatePartyQuickStartWrapper = {
-			screen = createOverlayTopBarStackNavigatorWithFocusModule({
+			screen = CreateOverlayTopBarStackNavigatorWithFocusModule({
 				{
-					[enumScreensModule.QuickStartSquadInviteFriends] = quickStartSquadInviteFriendsScreenModule
+					[EnumScreensModule.QuickStartSquadInviteFriends] = QuickStartSquadInviteFriendsScreenModule
 				}
 			}),
-			navigationOptions = t
+			navigationOptions = NavigationOptions
 		}
 	})
 end
-return roactNavigationModule.createRobloxStackNavigator(list, {
-	defaultNavigationOptions = if fFlagAppChatDisableAbsorbInputSelectableModule then { absorbInputSelectable = false } else nil,
-	mode = roactNavigationModule.StackPresentationStyle.Overlay
+return RoactNavigationModule.createRobloxStackNavigator(List, {
+	defaultNavigationOptions = if FFlagAppChatDisableAbsorbInputSelectableModule then { absorbInputSelectable = false } else nil,
+	mode = RoactNavigationModule.StackPresentationStyle.Overlay
 })

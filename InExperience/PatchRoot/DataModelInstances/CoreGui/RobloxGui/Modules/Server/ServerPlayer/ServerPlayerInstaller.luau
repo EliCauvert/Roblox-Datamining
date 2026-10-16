@@ -1,17 +1,17 @@
-﻿local serverUtilModule = require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.Server.ServerUtil)
+﻿local ServerUtilModule = require(game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.Server.ServerUtil)
 
-return function()
-	-- upvalues: serverUtilModule (ref)
+return function() --[[ Line: 5 ]]
+	-- upvalues: ServerUtilModule (copy)
 	if game:GetService("StarterPlayer"):FindFirstChild("PlayerSettings") == nil then
-		local playerSettings = Instance.new("ModuleScript")
-		playerSettings.Name = "PlayerSettings"
+		local PlayerSettings = Instance.new("ModuleScript")
+		PlayerSettings.Name = "PlayerSettings"
 		
-		if serverUtilModule.getFFlagServerCoreScriptSourceCode() then
-			playerSettings.Source = serverUtilModule.getSourceForServerScript(script.Parent.DefaultServerPlayerModules:WaitForChild("PlayerSettings"))
+		if ServerUtilModule.getFFlagServerCoreScriptSourceCode() then
+			PlayerSettings.Source = ServerUtilModule.getSourceForServerScript(script.Parent.DefaultServerPlayerModules:WaitForChild("PlayerSettings"))
 		else
-			playerSettings.Source = script.Parent.DefaultServerPlayerModules:WaitForChild("PlayerSettings").Source
+			PlayerSettings.Source = script.Parent.DefaultServerPlayerModules:WaitForChild("PlayerSettings").Source
 		end
-		playerSettings.Parent = game:GetService("StarterPlayer")
-		playerSettings.Archivable = false
+		PlayerSettings.Parent = game:GetService("StarterPlayer")
+		PlayerSettings.Archivable = false
 	end
 end

@@ -1,90 +1,88 @@
-﻿local parent = script:FindFirstAncestor("CollectionViews").Parent
-local reactModule = require(parent.React)
-local reactIsModule = require(parent.ReactIs)
-local foundationModule = require(parent.Foundation)
-local controlState = foundationModule.Enums.ControlState
-local iconSize = foundationModule.Enums.IconSize
-local icon = foundationModule.Icon
-local view = foundationModule.View
-local useTokens = foundationModule.Hooks.useTokens
+﻿local Parent = script:FindFirstAncestor("CollectionViews").Parent
+local ReactModule = require(Parent.React)
+local ReactIsModule = require(Parent.ReactIs)
+local FoundationModule = require(Parent.Foundation)
+local ControlState = FoundationModule.Enums.ControlState
+local IconSize = FoundationModule.Enums.IconSize
+local Icon = FoundationModule.Icon
+local View = FoundationModule.View
+local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-local function ScrollButton(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), controlState (ref), view (ref), icon (ref), iconSize (ref)
-	return reactModule.createElement(view, {
+local function ScrollButton(Frame) --[[ Line: 41 ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), ControlState (copy), View (copy), Icon (copy), IconSize (copy)
+	return ReactModule.createElement(View, {
 		tag = "size-1000 radius-circle bg-over-media-100",
-		AnchorPoint = p1.AnchorPoint,
-		Position = p1.Position,
-		Visible = p1.Visible,
-		onStateChanged = reactModule.useCallback(function(p2)
-			-- upvalues: controlState (copy), p1 (ref)
-			if p2 == controlState.Hover or p2 == controlState.Pressed then
-				if p1.onScrollButtonEnter then
-					p1.onScrollButtonEnter()
+		AnchorPoint = Frame.AnchorPoint,
+		Position = Frame.Position,
+		Visible = Frame.Visible,
+		onStateChanged = ReactModule.useCallback(function(Hover) --[[ Line: 43 ]]
+			-- upvalues: ControlState (upval), Frame (copy)
+			if Hover == ControlState.Hover or Hover == ControlState.Pressed then
+				if Frame.onScrollButtonEnter then
+					Frame.onScrollButtonEnter()
 					
 					return
 				end
-			elseif p1.onScrollButtonLeave then
-				p1.onScrollButtonLeave()
+			elseif Frame.onScrollButtonLeave then
+				Frame.onScrollButtonLeave()
 			end
-		end, { p1.onScrollButtonEnter, p1.onScrollButtonLeave }),
-		onActivated = p1.onActivated
+		end, { Frame.onScrollButtonEnter, Frame.onScrollButtonLeave }),
+		onActivated = Frame.onActivated
 	}, {
-		Icon = reactModule.createElement(icon, {
-			name = p1.icon,
-			size = iconSize.Large,
-			style = useTokens().Color.Content.Emphasis,
+		Icon = ReactModule.createElement(Icon, {
+			name = Frame.icon,
+			size = IconSize.Large,
+			style = UseTokensFunction().Color.Content.Emphasis,
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			Position = UDim2.fromScale(0.5, 0.5)
 		})
 	})
 end
 
-return function(p1)
-	-- upvalues: reactModule (ref), reactIsModule (ref), ScrollButton (ref)
-	local buttonOffsetFromEdge = p1.buttonOffsetFromEdge or 0
-	local var1, var2 = reactModule.useState(false)
-	local _ = nil
-	local _ = nil
+return function(Frame) --[[ Line: 73 | Named "CarouselScrollButtons" ]]
+	-- upvalues: ReactModule (copy), ReactIsModule (copy), ScrollButton (copy)
+	local ButtonOffsetFromEdge = Frame.buttonOffsetFromEdge or 0
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	
-	return reactModule.createElement("Frame", {
-		AnchorPoint = p1.AnchorPoint,
-		Position = p1.Position,
-		Size = p1.Size,
-		ZIndex = p1.ZIndex or 10,
+	return ReactModule.createElement("Frame", {
+		AnchorPoint = Frame.AnchorPoint,
+		Position = Frame.Position,
+		Size = Frame.Size,
+		ZIndex = Frame.ZIndex or 10,
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
-		[reactModule.Event.MouseEnter] = reactModule.useCallback(function()
-			-- upvalues: var2 (ref)
-			var2(true)
+		[ReactModule.Event.MouseEnter] = ReactModule.useCallback(function() --[[ Line: 100 ]]
+			-- upvalues: UseStateResult2 (copy)
+			UseStateResult2(true)
 		end, {}),
-		[reactModule.Event.MouseLeave] = reactModule.useCallback(function()
-			-- upvalues: var2 (ref)
-			var2(false)
+		[ReactModule.Event.MouseLeave] = ReactModule.useCallback(function() --[[ Line: 103 ]]
+			-- upvalues: UseStateResult2 (copy)
+			UseStateResult2(false)
 		end, {})
 	}, {
-		LeftScrollButton = reactModule.createElement(ScrollButton, {
+		LeftScrollButton = ReactModule.createElement(ScrollButton, {
 			icon = "chevron-large-left",
 			AnchorPoint = Vector2.new(0, 0.5),
-			Position = UDim2.new(0, buttonOffsetFromEdge, 0.5, 0),
-			Visible = if reactIsModule.isBinding(p1.leftScrollingEnabled) then p1.leftScrollingEnabled:map(function(p2)
-				-- upvalues: var1 (ref)
-				return var1 and p2
-			end) else var1 and p1.leftScrollingEnabled,
-			onScrollButtonEnter = p1.onScrollButtonEnter,
-			onScrollButtonLeave = p1.onScrollButtonLeave,
-			onActivated = p1.handleScrollLeft
+			Position = UDim2.new(0, ButtonOffsetFromEdge, 0.5, 0),
+			Visible = if ReactIsModule.isBinding(Frame.leftScrollingEnabled) then Frame.leftScrollingEnabled:map(function(p1) --[[ Line: 81 ]]
+				-- upvalues: UseStateResult (copy)
+				return UseStateResult and p1
+			end) else UseStateResult and Frame.leftScrollingEnabled,
+			onScrollButtonEnter = Frame.onScrollButtonEnter,
+			onScrollButtonLeave = Frame.onScrollButtonLeave,
+			onActivated = Frame.handleScrollLeft
 		}),
-		RightScrollButton = reactModule.createElement(ScrollButton, {
+		RightScrollButton = ReactModule.createElement(ScrollButton, {
 			icon = "chevron-large-right",
 			AnchorPoint = Vector2.new(1, 0.5),
-			Position = UDim2.new(1, -buttonOffsetFromEdge, 0.5, 0),
-			Visible = if reactIsModule.isBinding(p1.rightScrollingEnabled) then p1.rightScrollingEnabled:map(function(p2)
-				-- upvalues: var1 (ref)
-				return var1 and p2
-			end) else var1 and p1.rightScrollingEnabled,
-			onScrollButtonEnter = p1.onScrollButtonEnter,
-			onScrollButtonLeave = p1.onScrollButtonLeave,
-			onActivated = p1.handleScrollRight
+			Position = UDim2.new(1, -ButtonOffsetFromEdge, 0.5, 0),
+			Visible = if ReactIsModule.isBinding(Frame.rightScrollingEnabled) then Frame.rightScrollingEnabled:map(function(p1) --[[ Line: 92 ]]
+				-- upvalues: UseStateResult (copy)
+				return UseStateResult and p1
+			end) else UseStateResult and Frame.rightScrollingEnabled,
+			onScrollButtonEnter = Frame.onScrollButtonEnter,
+			onScrollButtonLeave = Frame.onScrollButtonLeave,
+			onActivated = Frame.handleScrollRight
 		})
 	})
 end

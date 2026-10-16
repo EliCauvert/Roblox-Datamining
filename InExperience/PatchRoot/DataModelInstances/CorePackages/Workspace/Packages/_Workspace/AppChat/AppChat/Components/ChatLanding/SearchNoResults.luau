@@ -1,29 +1,29 @@
-﻿local parent = script:FindFirstAncestor("AppChat").Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local view = foundationModule.View
-local text = foundationModule.Text
-local useTokens = foundationModule.Hooks.useTokens
+﻿local Parent = script:FindFirstAncestor("AppChat").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return function(p1)
-	-- upvalues: useLocalization (ref), useTokens (ref), reactModule (ref), view (ref), text (ref)
-	local var1 = useLocalization({ noChatFound = "Feature.Chat.Label.NoChatFound" })
-	local var2 = useTokens()
-	local uDim = UDim.new(0, var2.Padding.Large)
+return function(p1) --[[ Line: 19 | Named "SearchNoResults" ]]
+	-- upvalues: UseLocalizationFunction (copy), UseTokensFunction (copy), ReactModule (copy), View (copy), Text (copy)
+	local UseLocalizationResult = UseLocalizationFunction({ noChatFound = "Feature.Chat.Label.NoChatFound" })
+	local UseTokensResult = UseTokensFunction()
+	local _UDim = UDim.new(0, UseTokensResult.Padding.Large)
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "col align-x-center align-y-center gap-small size-full",
 		padding = {
-			top = UDim.new(0, (p1.topPadding or 0) + var2.Padding.Large),
-			bottom = uDim,
-			left = uDim,
-			right = uDim
+			top = UDim.new(0, (p1.topPadding or 0) + UseTokensResult.Padding.Large),
+			bottom = _UDim,
+			left = _UDim,
+			right = _UDim
 		}
 	}, {
-		SearchNoResultsMessage = reactModule.createElement(text, {
+		SearchNoResultsMessage = ReactModule.createElement(Text, {
 			tag = "size-full-0 auto-y text-body-large text-wrap text-align-x-center content-default",
-			Text = var1.noChatFound
+			Text = UseLocalizationResult.noChatFound
 		})
 	})
 end

@@ -1,5 +1,5 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
 
-return require(profilePlatform.Parent.LuaSocialLibrariesDeps).NetworkingCurrentlyWearing.config({
-	roduxNetworking = require(profilePlatform.Networking.myRoduxNetworking)
-})
+return (require(ProfilePlatform.Parent.LuaSocialLibrariesDeps).NetworkingCurrentlyWearing.config({
+	roduxNetworking = require(ProfilePlatform.Networking.myRoduxNetworking)
+}))

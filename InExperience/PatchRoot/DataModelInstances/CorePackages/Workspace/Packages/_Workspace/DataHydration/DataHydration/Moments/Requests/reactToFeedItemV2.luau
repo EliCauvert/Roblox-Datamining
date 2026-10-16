@@ -1,23 +1,23 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local parent = dataHydration.Parent
-local httpClientModule = require(parent.HttpClient)
-local _ = require(parent.MomentsTypes)
-local _ = require(dataHydration.Moments.MomentsStoreTypes)
-local constructApiUrlModule = require(dataHydration.Moments.Util.constructApiUrl)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local Parent = DataHydration.Parent
+local HttpClientModule = require(Parent.HttpClient)
+local _ = require(Parent.MomentsTypes)
+local _ = require(DataHydration.Moments.MomentsStoreTypes)
+local ConstructApiUrlModule = require(DataHydration.Moments.Util.constructApiUrl)
 
-return function(p1, p2)
-	-- upvalues: constructApiUrlModule (ref), httpClientModule (ref)
-	local var1, var2 = constructApiUrlModule("content-captures-api/v2/moments/react-to-feed-item-v2")
+return function(Body, Network) --[[ Line: 20 | Named "reactToFeedItemV2" ]]
+	-- upvalues: ConstructApiUrlModule (copy), HttpClientModule (copy)
+	local ReactToFeedItemV2, ReactToFeedItemV22 = ConstructApiUrlModule("content-captures-api/v2/moments/react-to-feed-item-v2")
 	
-	return httpClientModule.fetch({
+	return HttpClientModule.fetch({
 		method = "POST",
 		analyticsKey = "moments.react-to-feed-item-v2",
-		url = var1,
-		headers = var2,
-		body = p1,
-		network = p2,
-		decode = function(p3)
-			return p3 or {}
+		url = ReactToFeedItemV2,
+		headers = ReactToFeedItemV22,
+		body = Body,
+		network = Network,
+		decode = function(p1) --[[ Line: 33 ]]
+			return p1 or {}
 		end
 	})
 end

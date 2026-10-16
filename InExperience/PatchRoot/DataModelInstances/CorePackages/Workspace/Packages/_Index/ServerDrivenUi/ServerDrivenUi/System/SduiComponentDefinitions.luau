@@ -1,929 +1,915 @@
-﻿local serverDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
-local parent = serverDrivenUi.Parent
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local tModule = require(parent.t)
-local collectionItemSize = require(parent.CollectionViews).CollectionViewTypes.CollectionItemSize
-local itemHeightModeModule = require(serverDrivenUi.Content.Collections.ItemHeightMode)
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local sduiComponentType = sduiCoreSystemModule.SduiComponentType
-local sduiParsers = sduiCoreSystemModule.SduiParsers
-local getSduiComponentRegistry = sduiCoreSystemModule.getSduiComponentRegistry
-local fFlagLuaAppResetHoverOnSduiPlayButtonActivation = require(parent.SharedFlags).FFlagLuaAppResetHoverOnSduiPlayButtonActivation
-local fFlagSduiGlobalRegistryFallback = require(parent.SharedFlags).FFlagSduiGlobalRegistryFallback
-local fFlagLuaAppRespectClipAncestorImpressions = require(parent.SharedFlags).FFlagLuaAppRespectClipAncestorImpressions
-local parseCallbackProp = sduiParsers.parseCallbackProp_
-local parseUiComponentProp = sduiParsers.parseUiComponentProp_
-local parseLazyUiComponentProp = sduiParsers.parseLazyUiComponentProp_
-local parseIntegerProp = sduiParsers.parseIntegerProp_
-local parseNumberProp = sduiParsers.parseNumberProp_
-local parseUDim2Prop = sduiParsers.parseUDim2Prop_
-local parseUDimProp = sduiParsers.parseUDimProp_
-local parseImageStringProp = sduiParsers.parseImageStringProp_
-local parseVector2Prop = sduiParsers.parseVector2Prop_
-local parseColor3Prop = sduiParsers.parseColor3Prop_
-local parseBooleanProp = sduiParsers.parseBooleanProp_
-local parseGradientProp = sduiParsers.parseGradientProp_
-local parseIconProp = sduiParsers.parseIconProp_
-local parseTypographyTokenProp = sduiParsers.parseTypographyTokenProp_
-local parseColorTokenProp = sduiParsers.parseColorTokenProp_
-local parseImageSetOrImageProp = sduiParsers.parseImageSetOrImageProp_
-local parseStringProp = sduiParsers.parseStringProp_
-local parseFocusNavActionsProp = sduiParsers.parseFocusNavActionsProp_
-local getArrayMetatableParser = sduiParsers.getArrayMetatableParser
-local getEngineEnumParser = sduiParsers.getEngineEnumParser
-local getLuaTableEnumParser = sduiParsers.getLuaTableEnumParser
-local sduiBadgeComponent = game:DefineFastFlag("SduiBadgeComponent", false)
-local fFlagSduiTileDisableLegacyHover = require(serverDrivenUi.Flags).FFlagSduiTileDisableLegacyHover
-local fFlagSduiEnableHeroUnitBottomRow = require(serverDrivenUi.Flags).FFlagSduiEnableHeroUnitBottomRow
-local fFlagSduiAttributionRowV2 = require(parent.SharedFlags).FFlagSduiAttributionRowV2
-local fFlagSduiExperienceDetailsSocialProof = require(parent.SharedFlags).FFlagSduiExperienceDetailsSocialProof
-local fFlagSduiChipAccessoryProps = require(parent.SharedFlags).FFlagSduiChipAccessoryProps
-local fFlagSduiCollectionCarouselOverrides = require(parent.SharedFlags).FFlagSduiCollectionCarouselOverrides
-local fFlagLuaAppDismissUnlockUpsell = require(parent.SharedFlags).FFlagLuaAppDismissUnlockUpsell
-local fFlagLuaAppSduiGameTileFeedback = require(parent.SharedFlags).FFlagLuaAppSduiGameTileFeedback
-local fFlagSduiGameTileDirectAction = require(parent.SharedFlags).FFlagSduiGameTileDirectAction
-local fFlagSduiOptionSelectorCollection = require(parent.SharedFlags).FFlagSduiOptionSelectorCollection
-local fFlagSduiCollectionCarouselPlaceholderItem = require(parent.SharedFlags).FFlagSduiCollectionCarouselPlaceholderItem
-local fFlagSduiCollectionGridRevealRows = require(parent.SharedFlags).FFlagSduiCollectionGridRevealRows
-local fFlagSduiIndividualFeedItemSpacing = require(parent.SharedFlags).FFlagSduiIndividualFeedItemSpacing
+﻿local ServerDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
+local Parent = ServerDrivenUi.Parent
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local TModule = require(Parent.t)
+local CollectionItemSize = require(Parent.CollectionViews).CollectionViewTypes.CollectionItemSize
+local ItemHeightModeModule = require(ServerDrivenUi.Content.Collections.ItemHeightMode)
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local SduiComponentType = SduiCoreSystemModule.SduiComponentType
+local SduiParsers = SduiCoreSystemModule.SduiParsers
+local GetSduiComponentRegistryFunction = SduiCoreSystemModule.getSduiComponentRegistry
+local FFlagLuaAppRespectClipAncestorImpressions = require(Parent.SharedFlags).FFlagLuaAppRespectClipAncestorImpressions
+local ParseCallbackProp = SduiParsers.parseCallbackProp_
+local ParseUiComponentProp = SduiParsers.parseUiComponentProp_
+local ParseLazyUiComponentProp = SduiParsers.parseLazyUiComponentProp_
+local ParseIntegerProp = SduiParsers.parseIntegerProp_
+local ParseNumberProp = SduiParsers.parseNumberProp_
+local ParseUDim2Prop = SduiParsers.parseUDim2Prop_
+local ParseUDimProp = SduiParsers.parseUDimProp_
+local ParseImageStringProp = SduiParsers.parseImageStringProp_
+local ParseVector2Prop = SduiParsers.parseVector2Prop_
+local ParseColor3Prop = SduiParsers.parseColor3Prop_
+local ParseBooleanProp = SduiParsers.parseBooleanProp_
+local ParseGradientProp = SduiParsers.parseGradientProp_
+local ParseIconProp = SduiParsers.parseIconProp_
+local ParseTypographyTokenProp = SduiParsers.parseTypographyTokenProp_
+local ParseColorTokenProp = SduiParsers.parseColorTokenProp_
+local ParseImageSetOrImageProp = SduiParsers.parseImageSetOrImageProp_
+local ParseStringProp = SduiParsers.parseStringProp_
+local ParseFocusNavActionsProp = SduiParsers.parseFocusNavActionsProp_
+local GetArrayMetatableParserFunction = SduiParsers.getArrayMetatableParser
+local GetEngineEnumParserFunction = SduiParsers.getEngineEnumParser
+local GetLuaTableEnumParserFunction = SduiParsers.getLuaTableEnumParser
+local FFlagSduiTileDisableLegacyHover = require(ServerDrivenUi.Flags).FFlagSduiTileDisableLegacyHover
+local FFlagSduiEnableHeroUnitBottomRow = require(ServerDrivenUi.Flags).FFlagSduiEnableHeroUnitBottomRow
+local FFlagSduiAttributionRowV2 = require(Parent.SharedFlags).FFlagSduiAttributionRowV2
+local FFlagSduiExperienceDetailsSocialProof = require(Parent.SharedFlags).FFlagSduiExperienceDetailsSocialProof
+local FFlagSduiChipAccessoryProps = require(Parent.SharedFlags).FFlagSduiChipAccessoryProps
+local FFlagSduiCollectionCarouselOverrides = require(Parent.SharedFlags).FFlagSduiCollectionCarouselOverrides
+local FFlagLuaAppDismissUnlockUpsell = require(Parent.SharedFlags).FFlagLuaAppDismissUnlockUpsell
+local FFlagLuaAppSduiGameTileFeedback = require(Parent.SharedFlags).FFlagLuaAppSduiGameTileFeedback
+local FFlagSduiGameTileDirectAction = require(Parent.SharedFlags).FFlagSduiGameTileDirectAction
+local FFlagSduiOptionSelectorCollection = require(Parent.SharedFlags).FFlagSduiOptionSelectorCollection
+local FFlagSduiCollectionCarouselPlaceholderItem = require(Parent.SharedFlags).FFlagSduiCollectionCarouselPlaceholderItem
+local FFlagSduiCollectionGridRevealRows = require(Parent.SharedFlags).FFlagSduiCollectionGridRevealRows
+local FFlagSduiIndividualFeedItemSpacing = require(Parent.SharedFlags).FFlagSduiIndividualFeedItemSpacing
 local t = {}
-local t_1 = {}
-t_1.__index = t_1
+local SduiComponentDefinitionsModule = {}
+SduiComponentDefinitionsModule.__index = SduiComponentDefinitionsModule
 
-function t_1.new()
-	-- upvalues: parseVector2Prop (ref), getEngineEnumParser (ref), parseColor3Prop (ref), parseNumberProp (ref), parseIntegerProp (ref), parseUDim2Prop (ref), cryoModule (ref), parseBooleanProp (ref), parseStringProp (ref), sduiComponentType (ref), parent (ref), fFlagSduiAttributionRowV2 (ref), parseCallbackProp (ref), parseUiComponentProp (ref), parseTypographyTokenProp (ref), parseColorTokenProp (ref), getLuaTableEnumParser (ref), foundationModule (ref), parseImageStringProp (ref), tModule (ref), parseIconProp (ref), parseUDimProp (ref), serverDrivenUi (ref), collectionItemSize (ref), itemHeightModeModule (ref), fFlagSduiCollectionCarouselOverrides (ref), fFlagLuaAppRespectClipAncestorImpressions (ref), getArrayMetatableParser (ref), parseLazyUiComponentProp (ref), fFlagSduiCollectionCarouselPlaceholderItem (ref), fFlagSduiOptionSelectorCollection (ref), fFlagSduiCollectionGridRevealRows (ref), parseFocusNavActionsProp (ref), reactModule (ref), parseGradientProp (ref), fFlagLuaAppResetHoverOnSduiPlayButtonActivation (ref), parseImageSetOrImageProp (ref), fFlagSduiTileDisableLegacyHover (ref), fFlagLuaAppSduiGameTileFeedback (ref), fFlagSduiGameTileDirectAction (ref), fFlagSduiEnableHeroUnitBottomRow (ref), fFlagSduiChipAccessoryProps (ref), fFlagSduiExperienceDetailsSocialProof (ref), fFlagSduiIndividualFeedItemSpacing (ref), sduiBadgeComponent (ref), fFlagLuaAppDismissUnlockUpsell (ref), t_1 (ref)
-	local t = {
-		anchorPoint = parseVector2Prop,
-		automaticSize = getEngineEnumParser(Enum.AutomaticSize),
-		backgroundColor3 = parseColor3Prop,
-		backgroundTransparency = parseNumberProp,
-		layoutOrder = parseIntegerProp,
-		position = parseUDim2Prop,
-		size = parseUDim2Prop,
-		zIndex = parseNumberProp
+function SduiComponentDefinitionsModule.new() --[[ Line: 81 ]]
+	-- upvalues: ParseVector2Prop (copy), GetEngineEnumParserFunction (copy), ParseColor3Prop (copy), ParseNumberProp (copy), ParseIntegerProp (copy), ParseUDim2Prop (copy), CryoModule (copy), ParseBooleanProp (copy), ParseStringProp (copy), SduiComponentType (copy), Parent (copy), FFlagSduiAttributionRowV2 (copy), ParseCallbackProp (copy), ParseUiComponentProp (copy), ParseTypographyTokenProp (copy), ParseColorTokenProp (copy), GetLuaTableEnumParserFunction (copy), FoundationModule (copy), ParseImageStringProp (copy), TModule (copy), ParseIconProp (copy), ParseUDimProp (copy), ServerDrivenUi (copy), CollectionItemSize (copy), ItemHeightModeModule (copy), FFlagSduiCollectionCarouselOverrides (copy), FFlagLuaAppRespectClipAncestorImpressions (copy), GetArrayMetatableParserFunction (copy), ParseLazyUiComponentProp (copy), FFlagSduiCollectionCarouselPlaceholderItem (copy), FFlagSduiOptionSelectorCollection (copy), FFlagSduiCollectionGridRevealRows (copy), ParseFocusNavActionsProp (copy), ReactModule (copy), ParseGradientProp (copy), ParseImageSetOrImageProp (copy), FFlagSduiTileDisableLegacyHover (copy), FFlagLuaAppSduiGameTileFeedback (copy), FFlagSduiGameTileDirectAction (copy), FFlagSduiEnableHeroUnitBottomRow (copy), FFlagSduiChipAccessoryProps (copy), FFlagSduiExperienceDetailsSocialProof (copy), FFlagSduiIndividualFeedItemSpacing (copy), FFlagLuaAppDismissUnlockUpsell (copy), SduiComponentDefinitionsModule (copy)
+	local IconOverrides = {
+		anchorPoint = ParseVector2Prop,
+		automaticSize = GetEngineEnumParserFunction(Enum.AutomaticSize),
+		backgroundColor3 = ParseColor3Prop,
+		backgroundTransparency = ParseNumberProp,
+		layoutOrder = ParseIntegerProp,
+		position = ParseUDim2Prop,
+		size = ParseUDim2Prop,
+		zIndex = ParseNumberProp
 	}
-	local t_2 = {
-		columnGap = parseNumberProp,
-		sideMargin = parseNumberProp,
-		numColumns = parseNumberProp,
-		fractionalItemAmount = parseNumberProp,
-		loadMoreThreshold = parseNumberProp,
-		verticalGap = parseNumberProp
+	local LayoutOverrides = {
+		columnGap = ParseNumberProp,
+		sideMargin = ParseNumberProp,
+		numColumns = ParseNumberProp,
+		fractionalItemAmount = ParseNumberProp,
+		loadMoreThreshold = ParseNumberProp,
+		verticalGap = ParseNumberProp
 	}
-	local t_3 = {
+	local config = {
 		_registeredComponents = {
-			[sduiComponentType.AttributionRow] = {
-				component = require(parent.SduiSharedContent).SduiAttributionRow,
+			[SduiComponentType.AttributionRow] = {
+				component = require(Parent.SduiSharedContent).SduiAttributionRow,
 				propParsers = {
-					layoutOrder = parseIntegerProp,
-					position = parseUDim2Prop,
-					size = if fFlagSduiAttributionRowV2 then parseUDim2Prop else nil,
-					onActivated = parseCallbackProp,
-					rightButtonContent = parseUiComponentProp,
-					title = if fFlagSduiAttributionRowV2 then parseStringProp else nil,
-					titleFontStyle = if fFlagSduiAttributionRowV2 then parseTypographyTokenProp else nil,
-					titleTextColor = if fFlagSduiAttributionRowV2 then parseColorTokenProp else nil,
-					subtitle = if fFlagSduiAttributionRowV2 then parseStringProp else nil,
-					subtitleFontStyle = if fFlagSduiAttributionRowV2 then parseTypographyTokenProp else nil,
-					subtitleTextColor = if fFlagSduiAttributionRowV2 then parseColor3Prop else nil,
-					subtitleIconName = if fFlagSduiAttributionRowV2 then getLuaTableEnumParser(foundationModule.Enums.IconName, "string") else nil,
-					subtitleIconSize = if fFlagSduiAttributionRowV2 then getLuaTableEnumParser(foundationModule.Enums.IconSize, "string") else nil,
-					subtitleIconStyle = if fFlagSduiAttributionRowV2 then parseColorTokenProp else nil,
-					subtitleIconVariant = if fFlagSduiAttributionRowV2 then getLuaTableEnumParser(foundationModule.Enums.IconVariant, "string") else nil,
-					subtitleBackgroundIconName = if fFlagSduiAttributionRowV2 then getLuaTableEnumParser(foundationModule.Enums.IconName, "string") else nil,
-					subtitleBackgroundIconStyle = if fFlagSduiAttributionRowV2 then parseColorTokenProp else nil,
-					subtitleOnActivated = if fFlagSduiAttributionRowV2 then parseCallbackProp else nil,
-					caption = if fFlagSduiAttributionRowV2 then parseStringProp else nil,
-					captionTextColor = if fFlagSduiAttributionRowV2 then parseColorTokenProp else nil,
-					captionFontStyle = if fFlagSduiAttributionRowV2 then parseTypographyTokenProp else nil,
-					textContainerSize = if fFlagSduiAttributionRowV2 then parseUDim2Prop else nil,
-					image = parseImageStringProp,
-					imageSize = if fFlagSduiAttributionRowV2 then parseUDim2Prop else nil
+					layoutOrder = ParseIntegerProp,
+					position = ParseUDim2Prop,
+					size = if FFlagSduiAttributionRowV2 then ParseUDim2Prop else nil,
+					onActivated = ParseCallbackProp,
+					rightButtonContent = ParseUiComponentProp,
+					title = if FFlagSduiAttributionRowV2 then ParseStringProp else nil,
+					titleFontStyle = if FFlagSduiAttributionRowV2 then ParseTypographyTokenProp else nil,
+					titleTextColor = if FFlagSduiAttributionRowV2 then ParseColorTokenProp else nil,
+					subtitle = if FFlagSduiAttributionRowV2 then ParseStringProp else nil,
+					subtitleFontStyle = if FFlagSduiAttributionRowV2 then ParseTypographyTokenProp else nil,
+					subtitleTextColor = if FFlagSduiAttributionRowV2 then ParseColor3Prop else nil,
+					subtitleIconName = if FFlagSduiAttributionRowV2 then GetLuaTableEnumParserFunction(FoundationModule.Enums.IconName, "string") else nil,
+					subtitleIconSize = if FFlagSduiAttributionRowV2 then GetLuaTableEnumParserFunction(FoundationModule.Enums.IconSize, "string") else nil,
+					subtitleIconStyle = if FFlagSduiAttributionRowV2 then ParseColorTokenProp else nil,
+					subtitleIconVariant = if FFlagSduiAttributionRowV2 then GetLuaTableEnumParserFunction(FoundationModule.Enums.IconVariant, "string") else nil,
+					subtitleBackgroundIconName = if FFlagSduiAttributionRowV2 then GetLuaTableEnumParserFunction(FoundationModule.Enums.IconName, "string") else nil,
+					subtitleBackgroundIconStyle = if FFlagSduiAttributionRowV2 then ParseColorTokenProp else nil,
+					subtitleOnActivated = if FFlagSduiAttributionRowV2 then ParseCallbackProp else nil,
+					caption = if FFlagSduiAttributionRowV2 then ParseStringProp else nil,
+					captionTextColor = if FFlagSduiAttributionRowV2 then ParseColorTokenProp else nil,
+					captionFontStyle = if FFlagSduiAttributionRowV2 then ParseTypographyTokenProp else nil,
+					textContainerSize = if FFlagSduiAttributionRowV2 then ParseUDim2Prop else nil,
+					image = ParseImageStringProp,
+					imageSize = if FFlagSduiAttributionRowV2 then ParseUDim2Prop else nil
 				},
-				propInterface = if fFlagSduiAttributionRowV2 then { title = tModule.string, subtitle = tModule.string } else nil
+				propInterface = if FFlagSduiAttributionRowV2 then { title = TModule.string, subtitle = TModule.string } else nil
 			},
-			[sduiComponentType.Button] = {
-				component = require(parent.SduiSharedContent).SduiButton,
+			[SduiComponentType.Button] = {
+				component = require(Parent.SduiSharedContent).SduiButton,
 				propParsers = {
-					anchorPoint = parseVector2Prop,
-					cursorType = getLuaTableEnumParser(foundationModule.Enums.CursorType, "string"),
-					fillBehavior = getLuaTableEnumParser(foundationModule.Enums.FillBehavior, "string"),
-					icon = parseIconProp,
-					inputDelay = parseNumberProp,
-					isDisabled = parseBooleanProp,
-					isLoading = parseBooleanProp,
-					layoutOrder = parseIntegerProp,
-					onActivated = parseCallbackProp,
-					position = parseUDim2Prop,
-					selectable = parseBooleanProp,
-					size = getLuaTableEnumParser(foundationModule.Enums.InputSize, "string"),
-					tag = parseStringProp,
-					testId = parseStringProp,
-					text = parseStringProp,
-					variant = getLuaTableEnumParser(foundationModule.Enums.ButtonVariant, "string"),
-					visible = parseBooleanProp,
-					width = parseUDimProp,
-					zIndex = parseNumberProp
+					anchorPoint = ParseVector2Prop,
+					cursorType = GetLuaTableEnumParserFunction(FoundationModule.Enums.CursorType, "string"),
+					fillBehavior = GetLuaTableEnumParserFunction(FoundationModule.Enums.FillBehavior, "string"),
+					icon = ParseIconProp,
+					inputDelay = ParseNumberProp,
+					isDisabled = ParseBooleanProp,
+					isLoading = ParseBooleanProp,
+					layoutOrder = ParseIntegerProp,
+					onActivated = ParseCallbackProp,
+					position = ParseUDim2Prop,
+					selectable = ParseBooleanProp,
+					size = GetLuaTableEnumParserFunction(FoundationModule.Enums.InputSize, "string"),
+					tag = ParseStringProp,
+					testId = ParseStringProp,
+					text = ParseStringProp,
+					variant = GetLuaTableEnumParserFunction(FoundationModule.Enums.ButtonVariant, "string"),
+					visible = ParseBooleanProp,
+					width = ParseUDimProp,
+					zIndex = ParseNumberProp
 				}
 			},
-			[sduiComponentType.CollectionCarousel] = {
-				component = require(serverDrivenUi.Content.Collections.SduiCollectionCarousel),
+			[SduiComponentType.CollectionCarousel] = {
+				component = require(ServerDrivenUi.Content.Collections.SduiCollectionCarousel),
 				propParsers = {
-					anchorPoint = parseVector2Prop,
-					position = parseUDim2Prop,
-					size = parseUDim2Prop,
-					collectionItemSize = getLuaTableEnumParser(collectionItemSize, "string"),
-					itemHeightFromWidth = parseUDimProp,
-					headerComponent = parseUiComponentProp,
-					itemHeightMode = getLuaTableEnumParser(itemHeightModeModule, "string"),
-					layoutOverrides = t_2,
-					numColumnsOverride = if fFlagSduiCollectionCarouselOverrides then parseNumberProp else nil,
-					scrollingEnabledOverride = parseBooleanProp,
-					maxItemsToShow = parseNumberProp,
-					shouldUseFrameBoundsForImpressions = parseBooleanProp,
-					respectClipAncestors = if fFlagLuaAppRespectClipAncestorImpressions then parseBooleanProp else nil,
-					backgroundMuralUrl = parseImageStringProp,
-					onScrollToEnd = parseCallbackProp,
-					scrollThresholdFromEnd = parseNumberProp,
-					itemTemplateKey = parseStringProp,
-					focusNavActionsComponent = parseUiComponentProp,
-					disableSelectionOrder = parseBooleanProp,
-					numItemsToRenderOffScreen = parseNumberProp,
-					items = getArrayMetatableParser(parseLazyUiComponentProp),
-					impressionEventName = parseStringProp,
-					skipItemImpressionsLog = parseBooleanProp,
-					enableHoverOverflow = parseBooleanProp
+					anchorPoint = ParseVector2Prop,
+					position = ParseUDim2Prop,
+					size = ParseUDim2Prop,
+					collectionItemSize = GetLuaTableEnumParserFunction(CollectionItemSize, "string"),
+					itemHeightFromWidth = ParseUDimProp,
+					headerComponent = ParseUiComponentProp,
+					itemHeightMode = GetLuaTableEnumParserFunction(ItemHeightModeModule, "string"),
+					layoutOverrides = LayoutOverrides,
+					numColumnsOverride = if FFlagSduiCollectionCarouselOverrides then ParseNumberProp else nil,
+					scrollingEnabledOverride = ParseBooleanProp,
+					maxItemsToShow = ParseNumberProp,
+					shouldUseFrameBoundsForImpressions = ParseBooleanProp,
+					respectClipAncestors = if FFlagLuaAppRespectClipAncestorImpressions then ParseBooleanProp else nil,
+					backgroundMuralUrl = ParseImageStringProp,
+					onScrollToEnd = ParseCallbackProp,
+					scrollThresholdFromEnd = ParseNumberProp,
+					itemTemplateKey = ParseStringProp,
+					focusNavActionsComponent = ParseUiComponentProp,
+					disableSelectionOrder = ParseBooleanProp,
+					numItemsToRenderOffScreen = ParseNumberProp,
+					items = GetArrayMetatableParserFunction(ParseLazyUiComponentProp),
+					impressionEventName = ParseStringProp,
+					skipItemImpressionsLog = ParseBooleanProp,
+					enableHoverOverflow = ParseBooleanProp
 				}
 			},
-			[sduiComponentType.VariableItemWidthCarousel] = {
-				component = require(serverDrivenUi.Content.Collections.SduiVariableItemWidthCarousel)
+			[SduiComponentType.VariableItemWidthCarousel] = {
+				component = require(ServerDrivenUi.Content.Collections.SduiVariableItemWidthCarousel)
 			},
-			[sduiComponentType.CollectionCarouselPlaceholder] = {
-				component = require(serverDrivenUi.Content.Collections.SduiCollectionCarouselPlaceholder)
+			[SduiComponentType.CollectionCarouselPlaceholder] = {
+				component = require(ServerDrivenUi.Content.Collections.SduiCollectionCarouselPlaceholder)
 			},
-			[sduiComponentType.PlaceholderTile] = if fFlagSduiCollectionCarouselPlaceholderItem then {
-				component = require(parent.SduiSharedContent).SduiPlaceholderTile
+			[SduiComponentType.PlaceholderTile] = if FFlagSduiCollectionCarouselPlaceholderItem then {
+				component = require(Parent.SduiSharedContent).SduiPlaceholderTile
 			} else nil,
-			[sduiComponentType.OptionSelectorCollection] = if fFlagSduiOptionSelectorCollection then {
-				component = require(serverDrivenUi.Content.Collections.SduiOptionSelectorCollection)
+			[SduiComponentType.OptionSelectorCollection] = if FFlagSduiOptionSelectorCollection then {
+				component = require(ServerDrivenUi.Content.Collections.SduiOptionSelectorCollection)
 			} else nil,
-			[sduiComponentType.CollectionGrid] = {
-				component = require(serverDrivenUi.Content.Collections.SduiCollectionGrid),
+			[SduiComponentType.CollectionGrid] = {
+				component = require(ServerDrivenUi.Content.Collections.SduiCollectionGrid),
 				propParsers = {
-					anchorPoint = parseVector2Prop,
-					position = parseUDim2Prop,
-					size = parseUDim2Prop,
-					bufferRowsBelowScreen = parseNumberProp,
-					bufferRowsAboveScreen = parseNumberProp,
-					collectionItemSize = getLuaTableEnumParser(collectionItemSize, "string"),
-					disableRelativeGap = parseBooleanProp,
-					focusNavActionsComponent = parseUiComponentProp,
-					headerComponent = parseUiComponentProp,
-					itemHeightFromWidth = parseUDimProp,
-					itemTemplateKey = parseStringProp,
-					layoutOverrides = t_2,
-					maxNumRows = parseNumberProp,
-					shouldUseFrameBoundsForImpressions = parseBooleanProp,
-					disableSelectionOrder = parseBooleanProp,
-					items = getArrayMetatableParser(parseLazyUiComponentProp),
-					thresholdRowsFromBottom = parseNumberProp,
-					onReachedThresholdFromEnd = parseCallbackProp,
-					impressionEventName = parseStringProp,
-					skipItemImpressionsLog = parseBooleanProp
+					anchorPoint = ParseVector2Prop,
+					position = ParseUDim2Prop,
+					size = ParseUDim2Prop,
+					bufferRowsBelowScreen = ParseNumberProp,
+					bufferRowsAboveScreen = ParseNumberProp,
+					collectionItemSize = GetLuaTableEnumParserFunction(CollectionItemSize, "string"),
+					disableRelativeGap = ParseBooleanProp,
+					focusNavActionsComponent = ParseUiComponentProp,
+					headerComponent = ParseUiComponentProp,
+					itemHeightFromWidth = ParseUDimProp,
+					itemTemplateKey = ParseStringProp,
+					layoutOverrides = LayoutOverrides,
+					maxNumRows = ParseNumberProp,
+					shouldUseFrameBoundsForImpressions = ParseBooleanProp,
+					disableSelectionOrder = ParseBooleanProp,
+					items = GetArrayMetatableParserFunction(ParseLazyUiComponentProp),
+					thresholdRowsFromBottom = ParseNumberProp,
+					onReachedThresholdFromEnd = ParseCallbackProp,
+					impressionEventName = ParseStringProp,
+					skipItemImpressionsLog = ParseBooleanProp
 				},
-				propInterface = { itemHeightFromWidth = tModule.UDim }
+				propInterface = { itemHeightFromWidth = TModule.UDim }
 			},
-			[sduiComponentType.RevealRowsButtonWithDivider] = if fFlagSduiCollectionGridRevealRows then {
-				component = require(serverDrivenUi.Content.Collections.SduiRevealRowsButtonWithDivider)
+			[SduiComponentType.RevealRowsButtonWithDivider] = if FFlagSduiCollectionGridRevealRows then {
+				component = require(ServerDrivenUi.Content.Collections.SduiRevealRowsButtonWithDivider)
 			} else nil,
-			[sduiComponentType.Dialog] = {
-				component = require(serverDrivenUi.Content.SduiDialog),
+			[SduiComponentType.Dialog] = {
+				component = require(ServerDrivenUi.Content.SduiDialog),
 				propParsers = {
-					size = getLuaTableEnumParser(foundationModule.Enums.DialogSize, "string"),
-					image = parseStringProp,
-					imageAspectRatio = parseNumberProp,
-					titleText = parseStringProp,
-					bodyText = parseStringProp,
-					bodyComponent = parseUiComponentProp,
-					actionsLabel = parseStringProp,
-					actionsOrientation = getLuaTableEnumParser(foundationModule.Enums.Orientation, "string"),
-					primaryButtonAction = parseCallbackProp,
-					primaryButtonText = parseStringProp,
-					primaryButtonIcon = parseIconProp,
-					primaryButtonInputDelay = parseNumberProp,
-					primaryButtonSideEffectAction = parseCallbackProp,
-					secondaryButtonAction = parseCallbackProp,
-					secondaryButtonText = parseStringProp,
-					secondaryButtonIcon = parseIconProp,
-					secondaryButtonInputDelay = parseNumberProp,
-					secondaryButtonSideEffectAction = parseCallbackProp,
-					onClose = parseCallbackProp,
-					disablePortal = parseBooleanProp,
-					hasBackdrop = parseBooleanProp
+					size = GetLuaTableEnumParserFunction(FoundationModule.Enums.DialogSize, "string"),
+					image = ParseStringProp,
+					imageAspectRatio = ParseNumberProp,
+					titleText = ParseStringProp,
+					bodyText = ParseStringProp,
+					bodyComponent = ParseUiComponentProp,
+					actionsLabel = ParseStringProp,
+					actionsOrientation = GetLuaTableEnumParserFunction(FoundationModule.Enums.Orientation, "string"),
+					primaryButtonAction = ParseCallbackProp,
+					primaryButtonText = ParseStringProp,
+					primaryButtonIcon = ParseIconProp,
+					primaryButtonInputDelay = ParseNumberProp,
+					primaryButtonSideEffectAction = ParseCallbackProp,
+					secondaryButtonAction = ParseCallbackProp,
+					secondaryButtonText = ParseStringProp,
+					secondaryButtonIcon = ParseIconProp,
+					secondaryButtonInputDelay = ParseNumberProp,
+					secondaryButtonSideEffectAction = ParseCallbackProp,
+					onClose = ParseCallbackProp,
+					disablePortal = ParseBooleanProp,
+					hasBackdrop = ParseBooleanProp
 				}
 			},
-			[sduiComponentType.Divider] = {
-				component = require(serverDrivenUi.Content.SduiDivider),
+			[SduiComponentType.Divider] = {
+				component = require(ServerDrivenUi.Content.SduiDivider),
 				propParsers = {
-					anchorPoint = parseVector2Prop,
-					backgroundColor3 = parseColor3Prop,
-					position = parseUDim2Prop,
-					size = parseUDim2Prop
+					anchorPoint = ParseVector2Prop,
+					backgroundColor3 = ParseColor3Prop,
+					position = ParseUDim2Prop,
+					size = ParseUDim2Prop
 				}
 			},
-			[sduiComponentType.FocusNavActions] = {
-				component = require(serverDrivenUi.FocusNavigation.SduiFocusNavActions),
-				propParsers = { focusNavActions = parseFocusNavActionsProp },
-				propInterface = { focusNavActions = tModule.table }
+			[SduiComponentType.FocusNavActions] = {
+				component = require(ServerDrivenUi.FocusNavigation.SduiFocusNavActions),
+				propParsers = { focusNavActions = ParseFocusNavActionsProp },
+				propInterface = { focusNavActions = TModule.table }
 			},
-			[sduiComponentType.Fragment] = { component = reactModule.Fragment },
-			[sduiComponentType.GameTileActiveFriendsFooter] = {
-				component = require(serverDrivenUi.Content.SduiGameTileActiveFriendsFooter),
+			[SduiComponentType.Fragment] = { component = ReactModule.Fragment },
+			[SduiComponentType.GameTileActiveFriendsFooter] = {
+				component = require(ServerDrivenUi.Content.SduiGameTileActiveFriendsFooter),
 				propParsers = {
-					anchorPoint = parseVector2Prop,
-					automaticSize = getEngineEnumParser(Enum.AutomaticSize),
-					backgroundColor3 = parseColor3Prop,
-					layoutOrder = parseIntegerProp,
-					position = parseUDim2Prop,
-					size = parseUDim2Prop,
-					zIndex = parseNumberProp,
-					universeId = parseStringProp,
-					iconWidth = parseNumberProp,
-					maxAvatars = parseNumberProp,
-					onActivated = parseCallbackProp
+					anchorPoint = ParseVector2Prop,
+					automaticSize = GetEngineEnumParserFunction(Enum.AutomaticSize),
+					backgroundColor3 = ParseColor3Prop,
+					layoutOrder = ParseIntegerProp,
+					position = ParseUDim2Prop,
+					size = ParseUDim2Prop,
+					zIndex = ParseNumberProp,
+					universeId = ParseStringProp,
+					iconWidth = ParseNumberProp,
+					maxAvatars = ParseNumberProp,
+					onActivated = ParseCallbackProp
 				},
 				propInterface = {
-					universeId = tModule.union(tModule.string, tModule.number)
+					universeId = TModule.union(TModule.string, TModule.number)
 				}
 			},
-			[sduiComponentType.HeroUnit] = {
-				component = require(serverDrivenUi.Content.SduiHeroUnit),
+			[SduiComponentType.HeroUnit] = {
+				component = require(ServerDrivenUi.Content.SduiHeroUnit),
 				propParsers = {
-					backgroundComponent = parseUiComponentProp,
-					bottomRowComponent = parseUiComponentProp,
-					ctaButtonComponent = parseUiComponentProp,
-					gradient = parseGradientProp,
-					headerComponent = parseUiComponentProp,
-					onActivated = parseCallbackProp,
-					overlayComponent = parseUiComponentProp,
-					backgroundImage = parseImageStringProp,
-					foregroundImage = parseImageStringProp,
-					titleImage = parseImageStringProp
+					backgroundComponent = ParseUiComponentProp,
+					bottomRowComponent = ParseUiComponentProp,
+					ctaButtonComponent = ParseUiComponentProp,
+					gradient = ParseGradientProp,
+					headerComponent = ParseUiComponentProp,
+					onActivated = ParseCallbackProp,
+					overlayComponent = ParseUiComponentProp,
+					backgroundImage = ParseImageStringProp,
+					foregroundImage = ParseImageStringProp,
+					titleImage = ParseImageStringProp
 				}
 			},
-			[sduiComponentType.HoldToPlay] = {
-				component = require(serverDrivenUi.FocusNavigation.SduiHoldToPlay),
-				propParsers = { universeId = parseStringProp, placeId = parseStringProp },
+			[SduiComponentType.HoldToPlay] = {
+				component = require(ServerDrivenUi.FocusNavigation.SduiHoldToPlay),
+				propParsers = { universeId = ParseStringProp, placeId = ParseStringProp },
 				propInterface = {
-					universeId = tModule.union(tModule.string, tModule.number)
+					universeId = TModule.union(TModule.string, TModule.number)
 				}
 			},
-			[sduiComponentType.Image] = {
-				component = require(parent.SduiSharedContent).SduiImage,
+			[SduiComponentType.Image] = {
+				component = require(Parent.SduiSharedContent).SduiImage,
 				propParsers = {
-					anchorPoint = parseVector2Prop,
-					aspectRatio = parseNumberProp,
-					automaticSize = getEngineEnumParser(Enum.AutomaticSize),
-					backgroundStyle = parseColorTokenProp,
-					clipsDescendants = parseBooleanProp,
-					cornerRadius = parseUDimProp,
-					cursorType = getLuaTableEnumParser(foundationModule.Enums.CursorType, "string"),
-					image = parseImageStringProp,
-					imageStyle = parseColorTokenProp,
-					layoutOrder = parseIntegerProp,
-					onActivated = parseCallbackProp,
-					position = parseUDim2Prop,
-					resampleMode = getEngineEnumParser(Enum.ResamplerMode),
-					scaleType = getEngineEnumParser(Enum.ScaleType),
-					size = parseUDim2Prop,
-					sizeConstraint = getEngineEnumParser(Enum.SizeConstraint),
-					tag = parseStringProp,
-					tileSize = parseUDim2Prop,
-					visible = parseBooleanProp,
-					zIndex = parseNumberProp
+					anchorPoint = ParseVector2Prop,
+					aspectRatio = ParseNumberProp,
+					automaticSize = GetEngineEnumParserFunction(Enum.AutomaticSize),
+					backgroundStyle = ParseColorTokenProp,
+					clipsDescendants = ParseBooleanProp,
+					cornerRadius = ParseUDimProp,
+					cursorType = GetLuaTableEnumParserFunction(FoundationModule.Enums.CursorType, "string"),
+					image = ParseImageStringProp,
+					imageStyle = ParseColorTokenProp,
+					layoutOrder = ParseIntegerProp,
+					onActivated = ParseCallbackProp,
+					position = ParseUDim2Prop,
+					resampleMode = GetEngineEnumParserFunction(Enum.ResamplerMode),
+					scaleType = GetEngineEnumParserFunction(Enum.ScaleType),
+					size = ParseUDim2Prop,
+					sizeConstraint = GetEngineEnumParserFunction(Enum.SizeConstraint),
+					tag = ParseStringProp,
+					tileSize = ParseUDim2Prop,
+					visible = ParseBooleanProp,
+					zIndex = ParseNumberProp
 				}
 			},
-			[sduiComponentType.SingleItemCollection] = {
-				component = require(serverDrivenUi.Content.SduiSingleItemCollection),
+			[SduiComponentType.SingleItemCollection] = {
+				component = require(ServerDrivenUi.Content.SduiSingleItemCollection),
 				propParsers = {
-					anchorPoint = parseVector2Prop,
-					automaticSize = getEngineEnumParser(Enum.AutomaticSize),
-					position = parseUDim2Prop,
-					size = parseUDim2Prop,
-					item = parseLazyUiComponentProp,
-					impressionEventName = parseStringProp,
-					skipItemImpressionsLog = parseBooleanProp
+					anchorPoint = ParseVector2Prop,
+					automaticSize = GetEngineEnumParserFunction(Enum.AutomaticSize),
+					position = ParseUDim2Prop,
+					size = ParseUDim2Prop,
+					item = ParseLazyUiComponentProp,
+					impressionEventName = ParseStringProp,
+					skipItemImpressionsLog = ParseBooleanProp
 				}
 			},
-			[sduiComponentType.PlayButton] = {
-				component = require(parent.SduiSharedContent).SduiPlayButton,
+			[SduiComponentType.PlayButton] = {
+				component = require(Parent.SduiSharedContent).SduiPlayButton,
 				propParsers = {
-					anchorPoint = parseVector2Prop,
-					layoutOrder = parseIntegerProp,
-					position = parseUDim2Prop,
-					tag = parseStringProp,
-					width = parseUDimProp,
-					onActivatedEffect = if fFlagLuaAppResetHoverOnSduiPlayButtonActivation then parseCallbackProp else nil
+					anchorPoint = ParseVector2Prop,
+					layoutOrder = ParseIntegerProp,
+					position = ParseUDim2Prop,
+					tag = ParseStringProp,
+					width = ParseUDimProp,
+					onActivatedEffect = ParseCallbackProp
 				},
 				propInterface = {
-					universeId = tModule.union(tModule.string, tModule.number)
+					universeId = TModule.union(TModule.string, TModule.number)
 				}
 			},
-			[sduiComponentType.SectionHeader] = {
-				component = require(serverDrivenUi.Content.SduiSectionHeader),
+			[SduiComponentType.SectionHeader] = {
+				component = require(ServerDrivenUi.Content.SduiSectionHeader),
 				propParsers = {
-					anchorPoint = parseVector2Prop,
-					automaticSize = getEngineEnumParser(Enum.AutomaticSize),
-					layoutOrder = parseIntegerProp,
-					position = parseUDim2Prop,
-					size = parseUDim2Prop,
-					zIndex = parseNumberProp,
-					iconComponent = parseUiComponentProp,
-					infoText = parseStringProp,
-					onTitleActivated = parseCallbackProp,
-					onSubtitleActivated = parseCallbackProp,
-					onInfoIconActivated = parseCallbackProp,
-					subtitleColor = parseColor3Prop,
-					subtitleComponent = parseUiComponentProp,
-					subtitleIcon = parseIconProp,
-					subtitleIconWidth = parseNumberProp,
-					subtitleFontStyle = parseTypographyTokenProp,
-					subtitleGap = parseNumberProp,
-					subtitleText = parseStringProp,
-					titleColor = parseColor3Prop,
-					titleComponent = parseUiComponentProp,
-					titleGap = parseNumberProp,
-					titleIcon = parseIconProp,
-					titleIconWidth = parseNumberProp,
-					titleFontStyle = parseTypographyTokenProp,
-					titleText = parseStringProp,
-					verticalGap = parseNumberProp,
-					allowInteractionForDirectionalInput = parseBooleanProp
+					anchorPoint = ParseVector2Prop,
+					automaticSize = GetEngineEnumParserFunction(Enum.AutomaticSize),
+					layoutOrder = ParseIntegerProp,
+					position = ParseUDim2Prop,
+					size = ParseUDim2Prop,
+					zIndex = ParseNumberProp,
+					iconComponent = ParseUiComponentProp,
+					infoText = ParseStringProp,
+					onTitleActivated = ParseCallbackProp,
+					onSubtitleActivated = ParseCallbackProp,
+					onInfoIconActivated = ParseCallbackProp,
+					subtitleColor = ParseColor3Prop,
+					subtitleComponent = ParseUiComponentProp,
+					subtitleIcon = ParseIconProp,
+					subtitleIconWidth = ParseNumberProp,
+					subtitleFontStyle = ParseTypographyTokenProp,
+					subtitleGap = ParseNumberProp,
+					subtitleText = ParseStringProp,
+					titleColor = ParseColor3Prop,
+					titleComponent = ParseUiComponentProp,
+					titleGap = ParseNumberProp,
+					titleIcon = ParseIconProp,
+					titleIconWidth = ParseNumberProp,
+					titleFontStyle = ParseTypographyTokenProp,
+					titleText = ParseStringProp,
+					verticalGap = ParseNumberProp,
+					allowInteractionForDirectionalInput = ParseBooleanProp
 				}
 			},
-			[sduiComponentType.SeeAllTile] = {
-				component = require(parent.GameCollections).SeeAllTile,
+			[SduiComponentType.SeeAllTile] = {
+				component = require(Parent.GameCollections).SeeAllTile,
 				propParsers = {
-					layoutOrder = parseNumberProp,
-					size = parseUDim2Prop,
-					onActivated = parseCallbackProp,
-					icon = parseIconProp,
-					title = parseStringProp
+					layoutOrder = ParseNumberProp,
+					size = ParseUDim2Prop,
+					onActivated = ParseCallbackProp,
+					icon = ParseIconProp,
+					title = ParseStringProp
 				}
 			},
-			[sduiComponentType.SlotOverlay] = {
-				component = require(serverDrivenUi.Content.SduiSlotOverlay),
+			[SduiComponentType.SlotOverlay] = {
+				component = require(ServerDrivenUi.Content.SduiSlotOverlay),
 				propParsers = {
-					anchorPoint = parseVector2Prop,
-					automaticSize = getEngineEnumParser(Enum.AutomaticSize),
-					layoutOrder = parseIntegerProp,
-					position = parseUDim2Prop,
-					size = parseUDim2Prop,
-					zIndex = parseNumberProp,
-					topLeftSlot = parseUiComponentProp,
-					topMiddleSlot = parseUiComponentProp,
-					topRightSlot = parseUiComponentProp,
-					centerLeftSlot = parseUiComponentProp,
-					centerMiddleSlot = parseUiComponentProp,
-					centerRightSlot = parseUiComponentProp,
-					bottomLeftSlot = parseUiComponentProp,
-					bottomMiddleSlot = parseUiComponentProp,
-					bottomRightSlot = parseUiComponentProp,
-					padding = parseNumberProp
+					anchorPoint = ParseVector2Prop,
+					automaticSize = GetEngineEnumParserFunction(Enum.AutomaticSize),
+					layoutOrder = ParseIntegerProp,
+					position = ParseUDim2Prop,
+					size = ParseUDim2Prop,
+					zIndex = ParseNumberProp,
+					topLeftSlot = ParseUiComponentProp,
+					topMiddleSlot = ParseUiComponentProp,
+					topRightSlot = ParseUiComponentProp,
+					centerLeftSlot = ParseUiComponentProp,
+					centerMiddleSlot = ParseUiComponentProp,
+					centerRightSlot = ParseUiComponentProp,
+					bottomLeftSlot = ParseUiComponentProp,
+					bottomMiddleSlot = ParseUiComponentProp,
+					bottomRightSlot = ParseUiComponentProp,
+					padding = ParseNumberProp
 				}
 			},
-			[sduiComponentType.Text] = {
-				component = require(parent.SduiSharedContent).SduiText,
+			[SduiComponentType.Text] = {
+				component = require(Parent.SduiSharedContent).SduiText,
 				propParsers = {
-					anchorPoint = parseVector2Prop,
-					aspectRatio = parseNumberProp,
-					automaticSize = getEngineEnumParser(Enum.AutomaticSize),
-					backgroundStyle = parseColorTokenProp,
-					children = parseUiComponentProp,
-					cornerRadius = parseUDimProp,
-					cursorType = getLuaTableEnumParser(foundationModule.Enums.CursorType, "string"),
-					fontStyle = parseTypographyTokenProp,
-					isDisabled = parseBooleanProp,
-					layoutOrder = parseIntegerProp,
-					onActivated = parseCallbackProp,
-					onSecondaryActivated = parseCallbackProp,
-					padding = parseNumberProp,
-					position = parseUDim2Prop,
-					richText = parseBooleanProp,
-					rotation = parseNumberProp,
-					scale = parseNumberProp,
-					selectable = parseBooleanProp,
-					size = parseUDim2Prop,
-					sizeConstraint = getEngineEnumParser(Enum.SizeConstraint),
-					tag = parseStringProp,
-					testId = parseStringProp,
-					text = parseStringProp,
-					textStyle = parseColorTokenProp,
-					textTruncate = getEngineEnumParser(Enum.TextTruncate),
-					textWrapped = parseBooleanProp,
-					textXAlignment = getEngineEnumParser(Enum.TextXAlignment),
-					textYAlignment = getEngineEnumParser(Enum.TextYAlignment),
-					visible = parseBooleanProp,
-					zIndex = parseNumberProp
+					anchorPoint = ParseVector2Prop,
+					aspectRatio = ParseNumberProp,
+					automaticSize = GetEngineEnumParserFunction(Enum.AutomaticSize),
+					backgroundStyle = ParseColorTokenProp,
+					children = ParseUiComponentProp,
+					cornerRadius = ParseUDimProp,
+					cursorType = GetLuaTableEnumParserFunction(FoundationModule.Enums.CursorType, "string"),
+					fontStyle = ParseTypographyTokenProp,
+					isDisabled = ParseBooleanProp,
+					layoutOrder = ParseIntegerProp,
+					onActivated = ParseCallbackProp,
+					onSecondaryActivated = ParseCallbackProp,
+					padding = ParseNumberProp,
+					position = ParseUDim2Prop,
+					richText = ParseBooleanProp,
+					rotation = ParseNumberProp,
+					scale = ParseNumberProp,
+					selectable = ParseBooleanProp,
+					size = ParseUDim2Prop,
+					sizeConstraint = GetEngineEnumParserFunction(Enum.SizeConstraint),
+					tag = ParseStringProp,
+					testId = ParseStringProp,
+					text = ParseStringProp,
+					textStyle = ParseColorTokenProp,
+					textTruncate = GetEngineEnumParserFunction(Enum.TextTruncate),
+					textWrapped = ParseBooleanProp,
+					textXAlignment = GetEngineEnumParserFunction(Enum.TextXAlignment),
+					textYAlignment = GetEngineEnumParserFunction(Enum.TextYAlignment),
+					visible = ParseBooleanProp,
+					zIndex = ParseNumberProp
 				}
 			},
-			[sduiComponentType.TextIconRow] = {
-				component = require(serverDrivenUi.Content.SduiTextIconRow),
+			[SduiComponentType.TextIconRow] = {
+				component = require(ServerDrivenUi.Content.SduiTextIconRow),
 				propParsers = {
-					anchorPoint = parseVector2Prop,
-					automaticSize = getEngineEnumParser(Enum.AutomaticSize),
-					layoutOrder = parseIntegerProp,
-					position = parseUDim2Prop,
-					selectable = parseBooleanProp,
-					size = parseUDim2Prop,
-					zIndex = parseNumberProp,
-					iconFirst = parseBooleanProp,
-					onActivated = parseCallbackProp,
-					text = parseStringProp,
-					textColor = parseColor3Prop,
-					fontStyle = parseTypographyTokenProp,
-					gap = parseNumberProp,
-					icon = parseIconProp,
-					iconWidth = parseNumberProp,
-					iconColor = parseColor3Prop,
-					textOverrides = cryoModule.Dictionary.union({
-						richText = parseBooleanProp,
-						text = parseStringProp,
-						textTruncate = getEngineEnumParser(Enum.TextTruncate),
-						textWrapped = parseBooleanProp,
-						textXAlignment = getEngineEnumParser(Enum.TextXAlignment),
-						textYAlignment = getEngineEnumParser(Enum.TextYAlignment)
-					}, t),
-					iconOverrides = t,
-					textFlexMode = getEngineEnumParser(Enum.UIFlexMode),
-					backgroundStyle = parseColorTokenProp,
-					cornerRadius = parseUDimProp
+					anchorPoint = ParseVector2Prop,
+					automaticSize = GetEngineEnumParserFunction(Enum.AutomaticSize),
+					layoutOrder = ParseIntegerProp,
+					position = ParseUDim2Prop,
+					selectable = ParseBooleanProp,
+					size = ParseUDim2Prop,
+					zIndex = ParseNumberProp,
+					iconFirst = ParseBooleanProp,
+					onActivated = ParseCallbackProp,
+					text = ParseStringProp,
+					textColor = ParseColor3Prop,
+					fontStyle = ParseTypographyTokenProp,
+					gap = ParseNumberProp,
+					icon = ParseIconProp,
+					iconWidth = ParseNumberProp,
+					iconColor = ParseColor3Prop,
+					textOverrides = CryoModule.Dictionary.union({
+						richText = ParseBooleanProp,
+						text = ParseStringProp,
+						textTruncate = GetEngineEnumParserFunction(Enum.TextTruncate),
+						textWrapped = ParseBooleanProp,
+						textXAlignment = GetEngineEnumParserFunction(Enum.TextXAlignment),
+						textYAlignment = GetEngineEnumParserFunction(Enum.TextYAlignment)
+					}, IconOverrides),
+					iconOverrides = IconOverrides,
+					textFlexMode = GetEngineEnumParserFunction(Enum.UIFlexMode),
+					backgroundStyle = ParseColorTokenProp,
+					cornerRadius = ParseUDimProp
 				}
 			},
-			[sduiComponentType.TextPill] = {
-				component = require(serverDrivenUi.Content.SduiTextPill),
+			[SduiComponentType.TextPill] = {
+				component = require(ServerDrivenUi.Content.SduiTextPill),
 				propParsers = {
-					anchorPoint = parseVector2Prop,
-					backgroundColor3 = parseColor3Prop,
-					position = parseUDim2Prop,
-					size = parseUDim2Prop,
-					textColor3 = parseColor3Prop,
-					fontStyle = parseTypographyTokenProp
+					anchorPoint = ParseVector2Prop,
+					backgroundColor3 = ParseColor3Prop,
+					position = ParseUDim2Prop,
+					size = ParseUDim2Prop,
+					textColor3 = ParseColor3Prop,
+					fontStyle = ParseTypographyTokenProp
 				}
 			},
-			[sduiComponentType.Tile] = {
-				component = require(serverDrivenUi.Content.SduiTile),
+			[SduiComponentType.Tile] = {
+				component = require(ServerDrivenUi.Content.SduiTile),
 				propParsers = {
-					anchorPoint = parseVector2Prop,
-					automaticSize = getEngineEnumParser(Enum.AutomaticSize),
-					backgroundColor3 = parseColor3Prop,
-					layoutOrder = parseNumberProp,
-					position = parseUDim2Prop,
-					selectionOrder = parseNumberProp,
-					size = parseUDim2Prop,
-					zIndex = parseNumberProp,
-					backgroundImage = parseImageSetOrImageProp,
-					backgroundImageComponent = parseUiComponentProp,
-					backgroundStyle = parseColorTokenProp,
-					containmentPadding = parseNumberProp,
-					cornerRadius = parseNumberProp,
-					ctaButtonComponent = parseUiComponentProp,
-					footerComponent = parseUiComponentProp,
-					image = parseImageStringProp,
-					imageAspectRatio = parseNumberProp,
-					imageComponent = parseUiComponentProp,
-					isContained = parseBooleanProp,
-					onActivated = parseCallbackProp,
-					thumbnailBackgroundStyle = parseColorTokenProp,
-					thumbnailOverlayComponent = parseUiComponentProp,
-					titleComponent = parseUiComponentProp,
-					titleFont = parseTypographyTokenProp,
-					titleLines = parseIntegerProp,
-					titleText = parseStringProp,
-					enableLegacyHoverState = if fFlagSduiTileDisableLegacyHover then nil else parseBooleanProp,
-					focusNavActionsComponent = parseUiComponentProp,
-					bottomButtonComponent = parseUiComponentProp,
-					bottomButtonGap = parseNumberProp,
+					anchorPoint = ParseVector2Prop,
+					automaticSize = GetEngineEnumParserFunction(Enum.AutomaticSize),
+					backgroundColor3 = ParseColor3Prop,
+					layoutOrder = ParseNumberProp,
+					position = ParseUDim2Prop,
+					selectionOrder = ParseNumberProp,
+					size = ParseUDim2Prop,
+					zIndex = ParseNumberProp,
+					backgroundImage = ParseImageSetOrImageProp,
+					backgroundImageComponent = ParseUiComponentProp,
+					backgroundStyle = ParseColorTokenProp,
+					containmentPadding = ParseNumberProp,
+					cornerRadius = ParseNumberProp,
+					ctaButtonComponent = ParseUiComponentProp,
+					footerComponent = ParseUiComponentProp,
+					image = ParseImageStringProp,
+					imageAspectRatio = ParseNumberProp,
+					imageComponent = ParseUiComponentProp,
+					isContained = ParseBooleanProp,
+					onActivated = ParseCallbackProp,
+					thumbnailBackgroundStyle = ParseColorTokenProp,
+					thumbnailOverlayComponent = ParseUiComponentProp,
+					titleComponent = ParseUiComponentProp,
+					titleFont = ParseTypographyTokenProp,
+					titleLines = ParseIntegerProp,
+					titleText = ParseStringProp,
+					enableLegacyHoverState = if FFlagSduiTileDisableLegacyHover then nil else ParseBooleanProp,
+					focusNavActionsComponent = ParseUiComponentProp,
+					bottomButtonComponent = ParseUiComponentProp,
+					bottomButtonGap = ParseNumberProp,
 					holdActionConfig = {
-						onHoldCompleted = parseCallbackProp,
-						focusNavigationEventName = parseStringProp,
-						keyCode = getEngineEnumParser(Enum.KeyCode)
+						onHoldCompleted = ParseCallbackProp,
+						focusNavigationEventName = ParseStringProp,
+						keyCode = GetEngineEnumParserFunction(Enum.KeyCode)
 					}
 				}
 			},
-			[sduiComponentType.TileFooter] = {
-				component = require(serverDrivenUi.Content.SduiTileFooter),
+			[SduiComponentType.TileFooter] = {
+				component = require(ServerDrivenUi.Content.SduiTileFooter),
 				propParsers = {
-					anchorPoint = parseVector2Prop,
-					automaticSize = getEngineEnumParser(Enum.AutomaticSize),
-					layoutOrder = parseIntegerProp,
-					position = parseUDim2Prop,
-					selectable = parseBooleanProp,
-					size = parseUDim2Prop,
-					zIndex = parseNumberProp,
-					sectionGap = parseNumberProp,
-					textIconGap = parseNumberProp,
-					fontStyle = parseTypographyTokenProp,
-					iconColor = parseColor3Prop,
-					iconWidth = parseNumberProp,
-					leftIcon = parseIconProp,
-					leftIconComponent = parseUiComponentProp,
-					leftText = parseStringProp,
-					leftTextFlexMode = getEngineEnumParser(Enum.UIFlexMode),
-					onActivated = parseCallbackProp,
-					rightIcon = parseIconProp,
-					rightIconComponent = parseUiComponentProp,
-					rightText = parseStringProp,
-					rightTextFlexMode = getEngineEnumParser(Enum.UIFlexMode),
-					textColor = parseColor3Prop
+					anchorPoint = ParseVector2Prop,
+					automaticSize = GetEngineEnumParserFunction(Enum.AutomaticSize),
+					layoutOrder = ParseIntegerProp,
+					position = ParseUDim2Prop,
+					selectable = ParseBooleanProp,
+					size = ParseUDim2Prop,
+					zIndex = ParseNumberProp,
+					sectionGap = ParseNumberProp,
+					textIconGap = ParseNumberProp,
+					fontStyle = ParseTypographyTokenProp,
+					iconColor = ParseColor3Prop,
+					iconWidth = ParseNumberProp,
+					leftIcon = ParseIconProp,
+					leftIconComponent = ParseUiComponentProp,
+					leftText = ParseStringProp,
+					leftTextFlexMode = GetEngineEnumParserFunction(Enum.UIFlexMode),
+					onActivated = ParseCallbackProp,
+					rightIcon = ParseIconProp,
+					rightIconComponent = ParseUiComponentProp,
+					rightText = ParseStringProp,
+					rightTextFlexMode = GetEngineEnumParserFunction(Enum.UIFlexMode),
+					textColor = ParseColor3Prop
 				}
 			},
-			[sduiComponentType.View] = {
-				component = require(parent.SduiSharedContent).SduiView,
+			[SduiComponentType.View] = {
+				component = require(Parent.SduiSharedContent).SduiView,
 				propParsers = {
-					anchorPoint = parseVector2Prop,
-					aspectRatio = parseNumberProp,
-					automaticSize = getEngineEnumParser(Enum.AutomaticSize),
-					backgroundStyle = parseColorTokenProp,
-					children = parseUiComponentProp,
-					clipsDescendants = parseBooleanProp,
-					cornerRadius = parseUDimProp,
-					cursorType = getLuaTableEnumParser(foundationModule.Enums.CursorType, "string"),
-					groupTransparency = parseNumberProp,
-					isDisabled = parseBooleanProp,
-					layoutOrder = parseIntegerProp,
-					onActivated = parseCallbackProp,
-					onSecondaryActivated = parseCallbackProp,
-					padding = parseNumberProp,
-					position = parseUDim2Prop,
-					rotation = parseNumberProp,
-					scale = parseNumberProp,
-					selectable = parseBooleanProp,
-					selectionGroup = parseBooleanProp,
-					size = parseUDim2Prop,
-					sizeConstraint = getEngineEnumParser(Enum.SizeConstraint),
-					tag = parseStringProp,
-					testId = parseStringProp,
-					visible = parseBooleanProp,
-					zIndex = parseNumberProp
+					anchorPoint = ParseVector2Prop,
+					aspectRatio = ParseNumberProp,
+					automaticSize = GetEngineEnumParserFunction(Enum.AutomaticSize),
+					backgroundStyle = ParseColorTokenProp,
+					children = ParseUiComponentProp,
+					clipsDescendants = ParseBooleanProp,
+					cornerRadius = ParseUDimProp,
+					cursorType = GetLuaTableEnumParserFunction(FoundationModule.Enums.CursorType, "string"),
+					groupTransparency = ParseNumberProp,
+					isDisabled = ParseBooleanProp,
+					layoutOrder = ParseIntegerProp,
+					onActivated = ParseCallbackProp,
+					onSecondaryActivated = ParseCallbackProp,
+					padding = ParseNumberProp,
+					position = ParseUDim2Prop,
+					rotation = ParseNumberProp,
+					scale = ParseNumberProp,
+					selectable = ParseBooleanProp,
+					selectionGroup = ParseBooleanProp,
+					size = ParseUDim2Prop,
+					sizeConstraint = GetEngineEnumParserFunction(Enum.SizeConstraint),
+					tag = ParseStringProp,
+					testId = ParseStringProp,
+					visible = ParseBooleanProp,
+					zIndex = ParseNumberProp
 				}
 			}
 		}
 	}
-	t_3._registeredComponents[sduiComponentType.CountdownTextIconRow] = {
-		component = require(serverDrivenUi.Content.SduiCountdownTextIconRow),
-		propParsers = cryoModule.Dictionary.join(t_3._registeredComponents[sduiComponentType.TextIconRow], {
-			endTimestamp = parseNumberProp,
-			formatStringHoursMinutes = parseStringProp,
-			defaultString = parseStringProp
+	config._registeredComponents[SduiComponentType.CountdownTextIconRow] = {
+		component = require(ServerDrivenUi.Content.SduiCountdownTextIconRow),
+		propParsers = CryoModule.Dictionary.join(config._registeredComponents[SduiComponentType.TextIconRow], {
+			endTimestamp = ParseNumberProp,
+			formatStringHoursMinutes = ParseStringProp,
+			defaultString = ParseStringProp
 		})
 	}
-	t_3._registeredComponents[sduiComponentType.GameTile] = {
-		component = require(serverDrivenUi.Content.SduiGameTile),
-		propParsers = cryoModule.Dictionary.join(t_3._registeredComponents[sduiComponentType.Tile].propParsers, {
-			universeId = parseStringProp,
-			placeId = parseStringProp,
-			collectionId = if fFlagLuaAppSduiGameTileFeedback then parseStringProp else nil,
-			hiddenStateComponent = if fFlagLuaAppSduiGameTileFeedback then parseLazyUiComponentProp else nil,
-			overflowMenuComponent = if fFlagLuaAppSduiGameTileFeedback then parseLazyUiComponentProp else nil,
-			directActionComponent = if fFlagSduiGameTileDirectAction then parseLazyUiComponentProp else nil,
-			disableHoldToPlay = parseBooleanProp,
-			ratingText = parseStringProp,
-			playerCount = parseNumberProp
+	config._registeredComponents[SduiComponentType.GameTile] = {
+		component = require(ServerDrivenUi.Content.SduiGameTile),
+		propParsers = CryoModule.Dictionary.join(config._registeredComponents[SduiComponentType.Tile].propParsers, {
+			universeId = ParseStringProp,
+			placeId = ParseStringProp,
+			collectionId = if FFlagLuaAppSduiGameTileFeedback then ParseStringProp else nil,
+			hiddenStateComponent = if FFlagLuaAppSduiGameTileFeedback then ParseLazyUiComponentProp else nil,
+			overflowMenuComponent = if FFlagLuaAppSduiGameTileFeedback then ParseLazyUiComponentProp else nil,
+			directActionComponent = if FFlagSduiGameTileDirectAction then ParseLazyUiComponentProp else nil,
+			disableHoldToPlay = ParseBooleanProp,
+			ratingText = ParseStringProp,
+			playerCount = ParseNumberProp
 		}),
 		propInterface = {
-			universeId = tModule.union(tModule.string, tModule.number),
-			placeId = tModule.union(tModule.string, tModule.number)
+			universeId = TModule.union(TModule.string, TModule.number),
+			placeId = TModule.union(TModule.string, TModule.number)
 		}
 	}
 	
-	if fFlagLuaAppSduiGameTileFeedback then
-		t_3._registeredComponents[sduiComponentType.GameTileHiddenState] = {
-			component = require(serverDrivenUi.Content.SduiGameTileHiddenState)
+	if FFlagLuaAppSduiGameTileFeedback then
+		config._registeredComponents[SduiComponentType.GameTileHiddenState] = {
+			component = require(ServerDrivenUi.Content.SduiGameTileHiddenState)
 		}
 	end
-	if fFlagSduiEnableHeroUnitBottomRow then
-		t_3._registeredComponents[sduiComponentType.HeroUnitBottomRow] = {
-			component = require(serverDrivenUi.Content.SduiHeroUnitBottomRow),
+	if FFlagSduiEnableHeroUnitBottomRow then
+		config._registeredComponents[SduiComponentType.HeroUnitBottomRow] = {
+			component = require(ServerDrivenUi.Content.SduiHeroUnitBottomRow),
 			propParsers = {
-				layoutOrder = parseIntegerProp,
-				position = parseUDim2Prop,
-				zIndex = parseNumberProp,
-				ctaButton = parseUiComponentProp,
-				labelText = parseStringProp,
-				rightLabelContent = parseUiComponentProp
+				layoutOrder = ParseIntegerProp,
+				position = ParseUDim2Prop,
+				zIndex = ParseNumberProp,
+				ctaButton = ParseUiComponentProp,
+				labelText = ParseStringProp,
+				rightLabelContent = ParseUiComponentProp
 			}
 		}
 	end
-	t_3._registeredComponents[sduiComponentType.Chip] = {
-		component = require(parent.SduiSharedContent).SduiChip,
+	config._registeredComponents[SduiComponentType.Chip] = {
+		component = require(Parent.SduiSharedContent).SduiChip,
 		propParsers = {
-			anchorPoint = parseVector2Prop,
-			layoutOrder = parseIntegerProp,
-			position = parseUDim2Prop,
-			text = parseStringProp,
-			leadingIconName = parseStringProp,
-			leadingIconVariant = getLuaTableEnumParser(foundationModule.Enums.IconVariant, "string"),
-			leadingIsCircular = parseBooleanProp,
-			leadingOnActivated = parseCallbackProp,
-			trailingIconName = parseStringProp,
-			trailingIconVariant = getLuaTableEnumParser(foundationModule.Enums.IconVariant, "string"),
-			trailingIsCircular = parseBooleanProp,
-			trailingOnActivated = parseCallbackProp,
-			onActivated = parseCallbackProp,
-			isChecked = parseBooleanProp,
-			size = getLuaTableEnumParser(foundationModule.Enums.ChipSize, "string")
+			anchorPoint = ParseVector2Prop,
+			layoutOrder = ParseIntegerProp,
+			position = ParseUDim2Prop,
+			text = ParseStringProp,
+			leadingIconName = ParseStringProp,
+			leadingIconVariant = GetLuaTableEnumParserFunction(FoundationModule.Enums.IconVariant, "string"),
+			leadingIsCircular = ParseBooleanProp,
+			leadingOnActivated = ParseCallbackProp,
+			trailingIconName = ParseStringProp,
+			trailingIconVariant = GetLuaTableEnumParserFunction(FoundationModule.Enums.IconVariant, "string"),
+			trailingIsCircular = ParseBooleanProp,
+			trailingOnActivated = ParseCallbackProp,
+			onActivated = ParseCallbackProp,
+			isChecked = ParseBooleanProp,
+			size = GetLuaTableEnumParserFunction(FoundationModule.Enums.ChipSize, "string")
 		},
-		propInterface = if fFlagSduiChipAccessoryProps then {
-			leading = tModule.optional(tModule.table),
-			trailing = tModule.optional(tModule.table)
+		propInterface = if FFlagSduiChipAccessoryProps then {
+			leading = TModule.optional(TModule.table),
+			trailing = TModule.optional(TModule.table)
 		} else nil
 	}
-	t_3._registeredComponents[sduiComponentType.DualActionChip] = {
-		component = require(parent.SduiSharedContent).SduiDualActionChip,
+	config._registeredComponents[SduiComponentType.DualActionChip] = {
+		component = require(Parent.SduiSharedContent).SduiDualActionChip,
 		propParsers = {
-			anchorPoint = parseVector2Prop,
-			layoutOrder = parseIntegerProp,
-			position = parseUDim2Prop,
-			text = parseStringProp,
-			leadingIconName = parseStringProp,
-			leadingIconVariant = getLuaTableEnumParser(foundationModule.Enums.IconVariant, "string"),
-			leadingOnActivated = parseCallbackProp,
-			trailingIconName = parseStringProp,
-			trailingIconVariant = getLuaTableEnumParser(foundationModule.Enums.IconVariant, "string"),
-			trailingOnActivated = parseCallbackProp
+			anchorPoint = ParseVector2Prop,
+			layoutOrder = ParseIntegerProp,
+			position = ParseUDim2Prop,
+			text = ParseStringProp,
+			leadingIconName = ParseStringProp,
+			leadingIconVariant = GetLuaTableEnumParserFunction(FoundationModule.Enums.IconVariant, "string"),
+			leadingOnActivated = ParseCallbackProp,
+			trailingIconName = ParseStringProp,
+			trailingIconVariant = GetLuaTableEnumParserFunction(FoundationModule.Enums.IconVariant, "string"),
+			trailingOnActivated = ParseCallbackProp
 		}
 	}
-	t_3._registeredComponents[sduiComponentType.AssociatedItemsRow] = {
-		component = require(serverDrivenUi.Content.SduiAssociatedItemsRow),
+	config._registeredComponents[SduiComponentType.AssociatedItemsRow] = {
+		component = require(ServerDrivenUi.Content.SduiAssociatedItemsRow),
 		propParsers = {
-			layoutOrder = parseIntegerProp,
-			items = getArrayMetatableParser(parseLazyUiComponentProp),
-			footerComponent = parseUiComponentProp
+			layoutOrder = ParseIntegerProp,
+			items = GetArrayMetatableParserFunction(ParseLazyUiComponentProp),
+			footerComponent = ParseUiComponentProp
 		}
 	}
-	t_3._registeredComponents[sduiComponentType.ExperienceAssociatedItemsRow] = {
-		component = require(serverDrivenUi.Content.ExperienceDetails.ExperienceAssociatedItemsRow),
+	config._registeredComponents[SduiComponentType.ExperienceAssociatedItemsRow] = {
+		component = require(ServerDrivenUi.Content.ExperienceDetails.ExperienceAssociatedItemsRow),
 		propParsers = {
-			layoutOrder = parseIntegerProp,
-			items = getArrayMetatableParser(parseLazyUiComponentProp),
-			universeId = parseStringProp
+			layoutOrder = ParseIntegerProp,
+			items = GetArrayMetatableParserFunction(ParseLazyUiComponentProp),
+			universeId = ParseStringProp
 		},
-		propInterface = { universeId = tModule.string }
+		propInterface = { universeId = TModule.string }
 	}
-	t_3._registeredComponents[sduiComponentType.ExperienceDetailsVoteChip] = {
-		component = require(serverDrivenUi.Content.ExperienceDetails.ExperienceDetailsVoteChip),
+	config._registeredComponents[SduiComponentType.ExperienceDetailsVoteChip] = {
+		component = require(ServerDrivenUi.Content.ExperienceDetails.ExperienceDetailsVoteChip),
 		propParsers = {
-			layoutOrder = parseIntegerProp,
-			universeId = parseStringProp
+			layoutOrder = ParseIntegerProp,
+			universeId = ParseStringProp
 		},
-		propInterface = { universeId = tModule.string }
+		propInterface = { universeId = TModule.string }
 	}
-	t_3._registeredComponents[sduiComponentType.ExperienceDetailsFavoriteChip] = {
-		component = require(serverDrivenUi.Content.ExperienceDetails.ExperienceDetailsFavoriteChip),
+	config._registeredComponents[SduiComponentType.ExperienceDetailsFavoriteChip] = {
+		component = require(ServerDrivenUi.Content.ExperienceDetails.ExperienceDetailsFavoriteChip),
 		propParsers = {
-			layoutOrder = parseIntegerProp,
-			universeId = parseStringProp
+			layoutOrder = ParseIntegerProp,
+			universeId = ParseStringProp
 		},
-		propInterface = { universeId = tModule.string }
+		propInterface = { universeId = TModule.string }
 	}
-	t_3._registeredComponents[sduiComponentType.ExperienceDetailsNotifyChip] = {
-		component = require(serverDrivenUi.Content.ExperienceDetails.ExperienceDetailsNotifyChip),
+	config._registeredComponents[SduiComponentType.ExperienceDetailsNotifyChip] = {
+		component = require(ServerDrivenUi.Content.ExperienceDetails.ExperienceDetailsNotifyChip),
 		propParsers = {
-			layoutOrder = parseIntegerProp,
-			universeId = parseStringProp
+			layoutOrder = ParseIntegerProp,
+			universeId = ParseStringProp
 		},
-		propInterface = { universeId = tModule.string }
+		propInterface = { universeId = TModule.string }
 	}
-	t_3._registeredComponents[sduiComponentType.ExperienceDetailsActiveChip] = {
-		component = require(serverDrivenUi.Content.ExperienceDetails.ExperienceDetailsActiveChip),
+	config._registeredComponents[SduiComponentType.ExperienceDetailsActiveChip] = {
+		component = require(ServerDrivenUi.Content.ExperienceDetails.ExperienceDetailsActiveChip),
 		propParsers = {
-			layoutOrder = parseIntegerProp,
-			universeId = parseStringProp
+			layoutOrder = ParseIntegerProp,
+			universeId = ParseStringProp
 		},
-		propInterface = { universeId = tModule.string }
+		propInterface = { universeId = TModule.string }
 	}
-	t_3._registeredComponents[sduiComponentType.ExperienceDetailsShareChip] = {
-		component = require(serverDrivenUi.Content.ExperienceDetails.ExperienceDetailsShareChip),
+	config._registeredComponents[SduiComponentType.ExperienceDetailsShareChip] = {
+		component = require(ServerDrivenUi.Content.ExperienceDetails.ExperienceDetailsShareChip),
 		propParsers = {
-			layoutOrder = parseIntegerProp,
-			universeId = parseStringProp
+			layoutOrder = ParseIntegerProp,
+			universeId = ParseStringProp
 		},
-		propInterface = { universeId = tModule.string }
+		propInterface = { universeId = TModule.string }
 	}
-	t_3._registeredComponents[sduiComponentType.ExperienceDetailsReportChip] = {
-		component = require(serverDrivenUi.Content.ExperienceDetails.ExperienceDetailsReportChip),
+	config._registeredComponents[SduiComponentType.ExperienceDetailsReportChip] = {
+		component = require(ServerDrivenUi.Content.ExperienceDetails.ExperienceDetailsReportChip),
 		propParsers = {
-			layoutOrder = parseIntegerProp,
-			universeId = parseStringProp
+			layoutOrder = ParseIntegerProp,
+			universeId = ParseStringProp
 		},
-		propInterface = { universeId = tModule.string }
+		propInterface = { universeId = TModule.string }
 	}
 	
-	if fFlagSduiExperienceDetailsSocialProof then
-		t_3._registeredComponents[sduiComponentType.ExperienceDetailsConnectionsPlayedChip] = {
-			component = require(serverDrivenUi.Content.ExperienceDetails.ExperienceDetailsConnectionsPlayedChip),
+	if FFlagSduiExperienceDetailsSocialProof then
+		config._registeredComponents[SduiComponentType.ExperienceDetailsConnectionsPlayedChip] = {
+			component = require(ServerDrivenUi.Content.ExperienceDetails.ExperienceDetailsConnectionsPlayedChip),
 			propParsers = {
-				layoutOrder = parseIntegerProp,
-				universeId = parseStringProp
+				layoutOrder = ParseIntegerProp,
+				universeId = ParseStringProp
 			},
-			propInterface = { universeId = tModule.string }
+			propInterface = { universeId = TModule.string }
 		}
-		t_3._registeredComponents[sduiComponentType.ExperienceDetailsConnectionsPlayedTextRow] = {
-			component = require(serverDrivenUi.Content.ExperienceDetails.ExperienceDetailsConnectionsPlayedTextRow),
+		config._registeredComponents[SduiComponentType.ExperienceDetailsConnectionsPlayedTextRow] = {
+			component = require(ServerDrivenUi.Content.ExperienceDetails.ExperienceDetailsConnectionsPlayedTextRow),
 			propParsers = {
-				layoutOrder = parseIntegerProp,
-				universeId = parseStringProp,
-				name = parseStringProp
+				layoutOrder = ParseIntegerProp,
+				universeId = ParseStringProp,
+				name = ParseStringProp
 			},
 			propInterface = {
-				universeId = tModule.string,
-				name = tModule.optional(tModule.string)
+				universeId = TModule.string,
+				name = TModule.optional(TModule.string)
 			}
 		}
 	end
-	t_3._registeredComponents[sduiComponentType.VerticalFeed] = {
-		component = require(parent.SduiSharedContent).SduiVerticalFeed,
+	config._registeredComponents[SduiComponentType.VerticalFeed] = {
+		component = require(Parent.SduiSharedContent).SduiVerticalFeed,
 		propParsers = {
-			layoutOrder = parseIntegerProp,
-			feedItems = getArrayMetatableParser(parseLazyUiComponentProp),
-			gapBetweenFeedItems = parseNumberProp,
-			gapAfterFirstFeedItem = if fFlagSduiIndividualFeedItemSpacing then parseNumberProp else nil,
-			thresholdFromEnd = parseNumberProp,
-			onScrollToEnd = parseCallbackProp,
-			onRefresh = parseCallbackProp,
-			stickyItems = getArrayMetatableParser(parseUiComponentProp),
-			gapAfterStickyItems = parseIntegerProp,
-			gapBetweenStickyItems = parseIntegerProp,
-			stickyPaddingTop = parseIntegerProp,
-			stickyPaddingBottom = parseIntegerProp,
-			stickyBackgroundStyle = parseColorTokenProp,
-			stickyContentTag = parseStringProp,
-			backgroundStyle = parseColorTokenProp
+			layoutOrder = ParseIntegerProp,
+			feedItems = GetArrayMetatableParserFunction(ParseLazyUiComponentProp),
+			gapBetweenFeedItems = ParseNumberProp,
+			gapAfterFirstFeedItem = if FFlagSduiIndividualFeedItemSpacing then ParseNumberProp else nil,
+			thresholdFromEnd = ParseNumberProp,
+			onScrollToEnd = ParseCallbackProp,
+			onRefresh = ParseCallbackProp,
+			stickyItems = GetArrayMetatableParserFunction(ParseUiComponentProp),
+			gapAfterStickyItems = ParseIntegerProp,
+			gapBetweenStickyItems = ParseIntegerProp,
+			stickyPaddingTop = ParseIntegerProp,
+			stickyPaddingBottom = ParseIntegerProp,
+			stickyBackgroundStyle = ParseColorTokenProp,
+			stickyContentTag = ParseStringProp,
+			backgroundStyle = ParseColorTokenProp
 		}
 	}
-	t_3._registeredComponents[sduiComponentType.BadgeTile] = {
-		component = require(serverDrivenUi.Content.SduiBadgeTile),
-		propParsers = cryoModule.Dictionary.join(t_3._registeredComponents[sduiComponentType.Tile].propParsers, {
-			imageCornerRadius = parseNumberProp,
-			imagePadding = parseNumberProp
+	config._registeredComponents[SduiComponentType.BadgeTile] = {
+		component = require(ServerDrivenUi.Content.SduiBadgeTile),
+		propParsers = CryoModule.Dictionary.join(config._registeredComponents[SduiComponentType.Tile].propParsers, {
+			imageCornerRadius = ParseNumberProp,
+			imagePadding = ParseNumberProp
 		})
 	}
-	
-	if sduiBadgeComponent then
-		t_3._registeredComponents[sduiComponentType.Badge] = {
-			component = require(parent.SduiSharedContent).SduiBadge,
-			propParsers = {
-				anchorPoint = parseVector2Prop,
-				layoutOrder = parseIntegerProp,
-				position = parseUDim2Prop,
-				visible = parseBooleanProp,
-				zIndex = parseNumberProp,
-				text = parseStringProp,
-				icon = parseStringProp,
-				variant = getLuaTableEnumParser(foundationModule.Enums.BadgeVariant, "string")
-			}
+	config._registeredComponents[SduiComponentType.Badge] = {
+		component = require(Parent.SduiSharedContent).SduiBadge,
+		propParsers = {
+			anchorPoint = ParseVector2Prop,
+			layoutOrder = ParseIntegerProp,
+			position = ParseUDim2Prop,
+			visible = ParseBooleanProp,
+			zIndex = ParseNumberProp,
+			text = ParseStringProp,
+			icon = ParseStringProp,
+			variant = GetLuaTableEnumParserFunction(FoundationModule.Enums.BadgeVariant, "string")
 		}
-	end
-	t_3._registeredComponents[sduiComponentType.SongTile] = { component = require(serverDrivenUi.Content.SduiSongTile) }
-	t_3._registeredComponents[sduiComponentType.InfoTable] = {
-		component = require(parent.SduiSharedContent).SduiInfoTable,
-		propParsers = {
-			layoutOrder = parseIntegerProp,
-			gridTag = parseStringProp,
-			items = getArrayMetatableParser(parseLazyUiComponentProp),
-			numColumns = parseIntegerProp,
-			tag = parseStringProp
-		},
-		propInterface = { items = tModule.array(tModule.table) }
 	}
-	t_3._registeredComponents[sduiComponentType.InfoTableCell] = {
-		component = require(parent.AppBlox).InfoTableCell,
+	config._registeredComponents[SduiComponentType.SongTile] = { component = require(ServerDrivenUi.Content.SduiSongTile) }
+	config._registeredComponents[SduiComponentType.InfoTable] = {
+		component = require(Parent.SduiSharedContent).SduiInfoTable,
 		propParsers = {
-			labelComponent = parseUiComponentProp,
-			isLastInSingleColumn = parseBooleanProp,
-			numColumns = parseIntegerProp,
-			onActivated = parseCallbackProp,
-			valueComponent = parseUiComponentProp
+			layoutOrder = ParseIntegerProp,
+			gridTag = ParseStringProp,
+			items = GetArrayMetatableParserFunction(ParseLazyUiComponentProp),
+			numColumns = ParseIntegerProp,
+			tag = ParseStringProp
+		},
+		propInterface = { items = TModule.array(TModule.table) }
+	}
+	config._registeredComponents[SduiComponentType.InfoTableCell] = {
+		component = require(Parent.AppBlox).InfoTableCell,
+		propParsers = {
+			labelComponent = ParseUiComponentProp,
+			isLastInSingleColumn = ParseBooleanProp,
+			numColumns = ParseIntegerProp,
+			onActivated = ParseCallbackProp,
+			valueComponent = ParseUiComponentProp
 		},
 		propInterface = {
-			labelComponent = tModule.table,
-			valueComponent = tModule.table,
-			isLastInSingleColumn = tModule.optional(tModule.boolean)
+			labelComponent = TModule.table,
+			valueComponent = TModule.table,
+			isLastInSingleColumn = TModule.optional(TModule.boolean)
 		}
 	}
-	t_3._registeredComponents[sduiComponentType.ExpandableText] = {
-		component = require(parent.SduiSharedContent).SduiExpandableText,
+	config._registeredComponents[SduiComponentType.ExpandableText] = {
+		component = require(Parent.SduiSharedContent).SduiExpandableText,
 		propParsers = {
-			layoutOrder = parseIntegerProp,
-			text = parseStringProp,
-			compactNumberOfLines = parseIntegerProp,
-			fontStyle = parseTypographyTokenProp,
-			textStyle = parseColorTokenProp,
-			pressedTextStyle = parseColorTokenProp,
-			expandedInitially = parseBooleanProp,
-			avoidBlankLineClip = parseBooleanProp,
-			onExpandChanged = parseCallbackProp,
-			headerComponent = parseUiComponentProp
+			layoutOrder = ParseIntegerProp,
+			text = ParseStringProp,
+			compactNumberOfLines = ParseIntegerProp,
+			fontStyle = ParseTypographyTokenProp,
+			textStyle = ParseColorTokenProp,
+			pressedTextStyle = ParseColorTokenProp,
+			expandedInitially = ParseBooleanProp,
+			avoidBlankLineClip = ParseBooleanProp,
+			onExpandChanged = ParseCallbackProp,
+			headerComponent = ParseUiComponentProp
 		},
-		propInterface = { text = tModule.string }
+		propInterface = { text = TModule.string }
 	}
-	t_3._registeredComponents[sduiComponentType.OverflowMenu] = {
-		component = require(parent.SduiSharedContent).SduiOverflowMenu,
+	config._registeredComponents[SduiComponentType.OverflowMenu] = {
+		component = require(Parent.SduiSharedContent).SduiOverflowMenu,
 		propParsers = {
-			anchorPoint = parseVector2Prop,
-			layoutOrder = parseIntegerProp,
-			position = parseUDim2Prop,
-			zIndex = parseNumberProp,
-			buttonVariant = getLuaTableEnumParser(foundationModule.Enums.ButtonVariant, "string"),
-			buttonSize = getLuaTableEnumParser(foundationModule.Enums.InputSize, "string"),
-			buttonIcon = getLuaTableEnumParser(foundationModule.Enums.IconName, "string"),
-			buttonIconBackgroundStyle = parseColorTokenProp,
-			menuItemSize = getLuaTableEnumParser(foundationModule.Enums.InputSize, "string"),
-			popoverAlign = getLuaTableEnumParser(foundationModule.Enums.PopoverAlign, "string"),
-			popoverSide = getLuaTableEnumParser(foundationModule.Enums.PopoverSide, "string"),
-			menuWidth = parseUDimProp
+			anchorPoint = ParseVector2Prop,
+			layoutOrder = ParseIntegerProp,
+			position = ParseUDim2Prop,
+			zIndex = ParseNumberProp,
+			buttonVariant = GetLuaTableEnumParserFunction(FoundationModule.Enums.ButtonVariant, "string"),
+			buttonSize = GetLuaTableEnumParserFunction(FoundationModule.Enums.InputSize, "string"),
+			buttonIcon = GetLuaTableEnumParserFunction(FoundationModule.Enums.IconName, "string"),
+			buttonIconBackgroundStyle = ParseColorTokenProp,
+			menuItemSize = GetLuaTableEnumParserFunction(FoundationModule.Enums.InputSize, "string"),
+			popoverAlign = GetLuaTableEnumParserFunction(FoundationModule.Enums.PopoverAlign, "string"),
+			popoverSide = GetLuaTableEnumParserFunction(FoundationModule.Enums.PopoverSide, "string"),
+			menuWidth = ParseUDimProp
 		},
-		propInterface = { items = tModule.table }
+		propInterface = { items = TModule.table }
 	}
 	
-	if fFlagLuaAppDismissUnlockUpsell then
-		t_3._registeredComponents[sduiComponentType.AgeCheckUpsellRow] = {
-			component = require(serverDrivenUi.Content.SduiAgeCheckUpsellRow),
+	if FFlagLuaAppDismissUnlockUpsell then
+		config._registeredComponents[SduiComponentType.AgeCheckUpsellRow] = {
+			component = require(ServerDrivenUi.Content.SduiAgeCheckUpsellRow),
 			propParsers = {
-				leading = parseUiComponentProp,
-				content = parseUiComponentProp,
-				trailing = parseUiComponentProp,
-				onActivated = parseCallbackProp,
-				tag = parseStringProp,
-				leadingTag = parseStringProp,
-				contentTag = parseStringProp,
-				trailingTag = parseStringProp,
-				layoutOrder = parseIntegerProp,
-				position = parseUDim2Prop,
-				zIndex = parseNumberProp,
-				testId = parseStringProp
+				leading = ParseUiComponentProp,
+				content = ParseUiComponentProp,
+				trailing = ParseUiComponentProp,
+				onActivated = ParseCallbackProp,
+				tag = ParseStringProp,
+				leadingTag = ParseStringProp,
+				contentTag = ParseStringProp,
+				trailingTag = ParseStringProp,
+				layoutOrder = ParseIntegerProp,
+				position = ParseUDim2Prop,
+				zIndex = ParseNumberProp,
+				testId = ParseStringProp
 			}
 		}
 	end
-	setmetatable(t_3, t_1)
+	setmetatable(config, SduiComponentDefinitionsModule)
 	
-	return t_3
+	return config
 end
 
-function t_1:getComponentDefinition(p1)
-	-- upvalues: fFlagSduiGlobalRegistryFallback (ref), getSduiComponentRegistry (ref)
-	local var1 = self._registeredComponents[p1]
-	
-	if not var1 then
-		if fFlagSduiGlobalRegistryFallback then
-			return getSduiComponentRegistry().getComponentDefinition(p1)
-		end
-		var1 = nil
-	end
-	return var1
+function SduiComponentDefinitionsModule:getComponentDefinition(p1) --[[ Line: 958 ]]
+	-- upvalues: GetSduiComponentRegistryFunction (copy)
+	return self._registeredComponents[p1] or GetSduiComponentRegistryFunction().getComponentDefinition(p1)
 end
 
-function t_1:doesComponentManageChildren(p1)
-	local var1 = self:getComponentDefinition(p1)
+function SduiComponentDefinitionsModule:doesComponentManageChildren(p1) --[[ Line: 966 ]]
+	local ComponentDefinition = self:getComponentDefinition(p1)
 	
-	return if var1 then var1.doesManageChildren else false
+	return ComponentDefinition and ComponentDefinition.doesManageChildren or false
 end
 
-function t_1:getComponent(p1)
-	local var1 = self:getComponentDefinition(p1)
+function SduiComponentDefinitionsModule:getComponent(p1) --[[ Line: 974 ]]
+	local ComponentDefinition = self:getComponentDefinition(p1)
 	
-	return var1 and var1.component
+	return ComponentDefinition and ComponentDefinition.component
 end
 
-function t_1:getPropParsers(p1)
-	-- upvalues: t (ref)
-	local var1 = self:getComponentDefinition(p1)
+function SduiComponentDefinitionsModule:getPropParsers(p1) --[[ Line: 979 ]]
+	-- upvalues: t (copy)
+	local ComponentDefinition = self:getComponentDefinition(p1)
 	
-	return if var1 then var1.propParsers else t
+	return ComponentDefinition and ComponentDefinition.propParsers or t
 end
 
-function t_1:getPropInterface(p1)
-	local var1 = self:getComponentDefinition(p1)
+function SduiComponentDefinitionsModule:getPropInterface(p1) --[[ Line: 987 ]]
+	local ComponentDefinition = self:getComponentDefinition(p1)
 	
-	return if var1 then var1.propInterface else nil
+	return ComponentDefinition and ComponentDefinition.propInterface or nil
 end
 
-local t_2 = {
-	[parseUiComponentProp] = true,
-	[parseCallbackProp] = true,
-	[parseFocusNavActionsProp] = true
+local config = {
+	[ParseUiComponentProp] = true,
+	[ParseCallbackProp] = true,
+	[ParseFocusNavActionsProp] = true
 }
 
-function t_1.doesParserRequireRenderContext(_, p1)
-	-- upvalues: t_2 (ref)
-	return if p1 and t_2[p1] then true else typeof(p1) == "table"
+function SduiComponentDefinitionsModule:doesParserRequireRenderContext(p1): boolean --[[ Line: 998 ]]
+	-- upvalues: config (copy)
+	return if p1 and config[p1] then true else typeof(p1) == "table"
 end
 
-function t_1:registerComponent(p1, p2)
+function SduiComponentDefinitionsModule:registerComponent(p1, p2) --[[ Line: 1013 ]]
 	self._registeredComponents[p1] = p2
 end
 
-return t_1
+return SduiComponentDefinitionsModule

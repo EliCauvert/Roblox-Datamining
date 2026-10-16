@@ -1,72 +1,69 @@
-﻿local gameProductInfoRodux = script:FindFirstAncestor("GameProductInfoRodux")
-local parent = gameProductInfoRodux.Parent
-local promiseModule = require(parent.Promise)
-local resultModule = require(parent.Result)
-local performFetch = require(parent.Http).PerformFetch
-local logging = require(parent.AppCommonLib).Logging
-local setGamesProductInfoModule = require(gameProductInfoRodux.SetGamesProductInfo)
-local gamesGetProductInfoModule = require(gameProductInfoRodux.GamesGetProductInfo)
-local gameProductInfoModule = require(gameProductInfoRodux.GameProductInfo)
-local t = {}
+﻿local GameProductInfoRodux = script:FindFirstAncestor("GameProductInfoRodux")
+local Parent = GameProductInfoRodux.Parent
+local PromiseModule = require(Parent.Promise)
+local ResultModule = require(Parent.Result)
+local PerformFetch = require(Parent.Http).PerformFetch
+local Logging = require(Parent.AppCommonLib).Logging
+local SetGamesProductInfoModule = require(GameProductInfoRodux.SetGamesProductInfo)
+local GamesGetProductInfoModule = require(GameProductInfoRodux.GamesGetProductInfo)
+local GameProductInfoModule = require(GameProductInfoRodux.GameProductInfo)
 
-local var1 = function(p1)
-	return "luaapp.gamesapi.games-product-info." .. p0
+local function KeyMapper(Text): string --[[ Line: 16 ]]
+	return "luaapp.gamesapi.games-product-info." .. Text
 end
 
-t.KeyMapper = var1
-
-function t.Fetch(p1, p2)
-	-- upvalues: performFetch (ref), var1 (ref), gamesGetProductInfoModule (ref), resultModule (ref), gameProductInfoModule (ref), logging (ref), setGamesProductInfoModule (ref), promiseModule (ref)
-	assert(type(p2) == "table", "FetchGamesProductInfo thunk expects universeIds to be a table")
-	assert(#p2 > 0, "FetchGamesProductInfo thunk expects universeIds count to be greater than 0")
-	assert(#p2 <= 100, "FetchGamesProductInfo thunk expects universeIds count to not exceed " .. 100)
-	
-	return performFetch.Batch(p2, var1, function(p3, p4)
-		-- upvalues: gamesGetProductInfoModule (copy), p1 (ref), resultModule (copy), gameProductInfoModule (copy), logging (copy), setGamesProductInfoModule (copy), promiseModule (copy)
-		return gamesGetProductInfoModule(p1, p4):andThen(function(p5)
-			-- upvalues: p4 (ref), resultModule (copy), gameProductInfoModule (copy), logging (copy), p3 (ref), setGamesProductInfoModule (copy), promiseModule (copy)
-			local t = {}
-			
-			for i, v in ipairs(p4) do
-				t["luaapp.gamesapi.games-product-info." .. v] = resultModule.new(false, nil)
-			end
-			local data = p5 and (p5.responseBody and p5.responseBody.data)
-			
-			if data == nil then
-				logging.warn("Response from GamesGetProductInfo is malformed!")
-			else
-				local t_1 = {}
+return {
+	KeyMapper = KeyMapper,
+	Fetch = function(p1, p2) --[[ Line: 22 ]]
+		-- upvalues: PerformFetch (copy), KeyMapper (copy), GamesGetProductInfoModule (copy), ResultModule (copy), GameProductInfoModule (copy), Logging (copy), SetGamesProductInfoModule (copy), PromiseModule (copy)
+		assert(type(p2) == "table", "FetchGamesProductInfo thunk expects universeIds to be a table")
+		assert(#p2 > 0, "FetchGamesProductInfo thunk expects universeIds count to be greater than 0")
+		assert(#p2 <= 100, "FetchGamesProductInfo thunk expects universeIds count to not exceed " .. 100)
+		
+		return PerformFetch.Batch(p2, KeyMapper, function(p3, p4) --[[ Line: 30 ]]
+			-- upvalues: GamesGetProductInfoModule (upval), p1 (copy), ResultModule (upval), GameProductInfoModule (upval), Logging (upval), SetGamesProductInfoModule (upval), PromiseModule (upval)
+			return GamesGetProductInfoModule(p1, p4):andThen(function(Result) --[[ Line: 31 ]]
+				-- upvalues: p4 (copy), ResultModule (upval), GameProductInfoModule (upval), Logging (upval), p3 (copy), SetGamesProductInfoModule (upval), PromiseModule (upval)
+				local NewResults = {}
 				
-				for i_1, v_1 in ipairs(data) do
-					gameProductInfoModule.fromJsonData(v_1):match(function(p6)
-						-- upvalues: t_1 (ref), t (ref), resultModule (copy)
-						t_1[p6.universeId] = p6
-						t["luaapp.gamesapi.games-product-info." .. p7.universeId] = resultModule.new(true, nil)
-					end):matchError(function(p6)
-						-- upvalues: logging (copy)
-						logging.warn(p6)
-					end)
+				for _, value in ipairs(p4) do
+					NewResults["luaapp.gamesapi.games-product-info." .. value] = ResultModule.new(false, nil)
 				end
-				if next(t_1) then
-					p3:dispatch(setGamesProductInfoModule(t_1))
+				local Data = Result and (Result.responseBody and Result.responseBody.data)
+				
+				if Data == nil then
+					Logging.warn("Response from GamesGetProductInfo is malformed!")
+				else
+					local t = {}
+					
+					for _, entry in ipairs(Data) do
+						GameProductInfoModule.fromJsonData(entry):match(function(p5) --[[ Line: 42 ]]
+							-- upvalues: t (copy), NewResults (copy), ResultModule (upval)
+							t[p5.universeId] = p5
+							NewResults["luaapp.gamesapi.games-product-info." .. p5.universeId] = ResultModule.new(true, nil)
+						end):matchError(function(p5) --[[ Line: 46 ]]
+							-- upvalues: Logging (upval)
+							Logging.warn(p5)
+						end)
+					end
+					if next(t) then
+						p3:dispatch(SetGamesProductInfoModule(t))
+					end
 				end
-			end
-			return promiseModule.resolve(t)
-		end, function(_)
-			-- upvalues: p4 (ref), resultModule (copy), promiseModule (copy)
-			local t = {}
-			
-			for i, v in ipairs(p4) do
-				t["luaapp.gamesapi.games-product-info." .. v] = resultModule.new(false, nil)
-			end
-			return promiseModule.resolve(t)
+				return PromiseModule.resolve(NewResults)
+			end, function(_) --[[ Line: 59 ]]
+				-- upvalues: p4 (copy), ResultModule (upval), PromiseModule (upval)
+				local NewResults = {}
+				
+				for _, value in ipairs(p4) do
+					NewResults["luaapp.gamesapi.games-product-info." .. value] = ResultModule.new(false, nil)
+				end
+				return PromiseModule.resolve(NewResults)
+			end)
 		end)
-	end)
-end
-
-function t.GetFetchingStatus(p6, p7)
-	-- upvalues: performFetch (ref)
-	return performFetch.GetStatus(p6, "luaapp.gamesapi.games-product-info." .. p9)
-end
-
-return t
+	end,
+	GetFetchingStatus = function(p5, Text) --[[ Line: 69 ]]
+		-- upvalues: PerformFetch (copy)
+		return PerformFetch.GetStatus(p5, "luaapp.gamesapi.games-product-info." .. Text)
+	end
+}

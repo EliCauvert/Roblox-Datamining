@@ -1,7 +1,7 @@
-﻿local sduiDataBinderTransformUtilsModule = require(script:FindFirstAncestor("SduiCoreSystem").ClientBinding.SduiDataBinderTransformUtils)
-local snakeToCamel = sduiDataBinderTransformUtilsModule.snakeToCamel
-local protobufTimestampToLocalTimeString = sduiDataBinderTransformUtilsModule.protobufTimestampToLocalTimeString
-local t = {
+﻿local SduiDataBinderTransformUtilsModule = require(script:FindFirstAncestor("SduiCoreSystem").ClientBinding.SduiDataBinderTransformUtils)
+local SnakeToCamel = SduiDataBinderTransformUtilsModule.snakeToCamel
+local ProtobufTimestampToLocalTimeString = SduiDataBinderTransformUtilsModule.protobufTimestampToLocalTimeString
+local DataHydrationTypes = {
 	DataStatus = {
 		Ready = "Ready",
 		NotReady = "NotReady",
@@ -10,106 +10,107 @@ local t = {
 }
 
 return {
-	createDataHydrationMock = function(p1)
-		-- upvalues: t (ref)
-		local t_1 = {
-			Badges = if p1 then p1.Badges else {
-				getBadgeInfoStore = function()
+	createDataHydrationMock = function(p1) --[[ Line: 30 ]]
+		-- upvalues: DataHydrationTypes (copy)
+		local config = {
+			Badges = p1 and p1.Badges or {
+				getBadgeInfoStore = function() --[[ Line: 51 ]]
 					return {
-						getBadgeInfo = function()
+						getBadgeInfo = function() --[[ Line: 53 ]]
 							return {
-								data = function()
+								data = function() --[[ Line: 55 ]]
 									return nil
 								end,
-								status = function()
+								status = function(): string --[[ Line: 58 ]]
 									return "NotReady"
 								end
 							}
 						end,
-						getBadgeInfos = function()
+						getBadgeInfos = function() --[[ Line: 63 ]]
 							return {}
 						end,
-						clear = function() end,
-						dispose = function() end
+						clear = function() --[[ Line: 66 ]] end,
+						dispose = function() --[[ Line: 67 ]] end
 					}
 				end
 			},
-			Game = if p1 then p1.Game else nil,
-			SocialLink = if p1 then p1.SocialLink else nil,
-			MarketplaceCatalogCategory = if p1 then p1.MarketplaceCatalogCategory else {
-				getMarketplaceCatalogCategoryStore = function()
+			Game = p1 and p1.Game or nil,
+			SocialLink = p1 and p1.SocialLink or nil,
+			MarketplaceCatalogCategory = p1 and p1.MarketplaceCatalogCategory or {
+				getMarketplaceCatalogCategoryStore = function() --[[ Line: 74 ]]
 					return {
-						getMarketplaceCatalogCategory = function()
+						getMarketplaceCatalogCategory = function() --[[ Line: 76 ]]
 							return {
-								data = function()
+								data = function() --[[ Line: 78 ]]
 									return nil
 								end,
-								status = function()
+								status = function(): string --[[ Line: 81 ]]
 									return "NotReady"
 								end
 							}
 						end,
-						getMarketplaceCatalogCategories = function()
+						getMarketplaceCatalogCategories = function() --[[ Line: 86 ]]
 							return {}
 						end,
-						updateMarketplaceCatalogCategories = function() end,
-						updateMarketplaceCatalogCategory = function() end,
-						clear = function() end,
-						dispose = function() end
+						updateMarketplaceCatalogCategories = function() --[[ Line: 89 ]] end,
+						updateMarketplaceCatalogCategory = function() --[[ Line: 90 ]] end,
+						clear = function() --[[ Line: 91 ]] end,
+						dispose = function() --[[ Line: 92 ]] end
 					}
 				end
 			},
-			MarketplaceCatalogSort = if p1 then p1.MarketplaceCatalogSort else {
-				getMarketplaceCatalogSortStore = function()
+			MarketplaceCatalogSort = p1 and p1.MarketplaceCatalogSort or {
+				getMarketplaceCatalogSortStore = function() --[[ Line: 97 ]]
 					return {
-						getMarketplaceCatalogSort = function()
+						getMarketplaceCatalogSort = function() --[[ Line: 99 ]]
 							return {
-								data = function()
+								data = function() --[[ Line: 101 ]]
 									return nil
 								end,
-								status = function()
+								status = function(): string --[[ Line: 104 ]]
 									return "NotReady"
 								end
 							}
 						end,
-						getMarketplaceCatalogSorts = function()
+						getMarketplaceCatalogSorts = function() --[[ Line: 109 ]]
 							return {}
 						end,
-						updateMarketplaceCatalogSorts = function() end,
-						updateMarketplaceCatalogSort = function() end,
-						clear = function() end,
-						dispose = function() end
+						updateMarketplaceCatalogSorts = function() --[[ Line: 112 ]] end,
+						updateMarketplaceCatalogSort = function() --[[ Line: 113 ]] end,
+						clear = function() --[[ Line: 114 ]] end,
+						dispose = function() --[[ Line: 115 ]] end
 					}
 				end
 			},
-			Song = if p1 then p1.Song else nil,
-			MarketplaceAsset = if p1 then p1.MarketplaceAsset else nil,
-			MarketplaceBundle = if p1 then p1.MarketplaceBundle else nil,
-			MarketplaceLook = if p1 then p1.MarketplaceLook else nil,
-			CollectibleItem = if p1 then p1.CollectibleItem else nil,
-			MediaAsset = if p1 then p1.MediaAsset else nil,
-			UserProfile = if p1 then p1.UserProfile else nil,
-			Community = if p1 then p1.Community else nil,
-			CommunityUserMembership = if p1 then p1.CommunityUserMembership else nil,
-			NotificationBadge = if p1 then p1.NotificationBadge else nil,
-			DataHydrationTypes = t
+			Song = p1 and p1.Song or nil,
+			MarketplaceAsset = p1 and p1.MarketplaceAsset or nil,
+			MarketplaceBundle = p1 and p1.MarketplaceBundle or nil,
+			MarketplaceLook = p1 and p1.MarketplaceLook or nil,
+			CollectibleItem = p1 and p1.CollectibleItem or nil,
+			MediaAsset = p1 and p1.MediaAsset or nil,
+			UserProfile = p1 and p1.UserProfile or nil,
+			Community = p1 and p1.Community or nil,
+			CommunityUserMembership = p1 and p1.CommunityUserMembership or nil,
+			NotificationBadge = p1 and p1.NotificationBadge or nil,
+			LeaderboardStats = p1 and p1.LeaderboardStats or nil,
+			DataHydrationTypes = DataHydrationTypes
 		}
 		
 		if p1 and p1.extraFields then
-			for i, v in p1.extraFields do
-				t_1[i] = v
+			for i, extraField in p1.extraFields do
+				config[i] = extraField
 			end
 		end
-		return t_1
+		return config
 	end,
-	createSduiDataBinderTransformUtilsMock = function()
-		-- upvalues: snakeToCamel (ref), protobufTimestampToLocalTimeString (ref)
+	createSduiDataBinderTransformUtilsMock = function() --[[ Line: 147 ]]
+		-- upvalues: SnakeToCamel (copy), ProtobufTimestampToLocalTimeString (copy)
 		return {
-			snakeToCamel = snakeToCamel,
-			protobufTimestampToLocalTimeString = protobufTimestampToLocalTimeString
+			snakeToCamel = SnakeToCamel,
+			protobufTimestampToLocalTimeString = ProtobufTimestampToLocalTimeString
 		}
 	end,
-	snakeToCamel = snakeToCamel,
-	protobufTimestampToLocalTimeString = protobufTimestampToLocalTimeString,
-	DataHydrationTypesMock = t
+	snakeToCamel = SnakeToCamel,
+	protobufTimestampToLocalTimeString = ProtobufTimestampToLocalTimeString,
+	DataHydrationTypesMock = DataHydrationTypes
 }

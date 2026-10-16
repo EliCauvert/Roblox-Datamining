@@ -1,9 +1,9 @@
 ﻿local UGCValidationService = game:GetService("UGCValidationService")
-local parent = script.Parent.Parent.Parent
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local list = {
+local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
+local ControlNames = {
 	"LeftEyeClosed", "EyesLookDown", "RightEyeClosed", "JawDrop", "Pucker",
 	"LeftLipCornerPuller", "RightLipCornerPuller", "ChinRaiser",
 	"ChinRaiserUpperLip", "LeftCheekRaiser", "RightCheekRaiser",
@@ -12,40 +12,40 @@ local list = {
 }
 
 return {
-	categories = { validationEnumsModule.UploadCategory.DYNAMIC_HEAD },
+	categories = { ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD },
 	prereqTests = {
-		validationEnumsModule.ValidationModule.DynamicHeadFacsPresent
+		ValidationEnumsModule.ValidationModule.DynamicHeadFacsPresent
 	},
-	requiredData = { validationEnumsModule.SharedDataMember.renderMeshesData },
+	requiredData = { ValidationEnumsModule.SharedDataMember.renderMeshesData },
 	expectedFailures = {},
-	run = function(p1, p2)
-		-- upvalues: UGCValidationService (ref), list (ref), errorSourceStringsModule (ref)
-		local head = p2.renderMeshesData.Head
-		local ok, status, var1 = pcall(function()
-			-- upvalues: UGCValidationService (copy), head (ref), list (copy)
-			return UGCValidationService:GetDynamicHeadEditableMeshInactiveControls(head.editable, list)
+	run = function(p1, p2) --[[ Line: 42 ]]
+		-- upvalues: UGCValidationService (copy), ControlNames (copy), ErrorSourceStringsModule (copy)
+		local Head = p2.renderMeshesData.Head
+		local Success, Result, Result3 = pcall(function() --[[ Line: 45 ]]
+			-- upvalues: UGCValidationService (upval), Head (copy), ControlNames (upval)
+			return UGCValidationService:GetDynamicHeadEditableMeshInactiveControls(Head.editable, ControlNames)
 		end)
 		
-		if not ok then
-			if string.find(status, "Download Error") == 1 then
+		if not Success then
+			if string.find(Result, "Download Error") == 1 then
 				p1:fetchError(string.format("Failed to load model for dynamic head '%s'. Make sure model exists and try again.", p2.rootInstance.Name))
 			end
-			assert(false, status)
+			assert(false, Result)
 		end
-		local meshId = p2.rootInstance.MeshId
+		local MeshId = p2.rootInstance.MeshId
 		
-		if #status > 0 then
-			p1:fail(errorSourceStringsModule.Keys.DynHead_ControlsMissing, {
+		if #Result > 0 then
+			p1:fail(ErrorSourceStringsModule.Keys.DynHead_ControlsMissing, {
 				headName = p2.rootInstance.Name,
-				meshId = meshId,
-				controlList = table.concat(status, ", ")
+				meshId = MeshId,
+				controlList = table.concat(Result, ", ")
 			})
 		end
-		if #var1 > 0 then
-			p1:fail(errorSourceStringsModule.Keys.DynHead_ControlsInactive, {
+		if #Result3 > 0 then
+			p1:fail(ErrorSourceStringsModule.Keys.DynHead_ControlsInactive, {
 				headName = p2.rootInstance.Name,
-				meshId = meshId,
-				controlList = table.concat(var1, ", ")
+				meshId = MeshId,
+				controlList = table.concat(Result3, ", ")
 			})
 		end
 	end

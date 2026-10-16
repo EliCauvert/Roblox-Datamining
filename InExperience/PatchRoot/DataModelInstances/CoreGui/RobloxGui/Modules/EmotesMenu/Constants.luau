@@ -1,5 +1,5 @@
-﻿local layouts = script.Parent.Layouts
-local t = {
+﻿local Layouts = script.Parent.Layouts
+local Constants = {
 	EmotesPerPage = 8,
 	ErrorDisplayTimeSeconds = 5,
 	FallbackLocale = "en-us",
@@ -84,34 +84,34 @@ local t = {
 	Colors = { White = Color3.new(1, 1, 1), Black = Color3.new(0, 0, 0) },
 	OffScreen = require(game:GetService("CorePackages").Packages.enumerate)("OffScreen", { "Top", "Bottom" })
 }
-t.Layouts = {
-	[t.Layout.Small] = require(layouts.Small),
-	[t.Layout.Large] = require(layouts.Large),
-	[t.Layout.TenFoot] = require(layouts.TenFoot)
+Constants.Layouts = {
+	[Constants.Layout.Small] = require(Layouts.Small),
+	[Constants.Layout.Large] = require(Layouts.Large),
+	[Constants.Layout.TenFoot] = require(Layouts.TenFoot)
 }
 
-local function makeTableConstant(p1, p2)
+local function makeTableConstant(p1, p2) --[[ Line: 168 ]]
 	setmetatable(p2, {
-		__newindex = function() end,
-		__index = function(_, p3)
-			-- upvalues: p1 (ref)
+		__newindex = function() --[[ Line: 170 ]] end,
+		__index = function(_, p3) --[[ Line: 172 ]]
+			-- upvalues: p1 (copy)
 			error(p1 .. " table has no index: " .. tostring(p3), 2)
 		end
 	})
 end
 
-for i, v in pairs({
-	Constants = t,
-	["Constants.Colors"] = t.Colors,
-	["Constants.Layout"] = t.Layout,
-	["Constants.LeaveMenuNoSinkInputs"] = t.LeaveMenuNoSinkInputs,
-	["Constants.LocalizationKeys"] = t.LocalizationKeys,
-	["Constants.LocalizationKeys.ErrorMessages"] = t.LocalizationKeys.ErrorMessages,
-	["Constants.Layouts"] = t.Layouts,
-	["Constants.Layouts.Small"] = t.Layouts[t.Layout.Small],
-	["Constants.Layouts.Large"] = t.Layouts[t.Layout.Large],
-	["Constants.Layouts.TenFoot"] = t.Layouts[t.Layout.TenFoot]
+for i, value in pairs({
+	Constants = Constants,
+	["Constants.Colors"] = Constants.Colors,
+	["Constants.Layout"] = Constants.Layout,
+	["Constants.LeaveMenuNoSinkInputs"] = Constants.LeaveMenuNoSinkInputs,
+	["Constants.LocalizationKeys"] = Constants.LocalizationKeys,
+	["Constants.LocalizationKeys.ErrorMessages"] = Constants.LocalizationKeys.ErrorMessages,
+	["Constants.Layouts"] = Constants.Layouts,
+	["Constants.Layouts.Small"] = Constants.Layouts[Constants.Layout.Small],
+	["Constants.Layouts.Large"] = Constants.Layouts[Constants.Layout.Large],
+	["Constants.Layouts.TenFoot"] = Constants.Layouts[Constants.Layout.TenFoot]
 }) do
-	makeTableConstant(i, v)
+	makeTableConstant(i, value)
 end
-return t
+return Constants

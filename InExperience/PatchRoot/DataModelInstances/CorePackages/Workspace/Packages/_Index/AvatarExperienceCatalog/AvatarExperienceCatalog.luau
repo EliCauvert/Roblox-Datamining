@@ -1,38 +1,20 @@
-﻿local getWidgetListInfoModule = require(script.Api.GetWidgetListInfo.getWidgetListInfo)
-local getWidgetListInfoSearchModule = require(script.Api.GetWidgetListInfo.getWidgetListInfoSearch)
-local getLooksFromWidgetListInfoModule = require(script.Api.GetWidgetListInfo.getLooksFromWidgetListInfo)
-local getCatalogV2SearchItemDetailsModule = require(script.Api.GetCatalogV2SearchItemDetails.getCatalogV2SearchItemDetails)
-local catalogSearchAXPagesModule = require(script.Api.GetCatalogV2SearchItemDetails.Types.CatalogSearchAXPages)
-local _ = require(script.Api.GetCatalogV2SearchItemDetails.Types.AXPagesTypes)
-local trackSponsoredItemClickModule = require(script.Api.TrackSponsoredItemClick.trackSponsoredItemClick)
+﻿local _ = require(script.Api.GetCatalogV2SearchItemDetails.Types.AXPagesTypes)
 local _ = require(script.Models.WidgetListInfo)
 local _ = require(script.Models.CatalogV2SearchItemDetails)
 local _ = require(script.Components.ResultsList.WidgetListInfoViewModel)
-local useWidgetListInfoViewModelModule = require(script.Components.ResultsList.useWidgetListInfoViewModel)
-local widgetListBreakPointEnumModule = require(script.Components.ResultsList.WidgetListBreakPointEnum)
-local widgetListBreakPointThresholdsModule = require(script.Components.ResultsList.WidgetListBreakPointThresholds)
-local widgetListBreakPointSizeMapModule = require(script.Components.ResultsList.WidgetListBreakPointSizeMap)
-local widgetIxpLayerMapModule = require(script.Utils.WidgetIxpLayerMap)
-local getFooterVisibilityFromItemFootersModule = require(script.Utils.getFooterVisibilityFromItemFooters)
-local purchaseItemsSuccessModule = require(script.State.Actions.PurchaseItemsSuccess)
-local fetchAssetOrBundleInfoBatchedSuccessModule = require(script.State.Actions.FetchAssetOrBundleInfoBatchedSuccess)
-local fetchCollectibleItemDataBatchedSuccessModule = require(script.State.Actions.FetchCollectibleItemDataBatchedSuccess)
-local setSelectedTimedOptionModule = require(script.State.Actions.SetSelectedTimedOption)
-local getCatalogCategoriesModule = require(script.Api.GetCatalogCategories.getCatalogCategories)
-local getFaeStatus = require(script.Api.GetFaeStatus.getFaeStatus).getFaeStatus
 local _ = require(script.Api.GetFaeStatus.normalizeFaeStatus)
 local _ = require(script.Stores)
 
 return {
 	Api = {
-		getWidgetListInfo = getWidgetListInfoModule,
-		getWidgetListInfoSearch = getWidgetListInfoSearchModule,
-		getLooksFromWidgetListInfo = getLooksFromWidgetListInfoModule,
-		getCatalogV2SearchItemDetails = getCatalogV2SearchItemDetailsModule.getCatalogV2SearchItemDetails,
-		CatalogSearchAXPages = catalogSearchAXPagesModule,
-		getCatalogCategories = getCatalogCategoriesModule.getCatalogCategories,
-		getFaeStatus = getFaeStatus,
-		trackSponsoredItemClick = trackSponsoredItemClickModule
+		getWidgetListInfo = require(script.Api.GetWidgetListInfo.getWidgetListInfo),
+		getWidgetListInfoSearch = require(script.Api.GetWidgetListInfo.getWidgetListInfoSearch),
+		getLooksFromWidgetListInfo = require(script.Api.GetWidgetListInfo.getLooksFromWidgetListInfo),
+		getCatalogV2SearchItemDetails = require(script.Api.GetCatalogV2SearchItemDetails.getCatalogV2SearchItemDetails).getCatalogV2SearchItemDetails,
+		CatalogSearchAXPages = require(script.Api.GetCatalogV2SearchItemDetails.Types.CatalogSearchAXPages),
+		getCatalogCategories = require(script.Api.GetCatalogCategories.getCatalogCategories).getCatalogCategories,
+		getFaeStatus = require(script.Api.GetFaeStatus.getFaeStatus).getFaeStatus,
+		trackSponsoredItemClick = require(script.Api.TrackSponsoredItemClick.trackSponsoredItemClick)
 	},
 	Components = {
 		CatalogSduiFeedEntryPoint = require(script.Sdui.CatalogSduiFeedEntryPoint),
@@ -57,10 +39,10 @@ return {
 			OwnedActionBar = require(script.Components.Checkout.OwnedActionBar)
 		},
 		ResultsList = {
-			useWidgetListInfoViewModel = useWidgetListInfoViewModelModule,
-			WidgetListBreakPointEnum = widgetListBreakPointEnumModule,
-			WidgetListBreakPointThresholds = widgetListBreakPointThresholdsModule,
-			WidgetListBreakPointSizeMap = widgetListBreakPointSizeMapModule,
+			useWidgetListInfoViewModel = require(script.Components.ResultsList.useWidgetListInfoViewModel),
+			WidgetListBreakPointEnum = require(script.Components.ResultsList.WidgetListBreakPointEnum),
+			WidgetListBreakPointThresholds = require(script.Components.ResultsList.WidgetListBreakPointThresholds),
+			WidgetListBreakPointSizeMap = require(script.Components.ResultsList.WidgetListBreakPointSizeMap),
 			getOrderedWidgets = require(script.Components.ResultsList.getOrderedWidgets)
 		},
 		WidgetPanelContainer = require(script.Components.WidgetPanel.WidgetPanelContainer),
@@ -92,11 +74,12 @@ return {
 		useHydrateCatalogSortOnDemandEffect = require(script.Components.Hooks.useHydrateCatalogSortOnDemandEffect),
 		useHydrateCatalogItemGridOnDemandEffect = require(script.Components.Hooks.useHydrateCatalogItemGridOnDemandEffect),
 		useShouldFetchCartPricingForPurchasePrompt = require(script.Hooks.useShouldFetchCartPricingForPurchasePrompt),
-		useShouldFetchCartPricingForLookPurchasePrompt = require(script.Hooks.useShouldFetchCartPricingForLookPurchasePrompt)
+		useShouldFetchCartPricingForLookPurchasePrompt = require(script.Hooks.useShouldFetchCartPricingForLookPurchasePrompt),
+		useOnRequestImpressionsSignal = require(script.Components.Hooks.useOnRequestImpressionsSignal)
 	},
 	Utils = {
-		WidgetIxpLayerMap = widgetIxpLayerMapModule,
-		getFooterVisibilityFromItemFooters = getFooterVisibilityFromItemFootersModule,
+		WidgetIxpLayerMap = require(script.Utils.WidgetIxpLayerMap),
+		getFooterVisibilityFromItemFooters = require(script.Utils.getFooterVisibilityFromItemFooters),
 		resolveWidgetListItemBottomPaddingPx = require(script.Utils.resolveWidgetListItemBottomPaddingPx),
 		getBreakpointFromRowWidth = require(script.Utils.getBreakpointFromRowWidth),
 		getUIScaleFromTokens = require(script.Utils.getUIScaleFromTokens),
@@ -118,15 +101,16 @@ return {
 	Stores = {
 		getCatalogStores = require(script.Stores),
 		getAXMarketplaceWidgetStore = require(script.Stores.GetAXMarketplaceWidgetStore),
+		getAvatarsTabSearchInfoStore = require(script.Stores.GetAvatarsTabSearchInfoStore),
 		getCatalogPageRequestIdStore = require(script.Stores.GetCatalogPageRequestIdStore),
 		GetFaeFeatureAccessStore = require(script.Stores.GetFaeFeatureAccessStore)
 	},
 	State = {
 		Actions = {
-			PurchaseItemsSuccess = purchaseItemsSuccessModule,
-			FetchAssetOrBundleInfoBatchedSuccess = fetchAssetOrBundleInfoBatchedSuccessModule,
-			FetchCollectibleItemDataBatchedSuccess = fetchCollectibleItemDataBatchedSuccessModule,
-			SetSelectedTimedOption = setSelectedTimedOptionModule
+			PurchaseItemsSuccess = require(script.State.Actions.PurchaseItemsSuccess),
+			FetchAssetOrBundleInfoBatchedSuccess = require(script.State.Actions.FetchAssetOrBundleInfoBatchedSuccess),
+			FetchCollectibleItemDataBatchedSuccess = require(script.State.Actions.FetchCollectibleItemDataBatchedSuccess),
+			SetSelectedTimedOption = require(script.State.Actions.SetSelectedTimedOption)
 		},
 		Selectors = {
 			selectHydratedWidgetData = require(script.State.Selectors.selectHydratedWidgetData)

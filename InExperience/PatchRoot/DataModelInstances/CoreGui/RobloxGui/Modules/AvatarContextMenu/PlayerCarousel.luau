@@ -1,160 +1,162 @@
-﻿local t = {}
-t.__index = t
-local guiService = game:GetService("GuiService")
-local coreGuiService = game:GetService("CoreGui")
-local tweenService = game:GetService("TweenService")
-local userInputService = game:GetService("UserInputService")
-local color = Color3.fromRGB(0, 162, 255)
-local color_1 = Color3.fromRGB(0, 0, 0)
-local avatarContextMenu = coreGuiService:WaitForChild("RobloxGui"):WaitForChild("Modules"):WaitForChild("AvatarContextMenu")
-local var1 = nil
-local var2 = nil
-local var3 = nil
-local t_1 = {}
-local t_2 = {}
+﻿local PlayerCarouselModule = {}
+PlayerCarouselModule.__index = PlayerCarouselModule
+local GuiService = game:GetService("GuiService")
+local TweenService = game:GetService("TweenService")
+local UserInputService = game:GetService("UserInputService")
+local _Color3 = Color3.fromRGB(0, 162, 255)
+local _Color3_1 = Color3.fromRGB(0, 0, 0)
+local AvatarContextMenu = game:GetService("CoreGui"):WaitForChild("RobloxGui"):WaitForChild("Modules"):WaitForChild("AvatarContextMenu")
+local Frame = nil
+local PageLayout = nil
+local BindableEvent = nil
+local Keys = {}
+local ImageButtons = {}
 
-local function getSortedCarouselButtons()
-	-- upvalues: var1 (write)
+local function getSortedCarouselButtons() --[[ Line: 34 ]]
+	-- upvalues: Frame (ref)
 	local t = {}
-	local t_1 = {}
+	local List = {}
 	
-	for i, v in ipairs(var1:GetChildren()) do
-		if v:IsA("GuiObject") and v.Name ~= "_CarouselDivider" then
-			table.insert(t_1, v)
-			t[v] = i
+	for i, Gui in ipairs(Frame:GetChildren()) do
+		if Gui:IsA("GuiObject") and Gui.Name ~= "_CarouselDivider" then
+			table.insert(List, Gui)
+			t[Gui] = i
 		end
 	end
-	table.sort(t_1, function(p1, p2)
-		-- upvalues: t (ref)
-		return if p1.LayoutOrder == p2.LayoutOrder then t[p1] < t[p2] else p1.LayoutOrder < p2.LayoutOrder
+	table.sort(List, function(A: Frame, B: Frame): boolean --[[ Line: 43 ]]
+		-- upvalues: t (copy)
+		return if A.LayoutOrder == B.LayoutOrder then t[A] < t[B] else A.LayoutOrder < B.LayoutOrder
 	end)
 	
-	return t_1
+	return List
 end
 
-local function CreateMenuCarousel(p1)
-	-- upvalues: var1 (write), var2 (write), var3 (write), getSortedCarouselButtons (ref), color_1 (ref), guiService (ref), color (ref), t_1 (write), userInputService (ref)
-	local playerCarousel = Instance.new("Frame")
-	playerCarousel.Name = "PlayerCarousel"
-	playerCarousel.AnchorPoint = Vector2.new(0.5, 0.5)
-	playerCarousel.BackgroundTransparency = 1
-	playerCarousel.Position = UDim2.new(0.5, 0, 0.5, 0)
-	playerCarousel.Size = UDim2.new(1, 0, 0.28, 0)
-	playerCarousel.ClipsDescendants = true
-	local innerFrame = Instance.new("Frame")
-	innerFrame.Name = "InnerFrame"
-	innerFrame.AnchorPoint = Vector2.new(0.5, 0.5)
-	innerFrame.BackgroundTransparency = 1
-	innerFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
-	innerFrame.Size = UDim2.new(0.8, 0, 1, 0)
-	innerFrame.ClipsDescendants = true
-	innerFrame.Active = true
-	innerFrame.Parent = playerCarousel
-	var1 = Instance.new("Frame")
-	var1.Name = "SelectedPlayer"
-	var1.AnchorPoint = Vector2.new(0.5, 0.5)
-	var1.BackgroundTransparency = 1
-	var1.Position = UDim2.new(0.5, 0, 0.5, 0)
-	var1.Size = UDim2.new(0, 100, 1, -10)
-	var1.Parent = innerFrame
-	var2 = Instance.new("UIPageLayout")
-	var2.EasingDirection = Enum.EasingDirection.Out
-	var2.EasingStyle = Enum.EasingStyle.Quad
-	var2.Padding = UDim.new(0, 5)
-	var2.TweenTime = 0.25
-	var2.HorizontalAlignment = Enum.HorizontalAlignment.Center
-	var2.VerticalAlignment = Enum.VerticalAlignment.Center
-	var2.TouchInputEnabled = false
-	var2.Circular = true
-	var2.SortOrder = Enum.SortOrder.LayoutOrder
-	local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
-	UIAspectRatioConstraint.DominantAxis = Enum.DominantAxis.Height
-	UIAspectRatioConstraint.Parent = var1
-	var3 = Instance.new("BindableEvent")
-	var3.Name = "PlayerChanged"
-	local var4 = nil
-	var2:GetPropertyChangedSignal("CurrentPage"):Connect(function()
-		-- upvalues: var2 (copy), getSortedCarouselButtons (copy), var4 (write), color_1 (copy), guiService (copy), color (copy), var3 (copy), t_1 (copy)
-		if var2.CurrentPage then
-			if var2.CurrentPage.Name ~= "_CarouselDivider" then
-				var2.CurrentPage.BackgroundColor3 = color_1
-				var4 = var2.CurrentPage
-			elseif var4 == getSortedCarouselButtons()[1] then
-				var2:Previous()
+local function CreateMenuCarousel(p1) --[[ Line: 52 ]]
+	-- upvalues: Frame (ref), PageLayout (ref), BindableEvent (ref), getSortedCarouselButtons (copy), _Color3_1 (copy), GuiService (copy), _Color3 (copy), Keys (ref), UserInputService (copy)
+	local PlayerCarousel = Instance.new("Frame")
+	PlayerCarousel.Name = "PlayerCarousel"
+	PlayerCarousel.AnchorPoint = Vector2.new(0.5, 0.5)
+	PlayerCarousel.BackgroundTransparency = 1
+	PlayerCarousel.Position = UDim2.new(0.5, 0, 0.5, 0)
+	PlayerCarousel.Size = UDim2.new(1, 0, 0.28, 0)
+	PlayerCarousel.ClipsDescendants = true
+	local InnerFrame = Instance.new("Frame")
+	InnerFrame.Name = "InnerFrame"
+	InnerFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+	InnerFrame.BackgroundTransparency = 1
+	InnerFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
+	InnerFrame.Size = UDim2.new(0.8, 0, 1, 0)
+	InnerFrame.ClipsDescendants = true
+	InnerFrame.Active = true
+	InnerFrame.Parent = PlayerCarousel
+	Frame = Instance.new("Frame")
+	Frame.Name = "SelectedPlayer"
+	Frame.AnchorPoint = Vector2.new(0.5, 0.5)
+	Frame.BackgroundTransparency = 1
+	Frame.Position = UDim2.new(0.5, 0, 0.5, 0)
+	Frame.Size = UDim2.new(0, 100, 1, -10)
+	Frame.Parent = InnerFrame
+	PageLayout = Instance.new("UIPageLayout")
+	PageLayout.EasingDirection = Enum.EasingDirection.Out
+	PageLayout.EasingStyle = Enum.EasingStyle.Quad
+	PageLayout.Padding = UDim.new(0, 5)
+	PageLayout.TweenTime = 0.25
+	PageLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+	PageLayout.VerticalAlignment = Enum.VerticalAlignment.Center
+	PageLayout.TouchInputEnabled = false
+	PageLayout.Circular = true
+	PageLayout.SortOrder = Enum.SortOrder.LayoutOrder
+	local AspectRatio = Instance.new("UIAspectRatioConstraint")
+	AspectRatio.DominantAxis = Enum.DominantAxis.Height
+	AspectRatio.Parent = Frame
+	BindableEvent = Instance.new("BindableEvent")
+	BindableEvent.Name = "PlayerChanged"
+	local CurrentPage = nil
+	PageLayout:GetPropertyChangedSignal("CurrentPage"):Connect(function() --[[ Line: 98 ]]
+		-- upvalues: PageLayout (upval), getSortedCarouselButtons (upval), CurrentPage (ref), _Color3_1 (upval), GuiService (upval), _Color3 (upval), BindableEvent (upval), Keys (upval)
+		if PageLayout.CurrentPage then
+			if PageLayout.CurrentPage.Name == "_CarouselDivider" then
+				if CurrentPage == getSortedCarouselButtons()[1] then
+					PageLayout:Previous()
+				else
+					PageLayout:Next()
+				end
 			else
-				var2:Next()
+				PageLayout.CurrentPage.BackgroundColor3 = _Color3_1
+				CurrentPage = PageLayout.CurrentPage
 			end
 		end
-		if guiService.SelectedCoreObject and guiService.SelectedCoreObject.Parent == var2.Parent then
-			guiService.SelectedCoreObject.BackgroundColor3 = color
+		if GuiService.SelectedCoreObject and GuiService.SelectedCoreObject.Parent == PageLayout.Parent then
+			GuiService.SelectedCoreObject.BackgroundColor3 = _Color3
 		end
-		guiService.SelectedCoreObject = var2.CurrentPage
+		GuiService.SelectedCoreObject = PageLayout.CurrentPage
 		
-		if var2.CurrentPage then
-			var3:Fire(t_1[var2.CurrentPage])
+		if PageLayout.CurrentPage then
+			BindableEvent:Fire(Keys[PageLayout.CurrentPage])
 		end
 	end)
-	var2.Parent = var1
-	local nextButton = Instance.new("ImageButton")
-	nextButton.Name = "NextButton"
-	nextButton.Image = p1.ScrollRightImage
-	nextButton.BackgroundTransparency = 1
-	nextButton.AnchorPoint = Vector2.new(1, 0.5)
-	nextButton.Position = UDim2.new(1, -5, 0.5, 0)
-	nextButton.Size = UDim2.new(0.3, 0, 0.3, 0)
-	nextButton.Selectable = false
-	nextButton.Parent = playerCarousel
-	local UIAspectRatioConstraint_1 = Instance.new("UIAspectRatioConstraint")
-	UIAspectRatioConstraint_1.DominantAxis = Enum.DominantAxis.Width
-	UIAspectRatioConstraint_1.Parent = nextButton
-	local prevButton = nextButton:Clone()
-	prevButton.Name = "PrevButton"
+	PageLayout.Parent = Frame
+	local NextButton = Instance.new("ImageButton")
+	NextButton.Name = "NextButton"
+	NextButton.Image = p1.ScrollRightImage
+	NextButton.BackgroundTransparency = 1
+	NextButton.AnchorPoint = Vector2.new(1, 0.5)
+	NextButton.Position = UDim2.new(1, -5, 0.5, 0)
+	NextButton.Size = UDim2.new(0.3, 0, 0.3, 0)
+	NextButton.Selectable = false
+	NextButton.Parent = PlayerCarousel
+	local AspectRatio1 = Instance.new("UIAspectRatioConstraint")
+	AspectRatio1.DominantAxis = Enum.DominantAxis.Width
+	AspectRatio1.Parent = NextButton
+	local PrevButton = NextButton:Clone()
+	PrevButton.Name = "PrevButton"
 	
 	if p1.ScrollLeftImage == "" then
-		prevButton.Rotation = 180
+		PrevButton.Rotation = 180
 	else
-		prevButton.Image = p1.ScrollLeftImage
+		PrevButton.Image = p1.ScrollLeftImage
 	end
-	prevButton.AnchorPoint = Vector2.new(0, 0.5)
-	prevButton.Position = UDim2.new(0, 5, 0.5, 0)
-	prevButton.Selectable = false
-	prevButton.Parent = playerCarousel
+	PrevButton.AnchorPoint = Vector2.new(0, 0.5)
+	PrevButton.Position = UDim2.new(0, 5, 0.5, 0)
+	PrevButton.Selectable = false
+	PrevButton.Parent = PlayerCarousel
 	
-	local function _(p2)
-		-- upvalues: var2 (copy)
+	local function _(p2) --[[ Line: 146 | Named "moveChangePage" ]]
+		-- upvalues: PageLayout (upval)
 		if p2 then
-			var2:Next()
+			PageLayout:Next()
 			
 			return
+		else
+			PageLayout:Previous()
 		end
-		var2:Previous()
 	end
 	
-	nextButton.MouseButton1Click:Connect(function()
-		-- upvalues: var2 (copy)
-		var2:Next()
+	NextButton.MouseButton1Click:Connect(function() --[[ Line: 154 ]]
+		-- upvalues: PageLayout (upval)
+		PageLayout:Next()
 	end)
-	prevButton.MouseButton1Click:Connect(function()
-		-- upvalues: var2 (copy)
-		var2:Previous()
+	PrevButton.MouseButton1Click:Connect(function() --[[ Line: 155 ]]
+		-- upvalues: PageLayout (upval)
+		PageLayout:Previous()
 	end)
 	
-	local function checkButtonVisibility()
-		-- upvalues: userInputService (copy), prevButton (ref), var1 (copy), nextButton (ref)
-		local var5 = userInputService:GetLastInputType() == Enum.UserInputType.Touch
-		prevButton.Visible = not var5 and #var1:GetChildren() > 3
-		nextButton.Visible = not var5 and #var1:GetChildren() > 3
+	local function checkButtonVisibility() --[[ Line: 159 ]]
+		-- upvalues: UserInputService (upval), PrevButton (copy), Frame (upval), NextButton (copy)
+		local IsLastInputTypeMatch = UserInputService:GetLastInputType() == Enum.UserInputType.Touch
+		PrevButton.Visible = not IsLastInputTypeMatch and #Frame:GetChildren() > 3
+		NextButton.Visible = not IsLastInputTypeMatch and #Frame:GetChildren() > 3
 	end
 	
-	local var5 = userInputService:GetLastInputType() == Enum.UserInputType.Touch
-	prevButton.Visible = not var5 and #var1:GetChildren() > 3
-	nextButton.Visible = not var5 and #var1:GetChildren() > 3
-	userInputService.LastInputTypeChanged:Connect(checkButtonVisibility)
+	local IsLastInputTypeMatch = UserInputService:GetLastInputType() == Enum.UserInputType.Touch
+	PrevButton.Visible = not IsLastInputTypeMatch and #Frame:GetChildren() > 3
+	NextButton.Visible = not IsLastInputTypeMatch and #Frame:GetChildren() > 3
+	UserInputService.LastInputTypeChanged:Connect(checkButtonVisibility)
 	
-	return playerCarousel
+	return PlayerCarousel
 end
 
-function t:UpdateGuiTheme(p1)
+function PlayerCarouselModule:UpdateGuiTheme(p1) --[[ Line: 170 ]]
 	self.rbxGui.NextButton.Image = p1.ScrollRightImage
 	
 	if p1.ScrollLeftImage == "" then
@@ -162,186 +164,191 @@ function t:UpdateGuiTheme(p1)
 		self.rbxGui.PrevButton.Rotation = 180
 		
 		return
+	else
+		self.rbxGui.PrevButton.Image = p1.ScrollLeftImage
 	end
-	self.rbxGui.PrevButton.Image = p1.ScrollLeftImage
 end
 
-function t.FadeTowardsEdges(_)
-	-- upvalues: var2 (write), getSortedCarouselButtons (ref)
-	if not var2.CurrentPage then return end
-	local var4 = getSortedCarouselButtons()
-	local var5 = 0
+function PlayerCarouselModule:FadeTowardsEdges() --[[ Line: 181 ]]
+	-- upvalues: PageLayout (ref), getSortedCarouselButtons (copy)
+	if not PageLayout.CurrentPage then return end
+	local SortedCarouselButtons = getSortedCarouselButtons()
+	local v1 = 0
 	
-	for i, v in ipairs(var4) do
-		if v == var2.CurrentPage then
-			var5 = i
+	for i, sortedCarouselButton in ipairs(SortedCarouselButtons) do
+		if sortedCarouselButton == PageLayout.CurrentPage then
+			v1 = i
 			break
 		end
 	end
-	for i_1, v in ipairs(var4) do
-		local minValue = math.min((var5 - i_1) % #var4, (i_1 - var5) % #var4)
+	for i1, sortedCarouselButton1 in ipairs(SortedCarouselButtons) do
+		local Smallest = math.min((v1 - i1) % #SortedCarouselButtons, (i1 - v1) % #SortedCarouselButtons)
 		
-		if minValue >= 2 then
-			v.ImageTransparency = 0.7
-		elseif minValue == 1 then
-			v.ImageTransparency = 0.4
+		if Smallest >= 2 then
+			sortedCarouselButton1.ImageTransparency = 0.7
+		elseif Smallest == 1 then
+			sortedCarouselButton1.ImageTransparency = 0.4
 		else
-			v.ImageTransparency = 0
+			sortedCarouselButton1.ImageTransparency = 0
 		end
 	end
 end
 
-function t.AddCarouselDivider(_)
-	-- upvalues: var1 (write)
-	local carouselDivider = var1:FindFirstChild("_CarouselDivider")
+function PlayerCarouselModule:AddCarouselDivider() --[[ Line: 209 ]]
+	-- upvalues: Frame (ref)
+	local CarouselDivider = Frame:FindFirstChild("_CarouselDivider")
 	
-	if carouselDivider then
-		carouselDivider:Destroy()
+	if CarouselDivider then
+		CarouselDivider:Destroy()
 	end
-	if #var1:GetChildren() - 1 < 5 then
+	if #Frame:GetChildren() - 1 >= 5 then
+		local _CarouselDivider = Instance.new("Frame")
+		_CarouselDivider.Name = "_CarouselDivider"
+		_CarouselDivider.Size = UDim2.new(1, 0, 1, 0)
+		_CarouselDivider.BackgroundTransparency = 1
+		_CarouselDivider.Parent = Frame
+		_CarouselDivider.LayoutOrder = 1000000
+		local line = Instance.new("Frame")
+		line.Name = "line"
+		line.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+		line.BorderSizePixel = 0
+		line.Position = UDim2.new(0.25, 0, 0, -3)
+		line.Size = UDim2.new(0, 2, 1, 6)
+		line.Parent = _CarouselDivider
+		local LineClone = line:Clone()
+		LineClone.Position = UDim2.new(0.5, 0, 0, -3)
+		LineClone.Parent = _CarouselDivider
+		local LineClone1 = line:Clone()
+		LineClone1.Position = UDim2.new(0.75, 0, 0, -3)
+		LineClone1.Parent = _CarouselDivider
+		
 		return
 	end
-	local carouselDivider_1 = Instance.new("Frame")
-	carouselDivider_1.Name = "_CarouselDivider"
-	carouselDivider_1.Size = UDim2.new(1, 0, 1, 0)
-	carouselDivider_1.BackgroundTransparency = 1
-	carouselDivider_1.Parent = var1
-	carouselDivider_1.LayoutOrder = 1000000
-	local line = Instance.new("Frame")
-	line.Name = "line"
-	line.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-	line.BorderSizePixel = 0
-	line.Position = UDim2.new(0.25, 0, 0, -3)
-	line.Size = UDim2.new(0, 2, 1, 6)
-	line.Parent = carouselDivider_1
-	local var6 = line:Clone()
-	var6.Position = UDim2.new(0.5, 0, 0, -3)
-	var6.Parent = carouselDivider_1
-	local var7 = line:Clone()
-	var7.Position = UDim2.new(0.75, 0, 0, -3)
-	var7.Parent = carouselDivider_1
 end
 
-function t:RemovePlayerEntry(p1)
-	-- upvalues: t_2 (write), t_1 (write), var2 (write)
-	local var6 = t_2[p1]
+function PlayerCarouselModule:RemovePlayerEntry(Key) --[[ Line: 244 ]]
+	-- upvalues: ImageButtons (ref), Keys (ref), PageLayout (ref)
+	local ImageButton = ImageButtons[Key]
 	
-	if var6 then
-		t_2[p1] = nil
-		t_1[var6] = nil
-		var6:Destroy()
+	if ImageButton then
+		ImageButtons[Key] = nil
+		Keys[ImageButton] = nil
+		ImageButton:Destroy()
 		
-		if var2 then
-			var2:ApplyLayout()
+		if PageLayout then
+			PageLayout:ApplyLayout()
 		end
 		self:FadeTowardsEdges()
 	end
 end
 
-function t.ClearPlayerEntries(_)
-	-- upvalues: t_1 (write), t_2 (write)
-	for i in pairs(t_1) do
-		i:Destroy()
+function PlayerCarouselModule:ClearPlayerEntries() --[[ Line: 259 ]]
+	-- upvalues: Keys (ref), ImageButtons (ref)
+	for key in pairs(Keys) do
+		key:Destroy()
 	end
-	t_1 = {}
-	t_2 = {}
+	Keys = {}
+	ImageButtons = {}
 end
 
-function t.CreatePlayerEntry(_, p1, p2)
-	-- upvalues: t_2 (write), color_1 (ref), color (ref), tweenService (ref), t_1 (write), var2 (write), var1 (write), avatarContextMenu (ref), guiService (ref)
-	local var6 = t_2[p1]
+function PlayerCarouselModule:CreatePlayerEntry(Key, LayoutOrder) --[[ Line: 268 ]]
+	-- upvalues: ImageButtons (ref), _Color3_1 (copy), _Color3 (copy), TweenService (copy), Keys (ref), PageLayout (ref), Frame (ref), AvatarContextMenu (copy), GuiService (copy)
+	local ImageButton = ImageButtons[Key]
 	
-	if var6 then
-		var6.LayoutOrder = p2
+	if ImageButton then
+		ImageButton.LayoutOrder = LayoutOrder
 		
 		return
-	end
-	local imageButton = Instance.new("ImageButton")
-	imageButton.Name = p1.Name
-	imageButton.BorderSizePixel = 0
-	imageButton.LayoutOrder = p2
-	imageButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-	imageButton.BackgroundTransparency = 0
-	imageButton.Size = UDim2.new(1, 0, 1, 0)
-	imageButton.SelectionLost:connect(function()
-		-- upvalues: imageButton (ref), color_1 (copy)
-		imageButton.BackgroundColor3 = color_1
-	end)
-	imageButton.SelectionGained:connect(function()
-		-- upvalues: imageButton (ref), color (copy)
-		imageButton.BackgroundColor3 = color
-	end)
-	local _ = nil
-	local var7 = tweenService:Create(imageButton, TweenInfo.new(1, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut, -1, true), { BackgroundColor3 = Color3.fromRGB(255, 255, 255) })
-	var7:Play()
-	t_1[imageButton] = p1
-	t_2[p1] = imageButton
-	imageButton.MouseButton1Click:Connect(function()
-		-- upvalues: var2 (copy), imageButton (ref)
-		var2:JumpTo(imageButton)
-	end)
-	imageButton.Parent = var1
-	spawn(function()
-		-- upvalues: avatarContextMenu (copy), imageButton (ref), p1 (ref), var7 (write), guiService (copy), color (copy), color_1 (copy)
-		imageButton.Image = require(avatarContextMenu:WaitForChild("ContextMenuUtil")):GetHeadshotForPlayer(p1)
-		var7:Cancel()
-		var7 = nil
-		
-		if imageButton == guiService.SelectedCoreObject then
-			imageButton.BackgroundColor3 = color
+	else
+		local ImageButton1 = Instance.new("ImageButton")
+		ImageButton1.Name = Key.Name
+		ImageButton1.BorderSizePixel = 0
+		ImageButton1.LayoutOrder = LayoutOrder
+		ImageButton1.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+		ImageButton1.BackgroundTransparency = 0
+		ImageButton1.Size = UDim2.new(1, 0, 1, 0)
+		ImageButton1.SelectionLost:connect(function() --[[ Line: 283 ]]
+			-- upvalues: ImageButton1 (copy), _Color3_1 (upval)
+			ImageButton1.BackgroundColor3 = _Color3_1
+		end)
+		ImageButton1.SelectionGained:connect(function() --[[ Line: 284 ]]
+			-- upvalues: ImageButton1 (copy), _Color3 (upval)
+			ImageButton1.BackgroundColor3 = _Color3
+		end)
+		local Tween = nil
+		Tween = TweenService:Create(ImageButton1, TweenInfo.new(1, Enum.EasingStyle.Quad, Enum.EasingDirection.InOut, -1, true), { BackgroundColor3 = Color3.fromRGB(255, 255, 255) })
+		Tween:Play()
+		Keys[ImageButton1] = Key
+		ImageButtons[Key] = ImageButton1
+		ImageButton1.MouseButton1Click:Connect(function() --[[ Line: 298 ]]
+			-- upvalues: PageLayout (upval), ImageButton1 (copy)
+			PageLayout:JumpTo(ImageButton1)
+		end)
+		ImageButton1.Parent = Frame
+		spawn(function() --[[ Line: 304 ]]
+			-- upvalues: AvatarContextMenu (upval), ImageButton1 (copy), Key (copy), Tween (ref), GuiService (upval), _Color3 (upval), _Color3_1 (upval)
+			ImageButton1.Image = require(AvatarContextMenu:WaitForChild("ContextMenuUtil")):GetHeadshotForPlayer(Key)
+			Tween:Cancel()
+			Tween = nil
 			
-			return
-		end
-		imageButton.BackgroundColor3 = color_1
-	end)
+			if ImageButton1 == GuiService.SelectedCoreObject then
+				ImageButton1.BackgroundColor3 = _Color3
+				
+				return
+			else
+				ImageButton1.BackgroundColor3 = _Color3_1
+			end
+		end)
+	end
 end
 
-function t:SwitchToPlayerEntry(p1, p2)
-	-- upvalues: t_2 (write), var2 (write)
+function PlayerCarouselModule:SwitchToPlayerEntry(p1, p2) --[[ Line: 317 ]]
+	-- upvalues: ImageButtons (ref), PageLayout (ref)
 	if not p1 then return end
-	local var6 = t_2[p1]
+	local ImageButton = ImageButtons[p1]
 	
-	if not var6 then
+	if not ImageButton then
 		self:CreatePlayerEntry(p1, 0)
-		var6 = t_2[p1]
+		ImageButton = ImageButtons[p1]
 	end
 	if p2 then
-		var2.TweenTime = 0
+		PageLayout.TweenTime = 0
 	end
-	var2:JumpTo(var6)
-	spawn(function()
-		-- upvalues: var2 (copy)
-		var2.TweenTime = 0.25
+	PageLayout:JumpTo(ImageButton)
+	spawn(function() --[[ Line: 330 ]]
+		-- upvalues: PageLayout (upval)
+		PageLayout.TweenTime = 0.25
 	end)
 end
 
-function t.OffsetPlayerEntry(_, p1)
-	-- upvalues: var2 (write)
+function PlayerCarouselModule:OffsetPlayerEntry(p1: number) --[[ Line: 335 ]]
+	-- upvalues: PageLayout (ref)
 	if p1 == 0 then return end
 	if p1 > 0 then
-		var2:Next()
+		PageLayout:Next()
 		
 		return
+	else
+		PageLayout:Previous()
 	end
-	var2:Previous()
 end
 
-function t.GetSelectedPlayer(_)
-	-- upvalues: t_1 (write), var2 (write)
-	return t_1[var2.CurrentPage]
+function PlayerCarouselModule:GetSelectedPlayer() --[[ Line: 345 ]]
+	-- upvalues: Keys (ref), PageLayout (ref)
+	return Keys[PageLayout.CurrentPage]
 end
 
-function t.new(p1)
-	-- upvalues: t (ref), CreateMenuCarousel (ref), var3 (write)
-	local tbl = setmetatable({}, t)
-	tbl.rbxGui = CreateMenuCarousel(p1)
-	tbl.PlayerChanged = var3.Event
-	var3.Event:Connect(function()
-		-- upvalues: tbl (ref)
-		tbl:FadeTowardsEdges()
+function PlayerCarouselModule.new(p1) --[[ Line: 349 ]]
+	-- upvalues: PlayerCarouselModule (copy), CreateMenuCarousel (copy), BindableEvent (ref)
+	local self = setmetatable({}, PlayerCarouselModule)
+	self.rbxGui = CreateMenuCarousel(p1)
+	self.PlayerChanged = BindableEvent.Event
+	BindableEvent.Event:Connect(function() --[[ Line: 355 ]]
+		-- upvalues: self (copy)
+		self:FadeTowardsEdges()
 	end)
 	
-	return tbl
+	return self
 end
 
-return t
+return PlayerCarouselModule

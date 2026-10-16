@@ -1,5 +1,7 @@
 ﻿return {
 	GenericError = "GenericError",
 	AlreadySubscribed = "AlreadySubscribed",
-	UnsupportedPlatform = "UnsupportedPlatform"
+	UnsupportedPlatform = "UnsupportedPlatform",
+	ReferralIneligible = "ReferralIneligible",
+	ReferralSelfReferral = "ReferralSelfReferral"
 }

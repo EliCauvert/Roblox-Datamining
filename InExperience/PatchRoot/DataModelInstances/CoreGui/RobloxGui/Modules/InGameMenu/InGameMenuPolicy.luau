@@ -1,40 +1,39 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local policyProvider = require(corePackagesService.Packages.InGameMenuDependencies).PolicyProvider
-local sharedFlags = corePackagesService.Workspace.Packages.SharedFlags
-local getFFlagUseVoiceExitBetaLanguage = require(sharedFlags).GetFFlagUseVoiceExitBetaLanguage
-local getFFlagGateEducationalPopupVisibilityViaGUAC = require(sharedFlags).GetFFlagGateEducationalPopupVisibilityViaGUAC
-local var1 = policyProvider.withGetPolicyImplementation(policyProvider.GetPolicyImplementations.MemStorageService("app-policy"))
-local getFIntEducationalPopupDisplayMaxCountModule = require(script.Parent.Parent.Flags.GetFIntEducationalPopupDisplayMaxCount)
-local isSubjectToDesktopPolicies = require(corePackagesService.Workspace.Packages.SharedFlags).isSubjectToDesktopPolicies
+﻿local CorePackages = game:GetService("CorePackages")
+local PolicyProvider = require(CorePackages.Packages.InGameMenuDependencies).PolicyProvider
+local GetFFlagGateEducationalPopupVisibilityViaGUACFunction = require(CorePackages.Workspace.Packages.SharedFlags).GetFFlagGateEducationalPopupVisibilityViaGUAC
+local WithGetPolicyImplementationResult = PolicyProvider.withGetPolicyImplementation((PolicyProvider.GetPolicyImplementations.MemStorageService("app-policy")))
+local GetFIntEducationalPopupDisplayMaxCountModule = require(script.Parent.Parent.Flags.GetFIntEducationalPopupDisplayMaxCount)
+local IsSubjectToDesktopPoliciesFunction = require(CorePackages.Workspace.Packages.SharedFlags).isSubjectToDesktopPolicies
 
-function var1.Mapper(p1)
-	-- upvalues: isSubjectToDesktopPolicies (ref), getFFlagGateEducationalPopupVisibilityViaGUAC (ref), getFIntEducationalPopupDisplayMaxCountModule (ref), getFFlagUseVoiceExitBetaLanguage (ref)
+function WithGetPolicyImplementationResult.Mapper(p1) --[[ Line: 15 ]]
+	-- upvalues: IsSubjectToDesktopPoliciesFunction (copy), GetFFlagGateEducationalPopupVisibilityViaGUACFunction (copy), GetFIntEducationalPopupDisplayMaxCountModule (copy)
 	return {
-		enableInGameHomeIcon = function()
-			-- upvalues: isSubjectToDesktopPolicies (copy)
-			return isSubjectToDesktopPolicies()
+		enableInGameHomeIcon = function() --[[ Line: 17 ]]
+			-- upvalues: IsSubjectToDesktopPoliciesFunction (upval)
+			return IsSubjectToDesktopPoliciesFunction()
 		end,
-		enableEducationalPopup = function()
-			-- upvalues: isSubjectToDesktopPolicies (copy), getFFlagGateEducationalPopupVisibilityViaGUAC (copy), p1 (ref)
-			return not (not isSubjectToDesktopPolicies() or not game:GetEngineFeature("NativeCloseIntercept")) and (if getFFlagGateEducationalPopupVisibilityViaGUAC() then p1.InExperienceCanViewEducationalPopup == nil or p1.InExperienceCanViewEducationalPopup else true)
+		enableEducationalPopup = function() --[[ Line: 21 ]]
+			-- upvalues: IsSubjectToDesktopPoliciesFunction (upval), GetFFlagGateEducationalPopupVisibilityViaGUACFunction (upval), p1 (copy)
+			local NativeCloseInterceptEngineFeature = game:GetEngineFeature("NativeCloseIntercept")
+			
+			return if IsSubjectToDesktopPoliciesFunction() and NativeCloseInterceptEngineFeature then not GetFFlagGateEducationalPopupVisibilityViaGUACFunction() or (p1.InExperienceCanViewEducationalPopup == nil or p1.InExperienceCanViewEducationalPopup) else false
 		end,
-		educationalPopupMaxDisplayCount = function()
-			-- upvalues: isSubjectToDesktopPolicies (copy), getFIntEducationalPopupDisplayMaxCountModule (copy)
-			return isSubjectToDesktopPolicies() and getFIntEducationalPopupDisplayMaxCountModule() or 0
+		educationalPopupMaxDisplayCount = function() --[[ Line: 34 ]]
+			-- upvalues: IsSubjectToDesktopPoliciesFunction (upval), GetFIntEducationalPopupDisplayMaxCountModule (upval)
+			return IsSubjectToDesktopPoliciesFunction() and GetFIntEducationalPopupDisplayMaxCountModule() or 0
 		end,
-		getGameInfoShowChatFeatures = function()
-			-- upvalues: getFFlagUseVoiceExitBetaLanguage (copy), p1 (ref)
-			return if getFFlagUseVoiceExitBetaLanguage() then p1.GameInfoShowChatFeatures or false else false
+		getGameInfoShowChatFeatures = function(): boolean --[[ Line: 38 ]]
+			return false
 		end,
-		enableFullscreenTitleBar = function()
-			-- upvalues: p1 (ref)
+		enableFullscreenTitleBar = function() --[[ Line: 42 ]]
+			-- upvalues: p1 (copy)
 			return p1.FullscreenTitleBarEnabled or false
 		end,
-		getDisplayCheckboxInVoiceConsent = function()
-			-- upvalues: p1 (ref)
+		getDisplayCheckboxInVoiceConsent = function() --[[ Line: 46 ]]
+			-- upvalues: p1 (copy)
 			return p1.DisplayCheckboxInVoiceConsent == nil or p1.DisplayCheckboxInVoiceConsent
 		end
 	}
 end
 
-return var1
+return WithGetPolicyImplementationResult

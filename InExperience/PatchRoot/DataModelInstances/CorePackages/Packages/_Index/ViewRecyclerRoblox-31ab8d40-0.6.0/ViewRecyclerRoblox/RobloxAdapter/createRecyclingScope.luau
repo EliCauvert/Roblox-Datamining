@@ -1,24 +1,24 @@
-﻿local viewRecyclerModule = require(script:FindFirstAncestor("ViewRecyclerRoblox").Parent.ViewRecycler)
+﻿local ViewRecyclerModule = require(script:FindFirstAncestor("ViewRecyclerRoblox").Parent.ViewRecycler)
 
 return {
-	create = function(p1)
-		-- upvalues: viewRecyclerModule (ref)
-		local itemViewAdapter = p1.itemViewAdapter
-		local maxPoolSize = p1.maxPoolSize
+	create = function(p1) --[[ Line: 19 ]]
+		-- upvalues: ViewRecyclerModule (copy)
+		local ItemViewAdapter = p1.itemViewAdapter
+		local MaxPoolSize = p1.maxPoolSize
 		
-		local function _(p2)
-			-- upvalues: p1 (ref)
-			local var1 = if p1.getInstance ~= nil then p2 else p1.getInstance(p2)
-			assert(typeof(var1) == "Instance" and var1:IsA("GuiObject"), "createRecyclingScope: ItemView host must be a GuiObject")
+		local function _(p2) --[[ Line: 23 | Named "getInstance" ]]
+			-- upvalues: p1 (copy)
+			local _Instance = if p1.getInstance == nil then p2 else p1.getInstance(p2)
+			assert(typeof(_Instance) == "Instance" and _Instance:IsA("GuiObject"), "createRecyclingScope: ItemView host must be a GuiObject")
 			
-			return var1
+			return _Instance
 		end
 		
-		local var1 = viewRecyclerModule.Adapter.createRecyclingScope({
-			onPoolChanged = if p1.diagnostics == nil then nil else function(p2)
-				-- upvalues: p1 (ref), viewRecyclerModule (copy)
+		local RecyclingScope = ViewRecyclerModule.Adapter.createRecyclingScope({
+			onPoolChanged = if p1.diagnostics == nil then nil else function(p2) --[[ Line: 38 ]]
+				-- upvalues: p1 (copy), ViewRecyclerModule (upval)
 				p1.diagnostics({
-					kind = viewRecyclerModule.Diagnostics.EventKind.PoolChanged,
+					kind = ViewRecyclerModule.Diagnostics.EventKind.PoolChanged,
 					action = p2.action,
 					itemViewType = p2.viewType,
 					occupiedDelta = p2.occupiedDelta,
@@ -27,44 +27,45 @@ return {
 				})
 			end,
 			adapter = {
-				create = function(p2)
-					-- upvalues: itemViewAdapter (ref), p1 (ref)
-					local var2 = itemViewAdapter.create(p2)
-					local var3 = if p1.getInstance ~= nil then var2 else p1.getInstance(var2)
-					assert(typeof(var3) == "Instance" and var3:IsA("GuiObject"), "createRecyclingScope: ItemView host must be a GuiObject")
+				create = function(p2) --[[ Line: 49 ]]
+					-- upvalues: ItemViewAdapter (copy), p1 (copy)
+					local NewItemViewAdapter = ItemViewAdapter.create(p2)
+					local NewItemViewAdapter1 = if p1.getInstance == nil then NewItemViewAdapter else p1.getInstance(NewItemViewAdapter)
+					assert(typeof(NewItemViewAdapter1) == "Instance" and NewItemViewAdapter1:IsA("GuiObject"), "createRecyclingScope: ItemView host must be a GuiObject")
 					
-					return var2
+					return NewItemViewAdapter
 				end,
-				destroy = function(p2)
-					-- upvalues: p1 (ref)
+				destroy = function(p2) --[[ Line: 54 ]]
+					-- upvalues: p1 (copy)
 					if p1.destroyItemView == nil then
-						local var2 = if p1.getInstance ~= nil then p2 else p1.getInstance(p2)
-						assert(typeof(var2) == "Instance" and var2:IsA("GuiObject"), "createRecyclingScope: ItemView host must be a GuiObject")
-						var2:Destroy()
+						local _Instance = if p1.getInstance == nil then p2 else p1.getInstance(p2)
+						assert(typeof(_Instance) == "Instance" and _Instance:IsA("GuiObject"), "createRecyclingScope: ItemView host must be a GuiObject")
+						_Instance:Destroy()
 						
 						return
+					else
+						p1.destroyItemView(p2)
 					end
-					p1.destroyItemView(p2)
 				end,
-				onCreated = itemViewAdapter.onCreated,
-				onEvicted = itemViewAdapter.onEvicted,
-				batch = itemViewAdapter.batch or function(p2)
-					p2()
+				onCreated = ItemViewAdapter.onCreated,
+				onEvicted = ItemViewAdapter.onEvicted,
+				batch = ItemViewAdapter.batch or function(Callback: () -> ()) --[[ Line: 32 ]]
+					Callback()
 				end
 			}
 		})
 		
 		return {
-			bind = function(p2)
-				-- upvalues: maxPoolSize (ref), var1 (ref)
-				local cloned = table.clone(p2)
+			bind = function(Tbl) --[[ Line: 68 ]]
+				-- upvalues: MaxPoolSize (copy), RecyclingScope (copy)
+				local Copy = table.clone(Tbl)
 				
-				if cloned.capacity == nil then
-					cloned.capacity = maxPoolSize
+				if Copy.capacity == nil then
+					Copy.capacity = MaxPoolSize
 				end
-				return var1.bind(cloned)
+				return RecyclingScope.bind(Copy)
 			end,
-			dispose = var1.dispose
+			dispose = RecyclingScope.dispose
 		}
 	end
 }

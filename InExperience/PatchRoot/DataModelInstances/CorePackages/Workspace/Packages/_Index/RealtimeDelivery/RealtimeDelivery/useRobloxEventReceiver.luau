@@ -1,7 +1,7 @@
-﻿local reactModule = require(script:FindFirstAncestor("RealtimeDelivery").Parent.React)
-local realtimeContextModule = require(script.Parent.RealtimeContext)
+﻿local ReactModule = require(script:FindFirstAncestor("RealtimeDelivery").Parent.React)
+local RealtimeContextModule = require(script.Parent.RealtimeContext)
 
-return function()
-	-- upvalues: reactModule (ref), realtimeContextModule (ref)
-	return reactModule.useContext(realtimeContextModule)
+return function() --[[ Line: 7 | Named "useRobloxEventReceiver" ]]
+	-- upvalues: ReactModule (copy), RealtimeContextModule (copy)
+	return ReactModule.useContext(RealtimeContextModule)
 end

@@ -1,6 +1,6 @@
-﻿local textChatService = game:GetService("TextChatService")
+﻿local TextChatService = game:GetService("TextChatService")
 
-return function()
-	-- upvalues: textChatService (ref)
-	return textChatService.ChatVersion ~= Enum.ChatVersion.LegacyChatService
+return function(): boolean --[[ Line: 3 ]]
+	-- upvalues: TextChatService (copy)
+	return TextChatService.ChatVersion ~= Enum.ChatVersion.LegacyChatService
 end

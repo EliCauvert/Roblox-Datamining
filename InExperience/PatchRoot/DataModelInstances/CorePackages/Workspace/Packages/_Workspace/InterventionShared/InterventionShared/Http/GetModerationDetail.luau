@@ -1,43 +1,44 @@
-﻿local interventionShared = script:FindFirstAncestor("InterventionShared")
-local parent = interventionShared.Parent
-local httpRbxApiService = game:GetService("HttpRbxApiService")
-local httpService = game:GetService("HttpService")
-local urlBuilder = require(parent.UrlBuilder).UrlBuilder
-local promiseModule = require(parent.Promise)
-local buildQueryStringModule = require(interventionShared.Utils.buildQueryString)
+﻿local InterventionShared = script:FindFirstAncestor("InterventionShared")
+local Parent = InterventionShared.Parent
+local HttpRbxApiService = game:GetService("HttpRbxApiService")
+local HttpService = game:GetService("HttpService")
+local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
+local PromiseModule = require(Parent.Promise)
+local BuildQueryStringModule = require(InterventionShared.Utils.buildQueryString)
 
-return function(p1)
-	-- upvalues: urlBuilder (ref), buildQueryStringModule (ref), promiseModule (ref), httpRbxApiService (ref), httpService (ref)
-	local text = urlBuilder.usermoderation.moderationDetail() .. buildQueryStringModule(p1)
+return function(p1) --[[ Line: 20 | Named "GetModerationDetail" ]]
+	-- upvalues: UrlBuilder (copy), BuildQueryStringModule (copy), PromiseModule (copy), HttpRbxApiService (copy), HttpService (copy)
+	local Text = UrlBuilder.usermoderation.moderationDetail() .. BuildQueryStringModule(p1)
 	
-	return promiseModule.new(function(p2, p3)
-		-- upvalues: httpRbxApiService (copy), text (ref), httpService (copy)
-		task.defer(function()
-			-- upvalues: httpRbxApiService (copy), text (copy), httpService (copy), p2 (ref), p3 (ref)
-			local ok, status = pcall(function()
-				-- upvalues: httpRbxApiService (copy), text (copy)
-				return httpRbxApiService:GetAsyncFullUrl(text, Enum.ThrottlingPriority.Default)
+	return PromiseModule.new(function(Callback1, Callback) --[[ Line: 24 ]]
+		-- upvalues: HttpRbxApiService (upval), Text (copy), HttpService (upval)
+		task.defer(function() --[[ Line: 25 ]]
+			-- upvalues: HttpRbxApiService (upval), Text (upval), HttpService (upval), Callback1 (copy), Callback (copy)
+			local Success, Result = pcall(function() --[[ Line: 26 ]]
+				-- upvalues: HttpRbxApiService (upval), Text (upval)
+				return HttpRbxApiService:GetAsyncFullUrl(Text, Enum.ThrottlingPriority.Default)
 			end)
 			
-			if not ok then
-				p3({ error = "HTTP request failed", details = status })
+			if not Success then
+				Callback({ error = "HTTP request failed", details = Result })
 				
 				return
 			end
-			local ok_1, status_1 = pcall(function()
-				-- upvalues: httpService (copy), status (ref)
-				return httpService:JSONDecode(status)
+			local Success1, Result1 = pcall(function() --[[ Line: 31 ]]
+				-- upvalues: HttpService (upval), Result (copy)
+				return HttpService:JSONDecode(Result)
 			end)
 			
-			if ok_1 then
-				p2(status_1)
+			if Success1 then
+				Callback1(Result1)
 				
 				return
+			else
+				Callback({
+					error = "Failed to parse JSON response",
+					details = Result1
+				})
 			end
-			p3({
-				error = "Failed to parse JSON response",
-				details = status_1
-			})
 		end)
 	end)
 end

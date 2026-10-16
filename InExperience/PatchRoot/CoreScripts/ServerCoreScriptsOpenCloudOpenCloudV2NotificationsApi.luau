@@ -1,170 +1,200 @@
-﻿local openCloudNotificationScheduledTimeEnabled = game:DefineFastFlag("OpenCloudNotificationScheduledTimeEnabled", false)
-local contentProviderService = game:GetService("ContentProvider")
-local httpService = game:GetService("HttpService")
-local openCloudService = game:GetService("OpenCloudService")
-local runService = game:GetService("RunService")
+﻿local OpenCloudNotificationScheduledTimeEnabled = game:DefineFastFlag("OpenCloudNotificationScheduledTimeEnabled", false)
+local ContentProvider = game:GetService("ContentProvider")
+local HttpService = game:GetService("HttpService")
+local OpenCloudService = game:GetService("OpenCloudService")
+local RunService = game:GetService("RunService")
 
-function returnInvalidArgumentError(p1)
-	-- upvalues: httpService (ref)
+function returnInvalidArgumentError(Message) --[[ Line: 22 ]]
+	-- upvalues: HttpService (copy)
 	return {
 		StatusCode = 400,
-		Body = httpService:JSONEncode({ code = "INVALID_ARGUMENT", message = p1 })
+		Body = HttpService:JSONEncode({ code = "INVALID_ARGUMENT", message = Message })
 	}
 end
 
-function verifyUserNotification(p1)
+function verifyUserNotification(p1) --[[ Line: 32 ]]
 	if p1.path ~= nil then
-		local var1 = verifyString(p1.path)
+		local VerifyStringResult = verifyString(p1.path)
 		
-		if var1 ~= nil then
-			return var1
-		elseif p1.id ~= nil then
-			local var2 = verifyString(p1.id)
-			
-			if var2 ~= nil then
-				return var2
-			elseif p1.source ~= nil then
-				local var3 = verifySource(p1.source)
-				
-				if var3 ~= nil then
-					return var3
-				elseif p1.payload ~= nil then
-					local var4 = verifyPayload(p1.payload)
-					
-					return if var4 == nil then nil else var4
-				end
-			end
+		if VerifyStringResult ~= nil then
+			return VerifyStringResult
 		end
 	end
-end
-
-function verifySource(p1)
-	if p1.universe ~= nil then
-		local var1 = verifyString(p1.universe)
+	if p1.id ~= nil then
+		local VerifyStringResult = verifyString(p1.id)
 		
-		return if var1 == nil then nil else var1
-	end
-end
-
-function verifyPayload(p1)
-	-- upvalues: openCloudNotificationScheduledTimeEnabled (ref)
-	if p1.type ~= nil then
-		local var1 = verifyString(p1.type)
-		
-		if var1 ~= nil then
-			return var1
-		elseif p1.messageId ~= nil then
-			local var2 = verifyString(p1.messageId)
-			
-			if var2 ~= nil then
-				return var2
-			elseif p1.joinExperience ~= nil then
-				local var3 = verifyJoinExperience(p1.joinExperience)
-				
-				if var3 ~= nil then
-					return var3
-				elseif p1.analyticsData ~= nil then
-					local var4 = verifyAnalyticsData(p1.analyticsData)
-					
-					if var4 ~= nil then
-						return var4
-					elseif p1.parameters ~= nil then
-						local var5 = verifyParameters(p1.parameters)
-						
-						if var5 ~= nil then
-							return var5
-						elseif openCloudNotificationScheduledTimeEnabled and p1.scheduleTime ~= nil then
-							local var6 = verifyString(p1.scheduleTime)
-							
-							return if var6 == nil then nil else var6
-						end
-					end
-				end
-			end
+		if VerifyStringResult ~= nil then
+			return VerifyStringResult
 		end
 	end
-end
-
-function verifyJoinExperience(p1)
-	if p1.launchData ~= nil then
-		local var1 = verifyString(p1.launchData)
+	if p1.source ~= nil then
+		local VerifySourceResult = verifySource(p1.source)
 		
-		return if var1 == nil then nil else var1
+		if VerifySourceResult ~= nil then
+			return VerifySourceResult
+		end
 	end
-end
-
-function verifyAnalyticsData(p1)
-	if p1.category ~= nil then
-		local var1 = verifyString(p1.category)
+	if p1.payload ~= nil then
+		local VerifyPayloadResult = verifyPayload(p1.payload)
 		
-		return if var1 == nil then nil else var1
-	end
-end
-
-function verifyParameters(p1)
-	for i, v in pairs(p1) do
-		local var1
-		local var2 = 0
-		
-		if v.stringValue ~= nil then
-			var2 += 1
-			var1 = verifyString(v.stringValue)
-			
-			if var1 == nil then
-				if v.int64Value ~= nil then
-					var2 += 1
-					var1 = verifyNumber(v.int64Value)
-					
-					if var1 == nil then
-						if var2 > 1 then
-							return returnInvalidArgumentError("Too many parameters provided for oneOf object!")
-						end
-					end
-					return var1
-				end
-			end
-			return var1
+		if VerifyPayloadResult ~= nil then
+			return VerifyPayloadResult
 		end
 	end
 	return nil
 end
 
-function verifyNumber(p2)
-	return if typeof(p2) == "number" then nil else returnInvalidArgumentError("Argument not a number.")
-end
-
-function verifyString(p2)
-	return if typeof(p2) == "string" then nil else returnInvalidArgumentError("Argument not a string.")
-end
-
-function getUrlPrefix()
-	-- upvalues: runService (ref)
-	return if runService:IsStudio() then "user" else "rcc"
-end
-
-function createUserNotificationUrl(p2, _)
-	-- upvalues: contentProviderService (ref)
-	return string.format("%s%s/cloud/v2/users/%d/notifications", string.gsub(string.gsub(contentProviderService.BaseUrl:lower(), "http:", "https:"), "www", "apis"), getUrlPrefix(), p2)
-end
-
-function userNotification(p2)
-	-- upvalues: httpService (ref), openCloudService (ref)
-	if p2.user ~= nil then
-		local var3 = verifyNumber(p2.user)
+function verifySource(p1) --[[ Line: 64 ]]
+	if p1.universe ~= nil then
+		local VerifyStringResult = verifyString(p1.universe)
 		
-		if var3 ~= nil then
-			return var3
-		elseif p2.userNotification ~= nil then
-			local var4 = verifyUserNotification(p2.userNotification)
-			
-			return if var4 == nil then openCloudService:HttpRequestAsync({
-				Url = createUserNotificationUrl(p2.user, p2.userNotification),
-				Request_Type = "POST",
-				Body = httpService:JSONEncode(p2.userNotification)
-			}) else var4
+		if VerifyStringResult ~= nil then
+			return VerifyStringResult
 		end
 	end
+	return nil
 end
 
-openCloudService:RegisterOpenCloud("v2", "userNotification", userNotification)
-openCloudService:RegistrationComplete()
+function verifyPayload(p1) --[[ Line: 75 ]]
+	-- upvalues: OpenCloudNotificationScheduledTimeEnabled (copy)
+	if p1.type ~= nil then
+		local VerifyStringResult = verifyString(p1.type)
+		
+		if VerifyStringResult ~= nil then
+			return VerifyStringResult
+		end
+	end
+	if p1.messageId ~= nil then
+		local VerifyStringResult = verifyString(p1.messageId)
+		
+		if VerifyStringResult ~= nil then
+			return VerifyStringResult
+		end
+	end
+	if p1.joinExperience ~= nil then
+		local VerifyJoinExperienceResult = verifyJoinExperience(p1.joinExperience)
+		
+		if VerifyJoinExperienceResult ~= nil then
+			return VerifyJoinExperienceResult
+		end
+	end
+	if p1.analyticsData ~= nil then
+		local VerifyAnalyticsDataResult = verifyAnalyticsData(p1.analyticsData)
+		
+		if VerifyAnalyticsDataResult ~= nil then
+			return VerifyAnalyticsDataResult
+		end
+	end
+	if p1.parameters ~= nil then
+		local VerifyParametersResult = verifyParameters(p1.parameters)
+		
+		if VerifyParametersResult ~= nil then
+			return VerifyParametersResult
+		end
+	end
+	if OpenCloudNotificationScheduledTimeEnabled and p1.scheduleTime ~= nil then
+		local VerifyStringResult = verifyString(p1.scheduleTime)
+		
+		if VerifyStringResult ~= nil then
+			return VerifyStringResult
+		end
+	end
+	return nil
+end
+
+function verifyJoinExperience(p1) --[[ Line: 121 ]]
+	if p1.launchData ~= nil then
+		local VerifyStringResult = verifyString(p1.launchData)
+		
+		if VerifyStringResult ~= nil then
+			return VerifyStringResult
+		end
+	end
+	return nil
+end
+
+function verifyAnalyticsData(p1) --[[ Line: 132 ]]
+	if p1.category ~= nil then
+		local VerifyStringResult = verifyString(p1.category)
+		
+		if VerifyStringResult ~= nil then
+			return VerifyStringResult
+		end
+	end
+	return nil
+end
+
+function verifyParameters(List) --[[ Line: 143 ]]
+	local VerifyNumberResult = nil
+	local VerifyStringResult = nil
+	for _, value in pairs(List) do
+		local Count = 0
+		local NoStringValue = value.stringValue == nil
+		
+		if not NoStringValue then
+			Count += 1
+			VerifyStringResult = verifyString(value.stringValue)
+			NoStringValue = VerifyStringResult == nil
+		end
+		if not NoStringValue then
+			return VerifyStringResult
+		end
+		local NoInt64Value = value.int64Value == nil
+		
+		if not NoInt64Value then
+			Count += 1
+			VerifyNumberResult = verifyNumber(value.int64Value)
+			NoInt64Value = VerifyNumberResult == nil
+		end
+		if not NoInt64Value then
+			return VerifyNumberResult
+		elseif Count > 1 then
+			return returnInvalidArgumentError("Too many parameters provided for oneOf object!")
+		end
+	end
+	return nil
+end
+
+function verifyNumber(p1) --[[ Line: 168 ]]
+	return if typeof(p1) == "number" then nil else returnInvalidArgumentError("Argument not a number.")
+end
+
+function verifyString(p1) --[[ Line: 175 ]]
+	return if typeof(p1) == "string" then nil else returnInvalidArgumentError("Argument not a string.")
+end
+
+function getUrlPrefix(): string --[[ Line: 182 ]]
+	-- upvalues: RunService (copy)
+	return if RunService:IsStudio() then "user" else "rcc"
+end
+
+function createUserNotificationUrl(p1, _): string --[[ Line: 189 ]]
+	-- upvalues: ContentProvider (copy)
+	return (string.format("%s%s/cloud/v2/users/%d/notifications", string.gsub(string.gsub(ContentProvider.BaseUrl:lower(), "http:", "https:"), "www", "apis"), getUrlPrefix(), p1))
+end
+
+function userNotification(p1) --[[ Line: 198 ]]
+	-- upvalues: HttpService (copy), OpenCloudService (copy)
+	if p1.user ~= nil then
+		local VerifyNumberResult = verifyNumber(p1.user)
+		
+		if VerifyNumberResult ~= nil then
+			return VerifyNumberResult
+		end
+	end
+	if p1.userNotification ~= nil then
+		local VerifyUserNotificationResult = verifyUserNotification(p1.userNotification)
+		
+		if VerifyUserNotificationResult ~= nil then
+			return VerifyUserNotificationResult
+		end
+	end
+	return OpenCloudService:HttpRequestAsync({
+		Url = createUserNotificationUrl(p1.user, p1.userNotification),
+		Request_Type = "POST",
+		Body = HttpService:JSONEncode(p1.userNotification)
+	})
+end
+
+OpenCloudService:RegisterOpenCloud("v2", "userNotification", userNotification)
+OpenCloudService:RegistrationComplete()

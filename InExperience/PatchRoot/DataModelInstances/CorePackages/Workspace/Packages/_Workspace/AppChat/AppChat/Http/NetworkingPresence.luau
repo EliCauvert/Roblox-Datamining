@@ -1,3 +1,5 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local NetworkingPresence = require(AppChat.Parent.LuaSocialLibrariesDeps).NetworkingPresence
+local RoduxNetworkingModule = require(script.Parent.RoduxNetworking)
 
-return if require(appChat.Flags.FFlagAppChatPresenceStoreMigration) then nil else require(appChat.Parent.LuaSocialLibrariesDeps).NetworkingPresence.config({ roduxNetworking = require(script.Parent.RoduxNetworking) })
+return if require(AppChat.Flags.FFlagAppChatPresenceStoreMigration) then nil else NetworkingPresence.config({ roduxNetworking = RoduxNetworkingModule })

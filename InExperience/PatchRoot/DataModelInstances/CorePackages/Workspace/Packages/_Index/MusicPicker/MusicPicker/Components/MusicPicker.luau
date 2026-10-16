@@ -1,81 +1,77 @@
-﻿local musicPicker = script:FindFirstAncestor("MusicPicker")
-local reactModule = require(musicPicker.Parent.React)
-local musicPickerContextModule = require(musicPicker.Context.MusicPickerContext)
-local musicPickerViewModule = require(musicPicker.Components.MusicPickerView)
-local useMusicPickerViewModelModule = require(musicPicker.Hooks.useMusicPickerViewModel)
-local useMusicPickerAnalyticsModule = require(musicPicker.Hooks.useMusicPickerAnalytics)
-local _ = require(musicPicker.Types.MusicPickerTypes)
-local fFlagMusicPickerSongbirdAnalyticsModule = require(musicPicker.Flags.FFlagMusicPickerSongbirdAnalytics)
+﻿local MusicPicker = script:FindFirstAncestor("MusicPicker")
+local ReactModule = require(MusicPicker.Parent.React)
+local MusicPickerContextModule = require(MusicPicker.Context.MusicPickerContext)
+local MusicPickerViewModule = require(MusicPicker.Components.MusicPickerView)
+local UseMusicPickerViewModelModule = require(MusicPicker.Hooks.useMusicPickerViewModel)
+local UseMusicPickerAnalyticsModule = require(MusicPicker.Hooks.useMusicPickerAnalytics)
+local _ = require(MusicPicker.Types.MusicPickerTypes)
 
-local function MusicPickerBase(p1)
-	-- upvalues: useMusicPickerViewModelModule (ref), reactModule (ref), musicPickerViewModule (ref)
-	local var1 = useMusicPickerViewModelModule({
+local function MusicPickerBase(p1) --[[ Line: 54 ]]
+	-- upvalues: UseMusicPickerViewModelModule (copy), ReactModule (copy), MusicPickerViewModule (copy)
+	local UseMusicPickerViewModelModuleResult = UseMusicPickerViewModelModule({
 		tabs = p1.tabs,
 		onQueryChanged = p1.onQueryChanged,
-		onTabChanged = p1.onTabChanged
+		onTabChanged = p1.onTabChanged,
+		initialQuery = p1.initialQuery
 	})
 	
-	return reactModule.createElement(musicPickerViewModule, {
+	return ReactModule.createElement(MusicPickerViewModule, {
 		titleText = p1.titleText,
 		searchPlaceholder = p1.searchPlaceholder,
-		searchText = var1.searchText,
-		mode = var1.mode,
+		searchText = UseMusicPickerViewModelModuleResult.searchText,
+		mode = UseMusicPickerViewModelModuleResult.mode,
 		showTabs = p1.showTabs,
 		tabs = p1.tabs,
-		activeTabId = var1.activeTabId,
+		activeTabId = UseMusicPickerViewModelModuleResult.activeTabId,
 		searchContent = p1.searchContent,
-		onSearchChanged = var1.onSearchChanged,
-		onSubmitSearch = var1.onSubmitSearch,
-		onTabSelected = var1.onTabSelected,
+		onSearchChanged = UseMusicPickerViewModelModuleResult.onSearchChanged,
+		onSubmitSearch = UseMusicPickerViewModelModuleResult.onSubmitSearch,
+		onTabSelected = UseMusicPickerViewModelModuleResult.onTabSelected,
 		onClose = p1.onClose,
 		onSelect = p1.onSelect,
 		safeAreaInsets = p1.safeAreaInsets
 	})
 end
 
-local function MusicPickerWithAnalytics(p1)
-	-- upvalues: reactModule (ref), musicPickerContextModule (ref), useMusicPickerAnalyticsModule (ref), MusicPickerBase (ref)
-	local var1 = reactModule.useContext(musicPickerContextModule)
-	local var2 = useMusicPickerAnalyticsModule({
+return function(p1) --[[ Line: 83 | Named "MusicPicker" ]]
+	-- upvalues: ReactModule (copy), MusicPickerContextModule (copy), UseMusicPickerAnalyticsModule (copy), MusicPickerBase (copy)
+	local UseContextResult = ReactModule.useContext(MusicPickerContextModule)
+	local UseMusicPickerAnalyticsModuleResult = UseMusicPickerAnalyticsModule({
 		source = p1.source,
-		previewingId = var1.previewingId,
-		savedIds = var1.savedIds,
-		itemsById = reactModule.useMemo(function()
-			-- upvalues: p1 (ref)
+		previewingId = UseContextResult.previewingId,
+		savedIds = UseContextResult.savedIds,
+		itemsById = ReactModule.useMemo(function() --[[ Line: 86 ]]
+			-- upvalues: p1 (copy)
 			local t = {}
 			
-			for i, v in p1.tabs do
-				for i_2, v_1 in v.content.items do
-					t[v_1.id] = v_1
+			for _, tab in p1.tabs do
+				for _, item in tab.content.items do
+					t[item.id] = item
 				end
 			end
-			for i, v_1 in p1.searchContent.items do
-				t[v_1.id] = v_1
+			for _, item1 in p1.searchContent.items do
+				t[item1.id] = item1
 			end
 			return t
 		end, { p1.tabs, p1.searchContent })
 	})
 	
-	return reactModule.createElement(musicPickerContextModule.Provider, {
-		value = reactModule.useMemo(function()
-			-- upvalues: var1 (ref), var2 (ref)
+	return ReactModule.createElement(MusicPickerContextModule.Provider, {
+		value = ReactModule.useMemo(function() --[[ Line: 111 ]]
+			-- upvalues: UseContextResult (copy), UseMusicPickerAnalyticsModuleResult (copy)
 			return {
-				previewingId = var1.previewingId,
-				togglePreview = function(p2)
-					-- upvalues: var1 (copy), var2 (copy)
-					if var1.previewingId == p2 then
-						var2(p2)
+				previewingId = UseContextResult.previewingId,
+				togglePreview = function(PreviewingId) --[[ Line: 114 ]]
+					-- upvalues: UseContextResult (upval), UseMusicPickerAnalyticsModuleResult (upval)
+					if UseContextResult.previewingId == PreviewingId then
+						UseMusicPickerAnalyticsModuleResult(PreviewingId)
 					end
-					var1.togglePreview(p2)
+					UseContextResult.togglePreview(PreviewingId)
 				end,
-				savedIds = var1.savedIds,
-				toggleSaved = var1.toggleSaved
+				savedIds = UseContextResult.savedIds,
+				toggleSaved = UseContextResult.toggleSaved,
+				showSaveButton = UseContextResult.showSaveButton
 			}
-		end, { var1, var2 })
-	}, { Picker = reactModule.createElement(MusicPickerBase, p1) })
-end
-
-return function(p2)
-	-- upvalues: fFlagMusicPickerSongbirdAnalyticsModule (ref), reactModule (ref), MusicPickerWithAnalytics (ref), MusicPickerBase (ref)
-	return if fFlagMusicPickerSongbirdAnalyticsModule then reactModule.createElement(MusicPickerWithAnalytics, p2) else reactModule.createElement(MusicPickerBase, p2)
+		end, { UseContextResult, UseMusicPickerAnalyticsModuleResult })
+	}, { Picker = ReactModule.createElement(MusicPickerBase, p1) })
 end

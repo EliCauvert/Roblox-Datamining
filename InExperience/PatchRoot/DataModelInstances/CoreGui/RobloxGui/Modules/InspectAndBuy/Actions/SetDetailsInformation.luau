@@ -1,3 +1,3 @@
-﻿return require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator(script.Name, function(p1, p2)
-	return { viewingDetails = p1, assetId = p2 }
+﻿return require(game:GetService("CorePackages").Packages.Rodux).makeActionCreator(script.Name, function(ViewingDetails, AssetId) --[[ Line: 4 ]]
+	return { viewingDetails = ViewingDetails, assetId = AssetId }
 end)

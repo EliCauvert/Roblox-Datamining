@@ -1,68 +1,71 @@
-﻿local analytics = script:FindFirstAncestor("Analytics")
-local userInputService = game:GetService("UserInputService")
-local var1 = if require(analytics.Parent.SharedFlags).GetFFlagShareGetPlatformTargetImpl() then require(analytics.getPlatformTarget) else function()
-	-- upvalues: userInputService (ref)
-	local var2 = "unknownLua"
-	local none = Enum.Platform.None
-	pcall(function()
-		-- upvalues: none (write), userInputService (copy)
-		none = userInputService:GetPlatform()
+﻿local Analytics = script:FindFirstAncestor("Analytics")
+local UserInputService = game:GetService("UserInputService")
+local GetPlatformTargetModule = nil
+GetPlatformTargetModule = if require(Analytics.Parent.SharedFlags).GetFFlagShareGetPlatformTargetImpl() then require(Analytics.getPlatformTarget) else function(): string --[[ Line: 19 | Named "getPlatformTarget" ]]
+	-- upvalues: UserInputService (copy)
+	local v1 = "unknownLua"
+	local None = Enum.Platform.None
+	pcall(function() --[[ Line: 25 ]]
+		-- upvalues: None (ref), UserInputService (upval)
+		None = UserInputService:GetPlatform()
 	end)
-	local var3 = if none ~= Enum.Platform.XBox360 then none == Enum.Platform.XBoxOne else true
+	local IsNoneMatch: boolean = None == Enum.Platform.Windows or None == Enum.Platform.OSX
+	local IsNoneMatch1: boolean = None == Enum.Platform.IOS or None == Enum.Platform.Android or None == Enum.Platform.UWP
+	local IsNoneMatch2: boolean = None == Enum.Platform.XBox360 or None == Enum.Platform.XBoxOne or (None == Enum.Platform.PS3 or (None == Enum.Platform.PS4 or game:GetEngineFeature("PlatformEnumPS5") and None == Enum.Platform.PS5)) or None == Enum.Platform.WiiU
 	
-	return if if none ~= Enum.Platform.Windows then none == Enum.Platform.OSX else true then "client" elseif (if none ~= Enum.Platform.IOS then none == Enum.Platform.Android else true) or none == Enum.Platform.UWP then "mobile" elseif (var3 or (if none ~= Enum.Platform.PS3 then if none ~= Enum.Platform.PS4 then game:GetEngineFeature("PlatformEnumPS5") and none == Enum.Platform.PS5 else true else true)) or none == Enum.Platform.WiiU then "console" else var2 .. tostring(none)
+	return if IsNoneMatch then "client" elseif IsNoneMatch1 then "mobile" elseif IsNoneMatch2 then "console" else v1 .. tostring(None)
 end
-local t = {}
-t.__index = t
+local EventIngestModule = {}
+EventIngestModule.__index = EventIngestModule
 
-function t.new(p1)
-	-- upvalues: t (ref)
-	local var2 = type(p1)
-	assert(if var2 ~= "table" then var2 == "userdata" else true, "Unexpected value for eventIngestService")
-	local t_1 = { _eventIngest = p1 }
-	setmetatable(t_1, t)
+function EventIngestModule.new(_eventIngest) --[[ Line: 61 ]]
+	-- upvalues: EventIngestModule (copy)
+	local ValueType = type(_eventIngest)
+	assert(ValueType == "table" or ValueType == "userdata", "Unexpected value for eventIngestService")
+	local config = { _eventIngest = _eventIngest }
+	setmetatable(config, EventIngestModule)
 	
-	return t_1
+	return config
 end
 
-function t:setRBXEvent(p1, p2, p3)
-	-- upvalues: var1 (write)
-	local var2 = var1()
-	p3 = p3 or {}
-	assert(type(p1) == "string", "Expected eventContext to be a string")
-	assert(type(p2) == "string", "Expected eventName to be a string")
-	assert(type(p3) == "table", "Expected additionalArgs to be a table")
-	self._eventIngest:SetRBXEvent(var2, p1, p2, p3)
+function EventIngestModule:setRBXEvent(EventContext, EventName, p1) --[[ Line: 76 ]]
+	-- upvalues: GetPlatformTargetModule (ref)
+	local PlatformTargetModule = GetPlatformTargetModule()
+	local P4 = p1 or {}
+	assert(type(EventContext) == "string", "Expected eventContext to be a string")
+	assert(type(EventName) == "string", "Expected eventName to be a string")
+	assert(type(P4) == "table", "Expected additionalArgs to be a table")
+	self._eventIngest:SetRBXEvent(PlatformTargetModule, EventContext, EventName, P4)
 end
 
-function t:setRBXEventStream(p1, p2, p3)
-	-- upvalues: var1 (write)
-	local var2 = var1()
-	p3 = p3 or {}
-	assert(type(p1) == "string", "Expected eventContext to be a string")
-	assert(type(p2) == "string", "Expected eventName to be a string")
-	assert(type(p3) == "table", "Expected additionalArgs to be a table")
-	self._eventIngest:SetRBXEventStream(var2, p1, p2, p3)
+function EventIngestModule:setRBXEventStream(EventContext, EventName, p1) --[[ Line: 90 ]]
+	-- upvalues: GetPlatformTargetModule (ref)
+	local PlatformTargetModule = GetPlatformTargetModule()
+	local P8 = p1 or {}
+	assert(type(EventContext) == "string", "Expected eventContext to be a string")
+	assert(type(EventName) == "string", "Expected eventName to be a string")
+	assert(type(P8) == "table", "Expected additionalArgs to be a table")
+	self._eventIngest:SetRBXEventStream(PlatformTargetModule, EventContext, EventName, P8)
 end
 
-function t:sendEventDeferred(p1, p2, p3)
-	-- upvalues: var1 (write)
-	local var2 = var1()
-	p3 = p3 or {}
-	assert(type(p1) == "string", "Expected eventContext to be a string")
-	assert(type(p2) == "string", "Expected eventName to be a string")
-	assert(type(p3) == "table", "Expected additionalArgs to be a table")
-	self._eventIngest:SendEventDeferred(var2, p1, p2, p3)
+function EventIngestModule:sendEventDeferred(EventContext, EventName, p1) --[[ Line: 104 ]]
+	-- upvalues: GetPlatformTargetModule (ref)
+	local PlatformTargetModule = GetPlatformTargetModule()
+	local P12 = p1 or {}
+	assert(type(EventContext) == "string", "Expected eventContext to be a string")
+	assert(type(EventName) == "string", "Expected eventName to be a string")
+	assert(type(P12) == "table", "Expected additionalArgs to be a table")
+	self._eventIngest:SendEventDeferred(PlatformTargetModule, EventContext, EventName, P12)
 end
 
-function t:sendEventImmediately(p1, p2, p3)
-	-- upvalues: var1 (write)
-	local var2 = var1()
-	p3 = p3 or {}
-	assert(type(p1) == "string", "Expected eventContext to be a string")
-	assert(type(p2) == "string", "Expected eventName to be a string")
-	assert(type(p3) == "table", "Expected additionalArgs to be a table")
-	self._eventIngest:SendEventImmediately(var2, p1, p2, p3)
+function EventIngestModule:sendEventImmediately(EventContext, EventName, p1) --[[ Line: 119 ]]
+	-- upvalues: GetPlatformTargetModule (ref)
+	local PlatformTargetModule = GetPlatformTargetModule()
+	local P16 = p1 or {}
+	assert(type(EventContext) == "string", "Expected eventContext to be a string")
+	assert(type(EventName) == "string", "Expected eventName to be a string")
+	assert(type(P16) == "table", "Expected additionalArgs to be a table")
+	self._eventIngest:SendEventImmediately(PlatformTargetModule, EventContext, EventName, P16)
 end
 
-return t
+return EventIngestModule

@@ -1,69 +1,73 @@
-﻿local t = {}
-local var1 = nil
-local var2 = nil
-local var3 = false
-local var4 = nil
+﻿local v1 = nil
+local v2 = nil
+local Flag = false
+local Config = nil
 
-local function defaultClock()
+local function defaultClock(): number --[[ Line: 17 ]]
 	return os.clock()
 end
 
-function t._setClockForTesting(value)
-	-- upvalues: defaultClock (write)
-	defaultClock = value
-end
-
-function t.markClosed()
-	-- upvalues: var3 (write), var1 (write), defaultClock (write), var4 (write)
-	if var3 or var1 == nil then
-		var1 = defaultClock()
+local WebViewStateTrackerModule = {
+	_setClockForTesting = function(p1) --[[ Line: 24 ]]
+		-- upvalues: defaultClock (ref)
+		defaultClock = p1
+	end,
+	markClosed = function() --[[ Line: 31 ]]
+		-- upvalues: Flag (ref), v1 (ref), defaultClock (ref), Config (ref)
+		if Flag or v1 == nil then
+			v1 = defaultClock()
+		end
+		Flag = false
+		Config = nil
+	end,
+	updateMetadata = function(Url, Title, IsVisible, HasBackButton) --[[ Line: 46 ]]
+		-- upvalues: Config (ref)
+		Config = {
+			url = Url,
+			title = Title,
+			isVisible = IsVisible,
+			hasBackButton = HasBackButton
+		}
 	end
-	var3 = false
-	var4 = nil
-end
+}
 
-function t.updateMetadata(p1, p2, p3, p4)
-	-- upvalues: var4 (write)
-	var4 = { url = p1, title = p2, isVisible = p3, hasBackButton = p4 }
-end
-
-function t.markOpen(p1, p2, p3, p4)
-	-- upvalues: var3 (write), var2 (write), defaultClock (write), t (ref)
-	if not var3 or var2 == nil then
-		var2 = defaultClock()
+function WebViewStateTrackerModule.markOpen(Url, Title, IsVisible, HasBackButton) --[[ Line: 67 ]]
+	-- upvalues: Flag (ref), v2 (ref), defaultClock (ref), WebViewStateTrackerModule (copy)
+	if not Flag or v2 == nil then
+		v2 = defaultClock()
 	end
-	var3 = true
-	t.updateMetadata(p1, p2, p3, p4)
+	Flag = true
+	WebViewStateTrackerModule.updateMetadata(Url, Title, IsVisible, HasBackButton)
 end
 
-function t.isOpen()
-	-- upvalues: var3 (write)
-	return var3
+function WebViewStateTrackerModule.isOpen() --[[ Line: 79 ]]
+	-- upvalues: Flag (ref)
+	return Flag
 end
 
-function t.wasLastClosed()
-	-- upvalues: var1 (write), defaultClock (write)
-	return if var1 == nil then -1 else defaultClock() - var1
+function WebViewStateTrackerModule.wasLastClosed() --[[ Line: 87 ]]
+	-- upvalues: v1 (ref), defaultClock (ref)
+	return if v1 == nil then -1 else defaultClock() - v1
 end
 
-function t.getOpenDuration()
-	-- upvalues: var2 (write), defaultClock (write)
-	return if var2 == nil then -1 else defaultClock() - var2
+function WebViewStateTrackerModule.getOpenDuration() --[[ Line: 99 ]]
+	-- upvalues: v2 (ref), defaultClock (ref)
+	return if v2 == nil then -1 else defaultClock() - v2
 end
 
-function t.wasClosedWithin(p1)
-	-- upvalues: var1 (write), defaultClock (write)
-	return if var1 == nil then false else defaultClock() - var1 <= p1
+function WebViewStateTrackerModule.wasClosedWithin(p1): boolean --[[ Line: 112 ]]
+	-- upvalues: v1 (ref), defaultClock (ref)
+	return v1 ~= nil and defaultClock() - v1 <= p1
 end
 
-function t.isOpenNoLongerThan(p1, p2)
-	-- upvalues: var3 (write), var2 (write), defaultClock (write)
-	return if p1 then if var2 == nil or var3 and p2 <= defaultClock() - var2 then false else var3 else var3
+function WebViewStateTrackerModule.isOpenNoLongerThan(p1, p2) --[[ Line: 127 ]]
+	-- upvalues: Flag (ref), v2 (ref), defaultClock (ref)
+	return (not p1 or v2 ~= nil and (not Flag or p2 > defaultClock() - v2)) and Flag
 end
 
-function t.getWebViewMetadata()
-	-- upvalues: var4 (write)
-	return var4
+function WebViewStateTrackerModule.getWebViewMetadata() --[[ Line: 143 ]]
+	-- upvalues: Config (ref)
+	return Config
 end
 
-return t
+return WebViewStateTrackerModule

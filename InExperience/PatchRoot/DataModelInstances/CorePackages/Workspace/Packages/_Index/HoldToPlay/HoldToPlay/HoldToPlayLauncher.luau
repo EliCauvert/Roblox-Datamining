@@ -1,42 +1,49 @@
-﻿local holdToPlay = script:FindFirstAncestor("HoldToPlay")
-local parent = holdToPlay.Parent
-local reactModule = require(parent.React)
-local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-local focusNavigationEventNameEnum = focusNavigationUtilsModule.FocusNavigationEventNameEnum
-local buttonHoldStateEnum = focusNavigationUtilsModule.ButtonHoldStateEnum
-local appShortcutBarContext = require(parent.AppShortcutBar).AppShortcutBarContext
-local holdToPlayLoaderModule = require(holdToPlay.HoldToPlayLoader)
-local fFlagLuaAppDemoModePlayButtonTelemetry = require(parent.SharedFlags).FFlagLuaAppDemoModePlayButtonTelemetry
+﻿local HoldToPlay = script:FindFirstAncestor("HoldToPlay")
+local Parent = HoldToPlay.Parent
+local ReactModule = require(Parent.React)
+local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
+local FocusNavigationEventNameEnum = FocusNavigationUtilsModule.FocusNavigationEventNameEnum
+local ButtonHoldStateEnum = FocusNavigationUtilsModule.ButtonHoldStateEnum
+local AppShortcutBarContext = require(Parent.AppShortcutBar).AppShortcutBarContext
+local HoldToPlayLoaderModule = require(HoldToPlay.HoldToPlayLoader)
+local FFlagLuaAppDemoModePlayButtonTelemetry = require(Parent.SharedFlags).FFlagLuaAppDemoModePlayButtonTelemetry
 
-return function(p1)
-	-- upvalues: appShortcutBarContext (ref), reactModule (ref), buttonHoldStateEnum (ref), focusNavigationEventNameEnum (ref), fFlagLuaAppDemoModePlayButtonTelemetry (ref), holdToPlayLoaderModule (ref)
-	local var1 = appShortcutBarContext.useDispatchButtonHoldStarted()
-	local var2 = appShortcutBarContext.useDispatchButtonHoldEnded()
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), buttonHoldStateEnum (copy), var1 (ref), focusNavigationEventNameEnum (copy), var2 (ref)
-		if p1.holdState == buttonHoldStateEnum.JUST_PRESSED then
-			var1(focusNavigationEventNameEnum.HoldToPlay, p1.holdProgress)
+return function(p1) --[[ Line: 38 | Named "HoldToPlayLauncher" ]]
+	-- upvalues: AppShortcutBarContext (copy), ReactModule (copy), ButtonHoldStateEnum (copy), FocusNavigationEventNameEnum (copy), FFlagLuaAppDemoModePlayButtonTelemetry (copy), HoldToPlayLoaderModule (copy)
+	local UseDispatchButtonHoldStartedResult = AppShortcutBarContext.useDispatchButtonHoldStarted()
+	local UseDispatchButtonHoldEndedResult = AppShortcutBarContext.useDispatchButtonHoldEnded()
+	ReactModule.useEffect(function() --[[ Line: 42 ]]
+		-- upvalues: p1 (copy), ButtonHoldStateEnum (upval), UseDispatchButtonHoldStartedResult (copy), FocusNavigationEventNameEnum (upval), UseDispatchButtonHoldEndedResult (copy)
+		if p1.holdState == ButtonHoldStateEnum.JUST_PRESSED then
+			UseDispatchButtonHoldStartedResult(FocusNavigationEventNameEnum.HoldToPlay, p1.holdProgress)
 			
 			return
-		elseif p1.holdState == buttonHoldStateEnum.NOT_HELD then
-			var2(focusNavigationEventNameEnum.HoldToPlay)
 		end
-	end, { p1.holdState, p1.holdProgress, var1, var2 })
-	local selectedNavigationUniverseId = p1.selectedNavigationUniverseId or (if p1.selectedEntry then p1.selectedEntry.universeId else nil)
+		if p1.holdState == ButtonHoldStateEnum.NOT_HELD then
+			UseDispatchButtonHoldEndedResult(FocusNavigationEventNameEnum.HoldToPlay)
+		end
+	end, {
+		p1.holdState,
+		p1.holdProgress,
+		UseDispatchButtonHoldStartedResult,
+		UseDispatchButtonHoldEndedResult
+	})
+	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 51 ]]
+		-- upvalues: p1 (copy), FFlagLuaAppDemoModePlayButtonTelemetry (upval)
+		p1.reportExperienceLaunched(p1.selectedEntry, p1.referralSource, nil, p1.launchContext, p1.selectedIndex, if FFlagLuaAppDemoModePlayButtonTelemetry then p2 else nil)
+	end, {
+		p1.reportExperienceLaunched,
+		p1.selectedEntry,
+		p1.referralSource,
+		p1.selectedIndex,
+		p1.launchContext
+	})
+	local SelectedNavigationUniverseId = p1.selectedNavigationUniverseId or (p1.selectedEntry and p1.selectedEntry.universeId or nil)
 	
-	return if selectedNavigationUniverseId and (p1.holdState == buttonHoldStateEnum.HOLDING or p1.holdState == buttonHoldStateEnum.COMPLETED) then reactModule.createElement(holdToPlayLoaderModule, {
-		universeId = selectedNavigationUniverseId,
-		shouldAttemptLaunch = p1.holdState == buttonHoldStateEnum.COMPLETED,
-		reportExperienceLaunched = reactModule.useCallback(function(p2)
-			-- upvalues: p1 (ref), fFlagLuaAppDemoModePlayButtonTelemetry (copy)
-			p1.reportExperienceLaunched(p1.selectedEntry, p1.referralSource, nil, p1.launchContext, p1.selectedIndex, if fFlagLuaAppDemoModePlayButtonTelemetry then p2 else nil)
-		end, {
-			p1.reportExperienceLaunched,
-			p1.selectedEntry,
-			p1.referralSource,
-			p1.selectedIndex,
-			p1.launchContext
-		}),
+	return if SelectedNavigationUniverseId and (p1.holdState == ButtonHoldStateEnum.HOLDING or p1.holdState == ButtonHoldStateEnum.COMPLETED) then ReactModule.createElement(HoldToPlayLoaderModule, {
+		universeId = SelectedNavigationUniverseId,
+		shouldAttemptLaunch = p1.holdState == ButtonHoldStateEnum.COMPLETED,
+		reportExperienceLaunched = UseResult,
 		onLaunched = p1.cancelHold
 	}) else nil
 end

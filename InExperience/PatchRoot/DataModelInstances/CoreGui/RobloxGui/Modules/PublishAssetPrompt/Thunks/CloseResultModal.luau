@@ -1,6 +1,6 @@
-﻿local closeResultModalModule = require(script.Parent.Parent.Actions.CloseResultModal)
+﻿local CloseResultModalModule = require(script.Parent.Parent.Actions.CloseResultModal)
 
-return function(p1)
-	-- upvalues: closeResultModalModule (ref)
-	p1:dispatch(closeResultModalModule())
+return function(p1) --[[ Line: 4 ]]
+	-- upvalues: CloseResultModalModule (copy)
+	p1:dispatch(CloseResultModalModule())
 end

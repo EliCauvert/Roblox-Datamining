@@ -1,6 +1,6 @@
-﻿local socialCommon = script:FindFirstAncestor("SocialCommon")
-local _ = require(socialCommon.Enums.ChatEntryPointNames)
+﻿local SocialCommon = script:FindFirstAncestor("SocialCommon")
+local _ = require(SocialCommon.Enums.ChatEntryPointNames)
 
-return require(socialCommon.Parent.Rodux).makeActionCreator(script.Name, function(p1)
-	return { entryPoint = p1 }
+return require(SocialCommon.Parent.Rodux).makeActionCreator(script.Name, function(EntryPoint) --[[ Line: 22 ]]
+	return { entryPoint = EntryPoint }
 end)

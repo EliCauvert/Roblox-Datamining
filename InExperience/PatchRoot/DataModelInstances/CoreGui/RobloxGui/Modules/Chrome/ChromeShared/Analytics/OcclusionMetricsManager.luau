@@ -1,78 +1,77 @@
-﻿local chromeShared = script:FindFirstAncestor("ChromeShared")
-local corePackagesService = game:GetService("CorePackages")
-local guiService = game:GetService("GuiService")
-local reactModule = require(corePackagesService.Packages.React)
-local signalsModule = require(corePackagesService.Packages.Signals)
-local useSelector = require(corePackagesService.Workspace.Packages.RoactUtils).Hooks.RoactRodux.useSelector
-local constantsModule = require(chromeShared.Unibar.Constants)
-local coreGuiCommonModule = require(corePackagesService.Workspace.Packages.CoreGuiCommon)
-local fFlagTopBarSignalizeKeepOutAreas = coreGuiCommonModule.Flags.FFlagTopBarSignalizeKeepOutAreas
-local fIntLuaUIOcclusionMetricsReportingPeriodSeconds = require(corePackagesService.Workspace.Packages.SharedFlags).GetFIntLuaUIOcclusionMetricsReportingPeriodSeconds()
-local guiServiceSendUIOcclusionMetricsForQueryRegionEngineFeature = game:GetEngineFeature("GuiServiceSendUIOcclusionMetricsForQueryRegion")
+﻿local CorePackages = game:GetService("CorePackages")
+local GuiService = game:GetService("GuiService")
+local ReactModule = require(CorePackages.Packages.React)
+local SignalsModule = require(CorePackages.Packages.Signals)
+local UseSelectorFunction = require(CorePackages.Workspace.Packages.RoactUtils).Hooks.RoactRodux.useSelector
+local ConstantsModule = require(script:FindFirstAncestor("ChromeShared").Unibar.Constants)
+local CoreGuiCommonModule = require(CorePackages.Workspace.Packages.CoreGuiCommon)
+local FFlagTopBarSignalizeKeepOutAreas = CoreGuiCommonModule.Flags.FFlagTopBarSignalizeKeepOutAreas
+local FIntLuaUIOcclusionMetricsReportingPeriodSeconds = require(CorePackages.Workspace.Packages.SharedFlags).GetFIntLuaUIOcclusionMetricsReportingPeriodSeconds()
+local GuiServiceSendUIOcclusionMetricsForQueryRegionEngineFeature = game:GetEngineFeature("GuiServiceSendUIOcclusionMetricsForQueryRegion")
 
-local function _(p1)
-	-- upvalues: guiService (ref)
-	return p1 + guiService:GetGuiInset()
+local function _(p1) --[[ Line: 28 | Named "convertCoreUIPointToHardwareSafeAreaPoint" ]]
+	-- upvalues: GuiService (copy)
+	return p1 + GuiService:GetGuiInset()
 end
 
-local _ = function(p1)
-	return UDim2.fromOffset(p1.X, p1.Y)
+local _ = function(Vector): UDim2 --[[ Line: 33 | Named "vector2ToUDim2" ]]
+	return UDim2.fromOffset(Vector.X, Vector.Y)
 end
 
-local _ = function(p1)
-	-- upvalues: guiService (ref)
-	local var1 = p1.position + guiService:GetGuiInset()
-	local size = p1.size
-	guiService:SendUIOcclusionMetricsForQueryRegion(UDim2.fromOffset(var1.X, var1.Y), UDim2.fromOffset(size.X, size.Y), "currentSizeTR")
+local _ = function(p1) --[[ Line: 37 | Named "reportOcclusionMetrics" ]]
+	-- upvalues: GuiService (copy)
+	local NewPosition = p1.position + GuiService:GetGuiInset()
+	local Size = p1.size
+	GuiService:SendUIOcclusionMetricsForQueryRegion(UDim2.fromOffset(NewPosition.X, NewPosition.Y), UDim2.fromOffset(Size.X, Size.Y), "currentSizeTR")
 end
 
-return function()
-	-- upvalues: guiServiceSendUIOcclusionMetricsForQueryRegionEngineFeature (ref), reactModule (ref), constantsModule (ref), fFlagTopBarSignalizeKeepOutAreas (ref), coreGuiCommonModule (ref), signalsModule (ref), useSelector (ref), guiService (ref), fIntLuaUIOcclusionMetricsReportingPeriodSeconds (ref)
-	if not guiServiceSendUIOcclusionMetricsForQueryRegionEngineFeature then return end
-	local var1 = nil
-	local var2 = reactModule.useRef({
-		id = constantsModule.UNIBAR_KEEP_OUT_AREA_ID,
+return function() --[[ Line: 46 | Named "OcclusionMetricsManager" ]]
+	-- upvalues: GuiServiceSendUIOcclusionMetricsForQueryRegionEngineFeature (copy), ReactModule (copy), ConstantsModule (copy), FFlagTopBarSignalizeKeepOutAreas (copy), CoreGuiCommonModule (copy), SignalsModule (copy), UseSelectorFunction (copy), GuiService (copy), FIntLuaUIOcclusionMetricsReportingPeriodSeconds (copy)
+	if not GuiServiceSendUIOcclusionMetricsForQueryRegionEngineFeature then return end
+	local Callback = nil
+	local UseRefResult = ReactModule.useRef({
+		id = ConstantsModule.UNIBAR_KEEP_OUT_AREA_ID,
 		position = Vector2.new(),
 		size = Vector2.new()
 	})
 	
-	if fFlagTopBarSignalizeKeepOutAreas then
-		local keepOutAreasStore = coreGuiCommonModule.Stores.GetKeepOutAreasStore(false)
-		var1 = signalsModule.createEffect(function(_)
-			-- upvalues: var2 (ref), keepOutAreasStore (ref), constantsModule (copy)
-			var2.current = keepOutAreasStore.getKeepOutAreas(false)[constantsModule.UNIBAR_KEEP_OUT_AREA_ID]
+	if FFlagTopBarSignalizeKeepOutAreas then
+		local KeepOutAreasStore = CoreGuiCommonModule.Stores.GetKeepOutAreasStore(false)
+		Callback = SignalsModule.createEffect(function(_) --[[ Line: 63 ]]
+			-- upvalues: UseRefResult (copy), KeepOutAreasStore (copy), ConstantsModule (upval)
+			UseRefResult.current = KeepOutAreasStore.getKeepOutAreas(false)[ConstantsModule.UNIBAR_KEEP_OUT_AREA_ID]
 		end)
 	else
-		local var3 = useSelector(function(p1)
-			-- upvalues: constantsModule (copy)
-			return p1.displayOptions.keepOutAreas[constantsModule.UNIBAR_KEEP_OUT_AREA_ID]
+		local UseSelectorResult = UseSelectorFunction(function(p1) --[[ Line: 67 ]]
+			-- upvalues: ConstantsModule (upval)
+			return p1.displayOptions.keepOutAreas[ConstantsModule.UNIBAR_KEEP_OUT_AREA_ID]
 		end)
-		reactModule.useEffect(function()
-			-- upvalues: var2 (ref), var3 (ref)
-			var2.current = var3
-		end, { var3 })
+		ReactModule.useEffect(function() --[[ Line: 71 ]]
+			-- upvalues: UseRefResult (copy), UseSelectorResult (copy)
+			UseRefResult.current = UseSelectorResult
+		end, { UseSelectorResult })
 	end
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), guiService (copy), fIntLuaUIOcclusionMetricsReportingPeriodSeconds (copy), fFlagTopBarSignalizeKeepOutAreas (copy), var1 (write)
-		local thread = task.spawn(function()
-			-- upvalues: var2 (copy), guiService (copy), fIntLuaUIOcclusionMetricsReportingPeriodSeconds (copy)
+	ReactModule.useEffect(function() --[[ Line: 76 ]]
+		-- upvalues: UseRefResult (copy), GuiService (upval), FIntLuaUIOcclusionMetricsReportingPeriodSeconds (upval), FFlagTopBarSignalizeKeepOutAreas (upval), Callback (ref)
+		local SpawnedThread = task.spawn(function() --[[ Line: 78 ]]
+			-- upvalues: UseRefResult (upval), GuiService (upval), FIntLuaUIOcclusionMetricsReportingPeriodSeconds (upval)
 			while true do
-				if var2.current then
-					local current = var2.current
-					local var4 = current.position + guiService:GetGuiInset()
-					local size = current.size
-					guiService:SendUIOcclusionMetricsForQueryRegion(UDim2.fromOffset(var4.X, var4.Y), UDim2.fromOffset(size.X, size.Y), "currentSizeTR")
+				if UseRefResult.current then
+					local Current = UseRefResult.current
+					local NewPosition = Current.position + GuiService:GetGuiInset()
+					local Size = Current.size
+					GuiService:SendUIOcclusionMetricsForQueryRegion(UDim2.fromOffset(NewPosition.X, NewPosition.Y), UDim2.fromOffset(Size.X, Size.Y), "currentSizeTR")
 				end
-				task.wait(fIntLuaUIOcclusionMetricsReportingPeriodSeconds)
+				task.wait(FIntLuaUIOcclusionMetricsReportingPeriodSeconds)
 			end
 		end)
 		
-		return function()
-			-- upvalues: thread (ref), fFlagTopBarSignalizeKeepOutAreas (copy), var1 (copy)
-			task.cancel(thread)
+		return function() --[[ Line: 87 ]]
+			-- upvalues: SpawnedThread (copy), FFlagTopBarSignalizeKeepOutAreas (upval), Callback (upval)
+			task.cancel(SpawnedThread)
 			
-			if fFlagTopBarSignalizeKeepOutAreas then
-				var1()
+			if FFlagTopBarSignalizeKeepOutAreas then
+				Callback()
 			end
 		end
 	end, {})

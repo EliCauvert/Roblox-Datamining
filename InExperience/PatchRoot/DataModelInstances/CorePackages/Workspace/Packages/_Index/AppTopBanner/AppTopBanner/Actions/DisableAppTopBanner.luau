@@ -1,3 +1,3 @@
-﻿return require(script:FindFirstAncestor("AppTopBanner").Parent.Rodux).makeActionCreator(script.Name, function(p1)
-	return { isDisabled = p1 }
+﻿return require(script:FindFirstAncestor("AppTopBanner").Parent.Rodux).makeActionCreator(script.Name, function(IsDisabled) --[[ Line: 5 ]]
+	return { isDisabled = IsDisabled }
 end)

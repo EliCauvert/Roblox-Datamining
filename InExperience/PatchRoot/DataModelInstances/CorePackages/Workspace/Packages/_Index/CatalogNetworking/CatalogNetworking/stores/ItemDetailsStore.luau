@@ -1,41 +1,40 @@
-﻿local catalogNetworking = script:FindFirstAncestor("CatalogNetworking")
-local parent = catalogNetworking.Parent
-local signalsModule = require(parent.Signals)
-local promiseModule = require(parent.Promise)
-local _ = require(catalogNetworking.Types)
-local fetchItemDetailsModule = require(catalogNetworking.networkRequests.fetchItemDetails)
-local var1, var2 = signalsModule.createSignal({})
+﻿local CatalogNetworking = script:FindFirstAncestor("CatalogNetworking")
+local Parent = CatalogNetworking.Parent
+local PromiseModule = require(Parent.Promise)
+local _ = require(CatalogNetworking.Types)
+local FetchItemDetailsModule = require(CatalogNetworking.networkRequests.fetchItemDetails)
+local Signal, Signal2 = require(Parent.Signals).createSignal({})
 
 return {
-	getCache = var1,
-	fetchAndCache = function(p1, p2)
-		-- upvalues: var1 (ref), promiseModule (ref), fetchItemDetailsModule (ref), var2 (ref)
-		local var3 = var1(false)
-		local t = {}
+	getCache = Signal,
+	fetchAndCache = function(p1, List) --[[ Line: 14 ]]
+		-- upvalues: Signal (copy), PromiseModule (copy), FetchItemDetailsModule (copy), Signal2 (copy)
+		local SignalResult = Signal(false)
+		local List1 = {}
 		
-		for i, v in p2 do
-			if not var3[tostring(v.id)] then
-				table.insert(t, v)
+		for _, value in List do
+			if not SignalResult[tostring(value.id)] then
+				table.insert(List1, value)
 			end
 		end
-		return if #t == 0 then promiseModule.resolve() else fetchItemDetailsModule(p1, t):andThen(function(p3)
-			-- upvalues: var1 (copy), var2 (copy)
-			if p3 and p3.data then
-				local cloned = table.clone(var1(false))
+		return if #List1 == 0 then PromiseModule.resolve() else FetchItemDetailsModule(p1, List1):andThen(function(Result) --[[ Line: 26 ]]
+			-- upvalues: Signal (upval), Signal2 (upval)
+			if Result and Result.data then
+				local Copy = table.clone(Signal(false))
 				
-				for i, v in p3.data do
-					cloned[tostring(v.id)] = v
+				for _, entry in Result.data do
+					Copy[tostring(entry.id)] = entry
 				end
-				var2(cloned)
+				Signal2(Copy)
 			end
 		end)
 	end,
-	getItem = function(p3)
-		-- upvalues: var1 (ref)
-		return var1(false)[p3]
+	getItem = function(p2) --[[ Line: 37 ]]
+		-- upvalues: Signal (copy)
+		return Signal(false)[p2]
 	end,
-	clear = function()
-		-- upvalues: var2 (ref)
-		var2({})
+	clear = function() --[[ Line: 41 ]]
+		-- upvalues: Signal2 (copy)
+		Signal2({})
 	end
 }

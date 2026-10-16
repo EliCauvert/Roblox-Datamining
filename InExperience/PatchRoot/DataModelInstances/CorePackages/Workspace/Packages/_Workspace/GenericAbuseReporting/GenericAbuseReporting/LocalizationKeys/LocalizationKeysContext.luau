@@ -1,3 +1,3 @@
-﻿local genericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
+﻿local GenericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
 
-return require(genericAbuseReporting.Parent.React).createContext(require(genericAbuseReporting.LocalizationKeys.DefaultLocalizationKeys))
+return require(GenericAbuseReporting.Parent.React).createContext((require(GenericAbuseReporting.LocalizationKeys.DefaultLocalizationKeys)))

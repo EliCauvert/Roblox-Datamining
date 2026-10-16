@@ -1,26 +1,27 @@
-﻿local genericChallenges = script:FindFirstAncestor("GenericChallenges")
-local constantsModule = require(genericChallenges.Utils.constants)
-local genericTypeModule = require(genericChallenges.Types.GenericType)
-local base64 = require(genericChallenges.Parent.AuthCommon).Utils.Base64
-local httpService = game:GetService("HttpService")
-local t = {}
-t.__index = t
+﻿local GenericChallenges = script:FindFirstAncestor("GenericChallenges")
+local ConstantsModule = require(GenericChallenges.Utils.constants)
+local GenericTypeModule = require(GenericChallenges.Types.GenericType)
+local Base64 = require(GenericChallenges.Parent.AuthCommon).Utils.Base64
+local HttpService = game:GetService("HttpService")
+local ChallengeHeadersModule = {}
+ChallengeHeadersModule.__index = ChallengeHeadersModule
 
-function t.new(p1)
-	-- upvalues: constantsModule (ref), base64 (ref), httpService (ref), genericTypeModule (ref), t (ref)
-	local t_1 = { challengeId = p1[constantsModule.challengeIdHeader] }
-	local var1 = base64.Decode(p1[constantsModule.challengeMetadataHeader])
-	t_1.challengeMetadata = {
-		raw = p1[constantsModule.challengeMetadataHeader],
-		decoded = var1,
-		typed = httpService:JSONDecode(var1)
-	}
-	t_1.challengeType = {
-		raw = p1[constantsModule.challengeTypeHeader],
-		typed = genericTypeModule.fromRawValue(p1[constantsModule.challengeTypeHeader])
-	}
+function ChallengeHeadersModule.new(p1) --[[ Line: 41 ]]
+	-- upvalues: ConstantsModule (copy), Base64 (copy), HttpService (copy), GenericTypeModule (copy), ChallengeHeadersModule (copy)
+	local DecodeResult = Base64.Decode(p1[ConstantsModule.challengeMetadataHeader])
 	
-	return setmetatable(t_1, t)
+	return (setmetatable({
+		challengeId = p1[ConstantsModule.challengeIdHeader],
+		challengeMetadata = {
+			raw = p1[ConstantsModule.challengeMetadataHeader],
+			decoded = DecodeResult,
+			typed = HttpService:JSONDecode(DecodeResult)
+		},
+		challengeType = {
+			raw = p1[ConstantsModule.challengeTypeHeader],
+			typed = GenericTypeModule.fromRawValue(p1[ConstantsModule.challengeTypeHeader])
+		}
+	}, ChallengeHeadersModule))
 end
 
-return t
+return ChallengeHeadersModule

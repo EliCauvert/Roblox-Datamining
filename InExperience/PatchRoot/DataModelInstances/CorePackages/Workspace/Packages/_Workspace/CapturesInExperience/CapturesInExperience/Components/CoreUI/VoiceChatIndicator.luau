@@ -1,81 +1,84 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local reactModule = require(parent_1.React)
-local roactUtilsModule = require(parent_1.RoactUtils)
-local default = require(parent_1.VoiceChatCore).CoreVoiceManager.default
-local foundationModule = require(parent_1.Foundation)
-local localizationModule = require(parent_1.Localization)
-local controlState = foundationModule.Enums.ControlState
-local icon = foundationModule.Icon
-local popover = foundationModule.Popover
-local popoverAlign = foundationModule.Enums.PopoverAlign
-local text = foundationModule.Text
-local view = foundationModule.View
-local useLocalization = localizationModule.Hooks.useLocalization
-local useScaledValue = foundationModule.Hooks.useScaledValue
-local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
-local useTokens = foundationModule.Hooks.useTokens
-local captureTriggerTypeModule = require(parent.Enums.CaptureTriggerType)
-local constantsModule = require(parent.Constants)
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local ReactModule = require(Parent1.React)
+local Default = require(Parent1.VoiceChatCore).CoreVoiceManager.default
+local FoundationModule = require(Parent1.Foundation)
+local ControlState = FoundationModule.Enums.ControlState
+local Icon = FoundationModule.Icon
+local Popover = FoundationModule.Popover
+local PopoverAlign = FoundationModule.Enums.PopoverAlign
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local UseLocalizationFunction = require(Parent1.Localization).Hooks.useLocalization
+local UseScaledValueFunction = FoundationModule.Hooks.useScaledValue
+local UseSelectorFunction = require(Parent1.RoactUtils).Hooks.RoactRodux.useSelector
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local CaptureTriggerTypeModule = require(Parent.Enums.CaptureTriggerType)
+local ConstantsModule = require(Parent.Constants)
 
-return function(p1)
-	-- upvalues: useLocalization (ref), useScaledValue (ref), useTokens (ref), reactModule (ref), useSelector (ref), constantsModule (ref), controlState (ref), default (ref), captureTriggerTypeModule (ref), view (ref), popover (ref), icon (ref), foundationModule (ref), popoverAlign (ref), text (ref)
-	local var1 = useLocalization({
+return function(p1) --[[ Line: 33 ]]
+	-- upvalues: UseLocalizationFunction (copy), UseScaledValueFunction (copy), UseTokensFunction (copy), ReactModule (copy), UseSelectorFunction (copy), ConstantsModule (copy), ControlState (copy), Default (copy), CaptureTriggerTypeModule (copy), View (copy), Popover (copy), Icon (copy), FoundationModule (copy), PopoverAlign (copy), Text (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
 		voiceChatMutedLabel = "Feature.Captures.Label.VideoCaptureVoiceChatMutedTooltip",
 		voiceChatMutedTitle = "Feature.Captures.Title.VideoCaptureVoiceChatMutedTooltip"
 	})
-	local var2 = useScaledValue(320)
-	local var3 = useTokens()
-	local var4, var5 = reactModule.useState(false)
-	local var6 = useSelector(function(p2)
-		-- upvalues: constantsModule (copy)
-		return p2[constantsModule.RoduxKey].IsVideoCaptureActive.triggerType
+	local UseScaledValueResult = UseScaledValueFunction(320)
+	local UseTokensResult = UseTokensFunction()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseSelectorResult = UseSelectorFunction(function(p2) --[[ Line: 43 ]]
+		-- upvalues: ConstantsModule (upval)
+		return p2[ConstantsModule.RoduxKey].IsVideoCaptureActive.triggerType
 	end)
+	local UseResult = ReactModule.useCallback(function(Pressed) --[[ Line: 47 ]]
+		-- upvalues: ControlState (upval), UseStateResult2 (copy), UseStateResult (copy)
+		if Pressed == ControlState.Pressed then
+			UseStateResult2(not UseStateResult)
+		end
+	end, { UseStateResult })
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 53 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(false)
+	end, {})
 	
-	return if not (not default:UserVoiceEnabled() or not default:IsInitialized()) then if not (var6 ~= captureTriggerTypeModule.UserCapture and var6 ~= captureTriggerTypeModule.DeveloperCapture) then if game:GetEngineFeature("ReenableMomentsVoice") then nil else reactModule.createElement(view, {
+	return if Default:UserVoiceEnabled() and Default:IsInitialized() and (UseSelectorResult == CaptureTriggerTypeModule.UserCapture or UseSelectorResult == CaptureTriggerTypeModule.DeveloperCapture) then if game:GetEngineFeature("ReenableMomentsVoice") then nil else ReactModule.createElement(View, {
 		tag = "anchor-center-center clip position-center-center radius-circle size-700-700",
 		LayoutOrder = p1.layoutOrder,
-		onStateChanged = reactModule.useCallback(function(p2)
-			-- upvalues: controlState (copy), var5 (ref), var4 (ref)
-			if p2 == controlState.Pressed then
-				var5(not var4)
-			end
-		end, { var4 })
+		onStateChanged = UseResult
 	}, {
-		Popover = reactModule.createElement(popover.Root, { isOpen = var4 }, {
-			Anchor = reactModule.createElement(popover.Anchor, {
+		Popover = ReactModule.createElement(Popover.Root, { isOpen = UseStateResult }, {
+			Anchor = ReactModule.createElement(Popover.Anchor, {
 				AnchorPoint = Vector2.new(0.5, 0.5),
 				Position = UDim2.fromScale(0.5, 0.5)
 			}, {
-				DeafenIcon = reactModule.createElement(icon, {
+				DeafenIcon = ReactModule.createElement(Icon, {
 					name = "icons/controls/headphoneDeafen_small",
-					size = foundationModule.Enums.IconSize.Small,
-					style = var3.Color.Content.Emphasis
+					size = FoundationModule.Enums.IconSize.Small,
+					style = UseTokensResult.Color.Content.Emphasis
 				})
 			}),
-			Content = reactModule.createElement(popover.Content, {
+			Content = ReactModule.createElement(Popover.Content, {
 				hasArrow = false,
-				align = popoverAlign.Center,
-				onPressedOutside = reactModule.useCallback(function()
-					-- upvalues: var5 (ref)
-					var5(false)
-				end, {}),
-				side = { offset = var3.Size.Size_500, position = p1.popoverSide }
+				align = PopoverAlign.Center,
+				onPressedOutside = UseResult1,
+				side = {
+					offset = UseTokensResult.Size.Size_500,
+					position = p1.popoverSide
+				}
 			}, {
-				Tooltip = reactModule.createElement(view, {
+				Tooltip = ReactModule.createElement(View, {
 					tag = "auto-xy col gap-xsmall padding-y-small padding-x-medium",
-					sizeConstraint = { MaxSize = Vector2.new(var2, 1e999) }
+					sizeConstraint = { MaxSize = Vector2.new(UseScaledValueResult, 1e999) }
 				}, {
-					Title = reactModule.createElement(text, {
+					Title = ReactModule.createElement(Text, {
 						tag = "size-full-0 auto-y text-truncate-end text-align-x-left text-title-small",
-						Text = var1.voiceChatMutedTitle
+						Text = UseLocalizationResult.voiceChatMutedTitle
 					}),
-					Subtitle = reactModule.createElement(text, {
+					Subtitle = ReactModule.createElement(Text, {
 						tag = "size-full-0 auto-y text-wrap text-align-x-left text-body-small",
-						Text = var1.voiceChatMutedLabel
+						Text = UseLocalizationResult.voiceChatMutedLabel
 					})
 				})
 			})
 		})
-	}) else nil else nil
+	}) else nil
 end

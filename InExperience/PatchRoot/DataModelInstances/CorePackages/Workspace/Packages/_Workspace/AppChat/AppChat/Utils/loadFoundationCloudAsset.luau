@@ -1,18 +1,19 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local foundationCloudAssetsModule = require(appChat.Parent.FoundationCloudAssets)
-local assets = foundationCloudAssetsModule.Assets
-local preloadAsset = foundationCloudAssetsModule.preloadAsset
-local loadFoundationCloudAsset = require(appChat.Logger):new("loadFoundationCloudAsset")
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local FoundationCloudAssetsModule = require(AppChat.Parent.FoundationCloudAssets)
+local Assets = FoundationCloudAssetsModule.Assets
+local PreloadAssetFunction = FoundationCloudAssetsModule.preloadAsset
+local LoadFoundationCloudAsset = require(AppChat.Logger):new("loadFoundationCloudAsset")
 
-return function(value)
-	-- upvalues: preloadAsset (ref), assets (ref), loadFoundationCloudAsset (ref)
-	preloadAsset(value)
-	local var1 = assets[value]
+return function(p1) --[[ Line: 12 | Named "loadFoundationCloudAsset" ]]
+	-- upvalues: PreloadAssetFunction (copy), Assets (copy), LoadFoundationCloudAsset (copy)
+	PreloadAssetFunction(p1)
+	local Asset = Assets[p1]
 	
-	if var1 then
-		return var1.assetId, var1.size
+	if Asset then
+		return Asset.assetId, Asset.size
+	else
+		LoadFoundationCloudAsset:error("FoundationCloudAsset not found: %s", p1)
+		
+		return "", { X = 0, Y = 0 }
 	end
-	loadFoundationCloudAsset:error("FoundationCloudAsset not found: %s", value)
-	
-	return "", { X = 0, Y = 0 }
 end

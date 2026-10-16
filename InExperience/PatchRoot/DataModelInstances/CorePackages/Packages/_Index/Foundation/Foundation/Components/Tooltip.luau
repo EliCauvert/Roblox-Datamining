@@ -1,1 +1,1 @@
-﻿return require(script.Tooltip)
+﻿return (require(script.Tooltip))

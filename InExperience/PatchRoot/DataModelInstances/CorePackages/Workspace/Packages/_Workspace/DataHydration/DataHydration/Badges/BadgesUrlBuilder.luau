@@ -1,11 +1,11 @@
-﻿local parent = script:FindFirstAncestor("DataHydration").Parent
-local urlBuilder = require(parent.UrlBuilder).UrlBuilder
-local url = require(parent.Http).Url
+﻿local Parent = script:FindFirstAncestor("DataHydration").Parent
+local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
+local Url = require(Parent.Http).Url
 
 return {
-	buildBadgeRemoveUrl = function(p1)
-		-- upvalues: urlBuilder (ref), url (ref)
-		return urlBuilder.new({ path = "v1/user/badges/{assetId}", base = url.BADGES_URL })({ assetId = p1 })
+	buildBadgeRemoveUrl = function(AssetId) --[[ Line: 13 ]]
+		-- upvalues: UrlBuilder (copy), Url (copy)
+		return UrlBuilder.new({ path = "v1/user/badges/{assetId}", base = Url.BADGES_URL })({ assetId = AssetId })
 	end,
-	BADGE_REMOVE_URL = urlBuilder.new({ path = "v1/user/badges/", base = url.BADGES_URL })()
+	BADGE_REMOVE_URL = UrlBuilder.new({ path = "v1/user/badges/", base = Url.BADGES_URL })()
 }

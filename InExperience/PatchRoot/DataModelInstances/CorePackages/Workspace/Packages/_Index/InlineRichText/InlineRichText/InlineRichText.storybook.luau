@@ -1,29 +1,25 @@
-﻿local inlineRichText = script:FindFirstAncestor("InlineRichText")
-local parent = inlineRichText.Parent
-require(parent.UIBlox).init(require(parent.Dev.RobloxAppUIBloxConfig))
-local roactModule = require(parent.Dev.Roact)
-local cryoModule = require(parent.Cryo)
-local mockProvidersModule = require(inlineRichText.MockProviders)
-local t = {
+﻿local InlineRichText = script:FindFirstAncestor("InlineRichText")
+local Parent = InlineRichText.Parent
+require(Parent.UIBlox).init((require(Parent.Dev.RobloxAppUIBloxConfig)))
+local RoactModule = require(Parent.Dev.Roact)
+local CryoModule = require(Parent.Cryo)
+local MockProvidersModule = require(InlineRichText.MockProviders)
+local config = {
 	Default = { themeName = "Light", fontName = "Gotham" },
 	Light = { themeName = "Light", fontName = "Gotham" },
 	Dark = { themeName = "Dark", fontName = "Gotham" }
 }
 
 return {
-	roact = roactModule,
-	mapStory = function(p1)
-		-- upvalues: t (ref), roactModule (ref), mockProvidersModule (ref), cryoModule (ref)
-		return function(p2)
-			-- upvalues: t (copy), roactModule (copy), mockProvidersModule (copy), p1 (ref), cryoModule (copy)
-			local props
-			if p2 then
-				props = p2.definition and (p2.definition.props or {})
-			end
-			return roactModule.createElement(mockProvidersModule, {
-				themeName = (if p2 then t[p2.theme] else t.Default).themeName
+	roact = RoactModule,
+	mapStory = function(p1) --[[ Line: 35 ]]
+		-- upvalues: config (copy), RoactModule (copy), MockProvidersModule (copy), CryoModule (copy)
+		return function(p2) --[[ Line: 36 ]]
+			-- upvalues: config (upval), RoactModule (upval), MockProvidersModule (upval), p1 (copy), CryoModule (upval)
+			return RoactModule.createElement(MockProvidersModule, {
+				themeName = (p2 and config[p2.theme] or config.Default).themeName
 			}, {
-				story = roactModule.createElement(p1, cryoModule.Dictionary.union(props, p2))
+				story = RoactModule.createElement(p1, CryoModule.Dictionary.union(p2 and p2.definition and p2.definition.props or {}, p2))
 			})
 		end
 	end

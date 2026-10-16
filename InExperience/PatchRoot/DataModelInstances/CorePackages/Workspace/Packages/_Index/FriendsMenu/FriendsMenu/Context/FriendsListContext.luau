@@ -1,17 +1,17 @@
-﻿local friendsMenu = script:FindFirstAncestor("FriendsMenu")
-local _ = require(friendsMenu.friendsMenuModalType)
+﻿local FriendsMenu = script:FindFirstAncestor("FriendsMenu")
+local _ = require(FriendsMenu.friendsMenuModalType)
 
-return require(friendsMenu.Parent.React).createContext({
+return (require(FriendsMenu.Parent.React).createContext({
 	hasFriends = false,
 	isFetchingFriends = false,
 	isFriendsListFetchFailed = false,
 	searchFriendsString = "",
 	friends = {},
-	searchFriends = function()
+	searchFriends = function() --[[ Line: 15 ]]
 		return {}
 	end,
-	fetchMoreFriends = function()
+	fetchMoreFriends = function() --[[ Line: 18 ]]
 		return {}
 	end,
 	friendsNames = { loading = true }
-})
+}))

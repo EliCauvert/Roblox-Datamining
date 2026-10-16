@@ -1,38 +1,38 @@
-﻿local socialLuaAnalytics = require(script.Parent.Parent.dependencies).SocialLuaAnalytics
-local eventNamesModule = require(script.Parent.Enums.EventNames)
-local fireReportStatsModule = require(script.Parent.fireReportStats)
-local fireEventStream = socialLuaAnalytics.Analytics.FireEvent.fireEventStream
-local fireDiagCounter = socialLuaAnalytics.Analytics.FireEvent.fireDiagCounter
-local analyticsEventsModule = require(script.Parent.AnalyticsEvents)
-local diagEventsModule = require(script.Parent.DiagEvents)
+﻿local SocialLuaAnalytics = require(script.Parent.Parent.dependencies).SocialLuaAnalytics
+local EventNamesModule = require(script.Parent.Enums.EventNames)
+local FireReportStatsModule = require(script.Parent.fireReportStats)
+local FireEventStreamFunction = SocialLuaAnalytics.Analytics.FireEvent.fireEventStream
+local FireDiagCounterFunction = SocialLuaAnalytics.Analytics.FireEvent.fireDiagCounter
+local AnalyticsEventsModule = require(script.Parent.AnalyticsEvents)
+local DiagEventsModule = require(script.Parent.DiagEvents)
 
-return function(p1)
-	-- upvalues: fireEventStream (ref), analyticsEventsModule (ref), fireDiagCounter (ref), diagEventsModule (ref), fireReportStatsModule (ref), eventNamesModule (ref)
-	local var1 = fireEventStream({
+return function(p1) --[[ Line: 12 ]]
+	-- upvalues: FireEventStreamFunction (copy), AnalyticsEventsModule (copy), FireDiagCounterFunction (copy), DiagEventsModule (copy), FireReportStatsModule (copy), EventNamesModule (copy)
+	local FireEventStreamResult = FireEventStreamFunction({
 		eventStreamImpl = if p1.analytics then p1.analytics.EventStream else p1.eventStreamImpl,
-		eventList = analyticsEventsModule,
+		eventList = AnalyticsEventsModule,
 		infoForAllEvents = p1.defaultAnalyticsInfo
 	})
-	local var2 = fireDiagCounter({
+	local FireDiagCounterResult = FireDiagCounterFunction({
 		diagImpl = if p1.analytics then p1.analytics.Diag else p1.diag,
-		eventList = diagEventsModule
+		eventList = DiagEventsModule
 	})
-	local var3 = fireReportStatsModule({
+	local FireReportStatsModuleResult = FireReportStatsModule({
 		diagImpl = if p1.analytics then p1.analytics.Diag else p1.diag,
-		eventList = diagEventsModule
+		eventList = DiagEventsModule
 	})
 	
-	return function(p2, p3)
-		-- upvalues: diagEventsModule (copy), eventNamesModule (copy), var3 (ref), var2 (ref), analyticsEventsModule (copy), var1 (ref)
-		if diagEventsModule[p2] then
-			if p2 == eventNamesModule.ContactImportingTime then
-				var3(eventNamesModule.ContactImportingTime, p3)
+	return function(ContactImportingTime, p2) --[[ Line: 35 ]]
+		-- upvalues: DiagEventsModule (upval), EventNamesModule (upval), FireReportStatsModuleResult (copy), FireDiagCounterResult (copy), AnalyticsEventsModule (upval), FireEventStreamResult (copy)
+		if DiagEventsModule[ContactImportingTime] then
+			if ContactImportingTime == EventNamesModule.ContactImportingTime then
+				FireReportStatsModuleResult(EventNamesModule.ContactImportingTime, p2)
 			else
-				var2(p2)
+				FireDiagCounterResult(ContactImportingTime)
 			end
 		end
-		if analyticsEventsModule[p2] then
-			var1(p2, p3)
+		if AnalyticsEventsModule[ContactImportingTime] then
+			FireEventStreamResult(ContactImportingTime, p2)
 		end
 	end
 end

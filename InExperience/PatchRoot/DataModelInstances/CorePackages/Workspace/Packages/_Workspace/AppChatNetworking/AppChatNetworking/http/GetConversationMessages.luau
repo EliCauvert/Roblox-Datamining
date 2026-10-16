@@ -1,17 +1,16 @@
-﻿local httpService = game:GetService("HttpService")
-local appChatNetworking = script:FindFirstAncestor("AppChatNetworking")
-local parent = appChatNetworking.Parent
-local CHAT_PLATFORM_BASE_URLModule = require(appChatNetworking.url.CHAT_PLATFORM_BASE_URL)
-local default = require(appChatNetworking.url.HttpRequest).default
-local getFFlagEnableSocialCards = require(parent.SharedFlags).GetFFlagEnableSocialCards
+﻿local HttpService = game:GetService("HttpService")
+local AppChatNetworking = script:FindFirstAncestor("AppChatNetworking")
+local CHATPLATFORMBASEURLModule = require(AppChatNetworking.url.CHAT_PLATFORM_BASE_URL)
+local Default = require(AppChatNetworking.url.HttpRequest).default
+local GetFFlagEnableSocialCardsFunction = require(AppChatNetworking.Parent.SharedFlags).GetFFlagEnableSocialCards
 
-return function(p1, p2, p3)
-	-- upvalues: default (ref), httpService (ref), getFFlagEnableSocialCards (ref), CHAT_PLATFORM_BASE_URLModule (ref)
-	p1 = p1 or default
-	local var1 = `conversation_id={httpService:UrlEncode(p2)}`
+return function(p1, Input, Input1) --[[ Line: 12 ]]
+	-- upvalues: Default (copy), HttpService (copy), GetFFlagEnableSocialCardsFunction (copy), CHATPLATFORMBASEURLModule (copy)
+	local Callback = p1 or Default
+	local ConversationName: string = `conversation_id={HttpService:UrlEncode(Input)}`
 	
-	if p3 ~= nil and p3 ~= "" then
-		var1 = `{var1}&cursor={httpService:UrlEncode(p3)}`
+	if Input1 ~= nil and Input1 ~= "" then
+		ConversationName = `{ConversationName}&cursor={HttpService:UrlEncode(Input1)}`
 	end
-	return p1(`{CHAT_PLATFORM_BASE_URLModule}/v1/get-conversation-messages?{`{var1}&include_cards={if getFFlagEnableSocialCards() then "true" else "false"}`}`, "GET")
+	return Callback(`{CHATPLATFORMBASEURLModule}/v1/get-conversation-messages?{`{ConversationName}&include_cards={if GetFFlagEnableSocialCardsFunction() then "true" else "false"}`}`, "GET")
 end

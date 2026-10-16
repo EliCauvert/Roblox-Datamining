@@ -1,113 +1,139 @@
-﻿local genericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
-local _ = require(genericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.AbuseSheetFlowTypes)
+﻿local GenericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
+local _ = require(GenericAbuseReporting.BeduiV2.Hooks.AbuseSheetFlow.AbuseSheetFlowTypes)
 local _ = require(script.Parent.ResolverTypes)
-local transformJsonLeafFirstModule = require(script.Parent.transformJsonLeafFirst)
-local _ = require(genericAbuseReporting.BeduiV2.Types)
+local TransformJsonLeafFirstModule = require(script.Parent.transformJsonLeafFirst)
+local _ = require(GenericAbuseReporting.BeduiV2.Types)
 
-local function getByPath(p1, p2)
-	local var1 = p1
+local function getByPath(Attribute, Text: string) --[[ Line: 18 ]]
+	local Attribute1 = Attribute
 	
-	for i, v in ipairs(string.split(p2, ".")) do
-		if type(var1) == "table" and var1 ~= nil then
-			var1 = var1[v]
-			
-			if var1 == nil then
-				return nil
-			end
+	for _, value in ipairs((string.split(Text, "."))) do
+		if type(Attribute1) ~= "table" or Attribute1 == nil then
+			return nil
 		end
-		return nil
+		Attribute1 = Attribute1[value]
+		
+		if Attribute1 == nil then
+			return nil
+		end
 	end
-	return var1
+	return Attribute1
 end
 
-local function _(p3)
-	return p3 ~= nil and (p3 ~= false and p3 ~= "")
+local function _(Enabled): boolean --[[ Line: 47 | Named "isTruthy" ]]
+	return Enabled ~= nil and (Enabled ~= false and Enabled ~= "")
 end
 
-local t = {
+local config = {
 	["$attribute"] = {
-		is = function(p3)
-			return type(p3) == "table" and (p3["$attribute"] ~= nil and type(p3["$attribute"]) == "string")
+		is = function(p1): boolean --[[ Line: 57 ]]
+			return type(p1) == "table" and (p1["$attribute"] ~= nil and type(p1["$attribute"]) == "string")
 		end,
-		resolve = function(p3, p4)
-			-- upvalues: getByPath (ref)
-			return getByPath(p4.attribute, p3["$attribute"])
+		resolve = function(p1, p2) --[[ Line: 60 ]]
+			-- upvalues: getByPath (copy)
+			return (getByPath(p2.attribute, p1["$attribute"]))
 		end
 	},
 	["$resource"] = {
-		is = function(p3)
-			return type(p3) == "table" and (p3["$resource"] ~= nil and type(p3["$resource"]) == "string")
+		is = function(p1): boolean --[[ Line: 66 ]]
+			return type(p1) == "table" and (p1["$resource"] ~= nil and type(p1["$resource"]) == "string")
 		end,
-		resolve = function(p3, p4)
-			local var2 = p4.resources[p3["$resource"]]
+		resolve = function(p1, p2) --[[ Line: 69 ]]
+			local Resource = p2.resources[p1["$resource"]]
 			
-			return if var2 then var2.value else nil
+			return if Resource then Resource.value else nil
 		end
 	},
 	["$switch"] = {
-		is = function(p3)
-			return type(p3) == "table" and (p3["$switch"] ~= nil and type(p3["$switch"]) == "table")
+		is = function(p1): boolean --[[ Line: 75 ]]
+			return type(p1) == "table" and (p1["$switch"] ~= nil and type(p1["$switch"]) == "table")
 		end,
-		resolve = function(p3, _)
-			for i, v in ipairs(p3["$switch"]) do
-				if type(v) ~= "string" then
-					if type(v) == "table" and v.condition then
-						local condition = v.condition
-						
-						if condition ~= nil and (condition ~= false and condition ~= "") then
-							return v.value
-						end
+		resolve = function(p1, _) --[[ Line: 78 ]]
+			for _, value in ipairs(p1["$switch"]) do
+				if type(value) == "string" then
+					return value
+				elseif type(value) == "table" and value.condition then
+					local Condition = value.condition
+					
+					if Condition ~= nil and (Condition ~= false and Condition ~= "") then
+						return value.value
 					end
 				end
-				return v
 			end
 			return nil
 		end
 	},
 	["$store"] = {
-		is = function(p4)
-			return type(p4) == "table" and (p4["$store"] ~= nil and type(p4["$store"]) == "string")
+		is = function(p2): boolean --[[ Line: 93 ]]
+			return type(p2) == "table" and (p2["$store"] ~= nil and type(p2["$store"]) == "string")
 		end,
-		resolve = function(p4, p5)
-			-- upvalues: getByPath (ref)
-			return getByPath(p5.store, p4["$store"])
+		resolve = function(p2, p3) --[[ Line: 96 ]]
+			-- upvalues: getByPath (copy)
+			return (getByPath(p3.store, p2["$store"]))
 		end
 	}
 }
 
 return {
-	resolveArConfig = function(p4, p5)
-		-- upvalues: t (ref), transformJsonLeafFirstModule (ref)
-		local t_1 = {
-			attribute = p4.attributes,
+	resolveArConfig = function(p2, p3) --[[ Line: 139 ]]
+		-- upvalues: config (copy), TransformJsonLeafFirstModule (copy)
+		local config1 = {
+			attribute = p2.attributes,
 			resources = {},
-			store = p5.store
+			store = p3.store
 		}
-		t_1 = {
-			attribute = p4.attributes,
-			resources = transformJsonLeafFirstModule(p4.resources, function(p6)
-				-- upvalues: t (copy), t_1 (ref)
-				if type(p6) == "table" then
-					return if t["$attribute"].is(p6) then t["$attribute"].resolve(p6, t_1) elseif t["$resource"].is(p6) then t["$resource"].resolve(p6, t_1) elseif t["$switch"].is(p6) then t["$switch"].resolve(p6, t_1) elseif t["$store"].is(p6) then t["$store"].resolve(p6, t_1) else p6
+		local config2 = {
+			attribute = p2.attributes,
+			resources = TransformJsonLeafFirstModule(p2.resources, function(p4) --[[ Line: 113 | Named "replacerFn" ]]
+				-- upvalues: config (upval), config1 (copy)
+				if type(p4) == "table" then
+					if config["$attribute"].is(p4) then
+						return config["$attribute"].resolve(p4, config1)
+					elseif config["$resource"].is(p4) then
+						return config["$resource"].resolve(p4, config1)
+					elseif config["$switch"].is(p4) then
+						return config["$switch"].resolve(p4, config1)
+					elseif config["$store"].is(p4) then
+						return config["$store"].resolve(p4, config1)
+					end
 				end
+				return p4
 			end),
-			store = p5.store
+			store = p3.store
 		}
 		
-		return transformJsonLeafFirstModule(p4, function(p6)
-			-- upvalues: t (copy), t_1 (ref)
-			if type(p6) == "table" then
-				return if t["$attribute"].is(p6) then t["$attribute"].resolve(p6, t_1) elseif t["$resource"].is(p6) then t["$resource"].resolve(p6, t_1) elseif t["$switch"].is(p6) then t["$switch"].resolve(p6, t_1) elseif t["$store"].is(p6) then t["$store"].resolve(p6, t_1) else p6
+		return (TransformJsonLeafFirstModule(p2, function(p4) --[[ Line: 113 | Named "replacerFn" ]]
+			-- upvalues: config (upval), config2 (copy)
+			if type(p4) == "table" then
+				if config["$attribute"].is(p4) then
+					return config["$attribute"].resolve(p4, config2)
+				elseif config["$resource"].is(p4) then
+					return config["$resource"].resolve(p4, config2)
+				elseif config["$switch"].is(p4) then
+					return config["$switch"].resolve(p4, config2)
+				elseif config["$store"].is(p4) then
+					return config["$store"].resolve(p4, config2)
+				end
 			end
-		end)
+			return p4
+		end))
 	end,
-	resolveConfig = function(p4, p5)
-		-- upvalues: t (ref), transformJsonLeafFirstModule (ref)
-		return transformJsonLeafFirstModule(p4, function(p6)
-			-- upvalues: t (copy), p5 (ref)
-			if type(p6) == "table" then
-				return if t["$attribute"].is(p6) then t["$attribute"].resolve(p6, p5) elseif t["$resource"].is(p6) then t["$resource"].resolve(p6, p5) elseif t["$switch"].is(p6) then t["$switch"].resolve(p6, p5) elseif t["$store"].is(p6) then t["$store"].resolve(p6, p5) else p6
+	resolveConfig = function(p2, p3) --[[ Line: 105 ]]
+		-- upvalues: config (copy), TransformJsonLeafFirstModule (copy)
+		return (TransformJsonLeafFirstModule(p2, function(p4) --[[ Line: 113 | Named "replacerFn" ]]
+			-- upvalues: config (upval), p3 (copy)
+			if type(p4) == "table" then
+				if config["$attribute"].is(p4) then
+					return config["$attribute"].resolve(p4, p3)
+				elseif config["$resource"].is(p4) then
+					return config["$resource"].resolve(p4, p3)
+				elseif config["$switch"].is(p4) then
+					return config["$switch"].resolve(p4, p3)
+				elseif config["$store"].is(p4) then
+					return config["$store"].resolve(p4, p3)
+				end
 			end
-		end)
+			return p4
+		end))
 	end
 }

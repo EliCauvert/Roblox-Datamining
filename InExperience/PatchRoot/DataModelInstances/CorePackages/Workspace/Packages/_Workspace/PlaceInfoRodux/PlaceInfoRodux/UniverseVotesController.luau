@@ -1,98 +1,96 @@
-﻿local parent = script:FindFirstAncestor("PlaceInfoRodux").Parent
-local promiseModule = require(parent.Promise)
-local httpModule = require(parent.Http)
-local httpRequestModule = require(parent.HttpRequest)
-local _ = require(parent.LuauPolyfill)
-local url = httpModule.Url
-local t = {}
-t.__index = t
+﻿local Parent = script:FindFirstAncestor("PlaceInfoRodux").Parent
+local PromiseModule = require(Parent.Promise)
+local HttpRequestModule = require(Parent.HttpRequest)
+local _ = require(Parent.LuauPolyfill)
+local Url = require(Parent.Http).Url
+local UniverseVotesController = {}
+UniverseVotesController.__index = UniverseVotesController
 
-function t.new(p1)
-	-- upvalues: httpRequestModule (ref), t (ref)
-	return setmetatable({
-		_universeVotes = {},
-		_requestImpl = p1 or httpRequestModule.config({
-			requestFunction = function(p2, p3, p4)
-				-- upvalues: httpRequestModule (copy)
-				return httpRequestModule.requestFunctions.HttpRbxApi(p2, p3, p4)
-			end
-		})
-	}, t)
+function UniverseVotesController.new(p1) --[[ Line: 66 ]]
+	-- upvalues: HttpRequestModule (copy), UniverseVotesController (copy)
+	local ConfigResult = HttpRequestModule.config({
+		requestFunction = function(p2, p3, p4) --[[ Line: 70 ]]
+			-- upvalues: HttpRequestModule (upval)
+			return HttpRequestModule.requestFunctions.HttpRbxApi(p2, p3, p4)
+		end
+	})
+	
+	return (setmetatable({ _universeVotes = {}, _requestImpl = p1 or ConfigResult }, UniverseVotesController))
 end
 
-function t:upVotes(p1)
+function UniverseVotesController:upVotes(p1) --[[ Line: 81 ]]
 	return self:_getVotes(p1, "upVotes")
 end
 
-function t:downVotes(p1)
+function UniverseVotesController:downVotes(p1) --[[ Line: 85 ]]
 	return self:_getVotes(p1, "downVotes")
 end
 
-function t:rating(p1)
+function UniverseVotesController:rating(p1) --[[ Line: 89 ]]
 	return self:_getVotes(p1, "rating")
 end
 
-function t:_fetchUniversesVotes(p1)
-	-- upvalues: url (ref)
-	return self._requestImpl(string.format("%sv1/games/votes?%s", url.GAME_URL, url:makeQueryString({ universeIds = p1 })), "GET")
+function UniverseVotesController:_fetchUniversesVotes(UniverseIds) --[[ Line: 95 ]]
+	-- upvalues: Url (copy)
+	return self._requestImpl(string.format("%sv1/games/votes?%s", Url.GAME_URL, (Url:makeQueryString({ universeIds = UniverseIds }))), "GET")
 end
 
-function t:getUniversesVotes(p1)
-	-- upvalues: promiseModule (ref)
-	local var1 = promiseModule.new(function(p2, p3)
-		-- upvalues: self (ref), p1 (ref)
-		self:_fetchUniversesVotes(p1):andThen(function(p4)
-			-- upvalues: p2 (ref), self (copy)
-			if not p4 or not p4.responseBody then
-				p2(nil)
+function UniverseVotesController:getUniversesVotes(UniverseIds) --[[ Line: 108 ]]
+	-- upvalues: PromiseModule (copy)
+	local NewPromise = PromiseModule.new(function(Callback, Callback1) --[[ Line: 111 ]]
+		-- upvalues: self (copy), UniverseIds (copy)
+		self:_fetchUniversesVotes(UniverseIds):andThen(function(Result) --[[ Line: 113 ]]
+			-- upvalues: Callback (copy), self (upval)
+			if not Result or not Result.responseBody then
+				Callback(nil)
 				
 				return
 			end
 			local t = {}
 			
-			for i, v in p4.responseBody.data do
-				local t_1 = {
-					universeId = v.id,
-					upVotes = v.upVotes,
-					downVotes = v.downVotes,
-					rating = if v.upVotes + v.downVotes == 0 then 0 else v.upVotes / (v.upVotes + v.downVotes)
+			for _, entry in Result.responseBody.data do
+				local config = {
+					universeId = entry.id,
+					upVotes = entry.upVotes,
+					downVotes = entry.downVotes,
+					rating = if entry.upVotes + entry.downVotes == 0 then 0 else entry.upVotes / (entry.upVotes + entry.downVotes)
 				}
-				t[v.id] = t_1
-				self._universeVotes[v.id] = t_1
+				t[entry.id] = config
+				self._universeVotes[entry.id] = config
 			end
-			p2(t)
-		end):catch(function(p5)
-			-- upvalues: p3 (ref)
-			p3(p5)
+			Callback(t)
+		end):catch(function(Err) --[[ Line: 140 ]]
+			-- upvalues: Callback1 (copy)
+			Callback1(Err)
 		end)
 	end)
-	local t = {}
+	local ResolveResults = {}
 	
-	for i, v in p1 do
-		if self._universeVotes[v] then
-			t[v] = promiseModule.resolve(self._universeVotes[v])
+	for _, universeId in UniverseIds do
+		if self._universeVotes[universeId] then
+			ResolveResults[universeId] = PromiseModule.resolve(self._universeVotes[universeId])
 		else
-			self._universeVotes[v] = var1:andThen(function(p4)
-				-- upvalues: v (ref)
-				return p4[v]
+			self._universeVotes[universeId] = NewPromise:andThen(function(Result) --[[ Line: 152 ]]
+				-- upvalues: universeId (copy)
+				return Result[universeId]
 			end)
-			t[v] = self._universeVotes[v]
+			ResolveResults[universeId] = self._universeVotes[universeId]
 		end
 	end
-	return t
+	return ResolveResults
 end
 
-function t:_getVotes(p4, p5)
-	-- upvalues: promiseModule (ref)
-	return if self._universeVotes[p4] and self._universeVotes[p4][p5] then promiseModule.resolve(self._universeVotes[p4][p5]) elseif self._universeVotes[p4] then self._universeVotes[p4]:andThen(function(_)
-		-- upvalues: self (ref), p4 (ref), p5 (ref)
-		return self._universeVotes[p4][p5]
-	end) else self:getUniversesVotes({ p4 })[p4]:andThen(function(p6)
-		-- upvalues: p5 (ref)
-		return p6[p5]
+function UniverseVotesController._getVotes(p1, p2, p3) --[[ Line: 162 ]]
+	-- upvalues: PromiseModule (copy)
+	return if p1._universeVotes[p2] and p1._universeVotes[p2][p3] then PromiseModule.resolve(p1._universeVotes[p2][p3]) elseif p1._universeVotes[p2] then p1._universeVotes[p2]:andThen(function(_) --[[ Line: 169 ]]
+		-- upvalues: p1 (copy), p2 (copy), p3 (copy)
+		return p1._universeVotes[p2][p3]
+	end) else p1:getUniversesVotes({ p2 })[p2]:andThen(function(Result) --[[ Line: 174 ]]
+		-- upvalues: p3 (copy)
+		return Result[p3]
 	end)
 end
 
-t.default = t.new()
+UniverseVotesController.default = UniverseVotesController.new()
 
-return t
+return UniverseVotesController

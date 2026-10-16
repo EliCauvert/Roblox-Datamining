@@ -8,7 +8,7 @@
 	Padding = 8,
 	MaxWidth = 300,
 	VerticalStudsOffset = 0,
-	LocalPlayerStudsOffset = Vector3.new(0, 0, 2),
+	LocalPlayerStudsOffset = vector.create(0, 0, 2),
 	BubblesSpacing = 6,
 	MinimizeDistance = 40,
 	MaxDistance = 100,

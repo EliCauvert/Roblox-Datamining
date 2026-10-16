@@ -1,31 +1,33 @@
-﻿local cryo = require(game:GetService("CorePackages").Packages.InGameMenuDependencies).Cryo
-local parent = script.Parent.Parent
-local pagesModule = require(parent.Components.Pages)
-local navigateBackModule = require(parent.Actions.NavigateBack)
-local setCurrentPageModule = require(parent.Actions.SetCurrentPage)
+﻿local Cryo = require(game:GetService("CorePackages").Packages.InGameMenuDependencies).Cryo
+local Parent = script.Parent.Parent
+local PagesModule = require(Parent.Components.Pages)
+local NavigateBackModule = require(Parent.Actions.NavigateBack)
+local SetCurrentPageModule = require(Parent.Actions.SetCurrentPage)
 
-return function(p1, p2)
-	-- upvalues: pagesModule (ref), navigateBackModule (ref), cryo (ref), setCurrentPageModule (ref)
-	local menuPage = pagesModule.pagesByKey[p1.menuPage]
+return function(p1, p2) --[[ Line: 12 ]]
+	-- upvalues: PagesModule (copy), NavigateBackModule (copy), Cryo (copy), SetCurrentPageModule (copy)
+	local PagesByKeyEntry = PagesModule.pagesByKey[p1.menuPage]
 	
-	if p2.type == navigateBackModule.name then
+	if p2.type == NavigateBackModule.name then
 		if p1.respawn.dialogOpen then
-			return cryo.Dictionary.join(p1, {
-				respawn = cryo.Dictionary.join(p1.respawn, { dialogOpen = false })
+			return Cryo.Dictionary.join(p1, {
+				respawn = Cryo.Dictionary.join(p1.respawn, { dialogOpen = false })
 			})
-		elseif p1.report.dialogOpen then
-			return cryo.Dictionary.join(p1, {
-				report = cryo.Dictionary.join(p1.report, { dialogOpen = false })
+		end
+		if p1.report.dialogOpen then
+			return Cryo.Dictionary.join(p1, {
+				report = Cryo.Dictionary.join(p1.report, { dialogOpen = false })
 			})
-		elseif p1.menuPage then
-			local parentPage = menuPage.parentPage
+		end
+		if p1.menuPage then
+			local ParentPage = PagesByKeyEntry.parentPage
 			
-			if parentPage == nil then
-			else
-				return cryo.Dictionary.join(p1, { menuPage = parentPage })
+			if ParentPage ~= nil then
+				return Cryo.Dictionary.join(p1, { menuPage = ParentPage })
 			end
 		end
-	else
-		return if p2.type == setCurrentPageModule.name then cryo.Dictionary.join(p1, { currentlyOpenBubble = cryo.None }) else p1
+	elseif p2.type == SetCurrentPageModule.name then
+		return Cryo.Dictionary.join(p1, { currentlyOpenBubble = Cryo.None })
 	end
+	return p1
 end

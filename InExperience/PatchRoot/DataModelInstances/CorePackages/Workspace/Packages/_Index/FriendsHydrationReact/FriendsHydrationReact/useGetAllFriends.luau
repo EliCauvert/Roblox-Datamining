@@ -1,18 +1,18 @@
-﻿local parent = script:FindFirstAncestor("FriendsHydrationReact").Parent
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local var1 = require(parent.DataHydration).Friends.FriendsStore.get()
+﻿local Parent = script:FindFirstAncestor("FriendsHydrationReact").Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local GetResult = require(Parent.DataHydration).Friends.FriendsStore.get()
 
-return function()
-	-- upvalues: reactModule (ref), var1 (ref), signalsReactModule (ref)
-	return signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: var1 (copy)
-		return var1.GetAllFriends()
-	end, {})), signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: var1 (copy)
-		return var1.GetAllFriendsStatus()
-	end, {})), reactModule.useCallback(function()
-		-- upvalues: var1 (copy)
-		var1.FetchMoreFriends()
-	end, {})
+return function() --[[ Line: 14 | Named "useGetAllFriends" ]]
+	-- upvalues: ReactModule (copy), GetResult (copy), SignalsReactModule (copy)
+	return SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 15 ]]
+		-- upvalues: GetResult (upval)
+		return GetResult.GetAllFriends()
+	end, {}))), SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 18 ]]
+		-- upvalues: GetResult (upval)
+		return GetResult.GetAllFriendsStatus()
+	end, {}))), (ReactModule.useCallback(function() --[[ Line: 25 ]]
+		-- upvalues: GetResult (upval)
+		GetResult.FetchMoreFriends()
+	end, {}))
 end

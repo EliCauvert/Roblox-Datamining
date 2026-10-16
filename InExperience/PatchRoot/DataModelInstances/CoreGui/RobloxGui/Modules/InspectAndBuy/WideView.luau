@@ -1,5 +1,5 @@
-﻿local constantsModule = require(script.Parent.Parent.TopBar.Constants)
-local t = {
+﻿local ConstantsModule = require(script.Parent.Parent.TopBar.Constants)
+local WideViewModule = {
 	UseContainerAspectRatio = false,
 	ContainerBackgroundTransparency = 0.3,
 	ContainerAspectRatio = 0.9,
@@ -12,14 +12,14 @@ local t = {
 	BorderPaddingSize = 40,
 	AssetTextMaxSize = 18,
 	ContainerBackgroundColor = require(script.Parent.Colors).Black,
-	ContainerSize = function(p1)
-		-- upvalues: constantsModule (ref)
-		return UDim2.new(0.7, 0, 0.95, -constantsModule.TopBarHeight * p1)
+	ContainerSize = function(p1): UDim2 --[[ Line: 10 ]]
+		-- upvalues: ConstantsModule (copy)
+		return UDim2.new(0.7, 0, 0.95, -ConstantsModule.TopBarHeight * p1)
 	end,
 	ContainerAnchorPoint = Vector2.new(0.5, 0.5),
-	ContainerPosition = function(p1)
-		-- upvalues: constantsModule (ref)
-		return UDim2.new(0.5, 0, 0.5, constantsModule.TopBarHeight * p1)
+	ContainerPosition = function(p1): UDim2 --[[ Line: 15 ]]
+		-- upvalues: ConstantsModule (copy)
+		return UDim2.new(0.5, 0, 0.5, ConstantsModule.TopBarHeight * p1)
 	end,
 	PlayerViewportSize = UDim2.new(0.33, 0, 1, -42),
 	AssetListSize = UDim2.new(0.67, 0, 1, -42),
@@ -37,11 +37,11 @@ local t = {
 	TryOnPosition = UDim2.new(0, 25, 0, 30),
 	TryOnSize = UDim2.new(0.4, 0, 1, -30)
 }
-setmetatable(t, {
-	__newindex = function(_, _, _) end,
-	__index = function(_, p1)
+setmetatable(WideViewModule, {
+	__newindex = function(_, _, _) --[[ Line: 44 ]] end,
+	__index = function(_, p1) --[[ Line: 45 ]]
 		error("WideView table has no value: " .. tostring(p1))
 	end
 })
 
-return t
+return WideViewModule

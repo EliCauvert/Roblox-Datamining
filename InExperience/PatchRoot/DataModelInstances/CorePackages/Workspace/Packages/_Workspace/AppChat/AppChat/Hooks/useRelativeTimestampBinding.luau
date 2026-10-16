@@ -1,52 +1,55 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local reactModule = require(parent.React)
-local dateTime = require(parent.Time).DateTime
-local getConversationTimestampModule = require(appChat.Utils.getConversationTimestamp)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local ReactModule = require(Parent.React)
+local _DateTime = require(Parent.Time).DateTime
+local GetConversationTimestampModule = require(AppChat.Utils.getConversationTimestamp)
 
-local function computeTimestamp(p1)
-	-- upvalues: getConversationTimestampModule (ref), dateTime (ref)
-	return if p1 == nil then "" else getConversationTimestampModule(dateTime.fromUnixTimestamp(p1))
+local function computeTimestamp(p1) --[[ Line: 10 ]]
+	-- upvalues: GetConversationTimestampModule (copy), _DateTime (copy)
+	return if p1 == nil then "" else GetConversationTimestampModule(_DateTime.fromUnixTimestamp(p1))
 end
 
-return function(p1)
-	-- upvalues: reactModule (ref), computeTimestamp (ref)
-	local var1, var2 = reactModule.useBinding(computeTimestamp(p1))
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), computeTimestamp (copy), p1 (ref)
-		var2(computeTimestamp(p1))
+return function(p1) --[[ Line: 17 | Named "useRelativeTimestampBinding" ]]
+	-- upvalues: ReactModule (copy), computeTimestamp (copy)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(computeTimestamp(p1))
+	ReactModule.useEffect(function() --[[ Line: 20 ]]
+		-- upvalues: UseBindingResult2 (copy), computeTimestamp (upval), p1 (copy)
+		UseBindingResult2(computeTimestamp(p1))
 		
 		if p1 == nil then
-			return function() end
-		end
-		local var3 = false
-		
-		local function scheduleUpdate()
-			-- upvalues: var3 (write), var2 (copy), computeTimestamp (copy), p1 (copy), scheduleUpdate (ref)
-			task.delay(30, function()
-				-- upvalues: var3 (copy), var2 (copy), computeTimestamp (copy), p1 (copy), scheduleUpdate (copy)
-				if var3 then
+			return function() --[[ Line: 24 ]] end
+		else
+			local Flag = false
+			
+			local function scheduleUpdate() --[[ Line: 29 ]]
+				-- upvalues: Flag (ref), UseBindingResult2 (upval), computeTimestamp (upval), p1 (upval), scheduleUpdate (copy)
+				task.delay(30, function() --[[ Line: 30 ]]
+					-- upvalues: Flag (upval), UseBindingResult2 (upval), computeTimestamp (upval), p1 (upval), scheduleUpdate (upval)
+					if not Flag then
+						UseBindingResult2(computeTimestamp(p1))
+						scheduleUpdate()
+						
+						return
+					end
+				end)
+			end
+			
+			task.delay(30, function() --[[ Line: 30 ]]
+				-- upvalues: Flag (ref), UseBindingResult2 (upval), computeTimestamp (upval), p1 (upval), scheduleUpdate (copy)
+				if not Flag then
+					UseBindingResult2(computeTimestamp(p1))
+					scheduleUpdate()
+					
 					return
 				end
-				var2(computeTimestamp(p1))
-				scheduleUpdate()
 			end)
-		end
-		
-		task.delay(30, function()
-			-- upvalues: var3 (write), var2 (copy), computeTimestamp (copy), p1 (copy), scheduleUpdate (ref)
-			if var3 then
-				return
+			
+			return function() --[[ Line: 41 ]]
+				-- upvalues: Flag (ref)
+				Flag = true
 			end
-			var2(computeTimestamp(p1))
-			scheduleUpdate()
-		end)
-		
-		return function()
-			-- upvalues: var3 (write)
-			var3 = true
 		end
 	end, { p1 })
 	
-	return var1
+	return UseBindingResult
 end

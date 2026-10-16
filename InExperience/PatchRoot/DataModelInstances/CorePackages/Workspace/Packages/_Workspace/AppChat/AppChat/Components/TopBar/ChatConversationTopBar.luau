@@ -1,111 +1,117 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local enumScreensModule = require(appChat.EnumScreens)
-local fFlagDebugAppChatEnableDomLocatorsModule = require(appChat.Flags.FFlagDebugAppChatEnableDomLocators)
-local domLocatorsModule = require(appChat.Utils.DomLocators)
-local chatTopBarBaseModule = require(script.Parent.ChatTopBarBase)
-local createBackFuncModule = require(script.Parent.createBackFunc)
-local useCallButtonEligibilityModule = require(appChat.Hooks.useCallButtonEligibility)
-local getTopBarStoreModule = require(appChat.Stores.GetTopBarStore)
-local headerBarTitleLeftAlignedModule = require(appChat.Components.ChatConversation.HeaderBarTitleLeftAligned)
-local useChatPlacementContext = require(appChat.Contexts.ChatPlacementContext).useChatPlacementContext
-local conversationChannelsModule = require(appChat.Models.ConversationChannels)
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local signalsReactModule = require(parent.SignalsReact)
-local appHeaderBarModule = require(parent.AppHeaderBar)
-local squadJoinButtonModule = require(parent.Squads.SquadJoinButton)
-local squadButtonSourceEnum = require(parent.Squads.Enums).SquadButtonSourceEnum
-local squadComponentAccessWrapperModule = require(parent.Squads.SquadComponentAccessWrapper)
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagFriendsCallingClientGateDEV = sharedFlagsModule.FFlagFriendsCallingClientGate_DEV
-local getFFlagIsSquadEnabled = sharedFlagsModule.GetFFlagIsSquadEnabled
-local useSignalState = signalsReactModule.useSignalState
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local EnumScreensModule = require(AppChat.EnumScreens)
+local FFlagDebugAppChatEnableDomLocatorsModule = require(AppChat.Flags.FFlagDebugAppChatEnableDomLocators)
+local DomLocatorsModule = require(AppChat.Utils.DomLocators)
+local ChatTopBarBaseModule = require(script.Parent.ChatTopBarBase)
+local CreateBackFuncModule = require(script.Parent.createBackFunc)
+local UseCallButtonEligibilityModule = require(AppChat.Hooks.useCallButtonEligibility)
+local GetTopBarStoreModule = require(AppChat.Stores.GetTopBarStore)
+local HeaderBarTitleLeftAlignedModule = require(AppChat.Components.ChatConversation.HeaderBarTitleLeftAligned)
+local UseChatPlacementContextFunction = require(AppChat.Contexts.ChatPlacementContext).useChatPlacementContext
+local ConversationChannelsModule = require(AppChat.Models.ConversationChannels)
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local AppHeaderBarModule = require(Parent.AppHeaderBar)
+local SquadJoinButtonModule = require(Parent.Squads.SquadJoinButton)
+local SquadButtonSourceEnum = require(Parent.Squads.Enums).SquadButtonSourceEnum
+local SquadComponentAccessWrapperModule = require(Parent.Squads.SquadComponentAccessWrapper)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagFriendsCallingClientGateDEV = SharedFlagsModule.FFlagFriendsCallingClientGate_DEV
+local GetFFlagIsSquadEnabledFunction = SharedFlagsModule.GetFFlagIsSquadEnabled
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 
-local function noOp()
+local function noOp() --[[ Line: 41 ]]
 	return nil
 end
 
-return function(p1)
-	-- upvalues: getTopBarStoreModule (ref), useSignalState (ref), fFlagFriendsCallingClientGateDEV (ref), useCallButtonEligibilityModule (ref), useChatPlacementContext (ref), useLocalization (ref), appHeaderBarModule (ref), createBackFuncModule (ref), reactModule (ref), conversationChannelsModule (ref), getFFlagIsSquadEnabled (ref), foundationModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref), squadComponentAccessWrapperModule (ref), squadJoinButtonModule (ref), enumScreensModule (ref), squadButtonSourceEnum (ref), headerBarTitleLeftAlignedModule (ref), chatTopBarBaseModule (ref), noOp (ref)
-	local screenName = p1.screenName
-	local navigation = p1.navigation
-	local var1 = useSignalState(getTopBarStoreModule(false).getScreenTopBar(screenName))
-	local headerText = var1.headerText or {}
-	local backButtonEnabled = var1.backButtonEnabled
-	local isRoot = var1.isRoot
-	local conversationId = var1.conversationId
-	local var2 = if fFlagFriendsCallingClientGateDEV then useCallButtonEligibilityModule(conversationId) else nil
-	local navigateToChatDetails = var1.navigateToChatDetails
-	local rightPaddingOverride = var1.rightPaddingOverride
-	local var3 = useChatPlacementContext()
-	local var4 = useLocalization({
-		headerText = if headerText.shouldLocalize then headerText.raw else nil
+return function(p1) --[[ Line: 50 | Named "ChatConversationTopBar" ]]
+	-- upvalues: GetTopBarStoreModule (copy), UseSignalStateFunction (copy), FFlagFriendsCallingClientGateDEV (copy), UseCallButtonEligibilityModule (copy), UseChatPlacementContextFunction (copy), UseLocalizationFunction (copy), AppHeaderBarModule (copy), CreateBackFuncModule (copy), ReactModule (copy), ConversationChannelsModule (copy), GetFFlagIsSquadEnabledFunction (copy), FoundationModule (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), DomLocatorsModule (copy), SquadComponentAccessWrapperModule (copy), SquadJoinButtonModule (copy), EnumScreensModule (copy), SquadButtonSourceEnum (copy), HeaderBarTitleLeftAlignedModule (copy), ChatTopBarBaseModule (copy), noOp (copy)
+	local ScreenName = p1.screenName
+	local Navigation = p1.navigation
+	local UseSignalStateResult = UseSignalStateFunction((GetTopBarStoreModule(false).getScreenTopBar(ScreenName)))
+	local HeaderText = UseSignalStateResult.headerText or {}
+	local BackButtonEnabled = UseSignalStateResult.backButtonEnabled
+	local IsRoot = UseSignalStateResult.isRoot
+	local ConversationId = UseSignalStateResult.conversationId
+	local UseCallButtonEligibilityModuleResult = if FFlagFriendsCallingClientGateDEV then UseCallButtonEligibilityModule(ConversationId) else nil
+	local NavigateToChatDetails = UseSignalStateResult.navigateToChatDetails
+	local RightPaddingOverride = UseSignalStateResult.rightPaddingOverride
+	local UseChatPlacementContextResult = UseChatPlacementContextFunction()
+	local UseLocalizationResult = UseLocalizationFunction({
+		headerText = HeaderText.shouldLocalize and HeaderText.raw or nil
 	})
-	local var5 = if backButtonEnabled then appHeaderBarModule.makeBackButton(createBackFuncModule({
-		navigation = navigation,
-		navigateToRootStack = navigation.getScreenProps("navigateToRootStack", nil),
-		isRoot = isRoot
-	})) else nil
-	local var6 = reactModule.useCallback(function()
-		-- upvalues: fFlagFriendsCallingClientGateDEV (copy), var2 (ref), conversationChannelsModule (copy), conversationId (ref)
-		if not fFlagFriendsCallingClientGateDEV or var2 ~= conversationChannelsModule.CallButtonEligibility.Eligible then return end
-		if conversationId then
-			local callingService = game:GetService("CallingService")
-			task.spawn(function()
-				-- upvalues: callingService (ref), conversationId (copy)
-				pcall(function()
-					-- upvalues: callingService (copy), conversationId (copy)
-					callingService:CreateCallAsync({}, conversationId)
+	local MakeBackButtonFunction = AppHeaderBarModule.makeBackButton
+	local BackFuncModule = CreateBackFuncModule({
+		navigation = Navigation,
+		navigateToRootStack = Navigation.getScreenProps("navigateToRootStack", nil),
+		isRoot = IsRoot
+	})
+	local BackButton = if BackButtonEnabled then MakeBackButtonFunction(BackFuncModule) else nil
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 83 ]]
+		-- upvalues: FFlagFriendsCallingClientGateDEV (upval), UseCallButtonEligibilityModuleResult (copy), ConversationChannelsModule (upval), ConversationId (copy)
+		if not FFlagFriendsCallingClientGateDEV or UseCallButtonEligibilityModuleResult ~= ConversationChannelsModule.CallButtonEligibility.Eligible then return end
+		if ConversationId then
+			local CallingService = game:GetService("CallingService")
+			task.spawn(function() --[[ Line: 94 ]]
+				-- upvalues: CallingService (copy), ConversationId (upval)
+				pcall(function() --[[ Line: 95 ]]
+					-- upvalues: CallingService (upval), ConversationId (upval)
+					CallingService:CreateCallAsync({}, ConversationId)
 				end)
 			end)
 		end
-	end, { conversationId or false, var2 or false })
-	local var7 = if fFlagFriendsCallingClientGateDEV and (conversationId ~= nil and var2 == conversationChannelsModule.CallButtonEligibility.Eligible) then function()
-		-- upvalues: reactModule (copy), foundationModule (copy), var6 (ref), fFlagDebugAppChatEnableDomLocatorsModule (copy), domLocatorsModule (copy)
-		return reactModule.createElement(foundationModule.View, { tag = "row align-x-right align-y-center auto-xy" }, {
-			CallButton = reactModule.createElement(foundationModule.IconButton, {
+	end, {
+		ConversationId or false,
+		UseCallButtonEligibilityModuleResult or false
+	})
+	local IsUseCallButtonEligibilityModuleResultMatch: boolean = FFlagFriendsCallingClientGateDEV and (ConversationId ~= nil and UseCallButtonEligibilityModuleResult == ConversationChannelsModule.CallButtonEligibility.Eligible)
+	local HasConversationId: boolean = not FFlagFriendsCallingClientGateDEV and (GetFFlagIsSquadEnabledFunction() and ConversationId ~= nil)
+	local RenderRight = if IsUseCallButtonEligibilityModuleResultMatch then function() --[[ Line: 114 ]]
+		-- upvalues: ReactModule (upval), FoundationModule (upval), UseResult (copy), FFlagDebugAppChatEnableDomLocatorsModule (upval), DomLocatorsModule (upval)
+		return ReactModule.createElement(FoundationModule.View, { tag = "row align-x-right align-y-center auto-xy" }, {
+			CallButton = ReactModule.createElement(FoundationModule.IconButton, {
 				isCircular = true,
-				icon = foundationModule.Enums.IconName.Phone,
-				size = foundationModule.Enums.InputSize.Medium,
-				onActivated = var6,
-				testId = if fFlagDebugAppChatEnableDomLocatorsModule then domLocatorsModule.chatConversationTopBarButton("call") else nil
+				icon = FoundationModule.Enums.IconName.Phone,
+				size = FoundationModule.Enums.InputSize.Medium,
+				onActivated = UseResult,
+				testId = if FFlagDebugAppChatEnableDomLocatorsModule then DomLocatorsModule.chatConversationTopBarButton("call") else nil
 			})
 		})
-	end elseif not fFlagFriendsCallingClientGateDEV and (getFFlagIsSquadEnabled() and conversationId ~= nil) then function()
-		-- upvalues: reactModule (copy), foundationModule (copy), squadComponentAccessWrapperModule (copy), conversationId (ref), squadJoinButtonModule (copy), navigation (ref), enumScreensModule (copy), squadButtonSourceEnum (copy), var3 (ref)
-		return reactModule.createElement(foundationModule.View, { tag = "row align-x-right auto-xy" }, {
-			GroupUpButton = reactModule.createElement(squadComponentAccessWrapperModule, { parentChannelId = conversationId }, reactModule.createElement(squadJoinButtonModule, {
+	end elseif HasConversationId then function() --[[ Line: 129 ]]
+		-- upvalues: ReactModule (upval), FoundationModule (upval), SquadComponentAccessWrapperModule (upval), ConversationId (copy), SquadJoinButtonModule (upval), Navigation (copy), EnumScreensModule (upval), SquadButtonSourceEnum (upval), UseChatPlacementContextResult (copy)
+		return ReactModule.createElement(FoundationModule.View, { tag = "row align-x-right auto-xy" }, {
+			GroupUpButton = ReactModule.createElement(SquadComponentAccessWrapperModule, { parentChannelId = ConversationId }, ReactModule.createElement(SquadJoinButtonModule, {
 				isFullWidth = false,
 				isInCard = false,
 				layoutOrder = 0,
 				shouldAnimate = true,
 				shouldShowSignifier = true,
-				conversationId = conversationId,
-				onActivated = function()
-					-- upvalues: navigation (copy), enumScreensModule (copy), conversationId (copy)
-					navigation.navigate(enumScreensModule.SquadLobby, { conversationId = conversationId })
+				conversationId = ConversationId,
+				onActivated = function() --[[ Line: 143 ]]
+					-- upvalues: Navigation (upval), EnumScreensModule (upval), ConversationId (upval)
+					Navigation.navigate(EnumScreensModule.SquadLobby, { conversationId = ConversationId })
 				end,
-				squadButtonSource = squadButtonSourceEnum.ChatConversationScreen,
-				squadLocation = var3.chatPlacement
+				squadButtonSource = SquadButtonSourceEnum.ChatConversationScreen,
+				squadLocation = UseChatPlacementContextResult.chatPlacement
 			}))
 		})
 	end else nil
 	
-	return reactModule.createElement(chatTopBarBaseModule, {
-		screenName = screenName,
-		navigation = navigation,
+	return ReactModule.createElement(ChatTopBarBaseModule, {
+		screenName = ScreenName,
+		navigation = Navigation,
 		renderLeft = noOp,
-		renderCenter = function()
-			-- upvalues: headerText (ref), var4 (ref), reactModule (copy), headerBarTitleLeftAlignedModule (copy), var5 (ref), var7 (ref), conversationId (ref), navigateToChatDetails (ref), rightPaddingOverride (ref)
-			return reactModule.createElement(headerBarTitleLeftAlignedModule, {
-				renderLeft = var5,
-				renderRight = var7,
-				titleText = if headerText.shouldLocalize then var4.headerText else headerText.raw or "",
-				conversationId = conversationId or "",
-				navigateToChatDetails = navigateToChatDetails or function() end,
-				ignoreRightMargin = rightPaddingOverride ~= nil
+		renderCenter = function() --[[ Line: 156 ]]
+			-- upvalues: HeaderText (copy), UseLocalizationResult (copy), ReactModule (upval), HeaderBarTitleLeftAlignedModule (upval), BackButton (copy), RenderRight (copy), ConversationId (copy), NavigateToChatDetails (copy), RightPaddingOverride (copy)
+			return ReactModule.createElement(HeaderBarTitleLeftAlignedModule, {
+				renderLeft = BackButton,
+				renderRight = RenderRight,
+				titleText = HeaderText.shouldLocalize and UseLocalizationResult.headerText or (HeaderText.raw or ""),
+				conversationId = ConversationId or "",
+				navigateToChatDetails = NavigateToChatDetails or function() --[[ Line: 163 ]] end,
+				ignoreRightMargin = RightPaddingOverride ~= nil
 			})
 		end
 	})

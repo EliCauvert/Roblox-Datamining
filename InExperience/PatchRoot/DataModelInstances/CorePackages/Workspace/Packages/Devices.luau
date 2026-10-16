@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.Devices.Devices)
+﻿return (require(script.Parent._Workspace.Devices.Devices))

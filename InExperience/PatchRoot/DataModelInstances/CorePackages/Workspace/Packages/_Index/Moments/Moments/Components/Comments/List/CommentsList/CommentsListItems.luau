@@ -1,123 +1,129 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local viewRecyclerModule = require(parent.ViewRecycler)
-local commentsListFooterViewModule = require(script.Parent.Parent.CommentsListFooterView)
-local commentsListRowContextModule = require(script.Parent.CommentsListRowContext)
-local commentRowContainerModule = require(script.Parent.Parent.Rows.CommentRow.CommentRowContainer)
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local ViewRecyclerModule = require(Parent.ViewRecycler)
+local CommentsListFooterViewModule = require(script.Parent.Parent.CommentsListFooterView)
+local CommentRowContainerModule = require(script.Parent.Parent.Rows.CommentRow.CommentRowContainer)
 local _ = require(script.Parent.Parent.Rows.CommentRowTypes)
-local commentsReadOnlyNoticeViewModule = require(moments.Components.Comments.Panel.CommentsReadOnlyNoticeView)
-local pendingCommentRowViewModule = require(script.Parent.Parent.Rows.PendingCommentRowView)
-local _ = require(moments.Components.Comments.GetCommentCollectionStore.CommentCollectionTypes)
-local useCommentsListRow = commentsListRowContextModule.useCommentsListRow
-local t = {
-	readiness = viewRecyclerModule.RecyclableViewReadiness.ReadyOnCommit
+local CommentsReadOnlyNoticeViewModule = require(Moments.Components.Comments.Panel.CommentsReadOnlyNoticeView)
+local PendingCommentRowViewModule = require(script.Parent.Parent.Rows.PendingCommentRowView)
+local _ = require(Moments.Components.Comments.GetCommentCollectionStore.CommentCollectionTypes)
+local UseCommentsListRowFunction = require(script.Parent.CommentsListRowContext).useCommentsListRow
+local config = {
+	readiness = ViewRecyclerModule.RecyclableViewReadiness.ReadyOnCommit
 }
-local frozen = table.freeze({
-	comment = viewRecyclerModule.createRecyclableView(function(p1)
-		-- upvalues: signalsReactModule (ref), useCommentsListRow (ref), reactModule (ref), foundationModule (ref), commentRowContainerModule (ref)
-		local var1 = signalsReactModule.useSignalState(p1.itemSignal)
-		local var2 = useCommentsListRow()
+local Frozen = table.freeze({
+	comment = ViewRecyclerModule.createRecyclableView(function(p1) --[[ Line: 40 | Named "CommentItemView" ]]
+		-- upvalues: SignalsReactModule (copy), UseCommentsListRowFunction (copy), ReactModule (copy), FoundationModule (copy), CommentRowContainerModule (copy)
+		local UseSignalStateResult = SignalsReactModule.useSignalState(p1.itemSignal)
+		local UseCommentsListRowResult = UseCommentsListRowFunction()
 		
-		return if var1.type == "comment" then reactModule.createElement(foundationModule.View, { tag = "size-full-0 auto-y padding-x-small" }, {
-			Row = reactModule.createElement(commentRowContainerModule, {
-				feedItemId = var2.feedItemId,
-				commentId = var1.commentId,
-				text = var1.text,
-				createdAt = var1.createdAt,
-				viewerUsername = var2.viewerUsername,
-				thumbsUpEmoteId = var2.thumbsUpEmoteId,
-				creatorEnabled = var2.creatorEnabled,
-				viewerCanWrite = var2.viewerCanWrite,
-				scrollingFrameRef = var2.scrollingFrameRef,
-				avatarBackgroundStyle = var2.avatarBackgroundStyle,
-				onToggleReaction = var2.onToggleReaction,
-				onAddReaction = var2.onAddReaction,
-				onReportComment = var2.onReportComment,
-				onBlockCommentAuthor = var2.onBlockCommentAuthor,
-				onDeleteComment = var2.onDeleteComment,
-				isExpanded = var1.isExpanded,
-				onToggleExpanded = var2.onToggleCommentExpanded
+		return if UseSignalStateResult.type == "comment" then ReactModule.createElement(FoundationModule.View, { tag = "size-full-0 auto-y padding-x-small" }, {
+			Row = ReactModule.createElement(CommentRowContainerModule, {
+				feedItemId = UseCommentsListRowResult.feedItemId,
+				commentId = UseSignalStateResult.commentId,
+				text = UseSignalStateResult.text,
+				createdAt = UseSignalStateResult.createdAt,
+				viewerUsername = UseCommentsListRowResult.viewerUsername,
+				thumbsUpEmoteId = UseCommentsListRowResult.thumbsUpEmoteId,
+				creatorEnabled = UseCommentsListRowResult.creatorEnabled,
+				viewerCanWrite = UseCommentsListRowResult.viewerCanWrite,
+				scrollingFrameRef = UseCommentsListRowResult.scrollingFrameRef,
+				avatarBackgroundStyle = UseCommentsListRowResult.avatarBackgroundStyle,
+				onToggleReaction = UseCommentsListRowResult.onToggleReaction,
+				onAddReaction = UseCommentsListRowResult.onAddReaction,
+				onReportComment = UseCommentsListRowResult.onReportComment,
+				onBlockCommentAuthor = UseCommentsListRowResult.onBlockCommentAuthor,
+				onDeleteComment = UseCommentsListRowResult.onDeleteComment,
+				isExpanded = UseSignalStateResult.isExpanded,
+				onToggleExpanded = UseCommentsListRowResult.onToggleCommentExpanded
 			})
 		}) else nil
-	end, t),
-	pending = viewRecyclerModule.createRecyclableView(function(p1)
-		-- upvalues: signalsReactModule (ref), useCommentsListRow (ref), reactModule (ref), foundationModule (ref), pendingCommentRowViewModule (ref)
-		local var1 = signalsReactModule.useSignalState(p1.itemSignal)
-		local var2 = useCommentsListRow()
+	end, config),
+	pending = ViewRecyclerModule.createRecyclableView(function(p1) --[[ Line: 71 | Named "PendingItemView" ]]
+		-- upvalues: SignalsReactModule (copy), UseCommentsListRowFunction (copy), ReactModule (copy), FoundationModule (copy), PendingCommentRowViewModule (copy)
+		local UseSignalStateResult = SignalsReactModule.useSignalState(p1.itemSignal)
+		local UseCommentsListRowResult = UseCommentsListRowFunction()
 		
-		if var1.type == "pending" then
-			local isOutcomeUnknown = var1.status == "OutcomeUnknown"
+		if UseSignalStateResult.type == "pending" then
+			local IsOutcomeUnknown = UseSignalStateResult.status == "OutcomeUnknown"
 			
-			return reactModule.createElement(foundationModule.View, { tag = "size-full-0 auto-y padding-x-small" }, {
-				Row = reactModule.createElement(pendingCommentRowViewModule, {
-					rowKey = var1.key,
-					text = var1.text,
-					viewerUsername = var2.viewerUsername,
-					avatarBackgroundStyle = var2.avatarBackgroundStyle,
-					status = var1.status,
-					onRetry = if isOutcomeUnknown then var2.onRetryPendingSubmission else nil,
-					onEdit = if isOutcomeUnknown then var2.onEditPendingSubmission else nil
+			return ReactModule.createElement(FoundationModule.View, { tag = "size-full-0 auto-y padding-x-small" }, {
+				Row = ReactModule.createElement(PendingCommentRowViewModule, {
+					rowKey = UseSignalStateResult.key,
+					text = UseSignalStateResult.text,
+					viewerUsername = UseCommentsListRowResult.viewerUsername,
+					avatarBackgroundStyle = UseCommentsListRowResult.avatarBackgroundStyle,
+					status = UseSignalStateResult.status,
+					onRetry = if IsOutcomeUnknown then UseCommentsListRowResult.onRetryPendingSubmission else nil,
+					onEdit = if IsOutcomeUnknown then UseCommentsListRowResult.onEditPendingSubmission else nil
 				})
 			})
+		else
+			return nil
 		end
-		return nil
-	end, t),
-	loadMore = viewRecyclerModule.createRecyclableView(function(p1)
-		-- upvalues: signalsReactModule (ref), useCommentsListRow (ref), reactModule (ref), foundationModule (ref), commentsListFooterViewModule (ref)
-		local var1 = signalsReactModule.useSignalState(p1.itemSignal)
+	end, config),
+	loadMore = ViewRecyclerModule.createRecyclableView(function(p1) --[[ Line: 93 | Named "LoadMoreItemView" ]]
+		-- upvalues: SignalsReactModule (copy), UseCommentsListRowFunction (copy), ReactModule (copy), FoundationModule (copy), CommentsListFooterViewModule (copy)
+		local UseSignalStateResult = SignalsReactModule.useSignalState(p1.itemSignal)
+		local UseCommentsListRowResult = UseCommentsListRowFunction()
 		
-		return if var1.type == "loadMore" then reactModule.createElement(foundationModule.View, { tag = "size-full-0 auto-y padding-x-large" }, {
-			Footer = reactModule.createElement(commentsListFooterViewModule, {
-				status = var1.status,
-				onRetry = useCommentsListRow().onRetryLoadMore
+		return if UseSignalStateResult.type == "loadMore" then ReactModule.createElement(FoundationModule.View, { tag = "size-full-0 auto-y padding-x-large" }, {
+			Footer = ReactModule.createElement(CommentsListFooterViewModule, {
+				status = UseSignalStateResult.status,
+				onRetry = UseCommentsListRowResult.onRetryLoadMore
 			})
 		}) else nil
 	end),
-	readOnlyNotice = viewRecyclerModule.createRecyclableView(function(_)
-		-- upvalues: reactModule (ref), foundationModule (ref), commentsReadOnlyNoticeViewModule (ref)
-		return reactModule.createElement(foundationModule.View, { tag = "size-full-0 auto-y padding-x-large" }, {
-			Notice = reactModule.createElement(commentsReadOnlyNoticeViewModule)
+	readOnlyNotice = ViewRecyclerModule.createRecyclableView(function(_) --[[ Line: 109 | Named "ReadOnlyNoticeItemView" ]]
+		-- upvalues: ReactModule (copy), FoundationModule (copy), CommentsReadOnlyNoticeViewModule (copy)
+		return ReactModule.createElement(FoundationModule.View, { tag = "size-full-0 auto-y padding-x-large" }, {
+			Notice = ReactModule.createElement(CommentsReadOnlyNoticeViewModule)
 		})
 	end)
 })
 
-local function getItemType(p1, _)
-	-- upvalues: frozen (ref)
-	local type = frozen[p1.type]
-	assert(type ~= nil, `CommentsListItems: unknown item type "{tostring(p3.type)}"`)
+local function getItemType(p1, _) --[[ Line: 124 ]]
+	-- upvalues: Frozen (copy)
+	local FrozenEntry = Frozen[p1.type]
+	assert(FrozenEntry ~= nil, `CommentsListItems: unknown item type "{tostring(p4.type)}"`)
 	
-	return type
+	return FrozenEntry
 end
 
-local function getItemKey(p1, _)
+local function getItemKey(p1, _) --[[ Line: 130 ]]
 	return p1.key
 end
 
-local t_1 = {}
-local t_2 = { type = "readOnlyNotice", key = "footer:read-only-notice" }
-table.freeze(t_2)
+local t = {}
+local config1 = { type = "readOnlyNotice", key = "footer:read-only-notice" }
+table.freeze(config1)
 
 return table.freeze({
 	getItemType = getItemType,
 	getItemKey = getItemKey,
-	loadMore = function(p1)
-		-- upvalues: t_1 (ref)
-		local var1 = t_1[p1]
+	loadMore = function(Status) --[[ Line: 142 ]]
+		-- upvalues: t (copy)
+		local Entry = t[Status]
 		
-		if var1 == nil then
-			local t = { type = "loadMore", key = "footer:load-more", status = p1 }
-			table.freeze(t)
-			t_1[p1] = t
+		if Entry == nil then
+			local config = {
+				type = "loadMore",
+				key = "footer:load-more",
+				status = Status
+			}
+			table.freeze(config)
+			t[Status] = config
 			
-			return t
+			return config
+		else
+			return Entry
 		end
-		return var1
 	end,
-	readOnlyNotice = function()
-		-- upvalues: t_2 (ref)
-		return t_2
+	readOnlyNotice = function() --[[ Line: 157 ]]
+		-- upvalues: config1 (copy)
+		return config1
 	end
 })

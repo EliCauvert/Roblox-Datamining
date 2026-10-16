@@ -1,1 +1,1 @@
-﻿return require(script.SheetContent)
+﻿return (require(script.SheetContent))

@@ -1,60 +1,61 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local constantsModule = require(script.Parent.Parent.Parent.Constants)
-local microProfilerPanelModule = require(script.Parent.MicroProfilerPanel)
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local recentlyCapturedDumpsView = roactModule.Component:extend("RecentlyCapturedDumpsView")
+﻿local CorePackages = game:GetService("CorePackages")
+local ConstantsModule = require(script.Parent.Parent.Parent.Constants)
+local MicroProfilerPanelModule = require(script.Parent.MicroProfilerPanel)
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local RecentlyCapturedDumpsView = RoactModule.Component:extend("RecentlyCapturedDumpsView")
 
-function recentlyCapturedDumpsView.render(p1)
-	-- upvalues: roactModule (ref), constantsModule (ref), microProfilerPanelModule (ref)
-	local _ = p1.props.RecentDumpPaths or {}
-	local t = {}
+function RecentlyCapturedDumpsView.render(p1) --[[ Line: 11 ]]
+	-- upvalues: RoactModule (copy), ConstantsModule (copy), MicroProfilerPanelModule (copy)
+	if p1.props.RecentDumpPaths then
+	end
+	local List = {}
 	
-	for i, v in ipairs(p1.props.RecentDumpPaths) do
-		table.insert(t, {
-			DumpPathLabel = roactModule.createElement("TextBox", {
+	for _, recentDumpPath in ipairs(p1.props.RecentDumpPaths) do
+		table.insert(List, {
+			DumpPathLabel = RoactModule.createElement("TextBox", {
 				TextSize = 14,
 				BackgroundTransparency = 1,
 				TextEditable = false,
 				ClearTextOnFocus = false,
 				ClipsDescendants = true,
-				Font = constantsModule.Font.Log,
-				Text = v,
-				TextColor3 = constantsModule.Color.Text,
+				Font = ConstantsModule.Font.Log,
+				Text = recentDumpPath,
+				TextColor3 = ConstantsModule.Color.Text,
 				TextXAlignment = Enum.TextXAlignment.Left,
 				Size = UDim2.fromScale(1, 1)
 			}, {
-				UIPadding = roactModule.createElement("UIPadding", {
-					PaddingLeft = UDim.new(0, constantsModule.MicroProfilerFormatting.RecentDumpPathPadding),
-					PaddingRight = UDim.new(0, constantsModule.MicroProfilerFormatting.RecentDumpPathPadding)
+				UIPadding = RoactModule.createElement("UIPadding", {
+					PaddingLeft = UDim.new(0, ConstantsModule.MicroProfilerFormatting.RecentDumpPathPadding),
+					PaddingRight = UDim.new(0, ConstantsModule.MicroProfilerFormatting.RecentDumpPathPadding)
 				})
 			})
 		})
 	end
-	if #t == 0 then
-		table.insert(t, {
-			NoDumpsLabel = roactModule.createElement("TextLabel", {
+	if #List == 0 then
+		table.insert(List, {
+			NoDumpsLabel = RoactModule.createElement("TextLabel", {
 				Text = "No recently captured MicroProfiler dumps.",
 				BackgroundTransparency = 1,
-				Font = constantsModule.Font.MainWindow,
-				TextColor3 = constantsModule.Color.Text,
-				TextSize = constantsModule.MicroProfilerFormatting.OptionTextSize,
+				Font = ConstantsModule.Font.MainWindow,
+				TextColor3 = ConstantsModule.Color.Text,
+				TextSize = ConstantsModule.MicroProfilerFormatting.OptionTextSize,
 				TextXAlignment = Enum.TextXAlignment.Left,
 				Size = UDim2.fromScale(1, 1)
 			}, {
-				UIPadding = roactModule.createElement("UIPadding", {
-					PaddingLeft = UDim.new(0, constantsModule.MicroProfilerFormatting.OptionTextPadding)
+				UIPadding = RoactModule.createElement("UIPadding", {
+					PaddingLeft = UDim.new(0, ConstantsModule.MicroProfilerFormatting.OptionTextPadding)
 				})
 			})
 		})
 	end
-	return roactModule.createElement(microProfilerPanelModule, {
+	return RoactModule.createElement(MicroProfilerPanelModule, {
 		Title = "Recently captured MicroProfiler dumps",
 		LayoutOrder = p1.props.LayoutOrder,
-		Sections = { { Name = "RecentlyCapturedDumps", Rows = t } }
+		Sections = { { Name = "RecentlyCapturedDumps", Rows = List } }
 	})
 end
 
-return roactRoduxModule.connect(function(p2, _)
+return RoactRoduxModule.connect(function(p2, _) --[[ Line: 67 | Named "mapStateToProps" ]]
 	return { RecentDumpPaths = p2.MicroProfiler.recentDumpPaths }
-end, nil)(recentlyCapturedDumpsView)
+end, nil)(RecentlyCapturedDumpsView)

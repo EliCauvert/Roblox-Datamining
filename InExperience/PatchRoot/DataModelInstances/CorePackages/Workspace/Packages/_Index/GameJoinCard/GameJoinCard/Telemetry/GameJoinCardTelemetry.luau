@@ -1,43 +1,40 @@
-﻿local loggingProtocolModule = require(script:FindFirstAncestor("GameJoinCard").Parent.LoggingProtocol)
-local t = {
+﻿local LoggingProtocolModule = require(script:FindFirstAncestor("GameJoinCard").Parent.LoggingProtocol)
+local config = {
 	eventName = "mobileGameJoinCardBannerLoad",
 	description = "MobileGameJoinCard banner image resolution outcomes; status custom field is one of Success / NotFound / Fallback / Failed.",
-	backends = { loggingProtocolModule.TelemetryBackends.Counter },
+	backends = { LoggingProtocolModule.TelemetryBackends.Counter },
 	throttlingPercentage = game:DefineFastInt("MobileGameJoinCardBannerLoadCounterThrottleHundredthsPercent", 10000),
 	lastUpdated = { 2026, 5, 14 }
 }
-local t_1 = {
+local config1 = {
 	Success = true,
 	NotFound = true,
 	Fallback = true,
 	Failed = true
 }
-
-local function logBannerLoadResult(p1)
-	-- upvalues: t_1 (ref), loggingProtocolModule (ref), t (ref)
-	if t_1[p1] then
-		loggingProtocolModule.default:logRobloxTelemetryCounter(t, nil, { status = p1 })
-		
-		return
-	end
-end
-
-local t_2 = {
+local config2 = {
 	eventName = "gameJoinCardActionsResolve",
 	links = "",
 	description = "Milliseconds a visible join card waited on JoinUserActions. status is Ready or Failed. surface is mobile or desktop.",
-	backends = { loggingProtocolModule.TelemetryBackends.Stats },
+	backends = { LoggingProtocolModule.TelemetryBackends.Stats },
 	throttlingPercentage = game:DefineFastInt("GameJoinCardActionsResolveStatThrottleHundredthsPercent", 10000),
 	lastUpdated = { 2026, 10, 5 }
 }
-local t_3 = { Ready = true, Failed = true }
+local config3 = { Ready = true, Failed = true }
 
 return {
-	logBannerLoadResult = logBannerLoadResult,
-	logActionsResolved = function(p1, p2, p3)
-		-- upvalues: t_3 (ref), loggingProtocolModule (ref), t_2 (ref)
-		if t_3[p2] then
-			loggingProtocolModule.default:logRobloxTelemetryStat(t_2, math.max(0, math.floor(p1)), { status = p2, surface = p3 })
+	logBannerLoadResult = function(Status) --[[ Line: 49 ]]
+		-- upvalues: config1 (copy), LoggingProtocolModule (copy), config (copy)
+		if config1[Status] then
+			LoggingProtocolModule.default:logRobloxTelemetryCounter(config, nil, { status = Status })
+			
+			return
+		end
+	end,
+	logActionsResolved = function(Value: number, Status, Surface) --[[ Line: 76 ]]
+		-- upvalues: config3 (copy), LoggingProtocolModule (copy), config2 (copy)
+		if config3[Status] then
+			LoggingProtocolModule.default:logRobloxTelemetryStat(config2, math.max(0, (math.floor(Value))), { status = Status, surface = Surface })
 			
 			return
 		end

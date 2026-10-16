@@ -1,20 +1,23 @@
-﻿local genericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
-local parent = genericAbuseReporting.Parent
-local httpService = game:GetService("HttpService")
-local promiseModule = require(parent.Promise)
-local url = require(parent.Http).Url
-local fFlagAbuseReportImproveErrorEventsModule = require(genericAbuseReporting.Flags.FFlagAbuseReportImproveErrorEvents)
+﻿local GenericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
+local Parent = GenericAbuseReporting.Parent
+local HttpService = game:GetService("HttpService")
+local PromiseModule = require(Parent.Promise)
+local Url = require(Parent.Http).Url
+local FFlagAbuseReportImproveErrorEventsModule = require(GenericAbuseReporting.Flags.FFlagAbuseReportImproveErrorEvents)
 
-return function(p1, p2, p3)
-	-- upvalues: httpService (ref), fFlagAbuseReportImproveErrorEventsModule (ref), promiseModule (ref), url (ref)
-	local ok, status = pcall(function()
-		-- upvalues: httpService (copy), p3 (ref)
-		return httpService:JSONEncode(p3)
+return function(Callback, Text, Input) --[[ Line: 13 ]]
+	-- upvalues: HttpService (copy), FFlagAbuseReportImproveErrorEventsModule (copy), PromiseModule (copy), Url (copy)
+	local Success, Result = pcall(function() --[[ Line: 14 ]]
+		-- upvalues: HttpService (upval), Input (copy)
+		return HttpService:JSONEncode(Input)
 	end)
 	
-	if not ok then
+	if not Success then
 		warn("Failed to encode v1 report body")
 		
-		return if fFlagAbuseReportImproveErrorEventsModule then promiseModule.reject("Failed to encode v1 report body") else p1(url.APIS_URL .. p1, "POST", { postBody = status })
+		if FFlagAbuseReportImproveErrorEventsModule then
+			return PromiseModule.reject("Failed to encode v1 report body")
+		end
 	end
+	return Callback(Url.APIS_URL .. Text, "POST", { postBody = Result })
 end

@@ -1,47 +1,50 @@
-﻿local authCommon = script:FindFirstAncestor("AuthCommon")
-local loginResultModule = require(authCommon.Models.LoginResult)
-local appStorageUtilitiesModule = require(authCommon.Utils.AppStorageUtilities)
-local _ = require(authCommon.Utils.PreviousAccountEntry)
-local prunePreviousAccountsListModule = require(authCommon.Utils.prunePreviousAccountsList)
-local cryoModule = require(authCommon.Parent.Cryo)
+﻿local AuthCommon = script:FindFirstAncestor("AuthCommon")
+local LoginResultModule = require(AuthCommon.Models.LoginResult)
+local AppStorageUtilitiesModule = require(AuthCommon.Utils.AppStorageUtilities)
+local _ = require(AuthCommon.Utils.PreviousAccountEntry)
+local PrunePreviousAccountsListModule = require(AuthCommon.Utils.prunePreviousAccountsList)
+local CryoModule = require(AuthCommon.Parent.Cryo)
 
-return function(p1, p2, p3)
-	-- upvalues: appStorageUtilitiesModule (ref), loginResultModule (ref), cryoModule (ref), prunePreviousAccountsListModule (ref)
+return function(p1, LoginMethod, Name): boolean --[[ Line: 10 | Named "recordLogin" ]]
+	-- upvalues: AppStorageUtilitiesModule (copy), LoginResultModule (copy), CryoModule (copy), PrunePreviousAccountsListModule (copy)
 	if p1.user.id == nil or p1.user.id == "0" then
 		return false
-	elseif p1.user.name == nil or p1.user.name == "" then
+	end
+	if p1.user.name == nil or p1.user.name == "" then
 		return false
 	end
-	local previousAccountsList = appStorageUtilitiesModule.getPreviousAccountsList()
-	local var1 = p3
+	local PreviousAccountsList = AppStorageUtilitiesModule.getPreviousAccountsList()
+	local Name1 = Name
 	
-	if var1 == nil then
-		var1 = p1.user.name
+	if Name1 == nil then
+		Name1 = p1.user.name
 	end
-	local timestamp = os.time()
-	local var2 = loginResultModule.hasTwoStepData(p1)
+	local Timestamp: number? = os.time()
+	local HasTwoStepData = LoginResultModule.hasTwoStepData(p1)
 	
-	if var2 then
-		timestamp = nil
+	if HasTwoStepData then
+		Timestamp = nil
 	end
-	local t = {
+	local config = {
 		showInAccountPicker = true,
 		userId = p1.user.id,
-		userIdentifier = var1,
-		loginMethod = p2,
+		userIdentifier = Name1,
+		loginMethod = LoginMethod,
 		username = p1.user.name,
-		signInTimestamp = timestamp
+		signInTimestamp = Timestamp
 	}
-	local id = previousAccountsList[p1.user.id]
+	local PreviousAccounts = PreviousAccountsList[p1.user.id]
 	
-	if id == nil then
-		previousAccountsList[p1.user.id] = t
-	elseif not var2 then
-		t.signOutTimestamp = cryoModule.None
+	if PreviousAccounts == nil then
+		PreviousAccountsList[p1.user.id] = config
+	else
+		if not HasTwoStepData then
+			config.signOutTimestamp = CryoModule.None
+		end
+		PreviousAccountsList[p1.user.id] = CryoModule.Dictionary.join(PreviousAccounts, config)
 	end
-	previousAccountsList[p1.user.id] = cryoModule.Dictionary.join(id, t)
-	appStorageUtilitiesModule.setPreviousAccountsList(previousAccountsList)
-	prunePreviousAccountsListModule()
+	AppStorageUtilitiesModule.setPreviousAccountsList(PreviousAccountsList)
+	PrunePreviousAccountsListModule()
 	
 	return true
 end

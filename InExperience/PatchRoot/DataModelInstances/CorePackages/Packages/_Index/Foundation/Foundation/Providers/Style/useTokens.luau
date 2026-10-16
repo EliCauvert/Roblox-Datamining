@@ -1,10 +1,9 @@
-﻿local parent = script.Parent
-local parent_1 = script:FindFirstAncestor("Foundation").Parent
-local _ = require(parent.Tokens)
-local tokensContextModule = require(parent.TokensContext)
-local reactModule = require(parent_1.React)
+﻿local Parent = script.Parent
+local _ = require(Parent.Tokens)
+local TokensContextModule = require(Parent.TokensContext)
+local ReactModule = require(script:FindFirstAncestor("Foundation").Parent.React)
 
-return function()
-	-- upvalues: reactModule (ref), tokensContextModule (ref)
-	return reactModule.useContext(tokensContextModule)
+return function() --[[ Line: 10 | Named "useTokens" ]]
+	-- upvalues: ReactModule (copy), TokensContextModule (copy)
+	return (ReactModule.useContext(TokensContextModule))
 end

@@ -1,22 +1,22 @@
-﻿local unifiedEventLogEnumsModule = require(script.Parent.Parent.UnifiedEventLogEnums)
-local t = {
-	[0] = unifiedEventLogEnumsModule.MarketplaceTimedOption.PERMANENT,
-	[3] = unifiedEventLogEnumsModule.MarketplaceTimedOption.DAYS_3,
-	[7] = unifiedEventLogEnumsModule.MarketplaceTimedOption.DAYS_7,
-	[14] = unifiedEventLogEnumsModule.MarketplaceTimedOption.DAYS_14
+﻿local UnifiedEventLogEnumsModule = require(script.Parent.Parent.UnifiedEventLogEnums)
+local config = {
+	[0] = UnifiedEventLogEnumsModule.MarketplaceTimedOption.PERMANENT,
+	[3] = UnifiedEventLogEnumsModule.MarketplaceTimedOption.DAYS_3,
+	[7] = UnifiedEventLogEnumsModule.MarketplaceTimedOption.DAYS_7,
+	[14] = UnifiedEventLogEnumsModule.MarketplaceTimedOption.DAYS_14
 }
 
-function getTimedOptionForItemData(p1)
-	-- upvalues: t (ref), unifiedEventLogEnumsModule (ref)
+function getTimedOptionForItemData(p1) --[[ Line: 10 ]]
+	-- upvalues: config (copy), UnifiedEventLogEnumsModule (copy)
 	if not p1 or not p1.timedOptions then
-		return unifiedEventLogEnumsModule.MarketplaceTimedOption.PERMANENT
+		return UnifiedEventLogEnumsModule.MarketplaceTimedOption.PERMANENT
 	end
-	for i, v in p1.timedOptions do
-		if v.selected then
-			return t[v.days]
+	for _, timedOption in p1.timedOptions do
+		if timedOption.selected then
+			return config[timedOption.days]
 		end
 	end
-	return unifiedEventLogEnumsModule.MarketplaceTimedOption.PERMANENT
+	return UnifiedEventLogEnumsModule.MarketplaceTimedOption.PERMANENT
 end
 
 return getTimedOptionForItemData

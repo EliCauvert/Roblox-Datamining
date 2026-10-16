@@ -1,118 +1,127 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local reactModule = require(parent.React)
-local iconVariant = require(parent.BuilderIcons).IconVariant
-local constantsModule = require(foundation.Constants)
-local presentationContextModule = require(foundation.Providers.Style.PresentationContext)
-local textModule = require(foundation.Components.Text)
-local _ = require(foundation.Components.Types)
-local viewModule = require(foundation.Components.View)
-local useTokensModule = require(foundation.Providers.Style.useTokens)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local accessoryModule = require(script.Parent.Accessory)
-local iconPositionModule = require(foundation.Enums.IconPosition)
-local colorNamespaceModule = require(foundation.Enums.ColorNamespace)
-local stateLayerModeModule = require(foundation.Enums.StateLayerMode)
-local _ = require(foundation.Enums.CursorType)
-local useChipVariantsModule = require(script.Parent.useChipVariants)
-local t = {
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local ReactModule = require(Parent.React)
+local IconVariant = require(Parent.BuilderIcons).IconVariant
+local ConstantsModule = require(Foundation.Constants)
+local FlagsModule = require(Foundation.Utility.Flags)
+local PresentationContextModule = require(Foundation.Providers.Style.PresentationContext)
+local TextModule = require(Foundation.Components.Text)
+local _ = require(Foundation.Components.Types)
+local ViewModule = require(Foundation.Components.View)
+local UseTokensModule = require(Foundation.Providers.Style.useTokens)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local AccessoryModule = require(script.Parent.Accessory)
+local IconPositionModule = require(Foundation.Enums.IconPosition)
+local ColorNamespaceModule = require(Foundation.Enums.ColorNamespace)
+local StateLayerModeModule = require(Foundation.Enums.StateLayerMode)
+local _ = require(Foundation.Enums.CursorType)
+local UseChipVariantsModule = require(script.Parent.useChipVariants)
+local config = {
 	isChecked = false,
 	Selectable = true,
 	isDisabled = false,
 	testId = "--foundation-chip",
-	size = require(foundation.Enums.ChipSize).Medium,
-	variant = require(foundation.Enums.ChipVariant).Standard
+	size = require(Foundation.Enums.ChipSize).Medium,
+	variant = require(Foundation.Enums.ChipVariant).Standard
 }
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), useTokensModule (ref), reactModule (ref), iconPositionModule (ref), iconVariant (ref), useChipVariantsModule (ref), colorNamespaceModule (ref), viewModule (ref), withCommonPropsModule (ref), stateLayerModeModule (ref), constantsModule (ref), presentationContextModule (ref), accessoryModule (ref), textModule (ref)
-	local var1 = withDefaultsModule(p1, t)
-	local var2 = useTokensModule()
-	local var3, var4 = reactModule.useMemo(function()
-		-- upvalues: var1 (ref), iconPositionModule (copy), iconVariant (copy)
-		local leading = var1.leading
-		local trailing = var1.trailing
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 72 | Named "Chip" ]]
+	-- upvalues: WithDefaultsModule (copy), config (copy), UseTokensModule (copy), ReactModule (copy), IconPositionModule (copy), IconVariant (copy), FlagsModule (copy), UseChipVariantsModule (copy), ColorNamespaceModule (copy), ViewModule (copy), WithCommonPropsModule (copy), StateLayerModeModule (copy), ConstantsModule (copy), PresentationContextModule (copy), AccessoryModule (copy), TextModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
+	local UseTokensModuleResult = UseTokensModule()
+	local UseMemoResult, UseMemoResult2 = ReactModule.useMemo(function() --[[ Line: 76 ]]
+		-- upvalues: WithDefaultsModuleResult (copy), IconPositionModule (upval), IconVariant (upval)
+		local Leading = WithDefaultsModuleResult.leading
+		local Trailing = WithDefaultsModuleResult.trailing
 		
-		if var1.icon ~= nil then
-			if typeof(var1.icon) == "string" then
-				leading = { iconName = var1.icon }
+		if WithDefaultsModuleResult.icon ~= nil then
+			if typeof(WithDefaultsModuleResult.icon) == "string" then
+				Leading = { iconName = WithDefaultsModuleResult.icon }
 			else
-				local t = { iconName = var1.icon.name }
+				local config = { iconName = WithDefaultsModuleResult.icon.name }
 				
-				if var1.icon.position == iconPositionModule.Left then
-					leading = t
+				if WithDefaultsModuleResult.icon.position == IconPositionModule.Left then
+					Leading = config
 				else
-					trailing = t
+					Trailing = config
 				end
 			end
 		end
-		if typeof(leading) == "table" and leading.isCircular then
-			leading.iconVariant = iconVariant.Filled
+		if typeof(Leading) == "table" and Leading.isCircular then
+			Leading.iconVariant = IconVariant.Filled
 		end
-		if typeof(trailing) == "table" and trailing.isCircular then
-			trailing.iconVariant = iconVariant.Filled
+		if typeof(Trailing) == "table" and Trailing.isCircular then
+			Trailing.iconVariant = IconVariant.Filled
 		end
-		return leading, trailing
-	end, { var1.leading, var1.icon, var1.trailing })
-	local var5 = useChipVariantsModule(var2, var1.size, var1.variant, var1.isChecked, var3 ~= nil, var4 ~= nil)
-	local floored = math.floor(var2.Stroke.Thicker)
+		return Leading, Trailing
+	end, {
+		WithDefaultsModuleResult.leading,
+		WithDefaultsModuleResult.icon,
+		WithDefaultsModuleResult.trailing
+	})
+	local IsNotTextMatch: boolean = WithDefaultsModuleResult.text ~= nil and WithDefaultsModuleResult.text ~= ""
+	local IsIconOnly = if FlagsModule.FoundationFixChipAccessoryLayout then not IsNotTextMatch and UseMemoResult == nil ~= (UseMemoResult2 == nil) else nil
+	local UseChipVariantsModuleResult = UseChipVariantsModule(UseTokensModuleResult, WithDefaultsModuleResult.size, WithDefaultsModuleResult.variant, WithDefaultsModuleResult.isChecked, UseMemoResult ~= nil, UseMemoResult2 ~= nil)
+	local Floored = math.floor(UseTokensModuleResult.Stroke.Thicker)
 	
-	return reactModule.createElement(viewModule, withCommonPropsModule(var1, {
-		isDisabled = var1.isDisabled,
+	return ReactModule.createElement(ViewModule, WithCommonPropsModule(WithDefaultsModuleResult, {
+		isDisabled = WithDefaultsModuleResult.isDisabled,
 		selection = {
-			Selectable = if var1.isDisabled then false else var1.Selectable,
-			NextSelectionUp = var1.NextSelectionUp,
-			NextSelectionDown = var1.NextSelectionDown,
-			NextSelectionLeft = var1.NextSelectionLeft,
-			NextSelectionRight = var1.NextSelectionRight
+			Selectable = not WithDefaultsModuleResult.isDisabled and WithDefaultsModuleResult.Selectable,
+			NextSelectionUp = WithDefaultsModuleResult.NextSelectionUp,
+			NextSelectionDown = WithDefaultsModuleResult.NextSelectionDown,
+			NextSelectionLeft = WithDefaultsModuleResult.NextSelectionLeft,
+			NextSelectionRight = WithDefaultsModuleResult.NextSelectionRight
 		},
-		onActivated = var1.onActivated,
-		stateLayer = if var1.isChecked then { mode = stateLayerModeModule.Inverse } else nil,
-		backgroundStyle = var5.chip.backgroundStyle,
-		padding = var5.chip.padding,
+		onActivated = WithDefaultsModuleResult.onActivated,
+		stateLayer = if WithDefaultsModuleResult.isChecked then { mode = StateLayerModeModule.Inverse } else nil,
+		backgroundStyle = UseChipVariantsModuleResult.chip.backgroundStyle,
+		padding = UseChipVariantsModuleResult.chip.padding,
 		cursor = {
-			radius = UDim.new(0, var2.Radius.Circle),
-			offset = floored * 2,
-			borderWidth = floored
+			radius = UDim.new(0, UseTokensModuleResult.Radius.Circle),
+			offset = Floored * 2,
+			borderWidth = Floored
 		},
-		tag = var5.chip.tag,
-		ref = p2,
-		GroupTransparency = if var1.isDisabled then constantsModule.DISABLED_TRANSPARENCY else 0
-	}), reactModule.createElement(presentationContextModule.Provider, {
-		value = reactModule.useMemo(function()
-			-- upvalues: var1 (ref), colorNamespaceModule (copy)
+		tag = UseChipVariantsModuleResult.chip.tag,
+		ref = Ref,
+		GroupTransparency = if WithDefaultsModuleResult.isDisabled then ConstantsModule.DISABLED_TRANSPARENCY else 0
+	}), ReactModule.createElement(PresentationContextModule.Provider, {
+		value = ReactModule.useMemo(function() --[[ Line: 116 ]]
+			-- upvalues: WithDefaultsModuleResult (copy), ColorNamespaceModule (upval)
 			return {
 				isIconSize = true,
-				colorNamespace = if var1.isChecked then colorNamespaceModule.Inverse else colorNamespaceModule.Color
+				colorNamespace = if WithDefaultsModuleResult.isChecked then ColorNamespaceModule.Inverse else ColorNamespaceModule.Color
 			}
-		end, { var1.isChecked })
+		end, { WithDefaultsModuleResult.isChecked })
 	}, {
-		Leading = if var3 then reactModule.createElement(accessoryModule, {
+		Leading = if UseMemoResult then ReactModule.createElement(AccessoryModule, {
 			isLeading = true,
-			config = var3,
-			size = var1.size,
-			chipBackgroundStyle = var5.chip.backgroundStyle,
-			contentStyle = var5.text.contentStyle,
-			isDisabled = var1.isDisabled,
-			testId = `{var1.testId}--leading-accessory`
+			config = UseMemoResult,
+			size = WithDefaultsModuleResult.size,
+			chipBackgroundStyle = UseChipVariantsModuleResult.chip.backgroundStyle,
+			contentStyle = UseChipVariantsModuleResult.text.contentStyle,
+			isDisabled = WithDefaultsModuleResult.isDisabled,
+			isIconOnly = IsIconOnly,
+			testId = `{WithDefaultsModuleResult.testId}--leading-accessory`
 		}) else nil,
-		Text = if var1.text and var1.text ~= "" then reactModule.createElement(textModule, {
+		Text = if IsNotTextMatch then ReactModule.createElement(TextModule, {
 			LayoutOrder = 2,
-			Text = var1.text,
-			textStyle = var5.text.contentStyle,
-			tag = var5.text.tag,
-			padding = var5.text.padding,
-			testId = `{var1.testId}--text`
+			Text = WithDefaultsModuleResult.text,
+			textStyle = UseChipVariantsModuleResult.text.contentStyle,
+			tag = UseChipVariantsModuleResult.text.tag,
+			padding = UseChipVariantsModuleResult.text.padding,
+			testId = `{WithDefaultsModuleResult.testId}--text`
 		}) else nil,
-		Trailing = if var4 then reactModule.createElement(accessoryModule, {
+		Trailing = if UseMemoResult2 then ReactModule.createElement(AccessoryModule, {
 			isLeading = false,
-			config = var4,
-			size = var1.size,
-			chipBackgroundStyle = var5.chip.backgroundStyle,
-			contentStyle = var5.text.contentStyle,
-			isDisabled = var1.isDisabled,
-			testId = `{var1.testId}--trailing-accessory`
+			config = UseMemoResult2,
+			size = WithDefaultsModuleResult.size,
+			chipBackgroundStyle = UseChipVariantsModuleResult.chip.backgroundStyle,
+			contentStyle = UseChipVariantsModuleResult.text.contentStyle,
+			isDisabled = WithDefaultsModuleResult.isDisabled,
+			isIconOnly = IsIconOnly,
+			testId = `{WithDefaultsModuleResult.testId}--trailing-accessory`
 		}) else nil
 	}))
 end))

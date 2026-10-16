@@ -1,91 +1,79 @@
-﻿local cryo = require(game:GetService("CorePackages").Packages.InGameMenuDependencies).Cryo
-local parent = script.Parent
-local setMenuOpenModule = require(parent.Actions.SetMenuOpen)
-local setMainPageMoreMenuOpenModule = require(parent.Actions.SetMainPageMoreMenuOpen)
-local setCurrentPageModule = require(parent.Actions.SetCurrentPage)
-local setScreenSizeModule = require(parent.Actions.SetScreenSize)
-local startLeavingGameModule = require(parent.Actions.StartLeavingGame)
-local cancelLeavingGameModule = require(parent.Actions.CancelLeavingGame)
-local setControlLayoutModule = require(parent.Actions.SetControlLayout)
-local setRespawningModule = require(parent.Actions.SetRespawning)
-local setCurrentZoneModule = require(parent.Actions.SetCurrentZone)
-local setControllerBarHeightModule = require(parent.Actions.SetControllerBarHeight)
-local decrementControllerBarModule = require(parent.Actions.DecrementControllerBar)
-local incrementControllerBarModule = require(parent.Actions.IncrementControllerBar)
-local navigationReducerModule = require(script.navigationReducer)
-local respawnModule = require(script.respawn)
-local invitesModule = require(script.invites)
-local gameInfoModule = require(script.gameInfo)
-local reportModule = require(script.report)
-local friendsModule = require(script.friends)
-local displayOptionsModule = require(script.displayOptions)
-local nativeClosePromptModule = require(script.nativeClosePrompt)
-local voiceStateModule = require(parent.Parent.VoiceChat.Reducers.voiceState)
-local constantsModule = require(parent.Resources.Constants)
-local controlsModule = require(parent.Resources.Controls)
-local t = {
-	[setMenuOpenModule.name] = function(p1, p2)
-		-- upvalues: cryo (ref)
-		return cryo.Dictionary.join(p1, {
+﻿local Cryo = require(game:GetService("CorePackages").Packages.InGameMenuDependencies).Cryo
+local Parent = script.Parent
+local NavigationReducerModule = require(script.navigationReducer)
+local RespawnModule = require(script.respawn)
+local InvitesModule = require(script.invites)
+local GameInfoModule = require(script.gameInfo)
+local ReportModule = require(script.report)
+local FriendsModule = require(script.friends)
+local DisplayOptionsModule = require(script.displayOptions)
+local NativeClosePromptModule = require(script.nativeClosePrompt)
+local VoiceStateModule = require(Parent.Parent.VoiceChat.Reducers.voiceState)
+local ConstantsModule = require(Parent.Resources.Constants)
+local ControlsModule = require(Parent.Resources.Controls)
+local config = {
+	[require(Parent.Actions.SetMenuOpen).name] = function(p1, p2) --[[ Line: 36 ]]
+		-- upvalues: Cryo (copy)
+		return Cryo.Dictionary.join(p1, {
 			isMenuOpen = p2.isMenuOpen,
-			isMainPageMoreMenuOpen = if not p2.isMenuOpen then false else nil,
-			currentZone = if p1.isMenuOpen ~= p2.isMenuOpen then nil else 1
+			isMainPageMoreMenuOpen = if p2.isMenuOpen then nil else false,
+			currentZone = if p1.isMenuOpen == p2.isMenuOpen then nil else 1
 		})
 	end,
-	[setMainPageMoreMenuOpenModule.name] = function(p1, p2)
-		-- upvalues: cryo (ref)
-		return cryo.Dictionary.join(p1, { isMainPageMoreMenuOpen = p2.isMainPageMoreMenuOpen })
+	[require(Parent.Actions.SetMainPageMoreMenuOpen).name] = function(p1, p2) --[[ Line: 49 ]]
+		-- upvalues: Cryo (copy)
+		return Cryo.Dictionary.join(p1, { isMainPageMoreMenuOpen = p2.isMainPageMoreMenuOpen })
 	end,
-	[startLeavingGameModule.name] = function(p1, _)
-		-- upvalues: cryo (ref)
-		return cryo.Dictionary.join(p1, { leavingGame = true })
+	[require(Parent.Actions.StartLeavingGame).name] = function(p1, _) --[[ Line: 54 ]]
+		-- upvalues: Cryo (copy)
+		return Cryo.Dictionary.join(p1, { leavingGame = true })
 	end,
-	[cancelLeavingGameModule.name] = function(p1, _)
-		-- upvalues: cryo (ref)
-		return cryo.Dictionary.join(p1, { leavingGame = false })
+	[require(Parent.Actions.CancelLeavingGame).name] = function(p1, _) --[[ Line: 59 ]]
+		-- upvalues: Cryo (copy)
+		return Cryo.Dictionary.join(p1, { leavingGame = false })
 	end,
-	[setCurrentPageModule.name] = function(p1, p2)
-		-- upvalues: cryo (ref), constantsModule (ref)
-		return cryo.Dictionary.join(p1, {
+	[require(Parent.Actions.SetCurrentPage).name] = function(p1, p2) --[[ Line: 64 ]]
+		-- upvalues: Cryo (copy), ConstantsModule (copy)
+		return Cryo.Dictionary.join(p1, {
 			isMainPageMoreMenuOpen = false,
 			menuPage = p2.newPage,
-			currentZone = if p2.newPage == constantsModule.InitalPageKey then 0 else 1
+			currentZone = if p2.newPage == ConstantsModule.InitalPageKey then 0 else 1
 		})
 	end,
-	[setControlLayoutModule.name] = function(p1, p2)
-		-- upvalues: cryo (ref)
-		return cryo.Dictionary.join(p1, { controlLayout = p2.controlLayout })
+	[require(Parent.Actions.SetControlLayout).name] = function(p1, p2) --[[ Line: 72 ]]
+		-- upvalues: Cryo (copy)
+		return Cryo.Dictionary.join(p1, { controlLayout = p2.controlLayout })
 	end,
-	[setScreenSizeModule.name] = function(p1, p2)
-		-- upvalues: cryo (ref)
-		return cryo.Dictionary.join(p1, { screenSize = p2.newScreenSize })
+	[require(Parent.Actions.SetScreenSize).name] = function(p1, p2) --[[ Line: 79 ]]
+		-- upvalues: Cryo (copy)
+		return Cryo.Dictionary.join(p1, { screenSize = p2.newScreenSize })
 	end,
-	[setRespawningModule.name] = function(p1, p2)
-		-- upvalues: cryo (ref)
-		return cryo.Dictionary.join(p1, {
-			isMainPageMoreMenuOpen = if p2.respawning then false else p1.isMainPageMoreMenuOpen
+	[require(Parent.Actions.SetRespawning).name] = function(p1, p2) --[[ Line: 84 ]]
+		-- upvalues: Cryo (copy)
+		return Cryo.Dictionary.join(p1, {
+			isMainPageMoreMenuOpen = not p2.respawning and p1.isMainPageMoreMenuOpen
 		})
 	end,
-	[setCurrentZoneModule.name] = function(p1, p2)
-		-- upvalues: cryo (ref)
-		return cryo.Dictionary.join(p1, { currentZone = p2.zone })
+	[require(Parent.Actions.SetCurrentZone).name] = function(p1, p2) --[[ Line: 96 ]]
+		-- upvalues: Cryo (copy)
+		return Cryo.Dictionary.join(p1, { currentZone = p2.zone })
 	end,
-	[setControllerBarHeightModule.name] = function(p1, p2)
-		-- upvalues: cryo (ref)
-		return cryo.Dictionary.join(p1, { controllerBarHeight = p2.controllerBarHeight })
+	[require(Parent.Actions.SetControllerBarHeight).name] = function(p1, p2) --[[ Line: 101 ]]
+		-- upvalues: Cryo (copy)
+		return Cryo.Dictionary.join(p1, { controllerBarHeight = p2.controllerBarHeight })
 	end,
-	[incrementControllerBarModule.name] = function(p1, _)
-		-- upvalues: cryo (ref)
-		return cryo.Dictionary.join(p1, { controllerBarCount = p1.controllerBarCount + 1 })
+	[require(Parent.Actions.IncrementControllerBar).name] = function(p1, _) --[[ Line: 106 ]]
+		-- upvalues: Cryo (copy)
+		return Cryo.Dictionary.join(p1, { controllerBarCount = p1.controllerBarCount + 1 })
 	end,
-	[decrementControllerBarModule.name] = function(p1, _)
-		-- upvalues: cryo (ref)
-		return cryo.Dictionary.join(p1, { controllerBarCount = p1.controllerBarCount - 1 })
+	[require(Parent.Actions.DecrementControllerBar).name] = function(p1, _) --[[ Line: 111 ]]
+		-- upvalues: Cryo (copy)
+		return Cryo.Dictionary.join(p1, { controllerBarCount = p1.controllerBarCount - 1 })
 	end
 }
 
-return function(p1, p2)
-	-- upvalues: controlsModule (ref), constantsModule (ref), invitesModule (ref), respawnModule (ref), gameInfoModule (ref), friendsModule (ref), displayOptionsModule (ref), nativeClosePromptModule (ref), t (ref), navigationReducerModule (ref), voiceStateModule (ref), reportModule (ref)
+return function(p1, p2) --[[ Line: 118 | Named "reducer" ]]
+	-- upvalues: ControlsModule (copy), ConstantsModule (copy), InvitesModule (copy), RespawnModule (copy), GameInfoModule (copy), FriendsModule (copy), DisplayOptionsModule (copy), NativeClosePromptModule (copy), config (copy), NavigationReducerModule (copy), VoiceStateModule (copy), ReportModule (copy)
 	if p1 == nil then
 		p1 = {
 			isMenuOpen = false,
@@ -96,31 +84,31 @@ return function(p1, p2)
 			isMainPageMoreMenuOpen = false,
 			controllerBarHeight = 0,
 			controllerBarCount = 0,
-			controlLayout = controlsModule.ControlLayouts.KEYBOARD,
-			menuPage = constantsModule.defaultPageKey,
-			invites = invitesModule(nil, p2),
-			respawn = respawnModule(nil, p2),
-			gameInfo = gameInfoModule(nil, p2),
-			friends = friendsModule(nil, p2),
-			displayOptions = displayOptionsModule(nil, p2),
+			controlLayout = ControlsModule.ControlLayouts.KEYBOARD,
+			menuPage = ConstantsModule.defaultPageKey,
+			invites = InvitesModule(nil, p2),
+			respawn = RespawnModule(nil, p2),
+			gameInfo = GameInfoModule(nil, p2),
+			friends = FriendsModule(nil, p2),
+			displayOptions = DisplayOptionsModule(nil, p2),
 			screenSize = Vector2.new(0, 0),
-			nativeClosePrompt = nativeClosePromptModule(nil, p2)
+			nativeClosePrompt = NativeClosePromptModule(nil, p2)
 		}
 	end
-	local type = t[p2.type]
+	local Entry = config[p2.type]
 	
-	if type ~= nil then
-		p1 = type(p1, p2)
+	if Entry ~= nil then
+		p1 = Entry(p1, p2)
 	end
-	local var1 = navigationReducerModule(p1, p2)
-	var1.respawn = respawnModule(var1.respawn, p2)
-	var1.invites = invitesModule(var1.invites, p2)
-	var1.voiceState = voiceStateModule(var1.voiceState, p2)
-	var1.gameInfo = gameInfoModule(var1.gameInfo, p2)
-	var1.report = reportModule(var1.report, p2)
-	var1.friends = friendsModule(var1.friends, p2)
-	var1.displayOptions = displayOptionsModule(var1.displayOptions, p2)
-	var1.nativeClosePrompt = nativeClosePromptModule(var1.nativeClosePrompt, p2)
+	local NavigationReducerModuleResult = NavigationReducerModule(p1, p2)
+	NavigationReducerModuleResult.respawn = RespawnModule(NavigationReducerModuleResult.respawn, p2)
+	NavigationReducerModuleResult.invites = InvitesModule(NavigationReducerModuleResult.invites, p2)
+	NavigationReducerModuleResult.voiceState = VoiceStateModule(NavigationReducerModuleResult.voiceState, p2)
+	NavigationReducerModuleResult.gameInfo = GameInfoModule(NavigationReducerModuleResult.gameInfo, p2)
+	NavigationReducerModuleResult.report = ReportModule(NavigationReducerModuleResult.report, p2)
+	NavigationReducerModuleResult.friends = FriendsModule(NavigationReducerModuleResult.friends, p2)
+	NavigationReducerModuleResult.displayOptions = DisplayOptionsModule(NavigationReducerModuleResult.displayOptions, p2)
+	NavigationReducerModuleResult.nativeClosePrompt = NativeClosePromptModule(NavigationReducerModuleResult.nativeClosePrompt, p2)
 	
-	return var1
+	return NavigationReducerModuleResult
 end

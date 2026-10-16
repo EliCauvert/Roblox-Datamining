@@ -1,123 +1,124 @@
-﻿local appComposition = script:FindFirstAncestor("AppComposition")
-local parent = appComposition.Parent
-local _ = require(parent.Foundation)
-local signalsModule = require(parent.Signals)
-local compositionConfigModule = require(appComposition.CompositionConfig)
-local appCompositionEnumsModule = require(appComposition.AppCompositionEnums)
-local compositionTagsModule = require(appComposition.CompositionTags)
-local getGlobalViewportBreakpointModule = require(appComposition.getGlobalViewportBreakpoint)
-local fFlagEnableSplitPane = require(parent.SharedFlags).FFlagEnableSplitPane
-local displayModule = require(parent.Display)
-local luaAppScaleDetailWidth = game:DefineFastFlag("LuaAppScaleDetailWidth", false)
-local luaAppScaleDiscoveryWidth = game:DefineFastFlag("LuaAppScaleDiscoveryWidth", false)
-local header = compositionTagsModule.ContentRegion.Header
-local body = compositionTagsModule.ContentRegion.Body
-local detail = compositionTagsModule.Layout.Detail
-local clipAtMaxWidth = compositionTagsModule.Utility.ClipAtMaxWidth
-local var1 = if fFlagEnableSplitPane then compositionTagsModule.SupportRegion.Root else nil
-local var2 = if fFlagEnableSplitPane then compositionTagsModule.SupportRegion.Collapsed else nil
-local var3 = if fFlagEnableSplitPane then "CompositionSupportMinSize" else nil
-local var4 = if fFlagEnableSplitPane then "CompositionSupportMaxSize" else nil
-local var5 = if fFlagEnableSplitPane then compositionConfigModule.getRegionOverrides(appCompositionEnumsModule.RegionName.SupportRegion) else nil
-local t = {
-	[`.{header}`] = {
+﻿local AppComposition = script:FindFirstAncestor("AppComposition")
+local Parent = AppComposition.Parent
+local _ = require(Parent.Foundation)
+local SignalsModule = require(Parent.Signals)
+local CompositionConfigModule = require(AppComposition.CompositionConfig)
+local AppCompositionEnumsModule = require(AppComposition.AppCompositionEnums)
+local CompositionTagsModule = require(AppComposition.CompositionTags)
+local GetGlobalViewportBreakpointModule = require(AppComposition.getGlobalViewportBreakpoint)
+local FFlagEnableSplitPane = require(Parent.SharedFlags).FFlagEnableSplitPane
+local DisplayModule = require(Parent.Display)
+local LuaAppScaleDetailWidth = game:DefineFastFlag("LuaAppScaleDetailWidth", false)
+local LuaAppScaleDiscoveryWidth = game:DefineFastFlag("LuaAppScaleDiscoveryWidth", false)
+local Header = CompositionTagsModule.ContentRegion.Header
+local Body = CompositionTagsModule.ContentRegion.Body
+local Detail = CompositionTagsModule.Layout.Detail
+local ClipAtMaxWidth = CompositionTagsModule.Utility.ClipAtMaxWidth
+local Root = if FFlagEnableSplitPane then CompositionTagsModule.SupportRegion.Root else nil
+local CompositionSupportMinSize = if FFlagEnableSplitPane then "CompositionSupportMinSize" else nil
+local CompositionSupportMaxSize = if FFlagEnableSplitPane then "CompositionSupportMaxSize" else nil
+local RegionOverrides = if FFlagEnableSplitPane then CompositionConfigModule.getRegionOverrides(AppCompositionEnumsModule.RegionName.SupportRegion) else nil
+local config = {
+	[`.{Header}`] = {
 		AnchorPoint = Vector2.new(0.5, 0),
 		Position = UDim2.fromScale(0.5, 0)
 	},
-	[`.{header}::UIPadding`] = {
+	[`.{Header}::UIPadding`] = {
 		PaddingLeft = "$CompositionMargin",
 		PaddingRight = "$CompositionMargin"
 	},
-	[`.{header}::UISizeConstraint`] = { MaxSize = "$CompositionMaxWidthDiscovery" },
-	[`.{body}`] = {
+	[`.{Header}::UISizeConstraint`] = { MaxSize = "$CompositionMaxWidthDiscovery" },
+	[`.{Body}`] = {
 		AnchorPoint = Vector2.new(0.5, 0),
 		Position = UDim2.fromScale(0.5, 0)
 	},
-	[`.{body}::UIPadding`] = {
+	[`.{Body}::UIPadding`] = {
 		PaddingLeft = "$CompositionMargin",
 		PaddingRight = "$CompositionMargin"
 	},
-	[`.{body}::UISizeConstraint`] = { MaxSize = "$CompositionMaxWidthDiscovery" },
-	[`.{detail} >> .{header}::UISizeConstraint`] = { MaxSize = "$CompositionMaxWidthDetail" },
-	[`.{detail} >> .{body}::UISizeConstraint`] = { MaxSize = "$CompositionMaxWidthDetail" },
-	[`.{body}::StyleQuery #CompositionAtMaxWidthDiscovery`] = { MinSize = "$CompositionClipThresholdDiscovery" },
-	[`.{body}::StyleQuery #CompositionNotAtMaxWidthDiscovery`] = { MaxSize = "$CompositionMaxWidthDiscovery" },
-	[`@CompositionAtMaxWidthDiscovery >> .{clipAtMaxWidth}`] = { ClipsDescendants = true },
-	[`.{detail} >> .{body}::StyleQuery #CompositionAtMaxWidthDetail`] = { MinSize = "$CompositionClipThresholdDetail" },
-	[`.{detail} >> .{body}::StyleQuery #CompositionNotAtMaxWidthDetail`] = { MaxSize = "$CompositionMaxWidthDetail" },
-	[`@CompositionAtMaxWidthDetail >> .{clipAtMaxWidth}`] = { ClipsDescendants = true },
-	[`.{var1}`] = if fFlagEnableSplitPane and var5 and var5.widthScale then { Size = UDim2.new(var5.widthScale, 0, 1, 0) } else nil,
-	[`.{var1}::UISizeConstraint`] = if fFlagEnableSplitPane then { MinSize = "$" .. var11, MaxSize = "$" .. var12 } else nil,
-	[`.{var2}`] = if fFlagEnableSplitPane then { Size = UDim2.new(0, 0, 1, 0) } else nil
+	[`.{Body}::UISizeConstraint`] = { MaxSize = "$CompositionMaxWidthDiscovery" },
+	[`.{Detail} >> .{Header}::UISizeConstraint`] = { MaxSize = "$CompositionMaxWidthDetail" },
+	[`.{Detail} >> .{Body}::UISizeConstraint`] = { MaxSize = "$CompositionMaxWidthDetail" },
+	[`.{Body}::StyleQuery #CompositionAtMaxWidthDiscovery`] = { MinSize = "$CompositionClipThresholdDiscovery" },
+	[`.{Body}::StyleQuery #CompositionNotAtMaxWidthDiscovery`] = { MaxSize = "$CompositionMaxWidthDiscovery" },
+	[`@CompositionAtMaxWidthDiscovery >> .{ClipAtMaxWidth}`] = { ClipsDescendants = true },
+	[`.{Detail} >> .{Body}::StyleQuery #CompositionAtMaxWidthDetail`] = { MinSize = "$CompositionClipThresholdDetail" },
+	[`.{Detail} >> .{Body}::StyleQuery #CompositionNotAtMaxWidthDetail`] = { MaxSize = "$CompositionMaxWidthDetail" },
+	[`@CompositionAtMaxWidthDetail >> .{ClipAtMaxWidth}`] = { ClipsDescendants = true },
+	[`.{Root}`] = if FFlagEnableSplitPane and RegionOverrides and RegionOverrides.widthScale then { Size = UDim2.new(RegionOverrides.widthScale, 0, 1, 0) } else nil,
+	[`.{Root}::UISizeConstraint`] = if FFlagEnableSplitPane then {
+		MinSize = "$" .. CompositionSupportMinSize,
+		MaxSize = "$" .. CompositionSupportMaxSize
+	} else nil,
+	[`.{if FFlagEnableSplitPane then CompositionTagsModule.SupportRegion.Collapsed else nil}`] = if FFlagEnableSplitPane then { Size = UDim2.new(0, 0, 1, 0) } else nil
 }
 
-local function applyRules(p1, p2)
-	-- upvalues: t (ref)
-	for i, v in t do
-		local styleRule = Instance.new("StyleRule")
-		styleRule.Selector = i
-		styleRule.Name = i
-		styleRule:SetProperties(v)
-		styleRule.Parent = p1
-		table.insert(p2, styleRule)
+local function applyRules(Parent, List) --[[ Line: 134 ]]
+	-- upvalues: config (copy)
+	for Name, value in config do
+		local StyleRule = Instance.new("StyleRule")
+		StyleRule.Selector = Name
+		StyleRule.Name = Name
+		StyleRule:SetProperties(value)
+		StyleRule.Parent = Parent
+		table.insert(List, StyleRule)
 	end
 end
 
-local function setupReactiveAttributes(value, p3)
-	-- upvalues: signalsModule (ref), getGlobalViewportBreakpointModule (ref), compositionConfigModule (ref), fFlagEnableSplitPane (ref), appCompositionEnumsModule (ref), luaAppScaleDiscoveryWidth (ref), luaAppScaleDetailWidth (ref), displayModule (ref), var3 (ref), var4 (ref)
-	local var6 = signalsModule.createComputed(function(p4)
-		-- upvalues: getGlobalViewportBreakpointModule (copy), compositionConfigModule (copy), p3 (ref)
-		return compositionConfigModule.getBaseConfig(getGlobalViewportBreakpointModule(p4), p3).margin
+local function setupReactiveAttributes(Object, p1) --[[ Line: 148 ]]
+	-- upvalues: SignalsModule (copy), GetGlobalViewportBreakpointModule (copy), CompositionConfigModule (copy), FFlagEnableSplitPane (copy), AppCompositionEnumsModule (copy), LuaAppScaleDiscoveryWidth (copy), LuaAppScaleDetailWidth (copy), DisplayModule (copy), CompositionSupportMinSize (copy), CompositionSupportMaxSize (copy)
+	local Computed = SignalsModule.createComputed(function(p2) --[[ Line: 149 ]]
+		-- upvalues: GetGlobalViewportBreakpointModule (upval), CompositionConfigModule (upval), p1 (copy)
+		return CompositionConfigModule.getBaseConfig(GetGlobalViewportBreakpointModule(p2), p1).margin
 	end)
-	local var7 = if fFlagEnableSplitPane then signalsModule.createComputed(function(p4)
-		-- upvalues: getGlobalViewportBreakpointModule (copy), compositionConfigModule (copy), appCompositionEnumsModule (copy), p3 (ref)
-		return compositionConfigModule.getRegionLayout(appCompositionEnumsModule.RegionName.SupportRegion, getGlobalViewportBreakpointModule(p4), p3)
+	local Computed1 = if FFlagEnableSplitPane then SignalsModule.createComputed(function(p2) --[[ Line: 155 ]]
+		-- upvalues: GetGlobalViewportBreakpointModule (upval), CompositionConfigModule (upval), AppCompositionEnumsModule (upval), p1 (copy)
+		return CompositionConfigModule.getRegionLayout(AppCompositionEnumsModule.RegionName.SupportRegion, GetGlobalViewportBreakpointModule(p2), p1)
 	end) else nil
 	
-	return signalsModule.createEffect(function(p4)
-		-- upvalues: var6 (ref), value (ref), luaAppScaleDiscoveryWidth (copy), luaAppScaleDetailWidth (copy), displayModule (copy), fFlagEnableSplitPane (copy), var7 (ref), var3 (copy), var4 (copy)
-		local var8
-		local var9 = var6(p4)
-		local var10 = var9 * 2
-		value:SetAttribute("CompositionMargin", UDim.new(0, var9))
-		local var11 = nil
+	return SignalsModule.createEffect(function(p2) --[[ Line: 161 ]]
+		-- upvalues: Computed (copy), Object (copy), LuaAppScaleDiscoveryWidth (upval), LuaAppScaleDetailWidth (upval), DisplayModule (upval), FFlagEnableSplitPane (upval), Computed1 (copy), CompositionSupportMinSize (upval), CompositionSupportMaxSize (upval)
+		local ComputedResult: number = Computed(p2)
+		local ScaledComputedResult = ComputedResult * 2
+		Object:SetAttribute("CompositionMargin", UDim.new(0, ComputedResult))
+		local v1 = nil
 		
-		if luaAppScaleDiscoveryWidth or luaAppScaleDetailWidth then
-			local displayStore = displayModule.GetDisplayStore(p4)
-			var8 = if displayStore.getPlatformScale then displayStore.getPlatformScale(p4) else 1
-			var11 = if var8 and var8 > 0 then var8 else 1
+		if LuaAppScaleDiscoveryWidth or LuaAppScaleDetailWidth then
+			local DisplayStore = DisplayModule.GetDisplayStore(p2)
+			local PlatformScale = if DisplayStore.getPlatformScale then DisplayStore.getPlatformScale(p2) else 1
+			v1 = if PlatformScale and PlatformScale > 0 then PlatformScale else 1
 		end
-		value:SetAttribute("CompositionMaxWidthDiscovery", Vector2.new((if luaAppScaleDiscoveryWidth then var11 * 1920 else 1920) + var10, 1e999))
-		value:SetAttribute("CompositionClipThresholdDiscovery", Vector2.new((if luaAppScaleDiscoveryWidth then var11 * 1920 else 1920) + var10, 0))
-		value:SetAttribute("CompositionMaxWidthDetail", Vector2.new((if luaAppScaleDetailWidth then var11 * 848 else 848) + var10, 1e999))
-		value:SetAttribute("CompositionClipThresholdDetail", Vector2.new((if luaAppScaleDetailWidth then var11 * 848 else 848) + var10, 0))
+		Object:SetAttribute("CompositionMaxWidthDiscovery", Vector2.new((if LuaAppScaleDiscoveryWidth then v1 * 1920 else 1920) + ScaledComputedResult, 1e999))
+		Object:SetAttribute("CompositionClipThresholdDiscovery", Vector2.new((if LuaAppScaleDiscoveryWidth then v1 * 1920 else 1920) + ScaledComputedResult, 0))
+		Object:SetAttribute("CompositionMaxWidthDetail", Vector2.new((if LuaAppScaleDetailWidth then v1 * 848 else 848) + ScaledComputedResult, 1e999))
+		Object:SetAttribute("CompositionClipThresholdDetail", Vector2.new((if LuaAppScaleDetailWidth then v1 * 848 else 848) + ScaledComputedResult, 0))
 		
-		if fFlagEnableSplitPane then
-			local var12 = var7(p4)
-			var8 = displayModule.GetDisplayStore(p4)
-			local var13 = if var8.getPlatformScale then var8.getPlatformScale(p4) else 1
+		if FFlagEnableSplitPane then
+			local ComputedResult1 = Computed1(p2)
+			local DisplayStore = DisplayModule.GetDisplayStore(p2)
+			local PlatformScale = if DisplayStore.getPlatformScale then DisplayStore.getPlatformScale(p2) else 1
 			
-			if not var13 or var13 == 0 then
-				var13 = 1
+			if not PlatformScale or PlatformScale == 0 then
+				PlatformScale = 1
 			end
-			value:SetAttribute(var3, Vector2.new((var12.minWidth or 0) * var13, 0))
-			value:SetAttribute(var4, Vector2.new((var12.maxWidth or 1e999) * var13, 1e999))
+			Object:SetAttribute(CompositionSupportMinSize, Vector2.new((ComputedResult1.minWidth or 0) * PlatformScale, 0))
+			Object:SetAttribute(CompositionSupportMaxSize, Vector2.new((ComputedResult1.maxWidth or 1e999) * PlatformScale, 1e999))
 		end
 	end)
 end
 
-return function(value, p3)
-	-- upvalues: applyRules (ref), setupReactiveAttributes (ref)
+return function(Parent, p1) --[[ Line: 225 | Named "setupCompositionStyleRules" ]]
+	-- upvalues: applyRules (copy), setupReactiveAttributes (copy)
 	local t = {}
-	applyRules(value, t)
-	local var6 = setupReactiveAttributes(value, p3)
+	applyRules(Parent, t)
+	local SetupReactiveAttributesResult = setupReactiveAttributes(Parent, p1)
 	
-	return function()
-		-- upvalues: var6 (ref), t (ref)
-		var6()
+	return function() --[[ Line: 232 ]]
+		-- upvalues: SetupReactiveAttributesResult (copy), t (copy)
+		SetupReactiveAttributesResult()
 		
-		for i, v in t do
-			v:Destroy()
+		for _, value in t do
+			value:Destroy()
 		end
 	end
 end

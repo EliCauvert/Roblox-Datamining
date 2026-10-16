@@ -1,35 +1,35 @@
-﻿local userInputService = game:GetService("UserInputService")
-local parent = script:FindFirstAncestor("ChatUIPrimitives").Parent
-local reactModule = require(parent.React)
-local inputTypeModule = require(parent.InputType)
-local getInputGroup = inputTypeModule.getInputGroup
-local inputTypeConstants = inputTypeModule.InputTypeConstants
-local fFlagLuaSupportMicroGamepadPreferredInput = require(parent.SharedFlags).FFlagLuaSupportMicroGamepadPreferredInput
+﻿local UserInputService = game:GetService("UserInputService")
+local Parent = script:FindFirstAncestor("ChatUIPrimitives").Parent
+local ReactModule = require(Parent.React)
+local InputTypeModule = require(Parent.InputType)
+local GetInputGroupFunction = InputTypeModule.getInputGroup
+local InputTypeConstants = InputTypeModule.InputTypeConstants
+local FFlagLuaSupportMicroGamepadPreferredInput = require(Parent.SharedFlags).FFlagLuaSupportMicroGamepadPreferredInput
 
-local function _(p1)
-	-- upvalues: fFlagLuaSupportMicroGamepadPreferredInput (ref), inputTypeConstants (ref)
-	return if p1.PreferredInput == Enum.PreferredInput.Gamepad or fFlagLuaSupportMicroGamepadPreferredInput and p1.PreferredInput == Enum.PreferredInput.MicroGamepad then inputTypeConstants.Gamepad elseif p1.TouchEnabled then inputTypeConstants.Touch else inputTypeConstants.MouseAndKeyboard
+local function _(p1) --[[ Line: 21 | Named "getInitialInputGroup" ]]
+	-- upvalues: FFlagLuaSupportMicroGamepadPreferredInput (copy), InputTypeConstants (copy)
+	return if p1.PreferredInput == Enum.PreferredInput.Gamepad or FFlagLuaSupportMicroGamepadPreferredInput and p1.PreferredInput == Enum.PreferredInput.MicroGamepad then InputTypeConstants.Gamepad elseif p1.TouchEnabled then InputTypeConstants.Touch else InputTypeConstants.MouseAndKeyboard
 end
 
-return function(p1)
-	-- upvalues: userInputService (ref), reactModule (ref), fFlagLuaSupportMicroGamepadPreferredInput (ref), inputTypeConstants (ref), getInputGroup (ref)
-	p1 = p1 or userInputService
-	local var1, var2 = reactModule.useState(function()
-		-- upvalues: p1 (ref), fFlagLuaSupportMicroGamepadPreferredInput (copy), inputTypeConstants (copy)
-		return if p1.PreferredInput == Enum.PreferredInput.Gamepad or fFlagLuaSupportMicroGamepadPreferredInput and p1.PreferredInput == Enum.PreferredInput.MicroGamepad then inputTypeConstants.Gamepad elseif p1.TouchEnabled then inputTypeConstants.Touch else inputTypeConstants.MouseAndKeyboard
+return function(p1) --[[ Line: 37 | Named "useLastInputGroup" ]]
+	-- upvalues: UserInputService (copy), ReactModule (copy), FFlagLuaSupportMicroGamepadPreferredInput (copy), InputTypeConstants (copy), GetInputGroupFunction (copy)
+	local P1 = p1 or UserInputService
+	local UseStateResult, UseStateResult2 = ReactModule.useState(function() --[[ Line: 39 ]]
+		-- upvalues: P1 (copy), FFlagLuaSupportMicroGamepadPreferredInput (upval), InputTypeConstants (upval)
+		return if P1.PreferredInput == Enum.PreferredInput.Gamepad or FFlagLuaSupportMicroGamepadPreferredInput and P1.PreferredInput == Enum.PreferredInput.MicroGamepad then InputTypeConstants.Gamepad elseif P1.TouchEnabled then InputTypeConstants.Touch else InputTypeConstants.MouseAndKeyboard
 	end)
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var2 (ref), getInputGroup (copy)
-		local lastInputTypeChangedConnection = p1.LastInputTypeChanged:Connect(function(p2)
-			-- upvalues: var2 (copy), getInputGroup (copy)
-			var2(getInputGroup(p2))
+	ReactModule.useEffect(function() --[[ Line: 43 ]]
+		-- upvalues: P1 (copy), UseStateResult2 (copy), GetInputGroupFunction (upval)
+		local LastInputTypeChangedConnection = P1.LastInputTypeChanged:Connect(function(LastInputType) --[[ Line: 44 ]]
+			-- upvalues: UseStateResult2 (upval), GetInputGroupFunction (upval)
+			UseStateResult2(GetInputGroupFunction(LastInputType))
 		end)
 		
-		return function()
-			-- upvalues: lastInputTypeChangedConnection (ref)
-			lastInputTypeChangedConnection:Disconnect()
+		return function() --[[ Line: 47 ]]
+			-- upvalues: LastInputTypeChangedConnection (copy)
+			LastInputTypeChangedConnection:Disconnect()
 		end
-	end, { p1 })
+	end, { P1 })
 	
-	return var1
+	return UseStateResult
 end

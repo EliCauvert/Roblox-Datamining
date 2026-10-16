@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.TrustAndSafetyIxp.TrustAndSafetyIxp)
+﻿return (require(script.Parent._Workspace.TrustAndSafetyIxp.TrustAndSafetyIxp))

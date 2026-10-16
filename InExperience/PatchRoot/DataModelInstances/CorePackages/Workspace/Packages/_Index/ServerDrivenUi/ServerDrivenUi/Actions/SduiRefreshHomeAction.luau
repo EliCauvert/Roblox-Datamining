@@ -1,30 +1,30 @@
-﻿local parent = script:FindFirstAncestor("ServerDrivenUi").Parent
-local refreshHomePage = require(parent.Home).refreshHomePage
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local sduiActionType = sduiCoreSystemModule.SduiActionType
-local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
+﻿local Parent = script:FindFirstAncestor("ServerDrivenUi").Parent
+local RefreshHomePageFunction = require(Parent.Home).refreshHomePage
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local SduiActionType = SduiCoreSystemModule.SduiActionType
+local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
 
-local function _(p1, p2, p3)
-	-- upvalues: sduiErrorType (ref), sduiActionType (ref)
-	p1.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
-		name = sduiActionType.RefreshHome,
-		message = p2,
-		propName = p3
+local function _(p1, Message, PropName) --[[ Line: 13 | Named "reportInvalidActionParams" ]]
+	-- upvalues: SduiErrorType (copy), SduiActionType (copy)
+	p1.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
+		name = SduiActionType.RefreshHome,
+		message = Message,
+		propName = PropName
 	}, p1.appPage)
 end
 
-return function(p1, _, p2)
-	-- upvalues: sduiErrorType (ref), sduiActionType (ref), refreshHomePage (ref)
-	local var1 = if p1 then p1.actionParams else nil
-	local var2 = if var1 then var1.requestIntent else nil
+return function(p1, _, p2) --[[ Line: 21 | Named "SduiRefreshHomeAction" ]]
+	-- upvalues: SduiErrorType (copy), SduiActionType (copy), RefreshHomePageFunction (copy)
+	local ActionParams = p1 and p1.actionParams or nil
+	local RequestIntent = if ActionParams then ActionParams.requestIntent else nil
 	
-	if var2 ~= nil and (typeof(var2) ~= "string" or var2 == "") then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if RequestIntent ~= nil and (typeof(RequestIntent) ~= "string" or RequestIntent == "") then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			propName = "requestIntent",
-			name = sduiActionType.RefreshHome,
-			message = `Invalid requestIntent: {tostring(var2)}`
+			name = SduiActionType.RefreshHome,
+			message = `Invalid requestIntent: {tostring(RequestIntent)}`
 		}, p2.appPage)
-		var2 = nil
+		RequestIntent = nil
 	end
-	return refreshHomePage(var2)
+	return RefreshHomePageFunction(RequestIntent)
 end

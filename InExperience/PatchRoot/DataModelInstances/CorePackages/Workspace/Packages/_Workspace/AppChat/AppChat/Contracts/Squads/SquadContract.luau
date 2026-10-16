@@ -1,104 +1,104 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local appChatNetworkingModule = require(parent.AppChatNetworking)
-local retrievalStatus = require(parent.Http).Enum.RetrievalStatus
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local conversationModule = require(appChat.Models.Conversation)
-local conversationChannelsModule = require(appChat.Models.ConversationChannels)
-local createConversationModule = require(appChat.Conversations.Thunks.createConversation)
-local createFriendConversationModule = require(appChat.Conversations.Thunks.createFriendConversation)
-local moderationType = require(appChat.Models.ConversationChannels).ModerationType
-local expandToGroupConversationModule = require(appChat.Conversations.Thunks.expandToGroupConversation)
-local fetchLatestConversationDetailsModule = require(appChat.Conversations.Thunks.fetchLatestConversationDetails)
-local getConversationTitleModule = require(appChat.Conversations.getConversationTitle)
-local navigateIntoSquadLobbyModule = require(appChat.Conversations.Thunks.NavigateIntoSquadLobby)
-local useGetConversationFromIdModule = require(appChat.Hooks.useGetConversationFromId)
-local useGetConversationHasGroupUpFromIdModule = require(appChat.Hooks.useGetConversationHasGroupUpFromId)
-local useIsUserPendingModule = require(appChat.Hooks.useIsUserPending)
-local useIsChatEnabledModule = require(appChat.Hooks.useIsChatEnabled)
-local useIsChatUserMessagesEnabledModule = require(appChat.Hooks.useIsChatUserMessagesEnabled)
-local getDeepValueModule = require(appChat.Utils.getDeepValue)
-local fFlagReadAppChatFetchingVariable = require(parent.SharedFlags).FFlagReadAppChatFetchingVariable
-local fFlagAppChatNavigateBackIfOSAUnacknowledged = require(parent.SharedFlags).FFlagAppChatNavigateBackIfOSAUnacknowledged
-local fFlagEnableSquadRegroupExperimentation = require(parent.SharedFlags).FFlagEnableSquadRegroupExperimentation
-local shouldShowOSAForConversationModule = require(appChat.Utils.shouldShowOSAForConversation)
-local getOverlayStoreModule = require(appChat.Stores.GetOverlayStore)
-local overlayTypesModule = require(appChat.Stores.GetOverlayStore.OverlayTypes)
-local httpService = game:GetService("HttpService")
-local createExperienceInvite = require(parent.Squads.Thunks).CreateExperienceInvite
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local AppChatNetworkingModule = require(Parent.AppChatNetworking)
+local RetrievalStatus = require(Parent.Http).Enum.RetrievalStatus
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local ConversationModule = require(AppChat.Models.Conversation)
+local ConversationChannelsModule = require(AppChat.Models.ConversationChannels)
+local ModerationType = require(AppChat.Models.ConversationChannels).ModerationType
+local ExpandToGroupConversationModule = require(AppChat.Conversations.Thunks.expandToGroupConversation)
+local FetchLatestConversationDetailsModule = require(AppChat.Conversations.Thunks.fetchLatestConversationDetails)
+local GetConversationTitleModule = require(AppChat.Conversations.getConversationTitle)
+local UseGetConversationFromIdModule = require(AppChat.Hooks.useGetConversationFromId)
+local UseGetConversationHasGroupUpFromIdModule = require(AppChat.Hooks.useGetConversationHasGroupUpFromId)
+local UseIsUserPendingModule = require(AppChat.Hooks.useIsUserPending)
+local GetDeepValueModule = require(AppChat.Utils.getDeepValue)
+local FFlagReadAppChatFetchingVariable = require(Parent.SharedFlags).FFlagReadAppChatFetchingVariable
+local FFlagAppChatNavigateBackIfOSAUnacknowledged = require(Parent.SharedFlags).FFlagAppChatNavigateBackIfOSAUnacknowledged
+local ShouldShowOSAForConversationModule = require(AppChat.Utils.shouldShowOSAForConversation)
+local GetOverlayStoreModule = require(AppChat.Stores.GetOverlayStore)
+local OverlayTypesModule = require(AppChat.Stores.GetOverlayStore.OverlayTypes)
+local HttpService = game:GetService("HttpService")
+local CreateExperienceInviteFunction = require(Parent.Squads.Thunks).CreateExperienceInvite
 
 return {
-	fetchParentChannelDetails = function(p1, p2)
-		-- upvalues: fetchLatestConversationDetailsModule (ref)
-		return p1(fetchLatestConversationDetailsModule(p2))
+	fetchParentChannelDetails = function(Callback, p1) --[[ Line: 35 ]]
+		-- upvalues: FetchLatestConversationDetailsModule (copy)
+		return Callback(FetchLatestConversationDetailsModule(p1))
 	end,
-	inviteToParentChannel = function(p1, p2, p3)
-		-- upvalues: conversationModule (ref), appChatNetworkingModule (ref), expandToGroupConversationModule (ref)
-		return if p2.conversationType == conversationModule.Type.MULTI_USER_CONVERSATION then p1(appChatNetworkingModule.rodux.AddUserToConversation.API(p2.id, p3)):andThen(function()
-			-- upvalues: p2 (ref)
-			return p2.id
-		end) else p1(expandToGroupConversationModule(p2.id, p3)):andThen(function(p4)
-			return p4.id
+	inviteToParentChannel = function(Callback, p1, p2) --[[ Line: 39 ]]
+		-- upvalues: ConversationModule (copy), AppChatNetworkingModule (copy), ExpandToGroupConversationModule (copy)
+		return if p1.conversationType == ConversationModule.Type.MULTI_USER_CONVERSATION then Callback(AppChatNetworkingModule.rodux.AddUserToConversation.API(p1.id, p2)):andThen(function() --[[ Line: 43 ]]
+			-- upvalues: p1 (copy)
+			return p1.id
+		end) else Callback(ExpandToGroupConversationModule(p1.id, p2)):andThen(function(Result) --[[ Line: 49 ]]
+			return Result.id
 		end)
 	end,
-	navigateIntoSquadLobby = navigateIntoSquadLobbyModule,
-	removeUserFromParentChannel = function(p1, p2, p3)
-		-- upvalues: appChatNetworkingModule (ref)
-		return p1(appChatNetworkingModule.rodux.RemoveUserFromConversation.API(p2, p3))
+	navigateIntoSquadLobby = require(AppChat.Conversations.Thunks.NavigateIntoSquadLobby),
+	removeUserFromParentChannel = function(Callback, p1, p2) --[[ Line: 55 ]]
+		-- upvalues: AppChatNetworkingModule (copy)
+		return Callback(AppChatNetworkingModule.rodux.RemoveUserFromConversation.API(p1, p2))
 	end,
-	createConversation = createConversationModule,
-	createFriendConversation = createFriendConversationModule,
-	createExperienceInvite = if fFlagEnableSquadRegroupExperimentation then function(p1, p2, p3)
-		-- upvalues: createExperienceInvite (ref)
-		return createExperienceInvite(p1, p2, p3)
+	createConversation = require(AppChat.Conversations.Thunks.createConversation),
+	createFriendConversation = require(AppChat.Conversations.Thunks.createFriendConversation),
+	createExperienceInvite = if require(Parent.SharedFlags).FFlagEnableSquadRegroupExperimentation then function(p1, p2, p3) --[[ Line: 129 ]]
+		-- upvalues: CreateExperienceInviteFunction (copy)
+		return CreateExperienceInviteFunction(p1, p2, p3)
 	end else nil,
-	useGetConversationFromId = useGetConversationFromIdModule,
-	useParentChannelHasGroupUp = function(p1)
-		-- upvalues: useGetConversationHasGroupUpFromIdModule (ref)
-		return useGetConversationHasGroupUpFromIdModule(p1)
+	useGetConversationFromId = UseGetConversationFromIdModule,
+	useParentChannelHasGroupUp = function(p1) --[[ Line: 59 ]]
+		-- upvalues: UseGetConversationHasGroupUpFromIdModule (copy)
+		return UseGetConversationHasGroupUpFromIdModule(p1)
 	end,
-	useParentChannelHasSquadAccess = function(p1)
-		-- upvalues: useGetConversationFromIdModule (ref), conversationChannelsModule (ref), useIsUserPendingModule (ref)
+	useParentChannelHasSquadAccess = function(p1): boolean --[[ Line: 63 ]]
+		-- upvalues: UseGetConversationFromIdModule (copy), ConversationChannelsModule (copy), UseIsUserPendingModule (copy)
 		assert(p1 ~= nil, "Missing parent channel ID")
-		local var1 = useGetConversationFromIdModule(p1) or {}
+		local UseGetConversationFromIdModuleResult = UseGetConversationFromIdModule(p1) or {}
 		
-		return var1.source == "friends" or not useIsUserPendingModule(var1) and not (var1.participantPendingStatus == conversationChannelsModule.UserPendingStatus.Pending)
+		if UseGetConversationFromIdModuleResult.source == "friends" then
+			return true
+		else
+			local IsParticipantPendingStatusMatch = UseGetConversationFromIdModuleResult.participantPendingStatus == ConversationChannelsModule.UserPendingStatus.Pending
+			
+			return not UseIsUserPendingModule(UseGetConversationFromIdModuleResult) and not IsParticipantPendingStatusMatch
+		end
 	end,
-	useParentChannelIsPartyVoiceEligible = function(p1)
-		-- upvalues: useGetConversationFromIdModule (ref), moderationType (ref)
-		local var1 = useGetConversationFromIdModule(p1)
+	useParentChannelIsPartyVoiceEligible = function(p1) --[[ Line: 81 ]]
+		-- upvalues: UseGetConversationFromIdModule (copy), ModerationType (copy)
+		local UseGetConversationFromIdModuleResult = UseGetConversationFromIdModule(p1)
 		
-		return if var1 and var1.moderationType ~= nil then var1.moderationType == moderationType.TrustedComms else nil
+		return if UseGetConversationFromIdModuleResult and UseGetConversationFromIdModuleResult.moderationType ~= nil then UseGetConversationFromIdModuleResult.moderationType == ModerationType.TrustedComms else nil
 	end,
-	useParentChannelTitleSelector = function(p1)
-		-- upvalues: useGetConversationFromIdModule (ref), getConversationTitleModule (ref)
-		return getConversationTitleModule(useGetConversationFromIdModule(p1))
+	useParentChannelTitleSelector = function(p1) --[[ Line: 89 ]]
+		-- upvalues: UseGetConversationFromIdModule (copy), GetConversationTitleModule (copy)
+		return GetConversationTitleModule((UseGetConversationFromIdModule(p1)))
 	end,
-	useIsChatEnabled = useIsChatEnabledModule,
-	useIsLoadingChatSettings = function()
-		-- upvalues: useSelector (ref), fFlagReadAppChatFetchingVariable (ref), getDeepValueModule (ref), retrievalStatus (ref)
-		return useSelector(function(p1)
-			-- upvalues: fFlagReadAppChatFetchingVariable (copy), getDeepValueModule (copy), retrievalStatus (copy)
-			return if fFlagReadAppChatFetchingVariable then getDeepValueModule(p1, "ChatAppReducer.ChatSettings.retrievalStatus") ~= retrievalStatus.Done else nil
+	useIsChatEnabled = require(AppChat.Hooks.useIsChatEnabled),
+	useIsLoadingChatSettings = function() --[[ Line: 94 ]]
+		-- upvalues: UseSelectorFunction (copy), FFlagReadAppChatFetchingVariable (copy), GetDeepValueModule (copy), RetrievalStatus (copy)
+		return UseSelectorFunction(function(p1) --[[ Line: 95 ]]
+			-- upvalues: FFlagReadAppChatFetchingVariable (upval), GetDeepValueModule (upval), RetrievalStatus (upval)
+			return if FFlagReadAppChatFetchingVariable then GetDeepValueModule(p1, "ChatAppReducer.ChatSettings.retrievalStatus") ~= RetrievalStatus.Done else nil
 		end)
 	end,
-	useIsChatUserMessagesEnabled = useIsChatUserMessagesEnabledModule,
-	shouldShowOSAForConversation = if fFlagAppChatNavigateBackIfOSAUnacknowledged then shouldShowOSAForConversationModule else nil,
-	showGroupOSADialog = function(p1, p2, p3)
-		-- upvalues: getOverlayStoreModule (ref), overlayTypesModule (ref), httpService (ref)
-		local var1 = getOverlayStoreModule(false)
-		var1.showOverlay(overlayTypesModule.GroupOSADialog, {
-			conversationId = p1,
-			impressionId = httpService:GenerateGUID(false),
-			onJoin = function()
-				-- upvalues: var1 (ref), p2 (ref)
-				var1.dismissOverlay()
-				p2()
+	useIsChatUserMessagesEnabled = require(AppChat.Hooks.useIsChatUserMessagesEnabled),
+	shouldShowOSAForConversation = if FFlagAppChatNavigateBackIfOSAUnacknowledged then ShouldShowOSAForConversationModule else nil,
+	showGroupOSADialog = function(ConversationId, Callback1, Callback) --[[ Line: 105 ]]
+		-- upvalues: GetOverlayStoreModule (copy), OverlayTypesModule (copy), HttpService (copy)
+		local OverlayStoreModule = GetOverlayStoreModule(false)
+		OverlayStoreModule.showOverlay(OverlayTypesModule.GroupOSADialog, {
+			conversationId = ConversationId,
+			impressionId = HttpService:GenerateGUID(false),
+			onJoin = function() --[[ Line: 110 ]]
+				-- upvalues: OverlayStoreModule (copy), Callback1 (copy)
+				OverlayStoreModule.dismissOverlay()
+				Callback1()
 			end,
-			onDecline = function()
-				-- upvalues: var1 (ref), p3 (ref)
-				var1.dismissOverlay()
-				p3()
+			onDecline = function() --[[ Line: 114 ]]
+				-- upvalues: OverlayStoreModule (copy), Callback (copy)
+				OverlayStoreModule.dismissOverlay()
+				Callback()
 			end
 		})
 	end

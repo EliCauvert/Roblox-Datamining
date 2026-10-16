@@ -1,42 +1,63 @@
-﻿local userList = script:FindFirstAncestor("UserList")
-local parent = userList.Parent
-local reactModule = require(parent.React)
-local profileCtaServiceModule = require(parent.ProfileCtaService)
-local enumsModule = require(userList.Common.Enums)
-local _ = require(userList.Common.Types)
-local ctaRowModule = require(userList.Cta.CtaRow)
-local useCtaActionHandlersModule = require(script.Parent.useCtaActionHandlers)
-local fFlagUserListCanonicalCtaAnalyticsModule = require(userList.Flags.FFlagUserListCanonicalCtaAnalytics)
-local fFlagUserListComposeRenderRowWithCta = require(parent.SharedFlags).FFlagUserListComposeRenderRowWithCta
-local profileCTAService = profileCtaServiceModule.ProfileCTAService
+﻿local UserList = script:FindFirstAncestor("UserList")
+local Parent = UserList.Parent
+local ReactModule = require(Parent.React)
+local EnumsModule = require(UserList.Common.Enums)
+local _ = require(UserList.Common.Types)
+local CtaRowModule = require(UserList.Cta.CtaRow)
+local SurfaceJoinCtaRowModule = require(UserList.Cta.SurfaceJoinCtaRow)
+local UseCtaActionHandlersModule = require(script.Parent.useCtaActionHandlers)
+local ConstantsModule = require(UserList.Common.Constants)
+local FFlagUserListCanonicalCtaAnalyticsModule = require(UserList.Flags.FFlagUserListCanonicalCtaAnalytics)
+local FFlagUserListDefaultCtaWidths = require(Parent.SharedFlags).FFlagUserListDefaultCtaWidths
+local FFlagUserListComposeRenderRowWithCta = require(Parent.SharedFlags).FFlagUserListComposeRenderRowWithCta
+local FFlagUserListSurfaceExtensions = require(Parent.SharedFlags).FFlagUserListSurfaceExtensions
+local ProfileCTAService = require(Parent.ProfileCtaService).ProfileCTAService
 local t = {}
 
-return function(p1, p2)
-	-- upvalues: reactModule (ref), profileCTAService (ref), useCtaActionHandlersModule (ref), fFlagUserListComposeRenderRowWithCta (ref), enumsModule (ref), t (ref), ctaRowModule (ref), fFlagUserListCanonicalCtaAnalyticsModule (ref)
-	reactModule.useEffect(function()
-		-- upvalues: profileCTAService (copy)
-		local var1 = profileCTAService.connectRealTimeUpdates()
+return function(Tbl, p1) --[[ Line: 30 | Named "useCtaRenderRow" ]]
+	-- upvalues: ReactModule (copy), ProfileCTAService (copy), UseCtaActionHandlersModule (copy), FFlagUserListComposeRenderRowWithCta (copy), FFlagUserListDefaultCtaWidths (copy), ConstantsModule (copy), FFlagUserListSurfaceExtensions (copy), SurfaceJoinCtaRowModule (copy), CtaRowModule (copy), EnumsModule (copy), t (copy), FFlagUserListCanonicalCtaAnalyticsModule (copy)
+	ReactModule.useEffect(function() --[[ Line: 31 ]]
+		-- upvalues: ProfileCTAService (upval)
+		local ConnectRealTimeUpdatesResult = ProfileCTAService.connectRealTimeUpdates()
 		
-		return function()
-			-- upvalues: var1 (ref)
-			var1.Disconnect()
+		return function() --[[ Line: 33 ]]
+			-- upvalues: ConnectRealTimeUpdatesResult (copy)
+			ConnectRealTimeUpdatesResult.Disconnect()
 		end
 	end, {})
-	local var1 = useCtaActionHandlersModule(p1)
-	local var2 = if fFlagUserListComposeRenderRowWithCta then p2 else nil
-	
-	return reactModule.useMemo(function()
-		-- upvalues: enumsModule (copy), var2 (ref), t (copy), reactModule (copy), ctaRowModule (copy), var1 (ref), p1 (ref), fFlagUserListCanonicalCtaAnalyticsModule (copy), fFlagUserListComposeRenderRowWithCta (copy)
-		return function(p3, p4, p5)
-			-- upvalues: enumsModule (copy), var2 (copy), t (copy), reactModule (copy), ctaRowModule (copy), var1 (copy), p1 (copy), fFlagUserListCanonicalCtaAnalyticsModule (copy), fFlagUserListComposeRenderRowWithCta (copy)
-			return if p4.type == enumsModule.EntityType.User then reactModule.createElement(ctaRowModule, {
-				createRow = p3,
-				entity = p4,
-				actionHandlers = var1,
-				ctaConfig = p1,
-				index = if fFlagUserListCanonicalCtaAnalyticsModule then p5 elseif fFlagUserListComposeRenderRowWithCta and var2 then p5 else nil,
-				renderRow = var2
-			}) elseif var2 then var2(p3, p4, p5) else p3(t)
+	local UseCtaActionHandlersModuleResult = UseCtaActionHandlersModule(Tbl)
+	local Callback = if FFlagUserListComposeRenderRowWithCta then p1 else nil
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 41 ]]
+		-- upvalues: FFlagUserListDefaultCtaWidths (upval), Tbl (copy), ConstantsModule (upval)
+		if FFlagUserListDefaultCtaWidths and Tbl and (Tbl.primaryCtaMinWidth == nil or Tbl.primaryCtaMaxWidth == nil) then
+			local Copy = table.clone(Tbl)
+			Copy.primaryCtaMinWidth = Tbl.primaryCtaMinWidth or ConstantsModule.DEFAULT_PRIMARY_CTA_MIN_WIDTH
+			Copy.primaryCtaMaxWidth = Tbl.primaryCtaMaxWidth or ConstantsModule.DEFAULT_PRIMARY_CTA_MAX_WIDTH
+			
+			return Copy
+		else
+			return Tbl
 		end
-	end, { var1, p1, var2 })
+	end, { Tbl })
+	
+	return ReactModule.useMemo(function() --[[ Line: 55 ]]
+		-- upvalues: FFlagUserListSurfaceExtensions (upval), UseMemoResult (copy), SurfaceJoinCtaRowModule (upval), CtaRowModule (upval), EnumsModule (upval), Callback (copy), t (upval), ReactModule (upval), UseCtaActionHandlersModuleResult (copy), FFlagUserListCanonicalCtaAnalyticsModule (upval), FFlagUserListComposeRenderRowWithCta (upval)
+		local SurfaceJoinCtaRowModule1 = if FFlagUserListSurfaceExtensions and UseMemoResult and UseMemoResult.join then SurfaceJoinCtaRowModule else CtaRowModule
+		
+		return function(Callback1, Entity, p2) --[[ Line: 66 ]]
+			-- upvalues: EnumsModule (upval), Callback (upval), t (upval), ReactModule (upval), SurfaceJoinCtaRowModule1 (copy), UseCtaActionHandlersModuleResult (upval), UseMemoResult (upval), FFlagUserListCanonicalCtaAnalyticsModule (upval), FFlagUserListComposeRenderRowWithCta (upval)
+			return if Entity.type == EnumsModule.EntityType.User then ReactModule.createElement(SurfaceJoinCtaRowModule1, {
+				createRow = Callback1,
+				entity = Entity,
+				actionHandlers = UseCtaActionHandlersModuleResult,
+				ctaConfig = UseMemoResult,
+				index = if FFlagUserListCanonicalCtaAnalyticsModule then p2 elseif FFlagUserListComposeRenderRowWithCta and Callback then p2 else nil,
+				renderRow = Callback
+			}) elseif Callback then Callback(Callback1, Entity, p2) else Callback1(t)
+		end
+	end, {
+		UseCtaActionHandlersModuleResult,
+		UseMemoResult,
+		Callback
+	})
 end

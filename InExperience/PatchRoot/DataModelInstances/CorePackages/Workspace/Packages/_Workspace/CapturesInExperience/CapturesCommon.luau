@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.CapturesCommon.CapturesCommon)
+﻿return (require(script.Parent.Parent.Parent._Index.CapturesCommon.CapturesCommon))

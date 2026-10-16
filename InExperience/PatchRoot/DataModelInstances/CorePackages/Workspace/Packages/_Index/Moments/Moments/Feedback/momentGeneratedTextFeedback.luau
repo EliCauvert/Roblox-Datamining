@@ -1,16 +1,16 @@
-﻿local parent = script:FindFirstAncestor("Moments").Parent
-local httpClientModule = require(parent.HttpClient)
-local text = require(parent.Http).Url.APIS_URL .. "content-captures-api/v1/moment-generated-text-feedback"
+﻿local Parent = script:FindFirstAncestor("Moments").Parent
+local HttpClientModule = require(Parent.HttpClient)
+local Text = require(Parent.Http).Url.APIS_URL .. "content-captures-api/v1/moment-generated-text-feedback"
 
-return function(p1, p2, p3)
-	-- upvalues: httpClientModule (ref), text (ref)
-	return httpClientModule.asPromise(httpClientModule.fetch({
+return function(GenerationToken, Reason, Network) --[[ Line: 22 | Named "momentGeneratedTextFeedback" ]]
+	-- upvalues: HttpClientModule (copy), Text (copy)
+	return HttpClientModule.asPromise(HttpClientModule.fetch({
 		method = "POST",
 		analyticsKey = "moments.moment-generated-text-feedback",
-		url = text,
-		body = { generationToken = p1, reason = p2 },
-		network = p3,
-		decode = function(_)
+		url = Text,
+		body = { generationToken = GenerationToken, reason = Reason },
+		network = Network,
+		decode = function(_) --[[ Line: 32 ]]
 			return { ok = true }
 		end
 	}))

@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("EnableVpcForInExperiencePremiumUpsell", false)
 
-return function()
+return function() --[[ Line: 3 ]]
 	return game:GetFastFlag("EnableVpcForInExperiencePremiumUpsell")
 end

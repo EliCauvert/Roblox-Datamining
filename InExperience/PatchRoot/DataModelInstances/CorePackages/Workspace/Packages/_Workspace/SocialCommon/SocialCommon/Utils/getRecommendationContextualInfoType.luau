@@ -1,11 +1,11 @@
-﻿local socialCommon = script:FindFirstAncestor("SocialCommon")
-local recommendationContextTypeModule = require(socialCommon.Enums.RecommendationContextType)
-local contextualInfoTypesModule = require(socialCommon.Enums.ContextualInfoTypes)
+﻿local SocialCommon = script:FindFirstAncestor("SocialCommon")
+local RecommendationContextTypeModule = require(SocialCommon.Enums.RecommendationContextType)
+local ContextualInfoTypesModule = require(SocialCommon.Enums.ContextualInfoTypes)
 
-return function(p1)
-	-- upvalues: recommendationContextTypeModule (ref), contextualInfoTypesModule (ref)
-	local contextType = p1.contextType
-	local var1 = contextType and contextType.rawValue()
+return function(p1) --[[ Line: 11 | Named "getRecommendationContextualInfoType" ]]
+	-- upvalues: RecommendationContextTypeModule (copy), ContextualInfoTypesModule (copy)
+	local ContextType = p1.contextType
+	local RawValueResult = ContextType and ContextType.rawValue()
 	
-	return if var1 == recommendationContextTypeModule.MutualFriends.rawValue() then contextualInfoTypesModule.MutualFriends elseif var1 == recommendationContextTypeModule.Frequents.rawValue() then contextualInfoTypesModule.Frequents elseif var1 == recommendationContextTypeModule.Contacts.rawValue() then contextualInfoTypesModule.Contacts else nil
+	return if RawValueResult == RecommendationContextTypeModule.MutualFriends.rawValue() then ContextualInfoTypesModule.MutualFriends elseif RawValueResult == RecommendationContextTypeModule.Frequents.rawValue() then ContextualInfoTypesModule.Frequents elseif RawValueResult == RecommendationContextTypeModule.Contacts.rawValue() then ContextualInfoTypesModule.Contacts else nil
 end

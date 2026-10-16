@@ -1,4 +1,4 @@
-﻿local t = {
+﻿local config = {
 	["&lt;"] = "<",
 	["&gt;"] = ">",
 	["&quot;"] = "\"",
@@ -6,7 +6,7 @@
 	["&amp;"] = "&"
 }
 
-return function(p1)
-	-- upvalues: t (ref)
-	return p1:gsub("&%l+;", t)
+return function(Text: string): string --[[ Line: 14 | Named "unescapeRichFormatting" ]]
+	-- upvalues: config (copy)
+	return (Text:gsub("&%l+;", config))
 end

@@ -1,5 +1,5 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
 
-return require(profilePlatform.Parent.LuaSocialLibrariesDeps).RoduxPresence.config({
-	keyPath = require(profilePlatform.Common.Constants).RODUX_KEY .. ".Presence"
-})
+return (require(ProfilePlatform.Parent.LuaSocialLibrariesDeps).RoduxPresence.config({
+	keyPath = require(ProfilePlatform.Common.Constants).RODUX_KEY .. ".Presence"
+}))

@@ -1,5 +1,5 @@
-﻿local parent = script:FindFirstAncestor("MediaGallery").Parent
-local _ = require(parent.React)
-local _ = require(parent.AppCommonLib)
+﻿local Parent = script:FindFirstAncestor("MediaGallery").Parent
+local _ = require(Parent.React)
+local _ = require(Parent.AppCommonLib)
 
 return nil

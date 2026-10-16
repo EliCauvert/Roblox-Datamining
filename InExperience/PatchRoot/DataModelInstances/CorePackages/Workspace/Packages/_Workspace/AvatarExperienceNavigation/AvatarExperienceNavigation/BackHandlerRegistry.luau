@@ -1,28 +1,29 @@
-﻿local t = {}
+﻿local List = {}
 
 return {
-	register = function(p1)
-		-- upvalues: t (ref)
-		table.insert(t, p1)
+	register = function(Value) --[[ Line: 5 ]]
+		-- upvalues: List (copy)
+		table.insert(List, Value)
 		
-		return function()
-			-- upvalues: t (copy), p1 (ref)
-			local index = table.find(t, p1)
+		return function() --[[ Line: 8 ]]
+			-- upvalues: List (upval), Value (copy)
+			local FoundIndex: number? = table.find(List, Value)
 			
-			if index then
-				table.remove(t, index)
+			if FoundIndex then
+				table.remove(List, FoundIndex)
 			end
 		end
 	end,
-	consume = function()
-		-- upvalues: t (ref)
-		local var1 = t[#t]
+	consume = function(): boolean --[[ Line: 16 ]]
+		-- upvalues: List (copy)
+		local Entry: () -> () = List[#List]
 		
-		if var1 then
-			var1()
+		if Entry then
+			Entry()
 			
 			return true
+		else
+			return false
 		end
-		return false
 	end
 }

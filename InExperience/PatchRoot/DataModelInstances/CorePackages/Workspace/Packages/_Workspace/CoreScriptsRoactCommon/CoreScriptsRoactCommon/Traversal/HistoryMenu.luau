@@ -1,159 +1,159 @@
-﻿local parent = script:FindFirstAncestor("CoreScriptsRoactCommon").Parent
-local cryoModule = require(parent.Cryo)
-local foundationModule = require(parent.Foundation)
-local localizationModule = require(parent.Localization)
-local reactModule = require(parent.React)
-local constantsModule = require(script.Parent.Constants)
-local traversalTelemetryModule = require(script.Parent.TraversalTelemetry)
-local icon = foundationModule.Icon
-local iconName = foundationModule.Enums.IconName
-local menu = foundationModule.Menu
-local popoverAlign = foundationModule.Enums.PopoverAlign
-local popoverSide = foundationModule.Enums.PopoverSide
-local view = foundationModule.View
-local useLocalization = localizationModule.Hooks.useLocalization
+﻿local Parent = script:FindFirstAncestor("CoreScriptsRoactCommon").Parent
+local CryoModule = require(Parent.Cryo)
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local ConstantsModule = require(script.Parent.Constants)
+local TraversalTelemetryModule = require(script.Parent.TraversalTelemetry)
+local Icon = FoundationModule.Icon
+local IconName = FoundationModule.Enums.IconName
+local Menu = FoundationModule.Menu
+local PopoverAlign = FoundationModule.Enums.PopoverAlign
+local PopoverSide = FoundationModule.Enums.PopoverSide
+local View = FoundationModule.View
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
 
-local function _(p1)
+local function _(p1) --[[ Line: 39 | Named "formatTags" ]]
 	return if typeof(p1) == "table" then p1 else { [p1] = true }
 end
 
-local _ = function(value, p1, p2)
-	-- upvalues: popoverSide (ref)
-	if not value or not value.current then return end
-	if p2 == popoverSide.Top then
-		value.current.NextSelectionUp = p1
+local _ = function(p1, NextSelectionDown, Bottom) --[[ Line: 46 | Named "setMenuSelection" ]]
+	-- upvalues: PopoverSide (copy)
+	if not p1 or not p1.current then return end
+	if Bottom == PopoverSide.Top then
+		p1.current.NextSelectionUp = NextSelectionDown
 		
 		return
-	elseif p2 == popoverSide.Bottom then
-		value.current.NextSelectionDown = p1
+	end
+	if Bottom == PopoverSide.Bottom then
+		p1.current.NextSelectionDown = NextSelectionDown
 	end
 end
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: constantsModule (ref), reactModule (ref), useLocalization (ref), popoverSide (ref), cryoModule (ref), traversalTelemetryModule (ref), iconName (ref), view (ref), icon (ref), menu (ref), popoverAlign (ref)
-	local var1 = if p1.idleButtonStateIsDown ~= nil then constantsModule.DEFAULT_CHEVRON_BUTTON_STATE else p1.idleButtonStateIsDown
-	local var2, var3 = reactModule.useState(false)
-	local var4 = if var2 then not var1 else not var2 and var1
-	local var5 = useLocalization({ history = "CoreScripts.TopBar.Traversal.History" })
-	local var6 = reactModule.useRef(nil)
-	local var7 = reactModule.useCallback(function(p3)
-		-- upvalues: var6 (ref), p1 (ref), popoverSide (copy)
-		local menuSide = p1.menuSide
+return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 61 | Named "HistoryMenu" ]]
+	-- upvalues: ConstantsModule (copy), ReactModule (copy), UseLocalizationFunction (copy), PopoverSide (copy), CryoModule (copy), TraversalTelemetryModule (copy), IconName (copy), View (copy), Icon (copy), Menu (copy), PopoverAlign (copy)
+	local DEFAULTCHEVRONBUTTONSTATE = if p1.idleButtonStateIsDown == nil then ConstantsModule.DEFAULT_CHEVRON_BUTTON_STATE else p1.idleButtonStateIsDown
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local NoDEFAULTCHEVRONBUTTONSTATE = UseStateResult and not DEFAULTCHEVRONBUTTONSTATE or not UseStateResult and DEFAULTCHEVRONBUTTONSTATE
+	local UseLocalizationResult = UseLocalizationFunction({ history = "CoreScripts.TopBar.Traversal.History" })
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseResult = ReactModule.useCallback(function(NextSelectionDown) --[[ Line: 76 ]]
+		-- upvalues: UseRefResult (copy), p1 (copy), PopoverSide (upval)
+		local MenuSide = p1.menuSide
 		
-		if var6 then
-			if not var6.current then return end
-			if menuSide == popoverSide.Top then
-				var6.current.NextSelectionUp = p3
+		if UseRefResult then
+			if not UseRefResult.current then return end
+			if MenuSide == PopoverSide.Top then
+				UseRefResult.current.NextSelectionUp = NextSelectionDown
 				
 				return
-			elseif menuSide == popoverSide.Bottom then
-				var6.current.NextSelectionDown = p3
+			end
+			if MenuSide == PopoverSide.Bottom then
+				UseRefResult.current.NextSelectionDown = NextSelectionDown
 			end
 		end
 	end, { p1.menuSide })
-	local var8 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref), cryoModule (copy)
-		local var9
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 80 ]]
+		-- upvalues: p1 (copy), CryoModule (upval)
+		local HistoryButtonTags1 = nil
 		if p1.historyButtonTags then
-			local historyButtonTags = p1.historyButtonTags
-			var9 = if typeof(historyButtonTags) == "table" then historyButtonTags else { [historyButtonTags] = true }
+			local HistoryButtonTags = p1.historyButtonTags
+			HistoryButtonTags1 = if typeof(HistoryButtonTags) == "table" then HistoryButtonTags else { [HistoryButtonTags] = true }
 		else
-			var9 = {}
+			HistoryButtonTags1 = {}
 		end
-		return cryoModule.Dictionary.join({
+		return CryoModule.Dictionary.join({
 			["row auto-xy align-y-center align-x-center radius-medium"] = true
-		}, var9)
+		}, HistoryButtonTags1)
 	end, { p1.historyButtonTags })
-	local var9 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref), var2 (ref), var3 (ref)
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 87 ]]
+		-- upvalues: p1 (copy), UseStateResult (copy), UseStateResult2 (copy)
 		if p1.onMenuToggled then
-			p1.onMenuToggled(not var2)
+			p1.onMenuToggled(not UseStateResult)
 		end
-		var3(not var2)
-	end, { var2, p1.onMenuToggled })
-	local var10 = reactModule.useCallback(function()
-		-- upvalues: var3 (ref), p1 (ref)
-		var3(false)
+		UseStateResult2(not UseStateResult)
+	end, { UseStateResult, p1.onMenuToggled })
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 95 ]]
+		-- upvalues: UseStateResult2 (copy), p1 (copy)
+		UseStateResult2(false)
 		
 		if p1.onMenuToggled then
 			p1.onMenuToggled(false)
 		end
 	end, {})
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var10 (ref)
-		if p1.closeMenuConn then
-			local var11 = p1.closeMenuConn(var10)
-			
-			return function()
-				-- upvalues: var11 (ref)
-				for i, v in var11 do
-					v:Disconnect()
-				end
+	ReactModule.useEffect(function() --[[ Line: 101 ]]
+		-- upvalues: p1 (copy), UseResult2 (copy)
+		if not p1.closeMenuConn then return end
+		local CloseMenuConnResult = p1.closeMenuConn(UseResult2)
+		
+		return function() --[[ Line: 107 ]]
+			-- upvalues: CloseMenuConnResult (copy)
+			for _, Connection in CloseMenuConnResult do
+				Connection:Disconnect()
 			end
 		end
-	end, { p1.closeMenuConn, var10 })
-	local var12 = reactModule.useCallback(function()
-		-- upvalues: traversalTelemetryModule (copy), var10 (ref), p1 (ref)
-		traversalTelemetryModule.sendHistoryMenuHistoryClick({ integration_id = "history_landing", event_type = "click" })
-		var10()
+	end, { p1.closeMenuConn, UseResult2 })
+	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 128 ]]
+		-- upvalues: TraversalTelemetryModule (upval), UseResult2 (copy), p1 (copy)
+		TraversalTelemetryModule.sendHistoryMenuHistoryClick({ integration_id = "history_landing", event_type = "click" })
+		UseResult2()
 		p1.onHistorySelected()
-	end, { var10, p1.onHistorySelected })
+	end, { UseResult2, p1.onHistorySelected })
 	
-	return reactModule.createElement(view, { tag = "auto-xy" }, {
-		ChevronButton = reactModule.createElement(view, {
+	return ReactModule.createElement(View, { tag = "auto-xy" }, {
+		ChevronButton = ReactModule.createElement(View, {
 			testId = "--chevron-button",
-			tag = var8,
-			onActivated = function()
-				-- upvalues: traversalTelemetryModule (copy), var2 (ref), var9 (ref)
-				traversalTelemetryModule.sendHistoryMenuButtonActionEvent({
+			tag = UseMemoResult,
+			onActivated = function() --[[ Line: 162 ]]
+				-- upvalues: TraversalTelemetryModule (upval), UseStateResult (copy), UseResult1 (copy)
+				TraversalTelemetryModule.sendHistoryMenuButtonActionEvent({
 					integration_id = "history_chevron",
-					event_type = if not var2 then "open" else "close"
+					event_type = if UseStateResult then "close" else "open"
 				})
-				var9()
+				UseResult1()
 			end,
-			ref = var6
+			ref = UseRefResult
 		}, {
-			Chevron = reactModule.createElement(icon, {
-				name = if var4 then iconName.ChevronLargeDown else iconName.ChevronLargeUp
+			Chevron = ReactModule.createElement(Icon, {
+				name = if NoDEFAULTCHEVRONBUTTONSTATE then IconName.ChevronLargeDown else IconName.ChevronLargeUp
 			})
 		}),
-		Menu = reactModule.createElement(menu, {
-			align = popoverAlign.Start,
-			anchorRef = p2 or var6,
-			isOpen = var2,
-			items = reactModule.useMemo(function()
-				-- upvalues: cryoModule (copy), p1 (ref), var5 (ref), iconName (copy), var12 (ref)
-				return cryoModule.List.join(cryoModule.List.map(p1.historyItems, function(p3)
+		Menu = ReactModule.createElement(Menu, {
+			align = PopoverAlign.Start,
+			anchorRef = p2 or UseRefResult,
+			isOpen = UseStateResult,
+			items = ReactModule.useMemo(function() --[[ Line: 138 ]]
+				-- upvalues: CryoModule (upval), p1 (copy), UseLocalizationResult (copy), IconName (upval), UseResult3 (copy)
+				return (CryoModule.List.join(CryoModule.List.map(p1.historyItems, function(p3) --[[ Line: 139 ]]
 					return { id = p3.universeId, text = p3.text, icon = p3.icon }
 				end), {
 					{
 						id = "history",
-						text = var5.history,
-						icon = iconName.ClockSpinReverse,
-						onActivated = var12
+						text = UseLocalizationResult.history,
+						icon = IconName.ClockSpinReverse,
+						onActivated = UseResult3
 					}
-				})
+				}))
 			end, { p1.historyItems }),
-			onActivated = reactModule.useCallback(function(p3)
-				-- upvalues: traversalTelemetryModule (copy), var10 (ref), p1 (ref)
-				traversalTelemetryModule.sendHistoryMenuItemClick({
+			onActivated = ReactModule.useCallback(function(p3) --[[ Line: 114 ]]
+				-- upvalues: TraversalTelemetryModule (upval), UseResult2 (copy), p1 (copy)
+				TraversalTelemetryModule.sendHistoryMenuItemClick({
 					integration_id = "history_dropdown",
 					event_type = "click",
 					destination_universe_id = tostring(p3)
 				})
-				var10()
+				UseResult2()
 				
 				if p1.onMenuItemSelected then
 					p1.onMenuItemSelected(p3)
 					
 					return
 				end
-			end, { var10, p1.onMenuItemSelected }),
-			onPressedOutside = var10,
+			end, { UseResult2, p1.onMenuItemSelected }),
+			onPressedOutside = UseResult2,
 			side = p1.menuSide,
 			size = p1.menuSize,
 			width = if p2 and p2.current then UDim.new(0, p2.current.AbsoluteSize.X) else nil,
-			ref = var7
+			ref = UseResult
 		})
 	})
 end))

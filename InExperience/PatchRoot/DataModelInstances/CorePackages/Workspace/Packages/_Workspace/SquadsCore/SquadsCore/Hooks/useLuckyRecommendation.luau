@@ -1,33 +1,37 @@
-﻿local squadsCore = script:FindFirstAncestor("SquadsCore")
-local parent = squadsCore.Parent
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local getLuckyRecommendationStoreModule = require(squadsCore.Stores.GetLuckyRecommendationStore)
+﻿local SquadsCore = script:FindFirstAncestor("SquadsCore")
+local Parent = SquadsCore.Parent
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local GetLuckyRecommendationStoreModule = require(SquadsCore.Stores.GetLuckyRecommendationStore)
 
-return function()
-	-- upvalues: getLuckyRecommendationStoreModule (ref), reactModule (ref), signalsModule (ref)
-	local var1 = getLuckyRecommendationStoreModule(false)
-	local var2, var3 = reactModule.useState(function()
-		-- upvalues: var1 (ref)
-		return var1.getState(false)
+return function() --[[ Line: 9 | Named "useLuckyRecommendation" ]]
+	-- upvalues: GetLuckyRecommendationStoreModule (copy), ReactModule (copy), SignalsModule (copy)
+	local LuckyRecommendationStoreModule = GetLuckyRecommendationStoreModule(false)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(function() --[[ Line: 12 ]]
+		-- upvalues: LuckyRecommendationStoreModule (copy)
+		return LuckyRecommendationStoreModule.getState(false)
 	end)
-	reactModule.useLayoutEffect(function()
-		-- upvalues: signalsModule (copy), var3 (ref), var1 (ref)
-		return signalsModule.createEffect(function(p1)
-			-- upvalues: var3 (copy), var1 (copy)
-			var3(var1.getState(p1))
+	ReactModule.useLayoutEffect(function() --[[ Line: 16 ]]
+		-- upvalues: SignalsModule (upval), UseStateResult2 (copy), LuckyRecommendationStoreModule (copy)
+		return SignalsModule.createEffect(function(p1) --[[ Line: 17 ]]
+			-- upvalues: UseStateResult2 (upval), LuckyRecommendationStoreModule (upval)
+			UseStateResult2(LuckyRecommendationStoreModule.getState(p1))
 		end)
-	end, { var1.getState })
+	end, { LuckyRecommendationStoreModule.getState })
 	
 	return {
-		state = var2,
-		actions = reactModule.useMemo(function()
-			-- upvalues: var1 (ref)
+		state = UseStateResult,
+		actions = ReactModule.useMemo(function() --[[ Line: 22 ]]
+			-- upvalues: LuckyRecommendationStoreModule (copy)
 			return {
-				startRoll = var1.startRoll,
-				endRoll = var1.endRoll,
-				cancelFetch = var1.cancelFetch
+				startRoll = LuckyRecommendationStoreModule.startRoll,
+				endRoll = LuckyRecommendationStoreModule.endRoll,
+				cancelFetch = LuckyRecommendationStoreModule.cancelFetch
 			}
-		end, { var1.startRoll, var1.endRoll, var1.cancelFetch })
+		end, {
+			LuckyRecommendationStoreModule.startRoll,
+			LuckyRecommendationStoreModule.endRoll,
+			LuckyRecommendationStoreModule.cancelFetch
+		})
 	}
 end

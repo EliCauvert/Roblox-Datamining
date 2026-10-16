@@ -1,18 +1,18 @@
-﻿local utilModule = require(script.Parent:WaitForChild("Util"))
+﻿local UtilModule = require(script.Parent:WaitForChild("Util"))
 
-function ProcessMessage(p1, p2, _)
-	if string.sub(p1, 1, 4):lower() ~= "/cls" and string.sub(p1, 1, 6):lower() ~= "/clear" then
+function ProcessMessage(Text: string, p1, _): boolean --[[ Line: 8 ]]
+	if string.sub(Text, 1, 4):lower() ~= "/cls" and string.sub(Text, 1, 6):lower() ~= "/clear" then
 		return false
 	end
-	local currentChannel = p2:GetCurrentChannel()
+	local CurrentChannel = p1:GetCurrentChannel()
 	
-	if currentChannel then
-		currentChannel:ClearMessageLog()
+	if CurrentChannel then
+		CurrentChannel:ClearMessageLog()
 	end
 	return true
 end
 
 return {
-	[utilModule.KEY_COMMAND_PROCESSOR_TYPE] = utilModule.COMPLETED_MESSAGE_PROCESSOR,
-	[utilModule.KEY_PROCESSOR_FUNCTION] = ProcessMessage
+	[UtilModule.KEY_COMMAND_PROCESSOR_TYPE] = UtilModule.COMPLETED_MESSAGE_PROCESSOR,
+	[UtilModule.KEY_PROCESSOR_FUNCTION] = ProcessMessage
 }

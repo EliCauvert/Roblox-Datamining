@@ -1,3 +1,3 @@
-﻿return require(script.Parent.Parent.Action)("DataStoresUpdateSearchFilter", function(p1, p2)
-	return { searchTerm = p1, filterTypes = p2 }
+﻿return require(script.Parent.Parent.Action)("DataStoresUpdateSearchFilter", function(SearchTerm, FilterTypes) --[[ Line: 4 ]]
+	return { searchTerm = SearchTerm, filterTypes = FilterTypes }
 end)

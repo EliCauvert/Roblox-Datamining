@@ -1,16 +1,17 @@
 ﻿return {
-	getCenterOffsetX = function(value)
-		local var1 = value.containerPosition + value.ratio * value.containerWidth
-		local var2 = value.insetLeft + value.margin
-		local var3 = value.screenWidth - value.insetRight - value.margin
-		local var4 = var3 - var2
+	getCenterOffsetX = function(p1): number --[[ Line: 42 ]]
+		local NewContainerPosition = p1.containerPosition + p1.ratio * p1.containerWidth
+		local NewInsetLeft = p1.insetLeft + p1.margin
+		local ScreenWidthDelta = p1.screenWidth - p1.insetRight - p1.margin
+		local ScreenWidthDeltaDelta = ScreenWidthDelta - NewInsetLeft
 		
-		if var4 <= 0 or value.popoverWidth <= 0 then
-			return var1 - value.containerPosition
+		if ScreenWidthDeltaDelta <= 0 or p1.popoverWidth <= 0 then
+			return NewContainerPosition - p1.containerPosition
+		else
+			local NewNewInsetLeft = NewInsetLeft + p1.popoverWidth / 2
+			local MaxValue = ScreenWidthDelta - p1.popoverWidth / 2
+			
+			return (if MaxValue < NewNewInsetLeft then NewInsetLeft + ScreenWidthDeltaDelta / 2 else math.clamp(NewContainerPosition, NewNewInsetLeft, MaxValue)) - p1.containerPosition
 		end
-		local var5 = var2 + value.popoverWidth / 2
-		local var6 = var3 - value.popoverWidth / 2
-		
-		return (if var6 < var5 then var2 + var4 / 2 else math.clamp(var1, var5, var6)) - value.containerPosition
 	end
 }

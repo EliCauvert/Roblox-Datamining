@@ -1,104 +1,104 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local baseMenuModule = require(foundation.Components.BaseMenu)
-local popoverModule = require(foundation.Components.Popover)
-local _ = require(foundation.Components.Types)
-local withCommonPropsModule = require(foundation.Utility.withCommonProps)
-local withDefaultsModule = require(foundation.Utility.withDefaults)
-local inputSizeModule = require(foundation.Enums.InputSize)
-local inputVariantModule = require(foundation.Enums.InputVariant)
-local popoverAlignModule = require(foundation.Enums.PopoverAlign)
-local popoverSideModule = require(foundation.Enums.PopoverSide)
-local radiusModule = require(foundation.Enums.Radius)
-local dropdownControlModule = require(script.Parent.DropdownControl)
-local markSelectedItemModule = require(script.Parent.markSelectedItem)
-local t = {
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local BaseMenuModule = require(Foundation.Components.BaseMenu)
+local PopoverModule = require(Foundation.Components.Popover)
+local _ = require(Foundation.Components.Types)
+local WithCommonPropsModule = require(Foundation.Utility.withCommonProps)
+local WithDefaultsModule = require(Foundation.Utility.withDefaults)
+local PopoverAlignModule = require(Foundation.Enums.PopoverAlign)
+local RadiusModule = require(Foundation.Enums.Radius)
+local DropdownControlModule = require(script.Parent.DropdownControl)
+local MarkSelectedItemModule = require(script.Parent.markSelectedItem)
+local config = {
 	testId = "--foundation-dropdown",
-	variant = inputVariantModule.Standard,
+	variant = require(Foundation.Enums.InputVariant).Standard,
 	width = UDim.new(0, 400),
-	size = inputSizeModule.Medium
+	size = require(Foundation.Enums.InputSize).Medium
 }
-local t_1 = { offset = 5, position = popoverSideModule.Bottom }
+local Side = {
+	offset = 5,
+	position = require(Foundation.Enums.PopoverSide).Bottom
+}
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: withDefaultsModule (ref), t (ref), reactModule (ref), markSelectedItemModule (ref), popoverModule (ref), dropdownControlModule (ref), withCommonPropsModule (ref), popoverAlignModule (ref), t_1 (ref), radiusModule (ref), baseMenuModule (ref)
-	local var1 = withDefaultsModule(p1, t)
-	local var2, var3 = reactModule.useState(false)
-	local var4 = reactModule.useRef(nil)
-	local var5, var6 = reactModule.useState(nil)
-	local var7 = reactModule.useCallback(function(p3)
-		-- upvalues: var4 (ref), var6 (ref)
-		var4.current = p3
-		var6(p3)
+return ReactModule.memo(ReactModule.forwardRef(function(p1, p2) --[[ Line: 82 | Named "Dropdown" ]]
+	-- upvalues: WithDefaultsModule (copy), config (copy), ReactModule (copy), MarkSelectedItemModule (copy), PopoverModule (copy), DropdownControlModule (copy), WithCommonPropsModule (copy), PopoverAlignModule (copy), Side (copy), RadiusModule (copy), BaseMenuModule (copy)
+	local WithDefaultsModuleResult = WithDefaultsModule(p1, config)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
+	local UseResult = ReactModule.useCallback(function(Current) --[[ Line: 87 ]]
+		-- upvalues: UseRefResult (copy), UseStateResult2_1 (copy)
+		UseRefResult.current = Current
+		UseStateResult2_1(Current)
 	end, {})
-	reactModule.useImperativeHandle(p2, function()
-		-- upvalues: var5 (ref)
-		return var5
-	end, { var5 })
-	local var8, var9 = reactModule.useBinding(var1.width)
-	local var10, var11 = markSelectedItemModule(var1.items, var1.value)
-	local var12 = reactModule.useCallback(function()
-		-- upvalues: var3 (ref)
-		var3(function(p3)
+	ReactModule.useImperativeHandle(p2, function() --[[ Line: 91 ]]
+		-- upvalues: UseStateResult1 (copy)
+		return UseStateResult1
+	end, { UseStateResult1 })
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(WithDefaultsModuleResult.width)
+	local MarkSelectedItemModuleResult, MarkSelectedItemModuleResult2 = MarkSelectedItemModule(WithDefaultsModuleResult.items, WithDefaultsModuleResult.value)
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 100 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(function(p3): boolean --[[ Line: 101 ]]
 			return not p3
 		end)
 	end, {})
-	local var13 = reactModule.useCallback(function()
-		-- upvalues: var3 (ref)
-		var3(false)
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 106 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(false)
 	end, {})
-	local var14 = reactModule.useCallback(function(p3)
-		-- upvalues: var3 (ref), var1 (ref)
-		var3(false)
-		var1.onItemChanged(p3)
-	end, { var1.onItemChanged })
-	var1.onAbsoluteSizeChanged = reactModule.useCallback(function(p3)
-		-- upvalues: p1 (ref), var9 (ref)
+	local UseResult3 = ReactModule.useCallback(function(p3) --[[ Line: 110 ]]
+		-- upvalues: UseStateResult2 (copy), WithDefaultsModuleResult (copy)
+		UseStateResult2(false)
+		WithDefaultsModuleResult.onItemChanged(p3)
+	end, { WithDefaultsModuleResult.onItemChanged })
+	WithDefaultsModuleResult.onAbsoluteSizeChanged = ReactModule.useCallback(function(Frame) --[[ Line: 115 ]]
+		-- upvalues: p1 (copy), UseBindingResult2 (copy)
 		if p1.onAbsoluteSizeChanged then
-			p1.onAbsoluteSizeChanged(p3)
+			p1.onAbsoluteSizeChanged(Frame)
 		end
-		var9(UDim.new(0, p3.AbsoluteSize.X))
-	end, { var9, p1.onAbsoluteSizeChanged })
+		UseBindingResult2(UDim.new(0, Frame.AbsoluteSize.X))
+	end, { UseBindingResult2, p1.onAbsoluteSizeChanged })
 	
-	return reactModule.createElement(popoverModule.Root, { isOpen = var2 }, {
-		DropdownControl = reactModule.createElement(dropdownControlModule, withCommonPropsModule(var1, {
-			variant = var1.variant,
-			onActivated = var12,
-			hasError = var1.hasError,
-			isDisabled = var1.isDisabled,
-			item = var11,
-			placeholder = var1.placeholder,
-			isMenuOpen = var2,
-			width = var1.width,
-			size = var1.size,
-			label = var1.label,
-			hint = var1.hint,
-			inputRef = var7,
-			Selectable = var1.Selectable,
-			NextSelectionUp = var1.NextSelectionUp,
-			NextSelectionDown = var1.NextSelectionDown,
-			NextSelectionLeft = var1.NextSelectionLeft,
-			NextSelectionRight = var1.NextSelectionRight
+	return ReactModule.createElement(PopoverModule.Root, { isOpen = UseStateResult }, {
+		DropdownControl = ReactModule.createElement(DropdownControlModule, WithCommonPropsModule(WithDefaultsModuleResult, {
+			variant = WithDefaultsModuleResult.variant,
+			onActivated = UseResult1,
+			hasError = WithDefaultsModuleResult.hasError,
+			isDisabled = WithDefaultsModuleResult.isDisabled,
+			item = MarkSelectedItemModuleResult2,
+			placeholder = WithDefaultsModuleResult.placeholder,
+			isMenuOpen = UseStateResult,
+			width = WithDefaultsModuleResult.width,
+			size = WithDefaultsModuleResult.size,
+			label = WithDefaultsModuleResult.label,
+			hint = WithDefaultsModuleResult.hint,
+			inputRef = UseResult,
+			Selectable = WithDefaultsModuleResult.Selectable,
+			NextSelectionUp = WithDefaultsModuleResult.NextSelectionUp,
+			NextSelectionDown = WithDefaultsModuleResult.NextSelectionDown,
+			NextSelectionLeft = WithDefaultsModuleResult.NextSelectionLeft,
+			NextSelectionRight = WithDefaultsModuleResult.NextSelectionRight
 		})),
-		Anchor = reactModule.createElement(popoverModule.Anchor, { anchorRef = var4 }),
-		Menu = reactModule.createElement(popoverModule.Content, {
+		Anchor = ReactModule.createElement(PopoverModule.Anchor, { anchorRef = UseRefResult }),
+		Menu = ReactModule.createElement(PopoverModule.Content, {
 			hasArrow = false,
-			align = popoverAlignModule.End,
-			side = t_1,
-			onPressedOutside = var13,
-			radius = radiusModule.Medium,
-			selection = var1.selection,
-			selectionGroup = var1.selectionGroup
-		}, reactModule.createElement(baseMenuModule.Root, {
+			align = PopoverAlignModule.End,
+			side = Side,
+			onPressedOutside = UseResult2,
+			radius = RadiusModule.Medium,
+			selection = WithDefaultsModuleResult.selection,
+			selectionGroup = WithDefaultsModuleResult.selectionGroup
+		}, ReactModule.createElement(BaseMenuModule.Root, {
 			couldGrow = true,
-			size = var1.size,
-			width = var8,
-			items = var10,
-			maxHeight = var1.maxHeight,
-			onActivated = var14,
-			radius = radiusModule.Medium,
-			scrollingFrameRef = var1.scrollingFrameRef,
-			testId = `{var1.testId}--menu`
+			size = WithDefaultsModuleResult.size,
+			width = UseBindingResult,
+			items = MarkSelectedItemModuleResult,
+			maxHeight = WithDefaultsModuleResult.maxHeight,
+			onActivated = UseResult3,
+			radius = RadiusModule.Medium,
+			scrollingFrameRef = WithDefaultsModuleResult.scrollingFrameRef,
+			testId = `{WithDefaultsModuleResult.testId}--menu`
 		}))
 	})
 end))

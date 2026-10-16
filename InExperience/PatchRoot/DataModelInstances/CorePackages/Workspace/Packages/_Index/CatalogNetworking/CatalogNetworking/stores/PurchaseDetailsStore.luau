@@ -1,61 +1,60 @@
-﻿local catalogNetworking = script:FindFirstAncestor("CatalogNetworking")
-local parent = catalogNetworking.Parent
-local signalsModule = require(parent.Signals)
-local promiseModule = require(parent.Promise)
-local dashModule = require(parent.Dash)
-local _ = require(catalogNetworking.Types)
-local fetchPurchaseDetailsModule = require(catalogNetworking.networkRequests.fetchPurchaseDetails)
-local var1, var2 = signalsModule.createSignal({})
+﻿local CatalogNetworking = script:FindFirstAncestor("CatalogNetworking")
+local Parent = CatalogNetworking.Parent
+local PromiseModule = require(Parent.Promise)
+local DashModule = require(Parent.Dash)
+local _ = require(CatalogNetworking.Types)
+local FetchPurchaseDetailsModule = require(CatalogNetworking.networkRequests.fetchPurchaseDetails)
+local Signal, Signal2 = require(Parent.Signals).createSignal({})
 
-local function mergeResponse(p1)
-	-- upvalues: var1 (ref), var2 (ref)
-	if p1 and p1.look and p1.look.items then
-		local cloned = table.clone(var1(false))
+local function mergeResponse(Result) --[[ Line: 15 ]]
+	-- upvalues: Signal (copy), Signal2 (copy)
+	if Result and Result.look and Result.look.items then
+		local Copy = table.clone(Signal(false))
 		
-		for i, v in p1.look.items do
-			cloned[tostring(v.id)] = v
+		for _, item in Result.look.items do
+			Copy[tostring(item.id)] = item
 		end
-		var2(cloned)
+		Signal2(Copy)
 	end
-	return p1
+	return Result
 end
 
 return {
-	getCache = var1,
-	fetchAndCache = function(p2, p3)
-		-- upvalues: var1 (ref), dashModule (ref), promiseModule (ref), fetchPurchaseDetailsModule (ref), mergeResponse (ref)
-		local var3 = var1(false)
-		local var4 = dashModule.filter(p3, function(p4)
-			-- upvalues: var3 (ref)
-			return not var3[tostring(p4.id)]
+	getCache = Signal,
+	fetchAndCache = function(p1, p2) --[[ Line: 26 ]]
+		-- upvalues: Signal (copy), DashModule (copy), PromiseModule (copy), FetchPurchaseDetailsModule (copy), mergeResponse (copy)
+		local SignalResult = Signal(false)
+		local FilterResult = DashModule.filter(p2, function(p3): boolean --[[ Line: 28 ]]
+			-- upvalues: SignalResult (copy)
+			return not SignalResult[tostring(p3.id)]
 		end)
 		
-		return if #var4 == 0 then promiseModule.resolve() else fetchPurchaseDetailsModule(p2, var4):andThen(mergeResponse)
+		return if #FilterResult == 0 then PromiseModule.resolve() else FetchPurchaseDetailsModule(p1, FilterResult):andThen(mergeResponse)
 	end,
-	fetchAll = function(p2, p3)
-		-- upvalues: fetchPurchaseDetailsModule (ref), mergeResponse (ref)
-		return fetchPurchaseDetailsModule(p2, p3):andThen(mergeResponse)
+	fetchAll = function(p1, p2) --[[ Line: 37 ]]
+		-- upvalues: FetchPurchaseDetailsModule (copy), mergeResponse (copy)
+		return FetchPurchaseDetailsModule(p1, p2):andThen(mergeResponse)
 	end,
-	getItem = function(p2)
-		-- upvalues: var1 (ref)
-		return var1(false)[p2]
+	getItem = function(p1) --[[ Line: 41 ]]
+		-- upvalues: Signal (copy)
+		return Signal(false)[p1]
 	end,
-	clear = function()
-		-- upvalues: var2 (ref)
-		var2({})
+	clear = function() --[[ Line: 45 ]]
+		-- upvalues: Signal2 (copy)
+		Signal2({})
 	end,
-	markItemsOwned = function(p2)
-		-- upvalues: var1 (ref), var2 (ref)
-		local cloned = table.clone(var1(false))
+	markItemsOwned = function(List) --[[ Line: 49 ]]
+		-- upvalues: Signal (copy), Signal2 (copy)
+		local Copy = table.clone(Signal(false))
 		
-		for i, v in p2 do
-			if cloned[v] then
-				local cloned_1 = table.clone(cloned[v])
-				cloned_1.quantityOwned = (cloned_1.quantityOwned or 0) + 1
-				cloned_1.isPurchasable = false
-				cloned[v] = cloned_1
+		for _, value in List do
+			if Copy[value] then
+				local Copy1 = table.clone(Copy[value])
+				Copy1.quantityOwned = (Copy1.quantityOwned or 0) + 1
+				Copy1.isPurchasable = false
+				Copy[value] = Copy1
 			end
 		end
-		var2(cloned)
+		Signal2(Copy)
 	end
 }

@@ -1,14 +1,14 @@
-﻿local parent = script.Parent.Parent
-local setPromptStateModule = require(parent.Actions.SetPromptState)
-local promptStateModule = require(parent.Enums.PromptState)
-local purchaseWarningModule = require(parent.Enums.PurchaseWarning)
-local launchRobuxUpsellModule = require(parent.Thunks.launchRobuxUpsell)
-local thunkModule = require(parent.Thunk)
+﻿local Parent = script.Parent.Parent
+local SetPromptStateModule = require(Parent.Actions.SetPromptState)
+local PromptStateModule = require(Parent.Enums.PromptState)
+local PurchaseWarningModule = require(Parent.Enums.PurchaseWarning)
+local LaunchRobuxUpsellModule = require(Parent.Thunks.launchRobuxUpsell)
+local ThunkModule = require(Parent.Thunk)
 
-return function(p1)
-	-- upvalues: thunkModule (ref), purchaseWarningModule (ref), setPromptStateModule (ref), promptStateModule (ref), launchRobuxUpsellModule (ref)
-	return thunkModule.new(script.Name, {}, function(p2, _)
-		-- upvalues: p1 (ref), purchaseWarningModule (copy), setPromptStateModule (copy), promptStateModule (copy), launchRobuxUpsellModule (copy)
-		return if p1 == purchaseWarningModule.U13PaymentModal then p2:dispatch(setPromptStateModule(promptStateModule.U13PaymentModal)) elseif p1 == purchaseWarningModule.U13MonthlyThreshold1Modal then p2:dispatch(setPromptStateModule(promptStateModule.U13MonthlyThreshold1Modal)) elseif p1 == purchaseWarningModule.RequireEmailVerification then p2:dispatch(setPromptStateModule(promptStateModule.RequireEmailVerification)) elseif p1 == purchaseWarningModule.U13MonthlyThreshold2Modal then p2:dispatch(setPromptStateModule(promptStateModule.U13MonthlyThreshold2Modal)) elseif p1 == purchaseWarningModule.ParentalConsentWarningPaymentModal13To17 then p2:dispatch(setPromptStateModule(promptStateModule.ParentalConsentWarningPaymentModal13To17)) else p2:dispatch(launchRobuxUpsellModule())
+return function(ParentalConsentWarningPaymentModal13To) --[[ Line: 9 | Named "resolvePurchasePrecheck" ]]
+	-- upvalues: ThunkModule (copy), PurchaseWarningModule (copy), SetPromptStateModule (copy), PromptStateModule (copy), LaunchRobuxUpsellModule (copy)
+	return ThunkModule.new(script.Name, {}, function(p1, _) --[[ Line: 10 ]]
+		-- upvalues: ParentalConsentWarningPaymentModal13To (copy), PurchaseWarningModule (upval), SetPromptStateModule (upval), PromptStateModule (upval), LaunchRobuxUpsellModule (upval)
+		return if ParentalConsentWarningPaymentModal13To == PurchaseWarningModule.U13PaymentModal then p1:dispatch(SetPromptStateModule(PromptStateModule.U13PaymentModal)) elseif ParentalConsentWarningPaymentModal13To == PurchaseWarningModule.U13MonthlyThreshold1Modal then p1:dispatch(SetPromptStateModule(PromptStateModule.U13MonthlyThreshold1Modal)) elseif ParentalConsentWarningPaymentModal13To == PurchaseWarningModule.RequireEmailVerification then p1:dispatch(SetPromptStateModule(PromptStateModule.RequireEmailVerification)) elseif ParentalConsentWarningPaymentModal13To == PurchaseWarningModule.U13MonthlyThreshold2Modal then p1:dispatch(SetPromptStateModule(PromptStateModule.U13MonthlyThreshold2Modal)) elseif ParentalConsentWarningPaymentModal13To == PurchaseWarningModule.ParentalConsentWarningPaymentModal13To17 then p1:dispatch(SetPromptStateModule(PromptStateModule.ParentalConsentWarningPaymentModal13To17)) else p1:dispatch(LaunchRobuxUpsellModule())
 	end)
 end

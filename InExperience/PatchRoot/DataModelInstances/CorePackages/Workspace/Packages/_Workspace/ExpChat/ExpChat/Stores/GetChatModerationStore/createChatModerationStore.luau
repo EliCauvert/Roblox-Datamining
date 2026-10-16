@@ -1,80 +1,82 @@
-﻿local chatService = game:GetService("Chat")
-local robloxReplicatedStorageService = game:GetService("RobloxReplicatedStorage")
-local signalsModule = require(script:FindFirstAncestor("ExpChat").Parent.Signals)
-local createSignal = signalsModule.createSignal
-local createComputed = signalsModule.createComputed
-local getChatStatusStoreModule = require(script.Parent.Parent.GetChatStatusStore)
-local enableChatModerationModeLoggingRefactor = game:DefineFastFlag("EnableModerateChatUseChatService", false) and game:GetEngineFeature("EnableChatModerationModeLoggingRefactor")
+﻿local Chat = game:GetService("Chat")
+local RobloxReplicatedStorage = game:GetService("RobloxReplicatedStorage")
+local SignalsModule = require(script:FindFirstAncestor("ExpChat").Parent.Signals)
+local CreateSignalFunction = SignalsModule.createSignal
+local CreateComputedFunction = SignalsModule.createComputed
+local GetChatStatusStoreModule = require(script.Parent.Parent.GetChatStatusStore)
+local EnableChatModerationModeLoggingRefactorEngineFeature = game:GetEngineFeature("EnableChatModerationModeLoggingRefactor")
 
-return function()
-	-- upvalues: createSignal (ref), getChatStatusStoreModule (ref), enableChatModerationModeLoggingRefactor (ref), chatService (ref), robloxReplicatedStorageService (ref), createComputed (ref)
-	local var1, var2 = createSignal(false)
-	local var3, var4 = createSignal(false)
-	local var5 = getChatStatusStoreModule(false)
-	local var6 = nil
+return function() --[[ Line: 23 ]]
+	-- upvalues: CreateSignalFunction (copy), GetChatStatusStoreModule (copy), EnableChatModerationModeLoggingRefactorEngineFeature (copy), Chat (copy), RobloxReplicatedStorage (copy), CreateComputedFunction (copy)
+	local Signal, Signal2 = CreateSignalFunction(false)
+	local Signal1, Signal2_1 = CreateSignalFunction(false)
+	local ChatStatusStoreModule = GetChatStatusStoreModule(false)
+	local ModerateChatSettingUpdated = nil
 	
-	local function setIsSettingEnabled(value)
-		-- upvalues: enableChatModerationModeLoggingRefactor (copy), chatService (copy), var6 (write)
-		if enableChatModerationModeLoggingRefactor then
-			chatService:RequestModerationModeEnabled(value)
+	local function setIsSettingEnabled(Enabled) --[[ Line: 30 ]]
+		-- upvalues: EnableChatModerationModeLoggingRefactorEngineFeature (upval), Chat (upval), ModerateChatSettingUpdated (ref)
+		if EnableChatModerationModeLoggingRefactorEngineFeature then
+			Chat:RequestModerationModeEnabled(Enabled)
 			
 			return
-		elseif var6 then
-			var6:FireServer(value)
+		end
+		if ModerateChatSettingUpdated then
+			ModerateChatSettingUpdated:FireServer(Enabled)
 		end
 	end
 	
-	local function initialize()
-		-- upvalues: enableChatModerationModeLoggingRefactor (copy), chatService (copy), var6 (write)
-		if enableChatModerationModeLoggingRefactor then
-			chatService:RequestModerationModeEnabled(false)
+	local function initialize() --[[ Line: 40 ]]
+		-- upvalues: EnableChatModerationModeLoggingRefactorEngineFeature (upval), Chat (upval), ModerateChatSettingUpdated (ref)
+		if EnableChatModerationModeLoggingRefactorEngineFeature then
+			Chat:RequestModerationModeEnabled(false)
 			
 			return
-		elseif var6 then
-			var6:FireServer(false)
+		end
+		if ModerateChatSettingUpdated then
+			ModerateChatSettingUpdated:FireServer(false)
 		end
 	end
 	
-	local var7 = nil
+	local Connection = nil
 	
-	if enableChatModerationModeLoggingRefactor then
-		var7 = chatService:GetPropertyChangedSignal("ModerationMode"):Connect(function()
-			-- upvalues: var2 (ref), chatService (copy), var4 (ref)
-			var2(chatService.ModerationMode ~= "Unsupported")
-			var4(chatService.ModerationMode == "Enabled")
+	if EnableChatModerationModeLoggingRefactorEngineFeature then
+		Connection = Chat:GetPropertyChangedSignal("ModerationMode"):Connect(function() --[[ Line: 51 ]]
+			-- upvalues: Signal2 (copy), Chat (upval), Signal2_1 (copy)
+			Signal2(Chat.ModerationMode ~= "Unsupported")
+			Signal2_1(Chat.ModerationMode == "Enabled")
 		end)
-		var2(chatService.ModerationMode ~= "Unsupported")
-		var4(chatService.ModerationMode == "Enabled")
+		Signal2(Chat.ModerationMode ~= "Unsupported")
+		Signal2_1(Chat.ModerationMode == "Enabled")
 	else
-		coroutine.wrap(function()
-			-- upvalues: var6 (write), robloxReplicatedStorageService (copy), var2 (ref), var4 (ref)
-			var6 = robloxReplicatedStorageService:WaitForChild("ModerateChatSettingUpdated", 10)
+		coroutine.wrap(function() --[[ Line: 58 ]]
+			-- upvalues: ModerateChatSettingUpdated (ref), RobloxReplicatedStorage (upval), Signal2 (copy), Signal2_1 (copy)
+			ModerateChatSettingUpdated = RobloxReplicatedStorage:WaitForChild("ModerateChatSettingUpdated", 10)
 			
-			if var6 then
-				var6.OnClientEvent:Connect(function(p1)
-					-- upvalues: var2 (copy), var4 (copy)
-					var2(true)
-					var4(p1)
+			if ModerateChatSettingUpdated then
+				ModerateChatSettingUpdated.OnClientEvent:Connect(function(p1) --[[ Line: 61 ]]
+					-- upvalues: Signal2 (upval), Signal2_1 (upval)
+					Signal2(true)
+					Signal2_1(p1)
 				end)
 			end
 		end)()
 	end
 	return {
-		getIsSettingVisible = createComputed(function(p1)
-			-- upvalues: var1 (ref), var5 (ref)
-			return var1(p1) and var5.getChatStatus(p1) == "Enabled"
+		getIsSettingVisible = CreateComputedFunction(function(p1): boolean --[[ Line: 70 ]]
+			-- upvalues: Signal (copy), ChatStatusStoreModule (copy)
+			return Signal(p1) and ChatStatusStoreModule.getChatStatus(p1) == "Enabled"
 		end),
-		getIsSettingEnabled = createComputed(function(p1)
-			-- upvalues: var3 (ref), var5 (ref)
-			return var3(p1) and var5.getChatStatus(p1) == "Enabled"
+		getIsSettingEnabled = CreateComputedFunction(function(p1): boolean --[[ Line: 73 ]]
+			-- upvalues: Signal1 (copy), ChatStatusStoreModule (copy)
+			return Signal1(p1) and ChatStatusStoreModule.getChatStatus(p1) == "Enabled"
 		end),
 		setIsSettingEnabled = setIsSettingEnabled,
 		initialize = initialize,
-		cleanup = function()
-			-- upvalues: var7 (write)
-			if var7 then
-				var7:Disconnect()
-				var7 = nil
+		cleanup = function() --[[ Line: 82 ]]
+			-- upvalues: Connection (ref)
+			if Connection then
+				Connection:Disconnect()
+				Connection = nil
 			end
 		end
 	}

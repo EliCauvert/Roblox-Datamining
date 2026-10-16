@@ -1,24 +1,24 @@
-﻿local parent = script.Parent.Parent.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local view = foundationModule.View
-local button = foundationModule.Button
-local buttonSize = foundationModule.Enums.ButtonSize
-local buttonVariant = foundationModule.Enums.ButtonVariant
+﻿local Parent = script.Parent.Parent.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local View = FoundationModule.View
+local Button = FoundationModule.Button
+local ButtonSize = FoundationModule.Enums.ButtonSize
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
 
-return function(p1)
-	-- upvalues: reactModule (ref), view (ref), button (ref), buttonSize (ref), buttonVariant (ref)
-	return reactModule.createElement(view, {
+return function(Frame: Frame) --[[ Line: 22 ]]
+	-- upvalues: ReactModule (copy), View (copy), Button (copy), ButtonSize (copy), ButtonVariant (copy)
+	return ReactModule.createElement(View, {
 		tag = "bg-action-subtle align-x-center align-y-center auto-xy padding-bottom-medium",
-		AnchorPoint = p1.AnchorPoint,
-		LayoutOrder = p1.LayoutOrder,
-		Position = p1.Position
+		AnchorPoint = Frame.AnchorPoint,
+		LayoutOrder = Frame.LayoutOrder,
+		Position = Frame.Position
 	}, {
-		ShowMoreButton = reactModule.createElement(button, {
-			onActivated = p1.onActivated,
-			size = buttonSize.Small,
-			text = p1.text,
-			variant = buttonVariant.Subtle
+		ShowMoreButton = ReactModule.createElement(Button, {
+			onActivated = Frame.onActivated,
+			size = ButtonSize.Small,
+			text = Frame.text,
+			variant = ButtonVariant.Subtle
 		})
 	})
 end

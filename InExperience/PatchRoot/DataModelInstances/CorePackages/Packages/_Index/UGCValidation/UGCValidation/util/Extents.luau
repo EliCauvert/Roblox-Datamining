@@ -1,90 +1,90 @@
-﻿local t = {}
-t.__index = t
+﻿local ExtentsModule = {}
+ExtentsModule.__index = ExtentsModule
 
-function t.new()
-	-- upvalues: t (ref)
-	local tbl = setmetatable({}, t)
-	tbl.min = Vector3.new(1e999, 1e999, 1e999)
-	tbl.max = Vector3.new(-1e999, -1e999, -1e999)
+function ExtentsModule.new() --[[ Line: 14 ]]
+	-- upvalues: ExtentsModule (copy)
+	local self = setmetatable({}, ExtentsModule)
+	self.min = vector.create(1e999, 1e999, 1e999)
+	self.max = vector.create(-1e999, -1e999, -1e999)
 	
-	return tbl
+	return self
 end
 
-function t:fromMinMax(b)
-	-- upvalues: t (ref)
-	local var1 = t.new()
-	local t_1 = { X = self.X, Y = self.Y, Z = self.Z }
-	local t_2 = { X = b.X, Y = b.Y, Z = b.Z }
+function ExtentsModule:fromMinMax(Vector1) --[[ Line: 22 ]]
+	-- upvalues: ExtentsModule (copy)
+	local NewExtents = ExtentsModule.new()
+	local config = { X = self.X, Y = self.Y, Z = self.Z }
+	local config1 = { X = Vector1.X, Y = Vector1.Y, Z = Vector1.Z }
 	
-	for i, v in { "X", "Y", "Z" } do
-		if t_2[v] ~= -1e999 and t_1[v] ~= 1e999 and t_2[v] < t_1[v] then
-			local var2 = t_1[v]
-			t_1[v] = t_2[v]
-			t_2[v] = var2
+	for _, value in { "X", "Y", "Z" } do
+		if config1[value] ~= -1e999 and config[value] ~= 1e999 and config1[value] < config[value] then
+			local Entry = config[value]
+			config[value] = config1[value]
+			config1[value] = Entry
 		end
 	end
-	var1.min = Vector3.new(t_1.X, t_1.Y, t_1.Z)
-	var1.max = Vector3.new(t_2.X, t_2.Y, t_2.Z)
+	NewExtents.min = Vector3.new(config.X, config.Y, config.Z)
+	NewExtents.max = Vector3.new(config1.X, config1.Y, config1.Z)
 	
-	return var1
+	return NewExtents
 end
 
-function t:unionExtents(p1)
-	-- upvalues: t (ref)
-	local var3 = t.new()
-	var3.min = self.min:Min(p1.min)
-	var3.max = self.max:Max(p1.max)
+function ExtentsModule:unionExtents(p1) --[[ Line: 42 ]]
+	-- upvalues: ExtentsModule (copy)
+	local NewExtents = ExtentsModule.new()
+	NewExtents.min = self.min:Min(p1.min)
+	NewExtents.max = self.max:Max(p1.max)
 	
-	return var3
+	return NewExtents
 end
 
-function t:intersectExtents(p1)
-	-- upvalues: t (ref)
-	local t_1 = { X = 1e999, Y = 1e999, Z = 1e999 }
-	local t_2 = { X = -1e999, Y = -1e999, Z = -1e999 }
+function ExtentsModule:intersectExtents(p1) --[[ Line: 49 ]]
+	-- upvalues: ExtentsModule (copy)
+	local config = { X = 1e999, Y = 1e999, Z = 1e999 }
+	local config1 = { X = -1e999, Y = -1e999, Z = -1e999 }
 	
-	for i, v in { "X", "Y", "Z" } do
-		if self.max[v] >= self.min[v] and p1.max[v] >= p1.min[v] then
-			local maxValue = math.max(self.min[v], p1.min[v])
-			local minValue = math.min(self.max[v], p1.max[v])
+	for _, value in { "X", "Y", "Z" } do
+		if self.max[value] >= self.min[value] and p1.max[value] >= p1.min[value] then
+			local Largest = math.max(self.min[value], p1.min[value])
+			local Smallest = math.min(self.max[value], p1.max[value])
 			
-			if maxValue <= minValue then
-				t_1[v] = maxValue
-				t_2[v] = minValue
+			if Largest <= Smallest then
+				config[value] = Largest
+				config1[value] = Smallest
 			end
 		end
 	end
-	local var3 = t.new()
-	var3.min = Vector3.new(t_1.X, t_1.Y, t_1.Z)
-	var3.max = Vector3.new(t_2.X, t_2.Y, t_2.Z)
+	local NewExtents = ExtentsModule.new()
+	NewExtents.min = Vector3.new(config.X, config.Y, config.Z)
+	NewExtents.max = Vector3.new(config1.X, config1.Y, config1.Z)
 	
-	return var3
+	return NewExtents
 end
 
-function t:expandToInclude(p2)
-	-- upvalues: t (ref)
-	local var4 = t.new()
-	var4.min = self.min:Min(p2)
-	var4.max = self.max:Max(p2)
+function ExtentsModule:expandToInclude(p2) --[[ Line: 72 ]]
+	-- upvalues: ExtentsModule (copy)
+	local NewExtents = ExtentsModule.new()
+	NewExtents.min = self.min:Min(p2)
+	NewExtents.max = self.max:Max(p2)
 	
-	return var4
+	return NewExtents
 end
 
-function t:isValid()
-	for i, v in { "X", "Y", "Z" } do
-		if self.max[v] < self.min[v] then
+function ExtentsModule:isValid(): boolean --[[ Line: 79 ]]
+	for _, value in { "X", "Y", "Z" } do
+		if self.max[value] < self.min[value] then
 			return false
 		end
 	end
 	return true
 end
 
-function t:size()
-	return if self:isValid() then self.max - self.min else nil
+function ExtentsModule.size(p2) --[[ Line: 88 ]]
+	return if p2:isValid() then p2.max - p2.min else nil
 end
 
-function t:center()
-	return if self:isValid() then (self.max + self.min) / 2 else nil
+function ExtentsModule.center(p2) --[[ Line: 95 ]]
+	return if p2:isValid() then (p2.max + p2.min) / 2 else nil
 end
 
-return t
+return ExtentsModule

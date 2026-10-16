@@ -1,7 +1,7 @@
-﻿local robloxSubscriptionPurchaseApp = script:FindFirstAncestor("RobloxSubscriptionPurchaseApp")
-local _ = require(robloxSubscriptionPurchaseApp.Enums.RobloxSubscriptionFlowCompleteReason)
-local _ = require(robloxSubscriptionPurchaseApp.Enums.SurfaceContext)
-local _ = require(robloxSubscriptionPurchaseApp.Enums.SurfaceName)
-local _ = require(robloxSubscriptionPurchaseApp.Enums.PurchaseClientSessionIdType)
+﻿local RobloxSubscriptionPurchaseApp = script:FindFirstAncestor("RobloxSubscriptionPurchaseApp")
+local _ = require(RobloxSubscriptionPurchaseApp.Enums.RobloxSubscriptionFlowCompleteReason)
+local _ = require(RobloxSubscriptionPurchaseApp.Enums.SurfaceContext)
+local _ = require(RobloxSubscriptionPurchaseApp.Enums.SurfaceName)
+local _ = require(RobloxSubscriptionPurchaseApp.Enums.PurchaseClientSessionIdType)
 
 return {}

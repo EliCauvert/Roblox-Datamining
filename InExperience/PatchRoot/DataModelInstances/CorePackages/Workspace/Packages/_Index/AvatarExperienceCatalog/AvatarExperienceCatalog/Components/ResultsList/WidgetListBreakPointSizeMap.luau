@@ -1,13 +1,13 @@
-﻿local widgetListBreakPointEnumModule = require(script.Parent.WidgetListBreakPointEnum)
+﻿local WidgetListBreakPointEnumModule = require(script.Parent.WidgetListBreakPointEnum)
 
 return {
-	[widgetListBreakPointEnumModule.Default] = "default",
-	[widgetListBreakPointEnumModule.XSmall] = "xSmall",
-	[widgetListBreakPointEnumModule.Small] = "small",
-	[widgetListBreakPointEnumModule.Medium] = "medium",
-	[widgetListBreakPointEnumModule.Large] = "large",
-	[widgetListBreakPointEnumModule.XLarge] = "xLarge",
-	[widgetListBreakPointEnumModule.X2Large] = "x2Large",
-	[widgetListBreakPointEnumModule.Landscape] = "landscape",
-	[widgetListBreakPointEnumModule.Portrait] = "portrait"
+	[WidgetListBreakPointEnumModule.Default] = "default",
+	[WidgetListBreakPointEnumModule.XSmall] = "xSmall",
+	[WidgetListBreakPointEnumModule.Small] = "small",
+	[WidgetListBreakPointEnumModule.Medium] = "medium",
+	[WidgetListBreakPointEnumModule.Large] = "large",
+	[WidgetListBreakPointEnumModule.XLarge] = "xLarge",
+	[WidgetListBreakPointEnumModule.X2Large] = "x2Large",
+	[WidgetListBreakPointEnumModule.Landscape] = "landscape",
+	[WidgetListBreakPointEnumModule.Portrait] = "portrait"
 }

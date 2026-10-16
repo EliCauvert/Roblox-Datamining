@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.LuauPolyfill.LuauPolyfill)
+﻿return (require(script.Parent.Parent.Parent._Index.LuauPolyfill.LuauPolyfill))

@@ -1,114 +1,125 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local fFlagBuildAgentAdCampaignCardModule = require(buildExperience.Flags.FFlagBuildAgentAdCampaignCard)
-local fFlagBuildExperienceChatCardEmphasisModule = require(buildExperience.Flags.FFlagBuildExperienceChatCardEmphasis)
-local chatCardPriorityModule = require(buildExperience.Components.Chat.ChatCardEmphasis.ChatCardPriority)
-local useChatCardEmphasisModule = require(buildExperience.Components.Chat.ChatCardEmphasis.useChatCardEmphasis)
-local button = foundationModule.Button
-local icon = foundationModule.Icon
-local text = foundationModule.Text
-local view = foundationModule.View
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local fillBehavior = foundationModule.Enums.FillBehavior
-local iconName = foundationModule.Enums.IconName
-local inputSize = foundationModule.Enums.InputSize
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
+local FFlagBuildAgentAdCampaignCardModule = require(BuildExperience.Flags.FFlagBuildAgentAdCampaignCard)
+local FFlagBuildAgentAdCampaignRefreshEligibilityModule = require(BuildExperience.Flags.FFlagBuildAgentAdCampaignRefreshEligibility)
+local FFlagBuildExperienceChatCardEmphasisModule = require(BuildExperience.Flags.FFlagBuildExperienceChatCardEmphasis)
+local ChatCardPriorityModule = require(BuildExperience.Components.Chat.ChatCardEmphasis.ChatCardPriority)
+local UseChatCardEmphasisModule = require(BuildExperience.Components.Chat.ChatCardEmphasis.useChatCardEmphasis)
+local Button = FoundationModule.Button
+local Icon = FoundationModule.Icon
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local FillBehavior = FoundationModule.Enums.FillBehavior
+local IconName = FoundationModule.Enums.IconName
+local InputSize = FoundationModule.Enums.InputSize
 
-return function(p1)
-	-- upvalues: foundationModule (ref), useLocalization (ref), localizationStringsModule (ref), fFlagBuildAgentAdCampaignCardModule (ref), fFlagBuildExperienceChatCardEmphasisModule (ref), useChatCardEmphasisModule (ref), chatCardPriorityModule (ref), reactModule (ref), view (ref), icon (ref), iconName (ref), text (ref), button (ref), inputSize (ref), buttonVariant (ref), fillBehavior (ref)
-	local var1 = foundationModule.Hooks.useTokens()
-	local var2 = useLocalization({
-		title = localizationStringsModule.AD_UPSELL_CARD_TITLE,
-		description = localizationStringsModule.AD_UPSELL_CARD_DESC,
-		freeTitle = if fFlagBuildAgentAdCampaignCardModule then localizationStringsModule.AD_UPSELL_FREE_TITLE else nil,
-		freeTitlePlural = if fFlagBuildAgentAdCampaignCardModule then {
-			localizationStringsModule.AD_UPSELL_FREE_TITLE_PLURAL,
-			promotionCount = p1.freePromotionsRemaining
+return function(Frame) --[[ Line: 41 | Named "AdUpsellCard" ]]
+	-- upvalues: FoundationModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), FFlagBuildAgentAdCampaignCardModule (copy), FFlagBuildAgentAdCampaignRefreshEligibilityModule (copy), FFlagBuildExperienceChatCardEmphasisModule (copy), UseChatCardEmphasisModule (copy), ChatCardPriorityModule (copy), ReactModule (copy), View (copy), Icon (copy), IconName (copy), Text (copy), Button (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy)
+	local UseTokensResult = FoundationModule.Hooks.useTokens()
+	local UseLocalizationResult = UseLocalizationFunction({
+		title = LocalizationStringsModule.AD_UPSELL_CARD_TITLE,
+		description = LocalizationStringsModule.AD_UPSELL_CARD_DESC,
+		freeTitle = if FFlagBuildAgentAdCampaignCardModule then LocalizationStringsModule.AD_UPSELL_FREE_TITLE else nil,
+		freeTitlePlural = if FFlagBuildAgentAdCampaignCardModule then {
+			LocalizationStringsModule.AD_UPSELL_FREE_TITLE_PLURAL,
+			promotionCount = Frame.freePromotionsRemaining
 		} else nil,
-		freeDescription = if fFlagBuildAgentAdCampaignCardModule then localizationStringsModule.AD_UPSELL_FREE_DESC else nil,
-		noFreeTitle = if fFlagBuildAgentAdCampaignCardModule then localizationStringsModule.AD_UPSELL_NO_FREE_TITLE else nil,
-		noFreeDescription = if fFlagBuildAgentAdCampaignCardModule then localizationStringsModule.AD_UPSELL_NO_FREE_DESC else nil,
-		create = localizationStringsModule.AD_UPSELL_CARD_CREATE,
-		dontShowAgain = localizationStringsModule.AD_UPSELL_CARD_DONT_SHOW_AGAIN
+		freeDescription = if FFlagBuildAgentAdCampaignCardModule then LocalizationStringsModule.AD_UPSELL_FREE_DESC else nil,
+		noFreeTitle = if FFlagBuildAgentAdCampaignCardModule then LocalizationStringsModule.AD_UPSELL_NO_FREE_TITLE else nil,
+		noFreeDescription = if FFlagBuildAgentAdCampaignCardModule then LocalizationStringsModule.AD_UPSELL_NO_FREE_DESC else nil,
+		create = LocalizationStringsModule.AD_UPSELL_CARD_CREATE,
+		dontShowAgain = LocalizationStringsModule.AD_UPSELL_CARD_DONT_SHOW_AGAIN,
+		eligibilityError = if FFlagBuildAgentAdCampaignRefreshEligibilityModule then if Frame.eligibilityError == "unavailable" then LocalizationStringsModule.AD_CAMPAIGN_SHEET_FORBIDDEN_ERROR else LocalizationStringsModule.AD_CAMPAIGN_SHEET_INTERNAL_ERROR else nil
 	})
-	local title = var2.title
-	local description = var2.description
+	local Title = UseLocalizationResult.title
+	local Description = UseLocalizationResult.description
 	
-	if fFlagBuildAgentAdCampaignCardModule then
-		if p1.fundingType == "paid" then
-			title = var2.noFreeTitle
-			description = var2.noFreeDescription
-		elseif p1.freePromotionsRemaining == 1 then
-			title = var2.freeTitle
-			description = var2.freeDescription
-		elseif p1.freePromotionsRemaining > 0 then
-			title = var2.freeTitlePlural
-			description = var2.freeDescription
+	if FFlagBuildAgentAdCampaignCardModule then
+		if Frame.fundingType == "paid" then
+			Title = UseLocalizationResult.noFreeTitle
+			Description = UseLocalizationResult.noFreeDescription
+		elseif Frame.freePromotionsRemaining == 1 then
+			Title = UseLocalizationResult.freeTitle
+			Description = UseLocalizationResult.freeDescription
+		elseif Frame.freePromotionsRemaining > 0 then
+			Title = UseLocalizationResult.freeTitlePlural
+			Description = UseLocalizationResult.freeDescription
 		else
-			title = var2.noFreeTitle
-			description = var2.noFreeDescription
+			Title = UseLocalizationResult.noFreeTitle
+			Description = UseLocalizationResult.noFreeDescription
 		end
 	end
-	return reactModule.createElement(view, {
+	local DontShowAgain = UseLocalizationResult.dontShowAgain
+	local UseChatCardEmphasisModuleResult = if FFlagBuildExperienceChatCardEmphasisModule then UseChatCardEmphasisModule(ChatCardPriorityModule.AdUpsell, Frame.emphasisOrder) else nil
+	
+	return ReactModule.createElement(View, {
 		tag = "col gap-large size-full-0 auto-y padding-large stroke-standard stroke-default radius-large",
 		testId = "AdUpsellCard",
-		LayoutOrder = p1.LayoutOrder,
-		ref = p1.containerRef
+		LayoutOrder = Frame.LayoutOrder,
+		ref = Frame.containerRef
 	}, {
-		Content = reactModule.createElement(view, {
+		Content = ReactModule.createElement(View, {
 			LayoutOrder = 1,
 			tag = "col gap-xxsmall size-full-0 auto-y"
 		}, {
-			Title = reactModule.createElement(view, {
+			Title = ReactModule.createElement(View, {
 				LayoutOrder = 1,
 				tag = "row align-y-center gap-small size-full-0 auto-y"
 			}, {
-				Icon = reactModule.createElement(icon, {
+				Icon = ReactModule.createElement(Icon, {
 					LayoutOrder = 1,
 					testId = "AdUpsellCard.Icon",
-					name = iconName.Megaphone,
-					style = var1.Color.Content.Emphasis
+					name = IconName.Megaphone,
+					style = UseTokensResult.Color.Content.Emphasis
 				}),
-				Label = reactModule.createElement(text, {
+				Label = ReactModule.createElement(Text, {
 					LayoutOrder = 2,
 					tag = "fill auto-y text-title-medium text-wrap text-align-x-left content-emphasis",
-					Text = title
+					Text = Title
 				})
 			}),
-			Description = reactModule.createElement(text, {
+			Description = ReactModule.createElement(Text, {
 				LayoutOrder = 2,
 				tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-emphasis",
-				Text = description
-			})
+				Text = Description
+			}),
+			EligibilityError = if FFlagBuildAgentAdCampaignRefreshEligibilityModule and Frame.eligibilityError ~= nil then ReactModule.createElement(Text, {
+				LayoutOrder = 3,
+				tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-alert",
+				testId = "AdUpsellCard.EligibilityError",
+				Text = UseLocalizationResult.eligibilityError
+			}) else nil
 		}),
-		Actions = reactModule.createElement(view, {
+		Actions = ReactModule.createElement(View, {
 			LayoutOrder = 2,
 			tag = "row gap-small size-full-0 auto-y"
 		}, {
-			Create = reactModule.createElement(button, {
+			Create = ReactModule.createElement(Button, {
 				LayoutOrder = 1,
 				testId = "AdUpsellCard.Create",
-				text = var2.create,
-				size = inputSize.Small,
-				variant = if (if fFlagBuildExperienceChatCardEmphasisModule then useChatCardEmphasisModule(chatCardPriorityModule.AdUpsell, p1.emphasisOrder) else nil) == true then buttonVariant.Emphasis else buttonVariant.SoftEmphasis,
-				fillBehavior = fillBehavior.Fill,
+				text = UseLocalizationResult.create,
+				size = InputSize.Small,
+				variant = if UseChatCardEmphasisModuleResult == true then ButtonVariant.Emphasis else ButtonVariant.SoftEmphasis,
+				fillBehavior = FillBehavior.Fill,
 				width = UDim.new(1, 0),
-				isLoading = p1.isCreatePending == true,
-				isDisabled = fFlagBuildAgentAdCampaignCardModule and p1.isCreateDisabled == true,
-				onActivated = p1.onCreate
+				isLoading = Frame.isCreatePending == true,
+				isDisabled = FFlagBuildAgentAdCampaignCardModule and Frame.isCreateDisabled == true,
+				onActivated = Frame.onCreate
 			}),
-			DontShowAgain = if fFlagBuildAgentAdCampaignCardModule and p1.onDismiss == nil then nil else reactModule.createElement(button, {
+			DontShowAgain = if FFlagBuildAgentAdCampaignCardModule and Frame.onDismiss == nil then nil else ReactModule.createElement(Button, {
 				LayoutOrder = 2,
 				testId = "AdUpsellCard.DontShowAgain",
-				text = var2.dontShowAgain,
-				size = inputSize.Small,
-				variant = buttonVariant.Standard,
-				fillBehavior = fillBehavior.Fill,
+				text = DontShowAgain,
+				size = InputSize.Small,
+				variant = ButtonVariant.Standard,
+				fillBehavior = FillBehavior.Fill,
 				width = UDim.new(1, 0),
-				onActivated = p1.onDismiss
+				onActivated = Frame.onDismiss
 			})
 		})
 	})

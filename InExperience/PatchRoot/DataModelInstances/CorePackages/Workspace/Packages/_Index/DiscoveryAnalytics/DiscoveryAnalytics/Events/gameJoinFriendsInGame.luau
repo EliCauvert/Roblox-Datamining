@@ -1,31 +1,31 @@
-﻿local telemetryService = game:GetService("TelemetryService")
-local parent = script:FindFirstAncestor("DiscoveryAnalytics").Parent
-local tModule = require(parent.t)
-local discoveryEventErrorLogger = require(parent.DiscoveryUtils).DiscoveryEventErrorLogger
-local var1 = tModule.strictInterface({
-	placeId = tModule.string,
-	uid = tModule.string,
-	ctx = tModule.string
+﻿local TelemetryService = game:GetService("TelemetryService")
+local Parent = script:FindFirstAncestor("DiscoveryAnalytics").Parent
+local TModule = require(Parent.t)
+local DiscoveryEventErrorLogger = require(Parent.DiscoveryUtils).DiscoveryEventErrorLogger
+local StrictInterfaceResult = TModule.strictInterface({
+	placeId = TModule.string,
+	uid = TModule.string,
+	ctx = TModule.string
 })
-local t = {
+local config = {
 	eventName = "joinFriendsInGame",
 	description = "User joined friends in game from experience details overflow",
 	backends = { "EventIngest" },
 	throttlingPercentage = game:DefineFastInt("GameJoinFriendsInGameThrottleHundrethsPercent", 10000),
 	lastUpdated = { 26, 4, 29 }
 }
-local list = { "addSessionInfo" }
+local StandardizedFields = { "addSessionInfo" }
 
-return function(p1, p2)
-	-- upvalues: var1 (ref), discoveryEventErrorLogger (ref), telemetryService (ref), t (ref), list (ref)
-	local var2, var3 = var1(p1)
+return function(CustomFields, EventContext) --[[ Line: 29 ]]
+	-- upvalues: StrictInterfaceResult (copy), DiscoveryEventErrorLogger (copy), TelemetryService (copy), config (copy), StandardizedFields (copy)
+	local StrictInterfaceResultResult, StrictInterfaceResultResult2 = StrictInterfaceResult(CustomFields)
 	
-	if not var2 then
-		discoveryEventErrorLogger.reportError("GameJoinFriendsInGameInvalidInterface", var3)
+	if not StrictInterfaceResultResult then
+		DiscoveryEventErrorLogger.reportError("GameJoinFriendsInGameInvalidInterface", StrictInterfaceResultResult2)
 	end
-	telemetryService:LogEvent(t, {
-		eventContext = p2,
-		standardizedFields = list,
-		customFields = p1
+	TelemetryService:LogEvent(config, {
+		eventContext = EventContext,
+		standardizedFields = StandardizedFields,
+		customFields = CustomFields
 	})
 end

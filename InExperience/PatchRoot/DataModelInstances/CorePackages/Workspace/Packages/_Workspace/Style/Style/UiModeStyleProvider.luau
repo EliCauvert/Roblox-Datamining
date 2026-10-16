@@ -1,106 +1,113 @@
-﻿local userGameSettingsService = UserSettings():GetService("UserGameSettings")
-local parent = script:FindFirstAncestor("Style").Parent
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local useDeviceType = require(parent.RobloxAppHooks).useDeviceType
-local appearanceContextModule = require(script.Parent.AppearanceContext)
-local sceneOverridesRegistryModule = require(script.Parent.SceneOverridesRegistry)
-local appStyleProvider = require(parent.UIBlox).App.Style.AppStyleProvider
-local foundationModule = require(parent.Foundation)
-local foundationProvider = foundationModule.FoundationProvider
-local colorMode = foundationModule.Enums.ColorMode
-local themeName = foundationModule.Enums.ThemeName
-local getUIScale = require(parent.Display).GetDisplayStore(false).getUIScale
-local enableDisplaySize = game:DefineFastFlag("LuaAppEnableWindowsHandheldTokenScale", false) and game:GetEngineFeature("EnableDisplaySize") or game:DefineFastFlag("DebugLuaAppEnableTokenScale", false)
-local fFlagAppNavBarPerItemThemeOverride = require(parent.SharedFlags).FFlagAppNavBarPerItemThemeOverride
-local var1 = if fFlagAppNavBarPerItemThemeOverride then require(script.Parent.UiModeBrandThemeContext) else nil
-local appClassicThemeGreenButtonColors = game:DefineFastFlag("AppClassicThemeGreenButtonColors", false)
-local t = {
+﻿local UserGameSettings = UserSettings():GetService("UserGameSettings")
+local Parent = script:FindFirstAncestor("Style").Parent
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local UseDeviceTypeFunction = require(Parent.RobloxAppHooks).useDeviceType
+local AppearanceContextModule = require(script.Parent.AppearanceContext)
+local SceneOverridesRegistryModule = require(script.Parent.SceneOverridesRegistry)
+local AppStyleProvider = require(Parent.UIBlox).App.Style.AppStyleProvider
+local FoundationModule = require(Parent.Foundation)
+local FoundationProvider = FoundationModule.FoundationProvider
+local ColorMode = FoundationModule.Enums.ColorMode
+local ThemeName = FoundationModule.Enums.ThemeName
+local GetUIScale = require(Parent.Display).GetDisplayStore(false).getUIScale
+local DebugLuaAppEnableTokenScale = game:DefineFastFlag("DebugLuaAppEnableTokenScale", false)
+local EnableDisplaySizeEngineFeature = game:DefineFastFlag("LuaAppEnableWindowsHandheldTokenScale", false) and game:GetEngineFeature("EnableDisplaySize") or DebugLuaAppEnableTokenScale
+local FFlagAppNavBarPerItemThemeOverride = require(Parent.SharedFlags).FFlagAppNavBarPerItemThemeOverride
+local UiModeBrandThemeContextModule = if FFlagAppNavBarPerItemThemeOverride then require(script.Parent.UiModeBrandThemeContext) else nil
+local AppClassicThemeGreenButtonColors = game:DefineFastFlag("AppClassicThemeGreenButtonColors", false)
+local config = {
 	["Color.ActionEmphasis.Background.Color3"] = Color3.fromHex("#137F1F"),
 	["Color.ActionSoftEmphasis.Background.Color3"] = Color3.fromHex("#137F1F"),
 	["Color.ActionSoftEmphasis.Foreground.Color3"] = Color3.fromHex("#E2F8E3")
 }
-local t_1 = {
+local config1 = {
 	["Color.ActionEmphasis.Background.Color3"] = Color3.fromHex("#12891D"),
 	["Color.ActionEmphasis.Foreground.Color3"] = Color3.fromHex("#FFFFFF"),
 	["Color.ActionSoftEmphasis.Background.Color3"] = Color3.fromHex("#12891D"),
 	["Color.ActionSoftEmphasis.Foreground.Color3"] = Color3.fromHex("#022708")
 }
-local t_2 = { dark = colorMode.Dark, light = colorMode.Light }
+local config2 = { dark = ColorMode.Dark, light = ColorMode.Light }
 
-local function _()
-	-- upvalues: signalsReactModule (ref), getUIScale (ref)
-	return signalsReactModule.useSignalState(getUIScale)
+local function _() --[[ Line: 73 | Named "useTokenScale" ]]
+	-- upvalues: SignalsReactModule (copy), GetUIScale (copy)
+	return (SignalsReactModule.useSignalState(GetUIScale))
 end
 
-local function UiModeStyleProvider(p1)
-	-- upvalues: useDeviceType (ref), enableDisplaySize (ref), signalsReactModule (ref), getUIScale (ref), reactModule (ref), userGameSettingsService (ref), cryoModule (ref), appClassicThemeGreenButtonColors (ref), themeName (ref), t_2 (ref), colorMode (ref), t_1 (ref), t (ref), foundationProvider (ref), sceneOverridesRegistryModule (ref), appStyleProvider (ref)
-	local var2 = useDeviceType()
-	local var3 = if enableDisplaySize then signalsReactModule.useSignalState(getUIScale) else nil
-	local var4, var5 = reactModule.useState({
-		preferredTransparency = userGameSettingsService.PreferredTransparency,
-		reducedMotion = userGameSettingsService.ReducedMotion,
-		preferredTextSize = userGameSettingsService.PreferredTextSize
+local function UiModeStyleProvider(p1) --[[ Line: 78 ]]
+	-- upvalues: UseDeviceTypeFunction (copy), EnableDisplaySizeEngineFeature (copy), SignalsReactModule (copy), GetUIScale (copy), ReactModule (copy), UserGameSettings (copy), CryoModule (copy), AppClassicThemeGreenButtonColors (copy), ThemeName (copy), config2 (copy), ColorMode (copy), config1 (copy), config (copy), FoundationProvider (copy), SceneOverridesRegistryModule (copy), AppStyleProvider (copy)
+	local UseDeviceTypeResult = UseDeviceTypeFunction()
+	local UseSignalStateResult = if EnableDisplaySizeEngineFeature then SignalsReactModule.useSignalState(GetUIScale) else nil
+	local UseStateResult, UseStateResult2 = ReactModule.useState({
+		preferredTransparency = UserGameSettings.PreferredTransparency,
+		reducedMotion = UserGameSettings.ReducedMotion,
+		preferredTextSize = UserGameSettings.PreferredTextSize
 	})
-	reactModule.useEffect(function()
-		-- upvalues: var5 (ref), userGameSettingsService (copy)
-		local function updateSettings()
-			-- upvalues: var5 (copy), userGameSettingsService (copy)
-			var5({
-				preferredTransparency = userGameSettingsService.PreferredTransparency,
-				reducedMotion = userGameSettingsService.ReducedMotion,
-				preferredTextSize = userGameSettingsService.PreferredTextSize
+	ReactModule.useEffect(function() --[[ Line: 92 ]]
+		-- upvalues: UseStateResult2 (copy), UserGameSettings (upval)
+		local function updateSettings() --[[ Line: 93 ]]
+			-- upvalues: UseStateResult2 (upval), UserGameSettings (upval)
+			UseStateResult2({
+				preferredTransparency = UserGameSettings.PreferredTransparency,
+				reducedMotion = UserGameSettings.ReducedMotion,
+				preferredTextSize = UserGameSettings.PreferredTextSize
 			})
 		end
 		
-		local var6 = userGameSettingsService:GetPropertyChangedSignal("PreferredTransparency"):Connect(updateSettings)
-		local var7 = userGameSettingsService:GetPropertyChangedSignal("ReducedMotion"):Connect(updateSettings)
-		local var8 = userGameSettingsService:GetPropertyChangedSignal("PreferredTextSize"):Connect(updateSettings)
+		local Connection = UserGameSettings:GetPropertyChangedSignal("PreferredTransparency"):Connect(updateSettings)
+		local Connection1 = UserGameSettings:GetPropertyChangedSignal("ReducedMotion"):Connect(updateSettings)
+		local Connection2 = UserGameSettings:GetPropertyChangedSignal("PreferredTextSize"):Connect(updateSettings)
 		
-		return function()
-			-- upvalues: var6 (ref), var7 (ref), var8 (ref)
-			var6:Disconnect()
-			var7:Disconnect()
-			var8:Disconnect()
+		return function() --[[ Line: 107 ]]
+			-- upvalues: Connection (copy), Connection1 (copy), Connection2 (copy)
+			Connection:Disconnect()
+			Connection1:Disconnect()
+			Connection2:Disconnect()
 		end
 	end, {})
-	local style = p1.style
-	local var6 = reactModule.useMemo(function()
-		-- upvalues: cryoModule (copy), style (ref), var2 (ref), enableDisplaySize (copy), var4 (ref), var3 (write)
-		return cryoModule.Dictionary.join({ deviceType = style.deviceType or var2 }, style, {
-			settings = if enableDisplaySize then cryoModule.Dictionary.join(var4, { scale = var3 }) else var4
+	local Style = p1.style
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 115 ]]
+		-- upvalues: CryoModule (upval), Style (copy), UseDeviceTypeResult (copy), EnableDisplaySizeEngineFeature (upval), UseStateResult (copy), UseSignalStateResult (ref)
+		return CryoModule.Dictionary.join({ deviceType = Style.deviceType or UseDeviceTypeResult }, Style, {
+			settings = if EnableDisplaySizeEngineFeature then CryoModule.Dictionary.join(UseStateResult, { scale = UseSignalStateResult }) else UseStateResult
 		})
-	end, { style, var2, var4, var3 })
-	local var7 = var6.foundationThemeName ~= nil
-	local var8 = nil
+	end, {
+		Style,
+		UseDeviceTypeResult,
+		UseStateResult,
+		UseSignalStateResult
+	})
+	local HasFoundationThemeName = UseMemoResult.foundationThemeName ~= nil
+	local TokenOverrides = nil
 	
-	if appClassicThemeGreenButtonColors then
-		local foundationThemeName = var6.foundationThemeName
-		
-		if if foundationThemeName ~= themeName.Classic then foundationThemeName == themeName.KidsClassic else true then
-			var8 = if t_2[var6.themeName:lower()] == colorMode.Light then t_1 else t
-		end
+	if AppClassicThemeGreenButtonColors and UseMemoResult.foundationThemeName == ThemeName.Classic then
+		local IsEntryMatch = config2[UseMemoResult.themeName:lower()] == ColorMode.Light
+		TokenOverrides = if IsEntryMatch then config1 else config
 	end
-	return reactModule.createElement(foundationProvider, {
-		device = var6.deviceType,
-		colorMode = t_2[var6.themeName:lower()],
-		themeName = var6.foundationThemeName,
-		preferences = var6.settings,
-		tokenOverrides = var8
-	}, reactModule.createElement(sceneOverridesRegistryModule, { isActive = var7 }, reactModule.createElement(appStyleProvider, { style = var6 }, p1.children)))
+	return ReactModule.createElement(FoundationProvider, {
+		device = UseMemoResult.deviceType,
+		colorMode = config2[UseMemoResult.themeName:lower()],
+		themeName = UseMemoResult.foundationThemeName,
+		preferences = UseMemoResult.settings,
+		tokenOverrides = TokenOverrides
+	}, ReactModule.createElement(SceneOverridesRegistryModule, { isActive = HasFoundationThemeName }, ReactModule.createElement(AppStyleProvider, { style = UseMemoResult }, p1.children)))
 end
 
-return function(p1)
-	-- upvalues: reactModule (ref), fFlagAppNavBarPerItemThemeOverride (ref), cryoModule (ref), appearanceContextModule (ref), UiModeStyleProvider (ref), var1 (ref)
-	local var2, var3 = reactModule.useState(p1.style.themeName)
-	local var4 = if fFlagAppNavBarPerItemThemeOverride and p1.syncThemeFromProps then p1.style.themeName else var2
-	local cloned = table.clone(p1)
-	cloned.style = cryoModule.Dictionary.join(cloned.style, {
-		themeName = var4,
-		foundationThemeName = if p1.foundationThemeName then p1.foundationThemeName else cryoModule.None
+return function(Tbl) --[[ Line: 164 | Named "ThemeProvider" ]]
+	-- upvalues: ReactModule (copy), FFlagAppNavBarPerItemThemeOverride (copy), CryoModule (copy), AppearanceContextModule (copy), UiModeStyleProvider (copy), UiModeBrandThemeContextModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(Tbl.style.themeName)
+	local ThemeName = if FFlagAppNavBarPerItemThemeOverride and Tbl.syncThemeFromProps then Tbl.style.themeName else UseStateResult
+	local Copy = table.clone(Tbl)
+	Copy.style = CryoModule.Dictionary.join(Copy.style, {
+		themeName = ThemeName,
+		foundationThemeName = if Tbl.foundationThemeName then Tbl.foundationThemeName else CryoModule.None
 	})
-	local var5 = reactModule.createElement(appearanceContextModule.Provider, { value = { theme = var4, setTheme = var3 } }, reactModule.createElement(UiModeStyleProvider, cloned))
+	local Element = ReactModule.createElement(AppearanceContextModule.Provider, {
+		value = { theme = ThemeName, setTheme = UseStateResult2 }
+	}, ReactModule.createElement(UiModeStyleProvider, Copy))
 	
-	return if fFlagAppNavBarPerItemThemeOverride then reactModule.createElement(var1.Provider, { value = { foundationThemeName = p1.foundationThemeName } }, var5) else var5
+	return if FFlagAppNavBarPerItemThemeOverride then ReactModule.createElement(UiModeBrandThemeContextModule.Provider, {
+		value = { foundationThemeName = Tbl.foundationThemeName }
+	}, Element) else Element
 end

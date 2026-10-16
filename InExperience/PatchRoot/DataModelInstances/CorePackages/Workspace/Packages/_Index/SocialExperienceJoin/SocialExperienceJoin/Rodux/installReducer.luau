@@ -1,15 +1,15 @@
-﻿local socialExperienceJoin = script:FindFirstAncestor("SocialExperienceJoin")
-local roduxModule = require(socialExperienceJoin.Parent.Rodux)
-local myRoduxNetworkingModule = require(socialExperienceJoin.Networking.myRoduxNetworking)
-local gamesModule = require(socialExperienceJoin.Rodux.Games)
-local presenceModule = require(socialExperienceJoin.Rodux.Presence)
-local fFlagSocialExperienceJoinPresenceStoreMigrationModule = require(socialExperienceJoin.Flags.FFlagSocialExperienceJoinPresenceStoreMigration)
+﻿local SocialExperienceJoin = script:FindFirstAncestor("SocialExperienceJoin")
+local RoduxModule = require(SocialExperienceJoin.Parent.Rodux)
+local MyRoduxNetworkingModule = require(SocialExperienceJoin.Networking.myRoduxNetworking)
+local GamesModule = require(SocialExperienceJoin.Rodux.Games)
+local PresenceModule = require(SocialExperienceJoin.Rodux.Presence)
+local FFlagSocialExperienceJoinPresenceStoreMigrationModule = require(SocialExperienceJoin.Flags.FFlagSocialExperienceJoinPresenceStoreMigration)
 
-return function()
-	-- upvalues: roduxModule (ref), myRoduxNetworkingModule (ref), gamesModule (ref), fFlagSocialExperienceJoinPresenceStoreMigrationModule (ref), presenceModule (ref)
-	return roduxModule.combineReducers({
-		NetworkStatus = myRoduxNetworkingModule.installReducer(),
-		Games = gamesModule.installReducer(),
-		Presence = if fFlagSocialExperienceJoinPresenceStoreMigrationModule then nil else presenceModule.installReducer()
+return function() --[[ Line: 17 ]]
+	-- upvalues: RoduxModule (copy), MyRoduxNetworkingModule (copy), GamesModule (copy), FFlagSocialExperienceJoinPresenceStoreMigrationModule (copy), PresenceModule (copy)
+	return RoduxModule.combineReducers({
+		NetworkStatus = MyRoduxNetworkingModule.installReducer(),
+		Games = GamesModule.installReducer(),
+		Presence = if FFlagSocialExperienceJoinPresenceStoreMigrationModule then nil else PresenceModule.installReducer()
 	})
 end

@@ -1,223 +1,223 @@
-﻿local function parseEligibleOffers(p1)
-	assert(type(p1) == "table", "Expected EligibleOffers to be a table")
-	local t = {}
+﻿local function parseEligibleOffers(EligibleOffers) --[[ Line: 51 ]]
+	assert(type(EligibleOffers) == "table", "Expected EligibleOffers to be a table")
+	local List = {}
 	
-	for i, v in ipairs(p1) do
-		assert(type(v) == "table", "Expected each EligibleOffer to be a table")
-		table.insert(t, {
-			Duration = tonumber(v.Duration) or 0,
-			OfferType = tostring(v.OfferType or ""),
-			PeriodType = tostring(v.PeriodType or "")
+	for _, eligibleOffer in ipairs(EligibleOffers) do
+		assert(type(eligibleOffer) == "table", "Expected each EligibleOffer to be a table")
+		table.insert(List, {
+			Duration = tonumber(eligibleOffer.Duration) or 0,
+			OfferType = tostring(eligibleOffer.OfferType or ""),
+			PeriodType = tostring(eligibleOffer.PeriodType or "")
 		})
 	end
-	return t
+	return List
 end
 
-local function parseRobloxSubscriptionDiscounts(p2)
-	if type(p2) ~= "table" then
+local function parseRobloxSubscriptionDiscounts(PrivateServerDiscounts) --[[ Line: 67 ]]
+	if type(PrivateServerDiscounts) ~= "table" then
 		return nil
 	end
-	local t = {}
+	local List = {}
 	
-	for i, v in ipairs(p2) do
-		if type(v) == "table" then
-			table.insert(t, {
-				DiscountPercent = tonumber(v.DiscountPercent) or 0,
-				PeriodIndex = tonumber(v.PeriodIndex) or 0,
-				TierId = tostring(v.TierId or "")
+	for _, privateServerDiscount in ipairs(PrivateServerDiscounts) do
+		if type(privateServerDiscount) == "table" then
+			table.insert(List, {
+				DiscountPercent = tonumber(privateServerDiscount.DiscountPercent) or 0,
+				PeriodIndex = tonumber(privateServerDiscount.PeriodIndex) or 0,
+				TierId = tostring(privateServerDiscount.TierId or "")
 			})
 		end
 	end
-	return t
+	return List
 end
 
-local function parseFeatureConfig(p3)
-	-- upvalues: parseRobloxSubscriptionDiscounts (ref)
-	assert(type(p3) == "table", "Expected FeatureConfig to be a table")
+local function parseFeatureConfig(FeatureConfig) --[[ Line: 84 ]]
+	-- upvalues: parseRobloxSubscriptionDiscounts (copy)
+	assert(type(FeatureConfig) == "table", "Expected FeatureConfig to be a table")
 	
 	return {
-		IsRobuxTransferEnabled = p3.IsRobuxTransferEnabled == true,
-		IsTradingEnabled = p3.IsTradingEnabled == true,
-		IsUgcPublishingEnabled = p3.IsUgcPublishingEnabled == true,
-		VirtualTransactionDiscounts = parseRobloxSubscriptionDiscounts(p3.VirtualTransactionDiscounts),
-		PrivateServerDiscounts = parseRobloxSubscriptionDiscounts(p3.PrivateServerDiscounts)
+		IsRobuxTransferEnabled = FeatureConfig.IsRobuxTransferEnabled == true,
+		IsTradingEnabled = FeatureConfig.IsTradingEnabled == true,
+		IsUgcPublishingEnabled = FeatureConfig.IsUgcPublishingEnabled == true,
+		VirtualTransactionDiscounts = parseRobloxSubscriptionDiscounts(FeatureConfig.VirtualTransactionDiscounts),
+		PrivateServerDiscounts = parseRobloxSubscriptionDiscounts(FeatureConfig.PrivateServerDiscounts)
 	}
 end
 
-local function _(p3)
-	-- upvalues: parseFeatureConfig (ref)
-	assert(type(p3) == "table", "Expected RobloxSubscriptionProductDetails to be a table")
+local function _(p1) --[[ Line: 96 | Named "parseRobloxSubscriptionProductDetails" ]]
+	-- upvalues: parseFeatureConfig (copy)
+	assert(type(p1) == "table", "Expected RobloxSubscriptionProductDetails to be a table")
 	
-	return { FeatureConfig = parseFeatureConfig(p3.FeatureConfig) }
+	return { FeatureConfig = parseFeatureConfig(p1.FeatureConfig) }
 end
 
-local _ = function(p3)
-	-- upvalues: parseFeatureConfig (ref)
-	assert(type(p3) == "table", "Expected ProductTypeDetails to be a table")
+local _ = function(p1) --[[ Line: 103 | Named "parseProductTypeDetails" ]]
+	-- upvalues: parseFeatureConfig (copy)
+	assert(type(p1) == "table", "Expected ProductTypeDetails to be a table")
 	local t = {}
-	local robloxSubscriptionProductDetails = p3.RobloxSubscriptionProductDetails
-	assert(type(robloxSubscriptionProductDetails) == "table", "Expected RobloxSubscriptionProductDetails to be a table")
+	local RobloxSubscriptionProductDetails = p1.RobloxSubscriptionProductDetails
+	assert(type(RobloxSubscriptionProductDetails) == "table", "Expected RobloxSubscriptionProductDetails to be a table")
 	t.RobloxSubscriptionProductDetails = {
-		FeatureConfig = parseFeatureConfig(robloxSubscriptionProductDetails.FeatureConfig)
+		FeatureConfig = parseFeatureConfig(RobloxSubscriptionProductDetails.FeatureConfig)
 	}
 	
 	return t
 end
 
-local function parseLocalizedPrice(p3)
-	assert(type(p3) == "table", "Expected LocalizedPrice to be a table")
+local function parseLocalizedPrice(LocalizedPrice) --[[ Line: 110 ]]
+	assert(type(LocalizedPrice) == "table", "Expected LocalizedPrice to be a table")
 	
 	return {
-		CurrencyCode = tostring(p3.CurrencyCode or ""),
-		Nanos = tonumber(p3.Nanos) or 0,
-		Units = tonumber(p3.Units) or 0
+		CurrencyCode = tostring(LocalizedPrice.CurrencyCode or ""),
+		Nanos = tonumber(LocalizedPrice.Nanos) or 0,
+		Units = tonumber(LocalizedPrice.Units) or 0
 	}
 end
 
-local function parseProductKey(p3)
-	return if type(p3) == "table" then {
-		Id = tostring(p3.Id or ""),
-		Type = tostring(p3.Type or "")
+local function parseProductKey(ProductKey) --[[ Line: 119 ]]
+	return if type(ProductKey) == "table" then {
+		Id = tostring(ProductKey.Id or ""),
+		Type = tostring(ProductKey.Type or "")
 	} else { Id = "", Type = "" }
 end
 
-local function parseEligibleOffersFromRest(p3)
-	if type(p3) ~= "table" then
+local function parseEligibleOffersFromRest(EligibleOffers) --[[ Line: 129 ]]
+	if type(EligibleOffers) ~= "table" then
 		return {}
 	end
-	local t = {}
+	local List = {}
 	
-	for i, v in ipairs(p3) do
-		if type(v) == "table" then
-			local var1 = if type(v.freeTrialOffer) == "table" then v.freeTrialOffer else nil
-			table.insert(t, {
-				Duration = tonumber(var1 and var1.duration) or 0,
-				OfferType = tostring(v.offerType or ""),
-				PeriodType = tostring(if var1 then var1.periodType else "")
+	for _, eligibleOffer in ipairs(EligibleOffers) do
+		if type(eligibleOffer) == "table" then
+			local FreeTrialOffer = if type(eligibleOffer.freeTrialOffer) == "table" then eligibleOffer.freeTrialOffer else nil
+			table.insert(List, {
+				Duration = tonumber(FreeTrialOffer and FreeTrialOffer.duration) or 0,
+				OfferType = tostring(eligibleOffer.offerType or ""),
+				PeriodType = tostring(FreeTrialOffer and FreeTrialOffer.periodType or "")
 			})
 		end
 	end
-	return t
+	return List
 end
 
-local function parseDiscountsFromRest(p4)
-	if type(p4) ~= "table" then
+local function parseDiscountsFromRest(PrivateServerDiscounts) --[[ Line: 148 ]]
+	if type(PrivateServerDiscounts) ~= "table" then
 		return nil
 	end
-	local t = {}
+	local List = {}
 	
-	for i, v in ipairs(p4) do
-		if type(v) == "table" then
-			table.insert(t, {
-				DiscountPercent = tonumber(v.discountPercent) or 0,
-				PeriodIndex = tonumber(v.periodIndex) or 0,
-				TierId = tostring(v.tierId or "")
+	for _, privateServerDiscount in ipairs(PrivateServerDiscounts) do
+		if type(privateServerDiscount) == "table" then
+			table.insert(List, {
+				DiscountPercent = tonumber(privateServerDiscount.discountPercent) or 0,
+				PeriodIndex = tonumber(privateServerDiscount.periodIndex) or 0,
+				TierId = tostring(privateServerDiscount.tierId or "")
 			})
 		end
 	end
-	return t
+	return List
 end
 
-local function parseFeatureConfigFromRest(p5)
-	-- upvalues: parseDiscountsFromRest (ref)
-	local var2 = if type(p5) == "table" then p5 else {}
+local function parseFeatureConfigFromRest(FeatureConfig) --[[ Line: 165 ]]
+	-- upvalues: parseDiscountsFromRest (copy)
+	local FeatureConfig1 = if type(FeatureConfig) == "table" then FeatureConfig else {}
 	
 	return {
-		IsRobuxTransferEnabled = var2.isRobuxTransferEnabled == true,
-		IsTradingEnabled = var2.isTradingEnabled == true,
-		IsUgcPublishingEnabled = var2.isUgcPublishingEnabled == true,
-		VirtualTransactionDiscounts = parseDiscountsFromRest(var2.virtualTransactionDiscounts),
-		PrivateServerDiscounts = parseDiscountsFromRest(var2.privateServerDiscounts)
+		IsRobuxTransferEnabled = FeatureConfig1.isRobuxTransferEnabled == true,
+		IsTradingEnabled = FeatureConfig1.isTradingEnabled == true,
+		IsUgcPublishingEnabled = FeatureConfig1.isUgcPublishingEnabled == true,
+		VirtualTransactionDiscounts = parseDiscountsFromRest(FeatureConfig1.virtualTransactionDiscounts),
+		PrivateServerDiscounts = parseDiscountsFromRest(FeatureConfig1.privateServerDiscounts)
 	}
 end
 
-local function parseLocalizedPriceFromRest(p5)
-	local var2 = if type(p5) == "table" then p5 else {}
+local function parseLocalizedPriceFromRest(LocalizedPrice) --[[ Line: 176 ]]
+	local LocalizedPrice1 = if type(LocalizedPrice) == "table" then LocalizedPrice else {}
 	
 	return {
-		CurrencyCode = tostring(var2.currencyCode or ""),
-		Nanos = tonumber(var2.nanos) or 0,
-		Units = tonumber(var2.units) or 0
+		CurrencyCode = tostring(LocalizedPrice1.currencyCode or ""),
+		Nanos = tonumber(LocalizedPrice1.nanos) or 0,
+		Units = tonumber(LocalizedPrice1.units) or 0
 	}
 end
 
-local function parseProductKeyFromRest(p5)
-	return if type(p5) == "table" then {
-		Id = tostring(p5.id or ""),
-		Type = tostring(p5.type or "")
+local function parseProductKeyFromRest(ProductKey) --[[ Line: 185 ]]
+	return if type(ProductKey) == "table" then {
+		Id = tostring(ProductKey.id or ""),
+		Type = tostring(ProductKey.type or "")
 	} else { Id = "", Type = "" }
 end
 
-local t = {
-	new = function(p5)
-		return p5
+local GetRobloxSubscriptionProductsModelModule = {
+	new = function(p1) --[[ Line: 197 ]]
+		return p1
 	end
 }
 
-function t.format(p5)
-	-- upvalues: parseEligibleOffers (ref), parseLocalizedPrice (ref), parseProductKey (ref), parseFeatureConfig (ref), t (ref)
-	assert(type(p5) == "table", "Expected products response to be a table")
-	local t_1 = {}
+function GetRobloxSubscriptionProductsModelModule.format(List) --[[ Line: 202 ]]
+	-- upvalues: parseEligibleOffers (copy), parseLocalizedPrice (copy), parseProductKey (copy), parseFeatureConfig (copy), GetRobloxSubscriptionProductsModelModule (copy)
+	assert(type(List) == "table", "Expected products response to be a table")
+	local List1 = {}
 	
-	for i, v in ipairs(p5) do
-		if type(v) == "table" then
-			assert(type(v.PeriodType) == "string" and v.PeriodType ~= "", "Missing or invalid PeriodType")
-			local t_2 = {
-				EligibleOffers = parseEligibleOffers(v.EligibleOffers),
-				LocalizedPrice = parseLocalizedPrice(v.LocalizedPrice),
-				LocalizedPriceDisplayString = if type(v.LocalizedPriceDisplayString) == "string" then v.LocalizedPriceDisplayString else nil,
-				PeriodType = tostring(v.PeriodType),
-				ProductKey = parseProductKey(v.ProductKey)
+	for _, value in ipairs(List) do
+		if type(value) == "table" then
+			assert(type(value.PeriodType) == "string" and value.PeriodType ~= "", "Missing or invalid PeriodType")
+			local config = {
+				EligibleOffers = parseEligibleOffers(value.EligibleOffers),
+				LocalizedPrice = parseLocalizedPrice(value.LocalizedPrice),
+				LocalizedPriceDisplayString = type(value.LocalizedPriceDisplayString) == "string" and value.LocalizedPriceDisplayString or nil,
+				PeriodType = tostring(value.PeriodType),
+				ProductKey = parseProductKey(value.ProductKey)
 			}
-			local productTypeDetails = v.ProductTypeDetails
-			assert(type(productTypeDetails) == "table", "Expected ProductTypeDetails to be a table")
-			local t_3 = {}
-			local robloxSubscriptionProductDetails = productTypeDetails.RobloxSubscriptionProductDetails
-			assert(type(robloxSubscriptionProductDetails) == "table", "Expected RobloxSubscriptionProductDetails to be a table")
-			t_3.RobloxSubscriptionProductDetails = {
-				FeatureConfig = parseFeatureConfig(robloxSubscriptionProductDetails.FeatureConfig)
+			local ProductTypeDetails = value.ProductTypeDetails
+			assert(type(ProductTypeDetails) == "table", "Expected ProductTypeDetails to be a table")
+			local ProductTypeDetails1 = {}
+			local RobloxSubscriptionProductDetails = ProductTypeDetails.RobloxSubscriptionProductDetails
+			assert(type(RobloxSubscriptionProductDetails) == "table", "Expected RobloxSubscriptionProductDetails to be a table")
+			ProductTypeDetails1.RobloxSubscriptionProductDetails = {
+				FeatureConfig = parseFeatureConfig(RobloxSubscriptionProductDetails.FeatureConfig)
 			}
-			t_2.ProductTypeDetails = t_3
-			table.insert(t_1, t.new(t_2))
+			config.ProductTypeDetails = ProductTypeDetails1
+			table.insert(List1, GetRobloxSubscriptionProductsModelModule.new(config))
 		else
 			error("Expected each product to be a table")
 		end
 	end
-	return t_1
+	return List1
 end
 
-function t.formatFromRest(p6)
-	-- upvalues: parseEligibleOffersFromRest (ref), parseLocalizedPriceFromRest (ref), parseProductKeyFromRest (ref), parseFeatureConfigFromRest (ref), t (ref)
-	assert(type(p6) == "table", "Expected products response to be a table")
-	local products = p6.products
+function GetRobloxSubscriptionProductsModelModule.formatFromRest(p1) --[[ Line: 227 ]]
+	-- upvalues: parseEligibleOffersFromRest (copy), parseLocalizedPriceFromRest (copy), parseProductKeyFromRest (copy), parseFeatureConfigFromRest (copy), GetRobloxSubscriptionProductsModelModule (copy)
+	assert(type(p1) == "table", "Expected products response to be a table")
+	local Products = p1.products
 	
-	if type(products) ~= "table" then
+	if type(Products) ~= "table" then
 		return {}
 	end
-	local t_1 = {}
+	local List = {}
 	
-	for i, v in ipairs(products) do
-		if type(v) == "table" and type(v.periodType) == "string" and v.periodType ~= "" then
-			table.insert(t_1, t.new({
-				EligibleOffers = parseEligibleOffersFromRest(v.eligibleOffers),
-				LocalizedPrice = parseLocalizedPriceFromRest(v.localizedPrice),
-				LocalizedPriceDisplayString = if type(v.localizedPriceDisplayString) == "string" then v.localizedPriceDisplayString else nil,
-				PeriodType = tostring(v.periodType),
-				ProductKey = parseProductKeyFromRest(v.productKey),
+	for _, product in ipairs(Products) do
+		if type(product) == "table" and type(product.periodType) == "string" and product.periodType ~= "" then
+			table.insert(List, GetRobloxSubscriptionProductsModelModule.new({
+				EligibleOffers = parseEligibleOffersFromRest(product.eligibleOffers),
+				LocalizedPrice = parseLocalizedPriceFromRest(product.localizedPrice),
+				LocalizedPriceDisplayString = type(product.localizedPriceDisplayString) == "string" and product.localizedPriceDisplayString or nil,
+				PeriodType = tostring(product.periodType),
+				ProductKey = parseProductKeyFromRest(product.productKey),
 				ProductTypeDetails = {
 					RobloxSubscriptionProductDetails = {
-						FeatureConfig = parseFeatureConfigFromRest(v.productTypeDetails and (v.productTypeDetails.robloxSubscriptionProductDetails and v.productTypeDetails.robloxSubscriptionProductDetails.featureConfig))
+						FeatureConfig = parseFeatureConfigFromRest(product.productTypeDetails and (product.productTypeDetails.robloxSubscriptionProductDetails and product.productTypeDetails.robloxSubscriptionProductDetails.featureConfig))
 					}
 				}
 			}))
 		end
 	end
-	return t_1
+	return List
 end
 
-function t.mock(p7)
-	-- upvalues: t (ref)
-	local t_1 = {
+function GetRobloxSubscriptionProductsModelModule.mock(List) --[[ Line: 259 ]]
+	-- upvalues: GetRobloxSubscriptionProductsModelModule (copy)
+	local config = {
 		LocalizedPriceDisplayString = "$12.99",
 		PeriodType = "Month",
 		EligibleOffers = {
@@ -255,12 +255,12 @@ function t.mock(p7)
 		}
 	}
 	
-	if type(p7) == "table" then
-		for i, v in pairs(p7) do
-			t_1[i] = v
+	if type(List) == "table" then
+		for i, value in pairs(List) do
+			config[i] = value
 		end
 	end
-	return t.new(t_1)
+	return GetRobloxSubscriptionProductsModelModule.new(config)
 end
 
-return t
+return GetRobloxSubscriptionProductsModelModule

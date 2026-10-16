@@ -1,1 +1,1 @@
-﻿return require(script:FindFirstAncestor("AppChat").Http.RoduxFriends).installReducer()
+﻿return (require(script:FindFirstAncestor("AppChat").Http.RoduxFriends).installReducer())

@@ -1,33 +1,32 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local parent = dataHydration.Parent
-local getGameInfoStoreModule = require(dataHydration.Game.GameInfo.getGameInfoStore)
-local getAgeRecommendationStoreModule = require(dataHydration.Game.AgeRecommendations.getAgeRecommendationStore)
-local fFlagLuaAppDataHydrationUpdateItem = require(parent.SharedFlags).FFlagLuaAppDataHydrationUpdateItem
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local GetGameInfoStoreModule = require(DataHydration.Game.GameInfo.getGameInfoStore)
+local GetAgeRecommendationStoreModule = require(DataHydration.Game.AgeRecommendations.getAgeRecommendationStore)
+local FFlagLuaAppDataHydrationUpdateItem = require(DataHydration.Parent.SharedFlags).FFlagLuaAppDataHydrationUpdateItem
 local _ = require(script.Parent.ExperienceGuidelinesStoreTypes)
 
 return {
-	syncGuidelinesAgeToGameStores = function(p1, p2)
-		-- upvalues: fFlagLuaAppDataHydrationUpdateItem (ref), getGameInfoStoreModule (ref), getAgeRecommendationStoreModule (ref)
-		local ageRecommendationDetails = p2.ageRecommendationDetails
-		local ageRecommendationSummary = ageRecommendationDetails and ageRecommendationDetails.ageRecommendationSummary
-		local ageRecommendation = ageRecommendationSummary and ageRecommendationSummary.ageRecommendation
+	syncGuidelinesAgeToGameStores = function(p1, p2) --[[ Line: 11 ]]
+		-- upvalues: FFlagLuaAppDataHydrationUpdateItem (copy), GetGameInfoStoreModule (copy), GetAgeRecommendationStoreModule (copy)
+		local AgeRecommendationDetails = p2.ageRecommendationDetails
+		local AgeRecommendationSummary = AgeRecommendationDetails and AgeRecommendationDetails.ageRecommendationSummary
+		local AgeRecommendation = AgeRecommendationSummary and AgeRecommendationSummary.ageRecommendation
 		
-		if not ageRecommendation then return end
-		local var1 = tostring(p1)
+		if not AgeRecommendation then return end
+		local Text = tostring(p1)
 		
-		if fFlagLuaAppDataHydrationUpdateItem then
-			getGameInfoStoreModule(false).updateGameInfo(var1, {
-				gameMinimumAge = ageRecommendation.minimumAge,
-				gameAgeDisplayName = ageRecommendation.displayName,
-				contentMaturity = ageRecommendation.contentMaturity
+		if FFlagLuaAppDataHydrationUpdateItem then
+			GetGameInfoStoreModule(false).updateGameInfo(Text, {
+				gameMinimumAge = AgeRecommendation.minimumAge,
+				gameAgeDisplayName = AgeRecommendation.displayName,
+				contentMaturity = AgeRecommendation.contentMaturity
 			})
 		end
-		getAgeRecommendationStoreModule(false).updateAgeRecommendations({
-			[var1] = {
-				displayName = ageRecommendation.displayName,
-				displayNameWithHeaderShort = ageRecommendation.displayNameWithHeaderShort,
-				igrsRating = ageRecommendation.igrsRating,
-				igrsRatingDisplayMessage = ageRecommendation.igrsRatingDisplayMessage
+		GetAgeRecommendationStoreModule(false).updateAgeRecommendations({
+			[Text] = {
+				displayName = AgeRecommendation.displayName,
+				displayNameWithHeaderShort = AgeRecommendation.displayNameWithHeaderShort,
+				igrsRating = AgeRecommendation.igrsRating,
+				igrsRatingDisplayMessage = AgeRecommendation.igrsRatingDisplayMessage
 			}
 		})
 	end

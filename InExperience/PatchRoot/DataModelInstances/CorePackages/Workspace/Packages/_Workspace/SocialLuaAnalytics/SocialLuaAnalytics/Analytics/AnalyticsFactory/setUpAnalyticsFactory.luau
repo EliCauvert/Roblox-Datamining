@@ -1,13 +1,13 @@
-﻿local cryoModule = require(script:FindFirstAncestor("SocialLuaAnalytics").Parent.Cryo)
-local analyticsFactoryModule = require(script.Parent.AnalyticsFactory)
+﻿local CryoModule = require(script:FindFirstAncestor("SocialLuaAnalytics").Parent.Cryo)
+local AnalyticsFactoryModule = require(script.Parent.AnalyticsFactory)
 local _ = require(script.Parent.Parent.Types)
 
-return function(value)
-	-- upvalues: cryoModule (ref), analyticsFactoryModule (ref)
-	return function(p1)
-		-- upvalues: cryoModule (copy), value (ref), analyticsFactoryModule (copy)
-		return analyticsFactoryModule(cryoModule.Dictionary.join(value, {
-			infoForAllEvents = cryoModule.Dictionary.join(value.staticInfoForAllEvents or {}, if p1 then p1.infoForAllEvents else {})
+return function(p1) --[[ Line: 29 | Named "setUpAnalyticsFactory" ]]
+	-- upvalues: CryoModule (copy), AnalyticsFactoryModule (copy)
+	return function(p2) --[[ Line: 30 ]]
+		-- upvalues: CryoModule (upval), p1 (copy), AnalyticsFactoryModule (upval)
+		return AnalyticsFactoryModule(CryoModule.Dictionary.join(p1, {
+			infoForAllEvents = CryoModule.Dictionary.join(p1.staticInfoForAllEvents or {}, p2 and p2.infoForAllEvents or {})
 		}))
 	end
 end

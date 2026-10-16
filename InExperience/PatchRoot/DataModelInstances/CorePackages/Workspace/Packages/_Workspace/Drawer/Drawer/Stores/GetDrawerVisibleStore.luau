@@ -1,1 +1,1 @@
-﻿return require(script:FindFirstAncestor("Drawer").Parent.Signals).createComputed(require(script.createDrawerVisibleStore))
+﻿return require(script:FindFirstAncestor("Drawer").Parent.Signals).createComputed((require(script.createDrawerVisibleStore)))

@@ -1,40 +1,35 @@
-﻿local profileInsights = script:FindFirstAncestor("ProfileInsights")
-local parent = profileInsights.Parent
-local profileInsightsStoreModule = require(profileInsights["data-hydration"].ProfileInsightsStore)
-local signalsReactModule = require(parent.SignalsReact)
-local reactModule = require(parent.React)
-local fFlagAddFriendsPageTrustedFriendRequestSection = require(parent.SharedFlags).FFlagAddFriendsPageTrustedFriendRequestSection
-local fFlagTFProfileInsightsBypassCache = require(parent.SharedFlags).FFlagTFProfileInsightsBypassCache
+﻿local ProfileInsights = script:FindFirstAncestor("ProfileInsights")
+local Parent = ProfileInsights.Parent
+local ProfileInsightsStoreModule = require(ProfileInsights["data-hydration"].ProfileInsightsStore)
+local SignalsReactModule = require(Parent.SignalsReact)
+local ReactModule = require(Parent.React)
+local FFlagAddFriendsPageTrustedFriendRequestSection = require(Parent.SharedFlags).FFlagAddFriendsPageTrustedFriendRequestSection
 
-return function(value)
-	-- upvalues: fFlagTFProfileInsightsBypassCache (ref), reactModule (ref), profileInsightsStoreModule (ref), fFlagAddFriendsPageTrustedFriendRequestSection (ref), signalsReactModule (ref)
-	local var1 = if fFlagTFProfileInsightsBypassCache then reactModule.useMemo(function()
-		-- upvalues: profileInsightsStoreModule (copy), value (ref), fFlagAddFriendsPageTrustedFriendRequestSection (copy)
-		return profileInsightsStoreModule(false).getProfileInsightsByUserId({
-			userIds = { value.userId },
-			rankingStrategy = value.rankingStrategy,
-			skipFetch = if fFlagAddFriendsPageTrustedFriendRequestSection then value.skipFetch else nil,
-			forceFetch = value.forceFetch
+return function(p1) --[[ Line: 19 | Named "useSignalProfileInsightsByUserId" ]]
+	-- upvalues: ReactModule (copy), ProfileInsightsStoreModule (copy), FFlagAddFriendsPageTrustedFriendRequestSection (copy), SignalsReactModule (copy)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 20 ]]
+		-- upvalues: ProfileInsightsStoreModule (upval), p1 (copy), FFlagAddFriendsPageTrustedFriendRequestSection (upval)
+		return ProfileInsightsStoreModule(false).getProfileInsightsByUserId({
+			userIds = { p1.userId },
+			rankingStrategy = p1.rankingStrategy,
+			skipFetch = if FFlagAddFriendsPageTrustedFriendRequestSection then p1.skipFetch else nil,
+			forceFetch = p1.forceFetch
 		})
 	end, {
-		value.userId,
-		value.rankingStrategy,
-		value.skipFetch,
-		value.forceFetch
-	}) else profileInsightsStoreModule(false).getProfileInsightsByUserId({
-		userIds = { value.userId },
-		rankingStrategy = value.rankingStrategy,
-		skipFetch = if fFlagAddFriendsPageTrustedFriendRequestSection then value.skipFetch else nil
+		p1.userId,
+		p1.rankingStrategy,
+		p1.skipFetch,
+		p1.forceFetch
 	})
-	local var2 = signalsReactModule.useSignalState(var1(false).data.getProfileInsights)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(UseMemoResult(false).data.getProfileInsights)
 	
-	return reactModule.useMemo(function()
-		-- upvalues: var2 (ref), value (ref)
-		for i, v in var2 do
-			if v.targetUserId == value.userId then
-				return v
+	return ReactModule.useMemo(function() --[[ Line: 31 ]]
+		-- upvalues: UseSignalStateResult (copy), p1 (copy)
+		for _, value in UseSignalStateResult do
+			if value.targetUserId == p1.userId then
+				return value
 			end
 		end
 		return {}
-	end, { var2 }), var1(false).status == "fetching"
+	end, { UseSignalStateResult }), UseMemoResult(false).status == "fetching"
 end

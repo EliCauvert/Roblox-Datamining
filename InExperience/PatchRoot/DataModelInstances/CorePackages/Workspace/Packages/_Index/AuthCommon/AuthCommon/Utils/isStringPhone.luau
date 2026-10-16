@@ -1,8 +1,10 @@
-﻿return function(p1)
-	if p1 and p1 ~= "" then
-		assert(p1, "")
+﻿return function(Text: string): boolean --[[ Line: 1 ]]
+	if Text and Text ~= "" then
+		assert(Text, "")
+		local v1 = #Text:gsub("[^%d]", "") >= 6
 		
-		return string.find(p1, "^%+*[%d%-%s%.%(%)]+$") ~= nil and #p1:gsub("[^%d]", "") >= 6
+		return string.find(Text, "^%+*[%d%-%s%.%(%)]+$") ~= nil and v1
+	else
+		return false
 	end
-	return false
 end

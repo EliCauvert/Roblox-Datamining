@@ -1,68 +1,68 @@
-﻿function enc(p1)
-	return (p1:gsub(".", function(p2)
-		local var1 = ""
-		local var2 = p2:byte()
+﻿function enc(Text: string): string --[[ Line: 6 ]]
+	return (Text:gsub(".", function(Text: string): string --[[ Line: 7 ]]
+		local Text1 = ""
+		local ByteValue: number = Text:byte()
 		
 		for i = 8, 1, -1 do
-			var1 ..= if var2 % 2 ^ i - var2 % 2 ^ (i - 1) > 0 then "1" else "0"
+			Text1 ..= if ByteValue % 2 ^ i - ByteValue % 2 ^ (i - 1) > 0 then "1" else "0"
 		end
-		return var1
-	end) .. "0000"):gsub("%d%d%d?%d?%d?%d?", function(p3)
-		if #p3 < 6 then
+		return Text1
+	end) .. "0000"):gsub("%d%d%d?%d?%d?%d?", function(Text: string): string --[[ Line: 11 ]]
+		if #Text < 6 then
 			return ""
 		end
-		local var3 = 0
+		local Total = 0
 		
 		for i = 1, 6 do
-			var3 += if p3:sub(i, i) == "1" then 2 ^ (6 - i) else 0
+			Total += Text:sub(i, i) == "1" and 2 ^ (6 - i) or 0
 		end
-		return ("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"):sub(var3 + 1, var3 + 1)
-	end) .. ({ "", "==", "=" })[#p1 % 3 + 1]
+		return ("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"):sub(Total + 1, Total + 1)
+	end) .. ({ "", "==", "=" })[#Text % 3 + 1]
 end
 
-function dec(p3)
-	return string.gsub(p3, "[^ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=]", ""):gsub(".", function(p4)
-		if p4 == "=" then
+function dec(Text: string) --[[ Line: 20 ]]
+	return (string.gsub(Text, "[^ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=]", ""):gsub(".", function(p1): string --[[ Line: 22 ]]
+		if p1 == "=" then
 			return ""
 		end
-		local var3 = ""
-		local var4 = ("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"):find(p4) - 1
+		local Text = ""
+		local StartIndexDelta = ("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"):find(p1) - 1
 		
 		for i = 6, 1, -1 do
-			var3 ..= if var4 % 2 ^ i - var4 % 2 ^ (i - 1) > 0 then "1" else "0"
+			Text ..= if StartIndexDelta % 2 ^ i - StartIndexDelta % 2 ^ (i - 1) > 0 then "1" else "0"
 		end
-		return var3
-	end):gsub("%d%d%d?%d?%d?%d?%d?%d?", function(p5)
-		if #p5 ~= 8 then
+		return Text
+	end):gsub("%d%d%d?%d?%d?%d?%d?%d?", function(Text: string): string --[[ Line: 27 ]]
+		if #Text ~= 8 then
 			return ""
 		end
-		local var5 = 0
+		local Total = 0
 		
 		for i = 1, 8 do
-			var5 += if p5:sub(i, i) == "1" then 2 ^ (7 - i) else 0
+			Total += Text:sub(i, i) == "1" and 2 ^ (7 - i) or 0
 		end
-		return string.char(var5)
-	end)
+		return (string.char(Total))
+	end))
 end
 
-function safe_enc(p5, p6)
-	if p6 == nil then
-		p6 = true
+function safe_enc(Text: string, p2: boolean): string --[[ Line: 35 ]]
+	if p2 == nil then
+		p2 = true
 	end
-	local var5 = ""
-	local t = {}
-	while #p5 > 0 do
-		table.insert(t, p5:sub(1, 204798))
-		p5 = p5:sub(204799)
+	local Text1 = ""
+	local List = {}
+	while #Text > 0 do
+		table.insert(List, Text:sub(1, 204798))
+		Text = Text:sub(204799)
 	end
-	for i, v in ipairs(t) do
-		if p6 then
-			print(("[http] Encoding B64 chunk %s/%s"):format(i, #t))
+	for i, value in ipairs(List) do
+		if p2 then
+			print(("[http] Encoding B64 chunk %s/%s"):format(i, #List))
 		end
-		var5 ..= enc(v)
+		Text1 ..= enc(value)
 		wait()
 	end
-	return var5
+	return Text1
 end
 
 return { encode = safe_enc, decode = dec }

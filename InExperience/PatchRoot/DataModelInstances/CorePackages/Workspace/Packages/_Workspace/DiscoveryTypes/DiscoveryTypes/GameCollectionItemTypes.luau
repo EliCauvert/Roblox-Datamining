@@ -1,7 +1,7 @@
-﻿local parent = script:FindFirstAncestor("DiscoveryTypes").Parent
-local _ = require(parent.React)
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagLuaAppEnableHomepageOneByTwoTile = sharedFlagsModule.FFlagLuaAppEnableHomepageOneByTwoTile
+﻿local Parent = script:FindFirstAncestor("DiscoveryTypes").Parent
+local _ = require(Parent.React)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagLuaAppEnableHomepageOneByTwoTile = SharedFlagsModule.FFlagLuaAppEnableHomepageOneByTwoTile
 
 return {
 	GameCollectionItemType = {
@@ -10,16 +10,16 @@ return {
 		EmphasisTile = "EmphasisTile",
 		TwoByOneTile = "TwoByOneTile",
 		Blank = "Blank",
-		OneByTwoTile = if fFlagLuaAppEnableHomepageOneByTwoTile then "OneByTwoTile" else nil
+		OneByTwoTile = if FFlagLuaAppEnableHomepageOneByTwoTile then "OneByTwoTile" else nil
 	},
-	AlignmentType = if sharedFlagsModule.FFlagLuaAppVideoAutoplayOneByTwoTileDoubleAnchor then {
+	AlignmentType = {
 		RightPin = "RightPin",
 		LeftPin = "LeftPin",
 		Default = "Default"
-	} else nil,
-	SpanForItemType = if sharedFlagsModule.FFlagLuaAppEnableNxMRoduxApportioning then {
+	},
+	SpanForItemType = if SharedFlagsModule.FFlagLuaAppEnableNxMRoduxApportioning then {
 		EmphasisTile = { colSpan = 2, rowSpan = 2 },
 		TwoByOneTile = { colSpan = 2, rowSpan = 1 },
-		OneByTwoTile = if fFlagLuaAppEnableHomepageOneByTwoTile then { colSpan = 1, rowSpan = 2 } else nil
+		OneByTwoTile = if FFlagLuaAppEnableHomepageOneByTwoTile then { colSpan = 1, rowSpan = 2 } else nil
 	} else nil
 }

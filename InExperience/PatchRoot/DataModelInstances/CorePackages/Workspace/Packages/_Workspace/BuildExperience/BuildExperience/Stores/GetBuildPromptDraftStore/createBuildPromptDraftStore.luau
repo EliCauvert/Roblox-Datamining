@@ -1,37 +1,36 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local signalsModule = require(buildExperience.Parent.Signals)
-local _ = require(buildExperience.Chat.chatTypes)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local SignalsModule = require(BuildExperience.Parent.Signals)
+local _ = require(BuildExperience.Chat.chatTypes)
 
-local function _(p1, p2, p3)
-	return p1.universeId == p2 and (if p1.sessionId ~= nil then p1.sessionId == p3 else true)
+local function _(p1, UniverseId, SessionId): boolean --[[ Line: 22 | Named "targetsMatch" ]]
+	return p1.universeId == UniverseId and (p1.sessionId == nil or p1.sessionId == SessionId)
 end
 
-return function()
-	-- upvalues: signalsModule (ref)
-	local var1, var2 = signalsModule.createSignal(nil)
+return function() --[[ Line: 29 | Named "createBuildPromptDraftStore" ]]
+	-- upvalues: SignalsModule (copy)
+	local Signal, Signal2 = SignalsModule.createSignal(nil)
 	
 	return {
-		getPendingDraft = var1,
-		queueDraft = function(p1)
-			-- upvalues: var2 (ref)
-			var2(p1)
+		getPendingDraft = Signal,
+		queueDraft = function(p1) --[[ Line: 33 ]]
+			-- upvalues: Signal2 (copy)
+			Signal2(p1)
 		end,
-		consumeDraft = function(p1, p2)
-			-- upvalues: var1 (ref), var2 (ref)
-			local var3 = var1()
+		consumeDraft = function(UniverseId, SessionId) --[[ Line: 37 ]]
+			-- upvalues: Signal (copy), Signal2 (copy)
+			local SignalResult = Signal()
 			
-			if var3 ~= nil then
-				if var3.universeId == p1 and (if var3.sessionId ~= nil then var3.sessionId == p2 else true) then
-					var2(nil)
-					
-					return var3.text
-				end
+			if SignalResult == nil or (SignalResult.universeId ~= UniverseId or SignalResult.sessionId ~= nil and SignalResult.sessionId ~= SessionId) then
+				return nil
+			else
+				Signal2(nil)
+				
+				return SignalResult.text
 			end
-			return nil
 		end,
-		reset = function()
-			-- upvalues: var2 (ref)
-			var2(nil)
+		reset = function() --[[ Line: 46 ]]
+			-- upvalues: Signal2 (copy)
+			Signal2(nil)
 		end
 	}
 end

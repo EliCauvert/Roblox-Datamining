@@ -1,257 +1,260 @@
-﻿local parent = script:FindFirstAncestor("FriendsChat").Parent
-local cryoModule = require(parent.Cryo)
-local signalsModule = require(parent.Signals)
-local userProfileStore = require(parent.UserProfiles).Stores.UserProfileStore
-local getConversationMessageStoreModule = require(parent.AppChat.GetConversationMessageStore)
-local getConversationStoreModule = require(parent.AppChat.GetConversationStore)
-local conversationModule = require(parent.AppChat.Conversation)
-local classifyMessageModule = require(script.Parent.classifyMessage)
-local buildRowDisplayModule = require(script.Parent.buildRowDisplay)
-local getLocalUserIdModule = require(script.Parent.Parent.Parent.Utils.getLocalUserId)
+﻿local Parent = script:FindFirstAncestor("FriendsChat").Parent
+local CryoModule = require(Parent.Cryo)
+local SignalsModule = require(Parent.Signals)
+local UserProfileStore = require(Parent.UserProfiles).Stores.UserProfileStore
+local GetConversationMessageStoreModule = require(Parent.AppChat.GetConversationMessageStore)
+local GetConversationStoreModule = require(Parent.AppChat.GetConversationStore)
+local ConversationModule = require(Parent.AppChat.Conversation)
+local ClassifyMessageModule = require(script.Parent.classifyMessage)
+local BuildRowDisplayModule = require(script.Parent.buildRowDisplay)
+local GetLocalUserIdModule = require(script.Parent.Parent.Parent.Utils.getLocalUserId)
 local t = {}
 
-local function _(p1)
-	local var1 = if p1 then p1.created_at else nil
+local function _(p1) --[[ Line: 59 | Named "messageSortTime" ]]
+	local CreatedAt = if p1 then p1.created_at else nil
 	
-	if var1 == nil then
+	if CreatedAt == nil then
 		return 1e999
 	end
-	local dateTime = DateTime.fromIsoDate(var1)
+	local _DateTime = DateTime.fromIsoDate(CreatedAt)
 	
-	if dateTime then
-		return dateTime.UnixTimestampMillis
+	if _DateTime then
+		return _DateTime.UnixTimestampMillis
+	else
+		local Number: number? = tonumber(CreatedAt)
+		
+		return if Number then Number * 1000 else 1e999
 	end
-	local var2 = tonumber(var1)
-	
-	return if var2 then var2 * 1000 else 1e999
 end
 
-local function resolveProfileNameInfo(p1, p2)
+local function resolveProfileNameInfo(p1, p2) --[[ Line: 78 ]]
 	if p1 == nil or p1.names == nil then
 		return { name = nil, username = nil }
-	end
-	local getCombinedName = p1.names.getCombinedName
-	local getDisplayName = p1.names.getDisplayName
-	local getUsername = p1.names.getUsername
-	local var1 = if getUsername then getUsername(p2) else nil
-	local var2 = if getCombinedName then getCombinedName(p2) else nil
-	local var3 = if getDisplayName then getDisplayName(p2) else nil
-	
-	return {
-		name = if var2 ~= nil and var2 ~= "" then if var3 == nil or var3 == "" then var1 else var3 else var2,
-		username = var1
-	}
-end
-
-local function resolveNameInfos(p1, p2)
-	-- upvalues: userProfileStore (ref), resolveProfileNameInfo (ref)
-	local t = {}
-	local t_1 = {}
-	local t_2 = {}
-	
-	for i, v in p1 do
-		if not t_1[v] then
-			t_1[v] = true
-			table.insert(t, v)
-			table.insert(t_2, tostring(v))
-		end
-	end
-	local var1 = userProfileStore.get().fetchNamesByUserIds(t_2)(p2)
-	local var2 = if var1 and var1.data then var1.data else {}
-	local t_3 = {}
-	
-	for i_1, v_1 in t do
-		t_3[v_1] = resolveProfileNameInfo(var2[i_1], p2)
-	end
-	return t_3
-end
-
-return function(p3, p4)
-	-- upvalues: signalsModule (ref), getConversationStoreModule (ref), conversationModule (ref), resolveNameInfos (ref), getLocalUserIdModule (ref), getConversationMessageStoreModule (ref), t (ref), classifyMessageModule (ref), cryoModule (ref), buildRowDisplayModule (ref)
-	local t_1 = {}
-	local t_2 = {}
-	local var3 = signalsModule.createComputed(function(p5)
-		-- upvalues: p4 (ref), getConversationStoreModule (copy), conversationModule (copy)
-		if p4 == nil then
-			return false
-		end
-		local conversation = getConversationStoreModule(p5).getConversation(p4, p5)
+	else
+		local GetCombinedNameFunction = p1.names.getCombinedName
+		local GetDisplayNameFunction = p1.names.getDisplayName
+		local GetUsernameFunction = p1.names.getUsername
+		local Username = if GetUsernameFunction then GetUsernameFunction(p2) else nil
+		local CombinedName = if GetCombinedNameFunction then GetCombinedNameFunction(p2) else nil
+		local DisplayName = if GetDisplayNameFunction then GetDisplayNameFunction(p2) else nil
 		
-		return conversation ~= nil and conversation.conversationType == conversationModule.Type.MULTI_USER_CONVERSATION
+		return {
+			name = if CombinedName == nil or CombinedName == "" then if DisplayName == nil or DisplayName == "" then Username else DisplayName else CombinedName,
+			username = Username
+		}
+	end
+end
+
+local function resolveNameInfos(List, p1) --[[ Line: 106 ]]
+	-- upvalues: UserProfileStore (copy), resolveProfileNameInfo (copy)
+	local List1 = {}
+	local t = {}
+	local List2 = {}
+	
+	for _, value in List do
+		if not t[value] then
+			t[value] = true
+			table.insert(List1, value)
+			table.insert(List2, (tostring(value)))
+		end
+	end
+	local v1 = UserProfileStore.get().fetchNamesByUserIds(List2)(p1)
+	local Data = if v1 and v1.data then v1.data else {}
+	local t1 = {}
+	
+	for i, value1 in List1 do
+		t1[value1] = resolveProfileNameInfo(Data[i], p1)
+	end
+	return t1
+end
+
+return function(Callback, p2) --[[ Line: 128 | Named "createMessageDisplayStore" ]]
+	-- upvalues: SignalsModule (copy), GetConversationStoreModule (copy), ConversationModule (copy), resolveNameInfos (copy), GetLocalUserIdModule (copy), GetConversationMessageStoreModule (copy), t (copy), ClassifyMessageModule (copy), CryoModule (copy), BuildRowDisplayModule (copy)
+	local t2 = {}
+	local t3 = {}
+	local Computed = SignalsModule.createComputed(function(p3): boolean --[[ Line: 135 ]]
+		-- upvalues: p2 (copy), GetConversationStoreModule (upval), ConversationModule (upval)
+		if p2 == nil then
+			return false
+		else
+			local Conversation = GetConversationStoreModule(p3).getConversation(p2, p3)
+			
+			return Conversation ~= nil and Conversation.conversationType == ConversationModule.Type.MULTI_USER_CONVERSATION
+		end
 	end)
 	
-	local function resolveForRowSpec(p5, p6)
-		-- upvalues: resolveNameInfos (copy), getLocalUserIdModule (copy), var3 (ref)
-		return if p5.kind == "userText" or p5.kind == "hiddenUser" then {
-			namesByUserId = resolveNameInfos({ p5.senderUserId }, p6)
-		} elseif p5.kind == "replyHeader" then {
-			namesByUserId = resolveNameInfos({ p5.senderUserId, p5.repliedToUserId }, p6),
-			localUserId = getLocalUserIdModule(),
-			isGroup = var3(p6)
+	local function resolveForRowSpec(p3, p4) --[[ Line: 144 ]]
+		-- upvalues: resolveNameInfos (upval), GetLocalUserIdModule (upval), Computed (copy)
+		return if p3.kind == "userText" or p3.kind == "hiddenUser" then {
+			namesByUserId = resolveNameInfos({ p3.senderUserId }, p4)
+		} elseif p3.kind == "replyHeader" then {
+			namesByUserId = resolveNameInfos({ p3.senderUserId, p3.repliedToUserId }, p4),
+			localUserId = GetLocalUserIdModule(),
+			isGroup = Computed(p4)
 		} else {}
 	end
 	
-	local function _(p5)
-		-- upvalues: t_1 (ref), signalsModule (copy), getConversationMessageStoreModule (copy), t (copy), classifyMessageModule (copy)
-		local var4 = t_1[p5]
+	local function _(Key) --[[ Line: 158 | Named "getMessageRowSpecs" ]]
+		-- upvalues: t2 (copy), SignalsModule (upval), GetConversationMessageStoreModule (upval), t (upval), ClassifyMessageModule (upval)
+		local Entry = t2[Key]
 		
-		if var4 == nil then
-			var4 = signalsModule.createComputed(function(p6)
-				-- upvalues: getConversationMessageStoreModule (copy), p5 (ref), t (copy), classifyMessageModule (copy)
-				local message = getConversationMessageStoreModule(p6).getMessage(p5, p6)
+		if Entry == nil then
+			Entry = SignalsModule.createComputed(function(p3) --[[ Line: 161 ]]
+				-- upvalues: GetConversationMessageStoreModule (upval), Key (copy), t (upval), ClassifyMessageModule (upval)
+				local Message = GetConversationMessageStoreModule(p3).getMessage(Key, p3)
 				
-				return if message == nil then t else classifyMessageModule(message)
+				return if Message == nil then t else ClassifyMessageModule(Message)
 			end)
-			t_1[p5] = var4
+			t2[Key] = Entry
 		end
-		return var4
+		return Entry
 	end
 	
-	local _ = function(p5, p6)
-		-- upvalues: t_2 (ref), getConversationMessageStoreModule (copy)
-		local var4 = t_2[p5]
+	local _ = function(Key, p3) --[[ Line: 184 | Named "getFrozenMessageSortTime" ]]
+		-- upvalues: t3 (copy), GetConversationMessageStoreModule (upval)
+		local Entry = t3[Key]
 		
-		if var4 ~= nil then
-			return var4
+		if Entry ~= nil then
+			return Entry
 		end
-		local message = getConversationMessageStoreModule(p6).getMessage(p5, p6)
+		local Message = GetConversationMessageStoreModule(p3).getMessage(Key, p3)
 		
-		if message == nil then
+		if Message == nil then
 			return 1e999
 		end
-		local var5
-		local var6 = if message then message.created_at else nil
+		local CreatedAt = if Message then Message.created_at else nil
+		local UnixTimestampMillis = nil
 		
-		if var6 == nil then
-			var5 = 1e999
+		if CreatedAt == nil then
+			UnixTimestampMillis = 1e999
 		else
-			local dateTime = DateTime.fromIsoDate(var6)
+			local _DateTime = DateTime.fromIsoDate(CreatedAt)
 			
-			if dateTime then
-				var5 = dateTime.UnixTimestampMillis
+			if _DateTime then
+				UnixTimestampMillis = _DateTime.UnixTimestampMillis
 			else
-				local var7 = tonumber(var6)
-				var5 = if var7 then var7 * 1000 else 1e999
+				local Number: number? = tonumber(CreatedAt)
+				UnixTimestampMillis = if Number then Number * 1000 else 1e999
 			end
 		end
-		t_2[p5] = var5
+		t3[Key] = UnixTimestampMillis
 		
-		return var5
+		return UnixTimestampMillis
 	end
 	
-	local var4 = signalsModule.createComputed(function(p5)
-		-- upvalues: p3 (ref), t_1 (ref), signalsModule (copy), getConversationMessageStoreModule (copy), t (copy), classifyMessageModule (copy), t_2 (ref)
-		local var5 = p3(p5)
-		local t_3 = {}
-		local var6 = 0
+	local Computed1 = SignalsModule.createComputed(function(p3) --[[ Line: 201 ]]
+		-- upvalues: Callback (copy), t2 (copy), SignalsModule (upval), GetConversationMessageStoreModule (upval), t (upval), ClassifyMessageModule (upval), t3 (copy)
+		local List = {}
+		local Total = 0
 		
-		for i, v in var5 do
-			local var7 = t_1[v]
+		for _, SourceId in Callback(p3) do
+			local Entry = t2[SourceId]
 			
-			if var7 == nil then
-				var7 = signalsModule.createComputed(function(p6)
-					-- upvalues: getConversationMessageStoreModule (copy), v (ref), t (copy), classifyMessageModule (copy)
-					local message = getConversationMessageStoreModule(p6).getMessage(v, p6)
+			if Entry == nil then
+				Entry = SignalsModule.createComputed(function(p4) --[[ Line: 161 ]]
+					-- upvalues: GetConversationMessageStoreModule (upval), SourceId (copy), t (upval), ClassifyMessageModule (upval)
+					local Message = GetConversationMessageStoreModule(p4).getMessage(SourceId, p4)
 					
-					return if message == nil then t else classifyMessageModule(message)
+					return if Message == nil then t else ClassifyMessageModule(Message)
 				end)
-				t_1[v] = var7
+				t2[SourceId] = Entry
 			end
-			local count = #var7(p5)
+			local Count = #Entry(p3)
 			
-			if count ~= 0 then
-				if var6 + count > 50 then break end
-				local var8
-				var6 += count
-				local t_4 = { sourceId = v, count = count }
-				local var9 = t_2[v]
+			if Count ~= 0 then
+				if Total + Count > 50 then break end
+				Total += Count
+				local config = { sourceId = SourceId, count = Count }
+				local Entry1 = t3[SourceId]
+				local SortTime = nil
 				
-				if var9 == nil then
-					local message = getConversationMessageStoreModule(p5).getMessage(v, p5)
+				if Entry1 == nil then
+					local Message = GetConversationMessageStoreModule(p3).getMessage(SourceId, p3)
 					
-					if message == nil then
-						var8 = 1e999
+					if Message == nil then
+						SortTime = 1e999
 					else
-						local var10
-						local var11 = if message then message.created_at else nil
+						local CreatedAt = if Message then Message.created_at else nil
+						local UnixTimestampMillis = nil
 						
-						if var11 == nil then
-							var10 = 1e999
+						if CreatedAt == nil then
+							UnixTimestampMillis = 1e999
 						else
-							local dateTime = DateTime.fromIsoDate(var11)
+							local _DateTime = DateTime.fromIsoDate(CreatedAt)
 							
-							if dateTime then
-								var10 = dateTime.UnixTimestampMillis
+							if _DateTime then
+								UnixTimestampMillis = _DateTime.UnixTimestampMillis
 							else
-								local var12 = tonumber(var11)
-								var10 = if var12 then var12 * 1000 else 1e999
+								local Number: number? = tonumber(CreatedAt)
+								UnixTimestampMillis = if Number then Number * 1000 else 1e999
 							end
 						end
-						t_2[v] = var10
-						var8 = var10
+						t3[SourceId] = UnixTimestampMillis
+						SortTime = UnixTimestampMillis
 					end
 				else
-					var8 = var9
+					SortTime = Entry1
 				end
-				t_4.sortTime = var8
-				table.insert(t_3, t_4)
+				config.sortTime = SortTime
+				table.insert(List, config)
 			end
 		end
-		table.sort(t_3, function(p6, p7)
-			return if p6.sortTime == p7.sortTime then p6.sourceId < p7.sourceId else p6.sortTime < p7.sortTime
+		table.sort(List, function(A, B): boolean --[[ Line: 227 ]]
+			return if A.sortTime == B.sortTime then A.sourceId < B.sourceId else A.sortTime < B.sortTime
 		end)
-		local t_4 = {}
-		local t_5 = {}
+		local IdList = {}
+		local IdToHandle = {}
 		
-		for i_1, v_1 in t_3 do
-			for i_2 = 1, v_1.count do
-				local sourceId = `{v_1.sourceId}_{i_2}`
-				table.insert(t_4, sourceId)
-				t_5[sourceId] = { messageId = v_1.sourceId, rowIndex = i_2 }
+		for _, value in List do
+			for i = 1, value.count do
+				local Text: string = `{value.sourceId}_{i}`
+				table.insert(IdList, Text)
+				IdToHandle[Text] = { messageId = value.sourceId, rowIndex = i }
 			end
 		end
-		return { idList = t_4, idToHandle = t_5 }
+		return { idList = IdList, idToHandle = IdToHandle }
 	end)
 	
 	return {
-		getDisplayIds = signalsModule.createComputed(function(p6)
-			-- upvalues: var4 (ref)
-			return var4(p6).idList
-		end, cryoModule.List.equals),
-		getDisplayFromId = function(p6, p7, p8)
-			-- upvalues: var4 (ref), t_1 (ref), signalsModule (copy), getConversationMessageStoreModule (copy), t (copy), classifyMessageModule (copy), buildRowDisplayModule (copy), resolveForRowSpec (ref)
-			if p6 == nil then
+		getDisplayIds = SignalsModule.createComputed(function(p4) --[[ Line: 247 ]]
+			-- upvalues: Computed1 (copy)
+			return Computed1(p4).idList
+		end, CryoModule.List.equals),
+		getDisplayFromId = function(p4, p5, p6) --[[ Line: 255 ]]
+			-- upvalues: Computed1 (copy), t2 (copy), SignalsModule (upval), GetConversationMessageStoreModule (upval), t (upval), ClassifyMessageModule (upval), BuildRowDisplayModule (upval), resolveForRowSpec (copy)
+			if p4 == nil then
 				return nil
 			end
-			local var13 = var4(false).idToHandle[p6]
+			local IdToHandleEntry = Computed1(false).idToHandle[p4]
 			
-			if var13 == nil then
+			if IdToHandleEntry == nil then
 				return nil
 			end
-			local messageId = var13.messageId
-			local var14 = t_1[messageId]
+			local MessageId = IdToHandleEntry.messageId
+			local Entry = t2[MessageId]
 			
-			if var14 == nil then
-				var14 = signalsModule.createComputed(function(p9)
-					-- upvalues: getConversationMessageStoreModule (copy), messageId (ref), t (copy), classifyMessageModule (copy)
-					local message = getConversationMessageStoreModule(p9).getMessage(messageId, p9)
+			if Entry == nil then
+				Entry = SignalsModule.createComputed(function(p7) --[[ Line: 161 ]]
+					-- upvalues: GetConversationMessageStoreModule (upval), MessageId (copy), t (upval), ClassifyMessageModule (upval)
+					local Message = GetConversationMessageStoreModule(p7).getMessage(MessageId, p7)
 					
-					return if message == nil then t else classifyMessageModule(message)
+					return if Message == nil then t else ClassifyMessageModule(Message)
 				end)
-				t_1[messageId] = var14
+				t2[MessageId] = Entry
 			end
-			local rowIndex = var14(p7)[var13.rowIndex]
+			local EntryResultEntry = Entry(p5)[IdToHandleEntry.rowIndex]
 			
-			return if rowIndex == nil then nil else buildRowDisplayModule(rowIndex, resolveForRowSpec(rowIndex, p7), p8 or {})
+			return if EntryResultEntry == nil then nil else BuildRowDisplayModule(EntryResultEntry, resolveForRowSpec(EntryResultEntry, p5), p6 or {})
 		end,
-		getMessageIdFromDisplayId = function(p6)
-			-- upvalues: var4 (ref)
-			if p6 == nil then
+		getMessageIdFromDisplayId = function(p4) --[[ Line: 274 ]]
+			-- upvalues: Computed1 (copy)
+			if p4 == nil then
 				return nil
+			else
+				local IdToHandleEntry = Computed1(false).idToHandle[p4]
+				
+				return if IdToHandleEntry then IdToHandleEntry.messageId else nil
 			end
-			local var13 = var4(false).idToHandle[p6]
-			
-			return if var13 then var13.messageId else nil
 		end
 	}
 end

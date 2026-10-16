@@ -1,43 +1,46 @@
-﻿local roduxPresence = script:FindFirstAncestor("RoduxPresence")
-local cryoModule = require(roduxPresence.Parent.Cryo)
-local getDeepValueModule = require(roduxPresence.getDeepValue)
-local receivedUserPresenceModule = require(roduxPresence.Actions.ReceivedUserPresence)
+﻿local RoduxPresence = script:FindFirstAncestor("RoduxPresence")
+local CryoModule = require(RoduxPresence.Parent.Cryo)
+local GetDeepValueModule = require(RoduxPresence.getDeepValue)
+local ReceivedUserPresenceModule = require(RoduxPresence.Actions.ReceivedUserPresence)
 
-return function(p1, p2, p3)
-	-- upvalues: getDeepValueModule (ref), cryoModule (ref), receivedUserPresenceModule (ref)
-	local presenceNetworking = p3.presenceNetworking
+return function(p1, p2, p3) --[[ Line: 10 ]]
+	-- upvalues: GetDeepValueModule (copy), CryoModule (copy), ReceivedUserPresenceModule (copy)
+	local PresenceNetworking = p3.presenceNetworking
 	
-	local function handlePresenceModel(p4, p5)
-		-- upvalues: p1 (ref), getDeepValueModule (copy), p2 (ref), cryoModule (copy)
-		local var1 = p4[p1]
-		local var2 = tostring(p5.userId)
-		local var3 = getDeepValueModule(p4, string.format("byUserId.%s.%s", var2, p2))
+	local function handlePresenceModel(p4, Payload) --[[ Line: 13 ]]
+		-- upvalues: p1 (copy), GetDeepValueModule (upval), p2 (copy), CryoModule (upval)
+		local JoinResult = p4[p1]
+		local Text = tostring(Payload.userId)
+		local DeepValueModule = GetDeepValueModule(p4, string.format("byUserId.%s.%s", Text, p2))
 		
-		if var3 and var1[var3] then
-			var3 = tostring(var3)
-			var1 = cryoModule.Dictionary.join(var1, { [var3] = cryoModule.List.removeValue(var1[var3], var2) })
+		if DeepValueModule and JoinResult[DeepValueModule] then
+			local Text1 = tostring(DeepValueModule)
+			JoinResult = CryoModule.Dictionary.join(JoinResult, {
+				[Text1] = CryoModule.List.removeValue(JoinResult[Text1], Text)
+			})
 		end
-		local var4 = var1[p5[p2]]
+		local List = JoinResult[Payload[p2]]
 		
-		return if var4 and table.find(var4, var2) then var1 else cryoModule.Dictionary.join(var1, {
-			[tostring(p5[p2])] = cryoModule.List.join(var4 or {}, { var2 })
+		return if List and table.find(List, Text) then JoinResult else CryoModule.Dictionary.join(JoinResult, {
+			[tostring(Payload[p2])] = CryoModule.List.join(List or {}, { Text })
 		})
 	end
 	
-	return function(p4, p5)
-		-- upvalues: receivedUserPresenceModule (copy), handlePresenceModel (ref), presenceNetworking (ref), p1 (ref)
+	return function(p4, p5) --[[ Line: 36 ]]
+		-- upvalues: ReceivedUserPresenceModule (upval), handlePresenceModel (copy), PresenceNetworking (copy), p1 (copy)
 		assert(p4, "state should not be nil")
 		
-		if p5.type == receivedUserPresenceModule.name then
+		if p5.type == ReceivedUserPresenceModule.name then
 			return handlePresenceModel(p4, p5.payload)
-		elseif p5.type ~= presenceNetworking.GetPresencesFromUserIds.Succeeded.name then
+		end
+		if p5.type ~= PresenceNetworking.GetPresencesFromUserIds.Succeeded.name then
 			return p4[p1]
 		end
-		local var1 = p4[p1]
+		local v1 = p4[p1]
 		
-		for i, v in ipairs(p5.responseBody.userPresences) do
-			var1 = handlePresenceModel(p4, v)
+		for _, userPresence in ipairs(p5.responseBody.userPresences) do
+			v1 = handlePresenceModel(p4, userPresence)
 		end
-		return var1
+		return v1
 	end
 end

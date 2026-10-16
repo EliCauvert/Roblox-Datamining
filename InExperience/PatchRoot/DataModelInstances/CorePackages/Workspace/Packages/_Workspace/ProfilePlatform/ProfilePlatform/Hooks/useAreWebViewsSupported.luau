@@ -1,8 +1,8 @@
-﻿local useAppPolicy = require(script:FindFirstAncestor("ProfilePlatform").Parent.UniversalAppPolicy).useAppPolicy
+﻿local UseAppPolicyFunction = require(script:FindFirstAncestor("ProfilePlatform").Parent.UniversalAppPolicy).useAppPolicy
 
-return function()
-	-- upvalues: useAppPolicy (ref)
-	return useAppPolicy(function(p1)
+return function() --[[ Line: 6 ]]
+	-- upvalues: UseAppPolicyFunction (copy)
+	return UseAppPolicyFunction(function(p1) --[[ Line: 7 ]]
 		return p1.getWebViewSupport()
 	end)
 end

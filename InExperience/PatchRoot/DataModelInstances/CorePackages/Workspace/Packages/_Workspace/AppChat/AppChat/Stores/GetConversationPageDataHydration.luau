@@ -1,80 +1,82 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local dataHydrationModule = require(parent.DataHydration)
-local appChatNetworkingModule = require(parent.AppChatNetworking)
-local name = require(appChat.Logger):new(script.Name)
-local ingestConversationListPageModule = require(appChat.Stores.Ingestion.ingestConversationListPage)
-local getConversationStoreModule = require(appChat.Stores.GetConversationStore)
-local createDataCache = dataHydrationModule.createDataCache
-local createDataResolver = dataHydrationModule.createDataResolver
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local DataHydrationModule = require(Parent.DataHydration)
+local AppChatNetworkingModule = require(Parent.AppChatNetworking)
+local NewResult = require(AppChat.Logger):new(script.Name)
+local IngestConversationListPageModule = require(AppChat.Stores.Ingestion.ingestConversationListPage)
+local GetConversationStoreModule = require(AppChat.Stores.GetConversationStore)
+local CreateDataCacheFunction = DataHydrationModule.createDataCache
+local CreateDataResolverFunction = DataHydrationModule.createDataResolver
 
-local function _(p1)
+local function _(p1) --[[ Line: 28 | Named "getPageId" ]]
 	return if p1 == nil or p1 == "" then "__initial__" else p1
 end
 
-local _ = function(p1)
+local _ = function(p1) --[[ Line: 32 | Named "getCursorFromPageId" ]]
 	return if p1 == "__initial__" then nil else p1
 end
 
-local _ = function(p1)
-	return if p1 ~= nil then p1 == "" else true
+local _ = function(p1): boolean --[[ Line: 36 | Named "isInitialCursor" ]]
+	return p1 == nil or p1 == ""
 end
 
-return (function()
-	-- upvalues: createDataCache (ref), getConversationStoreModule (ref), createDataResolver (ref), name (ref), ingestConversationListPageModule (ref), appChatNetworkingModule (ref)
-	local var1 = getConversationStoreModule(false)
-	local var2 = createDataResolver({
+return ((function() --[[ Line: 40 | Named "createConversationPageDataHydrationStore" ]]
+	-- upvalues: CreateDataCacheFunction (copy), GetConversationStoreModule (copy), CreateDataResolverFunction (copy), NewResult (copy), IngestConversationListPageModule (copy), AppChatNetworkingModule (copy)
+	local DataCache = CreateDataCacheFunction(60)
+	local ConversationStoreModule = GetConversationStoreModule(false)
+	local DataResolver = CreateDataResolverFunction({
 		supportsMultiGet = false,
 		queueProcessDelaySec = 0,
 		replaceItems = true,
-		cache = createDataCache(60),
-		logError = function(p1)
-			-- upvalues: name (copy), ingestConversationListPageModule (copy), var1 (ref)
-			name:warning(`Failed to fetch AppChat conversation list page: {tostring(p1)}`)
-			ingestConversationListPageModule.ingestFailure(var1, p1)
+		cache = DataCache,
+		logError = function(p1) --[[ Line: 48 ]]
+			-- upvalues: NewResult (upval), IngestConversationListPageModule (upval), ConversationStoreModule (copy)
+			NewResult:warning(`Failed to fetch AppChat conversation list page: {tostring(p1)}`)
+			IngestConversationListPageModule.ingestFailure(ConversationStoreModule, p1)
 		end,
-		fetchFn = function(p1)
-			-- upvalues: appChatNetworkingModule (copy), ingestConversationListPageModule (copy), var1 (ref)
-			local var3 = if p1 == "__initial__" then nil else p1
+		fetchFn = function(p1) --[[ Line: 52 ]]
+			-- upvalues: AppChatNetworkingModule (upval), IngestConversationListPageModule (upval), ConversationStoreModule (copy)
+			local Cursor = if p1 == "__initial__" then nil else p1
 			
-			return appChatNetworkingModule.http.GetUserConversations(nil, var3):andThen(function(p2)
-				-- upvalues: ingestConversationListPageModule (copy), var1 (copy), var3 (ref)
-				local var4 = ingestConversationListPageModule.ingestSuccess(var1, var3, p2)
+			return AppChatNetworkingModule.http.GetUserConversations(nil, Cursor):andThen(function(Result) --[[ Line: 55 ]]
+				-- upvalues: IngestConversationListPageModule (upval), ConversationStoreModule (upval), Cursor (copy)
+				local IngestSuccessResult = IngestConversationListPageModule.ingestSuccess(ConversationStoreModule, Cursor, Result)
 				
 				return {
-					cursor = var3,
-					nextCursor = var4.nextCursor,
-					conversationCount = var4.conversationCount
+					cursor = Cursor,
+					nextCursor = IngestSuccessResult.nextCursor,
+					conversationCount = IngestSuccessResult.conversationCount
 				}
 			end)
 		end
 	})
 	
-	local function fetchPage(p1)
-		-- upvalues: var1 (ref), var2 (ref), ingestConversationListPageModule (copy)
-		local var3 = if p1 == nil or p1 == "" then "__initial__" else p1
-		local listStatus = var1.getListStatus(false)
+	local function fetchPage(p1) --[[ Line: 67 ]]
+		-- upvalues: ConversationStoreModule (copy), DataResolver (copy), IngestConversationListPageModule (upval)
+		local Initial = if p1 == nil or p1 == "" then "__initial__" else p1
+		local ListStatus = ConversationStoreModule.getListStatus(false)
 		
-		if listStatus.isFetchingConversations == true then
-			return var2.getCachedItem(var3)
-		elseif (if p1 ~= nil then p1 == "" else true) or listStatus.isExhausted ~= true then
-			ingestConversationListPageModule.beginFetch(var1, p1)
+		if ListStatus.isFetchingConversations == true then
+			return DataResolver.getCachedItem(Initial)
+		elseif p1 == nil or p1 == "" or ListStatus.isExhausted ~= true then
+			IngestConversationListPageModule.beginFetch(ConversationStoreModule, p1)
 			
-			return var2.fetchItem(var3)
+			return DataResolver.fetchItem(Initial)
+		else
+			return DataResolver.getCachedItem(Initial)
 		end
-		return var2.getCachedItem(var3)
 	end
 	
-	var1.addClearListener(function()
-		-- upvalues: var2 (ref)
-		var2.clear()
+	ConversationStoreModule.addClearListener(function() --[[ Line: 83 ]]
+		-- upvalues: DataResolver (copy)
+		DataResolver.clear()
 	end)
 	
 	return {
 		fetchPage = fetchPage,
-		clear = function()
-			-- upvalues: var2 (ref)
-			var2.clear()
+		clear = function() --[[ Line: 89 ]]
+			-- upvalues: DataResolver (copy)
+			DataResolver.clear()
 		end
 	}
-end)()
+end)())

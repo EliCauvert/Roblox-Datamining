@@ -1,41 +1,43 @@
-﻿local loadSlicesModule = require(script.Parent.LoadSlices)
-local userInputService = game:GetService("UserInputService")
-local experienceStateRecordingService = game:GetService("ExperienceStateRecordingService")
-local mouse = game:GetService("Players").LocalPlayer:GetMouse()
-local t = {
-	jumpTo = function(p1)
-		-- upvalues: mouse (ref), loadSlicesModule (ref), experienceStateRecordingService (ref)
-		local var1 = computePercentX(p1.ScrubberLoadProgress.AbsolutePosition, p1.ScrubberLoadProgress.AbsoluteSize, mouse.X)
+﻿local LoadSlicesModule = require(script.Parent.LoadSlices)
+local UserInputService = game:GetService("UserInputService")
+local ExperienceStateRecordingService = game:GetService("ExperienceStateRecordingService")
+local Mouse = game:GetService("Players").LocalPlayer:GetMouse()
+
+function computePercentX(p1, p2, p3) --[[ Line: 13 ]]
+	local X = p1.X
+	
+	return (p3 - X) / (X + p2.X - X)
+end
+
+local ControlScrubberModule = {
+	jumpTo = function(p1) --[[ Line: 19 ]]
+		-- upvalues: Mouse (copy), LoadSlicesModule (copy), ExperienceStateRecordingService (copy)
+		local PercentX: number = computePercentX(p1.ScrubberLoadProgress.AbsolutePosition, p1.ScrubberLoadProgress.AbsoluteSize, Mouse.X)
 		
-		if var1 < 0 or var1 > 1 then
-			loadSlicesModule.loadNoncontiguousSlice(p1, computePercentX(p1.ScrubberButton.AbsolutePosition, p1.ScrubberButton.AbsoluteSize, mouse.X))
+		if PercentX < 0 or PercentX > 1 then
+			LoadSlicesModule.loadNoncontiguousSlice(p1, (computePercentX(p1.ScrubberButton.AbsolutePosition, p1.ScrubberButton.AbsoluteSize, Mouse.X)))
 			
 			return
+		else
+			ExperienceStateRecordingService:SetPlaybackPercentage(PercentX)
 		end
-		experienceStateRecordingService:SetPlaybackPercentage(var1)
 	end
 }
 
-function computePercentX(p1, p2, p3)
-	local x = p1.X
-	
-	return (p3 - x) / (x + p2.X - x)
-end
-
-function t.setupControl(value)
-	-- upvalues: userInputService (ref), t (ref)
-	value.ScrubberButton.MouseMoved:Connect(function()
-		-- upvalues: userInputService (copy), t (copy), value (ref)
-		if userInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) then
-			t.jumpTo(value)
+function ControlScrubberModule.setupControl(p1) --[[ Line: 39 ]]
+	-- upvalues: UserInputService (copy), ControlScrubberModule (copy)
+	p1.ScrubberButton.MouseMoved:Connect(function() --[[ Line: 40 ]]
+		-- upvalues: UserInputService (upval), ControlScrubberModule (upval), p1 (copy)
+		if UserInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) then
+			ControlScrubberModule.jumpTo(p1)
 			
 			return
 		end
 	end)
-	value.ScrubberButton.MouseButton1Down:Connect(function()
-		-- upvalues: t (copy), value (ref)
-		t.jumpTo(value)
+	p1.ScrubberButton.MouseButton1Down:Connect(function() --[[ Line: 48 ]]
+		-- upvalues: ControlScrubberModule (upval), p1 (copy)
+		ControlScrubberModule.jumpTo(p1)
 	end)
 end
 
-return t
+return ControlScrubberModule

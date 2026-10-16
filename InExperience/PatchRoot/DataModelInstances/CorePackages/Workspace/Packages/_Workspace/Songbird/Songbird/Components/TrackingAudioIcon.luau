@@ -1,35 +1,35 @@
-﻿local songbird = script:FindFirstAncestor("Songbird")
-local cryoModule = require(songbird.Parent.Cryo)
-local foundationModule = require(songbird.Parent.Foundation)
-local reactModule = require(songbird.Parent.React)
-local createNextOrder = require(songbird.Parent.ReactUtils).createNextOrder
-local musicPlayingIconModule = require(songbird.Components.MusicPlayingIcon)
-local t = { isMoving = true }
+﻿local Songbird = script:FindFirstAncestor("Songbird")
+local CryoModule = require(Songbird.Parent.Cryo)
+local FoundationModule = require(Songbird.Parent.Foundation)
+local ReactModule = require(Songbird.Parent.React)
+local CreateNextOrderFunction = require(Songbird.Parent.ReactUtils).createNextOrder
+local MusicPlayingIconModule = require(Songbird.Components.MusicPlayingIcon)
+local config = { isMoving = true }
 
-return function(p1)
-	-- upvalues: cryoModule (ref), t (ref), createNextOrder (ref), foundationModule (ref), reactModule (ref), musicPlayingIconModule (ref)
-	local var1 = cryoModule.Dictionary.join(t, p1)
-	local var2 = createNextOrder()
-	local size900 = foundationModule.Hooks.useTokens().Size.Size_900
+return function(p1) --[[ Line: 23 | Named "TrackingAudioIcon" ]]
+	-- upvalues: CryoModule (copy), config (copy), CreateNextOrderFunction (copy), FoundationModule (copy), ReactModule (copy), MusicPlayingIconModule (copy)
+	local JoinResult = CryoModule.Dictionary.join(config, p1)
+	local NextOrder = CreateNextOrderFunction()
+	local Size900: number = FoundationModule.Hooks.useTokens().Size.Size_900
 	
-	return reactModule.createElement(foundationModule.View, { Size = UDim2.fromOffset(size900, size900) }, {
-		BaseIcon = reactModule.createElement(foundationModule.Image, {
+	return ReactModule.createElement(FoundationModule.View, { Size = UDim2.fromOffset(Size900, Size900) }, {
+		BaseIcon = ReactModule.createElement(FoundationModule.Image, {
 			Image = "icons/common/musicTrackingBorder_medium",
-			Size = UDim2.fromOffset(size900, size900),
-			ZIndex = var2()
+			Size = UDim2.fromOffset(Size900, Size900),
+			ZIndex = NextOrder()
 		}),
-		CenterCover = reactModule.createElement(foundationModule.View, {
+		CenterCover = ReactModule.createElement(FoundationModule.View, {
 			Transparency = 1,
-			Size = UDim2.fromOffset(size900 / 2, size900 / 2),
+			Size = UDim2.fromOffset(Size900 / 2, Size900 / 2),
 			Position = UDim2.fromScale(0.5, 0.5),
 			AnchorPoint = Vector2.new(0.5, 0.5),
-			ZIndex = var2()
+			ZIndex = NextOrder()
 		}, {
-			Bars = reactModule.createElement(musicPlayingIconModule, {
+			Bars = ReactModule.createElement(MusicPlayingIconModule, {
 				numAnimatedBars = 4,
 				heightRange = NumberRange.new(0.25, 0.9),
-				zIndex = var2(),
-				isMoving = var1.isMoving
+				zIndex = NextOrder(),
+				isMoving = JoinResult.isMoving
 			})
 		})
 	})

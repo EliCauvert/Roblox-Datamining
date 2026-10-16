@@ -1,135 +1,142 @@
-﻿local parent = script:FindFirstAncestor("OnPlatformSurveys").Parent
-local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-local inputHandlersModule = require(parent.InputHandlers)
-local reactModule = require(parent.React)
-local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
-local inlineSurveyFocusRoot = game:DefineFastFlag("InlineSurveyFocusRoot", false)
-local focusNavigationEventNameEnum = focusNavigationUtilsModule.FocusNavigationEventNameEnum
-local useAppFocusRoot = focusNavigationUtilsModule.useAppFocusRoot
-local useFocusRoot = focusNavigationUtilsModule.useFocusRoot
-local useDefaultFocusBehavior = reactFocusNavigationModule.useDefaultFocusBehavior
-local useFocusedGuiObject = reactFocusNavigationModule.useFocusedGuiObject
-local t = {
-	[Enum.KeyCode.ButtonB] = focusNavigationEventNameEnum.NavigateBack,
-	[Enum.KeyCode.Escape] = focusNavigationEventNameEnum.NavigateBack,
-	[Enum.KeyCode.PageUp] = focusNavigationEventNameEnum.ScrollUp,
-	[Enum.KeyCode.LeftBracket] = focusNavigationEventNameEnum.ScrollUp,
-	[Enum.KeyCode.PageDown] = focusNavigationEventNameEnum.ScrollDown,
-	[Enum.KeyCode.RightBracket] = focusNavigationEventNameEnum.ScrollDown
+﻿local Parent = script:FindFirstAncestor("OnPlatformSurveys").Parent
+local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
+local InputHandlersModule = require(Parent.InputHandlers)
+local ReactModule = require(Parent.React)
+local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
+local InlineSurveyFocusRoot = game:DefineFastFlag("InlineSurveyFocusRoot", false)
+local FocusNavigationEventNameEnum = FocusNavigationUtilsModule.FocusNavigationEventNameEnum
+local UseAppFocusRootFunction = FocusNavigationUtilsModule.useAppFocusRoot
+local UseFocusRootFunction = FocusNavigationUtilsModule.useFocusRoot
+local UseDefaultFocusBehaviorFunction = ReactFocusNavigationModule.useDefaultFocusBehavior
+local UseFocusedGuiObjectFunction = ReactFocusNavigationModule.useFocusedGuiObject
+local EventMap = {
+	[Enum.KeyCode.ButtonB] = FocusNavigationEventNameEnum.NavigateBack,
+	[Enum.KeyCode.Escape] = FocusNavigationEventNameEnum.NavigateBack,
+	[Enum.KeyCode.PageUp] = FocusNavigationEventNameEnum.ScrollUp,
+	[Enum.KeyCode.LeftBracket] = FocusNavigationEventNameEnum.ScrollUp,
+	[Enum.KeyCode.PageDown] = FocusNavigationEventNameEnum.ScrollDown,
+	[Enum.KeyCode.RightBracket] = FocusNavigationEventNameEnum.ScrollDown
 }
 
-local function _(p1)
-	return if p1 == nil then nil elseif p1:IsA("ScrollingFrame") then p1 else p1:FindFirstAncestorWhichIsA("ScrollingFrame")
+local function _(ScrollingFrame) --[[ Line: 38 | Named "getScrollableAncestor" ]]
+	return if ScrollingFrame == nil then nil elseif ScrollingFrame:IsA("ScrollingFrame") then ScrollingFrame else ScrollingFrame:FindFirstAncestorWhichIsA("ScrollingFrame")
 end
 
-local _ = function(p1, p2)
-	local var1 = p1.AbsoluteCanvasSize.Y - p1.AbsoluteWindowSize.Y
+local _ = function(ScrollFrame, Y: number) --[[ Line: 48 | Named "scrollTo" ]]
+	local YDelta = ScrollFrame.AbsoluteCanvasSize.Y - ScrollFrame.AbsoluteWindowSize.Y
 	
-	if p2 > 0 and var1 - 350 <= p1.CanvasPosition.Y then
-		p1.CanvasPosition = Vector2.new(0, var1)
-		
-		return
-	elseif p2 < 0 and p1.CanvasPosition.Y <= 350 then
-		p1.CanvasPosition = Vector2.new(0, 0)
+	if Y > 0 and YDelta - 350 <= ScrollFrame.CanvasPosition.Y then
+		ScrollFrame.CanvasPosition = Vector2.new(0, YDelta)
 		
 		return
 	end
-	p1.CanvasPosition += Vector2.new(0, p2)
+	if Y < 0 and ScrollFrame.CanvasPosition.Y <= 350 then
+		ScrollFrame.CanvasPosition = Vector2.new(0, 0)
+		
+		return
+	else
+		ScrollFrame.CanvasPosition += Vector2.new(0, Y)
+	end
 end
 
-local _ = function(p1, p2)
-	return function(p3)
-		-- upvalues: p1 (ref), p2 (ref)
+local _ = function(p1, p2) --[[ Line: 61 | Named "mergeRefs" ]]
+	return function(Current) --[[ Line: 62 ]]
+		-- upvalues: p1 (copy), p2 (copy)
 		if type(p1) == "function" then
-			p1(p3)
+			p1(Current)
 		elseif p1 ~= nil then
-			p1.current = p3
+			p1.current = Current
 		end
 		if type(p2) == "function" then
-			p2(p3)
+			p2(Current)
 			
 			return
-		elseif p2 ~= nil then
-			p2.current = p3
+		end
+		if p2 ~= nil then
+			p2.current = Current
 		end
 	end
 end
 
-return function(p1, p2)
-	-- upvalues: useDefaultFocusBehavior (ref), inlineSurveyFocusRoot (ref), useFocusedGuiObject (ref), reactModule (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), useFocusRoot (ref), t (ref), useAppFocusRoot (ref)
-	local var1
-	local var2 = useDefaultFocusBehavior()
-	local _ = nil
+return function(SurfaceIdentifier, p1) --[[ Line: 77 | Named "useSurveyFocusRefs" ]]
+	-- upvalues: UseDefaultFocusBehaviorFunction (copy), InlineSurveyFocusRoot (copy), UseFocusedGuiObjectFunction (copy), ReactModule (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), UseFocusRootFunction (copy), EventMap (copy), UseAppFocusRootFunction (copy)
+	local UseDefaultFocusBehaviorResult = UseDefaultFocusBehaviorFunction()
+	local UseFocusRootResult = nil
 	
-	if inlineSurveyFocusRoot then
-		local var3 = useFocusedGuiObject()
-		local var4 = if var3 == nil then nil elseif var3:IsA("ScrollingFrame") then var3 else var3:FindFirstAncestorWhichIsA("ScrollingFrame")
-		var1 = useFocusRoot({
+	if InlineSurveyFocusRoot then
+		local UseFocusedGuiObjectResult = UseFocusedGuiObjectFunction()
+		local UseFocusedGuiObjectResult1 = if UseFocusedGuiObjectResult == nil then nil elseif UseFocusedGuiObjectResult:IsA("ScrollingFrame") then UseFocusedGuiObjectResult else UseFocusedGuiObjectResult:FindFirstAncestorWhichIsA("ScrollingFrame")
+		UseFocusRootResult = UseFocusRootFunction({
 			isAutoFocusRoot = true,
-			surfaceIdentifier = p1,
-			eventHandlers = reactModule.useMemo(function()
-				-- upvalues: focusNavigationEventNameEnum (copy), inputHandlersModule (copy), p2 (ref), var4 (ref)
-				local t = {
-					[focusNavigationEventNameEnum.NavigateBack] = { handler = inputHandlersModule.onRelease(p2) }
+			surfaceIdentifier = SurfaceIdentifier,
+			eventHandlers = ReactModule.useMemo(function() --[[ Line: 85 ]]
+				-- upvalues: FocusNavigationEventNameEnum (upval), InputHandlersModule (upval), p1 (copy), UseFocusedGuiObjectResult1 (copy)
+				local config = {
+					[FocusNavigationEventNameEnum.NavigateBack] = { handler = InputHandlersModule.onRelease(p1) }
 				}
 				
-				if var4 then
-					t[focusNavigationEventNameEnum.ScrollUp] = {
-						handler = inputHandlersModule.onRelease(function()
-							-- upvalues: var4 (copy)
-							local _ = var4.AbsoluteCanvasSize.Y - var4.AbsoluteWindowSize.Y
+				if UseFocusedGuiObjectResult1 then
+					config[FocusNavigationEventNameEnum.ScrollUp] = {
+						handler = InputHandlersModule.onRelease(function() --[[ Line: 94 ]]
+							-- upvalues: UseFocusedGuiObjectResult1 (upval)
+							local _ = UseFocusedGuiObjectResult1.AbsoluteCanvasSize.Y - UseFocusedGuiObjectResult1.AbsoluteWindowSize.Y
 							
-							if var4.CanvasPosition.Y <= 350 then
-								var4.CanvasPosition = Vector2.new(0, 0)
+							if UseFocusedGuiObjectResult1.CanvasPosition.Y <= 350 then
+								UseFocusedGuiObjectResult1.CanvasPosition = Vector2.new(0, 0)
 								
 								return
+							else
+								UseFocusedGuiObjectResult1.CanvasPosition += Vector2.new(0, -300)
 							end
-							var4.CanvasPosition += Vector2.new(0, -300)
 						end)
 					}
-					t[focusNavigationEventNameEnum.ScrollDown] = {
-						handler = inputHandlersModule.onRelease(function()
-							-- upvalues: var4 (copy)
-							local var5 = var4.AbsoluteCanvasSize.Y - var4.AbsoluteWindowSize.Y
+					config[FocusNavigationEventNameEnum.ScrollDown] = {
+						handler = InputHandlersModule.onRelease(function() --[[ Line: 99 ]]
+							-- upvalues: UseFocusedGuiObjectResult1 (upval)
+							local YDelta = UseFocusedGuiObjectResult1.AbsoluteCanvasSize.Y - UseFocusedGuiObjectResult1.AbsoluteWindowSize.Y
 							
-							if var5 - 350 <= var4.CanvasPosition.Y then
-								var4.CanvasPosition = Vector2.new(0, var5)
+							if YDelta - 350 <= UseFocusedGuiObjectResult1.CanvasPosition.Y then
+								UseFocusedGuiObjectResult1.CanvasPosition = Vector2.new(0, YDelta)
 								
 								return
+							else
+								UseFocusedGuiObjectResult1.CanvasPosition += Vector2.new(0, 300)
 							end
-							var4.CanvasPosition += Vector2.new(0, 300)
 						end)
 					}
 				end
-				return t
-			end, { var4, p2 }),
-			eventMap = t
+				return config
+			end, { UseFocusedGuiObjectResult1, p1 }),
+			eventMap = EventMap
 		})
 	else
-		var1 = useAppFocusRoot({
+		UseFocusRootResult = UseAppFocusRootFunction({
 			isAutoFocusRoot = true,
-			surfaceIdentifier = p1,
+			surfaceIdentifier = SurfaceIdentifier,
 			customEventHandlers = {
-				[focusNavigationEventNameEnum.NavigateBack] = { handler = inputHandlersModule.onRelease(p2) }
+				[FocusNavigationEventNameEnum.NavigateBack] = { handler = InputHandlersModule.onRelease(p1) }
 			}
 		})
 	end
-	return reactModule.useMemo(function()
-		-- upvalues: var1 (write), var2 (ref)
-		return function(p3)
-			-- upvalues: var1 (ref), var2 (ref)
-			if type(var1) == "function" then
-				var1(p3)
-			elseif var1 ~= nil then
-				var1.current = p3
+	return ReactModule.useMemo(function() --[[ Line: 126 ]]
+		-- upvalues: UseFocusRootResult (ref), UseDefaultFocusBehaviorResult (copy)
+		local Callback = UseFocusRootResult
+		
+		return function(Current) --[[ Line: 62 ]]
+			-- upvalues: Callback (copy), UseDefaultFocusBehaviorResult (copy)
+			if type(Callback) == "function" then
+				Callback(Current)
+			elseif Callback ~= nil then
+				Callback.current = Current
 			end
-			if type(var2) == "function" then
-				var2(p3)
+			if type(UseDefaultFocusBehaviorResult) == "function" then
+				UseDefaultFocusBehaviorResult(Current)
 				
 				return
-			elseif var2 ~= nil then
-				var2.current = p3
+			end
+			if UseDefaultFocusBehaviorResult ~= nil then
+				UseDefaultFocusBehaviorResult.current = Current
 			end
 		end
-	end, { var1, var2 })
+	end, { UseFocusRootResult, UseDefaultFocusBehaviorResult })
 end

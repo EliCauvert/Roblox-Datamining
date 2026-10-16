@@ -1,10 +1,10 @@
-﻿local currencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
-local _ = require(currencyTransfers.Stores.createTransferStore)
-local promptStateModule = require(currencyTransfers.Enums.PromptState)
+﻿local CurrencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
+local _ = require(CurrencyTransfers.Stores.createTransferStore)
+local PromptStateModule = require(CurrencyTransfers.Enums.PromptState)
 
-return function(p1)
-	-- upvalues: promptStateModule (ref)
-	local triggerOnClose = p1.triggerOnClose
-	p1.setPromptState(promptStateModule.ReceiveComplete)
-	triggerOnClose()
+return function(p1) --[[ Line: 8 | Named "handleReceiveComplete" ]]
+	-- upvalues: PromptStateModule (copy)
+	local TriggerOnCloseFunction: () -> () = p1.triggerOnClose
+	p1.setPromptState(PromptStateModule.ReceiveComplete)
+	TriggerOnCloseFunction()
 end

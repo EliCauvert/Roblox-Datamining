@@ -1,213 +1,229 @@
-﻿local appStorageService = game:GetService("AppStorageService")
-local unifiedLogging = script:FindFirstAncestor("UnifiedLogging")
-local parent = unifiedLogging.Parent
-local argCheckModule = require(parent.ArgCheck)
-local cryoModule = require(parent.Cryo)
-local discoveryEventErrorLogger = require(parent.DiscoveryUtils).DiscoveryEventErrorLogger
-local contentTypeModule = require(unifiedLogging.ContentType)
-local itemImpressionsEventModule = require(unifiedLogging.itemImpressionsEvent)
-local sduiCustomImpressionsEventModule = require(unifiedLogging.sduiCustomImpressionsEvent)
-local userEntryUtilsModule = require(unifiedLogging.userEntryUtils)
-local buildItemMetadataFieldsModule = require(unifiedLogging.buildItemMetadataFields)
-local buildGameMetadataFieldsModule = require(unifiedLogging.buildGameMetadataFields)
-local _ = require(unifiedLogging.SduiAnalyticsTypes)
-local fFlagLuaAppDesktopFriendCarouselClicks = require(parent.SharedFlags).FFlagLuaAppDesktopFriendCarouselClicks
-local fFlagProfilePlatformEnableImpressions = require(parent.SharedFlags).FFlagProfilePlatformEnableImpressions
-local fFlagItemImpressionsAddGameMetadata = require(parent.SharedFlags).FFlagItemImpressionsAddGameMetadata
-local fFlagEnableTopSongsSort = require(parent.SharedFlags).FFlagEnableTopSongsSort
+﻿local AppStorageService = game:GetService("AppStorageService")
+local UnifiedLogging = script:FindFirstAncestor("UnifiedLogging")
+local Parent = UnifiedLogging.Parent
+local ArgCheckModule = require(Parent.ArgCheck)
+local CryoModule = require(Parent.Cryo)
+local DiscoveryEventErrorLogger = require(Parent.DiscoveryUtils).DiscoveryEventErrorLogger
+local ContentTypeModule = require(UnifiedLogging.ContentType)
+local ItemImpressionsEventModule = require(UnifiedLogging.itemImpressionsEvent)
+local SduiCustomImpressionsEventModule = require(UnifiedLogging.sduiCustomImpressionsEvent)
+local UserEntryUtilsModule = require(UnifiedLogging.userEntryUtils)
+local BuildItemMetadataFieldsModule = require(UnifiedLogging.buildItemMetadataFields)
+local BuildGameMetadataFieldsModule = require(UnifiedLogging.buildGameMetadataFields)
+local _ = require(UnifiedLogging.SduiAnalyticsTypes)
+local FFlagLuaAppDesktopFriendCarouselClicks = require(Parent.SharedFlags).FFlagLuaAppDesktopFriendCarouselClicks
+local FFlagProfilePlatformEnableImpressions = require(Parent.SharedFlags).FFlagProfilePlatformEnableImpressions
+local FFlagItemImpressionsAddGameMetadata = require(Parent.SharedFlags).FFlagItemImpressionsAddGameMetadata
+local FFlagEnableTopSongsSort = require(Parent.SharedFlags).FFlagEnableTopSongsSort
 
-local var1 = function(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10)
-	-- upvalues: argCheckModule (ref), discoveryEventErrorLogger (ref), fFlagProfilePlatformEnableImpressions (ref)
-	local t = {}
-	local t_1 = {}
-	local t_2 = {}
-	local t_3 = {}
-	local t_4 = {}
-	local t_5 = {}
+local function v17(EntryIndexes, p1, ContentType, Count: number, CollectionPosition, CollectionId, TotalNumberOfItems, CollectionComponentType, CollectionIdStr, p2: number) --[[ Line: 25 ]]
+	-- upvalues: ArgCheckModule (copy), DiscoveryEventErrorLogger (copy), FFlagProfilePlatformEnableImpressions (copy)
+	local List = {}
+	local List1 = {}
+	local List2 = {}
+	local List3 = {}
+	local List4 = {}
+	local List5 = {}
 	
-	for i, v in p1 do
-		local var2 = if p2 then p2[v] else nil
+	for _, entryIndex in EntryIndexes do
+		local v1 = p1 and p1[entryIndex] or nil
 		
-		if var2 == nil then
-			discoveryEventErrorLogger.reportError("SendItemImpressionsEventNilEntry", `Entry at index {v} was nil when sending item impressions for collection {p6}`, { entryIndex = v, collectionId = p6 })
+		if v1 == nil then
+			DiscoveryEventErrorLogger.reportError("SendItemImpressionsEventNilEntry", `Entry at index {entryIndex} was nil when sending item impressions for collection {CollectionId}`, { entryIndex = entryIndex, collectionId = CollectionId })
 			continue
 		end
-		local var3, var4
-		table.insert(t, var2.id)
-		table.insert(t_1, v)
-		table.insert(t_3, v)
-		local _ = nil
-		local _ = nil
+		table.insert(List, v1.id)
+		table.insert(List1, entryIndex)
+		table.insert(List3, entryIndex)
+		local Ceiled = nil
+		local EntryIndex = nil
 		
-		if p4 and p4 > 0 then
-			var3 = math.ceil(v / p4)
-			var4 = v % p4
+		if Count and Count > 0 then
+			Ceiled = math.ceil(entryIndex / Count)
+			EntryIndex = entryIndex % Count
 			
-			if var4 == 0 then
-				var4 = p4
+			if EntryIndex == 0 then
+				EntryIndex = Count
 			end
-			table.insert(t_2, var3)
+			table.insert(List2, Ceiled)
 		else
-			argCheckModule.assert(p4 ~= 0)
-			var3 = 1
-			var4 = v
+			ArgCheckModule.assert(Count ~= 0)
+			Ceiled = 1
+			EntryIndex = entryIndex
 		end
-		if p10 then
-			table.insert(t_4, p10 + var3 - 1)
-			table.insert(t_5, var4)
+		if p2 then
+			table.insert(List4, p2 + Ceiled - 1)
+			table.insert(List5, EntryIndex)
 		end
 	end
-	local tCount = #t
-	argCheckModule.assert(tCount == #t_1)
+	local CountList = #List
+	ArgCheckModule.assert(CountList == #List1)
 	
-	if #t_2 > 0 then
-		argCheckModule.assert(tCount == #t_2)
+	if #List2 > 0 then
+		ArgCheckModule.assert(CountList == #List2)
 	end
-	if #t_4 > 0 then
-		argCheckModule.assert(tCount == #t_4)
+	if #List4 > 0 then
+		ArgCheckModule.assert(CountList == #List4)
 	end
-	if #t_5 > 0 then
-		argCheckModule.assert(tCount == #t_5)
+	if #List5 > 0 then
+		ArgCheckModule.assert(CountList == #List5)
 	end
-	local t_6 = {
-		contentType = p3,
-		itemIds = table.concat(t, ","),
-		itemPositions = table.concat(t_1, ","),
-		positionsInTopic = table.concat(t_3, ","),
-		collectionPosition = p5,
-		collectionId = p6,
-		totalNumberOfItems = p7 or (if p2 then #p2 else 0),
-		collectionComponentType = p8,
-		collectionIdStr = if fFlagProfilePlatformEnableImpressions then p9 else nil
+	local config = {
+		contentType = ContentType,
+		itemIds = table.concat(List, ","),
+		itemPositions = table.concat(List1, ","),
+		positionsInTopic = table.concat(List3, ","),
+		collectionPosition = CollectionPosition,
+		collectionId = CollectionId,
+		totalNumberOfItems = if TotalNumberOfItems then TotalNumberOfItems elseif p1 then #p1 else 0,
+		collectionComponentType = CollectionComponentType,
+		collectionIdStr = if FFlagProfilePlatformEnableImpressions then CollectionIdStr else nil
 	}
 	
-	if #t_2 > 0 then
-		t_6.rowNumbers = table.concat(t_2, ",")
+	if #List2 > 0 then
+		config.rowNumbers = table.concat(List2, ",")
 	end
-	if #t_4 > 0 then
-		t_6.feedRowNumbers = table.concat(t_4, ",")
+	if #List4 > 0 then
+		config.feedRowNumbers = table.concat(List4, ",")
 	end
-	if #t_5 > 0 then
-		t_6.positionsInRow = table.concat(t_5, ",")
+	if #List5 > 0 then
+		config.positionsInRow = table.concat(List5, ",")
 	end
-	return t_6
+	return config
 end
 
-local var5 = function(p11, p12, p13)
-	-- upvalues: fFlagLuaAppDesktopFriendCarouselClicks (ref), userEntryUtilsModule (ref)
-	local t = {}
-	local t_1 = {}
-	local t_2 = {}
+local function v18(List, p3, SourceCarousel) --[[ Line: 125 ]]
+	-- upvalues: FFlagLuaAppDesktopFriendCarouselClicks (copy), UserEntryUtilsModule (copy)
+	local List1 = {}
+	local List2 = {}
+	local List3 = {}
 	
-	for i, v in p11 do
-		local var6 = if p12 then p12[v] else nil
+	for _, value in List do
+		local v2 = p3 and p3[value] or nil
 		
-		if var6 ~= nil then
-			if fFlagLuaAppDesktopFriendCarouselClicks then
-				local var7 = userEntryUtilsModule.extractFieldsFromUserEntry(var6)
-				table.insert(t, var7.presence)
-				table.insert(t_1, var7.friendStatus)
-				table.insert(t_2, var7.presenceUniverseId)
+		if v2 ~= nil then
+			if FFlagLuaAppDesktopFriendCarouselClicks then
+				local ExtractFieldsFromUserEntryResult = UserEntryUtilsModule.extractFieldsFromUserEntry(v2)
+				table.insert(List1, ExtractFieldsFromUserEntryResult.presence)
+				table.insert(List2, ExtractFieldsFromUserEntryResult.friendStatus)
+				table.insert(List3, ExtractFieldsFromUserEntryResult.presenceUniverseId)
 			else
-				table.insert(t, if var6.presence then var6.presence.userPresenceType else "")
-				table.insert(t_1, if var6.isFriend then "friend" else "notFriend")
-				table.insert(t_2, if var6.presence and var6.presence.universeId and var6.presence.universeId ~= "" then var6.presence.universeId else "-1")
+				table.insert(List1, v2.presence and v2.presence.userPresenceType or "")
+				table.insert(List2, if v2.isFriend then "friend" else "notFriend")
+				table.insert(List3, if v2.presence and v2.presence.universeId and v2.presence.universeId ~= "" then v2.presence.universeId else "-1")
 			end
 		end
 	end
 	return {
-		sourceCarousel = p13,
-		presences = table.concat(t, ","),
-		friendStatuses = table.concat(t_1, ","),
-		presenceUniverseIds = table.concat(t_2, ",")
+		sourceCarousel = SourceCarousel,
+		presences = table.concat(List1, ","),
+		friendStatuses = table.concat(List2, ","),
+		presenceUniverseIds = table.concat(List3, ",")
 	}
 end
 
+local v3 = if FFlagProfilePlatformEnableImpressions then function(EventIngest, AppAnalytics, p4, p5, p6, p7, ContentType, CollectionPosition, CollectionIdStr) --[[ Line: 214 ]]
+	-- upvalues: DiscoveryEventErrorLogger (copy), v17 (copy), FFlagItemImpressionsAddGameMetadata (copy), ContentTypeModule (copy), BuildGameMetadataFieldsModule (copy), CryoModule (copy), ItemImpressionsEventModule (copy)
+	if not EventIngest or not AppAnalytics then
+		DiscoveryEventErrorLogger.reportError("SendItemImpressionsFromProfile", `Event Ingest or App Analytics was nil when trying to send itemImpressions for collection {CollectionIdStr} on Profile Platform`, {
+			eventIngest = EventIngest,
+			appAnalytics = AppAnalytics,
+			collectionIdStr = CollectionIdStr
+		})
+		
+		return
+	end
+	if not p4 or #p4 == 0 then return end
+	if not p5 or #p5 == 0 then return end
+	local v4 = v17(p4, p5, ContentType, p6, CollectionPosition, nil, #p5, nil, CollectionIdStr)
+	
+	if not FFlagItemImpressionsAddGameMetadata then
+		ItemImpressionsEventModule(EventIngest, p7, ContentType, v4)
+		
+		return
+	end
+	local UnionResult = v4
+	
+	if ContentType == ContentTypeModule.Game then
+		UnionResult = CryoModule.Dictionary.union(UnionResult, (BuildGameMetadataFieldsModule(p4, p5, CollectionIdStr)))
+	end
+	ItemImpressionsEventModule(EventIngest, p7, ContentType, UnionResult)
+end else nil
+
+local function v20(EventIngest, AppAnalytics, p8, p9, p10, p11, CollectionPosition, ContentType, p12, SortId, p13) --[[ Line: 346 ]]
+	-- upvalues: DiscoveryEventErrorLogger (copy), v17 (copy), FFlagItemImpressionsAddGameMetadata (copy), ContentTypeModule (copy), BuildGameMetadataFieldsModule (copy), CryoModule (copy), ItemImpressionsEventModule (copy)
+	if not EventIngest or not AppAnalytics then
+		DiscoveryEventErrorLogger.reportError("SendItemImpressionsService", `Event Ingest or App Analytics was nil when trying to send itemImpressions for collection {SortId}`, {
+			eventIngest = EventIngest,
+			appAnalytics = AppAnalytics,
+			sortId = SortId
+		})
+		
+		return
+	end
+	if not p8 or #p8 == 0 then return end
+	if not p9 or #p9 == 0 then return end
+	local UnionResult = v17(p8, p9, ContentType, p10, CollectionPosition, SortId, p12, nil, p13)
+	
+	if not FFlagItemImpressionsAddGameMetadata then
+		ItemImpressionsEventModule(EventIngest, p11, ContentType, UnionResult)
+		
+		return
+	end
+	if ContentType == ContentTypeModule.Game then
+		UnionResult = CryoModule.Dictionary.union(UnionResult, (BuildGameMetadataFieldsModule(p8, p9, p13)))
+	end
+	ItemImpressionsEventModule(EventIngest, p11, ContentType, UnionResult)
+end
+
 return {
-	sendFromFriendsCarousel = function(p14, p15, p16, p17, p18, p19, p20, p21)
-		-- upvalues: fFlagLuaAppDesktopFriendCarouselClicks (ref), discoveryEventErrorLogger (ref), contentTypeModule (ref), var1 (ref), var5 (ref), cryoModule (ref), itemImpressionsEventModule (ref)
-		if p14 and p15 then
-			if not p16 or #p16 == 0 then return end
-			if p17 and #p17 ~= 0 then
-				local user = contentTypeModule.User
-				itemImpressionsEventModule(p14, p18, user, cryoModule.Dictionary.union(var1(p16, p17, user, #p17, p19, p20), var5(p16, p17, p21)))
+	sendFromFriendsCarousel = function(EventIngest, AppAnalytics, p14, p15, p16, CollectionPosition, SortId, SourceCarousel) --[[ Line: 166 ]]
+		-- upvalues: FFlagLuaAppDesktopFriendCarouselClicks (copy), DiscoveryEventErrorLogger (copy), ContentTypeModule (copy), v17 (copy), v18 (copy), CryoModule (copy), ItemImpressionsEventModule (copy)
+		if EventIngest and AppAnalytics then
+			if not p14 or #p14 == 0 then return end
+			if p15 and #p15 ~= 0 then
+				local User = ContentTypeModule.User
+				ItemImpressionsEventModule(EventIngest, p16, User, (CryoModule.Dictionary.union(v17(p14, p15, User, #p15, CollectionPosition, SortId), (v18(p14, p15, SourceCarousel)))))
 				
 				return
 			end
 			return
-		elseif fFlagLuaAppDesktopFriendCarouselClicks then
-			discoveryEventErrorLogger.reportError("SendItemImpressionsService", `Event Ingest or App Analytics was nil when trying to send itemImpressions for collection {p20}`, { eventIngest = p14, appAnalytics = p15, sortId = p20 })
+		elseif FFlagLuaAppDesktopFriendCarouselClicks then
+			DiscoveryEventErrorLogger.reportError("SendItemImpressionsService", `Event Ingest or App Analytics was nil when trying to send itemImpressions for collection {SortId}`, {
+				eventIngest = EventIngest,
+				appAnalytics = AppAnalytics,
+				sortId = SortId
+			})
 		end
 	end,
-	sendFromItemCollection = if fFlagEnableTopSongsSort then function(p22, p23, p24, p25, p26, p27, p28, p29, p30, p31, p32)
-		-- upvalues: discoveryEventErrorLogger (ref), var1 (ref), fFlagItemImpressionsAddGameMetadata (ref), contentTypeModule (ref), buildGameMetadataFieldsModule (ref), cryoModule (ref), itemImpressionsEventModule (ref)
-		if not p22 or not p23 then
-			discoveryEventErrorLogger.reportError("SendItemImpressionsService", `Event Ingest or App Analytics was nil when trying to send itemImpressions for collection {p31}`, { eventIngest = p22, appAnalytics = p23, sortId = p31 })
+	sendFromItemCollection = if FFlagEnableTopSongsSort then v20 else nil,
+	sendFromProfile = if FFlagProfilePlatformEnableImpressions then v3 else nil,
+	sendFromServerDrivenUi = function(p17, p18, p19, p20, p21, CollectionId, ContentType, p22, CollectionPosition, p23, p24) --[[ Line: 273 ]]
+		-- upvalues: DiscoveryEventErrorLogger (copy), v17 (copy), BuildItemMetadataFieldsModule (copy), CryoModule (copy), AppStorageService (copy), SduiCustomImpressionsEventModule (copy), ItemImpressionsEventModule (copy)
+		if not p17 then
+			DiscoveryEventErrorLogger.reportError("SendItemImpressionsFromSduiNilService", `Event Ingest was nil when trying to send itemImpressions for collection {CollectionId}`, { collectionId = CollectionId })
 			
 			return
-		elseif not p24 or #p24 == 0 then return end
-		if not p25 or #p25 == 0 then return end
-		local var8 = var1(p24, p25, p29, p26, p28, p31, p30, nil, p32)
+		end
+		if not p18 or #p18 == 0 then return end
+		if not p19 or #p19 == 0 then return end
+		if not p20 then return end
+		local JoinResult = CryoModule.Dictionary.join(p20, BuildItemMetadataFieldsModule(p18, p19, CollectionId), (v17(p18, p19, ContentType, p22, CollectionPosition, CollectionId, p20.totalNumberOfItems, p20.collectionComponentType, nil, p23)))
+		local MobileAdvertisingIdItem = AppStorageService:GetItem("MobileAdvertisingId")
 		
-		if not fFlagItemImpressionsAddGameMetadata then
-			itemImpressionsEventModule(p22, p27, p29, var8)
+		if MobileAdvertisingIdItem and MobileAdvertisingIdItem ~= "" then
+			JoinResult.mobileAdvertisingId = MobileAdvertisingIdItem
+		end
+		if JoinResult.collectionId and type(JoinResult.collectionId) == "string" and type((tonumber(JoinResult.collectionId))) ~= "number" then
+			JoinResult.collectionIdStr = JoinResult.collectionId
+			JoinResult.collectionId = nil
+		end
+		if p24 then
+			SduiCustomImpressionsEventModule(p24, p21, JoinResult)
 			
 			return
-		elseif p29 == contentTypeModule.Game then
-			var8 = cryoModule.Dictionary.union(var8, buildGameMetadataFieldsModule(p24, p25, p32))
+		else
+			ItemImpressionsEventModule(p17, p21, ContentType, JoinResult)
 		end
-		itemImpressionsEventModule(p22, p27, p29, var8)
-	end else nil,
-	sendFromProfile = if fFlagProfilePlatformEnableImpressions then if fFlagProfilePlatformEnableImpressions then function(p33, p34, p35, p36, p37, p38, p39, p40, p41)
-		-- upvalues: discoveryEventErrorLogger (ref), var1 (ref), fFlagItemImpressionsAddGameMetadata (ref), contentTypeModule (ref), buildGameMetadataFieldsModule (ref), cryoModule (ref), itemImpressionsEventModule (ref)
-		if not p33 or not p34 then
-			discoveryEventErrorLogger.reportError("SendItemImpressionsFromProfile", `Event Ingest or App Analytics was nil when trying to send itemImpressions for collection {p41} on Profile Platform`, {
-				eventIngest = p33,
-				appAnalytics = p34,
-				collectionIdStr = p41
-			})
-			
-			return
-		elseif not p35 or #p35 == 0 then return end
-		if not p36 or #p36 == 0 then return end
-		local var9 = var1(p35, p36, p39, p37, p40, nil, #p36, nil, p41)
-		
-		if not fFlagItemImpressionsAddGameMetadata then
-			itemImpressionsEventModule(p33, p38, p39, var9)
-			
-			return
-		end
-		local var10 = var9
-		
-		if p39 == contentTypeModule.Game then
-			var10 = cryoModule.Dictionary.union(var10, buildGameMetadataFieldsModule(p35, p36, p41))
-		end
-		itemImpressionsEventModule(p33, p38, p39, var10)
-	end else nil else nil,
-	sendFromServerDrivenUi = function(p42, p43, p44, p45, p46, p47, p48, p49, p50, p51, p52)
-		-- upvalues: discoveryEventErrorLogger (ref), var1 (ref), buildItemMetadataFieldsModule (ref), cryoModule (ref), appStorageService (ref), sduiCustomImpressionsEventModule (ref), itemImpressionsEventModule (ref)
-		if not p42 then
-			discoveryEventErrorLogger.reportError("SendItemImpressionsFromSduiNilService", `Event Ingest was nil when trying to send itemImpressions for collection {p47}`, { collectionId = p47 })
-			
-			return
-		elseif not p43 or #p43 == 0 then return end
-		if not p44 or #p44 == 0 then return end
-		if not p45 then return end
-		local var11 = cryoModule.Dictionary.join(p45, buildItemMetadataFieldsModule(p43, p44, p47), var1(p43, p44, p48, p49, p50, p47, p45.totalNumberOfItems, p45.collectionComponentType, nil, p51))
-		local mobileAdvertisingIdItem = appStorageService:GetItem("MobileAdvertisingId")
-		
-		if mobileAdvertisingIdItem and mobileAdvertisingIdItem ~= "" then
-			var11.mobileAdvertisingId = mobileAdvertisingIdItem
-		end
-		if var11.collectionId and type(var11.collectionId) == "string" and type(tonumber(var11.collectionId)) ~= "number" then
-			var11.collectionIdStr = var11.collectionId
-			var11.collectionId = nil
-		end
-		if p52 then
-			sduiCustomImpressionsEventModule(p52, p46, var11)
-			
-			return
-		end
-		itemImpressionsEventModule(p42, p46, p48, var11)
 	end
 }

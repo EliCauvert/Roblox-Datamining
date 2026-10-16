@@ -1,154 +1,153 @@
-﻿local runService = game:GetService("RunService")
-local signalModule = require(script.Parent.Signal)
-local noYieldModule = require(script.Parent.NoYield)
-local t = {
-	reportReducerError = function(_, _, p1)
+﻿local SignalModule = require(script.Parent.Signal)
+local NoYieldModule = require(script.Parent.NoYield)
+local config = {
+	reportReducerError = function(_, _, p1) --[[ Line: 9 ]]
 		error(string.format("Received error: %s\n\n%s", p1.message, p1.thrownValue))
 	end,
-	reportUpdateError = function(_, _, _, p1)
+	reportUpdateError = function(_, _, _, p1) --[[ Line: 12 ]]
 		error(string.format("Received error: %s\n\n%s", p1.message, p1.thrownValue))
 	end
 }
 
-local function tracebackReporter(p1)
-	return debug.traceback(tostring(p1))
+local function tracebackReporter(Err) --[[ Line: 17 ]]
+	return debug.traceback((tostring(Err)))
 end
 
-local t_1 = { _flushEvent = runService.Heartbeat }
-t_1.__index = t_1
+local Store = { _flushEvent = game:GetService("RunService").Heartbeat }
+Store.__index = Store
 
-function t_1.new(p1, p2, p3, p4, p5)
-	-- upvalues: t (ref), signalModule (ref), tracebackReporter (ref), t_1 (ref)
-	assert(typeof(p1) == "function", "Bad argument #1 to Store.new, expected function.")
-	assert(if p3 ~= nil then typeof(p3) == "table" else true, "Bad argument #3 to Store.new, expected nil or table.")
-	assert(if p5 ~= nil then typeof(p5) == "table" and p5.__className == "Devtools" else true, "Bad argument #5 to Store.new, expected nil or Devtools object.")
+function Store.new(_reducer, _state, p1, p2, _devtools) --[[ Line: 41 ]]
+	-- upvalues: config (copy), SignalModule (copy), tracebackReporter (copy), Store (copy)
+	assert(typeof(_reducer) == "function", "Bad argument #1 to Store.new, expected function.")
+	assert(p1 == nil or typeof(p1) == "table", "Bad argument #3 to Store.new, expected nil or table.")
+	assert(_devtools == nil or typeof(_devtools) == "table" and _devtools.__className == "Devtools", "Bad argument #5 to Store.new, expected nil or Devtools object.")
 	
-	if p3 ~= nil then
-		for i = 1, #p3 do
-			assert(typeof(p3[i]) == "function", ("Expected the middleware ('%s') at index %d to be a function."):format(tostring(p3[i]), i))
+	if p1 ~= nil then
+		for i = 1, #p1 do
+			assert(typeof(p1[i]) == "function", ("Expected the middleware ('%s') at index %d to be a function."):format(tostring(p1[i]), i))
 		end
 	end
-	local t_2 = {
+	local config1 = {
 		_source = string.match(debug.traceback(), "^.-\n(.-)\n"),
-		_errorReporter = p4 or t,
+		_errorReporter = p2 or config,
 		_isDispatching = false,
 		_lastState = nil
 	}
-	t_2.changed = signalModule.new(t_2)
-	t_2._reducer = p1
+	config1.changed = SignalModule.new(config1)
+	config1._reducer = _reducer
 	
-	function t_2._flushHandler(p6)
-		-- upvalues: t_2 (ref)
-		t_2.changed:fire(p6, t_2._lastState)
+	function config1._flushHandler(p3) --[[ Line: 66 ]]
+		-- upvalues: config1 (copy)
+		config1.changed:fire(p3, config1._lastState)
 	end
 	
-	if p5 then
-		t_2._devtools = p5
-		p5:_hookIntoStore(t_2)
+	if _devtools then
+		config1._devtools = _devtools
+		_devtools:_hookIntoStore(config1)
 	end
-	local t_3 = { type = "@@INIT" }
-	t_2._actionLog = { t_3 }
-	local ok, status = xpcall(function()
-		-- upvalues: t_2 (ref), p2 (ref), t_3 (ref)
-		t_2._state = t_2._reducer(p2, t_3)
+	local config2 = { type = "@@INIT" }
+	config1._actionLog = { config2 }
+	local Success, Result = xpcall(function() --[[ Line: 82 ]]
+		-- upvalues: config1 (copy), _state (copy), config2 (copy)
+		config1._state = config1._reducer(_state, config2)
 	end, tracebackReporter)
 	
-	if not ok then
-		t_2._errorReporter.reportReducerError(p2, t_3, {
+	if not Success then
+		config1._errorReporter.reportReducerError(_state, config2, {
 			message = "Caught error in reducer with init",
-			thrownValue = status
+			thrownValue = Result
 		})
-		t_2._state = p2
+		config1._state = _state
 	end
-	t_2._lastState = t_2._state
-	t_2._mutatedSinceFlush = false
-	t_2._connections = {}
-	setmetatable(t_2, t_1)
-	table.insert(t_2._connections, t_2._flushEvent:Connect(function()
-		-- upvalues: t_2 (ref)
-		t_2:flush()
-	end))
+	config1._lastState = config1._state
+	config1._mutatedSinceFlush = false
+	config1._connections = {}
+	setmetatable(config1, Store)
+	table.insert(config1._connections, (config1._flushEvent:Connect(function() --[[ Line: 99 ]]
+		-- upvalues: config1 (copy)
+		config1:flush()
+	end)))
 	
-	if p3 then
-		local dispatch = t_2.dispatch
+	if p1 then
+		local DispatchFunction = config1.dispatch
 		
-		local var1 = function(...)
-			-- upvalues: dispatch (ref), t_2 (ref)
-			return dispatch(t_2, ...)
+		local function v8(...) --[[ Line: 106 ]]
+			-- upvalues: DispatchFunction (copy), config1 (copy)
+			return DispatchFunction(config1, ...)
 		end
 		
-		for i_1 = #p3, 1, -1 do
-			var1 = p3[i_1](var1, t_2)
+		for i1 = #p1, 1, -1 do
+			v8 = p1[i1](v8, config1)
 		end
-		function t_2.dispatch(_, ...)
-			-- upvalues: var1 (write)
-			return var1(...)
+		function config1:dispatch(...) --[[ Line: 115 ]]
+			-- upvalues: v8 (ref)
+			return v8(...)
 		end
 	end
-	return t_2
+	return config1
 end
 
-function t_1:getState()
+function Store:getState() --[[ Line: 126 ]]
 	if self._isDispatching then
-		error(("You may not call store:getState() while the reducer is executing. The reducer (%s) has already received the state as an argument. Pass it down from the top reducer instead of reading it from the store."):format(tostring(self._reducer)))
+		error(("You may not call store:getState() while the reducer is executing. The reducer (%s) has already received the state as an argument. Pass it down from the top reducer instead of reading it from the store."):format((tostring(self._reducer))))
 	end
 	return self._state
 end
 
-function t_1:dispatch(p6)
-	if typeof(p6) ~= "table" then
-		error(("Actions must be tables. Use custom middleware for %q actions."):format(typeof(p6)), 2)
+function Store:dispatch(p3) --[[ Line: 143 ]]
+	if typeof(p3) ~= "table" then
+		error(("Actions must be tables. Use custom middleware for %q actions."):format((typeof(p3))), 2)
 	end
-	if p6.type == nil then
-		error("Actions may not have an undefined 'type' property. " .. "Have you misspelled a constant? \n" .. tostring(p6), 2)
+	if p3.type == nil then
+		error("Actions may not have an undefined 'type' property. " .. "Have you misspelled a constant? \n" .. tostring(p3), 2)
 	end
 	if self._isDispatching then
 		error("Reducers may not dispatch actions.")
 	end
-	local ok, status = pcall(function()
-		-- upvalues: self (ref), p6 (ref)
+	local Success, Result = pcall(function() --[[ Line: 161 ]]
+		-- upvalues: self (copy), p3 (copy)
 		self._isDispatching = true
-		self._state = self._reducer(self._state, p6)
+		self._state = self._reducer(self._state, p3)
 		self._mutatedSinceFlush = true
 	end)
 	self._isDispatching = false
 	
-	if not ok then
-		self._errorReporter.reportReducerError(self._state, p6, {
+	if not Success then
+		self._errorReporter.reportReducerError(self._state, p3, {
 			message = "Caught error in reducer",
-			thrownValue = status
+			thrownValue = Result
 		})
 	end
 	if #self._actionLog == 3 then
 		table.remove(self._actionLog, 1)
 	end
-	table.insert(self._actionLog, p6)
+	table.insert(self._actionLog, p3)
 end
 
-function t_1:destruct()
-	for i, v in ipairs(self._connections) do
-		v:Disconnect()
+function Store:destruct() --[[ Line: 189 ]]
+	for _, connection in ipairs(self._connections) do
+		connection:Disconnect()
 	end
 	self._connections = nil
 end
 
-function t_1:flush()
-	-- upvalues: noYieldModule (ref), tracebackReporter (ref)
+function Store:flush() --[[ Line: 200 ]]
+	-- upvalues: NoYieldModule (copy), tracebackReporter (copy)
 	if not self._mutatedSinceFlush then return end
 	self._mutatedSinceFlush = false
-	local state = self._state
-	local ok, status = xpcall(function()
-		-- upvalues: noYieldModule (copy), self (ref), state (ref)
-		noYieldModule(self._flushHandler, state)
+	local State = self._state
+	local Success, Result = xpcall(function() --[[ Line: 212 ]]
+		-- upvalues: NoYieldModule (upval), self (copy), State (copy)
+		NoYieldModule(self._flushHandler, State)
 	end, tracebackReporter)
 	
-	if not ok then
-		self._errorReporter.reportUpdateError(self._lastState, state, self._actionLog, {
+	if not Success then
+		self._errorReporter.reportUpdateError(self._lastState, State, self._actionLog, {
 			message = "Caught error flushing store updates",
-			thrownValue = status
+			thrownValue = Result
 		})
 	end
-	self._lastState = state
+	self._lastState = State
 end
 
-return t_1
+return Store

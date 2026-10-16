@@ -1,10 +1,10 @@
-﻿local symbolModule = require(script.Symbol)
-local tbl = setmetatable({}, {
-	__call = function(_, p1)
-		-- upvalues: symbolModule (ref)
-		return symbolModule.new(p1)
+﻿local SymbolModule = require(script.Symbol)
+local self = setmetatable({}, {
+	__call = function(_, p1) --[[ Line: 29 ]]
+		-- upvalues: SymbolModule (copy)
+		return SymbolModule.new(p1)
 	end
 })
-tbl.for_ = require(script["Registry.global"]).getOrInit
+self.for_ = require(script["Registry.global"]).getOrInit
 
-return tbl
+return self

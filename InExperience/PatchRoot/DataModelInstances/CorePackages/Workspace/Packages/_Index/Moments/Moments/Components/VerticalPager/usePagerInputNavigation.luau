@@ -1,118 +1,119 @@
-﻿local parent = script:FindFirstAncestor("Moments").Parent
-local userInputService = game:GetService("UserInputService")
-local inputHandlersModule = require(parent.InputHandlers)
-local reactModule = require(parent.React)
-local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
-local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-local useDescendantHasFocus = focusNavigationUtilsModule.useDescendantHasFocus
-local useAutoFocus = focusNavigationUtilsModule.useAutoFocus
-local useLastInputMode = focusNavigationUtilsModule.useLastInputMode
-local constantsModule = require(script.Parent.Constants)
+﻿local Parent = script:FindFirstAncestor("Moments").Parent
+local UserInputService = game:GetService("UserInputService")
+local InputHandlersModule = require(Parent.InputHandlers)
+local ReactModule = require(Parent.React)
+local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
+local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
+local UseDescendantHasFocusFunction = FocusNavigationUtilsModule.useDescendantHasFocus
+local UseAutoFocusFunction = FocusNavigationUtilsModule.useAutoFocus
+local UseLastInputModeFunction = FocusNavigationUtilsModule.useLastInputMode
+local ConstantsModule = require(script.Parent.Constants)
 local _ = require(script.Parent.Types)
-local pagerNavigationModule = require(script.Parent.pagerNavigation)
-local PREVIOUS_EVENT = pagerNavigationModule.PREVIOUS_EVENT
-local NEXT_EVENT = pagerNavigationModule.NEXT_EVENT
-local KEYBOARD_KEY_EVENTS = pagerNavigationModule.KEYBOARD_KEY_EVENTS
+local PagerNavigationModule = require(script.Parent.pagerNavigation)
+local PREVIOUSEVENT = PagerNavigationModule.PREVIOUS_EVENT
+local NEXTEVENT = PagerNavigationModule.NEXT_EVENT
+local KEYBOARDKEYEVENTS = PagerNavigationModule.KEYBOARD_KEY_EVENTS
 
-return function(p1)
-	-- upvalues: reactModule (ref), useDescendantHasFocus (ref), useAutoFocus (ref), useLastInputMode (ref), pagerNavigationModule (ref), PREVIOUS_EVENT (ref), inputHandlersModule (ref), NEXT_EVENT (ref), reactFocusNavigationModule (ref), userInputService (ref), constantsModule (ref), KEYBOARD_KEY_EVENTS (ref)
-	local active = p1.active
-	local keyboardNavigation = p1.keyboardNavigation
-	local var1 = reactModule.useRef(p1.goNext)
-	var1.current = p1.goNext
-	local var2 = reactModule.useRef(p1.goPrevious)
-	var2.current = p1.goPrevious
-	local var3, var4 = reactModule.useState(nil)
-	local var5 = useDescendantHasFocus(var3)
-	local var6 = useAutoFocus({ var3 }, 0.1)
-	local var7 = active and (var3 ~= nil and (not var5 and useLastInputMode() == "Focus"))
-	reactModule.useEffect(function()
-		-- upvalues: var7 (ref), var6 (ref)
-		local var8 = if var7 then var6() else nil
+return function(p1) --[[ Line: 53 | Named "usePagerInputNavigation" ]]
+	-- upvalues: ReactModule (copy), UseDescendantHasFocusFunction (copy), UseAutoFocusFunction (copy), UseLastInputModeFunction (copy), PagerNavigationModule (copy), PREVIOUSEVENT (copy), InputHandlersModule (copy), NEXTEVENT (copy), ReactFocusNavigationModule (copy), UserInputService (copy), ConstantsModule (copy), KEYBOARDKEYEVENTS (copy)
+	local Active = p1.active
+	local KeyboardNavigation = p1.keyboardNavigation
+	local UseRefResult = ReactModule.useRef(p1.goNext)
+	UseRefResult.current = p1.goNext
+	local UseRefResult1 = ReactModule.useRef(p1.goPrevious)
+	UseRefResult1.current = p1.goPrevious
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	local UseDescendantHasFocusResult = UseDescendantHasFocusFunction(UseStateResult)
+	local UseAutoFocusResult = UseAutoFocusFunction({ UseStateResult }, 0.1)
+	local IsFocus = UseLastInputModeFunction() == "Focus"
+	local IsFocus1: boolean = Active and (UseStateResult ~= nil and (not UseDescendantHasFocusResult and IsFocus))
+	ReactModule.useEffect(function() --[[ Line: 78 ]]
+		-- upvalues: IsFocus1 (copy), UseAutoFocusResult (copy)
+		local UseAutoFocusResultResult = if IsFocus1 then UseAutoFocusResult() else nil
 		
-		return function()
-			-- upvalues: var8 (write)
-			if var8 then
-				var8.cancel()
+		return function() --[[ Line: 83 ]]
+			-- upvalues: UseAutoFocusResultResult (ref)
+			if UseAutoFocusResultResult then
+				UseAutoFocusResultResult.cancel()
 			end
 		end
-	end, { var7, var6 })
-	local var8 = reactFocusNavigationModule.useEventHandlerMap(reactModule.useMemo(function()
-		-- upvalues: PREVIOUS_EVENT (copy), inputHandlersModule (copy), var2 (ref), NEXT_EVENT (copy), var1 (ref)
+	end, { IsFocus1, UseAutoFocusResult })
+	local UseEventHandlerMapResult = ReactFocusNavigationModule.useEventHandlerMap(ReactModule.useMemo(function() --[[ Line: 95 ]]
+		-- upvalues: PREVIOUSEVENT (upval), InputHandlersModule (upval), UseRefResult1 (copy), NEXTEVENT (upval), UseRefResult (copy)
 		return {
-			[PREVIOUS_EVENT] = {
-				handler = inputHandlersModule.onRelease(function()
-					-- upvalues: var2 (copy)
-					var2.current()
+			[PREVIOUSEVENT] = {
+				handler = InputHandlersModule.onRelease(function() --[[ Line: 98 ]]
+					-- upvalues: UseRefResult1 (upval)
+					UseRefResult1.current()
 				end)
 			},
-			[NEXT_EVENT] = {
-				handler = inputHandlersModule.onRelease(function()
-					-- upvalues: var1 (copy)
-					var1.current()
+			[NEXTEVENT] = {
+				handler = InputHandlersModule.onRelease(function() --[[ Line: 103 ]]
+					-- upvalues: UseRefResult (upval)
+					UseRefResult.current()
 				end)
 			}
 		}
-	end, {}), reactFocusNavigationModule.useEventMap(reactModule.useMemo(function()
-		-- upvalues: pagerNavigationModule (copy), active (ref), keyboardNavigation (ref)
-		return pagerNavigationModule.buildEventMap(active, keyboardNavigation)
-	end, { active, keyboardNavigation })))
-	reactModule.useEffect(function()
-		-- upvalues: active (ref), var5 (ref), userInputService (copy), pagerNavigationModule (copy), constantsModule (copy), var2 (ref), var1 (ref)
-		if active and var5 then
-			local var9 = 0
-			local inputChangedConnection = userInputService.InputChanged:Connect(function(p2)
-				-- upvalues: pagerNavigationModule (copy), constantsModule (copy), var9 (write), var2 (copy), var1 (copy)
-				if p2.KeyCode ~= Enum.KeyCode.Thumbstick1 then return end
-				local var10 = pagerNavigationModule.thumbstickDirection(p2.Position.Y, constantsModule.THUMBSTICK_THRESHOLD)
-				
-				if var10 == nil then return end
-				local processTime = os.clock()
-				
-				if processTime - var9 < constantsModule.THUMBSTICK_COOLDOWN_SECONDS then return end
-				var9 = processTime
-				
-				if var10 == "previous" then
-					var2.current()
-					
-					return
-				end
-				var1.current()
-			end)
+	end, {}), (ReactFocusNavigationModule.useEventMap((ReactModule.useMemo(function() --[[ Line: 91 ]]
+		-- upvalues: PagerNavigationModule (upval), Active (copy), KeyboardNavigation (copy)
+		return PagerNavigationModule.buildEventMap(Active, KeyboardNavigation)
+	end, { Active, KeyboardNavigation })))))
+	ReactModule.useEffect(function() --[[ Line: 115 ]]
+		-- upvalues: Active (copy), UseDescendantHasFocusResult (copy), UserInputService (upval), PagerNavigationModule (upval), ConstantsModule (upval), UseRefResult1 (copy), UseRefResult (copy)
+		if not Active or not UseDescendantHasFocusResult then return end
+		local v1 = 0
+		local InputChangedConnection = UserInputService.InputChanged:Connect(function(Input) --[[ Line: 120 ]]
+			-- upvalues: PagerNavigationModule (upval), ConstantsModule (upval), v1 (ref), UseRefResult1 (upval), UseRefResult (upval)
+			if Input.KeyCode ~= Enum.KeyCode.Thumbstick1 then return end
+			local ThumbstickDirectionResult = PagerNavigationModule.thumbstickDirection(Input.Position.Y, ConstantsModule.THUMBSTICK_THRESHOLD)
 			
-			return function()
-				-- upvalues: inputChangedConnection (ref)
-				inputChangedConnection:Disconnect()
-			end
-		end
-	end, { active, var5 })
-	reactModule.useEffect(function()
-		-- upvalues: active (ref), keyboardNavigation (ref), userInputService (copy), KEYBOARD_KEY_EVENTS (copy), PREVIOUS_EVENT (copy), var2 (ref), NEXT_EVENT (copy), var1 (ref)
-		if active and keyboardNavigation == "global" then
-			local inputBeganConnection = userInputService.InputBegan:Connect(function(p2, p3)
-				-- upvalues: KEYBOARD_KEY_EVENTS (copy), PREVIOUS_EVENT (copy), var2 (copy), NEXT_EVENT (copy), var1 (copy)
-				if p3 then return end
-				local keyCode = KEYBOARD_KEY_EVENTS[p2.KeyCode]
-				
-				if keyCode == PREVIOUS_EVENT then
-					var2.current()
-					
-					return
-				elseif keyCode == NEXT_EVENT then
-					var1.current()
-				end
-			end)
+			if ThumbstickDirectionResult == nil then return end
+			local ClockTime = os.clock()
 			
-			return function()
-				-- upvalues: inputBeganConnection (ref)
-				inputBeganConnection:Disconnect()
+			if ClockTime - v1 < ConstantsModule.THUMBSTICK_COOLDOWN_SECONDS then return end
+			v1 = ClockTime
+			
+			if ThumbstickDirectionResult == "previous" then
+				UseRefResult1.current()
+				
+				return
+			else
+				UseRefResult.current()
 			end
+		end)
+		
+		return function() --[[ Line: 139 ]]
+			-- upvalues: InputChangedConnection (copy)
+			InputChangedConnection:Disconnect()
 		end
-	end, { active, keyboardNavigation })
+	end, { Active, UseDescendantHasFocusResult })
+	ReactModule.useEffect(function() --[[ Line: 145 ]]
+		-- upvalues: Active (copy), KeyboardNavigation (copy), UserInputService (upval), KEYBOARDKEYEVENTS (upval), PREVIOUSEVENT (upval), UseRefResult1 (copy), NEXTEVENT (upval), UseRefResult (copy)
+		if not Active or KeyboardNavigation ~= "global" then return end
+		local InputBeganConnection = UserInputService.InputBegan:Connect(function(Input, GameProcessed) --[[ Line: 149 ]]
+			-- upvalues: KEYBOARDKEYEVENTS (upval), PREVIOUSEVENT (upval), UseRefResult1 (upval), NEXTEVENT (upval), UseRefResult (upval)
+			if GameProcessed then return end
+			local KEYBOARDKEYEVENT = KEYBOARDKEYEVENTS[Input.KeyCode]
+			
+			if KEYBOARDKEYEVENT == PREVIOUSEVENT then
+				UseRefResult1.current()
+				
+				return
+			end
+			if KEYBOARDKEYEVENT == NEXTEVENT then
+				UseRefResult.current()
+			end
+		end)
+		
+		return function() --[[ Line: 160 ]]
+			-- upvalues: InputBeganConnection (copy)
+			InputBeganConnection:Disconnect()
+		end
+	end, { Active, KeyboardNavigation })
 	
-	return reactModule.useCallback(function(p2)
-		-- upvalues: var8 (ref), var4 (ref)
-		var8(p2)
-		var4(p2)
-	end, { var8 })
+	return ReactModule.useCallback(function(p2) --[[ Line: 169 ]]
+		-- upvalues: UseEventHandlerMapResult (copy), UseStateResult2 (copy)
+		UseEventHandlerMapResult(p2)
+		UseStateResult2(p2)
+	end, { UseEventHandlerMapResult })
 end

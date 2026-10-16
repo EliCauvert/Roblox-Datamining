@@ -1,19 +1,19 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local momentContextModule = require(moments.Components.Feed.Items.Moment.MomentContext)
-local useSignalState = require(parent.SignalsReact).useSignalState
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local MomentContextModule = require(Moments.Components.Feed.Items.Moment.MomentContext)
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
 
-return function()
-	-- upvalues: momentContextModule (ref), reactModule (ref), signalsModule (ref), useSignalState (ref)
-	local controller = momentContextModule.useMoment().controller
+return function() --[[ Line: 12 | Named "useIsPlaying" ]]
+	-- upvalues: MomentContextModule (copy), ReactModule (copy), SignalsModule (copy), UseSignalStateFunction (copy)
+	local Controller = MomentContextModule.useMoment().controller
 	
-	return useSignalState(reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), controller (ref)
-		return signalsModule.createComputed(function(p1)
-			-- upvalues: controller (copy)
-			return if controller == nil then false else controller.getState(p1).isPlaying
+	return UseSignalStateFunction((ReactModule.useMemo(function() --[[ Line: 16 ]]
+		-- upvalues: SignalsModule (upval), Controller (copy)
+		return SignalsModule.createComputed(function(p1) --[[ Line: 17 ]]
+			-- upvalues: Controller (upval)
+			return Controller ~= nil and Controller.getState(p1).isPlaying
 		end)
-	end, { controller }))
+	end, { Controller })))
 end

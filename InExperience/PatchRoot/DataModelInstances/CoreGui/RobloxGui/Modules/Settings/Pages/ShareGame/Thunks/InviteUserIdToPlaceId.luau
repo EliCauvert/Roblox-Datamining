@@ -1,68 +1,72 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local shareGame = game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.Settings.Pages.ShareGame
-local apiSendGameInviteModule = require(shareGame.Thunks.ApiSendGameInvite)
-local apiFetchPlaceInfos = require(corePackagesService.Workspace.Packages.PlaceInfoRodux).Thunks.ApiFetchPlaceInfos
-local promiseModule = require(corePackagesService.Packages.Promise)
-local receivedUserInviteStatusModule = require(shareGame.Actions.ReceivedUserInviteStatus)
-local inviteStatus = require(shareGame.Constants).InviteStatus
+﻿local CorePackages = game:GetService("CorePackages")
+local ShareGame = game:GetService("CoreGui"):WaitForChild("RobloxGui").Modules.Settings.Pages.ShareGame
+local ApiSendGameInviteModule = require(ShareGame.Thunks.ApiSendGameInvite)
+local ApiFetchPlaceInfosFunction = require(CorePackages.Workspace.Packages.PlaceInfoRodux).Thunks.ApiFetchPlaceInfos
+local PromiseModule = require(CorePackages.Packages.Promise)
+local ReceivedUserInviteStatusModule = require(ShareGame.Actions.ReceivedUserInviteStatus)
+local InviteStatus = require(ShareGame.Constants).InviteStatus
 
-return function(p1, p2, p3)
-	-- upvalues: receivedUserInviteStatusModule (ref), inviteStatus (ref), promiseModule (ref), apiFetchPlaceInfos (ref), apiSendGameInviteModule (ref)
-	return function(p4)
-		-- upvalues: p3 (ref), receivedUserInviteStatusModule (copy), p2 (ref), inviteStatus (copy), promiseModule (copy), apiFetchPlaceInfos (copy), p1 (ref), apiSendGameInviteModule (copy)
+return function(p1, p2, p3) --[[ Line: 18 ]]
+	-- upvalues: ReceivedUserInviteStatusModule (copy), InviteStatus (copy), PromiseModule (copy), ApiFetchPlaceInfosFunction (copy), ApiSendGameInviteModule (copy)
+	return function(p4) --[[ Line: 19 ]]
+		-- upvalues: p3 (copy), ReceivedUserInviteStatusModule (upval), p2 (copy), InviteStatus (upval), PromiseModule (upval), ApiFetchPlaceInfosFunction (upval), p1 (copy), ApiSendGameInviteModule (upval)
 		if p3 == "0" then
 			warn("Game Invite failed to send. Cannot send invite to unpublished Place.")
-			p4:dispatch(receivedUserInviteStatusModule(p2, inviteStatus.Failed))
+			p4:dispatch(ReceivedUserInviteStatusModule(p2, InviteStatus.Failed))
 			
-			return promiseModule.reject()
-		end
-		local state = p4:getState()
-		
-		return promiseModule.new(function(p5, p6)
-			-- upvalues: state (ref), p2 (copy), inviteStatus (copy)
-			if state.Invites[tostring(p2)] == inviteStatus.Pending then
-				p6()
-				
-				return
-			end
-			p5()
-		end):andThen(function()
-			-- upvalues: state (ref), p3 (copy), promiseModule (copy), p4 (ref), receivedUserInviteStatusModule (copy), p2 (copy), inviteStatus (copy), apiFetchPlaceInfos (copy), p1 (copy), apiSendGameInviteModule (copy)
-			local var1 = state.PlaceInfos[p3]
+			return PromiseModule.reject()
+		else
+			local State = p4:getState()
 			
-			return promiseModule.new(function(p5, p6)
-				-- upvalues: p4 (copy), receivedUserInviteStatusModule (copy), p2 (copy), inviteStatus (copy), var1 (ref), apiFetchPlaceInfos (copy), p1 (copy), p3 (copy)
-				p4:dispatch(receivedUserInviteStatusModule(p2, inviteStatus.Pending))
-				
-				if var1 then
-					p5(var1)
+			return PromiseModule.new(function(Callback1: () -> (), Callback: () -> ()) --[[ Line: 29 ]]
+				-- upvalues: State (copy), p2 (upval), InviteStatus (upval)
+				if State.Invites[tostring(p2)] == InviteStatus.Pending then
+					Callback()
 					
 					return
+				else
+					Callback1()
 				end
-				p4:dispatch(apiFetchPlaceInfos(p1, { p3 })):andThen(function(p7)
-					-- upvalues: p5 (ref), p6 (ref)
-					if p7[1] == nil then
-						p6()
+			end):andThen(function() --[[ Line: 36 ]]
+				-- upvalues: State (copy), p3 (upval), PromiseModule (upval), p4 (copy), ReceivedUserInviteStatusModule (upval), p2 (upval), InviteStatus (upval), ApiFetchPlaceInfosFunction (upval), p1 (upval), ApiSendGameInviteModule (upval)
+				local PlaceInfo = State.PlaceInfos[p3]
+				
+				return PromiseModule.new(function(Callback: (any) -> (), Callback1) --[[ Line: 39 ]]
+					-- upvalues: p4 (upval), ReceivedUserInviteStatusModule (upval), p2 (upval), InviteStatus (upval), PlaceInfo (copy), ApiFetchPlaceInfosFunction (upval), p1 (upval), p3 (upval)
+					p4:dispatch(ReceivedUserInviteStatusModule(p2, InviteStatus.Pending))
+					
+					if PlaceInfo then
+						Callback(PlaceInfo)
 						
 						return
+					else
+						p4:dispatch(ApiFetchPlaceInfosFunction(p1, { p3 })):andThen(function(Entry) --[[ Line: 46 ]]
+							-- upvalues: Callback (copy), Callback1 (copy)
+							if Entry[1] == nil then
+								Callback1()
+								
+								return
+							else
+								Callback(Entry[1])
+							end
+						end, function() --[[ Line: 52 ]]
+							-- upvalues: Callback1 (copy)
+							Callback1()
+						end)
 					end
-					p5(p7[1])
-				end, function()
-					-- upvalues: p6 (ref)
-					p6()
+				end):andThen(function(Result) --[[ Line: 56 ]]
+					-- upvalues: p4 (upval), ApiSendGameInviteModule (upval), p1 (upval), p2 (upval)
+					return p4:dispatch(ApiSendGameInviteModule(p1, p2, Result))
+				end):andThen(function(Result) --[[ Line: 58 ]]
+					-- upvalues: p4 (upval), ReceivedUserInviteStatusModule (upval), p2 (upval)
+					p4:dispatch(ReceivedUserInviteStatusModule(p2, Result.resultType))
+					
+					return Result
+				end, function() --[[ Line: 61 ]]
+					-- upvalues: p4 (upval), ReceivedUserInviteStatusModule (upval), p2 (upval), InviteStatus (upval)
+					p4:dispatch(ReceivedUserInviteStatusModule(p2, InviteStatus.Failed))
 				end)
-			end):andThen(function(p5)
-				-- upvalues: p4 (copy), apiSendGameInviteModule (copy), p1 (copy), p2 (copy)
-				return p4:dispatch(apiSendGameInviteModule(p1, p2, p5))
-			end):andThen(function(p5)
-				-- upvalues: p4 (copy), receivedUserInviteStatusModule (copy), p2 (copy)
-				p4:dispatch(receivedUserInviteStatusModule(p2, p5.resultType))
-				
-				return p5
-			end, function()
-				-- upvalues: p4 (copy), receivedUserInviteStatusModule (copy), p2 (copy), inviteStatus (copy)
-				p4:dispatch(receivedUserInviteStatusModule(p2, inviteStatus.Failed))
 			end)
-		end)
+		end
 	end
 end

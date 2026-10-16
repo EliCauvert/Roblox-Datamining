@@ -1,25 +1,25 @@
-﻿local inputModeModule = require(script:FindFirstAncestor("Foundation").Utility.Input.InputMode)
-local t = {
-	[Enum.UserInputType.MouseButton1] = inputModeModule.Pointer,
-	[Enum.UserInputType.MouseButton2] = inputModeModule.Pointer,
-	[Enum.UserInputType.MouseButton3] = inputModeModule.Pointer,
-	[Enum.UserInputType.MouseMovement] = inputModeModule.Pointer,
-	[Enum.UserInputType.MouseWheel] = inputModeModule.Pointer,
-	[Enum.UserInputType.None] = inputModeModule.Pointer,
-	[Enum.UserInputType.TextInput] = inputModeModule.Pointer,
-	[Enum.UserInputType.Gamepad1] = inputModeModule.Directional,
-	[Enum.UserInputType.Gamepad2] = inputModeModule.Directional,
-	[Enum.UserInputType.Gamepad3] = inputModeModule.Directional,
-	[Enum.UserInputType.Gamepad4] = inputModeModule.Directional,
-	[Enum.UserInputType.Gamepad5] = inputModeModule.Directional,
-	[Enum.UserInputType.Gamepad6] = inputModeModule.Directional,
-	[Enum.UserInputType.Gamepad7] = inputModeModule.Directional,
-	[Enum.UserInputType.Gamepad8] = inputModeModule.Directional,
-	[Enum.UserInputType.Keyboard] = inputModeModule.Directional,
-	[Enum.UserInputType.Touch] = inputModeModule.Touch
+﻿local InputModeModule = require(script:FindFirstAncestor("Foundation").Utility.Input.InputMode)
+local config = {
+	[Enum.UserInputType.MouseButton1] = InputModeModule.Pointer,
+	[Enum.UserInputType.MouseButton2] = InputModeModule.Pointer,
+	[Enum.UserInputType.MouseButton3] = InputModeModule.Pointer,
+	[Enum.UserInputType.MouseMovement] = InputModeModule.Pointer,
+	[Enum.UserInputType.MouseWheel] = InputModeModule.Pointer,
+	[Enum.UserInputType.None] = InputModeModule.Pointer,
+	[Enum.UserInputType.TextInput] = InputModeModule.Pointer,
+	[Enum.UserInputType.Gamepad1] = InputModeModule.Directional,
+	[Enum.UserInputType.Gamepad2] = InputModeModule.Directional,
+	[Enum.UserInputType.Gamepad3] = InputModeModule.Directional,
+	[Enum.UserInputType.Gamepad4] = InputModeModule.Directional,
+	[Enum.UserInputType.Gamepad5] = InputModeModule.Directional,
+	[Enum.UserInputType.Gamepad6] = InputModeModule.Directional,
+	[Enum.UserInputType.Gamepad7] = InputModeModule.Directional,
+	[Enum.UserInputType.Gamepad8] = InputModeModule.Directional,
+	[Enum.UserInputType.Keyboard] = InputModeModule.Directional,
+	[Enum.UserInputType.Touch] = InputModeModule.Touch
 }
 
-return function(p1)
-	-- upvalues: t (ref)
-	return t[p1]
+return function(p1) --[[ Line: 28 | Named "getInputMode" ]]
+	-- upvalues: config (copy)
+	return config[p1]
 end

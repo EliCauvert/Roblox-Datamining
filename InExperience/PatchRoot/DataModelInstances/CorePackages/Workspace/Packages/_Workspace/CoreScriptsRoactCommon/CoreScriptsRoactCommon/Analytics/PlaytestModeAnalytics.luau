@@ -1,7 +1,7 @@
-﻿local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
-local telemetryService = game:GetService("TelemetryService")
-local telemetryServicePlaySessionInfoEnabledEngineFeature = game:GetEngineFeature("TelemetryServicePlaySessionInfoEnabled")
-local t = {
+﻿local RbxAnalyticsService = game:GetService("RbxAnalyticsService")
+local TelemetryService = game:GetService("TelemetryService")
+local TelemetryServicePlaySessionInfoEnabledEngineFeature = game:GetEngineFeature("TelemetryServicePlaySessionInfoEnabled")
+local config = {
 	eventName = "playtest_mode_enabled",
 	description = "Fires once when playtest mode becomes enabled for the local player",
 	backends = {
@@ -11,22 +11,25 @@ local t = {
 	lastUpdated = { 2026, 7, 23 }
 }
 
-local function _logEventWithStandardizedFields(p1, p2)
-	-- upvalues: telemetryServicePlaySessionInfoEnabledEngineFeature (ref), rbxAnalyticsService (ref), telemetryService (ref)
-	local list = { "addPlaceId", "addUniverseId", "addSessionInfo" }
-	p2 = p2 or {}
+local function _logEventWithStandardizedFields(Config, p1) --[[ Line: 26 ]]
+	-- upvalues: TelemetryServicePlaySessionInfoEnabledEngineFeature (copy), RbxAnalyticsService (copy), TelemetryService (copy)
+	local StandardizedFields = { "addPlaceId", "addUniverseId", "addSessionInfo" }
+	local P1 = p1 or {}
 	
-	if telemetryServicePlaySessionInfoEnabledEngineFeature then
-		table.insert(list, "addPlaySessionId")
+	if TelemetryServicePlaySessionInfoEnabledEngineFeature then
+		table.insert(StandardizedFields, "addPlaySessionId")
 	else
-		p2.playsessionid = rbxAnalyticsService:GetPlaySessionId()
+		P1.playsessionid = RbxAnalyticsService:GetPlaySessionId()
 	end
-	telemetryService:LogEvent(p1, { standardizedFields = list, customFields = p2 })
+	TelemetryService:LogEvent(Config, {
+		standardizedFields = StandardizedFields,
+		customFields = P1
+	})
 end
 
 return {
-	logPlaytestModeEnabled = function(p1)
-		-- upvalues: _logEventWithStandardizedFields (ref), t (ref)
-		_logEventWithStandardizedFields(t, { reason = p1 })
+	logPlaytestModeEnabled = function(Reason) --[[ Line: 42 ]]
+		-- upvalues: _logEventWithStandardizedFields (copy), config (copy)
+		_logEventWithStandardizedFields(config, { reason = Reason })
 	end
 }

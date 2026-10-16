@@ -1,20 +1,20 @@
-﻿local currencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
-local loggingProtocolModule = require(currencyTransfers.Parent.LoggingProtocol)
-local _ = require(currencyTransfers.Stores.createTransferStore)
+﻿local CurrencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
+local LoggingProtocolModule = require(CurrencyTransfers.Parent.LoggingProtocol)
+local _ = require(CurrencyTransfers.Stores.createTransferStore)
 
-return function(p1, p2, p3)
-	-- upvalues: loggingProtocolModule (ref)
-	local direction = p1.getDirection(false)
-	local transferOrigination = p1.getTransferOrigination(false)
-	local t = {
-		direction = if direction then tostring(direction) else "unknown",
-		transferOrigination = if transferOrigination then tostring(transferOrigination) else "unknown"
+return function(p1, p2, List) --[[ Line: 9 | Named "logCurrencyTransferCounter" ]]
+	-- upvalues: LoggingProtocolModule (copy)
+	local Direction = p1.getDirection(false)
+	local TransferOrigination = p1.getTransferOrigination(false)
+	local config = {
+		direction = if Direction then tostring(Direction) else "unknown",
+		transferOrigination = if TransferOrigination then tostring(TransferOrigination) else "unknown"
 	}
 	
-	if p3 then
-		for i, v in p3 do
-			t[i] = v
+	if List then
+		for i, value in List do
+			config[i] = value
 		end
 	end
-	loggingProtocolModule.default:logRobloxTelemetryCounter(p2, 1, t)
+	LoggingProtocolModule.default:logRobloxTelemetryCounter(p2, 1, config)
 end

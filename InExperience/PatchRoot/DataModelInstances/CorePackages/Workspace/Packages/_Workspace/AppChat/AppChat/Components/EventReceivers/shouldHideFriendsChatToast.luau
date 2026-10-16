@@ -1,49 +1,50 @@
-﻿local httpService = game:GetService("HttpService")
+﻿local HttpService = game:GetService("HttpService")
 
-local function isOneToOneChatToast(p1)
-	local content = p1.content
+local function isOneToOneChatToast(p1): boolean --[[ Line: 19 ]]
+	local Content = p1.content
 	
-	if content == nil or content.currentState == nil or content.states == nil then
+	if Content == nil or Content.currentState == nil or Content.states == nil then
 		return false
 	end
-	local currentState = content.states[content.currentState]
+	local State = Content.states[Content.currentState]
 	
-	if currentState == nil or currentState.visualItems == nil then
+	if State == nil or State.visualItems == nil then
 		return false
 	end
-	local var1 = 0
+	local Count = 0
 	
-	for i, v in currentState.visualItems do
-		if v.thumbnail ~= nil then
-			var1 += 1
+	for _, visualItem in State.visualItems do
+		if visualItem.thumbnail ~= nil then
+			Count += 1
 		end
 	end
-	return var1 == 1
+	return Count == 1
 end
 
-return function(p2, p3)
-	-- upvalues: isOneToOneChatToast (ref), httpService (ref)
-	if p2 == nil or p3 == nil then
+return function(p2, ConversationId): boolean --[[ Line: 39 | Named "shouldHideFriendsChatToast" ]]
+	-- upvalues: isOneToOneChatToast (copy), HttpService (copy)
+	if p2 == nil or ConversationId == nil then
 		return false
 	end
-	local content = p2.content
-	local var2 = if content then content.clientEventsPayload else p2.clientEventsPayload
-	local senderId = var2 and (var2.sender_id or var2.sender_userid)
+	local Content = p2.content
+	local ClientEventsPayload = if Content then Content.clientEventsPayload else p2.clientEventsPayload
+	local SenderId = ClientEventsPayload and (ClientEventsPayload.sender_id or ClientEventsPayload.sender_userid)
 	
-	if senderId ~= nil and isOneToOneChatToast(p2) and p3 == `friends:{tostring(senderId)}` then
+	if SenderId ~= nil and isOneToOneChatToast(p2) and ConversationId == `friends:{tostring(SenderId)}` then
 		return true
 	end
-	local conversationId = var2 and var2.conversation_id
+	local ConversationId1 = ClientEventsPayload and ClientEventsPayload.conversation_id
 	
-	if conversationId == p3 then
+	if ConversationId1 == ConversationId then
 		return true
-	elseif type(conversationId) == "string" then
-		local ok, status = pcall(function()
-			-- upvalues: httpService (copy), conversationId (ref)
-			return httpService:JSONDecode(conversationId)
+	elseif type(ConversationId1) == "string" then
+		local Success, Result = pcall(function() --[[ Line: 63 ]]
+			-- upvalues: HttpService (upval), ConversationId1 (copy)
+			return HttpService:JSONDecode(ConversationId1)
 		end)
 		
-		return ok and (type(status) == "table" and status.conversationId == p3)
+		return Success and (type(Result) == "table" and Result.conversationId == ConversationId)
+	else
+		return false
 	end
-	return false
 end

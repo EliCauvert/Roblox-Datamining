@@ -1,140 +1,139 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local telemetryModule = require(appChat.Telemetry.Telemetry)
-local _ = require(appChat.Telemetry.Layers.ChatDetailsTelemetryLayer)
-local _ = require(appChat.Telemetry.Layers.ChatDialogTelemetryLayer)
-local _ = require(parent.SocialLuaAnalytics)
-local defaultTelemetryEventsModule = require(appChat.Telemetry.DefaultTelemetryEvents)
-local namedCounterConfigurationNoEmittedInfo = defaultTelemetryEventsModule.namedCounterConfigurationNoEmittedInfo
-local namedCounterConfigurationAndFormat = defaultTelemetryEventsModule.namedCounterConfigurationAndFormat
-local EVENT_INGEST_NO_EMITTED_INFO = defaultTelemetryEventsModule.EVENT_INGEST_NO_EMITTED_INFO
-local namedCounterConfigurationNoEmittedInfo_1 = defaultTelemetryEventsModule.namedCounterConfigurationNoEmittedInfo
-local EVENT_INGEST_NO_EMITTED_INFO_1 = defaultTelemetryEventsModule.EVENT_INGEST_NO_EMITTED_INFO
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local TelemetryModule = require(AppChat.Telemetry.Telemetry)
+local _ = require(AppChat.Telemetry.Layers.ChatDetailsTelemetryLayer)
+local _ = require(AppChat.Telemetry.Layers.ChatDialogTelemetryLayer)
+local _ = require(AppChat.Parent.SocialLuaAnalytics)
+local DefaultTelemetryEventsModule = require(AppChat.Telemetry.DefaultTelemetryEvents)
+local NamedCounterConfigurationNoEmittedInfoFunction = DefaultTelemetryEventsModule.namedCounterConfigurationNoEmittedInfo
+local NamedCounterConfigurationAndFormatFunction = DefaultTelemetryEventsModule.namedCounterConfigurationAndFormat
+local EVENTINGESTNOEMITTEDINFO = DefaultTelemetryEventsModule.EVENT_INGEST_NO_EMITTED_INFO
+local NamedCounterConfigurationNoEmittedInfoFunction1 = DefaultTelemetryEventsModule.namedCounterConfigurationNoEmittedInfo
+local EVENTINGESTNOEMITTEDINFO1 = DefaultTelemetryEventsModule.EVENT_INGEST_NO_EMITTED_INFO
 
 return {
-	ScreenRendered = telemetryModule.new({
+	ScreenRendered = TelemetryModule.new({
 		name = "chatDetailsRendered",
 		description = "",
 		lastUpdated = { 2026, 1, 27 },
 		backendsList = {
-			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
+			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1) --[[ Line: 28 ]]
 				return { isGroupConversation = p1.isGroupConversation }
 			end),
-			namedCounterConfigurationAndFormat("AppChat.ChatDetails.Rendered", function(p1)
+			NamedCounterConfigurationAndFormatFunction("AppChat.ChatDetails.Rendered", function(p1) --[[ Line: 34 ]]
 				return { isGroupConversation = p1.isGroupConversation }
 			end)
 		}
 	}),
-	ChatDetailsLeaveGroupBtnClicked = telemetryModule.new({
+	ChatDetailsLeaveGroupBtnClicked = TelemetryModule.new({
 		name = "chatDetailsLeaveGroupBtnClicked",
 		description = "",
 		lastUpdated = { 2025, 7, 14 },
 		backendsList = {
-			namedCounterConfigurationNoEmittedInfo("AppChat.ChatDetails.Button.LeaveGroup"),
-			EVENT_INGEST_NO_EMITTED_INFO
+			NamedCounterConfigurationNoEmittedInfoFunction("AppChat.ChatDetails.Button.LeaveGroup"),
+			EVENTINGESTNOEMITTEDINFO
 		}
 	}),
-	ChatDetailsCreateUnfilteredChatCellClicked = telemetryModule.new({
+	ChatDetailsCreateUnfilteredChatCellClicked = TelemetryModule.new({
 		name = "chatDetailsCreateUnfilteredChatCellClicked",
 		description = "",
 		lastUpdated = { 2025, 7, 14 },
 		backendsList = {
-			namedCounterConfigurationNoEmittedInfo("AppChat.ChatDetails.Button.CreateUnfilteredChat"),
-			EVENT_INGEST_NO_EMITTED_INFO
+			NamedCounterConfigurationNoEmittedInfoFunction("AppChat.ChatDetails.Button.CreateUnfilteredChat"),
+			EVENTINGESTNOEMITTEDINFO
 		}
 	}),
-	ChatDetailsCreateUnfilteredChatCellRendered = telemetryModule.new({
+	ChatDetailsCreateUnfilteredChatCellRendered = TelemetryModule.new({
 		name = "chatDetailsCreateUnfilteredChatCellRendered",
 		description = "",
 		lastUpdated = { 2025, 7, 14 },
 		backendsList = {
-			namedCounterConfigurationNoEmittedInfo("AppChat.ChatDetails.CreateUnfilteredChatCell.Rendered"),
-			EVENT_INGEST_NO_EMITTED_INFO
+			NamedCounterConfigurationNoEmittedInfoFunction("AppChat.ChatDetails.CreateUnfilteredChatCell.Rendered"),
+			EVENTINGESTNOEMITTEDINFO
 		}
 	}),
-	ChatDetailsAddFriendsBtnClicked = telemetryModule.new({
+	ChatDetailsAddFriendsBtnClicked = TelemetryModule.new({
 		name = "chatDetailsAddFriendsBtnClicked",
 		description = "",
 		lastUpdated = { 2025, 7, 14 },
 		backendsList = {
-			namedCounterConfigurationNoEmittedInfo("AppChat.ChatDetails.Button.AddFriends"),
-			EVENT_INGEST_NO_EMITTED_INFO
+			NamedCounterConfigurationNoEmittedInfoFunction("AppChat.ChatDetails.Button.AddFriends"),
+			EVENTINGESTNOEMITTEDINFO
 		}
 	}),
-	LeaveGroupDialogRendered = telemetryModule.new({
+	LeaveGroupDialogRendered = TelemetryModule.new({
 		name = "chatDetailsLeaveGroupDialogRendered",
 		description = "",
 		lastUpdated = { 2025, 7, 14 },
 		backendsList = {
-			namedCounterConfigurationNoEmittedInfo_1("AppChat.Dialog.LeaveGroup.Rendered"),
-			EVENT_INGEST_NO_EMITTED_INFO_1
+			NamedCounterConfigurationNoEmittedInfoFunction1("AppChat.Dialog.LeaveGroup.Rendered"),
+			EVENTINGESTNOEMITTEDINFO1
 		}
 	}),
-	LeaveGroupDialogLeaveClicked = telemetryModule.new({
+	LeaveGroupDialogLeaveClicked = TelemetryModule.new({
 		name = "chatDetailsLeaveGroupDialogLeaveClicked",
 		description = "",
 		lastUpdated = { 2025, 7, 14 },
 		backendsList = {
-			namedCounterConfigurationNoEmittedInfo_1("AppChat.Dialog.LeaveGroup.Button.Leave"),
-			EVENT_INGEST_NO_EMITTED_INFO_1
+			NamedCounterConfigurationNoEmittedInfoFunction1("AppChat.Dialog.LeaveGroup.Button.Leave"),
+			EVENTINGESTNOEMITTEDINFO1
 		}
 	}),
-	LeaveGroupDialogStayClicked = telemetryModule.new({
+	LeaveGroupDialogStayClicked = TelemetryModule.new({
 		name = "chatDetailsLeaveGroupDialogStayClicked",
 		description = "",
 		lastUpdated = { 2025, 7, 14 },
 		backendsList = {
-			namedCounterConfigurationNoEmittedInfo_1("AppChat.Dialog.LeaveGroup.Button.Stay"),
-			EVENT_INGEST_NO_EMITTED_INFO_1
+			NamedCounterConfigurationNoEmittedInfoFunction1("AppChat.Dialog.LeaveGroup.Button.Stay"),
+			EVENTINGESTNOEMITTEDINFO1
 		}
 	}),
-	ParticipantDialogReportUserClicked = telemetryModule.new({
+	ParticipantDialogReportUserClicked = TelemetryModule.new({
 		name = "chatDetailsReportUserClicked",
 		description = "",
 		lastUpdated = { 2025, 7, 14 },
 		backendsList = {
-			namedCounterConfigurationNoEmittedInfo_1("AppChat.Dialog.ParticipantDetails.Button.ReportUser"),
-			EVENT_INGEST_NO_EMITTED_INFO_1
+			NamedCounterConfigurationNoEmittedInfoFunction1("AppChat.Dialog.ParticipantDetails.Button.ReportUser"),
+			EVENTINGESTNOEMITTEDINFO1
 		}
 	}),
-	ParticipantDialogChatClicked = telemetryModule.new({
+	ParticipantDialogChatClicked = TelemetryModule.new({
 		name = "chatDetailsParticipantDialogChatClicked",
 		description = "",
 		lastUpdated = { 2026, 4, 2 },
 		backendsList = {
-			namedCounterConfigurationNoEmittedInfo_1("AppChat.Dialog.ParticipantDetails.Button.Chat"),
-			EVENT_INGEST_NO_EMITTED_INFO_1
+			NamedCounterConfigurationNoEmittedInfoFunction1("AppChat.Dialog.ParticipantDetails.Button.Chat"),
+			EVENTINGESTNOEMITTEDINFO1
 		}
 	}),
-	ParticipantDialogAddTrustedConnectionClicked = telemetryModule.new({
+	ParticipantDialogAddTrustedConnectionClicked = TelemetryModule.new({
 		name = "chatDetailsParticipantDialogAddTrustedConnectionClicked",
 		description = "",
 		lastUpdated = { 2026, 4, 30 },
 		backendsList = {
-			defaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1)
+			DefaultTelemetryEventsModule.eventIngestWithFormatFunction(function(p1) --[[ Line: 130 ]]
 				return { modalVariantOverride = p1.modalVariantOverride }
 			end),
-			namedCounterConfigurationAndFormat("AppChat.Dialog.ParticipantDetails.Button.AddTrustedConnection", function(p1)
+			NamedCounterConfigurationAndFormatFunction("AppChat.Dialog.ParticipantDetails.Button.AddTrustedConnection", function(p1) --[[ Line: 138 ]]
 				return { modalVariantOverride = p1.modalVariantOverride }
 			end)
 		}
 	}),
-	ParticipantDialogAddIncomingTrustedConnectionClicked = telemetryModule.new({
+	ParticipantDialogAddIncomingTrustedConnectionClicked = TelemetryModule.new({
 		name = "chatDetailsParticipantDialogAddIncomingTrustedConnectionClicked",
 		description = "",
 		lastUpdated = { 2026, 4, 30 },
 		backendsList = {
-			namedCounterConfigurationNoEmittedInfo_1("AppChat.Dialog.ParticipantDetails.Button.AddIncomingTrustedConnection"),
-			EVENT_INGEST_NO_EMITTED_INFO_1
+			NamedCounterConfigurationNoEmittedInfoFunction1("AppChat.Dialog.ParticipantDetails.Button.AddIncomingTrustedConnection"),
+			EVENTINGESTNOEMITTEDINFO1
 		}
 	}),
-	ParticipantDialogRemoveTrustedConnectionClicked = telemetryModule.new({
+	ParticipantDialogRemoveTrustedConnectionClicked = TelemetryModule.new({
 		name = "chatDetailsParticipantDialogRemoveTrustedConnectionClicked",
 		description = "",
 		lastUpdated = { 2026, 4, 30 },
 		backendsList = {
-			namedCounterConfigurationNoEmittedInfo_1("AppChat.Dialog.ParticipantDetails.Button.RemoveTrustedConnection"),
-			EVENT_INGEST_NO_EMITTED_INFO_1
+			NamedCounterConfigurationNoEmittedInfoFunction1("AppChat.Dialog.ParticipantDetails.Button.RemoveTrustedConnection"),
+			EVENTINGESTNOEMITTEDINFO1
 		}
 	})
 }

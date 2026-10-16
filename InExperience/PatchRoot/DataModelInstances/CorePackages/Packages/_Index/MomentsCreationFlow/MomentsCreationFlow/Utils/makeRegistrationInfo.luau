@@ -1,40 +1,39 @@
-﻿local momentsCommonModule = require(script:FindFirstAncestor("MomentsCreationFlow").Parent.MomentsCommon)
-local attributeType = momentsCommonModule.Enums.AttributeType
-local getTagsForMoment = momentsCommonModule.Utils.getTagsForMoment
+﻿local MomentsCommonModule = require(script:FindFirstAncestor("MomentsCreationFlow").Parent.MomentsCommon)
+local AttributeType = MomentsCommonModule.Enums.AttributeType
+local GetTagsForMomentFunction = MomentsCommonModule.Utils.getTagsForMoment
 
-return function(p1, p2)
-	-- upvalues: attributeType (ref), getTagsForMoment (ref)
-	local assetTotalDuration
-	local edits = p2.edits
-	local t = {}
-	local _ = 0
+return function(p1, p2) --[[ Line: 12 | Named "makeRegistrationInfo" ]]
+	-- upvalues: AttributeType (copy), GetTagsForMomentFunction (copy)
+	local Edits = p2.edits
+	local List = {}
+	local AssetTotalDuration = nil
 	
-	if edits and edits.trim then
-		table.insert(t, {
+	if Edits and Edits.trim then
+		table.insert(List, {
 			AssetId = 0,
-			Description = attributeType.PrimaryAsset,
-			TrimStartTime = edits.trim.startTime
+			Description = AttributeType.PrimaryAsset,
+			TrimStartTime = Edits.trim.startTime
 		})
-		assetTotalDuration = edits.trim.endTime - edits.trim.startTime
+		AssetTotalDuration = Edits.trim.endTime - Edits.trim.startTime
 	else
-		table.insert(t, {
+		table.insert(List, {
 			AssetId = 0,
 			TrimStartTime = 0,
-			Description = attributeType.PrimaryAsset
+			Description = AttributeType.PrimaryAsset
 		})
-		assetTotalDuration = p2.assetTotalDuration
+		AssetTotalDuration = p2.assetTotalDuration
 	end
-	if edits and edits.music then
-		table.insert(t, {
-			AssetId = edits.music.assetId,
-			Description = attributeType.Music,
-			TrimStartTime = edits.music.startTime
+	if Edits and Edits.music then
+		table.insert(List, {
+			AssetId = Edits.music.assetId,
+			Description = AttributeType.Music,
+			TrimStartTime = Edits.music.startTime
 		})
 	end
 	return {
-		attributes = t,
+		attributes = List,
 		contentType = if p1.CaptureType == Enum.CaptureType.Screenshot then Enum.RecommendationItemContentType.Static else Enum.RecommendationItemContentType.Dynamic,
-		customTags = getTagsForMoment(p2),
-		duration = assetTotalDuration
+		customTags = GetTagsForMomentFunction(p2),
+		duration = AssetTotalDuration
 	}
 end

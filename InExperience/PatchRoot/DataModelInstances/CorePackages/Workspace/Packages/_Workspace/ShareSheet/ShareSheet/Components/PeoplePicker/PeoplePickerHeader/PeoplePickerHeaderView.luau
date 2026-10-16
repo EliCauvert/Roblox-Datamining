@@ -1,35 +1,35 @@
-﻿local parent = script:FindFirstAncestor("ShareSheet").Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local iconButton = foundationModule.IconButton
-local searchInput = foundationModule.SearchInput
-local view = foundationModule.View
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local iconName = foundationModule.Enums.IconName
-local inputSize = foundationModule.Enums.InputSize
-local searchInputShape = foundationModule.Enums.SearchInputShape
+﻿local Parent = script:FindFirstAncestor("ShareSheet").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local IconButton = FoundationModule.IconButton
+local SearchInput = FoundationModule.SearchInput
+local View = FoundationModule.View
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local IconName = FoundationModule.Enums.IconName
+local InputSize = FoundationModule.Enums.InputSize
+local SearchInputShape = FoundationModule.Enums.SearchInputShape
 
-return function(p1)
-	-- upvalues: reactModule (ref), view (ref), iconButton (ref), iconName (ref), inputSize (ref), buttonVariant (ref), searchInput (ref), searchInputShape (ref)
-	return reactModule.createElement(view, {
+return function(p1) --[[ Line: 25 | Named "PeoplePickerHeaderView" ]]
+	-- upvalues: ReactModule (copy), View (copy), IconButton (copy), IconName (copy), InputSize (copy), ButtonVariant (copy), SearchInput (copy), SearchInputShape (copy)
+	return ReactModule.createElement(View, {
 		tag = "row align-y-center gap-small size-full-0 auto-y padding-y-small",
 		testId = "PeoplePickerHeaderView"
 	}, {
-		Back = reactModule.createElement(view, { tag = "auto-xy", LayoutOrder = 1 }, {
-			Button = reactModule.createElement(iconButton, {
+		Back = ReactModule.createElement(View, { tag = "auto-xy", LayoutOrder = 1 }, {
+			Button = ReactModule.createElement(IconButton, {
 				testId = "PeoplePickerHeaderView--back",
-				icon = iconName.ChevronLargeLeft,
+				icon = IconName.ChevronLargeLeft,
 				onActivated = p1.goBack,
-				size = inputSize.Medium,
-				variant = buttonVariant.Utility
+				size = InputSize.Medium,
+				variant = ButtonVariant.Utility
 			})
 		}),
-		Field = reactModule.createElement(view, { tag = "fill auto-y", LayoutOrder = 2 }, {
-			Input = reactModule.createElement(searchInput, {
+		Field = ReactModule.createElement(View, { tag = "fill auto-y", LayoutOrder = 2 }, {
+			Input = ReactModule.createElement(SearchInput, {
 				onChanged = p1.onQueryChanged,
 				placeholder = p1.searchPlaceholder,
-				shape = searchInputShape.Pill,
-				size = inputSize.Medium,
+				shape = SearchInputShape.Pill,
+				size = InputSize.Medium,
 				text = p1.query,
 				width = UDim.new(1, 0)
 			})

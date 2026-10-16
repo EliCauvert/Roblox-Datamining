@@ -1,55 +1,57 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local chatCardPriorityModule = require(script.Parent.ChatCardEmphasis.ChatCardPriority)
-local useChatCardEmphasisModule = require(script.Parent.ChatCardEmphasis.useChatCardEmphasis)
-local fFlagBuildExperienceChatCardEmphasisModule = require(buildExperience.Flags.FFlagBuildExperienceChatCardEmphasis)
-local button = foundationModule.Button
-local text = foundationModule.Text
-local view = foundationModule.View
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local fillBehavior = foundationModule.Enums.FillBehavior
-local inputSize = foundationModule.Enums.InputSize
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local ChatCardPriorityModule = require(script.Parent.ChatCardEmphasis.ChatCardPriority)
+local UseChatCardEmphasisModule = require(script.Parent.ChatCardEmphasis.useChatCardEmphasis)
+local FFlagBuildExperienceChatCardEmphasisModule = require(BuildExperience.Flags.FFlagBuildExperienceChatCardEmphasis)
+local Button = FoundationModule.Button
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local FillBehavior = FoundationModule.Enums.FillBehavior
+local InputSize = FoundationModule.Enums.InputSize
 
-return function(p1)
-	-- upvalues: fFlagBuildExperienceChatCardEmphasisModule (ref), useChatCardEmphasisModule (ref), chatCardPriorityModule (ref), reactModule (ref), view (ref), text (ref), button (ref), inputSize (ref), buttonVariant (ref), fillBehavior (ref)
-	return reactModule.createElement(view, {
+return function(Frame) --[[ Line: 31 | Named "BuyMoreRobuxCard" ]]
+	-- upvalues: FFlagBuildExperienceChatCardEmphasisModule (copy), UseChatCardEmphasisModule (copy), ChatCardPriorityModule (copy), ReactModule (copy), View (copy), Text (copy), Button (copy), InputSize (copy), ButtonVariant (copy), FillBehavior (copy)
+	local UseChatCardEmphasisModuleResult = if FFlagBuildExperienceChatCardEmphasisModule then UseChatCardEmphasisModule(ChatCardPriorityModule.BuyMoreRobux) else nil
+	
+	return ReactModule.createElement(View, {
 		tag = "col gap-medium size-full-0 auto-y padding-large stroke-standard stroke-default radius-large",
 		testId = "BuyMoreRobuxCard",
-		LayoutOrder = p1.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		Title = reactModule.createElement(text, {
+		Title = ReactModule.createElement(Text, {
 			LayoutOrder = 1,
 			tag = "size-full-0 auto-y text-title-medium text-wrap text-align-x-left content-emphasis",
-			Text = p1.title
+			Text = Frame.title
 		}),
-		Description = reactModule.createElement(text, {
+		Description = ReactModule.createElement(Text, {
 			LayoutOrder = 2,
 			tag = "size-full-0 auto-y text-body-medium text-wrap text-align-x-left content-emphasis",
-			Text = p1.description
+			Text = Frame.description
 		}),
-		Actions = reactModule.createElement(view, {
+		Actions = ReactModule.createElement(View, {
 			LayoutOrder = 3,
 			tag = "row gap-small size-full-0 auto-y"
 		}, {
-			PrimaryAction = reactModule.createElement(button, {
+			PrimaryAction = ReactModule.createElement(Button, {
 				LayoutOrder = 1,
 				testId = "BuyMoreRobuxCard.PrimaryAction",
-				text = p1.primaryActionText,
-				size = inputSize.Small,
-				variant = if (if fFlagBuildExperienceChatCardEmphasisModule then useChatCardEmphasisModule(chatCardPriorityModule.BuyMoreRobux) else nil) == false then buttonVariant.SoftEmphasis else buttonVariant.Emphasis,
-				fillBehavior = fillBehavior.Fill,
-				onActivated = p1.onPrimaryAction
+				text = Frame.primaryActionText,
+				size = InputSize.Small,
+				variant = if UseChatCardEmphasisModuleResult == false then ButtonVariant.SoftEmphasis else ButtonVariant.Emphasis,
+				fillBehavior = FillBehavior.Fill,
+				onActivated = Frame.onPrimaryAction
 			}),
-			SecondaryAction = reactModule.createElement(button, {
+			SecondaryAction = ReactModule.createElement(Button, {
 				LayoutOrder = 2,
 				testId = "BuyMoreRobuxCard.SecondaryAction",
-				text = p1.secondaryActionText,
-				size = inputSize.Small,
-				variant = buttonVariant.Standard,
-				fillBehavior = fillBehavior.Fill,
-				onActivated = p1.onSecondaryAction
+				text = Frame.secondaryActionText,
+				size = InputSize.Small,
+				variant = ButtonVariant.Standard,
+				fillBehavior = FillBehavior.Fill,
+				onActivated = Frame.onSecondaryAction
 			})
 		})
 	})

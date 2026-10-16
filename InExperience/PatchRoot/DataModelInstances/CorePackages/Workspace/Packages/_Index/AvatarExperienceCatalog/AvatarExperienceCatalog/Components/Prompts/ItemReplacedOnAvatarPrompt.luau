@@ -1,103 +1,102 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
-local reactModule = require(parent.React)
-local builderIconsModule = require(parent.BuilderIcons)
-local roactNavigationModule = require(parent.RoactNavigation)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local withMappedNavigationParams = require(parent.AvatarExperienceNavigation).withMappedNavigationParams
-local avatarExperienceCommonModule = require(parent.AvatarExperienceCommon)
-local AXPartialPageModal = avatarExperienceCommonModule.Components.AXPartialPageModal
-local catalogItemCard = avatarExperienceCommonModule.Components.CatalogItemCard.CatalogItemCard
-local itemCardThumbnail = require(parent.AvatarExperienceUIKit).ItemCardComponents.ItemCardThumbnail
-local foundationModule = require(parent.Foundation)
-local view = foundationModule.View
-local text = foundationModule.Text
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local inputSize = foundationModule.Enums.InputSize
-local iconSize = foundationModule.Enums.IconSize
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
+local ReactModule = require(Parent.React)
+local BuilderIconsModule = require(Parent.BuilderIcons)
+local RoactNavigationModule = require(Parent.RoactNavigation)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local AvatarExperienceCommonModule = require(Parent.AvatarExperienceCommon)
+local AXPartialPageModal = AvatarExperienceCommonModule.Components.AXPartialPageModal
+local CatalogItemCard = AvatarExperienceCommonModule.Components.CatalogItemCard.CatalogItemCard
+local ItemCardThumbnail = require(Parent.AvatarExperienceUIKit).ItemCardComponents.ItemCardThumbnail
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local InputSize = FoundationModule.Enums.InputSize
+local IconSize = FoundationModule.Enums.IconSize
 
-local _ = function(p1, p2)
+local function _(p1, p2): string --[[ Line: 34 ]]
 	return `rbxthumb://type={p2}&id={p1}&w=150&h=150`
 end
 
-return withMappedNavigationParams(function(p1)
-	-- upvalues: useLocalization (ref), reactModule (ref), roactNavigationModule (ref), view (ref), catalogItemCard (ref), itemCardThumbnail (ref), foundationModule (ref), builderIconsModule (ref), iconSize (ref), text (ref), AXPartialPageModal (ref), buttonVariant (ref), inputSize (ref)
-	local var1 = useLocalization({
+return (require(Parent.AvatarExperienceNavigation).withMappedNavigationParams(function(p1) --[[ Line: 38 | Named "ItemReplacedOnAvatarPrompt" ]]
+	-- upvalues: UseLocalizationFunction (copy), ReactModule (copy), RoactNavigationModule (copy), View (copy), CatalogItemCard (copy), ItemCardThumbnail (copy), FoundationModule (copy), BuilderIconsModule (copy), IconSize (copy), Text (copy), AXPartialPageModal (copy), ButtonVariant (copy), InputSize (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
 		confirmButtonText = "CommonUI.Controls.Action.OK",
 		titleText = "Feature.Catalog.Title.Checkout.ItemReplacedOnAvatarTitle",
 		bodyText = "Feature.Catalog.Label.Checkout.ItemReplacedOnAvatarBody"
 	})
-	local var2 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref), roactNavigationModule (copy)
-		p1.navigation.dispatch(roactNavigationModule.Actions.back(nil))
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 45 ]]
+		-- upvalues: p1 (copy), RoactNavigationModule (upval)
+		p1.navigation.dispatch(RoactNavigationModule.Actions.back(nil))
 	end, { p1.navigation })
-	local var3 = reactModule.useCallback(function()
-		-- upvalues: var2 (ref), p1 (ref)
-		var2()
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 49 ]]
+		-- upvalues: UseResult (copy), p1 (copy)
+		UseResult()
 		p1.onConfirm()
-	end, { p1.onConfirm, var2 })
+	end, { p1.onConfirm, UseResult })
 	
-	return reactModule.createElement(AXPartialPageModal, {
-		onBackgroundPress = var3,
+	return ReactModule.createElement(AXPartialPageModal, {
+		onBackgroundPress = UseResult1,
 		buttonStackProps = {
 			rowLayout = false,
 			buttons = {
 				{
 					props = {
-						onActivated = var3,
-						text = var1.confirmButtonText,
-						variant = buttonVariant.Standard,
-						size = inputSize.Medium
+						onActivated = UseResult1,
+						text = UseLocalizationResult.confirmButtonText,
+						variant = ButtonVariant.Standard,
+						size = InputSize.Medium
 					}
 				}
 			}
 		}
-	}, (function()
-		-- upvalues: reactModule (copy), view (copy), catalogItemCard (copy), itemCardThumbnail (copy), p1 (ref), foundationModule (copy), builderIconsModule (copy), iconSize (copy), text (copy), var1 (ref)
+	}, ((function() --[[ Line: 54 ]]
+		-- upvalues: ReactModule (upval), View (upval), CatalogItemCard (upval), ItemCardThumbnail (upval), p1 (copy), FoundationModule (upval), BuilderIconsModule (upval), IconSize (upval), Text (upval), UseLocalizationResult (copy)
 		return {
-			ViewFrame = reactModule.createElement(view, {
+			ViewFrame = ReactModule.createElement(View, {
 				tag = "auto-y size-full-0 padding-bottom-xxlarge col align-x-left align-y-top"
 			}, {
-				GraphicContainer = reactModule.createElement(view, {
+				GraphicContainer = ReactModule.createElement(View, {
 					tag = "row size-full-0 auto-y align-x-center padding-bottom-xxlarge",
 					LayoutOrder = 1
 				}, {
-					BeforeItem = reactModule.createElement(catalogItemCard, {
+					BeforeItem = ReactModule.createElement(CatalogItemCard, {
 						LayoutOrder = 1,
 						Selectable = false,
 						AutomaticSize = Enum.AutomaticSize.XY,
-						presentationSlot = reactModule.createElement(view, { Size = UDim2.fromOffset(80, 80) }, reactModule.createElement(itemCardThumbnail, {
+						presentationSlot = ReactModule.createElement(View, { Size = UDim2.fromOffset(80, 80) }, ReactModule.createElement(ItemCardThumbnail, {
 							url = `rbxthumb://type={p1.beforeItem.thumbType}&id={p1.beforeItem.itemId}&w=150&h=150`
 						}))
 					}),
-					ReplaceIcon = reactModule.createElement(view, {
+					ReplaceIcon = ReactModule.createElement(View, {
 						LayoutOrder = 2,
 						tag = "row auto-x auto-y align-x-center align-y-center",
 						Size = UDim2.fromOffset(60, 80)
-					}, reactModule.createElement(foundationModule.Icon, {
-						name = builderIconsModule.Icon.TwoArrowsSpinClockwise,
-						size = iconSize.Large,
-						variant = builderIconsModule.IconVariant.Regular
+					}, ReactModule.createElement(FoundationModule.Icon, {
+						name = BuilderIconsModule.Icon.TwoArrowsSpinClockwise,
+						size = IconSize.Large,
+						variant = BuilderIconsModule.IconVariant.Regular
 					})),
-					AfterItem = reactModule.createElement(catalogItemCard, {
+					AfterItem = ReactModule.createElement(CatalogItemCard, {
 						LayoutOrder = 3,
 						Selectable = false,
 						AutomaticSize = Enum.AutomaticSize.XY,
-						presentationSlot = reactModule.createElement(view, { Size = UDim2.fromOffset(80, 80) }, reactModule.createElement(itemCardThumbnail, {
+						presentationSlot = ReactModule.createElement(View, { Size = UDim2.fromOffset(80, 80) }, ReactModule.createElement(ItemCardThumbnail, {
 							url = `rbxthumb://type={p1.afterItem.thumbType}&id={p1.afterItem.itemId}&w=150&h=150`
 						}))
 					})
 				}),
-				PromptBodyTitle = reactModule.createElement(text, {
+				PromptBodyTitle = ReactModule.createElement(Text, {
 					tag = "auto-xy padding-bottom-small padding-top-large text-align-x-left text-heading-small text-wrap",
 					LayoutOrder = 2,
-					Text = var1.titleText
+					Text = UseLocalizationResult.titleText
 				}),
-				PromptBodyText = reactModule.createElement(text, {
+				PromptBodyText = ReactModule.createElement(Text, {
 					tag = "auto-xy text-align-x-left text-truncate-end text-body-large text-wrap",
 					LayoutOrder = 3,
-					Text = var1.bodyText
+					Text = UseLocalizationResult.bodyText
 				})
 			})
 		}
-	end)())
-end)
+	end)()))
+end))

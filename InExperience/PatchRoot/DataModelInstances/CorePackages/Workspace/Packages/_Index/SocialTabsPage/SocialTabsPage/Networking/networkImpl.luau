@@ -1,6 +1,6 @@
-﻿local httpRequestModule = require(script:FindFirstAncestor("SocialTabsPage").Parent.HttpRequest)
+﻿local HttpRequestModule = require(script:FindFirstAncestor("SocialTabsPage").Parent.HttpRequest)
 
-return httpRequestModule.config({
-	requestFunction = httpRequestModule.requestFunctions.RequestInternal,
+return HttpRequestModule.config({
+	requestFunction = HttpRequestModule.requestFunctions.RequestInternal,
 	maxRetryCount = game:DefineFastInt("SocialTabsPageHttpRetryCount", 3)
 })

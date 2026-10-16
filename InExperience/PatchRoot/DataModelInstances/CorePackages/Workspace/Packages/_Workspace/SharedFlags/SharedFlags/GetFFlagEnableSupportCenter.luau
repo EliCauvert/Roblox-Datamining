@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("EnableSupportCenter", false)
 
-return function()
+return function() --[[ Line: 3 ]]
 	return game:GetFastFlag("EnableSupportCenter")
 end

@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Workspace.VrCompatibility.VrCompatibility)
+﻿return (require(script.Parent.Parent.Parent._Workspace.VrCompatibility.VrCompatibility))

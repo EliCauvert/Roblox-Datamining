@@ -1,13 +1,13 @@
-﻿local avatarEditorService = game:GetService("AvatarEditorService")
-local playersService = game:GetService("Players")
+﻿local AvatarEditorService = game:GetService("AvatarEditorService")
+local Players = game:GetService("Players")
 
-return function(p1, p2)
-	-- upvalues: playersService (ref), avatarEditorService (ref)
-	avatarEditorService:NoPromptSaveAvatar(playersService:GetHumanoidDescriptionFromOutfitIdAsync(p1), p2, {
+return function(OutfitId, RigType) --[[ Line: 10 | Named "applyOutfit" ]]
+	-- upvalues: Players (copy), AvatarEditorService (copy)
+	AvatarEditorService:NoPromptSaveAvatar(Players:GetHumanoidDescriptionFromOutfitIdAsync(OutfitId), RigType, {
 		BodyColors = true,
 		AvatarType = true,
 		Scales = true,
 		Assets = true
 	})
-	avatarEditorService.PromptSaveAvatarCompleted:Wait()
+	AvatarEditorService.PromptSaveAvatarCompleted:Wait()
 end

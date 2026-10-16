@@ -1,17 +1,17 @@
-﻿local squadsCore = script:FindFirstAncestor("SquadsCore")
-local parent = squadsCore.Parent
-local useCurrentSquadIdModule = require(squadsCore.Hooks.useCurrentSquadId)
-local reactModule = require(parent.React)
-local usePrevious = require(parent.RoactUtils).Hooks.usePrevious
+﻿local SquadsCore = script:FindFirstAncestor("SquadsCore")
+local Parent = SquadsCore.Parent
+local UseCurrentSquadIdModule = require(SquadsCore.Hooks.useCurrentSquadId)
+local ReactModule = require(Parent.React)
+local UsePreviousFunction = require(Parent.RoactUtils).Hooks.usePrevious
 
-return function(p1)
-	-- upvalues: useCurrentSquadIdModule (ref), usePrevious (ref), reactModule (ref)
-	local var1 = useCurrentSquadIdModule() or ""
-	local var2 = usePrevious(var1) or ""
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), var2 (ref), p1 (ref)
-		if var1 ~= var2 and var2 ~= "" and p1 then
-			p1()
+return function(Callback) --[[ Line: 9 ]]
+	-- upvalues: UseCurrentSquadIdModule (copy), UsePreviousFunction (copy), ReactModule (copy)
+	local UseCurrentSquadIdModuleResult = UseCurrentSquadIdModule() or ""
+	local UsePreviousResult = UsePreviousFunction(UseCurrentSquadIdModuleResult) or ""
+	ReactModule.useEffect(function() --[[ Line: 12 ]]
+		-- upvalues: UseCurrentSquadIdModuleResult (copy), UsePreviousResult (copy), Callback (copy)
+		if UseCurrentSquadIdModuleResult ~= UsePreviousResult and UsePreviousResult ~= "" and Callback then
+			Callback()
 		end
-	end, { var1, p1 })
+	end, { UseCurrentSquadIdModuleResult, Callback })
 end

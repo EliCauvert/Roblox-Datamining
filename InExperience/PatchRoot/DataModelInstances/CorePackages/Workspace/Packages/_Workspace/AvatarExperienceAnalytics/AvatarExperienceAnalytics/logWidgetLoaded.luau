@@ -1,57 +1,56 @@
-﻿local avatarExperienceFlagsModule = require(script:FindFirstAncestor("AvatarExperienceAnalytics").Parent.AvatarExperienceFlags)
-local fFlagAXDeferWidgetLoadedUntilMarketplaceEntered = avatarExperienceFlagsModule.FFlagAXDeferWidgetLoadedUntilMarketplaceEntered
-local fFlagAXLimitWidgetLoadedItemCount = avatarExperienceFlagsModule.FFlagAXLimitWidgetLoadedItemCount
-local fIntAXWidgetLoadedItemCountLimit = avatarExperienceFlagsModule.FIntAXWidgetLoadedItemCountLimit
-local fFlagAXUnifiedEventCounters = avatarExperienceFlagsModule.FFlagAXUnifiedEventCounters
-local unifiedEventLogEnumsModule = require(script.Parent.UnifiedEventLogEnums)
-local sendUnifiedEventLogModule = require(script.Parent.sendUnifiedEventLog)
-local getUnifiedDeferredEventStoreModule = require(script.Parent.Store.getUnifiedDeferredEventStore)
-local WIDGET_LOADED = unifiedEventLogEnumsModule.MarketplaceUnifiedAction.WIDGET_LOADED
+﻿local AvatarExperienceFlagsModule = require(script:FindFirstAncestor("AvatarExperienceAnalytics").Parent.AvatarExperienceFlags)
+local FFlagAXDeferWidgetLoadedUntilMarketplaceEntered = AvatarExperienceFlagsModule.FFlagAXDeferWidgetLoadedUntilMarketplaceEntered
+local FFlagAXLimitWidgetLoadedItemCount = AvatarExperienceFlagsModule.FFlagAXLimitWidgetLoadedItemCount
+local FIntAXWidgetLoadedItemCountLimit = AvatarExperienceFlagsModule.FIntAXWidgetLoadedItemCountLimit
+local FFlagAXUnifiedEventCounters = AvatarExperienceFlagsModule.FFlagAXUnifiedEventCounters
+local UnifiedEventLogEnumsModule = require(script.Parent.UnifiedEventLogEnums)
+local SendUnifiedEventLogModule = require(script.Parent.sendUnifiedEventLog)
+local GetUnifiedDeferredEventStoreModule = require(script.Parent.Store.getUnifiedDeferredEventStore)
+local WIDGETLOADED = UnifiedEventLogEnumsModule.MarketplaceUnifiedAction.WIDGET_LOADED
 
-local function logWidgetLoaded(p1, p2, p3)
-	-- upvalues: fFlagAXDeferWidgetLoadedUntilMarketplaceEntered (ref), getUnifiedDeferredEventStoreModule (ref), WIDGET_LOADED (ref), logWidgetLoaded (ref), fFlagAXUnifiedEventCounters (ref), fFlagAXLimitWidgetLoadedItemCount (ref), fIntAXWidgetLoadedItemCountLimit (ref), sendUnifiedEventLogModule (ref), unifiedEventLogEnumsModule (ref)
-	if fFlagAXDeferWidgetLoadedUntilMarketplaceEntered then
-		local var1 = getUnifiedDeferredEventStoreModule(false)
+local function logWidgetLoaded(List, RequestId, Callback) --[[ Line: 22 ]]
+	-- upvalues: FFlagAXDeferWidgetLoadedUntilMarketplaceEntered (copy), GetUnifiedDeferredEventStoreModule (copy), WIDGETLOADED (copy), logWidgetLoaded (copy), FFlagAXUnifiedEventCounters (copy), FFlagAXLimitWidgetLoadedItemCount (copy), FIntAXWidgetLoadedItemCountLimit (copy), SendUnifiedEventLogModule (copy), UnifiedEventLogEnumsModule (copy)
+	if FFlagAXDeferWidgetLoadedUntilMarketplaceEntered then
+		local UnifiedDeferredEventStoreModule = GetUnifiedDeferredEventStoreModule(false)
 		
-		if not var1.isEntered(false) then
-			var1.enqueue(WIDGET_LOADED, function()
-				-- upvalues: logWidgetLoaded (copy), p1 (ref), p2 (ref), fFlagAXUnifiedEventCounters (copy), p3 (ref)
-				logWidgetLoaded(p1, p2, if fFlagAXUnifiedEventCounters then p3 else nil)
+		if not UnifiedDeferredEventStoreModule.isEntered(false) then
+			UnifiedDeferredEventStoreModule.enqueue(WIDGETLOADED, function() --[[ Line: 26 ]]
+				-- upvalues: logWidgetLoaded (upval), List (copy), RequestId (copy), FFlagAXUnifiedEventCounters (upval), Callback (copy)
+				logWidgetLoaded(List, RequestId, if FFlagAXUnifiedEventCounters then Callback else nil)
 			end)
 			
 			return
 		end
 	end
-	local var2 = if fFlagAXUnifiedEventCounters and p3 ~= nil then p3() else nil
-	
-	for i, v in p1 do
-		local t = {}
-		local t_1 = {}
-		local t_2 = {}
+	local CallbackResult = if FFlagAXUnifiedEventCounters and Callback ~= nil then Callback() else nil
+	for GridPositionRow, value in List do
+		local List1 = {}
+		local List2 = {}
+		local List3 = {}
 		
-		if v.content then
-			for i_1, v_1 in v.content do
-				if fFlagAXLimitWidgetLoadedItemCount and fIntAXWidgetLoadedItemCountLimit <= #t_2 then break end
-				if v_1.type == "Asset" then
-					table.insert(t, v_1.id)
-				elseif v_1.type == "Bundle" then
-					table.insert(t_1, v_1.id)
+		if value.content then
+			for _, value1 in value.content do
+				if FFlagAXLimitWidgetLoadedItemCount and FIntAXWidgetLoadedItemCountLimit <= #List3 then break end
+				if value1.type == "Asset" then
+					table.insert(List1, value1.id)
+				elseif value1.type == "Bundle" then
+					table.insert(List2, value1.id)
 				end
-				table.insert(t_2, v_1.id)
+				table.insert(List3, value1.id)
 			end
 		end
-		sendUnifiedEventLogModule({
+		SendUnifiedEventLogModule({
 			gridPositionColumn = 1,
-			action = unifiedEventLogEnumsModule.MarketplaceUnifiedAction.WIDGET_LOADED,
-			surface = if fFlagAXUnifiedEventCounters then var2 else nil,
-			requestId = p2,
-			widgetId = v.id,
-			widgetType = v.type,
-			themeId = v.tagId,
-			gridPositionRow = i,
-			assetIds = table.concat(t, ","),
-			bundleIds = table.concat(t_1, ","),
-			widgetItemIds = table.concat(t_2, ",")
+			action = UnifiedEventLogEnumsModule.MarketplaceUnifiedAction.WIDGET_LOADED,
+			surface = if FFlagAXUnifiedEventCounters then CallbackResult else nil,
+			requestId = RequestId,
+			widgetId = value.id,
+			widgetType = value.type,
+			themeId = value.tagId,
+			gridPositionRow = GridPositionRow,
+			assetIds = table.concat(List1, ","),
+			bundleIds = table.concat(List2, ","),
+			widgetItemIds = table.concat(List3, ",")
 		})
 	end
 end

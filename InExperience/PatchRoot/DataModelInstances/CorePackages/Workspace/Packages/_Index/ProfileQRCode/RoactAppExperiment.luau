@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.RoactAppExperiment.RoactAppExperiment)
+﻿return (require(script.Parent.Parent.Parent._Index.RoactAppExperiment.RoactAppExperiment))

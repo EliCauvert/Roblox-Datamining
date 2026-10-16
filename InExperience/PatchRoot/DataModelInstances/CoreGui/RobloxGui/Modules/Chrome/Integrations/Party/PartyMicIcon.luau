@@ -1,100 +1,99 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local playersService = game:GetService("Players")
-local httpService = game:GetService("HttpService")
-local runService = game:GetService("RunService")
-local reactModule = require(corePackagesService.Packages.React)
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local crossExperienceVoiceModule = require(corePackagesService.Workspace.Packages.CrossExperienceVoice)
-local voiceChatModule = require(corePackagesService.Workspace.Packages.VoiceChat)
-local useParticipant = crossExperienceVoiceModule.Hooks.useParticipant
-local useIsVoiceConnected = crossExperienceVoiceModule.Hooks.useIsVoiceConnected
-local useIsActiveParticipant = crossExperienceVoiceModule.Hooks.useIsActiveParticipant
-local useIsParticipantMuted = crossExperienceVoiceModule.Hooks.useIsParticipantMuted
-local unibarStyle = require(corePackagesService.Workspace.Packages.Chrome).UnibarStyle
-local fFlagTokenizeUnibarConstantsWithStyleProvider = require(script.Parent.Parent.Parent.ChromeShared.Flags).FFlagTokenizeUnibarConstantsWithStyleProvider
-local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
-local partyMicVoiceIndicatorFrameBuffer = game:DefineFastInt("PartyMicVoiceIndicatorFrameBuffer", 3)
+﻿local CorePackages = game:GetService("CorePackages")
+local Players = game:GetService("Players")
+local HttpService = game:GetService("HttpService")
+local RunService = game:GetService("RunService")
+local ReactModule = require(CorePackages.Packages.React)
+local CrossExperienceVoiceModule = require(CorePackages.Workspace.Packages.CrossExperienceVoice)
+local VoiceChatModule = require(CorePackages.Workspace.Packages.VoiceChat)
+local UseParticipantFunction = CrossExperienceVoiceModule.Hooks.useParticipant
+local UseIsVoiceConnectedFunction = CrossExperienceVoiceModule.Hooks.useIsVoiceConnected
+local UseIsActiveParticipantFunction = CrossExperienceVoiceModule.Hooks.useIsActiveParticipant
+local UseIsParticipantMutedFunction = CrossExperienceVoiceModule.Hooks.useIsParticipantMuted
+local UnibarStyle = require(CorePackages.Workspace.Packages.Chrome).UnibarStyle
+local FFlagTokenizeUnibarConstantsWithStyleProvider = require(script.Parent.Parent.Parent.ChromeShared.Flags).FFlagTokenizeUnibarConstantsWithStyleProvider
+local ImageSetLabel = require(CorePackages.Packages.UIBlox).Core.ImageSet.ImageSetLabel
+local PartyMicVoiceIndicatorFrameBuffer = game:DefineFastInt("PartyMicVoiceIndicatorFrameBuffer", 3)
 
-local function getLoadingIndicatorIcon(p1, p2, p3, p4, p5)
-	-- upvalues: voiceChatModule (ref)
-	return if not (not p3 or not p1 or p2) then if p4 then voiceChatModule.Utils.GetIcon("Unmuted", "MicLight", p5) else voiceChatModule.Utils.GetIcon("Unmuted0", "MicLight") else voiceChatModule.Utils.GetIcon("Muted", "MicLight")
+local function getLoadingIndicatorIcon(p1, p2, p3, Current, p4) --[[ Line: 28 ]]
+	-- upvalues: VoiceChatModule (copy)
+	return if p3 and p1 and not p2 then if Current then VoiceChatModule.Utils.GetIcon("Unmuted", "MicLight", p4) else VoiceChatModule.Utils.GetIcon("Unmuted0", "MicLight") else VoiceChatModule.Utils.GetIcon("Muted", "MicLight")
 end
 
-function PartyMicIcon(p1)
-	-- upvalues: playersService (ref), useIsVoiceConnected (ref), useParticipant (ref), useIsActiveParticipant (ref), reactModule (ref), useIsParticipantMuted (ref), httpService (ref), fFlagTokenizeUnibarConstantsWithStyleProvider (ref), unibarStyle (ref), partyMicVoiceIndicatorFrameBuffer (ref), runService (ref), getLoadingIndicatorIcon (ref), imageSetLabel (ref)
-	local userId = playersService and (playersService.LocalPlayer and (playersService.LocalPlayer.UserId or -1))
-	local var1 = useIsVoiceConnected()
-	local var2 = useParticipant(userId)
-	local var3 = useIsActiveParticipant(userId)
-	local var4 = reactModule.useRef(var3)
-	local var5 = useIsParticipantMuted(userId) == true
-	local var6 = reactModule.useRef(0)
-	local var7, var8 = reactModule.useState(0)
-	local var9 = reactModule.useMemo(function()
-		-- upvalues: httpService (copy)
-		return httpService:GenerateGUID()
+function PartyMicIcon(p1) --[[ Line: 44 ]]
+	-- upvalues: Players (copy), UseIsVoiceConnectedFunction (copy), UseParticipantFunction (copy), UseIsActiveParticipantFunction (copy), ReactModule (copy), UseIsParticipantMutedFunction (copy), HttpService (copy), FFlagTokenizeUnibarConstantsWithStyleProvider (copy), UnibarStyle (copy), PartyMicVoiceIndicatorFrameBuffer (copy), RunService (copy), getLoadingIndicatorIcon (copy), ImageSetLabel (copy)
+	local UserId = Players and Players.LocalPlayer and Players.LocalPlayer.UserId or -1
+	local UseIsVoiceConnectedResult = UseIsVoiceConnectedFunction()
+	local UseParticipantResult = UseParticipantFunction(UserId)
+	local UseIsActiveParticipantResult = UseIsActiveParticipantFunction(UserId)
+	local UseRefResult = ReactModule.useRef(UseIsActiveParticipantResult)
+	local IsUseIsParticipantMutedResult = UseIsParticipantMutedFunction(UserId) == true
+	local UseRefResult1 = ReactModule.useRef(0)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 53 ]]
+		-- upvalues: HttpService (upval)
+		return HttpService:GenerateGUID()
 	end, {})
-	local _ = nil
-	local var10 = if fFlagTokenizeUnibarConstantsWithStyleProvider then unibarStyle.use().ICON_SIZE else 36
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), p1 (ref)
-		if var2 then
-			p1.isLocalPlayerMutedSignal:fire(var2.isMuted)
+	local ICONSIZE = if FFlagTokenizeUnibarConstantsWithStyleProvider then UnibarStyle.use().ICON_SIZE else 36
+	ReactModule.useEffect(function() --[[ Line: 66 ]]
+		-- upvalues: UseParticipantResult (copy), p1 (copy)
+		if UseParticipantResult then
+			p1.isLocalPlayerMutedSignal:fire(UseParticipantResult.isMuted)
 		end
-	end, { var2 })
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var1 (ref)
-		p1.isVoiceConnectedSignal:fire(var1)
-	end, { var1 })
-	local var11 = reactModule.useCallback(function()
-		-- upvalues: var4 (ref), var6 (ref), partyMicVoiceIndicatorFrameBuffer (copy), var8 (ref)
-		if var4.current then
-			if partyMicVoiceIndicatorFrameBuffer < var6.current then
-				var8(math.random())
-				var6.current = 0
+	end, { UseParticipantResult })
+	ReactModule.useEffect(function() --[[ Line: 72 ]]
+		-- upvalues: p1 (copy), UseIsVoiceConnectedResult (copy)
+		p1.isVoiceConnectedSignal:fire(UseIsVoiceConnectedResult)
+	end, { UseIsVoiceConnectedResult })
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 76 ]]
+		-- upvalues: UseRefResult (copy), UseRefResult1 (copy), PartyMicVoiceIndicatorFrameBuffer (upval), UseStateResult2 (copy)
+		if UseRefResult.current then
+			if PartyMicVoiceIndicatorFrameBuffer < UseRefResult1.current then
+				UseStateResult2(math.random())
+				UseRefResult1.current = 0
 				
 				return
+			else
+				UseRefResult1.current += 1
 			end
-			var6.current += 1
 		end
 	end, {})
-	reactModule.useEffect(function()
-		-- upvalues: var4 (ref), var3 (ref)
-		var4.current = var3
-	end, { var3 })
-	reactModule.useEffect(function()
-		-- upvalues: runService (copy), var9 (ref), var11 (ref)
-		runService:BindToRenderStep(var9, 1, var11)
+	ReactModule.useEffect(function() --[[ Line: 87 ]]
+		-- upvalues: UseRefResult (copy), UseIsActiveParticipantResult (copy)
+		UseRefResult.current = UseIsActiveParticipantResult
+	end, { UseIsActiveParticipantResult })
+	ReactModule.useEffect(function() --[[ Line: 91 ]]
+		-- upvalues: RunService (upval), UseMemoResult (copy), UseResult (copy)
+		RunService:BindToRenderStep(UseMemoResult, 1, UseResult)
 		
-		return function()
-			-- upvalues: runService (copy), var9 (copy)
-			runService:UnbindFromRenderStep(var9)
+		return function() --[[ Line: 94 ]]
+			-- upvalues: RunService (upval), UseMemoResult (upval)
+			RunService:UnbindFromRenderStep(UseMemoResult)
 		end
 	end, {})
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BorderSizePixel = 0,
 		BackgroundTransparency = 1,
-		Size = UDim2.new(0, var10, 0, var10)
+		Size = UDim2.new(0, ICONSIZE, 0, ICONSIZE)
 	}, {
-		UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) }),
-		Icon = reactModule.createElement(imageSetLabel, {
+		UICorner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) }),
+		Icon = ReactModule.createElement(ImageSetLabel, {
 			BackgroundTransparency = 1,
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			Position = UDim2.fromScale(0.5, 0.5),
-			Size = UDim2.fromOffset(var10, var10),
-			Image = reactModule.useMemo(function()
-				-- upvalues: getLoadingIndicatorIcon (copy), var2 (ref), var5 (ref), var1 (ref), var3 (ref), var7 (ref)
-				return getLoadingIndicatorIcon(var2, var5, var1, var3, var7)
+			Size = UDim2.fromOffset(ICONSIZE, ICONSIZE),
+			Image = ReactModule.useMemo(function() --[[ Line: 99 ]]
+				-- upvalues: getLoadingIndicatorIcon (upval), UseParticipantResult (copy), IsUseIsParticipantMutedResult (copy), UseIsVoiceConnectedResult (copy), UseIsActiveParticipantResult (copy), UseStateResult (copy)
+				return getLoadingIndicatorIcon(UseParticipantResult, IsUseIsParticipantMutedResult, UseIsVoiceConnectedResult, UseIsActiveParticipantResult, UseStateResult)
 			end, {
-				var2,
-				var5,
-				var1,
-				var3,
-				var7
+				UseParticipantResult,
+				IsUseIsParticipantMutedResult,
+				UseIsVoiceConnectedResult,
+				UseIsActiveParticipantResult,
+				UseStateResult
 			})
 		}, {
-			reactModule.createElement("UICorner", { Name = "Corner", CornerRadius = UDim.new(1, 0) })
+			ReactModule.createElement("UICorner", { Name = "Corner", CornerRadius = UDim.new(1, 0) })
 		})
 	})
 end

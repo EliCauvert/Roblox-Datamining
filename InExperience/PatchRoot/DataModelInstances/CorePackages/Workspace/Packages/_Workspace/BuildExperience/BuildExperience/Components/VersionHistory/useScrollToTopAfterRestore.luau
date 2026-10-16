@@ -1,27 +1,31 @@
-﻿local reactModule = require(script:FindFirstAncestor("BuildExperience").Parent.React)
+﻿local ReactModule = require(script:FindFirstAncestor("BuildExperience").Parent.React)
 
-return function()
-	-- upvalues: reactModule (ref)
-	local var1 = reactModule.useRef(nil)
-	local var2 = reactModule.useCallback(function()
-		-- upvalues: var1 (ref)
-		local current = var1.current
+return function() --[[ Line: 6 | Named "useScrollToTopAfterRestore" ]]
+	-- upvalues: ReactModule (copy)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 9 ]]
+		-- upvalues: UseRefResult (copy)
+		local Current = UseRefResult.current
 		
-		if current == nil then
+		if Current ~= nil then
+			task.defer(function() --[[ Line: 15 ]]
+				-- upvalues: UseRefResult (upval), Current (copy)
+				if UseRefResult.current == Current then
+					Current.CanvasPosition = Vector2.new(0, 0)
+					
+					return
+				end
+			end)
+			
 			return
 		end
-		task.defer(function()
-			-- upvalues: var1 (copy), current (ref)
-			if var1.current == current then
-				current.CanvasPosition = Vector2.new(0, 0)
-				
-				return
-			end
-		end)
 	end, {})
 	
-	return reactModule.useMemo(function()
-		-- upvalues: var1 (ref), var2 (ref)
-		return { scrollingFrameRef = var1, scrollToTopAfterRestore = var2 }
-	end, { var1, var2 })
+	return ReactModule.useMemo(function() --[[ Line: 24 ]]
+		-- upvalues: UseRefResult (copy), UseResult (copy)
+		return {
+			scrollingFrameRef = UseRefResult,
+			scrollToTopAfterRestore = UseResult
+		}
+	end, { UseRefResult, UseResult })
 end

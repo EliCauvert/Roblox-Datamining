@@ -1,89 +1,81 @@
-﻿local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local constantsModule = require(parent.Common.Constants)
-local dependenciesModule = require(parent.dependencies)
-local llama = dependenciesModule.llama
-local react = dependenciesModule.React
-local useSelector = dependenciesModule.Hooks.useSelector
-local getDeepValue = dependenciesModule.SocialLibraries.Dictionary.getDeepValue
-local eventNamesModule = require(script.Parent.EventNames)
-local getFriendStatusModule = require(script.Parent.getFriendStatus)
-local recommendationContextType = dependenciesModule.RoduxFriends.Enums.RecommendationContextType
-local getFFlagPYMKAddFriendsEntry = dependenciesModule.getFFlagPYMKAddFriendsEntry
-local fFlagMigrateFriendshipStatusesPYMKModule = require(parent.Flags.FFlagMigrateFriendshipStatusesPYMK)
-local fFlagLuaAppEnableSduiHomePage = require(parent_1.SharedFlags).FFlagLuaAppEnableSduiHomePage
-local var1 = if fFlagMigrateFriendshipStatusesPYMKModule then require(parent_1.DataHydration).Friends.FriendsStore.get() else nil
+﻿local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local ConstantsModule = require(Parent.Common.Constants)
+local DependenciesModule = require(Parent.dependencies)
+local Llama = DependenciesModule.llama
+local React = DependenciesModule.React
+local UseSelectorFunction = DependenciesModule.Hooks.useSelector
+local GetDeepValueFunction = DependenciesModule.SocialLibraries.Dictionary.getDeepValue
+local EventNamesModule = require(script.Parent.EventNames)
+local GetFriendStatusModule = require(script.Parent.getFriendStatus)
+local RecommendationContextType = DependenciesModule.RoduxFriends.Enums.RecommendationContextType
+local GetFFlagPYMKAddFriendsEntryFunction = DependenciesModule.getFFlagPYMKAddFriendsEntry
+local FFlagMigrateFriendshipStatusesPYMKModule = require(Parent.Flags.FFlagMigrateFriendshipStatusesPYMK)
+local FFlagLuaAppEnableSduiHomePage = require(Parent1.SharedFlags).FFlagLuaAppEnableSduiHomePage
+local GetResult = if FFlagMigrateFriendshipStatusesPYMKModule then require(Parent1.DataHydration).Friends.FriendsStore.get() else nil
 
-local function _(p1)
-	-- upvalues: var1 (ref)
-	local friendshipStatus = var1.GetFriendshipStatus(p1, { skipFetch = true })
+local function _(p1) --[[ Line: 22 | Named "getHydratedFriendshipStatus" ]]
+	-- upvalues: GetResult (copy)
+	local FriendshipStatus = GetResult.GetFriendshipStatus(p1, { skipFetch = true })
 	
-	return if friendshipStatus then friendshipStatus.data(false) else nil
+	return if FriendshipStatus then FriendshipStatus.data(false) else nil
 end
 
-return function(p1)
-	-- upvalues: react (ref), fFlagMigrateFriendshipStatusesPYMKModule (ref), useSelector (ref), getDeepValue (ref), constantsModule (ref), fFlagLuaAppEnableSduiHomePage (ref), getFFlagPYMKAddFriendsEntry (ref), eventNamesModule (ref), recommendationContextType (ref), getFriendStatusModule (ref), var1 (ref), llama (ref)
-	local var2 = react.useRef({})
-	local var3 = if not fFlagMigrateFriendshipStatusesPYMKModule then useSelector(function(p2)
-		-- upvalues: getDeepValue (copy), constantsModule (copy)
-		return getDeepValue(p2, string.format("%s.Friends.friendshipStatus", constantsModule.RODUX_KEY)) or {}
-	end) else nil
-	local var4 = nil
-	
-	if not fFlagLuaAppEnableSduiHomePage then
-		var4 = useSelector(function(p2)
-			-- upvalues: getDeepValue (copy), constantsModule (copy)
-			return getDeepValue(p2, string.format("%s.Friends.recommendations.hasIncomingFriendRequest", constantsModule.RODUX_KEY))
-		end) or {}
-	end
-	local var5 = useSelector(function(p2)
-		-- upvalues: getDeepValue (copy)
-		return getDeepValue(p2, "PYMKCarousel.Presence.byUserId") or {}
+return function(Callback) --[[ Line: 27 ]]
+	-- upvalues: React (copy), FFlagMigrateFriendshipStatusesPYMKModule (copy), UseSelectorFunction (copy), GetDeepValueFunction (copy), ConstantsModule (copy), FFlagLuaAppEnableSduiHomePage (copy), GetFFlagPYMKAddFriendsEntryFunction (copy), EventNamesModule (copy), RecommendationContextType (copy), GetFriendStatusModule (copy), GetResult (copy), Llama (copy)
+	local UseRefResult = React.useRef({})
+	local UseSelectorResult = if FFlagMigrateFriendshipStatusesPYMKModule then nil else UseSelectorFunction(function(p1) --[[ Line: 31 ]]
+		-- upvalues: GetDeepValueFunction (upval), ConstantsModule (upval)
+		return GetDeepValueFunction(p1, string.format("%s.Friends.friendshipStatus", ConstantsModule.RODUX_KEY)) or {}
+	end)
+	local UseSelectorResult1 = if FFlagLuaAppEnableSduiHomePage then nil else UseSelectorFunction(function(p1) --[[ Line: 37 ]]
+		-- upvalues: GetDeepValueFunction (upval), ConstantsModule (upval)
+		return GetDeepValueFunction(p1, string.format("%s.Friends.recommendations.hasIncomingFriendRequest", ConstantsModule.RODUX_KEY))
+	end) or {}
+	local UseSelectorResult2 = UseSelectorFunction(function(p1) --[[ Line: 45 ]]
+		-- upvalues: GetDeepValueFunction (upval)
+		return GetDeepValueFunction(p1, "PYMKCarousel.Presence.byUserId") or {}
 	end)
 	
-	return react.useMemo(function()
-		-- upvalues: var2 (ref), getFFlagPYMKAddFriendsEntry (copy), p1 (ref), eventNamesModule (copy), recommendationContextType (copy), getFriendStatusModule (copy), fFlagMigrateFriendshipStatusesPYMKModule (copy), var1 (copy), var3 (write), fFlagLuaAppEnableSduiHomePage (copy), var4 (write), var5 (ref), llama (copy)
+	return React.useMemo(function() --[[ Line: 49 ]]
+		-- upvalues: UseRefResult (copy), GetFFlagPYMKAddFriendsEntryFunction (upval), Callback (copy), EventNamesModule (upval), RecommendationContextType (upval), GetFriendStatusModule (upval), FFlagMigrateFriendshipStatusesPYMKModule (upval), GetResult (upval), UseSelectorResult (ref), FFlagLuaAppEnableSduiHomePage (upval), UseSelectorResult1 (ref), UseSelectorResult2 (copy), Llama (upval)
 		return {
 			{
 				viewabilityConfig = {
 					itemVisiblePercentThreshold = 50,
 					waitForInteraction = false
 				},
-				onViewableItemsChanged = function(p2)
-					-- upvalues: var2 (copy), getFFlagPYMKAddFriendsEntry (copy), p1 (copy), eventNamesModule (copy), recommendationContextType (copy), getFriendStatusModule (copy), fFlagMigrateFriendshipStatusesPYMKModule (copy), var1 (copy), var3 (copy), fFlagLuaAppEnableSduiHomePage (copy), var4 (copy), var5 (copy), llama (copy)
-					for i, v in pairs(p2.changed) do
-						local item = v.item
-						local current = var2.current or {}
-						local var6 = not current[item.id]
+				onViewableItemsChanged = function(p1) --[[ Line: 56 ]]
+					-- upvalues: UseRefResult (upval), GetFFlagPYMKAddFriendsEntryFunction (upval), Callback (upval), EventNamesModule (upval), RecommendationContextType (upval), GetFriendStatusModule (upval), FFlagMigrateFriendshipStatusesPYMKModule (upval), GetResult (upval), UseSelectorResult (upval), FFlagLuaAppEnableSduiHomePage (upval), UseSelectorResult1 (upval), UseSelectorResult2 (upval), Llama (upval)
+					for _, value in pairs(p1.changed) do
+						local Item = value.item
+						local Current = UseRefResult.current or {}
 						
-						if getFFlagPYMKAddFriendsEntry() then
-							var6 = not current[item.id] and (not item.isTooltip and not item.isButtonTile)
-						end
-						if var6 then
-							local id
-							local userSeen = eventNamesModule.UserSeen
-							local t = {
-								userId = item.id,
-								contactId = if item.recommendationContextType == recommendationContextType.Contacts then item.id else nil
+						if if GetFFlagPYMKAddFriendsEntryFunction() then not Current[Item.id] and (not Item.isTooltip and not Item.isButtonTile) else not Current[Item.id] then
+							local UserSeen = EventNamesModule.UserSeen
+							local config = {
+								userId = Item.id,
+								contactId = if Item.recommendationContextType == RecommendationContextType.Contacts then Item.id else nil
 							}
+							local DataResult = nil
 							
-							if fFlagMigrateFriendshipStatusesPYMKModule then
-								local friendshipStatus = var1.GetFriendshipStatus(item.id, { skipFetch = true })
-								id = if friendshipStatus then friendshipStatus.data(false) else nil
+							if FFlagMigrateFriendshipStatusesPYMKModule then
+								local FriendshipStatus = GetResult.GetFriendshipStatus(Item.id, { skipFetch = true })
+								DataResult = if FriendshipStatus then FriendshipStatus.data(false) else nil
 							else
-								id = var3[item.id]
+								DataResult = UseSelectorResult[Item.id]
 							end
-							t.friendStatus = getFriendStatusModule(id, if fFlagLuaAppEnableSduiHomePage then item.hasIncomingFriendRequest else var4[item.id])
-							t.recommendationContextType = item.recommendationContextType
-							t.recommendationRank = item.recommendationRank
-							t.absolutePosition = item.absolutePosition
-							t.presence = (var5[item.id] or {}).userPresenceType
-							p1(userSeen, t)
-							var2.current = llama.Dictionary.join(var2.current, { [item.id] = true })
+							config.friendStatus = GetFriendStatusModule(DataResult, if FFlagLuaAppEnableSduiHomePage then Item.hasIncomingFriendRequest else UseSelectorResult1[Item.id])
+							config.recommendationContextType = Item.recommendationContextType
+							config.recommendationRank = Item.recommendationRank
+							config.absolutePosition = Item.absolutePosition
+							config.presence = (UseSelectorResult2[Item.id] or {}).userPresenceType
+							Callback(UserSeen, config)
+							UseRefResult.current = Llama.Dictionary.join(UseRefResult.current, { [Item.id] = true })
 						end
 					end
 				end
 			}
 		}
-	end, { var5 })
+	end, { UseSelectorResult2 })
 end

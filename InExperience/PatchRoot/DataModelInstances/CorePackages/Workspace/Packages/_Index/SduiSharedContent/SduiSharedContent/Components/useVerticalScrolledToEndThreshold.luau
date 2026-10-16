@@ -1,115 +1,117 @@
-﻿local reactModule = require(script:FindFirstAncestor("SduiSharedContent").Parent.React)
-local sduiFeedCacheScrollExtents = game:DefineFastFlag("SduiFeedCacheScrollExtents", false)
+﻿local ReactModule = require(script:FindFirstAncestor("SduiSharedContent").Parent.React)
+local SduiFeedCacheScrollExtents = game:DefineFastFlag("SduiFeedCacheScrollExtents", false)
 
-return function(p1, p2, p3)
-	-- upvalues: reactModule (ref), sduiFeedCacheScrollExtents (ref)
-	local var1 = reactModule.useRef(false)
-	local var2 = reactModule.useRef(p3)
-	var2.current = p3
+return function(p1, p2, Current) --[[ Line: 8 | Named "useVerticalScrolledToEndThreshold" ]]
+	-- upvalues: ReactModule (copy), SduiFeedCacheScrollExtents (copy)
+	local UseRefResult = ReactModule.useRef(false)
+	local UseRefResult1 = ReactModule.useRef(Current)
+	UseRefResult1.current = Current
 	
-	if p3 == nil then
+	if Current == nil then
 		p2 = nil
 	end
-	reactModule.useEffect(function()
-		-- upvalues: p2 (write), p1 (ref), sduiFeedCacheScrollExtents (copy), var1 (ref), var2 (ref)
+	ReactModule.useEffect(function() --[[ Line: 26 ]]
+		-- upvalues: p2 (ref), p1 (copy), SduiFeedCacheScrollExtents (upval), UseRefResult (copy), UseRefResult1 (copy)
 		if p2 == nil or p1.current == nil then
 			return nil
 		end
-		local var3
-		local t = {}
-		local current = p1.current
-		local _ = nil
+		local List = {}
+		local Current = p1.current
+		local Callback = nil
 		
-		if sduiFeedCacheScrollExtents then
-			local y = current.AbsoluteCanvasSize.Y
-			local y_1 = current.AbsoluteWindowSize.Y
+		if SduiFeedCacheScrollExtents then
+			local Y = Current.AbsoluteCanvasSize.Y
+			local Y1 = Current.AbsoluteWindowSize.Y
 			
-			local function _()
-				-- upvalues: y (write), current (ref), y_1 (write)
-				y = current.AbsoluteCanvasSize.Y
-				y_1 = current.AbsoluteWindowSize.Y
+			local function _() --[[ Line: 45 | Named "refreshSizes" ]]
+				-- upvalues: Y (ref), Current (copy), Y1 (ref)
+				Y = Current.AbsoluteCanvasSize.Y
+				Y1 = Current.AbsoluteWindowSize.Y
 			end
 			
-			local function evaluateThreshold()
-				-- upvalues: y (write), y_1 (write), p2 (copy), current (ref), var1 (copy), var2 (copy)
-				local var4 = y - y_1 - p2
-				local y_2 = current.CanvasPosition.Y
+			local function evaluateThreshold() --[[ Line: 51 ]]
+				-- upvalues: Y (ref), Y1 (ref), p2 (upval), Current (copy), UseRefResult (upval), UseRefResult1 (upval)
+				local YDelta = Y - Y1 - p2
+				local Y2 = Current.CanvasPosition.Y
 				
-				if y_2 < var4 and var1.current then
-					var1.current = false
+				if Y2 < YDelta and UseRefResult.current then
+					UseRefResult.current = false
 					
 					return
-				elseif var4 < y_2 and not var1.current then
-					var1.current = true
+				end
+				if YDelta < Y2 and not UseRefResult.current then
+					UseRefResult.current = true
 					
-					if var2.current then
-						var2.current()
+					if UseRefResult1.current then
+						UseRefResult1.current()
 					end
 				end
 			end
 			
-			local function refreshSizesAndEvaluate()
-				-- upvalues: y (write), current (ref), y_1 (write), p2 (copy), var1 (copy), var2 (copy)
-				y = current.AbsoluteCanvasSize.Y
-				y_1 = current.AbsoluteWindowSize.Y
-				local var4 = y - y_1 - p2
-				local y_2 = current.CanvasPosition.Y
+			local function refreshSizesAndEvaluate() --[[ Line: 65 ]]
+				-- upvalues: Y (ref), Current (copy), Y1 (ref), p2 (upval), UseRefResult (upval), UseRefResult1 (upval)
+				Y = Current.AbsoluteCanvasSize.Y
+				Y1 = Current.AbsoluteWindowSize.Y
+				local YDelta = Y - Y1 - p2
+				local Y2 = Current.CanvasPosition.Y
 				
-				if y_2 < var4 and var1.current then
-					var1.current = false
+				if Y2 < YDelta and UseRefResult.current then
+					UseRefResult.current = false
 					
 					return
-				elseif var4 < y_2 and not var1.current then
-					var1.current = true
+				end
+				if YDelta < Y2 and not UseRefResult.current then
+					UseRefResult.current = true
 					
-					if var2.current then
-						var2.current()
+					if UseRefResult1.current then
+						UseRefResult1.current()
 					end
 				end
 			end
 			
-			table.insert(t, current:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(refreshSizesAndEvaluate))
-			table.insert(t, current:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(refreshSizesAndEvaluate))
-			table.insert(t, current:GetPropertyChangedSignal("CanvasPosition"):Connect(evaluateThreshold))
-			var3 = refreshSizesAndEvaluate
+			table.insert(List, Current:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(refreshSizesAndEvaluate))
+			table.insert(List, Current:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(refreshSizesAndEvaluate))
+			table.insert(List, Current:GetPropertyChangedSignal("CanvasPosition"):Connect(evaluateThreshold))
+			Callback = refreshSizesAndEvaluate
 		else
-			local function y()
-				-- upvalues: current (ref), p2 (copy), var1 (copy), var2 (copy)
-				local var4 = current.AbsoluteCanvasSize.Y - current.AbsoluteWindowSize.Y - p2
-				local y = current.CanvasPosition.Y
+			local function checkThreshold() --[[ Line: 85 ]]
+				-- upvalues: Current (copy), p2 (upval), UseRefResult (upval), UseRefResult1 (upval)
+				local YDelta = Current.AbsoluteCanvasSize.Y - Current.AbsoluteWindowSize.Y - p2
+				local Y = Current.CanvasPosition.Y
 				
-				if y < var4 and var1.current then
-					var1.current = false
+				if Y < YDelta and UseRefResult.current then
+					UseRefResult.current = false
 					
 					return
-				elseif var4 < y and not var1.current then
-					var1.current = true
+				end
+				if YDelta < Y and not UseRefResult.current then
+					UseRefResult.current = true
 					
-					if var2.current then
-						var2.current()
+					if UseRefResult1.current then
+						UseRefResult1.current()
 					end
 				end
 			end
 			
-			table.insert(t, current:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(y))
-			table.insert(t, current:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(y))
-			table.insert(t, current:GetPropertyChangedSignal("CanvasPosition"):Connect(y))
-			var3 = y
+			table.insert(List, Current:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(checkThreshold))
+			table.insert(List, Current:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(checkThreshold))
+			table.insert(List, Current:GetPropertyChangedSignal("CanvasPosition"):Connect(checkThreshold))
+			Callback = checkThreshold
 		end
-		local y = false
-		task.defer(function()
-			-- upvalues: y (write), var3 (write)
-			if not y then
-				var3()
+		local Flag = false
+		task.defer(function() --[[ Line: 117 ]]
+			-- upvalues: Flag (ref), Callback (ref)
+			if not Flag then
+				Callback()
 			end
 		end)
 		
-		return function()
-			-- upvalues: y (write), t (ref)
-			y = true
+		return function() --[[ Line: 123 ]]
+			-- upvalues: Flag (ref), List (copy)
+			Flag = true
 			
-			for i, v in t do
-				v:Disconnect()
+			for _, Connection in List do
+				Connection:Disconnect()
 			end
 		end
 	end, { p1, p2 })

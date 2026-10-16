@@ -1,59 +1,50 @@
-﻿local collectionViews = script:FindFirstAncestor("CollectionViews")
-local parent = collectionViews.Parent
-local reactModule = require(parent.React)
-local fFlagCollectionViewMathChanges = require(parent.SharedFlags).FFlagCollectionViewMathChanges
-local _ = require(collectionViews.Carousel.calculateCarouselSpacingMetrics)
+﻿local ReactModule = require(script:FindFirstAncestor("CollectionViews").Parent.React)
 
-return function(p1, p2, p3, p4, p5, p6)
-	-- upvalues: reactModule (ref), fFlagCollectionViewMathChanges (ref)
-	local var1, var2 = reactModule.useState(1)
-	local var3 = reactModule.useCallback(function()
-		-- upvalues: p4 (ref), p1 (ref), fFlagCollectionViewMathChanges (copy), p5 (ref), p6 (ref), p2 (ref), p3 (ref), var2 (ref)
-		if p4 then
-			if p1.current == nil or fFlagCollectionViewMathChanges and p5 <= 0 then return end
-			local x = p1.current.CanvasPosition.X
-			local var4 = if fFlagCollectionViewMathChanges then p6:getValue().stride else p2:getValue().X + p3
+return function(p1, p2, p3, p4) --[[ Line: 7 | Named "useHorizontalWindowStartIndex" ]]
+	-- upvalues: ReactModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(1)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 17 ]]
+		-- upvalues: p4 (copy), p1 (copy), p2 (copy), p3 (copy), UseStateResult2 (copy)
+		if not p4 then
+			UseStateResult2(1)
+		elseif p1.current ~= nil then
+			local X = p1.current.CanvasPosition.X
+			local NewX = p2:getValue().X + p3
 			
-			if var4 > 0 then
-				var2(math.max(1, math.floor(x / var4)))
+			if NewX > 0 then
+				UseStateResult2((math.max(1, (math.floor(X / NewX)))))
+				
+				return
+			else
+				UseStateResult2(1)
 				
 				return
 			end
-			var2(1)
-			
-			return
-		else
-			var2(1)
 		end
-	end, {
-		p4,
-		p1,
-		if fFlagCollectionViewMathChanges then p6 else p2,
-		if fFlagCollectionViewMathChanges then p5 else p3
-	})
-	reactModule.useEffect(function()
-		-- upvalues: var3 (ref)
-		var3()
-	end, { var3 })
-	reactModule.useEffect(function()
-		-- upvalues: p4 (ref), p1 (ref), var3 (ref)
+	end, { p4, p1, p2, p3 })
+	ReactModule.useEffect(function() --[[ Line: 42 ]]
+		-- upvalues: UseResult (copy)
+		UseResult()
+	end, { UseResult })
+	ReactModule.useEffect(function() --[[ Line: 50 ]]
+		-- upvalues: p4 (copy), p1 (copy), UseResult (copy)
 		if not p4 then
 			return nil
 		end
-		local t = {}
+		local List = {}
 		
 		if p1.current ~= nil then
-			var3()
-			table.insert(t, p1.current:GetPropertyChangedSignal("CanvasPosition"):Connect(var3))
-			table.insert(t, p1.current:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(var3))
+			UseResult()
+			table.insert(List, p1.current:GetPropertyChangedSignal("CanvasPosition"):Connect(UseResult))
+			table.insert(List, p1.current:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(UseResult))
 		end
-		return function()
-			-- upvalues: t (ref)
-			for i, v in t do
-				v:Disconnect()
+		return function() --[[ Line: 66 ]]
+			-- upvalues: List (copy)
+			for _, Connection in List do
+				Connection:Disconnect()
 			end
 		end
-	end, { p1, var3, p4 })
+	end, { p1, UseResult, p4 })
 	
-	return var1
+	return UseStateResult
 end

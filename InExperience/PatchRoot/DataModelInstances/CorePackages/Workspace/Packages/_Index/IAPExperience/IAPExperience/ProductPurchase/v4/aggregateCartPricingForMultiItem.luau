@@ -1,39 +1,38 @@
-﻿local cartPricingResponseLineItemModule = require(script.Parent.cartPricingResponseLineItem)
+﻿local CartPricingResponseLineItemModule = require(script.Parent.cartPricingResponseLineItem)
 
-return function(p1)
-	-- upvalues: cartPricingResponseLineItemModule (ref)
+return function(p1) --[[ Line: 20 | Named "aggregateCartPricingForMultiItem" ]]
+	-- upvalues: CartPricingResponseLineItemModule (copy)
 	if type(p1) ~= "table" then
 		return nil
 	end
-	local errors = p1.errors
+	local Errors = p1.errors
 	
-	if type(errors) == "table" and next(errors) ~= nil then
+	if type(Errors) == "table" and next(Errors) ~= nil then
 		return nil
 	end
-	local items = p1.items
+	local Items = p1.items
 	
-	if type(items) ~= "table" or next(items) == nil then
+	if type(Items) ~= "table" or next(Items) == nil then
 		return nil
 	end
-	local var1 = 0
-	local var2 = 0
+	local NewCartLineRegularPriceInRobux = 0
+	local TotalRobux = 0
 	
-	for i, v in ipairs(items) do
-		local cartLineSalePriceInRobux = cartPricingResponseLineItemModule.getCartLineSalePriceInRobux(v)
+	for _, item in ipairs(Items) do
+		local CartLineSalePriceInRobux: number = CartPricingResponseLineItemModule.getCartLineSalePriceInRobux(item)
 		
-		if cartLineSalePriceInRobux ~= nil then
-			var1 += cartPricingResponseLineItemModule.getCartLineRegularPriceInRobux(v, cartLineSalePriceInRobux)
-			var2 += cartLineSalePriceInRobux
-			continue
+		if CartLineSalePriceInRobux == nil then
+			return nil
 		end
-		return nil
+		NewCartLineRegularPriceInRobux += CartPricingResponseLineItemModule.getCartLineRegularPriceInRobux(item, CartLineSalePriceInRobux)
+		TotalRobux += CartLineSalePriceInRobux
 	end
-	local var3 = var1 - var2
+	local NewCartLineRegularPriceInRobuxDelta = NewCartLineRegularPriceInRobux - TotalRobux
 	
-	return if var3 <= 0 then nil else {
-		subtotalRobux = var1,
-		totalRobux = var2,
-		savingsRobux = var3,
-		itemCount = #items
+	return if NewCartLineRegularPriceInRobuxDelta <= 0 then nil else {
+		subtotalRobux = NewCartLineRegularPriceInRobux,
+		totalRobux = TotalRobux,
+		savingsRobux = NewCartLineRegularPriceInRobuxDelta,
+		itemCount = #Items
 	}
 end

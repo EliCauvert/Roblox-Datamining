@@ -1,42 +1,42 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local reactOtterModule = require(parent.ReactOtter)
-local getColorStyleWithTransparencyModule = require(moments.Utils.getColorStyleWithTransparency)
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local ReactOtterModule = require(Parent.ReactOtter)
+local GetColorStyleWithTransparencyModule = require(Moments.Utils.getColorStyleWithTransparency)
 local _ = require(script.Parent.useVideoScrubPreview)
-local skeleton = foundationModule.Skeleton
-local view = foundationModule.View
-local radius = foundationModule.Enums.Radius
-local useTokens = foundationModule.Hooks.useTokens
+local Skeleton = FoundationModule.Skeleton
+local View = FoundationModule.View
+local Radius = FoundationModule.Enums.Radius
+local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), getColorStyleWithTransparencyModule (ref), reactModule (ref), reactOtterModule (ref), view (ref), skeleton (ref), radius (ref)
-	local var1 = useTokens()
-	local preview = p1.preview
-	local var2 = p1.animationRatio:map(function(p2)
-		return 1 - p2
+return ReactModule.memo(function(Frame) --[[ Line: 32 | Named "VideoPreview" ]]
+	-- upvalues: UseTokensFunction (copy), GetColorStyleWithTransparencyModule (copy), ReactModule (copy), ReactOtterModule (copy), View (copy), Skeleton (copy), Radius (copy)
+	local UseTokensResult = UseTokensFunction()
+	local Preview = Frame.preview
+	local MapResult = Frame.animationRatio:map(function(p1: number): number --[[ Line: 37 ]]
+		return 1 - p1
 	end)
-	local var3 = var2:map(function(p2)
-		-- upvalues: getColorStyleWithTransparencyModule (copy), var1 (ref)
-		return getColorStyleWithTransparencyModule(var1.Color.Shift.Shift_400, p2).Transparency or 0
+	local MapResult1 = MapResult:map(function(p1) --[[ Line: 42 ]]
+		-- upvalues: GetColorStyleWithTransparencyModule (upval), UseTokensResult (copy)
+		return GetColorStyleWithTransparencyModule(UseTokensResult.Color.Shift.Shift_400, p1).Transparency or 0
 	end)
-	local var4, var5 = reactModule.useState(preview.isLoading)
-	local var6, var7 = reactOtterModule.useAnimatedBinding(0, function()
-		-- upvalues: var5 (ref)
-		var5(false)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(Preview.isLoading)
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding(0, function() --[[ Line: 49 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(false)
 	end)
-	reactModule.useEffect(function()
-		-- upvalues: preview (ref), var7 (ref), reactOtterModule (copy)
-		if not preview.isLoading then
-			var7(reactOtterModule.ease(1, { duration = 0.1, easingStyle = Enum.EasingStyle.Quad }))
+	ReactModule.useEffect(function() --[[ Line: 53 ]]
+		-- upvalues: Preview (copy), UseAnimatedBindingResult2 (copy), ReactOtterModule (upval)
+		if not Preview.isLoading then
+			UseAnimatedBindingResult2(ReactOtterModule.ease(1, { duration = 0.1, easingStyle = Enum.EasingStyle.Quad }))
 		end
-	end, { preview.isLoading })
-	local var8 = var6:map(function(p2)
-		return 1 - p2
+	end, { Preview.isLoading })
+	local MapResult2 = UseAnimatedBindingResult:map(function(p1: number): number --[[ Line: 64 ]]
+		return 1 - p1
 	end)
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "size-2800 radius-medium bg-shift-200",
 		aspectRatio = {
 			AspectRatio = 0.5625,
@@ -44,37 +44,41 @@ return reactModule.memo(function(p1)
 			DominantAxis = Enum.DominantAxis.Width
 		},
 		stroke = {
-			Color = var1.Color.Shift.Shift_400.Color3,
-			Transparency = var3,
-			Thickness = var1.Stroke.Thick
+			Color = UseTokensResult.Color.Shift.Shift_400.Color3,
+			Transparency = MapResult1,
+			Thickness = UseTokensResult.Stroke.Thick
 		},
-		GroupTransparency = var2,
-		LayoutOrder = p1.LayoutOrder
+		GroupTransparency = MapResult,
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		FrameA = reactModule.createElement("ImageLabel", {
+		FrameA = ReactModule.createElement("ImageLabel", {
 			BackgroundTransparency = 1,
 			Size = UDim2.fromScale(1, 1),
-			ImageTransparency = var8,
+			ImageTransparency = MapResult2,
 			ScaleType = Enum.ScaleType.Crop,
-			ImageContent = preview.contentA,
-			ZIndex = preview.frontIsA:map(function(p2)
-				return if p2 then 2 else 1
+			ImageContent = Preview.contentA,
+			ZIndex = Preview.frontIsA:map(function(p1): number --[[ Line: 91 ]]
+				return if p1 then 2 else 1
 			end),
-			ref = preview.imageARef
+			ref = Preview.imageARef
 		}),
-		FrameB = reactModule.createElement("ImageLabel", {
+		FrameB = ReactModule.createElement("ImageLabel", {
 			BackgroundTransparency = 1,
 			Size = UDim2.fromScale(1, 1),
-			ImageTransparency = var8,
+			ImageTransparency = MapResult2,
 			ScaleType = Enum.ScaleType.Crop,
-			ImageContent = preview.contentB,
-			ZIndex = preview.frontIsA:map(function(p2)
-				return if p2 then 1 else 2
+			ImageContent = Preview.contentB,
+			ZIndex = Preview.frontIsA:map(function(p1): number --[[ Line: 102 ]]
+				return if p1 then 1 else 2
 			end),
-			ref = preview.imageBRef
+			ref = Preview.imageBRef
 		}),
-		SkeletonOverlay = if var4 then reactModule.createElement(view, { tag = "size-full", ZIndex = 3, GroupTransparency = var6 }, {
-			Shimmer = reactModule.createElement(skeleton, { radius = radius.Medium, Size = UDim2.fromScale(1, 1) })
+		SkeletonOverlay = if UseStateResult then ReactModule.createElement(View, {
+			tag = "size-full",
+			ZIndex = 3,
+			GroupTransparency = UseAnimatedBindingResult
+		}, {
+			Shimmer = ReactModule.createElement(Skeleton, { radius = Radius.Medium, Size = UDim2.fromScale(1, 1) })
 		}) else nil
 	})
 end)

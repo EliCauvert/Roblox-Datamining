@@ -1,44 +1,44 @@
-﻿local userModule = require(script.Parent.User)
-local var1 = 0
+﻿local UserModule = require(script.Parent.User)
+local Count = 0
 
-local _ = function()
-	-- upvalues: var1 (write)
-	var1 += 1
+local function _(): string --[[ Line: 7 ]]
+	-- upvalues: Count (ref)
+	Count += 1
 	
-	return tostring(var1)
+	return (tostring(Count))
 end
 
-local t = {}
-t.__index = t
+local MockUserModule = {}
+MockUserModule.__index = MockUserModule
 
-function t.new()
-	-- upvalues: userModule (ref), var1 (write)
-	local var2 = userModule.new()
-	var1 += 1
-	var2.id = tostring(var1)
-	var2.isFetching = false
-	var2.isFriend = false
-	var2.friendRank = 0
-	var2.lastLocation = nil
-	var2.name = "USER NAME"
-	var2.universeId = nil
-	var2.placeId = nil
-	var2.rootPlaceId = nil
-	var2.gameInstanceId = nil
-	var2.presence = userModule.PresenceType.OFFLINE
-	var2.membership = nil
-	var2.thumbnails = nil
-	var2.lastOnline = nil
-	var2.displayName = "DN+" .. var3.name
-	var2.externalAppDisplayName = "EXTERNAL APP DISPLAY NAME"
-	var2.hasVerifiedBadge = false
-	var2.hasRobloxSubscription = false
-	setmetatable(var2, { __index = userModule })
+function MockUserModule.new() --[[ Line: 15 ]]
+	-- upvalues: UserModule (copy), Count (ref)
+	local NewUser = UserModule.new()
+	Count += 1
+	NewUser.id = tostring(Count)
+	NewUser.isFetching = false
+	NewUser.isFriend = false
+	NewUser.friendRank = 0
+	NewUser.lastLocation = nil
+	NewUser.name = "USER NAME"
+	NewUser.universeId = nil
+	NewUser.placeId = nil
+	NewUser.rootPlaceId = nil
+	NewUser.gameInstanceId = nil
+	NewUser.presence = UserModule.PresenceType.OFFLINE
+	NewUser.membership = nil
+	NewUser.thumbnails = nil
+	NewUser.lastOnline = nil
+	NewUser.displayName = "DN+" .. NewUser.name
+	NewUser.externalAppDisplayName = "EXTERNAL APP DISPLAY NAME"
+	NewUser.hasVerifiedBadge = false
+	NewUser.hasRobloxSubscription = false
+	setmetatable(NewUser, { __index = UserModule })
 	
-	return var2
+	return NewUser
 end
 
-function t.mockEndpointResponse()
+function MockUserModule.mockEndpointResponse() --[[ Line: 45 ]]
 	return {
 		created = "0001-01-01T06:00:00Z",
 		displayName = "DN+12345",
@@ -54,4 +54,4 @@ function t.mockEndpointResponse()
 	}
 end
 
-return t
+return MockUserModule

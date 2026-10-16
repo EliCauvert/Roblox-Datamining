@@ -1,6 +1,6 @@
-﻿local urlModule = require(script.Parent.Parent.Parent.Parent.Network.Url)
+﻿local UrlModule = require(script.Parent.Parent.Parent.Parent.Network.Url)
 
-return function(p1, p2)
-	-- upvalues: urlModule (ref)
-	return p1(string.format("%sv1/games/%d/icon", urlModule.GAME_URL, p2), "GET")
+return function(Callback, p1) --[[ Line: 20 ]]
+	-- upvalues: UrlModule (copy)
+	return Callback(string.format("%sv1/games/%d/icon", UrlModule.GAME_URL, p1), "GET")
 end

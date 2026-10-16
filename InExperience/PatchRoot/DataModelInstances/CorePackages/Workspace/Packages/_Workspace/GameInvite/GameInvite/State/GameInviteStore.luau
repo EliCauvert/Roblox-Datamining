@@ -1,4 +1,4 @@
-﻿local parent = script.Parent
-local roduxModule = require(parent.Parent.Parent.Rodux)
+﻿local Parent = script.Parent
+local RoduxModule = require(Parent.Parent.Parent.Rodux)
 
-return roduxModule.Store.new(require(parent.Reducers.GameInviteReducer), nil, { roduxModule.thunkMiddleware })
+return RoduxModule.Store.new(require(Parent.Reducers.GameInviteReducer), nil, { RoduxModule.thunkMiddleware })

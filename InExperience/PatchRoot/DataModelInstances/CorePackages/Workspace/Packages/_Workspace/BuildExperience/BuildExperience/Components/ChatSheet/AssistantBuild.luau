@@ -1,86 +1,95 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local fFlagBuildExperienceInGameShell = require(parent.SharedFlags).FFlagBuildExperienceInGameShell
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local getAssistantBuildStoreModule = require(buildExperience.Stores.GetAssistantBuildStore)
-local getPlayButtonStoreModule = require(buildExperience.Stores.GetPlayButtonStore)
-local fFlagBuildExperienceTooltipsLightDismissModule = require(buildExperience.Flags.FFlagBuildExperienceTooltipsLightDismiss)
-local educationalTooltip = foundationModule.EducationalTooltip
-local iconButton = foundationModule.IconButton
-local iconName = foundationModule.Enums.IconName
-local inputSize = foundationModule.Enums.InputSize
-local popoverAlign = foundationModule.Enums.PopoverAlign
-local popoverSide = foundationModule.Enums.PopoverSide
-local view = foundationModule.View
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local FFlagBuildExperienceInGameShell = require(Parent.SharedFlags).FFlagBuildExperienceInGameShell
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
+local GetAssistantBuildStoreModule = require(BuildExperience.Stores.GetAssistantBuildStore)
+local GetPlayButtonStoreModule = require(BuildExperience.Stores.GetPlayButtonStore)
+local EducationalTooltip = FoundationModule.EducationalTooltip
+local IconButton = FoundationModule.IconButton
+local IconName = FoundationModule.Enums.IconName
+local InputSize = FoundationModule.Enums.InputSize
+local PopoverAlign = FoundationModule.Enums.PopoverAlign
+local PopoverSide = FoundationModule.Enums.PopoverSide
+local View = FoundationModule.View
 
-return reactModule.memo(function(p1)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), getAssistantBuildStoreModule (ref), getPlayButtonStoreModule (ref), signalsReactModule (ref), fFlagBuildExperienceInGameShell (ref), reactModule (ref), fFlagBuildExperienceTooltipsLightDismissModule (ref), iconButton (ref), iconName (ref), inputSize (ref), view (ref), educationalTooltip (ref), popoverAlign (ref), popoverSide (ref)
-	local var1 = useLocalization({
-		disabledTitle = localizationStringsModule.CHAT_ASSISTANT_DISABLED,
-		portraitRequired = localizationStringsModule.CHAT_PORTRAIT_REQUIRED
+return ReactModule.memo(function(p1) --[[ Line: 30 | Named "AssistantBuild" ]]
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), GetAssistantBuildStoreModule (copy), GetPlayButtonStoreModule (copy), SignalsReactModule (copy), FFlagBuildExperienceInGameShell (copy), ReactModule (copy), IconButton (copy), IconName (copy), InputSize (copy), View (copy), EducationalTooltip (copy), PopoverAlign (copy), PopoverSide (copy)
+	local UseLocalizationResult = UseLocalizationFunction({
+		disabledTitle = LocalizationStringsModule.CHAT_ASSISTANT_DISABLED,
+		portraitRequired = LocalizationStringsModule.CHAT_PORTRAIT_REQUIRED
 	})
-	local var2 = getAssistantBuildStoreModule()
-	local var3 = getPlayButtonStoreModule()
-	local var4 = signalsReactModule.useSignalState(var2.getIsDisabled)
-	local var5 = signalsReactModule.useSignalState(var2.getIsDisabledTooltipOpen)
-	local var6 = if fFlagBuildExperienceInGameShell then signalsReactModule.useSignalState(var2.getIsOverlayVisible) else nil
-	local var7 = reactModule.useCallback(function()
-		-- upvalues: var4 (ref), var2 (ref), var5 (ref), var3 (ref)
-		if var4 then
-			var2.setIsDisabledTooltipOpen(not var5)
+	local AssistantBuildStoreModule = GetAssistantBuildStoreModule()
+	local PlayButtonStoreModule = GetPlayButtonStoreModule()
+	local UseSignalStateResult = SignalsReactModule.useSignalState(AssistantBuildStoreModule.getIsDisabled)
+	local UseSignalStateResult1 = SignalsReactModule.useSignalState(AssistantBuildStoreModule.getIsDisabledTooltipOpen)
+	local UseSignalStateResult2 = if FFlagBuildExperienceInGameShell then SignalsReactModule.useSignalState(AssistantBuildStoreModule.getIsOverlayVisible) else nil
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 42 ]]
+		-- upvalues: UseSignalStateResult (copy), AssistantBuildStoreModule (copy), UseSignalStateResult1 (copy), PlayButtonStoreModule (copy)
+		if UseSignalStateResult then
+			AssistantBuildStoreModule.setIsDisabledTooltipOpen(not UseSignalStateResult1)
 			
 			return
+		else
+			AssistantBuildStoreModule.setIsDisabledTooltipOpen(false)
+			PlayButtonStoreModule.setIsActive(true)
 		end
-		var2.setIsDisabledTooltipOpen(false)
-		var3.setIsActive(true)
-	end, { var2, var4, var5, var3 })
-	local var8 = if fFlagBuildExperienceTooltipsLightDismissModule then reactModule.useCallback(function()
-		-- upvalues: var2 (ref)
-		var2.setIsDisabledTooltipOpen(false)
-	end, { var2 }) else nil
-	reactModule.useEffect(function()
-		-- upvalues: var4 (ref), var3 (ref), var2 (ref)
-		if var4 then
-			var3.setIsActive(false)
+	end, {
+		AssistantBuildStoreModule,
+		UseSignalStateResult,
+		UseSignalStateResult1,
+		PlayButtonStoreModule
+	})
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 50 ]]
+		-- upvalues: AssistantBuildStoreModule (copy)
+		AssistantBuildStoreModule.setIsDisabledTooltipOpen(false)
+	end, { AssistantBuildStoreModule })
+	ReactModule.useEffect(function() --[[ Line: 54 ]]
+		-- upvalues: UseSignalStateResult (copy), PlayButtonStoreModule (copy), AssistantBuildStoreModule (copy)
+		if UseSignalStateResult then
+			PlayButtonStoreModule.setIsActive(false)
 			
 			return
+		else
+			AssistantBuildStoreModule.setIsDisabledTooltipOpen(false)
 		end
-		var2.setIsDisabledTooltipOpen(false)
-	end, { var2, var4, var3 })
-	local var9 = reactModule.createElement(iconButton, {
+	end, {
+		AssistantBuildStoreModule,
+		UseSignalStateResult,
+		PlayButtonStoreModule
+	})
+	local Element = ReactModule.createElement(IconButton, {
 		isCircular = true,
 		testId = "build-header-play-button",
-		icon = if fFlagBuildExperienceInGameShell then if var6 then iconName.TwoArrowsFromCenter else iconName.TwoArrowsToCenter else iconName.Nebula,
+		icon = if FFlagBuildExperienceInGameShell then if UseSignalStateResult2 then IconName.TwoArrowsFromCenter else IconName.TwoArrowsToCenter else IconName.Nebula,
 		variant = p1.variant,
-		size = inputSize.Medium,
-		isDisabled = var4,
-		onActivated = if fFlagBuildExperienceInGameShell then var2.activate else var7
+		size = InputSize.Medium,
+		isDisabled = UseSignalStateResult,
+		onActivated = if FFlagBuildExperienceInGameShell then AssistantBuildStoreModule.activate else UseResult
 	})
+	local Element1 = ReactModule.createElement(View, {
+		tag = "auto-xy",
+		testId = "build-header-play-button-disabled",
+		onActivated = if FFlagBuildExperienceInGameShell then AssistantBuildStoreModule.activate else UseResult
+	}, { Button = Element })
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "auto-xy",
 		LayoutOrder = p1.layoutOrder,
 		testId = p1.testId or "assistant-build"
 	}, {
-		Tooltip = if var4 then reactModule.createElement(educationalTooltip, {
+		Tooltip = if UseSignalStateResult then ReactModule.createElement(EducationalTooltip, {
 			testId = "build-assistant-disabled-tooltip",
-			align = popoverAlign.Start,
-			isOpen = var5,
-			onPressedOutside = var8,
-			side = popoverSide.Bottom,
-			text = var1.portraitRequired,
-			title = var1.disabledTitle
-		}, {
-			Button = reactModule.createElement(view, {
-				tag = "auto-xy",
-				testId = "build-header-play-button-disabled",
-				onActivated = if fFlagBuildExperienceInGameShell then var2.activate else var7
-			}, { Button = var9 })
-		}) else nil,
-		Button = if not var4 then var9 else nil
+			align = PopoverAlign.Start,
+			isOpen = UseSignalStateResult1,
+			onPressedOutside = UseResult1,
+			side = PopoverSide.Bottom,
+			text = UseLocalizationResult.portraitRequired,
+			title = UseLocalizationResult.disabledTitle
+		}, { Button = Element1 }) else nil,
+		Button = if UseSignalStateResult then nil else Element
 	})
 end)

@@ -1,25 +1,28 @@
-﻿local expChat = script:FindFirstAncestor("ExpChat")
-local parent = expChat.Parent
-local expChatSharedModule = require(parent.ExpChatShared)
-local sharedFlagsModule = require(parent.SharedFlags)
-local friendsChatTabNameModule = require(parent.FriendsChat.FriendsChatTabName)
-local requestSelectTabModule = require(expChat.ExternalNavigation.requestSelectTab)
-local friendsChatChannelSelected = expChatSharedModule.Actions.FriendsChatChannelSelected
-local fFlagExpChatEnableFriendsTab = sharedFlagsModule.FFlagExpChatEnableFriendsTab
+﻿local ExpChat = script:FindFirstAncestor("ExpChat")
+local Parent = ExpChat.Parent
+local ExpChatSharedModule = require(Parent.ExpChatShared)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FriendsChatTabNameModule = require(Parent.FriendsChat.FriendsChatTabName)
+local RequestSelectTabModule = require(ExpChat.ExternalNavigation.requestSelectTab)
+local FriendsChatChannelSelectedFunction = ExpChatSharedModule.Actions.FriendsChatChannelSelected
+local FFlagExpChatEnableFriendsTab = SharedFlagsModule.FFlagExpChatEnableFriendsTab
+local FFlagExpChatUseChannelTabsStore = SharedFlagsModule.FFlagExpChatUseChannelTabsStore
 
-return function()
-	-- upvalues: fFlagExpChatEnableFriendsTab (ref), expChatSharedModule (ref), requestSelectTabModule (ref), friendsChatTabNameModule (ref), friendsChatChannelSelected (ref)
-	if not fFlagExpChatEnableFriendsTab then
+return function(): boolean --[[ Line: 18 | Named "requestSelectFriendsTab" ]]
+	-- upvalues: FFlagExpChatEnableFriendsTab (copy), ExpChatSharedModule (copy), RequestSelectTabModule (copy), FriendsChatTabNameModule (copy), FFlagExpChatUseChannelTabsStore (copy), FriendsChatChannelSelectedFunction (copy)
+	if not FFlagExpChatEnableFriendsTab then
 		return false
 	end
-	local store = expChatSharedModule.context.store
+	local Store = ExpChatSharedModule.context.store
 	
-	if store == nil then
+	if Store == nil then
 		return false
-	elseif requestSelectTabModule(friendsChatTabNameModule) then
-		store:dispatch(friendsChatChannelSelected(friendsChatTabNameModule))
-		
-		return true
 	end
-	return false
+	if not RequestSelectTabModule(FriendsChatTabNameModule) then
+		return false
+	end
+	if not FFlagExpChatUseChannelTabsStore then
+		Store:dispatch(FriendsChatChannelSelectedFunction(FriendsChatTabNameModule))
+	end
+	return true
 end

@@ -1,187 +1,184 @@
-﻿local dataHydration = script:FindFirstAncestor("DataHydration")
-local parent = dataHydration.Parent
-local createDataCacheModule = require(dataHydration.createDataCache)
-local createDataResolverModule = require(dataHydration.createDataResolver)
-local _ = require(dataHydration.DataHydrationTypes)
-local cryoModule = require(parent.Cryo)
-local promiseModule = require(parent.Promise)
-local requestsModule = require(script.Parent.Requests)
+﻿local DataHydration = script:FindFirstAncestor("DataHydration")
+local Parent = DataHydration.Parent
+local CreateDataCacheModule = require(DataHydration.createDataCache)
+local CreateDataResolverModule = require(DataHydration.createDataResolver)
+local _ = require(DataHydration.DataHydrationTypes)
+local CryoModule = require(Parent.Cryo)
+local PromiseModule = require(Parent.Promise)
+local RequestsModule = require(script.Parent.Requests)
 local _ = require(script.Parent.FollowingStoreTypes)
-local classifyFollowingErrorModule = require(script.Parent.classifyFollowingError)
+local ClassifyFollowingErrorModule = require(script.Parent.classifyFollowingError)
 game:DefineFastInt("FollowingStoreProcessDelaySec", 1)
 
-local function _()
+local function _() --[[ Line: 35 | Named "getFIntFollowingStoreProcessDelaySec" ]]
 	return game:GetFastInt("FollowingStoreProcessDelaySec")
 end
 
-local _ = function(p1)
+local _ = function(p1) --[[ Line: 41 | Named "normalizeId" ]]
 	return if p1 == nil then nil else tostring(p1)
 end
 
-return function()
-	-- upvalues: createDataCacheModule (ref), requestsModule (ref), createDataResolverModule (ref), cryoModule (ref), promiseModule (ref), classifyFollowingErrorModule (ref)
-	local var1 = createDataCacheModule()
-	local var2 = createDataCacheModule()
+return function() --[[ Line: 48 | Named "createFollowingStore" ]]
+	-- upvalues: CreateDataCacheModule (copy), RequestsModule (copy), CreateDataResolverModule (copy), CryoModule (copy), PromiseModule (copy), ClassifyFollowingErrorModule (copy)
+	local DataCacheModule = CreateDataCacheModule()
+	local DataCacheModule1 = CreateDataCacheModule()
 	
-	local function _(p1)
-		-- upvalues: requestsModule (copy)
-		return requestsModule.GetFollowingExists(p1):andThen(function(p2)
-			-- upvalues: p1 (ref)
-			local var3 = if p2 and p2.followings then p2.followings else {}
-			local t = {}
-			local t_1 = {}
+	local function _(p1) --[[ Line: 58 | Named "fetchFollowingExists" ]]
+		-- upvalues: RequestsModule (upval)
+		return RequestsModule.GetFollowingExists(p1):andThen(function(Result) --[[ Line: 59 ]]
+			-- upvalues: p1 (copy)
+			local IsFollowing = {}
+			local IsFollowed = {}
 			
-			for i, v in var3 do
-				local userId = v.userId
-				local var4 = if userId == nil then nil else tostring(userId)
+			for _, value in if Result and Result.followings then Result.followings else {} do
+				local UserId = value.userId
+				local Text = if UserId == nil then nil else tostring(UserId)
 				
-				if var4 then
-					t[var4] = v.isFollowing == true
-					t_1[var4] = v.isFollowed == true
+				if Text then
+					IsFollowing[Text] = value.isFollowing == true
+					IsFollowed[Text] = value.isFollowed == true
 				end
 			end
-			for i, v_1 in p1 do
-				if t[v_1] == nil then
-					t[v_1] = false
+			for _, value1 in p1 do
+				if IsFollowing[value1] == nil then
+					IsFollowing[value1] = false
 				end
-				if t_1[v_1] == nil then
-					t_1[v_1] = false
+				if IsFollowed[value1] == nil then
+					IsFollowed[value1] = false
 				end
 			end
-			return { isFollowing = t, isFollowed = t_1 }
+			return { isFollowing = IsFollowing, isFollowed = IsFollowed }
 		end)
 	end
 	
-	local var5 = createDataResolverModule({
+	local DataResolverModule = CreateDataResolverModule({
 		requestBatchSize = 100,
 		supportsMutations = true,
-		cache = var1,
+		cache = DataCacheModule,
 		queueProcessDelaySec = game:GetFastInt("FollowingStoreProcessDelaySec"),
-		fetchFn = function(p3)
-			-- upvalues: cryoModule (copy), requestsModule (copy), var2 (ref)
-			local var6 = cryoModule.Dictionary.keys(p3)
+		fetchFn = function(p2) --[[ Line: 96 ]]
+			-- upvalues: CryoModule (upval), RequestsModule (upval), DataCacheModule1 (copy)
+			local KeysResult = CryoModule.Dictionary.keys(p2)
 			
-			return requestsModule.GetFollowingExists(var6):andThen(function(p4)
-				-- upvalues: var6 (ref)
-				local var7 = if p4 and p4.followings then p4.followings else {}
-				local t = {}
-				local t_1 = {}
+			return RequestsModule.GetFollowingExists(KeysResult):andThen(function(Result) --[[ Line: 59 ]]
+				-- upvalues: KeysResult (copy)
+				local IsFollowing = {}
+				local IsFollowed = {}
 				
-				for i, v in var7 do
-					local userId = v.userId
-					local var8 = if userId == nil then nil else tostring(userId)
+				for _, value in if Result and Result.followings then Result.followings else {} do
+					local UserId = value.userId
+					local Text = if UserId == nil then nil else tostring(UserId)
 					
-					if var8 then
-						t[var8] = v.isFollowing == true
-						t_1[var8] = v.isFollowed == true
+					if Text then
+						IsFollowing[Text] = value.isFollowing == true
+						IsFollowed[Text] = value.isFollowed == true
 					end
 				end
-				for i, v_1 in var6 do
-					if t[v_1] == nil then
-						t[v_1] = false
+				for _, value1 in KeysResult do
+					if IsFollowing[value1] == nil then
+						IsFollowing[value1] = false
 					end
-					if t_1[v_1] == nil then
-						t_1[v_1] = false
+					if IsFollowed[value1] == nil then
+						IsFollowed[value1] = false
 					end
 				end
-				return { isFollowing = t, isFollowed = t_1 }
-			end):andThen(function(p5)
-				-- upvalues: var2 (copy)
-				var2.replaceItems(p5.isFollowed)
+				return { isFollowing = IsFollowing, isFollowed = IsFollowed }
+			end):andThen(function(Result) --[[ Line: 98 ]]
+				-- upvalues: DataCacheModule1 (upval)
+				DataCacheModule1.replaceItems(Result.isFollowed)
 				
-				return p5.isFollowing
+				return Result.isFollowing
 			end)
 		end
 	})
-	local var9 = createDataResolverModule({
+	local DataResolverModule1 = CreateDataResolverModule({
 		requestBatchSize = 100,
 		supportsMutations = true,
-		cache = var2,
+		cache = DataCacheModule1,
 		queueProcessDelaySec = game:GetFastInt("FollowingStoreProcessDelaySec"),
-		fetchFn = function(p5)
-			-- upvalues: cryoModule (copy), requestsModule (copy), var1 (ref)
-			local var10 = cryoModule.Dictionary.keys(p5)
+		fetchFn = function(p3) --[[ Line: 111 ]]
+			-- upvalues: CryoModule (upval), RequestsModule (upval), DataCacheModule (copy)
+			local KeysResult = CryoModule.Dictionary.keys(p3)
 			
-			return requestsModule.GetFollowingExists(var10):andThen(function(p6)
-				-- upvalues: var10 (ref)
-				local var11 = if p6 and p6.followings then p6.followings else {}
-				local t = {}
-				local t_1 = {}
+			return RequestsModule.GetFollowingExists(KeysResult):andThen(function(Result) --[[ Line: 59 ]]
+				-- upvalues: KeysResult (copy)
+				local IsFollowing = {}
+				local IsFollowed = {}
 				
-				for i, v in var11 do
-					local userId = v.userId
-					local var12 = if userId == nil then nil else tostring(userId)
+				for _, value in if Result and Result.followings then Result.followings else {} do
+					local UserId = value.userId
+					local Text = if UserId == nil then nil else tostring(UserId)
 					
-					if var12 then
-						t[var12] = v.isFollowing == true
-						t_1[var12] = v.isFollowed == true
+					if Text then
+						IsFollowing[Text] = value.isFollowing == true
+						IsFollowed[Text] = value.isFollowed == true
 					end
 				end
-				for i, v_1 in var10 do
-					if t[v_1] == nil then
-						t[v_1] = false
+				for _, value1 in KeysResult do
+					if IsFollowing[value1] == nil then
+						IsFollowing[value1] = false
 					end
-					if t_1[v_1] == nil then
-						t_1[v_1] = false
+					if IsFollowed[value1] == nil then
+						IsFollowed[value1] = false
 					end
 				end
-				return { isFollowing = t, isFollowed = t_1 }
-			end):andThen(function(p7)
-				-- upvalues: var1 (copy)
-				var1.replaceItems(p7.isFollowing)
+				return { isFollowing = IsFollowing, isFollowed = IsFollowed }
+			end):andThen(function(Result) --[[ Line: 113 ]]
+				-- upvalues: DataCacheModule (upval)
+				DataCacheModule.replaceItems(Result.isFollowing)
 				
-				return p7.isFollowed
+				return Result.isFollowed
 			end)
 		end
 	})
-	local getOptimisticCachedItem = var5.getOptimisticCachedItem
-	local getOptimisticAndFetchItem = var5.getOptimisticAndFetchItem
-	local getOptimisticCachedItem_1 = var9.getOptimisticCachedItem
-	local getOptimisticAndFetchItem_1 = var9.getOptimisticAndFetchItem
+	local GetOptimisticCachedItemFunction = DataResolverModule.getOptimisticCachedItem
+	local GetOptimisticAndFetchItemFunction1 = DataResolverModule.getOptimisticAndFetchItem
+	local GetOptimisticCachedItemFunction1 = DataResolverModule1.getOptimisticCachedItem
+	local GetOptimisticAndFetchItemFunction = DataResolverModule1.getOptimisticAndFetchItem
 	
-	local function writeFollowing(p7, p8, p9, p10)
-		-- upvalues: var5 (ref), promiseModule (copy), classifyFollowingErrorModule (copy)
-		var5.setMutation(p7, p8)
+	local function writeFollowing(p4, IsFollowing, Callback, p5) --[[ Line: 147 ]]
+		-- upvalues: DataResolverModule (copy), PromiseModule (upval), ClassifyFollowingErrorModule (upval)
+		DataResolverModule.setMutation(p4, IsFollowing)
 		
-		return p9(p7, p10):andThen(function()
-			-- upvalues: var5 (copy), p7 (ref), p8 (ref)
-			var5.commitMutation(p7)
+		return Callback(p4, p5):andThen(function() --[[ Line: 155 ]]
+			-- upvalues: DataResolverModule (upval), p4 (copy), IsFollowing (copy)
+			DataResolverModule.commitMutation(p4)
 			
-			return { type = "success", isFollowing = p8 }
-		end, function(p11)
-			-- upvalues: var5 (copy), p7 (ref), promiseModule (copy), classifyFollowingErrorModule (copy)
-			var5.clearMutation(p7)
+			return { type = "success", isFollowing = IsFollowing }
+		end, function(p6) --[[ Line: 158 ]]
+			-- upvalues: DataResolverModule (upval), p4 (copy), PromiseModule (upval), ClassifyFollowingErrorModule (upval)
+			DataResolverModule.clearMutation(p4)
 			
-			return promiseModule.reject(classifyFollowingErrorModule(p11))
+			return PromiseModule.reject(ClassifyFollowingErrorModule(p6))
 		end)
 	end
 	
 	return {
-		GetIsFollowing = function(p7, p8)
-			-- upvalues: getOptimisticCachedItem (ref), var9 (ref), getOptimisticAndFetchItem (ref)
-			return if p8 and p8.skipFetch then getOptimisticCachedItem(p7) elseif var9.isRequestInQueueOrInFlight(p7) then getOptimisticCachedItem(p7) else getOptimisticAndFetchItem(p7)
+		GetIsFollowing = function(p4, p5) --[[ Line: 127 ]]
+			-- upvalues: GetOptimisticCachedItemFunction (copy), DataResolverModule1 (copy), GetOptimisticAndFetchItemFunction1 (copy)
+			return if p5 and p5.skipFetch then GetOptimisticCachedItemFunction(p4) elseif DataResolverModule1.isRequestInQueueOrInFlight(p4) then GetOptimisticCachedItemFunction(p4) else GetOptimisticAndFetchItemFunction1(p4)
 		end,
-		GetIsFollowed = function(p7, p8)
-			-- upvalues: getOptimisticCachedItem_1 (ref), var5 (ref), getOptimisticAndFetchItem_1 (ref)
-			return if p8 and p8.skipFetch then getOptimisticCachedItem_1(p7) elseif var5.isRequestInQueueOrInFlight(p7) then getOptimisticCachedItem_1(p7) else getOptimisticAndFetchItem_1(p7)
+		GetIsFollowed = function(p4, p5) --[[ Line: 137 ]]
+			-- upvalues: GetOptimisticCachedItemFunction1 (copy), DataResolverModule (copy), GetOptimisticAndFetchItemFunction (copy)
+			return if p5 and p5.skipFetch then GetOptimisticCachedItemFunction1(p4) elseif DataResolverModule.isRequestInQueueOrInFlight(p4) then GetOptimisticCachedItemFunction1(p4) else GetOptimisticAndFetchItemFunction(p4)
 		end,
-		Follow = function(p7, p8)
-			-- upvalues: writeFollowing (ref), requestsModule (copy)
-			return writeFollowing(p7, true, requestsModule.FollowUser, p8)
+		Follow = function(p4, p5) --[[ Line: 164 ]]
+			-- upvalues: writeFollowing (copy), RequestsModule (upval)
+			return writeFollowing(p4, true, RequestsModule.FollowUser, p5)
 		end,
-		Unfollow = function(p7, p8)
-			-- upvalues: writeFollowing (ref), requestsModule (copy)
-			return writeFollowing(p7, false, requestsModule.UnfollowUser, p8)
+		Unfollow = function(p4, p5) --[[ Line: 168 ]]
+			-- upvalues: writeFollowing (copy), RequestsModule (upval)
+			return writeFollowing(p4, false, RequestsModule.UnfollowUser, p5)
 		end,
-		clear = function()
-			-- upvalues: var5 (ref), var9 (ref)
-			var5.clear()
-			var9.clear()
+		clear = function() --[[ Line: 172 ]]
+			-- upvalues: DataResolverModule (copy), DataResolverModule1 (copy)
+			DataResolverModule.clear()
+			DataResolverModule1.clear()
 		end,
-		dispose = function()
-			-- upvalues: var5 (ref), var9 (ref)
-			var5.dispose()
-			var9.dispose()
+		dispose = function() --[[ Line: 177 ]]
+			-- upvalues: DataResolverModule (copy), DataResolverModule1 (copy)
+			DataResolverModule.dispose()
+			DataResolverModule1.dispose()
 		end
 	}
 end

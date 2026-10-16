@@ -1,30 +1,30 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local appStorageService = game:GetService("AppStorageService")
-local httpService = game:GetService("HttpService")
-local fFlagBuildAdUpsellModule = require(buildExperience.Flags.FFlagBuildAdUpsell)
-local fFlagBuildAgentAdCampaignCardModule = require(buildExperience.Flags.FFlagBuildAgentAdCampaignCard)
-local createAdCampaignCardStorageModule = require(script.Parent.createAdCampaignCardStorage)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local FFlagBuildAdUpsellModule = require(BuildExperience.Flags.FFlagBuildAdUpsell)
+local FFlagBuildAdUpsellPinnedModule = require(BuildExperience.Flags.FFlagBuildAdUpsellPinned)
+local FFlagBuildAgentAdCampaignCardModule = require(BuildExperience.Flags.FFlagBuildAgentAdCampaignCard)
+local CreateAdCampaignCardStorageModule = require(script.Parent.createAdCampaignCardStorage)
 
-local function _(p1)
-	return if type(p1) == "number" and p1 >= 0 then math.floor(p1) else 0
+local function _(Value: number): number --[[ Line: 89 | Named "sanitizeCount" ]]
+	return if type(Value) == "number" and Value >= 0 then math.floor(Value) else 0
 end
 
-local _ = function(p1)
-	return if type(p1) == "number" and p1 >= 0 then math.floor(p1) else 0
+local _ = function(Value: number): number --[[ Line: 93 | Named "sanitizeDisplayCount" ]]
+	return if type(Value) == "number" and Value >= 0 then math.floor(Value) else 0
 end
 
-local _ = function(p1)
-	return string.match(p1, "^(%d%d%d%d%-%d%d%-%d%d)")
+local _ = function(Text: string): string --[[ Line: 97 | Named "getUtcDate" ]]
+	return string.match(Text, "^(%d%d%d%d%-%d%d%-%d%d)")
 end
 
-local _ = function(p1, p2)
-	return p1 ~= nil and string.match(p1, "^(%d%d%d%d%-%d%d%-%d%d)") == string.match(p2, "^(%d%d%d%d%-%d%d%-%d%d)")
+local _ = function(Text: string, Text1: string): boolean --[[ Line: 101 | Named "isSameUtcDate" ]]
+	return Text ~= nil and string.match(Text, "^(%d%d%d%d%-%d%d%-%d%d)") == string.match(Text1, "^(%d%d%d%d%-%d%d%-%d%d)")
 end
 
-local function makeEmptyAdUpsellScheduler()
+local function makeEmptyAdUpsellScheduler() --[[ Line: 105 ]]
+	-- upvalues: FFlagBuildAdUpsellPinnedModule (copy)
 	return {
-		version = 3,
 		nextOrder = 1,
+		version = if FFlagBuildAdUpsellPinnedModule then 4 else 3,
 		universes = {},
 		anchors = {},
 		pendingMilestones = {},
@@ -32,724 +32,726 @@ local function makeEmptyAdUpsellScheduler()
 	}
 end
 
-local function pruneUniverseCap(p1)
-	local var1 = 0
-	local var2 = nil
-	local var3 = 1e999
+local function pruneUniverseCap(EmptyAdUpsellScheduler) --[[ Line: 116 ]]
+	local Count = 0
+	local v1 = nil
+	local LastTouchedOrder = 1e999
 	
-	for i, v in p1.universes do
-		var1 += 1
+	for i, univers in EmptyAdUpsellScheduler.universes do
+		Count += 1
 		
-		if v.lastTouchedOrder < var3 or v.lastTouchedOrder == var3 and (var2 == nil or i < var2) then
-			var2 = i
-			var3 = v.lastTouchedOrder
+		if univers.lastTouchedOrder < LastTouchedOrder or univers.lastTouchedOrder == LastTouchedOrder and (v1 == nil or i < v1) then
+			v1 = i
+			LastTouchedOrder = univers.lastTouchedOrder
 		end
 	end
-	if var1 > 50 and var2 ~= nil then
-		p1.universes[var2] = nil
-		local var4 = tonumber(var2)
+	if Count > 50 and v1 ~= nil then
+		EmptyAdUpsellScheduler.universes[v1] = nil
+		local Number: number? = tonumber(v1)
 		
-		if var4 ~= nil then
-			for i_1 = #p1.anchors, 1, -1 do
-				if p1.anchors[i_1].universeId == var4 then
-					table.remove(p1.anchors, i_1)
+		if Number ~= nil then
+			for i1 = #EmptyAdUpsellScheduler.anchors, 1, -1 do
+				if EmptyAdUpsellScheduler.anchors[i1].universeId == Number then
+					table.remove(EmptyAdUpsellScheduler.anchors, i1)
 				end
 			end
-			for i_2 = #p1.pendingMilestones, 1, -1 do
-				if p1.pendingMilestones[i_2].universeId == var4 then
-					table.remove(p1.pendingMilestones, i_2)
+			for i2 = #EmptyAdUpsellScheduler.pendingMilestones, 1, -1 do
+				if EmptyAdUpsellScheduler.pendingMilestones[i2].universeId == Number then
+					table.remove(EmptyAdUpsellScheduler.pendingMilestones, i2)
 				end
 			end
 		end
 	end
 end
 
-local function sanitizeAdUpsellScheduler(p2)
-	-- upvalues: makeEmptyAdUpsellScheduler (ref), pruneUniverseCap (ref)
-	if type(p2) ~= "table" then
-		return makeEmptyAdUpsellScheduler()
-	elseif p2.version ~= 3 then
-		return makeEmptyAdUpsellScheduler()
+local function sanitizeAdUpsellScheduler(Scheduler) --[[ Line: 151 ]]
+	-- upvalues: makeEmptyAdUpsellScheduler (copy), pruneUniverseCap (copy)
+	if type(Scheduler) ~= "table" then
+		return (makeEmptyAdUpsellScheduler())
 	end
-	local lastTouchedOrder, v
-	local var5 = makeEmptyAdUpsellScheduler()
-	local var6 = 0
-	local var7 = 0
+	if Scheduler.version ~= 4 and Scheduler.version ~= 3 then
+		return (makeEmptyAdUpsellScheduler())
+	end
+	local EmptyAdUpsellScheduler = makeEmptyAdUpsellScheduler()
+	local Largest = 0
+	local Count = 0
 	
-	if type(p2.universes) == "table" then
-		for i, v in p2.universes do
-			if type(i) == "string" and type(v) == "table" then
-				lastTouchedOrder = v.lastTouchedOrder
-				local var8 = if type(lastTouchedOrder) == "number" and lastTouchedOrder >= 0 then math.floor(lastTouchedOrder) else 0
-				var6 = math.max(var6, var8)
-				var5.universes[i] = {
-					hasShownUpsell = v.hasShownUpsell == true,
-					dismissedPermanently = v.dismissedPermanently == true,
-					lastTouchedOrder = var8
+	if type(Scheduler.universes) == "table" then
+		for i, univers in Scheduler.universes do
+			if type(i) == "string" and type(univers) == "table" then
+				local LastTouchedOrder: number = univers.lastTouchedOrder
+				local Floored: number = if type(LastTouchedOrder) == "number" and LastTouchedOrder >= 0 then math.floor(LastTouchedOrder) else 0
+				Largest = math.max(Largest, Floored)
+				EmptyAdUpsellScheduler.universes[i] = {
+					hasShownUpsell = univers.hasShownUpsell == true,
+					dismissedPermanently = univers.dismissedPermanently == true,
+					lastTouchedOrder = Floored
 				}
-				var7 += 1
+				Count += 1
 			end
 		end
 	end
-	if type(p2.anchors) == "table" then
-		for i, v in p2.anchors do
-			if type(v) == "table" and type(v.id) == "string" and (type(v.universeId) == "number" and type(v.sessionId) == "string") and (type(v.afterMessageKey) == "string" and type(v.order) == "number") then
-				local maxValue = math.max(1, math.floor(v.order))
-				var6 = math.max(var6, maxValue)
-				table.insert(var5.anchors, {
-					id = v.id,
-					universeId = v.universeId,
-					sessionId = v.sessionId,
-					afterMessageKey = v.afterMessageKey,
-					order = maxValue,
-					impressed = v.impressed == true
+	if type(Scheduler.anchors) == "table" then
+		for _, anchor in Scheduler.anchors do
+			if type(anchor) == "table" and type(anchor.id) == "string" and type(anchor.universeId) == "number" and type(anchor.sessionId) == "string" and type(anchor.order) == "number" then
+				local Largest1 = math.max(1, (math.floor(anchor.order)))
+				Largest = math.max(Largest, Largest1)
+				table.insert(EmptyAdUpsellScheduler.anchors, {
+					id = anchor.id,
+					universeId = anchor.universeId,
+					sessionId = anchor.sessionId,
+					afterMessageKey = if type(anchor.afterMessageKey) == "string" then anchor.afterMessageKey else nil,
+					order = Largest1,
+					impressed = anchor.impressed == true
 				})
 			end
 		end
 	end
-	if type(p2.pendingMilestones) == "table" then
-		for i, v in p2.pendingMilestones do
-			if type(v) == "table" and type(v.id) == "string" and type(v.universeId) == "number" and ((v.sessionId == nil or type(v.sessionId) == "string") and type(v.order) == "number") then
-				local maxValue = math.max(1, math.floor(v.order))
-				var6 = math.max(var6, maxValue)
-				table.insert(var5.pendingMilestones, {
-					id = v.id,
-					universeId = v.universeId,
-					sessionId = v.sessionId,
-					order = maxValue
+	if type(Scheduler.pendingMilestones) == "table" then
+		for _, pendingMilestone in Scheduler.pendingMilestones do
+			if type(pendingMilestone) == "table" and type(pendingMilestone.id) == "string" and type(pendingMilestone.universeId) == "number" and (pendingMilestone.sessionId == nil or type(pendingMilestone.sessionId) == "string") and type(pendingMilestone.order) == "number" then
+				local Largest2 = math.max(1, (math.floor(pendingMilestone.order)))
+				Largest = math.max(Largest, Largest2)
+				table.insert(EmptyAdUpsellScheduler.pendingMilestones, {
+					id = pendingMilestone.id,
+					universeId = pendingMilestone.universeId,
+					sessionId = pendingMilestone.sessionId,
+					order = Largest2
 				})
 			end
 		end
 	end
-	if type(p2.recentEventIds) == "table" then
-		for i, v in p2.recentEventIds do
-			if type(v) == "string" then
-				table.insert(var5.recentEventIds, v)
+	if type(Scheduler.recentEventIds) == "table" then
+		for _, recentEventId in Scheduler.recentEventIds do
+			if type(recentEventId) == "string" then
+				table.insert(EmptyAdUpsellScheduler.recentEventIds, recentEventId)
 			end
 		end
 	end
-	for _ = 51, var7 do
-		pruneUniverseCap(var5)
+	for _ = 51, Count do
+		pruneUniverseCap(EmptyAdUpsellScheduler)
 	end
-	table.sort(var5.anchors, function(p3, p4)
-		return p3.order < p4.order
+	table.sort(EmptyAdUpsellScheduler.anchors, function(A, B): boolean --[[ Line: 233 ]]
+		return A.order < B.order
 	end)
 	local t = {}
 	
-	for i = #var5.anchors, 1, -1 do
-		v = var5.anchors[i]
-		local universeId = `{v.universeId}:{v.sessionId}`
-		lastTouchedOrder = t[universeId] or 0
+	for i1 = #EmptyAdUpsellScheduler.anchors, 1, -1 do
+		local Anchor = EmptyAdUpsellScheduler.anchors[i1]
+		local Text: string = `{Anchor.universeId}:{Anchor.sessionId}`
+		local v2 = t[Text] or 0
 		
-		if lastTouchedOrder >= 10 then
-			table.remove(var5.anchors, i)
+		if v2 >= 10 then
+			table.remove(EmptyAdUpsellScheduler.anchors, i1)
 		else
-			t[universeId] = lastTouchedOrder + 1
+			t[Text] = v2 + 1
 		end
 	end
-	table.sort(var5.pendingMilestones, function(p3, p4)
-		return p3.order < p4.order
+	table.sort(EmptyAdUpsellScheduler.pendingMilestones, function(A, B): boolean --[[ Line: 247 ]]
+		return A.order < B.order
 	end)
-	while #var5.anchors > 50 do
-		table.remove(var5.anchors, 1)
+	while #EmptyAdUpsellScheduler.anchors > 50 do
+		table.remove(EmptyAdUpsellScheduler.anchors, 1)
 	end
-	while #var5.pendingMilestones > 50 do
-		table.remove(var5.pendingMilestones, 1)
+	while #EmptyAdUpsellScheduler.pendingMilestones > 50 do
+		table.remove(EmptyAdUpsellScheduler.pendingMilestones, 1)
 	end
-	while #var5.recentEventIds > 50 do
-		table.remove(var5.recentEventIds, 1)
+	while #EmptyAdUpsellScheduler.recentEventIds > 50 do
+		table.remove(EmptyAdUpsellScheduler.recentEventIds, 1)
 	end
-	local nextOrder = p2.nextOrder
-	var5.nextOrder = math.max(if type(nextOrder) == "number" and nextOrder >= 0 then math.floor(nextOrder) else 0, var6 + 1, 1)
+	local NextOrder: number = Scheduler.nextOrder
+	EmptyAdUpsellScheduler.nextOrder = math.max(if type(NextOrder) == "number" and NextOrder >= 0 then math.floor(NextOrder) else 0, Largest + 1, 1)
 	
-	return var5
+	return EmptyAdUpsellScheduler
 end
 
-local function createBuildAppStorage(p3, p4)
-	-- upvalues: createAdCampaignCardStorageModule (ref), fFlagBuildAdUpsellModule (ref), makeEmptyAdUpsellScheduler (ref), sanitizeAdUpsellScheduler (ref), pruneUniverseCap (ref), fFlagBuildAgentAdCampaignCardModule (ref)
-	local var9 = nil
-	local var10 = false
-	local var11 = 0
-	local var12 = nil
-	local var13 = false
-	local var14 = false
-	local var15 = 0
-	local var16 = nil
-	local var17 = false
-	local var18 = nil
+local function createBuildAppStorage(AppStorageService, HttpService) --[[ Line: 263 ]]
+	-- upvalues: CreateAdCampaignCardStorageModule (copy), FFlagBuildAdUpsellModule (copy), makeEmptyAdUpsellScheduler (copy), sanitizeAdUpsellScheduler (copy), FFlagBuildAdUpsellPinnedModule (copy), pruneUniverseCap (copy), FFlagBuildAgentAdCampaignCardModule (copy)
+	local v3 = nil
+	local Flag = false
+	local v4 = 0
+	local v5 = nil
+	local Flag1 = false
+	local Inverted = false
+	local Count = 0
+	local DelayedThread = nil
+	local Flag2 = false
+	local v6 = nil
 	
-	local function tryReadData()
-		-- upvalues: p3 (ref), p4 (ref)
-		local ok, status = pcall(p3.GetItem, p3, "BuildAppStorageKey")
+	local function tryReadData() --[[ Line: 275 ]]
+		-- upvalues: AppStorageService (copy), HttpService (copy)
+		local Success, Result = pcall(AppStorageService.GetItem, AppStorageService, "BuildAppStorageKey")
 		
-		if not ok then
+		if not Success then
 			return false, {}
-		elseif type(status) ~= "string" or status == "" then
+		elseif type(Result) ~= "string" or Result == "" then
 			return true, {}
+		else
+			local Success1, Result1 = pcall(HttpService.JSONDecode, HttpService, Result)
+			
+			if Success1 and type(Result1) == "table" then
+				return true, Result1
+			else
+				return true, {}
+			end
 		end
-		local ok_1, status_1 = pcall(p4.JSONDecode, p4, status)
-		
-		if ok_1 and type(status_1) == "table" then
-			return true, status_1
-		end
-		return true, {}
 	end
 	
-	local function tryReadDataStrict()
-		-- upvalues: p3 (ref), p4 (ref)
-		local ok, status = pcall(p3.GetItem, p3, "BuildAppStorageKey")
+	local function tryReadDataStrict() --[[ Line: 292 ]]
+		-- upvalues: AppStorageService (copy), HttpService (copy)
+		local Success, Result = pcall(AppStorageService.GetItem, AppStorageService, "BuildAppStorageKey")
 		
-		if not ok then
+		if not Success then
 			return false, {}
-		elseif type(status) ~= "string" or status == "" then
+		elseif type(Result) ~= "string" or Result == "" then
 			return true, {}
+		else
+			local Success1, Result1 = pcall(HttpService.JSONDecode, HttpService, Result)
+			
+			if Success1 and type(Result1) == "table" then
+				return true, Result1
+			else
+				return false, {}
+			end
 		end
-		local ok_1, status_1 = pcall(p4.JSONDecode, p4, status)
-		
-		if ok_1 and type(status_1) == "table" then
-			return true, status_1
-		end
-		return false, {}
 	end
 	
-	local function _()
-		-- upvalues: tryReadData (ref)
-		local _, var19 = tryReadData()
+	local function _() --[[ Line: 308 | Named "readData" ]]
+		-- upvalues: tryReadData (copy)
+		local _, TryReadDataResult2 = tryReadData()
 		
-		return var19
+		return TryReadDataResult2
 	end
 	
-	local function tryReadDataWithRetry(p5)
-		local var19, var20 = p5()
+	local function tryReadDataWithRetry(Callback) --[[ Line: 313 ]]
+		local CallbackResult, CallbackResult2 = Callback()
 		
-		if var19 then
-			return true, var20
+		if CallbackResult then
+			return true, CallbackResult2
+		else
+			return Callback()
 		end
-		return p5()
 	end
 	
-	local function writeData(p5)
-		-- upvalues: p4 (ref), p3 (ref)
-		local ok, status = pcall(p4.JSONEncode, p4, p5)
+	local function writeData(p1) --[[ Line: 321 ]]
+		-- upvalues: HttpService (copy), AppStorageService (copy)
+		local Success, Result = pcall(HttpService.JSONEncode, HttpService, p1)
 		
-		return if ok and type(status) == "string" then pcall(function()
-			-- upvalues: p3 (copy), status (ref)
-			p3:SetItem("BuildAppStorageKey", status)
-			p3:Flush()
+		return if Success and type(Result) == "string" then pcall(function() --[[ Line: 327 ]]
+			-- upvalues: AppStorageService (upval), Result (copy)
+			AppStorageService:SetItem("BuildAppStorageKey", Result)
+			AppStorageService:Flush()
 		end) else false
 	end
 	
-	local _ = function(p5)
-		-- upvalues: tryReadData (ref), p4 (ref), p3 (ref)
-		local var19, var20
-		local var21 = tryReadData
-		local var22, var23 = var21()
+	local _ = function(Callback: (any) -> ()) --[[ Line: 334 | Named "updateData" ]]
+		-- upvalues: tryReadData (copy), HttpService (copy), AppStorageService (copy)
+		local TryReadDataResult, TryReadDataResult2 = tryReadData()
+		local TryReadDataResult1 = nil
+		local v7 = nil
 		
-		if var22 then
-			var19 = true
-			var20 = var23
+		if TryReadDataResult then
+			v7 = true
+			TryReadDataResult1 = TryReadDataResult2
 		else
-			local var24, var25 = var21()
-			var19 = var24
-			var20 = var25
+			v7, TryReadDataResult1 = tryReadData()
 		end
-		if not var19 then
+		if v7 then
+			Callback(TryReadDataResult1)
+			local Success, Result = pcall(HttpService.JSONEncode, HttpService, TryReadDataResult1)
+			
+			return if Success and type(Result) == "string" then pcall(function() --[[ Line: 327 ]]
+				-- upvalues: AppStorageService (upval), Result (copy)
+				AppStorageService:SetItem("BuildAppStorageKey", Result)
+				AppStorageService:Flush()
+			end) else false
+		else
 			return false
 		end
-		p5(var20)
-		local ok, status = pcall(p4.JSONEncode, p4, var20)
-		
-		return if ok and type(status) == "string" then pcall(function()
-			-- upvalues: p3 (copy), status (ref)
-			p3:SetItem("BuildAppStorageKey", status)
-			p3:Flush()
-		end) else false
 	end
 	
-	local function getAdCampaignCardStorage()
-		-- upvalues: var18 (write), createAdCampaignCardStorageModule (copy), tryReadDataWithRetry (ref), tryReadDataStrict (ref), writeData (ref)
-		if var18 == nil then
-			var18 = createAdCampaignCardStorageModule({
-				readData = function()
-					-- upvalues: tryReadDataWithRetry (copy), tryReadDataStrict (copy)
+	local function getAdCampaignCardStorage() --[[ Line: 343 ]]
+		-- upvalues: v6 (ref), CreateAdCampaignCardStorageModule (upval), tryReadDataWithRetry (copy), tryReadDataStrict (copy), writeData (copy)
+		if v6 == nil then
+			v6 = CreateAdCampaignCardStorageModule({
+				readData = function() --[[ Line: 346 ]]
+					-- upvalues: tryReadDataWithRetry (upval), tryReadDataStrict (upval)
 					return tryReadDataWithRetry(tryReadDataStrict)
 				end,
 				writeData = writeData
 			})
 		end
-		return var18
+		return v6
 	end
 	
-	local function getChatDraft(p5)
-		-- upvalues: tryReadData (ref)
-		local _, var19 = tryReadData()
-		local chatDrafts = var19.chatDrafts
-		
-		if type(chatDrafts) ~= "table" then
-			return nil
+	local function loadAdUpsell() --[[ Line: 436 ]]
+		-- upvalues: v5 (ref), Flag1 (ref), tryReadDataStrict (copy), makeEmptyAdUpsellScheduler (upval), sanitizeAdUpsellScheduler (upval)
+		if v5 ~= nil then
+			return true, v5
 		end
-		local var20 = chatDrafts[p5]
-		
-		return if type(var20) == "string" and var20 ~= "" then var20 else nil
-	end
-	
-	local function setChatDraft(value, p5)
-		-- upvalues: tryReadData (ref), p4 (ref), p3 (ref)
-		local var19, var20
-		local _ = function(p6)
-			-- upvalues: value (ref), p5 (ref)
-			local var21 = if type(p6.chatDrafts) == "table" then table.clone(p6.chatDrafts) else {}
-			var21[value] = if p5 ~= "" then nil else p5
-			p6.chatDrafts = var21
-		end
-		
-		local var21, var22 = tryReadData()
-		
-		if var21 then
-			var19 = true
-			var20 = var22
-		else
-			local var23, var24 = tryReadData()
-			var19 = var23
-			var20 = var24
-		end
-		if not var19 then
-			return false
-		end
-		local var25 = if type(var20.chatDrafts) == "table" then table.clone(var20.chatDrafts) else {}
-		var25[value] = if p5 ~= "" then nil else p5
-		var20.chatDrafts = var25
-		local ok, status = pcall(p4.JSONEncode, p4, var20)
-		
-		return if ok and type(status) == "string" then pcall(function()
-			-- upvalues: p3 (copy), status (ref)
-			p3:SetItem("BuildAppStorageKey", status)
-			p3:Flush()
-		end) else false
-	end
-	
-	local function getUnpublishedPlaytestModeTooltipDisplayCount()
-		-- upvalues: tryReadData (ref), var11 (write)
-		local _, var19 = tryReadData()
-		local unpublishedPlaytestModeTooltipDisplayCount = var19.unpublishedPlaytestModeTooltipDisplayCount
-		
-		return math.max(if type(unpublishedPlaytestModeTooltipDisplayCount) == "number" and unpublishedPlaytestModeTooltipDisplayCount >= 0 then math.floor(unpublishedPlaytestModeTooltipDisplayCount) else 0, var11)
-	end
-	
-	local function incrementUnpublishedPlaytestModeTooltipDisplayCount()
-		-- upvalues: fFlagBuildAdUpsellModule (copy), var11 (write), tryReadData (ref), p4 (ref), p3 (ref)
-		local status
-		if fFlagBuildAdUpsellModule then
-			local var19, var20
-			local var21 = var11 + 1
-			var11 = var21
-			
-			local _ = function(p5)
-				-- upvalues: var21 (ref), var11 (copy)
-				local unpublishedPlaytestModeTooltipDisplayCount = p5.unpublishedPlaytestModeTooltipDisplayCount
-				unpublishedPlaytestModeTooltipDisplayCount = math.max((if type(unpublishedPlaytestModeTooltipDisplayCount) == "number" and unpublishedPlaytestModeTooltipDisplayCount >= 0 then math.floor(unpublishedPlaytestModeTooltipDisplayCount) else 0) + 1, var21)
-				var11 = unpublishedPlaytestModeTooltipDisplayCount
-				p5.unpublishedPlaytestModeTooltipDisplayCount = unpublishedPlaytestModeTooltipDisplayCount
-			end
-			
-			local var22, var23 = tryReadData()
-			
-			if var22 then
-				var19 = true
-				var20 = var23
-			else
-				local var24, var25 = tryReadData()
-				var19 = var24
-				var20 = var25
-			end
-			if not var19 then
-				return false
-			end
-			local status = var20.unpublishedPlaytestModeTooltipDisplayCount
-			status = math.max((if type(status) == "number" and status >= 0 then math.floor(status) else 0) + 1, var21)
-			var11 = status
-			var20.unpublishedPlaytestModeTooltipDisplayCount = status
-			status, status = pcall(p4.JSONEncode, p4, var20)
-			
-			return if status and type(status) == "string" then pcall(function()
-				-- upvalues: p3 (copy), status (ref)
-				p3:SetItem("BuildAppStorageKey", status)
-				p3:Flush()
-			end) else false
-		else
-			local _, var26 = tryReadData()
-			var26 = var26.unpublishedPlaytestModeTooltipDisplayCount
-			var26 = math.max(if type(var26) == "number" and var26 >= 0 then math.floor(var26) else 0, var11) + 1
-			var11 = var26
-			var26.unpublishedPlaytestModeTooltipDisplayCount = var26
-			ok, status = pcall(p4.JSONEncode, p4, var26)
-			
-			return if ok and type(status) == "string" then pcall(function()
-				-- upvalues: p3 (copy), status (ref)
-				p3:SetItem("BuildAppStorageKey", status)
-				p3:Flush()
-			end) else false
-		end
-	end
-	
-	local function wasPushNotificationsUpsellShownToday(p5)
-		-- upvalues: var9 (write), tryReadData (ref)
-		local var19 = (p5 or DateTime.now()):ToIsoDate()
-		
-		if var9 ~= nil and string.match(var9, "^(%d%d%d%d%-%d%d%-%d%d)") == string.match(var19, "^(%d%d%d%d%-%d%d%-%d%d)") then
-			return true
-		end
-		local _, var20 = tryReadData()
-		local pushNotificationsUpsell = var20.pushNotificationsUpsell
-		local var21 = false
-		
-		if type(pushNotificationsUpsell) == "table" then
-			local lastShownAt = pushNotificationsUpsell.lastShownAt
-			var21 = lastShownAt ~= nil and string.match(lastShownAt, "^(%d%d%d%d%-%d%d%-%d%d)") == string.match(var19, "^(%d%d%d%d%-%d%d%-%d%d)")
-		end
-		return var21
-	end
-	
-	local function markPushNotificationsUpsellShown(p5)
-		-- upvalues: var9 (write), fFlagBuildAdUpsellModule (copy), tryReadData (ref), p4 (ref), p3 (ref)
-		local ok
-		local var19 = (p5 or DateTime.now()):ToIsoDate()
-		var9 = var19
-		
-		if fFlagBuildAdUpsellModule then
-			local var20, var21
-			local _ = function(p6)
-				-- upvalues: var19 (ref)
-				local pushNotificationsUpsell = p6.pushNotificationsUpsell
-				local var22 = if type(pushNotificationsUpsell) == "table" then table.clone(pushNotificationsUpsell) else {}
-				var22.lastShownAt = var19
-				p6.pushNotificationsUpsell = var22
-			end
-			
-			local var22, var23 = tryReadData()
-			
-			if var22 then
-				var20 = true
-				var21 = var23
-			else
-				local var24, var25 = tryReadData()
-				var20 = var24
-				var21 = var25
-			end
-			if not var20 then
-				return false
-			end
-			local pushNotificationsUpsell = var21.pushNotificationsUpsell
-			local var26 = if type(pushNotificationsUpsell) == "table" then table.clone(pushNotificationsUpsell) else {}
-			var26.lastShownAt = var19
-			var21.pushNotificationsUpsell = var26
-			ok, status = pcall(p4.JSONEncode, p4, var21)
-			
-			return if ok and type(status) == "string" then pcall(function()
-				-- upvalues: p3 (copy), status (ref)
-				p3:SetItem("BuildAppStorageKey", status)
-				p3:Flush()
-			end) else false
-		else
-			local _, var27 = tryReadData()
-			local pushNotificationsUpsell = var27.pushNotificationsUpsell
-			local var28 = if type(pushNotificationsUpsell) == "table" then table.clone(pushNotificationsUpsell) else {}
-			var28.lastShownAt = var19
-			var27.pushNotificationsUpsell = var28
-			ok, status = pcall(p4.JSONEncode, p4, var27)
-			
-			return if ok and type(status) == "string" then pcall(function()
-				-- upvalues: p3 (copy), status (ref)
-				p3:SetItem("BuildAppStorageKey", status)
-				p3:Flush()
-			end) else false
-		end
-	end
-	
-	local function loadAdUpsell()
-		-- upvalues: var12 (write), var13 (write), tryReadDataStrict (ref), makeEmptyAdUpsellScheduler (copy), sanitizeAdUpsellScheduler (copy)
-		if var12 ~= nil then
-			return true, var12
-		elseif var13 then
+		if Flag1 then
 			return false, nil
 		end
-		local var19, var20
-		local var21 = tryReadDataStrict
-		local var22, var23 = var21()
+		local TryReadDataStrictResult, TryReadDataStrictResult2 = tryReadDataStrict()
+		local TryReadDataStrictResult1 = nil
+		local v7 = nil
 		
-		if var22 then
-			var19 = true
-			var20 = var23
+		if TryReadDataStrictResult then
+			v7 = true
+			TryReadDataStrictResult1 = TryReadDataStrictResult2
 		else
-			local var24, var25 = var21()
-			var19 = var24
-			var20 = var25
+			v7, TryReadDataStrictResult1 = tryReadDataStrict()
 		end
-		if var19 then
-			local adUpsell = var20.adUpsell
-			local var26 = if type(adUpsell) == "table" then table.clone(adUpsell) else {}
-			var26.dismissedPermanently = var26.dismissedPermanently == true
-			var26.scheduler = if var26.dismissedPermanently then makeEmptyAdUpsellScheduler() else sanitizeAdUpsellScheduler(var26.scheduler)
-			var12 = var26
+		if v7 then
+			local AdUpsell = TryReadDataStrictResult1.adUpsell
+			local Copy = if type(AdUpsell) == "table" then table.clone(AdUpsell) else {}
+			Copy.dismissedPermanently = Copy.dismissedPermanently == true
+			Copy.scheduler = if Copy.dismissedPermanently then makeEmptyAdUpsellScheduler() else sanitizeAdUpsellScheduler(Copy.scheduler)
+			v5 = Copy
 			
-			return true, var26
-		end
-		var13 = true
-		
-		return false, nil
-	end
-	
-	local function retryAdUpsellRead()
-		-- upvalues: var13 (write), loadAdUpsell (ref)
-		var13 = false
-		
-		return loadAdUpsell()
-	end
-	
-	local function persistCachedAdUpsell(p5)
-		-- upvalues: var12 (write), tryReadData (ref), tryReadDataStrict (ref), p4 (ref), p3 (ref)
-		if var12 == nil then
-			return false
-		end
-		local var19, var20
-		local var21 = if p5 then tryReadData else tryReadDataStrict
-		local var22, var23 = var21()
-		
-		if var22 then
-			var19 = true
-			var20 = var23
+			return true, Copy
 		else
-			local var24, var25 = var21()
-			var19 = var24
-			var20 = var25
+			Flag1 = true
+			
+			return false, nil
 		end
-		if not var19 then
-			return false
-		end
-		local adUpsell = var20.adUpsell
-		local var26 = if type(adUpsell) == "table" then table.clone(adUpsell) else {}
-		var26.dismissedPermanently = var12.dismissedPermanently
-		var26.scheduler = var12.scheduler
-		var20.adUpsell = var26
-		local ok, status = pcall(p4.JSONEncode, p4, var20)
-		
-		return if ok and type(status) == "string" then pcall(function()
-			-- upvalues: p3 (copy), status (ref)
-			p3:SetItem("BuildAppStorageKey", status)
-			p3:Flush()
-		end) else false
 	end
 	
-	local function scheduleAdUpsellWriteRetry(p5)
-		-- upvalues: var16 (write), var15 (write), var14 (write), persistCachedAdUpsell (ref), var17 (write), scheduleAdUpsellWriteRetry (ref)
-		if var16 == nil and var15 < 3 then
-			local function retryWrite()
-				-- upvalues: var16 (copy), var14 (copy), var15 (copy), persistCachedAdUpsell (copy), var17 (copy), scheduleAdUpsellWriteRetry (copy)
-				var16 = nil
+	local function persistCachedAdUpsell(p1) --[[ Line: 470 ]]
+		-- upvalues: v5 (ref), tryReadData (copy), tryReadDataStrict (copy), HttpService (copy), AppStorageService (copy)
+		if v5 == nil then
+			return false
+		end
+		local TryReadData = if p1 then tryReadData else tryReadDataStrict
+		local TryReadDataResult, TryReadDataResult2 = TryReadData()
+		local v7 = nil
+		local TryReadDataResult1 = nil
+		
+		if TryReadDataResult then
+			v7 = true
+			TryReadDataResult1 = TryReadDataResult2
+		else
+			v7, TryReadDataResult1 = TryReadData()
+		end
+		if v7 then
+			local AdUpsell = TryReadDataResult1.adUpsell
+			local Copy = if type(AdUpsell) == "table" then table.clone(AdUpsell) else {}
+			local v8 = v5
+			Copy.dismissedPermanently = v8.dismissedPermanently
+			Copy.scheduler = v8.scheduler
+			TryReadDataResult1.adUpsell = Copy
+			local Success, Result = pcall(HttpService.JSONEncode, HttpService, TryReadDataResult1)
+			
+			return if Success and type(Result) == "string" then pcall(function() --[[ Line: 327 ]]
+				-- upvalues: AppStorageService (upval), Result (copy)
+				AppStorageService:SetItem("BuildAppStorageKey", Result)
+				AppStorageService:Flush()
+			end) else false
+		else
+			return false
+		end
+	end
+	
+	local function scheduleAdUpsellWriteRetry(p1) --[[ Line: 488 ]]
+		-- upvalues: DelayedThread (ref), Count (ref), Inverted (ref), persistCachedAdUpsell (copy), Flag2 (ref), scheduleAdUpsellWriteRetry (copy)
+		if DelayedThread == nil and Count < 3 then
+			local function retryWrite() --[[ Line: 492 ]]
+				-- upvalues: DelayedThread (upval), Inverted (upval), Count (upval), persistCachedAdUpsell (upval), Flag2 (upval), scheduleAdUpsellWriteRetry (upval)
+				DelayedThread = nil
 				
-				if not var14 or var15 >= 3 then return end
-				var15 += 1
+				if not Inverted or Count >= 3 then return end
+				Count += 1
 				
-				if persistCachedAdUpsell(var17) then
-					var14 = false
-					var15 = 0
-					var17 = false
+				if persistCachedAdUpsell(Flag2) then
+					Inverted = false
+					Count = 0
+					Flag2 = false
 					
 					return
+				else
+					scheduleAdUpsellWriteRetry(true)
 				end
-				scheduleAdUpsellWriteRetry(true)
 			end
 			
-			var16 = if p5 then task.delay(1, retryWrite) else task.defer(retryWrite)
+			DelayedThread = if p1 then task.delay(1, retryWrite) else task.defer(retryWrite)
 			
 			return
 		end
 	end
 	
-	local function persistAdUpsellMutation(p5, p6)
-		-- upvalues: var15 (write), var14 (write), var17 (write), scheduleAdUpsellWriteRetry (ref), persistCachedAdUpsell (ref), var16 (write)
-		var15 = 0
+	local function persistAdUpsellMutation(Enabled, p1) --[[ Line: 511 ]]
+		-- upvalues: Count (ref), Inverted (ref), Flag2 (ref), scheduleAdUpsellWriteRetry (copy), persistCachedAdUpsell (copy), DelayedThread (ref)
+		Count = 0
 		
-		if p6 then
-			var14 = true
-			var17 = var17 or p5 == true
+		if p1 then
+			Inverted = true
+			Flag2 = Flag2 or Enabled == true
 			scheduleAdUpsellWriteRetry()
 			
 			return true
 		end
-		var15 += 1
-		local var19 = persistCachedAdUpsell(p5)
-		var14 = not var19
+		Count += 1
+		local PersistCachedAdUpsellResult = persistCachedAdUpsell(Enabled)
+		Inverted = not PersistCachedAdUpsellResult
 		
-		if var14 then
-			var17 = var17 or p5 == true
+		if Inverted then
+			Flag2 = Flag2 or Enabled == true
 			scheduleAdUpsellWriteRetry()
 			
-			return var19
+			return PersistCachedAdUpsellResult
 		end
-		var15 = 0
-		var17 = false
+		Count = 0
+		Flag2 = false
 		
-		if var16 ~= nil then
-			task.cancel(var16)
-			var16 = nil
+		if DelayedThread ~= nil then
+			task.cancel(DelayedThread)
+			DelayedThread = nil
 		end
-		return var19
+		return PersistCachedAdUpsellResult
 	end
 	
-	local _ = function()
-		-- upvalues: loadAdUpsell (ref)
-		local var19, var20 = loadAdUpsell()
+	local _ = function() --[[ Line: 537 | Named "getAdUpsellScheduler" ]]
+		-- upvalues: loadAdUpsell (copy)
+		local AdUpsell, AdUpsell2 = loadAdUpsell()
 		
-		if var19 and var20 ~= nil then
-			return true, var20, var20.scheduler
+		if AdUpsell and AdUpsell2 ~= nil then
+			return true, AdUpsell2, AdUpsell2.scheduler
+		else
+			return false, nil, nil
 		end
-		return false, nil, nil
 	end
 	
-	local _ = function(p5, p6)
-		local var19 = tostring(p6)
-		local var20 = p5.universes[var19]
+	local _ = function(p1, p2) --[[ Line: 545 | Named "getOrCreateUniverseState" ]]
+		local Text = tostring(p2)
+		local Univers = p1.universes[Text]
 		
-		if var20 == nil then
-			var20 = {
+		if Univers == nil then
+			Univers = {
 				hasShownUpsell = false,
 				dismissedPermanently = false,
 				lastTouchedOrder = 0
 			}
-			p5.universes[var19] = var20
+			p1.universes[Text] = Univers
 		end
-		return var20
+		return Univers
 	end
 	
-	local _ = function(p5, p6)
-		return table.find(p5.recentEventIds, p6) ~= nil
+	local _ = function(p1, Value): boolean --[[ Line: 559 | Named "hasRecentEvent" ]]
+		return table.find(p1.recentEventIds, Value) ~= nil
 	end
 	
-	local function rememberEvent(p5, p6)
-		table.insert(p5.recentEventIds, p6)
-		while #p5.recentEventIds > 50 do
-			table.remove(p5.recentEventIds, 1)
+	local function rememberEvent(Scheduler, EventId) --[[ Line: 563 ]]
+		table.insert(Scheduler.recentEventIds, EventId)
+		while #Scheduler.recentEventIds > 50 do
+			table.remove(Scheduler.recentEventIds, 1)
 		end
 	end
 	
-	local function pruneAnchorCaps(p7, p8, p9)
-		local var19 = 0
+	local function pruneAnchorCaps(Scheduler, UniverseId, SessionId) --[[ Line: 570 ]]
+		local Count = 0
 		
-		for i, v in p7.anchors do
-			if v.universeId == p8 and v.sessionId == p9 then
-				var19 += 1
+		for i, anchor in Scheduler.anchors do
+			if anchor.universeId == UniverseId and anchor.sessionId == SessionId then
+				Count += 1
 			end
 		end
-		while var19 > 10 do
-			for i_1, v_1 in p7.anchors do
-				if v_1.universeId == p8 and v_1.sessionId == p9 then
-					table.remove(p7.anchors, i_1)
-					var19 -= 1
-					continue
+		while Count > 10 do
+			for i, anchor1 in Scheduler.anchors do
+				if anchor1.universeId == UniverseId and anchor1.sessionId == SessionId then
+					table.remove(Scheduler.anchors, i)
+					Count -= 1
+					break
 				end
 			end
 		end
-		while #p7.anchors > 50 do
-			table.remove(p7.anchors, 1)
+		while #Scheduler.anchors > 50 do
+			table.remove(Scheduler.anchors, 1)
 		end
 	end
 	
-	local function addMilestone(p10, p11, p12, p13, p14, p15)
-		-- upvalues: pruneAnchorCaps (ref)
-		if p13 ~= nil and p14 ~= nil then
-			table.insert(p10.anchors, {
+	local function addMilestone(EmptyAdUpsellScheduler, Id, UniverseId, SessionId, AfterMessageKey, Order) --[[ Line: 591 ]]
+		-- upvalues: FFlagBuildAdUpsellPinnedModule (upval), pruneAnchorCaps (copy)
+		if SessionId ~= nil and (FFlagBuildAdUpsellPinnedModule or AfterMessageKey ~= nil) then
+			table.insert(EmptyAdUpsellScheduler.anchors, {
 				impressed = false,
-				id = p11,
-				universeId = p12,
-				sessionId = p13,
-				afterMessageKey = p14,
-				order = p15
+				id = Id,
+				universeId = UniverseId,
+				sessionId = SessionId,
+				afterMessageKey = if FFlagBuildAdUpsellPinnedModule then nil else AfterMessageKey,
+				order = Order
 			})
-			pruneAnchorCaps(p10, p12, p13)
+			pruneAnchorCaps(EmptyAdUpsellScheduler, UniverseId, SessionId)
 			
 			return
 		end
-		table.insert(p10.pendingMilestones, { id = p11, universeId = p12, sessionId = p13, order = p15 })
-		while #p10.pendingMilestones > 50 do
-			table.remove(p10.pendingMilestones, 1)
+		table.insert(EmptyAdUpsellScheduler.pendingMilestones, {
+			id = Id,
+			universeId = UniverseId,
+			sessionId = SessionId,
+			order = Order
+		})
+		while #EmptyAdUpsellScheduler.pendingMilestones > 50 do
+			table.remove(EmptyAdUpsellScheduler.pendingMilestones, 1)
 		end
 	end
 	
-	local function recordAdUpsellEvent(p16)
-		-- upvalues: loadAdUpsell (ref), var14 (write), persistAdUpsellMutation (ref), rememberEvent (ref), pruneUniverseCap (copy), addMilestone (ref)
-		local var20, var21, scheduler
-		local var22, var23 = loadAdUpsell()
+	local function recordAdUpsellEvent(p1) --[[ Line: 622 ]]
+		-- upvalues: loadAdUpsell (copy), Inverted (ref), persistAdUpsellMutation (copy), rememberEvent (copy), pruneUniverseCap (upval), addMilestone (copy)
+		local AdUpsell, AdUpsell2 = loadAdUpsell()
+		local Flag = nil
+		local v7 = nil
+		local Scheduler = nil
 		
-		if var22 and var23 ~= nil then
-			var20 = true
-			var21 = var23
-			scheduler = var23.scheduler
+		if AdUpsell and AdUpsell2 ~= nil then
+			Flag = true
+			v7 = AdUpsell2
+			Scheduler = AdUpsell2.scheduler
 		else
-			var20 = false
-			var21 = nil
-			scheduler = nil
+			Flag = false
+			v7 = nil
+			Scheduler = nil
 		end
-		if not var20 or var21 == nil or scheduler == nil then
+		if not Flag or v7 == nil or Scheduler == nil then
 			return false, false
 		end
-		var22 = scheduler.universes[tostring(p16.universeId)]
+		local Univers = Scheduler.universes[tostring(p1.universeId)]
 		
-		if var21.dismissedPermanently == true or var22 ~= nil and var22.dismissedPermanently then
+		if v7.dismissedPermanently == true or Univers ~= nil and Univers.dismissedPermanently then
 			return true, false
-		elseif not p16.isEligiblePublish then
-			return true, false
-		elseif var22 ~= nil and var22.hasShownUpsell or table.find(scheduler.recentEventIds, p16.eventId) ~= nil then
-			return if var14 then persistAdUpsellMutation() else true, false
 		end
-		rememberEvent(scheduler, p16.eventId)
-		local var24 = tostring(p16.universeId)
-		local var25 = scheduler.universes[var24]
+		if not p1.isEligiblePublish then
+			return true, false
+		end
+		if Univers ~= nil and Univers.hasShownUpsell or table.find(Scheduler.recentEventIds, p1.eventId) ~= nil then
+			return not Inverted or persistAdUpsellMutation(), false
+		end
+		rememberEvent(Scheduler, p1.eventId)
+		local Text = tostring(p1.universeId)
+		local Univers1 = Scheduler.universes[Text]
 		
-		if var25 == nil then
-			var25 = {
+		if Univers1 == nil then
+			Univers1 = {
 				hasShownUpsell = false,
 				dismissedPermanently = false,
 				lastTouchedOrder = 0
 			}
-			scheduler.universes[var24] = var25
+			Scheduler.universes[Text] = Univers1
 		end
-		local nextOrder = scheduler.nextOrder
-		scheduler.nextOrder += 1
-		var25.lastTouchedOrder = nextOrder
-		var25.hasShownUpsell = true
-		pruneUniverseCap(scheduler)
-		addMilestone(scheduler, p16.eventId, p16.universeId, p16.sessionId, p16.afterMessageKey, nextOrder)
+		local NextOrder = Scheduler.nextOrder
+		Scheduler.nextOrder += 1
+		Univers1.lastTouchedOrder = NextOrder
+		Univers1.hasShownUpsell = true
+		pruneUniverseCap(Scheduler)
+		addMilestone(Scheduler, p1.eventId, p1.universeId, p1.sessionId, p1.afterMessageKey, NextOrder)
 		
 		return persistAdUpsellMutation(), true
 	end
 	
 	return {
 		STORAGE_KEY = "BuildAppStorageKey",
-		AD_UPSELL_SCHEDULER_VERSION = 3,
-		getAdCampaignCardStorage = if fFlagBuildAgentAdCampaignCardModule then getAdCampaignCardStorage else nil,
-		getChatDraft = getChatDraft,
-		setChatDraft = setChatDraft,
-		getUnpublishedPlaytestModeTooltipDisplayCount = getUnpublishedPlaytestModeTooltipDisplayCount,
-		incrementUnpublishedPlaytestModeTooltipDisplayCount = incrementUnpublishedPlaytestModeTooltipDisplayCount,
-		wasPushNotificationsUpsellShownToday = wasPushNotificationsUpsellShownToday,
-		markPushNotificationsUpsellShown = markPushNotificationsUpsellShown,
-		retryAdUpsellRead = retryAdUpsellRead,
-		getAdUpsellState = function(p16, p17)
-			-- upvalues: loadAdUpsell (ref)
-			local var20, var21, scheduler
-			local var22, var23 = loadAdUpsell()
+		AD_UPSELL_SCHEDULER_VERSION = 4,
+		getAdCampaignCardStorage = if FFlagBuildAgentAdCampaignCardModule then getAdCampaignCardStorage else nil,
+		getChatDraft = function(p1) --[[ Line: 354 ]]
+			-- upvalues: tryReadData (copy)
+			local _, TryReadDataResult2 = tryReadData()
+			local ChatDrafts = TryReadDataResult2.chatDrafts
 			
-			if var22 and var23 ~= nil then
-				var20 = true
-				var21 = var23
-				scheduler = var23.scheduler
+			if type(ChatDrafts) == "table" then
+				local ChatDraft = ChatDrafts[p1]
+				
+				return if type(ChatDraft) == "string" and ChatDraft ~= "" then ChatDraft else nil
 			else
-				var20 = false
-				var21 = nil
-				scheduler = nil
+				return nil
 			end
-			if not var20 or var21 == nil or scheduler == nil then
+		end,
+		setChatDraft = function(Key, p1) --[[ Line: 363 ]]
+			-- upvalues: tryReadData (copy), HttpService (copy), AppStorageService (copy)
+			local function _(p2) --[[ Line: 364 ]]
+				-- upvalues: Key (copy), p1 (copy)
+				local Copy = if type(p2.chatDrafts) == "table" then table.clone(p2.chatDrafts) else {}
+				Copy[Key] = if p1 == "" then nil else p1
+				p2.chatDrafts = Copy
+			end
+			
+			local TryReadDataResult, TryReadDataResult2 = tryReadData()
+			local v7 = nil
+			local TryReadDataResult1 = nil
+			
+			if TryReadDataResult then
+				v7 = true
+				TryReadDataResult1 = TryReadDataResult2
+			else
+				v7, TryReadDataResult1 = tryReadData()
+			end
+			if v7 then
+				local Copy = if type(TryReadDataResult1.chatDrafts) == "table" then table.clone(TryReadDataResult1.chatDrafts) else {}
+				Copy[Key] = if p1 == "" then nil else p1
+				TryReadDataResult1.chatDrafts = Copy
+				local Success, Result = pcall(HttpService.JSONEncode, HttpService, TryReadDataResult1)
+				
+				return if Success and type(Result) == "string" then pcall(function() --[[ Line: 327 ]]
+					-- upvalues: AppStorageService (upval), Result (copy)
+					AppStorageService:SetItem("BuildAppStorageKey", Result)
+					AppStorageService:Flush()
+				end) else false
+			else
+				return false
+			end
+		end,
+		getUnpublishedPlaytestModeTooltipDisplayCount = function(): number --[[ Line: 371 ]]
+			-- upvalues: tryReadData (copy), v4 (ref)
+			local _, TryReadDataResult2 = tryReadData()
+			local UnpublishedPlaytestModeTooltipDisplayCount: number = TryReadDataResult2.unpublishedPlaytestModeTooltipDisplayCount
+			
+			return (math.max(if type(UnpublishedPlaytestModeTooltipDisplayCount) == "number" and UnpublishedPlaytestModeTooltipDisplayCount >= 0 then math.floor(UnpublishedPlaytestModeTooltipDisplayCount) else 0, v4))
+		end,
+		incrementUnpublishedPlaytestModeTooltipDisplayCount = function() --[[ Line: 376 ]]
+			-- upvalues: FFlagBuildAdUpsellModule (upval), v4 (ref), tryReadData (copy), HttpService (copy), AppStorageService (copy)
+			if not FFlagBuildAdUpsellModule then
+				local _, TryReadDataResult2_1 = tryReadData()
+				local UnpublishedPlaytestModeTooltipDisplayCount: number = TryReadDataResult2_1.unpublishedPlaytestModeTooltipDisplayCount
+				local NewLargest = math.max(if type(UnpublishedPlaytestModeTooltipDisplayCount) == "number" and UnpublishedPlaytestModeTooltipDisplayCount >= 0 then math.floor(UnpublishedPlaytestModeTooltipDisplayCount) else 0, v4) + 1
+				v4 = NewLargest
+				TryReadDataResult2_1.unpublishedPlaytestModeTooltipDisplayCount = NewLargest
+				local Success, Result = pcall(HttpService.JSONEncode, HttpService, TryReadDataResult2_1)
+				
+				return if Success and type(Result) == "string" then pcall(function() --[[ Line: 327 ]]
+					-- upvalues: AppStorageService (upval), Result (copy)
+					AppStorageService:SetItem("BuildAppStorageKey", Result)
+					AppStorageService:Flush()
+				end) else false
+			end
+			local v7 = v4 + 1
+			v4 = v7
+			
+			local function _(p1) --[[ Line: 380 ]]
+				-- upvalues: v7 (copy), v4 (upval)
+				local UnpublishedPlaytestModeTooltipDisplayCount: number = p1.unpublishedPlaytestModeTooltipDisplayCount
+				local Largest = math.max((if type(UnpublishedPlaytestModeTooltipDisplayCount) == "number" and UnpublishedPlaytestModeTooltipDisplayCount >= 0 then math.floor(UnpublishedPlaytestModeTooltipDisplayCount) else 0) + 1, v7)
+				v4 = Largest
+				p1.unpublishedPlaytestModeTooltipDisplayCount = Largest
+			end
+			
+			local TryReadDataResult, TryReadDataResult2 = tryReadData()
+			local v8 = nil
+			local TryReadDataResult1 = nil
+			
+			if TryReadDataResult then
+				v8 = true
+				TryReadDataResult1 = TryReadDataResult2
+			else
+				v8, TryReadDataResult1 = tryReadData()
+			end
+			if v8 then
+				local UnpublishedPlaytestModeTooltipDisplayCount: number = TryReadDataResult1.unpublishedPlaytestModeTooltipDisplayCount
+				local Largest = math.max((if type(UnpublishedPlaytestModeTooltipDisplayCount) == "number" and UnpublishedPlaytestModeTooltipDisplayCount >= 0 then math.floor(UnpublishedPlaytestModeTooltipDisplayCount) else 0) + 1, v7)
+				v4 = Largest
+				TryReadDataResult1.unpublishedPlaytestModeTooltipDisplayCount = Largest
+				local Success1, Result1 = pcall(HttpService.JSONEncode, HttpService, TryReadDataResult1)
+				
+				return if Success1 and type(Result1) == "string" then pcall(function() --[[ Line: 327 ]]
+					-- upvalues: AppStorageService (upval), Result1 (copy)
+					AppStorageService:SetItem("BuildAppStorageKey", Result1)
+					AppStorageService:Flush()
+				end) else false
+			else
+				return false
+			end
+		end,
+		wasPushNotificationsUpsellShownToday = function(p1): boolean --[[ Line: 395 ]]
+			-- upvalues: v3 (ref), tryReadData (copy)
+			local IsoDate: string = (p1 or DateTime.now()):ToIsoDate()
+			local Text: string = v3
+			
+			if Text ~= nil and string.match(Text, "^(%d%d%d%d%-%d%d%-%d%d)") == string.match(IsoDate, "^(%d%d%d%d%-%d%d%-%d%d)") then
+				return true
+			end
+			local _, TryReadDataResult2 = tryReadData()
+			local PushNotificationsUpsell = TryReadDataResult2.pushNotificationsUpsell
+			local IsMatchMatch = false
+			
+			if type(PushNotificationsUpsell) == "table" then
+				local LastShownAt: string = PushNotificationsUpsell.lastShownAt
+				IsMatchMatch = LastShownAt ~= nil and string.match(LastShownAt, "^(%d%d%d%d%-%d%d%-%d%d)") == string.match(IsoDate, "^(%d%d%d%d%-%d%d%-%d%d)")
+			end
+			return IsMatchMatch
+		end,
+		markPushNotificationsUpsellShown = function(p1) --[[ Line: 406 ]]
+			-- upvalues: v3 (ref), FFlagBuildAdUpsellModule (upval), tryReadData (copy), HttpService (copy), AppStorageService (copy)
+			local IsoDate = (p1 or DateTime.now()):ToIsoDate()
+			v3 = IsoDate
+			
+			if not FFlagBuildAdUpsellModule then
+				local _, TryReadDataResult2_1 = tryReadData()
+				local PushNotificationsUpsell = TryReadDataResult2_1.pushNotificationsUpsell
+				local Copy = if type(PushNotificationsUpsell) == "table" then table.clone(PushNotificationsUpsell) else {}
+				Copy.lastShownAt = IsoDate
+				TryReadDataResult2_1.pushNotificationsUpsell = Copy
+				local Success, Result = pcall(HttpService.JSONEncode, HttpService, TryReadDataResult2_1)
+				
+				return if Success and type(Result) == "string" then pcall(function() --[[ Line: 327 ]]
+					-- upvalues: AppStorageService (upval), Result (copy)
+					AppStorageService:SetItem("BuildAppStorageKey", Result)
+					AppStorageService:Flush()
+				end) else false
+			end
+			local function _(p2) --[[ Line: 411 ]]
+				-- upvalues: IsoDate (copy)
+				local PushNotificationsUpsell = p2.pushNotificationsUpsell
+				local Copy = if type(PushNotificationsUpsell) == "table" then table.clone(PushNotificationsUpsell) else {}
+				Copy.lastShownAt = IsoDate
+				p2.pushNotificationsUpsell = Copy
+			end
+			
+			local TryReadDataResult, TryReadDataResult2 = tryReadData()
+			local v7 = nil
+			local TryReadDataResult1 = nil
+			
+			if TryReadDataResult then
+				v7 = true
+				TryReadDataResult1 = TryReadDataResult2
+			else
+				v7, TryReadDataResult1 = tryReadData()
+			end
+			if v7 then
+				local PushNotificationsUpsell = TryReadDataResult1.pushNotificationsUpsell
+				local Copy = if type(PushNotificationsUpsell) == "table" then table.clone(PushNotificationsUpsell) else {}
+				Copy.lastShownAt = IsoDate
+				TryReadDataResult1.pushNotificationsUpsell = Copy
+				local Success1, Result1 = pcall(HttpService.JSONEncode, HttpService, TryReadDataResult1)
+				
+				return if Success1 and type(Result1) == "string" then pcall(function() --[[ Line: 327 ]]
+					-- upvalues: AppStorageService (upval), Result1 (copy)
+					AppStorageService:SetItem("BuildAppStorageKey", Result1)
+					AppStorageService:Flush()
+				end) else false
+			else
+				return false
+			end
+		end,
+		retryAdUpsellRead = function() --[[ Line: 464 ]]
+			-- upvalues: Flag1 (ref), loadAdUpsell (copy)
+			Flag1 = false
+			
+			return (loadAdUpsell())
+		end,
+		getAdUpsellState = function(UniverseId, SessionId) --[[ Line: 740 ]]
+			-- upvalues: loadAdUpsell (copy)
+			local AdUpsell, AdUpsell2 = loadAdUpsell()
+			local Flag = nil
+			local v7 = nil
+			local Scheduler = nil
+			
+			if AdUpsell and AdUpsell2 ~= nil then
+				Flag = true
+				v7 = AdUpsell2
+				Scheduler = AdUpsell2.scheduler
+			else
+				Flag = false
+				v7 = nil
+				Scheduler = nil
+			end
+			if not Flag or v7 == nil or Scheduler == nil then
 				return {
 					isAvailable = false,
 					dismissedPermanently = true,
@@ -758,337 +760,345 @@ local function createBuildAppStorage(p3, p4)
 					anchors = {}
 				}
 			end
-			var22 = scheduler.universes[tostring(p16)]
-			local t = {}
+			local Univers = Scheduler.universes[tostring(UniverseId)]
+			local Anchors = {}
 			
-			if p17 ~= nil then
-				for i, v in scheduler.anchors do
-					if v.universeId == p16 and v.sessionId == p17 then
-						table.insert(t, table.clone(v))
+			if SessionId ~= nil then
+				for _, anchor in Scheduler.anchors do
+					if anchor.universeId == UniverseId and anchor.sessionId == SessionId then
+						table.insert(Anchors, table.clone(anchor))
 					end
 				end
 			end
-			local var24 = 0
+			local PendingMilestoneCount = 0
 			
-			for i, v in scheduler.pendingMilestones do
-				if v.universeId == p16 and (p17 == nil or v.sessionId == nil or v.sessionId == p17) then
-					var24 += 1
+			for _, pendingMilestone in Scheduler.pendingMilestones do
+				if pendingMilestone.universeId == UniverseId and (SessionId == nil or pendingMilestone.sessionId == nil or pendingMilestone.sessionId == SessionId) then
+					PendingMilestoneCount += 1
 				end
 			end
 			return {
 				isAvailable = true,
-				dismissedPermanently = if var21.dismissedPermanently ~= true then var22 ~= nil and var22.dismissedPermanently else true,
-				hasShownUpsell = if var22 ~= nil then false else var22.hasShownUpsell,
-				anchors = t,
-				pendingMilestoneCount = var24
+				dismissedPermanently = v7.dismissedPermanently == true or Univers ~= nil and Univers.dismissedPermanently,
+				hasShownUpsell = Univers ~= nil and Univers.hasShownUpsell,
+				anchors = Anchors,
+				pendingMilestoneCount = PendingMilestoneCount
 			}
 		end,
-		recordAdUpsellCompletedTurn = function(p18)
-			-- upvalues: recordAdUpsellEvent (ref)
-			return recordAdUpsellEvent(p18)
+		recordAdUpsellCompletedTurn = function(p1) --[[ Line: 655 ]]
+			-- upvalues: recordAdUpsellEvent (copy)
+			return recordAdUpsellEvent(p1)
 		end,
-		recordAdUpsellPublish = function(p18)
-			-- upvalues: recordAdUpsellEvent (ref)
-			return recordAdUpsellEvent(p18)
+		recordAdUpsellPublish = function(p1) --[[ Line: 659 ]]
+			-- upvalues: recordAdUpsellEvent (copy)
+			return recordAdUpsellEvent(p1)
 		end,
-		attachPendingAdUpsellMilestones = function(p18, p19, p20)
-			-- upvalues: loadAdUpsell (ref), pruneAnchorCaps (ref), persistAdUpsellMutation (ref)
-			local var25, var26, scheduler
-			local var27, var28 = loadAdUpsell()
+		attachPendingAdUpsellMilestones = function(UniverseId, SessionId, p1) --[[ Line: 663 ]]
+			-- upvalues: loadAdUpsell (copy), FFlagBuildAdUpsellPinnedModule (upval), pruneAnchorCaps (copy), persistAdUpsellMutation (copy)
+			local AdUpsell, AdUpsell2 = loadAdUpsell()
+			local Flag = nil
+			local v8 = nil
+			local Scheduler = nil
 			
-			if var27 and var28 ~= nil then
-				var25 = true
-				var26 = var28
-				scheduler = var28.scheduler
+			if AdUpsell and AdUpsell2 ~= nil then
+				Flag = true
+				v8 = AdUpsell2
+				Scheduler = AdUpsell2.scheduler
 			else
-				var25 = false
-				var26 = nil
-				scheduler = nil
+				Flag = false
+				v8 = nil
+				Scheduler = nil
 			end
-			if not var25 or var26 == nil or scheduler == nil then
+			if not Flag or v8 == nil or Scheduler == nil then
 				return false
-			elseif var26.dismissedPermanently == true then
+			end
+			if v8.dismissedPermanently == true then
 				return true
 			end
-			var27 = {}
-			local var29 = false
+			local PendingMilestones = {}
+			local Flag1 = false
 			
-			for i, v in scheduler.pendingMilestones do
-				if v.universeId == p18 and (v.sessionId == nil or v.sessionId == p19) then
-					table.insert(scheduler.anchors, {
+			for _, pendingMilestone in Scheduler.pendingMilestones do
+				if pendingMilestone.universeId == UniverseId and (pendingMilestone.sessionId == nil or pendingMilestone.sessionId == SessionId) and (FFlagBuildAdUpsellPinnedModule or p1 ~= nil) then
+					table.insert(Scheduler.anchors, {
 						impressed = false,
-						id = v.id,
-						universeId = p18,
-						sessionId = p19,
-						afterMessageKey = p20,
-						order = v.order
+						id = pendingMilestone.id,
+						universeId = UniverseId,
+						sessionId = SessionId,
+						afterMessageKey = if FFlagBuildAdUpsellPinnedModule then nil else p1,
+						order = pendingMilestone.order
 					})
-					var29 = true
+					Flag1 = true
 				else
-					table.insert(var27, v)
+					table.insert(PendingMilestones, pendingMilestone)
 				end
 			end
-			if var29 then
-				scheduler.pendingMilestones = var27
-				table.sort(scheduler.anchors, function(p21, p22)
-					return p21.order < p22.order
+			if Flag1 then
+				Scheduler.pendingMilestones = PendingMilestones
+				table.sort(Scheduler.anchors, function(A, B): boolean --[[ Line: 701 ]]
+					return A.order < B.order
 				end)
-				pruneAnchorCaps(scheduler, p18, p19)
+				pruneAnchorCaps(Scheduler, UniverseId, SessionId)
 				
-				return persistAdUpsellMutation()
-			end
-			return true
-		end,
-		pruneAdUpsellAnchors = function(p21, p22, p23)
-			-- upvalues: loadAdUpsell (ref), persistAdUpsellMutation (ref)
-			local var30, var31, scheduler
-			local var32, var33 = loadAdUpsell()
-			
-			if var32 and var33 ~= nil then
-				var30 = true
-				var31 = var33
-				scheduler = var33.scheduler
+				return (persistAdUpsellMutation())
 			else
-				var30 = false
-				var31 = nil
-				scheduler = nil
+				return true
 			end
-			if not var30 or scheduler == nil then
+		end,
+		pruneAdUpsellAnchors = function(UniverseId, SessionId, p2) --[[ Line: 708 ]]
+			-- upvalues: FFlagBuildAdUpsellPinnedModule (upval), loadAdUpsell (copy), persistAdUpsellMutation (copy)
+			if FFlagBuildAdUpsellPinnedModule then
+				return true, false
+			end
+			local AdUpsell, AdUpsell2 = loadAdUpsell()
+			local Flag = nil
+			local Scheduler = nil
+			
+			if AdUpsell and AdUpsell2 ~= nil then
+				Flag = true
+				Scheduler = AdUpsell2.scheduler
+			else
+				Flag = false
+				Scheduler = nil
+			end
+			if not Flag or Scheduler == nil then
 				return false, false
 			end
-			var32 = {}
-			local var34 = false
+			local Anchors = {}
+			local Flag1 = false
 			
-			for i, v in scheduler.anchors do
-				if v.universeId == p21 and v.sessionId == p22 and not p23[v.afterMessageKey] then
-					var34 = true
+			for _, anchor in Scheduler.anchors do
+				if anchor.universeId == UniverseId and anchor.sessionId == SessionId and (anchor.afterMessageKey == nil or not p2[anchor.afterMessageKey]) then
+					Flag1 = true
 				else
-					table.insert(var32, v)
+					table.insert(Anchors, anchor)
 				end
 			end
-			if var34 then
-				scheduler.anchors = var32
+			if Flag1 then
+				Scheduler.anchors = Anchors
 				
 				return persistAdUpsellMutation(), true
-			end
-			return true, false
-		end,
-		markAdUpsellAnchorImpressed = function(p24, p25, p26)
-			-- upvalues: loadAdUpsell (ref), var15 (write), var14 (write), var17 (write), scheduleAdUpsellWriteRetry (ref)
-			local var35, var36, scheduler
-			local var37, var38 = loadAdUpsell()
-			
-			if var37 and var38 ~= nil then
-				var35 = true
-				var36 = var38
-				scheduler = var38.scheduler
 			else
-				var35 = false
-				var36 = nil
-				scheduler = nil
+				return true, false
 			end
-			if not var35 or var36 == nil or (scheduler == nil or var36.dismissedPermanently == true) then
+		end,
+		markAdUpsellAnchorImpressed = function(UniverseId, SessionId, Id): boolean --[[ Line: 779 ]]
+			-- upvalues: loadAdUpsell (copy), Count (ref), Inverted (ref), Flag2 (ref), scheduleAdUpsellWriteRetry (copy)
+			local AdUpsell, AdUpsell2 = loadAdUpsell()
+			local Flag = nil
+			local v9 = nil
+			local Scheduler = nil
+			
+			if AdUpsell and AdUpsell2 ~= nil then
+				Flag = true
+				v9 = AdUpsell2
+				Scheduler = AdUpsell2.scheduler
+			else
+				Flag = false
+				v9 = nil
+				Scheduler = nil
+			end
+			if not Flag or v9 == nil or Scheduler == nil or v9.dismissedPermanently == true then
 				return false
 			end
-			for i, v in scheduler.anchors do
-				if v.universeId == p24 and v.sessionId == p25 and v.id == p26 then
-					if v.impressed then
+			for _, anchor in Scheduler.anchors do
+				if anchor.universeId == UniverseId and anchor.sessionId == SessionId and anchor.id == Id then
+					if anchor.impressed then
 						return false
+					else
+						anchor.impressed = true
+						Count = 0
+						Inverted = true
+						Flag2 = Flag2 or false
+						scheduleAdUpsellWriteRetry()
+						
+						return true
 					end
-					v.impressed = true
-					var15 = 0
-					var14 = true
-					var17 = var17 or false
-					scheduleAdUpsellWriteRetry()
-					
-					return true
 				end
 			end
 			return false
 		end,
-		markAdUpsellDismissedPermanently = function(p27)
-			-- upvalues: loadAdUpsell (ref), tryReadData (ref), sanitizeAdUpsellScheduler (copy), var12 (write), var13 (write), var15 (write), persistCachedAdUpsell (ref), var14 (write), var17 (write), scheduleAdUpsellWriteRetry (ref), var16 (write)
-			local var39, var40 = loadAdUpsell()
+		markAdUpsellDismissedPermanently = function(UniverseId): boolean --[[ Line: 797 ]]
+			-- upvalues: loadAdUpsell (copy), tryReadData (copy), sanitizeAdUpsellScheduler (upval), v5 (ref), Flag1 (ref), Count (ref), persistCachedAdUpsell (copy), Inverted (ref), Flag2 (ref), scheduleAdUpsellWriteRetry (copy), DelayedThread (ref)
+			local AdUpsell, AdUpsell2 = loadAdUpsell()
 			
-			if var39 and var40 ~= nil and var40.dismissedPermanently == true then
+			if AdUpsell and AdUpsell2 ~= nil and AdUpsell2.dismissedPermanently == true then
 				return true
 			end
-			local var41 = false
+			local Flag = false
 			
-			if not var39 or var40 == nil then
-				local var42
-				local var43, var44 = tryReadData()
+			if not AdUpsell or AdUpsell2 == nil then
+				local TryReadDataResult, TryReadDataResult2 = tryReadData()
+				local TryReadDataResult1 = nil
 				
-				if var43 then
-					local _ = true
-					var42 = var44
+				if TryReadDataResult then
+					TryReadDataResult1 = TryReadDataResult2
 				else
-					local var45, var46 = tryReadData()
-					local _ = var45
-					var42 = var46
+					local _
+					_, TryReadDataResult1 = tryReadData()
 				end
-				local var47 = if type(var42.adUpsell) == "table" then table.clone(var42.adUpsell) else {}
-				var47.dismissedPermanently = var47.dismissedPermanently == true
-				var47.scheduler = sanitizeAdUpsellScheduler(var47.scheduler)
-				var12 = var47
-				var13 = false
-				var41 = true
+				local Copy = if type(TryReadDataResult1.adUpsell) == "table" then table.clone(TryReadDataResult1.adUpsell) else {}
+				Copy.dismissedPermanently = Copy.dismissedPermanently == true
+				Copy.scheduler = sanitizeAdUpsellScheduler(Copy.scheduler)
+				v5 = Copy
+				Flag1 = false
+				Flag = true
 			end
-			local scheduler = var12.scheduler
-			local var48 = tostring(p27)
-			local var49 = scheduler.universes[var48]
+			local Scheduler = v5.scheduler
+			local Text = tostring(UniverseId)
+			local Univers = Scheduler.universes[Text]
 			
-			if var49 == nil then
-				var49 = {
+			if Univers == nil then
+				Univers = {
 					hasShownUpsell = false,
 					dismissedPermanently = false,
 					lastTouchedOrder = 0
 				}
-				scheduler.universes[var48] = var49
+				Scheduler.universes[Text] = Univers
 			end
-			var49.hasShownUpsell = false
-			var49.dismissedPermanently = true
-			local t = {}
+			Univers.hasShownUpsell = false
+			Univers.dismissedPermanently = true
+			local Anchors = {}
 			
-			for i, v in scheduler.anchors do
-				if v.universeId ~= p27 then
-					table.insert(t, v)
+			for _, anchor in Scheduler.anchors do
+				if anchor.universeId ~= UniverseId then
+					table.insert(Anchors, anchor)
 				end
 			end
-			scheduler.anchors = t
-			local t_1 = {}
+			Scheduler.anchors = Anchors
+			local PendingMilestones = {}
 			
-			for i_1, v_1 in scheduler.pendingMilestones do
-				if v_1.universeId ~= p27 then
-					table.insert(t_1, v_1)
+			for _, pendingMilestone in Scheduler.pendingMilestones do
+				if pendingMilestone.universeId ~= UniverseId then
+					table.insert(PendingMilestones, pendingMilestone)
 				end
 			end
-			scheduler.pendingMilestones = t_1
-			var15 = 0
-			var15 += 1
-			var14 = not persistCachedAdUpsell(var41)
+			Scheduler.pendingMilestones = PendingMilestones
+			local Flag3: boolean = Flag
+			Count = 0
+			Count += 1
+			Inverted = not persistCachedAdUpsell(Flag3)
 			
-			if var14 then
-				var17 = var17 or var41 == true
+			if Inverted then
+				Flag2 = Flag2 or Flag3 == true
 				scheduleAdUpsellWriteRetry()
 			else
-				var15 = 0
-				var17 = false
+				Count = 0
+				Flag2 = false
 				
-				if var16 ~= nil then
-					task.cancel(var16)
-					var16 = nil
+				if DelayedThread ~= nil then
+					task.cancel(DelayedThread)
+					DelayedThread = nil
 				end
 			end
-			return not var14
+			return not Inverted
 		end,
-		isPushNotificationsUpsellDismissedPermanently = function()
-			-- upvalues: var10 (write), tryReadData (ref)
-			if var10 then
+		isPushNotificationsUpsellDismissedPermanently = function(): boolean --[[ Line: 838 ]]
+			-- upvalues: Flag (ref), tryReadData (copy)
+			if Flag then
 				return true
+			else
+				local _, TryReadDataResult2 = tryReadData()
+				local PushNotificationsUpsell = TryReadDataResult2.pushNotificationsUpsell
+				
+				return type(PushNotificationsUpsell) == "table" and PushNotificationsUpsell.dismissedPermanently == true
 			end
-			local _, var50 = tryReadData()
-			local pushNotificationsUpsell = var50.pushNotificationsUpsell
-			
-			return type(pushNotificationsUpsell) == "table" and pushNotificationsUpsell.dismissedPermanently == true
 		end,
-		markPushNotificationsUpsellDismissedPermanently = function()
-			-- upvalues: var10 (write), fFlagBuildAdUpsellModule (copy), tryReadData (ref), p4 (ref), p3 (ref)
-			local ok
-			var10 = true
+		markPushNotificationsUpsellDismissedPermanently = function() --[[ Line: 847 ]]
+			-- upvalues: Flag (ref), FFlagBuildAdUpsellModule (upval), tryReadData (copy), HttpService (copy), AppStorageService (copy)
+			Flag = true
 			
-			if fFlagBuildAdUpsellModule then
-				local var50, var51
-				local _ = function(p28)
-					local pushNotificationsUpsell = p28.pushNotificationsUpsell
-					local var52 = if type(pushNotificationsUpsell) == "table" then table.clone(pushNotificationsUpsell) else {}
-					var52.dismissedPermanently = true
-					p28.pushNotificationsUpsell = var52
-				end
+			if not FFlagBuildAdUpsellModule then
+				local _, TryReadDataResult2_1 = tryReadData()
+				local PushNotificationsUpsell = TryReadDataResult2_1.pushNotificationsUpsell
+				local Copy = if type(PushNotificationsUpsell) == "table" then table.clone(PushNotificationsUpsell) else {}
+				Copy.dismissedPermanently = true
+				TryReadDataResult2_1.pushNotificationsUpsell = Copy
+				local Success, Result = pcall(HttpService.JSONEncode, HttpService, TryReadDataResult2_1)
 				
-				local var52, var53 = tryReadData()
+				return if Success and type(Result) == "string" then pcall(function() --[[ Line: 327 ]]
+					-- upvalues: AppStorageService (upval), Result (copy)
+					AppStorageService:SetItem("BuildAppStorageKey", Result)
+					AppStorageService:Flush()
+				end) else false
+			end
+			local function _(p3) --[[ Line: 851 ]]
+				local PushNotificationsUpsell = p3.pushNotificationsUpsell
+				local Copy = if type(PushNotificationsUpsell) == "table" then table.clone(PushNotificationsUpsell) else {}
+				Copy.dismissedPermanently = true
+				p3.pushNotificationsUpsell = Copy
+			end
+			
+			local TryReadDataResult, TryReadDataResult2 = tryReadData()
+			local v10 = nil
+			local TryReadDataResult1 = nil
+			
+			if TryReadDataResult then
+				v10 = true
+				TryReadDataResult1 = TryReadDataResult2
+			else
+				v10, TryReadDataResult1 = tryReadData()
+			end
+			if v10 then
+				local PushNotificationsUpsell = TryReadDataResult1.pushNotificationsUpsell
+				local Copy = if type(PushNotificationsUpsell) == "table" then table.clone(PushNotificationsUpsell) else {}
+				Copy.dismissedPermanently = true
+				TryReadDataResult1.pushNotificationsUpsell = Copy
+				local Success1, Result1 = pcall(HttpService.JSONEncode, HttpService, TryReadDataResult1)
 				
-				if var52 then
-					var50 = true
-					var51 = var53
-				else
-					local var54, var55 = tryReadData()
-					var50 = var54
-					var51 = var55
-				end
-				if not var50 then
-					return false
-				end
-				local pushNotificationsUpsell = var51.pushNotificationsUpsell
-				local var56 = if type(pushNotificationsUpsell) == "table" then table.clone(pushNotificationsUpsell) else {}
-				var56.dismissedPermanently = true
-				var51.pushNotificationsUpsell = var56
-				ok, status = pcall(p4.JSONEncode, p4, var51)
-				
-				return if ok and type(status) == "string" then pcall(function()
-					-- upvalues: p3 (copy), status (ref)
-					p3:SetItem("BuildAppStorageKey", status)
-					p3:Flush()
+				return if Success1 and type(Result1) == "string" then pcall(function() --[[ Line: 327 ]]
+					-- upvalues: AppStorageService (upval), Result1 (copy)
+					AppStorageService:SetItem("BuildAppStorageKey", Result1)
+					AppStorageService:Flush()
 				end) else false
 			else
-				local _, var57 = tryReadData()
-				local pushNotificationsUpsell = var57.pushNotificationsUpsell
-				local var58 = if type(pushNotificationsUpsell) == "table" then table.clone(pushNotificationsUpsell) else {}
-				var58.dismissedPermanently = true
-				var57.pushNotificationsUpsell = var58
-				ok, status = pcall(p4.JSONEncode, p4, var57)
-				
-				return if ok and type(status) == "string" then pcall(function()
-					-- upvalues: p3 (copy), status (ref)
-					p3:SetItem("BuildAppStorageKey", status)
-					p3:Flush()
-				end) else false
+				return false
 			end
 		end,
-		clearSessionCacheForTests = function()
-			-- upvalues: fFlagBuildAgentAdCampaignCardModule (copy), var18 (write), var9 (write), var10 (write), var11 (write), var12 (write), var13 (write), var14 (write), var15 (write), var16 (write), var17 (write)
-			if fFlagBuildAgentAdCampaignCardModule and var18 ~= nil then
-				var18.reset()
+		clearSessionCacheForTests = function() --[[ Line: 876 ]]
+			-- upvalues: FFlagBuildAgentAdCampaignCardModule (upval), v6 (ref), v3 (ref), Flag (ref), v4 (ref), v5 (ref), Flag1 (ref), Inverted (ref), Count (ref), DelayedThread (ref), Flag2 (ref)
+			if FFlagBuildAgentAdCampaignCardModule and v6 ~= nil then
+				v6.reset()
 			end
-			var9 = nil
-			var10 = false
-			var11 = 0
-			var12 = nil
-			var13 = false
-			var14 = false
-			var15 = 0
+			v3 = nil
+			Flag = false
+			v4 = 0
+			v5 = nil
+			Flag1 = false
+			Inverted = false
+			Count = 0
 			
-			if var16 ~= nil then
-				task.cancel(var16)
+			if DelayedThread ~= nil then
+				task.cancel(DelayedThread)
 			end
-			var16 = nil
-			var17 = false
+			DelayedThread = nil
+			Flag2 = false
 		end
 	}
 end
 
-local var50 = createBuildAppStorage(appStorageService, httpService)
+local BuildAppStorage = createBuildAppStorage(game:GetService("AppStorageService"), (game:GetService("HttpService")))
 
 return {
 	STORAGE_KEY = "BuildAppStorageKey",
-	AD_UPSELL_SCHEDULER_VERSION = 3,
-	getAdCampaignCardStorage = if fFlagBuildAgentAdCampaignCardModule then var50.getAdCampaignCardStorage else nil,
-	getChatDraft = var50.getChatDraft,
-	setChatDraft = var50.setChatDraft,
-	getUnpublishedPlaytestModeTooltipDisplayCount = var50.getUnpublishedPlaytestModeTooltipDisplayCount,
-	incrementUnpublishedPlaytestModeTooltipDisplayCount = var50.incrementUnpublishedPlaytestModeTooltipDisplayCount,
-	wasPushNotificationsUpsellShownToday = var50.wasPushNotificationsUpsellShownToday,
-	markPushNotificationsUpsellShown = var50.markPushNotificationsUpsellShown,
-	retryAdUpsellRead = var50.retryAdUpsellRead,
-	getAdUpsellState = var50.getAdUpsellState,
-	recordAdUpsellCompletedTurn = var50.recordAdUpsellCompletedTurn,
-	recordAdUpsellPublish = var50.recordAdUpsellPublish,
-	attachPendingAdUpsellMilestones = var50.attachPendingAdUpsellMilestones,
-	pruneAdUpsellAnchors = var50.pruneAdUpsellAnchors,
-	markAdUpsellAnchorImpressed = var50.markAdUpsellAnchorImpressed,
-	markAdUpsellDismissedPermanently = var50.markAdUpsellDismissedPermanently,
-	isPushNotificationsUpsellDismissedPermanently = var50.isPushNotificationsUpsellDismissedPermanently,
-	markPushNotificationsUpsellDismissedPermanently = var50.markPushNotificationsUpsellDismissedPermanently,
-	clearSessionCacheForTests = var50.clearSessionCacheForTests,
+	AD_UPSELL_SCHEDULER_VERSION = 4,
+	getAdCampaignCardStorage = if FFlagBuildAgentAdCampaignCardModule then BuildAppStorage.getAdCampaignCardStorage else nil,
+	getChatDraft = BuildAppStorage.getChatDraft,
+	setChatDraft = BuildAppStorage.setChatDraft,
+	getUnpublishedPlaytestModeTooltipDisplayCount = BuildAppStorage.getUnpublishedPlaytestModeTooltipDisplayCount,
+	incrementUnpublishedPlaytestModeTooltipDisplayCount = BuildAppStorage.incrementUnpublishedPlaytestModeTooltipDisplayCount,
+	wasPushNotificationsUpsellShownToday = BuildAppStorage.wasPushNotificationsUpsellShownToday,
+	markPushNotificationsUpsellShown = BuildAppStorage.markPushNotificationsUpsellShown,
+	retryAdUpsellRead = BuildAppStorage.retryAdUpsellRead,
+	getAdUpsellState = BuildAppStorage.getAdUpsellState,
+	recordAdUpsellCompletedTurn = BuildAppStorage.recordAdUpsellCompletedTurn,
+	recordAdUpsellPublish = BuildAppStorage.recordAdUpsellPublish,
+	attachPendingAdUpsellMilestones = BuildAppStorage.attachPendingAdUpsellMilestones,
+	pruneAdUpsellAnchors = BuildAppStorage.pruneAdUpsellAnchors,
+	markAdUpsellAnchorImpressed = BuildAppStorage.markAdUpsellAnchorImpressed,
+	markAdUpsellDismissedPermanently = BuildAppStorage.markAdUpsellDismissedPermanently,
+	isPushNotificationsUpsellDismissedPermanently = BuildAppStorage.isPushNotificationsUpsellDismissedPermanently,
+	markPushNotificationsUpsellDismissedPermanently = BuildAppStorage.markPushNotificationsUpsellDismissedPermanently,
+	clearSessionCacheForTests = BuildAppStorage.clearSessionCacheForTests,
 	createForTests = createBuildAppStorage
 }

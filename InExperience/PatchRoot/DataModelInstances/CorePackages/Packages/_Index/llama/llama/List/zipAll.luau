@@ -1,26 +1,26 @@
-﻿local noneModule = require(script.Parent.Parent.None)
+﻿local NoneModule = require(script.Parent.Parent.None)
 
-return function(...)
-	-- upvalues: noneModule (ref)
+return function(...) --[[ Line: 4 | Named "zipAll" ]]
+	-- upvalues: NoneModule (copy)
 	local t = {}
-	local var1 = select("#", ...)
-	local count = #select(1, ...)
+	local Selected = select("#", ...)
+	local Count = #select(1, ...)
 	
-	for i = 2, var1 do
-		local count_1 = #select(i, ...)
+	for i = 2, Selected do
+		local Count1 = #select(i, ...)
 		
-		if count < count_1 then
-			count = count_1
+		if Count < Count1 then
+			Count = Count1
 		end
 	end
-	for i_2 = 1, count do
-		t[i_2] = {}
+	for i1 = 1, Count do
+		t[i1] = {}
 		
-		for i_1 = 1, var1 do
-			if select(i_1, ...)[i_2] == nil then
-				t[i_2][i_1] = noneModule
+		for i2 = 1, Selected do
+			if select(i2, ...)[i1] == nil then
+				t[i1][i2] = NoneModule
 			else
-				t[i_2][i_1] = select(i_1, ...)[i_2]
+				t[i1][i2] = select(i2, ...)[i1]
 			end
 		end
 	end

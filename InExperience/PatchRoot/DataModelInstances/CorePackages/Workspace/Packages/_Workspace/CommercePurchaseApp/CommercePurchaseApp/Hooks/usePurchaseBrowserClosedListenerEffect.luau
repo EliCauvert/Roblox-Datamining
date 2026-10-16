@@ -1,37 +1,42 @@
-﻿local commerceService = game:GetService("CommerceService")
-local commercePurchaseApp = script:FindFirstAncestor("CommercePurchaseApp")
-local parent = commercePurchaseApp.Parent
-local reactModule = require(parent.React)
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local commercePurchasePromptStateEnumModule = require(commercePurchaseApp.Enums.CommercePurchasePromptStateEnum)
-local selectPromptStateModule = require(commercePurchaseApp.Store.Selectors.selectPromptState)
-local selectCommerceProductIdModule = require(commercePurchaseApp.Store.Selectors.selectCommerceProductId)
-local selectCheckoutSessionIdModule = require(commercePurchaseApp.Store.Selectors.selectCheckoutSessionId)
-local commercePurchaseEndedModule = require(commercePurchaseApp.Store.Actions.CommercePurchaseEnded)
+﻿local CommerceService = game:GetService("CommerceService")
+local CommercePurchaseApp = script:FindFirstAncestor("CommercePurchaseApp")
+local Parent = CommercePurchaseApp.Parent
+local ReactModule = require(Parent.React)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local CommercePurchasePromptStateEnumModule = require(CommercePurchaseApp.Enums.CommercePurchasePromptStateEnum)
+local SelectPromptStateModule = require(CommercePurchaseApp.Store.Selectors.selectPromptState)
+local SelectCommerceProductIdModule = require(CommercePurchaseApp.Store.Selectors.selectCommerceProductId)
+local SelectCheckoutSessionIdModule = require(CommercePurchaseApp.Store.Selectors.selectCheckoutSessionId)
+local CommercePurchaseEndedModule = require(CommercePurchaseApp.Store.Actions.CommercePurchaseEnded)
 
-return function()
-	-- upvalues: useDispatch (ref), useSelector (ref), selectPromptStateModule (ref), selectCommerceProductIdModule (ref), selectCheckoutSessionIdModule (ref), reactModule (ref), commerceService (ref), commercePurchasePromptStateEnumModule (ref), commercePurchaseEndedModule (ref)
-	local var1 = useDispatch()
-	local var2 = useSelector(selectPromptStateModule)
-	local var3 = useSelector(selectCommerceProductIdModule)
-	local var4 = useSelector(selectCheckoutSessionIdModule)
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), commerceService (copy), var2 (ref), commercePurchasePromptStateEnumModule (copy), var3 (ref), var4 (ref), commercePurchaseEndedModule (copy)
-		local var5 = if var1 then commerceService.PurchaseBrowserClosed:Connect(function()
-			-- upvalues: var2 (copy), commercePurchasePromptStateEnumModule (copy), commerceService (copy), var3 (copy), var4 (copy), var1 (copy), commercePurchaseEndedModule (copy)
-			if var2 == commercePurchasePromptStateEnumModule.Checkout then
-				commerceService:SignalPromptCommerceProductPurchaseFinished(var3, true, var4)
-				var1(commercePurchaseEndedModule())
+return function() --[[ Line: 16 | Named "usePurchaseBrowserClosedListenerEffect" ]]
+	-- upvalues: UseDispatchFunction (copy), UseSelectorFunction (copy), SelectPromptStateModule (copy), SelectCommerceProductIdModule (copy), SelectCheckoutSessionIdModule (copy), ReactModule (copy), CommerceService (copy), CommercePurchasePromptStateEnumModule (copy), CommercePurchaseEndedModule (copy)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseSelectorResult = UseSelectorFunction(SelectPromptStateModule)
+	local UseSelectorResult1 = UseSelectorFunction(SelectCommerceProductIdModule)
+	local UseSelectorResult2 = UseSelectorFunction(SelectCheckoutSessionIdModule)
+	ReactModule.useEffect(function() --[[ Line: 21 ]]
+		-- upvalues: UseDispatchResult (copy), CommerceService (upval), UseSelectorResult (copy), CommercePurchasePromptStateEnumModule (upval), UseSelectorResult1 (copy), UseSelectorResult2 (copy), CommercePurchaseEndedModule (upval)
+		local PurchaseBrowserClosedConnection = if UseDispatchResult then CommerceService.PurchaseBrowserClosed:Connect(function() --[[ Line: 24 ]]
+			-- upvalues: UseSelectorResult (upval), CommercePurchasePromptStateEnumModule (upval), CommerceService (upval), UseSelectorResult1 (upval), UseSelectorResult2 (upval), UseDispatchResult (upval), CommercePurchaseEndedModule (upval)
+			if UseSelectorResult == CommercePurchasePromptStateEnumModule.Checkout then
+				CommerceService:SignalPromptCommerceProductPurchaseFinished(UseSelectorResult1, true, UseSelectorResult2)
+				UseDispatchResult(CommercePurchaseEndedModule())
 			end
 		end) else nil
 		
-		return function()
-			-- upvalues: var5 (write)
-			if var5 then
-				var5:Disconnect()
-				var5 = nil
+		return function() --[[ Line: 35 ]]
+			-- upvalues: PurchaseBrowserClosedConnection (ref)
+			if PurchaseBrowserClosedConnection then
+				PurchaseBrowserClosedConnection:Disconnect()
+				PurchaseBrowserClosedConnection = nil
 			end
 		end
-	end, { var1, var2, var3, var4 })
+	end, {
+		UseDispatchResult,
+		UseSelectorResult,
+		UseSelectorResult1,
+		UseSelectorResult2
+	})
 end

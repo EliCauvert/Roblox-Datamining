@@ -1,12 +1,12 @@
-﻿local dependenciesModule = require(script.Parent.Parent.dependencies)
-local rodux = dependenciesModule.Rodux
-local roduxNetworking = dependenciesModule.RoduxNetworking
-local roduxUserPermissions = dependenciesModule.RoduxUserPermissions
+﻿local DependenciesModule = require(script.Parent.Parent.dependencies)
+local Rodux = DependenciesModule.Rodux
+local RoduxNetworking = DependenciesModule.RoduxNetworking
+local RoduxUserPermissions = DependenciesModule.RoduxUserPermissions
 
-return function()
-	-- upvalues: rodux (ref), roduxUserPermissions (ref), roduxNetworking (ref)
-	return rodux.combineReducers({
-		UserPermissions = roduxUserPermissions.installReducer(),
-		NetworkStatus = roduxNetworking.installReducer()
+return function() --[[ Line: 8 ]]
+	-- upvalues: Rodux (copy), RoduxUserPermissions (copy), RoduxNetworking (copy)
+	return Rodux.combineReducers({
+		UserPermissions = RoduxUserPermissions.installReducer(),
+		NetworkStatus = RoduxNetworking.installReducer()
 	})
 end

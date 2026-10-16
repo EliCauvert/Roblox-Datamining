@@ -1,32 +1,37 @@
-﻿local avatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
-local parent = avatarExperienceCatalog.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local avatarExperienceCommonModule = require(parent.AvatarExperienceCommon)
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local _ = require(avatarExperienceCatalog.Api.GetMarketplaceOffersBanner.MarketplaceOffersBannerTypes)
-local getFoundationIconNameModule = require(script.Parent.getFoundationIconName)
-local AXPartialPageModal = avatarExperienceCommonModule.Components.AXPartialPageModal
-local useTokens = foundationModule.Hooks.useTokens
-local iconVariant = foundationModule.Enums.IconVariant
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local inputSize = foundationModule.Enums.InputSize
-local fFlagAXPartialPageModalBackgroundShim = require(parent.AvatarExperienceFlags).FFlagAXPartialPageModalBackgroundShim
+﻿local AvatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
+local Parent = AvatarExperienceCatalog.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local _ = require(AvatarExperienceCatalog.Api.GetMarketplaceOffersBanner.MarketplaceOffersBannerTypes)
+local GetFoundationIconNameModule = require(script.Parent.getFoundationIconName)
+local AXPartialPageModal = require(Parent.AvatarExperienceCommon).Components.AXPartialPageModal
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local IconName = FoundationModule.Enums.IconName
+local IconVariant = FoundationModule.Enums.IconVariant
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local InputSize = FoundationModule.Enums.InputSize
+local FFlagAXPartialPageModalBackgroundShim = require(Parent.AvatarExperienceFlags).FFlagAXPartialPageModalBackgroundShim
+local AXUpdateOffersModalHero = game:DefineFastFlag("AXUpdateOffersModalHero", false)
+local _UDim2 = UDim2.new(0.5, -82, 0.5, 12)
+local _UDim2_1 = UDim2.new(0.5, 92, 0.5, -19)
+local v1: number = if AXUpdateOffersModalHero then 230 else 540
 
-local function selectScreenSize(p1)
+local function selectScreenSize(p1) --[[ Line: 53 ]]
 	return p1.ScreenSize
 end
 
-local function _(p1)
-	local var1 = p1.X < 540
+local function _(Vector): number --[[ Line: 57 | Named "getTermsScrollHeight" ]]
+	-- upvalues: v1 (copy)
+	local IsXBelow = Vector.X < 540
 	
-	return math.clamp(math.floor(p1.Y * (if var1 then 0.35 else 0.5)), 180, if var1 then 280 else 540)
+	return (math.clamp(math.floor(Vector.Y * (if IsXBelow then 0.35 else 0.5)), 180, if IsXBelow then 280 else v1))
 end
 
-local function RichTextBlock(p1)
-	-- upvalues: reactModule (ref), foundationModule (ref)
-	return reactModule.createElement(foundationModule.Text, {
+local function RichTextBlock(p1) --[[ Line: 71 ]]
+	-- upvalues: ReactModule (copy), FoundationModule (copy)
+	return ReactModule.createElement(FoundationModule.Text, {
 		RichText = true,
 		tag = p1.tag,
 		Text = p1.segment,
@@ -34,149 +39,216 @@ local function RichTextBlock(p1)
 	})
 end
 
-return function(p1)
-	-- upvalues: useTokens (ref), useLocalization (ref), useSelector (ref), selectScreenSize (ref), reactModule (ref), foundationModule (ref), RichTextBlock (ref), AXPartialPageModal (ref), fFlagAXPartialPageModalBackgroundShim (ref), buttonVariant (ref), inputSize (ref), getFoundationIconNameModule (ref), iconVariant (ref)
-	local var1 = useTokens()
-	local var2 = useLocalization({ viewTermsButtonText = "Feature.Catalog.Action.ViewTerms" })
-	local modal = p1.modal
-	local onOpenTermsModal = p1.onOpenTermsModal
-	local termsBody = modal.termsBody
-	local var3 = termsBody ~= nil and termsBody ~= ""
-	local var4 = if var3 then modal.offerBodyLinkText .. " " else modal.offerBodyLinkText
-	local var5 = useSelector(selectScreenSize)
-	local var6 = var5.X < 540
+local function HeroFrame(p1) --[[ Line: 90 ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), FoundationModule (copy), IconVariant (copy)
+	local UseTokensResult = UseTokensFunction()
 	
-	return reactModule.createElement(reactModule.Fragment, nil, {
-		OffersModal = if p1.offersModalOpen then reactModule.createElement(AXPartialPageModal, {
+	return ReactModule.createElement(FoundationModule.View, {
+		tag = "bg-surface-100 stroke-standard stroke-emphasis",
+		testId = p1.testId,
+		AnchorPoint = Vector2.new(0.5, 0.5),
+		Position = p1.position,
+		Size = UDim2.fromOffset(p1.framePx, p1.framePx),
+		Rotation = p1.rotation,
+		ZIndex = p1.zIndex,
+		cornerRadius = UDim.new(0, UseTokensResult.Radius.Small)
+	}, {
+		IconCenter = ReactModule.createElement(FoundationModule.View, { tag = "size-full col align-x-center align-y-center" }, {
+			Glyph = ReactModule.createElement(FoundationModule.Icon, {
+				testId = `{p1.testId}Icon`,
+				name = p1.iconName,
+				variant = IconVariant.Regular,
+				size = p1.iconSize,
+				style = UseTokensResult.Color.Content.Emphasis
+			})
+		})
+	})
+end
+
+return function(p1) --[[ Line: 127 | Named "CatalogOffersBannerOfferModals" ]]
+	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), UseSelectorFunction (copy), selectScreenSize (copy), v1 (copy), ReactModule (copy), FoundationModule (copy), RichTextBlock (copy), AXPartialPageModal (copy), FFlagAXPartialPageModalBackgroundShim (copy), ButtonVariant (copy), InputSize (copy), AXUpdateOffersModalHero (copy), GetFoundationIconNameModule (copy), IconVariant (copy), HeroFrame (copy), _UDim2 (copy), IconName (copy), _UDim2_1 (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseLocalizationResult = UseLocalizationFunction({ viewTermsButtonText = "Feature.Catalog.Action.ViewTerms" })
+	local Modal = p1.modal
+	local OnOpenTermsModal = p1.onOpenTermsModal
+	local TermsBody = Modal.termsBody
+	local IsNotTermsBodyMatch: boolean = TermsBody ~= nil and TermsBody ~= ""
+	local Text = if IsNotTermsBodyMatch then Modal.offerBodyLinkText .. " " else Modal.offerBodyLinkText
+	local UseSelectorResult = UseSelectorFunction(selectScreenSize)
+	local IsXBelow = UseSelectorResult.X < 540
+	local ClampedValue = math.clamp(math.floor(UseSelectorResult.Y * (if IsXBelow then 0.35 else 0.5)), 180, if IsXBelow then 280 else v1)
+	local Element = ReactModule.createElement(FoundationModule.View, {
+		tag = "row wrap align-x-left align-y-top gap-xsmall size-full-0 auto-y"
+	}, {
+		Body = if Text == "" then nil else ReactModule.createElement(RichTextBlock, {
+			tag = "auto-xy text-body-medium text-wrap text-align-x-left",
+			layoutOrder = 1,
+			segment = Text
+		}),
+		TermsLink = if IsNotTermsBodyMatch then ReactModule.createElement(FoundationModule.Text, {
+			tag = "auto-xy text-body-medium text-wrap text-align-x-left content-muted",
+			RichText = true,
+			LayoutOrder = 2,
+			Text = `<u>{UseLocalizationResult.viewTermsButtonText}</u>`,
+			onActivated = OnOpenTermsModal
+		}) else nil
+	})
+	
+	return ReactModule.createElement(ReactModule.Fragment, nil, {
+		OffersModal = if p1.offersModalOpen then ReactModule.createElement(AXPartialPageModal, {
 			visible = true,
 			onBackgroundPress = p1.onCloseOffersModal,
-			hasBackgroundShim = if fFlagAXPartialPageModalBackgroundShim then true else nil,
+			hasBackgroundShim = if FFlagAXPartialPageModalBackgroundShim then true else nil,
 			buttonStackProps = {
 				rowLayout = false,
 				buttons = {
 					{
 						props = {
 							text = p1.okButtonText,
-							variant = buttonVariant.Emphasis,
-							size = inputSize.Medium,
+							variant = ButtonVariant.Emphasis,
+							size = InputSize.Medium,
 							onActivated = p1.onCloseOffersModal
 						}
 					}
 				}
 			}
 		}, {
-			ViewFrame = reactModule.createElement(foundationModule.View, {
-				tag = "col align-x-left align-y-top size-full-0 auto-y padding-y-xxlarge"
+			ViewFrame = ReactModule.createElement(FoundationModule.View, {
+				tag = {
+					["col align-x-left align-y-top size-full-0 auto-y"] = true,
+					["padding-bottom-xxlarge"] = AXUpdateOffersModalHero,
+					["padding-y-xxlarge"] = not AXUpdateOffersModalHero
+				}
 			}, {
-				Contents = reactModule.createElement(foundationModule.View, {
-					tag = "col align-x-left gap-medium size-full-0 auto-y padding-y-xlarge"
+				Contents = ReactModule.createElement(FoundationModule.View, {
+					tag = {
+						["col align-x-left gap-medium size-full-0 auto-y"] = true,
+						["padding-y-xlarge"] = not AXUpdateOffersModalHero
+					}
 				}, {
-					HeroIcon = reactModule.createElement(foundationModule.View, {
-						tag = "row align-x-center align-y-center auto-y",
+					HeroIcon = ReactModule.createElement(FoundationModule.View, {
 						LayoutOrder = 0,
+						tag = {
+							["row align-x-center align-y-center auto-y"] = true,
+							["padding-bottom-xxlarge"] = AXUpdateOffersModalHero
+						},
 						Size = UDim2.new(1, 0, 0, 136)
 					}, {
-						HeroIconSlot = reactModule.createElement(foundationModule.View, {
+						HeroIconSlot = ReactModule.createElement(FoundationModule.View, {
 							BackgroundTransparency = 1,
 							Size = UDim2.fromOffset(136, 136)
 						}, {
-							TiltedSquare = reactModule.createElement(foundationModule.View, {
+							TiltedSquare = if AXUpdateOffersModalHero then nil else ReactModule.createElement(FoundationModule.View, {
 								BackgroundTransparency = 1,
 								Rotation = -15,
 								Size = UDim2.fromOffset(108, 108),
 								AnchorPoint = Vector2.new(0.5, 0.5),
 								Position = UDim2.fromScale(0.5, 0.5),
-								cornerRadius = UDim.new(0, var1.Radius.Small),
+								cornerRadius = UDim.new(0, UseTokensResult.Radius.Small),
 								stroke = {
 									Transparency = 0.84,
-									Color = var1.Color.Content.Emphasis.Color3,
-									Thickness = var1.Stroke.Standard
+									Color = UseTokensResult.Color.Content.Emphasis.Color3,
+									Thickness = UseTokensResult.Stroke.Standard
 								}
 							}, {
-								IconCounterRotate = reactModule.createElement(foundationModule.View, {
+								IconCounterRotate = ReactModule.createElement(FoundationModule.View, {
 									tag = "size-full",
 									BackgroundTransparency = 1,
 									Rotation = 15
 								}, {
-									Icon = reactModule.createElement(foundationModule.Icon, {
+									Icon = ReactModule.createElement(FoundationModule.Icon, {
 										size = 64,
-										name = getFoundationIconNameModule(modal.modalHeroIcon),
-										variant = iconVariant.Regular,
-										style = var1.Color.Content.Emphasis,
+										name = GetFoundationIconNameModule(Modal.modalHeroIcon),
+										variant = IconVariant.Regular,
+										style = UseTokensResult.Color.Content.Emphasis,
 										AnchorPoint = Vector2.new(0.5, 0.5),
 										Position = UDim2.fromScale(0.5, 0.5)
 									})
 								})
-							})
-						})
-					}),
-					ModalTitle = reactModule.createElement(foundationModule.Text, {
-						tag = "size-full-0 auto-xy padding-bottom-small text-heading-small text-wrap text-align-x-left",
-						LayoutOrder = 1,
-						Text = modal.modalTitle
-					}),
-					ModalBody = reactModule.createElement(foundationModule.View, { tag = "size-full-0 auto-y", LayoutOrder = 2 }, {
-						Body = reactModule.createElement(foundationModule.View, {
-							tag = "row wrap align-x-left align-y-top gap-xsmall size-full-0 auto-y"
-						}, {
-							Body = if var4 ~= "" then nil else reactModule.createElement(RichTextBlock, {
-								tag = "auto-xy text-body-medium text-wrap text-align-x-left",
-								layoutOrder = 1,
-								segment = var4
 							}),
-							TermsLink = if var3 then reactModule.createElement(foundationModule.Text, {
-								tag = "auto-xy text-body-medium text-wrap text-align-x-left content-muted",
-								RichText = true,
-								LayoutOrder = 2,
-								Text = `<u>{var2.viewTermsButtonText}</u>`,
-								onActivated = onOpenTermsModal
+							HeroFrameLeft = if AXUpdateOffersModalHero then ReactModule.createElement(HeroFrame, {
+								framePx = 74,
+								rotation = 15,
+								zIndex = 1,
+								testId = "CatalogOffersModalHeroFrameLeft",
+								position = _UDim2,
+								iconName = IconName.Shirt,
+								iconSize = UseTokensResult.Size.Size_1200
+							}) else nil,
+							HeroFrameRight = if AXUpdateOffersModalHero then ReactModule.createElement(HeroFrame, {
+								framePx = 84,
+								rotation = 15,
+								zIndex = 1,
+								testId = "CatalogOffersModalHeroFrameRight",
+								position = _UDim2_1,
+								iconName = IconName.Shoe,
+								iconSize = UseTokensResult.Size.Size_1200
+							}) else nil,
+							HeroFrame = if AXUpdateOffersModalHero then ReactModule.createElement(HeroFrame, {
+								rotation = -15,
+								zIndex = 2,
+								testId = "CatalogOffersModalHeroFrame",
+								framePx = UseTokensResult.Size.Size_2600,
+								position = UDim2.fromScale(0.5, 0.5),
+								iconName = GetFoundationIconNameModule(Modal.modalHeroIcon),
+								iconSize = UseTokensResult.Size.Size_1600
 							}) else nil
 						})
-					})
+					}),
+					ModalTitle = ReactModule.createElement(FoundationModule.Text, {
+						tag = "size-full-0 auto-xy padding-bottom-small text-heading-small text-wrap text-align-x-left",
+						LayoutOrder = 1,
+						Text = Modal.modalTitle
+					}),
+					ModalBody = ReactModule.createElement(FoundationModule.View, { tag = "size-full-0 auto-y", LayoutOrder = 2 }, { Body = Element })
 				})
 			})
 		}) else nil,
-		TermsModal = if p1.termsModalOpen and var3 then reactModule.createElement(AXPartialPageModal, {
+		TermsModal = if p1.termsModalOpen and IsNotTermsBodyMatch then ReactModule.createElement(AXPartialPageModal, {
 			visible = true,
 			onBackgroundPress = p1.onCloseTermsModal,
-			hasBackgroundShim = if fFlagAXPartialPageModalBackgroundShim then true else nil,
+			hasBackgroundShim = if FFlagAXPartialPageModalBackgroundShim then true else nil,
 			buttonStackProps = {
 				rowLayout = false,
 				buttons = {
 					{
 						props = {
 							text = p1.okButtonText,
-							variant = buttonVariant.Standard,
-							size = inputSize.Medium,
+							variant = ButtonVariant.Standard,
+							size = InputSize.Medium,
 							onActivated = p1.onCloseTermsModal
 						}
 					}
 				}
 			}
 		}, {
-			ViewFrame = reactModule.createElement(foundationModule.View, {
-				tag = "col align-x-left gap-medium size-full-0 auto-y padding-y-large"
+			ViewFrame = ReactModule.createElement(FoundationModule.View, {
+				tag = {
+					["col align-x-left gap-medium size-full-0 auto-y"] = true,
+					["padding-bottom-large"] = AXUpdateOffersModalHero,
+					["padding-y-large"] = not AXUpdateOffersModalHero
+				}
 			}, {
-				TermsTitle = if modal.termsModalTitle then reactModule.createElement(foundationModule.Text, {
+				TermsTitle = if Modal.termsModalTitle then ReactModule.createElement(FoundationModule.Text, {
 					tag = "size-full-0 auto-xy text-heading-small text-wrap text-align-x-left",
 					LayoutOrder = 1,
-					Text = modal.termsModalTitle
+					Text = Modal.termsModalTitle
 				}) else nil,
-				TermsScroll = reactModule.createElement(foundationModule.ScrollView, {
+				TermsScroll = ReactModule.createElement(FoundationModule.ScrollView, {
 					LayoutOrder = 2,
-					Size = UDim2.new(1, 0, 0, math.clamp(math.floor(var5.Y * (if var6 then 0.35 else 0.5)), 180, if var6 then 280 else 540)),
+					Size = UDim2.new(1, 0, 0, ClampedValue),
 					scroll = {
-						scrollBarVisibility = foundationModule.Enums.Visibility.None,
+						scrollBarVisibility = FoundationModule.Enums.Visibility.None,
 						ScrollingDirection = Enum.ScrollingDirection.Y,
 						AutomaticCanvasSize = Enum.AutomaticSize.Y,
 						CanvasSize = UDim2.fromScale(0, 1)
 					},
 					selection = { Selectable = false }
 				}, {
-					TermsBody = reactModule.createElement(foundationModule.Text, {
+					TermsBody = ReactModule.createElement(FoundationModule.Text, {
 						tag = "size-full-0 auto-xy padding-bottom-large text-body-medium text-wrap text-align-x-left",
 						RichText = true,
-						Text = termsBody or "",
+						Text = TermsBody or "",
 						selection = { Selectable = false }
 					})
 				})

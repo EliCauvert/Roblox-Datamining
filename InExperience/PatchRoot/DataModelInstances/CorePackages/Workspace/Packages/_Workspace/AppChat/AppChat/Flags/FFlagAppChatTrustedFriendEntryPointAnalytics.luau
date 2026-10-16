@@ -1,1 +1,3 @@
-﻿return game:DefineFastFlag("AppChatTrustedFriendEntryPointAnalytics", false) and require(script:FindFirstAncestor("AppChat").Flags.FFlagAppChatEnableTrustedFriendEntryPoint)
+﻿local FFlagAppChatEnableTrustedFriendEntryPointModule = require(script:FindFirstAncestor("AppChat").Flags.FFlagAppChatEnableTrustedFriendEntryPoint)
+
+return game:DefineFastFlag("AppChatTrustedFriendEntryPointAnalytics", false) and FFlagAppChatEnableTrustedFriendEntryPointModule

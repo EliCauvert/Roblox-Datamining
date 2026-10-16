@@ -1,65 +1,63 @@
-﻿local experimentCacheManager = require(script:FindFirstAncestor("SocialExperiments").Parent.ExperimentCacheManager).ExperimentCacheManager
-local fStringQueueExpLayer = game:DefineFastString("FStringQueueExpLayer", "Party.Coordination.ExperienceJoin")
-local queueEnableAutoJoinNewServerVariant = game:DefineFastString("QueueEnableAutoJoinNewServerVariant", "enableAutoJoinNewServer")
-local queueEnableJoinNewServerVariant = game:DefineFastString("QueueEnableJoinNewServerVariant", "enableJoinNewServerButton")
-local forceEnableQueueAutoJoinNewServer2 = game:DefineFastFlag("ForceEnableQueueAutoJoinNewServer2", false)
-local forceEnableQueueJoinNewServerButton2 = game:DefineFastFlag("ForceEnableQueueJoinNewServerButton2", false)
-local placeJoinStateEnabled = game:DefineFastFlag("EnableQueueExperimentation2", false) and game:GetEngineFeature("PlaceJoinStateEnabled")
+﻿local ExperimentCacheManager = require(script:FindFirstAncestor("SocialExperiments").Parent.ExperimentCacheManager).ExperimentCacheManager
+local FStringQueueExpLayer = game:DefineFastString("FStringQueueExpLayer", "Party.Coordination.ExperienceJoin")
+local QueueEnableAutoJoinNewServerVariant = game:DefineFastString("QueueEnableAutoJoinNewServerVariant", "enableAutoJoinNewServer")
+local QueueEnableJoinNewServerVariant = game:DefineFastString("QueueEnableJoinNewServerVariant", "enableJoinNewServerButton")
+local ForceEnableQueueAutoJoinNewServer2 = game:DefineFastFlag("ForceEnableQueueAutoJoinNewServer2", false)
+local ForceEnableQueueJoinNewServerButton2 = game:DefineFastFlag("ForceEnableQueueJoinNewServerButton2", false)
+local PlaceJoinStateEnabledEngineFeature = game:DefineFastFlag("EnableQueueExperimentation2", false) and game:GetEngineFeature("PlaceJoinStateEnabled")
 
-local function _(p1)
-	-- upvalues: experimentCacheManager (ref), fStringQueueExpLayer (ref)
-	local var1 = experimentCacheManager.default:getLayerVariables(fStringQueueExpLayer)
+local function _(p1) --[[ Line: 17 | Named "getIsUserInTreatment" ]]
+	-- upvalues: ExperimentCacheManager (copy), FStringQueueExpLayer (copy)
+	local LayerVariables = ExperimentCacheManager.default:getLayerVariables(FStringQueueExpLayer)
 	
-	return if var1 and var1[p1] ~= nil then var1[p1] else false
+	return if LayerVariables and LayerVariables[p1] ~= nil then LayerVariables[p1] else false
 end
 
 return {
-	getIsJoinNewServerButtonEnabled = function()
-		-- upvalues: forceEnableQueueJoinNewServerButton2 (ref), placeJoinStateEnabled (ref), queueEnableJoinNewServerVariant (ref), experimentCacheManager (ref), fStringQueueExpLayer (ref)
-		local var1 = forceEnableQueueJoinNewServerButton2
+	getIsJoinNewServerButtonEnabled = function() --[[ Line: 32 ]]
+		-- upvalues: ForceEnableQueueJoinNewServerButton2 (copy), PlaceJoinStateEnabledEngineFeature (copy), QueueEnableJoinNewServerVariant (copy), ExperimentCacheManager (copy), FStringQueueExpLayer (copy)
+		local Flag: boolean = ForceEnableQueueJoinNewServerButton2
 		
-		if not var1 then
-			var1 = placeJoinStateEnabled
+		if not Flag then
+			Flag = PlaceJoinStateEnabledEngineFeature
 			
-			if var1 then
-				local var2 = queueEnableJoinNewServerVariant
-				local var3 = experimentCacheManager.default:getLayerVariables(fStringQueueExpLayer)
+			if Flag then
+				local LayerVariables = ExperimentCacheManager.default:getLayerVariables(FStringQueueExpLayer)
 				
-				if var3 and var3[var2] ~= nil then
-					return var3[var2]
+				if LayerVariables and LayerVariables[QueueEnableJoinNewServerVariant] ~= nil then
+					return LayerVariables[QueueEnableJoinNewServerVariant]
 				end
-				var1 = false
+				Flag = false
 			end
 		end
-		return var1
+		return Flag
 	end,
-	getIsAutoJoinNewServerEnabled = function()
-		-- upvalues: forceEnableQueueAutoJoinNewServer2 (ref), placeJoinStateEnabled (ref), queueEnableAutoJoinNewServerVariant (ref), experimentCacheManager (ref), fStringQueueExpLayer (ref)
-		local var1 = forceEnableQueueAutoJoinNewServer2
+	getIsAutoJoinNewServerEnabled = function() --[[ Line: 27 ]]
+		-- upvalues: ForceEnableQueueAutoJoinNewServer2 (copy), PlaceJoinStateEnabledEngineFeature (copy), QueueEnableAutoJoinNewServerVariant (copy), ExperimentCacheManager (copy), FStringQueueExpLayer (copy)
+		local Flag: boolean = ForceEnableQueueAutoJoinNewServer2
 		
-		if not var1 then
-			var1 = placeJoinStateEnabled
+		if not Flag then
+			Flag = PlaceJoinStateEnabledEngineFeature
 			
-			if var1 then
-				local var2 = queueEnableAutoJoinNewServerVariant
-				local var3 = experimentCacheManager.default:getLayerVariables(fStringQueueExpLayer)
+			if Flag then
+				local LayerVariables = ExperimentCacheManager.default:getLayerVariables(FStringQueueExpLayer)
 				
-				if var3 and var3[var2] ~= nil then
-					return var3[var2]
+				if LayerVariables and LayerVariables[QueueEnableAutoJoinNewServerVariant] ~= nil then
+					return LayerVariables[QueueEnableAutoJoinNewServerVariant]
 				end
-				var1 = false
+				Flag = false
 			end
 		end
-		return var1
+		return Flag
 	end,
-	isInExperiment = function()
-		-- upvalues: placeJoinStateEnabled (ref), experimentCacheManager (ref), fStringQueueExpLayer (ref)
-		return if placeJoinStateEnabled then experimentCacheManager.default:getLayerVariables(fStringQueueExpLayer) ~= nil else false
+	isInExperiment = function(): boolean --[[ Line: 37 ]]
+		-- upvalues: PlaceJoinStateEnabledEngineFeature (copy), ExperimentCacheManager (copy), FStringQueueExpLayer (copy)
+		return if PlaceJoinStateEnabledEngineFeature then ExperimentCacheManager.default:getLayerVariables(FStringQueueExpLayer) ~= nil else false
 	end,
-	logExposure = function()
-		-- upvalues: placeJoinStateEnabled (ref), experimentCacheManager (ref), fStringQueueExpLayer (ref)
-		if placeJoinStateEnabled and experimentCacheManager.default:getLayerVariables(fStringQueueExpLayer) ~= nil then
-			experimentCacheManager.default:logLayerExposure(fStringQueueExpLayer)
+	logExposure = function() --[[ Line: 45 ]]
+		-- upvalues: PlaceJoinStateEnabledEngineFeature (copy), ExperimentCacheManager (copy), FStringQueueExpLayer (copy)
+		if PlaceJoinStateEnabledEngineFeature and ExperimentCacheManager.default:getLayerVariables(FStringQueueExpLayer) ~= nil then
+			ExperimentCacheManager.default:logLayerExposure(FStringQueueExpLayer)
 		end
 	end
 }

@@ -1,14 +1,15 @@
-﻿local ASSET_TYPE_NAME_TO_ID_STRING = require(script:FindFirstAncestor("AvatarExperienceCommon").Constants).ASSET_TYPE_NAME_TO_ID_STRING
-local getEquippedAssetIdsForTypeModule = require(script.Parent.getEquippedAssetIdsForType)
+﻿local ASSETTYPENAMETOIDSTRING = require(script:FindFirstAncestor("AvatarExperienceCommon").Constants).ASSET_TYPE_NAME_TO_ID_STRING
+local GetEquippedAssetIdsForTypeModule = require(script.Parent.getEquippedAssetIdsForType)
 
-return function(p1)
-	-- upvalues: getEquippedAssetIdsForTypeModule (ref), ASSET_TYPE_NAME_TO_ID_STRING (ref)
-	local equippedAssets = p1.AvatarEditor.Character.EquippedAssets
+return function(p1): number --[[ Line: 6 ]]
+	-- upvalues: GetEquippedAssetIdsForTypeModule (copy), ASSETTYPENAMETOIDSTRING (copy)
+	local EquippedAssets = p1.AvatarEditor.Character.EquippedAssets
 	
-	if equippedAssets == nil then
+	if EquippedAssets == nil then
 		return 0
+	else
+		local _, Value = next((GetEquippedAssetIdsForTypeModule(EquippedAssets, ASSETTYPENAMETOIDSTRING.Gear)))
+		
+		return Value and tonumber(Value) or 0
 	end
-	local _, var1 = next(getEquippedAssetIdsForTypeModule(equippedAssets, ASSET_TYPE_NAME_TO_ID_STRING.Gear))
-	
-	return if var1 then tonumber(var1) or 0 else 0
 end

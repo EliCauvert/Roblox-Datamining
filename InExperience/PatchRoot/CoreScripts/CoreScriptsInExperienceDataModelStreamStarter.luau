@@ -1,14 +1,14 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local ok, status = pcall(function()
-	-- upvalues: corePackagesService (ref)
-	return require(corePackagesService.Workspace.Packages.DataModelStreaming)
+﻿local CorePackages = game:GetService("CorePackages")
+local Success, Result = pcall(function() --[[ Line: 3 ]]
+	-- upvalues: CorePackages (copy)
+	return require(CorePackages.Workspace.Packages.DataModelStreaming)
 end)
 
-if not ok or type(status) ~= "table" then return end
-local initDataModelStreamWsClient = status.initDataModelStreamWsClient
+if not Success or type(Result) ~= "table" then return end
+local InitDataModelStreamWsClientFunction: (any) -> () = Result.initDataModelStreamWsClient
 
-if type(initDataModelStreamWsClient) == "function" then
-	initDataModelStreamWsClient("experience")
+if type(InitDataModelStreamWsClientFunction) == "function" then
+	InitDataModelStreamWsClientFunction("experience")
 	
 	return
 end

@@ -1,17 +1,17 @@
 ﻿return {
-	lerp = function(startValue, endValue, alpha)
-		return endValue * alpha + startValue * (1 - alpha)
+	lerp = function(p1, p2, p3: number) --[[ Line: 5 ]]
+		return p2 * p3 + p1 * (1 - p3)
 	end,
-	inverseLerp = function(startValue, endValue, alpha)
-		return if endValue - startValue == 0 then 0 else (alpha - startValue) / (endValue - startValue)
+	inverseLerp = function(p1, p2, p3) --[[ Line: 9 ]]
+		return if p2 - p1 == 0 then 0 else (p3 - p1) / (p2 - p1)
 	end,
-	signedPow = function(value, p1)
-		return math.pow(math.abs(value), p1) * math.sign(value)
+	signedPow = function(Value: number, p1: number): number --[[ Line: 13 ]]
+		return math.pow(math.abs(Value), p1) * math.sign(Value)
 	end,
-	log = function(p1, p2)
+	log = function(p1: number, p2: number): number --[[ Line: 17 ]]
 		return if p1 == 10 then math.log10(p2) else math.log(p2) / math.log(p1)
 	end,
-	roundToNearest = function(value, p1)
-		return math.round(value / p1) * p1
+	roundToNearest = function(p1, p2) --[[ Line: 25 ]]
+		return math.round(p1 / p2) * p2
 	end
 }

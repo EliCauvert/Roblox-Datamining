@@ -1,15 +1,15 @@
-﻿local parent = script.Parent.Parent.Parent
-local error = require(parent.Parent.LuauPolyfill).Error
-local _ = require(parent.luaUtils.Response)
+﻿local Parent = script.Parent.Parent.Parent
+local Error1 = require(Parent.Parent.LuauPolyfill).Error
+local _ = require(Parent.luaUtils.Response)
 
 return {
-	throwServerError = function(p1, p2, p3)
-		-- upvalues: error (ref)
-		local serverError = error.new(p3)
-		serverError.name = "ServerError"
-		serverError.response = p1
-		serverError.statusCode = p1.status
-		serverError.result = p2
-		error(serverError)
+	throwServerError = function(Response, Result, p1) --[[ Line: 31 ]]
+		-- upvalues: Error1 (copy)
+		local NewError = Error1.new(p1)
+		NewError.name = "ServerError"
+		NewError.response = Response
+		NewError.statusCode = Response.status
+		NewError.result = Result
+		error(NewError)
 	end
 }

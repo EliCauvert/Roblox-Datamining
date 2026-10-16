@@ -1,1 +1,3 @@
-﻿return require(script:FindFirstAncestor("PurchasePrompt").Parent.SharedFlags).FFlagSkipBuyDelayForExperienceShop and require(script.Parent.FFlagPromptPurchaseClearStateOnCompletion)
+﻿local FFlagPromptPurchaseClearStateOnCompletionModule = require(script.Parent.FFlagPromptPurchaseClearStateOnCompletion)
+
+return require(script:FindFirstAncestor("PurchasePrompt").Parent.SharedFlags).FFlagSkipBuyDelayForExperienceShop and FFlagPromptPurchaseClearStateOnCompletionModule

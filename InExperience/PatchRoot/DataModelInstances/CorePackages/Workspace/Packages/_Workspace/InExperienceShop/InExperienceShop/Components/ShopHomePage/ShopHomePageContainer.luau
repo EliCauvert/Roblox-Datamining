@@ -1,8 +1,8 @@
-﻿local reactModule = require(script:FindFirstAncestor("InExperienceShop").Parent.React)
-local shopHomePageViewModule = require(script.Parent.ShopHomePageView)
-local useShopHomePageViewModelModule = require(script.Parent.useShopHomePageViewModel)
+﻿local ReactModule = require(script:FindFirstAncestor("InExperienceShop").Parent.React)
+local ShopHomePageViewModule = require(script.Parent.ShopHomePageView)
+local UseShopHomePageViewModelModule = require(script.Parent.useShopHomePageViewModel)
 
-return reactModule.memo(function(p1)
-	-- upvalues: useShopHomePageViewModelModule (ref), reactModule (ref), shopHomePageViewModule (ref)
-	return reactModule.createElement(shopHomePageViewModule, useShopHomePageViewModelModule(p1))
+return ReactModule.memo(function(p1) --[[ Line: 10 | Named "ShopHomePageContainer" ]]
+	-- upvalues: UseShopHomePageViewModelModule (copy), ReactModule (copy), ShopHomePageViewModule (copy)
+	return ReactModule.createElement(ShopHomePageViewModule, (UseShopHomePageViewModelModule(p1)))
 end)

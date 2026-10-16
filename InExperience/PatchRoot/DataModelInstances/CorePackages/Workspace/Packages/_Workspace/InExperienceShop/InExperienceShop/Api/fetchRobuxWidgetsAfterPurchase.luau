@@ -1,168 +1,171 @@
-﻿local httpRbxApiService = game:GetService("HttpRbxApiService")
-local httpService = game:GetService("HttpService")
-local runService = game:GetService("RunService")
-local inExperienceShop = script:FindFirstAncestor("InExperienceShop")
-local parent = inExperienceShop.Parent
-local promiseModule = require(parent.Promise)
-local httpModule = require(parent.Http)
-local url = httpModule.Url
-local requestInternalWrapper = httpModule.NetworkLayers.requestInternalWrapper
-local constantsModule = require(inExperienceShop.Constants)
-local _ = require(inExperienceShop.Types)
-local errorsModule = require(script.Parent.Errors)
-local multiGetProductInfoModule = require(script.Parent.multiGetProductInfo)
-local buildShopDataFromWidgetsModule = require(script.Parent.buildShopDataFromWidgets)
-local shopDebugLoggerModule = require(inExperienceShop.Internal.ShopDebugLogger)
-local fFlagUseShopRequestImplModule = require(inExperienceShop.Flags.FFlagUseShopRequestImpl)
-local fIntExperienceShopWidgetRequestPriorityModule = require(inExperienceShop.Flags.FIntExperienceShopWidgetRequestPriority)
-local fFlagSkipShopWidgetsCallInUnpublishedStudioModule = require(inExperienceShop.Flags.FFlagSkipShopWidgetsCallInUnpublishedStudio)
-local ROBUX_CATEGORY_NAME = constantsModule.ROBUX_CATEGORY_NAME
-local text = url.APIS_URL .. "marketplace-widgets/v1/widgets/robux-widget"
-local t = { categories = {}, sections = {}, failedItems = {} }
+﻿local HttpRbxApiService = game:GetService("HttpRbxApiService")
+local HttpService = game:GetService("HttpService")
+local RunService = game:GetService("RunService")
+local InExperienceShop = script:FindFirstAncestor("InExperienceShop")
+local Parent = InExperienceShop.Parent
+local PromiseModule = require(Parent.Promise)
+local HttpModule = require(Parent.Http)
+local Url = HttpModule.Url
+local RequestInternalWrapperFunction = HttpModule.NetworkLayers.requestInternalWrapper
+local _ = require(InExperienceShop.Types)
+local ErrorsModule = require(script.Parent.Errors)
+local MultiGetProductInfoModule = require(script.Parent.multiGetProductInfo)
+local BuildShopDataFromWidgetsModule = require(script.Parent.buildShopDataFromWidgets)
+local ShopDebugLoggerModule = require(InExperienceShop.Internal.ShopDebugLogger)
+local FFlagUseShopRequestImplModule = require(InExperienceShop.Flags.FFlagUseShopRequestImpl)
+local FIntExperienceShopWidgetRequestPriorityModule = require(InExperienceShop.Flags.FIntExperienceShopWidgetRequestPriority)
+local FFlagSkipShopWidgetsCallInUnpublishedStudioModule = require(InExperienceShop.Flags.FFlagSkipShopWidgetsCallInUnpublishedStudio)
+local ROBUXCATEGORYNAME = require(InExperienceShop.Constants).ROBUX_CATEGORY_NAME
+local Text = Url.APIS_URL .. "marketplace-widgets/v1/widgets/robux-widget"
+local config = { categories = {}, sections = {}, failedItems = {} }
 
-local function _(p1)
-	-- upvalues: url (ref), text (ref)
-	return `{text}?{url:makeQueryString({ requestId = p1, universeId = game.GameId })}`
+local function _(RequestId): string --[[ Line: 39 | Named "buildRobuxWidgetUrl" ]]
+	-- upvalues: Url (copy), Text (copy)
+	return `{Text}?{Url:makeQueryString({ requestId = RequestId, universeId = game.GameId })}`
 end
 
-local function validateAndResolve(p1, p2, p3)
-	-- upvalues: errorsModule (ref)
-	if typeof(p1) ~= "table" then
-		p3(errorsModule.schemaError("fetchRobuxWidgetsAfterPurchase: malformed response, expected { category = ... }", p1))
+local function validateAndResolve(ResponseBody, Callback1: (any) -> (), Callback: (any) -> ()): boolean --[[ Line: 47 ]]
+	-- upvalues: ErrorsModule (copy)
+	if typeof(ResponseBody) ~= "table" then
+		Callback((ErrorsModule.schemaError("fetchRobuxWidgetsAfterPurchase: malformed response, expected { category = ... }", ResponseBody)))
 		
 		return false
-	elseif p1.category == nil or typeof(p1.category) == "table" then
-		p2(p1)
+	elseif ResponseBody.category == nil or typeof(ResponseBody.category) == "table" then
+		Callback1(ResponseBody)
 		
 		return true
+	else
+		Callback((ErrorsModule.schemaError("fetchRobuxWidgetsAfterPurchase: malformed response, category must be a table", ResponseBody)))
+		
+		return false
 	end
-	p3(errorsModule.schemaError("fetchRobuxWidgetsAfterPurchase: malformed response, category must be a table", p1))
-	
-	return false
 end
 
-local function buildFromWidgetResponse(p1, p2)
-	-- upvalues: promiseModule (ref), t (ref), ROBUX_CATEGORY_NAME (ref), buildShopDataFromWidgetsModule (ref)
-	local category = p1.category
+local function buildFromWidgetResponse(p1, MultiGetProductInfoModule) --[[ Line: 77 ]]
+	-- upvalues: PromiseModule (copy), config (copy), ROBUXCATEGORYNAME (copy), BuildShopDataFromWidgetsModule (copy)
+	local Category = p1.category
 	
-	if category == nil then
-		return promiseModule.resolve(t)
+	if Category == nil then
+		return PromiseModule.resolve(config)
 	end
-	local t_1 = {}
+	local Items = {}
 	
-	for i, v in ipairs(category.items) do
-		if v.type == "Robux" then
-			table.insert(t_1, v)
+	for _, item in ipairs(Category.items) do
+		if item.type == "Robux" then
+			table.insert(Items, item)
 		end
 	end
-	return buildShopDataFromWidgetsModule({
+	return BuildShopDataFromWidgetsModule({
 		categories = {
 			{
-				id = category.id,
-				name = ROBUX_CATEGORY_NAME,
-				items = t_1,
-				metadata = category.metadata
+				id = Category.id,
+				name = ROBUXCATEGORYNAME,
+				items = Items,
+				metadata = Category.metadata
 			}
 		}
-	}, p2)
+	}, MultiGetProductInfoModule)
 end
 
-local function fetchViaGetAsyncFullUrl(p3)
-	-- upvalues: promiseModule (ref), url (ref), text (ref), shopDebugLoggerModule (ref), httpRbxApiService (ref), errorsModule (ref), httpService (ref), validateAndResolve (ref)
-	return promiseModule.new(function(p4, p5)
-		-- upvalues: p3 (ref), url (copy), text (copy), shopDebugLoggerModule (copy), httpRbxApiService (copy), errorsModule (copy), httpService (copy), validateAndResolve (copy)
-		task.spawn(function()
-			-- upvalues: p3 (copy), url (copy), text (copy), shopDebugLoggerModule (copy), httpRbxApiService (copy), p5 (ref), errorsModule (copy), httpService (copy), validateAndResolve (copy), p4 (ref)
-			local status = `{text}?{url:makeQueryString({ requestId = p3, universeId = game.GameId })}`
-			shopDebugLoggerModule.logLazy(function()
-				-- upvalues: status (ref)
-				return "fetchRobuxWidgetsAfterPurchase: GET " .. status
+local function fetchViaGetAsyncFullUrl(RequestId) --[[ Line: 105 ]]
+	-- upvalues: PromiseModule (copy), Url (copy), Text (copy), ShopDebugLoggerModule (copy), HttpRbxApiService (copy), ErrorsModule (copy), HttpService (copy), validateAndResolve (copy)
+	return PromiseModule.new(function(p2, Callback) --[[ Line: 106 ]]
+		-- upvalues: RequestId (copy), Url (upval), Text (upval), ShopDebugLoggerModule (upval), HttpRbxApiService (upval), ErrorsModule (upval), HttpService (upval), validateAndResolve (upval)
+		task.spawn(function() --[[ Line: 107 ]]
+			-- upvalues: RequestId (upval), Url (upval), Text (upval), ShopDebugLoggerModule (upval), HttpRbxApiService (upval), Callback (copy), ErrorsModule (upval), HttpService (upval), validateAndResolve (upval), p2 (copy)
+			local Text1: string = `{Text}?{Url:makeQueryString({ requestId = RequestId, universeId = game.GameId })}`
+			ShopDebugLoggerModule.logLazy(function(): string --[[ Line: 109 ]]
+				-- upvalues: Text1 (copy)
+				return "fetchRobuxWidgetsAfterPurchase: GET " .. Text1
 			end)
-			local var1 = shopDebugLoggerModule.startTimer()
-			ok, status = pcall(function()
-				-- upvalues: httpRbxApiService (copy), status (ref)
-				return httpRbxApiService:GetAsyncFullUrl(status)
+			local StartTimerResult = ShopDebugLoggerModule.startTimer()
+			local Success, Result = pcall(function() --[[ Line: 113 ]]
+				-- upvalues: HttpRbxApiService (upval), Text1 (copy)
+				return HttpRbxApiService:GetAsyncFullUrl(Text1)
 			end)
 			
-			if not ok then
-				shopDebugLoggerModule.logElapsed("fetchRobuxWidgetsAfterPurchase: HTTP error", var1)
-				p5(errorsModule.networkError("fetchRobuxWidgetsAfterPurchase: HTTP request failed", status))
+			if not Success then
+				ShopDebugLoggerModule.logElapsed("fetchRobuxWidgetsAfterPurchase: HTTP error", StartTimerResult)
+				Callback((ErrorsModule.networkError("fetchRobuxWidgetsAfterPurchase: HTTP request failed", Result)))
 				
 				return
 			end
-			shopDebugLoggerModule.logElapsed("fetchRobuxWidgetsAfterPurchase: HTTP response received", var1)
-			local ok_1, status_1 = pcall(function()
-				-- upvalues: httpService (copy), status (ref)
-				return httpService:JSONDecode(status)
+			ShopDebugLoggerModule.logElapsed("fetchRobuxWidgetsAfterPurchase: HTTP response received", StartTimerResult)
+			local Success1, Result1 = pcall(function() --[[ Line: 125 ]]
+				-- upvalues: HttpService (upval), Result (copy)
+				return HttpService:JSONDecode(Result)
 			end)
 			
-			if ok_1 then
-				validateAndResolve(status_1, p4, p5)
+			if Success1 then
+				validateAndResolve(Result1, p2, Callback)
 				
 				return
+			else
+				Callback((ErrorsModule.parseError("fetchRobuxWidgetsAfterPurchase: response body is not valid JSON", Result1)))
 			end
-			p5(errorsModule.parseError("fetchRobuxWidgetsAfterPurchase: response body is not valid JSON", status_1))
 		end)
 	end)
 end
 
-local function fetchViaRequestImpl(p3)
-	-- upvalues: url (ref), text (ref), shopDebugLoggerModule (ref), requestInternalWrapper (ref), httpService (ref), fIntExperienceShopWidgetRequestPriorityModule (ref), promiseModule (ref), validateAndResolve (ref), errorsModule (ref)
-	local var1 = `{text}?{url:makeQueryString({ requestId = p3, universeId = game.GameId })}`
-	shopDebugLoggerModule.logLazy(function()
-		-- upvalues: var1 (ref)
-		return "fetchRobuxWidgetsAfterPurchase: GET " .. var24
+local function fetchViaRequestImpl(RequestId) --[[ Line: 139 ]]
+	-- upvalues: Url (copy), Text (copy), ShopDebugLoggerModule (copy), RequestInternalWrapperFunction (copy), HttpService (copy), FIntExperienceShopWidgetRequestPriorityModule (copy), PromiseModule (copy), validateAndResolve (copy), ErrorsModule (copy)
+	local Text1: string = `{Text}?{Url:makeQueryString({ requestId = RequestId, universeId = game.GameId })}`
+	ShopDebugLoggerModule.logLazy(function(): string --[[ Line: 141 ]]
+		-- upvalues: Text1 (copy)
+		return "fetchRobuxWidgetsAfterPurchase: GET " .. Text1
 	end)
-	local var2 = shopDebugLoggerModule.startTimer()
+	local StartTimerResult = ShopDebugLoggerModule.startTimer()
 	
-	return requestInternalWrapper(httpService)(var1, "GET", if fIntExperienceShopWidgetRequestPriorityModule ~= 0 then nil else { priority = fIntExperienceShopWidgetRequestPriorityModule }):andThen(function(p4)
-		-- upvalues: shopDebugLoggerModule (copy), var2 (ref), promiseModule (copy), validateAndResolve (copy)
-		shopDebugLoggerModule.logElapsed("fetchRobuxWidgetsAfterPurchase: HTTP response received", var2)
+	return RequestInternalWrapperFunction(HttpService)(Text1, "GET", if FIntExperienceShopWidgetRequestPriorityModule == 0 then nil else { priority = FIntExperienceShopWidgetRequestPriorityModule }):andThen(function(Result) --[[ Line: 150 ]]
+		-- upvalues: ShopDebugLoggerModule (upval), StartTimerResult (copy), PromiseModule (upval), validateAndResolve (upval)
+		ShopDebugLoggerModule.logElapsed("fetchRobuxWidgetsAfterPurchase: HTTP response received", StartTimerResult)
 		
-		return promiseModule.new(function(p5, p6)
-			-- upvalues: validateAndResolve (copy), p4 (ref)
-			validateAndResolve(p4.responseBody, p5, p6)
+		return PromiseModule.new(function(p2, p3) --[[ Line: 152 ]]
+			-- upvalues: validateAndResolve (upval), Result (copy)
+			validateAndResolve(Result.responseBody, p2, p3)
 		end)
-	end):catch(function(p4)
-		-- upvalues: promiseModule (copy), errorsModule (copy), shopDebugLoggerModule (copy), var2 (ref)
-		if typeof(p4) == "table" and p4.kind ~= nil then
-			return promiseModule.reject(p4)
-		elseif typeof(p4) == "table" and p4.isJSONValid == false then
-			return promiseModule.reject(errorsModule.parseError("fetchRobuxWidgetsAfterPurchase: response body is not valid JSON", p4))
+	end):catch(function(Err) --[[ Line: 156 ]]
+		-- upvalues: PromiseModule (upval), ErrorsModule (upval), ShopDebugLoggerModule (upval), StartTimerResult (copy)
+		if typeof(Err) == "table" and Err.kind ~= nil then
+			return PromiseModule.reject(Err)
+		elseif typeof(Err) == "table" and Err.isJSONValid == false then
+			return PromiseModule.reject((ErrorsModule.parseError("fetchRobuxWidgetsAfterPurchase: response body is not valid JSON", Err)))
+		else
+			ShopDebugLoggerModule.logElapsed("fetchRobuxWidgetsAfterPurchase: HTTP error", StartTimerResult)
+			
+			return PromiseModule.reject((ErrorsModule.networkError("fetchRobuxWidgetsAfterPurchase: HTTP request failed", Err)))
 		end
-		shopDebugLoggerModule.logElapsed("fetchRobuxWidgetsAfterPurchase: HTTP error", var2)
-		
-		return promiseModule.reject(errorsModule.networkError("fetchRobuxWidgetsAfterPurchase: HTTP request failed", p4))
 	end)
 end
 
-local function fetchRobuxWidget(p3)
-	-- upvalues: fFlagSkipShopWidgetsCallInUnpublishedStudioModule (ref), runService (ref), shopDebugLoggerModule (ref), promiseModule (ref), fFlagUseShopRequestImplModule (ref), fetchViaRequestImpl (ref), fetchViaGetAsyncFullUrl (ref)
-	if fFlagSkipShopWidgetsCallInUnpublishedStudioModule and runService:IsStudio() and game.GameId == 0 then
-		shopDebugLoggerModule.logLazy(function()
-			-- upvalues: p3 (ref)
-			return "fetchRobuxWidgetsAfterPurchase: skipped unpublished Studio requestId=" .. p14
+local function fetchRobuxWidget(RequestId) --[[ Line: 172 ]]
+	-- upvalues: FFlagSkipShopWidgetsCallInUnpublishedStudioModule (copy), RunService (copy), ShopDebugLoggerModule (copy), PromiseModule (copy), FFlagUseShopRequestImplModule (copy), fetchViaRequestImpl (copy), fetchViaGetAsyncFullUrl (copy)
+	if FFlagSkipShopWidgetsCallInUnpublishedStudioModule and RunService:IsStudio() and game.GameId == 0 then
+		ShopDebugLoggerModule.logLazy(function(): string --[[ Line: 174 ]]
+			-- upvalues: RequestId (copy)
+			return "fetchRobuxWidgetsAfterPurchase: skipped unpublished Studio requestId=" .. RequestId
 		end)
 		
-		return promiseModule.resolve({})
+		return PromiseModule.resolve({})
+	else
+		return if FFlagUseShopRequestImplModule then fetchViaRequestImpl(RequestId) else fetchViaGetAsyncFullUrl(RequestId)
 	end
-	return if fFlagUseShopRequestImplModule then fetchViaRequestImpl(p3) else fetchViaGetAsyncFullUrl(p3)
 end
 
 return {
-	fetchRobuxWidgetsAfterPurchase = function()
-		-- upvalues: httpService (ref), shopDebugLoggerModule (ref), fetchRobuxWidget (ref), buildFromWidgetResponse (ref), multiGetProductInfoModule (ref)
-		local var1 = httpService:GenerateGUID(false)
-		shopDebugLoggerModule.logLazy(function()
-			-- upvalues: var1 (ref)
-			return "fetchRobuxWidgetsAfterPurchase: start requestId=" .. var26
+	fetchRobuxWidgetsAfterPurchase = function() --[[ Line: 186 ]]
+		-- upvalues: HttpService (copy), ShopDebugLoggerModule (copy), fetchRobuxWidget (copy), buildFromWidgetResponse (copy), MultiGetProductInfoModule (copy)
+		local Guid = HttpService:GenerateGUID(false)
+		ShopDebugLoggerModule.logLazy(function(): string --[[ Line: 188 ]]
+			-- upvalues: Guid (copy)
+			return "fetchRobuxWidgetsAfterPurchase: start requestId=" .. Guid
 		end)
 		
-		return fetchRobuxWidget(var1):andThen(function(p3)
-			-- upvalues: buildFromWidgetResponse (copy), multiGetProductInfoModule (copy)
-			return buildFromWidgetResponse(p3, multiGetProductInfoModule)
+		return fetchRobuxWidget(Guid):andThen(function(Result) --[[ Line: 191 ]]
+			-- upvalues: buildFromWidgetResponse (upval), MultiGetProductInfoModule (upval)
+			return buildFromWidgetResponse(Result, MultiGetProductInfoModule)
 		end)
 	end,
 	buildFromWidgetResponse = buildFromWidgetResponse,
-	EMPTY_SHOP_DATA = t
+	EMPTY_SHOP_DATA = config
 }

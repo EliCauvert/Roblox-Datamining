@@ -1,33 +1,43 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local reactModule = require(parent.React)
-local signalsModule = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local chatCardEmphasisContextModule = require(script.Parent.ChatCardEmphasisContext)
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local ReactModule = require(Parent.React)
+local SignalsModule = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
+local ChatCardEmphasisContextModule = require(script.Parent.ChatCardEmphasisContext)
+local ChatCardEmphasisPositionContextModule = require(script.Parent.ChatCardEmphasisPositionContext)
 
-return function(p1, p2)
-	-- upvalues: reactModule (ref), chatCardEmphasisContextModule (ref), signalsModule (ref), signalsReactModule (ref)
-	local var1 = reactModule.useContext(chatCardEmphasisContextModule)
-	local var2 = reactModule.useMemo(function()
+return function(p1, p2) --[[ Line: 13 | Named "useChatCardEmphasis" ]]
+	-- upvalues: ReactModule (copy), ChatCardEmphasisContextModule (copy), ChatCardEmphasisPositionContextModule (copy), SignalsModule (copy), SignalsReactModule (copy)
+	local UseContextResult = ReactModule.useContext(ChatCardEmphasisContextModule)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 15 ]]
 		return {}
 	end, {})
-	reactModule.useLayoutEffect(function()
-		-- upvalues: var1 (ref), p1 (ref), var2 (ref), p2 (ref)
-		if var1 == nil or p1 == nil then
+	local UseContextResult1 = ReactModule.useContext(ChatCardEmphasisPositionContextModule)
+	ReactModule.useLayoutEffect(function() --[[ Line: 22 ]]
+		-- upvalues: UseContextResult (copy), p1 (copy), UseMemoResult (copy), p2 (copy), UseContextResult1 (copy)
+		if UseContextResult == nil or p1 == nil then
 			return nil
+		else
+			UseContextResult.register(UseMemoResult, p1, p2 or 0, UseContextResult1)
+			
+			return function() --[[ Line: 27 ]]
+				-- upvalues: UseContextResult (upval), UseMemoResult (upval)
+				UseContextResult.unregister(UseMemoResult)
+			end
 		end
-		var1.register(var2, p1, p2 or 0)
-		
-		return function()
-			-- upvalues: var1 (copy), var2 (copy)
-			var1.unregister(var2)
-		end
-	end, { var1, var2, p1, p2 })
-	
-	return if var1 == nil then nil else signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: signalsModule (copy), var1 (ref), var2 (ref)
-		return signalsModule.createComputed(function(p3)
-			-- upvalues: var1 (copy), var2 (copy)
-			return var1 ~= nil and var1.getEmphasizedKey(p3) == var2
+	end, {
+		UseContextResult,
+		UseMemoResult,
+		p1,
+		p2,
+		UseContextResult1
+	})
+	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 32 ]]
+		-- upvalues: SignalsModule (upval), UseContextResult (copy), UseMemoResult (copy)
+		return SignalsModule.createComputed(function(p3): boolean --[[ Line: 33 ]]
+			-- upvalues: UseContextResult (upval), UseMemoResult (upval)
+			return UseContextResult ~= nil and UseContextResult.getEmphasizedKey(p3) == UseMemoResult
 		end)
-	end, { var1, var2 }))
+	end, { UseContextResult, UseMemoResult })))
+	
+	return if UseContextResult == nil then nil else UseSignalStateResult
 end

@@ -1,19 +1,19 @@
-﻿local populateUserWithStateModule = require(script:FindFirstAncestor("AppChat").Users.populateUserWithState)
-local loggerModule = require(script.Parent.Parent.Logger)
+﻿local PopulateUserWithStateModule = require(script:FindFirstAncestor("AppChat").Users.populateUserWithState)
+local LoggerModule = require(script.Parent.Parent.Logger)
 
-return function(p1, p2, p3)
-	-- upvalues: populateUserWithStateModule (ref), loggerModule (ref)
-	local users = p1.Users
+return function(p1, List, p2) --[[ Line: 5 ]]
+	-- upvalues: PopulateUserWithStateModule (copy), LoggerModule (copy)
+	local Users = p1.Users
 	local t = {}
 	
-	for i, v in pairs(p2) do
-		local var1 = users[v]
-		local var2 = if p3 then p3[i] else nil
+	for i, value in pairs(List) do
+		local User = Users[value]
+		local v1 = if p2 then p2[i] else nil
 		
-		if var1 then
-			t[var1.id] = populateUserWithStateModule(p1, var1, var2)
+		if User then
+			t[User.id] = PopulateUserWithStateModule(p1, User, v1)
 		else
-			loggerModule:warning("user is required in selectChatUserEntryModelList")
+			LoggerModule:warning("user is required in selectChatUserEntryModelList")
 		end
 	end
 	return t

@@ -1,1 +1,4 @@
-﻿return require(script.Parent.FFlagAXBackgroundsRoot) and (require(script.Parent.FFlagAXBackgroundsOutfitPersistence) and game:DefineFastFlag("AXBackgroundsOutfitHighlight", false))
+﻿local FFlagAXBackgroundsOutfitPersistenceModule = require(script.Parent.FFlagAXBackgroundsOutfitPersistence)
+local AXBackgroundsOutfitHighlight = game:DefineFastFlag("AXBackgroundsOutfitHighlight", false)
+
+return require(script.Parent.FFlagAXBackgroundsRoot) and (FFlagAXBackgroundsOutfitPersistenceModule and AXBackgroundsOutfitHighlight)

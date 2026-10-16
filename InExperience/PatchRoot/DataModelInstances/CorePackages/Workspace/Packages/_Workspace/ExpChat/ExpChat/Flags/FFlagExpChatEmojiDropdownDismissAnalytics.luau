@@ -1,0 +1,3 @@
+﻿local FFlagExpChatEmojiDropdownShowAnalyticsModule = require(script.Parent.FFlagExpChatEmojiDropdownShowAnalytics)
+
+return game:DefineFastFlag("ExpChatEmojiDropdownDismissAnalytics", false) and FFlagExpChatEmojiDropdownShowAnalyticsModule

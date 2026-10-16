@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("DSAIllegalContentReporting2", false)
 
-return function()
+return function() --[[ Line: 3 ]]
 	return game:GetFastFlag("DSAIllegalContentReporting2")
 end

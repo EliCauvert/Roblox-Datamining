@@ -1,122 +1,121 @@
-﻿local parent = script.Parent.Parent.Parent
-local language = parent.language
-local jsutils = parent.jsutils
-local instanceOfModule = require(jsutils.instanceOf)
-local keyMap = require(jsutils.keyMap).keyMap
-local inspect = require(jsutils.inspect).inspect
-local didYouMean = require(jsutils.didYouMean).didYouMean
-local suggestionList = require(jsutils.suggestionList).suggestionList
-local graphQLError = require(parent.error.GraphQLError).GraphQLError
-local print = require(language.printer).print
-local definitionModule = require(parent.type.definition)
-local isLeafType = definitionModule.isLeafType
-local isInputObjectType = definitionModule.isInputObjectType
-local isListType = definitionModule.isListType
-local isNonNullType = definitionModule.isNonNullType
-local isRequiredInputField = definitionModule.isRequiredInputField
-local getNullableType = definitionModule.getNullableType
-local getNamedType = definitionModule.getNamedType
-local t = {}
-local isValidValueNode = nil
-
-function t.ValuesOfCorrectTypeRule(p1)
-	-- upvalues: getNullableType (ref), isListType (ref), isValidValueNode (write), getNamedType (ref), isInputObjectType (ref), keyMap (ref), isRequiredInputField (ref), inspect (ref), graphQLError (ref), suggestionList (ref), didYouMean (ref), isNonNullType (ref), print (ref)
-	return {
-		ListValue = function(_, p2)
-			-- upvalues: getNullableType (copy), p1 (ref), isListType (copy), isValidValueNode (copy)
-			if isListType(getNullableType(p1:getParentInputType())) then
-				return
-			end
-			isValidValueNode(p1, p2)
-			
-			return false
-		end,
-		ObjectValue = function(_, p2)
-			-- upvalues: getNamedType (copy), p1 (ref), isInputObjectType (copy), isValidValueNode (copy), keyMap (copy), isRequiredInputField (copy), inspect (copy), graphQLError (copy)
-			local var1 = getNamedType(p1:getInputType())
-			
-			if not isInputObjectType(var1) then
-				isValidValueNode(p1, p2)
+﻿local Parent = script.Parent.Parent.Parent
+local Jsutils = Parent.jsutils
+local InstanceOfModule = require(Jsutils.instanceOf)
+local KeyMapFunction = require(Jsutils.keyMap).keyMap
+local InspectFunction = require(Jsutils.inspect).inspect
+local DidYouMeanFunction = require(Jsutils.didYouMean).didYouMean
+local SuggestionListFunction = require(Jsutils.suggestionList).suggestionList
+local GraphQLError = require(Parent.error.GraphQLError).GraphQLError
+local PrintFunction = require(Parent.language.printer).print
+local DefinitionModule = require(Parent.type.definition)
+local IsLeafTypeFunction = DefinitionModule.isLeafType
+local IsInputObjectTypeFunction = DefinitionModule.isInputObjectType
+local IsListTypeFunction = DefinitionModule.isListType
+local IsNonNullTypeFunction = DefinitionModule.isNonNullType
+local IsRequiredInputFieldFunction = DefinitionModule.isRequiredInputField
+local GetNullableTypeFunction = DefinitionModule.getNullableType
+local GetNamedTypeFunction = DefinitionModule.getNamedType
+local Callback = nil
+local ValuesOfCorrectTypeRuleModule = {
+	ValuesOfCorrectTypeRule = function(p1) --[[ Line: 41 ]]
+		-- upvalues: GetNullableTypeFunction (copy), IsListTypeFunction (copy), Callback (ref), GetNamedTypeFunction (copy), IsInputObjectTypeFunction (copy), KeyMapFunction (copy), IsRequiredInputFieldFunction (copy), InspectFunction (copy), GraphQLError (copy), SuggestionListFunction (copy), DidYouMeanFunction (copy), IsNonNullTypeFunction (copy), PrintFunction (copy)
+		return {
+			ListValue = function(_, p2): boolean? --[[ Line: 43 ]]
+				-- upvalues: GetNullableTypeFunction (upval), p1 (copy), IsListTypeFunction (upval), Callback (upval)
+				if IsListTypeFunction((GetNullableTypeFunction(p1:getParentInputType()))) then return end
+				Callback(p1, p2)
 				
 				return false
-			end
-			local var2 = keyMap(p2.fields, function(p3)
-				return p3.name.value
-			end)
-			
-			for i, v in ipairs(var1:getFields():values()) do
-				if not var2[v.name] and isRequiredInputField(v) then
-					p1:reportError(graphQLError.new(("Field \"%s.%s\" of required type \"%s\" was not provided."):format(var1.name, v.name, inspect(v.type)), p2))
+			end,
+			ObjectValue = function(_, p2): boolean? --[[ Line: 53 ]]
+				-- upvalues: GetNamedTypeFunction (upval), p1 (copy), IsInputObjectTypeFunction (upval), Callback (upval), KeyMapFunction (upval), IsRequiredInputFieldFunction (upval), InspectFunction (upval), GraphQLError (upval)
+				local NamedType = GetNamedTypeFunction(p1:getInputType())
+				
+				if not IsInputObjectTypeFunction(NamedType) then
+					Callback(p1, p2)
+					
+					return false
 				end
+				local KeyMapResult = KeyMapFunction(p2.fields, function(p3) --[[ Line: 60 ]]
+					return p3.name.value
+				end)
+				
+				for _, value in ipairs(NamedType:getFields():values()) do
+					if not KeyMapResult[value.name] and IsRequiredInputFieldFunction(value) then
+						p1:reportError(GraphQLError.new(("Field \"%s.%s\" of required type \"%s\" was not provided."):format(NamedType.name, value.name, (InspectFunction(value.type))), p2))
+					end
+				end
+			end,
+			ObjectField = function(_, p3) --[[ Line: 82 ]]
+				-- upvalues: GetNamedTypeFunction (upval), p1 (copy), IsInputObjectTypeFunction (upval), SuggestionListFunction (upval), GraphQLError (upval), DidYouMeanFunction (upval)
+				local NamedType = GetNamedTypeFunction(p1:getParentInputType())
+				
+				if not p1:getInputType() and IsInputObjectTypeFunction(NamedType) then
+					p1:reportError(GraphQLError.new(("Field \"%s\" is not defined by type \"%s\"."):format(p3.name.value, NamedType.name) .. DidYouMeanFunction((SuggestionListFunction(p3.name.value, NamedType:getFields():keys()))), p3))
+				end
+			end,
+			NullValue = function(_, p3) --[[ Line: 102 ]]
+				-- upvalues: p1 (copy), IsNonNullTypeFunction (upval), GraphQLError (upval), InspectFunction (upval), PrintFunction (upval)
+				local InputType = p1:getInputType()
+				
+				if IsNonNullTypeFunction(InputType) then
+					p1:reportError(GraphQLError.new(("Expected value of type \"%s\", found %s."):format(InspectFunction(InputType), PrintFunction(p3)), p3))
+				end
+			end,
+			EnumValue = function(_, p3) --[[ Line: 116 ]]
+				-- upvalues: Callback (upval), p1 (copy)
+				return Callback(p1, p3)
+			end,
+			IntValue = function(_, p3) --[[ Line: 119 ]]
+				-- upvalues: Callback (upval), p1 (copy)
+				return Callback(p1, p3)
+			end,
+			FloatValue = function(_, p3) --[[ Line: 122 ]]
+				-- upvalues: Callback (upval), p1 (copy)
+				return Callback(p1, p3)
+			end,
+			StringValue = function(_, p3) --[[ Line: 125 ]]
+				-- upvalues: Callback (upval), p1 (copy)
+				return Callback(p1, p3)
+			end,
+			BooleanValue = function(_, p3) --[[ Line: 128 ]]
+				-- upvalues: Callback (upval), p1 (copy)
+				return Callback(p1, p3)
 			end
-		end,
-		ObjectField = function(_, p3)
-			-- upvalues: getNamedType (copy), p1 (ref), isInputObjectType (copy), suggestionList (copy), graphQLError (copy), didYouMean (copy)
-			local var3 = getNamedType(p1:getParentInputType())
-			
-			if not p1:getInputType() and isInputObjectType(var3) then
-				p1:reportError(graphQLError.new(("Field \"%s\" is not defined by type \"%s\"."):format(p3.name.value, var3.name) .. didYouMean(suggestionList(p3.name.value, var3:getFields():keys())), p3))
-			end
-		end,
-		NullValue = function(_, p3)
-			-- upvalues: p1 (ref), isNonNullType (copy), graphQLError (copy), inspect (copy), print (copy)
-			local inputType = p1:getInputType()
-			
-			if isNonNullType(inputType) then
-				p1:reportError(graphQLError.new(("Expected value of type \"%s\", found %s."):format(inspect(inputType), print(p3)), p3))
-			end
-		end,
-		EnumValue = function(_, p3)
-			-- upvalues: isValidValueNode (copy), p1 (ref)
-			return isValidValueNode(p1, p3)
-		end,
-		IntValue = function(_, p3)
-			-- upvalues: isValidValueNode (copy), p1 (ref)
-			return isValidValueNode(p1, p3)
-		end,
-		FloatValue = function(_, p3)
-			-- upvalues: isValidValueNode (copy), p1 (ref)
-			return isValidValueNode(p1, p3)
-		end,
-		StringValue = function(_, p3)
-			-- upvalues: isValidValueNode (copy), p1 (ref)
-			return isValidValueNode(p1, p3)
-		end,
-		BooleanValue = function(_, p3)
-			-- upvalues: isValidValueNode (copy), p1 (ref)
-			return isValidValueNode(p1, p3)
-		end
-	}
-end
+		}
+	end
+}
 
-isValidValueNode = function(p2, p3)
-	-- upvalues: getNamedType (ref), isLeafType (ref), inspect (ref), graphQLError (ref), print (ref), instanceOfModule (ref)
-	local inputType = p2:getInputType()
+Callback = function(p2, p3) --[[ Line: 138 | Named "isValidValueNode" ]]
+	-- upvalues: GetNamedTypeFunction (copy), IsLeafTypeFunction (copy), InspectFunction (copy), GraphQLError (copy), PrintFunction (copy), InstanceOfModule (copy)
+	local InputType = p2:getInputType()
 	
-	if not inputType then return end
-	local var1 = getNamedType(inputType)
+	if not InputType then return end
+	local NamedType = GetNamedTypeFunction(InputType)
 	
-	if isLeafType(var1) then
-		xpcall(function()
-			-- upvalues: var1 (ref), p3 (ref), inspect (copy), inputType (ref), p2 (ref), graphQLError (copy), print (copy)
-			if var1:parseLiteral(p3, nil) == nil then
-				p2:reportError(graphQLError.new(("Expected value of type \"%s\", found %s."):format(inspect(inputType), print(p3)), p3))
+	if IsLeafTypeFunction(NamedType) then
+		xpcall(function() --[[ Line: 160 ]]
+			-- upvalues: NamedType (copy), p3 (copy), InspectFunction (upval), InputType (copy), p2 (copy), GraphQLError (upval), PrintFunction (upval)
+			if NamedType:parseLiteral(p3, nil) == nil then
+				p2:reportError(GraphQLError.new(("Expected value of type \"%s\", found %s."):format(InspectFunction(InputType), PrintFunction(p3)), p3))
 			end
-		end, function(p4)
-			-- upvalues: inspect (copy), inputType (ref), instanceOfModule (copy), graphQLError (copy), p2 (ref), print (copy), p3 (ref)
-			local var2 = inspect(inputType)
+		end, function(Err) --[[ Line: 173 ]]
+			-- upvalues: InspectFunction (upval), InputType (copy), InstanceOfModule (upval), GraphQLError (upval), p2 (copy), PrintFunction (upval), p3 (copy)
+			local InspectResult = InspectFunction(InputType)
 			
-			if instanceOfModule(p4, graphQLError) then
-				p2:reportError(p4)
+			if InstanceOfModule(Err, GraphQLError) then
+				p2:reportError(Err)
 				
 				return
+			else
+				p2:reportError(GraphQLError.new(("Expected value of type \"%s\", found %s; "):format(InspectResult, PrintFunction(p3)) .. Err.message, p3, nil, nil, nil, Err))
 			end
-			p2:reportError(graphQLError.new(("Expected value of type \"%s\", found %s; "):format(var2, print(p3)) .. p13.message, p3, nil, nil, nil, p4))
 		end)
 		
 		return
+	else
+		p2:reportError(GraphQLError.new(("Expected value of type \"%s\", found %s."):format(InspectFunction(InputType), PrintFunction(p3)), p3))
 	end
-	p2:reportError(graphQLError.new(("Expected value of type \"%s\", found %s."):format(inspect(inputType), print(p3)), p3))
 end
 
-return t
+return ValuesOfCorrectTypeRuleModule

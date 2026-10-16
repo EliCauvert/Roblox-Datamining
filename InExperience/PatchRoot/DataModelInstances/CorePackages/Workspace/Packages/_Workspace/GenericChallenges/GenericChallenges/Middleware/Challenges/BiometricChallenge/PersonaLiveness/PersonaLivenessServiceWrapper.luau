@@ -1,38 +1,40 @@
-﻿local promiseModule = require(script:FindFirstAncestor("GenericChallenges").Parent.Promise)
-local facialAgeEstimationServiceAvailableEngineFeature = game:GetEngineFeature("FacialAgeEstimationServiceAvailable")
-local var1 = if facialAgeEstimationServiceAvailableEngineFeature then game:GetService("FacialAgeEstimationService") else nil
+﻿local PromiseModule = require(script:FindFirstAncestor("GenericChallenges").Parent.Promise)
+local FacialAgeEstimationServiceAvailableEngineFeature = game:GetEngineFeature("FacialAgeEstimationServiceAvailable")
+local FacialAgeEstimationService = if FacialAgeEstimationServiceAvailableEngineFeature then game:GetService("FacialAgeEstimationService") else nil
 
 return {
-	isAvailable = function()
-		-- upvalues: facialAgeEstimationServiceAvailableEngineFeature (ref), var1 (ref)
-		return facialAgeEstimationServiceAvailableEngineFeature and var1:IsAvailable()
+	isAvailable = function() --[[ Line: 13 ]]
+		-- upvalues: FacialAgeEstimationServiceAvailableEngineFeature (copy), FacialAgeEstimationService (copy)
+		return FacialAgeEstimationServiceAvailableEngineFeature and FacialAgeEstimationService:IsAvailable()
 	end,
-	startFlow = function(p1, p2)
-		-- upvalues: promiseModule (ref), var1 (ref)
-		return promiseModule.new(function(p3, p4)
-			-- upvalues: var1 (copy), p1 (ref), p2 (ref)
-			local ok, status = pcall(function()
-				-- upvalues: var1 (copy), p1 (copy), p2 (copy)
-				return var1:InquiryAsync({ inquiryId = p1, sessionToken = p2 })
+	startFlow = function(InquiryId, SessionToken) --[[ Line: 16 ]]
+		-- upvalues: PromiseModule (copy), FacialAgeEstimationService (copy)
+		return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ()) --[[ Line: 17 ]]
+			-- upvalues: FacialAgeEstimationService (upval), InquiryId (copy), SessionToken (copy)
+			local Success, Result = pcall(function() --[[ Line: 18 ]]
+				-- upvalues: FacialAgeEstimationService (upval), InquiryId (upval), SessionToken (upval)
+				return FacialAgeEstimationService:InquiryAsync({ inquiryId = InquiryId, sessionToken = SessionToken })
 			end)
 			
-			if not ok then
-				p4(status)
+			if not Success then
+				Callback(Result)
 				
 				return
 			end
-			local resultType = status.resultType
+			local ResultType = Result.resultType
 			
-			if resultType == Enum.FacialAgeEstimationResultType.Complete then
-				p3(p1)
+			if ResultType == Enum.FacialAgeEstimationResultType.Complete then
+				Callback1(InquiryId)
 				
 				return
-			elseif resultType == Enum.FacialAgeEstimationResultType.Cancel then
-				p4({ resultType = resultType })
+			end
+			if ResultType == Enum.FacialAgeEstimationResultType.Cancel then
+				Callback({ resultType = ResultType })
 				
 				return
-			elseif resultType == Enum.FacialAgeEstimationResultType.Error then
-				p4({ resultType = resultType })
+			end
+			if ResultType == Enum.FacialAgeEstimationResultType.Error then
+				Callback({ resultType = ResultType })
 			end
 		end)
 	end

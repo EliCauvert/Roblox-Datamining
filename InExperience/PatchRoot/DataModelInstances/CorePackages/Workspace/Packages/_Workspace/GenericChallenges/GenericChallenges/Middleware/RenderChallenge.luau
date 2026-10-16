@@ -1,120 +1,120 @@
-﻿local genericChallenges = script:FindFirstAncestor("GenericChallenges")
-local _ = require(genericChallenges.Types.ChallengeParameters)
-local buildHybridCallbackModule = require(script.Parent.BuildHybridCallback)
-local getLocalizedTitleModule = require(genericChallenges.Utils.getLocalizedTitle)
-local challengeWebViewModule = require(script.Parent.ChallengeWebView)
-local challengeErrorModule = require(script.Parent.ChallengeError)
-local initializeHybridCallbackModule = require(script.Parent.InitializeHybridCallback)
-local constantsModule = require(genericChallenges.Utils.constants)
-local buildCredentialsProtocolHookModule = require(script.Parent.Hooks.BuildCredentialsProtocolHook)
-local errorKindModule = require(genericChallenges.Types.ErrorKind)
-local completionDataToRawHeadersModule = require(genericChallenges.Utils.completionDataToRawHeaders)
-local enableRejectPromiseOnWebviewClosed = game:DefineFastFlag("EnableRejectPromiseOnWebviewClosed", false)
-local _ = require(genericChallenges.Parent.LuauPolyfill)
+﻿local GenericChallenges = script:FindFirstAncestor("GenericChallenges")
+local _ = require(GenericChallenges.Types.ChallengeParameters)
+local BuildHybridCallbackModule = require(script.Parent.BuildHybridCallback)
+local GetLocalizedTitleModule = require(GenericChallenges.Utils.getLocalizedTitle)
+local ChallengeWebViewModule = require(script.Parent.ChallengeWebView)
+local ChallengeErrorModule = require(script.Parent.ChallengeError)
+local InitializeHybridCallbackModule = require(script.Parent.InitializeHybridCallback)
+local ConstantsModule = require(GenericChallenges.Utils.constants)
+local BuildCredentialsProtocolHookModule = require(script.Parent.Hooks.BuildCredentialsProtocolHook)
+local ErrorKindModule = require(GenericChallenges.Types.ErrorKind)
+local CompletionDataToRawHeadersModule = require(GenericChallenges.Utils.completionDataToRawHeaders)
+local EnableRejectPromiseOnWebviewClosed = game:DefineFastFlag("EnableRejectPromiseOnWebviewClosed", false)
+local _ = require(GenericChallenges.Parent.LuauPolyfill)
 
-return function(p1)
-	-- upvalues: challengeWebViewModule (ref), getLocalizedTitleModule (ref), enableRejectPromiseOnWebviewClosed (ref), constantsModule (ref), buildHybridCallbackModule (ref), buildCredentialsProtocolHookModule (ref), challengeErrorModule (ref), errorKindModule (ref), completionDataToRawHeadersModule (ref), initializeHybridCallbackModule (ref)
+return function(p1) --[[ Line: 41 ]]
+	-- upvalues: ChallengeWebViewModule (copy), GetLocalizedTitleModule (copy), EnableRejectPromiseOnWebviewClosed (copy), ConstantsModule (copy), BuildHybridCallbackModule (copy), BuildCredentialsProtocolHookModule (copy), ChallengeErrorModule (copy), ErrorKindModule (copy), CompletionDataToRawHeadersModule (copy), InitializeHybridCallbackModule (copy)
 	if p1.rawResponseHeaders == nil then
 		assert(p1.callbacks ~= nil, "Callbacks must be specified in manual challenge mode")
 		assert(p1.challengeParameters ~= nil, "Challenge parameters must be specified in manual challenge mode")
 		assert(p1.challengeType ~= nil, "Challenge type must be specified in manual challenge mode")
-		local var1 = challengeWebViewModule.new({
-			title = getLocalizedTitleModule(p1.title),
+		local NewChallengeWebView1 = ChallengeWebViewModule.new({
+			title = GetLocalizedTitleModule(p1.title),
 			challengeType = p1.challengeType,
 			challengeParameters = p1.challengeParameters,
 			modal = p1.renderWebViewInModal
 		})
-		local var2 = false
-		var1:setHybridCallback(buildHybridCallbackModule({
-			Hooks = { buildCredentialsProtocolHookModule() },
-			OnChallengeLoadFailed = function(p2)
-				-- upvalues: p1 (ref), var1 (ref)
+		local Flag = false
+		NewChallengeWebView1:setHybridCallback(BuildHybridCallbackModule({
+			Hooks = { BuildCredentialsProtocolHookModule() },
+			OnChallengeLoadFailed = function(p2) --[[ Line: 131 ]]
+				-- upvalues: p1 (copy), NewChallengeWebView1 (copy)
 				p1.callbacks.OnChallengeLoadFailed(p2)
-				var1:close()
+				NewChallengeWebView1:close()
 			end,
-			OnChallengeInvalidated = function(p2)
-				-- upvalues: p1 (ref), var1 (ref)
+			OnChallengeInvalidated = function(p2) --[[ Line: 135 ]]
+				-- upvalues: p1 (copy), NewChallengeWebView1 (copy)
 				p1.callbacks.OnChallengeInvalidated(p2)
-				var1:close()
+				NewChallengeWebView1:close()
 			end,
-			OnChallengeCompleted = function(p2)
-				-- upvalues: var2 (write), p1 (ref), var1 (ref)
-				var2 = true
+			OnChallengeCompleted = function(p2) --[[ Line: 139 ]]
+				-- upvalues: Flag (ref), p1 (copy), NewChallengeWebView1 (copy)
+				Flag = true
 				p1.callbacks.OnChallengeCompleted(p2)
-				var1:close()
+				NewChallengeWebView1:close()
 			end
 		}))
-		var1:setCloseCallback(function()
-			-- upvalues: var2 (write), p1 (ref)
-			if not var2 and p1.callbacks.OnChallengeAbandoned ~= nil then
+		NewChallengeWebView1:setCloseCallback(function() --[[ Line: 145 ]]
+			-- upvalues: Flag (ref), p1 (copy)
+			if not Flag and p1.callbacks.OnChallengeAbandoned ~= nil then
 				p1.callbacks.OnChallengeAbandoned()
 			end
 		end)
 		
 		if p1.onWebViewOpen ~= nil then
-			var1:setOpenCallback(p1.onWebViewOpen)
+			NewChallengeWebView1:setOpenCallback(p1.onWebViewOpen)
 		end
-		var1:open()
+		NewChallengeWebView1:open()
 		
 		return
 	else
 		assert(p1.retryRequestCallback ~= nil, "Retry request callback must be defined for generic handling")
 		assert(p1.resolve ~= nil, "Promise resolution method must be provided for generic handling")
 		assert(p1.reject ~= nil, "Promise rejection method must be provided for generic handling")
-		local var3 = challengeWebViewModule.new({
-			title = getLocalizedTitleModule(p1.title),
+		local NewChallengeWebView = ChallengeWebViewModule.new({
+			title = GetLocalizedTitleModule(p1.title),
 			rawResponseHeaders = p1.rawResponseHeaders,
 			modal = p1.renderWebViewInModal
 		})
 		
-		if enableRejectPromiseOnWebviewClosed then
-			local challengeTypeHeader = p1.rawResponseHeaders[constantsModule.challengeTypeHeader]
-			local challengeIdHeader = p1.rawResponseHeaders[constantsModule.challengeIdHeader]
-			local var4 = false
-			var3:setHybridCallback(buildHybridCallbackModule({
-				Hooks = { buildCredentialsProtocolHookModule() },
-				OnChallengeLoadFailed = function(_)
-					-- upvalues: p1 (ref), challengeErrorModule (copy), errorKindModule (copy), challengeTypeHeader (ref), var3 (ref)
+		if EnableRejectPromiseOnWebviewClosed then
+			local RawResponseHeader = p1.rawResponseHeaders[ConstantsModule.challengeTypeHeader]
+			local RawResponseHeader1 = p1.rawResponseHeaders[ConstantsModule.challengeIdHeader]
+			local Flag1 = false
+			NewChallengeWebView:setHybridCallback(BuildHybridCallbackModule({
+				Hooks = { BuildCredentialsProtocolHookModule() },
+				OnChallengeLoadFailed = function(_) --[[ Line: 61 ]]
+					-- upvalues: p1 (copy), ChallengeErrorModule (upval), ErrorKindModule (upval), RawResponseHeader (copy), NewChallengeWebView (copy)
 					if p1.challengeErrorCallback ~= nil then
 						p1.challengeErrorCallback()
 					end
-					p1.reject(challengeErrorModule.new(errorKindModule.LoadFailed, { challengeType = challengeTypeHeader }))
-					var3:close()
+					p1.reject(ChallengeErrorModule.new(ErrorKindModule.LoadFailed, { challengeType = RawResponseHeader }))
+					NewChallengeWebView:close()
 				end,
-				OnChallengeInvalidated = function(p2)
-					-- upvalues: p1 (ref), challengeErrorModule (copy), errorKindModule (copy), var3 (ref)
+				OnChallengeInvalidated = function(p2) --[[ Line: 70 ]]
+					-- upvalues: p1 (copy), ChallengeErrorModule (upval), ErrorKindModule (upval), NewChallengeWebView (copy)
 					if p1.challengeErrorCallback ~= nil and p2.data ~= nil then
 						p1.challengeErrorCallback(p2.data)
 					end
-					p1.reject(challengeErrorModule.new(errorKindModule.Invalidated, p2.data))
-					var3:close()
+					p1.reject(ChallengeErrorModule.new(ErrorKindModule.Invalidated, p2.data))
+					NewChallengeWebView:close()
 				end,
-				OnChallengeDisplayed = function(_)
-					-- upvalues: var3 (ref)
-					var3:setVisible(true)
+				OnChallengeDisplayed = function(_) --[[ Line: 77 ]]
+					-- upvalues: NewChallengeWebView (copy)
+					NewChallengeWebView:setVisible(true)
 				end,
-				OnChallengeCompleted = function(p2)
-					-- upvalues: p1 (ref), completionDataToRawHeadersModule (copy), challengeIdHeader (ref), var4 (write), var3 (ref)
+				OnChallengeCompleted = function(p2) --[[ Line: 80 ]]
+					-- upvalues: p1 (copy), CompletionDataToRawHeadersModule (upval), RawResponseHeader1 (copy), Flag1 (ref), NewChallengeWebView (copy)
 					if p2.data ~= nil and p2.data.challengeType ~= nil and p2.data.metadata ~= nil then
-						p1.resolve(p1.retryRequestCallback(completionDataToRawHeadersModule({
-							challengeId = challengeIdHeader,
+						p1.resolve(p1.retryRequestCallback(CompletionDataToRawHeadersModule({
+							challengeId = RawResponseHeader1,
 							challengeType = p2.data.challengeType,
 							metadata = p2.data.metadata
 						})))
 					end
-					var4 = true
-					var3:close()
+					Flag1 = true
+					NewChallengeWebView:close()
 				end
 			}))
-			var3:setCloseCallback(function()
-				-- upvalues: var4 (write), p1 (ref), challengeErrorModule (copy), errorKindModule (copy), challengeTypeHeader (ref)
-				if not var4 then
-					p1.reject(challengeErrorModule.new(errorKindModule.Invalidated, { challengeType = challengeTypeHeader }))
+			NewChallengeWebView:setCloseCallback(function() --[[ Line: 94 ]]
+				-- upvalues: Flag1 (ref), p1 (copy), ChallengeErrorModule (upval), ErrorKindModule (upval), RawResponseHeader (copy)
+				if not Flag1 then
+					p1.reject(ChallengeErrorModule.new(ErrorKindModule.Invalidated, { challengeType = RawResponseHeader }))
 				end
 			end)
 		else
-			var3:setHybridCallback(initializeHybridCallbackModule(p1.rawResponseHeaders[constantsModule.challengeIdHeader], p1.rawResponseHeaders[constantsModule.challengeTypeHeader], var3, p1.retryRequestCallback, p1.challengeErrorCallback, p1.resolve, p1.reject))
+			NewChallengeWebView:setHybridCallback(InitializeHybridCallbackModule(p1.rawResponseHeaders[ConstantsModule.challengeIdHeader], p1.rawResponseHeaders[ConstantsModule.challengeTypeHeader], NewChallengeWebView, p1.retryRequestCallback, p1.challengeErrorCallback, p1.resolve, p1.reject))
 		end
-		var3:open()
+		NewChallengeWebView:open()
 	end
 end

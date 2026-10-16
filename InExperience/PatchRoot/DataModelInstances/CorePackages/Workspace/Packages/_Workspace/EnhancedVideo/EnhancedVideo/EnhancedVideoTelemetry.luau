@@ -1,12 +1,12 @@
-﻿local telemetryService = game:GetService("TelemetryService")
-local list = {
+﻿local TelemetryService = game:GetService("TelemetryService")
+local StandardizedFields = {
 	"addPlaceId",
 	"addUniverseId",
 	"addSessionId",
 	"addOSInfo",
 	"addSessionInfo"
 }
-local t = {
+local config = {
 	eventName = "ServeEnhancedVideoError",
 	description = "        This is fired when there is an error calling /serve-enhanced-video.\n    ",
 	backends = { "Points" },
@@ -15,8 +15,11 @@ local t = {
 }
 
 return {
-	logServeEnhancedVideoError = function(p1)
-		-- upvalues: telemetryService (ref), t (ref), list (ref)
-		telemetryService:LogEvent(t, { standardizedFields = list, customFields = { error = p1 } })
+	logServeEnhancedVideoError = function(p1) --[[ Line: 19 ]]
+		-- upvalues: TelemetryService (copy), config (copy), StandardizedFields (copy)
+		TelemetryService:LogEvent(config, {
+			standardizedFields = StandardizedFields,
+			customFields = { error = p1 }
+		})
 	end
 }

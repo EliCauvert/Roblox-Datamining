@@ -1,86 +1,90 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local icon = foundationModule.Icon
-local list = foundationModule.List
-local text = foundationModule.Text
-local view = foundationModule.View
-local iconSize = foundationModule.Enums.IconSize
-local inputSize = foundationModule.Enums.InputSize
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local Icon = FoundationModule.Icon
+local List = FoundationModule.List
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local IconSize = FoundationModule.Enums.IconSize
+local InputSize = FoundationModule.Enums.InputSize
 
-local function GameConfigurationListItem(p1)
-	-- upvalues: reactModule (ref), icon (ref), iconSize (ref), list (ref)
-	local row = p1.row
-	local var1 = row.isDisabled == true
-	local onActivated = row.onActivated
-	local createElement = reactModule.createElement
-	createElement = createElement(list.Item, {
-		LayoutOrder = p1.LayoutOrder,
-		title = row.title,
-		description = row.description,
-		trailing = if row.trailingIcon then reactModule.createElement(icon, {
+local function GameConfigurationListItem(Frame: Frame) --[[ Line: 41 ]]
+	-- upvalues: ReactModule (copy), Icon (copy), IconSize (copy), List (copy)
+	local Row = Frame.row
+	local IsIsDisabled = Row.isDisabled == true
+	local OnActivatedFunction = Row.onActivated
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 45 ]]
+		-- upvalues: OnActivatedFunction (copy)
+		if OnActivatedFunction ~= nil then
+			OnActivatedFunction()
+		end
+	end, { OnActivatedFunction })
+	local Element = ReactModule.createElement(List.Item, {
+		LayoutOrder = Frame.LayoutOrder,
+		title = Row.title,
+		description = Row.description,
+		trailing = if Row.trailingIcon then ReactModule.createElement(Icon, {
 			tag = "auto-xy content-default",
-			name = row.trailingIcon,
-			size = iconSize.Large,
-			testId = `{p1.testId}-trailing-icon`
+			name = Row.trailingIcon,
+			size = IconSize.Large,
+			testId = `{Frame.testId}-trailing-icon`
 		}) else nil,
-		onActivated = if onActivated == nil or var1 then nil else reactModule.useCallback(function()
-			-- upvalues: onActivated (ref)
-			if onActivated ~= nil then
-				onActivated()
-			end
-		end, { onActivated }),
-		testId = p1.testId
+		onActivated = if OnActivatedFunction == nil or IsIsDisabled then nil else UseResult,
+		testId = Frame.testId
 	})
 	
-	return if var1 then reactModule.createElement("CanvasGroup", {
+	return if IsIsDisabled then ReactModule.createElement("CanvasGroup", {
 		BackgroundTransparency = 1,
 		GroupTransparency = 0.5,
-		LayoutOrder = p1.LayoutOrder,
+		LayoutOrder = Frame.LayoutOrder,
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y
-	}, { Item = createElement }) else createElement
+	}, { Item = Element }) else Element
 end
 
-return function(p1)
-	-- upvalues: reactModule (ref), GameConfigurationListItem (ref), view (ref), text (ref), list (ref), inputSize (ref)
-	local testId = p1.testId or "game-configuration-list"
+return function(p1) --[[ Line: 86 | Named "GameConfigurationList" ]]
+	-- upvalues: ReactModule (copy), GameConfigurationListItem (copy), View (copy), Text (copy), List (copy), InputSize (copy)
+	local TestId = p1.testId or "game-configuration-list"
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "col gap-medium size-full-0 auto-y",
 		LayoutOrder = p1.layoutOrder,
-		testId = testId
+		testId = TestId
 	}, {
-		Header = reactModule.createElement(view, {
+		Header = ReactModule.createElement(View, {
 			LayoutOrder = 1,
 			tag = "col gap-xsmall size-full-0 auto-y"
 		}, {
-			Title = reactModule.createElement(text, {
+			Title = ReactModule.createElement(Text, {
 				LayoutOrder = 1,
 				tag = "size-full-0 auto-y text-title-large text-align-x-left content-default",
 				Text = p1.title,
-				testId = `{testId}-title`
+				testId = `{TestId}-title`
 			}),
-			Body = if p1.body then reactModule.createElement(text, {
+			Body = if p1.body then ReactModule.createElement(Text, {
 				LayoutOrder = 2,
 				tag = "size-full-0 auto-y text-body-small text-wrap text-align-x-left content-default",
 				Text = p1.body,
-				testId = `{testId}-body`
+				testId = `{TestId}-body`
 			}) else nil
 		}),
-		Rows = reactModule.createElement(list.Root, {
+		Rows = ReactModule.createElement(List.Root, {
 			LayoutOrder = 2,
 			isContained = true,
 			hasDivider = { hasDivider = true, isInset = false },
-			size = inputSize.Medium
-		}, reactModule.useMemo(function()
-			-- upvalues: p1 (ref), reactModule (copy), GameConfigurationListItem (copy), testId (ref)
-			local t = {}
+			size = InputSize.Medium
+		}, (ReactModule.useMemo(function() --[[ Line: 88 ]]
+			-- upvalues: p1 (copy), ReactModule (upval), GameConfigurationListItem (upval), TestId (copy)
+			local Elements = {}
 			
-			for i, v in p1.rows do
-				t[v.id] = reactModule.createElement(GameConfigurationListItem, { LayoutOrder = i, row = v, testId = `{testId}-row-{v.id}` })
+			for LayoutOrder, row in p1.rows do
+				Elements[row.id] = ReactModule.createElement(GameConfigurationListItem, {
+					LayoutOrder = LayoutOrder,
+					row = row,
+					testId = `{TestId}-row-{row.id}`
+				})
 			end
-			return t
-		end, { p1.rows, testId }))
+			return Elements
+		end, { p1.rows, TestId })))
 	})
 end

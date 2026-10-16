@@ -1,111 +1,111 @@
-﻿local parent = script:FindFirstAncestor("SocialCards").Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local squadExternalContractProviderModule = require(parent.SquadsCore.SquadExternalContractProvider)
-local sharedFlagsModule = require(parent.SharedFlags)
-local useCurrentSquadId = require(parent.SquadsCore.Hooks).useCurrentSquadId
-local useCurrentSquadParentChannelId = require(parent.SquadsCore.Hooks).useCurrentSquadParentChannelId
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useNavigation = require(parent.Navigation).useNavigation
-local leaveSquad = require(parent.SquadsCore.Thunks).leaveSquad
-local squadButtonClickIntentionEnum = require(parent.Squads.Enums).SquadButtonClickIntentionEnum
-local squadButtonSourceEnum = require(parent.Squads.Enums).SquadButtonSourceEnum
-local eventNamesModule = require(parent.SquadsCore.EventNames)
-local squadExternalContractContext = squadExternalContractProviderModule.SquadExternalContractContext
-local squadPromptType = require(parent.SquadsCore.Enums).SquadPromptType
-local useTokens = foundationModule.Hooks.useTokens
-local fFlagPartyDevAPIToRespectThirdPartySettingsEnabled = sharedFlagsModule.FFlagPartyDevAPIToRespectThirdPartySettingsEnabled
-local useCanAccessPartyModule = require(parent.Squads.useCanAccessParty)
+﻿local Parent = script:FindFirstAncestor("SocialCards").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local UseCurrentSquadIdFunction = require(Parent.SquadsCore.Hooks).useCurrentSquadId
+local UseCurrentSquadParentChannelIdFunction = require(Parent.SquadsCore.Hooks).useCurrentSquadParentChannelId
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local LeaveSquadFunction = require(Parent.SquadsCore.Thunks).leaveSquad
+local SquadButtonClickIntentionEnum = require(Parent.Squads.Enums).SquadButtonClickIntentionEnum
+local SquadButtonSourceEnum = require(Parent.Squads.Enums).SquadButtonSourceEnum
+local EventNamesModule = require(Parent.SquadsCore.EventNames)
+local SquadExternalContractContext = require(Parent.SquadsCore.SquadExternalContractProvider).SquadExternalContractContext
+local SquadPromptType = require(Parent.SquadsCore.Enums).SquadPromptType
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local FFlagPartyDevAPIToRespectThirdPartySettingsEnabled = require(Parent.SharedFlags).FFlagPartyDevAPIToRespectThirdPartySettingsEnabled
+local UseCanAccessPartyModule = require(Parent.Squads.useCanAccessParty)
 
-return function(p1)
-	-- upvalues: useDispatch (ref), useLocalization (ref), useNavigation (ref), useTokens (ref), useCurrentSquadId (ref), useCurrentSquadParentChannelId (ref), reactModule (ref), squadExternalContractContext (ref), useCanAccessPartyModule (ref), fFlagPartyDevAPIToRespectThirdPartySettingsEnabled (ref), squadButtonClickIntentionEnum (ref), eventNamesModule (ref), squadButtonSourceEnum (ref), foundationModule (ref), leaveSquad (ref), squadPromptType (ref)
-	local var1 = useDispatch()
-	local var2 = useLocalization({
+return function(p1) --[[ Line: 33 | Named "SquadEndedCard" ]]
+	-- upvalues: UseDispatchFunction (copy), UseLocalizationFunction (copy), UseNavigationFunction (copy), UseTokensFunction (copy), UseCurrentSquadIdFunction (copy), UseCurrentSquadParentChannelIdFunction (copy), ReactModule (copy), SquadExternalContractContext (copy), UseCanAccessPartyModule (copy), FFlagPartyDevAPIToRespectThirdPartySettingsEnabled (copy), SquadButtonClickIntentionEnum (copy), EventNamesModule (copy), SquadButtonSourceEnum (copy), FoundationModule (copy), LeaveSquadFunction (copy), SquadPromptType (copy)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseLocalizationResult = UseLocalizationFunction({
 		partyEnded = "Feature.Squads.Label.PartyEndedText",
 		tapToStartNewParty = "Feature.Squads.Action.TapToStartNewParty"
 	})
-	local var3 = useNavigation()
-	local var4 = useTokens()
-	local var5 = useCurrentSquadId()
-	local var6 = useCurrentSquadParentChannelId()
-	local var7 = reactModule.useContext(squadExternalContractContext)
-	local var8 = var7.useParentChannelHasGroupUp(p1.conversationId)
-	local conversationId = useCanAccessPartyModule() and var7.useParentChannelHasSquadAccess(p1.conversationId)
-	local var9 = if fFlagPartyDevAPIToRespectThirdPartySettingsEnabled then var7.useIsChatEnabled() else true
-	local var10 = reactModule.useMemo(function()
-		-- upvalues: var6 (ref), p1 (ref)
-		return var6 == p1.conversationId
-	end, { var6, p1.conversationId })
-	local var11 = reactModule.useMemo(function()
-		-- upvalues: var10 (ref), squadButtonClickIntentionEnum (copy), var8 (ref)
-		return if var10 then squadButtonClickIntentionEnum.View elseif var8 then squadButtonClickIntentionEnum.Join else squadButtonClickIntentionEnum.Create
-	end, { var10, var8 })
-	local var12 = reactModule.useCallback(function()
-		-- upvalues: var7 (ref), eventNamesModule (copy), p1 (ref), squadButtonSourceEnum (copy), var5 (ref), var11 (ref)
-		var7.fireSquadAnalytics(eventNamesModule.EnterSquadButtonPressed, {
+	local UseNavigationResult = UseNavigationFunction()
+	local UseTokensResult = UseTokensFunction()
+	local UseCurrentSquadIdResult = UseCurrentSquadIdFunction()
+	local UseCurrentSquadParentChannelIdResult = UseCurrentSquadParentChannelIdFunction()
+	local UseContextResult = ReactModule.useContext(SquadExternalContractContext)
+	local UseParentChannelHasGroupUpResult = UseContextResult.useParentChannelHasGroupUp(p1.conversationId)
+	local UseParentChannelHasSquadAccessResult = UseContextResult.useParentChannelHasSquadAccess(p1.conversationId)
+	local UseParentChannelHasSquadAccessResult1 = UseCanAccessPartyModule() and UseParentChannelHasSquadAccessResult
+	local NoFFlagPartyDevAPIToRespectThirdPartySettingsEnabled = not FFlagPartyDevAPIToRespectThirdPartySettingsEnabled or UseContextResult.useIsChatEnabled()
+	local UseMemoResult = ReactModule.useMemo(function(): boolean --[[ Line: 56 ]]
+		-- upvalues: UseCurrentSquadParentChannelIdResult (copy), p1 (copy)
+		return UseCurrentSquadParentChannelIdResult == p1.conversationId
+	end, { UseCurrentSquadParentChannelIdResult, p1.conversationId })
+	local UseMemoResult1 = ReactModule.useMemo(function() --[[ Line: 60 ]]
+		-- upvalues: UseMemoResult (copy), SquadButtonClickIntentionEnum (upval), UseParentChannelHasGroupUpResult (copy)
+		return if UseMemoResult then SquadButtonClickIntentionEnum.View elseif UseParentChannelHasGroupUpResult then SquadButtonClickIntentionEnum.Join else SquadButtonClickIntentionEnum.Create
+	end, { UseMemoResult, UseParentChannelHasGroupUpResult })
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 72 ]]
+		-- upvalues: UseContextResult (copy), EventNamesModule (upval), p1 (copy), SquadButtonSourceEnum (upval), UseCurrentSquadIdResult (copy), UseMemoResult1 (copy)
+		UseContextResult.fireSquadAnalytics(EventNamesModule.EnterSquadButtonPressed, {
 			conversationId = p1.conversationId,
-			squadButtonSource = squadButtonSourceEnum.PartyEndedCard,
-			squadId = var5,
+			squadButtonSource = SquadButtonSourceEnum.PartyEndedCard,
+			squadId = UseCurrentSquadIdResult,
 			squadLocation = p1.squadLocation,
-			userIntention = var11
+			userIntention = UseMemoResult1
 		})
 	end, {
-		var11,
-		var5,
+		UseMemoResult1,
+		UseCurrentSquadIdResult,
 		p1.conversationId,
 		p1.squadLocation,
-		var7.fireSquadAnalytics
+		UseContextResult.fireSquadAnalytics
 	})
 	
-	return reactModule.createElement(foundationModule.View, {
+	return ReactModule.createElement(FoundationModule.View, {
 		AutomaticSize = Enum.AutomaticSize.Y,
 		Size = UDim2.fromScale(1, 0),
-		backgroundStyle = var4.Color.Shift.Shift_200,
-		cornerRadius = UDim.new(0, var4.Radius.Large),
+		backgroundStyle = UseTokensResult.Color.Shift.Shift_200,
+		cornerRadius = UDim.new(0, UseTokensResult.Radius.Large),
 		layout = {
 			FillDirection = Enum.FillDirection.Vertical,
-			Padding = UDim.new(0, var4.Gap.XSmall),
+			Padding = UDim.new(0, UseTokensResult.Gap.XSmall),
 			SortOrder = Enum.SortOrder.LayoutOrder
 		},
 		selection = { Selectable = true },
-		onActivated = if conversationId then function()
-			-- upvalues: var12 (ref), var5 (ref), p1 (ref), var6 (ref), var1 (ref), leaveSquad (copy), squadPromptType (copy), var7 (ref), var3 (ref), fFlagPartyDevAPIToRespectThirdPartySettingsEnabled (copy), var9 (ref)
-			var12()
+		onActivated = if UseParentChannelHasSquadAccessResult1 then function() --[[ Line: 104 ]]
+			-- upvalues: UseResult (copy), UseCurrentSquadIdResult (copy), p1 (copy), UseCurrentSquadParentChannelIdResult (copy), UseDispatchResult (copy), LeaveSquadFunction (upval), SquadPromptType (upval), UseContextResult (copy), UseNavigationResult (copy), FFlagPartyDevAPIToRespectThirdPartySettingsEnabled (upval), NoFFlagPartyDevAPIToRespectThirdPartySettingsEnabled (copy)
+			UseResult()
 			
-			if var5 and p1.conversationId ~= var6 then
-				var1(leaveSquad(squadPromptType.JoinAnotherSquad, var7.setSquadPrompt, function()
-					-- upvalues: var3 (copy), p1 (copy)
-					var3.navigate("SquadLobby", { conversationId = p1.conversationId })
-				end, var7.squadLocation, if fFlagPartyDevAPIToRespectThirdPartySettingsEnabled then var9 else true))
+			if UseCurrentSquadIdResult and p1.conversationId ~= UseCurrentSquadParentChannelIdResult then
+				UseDispatchResult(LeaveSquadFunction(SquadPromptType.JoinAnotherSquad, UseContextResult.setSquadPrompt, function() --[[ Line: 112 ]]
+					-- upvalues: UseNavigationResult (upval), p1 (upval)
+					UseNavigationResult.navigate("SquadLobby", { conversationId = p1.conversationId })
+				end, UseContextResult.squadLocation, not FFlagPartyDevAPIToRespectThirdPartySettingsEnabled or NoFFlagPartyDevAPIToRespectThirdPartySettingsEnabled))
 				
 				return
+			else
+				UseNavigationResult.navigate("SquadLobby", { conversationId = p1.conversationId })
 			end
-			var3.navigate("SquadLobby", { conversationId = p1.conversationId })
 		end else nil,
 		padding = {
-			bottom = UDim.new(0, var4.Padding.Medium),
-			left = UDim.new(0, var4.Padding.Large),
-			right = UDim.new(0, var4.Padding.Large),
-			top = UDim.new(0, var4.Padding.Medium)
+			bottom = UDim.new(0, UseTokensResult.Padding.Medium),
+			left = UDim.new(0, UseTokensResult.Padding.Large),
+			right = UDim.new(0, UseTokensResult.Padding.Large),
+			top = UDim.new(0, UseTokensResult.Padding.Medium)
 		}
 	}, {
-		Title = reactModule.createElement(foundationModule.Text, {
+		Title = ReactModule.createElement(FoundationModule.Text, {
 			LayoutOrder = 1,
 			AutomaticSize = Enum.AutomaticSize.XY,
-			backgroundStyle = var4.Color.None,
-			fontStyle = var4.Typography.TitleMedium,
-			Text = var2.partyEnded,
-			textStyle = var4.Color.Content.Emphasis,
+			backgroundStyle = UseTokensResult.Color.None,
+			fontStyle = UseTokensResult.Typography.TitleMedium,
+			Text = UseLocalizationResult.partyEnded,
+			textStyle = UseTokensResult.Color.Content.Emphasis,
 			TextTruncate = Enum.TextTruncate.AtEnd
 		}),
-		Status = if conversationId then reactModule.createElement(foundationModule.Text, {
+		Status = if UseParentChannelHasSquadAccessResult1 then ReactModule.createElement(FoundationModule.Text, {
 			LayoutOrder = 2,
 			AutomaticSize = Enum.AutomaticSize.XY,
-			backgroundStyle = var4.Color.None,
-			fontStyle = var4.Typography.LabelSmall,
-			Text = var2.tapToStartNewParty,
-			textStyle = var4.Color.Content.Muted,
+			backgroundStyle = UseTokensResult.Color.None,
+			fontStyle = UseTokensResult.Typography.LabelSmall,
+			Text = UseLocalizationResult.tapToStartNewParty,
+			textStyle = UseTokensResult.Color.Content.Muted,
 			TextTruncate = Enum.TextTruncate.AtEnd
 		}) else nil
 	})

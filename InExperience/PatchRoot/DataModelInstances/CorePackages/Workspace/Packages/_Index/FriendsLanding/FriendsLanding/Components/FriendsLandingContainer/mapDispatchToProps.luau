@@ -1,25 +1,25 @@
-﻿local friendsLanding = script:FindFirstAncestor("FriendsLanding")
-local friendsNetworking = require(friendsLanding.dependencies).FriendsNetworking
-local fFlagMigrateFriendshipStatusesRemainingActions = require(friendsLanding.Parent.SharedFlags).FFlagMigrateFriendshipStatusesRemainingActions
+﻿local FriendsLanding = script:FindFirstAncestor("FriendsLanding")
+local FriendsNetworking = require(FriendsLanding.dependencies).FriendsNetworking
+local FFlagMigrateFriendshipStatusesRemainingActions = require(FriendsLanding.Parent.SharedFlags).FFlagMigrateFriendshipStatusesRemainingActions
 
-return function(p1)
-	-- upvalues: friendsNetworking (ref), fFlagMigrateFriendshipStatusesRemainingActions (ref)
+return function(Callback) --[[ Line: 11 ]]
+	-- upvalues: FriendsNetworking (copy), FFlagMigrateFriendshipStatusesRemainingActions (copy)
 	return {
-		fetchFriends = function(p2)
-			-- upvalues: p1 (ref), friendsNetworking (copy)
-			return p1(friendsNetworking.GetFriendsFromUserId.API(p2))
+		fetchFriends = function(p1) --[[ Line: 13 ]]
+			-- upvalues: Callback (copy), FriendsNetworking (upval)
+			return Callback(FriendsNetworking.GetFriendsFromUserId.API(p1))
 		end,
-		getFriendRequestsCount = function()
-			-- upvalues: p1 (ref), friendsNetworking (copy)
-			return p1(friendsNetworking.GetFriendRequestsCount.API())
+		getFriendRequestsCount = function() --[[ Line: 16 ]]
+			-- upvalues: Callback (copy), FriendsNetworking (upval)
+			return Callback(FriendsNetworking.GetFriendRequestsCount.API())
 		end,
-		getInactiveFriends = function(p2)
-			-- upvalues: p1 (ref), friendsNetworking (copy)
-			return p1(friendsNetworking.GetInactiveFriends.API(p2))
+		getInactiveFriends = function(p1) --[[ Line: 19 ]]
+			-- upvalues: Callback (copy), FriendsNetworking (upval)
+			return Callback(FriendsNetworking.GetInactiveFriends.API(p1))
 		end,
-		unfriendTargetUser = if fFlagMigrateFriendshipStatusesRemainingActions then nil else function(p2)
-			-- upvalues: p1 (ref), friendsNetworking (copy)
-			return p1(friendsNetworking.UnfriendTargetUserId.API(p2))
+		unfriendTargetUser = if FFlagMigrateFriendshipStatusesRemainingActions then nil else function(p1) --[[ Line: 24 ]]
+			-- upvalues: Callback (copy), FriendsNetworking (upval)
+			return Callback(FriendsNetworking.UnfriendTargetUserId.API(p1))
 		end
 	}
 end

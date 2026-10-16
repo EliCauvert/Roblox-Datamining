@@ -1,116 +1,107 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local parent = script.Parent.Parent
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local cryoModule = require(corePackagesService.Packages.Cryo)
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local appFonts = require(corePackagesService.Workspace.Packages.Style).AppFonts
-local images = UIBloxModule.App.ImageSet.Images
-local iconSize = UIBloxModule.App.Constant.IconSize
-local notificationModule = require(parent.Components.Notification)
-local favoritesModule = require(parent.Components.Favorites)
-local utilityFunctionsModule = require(parent.UtilityFunctions)
-local colorsModule = require(parent.Colors)
-local constantsModule = require(parent.Constants)
-local getSelectionImageObjectRegularModule = require(parent.getSelectionImageObjectRegular)
-local inspectAndBuyContextModule = require(parent.Components.InspectAndBuyContext)
-local premium = images["icons/status/premium"]
-local detailsText = roactModule.PureComponent:extend("DetailsText")
+﻿local CorePackages = game:GetService("CorePackages")
+local Parent = script.Parent.Parent
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local CryoModule = require(CorePackages.Packages.Cryo)
+local UIBloxModule = require(CorePackages.Packages.UIBlox)
+local AppFonts = require(CorePackages.Workspace.Packages.Style).AppFonts
+local IconSize = UIBloxModule.App.Constant.IconSize
+local NotificationModule = require(Parent.Components.Notification)
+local FavoritesModule = require(Parent.Components.Favorites)
+local UtilityFunctionsModule = require(Parent.UtilityFunctions)
+local ColorsModule = require(Parent.Colors)
+local ConstantsModule = require(Parent.Constants)
+local GetSelectionImageObjectRegularModule = require(Parent.getSelectionImageObjectRegular)
+local InspectAndBuyContextModule = require(Parent.Components.InspectAndBuyContext)
+local IconsStatusPremium = UIBloxModule.App.ImageSet.Images["icons/status/premium"]
+local DetailsText = RoactModule.PureComponent:extend("DetailsText")
 
-function detailsText.init(p1)
-	-- upvalues: getSelectionImageObjectRegularModule (ref)
+function DetailsText.init(p1) --[[ Line: 29 ]]
+	-- upvalues: GetSelectionImageObjectRegularModule (copy)
 	p1.name = ""
 	p1.creator = ""
-	p1.selectedImage = getSelectionImageObjectRegularModule()
+	p1.selectedImage = GetSelectionImageObjectRegularModule()
 end
 
-function detailsText.setText(value)
-	-- upvalues: utilityFunctionsModule (ref)
-	local assetInfo = value.props.assetInfo or {}
-	local bundleInfo = value.props.bundleInfo or {}
+function DetailsText.setText(p1) --[[ Line: 39 ]]
+	-- upvalues: UtilityFunctionsModule (copy)
+	local AssetInfo = p1.props.assetInfo or {}
+	local BundleInfo = p1.props.bundleInfo or {}
 	
-	if assetInfo.parentBundleId ~= nil then
-		local bundleId = utilityFunctionsModule.getBundleId(assetInfo)
+	if AssetInfo.parentBundleId ~= nil then
+		local BundleId = UtilityFunctionsModule.getBundleId(AssetInfo)
 		
-		if bundleInfo[bundleId] then
-			value.name = bundleInfo[bundleId].name or ""
-			value.creator = bundleInfo[bundleId].creatorName or ""
+		if BundleInfo[BundleId] then
+			p1.name = BundleInfo[BundleId].name or ""
+			p1.creator = BundleInfo[BundleId].creatorName or ""
 			
 			return
 		end
-	elseif assetInfo then
-		value.name = assetInfo.name or ""
-		value.creator = assetInfo.creatorName or ""
+	elseif AssetInfo then
+		p1.name = AssetInfo.name or ""
+		p1.creator = AssetInfo.creatorName or ""
 	end
 end
 
-function detailsText.render(p1)
-	-- upvalues: iconSize (ref), constantsModule (ref), utilityFunctionsModule (ref), roactModule (ref), inspectAndBuyContextModule (ref), notificationModule (ref), cryoModule (ref), premium (ref), appFonts (ref), colorsModule (ref), favoritesModule (ref)
+function DetailsText.render(p1) --[[ Line: 58 ]]
+	-- upvalues: IconSize (copy), ConstantsModule (copy), UtilityFunctionsModule (copy), RoactModule (copy), InspectAndBuyContextModule (copy), NotificationModule (copy), CryoModule (copy), IconsStatusPremium (copy), AppFonts (copy), ColorsModule (copy), FavoritesModule (copy)
 	p1:setText()
-	local view = p1.props.view
-	local showFavoritesCount = p1.props.showFavoritesCount
-	local assetInfo = p1.props.assetInfo or {}
-	local var1 = assetInfo.parentBundleId ~= nil
-	local var2 = var1 and #p1.props.assetBundles[assetInfo.assetId] > 1
-	local var3 = assetInfo.premiumPricing ~= nil
-	local var4 = if var3 then iconSize.Regular + 5 else 0
-	local var5 = constantsModule.LayeredAssetTypes[assetInfo.assetTypeId] ~= nil and (p1.props.localPlayerModel and p1.props.localPlayerModel.Humanoid.RigType == Enum.HumanoidRigType.R6)
-	local var6 = utilityFunctionsModule.isLimited1Point0(assetInfo)
-	local layeredClothingOnR6Key = nil
+	local View = p1.props.view
+	local ShowFavoritesCount = p1.props.showFavoritesCount
+	local AssetInfo = p1.props.assetInfo or {}
+	local HasParentBundleId = AssetInfo.parentBundleId ~= nil
+	local AssetBundle = p1.props.assetBundles[AssetInfo.assetId]
+	local v1: boolean = HasParentBundleId and #AssetBundle > 1
+	local HasPremiumPricing = AssetInfo.premiumPricing ~= nil
+	local NewRegular: number = HasPremiumPricing and IconSize.Regular + 5 or 0
+	local IsRigTypeMatch: boolean = ConstantsModule.LayeredAssetTypes[AssetInfo.assetTypeId] ~= nil and (p1.props.localPlayerModel and p1.props.localPlayerModel.Humanoid.RigType == Enum.HumanoidRigType.R6)
+	local IsLimited1Point0 = UtilityFunctionsModule.isLimited1Point0(AssetInfo)
+	local MultipleBundleNoticeKey = if v1 then ConstantsModule.NotificationKeys.MultipleBundleNoticeKey elseif HasParentBundleId then ConstantsModule.NotificationKeys.SingleBundleNoticeKey elseif IsLimited1Point0 then ConstantsModule.NotificationKeys.LimitedItemNoticeKey elseif IsRigTypeMatch then ConstantsModule.NotificationKeys.LayeredClothingOnR6Key else nil
 	
-	if var2 then
-		layeredClothingOnR6Key = constantsModule.NotificationKeys.MultipleBundleNoticeKey
-	elseif var1 then
-		layeredClothingOnR6Key = constantsModule.NotificationKeys.SingleBundleNoticeKey
-	elseif var6 then
-		layeredClothingOnR6Key = constantsModule.NotificationKeys.LimitedItemNoticeKey
-	elseif var5 then
-		layeredClothingOnR6Key = constantsModule.NotificationKeys.LayeredClothingOnR6Key
-	end
-	return roactModule.createElement(inspectAndBuyContextModule.Consumer, {
-		render = function(p2)
-			-- upvalues: view (ref), roactModule (copy), layeredClothingOnR6Key (write), notificationModule (copy), var3 (ref), cryoModule (copy), premium (copy), iconSize (copy), var4 (ref), p1 (ref), appFonts (copy), colorsModule (copy), showFavoritesCount (ref), favoritesModule (copy)
-			return roactModule.createElement("Frame", {
+	return RoactModule.createElement(InspectAndBuyContextModule.Consumer, {
+		render = function(p2) --[[ Line: 87 ]]
+			-- upvalues: View (copy), RoactModule (upval), MultipleBundleNoticeKey (ref), NotificationModule (upval), HasPremiumPricing (copy), CryoModule (upval), IconsStatusPremium (upval), IconSize (upval), NewRegular (copy), p1 (copy), AppFonts (upval), ColorsModule (upval), ShowFavoritesCount (copy), FavoritesModule (upval)
+			return RoactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 1,
-				Position = p2[view].DetailsFramePosition,
+				Position = p2[View].DetailsFramePosition,
 				Size = UDim2.new(1, 0, 0, 131)
 			}, {
-				Layout = roactModule.createElement("UIListLayout", {
+				Layout = RoactModule.createElement("UIListLayout", {
 					SortOrder = Enum.SortOrder.LayoutOrder,
 					HorizontalAlignment = Enum.HorizontalAlignment.Left,
 					VerticalAlignment = Enum.VerticalAlignment.Top,
 					FillDirection = Enum.FillDirection.Vertical
 				}),
-				Notification = layeredClothingOnR6Key and roactModule.createElement(notificationModule, { noticeKey = layeredClothingOnR6Key }),
-				AssetName = roactModule.createElement("Frame", {
+				Notification = MultipleBundleNoticeKey and RoactModule.createElement(NotificationModule, { noticeKey = MultipleBundleNoticeKey }),
+				AssetName = RoactModule.createElement("Frame", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 1,
 					Size = UDim2.new(1, -10, 0, 50)
 				}, {
-					PremiumIcon = var3 and roactModule.createElement("ImageLabel", cryoModule.Dictionary.join(premium, {
+					PremiumIcon = HasPremiumPricing and RoactModule.createElement("ImageLabel", CryoModule.Dictionary.join(IconsStatusPremium, {
 						BackgroundTransparency = 1,
 						AnchorPoint = Vector2.new(0, 0.5),
 						Position = UDim2.new(0, 0, 0.5, 0),
-						Size = UDim2.new(0, iconSize.Regular, 0, iconSize.Regular),
+						Size = UDim2.new(0, IconSize.Regular, 0, IconSize.Regular),
 						ImageColor3 = Color3.new(1, 1, 1)
 					})) or nil,
-					PlayerName = roactModule.createElement("TextLabel", {
+					PlayerName = RoactModule.createElement("TextLabel", {
 						BackgroundTransparency = 1,
 						LayoutOrder = 1,
 						TextScaled = true,
 						TextSize = 20,
-						Position = UDim2.new(0, var4, 0, 0),
-						Size = UDim2.new(1, var4, 0, 50),
+						Position = UDim2.new(0, NewRegular, 0, 0),
+						Size = UDim2.new(1, NewRegular, 0, 50),
 						Text = p1.name or "",
 						TextXAlignment = Enum.TextXAlignment.Left,
 						TextYAlignment = Enum.TextYAlignment.Center,
-						Font = appFonts.default:getBold(),
-						TextColor3 = colorsModule.White
+						Font = AppFonts.default:getBold(),
+						TextColor3 = ColorsModule.White
 					}, {
-						UITextSizeConstraint = roactModule.createElement("UITextSizeConstraint", { MaxTextSize = 32 })
+						UITextSizeConstraint = RoactModule.createElement("UITextSizeConstraint", { MaxTextSize = 32 })
 					})
-				}) or roactModule.createElement("TextLabel", {
+				}) or RoactModule.createElement("TextLabel", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 1,
 					TextScaled = true,
@@ -119,18 +110,18 @@ function detailsText.render(p1)
 					Text = p1.name or "",
 					TextXAlignment = Enum.TextXAlignment.Left,
 					TextYAlignment = Enum.TextYAlignment.Center,
-					Font = appFonts.default:getBold(),
-					TextColor3 = colorsModule.White
+					Font = AppFonts.default:getBold(),
+					TextColor3 = ColorsModule.White
 				}, {
-					UITextSizeConstraint = roactModule.createElement("UITextSizeConstraint", { MaxTextSize = 32 })
+					UITextSizeConstraint = RoactModule.createElement("UITextSizeConstraint", { MaxTextSize = 32 })
 				}),
-				FavoriteContainer = showFavoritesCount and roactModule.createElement(favoritesModule)
+				FavoriteContainer = ShowFavoritesCount and RoactModule.createElement(FavoritesModule)
 			})
 		end
 	})
 end
 
-return roactRoduxModule.connect(function(p1, _)
+return RoactRoduxModule.connect(function(p1, _) --[[ Line: 158 ]]
 	return {
 		view = p1.view,
 		locale = p1.locale,
@@ -139,4 +130,4 @@ return roactRoduxModule.connect(function(p1, _)
 		assetBundles = p1.assetBundles,
 		showFavoritesCount = not p1.isSubjectToChinaPolicies
 	}
-end)(detailsText)
+end)(DetailsText)

@@ -1,121 +1,122 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
-local _ = require(parent.AvatarExperienceCommon)
-local _ = require(parent.DataHydration)
-local avatarExperienceFlagsModule = require(parent.AvatarExperienceFlags)
-local fFlagAXM41AllCategoriesToTaxonomy = avatarExperienceFlagsModule.FFlagAXM41AllCategoriesToTaxonomy
-local fFlagAXSduiCatalogSearchShowWidgets = avatarExperienceFlagsModule.FFlagAXSduiCatalogSearchShowWidgets
-local httpService = game:GetService("HttpService")
-local t = {
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
+local _ = require(Parent.AvatarExperienceCommon)
+local _ = require(Parent.DataHydration)
+local AvatarExperienceFlagsModule = require(Parent.AvatarExperienceFlags)
+local FFlagAXM41AllCategoriesToTaxonomy = AvatarExperienceFlagsModule.FFlagAXM41AllCategoriesToTaxonomy
+local FFlagAXSduiCatalogSearchShowWidgets = AvatarExperienceFlagsModule.FFlagAXSduiCatalogSearchShowWidgets
+local HttpService = game:GetService("HttpService")
+local config = {
 	AllAnimations = "AllAnimation",
 	AnimationBundles = "Animation",
 	Emotes = "Emotes"
 }
-local t_1 = {
+local config1 = {
 	Recommended = {
 		Name = "All",
 		CategoryFilter = "Recommended",
-		ShowWidgets = if fFlagAXSduiCatalogSearchShowWidgets then true else nil,
-		ShowSponsored = if fFlagAXSduiCatalogSearchShowWidgets then true else nil,
-		ShowTopics = if fFlagAXSduiCatalogSearchShowWidgets then true else nil
+		ShowWidgets = if FFlagAXSduiCatalogSearchShowWidgets then true else nil,
+		ShowSponsored = if FFlagAXSduiCatalogSearchShowWidgets then true else nil,
+		ShowTopics = if FFlagAXSduiCatalogSearchShowWidgets then true else nil
 	},
 	HighDefinition = { CategoryFilter = "HighDefinition" }
 }
 
-local function _(p1)
-	return `catalog-tab:{string.lower(p1:gsub(" ", "-"):gsub("%.", "-"))}`
+local function _(Text: string): string --[[ Line: 68 | Named "widgetContextFromName" ]]
+	return `catalog-tab:{string.lower((Text:gsub(" ", "-"):gsub("%.", "-")))}`
 end
 
-return function()
-	-- upvalues: httpService (ref), t_1 (ref), fFlagAXSduiCatalogSearchShowWidgets (ref), fFlagAXM41AllCategoriesToTaxonomy (ref), t (ref)
-	local t_2 = {}
+return function() --[[ Line: 73 | Named "createMapMarketplaceCategoryToCatalogCategory" ]]
+	-- upvalues: HttpService (copy), config1 (copy), FFlagAXSduiCatalogSearchShowWidgets (copy), FFlagAXM41AllCategoriesToTaxonomy (copy), config (copy)
+	local Guids = {}
 	
-	local function _(p1)
-		-- upvalues: t_2 (ref), httpService (copy)
-		local var1 = t_2[p1]
+	local function _(Key) --[[ Line: 82 | Named "getOrCreateSearchUuid" ]]
+		-- upvalues: Guids (copy), HttpService (upval)
+		local Guid = Guids[Key]
 		
-		if var1 then
-			return var1
+		if Guid then
+			return Guid
+		else
+			local Guid1 = HttpService:GenerateGUID(true)
+			Guids[Key] = Guid1
+			
+			return Guid1
 		end
-		local var2 = httpService:GenerateGUID(true)
-		t_2[p1] = var2
-		
-		return var2
 	end
 	
 	local _ = nil
 	
-	local function mapInternal(p1, p2, p3, p4)
-		-- upvalues: mapInternal (write), t_1 (copy), fFlagAXSduiCatalogSearchShowWidgets (copy), t_2 (ref), httpService (copy), fFlagAXM41AllCategoriesToTaxonomy (copy), t (copy)
+	local function mapInternal(p1, p2, p3, p4) --[[ Line: 99 ]]
+		-- upvalues: mapInternal (ref), config1 (upval), FFlagAXSduiCatalogSearchShowWidgets (upval), Guids (copy), HttpService (upval), FFlagAXM41AllCategoriesToTaxonomy (upval), config (upval)
 		p4[p1.id] = true
-		local t_3 = nil
+		local List = nil
 		
 		if p1.subcategories and #p1.subcategories > 0 then
-			t_3 = {}
+			List = {}
 			
-			for i, v in p1.subcategories do
-				if not p4[v] then
-					local var1 = p2[v]
+			for _, subcategory in p1.subcategories do
+				if not p4[subcategory] then
+					local v1 = p2[subcategory]
 					
-					if var1 then
-						table.insert(t_3, mapInternal(var1, p2, true, p4))
+					if v1 then
+						table.insert(List, mapInternal(v1, p2, true, p4))
 					end
 				end
 			end
-			if #t_3 == 0 then
-				t_3 = nil
+			if #List == 0 then
+				List = nil
 			end
 		end
-		local var2
 		p4[p1.id] = nil
-		local id = t_1[p1.id]
-		local t_4 = {
+		local Entry = config1[p1.id]
+		local config2 = {
 			Id = p1.id,
-			Name = if id and id.Name then id.Name else p1.name,
-			CategoryFilter = if id then id.CategoryFilter else nil,
-			ShowWidgets = if fFlagAXSduiCatalogSearchShowWidgets and id then id.ShowWidgets else nil,
-			ShowSponsored = if fFlagAXSduiCatalogSearchShowWidgets and id then id.ShowSponsored else nil,
-			ShowTopics = if fFlagAXSduiCatalogSearchShowWidgets and id then id.ShowTopics else nil,
+			Name = if Entry and Entry.Name then Entry.Name else p1.name,
+			CategoryFilter = if Entry then Entry.CategoryFilter else nil,
+			ShowWidgets = if FFlagAXSduiCatalogSearchShowWidgets and Entry then Entry.ShowWidgets else nil,
+			ShowSponsored = if FFlagAXSduiCatalogSearchShowWidgets and Entry then Entry.ShowSponsored else nil,
+			ShowTopics = if FFlagAXSduiCatalogSearchShowWidgets and Entry then Entry.ShowTopics else nil,
 			Title = p1.title,
 			LocalizedTitle = p1.title,
-			WidgetContext = `catalog-tab:{string.lower(p1.name:gsub(" ", "-"):gsub("%.", "-"))}`
+			WidgetContext = `catalog-tab:{string.lower((p1.name:gsub(" ", "-"):gsub("%.", "-")))}`
 		}
-		local id_1 = p1.id
-		local var3 = t_2[id_1]
+		local Id = p1.id
+		local Guid = Guids[Id]
+		local SearchUuid = nil
 		
-		if var3 then
-			var2 = var3
+		if Guid then
+			SearchUuid = Guid
 		else
-			local var4 = httpService:GenerateGUID(true)
-			t_2[id_1] = var4
-			var2 = var4
+			local Guid1 = HttpService:GenerateGUID(true)
+			Guids[Id] = Guid1
+			SearchUuid = Guid1
 		end
-		t_4.SearchUuid = var2
-		t_4.TaxonomyUuid = if fFlagAXM41AllCategoriesToTaxonomy and p1.taxonomyId ~= nil and p1.taxonomyId ~= "" then p1.taxonomyId else nil
-		t_4.AssetTypeIdStrings = p1.assetTypes
-		t_4.BundleTypes = p1.bundleTypes
-		t_4.TileType = p1.tileType
-		t_4.TimeToRefresh = p1.timeToRefresh
-		t_4.CategoryId = p1.categoryId
-		t_4.SubcategoryId = p1.subcategoryId
-		t_4.CameraFocus = p1.cameraFocus
-		t_4.CameraZoomRadius = p1.cameraZoomRadius
-		t_4.CanAnimateCameraBasedMood = p1.canAnimateCameraBasedMood
-		t_4.LooksWidgetContextForOrganicContent = if p1.looksWidgetContextForOrganicContent == nil or p1.looksWidgetContextForOrganicContent == "" then nil else p1.looksWidgetContextForOrganicContent
-		t_4.PageType = t[p1.name]
-		t_4.Subcategories = t_3
-		t_4.isSubcategory = if p3 then true else nil
+		config2.SearchUuid = SearchUuid
+		config2.TaxonomyUuid = if FFlagAXM41AllCategoriesToTaxonomy and p1.taxonomyId ~= nil and p1.taxonomyId ~= "" then p1.taxonomyId else nil
+		config2.AssetTypeIdStrings = p1.assetTypes
+		config2.BundleTypes = p1.bundleTypes
+		config2.TileType = p1.tileType
+		config2.TimeToRefresh = p1.timeToRefresh
+		config2.CategoryId = p1.categoryId
+		config2.SubcategoryId = p1.subcategoryId
+		config2.CameraFocus = p1.cameraFocus
+		config2.CameraZoomRadius = p1.cameraZoomRadius
+		config2.CanAnimateCameraBasedMood = p1.canAnimateCameraBasedMood
+		config2.LooksWidgetContextForOrganicContent = if p1.looksWidgetContextForOrganicContent == nil or p1.looksWidgetContextForOrganicContent == "" then nil else p1.looksWidgetContextForOrganicContent
+		config2.PageType = config[p1.name]
+		config2.Subcategories = List
+		config2.isSubcategory = if p3 then true else nil
 		
-		return t_4
+		return config2
 	end
 	
 	return {
-		map = function(p5, p6, p7)
-			-- upvalues: mapInternal (write)
+		map = function(p5, p6, p7) --[[ Line: 189 ]]
+			-- upvalues: mapInternal (ref)
 			return mapInternal(p5, p6, p7, {})
 		end,
-		clear = function()
-			-- upvalues: t_2 (ref)
-			table.clear(t_2)
+		clear = function() --[[ Line: 197 ]]
+			-- upvalues: Guids (copy)
+			table.clear(Guids)
 		end
 	}
 end

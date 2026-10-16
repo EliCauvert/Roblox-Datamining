@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.PlayerContextualMenu.PlayerContextualMenu)
+﻿return (require(script.Parent.Parent.Parent._Index.PlayerContextualMenu.PlayerContextualMenu))

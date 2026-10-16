@@ -1,88 +1,96 @@
 ﻿local UGCValidationService = game:GetService("UGCValidationService")
-local parent = script.Parent.Parent.Parent
-local getEngineFeatureUGCValidateHSRMeshIdsModule = require(parent.flags.getEngineFeatureUGCValidateHSRMeshIds)
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local parseContentIdsModule = require(parent.util.ParseContentIds)
-local pcallDeferredModule = require(parent.util.pcallDeferred)
-local t = {
-	categories = {
-		validationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
-		validationEnumsModule.UploadCategory.DYNAMIC_HEAD,
-		validationEnumsModule.UploadCategory.LAYERED_CLOTHING,
-		validationEnumsModule.UploadCategory.EYEBROW_EYELASH
-	},
-	requiredData = {
-		validationEnumsModule.SharedDataMember.rootInstance,
-		validationEnumsModule.SharedDataMember.consumerConfig,
-		validationEnumsModule.SharedDataMember.hsrAssets
-	},
-	expectedFailures = {}
-}
+local Parent = script.Parent.Parent.Parent
+local GetEngineFeatureUGCValidateHSRMeshIdsModule = require(Parent.flags.getEngineFeatureUGCValidateHSRMeshIds)
+local GetFFlagUGCValidateVersionedContentIdsModule = require(Parent.flags.getFFlagUGCValidateVersionedContentIds)
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
+local ParseContentIdsModule = require(Parent.util.ParseContentIds)
+local PcallDeferredModule = require(Parent.util.pcallDeferred)
 
-local function validateHSRStructure(p1, p2, p3)
-	-- upvalues: errorSourceStringsModule (ref)
-	if #p1 ~= 1 then
-		p3:fail(errorSourceStringsModule.Keys.HSRAssetInvalidRoot, { InstancePath = p2:GetFullName() })
+local function validateHSRStructure(Entry, Object, p1) --[[ Line: 29 ]]
+	-- upvalues: ErrorSourceStringsModule (copy)
+	if #Entry ~= 1 then
+		p1:fail(ErrorSourceStringsModule.Keys.HSRAssetInvalidRoot, { InstancePath = Object:GetFullName() })
 		
 		return nil
 	end
-	local var1 = p1[1]
+	local Entry1 = Entry[1]
 	
-	if not var1:IsA("HiddenSurfaceRemovalAsset") then
-		p3:fail(errorSourceStringsModule.Keys.HSRAssetInvalidRoot, { InstancePath = p2:GetFullName() })
+	if not Entry1:IsA("HiddenSurfaceRemovalAsset") then
+		p1:fail(ErrorSourceStringsModule.Keys.HSRAssetInvalidRoot, { InstancePath = Object:GetFullName() })
 		
 		return nil
-	elseif #var1:GetDescendants() > 0 then
-		p3:fail(errorSourceStringsModule.Keys.HSRAssetHasChildren, { InstancePath = p2:GetFullName() })
+	elseif #Entry1:GetDescendants() > 0 then
+		p1:fail(ErrorSourceStringsModule.Keys.HSRAssetHasChildren, { InstancePath = Object:GetFullName() })
 		
 		return nil
+	else
+		return Entry1
 	end
-	return var1
 end
 
-function t.run(p1, p2)
-	-- upvalues: validationEnumsModule (ref), errorSourceStringsModule (ref), parseContentIdsModule (ref), validateHSRStructure (ref), getEngineFeatureUGCValidateHSRMeshIdsModule (ref), pcallDeferredModule (ref), UGCValidationService (ref)
-	if p2.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.IEC then return end
-	local var1 = p2.consumerConfig.consumerEnv == validationEnumsModule.ConsumerEnv.Backend
-	local descendants = p2.rootInstance:GetDescendants()
-	table.insert(descendants, p2.rootInstance)
-	
-	for i, v in descendants do
-		if v:IsA("WrapLayer") then
-			local HSRAssetId = v.HSRAssetId
-			
-			if HSRAssetId and HSRAssetId ~= "" then
-				local var2 = parseContentIdsModule.tryGetAssetIdFromContentId(HSRAssetId)
+return {
+	categories = {
+		ValidationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
+		ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD,
+		ValidationEnumsModule.UploadCategory.LAYERED_CLOTHING,
+		ValidationEnumsModule.UploadCategory.EYEBROW_EYELASH
+	},
+	requiredData = {
+		ValidationEnumsModule.SharedDataMember.rootInstance,
+		ValidationEnumsModule.SharedDataMember.consumerConfig,
+		ValidationEnumsModule.SharedDataMember.hsrAssets
+	},
+	expectedFailures = {},
+	run = function(p1, p2) --[[ Line: 59 ]]
+		-- upvalues: ValidationEnumsModule (copy), ErrorSourceStringsModule (copy), GetFFlagUGCValidateVersionedContentIdsModule (copy), ParseContentIdsModule (copy), validateHSRStructure (copy), GetEngineFeatureUGCValidateHSRMeshIdsModule (copy), PcallDeferredModule (copy), UGCValidationService (copy)
+		if p2.consumerConfig.consumerEnv == ValidationEnumsModule.ConsumerEnv.IEC then return end
+		local IsConsumerEnvMatch = p2.consumerConfig.consumerEnv == ValidationEnumsModule.ConsumerEnv.Backend
+		local Descendants = p2.rootInstance:GetDescendants()
+		table.insert(Descendants, p2.rootInstance)
+		
+		for _, WrapLayer in Descendants do
+			if WrapLayer:IsA("WrapLayer") then
+				local HSRAssetId = WrapLayer.HSRAssetId
 				
-				if var2 then
-					local var3 = p2.hsrAssets[var2]
+				if not HSRAssetId or HSRAssetId == "" then
+					if IsConsumerEnvMatch then
+						p1:fail(ErrorSourceStringsModule.Keys.HSRAssetIdRequired, { InstancePath = WrapLayer:GetFullName() })
+						continue
+					end
+					continue
+				end
+				local ReferenceKey = nil
+				if GetFFlagUGCValidateVersionedContentIdsModule() then
+					local TryParseContentIdResult, TryParseContentIdResult2 = ParseContentIdsModule.tryParseContentId(HSRAssetId)
+					ReferenceKey = if TryParseContentIdResult then ParseContentIdsModule.getReferenceKey(TryParseContentIdResult, TryParseContentIdResult2) else nil
+				else
+					ReferenceKey = ParseContentIdsModule.tryGetAssetIdFromContentId(HSRAssetId)
+				end
+				if ReferenceKey then
+					local HsrAsset = p2.hsrAssets[ReferenceKey]
 					
-					if var3 then
-						local var4 = validateHSRStructure(var3, v, p1)
+					if HsrAsset then
+						local ValidateHSRStructureResult = validateHSRStructure(HsrAsset, WrapLayer, p1)
 						
-						if var4 and getEngineFeatureUGCValidateHSRMeshIdsModule() then
-							local var5, var6 = pcallDeferredModule(function()
-								-- upvalues: UGCValidationService (copy), v (ref), var4 (ref)
-								return UGCValidationService:ValidateHSRMeshIds(v, var4)
+						if ValidateHSRStructureResult and GetEngineFeatureUGCValidateHSRMeshIdsModule() then
+							local PcallDeferredModuleResult, PcallDeferredModuleResult2 = PcallDeferredModule(function() --[[ Line: 115 ]]
+								-- upvalues: UGCValidationService (upval), WrapLayer (copy), ValidateHSRStructureResult (copy)
+								return UGCValidationService:ValidateHSRMeshIds(WrapLayer, ValidateHSRStructureResult)
 							end, {})
 							
-							if not var5 then
-								p1:fail(errorSourceStringsModule.Keys.HSRMeshIdValidationError, { InstancePath = v:GetFullName() })
-							elseif not var6 then
-								p1:fail(errorSourceStringsModule.Keys.HSRMeshIdsMismatch, { InstancePath = v:GetFullName() })
+							if not PcallDeferredModuleResult then
+								p1:fail(ErrorSourceStringsModule.Keys.HSRMeshIdValidationError, { InstancePath = WrapLayer:GetFullName() })
+							elseif not PcallDeferredModuleResult2 then
+								p1:fail(ErrorSourceStringsModule.Keys.HSRMeshIdsMismatch, { InstancePath = WrapLayer:GetFullName() })
 							end
 						end
 					end
 				else
-					p1:fail(errorSourceStringsModule.Keys.HSRAssetIdInvalidUrl, { InstancePath = v:GetFullName() })
+					p1:fail(ErrorSourceStringsModule.Keys.HSRAssetIdInvalidUrl, { InstancePath = WrapLayer:GetFullName() })
 				end
-			elseif var1 then
-				p1:fail(errorSourceStringsModule.Keys.HSRAssetIdRequired, { InstancePath = v:GetFullName() })
 			end
 		end
 	end
-end
-
-return t
+}

@@ -1,65 +1,63 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local tModule = require(corePackagesService.Packages.t)
-local interactiveAlert = require(corePackagesService.Packages.UIBlox).App.Dialog.Alert.InteractiveAlert
-local parent = script.Parent.Parent
-local humanoidViewportModule = require(parent.HumanoidViewport)
-local getConformedHumanoidDescriptionModule = require(parent.Parent.GetConformedHumanoidDescription)
-local promptWithAvatarViewport = roactModule.PureComponent:extend("PromptWithAvatarViewport")
-promptWithAvatarViewport.validateProps = tModule.strictInterface({
-	humanoidDescription = tModule.instanceOf("HumanoidDescription"),
-	rigType = tModule.enum(Enum.HumanoidRigType),
-	title = tModule.string,
-	bodyText = tModule.optional(tModule.string),
-	buttonStackInfo = tModule.table,
-	screenSize = tModule.Vector2
+﻿local CorePackages = game:GetService("CorePackages")
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local TModule = require(CorePackages.Packages.t)
+local InteractiveAlert = require(CorePackages.Packages.UIBlox).App.Dialog.Alert.InteractiveAlert
+local Parent = script.Parent.Parent
+local HumanoidViewportModule = require(Parent.HumanoidViewport)
+local GetConformedHumanoidDescriptionModule = require(Parent.Parent.GetConformedHumanoidDescription)
+local PromptWithAvatarViewport = RoactModule.PureComponent:extend("PromptWithAvatarViewport")
+PromptWithAvatarViewport.validateProps = TModule.strictInterface({
+	humanoidDescription = TModule.instanceOf("HumanoidDescription"),
+	rigType = TModule.enum(Enum.HumanoidRigType),
+	title = TModule.string,
+	bodyText = TModule.optional(TModule.string),
+	buttonStackInfo = TModule.table,
+	screenSize = TModule.Vector2
 })
 
-function promptWithAvatarViewport.init(p1)
-	-- upvalues: roactModule (ref)
+function PromptWithAvatarViewport.init(p1) --[[ Line: 41 ]]
+	-- upvalues: RoactModule (copy)
 	p1.mounted = false
-	p1.middleContentRef = roactModule.createRef()
-	local var1, var2 = roactModule.createBinding(UDim2.new(1, 0, 0, 200))
-	p1.contentSize = var1
-	p1.updateContentSize = var2
+	p1.middleContentRef = RoactModule.createRef()
+	p1.contentSize, p1.updateContentSize = RoactModule.createBinding(UDim2.new(1, 0, 0, 200))
 	p1:setState({
 		conformedHumanoidDescription = nil,
 		getConformedDescriptionFailed = false
 	})
 	
-	function p0.onAlertSizeChanged(p2)
-		-- upvalues: p1 (ref)
-		local absoluteSize = p2.AbsoluteSize
+	function p1.onAlertSizeChanged(Frame) --[[ Line: 52 ]]
+		-- upvalues: p1 (copy)
+		local AbsoluteSize = Frame.AbsoluteSize
 		
 		if not p1.middleContentRef:getValue() then return end
-		local y = p1.middleContentRef:getValue().AbsoluteSize.Y
-		local var3 = p1.props.screenSize.Y - 60 - (absoluteSize.Y - y)
-		local var4 = p1.middleContentRef:getValue().AbsoluteSize.X - 20
+		local Y = p1.middleContentRef:getValue().AbsoluteSize.Y
+		local YDelta = p1.props.screenSize.Y - 60 - (AbsoluteSize.Y - Y)
+		local XDelta = p1.middleContentRef:getValue().AbsoluteSize.X - 20
 		
-		if var4 < var3 then
-			var3 = var4
+		if XDelta < YDelta then
+			YDelta = XDelta
 		end
-		if y ~= var3 then
-			p1.updateContentSize(UDim2.new(1, 0, 0, var3))
+		if Y ~= YDelta then
+			p1.updateContentSize(UDim2.new(1, 0, 0, YDelta))
 		end
 	end
 	
-	function p0.retryLoadDescription()
-		-- upvalues: p1 (ref)
+	function p1.retryLoadDescription() --[[ Line: 74 ]]
+		-- upvalues: p1 (copy)
 		p1:setState({ getConformedDescriptionFailed = false })
 		p1:getConformedHumanoidDescription()
 	end
 end
 
-function promptWithAvatarViewport.renderAlertMiddleContent(p1)
-	-- upvalues: roactModule (ref), humanoidViewportModule (ref)
-	return roactModule.createElement("Frame", {
+function PromptWithAvatarViewport.renderAlertMiddleContent(p1) --[[ Line: 83 ]]
+	-- upvalues: RoactModule (copy), HumanoidViewportModule (copy)
+	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = p1.contentSize,
-		[roactModule.Ref] = p1.middleContentRef
+		[RoactModule.Ref] = p1.middleContentRef
 	}, {
-		HumanoidViewport = roactModule.createElement(humanoidViewportModule, {
+		HumanoidViewport = RoactModule.createElement(HumanoidViewportModule, {
 			humanoidDescription = p1.state.conformedHumanoidDescription,
 			loadingFailed = p1.state.getConformedDescriptionFailed,
 			retryLoadDescription = p1.retryLoadDescription,
@@ -68,34 +66,34 @@ function promptWithAvatarViewport.renderAlertMiddleContent(p1)
 	})
 end
 
-function promptWithAvatarViewport.render(p1)
-	-- upvalues: roactModule (ref), interactiveAlert (ref)
-	return roactModule.createElement(interactiveAlert, {
+function PromptWithAvatarViewport.render(p1) --[[ Line: 102 ]]
+	-- upvalues: RoactModule (copy), InteractiveAlert (copy)
+	return RoactModule.createElement(InteractiveAlert, {
 		isMiddleContentFocusable = false,
 		title = p1.props.title,
 		bodyText = p1.props.bodyText,
 		buttonStackInfo = p1.props.buttonStackInfo,
 		position = UDim2.fromScale(0.5, 0.5),
 		screenSize = p1.props.screenSize,
-		middleContent = function()
-			-- upvalues: p1 (ref)
+		middleContent = function() --[[ Line: 109 ]]
+			-- upvalues: p1 (copy)
 			return p1:renderAlertMiddleContent()
 		end,
 		onAbsoluteSizeChanged = p1.onAlertSizeChanged
 	})
 end
 
-function promptWithAvatarViewport.getConformedHumanoidDescription(p1, p2)
-	-- upvalues: getConformedHumanoidDescriptionModule (ref)
-	getConformedHumanoidDescriptionModule(p2, true):andThen(function(p3)
-		-- upvalues: p1 (ref)
+function PromptWithAvatarViewport.getConformedHumanoidDescription(p1, HumanoidDescription) --[[ Line: 117 ]]
+	-- upvalues: GetConformedHumanoidDescriptionModule (copy)
+	GetConformedHumanoidDescriptionModule(HumanoidDescription, true):andThen(function(Result) --[[ Line: 119 ]]
+		-- upvalues: p1 (copy)
 		if p1.mounted then
-			p1:setState({ conformedHumanoidDescription = p3 })
+			p1:setState({ conformedHumanoidDescription = Result })
 			
 			return
 		end
-	end, function(_)
-		-- upvalues: p1 (ref)
+	end, function(_) --[[ Line: 127 ]]
+		-- upvalues: p1 (copy)
 		if p1.mounted then
 			p1:setState({ getConformedDescriptionFailed = true })
 			
@@ -104,26 +102,26 @@ function promptWithAvatarViewport.getConformedHumanoidDescription(p1, p2)
 	end)
 end
 
-function promptWithAvatarViewport.didMount(p1)
+function PromptWithAvatarViewport.didMount(p1) --[[ Line: 138 ]]
 	p1.mounted = true
 	p1:getConformedHumanoidDescription(p1.props.humanoidDescription)
 end
 
-function promptWithAvatarViewport.didUpdate(p1, p2, _)
-	-- upvalues: roactModule (ref)
+function PromptWithAvatarViewport.didUpdate(p1, p2, _) --[[ Line: 144 ]]
+	-- upvalues: RoactModule (copy)
 	if p2.humanoidDescription ~= p1.props.humanoidDescription then
 		p1:setState({
 			getConformedDescriptionFailed = false,
-			conformedHumanoidDescription = roactModule.None
+			conformedHumanoidDescription = RoactModule.None
 		})
 		p1:getConformedHumanoidDescription(p1.props.humanoidDescription)
 	end
 end
 
-function promptWithAvatarViewport.willUnmount(p1)
+function PromptWithAvatarViewport.willUnmount(p1) --[[ Line: 155 ]]
 	p1.mounted = false
 end
 
-return roactRoduxModule.connect(function(p1)
+return (RoactRoduxModule.connect(function(p1) --[[ Line: 159 | Named "mapStateToProps" ]]
 	return { screenSize = p1.screenSize }
-end, nil)(promptWithAvatarViewport)
+end, nil)(PromptWithAvatarViewport))

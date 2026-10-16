@@ -1,12 +1,12 @@
-﻿local parent = script.Parent.Parent
-local setWindowStateModule = require(parent.Actions.SetWindowState)
-local windowStateModule = require(parent.Enums.WindowState)
-local thunkModule = require(parent.Thunk)
+﻿local Parent = script.Parent.Parent
+local SetWindowStateModule = require(Parent.Actions.SetWindowState)
+local WindowStateModule = require(Parent.Enums.WindowState)
+local ThunkModule = require(Parent.Thunk)
 
-return function()
-	-- upvalues: thunkModule (ref), setWindowStateModule (ref), windowStateModule (ref)
-	return thunkModule.new(script.Name, {}, function(p1, _)
-		-- upvalues: setWindowStateModule (copy), windowStateModule (copy)
-		return p1:dispatch(setWindowStateModule(windowStateModule.Hidden))
+return function() --[[ Line: 7 | Named "hideWindow" ]]
+	-- upvalues: ThunkModule (copy), SetWindowStateModule (copy), WindowStateModule (copy)
+	return ThunkModule.new(script.Name, {}, function(p1, _) --[[ Line: 8 ]]
+		-- upvalues: SetWindowStateModule (upval), WindowStateModule (upval)
+		return p1:dispatch(SetWindowStateModule(WindowStateModule.Hidden))
 	end)
 end

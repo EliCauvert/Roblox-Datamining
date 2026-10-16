@@ -1,74 +1,74 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local verifiedBadgeModule = require(parent.VerifiedBadges.VerifiedBadge)
-local fFlagUnifyVerifiedBadgeComponent = require(parent.SharedFlags).FFlagUnifyVerifiedBadgeComponent
-local _ = require(buildExperience.Chat.chatTypes)
-local icon = foundationModule.Icon
-local image = foundationModule.Image
-local text = foundationModule.Text
-local view = foundationModule.View
-local iconName = foundationModule.Enums.IconName
-local iconSize = foundationModule.Enums.IconSize
-local iconVariant = foundationModule.Enums.IconVariant
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local VerifiedBadgeModule = require(Parent.VerifiedBadges.VerifiedBadge)
+local FFlagUnifyVerifiedBadgeComponent = require(Parent.SharedFlags).FFlagUnifyVerifiedBadgeComponent
+local _ = require(BuildExperience.Chat.chatTypes)
+local Icon = FoundationModule.Icon
+local Image = FoundationModule.Image
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local IconName = FoundationModule.Enums.IconName
+local IconSize = FoundationModule.Enums.IconSize
+local IconVariant = FoundationModule.Enums.IconVariant
 
-local function _(p1)
+local function _(p1) --[[ Line: 31 | Named "getGameIconUrl" ]]
 	return p1.gameIcon or `rbxthumb://type=GameIcon&id={p1.universeId}&w=150&h=150`
 end
 
-return function(p1)
-	-- upvalues: reactModule (ref), view (ref), image (ref), text (ref), fFlagUnifyVerifiedBadgeComponent (ref), verifiedBadgeModule (ref), icon (ref), iconName (ref), iconSize (ref), iconVariant (ref)
-	local testId = p1.testId or "publish-experience-title"
-	local target = p1.target
+return function(p1) --[[ Line: 35 | Named "PublishExperienceTitle" ]]
+	-- upvalues: ReactModule (copy), View (copy), Image (copy), Text (copy), FFlagUnifyVerifiedBadgeComponent (copy), VerifiedBadgeModule (copy), Icon (copy), IconName (copy), IconSize (copy), IconVariant (copy)
+	local TestId = p1.testId or "publish-experience-title"
+	local Target = p1.target
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "row align-y-center gap-medium size-full-0 auto-y",
 		LayoutOrder = p1.layoutOrder,
-		testId = testId
+		testId = TestId
 	}, {
-		GameIcon = reactModule.createElement(image, {
+		GameIcon = ReactModule.createElement(Image, {
 			LayoutOrder = 1,
 			tag = "size-1200-1200 radius-medium clip bg-surface-200",
-			Image = target.gameIcon or `rbxthumb://type=GameIcon&id={target.universeId}&w=150&h=150`,
+			Image = Target.gameIcon or `rbxthumb://type=GameIcon&id={Target.universeId}&w=150&h=150`,
 			ScaleType = Enum.ScaleType.Crop,
-			testId = `{testId}-game-icon`
+			testId = `{TestId}-game-icon`
 		}),
-		Details = reactModule.createElement(view, { LayoutOrder = 2, tag = "col fill size-full-0 auto-y" }, {
-			Title = reactModule.createElement(text, {
+		Details = ReactModule.createElement(View, { LayoutOrder = 2, tag = "col fill size-full-0 auto-y" }, {
+			Title = ReactModule.createElement(Text, {
 				LayoutOrder = 1,
 				tag = "size-full-0 auto-y text-title-medium text-wrap text-align-x-left content-emphasis",
-				Text = target.experienceName
+				Text = Target.experienceName
 			}),
-			CreatorRow = reactModule.createElement(view, {
+			CreatorRow = ReactModule.createElement(View, {
 				LayoutOrder = 2,
 				tag = "row align-y-center gap-xsmall size-full-0 auto-y"
 			}, {
-				CreatorName = reactModule.createElement(text, {
+				CreatorName = ReactModule.createElement(Text, {
 					LayoutOrder = 1,
-					Text = target.creatorName or "",
+					Text = Target.creatorName or "",
 					tag = {
 						["text-body-medium text-align-x-left content-default"] = true,
-						["shrink auto-xy text-wrap"] = fFlagUnifyVerifiedBadgeComponent,
-						["fill auto-y text-wrap"] = not fFlagUnifyVerifiedBadgeComponent
+						["shrink auto-xy text-wrap"] = FFlagUnifyVerifiedBadgeComponent,
+						["fill auto-y text-wrap"] = not FFlagUnifyVerifiedBadgeComponent
 					}
 				}),
-				VerifiedBadge = if p1.isCreatorVerified == true then if fFlagUnifyVerifiedBadgeComponent then reactModule.createElement(verifiedBadgeModule, { LayoutOrder = 2, testId = `{testId}-verified-badge` }) else reactModule.createElement(view, {
+				VerifiedBadge = if p1.isCreatorVerified == true then if FFlagUnifyVerifiedBadgeComponent then ReactModule.createElement(VerifiedBadgeModule, { LayoutOrder = 2, testId = `{TestId}-verified-badge` }) else ReactModule.createElement(View, {
 					LayoutOrder = 2,
 					tag = "size-400-400",
-					testId = `{testId}-verified-badge`
+					testId = `{TestId}-verified-badge`
 				}, {
-					Backplate = reactModule.createElement(icon, {
+					Backplate = ReactModule.createElement(Icon, {
 						tag = "content-system-emphasis",
 						ZIndex = 1,
-						name = iconName.VerifiedBackplate,
-						size = iconSize.Small
+						name = IconName.VerifiedBackplate,
+						size = IconSize.Small
 					}),
-					Check = reactModule.createElement(icon, {
+					Check = ReactModule.createElement(Icon, {
 						ZIndex = 2,
-						name = iconName.VerifiedCheck,
-						size = iconSize.Small,
-						variant = iconVariant.Regular
+						name = IconName.VerifiedCheck,
+						size = IconSize.Small,
+						variant = IconVariant.Regular
 					})
 				}) else nil
 			})

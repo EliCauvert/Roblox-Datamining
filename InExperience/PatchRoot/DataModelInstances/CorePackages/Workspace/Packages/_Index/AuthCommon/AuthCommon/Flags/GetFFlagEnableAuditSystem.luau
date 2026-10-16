@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("EnableAuditSystem2", false)
 
-return function()
+return function() --[[ Line: 3 ]]
 	return game:GetFastFlag("EnableAuditSystem2")
 end

@@ -1,79 +1,80 @@
-﻿local momentsCommon = script:FindFirstAncestor("MomentsCommon")
-local momentsLocalStorageModule = require(momentsCommon.Storage.MomentsLocalStorage)
-local playersService = game:GetService("Players")
-local coachmarkImpressions = require(momentsCommon.Storage.MomentsLocalStorageKeys).CoachmarkImpressions
+﻿local MomentsCommon = script:FindFirstAncestor("MomentsCommon")
+local MomentsLocalStorageModule = require(MomentsCommon.Storage.MomentsLocalStorage)
+local Players = game:GetService("Players")
+local CoachmarkImpressions = require(MomentsCommon.Storage.MomentsLocalStorageKeys).CoachmarkImpressions
 
-return function(p1)
-	-- upvalues: playersService (ref), momentsLocalStorageModule (ref), coachmarkImpressions (ref)
-	local dismissedValue = p1.dismissedValue
-	local coachmarkId = p1.coachmarkId
-	local playersService_1 = p1.PlayersService or playersService
-	local localStorage = p1.localStorage or momentsLocalStorageModule
+return function(p1) --[[ Line: 54 | Named "createCoachmarkImpressionCache" ]]
+	-- upvalues: Players (copy), MomentsLocalStorageModule (copy), CoachmarkImpressions (copy)
+	local DismissedValue = p1.dismissedValue
+	local CoachmarkId = p1.coachmarkId
+	local PlayersService = p1.PlayersService or Players
+	local LocalStorage = p1.localStorage or MomentsLocalStorageModule
 	
-	local function _()
-		-- upvalues: playersService_1 (ref)
-		local localPlayer = playersService_1.LocalPlayer
+	local function _() --[[ Line: 61 | Named "getLocalUserId" ]]
+		-- upvalues: PlayersService (copy)
+		local LocalPlayer = PlayersService.LocalPlayer
 		
-		return if localPlayer and localPlayer.UserId and localPlayer.UserId > 0 then tostring(localPlayer.UserId) else nil
+		return if LocalPlayer and LocalPlayer.UserId and LocalPlayer.UserId > 0 then tostring(LocalPlayer.UserId) else nil
 	end
 	
-	local _ = function()
-		-- upvalues: localStorage (ref), coachmarkImpressions (copy)
-		local field = localStorage.getField(coachmarkImpressions)
+	local _ = function() --[[ Line: 69 | Named "getStoredObject" ]]
+		-- upvalues: LocalStorage (copy), CoachmarkImpressions (upval)
+		local Field = LocalStorage.getField(CoachmarkImpressions)
 		
-		return if type(field) == "table" then field else {}
+		return if type(Field) == "table" then Field else {}
 	end
 	
-	local function setValue(value)
-		-- upvalues: playersService_1 (ref), localStorage (ref), coachmarkImpressions (copy), coachmarkId (ref)
-		local localPlayer = playersService_1.LocalPlayer
-		local var1 = if localPlayer and localPlayer.UserId and localPlayer.UserId > 0 then tostring(localPlayer.UserId) else nil
+	local function setValue(DismissedValue) --[[ Line: 74 ]]
+		-- upvalues: PlayersService (copy), LocalStorage (copy), CoachmarkImpressions (upval), CoachmarkId (copy)
+		local LocalPlayer = PlayersService.LocalPlayer
+		local Text = if LocalPlayer and LocalPlayer.UserId and LocalPlayer.UserId > 0 then tostring(LocalPlayer.UserId) else nil
 		
-		if not var1 then return end
-		local field = localStorage.getField(coachmarkImpressions)
-		localPlayer = if type(field) == "table" then field else {}
-		local var2 = localPlayer[var1]
+		if not Text then return end
+		local Field = LocalStorage.getField(CoachmarkImpressions)
+		local Field1 = if type(Field) == "table" then Field else {}
+		local FieldEntry = Field1[Text]
 		
-		if type(var2) ~= "table" then
-			var2 = {}
-			localPlayer[var1] = var2
+		if type(FieldEntry) ~= "table" then
+			FieldEntry = {}
+			Field1[Text] = FieldEntry
 		end
-		var2[coachmarkId] = value
-		localStorage.setField(coachmarkImpressions, localPlayer)
+		FieldEntry[CoachmarkId] = DismissedValue
+		LocalStorage.setField(CoachmarkImpressions, Field1)
 	end
 	
 	return {
-		getValue = function()
-			-- upvalues: playersService_1 (ref), dismissedValue (ref), localStorage (ref), coachmarkImpressions (copy), coachmarkId (ref)
-			local localPlayer = playersService_1.LocalPlayer
-			local var1 = if localPlayer and localPlayer.UserId and localPlayer.UserId > 0 then tostring(localPlayer.UserId) else nil
+		getValue = function() --[[ Line: 90 ]]
+			-- upvalues: PlayersService (copy), DismissedValue (copy), LocalStorage (copy), CoachmarkImpressions (upval), CoachmarkId (copy)
+			local LocalPlayer = PlayersService.LocalPlayer
+			local Text = if LocalPlayer and LocalPlayer.UserId and LocalPlayer.UserId > 0 then tostring(LocalPlayer.UserId) else nil
 			
-			if not var1 then
-				return dismissedValue
-			end
-			local field = localStorage.getField(coachmarkImpressions)
-			localPlayer = (if type(field) == "table" then field else {})[var1]
-			
-			return if type(localPlayer) == "table" then tonumber(localPlayer[coachmarkId]) or 0 else 0
-		end,
-		incrementValue = function()
-			-- upvalues: setValue (ref), playersService_1 (ref), dismissedValue (ref), localStorage (ref), coachmarkImpressions (copy), coachmarkId (ref)
-			local var1
-			local localPlayer = playersService_1.LocalPlayer
-			local var2 = if localPlayer and localPlayer.UserId and localPlayer.UserId > 0 then tostring(localPlayer.UserId) else nil
-			
-			if var2 then
-				local field = localStorage.getField(coachmarkImpressions)
-				localPlayer = (if type(field) == "table" then field else {})[var2]
-				var1 = if type(localPlayer) ~= "table" then tonumber(localPlayer[coachmarkId]) or 0 else 0
+			if Text then
+				local Field = LocalStorage.getField(CoachmarkImpressions)
+				local FieldEntry = (if type(Field) == "table" then Field else {})[Text]
+				
+				return type(FieldEntry) == "table" and tonumber(FieldEntry[CoachmarkId]) or 0
 			else
-				var1 = dismissedValue
+				return DismissedValue
 			end
-			setValue(var1 + 1)
 		end,
-		dismissValue = function()
-			-- upvalues: setValue (ref), dismissedValue (ref)
-			setValue(dismissedValue)
+		incrementValue = function() --[[ Line: 104 ]]
+			-- upvalues: setValue (copy), PlayersService (copy), DismissedValue (copy), LocalStorage (copy), CoachmarkImpressions (upval), CoachmarkId (copy)
+			local LocalPlayer = PlayersService.LocalPlayer
+			local Text = if LocalPlayer and LocalPlayer.UserId and LocalPlayer.UserId > 0 then tostring(LocalPlayer.UserId) else nil
+			local Number = nil
+			
+			if Text then
+				local Field = LocalStorage.getField(CoachmarkImpressions)
+				local FieldEntry = (if type(Field) == "table" then Field else {})[Text]
+				Number = type(FieldEntry) == "table" and tonumber(FieldEntry[CoachmarkId]) or 0
+			else
+				Number = DismissedValue
+			end
+			setValue(Number + 1)
+		end,
+		dismissValue = function() --[[ Line: 108 ]]
+			-- upvalues: setValue (copy), DismissedValue (copy)
+			setValue(DismissedValue)
 		end
 	}
 end

@@ -1,12 +1,12 @@
-﻿local parent = script:FindFirstAncestor("RobloxAppHooks").Parent
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local useSignalState = require(parent.SignalsReact).useSignalState
-local fFlagUseSignalsForIsLocalUserSoothsayer = require(parent.SharedFlags).FFlagUseSignalsForIsLocalUserSoothsayer
-local var1 = if fFlagUseSignalsForIsLocalUserSoothsayer then require(parent.IsLocalUserSoothsayerStore).GetIsLocalUserSoothsayerStore else nil
+﻿local Parent = script:FindFirstAncestor("RobloxAppHooks").Parent
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local FFlagUseSignalsForIsLocalUserSoothsayer = require(Parent.SharedFlags).FFlagUseSignalsForIsLocalUserSoothsayer
+local GetIsLocalUserSoothsayerStore = if FFlagUseSignalsForIsLocalUserSoothsayer then require(Parent.IsLocalUserSoothsayerStore).GetIsLocalUserSoothsayerStore else nil
 
-return function()
-	-- upvalues: fFlagUseSignalsForIsLocalUserSoothsayer (ref), useSignalState (ref), var1 (ref), useSelector (ref)
-	return if fFlagUseSignalsForIsLocalUserSoothsayer then useSignalState(var1(false).getIsLocalUserSoothsayer) else useSelector(function(p1)
+return function() --[[ Line: 11 ]]
+	-- upvalues: FFlagUseSignalsForIsLocalUserSoothsayer (copy), UseSignalStateFunction (copy), GetIsLocalUserSoothsayerStore (copy), UseSelectorFunction (copy)
+	return if FFlagUseSignalsForIsLocalUserSoothsayer then UseSignalStateFunction(GetIsLocalUserSoothsayerStore(false).getIsLocalUserSoothsayer) else UseSelectorFunction(function(p1) --[[ Line: 15 ]]
 		return p1.IsLocalUserSoothsayer
 	end)
 end

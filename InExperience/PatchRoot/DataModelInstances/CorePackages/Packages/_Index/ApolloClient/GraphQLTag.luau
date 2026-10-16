@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.GraphqlTag.GraphqlTag)
+﻿return (require(script.Parent.Parent.Parent._Index.GraphqlTag.GraphqlTag))

@@ -1,14 +1,14 @@
-﻿local t = {}
-t.__index = t
+﻿local MockAvatarChatService = {}
+MockAvatarChatService.__index = MockAvatarChatService
 
-function t.new(p1, p2, p3, p4)
-	-- upvalues: t (ref)
-	return setmetatable({
-		IsEnabled = p1,
-		EnableVoice = p2,
-		GetPropertyChangedSignal = p3,
-		GetClientFeaturesAsync = p4
-	}, t)
+function MockAvatarChatService.new(IsEnabled, EnableVoice, GetPropertyChangedSignal, GetClientFeaturesAsync) --[[ Line: 4 ]]
+	-- upvalues: MockAvatarChatService (copy)
+	return (setmetatable({
+		IsEnabled = IsEnabled,
+		EnableVoice = EnableVoice,
+		GetPropertyChangedSignal = GetPropertyChangedSignal,
+		GetClientFeaturesAsync = GetClientFeaturesAsync
+	}, MockAvatarChatService))
 end
 
-return t
+return MockAvatarChatService

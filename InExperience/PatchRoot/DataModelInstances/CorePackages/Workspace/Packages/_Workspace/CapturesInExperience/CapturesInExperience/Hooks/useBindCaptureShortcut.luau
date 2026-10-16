@@ -1,84 +1,87 @@
-﻿local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local contextActionService = game:GetService("ContextActionService")
-local userInputService = game:GetService("UserInputService")
-local reactModule = require(parent_1.React)
-local roactUtilsModule = require(parent_1.RoactUtils)
-local socialStopwatchModule = require(parent_1.SocialStopwatch)
-local constantsModule = require(parent.Constants)
-local eventNamesModule = require(parent.Analytics.EventNames)
-local getCaptureShortcutSetupKeysModule = require(parent.Utils.getCaptureShortcutSetupKeys)
-local takeCaptureModule = require(parent.Thunks.TakeCapture)
-local useAnalyticsModule = require(parent.Analytics.useAnalytics)
-local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
-local useEffect = reactModule.useEffect
-local useKeyboardEnabledModule = require(parent.Hooks.useKeyboardEnabled)
-local usePlayShutterSoundModule = require(parent.Hooks.usePlayShutterSound)
-local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
+﻿local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local ContextActionService = game:GetService("ContextActionService")
+local UserInputService = game:GetService("UserInputService")
+local RoactUtilsModule = require(Parent1.RoactUtils)
+local SocialStopwatchModule = require(Parent1.SocialStopwatch)
+local ConstantsModule = require(Parent.Constants)
+local EventNamesModule = require(Parent.Analytics.EventNames)
+local GetCaptureShortcutSetupKeysModule = require(Parent.Utils.getCaptureShortcutSetupKeys)
+local TakeCaptureModule = require(Parent.Thunks.TakeCapture)
+local UseAnalyticsModule = require(Parent.Analytics.useAnalytics)
+local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
+local UseEffectFunction = require(Parent1.React).useEffect
+local UseKeyboardEnabledModule = require(Parent.Hooks.useKeyboardEnabled)
+local UsePlayShutterSoundModule = require(Parent.Hooks.usePlayShutterSound)
+local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
 
-local _ = function()
-	-- upvalues: getCaptureShortcutSetupKeysModule (ref), userInputService (ref)
-	for i, v in getCaptureShortcutSetupKeysModule() do
-		if userInputService:IsKeyDown(v) then
+local function _(): boolean --[[ Line: 25 ]]
+	-- upvalues: GetCaptureShortcutSetupKeysModule (copy), UserInputService (copy)
+	for _, value in GetCaptureShortcutSetupKeysModule() do
+		if UserInputService:IsKeyDown(value) then
 			return true
 		end
 	end
 	return false
 end
 
-return function()
-	-- upvalues: useAnalyticsModule (ref), useDispatch (ref), useSelector (ref), constantsModule (ref), usePlayShutterSoundModule (ref), useKeyboardEnabledModule (ref), useEffect (ref), socialStopwatchModule (ref), eventNamesModule (ref), takeCaptureModule (ref), contextActionService (ref), getCaptureShortcutSetupKeysModule (ref), userInputService (ref)
-	local var1 = useAnalyticsModule()
-	local var2 = useDispatch()
-	local var3 = useSelector(function(p1)
-		-- upvalues: constantsModule (copy)
-		return p1[constantsModule.RoduxKey].IsActive
+return function() --[[ Line: 35 ]]
+	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), UseSelectorFunction (copy), ConstantsModule (copy), UsePlayShutterSoundModule (copy), UseKeyboardEnabledModule (copy), UseEffectFunction (copy), SocialStopwatchModule (copy), EventNamesModule (copy), TakeCaptureModule (copy), ContextActionService (copy), GetCaptureShortcutSetupKeysModule (copy), UserInputService (copy)
+	local UseAnalyticsModuleResult = UseAnalyticsModule()
+	local UseDispatchResult = UseDispatchFunction()
+	local UseSelectorResult = UseSelectorFunction(function(p1) --[[ Line: 39 ]]
+		-- upvalues: ConstantsModule (upval)
+		return p1[ConstantsModule.RoduxKey].IsActive
 	end)
-	local var4 = useSelector(function(p1)
-		-- upvalues: constantsModule (copy)
-		return p1[constantsModule.RoduxKey].IsCapturesCoreGuiEnabled
+	local UseSelectorResult1 = UseSelectorFunction(function(p1) --[[ Line: 43 ]]
+		-- upvalues: ConstantsModule (upval)
+		return p1[ConstantsModule.RoduxKey].IsCapturesCoreGuiEnabled
 	end)
-	local var5 = usePlayShutterSoundModule()
-	local var6 = useKeyboardEnabledModule()
-	useEffect(function()
-		-- upvalues: var6 (ref), var4 (ref), var5 (ref), socialStopwatchModule (copy), var1 (ref), eventNamesModule (copy), var2 (ref), takeCaptureModule (copy), contextActionService (copy), getCaptureShortcutSetupKeysModule (copy), userInputService (copy)
-		if not var6 then return end
-		if var4 then
-			local var7 = function()
-				-- upvalues: var5 (copy), socialStopwatchModule (copy), var1 (copy), eventNamesModule (copy), var2 (copy), takeCaptureModule (copy)
-				var5()
-				
-				if not socialStopwatchModule.Stopwatch.get(socialStopwatchModule.Events.CaptureTaken) then
-					socialStopwatchModule.Stopwatch.start(socialStopwatchModule.Events.CaptureTaken)
-				end
-				var1.fireEvent(eventNamesModule.CapturesEntrypointActivated)
-				var1.fireEvent(eventNamesModule.CapturesDesktopHotkeyCaptureTriggered)
-				var2(takeCaptureModule())
-			end
+	local UsePlayShutterSoundModuleResult = UsePlayShutterSoundModule()
+	local UseKeyboardEnabledModuleResult = UseKeyboardEnabledModule()
+	UseEffectFunction(function() --[[ Line: 50 ]]
+		-- upvalues: UseKeyboardEnabledModuleResult (copy), UseSelectorResult1 (copy), UsePlayShutterSoundModuleResult (copy), SocialStopwatchModule (upval), UseAnalyticsModuleResult (copy), EventNamesModule (upval), UseDispatchResult (copy), TakeCaptureModule (upval), ContextActionService (upval), GetCaptureShortcutSetupKeysModule (upval), UserInputService (upval)
+		if not UseKeyboardEnabledModuleResult then return end
+		if not UseSelectorResult1 then return end
+		local function v20() --[[ Line: 59 ]]
+			-- upvalues: UsePlayShutterSoundModuleResult (upval), SocialStopwatchModule (upval), UseAnalyticsModuleResult (upval), EventNamesModule (upval), UseDispatchResult (upval), TakeCaptureModule (upval)
+			UsePlayShutterSoundModuleResult()
 			
-			contextActionService:BindCoreAction("CaptureShortcutAction", function(_, p1)
-				-- upvalues: getCaptureShortcutSetupKeysModule (copy), userInputService (copy), var7 (ref)
-				if p1 == Enum.UserInputState.Begin then
-					local var8
-					for i, v in getCaptureShortcutSetupKeysModule() do
-						if userInputService:IsKeyDown(v) then
-							var8 = true
-							if var8 then
-								var7()
-								
-								return Enum.ContextActionResult.Sink
-							end
-						end
-					end
-					var8 = false
-				end
-				return Enum.ContextActionResult.Pass
-			end, false, Enum.KeyCode.One)
-			
-			return function()
-				-- upvalues: contextActionService (copy)
-				contextActionService:UnbindCoreAction("CaptureShortcutAction")
+			if not SocialStopwatchModule.Stopwatch.get(SocialStopwatchModule.Events.CaptureTaken) then
+				SocialStopwatchModule.Stopwatch.start(SocialStopwatchModule.Events.CaptureTaken)
 			end
+			UseAnalyticsModuleResult.fireEvent(EventNamesModule.CapturesEntrypointActivated)
+			UseAnalyticsModuleResult.fireEvent(EventNamesModule.CapturesDesktopHotkeyCaptureTriggered)
+			UseDispatchResult(TakeCaptureModule())
 		end
-	end, { var3, var4, var6 })
+		
+		ContextActionService:BindCoreAction("CaptureShortcutAction", function(_, UserInputState) --[[ Line: 70 ]]
+			-- upvalues: GetCaptureShortcutSetupKeysModule (upval), UserInputService (upval), v20 (copy)
+			if UserInputState == Enum.UserInputState.Begin then
+				local Flag = false
+				
+				for _, value in GetCaptureShortcutSetupKeysModule() do
+					if UserInputService:IsKeyDown(value) then
+						Flag = true
+						break
+					end
+				end
+				if Flag then
+					v20()
+					
+					return Enum.ContextActionResult.Sink
+				end
+			end
+			return Enum.ContextActionResult.Pass
+		end, false, Enum.KeyCode.One)
+		
+		return function() --[[ Line: 79 ]]
+			-- upvalues: ContextActionService (upval)
+			ContextActionService:UnbindCoreAction("CaptureShortcutAction")
+		end
+	end, {
+		UseSelectorResult,
+		UseSelectorResult1,
+		UseKeyboardEnabledModuleResult
+	})
 end

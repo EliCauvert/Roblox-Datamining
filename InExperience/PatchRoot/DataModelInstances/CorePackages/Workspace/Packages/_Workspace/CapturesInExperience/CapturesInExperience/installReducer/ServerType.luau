@@ -1,7 +1,7 @@
-﻿local parent = script.Parent.Parent
+﻿local Parent = script.Parent.Parent
 
-return require(parent.Parent.Rodux).createReducer(require(parent.Enums.ServerType).StandardServer, {
-	[require(parent.Actions.ServerTypeDetected).name] = function(_, p1)
+return require(Parent.Parent.Rodux).createReducer(require(Parent.Enums.ServerType).StandardServer, {
+	[require(Parent.Actions.ServerTypeDetected).name] = function(_, p1) --[[ Line: 15 ]]
 		return p1.serverType
 	end
 })

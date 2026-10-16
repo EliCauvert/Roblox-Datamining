@@ -1,103 +1,109 @@
-﻿local scriptProfilerService = game:GetService("ScriptProfilerService")
-local t = {}
-t.__index = t
+﻿local ScriptProfilerService = game:GetService("ScriptProfilerService")
+local ProfilerDataParserModule = {}
+ProfilerDataParserModule.__index = ProfilerDataParserModule
 
-function t.new(p1)
-	-- upvalues: t (ref), scriptProfilerService (ref)
-	local tbl = setmetatable({ _data = nil }, t)
-	local ok, status = pcall(function()
-		-- upvalues: scriptProfilerService (copy), p1 (ref)
-		return scriptProfilerService:DeserializeJSON(p1)
+function ProfilerDataParserModule.new(JsonString) --[[ Line: 52 ]]
+	-- upvalues: ProfilerDataParserModule (copy), ScriptProfilerService (copy)
+	local self = setmetatable({ _data = nil }, ProfilerDataParserModule)
+	local Success, Result = pcall(function() --[[ Line: 58 ]]
+		-- upvalues: ScriptProfilerService (upval), JsonString (copy)
+		return ScriptProfilerService:DeserializeJSON(JsonString)
 	end)
 	
-	if ok then
-		tbl._data = status
+	if Success then
+		self._data = Result
 		
-		return tbl
+		return self
+	else
+		warn("[ProfilerDataParser] Failed to deserialize JSON:", Result)
+		
+		return self
 	end
-	warn("[ProfilerDataParser] Failed to deserialize JSON:", status)
-	
-	return tbl
 end
 
-function t:getFunctionById(p1)
-	return if self._data then self._data.Functions[p1] else nil
+function ProfilerDataParserModule.getFunctionById(p1, p2) --[[ Line: 72 ]]
+	return if p1._data then p1._data.Functions[p2] else nil
 end
 
-function t:getNodeById(p1)
-	local data = self._data
+function ProfilerDataParserModule:getNodeById(p1) --[[ Line: 80 ]]
+	local Data = self._data
 	
-	return if data then data.Nodes[p1] else nil
+	return if Data then Data.Nodes[p1] else nil
 end
 
-function t:getSessionDuration()
-	local data = self._data
+function ProfilerDataParserModule:getSessionDuration() --[[ Line: 89 ]]
+	local Data = self._data
 	
-	if not data then
+	if Data then
+		local SessionStartTime = Data.SessionStartTime
+		local SessionEndTime = Data.SessionEndTime
+		
+		return if SessionStartTime and SessionEndTime then SessionEndTime - SessionStartTime else nil
+	else
 		return nil
 	end
-	local sessionStartTime = data.SessionStartTime
-	local sessionEndTime = data.SessionEndTime
+end
+
+function ProfilerDataParserModule.getTotalFunctions(p1): number --[[ Line: 103 ]]
+	return if p1._data then #p1._data.Functions else 0
+end
+
+function ProfilerDataParserModule:getTotalNodes(): number --[[ Line: 111 ]]
+	local Data = self._data
 	
-	return if sessionStartTime and sessionEndTime then sessionEndTime - sessionStartTime else nil
+	return if Data then #Data.Nodes else 0
 end
 
-function t:getTotalFunctions()
-	return if self._data then #self._data.Functions else 0
-end
-
-function t:getTotalNodes()
-	local data = self._data
-	
-	return if data then #data.Nodes else 0
-end
-
-function t:parsePackageName()
-	if not self or self == "" then
+function ProfilerDataParserModule.parsePackageName(Text: string): string --[[ Line: 127 ]]
+	if not Text or Text == "" then
 		return "Unknown"
 	end
-	local match = string.match(self, "^CorePackages%.Packages%._Index%.([^%.%-]+)")
+	local Match: string? = string.match(Text, "^CorePackages%.Packages%._Index%.([^%.%-]+)")
 	
-	if match then
-		return match
+	if Match then
+		return Match
+	else
+		local Match1: string? = string.match(Text, "^CorePackages%.Workspace%.Packages%._Workspace%.([^%.]+)")
+		
+		return if Match1 then Match1 elseif string.match(Text, "^CoreGui%.RobloxGui") then Text:match("^CoreGui%.RobloxGui%.(.*)") elseif string.match(Text, "^Players%.") then if string.match(Text, "CameraModule") then "CameraModule" elseif string.match(Text, "ControlModule") then "ControlModule" else "Players" else "Unknown"
 	end
-	local match_1 = string.match(self, "^CorePackages%.Workspace%.Packages%._Workspace%.([^%.]+)")
-	
-	return match_1 or (if string.match(self, "^CoreGui%.RobloxGui") then self:match("^CoreGui%.RobloxGui%.(.*)") elseif string.match(self, "^Players%.") then if string.match(self, "CameraModule") then "CameraModule" elseif string.match(self, "ControlModule") then "ControlModule" else "Players" else "Unknown")
 end
 
-function t:getPackageStatistics()
-	-- upvalues: t (ref)
+function ProfilerDataParserModule:getPackageStatistics() --[[ Line: 167 ]]
+	-- upvalues: ProfilerDataParserModule (copy)
 	if not self._data then
 		return {}
 	end
-	local var1, var2
-	local t_1 = {}
+	local t = {}
+	local ParsePackageNameResult = nil
+	local Node = nil
 	
-	for i, v in self._data.Categories do
-		for i_1, v_1 in self._data.Nodes[v.NodeId].Children do
-			var1 = self._data.Nodes[v_1]
+	for _, category in self._data.Categories do
+		for _, child in self._data.Nodes[category.NodeId].Children do
+			Node = self._data.Nodes[child]
 			
-			for i_2, v_2 in var1.Children do
-				local var3 = tonumber(i_2)
+			for i, _ in Node.Children do
+				local Number: number? = tonumber(i)
 				
-				if not var3 then break end
-				local var4 = self._data.Functions[var3]
+				if not Number then break end
+				local Function = self._data.Functions[Number]
 				
-				if not var4 then break end
-				var2 = t.parsePackageName(var4.Source)
+				if not Function then break end
+				ParsePackageNameResult = ProfilerDataParserModule.parsePackageName(Function.Source)
 				
-				if not var2 then break end
-				if not t_1[var2] then
-					t_1[var2] = { count = 0, totalDuration = 0 }
+				if not ParsePackageNameResult then break end
+				if not t[ParsePackageNameResult] then
+					t[ParsePackageNameResult] = { count = 0, totalDuration = 0 }
 				end
-				t_1[var2].count += 1
-				t_1[var2].totalDuration += var1.TotalDuration
+				local Entry = t[ParsePackageNameResult]
+				Entry.count += 1
+				local Entry1 = t[ParsePackageNameResult]
+				Entry1.totalDuration += Node.TotalDuration
 				break
 			end
 		end
 	end
-	return t_1
+	return t
 end
 
-return t
+return ProfilerDataParserModule

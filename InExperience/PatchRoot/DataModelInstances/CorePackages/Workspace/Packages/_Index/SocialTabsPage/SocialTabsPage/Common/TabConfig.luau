@@ -1,20 +1,24 @@
-﻿local socialTabsPage = script:FindFirstAncestor("SocialTabsPage")
-local appPage = require(socialTabsPage.Parent.RobloxAppEnums).AppPage
-local t = {
+﻿local SocialTabsPage = script:FindFirstAncestor("SocialTabsPage")
+local AppPage = require(SocialTabsPage.Parent.RobloxAppEnums).AppPage
+local Friends = {
 	tabLabelKey = "CommonUI.Features.Label.Friends",
-	id = appPage.SocialTabsFriends,
-	getScreen = function()
-		-- upvalues: socialTabsPage (ref)
-		return require(socialTabsPage.Components.TabContent.FriendsTabContent)
+	id = AppPage.SocialTabsFriends,
+	getScreen = function() --[[ Line: 10 ]]
+		-- upvalues: SocialTabsPage (copy)
+		return require(SocialTabsPage.Components.TabContent.FriendsTabContent)
 	end
 }
-local t_1 = {
+local Mutuals = {
 	tabLabelKey = "Feature.Friends.Mutuals",
-	id = appPage.SocialTabsMutuals,
-	getScreen = function()
-		-- upvalues: socialTabsPage (ref)
-		return require(socialTabsPage.Components.TabContent.MutualsTabContent)
+	id = AppPage.SocialTabsMutuals,
+	getScreen = function() --[[ Line: 18 ]]
+		-- upvalues: SocialTabsPage (copy)
+		return require(SocialTabsPage.Components.TabContent.MutualsTabContent)
 	end
 }
 
-return { Friends = t, Mutuals = t_1, routeOrder = { t, t_1 } }
+return {
+	Friends = Friends,
+	Mutuals = Mutuals,
+	routeOrder = { Friends, Mutuals }
+}

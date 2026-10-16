@@ -1,4 +1,4 @@
-﻿local t = {
+﻿local config = {
 	ImageLabel = true,
 	ImageButton = true,
 	TextLabel = true,
@@ -8,9 +8,9 @@
 	ViewportFrame = true
 }
 
-function isElementContentful(p1)
-	-- upvalues: t (ref)
-	return if p1.Visible and p1.BackgroundTransparency ~= 1 then t[p1.ClassName] else false
+function isElementContentful(Frame) --[[ Line: 11 ]]
+	-- upvalues: config (copy)
+	return if Frame.Visible and Frame.BackgroundTransparency ~= 1 then config[Frame.ClassName] else false
 end
 
 return isElementContentful

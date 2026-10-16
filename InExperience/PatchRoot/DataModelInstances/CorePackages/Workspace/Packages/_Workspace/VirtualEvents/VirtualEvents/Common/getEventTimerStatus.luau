@@ -1,12 +1,13 @@
-﻿local virtualEvents = script:FindFirstAncestor("VirtualEvents")
-local _ = require(virtualEvents.Parent.GraphQLServer)
-local _ = require(virtualEvents.Parent.VirtualEventsState)
-local getVirtualEventDatesModule = require(virtualEvents.Common.getVirtualEventDates)
+﻿local VirtualEvents = script:FindFirstAncestor("VirtualEvents")
+local _ = require(VirtualEvents.Parent.GraphQLServer)
+local _ = require(VirtualEvents.Parent.VirtualEventsState)
+local GetVirtualEventDatesModule = require(VirtualEvents.Common.getVirtualEventDates)
 
-return function(p1, p2)
-	-- upvalues: getVirtualEventDatesModule (ref)
-	local var1 = getVirtualEventDatesModule(p1)
-	local var2 = var1.startDate.UnixTimestamp - p2.UnixTimestamp
+return function(p1, p2): string --[[ Line: 11 | Named "getEventTimerStatus" ]]
+	-- upvalues: GetVirtualEventDatesModule (copy)
+	local VirtualEventDatesModule = GetVirtualEventDatesModule(p1)
+	local UnixTimestampDelta = VirtualEventDatesModule.startDate.UnixTimestamp - p2.UnixTimestamp
+	local UnixTimestampDelta1 = VirtualEventDatesModule.endDate.UnixTimestamp - p2.UnixTimestamp
 	
-	return if var1.startDate.UnixTimestamp <= p2.UnixTimestamp then if p2.UnixTimestamp < var1.endDate.UnixTimestamp then if var1.endDate.UnixTimestamp - p2.UnixTimestamp <= 14400 then "ElapsedImminent" else "Ongoing" else "Elapsed" elseif var2 > 0 and var2 <= 14400 then "UpcomingImminent" else "Upcoming"
+	return if VirtualEventDatesModule.startDate.UnixTimestamp <= p2.UnixTimestamp then if p2.UnixTimestamp < VirtualEventDatesModule.endDate.UnixTimestamp then if UnixTimestampDelta1 <= 14400 then "ElapsedImminent" else "Ongoing" else "Elapsed" elseif UnixTimestampDelta > 0 and UnixTimestampDelta <= 14400 then "UpcomingImminent" else "Upcoming"
 end

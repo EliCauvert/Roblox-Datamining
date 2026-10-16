@@ -1,32 +1,32 @@
 ﻿local list = {
-	Color3.new(0.992156862745, 0.160784313725, 0.262745098039),
-	Color3.new(0.003921568627, 0.635294117647, 1),
-	Color3.new(0.007843137255, 0.721568627451, 0.341176470588),
+	Color3.new(0.9921568627450981, 0.1607843137254902, 0.2627450980392157),
+	Color3.new(0.00392156862745098, 0.6352941176470588, 1),
+	Color3.new(0.00784313725490196, 0.7215686274509804, 0.3411764705882353),
 	BrickColor.new("Alder").Color, BrickColor.new("Bright orange").Color,
 	BrickColor.new("Bright yellow").Color,
 	BrickColor.new("Light reddish violet").Color,
 	BrickColor.new("Brick yellow").Color
 }
 
-local function HashNameToColor(p1)
-	local var1 = 0
+local function HashNameToColor(Text: string): number --[[ Line: 13 ]]
+	local Total = 0
 	
-	for i = 1, #p1 do
-		local byteValue = string.byte(string.sub(p1, i, i))
-		local var2 = #p1 - i + 1
+	for i = 1, #Text do
+		local ByteValue = string.byte((string.sub(Text, i, i)))
+		local NewI = #Text - i + 1
 		
-		if #p1 % 2 == 1 then
-			var2 -= 1
+		if #Text % 2 == 1 then
+			NewI -= 1
 		end
-		if var2 % 4 >= 2 then
-			byteValue = -byteValue
+		if NewI % 4 >= 2 then
+			ByteValue = -ByteValue
 		end
-		var1 += byteValue
+		Total += ByteValue
 	end
-	return var1
+	return Total
 end
 
-return function(p2)
-	-- upvalues: list (ref), HashNameToColor (ref)
-	return list[(HashNameToColor(p2) + 0) % #list + 1]
+return function(p1) --[[ Line: 31 | Named "computeNameColor" ]]
+	-- upvalues: list (copy), HashNameToColor (copy)
+	return list[(HashNameToColor(p1) + 0) % #list + 1]
 end

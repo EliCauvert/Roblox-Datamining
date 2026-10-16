@@ -1,46 +1,46 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local roactFitComponents = require(parent.LuaSocialLibrariesDeps).RoactFitComponents
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local memo = reactModule.memo
-local t = {
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local RoactFitComponents = require(Parent.LuaSocialLibrariesDeps).RoactFitComponents
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local MemoFunction = ReactModule.memo
+local config = {
 	Text = "Default Title",
 	LayoutOrder = 0,
 	marginTop = 8,
 	marginBottom = 14,
-	style = require(appChat.SocialLibraries).Components.TestStyle
+	style = require(AppChat.SocialLibraries).Components.TestStyle
 }
 
-function SectionHeader(p1)
-	-- upvalues: cryoModule (ref), t (ref), reactModule (ref), roactFitComponents (ref)
-	local var1 = cryoModule.Dictionary.join(t, p1)
-	local style = var1.style
-	local font = style.Font
+function SectionHeader(p1) --[[ Line: 30 ]]
+	-- upvalues: CryoModule (copy), config (copy), ReactModule (copy), RoactFitComponents (copy)
+	local JoinResult = CryoModule.Dictionary.join(config, p1)
+	local Style = JoinResult.style
+	local StyleFont = Style.Font
 	
-	return reactModule.createElement(roactFitComponents.FitFrameVertical, {
+	return ReactModule.createElement(RoactFitComponents.FitFrameVertical, {
 		BackgroundTransparency = 1,
-		LayoutOrder = var1.LayoutOrder,
+		LayoutOrder = JoinResult.LayoutOrder,
 		width = UDim.new(1, 0),
 		margin = {
 			left = 12,
 			right = 0,
-			top = var1.marginTop,
-			bottom = var1.marginBottom
+			top = JoinResult.marginTop,
+			bottom = JoinResult.marginBottom
 		}
 	}, {
-		SectionHeader = reactModule.createElement(roactFitComponents.FitTextLabel, {
+		SectionHeader = ReactModule.createElement(RoactFitComponents.FitTextLabel, {
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
-			width = roactFitComponents.FitTextLabel.Width.FitToText,
-			Text = var1.Text,
-			TextColor3 = style.Theme.TextDefault.Color,
-			TextSize = font.CaptionHeader.RelativeSize * font.BaseSize,
-			Font = font.CaptionHeader.Font,
+			width = RoactFitComponents.FitTextLabel.Width.FitToText,
+			Text = JoinResult.Text,
+			TextColor3 = Style.Theme.TextDefault.Color,
+			TextSize = StyleFont.CaptionHeader.RelativeSize * StyleFont.BaseSize,
+			Font = StyleFont.CaptionHeader.Font,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			AnchorPoint = Vector2.new(0, 1)
 		})
 	})
 end
 
-return memo(SectionHeader)
+return MemoFunction(SectionHeader)

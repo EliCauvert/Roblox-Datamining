@@ -1,23 +1,23 @@
-﻿local responsive = script:FindFirstAncestor("Responsive")
-local reactModule = require(responsive.Parent.React)
-local inputModeModule = require(responsive.InputMode)
+﻿local Responsive = script:FindFirstAncestor("Responsive")
+local ReactModule = require(Responsive.Parent.React)
+local InputModeModule = require(Responsive.InputMode)
 
-return function()
-	-- upvalues: reactModule (ref), inputModeModule (ref)
-	local var1, var2 = reactModule.useState(inputModeModule.last)
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), inputModeModule (copy)
-		var2(inputModeModule.last)
-		local var3 = inputModeModule.connect(function()
-			-- upvalues: var2 (copy), inputModeModule (copy)
-			var2(inputModeModule.last)
+return function() --[[ Line: 6 | Named "useLastInput" ]]
+	-- upvalues: ReactModule (copy), InputModeModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(InputModeModule.last)
+	ReactModule.useEffect(function() --[[ Line: 8 ]]
+		-- upvalues: UseStateResult2 (copy), InputModeModule (upval)
+		UseStateResult2(InputModeModule.last)
+		local ConnectResult = InputModeModule.connect(function() --[[ Line: 10 ]]
+			-- upvalues: UseStateResult2 (upval), InputModeModule (upval)
+			UseStateResult2(InputModeModule.last)
 		end)
 		
-		return function()
-			-- upvalues: var3 (ref)
-			var3:disconnect()
+		return function() --[[ Line: 13 ]]
+			-- upvalues: ConnectResult (copy)
+			ConnectResult:disconnect()
 		end
 	end, {})
 	
-	return var1 or ""
+	return UseStateResult or ""
 end

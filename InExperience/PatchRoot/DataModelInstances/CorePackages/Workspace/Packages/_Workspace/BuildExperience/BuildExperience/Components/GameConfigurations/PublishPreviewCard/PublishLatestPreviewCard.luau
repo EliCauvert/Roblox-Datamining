@@ -1,33 +1,32 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local _ = require(buildExperience.Chat.chatTypes)
-local publishExperienceTitleModule = require(script.Parent.PublishExperienceTitle)
-local view = foundationModule.View
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local ReactModule = require(Parent.React)
+local _ = require(BuildExperience.Chat.chatTypes)
+local PublishExperienceTitleModule = require(script.Parent.PublishExperienceTitle)
+local View = require(Parent.Foundation).View
 
-return function(p1)
-	-- upvalues: reactModule (ref), view (ref), publishExperienceTitleModule (ref)
-	local testId = p1.testId or "publish-latest-preview-card"
+return function(p1) --[[ Line: 21 | Named "PublishLatestPreviewCard" ]]
+	-- upvalues: ReactModule (copy), View (copy), PublishExperienceTitleModule (copy)
+	local TestId = p1.testId or "publish-latest-preview-card"
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "col size-full-0 auto-y padding-top-xxsmall",
 		LayoutOrder = p1.layoutOrder,
-		testId = testId
+		testId = TestId
 	}, {
-		Card = reactModule.createElement(view, {
+		Card = ReactModule.createElement(View, {
 			LayoutOrder = 1,
 			tag = "col size-full-0 auto-y stroke-standard stroke-default radius-large clip"
 		}, {
-			Content = reactModule.createElement(view, {
+			Content = ReactModule.createElement(View, {
 				LayoutOrder = 1,
 				tag = "col size-full-0 auto-y padding-large"
 			}, {
-				Title = reactModule.createElement(publishExperienceTitleModule, {
+				Title = ReactModule.createElement(PublishExperienceTitleModule, {
 					layoutOrder = 1,
 					target = p1.target,
 					isCreatorVerified = p1.isCreatorVerified,
-					testId = `{testId}-title`
+					testId = `{TestId}-title`
 				})
 			})
 		})

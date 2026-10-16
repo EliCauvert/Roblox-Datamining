@@ -1,13 +1,14 @@
 ﻿local _ = require(script.Parent.Stores.createUniversalShareSheetStore)
-local getUniversalShareSheetStoreModule = require(script.Parent.Stores.GetUniversalShareSheetStore)
+local GetUniversalShareSheetStoreModule = require(script.Parent.Stores.GetUniversalShareSheetStore)
 
 return {
-	show = function(p1)
-		-- upvalues: getUniversalShareSheetStoreModule (ref)
-		getUniversalShareSheetStoreModule().show(p1)
+	RecipientSource = require(script.Parent.Recipients.RecipientSource).RecipientSource,
+	show = function(p1) --[[ Line: 12 ]]
+		-- upvalues: GetUniversalShareSheetStoreModule (copy)
+		GetUniversalShareSheetStoreModule().show(p1)
 	end,
-	hide = function()
-		-- upvalues: getUniversalShareSheetStoreModule (ref)
-		getUniversalShareSheetStoreModule().hide()
+	hide = function() --[[ Line: 16 ]]
+		-- upvalues: GetUniversalShareSheetStoreModule (copy)
+		GetUniversalShareSheetStoreModule().hide()
 	end
 }

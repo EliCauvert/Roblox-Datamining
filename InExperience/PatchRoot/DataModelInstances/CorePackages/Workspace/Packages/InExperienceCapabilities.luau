@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.InExperienceCapabilities.InExperienceCapabilities)
+﻿return (require(script.Parent._Workspace.InExperienceCapabilities.InExperienceCapabilities))

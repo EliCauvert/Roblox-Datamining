@@ -1,0 +1,3 @@
+﻿local FFlagAXBackgroundGenerationModule = require(script.Parent.FFlagAXBackgroundGeneration)
+
+return game:DefineFastFlag("AXBackgroundsHidePlusUpsellsWhenGuacDisabled", false) and FFlagAXBackgroundGenerationModule

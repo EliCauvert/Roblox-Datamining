@@ -1,46 +1,45 @@
-﻿local parent = script:FindFirstAncestor("TrustedContacts").Parent
-local reactModule = require(parent.React)
-local UIBloxModule = require(parent.UIBlox)
-local partialPageModal = UIBloxModule.App.Dialog.Modal.PartialPageModal
-local buttonType = UIBloxModule.App.Button.Enum.ButtonType
-local useScreenSize = require(parent.RobloxAppHooks).useScreenSize
-local useNavigation = require(parent.Navigation).useNavigation
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local appPage = require(parent.RobloxAppEnums).AppPage
-local foundationModule = require(parent.Foundation)
-local skeleton = foundationModule.Skeleton
-local text = foundationModule.Text
-local icon = foundationModule.Icon
-local iconSize = foundationModule.Enums.IconSize
-local useTokens = foundationModule.Hooks.useTokens
-local ampApiProvider = require(parent.AmpUpsell).AmpApiProvider
-local accessResponseEnum = require(parent.AmpUpsell).AmpEnums.AccessResponseEnum
-local analyticsModule = require(script.Parent.Parent.Parent.Analytics)
-local useTCAnalytics = analyticsModule.useTCAnalytics
-local eventNames = analyticsModule.EventNames
-local fStringCanAccessTrustedContactsAmpNameSpace = require(parent.SharedFlags).FStringCanAccessTrustedContactsAmpNameSpace
-local fStringIsVerified18PlusAmpFeature = require(parent.SharedFlags).FStringIsVerified18PlusAmpFeature
-local fFlagCreateConnectionsHub = require(parent.SharedFlags).FFlagCreateConnectionsHub
-local consoleFriendsPageNavigation = game:DefineFastFlag("ConsoleFriendsPageNavigation", false)
-local fFlagConnectionsToFriendsRename = require(parent.SharedFlags).FFlagConnectionsToFriendsRename
+﻿local Parent = script:FindFirstAncestor("TrustedContacts").Parent
+local ReactModule = require(Parent.React)
+local UIBloxModule = require(Parent.UIBlox)
+local PartialPageModal = UIBloxModule.App.Dialog.Modal.PartialPageModal
+local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
+local UseScreenSizeFunction = require(Parent.RobloxAppHooks).useScreenSize
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local FoundationModule = require(Parent.Foundation)
+local Skeleton = FoundationModule.Skeleton
+local Text = FoundationModule.Text
+local Icon = FoundationModule.Icon
+local IconSize = FoundationModule.Enums.IconSize
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local AmpApiProvider = require(Parent.AmpUpsell).AmpApiProvider
+local AccessResponseEnum = require(Parent.AmpUpsell).AmpEnums.AccessResponseEnum
+local AnalyticsModule = require(script.Parent.Parent.Parent.Analytics)
+local UseTCAnalyticsFunction = AnalyticsModule.useTCAnalytics
+local EventNames = AnalyticsModule.EventNames
+local FStringCanAccessTrustedContactsAmpNameSpace = require(Parent.SharedFlags).FStringCanAccessTrustedContactsAmpNameSpace
+local FStringIsVerified18PlusAmpFeature = require(Parent.SharedFlags).FStringIsVerified18PlusAmpFeature
+local FFlagCreateConnectionsHub = require(Parent.SharedFlags).FFlagCreateConnectionsHub
+local ConsoleFriendsPageNavigation = game:DefineFastFlag("ConsoleFriendsPageNavigation", false)
 
-local function TextWithIcon(p1)
-	-- upvalues: reactModule (ref), icon (ref), iconSize (ref), text (ref)
-	return reactModule.createElement("Frame", {
+local function TextWithIcon(p1) --[[ Line: 38 ]]
+	-- upvalues: ReactModule (copy), Icon (copy), IconSize (copy), Text (copy)
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		AutomaticSize = Enum.AutomaticSize.Y,
 		Size = UDim2.fromScale(1, 0),
 		LayoutOrder = p1.layoutOrder
 	}, {
-		UIListLayout = reactModule.createElement("UIListLayout", {
+		UIListLayout = ReactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Horizontal,
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			Padding = UDim.new(0, p1.iconPadding),
 			HorizontalAlignment = Enum.HorizontalAlignment.Left,
 			VerticalAlignment = Enum.VerticalAlignment.Center
 		}),
-		Icon = reactModule.createElement(icon, { LayoutOrder = 1, name = p1.icon, size = iconSize.Small }),
-		Text = reactModule.createElement(text, {
+		Icon = ReactModule.createElement(Icon, { LayoutOrder = 1, name = p1.icon, size = IconSize.Small }),
+		Text = ReactModule.createElement(Text, {
 			tag = "auto-y grow size-full-0 text-align-x-left text-wrap",
 			LayoutOrder = 2,
 			Text = p1.text
@@ -48,133 +47,138 @@ local function TextWithIcon(p1)
 	})
 end
 
-return function(_)
-	-- upvalues: useScreenSize (ref), useNavigation (ref), useTokens (ref), reactModule (ref), accessResponseEnum (ref), ampApiProvider (ref), fStringIsVerified18PlusAmpFeature (ref), fStringCanAccessTrustedContactsAmpNameSpace (ref), useTCAnalytics (ref), eventNames (ref), fFlagCreateConnectionsHub (ref), appPage (ref), consoleFriendsPageNavigation (ref), useLocalization (ref), fFlagConnectionsToFriendsRename (ref), partialPageModal (ref), buttonType (ref), skeleton (ref), text (ref), TextWithIcon (ref)
-	local var1 = useScreenSize()
-	local var2 = useNavigation()
-	local var3 = useTokens()
-	local var4, var5 = reactModule.useState(accessResponseEnum.Pending)
-	reactModule.useEffect(function()
-		-- upvalues: ampApiProvider (copy), fStringIsVerified18PlusAmpFeature (copy), fStringCanAccessTrustedContactsAmpNameSpace (copy), var5 (ref)
-		var5(ampApiProvider.upsellFeatureAccess(fStringIsVerified18PlusAmpFeature, {}, fStringCanAccessTrustedContactsAmpNameSpace).access)
+return function(_) --[[ Line: 65 | Named "TrustedContactsEducationModal" ]]
+	-- upvalues: UseScreenSizeFunction (copy), UseNavigationFunction (copy), UseTokensFunction (copy), ReactModule (copy), AccessResponseEnum (copy), AmpApiProvider (copy), FStringIsVerified18PlusAmpFeature (copy), FStringCanAccessTrustedContactsAmpNameSpace (copy), UseTCAnalyticsFunction (copy), EventNames (copy), FFlagCreateConnectionsHub (copy), AppPage (copy), ConsoleFriendsPageNavigation (copy), UseLocalizationFunction (copy), PartialPageModal (copy), ButtonType (copy), Skeleton (copy), Text (copy), TextWithIcon (copy)
+	local UseScreenSizeResult = UseScreenSizeFunction()
+	local UseNavigationResult = UseNavigationFunction()
+	local UseTokensResult = UseTokensFunction()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(AccessResponseEnum.Pending)
+	ReactModule.useEffect(function() --[[ Line: 71 ]]
+		-- upvalues: AmpApiProvider (upval), FStringIsVerified18PlusAmpFeature (upval), FStringCanAccessTrustedContactsAmpNameSpace (upval), UseStateResult2 (copy)
+		UseStateResult2(AmpApiProvider.upsellFeatureAccess(FStringIsVerified18PlusAmpFeature, {}, FStringCanAccessTrustedContactsAmpNameSpace).access)
 	end, {})
-	local fireAnalyticsEvent = useTCAnalytics().fireAnalyticsEvent
-	reactModule.useEffect(function()
-		-- upvalues: fireAnalyticsEvent (ref), eventNames (copy)
-		fireAnalyticsEvent(eventNames.TCEducationModalSeen)
+	local FireAnalyticsEventFunction = UseTCAnalyticsFunction().fireAnalyticsEvent
+	ReactModule.useEffect(function() --[[ Line: 78 ]]
+		-- upvalues: FireAnalyticsEventFunction (copy), EventNames (upval)
+		FireAnalyticsEventFunction(EventNames.TCEducationModalSeen)
 	end, {})
-	local var6 = useLocalization({
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 82 ]]
+		-- upvalues: FireAnalyticsEventFunction (copy), EventNames (upval), UseNavigationResult (copy)
+		FireAnalyticsEventFunction(EventNames.TCEducationCloseClicked)
+		UseNavigationResult.pop()
+	end, { UseNavigationResult })
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 87 ]]
+		-- upvalues: FireAnalyticsEventFunction (copy), EventNames (upval), UseNavigationResult (copy)
+		FireAnalyticsEventFunction(EventNames.TCEducationGotItClicked)
+		UseNavigationResult.pop()
+	end, { UseNavigationResult })
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 92 ]]
+		-- upvalues: FireAnalyticsEventFunction (copy), EventNames (upval), FFlagCreateConnectionsHub (upval), UseNavigationResult (copy), AppPage (upval), ConsoleFriendsPageNavigation (upval)
+		FireAnalyticsEventFunction(EventNames.TCEducationManageConnectionsClicked)
+		
+		if FFlagCreateConnectionsHub then
+			UseNavigationResult.navigate(AppPage.CoHubMyConnections)
+			
+			return
+		end
+		if ConsoleFriendsPageNavigation then
+			UseNavigationResult.navigate(AppPage.ViewFriends)
+			
+			return
+		else
+			UseNavigationResult.replace(AppPage.ViewFriends)
+		end
+	end, { UseNavigationResult })
+	local FeatureFriendsTCEducationTitle = UseLocalizationFunction({
 		title = "Feature.Friends.TCEducation.Title",
+		textIntro = "Feature.Friends.TFEducation.Modal.TextIntro",
+		textIntro18Plus = "Feature.Friends.TFEducation.Modal.TextIntro.EighteenPlus",
 		textChatWithoutFilters = "Feature.Friends.TCFeature.ChatWithoutFilters",
 		textPartyVoice = "Feature.Friends.TCFeature.PartyVoice",
 		textAndMore = "Feature.Friends.TCFeature.AndMore",
+		textOutro = "Feature.Friends.TFEducation.Modal.TextOutro",
+		textOutro18Plus = "Feature.Friends.TFEducation.Modal.TextOutro.EighteenPlus",
 		buttonManage = "Feature.Avatar.Heading.Manage",
-		buttonGotIt = "Feature.Friends.Button.GotIt",
-		textIntro = if fFlagConnectionsToFriendsRename then "Feature.Friends.TFEducation.Modal.TextIntro" else "Feature.Friends.TCEducation.Modal.TextIntro",
-		textIntro18Plus = if fFlagConnectionsToFriendsRename then "Feature.Friends.TFEducation.Modal.TextIntro.EighteenPlus" else "Feature.Friends.TCEducation.Modal.TextIntro.EighteenPlus",
-		textOutro = if fFlagConnectionsToFriendsRename then "Feature.Friends.TFEducation.Modal.TextOutro" else "Feature.Friends.TCEducation.Modal.TextOutro",
-		textOutro18Plus = if fFlagConnectionsToFriendsRename then "Feature.Friends.TFEducation.Modal.TextOutro.EighteenPlus" else "Feature.Friends.TCEducation.Modal.TextOutro.EighteenPlus"
+		buttonGotIt = "Feature.Friends.Button.GotIt"
 	})
 	
-	return reactModule.createElement(partialPageModal, {
-		title = var6.title,
-		screenSize = var1,
-		onCloseClicked = reactModule.useCallback(function()
-			-- upvalues: fireAnalyticsEvent (ref), eventNames (copy), var2 (ref)
-			fireAnalyticsEvent(eventNames.TCEducationCloseClicked)
-			var2.pop()
-		end, { var2 }),
+	return ReactModule.createElement(PartialPageModal, {
+		title = FeatureFriendsTCEducationTitle.title,
+		screenSize = UseScreenSizeResult,
+		onCloseClicked = UseResult,
 		buttonStackProps = {
 			buttons = {
 				{
-					buttonType = buttonType.PrimaryContextual,
+					buttonType = ButtonType.PrimaryContextual,
 					props = {
-						onActivated = reactModule.useCallback(function()
-							-- upvalues: fireAnalyticsEvent (ref), eventNames (copy), var2 (ref)
-							fireAnalyticsEvent(eventNames.TCEducationGotItClicked)
-							var2.pop()
-						end, { var2 }),
-						text = var6.buttonGotIt
+						onActivated = UseResult1,
+						text = FeatureFriendsTCEducationTitle.buttonGotIt
 					}
 				},
 				{
-					buttonType = buttonType.Secondary,
+					buttonType = ButtonType.Secondary,
 					props = {
-						onActivated = reactModule.useCallback(function()
-							-- upvalues: fireAnalyticsEvent (ref), eventNames (copy), fFlagCreateConnectionsHub (copy), var2 (ref), appPage (copy), consoleFriendsPageNavigation (copy)
-							fireAnalyticsEvent(eventNames.TCEducationManageConnectionsClicked)
-							
-							if fFlagCreateConnectionsHub then
-								var2.navigate(appPage.CoHubMyConnections)
-								
-								return
-							elseif consoleFriendsPageNavigation then
-								var2.navigate(appPage.ViewFriends)
-								
-								return
-							end
-							var2.replace(appPage.ViewFriends)
-						end, { var2 }),
-						text = var6.buttonManage
+						onActivated = UseResult2,
+						text = FeatureFriendsTCEducationTitle.buttonManage
 					}
 				}
 			},
 			forcedFillDirection = Enum.FillDirection.Horizontal
 		}
 	}, {
-		ViewContainer = reactModule.createElement("Frame", {
+		ViewContainer = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			AutomaticSize = Enum.AutomaticSize.Y,
 			Size = UDim2.fromScale(1, 0)
 		}, {
-			UIListLayout = reactModule.createElement("UIListLayout", {
+			UIListLayout = ReactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Vertical,
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				HorizontalAlignment = Enum.HorizontalAlignment.Center
 			}),
-			TextContainer = reactModule.createElement("Frame", {
+			TextContainer = ReactModule.createElement("Frame", {
 				LayoutOrder = 2,
 				BackgroundTransparency = 1,
 				AutomaticSize = Enum.AutomaticSize.Y,
 				Size = UDim2.fromScale(1, 0)
 			}, {
-				UIListLayout = reactModule.createElement("UIListLayout", {
+				UIListLayout = ReactModule.createElement("UIListLayout", {
 					FillDirection = Enum.FillDirection.Vertical,
 					SortOrder = Enum.SortOrder.LayoutOrder,
-					Padding = UDim.new(0, var3.Padding.Large),
+					Padding = UDim.new(0, UseTokensResult.Padding.Large),
 					HorizontalAlignment = Enum.HorizontalAlignment.Center
 				}),
-				OuterPadding = reactModule.createElement("UIPadding", {
-					PaddingTop = UDim.new(0, var3.Padding.Medium),
-					PaddingBottom = UDim.new(0, var3.Padding.Large)
+				OuterPadding = ReactModule.createElement("UIPadding", {
+					PaddingTop = UDim.new(0, UseTokensResult.Padding.Medium),
+					PaddingBottom = UDim.new(0, UseTokensResult.Padding.Large)
 				}),
-				ConnectTextIntro = if var4 == accessResponseEnum.Pending then reactModule.createElement(skeleton, { LayoutOrder = 1, Size = UDim2.new(1, 0, 0, 30) }) else reactModule.createElement(text, {
+				ConnectTextIntro = if UseStateResult == AccessResponseEnum.Pending then ReactModule.createElement(Skeleton, { LayoutOrder = 1, Size = UDim2.new(1, 0, 0, 30) }) else ReactModule.createElement(Text, {
 					LayoutOrder = 1,
 					tag = "auto-y grow size-full-0 text-align-x-left text-wrap",
-					Text = if var4 == accessResponseEnum.Granted then var6.textIntro18Plus else var6.textIntro
+					Text = if UseStateResult == AccessResponseEnum.Granted then FeatureFriendsTCEducationTitle.textIntro18Plus else FeatureFriendsTCEducationTitle.textIntro
 				}),
-				ConnectOptionText1 = reactModule.createElement(TextWithIcon, {
+				ConnectOptionText1 = ReactModule.createElement(TextWithIcon, {
 					layoutOrder = 2,
 					icon = "icons/menu/platformChatOff_small",
-					text = var6.textChatWithoutFilters,
-					iconPadding = var3.Padding.Medium
+					text = FeatureFriendsTCEducationTitle.textChatWithoutFilters,
+					iconPadding = UseTokensResult.Padding.Medium
 				}),
-				ConnectOptionText2 = reactModule.createElement(TextWithIcon, {
+				ConnectOptionText2 = ReactModule.createElement(TextWithIcon, {
 					layoutOrder = 3,
 					icon = "icons/controls/microphone_small",
-					text = var6.textPartyVoice,
-					iconPadding = var3.Padding.Medium
+					text = FeatureFriendsTCEducationTitle.textPartyVoice,
+					iconPadding = UseTokensResult.Padding.Medium
 				}),
-				ConnectOptionText3 = reactModule.createElement(TextWithIcon, {
+				ConnectOptionText3 = ReactModule.createElement(TextWithIcon, {
 					layoutOrder = 4,
 					icon = "icons/actions/edit/add_small",
-					text = var6.textAndMore,
-					iconPadding = var3.Padding.Medium
+					text = FeatureFriendsTCEducationTitle.textAndMore,
+					iconPadding = UseTokensResult.Padding.Medium
 				}),
-				ConnectTextOutro = if var4 == accessResponseEnum.Pending then reactModule.createElement(skeleton, { LayoutOrder = 5, Size = UDim2.new(1, 0, 0, 60) }) else reactModule.createElement(text, {
+				ConnectTextOutro = if UseStateResult == AccessResponseEnum.Pending then ReactModule.createElement(Skeleton, { LayoutOrder = 5, Size = UDim2.new(1, 0, 0, 60) }) else ReactModule.createElement(Text, {
 					LayoutOrder = 5,
 					tag = "auto-y grow size-full-0 text-align-x-left text-wrap",
-					Text = if var4 == accessResponseEnum.Granted then var6.textOutro18Plus else var6.textOutro
+					Text = if UseStateResult == AccessResponseEnum.Granted then FeatureFriendsTCEducationTitle.textOutro18Plus else FeatureFriendsTCEducationTitle.textOutro
 				})
 			})
 		})

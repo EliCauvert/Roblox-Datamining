@@ -1,29 +1,29 @@
-﻿local marketplaceService = game:GetService("MarketplaceService")
-local cancelSubscriptionApp = script:FindFirstAncestor("CancelSubscriptionApp")
-local parent = cancelSubscriptionApp.Parent
-local reactModule = require(parent.React)
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local cancelSubscriptionEndedModule = require(cancelSubscriptionApp.Store.Actions.CancelSubscriptionEnded)
-local selectErrorStateModule = require(cancelSubscriptionApp.Store.Selectors.selectErrorState)
-local errorStateEnumModule = require(cancelSubscriptionApp.Enums.ErrorStateEnum)
-local selectSubscriptionIdModule = require(cancelSubscriptionApp.Store.Selectors.selectSubscriptionId)
+﻿local MarketplaceService = game:GetService("MarketplaceService")
+local CancelSubscriptionApp = script:FindFirstAncestor("CancelSubscriptionApp")
+local Parent = CancelSubscriptionApp.Parent
+local ReactModule = require(Parent.React)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local CancelSubscriptionEndedModule = require(CancelSubscriptionApp.Store.Actions.CancelSubscriptionEnded)
+local SelectErrorStateModule = require(CancelSubscriptionApp.Store.Selectors.selectErrorState)
+local ErrorStateEnumModule = require(CancelSubscriptionApp.Enums.ErrorStateEnum)
+local SelectSubscriptionIdModule = require(CancelSubscriptionApp.Store.Selectors.selectSubscriptionId)
 local _ = require(script.Parent.CancelUserSubscriptionErrorPrompt)
 
-return function()
-	-- upvalues: useSelector (ref), selectErrorStateModule (ref), useDispatch (ref), selectSubscriptionIdModule (ref), reactModule (ref), errorStateEnumModule (ref), marketplaceService (ref), cancelSubscriptionEndedModule (ref)
-	local var1 = useSelector(selectErrorStateModule)
-	local var2 = useDispatch()
-	local var3 = useSelector(selectSubscriptionIdModule) or ""
+return function() --[[ Line: 15 | Named "useCancelUserSubscriptionErrorPromptProps" ]]
+	-- upvalues: UseSelectorFunction (copy), SelectErrorStateModule (copy), UseDispatchFunction (copy), SelectSubscriptionIdModule (copy), ReactModule (copy), ErrorStateEnumModule (copy), MarketplaceService (copy), CancelSubscriptionEndedModule (copy)
+	local UseSelectorResult = UseSelectorFunction(SelectErrorStateModule)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseSelectorResult1 = UseSelectorFunction(SelectSubscriptionIdModule) or ""
 	
 	return {
-		onDismiss = reactModule.useCallback(function()
-			-- upvalues: var1 (ref), errorStateEnumModule (copy), marketplaceService (copy), var3 (ref), var2 (ref), cancelSubscriptionEndedModule (copy)
-			if var1 == errorStateEnumModule.Expiring then
-				marketplaceService:SignalUserSubscriptionStatusChanged(var3)
+		onDismiss = ReactModule.useCallback(function() --[[ Line: 20 ]]
+			-- upvalues: UseSelectorResult (copy), ErrorStateEnumModule (upval), MarketplaceService (upval), UseSelectorResult1 (copy), UseDispatchResult (copy), CancelSubscriptionEndedModule (upval)
+			if UseSelectorResult == ErrorStateEnumModule.Expiring then
+				MarketplaceService:SignalUserSubscriptionStatusChanged(UseSelectorResult1)
 			end
-			var2(cancelSubscriptionEndedModule())
-		end, { var1, var2 }),
-		errorState = var1
+			UseDispatchResult(CancelSubscriptionEndedModule())
+		end, { UseSelectorResult, UseDispatchResult }),
+		errorState = UseSelectorResult
 	}
 end

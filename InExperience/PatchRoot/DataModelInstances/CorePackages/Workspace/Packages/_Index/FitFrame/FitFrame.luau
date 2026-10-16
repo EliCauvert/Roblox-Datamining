@@ -1,1 +1,1 @@
-﻿return require(game:GetService("CorePackages").Packages.FitFrame)
+﻿return (require(game:GetService("CorePackages").Packages.FitFrame))

@@ -1,1 +1,5 @@
-﻿return game:DefineFastFlag("AddFriendsPageUseSections_v3", false) and (require(script.Parent.FFlagEnableGetFriendshipStatus) and (require(script.Parent.FFlagAddFriendsPresenceStoreMigration) and require(script.Parent.FFlagFriendsRequestsMergeListsWithoutDuplicates)))
+﻿local FFlagEnableGetFriendshipStatusModule = require(script.Parent.FFlagEnableGetFriendshipStatus)
+local FFlagAddFriendsPresenceStoreMigrationModule = require(script.Parent.FFlagAddFriendsPresenceStoreMigration)
+local FFlagFriendsRequestsMergeListsWithoutDuplicatesModule = require(script.Parent.FFlagFriendsRequestsMergeListsWithoutDuplicates)
+
+return game:DefineFastFlag("AddFriendsPageUseSections_v3", false) and (FFlagEnableGetFriendshipStatusModule and (FFlagAddFriendsPresenceStoreMigrationModule and FFlagFriendsRequestsMergeListsWithoutDuplicatesModule))

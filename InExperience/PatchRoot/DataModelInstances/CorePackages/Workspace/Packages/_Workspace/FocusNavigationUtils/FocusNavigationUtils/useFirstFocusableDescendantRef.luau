@@ -1,66 +1,76 @@
-﻿local reactModule = require(script:FindFirstAncestor("FocusNavigationUtils").Parent.React)
-local getFirstFocusableDescendantModule = require(script.Parent.getFirstFocusableDescendant)
+﻿local ReactModule = require(script:FindFirstAncestor("FocusNavigationUtils").Parent.React)
+local GetFirstFocusableDescendantModule = require(script.Parent.getFirstFocusableDescendant)
 
-local function _(p1)
-	if p1 then
-		p1:Disconnect()
+local function _(Connection) --[[ Line: 6 | Named "safeDisconnect" ]]
+	if Connection then
+		Connection:Disconnect()
 	end
 end
 
-return function(p1)
-	-- upvalues: reactModule (ref), getFirstFocusableDescendantModule (ref)
-	local var1 = reactModule.useRef(nil)
-	reactModule.useEffect(function()
-		-- upvalues: getFirstFocusableDescendantModule (copy), var1 (ref), p1 (ref)
-		local var2 = nil
-		local descendantAddedConnection = nil
-		local var3 = nil
+return function(p1) --[[ Line: 23 | Named "useFirstFocusableDescendantRef" ]]
+	-- upvalues: ReactModule (copy), GetFirstFocusableDescendantModule (copy)
+	local UseRefResult = ReactModule.useRef(nil)
+	ReactModule.useEffect(function() --[[ Line: 26 ]]
+		-- upvalues: GetFirstFocusableDescendantModule (upval), UseRefResult (copy), p1 (copy)
+		local Connection = nil
+		local DescendantAddedConnection = nil
+		local AncestryChangedConnection = nil
 		
-		local function updateFirstFocusable(p2)
-			-- upvalues: var2 (write), var3 (write), getFirstFocusableDescendantModule (copy), updateFirstFocusable (ref), var1 (copy)
-			if var2 then
-				var2:Disconnect()
-			end
-			if var3 then
-				var3:Disconnect()
-			end
-			local var4 = getFirstFocusableDescendantModule(p2)
+		local function updateFirstFocusable(p2) --[[ Line: 31 ]]
+			-- upvalues: Connection (ref), AncestryChangedConnection (ref), GetFirstFocusableDescendantModule (upval), updateFirstFocusable (copy), UseRefResult (upval)
+			local Connection1 = Connection
 			
-			if var4 then
-				var2 = var4:GetPropertyChangedSignal("Selectable"):Connect(function()
-					-- upvalues: updateFirstFocusable (copy), p2 (ref)
+			if Connection1 then
+				Connection1:Disconnect()
+			end
+			local Connection2 = AncestryChangedConnection
+			
+			if Connection2 then
+				Connection2:Disconnect()
+			end
+			local FirstFocusableDescendantModule = GetFirstFocusableDescendantModule(p2)
+			
+			if FirstFocusableDescendantModule then
+				Connection = FirstFocusableDescendantModule:GetPropertyChangedSignal("Selectable"):Connect(function() --[[ Line: 38 ]]
+					-- upvalues: updateFirstFocusable (upval), p2 (copy)
 					updateFirstFocusable(p2)
 				end)
-				var3 = var4.AncestryChanged:Connect(function()
-					-- upvalues: updateFirstFocusable (copy), p2 (ref)
+				AncestryChangedConnection = FirstFocusableDescendantModule.AncestryChanged:Connect(function() --[[ Line: 42 ]]
+					-- upvalues: updateFirstFocusable (upval), p2 (copy)
 					updateFirstFocusable(p2)
 				end)
 			end
-			var1.current = var4
+			UseRefResult.current = FirstFocusableDescendantModule
 		end
 		
 		if p1 then
 			updateFirstFocusable(p1)
-			descendantAddedConnection = p1.DescendantAdded:Connect(function()
-				-- upvalues: updateFirstFocusable (ref), p1 (copy)
+			DescendantAddedConnection = p1.DescendantAdded:Connect(function() --[[ Line: 51 ]]
+				-- upvalues: updateFirstFocusable (copy), p1 (upval)
 				updateFirstFocusable(p1)
 			end)
 		else
-			var1.current = nil
+			UseRefResult.current = nil
 		end
-		return function()
-			-- upvalues: var2 (write), descendantAddedConnection (write), var3 (write)
-			if var2 then
-				var2:Disconnect()
+		return function() --[[ Line: 58 ]]
+			-- upvalues: Connection (ref), DescendantAddedConnection (ref), AncestryChangedConnection (ref)
+			local Connection1 = Connection
+			
+			if Connection1 then
+				Connection1:Disconnect()
 			end
-			if descendantAddedConnection then
-				descendantAddedConnection:Disconnect()
+			local Connection2 = DescendantAddedConnection
+			
+			if Connection2 then
+				Connection2:Disconnect()
 			end
-			if var3 then
-				var3:Disconnect()
+			local Connection3 = AncestryChangedConnection
+			
+			if Connection3 then
+				Connection3:Disconnect()
 			end
 		end
 	end, { p1 })
 	
-	return var1
+	return UseRefResult
 end

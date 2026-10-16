@@ -1,6 +1,6 @@
-﻿local useGameIconForSizeModule = require(script:FindFirstAncestor("GameHydrationReact").useGameIconForSize)
+﻿local UseGameIconForSizeModule = require(script:FindFirstAncestor("GameHydrationReact").useGameIconForSize)
 
-return function(p1)
-	-- upvalues: useGameIconForSizeModule (ref)
-	return useGameIconForSizeModule(p1)
+return function(p1) --[[ Line: 7 | Named "useGameIcon" ]]
+	-- upvalues: UseGameIconForSizeModule (copy)
+	return UseGameIconForSizeModule(p1)
 end

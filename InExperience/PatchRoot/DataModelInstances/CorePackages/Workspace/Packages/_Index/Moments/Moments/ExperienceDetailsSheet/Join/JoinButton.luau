@@ -1,37 +1,38 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local button = foundationModule.Button
-local useSignalState = require(parent.SignalsReact).useSignalState
-local _ = require(moments.ExperienceDetailsSheet.Types)
-local feedContextModule = require(moments.Components.Feed.FeedContext)
-local useJoinExperienceModule = require(script.Parent.useJoinExperience)
-local useJoinCtaImpressionModule = require(script.Parent.useJoinCtaImpression)
-local getMomentsPreferencesStoreModule = require(moments.Stores.GetMomentsPreferencesStore)
-local fFlagMomentsFixRecommendationImpressionLifecycleModule = require(moments.Flags.FFlagMomentsFixRecommendationImpressionLifecycle)
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local Button = FoundationModule.Button
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local _ = require(Moments.ExperienceDetailsSheet.Types)
+local FeedContextModule = require(Moments.Components.Feed.FeedContext)
+local UseJoinExperienceModule = require(script.Parent.useJoinExperience)
+local UseJoinCtaImpressionModule = require(script.Parent.useJoinCtaImpression)
+local GetMomentsPreferencesStoreModule = require(Moments.Stores.GetMomentsPreferencesStore)
+local FFlagMomentsFixRecommendationImpressionLifecycleModule = require(Moments.Flags.FFlagMomentsFixRecommendationImpressionLifecycle)
+local NavigationDestinationTypeModule = require(Moments.Enums.NavigationDestinationType)
+local FFlagMomentsNavigationEventModule = require(Moments.Flags.FFlagMomentsNavigationEvent)
+local FFlagMomentsPlayEventModule = require(Moments.Flags.FFlagMomentsPlayEvent)
 
-return reactModule.memo(function(p1)
-	-- upvalues: useJoinExperienceModule (ref), useSignalState (ref), getMomentsPreferencesStoreModule (ref), useJoinCtaImpressionModule (ref), fFlagMomentsFixRecommendationImpressionLifecycleModule (ref), feedContextModule (ref), reactModule (ref), button (ref), foundationModule (ref)
-	local var1 = useJoinExperienceModule()
-	local var2 = useSignalState(getMomentsPreferencesStoreModule(false).getIsTeleporting)
-	useJoinCtaImpressionModule(p1.isDisabled == true, p1.reportsImpression == true)
-	local var3 = if fFlagMomentsFixRecommendationImpressionLifecycleModule then feedContextModule.useFeedOptional() else nil
-	local context = p1.context
+return ReactModule.memo(function(Frame) --[[ Line: 42 | Named "JoinButton" ]]
+	-- upvalues: UseJoinExperienceModule (copy), UseSignalStateFunction (copy), GetMomentsPreferencesStoreModule (copy), UseJoinCtaImpressionModule (copy), FFlagMomentsFixRecommendationImpressionLifecycleModule (copy), FeedContextModule (copy), ReactModule (copy), Button (copy), FoundationModule (copy), FFlagMomentsNavigationEventModule (copy), NavigationDestinationTypeModule (copy), FFlagMomentsPlayEventModule (copy)
+	local UseJoinExperienceModuleResult = UseJoinExperienceModule()
+	local UseSignalStateResult = UseSignalStateFunction(GetMomentsPreferencesStoreModule(false).getIsTeleporting)
+	UseJoinCtaImpressionModule(Frame.isDisabled == true, Frame.reportsImpression == true)
+	local UseFeedOptionalResult = if FFlagMomentsFixRecommendationImpressionLifecycleModule then FeedContextModule.useFeedOptional() else nil
+	local Context = Frame.context
 	
-	return reactModule.createElement(button, {
-		LayoutOrder = p1.LayoutOrder,
-		text = p1.text,
-		size = foundationModule.Enums.InputSize.Medium,
-		variant = foundationModule.Enums.ButtonVariant.Emphasis,
-		isDisabled = if p1.isDisabled ~= true then var2 else true,
-		testId = p1.testId,
-		onActivated = function()
-			-- upvalues: fFlagMomentsFixRecommendationImpressionLifecycleModule (copy), var3 (write), var1 (ref), context (ref)
-			if fFlagMomentsFixRecommendationImpressionLifecycleModule and var3 ~= nil then
-				var3.flushView()
-			end
-			var1(context)
+	return ReactModule.createElement(Button, {
+		LayoutOrder = Frame.LayoutOrder,
+		text = Frame.text,
+		size = FoundationModule.Enums.InputSize.Medium,
+		variant = FoundationModule.Enums.ButtonVariant.Emphasis,
+		isDisabled = Frame.isDisabled == true or UseSignalStateResult,
+		testId = Frame.testId,
+		onActivated = function() --[[ Line: 64 ]]
+			-- upvalues: FFlagMomentsFixRecommendationImpressionLifecycleModule (upval), UseFeedOptionalResult (ref), FFlagMomentsNavigationEventModule (upval), NavigationDestinationTypeModule (upval), UseJoinExperienceModuleResult (copy), Context (copy), FFlagMomentsPlayEventModule (upval)
+			local FlushViewResult = if FFlagMomentsFixRecommendationImpressionLifecycleModule and UseFeedOptionalResult ~= nil then UseFeedOptionalResult.flushView(if FFlagMomentsNavigationEventModule then NavigationDestinationTypeModule.ExperienceJoin else nil) else nil
+			UseJoinExperienceModuleResult(Context, nil, if FFlagMomentsPlayEventModule then FlushViewResult else nil)
 		end
 	})
 end)

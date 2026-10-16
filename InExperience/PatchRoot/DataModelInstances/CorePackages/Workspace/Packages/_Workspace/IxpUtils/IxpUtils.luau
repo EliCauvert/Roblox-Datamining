@@ -1,1 +1,1 @@
-﻿return require(script.IXPUtils)
+﻿return (require(script.IXPUtils))

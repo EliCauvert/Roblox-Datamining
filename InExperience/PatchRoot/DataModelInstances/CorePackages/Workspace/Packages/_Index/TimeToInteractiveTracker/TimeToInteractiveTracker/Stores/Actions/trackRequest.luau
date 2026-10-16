@@ -1,67 +1,66 @@
-﻿local timeToInteractiveTracker = script:FindFirstAncestor("TimeToInteractiveTracker")
-local name = require(timeToInteractiveTracker.Logger):new(script.Name)
-local fFlagDebugTimeToInteractiveTrackerModule = require(timeToInteractiveTracker.Utils.FFlagDebugTimeToInteractiveTracker)
-local fFlagTimeToInteractiveTrackerWarningsRequireDebugModule = require(timeToInteractiveTracker.Utils.FFlagTimeToInteractiveTrackerWarningsRequireDebug)
+﻿local TimeToInteractiveTracker = script:FindFirstAncestor("TimeToInteractiveTracker")
+local NewResult = require(TimeToInteractiveTracker.Logger):new(script.Name)
+local FFlagDebugTimeToInteractiveTrackerModule = require(TimeToInteractiveTracker.Utils.FFlagDebugTimeToInteractiveTracker)
+local FFlagTimeToInteractiveTrackerWarningsRequireDebugModule = require(TimeToInteractiveTracker.Utils.FFlagTimeToInteractiveTrackerWarningsRequireDebug)
 local _ = require(script.Parent.Parent.types)
-local nowModule = require(timeToInteractiveTracker.Utils.now)
-local utilModule = require(timeToInteractiveTracker.Utils.Util)
+local NowModule = require(TimeToInteractiveTracker.Utils.now)
+local UtilModule = require(TimeToInteractiveTracker.Utils.Util)
 
-return function(p1, p2)
-	-- upvalues: nowModule (ref), fFlagTimeToInteractiveTrackerWarningsRequireDebugModule (ref), fFlagDebugTimeToInteractiveTrackerModule (ref), name (ref), utilModule (ref)
-	return function(p3, p4, p5)
-		-- upvalues: nowModule (copy), p1 (ref), fFlagTimeToInteractiveTrackerWarningsRequireDebugModule (copy), fFlagDebugTimeToInteractiveTrackerModule (copy), name (copy), p2 (ref), utilModule (copy)
-		local var1 = nowModule()
-		local var2 = p1(false)[p3]
+return function(Callback, Callback1) --[[ Line: 21 ]]
+	-- upvalues: NowModule (copy), FFlagTimeToInteractiveTrackerWarningsRequireDebugModule (copy), FFlagDebugTimeToInteractiveTrackerModule (copy), NewResult (copy), UtilModule (copy)
+	return function(p1, p2, Name) --[[ Line: 22 ]]
+		-- upvalues: NowModule (upval), Callback (copy), FFlagTimeToInteractiveTrackerWarningsRequireDebugModule (upval), FFlagDebugTimeToInteractiveTrackerModule (upval), NewResult (upval), Callback1 (copy), UtilModule (upval)
+		local NowModuleResult = NowModule()
+		local CallbackResultEntry = Callback(false)[p1]
 		
-		if var2 and var2.startTime then
-			local t = {
-				name = p5,
-				timestamp = var1,
-				deltaMs = (var1 - var2.startTime) * 1000
+		if CallbackResultEntry and CallbackResultEntry.startTime then
+			local config = {
+				name = Name,
+				timestamp = NowModuleResult,
+				deltaMs = (NowModuleResult - CallbackResultEntry.startTime) * 1000
 			}
-			p2(function(p6)
-				-- upvalues: p3 (ref), utilModule (copy), p4 (ref), fFlagTimeToInteractiveTrackerWarningsRequireDebugModule (copy), fFlagDebugTimeToInteractiveTrackerModule (copy), name (copy), t (ref)
-				local var3 = p6[p3]
+			Callback1(function(Tbl) --[[ Line: 45 ]]
+				-- upvalues: p1 (copy), UtilModule (upval), p2 (copy), FFlagTimeToInteractiveTrackerWarningsRequireDebugModule (upval), FFlagDebugTimeToInteractiveTrackerModule (upval), NewResult (upval), config (copy)
+				local Entry = Tbl[p1]
 				
-				if not var3 or not var3.milestones then
-					return p6
+				if not Entry or not Entry.milestones then
+					return Tbl
 				end
-				local var4 = utilModule.findLastMilestoneIndex(var3.milestones, p4)
+				local LastMilestoneIndex = UtilModule.findLastMilestoneIndex(Entry.milestones, p2)
 				
-				if var4 then
-					local cloned = table.clone(p6)
-					local cloned_1 = table.clone(var3)
-					local cloned_2 = table.clone(var3.milestones)
-					local cloned_3 = table.clone(cloned_2[var4])
-					local var5 = if cloned_3.requests then table.clone(cloned_3.requests) else {}
-					table.insert(var5, t)
-					cloned_3.requests = var5
-					cloned_2[var4] = cloned_3
-					cloned_1.milestones = cloned_2
-					cloned[p3] = cloned_1
+				if LastMilestoneIndex then
+					local Copy = table.clone(Tbl)
+					local Copy1 = table.clone(Entry)
+					local Copy2 = table.clone(Entry.milestones)
+					local Copy3 = table.clone(Copy2[LastMilestoneIndex])
+					local Copy4 = if Copy3.requests then table.clone(Copy3.requests) else {}
+					table.insert(Copy4, config)
+					Copy3.requests = Copy4
+					Copy2[LastMilestoneIndex] = Copy3
+					Copy1.milestones = Copy2
+					Copy[p1] = Copy1
 					
-					return cloned
-				elseif fFlagTimeToInteractiveTrackerWarningsRequireDebugModule then
-					if fFlagDebugTimeToInteractiveTrackerModule then
-						name:warning(`no milestone "{p3}" found for eventName={p3}`)
-						
-						return p6
-					end
+					return Copy
 				else
-					name:warning(`no milestone "{p3}" found for eventName={p3}`)
+					if not FFlagTimeToInteractiveTrackerWarningsRequireDebugModule then
+						NewResult:warning(`no milestone "{p1}" found for eventName={p1}`)
+					elseif FFlagDebugTimeToInteractiveTrackerModule then
+						NewResult:warning(`no milestone "{p1}" found for eventName={p1}`)
+						
+						return Tbl
+					end
+					return Tbl
 				end
-				return p6
 			end)
 			
 			return
-		elseif fFlagTimeToInteractiveTrackerWarningsRequireDebugModule then
-			if fFlagDebugTimeToInteractiveTrackerModule then
-				name:warning(`called before trackStart for eventName={p3}`)
-				
-				return
-			end
-		else
-			name:warning(`called before trackStart for eventName={p3}`)
+		end
+		if not FFlagTimeToInteractiveTrackerWarningsRequireDebugModule then
+			NewResult:warning(`called before trackStart for eventName={p1}`)
+		elseif FFlagDebugTimeToInteractiveTrackerModule then
+			NewResult:warning(`called before trackStart for eventName={p1}`)
+			
+			return
 		end
 	end
 end

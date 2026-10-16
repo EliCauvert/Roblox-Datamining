@@ -1,17 +1,17 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local buttonVariant = require(profilePlatform.Parent.Foundation).Enums.ButtonVariant
-local enumsModule = require(profilePlatform.Common.Enums)
-local _ = require(profilePlatform.Components.CTARow.Types)
-local profileTypes = enumsModule.ProfileTypes
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local ButtonVariant = require(ProfilePlatform.Parent.Foundation).Enums.ButtonVariant
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local _ = require(ProfilePlatform.Components.CTARow.Types)
+local ProfileTypes = EnumsModule.ProfileTypes
 
 return {
-	[enumsModule.ProfileActions.PendingFriendRequest] = function(p1)
-		-- upvalues: buttonVariant (ref), enumsModule (ref), profileTypes (ref)
+	[EnumsModule.ProfileActions.PendingFriendRequest] = function(p1) --[[ Line: 13 ]]
+		-- upvalues: ButtonVariant (copy), EnumsModule (copy), ProfileTypes (copy)
 		return {
 			isDisabled = true,
-			variant = buttonVariant.Subtle,
-			text = p1.localized[enumsModule.ProfileActions.PendingFriendRequest],
-			onActivated = { [profileTypes.User] = function() end }
+			variant = ButtonVariant.Subtle,
+			text = p1.localized[EnumsModule.ProfileActions.PendingFriendRequest],
+			onActivated = { [ProfileTypes.User] = function() --[[ Line: 18 ]] end }
 		}
 	end
 }

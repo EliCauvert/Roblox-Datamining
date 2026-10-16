@@ -1,19 +1,19 @@
-﻿local parent = script:FindFirstAncestor("AuthCommon").Parent
-local httpService = game:GetService("HttpService")
-local _ = require(parent.Http)
-local urlBuilder = require(parent.UrlBuilder).UrlBuilder
+﻿local Parent = script:FindFirstAncestor("AuthCommon").Parent
+local HttpService = game:GetService("HttpService")
+local _ = require(Parent.Http)
+local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
 
-return function(p1, p2)
-	-- upvalues: urlBuilder (ref), httpService (ref)
-	return p1(urlBuilder.fromString("auth:v1/account/upgrade")(), "POST", {
+return function(Callback, p1) --[[ Line: 25 ]]
+	-- upvalues: UrlBuilder (copy), HttpService (copy)
+	return Callback(UrlBuilder.fromString("auth:v1/account/upgrade")(), "POST", {
 		maxRetryCount = 0,
-		postBody = httpService:JSONEncode({
-			upgradeType = p2.upgradeType,
-			username = p2.username,
-			password = if p2.password == "" then nil else p2.password,
-			birthday = if p2.birthday == "" then nil else p2.birthday,
-			email = if p2.email == "" then nil else p2.email,
-			gender = p2.gender
+		postBody = HttpService:JSONEncode({
+			upgradeType = p1.upgradeType,
+			username = p1.username,
+			password = if p1.password == "" then nil else p1.password,
+			birthday = if p1.birthday == "" then nil else p1.birthday,
+			email = if p1.email == "" then nil else p1.email,
+			gender = p1.gender
 		}),
 		headers = {
 			["Content-Type"] = "application/json",

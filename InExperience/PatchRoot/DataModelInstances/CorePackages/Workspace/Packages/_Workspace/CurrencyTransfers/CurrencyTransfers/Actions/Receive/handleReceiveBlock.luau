@@ -1,63 +1,63 @@
-﻿local currencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
-local sharedFlagsModule = require(currencyTransfers.Parent.SharedFlags)
-local _ = require(currencyTransfers.Stores.createTransferStore)
-local getTransferRequestByIdRequestModule = require(currencyTransfers.NetworkRequests.getTransferRequestByIdRequest)
-local promptStateModule = require(currencyTransfers.Enums.PromptState)
-local _ = require(currencyTransfers.Enums.TransferRetryOrigin)
-local currencyTransferTelemetryModule = require(currencyTransfers.Events.CurrencyTransferTelemetry)
-local robuxTransferFlowEventNameModule = require(currencyTransfers.Enums.RobuxTransferFlowEventName)
-local logCurrencyTransferCounterModule = require(currencyTransfers.Utils.logCurrencyTransferCounter)
-local logRobuxTransferFlowEventModule = require(currencyTransfers.Utils.logRobuxTransferFlowEvent)
+﻿local CurrencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
+local SharedFlagsModule = require(CurrencyTransfers.Parent.SharedFlags)
+local _ = require(CurrencyTransfers.Stores.createTransferStore)
+local GetTransferRequestByIdRequestModule = require(CurrencyTransfers.NetworkRequests.getTransferRequestByIdRequest)
+local PromptStateModule = require(CurrencyTransfers.Enums.PromptState)
+local _ = require(CurrencyTransfers.Enums.TransferRetryOrigin)
+local CurrencyTransferTelemetryModule = require(CurrencyTransfers.Events.CurrencyTransferTelemetry)
+local RobuxTransferFlowEventNameModule = require(CurrencyTransfers.Enums.RobuxTransferFlowEventName)
+local LogCurrencyTransferCounterModule = require(CurrencyTransfers.Utils.logCurrencyTransferCounter)
+local LogRobuxTransferFlowEventModule = require(CurrencyTransfers.Utils.logRobuxTransferFlowEvent)
 
-return function(p1, p2, p3, p4)
-	-- upvalues: logCurrencyTransferCounterModule (ref), currencyTransferTelemetryModule (ref), sharedFlagsModule (ref), logRobuxTransferFlowEventModule (ref), robuxTransferFlowEventNameModule (ref), promptStateModule (ref), getTransferRequestByIdRequestModule (ref)
-	local setPromptState = p1.setPromptState
-	local setAmpRecourseActions = p1.setAmpRecourseActions
-	local setAmpFeatureCheck = p1.setAmpFeatureCheck
-	local setTransferRetryOrigin = p1.setTransferRetryOrigin
-	local setSender = p1.setSender
-	local getSender = p1.getSender
-	local getTransferRequestId = p1.getTransferRequestId
+return function(p1, p2, p3, p4) --[[ Line: 17 | Named "handleReceiveBlock" ]]
+	-- upvalues: LogCurrencyTransferCounterModule (copy), CurrencyTransferTelemetryModule (copy), SharedFlagsModule (copy), LogRobuxTransferFlowEventModule (copy), RobuxTransferFlowEventNameModule (copy), PromptStateModule (copy), GetTransferRequestByIdRequestModule (copy)
+	local SetPromptStateFunction = p1.setPromptState
+	local SetAmpRecourseActionsFunction = p1.setAmpRecourseActions
+	local SetAmpFeatureCheckFunction = p1.setAmpFeatureCheck
+	local SetTransferRetryOriginFunction = p1.setTransferRetryOrigin
+	local SetSenderFunction = p1.setSender
+	local GetTransferRequestIdFunction = p1.getTransferRequestId
 	
-	local function applyBlockState()
-		-- upvalues: logCurrencyTransferCounterModule (copy), p1 (ref), currencyTransferTelemetryModule (copy), sharedFlagsModule (copy), logRobuxTransferFlowEventModule (copy), robuxTransferFlowEventNameModule (copy), p2 (ref), setAmpRecourseActions (ref), p3 (ref), setAmpFeatureCheck (ref), p4 (ref), setTransferRetryOrigin (ref), setPromptState (ref), promptStateModule (copy)
-		logCurrencyTransferCounterModule(p1, currencyTransferTelemetryModule.CurrencyTransferAmpRecourseRequiredCounter)
+	local function applyBlockState() --[[ Line: 31 ]]
+		-- upvalues: LogCurrencyTransferCounterModule (upval), p1 (copy), CurrencyTransferTelemetryModule (upval), SharedFlagsModule (upval), LogRobuxTransferFlowEventModule (upval), RobuxTransferFlowEventNameModule (upval), p2 (copy), SetAmpRecourseActionsFunction (copy), p3 (copy), SetAmpFeatureCheckFunction (copy), p4 (copy), SetTransferRetryOriginFunction (copy), SetPromptStateFunction (copy), PromptStateModule (upval)
+		LogCurrencyTransferCounterModule(p1, CurrencyTransferTelemetryModule.CurrencyTransferAmpRecourseRequiredCounter)
 		
-		if sharedFlagsModule.FFlagEnableRobuxTransferFlowEventIngest then
-			logRobuxTransferFlowEventModule(p1, robuxTransferFlowEventNameModule.amp_recourse_required)
+		if SharedFlagsModule.FFlagEnableRobuxTransferFlowEventIngest then
+			LogRobuxTransferFlowEventModule(p1, RobuxTransferFlowEventNameModule.amp_recourse_required)
 		end
 		if p2 then
-			setAmpRecourseActions(p2)
+			SetAmpRecourseActionsFunction(p2)
 		end
 		if p3 then
-			setAmpFeatureCheck(p3)
+			SetAmpFeatureCheckFunction(p3)
 		end
 		if p4 then
-			setTransferRetryOrigin(p4)
+			SetTransferRetryOriginFunction(p4)
 		end
-		setPromptState(promptStateModule.ReceiveBlocked)
+		SetPromptStateFunction(PromptStateModule.ReceiveBlocked)
 	end
 	
-	if getSender(false) then
+	if p1.getSender(false) then
 		applyBlockState()
 		
 		return
 	end
-	local var1 = getTransferRequestId(false)
+	local TransferRequestId = GetTransferRequestIdFunction(false)
 	
-	if var1 then
-		getTransferRequestByIdRequestModule({ transferRequestId = var1 }, nil, p1.getNetworkImpl()):andThen(function(p5)
-			-- upvalues: setSender (ref), applyBlockState (ref)
-			if p5 and p5.transfer and p5.transfer.sender then
-				setSender(p5.transfer.sender)
+	if TransferRequestId then
+		GetTransferRequestByIdRequestModule({ transferRequestId = TransferRequestId }, nil, p1.getNetworkImpl()):andThen(function(Result) --[[ Line: 60 ]]
+			-- upvalues: SetSenderFunction (copy), applyBlockState (copy)
+			if Result and Result.transfer and Result.transfer.sender then
+				SetSenderFunction(Result.transfer.sender)
 			end
 			applyBlockState()
-		end):catch(function()
-			-- upvalues: applyBlockState (ref)
+		end):catch(function() --[[ Line: 66 ]]
+			-- upvalues: applyBlockState (copy)
 			applyBlockState()
 		end)
 		
 		return
+	else
+		applyBlockState()
 	end
-	applyBlockState()
 end

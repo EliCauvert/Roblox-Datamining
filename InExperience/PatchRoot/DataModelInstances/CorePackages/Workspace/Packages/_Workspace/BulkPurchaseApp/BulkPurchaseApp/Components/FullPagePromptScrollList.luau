@@ -1,35 +1,35 @@
-﻿local parent = script:FindFirstAncestor("BulkPurchaseApp").Parent
-local reactModule = require(parent.React)
-local useDesignTokens = require(parent.Style).useDesignTokens
-local useCursor = require(parent.UIBlox).App.SelectionCursor.useCursor
+﻿local Parent = script:FindFirstAncestor("BulkPurchaseApp").Parent
+local ReactModule = require(Parent.React)
+local UseDesignTokensFunction = require(Parent.Style).useDesignTokens
+local UseCursorFunction = require(Parent.UIBlox).App.SelectionCursor.useCursor
 
-return function(p1)
-	-- upvalues: useDesignTokens (ref), useCursor (ref), reactModule (ref)
-	local var1 = useDesignTokens()
-	local var2 = useCursor(UDim.new(0, var1.Radius.Small), var1.Size.Size_200)
-	local size350 = var1.Size.Size_350
-	local var3, var4 = reactModule.useBinding(false)
+return function(Frame) --[[ Line: 15 | Named "FullPagePromptScrollList" ]]
+	-- upvalues: UseDesignTokensFunction (copy), UseCursorFunction (copy), ReactModule (copy)
+	local UseDesignTokensResult = UseDesignTokensFunction()
+	local UseCursorResult = UseCursorFunction(UDim.new(0, UseDesignTokensResult.Radius.Small), UseDesignTokensResult.Size.Size_200)
+	local Size350 = UseDesignTokensResult.Size.Size_350
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(false)
 	
-	return reactModule.createElement("ScrollingFrame", {
-		LayoutOrder = p1.LayoutOrder,
+	return ReactModule.createElement("ScrollingFrame", {
+		LayoutOrder = Frame.LayoutOrder,
 		BorderSizePixel = 0,
 		BackgroundTransparency = 1,
-		Size = p1.size,
-		ScrollBarThickness = var1.Size.Size_100,
-		ScrollBarImageColor3 = var1.Color.Shift.Shift_400.Color3,
-		ScrollBarImageTransparency = var1.Color.Shift.Shift_400.Transparency,
+		Size = Frame.size,
+		ScrollBarThickness = UseDesignTokensResult.Size.Size_100,
+		ScrollBarImageColor3 = UseDesignTokensResult.Color.Shift.Shift_400.Color3,
+		ScrollBarImageTransparency = UseDesignTokensResult.Color.Shift.Shift_400.Transparency,
 		AutomaticCanvasSize = Enum.AutomaticSize.Y,
-		CanvasSize = UDim2.new(1, -size350, 0, 0),
-		SelectionImageObject = var2,
-		Selectable = var3,
-		[reactModule.Change.AbsoluteCanvasSize] = function(p2)
-			-- upvalues: var4 (ref)
-			var4(p2.AbsoluteWindowSize.Y < p2.AbsoluteCanvasSize.Y)
+		CanvasSize = UDim2.new(1, -Size350, 0, 0),
+		SelectionImageObject = UseCursorResult,
+		Selectable = UseBindingResult,
+		[ReactModule.Change.AbsoluteCanvasSize] = function(ScrollFrame) --[[ Line: 35 ]]
+			-- upvalues: UseBindingResult2 (copy)
+			UseBindingResult2(ScrollFrame.AbsoluteWindowSize.Y < ScrollFrame.AbsoluteCanvasSize.Y)
 		end
-	}, reactModule.createElement("UIPadding", { PaddingRight = UDim.new(0, size350) }), reactModule.createElement("UIListLayout", {
+	}, ReactModule.createElement("UIPadding", { PaddingRight = UDim.new(0, Size350) }), ReactModule.createElement("UIListLayout", {
 		SortOrder = Enum.SortOrder.LayoutOrder,
 		HorizontalAlignment = Enum.HorizontalAlignment.Center,
 		VerticalAlignment = Enum.VerticalAlignment.Top,
-		Padding = UDim.new(0, var1.Size.Size_600)
-	}), p1.children)
+		Padding = UDim.new(0, UseDesignTokensResult.Size.Size_600)
+	}), Frame.children)
 end

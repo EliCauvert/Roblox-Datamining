@@ -1,9 +1,9 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local _ = require(parent_1.Enums.InputType)
-local parent_2 = parent_1.Parent
-local _ = require(parent_2.React)
-local _ = require(parent.ImageSet.ImagesTypes)
-local _ = require(parent_2.Foundation)
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local _ = require(Parent1.Enums.InputType)
+local Parent2 = Parent1.Parent
+local _ = require(Parent2.React)
+local _ = require(Parent.ImageSet.ImagesTypes)
+local _ = require(Parent2.Foundation)
 
 return {}

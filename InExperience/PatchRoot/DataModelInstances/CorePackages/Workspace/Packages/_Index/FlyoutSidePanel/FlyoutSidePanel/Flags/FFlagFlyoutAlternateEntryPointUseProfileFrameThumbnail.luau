@@ -1,1 +1,3 @@
-﻿return game:DefineFastFlag("FlyoutAlternateEntryPointUseProfileFrameThumbnail", false) and require(script:FindFirstAncestor("FlyoutSidePanel").Parent.SharedFlags).GetFFlagProfileFrameThumbnailEnabled()
+﻿local GetFFlagProfileFrameThumbnailEnabledFunction = require(script:FindFirstAncestor("FlyoutSidePanel").Parent.SharedFlags).GetFFlagProfileFrameThumbnailEnabled
+
+return game:DefineFastFlag("FlyoutAlternateEntryPointUseProfileFrameThumbnail", false) and GetFFlagProfileFrameThumbnailEnabledFunction()

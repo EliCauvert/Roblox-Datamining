@@ -1,26 +1,26 @@
-﻿local starterGuiService = game:GetService("StarterGui")
-local reactModule = require(game:GetService("CorePackages").Packages.React)
+﻿local StarterGui = game:GetService("StarterGui")
+local ReactModule = require(game:GetService("CorePackages").Packages.React)
 
-function useCoreGuiEnabled(p1)
-	-- upvalues: reactModule (ref), starterGuiService (ref)
-	local var1, var2 = reactModule.useState(starterGuiService:GetCoreGuiEnabled(p1))
-	reactModule.useEffect(function()
-		-- upvalues: starterGuiService (copy), p1 (ref), var2 (ref)
-		local coreGuiChangedSignalConnection = starterGuiService.CoreGuiChangedSignal:Connect(function(p2, p3)
-			-- upvalues: p1 (copy), var2 (copy)
-			if p2 == p1 then
-				var2(p3)
+function useCoreGuiEnabled(CoreGuiType) --[[ Line: 5 ]]
+	-- upvalues: ReactModule (copy), StarterGui (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(StarterGui:GetCoreGuiEnabled(CoreGuiType))
+	ReactModule.useEffect(function() --[[ Line: 7 ]]
+		-- upvalues: StarterGui (upval), CoreGuiType (copy), UseStateResult2 (copy)
+		local CoreGuiChangedSignalConnection = StarterGui.CoreGuiChangedSignal:Connect(function(CoreGuiType1, Enabled) --[[ Line: 9 ]]
+			-- upvalues: CoreGuiType (upval), UseStateResult2 (upval)
+			if CoreGuiType1 == CoreGuiType then
+				UseStateResult2(Enabled)
 			end
 		end)
-		var2(starterGuiService:GetCoreGuiEnabled(p1))
+		UseStateResult2(StarterGui:GetCoreGuiEnabled(CoreGuiType))
 		
-		return function()
-			-- upvalues: coreGuiChangedSignalConnection (ref)
-			coreGuiChangedSignalConnection:Disconnect()
+		return function() --[[ Line: 16 ]]
+			-- upvalues: CoreGuiChangedSignalConnection (copy)
+			CoreGuiChangedSignalConnection:Disconnect()
 		end
-	end, { p1 })
+	end, { CoreGuiType })
 	
-	return var1
+	return UseStateResult
 end
 
 return useCoreGuiEnabled

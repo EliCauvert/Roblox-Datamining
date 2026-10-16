@@ -1,253 +1,258 @@
-﻿local textChatService = game:GetService("TextChatService")
-local expChat = script:FindFirstAncestor("ExpChat")
-local parent = expChat.Parent
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local dictionary = require(parent.llama).Dictionary
-local list = require(parent.llama).List
-local expChatSharedModule = require(parent.ExpChatShared)
-local configModule = require(expChat.Config)
-local useInterpolatedClientSettingsModule = require(expChat.ClientSettings.useInterpolatedClientSettings)
-local getChatStatusStoreModule = require(expChat.Stores.GetChatStatusStore)
-local getMessagesStoreModule = require(expChat.Stores.GetMessagesStore)
-local getGlobalChatTooltipStoreModule = require(expChat.Stores.GetGlobalChatTooltipStore)
-local getChatTooltipStoreModule = require(expChat.Stores.GetChatTooltipStore)
-local ui = script:FindFirstAncestor("UI")
-local scrollingViewModule = require(ui.ScrollingView)
-local topBannerModule = require(ui.TopBanner)
-local globalChatTooltipModule = require(ui.GlobalChatTooltip)
-local isChatRegionLockedModule = require(expChat.isChatRegionLocked)
-local showChatEnabledUIModule = require(expChat.showChatEnabledUI)
-local useUserExperiment = require(parent.RoactAppExperiment).useUserExperiment
-local fStringReportingIXPLayer = require(parent.SharedFlags).FStringReportingIXPLayer
-local getFFlagEnableChatLineReporting = require(parent.SharedFlags).GetFFlagEnableChatLineReporting
-local getFFlagMemoizeChatReportingMenu = require(parent.SharedFlags).GetFFlagMemoizeChatReportingMenu
-local getFFlagChatWindowUseCallbackOptimizationsModule = require(expChat.Flags.getFFlagChatWindowUseCallbackOptimizations)
-local fFlagExpChatEnableV2ChatWindowModule = require(expChat.Flags.FFlagExpChatEnableV2ChatWindow)
-local fFlagExpChatPresetChatEnabled = expChatSharedModule.Flags.FFlagExpChatPresetChatEnabled
-local fFlagExpChatTopBannerForPresetChatAccessModule = require(expChat.Flags.FFlagExpChatTopBannerForPresetChatAccess)
-local useIsARButtonVisibleModule = require(expChat.useIsARButtonVisible)
-local fFlagExpChatEnableFriendsTab = require(parent.SharedFlags).FFlagExpChatEnableFriendsTab
-local expChatPerfTracker = require(parent.ChatUIPrimitives).Telemetry.ExpChatPerfTracker
-local fFlagExpChatPerfTrackerTabName = require(parent.ChatUIPrimitives).Flags.FFlagExpChatPerfTrackerTabName
-local fFlagExpChatRewriteInlineModule = require(expChat.Flags.FFlagExpChatRewriteInline)
-local getFFlagTextChatEnableUniverseChatTabs = expChatSharedModule.Flags.GetFFlagTextChatEnableUniverseChatTabs
-local fFlagExpChatUseUnifiedTooltipStore = expChatSharedModule.Flags.FFlagExpChatUseUnifiedTooltipStore
-local t = {
+﻿local TextChatService = game:GetService("TextChatService")
+local ExpChat = script:FindFirstAncestor("ExpChat")
+local Parent = ExpChat.Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local Dictionary = require(Parent.llama).Dictionary
+local List = require(Parent.llama).List
+local ExpChatSharedModule = require(Parent.ExpChatShared)
+local ConfigModule = require(ExpChat.Config)
+local UseInterpolatedClientSettingsModule = require(ExpChat.ClientSettings.useInterpolatedClientSettings)
+local GetChatStatusStoreModule = require(ExpChat.Stores.GetChatStatusStore)
+local GetMessagesStoreModule = require(ExpChat.Stores.GetMessagesStore)
+local GetGlobalChatTooltipStoreModule = require(ExpChat.Stores.GetGlobalChatTooltipStore)
+local GetChatTooltipStoreModule = require(ExpChat.Stores.GetChatTooltipStore)
+local UI = script:FindFirstAncestor("UI")
+local ScrollingViewModule = require(UI.ScrollingView)
+local TopBannerModule = require(UI.TopBanner)
+local GlobalChatTooltipModule = require(UI.GlobalChatTooltip)
+local IsChatRegionLockedModule = require(ExpChat.isChatRegionLocked)
+local ShowChatEnabledUIModule = require(ExpChat.showChatEnabledUI)
+local UseUserExperimentFunction = require(Parent.RoactAppExperiment).useUserExperiment
+local FStringReportingIXPLayer = require(Parent.SharedFlags).FStringReportingIXPLayer
+local GetFFlagEnableChatLineReportingFunction = require(Parent.SharedFlags).GetFFlagEnableChatLineReporting
+local GetFFlagMemoizeChatReportingMenuFunction = require(Parent.SharedFlags).GetFFlagMemoizeChatReportingMenu
+local GetFFlagChatWindowUseCallbackOptimizationsModule = require(ExpChat.Flags.getFFlagChatWindowUseCallbackOptimizations)
+local FFlagExpChatEnableV2ChatWindowModule = require(ExpChat.Flags.FFlagExpChatEnableV2ChatWindow)
+local FFlagExpChatPresetChatEnabled = ExpChatSharedModule.Flags.FFlagExpChatPresetChatEnabled
+local FFlagExpChatTopBannerForPresetChatAccessModule = require(ExpChat.Flags.FFlagExpChatTopBannerForPresetChatAccess)
+local UseIsARButtonVisibleModule = require(ExpChat.useIsARButtonVisible)
+local FFlagExpChatEnableFriendsTab = require(Parent.SharedFlags).FFlagExpChatEnableFriendsTab
+local ExpChatPerfTracker = require(Parent.ChatUIPrimitives).Telemetry.ExpChatPerfTracker
+local FFlagExpChatPerfTrackerTabName = require(Parent.ChatUIPrimitives).Flags.FFlagExpChatPerfTrackerTabName
+local FFlagExpChatRewriteInlineModule = require(ExpChat.Flags.FFlagExpChatRewriteInline)
+local GetFFlagTextChatEnableUniverseChatTabsFunction = ExpChatSharedModule.Flags.GetFFlagTextChatEnableUniverseChatTabs
+local FFlagExpChatUseUnifiedTooltipStore = ExpChatSharedModule.Flags.FFlagExpChatUseUnifiedTooltipStore
+local FFlagExpChatRenderHistoricalMessagesModule = require(ExpChat.Flags.FFlagExpChatRenderHistoricalMessages)
+local config = {
 	LayoutOrder = 1,
 	showTranslationButton = false,
 	size = UDim2.fromScale(1, 1),
-	messages = if fFlagExpChatEnableV2ChatWindowModule then nil else {},
-	transparencyValue = if getFFlagMemoizeChatReportingMenu() then reactModule.createBinding(configModule.ChatWindowBackgroundTransparency) else configModule.ChatWindowBackgroundTransparency,
-	textTransparency = reactModule.createBinding(0),
+	messages = if FFlagExpChatEnableV2ChatWindowModule then nil else {},
+	transparencyValue = if GetFFlagMemoizeChatReportingMenuFunction() then ReactModule.createBinding(ConfigModule.ChatWindowBackgroundTransparency) else ConfigModule.ChatWindowBackgroundTransparency,
+	textTransparency = ReactModule.createBinding(0),
 	mutedUserIds = {},
 	verifiedUserIds = {}
 }
 
-return reactModule.memo(function(p1)
-	-- upvalues: dictionary (ref), t (ref), useInterpolatedClientSettingsModule (ref), fFlagExpChatPresetChatEnabled (ref), fFlagExpChatTopBannerForPresetChatAccessModule (ref), useIsARButtonVisibleModule (ref), getChatStatusStoreModule (ref), signalsReactModule (ref), showChatEnabledUIModule (ref), fFlagExpChatUseUnifiedTooltipStore (ref), getChatTooltipStoreModule (ref), getGlobalChatTooltipStoreModule (ref), reactModule (ref), getFFlagMemoizeChatReportingMenu (ref), fFlagExpChatEnableV2ChatWindowModule (ref), getMessagesStoreModule (ref), list (ref), getFFlagTextChatEnableUniverseChatTabs (ref), getFFlagEnableChatLineReporting (ref), useUserExperiment (ref), fStringReportingIXPLayer (ref), getFFlagChatWindowUseCallbackOptimizationsModule (ref), fFlagExpChatPerfTrackerTabName (ref), expChatPerfTracker (ref), fFlagExpChatRewriteInlineModule (ref), configModule (ref), fFlagExpChatEnableFriendsTab (ref), isChatRegionLockedModule (ref), topBannerModule (ref), scrollingViewModule (ref), textChatService (ref), globalChatTooltipModule (ref)
-	local var1
-	local var2 = dictionary.join(t, p1)
-	local chatWindowSettings = var2.chatWindowSettings
-	local backgroundTransparency = useInterpolatedClientSettingsModule(chatWindowSettings).BackgroundTransparency
-	local backgroundColor3 = useInterpolatedClientSettingsModule(chatWindowSettings).BackgroundColor3
-	local var3 = nil
-	local _ = nil
-	local _ = true
+return (ReactModule.memo(function(p1) --[[ Line: 60 ]]
+	-- upvalues: Dictionary (copy), config (copy), UseInterpolatedClientSettingsModule (copy), FFlagExpChatPresetChatEnabled (copy), FFlagExpChatTopBannerForPresetChatAccessModule (copy), UseIsARButtonVisibleModule (copy), GetChatStatusStoreModule (copy), SignalsReactModule (copy), ShowChatEnabledUIModule (copy), FFlagExpChatUseUnifiedTooltipStore (copy), GetChatTooltipStoreModule (copy), GetGlobalChatTooltipStoreModule (copy), ReactModule (copy), GetFFlagMemoizeChatReportingMenuFunction (copy), FFlagExpChatEnableV2ChatWindowModule (copy), GetMessagesStoreModule (copy), List (copy), GetFFlagTextChatEnableUniverseChatTabsFunction (copy), GetFFlagEnableChatLineReportingFunction (copy), UseUserExperimentFunction (copy), FStringReportingIXPLayer (copy), GetFFlagChatWindowUseCallbackOptimizationsModule (copy), FFlagExpChatPerfTrackerTabName (copy), ExpChatPerfTracker (copy), FFlagExpChatRewriteInlineModule (copy), FFlagExpChatRenderHistoricalMessagesModule (copy), ConfigModule (copy), FFlagExpChatEnableFriendsTab (copy), IsChatRegionLockedModule (copy), TopBannerModule (copy), ScrollingViewModule (copy), TextChatService (copy), GlobalChatTooltipModule (copy)
+	local JoinResult = Dictionary.join(config, p1)
+	local ChatWindowSettings = JoinResult.chatWindowSettings
+	local BackgroundTransparency = UseInterpolatedClientSettingsModule(ChatWindowSettings).BackgroundTransparency
+	local BackgroundColor3 = UseInterpolatedClientSettingsModule(ChatWindowSettings).BackgroundColor3
+	local UseSignalStateResult = nil
+	local ShowChatEnabledUIModuleResult = nil
 	
-	if fFlagExpChatPresetChatEnabled and fFlagExpChatTopBannerForPresetChatAccessModule then
-		var1 = useIsARButtonVisibleModule()
+	if FFlagExpChatPresetChatEnabled and FFlagExpChatTopBannerForPresetChatAccessModule then
+		ShowChatEnabledUIModuleResult = UseIsARButtonVisibleModule()
 	else
-		var3 = signalsReactModule.useSignalState(getChatStatusStoreModule(false).getChatStatus)
-		var1 = showChatEnabledUIModule(var3)
+		UseSignalStateResult = SignalsReactModule.useSignalState(GetChatStatusStoreModule(false).getChatStatus)
+		ShowChatEnabledUIModuleResult = ShowChatEnabledUIModule(UseSignalStateResult)
 	end
-	local var4 = if fFlagExpChatUseUnifiedTooltipStore then signalsReactModule.useSignalState(getChatTooltipStoreModule(false).getIsEligible("GlobalChatTooltip")) else signalsReactModule.useSignalState(getGlobalChatTooltipStoreModule(false).getIsGlobalChatTooltipEligible)
+	local UseSignalStateResult1 = if FFlagExpChatUseUnifiedTooltipStore then SignalsReactModule.useSignalState(GetChatTooltipStoreModule(false).getIsEligible("GlobalChatTooltip")) else SignalsReactModule.useSignalState(GetGlobalChatTooltipStoreModule(false).getIsGlobalChatTooltipEligible)
 	
-	if fFlagExpChatUseUnifiedTooltipStore then
-		local setIsChatWindowOpen = getChatTooltipStoreModule(false).setIsChatWindowOpen
-		reactModule.useEffect(function()
-			-- upvalues: setIsChatWindowOpen (ref), var2 (ref)
-			setIsChatWindowOpen(var2.visible)
+	if FFlagExpChatUseUnifiedTooltipStore then
+		local SetIsChatWindowOpenFunction = GetChatTooltipStoreModule(false).setIsChatWindowOpen
+		ReactModule.useEffect(function() --[[ Line: 87 ]]
+			-- upvalues: SetIsChatWindowOpenFunction (copy), JoinResult (copy)
+			SetIsChatWindowOpenFunction(JoinResult.visible)
 			
-			return function()
-				-- upvalues: setIsChatWindowOpen (copy)
-				setIsChatWindowOpen(false)
+			return function() --[[ Line: 89 ]]
+				-- upvalues: SetIsChatWindowOpenFunction (upval)
+				SetIsChatWindowOpenFunction(false)
 			end
-		end, { var2.visible, setIsChatWindowOpen })
+		end, { JoinResult.visible, SetIsChatWindowOpenFunction })
 	end
-	local var5 = nil
-	local _ = nil
+	local UseResult = nil
+	local UseRefResult = nil
 	
-	if getFFlagMemoizeChatReportingMenu() and not fFlagExpChatEnableV2ChatWindowModule then
-		local var6 = reactModule.useRef(if fFlagExpChatEnableV2ChatWindowModule then nil else var2.messages)
-		reactModule.useEffect(function()
-			-- upvalues: var6 (write), fFlagExpChatEnableV2ChatWindowModule (copy), var2 (ref)
-			var6.current = if fFlagExpChatEnableV2ChatWindowModule then nil else var2.messages
+	if GetFFlagMemoizeChatReportingMenuFunction() and not FFlagExpChatEnableV2ChatWindowModule then
+		UseRefResult = ReactModule.useRef(if FFlagExpChatEnableV2ChatWindowModule then nil else JoinResult.messages)
+		ReactModule.useEffect(function() --[[ Line: 99 ]]
+			-- upvalues: UseRefResult (ref), FFlagExpChatEnableV2ChatWindowModule (upval), JoinResult (copy)
+			UseRefResult.current = if FFlagExpChatEnableV2ChatWindowModule then nil else JoinResult.messages
 		end, {
-			if fFlagExpChatEnableV2ChatWindowModule then nil else var2.messages
+			if FFlagExpChatEnableV2ChatWindowModule then nil else JoinResult.messages
 		})
-		var5 = reactModule.useCallback(function()
-			-- upvalues: var6 (write)
-			return var6.current
+		UseResult = ReactModule.useCallback(function() --[[ Line: 103 ]]
+			-- upvalues: UseRefResult (ref)
+			return UseRefResult.current
 		end, {})
 	end
-	if fFlagExpChatEnableV2ChatWindowModule then
-		var5 = reactModule.useCallback(function()
-			-- upvalues: getMessagesStoreModule (copy), var2 (ref), list (copy), getFFlagTextChatEnableUniverseChatTabs (copy)
-			local var7 = getMessagesStoreModule(false)
-			local t = {
-				windowMessagesInOrderByTabId = var7.getWindowMessagesInOrderByTabId(false),
-				byMessageId = var7.getByMessageId(false),
-				windowMessagesInOrder = var7.getWindowMessagesInOrder(false)
+	if FFlagExpChatEnableV2ChatWindowModule then
+		UseResult = ReactModule.useCallback(function() --[[ Line: 109 ]]
+			-- upvalues: GetMessagesStoreModule (upval), JoinResult (copy), List (upval), GetFFlagTextChatEnableUniverseChatTabsFunction (upval)
+			local MessagesStoreModule = GetMessagesStoreModule(false)
+			local config = {
+				windowMessagesInOrderByTabId = MessagesStoreModule.getWindowMessagesInOrderByTabId(false),
+				byMessageId = MessagesStoreModule.getByMessageId(false),
+				windowMessagesInOrder = MessagesStoreModule.getWindowMessagesInOrder(false)
 			}
 			
-			if not var2.isChannelBarVisible then
-				return list.map(t.windowMessagesInOrder, function(p2)
-					-- upvalues: t (ref)
-					return t.byMessageId[p2]
+			if not JoinResult.isChannelBarVisible then
+				return List.map(config.windowMessagesInOrder, function(p2) --[[ Line: 118 ]]
+					-- upvalues: config (copy)
+					return config.byMessageId[p2]
 				end)
-			elseif getFFlagTextChatEnableUniverseChatTabs() then
-				local var8 = if var2.targetTextChannel and t.windowMessagesInOrderByTabId[var2.targetTextChannel.Name] then var2.targetTextChannel.Name else var2.selectedChannelName
+			elseif GetFFlagTextChatEnableUniverseChatTabsFunction() then
+				local Name = if JoinResult.targetTextChannel and config.windowMessagesInOrderByTabId[JoinResult.targetTextChannel.Name] then JoinResult.targetTextChannel.Name else JoinResult.selectedChannelName
 				
-				return if var8 then list.map(t.windowMessagesInOrderByTabId[var8] or {}, function(p2)
-					-- upvalues: t (ref)
-					return t.byMessageId[p2]
+				return if Name then List.map(config.windowMessagesInOrderByTabId[Name] or {}, function(p2) --[[ Line: 133 ]]
+					-- upvalues: config (copy)
+					return config.byMessageId[p2]
+				end) else {}
+			else
+				return if JoinResult.targetTextChannel then List.map(config.windowMessagesInOrderByTabId[JoinResult.targetTextChannel.Name] or {}, function(p2) --[[ Line: 141 ]]
+					-- upvalues: config (copy)
+					return config.byMessageId[p2]
 				end) else {}
 			end
-			return if var2.targetTextChannel then list.map(t.windowMessagesInOrderByTabId[var2.targetTextChannel.Name] or {}, function(p2)
-				-- upvalues: t (ref)
-				return t.byMessageId[p2]
-			end) else {}
 		end, {
-			var2.isChannelBarVisible,
-			var2.targetTextChannel,
-			if getFFlagTextChatEnableUniverseChatTabs() then var2.selectedChannelName else nil
+			JoinResult.isChannelBarVisible,
+			JoinResult.targetTextChannel,
+			if GetFFlagTextChatEnableUniverseChatTabsFunction() then JoinResult.selectedChannelName else nil
 		})
 	end
-	local var7 = if getFFlagEnableChatLineReporting() then useUserExperiment({ fStringReportingIXPLayer }, function(p2)
-		-- upvalues: fStringReportingIXPLayer (copy)
-		return (p2[fStringReportingIXPLayer] or {}).EnableChatLineReporting
+	local UseUserExperimentResult = if GetFFlagEnableChatLineReportingFunction() then UseUserExperimentFunction({ FStringReportingIXPLayer }, function(p2) --[[ Line: 159 ]]
+		-- upvalues: FStringReportingIXPLayer (upval)
+		return (p2[FStringReportingIXPLayer] or {}).EnableChatLineReporting
 	end) else false
-	local var8 = reactModule.useCallback(function(p2, p3)
-		-- upvalues: var2 (ref)
-		return if type(p3) == "number" then var2.transparencyValue else p3:map(function(p4)
-			-- upvalues: p2 (ref)
+	local UseResult1 = ReactModule.useCallback(function(p2, p3) --[[ Line: 165 ]]
+		-- upvalues: JoinResult (copy)
+		return if type(p3) == "number" then JoinResult.transparencyValue else p3:map(function(p4): number --[[ Line: 170 ]]
+			-- upvalues: p2 (copy)
 			return p2 + p4 * (1 - p2)
 		end)
-	end, if getFFlagChatWindowUseCallbackOptimizationsModule() then { var2.transparencyValue } else nil)
-	local var9 = reactModule.useCallback(function(p2)
-		-- upvalues: var2 (ref)
-		var2.resetTargetChannel()
-		local var10 = tonumber(p2.userId)
+	end, if GetFFlagChatWindowUseCallbackOptimizationsModule() then { JoinResult.transparencyValue } else nil)
+	local UseResult2 = ReactModule.useCallback(function(p2) --[[ Line: 176 ]]
+		-- upvalues: JoinResult (copy)
+		JoinResult.resetTargetChannel()
+		local Number: number? = tonumber(p2.userId)
 		
-		if var10 then
-			var2.activateWhisperMode(var10)
+		if Number then
+			JoinResult.activateWhisperMode(Number)
 		end
-	end, if getFFlagChatWindowUseCallbackOptimizationsModule() then { var2.resetTargetChannel, var2.activateWhisperMode } else nil)
-	local selectedChannelName = var2.selectedChannelName or "UNKNOWN_TAB"
-	local var10 = if fFlagExpChatPerfTrackerTabName then { tabName = selectedChannelName } else nil
-	reactModule.useEffect(function()
-		-- upvalues: expChatPerfTracker (copy), var10 (ref)
-		expChatPerfTracker.finish(expChatPerfTracker.Events.ChatWindowMountTTI, {}, var10)
+	end, if GetFFlagChatWindowUseCallbackOptimizationsModule() then {
+		JoinResult.resetTargetChannel,
+		JoinResult.activateWhisperMode
+	} else nil)
+	local SelectedChannelName = JoinResult.selectedChannelName or "UNKNOWN_TAB"
+	local Config = if FFlagExpChatPerfTrackerTabName then { tabName = SelectedChannelName } else nil
+	ReactModule.useEffect(function() --[[ Line: 190 ]]
+		-- upvalues: ExpChatPerfTracker (upval), Config (copy)
+		ExpChatPerfTracker.finish(ExpChatPerfTracker.Events.ChatWindowMountTTI, {}, Config)
 		
-		return function()
-			-- upvalues: expChatPerfTracker (copy)
-			expChatPerfTracker.cancelAll()
+		return function() --[[ Line: 192 ]]
+			-- upvalues: ExpChatPerfTracker (upval)
+			ExpChatPerfTracker.cancelAll()
 		end
 	end, {})
-	reactModule.useEffect(function()
-		-- upvalues: expChatPerfTracker (copy), selectedChannelName (ref), var10 (ref)
-		expChatPerfTracker.finish(expChatPerfTracker.Events.ChatWindowTabSwitchTTI, { tabId = selectedChannelName }, var10)
-	end, { selectedChannelName })
-	local var11 = if fFlagExpChatEnableV2ChatWindowModule then {
-		showTranslationButton = var2.showTranslationButton,
-		chatWindowSettings = var2.chatWindowSettings,
-		textTransparency = var2.textTransparency,
-		onTextMessageLabelButtonActivated = var9,
-		isSpatialUIEnabled = var2.isSpatialUIEnabled,
-		chatWindowTransparencyBindable = if fFlagExpChatRewriteInlineModule then var2.transparencyValue else nil,
-		visible = var2.visible,
-		selectedChannelName = if getFFlagTextChatEnableUniverseChatTabs() then var2.selectedChannelName else nil
+	ReactModule.useEffect(function() --[[ Line: 196 ]]
+		-- upvalues: ExpChatPerfTracker (upval), SelectedChannelName (copy), Config (copy)
+		ExpChatPerfTracker.finish(ExpChatPerfTracker.Events.ChatWindowTabSwitchTTI, { tabId = SelectedChannelName }, Config)
+	end, { SelectedChannelName })
+	local Config1 = if FFlagExpChatEnableV2ChatWindowModule then {
+		showTranslationButton = JoinResult.showTranslationButton,
+		chatWindowSettings = JoinResult.chatWindowSettings,
+		textTransparency = JoinResult.textTransparency,
+		onTextMessageLabelButtonActivated = UseResult2,
+		isSpatialUIEnabled = JoinResult.isSpatialUIEnabled,
+		chatWindowTransparencyBindable = if FFlagExpChatRewriteInlineModule then JoinResult.transparencyValue else nil,
+		visible = JoinResult.visible,
+		selectedChannelName = if GetFFlagTextChatEnableUniverseChatTabsFunction() then JoinResult.selectedChannelName else nil,
+		historicalMessageCountSignal = if FFlagExpChatRenderHistoricalMessagesModule then GetMessagesStoreModule(false).getHistoricalWindowMessageCount else nil
 	} else {}
-	var11.messageComponentsSignal = var2.messageComponentsSignal
+	Config1.messageComponentsSignal = JoinResult.messageComponentsSignal
+	local DisableLineReporting = FFlagExpChatEnableFriendsTab and JoinResult.disableLineReporting
 	
-	return reactModule.createElement("Frame", {
-		BackgroundColor3 = backgroundColor3,
+	return ReactModule.createElement("Frame", {
+		BackgroundColor3 = BackgroundColor3,
 		BorderSizePixel = 0,
-		LayoutOrder = var2.LayoutOrder,
-		Size = var2.size,
-		Visible = var2.visible,
-		BackgroundTransparency = if fFlagExpChatEnableFriendsTab and var2.suppressBackground then 1 else var8(backgroundTransparency, var2.transparencyValue),
-		[reactModule.Change.AbsoluteSize] = if getFFlagChatWindowUseCallbackOptimizationsModule() then reactModule.useCallback(function(p2)
-			-- upvalues: textChatService (copy), var2 (ref)
-			local chatWindowConfiguration = textChatService:FindFirstChildOfClass("ChatWindowConfiguration")
+		LayoutOrder = JoinResult.LayoutOrder,
+		Size = JoinResult.size,
+		Visible = JoinResult.visible,
+		BackgroundTransparency = if FFlagExpChatEnableFriendsTab and JoinResult.suppressBackground then 1 else UseResult1(BackgroundTransparency, JoinResult.transparencyValue),
+		[ReactModule.Change.AbsoluteSize] = if GetFFlagChatWindowUseCallbackOptimizationsModule() then ReactModule.useCallback(function(p2) --[[ Line: 267 ]]
+			-- upvalues: TextChatService (upval), JoinResult (copy)
+			local ChatWindowConfiguration = TextChatService:FindFirstChildOfClass("ChatWindowConfiguration")
 			
-			if chatWindowConfiguration and var2.onAbsoluteSizeChanged then
-				var2.onAbsoluteSizeChanged(p2, chatWindowConfiguration)
+			if ChatWindowConfiguration and JoinResult.onAbsoluteSizeChanged then
+				JoinResult.onAbsoluteSizeChanged(p2, ChatWindowConfiguration)
 			end
-		end, { textChatService, var2.onAbsoluteSizeChanged }) else function(p2)
-			-- upvalues: textChatService (copy), var2 (ref)
-			local chatWindowConfiguration = textChatService:FindFirstChildOfClass("ChatWindowConfiguration")
+		end, { TextChatService, JoinResult.onAbsoluteSizeChanged }) else function(p2) --[[ Line: 273 ]]
+			-- upvalues: TextChatService (upval), JoinResult (copy)
+			local ChatWindowConfiguration = TextChatService:FindFirstChildOfClass("ChatWindowConfiguration")
 			
-			if chatWindowConfiguration and var2.onAbsoluteSizeChanged then
-				var2.onAbsoluteSizeChanged(p2, chatWindowConfiguration)
+			if ChatWindowConfiguration and JoinResult.onAbsoluteSizeChanged then
+				JoinResult.onAbsoluteSizeChanged(p2, ChatWindowConfiguration)
 			end
 		end,
-		[reactModule.Change.AbsolutePosition] = if getFFlagChatWindowUseCallbackOptimizationsModule() then reactModule.useCallback(function(p2)
-			-- upvalues: textChatService (copy), var2 (ref)
-			local chatWindowConfiguration = textChatService:FindFirstChildOfClass("ChatWindowConfiguration")
+		[ReactModule.Change.AbsolutePosition] = if GetFFlagChatWindowUseCallbackOptimizationsModule() then ReactModule.useCallback(function(p2) --[[ Line: 280 ]]
+			-- upvalues: TextChatService (upval), JoinResult (copy)
+			local ChatWindowConfiguration = TextChatService:FindFirstChildOfClass("ChatWindowConfiguration")
 			
-			if chatWindowConfiguration and var2.onAbsoluteSizeChanged then
-				var2.onAbsolutePositionChanged(p2, chatWindowConfiguration)
+			if ChatWindowConfiguration and JoinResult.onAbsoluteSizeChanged then
+				JoinResult.onAbsolutePositionChanged(p2, ChatWindowConfiguration)
 			end
-		end, { textChatService, var2.onAbsolutePositionChanged }) else function(p2)
-			-- upvalues: textChatService (copy), var2 (ref)
-			local chatWindowConfiguration = textChatService:FindFirstChildOfClass("ChatWindowConfiguration")
+		end, { TextChatService, JoinResult.onAbsolutePositionChanged }) else function(p2) --[[ Line: 286 ]]
+			-- upvalues: TextChatService (upval), JoinResult (copy)
+			local ChatWindowConfiguration = TextChatService:FindFirstChildOfClass("ChatWindowConfiguration")
 			
-			if chatWindowConfiguration and var2.onAbsoluteSizeChanged then
-				var2.onAbsolutePositionChanged(p2, chatWindowConfiguration)
+			if ChatWindowConfiguration and JoinResult.onAbsoluteSizeChanged then
+				JoinResult.onAbsolutePositionChanged(p2, ChatWindowConfiguration)
 			end
 		end
 	}, {
-		hoverLayer = reactModule.createElement("Frame", {
+		hoverLayer = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.fromScale(1, 1),
-			[reactModule.Event.MouseEnter] = var2.onHovered,
-			[reactModule.Event.MouseLeave] = var2.onUnhovered
+			[ReactModule.Event.MouseEnter] = JoinResult.onHovered,
+			[ReactModule.Event.MouseLeave] = JoinResult.onUnhovered
 		}),
-		uiSizeConstraint = reactModule.createElement("UISizeConstraint", {
-			MaxSize = if var2.isSpatialUIEnabled then Vector2.new(1e999, 400) else Vector2.new(configModule.ChatWindowMaxWidth, configModule.ChatWindowMaxHeight)
+		uiSizeConstraint = ReactModule.createElement("UISizeConstraint", {
+			MaxSize = if JoinResult.isSpatialUIEnabled then Vector2.new(1e999, 400) else Vector2.new(ConfigModule.ChatWindowMaxWidth, ConfigModule.ChatWindowMaxHeight)
 		}),
-		contentFrame = reactModule.createElement("Frame", {
+		contentFrame = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			Size = UDim2.fromScale(1, 1),
-			Visible = var2.textTransparency:map(function(p2)
-				-- upvalues: configModule (copy)
-				return p2 < configModule.ChatWindowMessageHideRootFadeThreshold
+			Visible = JoinResult.textTransparency:map(function(p2): boolean --[[ Line: 220 ]]
+				-- upvalues: ConfigModule (upval)
+				return p2 < ConfigModule.ChatWindowMessageHideRootFadeThreshold
 			end)
 		}, {
-			TopBanner = if fFlagExpChatEnableFriendsTab and var2.disableLineReporting or isChatRegionLockedModule() or (not var1 or not var7) then nil else reactModule.createElement(topBannerModule, {
-				backgroundColor3 = backgroundColor3,
-				backgroundTransparency = backgroundTransparency,
-				iconTransparency = if getFFlagMemoizeChatReportingMenu() then var2.transparencyValue else var8(backgroundTransparency, var2.transparencyValue),
-				onFocus = var2.onFocus,
-				onUnfocus = var2.onUnfocus,
-				getMessages = if getFFlagMemoizeChatReportingMenu() then var5 else nil,
-				messages = if not getFFlagMemoizeChatReportingMenu() then var2.messages else nil
+			TopBanner = if DisableLineReporting or IsChatRegionLockedModule() or not ShowChatEnabledUIModuleResult or not UseUserExperimentResult then nil else ReactModule.createElement(TopBannerModule, {
+				backgroundColor3 = BackgroundColor3,
+				backgroundTransparency = BackgroundTransparency,
+				iconTransparency = if GetFFlagMemoizeChatReportingMenuFunction() then JoinResult.transparencyValue else UseResult1(BackgroundTransparency, JoinResult.transparencyValue),
+				onFocus = JoinResult.onFocus,
+				onUnfocus = JoinResult.onUnfocus,
+				getMessages = if GetFFlagMemoizeChatReportingMenuFunction() then UseResult else nil,
+				messages = if GetFFlagMemoizeChatReportingMenuFunction() then nil else JoinResult.messages
 			}),
-			scrollingView = reactModule.createElement(scrollingViewModule, dictionary.join({
-				size = var2.size,
-				isChannelBarVisible = var2.isChannelBarVisible,
-				scrollResetKey = var2.scrollResetKey,
-				scrollToTopOnReset = if fFlagExpChatEnableFriendsTab then var2.scrollToTopOnReset else nil,
-				onCanvasPositionChanged = if fFlagExpChatEnableFriendsTab then var2.onCanvasPositionChanged else nil,
-				contentTopPadding = if fFlagExpChatEnableFriendsTab then var2.contentTopPadding else nil
-			}, var11))
+			scrollingView = ReactModule.createElement(ScrollingViewModule, Dictionary.join({
+				size = JoinResult.size,
+				isChannelBarVisible = JoinResult.isChannelBarVisible,
+				scrollResetKey = JoinResult.scrollResetKey,
+				scrollToTopOnReset = if FFlagExpChatEnableFriendsTab then JoinResult.scrollToTopOnReset else nil,
+				onCanvasPositionChanged = if FFlagExpChatEnableFriendsTab then JoinResult.onCanvasPositionChanged else nil,
+				contentTopPadding = if FFlagExpChatEnableFriendsTab then JoinResult.contentTopPadding else nil
+			}, Config1))
 		}),
-		GlobalChatTooltip = if var4 then reactModule.createElement(globalChatTooltipModule, {
-			visible = var2.visible,
-			targetTextChannel = var2.targetTextChannel,
-			chatStatus = var3
+		GlobalChatTooltip = if UseSignalStateResult1 then ReactModule.createElement(GlobalChatTooltipModule, {
+			visible = JoinResult.visible,
+			targetTextChannel = JoinResult.targetTextChannel,
+			chatStatus = UseSignalStateResult
 		}) else nil
 	})
-end)
+end))

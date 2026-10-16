@@ -1,45 +1,47 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
 local _ = require(script.Parent.FeedbackAction)
-local iconButton = foundationModule.IconButton
-local view = foundationModule.View
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local iconVariant = foundationModule.Enums.IconVariant
-local inputSize = foundationModule.Enums.InputSize
+local IconButton = FoundationModule.IconButton
+local View = FoundationModule.View
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local IconVariant = FoundationModule.Enums.IconVariant
+local InputSize = FoundationModule.Enums.InputSize
 
-return function(p1)
-	-- upvalues: iconVariant (ref), reactModule (ref), iconButton (ref), inputSize (ref), buttonVariant (ref), view (ref)
-	local testId = p1.testId or "user-feedback"
-	local onActivated = p1.onActivated
-	local selectedAction = p1.selectedAction
-	local t = {}
+return function(p1) --[[ Line: 34 | Named "UserFeedback" ]]
+	-- upvalues: IconVariant (copy), ReactModule (copy), IconButton (copy), InputSize (copy), ButtonVariant (copy), View (copy)
+	local TestId = p1.testId or "user-feedback"
+	local OnActivatedFunction = p1.onActivated
+	local SelectedAction = p1.selectedAction
+	local Elements = {}
 	
-	for i, v in p1.icons do
-		t[v.testId or `{v.iconName}-{i}`] = reactModule.createElement(iconButton, {
-			LayoutOrder = i,
-			icon = if selectedAction == v.action then { name = v.iconName, variant = iconVariant.Filled } else v.iconName,
-			isDisabled = v.isDisabled,
-			onActivated = function()
-				-- upvalues: selectedAction (ref), v (ref), onActivated (ref)
-				if selectedAction == v.action and v.allowRepeatedActivation ~= true then
+	for LayoutOrder, icon in p1.icons do
+		local IsSelectedActionMatch = SelectedAction == icon.action
+		Elements[icon.testId or `{icon.iconName}-{LayoutOrder}`] = ReactModule.createElement(IconButton, {
+			LayoutOrder = LayoutOrder,
+			icon = if IsSelectedActionMatch then { name = icon.iconName, variant = IconVariant.Filled } else icon.iconName,
+			isDisabled = icon.isDisabled,
+			onActivated = function() --[[ Line: 52 ]]
+				-- upvalues: SelectedAction (copy), icon (copy), OnActivatedFunction (copy)
+				if SelectedAction ~= icon.action or icon.allowRepeatedActivation == true then
+					OnActivatedFunction(icon)
+					
 					return
 				end
-				onActivated(v)
 			end,
-			size = inputSize.Small,
-			variant = buttonVariant.Utility,
-			testId = v.testId or `{testId}-{v.iconName}`
+			size = InputSize.Small,
+			variant = ButtonVariant.Utility,
+			testId = icon.testId or `{TestId}-{icon.iconName}`
 		})
 	end
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "row align-y-center size-full-0 auto-y padding-top-small",
 		LayoutOrder = p1.layoutOrder,
-		testId = testId
+		testId = TestId
 	}, {
-		Actions = reactModule.createElement(view, {
+		Actions = ReactModule.createElement(View, {
 			LayoutOrder = 1,
 			tag = "row wrap align-x-right align-y-center gap-small auto-xy"
-		}, t)
+		}, Elements)
 	})
 end

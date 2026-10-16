@@ -1,16 +1,16 @@
-﻿local experienceStateCaptureService = game:GetService("ExperienceStateCaptureService")
-local messageBusService = game:GetService("MessageBusService")
-local safetyService = game:GetService("SafetyService")
-local captureModeMessageId = messageBusService:GetMessageId("CaptureMode", "sceneSelectionExitReason")
+﻿local ExperienceStateCaptureService = game:GetService("ExperienceStateCaptureService")
+local MessageBusService = game:GetService("MessageBusService")
+local SafetyService = game:GetService("SafetyService")
+local CaptureModeMessageId = MessageBusService:GetMessageId("CaptureMode", "sceneSelectionExitReason")
 
 return {
-	start = function()
-		-- upvalues: safetyService (ref), experienceStateCaptureService (ref)
-		safetyService.IsCaptureModeForReport = true
-		experienceStateCaptureService:ToggleCaptureMode()
+	start = function() --[[ Line: 8 ]]
+		-- upvalues: SafetyService (copy), ExperienceStateCaptureService (copy)
+		SafetyService.IsCaptureModeForReport = true
+		ExperienceStateCaptureService:ToggleCaptureMode()
 	end,
-	subscribeOnceToExitReason = function(p1)
-		-- upvalues: messageBusService (ref), captureModeMessageId (ref)
-		return messageBusService:Subscribe(captureModeMessageId, p1, true, false)
+	subscribeOnceToExitReason = function(Callback) --[[ Line: 15 ]]
+		-- upvalues: MessageBusService (copy), CaptureModeMessageId (copy)
+		return MessageBusService:Subscribe(CaptureModeMessageId, Callback, true, false)
 	end
 }

@@ -1,9 +1,9 @@
-﻿return function(p1, p2, p3)
-	local var1 = game:SetFastIntForTesting(p1, p2)
-	local ok, status = pcall(p3)
-	game:SetFastIntForTesting(p1, var1)
+﻿return function(Name, NewValue, p1) --[[ Line: 4 | Named "withInt" ]]
+	local SetFastIntForTestingResult = game:SetFastIntForTesting(Name, NewValue)
+	local Success, Result = pcall(p1)
+	game:SetFastIntForTesting(Name, SetFastIntForTestingResult)
 	
-	if not ok then
-		error(status)
+	if not Success then
+		error(Result)
 	end
 end

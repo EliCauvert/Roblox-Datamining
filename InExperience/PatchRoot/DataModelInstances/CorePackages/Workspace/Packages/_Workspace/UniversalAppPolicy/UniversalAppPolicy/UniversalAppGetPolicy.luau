@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.PolicyProvider).GetPolicyImplementations.MemStorageService("app-policy")
+﻿return (require(script.Parent.Parent.PolicyProvider).GetPolicyImplementations.MemStorageService("app-policy"))

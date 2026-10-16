@@ -1,85 +1,83 @@
-﻿local currencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
-local parent = currencyTransfers.Parent
-local reactModule = require(parent.React)
-local sharedFlagsModule = require(parent.SharedFlags)
-local transferLocalizationKeysModule = require(currencyTransfers.Localization.TransferLocalizationKeys)
-local foundationModule = require(parent.Foundation)
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local sheet = foundationModule.Sheet
-local button = foundationModule.Button
-local view = foundationModule.View
-local text = foundationModule.Text
-local fillBehavior = foundationModule.Enums.FillBehavior
-local useScaledValue = foundationModule.Hooks.useScaledValue
-local enums = foundationModule.Enums
-local getIconRichText = foundationModule.Utility.getIconRichText
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local useTransferStoreModule = require(currencyTransfers.Hooks.useTransferStore)
-local processTransferModule = require(currencyTransfers.Actions.Send.processTransfer)
-local acceptTransferModule = require(currencyTransfers.Actions.Receive.acceptTransfer)
-local promptStateModule = require(currencyTransfers.Enums.PromptState)
-local transferDirectionModule = require(currencyTransfers.Enums.TransferDirection)
-local ampUpsellModule = require(parent.AmpUpsell)
-local accessResponseEnum = ampUpsellModule.AmpEnums.AccessResponseEnum
-local inExpAmpWizardController = ampUpsellModule.InExpAmpWizardController
-local openAmpWizardContainer = ampUpsellModule.OpenAmpWizardContainer
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local transferOriginationModule = require(currencyTransfers.Enums.TransferOrigination)
-local getFFlagCurrencyTransferUseAmpWizardContainerForInAppModule = require(currencyTransfers.Flags.GetFFlagCurrencyTransferUseAmpWizardContainerForInApp)
-local ampWizardTransferConstantsModule = require(currencyTransfers.Constants.AmpWizardTransferConstants)
-local getCounterUserIdModule = require(currencyTransfers.Utils.getCounterUserId)
-local currencyTransferTelemetryModule = require(currencyTransfers.Events.CurrencyTransferTelemetry)
-local robuxTransferFlowEventNameModule = require(currencyTransfers.Enums.RobuxTransferFlowEventName)
-local logCurrencyTransferCounterModule = require(currencyTransfers.Utils.logCurrencyTransferCounter)
-local logRobuxTransferFlowEventModule = require(currencyTransfers.Utils.logRobuxTransferFlowEvent)
-local getFFlagCurrencyTransferFocusNavigationModule = require(currencyTransfers.Flags.GetFFlagCurrencyTransferFocusNavigation)
-local useTransferSheetFocusModule = require(currencyTransfers.Hooks.useTransferSheetFocus)
+﻿local CurrencyTransfers = script:FindFirstAncestor("CurrencyTransfers")
+local Parent = CurrencyTransfers.Parent
+local ReactModule = require(Parent.React)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local TransferLocalizationKeysModule = require(CurrencyTransfers.Localization.TransferLocalizationKeys)
+local FoundationModule = require(Parent.Foundation)
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local Sheet = FoundationModule.Sheet
+local Button = FoundationModule.Button
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local FillBehavior = FoundationModule.Enums.FillBehavior
+local UseScaledValueFunction = FoundationModule.Hooks.useScaledValue
+local Enums = FoundationModule.Enums
+local GetIconRichTextFunction = FoundationModule.Utility.getIconRichText
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local UseTransferStoreModule = require(CurrencyTransfers.Hooks.useTransferStore)
+local ProcessTransferModule = require(CurrencyTransfers.Actions.Send.processTransfer)
+local AcceptTransferModule = require(CurrencyTransfers.Actions.Receive.acceptTransfer)
+local PromptStateModule = require(CurrencyTransfers.Enums.PromptState)
+local TransferDirectionModule = require(CurrencyTransfers.Enums.TransferDirection)
+local AmpUpsellModule = require(Parent.AmpUpsell)
+local AccessResponseEnum = AmpUpsellModule.AmpEnums.AccessResponseEnum
+local InExpAmpWizardController = AmpUpsellModule.InExpAmpWizardController
+local OpenAmpWizardContainerFunction = AmpUpsellModule.OpenAmpWizardContainer
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local TransferOriginationModule = require(CurrencyTransfers.Enums.TransferOrigination)
+local GetFFlagCurrencyTransferUseAmpWizardContainerForInAppModule = require(CurrencyTransfers.Flags.GetFFlagCurrencyTransferUseAmpWizardContainerForInApp)
+local AmpWizardTransferConstantsModule = require(CurrencyTransfers.Constants.AmpWizardTransferConstants)
+local GetCounterUserIdModule = require(CurrencyTransfers.Utils.getCounterUserId)
+local CurrencyTransferTelemetryModule = require(CurrencyTransfers.Events.CurrencyTransferTelemetry)
+local RobuxTransferFlowEventNameModule = require(CurrencyTransfers.Enums.RobuxTransferFlowEventName)
+local LogCurrencyTransferCounterModule = require(CurrencyTransfers.Utils.logCurrencyTransferCounter)
+local LogRobuxTransferFlowEventModule = require(CurrencyTransfers.Utils.logRobuxTransferFlowEvent)
+local GetFFlagCurrencyTransferFocusNavigationModule = require(CurrencyTransfers.Flags.GetFFlagCurrencyTransferFocusNavigation)
+local UseTransferSheetFocusModule = require(CurrencyTransfers.Hooks.useTransferSheetFocus)
 
-return function(p1)
-	-- upvalues: useLocalization (ref), transferLocalizationKeysModule (ref), useTransferStoreModule (ref), useDispatch (ref), getFFlagCurrencyTransferUseAmpWizardContainerForInAppModule (ref), transferOriginationModule (ref), useScaledValue (ref), reactModule (ref), logCurrencyTransferCounterModule (ref), currencyTransferTelemetryModule (ref), sharedFlagsModule (ref), logRobuxTransferFlowEventModule (ref), robuxTransferFlowEventNameModule (ref), transferDirectionModule (ref), getFFlagCurrencyTransferFocusNavigationModule (ref), useTransferSheetFocusModule (ref), sheet (ref), view (ref), text (ref), getIconRichText (ref), enums (ref), button (ref), promptStateModule (ref), getCounterUserIdModule (ref), accessResponseEnum (ref), acceptTransferModule (ref), processTransferModule (ref), inExpAmpWizardController (ref), ampWizardTransferConstantsModule (ref), openAmpWizardContainer (ref), buttonVariant (ref), fillBehavior (ref)
-	local var1 = useLocalization(transferLocalizationKeysModule.Presets.TransferFAEBlockSheet)
-	local var2 = useTransferStoreModule()
-	local var3 = useDispatch()
-	local direction = p1.direction
-	local triggerOnClose = var2.triggerOnClose
-	local selectedAmount = var2.getSelectedAmount(false)
-	local var4 = (if getFFlagCurrencyTransferUseAmpWizardContainerForInAppModule() then var2.getTransferOrigination(false) else nil) == transferOriginationModule.InExperience
-	local var5 = useScaledValue(420)
-	reactModule.useEffect(function()
-		-- upvalues: logCurrencyTransferCounterModule (copy), var2 (ref), currencyTransferTelemetryModule (copy), sharedFlagsModule (copy), logRobuxTransferFlowEventModule (copy), robuxTransferFlowEventNameModule (copy)
-		logCurrencyTransferCounterModule(var2, currencyTransferTelemetryModule.CurrencyTransferFAEBlockSheetShownCounter, { recourseSurface = "fae" })
+return function(p1) --[[ Line: 63 | Named "TransferFAEBlockSheet" ]]
+	-- upvalues: UseLocalizationFunction (copy), TransferLocalizationKeysModule (copy), UseTransferStoreModule (copy), UseDispatchFunction (copy), GetFFlagCurrencyTransferUseAmpWizardContainerForInAppModule (copy), TransferOriginationModule (copy), UseScaledValueFunction (copy), ReactModule (copy), LogCurrencyTransferCounterModule (copy), CurrencyTransferTelemetryModule (copy), SharedFlagsModule (copy), LogRobuxTransferFlowEventModule (copy), RobuxTransferFlowEventNameModule (copy), TransferDirectionModule (copy), GetFFlagCurrencyTransferFocusNavigationModule (copy), UseTransferSheetFocusModule (copy), Sheet (copy), View (copy), Text (copy), GetIconRichTextFunction (copy), Enums (copy), Button (copy), PromptStateModule (copy), GetCounterUserIdModule (copy), AccessResponseEnum (copy), AcceptTransferModule (copy), ProcessTransferModule (copy), InExpAmpWizardController (copy), AmpWizardTransferConstantsModule (copy), OpenAmpWizardContainerFunction (copy), ButtonVariant (copy), FillBehavior (copy)
+	local UseLocalizationResult = UseLocalizationFunction(TransferLocalizationKeysModule.Presets.TransferFAEBlockSheet)
+	local UseTransferStoreModuleResult = UseTransferStoreModule()
+	local UseDispatchResult = UseDispatchFunction()
+	local Direction = p1.direction
+	local TriggerOnCloseFunction = UseTransferStoreModuleResult.triggerOnClose
+	local SelectedAmount = UseTransferStoreModuleResult.getSelectedAmount(false)
+	local IsInExperienceMatch = (if GetFFlagCurrencyTransferUseAmpWizardContainerForInAppModule() then UseTransferStoreModuleResult.getTransferOrigination(false) else nil) == TransferOriginationModule.InExperience
+	local UseScaledValueResult = UseScaledValueFunction(420)
+	ReactModule.useEffect(function() --[[ Line: 77 ]]
+		-- upvalues: LogCurrencyTransferCounterModule (upval), UseTransferStoreModuleResult (copy), CurrencyTransferTelemetryModule (upval), SharedFlagsModule (upval), LogRobuxTransferFlowEventModule (upval), RobuxTransferFlowEventNameModule (upval)
+		LogCurrencyTransferCounterModule(UseTransferStoreModuleResult, CurrencyTransferTelemetryModule.CurrencyTransferFAEBlockSheetShownCounter, { recourseSurface = "fae" })
 		
-		if sharedFlagsModule.FFlagEnableRobuxTransferFlowEventIngest then
-			logRobuxTransferFlowEventModule(var2, robuxTransferFlowEventNameModule.fae_block_shown)
+		if SharedFlagsModule.FFlagEnableRobuxTransferFlowEventIngest then
+			LogRobuxTransferFlowEventModule(UseTransferStoreModuleResult, RobuxTransferFlowEventNameModule.fae_block_shown)
 		end
 		return nil
-	end, { var2 })
-	local var6 = if direction == transferDirectionModule.Send then var1.RequireSenderFAE else var1.RequireReceiverFAE
-	local requireFAE = var1.RequireFAE
-	local var7 = nil
-	local var8 = nil
+	end, { UseTransferStoreModuleResult })
+	local RequireSenderFAE = if Direction == TransferDirectionModule.Send then UseLocalizationResult.RequireSenderFAE else UseLocalizationResult.RequireReceiverFAE
+	local RequireFAE = UseLocalizationResult.RequireFAE
+	local Ref = nil
+	local Ref1 = nil
 	
-	if getFFlagCurrencyTransferFocusNavigationModule() then
-		local var9, var10 = useTransferSheetFocusModule(triggerOnClose)
-		var7 = var9
-		var8 = var10
+	if GetFFlagCurrencyTransferFocusNavigationModule() then
+		Ref, Ref1 = UseTransferSheetFocusModule(TriggerOnCloseFunction)
 	end
-	return reactModule.createElement(sheet.Root, {
+	return ReactModule.createElement(Sheet.Root, {
 		preferCenterSheet = true,
-		snapPoints = { var5, 0.5 },
-		onClose = triggerOnClose,
-		ref = var7
+		snapPoints = { UseScaledValueResult, 0.5 },
+		onClose = TriggerOnCloseFunction,
+		ref = Ref
 	}, {
-		Content = reactModule.createElement(sheet.Content, { LayoutOrder = 1 }, {
-			SheetContentContainer = reactModule.createElement(view, {
+		Content = ReactModule.createElement(Sheet.Content, { LayoutOrder = 1 }, {
+			SheetContentContainer = ReactModule.createElement(View, {
 				tag = "col gap-small auto-y size-full-0 align-x-center padding-top-xlarge padding-x-large"
 			}, {
-				IconsContainer = reactModule.createElement(view, {
+				IconsContainer = ReactModule.createElement(View, {
 					tag = "auto-xy position-relative padding-bottom-large",
 					LayoutOrder = 1,
 					Size = UDim2.fromOffset(300, 140)
 				}, {
-					ShieldIconContainer = reactModule.createElement(view, {
+					ShieldIconContainer = ReactModule.createElement(View, {
 						tag = "radius-medium stroke-default bg-surface-100 align-x-center align-y-center position-absolute",
 						Rotation = -15,
 						ZIndex = 2,
@@ -87,16 +85,16 @@ return function(p1)
 						Position = UDim2.new(0.5, -40, 0.5, 10),
 						AnchorPoint = Vector2.new(0.5, 0.5)
 					}, {
-						ShieldIcon = reactModule.createElement(text, {
+						ShieldIcon = ReactModule.createElement(Text, {
 							tag = "content-emphasis text-align-x-center text-display-medium",
 							RichText = true,
-							Text = getIconRichText(enums.IconName.ShieldCheck),
+							Text = GetIconRichTextFunction(Enums.IconName.ShieldCheck),
 							Size = UDim2.fromOffset(72, 72),
 							Position = UDim2.new(0.5, 0, 0.5, 0),
 							AnchorPoint = Vector2.new(0.5, 0.5)
 						})
 					}),
-					RobuxIconContainer = reactModule.createElement(view, {
+					RobuxIconContainer = ReactModule.createElement(View, {
 						tag = "radius-medium stroke-default bg-surface-100 align-x-center align-y-center position-absolute",
 						Rotation = 15,
 						ZIndex = 1,
@@ -104,98 +102,100 @@ return function(p1)
 						Position = UDim2.new(0.5, 55, 0.5, -10),
 						AnchorPoint = Vector2.new(0.5, 0.5)
 					}, {
-						RobuxIcon = reactModule.createElement(text, {
+						RobuxIcon = ReactModule.createElement(Text, {
 							tag = "content-emphasis text-align-x-center text-display-medium",
 							RichText = true,
-							Text = getIconRichText("robux"),
+							Text = GetIconRichTextFunction("robux"),
 							Size = UDim2.fromOffset(72, 72),
 							Position = UDim2.new(0.5, 0, 0.5, 0),
 							AnchorPoint = Vector2.new(0.5, 0.5)
 						})
 					})
 				}),
-				TitleText = reactModule.createElement(text, {
+				TitleText = ReactModule.createElement(Text, {
 					tag = "text-heading-medium content-emphasis text-align-x-left text-wrap padding-top-xlarge",
 					LayoutOrder = 2,
-					Text = var6,
+					Text = RequireSenderFAE,
 					Size = UDim2.new(1, 0, 0, 0),
 					AutomaticSize = Enum.AutomaticSize.Y
 				}),
-				BodyText = reactModule.createElement(text, {
+				BodyText = ReactModule.createElement(Text, {
 					tag = "text-body-medium content-default text-align-x-left text-wrap",
 					LayoutOrder = 3,
-					Text = requireFAE,
+					Text = RequireFAE,
 					Size = UDim2.new(1, 0, 0, 0),
 					AutomaticSize = Enum.AutomaticSize.Y
 				})
 			})
 		}),
-		Actions = reactModule.createElement(sheet.Actions, { LayoutOrder = 2 }, {
-			reactModule.createElement(view, {
+		Actions = ReactModule.createElement(Sheet.Actions, { LayoutOrder = 2 }, {
+			ReactModule.createElement(View, {
 				tag = "col auto-y align-y-center align-x-center size-full-0 gap-small padding-x-medium padding-bottom-large"
 			}, {
-				reactModule.createElement(view, { tag = "row auto-y size-full-0 gap-small" }, {
-					reactModule.createElement(button, {
-						ref = var8,
-						text = var1.Continue,
-						onActivated = function()
-							-- upvalues: logCurrencyTransferCounterModule (copy), var2 (ref), currencyTransferTelemetryModule (copy), sharedFlagsModule (copy), logRobuxTransferFlowEventModule (copy), robuxTransferFlowEventNameModule (copy), p1 (ref), promptStateModule (copy), getCounterUserIdModule (copy), direction (ref), accessResponseEnum (copy), transferDirectionModule (copy), acceptTransferModule (copy), processTransferModule (copy), selectedAmount (ref), triggerOnClose (ref), var4 (ref), getFFlagCurrencyTransferUseAmpWizardContainerForInAppModule (copy), inExpAmpWizardController (copy), ampWizardTransferConstantsModule (copy), var3 (ref), openAmpWizardContainer (copy)
-							logCurrencyTransferCounterModule(var2, currencyTransferTelemetryModule.CurrencyTransferFAEBlockContinueClickedCounter, { recourseSurface = "fae" })
+				ReactModule.createElement(View, { tag = "row auto-y size-full-0 gap-small" }, {
+					ReactModule.createElement(Button, {
+						ref = Ref1,
+						text = UseLocalizationResult.Continue,
+						onActivated = function() --[[ Line: 178 ]]
+							-- upvalues: LogCurrencyTransferCounterModule (upval), UseTransferStoreModuleResult (copy), CurrencyTransferTelemetryModule (upval), SharedFlagsModule (upval), LogRobuxTransferFlowEventModule (upval), RobuxTransferFlowEventNameModule (upval), p1 (copy), PromptStateModule (upval), GetCounterUserIdModule (upval), Direction (copy), AccessResponseEnum (upval), TransferDirectionModule (upval), AcceptTransferModule (upval), ProcessTransferModule (upval), SelectedAmount (copy), TriggerOnCloseFunction (copy), IsInExperienceMatch (copy), GetFFlagCurrencyTransferUseAmpWizardContainerForInAppModule (upval), InExpAmpWizardController (upval), AmpWizardTransferConstantsModule (upval), UseDispatchResult (copy), OpenAmpWizardContainerFunction (upval)
+							LogCurrencyTransferCounterModule(UseTransferStoreModuleResult, CurrencyTransferTelemetryModule.CurrencyTransferFAEBlockContinueClickedCounter, { recourseSurface = "fae" })
 							
-							if sharedFlagsModule.FFlagEnableRobuxTransferFlowEventIngest then
-								logRobuxTransferFlowEventModule(var2, robuxTransferFlowEventNameModule.fae_continue_clicked)
+							if SharedFlagsModule.FFlagEnableRobuxTransferFlowEventIngest then
+								LogRobuxTransferFlowEventModule(UseTransferStoreModuleResult, RobuxTransferFlowEventNameModule.fae_continue_clicked)
 							end
 							if not p1.ampFeatureCheck then
 								print("No ampFeatureCheck available")
-								triggerOnClose()
+								TriggerOnCloseFunction()
 								
 								return
 							end
-							var2.setPreviousPromptState(var2.getPromptState(false))
-							var2.setPromptState(promptStateModule.Hidden)
-							local var11 = getCounterUserIdModule(var2, direction)
-							local var12 = if var11 then {
+							UseTransferStoreModuleResult.setPreviousPromptState((UseTransferStoreModuleResult.getPromptState(false)))
+							UseTransferStoreModuleResult.setPromptState(PromptStateModule.Hidden)
+							local CounterUserIdModule = GetCounterUserIdModule(UseTransferStoreModuleResult, Direction)
+							local List = if CounterUserIdModule then {
 								{
 									name = "targetUser",
 									type = "UserId",
-									value = tostring(var11)
+									value = tostring(CounterUserIdModule)
 								}
 							} else nil
 							
-							local var13 = function(p2, _)
-								-- upvalues: var2 (copy), accessResponseEnum (copy), sharedFlagsModule (copy), logRobuxTransferFlowEventModule (copy), robuxTransferFlowEventNameModule (copy), direction (copy), transferDirectionModule (copy), acceptTransferModule (copy), processTransferModule (copy), selectedAmount (copy), triggerOnClose (copy)
-								local previousPromptState = var2.getPreviousPromptState(false)
+							local function v44(Granted, _) --[[ Line: 203 ]]
+								-- upvalues: UseTransferStoreModuleResult (upval), AccessResponseEnum (upval), SharedFlagsModule (upval), LogRobuxTransferFlowEventModule (upval), RobuxTransferFlowEventNameModule (upval), Direction (upval), TransferDirectionModule (upval), AcceptTransferModule (upval), ProcessTransferModule (upval), SelectedAmount (upval), TriggerOnCloseFunction (upval)
+								local PreviousPromptState = UseTransferStoreModuleResult.getPreviousPromptState(false)
 								
-								if previousPromptState then
-									var2.setPromptState(previousPromptState)
+								if PreviousPromptState then
+									UseTransferStoreModuleResult.setPromptState(PreviousPromptState)
 								end
-								if p2 == accessResponseEnum.Granted then
-									if sharedFlagsModule.FFlagEnableRobuxTransferFlowEventIngest then
-										logRobuxTransferFlowEventModule(var2, robuxTransferFlowEventNameModule.age_verification_completed)
+								if Granted == AccessResponseEnum.Granted then
+									if SharedFlagsModule.FFlagEnableRobuxTransferFlowEventIngest then
+										LogRobuxTransferFlowEventModule(UseTransferStoreModuleResult, RobuxTransferFlowEventNameModule.age_verification_completed)
 									end
-									if direction == transferDirectionModule.Receive then
-										acceptTransferModule(var2)
+									if Direction == TransferDirectionModule.Receive then
+										AcceptTransferModule(UseTransferStoreModuleResult)
 										
 										return
-									elseif direction == transferDirectionModule.Send then
-										processTransferModule(var2, selectedAmount or 0)
+									end
+									if Direction == TransferDirectionModule.Send then
+										ProcessTransferModule(UseTransferStoreModuleResult, SelectedAmount or 0)
 										
 										return
 									end
 								else
-									triggerOnClose()
+									TriggerOnCloseFunction()
 								end
 							end
 							
-							if var4 or not getFFlagCurrencyTransferUseAmpWizardContainerForInAppModule() then
-								inExpAmpWizardController.OpenAmpWizardContainerInExp(p1.ampFeatureCheck, var13, nil, ampWizardTransferConstantsModule.ENTRY_POINT_EVENT_CTX, var12, ampWizardTransferConstantsModule.NAMESPACE_NAME)
+							if IsInExperienceMatch or not GetFFlagCurrencyTransferUseAmpWizardContainerForInAppModule() then
+								InExpAmpWizardController.OpenAmpWizardContainerInExp(p1.ampFeatureCheck, v44, nil, AmpWizardTransferConstantsModule.ENTRY_POINT_EVENT_CTX, List, AmpWizardTransferConstantsModule.NAMESPACE_NAME)
 								
 								return
+							else
+								UseDispatchResult(OpenAmpWizardContainerFunction(p1.ampFeatureCheck, v44, nil, AmpWizardTransferConstantsModule.ENTRY_POINT_EVENT_CTX, List, AmpWizardTransferConstantsModule.NAMESPACE_NAME))
 							end
-							var3(openAmpWizardContainer(p1.ampFeatureCheck, var13, nil, ampWizardTransferConstantsModule.ENTRY_POINT_EVENT_CTX, var12, ampWizardTransferConstantsModule.NAMESPACE_NAME))
 						end,
-						variant = buttonVariant.Emphasis,
-						fillBehavior = fillBehavior.Fill
+						variant = ButtonVariant.Emphasis,
+						fillBehavior = FillBehavior.Fill
 					})
 				})
 			})

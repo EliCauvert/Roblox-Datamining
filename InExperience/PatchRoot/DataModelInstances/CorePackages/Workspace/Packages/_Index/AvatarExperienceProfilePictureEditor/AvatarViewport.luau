@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.AvatarViewport.AvatarViewport)
+﻿return (require(script.Parent.Parent.Parent._Index.AvatarViewport.AvatarViewport))

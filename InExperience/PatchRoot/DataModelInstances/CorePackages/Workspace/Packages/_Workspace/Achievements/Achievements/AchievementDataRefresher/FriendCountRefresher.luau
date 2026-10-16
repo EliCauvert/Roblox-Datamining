@@ -1,67 +1,63 @@
-﻿local achievements = script:FindFirstAncestor("Achievements")
-local loggerModule = require(achievements.Logger)
-local _ = require(achievements.Parent.Signal)
+﻿local Achievements = script:FindFirstAncestor("Achievements")
+local LoggerModule = require(Achievements.Logger)
+local _ = require(Achievements.Parent.Signal)
 
 return {
-	init = function(p1, p2, p3)
-		p1.fireFriendCountChanged = p2
-		p1.playersService = p3
+	init = function(p1, FireFriendCountChanged, PlayersService) --[[ Line: 25 ]]
+		p1.fireFriendCountChanged = FireFriendCountChanged
+		p1.playersService = PlayersService
 		p1.friendIds = {}
 		p1.friendCount = 0
 	end,
-	start = function(p1)
+	start = function(p1) --[[ Line: 32 ]]
 		p1.friendIds = p1:_getFriendIds()
 		
-		for i, v in pairs(p1.playersService:GetPlayers()) do
-			p1:_onPlayerAdded(v)
+		for _, player in pairs(p1.playersService:GetPlayers()) do
+			p1:_onPlayerAdded(player)
 		end
-		p1.playerAdded = p1.playersService.PlayerAdded:Connect(function(p2)
-			-- upvalues: p1 (ref)
-			p1:_onPlayerAdded(p2)
+		p1.playerAdded = p1.playersService.PlayerAdded:Connect(function(Player) --[[ Line: 37 ]]
+			-- upvalues: p1 (copy)
+			p1:_onPlayerAdded(Player)
 		end)
-		p1.playerRemoving = p1.playersService.PlayerRemoving:Connect(function(p2)
-			-- upvalues: p1 (ref)
-			p1:_onPlayerRemoving(p2)
+		p1.playerRemoving = p1.playersService.PlayerRemoving:Connect(function(Player) --[[ Line: 40 ]]
+			-- upvalues: p1 (copy)
+			p1:_onPlayerRemoving(Player)
 		end)
 	end,
-	_getFriendIds = function(p2)
-		-- upvalues: loggerModule (ref)
-		local function _(p3)
-			return coroutine.wrap(function()
-				-- upvalues: p3 (ref)
-				local var1 = 1
+	_getFriendIds = function(p2) --[[ Line: 45 ]]
+		-- upvalues: LoggerModule (copy)
+		local function _(Pages) --[[ Line: 46 | Named "iterPageItems" ]]
+			return coroutine.wrap(function() --[[ Line: 47 ]]
+				-- upvalues: Pages (copy)
+				local Count = 1
 				while true do
-					for i, v in ipairs(p3:GetCurrentPage()) do
-						coroutine.yield(v, var1)
+					for _, value in ipairs(Pages:GetCurrentPage()) do
+						coroutine.yield(value, Count)
 					end
-					if p3.IsFinished then break end
-					p3:AdvanceToNextPageAsync()
-					var1 += 1
+					if Pages.IsFinished then break end
+					Pages:AdvanceToNextPageAsync()
+					Count += 1
 				end
 			end)
 		end
 		
-		local ok, status = pcall(function()
-			-- upvalues: p2 (ref)
+		local Success, Result = pcall(function() --[[ Line: 62 ]]
+			-- upvalues: p2 (copy)
 			local t = {}
 			
 			if p2.playersService.LocalPlayer then
-				local userIdFriendsAsync = p2.playersService:GetFriendsAsync(p2.playersService.LocalPlayer.UserId)
+				local FriendsAsync = p2.playersService:GetFriendsAsync(p2.playersService.LocalPlayer.UserId)
 				
-				for i, v in coroutine.wrap(function()
-					-- upvalues: userIdFriendsAsync (ref)
-					local var2 = 1
-					while true do
-						for i, v in ipairs(userIdFriendsAsync:GetCurrentPage()) do
-							coroutine.yield(v, var2)
-						end
-						if userIdFriendsAsync.IsFinished then
-							break
-						end
-						break
-						userIdFriendsAsync:AdvanceToNextPageAsync()
-						var2 += 1
+				for i, _ in coroutine.wrap(function() --[[ Line: 47 ]]
+					-- upvalues: FriendsAsync (copy)
+					local Count = 1
+					for _, value in ipairs(FriendsAsync:GetCurrentPage()) do
+						coroutine.yield(value, Count)
 					end
+					if FriendsAsync.IsFinished then
+					end
+					FriendsAsync:AdvanceToNextPageAsync()
+					Count += 1
 				end) do
 					t[i.Id] = true
 				end
@@ -69,33 +65,33 @@ return {
 			return t
 		end)
 		
-		if not ok then
-			loggerModule:warning(status)
+		if not Success then
+			LoggerModule:warning(Result)
 		end
-		return if ok then status else {}
+		return Success and Result or {}
 	end,
-	_onPlayerAdded = function(p4, p5)
-		if p4.friendIds[p5.UserId] then
-			p4.friendCount += 1
-			p4.fireFriendCountChanged(p4.friendCount)
-		end
-	end,
-	_onPlayerRemoving = function(p4, p5)
-		if p4.friendIds[p5.UserId] then
-			p4.friendCount -= 1
-			p4.fireFriendCountChanged(p4.friendCount)
+	_onPlayerAdded = function(p3, Player) --[[ Line: 80 ]]
+		if p3.friendIds[Player.UserId] then
+			p3.friendCount += 1
+			p3.fireFriendCountChanged(p3.friendCount)
 		end
 	end,
-	stop = function(p4)
-		if p4.playerAdded then
-			p4.playerAdded:Disconnect()
-			p4.playerAdded = nil
+	_onPlayerRemoving = function(p3, Player) --[[ Line: 87 ]]
+		if p3.friendIds[Player.UserId] then
+			p3.friendCount -= 1
+			p3.fireFriendCountChanged(p3.friendCount)
 		end
-		if p4.playerRemoving then
-			p4.playerRemoving:Disconnect()
-			p4.playerRemoving = nil
+	end,
+	stop = function(p3) --[[ Line: 94 ]]
+		if p3.playerAdded then
+			p3.playerAdded:Disconnect()
+			p3.playerAdded = nil
 		end
-		p4.friendIds = {}
-		p4.friendCount = 0
+		if p3.playerRemoving then
+			p3.playerRemoving:Disconnect()
+			p3.playerRemoving = nil
+		end
+		p3.friendIds = {}
+		p3.friendCount = 0
 	end
 }

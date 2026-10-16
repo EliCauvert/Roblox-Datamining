@@ -1,9 +1,8 @@
-﻿local parent = script.Parent.Parent
-local inputTypeConstantsModule = require(script.Parent.InputTypeConstants)
-local inputTypeMapModule = require(script.Parent.InputTypeMap)
-local getFFlagDebugLuaAppAlwaysUseGamepad = require(parent.SharedFlags).getFFlagDebugLuaAppAlwaysUseGamepad
+﻿local InputTypeConstantsModule = require(script.Parent.InputTypeConstants)
+local InputTypeMapModule = require(script.Parent.InputTypeMap)
+local GetFFlagDebugLuaAppAlwaysUseGamepadFunction = require(script.Parent.Parent.SharedFlags).getFFlagDebugLuaAppAlwaysUseGamepad
 
-return function(p1)
-	-- upvalues: getFFlagDebugLuaAppAlwaysUseGamepad (ref), inputTypeConstantsModule (ref), inputTypeMapModule (ref)
-	return if getFFlagDebugLuaAppAlwaysUseGamepad() then inputTypeConstantsModule.Gamepad else inputTypeMapModule[p1] or inputTypeConstantsModule.None
+return function(p1) --[[ Line: 11 | Named "getInputGroup" ]]
+	-- upvalues: GetFFlagDebugLuaAppAlwaysUseGamepadFunction (copy), InputTypeConstantsModule (copy), InputTypeMapModule (copy)
+	return if GetFFlagDebugLuaAppAlwaysUseGamepadFunction() then InputTypeConstantsModule.Gamepad else InputTypeMapModule[p1] or InputTypeConstantsModule.None
 end

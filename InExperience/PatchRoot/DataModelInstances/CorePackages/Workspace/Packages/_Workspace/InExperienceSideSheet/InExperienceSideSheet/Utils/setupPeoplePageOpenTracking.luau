@@ -1,43 +1,46 @@
-﻿local inExperienceSideSheet = script:FindFirstAncestor("InExperienceSideSheet")
-local getSideSheetConfigStoreModule = require(inExperienceSideSheet.Stores.GetSideSheetConfigStore)
-local getDidSideSheetOpenWithPeoplePageModule = require(inExperienceSideSheet.Utils.getDidSideSheetOpenWithPeoplePage)
-local toggleSideSheetModule = require(inExperienceSideSheet.Utils.toggleSideSheet)
-local t = { Players = true, peoplepage = true }
-local var1 = false
+﻿local InExperienceSideSheet = script:FindFirstAncestor("InExperienceSideSheet")
+local GetSideSheetConfigStoreModule = require(InExperienceSideSheet.Stores.GetSideSheetConfigStore)
+local GetDidSideSheetOpenWithPeoplePageModule = require(InExperienceSideSheet.Utils.getDidSideSheetOpenWithPeoplePage)
+local ToggleSideSheetModule = require(InExperienceSideSheet.Utils.toggleSideSheet)
+local config = { Players = true, peoplepage = true }
+local Flag = false
 
-return function(p1)
-	-- upvalues: var1 (write), getSideSheetConfigStoreModule (ref), t (ref), getDidSideSheetOpenWithPeoplePageModule (ref), toggleSideSheetModule (ref)
-	if var1 then
+return function(p1) --[[ Line: 31 ]]
+	-- upvalues: Flag (ref), GetSideSheetConfigStoreModule (copy), config (copy), GetDidSideSheetOpenWithPeoplePageModule (copy), ToggleSideSheetModule (copy)
+	if not Flag then
+		Flag = true
+		local SideSheetConfigStoreModule = GetSideSheetConfigStoreModule(false)
+		
+		local function _(p2): boolean --[[ Line: 39 | Named "isPeoplePage" ]]
+			-- upvalues: config (upval)
+			return config[p2 or ""] == true
+		end
+		
+		local _ = function(p2) --[[ Line: 43 | Named "updateIsPeoplePageOpen" ]]
+			-- upvalues: SideSheetConfigStoreModule (copy), p1 (copy), config (upval)
+			SideSheetConfigStoreModule.setIsPeoplePageOpen(p1:GetVisibility() and config[p2 or ""] == true)
+		end
+		
+		p1.CurrentPageSignal:connect(function(p2) --[[ Line: 47 ]]
+			-- upvalues: config (upval), GetDidSideSheetOpenWithPeoplePageModule (upval), ToggleSideSheetModule (upval), SideSheetConfigStoreModule (copy), p1 (copy)
+			if config[p2 or ""] ~= true and GetDidSideSheetOpenWithPeoplePageModule() then
+				ToggleSideSheetModule(false)
+			end
+			SideSheetConfigStoreModule.setIsPeoplePageOpen(p1:GetVisibility() and config[p2 or ""] == true)
+		end)
+		p1.SettingsShowSignal:connect(function(p2) --[[ Line: 57 ]]
+			-- upvalues: SideSheetConfigStoreModule (copy), p1 (copy), config (upval)
+			if p2 then
+				local CurrentPage = if p1.Pages then p1.Pages.CurrentPage else nil
+				local Name = if CurrentPage then CurrentPage.Page.Name else nil
+				SideSheetConfigStoreModule.setIsPeoplePageOpen(p1:GetVisibility() and config[Name or ""] == true)
+				
+				return
+			else
+				SideSheetConfigStoreModule.setIsPeoplePageOpen(false)
+			end
+		end)
+		
 		return
 	end
-	var1 = true
-	local var2 = getSideSheetConfigStoreModule(false)
-	
-	local function _(p2)
-		-- upvalues: t (copy)
-		return t[p2 or ""] == true
-	end
-	
-	local _ = function(p2)
-		-- upvalues: var2 (ref), p1 (ref), t (copy)
-		var2.setIsPeoplePageOpen(p1:GetVisibility() and t[p2 or ""] == true)
-	end
-	
-	p1.CurrentPageSignal:connect(function(p2)
-		-- upvalues: t (copy), getDidSideSheetOpenWithPeoplePageModule (copy), toggleSideSheetModule (copy), var2 (ref), p1 (ref)
-		if t[p2 or ""] ~= true and getDidSideSheetOpenWithPeoplePageModule() then
-			toggleSideSheetModule(false)
-		end
-		var2.setIsPeoplePageOpen(p1:GetVisibility() and t[p2 or ""] == true)
-	end)
-	p1.SettingsShowSignal:connect(function(p2)
-		-- upvalues: var2 (ref), p1 (ref), t (copy)
-		if p2 then
-			local var3 = if p1.Pages then p1.Pages.CurrentPage else nil
-			var2.setIsPeoplePageOpen(p1:GetVisibility() and t[(if var3 then var3.Page.Name else nil) or ""] == true)
-			
-			return
-		end
-		var2.setIsPeoplePageOpen(false)
-	end)
 end

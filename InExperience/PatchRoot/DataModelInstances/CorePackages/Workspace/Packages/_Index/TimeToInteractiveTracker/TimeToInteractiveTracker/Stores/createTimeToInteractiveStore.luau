@@ -1,39 +1,39 @@
-﻿local timeToInteractiveTracker = script:FindFirstAncestor("TimeToInteractiveTracker")
-local parent = timeToInteractiveTracker.Parent
-local createSignal = require(parent.Signals).createSignal
-local fFlagEnableTTIRecordWebViewMilestones = require(parent.SharedFlags).FFlagEnableTTIRecordWebViewMilestones
-local updateTTIEventMetadataModule = require(script.Parent.Actions.updateTTIEventMetadata)
-local trackTTIEventStartModule = require(script.Parent.Actions.trackTTIEventStart)
-local trackTTIEventEndModule = require(script.Parent.Actions.trackTTIEventEnd)
-local trackMilestoneModule = require(script.Parent.Actions.trackMilestone)
-local trackSubphaseModule = require(script.Parent.Actions.trackSubphase)
-local trackRequestModule = require(script.Parent.Actions.trackRequest)
-local recordWebViewMilestonesModule = require(script.Parent.Actions.recordWebViewMilestones)
-local resetTTIEventModule = require(script.Parent.Actions.resetTTIEvent)
-local destroyTTIEventModule = require(script.Parent.Actions.destroyTTIEvent)
-local constantsModule = require(timeToInteractiveTracker.Milestones.constants)
-local useTTIRenderAndMountedTrackingModule = require(timeToInteractiveTracker.Hooks.useTTIRenderAndMountedTracking)
+﻿local TimeToInteractiveTracker = script:FindFirstAncestor("TimeToInteractiveTracker")
+local Parent = TimeToInteractiveTracker.Parent
+local CreateSignalFunction = require(Parent.Signals).createSignal
+local FFlagEnableTTIRecordWebViewMilestones = require(Parent.SharedFlags).FFlagEnableTTIRecordWebViewMilestones
+local UpdateTTIEventMetadataModule = require(script.Parent.Actions.updateTTIEventMetadata)
+local TrackTTIEventStartModule = require(script.Parent.Actions.trackTTIEventStart)
+local TrackTTIEventEndModule = require(script.Parent.Actions.trackTTIEventEnd)
+local TrackMilestoneModule = require(script.Parent.Actions.trackMilestone)
+local TrackSubphaseModule = require(script.Parent.Actions.trackSubphase)
+local TrackRequestModule = require(script.Parent.Actions.trackRequest)
+local RecordWebViewMilestonesModule = require(script.Parent.Actions.recordWebViewMilestones)
+local ResetTTIEventModule = require(script.Parent.Actions.resetTTIEvent)
+local DestroyTTIEventModule = require(script.Parent.Actions.destroyTTIEvent)
+local ConstantsModule = require(TimeToInteractiveTracker.Milestones.constants)
+local UseTTIRenderAndMountedTrackingModule = require(TimeToInteractiveTracker.Hooks.useTTIRenderAndMountedTracking)
 local _ = require(script.Parent.types)
 
-return function()
-	-- upvalues: createSignal (ref), updateTTIEventMetadataModule (ref), trackTTIEventStartModule (ref), trackTTIEventEndModule (ref), trackMilestoneModule (ref), trackSubphaseModule (ref), trackRequestModule (ref), fFlagEnableTTIRecordWebViewMilestones (ref), recordWebViewMilestonesModule (ref), resetTTIEventModule (ref), destroyTTIEventModule (ref), constantsModule (ref), useTTIRenderAndMountedTrackingModule (ref)
-	local var1, var2 = createSignal({})
+return function() --[[ Line: 28 ]]
+	-- upvalues: CreateSignalFunction (copy), UpdateTTIEventMetadataModule (copy), TrackTTIEventStartModule (copy), TrackTTIEventEndModule (copy), TrackMilestoneModule (copy), TrackSubphaseModule (copy), TrackRequestModule (copy), FFlagEnableTTIRecordWebViewMilestones (copy), RecordWebViewMilestonesModule (copy), ResetTTIEventModule (copy), DestroyTTIEventModule (copy), ConstantsModule (copy), UseTTIRenderAndMountedTrackingModule (copy)
+	local Signal, Signal2 = CreateSignalFunction({})
 	
 	return {
-		getEvents = var1,
-		setEvents = var2,
-		updateMetadata = updateTTIEventMetadataModule(var2),
-		trackStart = trackTTIEventStartModule(var2),
-		trackEnd = trackTTIEventEndModule(var2),
-		trackMilestone = trackMilestoneModule(var1, var2),
-		trackSubphase = trackSubphaseModule(var1, var2),
-		trackRequest = trackRequestModule(var1, var2),
-		recordWebViewMilestones = if fFlagEnableTTIRecordWebViewMilestones then recordWebViewMilestonesModule(var1, var2) else nil,
-		resetEvent = resetTTIEventModule(var2),
-		destroyEvent = destroyTTIEventModule(var2),
-		Milestone = constantsModule,
+		getEvents = Signal,
+		setEvents = Signal2,
+		updateMetadata = UpdateTTIEventMetadataModule(Signal2),
+		trackStart = TrackTTIEventStartModule(Signal2),
+		trackEnd = TrackTTIEventEndModule(Signal2),
+		trackMilestone = TrackMilestoneModule(Signal, Signal2),
+		trackSubphase = TrackSubphaseModule(Signal, Signal2),
+		trackRequest = TrackRequestModule(Signal, Signal2),
+		recordWebViewMilestones = if FFlagEnableTTIRecordWebViewMilestones then RecordWebViewMilestonesModule(Signal, Signal2) else nil,
+		resetEvent = ResetTTIEventModule(Signal2),
+		destroyEvent = DestroyTTIEventModule(Signal2),
+		Milestone = ConstantsModule,
 		Hooks = {
-			useTTIRenderAndMountedTracking = useTTIRenderAndMountedTrackingModule(trackMilestoneModule(var1, var2))
+			useTTIRenderAndMountedTracking = UseTTIRenderAndMountedTrackingModule(TrackMilestoneModule(Signal, Signal2))
 		}
 	}
 end

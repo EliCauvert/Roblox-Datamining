@@ -1,70 +1,69 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local userInputService = game:GetService("UserInputService")
-local logService = game:GetService("LogService")
-local roactModule = require(corePackagesService.Packages.Roact)
-local dataConsumerModule = require(script.Parent.Parent.DataConsumer)
-local scrollingTextBoxModule = require(script.Parent.Parent.ScrollingTextBox)
-local constantsModule = require(script.Parent.Parent.Parent.Constants)
-local commandLineIndent = constantsModule.LogFormatting.CommandLineIndent
-local commandLine = constantsModule.DefaultFontSize.CommandLine
-local log = constantsModule.Font.Log
-local devConsoleCommandLine = roactModule.PureComponent:extend("DevConsoleCommandLine")
+﻿local UserInputService = game:GetService("UserInputService")
+local LogService = game:GetService("LogService")
+local RoactModule = require(game:GetService("CorePackages").Packages.Roact)
+local DataConsumerModule = require(script.Parent.Parent.DataConsumer)
+local ScrollingTextBoxModule = require(script.Parent.Parent.ScrollingTextBox)
+local ConstantsModule = require(script.Parent.Parent.Parent.Constants)
+local CommandLineIndent = ConstantsModule.LogFormatting.CommandLineIndent
+local CommandLine = ConstantsModule.DefaultFontSize.CommandLine
+local Log = ConstantsModule.Font.Log
+local DevConsoleCommandLine = RoactModule.PureComponent:extend("DevConsoleCommandLine")
 
-function devConsoleCommandLine.init(p1)
-	-- upvalues: logService (ref), roactModule (ref)
-	function p0.onFocusLost(p2, p3, _)
-		-- upvalues: logService (copy)
-		if p3 then
-			logService:ExecuteScript(p2.Text)
-			p2:CaptureFocus()
+function DevConsoleCommandLine.init(p1) --[[ Line: 17 ]]
+	-- upvalues: LogService (copy), RoactModule (copy)
+	function p1.onFocusLost(TextBox, p2, _) --[[ Line: 18 ]]
+		-- upvalues: LogService (upval)
+		if p2 then
+			LogService:ExecuteScript(TextBox.Text)
+			TextBox:CaptureFocus()
 		end
 	end
 	
-	p1.textbox = roactModule.createRef()
+	p1.textbox = RoactModule.createRef()
 end
 
-function devConsoleCommandLine.didMount(p1)
-	-- upvalues: userInputService (ref)
+function DevConsoleCommandLine.didMount(p1) --[[ Line: 28 ]]
+	-- upvalues: UserInputService (copy)
 	if not p1.onFocusConnection then
-		p1.onFocusConnection = userInputService.InputBegan:Connect(function(p2)
-			-- upvalues: p1 (ref)
+		p1.onFocusConnection = UserInputService.InputBegan:Connect(function(Input) --[[ Line: 30 ]]
+			-- upvalues: p1 (copy)
 			if p1.textbox.current and p1.textbox.current:IsFocused() then
-				local current = p1.textbox.current
-				local serverLogData = p1.props.ServerLogData
-				local commandLineHistory = serverLogData:getCommandLineHistory()
-				local commandLineIndex = serverLogData:getCommandLineIndex()
+				local Current = p1.textbox.current
+				local ServerLogData = p1.props.ServerLogData
+				local CommandLineHistory = ServerLogData:getCommandLineHistory()
+				local CommandLineIndex = ServerLogData:getCommandLineIndex()
 				
-				if p2.KeyCode == Enum.KeyCode.Up then
-					local minValue = math.min(commandLineHistory:getSize(), commandLineIndex + 1)
-					commandLineIndex = minValue
-					current.Text = commandLineHistory:reverseAt(minValue) or ""
-				elseif p2.KeyCode == Enum.KeyCode.Down then
-					local maxValue = math.max(0, commandLineIndex - 1)
-					commandLineIndex = maxValue
-					current.Text = commandLineHistory:reverseAt(maxValue) or ""
-				elseif p2.KeyCode == Enum.KeyCode.Return then
-					if #current.Text:gsub("%s+", "") > 0 and commandLineHistory:reverseAt(1) ~= current.Text then
-						commandLineHistory:push_back(current.Text)
+				if Input.KeyCode == Enum.KeyCode.Up then
+					local Smallest = math.min(CommandLineHistory:getSize(), CommandLineIndex + 1)
+					CommandLineIndex = Smallest
+					Current.Text = CommandLineHistory:reverseAt(Smallest) or ""
+				elseif Input.KeyCode == Enum.KeyCode.Down then
+					local Largest = math.max(0, CommandLineIndex - 1)
+					CommandLineIndex = Largest
+					Current.Text = CommandLineHistory:reverseAt(Largest) or ""
+				elseif Input.KeyCode == Enum.KeyCode.Return then
+					if #Current.Text:gsub("%s+", "") > 0 and CommandLineHistory:reverseAt(1) ~= Current.Text then
+						CommandLineHistory:push_back(Current.Text)
 					end
-					commandLineIndex = 0
-				elseif commandLineIndex ~= 0 then
-					commandLineIndex = 0
+					CommandLineIndex = 0
+				elseif CommandLineIndex ~= 0 then
+					CommandLineIndex = 0
 				end
-				serverLogData:setCommandLineIndex(commandLineIndex)
+				ServerLogData:setCommandLineIndex(CommandLineIndex)
 			end
 		end)
 	end
 	if not p1.fixUnwantedReturnCapture then
-		p1.fixUnwantedReturnCapture = userInputService.InputEnded:Connect(function(p2)
-			-- upvalues: p1 (ref)
-			if p1.textbox.current and p1.textbox.current:IsFocused() and p2.KeyCode == Enum.KeyCode.Return then
+		p1.fixUnwantedReturnCapture = UserInputService.InputEnded:Connect(function(Input) --[[ Line: 70 ]]
+			-- upvalues: p1 (copy)
+			if p1.textbox.current and p1.textbox.current:IsFocused() and Input.KeyCode == Enum.KeyCode.Return then
 				p1.textbox.current.Text = ""
 			end
 		end)
 	end
 end
 
-function devConsoleCommandLine.willUnmount(p1)
+function DevConsoleCommandLine.willUnmount(p1) --[[ Line: 80 ]]
 	if p1.onFocusConnection then
 		p1.onFocusConnection:Disconnect()
 		p1.onFocusConnection = nil
@@ -75,48 +74,48 @@ function devConsoleCommandLine.willUnmount(p1)
 	end
 end
 
-function devConsoleCommandLine.render(p1)
-	-- upvalues: roactModule (ref), constantsModule (ref), commandLineIndent (ref), commandLine (ref), log (ref), scrollingTextBoxModule (ref)
-	local height = p1.props.height
-	local pos = p1.props.pos
-	local var1 = ""
-	local commandLineIndex = p1.props.ServerLogData:getCommandLineIndex()
+function DevConsoleCommandLine.render(p1) --[[ Line: 91 ]]
+	-- upvalues: RoactModule (copy), ConstantsModule (copy), CommandLineIndent (copy), CommandLine (copy), Log (copy), ScrollingTextBoxModule (copy)
+	local Height = p1.props.height
+	local Pos = p1.props.pos
+	local ReverseAtResult = ""
+	local CommandLineIndex = p1.props.ServerLogData:getCommandLineIndex()
 	
-	if commandLineIndex ~= 0 then
-		var1 = p1.props.ServerLogData:getCommandLineHistory():reverseAt(commandLineIndex) or ""
+	if CommandLineIndex ~= 0 then
+		ReverseAtResult = p1.props.ServerLogData:getCommandLineHistory():reverseAt(CommandLineIndex) or ""
 	end
-	return roactModule.createElement("Frame", {
+	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 0,
 		BorderSizePixel = 1,
-		Position = pos,
-		Size = UDim2.new(1, 0, 0, height),
-		BackgroundColor3 = constantsModule.Color.TextBoxGray,
-		BorderColor3 = constantsModule.Color.BorderGray
+		Position = Pos,
+		Size = UDim2.new(1, 0, 0, Height),
+		BackgroundColor3 = ConstantsModule.Color.TextBoxGray,
+		BorderColor3 = ConstantsModule.Color.BorderGray
 	}, {
-		Arrow = roactModule.createElement("TextLabel", {
+		Arrow = RoactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
 			Text = "> ",
-			Size = UDim2.new(0, commandLineIndent, 1, 0),
-			TextSize = commandLine,
-			Font = log,
-			TextColor3 = constantsModule.Color.Text,
+			Size = UDim2.new(0, CommandLineIndent, 1, 0),
+			TextSize = CommandLine,
+			Font = Log,
+			TextColor3 = ConstantsModule.Color.Text,
 			TextXAlignment = Enum.TextXAlignment.Right
 		}),
-		InputField = roactModule.createElement(scrollingTextBoxModule, {
-			Position = UDim2.new(0, commandLineIndent, 0, 0),
-			Size = UDim2.new(1, -commandLineIndent, 0, height),
+		InputField = RoactModule.createElement(ScrollingTextBoxModule, {
+			Position = UDim2.new(0, CommandLineIndent, 0, 0),
+			Size = UDim2.new(1, -CommandLineIndent, 0, Height),
 			ShowNativeInput = true,
 			ClearTextOnFocus = false,
-			TextColor3 = constantsModule.Color.Text,
+			TextColor3 = ConstantsModule.Color.Text,
 			TextXAlignment = 0,
-			TextSize = commandLine,
-			Text = var1,
-			Font = log,
+			TextSize = CommandLine,
+			Text = ReverseAtResult,
+			Font = Log,
 			PlaceholderText = "command line",
-			[roactModule.Ref] = p1.textbox,
+			[RoactModule.Ref] = p1.textbox,
 			TextBoxFocusLost = p1.onFocusLost
 		})
 	})
 end
 
-return dataConsumerModule(devConsoleCommandLine, "ServerLogData")
+return DataConsumerModule(DevConsoleCommandLine, "ServerLogData")

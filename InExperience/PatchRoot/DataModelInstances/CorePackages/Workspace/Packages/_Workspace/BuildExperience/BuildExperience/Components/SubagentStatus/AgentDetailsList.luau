@@ -1,217 +1,217 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local creatorAgentChatModule = require(parent.DataHydration.CreatorAgentChat)
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local todoListModule = require(script.Parent.TodoList)
-local matchesSearchQueryModule = require(buildExperience.utils.matchesSearchQuery)
-local chip = foundationModule.Chip
-local menu = foundationModule.Menu
-local searchInput = foundationModule.SearchInput
-local view = foundationModule.View
-local useScaledValue = foundationModule.Hooks.useScaledValue
-local chipSize = foundationModule.Enums.ChipSize
-local chipVariant = foundationModule.Enums.ChipVariant
-local iconName = foundationModule.Enums.IconName
-local inputSize = foundationModule.Enums.InputSize
-local popoverAlign = foundationModule.Enums.PopoverAlign
-local popoverSide = foundationModule.Enums.PopoverSide
-local subagentTaskStatus = creatorAgentChatModule.SubagentTaskStatus
-local buildAgentDetailsStatusMenuWidth = game:DefineFastInt("BuildAgentDetailsStatusMenuWidth", 172)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
+local TodoListModule = require(script.Parent.TodoList)
+local MatchesSearchQueryModule = require(BuildExperience.utils.matchesSearchQuery)
+local Chip = FoundationModule.Chip
+local Menu = FoundationModule.Menu
+local SearchInput = FoundationModule.SearchInput
+local View = FoundationModule.View
+local UseScaledValueFunction = FoundationModule.Hooks.useScaledValue
+local ChipSize = FoundationModule.Enums.ChipSize
+local ChipVariant = FoundationModule.Enums.ChipVariant
+local IconName = FoundationModule.Enums.IconName
+local InputSize = FoundationModule.Enums.InputSize
+local PopoverAlign = FoundationModule.Enums.PopoverAlign
+local PopoverSide = FoundationModule.Enums.PopoverSide
+local SubagentTaskStatus = require(Parent.DataHydration.CreatorAgentChat).SubagentTaskStatus
+local BuildAgentDetailsStatusMenuWidth = game:DefineFastInt("BuildAgentDetailsStatusMenuWidth", 172)
 
-local function _(p1, p2)
-	for i, v in p1 do
-		if v.status == p2 then
-			return v.text
+local function _(List, Status) --[[ Line: 50 | Named "getStatusFilterText" ]]
+	for _, value in List do
+		if value.status == Status then
+			return value.text
 		end
 	end
-	return p2 or "All"
+	return Status or "All"
 end
 
-local _ = function(p3, p4)
-	-- upvalues: matchesSearchQueryModule (ref)
-	return matchesSearchQueryModule(p3.text, p4) or matchesSearchQueryModule(p3.description, p4)
+local _ = function(p1, p2) --[[ Line: 59 | Named "taskMatchesSearch" ]]
+	-- upvalues: MatchesSearchQueryModule (copy)
+	return MatchesSearchQueryModule(p1.text, p2) or MatchesSearchQueryModule(p1.description, p2)
 end
 
-local _ = function(p3, p4)
-	return p4 == nil or p3.status == p4
+local _ = function(p1, Status): boolean --[[ Line: 63 | Named "taskMatchesStatus" ]]
+	return Status == nil or p1.status == Status
 end
 
-local _ = function(p3, p4)
-	-- upvalues: matchesSearchQueryModule (ref)
-	local searchQuery = p4.searchQuery
-	local var1 = matchesSearchQueryModule(p3.text, searchQuery) or matchesSearchQueryModule(p3.description, searchQuery)
+local _ = function(p1, p2) --[[ Line: 70 | Named "shouldIncludeTask" ]]
+	-- upvalues: MatchesSearchQueryModule (copy)
+	local SearchQuery = p2.searchQuery
+	local MatchesSearchQueryModuleResult = MatchesSearchQueryModule(p1.text, SearchQuery) or MatchesSearchQueryModule(p1.description, SearchQuery)
 	
-	if var1 then
-		local status = p4.status
+	if MatchesSearchQueryModuleResult then
+		local Status = p2.status
 		
-		if status == nil then
+		if Status == nil then
 			return true
 		end
-		var1 = p3.status == status
+		MatchesSearchQueryModuleResult = p1.status == Status
 	end
-	return var1
+	return MatchesSearchQueryModuleResult
 end
 
-return reactModule.memo(function(p3)
-	-- upvalues: reactModule (ref), useScaledValue (ref), buildAgentDetailsStatusMenuWidth (ref), useLocalization (ref), localizationStringsModule (ref), subagentTaskStatus (ref), matchesSearchQueryModule (ref), view (ref), searchInput (ref), menu (ref), popoverAlign (ref), popoverSide (ref), inputSize (ref), chip (ref), iconName (ref), chipVariant (ref), chipSize (ref), todoListModule (ref)
-	local var1, var2 = reactModule.useState("")
-	local var3, var4 = reactModule.useState(nil)
-	local var5, var6 = reactModule.useState(false)
-	local var7 = useScaledValue(buildAgentDetailsStatusMenuWidth)
-	local var8 = useLocalization({
-		all = localizationStringsModule.SUBAGENT_STATUS_ALL,
-		deleted = localizationStringsModule.SUBAGENT_STATUS_DELETED,
-		done = localizationStringsModule.SUBAGENT_STATUS_DONE,
-		error = localizationStringsModule.SUBAGENT_STATUS_ERROR,
-		inProgress = localizationStringsModule.SUBAGENT_STATUS_IN_PROGRESS,
-		pending = localizationStringsModule.SUBAGENT_STATUS_PENDING,
-		searchTasks = localizationStringsModule.SUBAGENT_STATUS_SEARCH_TASKS,
-		version = localizationStringsModule.SUBAGENT_STATUS_VERSION
+return ReactModule.memo(function(Frame) --[[ Line: 74 | Named "AgentDetailsList" ]]
+	-- upvalues: ReactModule (copy), UseScaledValueFunction (copy), BuildAgentDetailsStatusMenuWidth (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), SubagentTaskStatus (copy), MatchesSearchQueryModule (copy), View (copy), SearchInput (copy), Menu (copy), PopoverAlign (copy), PopoverSide (copy), InputSize (copy), Chip (copy), IconName (copy), ChipVariant (copy), ChipSize (copy), TodoListModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState("")
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(false)
+	local UseScaledValueResult = UseScaledValueFunction(BuildAgentDetailsStatusMenuWidth)
+	local UseLocalizationResult = UseLocalizationFunction({
+		all = LocalizationStringsModule.SUBAGENT_STATUS_ALL,
+		deleted = LocalizationStringsModule.SUBAGENT_STATUS_DELETED,
+		done = LocalizationStringsModule.SUBAGENT_STATUS_DONE,
+		error = LocalizationStringsModule.SUBAGENT_STATUS_ERROR,
+		inProgress = LocalizationStringsModule.SUBAGENT_STATUS_IN_PROGRESS,
+		pending = LocalizationStringsModule.SUBAGENT_STATUS_PENDING,
+		searchTasks = LocalizationStringsModule.SUBAGENT_STATUS_SEARCH_TASKS,
+		version = LocalizationStringsModule.SUBAGENT_STATUS_VERSION
 	})
-	local searchTasks = var8.searchTasks
-	local _ = var8.version
+	local SearchTasks = UseLocalizationResult.searchTasks
+	local _ = UseLocalizationResult.version
 	local list = {
-		{ id = "All", status = nil, text = var8.all },
 		{
-			id = subagentTaskStatus.InProgress,
-			status = subagentTaskStatus.InProgress,
-			text = var8.inProgress
+			id = "All",
+			status = nil,
+			text = UseLocalizationResult.all
 		},
 		{
-			id = subagentTaskStatus.Done,
-			status = subagentTaskStatus.Done,
-			text = var8.done
+			id = SubagentTaskStatus.InProgress,
+			status = SubagentTaskStatus.InProgress,
+			text = UseLocalizationResult.inProgress
 		},
 		{
-			id = subagentTaskStatus.Pending,
-			status = subagentTaskStatus.Pending,
-			text = var8.pending
+			id = SubagentTaskStatus.Done,
+			status = SubagentTaskStatus.Done,
+			text = UseLocalizationResult.done
 		},
 		{
-			id = subagentTaskStatus.Error,
-			status = subagentTaskStatus.Error,
-			text = var8.error
+			id = SubagentTaskStatus.Pending,
+			status = SubagentTaskStatus.Pending,
+			text = UseLocalizationResult.pending
 		},
 		{
-			id = subagentTaskStatus.Deleted,
-			status = subagentTaskStatus.Deleted,
-			text = var8.deleted
+			id = SubagentTaskStatus.Error,
+			status = SubagentTaskStatus.Error,
+			text = UseLocalizationResult.error
+		},
+		{
+			id = SubagentTaskStatus.Deleted,
+			status = SubagentTaskStatus.Deleted,
+			text = UseLocalizationResult.deleted
 		}
 	}
-	local t = { searchQuery = var1, status = var3 }
-	local t_1 = {}
+	local config = { searchQuery = UseStateResult, status = UseStateResult1 }
+	local Items = {}
 	
-	for i, v in p3.group.tasks do
-		local searchQuery = t.searchQuery
-		local var9 = matchesSearchQueryModule(v.text, searchQuery) or matchesSearchQueryModule(v.description, searchQuery)
+	for i, _task in Frame.group.tasks do
+		local SearchQuery = config.searchQuery
+		local MatchesSearchQueryModuleResult = MatchesSearchQueryModule(_task.text, SearchQuery) or MatchesSearchQueryModule(_task.description, SearchQuery)
 		
-		if var9 then
-			local status = t.status
-			var9 = status == nil or v.status == status
+		if MatchesSearchQueryModuleResult then
+			local Status = config.status
+			MatchesSearchQueryModuleResult = Status == nil or _task.status == Status
 		end
-		if var9 then
-			table.insert(t_1, {
-				title = v.text,
-				description = v.description,
-				status = v.status,
-				testId = `{p3.testId or "build-agent-details-list"}-item-{i}`
+		if MatchesSearchQueryModuleResult then
+			table.insert(Items, {
+				title = _task.text,
+				description = _task.description,
+				status = _task.status,
+				testId = `{Frame.testId or "build-agent-details-list"}-item-{i}`
 			})
 		end
 	end
-	local var10
-	local var11 = (function()
-		-- upvalues: list (ref), var3 (ref)
-		local t = {}
-		
-		for i, v in list do
-			table.insert(t, {
-				isDisabled = false,
-				id = v.id,
-				text = v.text,
-				isChecked = var3 == v.status
-			})
-		end
-		return t
-	end)()
-	local var12 = reactModule.useCallback(function()
-		-- upvalues: var6 (ref)
-		var6(function(p4)
-			return not p4
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 135 ]]
+		-- upvalues: UseStateResult2_2 (copy)
+		UseStateResult2_2(function(p1): boolean --[[ Line: 136 ]]
+			return not p1
 		end)
 	end, {})
-	local var13 = reactModule.useCallback(function()
-		-- upvalues: var6 (ref)
-		var6(false)
-	end, {})
-	local var14 = reactModule.useCallback(function(p4)
-		-- upvalues: var4 (ref), var6 (ref)
-		var4(if p4 == "All" then nil else p4)
-		var6(false)
-	end, {})
-	local createElement = reactModule.createElement
-	local t_2 = {
+	local CreateElementFunction4 = ReactModule.createElement
+	local config1 = {
 		tag = "col gap-xxlarge size-full-0 auto-y padding-y-small",
-		LayoutOrder = p3.LayoutOrder,
-		testId = p3.testId or "build-agent-details-list"
+		LayoutOrder = Frame.LayoutOrder,
+		testId = Frame.testId or "build-agent-details-list"
 	}
-	local t_3 = {}
-	local createElement_1 = reactModule.createElement
-	local t_4 = {
+	local t = {}
+	local CreateElementFunction3 = ReactModule.createElement
+	local config11 = {
 		LayoutOrder = 1,
 		tag = "col gap-small size-full-0 auto-y"
 	}
-	local t_5 = {
-		Search = reactModule.createElement(searchInput, {
+	local config2 = {
+		Search = ReactModule.createElement(SearchInput, {
 			LayoutOrder = 1,
-			text = var1,
-			placeholder = searchTasks,
-			onChanged = var2,
+			text = UseStateResult,
+			placeholder = SearchTasks,
+			onChanged = UseStateResult2,
 			width = UDim.new(1, 0),
-			testId = `{p3.testId or "build-agent-details-list"}-search-input`
+			testId = `{Frame.testId or "build-agent-details-list"}-search-input`
 		})
 	}
-	local createElement_2 = reactModule.createElement
-	local t_6 = {
+	local CreateElementFunction2 = ReactModule.createElement
+	local config3 = {
 		LayoutOrder = 2,
 		tag = "row align-y-center gap-small size-full-0 auto-y"
 	}
-	local t_7 = { VersionChip = nil }
-	local createElement_3 = reactModule.createElement
-	local t_8 = {
+	local config4 = { VersionChip = nil }
+	local CreateElementFunction1 = ReactModule.createElement
+	local config5 = {
 		LayoutOrder = 2,
-		align = popoverAlign.Start,
-		isOpen = var5,
-		items = var11,
-		onActivated = var14,
-		onPressedOutside = var13,
-		side = popoverSide.Bottom,
-		size = inputSize.Medium,
-		width = UDim.new(0, var7)
-	}
-	local t_9 = {}
-	local createElement_4 = reactModule.createElement
-	local t_10 = { LayoutOrder = 1 }
-	
-	for i_1, v_1 in list do
-		if v_1.status == var3 then
-			var10 = v_1.text
-			t_10.text = var10
-			t_10.trailing = iconName.ChevronLargeDown
-			t_10.variant = chipVariant.Standard
-			t_10.size = chipSize.Medium
-			t_10.onActivated = var12
-			t_10.testId = `{p3.testId or "build-agent-details-list"}-status-filter-chip`
-			t_9.StatusChip = createElement_4(chip, t_10)
-			t_7.StatusMenu = createElement_3(menu, t_8, t_9)
-			t_5.Chips = createElement_2(view, t_6, t_7)
-			t_3.Filters = createElement_1(view, t_4, t_5)
-			t_3.List = reactModule.createElement(todoListModule, { layoutOrder = 2, items = t_1 })
+		align = PopoverAlign.Start,
+		isOpen = UseStateResult3,
+		items = (function() --[[ Line: 121 | Named "buildStatusMenuItems" ]]
+			-- upvalues: list (copy), UseStateResult1 (copy)
+			local List = {}
 			
-			return createElement(view, t_2, t_3)
+			for _, value in list do
+				table.insert(List, {
+					isDisabled = false,
+					id = value.id,
+					text = value.text,
+					isChecked = UseStateResult1 == value.status
+				})
+			end
+			return List
+		end)(),
+		onActivated = ReactModule.useCallback(function(p1) --[[ Line: 145 ]]
+			-- upvalues: UseStateResult2_1 (copy), UseStateResult2_2 (copy)
+			UseStateResult2_1(if p1 == "All" then nil else p1)
+			UseStateResult2_2(false)
+		end, {}),
+		onPressedOutside = ReactModule.useCallback(function() --[[ Line: 141 ]]
+			-- upvalues: UseStateResult2_2 (copy)
+			UseStateResult2_2(false)
+		end, {}),
+		side = PopoverSide.Bottom,
+		size = InputSize.Medium,
+		width = UDim.new(0, UseScaledValueResult)
+	}
+	local t1 = {}
+	local CreateElementFunction = ReactModule.createElement
+	local config6 = { LayoutOrder = 1 }
+	local UseStateResult1_1 = nil
+	
+	for _, value in list do
+		if value.status == UseStateResult1 then
+			UseStateResult1_1 = value.text
+			config6.text = UseStateResult1_1
+			config6.trailing = IconName.ChevronLargeDown
+			config6.variant = ChipVariant.Standard
+			config6.size = ChipSize.Medium
+			config6.onActivated = UseResult
+			config6.testId = `{Frame.testId or "build-agent-details-list"}-status-filter-chip`
+			t1.StatusChip = CreateElementFunction(Chip, config6)
+			config4.StatusMenu = CreateElementFunction1(Menu, config5, t1)
+			config2.Chips = CreateElementFunction2(View, config3, config4)
+			t.Filters = CreateElementFunction3(View, config11, config2)
+			t.List = ReactModule.createElement(TodoListModule, { layoutOrder = 2, items = Items })
+			
+			return CreateElementFunction4(View, config1, t)
 		end
 	end
-	var10 = var3 or "All"
+	UseStateResult1_1 = UseStateResult1 or "All"
 end)

@@ -1,57 +1,64 @@
-﻿local parent = script:FindFirstAncestor("BuildExperiencePlaytestLaunch").Parent
-local centralOverlayModule = require(parent.CentralOverlay)
-local foundationModule = require(parent.Foundation)
-local localizationModule = require(parent.Localization)
-local navigationModule = require(parent.Navigation)
-local reactModule = require(parent.React)
-local robloxAppEnumsModule = require(parent.RobloxAppEnums)
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local useNavigation = navigationModule.useNavigation
-local useLocalization = localizationModule.Hooks.useLocalization
-local appPage = robloxAppEnumsModule.AppPage
-local centralOverlayType = robloxAppEnumsModule.CentralOverlayType
-local setCentralOverlay = centralOverlayModule.Actions.SetCentralOverlay
-local closeCentralOverlay = centralOverlayModule.Thunks.CloseCentralOverlay
-local dialogSize = foundationModule.Enums.DialogSize
+﻿local Parent = script:FindFirstAncestor("BuildExperiencePlaytestLaunch").Parent
+local CentralOverlayModule = require(Parent.CentralOverlay)
+local ReactModule = require(Parent.React)
+local RobloxAppEnumsModule = require(Parent.RobloxAppEnums)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local AppPage = RobloxAppEnumsModule.AppPage
+local CentralOverlayType = RobloxAppEnumsModule.CentralOverlayType
+local SetCentralOverlayFunction = CentralOverlayModule.Actions.SetCentralOverlay
+local CloseCentralOverlayFunction = CentralOverlayModule.Thunks.CloseCentralOverlay
+local DialogSize = require(Parent.Foundation).Enums.DialogSize
+local FFlagLuaAppPlaytestTrustedFriendsRefetchPlayability = require(Parent.SharedFlags).FFlagLuaAppPlaytestTrustedFriendsRefetchPlayability
 
-return function(value)
-	-- upvalues: useDispatch (ref), useNavigation (ref), useLocalization (ref), reactModule (ref), setCentralOverlay (ref), centralOverlayType (ref), dialogSize (ref), closeCentralOverlay (ref), appPage (ref)
-	local var1 = useDispatch()
-	local var2 = useNavigation()
-	local var3 = useLocalization({
+return function(UserId, p1) --[[ Line: 27 | Named "useTrustedFriendsPlaytestUpsell" ]]
+	-- upvalues: UseDispatchFunction (copy), UseNavigationFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), SetCentralOverlayFunction (copy), CentralOverlayType (copy), DialogSize (copy), CloseCentralOverlayFunction (copy), AppPage (copy), FFlagLuaAppPlaytestTrustedFriendsRefetchPlayability (copy)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseNavigationResult = UseNavigationFunction()
+	local UseLocalizationResult = UseLocalizationFunction({
 		title = "Feature.Friends.TrustedFriend.Label.AddTrustedFriend",
 		body = "Feature.Build.Message.TrustedFriendsRequiredForPlaytest",
 		add = "Feature.Friends.Action.Add",
 		cancel = "Feature.Build.Action.Cancel",
 		ok = "CommonUI.Controls.Action.OK"
 	})
-	local var4 = var2 ~= nil and value ~= nil
+	local HasUserId: boolean = UseNavigationResult ~= nil and UserId ~= nil
 	
-	return reactModule.useCallback(function()
-		-- upvalues: var1 (ref), setCentralOverlay (copy), centralOverlayType (copy), var3 (ref), var4 (ref), dialogSize (copy), closeCentralOverlay (copy), var2 (ref), appPage (copy), value (ref)
-		var1(setCentralOverlay(centralOverlayType.ConfirmationDialog, {
+	return (ReactModule.useCallback(function() --[[ Line: 42 ]]
+		-- upvalues: UseDispatchResult (copy), SetCentralOverlayFunction (upval), CentralOverlayType (upval), UseLocalizationResult (copy), HasUserId (copy), DialogSize (upval), CloseCentralOverlayFunction (upval), UseNavigationResult (copy), AppPage (upval), UserId (copy), FFlagLuaAppPlaytestTrustedFriendsRefetchPlayability (upval), p1 (copy)
+		UseDispatchResult(SetCentralOverlayFunction(CentralOverlayType.ConfirmationDialog, {
 			showCloseButton = false,
 			orientButtonsVertically = true,
-			title = var3.title,
-			body = var3.body,
-			confirmButtonText = var3.add,
-			cancelButtonText = if var4 then var3.cancel else var3.ok,
-			hideConfirmButton = not var4,
-			size = dialogSize.Small,
-			onConfirm = function()
-				-- upvalues: var1 (copy), closeCentralOverlay (copy), var4 (copy), var2 (copy), appPage (copy), value (copy)
-				var1(closeCentralOverlay())
+			title = UseLocalizationResult.title,
+			body = UseLocalizationResult.body,
+			confirmButtonText = UseLocalizationResult.add,
+			cancelButtonText = if HasUserId then UseLocalizationResult.cancel else UseLocalizationResult.ok,
+			hideConfirmButton = not HasUserId,
+			size = DialogSize.Small,
+			onConfirm = function() --[[ Line: 53 ]]
+				-- upvalues: UseDispatchResult (upval), CloseCentralOverlayFunction (upval), HasUserId (upval), UseNavigationResult (upval), AppPage (upval), UserId (upval), FFlagLuaAppPlaytestTrustedFriendsRefetchPlayability (upval), p1 (upval)
+				UseDispatchResult(CloseCentralOverlayFunction())
 				
-				if var4 then
-					var2.push(appPage.TrustedContactsModal, { props = { userId = value } })
+				if HasUserId then
+					UseNavigationResult.push(AppPage.TrustedContactsModal, {
+						props = {
+							userId = UserId,
+							onRequestAccepted = if FFlagLuaAppPlaytestTrustedFriendsRefetchPlayability then p1 else nil
+						}
+					})
 				end
 			end,
-			onCancel = function()
-				-- upvalues: var1 (copy), closeCentralOverlay (copy)
-				var1(closeCentralOverlay())
+			onCancel = function() --[[ Line: 66 ]]
+				-- upvalues: UseDispatchResult (upval), CloseCentralOverlayFunction (upval)
+				UseDispatchResult(CloseCentralOverlayFunction())
 			end
 		}))
 	end, {
-		var1, var2, value, var4, var3.title, var3.body, var3.add, var3.cancel, var3.ok
-	})
+		UseDispatchResult, UseNavigationResult, UserId,
+		if FFlagLuaAppPlaytestTrustedFriendsRefetchPlayability then p1 else nil,
+		HasUserId, UseLocalizationResult.title, UseLocalizationResult.body,
+		UseLocalizationResult.add, UseLocalizationResult.cancel,
+		UseLocalizationResult.ok
+	}))
 end

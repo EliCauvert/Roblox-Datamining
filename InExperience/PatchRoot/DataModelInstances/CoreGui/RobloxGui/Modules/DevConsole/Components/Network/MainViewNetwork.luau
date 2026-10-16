@@ -1,132 +1,131 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local roactModule = require(corePackagesService.Packages.Roact)
-local roactRoduxModule = require(corePackagesService.Packages.RoactRodux)
-local components = script.Parent.Parent.Parent.Components
-local clientNetworkModule = require(components.Network.ClientNetwork)
-local serverNetworkModule = require(components.Network.ServerNetwork)
-local utilAndTabModule = require(components.UtilAndTab)
-local actions = script.Parent.Parent.Parent.Actions
-local clientNetworkUpdateSearchFilterModule = require(actions.ClientNetworkUpdateSearchFilter)
-local serverNetworkUpdateSearchFilterModule = require(actions.ServerNetworkUpdateSearchFilter)
-local setActiveTabModule = require(actions.SetActiveTab)
-local constantsModule = require(script.Parent.Parent.Parent.Constants)
-local mainRowPadding = constantsModule.GeneralFormatting.MainRowPadding
-local mainViewNetwork = roactModule.Component:extend("MainViewNetwork")
+﻿local CorePackages = game:GetService("CorePackages")
+local RoactModule = require(CorePackages.Packages.Roact)
+local RoactRoduxModule = require(CorePackages.Packages.RoactRodux)
+local Components = script.Parent.Parent.Parent.Components
+local ClientNetworkModule = require(Components.Network.ClientNetwork)
+local ServerNetworkModule = require(Components.Network.ServerNetwork)
+local UtilAndTabModule = require(Components.UtilAndTab)
+local Actions = script.Parent.Parent.Parent.Actions
+local ClientNetworkUpdateSearchFilterModule = require(Actions.ClientNetworkUpdateSearchFilter)
+local ServerNetworkUpdateSearchFilterModule = require(Actions.ServerNetworkUpdateSearchFilter)
+local SetActiveTabModule = require(Actions.SetActiveTab)
+local ConstantsModule = require(script.Parent.Parent.Parent.Constants)
+local MainRowPadding = ConstantsModule.GeneralFormatting.MainRowPadding
+local MainViewNetwork = RoactModule.Component:extend("MainViewNetwork")
 
-function mainViewNetwork.init(p1)
-	-- upvalues: roactModule (ref)
-	function p0.onUtilTabHeightChanged(p2)
-		-- upvalues: p1 (ref)
-		p1:setState({ utilTabHeight = p2 })
+function MainViewNetwork.init(p1) --[[ Line: 20 ]]
+	-- upvalues: RoactModule (copy)
+	function p1.onUtilTabHeightChanged(UtilTabHeight) --[[ Line: 21 ]]
+		-- upvalues: p1 (copy)
+		p1:setState({ utilTabHeight = UtilTabHeight })
 	end
 	
-	function p0.onClientButton()
-		-- upvalues: p1 (ref)
+	function p1.onClientButton() --[[ Line: 27 ]]
+		-- upvalues: p1 (copy)
 		p1.props.dispatchSetActiveTab("Network", true)
 	end
 	
-	function p0.onServerButton()
-		-- upvalues: p1 (ref)
+	function p1.onServerButton() --[[ Line: 31 ]]
+		-- upvalues: p1 (copy)
 		p1.props.dispatchSetActiveTab("Network", false)
 	end
 	
-	function p0.onSearchTermChanged(p2)
-		-- upvalues: p1 (ref)
+	function p1.onSearchTermChanged(p2) --[[ Line: 35 ]]
+		-- upvalues: p1 (copy)
 		if p1.props.isClientView then
 			p1.props.dispatchClientNetworkUpdateSearchFilter(p2, {})
 			
 			return
+		else
+			p1.props.dispatchServerNetworkUpdateSearchFilter(p2, {})
 		end
-		p1.props.dispatchServerNetworkUpdateSearchFilter(p2, {})
 	end
 	
-	p1.utilRef = roactModule.createRef()
+	p1.utilRef = RoactModule.createRef()
 	p1.state = { utilTabHeight = 0 }
 end
 
-function mainViewNetwork.didMount(p1)
+function MainViewNetwork.didMount(p1) --[[ Line: 50 ]]
 	p1:setState({ utilTabHeight = p1.utilRef.current.Size.Y.Offset })
 end
 
-function mainViewNetwork.didUpdate(p1)
-	local size = p1.utilRef.current.Size
+function MainViewNetwork.didUpdate(p1) --[[ Line: 57 ]]
+	local Size = p1.utilRef.current.Size
 	
-	if size.Y.Offset ~= p1.state.utilTabHeight then
-		p1:setState({ utilTabHeight = size.Y.Offset })
+	if Size.Y.Offset ~= p1.state.utilTabHeight then
+		p1:setState({ utilTabHeight = Size.Y.Offset })
 	end
 end
 
-function mainViewNetwork.render(p1)
-	-- upvalues: roactModule (ref), mainRowPadding (ref), utilAndTabModule (ref), clientNetworkModule (ref), serverNetworkModule (ref), constantsModule (ref)
-	local t = {
-		UIListLayout = roactModule.createElement("UIListLayout", {
+function MainViewNetwork.render(p1) --[[ Line: 66 ]]
+	-- upvalues: RoactModule (copy), MainRowPadding (copy), UtilAndTabModule (copy), ClientNetworkModule (copy), ServerNetworkModule (copy), ConstantsModule (copy)
+	local Size = p1.props.size
+	local IsClientView = p1.props.isClientView
+	local UtilTabHeight: number = p1.state.utilTabHeight
+	local ClientSearchTerm = IsClientView and p1.props.clientSearchTerm or p1.props.serverSearchTerm
+	local config = {
+		UIListLayout = RoactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
-			Padding = UDim.new(0, mainRowPadding)
+			Padding = UDim.new(0, MainRowPadding)
+		}),
+		UtilAndTab = RoactModule.createElement(UtilAndTabModule, {
+			layoutOrder = 1,
+			windowWidth = Size.X.Offset,
+			formFactor = p1.props.formFactor,
+			tabList = p1.props.tabList,
+			isClientView = IsClientView,
+			searchTerm = ClientSearchTerm,
+			refForParent = p1.utilRef,
+			onHeightChanged = p1.onUtilTabHeightChanged,
+			onClientButton = p1.onClientButton,
+			onServerButton = p1.onServerButton,
+			onSearchTermChanged = p1.onSearchTermChanged
 		})
 	}
-	local size = p1.props.size
-	local formFactor = p1.props.formFactor
-	local tabList = p1.props.tabList
-	local isClientView = p1.props.isClientView
-	local utilTabHeight = p1.state.utilTabHeight
-	local var1 = if isClientView then p1.props.clientSearchTerm else p1.props.serverSearchTerm
-	t.UtilAndTab = roactModule.createElement(utilAndTabModule, {
-		layoutOrder = 1,
-		windowWidth = size.X.Offset,
-		formFactor = formFactor,
-		tabList = tabList,
-		isClientView = isClientView,
-		searchTerm = var1,
-		refForParent = p1.utilRef,
-		onHeightChanged = p1.onUtilTabHeightChanged,
-		onClientButton = p1.onClientButton,
-		onServerButton = p1.onServerButton,
-		onSearchTermChanged = p1.onSearchTermChanged
-	})
 	
-	if utilTabHeight > 0 then
-		if isClientView then
-			t.ClientNetwork = roactModule.createElement(clientNetworkModule, {
+	if UtilTabHeight > 0 then
+		if IsClientView then
+			config.ClientNetwork = RoactModule.createElement(ClientNetworkModule, {
 				layoutOrder = 2,
-				size = UDim2.new(1, 0, 1, -utilTabHeight),
-				searchTerm = var1
+				size = UDim2.new(1, 0, 1, -UtilTabHeight),
+				searchTerm = ClientSearchTerm
 			})
 		else
-			t.ServerNetwork = roactModule.createElement(serverNetworkModule, {
+			config.ServerNetwork = RoactModule.createElement(ServerNetworkModule, {
 				layoutOrder = 2,
-				size = UDim2.new(1, 0, 1, -utilTabHeight),
-				searchTerm = var1
+				size = UDim2.new(1, 0, 1, -UtilTabHeight),
+				searchTerm = ClientSearchTerm
 			})
 		end
 	end
-	return roactModule.createElement("Frame", {
+	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		LayoutOrder = 3,
-		Size = size,
-		BackgroundColor3 = constantsModule.Color.BaseGray
-	}, t)
+		Size = Size,
+		BackgroundColor3 = ConstantsModule.Color.BaseGray
+	}, config)
 end
 
-return roactRoduxModule.UNSTABLE_connect2(function(p1, _)
+return RoactRoduxModule.UNSTABLE_connect2(function(p1, _) --[[ Line: 121 | Named "mapStateToProps" ]]
 	return {
 		isClientView = p1.MainView.isClientView,
 		clientSearchTerm = p1.NetworkData.clientSearchTerm,
 		serverSearchTerm = p1.NetworkData.serverSearchTerm
 	}
-end, function(p1)
-	-- upvalues: clientNetworkUpdateSearchFilterModule (ref), serverNetworkUpdateSearchFilterModule (ref), setActiveTabModule (ref)
+end, function(Callback) --[[ Line: 129 | Named "mapDispatchToProps" ]]
+	-- upvalues: ClientNetworkUpdateSearchFilterModule (copy), ServerNetworkUpdateSearchFilterModule (copy), SetActiveTabModule (copy)
 	return {
-		dispatchClientNetworkUpdateSearchFilter = function(p2, p3)
-			-- upvalues: p1 (ref), clientNetworkUpdateSearchFilterModule (copy)
-			p1(clientNetworkUpdateSearchFilterModule(p2, p3))
+		dispatchClientNetworkUpdateSearchFilter = function(p1, p2) --[[ Line: 131 ]]
+			-- upvalues: Callback (copy), ClientNetworkUpdateSearchFilterModule (upval)
+			Callback(ClientNetworkUpdateSearchFilterModule(p1, p2))
 		end,
-		dispatchServerNetworkUpdateSearchFilter = function(p2, p3)
-			-- upvalues: p1 (ref), serverNetworkUpdateSearchFilterModule (copy)
-			p1(serverNetworkUpdateSearchFilterModule(p2, p3))
+		dispatchServerNetworkUpdateSearchFilter = function(p1, p2) --[[ Line: 135 ]]
+			-- upvalues: Callback (copy), ServerNetworkUpdateSearchFilterModule (upval)
+			Callback(ServerNetworkUpdateSearchFilterModule(p1, p2))
 		end,
-		dispatchSetActiveTab = function(value, p2)
-			-- upvalues: p1 (ref), setActiveTabModule (copy)
-			p1(setActiveTabModule(value, p2))
+		dispatchSetActiveTab = function(p1, p2) --[[ Line: 138 ]]
+			-- upvalues: Callback (copy), SetActiveTabModule (upval)
+			Callback(SetActiveTabModule(p1, p2))
 		end
 	}
-end)(mainViewNetwork)
+end)(MainViewNetwork)

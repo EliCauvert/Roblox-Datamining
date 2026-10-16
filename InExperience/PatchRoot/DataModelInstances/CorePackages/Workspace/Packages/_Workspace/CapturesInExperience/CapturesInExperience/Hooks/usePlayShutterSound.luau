@@ -1,32 +1,32 @@
-﻿local robloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
-local reactModule = require(script.Parent.Parent.Parent.React)
+﻿local RobloxGui = game:GetService("CoreGui"):WaitForChild("RobloxGui")
+local ReactModule = require(script.Parent.Parent.Parent.React)
 
-return function()
-	-- upvalues: reactModule (ref), robloxGui (ref)
-	local var1 = reactModule.useRef(nil)
-	reactModule.useEffect(function()
-		-- upvalues: robloxGui (copy), var1 (ref)
-		local shutterSound = Instance.new("Sound")
-		shutterSound.Name = "ShutterSound"
-		shutterSound.Parent = robloxGui
-		shutterSound.Volume = 1
+return function() --[[ Line: 13 ]]
+	-- upvalues: ReactModule (copy), RobloxGui (copy)
+	local UseRefResult = ReactModule.useRef(nil)
+	ReactModule.useEffect(function() --[[ Line: 16 ]]
+		-- upvalues: RobloxGui (upval), UseRefResult (copy)
+		local ShutterSound = Instance.new("Sound")
+		ShutterSound.Name = "ShutterSound"
+		ShutterSound.Parent = RobloxGui
+		ShutterSound.Volume = 1
 		
 		if not _G.__TEST_SUITE_PACKAGE__ and not _G.__TESTEZ_RUNNING_TEST__ then
-			shutterSound.SoundId = "rbxassetid://10066921516"
+			ShutterSound.SoundId = "rbxassetid://10066921516"
 		end
-		var1.current = shutterSound
+		UseRefResult.current = ShutterSound
 		
-		return function()
-			-- upvalues: var1 (copy), shutterSound (ref)
-			var1.current = nil
-			shutterSound:Destroy()
+		return function() --[[ Line: 27 ]]
+			-- upvalues: UseRefResult (upval), ShutterSound (copy)
+			UseRefResult.current = nil
+			ShutterSound:Destroy()
 		end
 	end, {})
 	
-	return reactModule.useCallback(function()
-		-- upvalues: var1 (ref)
-		if var1.current then
-			var1.current:Play()
+	return (ReactModule.useCallback(function() --[[ Line: 33 ]]
+		-- upvalues: UseRefResult (copy)
+		if UseRefResult.current then
+			UseRefResult.current:Play()
 		end
-	end, {})
+	end, {}))
 end

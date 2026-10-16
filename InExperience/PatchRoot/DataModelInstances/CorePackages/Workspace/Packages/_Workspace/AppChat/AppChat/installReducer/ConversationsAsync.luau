@@ -1,36 +1,36 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local immutable = require(parent.AppCommonLib).Immutable
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local Immutable = require(Parent.AppCommonLib).Immutable
 
-return require(parent.Rodux).createReducer({}, {
-	[require(appChat.Conversations.Actions.RequestPageConversations).name] = function(p1, _)
-		-- upvalues: immutable (ref)
-		return immutable.JoinDictionaries(p1, { pageConversationsIsFetching = true })
+return require(Parent.Rodux).createReducer({}, {
+	[require(AppChat.Conversations.Actions.RequestPageConversations).name] = function(p1, _) --[[ Line: 19 ]]
+		-- upvalues: Immutable (copy)
+		return Immutable.JoinDictionaries(p1, { pageConversationsIsFetching = true })
 	end,
-	[require(appChat.Conversations.Actions.ReceivedPageConversations).name] = function(p1, _)
-		-- upvalues: immutable (ref)
-		return immutable.JoinDictionaries(p1, { pageConversationsIsFetching = false })
+	[require(AppChat.Conversations.Actions.ReceivedPageConversations).name] = function(p1, _) --[[ Line: 24 ]]
+		-- upvalues: Immutable (copy)
+		return Immutable.JoinDictionaries(p1, { pageConversationsIsFetching = false })
 	end,
-	[require(appChat.Conversations.Actions.RequestLatestMessages).name] = function(p1, _)
-		-- upvalues: immutable (ref)
-		return immutable.JoinDictionaries(p1, { latestMessagesIsFetching = true })
+	[require(AppChat.Conversations.Actions.RequestLatestMessages).name] = function(p1, _) --[[ Line: 29 ]]
+		-- upvalues: Immutable (copy)
+		return Immutable.JoinDictionaries(p1, { latestMessagesIsFetching = true })
 	end,
-	[require(appChat.Conversations.Actions.ReceivedLatestMessages).name] = function(p1, _)
-		-- upvalues: immutable (ref)
-		return immutable.JoinDictionaries(p1, { latestMessagesIsFetching = false })
+	[require(AppChat.Conversations.Actions.ReceivedLatestMessages).name] = function(p1, _) --[[ Line: 34 ]]
+		-- upvalues: Immutable (copy)
+		return Immutable.JoinDictionaries(p1, { latestMessagesIsFetching = false })
 	end,
-	[require(appChat.Conversations.Actions.ReceivedOldestConversation).name] = function(p1, _)
-		-- upvalues: immutable (ref)
-		return immutable.JoinDictionaries(p1, { oldestConversationIsFetched = true })
+	[require(AppChat.Conversations.Actions.ReceivedOldestConversation).name] = function(p1, _) --[[ Line: 39 ]]
+		-- upvalues: Immutable (copy)
+		return Immutable.JoinDictionaries(p1, { oldestConversationIsFetched = true })
 	end,
-	[require(appChat.Http.NetworkingChat).GetUserConversations.Succeeded.name] = function(p1, p2)
-		-- upvalues: immutable (ref)
-		return if #p2.responseBody < p2.queryArgs.pageSize then immutable.JoinDictionaries(p1, { oldestConversationIsFetched = true }) else p1
+	[require(AppChat.Http.NetworkingChat).GetUserConversations.Succeeded.name] = function(p1, p2) --[[ Line: 44 ]]
+		-- upvalues: Immutable (copy)
+		return if #p2.responseBody < p2.queryArgs.pageSize then Immutable.JoinDictionaries(p1, { oldestConversationIsFetched = true }) else p1
 	end,
-	[require(parent.AppChatNetworking).rodux.GetUserConversations.Succeeded.name] = function(p1, p2)
-		-- upvalues: immutable (ref)
-		local nextCursor = p2.responseBody.next_cursor
+	[require(Parent.AppChatNetworking).rodux.GetUserConversations.Succeeded.name] = function(p1, p2) --[[ Line: 50 ]]
+		-- upvalues: Immutable (copy)
+		local NextCursor = p2.responseBody.next_cursor
 		
-		return if nextCursor == nil or nextCursor == "" then immutable.JoinDictionaries(p1, { oldestConversationIsFetched = true }) else p1
+		return if NextCursor == nil or NextCursor == "" then Immutable.JoinDictionaries(p1, { oldestConversationIsFetched = true }) else p1
 	end
 })

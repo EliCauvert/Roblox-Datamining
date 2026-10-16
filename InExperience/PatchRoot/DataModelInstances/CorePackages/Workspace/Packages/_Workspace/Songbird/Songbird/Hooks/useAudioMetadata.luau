@@ -1,42 +1,44 @@
-﻿local songbird = script:FindFirstAncestor("Songbird")
-local reactUtilsModule = require(songbird.Parent.ReactUtils)
-local reactModule = require(songbird.Parent.React)
-local _ = require(songbird.types)
-local getAudioMetadataAsyncModule = require(songbird.Requests.getAudioMetadataAsync)
-local useAsync = reactUtilsModule.useAsync
-local useState = reactModule.useState
-local useEffect = reactModule.useEffect
-local useCallback = reactModule.useCallback
+﻿local Songbird = script:FindFirstAncestor("Songbird")
+local ReactModule = require(Songbird.Parent.React)
+local _ = require(Songbird.types)
+local GetAudioMetadataAsyncModule = require(Songbird.Requests.getAudioMetadataAsync)
+local UseAsyncFunction = require(Songbird.Parent.ReactUtils).useAsync
+local UseStateFunction = ReactModule.useState
+local UseEffectFunction = ReactModule.useEffect
+local UseCallbackFunction = ReactModule.useCallback
 
-return function(p1)
-	-- upvalues: useState (ref), useAsync (ref), getAudioMetadataAsyncModule (ref), useCallback (ref), useEffect (ref)
-	local var1, var2 = useState({})
-	local var3 = useAsync(function()
-		-- upvalues: p1 (ref), getAudioMetadataAsyncModule (copy)
-		return if #p1 > 0 then getAudioMetadataAsyncModule(p1) else {}
+return function(p1) --[[ Line: 19 | Named "useAudioMetadata" ]]
+	-- upvalues: UseStateFunction (copy), UseAsyncFunction (copy), GetAudioMetadataAsyncModule (copy), UseCallbackFunction (copy), UseEffectFunction (copy)
+	local UseStateResult, UseStateResult2 = UseStateFunction({})
+	local UseAsyncResult = UseAsyncFunction(function() --[[ Line: 25 ]]
+		-- upvalues: p1 (copy), GetAudioMetadataAsyncModule (upval)
+		return if #p1 > 0 then GetAudioMetadataAsyncModule(p1) else {}
 	end, { table.unpack(p1) })
-	local var4 = useCallback(function()
-		-- upvalues: var1 (ref)
-		return var1
-	end, { var1 })
-	local var5 = useCallback(function(p2)
-		-- upvalues: var1 (ref)
-		return var1[tostring(p2)]
-	end, { var1 })
-	useEffect(function()
-		-- upvalues: var3 (ref), var2 (ref)
-		if var3.status == "ok" and #var3.value > 0 then
-			var2(function(p2)
-				-- upvalues: var3 (copy)
-				local cloned = table.clone(p2)
+	local UseCallbackResult = UseCallbackFunction(function() --[[ Line: 33 ]]
+		-- upvalues: UseStateResult (copy)
+		return UseStateResult
+	end, { UseStateResult })
+	local UseCallbackResult1 = UseCallbackFunction(function(p2) --[[ Line: 37 ]]
+		-- upvalues: UseStateResult (copy)
+		return UseStateResult[tostring(p2)]
+	end, { UseStateResult })
+	UseEffectFunction(function() --[[ Line: 41 ]]
+		-- upvalues: UseAsyncResult (copy), UseStateResult2 (copy)
+		if UseAsyncResult.status == "ok" and #UseAsyncResult.value > 0 then
+			UseStateResult2(function(Tbl) --[[ Line: 43 ]]
+				-- upvalues: UseAsyncResult (upval)
+				local Copy = table.clone(Tbl)
 				
-				for i, v in var3.value do
-					cloned[v.AssetId] = v
+				for _, value in UseAsyncResult.value do
+					Copy[value.AssetId] = value
 				end
-				return cloned
+				return Copy
 			end)
 		end
-	end, { var3 })
+	end, { UseAsyncResult })
 	
-	return { getAll = var4, getByAssetId = var5 }
+	return {
+		getAll = UseCallbackResult,
+		getByAssetId = UseCallbackResult1
+	}
 end

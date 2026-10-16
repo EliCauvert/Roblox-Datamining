@@ -1,1 +1,1 @@
-﻿return require(game:GetService("CorePackages").Packages.ApolloClient)
+﻿return (require(game:GetService("CorePackages").Packages.ApolloClient))

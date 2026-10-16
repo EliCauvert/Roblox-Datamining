@@ -1,1 +1,1 @@
-﻿return require(script:FindFirstAncestor("ExpChat").Parent.Signals).createComputed(require(script.createRewriteDropdownStore))
+﻿return require(script:FindFirstAncestor("ExpChat").Parent.Signals).createComputed((require(script.createRewriteDropdownStore)))

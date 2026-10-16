@@ -1,7 +1,7 @@
-﻿local reactModule = require(script:FindFirstAncestor("ExpChatIntegration").Parent.React)
-local chatPlatformContextModule = require(script.Parent.ChatPlatformContext)
+﻿local ReactModule = require(script:FindFirstAncestor("ExpChatIntegration").Parent.React)
+local ChatPlatformContextModule = require(script.Parent.ChatPlatformContext)
 
-return function()
-	-- upvalues: reactModule (ref), chatPlatformContextModule (ref)
-	return reactModule.useContext(chatPlatformContextModule)
+return function() --[[ Line: 14 | Named "useChatPlatform" ]]
+	-- upvalues: ReactModule (copy), ChatPlatformContextModule (copy)
+	return ReactModule.useContext(ChatPlatformContextModule)
 end

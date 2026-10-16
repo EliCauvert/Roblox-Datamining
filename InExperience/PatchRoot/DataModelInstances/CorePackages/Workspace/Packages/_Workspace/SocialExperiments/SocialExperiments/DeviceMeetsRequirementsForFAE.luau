@@ -1,49 +1,50 @@
-﻿local systemInfoProtocol = require(script:FindFirstAncestor("SocialExperiments").Parent.SystemInfoProtocol).SystemInfoProtocol
-local fFlagTestDeviceForFAEUpsellModule = require(script.Parent.FFlagTestDeviceForFAEUpsell)
+﻿local SystemInfoProtocol = require(script:FindFirstAncestor("SocialExperiments").Parent.SystemInfoProtocol).SystemInfoProtocol
+local FFlagTestDeviceForFAEUpsellModule = require(script.Parent.FFlagTestDeviceForFAEUpsell)
 local FAEUpsellDeviceNamePipeDenyList = game:DefineFastString("FAEUpsellDeviceNamePipeDenyList", "")
 local FAEUpsellSystemVersionPipeDenyList = game:DefineFastString("FAEUpsellSystemVersionPipeDenyList", "")
-local var1 = nil
+local Flag = nil
 
-return function()
-	-- upvalues: fFlagTestDeviceForFAEUpsellModule (ref), var1 (write), systemInfoProtocol (ref), FAEUpsellDeviceNamePipeDenyList (ref), FAEUpsellSystemVersionPipeDenyList (ref)
-	if not fFlagTestDeviceForFAEUpsellModule then
+return function() --[[ Line: 9 | Named "deviceMeetsRequirementsForFAE" ]]
+	-- upvalues: FFlagTestDeviceForFAEUpsellModule (copy), Flag (ref), SystemInfoProtocol (copy), FAEUpsellDeviceNamePipeDenyList (copy), FAEUpsellSystemVersionPipeDenyList (copy)
+	if not FFlagTestDeviceForFAEUpsellModule then
 		return true
-	elseif var1 ~= nil then
-		return var1
+	elseif Flag == nil then
+		local Success, Result = pcall(function(): boolean --[[ Line: 16 ]]
+			-- upvalues: SystemInfoProtocol (upval), FAEUpsellDeviceNamePipeDenyList (upval), Flag (upval), FAEUpsellSystemVersionPipeDenyList (upval)
+			local SystemInfo = SystemInfoProtocol.default:getSystemInfo({
+				SystemInfoProtocol.InfoNames.DEVICE_NAME,
+				SystemInfoProtocol.InfoNames.SYSTEM_VERSION,
+				SystemInfoProtocol.InfoNames.BASE_OS
+			})
+			local DeviceName = SystemInfo.deviceName or "Unknown"
+			
+			if typeof(DeviceName) == "string" then
+				for Text1 in FAEUpsellDeviceNamePipeDenyList:gmatch("([^|]+)") do
+					if DeviceName:lower():find(Text1:lower()) then
+						Flag = false
+						
+						return Flag
+					end
+				end
+			end
+			local Text = (SystemInfo.baseOs or "UnknownOS") .. ":" .. (SystemInfo.systemVersion or "UnknownVersion")
+			
+			if typeof(Text) == "string" then
+				for Text2 in FAEUpsellSystemVersionPipeDenyList:gmatch("([^|]+)") do
+					if Text:lower():find(Text2:lower()) then
+						Flag = false
+						
+						return Flag
+					end
+				end
+			end
+			Flag = true
+			
+			return Flag
+		end)
+		
+		return not Success or Result
+	else
+		return Flag
 	end
-	local ok, status = pcall(function()
-		-- upvalues: systemInfoProtocol (copy), FAEUpsellDeviceNamePipeDenyList (copy), var1 (copy), FAEUpsellSystemVersionPipeDenyList (copy)
-		local var2 = systemInfoProtocol.default:getSystemInfo({
-			systemInfoProtocol.InfoNames.DEVICE_NAME,
-			systemInfoProtocol.InfoNames.SYSTEM_VERSION,
-			systemInfoProtocol.InfoNames.BASE_OS
-		})
-		local deviceName = var2.deviceName or "Unknown"
-		
-		if typeof(deviceName) == "string" then
-			for i in FAEUpsellDeviceNamePipeDenyList:gmatch("([^|]+)") do
-				if deviceName:lower():find(i:lower()) then
-					var1 = false
-					
-					return var1
-				end
-			end
-		end
-		local text = (var2.baseOs or "UnknownOS") .. ":" .. (var2.systemVersion or "UnknownVersion")
-		
-		if typeof(text) == "string" then
-			for i in FAEUpsellSystemVersionPipeDenyList:gmatch("([^|]+)") do
-				if text:lower():find(i:lower()) then
-					var1 = false
-					
-					return var1
-				end
-			end
-		end
-		var1 = true
-		
-		return var1
-	end)
-	
-	return if ok then status else true
 end

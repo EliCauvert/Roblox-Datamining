@@ -1,46 +1,47 @@
-﻿local signalsModule = require(script:FindFirstAncestor("GameDetail").Parent.Signals)
-local ageCheckUpsellDismissedDataModule = require(script.Parent.AgeCheckUpsellDismissedData)
+﻿local SignalsModule = require(script:FindFirstAncestor("GameDetail").Parent.Signals)
+local AgeCheckUpsellDismissedDataModule = require(script.Parent.AgeCheckUpsellDismissedData)
 local t = {}
 
-local function _(p1)
-	-- upvalues: t (ref), signalsModule (ref)
-	local var1 = t[p1]
+local function _(Key) --[[ Line: 15 | Named "getOrCreate" ]]
+	-- upvalues: t (copy), SignalsModule (copy)
+	local Entry = t[Key]
 	
-	if not var1 then
-		local var2, var3 = signalsModule.createSignal(false)
-		var1 = { get = var2, set = var3 }
-		t[p1] = var1
+	if not Entry then
+		local Signal, Signal2 = SignalsModule.createSignal(false)
+		Entry = { get = Signal, set = Signal2 }
+		t[Key] = Entry
 	end
-	return var1
+	return Entry
 end
 
 return {
-	getIsAgeCheckUpsellRendered = function(p1, p2)
-		-- upvalues: ageCheckUpsellDismissedDataModule (ref), t (ref), signalsModule (ref)
-		if p2 == nil or p2 == "" then
-			return false
-		elseif ageCheckUpsellDismissedDataModule.getIsAgeCheckUpsellDismissed(p1) then
+	getIsAgeCheckUpsellRendered = function(p1, Key) --[[ Line: 32 ]]
+		-- upvalues: AgeCheckUpsellDismissedDataModule (copy), t (copy), SignalsModule (copy)
+		if Key == nil or Key == "" then
 			return false
 		end
-		local var1 = t[p2]
+		if AgeCheckUpsellDismissedDataModule.getIsAgeCheckUpsellDismissed(p1) then
+			return false
+		end
+		local Entry = t[Key]
 		
-		if not var1 then
-			local var2, var3 = signalsModule.createSignal(false)
-			var1 = { get = var2, set = var3 }
-			t[p2] = var1
+		if not Entry then
+			local Signal, Signal2 = SignalsModule.createSignal(false)
+			Entry = { get = Signal, set = Signal2 }
+			t[Key] = Entry
 		end
-		return var1.get(p1)
+		return Entry.get(p1)
 	end,
-	setAgeCheckUpsellRendered = function(value, p1)
-		-- upvalues: t (ref), signalsModule (ref)
-		if value == nil or value == "" then return end
-		local var1 = t[value]
+	setAgeCheckUpsellRendered = function(Key, p1) --[[ Line: 25 ]]
+		-- upvalues: t (copy), SignalsModule (copy)
+		if Key == nil or Key == "" then return end
+		local Entry = t[Key]
 		
-		if not var1 then
-			local var2, var3 = signalsModule.createSignal(false)
-			var1 = { get = var2, set = var3 }
-			t[value] = var1
+		if not Entry then
+			local Signal, Signal2 = SignalsModule.createSignal(false)
+			Entry = { get = Signal, set = Signal2 }
+			t[Key] = Entry
 		end
-		var1.set(p1)
+		Entry.set(p1)
 	end
 }

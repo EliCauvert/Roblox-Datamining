@@ -1,28 +1,27 @@
-﻿local playersService = game:GetService("Players")
+﻿local Players = game:GetService("Players")
 local _ = require(script.Parent.Parent.Types)
-local finishModelSetupModule = require(script.Parent.finishModelSetup)
+local FinishModelSetupModule = require(script.Parent.finishModelSetup)
 
-return function(p1, p2)
-	-- upvalues: playersService (ref), finishModelSetupModule (ref)
-	return function(p3)
-		-- upvalues: p1 (ref), playersService (copy), p2 (ref), finishModelSetupModule (copy)
-		local var1 = tonumber(p1)
+return function(p1, RigType) --[[ Line: 19 | Named "createUserIdRigTypeModelSource" ]]
+	-- upvalues: Players (copy), FinishModelSetupModule (copy)
+	return function(p2) --[[ Line: 20 ]]
+		-- upvalues: p1 (copy), Players (upval), RigType (copy), FinishModelSetupModule (upval)
+		local Number: number? = tonumber(p1)
 		
-		if not var1 then
+		if not Number then
 			return nil
 		end
-		local ok, status = pcall(function()
-			-- upvalues: playersService (copy), var1 (ref), p2 (copy)
-			return playersService:CreateHumanoidModelFromDescriptionAsync(playersService:GetHumanoidDescriptionFromUserIdAsync(var1), p2)
+		local Success, Result = pcall(function() --[[ Line: 26 ]]
+			-- upvalues: Players (upval), Number (copy), RigType (upval)
+			return Players:CreateHumanoidModelFromDescriptionAsync(Players:GetHumanoidDescriptionFromUserIdAsync(Number), RigType)
 		end)
 		
-		if p3.isCancelled() then
-			if ok and status then
-				status:Destroy()
-			end
-			return nil
-		else
-			return if ok and status then finishModelSetupModule(status) else nil
+		if not p2.isCancelled() then
+			return if Success and Result then FinishModelSetupModule(Result) else nil
 		end
+		if Success and Result then
+			Result:Destroy()
+		end
+		return nil
 	end
 end

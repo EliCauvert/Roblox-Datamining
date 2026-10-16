@@ -1,245 +1,286 @@
-﻿local telemetryService = game:GetService("TelemetryService")
-local parent = script.Parent.Parent
-local _ = require(parent.AppCommonLib)
-local loggingProtocolModule = require(parent.LoggingProtocol)
-local isReactProfilingEnabled = require(parent.RoactUtils).Profiling.isReactProfilingEnabled
-local supportTerminalMilestoneInReactProfilerLogger = game:DefineFastFlag("SupportTerminalMilestoneInReactProfilerLogger", false)
-local appLaunchReactProfilerLoggerCollectionTimeoutSec = game:DefineFastInt("AppLaunchReactProfilerLoggerCollectionTimeoutSec", 30)
-local supportedAppLaunchMilestonesForReactProfilerLogger = game:DefineFastString("SupportedAppLaunchMilestonesForReactProfilerLogger", "lua_app_starter_script_requires_end,fetch_homepage_data_begin,fetch_homepage_data_end,home_page_interactive")
+﻿local TelemetryService = game:GetService("TelemetryService")
+local Parent = script.Parent.Parent
+local _ = require(Parent.AppCommonLib)
+local LoggingProtocolModule = require(Parent.LoggingProtocol)
+local IsReactProfilingEnabled = require(Parent.RoactUtils).Profiling.isReactProfilingEnabled
+local SupportTerminalMilestoneInReactProfilerLogger = game:DefineFastFlag("SupportTerminalMilestoneInReactProfilerLogger", false)
+local AppLaunchReactProfilerLoggerCollectionTimeoutSec = game:DefineFastInt("AppLaunchReactProfilerLoggerCollectionTimeoutSec", 30)
+local SupportedAppLaunchMilestonesForReactProfilerLogger = game:DefineFastString("SupportedAppLaunchMilestonesForReactProfilerLogger", "lua_app_starter_script_requires_end,fetch_homepage_data_begin,fetch_homepage_data_end,home_page_interactive")
 
-local function _()
-	-- upvalues: supportedAppLaunchMilestonesForReactProfilerLogger (ref)
+local function _() --[[ Line: 20 | Named "getSupportedMilestones" ]]
+	-- upvalues: SupportedAppLaunchMilestonesForReactProfilerLogger (copy)
 	local t = {}
 	
-	for i, v in supportedAppLaunchMilestonesForReactProfilerLogger:split(",") do
-		t[v] = true
+	for _, value in SupportedAppLaunchMilestonesForReactProfilerLogger:split(",") do
+		t[value] = true
 	end
 	return t
 end
 
-local t = {
+local config = {
 	eventName = "AppLaunchReactProfilerUpdateCount",
 	throttlingPercentage = 0,
 	backends = { "RobloxTelemetryStat" },
 	lastUpdated = { 2025, 2, 25 }
 }
-local t_1 = {
+local config1 = {
 	eventName = "AppLaunchReactProfilerRenderDuration",
 	throttlingPercentage = 0,
 	backends = { "RobloxTelemetryStat" },
 	lastUpdated = { 2025, 2, 25 }
 }
-local t_2 = {
+local config2 = {
 	eventName = "AppLaunchReactProfilerCommitDuration",
 	throttlingPercentage = 0,
 	backends = { "RobloxTelemetryStat" },
 	lastUpdated = { 2025, 2, 25 }
 }
-local t_3 = {
+local config3 = {
 	eventName = "AppLaunchReactProfilerExclusiveRenderDuration",
 	throttlingPercentage = 0,
 	backends = { "RobloxTelemetryStat" },
 	lastUpdated = { 2025, 2, 25 }
 }
-local t_4 = {
+local config4 = {
 	eventName = "AppLaunchReactProfilerExclusiveCommitDuration",
 	throttlingPercentage = 0,
 	backends = { "RobloxTelemetryStat" },
 	lastUpdated = { 2025, 2, 25 }
 }
 
-local function logProfilerData(p1)
-	-- upvalues: telemetryService (ref), t (ref), t_1 (ref), t_2 (ref), t_3 (ref), t_4 (ref)
-	if next(p1) == nil then return end
-	for i, v in p1 do
-		telemetryService:LogStat(t, {
+local function logProfilerData(List) --[[ Line: 81 ]]
+	-- upvalues: TelemetryService (copy), config (copy), config1 (copy), config2 (copy), config3 (copy), config4 (copy)
+	if next(List) == nil then return end
+	for _, ProfilerData in List do
+		TelemetryService:LogStat(config, {
 			customFields = {
-				profilerId = v.profilerId,
-				milestoneName = v.milestoneName
+				profilerId = ProfilerData.profilerId,
+				milestoneName = ProfilerData.milestoneName
 			}
-		}, v.updateCount)
-		telemetryService:LogStat(t_1, {
+		}, ProfilerData.updateCount)
+		TelemetryService:LogStat(config1, {
 			customFields = {
-				profilerId = v.profilerId,
-				milestoneName = v.milestoneName
+				profilerId = ProfilerData.profilerId,
+				milestoneName = ProfilerData.milestoneName
 			}
-		}, v.renderDuration)
-		telemetryService:LogStat(t_2, {
+		}, ProfilerData.renderDuration)
+		TelemetryService:LogStat(config2, {
 			customFields = {
-				profilerId = v.profilerId,
-				milestoneName = v.milestoneName
+				profilerId = ProfilerData.profilerId,
+				milestoneName = ProfilerData.milestoneName
 			}
-		}, v.commitDuration)
-		telemetryService:LogStat(t_3, {
+		}, ProfilerData.commitDuration)
+		TelemetryService:LogStat(config3, {
 			customFields = {
-				profilerId = v.profilerId,
-				milestoneName = v.milestoneName
+				profilerId = ProfilerData.profilerId,
+				milestoneName = ProfilerData.milestoneName
 			}
-		}, v.exclusiveRenderDuration)
-		telemetryService:LogStat(t_4, {
+		}, ProfilerData.exclusiveRenderDuration)
+		TelemetryService:LogStat(config4, {
 			customFields = {
-				profilerId = v.profilerId,
-				milestoneName = v.milestoneName
+				profilerId = ProfilerData.profilerId,
+				milestoneName = ProfilerData.milestoneName
 			}
-		}, v.exclusiveCommitDuration)
+		}, ProfilerData.exclusiveCommitDuration)
 	end
 end
 
-local _ = function(p2, p3)
+local _ = function(ProfilerId, MilestoneName) --[[ Line: 120 | Named "createProfilerData" ]]
 	return {
 		updateCount = 0,
 		renderDuration = 0,
 		commitDuration = 0,
 		exclusiveRenderDuration = 0,
 		exclusiveCommitDuration = 0,
-		profilerId = p2,
-		milestoneName = p3
+		profilerId = ProfilerId,
+		milestoneName = MilestoneName
 	}
 end
 
-local _ = function(p2, p3)
-	p2.updateCount += 1
-	p2.renderDuration += p3.render.duration
-	p2.commitDuration += p3.commit.duration
-	p2.exclusiveRenderDuration += p3.render.exclusiveDuration
-	p2.exclusiveCommitDuration += p3.commit.exclusiveDuration
+local _ = function(ProfilerData, p1) --[[ Line: 133 | Named "updateProfilerData" ]]
+	ProfilerData.updateCount += 1
+	ProfilerData.renderDuration += p1.render.duration
+	ProfilerData.commitDuration += p1.commit.duration
+	ProfilerData.exclusiveRenderDuration += p1.render.exclusiveDuration
+	ProfilerData.exclusiveCommitDuration += p1.commit.exclusiveDuration
 end
 
-return function(p2, p3)
-	-- upvalues: isReactProfilingEnabled (ref), supportTerminalMilestoneInReactProfilerLogger (ref), supportedAppLaunchMilestonesForReactProfilerLogger (ref), loggingProtocolModule (ref), appLaunchReactProfilerLoggerCollectionTimeoutSec (ref), logProfilerData (ref)
-	if not isReactProfilingEnabled then return end
+return function(p1, EventName) --[[ Line: 141 | Named "createAppLaunchReactProfilerLogger" ]]
+	-- upvalues: IsReactProfilingEnabled (copy), SupportTerminalMilestoneInReactProfilerLogger (copy), SupportedAppLaunchMilestonesForReactProfilerLogger (copy), LoggingProtocolModule (copy), AppLaunchReactProfilerLoggerCollectionTimeoutSec (copy), logProfilerData (copy)
+	if not IsReactProfilingEnabled then return end
 	local t = {}
-	local t_1 = {}
+	local List = {}
 	
-	local function correlateProfilerData()
-		-- upvalues: t (write), t_1 (write)
-		local t_2 = {}
+	local function correlateProfilerData() --[[ Line: 153 ]]
+		-- upvalues: t (ref), List (ref)
+		local List1 = {}
 		
-		for i, v in t do
-			local vCount = #v
-			local t_1Count = #t_1
-			local var1 = 1
-			local var2 = 1
-			local t_3 = nil
-			local t_4 = {
+		for ProfilerId, value in t do
+			local Count = #value
+			local CountList = #List
+			local Count1 = 1
+			local Count2 = 1
+			local ProfilerData = nil
+			local config = {
 				milestoneName = "aggregate",
 				updateCount = 0,
 				renderDuration = 0,
 				commitDuration = 0,
 				exclusiveRenderDuration = 0,
 				exclusiveCommitDuration = 0,
-				profilerId = i
+				profilerId = ProfilerId
 			}
+			while Count1 <= Count and Count2 <= CountList do
+				local Entry = value[Count1]
+				local Entry1 = List[Count2]
+				
+				if ProfilerData == nil then
+					ProfilerData = {
+						updateCount = 0,
+						renderDuration = 0,
+						commitDuration = 0,
+						exclusiveRenderDuration = 0,
+						exclusiveCommitDuration = 0,
+						profilerId = ProfilerId,
+						milestoneName = Entry1.eventName
+					}
+				end
+				if Entry.render.startTime < Entry1.eventTime then
+					ProfilerData.updateCount += 1
+					ProfilerData.renderDuration += Entry.render.duration
+					ProfilerData.commitDuration += Entry.commit.duration
+					ProfilerData.exclusiveRenderDuration += Entry.render.exclusiveDuration
+					ProfilerData.exclusiveCommitDuration += Entry.commit.exclusiveDuration
+					config.updateCount += 1
+					config.renderDuration += Entry.render.duration
+					config.commitDuration += Entry.commit.duration
+					config.exclusiveRenderDuration += Entry.render.exclusiveDuration
+					config.exclusiveCommitDuration += Entry.commit.exclusiveDuration
+					Count1 += 1
+				else
+					if ProfilerData.updateCount > 0 then
+						table.insert(List1, ProfilerData)
+					end
+					Count2 += 1
+					ProfilerData = nil
+				end
+			end
+			if ProfilerData and ProfilerData.updateCount > 0 then
+				table.insert(List1, ProfilerData)
+			end
+			if config.updateCount > 0 then
+				table.insert(List1, config)
+			end
 		end
 		t = {}
-		t_1 = {}
+		List = {}
 		
-		return t_2
+		return List1
 	end
 	
-	local function _(p4)
-		-- upvalues: t (write)
-		local var3 = t[p4]
+	local function _(Key) --[[ Line: 208 | Named "getOrCreateEventsForProfiler" ]]
+		-- upvalues: t (ref)
+		local Entry = t[Key]
 		
-		if var3 == nil then
-			var3 = {}
-			t[p4] = var3
+		if Entry == nil then
+			Entry = {}
+			t[Key] = Entry
 		end
-		return var3
+		return Entry
 	end
 	
-	local onRenderConnection = p2.onRender:connect(function(p4)
-		-- upvalues: t (write)
-		local profilerId = p4.profilerId
-		local var3 = t[profilerId]
+	local OnRenderConnection = p1.onRender:connect(function(Render) --[[ Line: 218 ]]
+		-- upvalues: t (ref)
+		local ProfilerId = Render.profilerId
+		local Entry = t[ProfilerId]
 		
-		if var3 == nil then
-			var3 = {}
-			t[profilerId] = var3
+		if Entry == nil then
+			Entry = {}
+			t[ProfilerId] = Entry
 		end
-		table.insert(var3, {
-			render = p4,
+		table.insert(Entry, {
+			render = Render,
 			commit = {
 				duration = 0,
 				exclusiveDuration = 0,
-				profilerId = p4.profilerId,
-				commitTime = p4.commitTime
+				profilerId = Render.profilerId,
+				commitTime = Render.commitTime
 			}
 		})
 	end)
-	local onCommitConnection = p2.onCommit:connect(function(p4)
-		-- upvalues: t (write)
-		local profilerId = p4.profilerId
-		local var3 = t[profilerId]
+	local OnCommitConnection = p1.onCommit:connect(function(Commit) --[[ Line: 234 ]]
+		-- upvalues: t (ref)
+		local ProfilerId = Commit.profilerId
+		local Entry = t[ProfilerId]
 		
-		if var3 == nil then
-			var3 = {}
-			t[profilerId] = var3
+		if Entry == nil then
+			Entry = {}
+			t[ProfilerId] = Entry
 		end
-		local var4 = var3[#var3]
+		local Entry1 = Entry[#Entry]
 		
-		if var4 == nil or var4.render.commitTime ~= p4.commitTime then
+		if Entry1 == nil or Entry1.render.commitTime ~= Commit.commitTime then
 			warn("Profiler invariants are broken")
 			
 			return
+		else
+			Entry1.commit = Commit
 		end
-		var4.commit = p4
 	end)
-	local var3 = nil
+	local SetDurationLoggerListenerResult = nil
 	
-	if supportTerminalMilestoneInReactProfilerLogger then
-		local t_2 = {}
+	if SupportTerminalMilestoneInReactProfilerLogger then
+		local t1 = {}
 		
-		for i, v in supportedAppLaunchMilestonesForReactProfilerLogger:split(",") do
-			t_2[v] = true
+		for _, value in SupportedAppLaunchMilestonesForReactProfilerLogger:split(",") do
+			t1[value] = true
 		end
-		local var4 = t_2
-		var3 = loggingProtocolModule.default:setDurationLoggerListener(function(p4)
-			-- upvalues: var4 (ref), t_1 (write), p3 (ref), var3 (write)
-			if var4[p4] then
-				table.insert(t_1, { eventName = p4, eventTime = os.clock() * 1000 })
+		SetDurationLoggerListenerResult = LoggingProtocolModule.default:setDurationLoggerListener(function(EventName1) --[[ Line: 249 ]]
+			-- upvalues: t1 (copy), List (ref), EventName (copy), SetDurationLoggerListenerResult (ref)
+			if t1[EventName1] then
+				table.insert(List, { eventName = EventName1, eventTime = os.clock() * 1000 })
 			end
-			if p3 ~= nil and p4 == p3 and var3 ~= nil then
-				var3:disconnect()
-				var3 = nil
+			if EventName ~= nil and EventName1 == EventName and SetDurationLoggerListenerResult ~= nil then
+				SetDurationLoggerListenerResult:disconnect()
+				SetDurationLoggerListenerResult = nil
 			end
 		end)
 	else
-		var3 = loggingProtocolModule.default:setDurationLoggerListener(function(p4)
-			-- upvalues: t_1 (write)
-			table.insert(t_1, { eventName = p4, eventTime = os.clock() * 1000 })
+		SetDurationLoggerListenerResult = LoggingProtocolModule.default:setDurationLoggerListener(function(EventName) --[[ Line: 266 ]]
+			-- upvalues: List (ref)
+			table.insert(List, { eventName = EventName, eventTime = os.clock() * 1000 })
 		end)
 	end
-	local _ = function()
-		-- upvalues: onRenderConnection (write), onCommitConnection (write), var3 (write)
-		if onRenderConnection ~= nil then
-			onRenderConnection:disconnect()
-			onRenderConnection = nil
+	local _ = function() --[[ Line: 275 | Named "disconnectListeners" ]]
+		-- upvalues: OnRenderConnection (ref), OnCommitConnection (ref), SetDurationLoggerListenerResult (ref)
+		if OnRenderConnection ~= nil then
+			OnRenderConnection:disconnect()
+			OnRenderConnection = nil
 		end
-		if onCommitConnection ~= nil then
-			onCommitConnection:disconnect()
-			onCommitConnection = nil
+		if OnCommitConnection ~= nil then
+			OnCommitConnection:disconnect()
+			OnCommitConnection = nil
 		end
-		if var3 ~= nil then
-			var3:disconnect()
-			var3 = nil
+		if SetDurationLoggerListenerResult ~= nil then
+			SetDurationLoggerListenerResult:disconnect()
+			SetDurationLoggerListenerResult = nil
 		end
 	end
 	
-	task.delay(appLaunchReactProfilerLoggerCollectionTimeoutSec, function()
-		-- upvalues: onRenderConnection (write), onCommitConnection (write), var3 (write), correlateProfilerData (ref), logProfilerData (copy)
-		if onRenderConnection ~= nil then
-			onRenderConnection:disconnect()
-			onRenderConnection = nil
+	task.delay(AppLaunchReactProfilerLoggerCollectionTimeoutSec, function() --[[ Line: 290 ]]
+		-- upvalues: OnRenderConnection (ref), OnCommitConnection (ref), SetDurationLoggerListenerResult (ref), correlateProfilerData (copy), logProfilerData (upval)
+		if OnRenderConnection ~= nil then
+			OnRenderConnection:disconnect()
+			OnRenderConnection = nil
 		end
-		if onCommitConnection ~= nil then
-			onCommitConnection:disconnect()
-			onCommitConnection = nil
+		if OnCommitConnection ~= nil then
+			OnCommitConnection:disconnect()
+			OnCommitConnection = nil
 		end
-		if var3 ~= nil then
-			var3:disconnect()
-			var3 = nil
+		if SetDurationLoggerListenerResult ~= nil then
+			SetDurationLoggerListenerResult:disconnect()
+			SetDurationLoggerListenerResult = nil
 		end
-		logProfilerData(correlateProfilerData())
+		logProfilerData((correlateProfilerData()))
 	end)
 end

@@ -1,29 +1,31 @@
-﻿return function(p1, p2)
-	p2 = p2 or 2
+﻿return function(Text: string, p1): string --[[ Line: 49 | Named "unindentTags" ]]
+	local P0 = p1 or 2
 	
-	if not string.find(p1, "<.->") then
-		return p1
+	if not string.find(Text, "<.->") then
+		return Text
 	end
-	local parts = string.split(string.gsub(p1, "\r\n", "\n"), "\n")
-	local list = table.create(#parts)
-	local t = {}
+	local Parts = string.split(string.gsub(Text, "\r\n", "\n"), "\n")
+	local Buffer = table.create(#Parts)
+	local List = {}
 	
-	for i, v in parts do
-		local _, matchIndex = string.find(v, "^[ \t]*")
-		matchIndex = matchIndex or 0
-		local substring = string.sub(v, matchIndex + 1)
+	for _, part in Parts do
+		local _, EndIndex = string.find(part, "^[ \t]*")
+		local EndIndex1 = EndIndex or 0
+		local Segment = string.sub(part, EndIndex1 + 1)
 		
-		if not string.find(substring, "^<") then
-			table.insert(list, string.rep(" ", math.max(0, matchIndex - (if #t > 0 then t[#t] + p2 else 0))) .. substring)
-		elseif string.find(substring, "^</") then
-			table.remove(t)
-			table.insert(list, substring)
-		elseif string.find(substring, "/>$") then
-			table.insert(list, substring)
+		if not string.find(Segment, "^<") then
+			table.insert(Buffer, string.rep(" ", (math.max(0, EndIndex1 - (if #List > 0 then List[#List] + P0 else 0)))) .. Segment)
+			continue
+		end
+		if string.find(Segment, "^</") then
+			table.remove(List)
+			table.insert(Buffer, Segment)
+		elseif string.find(Segment, "/>$") then
+			table.insert(Buffer, Segment)
 		else
-			table.insert(t, matchIndex)
-			table.insert(list, substring)
+			table.insert(List, EndIndex1)
+			table.insert(Buffer, Segment)
 		end
 	end
-	return table.concat(list, "\n")
+	return table.concat(Buffer, "\n")
 end

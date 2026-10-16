@@ -1,29 +1,30 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local useRoactService = require(parent.RobloxAppHooks).useRoactService
-local roactAnalytics = require(parent.RoactServiceTags).RoactAnalytics
-local appEventIngestService = require(parent.RoactServiceTags).AppEventIngestService
-local sendItemImpressions = require(parent.UnifiedLogging).SendItemImpressions
-local appPage = require(parent.RobloxAppEnums).AppPage
-local useProfileAnalyticsContextModule = require(profilePlatform.Contexts.useProfileAnalyticsContext)
-local eventNamesModule = require(profilePlatform.Analytics.EventNames)
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local UseRoactServiceFunction = require(Parent.RobloxAppHooks).useRoactService
+local RoactAnalytics = require(Parent.RoactServiceTags).RoactAnalytics
+local AppEventIngestService = require(Parent.RoactServiceTags).AppEventIngestService
+local SendItemImpressions = require(Parent.UnifiedLogging).SendItemImpressions
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local UseProfileAnalyticsContextModule = require(ProfilePlatform.Contexts.useProfileAnalyticsContext)
+local EventNamesModule = require(ProfilePlatform.Analytics.EventNames)
 
-return function(p1, p2, p3, p4, p5)
-	-- upvalues: useRoactService (ref), appEventIngestService (ref), roactAnalytics (ref), appPage (ref), useProfileAnalyticsContextModule (ref), reactModule (ref), eventNamesModule (ref), sendItemImpressions (ref)
-	local var1 = useRoactService(appEventIngestService)
-	local var2 = useRoactService(roactAnalytics)
-	local profilePlatform = appPage.ProfilePlatform
-	local var3 = useProfileAnalyticsContextModule()
+return function(p1, p2, p3, p4, Component) --[[ Line: 19 ]]
+	-- upvalues: UseRoactServiceFunction (copy), AppEventIngestService (copy), RoactAnalytics (copy), AppPage (copy), UseProfileAnalyticsContextModule (copy), ReactModule (copy), EventNamesModule (copy), SendItemImpressions (copy)
+	local UseRoactServiceResult = UseRoactServiceFunction(AppEventIngestService)
+	local UseRoactServiceResult1 = UseRoactServiceFunction(RoactAnalytics)
+	local ProfilePlatform = AppPage.ProfilePlatform
+	local UseProfileAnalyticsContextModuleResult = UseProfileAnalyticsContextModule()
 	
-	return reactModule.useCallback(function(p6)
-		-- upvalues: var3 (ref), eventNamesModule (copy), p5 (ref), sendItemImpressions (copy), var1 (ref), var2 (ref), p1 (ref), p2 (ref), profilePlatform (ref), p3 (ref), p4 (ref)
-		var3.fireAnalyticsEvent(eventNamesModule.ProfileImpressionsSent, { component = p5 })
+	return ReactModule.useCallback(function(p5) --[[ Line: 31 ]]
+		-- upvalues: UseProfileAnalyticsContextModuleResult (copy), EventNamesModule (upval), Component (copy), SendItemImpressions (upval), UseRoactServiceResult (copy), UseRoactServiceResult1 (copy), p1 (copy), p2 (copy), ProfilePlatform (copy), p3 (copy), p4 (copy)
+		UseProfileAnalyticsContextModuleResult.fireAnalyticsEvent(EventNamesModule.ProfileImpressionsSent, { component = Component })
 		
-		if sendItemImpressions and sendItemImpressions.sendFromProfile then
-			sendItemImpressions.sendFromProfile(var1, var2, p6, p1, p2, profilePlatform, p3, p4, p5)
+		if SendItemImpressions and SendItemImpressions.sendFromProfile then
+			SendItemImpressions.sendFromProfile(UseRoactServiceResult, UseRoactServiceResult1, p5, p1, p2, ProfilePlatform, p3, p4, Component)
 		end
 	end, {
-		var2, p4, p5, p3, var1, profilePlatform, p1, p2, sendItemImpressions
+		UseRoactServiceResult1, p4, Component, p3, UseRoactServiceResult,
+		ProfilePlatform, p1, p2, SendItemImpressions
 	})
 end

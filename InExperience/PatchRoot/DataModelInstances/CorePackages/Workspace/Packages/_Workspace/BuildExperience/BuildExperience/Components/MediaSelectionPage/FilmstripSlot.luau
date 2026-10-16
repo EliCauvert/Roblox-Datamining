@@ -1,146 +1,143 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local image = foundationModule.Image
-local view = foundationModule.View
-local icon = foundationModule.Icon
-local iconButton = foundationModule.IconButton
-local badge = foundationModule.Badge
-local menu = foundationModule.Menu
-local badgeVariant = foundationModule.Enums.BadgeVariant
-local badgeShape = foundationModule.Enums.BadgeShape
-local badgeSize = foundationModule.Enums.BadgeSize
-local iconPosition = foundationModule.Enums.IconPosition
-local iconName = foundationModule.Enums.IconName
-local iconSize = foundationModule.Enums.IconSize
-local inputSize = foundationModule.Enums.InputSize
-local popoverAlign = foundationModule.Enums.PopoverAlign
-local popoverSide = foundationModule.Enums.PopoverSide
-local useTokens = foundationModule.Hooks.useTokens
-local fFlagBuildDesktopReadinessModule = require(buildExperience.Flags.FFlagBuildDesktopReadiness)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
+local Image = FoundationModule.Image
+local View = FoundationModule.View
+local Icon = FoundationModule.Icon
+local IconButton = FoundationModule.IconButton
+local Badge = FoundationModule.Badge
+local Menu = FoundationModule.Menu
+local BadgeVariant = FoundationModule.Enums.BadgeVariant
+local BadgeShape = FoundationModule.Enums.BadgeShape
+local BadgeSize = FoundationModule.Enums.BadgeSize
+local IconPosition = FoundationModule.Enums.IconPosition
+local IconName = FoundationModule.Enums.IconName
+local IconSize = FoundationModule.Enums.IconSize
+local InputSize = FoundationModule.Enums.InputSize
+local PopoverAlign = FoundationModule.Enums.PopoverAlign
+local PopoverSide = FoundationModule.Enums.PopoverSide
+local UseTokensFunction = FoundationModule.Hooks.useTokens
 local _ = require(script.Parent.types)
 
-return function(p1)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), useTokens (ref), reactModule (ref), menu (ref), popoverSide (ref), popoverAlign (ref), view (ref), fFlagBuildDesktopReadinessModule (ref), icon (ref), iconName (ref), iconSize (ref), inputSize (ref), image (ref), iconButton (ref), badge (ref), iconPosition (ref), badgeVariant (ref), badgeShape (ref), badgeSize (ref)
-	local video = useLocalization({ video = localizationStringsModule.MEDIA_SELECTION_VIDEO }).video
-	local var1 = useTokens()
-	local var2 = if p1.isSelected then var1.Color.Content.Emphasis.Color3 else var1.Color.Stroke.Default.Color3
-	local var3 = if p1.isSelected then 0 else var1.Color.Stroke.Default.Transparency
-	local var4 = if p1.isSelected then var1.Stroke.Thick else var1.Stroke.Standard
+return function(Frame: Frame) --[[ Line: 48 | Named "FilmstripSlot" ]]
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), UseTokensFunction (copy), ReactModule (copy), Menu (copy), PopoverSide (copy), PopoverAlign (copy), View (copy), Icon (copy), IconName (copy), IconSize (copy), InputSize (copy), Image (copy), IconButton (copy), Badge (copy), IconPosition (copy), BadgeVariant (copy), BadgeShape (copy), BadgeSize (copy)
+	local Video = UseLocalizationFunction({ video = LocalizationStringsModule.MEDIA_SELECTION_VIDEO }).video
+	local UseTokensResult = UseTokensFunction()
+	local EmphasisColor3 = if Frame.isSelected then UseTokensResult.Color.Content.Emphasis.Color3 else UseTokensResult.Color.Stroke.Default.Color3
+	local Transparency = if Frame.isSelected then 0 else UseTokensResult.Color.Stroke.Default.Transparency
+	local Thick = if Frame.isSelected then UseTokensResult.Stroke.Thick else UseTokensResult.Stroke.Standard
 	
-	return if p1.isFilled then reactModule.createElement(menu, {
-		isOpen = p1.isMenuOpen or false,
-		items = p1.menuItems or { { items = {} } },
-		side = popoverSide.Top,
-		align = popoverAlign.Center,
-		onPressedOutside = p1.onMenuClose,
-		onActivated = p1.onMenuActivated,
-		size = inputSize.Medium,
-		LayoutOrder = p1.LayoutOrder
-	}, reactModule.createElement(view, {
+	return if Frame.isFilled then ReactModule.createElement(Menu, {
+		isOpen = Frame.isMenuOpen or false,
+		items = Frame.menuItems or { { items = {} } },
+		side = PopoverSide.Top,
+		align = PopoverAlign.Center,
+		onPressedOutside = Frame.onMenuClose,
+		onActivated = Frame.onMenuActivated,
+		size = InputSize.Medium,
+		LayoutOrder = Frame.LayoutOrder
+	}, ReactModule.createElement(View, {
 		tag = {
 			["radius-large"] = true,
-			["size-full-2400"] = not fFlagBuildDesktopReadinessModule,
-			["size-full-2700"] = fFlagBuildDesktopReadinessModule,
-			["aspect-1-1"] = p1.aspectRatio == "square",
-			["aspect-16-9"] = p1.aspectRatio == "wide"
+			["size-full-2700"] = true,
+			["aspect-1-1"] = Frame.aspectRatio == "square",
+			["aspect-16-9"] = Frame.aspectRatio == "wide"
 		},
-		LayoutOrder = p1.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		Stroke = reactModule.createElement("UIStroke", {
-			Color = var2,
-			Transparency = var3,
-			Thickness = var4,
+		Stroke = ReactModule.createElement("UIStroke", {
+			Color = EmphasisColor3,
+			Transparency = Transparency,
+			Thickness = Thick,
 			ApplyStrokeMode = Enum.ApplyStrokeMode.Border
 		}),
-		TouchArea = reactModule.createElement("TextButton", {
+		TouchArea = ReactModule.createElement("TextButton", {
 			Size = UDim2.fromScale(1, 1),
 			BackgroundTransparency = 1,
 			Text = "",
 			ZIndex = 2,
-			[reactModule.Event.Activated] = p1.onSelect
+			[ReactModule.Event.Activated] = Frame.onSelect
 		}),
-		ImageClip = if p1.isLoading then reactModule.createElement(view, { tag = "size-full radius-large bg-surface-200" }) elseif p1.assetSource and p1.mediaType == "video" then reactModule.createElement("VideoFrame", {
+		ImageClip = if Frame.isLoading then ReactModule.createElement(View, { tag = "size-full radius-large bg-surface-200" }) elseif Frame.assetSource and Frame.mediaType == "video" then ReactModule.createElement("VideoFrame", {
 			Looped = false,
 			Playing = false,
 			Volume = 0,
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			Size = UDim2.fromScale(1, 1),
-			Video = p1.assetSource
+			Video = Frame.assetSource
 		}, {
-			UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 12) })
-		}) elseif p1.assetSource then reactModule.createElement(view, { tag = "size-full radius-large clip" }, {
-			Thumbnail = reactModule.createElement(image, {
+			UICorner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 12) })
+		}) elseif Frame.assetSource then ReactModule.createElement(View, { tag = "size-full radius-large clip" }, {
+			Thumbnail = ReactModule.createElement(Image, {
 				tag = "size-full radius-large",
-				Image = p1.assetSource,
+				Image = Frame.assetSource,
 				ScaleType = Enum.ScaleType.Crop
 			})
 		}) else nil,
-		EditButton = if p1.isSelected and p1.onEditPressed then reactModule.createElement(view, {
+		EditButton = if Frame.isSelected and Frame.onEditPressed then ReactModule.createElement(View, {
 			tag = "auto-xy radius-circle bg-over-media-0 padding-xxsmall",
 			ZIndex = 3,
-			Position = UDim2.new(1, -var1.Gap.Small, 0, var1.Gap.Small),
+			Position = UDim2.new(1, -UseTokensResult.Gap.Small, 0, UseTokensResult.Gap.Small),
 			AnchorPoint = Vector2.new(1, 0)
 		}, {
-			Button = reactModule.createElement(iconButton, {
-				icon = iconName.Pencil,
-				size = inputSize.XSmall,
-				onActivated = p1.onEditPressed
+			Button = ReactModule.createElement(IconButton, {
+				icon = IconName.Pencil,
+				size = InputSize.XSmall,
+				onActivated = Frame.onEditPressed
 			})
 		}) else nil,
-		VideoBadge = if p1.mediaType == "video" then reactModule.createElement(badge, {
+		VideoBadge = if Frame.mediaType == "video" then ReactModule.createElement(Badge, {
 			ZIndex = 3,
-			Position = UDim2.fromOffset(var1.Gap.Small, var1.Gap.Small),
-			icon = { name = iconName.PlaySmall, position = iconPosition.Left },
-			text = video,
-			variant = badgeVariant.OverMedia,
-			shape = badgeShape.Pill,
-			size = badgeSize.Small
+			Position = UDim2.fromOffset(UseTokensResult.Gap.Small, UseTokensResult.Gap.Small),
+			icon = { name = IconName.PlaySmall, position = IconPosition.Left },
+			text = Video,
+			variant = BadgeVariant.OverMedia,
+			shape = BadgeShape.Pill,
+			size = BadgeSize.Small
 		}) else nil
-	})) else reactModule.createElement(menu, {
+	})) else ReactModule.createElement(Menu, {
 		tag = "size-full",
-		isOpen = p1.isMenuOpen or false,
-		items = p1.menuItems or { { items = {} } },
-		side = popoverSide.Top,
-		align = popoverAlign.Center,
-		onPressedOutside = p1.onMenuClose,
-		onActivated = p1.onMenuActivated,
-		LayoutOrder = p1.LayoutOrder
-	}, reactModule.createElement(view, {
+		isOpen = Frame.isMenuOpen or false,
+		items = Frame.menuItems or { { items = {} } },
+		side = PopoverSide.Top,
+		align = PopoverAlign.Center,
+		onPressedOutside = Frame.onMenuClose,
+		onActivated = Frame.onMenuActivated,
+		LayoutOrder = Frame.LayoutOrder
+	}, ReactModule.createElement(View, {
 		tag = {
 			["radius-large"] = true,
 			["bg-surface-200"] = true,
-			["size-full-2400"] = not fFlagBuildDesktopReadinessModule,
-			["size-full-2700"] = fFlagBuildDesktopReadinessModule,
-			["aspect-1-1"] = p1.aspectRatio == "square",
-			["aspect-16-9"] = p1.aspectRatio == "wide"
+			["size-full-2700"] = true,
+			["aspect-1-1"] = Frame.aspectRatio == "square",
+			["aspect-16-9"] = Frame.aspectRatio == "wide"
 		}
 	}, {
-		Stroke = reactModule.createElement("UIStroke", {
-			Color = var2,
-			Transparency = var3,
-			Thickness = var4,
+		Stroke = ReactModule.createElement("UIStroke", {
+			Color = EmphasisColor3,
+			Transparency = Transparency,
+			Thickness = Thick,
 			ApplyStrokeMode = Enum.ApplyStrokeMode.Border
 		}),
-		TouchArea = reactModule.createElement("TextButton", {
+		TouchArea = ReactModule.createElement("TextButton", {
 			Size = UDim2.fromScale(1, 1),
 			BackgroundTransparency = 1,
 			Text = "",
 			ZIndex = 1,
-			[reactModule.Event.Activated] = p1.onEmptySlotPressed or function() end
+			[ReactModule.Event.Activated] = Frame.onEmptySlotPressed or function() --[[ Line: 93 ]] end
 		}),
-		PlusIcon = reactModule.createElement(view, {
+		PlusIcon = ReactModule.createElement(View, {
 			tag = "align-x-center align-y-center",
 			Size = UDim2.fromScale(1, 1)
 		}, {
-			IconElement = reactModule.createElement(icon, {
+			IconElement = ReactModule.createElement(Icon, {
 				tag = "auto-xy content-default",
-				name = iconName.PlusSmall,
-				size = iconSize.Medium
+				name = IconName.PlusSmall,
+				size = IconSize.Medium
 			})
 		})
 	}))

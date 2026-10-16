@@ -1,30 +1,30 @@
-﻿local parent = script:FindFirstAncestor("GenericChallenges").Parent
-local promiseModule = require(parent.Promise)
-local cryoModule = require(parent.Cryo)
-local isChallengeHttpResponseModule = require(script.Parent.IsChallengeHttpResponse)
-local interceptChallengeModule = require(script.Parent.InterceptChallenge)
-local _ = require(parent.Http)
+﻿local Parent = script:FindFirstAncestor("GenericChallenges").Parent
+local PromiseModule = require(Parent.Promise)
+local CryoModule = require(Parent.Cryo)
+local IsChallengeHttpResponseModule = require(script.Parent.IsChallengeHttpResponse)
+local InterceptChallengeModule = require(script.Parent.InterceptChallenge)
+local _ = require(Parent.Http)
 
-return function(p1, p2)
-	-- upvalues: interceptChallengeModule (ref), promiseModule (ref), isChallengeHttpResponseModule (ref), cryoModule (ref)
-	local var1 = if p2 ~= nil then p2 else interceptChallengeModule
+return function(Callback, p1) --[[ Line: 13 ]]
+	-- upvalues: InterceptChallengeModule (copy), PromiseModule (copy), IsChallengeHttpResponseModule (copy), CryoModule (copy)
+	local InterceptChallengeModule1 = if p1 == nil then InterceptChallengeModule else p1
 	
-	return function(p3, p4, p5)
-		-- upvalues: p1 (ref), promiseModule (copy), isChallengeHttpResponseModule (copy), cryoModule (copy), var1 (write)
-		local var2, var3 = p1(p3, p4, p5)
+	return function(p2, p3, p4) --[[ Line: 18 ]]
+		-- upvalues: Callback (copy), PromiseModule (upval), IsChallengeHttpResponseModule (upval), CryoModule (upval), InterceptChallengeModule1 (ref)
+		local CallbackResult, CallbackResult2 = Callback(p2, p3, p4)
 		
-		return var2:andThen(function(p6)
-			-- upvalues: promiseModule (copy)
-			return promiseModule.resolve(p6)
-		end):catch(function(p6)
-			-- upvalues: isChallengeHttpResponseModule (copy), p1 (copy), p3 (ref), p4 (ref), cryoModule (copy), p5 (ref), var1 (copy), promiseModule (copy)
-			return if p6.StatusCode == nil or p6.Headers == nil or not isChallengeHttpResponseModule(p6.StatusCode, p6.Headers) then promiseModule.reject(p6) else var1({
-				retryRequestCallback = function(p7)
-					-- upvalues: p1 (copy), p3 (copy), p4 (copy), cryoModule (copy), p5 (copy)
-					return p1(p3, p4, cryoModule.Dictionary.join(p5, { headers = p7 }))
+		return CallbackResult:andThen(function(Result) --[[ Line: 21 ]]
+			-- upvalues: PromiseModule (upval)
+			return PromiseModule.resolve(Result)
+		end):catch(function(Err) --[[ Line: 25 ]]
+			-- upvalues: IsChallengeHttpResponseModule (upval), Callback (upval), p2 (copy), p3 (copy), CryoModule (upval), p4 (copy), InterceptChallengeModule1 (upval), PromiseModule (upval)
+			return if Err.StatusCode == nil or Err.Headers == nil or not IsChallengeHttpResponseModule(Err.StatusCode, Err.Headers) then PromiseModule.reject(Err) else InterceptChallengeModule1({
+				retryRequestCallback = function(Headers) --[[ Line: 33 ]]
+					-- upvalues: Callback (upval), p2 (upval), p3 (upval), CryoModule (upval), p4 (upval)
+					return Callback(p2, p3, CryoModule.Dictionary.join(p4, { headers = Headers }))
 				end,
-				rawResponseHeaders = p6.Headers
+				rawResponseHeaders = Err.Headers
 			})
-		end), var3
+		end), CallbackResult2
 	end
 end

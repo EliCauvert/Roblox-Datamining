@@ -1,11 +1,11 @@
-﻿local genericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
-local reactModule = require(genericAbuseReporting.Parent.React)
-local textWithTranslationModule = require(genericAbuseReporting.BeduiV2.Utils.Translate.TextWithTranslation)
-local _ = require(genericAbuseReporting.BeduiV2.Utils.Translate.translate)
+﻿local GenericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
+local ReactModule = require(GenericAbuseReporting.Parent.React)
+local TextWithTranslationModule = require(GenericAbuseReporting.BeduiV2.Utils.Translate.TextWithTranslation)
+local _ = require(GenericAbuseReporting.BeduiV2.Utils.Translate.translate)
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), textWithTranslationModule (ref)
-	return if p1.eyebrow then reactModule.createElement(textWithTranslationModule, {
+return ReactModule.memo(function(p1) --[[ Line: 20 | Named "Eyebrow" ]]
+	-- upvalues: ReactModule (copy), TextWithTranslationModule (copy)
+	return if p1.eyebrow then ReactModule.createElement(TextWithTranslationModule, {
 		tag = "size-full-0 auto-y text-label-large",
 		input = p1.eyebrow,
 		LayoutOrder = p1.layoutOrder

@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Workspace.PlatformLeaderboardsClient.PlatformLeaderboardsClient)
+﻿return (require(script.Parent.Parent.Parent._Workspace.PlatformLeaderboardsClient.PlatformLeaderboardsClient))

@@ -1,15 +1,15 @@
-﻿return function(p1, p2)
-	local t = {}
+﻿return function(p1, p2) --[[ Line: 1 ]]
+	local List = {}
 	
 	if not p1 then
-		return t
+		return List
 	end
-	local var1 = p1[p2]
+	local v1 = p1[p2]
 	
-	if var1 then
-		for i, v in var1 do
-			table.insert(t, i)
+	if v1 then
+		for i, _ in v1 do
+			table.insert(List, i)
 		end
 	end
-	return t
+	return List
 end

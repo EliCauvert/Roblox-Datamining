@@ -1,120 +1,122 @@
-﻿local guiService = game:GetService("GuiService")
-local workspaceService = game:GetService("Workspace")
-local parent = script.Parent.Parent.Parent
-local appNavBarModule = require(parent.AppNavBar)
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local responsiveModule = require(parent.Responsive)
-local signalsReactModule = require(parent.SignalsReact)
-local fFlagSplitPaneFixClassicThemeHeader = require(parent.SharedFlags).FFlagSplitPaneFixClassicThemeHeader
-local var1 = if fFlagSplitPaneFixClassicThemeHeader then require(parent.SplitPane) else nil
-local var2 = if fFlagSplitPaneFixClassicThemeHeader then var1.SplitPaneStore else nil
-local useNavBarPlacement = appNavBarModule.useNavBarPlacement
-local useNavBarSize = appNavBarModule.useNavBarSize
-local placement = appNavBarModule.Placement
-local useTokens = foundationModule.Hooks.useTokens
-local image = foundationModule.Image
-local view = foundationModule.View
+﻿local GuiService = game:GetService("GuiService")
+local Workspace = game:GetService("Workspace")
+local Parent = script.Parent.Parent.Parent
+local AppNavBarModule = require(Parent.AppNavBar)
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local ResponsiveModule = require(Parent.Responsive)
+local SignalsReactModule = require(Parent.SignalsReact)
+local FFlagSplitPaneFixClassicThemeHeader = require(Parent.SharedFlags).FFlagSplitPaneFixClassicThemeHeader
+local SplitPaneModule = if FFlagSplitPaneFixClassicThemeHeader then require(Parent.SplitPane) else nil
+local SplitPaneStore = if FFlagSplitPaneFixClassicThemeHeader then SplitPaneModule.SplitPaneStore else nil
+local UseNavBarPlacementFunction = AppNavBarModule.useNavBarPlacement
+local UseNavBarSizeFunction = AppNavBarModule.useNavBarSize
+local Placement = AppNavBarModule.Placement
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local Image = FoundationModule.Image
+local View = FoundationModule.View
 
-local function _()
-	-- upvalues: workspaceService (ref), guiService (ref)
-	local currentCamera = workspaceService.CurrentCamera
+local function _() --[[ Line: 40 | Named "getScreenWidth" ]]
+	-- upvalues: Workspace (copy), GuiService (copy)
+	local CurrentCamera = Workspace.CurrentCamera
 	
-	return if currentCamera then currentCamera.ViewportSize.X else guiService:GetScreenResolution().X
+	return if CurrentCamera then CurrentCamera.ViewportSize.X else GuiService:GetScreenResolution().X
 end
 
-return reactModule.memo(function(value)
-	-- upvalues: useTokens (ref), responsiveModule (ref), useNavBarPlacement (ref), useNavBarSize (ref), placement (ref), fFlagSplitPaneFixClassicThemeHeader (ref), var2 (ref), signalsReactModule (ref), var1 (ref), reactModule (ref), workspaceService (ref), guiService (ref), view (ref), image (ref)
-	local var3 = useTokens()
-	local var4 = responsiveModule.useDeviceInsets()
-	local var5 = if useNavBarPlacement() == placement.Left then useNavBarSize() else 0
-	local var6 = nil
-	local var7 = nil
+return ReactModule.memo(function(p1) --[[ Line: 45 | Named "AppHeaderBarClassicThemeBackground" ]]
+	-- upvalues: UseTokensFunction (copy), ResponsiveModule (copy), UseNavBarPlacementFunction (copy), UseNavBarSizeFunction (copy), Placement (copy), FFlagSplitPaneFixClassicThemeHeader (copy), SplitPaneStore (copy), SignalsReactModule (copy), SplitPaneModule (copy), ReactModule (copy), Workspace (copy), GuiService (copy), View (copy), Image (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseDeviceInsetsResult = ResponsiveModule.useDeviceInsets()
+	local UseNavBarPlacementResult = UseNavBarPlacementFunction()
+	local UseNavBarSizeResult = UseNavBarSizeFunction()
+	local UseNavBarSizeResult1 = if UseNavBarPlacementResult == Placement.Left then UseNavBarSizeResult else 0
+	local IsUseSignalStateResultMatch: boolean? = nil
+	local UseSignalStateResult = nil
 	
-	if fFlagSplitPaneFixClassicThemeHeader then
-		local store = var2.getStore()
-		var6 = signalsReactModule.useSignalState(store.getSupportPaneModeIfActive) == var1.SupportPaneMode.Normal
-		var7 = signalsReactModule.useSignalState(store.getContentRegionRect)
+	if FFlagSplitPaneFixClassicThemeHeader then
+		local Store = SplitPaneStore.getStore()
+		IsUseSignalStateResultMatch = SignalsReactModule.useSignalState(Store.getSupportPaneModeIfActive) == SplitPaneModule.SupportPaneMode.Normal
+		UseSignalStateResult = SignalsReactModule.useSignalState(Store.getContentRegionRect)
 	end
-	local var8, var9 = reactModule.useBinding(UDim2.fromOffset(0, 0))
-	local var10, var11 = reactModule.useBinding(UDim2.fromOffset(0, 0))
-	local var12 = reactModule.useRef(nil)
-	local var13 = reactModule.useCallback(function(p1)
-		-- upvalues: var12 (ref), value (ref), var4 (ref), var5 (ref), fFlagSplitPaneFixClassicThemeHeader (copy), var6 (write), var7 (write), workspaceService (copy), guiService (copy), var9 (ref), var11 (ref)
-		if not p1 then return end
-		var12.current = p1
-		local current = value.containerRef.current
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(UDim2.fromOffset(0, 0))
+	local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(UDim2.fromOffset(0, 0))
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseResult = ReactModule.useCallback(function(Current) --[[ Line: 70 ]]
+		-- upvalues: UseRefResult (copy), p1 (copy), UseDeviceInsetsResult (copy), UseNavBarSizeResult1 (copy), FFlagSplitPaneFixClassicThemeHeader (upval), IsUseSignalStateResultMatch (ref), UseSignalStateResult (ref), Workspace (upval), GuiService (upval), UseBindingResult2 (copy), UseBindingResult2_1 (copy)
+		if not Current then return end
+		UseRefResult.current = Current
+		local Current1 = p1.containerRef.current
 		
-		if not current then return end
-		local var14
-		local vector2 = Vector2.new(-var4.left + var5, -var4.top)
-		local var15 = vector2 - p1.AbsolutePosition
-		local _ = nil
+		if not Current1 then return end
+		local _Vector2 = Vector2.new(-UseDeviceInsetsResult.left + UseNavBarSizeResult1, -UseDeviceInsetsResult.top)
+		local VectorDelta: Vector2 = _Vector2 - Current.AbsolutePosition
+		local LeftDelta = nil
 		
-		if fFlagSplitPaneFixClassicThemeHeader and var6 and var7 then
-			var14 = var7.Max.X - vector2.X
+		if FFlagSplitPaneFixClassicThemeHeader and IsUseSignalStateResultMatch and UseSignalStateResult then
+			LeftDelta = UseSignalStateResult.Max.X - _Vector2.X
 		else
-			local currentCamera = workspaceService.CurrentCamera
-			var14 = (if currentCamera then currentCamera.ViewportSize.X else guiService:GetScreenResolution().X) + var4.left + var4.right - var5
+			local CurrentCamera = Workspace.CurrentCamera
+			LeftDelta = (if CurrentCamera then CurrentCamera.ViewportSize.X else GuiService:GetScreenResolution().X) + UseDeviceInsetsResult.left + UseDeviceInsetsResult.right - UseNavBarSizeResult1
 		end
-		local var16 = current.AbsolutePosition.Y + current.AbsoluteSize.Y - vector2.Y
-		var9(UDim2.fromOffset(p1.Position.X.Offset + var15.X, p1.Position.Y.Offset + var15.Y))
-		var11(UDim2.fromOffset(var14, var16))
+		local YDelta = Current1.AbsolutePosition.Y + Current1.AbsoluteSize.Y - _Vector2.Y
+		UseBindingResult2(UDim2.fromOffset(Current.Position.X.Offset + VectorDelta.X, Current.Position.Y.Offset + VectorDelta.Y))
+		UseBindingResult2_1(UDim2.fromOffset(LeftDelta, YDelta))
 	end, {
-		var5, value.containerRef, var4.left, var4.top, var4.right,
-		if fFlagSplitPaneFixClassicThemeHeader then var6 else nil,
-		if fFlagSplitPaneFixClassicThemeHeader then var7 else nil
+		UseNavBarSizeResult1, p1.containerRef, UseDeviceInsetsResult.left,
+		UseDeviceInsetsResult.top, UseDeviceInsetsResult.right,
+		if FFlagSplitPaneFixClassicThemeHeader then IsUseSignalStateResultMatch else nil,
+		if FFlagSplitPaneFixClassicThemeHeader then UseSignalStateResult else nil
 	})
-	reactModule.useEffect(function()
-		-- upvalues: var13 (ref), var12 (ref), workspaceService (copy), value (ref)
-		var13(var12.current)
-		local t = {}
-		local currentCamera = workspaceService.CurrentCamera
+	ReactModule.useEffect(function() --[[ Line: 108 ]]
+		-- upvalues: UseResult (copy), UseRefResult (copy), Workspace (upval), p1 (copy)
+		UseResult(UseRefResult.current)
+		local List = {}
+		local CurrentCamera = Workspace.CurrentCamera
 		
-		if currentCamera then
-			table.insert(t, currentCamera:GetPropertyChangedSignal("ViewportSize"))
+		if CurrentCamera then
+			table.insert(List, CurrentCamera:GetPropertyChangedSignal("ViewportSize"))
 		end
-		local current = value.containerRef.current
+		local Current = p1.containerRef.current
 		
-		if current then
-			table.insert(t, current:GetPropertyChangedSignal("AbsolutePosition"))
-			table.insert(t, current:GetPropertyChangedSignal("AbsoluteSize"))
+		if Current then
+			table.insert(List, Current:GetPropertyChangedSignal("AbsolutePosition"))
+			table.insert(List, Current:GetPropertyChangedSignal("AbsoluteSize"))
 		end
-		local t_1 = {}
+		local List1 = {}
 		
-		for i, v in t do
-			table.insert(t_1, v:Connect(function()
-				-- upvalues: var13 (copy), var12 (copy)
-				var13(var12.current)
-			end))
+		for _, Signal in List do
+			table.insert(List1, (Signal:Connect(function() --[[ Line: 126 ]]
+				-- upvalues: UseResult (upval), UseRefResult (upval)
+				UseResult(UseRefResult.current)
+			end)))
 		end
-		return function()
-			-- upvalues: t_1 (ref)
-			for i, v in t_1 do
-				v:Disconnect()
+		return function() --[[ Line: 132 ]]
+			-- upvalues: List1 (copy)
+			for _, Connection in List1 do
+				Connection:Disconnect()
 			end
 		end
-	end, { value.containerRef, var13 })
+	end, { p1.containerRef, UseResult })
 	
-	return reactModule.createElement(view, { tag = "size-0", ZIndex = -1 }, {
-		Background = reactModule.createElement(view, {
+	return ReactModule.createElement(View, { tag = "size-0", ZIndex = -1 }, {
+		Background = ReactModule.createElement(View, {
 			tag = "clip",
-			Position = var8,
-			Size = var10,
-			backgroundStyle = var3.Color.Extended.White.White_100,
-			ref = var13
+			Position = UseBindingResult,
+			Size = UseBindingResult1,
+			backgroundStyle = UseTokensResult.Color.Extended.White.White_100,
+			ref = UseResult
 		}, {
-			Gradient = reactModule.createElement("UIGradient", {
+			Gradient = ReactModule.createElement("UIGradient", {
 				Rotation = 90,
 				Color = ColorSequence.new({
-					ColorSequenceKeypoint.new(0, value.config.gradientColor),
-					ColorSequenceKeypoint.new(0.33, value.config.gradientColor),
-					ColorSequenceKeypoint.new(1, var3.Color.Surface.Surface_0.Color3)
+					ColorSequenceKeypoint.new(0, p1.config.gradientColor),
+					ColorSequenceKeypoint.new(0.33, p1.config.gradientColor),
+					ColorSequenceKeypoint.new(1, UseTokensResult.Color.Surface.Surface_0.Color3)
 				})
 			}),
-			CenterImage = reactModule.createElement(image, {
+			CenterImage = ReactModule.createElement(Image, {
 				tag = "position-top-center anchor-top-center size-full",
-				Image = value.config.centerImage,
+				Image = p1.config.centerImage,
 				ScaleType = Enum.ScaleType.Stretch,
 				sizeConstraint = {
 					MinSize = Vector2.new(960, 0),

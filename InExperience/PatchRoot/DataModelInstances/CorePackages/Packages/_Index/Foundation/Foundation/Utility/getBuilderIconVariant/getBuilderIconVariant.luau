@@ -1,11 +1,11 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local builderIconsModule = require(foundation.Parent.BuilderIcons)
-local isBuilderIconModule = require(foundation.Utility.isBuilderIcon)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local BuilderIconsModule = require(Foundation.Parent.BuilderIcons)
+local IsBuilderIconModule = require(Foundation.Utility.isBuilderIcon)
 
-return function(p1)
-	-- upvalues: isBuilderIconModule (ref), builderIconsModule (ref)
-	return if pcall(function()
-		-- upvalues: p1 (ref)
-		return p1.Text
-	end) then if isBuilderIconModule(p1.Text) then if p1.FontFace.Weight == Enum.FontWeight.Bold then builderIconsModule.IconVariant.Filled else builderIconsModule.IconVariant.Regular else nil else nil
+return function(Label) --[[ Line: 8 | Named "getBuilderIconVariant" ]]
+	-- upvalues: IsBuilderIconModule (copy), BuilderIconsModule (copy)
+	return if pcall(function() --[[ Line: 9 ]]
+		-- upvalues: Label (copy)
+		return Label.Text
+	end) and IsBuilderIconModule(Label.Text) then if Label.FontFace.Weight == Enum.FontWeight.Bold then BuilderIconsModule.IconVariant.Filled else BuilderIconsModule.IconVariant.Regular else nil
 end

@@ -1,1 +1,1 @@
-﻿return require(game:GetService("CorePackages").Packages.InlineLayout)
+﻿return (require(game:GetService("CorePackages").Packages.InlineLayout))

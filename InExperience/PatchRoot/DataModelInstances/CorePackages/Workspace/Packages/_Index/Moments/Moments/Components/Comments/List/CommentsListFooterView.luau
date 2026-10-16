@@ -1,31 +1,33 @@
-﻿local parent = script:FindFirstAncestor("Moments").Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local inputSize = foundationModule.Enums.InputSize
-local progressShape = foundationModule.Enums.ProgressShape
-local progressSize = foundationModule.Enums.ProgressSize
-local t = { retry = "Feature.Moments.Action.RetryLoadingComments" }
+﻿local Parent = script:FindFirstAncestor("Moments").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local InputSize = FoundationModule.Enums.InputSize
+local ProgressShape = FoundationModule.Enums.ProgressShape
+local ProgressSize = FoundationModule.Enums.ProgressSize
+local config = { retry = "Feature.Moments.Action.RetryLoadingComments" }
 
-return function(p1)
-	-- upvalues: useLocalization (ref), t (ref), reactModule (ref), foundationModule (ref), progressShape (ref), progressSize (ref), inputSize (ref), buttonVariant (ref)
-	return if p1.status == "Loading" then reactModule.createElement(foundationModule.View, {
+return function(Frame: Frame) --[[ Line: 25 | Named "CommentsListFooterView" ]]
+	-- upvalues: UseLocalizationFunction (copy), config (copy), ReactModule (copy), FoundationModule (copy), ProgressShape (copy), ProgressSize (copy), InputSize (copy), ButtonVariant (copy)
+	local UseLocalizationResult = UseLocalizationFunction(config)
+	
+	return if Frame.status == "Loading" then ReactModule.createElement(FoundationModule.View, {
 		tag = "col align-x-center size-full-0 auto-y padding-y-medium",
 		testId = "moments-comments-load-more-loading",
-		LayoutOrder = p1.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		Spinner = reactModule.createElement(foundationModule.Progress, {
+		Spinner = ReactModule.createElement(FoundationModule.Progress, {
 			testId = "moments-comments-load-more-spinner",
-			shape = progressShape.Circle,
-			size = progressSize.Medium
+			shape = ProgressShape.Circle,
+			size = ProgressSize.Medium
 		})
-	}) elseif p1.status == "Failed" then reactModule.createElement(foundationModule.Button, {
+	}) elseif Frame.status == "Failed" then ReactModule.createElement(FoundationModule.Button, {
 		testId = "moments-comments-load-more-retry",
-		LayoutOrder = p1.LayoutOrder,
-		text = useLocalization(t).retry,
-		onActivated = p1.onRetry,
-		size = inputSize.Small,
-		variant = buttonVariant.Standard
+		LayoutOrder = Frame.LayoutOrder,
+		text = UseLocalizationResult.retry,
+		onActivated = Frame.onRetry,
+		size = InputSize.Small,
+		variant = ButtonVariant.Standard
 	}) else nil
 end

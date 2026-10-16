@@ -1,245 +1,239 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local userGameSettingsService = UserSettings():GetService("UserGameSettings")
-local userInputService = game:GetService("UserInputService")
-local _ = require(parent_1.AppCommonLib)
-local reactModule = require(parent_1.React)
-local roactUtilsModule = require(parent_1.RoactUtils)
-local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
-local useScreenSize = require(parent_1.RobloxAppHooks).useScreenSize
-local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
-local useSignal = roactUtilsModule.Hooks.useSignal
-local captureTypeModule = require(parent.Enums.CaptureType)
-local carouselItemModule = require(parent.Components.CapturesCarousel.CarouselItem)
-local carouselNavArrowModule = require(parent.Components.CapturesCarousel.CarouselNavArrow)
-local carouselScrolledModule = require(parent.Thunks.CarouselScrolled)
-local constantsModule = require(parent.Constants)
-local eventNamesModule = require(parent.Analytics.EventNames)
-local getClosestItemToCenterModule = require(parent.Utils.getClosestItemToCenter)
-local _ = require(parent.Types)
-local useAnalyticsModule = require(parent.Analytics.useAnalytics)
-local useCarouselControllerModule = require(parent.Hooks.useCarouselController)
-local fFlagUseRbxstorageInGalleryModule = require(parent.Flags.FFlagUseRbxstorageInGallery)
-local fFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local UserGameSettings = UserSettings():GetService("UserGameSettings")
+local UserInputService = game:GetService("UserInputService")
+local _ = require(Parent1.AppCommonLib)
+local ReactModule = require(Parent1.React)
+local RoactUtilsModule = require(Parent1.RoactUtils)
+local UseDispatchFunction = RoactUtilsModule.Hooks.RoactRodux.useDispatch
+local UseScreenSizeFunction = require(Parent1.RobloxAppHooks).useScreenSize
+local UseSelectorFunction = RoactUtilsModule.Hooks.RoactRodux.useSelector
+local UseSignalFunction = RoactUtilsModule.Hooks.useSignal
+local CaptureTypeModule = require(Parent.Enums.CaptureType)
+local CarouselItemModule = require(Parent.Components.CapturesCarousel.CarouselItem)
+local CarouselNavArrowModule = require(Parent.Components.CapturesCarousel.CarouselNavArrow)
+local CarouselScrolledModule = require(Parent.Thunks.CarouselScrolled)
+local ConstantsModule = require(Parent.Constants)
+local EventNamesModule = require(Parent.Analytics.EventNames)
+local GetClosestItemToCenterModule = require(Parent.Utils.getClosestItemToCenter)
+local _ = require(Parent.Types)
+local UseAnalyticsModule = require(Parent.Analytics.useAnalytics)
+local UseCarouselControllerModule = require(Parent.Hooks.useCarouselController)
+local FFlagUseRbxstorageInGalleryModule = require(Parent.Flags.FFlagUseRbxstorageInGallery)
+local FFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(Parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
 
-local function _(p1, p2)
-	local x = (p2 - p1).X
+local function _(p1, p2) --[[ Line: 40 | Named "getMargins" ]]
+	local X: number = (p2 - p1).X
 	
-	if x % 2 == 0 then
-		local var1 = x / 2
+	if X % 2 == 0 then
+		local XRatio = X / 2
 		
-		return var1, var1
-	end
-	local floored = math.floor(x / 2)
-	
-	return floored + 1, floored
-end
-
-local _ = function()
-	-- upvalues: userInputService (ref), userGameSettingsService (ref)
-	local platform = userInputService:GetPlatform()
-	
-	return (if platform ~= Enum.Platform.IOS then platform == Enum.Platform.Android else true) and (userInputService.TouchEnabled and not userGameSettingsService.ReducedMotion)
-end
-
-return function(p1)
-	-- upvalues: useAnalyticsModule (ref), useDispatch (ref), useScreenSize (ref), reactModule (ref), useSelector (ref), constantsModule (ref), eventNamesModule (ref), carouselScrolledModule (ref), useCarouselControllerModule (ref), useSignal (ref), getClosestItemToCenterModule (ref), carouselItemModule (ref), fFlagUseRbxstorageInGalleryModule (ref), fFlagEnableCapturesGalleryRetrievalCoreScriptModule (ref), captureTypeModule (ref), userInputService (ref), userGameSettingsService (ref), carouselNavArrowModule (ref)
-	local var1, var2
-	local var3 = useAnalyticsModule()
-	local var4 = useDispatch()
-	local var5 = useScreenSize()
-	local var6, var7 = reactModule.useState(false)
-	local var8, var9 = reactModule.useState(0)
-	local var10 = useSelector(function(p2)
-		-- upvalues: constantsModule (copy)
-		return p2[constantsModule.RoduxKey].Captures
-	end)
-	local var11 = useSelector(function(p2)
-		-- upvalues: constantsModule (copy)
-		return p2[constantsModule.RoduxKey].Carousel.SelectedCaptureIndex
-	end)
-	local var12, var13 = reactModule.useState(var11)
-	local clampedValue = math.clamp(math.floor(var5.X * (if var5.X / var5.Y > 1 then 0.15 else 0.075)), 50, 200)
-	clampedValue = math.floor(clampedValue * 0.2)
-	local vector2 = Vector2.new(math.floor(var5.X - clampedValue * 2), math.floor(p1.maxHeight))
-	local var14 = vector2.X * #var10
-	local x = (var5 - vector2).X
-	
-	if x % 2 == 0 then
-		local var15 = x / 2
-		var1 = var15
-		var2 = var15
+		return XRatio, XRatio
 	else
-		local floored = math.floor(x / 2)
-		var1 = floored + 1
-		var2 = floored
+		local Floored = math.floor(X / 2)
+		
+		return Floored + 1, Floored
 	end
-	local var16
-	local var17 = useCarouselControllerModule(vector2, var11, reactModule.useCallback(function(p2)
-		-- upvalues: var10 (ref), var11 (ref), constantsModule (copy), var3 (ref), eventNamesModule (copy), var4 (ref), carouselScrolledModule (copy)
-		if p2 < 1 or #var10 < p2 then
-			return
-		end
-		var3.fireEvent(eventNamesModule.CapturesCarouselScrolled, {
-			direction = if p2 < var11 then constantsModule.CarouselDirection.Left else constantsModule.CarouselDirection.Right
-		})
-		var4(carouselScrolledModule(p2))
-	end, { var10, var11 }))
-	local carouselRef = var17.carouselRef
-	local carouselInputBegan = var17.carouselInputBegan
-	local carouselInputEnded = var17.carouselInputEnded
-	local deleteSelectedItem = var17.deleteSelectedItem
-	local selectedItemFadeOutBinding = var17.selectedItemFadeOutBinding
-	local postDeletionItemBinding = var17.postDeletionItemBinding
-	local selectedItemRef = var17.selectedItemRef
-	local setIsNavigationLocked = var17.setIsNavigationLocked
-	local var18 = var12 > 1
-	local var19 = var12 < #var10
+end
+
+local _ = function(): boolean --[[ Line: 54 | Named "getTouchScrollingEnabled" ]]
+	-- upvalues: UserInputService (copy), UserGameSettings (copy)
+	local Platform = UserInputService:GetPlatform()
+	local TouchEnabled = UserInputService.TouchEnabled
+	local ReducedMotion = UserGameSettings.ReducedMotion
 	
-	if not var18 then
-		var16 = var19 and not p1.isDisabled
+	return (Platform == Enum.Platform.IOS or Platform == Enum.Platform.Android) and (TouchEnabled and not ReducedMotion)
+end
+
+return function(Frame) --[[ Line: 70 ]]
+	-- upvalues: UseAnalyticsModule (copy), UseDispatchFunction (copy), UseScreenSizeFunction (copy), ReactModule (copy), UseSelectorFunction (copy), ConstantsModule (copy), EventNamesModule (copy), CarouselScrolledModule (copy), UseCarouselControllerModule (copy), UseSignalFunction (copy), GetClosestItemToCenterModule (copy), CarouselItemModule (copy), FFlagUseRbxstorageInGalleryModule (copy), FFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), CaptureTypeModule (copy), UserInputService (copy), UserGameSettings (copy), CarouselNavArrowModule (copy)
+	local UseAnalyticsModuleResult = UseAnalyticsModule()
+	local UseDispatchResult = UseDispatchFunction()
+	local UseScreenSizeResult = UseScreenSizeFunction()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(0)
+	local UseSelectorResult = UseSelectorFunction(function(p1) --[[ Line: 77 ]]
+		-- upvalues: ConstantsModule (upval)
+		return p1[ConstantsModule.RoduxKey].Captures
+	end)
+	local UseSelectorResult1 = UseSelectorFunction(function(p1) --[[ Line: 81 ]]
+		-- upvalues: ConstantsModule (upval)
+		return p1[ConstantsModule.RoduxKey].Carousel.SelectedCaptureIndex
+	end)
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(UseSelectorResult1)
+	local IsXAbove = UseScreenSizeResult.X / UseScreenSizeResult.Y > 1
+	local ClampedValue = math.clamp(math.floor(UseScreenSizeResult.X * (if IsXAbove then 0.15 else 0.075)), 50, 200)
+	local Floored = math.floor(ClampedValue * 0.2)
+	local _Vector2 = Vector2.new(math.floor(UseScreenSizeResult.X - ClampedValue * 2), (math.floor(Frame.maxHeight)))
+	local ScaledX = _Vector2.X * #UseSelectorResult
+	local X: number = (UseScreenSizeResult - _Vector2).X
+	local XOffset = nil
+	local XRatio1 = nil
+	
+	if X % 2 == 0 then
+		local XRatio = X / 2
+		XOffset = XRatio
+		XRatio1 = XRatio
+	else
+		local Floored1 = math.floor(X / 2)
+		XOffset = Floored1 + 1
+		XRatio1 = Floored1
 	end
-	reactModule.useEffect(function()
-		-- upvalues: setIsNavigationLocked (ref), var16 (ref)
-		setIsNavigationLocked(not var16)
-	end, { var16, setIsNavigationLocked })
-	useSignal(p1.deleteItemSignal, reactModule.useCallback(function(p2)
-		-- upvalues: deleteSelectedItem (ref)
-		deleteSelectedItem(p2)
-	end, { deleteSelectedItem }))
-	local var20 = reactModule.useCallback(function(p2)
-		-- upvalues: getClosestItemToCenterModule (copy), vector2 (ref), var12 (ref), var13 (ref)
-		local var21 = getClosestItemToCenterModule(vector2, p2)
-		
-		if var21 ~= var12 then
-			var13(var21)
-		end
-	end, { vector2, var12, var13 })
-	local var21 = reactModule.useCallback(function()
-		-- upvalues: var3 (ref), eventNamesModule (copy)
-		var3.fireEvent(eventNamesModule.CapturesCarouselVideoMuteButtonActivated)
-	end, {})
-	local var22 = reactModule.useCallback(function(p2)
-		-- upvalues: var7 (ref), var6 (ref), var9 (ref), var3 (ref), eventNamesModule (copy)
-		var7(not var6)
-		var9(p2)
-		
-		if var6 then
-			var3.fireEvent(eventNamesModule.CapturesCarouselVideoShrank)
+	local UseCarouselControllerModuleResult = UseCarouselControllerModule(_Vector2, UseSelectorResult1, (ReactModule.useCallback(function(p1: number) --[[ Line: 102 ]]
+		-- upvalues: UseSelectorResult (copy), UseSelectorResult1 (copy), ConstantsModule (upval), UseAnalyticsModuleResult (copy), EventNamesModule (upval), UseDispatchResult (copy), CarouselScrolledModule (upval)
+		if p1 >= 1 and #UseSelectorResult >= p1 then
+			UseAnalyticsModuleResult.fireEvent(EventNamesModule.CapturesCarouselScrolled, {
+				direction = p1 < UseSelectorResult1 and ConstantsModule.CarouselDirection.Left or ConstantsModule.CarouselDirection.Right
+			})
+			UseDispatchResult(CarouselScrolledModule(p1))
 			
 			return
 		end
-		var3.fireEvent(eventNamesModule.CapturesCarouselVideoExpanded)
-	end, { var6 })
-	local var23 = reactModule.useCallback(function(p2, p3)
-		-- upvalues: var12 (ref), reactModule (copy), carouselItemModule (copy), var11 (ref), selectedItemFadeOutBinding (ref), postDeletionItemBinding (ref), clampedValue (ref), fFlagUseRbxstorageInGalleryModule (copy), p1 (ref), vector2 (ref), var22 (ref), var21 (ref)
-		if var12 + 3 < p3 or p3 < var12 - 3 then
-			return nil
-		end
-		local var24
-		local createElement = reactModule.createElement
-		local t = {
-			unfocusedSizeMultiplier = 0.8,
-			capture = p2,
-			fadeOutBinding = if p3 == var11 then selectedItemFadeOutBinding else nil,
-			transitionBinding = if p3 == var11 then selectedItemFadeOutBinding elseif if p3 ~= var12 - 1 then var12 == 1 and p3 == 2 else true then postDeletionItemBinding else nil,
-			imagePadding = clampedValue
-		}
+	end, { UseSelectorResult, UseSelectorResult1 })))
+	local CarouselRef = UseCarouselControllerModuleResult.carouselRef
+	local CarouselInputBegan = UseCarouselControllerModuleResult.carouselInputBegan
+	local CarouselInputEnded = UseCarouselControllerModuleResult.carouselInputEnded
+	local DeleteSelectedItemFunction = UseCarouselControllerModuleResult.deleteSelectedItem
+	local SelectedItemFadeOutBinding = UseCarouselControllerModuleResult.selectedItemFadeOutBinding
+	local PostDeletionItemBinding = UseCarouselControllerModuleResult.postDeletionItemBinding
+	local SelectedItemRef = UseCarouselControllerModuleResult.selectedItemRef
+	local SetIsNavigationLockedFunction = UseCarouselControllerModuleResult.setIsNavigationLocked
+	local IsUseStateResultAbove = UseStateResult3 > 1
+	local IsUseStateResultBelow = UseStateResult3 < #UseSelectorResult
+	local NoIsDisabled: boolean = if IsUseStateResultAbove then not Frame.isDisabled else IsUseStateResultBelow and not Frame.isDisabled
+	ReactModule.useEffect(function() --[[ Line: 130 ]]
+		-- upvalues: SetIsNavigationLockedFunction (copy), NoIsDisabled (copy)
+		SetIsNavigationLockedFunction(not NoIsDisabled)
+	end, { NoIsDisabled, SetIsNavigationLockedFunction })
+	UseSignalFunction(Frame.deleteItemSignal, (ReactModule.useCallback(function(p1) --[[ Line: 134 ]]
+		-- upvalues: DeleteSelectedItemFunction (copy)
+		DeleteSelectedItemFunction(p1)
+	end, { DeleteSelectedItemFunction })))
+	local UseResult = ReactModule.useCallback(function(p1) --[[ Line: 139 ]]
+		-- upvalues: GetClosestItemToCenterModule (upval), _Vector2 (copy), UseStateResult3 (copy), UseStateResult2_2 (copy)
+		local ClosestItemToCenterModule = GetClosestItemToCenterModule(_Vector2, p1)
 		
-		if fFlagUseRbxstorageInGalleryModule then
-			var24 = p1.isDisabled
+		if ClosestItemToCenterModule ~= UseStateResult3 then
+			UseStateResult2_2(ClosestItemToCenterModule)
+		end
+	end, { _Vector2, UseStateResult3, UseStateResult2_2 })
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 146 ]]
+		-- upvalues: UseAnalyticsModuleResult (copy), EventNamesModule (upval)
+		UseAnalyticsModuleResult.fireEvent(EventNamesModule.CapturesCarouselVideoMuteButtonActivated)
+	end, {})
+	local UseResult2 = ReactModule.useCallback(function(p1) --[[ Line: 150 ]]
+		-- upvalues: UseStateResult2 (copy), UseStateResult (copy), UseStateResult2_1 (copy), UseAnalyticsModuleResult (copy), EventNamesModule (upval)
+		UseStateResult2(not UseStateResult)
+		UseStateResult2_1(p1)
+		
+		if UseStateResult then
+			UseAnalyticsModuleResult.fireEvent(EventNamesModule.CapturesCarouselVideoShrank)
 			
-			if var24 then
-				var24 = var11 == p3
-				var24 = nil
-			end
+			return
 		else
-			var24 = nil
+			UseAnalyticsModuleResult.fireEvent(EventNamesModule.CapturesCarouselVideoExpanded)
 		end
-		t.isDisabled = var24
-		t.isSelected = var11 == p3
-		t.itemIndex = p3
-		t.itemSize = vector2
-		t.onExpandCallback = var22
-		t.onMuteCallback = var21
-		
-		return createElement(carouselItemModule, t)
+	end, { UseStateResult })
+	local UseResult3 = ReactModule.useCallback(function(Capture, ItemIndex) --[[ Line: 161 ]]
+		-- upvalues: UseStateResult3 (copy), ReactModule (upval), CarouselItemModule (upval), UseSelectorResult1 (copy), SelectedItemFadeOutBinding (copy), PostDeletionItemBinding (copy), Floored (copy), FFlagUseRbxstorageInGalleryModule (upval), Frame (copy), _Vector2 (copy), UseResult2 (copy), UseResult1 (copy)
+		if UseStateResult3 + 3 < ItemIndex or ItemIndex < UseStateResult3 - 3 then
+			return nil
+		else
+			local IsItemIndexMatch: boolean = ItemIndex == UseStateResult3 - 1 or UseStateResult3 == 1 and ItemIndex == 2
+			
+			return ReactModule.createElement(CarouselItemModule, {
+				unfocusedSizeMultiplier = 0.8,
+				capture = Capture,
+				fadeOutBinding = if ItemIndex == UseSelectorResult1 then SelectedItemFadeOutBinding else nil,
+				transitionBinding = if ItemIndex == UseSelectorResult1 then SelectedItemFadeOutBinding elseif IsItemIndexMatch then PostDeletionItemBinding else nil,
+				imagePadding = Floored,
+				isDisabled = if FFlagUseRbxstorageInGalleryModule then Frame.isDisabled and UseSelectorResult1 == ItemIndex else nil,
+				isSelected = UseSelectorResult1 == ItemIndex,
+				itemIndex = ItemIndex,
+				itemSize = _Vector2,
+				onExpandCallback = UseResult2,
+				onMuteCallback = UseResult1
+			})
+		end
 	end, {
-		vector2, var12, clampedValue, p1.isDisabled, var22, var21,
-		postDeletionItemBinding, var11, selectedItemFadeOutBinding
+		_Vector2, UseStateResult3, Floored, Frame.isDisabled, UseResult2, UseResult1,
+		PostDeletionItemBinding, UseSelectorResult1, SelectedItemFadeOutBinding
 	})
-	local var24 = reactModule.useMemo(function()
-		-- upvalues: reactModule (copy), var10 (ref), fFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), fFlagUseRbxstorageInGalleryModule (copy), captureTypeModule (copy), vector2 (ref), var11 (ref), selectedItemRef (ref), var6 (ref), var8 (ref), var23 (ref)
-		local t = {
-			Layout = reactModule.createElement("UIListLayout", {
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 201 ]]
+		-- upvalues: ReactModule (upval), UseSelectorResult (copy), FFlagEnableCapturesGalleryRetrievalCoreScriptModule (upval), FFlagUseRbxstorageInGalleryModule (upval), CaptureTypeModule (upval), _Vector2 (copy), UseSelectorResult1 (copy), SelectedItemRef (copy), UseStateResult (copy), UseStateResult1 (copy), UseResult3 (copy)
+		local config = {
+			Layout = ReactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Horizontal,
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				VerticalAlignment = Enum.VerticalAlignment.Center
 			})
 		}
 		
-		for i, v in var10 do
-			t[if fFlagEnableCapturesGalleryRetrievalCoreScriptModule then tostring(v.CaptureTime.UnixTimestampMillis) elseif fFlagUseRbxstorageInGalleryModule and v.type == captureTypeModule.Video then v.thumbnailKey else v.contentId] = reactModule.createElement("Frame", {
+		for LayoutOrder, value in UseSelectorResult do
+			config[if FFlagEnableCapturesGalleryRetrievalCoreScriptModule then tostring(value.CaptureTime.UnixTimestampMillis) elseif FFlagUseRbxstorageInGalleryModule and value.type == CaptureTypeModule.Video then value.thumbnailKey else value.contentId] = ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
-				LayoutOrder = i,
-				Size = UDim2.fromOffset(vector2.X, vector2.Y),
-				ref = if i == var11 then selectedItemRef else nil,
-				ZIndex = if var6 and var8 == i then 2 else 1
-			}, { Item = var23(v, i) })
+				LayoutOrder = LayoutOrder,
+				Size = UDim2.fromOffset(_Vector2.X, _Vector2.Y),
+				ref = if LayoutOrder == UseSelectorResult1 then SelectedItemRef else nil,
+				ZIndex = if UseStateResult and UseStateResult1 == LayoutOrder then 2 else 1
+			}, { Item = UseResult3(value, LayoutOrder) })
 		end
-		return t
+		return config
 	end, {
-		var10, vector2, var8, var6, var23, var11
+		UseSelectorResult, _Vector2, UseStateResult1, UseStateResult, UseResult3,
+		UseSelectorResult1
 	})
-	local floored = math.floor(vector2.Y * 0.8)
-	local createElement = reactModule.createElement
-	local var25 = "Frame"
-	local t = {
+	local Floored2 = math.floor(_Vector2.Y * 0.8)
+	local CreateElementFunction1 = ReactModule.createElement
+	local v1 = "Frame"
+	local config = {
 		BackgroundTransparency = 1,
-		LayoutOrder = p1.LayoutOrder,
-		Size = UDim2.new(1, 0, 0, p1.maxHeight),
-		ZIndex = p1.ZIndex
+		LayoutOrder = Frame.LayoutOrder,
+		Size = UDim2.new(1, 0, 0, Frame.maxHeight),
+		ZIndex = Frame.ZIndex
 	}
-	local t_1 = {}
-	local createElement_1 = reactModule.createElement
-	local var26 = "ScrollingFrame"
-	local t_2 = {
+	local t = {}
+	local CreateElementFunction = ReactModule.createElement
+	local v2 = "ScrollingFrame"
+	local config1 = {
 		BackgroundTransparency = 1,
-		CanvasSize = UDim2.new(0, var14, 1, 0),
+		CanvasSize = UDim2.new(0, ScaledX, 1, 0),
 		ClipsDescendants = false,
-		Position = UDim2.fromOffset(var1, 0),
+		Position = UDim2.fromOffset(XOffset, 0),
 		ScrollBarThickness = 0,
 		ScrollingDirection = Enum.ScrollingDirection.X
 	}
-	local var27 = not var6
+	local NoUseStateResult = not UseStateResult
 	
-	if var27 then
-		var27 = var16
+	if NoUseStateResult then
+		NoUseStateResult = NoIsDisabled
 		
-		if var27 then
-			local platform = userInputService:GetPlatform()
-			var27 = (if platform ~= Enum.Platform.IOS then platform == Enum.Platform.Android else true) and (userInputService.TouchEnabled and not userGameSettingsService.ReducedMotion)
+		if NoUseStateResult then
+			local Platform = UserInputService:GetPlatform()
+			local TouchEnabled = UserInputService.TouchEnabled
+			local ReducedMotion = UserGameSettings.ReducedMotion
+			NoUseStateResult = (Platform == Enum.Platform.IOS or Platform == Enum.Platform.Android) and (TouchEnabled and not ReducedMotion)
 		end
 	end
-	t_2.ScrollingEnabled = var27
-	t_2.Size = UDim2.fromOffset(vector2.X, vector2.Y)
-	t_2[reactModule.Change.CanvasPosition] = var20
-	t_2[reactModule.Event.InputBegan] = carouselInputBegan
-	t_2[reactModule.Event.InputEnded] = carouselInputEnded
-	t_2.ref = carouselRef
-	t_1.AnimatedCarousel = createElement_1(var26, t_2, var24)
-	t_1.LeftArrow = not var6 and (var18 and reactModule.createElement(carouselNavArrowModule, {
+	config1.ScrollingEnabled = NoUseStateResult
+	config1.Size = UDim2.fromOffset(_Vector2.X, _Vector2.Y)
+	config1[ReactModule.Change.CanvasPosition] = UseResult
+	config1[ReactModule.Event.InputBegan] = CarouselInputBegan
+	config1[ReactModule.Event.InputEnded] = CarouselInputEnded
+	config1.ref = CarouselRef
+	t.AnimatedCarousel = CreateElementFunction(v2, config1, UseMemoResult)
+	t.LeftArrow = not UseStateResult and (IsUseStateResultAbove and ReactModule.createElement(CarouselNavArrowModule, {
 		ZIndex = 2,
-		direction = constantsModule.CarouselDirection.Left,
-		isDisabled = p1.isDisabled,
-		Size = UDim2.fromOffset(var1 - clampedValue, floored)
+		direction = ConstantsModule.CarouselDirection.Left,
+		isDisabled = Frame.isDisabled,
+		Size = UDim2.fromOffset(XOffset - Floored, Floored2)
 	}))
-	t_1.RightArrow = not var6 and (var19 and reactModule.createElement(carouselNavArrowModule, {
+	t.RightArrow = not UseStateResult and (IsUseStateResultBelow and ReactModule.createElement(CarouselNavArrowModule, {
 		ZIndex = 2,
-		direction = constantsModule.CarouselDirection.Right,
-		isDisabled = p1.isDisabled,
-		Size = UDim2.fromOffset(var2 - clampedValue, floored)
+		direction = ConstantsModule.CarouselDirection.Right,
+		isDisabled = Frame.isDisabled,
+		Size = UDim2.fromOffset(XRatio1 - Floored, Floored2)
 	}))
 	
-	return createElement(var25, t, t_1)
+	return CreateElementFunction1(v1, config, t)
 end

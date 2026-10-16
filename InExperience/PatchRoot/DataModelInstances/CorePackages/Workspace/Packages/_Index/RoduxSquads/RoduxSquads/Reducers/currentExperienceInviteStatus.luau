@@ -1,12 +1,12 @@
-﻿local roduxSquads = script:FindFirstAncestor("RoduxSquads")
-local roduxModule = require(roduxSquads.Parent.Rodux)
-local currentExperienceInviteStatusUpdated = require(roduxSquads.Actions).CurrentExperienceInviteStatusUpdated
+﻿local RoduxSquads = script:FindFirstAncestor("RoduxSquads")
+local RoduxModule = require(RoduxSquads.Parent.Rodux)
+local CurrentExperienceInviteStatusUpdated = require(RoduxSquads.Actions).CurrentExperienceInviteStatusUpdated
 local _ = require(script.Parent.Parent.RoduxSquadsTypes)
 
-return function()
-	-- upvalues: roduxModule (ref), currentExperienceInviteStatusUpdated (ref)
-	return roduxModule.createReducer(false, {
-		[currentExperienceInviteStatusUpdated.name] = function(_, p1)
+return function() --[[ Line: 12 ]]
+	-- upvalues: RoduxModule (copy), CurrentExperienceInviteStatusUpdated (copy)
+	return RoduxModule.createReducer(false, {
+		[CurrentExperienceInviteStatusUpdated.name] = function(_, p1) --[[ Line: 14 ]]
 			return p1.payload.isExperienceInvitePending
 		end
 	})

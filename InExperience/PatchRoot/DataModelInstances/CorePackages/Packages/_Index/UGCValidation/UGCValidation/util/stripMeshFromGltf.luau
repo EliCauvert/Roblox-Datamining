@@ -1,89 +1,89 @@
-﻿local httpService = game:GetService("HttpService")
+﻿local HttpService = game:GetService("HttpService")
 
-return function(p1)
-	-- upvalues: httpService (ref)
-	local var1 = httpService:JSONDecode(p1)
-	var1.meshes = nil
-	var1.materials = nil
-	var1.textures = nil
-	var1.images = nil
-	var1.skins = nil
+return function(Input) --[[ Line: 3 | Named "stripMeshFromGltf" ]]
+	-- upvalues: HttpService (copy)
+	local Data = HttpService:JSONDecode(Input)
+	Data.meshes = nil
+	Data.materials = nil
+	Data.textures = nil
+	Data.images = nil
+	Data.skins = nil
 	
-	if var1.nodes then
+	if Data.nodes then
+		local Nodes = {}
 		local t = {}
-		local t_1 = {}
-		local t_2 = {}
+		local t1 = {}
 		
-		for i, v in ipairs(var1.nodes) do
-			if v.name and string.find(v.name, "_Geo$") then
-				t_2[i] = true
+		for i, node in ipairs(Data.nodes) do
+			if node.name and string.find(node.name, "_Geo$") then
+				t1[i] = true
 			end
 		end
-		local var2 = 0
+		local Count = 0
 		
-		for i_1, v_1 in ipairs(var1.nodes) do
-			if not t_2[i_1] then
-				v_1.mesh = nil
-				v_1.skin = nil
+		for i1, node1 in ipairs(Data.nodes) do
+			if not t1[i1] then
+				node1.mesh = nil
+				node1.skin = nil
 				
-				if v_1.children then
-					local t_3 = {}
+				if node1.children then
+					local List = {}
 					
-					for i_2, v_2 in ipairs(v_1.children) do
-						if not t_2[v_2 + 1] then
-							table.insert(t_3, v_2)
+					for _, child in ipairs(node1.children) do
+						if not t1[child + 1] then
+							table.insert(List, child)
 						end
 					end
-					v_1.children = if #t_3 > 0 then t_3 else nil
+					node1.children = if #List > 0 then List else nil
 				end
-				table.insert(t, v_1)
-				t_1[i_1] = var2
-				var2 += 1
+				table.insert(Nodes, node1)
+				t[i1] = Count
+				Count += 1
 			end
 		end
-		for i_2, v_2 in ipairs(t) do
-			if v_2.children then
-				for i_3, v_3 in ipairs(v_2.children) do
-					local var3 = v_3 + 1
+		for _, node2 in ipairs(Nodes) do
+			if node2.children then
+				for i2, child1 in ipairs(node2.children) do
+					local v1 = child1 + 1
 					
-					if t_1[var3] then
-						v_2.children[i_3] = t_1[var3]
+					if t[v1] then
+						node2.children[i2] = t[v1]
 					end
 				end
 			end
 		end
-		if var1.animations then
-			for i_3, v_3 in ipairs(var1.animations) do
-				if v_3.channels then
-					for i_4, v_4 in ipairs(v_3.channels) do
-						if v_4.target and v_4.target.node then
-							local var4 = v_4.target.node + 1
+		if Data.animations then
+			for _, animation in ipairs(Data.animations) do
+				if animation.channels then
+					for _, channel in ipairs(animation.channels) do
+						if channel.target and channel.target.node then
+							local NewNode = channel.target.node + 1
 							
-							if t_1[var4] then
-								v_4.target.node = t_1[var4]
+							if t[NewNode] then
+								channel.target.node = t[NewNode]
 							end
 						end
 					end
 				end
 			end
 		end
-		if var1.scenes then
-			for i_3, v_3 in ipairs(var1.scenes) do
-				if v_3.nodes then
-					local t_3 = {}
+		if Data.scenes then
+			for _, scene in ipairs(Data.scenes) do
+				if scene.nodes then
+					local Nodes1 = {}
 					
-					for i_4, v_4 in ipairs(v_3.nodes) do
-						local var5 = v_4 + 1
+					for _, node3 in ipairs(scene.nodes) do
+						local v2 = node3 + 1
 						
-						if t_1[var5] then
-							table.insert(t_3, t_1[var5])
+						if t[v2] then
+							table.insert(Nodes1, t[v2])
 						end
 					end
-					v_3.nodes = t_3
+					scene.nodes = Nodes1
 				end
 			end
 		end
-		var1.nodes = t
+		Data.nodes = Nodes
 	end
-	return httpService:JSONEncode(var1)
+	return HttpService:JSONEncode(Data)
 end

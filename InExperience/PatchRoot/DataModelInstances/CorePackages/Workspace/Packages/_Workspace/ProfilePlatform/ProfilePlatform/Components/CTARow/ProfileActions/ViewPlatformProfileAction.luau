@@ -1,29 +1,24 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local fFlagEnablePlatformProfileContextualMenuOption = require(parent.SharedFlags).FFlagEnablePlatformProfileContextualMenuOption
-local fFlagPPVEnabledOnConsole = require(parent.SharedFlags).FFlagPPVEnabledOnConsole
-local getPlatformFriendsServiceModule = require(profilePlatform.Utils.getPlatformFriendsService)
-local enumsModule = require(profilePlatform.Common.Enums)
-local _ = require(profilePlatform.Components.CTARow.Types)
-local eventNamesModule = require(profilePlatform.Analytics.EventNames)
-local profileTypes = enumsModule.ProfileTypes
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local GetPlatformFriendsServiceModule = require(ProfilePlatform.Utils.getPlatformFriendsService)
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local _ = require(ProfilePlatform.Components.CTARow.Types)
+local EventNamesModule = require(ProfilePlatform.Analytics.EventNames)
+local ProfileTypes = EnumsModule.ProfileTypes
 
 return {
-	[enumsModule.ProfileActions.ViewPlatformProfile] = if fFlagEnablePlatformProfileContextualMenuOption then function(p1)
-		-- upvalues: fFlagPPVEnabledOnConsole (ref), enumsModule (ref), profileTypes (ref), eventNamesModule (ref), getPlatformFriendsServiceModule (ref)
-		if fFlagPPVEnabledOnConsole then
-			local profilePlatformId = p1.profileWrapperContext.profilePlatformId
-			
-			return if profilePlatformId and profilePlatformId ~= "" then {
-				text = p1.localized[enumsModule.ProfileActions.ViewPlatformProfile],
-				onActivated = {
-					[profileTypes.User] = function()
-						-- upvalues: p1 (ref), eventNamesModule (copy), getPlatformFriendsServiceModule (copy)
-						p1.analytics.fireAnalyticsEvent(eventNamesModule.ContextualMenuButtonViewPlatformProfile, { buttonSurface = p1.buttonSurface })
-						getPlatformFriendsServiceModule:ShowProfile(p1.profileWrapperContext.profilePlatformId)
-					end
-				}
-			} else nil
-		end
+	[EnumsModule.ProfileActions.ViewPlatformProfile] = if require(ProfilePlatform.Parent.SharedFlags).FFlagEnablePlatformProfileContextualMenuOption then function(p1) --[[ Line: 15 ]]
+		-- upvalues: EnumsModule (copy), ProfileTypes (copy), EventNamesModule (copy), GetPlatformFriendsServiceModule (copy)
+		local ProfilePlatformId = p1.profileWrapperContext.profilePlatformId
+		
+		return if ProfilePlatformId and ProfilePlatformId ~= "" then {
+			text = p1.localized[EnumsModule.ProfileActions.ViewPlatformProfile],
+			onActivated = {
+				[ProfileTypes.User] = function() --[[ Line: 24 ]]
+					-- upvalues: p1 (copy), EventNamesModule (upval), GetPlatformFriendsServiceModule (upval)
+					p1.analytics.fireAnalyticsEvent(EventNamesModule.ContextualMenuButtonViewPlatformProfile, { buttonSurface = p1.buttonSurface })
+					GetPlatformFriendsServiceModule:ShowProfile(p1.profileWrapperContext.profilePlatformId)
+				end
+			}
+		} else nil
 	end else nil
 }

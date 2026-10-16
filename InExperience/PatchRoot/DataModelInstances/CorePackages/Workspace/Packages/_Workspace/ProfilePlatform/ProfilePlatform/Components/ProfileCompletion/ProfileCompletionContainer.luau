@@ -1,53 +1,55 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local roactNavigationModule = require(parent.RoactNavigation)
-local socialServerDrivenUiModule = require(parent.SocialServerDrivenUi)
-local robloxAppHooksModule = require(parent.RobloxAppHooks)
-local socialSduiComponentWrapper = socialServerDrivenUiModule.SocialSduiComponentWrapper
-local useProfileAnalyticsContextModule = require(profilePlatform.Contexts.useProfileAnalyticsContext)
-local useDynamicSizeMarginModule = require(profilePlatform.Hooks.useDynamicSizeMargin)
-local useProfileCompletionSduiContextModule = require(profilePlatform.Hooks.useProfileCompletionSduiContext)
-local useProfileCompletionDataModule = require(profilePlatform.Hooks.useProfileCompletionData)
-local enumsModule = require(profilePlatform.Common.Enums)
-local useScreenSize = robloxAppHooksModule.useScreenSize
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local RoactNavigationModule = require(Parent.RoactNavigation)
+local SocialServerDrivenUiModule = require(Parent.SocialServerDrivenUi)
+local SocialSduiComponentWrapper = SocialServerDrivenUiModule.SocialSduiComponentWrapper
+local UseProfileAnalyticsContextModule = require(ProfilePlatform.Contexts.useProfileAnalyticsContext)
+local UseDynamicSizeMarginModule = require(ProfilePlatform.Hooks.useDynamicSizeMargin)
+local UseProfileCompletionSduiContextModule = require(ProfilePlatform.Hooks.useProfileCompletionSduiContext)
+local UseProfileCompletionDataModule = require(ProfilePlatform.Hooks.useProfileCompletionData)
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local UseScreenSizeFunction = require(Parent.RobloxAppHooks).useScreenSize
 
-return reactModule.memo(function(p1)
-	-- upvalues: useProfileAnalyticsContextModule (ref), useScreenSize (ref), useDynamicSizeMarginModule (ref), reactModule (ref), useProfileCompletionSduiContextModule (ref), socialServerDrivenUiModule (ref), useProfileCompletionDataModule (ref), roactNavigationModule (ref), socialSduiComponentWrapper (ref), enumsModule (ref)
-	local var1 = useProfileAnalyticsContextModule()
-	local var2 = useScreenSize()
-	local var3, var4 = useDynamicSizeMarginModule()
-	local var5, var6 = reactModule.useState(var2.X)
-	local var7 = useProfileCompletionSduiContextModule({ sideMargin = var3, containerWidth = var5 })
-	local var8 = reactModule.useMemo(function()
-		-- upvalues: p1 (ref)
+return ReactModule.memo(function(p1) --[[ Line: 22 | Named "ProfileCompletionContainer" ]]
+	-- upvalues: UseProfileAnalyticsContextModule (copy), UseScreenSizeFunction (copy), UseDynamicSizeMarginModule (copy), ReactModule (copy), UseProfileCompletionSduiContextModule (copy), SocialServerDrivenUiModule (copy), UseProfileCompletionDataModule (copy), RoactNavigationModule (copy), SocialSduiComponentWrapper (copy), EnumsModule (copy)
+	local UseProfileAnalyticsContextModuleResult = UseProfileAnalyticsContextModule()
+	local UseScreenSizeResult = UseScreenSizeFunction()
+	local UseDynamicSizeMarginModuleResult, UseDynamicSizeMarginModuleResult2 = UseDynamicSizeMarginModule()
+	local UseStateResult, UseStateResult2 = ReactModule.useState(UseScreenSizeResult.X)
+	local UseProfileCompletionSduiContextModuleResult = UseProfileCompletionSduiContextModule({
+		sideMargin = UseDynamicSizeMarginModuleResult,
+		containerWidth = UseStateResult
+	})
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 33 ]]
+		-- upvalues: p1 (copy)
 		return { collectionPosition = p1.layoutOrder }
 	end, { p1.layoutOrder })
-	local var9 = reactModule.useRef(nil)
-	local var10 = reactModule.useCallback(function(p2)
-		-- upvalues: var4 (ref), var6 (ref)
-		var4(p2)
-		var6(p2.AbsoluteSize.X)
-	end, { var4, var6 })
-	reactModule.useEffect(function()
-		-- upvalues: socialServerDrivenUiModule (copy)
-		socialServerDrivenUiModule.registerSocialActions()
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseResult = ReactModule.useCallback(function(Frame) --[[ Line: 38 ]]
+		-- upvalues: UseDynamicSizeMarginModuleResult2 (copy), UseStateResult2 (copy)
+		UseDynamicSizeMarginModuleResult2(Frame)
+		UseStateResult2(Frame.AbsoluteSize.X)
+	end, { UseDynamicSizeMarginModuleResult2, UseStateResult2 })
+	ReactModule.useEffect(function() --[[ Line: 43 ]]
+		-- upvalues: SocialServerDrivenUiModule (upval)
+		SocialServerDrivenUiModule.registerSocialActions()
 	end, {})
-	local var11, var12 = useProfileCompletionDataModule()
+	local UseProfileCompletionDataModuleResult, UseProfileCompletionDataModuleResult2 = UseProfileCompletionDataModule()
 	
-	return reactModule.createElement(reactModule.Fragment, nil, {
-		NavEvents = reactModule.createElement(roactNavigationModule.NavigationEvents, { onDidFocus = var12 }),
-		Content = if var11 then reactModule.createElement(socialSduiComponentWrapper, {
+	return ReactModule.createElement(ReactModule.Fragment, nil, {
+		NavEvents = ReactModule.createElement(RoactNavigationModule.NavigationEvents, { onDidFocus = UseProfileCompletionDataModuleResult2 }),
+		Content = if UseProfileCompletionDataModuleResult then ReactModule.createElement(SocialSduiComponentWrapper, {
 			testId = "profile-completion",
 			layoutOrder = p1.layoutOrder,
-			sduiContext = var7,
-			sduiComponentConfig = var11,
-			pageSideMargin = var3,
-			onFrameResized = var10,
-			verticalScrollingFrameRef = var9,
-			scrollViewPositionChangedSignal = var1.scrollViewPositionChangedSignal,
-			analyticsContext = var8,
-			debugName = enumsModule.Components.ProfileCompletion
+			sduiContext = UseProfileCompletionSduiContextModuleResult,
+			sduiComponentConfig = UseProfileCompletionDataModuleResult,
+			pageSideMargin = UseDynamicSizeMarginModuleResult,
+			onFrameResized = UseResult,
+			verticalScrollingFrameRef = UseRefResult,
+			scrollViewPositionChangedSignal = UseProfileAnalyticsContextModuleResult.scrollViewPositionChangedSignal,
+			analyticsContext = UseMemoResult,
+			debugName = EnumsModule.Components.ProfileCompletion
 		}) else nil
 	})
 end)

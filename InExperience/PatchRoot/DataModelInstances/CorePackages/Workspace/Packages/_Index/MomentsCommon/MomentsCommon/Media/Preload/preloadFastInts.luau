@@ -1,32 +1,32 @@
-﻿local preloadConstantsModule = require(script:FindFirstAncestor("MomentsCommon").Media.Preload.preloadConstants)
-game:DefineFastInt("MomentsPreloadDownloadWindowForward", preloadConstantsModule.downloadWindow.forward)
-game:DefineFastInt("MomentsPreloadDownloadWindowBack", preloadConstantsModule.downloadWindow.back)
-game:DefineFastInt("MomentsPreloadDecodeWindowForward", preloadConstantsModule.decodeWindow.forward)
-game:DefineFastInt("MomentsPreloadDecodeWindowBack", preloadConstantsModule.decodeWindow.back)
+﻿local PreloadConstantsModule = require(script:FindFirstAncestor("MomentsCommon").Media.Preload.preloadConstants)
+game:DefineFastInt("MomentsPreloadDownloadWindowForward", PreloadConstantsModule.downloadWindow.forward)
+game:DefineFastInt("MomentsPreloadDownloadWindowBack", PreloadConstantsModule.downloadWindow.back)
+game:DefineFastInt("MomentsPreloadDecodeWindowForward", PreloadConstantsModule.decodeWindow.forward)
+game:DefineFastInt("MomentsPreloadDecodeWindowBack", PreloadConstantsModule.decodeWindow.back)
 game:DefineFastInt("MomentsPreloadDecodeRetryDelayMs", 2000)
 game:DefineFastInt("MomentsPreloadMaxDecodeRetries", 2)
-game:DefineFastInt("MomentsScreenshotDurationSeconds", preloadConstantsModule.screenshotDurationSeconds)
+game:DefineFastInt("MomentsScreenshotDurationSeconds", PreloadConstantsModule.screenshotDurationSeconds)
 
 return {
-	getDownloadWindow = function()
+	getDownloadWindow = function() --[[ Line: 25 ]]
 		return {
 			forward = game:GetFastInt("MomentsPreloadDownloadWindowForward"),
 			back = game:GetFastInt("MomentsPreloadDownloadWindowBack")
 		}
 	end,
-	getDecodeWindow = function()
+	getDecodeWindow = function() --[[ Line: 32 ]]
 		return {
 			forward = game:GetFastInt("MomentsPreloadDecodeWindowForward"),
 			back = game:GetFastInt("MomentsPreloadDecodeWindowBack")
 		}
 	end,
-	getDecodeRetryDelayMs = function()
+	getDecodeRetryDelayMs = function() --[[ Line: 39 ]]
 		return game:GetFastInt("MomentsPreloadDecodeRetryDelayMs")
 	end,
-	getMaxDecodeRetries = function()
+	getMaxDecodeRetries = function() --[[ Line: 43 ]]
 		return game:GetFastInt("MomentsPreloadMaxDecodeRetries")
 	end,
-	getScreenshotDurationSeconds = function()
+	getScreenshotDurationSeconds = function() --[[ Line: 47 ]]
 		return game:GetFastInt("MomentsScreenshotDurationSeconds")
 	end
 }

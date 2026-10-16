@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Workspace.CrossExperience.CrossExperience)
+﻿return (require(script.Parent.Parent.Parent._Workspace.CrossExperience.CrossExperience))

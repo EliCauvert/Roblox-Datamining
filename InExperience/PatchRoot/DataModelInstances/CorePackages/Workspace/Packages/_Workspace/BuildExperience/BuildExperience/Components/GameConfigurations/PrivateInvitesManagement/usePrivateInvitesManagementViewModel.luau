@@ -1,87 +1,88 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local getPrivatePlaytestersStore = require(parent.DataHydration.PrivatePlaytesters).getPrivatePlaytestersStore
-local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local sendBuildExperienceEventModule = require(buildExperience.Telemetry.sendBuildExperienceEvent)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local GetPrivatePlaytestersStoreFunction = require(Parent.DataHydration.PrivatePlaytesters).getPrivatePlaytestersStore
+local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
+local SendBuildExperienceEventModule = require(BuildExperience.Telemetry.sendBuildExperienceEvent)
 local _ = require(script.Parent.PrivateInvitesManagementView)
 
-return function(p1)
-	-- upvalues: getPrivatePlaytestersStore (ref), reactModule (ref), signalsReactModule (ref), useLocalization (ref), localizationStringsModule (ref), sendBuildExperienceEventModule (ref)
-	local var1 = getPrivatePlaytestersStore(false)
-	local var2 = signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: var1 (ref), p1 (ref)
-		return var1.getAndFetchInvitedPlayers(p1.universeId)
-	end, { var1, p1.universeId }).players)
-	local var6Count = #var2
-	local MAX_INVITES = var1.MAX_INVITES
-	local var3 = useLocalization({
+return function(p1) --[[ Line: 26 | Named "usePrivateInvitesManagementViewModel" ]]
+	-- upvalues: GetPrivatePlaytestersStoreFunction (copy), ReactModule (copy), SignalsReactModule (copy), UseLocalizationFunction (copy), LocalizationStringsModule (copy), SendBuildExperienceEventModule (copy)
+	local PrivatePlaytestersStore = GetPrivatePlaytestersStoreFunction(false)
+	local UseSignalStateResult = SignalsReactModule.useSignalState(ReactModule.useMemo(function() --[[ Line: 28 ]]
+		-- upvalues: PrivatePlaytestersStore (copy), p1 (copy)
+		return PrivatePlaytestersStore.getAndFetchInvitedPlayers(p1.universeId)
+	end, { PrivatePlaytestersStore, p1.universeId }).players)
+	local CountUseSignalStateResult = #UseSignalStateResult
+	local MAXINVITES = PrivatePlaytestersStore.MAX_INVITES
+	local UseLocalizationResult = UseLocalizationFunction({
 		count = {
-			localizationStringsModule.PRIVATE_INVITES_COUNT,
-			COUNT = var6Count,
-			MAX_INVITES = MAX_INVITES
+			LocalizationStringsModule.PRIVATE_INVITES_COUNT,
+			COUNT = CountUseSignalStateResult,
+			MAX_INVITES = MAXINVITES
 		},
-		inviteButton = localizationStringsModule.PRIVATE_INVITES_INVITE_BUTTON,
+		inviteButton = LocalizationStringsModule.PRIVATE_INVITES_INVITE_BUTTON,
 		subtitle = {
-			localizationStringsModule.PRIVATE_INVITES_SUBTITLE,
-			MAX_INVITES = MAX_INVITES
+			LocalizationStringsModule.PRIVATE_INVITES_SUBTITLE,
+			MAX_INVITES = MAXINVITES
 		},
-		title = localizationStringsModule.PRIVATE_INVITES_TITLE
+		title = LocalizationStringsModule.PRIVATE_INVITES_TITLE
 	})
-	local inviteButton = var3.inviteButton
-	local count = var3.count
-	local subtitle = var3.subtitle
-	local title = var3.title
-	local universeId = p1.universeId
-	local var4 = reactModule.useRef(false)
-	reactModule.useEffect(function()
-		-- upvalues: var4 (ref), sendBuildExperienceEventModule (copy), universeId (ref)
-		if var4.current then
+	local InviteButton = UseLocalizationResult.inviteButton
+	local Count = UseLocalizationResult.count
+	local Subtitle = UseLocalizationResult.subtitle
+	local Title = UseLocalizationResult.title
+	local UniverseId = p1.universeId
+	local UseRefResult = ReactModule.useRef(false)
+	ReactModule.useEffect(function() --[[ Line: 55 ]]
+		-- upvalues: UseRefResult (copy), SendBuildExperienceEventModule (upval), UniverseId (copy)
+		if not UseRefResult.current then
+			UseRefResult.current = true
+			SendBuildExperienceEventModule("PLAYTEST_MANAGEMENT_IMPRESSION", { universeId = UniverseId })
+			
 			return
 		end
-		var4.current = true
-		sendBuildExperienceEventModule("PLAYTEST_MANAGEMENT_IMPRESSION", { universeId = universeId })
-	end, { universeId })
-	local var5, var6 = reactModule.useState({})
+	end, { UniverseId })
+	local UseStateResult, UseStateResult2 = ReactModule.useState({})
 	
 	return {
-		title = title,
-		countText = count,
-		subtitle = subtitle,
-		inviteButtonText = inviteButton,
-		userIds = var2,
-		removingUserIds = var5,
-		onRemove = reactModule.useCallback(function(p2)
-			-- upvalues: var6 (ref), var1 (ref), universeId (ref), sendBuildExperienceEventModule (copy)
-			var6(function(p3)
-				-- upvalues: p2 (ref)
-				local cloned = table.clone(p3)
-				cloned[p2] = true
+		title = Title,
+		countText = Count,
+		subtitle = Subtitle,
+		inviteButtonText = InviteButton,
+		userIds = UseSignalStateResult,
+		removingUserIds = UseStateResult,
+		onRemove = ReactModule.useCallback(function(p2) --[[ Line: 65 ]]
+			-- upvalues: UseStateResult2 (copy), PrivatePlaytestersStore (copy), UniverseId (copy), SendBuildExperienceEventModule (upval)
+			UseStateResult2(function(Tbl) --[[ Line: 66 ]]
+				-- upvalues: p2 (copy)
+				local Copy = table.clone(Tbl)
+				Copy[p2] = true
 				
-				return cloned
+				return Copy
 			end)
-			var1.removeInvite(universeId, p2):andThen(function()
-				-- upvalues: sendBuildExperienceEventModule (copy), universeId (copy)
-				sendBuildExperienceEventModule("PLAYTESTER_REMOVED", { universeId = universeId })
-			end):finally(function()
-				-- upvalues: var6 (copy), p2 (ref)
-				var6(function(p3)
-					-- upvalues: p2 (copy)
-					local cloned = table.clone(p3)
-					cloned[p2] = nil
+			PrivatePlaytestersStore.removeInvite(UniverseId, p2):andThen(function() --[[ Line: 73 ]]
+				-- upvalues: SendBuildExperienceEventModule (upval), UniverseId (upval)
+				SendBuildExperienceEventModule("PLAYTESTER_REMOVED", { universeId = UniverseId })
+			end):finally(function() --[[ Line: 76 ]]
+				-- upvalues: UseStateResult2 (upval), p2 (copy)
+				UseStateResult2(function(Tbl) --[[ Line: 77 ]]
+					-- upvalues: p2 (upval)
+					local Copy = table.clone(Tbl)
+					Copy[p2] = nil
 					
-					return cloned
+					return Copy
 				end)
 			end)
-		end, { var1, universeId }),
-		isInviteDisabled = MAX_INVITES <= var6Count,
-		onOpenInvitePicker = reactModule.useCallback(function()
-			-- upvalues: sendBuildExperienceEventModule (copy), universeId (ref), p1 (ref)
-			sendBuildExperienceEventModule("ADD_TO_PLAYTEST_CLICK", { universeId = universeId }, { source = "management_page" })
+		end, { PrivatePlaytestersStore, UniverseId }),
+		isInviteDisabled = MAXINVITES <= CountUseSignalStateResult,
+		onOpenInvitePicker = ReactModule.useCallback(function() --[[ Line: 85 ]]
+			-- upvalues: SendBuildExperienceEventModule (upval), UniverseId (copy), p1 (copy)
+			SendBuildExperienceEventModule("ADD_TO_PLAYTEST_CLICK", { universeId = UniverseId }, { source = "management_page" })
 			p1.onOpenInvitePicker()
-		end, { universeId, p1.onOpenInvitePicker }),
+		end, { UniverseId, p1.onOpenInvitePicker }),
 		layoutOrder = p1.layoutOrder,
 		testId = p1.testId
 	}

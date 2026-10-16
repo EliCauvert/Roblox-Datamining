@@ -1,45 +1,40 @@
-﻿local parent = script.Parent.Parent.Parent
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local t = { InExpServer = true, InExpClient = true }
+﻿local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
+local config = { InExpServer = true, InExpClient = true }
 
 return {
 	categories = {
-		validationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
-		validationEnumsModule.UploadCategory.DYNAMIC_HEAD,
-		validationEnumsModule.UploadCategory.RIGID_ACCESSORY
+		ValidationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
+		ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD,
+		ValidationEnumsModule.UploadCategory.RIGID_ACCESSORY
 	},
 	requiredData = {},
 	expectedFailures = {},
-	run = function(p1, p2)
-		-- upvalues: t (ref), errorSourceStringsModule (ref)
-		local rootInstance = p2.rootInstance
-		local var1 = t[p2.consumerConfig.source] == true
-		local descendants = rootInstance:GetDescendants()
-		table.insert(descendants, rootInstance)
+	run = function(p1, p2) --[[ Line: 32 ]]
+		-- upvalues: config (copy), ErrorSourceStringsModule (copy)
+		local RootInstance = p2.rootInstance
+		local IsEntry = config[p2.consumerConfig.source] == true
+		local Descendants = RootInstance:GetDescendants()
+		table.insert(Descendants, RootInstance)
 		
-		for i, v in descendants do
-			if v:IsA("MeshPart") then
-				local var2 = v.TextureID ~= ""
+		for _, Part in Descendants do
+			if Part:IsA("MeshPart") then
+				local IsNotTextureIDMatch = Part.TextureID ~= ""
 				
-				if var1 and not var2 then
-					local var3
-					local textureContent = v.TextureContent
-					
-					if textureContent.Uri ~= nil then
-						var3 = if textureContent.Uri == "" then textureContent.Object ~= nil else true
-					end
-					var2 = var3
+				if IsEntry and not IsNotTextureIDMatch then
+					local TextureContent = Part.TextureContent
+					IsNotTextureIDMatch = if TextureContent.Uri == nil then TextureContent.Object ~= nil else TextureContent.Uri ~= "" or TextureContent.Object ~= nil
 				end
-				local surfaceAppearance = v:FindFirstChildWhichIsA("SurfaceAppearance")
+				local SurfaceAppearance = Part:FindFirstChildWhichIsA("SurfaceAppearance")
 				
-				if var2 then
-					if surfaceAppearance then
-						p1:fail(errorSourceStringsModule.Keys.SurfaceAppearance_TextureAndSABothDefined, { MeshPartFullName = v:GetFullName() }, v)
+				if IsNotTextureIDMatch then
+					if SurfaceAppearance then
+						p1:fail(ErrorSourceStringsModule.Keys.SurfaceAppearance_TextureAndSABothDefined, { MeshPartFullName = Part:GetFullName() }, Part)
 					end
-				elseif not surfaceAppearance then
-					p1:fail(errorSourceStringsModule.Keys.SurfaceAppearance_MissingSA, { MeshPartFullName = v:GetFullName() }, v)
+				elseif not SurfaceAppearance then
+					p1:fail(ErrorSourceStringsModule.Keys.SurfaceAppearance_MissingSA, { MeshPartFullName = Part:GetFullName() }, Part)
 				end
 			end
 		end

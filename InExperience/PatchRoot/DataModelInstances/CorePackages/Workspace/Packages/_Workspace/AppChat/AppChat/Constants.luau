@@ -69,6 +69,7 @@
 		THUMBNAIL_HEIGHT = 144,
 		FOOTER_HEIGHT = 64
 	},
+	AssetCard = { WIDTH = 256 },
 	NavProps = { WIDE_MODE = "wideMode", TOP_BAR_HEIGHT = "topBarHeight" },
 	OptInVariant = {
 		OsaContextCard = "OsaContextCard",
@@ -79,12 +80,10 @@
 		Decline = "record_dont_show_again"
 	},
 	ModalSequence = { ConversationListOverlay = "conversation_list_overlay" },
-	GetPresenceIndicatorSizeKey = function(p1, p2)
-		local _ = nil
-		
+	GetPresenceIndicatorSizeKey = function(p1, p2) --[[ Line: 112 ]]
 		return if p2 == 6 then p1.PresenceIndicatorSize.Size6x6 elseif p2 == 8 then p1.PresenceIndicatorSize.Size8x8 elseif p2 == 10 then p1.PresenceIndicatorSize.Size10x10 elseif p2 == 12 then p1.PresenceIndicatorSize.Size12x12 elseif p2 == 14 then p1.PresenceIndicatorSize.Size14x14 else p1.PresenceIndicatorSize.DEFAULT
 	end,
-	GetIconButtonWidth = function(_, p1)
+	GetIconButtonWidth = function(_, p1): number --[[ Line: 130 ]]
 		return if p1 then 44 else 34
 	end
 }

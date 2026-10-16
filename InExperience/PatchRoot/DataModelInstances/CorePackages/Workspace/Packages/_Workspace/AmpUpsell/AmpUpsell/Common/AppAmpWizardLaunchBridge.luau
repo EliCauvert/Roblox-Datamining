@@ -1,23 +1,24 @@
 ﻿local _ = require(script.Parent.Types)
-local var1 = require(script:FindFirstAncestor("AmpUpsell").Parent.AppCommonLib).Signal.new()
+local NewResult = require(script:FindFirstAncestor("AmpUpsell").Parent.AppCommonLib).Signal.new()
 
 return {
-	requestOpen = function(p1)
-		-- upvalues: var1 (ref)
-		local t = { handled = false, params = p1 }
-		var1:fire(t)
+	requestOpen = function(Params) --[[ Line: 26 ]]
+		-- upvalues: NewResult (copy)
+		local config = { handled = false, params = Params }
+		NewResult:fire(config)
 		
-		return t.handled
+		return config.handled
 	end,
-	subscribe = function(p1)
-		-- upvalues: var1 (ref)
-		return var1:connect(function(p2)
-			-- upvalues: p1 (ref)
-			if p2.handled then
+	subscribe = function(Callback) --[[ Line: 33 ]]
+		-- upvalues: NewResult (copy)
+		return NewResult:connect(function(p1) --[[ Line: 34 ]]
+			-- upvalues: Callback (copy)
+			if not p1.handled then
+				p1.handled = true
+				Callback(p1.params)
+				
 				return
 			end
-			p2.handled = true
-			p1(p2.params)
 		end)
 	end
 }

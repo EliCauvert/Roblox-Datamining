@@ -1,8 +1,8 @@
-﻿local parent = script:FindFirstAncestor("TopicInfosRodux").Parent
-local discoveryTypesModule = require(parent.DiscoveryTypes)
-local fFlagSearchOmniAutocompletePage = require(parent.SharedFlags).FFlagSearchOmniAutocompletePage
-local fFlagEnableTopSongsSort = require(parent.SharedFlags).FFlagEnableTopSongsSort
-local t = {
+﻿local Parent = script:FindFirstAncestor("TopicInfosRodux").Parent
+local DiscoveryTypesModule = require(Parent.DiscoveryTypes)
+local FFlagSearchOmniAutocompletePage = require(Parent.SharedFlags).FFlagSearchOmniAutocompletePage
+local FFlagEnableTopSongsSort = require(Parent.SharedFlags).FFlagEnableTopSongsSort
+local config = {
 	default = "LuaApp/category/filter_default",
 	Featured = "LuaApp/category/filter_featured",
 	FriendActivity = "LuaApp/category/filter_friendsplaying",
@@ -14,130 +14,130 @@ local t = {
 	TopRated = "LuaApp/category/filter_toprated",
 	TopRetaining = "LuaApp/category/filter_recommended"
 }
-local t_1 = {}
-t_1.__index = t_1
+local TopicInfoModelModule = {}
+TopicInfoModelModule.__index = TopicInfoModelModule
 
-function t_1.new()
-	-- upvalues: discoveryTypesModule (ref), t_1 (ref)
-	local t = { dataSource = discoveryTypesModule.DataSourceType.Unknown }
-	setmetatable(t, t_1)
+function TopicInfoModelModule.new() --[[ Line: 37 ]]
+	-- upvalues: DiscoveryTypesModule (copy), TopicInfoModelModule (copy)
+	local config = { dataSource = DiscoveryTypesModule.DataSourceType.Unknown }
+	setmetatable(config, TopicInfoModelModule)
 	
-	return t
+	return config
 end
 
-function t_1.mockFromExploreJsonData(p1, p2, p3)
-	-- upvalues: t_1 (ref)
-	return t_1.fromExploreJsonData({
+function TopicInfoModelModule.mockFromExploreJsonData(SortId, TreatmentType, p1) --[[ Line: 47 ]]
+	-- upvalues: TopicInfoModelModule (copy)
+	return (TopicInfoModelModule.fromExploreJsonData({
 		sortDisplayName = "",
 		gameSetTargetId = 0,
-		sortId = p1,
-		gameSetTypeId = p3 or 0,
+		sortId = SortId,
+		gameSetTypeId = p1 or 0,
 		topicLayoutData = {},
-		treatmentType = p2
-	})
+		treatmentType = TreatmentType
+	}))
 end
 
-function t_1.mockFromOmniApi(p1)
-	-- upvalues: t_1 (ref)
-	return t_1.fromOmniApi({ topic = "", treatmentType = "", topicId = p1 })
+function TopicInfoModelModule.mockFromOmniApi(TopicId) --[[ Line: 60 ]]
+	-- upvalues: TopicInfoModelModule (copy)
+	return (TopicInfoModelModule.fromOmniApi({ topic = "", treatmentType = "", topicId = TopicId }))
 end
 
-function t_1:fromExploreJsonData()
-	-- upvalues: t_1 (ref), discoveryTypesModule (ref), fFlagEnableTopSongsSort (ref), t (ref)
-	local var1 = t_1.new()
-	var1.dataSource = discoveryTypesModule.DataSourceType.ExploreApi
-	var1.displayName = self.sortDisplayName
-	var1.name = self.sortId
-	var1.subtitle = self.subtitle
-	var1.token = ""
-	var1.gameSetTargetId = self.gameSetTargetId
-	var1.gameSetTypeId = tostring(self.gameSetTypeId)
-	var1.topicLayoutData = self.topicLayoutData
-	var1.treatmentType = self.treatmentType
-	var1.appliedFilters = self.appliedFilters
-	var1.subtitle = self.subtitle
+function TopicInfoModelModule:fromExploreJsonData() --[[ Line: 69 ]]
+	-- upvalues: TopicInfoModelModule (copy), DiscoveryTypesModule (copy), FFlagEnableTopSongsSort (copy), config (copy)
+	local NewTopicInfoModel = TopicInfoModelModule.new()
+	NewTopicInfoModel.dataSource = DiscoveryTypesModule.DataSourceType.ExploreApi
+	NewTopicInfoModel.displayName = self.sortDisplayName
+	NewTopicInfoModel.name = self.sortId
+	NewTopicInfoModel.subtitle = self.subtitle
+	NewTopicInfoModel.token = ""
+	NewTopicInfoModel.gameSetTargetId = self.gameSetTargetId
+	NewTopicInfoModel.gameSetTypeId = tostring(self.gameSetTypeId)
+	NewTopicInfoModel.topicLayoutData = self.topicLayoutData
+	NewTopicInfoModel.treatmentType = self.treatmentType
+	NewTopicInfoModel.appliedFilters = self.appliedFilters
+	NewTopicInfoModel.subtitle = self.subtitle
 	
-	if fFlagEnableTopSongsSort then
-		var1.contentType = self.contentType
+	if FFlagEnableTopSongsSort then
+		NewTopicInfoModel.contentType = self.contentType
 	end
-	if var1.name ~= nil then
-		var1.displayIcon = t[var1.name]
+	if NewTopicInfoModel.name ~= nil then
+		NewTopicInfoModel.displayIcon = config[NewTopicInfoModel.name]
 	end
-	if var1.displayIcon == nil then
-		var1.displayIcon = "LuaApp/category/filter_default"
+	if NewTopicInfoModel.displayIcon == nil then
+		NewTopicInfoModel.displayIcon = "LuaApp/category/filter_default"
 	end
-	var1.uniqueKey = var1.name
-	var1.analyticsTypeId = var1.gameSetTypeId
+	NewTopicInfoModel.uniqueKey = NewTopicInfoModel.name
+	NewTopicInfoModel.analyticsTypeId = NewTopicInfoModel.gameSetTypeId
 	
-	return var1
+	return NewTopicInfoModel
 end
 
-function t_1:fromOmniApi()
-	-- upvalues: t_1 (ref), discoveryTypesModule (ref)
-	local var1 = t_1.new()
-	var1.dataSource = discoveryTypesModule.DataSourceType.DiscoveryApi
-	var1.displayName = self.topic
-	var1.topicId = tostring(self.topicId)
-	var1.subtitle = self.subtitle
-	var1.sortSubId = self.sortSubId
-	var1.analyticsData = self.analyticsData
-	var1.treatmentType = self.treatmentType
-	var1.uniqueKey = var1.topicId
-	var1.analyticsTypeId = var1.topicId
+function TopicInfoModelModule:fromOmniApi() --[[ Line: 101 ]]
+	-- upvalues: TopicInfoModelModule (copy), DiscoveryTypesModule (copy)
+	local NewTopicInfoModel = TopicInfoModelModule.new()
+	NewTopicInfoModel.dataSource = DiscoveryTypesModule.DataSourceType.DiscoveryApi
+	NewTopicInfoModel.displayName = self.topic
+	NewTopicInfoModel.topicId = tostring(self.topicId)
+	NewTopicInfoModel.subtitle = self.subtitle
+	NewTopicInfoModel.sortSubId = self.sortSubId
+	NewTopicInfoModel.analyticsData = self.analyticsData
+	NewTopicInfoModel.treatmentType = self.treatmentType
+	NewTopicInfoModel.uniqueKey = NewTopicInfoModel.topicId
+	NewTopicInfoModel.analyticsTypeId = NewTopicInfoModel.topicId
 	
-	return var1
+	return NewTopicInfoModel
 end
 
-if fFlagSearchOmniAutocompletePage then
-	function t_1:fromOmniAutocompleteApi()
-		-- upvalues: t_1 (ref), discoveryTypesModule (ref)
-		local var1 = t_1.new()
-		var1.dataSource = discoveryTypesModule.DataSourceType.OmniAutocompleteApi
-		var1.displayName = self.sortDisplayName
-		var1.name = self.sortId
-		var1.topicLayoutData = self.topicLayoutData or {}
-		var1.uniqueKey = var1.name
-		var1.analyticsTypeId = var1.name
-		var1.gameSetTypeId = var1.name
+if FFlagSearchOmniAutocompletePage then
+	function TopicInfoModelModule:fromOmniAutocompleteApi() --[[ Line: 118 ]]
+		-- upvalues: TopicInfoModelModule (copy), DiscoveryTypesModule (copy)
+		local NewTopicInfoModel = TopicInfoModelModule.new()
+		NewTopicInfoModel.dataSource = DiscoveryTypesModule.DataSourceType.OmniAutocompleteApi
+		NewTopicInfoModel.displayName = self.sortDisplayName
+		NewTopicInfoModel.name = self.sortId
+		NewTopicInfoModel.topicLayoutData = self.topicLayoutData or {}
+		NewTopicInfoModel.uniqueKey = NewTopicInfoModel.name
+		NewTopicInfoModel.analyticsTypeId = NewTopicInfoModel.name
+		NewTopicInfoModel.gameSetTypeId = NewTopicInfoModel.name
 		
-		return var1
+		return NewTopicInfoModel
 	end
 end
-function t_1.makeTopSearchTopicKey(p1, p2)
-	return `{p1}_{p2}`
+function TopicInfoModelModule.makeTopSearchTopicKey(SearchUuid, TopicId): string --[[ Line: 133 ]]
+	return `{SearchUuid}_{TopicId}`
 end
 
-function t_1:fromTopSearchApi(p1)
-	-- upvalues: t_1 (ref), discoveryTypesModule (ref)
-	local var1 = t_1.new()
-	var1.dataSource = discoveryTypesModule.DataSourceType.SearchApi
-	var1.topicId = tostring(self.topicId)
-	var1.treatmentType = self.treatmentType
-	var1.topicLayoutData = self.topicLayoutData or {}
-	var1.searchUuid = p1
-	var1.uniqueKey = t_1.makeTopSearchTopicKey(var1.searchUuid, var1.topicId)
-	var1.analyticsTypeId = var1.uniqueKey
+function TopicInfoModelModule:fromTopSearchApi(SearchUuid) --[[ Line: 137 ]]
+	-- upvalues: TopicInfoModelModule (copy), DiscoveryTypesModule (copy)
+	local NewTopicInfoModel = TopicInfoModelModule.new()
+	NewTopicInfoModel.dataSource = DiscoveryTypesModule.DataSourceType.SearchApi
+	NewTopicInfoModel.topicId = tostring(self.topicId)
+	NewTopicInfoModel.treatmentType = self.treatmentType
+	NewTopicInfoModel.topicLayoutData = self.topicLayoutData or {}
+	NewTopicInfoModel.searchUuid = SearchUuid
+	NewTopicInfoModel.uniqueKey = TopicInfoModelModule.makeTopSearchTopicKey(NewTopicInfoModel.searchUuid, NewTopicInfoModel.topicId)
+	NewTopicInfoModel.analyticsTypeId = NewTopicInfoModel.uniqueKey
 	
-	return var1
+	return NewTopicInfoModel
 end
 
-function t_1.makeSearchTopicKey(p1, p2)
-	-- upvalues: t_1 (ref)
-	return t_1.makeTopSearchTopicKey(p1, p2)
+function TopicInfoModelModule.makeSearchTopicKey(p1, p2) --[[ Line: 151 ]]
+	-- upvalues: TopicInfoModelModule (copy)
+	return TopicInfoModelModule.makeTopSearchTopicKey(p1, p2)
 end
 
-function t_1.fromSearchApi(p1, p2)
-	-- upvalues: t_1 (ref)
-	return t_1.fromTopSearchApi(p1, p2)
+function TopicInfoModelModule.fromSearchApi(p1, SearchUuid) --[[ Line: 155 ]]
+	-- upvalues: TopicInfoModelModule (copy)
+	return TopicInfoModelModule.fromTopSearchApi(p1, SearchUuid)
 end
 
-function t_1:isOmni()
-	-- upvalues: discoveryTypesModule (ref)
-	return self.dataSource == discoveryTypesModule.DataSourceType.DiscoveryApi
+function TopicInfoModelModule:isOmni(): boolean --[[ Line: 159 ]]
+	-- upvalues: DiscoveryTypesModule (copy)
+	return self.dataSource == DiscoveryTypesModule.DataSourceType.DiscoveryApi
 end
 
-function t_1:isSponsored()
+function TopicInfoModelModule:isSponsored(): boolean --[[ Line: 167 ]]
 	return self.topicId == "400000000" or self.gameSetTypeId == "27"
 end
 
-return t_1
+return TopicInfoModelModule

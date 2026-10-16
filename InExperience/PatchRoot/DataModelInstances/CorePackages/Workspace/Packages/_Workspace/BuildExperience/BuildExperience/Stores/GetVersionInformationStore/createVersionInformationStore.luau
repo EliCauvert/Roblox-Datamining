@@ -1,30 +1,34 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local _ = require(parent.Signals)
-local createSessionScopedSignal = require(parent.SignalsUtils).createSessionScopedSignal
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local _ = require(Parent.Signals)
+local CreateSessionScopedSignalFunction = require(Parent.SignalsUtils).createSessionScopedSignal
 
-return function()
-	-- upvalues: createSessionScopedSignal (ref)
-	local var1, var2 = createSessionScopedSignal(function()
+return function() --[[ Line: 20 | Named "createVersionInformationStore" ]]
+	-- upvalues: CreateSessionScopedSignalFunction (copy)
+	local SessionScopedSignal, SessionScopedSignal2 = CreateSessionScopedSignalFunction(function() --[[ Line: 22 ]]
 		return nil
 	end)
 	
 	return {
-		getDraft = var1,
-		setDraft = function(p1, p2, p3)
-			-- upvalues: var2 (ref)
-			var2({ placeId = p1, title = p2, description = p3 })
+		getDraft = SessionScopedSignal,
+		setDraft = function(PlaceId, Title, Description) --[[ Line: 27 ]]
+			-- upvalues: SessionScopedSignal2 (copy)
+			SessionScopedSignal2({
+				placeId = PlaceId,
+				title = Title,
+				description = Description
+			})
 		end,
-		clearDraft = function(p1)
-			-- upvalues: var1 (ref), var2 (ref)
-			local var3 = var1()
+		clearDraft = function(PlaceId) --[[ Line: 35 ]]
+			-- upvalues: SessionScopedSignal (copy), SessionScopedSignal2 (copy)
+			local SessionScopedSignalResult = SessionScopedSignal()
 			
-			if var3 ~= nil and var3.placeId == p1 then
-				var2(nil)
+			if SessionScopedSignalResult ~= nil and SessionScopedSignalResult.placeId == PlaceId then
+				SessionScopedSignal2(nil)
 			end
 		end,
-		reset = function()
-			-- upvalues: var2 (ref)
-			var2(nil)
+		reset = function() --[[ Line: 42 ]]
+			-- upvalues: SessionScopedSignal2 (copy)
+			SessionScopedSignal2(nil)
 		end
 	}
 end

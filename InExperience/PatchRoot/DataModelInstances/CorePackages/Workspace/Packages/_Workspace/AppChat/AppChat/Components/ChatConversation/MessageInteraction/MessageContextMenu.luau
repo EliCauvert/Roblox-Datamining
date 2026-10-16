@@ -1,59 +1,59 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local _ = require(appChat.types)
-local signal = require(parent.AppCommonLib).Signal
-local deviceType = require(parent.RobloxAppEnums).DeviceType
-local loggerModule = require(script.Parent.Logger)
-local eventNamesModule = require(appChat.Analytics.EventNames)
-local appChatNetworkingModule = require(parent.AppChatNetworking)
-local UIBloxModule = require(parent.UIBlox)
-local images = UIBloxModule.App.ImageSet.Images
-local peekView = require(parent.PeekView).PeekView
-local peekViewState = require(parent.PeekView).PeekViewState
-local contextualMenu = UIBloxModule.App.Menu.ContextualMenu
-local menuDirection = UIBloxModule.App.Menu.MenuDirection
-local default = require(parent.ExternalContentSharingProtocol).ExternalContentSharingProtocol.default
-local useStyle = UIBloxModule.Core.Style.useStyle
-local useDeviceType = require(parent.RobloxAppHooks).useDeviceType
-local useNavigation = require(parent.Navigation).useNavigation
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local getReplyingToStoreModule = require(appChat.Stores.GetReplyingToStore)
-local useReplyingToMessageDispatchModule = require(appChat.Components.ChatConversation.MessageInteraction.ReplyingContext.useReplyingToMessageDispatch)
-local fFlagAppChatSignalsReplyStoreModule = require(appChat.Flags.FFlagAppChatSignalsReplyStore)
-local useLayerCollector = UIBloxModule.Core.Layout.LayerCollector.useLayerCollector
-local useAnalyticsModule = require(appChat.Analytics.useAnalytics)
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local getFFlagAppChatEnableManualTranslationModule = require(appChat.Flags.getFFlagAppChatEnableManualTranslation)
-local t = {
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local _ = require(AppChat.types)
+local Signal = require(Parent.AppCommonLib).Signal
+local DeviceType = require(Parent.RobloxAppEnums).DeviceType
+local LoggerModule = require(script.Parent.Logger)
+local EventNamesModule = require(AppChat.Analytics.EventNames)
+local AppChatNetworkingModule = require(Parent.AppChatNetworking)
+local UIBloxModule = require(Parent.UIBlox)
+local Images = UIBloxModule.App.ImageSet.Images
+local PeekView = require(Parent.PeekView).PeekView
+local PeekViewState = require(Parent.PeekView).PeekViewState
+local ContextualMenu = UIBloxModule.App.Menu.ContextualMenu
+local MenuDirection = UIBloxModule.App.Menu.MenuDirection
+local Default = require(Parent.ExternalContentSharingProtocol).ExternalContentSharingProtocol.default
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local UseDeviceTypeFunction = require(Parent.RobloxAppHooks).useDeviceType
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local GetReplyingToStoreModule = require(AppChat.Stores.GetReplyingToStore)
+local UseReplyingToMessageDispatchModule = require(AppChat.Components.ChatConversation.MessageInteraction.ReplyingContext.useReplyingToMessageDispatch)
+local FFlagAppChatSignalsReplyStoreModule = require(AppChat.Flags.FFlagAppChatSignalsReplyStore)
+local UseLayerCollectorFunction = UIBloxModule.Core.Layout.LayerCollector.useLayerCollector
+local UseAnalyticsModule = require(AppChat.Analytics.useAnalytics)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local GetFFlagAppChatEnableManualTranslationModule = require(AppChat.Flags.getFFlagAppChatEnableManualTranslation)
+local config = {
 	message = nil,
 	userOwnsMessage = false,
 	unitTestDeviceType = nil,
 	unitTestScreenSize = nil,
-	inputBoxRef = reactModule.createRef()
+	inputBoxRef = ReactModule.createRef()
 }
 
-if t.unitTestDeviceType ~= nil then
-	loggerModule:error("Default unit test device type must ALWAYS BE NIL!")
+if config.unitTestDeviceType ~= nil then
+	LoggerModule:error("Default unit test device type must ALWAYS BE NIL!")
 	error("Default unit test device type was not nil.")
 end
-if t.unitTestScreenSize ~= nil then
-	loggerModule:error("Default unit test screen size must ALWAYS BE NIL!")
+if config.unitTestScreenSize ~= nil then
+	LoggerModule:error("Default unit test screen size must ALWAYS BE NIL!")
 	error("Default unit test screen size was not nil.")
 end
-function MessageContextMenu(p1)
-	-- upvalues: cryoModule (ref), t (ref), fFlagAppChatSignalsReplyStoreModule (ref), getReplyingToStoreModule (ref), useReplyingToMessageDispatchModule (ref), useStyle (ref), reactModule (ref), signal (ref), useLayerCollector (ref), useNavigation (ref), useDeviceType (ref), useAnalyticsModule (ref), useLocalization (ref), peekViewState (ref), eventNamesModule (ref), deviceType (ref), default (ref), getFFlagAppChatEnableManualTranslationModule (ref), useDispatch (ref), appChatNetworkingModule (ref), loggerModule (ref), images (ref), contextualMenu (ref), menuDirection (ref), peekView (ref)
-	local var1 = cryoModule.Dictionary.union(t, p1)
-	local var2 = if fFlagAppChatSignalsReplyStoreModule then getReplyingToStoreModule(false) else nil
-	local var3 = useReplyingToMessageDispatchModule()
-	local tokens = useStyle().Tokens
-	local var4 = reactModule.useRef(signal.new())
-	local unitTestScreenSize = var1.unitTestScreenSize or useLayerCollector().absoluteSize
-	local var5 = useNavigation()
-	local unitTestDeviceType = var1.unitTestDeviceType or useDeviceType()
-	local var6 = useAnalyticsModule()
-	local var7 = useLocalization({
+function MessageContextMenu(p1) --[[ Line: 86 ]]
+	-- upvalues: CryoModule (copy), config (copy), FFlagAppChatSignalsReplyStoreModule (copy), GetReplyingToStoreModule (copy), UseReplyingToMessageDispatchModule (copy), UseStyleFunction (copy), ReactModule (copy), Signal (copy), UseLayerCollectorFunction (copy), UseNavigationFunction (copy), UseDeviceTypeFunction (copy), UseAnalyticsModule (copy), UseLocalizationFunction (copy), PeekViewState (copy), EventNamesModule (copy), DeviceType (copy), Default (copy), GetFFlagAppChatEnableManualTranslationModule (copy), UseDispatchFunction (copy), AppChatNetworkingModule (copy), LoggerModule (copy), Images (copy), ContextualMenu (copy), MenuDirection (copy), PeekView (copy)
+	local UnionResult = CryoModule.Dictionary.union(config, p1)
+	local ReplyingToStoreModule = if FFlagAppChatSignalsReplyStoreModule then GetReplyingToStoreModule(false) else nil
+	local UseReplyingToMessageDispatchModuleResult = UseReplyingToMessageDispatchModule()
+	local Tokens = UseStyleFunction().Tokens
+	local UseRefResult = ReactModule.useRef(Signal.new())
+	local UnitTestScreenSize = UnionResult.unitTestScreenSize or UseLayerCollectorFunction().absoluteSize
+	local UseNavigationResult = UseNavigationFunction()
+	local UnitTestDeviceType = UnionResult.unitTestDeviceType or UseDeviceTypeFunction()
+	local UseAnalyticsModuleResult = UseAnalyticsModule()
+	local UseLocalizationResult = UseLocalizationFunction({
 		replyText = "Feature.Chat.Action.Reply",
 		copyText = "Feature.Chat.Action.Copy",
 		editText = "Feature.Chat.Action.Edit",
@@ -61,207 +61,212 @@ function MessageContextMenu(p1)
 		reportText = "Feature.Chat.Action.Report",
 		translateText = "Feature.Chat.Action.Translate"
 	})
-	local var8 = reactModule.useCallback(function(p2)
-		-- upvalues: var6 (ref), var1 (ref)
-		if var6 then
-			var6.fireAnalyticsEvent(p2, {
-				conversationId = if var1.message then var1.message.conversationId else nil,
-				targetMessageSenderId = if var1.message then var1.message.senderTargetId else nil,
-				targetMessageId = if var1.message then var1.message.id else nil,
-				targetMessageSentAt = if var1.message and var1.message.sent then tostring(var1.message.sent.dateTime) else nil,
-				targetMessageLength = if var1.message and var1.message.content then #var1.message.content else nil
+	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 112 ]]
+		-- upvalues: UseAnalyticsModuleResult (copy), UnionResult (copy)
+		if UseAnalyticsModuleResult then
+			UseAnalyticsModuleResult.fireAnalyticsEvent(p2, {
+				conversationId = if UnionResult.message then UnionResult.message.conversationId else nil,
+				targetMessageSenderId = if UnionResult.message then UnionResult.message.senderTargetId else nil,
+				targetMessageId = if UnionResult.message then UnionResult.message.id else nil,
+				targetMessageSentAt = if UnionResult.message and UnionResult.message.sent then tostring(UnionResult.message.sent.dateTime) else nil,
+				targetMessageLength = if UnionResult.message and UnionResult.message.content then #UnionResult.message.content else nil
 			})
 		end
-	end, { var1.message })
-	local var9 = reactModule.useRef(false)
-	local var10 = reactModule.useCallback(function()
-		-- upvalues: var1 (ref)
-		if var1.inputBoxRef and var1.inputBoxRef.current then
-			var1.inputBoxRef.current:CaptureFocus()
+	end, { UnionResult.message })
+	local UseRefResult1 = ReactModule.useRef(false)
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 132 ]]
+		-- upvalues: UnionResult (copy)
+		if UnionResult.inputBoxRef and UnionResult.inputBoxRef.current then
+			UnionResult.inputBoxRef.current:CaptureFocus()
 		end
-	end, { var1.inputBoxRef })
-	local var11 = reactModule.useCallback(function()
-		-- upvalues: var5 (ref)
-		var5.goBack()
-	end, { var5 and var5.goBack })
-	local var12 = reactModule.useCallback(function()
-		-- upvalues: var4 (ref)
-		var4.current:fire()
-	end, { var4.current })
-	local var13 = reactModule.useCallback(function(p2, _)
-		-- upvalues: peekViewState (copy), var11 (ref)
-		if p2 == peekViewState.Closed then
-			var11()
+	end, { UnionResult.inputBoxRef })
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 139 ]]
+		-- upvalues: UseNavigationResult (copy)
+		UseNavigationResult.goBack()
+	end, { UseNavigationResult and UseNavigationResult.goBack })
+	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 144 ]]
+		-- upvalues: UseRefResult (copy)
+		UseRefResult.current:fire()
+	end, { UseRefResult.current })
+	local UseResult4 = ReactModule.useCallback(function(Closed, _) --[[ Line: 150 ]]
+		-- upvalues: PeekViewState (upval), UseResult2 (copy)
+		if Closed == PeekViewState.Closed then
+			UseResult2()
 		end
-	end, { var11 })
-	reactModule.useEffect(function()
-		-- upvalues: var8 (ref), eventNamesModule (copy), var1 (ref), var9 (ref)
-		var8(eventNamesModule.ChatMessageMenuOpened)
+	end, { UseResult2 })
+	ReactModule.useEffect(function() --[[ Line: 156 ]]
+		-- upvalues: UseResult (copy), EventNamesModule (upval), UnionResult (copy), UseRefResult1 (copy)
+		UseResult(EventNamesModule.ChatMessageMenuOpened)
 		
-		if var1.inputBoxRef and var1.inputBoxRef.current then
-			var9.current = var1.inputBoxRef.current:IsFocused()
+		if UnionResult.inputBoxRef and UnionResult.inputBoxRef.current then
+			UseRefResult1.current = UnionResult.inputBoxRef.current:IsFocused()
 		end
 	end, {})
-	local var14 = reactModule.useCallback(function()
-		-- upvalues: unitTestDeviceType (ref), deviceType (copy), var12 (ref), var11 (ref)
-		if unitTestDeviceType == deviceType.Phone then
-			var12()
+	local UseResult5 = ReactModule.useCallback(function() --[[ Line: 165 ]]
+		-- upvalues: UnitTestDeviceType (copy), DeviceType (upval), UseResult3 (copy), UseResult2 (copy)
+		if UnitTestDeviceType == DeviceType.Phone then
+			UseResult3()
 			
 			return
-		end
-		var11()
-	end, { unitTestDeviceType, var12, var11 })
-	local var15 = reactModule.useCallback(function()
-		-- upvalues: var14 (ref), var9 (ref), var10 (ref)
-		var14()
-		
-		if var9.current then
-			var10()
-		end
-	end, { var14, var9.current, var10 })
-	local var16 = reactModule.useCallback(function()
-		-- upvalues: var8 (ref), eventNamesModule (copy), var14 (ref), fFlagAppChatSignalsReplyStoreModule (copy), var2 (ref), var1 (ref), var3 (ref), var10 (ref)
-		var8(eventNamesModule.ChatMessageMenuReplyBtnActivated)
-		var14()
-		
-		if fFlagAppChatSignalsReplyStoreModule and var2 then
-			var2.setReplyingTo(var1.message.id)
 		else
-			var3(var1.message)
+			UseResult2()
 		end
-		var10()
+	end, { UnitTestDeviceType, UseResult3, UseResult2 })
+	local UseResult6 = ReactModule.useCallback(function() --[[ Line: 173 ]]
+		-- upvalues: UseResult5 (copy), UseRefResult1 (copy), UseResult1 (copy)
+		UseResult5()
+		
+		if UseRefResult1.current then
+			UseResult1()
+		end
+	end, { UseResult5, UseRefResult1.current, UseResult1 })
+	local UseResult7 = ReactModule.useCallback(function() --[[ Line: 181 ]]
+		-- upvalues: UseResult (copy), EventNamesModule (upval), UseResult5 (copy), FFlagAppChatSignalsReplyStoreModule (upval), ReplyingToStoreModule (copy), UnionResult (copy), UseReplyingToMessageDispatchModuleResult (copy), UseResult1 (copy)
+		UseResult(EventNamesModule.ChatMessageMenuReplyBtnActivated)
+		UseResult5()
+		
+		if FFlagAppChatSignalsReplyStoreModule and ReplyingToStoreModule then
+			ReplyingToStoreModule.setReplyingTo(UnionResult.message.id)
+		else
+			UseReplyingToMessageDispatchModuleResult(UnionResult.message)
+		end
+		UseResult1()
 	end, {
-		var8, var14, if fFlagAppChatSignalsReplyStoreModule then var2 else nil,
-		var3, var1.message, var10
+		UseResult, UseResult5,
+		if FFlagAppChatSignalsReplyStoreModule then ReplyingToStoreModule else nil,
+		UseReplyingToMessageDispatchModuleResult, UnionResult.message, UseResult1
 	})
-	local var17 = reactModule.useCallback(function()
-		-- upvalues: var8 (ref), eventNamesModule (copy), var14 (ref), default (copy), var1 (ref)
-		var8(eventNamesModule.ChatMessageMenuCopyBtnActivated)
-		var14()
-		default:shareText({
+	local UseResult8 = ReactModule.useCallback(function() --[[ Line: 205 ]]
+		-- upvalues: UseResult (copy), EventNamesModule (upval), UseResult5 (copy), Default (upval), UnionResult (copy)
+		UseResult(EventNamesModule.ChatMessageMenuCopyBtnActivated)
+		UseResult5()
+		Default:shareText({
 			context = "AppChat-ChatConversation-MessageContextMenu",
-			text = var1.message.content
+			text = UnionResult.message.content
 		})
-	end, { var8, var14, var1.message })
-	local var18 = reactModule.useCallback(function() end)
-	local var19 = reactModule.useCallback(function() end)
-	local var20 = nil
+	end, { UseResult, UseResult5, UnionResult.message })
+	local UseResult9 = ReactModule.useCallback(function() --[[ Line: 220 ]] end)
+	local UseResult10 = ReactModule.useCallback(function() --[[ Line: 224 ]] end)
+	local UseResult11 = nil
 	
-	if getFFlagAppChatEnableManualTranslationModule() then
-		local var21 = useDispatch()
-		var20 = reactModule.useCallback(function()
-			-- upvalues: var14 (ref), var21 (ref), appChatNetworkingModule (copy), var1 (ref), loggerModule (copy)
-			var14()
-			var21(appChatNetworkingModule.rodux.TranslateUserMessage.API(var1.message.conversationId, var1.message.id)):catch(function(p2)
-				-- upvalues: loggerModule (copy)
-				loggerModule:error("Error translating message: ", p2)
+	if GetFFlagAppChatEnableManualTranslationModule() then
+		local UseDispatchResult = UseDispatchFunction()
+		UseResult11 = ReactModule.useCallback(function() --[[ Line: 232 ]]
+			-- upvalues: UseResult5 (copy), UseDispatchResult (copy), AppChatNetworkingModule (upval), UnionResult (copy), LoggerModule (upval)
+			UseResult5()
+			UseDispatchResult(AppChatNetworkingModule.rodux.TranslateUserMessage.API(UnionResult.message.conversationId, UnionResult.message.id)):catch(function(Err) --[[ Line: 236 ]]
+				-- upvalues: LoggerModule (upval)
+				LoggerModule:error("Error translating message: ", Err)
 			end)
-		end, { var1.message, var14, var21 })
+		end, { UnionResult.message, UseResult5, UseDispatchResult })
 	end
-	local var22, vector2, vector2_1, uDim, uDim_1
-	local var23 = reactModule.useCallback(function() end)
-	local var24 = reactModule.useMemo(function()
-		-- upvalues: images (copy), var7 (ref), var16 (ref), var17 (ref), var1 (ref), var18 (ref), tokens (ref), var19 (ref), getFFlagAppChatEnableManualTranslationModule (copy), var20 (write), var23 (ref)
-		local list = {
+	local UseResult12 = ReactModule.useCallback(function() --[[ Line: 248 ]] end)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 253 ]]
+		-- upvalues: Images (upval), UseLocalizationResult (copy), UseResult7 (copy), UseResult8 (copy), UnionResult (copy), UseResult9 (copy), Tokens (copy), UseResult10 (copy), GetFFlagAppChatEnableManualTranslationModule (upval), UseResult11 (ref), UseResult12 (copy)
+		local List = {
 			{
-				icon = images["icons/placeholder/placeholderOff"],
-				text = var7.replyText,
-				onActivated = var16
+				icon = Images["icons/placeholder/placeholderOff"],
+				text = UseLocalizationResult.replyText,
+				onActivated = UseResult7
 			},
 			{
-				icon = images["icons/actions/edit/copy"],
-				text = var7.copyText,
-				onActivated = var17
+				icon = Images["icons/actions/edit/copy"],
+				text = UseLocalizationResult.copyText,
+				onActivated = UseResult8
 			}
 		}
 		
-		if var1.userOwnsMessage then
-			table.insert(list, {
-				icon = images["icons/actions/edit/edit"],
-				text = var7.editText,
-				onActivated = var18
+		if UnionResult.userOwnsMessage then
+			table.insert(List, {
+				icon = Images["icons/actions/edit/edit"],
+				text = UseLocalizationResult.editText,
+				onActivated = UseResult9
 			})
-			table.insert(list, {
-				icon = images["icons/actions/edit/delete"],
-				iconColorOverride = tokens.Color.System.Alert.Color3,
-				text = var7.deleteText,
-				textColorOverride = tokens.Color.System.Alert.Color3,
-				onActivated = var19
+			table.insert(List, {
+				icon = Images["icons/actions/edit/delete"],
+				iconColorOverride = Tokens.Color.System.Alert.Color3,
+				text = UseLocalizationResult.deleteText,
+				textColorOverride = Tokens.Color.System.Alert.Color3,
+				onActivated = UseResult10
 			})
 			
-			return list
-		elseif getFFlagAppChatEnableManualTranslationModule() then
-			table.insert(list, {
+			return List
+		end
+		if GetFFlagAppChatEnableManualTranslationModule() then
+			table.insert(List, {
 				text = "Translate",
-				icon = images["icons/placeholder/placeholderOff"],
-				onActivated = var20
+				icon = Images["icons/placeholder/placeholderOff"],
+				onActivated = UseResult11
 			})
 		end
-		table.insert(list, {
-			icon = images["icons/placeholder/placeholderOff"],
-			iconColorOverride = tokens.Color.System.Alert.Color3,
-			text = var7.reportText,
-			textColorOverride = tokens.Color.System.Alert.Color3,
-			onActivated = var23
+		table.insert(List, {
+			icon = Images["icons/placeholder/placeholderOff"],
+			iconColorOverride = Tokens.Color.System.Alert.Color3,
+			text = UseLocalizationResult.reportText,
+			textColorOverride = Tokens.Color.System.Alert.Color3,
+			onActivated = UseResult12
 		})
 		
-		return list
+		return List
 	end, {
-		var7.replyText, var7.copyText, var7.editText, var7.deleteText,
-		var7.reportText, var7.translateText, var16, var17, var18, var19,
-		if getFFlagAppChatEnableManualTranslationModule() then var20 else nil, var23,
-		var1.userOwnsMessage
+		UseLocalizationResult.replyText, UseLocalizationResult.copyText,
+		UseLocalizationResult.editText, UseLocalizationResult.deleteText,
+		UseLocalizationResult.reportText, UseLocalizationResult.translateText,
+		UseResult7, UseResult8, UseResult9, UseResult10,
+		if GetFFlagAppChatEnableManualTranslationModule() then UseResult11 else nil,
+		UseResult12, UnionResult.userOwnsMessage
 	})
-	local var25 = #var24 * 56
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local _ = nil
+	local Offset = #UseMemoResult * 56
+	local ScreenSize = nil
+	local BorderCornerRadius = nil
+	local _Vector2 = nil
+	local _UDim = nil
+	local _UDim1 = nil
 	
-	if unitTestDeviceType == deviceType.Desktop or unitTestDeviceType == deviceType.Tablet then
-		var22 = 20
-		vector2 = unitTestScreenSize
-		vector2_1 = Vector2.new(0.5, 0.5)
-		uDim = UDim.new(0.5, 0)
-		uDim_1 = UDim.new(0.5, 0)
+	if UnitTestDeviceType == DeviceType.Desktop or UnitTestDeviceType == DeviceType.Tablet then
+		BorderCornerRadius = 20
+		ScreenSize = UnitTestScreenSize
+		_Vector2 = Vector2.new(0.5, 0.5)
+		_UDim = UDim.new(0.5, 0)
+		_UDim1 = UDim.new(0.5, 0)
 	else
-		var22 = 0
-		vector2 = Vector2.new(0, 0)
-		vector2_1 = Vector2.new(0.5, 1)
-		uDim = UDim.new(0, var25)
-		uDim_1 = UDim.new(1, 0)
+		BorderCornerRadius = 0
+		ScreenSize = Vector2.new(0, 0)
+		_Vector2 = Vector2.new(0.5, 1)
+		_UDim = UDim.new(0, Offset)
+		_UDim1 = UDim.new(1, 0)
 	end
-	local var26 = reactModule.createElement(contextualMenu, {
+	local Element = ReactModule.createElement(ContextualMenu, {
 		isElementBackgroundVisible = true,
 		isElementDividerVisible = true,
 		open = true,
-		screenSize = vector2,
-		menuDirection = menuDirection.Up,
-		openPositionY = uDim,
-		anchorPointOverride = vector2_1,
+		screenSize = ScreenSize,
+		menuDirection = MenuDirection.Up,
+		openPositionY = _UDim,
+		anchorPointOverride = _Vector2,
 		horizontalAlignment = Enum.HorizontalAlignment.Center,
-		contextMenuWidthOverride = uDim_1,
-		borderCornerRadius = var22,
-		buttonProps = var24,
-		onDismiss = var15
+		contextMenuWidthOverride = _UDim1,
+		borderCornerRadius = BorderCornerRadius,
+		buttonProps = UseMemoResult,
+		onDismiss = UseResult6
 	})
-	
-	return if unitTestDeviceType == deviceType.Desktop or unitTestDeviceType == deviceType.Tablet then var26 else reactModule.createElement("ImageButton", {
+	local ImageButton = ReactModule.createElement("ImageButton", {
 		Size = UDim2.new(1, 0, 1, 0),
 		BackgroundTransparency = 1,
-		[reactModule.Event.Activated] = var15
+		[ReactModule.Event.Activated] = UseResult6
 	}, {
-		PeekView = reactModule.createElement(peekView, {
+		PeekView = ReactModule.createElement(PeekView, {
 			mountAsFullView = false,
 			mountAnimation = true,
 			showDraggerInClosedState = false,
-			briefViewContentHeight = UDim.new(0, var25),
-			fullViewContentHeight = UDim.new(1, -var25),
-			closeSignal = var4.current,
-			viewStateChanged = var13
-		}, { var26 })
+			briefViewContentHeight = UDim.new(0, Offset),
+			fullViewContentHeight = UDim.new(1, -Offset),
+			closeSignal = UseRefResult.current,
+			viewStateChanged = UseResult4
+		}, { Element })
 	})
+	
+	return if UnitTestDeviceType == DeviceType.Desktop or UnitTestDeviceType == DeviceType.Tablet then Element else ImageButton
 end
 
-return reactModule.memo(MessageContextMenu)
+return ReactModule.memo(MessageContextMenu)

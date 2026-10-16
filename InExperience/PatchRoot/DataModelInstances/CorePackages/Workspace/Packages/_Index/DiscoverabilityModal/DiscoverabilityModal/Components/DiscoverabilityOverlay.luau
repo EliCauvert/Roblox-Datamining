@@ -1,1 +1,1 @@
-﻿return require(script.DiscoverabilityOverlayEntryPoint)
+﻿return (require(script.DiscoverabilityOverlayEntryPoint))

@@ -1,0 +1,3 @@
+﻿local FFlagAXSduiPageVariantRequestIdModule = require(script.Parent.FFlagAXSduiPageVariantRequestId)
+
+return game:DefineFastFlag("AXSduiPublishRequestIdWithResponse", false) and FFlagAXSduiPageVariantRequestIdModule

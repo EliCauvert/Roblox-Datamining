@@ -1,18 +1,18 @@
-﻿local gameInvite = script:FindFirstAncestor("GameInvite")
-local parent = gameInvite.Parent
-local networkImpl = require(gameInvite.GameInviteDependencies).networkImpl
-local _ = require(gameInvite.gameInviteModalType)
-local getCanSendAndCanCustomizeInvitesModule = require(gameInvite.Requests.GetCanSendAndCanCustomizeInvites)
-local fFlagGameInviteOpenModalWithoutBlockingOnCanPrompt = require(parent.SharedFlags).FFlagGameInviteOpenModalWithoutBlockingOnCanPrompt
+﻿local GameInvite = script:FindFirstAncestor("GameInvite")
+local NetworkImpl = require(GameInvite.GameInviteDependencies).networkImpl
+local _ = require(GameInvite.gameInviteModalType)
+local GetCanSendAndCanCustomizeInvitesModule = require(GameInvite.Requests.GetCanSendAndCanCustomizeInvites)
+local FFlagGameInviteOpenModalWithoutBlockingOnCanPrompt = require(GameInvite.Parent.SharedFlags).FFlagGameInviteOpenModalWithoutBlockingOnCanPrompt
 
-return function(p1, p2)
-	-- upvalues: getCanSendAndCanCustomizeInvitesModule (ref), networkImpl (ref), fFlagGameInviteOpenModalWithoutBlockingOnCanPrompt (ref)
-	local var1, var2 = getCanSendAndCanCustomizeInvitesModule(networkImpl, p1, p2):await()
+return function(p1, p2) --[[ Line: 13 ]]
+	-- upvalues: GetCanSendAndCanCustomizeInvitesModule (copy), NetworkImpl (copy), FFlagGameInviteOpenModalWithoutBlockingOnCanPrompt (copy)
+	local v1, v2 = GetCanSendAndCanCustomizeInvitesModule(NetworkImpl, p1, p2):await()
 	
-	if var1 and var2 and var2.responseBody then
-		return var2.responseBody.canPrompt or false, var2.responseBody.canCustomize or false
-	elseif fFlagGameInviteOpenModalWithoutBlockingOnCanPrompt then
+	if v1 and v2 and v2.responseBody then
+		return v2.responseBody.canPrompt or false, v2.responseBody.canCustomize or false
+	elseif FFlagGameInviteOpenModalWithoutBlockingOnCanPrompt then
 		return true, false
+	else
+		return false, false
 	end
-	return false, false
 end

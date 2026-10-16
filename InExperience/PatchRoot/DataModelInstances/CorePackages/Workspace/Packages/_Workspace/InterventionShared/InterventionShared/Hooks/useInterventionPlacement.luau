@@ -1,8 +1,8 @@
-﻿local interventionShared = script:FindFirstAncestor("InterventionShared")
-local interventionPlacementModule = require(interventionShared.Contexts.InterventionPlacement)
-local reactModule = require(interventionShared.Parent.React)
+﻿local InterventionShared = script:FindFirstAncestor("InterventionShared")
+local InterventionPlacementModule = require(InterventionShared.Contexts.InterventionPlacement)
+local ReactModule = require(InterventionShared.Parent.React)
 
-return function()
-	-- upvalues: reactModule (ref), interventionPlacementModule (ref)
-	return reactModule.useContext(interventionPlacementModule)
+return function() --[[ Line: 7 ]]
+	-- upvalues: ReactModule (copy), InterventionPlacementModule (copy)
+	return ReactModule.useContext(InterventionPlacementModule)
 end

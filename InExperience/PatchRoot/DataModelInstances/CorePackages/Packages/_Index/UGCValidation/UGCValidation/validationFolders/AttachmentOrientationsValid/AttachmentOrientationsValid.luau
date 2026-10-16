@@ -1,85 +1,83 @@
-﻿local parent = script.Parent.Parent.Parent
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
-local getDiffBetweenOrientationsModule = require(parent.util.getDiffBetweenOrientations)
-local floatEqualsModule = require(parent.util.floatEquals)
-local valueToStringModule = require(parent.util.valueToString)
-local r15plusUtilsModule = require(parent.util.R15plusUtils)
-local getAttachmentCFrameInPartSpaceModule = require(parent.util.getAttachmentCFrameInPartSpace)
+﻿local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
+local GetDiffBetweenOrientationsModule = require(Parent.util.getDiffBetweenOrientations)
+local FloatEqualsModule = require(Parent.util.floatEquals)
+local ValueToStringModule = require(Parent.util.valueToString)
+local R15plusUtilsModule = require(Parent.util.R15plusUtils)
+local GetAttachmentCFrameInPartSpaceModule = require(Parent.util.getAttachmentCFrameInPartSpace)
 local UGCValidateRigAttachmentRotationUsesDiff = game:DefineFastFlag("UGCValidateRigAttachmentRotationUsesDiff", false)
-local thresholdGetters = require(parent.util.AttachmentRotationFInts).thresholdGetters
-local var1 = CFrame.new(Vector3.new(0, 0, 0), Vector3.new(0, 0, -1)) * CFrame.fromEulerAnglesXYZ(-1.570796326795, 0, 0)
-local t = {
-	categories = {
-		validationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
-		validationEnumsModule.UploadCategory.DYNAMIC_HEAD
-	},
-	requiredData = {
-		validationEnumsModule.SharedDataMember.rootInstance,
-		validationEnumsModule.SharedDataMember.uploadEnum
-	},
-	expectedFailures = {}
-}
+local ThresholdGetters = require(Parent.util.AttachmentRotationFInts).thresholdGetters
+local v1 = CFrame.new(vector.create(0, 0, 0), vector.create(0, 0, -1)) * CFrame.fromEulerAnglesXYZ(-1.5707963267948966, 0, 0)
 
-local function expectedGripAttCFrameRotation(p1, p2)
-	-- upvalues: r15plusUtilsModule (ref), getAttachmentCFrameInPartSpaceModule (ref), var1 (ref)
-	local var2 = if p2 == Enum.AssetType.RightArm then "Right" else "Left"
-	local var3 = p1:FindFirstChild(var2 .. "LowerArm")
-	local var4 = p1:FindFirstChild(var2 .. "Hand")
+local function expectedGripAttCFrameRotation(Object, AssetType) --[[ Line: 36 ]]
+	-- upvalues: R15plusUtilsModule (copy), GetAttachmentCFrameInPartSpaceModule (copy), v1 (copy)
+	local Right: string = if AssetType == Enum.AssetType.RightArm then "Right" else "Left"
+	local Child = Object:FindFirstChild(Right .. "LowerArm")
+	local Child1 = Object:FindFirstChild(Right .. "Hand")
 	
-	if not var3 or not var4 then
+	if not Child or not Child1 then
 		return CFrame.identity
 	end
-	local var5 = var3:FindFirstChild(var2 .. "ElbowRigAttachment", r15plusUtilsModule.checkFlagEnabledForAllowHrd())
-	local var6 = var3:FindFirstChild(var2 .. "WristRigAttachment", r15plusUtilsModule.checkFlagEnabledForAllowHrd())
-	local var7 = var4:FindFirstChild(var2 .. "WristRigAttachment", r15plusUtilsModule.checkFlagEnabledForAllowHrd())
+	local Child2 = Child:FindFirstChild(Right .. "ElbowRigAttachment", R15plusUtilsModule.checkFlagEnabledForAllowHrd())
+	local Child3 = Child:FindFirstChild(Right .. "WristRigAttachment", R15plusUtilsModule.checkFlagEnabledForAllowHrd())
+	local Child4 = Child1:FindFirstChild(Right .. "WristRigAttachment", R15plusUtilsModule.checkFlagEnabledForAllowHrd())
+	local Child41 = Child1:FindFirstChild(Right .. "GripAttachment", R15plusUtilsModule.checkFlagEnabledForAllowHrd())
 	
-	if var5 and var6 and (var7 and var4:FindFirstChild(var2 .. "GripAttachment", r15plusUtilsModule.checkFlagEnabledForAllowHrd())) then
-		local var8 = getAttachmentCFrameInPartSpaceModule(var7)
-		local var9 = var8.Position - (var8 * getAttachmentCFrameInPartSpaceModule(var6):Inverse() * getAttachmentCFrameInPartSpaceModule(var5)).Position
+	if Child2 and Child3 and Child4 and Child41 then
+		local AttachmentCFrameInPartSpaceModule = GetAttachmentCFrameInPartSpaceModule(Child4)
+		local PositionDelta = AttachmentCFrameInPartSpaceModule.Position - (AttachmentCFrameInPartSpaceModule * GetAttachmentCFrameInPartSpaceModule(Child3):Inverse() * GetAttachmentCFrameInPartSpaceModule(Child2)).Position
 		
-		return CFrame.fromEulerAnglesXYZ(0, 0, 1.570796326795 - math.acos(Vector3.new(var9.X, math.max(0, -var9.Y), 0).Unit.X)) * var1.Rotation
+		return CFrame.fromEulerAnglesXYZ(0, 0, 1.5707963267948966 - math.acos(Vector3.new(PositionDelta.X, math.max(0, -PositionDelta.Y), 0).Unit.X)) * v1.Rotation
+	else
+		return CFrame.identity
 	end
-	return CFrame.identity
 end
 
-function t.run(p1, p2)
-	-- upvalues: UGCValidateRigAttachmentRotationUsesDiff (ref), getDiffBetweenOrientationsModule (ref), getAttachmentCFrameInPartSpaceModule (ref), thresholdGetters (ref), floatEqualsModule (ref), errorSourceStringsModule (ref), expectedGripAttCFrameRotation (ref), valueToStringModule (ref)
-	local rootInstance = p2.rootInstance
-	local assetType = p2.uploadEnum.assetType
-	
-	for i, v in rootInstance:GetDescendants() do
-		if v.ClassName == "Attachment" then
-			local isGripAttachment = string.sub(v.Name, -14) == "GripAttachment"
-			
-			if string.sub(v.Name, -13) == "RigAttachment" then
-				local var2
-				local _ = nil
+return {
+	categories = {
+		ValidationEnumsModule.UploadCategory.TORSO_AND_LIMBS,
+		ValidationEnumsModule.UploadCategory.DYNAMIC_HEAD
+	},
+	requiredData = {
+		ValidationEnumsModule.SharedDataMember.rootInstance,
+		ValidationEnumsModule.SharedDataMember.uploadEnum
+	},
+	expectedFailures = {},
+	run = function(p1, p2) --[[ Line: 76 ]]
+		-- upvalues: UGCValidateRigAttachmentRotationUsesDiff (copy), GetDiffBetweenOrientationsModule (copy), GetAttachmentCFrameInPartSpaceModule (copy), ThresholdGetters (copy), FloatEqualsModule (copy), ErrorSourceStringsModule (copy), expectedGripAttCFrameRotation (copy), ValueToStringModule (copy)
+		local RootInstance = p2.rootInstance
+		local AssetType = p2.uploadEnum.assetType
+		
+		for _, Attachment in RootInstance:GetDescendants() do
+			if Attachment.ClassName == "Attachment" then
+				local IsGripAttachment = string.sub(Attachment.Name, -14) == "GripAttachment"
 				
-				if UGCValidateRigAttachmentRotationUsesDiff then
-					local _ = thresholdGetters.RigAttachment() < getDiffBetweenOrientationsModule(CFrame.identity, getAttachmentCFrameInPartSpaceModule(v))
-				else
-					local var3, var4, var5 = getAttachmentCFrameInPartSpaceModule(v):ToOrientation()
-					var2 = if floatEqualsModule(var3, 0) then if floatEqualsModule(var4, 0) then not floatEqualsModule(var5, 0) else not floatEqualsModule(var4, 0) else not floatEqualsModule(var3, 0)
-				end
-				if var2 then
-					p1:fail(errorSourceStringsModule.Keys.AttachmentOrientationRigRotated, { InstancePath = v:GetFullName() })
-				end
-			elseif thresholdGetters[v.Name] ~= nil then
-				local var6 = if isGripAttachment and assetType and (assetType == Enum.AssetType.RightArm or assetType == Enum.AssetType.LeftArm) then expectedGripAttCFrameRotation(rootInstance, assetType) else CFrame.new()
-				
-				if thresholdGetters[v.Name]() < getDiffBetweenOrientationsModule(var6, getAttachmentCFrameInPartSpaceModule(v)) then
-					local vector3 = Vector3.new(var6:ToOrientation())
-					p1:fail(errorSourceStringsModule.Keys.AttachmentOrientationDeviation, {
-						InstancePath = v:GetFullName(),
-						ExpectedOrientation = valueToStringModule(Vector3.new(math.deg(vector3.X), math.deg(vector3.Y), math.deg(vector3.Z))),
-						MaxDeviation = tostring(thresholdGetters[v.Name]())
-					})
+				if string.sub(Attachment.Name, -13) == "RigAttachment" then
+					local IsRigAttachmentResultBelow = nil
+					if UGCValidateRigAttachmentRotationUsesDiff then
+						IsRigAttachmentResultBelow = ThresholdGetters.RigAttachment() < GetDiffBetweenOrientationsModule(CFrame.identity, GetAttachmentCFrameInPartSpaceModule(Attachment))
+					else
+						local Rx, Ry, Rz = GetAttachmentCFrameInPartSpaceModule(Attachment):ToOrientation()
+						IsRigAttachmentResultBelow = not FloatEqualsModule(Rx, 0) or (not FloatEqualsModule(Ry, 0) or not FloatEqualsModule(Rz, 0))
+					end
+					if IsRigAttachmentResultBelow then
+						p1:fail(ErrorSourceStringsModule.Keys.AttachmentOrientationRigRotated, { InstancePath = Attachment:GetFullName() })
+					end
+				elseif ThresholdGetters[Attachment.Name] ~= nil then
+					local ExpectedGripAttCFrameRotationResult = if IsGripAttachment and AssetType and (AssetType == Enum.AssetType.RightArm or AssetType == Enum.AssetType.LeftArm) then expectedGripAttCFrameRotation(RootInstance, AssetType) else CFrame.new()
+					
+					if ThresholdGetters[Attachment.Name]() < GetDiffBetweenOrientationsModule(ExpectedGripAttCFrameRotationResult, GetAttachmentCFrameInPartSpaceModule(Attachment)) then
+						local _Vector3 = Vector3.new(ExpectedGripAttCFrameRotationResult:ToOrientation())
+						p1:fail(ErrorSourceStringsModule.Keys.AttachmentOrientationDeviation, {
+							InstancePath = Attachment:GetFullName(),
+							ExpectedOrientation = ValueToStringModule((Vector3.new(math.deg(_Vector3.X), math.deg(_Vector3.Y), (math.deg(_Vector3.Z))))),
+							MaxDeviation = tostring(ThresholdGetters[Attachment.Name]())
+						})
+					end
 				end
 			end
 		end
 	end
-end
-
-return t
+}

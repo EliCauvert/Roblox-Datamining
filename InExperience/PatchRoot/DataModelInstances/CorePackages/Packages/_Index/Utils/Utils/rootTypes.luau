@@ -1,76 +1,79 @@
-﻿local parent = script.Parent.Parent
-local luauPolyfillModule = require(parent.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local boolean = luauPolyfillModule.Boolean
-local error = luauPolyfillModule.Error
-local map = luauPolyfillModule.Map
-local set = luauPolyfillModule.Set
-local t = {}
-local _ = require(parent.GraphQL)
-local memoize1 = require(script.Parent.memoize).memoize1
-local var1 = nil
-local var2 = nil
+﻿local Parent = script.Parent.Parent
+local LuauPolyfillModule = require(Parent.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local Boolean = LuauPolyfillModule.Boolean
+local Error1 = LuauPolyfillModule.Error
+local Map = LuauPolyfillModule.Map
+local Set = LuauPolyfillModule.Set
+local _ = require(Parent.GraphQL)
+local Memoize1Function = require(script.Parent.memoize).memoize1
+local Callback = nil
+local Callback1 = nil
 
-function t.getDefinedRootType(p1, p2)
-	-- upvalues: var1 (write), error (ref)
-	local var3 = var1(p1):get(p2)
+local function getDefinedRootType(p1, p2) --[[ Line: 32 ]]
+	-- upvalues: Callback (ref), Error1 (copy)
+	local GetResult = Callback(p1):get(p2)
 	
-	if var3 == nil then
-		error(error.new(("Root type for operation \"%s\" not defined by the given schema."):format(tostring(p2))))
+	if GetResult == nil then
+		error(Error1.new(("Root type for operation \"%s\" not defined by the given schema."):format((tostring(p2)))))
 	end
-	return var3
+	return GetResult
 end
 
-local function _(value)
-	local t = {}
-	value:forEach(function(p1)
-		-- upvalues: t (ref)
-		table.insert(t, p1)
+local function _(p1) --[[ Line: 47 | Named "setToArray" ]]
+	local List = {}
+	p1:forEach(function(p2) --[[ Line: 49 ]]
+		-- upvalues: List (copy)
+		table.insert(List, p2)
 	end)
 	
-	return t
+	return List
 end
 
-t.getRootTypeNames = memoize1(function(p1)
-	-- upvalues: var2 (write), set (ref), array (ref)
-	local var3 = var2(p1)
-	local new = set.new
-	local map = array.map
-	local concat = array.concat
+local Memoize1Result = Memoize1Function(function(p1) --[[ Line: 55 ]]
+	-- upvalues: Callback1 (ref), Set (copy), Array (copy)
+	local NewFunction = Set.new
+	local MapFunction = Array.map
+	local ConcatFunction = Array.concat
 	local t = {}
-	local t_1 = {}
-	var3:forEach(function(p2)
-		-- upvalues: t_1 (ref)
-		table.insert(t_1, p2)
+	local List = {}
+	Callback1(p1):forEach(function(p2) --[[ Line: 49 ]]
+		-- upvalues: List (copy)
+		table.insert(List, p2)
 	end)
 	
-	return new(map(concat(t, t_1), function(p2)
+	return NewFunction(MapFunction(ConcatFunction(t, List), function(p2) --[[ Line: 59 ]]
 		return p2.name
 	end))
 end)
-t.getRootTypes = memoize1(function(p1)
-	-- upvalues: var1 (write), set (ref)
-	return set.new(var1(p1):values())
+Callback1 = Memoize1Function(function(p1) --[[ Line: 67 ]]
+	-- upvalues: Callback (ref), Set (copy)
+	return Set.new(Callback(p1):values())
 end)
-t.getRootTypeMap = memoize1(function(p1)
-	-- upvalues: map (ref), boolean (ref)
-	local var3 = map.new()
-	local queryType = p1:getQueryType()
+Callback = Memoize1Function(function(p1) --[[ Line: 75 ]]
+	-- upvalues: Map (copy), Boolean (copy)
+	local NewMap = Map.new()
+	local QueryType = p1:getQueryType()
 	
-	if boolean.toJSBoolean(queryType) then
-		var3:set("query", queryType)
+	if Boolean.toJSBoolean(QueryType) then
+		NewMap:set("query", QueryType)
 	end
-	local mutationType = p1:getMutationType()
+	local MutationType = p1:getMutationType()
 	
-	if boolean.toJSBoolean(mutationType) then
-		var3:set("mutation", mutationType)
+	if Boolean.toJSBoolean(MutationType) then
+		NewMap:set("mutation", MutationType)
 	end
-	local subscriptionType = p1:getSubscriptionType()
+	local SubscriptionType = p1:getSubscriptionType()
 	
-	if boolean.toJSBoolean(subscriptionType) then
-		var3:set("subscription", subscriptionType)
+	if Boolean.toJSBoolean(SubscriptionType) then
+		NewMap:set("subscription", SubscriptionType)
 	end
-	return var3
+	return NewMap
 end)
 
-return t
+return {
+	getDefinedRootType = getDefinedRootType,
+	getRootTypeNames = Memoize1Result,
+	getRootTypes = Callback1,
+	getRootTypeMap = Callback
+}

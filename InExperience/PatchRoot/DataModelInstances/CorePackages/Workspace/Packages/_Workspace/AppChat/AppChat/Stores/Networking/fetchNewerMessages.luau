@@ -1,16 +1,16 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local appChatNetworkingModule = require(appChat.Parent.AppChatNetworking)
-local ingestNewerMessagesModule = require(appChat.Stores.Ingestion.ingestNewerMessages)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local AppChatNetworkingModule = require(AppChat.Parent.AppChatNetworking)
+local IngestNewerMessagesModule = require(AppChat.Stores.Ingestion.ingestNewerMessages)
 
-return function(p1)
-	-- upvalues: appChatNetworkingModule (ref), ingestNewerMessagesModule (ref)
-	return appChatNetworkingModule.http.GetConversationMessages(nil, p1, nil):andThen(function(p2)
-		-- upvalues: ingestNewerMessagesModule (copy), p1 (ref)
-		local responseBody = p2 and p2.responseBody
+return function(p1) --[[ Line: 24 | Named "fetchNewerMessages" ]]
+	-- upvalues: AppChatNetworkingModule (copy), IngestNewerMessagesModule (copy)
+	return AppChatNetworkingModule.http.GetConversationMessages(nil, p1, nil):andThen(function(Result) --[[ Line: 25 ]]
+		-- upvalues: IngestNewerMessagesModule (upval), p1 (copy)
+		local ResponseBody = Result and Result.responseBody
 		
 		return {
-			response = p2,
-			ingestedIds = ingestNewerMessagesModule(p1, if responseBody then responseBody.messages or {} else {})
+			response = Result,
+			ingestedIds = IngestNewerMessagesModule(p1, if ResponseBody then ResponseBody.messages or {} else {})
 		}
 	end)
 end

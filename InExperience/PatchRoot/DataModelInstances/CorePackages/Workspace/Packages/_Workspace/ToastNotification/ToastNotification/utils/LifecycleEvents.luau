@@ -6,22 +6,22 @@
 		UserAction = "ToastNotifications.UserActionOnToastNotification"
 	},
 	RegisteredCallbacks = {},
-	DispatchEvent = function(p1, p2, p3, p4)
-		local var1 = p1.RegisteredCallbacks[p3] and p1.RegisteredCallbacks[p3][p2]
+	DispatchEvent = function(p1, p2, p3, p4) --[[ Line: 12 ]]
+		local RegisteredCallbackEntry = p1.RegisteredCallbacks[p3] and p1.RegisteredCallbacks[p3][p2]
 		
-		if var1 then
-			for i in var1 do
+		if RegisteredCallbackEntry then
+			for i in RegisteredCallbackEntry do
 				task.spawn(i, p4)
 			end
 		end
 	end,
-	RemoveCallback = function(p5, p6, p7, p8)
-		local var2 = p5.RegisteredCallbacks[p7] and p5.RegisteredCallbacks[p7][p6]
+	RemoveCallback = function(p5, p6, p7, Key) --[[ Line: 22 ]]
+		local RegisteredCallbackEntry = p5.RegisteredCallbacks[p7] and p5.RegisteredCallbacks[p7][p6]
 		
-		if not var2 then return end
-		var2[p8] = nil
+		if not RegisteredCallbackEntry then return end
+		RegisteredCallbackEntry[Key] = nil
 		
-		if not next(var2) then
+		if not next(RegisteredCallbackEntry) then
 			p5.RegisteredCallbacks[p7][p6] = nil
 			
 			if not next(p5.RegisteredCallbacks[p7]) then
@@ -29,7 +29,7 @@
 			end
 		end
 	end,
-	RegisterCallback = function(p5, p6, p7, p8)
+	RegisterCallback = function(p5, p6, p7, p8) --[[ Line: 37 ]]
 		if not p5.RegisteredCallbacks[p7] then
 			p5.RegisteredCallbacks[p7] = {}
 		end
@@ -38,8 +38,8 @@
 		end
 		p5.RegisteredCallbacks[p7][p6][p8] = true
 		
-		return function()
-			-- upvalues: p5 (ref), p6 (ref), p7 (ref), p8 (ref)
+		return function() --[[ Line: 45 ]]
+			-- upvalues: p5 (copy), p6 (copy), p7 (copy), p8 (copy)
 			p5:RemoveCallback(p6, p7, p8)
 		end
 	end

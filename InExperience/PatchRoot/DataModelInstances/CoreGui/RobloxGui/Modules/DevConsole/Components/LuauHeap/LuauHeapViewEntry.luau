@@ -1,39 +1,39 @@
-﻿local roactModule = require(game:GetService("CorePackages").Packages.Roact)
-local components = script.Parent.Parent.Parent.Components
-local cellLabelModule = require(components.CellLabel)
-local bannerButtonModule = require(components.BannerButton)
-local tooltipModule = require(components.Tooltip)
+﻿local RoactModule = require(game:GetService("CorePackages").Packages.Roact)
+local Components = script.Parent.Parent.Parent.Components
+local CellLabelModule = require(Components.CellLabel)
+local BannerButtonModule = require(Components.BannerButton)
+local TooltipModule = require(Components.Tooltip)
 local _ = require(script.Parent.LuauHeapTypes)
-local constantsModule = require(script.Parent.Parent.Parent.Constants)
-local lineWidth = constantsModule.GeneralFormatting.LineWidth
-local lineColor = constantsModule.GeneralFormatting.LineColor
-local graphEntryFrameHeight = constantsModule.LuauHeapFormatting.GraphEntryFrameHeight
-local depthIndent = constantsModule.LuauHeapFormatting.DepthIndent
-local valueCellWidth = constantsModule.LuauHeapFormatting.ValueCellWidth
-local cellPadding = constantsModule.LuauHeapFormatting.CellPadding
-local valuePadding = constantsModule.LuauHeapFormatting.ValuePadding
-local luauHeapViewEntry = roactModule.PureComponent:extend("LuauHeapViewEntry")
+local ConstantsModule = require(script.Parent.Parent.Parent.Constants)
+local LineWidth = ConstantsModule.GeneralFormatting.LineWidth
+local LineColor = ConstantsModule.GeneralFormatting.LineColor
+local GraphEntryFrameHeight = ConstantsModule.LuauHeapFormatting.GraphEntryFrameHeight
+local DepthIndent = ConstantsModule.LuauHeapFormatting.DepthIndent
+local ValueCellWidth = ConstantsModule.LuauHeapFormatting.ValueCellWidth
+local CellPadding = ConstantsModule.LuauHeapFormatting.CellPadding
+local ValuePadding = ConstantsModule.LuauHeapFormatting.ValuePadding
+local LuauHeapViewEntry = RoactModule.PureComponent:extend("LuauHeapViewEntry")
 
-local function BorderedCellLabel(p1)
-	-- upvalues: roactModule (ref), cellLabelModule (ref), lineWidth (ref), valuePadding (ref), lineColor (ref)
-	return roactModule.createFragment({
-		Label = roactModule.createElement(cellLabelModule, {
+local function BorderedCellLabel(p1) --[[ Line: 32 ]]
+	-- upvalues: RoactModule (copy), CellLabelModule (copy), LineWidth (copy), ValuePadding (copy), LineColor (copy)
+	return RoactModule.createFragment({
+		Label = RoactModule.createElement(CellLabelModule, {
 			richText = true,
 			text = p1.text,
 			size = p1.size,
 			pos = p1.pos
 		}),
-		LeftBorder = roactModule.createElement("Frame", {
+		LeftBorder = RoactModule.createElement("Frame", {
 			BorderSizePixel = 0,
-			Size = UDim2.new(UDim.new(0, lineWidth), p1.size.Y),
-			Position = UDim2.fromOffset(-valuePadding, 0) + p1.pos,
+			Size = UDim2.new(UDim.new(0, LineWidth), p1.size.Y),
+			Position = UDim2.fromOffset(-ValuePadding, 0) + p1.pos,
 			AnchorPoint = Vector2.new(0, 0),
-			BackgroundColor3 = lineColor
+			BackgroundColor3 = LineColor
 		})
 	})
 end
 
-function luauHeapViewEntry.init(p1)
+function LuauHeapViewEntry.init(p1) --[[ Line: 50 ]]
 	p1.state = {
 		expandedEllipsis = false,
 		showTooltip = false,
@@ -41,212 +41,210 @@ function luauHeapViewEntry.init(p1)
 		tooltipPos = UDim2.fromOffset(0, 0)
 	}
 	
-	function p1.onButtonPress()
-		-- upvalues: p1 (ref)
-		p1:setState(function(p2)
+	function p1.onButtonPress() --[[ Line: 58 ]]
+		-- upvalues: p1 (copy)
+		p1:setState(function(p2) --[[ Line: 59 ]]
 			return { expanded = not p2.expanded }
 		end)
 	end
 	
-	function p1.onExpandEllipsis()
-		-- upvalues: p1 (ref)
+	function p1.onExpandEllipsis() --[[ Line: 66 ]]
+		-- upvalues: p1 (copy)
 		p1:setState({ expandedEllipsis = true })
 	end
 	
-	function p1.onMouseEnter(_, p2, p3)
-		-- upvalues: p1 (ref)
+	function p1:onMouseEnter(XOffset, YOffset) --[[ Line: 72 ]]
+		-- upvalues: p1 (copy)
 		p1:setState({
 			showTooltip = true,
-			tooltipPos = UDim2.fromOffset(p2, p3)
+			tooltipPos = UDim2.fromOffset(XOffset, YOffset)
 		})
 	end
 	
-	function p1.onMouseMove(_, p2, p3)
-		-- upvalues: p1 (ref)
+	function p1:onMouseMove(XOffset, YOffset) --[[ Line: 79 ]]
+		-- upvalues: p1 (copy)
 		p1:setState({
 			showTooltip = true,
-			tooltipPos = UDim2.fromOffset(p2, p3)
+			tooltipPos = UDim2.fromOffset(XOffset, YOffset)
 		})
 	end
 	
-	function p1.onMouseLeave()
-		-- upvalues: p1 (ref)
+	function p1.onMouseLeave() --[[ Line: 86 ]]
+		-- upvalues: p1 (copy)
 		p1:setState({ showTooltip = false })
 	end
 end
 
-function luauHeapViewEntry.renderChildren(p1, p2, p3)
-	-- upvalues: roactModule (ref), luauHeapViewEntry (ref)
+function LuauHeapViewEntry.renderChildren(p1, List, List1) --[[ Line: 93 ]]
+	-- upvalues: RoactModule (copy), LuauHeapViewEntry (copy)
 	if not p1.state.expanded then
 		return {}
-	elseif not (if #p2 == 0 then p3 ~= nil and #p3 ~= 0 else true) then
+	end
+	if #List == 0 and (List1 == nil or #List1 == 0) then
 		return {}
 	end
-	local t = {}
-	local totalSize = p1.props.data.TotalSize
-	local var1 = p1.props.depth + 1
-	local var2 = 0
-	local var3 = 0
-	local var4 = 0
+	local Elements = {}
+	local TotalSize = p1.props.data.TotalSize
+	local NewDepth = p1.props.depth + 1
+	local NewTotalSize = 0
+	local NewTotalSize1 = 0
+	local Count = 0
 	
-	local function _(p4)
-		-- upvalues: p3 (ref)
-		if p3 then
-			for i, v in ipairs(p3) do
-				if p4.Name == v.Name then
-					return v
+	local function _(p2) --[[ Line: 117 | Named "getCompareInfo" ]]
+		-- upvalues: List1 (copy)
+		if List1 then
+			for _, value in ipairs(List1) do
+				if p2.Name == value.Name then
+					return value
 				end
 			end
 		end
 		return nil
 	end
 	
-	for i, v in ipairs(p2) do
-		local var5
-		if not p3 then break end
-		for i_2, v_2 in ipairs(p3) do
-			if v.Name == v_2.Name then
-				var5 = v_2
-				if v.TotalSize <= 128 and #p2 > 4 and not p1.state.expandedEllipsis then
-					var2 += v.TotalSize
-					
-					if var5 then
-						var3 += var5.TotalSize
-					end
-				else
-					var4 += 1
-					t[var4] = roactModule.createElement(luauHeapViewEntry, {
-						layoutOrder = totalSize - v.TotalSize,
-						depth = var1,
-						data = v,
-						compare = var5
-					})
+	for _, Data in ipairs(List) do
+		repeat
+			if not List1 then break end
+			for _, value in ipairs(List1) do
+				if Data.Name == value.Name then
+					local Compare = value
+					break
 				end
 			end
+			local Compare = nil
+		until true
+		if Data.TotalSize <= 128 and #List > 4 and not p1.state.expandedEllipsis then
+			NewTotalSize += Data.TotalSize
+			
+			if Compare then
+				NewTotalSize1 += Compare.TotalSize
+			end
+		else
+			Count += 1
+			Elements[Count] = RoactModule.createElement(LuauHeapViewEntry, {
+				layoutOrder = TotalSize - Data.TotalSize,
+				depth = NewDepth,
+				data = Data,
+				compare = Compare
+			})
 		end
-		var5 = nil
 	end
-	if var2 > 0 then
-		var4 += 1
-		t[var4] = roactModule.createElement(luauHeapViewEntry, {
-			layoutOrder = totalSize,
-			depth = var1,
+	if NewTotalSize > 0 then
+		Count += 1
+		Elements[Count] = RoactModule.createElement(LuauHeapViewEntry, {
+			layoutOrder = TotalSize,
+			depth = NewDepth,
 			data = {
 				Name = "...",
-				Size = var2,
-				TotalSize = var2,
+				Size = NewTotalSize,
+				TotalSize = NewTotalSize,
 				Children = {}
 			},
-			compare = if p3 then {
+			compare = if List1 then {
 				Name = "...",
-				Size = var3,
-				TotalSize = var3,
+				Size = NewTotalSize1,
+				TotalSize = NewTotalSize1,
 				Children = {}
 			} else nil,
 			customButtonPress = p1.onExpandEllipsis
 		})
 	end
-	if p3 then
-		local var6
-		for i, v in ipairs(p3) do
-			var6 = false
+	if List1 then
+		local Flag = nil
+		for _, Compare in ipairs(List1) do
+			Flag = false
 			
-			for i_2, v_2 in ipairs(p2) do
-				if v_2.Name == v.Name then
-					var6 = true
+			for _, value1 in ipairs(List) do
+				if value1.Name == Compare.Name then
+					Flag = true
 					break
 				end
 			end
-			if not var6 then
-				var4 += 1
-				t[var4] = roactModule.createElement(luauHeapViewEntry, {
-					layoutOrder = totalSize,
-					depth = var1,
+			if not Flag then
+				Count += 1
+				Elements[Count] = RoactModule.createElement(LuauHeapViewEntry, {
+					layoutOrder = TotalSize,
+					depth = NewDepth,
 					data = {
 						Size = 0,
 						TotalSize = 0,
-						Name = v.Name,
-						Source = v.Source,
+						Name = Compare.Name,
+						Source = Compare.Source,
 						Children = {}
 					},
-					compare = v
+					compare = Compare
 				})
 			end
 		end
 	end
-	return t
+	return Elements
 end
 
-function luauHeapViewEntry.renderValues(_, p5)
-	-- upvalues: valueCellWidth (ref), valuePadding (ref), graphEntryFrameHeight (ref), roactModule (ref), BorderedCellLabel (ref)
-	local t = {}
-	local uDim2 = UDim2.new(valueCellWidth, -valuePadding, 0, graphEntryFrameHeight)
-	local uDim2_1 = UDim2.new(1 - valueCellWidth * #p5, valuePadding, 0, 0)
+function LuauHeapViewEntry:renderValues(List) --[[ Line: 223 ]]
+	-- upvalues: ValueCellWidth (copy), ValuePadding (copy), GraphEntryFrameHeight (copy), RoactModule (copy), BorderedCellLabel (copy)
+	local Elements = {}
+	local _UDim2 = UDim2.new(ValueCellWidth, -ValuePadding, 0, GraphEntryFrameHeight)
+	local _UDim2_1 = UDim2.new(1 - ValueCellWidth * #List, ValuePadding, 0, 0)
 	
-	for i, v in ipairs(p5) do
-		t[tostring(i)] = roactModule.createElement(BorderedCellLabel, {
-			text = tostring(v),
-			size = uDim2,
-			pos = uDim2_1 + UDim2.fromScale(valueCellWidth * (i - 1), 0)
+	for i, value in ipairs(List) do
+		Elements[tostring(i)] = RoactModule.createElement(BorderedCellLabel, {
+			text = tostring(value),
+			size = _UDim2,
+			pos = _UDim2_1 + UDim2.fromScale(ValueCellWidth * (i - 1), 0)
 		})
 	end
-	return t
+	return Elements
 end
 
-function luauHeapViewEntry.render(p6)
-	-- upvalues: graphEntryFrameHeight (ref), depthIndent (ref), valueCellWidth (ref), cellPadding (ref), roactModule (ref), tooltipModule (ref), bannerButtonModule (ref), cellLabelModule (ref)
-	local props = p6.props
-	local size = props.size or UDim2.new(1, 0, 0, graphEntryFrameHeight)
-	local depth = props.depth
-	local layoutOrder = props.layoutOrder or 0
-	local var7 = depth * depthIndent
-	local data = props.data
-	local compare = props.compare
-	local _ = ""
-	local _ = ""
+function LuauHeapViewEntry.render(p3) --[[ Line: 238 ]]
+	-- upvalues: GraphEntryFrameHeight (copy), DepthIndent (copy), ValueCellWidth (copy), CellPadding (copy), RoactModule (copy), TooltipModule (copy), BannerButtonModule (copy), CellLabelModule (copy)
+	local Props = p3.props
+	local Depth = Props.depth
+	local ScaledDepth = Depth * DepthIndent
+	local Data = Props.data
+	local Compare = Props.compare
 	local list = {
-		if compare and compare.TotalSize ~= data.TotalSize then string.format("%d <font color=\"#%s\">(%s%d)</font>", data.TotalSize, if data.TotalSize < compare.TotalSize then "0f0" else "f00", if data.TotalSize < compare.TotalSize then "" else "+", data.TotalSize - compare.TotalSize) else string.format("%.0f", data.TotalSize),
-		if compare and compare.Size ~= data.Size then string.format("%d <font color=\"#%s\">(%s%d)</font>", data.Size, if data.Size < compare.Size then "0f0" else "f00", if data.Size < compare.Size then "" else "+", data.Size - compare.Size) else string.format("%.0f", data.Size)
+		if Compare and Compare.TotalSize ~= Data.TotalSize then string.format("%d <font color=\"#%s\">(%s%d)</font>", Data.TotalSize, if Data.TotalSize < Compare.TotalSize then "0f0" else "f00", if Data.TotalSize < Compare.TotalSize then "" else "+", Data.TotalSize - Compare.TotalSize) else string.format("%.0f", Data.TotalSize),
+		if Compare and Compare.Size ~= Data.Size then string.format("%d <font color=\"#%s\">(%s%d)</font>", Data.Size, if Data.Size < Compare.Size then "0f0" else "f00", if Data.Size < Compare.Size then "" else "+", Data.Size - Compare.Size) else string.format("%.0f", Data.Size)
 	}
-	local var8 = if data.Name and #data.Name ~= 0 then data.Name elseif depth == 0 then "<root>" else "<anonymous>"
+	local Root: string = if Depth == 0 then "<root>" else "<anonymous>"
+	local Name = if Data.Name and #Data.Name ~= 0 then Data.Name else Root
+	local Source = if Data.Source and #Data.Source ~= 0 then Data.Source else Name
 	
-	return roactModule.createElement("Frame", {
+	return RoactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		Size = size,
-		LayoutOrder = layoutOrder,
+		Size = Props.size or UDim2.new(1, 0, 0, GraphEntryFrameHeight),
+		LayoutOrder = Props.layoutOrder or 0,
 		AutomaticSize = Enum.AutomaticSize.Y
 	}, {
-		tooltip = if p6.state.showTooltip then roactModule.createElement(tooltipModule, {
-			text = if data.Source and #data.Source ~= 0 then data.Source else var8,
-			pos = p6.state.tooltipPos
-		}) else nil,
-		layout = roactModule.createElement("UIListLayout", {
+		tooltip = if p3.state.showTooltip then RoactModule.createElement(TooltipModule, { text = Source, pos = p3.state.tooltipPos }) else nil,
+		layout = RoactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Vertical,
 			HorizontalAlignment = Enum.HorizontalAlignment.Right,
 			SortOrder = Enum.SortOrder.LayoutOrder
 		}),
-		button = roactModule.createElement(bannerButtonModule, {
+		button = RoactModule.createElement(BannerButtonModule, {
 			layoutOrder = -1,
-			size = UDim2.new(1, 0, 0, graphEntryFrameHeight),
-			inset = var7,
-			isExpanded = p6.state.expanded,
-			isExpandable = if #data.Children == 0 and compare ~= nil then if #compare.Children == 0 then props.customButtonPress ~= nil else true else true,
-			onButtonPress = if props.customButtonPress then props.customButtonPress else p6.onButtonPress,
-			onMouseEnter = p6.onMouseEnter,
-			onMouseLeave = p6.onMouseLeave,
-			onMouseMove = p6.onMouseMove
+			size = UDim2.new(1, 0, 0, GraphEntryFrameHeight),
+			inset = ScaledDepth,
+			isExpanded = p3.state.expanded,
+			isExpandable = #Data.Children ~= 0 or (if Compare == nil then Props.customButtonPress ~= nil else #Compare.Children ~= 0 or Props.customButtonPress ~= nil),
+			onButtonPress = if Props.customButtonPress then Props.customButtonPress else p3.onButtonPress,
+			onMouseEnter = p3.onMouseEnter,
+			onMouseLeave = p3.onMouseLeave,
+			onMouseMove = p3.onMouseMove
 		}, {
-			name = roactModule.createElement(cellLabelModule, {
+			name = RoactModule.createElement(CellLabelModule, {
 				textWrapped = false,
-				text = var8,
-				size = UDim2.new(UDim.new(1 - valueCellWidth * #list, -(cellPadding + var7)), UDim.new(1, 0)),
-				pos = UDim2.new(0, cellPadding + var7, 0, 0),
+				text = Name,
+				size = UDim2.new(UDim.new(1 - ValueCellWidth * #list, -(CellPadding + ScaledDepth)), UDim.new(1, 0)),
+				pos = UDim2.new(0, CellPadding + ScaledDepth, 0, 0),
 				textTruncate = Enum.TextTruncate.SplitWord
 			}),
-			values = roactModule.createFragment(p6:renderValues(list))
+			values = RoactModule.createFragment(p3:renderValues(list))
 		}),
-		children = roactModule.createFragment(p6:renderChildren(data.Children, if compare then compare.Children else nil))
+		children = RoactModule.createFragment(p3:renderChildren(Data.Children, if Compare then Compare.Children else nil))
 	})
 end
 
-return luauHeapViewEntry
+return LuauHeapViewEntry

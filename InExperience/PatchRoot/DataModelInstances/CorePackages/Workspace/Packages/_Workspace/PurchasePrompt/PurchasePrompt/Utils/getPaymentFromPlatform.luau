@@ -1,14 +1,14 @@
-﻿local purchasePrompt = script:FindFirstAncestor("PurchasePrompt")
-local parent = purchasePrompt.Parent
-local paymentPlatformModule = require(purchasePrompt.Enums.PaymentPlatform)
-local getFFlagEnablePalisadesPaymentsPlatformModule = require(purchasePrompt.Flags.GetFFlagEnablePalisadesPaymentsPlatform)
-local fFlagEnablePioneerPaymentsPlatformModule = require(purchasePrompt.Flags.FFlagEnablePioneerPaymentsPlatform)
-local getIsPioneerBuildModule = require(purchasePrompt.Utils.getIsPioneerBuild)
-local fFlagEnableMicrosoftStorePaymentsPlatform = require(parent.SharedFlags).FFlagEnableMicrosoftStorePaymentsPlatform
-local fFlagEnableMilkyWayPaymentsPlatformV2 = require(parent.SharedFlags).FFlagEnableMilkyWayPaymentsPlatformV2
-local getAppFeaturePolicies = require(parent.UniversalAppPolicy).getAppFeaturePolicies
+﻿local PurchasePrompt = script:FindFirstAncestor("PurchasePrompt")
+local Parent = PurchasePrompt.Parent
+local PaymentPlatformModule = require(PurchasePrompt.Enums.PaymentPlatform)
+local GetFFlagEnablePalisadesPaymentsPlatformModule = require(PurchasePrompt.Flags.GetFFlagEnablePalisadesPaymentsPlatform)
+local FFlagEnablePioneerPaymentsPlatformModule = require(PurchasePrompt.Flags.FFlagEnablePioneerPaymentsPlatform)
+local GetIsPioneerBuildModule = require(PurchasePrompt.Utils.getIsPioneerBuild)
+local FFlagEnableMicrosoftStorePaymentsPlatform = require(Parent.SharedFlags).FFlagEnableMicrosoftStorePaymentsPlatform
+local FFlagEnableMilkyWayPaymentsPlatformV2 = require(Parent.SharedFlags).FFlagEnableMilkyWayPaymentsPlatformV2
+local GetAppFeaturePoliciesFunction = require(Parent.UniversalAppPolicy).getAppFeaturePolicies
 
-return function(p1, p2, p3, p4)
-	-- upvalues: paymentPlatformModule (ref), fFlagEnablePioneerPaymentsPlatformModule (ref), getIsPioneerBuildModule (ref), fFlagEnableMicrosoftStorePaymentsPlatform (ref), getAppFeaturePolicies (ref), fFlagEnableMilkyWayPaymentsPlatformV2 (ref), getFFlagEnablePalisadesPaymentsPlatformModule (ref)
-	return if p1 == Enum.Platform.XBoxOne then paymentPlatformModule.Xbox elseif p1 == Enum.Platform.IOS then if p2 then paymentPlatformModule.Midas else paymentPlatformModule.Apple elseif p1 == Enum.Platform.Windows or p1 == Enum.Platform.OSX or p1 == Enum.Platform.Linux then if fFlagEnablePioneerPaymentsPlatformModule and getIsPioneerBuildModule() then paymentPlatformModule.Pioneer elseif fFlagEnableMicrosoftStorePaymentsPlatform and getAppFeaturePolicies().getUsePaymentPlatformMicrosoftStore() then paymentPlatformModule.Microsoft else paymentPlatformModule.Web elseif p1 == Enum.Platform.Android then if p2 then paymentPlatformModule.Midas elseif p3 then paymentPlatformModule.Amazon elseif p4 then paymentPlatformModule.Maquettes elseif fFlagEnableMilkyWayPaymentsPlatformV2 and getAppFeaturePolicies().getUsePaymentPlatformMilkyWayStore() then paymentPlatformModule.MilkyWay else paymentPlatformModule.Google elseif p1 == Enum.Platform.UWP then paymentPlatformModule.UWP elseif getFFlagEnablePalisadesPaymentsPlatformModule() and (p1 == Enum.Platform.PS4 or p1 == Enum.Platform.PS5) then paymentPlatformModule.Palisades else paymentPlatformModule.None
+return function(Platform, p1, p2, p3) --[[ Line: 19 ]]
+	-- upvalues: PaymentPlatformModule (copy), FFlagEnablePioneerPaymentsPlatformModule (copy), GetIsPioneerBuildModule (copy), FFlagEnableMicrosoftStorePaymentsPlatform (copy), GetAppFeaturePoliciesFunction (copy), FFlagEnableMilkyWayPaymentsPlatformV2 (copy), GetFFlagEnablePalisadesPaymentsPlatformModule (copy)
+	return if Platform == Enum.Platform.XBoxOne then PaymentPlatformModule.Xbox elseif Platform == Enum.Platform.IOS then if p1 then PaymentPlatformModule.Midas else PaymentPlatformModule.Apple elseif Platform == Enum.Platform.Windows or Platform == Enum.Platform.OSX or Platform == Enum.Platform.Linux then if FFlagEnablePioneerPaymentsPlatformModule and GetIsPioneerBuildModule() then PaymentPlatformModule.Pioneer elseif FFlagEnableMicrosoftStorePaymentsPlatform and GetAppFeaturePoliciesFunction().getUsePaymentPlatformMicrosoftStore() then PaymentPlatformModule.Microsoft else PaymentPlatformModule.Web elseif Platform == Enum.Platform.Android then if p1 then PaymentPlatformModule.Midas elseif p2 then PaymentPlatformModule.Amazon elseif p3 then PaymentPlatformModule.Maquettes elseif FFlagEnableMilkyWayPaymentsPlatformV2 and GetAppFeaturePoliciesFunction().getUsePaymentPlatformMilkyWayStore() then PaymentPlatformModule.MilkyWay else PaymentPlatformModule.Google elseif Platform == Enum.Platform.UWP then PaymentPlatformModule.UWP elseif GetFFlagEnablePalisadesPaymentsPlatformModule() and (Platform == Enum.Platform.PS4 or Platform == Enum.Platform.PS5) then PaymentPlatformModule.Palisades else PaymentPlatformModule.None
 end

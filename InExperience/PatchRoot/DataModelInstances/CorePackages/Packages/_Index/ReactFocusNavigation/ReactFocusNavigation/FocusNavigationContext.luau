@@ -1,4 +1,4 @@
-﻿local parent = script.Parent.Parent
-local _ = require(parent.FocusNavigation)
+﻿local Parent = script.Parent.Parent
+local _ = require(Parent.FocusNavigation)
 
-return require(parent.React).createContext(nil)
+return require(Parent.React).createContext(nil)

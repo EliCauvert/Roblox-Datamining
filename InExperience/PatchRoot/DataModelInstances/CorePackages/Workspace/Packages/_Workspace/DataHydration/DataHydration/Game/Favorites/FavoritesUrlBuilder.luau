@@ -1,22 +1,22 @@
-﻿local parent = script:FindFirstAncestor("DataHydration").Parent
-local urlBuilder = require(parent.UrlBuilder).UrlBuilder
-local url = require(parent.Http).Url
+﻿local Parent = script:FindFirstAncestor("DataHydration").Parent
+local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
+local Url = require(Parent.Http).Url
 
 return {
-	buildFavoriteUrl = function(p1)
-		-- upvalues: urlBuilder (ref), url (ref)
-		return urlBuilder.new({
+	buildFavoriteUrl = function(UniverseId) --[[ Line: 14 ]]
+		-- upvalues: UrlBuilder (copy), Url (copy)
+		return UrlBuilder.new({
 			path = "v1/games/{universeId}/favorites",
-			base = url.GAME_URL
-		})({ universeId = p1 })
+			base = Url.GAME_URL
+		})({ universeId = UniverseId })
 	end,
-	buildFavoriteUpdateUrl = function(p1)
-		-- upvalues: urlBuilder (ref), url (ref)
-		return urlBuilder.new({
+	buildFavoriteUpdateUrl = function(UniverseId) --[[ Line: 28 ]]
+		-- upvalues: UrlBuilder (copy), Url (copy)
+		return UrlBuilder.new({
 			path = "v1/games/{universeId}/favorites",
-			base = url.GAME_URL
-		})({ universeId = p1 })
+			base = Url.GAME_URL
+		})({ universeId = UniverseId })
 	end,
-	FAVORITE_URL = urlBuilder.new({ path = "v1/games/favorites", base = url.GAME_URL }),
-	FAVORITE_UPDATE_URL = urlBuilder.new({ path = "v1/games/favorites/update", base = url.GAME_URL })
+	FAVORITE_URL = UrlBuilder.new({ path = "v1/games/favorites", base = Url.GAME_URL }),
+	FAVORITE_UPDATE_URL = UrlBuilder.new({ path = "v1/games/favorites/update", base = Url.GAME_URL })
 }

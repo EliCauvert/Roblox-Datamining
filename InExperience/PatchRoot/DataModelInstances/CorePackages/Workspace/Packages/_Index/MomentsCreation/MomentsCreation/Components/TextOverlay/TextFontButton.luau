@@ -1,27 +1,29 @@
-﻿local parent = script:FindFirstAncestor("MomentsCreation").Parent
-local builderIconsModule = require(parent.BuilderIcons)
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local iconButton = foundationModule.IconButton
-local view = foundationModule.View
-local useTokens = foundationModule.Hooks.useTokens
+﻿local Parent = script:FindFirstAncestor("MomentsCreation").Parent
+local BuilderIconsModule = require(Parent.BuilderIcons)
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local IconButton = FoundationModule.IconButton
+local View = FoundationModule.View
+local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), view (ref), iconButton (ref), builderIconsModule (ref), foundationModule (ref)
-	return reactModule.createElement(view, {
+return function(Frame) --[[ Line: 24 | Named "TextFontButton" ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), IconButton (copy), BuilderIconsModule (copy), FoundationModule (copy)
+	local UseTokensResult = UseTokensFunction()
+	
+	return ReactModule.createElement(View, {
 		tag = "auto-xy radius-circle",
-		LayoutOrder = p1.LayoutOrder
+		LayoutOrder = Frame.LayoutOrder
 	}, {
-		Icon = reactModule.createElement(iconButton, {
+		Icon = ReactModule.createElement(IconButton, {
 			isCircular = true,
-			icon = builderIconsModule.Icon.TextUppercaseALowercaseA,
-			onActivated = p1.onToggle,
-			size = foundationModule.Enums.InputSize.Medium
+			icon = BuilderIconsModule.Icon.TextUppercaseALowercaseA,
+			onActivated = Frame.onToggle,
+			size = FoundationModule.Enums.InputSize.Medium
 		}),
-		Highlight = if p1.expanded then reactModule.createElement(view, {
+		Highlight = if Frame.expanded then ReactModule.createElement(View, {
 			ZIndex = 2,
 			tag = "size-full radius-circle",
-			backgroundStyle = useTokens().Color.State.Hover
+			backgroundStyle = UseTokensResult.Color.State.Hover
 		}) else nil
 	})
 end

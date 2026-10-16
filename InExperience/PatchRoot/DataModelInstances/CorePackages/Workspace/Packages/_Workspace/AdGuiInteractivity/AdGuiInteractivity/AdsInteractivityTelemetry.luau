@@ -1,60 +1,60 @@
-﻿local loggingProtocolModule = require(script.Parent.Parent.LoggingProtocol)
-local default = loggingProtocolModule.default
-local t = {
+﻿local LoggingProtocolModule = require(script.Parent.Parent.LoggingProtocol)
+local Default = LoggingProtocolModule.default
+local config = {
 	eventName = "AdMenuEvent",
 	description = "        This event is fired when a user interacts with the ad menu.\n    ",
 	links = "https://roblox.atlassian.net/browse/ADS-6383",
-	backends = { loggingProtocolModule.TelemetryBackends.Counter },
+	backends = { LoggingProtocolModule.TelemetryBackends.Counter },
 	lastUpdated = { 24, 10, 29 }
 }
-local t_1 = {
+local config1 = {
 	eventName = "WhyThisAdEvent",
 	description = "        This event is fired when a user interacts with the \"Why this ad?\" button.\n    ",
 	links = "https://roblox.atlassian.net/browse/ADS-6383",
-	backends = { loggingProtocolModule.TelemetryBackends.Counter },
+	backends = { LoggingProtocolModule.TelemetryBackends.Counter },
 	lastUpdated = { 24, 10, 29 }
 }
-local t_2 = {
+local config2 = {
 	eventName = "ReportAdEvent",
 	description = "        This event is fired when a user interacts with the \"Report this ad\" button.\n    ",
 	links = "https://roblox.atlassian.net/browse/ADS-6383",
-	backends = { loggingProtocolModule.TelemetryBackends.Counter },
+	backends = { LoggingProtocolModule.TelemetryBackends.Counter },
 	lastUpdated = { 24, 10, 29 }
 }
-local t_3 = {
+local config3 = {
 	eventName = "ImmersiveBrandedAdButtonClickEvent",
 	description = "This event is fired when a user clicks one of the immersive branded ad buttons (disclosure, \"Why this ad?\", or \"Report this ad\").",
 	links = "",
-	backends = { loggingProtocolModule.TelemetryBackends.Counter },
+	backends = { LoggingProtocolModule.TelemetryBackends.Counter },
 	lastUpdated = { 26, 3, 11 }
 }
-local t_4 = {
+local config4 = {
 	eventName = "ImmersiveBrandedAdLinkingFailedEvent",
 	description = "This event is fired when a user tries to click one of the immersive branded ad menu/dialog links, but LinkingProtocol fails.",
 	links = "",
-	backends = { loggingProtocolModule.TelemetryBackends.Counter },
+	backends = { LoggingProtocolModule.TelemetryBackends.Counter },
 	lastUpdated = { 26, 3, 24 }
 }
 
 return {
-	logAdMenuEvent = function(p1)
-		-- upvalues: default (ref), t (ref)
-		default:logRobloxTelemetryCounter(t, 1, { state = p1 })
+	logAdMenuEvent = function(State) --[[ Line: 72 ]]
+		-- upvalues: Default (copy), config (copy)
+		Default:logRobloxTelemetryCounter(config, 1, { state = State })
 	end,
-	logWhyThisAdEvent = function()
-		-- upvalues: default (ref), t_1 (ref)
-		default:logRobloxTelemetryCounter(t_1, 1)
+	logWhyThisAdEvent = function() --[[ Line: 78 ]]
+		-- upvalues: Default (copy), config1 (copy)
+		Default:logRobloxTelemetryCounter(config1, 1)
 	end,
-	logReportAdEvent = function(p1)
-		-- upvalues: default (ref), t_2 (ref)
-		default:logRobloxTelemetryCounter(t_2, 1, { state = p1 })
+	logReportAdEvent = function(State) --[[ Line: 88 ]]
+		-- upvalues: Default (copy), config2 (copy)
+		Default:logRobloxTelemetryCounter(config2, 1, { state = State })
 	end,
-	logImmersiveBrandedAdButtonClickCounter = function(p1)
-		-- upvalues: default (ref), t_3 (ref)
-		default:logRobloxTelemetryCounter(t_3, 1, { buttonName = p1 })
+	logImmersiveBrandedAdButtonClickCounter = function(ButtonName) --[[ Line: 94 ]]
+		-- upvalues: Default (copy), config3 (copy)
+		Default:logRobloxTelemetryCounter(config3, 1, { buttonName = ButtonName })
 	end,
-	logImmersiveBrandedAdLinkingFailedCounter = function(p1)
-		-- upvalues: default (ref), t_4 (ref)
-		default:logRobloxTelemetryCounter(t_4, 1, { linkName = p1 })
+	logImmersiveBrandedAdLinkingFailedCounter = function(LinkName) --[[ Line: 102 ]]
+		-- upvalues: Default (copy), config4 (copy)
+		Default:logRobloxTelemetryCounter(config4, 1, { linkName = LinkName })
 	end
 }

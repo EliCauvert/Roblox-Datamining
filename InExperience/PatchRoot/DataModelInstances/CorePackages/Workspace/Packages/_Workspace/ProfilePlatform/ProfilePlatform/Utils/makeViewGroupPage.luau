@@ -1,21 +1,20 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local appPage = require(parent.RobloxAppEnums).AppPage
-local _ = require(parent.NavigationRodux)
-local socialLuaAnalyticsModule = require(parent.SocialLuaAnalytics)
-local urlBuilder = require(parent.UrlBuilder).UrlBuilder
-local textKeysModule = require(profilePlatform.Common.TextKeys)
-local fFlagEnableGroupDetailPane = require(parent.SharedFlags).FFlagEnableGroupDetailPane
-local sources = socialLuaAnalyticsModule.Analytics.Enums.Sources
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local _ = require(Parent.NavigationRodux)
+local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
+local TextKeysModule = require(ProfilePlatform.Common.TextKeys)
+local FFlagEnableGroupDetailPane = require(Parent.SharedFlags).FFlagEnableGroupDetailPane
+local Sources = require(Parent.SocialLuaAnalytics).Analytics.Enums.Sources
 
-return function(p1, p2)
-	-- upvalues: fFlagEnableGroupDetailPane (ref), appPage (ref), sources (ref), urlBuilder (ref), textKeysModule (ref)
-	return if fFlagEnableGroupDetailPane then {
-		name = appPage.Groups,
-		extraProps = { groupId = p1, source = sources.ProfilePlatform }
+return function(GroupId, OnClose) --[[ Line: 17 | Named "makeViewGroupPage" ]]
+	-- upvalues: FFlagEnableGroupDetailPane (copy), AppPage (copy), Sources (copy), UrlBuilder (copy), TextKeysModule (copy)
+	return if FFlagEnableGroupDetailPane then {
+		name = AppPage.Groups,
+		extraProps = { groupId = GroupId, source = Sources.ProfilePlatform }
 	} else {
-		name = appPage.GenericWebPage,
-		detail = urlBuilder.user.group({ groupId = p1 }),
-		extraProps = { titleKey = textKeysModule.Community, onClose = p2 }
+		name = AppPage.GenericWebPage,
+		detail = UrlBuilder.user.group({ groupId = GroupId }),
+		extraProps = { titleKey = TextKeysModule.Community, onClose = OnClose }
 	}
 end

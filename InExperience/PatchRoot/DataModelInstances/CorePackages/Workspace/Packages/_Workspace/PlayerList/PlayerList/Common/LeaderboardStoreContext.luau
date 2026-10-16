@@ -1,4 +1,4 @@
-﻿local parent = script.Parent.Parent.Parent
-local _ = require(parent.LeaderboardStore)
+﻿local Parent = script.Parent.Parent.Parent
+local _ = require(Parent.LeaderboardStore)
 
-return require(parent.React).createContext(nil)
+return (require(Parent.React).createContext(nil))

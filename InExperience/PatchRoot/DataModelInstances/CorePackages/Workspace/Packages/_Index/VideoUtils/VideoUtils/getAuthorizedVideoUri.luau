@@ -1,6 +1,6 @@
-﻿local httpService = game:GetService("HttpService")
+﻿local HttpService = game:GetService("HttpService")
 
-return function(p1, p2)
-	-- upvalues: httpService (ref)
-	return if p2 == nil or p2 == "" then p1 else `{p1}&accessContext={httpService:UrlEncode(p2)}`
+return function(p1, Input) --[[ Line: 3 | Named "getAuthorizedVideoUri" ]]
+	-- upvalues: HttpService (copy)
+	return if Input == nil or Input == "" then p1 else `{p1}&accessContext={HttpService:UrlEncode(Input)}`
 end

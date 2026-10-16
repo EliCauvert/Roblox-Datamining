@@ -1,17 +1,17 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local textModule = require(foundation.Components.Text)
-local _ = require(foundation.Components.Types)
-local useDialogVariants = require(script.Parent.Parent.useDialogVariants).useDialogVariants
-local useDialogModule = require(script.Parent.Parent.useDialog)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local TextModule = require(Foundation.Components.Text)
+local _ = require(Foundation.Components.Types)
+local UseDialogVariantsFunction = require(script.Parent.Parent.useDialogVariants).useDialogVariants
+local UseDialogModule = require(script.Parent.Parent.useDialog)
 
-return function(p1)
-	-- upvalues: useDialogVariants (ref), useDialogModule (ref), reactModule (ref), textModule (ref)
-	return reactModule.createElement(textModule, {
+return function(Frame) --[[ Line: 17 | Named "DialogText" ]]
+	-- upvalues: UseDialogVariantsFunction (copy), UseDialogModule (copy), ReactModule (copy), TextModule (copy)
+	return ReactModule.createElement(TextModule, {
 		RichText = true,
-		Text = p1.Text,
-		tag = useDialogVariants().contentText.tag,
-		LayoutOrder = p1.LayoutOrder,
-		testId = `{useDialogModule().testId}--text`
+		Text = Frame.Text,
+		tag = UseDialogVariantsFunction().contentText.tag,
+		LayoutOrder = Frame.LayoutOrder,
+		testId = `{UseDialogModule().testId}--text`
 	})
 end

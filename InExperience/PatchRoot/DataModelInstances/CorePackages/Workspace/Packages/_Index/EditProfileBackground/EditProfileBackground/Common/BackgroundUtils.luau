@@ -1,10 +1,10 @@
-﻿local constantsModule = require(script.Parent.Constants)
-local var1 = constantsModule.DEFAULT_BACKGROUND_ASSET_IDS[1]
-local var2 = constantsModule.DEFAULT_BACKGROUND_ASSET_IDS[2]
+﻿local ConstantsModule = require(script.Parent.Constants)
+local DEFAULTBACKGROUNDASSETID = ConstantsModule.DEFAULT_BACKGROUND_ASSET_IDS[1]
+local DEFAULTBACKGROUNDASSETID1 = ConstantsModule.DEFAULT_BACKGROUND_ASSET_IDS[2]
 
 return {
-	getDisplayBackgroundId = function(value, p1)
-		-- upvalues: var1 (ref), var2 (ref)
-		return if value and value ~= -1 then value elseif p1 == "dark" then var1 else var2
+	getDisplayBackgroundId = function(p1, p2) --[[ Line: 8 ]]
+		-- upvalues: DEFAULTBACKGROUNDASSETID (copy), DEFAULTBACKGROUNDASSETID1 (copy)
+		return if p1 and p1 ~= -1 then p1 elseif p2 == "dark" then DEFAULTBACKGROUNDASSETID else DEFAULTBACKGROUNDASSETID1
 	end
 }

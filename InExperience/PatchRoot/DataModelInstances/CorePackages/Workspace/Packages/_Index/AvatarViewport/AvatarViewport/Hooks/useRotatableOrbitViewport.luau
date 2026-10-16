@@ -1,59 +1,59 @@
-﻿local avatarViewport = script:FindFirstAncestor("AvatarViewport")
-local reactModule = require(avatarViewport.Parent.React)
-local constantsModule = require(avatarViewport.Constants)
-local _ = require(avatarViewport.Types)
-local useAvatarViewportSceneModule = require(avatarViewport.Hooks.useAvatarViewportScene)
-local useViewportModelLoaderModule = require(avatarViewport.Hooks.useViewportModelLoader)
-local useViewportOrbitInteractionsModule = require(avatarViewport.Hooks.useViewportOrbitInteractions)
-local useViewportGamepadOrbitModule = require(avatarViewport.Hooks.useViewportGamepadOrbit)
-local useOrbitHeadCameraModule = require(avatarViewport.Hooks.useOrbitHeadCamera)
+﻿local AvatarViewport = script:FindFirstAncestor("AvatarViewport")
+local ReactModule = require(AvatarViewport.Parent.React)
+local ConstantsModule = require(AvatarViewport.Constants)
+local _ = require(AvatarViewport.Types)
+local UseAvatarViewportSceneModule = require(AvatarViewport.Hooks.useAvatarViewportScene)
+local UseViewportModelLoaderModule = require(AvatarViewport.Hooks.useViewportModelLoader)
+local UseViewportOrbitInteractionsModule = require(AvatarViewport.Hooks.useViewportOrbitInteractions)
+local UseViewportGamepadOrbitModule = require(AvatarViewport.Hooks.useViewportGamepadOrbit)
+local UseOrbitHeadCameraModule = require(AvatarViewport.Hooks.useOrbitHeadCamera)
 
-return function(p1)
-	-- upvalues: reactModule (ref), useAvatarViewportSceneModule (ref), useViewportOrbitInteractionsModule (ref), useViewportGamepadOrbitModule (ref), useViewportModelLoaderModule (ref), constantsModule (ref), useOrbitHeadCameraModule (ref)
-	local var1 = reactModule.useRef(function(_) end)
-	local var2 = useAvatarViewportSceneModule()
-	local var3 = useViewportOrbitInteractionsModule({
+return function(p1) --[[ Line: 52 | Named "useRotatableOrbitViewport" ]]
+	-- upvalues: ReactModule (copy), UseAvatarViewportSceneModule (copy), UseViewportOrbitInteractionsModule (copy), UseViewportGamepadOrbitModule (copy), UseViewportModelLoaderModule (copy), ConstantsModule (copy), UseOrbitHeadCameraModule (copy)
+	local UseRefResult = ReactModule.useRef(function(_) --[[ Line: 54 ]] end)
+	local UseAvatarViewportSceneModuleResult = UseAvatarViewportSceneModule()
+	local UseViewportOrbitInteractionsModuleResult = UseViewportOrbitInteractionsModule({
 		initialYRotDeg = p1.committedYRotDeg or p1.initialYRotDeg,
 		distanceScale = p1.distanceScale,
 		onYRotDegChanged = p1.onYRotDegChanged,
 		onDistanceScaleChanged = p1.onDistanceScaleChanged,
-		onCameraUpdateRequested = function()
-			-- upvalues: var1 (ref)
-			var1.current()
+		onCameraUpdateRequested = function() --[[ Line: 63 ]]
+			-- upvalues: UseRefResult (copy)
+			UseRefResult.current()
 		end
 	})
-	useViewportGamepadOrbitModule({
-		applyYawDelta = var3.applyYawDelta,
-		applyZoomGesture = var3.applyZoomGesture,
-		onOrbitEnded = var3.commitYaw,
+	UseViewportGamepadOrbitModule({
+		applyYawDelta = UseViewportOrbitInteractionsModuleResult.applyYawDelta,
+		applyZoomGesture = UseViewportOrbitInteractionsModuleResult.applyZoomGesture,
+		onOrbitEnded = UseViewportOrbitInteractionsModuleResult.commitYaw,
 		actionName = p1.gamepadActionName
 	})
-	local var4 = useViewportModelLoaderModule({
+	local UseViewportModelLoaderModuleResult = UseViewportModelLoaderModule({
 		modelSource = p1.modelSource,
-		worldModelRef = var2.worldModel,
-		onModelReady = function(p2)
-			-- upvalues: var3 (ref), p1 (ref)
-			var3.resetYaw(p1.committedYRotDeg or p1.initialYRotDeg)
+		worldModelRef = UseAvatarViewportSceneModuleResult.worldModel,
+		onModelReady = function(p2) --[[ Line: 78 ]]
+			-- upvalues: UseViewportOrbitInteractionsModuleResult (copy), p1 (copy)
+			UseViewportOrbitInteractionsModuleResult.resetYaw(p1.committedYRotDeg or p1.initialYRotDeg)
 			
 			if p1.onModelReady then
 				p1.onModelReady(p2)
 			end
 		end
 	})
-	local var5 = useOrbitHeadCameraModule({
-		cameraRef = var2.camera,
-		model = var4.model,
-		yRotDeg = var3.yRotDeg,
-		yRotDegRef = var3.yRotDegRef,
+	local UseOrbitHeadCameraModuleResult = UseOrbitHeadCameraModule({
+		cameraRef = UseAvatarViewportSceneModuleResult.camera,
+		model = UseViewportModelLoaderModuleResult.model,
+		yRotDeg = UseViewportOrbitInteractionsModuleResult.yRotDeg,
+		yRotDegRef = UseViewportOrbitInteractionsModuleResult.yRotDegRef,
 		distanceScale = p1.distanceScale,
-		distanceScaleRef = var3.distanceScaleRef,
-		config = reactModule.useMemo(function()
-			-- upvalues: p1 (ref), constantsModule (copy)
+		distanceScaleRef = UseViewportOrbitInteractionsModuleResult.distanceScaleRef,
+		config = ReactModule.useMemo(function() --[[ Line: 87 ]]
+			-- upvalues: p1 (copy), ConstantsModule (upval)
 			return {
-				baseDistance = p1.baseDistance or constantsModule.DefaultOrbitBaseDistance,
-				fieldOfViewDeg = p1.fieldOfViewDeg or constantsModule.DefaultOrbitFieldOfViewDeg,
+				baseDistance = p1.baseDistance or ConstantsModule.DefaultOrbitBaseDistance,
+				fieldOfViewDeg = p1.fieldOfViewDeg or ConstantsModule.DefaultOrbitFieldOfViewDeg,
 				fieldOfViewForDistanceScaleDeg = p1.fieldOfViewForDistanceScaleDeg,
-				focusPartName = p1.focusPartName or constantsModule.DefaultFocusPartName,
+				focusPartName = p1.focusPartName or ConstantsModule.DefaultFocusPartName,
 				layout = p1.layout
 			}
 		end, {
@@ -63,23 +63,26 @@ return function(p1)
 		}),
 		frameCloseupPreviewCamera = p1.frameCloseupPreviewCamera
 	})
-	var1.current = var5.frameCamera
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var3 (ref)
+	UseRefResult.current = UseOrbitHeadCameraModuleResult.frameCamera
+	ReactModule.useEffect(function() --[[ Line: 120 ]]
+		-- upvalues: p1 (copy), UseViewportOrbitInteractionsModuleResult (copy)
 		if p1.committedYRotDeg ~= nil then
-			var3.resetYaw(p1.committedYRotDeg)
+			UseViewportOrbitInteractionsModuleResult.resetYaw(p1.committedYRotDeg)
 		end
-	end, { p1.committedYRotDeg, var3.resetYaw })
+	end, {
+		p1.committedYRotDeg,
+		UseViewportOrbitInteractionsModuleResult.resetYaw
+	})
 	
 	return {
-		refs = var2,
-		inputHandlers = var3.inputHandlers,
+		refs = UseAvatarViewportSceneModuleResult,
+		inputHandlers = UseViewportOrbitInteractionsModuleResult.inputHandlers,
 		modelLoader = {
-			isLoading = var4.isLoading,
-			isReady = var4.isReady,
-			model = var4.model
+			isLoading = UseViewportModelLoaderModuleResult.isLoading,
+			isReady = UseViewportModelLoaderModuleResult.isReady,
+			model = UseViewportModelLoaderModuleResult.model
 		},
-		frameCamera = var5.frameCamera,
-		resetYaw = var3.resetYaw
+		frameCamera = UseOrbitHeadCameraModuleResult.frameCamera,
+		resetYaw = UseViewportOrbitInteractionsModuleResult.resetYaw
 	}
 end

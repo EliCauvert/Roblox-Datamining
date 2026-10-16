@@ -1,16 +1,16 @@
-﻿local url = require(script:FindFirstAncestor("GenericAbuseReporting").Parent.Http).Url
+﻿local Url = require(script:FindFirstAncestor("GenericAbuseReporting").Parent.Http).Url
 
 return {
-	blockUser = function(p1, p2)
-		-- upvalues: url (ref)
-		return p1(`{url.APIS_URL}user-blocking-api/v1/users/{p2}/block-user`, "POST")
+	blockUser = function(Callback, p1) --[[ Line: 8 ]]
+		-- upvalues: Url (copy)
+		return Callback(`{Url.APIS_URL}user-blocking-api/v1/users/{p1}/block-user`, "POST")
 	end,
-	unblockUser = function(p1, p2)
-		-- upvalues: url (ref)
-		return p1(`{url.APIS_URL}user-blocking-api/v1/users/{p2}/unblock-user`, "POST")
+	unblockUser = function(Callback, p1) --[[ Line: 13 ]]
+		-- upvalues: Url (copy)
+		return Callback(`{Url.APIS_URL}user-blocking-api/v1/users/{p1}/unblock-user`, "POST")
 	end,
-	isBlockedUser = function(p1, p2)
-		-- upvalues: url (ref)
-		return p1(`{url.APIS_URL}user-blocking-api/v1/users/{p2}/is-blocked`, "GET")
+	isBlockedUser = function(Callback, p1) --[[ Line: 18 ]]
+		-- upvalues: Url (copy)
+		return Callback(`{Url.APIS_URL}user-blocking-api/v1/users/{p1}/is-blocked`, "GET")
 	end
 }

@@ -1,15 +1,16 @@
-﻿local markdown = script:FindFirstAncestor("Markdown")
-local _ = require(markdown.Types)
-local nodeTypeModule = require(markdown.Enums.NodeType)
+﻿local Markdown = script:FindFirstAncestor("Markdown")
+local _ = require(Markdown.Types)
+local NodeTypeModule = require(Markdown.Enums.NodeType)
 
-return function(p1, p2)
-	-- upvalues: nodeTypeModule (ref)
-	local var1 = p2.nodeConfiguration[p1]
+return function(p1, p2) --[[ Line: 8 | Named "getNodeType" ]]
+	-- upvalues: NodeTypeModule (copy)
+	local NodeConfigurationEntry = p2.nodeConfiguration[p1]
 	
-	if var1 then
-		return var1.type
+	if NodeConfigurationEntry then
+		return NodeConfigurationEntry.type
+	else
+		warn(`No node configuration found for {p1}`)
+		
+		return NodeTypeModule.Block
 	end
-	warn(`No node configuration found for {p1}`)
-	
-	return nodeTypeModule.Block
 end

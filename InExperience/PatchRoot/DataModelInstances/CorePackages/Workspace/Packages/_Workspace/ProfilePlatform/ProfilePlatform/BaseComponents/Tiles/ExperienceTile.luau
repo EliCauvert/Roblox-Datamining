@@ -1,66 +1,66 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local UIBloxModule = require(parent.UIBlox)
-local experienceTileV3 = UIBloxModule.App.Tile.ExperienceTileV3
-local useStyle = UIBloxModule.Core.Style.useStyle
-local userLibModule = require(parent.UserLib)
-local constants = userLibModule.Utils.Constants
-local gameStats = require(parent.GameTile).GameStats
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local fFlagProfilePlatformEnableExperiencesFooterModule = require(profilePlatform.Flags.FFlagProfilePlatformEnableExperiencesFooter)
-local getDeepValue = require(parent.LuaSocialLibrariesDeps).SocialLibraries.config({}).Dictionary.getDeepValue
-local _ = require(profilePlatform.Common.Types)
-local useSetupImpressionsTileTaggingModule = require(profilePlatform.Hooks.useSetupImpressionsTileTagging)
-local getRbxthumbWithTypeSizeAndOptions = userLibModule.Utils.getRbxthumbWithTypeSizeAndOptions
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local UIBloxModule = require(Parent.UIBlox)
+local ExperienceTileV3 = UIBloxModule.App.Tile.ExperienceTileV3
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local UserLibModule = require(Parent.UserLib)
+local Constants = UserLibModule.Utils.Constants
+local GameStats = require(Parent.GameTile).GameStats
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local FFlagProfilePlatformEnableExperiencesFooterModule = require(ProfilePlatform.Flags.FFlagProfilePlatformEnableExperiencesFooter)
+local GetDeepValueFunction = require(Parent.LuaSocialLibrariesDeps).SocialLibraries.config({}).Dictionary.getDeepValue
+local _ = require(ProfilePlatform.Common.Types)
+local UseSetupImpressionsTileTaggingModule = require(ProfilePlatform.Hooks.useSetupImpressionsTileTagging)
+local GetRbxthumbWithTypeSizeAndOptionsFunction = UserLibModule.Utils.getRbxthumbWithTypeSizeAndOptions
 local t = {}
 
-return function(p1)
-	-- upvalues: useStyle (ref), reactModule (ref), useSetupImpressionsTileTaggingModule (ref), constants (ref), getRbxthumbWithTypeSizeAndOptions (ref), fFlagProfilePlatformEnableExperiencesFooterModule (ref), useSelector (ref), getDeepValue (ref), t (ref), experienceTileV3 (ref), gameStats (ref)
-	local var1 = useStyle()
-	local var2 = reactModule.useRef(nil)
-	useSetupImpressionsTileTaggingModule(var2, p1.impressionsTag, p1.index)
-	local var3 = getRbxthumbWithTypeSizeAndOptions(p1.item.experienceId, constants.RbxthumbTypes.GameIcon, 150)
-	local experienceId = nil
-	local fFlagProfilePlatformEnableExperiencesFooterModule_1 = p1.showFooter and fFlagProfilePlatformEnableExperiencesFooterModule
+return function(p1) --[[ Line: 41 | Named "ExperienceTile" ]]
+	-- upvalues: UseStyleFunction (copy), ReactModule (copy), UseSetupImpressionsTileTaggingModule (copy), Constants (copy), GetRbxthumbWithTypeSizeAndOptionsFunction (copy), FFlagProfilePlatformEnableExperiencesFooterModule (copy), UseSelectorFunction (copy), GetDeepValueFunction (copy), t (copy), ExperienceTileV3 (copy), GameStats (copy)
+	local UseStyleResult = UseStyleFunction()
+	local UseRefResult = ReactModule.useRef(nil)
+	UseSetupImpressionsTileTaggingModule(UseRefResult, p1.impressionsTag, p1.index)
+	local RbxthumbWithTypeSizeAndOptions = GetRbxthumbWithTypeSizeAndOptionsFunction(p1.item.experienceId, Constants.RbxthumbTypes.GameIcon, 150)
+	local v1 = nil
+	local FFlagProfilePlatformEnableExperiencesFooterModule1 = p1.showFooter and FFlagProfilePlatformEnableExperiencesFooterModule
 	
-	if fFlagProfilePlatformEnableExperiencesFooterModule_1 then
-		experienceId = useSelector(function(p2)
-			-- upvalues: getDeepValue (copy), t (copy)
-			return getDeepValue(p2, "GameVotes") or t
+	if FFlagProfilePlatformEnableExperiencesFooterModule1 then
+		v1 = UseSelectorFunction(function(p2) --[[ Line: 53 ]]
+			-- upvalues: GetDeepValueFunction (upval), t (upval)
+			return GetDeepValueFunction(p2, "GameVotes") or t
 		end)[p1.item.experienceId]
 	end
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		LayoutOrder = p1.index,
 		Size = UDim2.new(1, 0, 1, 0),
-		ref = var2
+		ref = UseRefResult
 	}, {
-		Tile = reactModule.createElement(experienceTileV3, {
+		Tile = ReactModule.createElement(ExperienceTileV3, {
 			contextTextLineCount = 1,
 			hasBackground = false,
 			isHoverEnabled = false,
 			hasOutline = false,
 			experienceName = p1.item.name,
-			thumbnail = var3,
+			thumbnail = RbxthumbWithTypeSizeAndOptions,
 			onActivated = p1.onActivated,
 			styleProps = {
 				bottomContentPadding = {
 					Left = 0,
 					Right = 0,
-					Top = var1.Tokens.Padding.Small,
-					Bottom = var1.Tokens.Padding.Small
+					Top = UseStyleResult.Tokens.Padding.Small,
+					Bottom = UseStyleResult.Tokens.Padding.Small
 				}
 			},
-			footer = if fFlagProfilePlatformEnableExperiencesFooterModule_1 then reactModule.createElement(gameStats, {
+			footer = if FFlagProfilePlatformEnableExperiencesFooterModule1 then ReactModule.createElement(GameStats, {
 				isGridTile = true,
 				stats = {
-					totalUpVotes = if experienceId then experienceId.upVotes else 0,
-					totalDownVotes = if experienceId then experienceId.downVotes else 0,
+					totalUpVotes = v1 and v1.upVotes or 0,
+					totalDownVotes = v1 and v1.downVotes or 0,
 					playerCount = p1.item.playing
 				}
 			}) else nil,
-			footerHeight = if fFlagProfilePlatformEnableExperiencesFooterModule_1 then 32 else nil
+			footerHeight = if FFlagProfilePlatformEnableExperiencesFooterModule1 then 32 else nil
 		})
 	})
 end

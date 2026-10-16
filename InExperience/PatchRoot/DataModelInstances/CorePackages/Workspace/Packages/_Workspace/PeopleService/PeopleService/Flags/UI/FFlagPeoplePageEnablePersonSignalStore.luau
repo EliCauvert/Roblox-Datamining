@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("PeoplePageEnablePersonSignalStore", false)
 
-return function()
+return function() --[[ Line: 3 ]]
 	return game:GetFastFlag("PeoplePageEnablePersonSignalStore")
 end

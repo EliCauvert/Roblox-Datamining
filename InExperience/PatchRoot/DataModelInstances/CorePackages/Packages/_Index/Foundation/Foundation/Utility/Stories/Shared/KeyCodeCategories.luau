@@ -2,13 +2,13 @@
 	"Letters", "Numbers", "Keypad", "Function keys", "Arrows", "Navigation",
 	"Modifiers", "Punctuation", "Gamepad", "Mouse and touch", "Other", "Deprecated"
 }
-local t = {
+local config = {
 	MouseBackButton = true,
 	MouseNoButton = true,
 	MouseX = true,
 	MouseY = true
 }
-local t_1 = {
+local config1 = {
 	MouseLeftButton = true,
 	MouseRightButton = true,
 	MouseMiddleButton = true,
@@ -19,7 +19,7 @@ local t_1 = {
 	TrackpadPan = true,
 	TrackpadPinch = true
 }
-local t_2 = {
+local config2 = {
 	Zero = true,
 	One = true,
 	Two = true,
@@ -31,12 +31,12 @@ local t_2 = {
 	Eight = true,
 	Nine = true
 }
-local list_1 = {
+local List = {
 	Enum.KeyCode.Zero, Enum.KeyCode.One, Enum.KeyCode.Two, Enum.KeyCode.Three,
 	Enum.KeyCode.Four, Enum.KeyCode.Five, Enum.KeyCode.Six, Enum.KeyCode.Seven,
 	Enum.KeyCode.Eight, Enum.KeyCode.Nine
 }
-local t_3 = {
+local config3 = {
 	LeftShift = true,
 	RightShift = true,
 	LeftControl = true,
@@ -45,15 +45,15 @@ local t_3 = {
 	RightAlt = true,
 	CapsLock = true
 }
-local t_4 = { Up = true, Down = true, Left = true, Right = true }
-local t_5 = {
+local config4 = { Up = true, Down = true, Left = true, Right = true }
+local config5 = {
 	Insert = true,
 	Home = true,
 	End = true,
 	PageUp = true,
 	PageDown = true
 }
-local t_6 = {
+local config6 = {
 	Comma = true,
 	Period = true,
 	Slash = true,
@@ -67,157 +67,165 @@ local t_6 = {
 	RightBracket = true
 }
 
-local function getKeyCodeName(p1)
-	local name = p1.Name
-	
-	if name ~= "" then
-		return name
-	end
-	local var1 = tostring(p1):match("^Enum%.KeyCode%.(.+)$")
-	
-	return var1 or tostring(p1)
+local function _(p1): boolean --[[ Line: 141 | Named "isDeprecatedKeyCode" ]]
+	-- upvalues: config (copy)
+	return if config[p1] then true else p1:match("^World%d+$") ~= nil
 end
 
-local function _(p1)
-	-- upvalues: t (ref)
-	return if t[p1] then true else p1:match("^World%d+$") ~= nil
+local _ = function(p1): boolean --[[ Line: 148 | Named "isGamepadKeyCode" ]]
+	return p1:match("^Button") ~= nil or p1:match("^DPad") ~= nil or p1:match("^Thumbstick") ~= nil
 end
 
-local _ = function(p1)
-	return if p1:match("^Button") == nil then if p1:match("^DPad") == nil then p1:match("^Thumbstick") ~= nil else true else true
-end
-
-local function getCategory(p1)
-	-- upvalues: t (ref), t_1 (ref), t_2 (ref), t_4 (ref), t_5 (ref), t_3 (ref), t_6 (ref)
-	local var1
-	local name = p1.Name
+local function getCategory(p1): string --[[ Line: 152 ]]
+	-- upvalues: config (copy), config1 (copy), config2 (copy), config4 (copy), config5 (copy), config3 (copy), config6 (copy)
+	local Name = p1.Name
+	local Name1 = nil
 	
-	if name == "" then
-		local var2 = tostring(p1):match("^Enum%.KeyCode%.(.+)$")
-		var1 = var2 or tostring(p1)
+	if Name == "" then
+		local EnumKeyCode = tostring(p1):match("^Enum%.KeyCode%.(.+)$")
+		Name1 = if EnumKeyCode then EnumKeyCode else tostring(p1)
 	else
-		var1 = name
+		Name1 = Name
 	end
-	return if if t[var1] then true else var1:match("^World%d+$") ~= nil then "Deprecated" elseif if var1:match("^Button") == nil then if var1:match("^DPad") == nil then var1:match("^Thumbstick") ~= nil else true else true then "Gamepad" elseif t_1[var1] then "Mouse and touch" elseif var1:match("^Keypad") then "Keypad" elseif var1:match("^[A-Z]$") then "Letters" elseif t_2[var1] then "Numbers" elseif var1:match("^F%d+$") then "Function keys" elseif t_4[var1] then "Arrows" elseif t_5[var1] then "Navigation" elseif t_3[var1] then "Modifiers" elseif t_6[var1] then "Punctuation" else "Other"
+	if if config[Name1] then true else Name1:match("^World%d+$") ~= nil then
+		return "Deprecated"
+	else
+		local HasButton: boolean = Name1:match("^Button") ~= nil or Name1:match("^DPad") ~= nil or Name1:match("^Thumbstick") ~= nil
+		
+		return if HasButton then "Gamepad" elseif config1[Name1] then "Mouse and touch" elseif Name1:match("^Keypad") then "Keypad" elseif Name1:match("^[A-Z]$") then "Letters" elseif config2[Name1] then "Numbers" elseif Name1:match("^F%d+$") then "Function keys" elseif config4[Name1] then "Arrows" elseif config5[Name1] then "Navigation" elseif config3[Name1] then "Modifiers" elseif config6[Name1] then "Punctuation" else "Other"
+	end
 end
 
-local function sortInCategory(p1, p2)
-	-- upvalues: list_1 (ref)
+local function sortInCategory(p1, List1) --[[ Line: 191 ]]
+	-- upvalues: List (copy)
 	if p1 == "Numbers" then
-		table.sort(p2, function(p3, p4)
-			-- upvalues: list_1 (copy)
-			return (table.find(list_1, p3) or 0) < (table.find(list_1, p4) or 0)
-		end)
-		
-		return
-	elseif p1 == "Function keys" then
-		table.sort(p2, function(p3, p4)
-			local var1
-			local name = p3.Name
-			
-			if name == "" then
-				local var2 = tostring(p3):match("^Enum%.KeyCode%.(.+)$")
-				var1 = var2 or tostring(p3)
-			else
-				var1 = name
-			end
-			local var3
-			local var4 = tonumber(var1:match("^F(%d+)$")) or 0
-			local name_1 = p4.Name
-			
-			if name_1 == "" then
-				local var5 = tostring(p4):match("^Enum%.KeyCode%.(.+)$")
-				var3 = var5 or tostring(p4)
-			else
-				var3 = name_1
-			end
-			return var4 < (tonumber(var3:match("^F(%d+)$")) or 0)
-		end)
-		
-		return
-	elseif p1 == "Deprecated" then
-		table.sort(p2, function(p3, p4)
-			local var1
-			local name = p3.Name
-			
-			if name == "" then
-				local var2 = tostring(p3):match("^Enum%.KeyCode%.(.+)$")
-				var1 = var2 or tostring(p3)
-			else
-				var1 = name
-			end
-			local var3
-			local name_1 = p4.Name
-			
-			if name_1 == "" then
-				local var4 = tostring(p4):match("^Enum%.KeyCode%.(.+)$")
-				var3 = var4 or tostring(p4)
-			else
-				var3 = name_1
-			end
-			local var5 = tonumber(var1:match("^World(%d+)$"))
-			local var6 = tonumber(var3:match("^World(%d+)$"))
-			
-			return if var5 and var6 then var5 < var6 elseif var5 then true elseif var6 then false else var1 < var3
+		table.sort(List1, function(Value, Value1): boolean --[[ Line: 193 ]]
+			-- upvalues: List (upval)
+			return (table.find(List, Value) or 0) < (table.find(List, Value1) or 0)
 		end)
 		
 		return
 	end
-	table.sort(p2, function(p3, p4)
-		local var1
-		local name = p3.Name
+	if p1 == "Function keys" then
+		table.sort(List1, function(A, B): boolean --[[ Line: 199 ]]
+			local Name = A.Name
+			local Name1 = nil
+			
+			if Name == "" then
+				local EnumKeyCode = tostring(A):match("^Enum%.KeyCode%.(.+)$")
+				Name1 = if EnumKeyCode then EnumKeyCode else tostring(A)
+			else
+				Name1 = Name
+			end
+			local Number: number = tonumber((Name1:match("^F(%d+)$"))) or 0
+			local Name2 = B.Name
+			local Name21 = nil
+			
+			if Name2 == "" then
+				local EnumKeyCode = tostring(B):match("^Enum%.KeyCode%.(.+)$")
+				Name21 = if EnumKeyCode then EnumKeyCode else tostring(B)
+			else
+				Name21 = Name2
+			end
+			return Number < (tonumber((Name21:match("^F(%d+)$"))) or 0)
+		end)
 		
-		if name == "" then
-			local var2 = tostring(p3):match("^Enum%.KeyCode%.(.+)$")
-			var1 = var2 or tostring(p3)
-		else
-			var1 = name
-		end
-		local var3
-		local name_1 = p4.Name
+		return
+	end
+	if p1 == "Deprecated" then
+		table.sort(List1, function(A, B): boolean --[[ Line: 205 ]]
+			local Name = A.Name
+			local Name1 = nil
+			
+			if Name == "" then
+				local EnumKeyCode = tostring(A):match("^Enum%.KeyCode%.(.+)$")
+				Name1 = if EnumKeyCode then EnumKeyCode else tostring(A)
+			else
+				Name1 = Name
+			end
+			local Name2 = B.Name
+			local Name21 = nil
+			
+			if Name2 == "" then
+				local EnumKeyCode = tostring(B):match("^Enum%.KeyCode%.(.+)$")
+				Name21 = if EnumKeyCode then EnumKeyCode else tostring(B)
+			else
+				Name21 = Name2
+			end
+			local Number: number? = tonumber(Name1:match("^World(%d+)$"))
+			local Number1: number? = tonumber(Name21:match("^World(%d+)$"))
+			
+			return if Number and Number1 then Number < Number1 elseif Number then true else not Number1 and Name1 < Name21
+		end)
 		
-		if name_1 == "" then
-			local var4 = tostring(p4):match("^Enum%.KeyCode%.(.+)$")
-			var3 = var4 or tostring(p4)
-		else
-			var3 = name_1
-		end
-		return var1 < var3
-	end)
+		return
+	else
+		table.sort(List1, function(A, B): boolean --[[ Line: 222 ]]
+			local Name = A.Name
+			local Name1 = nil
+			
+			if Name == "" then
+				local EnumKeyCode = tostring(A):match("^Enum%.KeyCode%.(.+)$")
+				Name1 = if EnumKeyCode then EnumKeyCode else tostring(A)
+			else
+				Name1 = Name
+			end
+			local Name2 = B.Name
+			local Name21 = nil
+			
+			if Name2 == "" then
+				local EnumKeyCode = tostring(B):match("^Enum%.KeyCode%.(.+)$")
+				Name21 = if EnumKeyCode then EnumKeyCode else tostring(B)
+			else
+				Name21 = Name2
+			end
+			return Name1 < Name21
+		end)
+	end
 end
 
 return {
 	CATEGORY_ORDER = list,
-	getKeyCodeName = getKeyCodeName,
+	getKeyCodeName = function(p1) --[[ Line: 127 ]]
+		local Name = p1.Name
+		
+		if Name == "" then
+			local EnumKeyCode = tostring(p1):match("^Enum%.KeyCode%.(.+)$")
+			
+			return if EnumKeyCode then EnumKeyCode else tostring(p1)
+		else
+			return Name
+		end
+	end,
 	getCategory = getCategory,
-	groupByCategory = function(p1)
-		-- upvalues: list (ref), getCategory (ref), sortInCategory (ref)
+	groupByCategory = function(List) --[[ Line: 228 ]]
+		-- upvalues: list (copy), getCategory (copy), sortInCategory (copy)
 		local t = {}
 		
 		for i = 1, #list do
 			t[list[i]] = {}
 		end
-		for i_1, v in p1 do
-			table.insert(t[getCategory(v)], v)
+		for _, value in List do
+			table.insert(t[getCategory(value)], value)
 		end
-		for i_2 = 1, #list do
-			local var1 = list[i_2]
-			sortInCategory(var1, t[var1])
+		for i1 = 1, #list do
+			local Entry = list[i1]
+			sortInCategory(Entry, t[Entry])
 		end
 		return t
 	end,
-	getNonEmptyCategories = function(p2)
-		-- upvalues: list (ref)
-		local t = {}
+	getNonEmptyCategories = function(p1) --[[ Line: 248 ]]
+		-- upvalues: list (copy)
+		local List = {}
 		
 		for i = 1, #list do
-			local var2 = list[i]
+			local Entry = list[i]
 			
-			if #p2[var2] > 0 then
-				table.insert(t, var2)
+			if #p1[Entry] > 0 then
+				table.insert(List, Entry)
 			end
 		end
-		return t
+		return List
 	end,
 	sortInCategory = sortInCategory
 }

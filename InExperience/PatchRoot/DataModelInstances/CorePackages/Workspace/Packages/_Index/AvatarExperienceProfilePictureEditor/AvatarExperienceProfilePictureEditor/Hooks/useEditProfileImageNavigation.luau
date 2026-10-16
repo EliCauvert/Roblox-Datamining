@@ -1,32 +1,32 @@
-﻿local avatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
-local parent = avatarExperienceProfilePictureEditor.Parent
-local reactModule = require(parent.React)
-local fFlagEditProfileFramesEnabled = require(parent.SharedFlags).FFlagEditProfileFramesEnabled
-local enumsModule = require(avatarExperienceProfilePictureEditor.Common.Enums)
-local editProfileImageHelpersModule = require(avatarExperienceProfilePictureEditor.Utils.editProfileImageHelpers)
+﻿local AvatarExperienceProfilePictureEditor = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor")
+local Parent = AvatarExperienceProfilePictureEditor.Parent
+local ReactModule = require(Parent.React)
+local FFlagEditProfileFramesEnabled = require(Parent.SharedFlags).FFlagEditProfileFramesEnabled
+local EnumsModule = require(AvatarExperienceProfilePictureEditor.Common.Enums)
+local EditProfileImageHelpersModule = require(AvatarExperienceProfilePictureEditor.Utils.editProfileImageHelpers)
 
-return function(p1)
-	-- upvalues: reactModule (ref), editProfileImageHelpersModule (ref), fFlagEditProfileFramesEnabled (ref), enumsModule (ref)
-	local var1, var2 = reactModule.useState(editProfileImageHelpersModule.getInitialActiveView(p1.mode))
-	local var3 = editProfileImageHelpersModule.hasOnTitleBack(var1, p1.mode)
-	local var4 = reactModule.useCallback(function()
-		-- upvalues: var2 (ref)
-		var2("combined")
+return function(p1) --[[ Line: 27 | Named "useEditProfileImageNavigation" ]]
+	-- upvalues: ReactModule (copy), EditProfileImageHelpersModule (copy), FFlagEditProfileFramesEnabled (copy), EnumsModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState((EditProfileImageHelpersModule.getInitialActiveView(p1.mode)))
+	local HasOnTitleBack = EditProfileImageHelpersModule.hasOnTitleBack(UseStateResult, p1.mode)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 41 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2("combined")
 	end, {})
 	
 	return {
-		activeView = var1,
-		isFramesOnlyEntry = fFlagEditProfileFramesEnabled and (var1 == "frames" and p1.mode == enumsModule.EditProfileImageMode.FramesOnly),
-		titleBackAvailable = var3,
-		onExpandEmotes = reactModule.useCallback(function()
-			-- upvalues: var2 (ref)
-			var2("emotes")
+		activeView = UseStateResult,
+		isFramesOnlyEntry = FFlagEditProfileFramesEnabled and (UseStateResult == "frames" and p1.mode == EnumsModule.EditProfileImageMode.FramesOnly),
+		titleBackAvailable = HasOnTitleBack,
+		onExpandEmotes = ReactModule.useCallback(function() --[[ Line: 35 ]]
+			-- upvalues: UseStateResult2 (copy)
+			UseStateResult2("emotes")
 		end, {}),
-		onExpandFrames = reactModule.useCallback(function()
-			-- upvalues: var2 (ref)
-			var2("frames")
+		onExpandFrames = ReactModule.useCallback(function() --[[ Line: 38 ]]
+			-- upvalues: UseStateResult2 (copy)
+			UseStateResult2("frames")
 		end, {}),
-		onReturnToCombined = var4,
-		onTitleBack = if var3 then var4 else nil
+		onReturnToCombined = UseResult,
+		onTitleBack = if HasOnTitleBack then UseResult else nil
 	}
 end

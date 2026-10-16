@@ -1,62 +1,64 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local reactModule = require(corePackagesService.Packages.React)
-local foundationModule = require(corePackagesService.Packages.Foundation)
-local shouldShowMoreSettingsBannerModule = require(script.Parent.Parent.shouldShowMoreSettingsBanner)
-local useLocalization = require(corePackagesService.Workspace.Packages.Localization).Hooks.useLocalization
-local useTokens = foundationModule.Hooks.useTokens
-local icon = foundationModule.Icon
-local iconName = foundationModule.Enums.IconName
-local iconSize = foundationModule.Enums.IconSize
-local text = foundationModule.Text
-local view = foundationModule.View
+﻿local CorePackages = game:GetService("CorePackages")
+local ReactModule = require(CorePackages.Packages.React)
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local ShouldShowMoreSettingsBannerModule = require(script.Parent.Parent.shouldShowMoreSettingsBanner)
+local UseLocalizationFunction = require(CorePackages.Workspace.Packages.Localization).Hooks.useLocalization
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local Icon = FoundationModule.Icon
+local IconName = FoundationModule.Enums.IconName
+local IconSize = FoundationModule.Enums.IconSize
+local Text = FoundationModule.Text
+local View = FoundationModule.View
 
-return function(value)
-	-- upvalues: reactModule (ref), useLocalization (ref), useTokens (ref), shouldShowMoreSettingsBannerModule (ref), view (ref), icon (ref), iconName (ref), iconSize (ref), text (ref)
-	local isPioneerLaunch = value.isPioneerLaunch
-	local getAvailability = value.getAvailability
-	local var1, var2 = reactModule.useState(false)
-	local var3 = useLocalization({
+return function(p1) --[[ Line: 23 | Named "MoreSettingsBanner" ]]
+	-- upvalues: ReactModule (copy), UseLocalizationFunction (copy), UseTokensFunction (copy), ShouldShowMoreSettingsBannerModule (copy), View (copy), Icon (copy), IconName (copy), IconSize (copy), Text (copy)
+	local IsPioneerLaunch = p1.isPioneerLaunch
+	local GetAvailability = p1.getAvailability
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseLocalizationResult = UseLocalizationFunction({
 		text = "CoreScripts.InGameMenu.GameSettings.MoreSettingsAvailable"
 	})
-	local var4 = useTokens()
-	reactModule.useEffect(function()
-		-- upvalues: shouldShowMoreSettingsBannerModule (copy), isPioneerLaunch (ref), getAvailability (ref), var2 (ref)
-		local var5 = false
-		task.spawn(function()
-			-- upvalues: shouldShowMoreSettingsBannerModule (copy), isPioneerLaunch (copy), getAvailability (copy), var5 (write), var2 (copy)
-			if not var5 and shouldShowMoreSettingsBannerModule(isPioneerLaunch, getAvailability) then
-				var2(true)
+	local UseTokensResult = UseTokensFunction()
+	ReactModule.useEffect(function() --[[ Line: 31 ]]
+		-- upvalues: ShouldShowMoreSettingsBannerModule (upval), IsPioneerLaunch (copy), GetAvailability (copy), UseStateResult2 (copy)
+		local Flag = false
+		task.spawn(function() --[[ Line: 34 ]]
+			-- upvalues: ShouldShowMoreSettingsBannerModule (upval), IsPioneerLaunch (upval), GetAvailability (upval), Flag (ref), UseStateResult2 (upval)
+			local ShouldShowMoreSettingsBannerModule1 = ShouldShowMoreSettingsBannerModule(IsPioneerLaunch, GetAvailability)
+			
+			if not Flag and ShouldShowMoreSettingsBannerModule1 then
+				UseStateResult2(true)
 			end
 		end)
 		
-		return function()
-			-- upvalues: var5 (write)
-			var5 = true
+		return function() --[[ Line: 41 ]]
+			-- upvalues: Flag (ref)
+			Flag = true
 		end
-	end, { isPioneerLaunch, getAvailability })
+	end, { IsPioneerLaunch, GetAvailability })
 	
-	return if var1 and var3.text ~= "" then reactModule.createElement(view, {
+	return if UseStateResult and UseLocalizationResult.text ~= "" then ReactModule.createElement(View, {
 		tag = "size-full-0 auto-y",
 		padding = {
 			left = UDim.new(0, 10),
 			right = UDim.new(0, 10),
-			bottom = UDim.new(0, var4.Padding.Large)
+			bottom = UDim.new(0, UseTokensResult.Padding.Large)
 		}
 	}, {
-		Banner = reactModule.createElement(view, {
+		Banner = ReactModule.createElement(View, {
 			tag = "row align-y-center gap-small size-full-0 auto-y padding-medium stroke-standard stroke-default radius-medium",
 			testId = "MoreSettingsBanner"
 		}, {
-			Icon = reactModule.createElement(icon, {
+			Icon = ReactModule.createElement(Icon, {
 				LayoutOrder = 1,
-				name = iconName.CircleI,
-				size = iconSize.Small
+				name = IconName.CircleI,
+				size = IconSize.Small
 			}),
-			Label = reactModule.createElement(text, {
+			Label = ReactModule.createElement(Text, {
 				LayoutOrder = 2,
 				tag = "fill auto-y text-body-medium text-wrap text-align-x-left content-default",
 				testId = "MoreSettingsAvailableText",
-				Text = var3.text
+				Text = UseLocalizationResult.text
 			})
 		})
 	}) else nil

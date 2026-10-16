@@ -1,42 +1,40 @@
-﻿local momentsCreation = script:FindFirstAncestor("MomentsCreation")
-local parent = momentsCreation.Parent
-local builderIconsModule = require(parent.BuilderIcons)
-local reactModule = require(parent.React)
-local eventNames = require(parent.MomentsCommon).Analytics.EventNames
-local creationFlowStateModule = require(momentsCreation.Enums.CreationFlowState)
-local _ = require(momentsCreation.Types.CreationFlowTypes)
-local createEditSessionModule = require(momentsCreation.Stores.createEditSession)
-local voiceEditorModule = require(momentsCreation.Components.Voice.VoiceEditor)
-local voicePreviewLayerModule = require(momentsCreation.Components.Voice.VoicePreviewLayer)
+﻿local MomentsCreation = script:FindFirstAncestor("MomentsCreation")
+local Parent = MomentsCreation.Parent
+local ReactModule = require(Parent.React)
+local EventNames = require(Parent.MomentsCommon).Analytics.EventNames
+local _ = require(MomentsCreation.Types.CreationFlowTypes)
+local CreateEditSessionModule = require(MomentsCreation.Stores.createEditSession)
+local VoiceEditorModule = require(MomentsCreation.Components.Voice.VoiceEditor)
+local VoicePreviewLayerModule = require(MomentsCreation.Components.Voice.VoicePreviewLayer)
 
 return {
 	kind = "voice",
 	presentation = "Step",
 	zIndex = 4,
-	step = creationFlowStateModule.Voice,
+	step = require(MomentsCreation.Enums.CreationFlowState).Voice,
 	cta = {
 		localizationKey = "Feature.Moments.Action.AddVoice",
 		order = 4,
 		commitRequiresEdit = true,
-		icon = builderIconsModule.Icon.FiveVerticalLinesWave,
-		analyticsEvent = eventNames.EditingFlowVoiceButtonPressed,
-		commitAnalyticsEvent = eventNames.EditingFlowVoiceDoneButtonPressed,
-		cancelAnalyticsEvent = eventNames.EditingFlowVoiceDeleteChangePressed
+		icon = require(Parent.BuilderIcons).Icon.FiveVerticalLinesWave,
+		analyticsEvent = EventNames.EditingFlowVoiceButtonPressed,
+		commitAnalyticsEvent = EventNames.EditingFlowVoiceDoneButtonPressed,
+		cancelAnalyticsEvent = EventNames.EditingFlowVoiceDeleteChangePressed
 	},
 	supportedCaptureTypes = { Enum.CaptureType.Video },
-	createSession = function()
-		-- upvalues: createEditSessionModule (ref)
-		return createEditSessionModule()
+	createSession = function() --[[ Line: 40 ]]
+		-- upvalues: CreateEditSessionModule (copy)
+		return CreateEditSessionModule()
 	end,
-	renderEditor = function(p1)
-		-- upvalues: reactModule (ref), voiceEditorModule (ref)
-		return reactModule.createElement(voiceEditorModule, { layoutOrder = 2, controller = p1 })
+	renderEditor = function(Controller) --[[ Line: 43 ]]
+		-- upvalues: ReactModule (copy), VoiceEditorModule (copy)
+		return ReactModule.createElement(VoiceEditorModule, { layoutOrder = 2, controller = Controller })
 	end,
-	renderPreviewLayer = function(p1, p2)
-		-- upvalues: reactModule (ref), voicePreviewLayerModule (ref)
-		return reactModule.createElement(voicePreviewLayerModule, { zIndex = 4, controller = p1, ctx = p2 })
+	renderPreviewLayer = function(Controller, Ctx) --[[ Line: 46 ]]
+		-- upvalues: ReactModule (copy), VoicePreviewLayerModule (copy)
+		return ReactModule.createElement(VoicePreviewLayerModule, { zIndex = 4, controller = Controller, ctx = Ctx })
 	end,
-	toEdits = function(p1)
-		return if p1 == nil or p1.text == "" then {} else { tts = p1 }
+	toEdits = function(Tts) --[[ Line: 49 ]]
+		return if Tts == nil or Tts.text == "" then {} else { tts = Tts }
 	end
 }

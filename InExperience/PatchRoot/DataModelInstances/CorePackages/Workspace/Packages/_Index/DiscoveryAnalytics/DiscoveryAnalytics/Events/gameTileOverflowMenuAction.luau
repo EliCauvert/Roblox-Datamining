@@ -1,39 +1,39 @@
-﻿local telemetryService = game:GetService("TelemetryService")
-local parent = script:FindFirstAncestor("DiscoveryAnalytics").Parent
-local tModule = require(parent.t)
-local discoveryEventErrorLogger = require(parent.DiscoveryUtils).DiscoveryEventErrorLogger
-local gameTileOverflowMenuActionThrottleHundrethsPercent = game:DefineFastInt("GameTileOverflowMenuActionThrottleHundrethsPercent", 0)
-local sharedFlagsModule = require(parent.SharedFlags)
-local strictInterface = tModule.strictInterface
-strictInterface = strictInterface({
-	universeId = tModule.string,
-	sortId = tModule.optional(tModule.string),
-	actionType = tModule.string,
-	menuItem = tModule.optional(tModule.string),
-	availableMenuItems = tModule.optional(tModule.string),
-	contentType = if sharedFlagsModule.FFlagLuaAppEnableHomepageOneByTwoTile then tModule.optional(tModule.string) else nil,
-	isDirectAction = if sharedFlagsModule.FFlagLuaAppGameTileDirectActionTelemetry or sharedFlagsModule.FFlagSduiGameTileDirectAction then tModule.optional(tModule.boolean) else nil
+﻿local TelemetryService = game:GetService("TelemetryService")
+local Parent = script:FindFirstAncestor("DiscoveryAnalytics").Parent
+local TModule = require(Parent.t)
+local DiscoveryEventErrorLogger = require(Parent.DiscoveryUtils).DiscoveryEventErrorLogger
+local GameTileOverflowMenuActionThrottleHundrethsPercent = game:DefineFastInt("GameTileOverflowMenuActionThrottleHundrethsPercent", 0)
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagSduiGameTileDirectAction = SharedFlagsModule.FFlagSduiGameTileDirectAction
+local StrictInterfaceResult = TModule.strictInterface({
+	universeId = TModule.string,
+	sortId = TModule.optional(TModule.string),
+	actionType = TModule.string,
+	menuItem = TModule.optional(TModule.string),
+	availableMenuItems = TModule.optional(TModule.string),
+	contentType = if SharedFlagsModule.FFlagLuaAppEnableHomepageOneByTwoTile then TModule.optional(TModule.string) else nil,
+	isDirectAction = if SharedFlagsModule.FFlagLuaAppGameTileDirectActionTelemetry or FFlagSduiGameTileDirectAction then TModule.optional(TModule.boolean) else nil
 })
 
-return function(p1, p2)
-	-- upvalues: discoveryEventErrorLogger (ref), strictInterface (ref), gameTileOverflowMenuActionThrottleHundrethsPercent (ref), telemetryService (ref)
-	if not p2 then
-		discoveryEventErrorLogger.reportError("GameTileOverflowMenuActionInvalidInterface", "event is missing context")
+return function(CustomFields, EventContext) --[[ Line: 28 ]]
+	-- upvalues: DiscoveryEventErrorLogger (copy), StrictInterfaceResult (copy), GameTileOverflowMenuActionThrottleHundrethsPercent (copy), TelemetryService (copy)
+	if not EventContext then
+		DiscoveryEventErrorLogger.reportError("GameTileOverflowMenuActionInvalidInterface", "event is missing context")
 	end
-	local var1, var2 = strictInterface(p1)
+	local StrictInterfaceResultResult, StrictInterfaceResultResult2 = StrictInterfaceResult(CustomFields)
 	
-	if not var1 then
-		discoveryEventErrorLogger.reportError("GameTileOverflowMenuActionInvalidInterface", var2)
+	if not StrictInterfaceResultResult then
+		DiscoveryEventErrorLogger.reportError("GameTileOverflowMenuActionInvalidInterface", StrictInterfaceResultResult2)
 	end
-	telemetryService:LogEvent({
+	TelemetryService:LogEvent({
 		eventName = "gameTileOverflowMenuAction",
 		description = "User has taken an action with the Game Tile Overflow Menu",
 		backends = { "EventIngest" },
-		throttlingPercentage = gameTileOverflowMenuActionThrottleHundrethsPercent,
+		throttlingPercentage = GameTileOverflowMenuActionThrottleHundrethsPercent,
 		lastUpdated = { 26, 9, 23 }
 	}, {
-		eventContext = p2,
+		eventContext = EventContext,
 		standardizedFields = { "addSessionInfo" },
-		customFields = p1
+		customFields = CustomFields
 	})
 end

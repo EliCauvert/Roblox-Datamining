@@ -1,13 +1,15 @@
-﻿local parent = script:FindFirstAncestor("BuildExperience").Parent
-local _ = require(parent.DataHydration.CreatorAgentChat)
-local _ = require(parent.Signals)
+﻿local Parent = script:FindFirstAncestor("BuildExperience").Parent
+local _ = require(Parent.DataHydration.CreatorAgentChat)
+local _ = require(Parent.Signals)
 
 return {
 	PENDING_USER_MESSAGE_ID_SUFFIX = ":pending",
-	getResourceAttachmentUri = function(p1)
+	getResourceAttachmentUri = function(p1) --[[ Line: 163 ]]
 		return if p1.type == "resource_link" then p1.uri else p1.resource.uri
 	end,
-	makeAssistantTurnAnchorKey = function(p1, p2)
-		return if p2 == nil then nil else `turn:{p1 or "project"}:sequence:{p2}`
+	makeAssistantTurnAnchorKey = function(p1, p2) --[[ Line: 295 ]]
+		local P1 = p1 or "project"
+		
+		return if p2 == nil then nil else `turn:{P1}:sequence:{p2}`
 	end
 }

@@ -1,65 +1,66 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local socialCardsModule = require(parent.SocialCards)
-local useLocalUserId = require(parent.RobloxAppHooks).useLocalUserId
-local useChatPagePaddingModule = require(appChat.Contexts.ChatPagePadding.useChatPagePadding)
-local useChatPlacementContext = require(appChat.Contexts.ChatPlacementContext).useChatPlacementContext
-local cards = socialCardsModule.Cards
-local userTile = require(parent.UserTile).UserTile
-local layoutMode = require(parent.UserTile).LayoutMode
-local userPresence = require(parent.Foundation).Enums.UserPresence
-local useTokens = foundationModule.Hooks.useTokens
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local UseLocalUserIdFunction = require(Parent.RobloxAppHooks).useLocalUserId
+local UseChatPagePaddingModule = require(AppChat.Contexts.ChatPagePadding.useChatPagePadding)
+local UseChatPlacementContextFunction = require(AppChat.Contexts.ChatPlacementContext).useChatPlacementContext
+local Cards = require(Parent.SocialCards).Cards
+local UserTile = require(Parent.UserTile).UserTile
+local LayoutMode = require(Parent.UserTile).LayoutMode
+local UserPresence = require(Parent.Foundation).Enums.UserPresence
+local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return function(p1)
-	-- upvalues: useLocalUserId (ref), useTokens (ref), useChatPagePaddingModule (ref), useChatPlacementContext (ref), reactModule (ref), foundationModule (ref), userTile (ref), layoutMode (ref), userPresence (ref), cards (ref)
-	local var1 = useLocalUserId()
-	local var2 = tostring(var1) == p1.senderTargetId
-	local var3 = useTokens()
-	local var4 = useChatPagePaddingModule()
-	local var5 = useChatPlacementContext()
-	local var6 = reactModule.useMemo(function()
-		-- upvalues: var3 (ref)
-		return Vector2.new(var3.Size.Size_700, var3.Size.Size_700)
-	end, { var3 })
-	local size200 = var3.Size.Size_200
+return function(p1) --[[ Line: 28 | Named "CardContainer" ]]
+	-- upvalues: UseLocalUserIdFunction (copy), UseTokensFunction (copy), UseChatPagePaddingModule (copy), UseChatPlacementContextFunction (copy), ReactModule (copy), FoundationModule (copy), UserTile (copy), LayoutMode (copy), UserPresence (copy), Cards (copy)
+	local UseLocalUserIdResult = UseLocalUserIdFunction()
+	local IsTextMatch = tostring(UseLocalUserIdResult) == p1.senderTargetId
+	local UseTokensResult = UseTokensFunction()
+	local UseChatPagePaddingModuleResult = UseChatPagePaddingModule()
+	local UseChatPlacementContextResult = UseChatPlacementContextFunction()
+	local UseMemoResult = ReactModule.useMemo(function(): Vector2 --[[ Line: 35 ]]
+		-- upvalues: UseTokensResult (copy)
+		return Vector2.new(UseTokensResult.Size.Size_700, UseTokensResult.Size.Size_700)
+	end, { UseTokensResult })
+	local Size200 = UseTokensResult.Size.Size_200
 	
-	return reactModule.createElement(foundationModule.View, {
+	return ReactModule.createElement(FoundationModule.View, {
 		AutomaticSize = Enum.AutomaticSize.Y,
 		Size = UDim2.fromScale(1, 0),
 		testId = p1.testId,
 		layout = {
 			FillDirection = Enum.FillDirection.Horizontal,
-			HorizontalAlignment = if not p1.senderTargetId then Enum.HorizontalAlignment.Center elseif var2 then Enum.HorizontalAlignment.Right else Enum.HorizontalAlignment.Left,
-			Padding = UDim.new(0, size200),
+			HorizontalAlignment = if p1.senderTargetId then if IsTextMatch then Enum.HorizontalAlignment.Right else Enum.HorizontalAlignment.Left else Enum.HorizontalAlignment.Center,
+			Padding = UDim.new(0, Size200),
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			VerticalAlignment = Enum.VerticalAlignment.Bottom
 		},
 		padding = {
-			left = UDim.new(0, var4.left),
-			right = UDim.new(0, var4.right),
-			top = UDim.new(0, var3.Padding.XSmall)
+			left = UDim.new(0, UseChatPagePaddingModuleResult.left),
+			right = UDim.new(0, UseChatPagePaddingModuleResult.right),
+			top = UDim.new(0, UseTokensResult.Padding.XSmall)
 		}
 	}, {
-		Avatar = if p1.senderTargetId and p1.senderTargetId ~= var1 then reactModule.createElement(foundationModule.View, {
-			Size = UDim2.new(0, var6.X, 0, var6.Y),
-			LayoutOrder = if var2 then 2 else 1
+		Avatar = if p1.senderTargetId and p1.senderTargetId ~= UseLocalUserIdResult then ReactModule.createElement(FoundationModule.View, {
+			Size = UDim2.new(0, UseMemoResult.X, 0, UseMemoResult.Y),
+			LayoutOrder = if IsTextMatch then 2 else 1
 		}, {
-			reactModule.createElement(userTile, {
+			ReactModule.createElement(UserTile, {
 				userId = p1.senderTargetId,
-				layoutMode = layoutMode.compact,
-				userPresenceType = userPresence.None
+				layoutMode = LayoutMode.compact,
+				userPresenceType = UserPresence.None
 			})
 		}) else nil,
-		Cards = if p1.cards then reactModule.createElement(foundationModule.View, {
+		Cards = if p1.cards then ReactModule.createElement(FoundationModule.View, {
 			AutomaticSize = Enum.AutomaticSize.Y,
-			Size = UDim2.new(1, if p1.senderTargetId then -(var6.X + size200) else 0, 0, 0),
-			LayoutOrder = if var2 then 1 else 2
-		}, reactModule.createElement(cards, {
-			analyticsInfo = { moduleLocation = var5.chatPlacement },
-			anchorPoint = if var2 then Vector2.new(1, 0) else Vector2.new(0, 0),
-			position = if var2 then UDim2.fromScale(1, 0) else UDim2.fromScale(0, 0),
+			Size = UDim2.new(1, if p1.senderTargetId then -(UseMemoResult.X + Size200) else 0, 0, 0),
+			LayoutOrder = if IsTextMatch then 1 else 2
+		}, ReactModule.createElement(Cards, {
+			analyticsInfo = {
+				moduleLocation = UseChatPlacementContextResult.chatPlacement
+			},
+			anchorPoint = if IsTextMatch then Vector2.new(1, 0) else Vector2.new(0, 0),
+			position = if IsTextMatch then UDim2.fromScale(1, 0) else UDim2.fromScale(0, 0),
 			cards = p1.cards
 		})) else nil
 	})

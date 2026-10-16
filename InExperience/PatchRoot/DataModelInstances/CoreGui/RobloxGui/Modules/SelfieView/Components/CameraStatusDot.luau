@@ -1,19 +1,19 @@
-﻿local packages = game:GetService("CorePackages").Packages
-local reactModule = require(packages.React)
-local useStyle = require(packages.UIBlox).Core.Style.useStyle
-local uDim2 = UDim2.fromOffset(4, 4)
-local vector2 = Vector2.new(0.5, 0.5)
-local uDim2_1 = UDim2.fromScale(0.8, 0.8)
+﻿local Packages = game:GetService("CorePackages").Packages
+local ReactModule = require(Packages.React)
+local UseStyleFunction = require(Packages.UIBlox).Core.Style.useStyle
+local _UDim2 = UDim2.fromOffset(4, 4)
+local _Vector2 = Vector2.new(0.5, 0.5)
+local _UDim2_1 = UDim2.fromScale(0.8, 0.8)
 
-return function(vectorA)
-	-- upvalues: useStyle (ref), reactModule (ref), vector2 (ref), uDim2 (ref), uDim2_1 (ref)
-	return reactModule.createElement("Frame", {
-		AnchorPoint = vectorA.AnchorPoint or vector2,
-		Size = if vectorA.Size then vectorA.Size else uDim2,
-		BackgroundColor3 = useStyle().Theme.OnlineStatus.Color,
-		Position = vectorA.Position or uDim2_1,
-		ZIndex = vectorA.ZIndex
+return function(Frame) --[[ Line: 18 | Named "CameraStatusDot" ]]
+	-- upvalues: UseStyleFunction (copy), ReactModule (copy), _Vector2 (copy), _UDim2 (copy), _UDim2_1 (copy)
+	return ReactModule.createElement("Frame", {
+		AnchorPoint = Frame.AnchorPoint or _Vector2,
+		Size = if Frame.Size then Frame.Size else _UDim2,
+		BackgroundColor3 = UseStyleFunction().Theme.OnlineStatus.Color,
+		Position = Frame.Position or _UDim2_1,
+		ZIndex = Frame.ZIndex
 	}, {
-		UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) })
+		UICorner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) })
 	})
 end

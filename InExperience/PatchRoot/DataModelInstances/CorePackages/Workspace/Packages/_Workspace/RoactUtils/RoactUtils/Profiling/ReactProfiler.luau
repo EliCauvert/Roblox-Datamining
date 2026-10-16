@@ -1,65 +1,67 @@
-﻿local reactModule = require(script:FindFirstAncestor("RoactUtils").Parent.React)
-local reactProfilerContextModule = require(script.Parent.ReactProfilerContext)
-local isReactProfilingEnabledModule = require(script.Parent.isReactProfilingEnabled)
-local var1 = reactModule.createContext(nil)
+﻿local ReactModule = require(script:FindFirstAncestor("RoactUtils").Parent.React)
+local ReactProfilerContextModule = require(script.Parent.ReactProfilerContext)
+local IsReactProfilingEnabledModule = require(script.Parent.isReactProfilingEnabled)
+local Context = ReactModule.createContext(nil)
 
-local function ReactProfiler(p1)
-	-- upvalues: reactModule (ref), var1 (ref), reactProfilerContextModule (ref)
-	local var2 = reactModule.useRef(0)
-	local var3 = reactModule.useRef(0)
-	local var4 = reactModule.useContext(var1)
-	local var5 = reactModule.useContext(reactProfilerContextModule)
+local function ReactProfiler(p1) --[[ Line: 20 ]]
+	-- upvalues: ReactModule (copy), Context (copy), ReactProfilerContextModule (copy)
+	local UseRefResult = ReactModule.useRef(0)
+	local UseRefResult1 = ReactModule.useRef(0)
+	local UseContextResult = ReactModule.useContext(Context)
+	local UseContextResult1 = ReactModule.useContext(ReactProfilerContextModule)
 	
-	return reactModule.createElement(reactModule.Profiler, {
+	return ReactModule.createElement(ReactModule.Profiler, {
 		id = p1.id,
-		onRender = reactModule.useCallback(function(p2, _, p3, _, p4, p5)
-			-- upvalues: var4 (ref), var2 (ref), var5 (ref)
-			if var4 ~= nil then
-				var4.exclusiveRenderDurationRef.current -= p3
+		onRender = ReactModule.useCallback(function(ProfilerId, _, Duration, _, StartTime, CommitTime) --[[ Line: 30 ]]
+			-- upvalues: UseContextResult (copy), UseRefResult (copy), UseContextResult1 (copy)
+			if UseContextResult ~= nil then
+				local ExclusiveRenderDurationRef = UseContextResult.exclusiveRenderDurationRef
+				ExclusiveRenderDurationRef.current -= Duration
 			end
-			var2.current += p3
+			UseRefResult.current += Duration
 			
-			if var5 ~= nil then
-				var5.onRender:fire({
-					profilerId = p2,
-					startTime = p4,
-					commitTime = p5,
-					duration = p3,
-					exclusiveDuration = var2.current
+			if UseContextResult1 ~= nil then
+				UseContextResult1.onRender:fire({
+					profilerId = ProfilerId,
+					startTime = StartTime,
+					commitTime = CommitTime,
+					duration = Duration,
+					exclusiveDuration = UseRefResult.current
 				})
 			end
-			var2.current = 0
+			UseRefResult.current = 0
 		end, {}),
-		onCommit = reactModule.useCallback(function(p2, _, p3, p4)
-			-- upvalues: var4 (ref), var3 (ref), var5 (ref)
-			if var4 ~= nil then
-				var4.exclusiveEffectDurationRef.current -= p3
+		onCommit = ReactModule.useCallback(function(ProfilerId, _, Duration, CommitTime) --[[ Line: 61 ]]
+			-- upvalues: UseContextResult (copy), UseRefResult1 (copy), UseContextResult1 (copy)
+			if UseContextResult ~= nil then
+				local ExclusiveEffectDurationRef = UseContextResult.exclusiveEffectDurationRef
+				ExclusiveEffectDurationRef.current -= Duration
 			end
-			var3.current += p3
+			UseRefResult1.current += Duration
 			
-			if var5 ~= nil then
-				var5.onCommit:fire({
-					profilerId = p2,
-					commitTime = p4,
-					duration = p3,
-					exclusiveDuration = var3.current
+			if UseContextResult1 ~= nil then
+				UseContextResult1.onCommit:fire({
+					profilerId = ProfilerId,
+					commitTime = CommitTime,
+					duration = Duration,
+					exclusiveDuration = UseRefResult1.current
 				})
 			end
-			var3.current = 0
+			UseRefResult1.current = 0
 		end, {})
-	}, reactModule.createElement(var1.Provider, {
+	}, ReactModule.createElement(Context.Provider, {
 		key = "ExclusiveDurationsContext",
-		value = reactModule.useMemo(function()
-			-- upvalues: var2 (ref), var3 (ref)
+		value = ReactModule.useMemo(function() --[[ Line: 83 ]]
+			-- upvalues: UseRefResult (copy), UseRefResult1 (copy)
 			return {
-				exclusiveRenderDurationRef = var2,
-				exclusiveEffectDurationRef = var3
+				exclusiveRenderDurationRef = UseRefResult,
+				exclusiveEffectDurationRef = UseRefResult1
 			}
 		end, {})
 	}, p1.children))
 end
 
-return function(p1)
-	-- upvalues: isReactProfilingEnabledModule (ref), reactModule (ref), ReactProfiler (ref)
-	return if isReactProfilingEnabledModule then reactModule.createElement(ReactProfiler, { id = p1.id }, p1.children) else reactModule.createElement(reactModule.Fragment, nil, p1.children)
+return function(p1) --[[ Line: 104 ]]
+	-- upvalues: IsReactProfilingEnabledModule (copy), ReactModule (copy), ReactProfiler (copy)
+	return if IsReactProfilingEnabledModule then ReactModule.createElement(ReactProfiler, { id = p1.id }, p1.children) else ReactModule.createElement(ReactModule.Fragment, nil, p1.children)
 end

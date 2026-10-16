@@ -1,7 +1,7 @@
-﻿local editProfileAnalyticsContextModule = require(script.Parent.EditProfileAnalyticsContext)
-local reactModule = require(script:FindFirstAncestor("EditProfile").Parent.React)
+﻿local EditProfileAnalyticsContextModule = require(script.Parent.EditProfileAnalyticsContext)
+local ReactModule = require(script:FindFirstAncestor("EditProfile").Parent.React)
 
-return function()
-	-- upvalues: reactModule (ref), editProfileAnalyticsContextModule (ref)
-	return reactModule.useContext(editProfileAnalyticsContextModule)
+return function() --[[ Line: 8 ]]
+	-- upvalues: ReactModule (copy), EditProfileAnalyticsContextModule (copy)
+	return ReactModule.useContext(EditProfileAnalyticsContextModule)
 end

@@ -1,85 +1,87 @@
-﻿local parent = script.Parent.Parent
-local luauPolyfillModule = require(parent.LuauPolyfill)
-local array = luauPolyfillModule.Array
-local boolean = luauPolyfillModule.Boolean
-local t = {}
-local kind = require(parent.GraphQL).Kind
-local error = luauPolyfillModule.Error
-local number = luauPolyfillModule.Number
-local object = luauPolyfillModule.Object
-local luauRegExpModule = require(parent.LuauRegExp)
-local var1 = nil
+﻿local Parent = script.Parent.Parent
+local LuauPolyfillModule = require(Parent.LuauPolyfill)
+local Array = LuauPolyfillModule.Array
+local Boolean = LuauPolyfillModule.Boolean
+local Kind = require(Parent.GraphQL).Kind
+local Error1 = LuauPolyfillModule.Error
+local Number = LuauPolyfillModule.Number
+local Object = LuauPolyfillModule.Object
+local _01909 = nil
 
-local function _(p1)
-	-- upvalues: number (ref)
-	local ok, status = pcall(function()
-		-- upvalues: p1 (ref), number (copy)
-		local var2 = tonumber(p1)
+local function _(Value) --[[ Line: 31 | Named "isFinite" ]]
+	-- upvalues: Number (copy)
+	local Success, Result = pcall(function(): boolean --[[ Line: 32 ]]
+		-- upvalues: Value (copy), Number (upval)
+		local Number: number? = tonumber(Value)
 		
-		return number.isNaN(var2) or var2 == 1e999 or var2 == -1e999
+		return not Number.isNaN(Number) and Number ~= 1e999 and Number ~= -1e999
 	end)
 	
-	return if ok then status else false
+	return if Success then Result else false
 end
 
-local function astFromValueUntyped(p1)
-	-- upvalues: object (ref), kind (ref), boolean (ref), array (ref), astFromValueUntyped (ref), number (ref), var1 (write), error (ref)
-	if p1 == object.None then
-		return { kind = kind.NULL }
-	elseif p1 == nil then
+local function astFromValueUntyped(Value) --[[ Line: 61 ]]
+	-- upvalues: Object (copy), Kind (copy), Boolean (copy), Array (copy), astFromValueUntyped (copy), Number (copy), _01909 (ref), Error1 (copy)
+	if Value == Object.None then
+		return { kind = Kind.NULL }
+	end
+	if Value == nil then
 		return nil
-	elseif boolean.toJSBoolean(array.isArray(p1)) then
-		local t = {}
+	end
+	if Boolean.toJSBoolean(Array.isArray(Value)) then
+		local Values = {}
 		
-		for i, v in p1 do
-			local var2 = astFromValueUntyped(v)
+		for _, value in Value do
+			local AstFromValueUntypedResult = astFromValueUntyped(value)
 			
-			if var2 ~= nil then
-				table.insert(t, var2)
+			if AstFromValueUntypedResult ~= nil then
+				table.insert(Values, AstFromValueUntypedResult)
 			end
 		end
-		return { kind = kind.LIST, values = t }
-	elseif typeof(p1) == "table" then
-		local t = {}
+		return { kind = Kind.LIST, values = Values }
+	elseif typeof(Value) == "table" then
+		local Fields = {}
 		
-		for i in p1 do
-			local var3 = astFromValueUntyped(p1[tostring(i)])
+		for Value1 in Value do
+			local AstFromValueUntypedResult = astFromValueUntyped(Value[tostring(Value1)])
 			
-			if boolean.toJSBoolean(var3) then
-				table.insert(t, {
-					kind = kind.OBJECT_FIELD,
-					name = { kind = kind.NAME, value = i },
-					value = var3
+			if Boolean.toJSBoolean(AstFromValueUntypedResult) then
+				table.insert(Fields, {
+					kind = Kind.OBJECT_FIELD,
+					name = { kind = Kind.NAME, value = Value1 },
+					value = AstFromValueUntypedResult
 				})
 			end
 		end
-		return { kind = kind.OBJECT, fields = t }
-	elseif typeof(p1) == "boolean" then
-		return { kind = kind.BOOLEAN, value = p1 }
-	end
-	local toJSBoolean = boolean.toJSBoolean
-	local var4 = false
-	
-	if typeof(p1) == "number" then
-		local ok, status = pcall(function()
-			-- upvalues: p1 (ref), number (copy)
-			local var5 = tonumber(p1)
-			
-			return number.isNaN(var5) or var5 == 1e999 or var5 == -1e999
-		end)
-		var4 = if not ok then false else status
-	end
-	if toJSBoolean(var4) then
-		local var5 = tostring(p1)
+		return { kind = Kind.OBJECT, fields = Fields }
+	else
+		if typeof(Value) == "boolean" then
+			return { kind = Kind.BOOLEAN, value = Value }
+		end
+		local ToJSBooleanFunction = Boolean.toJSBoolean
+		local v1 = false
 		
-		return if boolean.toJSBoolean(var1:test(var5)) then { kind = kind.INT, value = var5 } else { kind = kind.FLOAT, value = var5 }
-	elseif typeof(p1) == "string" then
-		return { kind = kind.STRING, value = p1 }
+		if typeof(Value) == "number" then
+			local Success, Result = pcall(function(): boolean --[[ Line: 32 ]]
+				-- upvalues: Value (copy), Number (upval)
+				local Number: number? = tonumber(Value)
+				
+				return not Number.isNaN(Number) and Number ~= 1e999 and Number ~= -1e999
+			end)
+			v1 = if Success then Result else false
+		end
+		if ToJSBooleanFunction(v1) then
+			local Text = tostring(Value)
+			
+			return if Boolean.toJSBoolean(_01909:test(Text)) then { kind = Kind.INT, value = Text } else { kind = Kind.FLOAT, value = Text }
+		elseif typeof(Value) == "string" then
+			return { kind = Kind.STRING, value = Value }
+		else
+			error(Error1.new(("Cannot convert value to AST: %s."):format((tostring(Value)))))
+		end
 	end
-	error(error.new(("Cannot convert value to AST: %s."):format(tostring(p1))))
 end
 
-t.astFromValueUntyped = astFromValueUntyped
-var1 = luauRegExpModule("^-?(?:0|[1-9][0-9]*)$")
+_01909 = require(Parent.LuauRegExp)("^-?(?:0|[1-9][0-9]*)$")
 
-return t
+return { astFromValueUntyped = astFromValueUntyped }

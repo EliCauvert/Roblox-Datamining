@@ -1,12 +1,12 @@
-﻿local avatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
-local reactModule = require(avatarExperienceCatalog.Parent.React)
-local _ = require(avatarExperienceCatalog.Components.ResultsList.WidgetListBreakPointEnum)
-local widgetPanelViewModule = require(script.Parent.WidgetPanelView)
-local useWidgetPanelViewModelModule = require(script.Parent.useWidgetPanelViewModel)
+﻿local AvatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
+local ReactModule = require(AvatarExperienceCatalog.Parent.React)
+local _ = require(AvatarExperienceCatalog.Components.ResultsList.WidgetListBreakPointEnum)
+local WidgetPanelViewModule = require(script.Parent.WidgetPanelView)
+local UseWidgetPanelViewModelModule = require(script.Parent.useWidgetPanelViewModel)
 
-return reactModule.memo(function(p1)
-	-- upvalues: useWidgetPanelViewModelModule (ref), reactModule (ref), widgetPanelViewModule (ref)
-	local var1 = useWidgetPanelViewModelModule(p1)
+return ReactModule.memo(function(p1) --[[ Line: 20 | Named "WidgetPanelContainer" ]]
+	-- upvalues: UseWidgetPanelViewModelModule (copy), ReactModule (copy), WidgetPanelViewModule (copy)
+	local UseWidgetPanelViewModelModuleResult = UseWidgetPanelViewModelModule(p1)
 	
-	return if var1.status == "visible" then reactModule.createElement(widgetPanelViewModule, var1.viewProps) else nil
+	return if UseWidgetPanelViewModelModuleResult.status == "visible" then ReactModule.createElement(WidgetPanelViewModule, UseWidgetPanelViewModelModuleResult.viewProps) else nil
 end)

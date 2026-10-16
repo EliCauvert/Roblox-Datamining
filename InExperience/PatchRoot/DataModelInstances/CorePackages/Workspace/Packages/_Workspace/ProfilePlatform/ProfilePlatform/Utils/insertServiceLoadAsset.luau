@@ -1,3 +1,3 @@
-﻿return function(p1)
-	return game:GetService("InsertService"):LoadAsset(p1)
+﻿return function(AssetId) --[[ Line: 8 ]]
+	return game:GetService("InsertService"):LoadAsset(AssetId)
 end

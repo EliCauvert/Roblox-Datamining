@@ -1,9 +1,9 @@
 ﻿local _ = game:GetService("CoreGui")
-local roduxModule = require(game:GetService("CorePackages").Packages.Rodux)
+local RoduxModule = require(game:GetService("CorePackages").Packages.Rodux)
 
 return {
-	Destruct = function(p1)
+	Destruct = function(p1) --[[ Line: 12 ]]
 		p1.store:destruct()
 	end,
-	store = roduxModule.Store.new(require(script.Parent.Reducers.AppShellReducer), {}, { roduxModule.thunkMiddleware }, nil)
+	store = RoduxModule.Store.new(require(script.Parent.Reducers.AppShellReducer), {}, { RoduxModule.thunkMiddleware }, nil)
 }

@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("UGCValidateCoplanarTriTestBody", false)
 
-return function()
+return function() --[[ Line: 3 ]]
 	return game:GetFastFlag("UGCValidateCoplanarTriTestBody")
 end

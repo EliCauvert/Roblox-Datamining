@@ -1,91 +1,96 @@
-﻿local parent = script:FindFirstAncestor("ProfileInsights").Parent
-local cryoModule = require(parent.Cryo)
-local createSignal = require(parent.Signals).createSignal
-local fFlagPlayerSearchEnableOnlineFrequents = require(parent.SharedFlags).FFlagPlayerSearchEnableOnlineFrequents
-local fFlagProfileInsightsParseClassmates = require(parent.SharedFlags).FFlagProfileInsightsParseClassmates
+﻿local Parent = script:FindFirstAncestor("ProfileInsights").Parent
+local CryoModule = require(Parent.Cryo)
+local CreateSignalFunction = require(Parent.Signals).createSignal
+local FFlagPlayerSearchEnableOnlineFrequents = require(Parent.SharedFlags).FFlagPlayerSearchEnableOnlineFrequents
+local FFlagProfileInsightsParseClassmates = require(Parent.SharedFlags).FFlagProfileInsightsParseClassmates
 
-local function createProfileInsight(p1, p2)
-	-- upvalues: cryoModule (ref), fFlagPlayerSearchEnableOnlineFrequents (ref), fFlagProfileInsightsParseClassmates (ref)
-	local t = {
+local function createProfileInsight(UserId, p1) --[[ Line: 41 ]]
+	-- upvalues: CryoModule (copy), FFlagPlayerSearchEnableOnlineFrequents (copy), FFlagProfileInsightsParseClassmates (copy)
+	local config = {
 		targetUserId = "",
 		isOfflineFrequents = false,
-		userId = p1,
+		userId = UserId,
 		mutualFriends = {}
 	}
 	
-	if not p2 or type(p2) ~= "table" then
-		return t
-	elseif p2.targetUser then
-		t.targetUserId = tostring(p2.targetUser)
+	if not p1 or type(p1) ~= "table" then
+		return config
 	end
-	for i, v in p2.profileInsights do
-		if v.mutualFriendInsight and v.mutualFriendInsight.mutualFriends then
-			local mutualFriends = v.mutualFriendInsight.mutualFriends
-			t.mutualFriends = cryoModule.List.foldLeft(cryoModule.Dictionary.keys(mutualFriends), function(p3, p4)
-				-- upvalues: mutualFriends (ref)
-				local var1 = mutualFriends[p4]
-				table.insert(p3, {
-					id = p4,
-					username = var1.username,
-					displayName = var1.displayName
+	if p1.targetUser then
+		config.targetUserId = tostring(p1.targetUser)
+	end
+	for _, profileInsight in p1.profileInsights do
+		if profileInsight.mutualFriendInsight and profileInsight.mutualFriendInsight.mutualFriends then
+			local MutualFriends = profileInsight.mutualFriendInsight.mutualFriends
+			config.mutualFriends = CryoModule.List.foldLeft(CryoModule.Dictionary.keys(MutualFriends), function(List, Id) --[[ Line: 60 ]]
+				-- upvalues: MutualFriends (copy)
+				local MutualFriend = MutualFriends[Id]
+				table.insert(List, {
+					id = Id,
+					username = MutualFriend.username,
+					displayName = MutualFriend.displayName
 				})
 				
-				return p3
+				return List
 			end, {})
 		end
-		if v.offlineFrequentsInsight then
-			t.isOfflineFrequents = v.offlineFrequentsInsight.havePlayedTogether
+		if profileInsight.offlineFrequentsInsight then
+			config.isOfflineFrequents = profileInsight.offlineFrequentsInsight.havePlayedTogether
 		end
-		if fFlagPlayerSearchEnableOnlineFrequents and v.playedTogetherInsight then
-			t.isOfflineFrequents = t.isOfflineFrequents or v.playedTogetherInsight.havePlayedTogether
+		if FFlagPlayerSearchEnableOnlineFrequents and profileInsight.playedTogetherInsight then
+			local PlayedTogetherInsight = profileInsight.playedTogetherInsight
+			config.isOfflineFrequents = config.isOfflineFrequents or PlayedTogetherInsight.havePlayedTogether
 		end
-		if v.friendshipAgeInsight then
-			local friendshipAgeInsight = v.friendshipAgeInsight
-			t.friendshipAgeUnixSeconds = if friendshipAgeInsight.friendsSinceDateTime then friendshipAgeInsight.friendsSinceDateTime.seconds else -1
+		if profileInsight.friendshipAgeInsight then
+			local FriendshipAgeInsight = profileInsight.friendshipAgeInsight
+			config.friendshipAgeUnixSeconds = FriendshipAgeInsight.friendsSinceDateTime and FriendshipAgeInsight.friendsSinceDateTime.seconds or -1
 		end
-		if v.friendRequestOriginInsight then
-			t.friendRequestOriginSource = v.friendRequestOriginInsight.friendRequestOriginSource or -1
+		if profileInsight.friendRequestOriginInsight then
+			config.friendRequestOriginSource = profileInsight.friendRequestOriginInsight.friendRequestOriginSource or -1
 		end
-		if v.accountCreationDateInsight then
-			local accountCreationDateInsight = v.accountCreationDateInsight
-			t.accountCreationDateUnixSeconds = if accountCreationDateInsight.accountCreatedDateTime then accountCreationDateInsight.accountCreatedDateTime.seconds else -1
+		if profileInsight.accountCreationDateInsight then
+			local AccountCreationDateInsight = profileInsight.accountCreationDateInsight
+			config.accountCreationDateUnixSeconds = AccountCreationDateInsight.accountCreatedDateTime and AccountCreationDateInsight.accountCreatedDateTime.seconds or -1
 		end
-		if v.accountLocationInsight then
-			local accountLocationInsight = v.accountLocationInsight
-			t.localizedCountryName = if accountLocationInsight then accountLocationInsight.localizedCountryName else ""
+		if profileInsight.accountLocationInsight then
+			local AccountLocationInsight = profileInsight.accountLocationInsight
+			config.localizedCountryName = AccountLocationInsight and AccountLocationInsight.localizedCountryName or ""
 		end
-		if fFlagProfileInsightsParseClassmates and v.classmatesInsight then
-			t.isClassmate = v.classmatesInsight.isClassmate == true
+		if FFlagProfileInsightsParseClassmates and profileInsight.classmatesInsight then
+			config.isClassmate = profileInsight.classmatesInsight.isClassmate == true
 		end
-		if v.accountCreationDateInsight then
-			local accountCreationDateInsight = v.accountCreationDateInsight
+		if profileInsight.accountCreationDateInsight then
+			local AccountCreationDateInsight = profileInsight.accountCreationDateInsight
 			
-			if accountCreationDateInsight and accountCreationDateInsight.namespace and accountCreationDateInsight.verifiedAgeBandLabel then
-				t.userAgeVerifiedBracket = `{accountCreationDateInsight.namespace}.{accountCreationDateInsight.verifiedAgeBandLabel}`
+			if AccountCreationDateInsight and AccountCreationDateInsight.namespace and AccountCreationDateInsight.verifiedAgeBandLabel then
+				config.userAgeVerifiedBracket = `{AccountCreationDateInsight.namespace}.{AccountCreationDateInsight.verifiedAgeBandLabel}`
 			end
 		end
 	end
-	return t
+	return config
 end
 
 return {
-	createProfileInsightsSignalList = function()
-		-- upvalues: createSignal (ref)
-		local var1, var2 = createSignal({})
+	createProfileInsightsSignalList = function() --[[ Line: 140 ]]
+		-- upvalues: CreateSignalFunction (copy)
+		local Signal, Signal2 = CreateSignalFunction({})
 		
-		return { getProfileInsights = var1, setProfileInsights = var2 }
+		return {
+			getProfileInsights = Signal,
+			setProfileInsights = Signal2
+		}
 	end,
-	createProfileInsightsList = function(p3)
-		-- upvalues: createProfileInsight (ref)
-		local t = {}
+	createProfileInsightsList = function(List) --[[ Line: 125 ]]
+		-- upvalues: createProfileInsight (copy)
+		local List1 = {}
 		
-		if not p3 or type(p3) ~= "table" then
-			return t
+		if not List or type(List) ~= "table" then
+			return List1
 		end
-		for i, v in p3 do
-			table.insert(t, createProfileInsight(v.targetUser, v))
+		for _, value in List do
+			table.insert(List1, (createProfileInsight(value.targetUser, value)))
 		end
-		return t
+		return List1
 	end,
 	createProfileInsight = createProfileInsight
 }

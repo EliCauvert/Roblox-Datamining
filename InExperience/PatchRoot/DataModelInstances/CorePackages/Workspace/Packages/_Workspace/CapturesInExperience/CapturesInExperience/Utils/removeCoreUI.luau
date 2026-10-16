@@ -1,51 +1,51 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local constantsModule = require(script.Parent.Parent.Constants)
-local capturesRecursiveCoreUIRemoval = game:DefineFastFlag("CapturesRecursiveCoreUIRemoval", false)
+﻿local CoreGui = game:GetService("CoreGui")
+local ConstantsModule = require(script.Parent.Parent.Constants)
+local CapturesRecursiveCoreUIRemoval = game:DefineFastFlag("CapturesRecursiveCoreUIRemoval", false)
 
-return function()
-	-- upvalues: constantsModule (ref), capturesRecursiveCoreUIRemoval (ref), coreGuiService (ref)
-	local t = {}
+return function() --[[ Line: 8 ]]
+	-- upvalues: ConstantsModule (copy), CapturesRecursiveCoreUIRemoval (copy), CoreGui (copy)
+	local List = {}
 	
-	local function _(p1)
-		-- upvalues: constantsModule (copy)
-		return if p1:IsA("LayerCollector") then if p1:IsA("BillboardGui") then false elseif p1.Enabled then p1.Name ~= constantsModule.OverlayName else false else false
+	local function _(Object): boolean --[[ Line: 11 | Named "shouldRemoveUI" ]]
+		-- upvalues: ConstantsModule (upval)
+		return if Object:IsA("LayerCollector") then not Object:IsA("BillboardGui") and (if Object.Enabled then Object.Name ~= ConstantsModule.OverlayName else false) else false
 	end
 	
-	if capturesRecursiveCoreUIRemoval then
-		local function searchInstance(p1)
-			-- upvalues: constantsModule (copy), t (ref), searchInstance (ref)
-			if p1:IsA("Folder") or p1:IsA("CoreGui") then
-				for i, v in p1:GetChildren() do
-					searchInstance(v)
+	if CapturesRecursiveCoreUIRemoval then
+		local function searchInstance(Object) --[[ Line: 34 ]]
+			-- upvalues: ConstantsModule (upval), List (copy), searchInstance (copy)
+			if Object:IsA("Folder") or Object:IsA("CoreGui") then
+				for _, child in Object:GetChildren() do
+					searchInstance(child)
 				end
 				return
-			elseif if not p1:IsA("LayerCollector") then false elseif p1:IsA("BillboardGui") then false elseif not p1.Enabled then false else p1.Name ~= constantsModule.OverlayName then
-				p1.Enabled = false
-				table.insert(t, p1)
+			elseif if Object:IsA("LayerCollector") then not Object:IsA("BillboardGui") and (if Object.Enabled then Object.Name ~= ConstantsModule.OverlayName else false) else false then
+				Object.Enabled = false
+				table.insert(List, Object)
 			end
 		end
 		
-		searchInstance(coreGuiService)
+		searchInstance(CoreGui)
 	else
-		for i, v in coreGuiService:GetChildren() do
-			if v:IsA("Folder") then
-				for i_1, v_1 in v:GetChildren() do
-					if if not v_1:IsA("LayerCollector") then false elseif v_1:IsA("BillboardGui") then false elseif not v_1.Enabled then false else v_1.Name ~= constantsModule.OverlayName then
-						v_1.Enabled = false
-						table.insert(t, v_1)
+		for _, child in CoreGui:GetChildren() do
+			if child:IsA("Folder") then
+				for _, child1 in child:GetChildren() do
+					if if child1:IsA("LayerCollector") then not child1:IsA("BillboardGui") and (if child1.Enabled then child1.Name ~= ConstantsModule.OverlayName else false) else false then
+						child1.Enabled = false
+						table.insert(List, child1)
 					end
 				end
 			end
-			if if not v:IsA("LayerCollector") then false elseif v:IsA("BillboardGui") then false elseif not v.Enabled then false else v.Name ~= constantsModule.OverlayName then
-				v.Enabled = false
-				table.insert(t, v)
+			if if child:IsA("LayerCollector") then not child:IsA("BillboardGui") and (if child.Enabled then child.Name ~= ConstantsModule.OverlayName else false) else false then
+				child.Enabled = false
+				table.insert(List, child)
 			end
 		end
 	end
-	return function()
-		-- upvalues: t (ref)
-		for i, v in t do
-			v.Enabled = true
+	return function() --[[ Line: 70 | Named "restoreCoreUI" ]]
+		-- upvalues: List (copy)
+		for _, value in List do
+			value.Enabled = true
 		end
 	end
 end

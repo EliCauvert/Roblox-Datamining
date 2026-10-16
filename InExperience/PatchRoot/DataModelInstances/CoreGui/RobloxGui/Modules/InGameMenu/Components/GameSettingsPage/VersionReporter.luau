@@ -1,61 +1,67 @@
-﻿local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
-local contentProviderService = game:GetService("ContentProvider")
-local coreGuiService = game:GetService("CoreGui")
-local corePackagesService = game:GetService("CorePackages")
-local httpRbxApiService = game:GetService("HttpRbxApiService")
-local httpService = game:GetService("HttpService")
-local playersService = game:GetService("Players")
-local robloxReplicatedStorageService = game:GetService("RobloxReplicatedStorage")
-local runService = game:GetService("RunService")
-local starterPlayerService = game:GetService("StarterPlayer")
-local robloxGui = coreGuiService:WaitForChild("RobloxGui")
-local inGameMenuDependenciesModule = require(corePackagesService.Packages.InGameMenuDependencies)
-local roact = inGameMenuDependenciesModule.Roact
-local t = inGameMenuDependenciesModule.t
-local skeleton = require(corePackagesService.Packages.Foundation).Skeleton
-local playerPermissionsModule = require(coreGuiService.RobloxGui.Modules.PlayerPermissionsModule)
-local parent = script.Parent.Parent.Parent
-local constantsModule = require(parent.Resources.Constants)
-local dividerModule = require(parent.Components.Divider)
-local themedTextLabelModule = require(parent.Components.ThemedTextLabel)
-local externalEventConnectionModule = require(parent.Utility.ExternalEventConnection)
-local withLocalizationModule = require(parent.Localization.withLocalization)
-local coreScriptVersionEnabledEngineFeature = game:GetEngineFeature("CoreScriptVersionEnabled")
-local getFFlagNewEventIngestPlayerScriptsDimensionsModule = require(robloxGui.Modules.Flags.GetFFlagNewEventIngestPlayerScriptsDimensions)
-local getFFlagRemoveAssetVersionEndpointModule = require(robloxGui.Modules.Flags.GetFFlagRemoveAssetVersionEndpoint)
-local versionReporter = roact.PureComponent:extend("VersionReporter")
-versionReporter.validateProps = t.strictInterface({ LayoutOrder = t.integer })
+﻿local RbxAnalyticsService = game:GetService("RbxAnalyticsService")
+local ContentProvider = game:GetService("ContentProvider")
+local CoreGui = game:GetService("CoreGui")
+local CorePackages = game:GetService("CorePackages")
+local HttpRbxApiService = game:GetService("HttpRbxApiService")
+local HttpService = game:GetService("HttpService")
+local Players = game:GetService("Players")
+local RobloxReplicatedStorage = game:GetService("RobloxReplicatedStorage")
+local RunService = game:GetService("RunService")
+local StarterPlayer = game:GetService("StarterPlayer")
+local RobloxGui = CoreGui:WaitForChild("RobloxGui")
+local InGameMenuDependenciesModule = require(CorePackages.Packages.InGameMenuDependencies)
+local Roact = InGameMenuDependenciesModule.Roact
+local T = InGameMenuDependenciesModule.t
+local Skeleton = require(CorePackages.Packages.Foundation).Skeleton
+local PlayerPermissionsModule = require(CoreGui.RobloxGui.Modules.PlayerPermissionsModule)
+local Parent = script.Parent.Parent.Parent
+local ConstantsModule = require(Parent.Resources.Constants)
+local DividerModule = require(Parent.Components.Divider)
+local ThemedTextLabelModule = require(Parent.Components.ThemedTextLabel)
+local ExternalEventConnectionModule = require(Parent.Utility.ExternalEventConnection)
+local WithLocalizationModule = require(Parent.Localization.withLocalization)
+local CoreScriptVersionEnabledEngineFeature = game:GetEngineFeature("CoreScriptVersionEnabled")
+local GetFFlagNewEventIngestPlayerScriptsDimensionsModule = require(RobloxGui.Modules.Flags.GetFFlagNewEventIngestPlayerScriptsDimensions)
+local GetFFlagRemoveAssetVersionEndpointModule = require(RobloxGui.Modules.Flags.GetFFlagRemoveAssetVersionEndpoint)
+local VersionReporter = Roact.PureComponent:extend("VersionReporter")
+VersionReporter.validateProps = T.strictInterface({ LayoutOrder = T.integer })
 
-local function inferPlayerScriptStatus(p1)
-	-- upvalues: constantsModule (ref), rbxAnalyticsService (ref), getFFlagNewEventIngestPlayerScriptsDimensionsModule (ref)
-	local playerScriptsLoader = p1:FindFirstChild("PlayerScriptsLoader")
-	local playerModule = p1:FindFirstChild("PlayerModule")
-	local _ = nil
-	local var1 = if playerScriptsLoader == nil or playerModule == nil then if p1:FindFirstChild("CameraScript") == nil and p1:FindFirstChild("ControlScript") == nil then constantsModule.PlayerScriptStatusStrings.Custom else constantsModule.PlayerScriptStatusStrings.CustomOld elseif playerModule.Archivable or playerScriptsLoader.Archivable then constantsModule.PlayerScriptStatusStrings.PossiblyCustom else constantsModule.PlayerScriptStatusStrings.Default
-	rbxAnalyticsService:SetRBXEventStream(constantsModule.AnalyticsTargetName, "player_scripts_status", "player_scripts_status_action", {
-		defaultPlayerScripts = var1 == constantsModule.PlayerScriptStatusStrings.Default,
+local function inferPlayerScriptStatus(Object) --[[ Line: 46 ]]
+	-- upvalues: ConstantsModule (copy), RbxAnalyticsService (copy), GetFFlagNewEventIngestPlayerScriptsDimensionsModule (copy)
+	local PlayerScriptsLoader = Object:FindFirstChild("PlayerScriptsLoader")
+	local PlayerModule = Object:FindFirstChild("PlayerModule")
+	local Custom = nil
+	
+	if PlayerScriptsLoader == nil or PlayerModule == nil then
+		local ControlScript = Object:FindFirstChild("ControlScript")
+		Custom = if Object:FindFirstChild("CameraScript") == nil and ControlScript == nil then ConstantsModule.PlayerScriptStatusStrings.Custom else ConstantsModule.PlayerScriptStatusStrings.CustomOld
+	else
+		Custom = if PlayerModule.Archivable or PlayerScriptsLoader.Archivable then ConstantsModule.PlayerScriptStatusStrings.PossiblyCustom else ConstantsModule.PlayerScriptStatusStrings.Default
+	end
+	RbxAnalyticsService:SetRBXEventStream(ConstantsModule.AnalyticsTargetName, "player_scripts_status", "player_scripts_status_action", {
+		defaultPlayerScripts = Custom == ConstantsModule.PlayerScriptStatusStrings.Default,
 		placeID = tostring(game.PlaceId),
-		rawValue = if getFFlagNewEventIngestPlayerScriptsDimensionsModule() then var1 else nil,
-		context = if getFFlagNewEventIngestPlayerScriptsDimensionsModule() then "IGMv2" else nil
+		rawValue = if GetFFlagNewEventIngestPlayerScriptsDimensionsModule() then Custom else nil,
+		context = if GetFFlagNewEventIngestPlayerScriptsDimensionsModule() then "IGMv2" else nil
 	})
 	
-	return var1
+	return Custom
 end
 
-function versionReporter.init(p1)
-	-- upvalues: starterPlayerService (ref), inferPlayerScriptStatus (ref), contentProviderService (ref), runService (ref), coreScriptVersionEnabledEngineFeature (ref)
-	local var1 = "PlayerScript Status: Unknown"
-	local starterPlayerScripts = starterPlayerService:FindFirstChild("StarterPlayerScripts")
+function VersionReporter.init(p1) --[[ Line: 82 ]]
+	-- upvalues: StarterPlayer (copy), inferPlayerScriptStatus (copy), ContentProvider (copy), RunService (copy), CoreScriptVersionEnabledEngineFeature (copy)
+	local PlayerScriptStatus = "PlayerScript Status: Unknown"
+	local StarterPlayerScripts = StarterPlayer:FindFirstChild("StarterPlayerScripts")
 	
-	if starterPlayerScripts then
-		var1 = inferPlayerScriptStatus(starterPlayerScripts)
+	if StarterPlayerScripts then
+		PlayerScriptStatus = inferPlayerScriptStatus(StarterPlayerScripts)
 	else
-		p1.playerScriptsAddedConnection = starterPlayerService.ChildAdded:Connect(function(p2)
-			-- upvalues: p1 (ref), inferPlayerScriptStatus (copy)
-			if p2.Name == "StarterPlayerScripts" then
+		p1.playerScriptsAddedConnection = StarterPlayer.ChildAdded:Connect(function(Child) --[[ Line: 88 ]]
+			-- upvalues: p1 (copy), inferPlayerScriptStatus (upval)
+			if Child.Name == "StarterPlayerScripts" then
 				p1.playerScriptsAddedConnection:Disconnect()
 				p1.playerScriptsAddedConnection = nil
-				p1:setState({ playerScriptStatus = inferPlayerScriptStatus(p2) })
+				p1:setState({ playerScriptStatus = inferPlayerScriptStatus(Child) })
 			end
 		end)
 	end
@@ -63,22 +69,22 @@ function versionReporter.init(p1)
 		isAdmin = false,
 		latestPlaceVersion = nil,
 		serverVersion = nil,
-		baseUrl = contentProviderService.BaseUrl,
-		clientVersion = runService:GetRobloxVersion(),
+		baseUrl = ContentProvider.BaseUrl,
+		clientVersion = RunService:GetRobloxVersion(),
 		placeVersion = game.PlaceVersion,
-		playerScriptStatus = var1,
-		coreScriptVersion = coreScriptVersionEnabledEngineFeature and runService:GetCoreScriptVersion() or nil
+		playerScriptStatus = PlayerScriptStatus,
+		coreScriptVersion = CoreScriptVersionEnabledEngineFeature and RunService:GetCoreScriptVersion() or nil
 	})
 end
 
-function versionReporter.render(p1)
-	-- upvalues: withLocalizationModule (ref), coreScriptVersionEnabledEngineFeature (ref), runService (ref), roact (ref), themedTextLabelModule (ref), skeleton (ref), dividerModule (ref), externalEventConnectionModule (ref)
-	local var1 = p1.state.serverVersion ~= nil
-	local var2 = p1.state.latestPlaceVersion ~= nil
-	local var3 = not p1.state.baseUrl:find("www.roblox.com")
-	local var4 = var3 or p1.state.isAdmin
+function VersionReporter.render(p1) --[[ Line: 111 ]]
+	-- upvalues: WithLocalizationModule (copy), CoreScriptVersionEnabledEngineFeature (copy), RunService (copy), Roact (copy), ThemedTextLabelModule (copy), Skeleton (copy), DividerModule (copy), ExternalEventConnectionModule (copy)
+	local HasServerVersion = p1.state.serverVersion ~= nil
+	local HasLatestPlaceVersion = p1.state.latestPlaceVersion ~= nil
+	local Inverted = not p1.state.baseUrl:find("www.roblox.com")
+	local Inverted1 = Inverted or p1.state.isAdmin
 	
-	return withLocalizationModule({
+	return WithLocalizationModule({
 		clientVersion = {
 			"CoreScripts.InGameMenu.GameSettings.ClientVersion",
 			CLIENT_VERSION = p1.state.clientVersion
@@ -88,61 +94,132 @@ function versionReporter.render(p1)
 			SERVER_VERSION = p1.state.serverVersion
 		},
 		placeVersion = {
-			if var2 then "CoreScripts.InGameMenu.GameSettings.PlaceVersionWithLatest" else "CoreScripts.InGameMenu.GameSettings.PlaceVersion",
+			if HasLatestPlaceVersion then "CoreScripts.InGameMenu.GameSettings.PlaceVersionWithLatest" else "CoreScripts.InGameMenu.GameSettings.PlaceVersion",
 			PLACE_VERSION = p1.state.placeVersion,
 			LATEST_PLACE_VERSION = p1.state.latestPlaceVersion
 		},
-		coreScriptVersion = coreScriptVersionEnabledEngineFeature and ({
+		coreScriptVersion = CoreScriptVersionEnabledEngineFeature and {
 			"CoreScripts.InGameMenu.GameSettings.ClientCoreScriptVersion",
 			CLIENT_CORESCRIPT_VERSION = p1.state.coreScriptVersion
-		} or nil)
-	})(function(_)
-		-- upvalues: runService (copy), roact (copy), p1 (ref), themedTextLabelModule (copy), var1 (ref), skeleton (copy), var3 (ref), var4 (ref), dividerModule (copy), coreScriptVersionEnabledEngineFeature (copy), externalEventConnectionModule (copy)
--- FATAL: Failed to generate AST for `unnamed` function:
-runtime : [KeyError] :11990: 48
-Traceback:
-	runtime : [lunaux]:11990 function decompile_function
-	runtime : [lunaux]:1933 function normalize_cfg
-	runtime : [lunaux]:1320 function match_weird_patterns
+		} or nil
+	})(function(p2) --[[ Line: 136 ]]
+		-- upvalues: RunService (upval), Roact (upval), p1 (copy), ThemedTextLabelModule (upval), HasServerVersion (copy), Skeleton (upval), Inverted (copy), Inverted1 (copy), DividerModule (upval), CoreScriptVersionEnabledEngineFeature (upval), ExternalEventConnectionModule (upval)
+		local ClientVersion = p2.clientVersion
+		local Success, Result = pcall(function() --[[ Line: 139 ]]
+			-- upvalues: RunService (upval)
+			return RunService.ClientGitHash
+		end)
+		
+		if Success then
+			ClientVersion = string.format("%s (%.6s)", ClientVersion, Result)
+		end
+		return Roact.createElement("Frame", {
+			BackgroundTransparency = 1,
+			Size = UDim2.new(1, 0, 0, 80),
+			LayoutOrder = p1.props.LayoutOrder
+		}, {
+			Padding = Roact.createElement("UIPadding", {
+				PaddingTop = UDim.new(0, 14),
+				PaddingLeft = UDim.new(0, 24),
+				PaddingBottom = UDim.new(0, 14)
+			}),
+			Layout = Roact.createElement("UIListLayout", {
+				SortOrder = Enum.SortOrder.LayoutOrder,
+				Padding = UDim.new(0, 10)
+			}),
+			ClientVersion = Roact.createElement(ThemedTextLabelModule, {
+				themeKey = "TextDefault",
+				fontKey = "Footer",
+				LayoutOrder = 1,
+				Text = ClientVersion,
+				Size = UDim2.new(1, -24, 0, 14)
+			}),
+			ServerVersion = Roact.createElement(ThemedTextLabelModule, {
+				themeKey = "TextDefault",
+				fontKey = "Footer",
+				LayoutOrder = 2,
+				Text = HasServerVersion and p2.serverVersion or "",
+				Size = UDim2.new(1, -24, 0, 14)
+			}, {
+				not HasServerVersion and Roact.createElement(Skeleton, { Size = UDim2.new(1, 0, 1, 0) })
+			}),
+			PlaceVersion = Roact.createElement(ThemedTextLabelModule, {
+				themeKey = "TextDefault",
+				fontKey = "Footer",
+				LayoutOrder = 3,
+				Text = p2.placeVersion,
+				Size = UDim2.new(1, -24, 0, 14)
+			}),
+			Divider = if Inverted then Roact.createElement(DividerModule, { LayoutOrder = 4, Size = UDim2.new(1, 0, 0, 1) }) else Inverted1 and Roact.createElement(DividerModule, { LayoutOrder = 4, Size = UDim2.new(1, 0, 0, 1) }),
+			PlayerScriptStatus = Inverted1 and Roact.createElement(ThemedTextLabelModule, {
+				themeKey = "TextDefault",
+				fontKey = "Footer",
+				LayoutOrder = 5,
+				Text = p1.state.playerScriptStatus,
+				Size = UDim2.new(1, -24, 0, 14)
+			}),
+			Environment = Inverted and Roact.createElement(ThemedTextLabelModule, {
+				themeKey = "TextDefault",
+				fontKey = "Footer",
+				LayoutOrder = 6,
+				Text = ("Base URL: %s"):format(p1.state.baseUrl),
+				Size = UDim2.new(1, -24, 0, 14)
+			}),
+			Divider2 = CoreScriptVersionEnabledEngineFeature and Roact.createElement(DividerModule, { LayoutOrder = 7, Size = UDim2.new(1, 0, 0, 1) }),
+			CoreScriptVersion = CoreScriptVersionEnabledEngineFeature and Roact.createElement(ThemedTextLabelModule, {
+				themeKey = "TextDefault",
+				fontKey = "Footer",
+				LayoutOrder = 8,
+				Text = p2.coreScriptVersion,
+				Size = UDim2.new(1, -24, 0, 14)
+			}),
+			VersionWatcher = Roact.createElement(ExternalEventConnectionModule, {
+				event = game:GetPropertyChangedSignal("PlaceVersion"),
+				callback = function() --[[ Line: 217 ]]
+					-- upvalues: p1 (upval)
+					p1:setState({ placeVersion = game.PlaceVersion })
+				end
+			})
+		})
 	end)
 end
 
-function versionReporter.didMount(p2)
-	-- upvalues: robloxReplicatedStorageService (ref), getFFlagRemoveAssetVersionEndpointModule (ref), httpRbxApiService (ref), httpService (ref), playerPermissionsModule (ref), playersService (ref)
+function VersionReporter.didMount(p2) --[[ Line: 227 ]]
+	-- upvalues: RobloxReplicatedStorage (copy), GetFFlagRemoveAssetVersionEndpointModule (copy), HttpRbxApiService (copy), HttpService (copy), PlayerPermissionsModule (copy), Players (copy)
 	p2.mounted = true
-	coroutine.wrap(function()
-		-- upvalues: robloxReplicatedStorageService (copy), p2 (ref)
-		local var5 = robloxReplicatedStorageService:WaitForChild("GetServerVersion", 1e999):InvokeServer()
+	coroutine.wrap(function() --[[ Line: 230 ]]
+		-- upvalues: RobloxReplicatedStorage (upval), p2 (copy)
+		local ServerResult = RobloxReplicatedStorage:WaitForChild("GetServerVersion", 1e999):InvokeServer()
 		
 		if p2.mounted then
-			p2:setState({ serverVersion = var5 })
+			p2:setState({ serverVersion = ServerResult })
 		end
 	end)()
 	
-	if not getFFlagRemoveAssetVersionEndpointModule() then
-		coroutine.wrap(function()
-			-- upvalues: httpRbxApiService (copy), httpService (copy), p2 (ref)
-			pcall(function()
-				-- upvalues: httpRbxApiService (copy), httpService (copy), p2 (copy)
-				local versionNumber = httpService:JSONDecode(httpRbxApiService:GetAsync(string.format("assets/%d/versions", game.PlaceId)))[1].VersionNumber
+	if not GetFFlagRemoveAssetVersionEndpointModule() then
+		coroutine.wrap(function() --[[ Line: 244 ]]
+			-- upvalues: HttpRbxApiService (upval), HttpService (upval), p2 (copy)
+			pcall(function() --[[ Line: 245 ]]
+				-- upvalues: HttpRbxApiService (upval), HttpService (upval), p2 (upval)
+				local VersionNumber = HttpService:JSONDecode((HttpRbxApiService:GetAsync(string.format("assets/%d/versions", game.PlaceId))))[1].VersionNumber
 				
 				if p2.mounted then
-					p2:setState({ latestPlaceVersion = versionNumber })
+					p2:setState({ latestPlaceVersion = VersionNumber })
 				end
 			end)
 		end)()
 	end
-	coroutine.wrap(function()
-		-- upvalues: playerPermissionsModule (copy), playersService (copy), p2 (ref)
-		local var5 = playerPermissionsModule.IsPlayerAdminAsync(playersService.LocalPlayer)
+	coroutine.wrap(function() --[[ Line: 259 ]]
+		-- upvalues: PlayerPermissionsModule (upval), Players (upval), p2 (copy)
+		local IsPlayerAdminAsync = PlayerPermissionsModule.IsPlayerAdminAsync(Players.LocalPlayer)
 		
 		if p2.mounted then
-			p2:setState({ isAdmin = var5 })
+			p2:setState({ isAdmin = IsPlayerAdminAsync })
 		end
 	end)()
 end
 
-function versionReporter.willUnmount(p2)
+function VersionReporter.willUnmount(p2) --[[ Line: 270 ]]
 	p2.mounted = false
 	
 	if p2.playerScriptsAddedConnection then
@@ -150,4 +227,4 @@ function versionReporter.willUnmount(p2)
 	end
 end
 
-return versionReporter
+return VersionReporter

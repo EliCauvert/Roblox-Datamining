@@ -1,11 +1,11 @@
-﻿local roduxModule = require(script:FindFirstAncestor("RoduxUsers").Parent.Rodux)
-local byUserIdModule = require(script.Users.byUserId)
-local byUsernameModule = require(script.Users.byUsername)
+﻿local RoduxModule = require(script:FindFirstAncestor("RoduxUsers").Parent.Rodux)
+local ByUserIdModule = require(script.Users.byUserId)
+local ByUsernameModule = require(script.Users.byUsername)
 
-return function(p1)
-	-- upvalues: roduxModule (ref), byUserIdModule (ref), byUsernameModule (ref)
-	return roduxModule.combineReducers({
-		byUserId = byUserIdModule(p1),
-		byUsername = byUsernameModule(p1)
+return function(p1) --[[ Line: 8 ]]
+	-- upvalues: RoduxModule (copy), ByUserIdModule (copy), ByUsernameModule (copy)
+	return RoduxModule.combineReducers({
+		byUserId = ByUserIdModule(p1),
+		byUsername = ByUsernameModule(p1)
 	})
 end

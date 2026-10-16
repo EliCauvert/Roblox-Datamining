@@ -1,112 +1,117 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local coreGuiService = game:GetService("CoreGui")
-local localizationModule = require(parent_1.Localization)
-local reactModule = require(parent_1.React)
-local UIBloxModule = require(parent_1.UIBlox)
-local foundationModule = require(parent_1.Foundation)
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local useAnalyticsModule = require(parent.Analytics.useAnalytics)
-local useLocalization = localizationModule.Hooks.useLocalization
-local useStyle = UIBloxModule.Core.Style.useStyle
-local button = UIBloxModule.App.Button.Button
-local buttonType = UIBloxModule.App.Button.Enum.ButtonType
-local eventNamesModule = require(parent.Analytics.EventNames)
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local CoreGui = game:GetService("CoreGui")
+local ReactModule = require(Parent1.React)
+local UIBloxModule = require(Parent1.UIBlox)
+local FoundationModule = require(Parent1.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local UseAnalyticsModule = require(Parent.Analytics.useAnalytics)
+local UseLocalizationFunction = require(Parent1.Localization).Hooks.useLocalization
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local Button = UIBloxModule.App.Button.Button
+local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
+local EventNamesModule = require(Parent.Analytics.EventNames)
 
-return function(p1)
-	-- upvalues: useAnalyticsModule (ref), useStyle (ref), useLocalization (ref), reactModule (ref), eventNamesModule (ref), coreGuiService (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), button (ref), buttonType (ref)
-	local var1 = useAnalyticsModule()
-	local var2 = useStyle()
-	local var3 = useLocalization({
+return function(p1) --[[ Line: 32 ]]
+	-- upvalues: UseAnalyticsModule (copy), UseStyleFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), EventNamesModule (copy), CoreGui (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), Button (copy), ButtonType (copy)
+	local UseAnalyticsModuleResult = UseAnalyticsModule()
+	local UseStyleResult = UseStyleFunction()
+	local UseLocalizationResult = UseLocalizationFunction({
 		videoCTATitle = "Feature.Captures.Title.VideoCTA",
 		videoEducationalText = "Feature.Captures.Label.VideoEducationalText",
 		startRecording = "Feature.Captures.Control.StartRecordingVideo",
 		stopRecording = "Feature.Captures.Control.StopRecordingVideo"
 	})
-	local var4, var5 = reactModule.useState(false)
-	reactModule.useEffect(function()
-		-- upvalues: var5 (ref)
-		local videoRecordingChangeRequestConnection = nil
-		local var6 = settings():FindFirstChild("Game Options")
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	ReactModule.useEffect(function() --[[ Line: 45 ]]
+		-- upvalues: UseStateResult2 (copy)
+		local VideoRecordingChangeRequestConnection = nil
+		local GameOptions = settings():FindFirstChild("Game Options")
 		
-		if var6 then
-			videoRecordingChangeRequestConnection = var6.VideoRecordingChangeRequest:connect(function(p2)
-				-- upvalues: var5 (copy)
-				var5(p2)
+		if GameOptions then
+			VideoRecordingChangeRequestConnection = GameOptions.VideoRecordingChangeRequest:connect(function(Recording) --[[ Line: 49 ]]
+				-- upvalues: UseStateResult2 (upval)
+				UseStateResult2(Recording)
 			end)
 		end
-		return function()
-			-- upvalues: videoRecordingChangeRequestConnection (write)
-			if videoRecordingChangeRequestConnection then
-				videoRecordingChangeRequestConnection:disconnect()
+		return function() --[[ Line: 55 ]]
+			-- upvalues: VideoRecordingChangeRequestConnection (ref)
+			if VideoRecordingChangeRequestConnection then
+				VideoRecordingChangeRequestConnection:disconnect()
 			end
 		end
-	end, { var1.fireEvent })
+	end, { UseAnalyticsModuleResult.fireEvent })
+	local CaptionBodyFont = UseStyleResult.Font.CaptionBody.Font
+	local HeaderFont = UseStyleResult.Font.Header2.Font
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BorderSizePixel = 0,
 		LayoutOrder = 3,
 		AutomaticSize = Enum.AutomaticSize.Y,
-		BackgroundColor3 = var2.Theme.BackgroundDefault.Color,
-		BackgroundTransparency = var2.Theme.BackgroundDefault.Transparency,
+		BackgroundColor3 = UseStyleResult.Theme.BackgroundDefault.Color,
+		BackgroundTransparency = UseStyleResult.Theme.BackgroundDefault.Transparency,
 		Size = UDim2.fromScale(1, 0)
 	}, {
-		TextFrame = reactModule.createElement("Frame", {
+		TextFrame = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			AutomaticSize = Enum.AutomaticSize.Y,
 			Size = UDim2.fromScale(0.7, 0)
 		}, {
-			Layout = reactModule.createElement("UIListLayout", {
+			Layout = ReactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Vertical,
 				HorizontalAlignment = Enum.HorizontalAlignment.Center,
 				SortOrder = Enum.SortOrder.LayoutOrder,
 				VerticalAlignment = Enum.VerticalAlignment.Top
 			}),
-			Title = reactModule.createElement("TextLabel", {
+			Title = ReactModule.createElement("TextLabel", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 1,
-				Font = if foundationFontFaceMigration then nil else var2.Font.Header2.Font,
-				FontFace = if foundationFontFaceMigration then normalizeFontFace(var2.Tokens.Typography.TitleLarge.Font) else nil,
+				Font = if FoundationFontFaceMigration then nil else HeaderFont,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.TitleLarge.Font) else nil,
 				Size = UDim2.new(1, 0, 0, 30),
-				Text = var3.videoCTATitle,
-				TextColor3 = var2.Theme.TextEmphasis.Color,
-				TextSize = var2.Font.BaseSize * var2.Font.Header2.RelativeSize,
+				Text = UseLocalizationResult.videoCTATitle,
+				TextColor3 = UseStyleResult.Theme.TextEmphasis.Color,
+				TextSize = UseStyleResult.Font.BaseSize * UseStyleResult.Font.Header2.RelativeSize,
 				TextXAlignment = Enum.TextXAlignment.Left
 			}),
-			EducationalLabel = reactModule.createElement("TextLabel", {
+			EducationalLabel = ReactModule.createElement("TextLabel", {
 				BackgroundTransparency = 1,
 				LayoutOrder = 2,
 				TextWrapped = true,
-				Font = if foundationFontFaceMigration then nil else var2.Font.CaptionBody.Font,
-				FontFace = if foundationFontFaceMigration then normalizeFontFace(var2.Tokens.Typography.BodySmall.Font) else nil,
+				Font = if FoundationFontFaceMigration then nil else CaptionBodyFont,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodySmall.Font) else nil,
 				Size = UDim2.new(1, 0, 0, 40),
-				Text = var3.videoEducationalText,
-				TextColor3 = var2.Theme.TextDefault.Color,
-				TextSize = var2.Font.BaseSize * var2.Font.CaptionBody.RelativeSize,
+				Text = UseLocalizationResult.videoEducationalText,
+				TextColor3 = UseStyleResult.Theme.TextDefault.Color,
+				TextSize = UseStyleResult.Font.BaseSize * UseStyleResult.Font.CaptionBody.RelativeSize,
 				TextXAlignment = Enum.TextXAlignment.Left
 			})
 		}),
-		CapturesToggleFrame = reactModule.createElement("Frame", {
+		CapturesToggleFrame = ReactModule.createElement("Frame", {
 			BackgroundTransparency = 1,
 			AnchorPoint = Vector2.new(1, 0.5),
 			Position = UDim2.fromScale(1, 0.5),
 			Size = UDim2.fromOffset(224, 44)
 		}, {
-			RecordButton = reactModule.createElement(button, {
-				buttonType = buttonType.Secondary,
-				onActivated = reactModule.useCallback(function()
-					-- upvalues: var4 (ref), p1 (ref), var1 (ref), eventNamesModule (copy), coreGuiService (copy)
-					if var4 then
-						var1.fireEvent(eventNamesModule.CapturesMigratedLegacyVideoRecordDeactivated)
+			RecordButton = ReactModule.createElement(Button, {
+				buttonType = ButtonType.Secondary,
+				onActivated = ReactModule.useCallback(function() --[[ Line: 62 ]]
+					-- upvalues: UseStateResult (copy), p1 (copy), UseAnalyticsModuleResult (copy), EventNamesModule (upval), CoreGui (upval)
+					if UseStateResult then
+						UseAnalyticsModuleResult.fireEvent(EventNamesModule.CapturesMigratedLegacyVideoRecordDeactivated)
 					else
 						p1.closeSettingsMenu()
-						var1.fireEvent(eventNamesModule.CapturesMigratedLegacyVideoRecordActivated)
+						UseAnalyticsModuleResult.fireEvent(EventNamesModule.CapturesMigratedLegacyVideoRecordActivated)
 					end
-					coreGuiService:ToggleRecording()
-				end, { var1.fireEvent, var4, p1.closeSettingsMenu }),
+					CoreGui:ToggleRecording()
+				end, {
+					UseAnalyticsModuleResult.fireEvent,
+					UseStateResult,
+					p1.closeSettingsMenu
+				}),
 				size = UDim2.fromScale(1, 1),
-				text = if var4 then var3.stopRecording else var3.startRecording
+				text = if UseStateResult then UseLocalizationResult.stopRecording else UseLocalizationResult.startRecording
 			})
 		})
 	})

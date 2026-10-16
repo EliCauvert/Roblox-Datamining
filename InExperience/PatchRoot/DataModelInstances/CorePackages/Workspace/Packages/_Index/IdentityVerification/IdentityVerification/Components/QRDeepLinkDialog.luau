@@ -1,62 +1,67 @@
-﻿local parent = script:FindFirstAncestor("IdentityVerification").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local dialog = foundationModule.Dialog
-local dialogSize = foundationModule.Enums.DialogSize
-local view = foundationModule.View
-local text = foundationModule.Text
-local useTokens = foundationModule.Hooks.useTokens
-local QRCodeDisplayModule = require(parent.QRCodeDisplay)
+﻿local Parent = script:FindFirstAncestor("IdentityVerification").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local Dialog = FoundationModule.Dialog
+local DialogSize = FoundationModule.Enums.DialogSize
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local QRCodeDisplayModule = require(Parent.QRCodeDisplay)
 local ECLevels = QRCodeDisplayModule.ECLevels
 
-return function(p1)
-	-- upvalues: useTokens (ref), reactModule (ref), dialog (ref), dialogSize (ref), view (ref), text (ref), QRCodeDisplayModule (ref), ECLevels (ref)
-	local var1 = useTokens()
+return function(p1) --[[ Line: 28 | Named "QRDeepLinkDialog" ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), Dialog (copy), DialogSize (copy), View (copy), Text (copy), QRCodeDisplayModule (copy), ECLevels (copy)
+	local Deeplink = p1.deeplink
+	local Title = p1.title
+	local Description = p1.description
+	local Footer = p1.footer
+	local OnClose = p1.onClose
+	local UseTokensResult = UseTokensFunction()
 	
-	return reactModule.createElement(dialog.Root, {
+	return ReactModule.createElement(Dialog.Root, {
 		hasBackdrop = true,
-		size = dialogSize.Medium,
-		onClose = p1.onClose
+		size = DialogSize.Medium,
+		onClose = OnClose
 	}, {
-		DialogContent = reactModule.createElement(dialog.Content, nil, {
-			DialogView = reactModule.createElement(view, { tag = "col items-stretch size-full-0 auto-y" }, {
-				TitleWrapper = reactModule.createElement(view, {
+		DialogContent = ReactModule.createElement(Dialog.Content, nil, {
+			DialogView = ReactModule.createElement(View, { tag = "col items-stretch size-full-0 auto-y" }, {
+				TitleWrapper = ReactModule.createElement(View, {
 					LayoutOrder = 1,
 					tag = "size-full-0 auto-y padding-bottom-small",
 					padding = {
-						right = UDim.new(0, var1.Size.Size_400 + var1.Size.Size_1000),
-						top = UDim.new(0, var1.Size.Size_500)
+						right = UDim.new(0, UseTokensResult.Size.Size_400 + UseTokensResult.Size.Size_1000),
+						top = UDim.new(0, UseTokensResult.Size.Size_500)
 					}
 				}, {
-					TitleText = reactModule.createElement(text, {
+					TitleText = ReactModule.createElement(Text, {
 						tag = "size-full-0 auto-y text-heading-small text-wrap text-align-x-left content-emphasis",
-						Text = p1.title
+						Text = Title
 					})
 				}),
-				BodyText = reactModule.createElement(dialog.Text, { LayoutOrder = 2, Text = p1.description }),
-				QRCardWrapper = reactModule.createElement(view, {
+				BodyText = ReactModule.createElement(Dialog.Text, { LayoutOrder = 2, Text = Description }),
+				QRCardWrapper = ReactModule.createElement(View, {
 					tag = "col align-x-center items-center size-full-0 auto-y margin-y-large",
 					LayoutOrder = 3
 				}, {
-					QRCard = reactModule.createElement(view, {
+					QRCard = ReactModule.createElement(View, {
 						tag = "col auto-xy padding-medium",
 						cornerRadius = UDim.new(0, 14),
 						backgroundStyle = { Transparency = 0, Color3 = Color3.fromRGB(255, 255, 255) }
 					}, {
-						QRCode = reactModule.createElement(QRCodeDisplayModule.DisplayQRCode, {
+						QRCode = ReactModule.createElement(QRCodeDisplayModule.DisplayQRCode, {
 							sideLength = 176,
 							ecLevel = ECLevels.EC_LEVEL_4,
-							toEncode = p1.deeplink,
+							toEncode = Deeplink,
 							backgroundColor = Color3.fromRGB(255, 255, 255),
 							pixelColor = Color3.fromRGB(0, 0, 0)
 						})
 					})
 				}),
-				FooterText = reactModule.createElement(text, {
+				FooterText = ReactModule.createElement(Text, {
 					LayoutOrder = 4,
 					RichText = true,
 					tag = "size-full-0 auto-y padding-bottom-small text-body-medium text-wrap text-align-x-left",
-					Text = p1.footer
+					Text = Footer
 				})
 			})
 		})

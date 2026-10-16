@@ -1,22 +1,22 @@
-﻿local parent = script:FindFirstAncestor("Drawer").Parent
-local reactModule = require(parent.React)
-local useTokens = require(parent.Foundation).Hooks.useTokens
-local drawerScrimCanBeModal = game:DefineFastFlag("DrawerScrimCanBeModal", false)
+﻿local Parent = script:FindFirstAncestor("Drawer").Parent
+local ReactModule = require(Parent.React)
+local UseTokensFunction = require(Parent.Foundation).Hooks.useTokens
+local DrawerScrimCanBeModal = game:DefineFastFlag("DrawerScrimCanBeModal", false)
 
-return reactModule.forwardRef(function(p1, p2)
-	-- upvalues: useTokens (ref), reactModule (ref), drawerScrimCanBeModal (ref)
-	return reactModule.createElement("TextButton", {
-		ref = p2,
+return (ReactModule.forwardRef(function(p1, Ref) --[[ Line: 18 ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), DrawerScrimCanBeModal (copy)
+	return ReactModule.createElement("TextButton", {
+		ref = Ref,
 		Size = UDim2.new(1, 0, 1, 0),
 		BackgroundTransparency = p1.transparencyBinding,
-		BackgroundColor3 = useTokens().Color.Common.Scrim.Color3,
+		BackgroundColor3 = UseTokensFunction().Color.Common.Scrim.Color3,
 		ClipsDescendants = false,
 		Text = "",
 		AutoButtonColor = false,
 		ZIndex = p1.zIndex,
-		[reactModule.Change.AbsoluteSize] = p1.onSizeChanged,
-		[reactModule.Event.Activated] = p1.onActivated,
+		[ReactModule.Change.AbsoluteSize] = p1.onSizeChanged,
+		[ReactModule.Event.Activated] = p1.onActivated,
 		BorderSizePixel = 0,
-		Modal = if drawerScrimCanBeModal then p1.isModal else nil
+		Modal = if DrawerScrimCanBeModal then p1.isModal else nil
 	}, p1.children)
-end)
+end))

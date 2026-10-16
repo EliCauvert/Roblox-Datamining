@@ -1,10 +1,10 @@
-﻿return function(p1, p2, p3, p4)
-	local maxValue = math.max(1, p3)
-	local maxValue_1 = math.max(0, math.min(p1, p4) - maxValue + 1)
-	local list = table.create(maxValue_1)
+﻿return function(p1: number, Callback, p2: number, p3: number) --[[ Line: 1 | Named "readDenseRange" ]]
+	local Largest = math.max(1, p2)
+	local Largest1 = math.max(0, math.min(p1, p3) - Largest + 1)
+	local Buffer = table.create(Largest1)
 	
-	for i = 1, maxValue_1 do
-		list[i] = p2(maxValue + i - 1)
+	for i = 1, Largest1 do
+		Buffer[i] = Callback(Largest + i - 1)
 	end
-	return list
+	return Buffer
 end

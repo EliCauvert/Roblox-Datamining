@@ -1,7 +1,7 @@
 ﻿local _ = game:GetService("CorePackages")
-local screenListModule = require(script.Parent.ScreenList)
+local ScreenListModule = require(script.Parent.ScreenList)
 
-return function(p1, p2)
-	-- upvalues: screenListModule (ref)
-	return { ScreenList = screenListModule((p1 or {}).ScreenList, p2) }
+return function(p1, p2) --[[ Line: 8 ]]
+	-- upvalues: ScreenListModule (copy)
+	return { ScreenList = ScreenListModule((p1 or {}).ScreenList, p2) }
 end

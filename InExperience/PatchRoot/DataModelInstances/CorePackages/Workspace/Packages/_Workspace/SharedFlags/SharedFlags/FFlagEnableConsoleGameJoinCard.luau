@@ -1,1 +1,0 @@
-﻿return require(script.Parent.FFlagPPVEnabledOnConsole) and game:DefineFastFlag("EnableConsoleGameJoinCard_v4", false)

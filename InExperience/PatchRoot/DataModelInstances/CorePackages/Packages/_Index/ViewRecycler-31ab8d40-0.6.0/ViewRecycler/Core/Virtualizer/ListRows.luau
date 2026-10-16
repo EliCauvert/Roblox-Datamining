@@ -1,800 +1,804 @@
-﻿local viewRecycler = script:FindFirstAncestor("ViewRecycler")
-local _ = require(viewRecycler.Core.DataSource)
-local dataSourceChangeTypeModule = require(viewRecycler.Core.Enums.DataSourceChangeType)
-local diagnosticsModule = require(viewRecycler.Core.Diagnostics)
-local _ = require(viewRecycler.Core.Layout)
-local placementTypesModule = require(viewRecycler.Core.Placement.PlacementTypes)
-local shallowTableModule = require(viewRecycler.Internal.ShallowTable)
-local typesModule = require(viewRecycler.Core.Types)
-local _ = require(viewRecycler.Core.Recycling.SlotBinder)
-local cloneFrozen = shallowTableModule.cloneFrozen
-local containsEqual = shallowTableModule.containsEqual
-local optionalContainsEqual = shallowTableModule.optionalContainsEqual
-local ITEM_LAYOUT_KEYS = typesModule.ITEM_LAYOUT_KEYS
-local ITEM_PLACEMENT_KEYS = placementTypesModule.ITEM_PLACEMENT_KEYS
-local frozen = table.freeze({ firstIndex = 1, lastIndex = 0 })
-local frozen_1 = table.freeze({})
-local frozen_2 = table.freeze({})
-local frozen_3 = table.freeze({
+﻿local ViewRecycler = script:FindFirstAncestor("ViewRecycler")
+local _ = require(ViewRecycler.Core.DataSource)
+local DataSourceChangeTypeModule = require(ViewRecycler.Core.Enums.DataSourceChangeType)
+local DiagnosticsModule = require(ViewRecycler.Core.Diagnostics)
+local _ = require(ViewRecycler.Core.Layout)
+local ShallowTableModule = require(ViewRecycler.Internal.ShallowTable)
+local TypesModule = require(ViewRecycler.Core.Types)
+local _ = require(ViewRecycler.Core.Recycling.SlotBinder)
+local CloneFrozenFunction = ShallowTableModule.cloneFrozen
+local ContainsEqualFunction = ShallowTableModule.containsEqual
+local OptionalContainsEqualFunction = ShallowTableModule.optionalContainsEqual
+local ITEMLAYOUTKEYS = TypesModule.ITEM_LAYOUT_KEYS
+local ITEMPLACEMENTKEYS = require(ViewRecycler.Core.Placement.PlacementTypes).ITEM_PLACEMENT_KEYS
+local Frozen = table.freeze({ firstIndex = 1, lastIndex = 0 })
+local Frozen1 = table.freeze({})
+local Frozen2 = table.freeze({})
+local Frozen3 = table.freeze({
 	hasViewportRelativePlacements = false,
-	retainedItems = frozen_2,
-	additionalItems = frozen_2,
-	placements = frozen_1
+	retainedItems = Frozen2,
+	additionalItems = Frozen2,
+	placements = Frozen1
 })
 
-local function _(p1, p2)
+local function _(p1, p2): boolean --[[ Line: 124 | Named "sameRange" ]]
 	return p1.firstIndex == p2.firstIndex and p1.lastIndex == p2.lastIndex
 end
 
-local _ = function(p1, p2)
+local _ = function(p1, p2): boolean --[[ Line: 130 | Named "measuresSameContent" ]]
 	if p1 == p2 then
 		return true
+	else
+		local ItemLayout = p1.itemLayout
+		local ItemLayout1 = p2.itemLayout
+		
+		return p1.assignment == p2.assignment and (p1.pinnedPosition == p2.pinnedPosition and (ItemLayout.crossAxisIndex == ItemLayout1.crossAxisIndex and ItemLayout.crossAxisCount == ItemLayout1.crossAxisCount)) and ItemLayout.crossAxisSpacing == ItemLayout1.crossAxisSpacing
 	end
-	local itemLayout = p1.itemLayout
-	local itemLayout_1 = p2.itemLayout
-	
-	return p1.assignment == p2.assignment and (p1.pinnedPosition == p2.pinnedPosition and (itemLayout.crossAxisIndex == itemLayout_1.crossAxisIndex and (itemLayout.crossAxisCount == itemLayout_1.crossAxisCount and itemLayout.crossAxisSpacing == itemLayout_1.crossAxisSpacing)))
 end
 
-local function resolveLayout(p1, p2, p3)
-	-- upvalues: containsEqual (ref), ITEM_LAYOUT_KEYS (ref), cloneFrozen (ref)
-	return if not (p2 ~= nil and containsEqual(p2, p1, ITEM_LAYOUT_KEYS)) then if table.isfrozen(p1) then p1 elseif p3 then table.freeze(p1) else cloneFrozen(p1) else p2
+local function resolveLayout(Tbl, ItemLayout, p1) --[[ Line: 143 ]]
+	-- upvalues: ContainsEqualFunction (copy), ITEMLAYOUTKEYS (copy), CloneFrozenFunction (copy)
+	return if ItemLayout == nil or not ContainsEqualFunction(ItemLayout, Tbl, ITEMLAYOUTKEYS) then if table.isfrozen(Tbl) then Tbl elseif p1 then table.freeze(Tbl) else CloneFrozenFunction(Tbl) else ItemLayout
 end
 
-local function resolvePlacement(p1, p2, p3)
-	-- upvalues: frozen_1 (ref), containsEqual (ref), ITEM_PLACEMENT_KEYS (ref), optionalContainsEqual (ref)
-	local var1 = frozen_1
-	local viewportPlacement = nil
+local function resolvePlacement(p1, ScrollOffset, State) --[[ Line: 157 ]]
+	-- upvalues: Frozen1 (copy), ContainsEqualFunction (copy), ITEMPLACEMENTKEYS (copy), OptionalContainsEqualFunction (copy)
+	local Tbl = Frozen1
+	local Tbl1 = nil
 	
-	if p1 ~= nil and p1.viewportRelative then
-		local mainAxisEndLimit = p1.mainAxisEndLimit
-		var1 = {
-			mainAxisOffset = p2 + (p1.mainAxisOffset or 0),
+	if p1 == nil or not p1.viewportRelative then
+		if p1 ~= nil then
+			Tbl = {
+				mainAxisOffset = p1.mainAxisOffset,
+				mainAxisLength = p1.mainAxisLength,
+				mainAxisEndLimit = p1.mainAxisEndLimit,
+				zIndex = p1.zIndex
+			}
+		end
+	else
+		local MainAxisEndLimit = p1.mainAxisEndLimit
+		Tbl = {
+			mainAxisOffset = ScrollOffset + (p1.mainAxisOffset or 0),
 			mainAxisLength = p1.mainAxisLength,
-			mainAxisEndLimit = if mainAxisEndLimit == nil then nil else p2 + mainAxisEndLimit,
+			mainAxisEndLimit = if MainAxisEndLimit == nil then nil else ScrollOffset + MainAxisEndLimit,
 			zIndex = p1.zIndex
 		}
-		viewportPlacement = {
+		Tbl1 = {
 			viewportRelative = true,
 			mainAxisOffset = p1.mainAxisOffset,
 			mainAxisLength = p1.mainAxisLength,
-			mainAxisEndLimit = mainAxisEndLimit,
-			zIndex = p1.zIndex
-		}
-	elseif p1 ~= nil then
-		var1 = {
-			mainAxisOffset = p1.mainAxisOffset,
-			mainAxisLength = p1.mainAxisLength,
-			mainAxisEndLimit = p1.mainAxisEndLimit,
+			mainAxisEndLimit = MainAxisEndLimit,
 			zIndex = p1.zIndex
 		}
 	end
-	if p3 ~= nil and containsEqual(p3.canvasPlacement, var1, ITEM_PLACEMENT_KEYS) then
-		var1 = p3.canvasPlacement
-	elseif var1 ~= frozen_1 then
-		table.freeze(var1)
+	if State == nil or not ContainsEqualFunction(State.canvasPlacement, Tbl, ITEMPLACEMENTKEYS) then
+		if Tbl ~= Frozen1 then
+			table.freeze(Tbl)
+		end
+	else
+		Tbl = State.canvasPlacement
 	end
-	if p3 ~= nil and optionalContainsEqual(p3.viewportPlacement, viewportPlacement, ITEM_PLACEMENT_KEYS) then
-		viewportPlacement = p3.viewportPlacement
+	if State ~= nil and OptionalContainsEqualFunction(State.viewportPlacement, Tbl1, ITEMPLACEMENTKEYS) then
+		Tbl1 = State.viewportPlacement
 		
-		return var1, viewportPlacement
-	elseif viewportPlacement ~= nil then
-		table.freeze(viewportPlacement)
+		return Tbl, Tbl1
 	end
-	return var1, viewportPlacement
+	if Tbl1 ~= nil then
+		table.freeze(Tbl1)
+	end
+	return Tbl, Tbl1
 end
 
-return function(p1)
-	-- upvalues: frozen (ref), frozen_3 (ref), frozen_2 (ref), dataSourceChangeTypeModule (ref), typesModule (ref), resolveLayout (ref), frozen_1 (ref), resolvePlacement (ref), diagnosticsModule (ref)
-	local slotBinder = p1.slotBinder
-	local var1 = false
+return function(p1) --[[ Line: 202 | Named "createListRows" ]]
+	-- upvalues: Frozen (copy), Frozen3 (copy), Frozen2 (copy), DataSourceChangeTypeModule (copy), TypesModule (copy), resolveLayout (copy), Frozen1 (copy), resolvePlacement (copy), DiagnosticsModule (copy)
+	local SlotBinder = p1.slotBinder
+	local Flag = false
 	local t = {}
-	local t_1 = {}
-	local var2 = true
-	local t_2 = {}
-	local t_3 = {}
-	local var3 = false
-	local var4 = frozen
-	local var5 = 0
-	local var6 = nil
-	local var7 = frozen_3
-	local var8 = 0
-	local var9 = frozen_2
-	local var10 = false
-	local var11 = false
-	local var12 = false
-	local t_4 = {}
-	local var13 = nil
-	local var14 = frozen
+	local t1 = {}
+	local IsLargestMatch = true
+	local t2 = {}
+	local t3 = {}
+	local Flag1 = false
+	local Frozen4 = Frozen
+	local ContentStartOffset = 0
+	local Layout = nil
+	local Frozen5 = Frozen3
+	local Count = 0
+	local Frozen6 = Frozen2
+	local Flag2 = false
+	local Flag3 = false
+	local Flag4 = false
+	local Tbl = {}
+	local v1 = nil
+	local Frozen7 = Frozen
 	
-	local function _()
-		-- upvalues: var3 (write), var4 (write), var13 (write), frozen (copy), var14 (write)
-		return if var3 then var4 elseif var13 == nil then frozen else var14
+	local function _() --[[ Line: 231 | Named "knownRange" ]]
+		-- upvalues: Flag1 (ref), Frozen4 (ref), v1 (ref), Frozen (upval), Frozen7 (ref)
+		return if Flag1 then Frozen4 elseif v1 == nil then Frozen else Frozen7
 	end
 	
-	local function noteDataChange(p2)
-		-- upvalues: dataSourceChangeTypeModule (copy), var10 (write), var11 (write), t_4 (ref), var3 (write), var4 (write), var13 (write), frozen (copy), var14 (write), typesModule (copy)
-		for i, v in p2.changes do
-			local type = v.type
-			
-			if type == dataSourceChangeTypeModule.Reset then
-				var10 = true
-				var11 = true
-			elseif type == dataSourceChangeTypeModule.Reorder then
-				var10 = true
-				continue
-			end
-			if type == dataSourceChangeTypeModule.Update then
-				for i_1, v_1 in v.keys do
-					t_4[v_1] = true
-				end
-			elseif type == dataSourceChangeTypeModule.Insert then
-				for i_1, v_1 in v.keys do
-					t_4[v_1] = true
-				end
-				local var15 = if var3 then var4 elseif var13 == nil then frozen else var14
-				
-				if not var10 and not typesModule.isIndexRangeEmpty(var15) and v.index <= var15.lastIndex then
-					var10 = true
-				end
-			elseif type == dataSourceChangeTypeModule.Remove then
-				local var16 = if var3 then var4 elseif var13 == nil then frozen else var14
-				
-				if not var10 and not typesModule.isIndexRangeEmpty(var16) and v.index <= var16.lastIndex then
-					var10 = true
-				end
-			elseif type == dataSourceChangeTypeModule.Move then
-				local var17 = if var3 then var4 elseif var13 == nil then frozen else var14
-				
-				if not var10 and not typesModule.isIndexRangeEmpty(var17) and (math.min(v.fromIndex, v.toIndex) <= var17.lastIndex and var17.firstIndex <= math.max(v.fromIndex, v.toIndex)) then
-					var10 = true
-				end
-			end
-		end
-	end
-	
-	local function publish(p3, p4, p5, p6, p7)
-		local state = p3.state
-		local assignment = p3.assignment
+	local function publish(p2, ItemLayout, CanvasPlacement, ViewportPlacement, ContentStartOffset): boolean --[[ Line: 283 ]]
+		local State = p2.state
+		local Assignment = p2.assignment
 		
-		if state == nil or state.assignment ~= assignment or (state.index ~= p3.index or state.pinnedPosition ~= p3.pinnedPosition) or (state.itemLayout ~= p4 or state.canvasPlacement ~= p5 or (state.viewportPlacement ~= p6 or state.contentStartOffset ~= p7)) or p3.record.itemView ~= p3.view then
-			local frozen = table.freeze({
-				assignment = assignment,
-				index = p3.index,
-				pinnedPosition = p3.pinnedPosition,
-				itemLayout = p4,
-				canvasPlacement = p5,
-				viewportPlacement = p6,
-				contentStartOffset = p7
+		if State == nil or State.assignment ~= Assignment or State.index ~= p2.index or State.pinnedPosition ~= p2.pinnedPosition or State.itemLayout ~= ItemLayout or State.canvasPlacement ~= CanvasPlacement or State.viewportPlacement ~= ViewportPlacement or State.contentStartOffset ~= ContentStartOffset or p2.record.itemView ~= p2.view then
+			local Frozen = table.freeze({
+				assignment = Assignment,
+				index = p2.index,
+				pinnedPosition = p2.pinnedPosition,
+				itemLayout = ItemLayout,
+				canvasPlacement = CanvasPlacement,
+				viewportPlacement = ViewportPlacement,
+				contentStartOffset = ContentStartOffset
 			})
-			p3.state = frozen
-			p3.record = table.freeze({ itemView = p3.view, state = frozen })
+			p2.state = Frozen
+			p2.record = table.freeze({ itemView = p2.view, state = Frozen })
 			
 			return true
+		else
+			return false
 		end
-		return false
 	end
 	
-	local var18 = 0
-	local var19 = nil
-	local var20 = nil
-	local var21 = 0
-	local var22 = 0
-	local var23 = false
-	local var24 = 0
-	local var25 = 0
-	local t_5 = {}
-	local t_6 = {}
-	local var26 = 0
-	local var27 = frozen_2
-	local var28 = frozen_2
-	local var29 = nil
-	local t_7 = {}
+	local Epoch = 0
+	local DataSource = nil
+	local Layout1 = nil
+	local ScrollOffset = 0
+	local ContentStartOffset1 = 0
+	local v2 = false
+	local FirstIndex = 0
+	local Smallest = 0
+	local List = {}
+	local Keys = {}
+	local Count1 = 0
+	local T = Frozen2
+	local T1 = Frozen2
+	local v3 = nil
+	local Placements = {}
 	
-	local _ = function(p3, p4, p5, p6)
-		-- upvalues: var18 (write), var26 (write), t_5 (ref)
-		local t = {
+	local _ = function(Key, Index, Value, ViewType) --[[ Line: 336 | Named "enter" ]]
+		-- upvalues: Epoch (ref), Count1 (ref), List (copy)
+		local config = {
 			side = false,
 			entered = true,
 			changed = true,
-			key = p3,
-			value = p5,
-			viewType = p6,
-			index = p4,
-			epoch = var18
+			key = Key,
+			value = Value,
+			viewType = ViewType,
+			index = Index,
+			epoch = Epoch
 		}
-		var26 += 1
-		table.insert(t_5, t)
+		Count1 += 1
+		table.insert(List, config)
 		
-		return t
+		return config
 	end
 	
-	local _ = function(p3, p4, p5)
-		-- upvalues: t_6 (ref), var18 (write), var26 (write), t_5 (ref)
-		table.insert(t_6, p3.key)
-		local t = {
+	local _ = function(p2, Value, ViewType) --[[ Line: 354 | Named "replace" ]]
+		-- upvalues: Keys (copy), Epoch (ref), Count1 (ref), List (copy)
+		table.insert(Keys, p2.key)
+		local config = {
 			side = false,
 			entered = true,
 			changed = true,
-			key = p3.key,
-			value = p4,
-			viewType = p5,
-			index = p3.index,
-			epoch = var18
+			key = p2.key,
+			value = Value,
+			viewType = ViewType,
+			index = p2.index,
+			epoch = Epoch
 		}
-		var26 += 1
-		table.insert(t_5, t)
-		t.side = p3.side
+		Count1 += 1
+		table.insert(List, config)
+		config.side = p2.side
 		
-		return t
+		return config
 	end
 	
-	local _ = function(p3, p4)
-		-- upvalues: var18 (write)
-		assert(p3.epoch ~= var18, `Virtualizer: duplicate key "{p25}"`)
-		p3.epoch = var18
-		p3.entered = false
-		p3.changed = false
+	local _ = function(p2, p3) --[[ Line: 361 | Named "claim" ]]
+		-- upvalues: Epoch (ref)
+		assert(p2.epoch ~= Epoch, `Virtualizer: duplicate key "{p24}"`)
+		p2.epoch = Epoch
+		p2.entered = false
+		p2.changed = false
 	end
 	
-	local function enterIndex(p3)
-		-- upvalues: var19 (write), t_2 (write), var18 (write), p1 (ref), var26 (write), t_5 (ref)
-		local itemKey = var19.getItemKey(p3)
-		local var30 = t_2[itemKey]
+	local function enterIndex(Index) --[[ Line: 368 ]]
+		-- upvalues: DataSource (ref), t2 (ref), Epoch (ref), p1 (copy), Count1 (ref), List (copy)
+		local ItemKey = DataSource.getItemKey(Index)
+		local Entry = t2[ItemKey]
 		
-		if var30 == nil then
-			local item = var19.getItem(p3)
-			local t = {
+		if Entry == nil then
+			local Item = DataSource.getItem(Index)
+			local config = {
 				side = false,
 				entered = true,
 				changed = true,
-				key = itemKey,
-				value = item,
-				viewType = p1.getItemViewType(item, p3),
-				index = p3,
-				epoch = var18
+				key = ItemKey,
+				value = Item,
+				viewType = p1.getItemViewType(Item, Index),
+				index = Index,
+				epoch = Epoch
 			}
-			var26 += 1
-			table.insert(t_5, t)
+			Count1 += 1
+			table.insert(List, config)
 			
-			return t
+			return config
+		else
+			assert(Entry.epoch ~= Epoch, `Virtualizer: duplicate key "{ItemKey}"`)
+			Entry.epoch = Epoch
+			Entry.entered = false
+			Entry.changed = false
+			Entry.index = Index
+			Entry.side = false
+			
+			return Entry
 		end
-		assert(var30.epoch ~= var18, `Virtualizer: duplicate key "{itemKey}"`)
-		var30.epoch = var18
-		var30.entered = false
-		var30.changed = false
-		var30.index = p3
-		var30.side = false
-		
-		return var30
 	end
 	
-	local function reread(p3, p4)
-		-- upvalues: var19 (write), p1 (ref), t_6 (ref), var18 (write), var26 (write), t_5 (ref)
-		local index = p3.index
+	local function reread(p2, Changed) --[[ Line: 382 ]]
+		-- upvalues: DataSource (ref), p1 (copy), Keys (copy), Epoch (ref), Count1 (ref), List (copy)
+		local Index = p2.index
 		
-		if index == nil or p3.entered then
+		if Index == nil or p2.entered then
 			return nil
 		end
-		local item = var19.getItem(index)
-		local itemViewType = p1.getItemViewType(item, index)
+		local Item = DataSource.getItem(Index)
+		local ItemViewType = p1.getItemViewType(Item, Index)
 		
-		if itemViewType == p3.viewType then
-			table.insert(t_5, {
-				key = p3.key,
-				value = item,
-				viewType = itemViewType,
-				changed = p4
+		if ItemViewType == p2.viewType then
+			table.insert(List, {
+				key = p2.key,
+				value = Item,
+				viewType = ItemViewType,
+				changed = Changed
 			})
 			
 			return nil
+		else
+			table.insert(Keys, p2.key)
+			local config = {
+				side = false,
+				entered = true,
+				changed = true,
+				key = p2.key,
+				value = Item,
+				viewType = ItemViewType,
+				index = p2.index,
+				epoch = Epoch
+			}
+			Count1 += 1
+			table.insert(List, config)
+			config.side = p2.side
+			
+			return config
 		end
-		table.insert(t_6, p3.key)
-		local t = {
-			side = false,
-			entered = true,
-			changed = true,
-			key = p3.key,
-			value = item,
-			viewType = itemViewType,
-			index = p3.index,
-			epoch = var18
-		}
-		var26 += 1
-		table.insert(t_5, t)
-		local var30 = t
-		var30.side = p3.side
-		
-		return var30
 	end
 	
-	local function restate(p3)
-		-- upvalues: t_7 (write), resolveLayout (copy), var23 (write), var29 (write), var24 (write), var25 (write), var20 (write), frozen_1 (copy), resolvePlacement (copy), var21 (write), publish (ref), var22 (write), var27 (write), var28 (write)
-		local state = p3.state
-		local var30 = if state == nil then nil else state.itemLayout
-		local _ = nil
-		local key = t_7[p3.key]
-		local index = p3.index
-		local var31 = if index == nil then resolveLayout({
+	local function restate(p2) --[[ Line: 401 ]]
+		-- upvalues: Placements (ref), resolveLayout (upval), v2 (ref), v3 (ref), FirstIndex (ref), Smallest (ref), Layout1 (ref), Frozen1 (upval), resolvePlacement (upval), ScrollOffset (ref), publish (copy), ContentStartOffset1 (ref), T (ref), T1 (ref)
+		local State = p2.state
+		local ItemLayout = if State == nil then nil else State.itemLayout
+		local Placement = Placements[p2.key]
+		local Index = p2.index
+		local ResolveLayoutResult = if Index == nil then resolveLayout({
 			startOffset = 0,
-			length = if key == nil then 0 else key.mainAxisLength or 0
-		}, var30, true) elseif var30 ~= nil and not var23 and state.index == index then if var29 == nil or var24 > index or index > var25 then resolveLayout(var20.getItemLayout(index), var30) else resolveLayout(var29[index - var24 + 1], var30, true) else var30
-		local var32 = frozen_1
-		local var33 = nil
+			length = if Placement == nil then 0 else Placement.mainAxisLength or 0
+		}, ItemLayout, true) elseif ItemLayout == nil or v2 or State.index ~= Index then if v3 == nil or FirstIndex > Index or Index > Smallest then resolveLayout(Layout1.getItemLayout(Index), ItemLayout) else resolveLayout(v3[Index - FirstIndex + 1], ItemLayout, true) else ItemLayout
+		local CanvasPlacement = Frozen1
+		local ViewportPlacement = nil
 		
-		if key ~= nil or state ~= nil and state.canvasPlacement ~= frozen_1 then
-			local var34, var35 = resolvePlacement(key, var21, state)
-			var32 = var34
-			var33 = var35
+		if Placement ~= nil or State ~= nil and State.canvasPlacement ~= Frozen1 then
+			CanvasPlacement, ViewportPlacement = resolvePlacement(Placement, ScrollOffset, State)
 		end
-		if publish(p3, var31, var32, var33, var22) then
-			if p3.entered then
-				var27 = if table.isfrozen(var27) then {} else var27
-				table.insert(var27, p3.record)
+		if publish(p2, ResolveLayoutResult, CanvasPlacement, ViewportPlacement, ContentStartOffset1) then
+			if p2.entered then
+				T = if table.isfrozen(T) then {} else T
+				table.insert(T, p2.record)
 				
 				return
 			end
-			var28 = if table.isfrozen(var28) then {} else var28
-			table.insert(var28, p3.record)
+			T1 = if table.isfrozen(T1) then {} else T1
+			table.insert(T1, p2.record)
 		end
 	end
 	
-	local function release()
-		-- upvalues: var3 (write), frozen_2 (copy), var2 (write), t (write), var10 (write), var13 (write), var14 (write), var4 (write), slotBinder (ref), t_1 (write), t_2 (write), t_3 (write), frozen (copy), var7 (write), frozen_3 (copy), var6 (write), var9 (write)
-		if not var3 then
-			return frozen_2
-		elseif var2 and #t > 0 and not var10 then
-			local list = table.create(#t)
-			
-			for i, v in t do
-				list[i] = v.key
-			end
-			var13 = list
-			var14 = var4
-		else
-			var13 = nil
+	local function release() --[[ Line: 736 ]]
+		-- upvalues: Flag1 (ref), Frozen2 (upval), IsLargestMatch (ref), t (ref), Flag2 (ref), v1 (ref), Frozen7 (ref), Frozen4 (ref), SlotBinder (copy), t1 (ref), t2 (ref), t3 (ref), Frozen (upval), Frozen5 (ref), Frozen3 (upval), Layout (ref), Frozen6 (ref)
+		if not Flag1 then
+			return Frozen2
 		end
-		var10 = false
-		local var30 = slotBinder.releaseAll()
+		if IsLargestMatch and #t > 0 and not Flag2 then
+			local Buffer = table.create(#t)
+			
+			for i, value in t do
+				Buffer[i] = value.key
+			end
+			v1 = Buffer
+			Frozen7 = Frozen4
+		else
+			v1 = nil
+		end
+		Flag2 = false
 		t = {}
-		t_1 = {}
-		var2 = true
-		t_2 = {}
-		t_3 = {}
-		var3 = false
-		var4 = frozen
-		var7 = frozen_3
-		var6 = nil
-		var9 = frozen_2
+		t1 = {}
+		IsLargestMatch = true
+		t2 = {}
+		t3 = {}
+		Flag1 = false
+		Frozen4 = Frozen
+		Frozen5 = Frozen3
+		Layout = nil
+		Frozen6 = Frozen2
 		
-		return var30
+		return (SlotBinder.releaseAll())
 	end
 	
 	return {
-		noteDataChange = noteDataChange,
-		invalidateKeys = function()
-			-- upvalues: var10 (write)
-			var10 = true
-		end,
-		invalidatePayloads = function()
-			-- upvalues: var11 (write)
-			var11 = true
-		end,
-		invalidateLayout = function()
-			-- upvalues: var12 (write)
-			var12 = true
-		end,
-		apply = function(p3)
-			-- upvalues: var1 (write), var19 (write), var20 (write), frozen_3 (copy), var21 (write), var22 (write), var23 (write), var12 (write), var6 (write), var5 (write), var4 (write), t_4 (ref), var3 (write), var10 (write), var11 (write), var7 (write), var8 (write), var18 (write), var24 (write), var25 (write), t_5 (ref), t_6 (ref), var26 (write), var2 (write), t (write), t_1 (write), enterIndex (ref), var13 (write), var14 (write), t_2 (write), p1 (ref), reread (ref), slotBinder (ref), t_3 (write), var27 (write), frozen_2 (copy), var28 (write), var29 (write), t_7 (write), restate (ref), var9 (write), diagnosticsModule (copy)
-			if var1 then
-				return nil, nil
-			end
-			var19 = p3.dataSource
-			var20 = p3.layout
-			local plan = p3.plan or frozen_3
-			local mountedRange = p3.mountedRange
-			var21 = p3.scrollOffset
-			var22 = p3.contentStartOffset
-			var23 = var12 or var20 ~= var6
-			local var31 = var22 ~= var5
-			local var32 = not (mountedRange.firstIndex == var4.firstIndex and mountedRange.lastIndex == var4.lastIndex)
-			local var33 = next(t_4) ~= nil
-			
-			if var3 and not var10 and (not var11 and not var23) and (not var31 and not var32 and (not var33 and plan == var7)) then
-				return nil, nil
-			end
-			local var34, i_2
-			var8 += 1
-			var18 = var8
-			var24 = mountedRange.firstIndex
-			var25 = math.min(mountedRange.lastIndex, var19.getItemCount())
-			local maxValue = math.max(0, var25 - var24 + 1)
-			local list = table.create(maxValue)
-			local t_8 = {}
-			table.clear(t_5)
-			local t_9 = {}
-			table.clear(t_6)
-			var26 = 0
-			local var35 = not var3 or (not var2 or var10)
-			local var36 = var35 or (var23 or var31)
-			
-			if var35 then
-				var34 = if var10 or var3 then nil else var13
+		noteDataChange = function(p2) --[[ Line: 238 ]]
+			-- upvalues: DataSourceChangeTypeModule (upval), Flag2 (ref), Flag3 (ref), Tbl (copy), Flag1 (ref), Frozen4 (ref), v1 (ref), Frozen (upval), Frozen7 (ref), TypesModule (upval)
+			for _, change in p2.changes do
+				local Type = change.type
 				
-				for i_2 = var24, var25 do
-					local _ = nil
-					local var37 = if var34 == nil or var14.firstIndex > i_2 or i_2 > var14.lastIndex then var19.getItemKey(i_2) else var34[i_2 - var14.firstIndex + 1]
-					local var38 = t_2[var37]
+				if Type == DataSourceChangeTypeModule.Reset then
+					Flag2 = true
+					Flag3 = true
+				else
+					if Type == DataSourceChangeTypeModule.Reorder then
+						Flag2 = true
+						continue
+					end
+					if Type == DataSourceChangeTypeModule.Update then
+						for _, key in change.keys do
+							Tbl[key] = true
+						end
+					elseif Type == DataSourceChangeTypeModule.Insert then
+						for _, key1 in change.keys do
+							Tbl[key1] = true
+						end
+						local Frozen1 = if Flag1 then Frozen4 elseif v1 == nil then Frozen else Frozen7
+						
+						if not Flag2 and not TypesModule.isIndexRangeEmpty(Frozen1) and change.index <= Frozen1.lastIndex then
+							Flag2 = true
+						end
+					elseif Type == DataSourceChangeTypeModule.Remove then
+						local Frozen2 = if Flag1 then Frozen4 elseif v1 == nil then Frozen else Frozen7
+						
+						if not Flag2 and not TypesModule.isIndexRangeEmpty(Frozen2) and change.index <= Frozen2.lastIndex then
+							Flag2 = true
+						end
+					elseif Type == DataSourceChangeTypeModule.Move then
+						local Frozen3 = if Flag1 then Frozen4 elseif v1 == nil then Frozen else Frozen7
+						
+						if not Flag2 and not TypesModule.isIndexRangeEmpty(Frozen3) and math.min(change.fromIndex, change.toIndex) <= Frozen3.lastIndex and Frozen3.firstIndex <= math.max(change.fromIndex, change.toIndex) then
+							Flag2 = true
+						end
+					end
+				end
+			end
+		end,
+		invalidateKeys = function() --[[ Line: 767 ]]
+			-- upvalues: Flag2 (ref)
+			Flag2 = true
+		end,
+		invalidatePayloads = function() --[[ Line: 770 ]]
+			-- upvalues: Flag3 (ref)
+			Flag3 = true
+		end,
+		invalidateLayout = function() --[[ Line: 773 ]]
+			-- upvalues: Flag4 (ref)
+			Flag4 = true
+		end,
+		apply = function(Keys1) --[[ Line: 435 ]]
+			-- upvalues: Flag (ref), DataSource (ref), Layout1 (ref), Frozen3 (upval), ScrollOffset (ref), ContentStartOffset1 (ref), v2 (ref), Flag4 (ref), Layout (ref), ContentStartOffset (ref), Frozen4 (ref), Tbl (copy), Flag1 (ref), Flag2 (ref), Flag3 (ref), Frozen5 (ref), Count (ref), Epoch (ref), FirstIndex (ref), Smallest (ref), List (copy), Keys (copy), Count1 (ref), IsLargestMatch (ref), t (ref), t1 (ref), enterIndex (copy), v1 (ref), Frozen7 (ref), t2 (ref), p1 (copy), reread (copy), SlotBinder (copy), t3 (ref), T (ref), Frozen2 (upval), T1 (ref), v3 (ref), Placements (ref), restate (copy), Frozen6 (ref), DiagnosticsModule (upval)
+			if Flag then
+				return nil, nil
+			end
+			DataSource = Keys1.dataSource
+			Layout1 = Keys1.layout
+			local Plan = Keys1.plan or Frozen3
+			local MountedRange = Keys1.mountedRange
+			ScrollOffset = Keys1.scrollOffset
+			ContentStartOffset1 = Keys1.contentStartOffset
+			v2 = Flag4 or Layout1 ~= Layout
+			local IsNotContentStartOffsetMatch = ContentStartOffset1 ~= ContentStartOffset
+			local Frozen = Frozen4
+			local Inverted = not (MountedRange.firstIndex == Frozen.firstIndex and MountedRange.lastIndex == Frozen.lastIndex)
+			local HasNextEntry = next(Tbl) ~= nil
+			
+			if Flag1 and not Flag2 and not Flag3 and not v2 and not IsNotContentStartOffsetMatch and not Inverted and not HasNextEntry and Plan == Frozen5 then
+				return nil, nil
+			end
+			Count += 1
+			Epoch = Count
+			FirstIndex = MountedRange.firstIndex
+			Smallest = math.min(MountedRange.lastIndex, (DataSource.getItemCount()))
+			local Largest = math.max(0, Smallest - FirstIndex + 1)
+			local Buffer = table.create(Largest)
+			local List1 = {}
+			table.clear(List)
+			local List2 = {}
+			table.clear(Keys)
+			Count1 = 0
+			local NoFlag1 = not Flag1 or (not IsLargestMatch or Flag2)
+			local NoFlag1_1 = NoFlag1 or (v2 or IsNotContentStartOffsetMatch)
+			
+			if NoFlag1 then
+				local v4 = if Flag2 or Flag1 then nil else v1
+				for i8 = FirstIndex, Smallest do
+					local ItemKey = if v4 == nil or Frozen7.firstIndex > i8 or i8 > Frozen7.lastIndex then DataSource.getItemKey(i8) else v4[i8 - Frozen7.firstIndex + 1]
+					local Entry = t2[ItemKey]
 					
-					if var38 == nil then
-						local item = var19.getItem(i_2)
-						local var39 = i_2 - var24 + 1
-						local t_10 = {
+					if Entry == nil then
+						local Item = DataSource.getItem(i8)
+						local NewI = i8 - FirstIndex + 1
+						local config1 = {
 							side = false,
 							entered = true,
 							changed = true,
-							key = var37,
-							value = item,
-							viewType = p1.getItemViewType(item, i_2),
-							index = i_2,
-							epoch = var18
+							key = ItemKey,
+							value = Item,
+							viewType = p1.getItemViewType(Item, i8),
+							index = i8,
+							epoch = Epoch
 						}
-						var26 += 1
-						table.insert(t_5, t_10)
-						list[var39] = t_10
+						Count1 += 1
+						table.insert(List, config1)
+						Buffer[NewI] = config1
 					else
-						assert(var38.epoch ~= var18, `Virtualizer: duplicate key "{var89}"`)
-						var38.epoch = var18
-						var38.entered = false
-						var38.changed = false
-						var38.index = i_2
-						var38.side = false
-						list[i_2 - var24 + 1] = var38
+						assert(Entry.epoch ~= Epoch, `Virtualizer: duplicate key "{ItemKey}"`)
+						Entry.epoch = Epoch
+						Entry.entered = false
+						Entry.changed = false
+						Entry.index = i8
+						Entry.side = false
+						Buffer[i8 - FirstIndex + 1] = Entry
 					end
 				end
-				for i_6, v in t_2 do
-					if v.epoch ~= var18 then
-						table.insert(t_9, v)
+				for _, value4 in t2 do
+					if value4.epoch ~= Epoch then
+						table.insert(List2, value4)
 					end
 				end
 			else
-				local firstIndex = var4.firstIndex
-				local lastIndex = var4.lastIndex
-				local maxValue_1 = math.max(firstIndex, var24)
-				local minValue = math.min(lastIndex, var25)
+				local FirstIndex1: number = Frozen4.firstIndex
+				local LastIndex: number = Frozen4.lastIndex
+				local Largest1 = math.max(FirstIndex1, FirstIndex)
+				local Smallest1 = math.min(LastIndex, Smallest)
 				
-				for i = firstIndex, math.min(lastIndex, var24 - 1) do
-					table.insert(t_9, t[i - firstIndex + 1])
+				for i2 = FirstIndex1, math.min(LastIndex, FirstIndex - 1) do
+					table.insert(List2, t[i2 - FirstIndex1 + 1])
 				end
-				for i_1 = math.max(firstIndex, var25 + 1), lastIndex do
-					table.insert(t_9, t[i_1 - firstIndex + 1])
+				for i3 = math.max(FirstIndex1, Smallest + 1), LastIndex do
+					table.insert(List2, t[i3 - FirstIndex1 + 1])
 				end
-				for i_2, v in t_1 do
-					table.insert(t_9, v)
+				for _, value3 in t1 do
+					table.insert(List2, value3)
 				end
-				if maxValue_1 <= minValue then
-					table.move(t, maxValue_1 - firstIndex + 1, minValue - firstIndex + 1, maxValue_1 - var24 + 1, list)
+				if Largest1 <= Smallest1 then
+					table.move(t, Largest1 - FirstIndex1 + 1, Smallest1 - FirstIndex1 + 1, Largest1 - FirstIndex + 1, Buffer)
 					
-					for i_3 = maxValue_1 - var24 + 1, minValue - var24 + 1 do
-						local var40 = list[i_3]
-						var40.epoch = var18
-						var40.entered = false
-						var40.changed = false
+					for i5 = Largest1 - FirstIndex + 1, Smallest1 - FirstIndex + 1 do
+						local BufferEntry = Buffer[i5]
+						BufferEntry.epoch = Epoch
+						BufferEntry.entered = false
+						BufferEntry.changed = false
 					end
 				end
-				for i_4 = var24, math.min(var25, maxValue_1 - 1) do
-					list[i_4 - var24 + 1] = enterIndex(i_4)
+				for i6 = FirstIndex, math.min(Smallest, Largest1 - 1) do
+					Buffer[i6 - FirstIndex + 1] = enterIndex(i6)
 				end
-				for i_5 = math.max(var24, minValue + 1), var25 do
-					list[i_5 - var24 + 1] = enterIndex(i_5)
+				for i7 = math.max(FirstIndex, Smallest1 + 1), Smallest do
+					Buffer[i7 - FirstIndex + 1] = enterIndex(i7)
 				end
 			end
-			local v
-			for i_2, v in plan.retainedItems do
-				if v.index < var24 or var25 < v.index then
-					local key = t_2[v.key]
+			for _, retainedItem in Plan.retainedItems do
+				if retainedItem.index < FirstIndex or Smallest < retainedItem.index then
+					local Entry = t2[retainedItem.key]
 					
-					if key == nil then
-						local item = var19.getItem(v.index)
-						local t_10 = {
+					if Entry == nil then
+						local Item = DataSource.getItem(retainedItem.index)
+						local config2 = {
 							side = false,
 							entered = true,
 							changed = true,
-							key = v.key,
-							value = item,
-							viewType = p1.getItemViewType(item, v.index),
-							index = v.index,
-							epoch = var18
+							key = retainedItem.key,
+							value = Item,
+							viewType = p1.getItemViewType(Item, retainedItem.index),
+							index = retainedItem.index,
+							epoch = Epoch
 						}
-						var26 += 1
-						table.insert(t_5, t_10)
-						local var41 = t_10
-						var41.side = true
-						table.insert(t_8, var41)
+						Count1 += 1
+						table.insert(List, config2)
+						config2.side = true
+						table.insert(List1, config2)
 					else
-						assert(key.epoch ~= var18, `Virtualizer: duplicate key "{v.key}"`)
-						key.epoch = var18
-						key.entered = false
-						key.changed = false
-						key.index = v.index
-						key.side = true
-						table.insert(t_8, key)
+						assert(Entry.epoch ~= Epoch, `Virtualizer: duplicate key "{retainedItem.key}"`)
+						Entry.epoch = Epoch
+						Entry.entered = false
+						Entry.changed = false
+						Entry.index = retainedItem.index
+						Entry.side = true
+						table.insert(List1, Entry)
 					end
 				end
 			end
-			for i_2, v in plan.additionalItems do
-				local position = v.identity.position
-				local pinnedItem = p1.getPinnedItem(position)
+			for _, additionalItem in Plan.additionalItems do
+				local Position = additionalItem.identity.position
+				local PinnedItem = p1.getPinnedItem(Position)
 				
-				if pinnedItem ~= nil and pinnedItem.key == v.key then
-					local var42
-					local key = t_2[v.key]
-					local _ = nil
+				if PinnedItem ~= nil and PinnedItem.key == additionalItem.key then
+					local Entry = t2[additionalItem.key]
+					local config4 = nil
 					
-					if key == nil then
-						local t_10 = {
+					if Entry == nil then
+						local config3 = {
 							index = nil,
 							side = false,
 							entered = true,
 							changed = true,
-							key = v.key,
-							value = pinnedItem.value,
-							viewType = pinnedItem.itemViewType,
-							epoch = var18
+							key = additionalItem.key,
+							value = PinnedItem.value,
+							viewType = PinnedItem.itemViewType,
+							epoch = Epoch
 						}
-						var26 += 1
-						table.insert(t_5, t_10)
-						var42 = t_10
+						Count1 += 1
+						table.insert(List, config3)
+						config4 = config3
 					else
-						assert(key.epoch ~= var18, `Virtualizer: duplicate key "{v.key}"`)
-						key.epoch = var18
-						key.entered = false
-						key.changed = false
-						var42 = key
+						assert(Entry.epoch ~= Epoch, `Virtualizer: duplicate key "{additionalItem.key}"`)
+						Entry.epoch = Epoch
+						Entry.entered = false
+						Entry.changed = false
+						config4 = Entry
 						
-						if var42.viewType ~= pinnedItem.itemViewType then
-							local value = pinnedItem.value
-							local itemViewType = pinnedItem.itemViewType
-							table.insert(t_6, key.key)
-							local t_10 = {
+						if config4.viewType == PinnedItem.itemViewType then
+							if config4.value ~= PinnedItem.value then
+								table.insert(List, {
+									key = additionalItem.key,
+									value = PinnedItem.value,
+									viewType = PinnedItem.itemViewType
+								})
+							end
+						else
+							local Value = PinnedItem.value
+							local ItemViewType = PinnedItem.itemViewType
+							table.insert(Keys, Entry.key)
+							local config5 = {
 								side = false,
 								entered = true,
 								changed = true,
-								key = key.key,
-								value = value,
-								viewType = itemViewType,
-								index = key.index,
-								epoch = var18
+								key = Entry.key,
+								value = Value,
+								viewType = ItemViewType,
+								index = Entry.index,
+								epoch = Epoch
 							}
-							var26 += 1
-							table.insert(t_5, t_10)
-							local var43 = t_10
-							var43.side = key.side
-							var42 = var43
-						elseif var42.value ~= pinnedItem.value then
-							table.insert(t_5, {
-								key = v.key,
-								value = pinnedItem.value,
-								viewType = pinnedItem.itemViewType
-							})
+							Count1 += 1
+							table.insert(List, config5)
+							config5.side = Entry.side
+							config4 = config5
 						end
 					end
-					var42.index = nil
-					var42.side = true
-					var42.pinnedPosition = position
-					var42.pinnedRevision = v.identity.revision
-					table.insert(t_8, var42)
+					config4.index = nil
+					config4.side = true
+					config4.pinnedPosition = Position
+					config4.pinnedRevision = additionalItem.identity.revision
+					table.insert(List1, config4)
 				end
 			end
-			if var11 then
-				for i_2, v in list do
-					list[i_2] = reread(v, false) or v
+			if Flag3 then
+				for i10, value6 in Buffer do
+					Buffer[i10] = reread(value6, false) or value6
 				end
-				for i_2, v in t_8 do
-					t_8[i_2] = reread(v, false) or v
+				for i11, value7 in List1 do
+					List1[i11] = reread(value7, false) or value7
 				end
-			elseif var33 then
-				for i_2 in t_4 do
-					local var44 = t_2[i_2]
+			elseif HasNextEntry then
+				for i4 in Tbl do
+					local Entry = t2[i4]
+					local NoEntry: boolean = Entry == nil or Entry.epoch ~= Epoch
+					local RereadResult = nil
 					
-					if var44 ~= nil and var44.epoch == var18 then
-						local var45 = reread(var44, true)
-						
-						if var45 ~= nil then
-							if var44.side then
-								t_8[table.find(t_8, var44)] = var45
-							else
-								list[var44.index - var24 + 1] = var45
-							end
+					if not NoEntry then
+						RereadResult = reread(Entry, true)
+						NoEntry = RereadResult == nil
+					end
+					if not NoEntry then
+						if Entry.side then
+							List1[table.find(List1, Entry)] = RereadResult
+						else
+							Buffer[Entry.index - FirstIndex + 1] = RereadResult
 						end
 					end
 				end
 			end
-			for i_2, v in t_9 do
-				if v.epoch ~= var18 then
-					table.insert(t_6, v.key)
+			for _, value8 in List2 do
+				if value8.epoch ~= Epoch then
+					table.insert(Keys, value8.key)
 				end
 			end
-			var34 = slotBinder.apply(t_6, t_5)
+			local ApplyResult = SlotBinder.apply(Keys, List)
 			
-			for v, v_5 in t_6 do
-				local var46 = t_2[v_5]
-				t_2[v_5] = nil
-				t_3[var46.view] = nil
+			for _, key in Keys do
+				t2[key] = nil
+				t3[t2[key].view] = nil
 			end
-			for v, v_6 in var34.entered do
-				t_2[v_6.key] = v_6
-				t_3[v_6.view] = v_6
+			for _, value9 in ApplyResult.entered do
+				t2[value9.key] = value9
+				t3[value9.view] = value9
 			end
-			for v, v_7 in var34.updated do
-				v_7.changed = true
+			for _, value2 in ApplyResult.updated do
+				value2.changed = true
 			end
-			local var47 = #t_6 - #var34.departed
-			var27 = frozen_2
-			var28 = frozen_2
-			var29 = nil
+			local Reassigned = #Keys - #ApplyResult.departed
+			T = Frozen2
+			T1 = Frozen2
+			v3 = nil
 			
-			if maxValue > 1 and var20.getItemLayouts ~= nil and (var36 and (var23 or not var3) or maxValue < var26 * 2) then
-				local list_1 = table.create(maxValue)
-				var20.getItemLayouts(var24, var25, list_1)
-				var29 = list_1
+			if Largest > 1 and Layout1.getItemLayouts ~= nil and (NoFlag1_1 and (v2 or not Flag1) or Largest < Count1 * 2) then
+				local Buffer1 = table.create(Largest)
+				Layout1.getItemLayouts(FirstIndex, Smallest, Buffer1)
+				v3 = Buffer1
 			end
-			local v_8
-			t_7 = plan.placements
-			local placements = var7.placements
+			Placements = Plan.placements
+			local Placements1 = Frozen5.placements
 			
-			if var36 then
-				for i_15, v_8 in list do
-					restate(v_8)
+			if NoFlag1_1 then
+				for _, value10 in Buffer do
+					restate(value10)
 				end
 			else
-				for i_15, v_8 in list do
-					if v_8.entered or v_8.changed then
-						restate(v_8)
+				for _, value1 in Buffer do
+					if value1.entered or value1.changed then
+						restate(value1)
 					end
 				end
-				for i_16 in t_7 do
-					local var48 = t_2[i_16]
+				for placement in Placements do
+					local Entry = t2[placement]
 					
-					if var48 ~= nil and not var48.side and (not var48.entered and not var48.changed) then
-						restate(var48)
+					if Entry ~= nil and not Entry.side and not Entry.entered and not Entry.changed then
+						restate(Entry)
 					end
 				end
-				for i_17 in placements do
-					local var49 = t_2[i_17]
+				for i1 in Placements1 do
+					local Entry = t2[i1]
 					
-					if var49 ~= nil and t_7[i_17] == nil and (not var49.side and not var49.entered) and not var49.changed then
-						restate(var49)
+					if Entry ~= nil and (Placements[i1] == nil and not Entry.side and not Entry.entered and not Entry.changed) then
+						restate(Entry)
 					end
 				end
 			end
-			for i_15, v_8 in t_8 do
-				restate(v_8)
+			for _, value11 in List1 do
+				restate(value11)
 			end
-			i_2 = if #list == #t then if #t_8 == #t_1 then var32 else true else true
+			local Flag5: boolean = #Buffer ~= #t or (#List1 ~= #t1 or Inverted)
 			
-			if not i_2 and var35 then
-				for v_8, v_10 in list do
-					if t[v_8] ~= v_10 then
-						i_2 = true
+			if not Flag5 and NoFlag1 then
+				for i12, value12 in Buffer do
+					if t[i12] ~= value12 then
+						Flag5 = true
 						break
 					end
 				end
 			end
-			if not i_2 then
-				for v_8, v_10 in t_8 do
-					if t_1[v_8] ~= v_10 then
-						i_2 = true
+			if not Flag5 then
+				for i, value in List1 do
+					if t1[i] ~= value then
+						Flag5 = true
 						break
 					end
 				end
 			end
-			t = list
-			t_1 = t_8
-			var2 = maxValue == math.max(0, mountedRange.lastIndex - mountedRange.firstIndex + 1)
-			var3 = true
-			var4 = mountedRange
-			var5 = var22
-			var6 = var20
-			var7 = plan
-			var10 = false
-			var11 = false
-			var12 = false
+			t = Buffer
+			t1 = List1
+			IsLargestMatch = Largest == math.max(0, MountedRange.lastIndex - MountedRange.firstIndex + 1)
+			Flag1 = true
+			Frozen4 = MountedRange
+			ContentStartOffset = ContentStartOffset1
+			Layout = Layout1
+			Frozen5 = Plan
+			Flag2 = false
+			Flag3 = false
+			Flag4 = false
 			
-			if var33 then
-				table.clear(t_4)
+			if HasNextEntry then
+				table.clear(Tbl)
 			end
-			var13 = nil
-			v = var34.departed
+			v1 = nil
+			local Departed = ApplyResult.departed
 			
-			if not i_2 and #var27 == 0 and (#var28 == 0 and #v == 0) then
+			if not Flag5 and #T == 0 and #T1 == 0 and #Departed == 0 then
 				return nil, nil
 			end
-			local list_1 = table.create(#t + #t_1)
+			local Buffer2 = table.create(#t + #t1)
 			
-			for i_18, v_10 in t do
-				list_1[i_18] = v_10.record
+			for i13, value13 in t do
+				Buffer2[i13] = value13.record
 			end
-			local tCount = #t
+			local CountT = #t
 			
-			for i_19, v_11 in t_1 do
-				list_1[tCount + i_19] = v_11.record
+			for i9, value5 in t1 do
+				Buffer2[CountT + i9] = value5.record
 			end
-			var9 = table.freeze(list_1)
-			v_8 = #var27 + #var28 + #v
-			local t_10 = { entered = var27, updated = var28, departed = v }
+			Frozen6 = table.freeze(Buffer2)
+			local Touched = #T + #T1 + #Departed
+			local config = { entered = T, updated = T1, departed = Departed }
 			
-			if v_8 == 0 then
-				return t_10, nil
+			if Touched == 0 then
+				return config, nil
+			else
+				return config, {
+					kind = DiagnosticsModule.EventKind.ItemViewsSynchronized,
+					retained = #Buffer2 - #T - #T1,
+					reassigned = Reassigned,
+					acquired = #T - Reassigned,
+					released = #Departed,
+					touched = Touched
+				}
 			end
-			return t_10, {
-				kind = diagnosticsModule.EventKind.ItemViewsSynchronized,
-				retained = #list_1 - #var27 - #var28,
-				reassigned = var47,
-				acquired = #var27 - var47,
-				released = #v,
-				touched = v_8
-			}
 		end,
 		release = release,
-		destroy = function()
-			-- upvalues: var1 (write), release (ref), var13 (write), slotBinder (ref)
-			if var1 then
+		destroy = function() --[[ Line: 778 ]]
+			-- upvalues: Flag (ref), release (copy), v1 (ref), SlotBinder (copy)
+			if not Flag then
+				release()
+				v1 = nil
+				SlotBinder.destroy()
+				Flag = true
+				
 				return
 			end
-			release()
-			var13 = nil
-			slotBinder.destroy()
-			var1 = true
 		end,
-		isApplied = function()
-			-- upvalues: var3 (write)
-			return var3
+		isApplied = function() --[[ Line: 787 ]]
+			-- upvalues: Flag1 (ref)
+			return Flag1
 		end,
-		getMountedViews = function()
-			-- upvalues: var9 (write)
-			return var9
+		getMountedViews = function() --[[ Line: 790 ]]
+			-- upvalues: Frozen6 (ref)
+			return Frozen6
 		end,
-		validate = function(p4)
-			-- upvalues: t_3 (write), t_2 (write)
-			local t = {}
-			local var50 = 0
+		validate = function(List) --[[ Line: 793 ]]
+			-- upvalues: t3 (ref), t2 (ref)
+			local List1 = {}
+			local Count = 0
 			
-			for i, v in p4 do
-				local itemView = t_3[v.itemView]
-				local state = v.state
+			for _, value in List do
+				local Entry = t3[value.itemView]
+				local State = value.state
 				
-				if itemView ~= nil then
-					local var51
-					local state_1 = itemView.state
+				if Entry ~= nil then
+					local State1 = Entry.state
+					local IsCrossAxisSpacingMatch = nil
 					
-					if state_1 == state then
-						var51 = true
+					if State1 == State then
+						IsCrossAxisSpacingMatch = true
 					else
-						local itemLayout = state_1.itemLayout
-						local itemLayout_1 = state.itemLayout
-						var51 = state_1.assignment == state.assignment and (state_1.pinnedPosition == state.pinnedPosition and (itemLayout.crossAxisIndex == itemLayout_1.crossAxisIndex and (itemLayout.crossAxisCount == itemLayout_1.crossAxisCount and itemLayout.crossAxisSpacing == itemLayout_1.crossAxisSpacing)))
+						local ItemLayout = State1.itemLayout
+						local ItemLayout1 = State.itemLayout
+						IsCrossAxisSpacingMatch = State1.assignment == State.assignment and (State1.pinnedPosition == State.pinnedPosition and (ItemLayout.crossAxisIndex == ItemLayout1.crossAxisIndex and (ItemLayout.crossAxisCount == ItemLayout1.crossAxisCount and ItemLayout.crossAxisSpacing == ItemLayout1.crossAxisSpacing)))
 					end
-					if var51 then
-						table.insert(t, {
-							index = itemView.index,
-							key = itemView.key,
-							pinnedPosition = itemView.pinnedPosition,
-							pinnedRevision = itemView.pinnedRevision,
-							length = v.length
+					if IsCrossAxisSpacingMatch then
+						table.insert(List1, {
+							index = Entry.index,
+							key = Entry.key,
+							pinnedPosition = Entry.pinnedPosition,
+							pinnedRevision = Entry.pinnedRevision,
+							length = value.length
 						})
-					elseif state.index == nil or state.pinnedPosition ~= nil or t_2[state.assignment.key] ~= nil then
-						var50 += 1
-					else
-						table.insert(t, {
-							index = state.index,
-							key = state.assignment.key,
-							length = v.length
-						})
+						continue
 					end
 				end
+				if State.index == nil or State.pinnedPosition ~= nil or t2[State.assignment.key] ~= nil then
+					Count += 1
+				else
+					table.insert(List1, {
+						index = State.index,
+						key = State.assignment.key,
+						length = value.length
+					})
+				end
 			end
-			return t, var50
+			return List1, Count
 		end
 	}
 end

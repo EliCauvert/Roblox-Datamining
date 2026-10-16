@@ -1,113 +1,112 @@
-﻿local ampUpsell = script:FindFirstAncestor("AmpUpsell")
-local parent = ampUpsell.Parent
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local foundationModule = require(parent.Foundation)
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local dialog = foundationModule.Dialog
-local dialogSize = foundationModule.Enums.DialogSize
-local orientation = foundationModule.Enums.Orientation
-local vpcPrologueStrings = require(ampUpsell.Common.LocalizationStrings).vpcPrologueStrings
-local _ = require(ampUpsell.Common.Types)
-local getFFlagEnableReusableVPCPrologueModule = require(ampUpsell.Flags.GetFFlagEnableReusableVPCPrologue)
+﻿local AmpUpsell = script:FindFirstAncestor("AmpUpsell")
+local Parent = AmpUpsell.Parent
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local FoundationModule = require(Parent.Foundation)
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local Dialog = FoundationModule.Dialog
+local DialogSize = FoundationModule.Enums.DialogSize
+local Orientation = FoundationModule.Enums.Orientation
+local VpcPrologueStrings = require(AmpUpsell.Common.LocalizationStrings).vpcPrologueStrings
+local _ = require(AmpUpsell.Common.Types)
+local GetFFlagEnableReusableVPCPrologueModule = require(AmpUpsell.Flags.GetFFlagEnableReusableVPCPrologue)
 
-local function _(p1)
-	-- upvalues: vpcPrologueStrings (ref)
+local function _(p1) --[[ Line: 27 | Named "getBodyLocalizationKey" ]]
+	-- upvalues: VpcPrologueStrings (copy)
 	if p1 then
-		return if p1.enablePurchases == true then vpcPrologueStrings.bodyPurchases elseif p1.contentAgeRestriction == nil then if p1.friendManagementAction == "Unblock" then vpcPrologueStrings.bodyUnblock else vpcPrologueStrings.bodyGeneric else vpcPrologueStrings.bodyContentRestriction
-	end
-end
-
-local function ConfigurableVPCPrologue(p1)
-	-- upvalues: useLocalization (ref), vpcPrologueStrings (ref), buttonVariant (ref), reactModule (ref), dialog (ref), dialogSize (ref), orientation (ref)
-	local var1
-	local config = p1.config or {}
-	local t = { title = vpcPrologueStrings.title }
-	local recourseData = p1.recourseData
-	
-	if not recourseData then
-		t.body = var1
-		t.buttonAsk = vpcPrologueStrings.buttonAsk
-		t.buttonCancel = vpcPrologueStrings.buttonCancel
-		local var2 = useLocalization(t)
-		local list = {
-			{
-				text = config.confirmText or var2.buttonAsk,
-				variant = buttonVariant.Emphasis,
-				onActivated = p1.onConfirm
-			}
-		}
-		
-		if not config.hideCancel then
-			table.insert(list, if config.cancelFirst then 1 else 2, {
-				text = config.cancelText or var2.buttonCancel,
-				variant = buttonVariant.Standard,
-				onActivated = p1.onCancel
-			})
+		if p1.enablePurchases == true then
+			return VpcPrologueStrings.bodyPurchases
+		elseif p1.contentAgeRestriction ~= nil then
+			return VpcPrologueStrings.bodyContentRestriction
+		elseif p1.friendManagementAction == "Unblock" then
+			return VpcPrologueStrings.bodyUnblock
 		end
-		local var3 = not config.omitLayoutOrder
-		
-		return reactModule.createElement(dialog.Root, {
-			size = if config.dialogSize == "Medium" then dialogSize.Medium else dialogSize.Small,
-			hasBackdrop = config.hasBackdrop,
-			closeOnClickOutside = config.closeOnClickOutside,
-			onClose = if config.onClose then config.onClose elseif config.onCloseCancels then p1.onCancel else nil
-		}, {
-			Title = reactModule.createElement(dialog.Title, {
-				LayoutOrder = if var3 then 1 else nil,
-				text = config.titleText or var2.title
-			}),
-			Content = reactModule.createElement(dialog.Content, { LayoutOrder = if var3 then 2 else nil }, {
-				Text = config.bodyContent or reactModule.createElement(dialog.Text, { Text = config.bodyText or var2.body })
-			}),
-			Buttons = reactModule.createElement(dialog.Actions, {
-				LayoutOrder = if var3 then 3 else nil,
-				orientation = if config.actionOrientation == "Vertical" then orientation.Vertical elseif config.actionOrientation == "Horizontal" then orientation.Horizontal else nil,
-				actions = list
-			})
-		})
-	var1 = if recourseData.enablePurchases == true then vpcPrologueStrings.bodyPurchases elseif recourseData.contentAgeRestriction ~= nil then if recourseData.friendManagementAction == "Unblock" then vpcPrologueStrings.bodyUnblock else vpcPrologueStrings.bodyGeneric else vpcPrologueStrings.bodyContentRestriction
+	end
+	return VpcPrologueStrings.bodyGeneric
 end
 
-local function LegacyVPCPrologue(p2)
-	-- upvalues: vpcPrologueStrings (ref), useLocalization (ref), reactModule (ref), dialog (ref), dialogSize (ref), buttonVariant (ref)
-	local var4
-	local recourseData = p2.recourseData
+local function ConfigurableVPCPrologue(p1) --[[ Line: 40 ]]
+	-- upvalues: UseLocalizationFunction (copy), VpcPrologueStrings (copy), ButtonVariant (copy), ReactModule (copy), Dialog (copy), DialogSize (copy), Orientation (copy)
+	local Config = p1.config or {}
+	local RecourseData = p1.recourseData
+	local UseLocalizationResult = UseLocalizationFunction({
+		title = VpcPrologueStrings.title,
+		body = if RecourseData then if RecourseData.enablePurchases == true then VpcPrologueStrings.bodyPurchases elseif RecourseData.contentAgeRestriction == nil then if RecourseData.friendManagementAction == "Unblock" then VpcPrologueStrings.bodyUnblock else VpcPrologueStrings.bodyGeneric else VpcPrologueStrings.bodyContentRestriction else VpcPrologueStrings.bodyGeneric,
+		buttonAsk = VpcPrologueStrings.buttonAsk,
+		buttonCancel = VpcPrologueStrings.buttonCancel
+	})
+	local Actions = {
+		{
+			text = Config.confirmText or UseLocalizationResult.buttonAsk,
+			variant = ButtonVariant.Emphasis,
+			onActivated = p1.onConfirm
+		}
+	}
 	
-	if recourseData then
-		var4 = if recourseData.enablePurchases == true then vpcPrologueStrings.bodyPurchases elseif recourseData.contentAgeRestriction ~= nil then if recourseData.friendManagementAction == "Unblock" then vpcPrologueStrings.bodyUnblock else vpcPrologueStrings.bodyGeneric else vpcPrologueStrings.bodyContentRestriction
+	if not Config.hideCancel then
+		table.insert(Actions, if Config.cancelFirst then 1 else 2, {
+			text = Config.cancelText or UseLocalizationResult.buttonCancel,
+			variant = ButtonVariant.Standard,
+			onActivated = p1.onCancel
+		})
 	end
-	recourseData = useLocalization({
-		title = vpcPrologueStrings.title,
-		body = var4,
-		buttonAsk = vpcPrologueStrings.buttonAsk,
-		buttonCancel = vpcPrologueStrings.buttonCancel
+	local NoOmitLayoutOrder = not Config.omitLayoutOrder
+	
+	return ReactModule.createElement(Dialog.Root, {
+		size = if Config.dialogSize == "Medium" then DialogSize.Medium else DialogSize.Small,
+		hasBackdrop = Config.hasBackdrop,
+		closeOnClickOutside = Config.closeOnClickOutside,
+		onClose = if Config.onClose then Config.onClose elseif Config.onCloseCancels then p1.onCancel else nil
+	}, {
+		Title = ReactModule.createElement(Dialog.Title, {
+			LayoutOrder = if NoOmitLayoutOrder then 1 else nil,
+			text = Config.titleText or UseLocalizationResult.title
+		}),
+		Content = ReactModule.createElement(Dialog.Content, { LayoutOrder = if NoOmitLayoutOrder then 2 else nil }, {
+			Text = Config.bodyContent or ReactModule.createElement(Dialog.Text, { Text = Config.bodyText or UseLocalizationResult.body })
+		}),
+		Buttons = ReactModule.createElement(Dialog.Actions, {
+			LayoutOrder = if NoOmitLayoutOrder then 3 else nil,
+			orientation = if Config.actionOrientation == "Vertical" then Orientation.Vertical elseif Config.actionOrientation == "Horizontal" then Orientation.Horizontal else nil,
+			actions = Actions
+		})
+	})
+end
+
+local function LegacyVPCPrologue(p1) --[[ Line: 94 ]]
+	-- upvalues: VpcPrologueStrings (copy), UseLocalizationFunction (copy), ReactModule (copy), Dialog (copy), DialogSize (copy), ButtonVariant (copy)
+	local RecourseData = p1.recourseData
+	local UseLocalizationResult = UseLocalizationFunction({
+		title = VpcPrologueStrings.title,
+		body = if RecourseData then if RecourseData.enablePurchases == true then VpcPrologueStrings.bodyPurchases elseif RecourseData.contentAgeRestriction == nil then if RecourseData.friendManagementAction == "Unblock" then VpcPrologueStrings.bodyUnblock else VpcPrologueStrings.bodyGeneric else VpcPrologueStrings.bodyContentRestriction else VpcPrologueStrings.bodyGeneric,
+		buttonAsk = VpcPrologueStrings.buttonAsk,
+		buttonCancel = VpcPrologueStrings.buttonCancel
 	})
 	
-	return reactModule.createElement(dialog.Root, { size = dialogSize.Small }, {
-		Title = reactModule.createElement(dialog.Title, { LayoutOrder = 1, text = recourseData.title }),
-		Content = reactModule.createElement(dialog.Content, { LayoutOrder = 2 }, {
-			Text = reactModule.createElement(dialog.Text, { Text = recourseData.body })
+	return ReactModule.createElement(Dialog.Root, { size = DialogSize.Small }, {
+		Title = ReactModule.createElement(Dialog.Title, { LayoutOrder = 1, text = UseLocalizationResult.title }),
+		Content = ReactModule.createElement(Dialog.Content, { LayoutOrder = 2 }, {
+			Text = ReactModule.createElement(Dialog.Text, { Text = UseLocalizationResult.body })
 		}),
-		Buttons = reactModule.createElement(dialog.Actions, {
+		Buttons = ReactModule.createElement(Dialog.Actions, {
 			LayoutOrder = 3,
 			actions = {
 				{
-					text = recourseData.buttonAsk,
-					variant = buttonVariant.Emphasis,
-					onActivated = p2.onConfirm
+					text = UseLocalizationResult.buttonAsk,
+					variant = ButtonVariant.Emphasis,
+					onActivated = p1.onConfirm
 				},
 				{
-					text = recourseData.buttonCancel,
-					variant = buttonVariant.Standard,
-					onActivated = p2.onCancel
+					text = UseLocalizationResult.buttonCancel,
+					variant = ButtonVariant.Standard,
+					onActivated = p1.onCancel
 				}
 			}
 		})
 	})
 end
 
-return function(p2)
-	-- upvalues: reactModule (ref), getFFlagEnableReusableVPCPrologueModule (ref), ConfigurableVPCPrologue (ref), LegacyVPCPrologue (ref)
-	return reactModule.createElement(if getFFlagEnableReusableVPCPrologueModule() then ConfigurableVPCPrologue else LegacyVPCPrologue, p2)
+return function(p1) --[[ Line: 131 | Named "VPCPrologue" ]]
+	-- upvalues: ReactModule (copy), GetFFlagEnableReusableVPCPrologueModule (copy), ConfigurableVPCPrologue (copy), LegacyVPCPrologue (copy)
+	return ReactModule.createElement(if GetFFlagEnableReusableVPCPrologueModule() then ConfigurableVPCPrologue else LegacyVPCPrologue, p1)
 end

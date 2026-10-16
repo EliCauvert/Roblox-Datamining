@@ -1,68 +1,70 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local parent = script:FindFirstAncestor("ProfilePlatform").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local useIsSpatial = require(parent.Responsive).useIsSpatial
-local fFlagProfileFixMenuNavigation = require(parent.SharedFlags).FFlagProfileFixMenuNavigation
-local popoverSide = foundationModule.Enums.PopoverSide
-local popoverAlign = foundationModule.Enums.PopoverAlign
-local inputSize = foundationModule.Enums.InputSize
-local menu = foundationModule.Menu
-local overlayProvider = foundationModule.OverlayProvider
+﻿local CoreGui = game:GetService("CoreGui")
+local Parent = script:FindFirstAncestor("ProfilePlatform").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local UseIsSpatialFunction = require(Parent.Responsive).useIsSpatial
+local FFlagProfileFixMenuNavigation = require(Parent.SharedFlags).FFlagProfileFixMenuNavigation
+local PopoverSide = FoundationModule.Enums.PopoverSide
+local PopoverAlign = FoundationModule.Enums.PopoverAlign
+local InputSize = FoundationModule.Enums.InputSize
+local Menu = FoundationModule.Menu
+local OverlayProvider = FoundationModule.OverlayProvider
 
-local function _()
-	-- upvalues: fFlagProfileFixMenuNavigation (ref), coreGuiService (ref)
-	if not fFlagProfileFixMenuNavigation then
+local function _() --[[ Line: 38 | Named "getVROverlaySurfaceGui" ]]
+	-- upvalues: FFlagProfileFixMenuNavigation (copy), CoreGui (copy)
+	if FFlagProfileFixMenuNavigation then
+		local LuaAppScreenGui = CoreGui:FindFirstChild("LuaAppScreenGui")
+		
+		return if LuaAppScreenGui then LuaAppScreenGui:FindFirstChild("MainAppScreen_SurfaceGui") else nil
+	else
 		return nil
 	end
-	local luaAppScreenGui = coreGuiService:FindFirstChild("LuaAppScreenGui")
-	
-	return if luaAppScreenGui then luaAppScreenGui:FindFirstChild("MainAppScreen_SurfaceGui") else nil
 end
 
-return function(p1)
-	-- upvalues: fFlagProfileFixMenuNavigation (ref), useIsSpatial (ref), coreGuiService (ref), popoverSide (ref), reactModule (ref), overlayProvider (ref), menu (ref), popoverAlign (ref), inputSize (ref)
-	local var1
-	if not fFlagProfileFixMenuNavigation or not useIsSpatial() then
-		var1 = nil
-	elseif fFlagProfileFixMenuNavigation then
-		local luaAppScreenGui = coreGuiService:FindFirstChild("LuaAppScreenGui")
-		var1 = if luaAppScreenGui then luaAppScreenGui:FindFirstChild("MainAppScreen_SurfaceGui") else nil
+return function(p1) --[[ Line: 50 | Named "ProfileContextualMenu" ]]
+	-- upvalues: FFlagProfileFixMenuNavigation (copy), UseIsSpatialFunction (copy), CoreGui (copy), PopoverSide (copy), ReactModule (copy), OverlayProvider (copy), Menu (copy), PopoverAlign (copy), InputSize (copy)
+	local MainAppScreenSurfaceGui = nil
+	if FFlagProfileFixMenuNavigation and UseIsSpatialFunction() then
+		if FFlagProfileFixMenuNavigation then
+			local LuaAppScreenGui = CoreGui:FindFirstChild("LuaAppScreenGui")
+			MainAppScreenSurfaceGui = if LuaAppScreenGui then LuaAppScreenGui:FindFirstChild("MainAppScreen_SurfaceGui") else nil
+		else
+			MainAppScreenSurfaceGui = nil
+		end
 	else
-		var1 = nil
+		MainAppScreenSurfaceGui = nil
 	end
-	local var2 = if p1.screenSize.Y / 2 < p1.rootElementPosition.Y then popoverSide.Top else popoverSide.Bottom
-	local _ = nil
+	local Top = if p1.screenSize.Y / 2 < p1.rootElementPosition.Y then PopoverSide.Top else PopoverSide.Bottom
 	
-	if var2 == popoverSide.Top then
-		local var3 = p1.screenSize.X / p1.screenSize.Y
-		local var4 = -(p1.screenSize.Y - p1.rootElementPosition.Y) + -20
+	if Top == PopoverSide.Top then
+		local XRatio = p1.screenSize.X / p1.screenSize.Y
+		local v1 = -(p1.screenSize.Y - p1.rootElementPosition.Y) + -20
 		
-		if p1.screenSize.Y > 700 and not (var3 >= 1.3 and var3 < 1.7) then
-			var4 += p1.screenSize.Y * 0.05
+		if p1.screenSize.Y > 700 and not (XRatio >= 1.3 and XRatio < 1.7) then
+			local _ = v1 + p1.screenSize.Y * 0.05
 		end
 	else
 		local _ = p1.rootElementPosition.Y + 60
 	end
-	return if fFlagProfileFixMenuNavigation then reactModule.createElement(overlayProvider, { gui = var1 }, {
-		Menu = reactModule.createElement(menu, {
-			align = popoverAlign.End,
+	return if FFlagProfileFixMenuNavigation then ReactModule.createElement(OverlayProvider, { gui = MainAppScreenSurfaceGui }, {
+		Menu = ReactModule.createElement(Menu, {
+			align = PopoverAlign.End,
 			anchorRef = p1.rootElementRef,
-			isOpen = p1.isOpen ~= nil or p1.isOpen,
+			isOpen = p1.isOpen == nil or p1.isOpen,
 			items = p1.buttonProps,
 			onPressedOutside = p1.onDismiss,
-			side = var2,
-			size = inputSize.Medium,
-			ref = if fFlagProfileFixMenuNavigation then p1.menuRef else nil
+			side = Top,
+			size = InputSize.Medium,
+			ref = if FFlagProfileFixMenuNavigation then p1.menuRef else nil
 		})
-	}) else reactModule.createElement(menu, {
-		align = popoverAlign.End,
+	}) else ReactModule.createElement(Menu, {
+		align = PopoverAlign.End,
 		anchorRef = p1.rootElementRef,
-		isOpen = p1.isOpen ~= nil or p1.isOpen,
+		isOpen = p1.isOpen == nil or p1.isOpen,
 		items = p1.buttonProps,
 		onPressedOutside = p1.onDismiss,
-		side = var2,
-		size = inputSize.Medium,
-		ref = if fFlagProfileFixMenuNavigation then p1.menuRef else nil
+		side = Top,
+		size = InputSize.Medium,
+		ref = if FFlagProfileFixMenuNavigation then p1.menuRef else nil
 	})
 end

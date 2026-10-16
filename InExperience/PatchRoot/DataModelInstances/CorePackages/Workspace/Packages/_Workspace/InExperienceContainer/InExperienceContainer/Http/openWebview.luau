@@ -1,13 +1,12 @@
-﻿local httpService = game:GetService("HttpService")
-local guiService = game:GetService("GuiService")
+﻿local HttpService = game:GetService("HttpService")
+local GuiService = game:GetService("GuiService")
 
-return function(p1)
-	-- upvalues: httpService (ref), guiService (ref)
-	local _ = { FullScreen = 0, FormSheet = 2 }
-	guiService:BroadcastNotification(httpService:JSONEncode({
+return function(Url) --[[ Line: 5 | Named "openWebview" ]]
+	-- upvalues: HttpService (copy), GuiService (copy)
+	GuiService:BroadcastNotification(HttpService:JSONEncode({
 		title = "",
 		presentationStyle = 2,
 		visible = true,
-		url = p1
+		url = Url
 	}), 20)
 end

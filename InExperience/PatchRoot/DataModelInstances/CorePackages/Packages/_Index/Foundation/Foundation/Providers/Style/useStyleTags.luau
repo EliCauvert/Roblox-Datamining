@@ -1,20 +1,19 @@
-﻿local parent = script.Parent
-local foundation = script:FindFirstAncestor("Foundation")
-local reactModule = require(foundation.Parent.React)
-local tagsContextModule = require(parent.TagsContext)
-local getFormattedTagsModule = require(foundation.Utility.getFormattedTags)
-local _ = require(foundation.Components.Types)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local ReactModule = require(Foundation.Parent.React)
+local TagsContextModule = require(script.Parent.TagsContext)
+local GetFormattedTagsModule = require(Foundation.Utility.getFormattedTags)
+local _ = require(Foundation.Components.Types)
 
-return function(p1)
-	-- upvalues: getFormattedTagsModule (ref), reactModule (ref), tagsContextModule (ref)
-	local var1 = getFormattedTagsModule(p1)
-	local var2 = reactModule.useContext(tagsContextModule)
-	reactModule.useLayoutEffect(function()
-		-- upvalues: var1 (ref), var2 (ref)
-		if var1 ~= nil then
-			var2(string.split(var1, " "))
+return function(p1) --[[ Line: 12 | Named "useStyleTags" ]]
+	-- upvalues: GetFormattedTagsModule (copy), ReactModule (copy), TagsContextModule (copy)
+	local FormattedTagsModule = GetFormattedTagsModule(p1)
+	local UseContextResult = ReactModule.useContext(TagsContextModule)
+	ReactModule.useLayoutEffect(function() --[[ Line: 16 ]]
+		-- upvalues: FormattedTagsModule (copy), UseContextResult (copy)
+		if FormattedTagsModule ~= nil then
+			UseContextResult(string.split(FormattedTagsModule, " "))
 		end
-	end, { var1, var2 })
+	end, { FormattedTagsModule, UseContextResult })
 	
-	return var1
+	return FormattedTagsModule
 end

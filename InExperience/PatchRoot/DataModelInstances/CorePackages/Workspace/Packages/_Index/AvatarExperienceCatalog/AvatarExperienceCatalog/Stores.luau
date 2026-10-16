@@ -1,12 +1,12 @@
-﻿local avatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
-local fFlagAXCatalogOffersBannerEnabled = require(avatarExperienceCatalog.Parent.AvatarExperienceFlags).FFlagAXCatalogOffersBannerEnabled
-local createAXShoppingCartStoreModule = require(avatarExperienceCatalog.Stores.createAXShoppingCartStore)
-local createCatalogOffersBannerStoreModule = require(avatarExperienceCatalog.Stores.createCatalogOffersBannerStore)
+﻿local AvatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
+local FFlagAXCatalogOffersBannerEnabled = require(AvatarExperienceCatalog.Parent.AvatarExperienceFlags).FFlagAXCatalogOffersBannerEnabled
+local CreateAXShoppingCartStoreModule = require(AvatarExperienceCatalog.Stores.createAXShoppingCartStore)
+local CreateCatalogOffersBannerStoreModule = require(AvatarExperienceCatalog.Stores.createCatalogOffersBannerStore)
 
-return function()
-	-- upvalues: createAXShoppingCartStoreModule (ref), fFlagAXCatalogOffersBannerEnabled (ref), createCatalogOffersBannerStoreModule (ref)
+return function() --[[ Line: 21 | Named "getCatalogStores" ]]
+	-- upvalues: CreateAXShoppingCartStoreModule (copy), FFlagAXCatalogOffersBannerEnabled (copy), CreateCatalogOffersBannerStoreModule (copy)
 	return {
-		shoppingCartStore = createAXShoppingCartStoreModule(),
-		catalogOffersBannerStore = if fFlagAXCatalogOffersBannerEnabled then createCatalogOffersBannerStoreModule() else nil
+		shoppingCartStore = CreateAXShoppingCartStoreModule(),
+		catalogOffersBannerStore = if FFlagAXCatalogOffersBannerEnabled then CreateCatalogOffersBannerStoreModule() else nil
 	}
 end

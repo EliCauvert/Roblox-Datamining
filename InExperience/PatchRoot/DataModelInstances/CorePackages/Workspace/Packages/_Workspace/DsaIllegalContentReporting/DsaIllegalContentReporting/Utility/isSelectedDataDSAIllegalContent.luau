@@ -1,11 +1,12 @@
-﻿local constantsModule = require(script:FindFirstAncestor("DsaIllegalContentReporting").Utility.Constants)
+﻿local ConstantsModule = require(script:FindFirstAncestor("DsaIllegalContentReporting").Utility.Constants)
 
-return function(p1)
-	-- upvalues: constantsModule (ref)
+return function(p1): boolean --[[ Line: 6 | Named "isSelectedDataDSAIllegalContent" ]]
+	-- upvalues: ConstantsModule (copy)
 	if p1 == nil then
 		return false
+	else
+		local v1 = p1[#p1]
+		
+		return v1 ~= nil and v1.tagValues[1] == ConstantsModule.DSA_TAG_VALUE
 	end
-	local var1 = p1[#p1]
-	
-	return var1 ~= nil and var1.tagValues[1] == constantsModule.DSA_TAG_VALUE
 end

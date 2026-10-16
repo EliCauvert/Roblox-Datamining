@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("AppChatEnableAutotranslation2", false)
+﻿return (game:DefineFastFlag("AppChatEnableAutotranslation2", false))

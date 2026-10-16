@@ -1,40 +1,41 @@
-﻿local parent = script:FindFirstAncestor("MomentsCommon").Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local momentMediaViewModule = require(script.Parent.MomentMediaView)
+﻿local Parent = script:FindFirstAncestor("MomentsCommon").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local MomentMediaViewModule = require(script.Parent.MomentMediaView)
 local _ = require(script.Parent.Parent.MediaTypes)
-local useVideoPosterFrameModule = require(script.Parent.Parent.useVideoPosterFrame)
-local skeleton = foundationModule.Skeleton
-local radius = foundationModule.Enums.Radius
+local UseVideoPosterFrameModule = require(script.Parent.Parent.useVideoPosterFrame)
+local Skeleton = FoundationModule.Skeleton
+local Radius = FoundationModule.Enums.Radius
 
-return function(p1)
-	-- upvalues: useVideoPosterFrameModule (ref), reactModule (ref), momentMediaViewModule (ref), skeleton (ref), radius (ref)
-	local mediaItem = p1.mediaItem
-	local cornerRadius = mediaItem.cornerRadius
-	local var1 = mediaItem.captureType == Enum.CaptureType.Video
-	local var2 = if var1 then useVideoPosterFrameModule(if var1 then mediaItem.content else nil) else mediaItem.posterContent
+return function(p1) --[[ Line: 41 | Named "MomentMediaTile" ]]
+	-- upvalues: UseVideoPosterFrameModule (copy), ReactModule (copy), MomentMediaViewModule (copy), Skeleton (copy), Radius (copy)
+	local MediaItem = p1.mediaItem
+	local CornerRadius = MediaItem.cornerRadius
+	local IsCaptureTypeMatch = MediaItem.captureType == Enum.CaptureType.Video
+	local UseVideoPosterFrameModuleResult = UseVideoPosterFrameModule(if IsCaptureTypeMatch then MediaItem.content else nil)
+	local UseVideoPosterFrameModuleResult1 = if IsCaptureTypeMatch then UseVideoPosterFrameModuleResult else MediaItem.posterContent
 	
-	return if p1.isActive and var1 then reactModule.createElement(momentMediaViewModule, {
+	return if p1.isActive and IsCaptureTypeMatch then ReactModule.createElement(MomentMediaViewModule, {
 		suppressTapToToggle = true,
 		holdPosterUntilPlaying = true,
 		tag = "size-full clip",
-		momentId = mediaItem.momentId,
-		posterContent = var2,
-		cornerRadius = cornerRadius
-	}) else reactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1) }, {
-		Shimmer = reactModule.createElement(skeleton, {
+		momentId = MediaItem.momentId,
+		posterContent = UseVideoPosterFrameModuleResult1,
+		cornerRadius = CornerRadius
+	}) else ReactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.fromScale(1, 1) }, {
+		Shimmer = ReactModule.createElement(Skeleton, {
 			ZIndex = 1,
-			radius = if cornerRadius then radius.Large else radius.None,
+			radius = if CornerRadius then Radius.Large else Radius.None,
 			Size = UDim2.fromScale(1, 1)
 		}),
-		Poster = if var2 ~= nil then nil else reactModule.createElement("ImageLabel", {
+		Poster = if UseVideoPosterFrameModuleResult1 == nil then nil else ReactModule.createElement("ImageLabel", {
 			BackgroundTransparency = 1,
 			ZIndex = 2,
 			Size = UDim2.fromScale(1, 1),
-			ImageContent = var2,
+			ImageContent = UseVideoPosterFrameModuleResult1,
 			ScaleType = Enum.ScaleType.Crop
 		}, {
-			Corner = if cornerRadius ~= nil then nil else reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, cornerRadius) })
+			Corner = if CornerRadius == nil then nil else ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0, CornerRadius) })
 		})
 	})
 end

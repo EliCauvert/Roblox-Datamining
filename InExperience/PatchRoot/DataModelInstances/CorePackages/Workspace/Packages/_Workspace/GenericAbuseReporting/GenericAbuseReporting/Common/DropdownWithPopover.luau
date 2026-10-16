@@ -1,125 +1,129 @@
-﻿local genericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
-local parent = genericAbuseReporting.Parent
-local coreGuiService = game:GetService("CoreGui")
-local focusNavigationUtilsModule = require(parent.FocusNavigationUtils)
-local foundationModule = require(parent.Foundation)
-local inputHandlersModule = require(parent.InputHandlers)
-local reactModule = require(parent.React)
-local reactFocusNavigationModule = require(parent.ReactFocusNavigation)
-local UIBloxModule = require(parent.UIBlox)
-local appFocusRoot = focusNavigationUtilsModule.AppFocusRoot
-local focusNavigationEventNameEnum = focusNavigationUtilsModule.FocusNavigationEventNameEnum
-local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
-local overlayProvider = foundationModule.OverlayProvider
-local popover = foundationModule.Popover
-local popoverAlign = foundationModule.Enums.PopoverAlign
-local popoverSide = foundationModule.Enums.PopoverSide
-local scrollBarVisibility = foundationModule.Enums.ScrollBarVisibility
-local scrollView = foundationModule.ScrollView
-local text = foundationModule.Text
-local useLayerCollector = UIBloxModule.Core.Layout.LayerCollector.useLayerCollector
-local useTokens = foundationModule.Hooks.useTokens
-local view = foundationModule.View
-local sideModalDropdownButtonModule = require(genericAbuseReporting.Common.SideModalDropdownButton)
-local useScrollbarOffsetModule = require(genericAbuseReporting.Common.useScrollbarOffset)
+﻿local GenericAbuseReporting = script:FindFirstAncestor("GenericAbuseReporting")
+local Parent = GenericAbuseReporting.Parent
+local CoreGui = game:GetService("CoreGui")
+local FocusNavigationUtilsModule = require(Parent.FocusNavigationUtils)
+local FoundationModule = require(Parent.Foundation)
+local InputHandlersModule = require(Parent.InputHandlers)
+local ReactModule = require(Parent.React)
+local ReactFocusNavigationModule = require(Parent.ReactFocusNavigation)
+local AppFocusRoot = FocusNavigationUtilsModule.AppFocusRoot
+local FocusNavigationEventNameEnum = FocusNavigationUtilsModule.FocusNavigationEventNameEnum
+local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
+local OverlayProvider = FoundationModule.OverlayProvider
+local Popover = FoundationModule.Popover
+local PopoverAlign = FoundationModule.Enums.PopoverAlign
+local PopoverSide = FoundationModule.Enums.PopoverSide
+local ScrollBarVisibility = FoundationModule.Enums.ScrollBarVisibility
+local ScrollView = FoundationModule.ScrollView
+local Text = FoundationModule.Text
+local UseLayerCollectorFunction = require(Parent.UIBlox).Core.Layout.LayerCollector.useLayerCollector
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local View = FoundationModule.View
+local SideModalDropdownButtonModule = require(GenericAbuseReporting.Common.SideModalDropdownButton)
+local UseScrollbarOffsetModule = require(GenericAbuseReporting.Common.useScrollbarOffset)
 
-return reactModule.memo(function(p1)
-	-- upvalues: useLayerCollector (ref), useTokens (ref), reactModule (ref), useScrollbarOffsetModule (ref), reactFocusNavigationModule (ref), coreGuiService (ref), view (ref), text (ref), overlayProvider (ref), popover (ref), sideModalDropdownButtonModule (ref), popoverAlign (ref), popoverSide (ref), appFocusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref), focusNavigationEventNameEnum (ref), inputHandlersModule (ref), scrollView (ref), scrollBarVisibility (ref)
-	local var1 = useTokens()
-	local absoluteSize = useLayerCollector().absoluteSize
-	local var2, var3 = reactModule.useState(false)
-	local var4, var5 = reactModule.useState({})
-	local var6, var7 = reactModule.useState(Vector2.new(0, 0))
-	local var8, var9 = reactModule.useState(Vector2.new(0, 0))
-	local var10, var11 = reactModule.useState(Vector2.new(0, 0))
-	local var12, var13 = reactModule.useState(Vector2.new(0, 0))
-	local var14 = useScrollbarOffsetModule(var10, var12)
-	local var15 = reactFocusNavigationModule.useFocusGuiObject()
-	local var16 = reactModule.useRef(nil)
-	local var17 = reactModule.useRef(nil)
-	local VRCentralOverlay = coreGuiService:FindFirstChild("VRCentralOverlay")
-	local var18 = if VRCentralOverlay then VRCentralOverlay:FindFirstChild("CentralOverlay_SurfaceGui") else nil
-	local var19 = reactModule.useCallback(function()
-		-- upvalues: var18 (ref), var15 (ref), var16 (ref), var3 (ref)
-		if not var18 then
-			var15(var16.current)
+return ReactModule.memo(function(p1) --[[ Line: 44 | Named "DropdownWithPopover" ]]
+	-- upvalues: UseLayerCollectorFunction (copy), UseTokensFunction (copy), ReactModule (copy), UseScrollbarOffsetModule (copy), ReactFocusNavigationModule (copy), CoreGui (copy), View (copy), Text (copy), OverlayProvider (copy), Popover (copy), SideModalDropdownButtonModule (copy), PopoverAlign (copy), PopoverSide (copy), AppFocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy), FocusNavigationEventNameEnum (copy), InputHandlersModule (copy), ScrollView (copy), ScrollBarVisibility (copy)
+	local UseLayerCollectorResult = UseLayerCollectorFunction()
+	local UseTokensResult = UseTokensFunction()
+	local AbsoluteSize = UseLayerCollectorResult.absoluteSize
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState({})
+	local UseStateResult3, UseStateResult2_2 = ReactModule.useState(Vector2.new(0, 0))
+	local UseStateResult4, UseStateResult2_3 = ReactModule.useState(Vector2.new(0, 0))
+	local UseStateResult5, UseStateResult2_4 = ReactModule.useState(Vector2.new(0, 0))
+	local UseStateResult6, UseStateResult2_5 = ReactModule.useState(Vector2.new(0, 0))
+	local UseFocusGuiObjectResult = ReactFocusNavigationModule.useFocusGuiObject()
+	local UseRefResult = ReactModule.useRef(nil)
+	local VRCentralOverlay = CoreGui:FindFirstChild("VRCentralOverlay")
+	local CentralOverlaySurfaceGui = if VRCentralOverlay then VRCentralOverlay:FindFirstChild("CentralOverlay_SurfaceGui") else nil
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 68 ]]
+		-- upvalues: CentralOverlaySurfaceGui (copy), UseFocusGuiObjectResult (copy), UseRefResult (copy), UseStateResult2 (copy)
+		if not CentralOverlaySurfaceGui then
+			UseFocusGuiObjectResult(UseRefResult.current)
 		end
-		var3(false)
-	end, { var16.current, var15, var18 })
+		UseStateResult2(false)
+	end, {
+		UseRefResult.current,
+		UseFocusGuiObjectResult,
+		CentralOverlaySurfaceGui
+	})
 	
-	return reactModule.createElement(overlayProvider, { gui = var18 }, {
-		DropdownWithPopover = reactModule.createElement(view, {
+	return ReactModule.createElement(OverlayProvider, { gui = CentralOverlaySurfaceGui }, {
+		DropdownWithPopover = ReactModule.createElement(View, {
 			tag = "size-full-0 auto-y",
-			ref = var16,
-			onAbsoluteSizeChanged = function(value)
-				-- upvalues: var7 (ref)
-				var7(value.AbsoluteSize)
+			ref = UseRefResult,
+			onAbsoluteSizeChanged = function(Frame) --[[ Line: 126 ]]
+				-- upvalues: UseStateResult2_2 (copy)
+				UseStateResult2_2(Frame.AbsoluteSize)
 			end,
 			LayoutOrder = p1.layoutOrder
 		}, {
-			Popover = reactModule.createElement(popover.Root, { isOpen = var2 }, {
-				Anchor = reactModule.createElement(popover.Anchor, nil, reactModule.createElement(view, { Size = UDim2.new(0, var6.X, 0, var6.Y) }, {
-					DropdownButton = reactModule.createElement(sideModalDropdownButtonModule, {
-						onActivated = reactModule.useCallback(function()
-							-- upvalues: var3 (ref), var2 (ref)
-							var3(not var2)
-						end, { var2 }),
-						text = if var4.text and #var4.text > 0 then var4.text else p1.placeholder,
+			Popover = ReactModule.createElement(Popover.Root, { isOpen = UseStateResult }, {
+				Anchor = ReactModule.createElement(Popover.Anchor, nil, ReactModule.createElement(View, {
+					Size = UDim2.new(0, UseStateResult3.X, 0, UseStateResult3.Y)
+				}, {
+					DropdownButton = ReactModule.createElement(SideModalDropdownButtonModule, {
+						onActivated = ReactModule.useCallback(function() --[[ Line: 116 ]]
+							-- upvalues: UseStateResult2 (copy), UseStateResult (copy)
+							UseStateResult2(not UseStateResult)
+						end, { UseStateResult }),
+						text = if UseStateResult1.text and #UseStateResult1.text > 0 then UseStateResult1.text else p1.placeholder,
 						isDropdownError = p1.errorState
 					})
 				})),
-				Content = reactModule.createElement(popover.Content, {
+				Content = ReactModule.createElement(Popover.Content, {
 					hasArrow = false,
-					align = popoverAlign.Center,
-					side = popoverSide.Bottom,
-					onPressedOutside = var19,
+					align = PopoverAlign.Center,
+					side = PopoverSide.Bottom,
+					onPressedOutside = UseResult,
 					selection = { Selectable = true }
 				}, {
-					DropdownPopup = reactModule.createElement(view, { tag = "auto-xy" }, {
-						AppFocusRoot = reactModule.createElement(appFocusRoot, {
-							surfaceIdentifier = if var2 then focusNavigableSurfaceIdentifierEnum.ModerationOverlay else focusNavigableSurfaceIdentifierEnum.PopUp,
-							isIsolated = var2,
+					DropdownPopup = ReactModule.createElement(View, { tag = "auto-xy" }, {
+						AppFocusRoot = ReactModule.createElement(AppFocusRoot, {
+							surfaceIdentifier = if UseStateResult then FocusNavigableSurfaceIdentifierEnum.ModerationOverlay else FocusNavigableSurfaceIdentifierEnum.PopUp,
+							isIsolated = UseStateResult,
 							customEventHandlers = {
-								[focusNavigationEventNameEnum.NavigateBack] = { handler = inputHandlersModule.onRelease(var19) }
+								[FocusNavigationEventNameEnum.NavigateBack] = { handler = InputHandlersModule.onRelease(UseResult) }
 							}
 						}, {
-							reactModule.createElement(scrollView, {
+							ReactModule.createElement(ScrollView, {
 								gradientHeight = 15,
-								Size = UDim2.new(0, math.min(absoluteSize.X, var8.X + var14), 0, math.min(absoluteSize.Y, var8.Y)),
+								Size = UDim2.new(0, math.min(AbsoluteSize.X, UseStateResult4.X + UseScrollbarOffsetModule(UseStateResult5, UseStateResult6)), 0, (math.min(AbsoluteSize.Y, UseStateResult4.Y))),
 								scroll = {
 									AutomaticCanvasSize = Enum.AutomaticSize.Y,
 									CanvasSize = UDim2.new(1, 0, 0, 0),
 									ScrollingDirection = Enum.ScrollingDirection.Y,
-									scrollBarVisibility = scrollBarVisibility.Always
+									scrollBarVisibility = ScrollBarVisibility.Always
 								},
-								onAbsoluteCanvasSizeChanged = function(value)
-									-- upvalues: var11 (ref)
-									var11(value.AbsoluteCanvasSize)
+								onAbsoluteCanvasSizeChanged = function(ScrollFrame) --[[ Line: 194 ]]
+									-- upvalues: UseStateResult2_4 (copy)
+									UseStateResult2_4(ScrollFrame.AbsoluteCanvasSize)
 								end,
-								onAbsoluteWindowSizeChanged = function(value)
-									-- upvalues: var13 (ref)
-									var13(value.AbsoluteWindowSize)
+								onAbsoluteWindowSizeChanged = function(p2) --[[ Line: 197 ]]
+									-- upvalues: UseStateResult2_5 (copy)
+									UseStateResult2_5(p2.AbsoluteWindowSize)
 								end
 							}, {
-								BaseMenu = reactModule.createElement(view, {
+								BaseMenu = ReactModule.createElement(View, {
 									tag = "auto-y col align-y-center gap-xsmall padding-xsmall",
-									Size = UDim2.new(0, var6.X + var1.Stroke.Standard * 2, 0, 0),
-									onAbsoluteSizeChanged = function(value)
-										-- upvalues: var9 (ref)
-										var9(value.AbsoluteSize)
+									Size = UDim2.new(0, UseStateResult3.X + UseTokensResult.Stroke.Standard * 2, 0, 0),
+									onAbsoluteSizeChanged = function(Frame) --[[ Line: 204 ]]
+										-- upvalues: UseStateResult2_3 (copy)
+										UseStateResult2_3(Frame.AbsoluteSize)
 									end,
-									ref = var17
-								}, reactModule.useMemo(function()
-									-- upvalues: p1 (ref), var5 (ref), var19 (ref), reactModule (copy), view (copy), var4 (ref), text (copy)
-									local t = {}
+									ref = ReactModule.useRef(nil)
+								}, (ReactModule.useMemo(function() --[[ Line: 76 ]]
+									-- upvalues: p1 (copy), UseStateResult2_1 (copy), UseResult (copy), ReactModule (upval), View (upval), UseStateResult1 (copy), Text (upval)
+									local Elements = {}
 									
-									for i, v in ipairs(p1.cellDatas) do
-										table.insert(t, reactModule.createElement(view, {
-											onActivated = function()
-												-- upvalues: p1 (copy), v (ref), var5 (copy), var19 (copy)
-												p1.onChange(if v.value == nil then v.text else v.value)
-												var5(v)
-												var19()
+									for _, cellData in ipairs(p1.cellDatas) do
+										table.insert(Elements, ReactModule.createElement(View, {
+											onActivated = function() --[[ Line: 79 ]]
+												-- upvalues: p1 (upval), cellData (copy), UseStateResult2_1 (upval), UseResult (upval)
+												p1.onChange(if cellData.value == nil then cellData.text else cellData.value)
+												UseStateResult2_1(cellData)
+												UseResult()
 											end,
 											selection = { Selectable = true },
 											tag = {
@@ -127,21 +131,21 @@ return reactModule.memo(function(p1)
 												["auto-y"] = true,
 												["padding-small"] = true,
 												["radius-medium"] = true,
-												["bg-shift-200"] = var4 == v
+												["bg-shift-200"] = UseStateResult1 == cellData
 											}
 										}, {
-											TextContainer = reactModule.createElement(view, { tag = "size-full-0 auto-y" }, {
-												Text = reactModule.createElement(text, {
+											TextContainer = ReactModule.createElement(View, { tag = "size-full-0 auto-y" }, {
+												Text = ReactModule.createElement(Text, {
 													TextWrapped = true,
 													tag = "auto-xy",
-													Text = v.text,
+													Text = cellData.text,
 													TextXAlignment = Enum.TextXAlignment.Left
 												})
 											})
 										}))
 									end
-									return t
-								end, { p1.cellDatas, var4, p1.onChange, var19 }))
+									return Elements
+								end, { p1.cellDatas, UseStateResult1, p1.onChange, UseResult })))
 							})
 						})
 					})

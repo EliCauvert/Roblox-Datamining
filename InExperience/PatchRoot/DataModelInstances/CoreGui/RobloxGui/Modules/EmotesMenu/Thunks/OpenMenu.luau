@@ -1,42 +1,33 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local guiService = game:GetService("GuiService")
+﻿local CorePackages = game:GetService("CorePackages")
+local GuiService = game:GetService("GuiService")
 local VRService = game:GetService("VRService")
-local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
-local parent = script.Parent.Parent
-local actions = parent.Actions
-local parent_1 = parent.Parent
-local eventStream = require(corePackagesService.Workspace.Packages.Analytics).AnalyticsReporters.EventStream
-local analyticsModule = require(parent.Analytics)
-local fFlagEnableNewBackpack = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagEnableNewBackpack
-local var1 = if fFlagEnableNewBackpack then require(corePackagesService.Workspace.Packages.System).Features else nil
-local var2 = if not fFlagEnableNewBackpack then require(parent_1.BackpackScript) else nil
-local showMenuModule = require(actions.ShowMenu)
-local var3 = analyticsModule.new():withEventStream(eventStream.new(rbxAnalyticsService))
+local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local FFlagEnableNewBackpack = require(CorePackages.Workspace.Packages.SharedFlags).FFlagEnableNewBackpack
+local Features = if FFlagEnableNewBackpack then require(CorePackages.Workspace.Packages.System).Features else nil
+local BackpackScriptModule = if FFlagEnableNewBackpack then nil else require(Parent1.BackpackScript)
+local ShowMenuModule = require(Parent.Actions.ShowMenu)
+local WithEventStreamResult = require(Parent.Analytics).new():withEventStream(require(CorePackages.Workspace.Packages.Analytics).AnalyticsReporters.EventStream.new((game:GetService("RbxAnalyticsService"))))
 
-return function(_)
-	-- upvalues: guiService (ref), VRService (ref), fFlagEnableNewBackpack (ref), var1 (ref), var2 (ref), var3 (ref), showMenuModule (ref)
-	return function(p1)
-		-- upvalues: guiService (copy), VRService (copy), fFlagEnableNewBackpack (copy), var1 (copy), var2 (copy), var3 (copy), showMenuModule (copy)
-		if guiService.MenuIsOpen then
-			if VRService.VREnabled then
-				guiService:SetMenuIsOpen(false, "VRMenu")
-			else
-				return
-			end
+return function(_) --[[ Line: 23 | Named "OpenMenu" ]]
+	-- upvalues: GuiService (copy), VRService (copy), FFlagEnableNewBackpack (copy), Features (copy), BackpackScriptModule (copy), WithEventStreamResult (copy), ShowMenuModule (copy)
+	return function(p1) --[[ Line: 24 ]]
+		-- upvalues: GuiService (upval), VRService (upval), FFlagEnableNewBackpack (upval), Features (upval), BackpackScriptModule (upval), WithEventStreamResult (upval), ShowMenuModule (upval)
+		if GuiService.MenuIsOpen then
+			if not VRService.VREnabled then return end
+			GuiService:SetMenuIsOpen(false, "VRMenu")
 		end
-		if fFlagEnableNewBackpack then
-			var1.setVisibility(var1.FeatureName.Backpack, false)
+		if FFlagEnableNewBackpack then
+			Features.setVisibility(Features.FeatureName.Backpack, false)
 			
-			if var1.getVisibility(var1.FeatureName.Backpack) then
-				return
+			if Features.getVisibility(Features.FeatureName.Backpack) then return end
+		else
+			if BackpackScriptModule.IsOpen then
+				BackpackScriptModule.OpenClose()
 			end
-		elseif var2.IsOpen then
-			var2.OpenClose()
+			if BackpackScriptModule.IsOpen then return end
 		end
-		if var2.IsOpen then
-			return
-		end
-		var3:onMenuOpened()
-		p1:dispatch(showMenuModule())
+		WithEventStreamResult:onMenuOpened()
+		p1:dispatch(ShowMenuModule())
 	end
 end

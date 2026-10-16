@@ -1,84 +1,82 @@
-﻿local parent = script.Parent.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local roactModule = require(parent_1.Roact)
-local cryoModule = require(parent_1.Cryo)
-local tModule = require(parent_1.t)
-local foundationFontFaceMigration = require(parent_1.Foundation).Utility.Flags.FoundationFontFaceMigration
-local imageSetComponentModule = require(parent.Core.ImageSet.ImageSetComponent)
-local genericTextLabelModule = require(parent.Core.Text.GenericTextLabel.GenericTextLabel)
-local getTextSizeModule = require(parent.Core.Text.GetTextSize)
-local getFontFromFontStyleModule = require(parent.Core.Text.GetFontFromFontStyle)
-local getWrappedTextWithIconModule = require(parent.Core.Text.GetWrappedTextWithIcon)
-local validateFontInfoModule = require(parent.Core.Style.Validator.validateFontInfo)
-local validateTypographyInfoModule = require(parent.Core.Style.Validator.validateTypographyInfo)
-local validateColorInfoModule = require(parent.Core.Style.Validator.validateColorInfo)
-local withStyleModule = require(parent.Core.Style.withStyle)
-local imageTextLabel = roactModule.PureComponent:extend("ImageTextLabel")
-imageTextLabel.validateProps = tModule.interface({
-	imageProps = tModule.optional(tModule.interface({ Size = tModule.UDim2 })),
-	genericTextLabelProps = tModule.interface({
-		Text = tModule.string,
-		fontStyle = tModule.union(validateFontInfoModule, validateTypographyInfoModule),
-		colorStyle = validateColorInfoModule,
-		fluidSizing = tModule.optional(tModule.boolean),
-		AnchorPoint = tModule.None,
-		Position = tModule.None,
-		Size = tModule.None,
-		TextXAlignment = tModule.None,
-		TextYAlignment = tModule.None,
-		TextScaled = tModule.None,
-		maxSize = tModule.None,
-		richText = tModule.optional(tModule.boolean)
+﻿local Parent = script.Parent.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local RoactModule = require(Parent1.Roact)
+local CryoModule = require(Parent1.Cryo)
+local TModule = require(Parent1.t)
+local FoundationFontFaceMigration = require(Parent1.Foundation).Utility.Flags.FoundationFontFaceMigration
+local ImageSetComponentModule = require(Parent.Core.ImageSet.ImageSetComponent)
+local GenericTextLabelModule = require(Parent.Core.Text.GenericTextLabel.GenericTextLabel)
+local GetTextSizeModule = require(Parent.Core.Text.GetTextSize)
+local GetFontFromFontStyleModule = require(Parent.Core.Text.GetFontFromFontStyle)
+local GetWrappedTextWithIconModule = require(Parent.Core.Text.GetWrappedTextWithIcon)
+local WithStyleModule = require(Parent.Core.Style.withStyle)
+local ImageTextLabel = RoactModule.PureComponent:extend("ImageTextLabel")
+ImageTextLabel.validateProps = TModule.interface({
+	imageProps = TModule.optional(TModule.interface({ Size = TModule.UDim2 })),
+	genericTextLabelProps = TModule.interface({
+		Text = TModule.string,
+		fontStyle = TModule.union(require(Parent.Core.Style.Validator.validateFontInfo), (require(Parent.Core.Style.Validator.validateTypographyInfo))),
+		colorStyle = require(Parent.Core.Style.Validator.validateColorInfo),
+		fluidSizing = TModule.optional(TModule.boolean),
+		AnchorPoint = TModule.None,
+		Position = TModule.None,
+		Size = TModule.None,
+		TextXAlignment = TModule.None,
+		TextYAlignment = TModule.None,
+		TextScaled = TModule.None,
+		maxSize = TModule.None,
+		richText = TModule.optional(TModule.boolean)
 	}),
-	frameProps = tModule.optional(tModule.interface({ Size = tModule.None })),
-	maxSize = tModule.optional(tModule.Vector2),
-	padding = tModule.optional(tModule.number)
+	frameProps = TModule.optional(TModule.interface({ Size = TModule.None })),
+	maxSize = TModule.optional(TModule.Vector2),
+	padding = TModule.optional(TModule.number)
 })
-imageTextLabel.defaultProps = {
+ImageTextLabel.defaultProps = {
 	padding = 0,
 	maxSize = Vector2.new(10000, 10000),
 	frameProps = {}
 }
 
-function imageTextLabel.render(p1)
-	-- upvalues: withStyleModule (ref), foundationFontFaceMigration (ref), getFontFromFontStyleModule (ref), getWrappedTextWithIconModule (ref), getTextSizeModule (ref), roactModule (ref), cryoModule (ref), imageSetComponentModule (ref), genericTextLabelModule (ref)
-	local genericTextLabelProps = p1.props.genericTextLabelProps
-	local imageProps = p1.props.imageProps
-	local frameProps = p1.props.frameProps
-	local padding = p1.props.padding
-	local text = p1.props.genericTextLabelProps.Text
-	local maxSize = p1.props.maxSize
-	local useMaxHeight = p1.props.useMaxHeight
-	local richText = p1.props.richText
+function ImageTextLabel.render(p1) --[[ Line: 71 ]]
+	-- upvalues: WithStyleModule (copy), FoundationFontFaceMigration (copy), GetFontFromFontStyleModule (copy), GetWrappedTextWithIconModule (copy), GetTextSizeModule (copy), RoactModule (copy), CryoModule (copy), ImageSetComponentModule (copy), GenericTextLabelModule (copy)
+	local GenericTextLabelProps = p1.props.genericTextLabelProps
+	local ImageProps = p1.props.imageProps
+	local FrameProps = p1.props.frameProps
+	local Padding = p1.props.padding
+	local Text = p1.props.genericTextLabelProps.Text
+	local MaxSize = p1.props.maxSize
+	local UseMaxHeight = p1.props.useMaxHeight
+	local RichText = p1.props.richText
 	
-	return withStyleModule(function(p2)
-		-- upvalues: genericTextLabelProps (ref), foundationFontFaceMigration (copy), getFontFromFontStyleModule (copy), imageProps (ref), text (write), getWrappedTextWithIconModule (copy), padding (ref), getTextSizeModule (copy), maxSize (ref), useMaxHeight (ref), roactModule (copy), cryoModule (copy), frameProps (ref), imageSetComponentModule (copy), genericTextLabelModule (copy), p1 (ref), richText (ref)
-		local fontStyle = genericTextLabelProps.fontStyle
-		local var1 = if fontStyle.RelativeSize then p2.Font.BaseSize * fontStyle.RelativeSize else fontStyle.FontSize
-		local var2 = if foundationFontFaceMigration then getFontFromFontStyleModule(fontStyle) else fontStyle.Font
+	return WithStyleModule(function(p2) --[[ Line: 81 ]]
+		-- upvalues: GenericTextLabelProps (copy), FoundationFontFaceMigration (upval), GetFontFromFontStyleModule (upval), ImageProps (copy), Text (ref), GetWrappedTextWithIconModule (upval), Padding (copy), GetTextSizeModule (upval), MaxSize (copy), UseMaxHeight (copy), RoactModule (upval), CryoModule (upval), FrameProps (copy), ImageSetComponentModule (upval), GenericTextLabelModule (upval), p1 (copy), RichText (copy)
+		local FontStyle = GenericTextLabelProps.fontStyle
+		local BaseSize = p2.Font.BaseSize
+		local ScaledBaseSize = if FontStyle.RelativeSize then BaseSize * FontStyle.RelativeSize else FontStyle.FontSize
+		local FontFromFontStyleModule = if FoundationFontFaceMigration then GetFontFromFontStyleModule(FontStyle) else FontStyle.Font
 		
-		if imageProps then
-			text = getWrappedTextWithIconModule(text, var1, var2, imageProps.Size.X.Offset, padding)
+		if ImageProps then
+			Text = GetWrappedTextWithIconModule(Text, ScaledBaseSize, FontFromFontStyleModule, ImageProps.Size.X.Offset, Padding)
 		end
-		local var3 = getTextSizeModule(text, var1, var2, Vector2.new(maxSize.X, maxSize.Y))
+		local TextSizeModule = GetTextSizeModule(Text, ScaledBaseSize, FontFromFontStyleModule, Vector2.new(MaxSize.X, MaxSize.Y))
 		
-		return roactModule.createElement("Frame", cryoModule.Dictionary.join(frameProps, {
-			Size = UDim2.new(0, var3.X, 0, if useMaxHeight then maxSize.Y else var3.Y)
+		return RoactModule.createElement("Frame", CryoModule.Dictionary.join(FrameProps, {
+			Size = UDim2.new(0, TextSizeModule.X, 0, UseMaxHeight and MaxSize.Y or TextSizeModule.Y)
 		}), {
-			Icon = if imageProps then roactModule.createElement(imageSetComponentModule.Label, imageProps) else nil,
-			Name = roactModule.createElement(genericTextLabelModule, cryoModule.Dictionary.join(genericTextLabelProps, {
-				Text = text,
+			Icon = if ImageProps then RoactModule.createElement(ImageSetComponentModule.Label, ImageProps) else nil,
+			Name = RoactModule.createElement(GenericTextLabelModule, CryoModule.Dictionary.join(GenericTextLabelProps, {
+				Text = Text,
 				AnchorPoint = Vector2.new(0, 0),
 				Position = UDim2.new(0, 0, 0, 0),
 				Size = UDim2.new(1, 0, 1, 0),
-				TextXAlignment = genericTextLabelProps.TextXAlignment or Enum.TextXAlignment.Left,
+				TextXAlignment = GenericTextLabelProps.TextXAlignment or Enum.TextXAlignment.Left,
 				TextYAlignment = Enum.TextYAlignment.Top,
-				fluidSizing = if imageProps then false else p1.props.fluidSizing,
-				maxSize = maxSize,
-				RichText = richText
+				fluidSizing = not ImageProps and p1.props.fluidSizing,
+				maxSize = MaxSize,
+				RichText = RichText
 			}))
 		})
 	end)
 end
 
-return imageTextLabel
+return ImageTextLabel

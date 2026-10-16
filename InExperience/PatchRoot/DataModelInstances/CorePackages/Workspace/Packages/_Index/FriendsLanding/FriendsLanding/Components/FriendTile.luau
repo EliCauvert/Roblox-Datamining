@@ -1,1 +1,1 @@
-﻿return require(script.FriendTileContainer)
+﻿return (require(script.FriendTileContainer))

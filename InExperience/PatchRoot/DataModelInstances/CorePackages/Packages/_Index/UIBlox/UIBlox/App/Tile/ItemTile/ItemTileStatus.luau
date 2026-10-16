@@ -1,69 +1,68 @@
-﻿local parent = script.Parent.Parent
-local parent_1 = parent.Parent.Parent
-local parent_2 = parent_1.Parent
-local UIBloxConfigModule = require(parent_1.UIBloxConfig)
-local roactModule = require(parent_2.Roact)
-local tModule = require(parent_2.t)
-local foundationModule = require(parent_2.Foundation)
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local withStyleModule = require(parent_1.Core.Style.withStyle)
-local getTextSizeModule = require(parent_1.Core.Text.GetTextSize)
-local getFontFromFontStyleModule = require(parent_1.Core.Text.GetFontFromFontStyle)
-local imagesModule = require(parent_1.App.ImageSet.Images)
-local imageSetComponentModule = require(parent_1.Core.ImageSet.ImageSetComponent)
-local itemTileEnumsModule = require(parent.Enum.ItemTileEnums)
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local itemTileStatus = roactModule.PureComponent:extend("ItemTileStatus")
-local vector2 = Vector2.new(50, 20)
-local vector2_1 = Vector2.new(10, 6)
-itemTileStatus.validateProps = tModule.strictInterface({
-	statusText = tModule.string,
-	statusStyle = itemTileEnumsModule.StatusStyle.isEnumValue
+﻿local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent.Parent
+local Parent2 = Parent1.Parent
+local RoactModule = require(Parent2.Roact)
+local TModule = require(Parent2.t)
+local FoundationModule = require(Parent2.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local WithStyleModule = require(Parent1.Core.Style.withStyle)
+local GetTextSizeModule = require(Parent1.Core.Text.GetTextSize)
+local GetFontFromFontStyleModule = require(Parent1.Core.Text.GetFontFromFontStyle)
+local ImagesModule = require(Parent1.App.ImageSet.Images)
+local ImageSetComponentModule = require(Parent1.Core.ImageSet.ImageSetComponent)
+local ItemTileEnumsModule = require(Parent.Enum.ItemTileEnums)
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local ItemTileStatus = RoactModule.PureComponent:extend("ItemTileStatus")
+local _Vector2 = Vector2.new(50, 20)
+local _Vector2_1 = Vector2.new(10, 6)
+ItemTileStatus.validateProps = TModule.strictInterface({
+	statusText = TModule.string,
+	statusStyle = ItemTileEnumsModule.StatusStyle.isEnumValue
 })
 
-local function getStyle(p1, p2)
-	-- upvalues: itemTileEnumsModule (ref)
-	return if p2 == itemTileEnumsModule.StatusStyle.Info then {
-		Background = p1.SystemPrimaryDefault,
-		Text = p1.SystemPrimaryContent
-	} elseif p2 == itemTileEnumsModule.StatusStyle.Alert then { Background = p1.Alert, Text = p1.TextEmphasis } else {
-		Background = p1.SystemPrimaryDefault,
-		Text = p1.SystemPrimaryContent
+local function getStyle(Theme, StatusStyle) --[[ Line: 35 ]]
+	-- upvalues: ItemTileEnumsModule (copy)
+	return if StatusStyle == ItemTileEnumsModule.StatusStyle.Info then {
+		Background = Theme.SystemPrimaryDefault,
+		Text = Theme.SystemPrimaryContent
+	} elseif StatusStyle == ItemTileEnumsModule.StatusStyle.Alert then { Background = Theme.Alert, Text = Theme.TextEmphasis } else {
+		Background = Theme.SystemPrimaryDefault,
+		Text = Theme.SystemPrimaryContent
 	}
 end
 
-function itemTileStatus.render(p1)
-	-- upvalues: withStyleModule (ref), foundationFontFaceMigration (ref), getFontFromFontStyleModule (ref), getTextSizeModule (ref), vector2 (ref), getStyle (ref), roactModule (ref), imageSetComponentModule (ref), imagesModule (ref), UIBloxConfigModule (ref), vector2_1 (ref), normalizeFontFace (ref)
-	return withStyleModule(function(p2)
-		-- upvalues: p1 (ref), foundationFontFaceMigration (copy), getFontFromFontStyleModule (copy), getTextSizeModule (copy), vector2 (copy), getStyle (copy), roactModule (copy), imageSetComponentModule (copy), imagesModule (copy), UIBloxConfigModule (copy), vector2_1 (copy), normalizeFontFace (copy)
-		local theme = p2.Theme
-		local font = p2.Font
-		local tokens = p2.Tokens
-		local statusText = p1.props.statusText
-		local statusStyle = p1.props.statusStyle
-		local var1 = if foundationFontFaceMigration then getFontFromFontStyleModule(font.CaptionHeader) else font.CaptionHeader.Font
-		local var2 = font.BaseSize * font.CaptionHeader.RelativeSize
-		local var3 = getTextSizeModule(statusText, var2, var1, vector2)
-		local var4 = getStyle(theme, statusStyle)
+function ItemTileStatus.render(p1) --[[ Line: 54 ]]
+	-- upvalues: WithStyleModule (copy), FoundationFontFaceMigration (copy), GetFontFromFontStyleModule (copy), GetTextSizeModule (copy), _Vector2 (copy), getStyle (copy), RoactModule (copy), ImageSetComponentModule (copy), ImagesModule (copy), _Vector2_1 (copy), NormalizeFontFaceFunction (copy)
+	return WithStyleModule(function(p2) --[[ Line: 55 ]]
+		-- upvalues: p1 (copy), FoundationFontFaceMigration (upval), GetFontFromFontStyleModule (upval), GetTextSizeModule (upval), _Vector2 (upval), getStyle (upval), RoactModule (upval), ImageSetComponentModule (upval), ImagesModule (upval), _Vector2_1 (upval), NormalizeFontFaceFunction (upval)
+		local Theme = p2.Theme
+		local _Font = p2.Font
+		local Tokens = p2.Tokens
+		local StatusText = p1.props.statusText
+		local StatusStyle = p1.props.statusStyle
+		local FontFromFontStyleModule = if FoundationFontFaceMigration then GetFontFromFontStyleModule(_Font.CaptionHeader) else _Font.CaptionHeader.Font
+		local ScaledBaseSize = _Font.BaseSize * _Font.CaptionHeader.RelativeSize
+		local TextSizeModule = GetTextSizeModule(StatusText, ScaledBaseSize, FontFromFontStyleModule, _Vector2)
+		local Style = getStyle(Theme, StatusStyle)
 		
-		return roactModule.createElement(imageSetComponentModule.Label, {
+		return RoactModule.createElement(ImageSetComponentModule.Label, {
 			BackgroundTransparency = 1,
-			Image = imagesModule["component_assets/circle_17"],
-			ImageColor3 = var4.Background.Color,
-			ImageTransparency = var4.Background.Transparency,
+			Image = ImagesModule["component_assets/circle_17"],
+			ImageColor3 = Style.Background.Color,
+			ImageTransparency = Style.Background.Transparency,
 			ScaleType = Enum.ScaleType.Slice,
 			SliceCenter = Rect.new(8, 8, 9, 9),
-			Position = UDim2.new(0, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_200 else tokens.Global.Size_100, 0, if UIBloxConfigModule.deprecateComponentGlobalSemanticTokenUse then tokens.Size.Size_200 else tokens.Global.Size_100),
-			Size = UDim2.new(0, var3.X + vector2_1.X, 0, var3.Y + vector2_1.Y)
+			Position = UDim2.new(0, Tokens.Size.Size_200, 0, Tokens.Size.Size_200),
+			Size = UDim2.new(0, TextSizeModule.X + _Vector2_1.X, 0, TextSizeModule.Y + _Vector2_1.Y)
 		}, {
-			Text = roactModule.createElement("TextLabel", {
+			Text = RoactModule.createElement("TextLabel", {
 				BackgroundTransparency = 1,
-				Font = if foundationFontFaceMigration then nil else var1,
-				FontFace = if foundationFontFaceMigration then normalizeFontFace(var1) else nil,
-				TextSize = var2,
-				Text = statusText,
-				TextColor3 = var4.Text.Color,
-				TextTransparency = var4.Text.TextTransparency,
+				Font = if FoundationFontFaceMigration then nil else FontFromFontStyleModule,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(FontFromFontStyleModule) else nil,
+				TextSize = ScaledBaseSize,
+				Text = StatusText,
+				TextColor3 = Style.Text.Color,
+				TextTransparency = Style.Text.TextTransparency,
 				TextTruncate = Enum.TextTruncate.AtEnd,
 				TextXAlignment = Enum.TextXAlignment.Center,
 				TextYAlignment = Enum.TextYAlignment.Center,
@@ -73,4 +72,4 @@ function itemTileStatus.render(p1)
 	end)
 end
 
-return itemTileStatus
+return ItemTileStatus

@@ -1,5 +1,5 @@
 ﻿local _ = require(script.Parent.ReactionAnimation)
-local t = {
+local config = {
 	crying = {
 		name = "sob",
 		frameCount = 91,
@@ -93,7 +93,7 @@ local t = {
 	}
 }
 
-return function(p1)
-	-- upvalues: t (ref)
-	return t[p1]
+return function(p1) --[[ Line: 100 | Named "getAnimationData" ]]
+	-- upvalues: config (copy)
+	return config[p1]
 end

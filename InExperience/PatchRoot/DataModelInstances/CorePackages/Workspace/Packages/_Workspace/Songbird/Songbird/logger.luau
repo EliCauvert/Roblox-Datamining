@@ -1,23 +1,23 @@
-﻿local songbird = require(script:FindFirstAncestor("Songbird").Parent.Lumberyak).Logger.new(nil, "Songbird")
-local ok, status = pcall(function()
+﻿local Songbird = require(script:FindFirstAncestor("Songbird").Parent.Lumberyak).Logger.new(nil, "Songbird")
+local Success, Result = pcall(function() --[[ Line: 7 ]]
 	return {
 		level = game:DefineFastString("DebugLuaLogLevel", ""),
 		pattern = game:DefineFastString("DebugLuaLogPattern", "")
 	}
 end)
 
-if not ok then
-	status = { level = "debug", pattern = "" }
+if not Success then
+	Result = { level = "debug", pattern = "" }
 end
-songbird:setContext({ prefix = "[{loggerName} - {level}] - " })
-songbird:addSink({
-	maxLevel = songbird.Levels.fromString(status.level),
-	log = function(_, p1, _)
-		-- upvalues: status (write)
-		if p1:match(status.pattern) then
+Songbird:setContext({ prefix = "[{loggerName} - {level}] - " })
+Songbird:addSink({
+	maxLevel = Songbird.Levels.fromString(Result.level),
+	log = function(_, p1, _) --[[ Line: 24 ]]
+		-- upvalues: Result (ref)
+		if p1:match(Result.pattern) then
 			print(p1)
 		end
 	end
 })
 
-return songbird
+return Songbird

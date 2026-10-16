@@ -1,23 +1,24 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local _ = require(appChat.types)
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local messageContextMenuModule = require(script.Parent.MessageContextMenu)
-local useLocalUserId = require(parent.RobloxAppHooks).useLocalUserId
-local useGetConversationFromIdModule = require(appChat.Hooks.useGetConversationFromId)
-local t = { messageId = "", conversationId = "", inputBoxRef = nil }
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local _ = require(AppChat.types)
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local MessageContextMenuModule = require(script.Parent.MessageContextMenu)
+local UseLocalUserIdFunction = require(Parent.RobloxAppHooks).useLocalUserId
+local UseGetConversationFromIdModule = require(AppChat.Hooks.useGetConversationFromId)
+local config = { messageId = "", conversationId = "", inputBoxRef = nil }
 
-function MessageContextMenuContainer(p1)
-	-- upvalues: cryoModule (ref), t (ref), useGetConversationFromIdModule (ref), useLocalUserId (ref), reactModule (ref), messageContextMenuModule (ref)
-	local var1 = cryoModule.Dictionary.union(t, p1)
-	local var2 = useGetConversationFromIdModule(var1.conversationId)
-	local var3 = if var2 and var2.messages then var2.messages:Get(var1.messageId) else nil
+function MessageContextMenuContainer(p1) --[[ Line: 32 ]]
+	-- upvalues: CryoModule (copy), config (copy), UseGetConversationFromIdModule (copy), UseLocalUserIdFunction (copy), ReactModule (copy), MessageContextMenuModule (copy)
+	local UnionResult = CryoModule.Dictionary.union(config, p1)
+	local UseGetConversationFromIdModuleResult = UseGetConversationFromIdModule(UnionResult.conversationId)
+	local GetResult = if UseGetConversationFromIdModuleResult and UseGetConversationFromIdModuleResult.messages then UseGetConversationFromIdModuleResult.messages:Get(UnionResult.messageId) else nil
+	local UseLocalUserIdResult = UseLocalUserIdFunction()
 	
-	return if var3 then reactModule.createElement(messageContextMenuModule, cryoModule.Dictionary.union(var1, {
-		message = var3,
-		userOwnsMessage = var3.senderTargetId == useLocalUserId()
+	return if GetResult then ReactModule.createElement(MessageContextMenuModule, CryoModule.Dictionary.union(UnionResult, {
+		message = GetResult,
+		userOwnsMessage = GetResult.senderTargetId == UseLocalUserIdResult
 	})) else nil
 end
 
-return reactModule.memo(MessageContextMenuContainer)
+return ReactModule.memo(MessageContextMenuContainer)

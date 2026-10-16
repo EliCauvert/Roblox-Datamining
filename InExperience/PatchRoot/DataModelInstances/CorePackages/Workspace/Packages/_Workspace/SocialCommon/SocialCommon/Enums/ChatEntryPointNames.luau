@@ -15,6 +15,7 @@
 	ChatDetailsParticipantDialog = "ChatDetailsParticipantDialog",
 	SchoolMemberList = "SchoolMemberList",
 	SocialTabsPage = "SocialTabsPage",
+	FriendsLandingPage = "FriendsLandingPage",
 	GameJoinCard = "GameJoinCard",
 	Unknown = "Unknown"
 }

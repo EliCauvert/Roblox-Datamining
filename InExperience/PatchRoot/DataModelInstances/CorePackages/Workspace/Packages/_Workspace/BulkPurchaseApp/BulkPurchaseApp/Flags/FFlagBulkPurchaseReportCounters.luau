@@ -1,1 +1,1 @@
-﻿return game:DefineFastFlag("BulkPurchaseReportCounters", false)
+﻿return (game:DefineFastFlag("BulkPurchaseReportCounters", false))

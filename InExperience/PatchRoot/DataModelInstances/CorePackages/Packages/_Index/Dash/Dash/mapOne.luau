@@ -1,9 +1,10 @@
-﻿return function(p1, p2)
-	for i, v in p1 do
-		local var1 = if p2 then p2(v, i) else v
+﻿return function(List, Callback) --[[ Line: 14 | Named "mapOne" ]]
+	local CallbackResult = nil
+	for i, value in List do
+		CallbackResult = if Callback then Callback(value, i) else value
 		
-		if var1 ~= nil then
-			return var1
+		if CallbackResult ~= nil then
+			return CallbackResult
 		end
 	end
 	return nil

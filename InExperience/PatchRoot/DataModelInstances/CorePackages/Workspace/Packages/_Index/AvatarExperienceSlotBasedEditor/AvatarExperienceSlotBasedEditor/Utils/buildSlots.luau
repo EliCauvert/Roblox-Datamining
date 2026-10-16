@@ -1,191 +1,194 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceSlotBasedEditor").Parent
-local _ = require(script.Parent.Parent.Types)
-local slotTypeModule = require(script.Parent.Parent.Enums.SlotType)
-local fFlagEnableSlotsHeadShapeThumbnail = require(parent.AvatarExperienceFlags).FFlagEnableSlotsHeadShapeThumbnail
+﻿local _ = require(script.Parent.Parent.Types)
+local SlotTypeModule = require(script.Parent.Parent.Enums.SlotType)
+local FFlagEnableSlotsHeadShapeThumbnail = require(script:FindFirstAncestor("AvatarExperienceSlotBasedEditor").Parent.AvatarExperienceFlags).FFlagEnableSlotsHeadShapeThumbnail
 
-local function _(p1, p2, p3)
+local function _(SlotSubcategory, ThumbnailUrl, CurrentAssetType) --[[ Line: 21 | Named "buildSlotSubcategory" ]]
 	return {
-		nameTranslationKey = p1.nameTranslationKey,
-		icon = p1.icon,
-		thumbnailUrl = p2,
-		assetTypes = p1.assetTypes,
-		editorSubcategory = p1.editorSubcategory,
-		eligibleSubcategories = p1.eligibleSubcategories,
-		currentAssetType = p3,
-		hide = p1.hide,
-		deselectable = p1.deselectable
+		nameTranslationKey = SlotSubcategory.nameTranslationKey,
+		icon = SlotSubcategory.icon,
+		thumbnailUrl = ThumbnailUrl,
+		assetTypes = SlotSubcategory.assetTypes,
+		editorSubcategory = SlotSubcategory.editorSubcategory,
+		eligibleSubcategories = SlotSubcategory.eligibleSubcategories,
+		currentAssetType = CurrentAssetType,
+		hide = SlotSubcategory.hide,
+		deselectable = SlotSubcategory.deselectable
 	}
 end
 
-local _ = function(p1, p2, p3, p4)
-	-- upvalues: slotTypeModule (ref)
+local _ = function(LayeredSlotSubcategory, ThumbnailUrl, CurrentAssetType, LayerIndex) --[[ Line: 35 | Named "buildLayeredSlotSubcategory" ]]
+	-- upvalues: SlotTypeModule (copy)
 	return {
-		nameTranslationKey = p1.nameTranslationKey,
-		icon = p1.icon,
-		thumbnailUrl = p2,
-		assetTypes = p1.assetTypes,
-		editorSubcategory = p1.editorSubcategory,
-		eligibleSubcategories = p1.eligibleSubcategories,
-		currentAssetType = p3,
-		hide = p1.hide,
-		deselectable = p1.deselectable,
-		slotType = slotTypeModule.LayeredSlot,
-		layerLimit = p1.layerLimit,
-		layerIndex = p4
+		nameTranslationKey = LayeredSlotSubcategory.nameTranslationKey,
+		icon = LayeredSlotSubcategory.icon,
+		thumbnailUrl = ThumbnailUrl,
+		assetTypes = LayeredSlotSubcategory.assetTypes,
+		editorSubcategory = LayeredSlotSubcategory.editorSubcategory,
+		eligibleSubcategories = LayeredSlotSubcategory.eligibleSubcategories,
+		currentAssetType = CurrentAssetType,
+		hide = LayeredSlotSubcategory.hide,
+		deselectable = LayeredSlotSubcategory.deselectable,
+		slotType = SlotTypeModule.LayeredSlot,
+		layerLimit = LayeredSlotSubcategory.layerLimit,
+		layerIndex = LayerIndex
 	}
 end
 
-local _ = function(value)
-	local value_1 = value[tostring(Enum.AvatarAssetType.DynamicHead.Value)]
+local _ = function(p1) --[[ Line: 50 | Named "getHeadShapeFromEquippedAssets" ]]
+	local v1 = p1[tostring(Enum.AvatarAssetType.DynamicHead.Value)]
 	
-	if value_1 then
-		for i, v in value_1 do
-			return if v.headShape == "Default" then nil else v.headShape
+	if v1 then
+		for _, value in v1 do
+			return if value.headShape == "Default" then nil else value.headShape
 		end
 	end
 	return nil
 end
 
-local function getClassicFaceOrDynamicHeadThumbnail(p1, p2)
-	local var1 = p1[if p2 then tostring(Enum.AvatarAssetType.DynamicHead.Value) else tostring(Enum.AvatarAssetType.Face.Value)]
+local function getClassicFaceOrDynamicHeadThumbnail(p2, p3): string? --[[ Line: 63 ]]
+	local v2 = p2[if p3 then tostring(Enum.AvatarAssetType.DynamicHead.Value) else tostring(Enum.AvatarAssetType.Face.Value)]
 	
-	if var1 then
-		for i, v in var1 do
+	if v2 then
+		for i, _ in v2 do
 			return `rbxthumb://type=Asset&id={i}&w=150&h=150`
 		end
 	end
 	return nil
 end
 
-return function(p3, p4)
-	-- upvalues: slotTypeModule (ref), fFlagEnableSlotsHeadShapeThumbnail (ref), getClassicFaceOrDynamicHeadThumbnail (ref)
-	local var2, i_3
-	local t = {}
-	local var3 = false
-	local var4 = false
+return function(List, p4) --[[ Line: 80 | Named "buildSlots" ]]
+	-- upvalues: SlotTypeModule (copy), FFlagEnableSlotsHeadShapeThumbnail (copy), getClassicFaceOrDynamicHeadThumbnail (copy)
+	local List1 = {}
+	local Flag = false
+	local Flag1 = false
+	local Flag3 = nil
 	
-	for i, v in p3 do
-		local v_2
-		if v.slotType ~= slotTypeModule.LayeredSlot then
-			local assetTypes = v.assetTypes
-			local var5 = false
-			
-			for i_1, v_1 in assetTypes do
-				local value = p4[tostring(v_1.Value)]
-				local i_1 = value ~= nil and next(value)
+	for _, LayeredSlotSubcategory in List do
+		if LayeredSlotSubcategory.slotType == SlotTypeModule.LayeredSlot then
+			for i = 0, LayeredSlotSubcategory.layerLimit - 1 do
+				Flag3 = false
 				
-				if i_1 then
-					if v_1 == Enum.AvatarAssetType.Face then
-						var4 = true
-					elseif v_1 == Enum.AvatarAssetType.DynamicHead then
-						var3 = true
-					end
-					for i_5, v_4 in value do
-						local var6 = `rbxthumb://type=Asset&id={i_5}&w=150&h=150`
-						
-						if var3 and fFlagEnableSlotsHeadShapeThumbnail then
-							v_2 = p4[tostring(Enum.AvatarAssetType.DynamicHead.Value)]
-							
-							if not v_2 then break end
-							for i_6, v_5 in v_2 do
-								i_3 = if v_5.headShape == "Default" then nil else v_5.headShape
-							end
-							i_3 = nil
-							if i_3 then
-								var6 = `rbxthumb://type=Asset&id={i_5}&headshape={i_3}&w=150&h=150`
+				for _, assetType in LayeredSlotSubcategory.assetTypes do
+					local v3 = p4[tostring(assetType.Value)]
+					
+					if v3 ~= nil and next(v3) then
+						for i1, value in v3 do
+							if value.order == i then
+								table.insert(List1, {
+									nameTranslationKey = LayeredSlotSubcategory.nameTranslationKey,
+									icon = LayeredSlotSubcategory.icon,
+									thumbnailUrl = `rbxthumb://type=Asset&id={i1}&w=150&h=150`,
+									assetTypes = LayeredSlotSubcategory.assetTypes,
+									editorSubcategory = LayeredSlotSubcategory.editorSubcategory,
+									eligibleSubcategories = LayeredSlotSubcategory.eligibleSubcategories,
+									currentAssetType = assetType,
+									hide = LayeredSlotSubcategory.hide,
+									deselectable = LayeredSlotSubcategory.deselectable,
+									slotType = SlotTypeModule.LayeredSlot,
+									layerLimit = LayeredSlotSubcategory.layerLimit,
+									layerIndex = i
+								})
+								Flag3 = true
+								break
 							end
 						end
-						table.insert(t, {
-							nameTranslationKey = v.nameTranslationKey,
-							icon = v.icon,
-							thumbnailUrl = var6,
-							assetTypes = v.assetTypes,
-							editorSubcategory = v.editorSubcategory,
-							eligibleSubcategories = v.eligibleSubcategories,
-							currentAssetType = v_1,
-							hide = v.hide,
-							deselectable = v.deselectable
-						})
-						var5 = true
 					end
 				end
-			end
-			for i_1, v_1 in assetTypes do
-				if v_1 == Enum.AvatarAssetType.Face and (var3 or var4) then
-					table.insert(t, {
-						nameTranslationKey = v.nameTranslationKey,
-						icon = v.icon,
-						thumbnailUrl = getClassicFaceOrDynamicHeadThumbnail(p4, var3),
-						assetTypes = v.assetTypes,
-						editorSubcategory = v.editorSubcategory,
-						eligibleSubcategories = v.eligibleSubcategories,
-						currentAssetType = v_1,
-						hide = v.hide,
-						deselectable = v.deselectable
+				if not Flag3 then
+					table.insert(List1, {
+						thumbnailUrl = nil,
+						currentAssetType = nil,
+						nameTranslationKey = LayeredSlotSubcategory.nameTranslationKey,
+						icon = LayeredSlotSubcategory.icon,
+						assetTypes = LayeredSlotSubcategory.assetTypes,
+						editorSubcategory = LayeredSlotSubcategory.editorSubcategory,
+						eligibleSubcategories = LayeredSlotSubcategory.eligibleSubcategories,
+						hide = LayeredSlotSubcategory.hide,
+						deselectable = LayeredSlotSubcategory.deselectable,
+						slotType = SlotTypeModule.LayeredSlot,
+						layerLimit = LayeredSlotSubcategory.layerLimit,
+						layerIndex = i
 					})
-					var5 = true
 				end
 			end
-			if not var5 then
-				table.insert(t, {
-					thumbnailUrl = nil,
-					currentAssetType = nil,
-					nameTranslationKey = v.nameTranslationKey,
-					icon = v.icon,
-					assetTypes = v.assetTypes,
-					editorSubcategory = v.editorSubcategory,
-					eligibleSubcategories = v.eligibleSubcategories,
-					hide = v.hide,
-					deselectable = v.deselectable
-				})
-			end
-		end
-		for i_2 = 0, v.layerLimit - 1 do
-			var2 = false
+		else
+			local AssetTypes = LayeredSlotSubcategory.assetTypes
+			local Flag2 = false
 			
-			for i_1, v_1 in v.assetTypes do
-				local value = p4[tostring(v_1.Value)]
+			for _, assetType1 in AssetTypes do
+				local v4 = p4[tostring(assetType1.Value)]
 				
-				if value ~= nil and next(value) then
-					for i_3, v_2 in value do
-						if v_2.order == i_2 then
-							table.insert(t, {
-								nameTranslationKey = v.nameTranslationKey,
-								icon = v.icon,
-								thumbnailUrl = `rbxthumb://type=Asset&id={i_3}&w=150&h=150`,
-								assetTypes = v.assetTypes,
-								editorSubcategory = v.editorSubcategory,
-								eligibleSubcategories = v.eligibleSubcategories,
-								currentAssetType = v_1,
-								hide = v.hide,
-								deselectable = v.deselectable,
-								slotType = slotTypeModule.LayeredSlot,
-								layerLimit = v.layerLimit,
-								layerIndex = i_2
-							})
-							var2 = true
-							continue
+				if v4 ~= nil and next(v4) then
+					if assetType1 == Enum.AvatarAssetType.Face then
+						Flag1 = true
+						continue
+					end
+					if assetType1 == Enum.AvatarAssetType.DynamicHead then
+						Flag = true
+					end
+					for i2, _ in v4 do
+						local RbxthumbName: string = `rbxthumb://type=Asset&id={i2}&w=150&h=150`
+						
+						if Flag and FFlagEnableSlotsHeadShapeThumbnail then
+							local v5 = p4[tostring(Enum.AvatarAssetType.DynamicHead.Value)]
+							local HeadShape = nil
+							repeat
+								if not v5 then break end
+								for _, value1 in v5 do
+									HeadShape = if value1.headShape == "Default" then nil else value1.headShape
+									break
+								end
+								HeadShape = nil
+							until true
+							if HeadShape then
+								RbxthumbName = `rbxthumb://type=Asset&id={i2}&headshape={HeadShape}&w=150&h=150`
+							end
 						end
+						table.insert(List1, {
+							nameTranslationKey = LayeredSlotSubcategory.nameTranslationKey,
+							icon = LayeredSlotSubcategory.icon,
+							thumbnailUrl = RbxthumbName,
+							assetTypes = LayeredSlotSubcategory.assetTypes,
+							editorSubcategory = LayeredSlotSubcategory.editorSubcategory,
+							eligibleSubcategories = LayeredSlotSubcategory.eligibleSubcategories,
+							currentAssetType = assetType1,
+							hide = LayeredSlotSubcategory.hide,
+							deselectable = LayeredSlotSubcategory.deselectable
+						})
+						Flag2 = true
 					end
 				end
 			end
-			if not var2 then
-				table.insert(t, {
+			for _, assetType2 in AssetTypes do
+				if assetType2 == Enum.AvatarAssetType.Face and (Flag or Flag1) then
+					table.insert(List1, {
+						nameTranslationKey = LayeredSlotSubcategory.nameTranslationKey,
+						icon = LayeredSlotSubcategory.icon,
+						thumbnailUrl = getClassicFaceOrDynamicHeadThumbnail(p4, Flag),
+						assetTypes = LayeredSlotSubcategory.assetTypes,
+						editorSubcategory = LayeredSlotSubcategory.editorSubcategory,
+						eligibleSubcategories = LayeredSlotSubcategory.eligibleSubcategories,
+						currentAssetType = assetType2,
+						hide = LayeredSlotSubcategory.hide,
+						deselectable = LayeredSlotSubcategory.deselectable
+					})
+					Flag2 = true
+				end
+			end
+			if not Flag2 then
+				table.insert(List1, {
 					thumbnailUrl = nil,
 					currentAssetType = nil,
-					nameTranslationKey = v.nameTranslationKey,
-					icon = v.icon,
-					assetTypes = v.assetTypes,
-					editorSubcategory = v.editorSubcategory,
-					eligibleSubcategories = v.eligibleSubcategories,
-					hide = v.hide,
-					deselectable = v.deselectable,
-					slotType = slotTypeModule.LayeredSlot,
-					layerLimit = v.layerLimit,
-					layerIndex = i_2
+					nameTranslationKey = LayeredSlotSubcategory.nameTranslationKey,
+					icon = LayeredSlotSubcategory.icon,
+					assetTypes = LayeredSlotSubcategory.assetTypes,
+					editorSubcategory = LayeredSlotSubcategory.editorSubcategory,
+					eligibleSubcategories = LayeredSlotSubcategory.eligibleSubcategories,
+					hide = LayeredSlotSubcategory.hide,
+					deselectable = LayeredSlotSubcategory.deselectable
 				})
 			end
 		end
 	end
-	return t
+	return List1
 end

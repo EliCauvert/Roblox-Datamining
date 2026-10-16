@@ -1,60 +1,61 @@
-﻿local parent = script:FindFirstAncestor("GenericAbuseReporting").Parent
-local tModule = require(parent.t)
-local fFlagAddThumbnailSelectorReport = require(parent.SharedFlags).FFlagAddThumbnailSelectorReport
-local t = {
-	componentType = tModule.literal("dropdown"),
-	isOptional = tModule.boolean,
-	formDataKey = tModule.string,
-	requirementMessage = tModule.string,
-	dropdown = tModule.interface({
-		prompt = tModule.string,
-		placeholder = tModule.string,
-		items = tModule.array(tModule.interface({
-			label = tModule.string,
-			formDataValue = tModule.union(tModule.number, tModule.string)
+﻿local Parent = script:FindFirstAncestor("GenericAbuseReporting").Parent
+local TModule = require(Parent.t)
+local FFlagAddThumbnailSelectorReport = require(Parent.SharedFlags).FFlagAddThumbnailSelectorReport
+local config = {
+	componentType = TModule.literal("dropdown"),
+	isOptional = TModule.boolean,
+	formDataKey = TModule.string,
+	requirementMessage = TModule.string,
+	dropdown = TModule.interface({
+		prompt = TModule.string,
+		placeholder = TModule.string,
+		items = TModule.array(TModule.interface({
+			label = TModule.string,
+			formDataValue = TModule.union(TModule.number, TModule.string)
 		}))
 	})
 }
-local t_1 = {
-	componentType = tModule.literal("freeComment"),
-	isOptional = tModule.boolean,
-	formDataKey = tModule.string,
-	requirementMessage = tModule.string,
-	freeComment = tModule.interface({ prompt = tModule.string, placeholder = tModule.string })
+local config1 = {
+	componentType = TModule.literal("freeComment"),
+	isOptional = TModule.boolean,
+	formDataKey = TModule.string,
+	requirementMessage = TModule.string,
+	freeComment = TModule.interface({ prompt = TModule.string, placeholder = TModule.string })
 }
-local t_2 = {
-	componentType = tModule.literal("paragraph"),
-	isOptional = tModule.boolean,
-	formDataKey = tModule.optional(tModule.string),
-	paragraph = tModule.interface({
-		text = tModule.string,
-		links = tModule.optional(tModule.map(tModule.string, tModule.interface({
-			label = tModule.string,
-			linkButtonLabel = tModule.string,
-			url = tModule.string
+local config2 = {
+	componentType = TModule.literal("paragraph"),
+	isOptional = TModule.boolean,
+	formDataKey = TModule.optional(TModule.string),
+	paragraph = TModule.interface({
+		text = TModule.string,
+		links = TModule.optional(TModule.map(TModule.string, TModule.interface({
+			label = TModule.string,
+			linkButtonLabel = TModule.string,
+			url = TModule.string
 		})))
 	})
 }
-local t_3 = {
-	componentType = tModule.literal("link"),
-	isOptional = tModule.boolean,
-	formDataKey = tModule.optional(tModule.string),
-	link = tModule.interface({
-		label = tModule.string,
-		linkButtonLabel = tModule.string,
-		url = tModule.string
+local config3 = {
+	componentType = TModule.literal("selector"),
+	isOptional = TModule.boolean,
+	formDataKey = TModule.string,
+	requirementMessage = TModule.string,
+	selector = TModule.interface({ prompt = TModule.string })
+}
+local config4 = {
+	componentType = TModule.literal("link"),
+	isOptional = TModule.boolean,
+	formDataKey = TModule.optional(TModule.string),
+	link = TModule.interface({
+		label = TModule.string,
+		linkButtonLabel = TModule.string,
+		url = TModule.string
 	})
 }
-local var1 = tModule.union(tModule.interface({
-	type = tModule.literal("configurableComponentList"),
-	configurableComponentList = tModule.interface({
-		components = if fFlagAddThumbnailSelectorReport then tModule.array(tModule.union(tModule.interface(t), tModule.interface(t_1), tModule.interface(t_2), tModule.interface({
-			componentType = tModule.literal("selector"),
-			isOptional = tModule.boolean,
-			formDataKey = tModule.string,
-			requirementMessage = tModule.string,
-			selector = tModule.interface({ prompt = tModule.string })
-		}), tModule.interface(t_3))) else tModule.array(tModule.union(tModule.interface(t), tModule.interface(t_1), tModule.interface(t_2), tModule.interface(t_3)))
+local UnionResult = TModule.union(TModule.interface({
+	type = TModule.literal("configurableComponentList"),
+	configurableComponentList = TModule.interface({
+		components = if FFlagAddThumbnailSelectorReport then TModule.array(TModule.union(TModule.interface(config), TModule.interface(config1), TModule.interface(config2), TModule.interface(config3), TModule.interface(config4))) else TModule.array(TModule.union(TModule.interface(config), TModule.interface(config1), TModule.interface(config2), TModule.interface(config4)))
 	})
 }))
 
@@ -65,20 +66,20 @@ return {
 		Error = "Error"
 	},
 	BeduiDataTypeInterface = {
-		rootStepId = tModule.number,
-		nodes = tModule.array(tModule.interface({
-			title = tModule.string,
-			subtitle = tModule.string,
-			actionInfo = tModule.interface({
-				actionLabel = tModule.optional(tModule.string),
-				predefinedNextStepId = tModule.number,
-				shouldSubmit = tModule.optional(tModule.boolean)
+		rootStepId = TModule.number,
+		nodes = TModule.array(TModule.interface({
+			title = TModule.string,
+			subtitle = TModule.string,
+			actionInfo = TModule.interface({
+				actionLabel = TModule.optional(TModule.string),
+				predefinedNextStepId = TModule.number,
+				shouldSubmit = TModule.optional(TModule.boolean)
 			}),
-			stepId = tModule.number,
-			internalStepName = tModule.string,
-			isCompletionStep = tModule.optional(tModule.boolean),
-			innerContentConfig = tModule.optional(var1),
-			footerContentConfig = tModule.optional(var1)
+			stepId = TModule.number,
+			internalStepName = TModule.string,
+			isCompletionStep = TModule.optional(TModule.boolean),
+			innerContentConfig = TModule.optional(UnionResult),
+			footerContentConfig = TModule.optional(UnionResult)
 		}))
 	},
 	ComponentType = {
@@ -86,7 +87,7 @@ return {
 		FreeComment = "freeComment",
 		Paragraph = "paragraph",
 		WebViewLink = "link",
-		Selector = if fFlagAddThumbnailSelectorReport then "selector" else nil
+		Selector = if FFlagAddThumbnailSelectorReport then "selector" else nil
 	},
 	ContentConfigType = {
 		InnerContentConfig = "innerContentConfig",

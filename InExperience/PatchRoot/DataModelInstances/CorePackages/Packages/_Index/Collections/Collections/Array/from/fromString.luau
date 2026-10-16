@@ -1,23 +1,22 @@
 ﻿local _ = require(script.Parent.Parent.Parent.Parent.ES7Types)
 
-return function(p1, p2, p3)
-	local _ = {}
-	local p0Count = #p1
-	local list = table.create(p0Count)
+return function(Text: string, Callback, p1) --[[ Line: 25 ]]
+	local CountText = #Text
+	local Buffer = table.create(CountText)
 	
-	if p2 then
-		for i = 1, p0Count do
-			if p3 == nil then
-				list[i] = p2(string.sub(p1, i, i), i)
+	if Callback then
+		for i = 1, CountText do
+			if p1 == nil then
+				Buffer[i] = Callback(string.sub(Text, i, i), i)
 			else
-				list[i] = p2(p3, string.sub(p1, i, i), i)
+				Buffer[i] = Callback(p1, string.sub(Text, i, i), i)
 			end
 		end
-		return list
+		return Buffer
 	else
-		for i_1 = 1, p0Count do
-			list[i_1] = string.sub(p1, i_1, i_1)
+		for i1 = 1, CountText do
+			Buffer[i1] = string.sub(Text, i1, i1)
 		end
-		return list
+		return Buffer
 	end
 end

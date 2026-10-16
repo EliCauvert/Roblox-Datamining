@@ -1,22 +1,22 @@
-﻿return function(p1)
-	return function(p2)
-		-- upvalues: p1 (ref)
-		local var1 = Instance.new(p1)
-		local var2 = nil
+﻿return function(p1) --[[ Line: 21 | Named "create" ]]
+	return function(List) --[[ Line: 22 ]]
+		-- upvalues: p1 (copy)
+		local NewInstance = Instance.new(p1)
+		local Parent = nil
 		
-		for i, v in pairs(p2) do
-			if type(i) == "number" and typeof(v) == "Instance" then
-				v.Parent = var1
+		for i, value in pairs(List) do
+			if type(i) == "number" and typeof(value) == "Instance" then
+				value.Parent = NewInstance
 			elseif type(i) == "string" then
 				if i == "Parent" then
-					var2 = v
+					Parent = value
 				else
-					var1[i] = v
+					NewInstance[i] = value
 				end
 			end
 		end
-		var1.Parent = var2
+		NewInstance.Parent = Parent
 		
-		return var1
+		return NewInstance
 	end
 end

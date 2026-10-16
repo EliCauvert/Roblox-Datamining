@@ -1,38 +1,37 @@
-﻿local isVRAppBuild = require(script:FindFirstAncestor("SocialLuaAnalytics").Parent.AppCommonLib).IsVRAppBuild
-local getUserInputServiceModule = require(script.Parent.getUserInputService)
-local platformBucketsModule = require(script.Parent.Parent.Enums.PlatformBuckets)
-local platformSpecificityModule = require(script.Parent.Parent.Enums.PlatformSpecificity)
-local t = {
-	[Enum.Platform.Windows] = platformBucketsModule.Windows,
-	[Enum.Platform.OSX] = platformBucketsModule.Mac,
-	[Enum.Platform.IOS] = platformBucketsModule.IOS,
-	[Enum.Platform.Android] = platformBucketsModule.Android,
-	[Enum.Platform.UWP] = platformBucketsModule.Windows,
-	[Enum.Platform.XBox360] = platformBucketsModule.XBox,
-	[Enum.Platform.XBoxOne] = platformBucketsModule.XBox,
-	[Enum.Platform.PS3] = platformBucketsModule.Playstation,
-	[Enum.Platform.PS4] = platformBucketsModule.Playstation,
-	[Enum.Platform.PS5] = platformBucketsModule.Playstation,
-	[Enum.Platform.None] = platformBucketsModule.None
+﻿local IsVRAppBuildFunction = require(script:FindFirstAncestor("SocialLuaAnalytics").Parent.AppCommonLib).IsVRAppBuild
+local GetUserInputServiceModule = require(script.Parent.getUserInputService)
+local PlatformBucketsModule = require(script.Parent.Parent.Enums.PlatformBuckets)
+local PlatformSpecificityModule = require(script.Parent.Parent.Enums.PlatformSpecificity)
+local config = {
+	[Enum.Platform.Windows] = PlatformBucketsModule.Windows,
+	[Enum.Platform.OSX] = PlatformBucketsModule.Mac,
+	[Enum.Platform.IOS] = PlatformBucketsModule.IOS,
+	[Enum.Platform.Android] = PlatformBucketsModule.Android,
+	[Enum.Platform.UWP] = PlatformBucketsModule.Windows,
+	[Enum.Platform.XBox360] = PlatformBucketsModule.XBox,
+	[Enum.Platform.XBoxOne] = PlatformBucketsModule.XBox,
+	[Enum.Platform.PS3] = PlatformBucketsModule.Playstation,
+	[Enum.Platform.PS4] = PlatformBucketsModule.Playstation,
+	[Enum.Platform.PS5] = PlatformBucketsModule.Playstation,
+	[Enum.Platform.None] = PlatformBucketsModule.None
 }
 
-return function(p1)
-	-- upvalues: getUserInputServiceModule (ref), platformSpecificityModule (ref), isVRAppBuild (ref), platformBucketsModule (ref), t (ref)
-	local var1 = getUserInputServiceModule()
-	local var2 = nil
-	pcall(function()
-		-- upvalues: var2 (write), var1 (ref)
-		var2 = var1:GetPlatform() or Enum.Platform.None
+return function(All) --[[ Line: 24 ]]
+	-- upvalues: GetUserInputServiceModule (copy), PlatformSpecificityModule (copy), IsVRAppBuildFunction (copy), PlatformBucketsModule (copy), config (copy)
+	local UserInputServiceModule = GetUserInputServiceModule()
+	local Platform = nil
+	pcall(function() --[[ Line: 29 ]]
+		-- upvalues: Platform (ref), UserInputServiceModule (copy)
+		Platform = UserInputServiceModule:GetPlatform() or Enum.Platform.None
 	end)
 	
-	if p1 == platformSpecificityModule.All then
-		if isVRAppBuild() then
-			return platformBucketsModule.Quest
-		end
-		local var3 = tostring(var2):match(".*%.(.*)")
-		
-		return var3 or platformBucketsModule.None
+	if All ~= PlatformSpecificityModule.All then
+		return if All == PlatformSpecificityModule.BucketsOnly then if IsVRAppBuildFunction() then PlatformBucketsModule.Quest else config[Platform] or PlatformBucketsModule.None else ""
+	elseif IsVRAppBuildFunction() then
+		return PlatformBucketsModule.Quest
 	else
-		return if p1 == platformSpecificityModule.BucketsOnly then if isVRAppBuild() then platformBucketsModule.Quest else t[var2] or platformBucketsModule.None else ""
+		local v1 = tostring(Platform):match(".*%.(.*)")
+		
+		return if v1 then v1 else PlatformBucketsModule.None
 	end
 end

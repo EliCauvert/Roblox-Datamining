@@ -1,63 +1,64 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local _ = require(appChat.Models.ConversationChannels)
-local reactModule = require(parent.React)
-local cryoModule = require(parent.Cryo)
-local list = require(parent.Cryo).List
-local networkingFriendsModule = require(appChat.Http.NetworkingFriends)
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local useLocalUserId = require(parent.RobloxAppHooks).useLocalUserId
-local luauPolyfillModule = require(parent.LuauPolyfill)
-local clearTimeout = luauPolyfillModule.clearTimeout
-local setTimeout = luauPolyfillModule.setTimeout
-local isUserInConversationModule = require(script.Parent.isUserInConversation)
-local loggerModule = require(script.Parent.Parent.Logger)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local _ = require(AppChat.Models.ConversationChannels)
+local ReactModule = require(Parent.React)
+local CryoModule = require(Parent.Cryo)
+local List = require(Parent.Cryo).List
+local NetworkingFriendsModule = require(AppChat.Http.NetworkingFriends)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseLocalUserIdFunction = require(Parent.RobloxAppHooks).useLocalUserId
+local LuauPolyfillModule = require(Parent.LuauPolyfill)
+local ClearTimeoutFunction = LuauPolyfillModule.clearTimeout
+local SetTimeoutFunction = LuauPolyfillModule.setTimeout
+local IsUserInConversationModule = require(script.Parent.isUserInConversation)
+local LoggerModule = require(script.Parent.Parent.Logger)
 
-return function(p1)
-	-- upvalues: useDispatch (ref), useLocalUserId (ref), reactModule (ref), setTimeout (ref), networkingFriendsModule (ref), list (ref), cryoModule (ref), isUserInConversationModule (ref), loggerModule (ref), clearTimeout (ref)
-	local var1 = useDispatch()
-	local var2 = useLocalUserId()
-	local var3 = reactModule.useRef(setTimeout(function() end, 250))
-	local var4 = reactModule.useRef("")
-	local var5, var6 = reactModule.useState({})
-	local var7 = reactModule.useCallback(function(p2)
-		-- upvalues: var1 (ref), networkingFriendsModule (copy), var2 (ref), list (copy), p1 (ref), var6 (ref), cryoModule (copy), isUserInConversationModule (copy), loggerModule (copy)
-		var1(networkingFriendsModule.SearchFriendsByQuery.API(var2, { limit = 20, query = p2 })):andThen(function(p3)
-			-- upvalues: list (copy), p1 (copy), var6 (copy), cryoModule (copy), isUserInConversationModule (copy)
-			local p4 = p1 or { participants = {} }
-			var6(cryoModule.List.filter(list.map(p3.responseBody.PageItems, function(p5)
-				return tostring(p5.id)
-			end), function(p5)
-				-- upvalues: isUserInConversationModule (copy), p4 (ref)
-				return not isUserInConversationModule(p5, p4)
+return function(p1) --[[ Line: 22 | Named "useDebouncedUserSearch" ]]
+	-- upvalues: UseDispatchFunction (copy), UseLocalUserIdFunction (copy), ReactModule (copy), SetTimeoutFunction (copy), NetworkingFriendsModule (copy), List (copy), CryoModule (copy), IsUserInConversationModule (copy), LoggerModule (copy), ClearTimeoutFunction (copy)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseLocalUserIdResult = UseLocalUserIdFunction()
+	local UseRefResult = ReactModule.useRef(SetTimeoutFunction(function() --[[ Line: 25 ]] end, 250))
+	local UseRefResult1 = ReactModule.useRef("")
+	local UseStateResult, UseStateResult2 = ReactModule.useState({})
+	local UseResult = ReactModule.useCallback(function(Query) --[[ Line: 29 ]]
+		-- upvalues: UseDispatchResult (copy), NetworkingFriendsModule (upval), UseLocalUserIdResult (copy), List (upval), p1 (copy), UseStateResult2 (copy), CryoModule (upval), IsUserInConversationModule (upval), LoggerModule (upval)
+		UseDispatchResult(NetworkingFriendsModule.SearchFriendsByQuery.API(UseLocalUserIdResult, { limit = 20, query = Query })):andThen(function(Result) --[[ Line: 34 ]]
+			-- upvalues: List (upval), p1 (upval), UseStateResult2 (upval), CryoModule (upval), IsUserInConversationModule (upval)
+			local P0 = p1 or { participants = {} }
+			UseStateResult2(CryoModule.List.filter(List.map(Result.responseBody.PageItems, function(p2): string --[[ Line: 35 ]]
+				return (tostring(p2.id))
+			end), function(p2): boolean --[[ Line: 39 ]]
+				-- upvalues: IsUserInConversationModule (upval), P0 (copy)
+				return not IsUserInConversationModule(p2, P0)
 			end))
-		end):catch(function(p3)
-			-- upvalues: loggerModule (copy), var6 (copy)
-			loggerModule:error("Error searching friends:", p3)
-			var6({})
+		end):catch(function(Err) --[[ Line: 43 ]]
+			-- upvalues: LoggerModule (upval), UseStateResult2 (upval)
+			LoggerModule:error("Error searching friends:", Err)
+			UseStateResult2({})
 		end)
-	end, { var1, var2, p1 })
-	local var8 = reactModule.useCallback(function(p2)
-		-- upvalues: clearTimeout (copy), var3 (ref), var4 (ref), setTimeout (copy), var7 (ref), var6 (ref)
-		clearTimeout(var3.current)
-		var4.current = p2
-		var3.current = setTimeout(function()
-			-- upvalues: p2 (ref), var7 (copy), var6 (copy)
-			if p2 == "" then
-				var6({})
+	end, { UseDispatchResult, UseLocalUserIdResult, p1 })
+	local UseResult1 = ReactModule.useCallback(function(Current) --[[ Line: 49 ]]
+		-- upvalues: ClearTimeoutFunction (upval), UseRefResult (copy), UseRefResult1 (copy), SetTimeoutFunction (upval), UseResult (copy), UseStateResult2 (copy)
+		ClearTimeoutFunction(UseRefResult.current)
+		UseRefResult1.current = Current
+		UseRefResult.current = SetTimeoutFunction(function() --[[ Line: 52 ]]
+			-- upvalues: Current (copy), UseResult (upval), UseStateResult2 (upval)
+			if Current == "" then
+				UseStateResult2({})
 				
 				return
+			else
+				UseResult(Current)
 			end
-			var7(p2)
 		end, 250)
-	end, { var7 })
-	reactModule.useEffect(function()
-		-- upvalues: clearTimeout (copy), var3 (ref)
-		return function()
-			-- upvalues: clearTimeout (copy), var3 (copy)
-			clearTimeout(var3.current)
+	end, { UseResult })
+	ReactModule.useEffect(function() --[[ Line: 62 ]]
+		-- upvalues: ClearTimeoutFunction (upval), UseRefResult (copy)
+		return function() --[[ Line: 63 ]]
+			-- upvalues: ClearTimeoutFunction (upval), UseRefResult (upval)
+			ClearTimeoutFunction(UseRefResult.current)
 		end
 	end, {})
 	
-	return var5, var8, var4.current
+	return UseStateResult, UseResult1, UseRefResult1.current
 end

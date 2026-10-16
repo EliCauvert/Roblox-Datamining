@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.FlyoutSidePanel.FlyoutSidePanel)
+﻿return (require(script.Parent.Parent.Parent._Index.FlyoutSidePanel.FlyoutSidePanel))

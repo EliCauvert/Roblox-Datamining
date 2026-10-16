@@ -1,23 +1,23 @@
-﻿local reactModule = require(script:FindFirstAncestor("AmpUpsell").Parent.React)
-local userInputService = game:GetService("UserInputService")
-local useEffect = reactModule.useEffect
-local useState = reactModule.useState
+﻿local ReactModule = require(script:FindFirstAncestor("AmpUpsell").Parent.React)
+local UserInputService = game:GetService("UserInputService")
+local UseEffectFunction = ReactModule.useEffect
+local UseStateFunction = ReactModule.useState
 
-return function()
-	-- upvalues: useState (ref), useEffect (ref), userInputService (ref)
-	local var1, var2 = useState(0)
-	useEffect(function()
-		-- upvalues: userInputService (copy), var2 (ref)
-		local var3 = userInputService:GetPropertyChangedSignal("OnScreenKeyboardVisible"):Connect(function()
-			-- upvalues: var2 (copy), userInputService (copy)
-			var2(if userInputService.OnScreenKeyboardVisible then userInputService.OnScreenKeyboardSize.Y else 0)
+return function() --[[ Line: 9 ]]
+	-- upvalues: UseStateFunction (copy), UseEffectFunction (copy), UserInputService (copy)
+	local UseStateResult, UseStateResult2 = UseStateFunction(0)
+	UseEffectFunction(function() --[[ Line: 12 ]]
+		-- upvalues: UserInputService (upval), UseStateResult2 (copy)
+		local Connection = UserInputService:GetPropertyChangedSignal("OnScreenKeyboardVisible"):Connect(function() --[[ Line: 14 ]]
+			-- upvalues: UseStateResult2 (upval), UserInputService (upval)
+			UseStateResult2(UserInputService.OnScreenKeyboardVisible and UserInputService.OnScreenKeyboardSize.Y or 0)
 		end)
 		
-		return function()
-			-- upvalues: var3 (ref)
-			var3:Disconnect()
+		return function() --[[ Line: 19 ]]
+			-- upvalues: Connection (copy)
+			Connection:Disconnect()
 		end
 	end, {})
 	
-	return var1
+	return UseStateResult
 end

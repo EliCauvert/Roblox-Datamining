@@ -1,32 +1,32 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local argCheckModule = require(parent.ArgCheck)
-local cryoModule = require(parent.Cryo)
-local roactModule = require(parent.Roact)
-local roactNavigationModule = require(parent.RoactNavigation)
-local signalsReactModule = require(parent.SignalsReact)
-local createChatTopBarModule = require(appChat.createChatTopBar)
-local getTopBarStoreModule = require(appChat.Stores.GetTopBarStore)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local ArgCheckModule = require(Parent.ArgCheck)
+local CryoModule = require(Parent.Cryo)
+local RoactModule = require(Parent.Roact)
+local RoactNavigationModule = require(Parent.RoactNavigation)
+local SignalsReactModule = require(Parent.SignalsReact)
+local CreateChatTopBarModule = require(AppChat.createChatTopBar)
+local GetTopBarStoreModule = require(AppChat.Stores.GetTopBarStore)
 
-local function TopBarFromStore(p1)
-	-- upvalues: roactNavigationModule (ref), getTopBarStoreModule (ref), signalsReactModule (ref), argCheckModule (ref), cryoModule (ref), createChatTopBarModule (ref)
-	local navigation = p1.navigation
-	local activeChildNavigationOptions = roactNavigationModule.getActiveChildNavigationOptions(navigation)
-	local state = navigation.state
-	local index = state.routes[state.index]
-	local var1 = signalsReactModule.useSignalState(getTopBarStoreModule(false).getScreenTopBar(index.routeName))
-	argCheckModule.isType(var1, "table", "screenTopBar")
-	local var2 = var1
-	local conversationId = index.params and index.params.conversationId
-	local conversationId_1 = var1.conversationId
+local function TopBarFromStore(p1) --[[ Line: 61 ]]
+	-- upvalues: RoactNavigationModule (copy), GetTopBarStoreModule (copy), SignalsReactModule (copy), ArgCheckModule (copy), CryoModule (copy), CreateChatTopBarModule (copy)
+	local Navigation = p1.navigation
+	local ActiveChildNavigationOptions = RoactNavigationModule.getActiveChildNavigationOptions(Navigation)
+	local State = Navigation.state
+	local Route = State.routes[State.index]
+	local UseSignalStateResult = SignalsReactModule.useSignalState((GetTopBarStoreModule(false).getScreenTopBar(Route.routeName)))
+	ArgCheckModule.isType(UseSignalStateResult, "table", "screenTopBar")
+	local UnionResult = UseSignalStateResult
+	local ConversationId = Route.params and Route.params.conversationId
+	local ConversationId1 = UseSignalStateResult.conversationId
 	
-	if conversationId and conversationId_1 and conversationId ~= conversationId_1 then
-		var2 = cryoModule.Dictionary.union(var1, { headerText = { raw = "", shouldLocalize = false } })
+	if ConversationId and ConversationId1 and ConversationId ~= ConversationId1 then
+		UnionResult = CryoModule.Dictionary.union(UseSignalStateResult, { headerText = { raw = "", shouldLocalize = false } })
 	end
-	return createChatTopBarModule(cryoModule.Dictionary.join(var2, activeChildNavigationOptions, { navigation = navigation }))
+	return CreateChatTopBarModule(CryoModule.Dictionary.join(UnionResult, ActiveChildNavigationOptions, { navigation = Navigation }))
 end
 
-return function(p1)
-	-- upvalues: roactModule (ref), TopBarFromStore (ref)
-	return roactModule.createElement(TopBarFromStore, { navigation = p1 })
+return function(Navigation) --[[ Line: 92 ]]
+	-- upvalues: RoactModule (copy), TopBarFromStore (copy)
+	return RoactModule.createElement(TopBarFromStore, { navigation = Navigation })
 end

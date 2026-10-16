@@ -1,137 +1,142 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local contextActionService = game:GetService("ContextActionService")
-local userInputService = game:GetService("UserInputService")
-local userGameSettingsService = UserSettings():GetService("UserGameSettings")
-local devConsoleMasterModule = require(coreGuiService.RobloxGui.Modules.DevConsoleMaster)
-local parent = script.Parent.Parent
-local openSystemMenuModule = require(parent.Thunks.OpenSystemMenu)
-local closeMenuModule = require(parent.Thunks.CloseMenu)
-local setRespawningModule = require(parent.Actions.SetRespawning)
-local setCurrentPageModule = require(parent.Actions.SetCurrentPage)
-local navigateBackModule = require(parent.Actions.NavigateBack)
-local setCurrentZoneModule = require(parent.Actions.SetCurrentZone)
-local pagesModule = require(parent.Components.Pages)
-local constantsModule = require(parent.Resources.Constants)
+﻿local ContextActionService = game:GetService("ContextActionService")
+local UserInputService = game:GetService("UserInputService")
+local UserGameSettings = UserSettings():GetService("UserGameSettings")
+local DevConsoleMasterModule = require(game:GetService("CoreGui").RobloxGui.Modules.DevConsoleMaster)
+local Parent = script.Parent.Parent
+local OpenSystemMenuModule = require(Parent.Thunks.OpenSystemMenu)
+local CloseMenuModule = require(Parent.Thunks.CloseMenu)
+local SetRespawningModule = require(Parent.Actions.SetRespawning)
+local SetCurrentPageModule = require(Parent.Actions.SetCurrentPage)
+local NavigateBackModule = require(Parent.Actions.NavigateBack)
+local SetCurrentZoneModule = require(Parent.Actions.SetCurrentZone)
+local PagesModule = require(Parent.Components.Pages)
+local ConstantsModule = require(Parent.Resources.Constants)
 
-return function(p1)
-	-- upvalues: pagesModule (ref), setCurrentPageModule (ref), constantsModule (ref), openSystemMenuModule (ref), closeMenuModule (ref), contextActionService (ref), devConsoleMasterModule (ref), userInputService (ref), userGameSettingsService (ref), setRespawningModule (ref), navigateBackModule (ref), setCurrentZoneModule (ref)
-	contextActionService:BindCoreAction("ToggleInGameMenu", function(_, p2, _)
-		-- upvalues: p1 (ref), pagesModule (copy), setCurrentPageModule (copy), constantsModule (copy), openSystemMenuModule (copy), closeMenuModule (copy)
-		if p2 ~= Enum.UserInputState.Begin then return end
-		local state = p1:getState()
-		local isMenuOpen = state.isMenuOpen
-		local menuPage = pagesModule.pagesByKey[state.menuPage]
+return function(p1) --[[ Line: 31 | Named "bindMenuActions" ]]
+	-- upvalues: PagesModule (copy), SetCurrentPageModule (copy), ConstantsModule (copy), OpenSystemMenuModule (copy), CloseMenuModule (copy), ContextActionService (copy), DevConsoleMasterModule (copy), UserInputService (copy), UserGameSettings (copy), SetRespawningModule (copy), NavigateBackModule (copy), SetCurrentZoneModule (copy)
+	ContextActionService:BindCoreAction("ToggleInGameMenu", function(_, UserInputState, _) --[[ Line: 32 | Named "toggleMenuFunc" ]]
+		-- upvalues: p1 (copy), PagesModule (upval), SetCurrentPageModule (upval), ConstantsModule (upval), OpenSystemMenuModule (upval), CloseMenuModule (upval)
+		if UserInputState ~= Enum.UserInputState.Begin then return end
+		local State = p1:getState()
+		local IsMenuOpen = State.isMenuOpen
+		local PagesByKeyEntry = PagesModule.pagesByKey[State.menuPage]
 		
-		if menuPage and menuPage.isModal then
-			p1:dispatch(setCurrentPageModule(constantsModule.defaultPageKey))
-			
-			return
-		elseif not isMenuOpen then
-			p1:dispatch(openSystemMenuModule(constantsModule.AnalyticsMenuOpenTypes.Keyboard))
-			
-			return
-		elseif state.menuPage == constantsModule.InitalPageKey then
-			p1:dispatch(openSystemMenuModule(constantsModule.AnalyticsMenuOpenTypes.Keyboard))
+		if PagesByKeyEntry and PagesByKeyEntry.isModal then
+			p1:dispatch(SetCurrentPageModule(ConstantsModule.defaultPageKey))
 			
 			return
 		end
-		p1:dispatch(closeMenuModule)
+		if not IsMenuOpen then
+			p1:dispatch(OpenSystemMenuModule(ConstantsModule.AnalyticsMenuOpenTypes.Keyboard))
+			
+			return
+		end
+		if State.menuPage == ConstantsModule.InitalPageKey then
+			p1:dispatch(OpenSystemMenuModule(ConstantsModule.AnalyticsMenuOpenTypes.Keyboard))
+			
+			return
+		else
+			p1:dispatch(CloseMenuModule)
+		end
 	end, false, Enum.KeyCode.Escape)
-	contextActionService:BindCoreAction("ToggleDeveloperConsole", function(p2, p3)
-		-- upvalues: devConsoleMasterModule (copy)
+	ContextActionService:BindCoreAction("ToggleDeveloperConsole", function(p2, UserInputState) --[[ Line: 59 ]]
+		-- upvalues: DevConsoleMasterModule (upval)
 		if p2 ~= "ToggleDeveloperConsole" then return end
-		if p3 == Enum.UserInputState.Begin then
-			devConsoleMasterModule:ToggleVisibility()
+		if UserInputState == Enum.UserInputState.Begin then
+			DevConsoleMasterModule:ToggleVisibility()
 			
 			return
 		end
 	end, false, Enum.KeyCode.F9)
-	contextActionService:BindCoreAction("TogglePerformanceStats", function(p2, p3)
-		-- upvalues: userInputService (copy), userGameSettingsService (copy)
-		if not userInputService:IsKeyDown(Enum.KeyCode.LeftControl) and not userInputService:IsKeyDown(Enum.KeyCode.RightControl) then
+	ContextActionService:BindCoreAction("TogglePerformanceStats", function(p2, UserInputState) --[[ Line: 71 ]]
+		-- upvalues: UserInputService (upval), UserGameSettings (upval)
+		if not UserInputService:IsKeyDown(Enum.KeyCode.LeftControl) and not UserInputService:IsKeyDown(Enum.KeyCode.RightControl) then
 			return Enum.ContextActionResult.Pass
 		elseif p2 ~= "TogglePerformanceStats" then return end
-		if p3 == Enum.UserInputState.Begin then
-			userGameSettingsService.PerformanceStatsVisible = not userGameSettingsService.PerformanceStatsVisible
+		if UserInputState == Enum.UserInputState.Begin then
+			UserGameSettings.PerformanceStatsVisible = not UserGameSettings.PerformanceStatsVisible
 			
 			return
 		end
 	end, false, Enum.KeyCode.F7)
-	contextActionService:BindCoreAction("LeaveGame", function(_, p2, _)
-		-- upvalues: p1 (ref), pagesModule (copy), setCurrentPageModule (copy), constantsModule (copy)
-		local state = p1:getState()
+	ContextActionService:BindCoreAction("LeaveGame", function(_, UserInputState, _) --[[ Line: 90 | Named "leaveGameFunc" ]]
+		-- upvalues: p1 (copy), PagesModule (upval), SetCurrentPageModule (upval), ConstantsModule (upval)
+		local State = p1:getState()
 		
-		if p2 ~= Enum.UserInputState.Begin or not state.isMenuOpen then
+		if UserInputState ~= Enum.UserInputState.Begin or not State.isMenuOpen then
 			return Enum.ContextActionResult.Pass
-		elseif pagesModule.pagesByKey[state.menuPage].isModal then
+		elseif PagesModule.pagesByKey[State.menuPage].isModal then
 			return Enum.ContextActionResult.Pass
-		end
-		p1:dispatch(setCurrentPageModule(constantsModule.LeaveGamePromptPageKey))
-		
-		return Enum.ContextActionResult.Sink
-	end, false, Enum.KeyCode.L, Enum.KeyCode.ButtonX)
-	contextActionService:BindCoreAction("ResetCharacter", function(_, p2, _)
-		-- upvalues: p1 (ref), pagesModule (copy), constantsModule (copy), setRespawningModule (copy)
-		local state = p1:getState()
-		
-		if p2 ~= Enum.UserInputState.Begin or not state.isMenuOpen then
-			return Enum.ContextActionResult.Pass
-		elseif not state.respawn.enabled then
-			return Enum.ContextActionResult.Pass
-		elseif pagesModule.pagesByKey[state.menuPage].isModal then
-			return Enum.ContextActionResult.Pass
-		elseif state.menuPage == constantsModule.InitalPageKey then
-			return Enum.ContextActionResult.Pass
-		end
-		p1:dispatch(setRespawningModule(true))
-		
-		return Enum.ContextActionResult.Sink
-	end, false, Enum.KeyCode.R, Enum.KeyCode.ButtonY)
-	contextActionService:BindCoreAction("NavigateBack", function(_, p2, _)
-		-- upvalues: p1 (ref), pagesModule (copy), devConsoleMasterModule (copy), closeMenuModule (copy), navigateBackModule (copy)
-		local state = p1:getState()
-		local parentPage = pagesModule.pagesByKey[state.menuPage].parentPage
-		local visibility = devConsoleMasterModule:GetVisibility()
-		
-		if p2 ~= Enum.UserInputState.End or not state.isMenuOpen and not visibility then
-			return Enum.ContextActionResult.Pass
-		elseif visibility then
-			devConsoleMasterModule:SetVisibility(false)
-		elseif parentPage == nil and not state.respawn.dialogOpen then
-			p1:dispatch(closeMenuModule)
 		else
-			p1:dispatch(navigateBackModule())
+			p1:dispatch(SetCurrentPageModule(ConstantsModule.LeaveGamePromptPageKey))
+			
+			return Enum.ContextActionResult.Sink
+		end
+	end, false, Enum.KeyCode.L, Enum.KeyCode.ButtonX)
+	ContextActionService:BindCoreAction("ResetCharacter", function(_, UserInputState, _) --[[ Line: 107 | Named "resetCharacterFunc" ]]
+		-- upvalues: p1 (copy), PagesModule (upval), ConstantsModule (upval), SetRespawningModule (upval)
+		local State = p1:getState()
+		
+		if UserInputState ~= Enum.UserInputState.Begin or not State.isMenuOpen then
+			return Enum.ContextActionResult.Pass
+		elseif not State.respawn.enabled then
+			return Enum.ContextActionResult.Pass
+		elseif PagesModule.pagesByKey[State.menuPage].isModal then
+			return Enum.ContextActionResult.Pass
+		elseif State.menuPage == ConstantsModule.InitalPageKey then
+			return Enum.ContextActionResult.Pass
+		else
+			p1:dispatch(SetRespawningModule(true))
+			
+			return Enum.ContextActionResult.Sink
+		end
+	end, false, Enum.KeyCode.R, Enum.KeyCode.ButtonY)
+	ContextActionService:BindCoreAction("NavigateBack", function(_, UserInputState, _) --[[ Line: 132 | Named "navigateBackFunc" ]]
+		-- upvalues: p1 (copy), PagesModule (upval), DevConsoleMasterModule (upval), CloseMenuModule (upval), NavigateBackModule (upval)
+		local State = p1:getState()
+		local ParentPage = PagesModule.pagesByKey[State.menuPage].parentPage
+		local Visibility = DevConsoleMasterModule:GetVisibility()
+		
+		if UserInputState ~= Enum.UserInputState.End or not State.isMenuOpen and not Visibility then
+			return Enum.ContextActionResult.Pass
+		end
+		if Visibility then
+			DevConsoleMasterModule:SetVisibility(false)
+		elseif ParentPage == nil and not State.respawn.dialogOpen then
+			p1:dispatch(CloseMenuModule)
+		else
+			p1:dispatch(NavigateBackModule())
 		end
 		return Enum.ContextActionResult.Sink
 	end, false, Enum.KeyCode.ButtonB)
 	
-	local function _()
-		-- upvalues: p1 (ref)
-		local state = p1:getState()
+	local function _(): boolean --[[ Line: 159 | Named "canBumperSwitch" ]]
+		-- upvalues: p1 (copy)
+		local State = p1:getState()
 		
-		return state.menuPage ~= "Controls" and (state.isMenuOpen and (not state.respawn.dialogOpen and (not state.report.dialogOpen and not state.report.reportSentOpen)))
+		return State.menuPage ~= "Controls" and (State.isMenuOpen and (not State.respawn.dialogOpen and (not State.report.dialogOpen and not State.report.reportSentOpen)))
 	end
 	
-	contextActionService:BindCoreAction("LeftBumperSwitchToZone0", function(_, p2, _)
-		-- upvalues: p1 (ref), setCurrentZoneModule (copy)
-		if p2 == Enum.UserInputState.Begin then
-			local state = p1:getState()
+	ContextActionService:BindCoreAction("LeftBumperSwitchToZone0", function(_, UserInputState, _) --[[ Line: 169 ]]
+		-- upvalues: p1 (copy), SetCurrentZoneModule (upval)
+		if UserInputState == Enum.UserInputState.Begin then
+			local State = p1:getState()
 			
-			if state.menuPage ~= "Controls" and (state.isMenuOpen and (not state.respawn.dialogOpen and (not state.report.dialogOpen and not state.report.reportSentOpen))) then
-				p1:dispatch(setCurrentZoneModule(0))
+			if State.menuPage ~= "Controls" and (State.isMenuOpen and (not State.respawn.dialogOpen and (not State.report.dialogOpen and not State.report.reportSentOpen))) then
+				p1:dispatch(SetCurrentZoneModule(0))
 				
 				return Enum.ContextActionResult.Sink
 			end
 		end
 		return Enum.ContextActionResult.Pass
 	end, false, Enum.KeyCode.ButtonL1)
-	contextActionService:BindCoreAction("RightBumperSwitchToZone1", function(_, p2, _)
-		-- upvalues: p1 (ref), setCurrentZoneModule (copy)
-		if p2 == Enum.UserInputState.Begin then
-			local state = p1:getState()
+	ContextActionService:BindCoreAction("RightBumperSwitchToZone1", function(_, UserInputState, _) --[[ Line: 179 ]]
+		-- upvalues: p1 (copy), SetCurrentZoneModule (upval)
+		if UserInputState == Enum.UserInputState.Begin then
+			local State = p1:getState()
 			
-			if state.menuPage ~= "Controls" and (state.isMenuOpen and (not state.respawn.dialogOpen and (not state.report.dialogOpen and not state.report.reportSentOpen))) then
-				p1:dispatch(setCurrentZoneModule(1))
+			if State.menuPage ~= "Controls" and (State.isMenuOpen and (not State.respawn.dialogOpen and (not State.report.dialogOpen and not State.report.reportSentOpen))) then
+				p1:dispatch(SetCurrentZoneModule(1))
 				
 				return Enum.ContextActionResult.Sink
 			end

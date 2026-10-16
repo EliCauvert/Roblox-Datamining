@@ -1,45 +1,45 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local reactModule = require(parent.React)
-local useNavigation = require(parent.Navigation).useNavigation
-local squadExternalContractContext = require(parent.SquadsCore.SquadExternalContractProvider).SquadExternalContractContext
-local eventNamesModule = require(parent.SquadsCore.EventNames)
-local useCurrentSquadId = require(parent.SquadsCore.Hooks).useCurrentSquadId
-local squadButtonClickIntentionEnum = require(parent.Squads.Enums).SquadButtonClickIntentionEnum
-local squadButtonSourceEnum = require(parent.Squads.Enums).SquadButtonSourceEnum
-local enumScreensModule = require(appChat.EnumScreens)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local ReactModule = require(Parent.React)
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local SquadExternalContractContext = require(Parent.SquadsCore.SquadExternalContractProvider).SquadExternalContractContext
+local EventNamesModule = require(Parent.SquadsCore.EventNames)
+local UseCurrentSquadIdFunction = require(Parent.SquadsCore.Hooks).useCurrentSquadId
+local SquadButtonClickIntentionEnum = require(Parent.Squads.Enums).SquadButtonClickIntentionEnum
+local SquadButtonSourceEnum = require(Parent.Squads.Enums).SquadButtonSourceEnum
+local EnumScreensModule = require(AppChat.EnumScreens)
 
-return function(p1, p2)
-	-- upvalues: useNavigation (ref), useCurrentSquadId (ref), reactModule (ref), squadExternalContractContext (ref), eventNamesModule (ref), squadButtonSourceEnum (ref), squadButtonClickIntentionEnum (ref), enumScreensModule (ref)
-	local var1 = useNavigation()
-	local var2 = useCurrentSquadId()
-	local var3 = reactModule.useContext(squadExternalContractContext)
-	local fireSquadAnalytics = var3.fireSquadAnalytics
-	local var4 = var3.useParentChannelHasGroupUp(p1)
-	local squadLocation = var3.squadLocation
-	local var5 = p2 and var2 == nil
+return function(p1, p2) --[[ Line: 21 | Named "useStartPartySuggestion" ]]
+	-- upvalues: UseNavigationFunction (copy), UseCurrentSquadIdFunction (copy), ReactModule (copy), SquadExternalContractContext (copy), EventNamesModule (copy), SquadButtonSourceEnum (copy), SquadButtonClickIntentionEnum (copy), EnumScreensModule (copy)
+	local UseNavigationResult = UseNavigationFunction()
+	local UseCurrentSquadIdResult = UseCurrentSquadIdFunction()
+	local UseContextResult = ReactModule.useContext(SquadExternalContractContext)
+	local FireSquadAnalyticsFunction = UseContextResult.fireSquadAnalytics
+	local UseParentChannelHasGroupUpResult = UseContextResult.useParentChannelHasGroupUp(p1)
+	local SquadLocation = UseContextResult.squadLocation
+	local NoUseCurrentSquadIdResult: boolean = p2 and UseCurrentSquadIdResult == nil
 	
 	return {
-		canStartParty = var5,
-		startParty = reactModule.useCallback(function(p3)
-			-- upvalues: var5 (ref), fireSquadAnalytics (ref), eventNamesModule (copy), squadButtonSourceEnum (copy), squadLocation (ref), var4 (ref), squadButtonClickIntentionEnum (copy), var1 (ref), enumScreensModule (copy)
-			if var5 then
-				fireSquadAnalytics(eventNamesModule.EnterSquadButtonPressed, {
-					conversationId = p3,
-					squadButtonSource = squadButtonSourceEnum.ChatConversationSmartSuggestion,
-					squadLocation = squadLocation,
-					userIntention = if var4 then squadButtonClickIntentionEnum.Join else squadButtonClickIntentionEnum.Create
+		canStartParty = NoUseCurrentSquadIdResult,
+		startParty = ReactModule.useCallback(function(ConversationId) --[[ Line: 31 ]]
+			-- upvalues: NoUseCurrentSquadIdResult (copy), FireSquadAnalyticsFunction (copy), EventNamesModule (upval), SquadButtonSourceEnum (upval), SquadLocation (copy), UseParentChannelHasGroupUpResult (copy), SquadButtonClickIntentionEnum (upval), UseNavigationResult (copy), EnumScreensModule (upval)
+			if NoUseCurrentSquadIdResult then
+				FireSquadAnalyticsFunction(EventNamesModule.EnterSquadButtonPressed, {
+					conversationId = ConversationId,
+					squadButtonSource = SquadButtonSourceEnum.ChatConversationSmartSuggestion,
+					squadLocation = SquadLocation,
+					userIntention = if UseParentChannelHasGroupUpResult then SquadButtonClickIntentionEnum.Join else SquadButtonClickIntentionEnum.Create
 				})
-				var1.navigate(enumScreensModule.SquadLobby, { conversationId = p3 })
+				UseNavigationResult.navigate(EnumScreensModule.SquadLobby, { conversationId = ConversationId })
 				
 				return
 			end
 		end, {
-			var5,
-			fireSquadAnalytics,
-			var4,
-			var1,
-			squadLocation
+			NoUseCurrentSquadIdResult,
+			FireSquadAnalyticsFunction,
+			UseParentChannelHasGroupUpResult,
+			UseNavigationResult,
+			SquadLocation
 		})
 	}
 end

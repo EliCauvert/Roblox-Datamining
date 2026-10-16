@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Index.DiscoveryHeroUnit.DiscoveryHeroUnit)
+﻿return (require(script.Parent.Parent.Parent._Index.DiscoveryHeroUnit.DiscoveryHeroUnit))

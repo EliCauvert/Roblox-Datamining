@@ -1,74 +1,73 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local UIBloxModule = require(parent.UIBlox)
-local foundationModule = require(parent.Foundation)
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
-local useStyle = UIBloxModule.Core.Style.useStyle
-local images = UIBloxModule.App.ImageSet.Images
-local textKeysModule = require(profilePlatform.Common.TextKeys)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local fFlagProfilePlatformFixResaleLimitedPriceModule = require(profilePlatform.Flags.FFlagProfilePlatformFixResaleLimitedPrice)
-local robux = images["icons/common/robux"]
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local UIBloxModule = require(Parent.UIBlox)
+local FoundationModule = require(Parent.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local TextKeysModule = require(ProfilePlatform.Common.TextKeys)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local FFlagProfilePlatformFixResaleLimitedPriceModule = require(ProfilePlatform.Flags.FFlagProfilePlatformFixResaleLimitedPrice)
+local IconsCommonRobux = UIBloxModule.App.ImageSet.Images["icons/common/robux"]
 
-return function(p1)
-	-- upvalues: useStyle (ref), useLocalization (ref), textKeysModule (ref), fFlagProfilePlatformFixResaleLimitedPriceModule (ref), reactModule (ref), imageSetLabel (ref), robux (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref)
-	local var1 = useStyle()
-	local font = var1.Font
-	local theme = var1.Theme
-	local var2 = font.BaseSize * font.SubHeader1.RelativeSize
-	local vector2 = Vector2.new(var2, var2)
-	local var3 = useLocalization({
-		freeText = textKeysModule.CatalogLabelFree,
-		offSaleText = textKeysModule.CatalogLabelOffSale
+return function(p1) --[[ Line: 30 | Named "PriceFooter" ]]
+	-- upvalues: UseStyleFunction (copy), UseLocalizationFunction (copy), TextKeysModule (copy), FFlagProfilePlatformFixResaleLimitedPriceModule (copy), ReactModule (copy), ImageSetLabel (copy), IconsCommonRobux (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy)
+	local UseStyleResult = UseStyleFunction()
+	local UseStyleResultFont = UseStyleResult.Font
+	local Theme = UseStyleResult.Theme
+	local ScaledBaseSize = UseStyleResultFont.BaseSize * UseStyleResultFont.SubHeader1.RelativeSize
+	local _Vector2 = Vector2.new(ScaledBaseSize, ScaledBaseSize)
+	local UseLocalizationResult = UseLocalizationFunction({
+		freeText = TextKeysModule.CatalogLabelFree,
+		offSaleText = TextKeysModule.CatalogLabelOffSale
 	})
-	local var4 = nil
-	local var5 = false
+	local Text = nil
+	local Flag = false
 	
 	if p1.isOffSale then
-		if fFlagProfilePlatformFixResaleLimitedPriceModule and p1.lowestResalePrice and p1.lowestResalePrice > 0 then
-			var4 = tostring(p1.lowestResalePrice)
-			var5 = true
+		if FFlagProfilePlatformFixResaleLimitedPriceModule and p1.lowestResalePrice and p1.lowestResalePrice > 0 then
+			Text = tostring(p1.lowestResalePrice)
+			Flag = true
 		else
-			var4 = var3.offSaleText
+			Text = UseLocalizationResult.offSaleText
 		end
 	elseif p1.price == 0 then
-		var4 = var3.freeText
+		Text = UseLocalizationResult.freeText
 	elseif p1.price then
-		var4 = tostring(p1.price)
-		var5 = true
+		Text = tostring(p1.price)
+		Flag = true
 	end
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.new(1, 0, 0, 20),
 		Position = UDim2.fromOffset(0, -4)
 	}, {
-		Layout = reactModule.createElement("UIListLayout", {
+		Layout = ReactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			VerticalAlignment = Enum.VerticalAlignment.Center,
 			FillDirection = Enum.FillDirection.Horizontal,
 			Padding = UDim.new(0, 4)
 		}),
-		Icon = if var5 then reactModule.createElement(imageSetLabel, {
+		Icon = if Flag then ReactModule.createElement(ImageSetLabel, {
 			LayoutOrder = 1,
 			BackgroundTransparency = 1,
-			Image = robux,
-			ImageColor3 = theme.IconEmphasis.Color,
-			ImageTransparency = theme.IconEmphasis.Transparency,
-			Size = UDim2.fromOffset(vector2.X, vector2.Y)
+			Image = IconsCommonRobux,
+			ImageColor3 = Theme.IconEmphasis.Color,
+			ImageTransparency = Theme.IconEmphasis.Transparency,
+			Size = UDim2.fromOffset(_Vector2.X, _Vector2.Y)
 		}) else nil,
-		Text = reactModule.createElement("TextLabel", {
+		Text = ReactModule.createElement("TextLabel", {
 			LayoutOrder = 2,
 			BackgroundTransparency = 1,
-			Size = UDim2.new(1, if var5 then -(vector2.X + 4) else 0, 1, 0),
-			Font = if foundationFontFaceMigration then nil else font.SubHeader1.Font,
-			FontFace = if foundationFontFaceMigration then normalizeFontFace(var1.Tokens.Typography.TitleLarge.Font) else nil,
-			TextColor3 = theme.SecondaryContent.Color,
-			TextTransparency = theme.SecondaryContent.Transparency,
-			TextSize = var2,
-			Text = var4,
+			Size = UDim2.new(1, if Flag then -(_Vector2.X + 4) else 0, 1, 0),
+			Font = if FoundationFontFaceMigration then nil else UseStyleResultFont.SubHeader1.Font,
+			FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.TitleLarge.Font) else nil,
+			TextColor3 = Theme.SecondaryContent.Color,
+			TextTransparency = Theme.SecondaryContent.Transparency,
+			TextSize = ScaledBaseSize,
+			Text = Text,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextYAlignment = Enum.TextYAlignment.Center
 		})

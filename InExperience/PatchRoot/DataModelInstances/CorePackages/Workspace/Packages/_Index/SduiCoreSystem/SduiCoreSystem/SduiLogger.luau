@@ -1,103 +1,99 @@
-﻿local sduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
-local parent = sduiCoreSystem.Parent
-local cryoModule = require(parent.Cryo)
-local loggingProtocolModule = require(parent.LoggingProtocol)
-local tutilsModule = require(parent.tutils)
-local _ = require(sduiCoreSystem.SduiBuilderTypes)
-local _ = require(sduiCoreSystem.SduiComponentType)
-local _ = require(sduiCoreSystem.SduiErrors)
-local fFlagLuaAppAddHasOneByTwoField = require(parent.SharedFlags).FFlagLuaAppAddHasOneByTwoField
-local fFlagLuaAppAddHasOneByTwoFieldSdui = require(parent.SharedFlags).FFlagLuaAppAddHasOneByTwoFieldSdui
-local fFlagLuaAppSduiHomeFeedStats = require(parent.SharedFlags).FFlagLuaAppSduiHomeFeedStats
-local discoverySduiErrorHundredthsPercent = game:DefineFastInt("DiscoverySduiErrorHundredthsPercent", 0)
-local discoverySduiTimerEventsHundredthsPercent = game:DefineFastInt("DiscoverySduiTimerEventsHundredthsPercent", 0)
-local discoveryFeedStatsHundredthsPercent = game:DefineFastInt("DiscoveryFeedStatsHundredthsPercent", 0)
-local t = {
+﻿local SduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
+local Parent = SduiCoreSystem.Parent
+local CryoModule = require(Parent.Cryo)
+local LoggingProtocolModule = require(Parent.LoggingProtocol)
+local TutilsModule = require(Parent.tutils)
+local _ = require(SduiCoreSystem.SduiBuilderTypes)
+local _ = require(SduiCoreSystem.SduiComponentType)
+local _ = require(SduiCoreSystem.SduiErrors)
+local FFlagLuaAppAddHasOneByTwoField = require(Parent.SharedFlags).FFlagLuaAppAddHasOneByTwoField
+local FFlagLuaAppAddHasOneByTwoFieldSdui = require(Parent.SharedFlags).FFlagLuaAppAddHasOneByTwoFieldSdui
+local config = {
 	eventName = "DiscoverySdui_ErrorDetails",
 	description = "Error details related to discovery server-driven ui",
 	links = "",
 	backends = {
-		loggingProtocolModule.TelemetryBackends.Points,
-		loggingProtocolModule.TelemetryBackends.EventIngest
+		LoggingProtocolModule.TelemetryBackends.Points,
+		LoggingProtocolModule.TelemetryBackends.EventIngest
 	},
-	throttlingPercentage = discoverySduiErrorHundredthsPercent,
+	throttlingPercentage = game:DefineFastInt("DiscoverySduiErrorHundredthsPercent", 0),
 	lastUpdated = { 24, 11, 4 }
 }
-local t_1 = {
+local config1 = {
 	eventName = "DiscoverySdui_ErrorCounter",
 	throttlingPercentage = 0,
 	description = "Error related to discovery server-driven ui",
-	backends = { loggingProtocolModule.TelemetryBackends.Counter },
+	backends = { LoggingProtocolModule.TelemetryBackends.Counter },
 	lastUpdated = { 24, 12, 14 }
 }
-local t_2 = {
+local config2 = {
 	eventName = "DiscoverySdui_Timers",
 	description = "Timers related to discovery server-driven ui",
 	links = "",
 	backends = {
-		loggingProtocolModule.TelemetryBackends.Points,
-		loggingProtocolModule.TelemetryBackends.EventIngest
+		LoggingProtocolModule.TelemetryBackends.Points,
+		LoggingProtocolModule.TelemetryBackends.EventIngest
 	},
-	throttlingPercentage = discoverySduiTimerEventsHundredthsPercent,
+	throttlingPercentage = game:DefineFastInt("DiscoverySduiTimerEventsHundredthsPercent", 0),
 	lastUpdated = { 25, 3, 14 }
 }
-local t_3 = {
+local config3 = {
 	eventName = "DiscoverySdui_FeedStats",
 	description = "Stats for feed response. Number of items per collection",
 	links = "",
 	backends = {
-		loggingProtocolModule.TelemetryBackends.Points,
-		loggingProtocolModule.TelemetryBackends.EventIngest
+		LoggingProtocolModule.TelemetryBackends.Points,
+		LoggingProtocolModule.TelemetryBackends.EventIngest
 	},
-	throttlingPercentage = discoveryFeedStatsHundredthsPercent,
+	throttlingPercentage = game:DefineFastInt("DiscoveryFeedStatsHundredthsPercent", 0),
 	lastUpdated = { 25, 5, 27 }
 }
 
-local function _(p1, p2)
+local function _(p1, p2): string --[[ Line: 71 | Named "makeErrorKey" ]]
 	return `{p1}_{p2.name}_{p2.componentType}_{p2.parserName}_{p2.propName}`
 end
 
-local t_4 = {}
+local t = {}
 
 return {
-	clearSeenErrors = function()
-		-- upvalues: t_4 (write)
-		t_4 = {}
+	clearSeenErrors = function() --[[ Line: 77 ]]
+		-- upvalues: t (ref)
+		t = {}
 	end,
-	reportError = function(p1, p2, p3, p4)
-		-- upvalues: loggingProtocolModule (ref), t_4 (write), t_1 (ref), t (ref), cryoModule (ref), tutilsModule (ref)
-		p4 = p4 or loggingProtocolModule.default
-		assert(p4, "loggingProtocol must exist")
-		local var1 = `{p1}_{p2.name}_{p2.componentType}_{p2.parserName}_{p2.propName}`
+	reportError = function(ErrorType, p1, Page, p2) --[[ Line: 81 ]]
+		-- upvalues: LoggingProtocolModule (copy), t (ref), config1 (copy), config (copy), CryoModule (copy), TutilsModule (copy)
+		local P5 = p2 or LoggingProtocolModule.default
+		assert(P5, "loggingProtocol must exist")
+		local Text: string = `{ErrorType}_{p1.name}_{p1.componentType}_{p1.parserName}_{p1.propName}`
 		
-		if t_4[var1] then return end
-		t_4[var1] = true
-		p4:logRobloxTelemetryCounter(t_1, 1, {
-			errorType = p1,
-			name = if p2 then p2.name else nil,
-			componentType = if p2 then p2.componentType else nil,
-			propName = if p2 then p2.propName else nil,
-			parserName = if p2 then p2.parserName else nil,
-			page = p3
+		if t[Text] then return end
+		t[Text] = true
+		P5:logRobloxTelemetryCounter(config1, 1, {
+			errorType = ErrorType,
+			name = if p1 then p1.name else nil,
+			componentType = if p1 then p1.componentType else nil,
+			propName = if p1 then p1.propName else nil,
+			parserName = if p1 then p1.parserName else nil,
+			page = Page
 		})
-		p4:logRobloxTelemetryEvent(t, {
+		P5:logRobloxTelemetryEvent(config, {
 			"addSessionInfo",
-			loggingProtocolModule.StandardizedFields.addOsInfo
-		}, cryoModule.Dictionary.union({ errorType = p1, page = p3 }, p2 or {}), p3)
+			LoggingProtocolModule.StandardizedFields.addOsInfo
+		}, CryoModule.Dictionary.union({ errorType = ErrorType, page = Page }, p1 or {}), Page)
 		
 		if not _G.__TESTEZ_RUNNING_TEST__ then
-			warn(`Discovery server-driven ui error \n{p1} \n{tutilsModule.toString(p2)}`)
+			warn(`Discovery server-driven ui error \n{ErrorType} \n{TutilsModule.toString(p1)}`)
 		end
 	end,
-	reportCounter = function(p1, p2, p3, p4)
-		-- upvalues: loggingProtocolModule (ref), tutilsModule (ref)
-		p4 = p4 or loggingProtocolModule.default
-		assert(p4, "loggingProtocol must exist")
-		p4:logRobloxTelemetryCounter({
+	reportCounter = function(p1, p2, p3, p4) --[[ Line: 129 ]]
+		-- upvalues: LoggingProtocolModule (copy), TutilsModule (copy)
+		local P9 = p4 or LoggingProtocolModule.default
+		assert(P9, "loggingProtocol must exist")
+		P9:logRobloxTelemetryCounter({
 			throttlingPercentage = 0,
 			description = "Counters related to discovery server-driven ui",
 			eventName = `DiscoverySdui_Counter_{p1}`,
-			backends = { loggingProtocolModule.TelemetryBackends.Counter },
+			backends = { LoggingProtocolModule.TelemetryBackends.Counter },
 			lastUpdated = { 25, 2, 5 }
 		}, 1, if p2 then {
 			name = if p2 then p2.name else nil,
@@ -107,110 +103,112 @@ return {
 		} else nil)
 		
 		if not p3 and not _G.__TESTEZ_RUNNING_TEST__ and not _G.__TEST_SUITE_PACKAGE__ then
-			warn(`Discovery server-driven ui counter \n{p1} \n{tutilsModule.toString(p2)}`)
+			warn(`Discovery server-driven ui counter \n{p1} \n{TutilsModule.toString(p2)}`)
 		end
 	end,
-	reportTimers = function(p1, p2, p3)
-		-- upvalues: loggingProtocolModule (ref), t_2 (ref)
-		p3 = p3 or loggingProtocolModule.default
-		assert(p3, "loggingProtocol must exist")
+	reportTimers = function(List, p1, p2) --[[ Line: 165 ]]
+		-- upvalues: LoggingProtocolModule (copy), config2 (copy)
+		local P12 = p2 or LoggingProtocolModule.default
+		assert(P12, "loggingProtocol must exist")
 		
-		for i, v in p1 do
-			p3:logRobloxTelemetryEvent(t_2, {
+		for Flow, value in List do
+			P12:logRobloxTelemetryEvent(config2, {
 				"addSessionInfo",
-				loggingProtocolModule.StandardizedFields.addOsInfo
+				LoggingProtocolModule.StandardizedFields.addOsInfo
 			}, {
-				flow = i,
-				durationMs = v.durationMs,
-				count = v.count,
-				failed = v.failed
-			}, p2)
+				flow = Flow,
+				durationMs = value.durationMs,
+				count = value.count,
+				failed = value.failed
+			}, p1)
 		end
 	end,
-	reportOmniFeedStats = function(p4, p5, p6, p7, p8, p9)
-		-- upvalues: loggingProtocolModule (ref), fFlagLuaAppAddHasOneByTwoField (ref), t_3 (ref)
-		p8 = p8 or loggingProtocolModule.default
-		assert(p8, "loggingProtocol must exist")
+	reportOmniFeedStats = function(List, p3, AppPage, SduiResponseRequestId, p4, HasOneByTwo) --[[ Line: 191 ]]
+		-- upvalues: LoggingProtocolModule (copy), FFlagLuaAppAddHasOneByTwoField (copy), config3 (copy)
+		local P17 = p4 or LoggingProtocolModule.default
+		assert(P17, "loggingProtocol must exist")
 		
-		if not p4 then return end
-		local var1, items
-		p5 = p5 or {}
+		if not List then return end
+		local P14 = p3 or {}
 		local t = {}
-		local t_1 = {}
+		local t1 = {}
+		local Items = nil
+		local Count = nil
 		
-		for i, v in p4 do
-			if v.topicId then
-				local isSdui = v.treatmentType == "sdui"
-				t_1[v.topicId] = isSdui
+		for _, value in List do
+			if value.topicId then
+				local IsSdui = value.treatmentType == "sdui"
+				t1[value.topicId] = IsSdui
 				
-				if isSdui then
-					var1 = 0
-					local feedItems = p5.feed and (p5.feed.props and p5.feed.props.feedItems)
+				if IsSdui then
+					Count = 0
+					local FeedItems = P14.feed and (P14.feed.props and P14.feed.props.feedItems)
 					
-					if feedItems then
-						for i_2, v_1 in feedItems do
-							if v_1.feedItemKey == v.feedItemKey then
-								items = v_1.props and v_1.props.items
+					if FeedItems then
+						for _, feedItem in FeedItems do
+							if feedItem.feedItemKey == value.feedItemKey then
+								Items = feedItem.props and feedItem.props.items
 								
-								if items then
-									var1 = #items
+								if Items then
+									Count = #Items
 									break
-								elseif not v_1.props or not v_1.props.item then
+								else
+									if not feedItem.props or not feedItem.props.item then break end
+									Count = 1
 									break
 								end
-								var1 = 1
-								break
 							end
 						end
 					end
-					t[v.topicId] = (t[v.topicId] or 0) + var1
+					t[value.topicId] = (t[value.topicId] or 0) + Count
+					continue
 				else
-					t[v.topicId] = (t[v.topicId] or 0) + (if v.recommendationList then #v.recommendationList else 0)
+					t[value.topicId] = (t[value.topicId] or 0) + (value.recommendationList and #value.recommendationList or 0)
 				end
 			end
 		end
-		local t_2 = {}
+		local t2 = {}
 		
-		for v, v_1 in t do
-			t_2[`{v}_item_count`] = v_1
-			t_2[`{v}_is_sdui`] = if t_1[v] then 1 else 0
+		for i, value1 in t do
+			t2[`{i}_item_count`] = value1
+			t2[`{i}_is_sdui`] = if t1[i] then 1 else 0
 		end
-		t_2.appPage = p6
-		t_2.sduiResponseRequestId = p7
+		t2.appPage = AppPage
+		t2.sduiResponseRequestId = SduiResponseRequestId
 		
-		if fFlagLuaAppAddHasOneByTwoField then
-			t_2.hasOneByTwo = p9
+		if FFlagLuaAppAddHasOneByTwoField then
+			t2.hasOneByTwo = HasOneByTwo
 		end
-		p8:logRobloxTelemetryEvent(t_3, {
+		P17:logRobloxTelemetryEvent(config3, {
 			"addSessionInfo",
-			loggingProtocolModule.StandardizedFields.addOsInfo
-		}, t_2, p6)
+			LoggingProtocolModule.StandardizedFields.addOsInfo
+		}, t2, AppPage)
 	end,
-	reportSduiV2FeedStats = if fFlagLuaAppSduiHomeFeedStats then function(p10, p11, p12, p13, p14)
-		-- upvalues: loggingProtocolModule (ref), fFlagLuaAppAddHasOneByTwoFieldSdui (ref), t_3 (ref)
-		p13 = p13 or loggingProtocolModule.default
-		assert(p13, "loggingProtocol must exist")
+	reportSduiV2FeedStats = if require(Parent.SharedFlags).FFlagLuaAppSduiHomeFeedStats then function(List, AppPage, SduiResponseRequestId, p5, HasOneByTwo) --[[ Line: 256 ]]
+		-- upvalues: LoggingProtocolModule (copy), FFlagLuaAppAddHasOneByTwoFieldSdui (copy), config3 (copy)
+		local P22 = p5 or LoggingProtocolModule.default
+		assert(P22, "loggingProtocol must exist")
 		
-		if next(p10) == nil then return end
-		local t = {}
+		if next(List) == nil then return end
+		local ItemCounts = {}
 		
-		for i, v in p10 do
-			if v.itemCount ~= nil then
-				t[`{i}_item_count`] = v.itemCount
+		for i, value in List do
+			if value.itemCount ~= nil then
+				ItemCounts[`{i}_item_count`] = value.itemCount
 			end
-			t[`{i}_is_sdui`] = 1
-			t[`{i}_position`] = v.position
+			ItemCounts[`{i}_is_sdui`] = 1
+			ItemCounts[`{i}_position`] = value.position
 		end
-		t.appPage = p11
-		t.sduiResponseRequestId = p12
-		t.feedSource = "SduiV2FullPage"
+		ItemCounts.appPage = AppPage
+		ItemCounts.sduiResponseRequestId = SduiResponseRequestId
+		ItemCounts.feedSource = "SduiV2FullPage"
 		
-		if fFlagLuaAppAddHasOneByTwoFieldSdui then
-			t.hasOneByTwo = p14
+		if FFlagLuaAppAddHasOneByTwoFieldSdui then
+			ItemCounts.hasOneByTwo = HasOneByTwo
 		end
-		p13:logRobloxTelemetryEvent(t_3, {
+		P22:logRobloxTelemetryEvent(config3, {
 			"addSessionInfo",
-			loggingProtocolModule.StandardizedFields.addOsInfo
-		}, t, p11)
+			LoggingProtocolModule.StandardizedFields.addOsInfo
+		}, ItemCounts, AppPage)
 	end else nil
 }

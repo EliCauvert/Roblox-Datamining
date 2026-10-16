@@ -1,13 +1,13 @@
-﻿local apolloPresence = script:FindFirstAncestor("ApolloPresence")
-local parent = apolloPresence.Parent
-local fragments = require(parent.ApolloLocalState).fragments
-local cryoModule = require(parent.Cryo)
-local formattersModule = require(apolloPresence.Formatters)
+﻿local ApolloPresence = script:FindFirstAncestor("ApolloPresence")
+local Parent = ApolloPresence.Parent
+local Fragments = require(Parent.ApolloLocalState).fragments
+local CryoModule = require(Parent.Cryo)
+local FormattersModule = require(ApolloPresence.Formatters)
 
-return function(p1, p2)
-	-- upvalues: cryoModule (ref), formattersModule (ref), fragments (ref)
-	return p1.cache:writeFragment({
-		data = cryoModule.Dictionary.join({ __typename = "UserPresence" }, formattersModule.formatUserPresence(p2)),
-		fragment = fragments.userPresenceAllFields
-	})
+return function(p1, p2) --[[ Line: 11 | Named "createUserPresenceCache" ]]
+	-- upvalues: CryoModule (copy), FormattersModule (copy), Fragments (copy)
+	return (p1.cache:writeFragment({
+		data = CryoModule.Dictionary.join({ __typename = "UserPresence" }, FormattersModule.formatUserPresence(p2)),
+		fragment = Fragments.userPresenceAllFields
+	}))
 end

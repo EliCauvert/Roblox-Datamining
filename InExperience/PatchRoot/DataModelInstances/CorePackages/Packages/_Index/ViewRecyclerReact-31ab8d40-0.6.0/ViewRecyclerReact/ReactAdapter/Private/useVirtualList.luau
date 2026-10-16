@@ -1,25 +1,26 @@
-﻿local viewRecyclerReact = script:FindFirstAncestor("ViewRecyclerReact")
-local viewRecyclerRobloxModule = require(viewRecyclerReact.Parent.ViewRecyclerRoblox)
-local placementKindModule = require(script.Parent.PlacementKind)
-local reactModule = require(viewRecyclerReact.Parent.React)
-local recyclableViewRegistryModule = require(script.Parent.RecyclableViewRegistry)
-local recyclingScopeContextModule = require(script.Parent.RecyclingScopeContext)
-local recyclingViewportContextModule = require(script.Parent.RecyclingViewportContext)
-local signalsModule = require(viewRecyclerReact.Parent.Signals)
+﻿local ViewRecyclerReact = script:FindFirstAncestor("ViewRecyclerReact")
+local ViewRecyclerRobloxModule = require(ViewRecyclerReact.Parent.ViewRecyclerRoblox)
+local PlacementKindModule = require(script.Parent.PlacementKind)
+local ReactModule = require(ViewRecyclerReact.Parent.React)
+local RecyclableViewRegistryModule = require(script.Parent.RecyclableViewRegistry)
+local RecyclingScopeContextModule = require(script.Parent.RecyclingScopeContext)
+local RecyclingViewportContextModule = require(script.Parent.RecyclingViewportContext)
+local SignalsModule = require(ViewRecyclerReact.Parent.Signals)
 local _ = require(script.Parent.VirtualListShell)
-local useCompositionPlacementModule = require(script.Parent.useCompositionPlacement)
+local UseCompositionPlacementModule = require(script.Parent.useCompositionPlacement)
 
-local function _(value, p1)
-	if value == nil then return end
-	if type(value) == "function" then
-		value(p1)
+local function _(Callback: (any) -> (), Current) --[[ Line: 13 | Named "assignRef" ]]
+	if Callback == nil then return end
+	if type(Callback) == "function" then
+		Callback(Current)
 		
 		return
+	else
+		Callback.current = Current
 	end
-	value.current = p1
 end
 
-local _ = function(p1)
+local _ = function(p1) --[[ Line: 24 | Named "toCorePinnedItem" ]]
 	return if p1 == nil then nil else {
 		key = p1.key,
 		value = p1.value,
@@ -27,362 +28,371 @@ local _ = function(p1)
 	}
 end
 
-local function configuration(p1, p2)
-	local t = {
-		scrollingFrame = p2.scrollingFrame,
-		viewportOverlay = p2.viewportOverlay,
-		axis = p1.axis,
-		dataSource = p1.dataSource,
-		layout = p1.layout,
-		onStartReached = p1.onStartReached,
-		onEndReached = p1.onEndReached,
-		onViewportChanged = p1.onViewportChanged,
-		onScrollOffsetChanged = p1.onScrollOffsetChanged,
-		onContentLengthChanged = p1.onContentLengthChanged,
-		onVisibleRangeChanged = p1.onVisibleRangeChanged,
-		onMountedRangeChanged = p1.onMountedRangeChanged,
-		onDataPrefetchRequested = p1.onDataPrefetchRequested,
-		overscan = p1.overscan,
-		dataPrefetch = p1.dataPrefetch,
-		contentAlignment = p1.contentAlignment,
-		endReachedThreshold = p1.endReachedThreshold,
-		initialScrollAlignment = p1.initialScrollAlignment,
-		autoScrollOnChange = p1.autoScrollOnChange,
-		autoScrollThreshold = p1.autoScrollThreshold,
-		startReachedThreshold = p1.startReachedThreshold,
-		isItemStickyHeader = p1.isItemStickyHeader
+local function configuration(Current, p1) --[[ Line: 35 ]]
+	local PinnedStartItem = Current.pinnedStartItem
+	local Config = if PinnedStartItem == nil then nil else {
+		key = PinnedStartItem.key,
+		value = PinnedStartItem.value,
+		itemViewType = PinnedStartItem.itemType
 	}
-	local pinnedStartItem = p1.pinnedStartItem
-	t.pinnedStartItem = if pinnedStartItem == nil then nil else {
-		key = pinnedStartItem.key,
-		value = pinnedStartItem.value,
-		itemViewType = pinnedStartItem.itemType
-	}
-	local pinnedEndItem = p1.pinnedEndItem
-	t.pinnedEndItem = if pinnedEndItem == nil then nil else {
-		key = pinnedEndItem.key,
-		value = pinnedEndItem.value,
-		itemViewType = pinnedEndItem.itemType
-	}
-	t.preserveScrollPositionOnChange = p1.preserveScrollPositionOnChange
+	local PinnedEndItem = Current.pinnedEndItem
 	
-	return t
+	return {
+		scrollingFrame = p1.scrollingFrame,
+		viewportOverlay = p1.viewportOverlay,
+		axis = Current.axis,
+		dataSource = Current.dataSource,
+		layout = Current.layout,
+		onStartReached = Current.onStartReached,
+		onEndReached = Current.onEndReached,
+		onViewportChanged = Current.onViewportChanged,
+		onScrollOffsetChanged = Current.onScrollOffsetChanged,
+		onContentLengthChanged = Current.onContentLengthChanged,
+		onVisibleRangeChanged = Current.onVisibleRangeChanged,
+		onMountedRangeChanged = Current.onMountedRangeChanged,
+		onDataPrefetchRequested = Current.onDataPrefetchRequested,
+		overscan = Current.overscan,
+		dataPrefetch = Current.dataPrefetch,
+		contentAlignment = Current.contentAlignment,
+		endReachedThreshold = Current.endReachedThreshold,
+		initialScrollAlignment = Current.initialScrollAlignment,
+		autoScrollOnChange = Current.autoScrollOnChange,
+		autoScrollThreshold = Current.autoScrollThreshold,
+		startReachedThreshold = Current.startReachedThreshold,
+		isItemStickyHeader = Current.isItemStickyHeader,
+		pinnedStartItem = Config,
+		pinnedEndItem = if PinnedEndItem == nil then nil else {
+			key = PinnedEndItem.key,
+			value = PinnedEndItem.value,
+			itemViewType = PinnedEndItem.itemType
+		},
+		preserveScrollPositionOnChange = Current.preserveScrollPositionOnChange
+	}
 end
 
-local _ = function(p1, p2)
+local _ = function(p1, p2) --[[ Line: 65 | Named "hostTarget" ]]
 	return {
 		scrollingFrame = p1.current,
 		viewportOverlay = p2.current
 	}
 end
 
-return function(p1)
-	-- upvalues: reactModule (ref), recyclingScopeContextModule (ref), recyclingViewportContextModule (ref), signalsModule (ref), useCompositionPlacementModule (ref), configuration (ref), recyclableViewRegistryModule (ref), placementKindModule (ref), viewRecyclerRobloxModule (ref)
-	local var1 = reactModule.useRef(nil)
-	local var2 = reactModule.useContext(recyclingScopeContextModule)
-	assert(var2 ~= nil, "VirtualListRenderer requires a RecyclingScope")
-	local var3 = reactModule.useContext(recyclingViewportContextModule)
-	local var4 = reactModule.useState(function()
-		-- upvalues: signalsModule (copy)
-		local var5, var6 = signalsModule.createSignal(false)
+return function(Current) --[[ Line: 72 | Named "useVirtualList" ]]
+	-- upvalues: ReactModule (copy), RecyclingScopeContextModule (copy), RecyclingViewportContextModule (copy), SignalsModule (copy), UseCompositionPlacementModule (copy), configuration (copy), RecyclableViewRegistryModule (copy), PlacementKindModule (copy), ViewRecyclerRobloxModule (copy)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseContextResult = ReactModule.useContext(RecyclingScopeContextModule)
+	assert(UseContextResult ~= nil, "VirtualListRenderer requires a RecyclingScope")
+	local UseContextResult1 = ReactModule.useContext(RecyclingViewportContextModule)
+	local UseStateResult = ReactModule.useState(function() --[[ Line: 78 ]]
+		-- upvalues: SignalsModule (upval)
+		local Signal, Signal2 = SignalsModule.createSignal(false)
 		
-		return { active = var5, setActive = var6 }
+		return { active = Signal, setActive = Signal2 }
 	end)
-	local var5 = reactModule.useRef(nil)
-	local var6 = reactModule.useRef(nil)
-	local var7 = reactModule.useRef(nil)
-	local var8 = reactModule.useState(function()
-		-- upvalues: var2 (ref)
-		return var2.root.getScope(var2.listOptions)
+	local UseRefResult1 = ReactModule.useRef(nil)
+	local UseRefResult2 = ReactModule.useRef(nil)
+	local UseRefResult3 = ReactModule.useRef(nil)
+	local UseStateResult1 = ReactModule.useState(function() --[[ Line: 89 ]]
+		-- upvalues: UseContextResult (copy)
+		return UseContextResult.root.getScope(UseContextResult.listOptions)
 	end)
-	reactModule.useEffect(function()
-		-- upvalues: var8 (ref), var2 (ref)
-		var8.bind({
+	ReactModule.useEffect(function() --[[ Line: 92 ]]
+		-- upvalues: UseStateResult1 (copy), UseContextResult (copy)
+		UseStateResult1.bind({
 			updateCapacity = true,
 			releases = {},
 			requests = {},
-			capacity = var2.listOptions.maxPoolSize
+			capacity = UseContextResult.listOptions.maxPoolSize
 		})
-	end, { var8, var2.listOptions.maxPoolSize })
-	local var9 = useCompositionPlacementModule(var2.root, var2.listOptions.maxPoolSize, var2.listOptions.diagnostics)
-	local var10 = reactModule.useRef(nil)
-	local var11 = reactModule.useState(function()
-		-- upvalues: p1 (ref), var1 (ref), var10 (ref), configuration (copy), var6 (ref), var7 (ref)
-		local var12 = p1
+	end, {
+		UseStateResult1,
+		UseContextResult.listOptions.maxPoolSize
+	})
+	local UseCompositionPlacementModuleResult = UseCompositionPlacementModule(UseContextResult.root, UseContextResult.listOptions.maxPoolSize, UseContextResult.listOptions.diagnostics)
+	local UseRefResult4 = ReactModule.useRef(nil)
+	local UseStateResult2 = ReactModule.useState(function() --[[ Line: 107 ]]
+		-- upvalues: Current (copy), UseRefResult (copy), UseRefResult4 (copy), configuration (upval), UseRefResult2 (copy), UseRefResult3 (copy)
+		local Current1 = Current
 		
 		return {
-			synchronize = function(p2)
-				-- upvalues: var12 (write), var1 (copy), var10 (copy), configuration (copy), var6 (copy), var7 (copy)
-				var12 = p2
-				var1.current = p2
-				local current = var10.current
+			synchronize = function(Current) --[[ Line: 110 ]]
+				-- upvalues: Current1 (ref), UseRefResult (upval), UseRefResult4 (upval), configuration (upval), UseRefResult2 (upval), UseRefResult3 (upval)
+				Current1 = Current
+				UseRefResult.current = Current
+				local Current2 = UseRefResult4.current
 				
-				if current ~= nil then
-					current.update(configuration(p2, {
-						scrollingFrame = var6.current,
-						viewportOverlay = var7.current
-					}))
+				if Current2 ~= nil then
+					Current2.update((configuration(Current, {
+						scrollingFrame = UseRefResult2.current,
+						viewportOverlay = UseRefResult3.current
+					})))
 				end
 			end,
-			refreshHost = function()
-				-- upvalues: var10 (copy), configuration (copy), var12 (write), var6 (copy), var7 (copy)
-				local current = var10.current
+			refreshHost = function() --[[ Line: 118 ]]
+				-- upvalues: UseRefResult4 (upval), configuration (upval), Current1 (ref), UseRefResult2 (upval), UseRefResult3 (upval)
+				local Current = UseRefResult4.current
 				
-				if current ~= nil then
-					current.update(configuration(var12, {
-						scrollingFrame = var6.current,
-						viewportOverlay = var7.current
-					}))
+				if Current ~= nil then
+					Current.update((configuration(Current1, {
+						scrollingFrame = UseRefResult2.current,
+						viewportOverlay = UseRefResult3.current
+					})))
 				end
 			end
 		}
 	end)
-	reactModule.useLayoutEffect(function()
-		-- upvalues: var1 (ref), p1 (ref), configuration (copy), var6 (ref), var7 (ref), var8 (ref), recyclableViewRegistryModule (copy), var3 (ref), var4 (ref), placementKindModule (copy), var9 (ref), viewRecyclerRobloxModule (copy), var10 (ref), signalsModule (copy)
-		var1.current = p1
+	ReactModule.useLayoutEffect(function() --[[ Line: 129 ]]
+		-- upvalues: UseRefResult (copy), Current (copy), configuration (upval), UseRefResult2 (copy), UseRefResult3 (copy), UseStateResult1 (copy), RecyclableViewRegistryModule (upval), UseContextResult1 (copy), UseStateResult (copy), PlacementKindModule (upval), UseCompositionPlacementModuleResult (copy), ViewRecyclerRobloxModule (upval), UseRefResult4 (copy), SignalsModule (upval)
+		UseRefResult.current = Current
 		
-		local function _()
-			-- upvalues: var1 (copy)
-			local current = var1.current
+		local function _() --[[ Line: 131 | Named "instrumentation" ]]
+			-- upvalues: UseRefResult (upval)
+			local Current = UseRefResult.current
 			
-			return if current == nil then nil else current._instrumentation
+			return if Current == nil then nil else Current._instrumentation
 		end
 		
-		local tbl = setmetatable({}, { __mode = "k" })
+		local self = setmetatable({}, { __mode = "k" })
 		
-		local function listSink(p2, p3)
-			-- upvalues: tbl (ref)
-			local var12 = tbl[p2]
+		local function listSink(Key, p1) --[[ Line: 136 ]]
+			-- upvalues: self (copy)
+			local SelfEntry = self[Key]
 			
-			if var12 == nil then
-				var12 = table.freeze({
-					apply = function(p4)
-						-- upvalues: p3 (ref), p2 (ref)
-						p3.apply(p2, p4)
+			if SelfEntry == nil then
+				SelfEntry = table.freeze({
+					apply = function(Key1) --[[ Line: 140 ]]
+						-- upvalues: p1 (copy), Key (copy)
+						p1.apply(Key, Key1)
 					end,
-					setMeasurementDependencies = function(value)
-						-- upvalues: p3 (ref), p2 (ref)
-						p3.setMeasurementDependencies(p2, value)
+					setMeasurementDependencies = function(Key1) --[[ Line: 143 ]]
+						-- upvalues: p1 (copy), Key (copy)
+						p1.setMeasurementDependencies(Key, Key1)
 					end
 				})
-				tbl[p2] = var12
+				self[Key] = SelfEntry
 			end
-			return var12
+			return SelfEntry
 		end
 		
-		local var12 = configuration(p1, {
-			scrollingFrame = var6.current,
-			viewportOverlay = var7.current
+		local ConfigurationResult = configuration(Current, {
+			scrollingFrame = UseRefResult2.current,
+			viewportOverlay = UseRefResult3.current
 		})
-		var12.recyclingScope = var8
+		ConfigurationResult.recyclingScope = UseStateResult1
 		
-		function var27.getItemViewType(p2, p3)
-			-- upvalues: var1 (copy), recyclableViewRegistryModule (copy)
-			local itemType = var1.current.itemType
-			assert(recyclableViewRegistryModule.isRegistered(itemType) or type(itemType) == "function", "VirtualList: `itemType` must be a Recyclable view type or selector")
-			local var13 = if recyclableViewRegistryModule.isRegistered(itemType) then itemType else itemType(p2, p3)
-			assert(recyclableViewRegistryModule.isRegistered(var13), "VirtualList: `itemType` selector must return a Recyclable view type")
+		function ConfigurationResult.getItemViewType(p1, p2) --[[ Line: 153 ]]
+			-- upvalues: UseRefResult (upval), RecyclableViewRegistryModule (upval)
+			local ItemTypeFunction = UseRefResult.current.itemType
+			assert(RecyclableViewRegistryModule.isRegistered(ItemTypeFunction) or type(ItemTypeFunction) == "function", "VirtualList: `itemType` must be a Recyclable view type or selector")
+			local ItemTypeFunction1 = if RecyclableViewRegistryModule.isRegistered(ItemTypeFunction) then ItemTypeFunction else ItemTypeFunction(p1, p2)
+			assert(RecyclableViewRegistryModule.isRegistered(ItemTypeFunction1), "VirtualList: `itemType` selector must return a Recyclable view type")
 			
-			return var13
+			return ItemTypeFunction1
 		end
 		
-		var12.diagnostics = p1.diagnostics
-		var12.active = if var3 == nil then nil else var4.active(false)
+		ConfigurationResult.diagnostics = Current.diagnostics
+		ConfigurationResult.active = if UseContextResult1 == nil then nil else UseStateResult.active(false)
 		
-		function var27.presentItemView(p2, p3, p4, p5)
-			-- upvalues: placementKindModule (copy), listSink (ref), var9 (copy), var1 (copy)
-			p2.transition(if p3 == nil then nil else table.freeze({
-				assignment = p3.assignment,
-				index = p3.index,
+		function ConfigurationResult.presentItemView(p1, State, p2, p3) --[[ Line: 171 ]]
+			-- upvalues: PlacementKindModule (upval), listSink (copy), UseCompositionPlacementModuleResult (upval), UseRefResult (upval)
+			p1.transition(if State == nil then nil else table.freeze({
+				assignment = State.assignment,
+				index = State.index,
 				destination = table.freeze({
-					kind = placementKindModule.List,
-					state = p3,
-					sink = listSink(p2, p5),
-					compositionPlacement = var9
+					kind = PlacementKindModule.List,
+					state = State,
+					sink = listSink(p1, p3),
+					compositionPlacement = UseCompositionPlacementModuleResult
 				})
 			}))
-			local current = var1.current
-			local var13 = if current == nil then nil else current._instrumentation
+			local Current = UseRefResult.current
+			local Instrumentation = if Current == nil then nil else Current._instrumentation
 			
-			if p4 and var13 ~= nil and var13.assignmentChanged ~= nil then
-				var13.assignmentChanged(p2, if p3 == nil then nil else p3.assignment)
+			if p2 and Instrumentation ~= nil and Instrumentation.assignmentChanged ~= nil then
+				Instrumentation.assignmentChanged(p1, if State == nil then nil else State.assignment)
 			end
 		end
 		
-		function var27.onItemViewPresentationChanged(p2, p3)
-			-- upvalues: var1 (copy)
-			local current = var1.current
-			local var13 = if current == nil then nil else current._instrumentation
+		function ConfigurationResult.onItemViewPresentationChanged(p1, p2) --[[ Line: 189 ]]
+			-- upvalues: UseRefResult (upval)
+			local Current = UseRefResult.current
+			local Instrumentation = if Current == nil then nil else Current._instrumentation
 			
-			if var13 ~= nil and var13.presentationChanged ~= nil then
-				var13.presentationChanged(p2, p3)
+			if Instrumentation ~= nil and Instrumentation.presentationChanged ~= nil then
+				Instrumentation.presentationChanged(p1, p2)
 			end
 		end
 		
-		local var13 = viewRecyclerRobloxModule.createVirtualizer(var12)
-		var10.current = var13
-		local var14 = nil
+		local Virtualizer = ViewRecyclerRobloxModule.createVirtualizer(ConfigurationResult)
+		UseRefResult4.current = Virtualizer
+		local Callback = nil
 		
-		if var3 ~= nil then
-			local active = var12.active
-			var14 = signalsModule.createEffect(function(p2)
-				-- upvalues: var4 (copy), active (write), var13 (ref)
-				local var15 = var4.active(p2)
+		if UseContextResult1 ~= nil then
+			local Active = ConfigurationResult.active
+			Callback = SignalsModule.createEffect(function(p1) --[[ Line: 200 ]]
+				-- upvalues: UseStateResult (upval), Active (ref), Virtualizer (copy)
+				local ActiveResult = UseStateResult.active(p1)
 				
-				if var15 ~= active then
-					active = var15
-					var13.setActive(var15)
+				if ActiveResult ~= Active then
+					Active = ActiveResult
+					Virtualizer.setActive(ActiveResult)
 				end
 			end)
 		end
-		return function()
-			-- upvalues: var14 (write), var10 (copy), var13 (ref)
-			if var14 ~= nil then
-				var14()
+		return function() --[[ Line: 208 ]]
+			-- upvalues: Callback (ref), UseRefResult4 (upval), Virtualizer (copy)
+			if Callback ~= nil then
+				Callback()
 			end
-			var10.current = nil
-			var13.destroy()
+			UseRefResult4.current = nil
+			Virtualizer.destroy()
 		end
-	end, { var11 })
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref)
-		return var2.registerConsumer()
-	end, { var2 })
-	reactModule.useEffect(function()
-		-- upvalues: var5 (ref)
-		return function()
-			-- upvalues: var5 (copy)
-			local current = var5.current
+	end, { UseStateResult2 })
+	ReactModule.useEffect(function() --[[ Line: 217 ]]
+		-- upvalues: UseContextResult (copy)
+		return UseContextResult.registerConsumer()
+	end, { UseContextResult })
+	ReactModule.useEffect(function() --[[ Line: 221 ]]
+		-- upvalues: UseRefResult1 (copy)
+		return function() --[[ Line: 222 ]]
+			-- upvalues: UseRefResult1 (upval)
+			local CurrentFunction: () -> () = UseRefResult1.current
 			
-			if current ~= nil then
-				var5.current = nil
-				current()
+			if CurrentFunction ~= nil then
+				UseRefResult1.current = nil
+				CurrentFunction()
 			end
 		end
 	end, {})
-	reactModule.useLayoutEffect(function()
-		-- upvalues: var11 (ref), p1 (ref)
-		var11.synchronize(p1)
+	ReactModule.useLayoutEffect(function() --[[ Line: 231 ]]
+		-- upvalues: UseStateResult2 (copy), Current (copy)
+		UseStateResult2.synchronize(Current)
 	end)
-	reactModule.useEffect(function()
-		-- upvalues: var10 (ref)
-		local current = var10.current
+	ReactModule.useEffect(function() --[[ Line: 235 ]]
+		-- upvalues: UseRefResult4 (copy)
+		local Current = UseRefResult4.current
 		
-		if current ~= nil then
-			current.refreshItemViews()
+		if Current ~= nil then
+			Current.refreshItemViews()
 		end
-	end, { p1.itemType })
-	reactModule.useEffect(function()
-		-- upvalues: var10 (ref), p1 (ref)
-		local function _()
-			-- upvalues: var10 (copy)
-			return assert(var10.current, "VirtualList: list handle used after unmount")
+	end, { Current.itemType })
+	ReactModule.useEffect(function() --[[ Line: 242 ]]
+		-- upvalues: UseRefResult4 (copy), Current (copy)
+		local function _() --[[ Line: 243 | Named "runtime" ]]
+			-- upvalues: UseRefResult4 (upval)
+			return assert(UseRefResult4.current, "VirtualList: list handle used after unmount")
 		end
 		
-		local t = {
-			scrollToIndex = function(p2, p3)
-				-- upvalues: var10 (copy)
-				assert(var10.current, "VirtualList: list handle used after unmount").scrollToIndex(p2, p3)
+		local Current1 = {
+			scrollToIndex = function(p1, p2) --[[ Line: 247 ]]
+				-- upvalues: UseRefResult4 (upval)
+				assert(UseRefResult4.current, "VirtualList: list handle used after unmount").scrollToIndex(p1, p2)
 			end,
-			scrollToOffset = function(value)
-				-- upvalues: var10 (copy)
-				return assert(var10.current, "VirtualList: list handle used after unmount").scrollToOffset(value)
+			scrollToOffset = function(p1) --[[ Line: 250 ]]
+				-- upvalues: UseRefResult4 (upval)
+				return assert(UseRefResult4.current, "VirtualList: list handle used after unmount").scrollToOffset(p1)
 			end,
-			scrollToStart = function()
-				-- upvalues: var10 (copy)
-				assert(var10.current, "VirtualList: list handle used after unmount").scrollToStart()
+			scrollToStart = function() --[[ Line: 253 ]]
+				-- upvalues: UseRefResult4 (upval)
+				assert(UseRefResult4.current, "VirtualList: list handle used after unmount").scrollToStart()
 			end,
-			scrollToEnd = function()
-				-- upvalues: var10 (copy)
-				assert(var10.current, "VirtualList: list handle used after unmount").scrollToEnd()
+			scrollToEnd = function() --[[ Line: 256 ]]
+				-- upvalues: UseRefResult4 (upval)
+				assert(UseRefResult4.current, "VirtualList: list handle used after unmount").scrollToEnd()
 			end,
-			scrollBy = function(p2)
-				-- upvalues: var10 (copy)
-				return assert(var10.current, "VirtualList: list handle used after unmount").scrollBy(p2)
+			scrollBy = function(p1) --[[ Line: 259 ]]
+				-- upvalues: UseRefResult4 (upval)
+				return assert(UseRefResult4.current, "VirtualList: list handle used after unmount").scrollBy(p1)
 			end,
-			getScrollState = function()
-				-- upvalues: var10 (copy)
-				return assert(var10.current, "VirtualList: list handle used after unmount").getScrollState()
+			getScrollState = function() --[[ Line: 262 ]]
+				-- upvalues: UseRefResult4 (upval)
+				return assert(UseRefResult4.current, "VirtualList: list handle used after unmount").getScrollState()
 			end,
-			captureScrollAnchorSnapshot = function()
-				-- upvalues: var10 (copy)
-				return assert(var10.current, "VirtualList: list handle used after unmount").captureScrollAnchorSnapshot()
+			captureScrollAnchorSnapshot = function() --[[ Line: 265 ]]
+				-- upvalues: UseRefResult4 (upval)
+				return assert(UseRefResult4.current, "VirtualList: list handle used after unmount").captureScrollAnchorSnapshot()
 			end,
-			restoreScrollAnchorSnapshot = function(p2)
-				-- upvalues: var10 (copy)
-				return assert(var10.current, "VirtualList: list handle used after unmount").restoreScrollAnchorSnapshot(p2)
+			restoreScrollAnchorSnapshot = function(p1) --[[ Line: 268 ]]
+				-- upvalues: UseRefResult4 (upval)
+				return assert(UseRefResult4.current, "VirtualList: list handle used after unmount").restoreScrollAnchorSnapshot(p1)
 			end
 		}
-		local listRef = p1.listRef
+		local ListRefFunction: (any) -> () = Current.listRef
 		
-		if listRef ~= nil then
-			if type(listRef) == "function" then
-				listRef(t)
+		if ListRefFunction ~= nil then
+			if type(ListRefFunction) == "function" then
+				ListRefFunction(Current1)
 			else
-				listRef.current = t
+				ListRefFunction.current = Current1
 			end
 		end
-		return function()
-			-- upvalues: p1 (copy)
-			local listRef = p1.listRef
+		return function() --[[ Line: 273 ]]
+			-- upvalues: Current (upval)
+			local ListRefFunction: (any) -> () = Current.listRef
 			
-			if listRef == nil then return end
-			if type(listRef) == "function" then
-				listRef(nil)
+			if ListRefFunction == nil then return end
+			if type(ListRefFunction) == "function" then
+				ListRefFunction(nil)
 				
 				return
-			end
-			listRef.current = nil
-		end
-	end, { p1.listRef })
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var6 (ref)
-		local scrollingFrameRef = p1.scrollingFrameRef
-		local current = var6.current
-		
-		if scrollingFrameRef ~= nil then
-			if type(scrollingFrameRef) == "function" then
-				scrollingFrameRef(current)
 			else
-				scrollingFrameRef.current = current
+				ListRefFunction.current = nil
 			end
 		end
-		return function()
-			-- upvalues: p1 (copy)
-			local scrollingFrameRef = p1.scrollingFrameRef
+	end, { Current.listRef })
+	ReactModule.useEffect(function() --[[ Line: 278 ]]
+		-- upvalues: Current (copy), UseRefResult2 (copy)
+		local ScrollingFrameRefFunction: (any) -> () = Current.scrollingFrameRef
+		local Current1 = UseRefResult2.current
+		
+		if ScrollingFrameRefFunction ~= nil then
+			if type(ScrollingFrameRefFunction) == "function" then
+				ScrollingFrameRefFunction(Current1)
+			else
+				ScrollingFrameRefFunction.current = Current1
+			end
+		end
+		return function() --[[ Line: 280 ]]
+			-- upvalues: Current (upval)
+			local ScrollingFrameRefFunction: (any) -> () = Current.scrollingFrameRef
 			
-			if scrollingFrameRef == nil then return end
-			if type(scrollingFrameRef) == "function" then
-				scrollingFrameRef(nil)
+			if ScrollingFrameRefFunction == nil then return end
+			if type(ScrollingFrameRefFunction) == "function" then
+				ScrollingFrameRefFunction(nil)
 				
 				return
+			else
+				ScrollingFrameRefFunction.current = nil
 			end
-			scrollingFrameRef.current = nil
 		end
-	end, { p1.scrollingFrameRef, var6 })
+	end, { Current.scrollingFrameRef, UseRefResult2 })
 	
 	return {
-		axis = p1.axis,
-		onScrollingFrameChanged = reactModule.useCallback(function(p2)
-			-- upvalues: var5 (ref), var3 (ref), var4 (ref), var11 (ref)
-			local current = var5.current
+		axis = Current.axis,
+		onScrollingFrameChanged = ReactModule.useCallback(function(p1) --[[ Line: 286 ]]
+			-- upvalues: UseRefResult1 (copy), UseContextResult1 (copy), UseStateResult (copy), UseStateResult2 (copy)
+			local CurrentFunction: () -> () = UseRefResult1.current
 			
-			if current ~= nil then
-				var5.current = nil
-				current()
+			if CurrentFunction ~= nil then
+				UseRefResult1.current = nil
+				CurrentFunction()
 			end
-			if p2 ~= nil and var3 ~= nil then
-				var5.current = var3.register(p2, var4.setActive)
+			if p1 ~= nil and UseContextResult1 ~= nil then
+				UseRefResult1.current = UseContextResult1.register(p1, UseStateResult.setActive)
 			end
-			var11.refreshHost()
-		end, { var4, var11.refreshHost, var3 }),
-		onViewportOverlayChanged = reactModule.useCallback(function(_)
-			-- upvalues: var11 (ref)
-			var11.refreshHost()
-		end, { var11.refreshHost }),
-		internalRef = var6,
-		viewportOverlayRef = var7,
-		scrollingFrameProps = p1.scrollingFrameProps,
-		tag = p1.tag
+			UseStateResult2.refreshHost()
+		end, {
+			UseStateResult,
+			UseStateResult2.refreshHost,
+			UseContextResult1
+		}),
+		onViewportOverlayChanged = ReactModule.useCallback(function(_) --[[ Line: 304 ]]
+			-- upvalues: UseStateResult2 (copy)
+			UseStateResult2.refreshHost()
+		end, { UseStateResult2.refreshHost }),
+		internalRef = UseRefResult2,
+		viewportOverlayRef = UseRefResult3,
+		scrollingFrameProps = Current.scrollingFrameProps,
+		tag = Current.tag
 	}
 end

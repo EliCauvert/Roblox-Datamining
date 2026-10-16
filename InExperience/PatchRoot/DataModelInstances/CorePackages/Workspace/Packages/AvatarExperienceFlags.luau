@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.AvatarExperienceFlags.AvatarExperienceFlags)
+﻿return (require(script.Parent._Workspace.AvatarExperienceFlags.AvatarExperienceFlags))

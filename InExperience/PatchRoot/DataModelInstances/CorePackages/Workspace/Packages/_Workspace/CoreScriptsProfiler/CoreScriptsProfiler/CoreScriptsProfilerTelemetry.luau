@@ -1,49 +1,53 @@
-﻿local coreScriptsProfilerModule = require(script.Parent.CoreScriptsProfiler)
-local profilerDataParserModule = require(script.Parent.ProfilerDataParser)
-local telemetryService = game:GetService("TelemetryService")
-local deviceTier = require(script:FindFirstAncestor("CoreScriptsProfiler").Parent.Devices).DeviceTier
+﻿local CoreScriptsProfilerModule = require(script.Parent.CoreScriptsProfiler)
+local ProfilerDataParserModule = require(script.Parent.ProfilerDataParser)
+local TelemetryService = game:GetService("TelemetryService")
+local DeviceTier = require(script:FindFirstAncestor("CoreScriptsProfiler").Parent.Devices).DeviceTier
 game:DefineFastInt("CoreScriptsProfilerSamplingHundredthsPercentv1", 0)
-local coreScriptsProfilerDelaySeconds = game:DefineFastInt("CoreScriptsProfilerDelaySeconds", 5)
-local coreScriptsProfilerDurationSeconds = game:DefineFastInt("CoreScriptsProfilerDurationSeconds", 10)
-local coreScriptsProfilerTelemetryLimit = game:DefineFastInt("CoreScriptsProfilerTelemetryLimit", 20)
+local CoreScriptsProfilerDelaySeconds = game:DefineFastInt("CoreScriptsProfilerDelaySeconds", 5)
+local CoreScriptsProfilerDurationSeconds = game:DefineFastInt("CoreScriptsProfilerDurationSeconds", 10)
+local CoreScriptsProfilerTelemetryLimit = game:DefineFastInt("CoreScriptsProfilerTelemetryLimit", 20)
 
 if math.random(0, 10000) <= game:GetFastInt("CoreScriptsProfilerSamplingHundredthsPercentv1") then
-	local t = {
+	local config = {
 		eventName = "CorescriptPackageStats",
 		description = "Task stats for each corescript package, all in milliseconds",
 		links = "https://roblox.atlassian.net/wiki/spaces/APEX/pages/4084400405/Lua+time+break-down+CoreScriptsProfiler",
 		backends = { "RobloxTelemetryStat" },
 		lastUpdated = { 2025, 11, 25 }
 	}
-	local t_1 = {}
-	t_1.__index = t_1
+	local Module = {}
+	Module.__index = Module
 	
-	function t_1.new(p1)
-		-- upvalues: t_1 (ref)
-		return setmetatable({ profiler = nil, profilingActive = false, context = p1 }, t_1)
+	function Module.new(Context) --[[ Line: 50 ]]
+		-- upvalues: Module (copy)
+		return (setmetatable({
+			profiler = nil,
+			profilingActive = false,
+			context = Context
+		}, Module))
 	end
 	
-	function t_1:start()
-		-- upvalues: coreScriptsProfilerModule (ref), coreScriptsProfilerDelaySeconds (ref)
-		self.profiler = coreScriptsProfilerModule.new(function(_, p1)
-			-- upvalues: self (ref)
+	function Module:start() --[[ Line: 61 ]]
+		-- upvalues: CoreScriptsProfilerModule (copy), CoreScriptsProfilerDelaySeconds (copy)
+		self.profiler = CoreScriptsProfilerModule.new(function(_, p1) --[[ Line: 63 ]]
+			-- upvalues: self (copy)
 			self:reportResults(p1)
 			self:cleanup()
 		end)
-		task.delay(coreScriptsProfilerDelaySeconds, function()
-			-- upvalues: self (ref)
+		task.delay(CoreScriptsProfilerDelaySeconds, function() --[[ Line: 69 ]]
+			-- upvalues: self (copy)
 			self:startProfilingSession()
 		end)
 	end
 	
-	function t_1:startProfilingSession()
-		-- upvalues: coreScriptsProfilerDurationSeconds (ref)
+	function Module:startProfilingSession() --[[ Line: 74 ]]
+		-- upvalues: CoreScriptsProfilerDurationSeconds (copy)
 		if self.profilingActive then return end
 		if self.profiler then
 			self.profilingActive = true
 			self.profiler:ClientStart()
-			task.delay(coreScriptsProfilerDurationSeconds, function()
-				-- upvalues: self (ref)
+			task.delay(CoreScriptsProfilerDurationSeconds, function() --[[ Line: 86 ]]
+				-- upvalues: self (copy)
 				self:stopProfilingSession()
 			end)
 			
@@ -51,7 +55,7 @@ if math.random(0, 10000) <= game:GetFastInt("CoreScriptsProfilerSamplingHundredt
 		end
 	end
 	
-	function t_1:stopProfilingSession()
+	function Module:stopProfilingSession() --[[ Line: 92 ]]
 		if not self.profilingActive then return end
 		if self.profiler then
 			self.profiler:ClientStop()
@@ -61,41 +65,41 @@ if math.random(0, 10000) <= game:GetFastInt("CoreScriptsProfilerSamplingHundredt
 		end
 	end
 	
-	local function sortPackageStatsByDuration(p1)
-		local t = {}
+	local function sortPackageStatsByDuration(PackageStatistics) --[[ Line: 107 ]]
+		local List = {}
 		
-		for i, v in p1 do
-			table.insert(t, {
-				packageName = i,
-				count = v.count,
-				totalDuration = v.totalDuration
+		for PackageName, packageStatistic in PackageStatistics do
+			table.insert(List, {
+				packageName = PackageName,
+				count = packageStatistic.count,
+				totalDuration = packageStatistic.totalDuration
 			})
 		end
-		table.sort(t, function(p2, p3)
-			return p3.totalDuration < p2.totalDuration
+		table.sort(List, function(A, B): boolean --[[ Line: 120 ]]
+			return B.totalDuration < A.totalDuration
 		end)
 		
-		return t
+		return List
 	end
 	
-	function t_1:reportResults(p2)
-		-- upvalues: profilerDataParserModule (ref), sortPackageStatsByDuration (ref), coreScriptsProfilerTelemetryLimit (ref), deviceTier (ref), telemetryService (ref), t (ref)
-		local var1 = sortPackageStatsByDuration(profilerDataParserModule.new(p2):getPackageStatistics())
-		local deviceMemoryTier = deviceTier.GetDeviceMemoryTier()
+	function Module:reportResults(Context) --[[ Line: 128 ]]
+		-- upvalues: ProfilerDataParserModule (copy), sortPackageStatsByDuration (copy), CoreScriptsProfilerTelemetryLimit (copy), DeviceTier (copy), TelemetryService (copy), config (copy)
+		local SortPackageStatsByDurationResult = sortPackageStatsByDuration((ProfilerDataParserModule.new(Context):getPackageStatistics()))
+		local DeviceMemoryTier = DeviceTier.GetDeviceMemoryTier()
 		
-		for i = 1, math.min(#var1, coreScriptsProfilerTelemetryLimit) do
-			local var2 = var1[i]
-			telemetryService:LogStat(t, {
+		for i = 1, math.min(#SortPackageStatsByDurationResult, CoreScriptsProfilerTelemetryLimit) do
+			local SortPackageStatsByDurationResultEntry = SortPackageStatsByDurationResult[i]
+			TelemetryService:LogStat(config, {
 				customFields = {
-					packageName = var2.packageName,
+					packageName = SortPackageStatsByDurationResultEntry.packageName,
 					context = self.context,
-					deviceTier = deviceMemoryTier
+					deviceTier = DeviceMemoryTier
 				}
-			}, var2.totalDuration * 1000)
+			}, SortPackageStatsByDurationResultEntry.totalDuration * 1000)
 		end
 	end
 	
-	function t_1:cleanup()
+	function Module:cleanup() --[[ Line: 157 ]]
 		if self.profiler then
 			self.profiler:Disconnect()
 			self.profiler = nil
@@ -103,14 +107,15 @@ if math.random(0, 10000) <= game:GetFastInt("CoreScriptsProfilerSamplingHundredt
 		end
 	end
 	
-	local var3 = nil
+	local NewResult = nil
 	
-	return function(p3)
-		-- upvalues: var3 (write), t_1 (ref)
-		if not var3 then
-			var3 = t_1.new(p3)
+	return function(Context) --[[ Line: 167 ]]
+		-- upvalues: NewResult (ref), Module (copy)
+		if not NewResult then
+			NewResult = Module.new(Context)
 		end
-		return var3
+		return NewResult
 	end
+else
+	return nil
 end
-return nil

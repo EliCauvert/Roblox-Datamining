@@ -1,46 +1,46 @@
-﻿local parent = script.Parent.Parent.Parent.Parent
-local reactModule = require(parent.React)
-local checkbox = require(parent.Foundation).Checkbox
-local fFlagEnableInExperienceOffersPurchaseFlow = require(parent.SharedFlags).FFlagEnableInExperienceOffersPurchaseFlow
-local var1 = if fFlagEnableInExperienceOffersPurchaseFlow then require(script.Parent.OfferCheckboxRow) else nil
+﻿local Parent = script.Parent.Parent.Parent.Parent
+local ReactModule = require(Parent.React)
+local Checkbox = require(Parent.Foundation).Checkbox
+local FFlagEnableInExperienceOffersPurchaseFlow = require(Parent.SharedFlags).FFlagEnableInExperienceOffersPurchaseFlow
+local OfferCheckboxRowModule = if FFlagEnableInExperienceOffersPurchaseFlow then require(script.Parent.OfferCheckboxRow) else nil
 local _ = require(script.Parent.useCartPricing)
 
-return function(p1)
-	-- upvalues: fFlagEnableInExperienceOffersPurchaseFlow (ref), reactModule (ref), var1 (ref), checkbox (ref)
-	local cartPricing = p1.cartPricing
-	local t = {}
+return function(p1) --[[ Line: 24 | Named "buildCartPricingOfferCheckboxes" ]]
+	-- upvalues: FFlagEnableInExperienceOffersPurchaseFlow (copy), ReactModule (copy), OfferCheckboxRowModule (copy), Checkbox (copy)
+	local CartPricing = p1.cartPricing
+	local Elements = {}
 	
-	if not cartPricing.showCartOfferUi then
-		return t
+	if not CartPricing.showCartOfferUi then
+		return Elements
 	end
-	for i, v in cartPricing.cartPricingOffers do
-		local offerId = v.offerId
+	for LayoutOrder, cartPricingOffer in CartPricing.cartPricingOffers do
+		local OfferId = cartPricingOffer.offerId
 		
-		if fFlagEnableInExperienceOffersPurchaseFlow then
-			t["CartPricingOffer_" .. offerId] = reactModule.createElement(var1, {
-				LayoutOrder = i,
-				label = v.localizedDescription,
-				isChecked = v.selected,
+		if FFlagEnableInExperienceOffersPurchaseFlow then
+			Elements["CartPricingOffer_" .. OfferId] = ReactModule.createElement(OfferCheckboxRowModule, {
+				LayoutOrder = LayoutOrder,
+				label = cartPricingOffer.localizedDescription,
+				isChecked = cartPricingOffer.selected,
 				isDisabled = p1.isDisabled,
-				expirationTimeUtc = v.expirationTimeUtc,
-				onActivated = function()
-					-- upvalues: cartPricing (ref), offerId (ref)
-					cartPricing.toggleCartPricingOffer(offerId)
+				expirationTimeUtc = cartPricingOffer.expirationTimeUtc,
+				onActivated = function() --[[ Line: 41 ]]
+					-- upvalues: CartPricing (copy), OfferId (copy)
+					CartPricing.toggleCartPricingOffer(OfferId)
 				end
 			})
 		else
-			t["CartPricingOffer_" .. offerId] = reactModule.createElement(checkbox, {
+			Elements["CartPricingOffer_" .. OfferId] = ReactModule.createElement(Checkbox, {
 				size = "XSmall",
-				LayoutOrder = i,
-				label = v.localizedDescription,
-				isChecked = v.selected,
+				LayoutOrder = LayoutOrder,
+				label = cartPricingOffer.localizedDescription,
+				isChecked = cartPricingOffer.selected,
 				isDisabled = p1.isDisabled,
-				onActivated = function()
-					-- upvalues: cartPricing (ref), offerId (ref)
-					cartPricing.toggleCartPricingOffer(offerId)
+				onActivated = function() --[[ Line: 52 ]]
+					-- upvalues: CartPricing (copy), OfferId (copy)
+					CartPricing.toggleCartPricingOffer(OfferId)
 				end
 			})
 		end
 	end
-	return t
+	return Elements
 end

@@ -1,25 +1,27 @@
-﻿local parent = script.Parent.Parent
-local captureService = game:GetService("CaptureService")
-local retrieveCapturesModule = require(parent.Thunks.RetrieveCaptures)
-local captureTypeModule = require(parent.Enums.CaptureType)
-local _ = require(parent.Types)
-local fFlagUseRbxstorageInGalleryModule = require(parent.Flags.FFlagUseRbxstorageInGallery)
-local fFlagCapturesVideoDeleteAsyncModule = require(parent.Flags.FFlagCapturesVideoDeleteAsync)
-local fFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
+﻿local Parent = script.Parent.Parent
+local CaptureService = game:GetService("CaptureService")
+local RetrieveCapturesModule = require(Parent.Thunks.RetrieveCaptures)
+local CaptureTypeModule = require(Parent.Enums.CaptureType)
+local _ = require(Parent.Types)
+local FFlagUseRbxstorageInGalleryModule = require(Parent.Flags.FFlagUseRbxstorageInGallery)
+local FFlagCapturesVideoDeleteAsyncModule = require(Parent.Flags.FFlagCapturesVideoDeleteAsync)
+local FFlagEnableCapturesGalleryRetrievalCoreScriptModule = require(Parent.Flags.FFlagEnableCapturesGalleryRetrievalCoreScript)
 
-return function(p1)
-	-- upvalues: fFlagEnableCapturesGalleryRetrievalCoreScriptModule (ref), captureService (ref), fFlagUseRbxstorageInGalleryModule (ref), captureTypeModule (ref), fFlagCapturesVideoDeleteAsyncModule (ref), retrieveCapturesModule (ref)
-	return function(p2)
-		-- upvalues: fFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), p1 (ref), captureService (copy), fFlagUseRbxstorageInGalleryModule (copy), captureTypeModule (copy), fFlagCapturesVideoDeleteAsyncModule (copy), retrieveCapturesModule (copy)
-		if fFlagEnableCapturesGalleryRetrievalCoreScriptModule then
-			captureService:DeleteCapturesAsync({ p1 })
-		elseif not fFlagUseRbxstorageInGalleryModule or p1.type ~= captureTypeModule.Video then
-			captureService:DeleteCapture(p1.filePath)
-		elseif fFlagCapturesVideoDeleteAsyncModule then
-			captureService:DeleteVideoCaptureAsync(p1.videoCapture)
+return function(p1) --[[ Line: 15 ]]
+	-- upvalues: FFlagEnableCapturesGalleryRetrievalCoreScriptModule (copy), CaptureService (copy), FFlagUseRbxstorageInGalleryModule (copy), CaptureTypeModule (copy), FFlagCapturesVideoDeleteAsyncModule (copy), RetrieveCapturesModule (copy)
+	return function(p2) --[[ Line: 16 ]]
+		-- upvalues: FFlagEnableCapturesGalleryRetrievalCoreScriptModule (upval), p1 (copy), CaptureService (upval), FFlagUseRbxstorageInGalleryModule (upval), CaptureTypeModule (upval), FFlagCapturesVideoDeleteAsyncModule (upval), RetrieveCapturesModule (upval)
+		if FFlagEnableCapturesGalleryRetrievalCoreScriptModule then
+			CaptureService:DeleteCapturesAsync({ p1 })
+		elseif FFlagUseRbxstorageInGalleryModule and p1.type == CaptureTypeModule.Video then
+			if FFlagCapturesVideoDeleteAsyncModule then
+				CaptureService:DeleteVideoCaptureAsync(p1.videoCapture)
+			else
+				CaptureService:DeleteVideoCapture(p1.videoCapture)
+			end
 		else
-			captureService:DeleteVideoCapture(p1.videoCapture)
+			CaptureService:DeleteCapture(p1.filePath)
 		end
-		p2:dispatch(retrieveCapturesModule())
+		p2:dispatch(RetrieveCapturesModule())
 	end
 end

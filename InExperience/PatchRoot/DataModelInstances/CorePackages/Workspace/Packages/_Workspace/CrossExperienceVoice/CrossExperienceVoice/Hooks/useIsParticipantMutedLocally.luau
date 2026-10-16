@@ -1,14 +1,15 @@
-﻿local useSelector = require(script:FindFirstAncestor("CrossExperienceVoice").dependencies).RoactUtils.Hooks.RoactRodux.useSelector
+﻿local UseSelectorFunction = require(script:FindFirstAncestor("CrossExperienceVoice").dependencies).RoactUtils.Hooks.RoactRodux.useSelector
 
-return function(p1)
-	-- upvalues: useSelector (ref)
-	return useSelector(function(p2)
-		-- upvalues: p1 (ref)
-		if not p2 or not p2.Squad or not p2.Squad.CrossExperienceVoice then
+return function(p1) --[[ Line: 7 ]]
+	-- upvalues: UseSelectorFunction (copy)
+	return UseSelectorFunction(function(p2) --[[ Line: 8 ]]
+		-- upvalues: p1 (copy)
+		if p2 and p2.Squad and p2.Squad.CrossExperienceVoice then
+			local Participant = p2.Squad.CrossExperienceVoice.Participants.participants[p1]
+			
+			return if Participant then Participant.isMutedLocally else nil
+		else
 			return nil
 		end
-		local var1 = p2.Squad.CrossExperienceVoice.Participants.participants[p1]
-		
-		return if var1 then var1.isMutedLocally else nil
 	end)
 end

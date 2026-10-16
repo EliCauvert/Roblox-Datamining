@@ -1,339 +1,341 @@
-﻿local corePackagesService = game:GetService("CorePackages")
+﻿local CorePackages = game:GetService("CorePackages")
 local _ = game:GetService("CoreGui"):WaitForChild("RobloxGui")
-local playersService = game:GetService("Players")
+local Players = game:GetService("Players")
 local VRService = game:GetService("VRService")
-local robloxReplicatedStorageService = game:GetService("RobloxReplicatedStorage")
-local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
-local avatarUtil = require(corePackagesService.Workspace.Packages.CoreScriptsCommon).AvatarUtil
-local connectionUtil = require(corePackagesService.Workspace.Packages.CoreScriptsCommon).ConnectionUtil
+local RobloxReplicatedStorage = game:GetService("RobloxReplicatedStorage")
+local RbxAnalyticsService = game:GetService("RbxAnalyticsService")
+local AvatarUtil = require(CorePackages.Workspace.Packages.CoreScriptsCommon).AvatarUtil
+local ConnectionUtil = require(CorePackages.Workspace.Packages.CoreScriptsCommon).ConnectionUtil
 local VRAvatarGesturesAnalyticsThrottleHundrethsPercent = game:DefineFastInt("VRAvatarGesturesAnalyticsThrottleHundrethsPercent", 0)
 local VRAvatarGesturesUseNilForHandChainRootRebuild = game:DefineFastFlag("VRAvatarGesturesUseNilForHandChainRootRebuild", false)
 local VRAvatarGesturesFixJointLimits = game:DefineFastFlag("VRAvatarGesturesFixJointLimits", false)
 local list = { "UpperArm", "LowerArm", "Hand" }
-local list_1 = { "Left", "Right" }
-local t = {}
-t.__index = t
+local list1 = { "Left", "Right" }
+local VRAvatarGesturesServerModule = {}
+VRAvatarGesturesServerModule.__index = VRAvatarGesturesServerModule
 
-local function _(p1)
-	return p1:IsA("BallSocketConstraint") and string.sub(p1.Name, -10) == "BallSocket"
+local function _(BallSocketConstraint): boolean --[[ Line: 34 | Named "isRagdollBallSocket" ]]
+	return BallSocketConstraint:IsA("BallSocketConstraint") and string.sub(BallSocketConstraint.Name, -10) == "BallSocket"
 end
 
-local function forEachArmRagdollBallSocket(p1, p2, p3)
-	-- upvalues: list (ref)
-	for i, v in ipairs(list) do
-		local var1 = p1:FindFirstChild(p2 .. v)
+local function forEachArmRagdollBallSocket(Character, Text, Callback: (any) -> ()) --[[ Line: 39 ]]
+	-- upvalues: list (copy)
+	for _, value in ipairs(list) do
+		local Child = Character:FindFirstChild(Text .. value)
 		
-		if var1 then
-			for i_1, v_1 in ipairs(var1:GetChildren()) do
-				if v_1:IsA("BallSocketConstraint") and string.sub(v_1.Name, -10) == "BallSocket" then
-					p3(v_1)
+		if Child then
+			for _, BallSocketConstraint in ipairs(Child:GetChildren()) do
+				if BallSocketConstraint:IsA("BallSocketConstraint") and string.sub(BallSocketConstraint.Name, -10) == "BallSocket" then
+					Callback(BallSocketConstraint)
 				end
 			end
 		end
 	end
 end
 
-local function suppressArmRagdollLimits(p4, p5)
-	-- upvalues: forEachArmRagdollBallSocket (ref)
-	forEachArmRagdollBallSocket(p4, p5, function(p6)
-		if p6:GetAttribute("VRAvatarGesturesPriorLimitsEnabled") == nil then
-			p6:SetAttribute("VRAvatarGesturesPriorLimitsEnabled", p6.LimitsEnabled)
-			p6:SetAttribute("VRAvatarGesturesPriorTwistLimitsEnabled", p6.TwistLimitsEnabled)
+local function suppressArmRagdollLimits(p1, p2) --[[ Line: 54 ]]
+	-- upvalues: forEachArmRagdollBallSocket (copy)
+	forEachArmRagdollBallSocket(p1, p2, function(Object) --[[ Line: 55 ]]
+		if Object:GetAttribute("VRAvatarGesturesPriorLimitsEnabled") == nil then
+			Object:SetAttribute("VRAvatarGesturesPriorLimitsEnabled", Object.LimitsEnabled)
+			Object:SetAttribute("VRAvatarGesturesPriorTwistLimitsEnabled", Object.TwistLimitsEnabled)
 		end
-		p6.LimitsEnabled = false
-		p6.TwistLimitsEnabled = false
+		Object.LimitsEnabled = false
+		Object.TwistLimitsEnabled = false
 	end)
 end
 
-local function restoreArmRagdollLimits(p4, p5)
-	-- upvalues: forEachArmRagdollBallSocket (ref)
-	forEachArmRagdollBallSocket(p4, p5, function(p6)
-		local VRAvatarGesturesPriorLimitsEnabledAttribute = p6:GetAttribute("VRAvatarGesturesPriorLimitsEnabled")
+local function restoreArmRagdollLimits(p1, p2) --[[ Line: 66 ]]
+	-- upvalues: forEachArmRagdollBallSocket (copy)
+	forEachArmRagdollBallSocket(p1, p2, function(Object) --[[ Line: 67 ]]
+		local VRAvatarGesturesPriorLimitsEnabledAttribute = Object:GetAttribute("VRAvatarGesturesPriorLimitsEnabled")
 		
 		if VRAvatarGesturesPriorLimitsEnabledAttribute ~= nil then
-			p6.LimitsEnabled = VRAvatarGesturesPriorLimitsEnabledAttribute
-			p6.TwistLimitsEnabled = p6:GetAttribute("VRAvatarGesturesPriorTwistLimitsEnabled")
-			p6:SetAttribute("VRAvatarGesturesPriorLimitsEnabled", nil)
-			p6:SetAttribute("VRAvatarGesturesPriorTwistLimitsEnabled", nil)
+			Object.LimitsEnabled = VRAvatarGesturesPriorLimitsEnabledAttribute
+			Object.TwistLimitsEnabled = Object:GetAttribute("VRAvatarGesturesPriorTwistLimitsEnabled")
+			Object:SetAttribute("VRAvatarGesturesPriorLimitsEnabled", nil)
+			Object:SetAttribute("VRAvatarGesturesPriorTwistLimitsEnabled", nil)
 		end
 	end)
 end
 
-function t.new()
-	-- upvalues: t (ref), connectionUtil (ref), VRService (ref)
-	local tbl = setmetatable({}, t)
-	tbl.connections = connectionUtil.new()
-	tbl.VRPlayers = {}
-	tbl.connections:connect("AvatarGestures", VRService:GetPropertyChangedSignal("AvatarGestures"), function()
-		-- upvalues: tbl (ref)
-		tbl:onAvatarGesturesChanged()
+function VRAvatarGesturesServerModule.new() --[[ Line: 78 ]]
+	-- upvalues: VRAvatarGesturesServerModule (copy), ConnectionUtil (copy), VRService (copy)
+	local self = setmetatable({}, VRAvatarGesturesServerModule)
+	self.connections = ConnectionUtil.new()
+	self.VRPlayers = {}
+	self.connections:connect("AvatarGestures", VRService:GetPropertyChangedSignal("AvatarGestures"), function() --[[ Line: 86 ]]
+		-- upvalues: self (copy)
+		self:onAvatarGesturesChanged()
 	end)
 	
 	if VRService.AvatarGestures then
-		tbl:onAvatarGesturesChanged()
+		self:onAvatarGesturesChanged()
 	end
-	return tbl
+	return self
 end
 
-function cleanCharacter(p4)
-	-- upvalues: VRAvatarGesturesFixJointLimits (ref), list_1 (ref), forEachArmRagdollBallSocket (ref)
-	if p4.Character then
+function cleanCharacter(Player: Player) --[[ Line: 93 ]]
+	-- upvalues: VRAvatarGesturesFixJointLimits (copy), list1 (copy), forEachArmRagdollBallSocket (copy)
+	if Player.Character then
 		if VRAvatarGesturesFixJointLimits then
-			for i, v in ipairs(list_1) do
-				forEachArmRagdollBallSocket(p4.Character, v, function(p5)
-					local VRAvatarGesturesPriorLimitsEnabledAttribute = p5:GetAttribute("VRAvatarGesturesPriorLimitsEnabled")
+			for _, value in ipairs(list1) do
+				forEachArmRagdollBallSocket(Player.Character, value, function(Object) --[[ Line: 67 ]]
+					local VRAvatarGesturesPriorLimitsEnabledAttribute = Object:GetAttribute("VRAvatarGesturesPriorLimitsEnabled")
 					
 					if VRAvatarGesturesPriorLimitsEnabledAttribute ~= nil then
-						p5.LimitsEnabled = VRAvatarGesturesPriorLimitsEnabledAttribute
-						p5.TwistLimitsEnabled = p5:GetAttribute("VRAvatarGesturesPriorTwistLimitsEnabled")
-						p5:SetAttribute("VRAvatarGesturesPriorLimitsEnabled", nil)
-						p5:SetAttribute("VRAvatarGesturesPriorTwistLimitsEnabled", nil)
+						Object.LimitsEnabled = VRAvatarGesturesPriorLimitsEnabledAttribute
+						Object.TwistLimitsEnabled = Object:GetAttribute("VRAvatarGesturesPriorTwistLimitsEnabled")
+						Object:SetAttribute("VRAvatarGesturesPriorLimitsEnabled", nil)
+						Object:SetAttribute("VRAvatarGesturesPriorTwistLimitsEnabled", nil)
 					end
 				end)
 			end
 		end
-		local humanoid = p4.Character:FindFirstChild("Humanoid")
+		local Humanoid = Player.Character:FindFirstChild("Humanoid")
 		
-		if humanoid then
-			for i, v in pairs({
+		if Humanoid then
+			for _, ChildName in pairs({
 				"TrackedIKLeftHand",
 				"TrackedIKRightHand",
 				"TrackedIKHead"
 			}) do
-				local var2 = humanoid:FindFirstChild(v)
+				local Child = Humanoid:FindFirstChild(ChildName)
 				
-				if var2 then
-					var2:Destroy()
+				if Child then
+					Child:Destroy()
 				end
 			end
 		end
-		for i, v in pairs({ "TrackedLeftHand", "TrackedRightHand", "TrackedHead" }) do
-			local var3 = p4.Character:FindFirstChild(v)
+		for _, ChildName1 in pairs({ "TrackedLeftHand", "TrackedRightHand", "TrackedHead" }) do
+			local Child = Player.Character:FindFirstChild(ChildName1)
 			
-			if var3 then
-				var3:Destroy()
+			if Child then
+				Child:Destroy()
 			end
 		end
 	end
 end
 
-function t:onPlayerChanged(p5, p6)
-	-- upvalues: avatarUtil (ref)
-	self.VRPlayers[p5] = p6 or nil
+function VRAvatarGesturesServerModule:onPlayerChanged(p1, p2) --[[ Line: 127 ]]
+	-- upvalues: AvatarUtil (copy)
+	self.VRPlayers[p1] = p2 or nil
 	
-	if not p6 then
-		cleanCharacter(p5)
+	if not p2 then
+		cleanCharacter(p1)
 		
 		return
-	elseif not self.avatarUtil then
-		self.avatarUtil = avatarUtil.new()
 	end
-	self.avatarUtil:connectPlayerCharacterChanges(p5, function(p7)
-		-- upvalues: self (ref)
-		self:onCharacterChanged(p7)
+	if not self.avatarUtil then
+		self.avatarUtil = AvatarUtil.new()
+	end
+	self.avatarUtil:connectPlayerCharacterChanges(p1, function(Character) --[[ Line: 136 ]]
+		-- upvalues: self (copy)
+		self:onCharacterChanged(Character)
 	end)
 end
 
-function t:onPlayerAdded(p5)
-	-- upvalues: rbxAnalyticsService (ref), VRAvatarGesturesAnalyticsThrottleHundrethsPercent (ref)
+function VRAvatarGesturesServerModule:onPlayerAdded(Player) --[[ Line: 144 ]]
+	-- upvalues: RbxAnalyticsService (copy), VRAvatarGesturesAnalyticsThrottleHundrethsPercent (copy)
 	if next(self.VRPlayers) ~= nil then
-		rbxAnalyticsService:ReportInfluxSeries("VRAvatarGestures", {
+		RbxAnalyticsService:ReportInfluxSeries("VRAvatarGestures", {
 			calledFrom = "ServerPlayerAddedWithVRPlayer",
 			placeId = game.PlaceId,
-			playerUserID = p5.UserId
+			playerUserID = Player.UserId
 		}, VRAvatarGesturesAnalyticsThrottleHundrethsPercent)
 	end
 end
 
-function t:onAvatarGesturesChanged()
-	-- upvalues: VRService (ref), robloxReplicatedStorageService (ref), playersService (ref)
+function VRAvatarGesturesServerModule:onAvatarGesturesChanged() --[[ Line: 155 ]]
+	-- upvalues: VRService (copy), RobloxReplicatedStorage (copy), Players (copy)
 	if VRService.AvatarGestures then
-		local avatarGesturesVRPlayer_1 = robloxReplicatedStorageService:FindFirstChild("AvatarGesturesVRPlayer")
+		local AvatarGesturesVRPlayer = RobloxReplicatedStorage:FindFirstChild("AvatarGesturesVRPlayer")
 		
-		if not avatarGesturesVRPlayer_1 then
-			avatarGesturesVRPlayer_1 = Instance.new("RemoteEvent")
-			avatarGesturesVRPlayer_1.Name = "AvatarGesturesVRPlayer"
-			avatarGesturesVRPlayer_1.Parent = robloxReplicatedStorageService
+		if not AvatarGesturesVRPlayer then
+			AvatarGesturesVRPlayer = Instance.new("RemoteEvent")
+			AvatarGesturesVRPlayer.Name = "AvatarGesturesVRPlayer"
+			AvatarGesturesVRPlayer.Parent = RobloxReplicatedStorage
 		end
-		self.connections:connect("VRPlayerOnServerEvent", avatarGesturesVRPlayer_1.OnServerEvent, function(p5, p6)
-			-- upvalues: self (ref)
-			self:onPlayerChanged(p5, p6)
+		self.connections:connect("VRPlayerOnServerEvent", AvatarGesturesVRPlayer.OnServerEvent, function(p1, p2) --[[ Line: 166 ]]
+			-- upvalues: self (copy)
+			self:onPlayerChanged(p1, p2)
 		end)
-		self.connections:connect("PlayerAdded", playersService.PlayerAdded, function(p5)
-			-- upvalues: self (ref)
-			self:onPlayerAdded(p5)
+		self.connections:connect("PlayerAdded", Players.PlayerAdded, function(Player) --[[ Line: 169 ]]
+			-- upvalues: self (copy)
+			self:onPlayerAdded(Player)
 		end)
-		self.connections:connect("PlayerRemoving", playersService.PlayerRemoving, function(p5)
-			-- upvalues: self (ref)
-			self:onPlayerChanged(p5, false)
+		self.connections:connect("PlayerRemoving", Players.PlayerRemoving, function(p1) --[[ Line: 172 ]]
+			-- upvalues: self (copy)
+			self:onPlayerChanged(p1, false)
 		end)
 		
 		return
 	else
-		for i in pairs(self.VRPlayers) do
-			self:onPlayerChanged(i, false)
+		for vRPlayer in pairs(self.VRPlayers) do
+			self:onPlayerChanged(vRPlayer, false)
 		end
 		self.connections:disconnectAll()
-		self.connections:connect("AvatarGestures", VRService:GetPropertyChangedSignal("AvatarGestures"), function()
-			-- upvalues: self (ref)
+		self.connections:connect("AvatarGestures", VRService:GetPropertyChangedSignal("AvatarGestures"), function() --[[ Line: 180 ]]
+			-- upvalues: self (copy)
 			self:onAvatarGesturesChanged()
 		end)
 	end
 end
 
-function t.findOrCreateColliders(_, p5, p6)
-	-- upvalues: playersService (ref)
-	local var4 = playersService:GetPlayerFromCharacter(p6)
-	local text = "Tracked" .. p20
-	local var5 = p6:FindFirstChild(text)
+function VRAvatarGesturesServerModule:findOrCreateColliders(ChildName, Model: Model) --[[ Line: 186 ]]
+	-- upvalues: Players (copy)
+	local Player = Players:GetPlayerFromCharacter(Model)
+	local Text = "Tracked" .. ChildName
+	local Text1 = Model:FindFirstChild(Text)
 	
-	if not var5 then
-		var5 = Instance.new("Part")
-		var5.Name = text
-		var5.Transparency = 1
-		var5.CanCollide = false
-		var5.Parent = p6
-		var5:SetNetworkOwner(var4)
+	if not Text1 then
+		Text1 = Instance.new("Part")
+		Text1.Name = Text
+		Text1.Transparency = 1
+		Text1.CanCollide = false
+		Text1.Parent = Model
+		Text1:SetNetworkOwner(Player)
 	end
-	local var6 = var5:FindFirstChild(text .. "Attachment")
+	local Child = Text1:FindFirstChild(Text .. "Attachment")
 	
-	if not var6 then
-		var6 = Instance.new("Attachment")
-		var6.Name = text .. "Attachment"
-		var6.Parent = var5
+	if not Child then
+		Child = Instance.new("Attachment")
+		Child.Name = Text .. "Attachment"
+		Child.Parent = Text1
 	end
-	local var7 = var5:FindFirstChild(text .. "AlignPosition")
+	local Child1 = Text1:FindFirstChild(Text .. "AlignPosition")
 	
-	if not var7 then
-		var7 = Instance.new("AlignPosition")
-		var7.Name = text .. "AlignPosition"
-		var7.Mode = Enum.PositionAlignmentMode.OneAttachment
-		var7.Attachment0 = var6
-		var7.RigidityEnabled = true
-		var7.Parent = var5
+	if not Child1 then
+		Child1 = Instance.new("AlignPosition")
+		Child1.Name = Text .. "AlignPosition"
+		Child1.Mode = Enum.PositionAlignmentMode.OneAttachment
+		Child1.Attachment0 = Child
+		Child1.RigidityEnabled = true
+		Child1.Parent = Text1
 	end
-	local var8 = var5:FindFirstChild(text .. "AlignOrientation")
+	local Child2 = Text1:FindFirstChild(Text .. "AlignOrientation")
 	
-	if not var8 then
-		var8 = Instance.new("AlignOrientation")
-		var8.Name = text .. "AlignOrientation"
-		var8.Mode = Enum.OrientationAlignmentMode.OneAttachment
-		var8.Attachment0 = var6
-		var8.RigidityEnabled = true
-		var8.Parent = var5
+	if not Child2 then
+		Child2 = Instance.new("AlignOrientation")
+		Child2.Name = Text .. "AlignOrientation"
+		Child2.Mode = Enum.OrientationAlignmentMode.OneAttachment
+		Child2.Attachment0 = Child
+		Child2.RigidityEnabled = true
+		Child2.Parent = Text1
 	end
-	local var9 = p6:FindFirstChild(p5)
+	local ChildName1 = Model:FindFirstChild(ChildName)
 	
-	if var9 then
-		var5.Size = var9.Size
-		var5.CFrame = var9.CFrame
-		var7.Position = var9.Position
-		var8.CFrame = var9.CFrame
+	if ChildName1 then
+		Text1.Size = ChildName1.Size
+		Text1.CFrame = ChildName1.CFrame
+		Child1.Position = ChildName1.Position
+		Child2.CFrame = ChildName1.CFrame
 	else
-		var5.Size = Vector3.new(1, 1, 1)
-		var5.CFrame = p6.WorldPivot
-		var7.Position = p6.WorldPivot.Position
-		var8.CFrame = p6.WorldPivot
+		Text1.Size = vector.create(1, 1, 1)
+		Text1.CFrame = Model.WorldPivot
+		Child1.Position = Model.WorldPivot.Position
+		Child2.CFrame = Model.WorldPivot
 	end
-	local humanoid = p6:FindFirstChild("Humanoid")
+	local Humanoid = Model:FindFirstChild("Humanoid")
 	
-	if humanoid then
-		local text_1 = "TrackedIK" .. p20
-		local var10 = humanoid:FindFirstChild(text_1)
+	if Humanoid then
+		local Text2 = "TrackedIK" .. ChildName
+		local Text21 = Humanoid:FindFirstChild(Text2)
 		
-		if not var10 then
-			var10 = Instance.new("IKControl")
-			var10.Name = text_1
+		if not Text21 then
+			Text21 = Instance.new("IKControl")
+			Text21.Name = Text2
 		end
-		var10.SmoothTime = 0.1
-		var10.Parent = humanoid
-		var10.Target = var5
+		Text21.SmoothTime = 0.1
+		Text21.Parent = Humanoid
+		Text21.Target = Text1
 	end
 end
 
-function t:createHandCollider(p5, p6)
-	-- upvalues: VRAvatarGesturesUseNilForHandChainRootRebuild (ref), VRAvatarGesturesFixJointLimits (ref), forEachArmRagdollBallSocket (ref)
-	self:findOrCreateColliders(p5 .. "Hand", p6)
-	local var4 = p6:FindFirstChild(p5 .. "Hand")
-	local humanoid = p6:FindFirstChild("Humanoid")
+function VRAvatarGesturesServerModule:createHandCollider(Text, Character) --[[ Line: 260 ]]
+	-- upvalues: VRAvatarGesturesUseNilForHandChainRootRebuild (copy), VRAvatarGesturesFixJointLimits (copy), forEachArmRagdollBallSocket (copy)
+	self:findOrCreateColliders(Text .. "Hand", Character)
+	local Child = Character:FindFirstChild(Text .. "Hand")
+	local Humanoid = Character:FindFirstChild("Humanoid")
 	
-	if humanoid then
-		local var5 = humanoid:FindFirstChild("TrackedIK" .. p22 .. "Hand")
+	if Humanoid then
+		local Child1 = Humanoid:FindFirstChild("TrackedIK" .. Text .. "Hand")
 		
-		if var5 then
-			var5.Type = Enum.IKControlType.Transform
-			local var6 = p6:FindFirstChild(p5 .. "UpperArm")
+		if Child1 then
+			Child1.Type = Enum.IKControlType.Transform
+			local Child2 = Character:FindFirstChild(Text .. "UpperArm")
 			
-			if var6 then
+			if Child2 then
 				if VRAvatarGesturesUseNilForHandChainRootRebuild then
-					var5.ChainRoot = nil
+					Child1.ChainRoot = nil
 				else
-					var5.ChainRoot = var4
+					Child1.ChainRoot = Child
 				end
-				coroutine.wrap(function()
-					-- upvalues: var5 (ref), var6 (ref)
+				coroutine.wrap(function() --[[ Line: 283 ]]
+					-- upvalues: Child1 (copy), Child2 (copy)
 					task.wait(0.1)
-					var5.ChainRoot = var6
+					Child1.ChainRoot = Child2
 				end)()
 			end
-			if var4 then
-				var5.EndEffector = var4
+			if Child then
+				Child1.EndEffector = Child
 			end
-			var5.Priority = 1
+			Child1.Priority = 1
 		end
 	end
 	if VRAvatarGesturesFixJointLimits then
-		forEachArmRagdollBallSocket(p6, p5, function(p7)
-			if p7:GetAttribute("VRAvatarGesturesPriorLimitsEnabled") == nil then
-				p7:SetAttribute("VRAvatarGesturesPriorLimitsEnabled", p7.LimitsEnabled)
-				p7:SetAttribute("VRAvatarGesturesPriorTwistLimitsEnabled", p7.TwistLimitsEnabled)
+		forEachArmRagdollBallSocket(Character, Text, function(Object) --[[ Line: 55 ]]
+			if Object:GetAttribute("VRAvatarGesturesPriorLimitsEnabled") == nil then
+				Object:SetAttribute("VRAvatarGesturesPriorLimitsEnabled", Object.LimitsEnabled)
+				Object:SetAttribute("VRAvatarGesturesPriorTwistLimitsEnabled", Object.TwistLimitsEnabled)
 			end
-			p7.LimitsEnabled = false
-			p7.TwistLimitsEnabled = false
+			Object.LimitsEnabled = false
+			Object.TwistLimitsEnabled = false
 		end)
 		
 		return
-	elseif var4 then
-		local ragdollBallSocket = var4:FindFirstChild("RagdollBallSocket")
+	end
+	if Child then
+		local RagdollBallSocket = Child:FindFirstChild("RagdollBallSocket")
 		
-		if ragdollBallSocket then
-			ragdollBallSocket.LimitsEnabled = false
+		if RagdollBallSocket then
+			RagdollBallSocket.LimitsEnabled = false
 		end
 	end
 end
 
-function t:createHeadCollider(p5)
-	self:findOrCreateColliders("Head", p5)
-	local head = p5:FindFirstChild("Head")
-	local humanoid = p5:FindFirstChild("Humanoid")
+function VRAvatarGesturesServerModule:createHeadCollider(Object) --[[ Line: 306 ]]
+	self:findOrCreateColliders("Head", Object)
+	local Head = Object:FindFirstChild("Head")
+	local Humanoid = Object:FindFirstChild("Humanoid")
 	
-	if humanoid then
-		local trackedIKHead = humanoid:FindFirstChild("TrackedIKHead")
+	if Humanoid then
+		local TrackedIKHead = Humanoid:FindFirstChild("TrackedIKHead")
 		
-		if trackedIKHead then
-			trackedIKHead.Type = Enum.IKControlType.Rotation
-			local upperTorso = p5:FindFirstChild("UpperTorso")
+		if TrackedIKHead then
+			TrackedIKHead.Type = Enum.IKControlType.Rotation
+			local UpperTorso = Object:FindFirstChild("UpperTorso")
 			
-			if upperTorso then
-				trackedIKHead.ChainRoot = upperTorso
+			if UpperTorso then
+				TrackedIKHead.ChainRoot = UpperTorso
 			end
-			if head then
-				trackedIKHead.EndEffector = head
+			if Head then
+				TrackedIKHead.EndEffector = Head
 			end
 		end
 	end
 end
 
-function t:onCharacterChanged(p5)
-	-- upvalues: playersService (ref), VRService (ref)
-	if self.VRPlayers[playersService:GetPlayerFromCharacter(p5)] and VRService.AvatarGestures then
-		self:createHandCollider("Left", p5)
-		self:createHandCollider("Right", p5)
-		self:createHeadCollider(p5)
+function VRAvatarGesturesServerModule:onCharacterChanged(Character) --[[ Line: 332 ]]
+	-- upvalues: Players (copy), VRService (copy)
+	if self.VRPlayers[Players:GetPlayerFromCharacter(Character)] and VRService.AvatarGestures then
+		self:createHandCollider("Left", Character)
+		self:createHandCollider("Right", Character)
+		self:createHeadCollider(Character)
 	end
 end
 
-t._suppressArmRagdollLimits = suppressArmRagdollLimits
-t._restoreArmRagdollLimits = restoreArmRagdollLimits
+VRAvatarGesturesServerModule._suppressArmRagdollLimits = suppressArmRagdollLimits
+VRAvatarGesturesServerModule._restoreArmRagdollLimits = restoreArmRagdollLimits
 
-return t
+return VRAvatarGesturesServerModule

@@ -1,65 +1,65 @@
-﻿local purchasePrompt = script:FindFirstAncestor("PurchasePrompt")
-local parent = purchasePrompt.Parent
-local thunkModule = require(purchasePrompt.Thunk)
-local networkModule = require(purchasePrompt.Services.Network)
-local externalSettingsModule = require(purchasePrompt.Services.ExternalSettings)
-local analyticsModule = require(purchasePrompt.Services.Analytics)
-local promptStateModule = require(purchasePrompt.Enums.PromptState)
-local paymentPlatformModule = require(purchasePrompt.Enums.PaymentPlatform)
-local setPromptStateModule = require(purchasePrompt.Actions.SetPromptState)
-local launchPremiumUpsellModule = require(purchasePrompt.Thunks.launchPremiumUpsell)
-local checkUserPurchaseSettingsModule = require(purchasePrompt.Network.checkUserPurchaseSettings)
-local getPaymentPlatformModule = require(purchasePrompt.Utils.getPaymentPlatform)
-local errorOccurredModule = require(purchasePrompt.Actions.ErrorOccurred)
-local purchaseErrorModule = require(purchasePrompt.Enums.PurchaseError)
-local IAPExperienceModule = require(parent.IAPExperience)
-local setEconomicRestrictionErrorModule = require(purchasePrompt.Actions.SetEconomicRestrictionError)
-local economicRestrictionsViolationType = IAPExperienceModule.Enums.EconomicRestrictionsViolationType
-local checkUserPurchaseSettingsFailureReason = IAPExperienceModule.Enums.CheckUserPurchaseSettingsFailureReason
-local mapCheckUserPurchaseSettingsFailureReasonToViolationType = IAPExperienceModule.Utility.mapCheckUserPurchaseSettingsFailureReasonToViolationType
-local list = { analyticsModule, networkModule, externalSettingsModule }
+﻿local PurchasePrompt = script:FindFirstAncestor("PurchasePrompt")
+local ThunkModule = require(PurchasePrompt.Thunk)
+local NetworkModule = require(PurchasePrompt.Services.Network)
+local ExternalSettingsModule = require(PurchasePrompt.Services.ExternalSettings)
+local AnalyticsModule = require(PurchasePrompt.Services.Analytics)
+local PromptStateModule = require(PurchasePrompt.Enums.PromptState)
+local PaymentPlatformModule = require(PurchasePrompt.Enums.PaymentPlatform)
+local SetPromptStateModule = require(PurchasePrompt.Actions.SetPromptState)
+local LaunchPremiumUpsellModule = require(PurchasePrompt.Thunks.launchPremiumUpsell)
+local CheckUserPurchaseSettingsModule = require(PurchasePrompt.Network.checkUserPurchaseSettings)
+local GetPaymentPlatformModule = require(PurchasePrompt.Utils.getPaymentPlatform)
+local ErrorOccurredModule = require(PurchasePrompt.Actions.ErrorOccurred)
+local PurchaseErrorModule = require(PurchasePrompt.Enums.PurchaseError)
+local IAPExperienceModule = require(PurchasePrompt.Parent.IAPExperience)
+local SetEconomicRestrictionErrorModule = require(PurchasePrompt.Actions.SetEconomicRestrictionError)
+local EconomicRestrictionsViolationType = IAPExperienceModule.Enums.EconomicRestrictionsViolationType
+local CheckUserPurchaseSettingsFailureReason = IAPExperienceModule.Enums.CheckUserPurchaseSettingsFailureReason
+local MapCheckUserPurchaseSettingsFailureReasonToViolationTypeFunction = IAPExperienceModule.Utility.mapCheckUserPurchaseSettingsFailureReasonToViolationType
+local list = { AnalyticsModule, NetworkModule, ExternalSettingsModule }
 
-local function handleCheckUserSettingsResult(value, p1, p2)
-	-- upvalues: errorOccurredModule (ref), purchaseErrorModule (ref), mapCheckUserPurchaseSettingsFailureReasonToViolationType (ref), economicRestrictionsViolationType (ref), launchPremiumUpsellModule (ref), checkUserPurchaseSettingsFailureReason (ref), setPromptStateModule (ref), promptStateModule (ref), setEconomicRestrictionErrorModule (ref)
-	if value == nil then
-		return p1:dispatch(errorOccurredModule(purchaseErrorModule.UnknownFailure))
+local function handleCheckUserSettingsResult(p1, p2, p3) --[[ Line: 35 ]]
+	-- upvalues: ErrorOccurredModule (copy), PurchaseErrorModule (copy), MapCheckUserPurchaseSettingsFailureReasonToViolationTypeFunction (copy), EconomicRestrictionsViolationType (copy), LaunchPremiumUpsellModule (copy), CheckUserPurchaseSettingsFailureReason (copy), SetPromptStateModule (copy), PromptStateModule (copy), SetEconomicRestrictionErrorModule (copy)
+	if p1 == nil then
+		return p2:dispatch(ErrorOccurredModule(PurchaseErrorModule.UnknownFailure))
 	end
-	local var1 = mapCheckUserPurchaseSettingsFailureReasonToViolationType(value.failureReason)
-	local var2 = var1 ~= economicRestrictionsViolationType.None and value.expirationTimeInMinutes ~= nil
+	local MapCheckUserPurchaseSettingsFailureReasonToViolationTypeResult = MapCheckUserPurchaseSettingsFailureReasonToViolationTypeFunction(p1.failureReason)
+	local HasExpirationTimeInMinutes: boolean = MapCheckUserPurchaseSettingsFailureReasonToViolationTypeResult ~= EconomicRestrictionsViolationType.None and p1.expirationTimeInMinutes ~= nil
 	
-	if (if value.isEligible ~= nil then value.failureReason == nil else true) and not var2 then
-		return p1:dispatch(errorOccurredModule(purchaseErrorModule.UnknownFailure))
-	elseif value.isEligible == true then
-		return p1:dispatch(launchPremiumUpsellModule())
-	elseif value.failureReason == checkUserPurchaseSettingsFailureReason.PurchaseNotEnabled then
-		p2.signalUserSettingEligibilityModal(checkUserPurchaseSettingsFailureReason.PurchaseNotEnabled)
+	if (p1.isEligible == nil or p1.failureReason == nil) and not HasExpirationTimeInMinutes then
+		return p2:dispatch(ErrorOccurredModule(PurchaseErrorModule.UnknownFailure))
+	elseif p1.isEligible == true then
+		return p2:dispatch(LaunchPremiumUpsellModule())
+	elseif p1.failureReason == CheckUserPurchaseSettingsFailureReason.PurchaseNotEnabled then
+		p3.signalUserSettingEligibilityModal(CheckUserPurchaseSettingsFailureReason.PurchaseNotEnabled)
 		
-		return p1:dispatch(setPromptStateModule(promptStateModule.EnablePurchaseVPCModal))
-	elseif value.failureReason == checkUserPurchaseSettingsFailureReason.SpendLimitExceeded then
-		return p1:dispatch(launchPremiumUpsellModule())
-	elseif var2 then
-		p2.signalEconomicRestrictionError(var1, value.expirationTimeInMinutes)
-		p1:dispatch(setEconomicRestrictionErrorModule(var1, value.expirationTimeInMinutes))
+		return p2:dispatch(SetPromptStateModule(PromptStateModule.EnablePurchaseVPCModal))
+	elseif p1.failureReason == CheckUserPurchaseSettingsFailureReason.SpendLimitExceeded then
+		return p2:dispatch(LaunchPremiumUpsellModule())
+	elseif HasExpirationTimeInMinutes then
+		p3.signalEconomicRestrictionError(MapCheckUserPurchaseSettingsFailureReasonToViolationTypeResult, p1.expirationTimeInMinutes)
+		p2:dispatch(SetEconomicRestrictionErrorModule(MapCheckUserPurchaseSettingsFailureReasonToViolationTypeResult, p1.expirationTimeInMinutes))
 		
-		return p1:dispatch(errorOccurredModule(purchaseErrorModule.EconomicRestriction))
+		return p2:dispatch(ErrorOccurredModule(PurchaseErrorModule.EconomicRestriction))
+	else
+		return p2:dispatch(ErrorOccurredModule(PurchaseErrorModule.UnknownFailure))
 	end
-	return p1:dispatch(errorOccurredModule(purchaseErrorModule.UnknownFailure))
 end
 
-return function()
-	-- upvalues: thunkModule (ref), list (ref), networkModule (ref), analyticsModule (ref), externalSettingsModule (ref), launchPremiumUpsellModule (ref), getPaymentPlatformModule (ref), paymentPlatformModule (ref), checkUserPurchaseSettingsModule (ref), handleCheckUserSettingsResult (ref), errorOccurredModule (ref), purchaseErrorModule (ref)
-	return thunkModule.new(script.Name, list, function(p1, p2)
-		-- upvalues: networkModule (copy), analyticsModule (copy), externalSettingsModule (copy), launchPremiumUpsellModule (copy), getPaymentPlatformModule (copy), paymentPlatformModule (copy), checkUserPurchaseSettingsModule (copy), handleCheckUserSettingsResult (copy), errorOccurredModule (copy), purchaseErrorModule (copy)
-		local var1 = p2[networkModule]
-		local var2 = p2[analyticsModule]
-		local var3 = p2[externalSettingsModule]
+return function() --[[ Line: 72 | Named "initiatePremiumPrecheck" ]]
+	-- upvalues: ThunkModule (copy), list (copy), NetworkModule (copy), AnalyticsModule (copy), ExternalSettingsModule (copy), LaunchPremiumUpsellModule (copy), GetPaymentPlatformModule (copy), PaymentPlatformModule (copy), CheckUserPurchaseSettingsModule (copy), handleCheckUserSettingsResult (copy), ErrorOccurredModule (copy), PurchaseErrorModule (copy)
+	return ThunkModule.new(script.Name, list, function(p1, p2) --[[ Line: 73 ]]
+		-- upvalues: NetworkModule (upval), AnalyticsModule (upval), ExternalSettingsModule (upval), LaunchPremiumUpsellModule (upval), GetPaymentPlatformModule (upval), PaymentPlatformModule (upval), CheckUserPurchaseSettingsModule (upval), handleCheckUserSettingsResult (upval), ErrorOccurredModule (upval), PurchaseErrorModule (upval)
+		local v1 = p2[NetworkModule]
+		local v2 = p2[AnalyticsModule]
+		local v3 = p2[ExternalSettingsModule]
 		
-		return if var3.isStudio() then p1:dispatch(launchPremiumUpsellModule()) elseif getPaymentPlatformModule(var3.getPlatform()) == paymentPlatformModule.Web then p1:dispatch(launchPremiumUpsellModule()) else checkUserPurchaseSettingsModule(var1):andThen(function(p3)
-			-- upvalues: handleCheckUserSettingsResult (copy), p1 (ref), var2 (ref)
-			return handleCheckUserSettingsResult(p3, p1, var2)
-		end):catch(function(_)
-			-- upvalues: p1 (ref), errorOccurredModule (copy), purchaseErrorModule (copy)
-			return p1:dispatch(errorOccurredModule(purchaseErrorModule.UnknownFailure))
+		return if v3.isStudio() then p1:dispatch(LaunchPremiumUpsellModule()) elseif GetPaymentPlatformModule(v3.getPlatform()) == PaymentPlatformModule.Web then p1:dispatch(LaunchPremiumUpsellModule()) else CheckUserPurchaseSettingsModule(v1):andThen(function(Result) --[[ Line: 90 ]]
+			-- upvalues: handleCheckUserSettingsResult (upval), p1 (copy), v2 (copy)
+			return handleCheckUserSettingsResult(Result, p1, v2)
+		end):catch(function(_) --[[ Line: 93 ]]
+			-- upvalues: p1 (copy), ErrorOccurredModule (upval), PurchaseErrorModule (upval)
+			return p1:dispatch(ErrorOccurredModule(PurchaseErrorModule.UnknownFailure))
 		end)
 	end)
 end

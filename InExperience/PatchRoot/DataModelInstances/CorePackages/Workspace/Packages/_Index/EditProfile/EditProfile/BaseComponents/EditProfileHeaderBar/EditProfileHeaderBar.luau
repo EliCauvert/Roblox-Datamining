@@ -1,43 +1,40 @@
-﻿local parent = script:FindFirstAncestor("EditProfile").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local text = foundationModule.Text
-local view = foundationModule.View
-local iconButton = foundationModule.IconButton
-local iconName = foundationModule.Enums.IconName
-local iconSize = foundationModule.Enums.IconSize
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local useTokens = foundationModule.Hooks.useTokens
-local editProfileIncreaseTopPadding = game:DefineFastFlag("EditProfileIncreaseTopPadding", false)
+﻿local Parent = script:FindFirstAncestor("EditProfile").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local IconButton = FoundationModule.IconButton
+local IconName = FoundationModule.Enums.IconName
+local IconSize = FoundationModule.Enums.IconSize
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local UseTokensFunction = FoundationModule.Hooks.useTokens
 
-return function(p1)
-	-- upvalues: editProfileIncreaseTopPadding (ref), useTokens (ref), reactModule (ref), view (ref), iconButton (ref), iconName (ref), iconSize (ref), buttonVariant (ref), text (ref)
-	return reactModule.createElement(view, {
-		tag = if editProfileIncreaseTopPadding then "row flex-between align-y-center gap-small size-full-0 auto-y padding-x-xlarge padding-bottom-xlarge" else "row flex-between align-y-center gap-small size-full-0 auto-y padding-x-xlarge padding-bottom-xlarge padding-top-xxlarge",
-		padding = if editProfileIncreaseTopPadding then {
-			top = UDim.new(0, (if editProfileIncreaseTopPadding then useTokens() else nil).Margin.Large)
-		} else nil
+return function(p1) --[[ Line: 23 | Named "EditProfileHeaderBar" ]]
+	-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), IconButton (copy), IconName (copy), IconSize (copy), ButtonVariant (copy), Text (copy)
+	return ReactModule.createElement(View, {
+		tag = "row flex-between align-y-center gap-small size-full-0 auto-y padding-x-xlarge padding-bottom-xlarge",
+		padding = { top = UDim.new(0, UseTokensFunction().Margin.Large) }
 	}, {
-		HeaderBar = reactModule.createElement(view, { tag = "row align-y-center size-0-1800 auto-x gap-small" }, {
-			BackButton = reactModule.createElement(iconButton, {
+		HeaderBar = ReactModule.createElement(View, { tag = "row align-y-center size-0-1800 auto-x gap-small" }, {
+			BackButton = ReactModule.createElement(IconButton, {
 				isCircular = true,
 				LayoutOrder = 1,
-				icon = iconName.ChevronLargeLeft,
-				size = iconSize.Medium,
-				variant = buttonVariant.Utility,
+				icon = IconName.ChevronLargeLeft,
+				size = IconSize.Medium,
+				variant = ButtonVariant.Utility,
 				onActivated = p1.onClose
 			}),
-			HeaderText = reactModule.createElement(text, {
+			HeaderText = ReactModule.createElement(Text, {
 				tag = "text-heading-small auto-xy",
 				LayoutOrder = 2,
 				Text = p1.headerText
 			})
 		}),
-		SaveButton = if p1.onSave then reactModule.createElement(iconButton, {
+		SaveButton = if p1.onSave then ReactModule.createElement(IconButton, {
 			isCircular = true,
-			icon = iconName.CheckLarge,
-			size = iconSize.Medium,
-			variant = buttonVariant.Utility,
+			icon = IconName.CheckLarge,
+			size = IconSize.Medium,
+			variant = ButtonVariant.Utility,
 			onActivated = p1.onSave,
 			isDisabled = p1.isLoading or p1.isDisabled == true
 		}) else nil

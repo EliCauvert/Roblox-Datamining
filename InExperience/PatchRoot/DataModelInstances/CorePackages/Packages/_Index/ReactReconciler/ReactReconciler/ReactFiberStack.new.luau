@@ -1,71 +1,72 @@
-﻿local parent = script.Parent.Parent
-local reactGlobalsModule = require(parent.ReactGlobals)
-local console = require(parent.Shared).console
+﻿local Parent = script.Parent.Parent
+local ReactGlobalsModule = require(Parent.ReactGlobals)
+local Console = require(Parent.Shared).console
 local _ = require(script.Parent.ReactInternalTypes)
-local t = {}
-local t_1 = {}
-local var1 = if reactGlobalsModule.__DEV__ then {} else nil
-local var2 = 0
+local Current = {}
+local Currents = {}
+local T = if ReactGlobalsModule.__DEV__ then {} else nil
+local Count = 0
 
 return {
-	createCursor = function(p1)
-		return { current = p1 }
+	createCursor = function(Current) --[[ Line: 36 ]]
+		return { current = Current }
 	end,
-	isEmpty = function()
-		-- upvalues: var2 (write)
-		return var2 == 0
+	isEmpty = function(): boolean --[[ Line: 42 ]]
+		-- upvalues: Count (ref)
+		return Count == 0
 	end,
-	pop = function(p1, p2)
-		-- upvalues: var2 (write), reactGlobalsModule (ref), console (ref), var1 (write), t_1 (ref), t (ref)
-		if var2 < 1 then
-			if reactGlobalsModule.__DEV__ then
-				console.error("Unexpected pop.")
+	pop = function(p1, p2) --[[ Line: 46 ]]
+		-- upvalues: Count (ref), ReactGlobalsModule (copy), Console (copy), T (ref), Currents (copy), Current (copy)
+		if Count >= 1 then
+			if ReactGlobalsModule.__DEV__ and p2 ~= T[Count] then
+				Console.error("Unexpected Fiber popped.")
 			end
+			local Current1 = Currents[Count]
+			
+			if Current1 == Current then
+				p1.current = nil
+			else
+				p1.current = Current1
+			end
+			Currents[Count] = nil
+			
+			if ReactGlobalsModule.__DEV__ then
+				T[Count] = nil
+			end
+			Count -= 1
+			
 			return
-		elseif reactGlobalsModule.__DEV__ and p2 ~= var1[var2] then
-			console.error("Unexpected Fiber popped.")
+		elseif ReactGlobalsModule.__DEV__ then
+			Console.error("Unexpected pop.")
 		end
-		local var3 = t_1[var2]
+	end,
+	push = function(p1, Current1, p2) --[[ Line: 78 ]]
+		-- upvalues: Count (ref), Currents (copy), Current (copy), ReactGlobalsModule (copy), T (ref)
+		Count += 1
+		local Current2 = p1.current
 		
-		if var3 == t then
-			p1.current = nil
+		if Current2 == nil then
+			Currents[Count] = Current
 		else
-			p1.current = var3
+			Currents[Count] = Current2
 		end
-		t_1[var2] = nil
-		
-		if reactGlobalsModule.__DEV__ then
-			var1[var2] = nil
+		if ReactGlobalsModule.__DEV__ then
+			T[Count] = p2
 		end
-		var2 -= 1
+		p1.current = Current1
 	end,
-	push = function(p1, p2, p3)
-		-- upvalues: var2 (write), t_1 (ref), t (ref), reactGlobalsModule (ref), var1 (write)
-		var2 += 1
-		local current = p1.current
-		
-		if current == nil then
-			t_1[var2] = t
-		else
-			t_1[var2] = current
-		end
-		if reactGlobalsModule.__DEV__ then
-			var1[var2] = p3
-		end
-		p1.current = p2
-	end,
-	checkThatStackIsEmpty = function()
-		-- upvalues: reactGlobalsModule (ref), var2 (write), console (ref)
-		if reactGlobalsModule.__DEV__ and var2 ~= 0 then
-			console.error("Expected an empty stack. Something was not reset properly.")
+	checkThatStackIsEmpty = function() --[[ Line: 95 ]]
+		-- upvalues: ReactGlobalsModule (copy), Count (ref), Console (copy)
+		if ReactGlobalsModule.__DEV__ and Count ~= 0 then
+			Console.error("Expected an empty stack. Something was not reset properly.")
 		end
 	end,
-	resetStackAfterFatalErrorInDev = function()
-		-- upvalues: reactGlobalsModule (ref), var2 (write), t_1 (ref), var1 (write)
-		if reactGlobalsModule.__DEV__ then
-			var2 = 0
-			table.clear(t_1)
-			table.clear(var1)
+	resetStackAfterFatalErrorInDev = function() --[[ Line: 103 ]]
+		-- upvalues: ReactGlobalsModule (copy), Count (ref), Currents (copy), T (ref)
+		if ReactGlobalsModule.__DEV__ then
+			Count = 0
+			table.clear(Currents)
+			table.clear(T)
 		end
 	end
 }

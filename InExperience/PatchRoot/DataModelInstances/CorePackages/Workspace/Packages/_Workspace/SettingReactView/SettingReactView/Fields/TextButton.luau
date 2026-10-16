@@ -1,35 +1,32 @@
-﻿local parent = script:FindFirstAncestor("SettingReactView").Parent
-local _ = require(parent.SettingsService)
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local button = foundationModule.Button
-local enums = foundationModule.Enums
-local buttonVariant = enums.ButtonVariant
-local buttonSize = enums.ButtonSize
+﻿local Parent = script:FindFirstAncestor("SettingReactView").Parent
+local _ = require(Parent.SettingsService)
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local Button = FoundationModule.Button
+local Enums = FoundationModule.Enums
+local ButtonVariant = Enums.ButtonVariant
+local ButtonSize = Enums.ButtonSize
 
-return function(p1)
-	-- upvalues: reactModule (ref), button (ref), buttonVariant (ref), buttonSize (ref)
-	local text
-	local _ = nil
-	local _ = nil
-	
+return function(p1) --[[ Line: 19 ]]
+	-- upvalues: ReactModule (copy), Button (copy), ButtonVariant (copy), ButtonSize (copy)
+	local Text = nil
 	if p1.text and type(p1.text) == "table" then
-		local var1, var2 = reactModule.useState(p1.text:get())
-		text = var1
-		p1.text:connect(var2)
+		local UseStateResult2
+		Text, UseStateResult2 = ReactModule.useState(p1.text:get())
+		p1.text:connect(UseStateResult2)
 	else
-		text = p1.text
+		Text = p1.text
 	end
-	return reactModule.createElement(button, {
-		onActivated = reactModule.useCallback(function()
-			-- upvalues: p1 (ref)
+	return ReactModule.createElement(Button, {
+		onActivated = ReactModule.useCallback(function() --[[ Line: 30 ]]
+			-- upvalues: p1 (copy)
 			if p1.onActivated then
 				p1.onActivated:signal():fire()
 			end
 		end, { p1.onActivated }),
-		text = text,
+		text = Text,
 		isDisabled = not p1.onActivated,
-		variant = buttonVariant.Standard,
-		size = buttonSize.Medium
+		variant = ButtonVariant.Standard,
+		size = ButtonSize.Medium
 	})
 end

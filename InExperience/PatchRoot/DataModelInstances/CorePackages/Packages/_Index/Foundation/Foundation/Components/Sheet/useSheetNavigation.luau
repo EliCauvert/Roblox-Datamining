@@ -1,1 +1,1 @@
-﻿return require(script:FindFirstAncestor("Foundation").Utility.createUseModalNavigation)(require(script.Parent.SheetContext))
+﻿return require(script:FindFirstAncestor("Foundation").Utility.createUseModalNavigation)((require(script.Parent.SheetContext)))

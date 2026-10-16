@@ -1,10 +1,10 @@
-﻿local jestConfigsModule = require(script.Parent.Parent.Dev.JestConfigs)
+﻿local JestConfigsModule = require(script.Parent.Parent.Dev.JestConfigs)
 
 return {
 	displayName = "InlineRichText",
 	setupFilesAfterEnv = {
-		jestConfigsModule.setupFiles.UIBloxInitializer,
-		jestConfigsModule.setupFiles.createPromiseRejectionHandler(),
-		jestConfigsModule.setupFiles.RetryTimes
+		JestConfigsModule.setupFiles.UIBloxInitializer,
+		JestConfigsModule.setupFiles.createPromiseRejectionHandler(),
+		JestConfigsModule.setupFiles.RetryTimes
 	}
 }

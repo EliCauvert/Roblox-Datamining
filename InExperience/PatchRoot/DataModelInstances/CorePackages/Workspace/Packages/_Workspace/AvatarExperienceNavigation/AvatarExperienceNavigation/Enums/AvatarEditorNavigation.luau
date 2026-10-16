@@ -1,4 +1,4 @@
-﻿local t = {
+﻿local Categories = {
 	Characters = 1,
 	HeadAndBody = 2,
 	Clothing = 3,
@@ -8,10 +8,10 @@
 }
 
 return {
-	Categories = t,
+	Categories = Categories,
 	Subcategories = {
-		[t.Characters] = { Creations = 1, Purchased = 2 },
-		[t.HeadAndBody] = {
+		[Categories.Characters] = { Creations = 1, Purchased = 2 },
+		[Categories.HeadAndBody] = {
 			Style = 1,
 			Hair = 2,
 			Skin = 3,
@@ -24,7 +24,7 @@ return {
 			RightLegs = 10,
 			Build = 11
 		},
-		[t.Clothing] = {
+		[Categories.Clothing] = {
 			Tops = 1,
 			Outerwear = 2,
 			Bottoms = 3,
@@ -34,7 +34,7 @@ return {
 			ClassicTShirts = 7,
 			ClassicPants = 8
 		},
-		[t.Accessories] = {
+		[Categories.Accessories] = {
 			Hats = 1,
 			Face = 2,
 			Neck = 3,
@@ -44,8 +44,8 @@ return {
 			Waist = 7,
 			Gear = 8
 		},
-		[t.Emotes] = {},
-		[t.Animation] = {
+		[Categories.Emotes] = {},
+		[Categories.Animation] = {
 			Idle = 1,
 			Walk = 2,
 			Run = 3,

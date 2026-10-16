@@ -1,9 +1,9 @@
-﻿local urlModule = require(script.Parent.Parent.Parent.Network.Url)
+﻿local UrlModule = require(script.Parent.Parent.Parent.Network.Url)
 
-return function(p1, p2)
-	-- upvalues: urlModule (ref)
-	for i, v in ipairs(p2) do
-		p2[i] = tostring(v)
+return function(Callback, PlaceIds) --[[ Line: 4 ]]
+	-- upvalues: UrlModule (copy)
+	for i, placeId in ipairs(PlaceIds) do
+		PlaceIds[i] = tostring(placeId)
 	end
-	return p1(string.format("%s/v1/games/multiget-place-details?%s", urlModule.GAME_URL, urlModule:makeQueryString({ placeIds = p2 })), "GET")
+	return Callback(string.format("%s/v1/games/multiget-place-details?%s", UrlModule.GAME_URL, (UrlModule:makeQueryString({ placeIds = PlaceIds }))), "GET")
 end

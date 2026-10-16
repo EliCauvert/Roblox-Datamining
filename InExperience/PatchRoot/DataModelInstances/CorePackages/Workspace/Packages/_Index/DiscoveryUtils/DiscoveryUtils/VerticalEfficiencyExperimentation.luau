@@ -1,39 +1,42 @@
-﻿local experimentCacheManager = require(script:FindFirstAncestor("DiscoveryUtils").Parent.ExperimentCacheManager).ExperimentCacheManager
-local luaAppVerticalEfficiencyExpLayer = game:DefineFastString("LuaAppVerticalEfficiencyExpLayer", "PlayerApp.HomePage.UX")
+﻿local ExperimentCacheManager = require(script:FindFirstAncestor("DiscoveryUtils").Parent.ExperimentCacheManager).ExperimentCacheManager
+local LuaAppVerticalEfficiencyExpLayer = game:DefineFastString("LuaAppVerticalEfficiencyExpLayer", "PlayerApp.HomePage.UX")
 
-local function _(p1)
-	-- upvalues: luaAppVerticalEfficiencyExpLayer (ref), experimentCacheManager (ref)
-	local var1 = experimentCacheManager.default:getLayerVariables(luaAppVerticalEfficiencyExpLayer, true)
+local function _(p1) --[[ Line: 12 | Named "getIsUserInTreatmentAndSendExposureLog" ]]
+	-- upvalues: LuaAppVerticalEfficiencyExpLayer (copy), ExperimentCacheManager (copy)
+	local LayerVariables = ExperimentCacheManager.default:getLayerVariables(LuaAppVerticalEfficiencyExpLayer, true)
 	
-	if var1 and var1[p1] ~= nil then
-		experimentCacheManager.default:sendCustomExposureLog(luaAppVerticalEfficiencyExpLayer)
+	if LayerVariables and LayerVariables[p1] ~= nil then
+		ExperimentCacheManager.default:sendCustomExposureLog(LuaAppVerticalEfficiencyExpLayer)
 		
-		return var1[p1]
+		return LayerVariables[p1]
+	else
+		return false
 	end
-	return false
 end
 
 return {
-	getIsProfileMovedToTopBar = function()
-		-- upvalues: luaAppVerticalEfficiencyExpLayer (ref), experimentCacheManager (ref)
-		local var1 = experimentCacheManager.default:getLayerVariables(luaAppVerticalEfficiencyExpLayer, true)
+	getIsProfileMovedToTopBar = function() --[[ Line: 24 ]]
+		-- upvalues: LuaAppVerticalEfficiencyExpLayer (copy), ExperimentCacheManager (copy)
+		local LayerVariables = ExperimentCacheManager.default:getLayerVariables(LuaAppVerticalEfficiencyExpLayer, true)
 		
-		if var1 and var1.IsProfileMovedToTopBar ~= nil then
-			experimentCacheManager.default:sendCustomExposureLog(luaAppVerticalEfficiencyExpLayer)
+		if LayerVariables and LayerVariables.IsProfileMovedToTopBar ~= nil then
+			ExperimentCacheManager.default:sendCustomExposureLog(LuaAppVerticalEfficiencyExpLayer)
 			
-			return var1.IsProfileMovedToTopBar
+			return LayerVariables.IsProfileMovedToTopBar
+		else
+			return false
 		end
-		return false
 	end,
-	getIsRobloxLogoHeaderEnabled = function()
-		-- upvalues: luaAppVerticalEfficiencyExpLayer (ref), experimentCacheManager (ref)
-		local var1 = experimentCacheManager.default:getLayerVariables(luaAppVerticalEfficiencyExpLayer, true)
+	getIsRobloxLogoHeaderEnabled = function() --[[ Line: 28 ]]
+		-- upvalues: LuaAppVerticalEfficiencyExpLayer (copy), ExperimentCacheManager (copy)
+		local LayerVariables = ExperimentCacheManager.default:getLayerVariables(LuaAppVerticalEfficiencyExpLayer, true)
 		
-		if var1 and var1.IsRobloxLogoHeaderEnabled ~= nil then
-			experimentCacheManager.default:sendCustomExposureLog(luaAppVerticalEfficiencyExpLayer)
+		if LayerVariables and LayerVariables.IsRobloxLogoHeaderEnabled ~= nil then
+			ExperimentCacheManager.default:sendCustomExposureLog(LuaAppVerticalEfficiencyExpLayer)
 			
-			return var1.IsRobloxLogoHeaderEnabled
+			return LayerVariables.IsRobloxLogoHeaderEnabled
+		else
+			return false
 		end
-		return false
 	end
 }

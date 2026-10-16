@@ -1,15 +1,15 @@
-﻿local serverDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
-local parent = serverDrivenUi.Parent
-local reactModule = require(parent.React)
-local _ = require(parent.SduiCoreSystem)
-local useSduiSocialDataModule = require(serverDrivenUi.DataStore.useSduiSocialData)
+﻿local ServerDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
+local Parent = ServerDrivenUi.Parent
+local ReactModule = require(Parent.React)
+local _ = require(Parent.SduiCoreSystem)
+local UseSduiSocialDataModule = require(ServerDrivenUi.DataStore.useSduiSocialData)
 
-return function()
-	-- upvalues: useSduiSocialDataModule (ref), reactModule (ref)
-	local var1 = useSduiSocialDataModule()
+return function() --[[ Line: 16 | Named "useSduiDataStore" ]]
+	-- upvalues: UseSduiSocialDataModule (copy), ReactModule (copy)
+	local UseSduiSocialDataModuleResult = UseSduiSocialDataModule()
 	
-	return reactModule.useMemo(function()
-		-- upvalues: var1 (ref)
-		return { social = var1 }
-	end, { var1 })
+	return ReactModule.useMemo(function() --[[ Line: 19 ]]
+		-- upvalues: UseSduiSocialDataModuleResult (copy)
+		return { social = UseSduiSocialDataModuleResult }
+	end, { UseSduiSocialDataModuleResult })
 end

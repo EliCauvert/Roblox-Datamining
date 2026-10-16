@@ -1,25 +1,24 @@
-﻿local chrome = script:FindFirstAncestor("Chrome")
-local corePackagesService = game:GetService("CorePackages")
-local serviceModule = require(chrome.Service)
-local commonIconModule = require(chrome.Integrations.CommonIcon)
-local sideSheetPlacement = require(corePackagesService.Workspace.Packages.Chrome).Enums.SideSheetPlacement
-local inGameMenuIntegrationUtilsModule = require(script.Parent.InGameMenuIntegrationUtils)
-local resetCharacterPage = inGameMenuIntegrationUtilsModule.createPageOpenSignal("ResetCharacterPage")
+﻿local Chrome = script:FindFirstAncestor("Chrome")
+local CorePackages = game:GetService("CorePackages")
+local ServiceModule = require(Chrome.Service)
+local CommonIconModule = require(Chrome.Integrations.CommonIcon)
+local InGameMenuIntegrationUtilsModule = require(script.Parent.InGameMenuIntegrationUtils)
+local ResetCharacterPage = InGameMenuIntegrationUtilsModule.createPageOpenSignal("ResetCharacterPage")
 
-return serviceModule:register({
+return ServiceModule:register({
 	label = "CoreScripts.InGameMenu.QuickActions.Respawn",
-	initialAvailability = serviceModule.AvailabilitySignal.Available,
-	id = require(corePackagesService.Workspace.Packages.InExperienceSideSheet).Enums.ActionBinding.Respawn,
-	sideSheetPlacement = sideSheetPlacement.SessionAction,
-	activated = function(_)
-		-- upvalues: inGameMenuIntegrationUtilsModule (ref), resetCharacterPage (ref)
-		inGameMenuIntegrationUtilsModule.toggleIGMPage("ResetCharacterPage", resetCharacterPage:get())
+	initialAvailability = ServiceModule.AvailabilitySignal.Available,
+	id = require(CorePackages.Workspace.Packages.InExperienceSideSheet).Enums.ActionBinding.Respawn,
+	sideSheetPlacement = require(CorePackages.Workspace.Packages.Chrome).Enums.SideSheetPlacement.SessionAction,
+	activated = function(_) --[[ Line: 22 ]]
+		-- upvalues: InGameMenuIntegrationUtilsModule (copy), ResetCharacterPage (copy)
+		InGameMenuIntegrationUtilsModule.toggleIGMPage("ResetCharacterPage", ResetCharacterPage:get())
 	end,
-	isActivated = resetCharacterPage,
+	isActivated = ResetCharacterPage,
 	components = {
-		Icon = function(_)
-			-- upvalues: commonIconModule (ref), resetCharacterPage (ref)
-			return commonIconModule("icons/actions/respawn", nil, resetCharacterPage)
+		Icon = function(_) --[[ Line: 27 ]]
+			-- upvalues: CommonIconModule (copy), ResetCharacterPage (copy)
+			return CommonIconModule("icons/actions/respawn", nil, ResetCharacterPage)
 		end
 	}
 })

@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.CrossExperienceVoice.CrossExperienceVoice)
+﻿return (require(script.Parent._Workspace.CrossExperienceVoice.CrossExperienceVoice))

@@ -1,45 +1,45 @@
-﻿local squadsCore = script:FindFirstAncestor("SquadsCore")
-local socialService = game:GetService("SocialService")
-local sharedFlagsModule = require(squadsCore.Parent.SharedFlags)
-local validateSquadIdModule = require(squadsCore.Common.validateSquadId)
-local t = {}
-t.__index = t
-local fFlagPartyDevAPIToRespectThirdPartySettingsEnabled = sharedFlagsModule.FFlagPartyDevAPIToRespectThirdPartySettingsEnabled
+﻿local SquadsCore = script:FindFirstAncestor("SquadsCore")
+local SocialService = game:GetService("SocialService")
+local ValidateSquadIdModule = require(SquadsCore.Common.validateSquadId)
+local Module = {}
+Module.__index = Module
+local FFlagPartyDevAPIToRespectThirdPartySettingsEnabled = require(SquadsCore.Parent.SharedFlags).FFlagPartyDevAPIToRespectThirdPartySettingsEnabled
 
-function t.new()
-	-- upvalues: t (ref)
-	return setmetatable({ isLeaveSquadPending = false, lastFiredSquadId = "" }, t)
+function Module.new() --[[ Line: 29 ]]
+	-- upvalues: Module (copy)
+	return (setmetatable({ isLeaveSquadPending = false, lastFiredSquadId = "" }, Module))
 end
 
-function t:setLeaveSquadPendingAndFireEvent(p1, p2)
-	if self:_setLeaveSquadPending(p1) then
-		self:fireSquadChangeEvent(nil, p2)
+function Module:setLeaveSquadPendingAndFireEvent(IsLeaveSquadPending, p1) --[[ Line: 40 ]]
+	if self:_setLeaveSquadPending(IsLeaveSquadPending) then
+		self:fireSquadChangeEvent(nil, p1)
 	end
 end
 
-function t:fireSquadChangeEvent(p1, p2)
-	-- upvalues: validateSquadIdModule (ref), socialService (ref), fFlagPartyDevAPIToRespectThirdPartySettingsEnabled (ref)
-	p1 = p1 or ""
-	assert(if p1 ~= "" then validateSquadIdModule(p1) else true, "Try to fire with wrong squadId")
+function Module:fireSquadChangeEvent(p1, p2) --[[ Line: 46 ]]
+	-- upvalues: ValidateSquadIdModule (copy), SocialService (copy), FFlagPartyDevAPIToRespectThirdPartySettingsEnabled (copy)
+	local P4 = p1 or ""
+	assert(P4 == "" or ValidateSquadIdModule(P4), "Try to fire with wrong squadId")
 	
-	if p1 ~= "" then
+	if P4 ~= "" then
 		self:_setLeaveSquadPending(false)
 	end
-	if (not self.isLeaveSquadPending or p1 ~= "") and self.lastFiredSquadId ~= p1 then
-		self.lastFiredSquadId = p1
-		socialService:UpdatePlayerPartyData(p1, if fFlagPartyDevAPIToRespectThirdPartySettingsEnabled then not p2 else nil)
+	if (not self.isLeaveSquadPending or P4 ~= "") and self.lastFiredSquadId ~= P4 then
+		self.lastFiredSquadId = P4
+		SocialService:UpdatePlayerPartyData(P4, if FFlagPartyDevAPIToRespectThirdPartySettingsEnabled then not p2 else nil)
 	end
 end
 
-function t:_setLeaveSquadPending(p1)
-	if self.isLeaveSquadPending == p1 then
+function Module:_setLeaveSquadPending(IsLeaveSquadPending): boolean --[[ Line: 63 ]]
+	if self.isLeaveSquadPending == IsLeaveSquadPending then
 		return false
+	else
+		self.isLeaveSquadPending = IsLeaveSquadPending
+		
+		return true
 	end
-	self.isLeaveSquadPending = p1
-	
-	return true
 end
 
-t.default = t.new()
+Module.default = Module.new()
 
-return t.default
+return Module.default

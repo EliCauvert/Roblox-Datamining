@@ -1,96 +1,98 @@
-﻿local httpService = game:GetService("HttpService")
-local parent = script:FindFirstAncestor("ExpChat").Parent
-local urlBuilderModule = require(parent.UrlBuilder)
-local urlBuilder = urlBuilderModule.UrlBuilder
-local urlBase = urlBuilderModule.UrlBase
-local expChatSharedModule = require(parent.ExpChatShared)
-local var1 = expChatSharedModule.Logger:new("ExpChat/" .. script.Name)
-local fFlagExpChatUseUnifiedTooltipStore = expChatSharedModule.Flags.FFlagExpChatUseUnifiedTooltipStore
-local var2 = urlBuilder.new({
+﻿local HttpService = game:GetService("HttpService")
+local Parent = script:FindFirstAncestor("ExpChat").Parent
+local UrlBuilderModule = require(Parent.UrlBuilder)
+local UrlBuilder = UrlBuilderModule.UrlBuilder
+local UrlBase = UrlBuilderModule.UrlBase
+local ExpChatSharedModule = require(Parent.ExpChatShared)
+local NewResult = ExpChatSharedModule.Logger:new("ExpChat/" .. script.Name)
+local FFlagExpChatUseUnifiedTooltipStore = ExpChatSharedModule.Flags.FFlagExpChatUseUnifiedTooltipStore
+local Url = UrlBuilder.new({
 	path = "modals-api/v1/prompts",
-	base = urlBase.APIS,
+	base = UrlBase.APIS,
 	query = {
 		entryPoint = "InExperienceChatWindowOpen",
 		promptStyle = if game:DefineFastFlag("ExpChatUseTooltipPromptStyle", false) then "Tooltip" else "Modal"
 	}
 })()
-local var3 = urlBuilder.new({
+local Url1 = UrlBuilder.new({
 	path = "modals-api/v1/prompts/impression",
-	base = urlBase.APIS
+	base = UrlBase.APIS
 })()
-local var4 = nil
+local CustomPrompts = nil
 
 return {
-	fetchAllTooltipEligibility = function(p1, p2)
-		-- upvalues: fFlagExpChatUseUnifiedTooltipStore (ref), var4 (write), httpService (ref), var2 (ref), var1 (ref)
-		if not fFlagExpChatUseUnifiedTooltipStore then return end
-		if var4 == nil then
-			httpService:RequestInternal({
+	fetchAllTooltipEligibility = function(Callback: (any) -> (), Callback1) --[[ Line: 87 ]]
+		-- upvalues: FFlagExpChatUseUnifiedTooltipStore (copy), CustomPrompts (ref), HttpService (copy), Url (copy), NewResult (copy)
+		if not FFlagExpChatUseUnifiedTooltipStore then return end
+		if CustomPrompts == nil then
+			HttpService:RequestInternal({
 				Method = "GET",
-				Url = var2,
+				Url = Url,
 				Headers = { Accept = "application/json" }
-			}):Start(function(_, p3)
-				-- upvalues: httpService (copy), var4 (copy), p1 (ref), var1 (copy), p2 (ref)
-				if p3.StatusCode == 200 then
-					local ok, status = pcall(function()
-						-- upvalues: httpService (copy), p3 (ref)
-						return httpService:JSONDecode(p3.Body)
+			}):Start(function(_, p1) --[[ Line: 107 ]]
+				-- upvalues: HttpService (upval), CustomPrompts (upval), Callback (copy), NewResult (upval), Callback1 (copy)
+				if p1.StatusCode == 200 then
+					local Success, Result = pcall(function() --[[ Line: 109 ]]
+						-- upvalues: HttpService (upval), p1 (copy)
+						return HttpService:JSONDecode(p1.Body)
 					end)
 					
-					if ok and status then
-						local customPrompts = status.customPrompts
+					if Success and Result then
+						local CustomPrompts1 = Result.customPrompts
 						
-						if type(customPrompts) ~= "table" then
-							customPrompts = {}
+						if type(CustomPrompts1) ~= "table" then
+							CustomPrompts1 = {}
 						end
-						var4 = customPrompts
+						CustomPrompts = CustomPrompts1
 						
-						if p1 then
-							p1({ customPrompts = customPrompts })
+						if Callback then
+							Callback({ customPrompts = CustomPrompts1 })
 							
 							return
 						end
 					else
-						var4 = {}
-						var1:error("Failed to decode ChatTooltip eligibility response")
+						CustomPrompts = {}
+						NewResult:error("Failed to decode ChatTooltip eligibility response")
 						
-						if p2 then
-							p2()
+						if Callback1 then
+							Callback1()
 							
 							return
 						end
 					end
 				else
-					var4 = {}
-					var1:error("ChatTooltip eligibility request failed: {} {}", tostring(p3.StatusCode), p3.StatusMessage or "")
+					CustomPrompts = {}
+					NewResult:error("ChatTooltip eligibility request failed: {} {}", tostring(p1.StatusCode), p1.StatusMessage or "")
 					
-					if p2 then
-						p2()
+					if Callback1 then
+						Callback1()
 					end
 				end
 			end)
 			
 			return
-		elseif p1 then
-			p1({ customPrompts = var4 })
+		end
+		if Callback then
+			Callback({ customPrompts = CustomPrompts })
 		end
 	end,
-	reportImpression = function(p1)
-		-- upvalues: fFlagExpChatUseUnifiedTooltipStore (ref), httpService (ref), var3 (ref), var1 (ref)
-		if fFlagExpChatUseUnifiedTooltipStore then
-			httpService:RequestInternal({
+	reportImpression = function(PromptId) --[[ Line: 50 ]]
+		-- upvalues: FFlagExpChatUseUnifiedTooltipStore (copy), HttpService (copy), Url1 (copy), NewResult (copy)
+		if FFlagExpChatUseUnifiedTooltipStore then
+			HttpService:RequestInternal({
 				Method = "POST",
-				Url = var3,
+				Url = Url1,
 				Headers = { ["Content-Type"] = "application/json" },
-				Body = httpService:JSONEncode({ promptType = p1, promptId = p1 })
-			}):Start(function(_, p2)
-				-- upvalues: var1 (copy), p1 (ref)
-				if p2.StatusCode == 200 then
-					var1:debug("ChatTooltip impression reported: {}", p1)
+				Body = HttpService:JSONEncode({ promptType = PromptId, promptId = PromptId })
+			}):Start(function(_, p1) --[[ Line: 69 ]]
+				-- upvalues: NewResult (upval), PromptId (copy)
+				if p1.StatusCode == 200 then
+					NewResult:debug("ChatTooltip impression reported: {}", PromptId)
 					
 					return
+				else
+					NewResult:error("ChatTooltip impression failed for {}: {} {}", PromptId, tostring(p1.StatusCode), p1.StatusMessage or "")
 				end
-				var1:error("ChatTooltip impression failed for {}: {} {}", p1, tostring(p2.StatusCode), p2.StatusMessage or "")
 			end)
 			
 			return

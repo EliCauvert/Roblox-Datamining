@@ -1,0 +1,3 @@
+﻿local FFlagAXRefetchInventoryOnUpdateModule = require(script.Parent.FFlagAXRefetchInventoryOnUpdate)
+
+return game:DefineFastFlag("AXBackgroundGenerationPollPublishedInventory", false) and FFlagAXRefetchInventoryOnUpdateModule

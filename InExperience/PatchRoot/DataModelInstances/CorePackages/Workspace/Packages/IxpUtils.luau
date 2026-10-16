@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.IxpUtils.IxpUtils)
+﻿return (require(script.Parent._Workspace.IxpUtils.IxpUtils))

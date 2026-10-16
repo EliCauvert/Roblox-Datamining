@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Workspace.CoreScriptsInitializer.CoreScriptsInitializer)
+﻿return (require(script.Parent.Parent.Parent._Workspace.CoreScriptsInitializer.CoreScriptsInitializer))

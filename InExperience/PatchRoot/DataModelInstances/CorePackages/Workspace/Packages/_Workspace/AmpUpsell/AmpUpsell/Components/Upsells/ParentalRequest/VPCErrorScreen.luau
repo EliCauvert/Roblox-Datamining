@@ -1,122 +1,137 @@
-﻿local ampUpsell = script:FindFirstAncestor("AmpUpsell")
-local parent = ampUpsell.Parent
-local reactModule = require(parent.React)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local vpcErrorScreenStrings = require(ampUpsell.Common.LocalizationStrings).vpcErrorScreenStrings
-local getRetryBehaviorFromErrorCodeAndRetryNum = require(ampUpsell.Common.VPCErrorUtils).getRetryBehaviorFromErrorCodeAndRetryNum
-local getStringsFromErrorCodeAndRetryNum = require(ampUpsell.Common.VPCErrorUtils).getStringsFromErrorCodeAndRetryNum
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local UIBloxModule = require(parent.UIBlox)
-local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
-local buttonType = UIBloxModule.App.Button.Enum.ButtonType
-local cryoModule = require(parent.Cryo)
-local VPCRetryBehaviorEnum = require(ampUpsell.Common.Enums).VPCRetryBehaviorEnum
-local getFFlagEnableVPCUpsellFoundationDialogHardeningModule = require(ampUpsell.Flags.GetFFlagEnableVPCUpsellFoundationDialogHardening)
-local getShouldUseFoundationUIVPCUpsellModule = require(ampUpsell.Flags.GetShouldUseFoundationUIVPCUpsell)
-local foundationModule = require(parent.Foundation)
-local dialog = foundationModule.Dialog
-local dialogSize = foundationModule.Enums.DialogSize
-local buttonVariant = foundationModule.Enums.ButtonVariant
+﻿local AmpUpsell = script:FindFirstAncestor("AmpUpsell")
+local Parent = AmpUpsell.Parent
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local VpcErrorScreenStrings = require(AmpUpsell.Common.LocalizationStrings).vpcErrorScreenStrings
+local GetRetryBehaviorFromErrorCodeAndRetryNumFunction = require(AmpUpsell.Common.VPCErrorUtils).getRetryBehaviorFromErrorCodeAndRetryNum
+local GetStringsFromErrorCodeAndRetryNumFunction = require(AmpUpsell.Common.VPCErrorUtils).getStringsFromErrorCodeAndRetryNum
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local UIBloxModule = require(Parent.UIBlox)
+local InteractiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
+local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
+local CryoModule = require(Parent.Cryo)
+local VPCRetryBehaviorEnum = require(AmpUpsell.Common.Enums).VPCRetryBehaviorEnum
+local GetFFlagEnableVPCUpsellFoundationDialogHardeningModule = require(AmpUpsell.Flags.GetFFlagEnableVPCUpsellFoundationDialogHardening)
+local GetShouldUseFoundationUIVPCUpsellModule = require(AmpUpsell.Flags.GetShouldUseFoundationUIVPCUpsell)
+local FoundationModule = require(Parent.Foundation)
+local Dialog = FoundationModule.Dialog
+local DialogSize = FoundationModule.Enums.DialogSize
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
 
-local function selectScreenSize(p1)
+local function selectScreenSize(p1) --[[ Line: 37 ]]
 	return p1.ScreenSize
 end
 
-return function(p1)
-	-- upvalues: useSelector (ref), selectScreenSize (ref), getShouldUseFoundationUIVPCUpsellModule (ref), getRetryBehaviorFromErrorCodeAndRetryNum (ref), getStringsFromErrorCodeAndRetryNum (ref), useLocalization (ref), cryoModule (ref), vpcErrorScreenStrings (ref), VPCRetryBehaviorEnum (ref), buttonVariant (ref), buttonType (ref), reactModule (ref), dialog (ref), dialogSize (ref), getFFlagEnableVPCUpsellFoundationDialogHardeningModule (ref), interactiveAlert (ref)
-	local errorCode = p1.errorCode
-	local onRetryAmp = p1.onRetryAmp
-	local onRetryVPC = p1.onRetryVPC
-	local onCancel = p1.onCancel
-	local onSuccess = p1.onSuccess
-	local retryNum = p1.retryNum
-	local var1 = useSelector(selectScreenSize)
-	local var2 = if p1.disablePortal then p1.disablePortal else false
-	local var3 = getShouldUseFoundationUIVPCUpsellModule(if p1.isInExperienceEntry then p1.isInExperienceEntry else false)
-	local var4 = getRetryBehaviorFromErrorCodeAndRetryNum(errorCode, retryNum)
-	local var5 = getStringsFromErrorCodeAndRetryNum(errorCode, retryNum)
-	local var6 = useLocalization(cryoModule.Dictionary.join(vpcErrorScreenStrings, { titleText = var5.title, bodyText = var5.body }))
-	local t = {}
-	local t_1 = {}
+return function(p1) --[[ Line: 41 | Named "VPCErrorScreen" ]]
+	-- upvalues: UseSelectorFunction (copy), selectScreenSize (copy), GetShouldUseFoundationUIVPCUpsellModule (copy), GetRetryBehaviorFromErrorCodeAndRetryNumFunction (copy), GetStringsFromErrorCodeAndRetryNumFunction (copy), UseLocalizationFunction (copy), CryoModule (copy), VpcErrorScreenStrings (copy), VPCRetryBehaviorEnum (copy), ButtonVariant (copy), ButtonType (copy), ReactModule (copy), Dialog (copy), DialogSize (copy), GetFFlagEnableVPCUpsellFoundationDialogHardeningModule (copy), InteractiveAlert (copy)
+	local ErrorCode = p1.errorCode
+	local OnRetryAmp = p1.onRetryAmp
+	local OnRetryVPC = p1.onRetryVPC
+	local OnCancel = p1.onCancel
+	local OnSuccess = p1.onSuccess
+	local RetryNum = p1.retryNum
+	local UseSelectorResult = UseSelectorFunction(selectScreenSize)
+	local DisablePortal = if p1.disablePortal then p1.disablePortal else false
+	local ShouldUseFoundationUIVPCUpsellModule = GetShouldUseFoundationUIVPCUpsellModule(if p1.isInExperienceEntry then p1.isInExperienceEntry else false)
+	local RetryBehaviorFromErrorCodeAndRetryNum = GetRetryBehaviorFromErrorCodeAndRetryNumFunction(ErrorCode, RetryNum)
+	local StringsFromErrorCodeAndRetryNum = GetStringsFromErrorCodeAndRetryNumFunction(ErrorCode, RetryNum)
+	local UseLocalizationResult = UseLocalizationFunction(CryoModule.Dictionary.join(VpcErrorScreenStrings, {
+		titleText = StringsFromErrorCodeAndRetryNum.title,
+		bodyText = StringsFromErrorCodeAndRetryNum.body
+	}))
+	local Buttons = {}
+	local Actions = {}
 	
-	if var4 == VPCRetryBehaviorEnum.RetryVPC or var4 == VPCRetryBehaviorEnum.RetryAMP then
-		local var7 = if var4 == VPCRetryBehaviorEnum.RetryVPC then onRetryVPC else onRetryAmp
+	if RetryBehaviorFromErrorCodeAndRetryNum == VPCRetryBehaviorEnum.RetryVPC or RetryBehaviorFromErrorCodeAndRetryNum == VPCRetryBehaviorEnum.RetryAMP then
+		local OnRetryVPC1 = if RetryBehaviorFromErrorCodeAndRetryNum == VPCRetryBehaviorEnum.RetryVPC then OnRetryVPC else OnRetryAmp
 		
-		if var3 then
-			t_1 = {
+		if ShouldUseFoundationUIVPCUpsellModule then
+			Actions = {
 				{
-					text = var6.cancelButton,
-					variant = buttonVariant.Standard,
-					onActivated = onCancel
+					text = UseLocalizationResult.cancelButton,
+					variant = ButtonVariant.Standard,
+					onActivated = OnCancel
 				},
 				{
-					text = var6.retryButton,
-					variant = buttonVariant.Emphasis,
-					onActivated = var7
+					text = UseLocalizationResult.retryButton,
+					variant = ButtonVariant.Emphasis,
+					onActivated = OnRetryVPC1
 				}
 			}
 		else
-			t = {
+			Buttons = {
 				{
-					buttonType = buttonType.Secondary,
-					props = { onActivated = onCancel, text = var6.cancelButton }
+					buttonType = ButtonType.Secondary,
+					props = {
+						onActivated = OnCancel,
+						text = UseLocalizationResult.cancelButton
+					}
 				},
 				{
-					buttonType = buttonType.PrimarySystem,
-					props = { onActivated = var7, text = var6.retryButton }
+					buttonType = ButtonType.PrimarySystem,
+					props = {
+						onActivated = OnRetryVPC1,
+						text = UseLocalizationResult.retryButton
+					}
 				}
 			}
 		end
-	elseif var4 == VPCRetryBehaviorEnum.Success then
-		if var3 then
-			t_1 = {
+	elseif RetryBehaviorFromErrorCodeAndRetryNum == VPCRetryBehaviorEnum.Success then
+		if ShouldUseFoundationUIVPCUpsellModule then
+			Actions = {
 				{
-					text = var6.okButton,
-					variant = buttonVariant.Standard,
-					onActivated = onSuccess
+					text = UseLocalizationResult.okButton,
+					variant = ButtonVariant.Standard,
+					onActivated = OnSuccess
 				}
 			}
 		else
-			t = {
+			Buttons = {
 				{
-					buttonType = buttonType.PrimarySystem,
-					props = { onActivated = onSuccess, text = var6.okButton }
+					buttonType = ButtonType.PrimarySystem,
+					props = {
+						onActivated = OnSuccess,
+						text = UseLocalizationResult.okButton
+					}
 				}
 			}
 		end
-	elseif var3 then
-		t_1 = {
+	elseif ShouldUseFoundationUIVPCUpsellModule then
+		Actions = {
 			{
-				text = var6.okButton,
-				variant = buttonVariant.Standard,
-				onActivated = onCancel
+				text = UseLocalizationResult.okButton,
+				variant = ButtonVariant.Standard,
+				onActivated = OnCancel
 			}
 		}
 	else
-		t = {
+		Buttons = {
 			{
-				buttonType = buttonType.PrimarySystem,
-				props = { onActivated = onCancel, text = var6.okButton }
+				buttonType = ButtonType.PrimarySystem,
+				props = {
+					onActivated = OnCancel,
+					text = UseLocalizationResult.okButton
+				}
 			}
 		}
 	end
-	return if var3 then reactModule.createElement(dialog.Root, {
-		size = dialogSize.Small,
-		onClose = onCancel,
-		disablePortal = var2,
-		hasBackdrop = if getFFlagEnableVPCUpsellFoundationDialogHardeningModule() then true else false
+	return if ShouldUseFoundationUIVPCUpsellModule then ReactModule.createElement(Dialog.Root, {
+		size = DialogSize.Small,
+		onClose = OnCancel,
+		disablePortal = DisablePortal,
+		hasBackdrop = if GetFFlagEnableVPCUpsellFoundationDialogHardeningModule() then true else false
 	}, {
-		DialogTitle = reactModule.createElement(dialog.Title, { text = var6.titleText }),
-		DialogContent = reactModule.createElement(dialog.Content, { LayoutOrder = 2 }, {
-			DialogText = reactModule.createElement(dialog.Text, { Text = var6.bodyText })
+		DialogTitle = ReactModule.createElement(Dialog.Title, { text = UseLocalizationResult.titleText }),
+		DialogContent = ReactModule.createElement(Dialog.Content, { LayoutOrder = 2 }, {
+			DialogText = ReactModule.createElement(Dialog.Text, { Text = UseLocalizationResult.bodyText })
 		}),
-		DialogActions = reactModule.createElement(dialog.Actions, { LayoutOrder = 3, actions = t_1 })
-	}) else reactModule.createElement(interactiveAlert, {
+		DialogActions = ReactModule.createElement(Dialog.Actions, { LayoutOrder = 3, actions = Actions })
+	}) else ReactModule.createElement(InteractiveAlert, {
 		anchorPoint = Vector2.new(0.5, 0.5),
 		position = UDim2.new(0.5, 0, 0.5, 0),
-		screenSize = var1,
-		title = var6.titleText,
-		bodyText = var6.bodyText,
-		buttonStackInfo = { buttons = t }
+		screenSize = UseSelectorResult,
+		title = UseLocalizationResult.titleText,
+		bodyText = UseLocalizationResult.bodyText,
+		buttonStackInfo = { buttons = Buttons }
 	})
 end

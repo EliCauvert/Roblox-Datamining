@@ -1,33 +1,34 @@
-﻿local avatarEditorService = game:GetService("AvatarEditorService")
-local marketplaceService = game:GetService("MarketplaceService")
-local promiseModule = require(game:GetService("CorePackages").Packages.Promise)
-local parent = script.Parent.Parent
-local openPromptModule = require(parent.Actions.OpenPrompt)
-local promptTypeModule = require(parent.PromptType)
+﻿local AvatarEditorService = game:GetService("AvatarEditorService")
+local MarketplaceService = game:GetService("MarketplaceService")
+local PromiseModule = require(game:GetService("CorePackages").Packages.Promise)
+local Parent = script.Parent.Parent
+local OpenPromptModule = require(Parent.Actions.OpenPrompt)
+local PromptTypeModule = require(Parent.PromptType)
 
-return function(p1, p2, p3)
-	-- upvalues: promiseModule (ref), marketplaceService (ref), openPromptModule (ref), promptTypeModule (ref), avatarEditorService (ref)
-	return function(p4)
-		-- upvalues: promiseModule (copy), p2 (ref), marketplaceService (copy), p1 (ref), openPromptModule (copy), promptTypeModule (copy), p3 (ref), avatarEditorService (copy)
-		return promiseModule.new(function(p5, p6)
-			-- upvalues: p2 (copy), marketplaceService (copy), p1 (copy), p4 (ref), openPromptModule (copy), promptTypeModule (copy), p3 (copy), avatarEditorService (copy)
-			local var1 = if p2 == Enum.AvatarItemType.Asset then Enum.InfoType.Asset else Enum.InfoType.Bundle
-			local ok, status = pcall(function()
-				-- upvalues: marketplaceService (copy), p1 (copy), var1 (write)
-				return marketplaceService:GetProductInfoAsync(p1, var1)
+return function(ItemId, ItemType, ShouldFavorite) --[[ Line: 12 ]]
+	-- upvalues: PromiseModule (copy), MarketplaceService (copy), OpenPromptModule (copy), PromptTypeModule (copy), AvatarEditorService (copy)
+	return function(p1) --[[ Line: 13 ]]
+		-- upvalues: PromiseModule (upval), ItemType (copy), MarketplaceService (upval), ItemId (copy), OpenPromptModule (upval), PromptTypeModule (upval), ShouldFavorite (copy), AvatarEditorService (upval)
+		return PromiseModule.new(function(Callback: () -> (), Callback1: () -> ()) --[[ Line: 14 ]]
+			-- upvalues: ItemType (upval), MarketplaceService (upval), ItemId (upval), p1 (copy), OpenPromptModule (upval), PromptTypeModule (upval), ShouldFavorite (upval), AvatarEditorService (upval)
+			local Asset = nil
+			Asset = if ItemType == Enum.AvatarItemType.Asset then Enum.InfoType.Asset else Enum.InfoType.Bundle
+			local Success, Result = pcall(function() --[[ Line: 22 ]]
+				-- upvalues: MarketplaceService (upval), ItemId (upval), Asset (ref)
+				return MarketplaceService:GetProductInfoAsync(ItemId, Asset)
 			end)
 			
-			if ok then
-				p4:dispatch(openPromptModule(promptTypeModule.SetFavorite, {
-					itemId = p1,
-					itemName = status.Name,
-					itemType = p2,
-					shouldFavorite = p3
+			if Success then
+				p1:dispatch(OpenPromptModule(PromptTypeModule.SetFavorite, {
+					itemId = ItemId,
+					itemName = Result.Name,
+					itemType = ItemType,
+					shouldFavorite = ShouldFavorite
 				}))
-				p5()
+				Callback()
 			else
-				avatarEditorService:SignalSetFavoriteFailed()
-				p6()
+				AvatarEditorService:SignalSetFavoriteFailed()
+				Callback1()
 			end
 		end)
 	end

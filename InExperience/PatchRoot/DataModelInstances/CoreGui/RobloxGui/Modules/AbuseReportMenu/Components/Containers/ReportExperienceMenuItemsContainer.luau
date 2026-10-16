@@ -1,34 +1,34 @@
-﻿local abuseReportMenu = script:FindFirstAncestor("AbuseReportMenu")
-local corePackagesService = game:GetService("CorePackages")
-local reactModule = require(corePackagesService.Packages.React)
-local getMenuItemsFromConfigsModule = require(abuseReportMenu.MenuConfigs.getMenuItemsFromConfigs)
-local getMenuItemSizingsModule = require(abuseReportMenu.Utility.getMenuItemSizings)
-local reportExperienceMenuItemConfigListModule = require(abuseReportMenu.MenuConfigs.Experience.ReportExperienceMenuItemConfigList)
-local _ = require(abuseReportMenu.Components.Types)
-local constantsModule = require(abuseReportMenu.Components.Constants)
-local cryoModule = require(corePackagesService.Packages.Cryo)
-local reportExperienceUIStateReducerModule = require(abuseReportMenu.Reducers.reportExperienceUIStateReducer)
+﻿local AbuseReportMenu = script:FindFirstAncestor("AbuseReportMenu")
+local CorePackages = game:GetService("CorePackages")
+local ReactModule = require(CorePackages.Packages.React)
+local GetMenuItemsFromConfigsModule = require(AbuseReportMenu.MenuConfigs.getMenuItemsFromConfigs)
+local GetMenuItemSizingsModule = require(AbuseReportMenu.Utility.getMenuItemSizings)
+local ReportExperienceMenuItemConfigListModule = require(AbuseReportMenu.MenuConfigs.Experience.ReportExperienceMenuItemConfigList)
+local _ = require(AbuseReportMenu.Components.Types)
+local ConstantsModule = require(AbuseReportMenu.Components.Constants)
+local CryoModule = require(CorePackages.Packages.Cryo)
+local ReportExperienceUIStateReducerModule = require(AbuseReportMenu.Reducers.reportExperienceUIStateReducer)
 
-return function(p1)
-	-- upvalues: getMenuItemSizingsModule (ref), reactModule (ref), reportExperienceUIStateReducerModule (ref), constantsModule (ref), getMenuItemsFromConfigsModule (ref), reportExperienceMenuItemConfigListModule (ref), cryoModule (ref)
-	local var1 = getMenuItemSizingsModule()
-	local var2, var3 = reactModule.useReducer(reportExperienceUIStateReducerModule, constantsModule.InitExperienceUIState)
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), constantsModule (copy)
+return function(p1) --[[ Line: 17 | Named "ReportExperienceMenuItemsContainer" ]]
+	-- upvalues: GetMenuItemSizingsModule (copy), ReactModule (copy), ReportExperienceUIStateReducerModule (copy), ConstantsModule (copy), GetMenuItemsFromConfigsModule (copy), ReportExperienceMenuItemConfigListModule (copy), CryoModule (copy)
+	local MenuItemSizingsModule = GetMenuItemSizingsModule()
+	local UseReducerResult, UseReducerResult2 = ReactModule.useReducer(ReportExperienceUIStateReducerModule, ConstantsModule.InitExperienceUIState)
+	ReactModule.useEffect(function() --[[ Line: 21 ]]
+		-- upvalues: p1 (copy), ConstantsModule (upval)
 		if p1.utilityProps.isReportTabVisible then
 			p1.utilityProps.analyticsDispatch({
-				type = constantsModule.AnalyticsActions.SwitchToExperienceInitialSelections
+				type = ConstantsModule.AnalyticsActions.SwitchToExperienceInitialSelections
 			})
 		end
 	end, { p1.utilityProps.isReportTabVisible })
 	
-	return reactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
-		MenuItems = reactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, cryoModule.Dictionary.join({
-			Layout = reactModule.createElement("UIListLayout", {
+	return ReactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, {
+		MenuItems = ReactModule.createElement("Frame", { BackgroundTransparency = 1, Size = UDim2.new(1, 0, 1, 0) }, (CryoModule.Dictionary.join({
+			Layout = ReactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Vertical,
 				SortOrder = Enum.SortOrder.LayoutOrder,
-				Padding = UDim.new(0, var1.ItemPadding)
+				Padding = UDim.new(0, MenuItemSizingsModule.ItemPadding)
 			})
-		}, getMenuItemsFromConfigsModule(var2, var3, p1.utilityProps, reportExperienceMenuItemConfigListModule, p1.isSmallPortraitViewport)))
+		}, (GetMenuItemsFromConfigsModule(UseReducerResult, UseReducerResult2, p1.utilityProps, ReportExperienceMenuItemConfigListModule, p1.isSmallPortraitViewport)))))
 	})
 end

@@ -1,16 +1,16 @@
-﻿local parent = script:FindFirstAncestor("AppBlox").Parent
-local cryoModule = require(parent.Cryo)
-local reactModule = require(parent.React)
-local view = require(parent.Foundation).View
+﻿local Parent = script:FindFirstAncestor("AppBlox").Parent
+local CryoModule = require(Parent.Cryo)
+local ReactModule = require(Parent.React)
+local View = require(Parent.Foundation).View
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), view (ref), cryoModule (ref)
-	return reactModule.createElement(view, {
+return ReactModule.memo(function(p1) --[[ Line: 19 | Named "EmptyTile" ]]
+	-- upvalues: ReactModule (copy), View (copy), CryoModule (copy)
+	return ReactModule.createElement(View, {
 		tag = "size-full",
 		LayoutOrder = p1.layoutOrder,
 		ZIndex = p1.ZIndex
-	}, cryoModule.Dictionary.union(p1.children or {}, {
-		Content = reactModule.createElement(view, {
+	}, CryoModule.Dictionary.union(p1.children or {}, {
+		Content = ReactModule.createElement(View, {
 			tag = "bg-surface-100 padding-y-medium padding-x-small radius-medium",
 			aspectRatio = p1.tileAspectRatio,
 			Size = p1.size

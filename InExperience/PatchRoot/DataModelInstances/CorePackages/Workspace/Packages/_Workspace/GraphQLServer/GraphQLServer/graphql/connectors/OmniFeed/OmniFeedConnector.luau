@@ -1,87 +1,81 @@
-﻿local httpService = game:GetService("HttpService")
-local parent = script:FindFirstAncestor("GraphQLServer").Parent
-local object = require(parent.LuauPolyfill).Object
-local promiseModule = require(parent.Promise)
-local t = {}
-local fetchModule = require(parent.Fetch)
-local fetch = fetchModule.fetch
-local response = fetchModule.Response
-local graphQLError = require(parent.GraphQL).GraphQLError
-local urlBuilder = require(parent.UrlBuilder).UrlBuilder
-local buildOmniRecommendationsRequestModule = require(script.Parent.buildOmniRecommendationsRequest)
+﻿local HttpService = game:GetService("HttpService")
+local Parent = script:FindFirstAncestor("GraphQLServer").Parent
+local Object = require(Parent.LuauPolyfill).Object
+local PromiseModule = require(Parent.Promise)
+local FetchModule = require(Parent.Fetch)
+local Fetch = FetchModule.fetch
+local Response = FetchModule.Response
+local GraphQLError = require(Parent.GraphQL).GraphQLError
+local BuildOmniRecommendationsRequestModule = require(script.Parent.buildOmniRecommendationsRequest)
 local _ = require(script.Parent.Parent.Parent.generatedTypes)
+local OmniRecommendationMetadata = require(Parent.UrlBuilder).UrlBuilder.fromString("apis:discovery-api/omni-recommendation-metadata")
 
-local function findOmniFeedBySessionId(p1, p2)
-	-- upvalues: fetch (ref), buildOmniRecommendationsRequestModule (ref), promiseModule (ref), response (ref), graphQLError (ref), object (ref)
-	local var1 = buildOmniRecommendationsRequestModule(p2 or fetch)
-	
-	return promiseModule.new(function(p3, p4)
-		-- upvalues: var1 (ref), p1 (ref), response (copy), graphQLError (copy), object (copy)
-		local var2 = var1(p1.pageType, p1.sessionId, p1.nextPageToken, p1.supportedTreatmentTypes):catch(function()
-			-- upvalues: response (copy)
-			return response.error()
-		end):expect()
+return {
+	findOmniFeedBySessionId = function(p1, p2) --[[ Line: 52 ]]
+		-- upvalues: Fetch (copy), BuildOmniRecommendationsRequestModule (copy), PromiseModule (copy), Response (copy), GraphQLError (copy), Object (copy)
+		local OmniRecommendationsRequestModule = BuildOmniRecommendationsRequestModule(if p2 then p2 else Fetch)
 		
-		if not var2.ok then
-			p4(graphQLError.new(string.format("Failed to fetch omni recommendations. Error code: %d", var2.status)))
+		return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ()) --[[ Line: 59 ]]
+			-- upvalues: OmniRecommendationsRequestModule (copy), p1 (copy), Response (upval), GraphQLError (upval), Object (upval)
+			local v1 = OmniRecommendationsRequestModule(p1.pageType, p1.sessionId, p1.nextPageToken, p1.supportedTreatmentTypes):catch(function() --[[ Line: 65 ]]
+				-- upvalues: Response (upval)
+				return Response.error()
+			end):expect()
+			
+			if not v1.ok then
+				Callback(GraphQLError.new(string.format("Failed to fetch omni recommendations. Error code: %d", v1.status)))
+				
+				return nil
+			end
+			local v2 = v1:json():catch(function() --[[ Line: 80 ]]
+				return nil
+			end):expect()
+			
+			if not v2 then
+				Callback(GraphQLError.new("Failed to decode HTTP response as JSON for omni-recommendation fetch"))
+			end
+			Callback1(Object.assign({ omniSessionId = p1.sessionId, pageType = p1.pageType }, v2))
 			
 			return nil
-		end
-		local var3 = var2:json():catch(function()
-			return nil
-		end):expect()
+		end)
+	end,
+	fetchMoreOmniRecommendationMetadata = function(p1, p2) --[[ Line: 100 ]]
+		-- upvalues: Fetch (copy), PromiseModule (copy), OmniRecommendationMetadata (copy), HttpService (copy), Response (copy), GraphQLError (copy), Object (copy)
+		local Fetch1 = if p2 then p2 else Fetch
 		
-		if not var3 then
-			p4(graphQLError.new("Failed to decode HTTP response as JSON for omni-recommendation fetch"))
-		end
-		p3(object.assign({ omniSessionId = p1.sessionId, pageType = p1.pageType }, var3))
-		
-		return nil
-	end)
-end
-
-local var1 = urlBuilder.fromString("apis:discovery-api/omni-recommendation-metadata")
-
-local function fetchMoreOmniRecommendationMetadata(p1, p2)
-	-- upvalues: fetch (ref), promiseModule (ref), var1 (ref), httpService (ref), response (ref), graphQLError (ref), object (ref)
-	local var2 = p2 or fetch
-	
-	return promiseModule.new(function(p3, p4)
-		-- upvalues: var1 (copy), var2 (ref), httpService (copy), p1 (ref), response (copy), graphQLError (copy), object (copy)
-		local var3 = var2(var1(), {
-			method = "POST",
-			body = httpService:JSONEncode({ sessionId = p1.sessionId, contents = p1.recommendations }),
-			headers = {
-				["Content-Type"] = "application/json",
-				Accept = "application/json"
-			}
-		}):catch(function()
-			-- upvalues: response (copy)
-			return response.error()
-		end):expect()
-		
-		if not var3.ok then
-			p4(graphQLError.new(string.format("Failed to fetch additional metadata for topicId: %s", p1.topicId)))
+		return PromiseModule.new(function(Callback1: (any) -> (), Callback: (any) -> ()) --[[ Line: 103 ]]
+			-- upvalues: OmniRecommendationMetadata (upval), Fetch1 (copy), HttpService (upval), p1 (copy), Response (upval), GraphQLError (upval), Object (upval)
+			local v1 = Fetch1(OmniRecommendationMetadata(), {
+				method = "POST",
+				body = HttpService:JSONEncode({ sessionId = p1.sessionId, contents = p1.recommendations }),
+				headers = {
+					["Content-Type"] = "application/json",
+					Accept = "application/json"
+				}
+			}):catch(function() --[[ Line: 117 ]]
+				-- upvalues: Response (upval)
+				return Response.error()
+			end):expect()
 			
-			return
-		end
-		local var4 = var3:json():catch(function()
-			return nil
-		end):expect()
-		
-		if var4 then
-			p3(object.assign(var4, {
-				topicId = p1.topicId,
-				recommendations = p1.recommendations
-			}))
+			if not v1.ok then
+				Callback(GraphQLError.new(string.format("Failed to fetch additional metadata for topicId: %s", p1.topicId)))
+				
+				return
+			end
+			local v2 = v1:json():catch(function() --[[ Line: 129 ]]
+				return nil
+			end):expect()
 			
-			return
-		end
-		p4(graphQLError.new(string.format("Failed to decode HTTP response as JSON for topicId: %s", p1.topicId)))
-	end)
-end
-
-t.findOmniFeedBySessionId = findOmniFeedBySessionId
-t.fetchMoreOmniRecommendationMetadata = fetchMoreOmniRecommendationMetadata
-
-return t
+			if v2 then
+				Callback1(Object.assign(v2, {
+					topicId = p1.topicId,
+					recommendations = p1.recommendations
+				}))
+				
+				return
+			else
+				Callback(GraphQLError.new(string.format("Failed to decode HTTP response as JSON for topicId: %s", p1.topicId)))
+			end
+		end)
+	end
+}

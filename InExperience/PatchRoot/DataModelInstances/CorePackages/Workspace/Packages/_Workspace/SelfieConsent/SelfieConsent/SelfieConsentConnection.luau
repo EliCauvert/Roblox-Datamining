@@ -1,35 +1,34 @@
-﻿local parent = script.Parent
-local parent_1 = parent.Parent
-local avatarCreationService = game:GetService("AvatarCreationService")
-local focusNavigationUtilsModule = require(parent_1.FocusNavigationUtils)
-local reactUtilsModule = require(parent_1.ReactUtils)
-local reactModule = require(parent_1.React)
-local selfieConsentPromptModule = require(parent.SelfieConsentPrompt)
-local focusRoot = focusNavigationUtilsModule.FocusRoot
-local focusNavigableSurfaceIdentifierEnum = focusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
-local useEventConnection = reactUtilsModule.useEventConnection
+﻿local Parent = script.Parent
+local Parent1 = Parent.Parent
+local AvatarCreationService = game:GetService("AvatarCreationService")
+local FocusNavigationUtilsModule = require(Parent1.FocusNavigationUtils)
+local ReactModule = require(Parent1.React)
+local SelfieConsentPromptModule = require(Parent.SelfieConsentPrompt)
+local FocusRoot = FocusNavigationUtilsModule.FocusRoot
+local FocusNavigableSurfaceIdentifierEnum = FocusNavigationUtilsModule.FocusNavigableSurfaceIdentifierEnum
+local UseEventConnectionFunction = require(Parent1.ReactUtils).useEventConnection
 
-local var1 = function(p1)
-	-- upvalues: reactModule (ref), useEventConnection (ref), avatarCreationService (ref)
-	useEventConnection(avatarCreationService.OpenSelfieConsent, reactModule.useCallback(function()
-		-- upvalues: p1 (ref)
+local function v8(p1) --[[ Line: 21 ]]
+	-- upvalues: ReactModule (copy), UseEventConnectionFunction (copy), AvatarCreationService (copy)
+	UseEventConnectionFunction(AvatarCreationService.OpenSelfieConsent, (ReactModule.useCallback(function() --[[ Line: 22 ]]
+		-- upvalues: p1 (copy)
 		p1.displaySelfieConsent(true)
-	end))
+	end)))
 	
-	return reactModule.createElement(reactModule.Fragment, {}, {})
+	return ReactModule.createElement(ReactModule.Fragment, {}, {})
 end
 
-return function(_)
-	-- upvalues: reactModule (ref), selfieConsentPromptModule (ref), var1 (ref), focusRoot (ref), focusNavigableSurfaceIdentifierEnum (ref)
-	local var2, var3 = reactModule.useState(false)
-	local var4 = if var2 then reactModule.createElement(selfieConsentPromptModule, { displaySelfieConsent = var3 }) else nil
+return function(_) --[[ Line: 29 ]]
+	-- upvalues: ReactModule (copy), SelfieConsentPromptModule (copy), v8 (copy), FocusRoot (copy), FocusNavigableSurfaceIdentifierEnum (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local Element = if UseStateResult then ReactModule.createElement(SelfieConsentPromptModule, { displaySelfieConsent = UseStateResult2 }) else nil
 	
-	return reactModule.createElement(reactModule.Fragment, {}, {
-		EventListener = reactModule.createElement(var1, { displaySelfieConsent = var3 }),
-		FocusNavigationCoreScriptsWrapper = if var4 ~= nil then nil else reactModule.createElement(focusRoot, {
+	return ReactModule.createElement(ReactModule.Fragment, {}, {
+		EventListener = ReactModule.createElement(v8, { displaySelfieConsent = UseStateResult2 }),
+		FocusNavigationCoreScriptsWrapper = if Element == nil then nil else ReactModule.createElement(FocusRoot, {
 			isIsolated = true,
 			isAutoFocusRoot = true,
-			surfaceIdentifier = focusNavigableSurfaceIdentifierEnum.CentralOverlay
-		}, { Prompt = var4 })
+			surfaceIdentifier = FocusNavigableSurfaceIdentifierEnum.CentralOverlay
+		}, { Prompt = Element })
 	})
 end

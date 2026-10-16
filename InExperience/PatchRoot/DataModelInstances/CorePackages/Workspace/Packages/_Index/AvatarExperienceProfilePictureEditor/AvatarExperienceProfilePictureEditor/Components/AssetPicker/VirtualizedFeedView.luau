@@ -1,70 +1,60 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local avatarExperienceUIKitModule = require(parent.AvatarExperienceUIKit)
-local assetPickerErrorBodyModule = require(script.Parent.AssetPickerErrorBody)
-local assetPickerTileModule = require(script.Parent.AssetPickerTile)
-local view = foundationModule.View
-local loading = foundationModule.Loading
-local iconSize = foundationModule.Enums.IconSize
-local virtualizedFeed = avatarExperienceUIKitModule.FeedComponents.VirtualizedFeed
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceProfilePictureEditor").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local AssetPickerErrorBodyModule = require(script.Parent.AssetPickerErrorBody)
+local AssetPickerTileModule = require(script.Parent.AssetPickerTile)
+local View = FoundationModule.View
+local Loading = FoundationModule.Loading
+local IconSize = FoundationModule.Enums.IconSize
+local VirtualizedFeed = require(Parent.AvatarExperienceUIKit).FeedComponents.VirtualizedFeed
 
-return function(value)
-	-- upvalues: reactModule (ref), view (ref), assetPickerTileModule (ref), loading (ref), iconSize (ref), assetPickerErrorBodyModule (ref), virtualizedFeed (ref)
-	local function renderRow(p1)
-		-- upvalues: value (ref), reactModule (copy), view (copy), assetPickerTileModule (copy)
-		local t = {}
-		
-		for i, v in p1.item do
-			t[`item-{v.id}`] = reactModule.createElement(view, {
-				tag = "auto-y",
-				Size = UDim2.new(1 / value.itemsPerRow, 0, 0, 0),
-				LayoutOrder = i,
-				padding = {
-					left = UDim.new(0, value.gap / 2),
-					right = UDim.new(0, value.gap / 2)
-				}
-			}, {
-				Tile = reactModule.createElement(assetPickerTileModule, {
-					item = v,
-					selectedId = value.selectedId,
-					onSelect = value.onSelect,
-					onDetailsActivated = value.onDetailsActivated,
-					labels = value.labels,
-					layoutOrder = (p1.index - 1) * value.itemsPerRow + i
-				})
-			})
-		end
-		return reactModule.createElement(view, {
-			tag = "row align-x-left align-y-top size-full-0 auto-y",
-			LayoutOrder = p1.index,
-			padding = {
-				left = UDim.new(0, value.horizontalPadding - value.gap / 2),
-				right = UDim.new(0, value.horizontalPadding - value.gap / 2),
-				bottom = UDim.new(0, value.gap)
-			}
-		}, t)
-	end
-	
-	local var1 = nil
-	
-	if value.isLoadingMore then
-		var1 = reactModule.createElement(view, { tag = "align-x-center size-full-0 auto-y padding-large" }, {
-			Loading = reactModule.createElement(loading, { size = iconSize.Medium })
-		})
-	elseif value.hasLoadMoreError then
-		var1 = reactModule.createElement(assetPickerErrorBodyModule, { onRetry = value.onRetryLoadMore })
-	end
-	return reactModule.createElement(virtualizedFeed, {
+return function(Frame) --[[ Line: 36 | Named "AssetPickerVirtualizedFeedView" ]]
+	-- upvalues: ReactModule (copy), View (copy), AssetPickerTileModule (copy), Loading (copy), IconSize (copy), AssetPickerErrorBodyModule (copy), VirtualizedFeed (copy)
+	return ReactModule.createElement(VirtualizedFeed, {
 		onEndReachedThreshold = 0.5,
 		shouldWrapFooter = false,
-		data = value.rows,
-		renderItem = renderRow,
-		onContainerWidthChanged = value.onContainerWidthChanged,
-		onEndReached = value.onEndReached,
-		ListHeaderComponent = value.listHeaderComponent,
-		ListFooterComponent = var1 or value.listFooterComponent,
-		LayoutOrder = value.LayoutOrder,
+		data = Frame.rows,
+		renderItem = function(p1) --[[ Line: 37 ]]
+			-- upvalues: Frame (copy), ReactModule (upval), View (upval), AssetPickerTileModule (upval)
+			local Elements = {}
+			
+			for LayoutOrder, Item in p1.item do
+				Elements[`item-{Item.id}`] = ReactModule.createElement(View, {
+					tag = "auto-y",
+					Size = UDim2.new(1 / Frame.itemsPerRow, 0, 0, 0),
+					LayoutOrder = LayoutOrder,
+					padding = {
+						left = UDim.new(0, Frame.gap / 2),
+						right = UDim.new(0, Frame.gap / 2)
+					}
+				}, {
+					Tile = ReactModule.createElement(AssetPickerTileModule, {
+						item = Item,
+						selectedId = Frame.selectedId,
+						onSelect = Frame.onSelect,
+						onDetailsActivated = Frame.onDetailsActivated,
+						labels = Frame.labels,
+						layoutOrder = (p1.index - 1) * Frame.itemsPerRow + LayoutOrder
+					})
+				})
+			end
+			return ReactModule.createElement(View, {
+				tag = "row align-x-left align-y-top size-full-0 auto-y",
+				LayoutOrder = p1.index,
+				padding = {
+					left = UDim.new(0, Frame.horizontalPadding - Frame.gap / 2),
+					right = UDim.new(0, Frame.horizontalPadding - Frame.gap / 2),
+					bottom = UDim.new(0, Frame.gap)
+				}
+			}, Elements)
+		end,
+		onContainerWidthChanged = Frame.onContainerWidthChanged,
+		onEndReached = Frame.onEndReached,
+		ListHeaderComponent = Frame.listHeaderComponent,
+		ListFooterComponent = (if Frame.isLoadingMore then ReactModule.createElement(View, { tag = "align-x-center size-full-0 auto-y padding-large" }, {
+			Loading = ReactModule.createElement(Loading, { size = IconSize.Medium })
+		}) elseif Frame.hasLoadMoreError then ReactModule.createElement(AssetPickerErrorBodyModule, { onRetry = Frame.onRetryLoadMore }) else nil) or Frame.listFooterComponent,
+		LayoutOrder = Frame.LayoutOrder,
 		Size = UDim2.fromScale(1, 1)
 	})
 end

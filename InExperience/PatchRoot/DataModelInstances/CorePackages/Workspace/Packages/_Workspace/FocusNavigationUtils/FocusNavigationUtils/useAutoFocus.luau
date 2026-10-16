@@ -1,55 +1,54 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local guiService = game:GetService("GuiService")
-local parent = script:FindFirstAncestor("FocusNavigationUtils").Parent
-local reactModule = require(parent.React)
-local focusNavigationContext = require(parent.ReactFocusNavigation).FocusNavigationContext
-local fFlagLuaAppsDefaultSelection = require(parent.SharedFlags).FFlagLuaAppsDefaultSelection
+﻿local CoreGui = game:GetService("CoreGui")
+local GuiService = game:GetService("GuiService")
+local Parent = script:FindFirstAncestor("FocusNavigationUtils").Parent
+local ReactModule = require(Parent.React)
+local FocusNavigationContext = require(Parent.ReactFocusNavigation).FocusNavigationContext
+local FFlagLuaAppsDefaultSelection = require(Parent.SharedFlags).FFlagLuaAppsDefaultSelection
 
-local var1 = function(p1, p2, p3)
-	-- upvalues: fFlagLuaAppsDefaultSelection (ref), guiService (ref), coreGuiService (ref)
-	local var2 = #p2 == 0
-	local t = {}
-	local t_1 = {}
+local function v6(Delay, Ancestors, UseContextResult) --[[ Line: 19 ]]
+	-- upvalues: FFlagLuaAppsDefaultSelection (copy), GuiService (copy), CoreGui (copy)
+	local Flag = #Ancestors == 0
+	local Connections = {}
+	local List = {}
 	
-	local function _()
-		-- upvalues: var2 (write), t (ref)
-		if not var2 then
-			var2 = true
+	local function _() --[[ Line: 24 | Named "disconnect" ]]
+		-- upvalues: Flag (ref), Connections (copy)
+		if not Flag then
+			Flag = true
 			
-			for i, v in t do
-				v:Disconnect()
+			for _, connection in Connections do
+				connection:Disconnect()
 			end
 		end
 	end
 	
-	local function onFocusChange(_, _, p4)
-		-- upvalues: var2 (write), t (ref)
-		if p4 and not var2 then
-			var2 = true
+	local function onFocusChange(_, _, p1) --[[ Line: 33 ]]
+		-- upvalues: Flag (ref), Connections (copy)
+		if p1 and not Flag then
+			Flag = true
 			
-			for i, v in t do
-				v:Disconnect()
+			for _, connection in Connections do
+				connection:Disconnect()
 			end
 		end
 	end
 	
-	local function focus(p5)
-		-- upvalues: p1 (ref), var2 (write), fFlagLuaAppsDefaultSelection (copy), guiService (copy), p2 (ref), t (ref), coreGuiService (copy), p3 (ref), focus (ref), t_1 (ref)
-		table.insert(t_1, task.delay(p1, function()
-			-- upvalues: var2 (copy), fFlagLuaAppsDefaultSelection (copy), guiService (copy), p2 (copy), t (copy), p5 (ref), coreGuiService (copy), p3 (copy), focus (copy)
-			if not var2 then
-				local selectedCoreObject
-				if fFlagLuaAppsDefaultSelection then
-					selectedCoreObject = guiService.SelectedCoreObject
+	local function focus(p2) --[[ Line: 39 ]]
+		-- upvalues: Delay (copy), Flag (ref), FFlagLuaAppsDefaultSelection (upval), GuiService (upval), Ancestors (copy), Connections (copy), CoreGui (upval), UseContextResult (copy), focus (copy), List (copy)
+		table.insert(List, (task.delay(Delay, function() --[[ Line: 40 ]]
+			-- upvalues: Flag (upval), FFlagLuaAppsDefaultSelection (upval), GuiService (upval), Ancestors (upval), Connections (upval), p2 (copy), CoreGui (upval), UseContextResult (upval), focus (upval)
+			if not Flag then
+				if FFlagLuaAppsDefaultSelection then
+					local SelectedCoreObject = GuiService.SelectedCoreObject
 					
-					if selectedCoreObject then
-						for i, v in p2 do
-							if selectedCoreObject == v or selectedCoreObject:IsDescendantOf(v) then
-								if not var2 then
-									var2 = true
+					if SelectedCoreObject then
+						for _, ancestor in Ancestors do
+							if SelectedCoreObject == ancestor or SelectedCoreObject:IsDescendantOf(ancestor) then
+								if not Flag then
+									Flag = true
 									
-									for i_1, v_1 in t do
-										v_1:Disconnect()
+									for _, connection in Connections do
+										connection:Disconnect()
 									end
 								end
 								return
@@ -57,35 +56,34 @@ local var1 = function(p1, p2, p3)
 						end
 					end
 				end
-				selectedCoreObject = p2[p5]
+				local Ancestor = Ancestors[p2]
 				
-				if selectedCoreObject and selectedCoreObject:IsDescendantOf(coreGuiService) then
-					p3:focusGuiObject(selectedCoreObject, false)
+				if Ancestor and Ancestor:IsDescendantOf(CoreGui) then
+					UseContextResult:focusGuiObject(Ancestor, false)
 				end
-				focus(if #p2 < p5 then 1 else p5 % #p2 + 1)
+				focus(if #Ancestors < p2 then 1 else p2 % #Ancestors + 1)
 			end
-		end))
+		end)))
 	end
 	
-	for i, v in p2 do
-		table.insert(t, v.SelectionChanged:Connect(onFocusChange))
+	for _, ancestor in Ancestors do
+		table.insert(Connections, ancestor.SelectionChanged:Connect(onFocusChange))
 	end
-	local var3 = 1
-	table.insert(t_1, task.delay(p1, function()
-		-- upvalues: var2 (write), fFlagLuaAppsDefaultSelection (copy), guiService (copy), p2 (ref), t (ref), var3 (ref), coreGuiService (copy), p3 (ref), focus (ref)
-		if not var2 then
-			local selectedCoreObject
-			if fFlagLuaAppsDefaultSelection then
-				selectedCoreObject = guiService.SelectedCoreObject
+	local v1 = 1
+	table.insert(List, (task.delay(Delay, function() --[[ Line: 40 ]]
+		-- upvalues: Flag (ref), FFlagLuaAppsDefaultSelection (upval), GuiService (upval), Ancestors (copy), Connections (copy), v1 (copy), CoreGui (upval), UseContextResult (copy), focus (copy)
+		if not Flag then
+			if FFlagLuaAppsDefaultSelection then
+				local SelectedCoreObject = GuiService.SelectedCoreObject
 				
-				if selectedCoreObject then
-					for i, v in p2 do
-						if selectedCoreObject == v or selectedCoreObject:IsDescendantOf(v) then
-							if not var2 then
-								var2 = true
+				if SelectedCoreObject then
+					for _, ancestor in Ancestors do
+						if SelectedCoreObject == ancestor or SelectedCoreObject:IsDescendantOf(ancestor) then
+							if not Flag then
+								Flag = true
 								
-								for i_1, v_1 in t do
-									v_1:Disconnect()
+								for _, connection in Connections do
+									connection:Disconnect()
 								end
 							end
 							return
@@ -93,40 +91,40 @@ local var1 = function(p1, p2, p3)
 					end
 				end
 			end
-			selectedCoreObject = p2[var3]
+			local Ancestor = Ancestors[v1]
 			
-			if selectedCoreObject and selectedCoreObject:IsDescendantOf(coreGuiService) then
-				p3:focusGuiObject(selectedCoreObject, false)
+			if Ancestor and Ancestor:IsDescendantOf(CoreGui) then
+				UseContextResult:focusGuiObject(Ancestor, false)
 			end
-			focus(if #p2 < var3 then 1 else var3 % #p2 + 1)
+			focus(if #Ancestors < v1 then 1 else v1 % #Ancestors + 1)
 		end
-	end))
+	end)))
 	
 	return {
-		cancel = function()
-			-- upvalues: t_1 (ref), var2 (write), t (ref)
-			for i, v in t_1 do
-				task.cancel(v)
+		cancel = function() --[[ Line: 71 ]]
+			-- upvalues: List (copy), Flag (ref), Connections (copy)
+			for _, value in List do
+				task.cancel(value)
 			end
-			table.clear(t_1)
+			table.clear(List)
 			
-			if not var2 then
-				var2 = true
+			if not Flag then
+				Flag = true
 				
-				for i, v_1 in t do
-					v_1:Disconnect()
+				for _, connection in Connections do
+					connection:Disconnect()
 				end
 			end
 		end
 	}
 end
 
-return function(p6, p7)
-	-- upvalues: reactModule (ref), focusNavigationContext (ref), var1 (ref)
-	local var4 = reactModule.useContext(focusNavigationContext)
+return function(p3, Delay) --[[ Line: 99 ]]
+	-- upvalues: ReactModule (copy), FocusNavigationContext (copy), v6 (copy)
+	local UseContextResult = ReactModule.useContext(FocusNavigationContext)
 	
-	return reactModule.useCallback(function()
-		-- upvalues: var4 (ref), var1 (copy), p7 (ref), p6 (ref)
-		return if var4 then var1(p7, p6, var4) else nil
-	end, { var4, p6, p7 })
+	return ReactModule.useCallback(function() --[[ Line: 102 ]]
+		-- upvalues: UseContextResult (copy), v6 (upval), Delay (copy), p3 (copy)
+		return if UseContextResult then v6(Delay, p3, UseContextResult) else nil
+	end, { UseContextResult, p3, Delay })
 end

@@ -1,21 +1,21 @@
-﻿local parent = script:FindFirstAncestor("InterventionShared").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local view = foundationModule.View
-local text = foundationModule.Text
+﻿local Parent = script:FindFirstAncestor("InterventionShared").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local Text = FoundationModule.Text
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), view (ref), text (ref)
-	return reactModule.createElement(view, {
+return ReactModule.memo(function(p1) --[[ Line: 26 | Named "EvidenceField" ]]
+	-- upvalues: ReactModule (copy), View (copy), Text (copy)
+	return ReactModule.createElement(View, {
 		tag = "size-full-0 auto-y col",
 		LayoutOrder = p1.layoutOrder
 	}, {
-		Label = reactModule.createElement(text, {
+		Label = ReactModule.createElement(Text, {
 			tag = "auto-xy text-title-medium text-align-x-left text-wrap content-emphasis",
 			LayoutOrder = 1,
 			Text = `{p1.fieldLabel}{if p1.hasColon == nil or p1.hasColon then ":" else ""}`
 		}),
-		Value = reactModule.createElement(text, {
+		Value = ReactModule.createElement(Text, {
 			tag = "auto-xy text-body-medium text-align-x-left text-wrap",
 			LayoutOrder = 2,
 			Text = p1.fieldValue

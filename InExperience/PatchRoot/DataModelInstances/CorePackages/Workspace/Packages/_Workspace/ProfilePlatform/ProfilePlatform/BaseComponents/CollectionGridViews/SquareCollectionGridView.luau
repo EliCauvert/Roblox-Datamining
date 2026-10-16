@@ -1,91 +1,91 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local collectionViewsModule = require(parent.CollectionViews)
-local collectionGrid = collectionViewsModule.CollectionGrid
-local collectionItemSize = collectionViewsModule.CollectionViewTypes.CollectionItemSize
-local useCollectionLayoutParams = collectionViewsModule.useCollectionLayoutParams
-local useCollectionImpressionsSignal = collectionViewsModule.useCollectionImpressionsSignal
-local screenSizeImpressionsTracker = require(parent.Impressions).ScreenSizeImpressionsTracker
-local useProfileAnalyticsContextModule = require(profilePlatform.Contexts.useProfileAnalyticsContext)
-local useDynamicSizeMarginModule = require(profilePlatform.Hooks.useDynamicSizeMargin)
-local appPage = require(parent.RobloxAppEnums).AppPage
-local profileCollectionGridConfigModule = require(script.Parent.ProfileCollectionGridConfig)
-local fFlagProfilePlatformEnableImpressions = require(parent.SharedFlags).FFlagProfilePlatformEnableImpressions
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local CollectionViewsModule = require(Parent.CollectionViews)
+local CollectionGrid = CollectionViewsModule.CollectionGrid
+local CollectionItemSize = CollectionViewsModule.CollectionViewTypes.CollectionItemSize
+local UseCollectionLayoutParamsFunction = CollectionViewsModule.useCollectionLayoutParams
+local UseCollectionImpressionsSignalFunction = CollectionViewsModule.useCollectionImpressionsSignal
+local ScreenSizeImpressionsTracker = require(Parent.Impressions).ScreenSizeImpressionsTracker
+local UseProfileAnalyticsContextModule = require(ProfilePlatform.Contexts.useProfileAnalyticsContext)
+local UseDynamicSizeMarginModule = require(ProfilePlatform.Hooks.useDynamicSizeMargin)
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local ProfileCollectionGridConfigModule = require(script.Parent.ProfileCollectionGridConfig)
+local FFlagProfilePlatformEnableImpressions = require(Parent.SharedFlags).FFlagProfilePlatformEnableImpressions
 
-return function(p1)
-	-- upvalues: reactModule (ref), fFlagProfilePlatformEnableImpressions (ref), useProfileAnalyticsContextModule (ref), useCollectionImpressionsSignal (ref), profileCollectionGridConfigModule (ref), useDynamicSizeMarginModule (ref), useCollectionLayoutParams (ref), collectionItemSize (ref), collectionGrid (ref), screenSizeImpressionsTracker (ref), appPage (ref)
-	local var1, var2 = reactModule.useState(nil)
-	local var3 = if fFlagProfilePlatformEnableImpressions then reactModule.useRef(nil) else nil
-	local var4 = if fFlagProfilePlatformEnableImpressions then useProfileAnalyticsContextModule() else nil
-	local var5 = nil
-	local var6 = nil
+return function(p1) --[[ Line: 28 | Named "SquareCollectionsGridView" ]]
+	-- upvalues: ReactModule (copy), FFlagProfilePlatformEnableImpressions (copy), UseProfileAnalyticsContextModule (copy), UseCollectionImpressionsSignalFunction (copy), ProfileCollectionGridConfigModule (copy), UseDynamicSizeMarginModule (copy), UseCollectionLayoutParamsFunction (copy), CollectionItemSize (copy), CollectionGrid (copy), ScreenSizeImpressionsTracker (copy), AppPage (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	local UseRefResult = if FFlagProfilePlatformEnableImpressions then ReactModule.useRef(nil) else nil
+	local UseProfileAnalyticsContextModuleResult = if FFlagProfilePlatformEnableImpressions then UseProfileAnalyticsContextModule() else nil
+	local ScrollViewPositionChangedSignal = nil
+	local Callback = nil
 	
-	if fFlagProfilePlatformEnableImpressions then
-		local var7, var8 = useCollectionImpressionsSignal(var4.scrollViewPositionChangedSignal)
-		var5 = var7
-		var6 = var8
+	if FFlagProfilePlatformEnableImpressions then
+		ScrollViewPositionChangedSignal, Callback = UseCollectionImpressionsSignalFunction(UseProfileAnalyticsContextModuleResult.scrollViewPositionChangedSignal)
 	end
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var1 (ref), fFlagProfilePlatformEnableImpressions (copy), var3 (ref)
+	ReactModule.useEffect(function() --[[ Line: 39 ]]
+		-- upvalues: p1 (copy), UseStateResult (copy), FFlagProfilePlatformEnableImpressions (upval), UseRefResult (copy)
 		if p1.setForwardRef then
-			p1.setForwardRef(var1)
+			p1.setForwardRef(UseStateResult)
 		end
-		if fFlagProfilePlatformEnableImpressions then
-			var3.current = var1
+		if FFlagProfilePlatformEnableImpressions then
+			UseRefResult.current = UseStateResult
 		end
-	end, { var1 })
-	local maxNumRows = p1.maxNumRows or profileCollectionGridConfigModule.Constants.DEFAULT_MAX_NUM_ROWS
-	local t = { sideMargin = 0 }
-	local var9, var10 = useDynamicSizeMarginModule()
-	local var11 = useCollectionLayoutParams(collectionItemSize.Small, var1, false, t)
+	end, { UseStateResult })
+	local MaxNumRows = p1.maxNumRows or ProfileCollectionGridConfigModule.Constants.DEFAULT_MAX_NUM_ROWS
+	local config = { sideMargin = 0 }
+	local UseDynamicSizeMarginModuleResult, UseDynamicSizeMarginModuleResult2 = UseDynamicSizeMarginModule()
+	local UseCollectionLayoutParamsResult = UseCollectionLayoutParamsFunction(CollectionItemSize.Small, UseStateResult, false, config)
+	local UseResult = if FFlagProfilePlatformEnableImpressions then ReactModule.useCallback(function(p2) --[[ Line: 58 ]]
+		-- upvalues: p1 (copy), Callback (ref)
+		if p1.onContainerSizeChanged then
+			p1.onContainerSizeChanged(p2)
+		end
+		Callback()
+	end, { p1.onContainerSizeChanged, Callback }) else nil
+	local UseResult1 = if FFlagProfilePlatformEnableImpressions then ReactModule.useCallback(function(p2, p3) --[[ Line: 67 ]]
+		-- upvalues: p1 (copy), Callback (ref)
+		if p1.onViewableItemsChanged then
+			p1.onViewableItemsChanged(p2, p3)
+		end
+		Callback()
+	end, { p1.onViewableItemsChanged, Callback }) else nil
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		Size = UDim2.new(1, 0, 0, 0),
 		AutomaticSize = Enum.AutomaticSize.Y,
 		BackgroundTransparency = 1,
 		LayoutOrder = p1.layoutOrder,
-		[reactModule.Change.AbsoluteSize] = var10
+		[ReactModule.Change.AbsoluteSize] = UseDynamicSizeMarginModuleResult2
 	}, {
-		CollectionGrid = reactModule.createElement(collectionGrid, {
-			columnGap = var11.columnGap,
-			containerRef = var2,
+		CollectionGrid = ReactModule.createElement(CollectionGrid, {
+			columnGap = UseCollectionLayoutParamsResult.columnGap,
+			containerRef = UseStateResult2,
 			getItemHeight = p1.getItemHeight,
 			headerButtonText = p1.headerButtonText,
 			hideHeaderButton = p1.hideHeaderButton,
 			items = p1.items,
 			LayoutOrder = p1.layoutOrder,
-			maxNumRows = maxNumRows,
-			numColumns = if p1.overrides then p1.overrides.numColumns else var11.numColumns,
+			maxNumRows = MaxNumRows,
+			numColumns = p1.overrides and p1.overrides.numColumns or UseCollectionLayoutParamsResult.numColumns,
 			onActivateHeader = p1.onActivateHeader,
 			onActivateInfoIcon = p1.onActivateInfoIcon,
-			onContainerSizeChanged = if fFlagProfilePlatformEnableImpressions then if fFlagProfilePlatformEnableImpressions then reactModule.useCallback(function(p2)
-				-- upvalues: p1 (ref), var6 (write)
-				if p1.onContainerSizeChanged then
-					p1.onContainerSizeChanged(p2)
-				end
-				var6()
-			end, { p1.onContainerSizeChanged, var6 }) else nil else p1.onContainerSizeChanged,
-			onViewableItemsChanged = if fFlagProfilePlatformEnableImpressions then if fFlagProfilePlatformEnableImpressions then reactModule.useCallback(function(p2, p3)
-				-- upvalues: p1 (ref), var6 (write)
-				if p1.onViewableItemsChanged then
-					p1.onViewableItemsChanged(p2, p3)
-				end
-				var6()
-			end, { p1.onViewableItemsChanged, var6 }) else nil else p1.onViewableItemsChanged,
+			onContainerSizeChanged = if FFlagProfilePlatformEnableImpressions then UseResult else p1.onContainerSizeChanged,
+			onViewableItemsChanged = if FFlagProfilePlatformEnableImpressions then UseResult1 else p1.onViewableItemsChanged,
 			verticalScrollingFrameRef = p1.verticalScrollingFrameRef,
 			renderItem = p1.renderItem,
-			sideMargin = var9,
+			sideMargin = UseDynamicSizeMarginModuleResult,
 			subtitle = p1.subtitle,
 			title = p1.title,
 			tooltipInfoText = p1.tooltipInfoText,
-			verticalPadding = var11.verticalPadding
+			verticalPadding = UseCollectionLayoutParamsResult.verticalPadding
 		}),
-		ScreenSizeImpressionsTracker = if fFlagProfilePlatformEnableImpressions and p1.impressionsTag and p1.sendImpressions then reactModule.createElement(screenSizeImpressionsTracker, {
-			pageContext = appPage.ProfilePlatform,
-			parentRef = var3,
+		ScreenSizeImpressionsTracker = if FFlagProfilePlatformEnableImpressions and p1.impressionsTag and p1.sendImpressions then ReactModule.createElement(ScreenSizeImpressionsTracker, {
+			pageContext = AppPage.ProfilePlatform,
+			parentRef = UseRefResult,
 			impressionsTag = p1.impressionsTag,
-			scrollViewPositionChangedSignal = var5,
+			scrollViewPositionChangedSignal = ScrollViewPositionChangedSignal,
 			sendImpressions = p1.sendImpressions
 		}) else nil
 	})

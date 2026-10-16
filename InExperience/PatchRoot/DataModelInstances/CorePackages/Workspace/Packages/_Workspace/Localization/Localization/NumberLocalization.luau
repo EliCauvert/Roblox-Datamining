@@ -1,7 +1,7 @@
-﻿local roundingBehaviourModule = require(script.Parent.RoundingBehaviour)
-local loggerModule = require(script.Parent.Logger)
+﻿local RoundingBehaviourModule = require(script.Parent.RoundingBehaviour)
+local LoggerModule = require(script.Parent.Logger)
 game:DefineFastFlag("AllowNumberLocalizationSigFigParam", false)
-local t = {
+local config = {
 	["en-us"] = {
 		decimalSeparator = ".",
 		groupDelimiter = ",",
@@ -45,41 +45,41 @@ local t = {
 		decimalSeparator = ".",
 		groupDelimiter = ",",
 		{ 1, "" },
-		{ 1000, "\229\141\131" },
-		{ 10000, "\228\184\135" },
-		{ 100000000, "\228\186\191" }
+		{ 1000, "千" },
+		{ 10000, "万" },
+		{ 100000000, "亿" }
 	},
 	["zh-cjv"] = {
 		decimalSeparator = ".",
 		groupDelimiter = ",",
 		{ 1, "" },
-		{ 1000, "\229\141\131" },
-		{ 10000, "\228\184\135" },
-		{ 100000000, "\228\186\191" }
+		{ 1000, "千" },
+		{ 10000, "万" },
+		{ 100000000, "亿" }
 	},
 	["zh-tw"] = {
 		decimalSeparator = ".",
 		groupDelimiter = ",",
 		{ 1, "" },
-		{ 1000, "\229\141\131" },
-		{ 10000, "\232\144\172" },
-		{ 100000000, "\229\132\132" }
+		{ 1000, "千" },
+		{ 10000, "萬" },
+		{ 100000000, "億" }
 	},
 	["ko-kr"] = {
 		decimalSeparator = ".",
 		groupDelimiter = ",",
 		{ 1, "" },
-		{ 1000, "\236\178\156" },
-		{ 10000, "\235\167\140" },
-		{ 100000000, "\236\150\181" }
+		{ 1000, "천" },
+		{ 10000, "만" },
+		{ 100000000, "억" }
 	},
 	["ja-jp"] = {
 		decimalSeparator = ".",
 		groupDelimiter = ",",
 		{ 1, "" },
-		{ 1000, "\229\141\131" },
-		{ 10000, "\228\184\135" },
-		{ 100000000, "\229\132\132" }
+		{ 1000, "千" },
+		{ 10000, "万" },
+		{ 100000000, "億" }
 	},
 	["it-it"] = {
 		decimalSeparator = ",",
@@ -93,9 +93,9 @@ local t = {
 		decimalSeparator = ",",
 		groupDelimiter = ".",
 		{ 1, "" },
-		{ 1000, " \209\130\209\139\209\129" },
-		{ 1000000, " \208\188\208\187\208\189" },
-		{ 1000000000, " \208\188\208\187\209\128\208\180" }
+		{ 1000, " тыс" },
+		{ 1000000, " млн" },
+		{ 1000000000, " млрд" }
 	},
 	["id-id"] = {
 		decimalSeparator = ",",
@@ -122,127 +122,131 @@ local t = {
 		{ 1000000000, " Mr" }
 	}
 }
-t["en-gb"] = t["en-us"]
-t["es-mx"] = t["es-es"]
-t["th-th"] = t["en-us"]
+config["en-gb"] = config["en-us"]
+config["es-mx"] = config["es-es"]
+config["th-th"] = config["en-us"]
 
-local function _(p1)
-	return string.find(p1, "%.") or #p1 + 1
+local function _(Text: string): number --[[ Line: 172 | Named "findDecimalPointIndex" ]]
+	return string.find(Text, "%.") or #Text + 1
 end
 
-local _ = function(value)
-	return if value == 0 then 0 else -(math.floor(math.log10(math.abs(value))) + 1)
+local _ = function(Value: number) --[[ Line: 177 | Named "findDecimalOffset" ]]
+	return if Value == 0 then 0 else -(math.floor((math.log10((math.abs(Value))))) + 1)
 end
 
-local _ = function(value, p1, p2)
-	-- upvalues: roundingBehaviourModule (ref)
-	local var1 = 10 ^ (p1 + (if value == 0 then 0 else -(math.floor(math.log10(math.abs(value))) + 1)))
+local _ = function(Value: number, p1, Truncate): number --[[ Line: 186 | Named "roundToSignificantDigits" ]]
+	-- upvalues: RoundingBehaviourModule (copy)
+	local v1 = 10 ^ (p1 + (if Value == 0 then 0 else -(math.floor((math.log10((math.abs(Value))))) + 1)))
 	
-	return (if p2 == roundingBehaviourModule.Truncate then math.modf(value * var1) else math.floor(value * var1 + 0.5)) / var1
+	return (if Truncate == RoundingBehaviourModule.Truncate then math.modf(Value * v1) else math.floor(Value * v1 + 0.5)) / v1
 end
 
-local function addGroupDelimiters(p1, p2)
-	local var1 = p1
-	local formattedText = string.format("%%1%s%%2", p2)
+local function addGroupDelimiters(Segment, GroupDelimiter): string --[[ Line: 198 ]]
+	local Text: string = Segment
+	local Formatted = string.format("%%1%s%%2", GroupDelimiter)
 	repeat
-		local replaced, replaced_1 = string.gsub(var1, "^(-?%d+)(%d%d%d)", formattedText)
-		var1 = replaced
-	until replaced_1 == 0
-	return var1
+		local Replaced2
+		Text, Replaced2 = string.gsub(Text, "^(-?%d+)(%d%d%d)", Formatted)
+	until Replaced2 == 0
+	return Text
 end
 
-local function findDenominationEntry(a, b, p1)
-	-- upvalues: roundingBehaviourModule (ref)
-	local var1 = a[1]
-	local absValue = math.abs(b)
+local function findDenominationEntry(Entry, Value: number, RoundToClosest) --[[ Line: 211 ]]
+	-- upvalues: RoundingBehaviourModule (copy)
+	local Entry1 = Entry[1]
+	local Magnitude = math.abs(Value)
+	local Entry2 = nil
 	
-	for i = #a, 2, -1 do
-		local var2 = a[i]
+	for i = #Entry, 2, -1 do
+		Entry2 = Entry[i]
 		
-		if (if p1 == roundingBehaviourModule.Truncate then var2[1] else var2[1] - a[i - 1][1] / 2) > absValue then
-			continue
+		if (if RoundToClosest == RoundingBehaviourModule.Truncate then Entry2[1] else Entry2[1] - Entry[i - 1][1] / 2) <= Magnitude then
+			Entry1 = Entry2
+			
+			return Entry1
 		end
-		var1 = var2
-		
-		return var1
 	end
-	return var1
+	return Entry1
 end
 
 return {
-	localize = function(p2, p3)
-		-- upvalues: t (ref), loggerModule (ref), addGroupDelimiters (ref)
-		if p2 == 0 then
+	localize = function(p1, p2) --[[ Line: 232 ]]
+		-- upvalues: config (copy), LoggerModule (copy), addGroupDelimiters (copy)
+		if p1 == 0 then
 			return "0"
 		end
-		local var3 = t[p3]
+		local Entry = config[p2]
 		
-		if not var3 then
-			var3 = t["en-us"]
-			loggerModule:warning(string.format("Warning: Locale not found: '%s', reverting to '%s' instead.", tostring(p3), "en-us"))
+		if not Entry then
+			Entry = config["en-us"]
+			LoggerModule:warning(string.format("Warning: Locale not found: '%s', reverting to '%s' instead.", tostring(p2), "en-us"))
 		end
-		return if var3.groupDelimiter then addGroupDelimiters(p2, var3.groupDelimiter) else p2
+		return if Entry.groupDelimiter then addGroupDelimiters(p1, Entry.groupDelimiter) else p1
 	end,
-	abbreviate = function(p2, p3, p4, p5)
-		-- upvalues: roundingBehaviourModule (ref), t (ref), loggerModule (ref), findDenominationEntry (ref), addGroupDelimiters (ref)
-		if p2 == 0 then
+	abbreviate = function(p1, p2, Truncate, p3: number): string --[[ Line: 257 ]]
+		-- upvalues: RoundingBehaviourModule (copy), config (copy), LoggerModule (copy), findDenominationEntry (copy), addGroupDelimiters (copy)
+		if p1 == 0 then
 			return "0"
-		elseif p4 == nil then
-			p4 = roundingBehaviourModule.RoundToClosest
 		end
-		if not game:GetFastFlag("AllowNumberLocalizationSigFigParam") then
-			p5 = 3
-		elseif p5 == nil then
-			p5 = 3
+		if Truncate == nil then
+			Truncate = RoundingBehaviourModule.RoundToClosest
 		end
-		local var3 = t[p3]
+		if game:GetFastFlag("AllowNumberLocalizationSigFigParam") then
+			if p3 == nil then
+				p3 = 3
+			end
+		else
+			p3 = 3
+		end
+		local Entry = config[p2]
 		
-		if not var3 then
-			var3 = t["en-us"]
-			loggerModule:warning(string.format("Warning: Locale not found: '%s', reverting to '%s' instead.", tostring(p3), "en-us"))
+		if not Entry then
+			Entry = config["en-us"]
+			LoggerModule:warning(string.format("Warning: Locale not found: '%s', reverting to '%s' instead.", tostring(p2), "en-us"))
 		end
-		local var4 = findDenominationEntry(var3, p2, p4)
-		local var5 = var4[2]
-		local var6 = p2 / var4[1]
-		local var7 = 10 ^ (p5 + (if var6 == 0 then 0 else -(math.floor(math.log10(math.abs(var6))) + 1)))
-		local var8 = (if p4 == roundingBehaviourModule.Truncate then math.modf(var6 * var7) else math.floor(var6 * var7 + 0.5)) / var7
-		local var9 = tostring(if p4 == roundingBehaviourModule.Truncate then math.modf(var8 * 10) / 10 else math.floor(var8 * 10 + 0.5) / 10)
-		local var10 = string.find(var9, "%.") or #var9 + 1
-		local substring = string.sub(var9, 1, var10 - 1)
-		local substring_1 = string.sub(var9, var10 + 1, #var9)
+		local DenominationEntry = findDenominationEntry(Entry, p1, Truncate)
+		local DenominationEntry1 = DenominationEntry[2]
+		local Value = p1 / DenominationEntry[1]
+		local v1 = 10 ^ (p3 + (if Value == 0 then 0 else -(math.floor((math.log10((math.abs(Value))))) + 1)))
+		local v2 = (if Truncate == RoundingBehaviourModule.Truncate then math.modf(Value * v1) else math.floor(Value * v1 + 0.5)) / v1
+		local Text = tostring(if Truncate == RoundingBehaviourModule.Truncate then math.modf(v2 * 10) / 10 else math.floor(v2 * 10 + 0.5) / 10)
+		local FoundAt: number = string.find(Text, "%.") or #Text + 1
+		local Segment = string.sub(Text, 1, FoundAt - 1)
+		local Segment1 = string.sub(Text, FoundAt + 1, #Text)
 		
-		if var3.groupDelimiter then
-			substring = addGroupDelimiters(substring, var3.groupDelimiter)
+		if Entry.groupDelimiter then
+			Segment = addGroupDelimiters(Segment, Entry.groupDelimiter)
 		end
-		return if #substring_1 > 0 then substring .. var14.decimalSeparator .. substring_1 .. var16 else substring .. var16
+		return if #Segment1 > 0 then Segment .. Entry.decimalSeparator .. Segment1 .. DenominationEntry1 else Segment .. DenominationEntry1
 	end,
-	localizeDecimal = function(p2, p3, p4)
-		-- upvalues: t (ref), loggerModule (ref), addGroupDelimiters (ref)
-		if p2 == 0 then
+	localizeDecimal = function(Value: number, p1, p2: number): string --[[ Line: 327 ]]
+		-- upvalues: config (copy), LoggerModule (copy), addGroupDelimiters (copy)
+		if Value == 0 then
 			return "0"
-		elseif p4 == nil then
-			p4 = 2
 		end
-		local var3 = t[p3]
-		
-		if not var3 then
-			var3 = t["en-us"]
-			loggerModule:warning(string.format("Warning: Locale not found: '%s', reverting to '%s' instead.", tostring(p3), "en-us"))
+		if p2 == nil then
+			p2 = 2
 		end
-		local var4 = 10 ^ p4
-		local var5 = math.floor(math.abs(p2) * var4 + 0.5) / var4
-		local var6 = if p2 < 0 and var5 ~= 0 then "-" else ""
-		local formattedText = string.format(string.format("%%.%df", p4), var5)
-		local var7 = string.find(formattedText, "%.") or #formattedText + 1
-		local substring = string.sub(formattedText, 1, var7 - 1)
-		local substring_1 = string.sub(formattedText, var7 + 1, #formattedText)
+		local Entry = config[p1]
 		
-		if var3.groupDelimiter then
-			substring = addGroupDelimiters(substring, var3.groupDelimiter)
+		if not Entry then
+			Entry = config["en-us"]
+			LoggerModule:warning(string.format("Warning: Locale not found: '%s', reverting to '%s' instead.", tostring(p1), "en-us"))
 		end
-		local replaced = string.gsub(substring_1, "0+$", "")
+		local v1 = 10 ^ p2
+		local FlooredRatio = math.floor(math.abs(Value) * v1 + 0.5) / v1
+		local v2: string = if Value < 0 and FlooredRatio ~= 0 then "-" else ""
+		local Formatted = string.format(string.format("%%.%df", p2), FlooredRatio)
+		local FoundAt: number = string.find(Formatted, "%.") or #Formatted + 1
+		local Segment = string.sub(Formatted, 1, FoundAt - 1)
+		local Segment1 = string.sub(Formatted, FoundAt + 1, #Formatted)
 		
-		return if #replaced > 0 then var6 .. substring .. var24.decimalSeparator .. replaced else var6 .. substring
+		if Entry.groupDelimiter then
+			Segment = addGroupDelimiters(Segment, Entry.groupDelimiter)
+		end
+		local Replaced = string.gsub(Segment1, "0+$", "")
+		
+		return if #Replaced > 0 then v2 .. Segment .. Entry.decimalSeparator .. Replaced else v2 .. Segment
 	end,
-	logger = loggerModule
+	logger = LoggerModule
 }

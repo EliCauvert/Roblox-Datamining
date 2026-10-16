@@ -1,191 +1,194 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local reactModule = require(parent.React)
-local navigationRoduxModule = require(parent.NavigationRodux)
-local roactUtilsModule = require(parent.RoactUtils)
-local appPage = require(parent.RobloxAppEnums).AppPage
-local url = require(parent.Http).Url
-local urlBuilder = require(parent.UrlBuilder).UrlBuilder
-local navigateDown = navigationRoduxModule.Thunks.NavigateDown
-local textKeysModule = require(profilePlatform.Common.TextKeys)
-local eventNamesModule = require(profilePlatform.Analytics.EventNames)
-local useDispatch = roactUtilsModule.Hooks.RoactRodux.useDispatch
-local useProfileFormFactorModule = require(profilePlatform.Hooks.useProfileFormFactor)
-local useNavigation = require(parent.Navigation).useNavigation
-local fFlagConnectionsToFriendsRename = require(parent.SharedFlags).FFlagConnectionsToFriendsRename
-local fFlagCreateConnectionsHub = require(parent.SharedFlags).FFlagCreateConnectionsHub
-local fFlagEnableSocialTabsPage = require(parent.SharedFlags).FFlagEnableSocialTabsPage
-local fFlagSignalsNavP3Dispatch = require(parent.SharedFlags).FFlagSignalsNavP3Dispatch
-local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local ReactModule = require(Parent.React)
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local Url = require(Parent.Http).Url
+local UrlBuilder = require(Parent.UrlBuilder).UrlBuilder
+local NavigateDownFunction = require(Parent.NavigationRodux).Thunks.NavigateDown
+local TextKeysModule = require(ProfilePlatform.Common.TextKeys)
+local EventNamesModule = require(ProfilePlatform.Analytics.EventNames)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseProfileFormFactorModule = require(ProfilePlatform.Hooks.useProfileFormFactor)
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local FFlagCreateConnectionsHub = require(Parent.SharedFlags).FFlagCreateConnectionsHub
+local FFlagEnableSocialTabsPage = require(Parent.SharedFlags).FFlagEnableSocialTabsPage
+local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3Dispatch
+local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
 
-return function(p1, p2, p3, p4, p5)
-	-- upvalues: useDispatch (ref), useNavigation (ref), fFlagEnableSocialTabsPage (ref), useProfileFormFactorModule (ref), reactModule (ref), appPage (ref), eventNamesModule (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref), url (ref), textKeysModule (ref), fFlagCreateConnectionsHub (ref), urlBuilder (ref), fFlagConnectionsToFriendsRename (ref)
-	local var2 = useDispatch()
-	local var3 = useNavigation()
-	local var4 = if fFlagEnableSocialTabsPage then not useProfileFormFactorModule().isFullView else nil
+return function(ProfileId, p1, p2, MutualFriendIds, Title) --[[ Line: 35 | Named "useSocialCountsActions" ]]
+	-- upvalues: UseDispatchFunction (copy), UseNavigationFunction (copy), FFlagEnableSocialTabsPage (copy), UseProfileFormFactorModule (copy), ReactModule (copy), AppPage (copy), EventNamesModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy), Url (copy), TextKeysModule (copy), FFlagCreateConnectionsHub (copy), UrlBuilder (copy)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseNavigationResult = UseNavigationFunction()
+	local NoIsFullView = if FFlagEnableSocialTabsPage then not UseProfileFormFactorModule().isFullView else nil
 	
-	return reactModule.useMemo(function()
-		-- upvalues: p4 (ref), appPage (copy), p3 (ref), eventNamesModule (copy), fFlagEnableSocialTabsPage (copy), p2 (ref), p1 (ref), p5 (ref), var4 (ref), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var2 (ref), navigateDown (copy), url (copy), textKeysModule (copy), fFlagCreateConnectionsHub (copy), var3 (ref), urlBuilder (copy), fFlagConnectionsToFriendsRename (copy)
-		local function buildTabConfig()
-			-- upvalues: p4 (copy), appPage (copy)
-			local t = {}
+	return ReactModule.useMemo(function() --[[ Line: 48 ]]
+		-- upvalues: MutualFriendIds (copy), AppPage (upval), p2 (copy), EventNamesModule (upval), FFlagEnableSocialTabsPage (upval), p1 (copy), ProfileId (copy), Title (copy), NoIsFullView (copy), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (copy), NavigateDownFunction (upval), Url (upval), TextKeysModule (upval), FFlagCreateConnectionsHub (upval), UseNavigationResult (copy), UrlBuilder (upval)
+		local function buildTabConfig() --[[ Line: 49 ]]
+			-- upvalues: MutualFriendIds (upval), AppPage (upval)
+			local List = {}
 			
-			if p4 and #p4 > 0 then
-				table.insert(t, {
+			if MutualFriendIds and #MutualFriendIds > 0 then
+				table.insert(List, {
 					tabLabelKey = "Feature.Friends.Mutuals",
-					id = appPage.SocialTabsMutuals
+					id = AppPage.SocialTabsMutuals
 				})
 			end
-			table.insert(t, {
+			table.insert(List, {
 				tabLabelKey = "CommonUI.Features.Label.Friends",
-				id = appPage.SocialTabsFriends
+				id = AppPage.SocialTabsFriends
 			})
 			
-			return t
+			return List
 		end
 		
 		return {
-			mutualFriendsCount = function()
-				-- upvalues: p3 (copy), eventNamesModule (copy), fFlagEnableSocialTabsPage (copy), p2 (copy), appPage (copy), p1 (copy), p5 (copy), buildTabConfig (ref), var4 (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var2 (copy), navigateDown (copy), p4 (copy)
-				p3.fireAnalyticsEvent(eventNamesModule.MutualFriendsButton)
+			mutualFriendsCount = function() --[[ Line: 62 ]]
+				-- upvalues: p2 (upval), EventNamesModule (upval), FFlagEnableSocialTabsPage (upval), p1 (upval), AppPage (upval), ProfileId (upval), Title (upval), buildTabConfig (copy), NoIsFullView (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (upval), NavigateDownFunction (upval), MutualFriendIds (upval)
+				p2.fireAnalyticsEvent(EventNamesModule.MutualFriendsButton)
 				
-				if fFlagEnableSocialTabsPage and not p2 then
-					local t = {
-						name = appPage.SocialTabsPage,
+				if FFlagEnableSocialTabsPage and not p1 then
+					local config1 = {
+						name = AppPage.SocialTabsPage,
 						extraProps = {
 							source = "ProfilePage",
-							profileId = p1,
-							title = p5,
-							initialTabId = appPage.SocialTabsMutuals,
+							profileId = ProfileId,
+							title = Title,
+							initialTabId = AppPage.SocialTabsMutuals,
 							tabConfig = buildTabConfig(),
-							dockToProfilePanel = var4
+							dockToProfilePanel = NoIsFullView
 						}
 					}
 					
-					if fFlagSignalsNavP3Dispatch then
-						var1.down(var1.fromLegacyPage(t))
+					if FFlagSignalsNavP3Dispatch then
+						NavigationCommands.down(NavigationCommands.fromLegacyPage(config1))
+						
+						return
+					else
+						UseDispatchResult(NavigateDownFunction(config1))
 						
 						return
 					end
-					var2(navigateDown(t))
+				else
+					local config = {
+						name = AppPage.MutualConnectionList,
+						extraProps = { mutualFriendIds = MutualFriendIds }
+					}
+					
+					if FFlagSignalsNavP3Dispatch then
+						NavigationCommands.down(NavigationCommands.fromLegacyPage(config))
+						
+						return
+					else
+						UseDispatchResult(NavigateDownFunction(config))
+					end
+				end
+			end,
+			followersCount = function() --[[ Line: 97 ]]
+				-- upvalues: p2 (upval), EventNamesModule (upval), AppPage (upval), Url (upval), ProfileId (upval), TextKeysModule (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (upval), NavigateDownFunction (upval)
+				p2.fireAnalyticsEvent(EventNamesModule.FollowersButton)
+				local config = {
+					name = AppPage.GenericWebPage,
+					detail = `{Url.BASE_URL}users/{ProfileId}/friends#!/followers`,
+					extraProps = { titleKey = TextKeysModule.Followers }
+				}
+				
+				if FFlagSignalsNavP3Dispatch then
+					NavigationCommands.down(NavigationCommands.fromLegacyPage(config))
 					
 					return
 				else
-					local t = {
-						name = appPage.MutualConnectionList,
-						extraProps = { mutualFriendIds = p4 }
-					}
+					UseDispatchResult(NavigateDownFunction(config))
+				end
+			end,
+			followingsCount = function() --[[ Line: 113 ]]
+				-- upvalues: p2 (upval), EventNamesModule (upval), AppPage (upval), Url (upval), ProfileId (upval), TextKeysModule (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (upval), NavigateDownFunction (upval)
+				p2.fireAnalyticsEvent(EventNamesModule.FollowingsButton)
+				local config = {
+					name = AppPage.GenericWebPage,
+					detail = `{Url.BASE_URL}users/{ProfileId}/friends#!/following`,
+					extraProps = { titleKey = TextKeysModule.Following }
+				}
+				
+				if FFlagSignalsNavP3Dispatch then
+					NavigationCommands.down(NavigationCommands.fromLegacyPage(config))
 					
-					if fFlagSignalsNavP3Dispatch then
-						var1.down(var1.fromLegacyPage(t))
+					return
+				else
+					UseDispatchResult(NavigateDownFunction(config))
+				end
+			end,
+			friendsCount = function() --[[ Line: 129 ]]
+				-- upvalues: p2 (upval), EventNamesModule (upval), p1 (upval), FFlagCreateConnectionsHub (upval), UseNavigationResult (upval), AppPage (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), UseDispatchResult (upval), NavigateDownFunction (upval), FFlagEnableSocialTabsPage (upval), ProfileId (upval), Title (upval), buildTabConfig (copy), NoIsFullView (upval), UrlBuilder (upval), TextKeysModule (upval)
+				p2.fireAnalyticsEvent(EventNamesModule.FriendsButton)
+				
+				if p1 then
+					if FFlagCreateConnectionsHub then
+						UseNavigationResult.navigate(AppPage.CoHubMyConnections)
 						
 						return
 					end
-					var2(navigateDown(t))
-				end
-			end,
-			followersCount = function()
-				-- upvalues: p3 (copy), eventNamesModule (copy), appPage (copy), url (copy), p1 (copy), textKeysModule (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var2 (copy), navigateDown (copy)
-				p3.fireAnalyticsEvent(eventNamesModule.FollowersButton)
-				local t = {
-					name = appPage.GenericWebPage,
-					detail = `{url.BASE_URL}users/{p1}/friends#!/followers`,
-					extraProps = { titleKey = textKeysModule.Followers }
-				}
-				
-				if fFlagSignalsNavP3Dispatch then
-					var1.down(var1.fromLegacyPage(t))
-					
-					return
-				end
-				var2(navigateDown(t))
-			end,
-			followingsCount = function()
-				-- upvalues: p3 (copy), eventNamesModule (copy), appPage (copy), url (copy), p1 (copy), textKeysModule (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var2 (copy), navigateDown (copy)
-				p3.fireAnalyticsEvent(eventNamesModule.FollowingsButton)
-				local t = {
-					name = appPage.GenericWebPage,
-					detail = `{url.BASE_URL}users/{p1}/friends#!/following`,
-					extraProps = { titleKey = textKeysModule.Following }
-				}
-				
-				if fFlagSignalsNavP3Dispatch then
-					var1.down(var1.fromLegacyPage(t))
-					
-					return
-				end
-				var2(navigateDown(t))
-			end,
-			friendsCount = function()
-				-- upvalues: p3 (copy), eventNamesModule (copy), p2 (copy), fFlagCreateConnectionsHub (copy), var3 (copy), appPage (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), var2 (copy), navigateDown (copy), fFlagEnableSocialTabsPage (copy), p1 (copy), p5 (copy), buildTabConfig (ref), var4 (copy), urlBuilder (copy), fFlagConnectionsToFriendsRename (copy), textKeysModule (copy)
-				p3.fireAnalyticsEvent(eventNamesModule.FriendsButton)
-				
-				if p2 then
-					if fFlagCreateConnectionsHub then
-						var3.navigate(appPage.CoHubMyConnections)
-						
-						return
-					end
-					local t = {
-						name = appPage.ViewFriends,
+					local config = {
+						name = AppPage.ViewFriends,
 						extraProps = {
 							navigateToFriendsLandingEventStart = {
-								startPage = appPage.ProfilePlatform,
+								startPage = AppPage.ProfilePlatform,
 								startTime = os.clock()
 							}
 						}
 					}
 					
-					if fFlagSignalsNavP3Dispatch then
-						var1.down(var1.fromLegacyPage(t))
+					if FFlagSignalsNavP3Dispatch then
+						NavigationCommands.down(NavigationCommands.fromLegacyPage(config))
+						
+						return
+					else
+						UseDispatchResult(NavigateDownFunction(config))
 						
 						return
 					end
-					var2(navigateDown(t))
-					
-					return
-				elseif fFlagEnableSocialTabsPage then
-					local t = {
-						name = appPage.SocialTabsPage,
+				elseif FFlagEnableSocialTabsPage then
+					local config = {
+						name = AppPage.SocialTabsPage,
 						extraProps = {
 							source = "ProfilePage",
-							profileId = p1,
-							title = p5,
-							initialTabId = appPage.SocialTabsFriends,
+							profileId = ProfileId,
+							title = Title,
+							initialTabId = AppPage.SocialTabsFriends,
 							tabConfig = buildTabConfig(),
-							dockToProfilePanel = var4
+							dockToProfilePanel = NoIsFullView
 						}
 					}
 					
-					if fFlagSignalsNavP3Dispatch then
-						var1.down(var1.fromLegacyPage(t))
+					if FFlagSignalsNavP3Dispatch then
+						NavigationCommands.down(NavigationCommands.fromLegacyPage(config))
+						
+						return
+					else
+						UseDispatchResult(NavigateDownFunction(config))
 						
 						return
 					end
-					var2(navigateDown(t))
-					
-					return
 				else
-					local t = {
-						name = appPage.GenericWebPage,
-						detail = urlBuilder.user.friends({ userId = p1 }),
-						extraProps = {
-							titleKey = if fFlagConnectionsToFriendsRename then textKeysModule.Friends else textKeysModule.Connections
-						}
+					local config1 = {
+						name = AppPage.GenericWebPage,
+						detail = UrlBuilder.user.friends({ userId = ProfileId }),
+						extraProps = { titleKey = TextKeysModule.Friends }
 					}
 					
-					if fFlagSignalsNavP3Dispatch then
-						var1.down(var1.fromLegacyPage(t))
+					if FFlagSignalsNavP3Dispatch then
+						NavigationCommands.down(NavigationCommands.fromLegacyPage(config1))
 						
 						return
+					else
+						UseDispatchResult(NavigateDownFunction(config1))
 					end
-					var2(navigateDown(t))
 				end
 			end
 		}
 	end, {
-		p1, p2, p3, var2, p4, if fFlagEnableSocialTabsPage then p5 or "" else nil,
-		if fFlagEnableSocialTabsPage then var4 else nil,
-		if fFlagEnableSocialTabsPage then var3 else nil
+		ProfileId, p1, p2, UseDispatchResult, MutualFriendIds,
+		if FFlagEnableSocialTabsPage then Title or "" else nil,
+		if FFlagEnableSocialTabsPage then NoIsFullView else nil,
+		if FFlagEnableSocialTabsPage then UseNavigationResult else nil
 	})
 end

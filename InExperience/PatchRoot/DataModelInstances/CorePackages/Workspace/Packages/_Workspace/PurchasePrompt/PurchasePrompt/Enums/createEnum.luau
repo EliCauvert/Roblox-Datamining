@@ -1,40 +1,40 @@
-﻿local parent = script.Parent.Parent
-local symbolModule = require(parent.Symbols.Symbol)
-local strictModule = require(parent.strict)
+﻿local Parent = script.Parent.Parent
+local SymbolModule = require(Parent.Symbols.Symbol)
+local StrictModule = require(Parent.strict)
 
-return function(p1, p2)
-	-- upvalues: symbolModule (ref), strictModule (ref)
+return function(p1, List) --[[ Line: 19 | Named "createEnum" ]]
+	-- upvalues: SymbolModule (copy), StrictModule (copy)
 	assert(typeof(p1) == "string", "Bad argument #1, expected string")
-	assert(typeof(p2) == "table", "Bad argument #2, expected list of values")
-	local t = {}
+	assert(typeof(List) == "table", "Bad argument #2, expected list of values")
+	local NamedResults = {}
 	
-	for i, v in ipairs(p2) do
-		assert(v ~= "isMember", "Shadowing 'isMember' function is not allowed")
-		assert(typeof(v) == "string", "Only string names are supported for enum types")
-		local var1 = symbolModule.named(v)
-		local var2 = ("%s.%s"):format(p1, v)
+	for _, value in ipairs(List) do
+		assert(value ~= "isMember", "Shadowing 'isMember' function is not allowed")
+		assert(typeof(value) == "string", "Only string names are supported for enum types")
+		local NamedResult = SymbolModule.named(value)
+		local Text: string = ("%s.%s"):format(p1, value)
 		
-		getmetatable(var1).__tostring = function()
-			-- upvalues: var2 (ref)
-			return var2
+		getmetatable(NamedResult).__tostring = function() --[[ Line: 31 ]]
+			-- upvalues: Text (copy)
+			return Text
 		end
 		
-		t[v] = var1
+		NamedResults[value] = NamedResult
 	end
-	function t.isMember(p3)
-		-- upvalues: t (ref)
-		if typeof(p3) ~= "userdata" then
+	function NamedResults.isMember(p2): boolean --[[ Line: 38 ]]
+		-- upvalues: NamedResults (copy)
+		if typeof(p2) ~= "userdata" then
 			return false
 		end
-		for i, v in pairs(t) do
-			if p3 == v then
+		for _, namedResult in pairs(NamedResults) do
+			if p2 == namedResult then
 				return true
 			end
 		end
 		return false
 	end
 	
-	getmetatable(newproxy(true)).__index = t
+	getmetatable((newproxy(true))).__index = NamedResults
 	
-	return strictModule(t, p1)
+	return StrictModule(NamedResults, p1)
 end

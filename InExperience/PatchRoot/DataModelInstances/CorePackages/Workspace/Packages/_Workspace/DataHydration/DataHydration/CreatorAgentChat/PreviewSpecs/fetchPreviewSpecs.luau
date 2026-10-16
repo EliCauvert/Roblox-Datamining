@@ -1,35 +1,35 @@
-﻿local parent = script:FindFirstAncestor("DataHydration").Parent
-local httpClientModule = require(parent.HttpClient)
-local urlBase = require(parent.UrlBuilder).UrlBase
-local resolveAcpUrlModule = require(script.Parent.Parent.Env.resolveAcpUrl)
-local decodePreviewSpecsModule = require(script.Parent.decodePreviewSpecs)
+﻿local Parent = script:FindFirstAncestor("DataHydration").Parent
+local HttpClientModule = require(Parent.HttpClient)
+local UrlBase = require(Parent.UrlBuilder).UrlBase
+local ResolveAcpUrlModule = require(script.Parent.Parent.Env.resolveAcpUrl)
+local DecodePreviewSpecsModule = require(script.Parent.decodePreviewSpecs)
 local _ = require(script.Parent.PreviewSpecsTypes)
 
-local function _()
-	-- upvalues: resolveAcpUrlModule (ref), urlBase (ref)
-	local sitetestNumber = resolveAcpUrlModule.resolveCreatorAgentAcp().sitetestNumber
+local function _() --[[ Line: 21 | Named "getDefaultBaseUrl" ]]
+	-- upvalues: ResolveAcpUrlModule (copy), UrlBase (copy)
+	local SitetestNumber = ResolveAcpUrlModule.resolveCreatorAgentAcp().sitetestNumber
 	
-	return if sitetestNumber == nil then urlBase.APIS else `https://apis.sitetest{sitetestNumber}.robloxlabs.com`
+	return if SitetestNumber == nil then UrlBase.APIS else `https://apis.sitetest{SitetestNumber}.robloxlabs.com`
 end
 
-return function(p1)
-	-- upvalues: httpClientModule (ref), resolveAcpUrlModule (ref), urlBase (ref), decodePreviewSpecsModule (ref)
-	p1 = p1 or {}
-	local fetch = httpClientModule.fetch
-	local t = {
+return function(p1) --[[ Line: 29 | Named "fetchPreviewSpecs" ]]
+	-- upvalues: HttpClientModule (copy), ResolveAcpUrlModule (copy), UrlBase (copy), DecodePreviewSpecsModule (copy)
+	local P0 = p1 or {}
+	local FetchFunction = HttpClientModule.fetch
+	local config = {
 		method = "GET",
 		analyticsKey = "build-preview-specs.get",
 		retry = false,
-		network = p1.network
+		network = P0.network
 	}
-	local baseUrl = p1.baseUrl
+	local BaseUrl = P0.baseUrl
 	
-	if not baseUrl then
-		local sitetestNumber = resolveAcpUrlModule.resolveCreatorAgentAcp().sitetestNumber
-		baseUrl = if sitetestNumber ~= nil then urlBase.APIS else `https://apis.sitetest{sitetestNumber}.robloxlabs.com`
+	if not BaseUrl then
+		local SitetestNumber = ResolveAcpUrlModule.resolveCreatorAgentAcp().sitetestNumber
+		BaseUrl = if SitetestNumber == nil then UrlBase.APIS else `https://apis.sitetest{SitetestNumber}.robloxlabs.com`
 	end
-	t.url = baseUrl .. "/build-internal-dashboard-api/v1/preview-specs"
-	t.decode = decodePreviewSpecsModule
+	config.url = BaseUrl .. "/build-internal-dashboard-api/v1/preview-specs"
+	config.decode = DecodePreviewSpecsModule
 	
-	return httpClientModule.asPromise(fetch(t))
+	return HttpClientModule.asPromise((FetchFunction(config)))
 end

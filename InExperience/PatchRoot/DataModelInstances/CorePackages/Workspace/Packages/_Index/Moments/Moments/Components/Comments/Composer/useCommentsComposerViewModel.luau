@@ -1,17 +1,16 @@
-﻿local moments = script:FindFirstAncestor("Moments")
-local parent = moments.Parent
-local localizationModule = require(parent.Localization)
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local useEventCallback = require(parent.ReactUtils).useEventCallback
-local fIntMomentsCommentMaxLengthModule = require(moments.Flags.FIntMomentsCommentMaxLength)
-local getCommentCollectionStoreModule = require(moments.Components.Comments.GetCommentCollectionStore)
-local getCommentsListCoordinatorModule = require(moments.Components.Comments.List.getCommentsListCoordinator)
+﻿local Moments = script:FindFirstAncestor("Moments")
+local Parent = Moments.Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local UseEventCallbackFunction = require(Parent.ReactUtils).useEventCallback
+local FIntMomentsCommentMaxLengthModule = require(Moments.Flags.FIntMomentsCommentMaxLength)
+local GetCommentCollectionStoreModule = require(Moments.Components.Comments.GetCommentCollectionStore)
+local GetCommentsListCoordinatorModule = require(Moments.Components.Comments.List.getCommentsListCoordinator)
 local _ = require(script.Parent.CommentsComposerView)
-local normalizeCommentTextModule = require(script.Parent.normalizeCommentText)
-local truncateToMaxLengthModule = require(script.Parent.truncateToMaxLength)
-local useLocalization = localizationModule.Hooks.useLocalization
-local t = {
+local NormalizeCommentTextModule = require(script.Parent.normalizeCommentText)
+local TruncateToMaxLengthModule = require(script.Parent.truncateToMaxLength)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local config = {
 	textFilterRejected = "Feature.Moments.Label.CommentRejectedByFilter",
 	rateLimited = "Feature.Moments.Label.CommentRateLimited",
 	submissionFailed = "Feature.Moments.Label.CommentPostFailed",
@@ -22,7 +21,7 @@ local t = {
 	signInRequired = "Feature.Moments.Label.CommentSignInRequired",
 	commentsOff = "Feature.Moments.Label.CommentingUnavailable"
 }
-local t_1 = {
+local config1 = {
 	TextFilterRejected = "textFilterRejected",
 	RateLimited = "rateLimited",
 	CommentsDisabledByCreator = "commentsDisabled",
@@ -35,70 +34,71 @@ local t_1 = {
 	SubmissionOutcomeUnknown = "outcomeUnknown"
 }
 
-local function _(p1)
-	-- upvalues: t_1 (ref)
-	return t_1[p1] or "submissionFailed"
+local function _(p1) --[[ Line: 54 | Named "getSubmissionErrorMessageName" ]]
+	-- upvalues: config1 (copy)
+	return config1[p1] or "submissionFailed"
 end
 
-local _ = function(p1)
-	-- upvalues: normalizeCommentTextModule (ref)
-	return normalizeCommentTextModule(p1) == ""
+local _ = function(p1): boolean --[[ Line: 58 | Named "isBlank" ]]
+	-- upvalues: NormalizeCommentTextModule (copy)
+	return NormalizeCommentTextModule(p1) == ""
 end
 
-return function(p1)
-	-- upvalues: reactModule (ref), useLocalization (ref), t (ref), getCommentCollectionStoreModule (ref), signalsReactModule (ref), getCommentsListCoordinatorModule (ref), t_1 (ref), normalizeCommentTextModule (ref), fIntMomentsCommentMaxLengthModule (ref), truncateToMaxLengthModule (ref), useEventCallback (ref)
-	local var1, var2 = reactModule.useState("")
-	local var3, var4 = reactModule.useBinding("")
-	local var5 = reactModule.useCallback(function(p2)
-		-- upvalues: var2 (ref), var4 (ref)
-		var2(p2)
-		var4(p2)
-	end, { var4 })
-	local var6 = useLocalization(t)
-	local var7, var8 = reactModule.useState(nil)
-	local var9 = getCommentCollectionStoreModule(false)
-	local var10 = signalsReactModule.useSignalState(reactModule.useMemo(function()
-		-- upvalues: var9 (ref), p1 (ref)
-		return var9.getState(p1.feedItemId)
-	end, { var9, p1.feedItemId }))
-	local var11 = getCommentsListCoordinatorModule(false)
-	local submissionError = var10.submissionError
-	local var12 = DateTime.now().UnixTimestampMillis < signalsReactModule.useSignalState(var11.getPostCooldownUntilMs)
-	reactModule.useEffect(function()
-		-- upvalues: submissionError (ref), var5 (ref), var8 (ref), t_1 (copy), var9 (ref), p1 (ref)
-		if submissionError == nil then
+return function(p1) --[[ Line: 62 | Named "useCommentsComposerViewModel" ]]
+	-- upvalues: ReactModule (copy), UseLocalizationFunction (copy), config (copy), GetCommentCollectionStoreModule (copy), SignalsReactModule (copy), GetCommentsListCoordinatorModule (copy), config1 (copy), NormalizeCommentTextModule (copy), FIntMomentsCommentMaxLengthModule (copy), TruncateToMaxLengthModule (copy), UseEventCallbackFunction (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState("")
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding("")
+	local UseResult = ReactModule.useCallback(function(p2) --[[ Line: 67 ]]
+		-- upvalues: UseStateResult2 (copy), UseBindingResult2 (copy)
+		UseStateResult2(p2)
+		UseBindingResult2(p2)
+	end, { UseBindingResult2 })
+	local UseLocalizationResult = UseLocalizationFunction(config)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
+	local CommentCollectionStoreModule = GetCommentCollectionStoreModule(false)
+	local UseSignalStateResult = SignalsReactModule.useSignalState((ReactModule.useMemo(function() --[[ Line: 74 ]]
+		-- upvalues: CommentCollectionStoreModule (copy), p1 (copy)
+		return CommentCollectionStoreModule.getState(p1.feedItemId)
+	end, { CommentCollectionStoreModule, p1.feedItemId })))
+	local CommentsListCoordinatorModule = GetCommentsListCoordinatorModule(false)
+	local SubmissionError = UseSignalStateResult.submissionError
+	local IsUnixTimestampMillisBelow = DateTime.now().UnixTimestampMillis < SignalsReactModule.useSignalState(CommentsListCoordinatorModule.getPostCooldownUntilMs)
+	ReactModule.useEffect(function() --[[ Line: 84 ]]
+		-- upvalues: SubmissionError (copy), UseResult (copy), UseStateResult2_1 (copy), config1 (upval), CommentCollectionStoreModule (copy), p1 (copy)
+		if SubmissionError ~= nil then
+			UseResult(SubmissionError.text)
+			UseStateResult2_1(config1[SubmissionError.errorCode] or "submissionFailed")
+			CommentCollectionStoreModule.clearSubmissionError(p1.feedItemId)
+			
 			return
 		end
-		var5(submissionError.text)
-		var8(t_1[submissionError.errorCode] or "submissionFailed")
-		var9.clearSubmissionError(p1.feedItemId)
 	end, {
-		var9,
+		CommentCollectionStoreModule,
 		p1.feedItemId,
-		var5,
-		if submissionError ~= nil then nil else submissionError.errorCode,
-		if submissionError ~= nil then nil else submissionError.text
+		UseResult,
+		if SubmissionError == nil then nil else SubmissionError.errorCode,
+		if SubmissionError == nil then nil else SubmissionError.text
 	})
-	local var13 = var10.pendingSubmission ~= nil
-	local var14 = if var12 then false else not var13 and not (normalizeCommentTextModule(var1) == "")
-	local var15 = if var12 and var7 == nil then "rateLimited" else var7
+	local HasPendingSubmission = UseSignalStateResult.pendingSubmission ~= nil
+	local Inverted: boolean = if not HasPendingSubmission then not IsUnixTimestampMillisBelow and not (NormalizeCommentTextModule(UseStateResult) == "") else not IsUnixTimestampMillisBelow and not HasPendingSubmission
+	local RateLimited = if IsUnixTimestampMillisBelow and UseStateResult1 == nil then "rateLimited" else UseStateResult1
 	
 	return {
-		text = var3,
-		isInputDisabled = var13,
-		isSubmitEnabled = var14,
-		errorMessage = if var15 ~= nil then nil else var6[var15],
-		onTextChanged = reactModule.useCallback(function(p2)
-			-- upvalues: var5 (ref), fIntMomentsCommentMaxLengthModule (copy), truncateToMaxLengthModule (copy), var8 (ref)
-			var5(if fIntMomentsCommentMaxLengthModule > 0 then truncateToMaxLengthModule(p2, fIntMomentsCommentMaxLengthModule) else p2)
-			var8(nil)
-		end, { var5 }),
-		onSubmit = useEventCallback(function()
-			-- upvalues: var14 (write), var11 (ref), p1 (ref), normalizeCommentTextModule (copy), var1 (ref), var5 (ref), var8 (ref)
-			if not var14 then return end
-			if var11.submitComment(p1.feedItemId, p1.sessionId, normalizeCommentTextModule(var1)) then
-				var5("")
-				var8(nil)
+		text = UseBindingResult,
+		isInputDisabled = HasPendingSubmission,
+		isSubmitEnabled = Inverted,
+		errorMessage = if RateLimited == nil then nil else UseLocalizationResult[RateLimited],
+		onTextChanged = ReactModule.useCallback(function(p2) --[[ Line: 106 ]]
+			-- upvalues: UseResult (copy), FIntMomentsCommentMaxLengthModule (upval), TruncateToMaxLengthModule (upval), UseStateResult2_1 (copy)
+			UseResult(if FIntMomentsCommentMaxLengthModule > 0 then TruncateToMaxLengthModule(p2, FIntMomentsCommentMaxLengthModule) else p2)
+			UseStateResult2_1(nil)
+		end, { UseResult }),
+		onSubmit = UseEventCallbackFunction(function() --[[ Line: 113 ]]
+			-- upvalues: Inverted (ref), CommentsListCoordinatorModule (copy), p1 (copy), NormalizeCommentTextModule (upval), UseStateResult (copy), UseResult (copy), UseStateResult2_1 (copy)
+			if not Inverted then return end
+			if CommentsListCoordinatorModule.submitComment(p1.feedItemId, p1.sessionId, NormalizeCommentTextModule(UseStateResult)) then
+				UseResult("")
+				UseStateResult2_1(nil)
 			end
 		end)
 	}

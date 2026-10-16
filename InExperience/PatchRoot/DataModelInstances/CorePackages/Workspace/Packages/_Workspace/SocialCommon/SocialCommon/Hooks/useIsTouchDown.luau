@@ -1,27 +1,26 @@
-﻿local parent = script.Parent.Parent
-local parent_1 = parent.Parent
-local reactUtilsModule = require(parent_1.ReactUtils)
-local userInputService = game:GetService("UserInputService")
-local reactModule = require(parent_1.React)
-local useEventConnection = reactUtilsModule.useEventConnection
-local inputUtilitiesModule = require(parent.Utils.InputUtilities)
+﻿local Parent = script.Parent.Parent
+local Parent1 = Parent.Parent
+local UserInputService = game:GetService("UserInputService")
+local ReactModule = require(Parent1.React)
+local UseEventConnectionFunction = require(Parent1.ReactUtils).useEventConnection
+local InputUtilitiesModule = require(Parent.Utils.InputUtilities)
 
-return function()
-	-- upvalues: reactModule (ref), inputUtilitiesModule (ref), useEventConnection (ref), userInputService (ref)
-	local var1, var2 = reactModule.useState(false)
-	local var3 = reactModule.useCallback(function(p1)
-		-- upvalues: inputUtilitiesModule (copy), var2 (ref)
-		if inputUtilitiesModule.isTouchInput(p1) then
-			var2(false)
+return function() --[[ Line: 13 ]]
+	-- upvalues: ReactModule (copy), InputUtilitiesModule (copy), UseEventConnectionFunction (copy), UserInputService (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseResult = ReactModule.useCallback(function(p1) --[[ Line: 22 ]]
+		-- upvalues: InputUtilitiesModule (upval), UseStateResult2 (copy)
+		if InputUtilitiesModule.isTouchInput(p1) then
+			UseStateResult2(false)
 		end
-	end, { var2 })
-	useEventConnection(userInputService.InputBegan, reactModule.useCallback(function(p1)
-		-- upvalues: inputUtilitiesModule (copy), var2 (ref)
-		if inputUtilitiesModule.isTouchInput(p1) then
-			var2(true)
+	end, { UseStateResult2 })
+	UseEventConnectionFunction(UserInputService.InputBegan, (ReactModule.useCallback(function(p1) --[[ Line: 16 ]]
+		-- upvalues: InputUtilitiesModule (upval), UseStateResult2 (copy)
+		if InputUtilitiesModule.isTouchInput(p1) then
+			UseStateResult2(true)
 		end
-	end, { var2 }))
-	useEventConnection(userInputService.InputEnded, var3)
+	end, { UseStateResult2 })))
+	UseEventConnectionFunction(UserInputService.InputEnded, UseResult)
 	
-	return var1
+	return UseStateResult
 end

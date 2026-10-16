@@ -1,122 +1,124 @@
-﻿local httpService = game:GetService("HttpService")
-local parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
-local safeAppStorageService = require(parent.AvatarExperienceCommon).Lib.SafeAppStorageService
-local fFlagAXDisableMultiItemShoppingFtux = require(parent.AvatarExperienceFlags).FFlagAXDisableMultiItemShoppingFtux
+﻿local HttpService = game:GetService("HttpService")
+local Parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
+local SafeAppStorageService = require(Parent.AvatarExperienceCommon).Lib.SafeAppStorageService
+local FFlagAXDisableMultiItemShoppingFtux = require(Parent.AvatarExperienceFlags).FFlagAXDisableMultiItemShoppingFtux
 local AXCatalogMultiItemShoppingFtuxUseMemStorage = game:DefineFastFlag("AXCatalogMultiItemShoppingFtuxUseMemStorage", false)
 local AXCatalogMultiItemShoppingFtuxOtherPromptMaxCount = game:DefineFastInt("AXCatalogMultiItemShoppingFtuxOtherPromptMaxCount", 3)
 
-local function getStorage()
-	-- upvalues: safeAppStorageService (ref), AXCatalogMultiItemShoppingFtuxUseMemStorage (ref), httpService (ref)
-	local AXCatalogMultiItemShoppingFTUX = safeAppStorageService.getItem("AXCatalogMultiItemShoppingFTUX", AXCatalogMultiItemShoppingFtuxUseMemStorage)
+local function getStorage() --[[ Line: 27 ]]
+	-- upvalues: SafeAppStorageService (copy), AXCatalogMultiItemShoppingFtuxUseMemStorage (copy), HttpService (copy)
+	local AXCatalogMultiItemShoppingFTUXItem = SafeAppStorageService.getItem("AXCatalogMultiItemShoppingFTUX", AXCatalogMultiItemShoppingFtuxUseMemStorage)
 	
-	if not AXCatalogMultiItemShoppingFTUX or AXCatalogMultiItemShoppingFTUX == "" then
-		AXCatalogMultiItemShoppingFTUX = "{}"
+	if not AXCatalogMultiItemShoppingFTUXItem or AXCatalogMultiItemShoppingFTUXItem == "" then
+		AXCatalogMultiItemShoppingFTUXItem = "{}"
 	end
 	local t = {}
-	pcall(function()
-		-- upvalues: t (write), httpService (copy), AXCatalogMultiItemShoppingFTUX (write)
-		t = httpService:JSONDecode(AXCatalogMultiItemShoppingFTUX)
+	pcall(function() --[[ Line: 35 ]]
+		-- upvalues: t (ref), HttpService (upval), AXCatalogMultiItemShoppingFTUXItem (ref)
+		t = HttpService:JSONDecode(AXCatalogMultiItemShoppingFTUXItem)
 	end)
 	
 	return t
 end
 
-local function _(value)
-	-- upvalues: httpService (ref), safeAppStorageService (ref), AXCatalogMultiItemShoppingFtuxUseMemStorage (ref)
-	pcall(function()
-		-- upvalues: httpService (copy), value (ref), safeAppStorageService (copy), AXCatalogMultiItemShoppingFtuxUseMemStorage (copy)
-		safeAppStorageService.setItem("AXCatalogMultiItemShoppingFTUX", httpService:JSONEncode(value), AXCatalogMultiItemShoppingFtuxUseMemStorage)
-		safeAppStorageService.flush()
+local function _(p1) --[[ Line: 43 | Named "setStorage" ]]
+	-- upvalues: HttpService (copy), SafeAppStorageService (copy), AXCatalogMultiItemShoppingFtuxUseMemStorage (copy)
+	pcall(function() --[[ Line: 44 ]]
+		-- upvalues: HttpService (upval), p1 (copy), SafeAppStorageService (upval), AXCatalogMultiItemShoppingFtuxUseMemStorage (upval)
+		SafeAppStorageService.setItem("AXCatalogMultiItemShoppingFTUX", HttpService:JSONEncode(p1), AXCatalogMultiItemShoppingFtuxUseMemStorage)
+		SafeAppStorageService.flush()
 	end)
 end
 
-return function()
-	-- upvalues: fFlagAXDisableMultiItemShoppingFtux (ref), getStorage (ref), AXCatalogMultiItemShoppingFtuxOtherPromptMaxCount (ref), httpService (ref), safeAppStorageService (ref), AXCatalogMultiItemShoppingFtuxUseMemStorage (ref)
+return function() --[[ Line: 55 | Named "useMultiItemShoppingFtux" ]]
+	-- upvalues: FFlagAXDisableMultiItemShoppingFtux (copy), getStorage (copy), AXCatalogMultiItemShoppingFtuxOtherPromptMaxCount (copy), HttpService (copy), SafeAppStorageService (copy), AXCatalogMultiItemShoppingFtuxUseMemStorage (copy)
 	return {
-		shouldShowTooltipOnCheckoutButton = function()
-			-- upvalues: fFlagAXDisableMultiItemShoppingFtux (copy), getStorage (copy)
-			return if fFlagAXDisableMultiItemShoppingFtux then false else not getStorage().seenTooltipOnCheckoutButton
+		shouldShowTooltipOnCheckoutButton = function(): boolean --[[ Line: 56 ]]
+			-- upvalues: FFlagAXDisableMultiItemShoppingFtux (upval), getStorage (upval)
+			return not FFlagAXDisableMultiItemShoppingFtux and not getStorage().seenTooltipOnCheckoutButton
 		end,
-		shouldShowClearAllItemsPrompt = function()
-			-- upvalues: fFlagAXDisableMultiItemShoppingFtux (copy), getStorage (copy), AXCatalogMultiItemShoppingFtuxOtherPromptMaxCount (copy)
-			if fFlagAXDisableMultiItemShoppingFtux then
+		shouldShowClearAllItemsPrompt = function(): boolean --[[ Line: 65 ]]
+			-- upvalues: FFlagAXDisableMultiItemShoppingFtux (upval), getStorage (upval), AXCatalogMultiItemShoppingFtuxOtherPromptMaxCount (upval)
+			if FFlagAXDisableMultiItemShoppingFtux then
 				return false
+			else
+				local Storage = getStorage()
+				
+				return not Storage.hideClearAllItemsPrompt and (Storage.clearAllItemsPromptCount == nil or Storage.clearAllItemsPromptCount < AXCatalogMultiItemShoppingFtuxOtherPromptMaxCount)
 			end
-			local var1 = getStorage()
-			
-			return not var1.hideClearAllItemsPrompt and (if var1.clearAllItemsPromptCount ~= nil then var1.clearAllItemsPromptCount < AXCatalogMultiItemShoppingFtuxOtherPromptMaxCount else true)
 		end,
-		shouldShowWearAvatarReplaceAllItemsPrompt = function()
-			-- upvalues: fFlagAXDisableMultiItemShoppingFtux (copy), getStorage (copy), AXCatalogMultiItemShoppingFtuxOtherPromptMaxCount (copy)
-			if fFlagAXDisableMultiItemShoppingFtux then
+		shouldShowWearAvatarReplaceAllItemsPrompt = function(): boolean --[[ Line: 78 ]]
+			-- upvalues: FFlagAXDisableMultiItemShoppingFtux (upval), getStorage (upval), AXCatalogMultiItemShoppingFtuxOtherPromptMaxCount (upval)
+			if FFlagAXDisableMultiItemShoppingFtux then
 				return false
+			else
+				local Storage = getStorage()
+				
+				return not Storage.hideWearAvatarReplaceAllItemsPrompt and (Storage.wearAvatarReplaceAllItemsPromptCount == nil or Storage.wearAvatarReplaceAllItemsPromptCount < AXCatalogMultiItemShoppingFtuxOtherPromptMaxCount)
 			end
-			local var1 = getStorage()
-			
-			return not var1.hideWearAvatarReplaceAllItemsPrompt and (if var1.wearAvatarReplaceAllItemsPromptCount ~= nil then var1.wearAvatarReplaceAllItemsPromptCount < AXCatalogMultiItemShoppingFtuxOtherPromptMaxCount else true)
 		end,
-		setSeenTooltipOnCheckoutButton = function()
-			-- upvalues: getStorage (copy), httpService (copy), safeAppStorageService (copy), AXCatalogMultiItemShoppingFtuxUseMemStorage (copy)
-			local var1 = getStorage()
-			var1.seenTooltipOnCheckoutButton = true
-			pcall(function()
-				-- upvalues: httpService (copy), var1 (ref), safeAppStorageService (copy), AXCatalogMultiItemShoppingFtuxUseMemStorage (copy)
-				safeAppStorageService.setItem("AXCatalogMultiItemShoppingFTUX", httpService:JSONEncode(var1), AXCatalogMultiItemShoppingFtuxUseMemStorage)
-				safeAppStorageService.flush()
+		setSeenTooltipOnCheckoutButton = function() --[[ Line: 100 ]]
+			-- upvalues: getStorage (upval), HttpService (upval), SafeAppStorageService (upval), AXCatalogMultiItemShoppingFtuxUseMemStorage (upval)
+			local Storage = getStorage()
+			Storage.seenTooltipOnCheckoutButton = true
+			pcall(function() --[[ Line: 44 ]]
+				-- upvalues: HttpService (upval), Storage (copy), SafeAppStorageService (upval), AXCatalogMultiItemShoppingFtuxUseMemStorage (upval)
+				SafeAppStorageService.setItem("AXCatalogMultiItemShoppingFTUX", HttpService:JSONEncode(Storage), AXCatalogMultiItemShoppingFtuxUseMemStorage)
+				SafeAppStorageService.flush()
 			end)
 		end,
-		hideClearAllItemsPrompt = function()
-			-- upvalues: getStorage (copy), httpService (copy), safeAppStorageService (copy), AXCatalogMultiItemShoppingFtuxUseMemStorage (copy)
-			local var1 = getStorage()
-			var1.hideClearAllItemsPrompt = true
-			pcall(function()
-				-- upvalues: httpService (copy), var1 (ref), safeAppStorageService (copy), AXCatalogMultiItemShoppingFtuxUseMemStorage (copy)
-				safeAppStorageService.setItem("AXCatalogMultiItemShoppingFTUX", httpService:JSONEncode(var1), AXCatalogMultiItemShoppingFtuxUseMemStorage)
-				safeAppStorageService.flush()
+		hideClearAllItemsPrompt = function() --[[ Line: 107 ]]
+			-- upvalues: getStorage (upval), HttpService (upval), SafeAppStorageService (upval), AXCatalogMultiItemShoppingFtuxUseMemStorage (upval)
+			local Storage = getStorage()
+			Storage.hideClearAllItemsPrompt = true
+			pcall(function() --[[ Line: 44 ]]
+				-- upvalues: HttpService (upval), Storage (copy), SafeAppStorageService (upval), AXCatalogMultiItemShoppingFtuxUseMemStorage (upval)
+				SafeAppStorageService.setItem("AXCatalogMultiItemShoppingFTUX", HttpService:JSONEncode(Storage), AXCatalogMultiItemShoppingFtuxUseMemStorage)
+				SafeAppStorageService.flush()
 			end)
 		end,
-		incrementClearAllItemsPromptCount = function()
-			-- upvalues: getStorage (copy), httpService (copy), safeAppStorageService (copy), AXCatalogMultiItemShoppingFtuxUseMemStorage (copy)
-			local var1 = getStorage()
-			var1.clearAllItemsPromptCount = if var1.clearAllItemsPromptCount == nil then 1 else var1.clearAllItemsPromptCount + 1
-			pcall(function()
-				-- upvalues: httpService (copy), var1 (ref), safeAppStorageService (copy), AXCatalogMultiItemShoppingFtuxUseMemStorage (copy)
-				safeAppStorageService.setItem("AXCatalogMultiItemShoppingFTUX", httpService:JSONEncode(var1), AXCatalogMultiItemShoppingFtuxUseMemStorage)
-				safeAppStorageService.flush()
+		incrementClearAllItemsPromptCount = function() --[[ Line: 114 ]]
+			-- upvalues: getStorage (upval), HttpService (upval), SafeAppStorageService (upval), AXCatalogMultiItemShoppingFtuxUseMemStorage (upval)
+			local Storage = getStorage()
+			Storage.clearAllItemsPromptCount = if Storage.clearAllItemsPromptCount == nil then 1 else Storage.clearAllItemsPromptCount + 1
+			pcall(function() --[[ Line: 44 ]]
+				-- upvalues: HttpService (upval), Storage (copy), SafeAppStorageService (upval), AXCatalogMultiItemShoppingFtuxUseMemStorage (upval)
+				SafeAppStorageService.setItem("AXCatalogMultiItemShoppingFTUX", HttpService:JSONEncode(Storage), AXCatalogMultiItemShoppingFtuxUseMemStorage)
+				SafeAppStorageService.flush()
 			end)
 		end,
-		hideWearAvatarReplaceAllItemsPrompt = function()
-			-- upvalues: getStorage (copy), httpService (copy), safeAppStorageService (copy), AXCatalogMultiItemShoppingFtuxUseMemStorage (copy)
-			local var1 = getStorage()
-			var1.hideWearAvatarReplaceAllItemsPrompt = true
-			pcall(function()
-				-- upvalues: httpService (copy), var1 (ref), safeAppStorageService (copy), AXCatalogMultiItemShoppingFtuxUseMemStorage (copy)
-				safeAppStorageService.setItem("AXCatalogMultiItemShoppingFTUX", httpService:JSONEncode(var1), AXCatalogMultiItemShoppingFtuxUseMemStorage)
-				safeAppStorageService.flush()
+		hideWearAvatarReplaceAllItemsPrompt = function() --[[ Line: 123 ]]
+			-- upvalues: getStorage (upval), HttpService (upval), SafeAppStorageService (upval), AXCatalogMultiItemShoppingFtuxUseMemStorage (upval)
+			local Storage = getStorage()
+			Storage.hideWearAvatarReplaceAllItemsPrompt = true
+			pcall(function() --[[ Line: 44 ]]
+				-- upvalues: HttpService (upval), Storage (copy), SafeAppStorageService (upval), AXCatalogMultiItemShoppingFtuxUseMemStorage (upval)
+				SafeAppStorageService.setItem("AXCatalogMultiItemShoppingFTUX", HttpService:JSONEncode(Storage), AXCatalogMultiItemShoppingFtuxUseMemStorage)
+				SafeAppStorageService.flush()
 			end)
 		end,
-		incrementWearAvatarReplaceAllItemsPromptCount = function()
-			-- upvalues: getStorage (copy), httpService (copy), safeAppStorageService (copy), AXCatalogMultiItemShoppingFtuxUseMemStorage (copy)
-			local var1 = getStorage()
-			var1.wearAvatarReplaceAllItemsPromptCount = if var1.wearAvatarReplaceAllItemsPromptCount == nil then 1 else var1.wearAvatarReplaceAllItemsPromptCount + 1
-			pcall(function()
-				-- upvalues: httpService (copy), var1 (ref), safeAppStorageService (copy), AXCatalogMultiItemShoppingFtuxUseMemStorage (copy)
-				safeAppStorageService.setItem("AXCatalogMultiItemShoppingFTUX", httpService:JSONEncode(var1), AXCatalogMultiItemShoppingFtuxUseMemStorage)
-				safeAppStorageService.flush()
+		incrementWearAvatarReplaceAllItemsPromptCount = function() --[[ Line: 130 ]]
+			-- upvalues: getStorage (upval), HttpService (upval), SafeAppStorageService (upval), AXCatalogMultiItemShoppingFtuxUseMemStorage (upval)
+			local Storage = getStorage()
+			Storage.wearAvatarReplaceAllItemsPromptCount = if Storage.wearAvatarReplaceAllItemsPromptCount == nil then 1 else Storage.wearAvatarReplaceAllItemsPromptCount + 1
+			pcall(function() --[[ Line: 44 ]]
+				-- upvalues: HttpService (upval), Storage (copy), SafeAppStorageService (upval), AXCatalogMultiItemShoppingFtuxUseMemStorage (upval)
+				SafeAppStorageService.setItem("AXCatalogMultiItemShoppingFTUX", HttpService:JSONEncode(Storage), AXCatalogMultiItemShoppingFtuxUseMemStorage)
+				SafeAppStorageService.flush()
 			end)
 		end,
-		shouldShowItemReplacedOnAvatarPrompt = function()
-			-- upvalues: fFlagAXDisableMultiItemShoppingFtux (copy), getStorage (copy)
-			return if fFlagAXDisableMultiItemShoppingFtux then false else not getStorage().seenItemReplacedOnAvatarPrompt
+		shouldShowItemReplacedOnAvatarPrompt = function(): boolean --[[ Line: 91 ]]
+			-- upvalues: FFlagAXDisableMultiItemShoppingFtux (upval), getStorage (upval)
+			return not FFlagAXDisableMultiItemShoppingFtux and not getStorage().seenItemReplacedOnAvatarPrompt
 		end,
-		setSeenItemReplaceOnAvatarPrompt = function()
-			-- upvalues: getStorage (copy), httpService (copy), safeAppStorageService (copy), AXCatalogMultiItemShoppingFtuxUseMemStorage (copy)
-			local var1 = getStorage()
-			var1.seenItemReplacedOnAvatarPrompt = true
-			pcall(function()
-				-- upvalues: httpService (copy), var1 (ref), safeAppStorageService (copy), AXCatalogMultiItemShoppingFtuxUseMemStorage (copy)
-				safeAppStorageService.setItem("AXCatalogMultiItemShoppingFTUX", httpService:JSONEncode(var1), AXCatalogMultiItemShoppingFtuxUseMemStorage)
-				safeAppStorageService.flush()
+		setSeenItemReplaceOnAvatarPrompt = function() --[[ Line: 139 ]]
+			-- upvalues: getStorage (upval), HttpService (upval), SafeAppStorageService (upval), AXCatalogMultiItemShoppingFtuxUseMemStorage (upval)
+			local Storage = getStorage()
+			Storage.seenItemReplacedOnAvatarPrompt = true
+			pcall(function() --[[ Line: 44 ]]
+				-- upvalues: HttpService (upval), Storage (copy), SafeAppStorageService (upval), AXCatalogMultiItemShoppingFtuxUseMemStorage (upval)
+				SafeAppStorageService.setItem("AXCatalogMultiItemShoppingFTUX", HttpService:JSONEncode(Storage), AXCatalogMultiItemShoppingFtuxUseMemStorage)
+				SafeAppStorageService.flush()
 			end)
 		end
 	}

@@ -1,147 +1,252 @@
-﻿local httpService = game:GetService("HttpService")
-local topicSourceModule = require(script.Parent.TopicSource)
-local t = {}
-t.__index = t
-local t_1 = { disconnect = function() end }
+﻿local HttpService = game:GetService("HttpService")
+local _ = require(script.Parent.RealtimeTypes)
+local TopicSourceModule = require(script.Parent.TopicSource)
+local TopicEventReceiverModule = {}
+TopicEventReceiverModule.__index = TopicEventReceiverModule
+local config = { disconnect = function() --[[ Line: 35 ]] end }
 
-local function _(p1)
-	if type(p1) ~= "string" then
+local function _(Text: string) --[[ Line: 38 | Named "getTopicId" ]]
+	if type(Text) == "string" then
+		local Match: string? = string.match(Text, "^([^%.]+)%.")
+		
+		return if Match == nil or string.find(Match, "!", 1, true) == nil then nil else Match
+	else
 		return nil
 	end
-	local match = string.match(p1, "^([^%.]+)%.")
-	
-	return if match == nil or string.find(match, "!", 1, true) == nil then nil else match
 end
 
-local _ = function(p1)
-	-- upvalues: httpService (ref)
+local _ = function(p1) --[[ Line: 51 | Named "decodeDetail" ]]
+	-- upvalues: HttpService (copy)
 	if p1 == "" then
 		return {}
-	end
-	local ok, status = pcall(httpService.JSONDecode, httpService, p1)
-	
-	return if ok then status else nil
-end
-
-local _ = function(p1, p2, p3)
-	local ok, status = pcall(p2.callback, p3)
-	
-	if not ok then
-		warn(`TopicEventReceiver: a callback for {p1} failed: {status}`)
-	end
-end
-
-function t.new(p4)
-	-- upvalues: topicSourceModule (ref), t (ref)
-	return setmetatable({ _source = topicSourceModule.new(p4), _topics = {} }, t)
-end
-
-function t:observeTopic(p4, p5)
-	-- upvalues: t_1 (ref)
-	local var1, match
-	assert(type(p5) == "function", "Expected a topic callback")
-	
-	if type(p4) == "string" then
-		match = string.match(p4, "^([^%.]+)%.")
-		var1 = if match == nil or string.find(match, "!", 1, true) == nil then nil else match
 	else
-		var1 = nil
+		local Success, Result = pcall(HttpService.JSONDecode, HttpService, p1)
+		
+		return if Success then Result else nil
 	end
-	if var1 == nil then
+end
+
+local _ = function(p1, p2, p3) --[[ Line: 59 | Named "callObserver" ]]
+	local Success, Result = pcall(p2.callback, p3)
+	
+	if not Success then
+		warn(`TopicEventReceiver: a callback for {p1} failed: {Result}`)
+	end
+end
+
+local _ = function(p4, p5, p6) --[[ Line: 66 | Named "callErrorHandler" ]]
+	local OnError = p5.onError
+	
+	if OnError == nil then return end
+	local Success, Result = pcall(OnError, p6)
+	
+	if not Success then
+		warn(`TopicEventReceiver: an error handler for {p4} failed: {Result}`)
+	end
+end
+
+function TopicEventReceiverModule.new(p7) --[[ Line: 77 ]]
+	-- upvalues: TopicSourceModule (copy), TopicEventReceiverModule (copy)
+	return (setmetatable({ _source = TopicSourceModule.new(p7), _topics = {} }, TopicEventReceiverModule))
+end
+
+function TopicEventReceiverModule:observeTopic(Text: string, Callback, p7) --[[ Line: 86 ]]
+	-- upvalues: config (copy)
+	assert(type(Callback) == "function", "Expected a topic callback")
+	local v1 = nil
+	
+	if type(Text) == "string" then
+		local Match: string? = string.match(Text, "^([^%.]+)%.")
+		v1 = if Match == nil or string.find(Match, "!", 1, true) == nil then nil else Match
+	else
+		v1 = nil
+	end
+	if v1 == nil then
 		warn("TopicEventReceiver: ignoring a malformed topic token")
 		
-		return t_1
-	elseif next(self._topics) == nil then
+		return config
+	end
+	if next(self._topics) == nil then
 		self:_startListening()
 	end
-	match, var7 = self:_trackToken(var1, p4)
-	local t = { callback = p5 }
-	table.insert(match.observers, t)
-	self._source:subscribe(p4, var7)
+	local TrackTokenResult, TrackTokenResult2 = self:_trackToken(v1, Text)
+	local config1 = {
+		callback = Callback,
+		onError = if p7 then p7.onError else nil
+	}
+	table.insert(TrackTokenResult.observers, config1)
+	self._source:subscribe(Text, TrackTokenResult2)
 	
 	return {
-		disconnect = function()
-			-- upvalues: self (ref), var1 (ref), t (ref)
-			self:_removeObserver(var1, t)
+		disconnect = function() --[[ Line: 109 ]]
+			-- upvalues: self (copy), v1 (copy), TrackTokenResult (copy), config1 (copy)
+			self:_removeObserver(v1, TrackTokenResult, config1)
 		end
 	}
 end
 
-function t:_startListening()
-	self._source:startListening(function(p4, p5)
-		-- upvalues: self (ref)
-		self:_dispatch(p4, p5)
-	end, function()
-		-- upvalues: self (ref)
-		self:_resubscribeAll()
-	end)
+function TopicEventReceiverModule:_startListening() --[[ Line: 115 ]]
+	self._source:startListening({
+		onNotification = function(p7, p8) --[[ Line: 117 ]]
+			-- upvalues: self (copy)
+			self:_dispatch(p7, p8)
+		end,
+		onConnected = function() --[[ Line: 120 ]]
+			-- upvalues: self (copy)
+			self:_resubscribeAll()
+		end,
+		onTokenExpiry = function(p7, ShouldExchange, p8) --[[ Line: 123 ]]
+			-- upvalues: self (copy)
+			self:_onTokenExpiry(p7, ShouldExchange, p8)
+		end,
+		onSubscriptionError = function(p7, ErrorCode, ShouldRetry) --[[ Line: 126 ]]
+			-- upvalues: self (copy)
+			self:_onSubscriptionError(p7, ErrorCode, ShouldRetry)
+		end
+	})
 end
 
-function t:_trackToken(p4, p5)
-	local var1 = self._topics[p4]
+function TopicEventReceiverModule:_trackToken(p7, Token) --[[ Line: 133 ]]
+	local Topic = self._topics[p7]
 	
-	if var1 == nil then
-		var1 = { token = p5, observers = {} }
-		self._topics[p4] = var1
+	if Topic == nil then
+		Topic = { token = Token, observers = {} }
+		self._topics[p7] = Topic
 		
-		return var1, nil
-	elseif var1.token == p5 then
-		return var1, nil
+		return Topic, nil
+	elseif Topic.token == Token then
+		return Topic, nil
+	else
+		local Token1 = Topic.token
+		Topic.token = Token
+		Topic.previousToken = Token1
+		
+		return Topic, Token1
 	end
-	local token = var1.token
-	var1.token = p5
-	
-	return var1, token
 end
 
-function t:_removeObserver(p4, p5)
-	local var1 = self._topics[p4]
-	local var2 = if var1 then table.find(var1.observers, p5) else nil
+function TopicEventReceiverModule:_removeObserver(p7, Topic, Value) --[[ Line: 149 ]]
+	local FoundIndex: number? = table.find(Topic.observers, Value)
 	
-	if var1 == nil or var2 == nil then return end
-	table.remove(var1.observers, var2)
+	if FoundIndex == nil then return end
+	table.remove(Topic.observers, FoundIndex)
 	
-	if #var1.observers > 0 then return end
-	self._topics[p4] = nil
-	self._source:unsubscribe(var1.token)
+	if #Topic.observers > 0 or self._topics[p7] ~= Topic then return end
+	self._topics[p7] = nil
+	self._source:unsubscribe(Topic.token)
 	
 	if next(self._topics) == nil then
 		self._source:stopListening()
 	end
 end
 
-function t:_dispatch(p4, p5)
-	-- upvalues: httpService (ref)
-	local t
-	local var1 = self._topics[p4]
+function TopicEventReceiverModule:_dispatch(p7, p8) --[[ Line: 166 ]]
+	-- upvalues: HttpService (copy)
+	local Topic = self._topics[p7]
 	
-	if var1 == nil then return end
-	if p5 == "" then
+	if Topic == nil then return end
+	local t = nil
+	if p8 == "" then
 		t = {}
 	else
-		local ok, status = pcall(httpService.JSONDecode, httpService, p5)
-		t = if ok then status else nil
+		local Success, Result = pcall(HttpService.JSONDecode, HttpService, p8)
+		t = if Success then Result else nil
 	end
 	if t == nil then
-		warn(`TopicEventReceiver: dropped a notification for {p4} whose detail is not valid JSON`)
+		warn(`TopicEventReceiver: dropped a notification for {p7} whose detail is not valid JSON`)
 		
 		return
 	end
-	for i, v in table.clone(var1.observers) do
-		if table.find(var1.observers, v) then
-			local ok, status = pcall(v.callback, t)
+	for _, value in table.clone(Topic.observers) do
+		if table.find(Topic.observers, value) then
+			local Success1, Result1 = pcall(value.callback, t)
 			
-			if not ok then
-				warn(`TopicEventReceiver: a callback for {p4} failed: {status}`)
+			if not Success1 then
+				warn(`TopicEventReceiver: a callback for {p7} failed: {Result1}`)
 			end
 		end
 	end
 end
 
-function t:_resubscribeAll()
-	for i, v in self._topics do
-		self._source:subscribe(v.token)
+function TopicEventReceiverModule:_resubscribeAll() --[[ Line: 185 ]]
+	for _, topic in self._topics do
+		topic.previousToken = nil
+		self._source:subscribe(topic.token)
 	end
 end
 
-return t
+function TopicEventReceiverModule._findCurrentTopic(p9, Text: string) --[[ Line: 194 ]]
+	local v1 = nil
+	if type(Text) == "string" then
+		local Match: string? = string.match(Text, "^([^%.]+)%.")
+		v1 = if Match == nil or string.find(Match, "!", 1, true) == nil then nil else Match
+	else
+		v1 = nil
+	end
+	local Topic = if v1 then p9._topics[v1] else nil
+	
+	if Topic == nil or Topic.token ~= Text then
+		return nil, nil
+	else
+		return v1, Topic
+	end
+end
+
+function TopicEventReceiverModule:_onTokenExpiry(p9, ShouldExchange, p10) --[[ Line: 203 ]]
+	local CurrentTopic, CurrentTopic2 = self:_findCurrentTopic(p9)
+	
+	if CurrentTopic == nil or CurrentTopic2 == nil then return end
+	CurrentTopic2.previousToken = nil
+	
+	if p10 then
+		self._source:subscribe(p9)
+		
+		return
+	else
+		self:_endTopic(CurrentTopic, CurrentTopic2, { type = "expired", shouldExchange = ShouldExchange })
+	end
+end
+
+function TopicEventReceiverModule:_onSubscriptionError(p9, ErrorCode, ShouldRetry) --[[ Line: 222 ]]
+	local CurrentTopic, CurrentTopic2 = self:_findCurrentTopic(p9)
+	
+	if CurrentTopic == nil or CurrentTopic2 == nil then return end
+	if CurrentTopic2.previousToken then
+		CurrentTopic2.token = CurrentTopic2.previousToken
+		CurrentTopic2.previousToken = nil
+		
+		return
+	else
+		self:_endTopic(CurrentTopic, CurrentTopic2, {
+			type = "error",
+			errorCode = ErrorCode,
+			shouldRetry = ShouldRetry
+		})
+	end
+end
+
+function TopicEventReceiverModule:_endTopic(p9, p10, p11) --[[ Line: 242 ]]
+	self._topics[p9] = nil
+	
+	if next(self._topics) == nil then
+		self._source:stopListening()
+	end
+	for _, value in table.clone(p10.observers) do
+		if table.find(p10.observers, value) then
+			local OnError = value.onError
+			local NoOnError = OnError == nil
+			local Result = nil
+			
+			if not NoOnError then
+				local Success
+				Success, Result = pcall(OnError, p11)
+				NoOnError = Success
+			end
+			if not NoOnError then
+				warn(`TopicEventReceiver: an error handler for {p9} failed: {Result}`)
+			end
+		end
+	end
+end
+
+return TopicEventReceiverModule

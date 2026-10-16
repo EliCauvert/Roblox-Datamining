@@ -1,78 +1,77 @@
-﻿local contextActionService = game:GetService("ContextActionService")
-local runService = game:GetService("RunService")
-local userInputService = game:GetService("UserInputService")
-local avatarViewport = script:FindFirstAncestor("AvatarViewport")
-local reactModule = require(avatarViewport.Parent.React)
-local constantsModule = require(avatarViewport.Constants)
-local viewportGamepadInputModule = require(avatarViewport.ViewportGamepadInput)
+﻿local ContextActionService = game:GetService("ContextActionService")
+local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
+local AvatarViewport = script:FindFirstAncestor("AvatarViewport")
+local ReactModule = require(AvatarViewport.Parent.React)
+local ConstantsModule = require(AvatarViewport.Constants)
+local ViewportGamepadInputModule = require(AvatarViewport.ViewportGamepadInput)
 
-return function(p1)
-	-- upvalues: constantsModule (ref), viewportGamepadInputModule (ref), reactModule (ref), userInputService (ref), contextActionService (ref), runService (ref)
-	local var1 = p1.enabled == nil or p1.enabled
-	local actionName = p1.actionName or constantsModule.GamepadOrbitActionName
-	local thumbstickDeadzone = p1.thumbstickDeadzone or viewportGamepadInputModule.defaultDeadzone
-	local yawSpeedDegPerSecond = p1.yawSpeedDegPerSecond or viewportGamepadInputModule.getDefaultYawSpeedDegPerSecond()
-	local zoomGestureSpeedPerSecond = p1.zoomGestureSpeedPerSecond or viewportGamepadInputModule.getDefaultZoomGestureSpeedPerSecond()
-	local zoomAxisThreshold = p1.zoomAxisThreshold or viewportGamepadInputModule.defaultZoomAxisThreshold
-	local thumbstickKeyCode = p1.thumbstickKeyCode or Enum.KeyCode.Thumbstick2
-	local var2 = reactModule.useRef(false)
-	local var3 = reactModule.useRef(false)
-	local var4 = reactModule.useRef(p1.applyYawDelta)
-	local var5 = reactModule.useRef(p1.applyZoomGesture)
-	local var6 = reactModule.useRef(p1.onOrbitEnded)
-	var4.current = p1.applyYawDelta
-	var5.current = p1.applyZoomGesture
-	var6.current = p1.onOrbitEnded
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), userInputService (copy), contextActionService (copy), actionName (ref), var2 (ref), viewportGamepadInputModule (copy), thumbstickDeadzone (ref), zoomAxisThreshold (ref), var3 (ref), var6 (ref), thumbstickKeyCode (ref), runService (copy), yawSpeedDegPerSecond (ref), var4 (ref), zoomGestureSpeedPerSecond (ref), var5 (ref)
-		if var1 and userInputService.GamepadEnabled then
-			local zero = Vector2.zero
-			contextActionService:UnbindCoreAction(actionName)
-			contextActionService:BindCoreAction(actionName, function(_, p2, p3)
-				-- upvalues: zero (write), var2 (copy), viewportGamepadInputModule (copy), thumbstickDeadzone (copy), zoomAxisThreshold (copy), var3 (copy), var6 (copy)
-				if p2 == Enum.UserInputState.Change then
-					zero = Vector2.new(p3.Position.X, p3.Position.Y)
-					var2.current = viewportGamepadInputModule.isRotating(zero, thumbstickDeadzone)
-					
-					if var2.current or zoomAxisThreshold < math.abs(zero.Y) then
-						var3.current = true
-					end
-				elseif p2 == Enum.UserInputState.End or p2 == Enum.UserInputState.Cancel then
-					zero = Vector2.zero
-					var2.current = false
-					
-					if var3.current and var6.current then
-						var6.current()
-					end
-					var3.current = false
-				end
-				return Enum.ContextActionResult.Sink
-			end, false, thumbstickKeyCode)
-			local renderSteppedConnection = runService.RenderStepped:Connect(function(p2)
-				-- upvalues: viewportGamepadInputModule (copy), zero (write), yawSpeedDegPerSecond (copy), thumbstickDeadzone (copy), var4 (copy), zoomGestureSpeedPerSecond (copy), zoomAxisThreshold (copy), var5 (copy)
-				local var7 = viewportGamepadInputModule.computeYawDeltaDegrees(zero, p2, yawSpeedDegPerSecond, thumbstickDeadzone)
+return function(p1) --[[ Line: 26 | Named "useViewportGamepadOrbit" ]]
+	-- upvalues: ConstantsModule (copy), ViewportGamepadInputModule (copy), ReactModule (copy), UserInputService (copy), ContextActionService (copy), RunService (copy)
+	local NoEnabled = p1.enabled == nil or p1.enabled
+	local ActionName = p1.actionName or ConstantsModule.GamepadOrbitActionName
+	local ThumbstickDeadzone = p1.thumbstickDeadzone or ViewportGamepadInputModule.defaultDeadzone
+	local YawSpeedDegPerSecond = p1.yawSpeedDegPerSecond or ViewportGamepadInputModule.getDefaultYawSpeedDegPerSecond()
+	local ZoomGestureSpeedPerSecond = p1.zoomGestureSpeedPerSecond or ViewportGamepadInputModule.getDefaultZoomGestureSpeedPerSecond()
+	local ZoomAxisThreshold = p1.zoomAxisThreshold or ViewportGamepadInputModule.defaultZoomAxisThreshold
+	local ThumbstickKeyCode = p1.thumbstickKeyCode or Enum.KeyCode.Thumbstick2
+	local UseRefResult = ReactModule.useRef(false)
+	local UseRefResult1 = ReactModule.useRef(false)
+	local UseRefResult2 = ReactModule.useRef(p1.applyYawDelta)
+	local UseRefResult3 = ReactModule.useRef(p1.applyZoomGesture)
+	local UseRefResult4 = ReactModule.useRef(p1.onOrbitEnded)
+	UseRefResult2.current = p1.applyYawDelta
+	UseRefResult3.current = p1.applyZoomGesture
+	UseRefResult4.current = p1.onOrbitEnded
+	ReactModule.useEffect(function() --[[ Line: 46 ]]
+		-- upvalues: NoEnabled (copy), UserInputService (upval), ContextActionService (upval), ActionName (copy), UseRefResult (copy), ViewportGamepadInputModule (upval), ThumbstickDeadzone (copy), ZoomAxisThreshold (copy), UseRefResult1 (copy), UseRefResult4 (copy), ThumbstickKeyCode (copy), RunService (upval), YawSpeedDegPerSecond (copy), UseRefResult2 (copy), ZoomGestureSpeedPerSecond (copy), UseRefResult3 (copy)
+		if not NoEnabled or not UserInputService.GamepadEnabled then return end
+		local ZeroVector = Vector2.zero
+		ContextActionService:UnbindCoreAction(ActionName)
+		ContextActionService:BindCoreAction(ActionName, function(_, UserInputState, p2) --[[ Line: 57 ]]
+			-- upvalues: ZeroVector (ref), UseRefResult (upval), ViewportGamepadInputModule (upval), ThumbstickDeadzone (upval), ZoomAxisThreshold (upval), UseRefResult1 (upval), UseRefResult4 (upval)
+			if UserInputState == Enum.UserInputState.Change then
+				ZeroVector = Vector2.new(p2.Position.X, p2.Position.Y)
+				UseRefResult.current = ViewportGamepadInputModule.isRotating(ZeroVector, ThumbstickDeadzone)
 				
-				if var7 ~= 0 and var4.current then
-					var4.current(var7)
+				if UseRefResult.current or ZoomAxisThreshold < math.abs(ZeroVector.Y) then
+					UseRefResult1.current = true
 				end
-				local var8 = viewportGamepadInputModule.computeZoomGestureDelta(zero, p2, zoomGestureSpeedPerSecond, thumbstickDeadzone, zoomAxisThreshold)
+			elseif UserInputState == Enum.UserInputState.End or UserInputState == Enum.UserInputState.Cancel then
+				ZeroVector = Vector2.zero
+				UseRefResult.current = false
 				
-				if var8 ~= 0 and var5.current then
-					var5.current(var8)
+				if UseRefResult1.current and UseRefResult4.current then
+					UseRefResult4.current()
 				end
-			end)
-			
-			return function()
-				-- upvalues: contextActionService (copy), actionName (copy), renderSteppedConnection (ref), zero (write), var2 (copy), var3 (copy)
-				contextActionService:UnbindCoreAction(actionName)
-				renderSteppedConnection:Disconnect()
-				zero = Vector2.zero
-				var2.current = false
-				var3.current = false
+				UseRefResult1.current = false
 			end
+			return Enum.ContextActionResult.Sink
+		end, false, ThumbstickKeyCode)
+		local RenderSteppedConnection = RunService.RenderStepped:Connect(function(DeltaTime) --[[ Line: 80 ]]
+			-- upvalues: ViewportGamepadInputModule (upval), ZeroVector (ref), YawSpeedDegPerSecond (upval), ThumbstickDeadzone (upval), UseRefResult2 (upval), ZoomGestureSpeedPerSecond (upval), ZoomAxisThreshold (upval), UseRefResult3 (upval)
+			local YawDeltaDegrees = ViewportGamepadInputModule.computeYawDeltaDegrees(ZeroVector, DeltaTime, YawSpeedDegPerSecond, ThumbstickDeadzone)
+			
+			if YawDeltaDegrees ~= 0 and UseRefResult2.current then
+				UseRefResult2.current(YawDeltaDegrees)
+			end
+			local ZoomGestureDelta = ViewportGamepadInputModule.computeZoomGestureDelta(ZeroVector, DeltaTime, ZoomGestureSpeedPerSecond, ThumbstickDeadzone, ZoomAxisThreshold)
+			
+			if ZoomGestureDelta ~= 0 and UseRefResult3.current then
+				UseRefResult3.current(ZoomGestureDelta)
+			end
+		end)
+		
+		return function() --[[ Line: 103 ]]
+			-- upvalues: ContextActionService (upval), ActionName (upval), RenderSteppedConnection (copy), ZeroVector (ref), UseRefResult (upval), UseRefResult1 (upval)
+			ContextActionService:UnbindCoreAction(ActionName)
+			RenderSteppedConnection:Disconnect()
+			ZeroVector = Vector2.zero
+			UseRefResult.current = false
+			UseRefResult1.current = false
 		end
 	end, {
-		var1, actionName, thumbstickDeadzone, yawSpeedDegPerSecond,
-		zoomGestureSpeedPerSecond, zoomAxisThreshold, thumbstickKeyCode
+		NoEnabled, ActionName, ThumbstickDeadzone, YawSpeedDegPerSecond,
+		ZoomGestureSpeedPerSecond, ZoomAxisThreshold, ThumbstickKeyCode
 	})
 end

@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Workspace.ShareSheet.ShareSheet)
+﻿return (require(script.Parent.Parent.Parent._Workspace.ShareSheet.ShareSheet))

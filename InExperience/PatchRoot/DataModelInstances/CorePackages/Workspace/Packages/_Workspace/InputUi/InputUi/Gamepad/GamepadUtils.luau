@@ -1,42 +1,53 @@
 ﻿local AXSetAngularVelocityIsOptional = game:DefineFastFlag("AXSetAngularVelocityIsOptional", false)
-local t = {
-	normalizeStickByDeadzone = function(p1, p2)
-		local magnitude = p1.Magnitude
-		p2 = p2 or 0.2
+local GamepadUtils = {
+	normalizeStickByDeadzone = function(Direction, p1) --[[ Line: 18 ]]
+		local Magnitude: number = Direction.Magnitude
+		local P1 = p1 or 0.2
 		
-		return if magnitude < p2 then Vector2.new(0, 0) else (magnitude - p2) / (1 - p2) * p1.Unit
+		return if Magnitude < P1 then Vector2.new(0, 0) else (Magnitude - P1) / (1 - P1) * Direction.Unit
 	end
 }
 
-function t.rotateAndZoom(p1, p2, p3, p4, p5)
-	-- upvalues: t (ref), AXSetAngularVelocityIsOptional (ref)
-	local var1 = t.normalizeStickByDeadzone(Vector2.new(p1.Position.X, p1.Position.Y))
+function GamepadUtils.rotateAndZoom(p1, p2, Callback: (any) -> (), Callback1: (any) -> (), Callback2: (any) -> ()) --[[ Line: 28 ]]
+	-- upvalues: GamepadUtils (copy), AXSetAngularVelocityIsOptional (copy)
+	local NormalizeStickByDeadzoneResult = GamepadUtils.normalizeStickByDeadzone(Vector2.new(p1.Position.X, p1.Position.Y))
 	
-	if var1 == Vector2.new(0, 0) then return end
-	if not AXSetAngularVelocityIsOptional then
-		p3(0)
-	elseif p3 then
-		p3(0)
+	if NormalizeStickByDeadzoneResult == Vector2.new(0, 0) then return end
+	if AXSetAngularVelocityIsOptional then
+		if Callback then
+			Callback(0)
+		end
+	else
+		Callback(0)
 	end
-	if p4 and math.abs(var1.X) > 0.5 then
-		p4(p2 * var1.X * 2.094395102393)
+	if Callback1 and math.abs(NormalizeStickByDeadzoneResult.X) > 0.5 then
+		Callback1(p2 * NormalizeStickByDeadzoneResult.X * 2.0943951023931953)
 	end
-	if p5 and math.abs(var1.Y) > 0.5 then
-		p5(p2 * -var1.Y * 10)
+	if Callback2 and math.abs(NormalizeStickByDeadzoneResult.Y) > 0.5 then
+		Callback2(p2 * -NormalizeStickByDeadzoneResult.Y * 10)
 	end
 end
 
-function t.mapPositionToDirection(p1)
-	-- upvalues: t (ref)
-	local var1 = t.normalizeStickByDeadzone(p1)
-	local x = var1.X
-	local y = var1.Y
+function GamepadUtils.mapPositionToDirection(Direction) --[[ Line: 56 ]]
+	-- upvalues: GamepadUtils (copy)
+	local NormalizeStickByDeadzoneResult = GamepadUtils.normalizeStickByDeadzone(Direction)
+	local X: number = NormalizeStickByDeadzoneResult.X
+	local Y: number = NormalizeStickByDeadzoneResult.Y
 	
-	if x * x + y * y > 0.25 then
-		local var2 = math.atan2(y, x)
+	if X * X + Y * Y > 0.25 then
+		local Angle = math.atan2(Y, X)
 		
-		return if var2 > -2.356194490192 and var2 <= -0.785398163397 then Enum.KeyCode.Down elseif var2 > -0.785398163397 and var2 <= 0.785398163397 then Enum.KeyCode.Right elseif var2 > 0.785398163397 and var2 <= 2.356194490192 then Enum.KeyCode.Up elseif var2 > 2.356194490192 or var2 <= -2.356194490192 then Enum.KeyCode.Left else nil
+		if Angle > -2.356194490192345 and Angle <= -0.7853981633974483 then
+			return Enum.KeyCode.Down
+		elseif Angle > -0.7853981633974483 and Angle <= 0.7853981633974483 then
+			return Enum.KeyCode.Right
+		elseif Angle > 0.7853981633974483 and Angle <= 2.356194490192345 then
+			return Enum.KeyCode.Up
+		elseif Angle > 2.356194490192345 or Angle <= -2.356194490192345 then
+			return Enum.KeyCode.Left
+		end
 	end
+	return nil
 end
 
-return t
+return GamepadUtils

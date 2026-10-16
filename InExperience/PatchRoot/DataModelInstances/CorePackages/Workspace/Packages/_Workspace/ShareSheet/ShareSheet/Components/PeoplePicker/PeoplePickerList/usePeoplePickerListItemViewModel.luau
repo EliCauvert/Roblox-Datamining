@@ -1,45 +1,41 @@
-﻿local parent = script:FindFirstAncestor("ShareSheet").Parent
-local foundationModule = require(parent.Foundation)
-local friendsCommonModule = require(parent.FriendsCommon)
-local reactModule = require(parent.React)
-local socialCommonModule = require(parent.SocialCommon)
+﻿local Parent = script:FindFirstAncestor("ShareSheet").Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
 local _ = require(script.Parent.PeoplePickerListView)
-local icon = foundationModule.Icon
-local iconName = foundationModule.Enums.IconName
-local iconSize = foundationModule.Enums.IconSize
-local useTokens = foundationModule.Hooks.useTokens
-local useGetPresenceByUserId = friendsCommonModule.Hooks.useGetPresenceByUserId
-local convertToFoundationPresenceEnum = socialCommonModule.Utils.convertToFoundationPresenceEnum
+local Icon = FoundationModule.Icon
+local IconName = FoundationModule.Enums.IconName
+local IconSize = FoundationModule.Enums.IconSize
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UseGetPresenceByUserIdFunction = require(Parent.FriendsCommon).Hooks.useGetPresenceByUserId
+local ConvertToFoundationPresenceEnumFunction = require(Parent.SocialCommon).Utils.convertToFoundationPresenceEnum
 
-return function(p1)
-	-- upvalues: useTokens (ref), useGetPresenceByUserId (ref), convertToFoundationPresenceEnum (ref), foundationModule (ref), reactModule (ref), icon (ref), iconName (ref), iconSize (ref)
-	local var1 = useTokens()
-	local var2 = useGetPresenceByUserId(if p1.primaryUserId == "" or p1.secondUserId ~= nil then nil else p1.primaryUserId)
-	local var3 = if var2 and var2.userPresenceType then convertToFoundationPresenceEnum(var2.userPresenceType) else foundationModule.Enums.UserPresence.None
-	local var4 = p1.isLoading == true
-	local testId = p1.testId or "people-picker-list-item"
-	local isSelected = p1.isSelected
+return function(p1) --[[ Line: 33 | Named "usePeoplePickerListItemViewModel" ]]
+	-- upvalues: UseTokensFunction (copy), UseGetPresenceByUserIdFunction (copy), ConvertToFoundationPresenceEnumFunction (copy), FoundationModule (copy), ReactModule (copy), Icon (copy), IconName (copy), IconSize (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseGetPresenceByUserIdResult = UseGetPresenceByUserIdFunction(if p1.primaryUserId == "" or p1.secondUserId ~= nil then nil else p1.primaryUserId)
+	local TestId = p1.testId or "people-picker-list-item"
+	local IsSelected = p1.isSelected
 	
 	return {
 		leading = {
 			type = "Avatar",
 			userId = p1.primaryUserId,
 			secondUserId = p1.secondUserId,
-			userPresence = var3
+			userPresence = if UseGetPresenceByUserIdResult and UseGetPresenceByUserIdResult.userPresenceType then ConvertToFoundationPresenceEnumFunction(UseGetPresenceByUserIdResult.userPresenceType) else FoundationModule.Enums.UserPresence.None
 		},
-		trailing = reactModule.useMemo(function()
-			-- upvalues: isSelected (ref), reactModule (copy), icon (copy), iconName (copy), iconSize (copy), var1 (ref), testId (ref)
-			return if isSelected then reactModule.createElement(icon, {
-				name = iconName.Check,
-				size = iconSize.Large,
-				style = var1.Color.Content.Emphasis,
-				testId = `{testId}--selected-check`
+		trailing = ReactModule.useMemo(function() --[[ Line: 48 ]]
+			-- upvalues: IsSelected (copy), ReactModule (upval), Icon (upval), IconName (upval), IconSize (upval), UseTokensResult (copy), TestId (copy)
+			return if IsSelected then ReactModule.createElement(Icon, {
+				name = IconName.Check,
+				size = IconSize.Large,
+				style = UseTokensResult.Color.Content.Emphasis,
+				testId = `{TestId}--selected-check`
 			}) else nil
-		end, { isSelected, testId, var1 }),
+		end, { IsSelected, TestId, UseTokensResult }),
 		title = p1.title,
 		description = p1.description,
-		isLoading = var4,
+		isLoading = p1.isLoading == true,
 		onActivated = p1.onActivated,
-		testId = testId
+		testId = TestId
 	}
 end

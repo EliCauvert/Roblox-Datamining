@@ -1,17 +1,17 @@
-﻿local experienceStoreServerDrivenUi = script:FindFirstAncestor("ExperienceStoreServerDrivenUi")
-local parent = experienceStoreServerDrivenUi.Parent
-local appPage = require(parent.RobloxAppEnums).AppPage
-local fFlagLuaAppDevStoreSeeAllForceRefreshOnNavigate = require(parent.SharedFlags).FFlagLuaAppDevStoreSeeAllForceRefreshOnNavigate
-local sduiLoadTimer = require(parent.SduiSharedUtilities).SduiLoadTimer
-local fetchDevStoreSeeAllPageIfNeededModule = require(experienceStoreServerDrivenUi.Api.fetchDevStoreSeeAllPageIfNeeded)
+﻿local ExperienceStoreServerDrivenUi = script:FindFirstAncestor("ExperienceStoreServerDrivenUi")
+local Parent = ExperienceStoreServerDrivenUi.Parent
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local FFlagLuaAppDevStoreSeeAllForceRefreshOnNavigate = require(Parent.SharedFlags).FFlagLuaAppDevStoreSeeAllForceRefreshOnNavigate
+local SduiLoadTimer = require(Parent.SduiSharedUtilities).SduiLoadTimer
+local FetchDevStoreSeeAllPageIfNeededModule = require(ExperienceStoreServerDrivenUi.Api.fetchDevStoreSeeAllPageIfNeeded)
 
-return function(p1, p2)
-	-- upvalues: sduiLoadTimer (ref), appPage (ref), fFlagLuaAppDevStoreSeeAllForceRefreshOnNavigate (ref), fetchDevStoreSeeAllPageIfNeededModule (ref)
-	local var1 = sduiLoadTimer.createLoadTimer(appPage.DevStoreSeeAll)
-	var1.start("navigate")
-	p1.navigate(appPage.DevStoreSeeAll, {
-		universeId = p2,
-		pageTimer = var1,
-		url = fetchDevStoreSeeAllPageIfNeededModule(p2, var1, if fFlagLuaAppDevStoreSeeAllForceRefreshOnNavigate then true else nil)
+return function(p1, UniverseId) --[[ Line: 11 | Named "navigateToDevStoreSeeAll" ]]
+	-- upvalues: SduiLoadTimer (copy), AppPage (copy), FFlagLuaAppDevStoreSeeAllForceRefreshOnNavigate (copy), FetchDevStoreSeeAllPageIfNeededModule (copy)
+	local LoadTimer = SduiLoadTimer.createLoadTimer(AppPage.DevStoreSeeAll)
+	LoadTimer.start("navigate")
+	p1.navigate(AppPage.DevStoreSeeAll, {
+		universeId = UniverseId,
+		pageTimer = LoadTimer,
+		url = FetchDevStoreSeeAllPageIfNeededModule(UniverseId, LoadTimer, if FFlagLuaAppDevStoreSeeAllForceRefreshOnNavigate then true else nil)
 	})
 end

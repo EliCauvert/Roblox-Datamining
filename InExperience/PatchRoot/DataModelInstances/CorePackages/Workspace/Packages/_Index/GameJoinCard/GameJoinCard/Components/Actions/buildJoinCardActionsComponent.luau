@@ -1,36 +1,36 @@
-﻿local parent = script:FindFirstAncestor("GameJoinCard").Parent
-local _ = require(parent.React)
-local userCtaAction = require(parent.UserCtaCommon).Enums.UserCtaAction
+﻿local Parent = script:FindFirstAncestor("GameJoinCard").Parent
+local _ = require(Parent.React)
+local UserCtaAction = require(Parent.UserCtaCommon).Enums.UserCtaAction
 local _ = require(script.Parent.Types)
 
-return function(p1, p2, p3, p4)
-	-- upvalues: userCtaAction (ref)
-	local t = {}
-	local t_1 = nil
+return function(List, p1, Callback1, Callback) --[[ Line: 17 | Named "buildJoinCardActionsComponent" ]]
+	-- upvalues: UserCtaAction (copy)
+	local RenderResults = {}
+	local Config = nil
 	
-	for i, v in p1 do
-		if t_1 == nil then
-			if v.id == userCtaAction.JoinExperience then
-				t_1 = { title = p2.playTogether }
-			elseif v.id == userCtaAction.PlayExperience then
-				t_1 = {
-					title = p2.playTogetherSoon,
-					subtitle = p2.differentServer
+	for i, value in List do
+		if Config == nil then
+			if value.id == UserCtaAction.JoinExperience then
+				Config = { title = p1.playTogether }
+			elseif value.id == UserCtaAction.PlayExperience then
+				Config = {
+					title = p1.playTogetherSoon,
+					subtitle = p1.differentServer
 				}
 			end
 		end
-		local var1 = v
+		local value1 = value
 		
-		if not v.keepOpenOnActivate then
-			var1 = table.clone(v)
+		if not value.keepOpenOnActivate then
+			value1 = table.clone(value)
 			
-			function var2.onActivated(...)
-				-- upvalues: v (ref), p3 (ref)
-				v.onActivated(...)
-				p3()
+			function value1.onActivated(...) --[[ Line: 43 ]]
+				-- upvalues: value (copy), Callback1 (copy)
+				value.onActivated(...)
+				Callback1()
 			end
 		end
-		t[`Action_{i}`] = if var1.render ~= nil then p4(var1, i) else var1:render(i)
+		RenderResults[`Action_{i}`] = if value1.render == nil then Callback(value1, i) else value1.render(value1, i)
 	end
-	return t, t_1
+	return RenderResults, Config
 end

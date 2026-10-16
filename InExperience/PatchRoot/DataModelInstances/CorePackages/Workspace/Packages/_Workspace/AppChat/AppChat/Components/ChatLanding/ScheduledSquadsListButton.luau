@@ -1,45 +1,49 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local foundationModule = require(parent.Foundation)
-local reactModule = require(parent.React)
-local squadExternalContractProviderModule = require(parent.SquadsCore.SquadExternalContractProvider)
-local domLocatorsModule = require(appChat.Utils.DomLocators)
-local fFlagDebugAppChatEnableDomLocatorsModule = require(appChat.Flags.FFlagDebugAppChatEnableDomLocators)
-local scheduledSquadActionEnum = require(parent.Squads.Enums).ScheduledSquadActionEnum
-local eventNamesModule = require(parent.SquadsCore.EventNames)
-local squadExternalContractContext = squadExternalContractProviderModule.SquadExternalContractContext
-local useCurrentSquadId = require(parent.SquadsCore.Hooks).useCurrentSquadId
-local iconButton = foundationModule.IconButton
-local scheduledSquadsListSheet = require(parent.Squads.Components).ScheduledSquadsListSheet
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local FoundationModule = require(Parent.Foundation)
+local ReactModule = require(Parent.React)
+local DomLocatorsModule = require(AppChat.Utils.DomLocators)
+local FFlagDebugAppChatEnableDomLocatorsModule = require(AppChat.Flags.FFlagDebugAppChatEnableDomLocators)
+local ScheduledSquadActionEnum = require(Parent.Squads.Enums).ScheduledSquadActionEnum
+local EventNamesModule = require(Parent.SquadsCore.EventNames)
+local SquadExternalContractContext = require(Parent.SquadsCore.SquadExternalContractProvider).SquadExternalContractContext
+local UseCurrentSquadIdFunction = require(Parent.SquadsCore.Hooks).useCurrentSquadId
+local IconButton = FoundationModule.IconButton
+local ScheduledSquadsListSheet = require(Parent.Squads.Components).ScheduledSquadsListSheet
 
-return function(p1)
-	-- upvalues: useCurrentSquadId (ref), reactModule (ref), squadExternalContractContext (ref), eventNamesModule (ref), scheduledSquadActionEnum (ref), iconButton (ref), foundationModule (ref), fFlagDebugAppChatEnableDomLocatorsModule (ref), domLocatorsModule (ref), scheduledSquadsListSheet (ref)
-	local var1 = useCurrentSquadId()
-	local var2 = reactModule.useContext(squadExternalContractContext)
-	local var3, var4 = reactModule.useState(false)
+return function(p1) --[[ Line: 32 ]]
+	-- upvalues: UseCurrentSquadIdFunction (copy), ReactModule (copy), SquadExternalContractContext (copy), EventNamesModule (copy), ScheduledSquadActionEnum (copy), IconButton (copy), FoundationModule (copy), FFlagDebugAppChatEnableDomLocatorsModule (copy), DomLocatorsModule (copy), ScheduledSquadsListSheet (copy)
+	local UseCurrentSquadIdResult = UseCurrentSquadIdFunction()
+	local UseContextResult = ReactModule.useContext(SquadExternalContractContext)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
 	
-	return reactModule.createElement(reactModule.Fragment, nil, {
-		ScheduledSquadsListButton = reactModule.createElement(iconButton, {
-			icon = foundationModule.Enums.IconName.Calendar,
+	return ReactModule.createElement(ReactModule.Fragment, nil, {
+		ScheduledSquadsListButton = ReactModule.createElement(IconButton, {
+			icon = FoundationModule.Enums.IconName.Calendar,
 			LayoutOrder = p1.layoutOrder,
-			onActivated = reactModule.useCallback(function()
-				-- upvalues: var2 (ref), eventNamesModule (copy), scheduledSquadActionEnum (copy), p1 (ref), var1 (ref), var4 (ref)
-				var2.fireSquadAnalytics(eventNamesModule.ScheduledSquadAction, {
-					actionType = scheduledSquadActionEnum.ViewSubscribedScheduledSquadsList,
+			onActivated = ReactModule.useCallback(function() --[[ Line: 38 ]]
+				-- upvalues: UseContextResult (copy), EventNamesModule (upval), ScheduledSquadActionEnum (upval), p1 (copy), UseCurrentSquadIdResult (copy), UseStateResult2 (copy)
+				UseContextResult.fireSquadAnalytics(EventNamesModule.ScheduledSquadAction, {
+					actionType = ScheduledSquadActionEnum.ViewSubscribedScheduledSquadsList,
 					source = p1.source,
-					squadId = var1,
-					squadLocation = var2.squadLocation
+					squadId = UseCurrentSquadIdResult,
+					squadLocation = UseContextResult.squadLocation
 				})
-				var4(true)
-			end, { var1, var4, var2.fireSquadAnalytics, var2.squadLocation }),
-			testId = if fFlagDebugAppChatEnableDomLocatorsModule then domLocatorsModule.chatLandingTopBarIconButton("scheduledSquads") else nil
+				UseStateResult2(true)
+			end, {
+				UseCurrentSquadIdResult,
+				UseStateResult2,
+				UseContextResult.fireSquadAnalytics,
+				UseContextResult.squadLocation
+			}),
+			testId = if FFlagDebugAppChatEnableDomLocatorsModule then DomLocatorsModule.chatLandingTopBarIconButton("scheduledSquads") else nil
 		}),
-		ScheduledSquadsListSheet = reactModule.createElement(scheduledSquadsListSheet, {
-			isOpen = var3,
-			onClose = reactModule.useCallback(function()
-				-- upvalues: var4 (ref)
-				var4(false)
-			end, { var4 })
+		ScheduledSquadsListSheet = ReactModule.createElement(ScheduledSquadsListSheet, {
+			isOpen = UseStateResult,
+			onClose = ReactModule.useCallback(function() --[[ Line: 54 ]]
+				-- upvalues: UseStateResult2 (copy)
+				UseStateResult2(false)
+			end, { UseStateResult2 })
 		})
 	})
 end

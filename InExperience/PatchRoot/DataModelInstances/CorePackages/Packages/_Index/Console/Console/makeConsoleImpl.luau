@@ -1,58 +1,50 @@
-﻿local inspect = require(script.Parent.Parent.Collections).inspect
+﻿local InspectFunction = require(script.Parent.Parent.Collections).inspect
 
-return function()
-	-- upvalues: inspect (ref)
-	local t = {}
-	local var1 = 0
+return function() --[[ Line: 22 ]]
+	-- upvalues: InspectFunction (copy)
+	local Count = 0
 	
-	local function _()
-		-- upvalues: var1 (write)
-		return string.rep("  ", var1)
+	local function _(): string --[[ Line: 26 | Named "indent" ]]
+		-- upvalues: Count (ref)
+		return string.rep("  ", Count)
 	end
 	
-	function t.log(p1, ...)
-		-- upvalues: inspect (copy), var1 (write)
-		print(string.rep("  ", var1) .. (if typeof(p1) == "string" then string.format(p1, ...) else inspect(p1)))
-	end
-	
-	function t.debug(p1, ...)
-		-- upvalues: inspect (copy), var1 (write)
-		print(string.rep("  ", var1) .. (if typeof(p1) == "string" then string.format(p1, ...) else inspect(p1)))
-	end
-	
-	function t.info(p1, ...)
-		-- upvalues: inspect (copy), var1 (write)
-		print(string.rep("  ", var1) .. (if typeof(p1) == "string" then string.format(p1, ...) else inspect(p1)))
-	end
-	
-	function t.warn(p1, ...)
-		-- upvalues: inspect (copy), var1 (write)
-		warn(string.rep("  ", var1) .. (if typeof(p1) == "string" then string.format(p1, ...) else inspect(p1)))
-	end
-	
-	function t.error(p1, ...)
-		-- upvalues: inspect (copy), var1 (write)
-		warn(string.rep("  ", var1) .. (if typeof(p1) == "string" then string.format(p1, ...) else inspect(p1)))
-	end
-	
-	function t.group(p1, ...)
-		-- upvalues: inspect (copy), var1 (write)
-		print(string.rep("  ", var1) .. (if typeof(p1) == "string" then string.format(p1, ...) else inspect(p1)))
-		var1 += 1
-	end
-	
-	function t.groupCollapsed(p1, ...)
-		-- upvalues: inspect (copy), var1 (write)
-		print(string.rep("  ", var1) .. (if typeof(p1) == "string" then string.format(p1, ...) else inspect(p1)))
-		var1 += 1
-	end
-	
-	function t.groupEnd()
-		-- upvalues: var1 (write)
-		if var1 > 0 then
-			var1 -= 1
+	return {
+		log = function(Template: string, ...) --[[ Line: 30 ]]
+			-- upvalues: InspectFunction (upval), Count (ref)
+			print(string.rep("  ", Count) .. (if typeof(Template) == "string" then string.format(Template, ...) else InspectFunction(Template)))
+		end,
+		debug = function(Template: string, ...) --[[ Line: 40 ]]
+			-- upvalues: InspectFunction (upval), Count (ref)
+			print(string.rep("  ", Count) .. (if typeof(Template) == "string" then string.format(Template, ...) else InspectFunction(Template)))
+		end,
+		info = function(Template: string, ...) --[[ Line: 50 ]]
+			-- upvalues: InspectFunction (upval), Count (ref)
+			print(string.rep("  ", Count) .. (if typeof(Template) == "string" then string.format(Template, ...) else InspectFunction(Template)))
+		end,
+		warn = function(Template: string, ...) --[[ Line: 60 ]]
+			-- upvalues: InspectFunction (upval), Count (ref)
+			warn(string.rep("  ", Count) .. (if typeof(Template) == "string" then string.format(Template, ...) else InspectFunction(Template)))
+		end,
+		error = function(Template: string, ...) --[[ Line: 70 ]]
+			-- upvalues: InspectFunction (upval), Count (ref)
+			warn(string.rep("  ", Count) .. (if typeof(Template) == "string" then string.format(Template, ...) else InspectFunction(Template)))
+		end,
+		group = function(Template: string, ...) --[[ Line: 82 ]]
+			-- upvalues: InspectFunction (upval), Count (ref)
+			print(string.rep("  ", Count) .. (if typeof(Template) == "string" then string.format(Template, ...) else InspectFunction(Template)))
+			Count += 1
+		end,
+		groupCollapsed = function(Template: string, ...) --[[ Line: 93 ]]
+			-- upvalues: InspectFunction (upval), Count (ref)
+			print(string.rep("  ", Count) .. (if typeof(Template) == "string" then string.format(Template, ...) else InspectFunction(Template)))
+			Count += 1
+		end,
+		groupEnd = function() --[[ Line: 105 ]]
+			-- upvalues: Count (ref)
+			if Count > 0 then
+				Count -= 1
+			end
 		end
-	end
-	
-	return t
+	}
 end

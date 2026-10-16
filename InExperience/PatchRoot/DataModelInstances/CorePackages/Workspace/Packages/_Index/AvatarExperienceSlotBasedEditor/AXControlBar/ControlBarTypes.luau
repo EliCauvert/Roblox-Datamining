@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent.Parent._Index.AvatarExperienceControlBar.AvatarExperienceControlBar.ControlBarTypes)
+﻿return (require(script.Parent.Parent.Parent.Parent._Index.AvatarExperienceControlBar.AvatarExperienceControlBar.ControlBarTypes))

@@ -1,77 +1,79 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local popoverAlignModule = require(foundation.Enums.PopoverAlign)
-local popoverSideModule = require(foundation.Enums.PopoverSide)
-local _ = require(foundation.Providers.StudioPanels.Types)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local PopoverAlignModule = require(Foundation.Enums.PopoverAlign)
+local PopoverSideModule = require(Foundation.Enums.PopoverSide)
+local _ = require(Foundation.Providers.StudioPanels.Types)
 
-return function(p1, p2, p3, p4, p5)
-	-- upvalues: popoverAlignModule (ref), popoverSideModule (ref)
-	local var1 = 0
-	local var2 = 0
-	local var3 = p1
-	local var4 = p2
+return function(Position, Position1, p1, p2, p3) --[[ Line: 24 | Named "getPanelPosition" ]]
+	-- upvalues: PopoverAlignModule (copy), PopoverSideModule (copy)
+	local Offset = 0
+	local X = 0
+	local Position2 = Position
+	local Position3 = Position1
 	
-	if type(p1) == "table" then
-		var1 = p1.offset
-		var3 = p1.position
+	if type(Position) == "table" then
+		Offset = Position.offset
+		Position2 = Position.position
 	end
-	if type(p2) == "table" then
-		var2 = p2.offset
-		var4 = p2.position
+	if type(Position1) == "table" then
+		X = Position1.offset
+		Position3 = Position1.position
 	end
-	local var5 = var1 + (p5 or 0)
-	local var6 = 0
+	local X2: number = X
+	local Y = Offset + (p3 or 0)
+	local X1 = 0
 	
-	if var4 == popoverAlignModule.Center then
-		var6 = 0.5
-		var2 = 0
-	elseif var4 == popoverAlignModule.End then
-		var6 = 1
-		var2 = -var2
+	if Position3 == PopoverAlignModule.Center then
+		X1 = 0.5
+		X = 0
+	elseif Position3 == PopoverAlignModule.End then
+		X1 = 1
+		X = -X
 	end
-	local var7 = nil
-	local zero = nil
-	local vector2 = nil
+	local NewVector: Vector2? = nil
+	local ZeroVector = nil
+	local SubjectAnchorPoint: Vector2? = nil
 	
-	if var3 == popoverSideModule.Top then
-		var7 = Vector2.new(var2, -var5)
-		zero = Vector2.new(var6, 0)
-		vector2 = Vector2.new(var6, 1)
-	elseif var3 == popoverSideModule.Bottom then
-		var7 = Vector2.new(var2, var5)
-		zero = Vector2.new(var6, 1)
-		vector2 = Vector2.new(var6, 0)
-	elseif var3 == popoverSideModule.Left then
-		var7 = Vector2.new(-var5, var2)
-		zero = Vector2.new(0, var6)
-		vector2 = Vector2.new(1, var6)
-	elseif var3 == popoverSideModule.Right then
-		var7 = Vector2.new(var5, var2)
-		zero = Vector2.new(1, var6)
-		vector2 = Vector2.new(0, var6)
+	if Position2 == PopoverSideModule.Top then
+		NewVector = Vector2.new(X, -Y)
+		ZeroVector = Vector2.new(X1, 0)
+		SubjectAnchorPoint = Vector2.new(X1, 1)
+	elseif Position2 == PopoverSideModule.Bottom then
+		NewVector = Vector2.new(X, Y)
+		ZeroVector = Vector2.new(X1, 1)
+		SubjectAnchorPoint = Vector2.new(X1, 0)
+	elseif Position2 == PopoverSideModule.Left then
+		NewVector = Vector2.new(-Y, X)
+		ZeroVector = Vector2.new(0, X1)
+		SubjectAnchorPoint = Vector2.new(1, X1)
+	elseif Position2 == PopoverSideModule.Right then
+		NewVector = Vector2.new(Y, X)
+		ZeroVector = Vector2.new(1, X1)
+		SubjectAnchorPoint = Vector2.new(0, X1)
 	end
-	p4 = p4 or 0
+	local P3 = p2 or 0
 	
-	if p4 > 0 then
-		local var8 = if var3 ~= popoverSideModule.Top then var3 == popoverSideModule.Bottom else true
-		local var9 = p4 * 2
-		local var10 = p4 * 2
+	if P3 > 0 then
+		local ScaledP = P3 * 2
+		local ScaledP1 = P3 * 2
+		local NewScaledP = nil
+		local NewScaledP1 = nil
 		
-		if var8 then
-			var9 += var2
-			var10 += var5
+		if Position2 == PopoverSideModule.Top or Position2 == PopoverSideModule.Bottom then
+			NewScaledP = ScaledP + X2
+			NewScaledP1 = ScaledP1 + Y
 		else
-			var9 += var5
-			var10 += var2
+			NewScaledP = ScaledP + Y
+			NewScaledP1 = ScaledP1 + X2
 		end
-		var7 += Vector2.new(vector2.X * var9 - p4, vector2.Y * var10 - p4)
+		NewVector += Vector2.new(SubjectAnchorPoint.X * NewScaledP - P3, SubjectAnchorPoint.Y * NewScaledP1 - P3)
 	end
-	if p3 then
-		var7 = p3
-		zero = Vector2.zero
+	if p1 then
+		NewVector = p1
+		ZeroVector = Vector2.zero
 	end
 	return {
-		targetAnchorPoint = zero,
-		subjectAnchorPoint = vector2,
-		offset = var7
+		targetAnchorPoint = ZeroVector,
+		subjectAnchorPoint = SubjectAnchorPoint,
+		offset = NewVector
 	}
 end

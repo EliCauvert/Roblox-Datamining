@@ -1,76 +1,88 @@
-﻿local coreScriptsPlayerFeedback = script:FindFirstAncestor("CoreScriptsPlayerFeedback")
-local parent = coreScriptsPlayerFeedback.Parent
-local reactUtilsModule = require(parent.ReactUtils)
-local getFFlagEnablePlayerSupportPromptModule = require(coreScriptsPlayerFeedback.Flags.GetFFlagEnablePlayerSupportPrompt)
-local reactModule = require(parent.React)
-local useEventConnection = reactUtilsModule.useEventConnection
-local var1 = getFFlagEnablePlayerSupportPromptModule()
-local var2 = reactModule.memo(function(p1)
-	-- upvalues: useEventConnection (ref)
-	useEventConnection(p1.event, p1.handler)
+﻿local CoreScriptsPlayerFeedback = script:FindFirstAncestor("CoreScriptsPlayerFeedback")
+local Parent = CoreScriptsPlayerFeedback.Parent
+local ReactModule = require(Parent.React)
+local UseEventConnectionFunction = require(Parent.ReactUtils).useEventConnection
+local v1 = require(CoreScriptsPlayerFeedback.Flags.GetFFlagEnablePlayerSupportPrompt)()
+local MemoResult = ReactModule.memo(function(p1) --[[ Line: 21 ]]
+	-- upvalues: UseEventConnectionFunction (copy)
+	UseEventConnectionFunction(p1.event, p1.handler)
 	
 	return nil
 end)
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), var1 (ref), var2 (ref)
-	local socialService = game:GetService("SocialService")
-	local var3 = if var1 then reactModule.useCallback(function(p2)
-		-- upvalues: p1 (ref)
-		local var4 = false
-		pcall(function()
-			-- upvalues: var4 (write), p2 (ref)
-			var4 = p2 == Enum.FeedbackType.PlayerSupport
-		end)
-		p1.openFeedbackPrompt()
-	end, { p1.openFeedbackPrompt, p1.openPlayerSupportPrompt }) else reactModule.useCallback(function()
-		-- upvalues: p1 (ref)
+return (ReactModule.memo(function(p1) --[[ Line: 26 ]]
+	-- upvalues: ReactModule (copy), v1 (copy), MemoResult (copy)
+	local SocialService = game:GetService("SocialService")
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 29 ]]
+		-- upvalues: p1 (copy)
 		p1.openFeedbackPrompt()
 	end, { p1.openFeedbackPrompt })
-	local var4 = if var1 then reactModule.useCallback(function(p2, p3)
-		-- upvalues: p1 (ref)
-		local var5 = false
-		pcall(function()
-			-- upvalues: var5 (write), p3 (ref)
-			var5 = p3 == Enum.FeedbackType.PlayerSupport
+	local UseResult1 = ReactModule.useCallback(function(FeedbackType) --[[ Line: 32 ]]
+		-- upvalues: p1 (copy)
+		local IsPlayerSupportMatch = false
+		pcall(function() --[[ Line: 34 ]]
+			-- upvalues: IsPlayerSupportMatch (ref), FeedbackType (copy)
+			IsPlayerSupportMatch = FeedbackType == Enum.FeedbackType.PlayerSupport
 		end)
 		
+		if not IsPlayerSupportMatch then
+			p1.openFeedbackPrompt()
+		elseif p1.openPlayerSupportPrompt then
+			p1.openPlayerSupportPrompt()
+		else
+			p1.openFeedbackPrompt()
+		end
+	end, { p1.openFeedbackPrompt, p1.openPlayerSupportPrompt })
+	local UseResult2 = if v1 then UseResult1 else UseResult
+	local UseResult3 = ReactModule.useCallback(function(p2) --[[ Line: 51 ]]
+		-- upvalues: p1 (copy)
 		if p1.openUnavailablePrompt then
+			p1.openUnavailablePrompt(p2)
+		end
+	end, { p1.openUnavailablePrompt })
+	local UseResult31 = ReactModule.useCallback(function(p2, FeedbackType) --[[ Line: 56 ]]
+		-- upvalues: p1 (copy)
+		local IsPlayerSupportMatch = false
+		pcall(function() --[[ Line: 58 ]]
+			-- upvalues: IsPlayerSupportMatch (ref), FeedbackType (copy)
+			IsPlayerSupportMatch = FeedbackType == Enum.FeedbackType.PlayerSupport
+		end)
+		
+		if IsPlayerSupportMatch then
+			if p1.openPlayerSupportUnavailablePrompt then
+				p1.openPlayerSupportUnavailablePrompt(p2)
+			end
+		elseif p1.openUnavailablePrompt then
 			p1.openUnavailablePrompt(p2)
 		end
 	end, {
 		p1.openUnavailablePrompt,
 		p1.openPlayerSupportUnavailablePrompt
-	}) else reactModule.useCallback(function(p2)
-		-- upvalues: p1 (ref)
-		if p1.openUnavailablePrompt then
-			p1.openUnavailablePrompt(p2)
-		end
-	end, { p1.openUnavailablePrompt })
-	local var5 = nil
-	local var6 = nil
+	})
+	local UseResult4 = if v1 then UseResult31 else UseResult3
+	local Event = nil
+	local Event1 = nil
 	
-	if socialService then
-		local ok, status = pcall(function()
-			-- upvalues: socialService (ref)
-			return socialService.ShowPromptFeedbackSubmission
+	if SocialService then
+		local Success, Result = pcall(function() --[[ Line: 79 ]]
+			-- upvalues: SocialService (copy)
+			return SocialService.ShowPromptFeedbackSubmission
 		end)
 		
-		if ok then
-			var5 = status
+		if Success then
+			Event = Result
 		end
-		local ok_1, status_1 = pcall(function()
-			-- upvalues: socialService (ref)
-			return socialService.ShowPromptFeedbackUnavailable
+		local Success1, Result1 = pcall(function() --[[ Line: 86 ]]
+			-- upvalues: SocialService (copy)
+			return SocialService.ShowPromptFeedbackUnavailable
 		end)
-		local var7 = status_1
 		
-		if ok_1 then
-			var6 = var7
+		if Success1 then
+			Event1 = Result1
 		end
 	end
-	return reactModule.createElement(reactModule.Fragment, {}, {
-		Show = var5 and reactModule.createElement(var2, { event = var5, handler = var3 }) or nil,
-		Unavailable = var6 and reactModule.createElement(var2, { event = var6, handler = var4 }) or nil
+	return ReactModule.createElement(ReactModule.Fragment, {}, {
+		Show = Event and ReactModule.createElement(MemoResult, { event = Event, handler = UseResult2 }) or nil,
+		Unavailable = Event1 and ReactModule.createElement(MemoResult, { event = Event1, handler = UseResult4 }) or nil
 	})
-end)
+end))

@@ -1,61 +1,57 @@
-﻿local appStorageService = game:GetService("AppStorageService")
-local reactModule = require(script:FindFirstAncestor("FlyoutSidePanel").Parent.React)
+﻿local AppStorageService = game:GetService("AppStorageService")
+local ReactModule = require(script:FindFirstAncestor("FlyoutSidePanel").Parent.React)
 game:DefineFastInt("PlusReferralFlyoutBannerMaxImpressions", 10)
 
-local function _()
-	return game:GetFastInt("PlusReferralFlyoutBannerMaxImpressions")
-end
-
-local _ = function(p1)
-	-- upvalues: appStorageService (ref)
-	local ok, status = pcall(function()
-		-- upvalues: appStorageService (copy), p1 (ref)
-		return appStorageService:GetItem(p1)
+local function _(p1): number --[[ Line: 9 | Named "getImpressionCount" ]]
+	-- upvalues: AppStorageService (copy)
+	local Success, Result = pcall(function() --[[ Line: 10 ]]
+		-- upvalues: AppStorageService (upval), p1 (copy)
+		return AppStorageService:GetItem(p1)
 	end)
 	
-	return if ok and typeof(status) == "string" and status ~= "" then tonumber(status) or 0 else 0
+	return Success and typeof(Result) == "string" and Result ~= "" and tonumber(Result) or 0
 end
 
-local _ = function(p1)
-	-- upvalues: appStorageService (ref)
-	pcall(function()
-		-- upvalues: p1 (ref), appStorageService (copy)
-		local ok, status = pcall(function()
-			-- upvalues: appStorageService (copy), p1 (ref)
-			return appStorageService:GetItem(p1)
+local _ = function(p1) --[[ Line: 19 | Named "incrementImpressionCount" ]]
+	-- upvalues: AppStorageService (copy)
+	pcall(function() --[[ Line: 20 ]]
+		-- upvalues: p1 (copy), AppStorageService (upval)
+		local Success, Result = pcall(function() --[[ Line: 10 ]]
+			-- upvalues: AppStorageService (upval), p1 (copy)
+			return AppStorageService:GetItem(p1)
 		end)
-		appStorageService:SetItem(p1, tostring((if ok and typeof(status) == "string" and status ~= "" then tonumber(status) or 0 else 0) + 1))
-		appStorageService:Flush()
+		AppStorageService:SetItem(p1, (tostring((Success and typeof(Result) == "string" and Result ~= "" and tonumber(Result) or 0) + 1)))
+		AppStorageService:Flush()
 	end)
 end
 
-return function(p1, p2)
-	-- upvalues: reactModule (ref), appStorageService (ref)
-	local plusReferralFlyoutBannerMaxImpressionsFastInt = game:GetFastInt("PlusReferralFlyoutBannerMaxImpressions")
-	local var1 = p1 and (if plusReferralFlyoutBannerMaxImpressionsFastInt ~= 0 then reactModule.useState(function()
-		-- upvalues: p2 (ref), appStorageService (copy)
-		local ok, status = pcall(function()
-			-- upvalues: appStorageService (copy), p2 (ref)
-			return appStorageService:GetItem(p2)
+return function(p1, Key, p2): boolean --[[ Line: 33 | Named "usePlusReferralFlyoutBannerBlindness" ]]
+	-- upvalues: ReactModule (copy), AppStorageService (copy)
+	local UseStateResult = ReactModule.useState(function(): number --[[ Line: 38 ]]
+		-- upvalues: Key (copy), AppStorageService (upval)
+		local Success, Result = pcall(function() --[[ Line: 10 ]]
+			-- upvalues: AppStorageService (upval), Key (copy)
+			return AppStorageService:GetItem(Key)
 		end)
 		
-		return if ok and typeof(status) == "string" and status ~= "" then tonumber(status) or 0 else 0
-	end) < plusReferralFlyoutBannerMaxImpressionsFastInt else true)
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), p2 (ref), appStorageService (copy)
-		if var1 then
-			local var2 = p2
-			pcall(function()
-				-- upvalues: var2 (ref), appStorageService (copy)
-				local ok, status = pcall(function()
-					-- upvalues: appStorageService (copy), var2 (ref)
-					return appStorageService:GetItem(var2)
+		return Success and typeof(Result) == "string" and Result ~= "" and tonumber(Result) or 0
+	end)
+	local P4 = p2 or game:GetFastInt("PlusReferralFlyoutBannerMaxImpressions")
+	local IsPMatch: boolean = p1 and (P4 == 0 or UseStateResult < P4)
+	ReactModule.useEffect(function() --[[ Line: 45 ]]
+		-- upvalues: IsPMatch (copy), Key (copy), AppStorageService (upval)
+		if IsPMatch then
+			pcall(function() --[[ Line: 20 ]]
+				-- upvalues: Key (copy), AppStorageService (upval)
+				local Success, Result = pcall(function() --[[ Line: 10 ]]
+					-- upvalues: AppStorageService (upval), Key (copy)
+					return AppStorageService:GetItem(Key)
 				end)
-				appStorageService:SetItem(var2, tostring((if ok and typeof(status) == "string" and status ~= "" then tonumber(status) or 0 else 0) + 1))
-				appStorageService:Flush()
+				AppStorageService:SetItem(Key, (tostring((Success and typeof(Result) == "string" and Result ~= "" and tonumber(Result) or 0) + 1)))
+				AppStorageService:Flush()
 			end)
 		end
-	end, { var1, p2 })
+	end, { IsPMatch, Key })
 	
-	return var1
+	return IsPMatch
 end

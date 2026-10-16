@@ -1,77 +1,86 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local view = foundationModule.View
-local text = foundationModule.Text
-local _ = require(buildExperience.Analytics.AnalyticsMetric)
-local _ = require(buildExperience.Analytics.AnalyticsWindow)
-local _ = require(parent.DataHydration.ExperienceAnalytics)
-local metricDetailSheetModule = require(buildExperience.Components.Analytics.MetricDetailSheet.MetricDetailSheet)
-local _ = require(buildExperience.Components.Analytics.StatsCard.StatsCard)
-local statsCardContainerModule = require(buildExperience.Components.Analytics.StatsCardContainer)
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local _ = require(BuildExperience.Analytics.AnalyticsMetric)
+local _ = require(BuildExperience.Analytics.AnalyticsWindow)
+local _ = require(Parent.DataHydration.ExperienceAnalytics)
+local FFlagBuildAnalyticsGoalsModule = require(BuildExperience.Flags.FFlagBuildAnalyticsGoals)
+local MetricDetailSheetModule = require(BuildExperience.Components.Analytics.MetricDetailSheet.MetricDetailSheet)
+local _ = require(BuildExperience.Components.Analytics.StatsCard.StatsCard)
+local StatsCardContainerModule = require(BuildExperience.Components.Analytics.StatsCardContainer)
+local GoalsSectionModule = require(BuildExperience.Components.Analytics.Goals.GoalsSection)
 local _ = require(script.Parent.InstantStatCard)
-local instantStatsRowModule = require(script.Parent.InstantStatsRow)
-local windowSegmentedControlModule = require(script.Parent.WindowSegmentedControl)
+local InstantStatsRowModule = require(script.Parent.InstantStatsRow)
+local WindowSegmentedControlModule = require(script.Parent.WindowSegmentedControl)
 
-local function _(p1, p2)
-	-- upvalues: reactModule (ref), text (ref)
-	return reactModule.createElement(text, {
+local function _(Text1, TestId) --[[ Line: 57 | Named "sectionHeading" ]]
+	-- upvalues: ReactModule (copy), Text (copy)
+	return ReactModule.createElement(Text, {
 		LayoutOrder = 1,
 		tag = "size-full-0 auto-y text-heading-small text-align-x-left content-emphasis",
-		Text = p1,
-		testId = p2
+		Text = Text1,
+		testId = TestId
 	})
 end
 
-return function(p1)
-	-- upvalues: reactModule (ref), view (ref), text (ref), instantStatsRowModule (ref), windowSegmentedControlModule (ref), statsCardContainerModule (ref), metricDetailSheetModule (ref)
-	local testId = p1.testId or "AnalyticsOverviewView"
-	local sheet = p1.sheet
+return function(p1) --[[ Line: 66 | Named "AnalyticsOverviewView" ]]
+	-- upvalues: ReactModule (copy), View (copy), Text (copy), InstantStatsRowModule (copy), FFlagBuildAnalyticsGoalsModule (copy), WindowSegmentedControlModule (copy), StatsCardContainerModule (copy), GoalsSectionModule (copy), MetricDetailSheetModule (copy)
+	local TestId = p1.testId or "AnalyticsOverviewView"
+	local Sheet = p1.sheet
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "col gap-xxlarge size-full-0 auto-y",
 		LayoutOrder = p1.layoutOrder,
-		testId = testId
+		testId = TestId
 	}, {
-		Overview = reactModule.createElement(view, {
+		Overview = ReactModule.createElement(View, {
 			LayoutOrder = 1,
 			tag = "col gap-xlarge size-full-0 auto-y",
-			testId = `{testId}.Overview`
+			testId = `{TestId}.Overview`
 		}, {
-			Heading = reactModule.createElement(text, {
+			Heading = ReactModule.createElement(Text, {
 				LayoutOrder = 1,
 				tag = "size-full-0 auto-y text-heading-small text-align-x-left content-emphasis",
 				Text = p1.overviewTitle,
-				testId = `{testId}.OverviewHeading`
+				testId = `{TestId}.OverviewHeading`
 			}),
-			InstantStats = reactModule.createElement(instantStatsRowModule, { layoutOrder = 2, stats = p1.instantStats })
+			InstantStats = ReactModule.createElement(InstantStatsRowModule, { layoutOrder = 2, stats = p1.instantStats })
 		}),
-		KeyStats = reactModule.createElement(view, {
+		KeyStats = ReactModule.createElement(View, {
 			LayoutOrder = 2,
 			tag = "col gap-large size-full-0 auto-y",
-			testId = `{testId}.KeyStats`
+			testId = `{TestId}.KeyStats`
 		}, {
-			Heading = reactModule.createElement(text, {
+			Heading = if FFlagBuildAnalyticsGoalsModule then nil else ReactModule.createElement(Text, {
 				LayoutOrder = 1,
 				tag = "size-full-0 auto-y text-heading-small text-align-x-left content-emphasis",
 				Text = p1.keyStatsTitle,
-				testId = `{testId}.KeyStatsHeading`
+				testId = `{TestId}.KeyStatsHeading`
 			}),
-			WindowToggle = reactModule.createElement(windowSegmentedControlModule, {
+			WindowToggle = ReactModule.createElement(WindowSegmentedControlModule, {
 				layoutOrder = 2,
 				windows = p1.windows,
 				selectedWindowId = p1.selectedWindowId,
 				onWindowSelected = p1.onWindowSelected
 			}),
-			Cards = reactModule.createElement(statsCardContainerModule, { layoutOrder = 3, cards = p1.statsCards })
+			Cards = if FFlagBuildAnalyticsGoalsModule then nil else ReactModule.createElement(StatsCardContainerModule, { layoutOrder = 3, cards = p1.statsCards }),
+			Goals = if FFlagBuildAnalyticsGoalsModule then ReactModule.createElement(GoalsSectionModule, {
+				layoutOrder = 4,
+				onOpenChat = p1.onOpenChat,
+				universeId = p1.universeId,
+				window = p1.window,
+				testId = `{TestId}.Goals`
+			}) else nil
 		}),
-		Sheet = if sheet ~= nil then nil else reactModule.createElement(metricDetailSheetModule, {
-			metricId = sheet.metricId,
-			universeId = sheet.universeId,
-			window = sheet.window,
-			latestAvailableTime = sheet.latestAvailableTime,
-			metadataStatus = sheet.metadataStatus,
+		Sheet = if Sheet == nil then nil else ReactModule.createElement(MetricDetailSheetModule, {
+			metricId = Sheet.metricId,
+			universeId = Sheet.universeId,
+			window = Sheet.window,
+			latestAvailableTime = Sheet.latestAvailableTime,
+			metadataStatus = Sheet.metadataStatus,
 			onClose = p1.onSheetClose,
 			onOpenChat = p1.onOpenChat
 		})

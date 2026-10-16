@@ -1,47 +1,47 @@
-﻿return function(p1)
+﻿return function(p1) --[[ Line: 1 | Named "ChatPolicies" ]]
 	return {
-		getChatConversationHeaderGroupDetails = function()
-			-- upvalues: p1 (ref)
+		getChatConversationHeaderGroupDetails = function() --[[ Line: 3 ]]
+			-- upvalues: p1 (copy)
 			return p1.ChatConversationHeaderGroupDetails or false
 		end,
-		getChatHeaderSearch = function()
-			-- upvalues: p1 (ref)
+		getChatHeaderSearch = function() --[[ Line: 6 ]]
+			-- upvalues: p1 (copy)
 			return p1.ChatHeaderSearch or false
 		end,
-		getChatHeaderCreateChatGroup = function()
-			-- upvalues: p1 (ref)
+		getChatHeaderCreateChatGroup = function() --[[ Line: 9 ]]
+			-- upvalues: p1 (copy)
 			return p1.ChatHeaderCreateChatGroup or false
 		end,
-		getChatHeaderHomeButton = function()
-			-- upvalues: p1 (ref)
+		getChatHeaderHomeButton = function() --[[ Line: 12 ]]
+			-- upvalues: p1 (copy)
 			return p1.ChatHeaderHomeButton or false
 		end,
-		getChatHeaderNotifications = function()
-			-- upvalues: p1 (ref)
+		getChatHeaderNotifications = function() --[[ Line: 15 ]]
+			-- upvalues: p1 (copy)
 			return p1.ChatHeaderNotifications or false
 		end,
-		getChatPlayTogether = function()
-			-- upvalues: p1 (ref)
+		getChatPlayTogether = function() --[[ Line: 18 ]]
+			-- upvalues: p1 (copy)
 			return p1.ChatPlayTogether or false
 		end,
-		getChatShareGameToChatFromChat = function()
-			-- upvalues: p1 (ref)
+		getChatShareGameToChatFromChat = function() --[[ Line: 21 ]]
+			-- upvalues: p1 (copy)
 			return p1.ChatShareGameToChatFromChat or false
 		end,
-		getChatTapConversationThumbnail = function()
-			-- upvalues: p1 (ref)
+		getChatTapConversationThumbnail = function() --[[ Line: 24 ]]
+			-- upvalues: p1 (copy)
 			return p1.ChatTapConversationThumbnail or false
 		end,
-		getChatReportingDisabled = function()
-			-- upvalues: p1 (ref)
+		getChatReportingDisabled = function() --[[ Line: 27 ]]
+			-- upvalues: p1 (copy)
 			return p1.ChatReportingDisabled or false
 		end,
-		getChatViewProfileOption = function()
-			-- upvalues: p1 (ref)
+		getChatViewProfileOption = function() --[[ Line: 30 ]]
+			-- upvalues: p1 (copy)
 			return p1.ChatViewProfileOption or false
 		end,
-		getContactImporterEnabled = function()
-			-- upvalues: p1 (ref)
+		getContactImporterEnabled = function() --[[ Line: 33 ]]
+			-- upvalues: p1 (copy)
 			return p1.ContactImporterEnabled or false
 		end
 	}

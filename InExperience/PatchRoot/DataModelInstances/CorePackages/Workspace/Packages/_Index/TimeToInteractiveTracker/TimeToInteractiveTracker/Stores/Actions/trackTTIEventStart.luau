@@ -1,29 +1,29 @@
 ﻿local _ = require(script.Parent.Parent.types)
-local nowModule = require(script.Parent.Parent.Parent.Utils.now)
+local NowModule = require(script.Parent.Parent.Parent.Utils.now)
 
-return function(p1)
-	-- upvalues: nowModule (ref)
+return function(Callback) --[[ Line: 11 ]]
+	-- upvalues: NowModule (copy)
 	local t = {}
 	
-	return function(p2, p3)
-		-- upvalues: p1 (ref), nowModule (copy), t (ref)
-		p1(function(p4)
-			-- upvalues: p2 (ref), nowModule (copy), p3 (ref), t (copy)
-			local var1 = p4[p2]
-			local cloned = table.clone(p4)
-			cloned[p2] = {
+	return function(p1, p2) --[[ Line: 17 ]]
+		-- upvalues: Callback (copy), NowModule (upval), t (copy)
+		Callback(function(Tbl) --[[ Line: 18 ]]
+			-- upvalues: p1 (copy), NowModule (upval), p2 (copy), t (upval)
+			local Entry = Tbl[p1]
+			local Copy = table.clone(Tbl)
+			Copy[p1] = {
 				endTime = nil,
 				deltaMs = nil,
 				sent = nil,
-				startTime = nowModule(),
-				metadata = if var1 ~= nil then {} else table.clone(var1.metadata)
+				startTime = NowModule(),
+				metadata = if Entry == nil then {} else table.clone(Entry.metadata)
 			}
 			
-			if p3 then
-				cloned[p2].metadata.coldStart = not t[p2]
-				t[p2] = true
+			if p2 then
+				Copy[p1].metadata.coldStart = not t[p1]
+				t[p1] = true
 			end
-			return cloned
+			return Copy
 		end)
 	end
 end

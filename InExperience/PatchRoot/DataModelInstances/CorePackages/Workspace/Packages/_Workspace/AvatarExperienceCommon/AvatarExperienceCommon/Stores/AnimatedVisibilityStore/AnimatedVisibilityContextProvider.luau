@@ -1,20 +1,20 @@
-﻿local reactModule = require(script:FindFirstAncestor("AvatarExperienceCommon").Parent.React)
-local createAnimatedVisibilityStoreModule = require(script.Parent.createAnimatedVisibilityStore)
-local animatedVisibilityContextModule = require(script.Parent.AnimatedVisibilityContext)
+﻿local ReactModule = require(script:FindFirstAncestor("AvatarExperienceCommon").Parent.React)
+local CreateAnimatedVisibilityStoreModule = require(script.Parent.createAnimatedVisibilityStore)
+local AnimatedVisibilityContextModule = require(script.Parent.AnimatedVisibilityContext)
 
-return function(p1)
-	-- upvalues: reactModule (ref), createAnimatedVisibilityStoreModule (ref), animatedVisibilityContextModule (ref)
-	local var1 = reactModule.useMemo(function()
-		-- upvalues: createAnimatedVisibilityStoreModule (copy), p1 (ref)
-		return createAnimatedVisibilityStoreModule(p1.initialRatio)
+return function(p1) --[[ Line: 14 | Named "AnimatedVisibilityProvider" ]]
+	-- upvalues: ReactModule (copy), CreateAnimatedVisibilityStoreModule (copy), AnimatedVisibilityContextModule (copy)
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 15 ]]
+		-- upvalues: CreateAnimatedVisibilityStoreModule (upval), p1 (copy)
+		return CreateAnimatedVisibilityStoreModule(p1.initialRatio)
 	end, {})
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref)
-		return function()
-			-- upvalues: var1 (copy)
-			var1.destroy()
+	ReactModule.useEffect(function() --[[ Line: 19 ]]
+		-- upvalues: UseMemoResult (copy)
+		return function() --[[ Line: 20 ]]
+			-- upvalues: UseMemoResult (upval)
+			UseMemoResult.destroy()
 		end
-	end, { var1 })
+	end, { UseMemoResult })
 	
-	return reactModule.createElement(animatedVisibilityContextModule.Provider, { value = { animatedMenusStore = var1 } }, p1.children)
+	return ReactModule.createElement(AnimatedVisibilityContextModule.Provider, { value = { animatedMenusStore = UseMemoResult } }, p1.children)
 end

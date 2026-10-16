@@ -1,6 +1,5 @@
-﻿local backgroundLayersModule = require(script.BackgroundLayers.BackgroundLayers)
-local itemCard = script.ItemCard
-local widget = script.Widget
+﻿local ItemCard = script.ItemCard
+local Widget = script.Widget
 
 return {
 	CategoryMenu = require(script.CategoryMenu.CategoryMenu),
@@ -9,27 +8,29 @@ return {
 	ScrollingFrameWithIndicators = require(script.ScrollingFrameWithIndicators.ScrollingFrameWithIndicators),
 	CategoryMenuButtonsLocationEnum = require(script.CategoryMenu.CategoryMenuButtonsLocationEnum),
 	ItemCardComponents = {
-		ItemCard = require(itemCard.ItemCard),
-		ItemCardAnimationStateIndicator = require(itemCard.ItemCardAnimationStateIndicator),
-		ItemCardBadge = require(itemCard.ItemCardBadge),
-		ItemCardCreatorName = require(itemCard.ItemCardCreatorName),
-		ItemCardFooter = require(itemCard.ItemCardFooter),
-		ItemCardHeader = require(itemCard.ItemCardHeader),
-		ItemCardHeaderCornersOverlay = require(itemCard.ItemCardHeaderCornersOverlay),
-		ItemCardIcon = require(itemCard.ItemCardIcon),
-		ItemCardIndicatorStack = require(itemCard.ItemCardIndicatorStack),
-		ItemCardPriceLine = require(itemCard.ItemCardPriceLine),
-		ItemCardStatus = require(itemCard.ItemCardStatus),
-		ItemCardThumbnail = require(itemCard.ItemCardThumbnail),
-		ItemCardThumbnailSkeleton = require(itemCard.ItemCardThumbnailSkeleton),
-		ItemCardTitle = require(itemCard.ItemCardTitle)
+		ItemCard = require(ItemCard.ItemCard),
+		ItemCardAnimationStateIndicator = require(ItemCard.ItemCardAnimationStateIndicator),
+		ItemCardBadge = require(ItemCard.ItemCardBadge),
+		ItemCardCreatorName = require(ItemCard.ItemCardCreatorName),
+		ItemCardFooter = require(ItemCard.ItemCardFooter),
+		ItemCardHeader = require(ItemCard.ItemCardHeader),
+		ItemCardHeaderCornersOverlay = require(ItemCard.ItemCardHeaderCornersOverlay),
+		ItemCardIcon = require(ItemCard.ItemCardIcon),
+		ItemCardIndicatorStack = require(ItemCard.ItemCardIndicatorStack),
+		ItemCardPriceLine = require(ItemCard.ItemCardPriceLine),
+		ItemCardStatus = require(ItemCard.ItemCardStatus),
+		ItemCardThumbnail = require(ItemCard.ItemCardThumbnail),
+		ItemCardThumbnailSkeleton = require(ItemCard.ItemCardThumbnailSkeleton),
+		ItemCardTitle = require(ItemCard.ItemCardTitle)
 	},
 	WidgetComponents = {
-		WidgetHeader = require(widget.WidgetHeader),
-		WidgetLayout = require(widget.WidgetLayout),
-		WidgetListItem = require(widget.WidgetListItem)
+		WidgetHeader = require(Widget.WidgetHeader),
+		WidgetLayout = require(Widget.WidgetLayout),
+		WidgetListItem = require(Widget.WidgetListItem)
 	},
-	BackgroundLayersComponents = { BackgroundLayers = backgroundLayersModule },
+	BackgroundLayersComponents = {
+		BackgroundLayers = require(script.BackgroundLayers.BackgroundLayers)
+	},
 	GridComponents = { Grid = require(script.Grid.Grid) },
 	AXTooltipComponents = { AXTooltip = require(script.AXTooltip.AXTooltip) },
 	FeedComponents = {
@@ -41,7 +42,7 @@ return {
 	Utils = {
 		getRemainingTime = require(script.Utils.getRemainingTime),
 		getItemCountForRow = require(script.Utils.getItemCountForRow),
-		getLocalizedPrice = require(itemCard.Utils.getLocalizedPrice)
+		getLocalizedPrice = require(ItemCard.Utils.getLocalizedPrice)
 	},
 	["jest.config"] = script["jest.config"]
 }

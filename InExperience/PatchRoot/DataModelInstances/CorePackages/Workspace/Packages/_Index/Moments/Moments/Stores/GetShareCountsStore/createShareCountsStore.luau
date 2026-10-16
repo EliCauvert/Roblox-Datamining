@@ -1,71 +1,77 @@
-﻿local parent = script:FindFirstAncestor("Moments").Parent
-local signalsModule = require(parent.Signals)
-local cryoModule = require(parent.Cryo)
-local createSignal = signalsModule.createSignal
-local createComputed = signalsModule.createComputed
-local t = { shareCount = 0, hasShared = false }
+﻿local Parent = script:FindFirstAncestor("Moments").Parent
+local SignalsModule = require(Parent.Signals)
+local CryoModule = require(Parent.Cryo)
+local CreateSignalFunction = SignalsModule.createSignal
+local CreateComputedFunction = SignalsModule.createComputed
+local config = { shareCount = 0, hasShared = false }
 
-return function()
-	-- upvalues: createSignal (ref), createComputed (ref), t (ref), cryoModule (ref)
-	local var1, var2 = createSignal({})
-	local t_1 = {}
+return function() --[[ Line: 29 | Named "createShareCountsStore" ]]
+	-- upvalues: CreateSignalFunction (copy), CreateComputedFunction (copy), config (copy), CryoModule (copy)
+	local Signal, Signal2 = CreateSignalFunction({})
+	local Tbl = {}
 	
 	return {
-		getShareInfoByMomentId = var1,
-		getShareInfo = function(p1)
-			-- upvalues: t_1 (ref), createComputed (copy), var1 (ref), t (copy)
-			if t_1[p1] == nil then
-				t_1[p1] = createComputed(function(p2)
-					-- upvalues: var1 (copy), p1 (ref), t (copy)
-					return var1(p2)[p1] or t
+		getShareInfoByMomentId = Signal,
+		getShareInfo = function(Key) --[[ Line: 34 ]]
+			-- upvalues: Tbl (copy), CreateComputedFunction (upval), Signal (copy), config (upval)
+			if Tbl[Key] == nil then
+				Tbl[Key] = CreateComputedFunction(function(p1) --[[ Line: 36 ]]
+					-- upvalues: Signal (upval), Key (copy), config (upval)
+					return Signal(p1)[Key] or config
 				end)
 			end
-			return t_1[p1]
+			return Tbl[Key]
 		end,
-		setBatchShareCounts = function(value)
-			-- upvalues: var2 (ref)
-			var2(function(p1)
-				-- upvalues: value (ref)
-				local cloned = table.clone(p1)
+		setBatchShareCounts = function(p1) --[[ Line: 43 ]]
+			-- upvalues: Signal2 (copy)
+			Signal2(function(Tbl) --[[ Line: 44 ]]
+				-- upvalues: p1 (copy)
+				local Copy = table.clone(Tbl)
 				
-				for i, v in value do
-					local var3 = p1[i]
+				for i, value in p1 do
+					local Entry = Tbl[i]
 					
-					if var3 == nil or not var3.hasShared or v.hasShared then
-						cloned[i] = v
+					if Entry == nil or not Entry.hasShared or value.hasShared then
+						Copy[i] = value
 					else
-						cloned[i] = {
+						Copy[i] = {
 							hasShared = true,
-							shareCount = math.max(var3.shareCount, v.shareCount)
+							shareCount = math.max(Entry.shareCount, value.shareCount)
 						}
 					end
 				end
-				return cloned
+				return Copy
 			end)
 		end,
-		setShareCount = function(value, p1, p2)
-			-- upvalues: var2 (ref), cryoModule (copy)
-			var2(function(p3)
-				-- upvalues: cryoModule (copy), value (ref), p1 (ref), p2 (ref)
-				return cryoModule.Dictionary.union(p3, { [value] = { shareCount = p1, hasShared = p2 } })
+		setShareCount = function(p2, ShareCount, HasShared) --[[ Line: 61 ]]
+			-- upvalues: Signal2 (copy), CryoModule (upval)
+			Signal2(function(p3) --[[ Line: 62 ]]
+				-- upvalues: CryoModule (upval), p2 (copy), ShareCount (copy), HasShared (copy)
+				return (CryoModule.Dictionary.union(p3, {
+					[p2] = { shareCount = ShareCount, hasShared = HasShared }
+				}))
 			end)
 		end,
-		markShared = function(p1)
-			-- upvalues: var1 (ref), t (copy), var2 (ref), cryoModule (copy)
-			local var3 = var1(false)
-			local var4 = var3[p1] or t
+		markShared = function(p2) --[[ Line: 72 ]]
+			-- upvalues: Signal (copy), config (upval), Signal2 (copy), CryoModule (upval)
+			local SignalResult = Signal(false)
+			local SignalResultEntry = SignalResult[p2] or config
 			
-			if var4.hasShared then
+			if not SignalResultEntry.hasShared then
+				Signal2((CryoModule.Dictionary.union(SignalResult, {
+					[p2] = {
+						hasShared = true,
+						shareCount = SignalResultEntry.shareCount + 1
+					}
+				})))
+				
 				return
 			end
-			var2(cryoModule.Dictionary.union(var3, {
-				[p1] = { hasShared = true, shareCount = var4.shareCount + 1 }
-			}))
 		end,
-		clear = function()
-			-- upvalues: var2 (ref), t_1 (ref)
-			var2({})
-			table.clear(t_1)
+		clear = function() --[[ Line: 86 ]]
+			-- upvalues: Signal2 (copy), Tbl (copy)
+			Signal2({})
+			table.clear(Tbl)
 		end
 	}
 end

@@ -1,37 +1,37 @@
-﻿local discoveryAnalytics = script:FindFirstAncestor("DiscoveryAnalytics")
-local parent = discoveryAnalytics.Parent
-local loggingProtocolModule = require(parent.LoggingProtocol)
-local tModule = require(parent.t)
-local reportWarningModule = require(discoveryAnalytics.Points.reportWarning)
-local var1 = tModule.strictInterface({
-	errorType = tModule.string,
-	clickedUniverseId = tModule.string,
-	universeId = tModule.optional(tModule.string),
-	gameSetTypeId = tModule.optional(tModule.string),
-	gameSetTargetId = tModule.optional(tModule.string),
-	sortIndex = tModule.number,
-	sortEntryIndex = tModule.optional(tModule.number)
+﻿local DiscoveryAnalytics = script:FindFirstAncestor("DiscoveryAnalytics")
+local Parent = DiscoveryAnalytics.Parent
+local LoggingProtocolModule = require(Parent.LoggingProtocol)
+local TModule = require(Parent.t)
+local ReportWarningModule = require(DiscoveryAnalytics.Points.reportWarning)
+local StrictInterfaceResult = TModule.strictInterface({
+	errorType = TModule.string,
+	clickedUniverseId = TModule.string,
+	universeId = TModule.optional(TModule.string),
+	gameSetTypeId = TModule.optional(TModule.string),
+	gameSetTargetId = TModule.optional(TModule.string),
+	sortIndex = TModule.number,
+	sortEntryIndex = TModule.optional(TModule.number)
 })
-local t = {
+local config = {
 	eventName = "GameAttributionError",
 	description = "Tracks failures to resolve game attribution errors",
 	backends = {
-		loggingProtocolModule.TelemetryBackends.Points,
-		loggingProtocolModule.TelemetryBackends.EventIngest
+		LoggingProtocolModule.TelemetryBackends.Points,
+		LoggingProtocolModule.TelemetryBackends.EventIngest
 	},
 	throttlingPercentage = game:DefineFastInt("LuaAppGameAttributionErrorEventThrottleHundrethsPercent", 0),
 	lastUpdated = { 25, 7, 30 }
 }
 
-return function(p1, p2)
-	-- upvalues: var1 (ref), reportWarningModule (ref), loggingProtocolModule (ref), t (ref)
-	local var2, var3 = var1(p2)
+return function(p1, p2) --[[ Line: 36 | Named "reportGameAttributionError" ]]
+	-- upvalues: StrictInterfaceResult (copy), ReportWarningModule (copy), LoggingProtocolModule (copy), config (copy)
+	local StrictInterfaceResultResult, StrictInterfaceResultResult2 = StrictInterfaceResult(p2)
 	
-	if not var2 then
-		reportWarningModule(loggingProtocolModule.default, "EventLogging", var3)
+	if not StrictInterfaceResultResult then
+		ReportWarningModule(LoggingProtocolModule.default, "EventLogging", StrictInterfaceResultResult2)
 	end
-	loggingProtocolModule.default:logRobloxTelemetryEvent(t, {
+	LoggingProtocolModule.default:logRobloxTelemetryEvent(config, {
 		"addSessionInfo",
-		loggingProtocolModule.StandardizedFields.addOsInfo
+		LoggingProtocolModule.StandardizedFields.addOsInfo
 	}, p2, p1)
 end

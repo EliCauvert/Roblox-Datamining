@@ -1,87 +1,93 @@
-﻿local var1
-local chrome = script:FindFirstAncestor("Chrome")
-local corePackagesService = game:GetService("CorePackages")
+﻿local CorePackages = game:GetService("CorePackages")
 local VRService = game:GetService("VRService")
-local fFlagBuildExperienceInGameShell = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagBuildExperienceInGameShell
-local reactModule = require(corePackagesService.Packages.React)
-local foundationModule = require(corePackagesService.Packages.Foundation)
-local var2 = if fFlagBuildExperienceInGameShell then require(corePackagesService.Packages.Signals) else nil
-local buildExperienceModule = require(corePackagesService.Workspace.Packages.BuildExperience)
-local buildModeLaunchModule = require(corePackagesService.Workspace.Packages.BuildExperiencePlaytestLaunch.BuildModeLaunch)
-local var3 = if fFlagBuildExperienceInGameShell then require(corePackagesService.Workspace.Packages.Display) else nil
-local serviceModule = require(chrome.Service)
-local buttonVariant = foundationModule.Enums.ButtonVariant
+local FFlagBuildExperienceInGameShell = require(CorePackages.Workspace.Packages.SharedFlags).FFlagBuildExperienceInGameShell
+local ReactModule = require(CorePackages.Packages.React)
+local SignalsModule = if FFlagBuildExperienceInGameShell then require(CorePackages.Packages.Signals) else nil
+local BuildExperienceModule = require(CorePackages.Workspace.Packages.BuildExperience)
+local BuildModeLaunchModule = require(CorePackages.Workspace.Packages.BuildExperiencePlaytestLaunch.BuildModeLaunch)
+local DisplayModule = if FFlagBuildExperienceInGameShell then require(CorePackages.Workspace.Packages.Display) else nil
+local ServiceModule = require(script:FindFirstAncestor("Chrome").Service)
+local ButtonVariant = require(CorePackages.Packages.Foundation).Enums.ButtonVariant
 
-local function _(p1)
-	-- upvalues: buildModeLaunchModule (ref), VRService (ref), fFlagBuildExperienceInGameShell (ref), var3 (ref)
-	if not buildModeLaunchModule:hasBuildMode() or VRService.VREnabled then
+local function _(p1): boolean --[[ Line: 21 | Named "canShowAssistantBuild" ]]
+	-- upvalues: BuildModeLaunchModule (copy), VRService (copy), FFlagBuildExperienceInGameShell (copy), DisplayModule (copy)
+	if not BuildModeLaunchModule:hasBuildMode() or VRService.VREnabled then
 		return false
-	elseif not fFlagBuildExperienceInGameShell then
+	elseif FFlagBuildExperienceInGameShell then
+		local DisplaySize = DisplayModule.GetDisplayStore(p1).getDisplaySize(p1)
+		
+		return DisplaySize == nil or DisplaySize == Enum.DisplaySize.Small
+	else
 		return true
 	end
-	local displaySize = var3.GetDisplayStore(p1).getDisplaySize(p1)
-	
-	return if displaySize ~= nil then displaySize == Enum.DisplaySize.Small else true
 end
 
-local t = {
+local config = {
 	id = "assistant_build",
 	label = "CommonUI.Features.NavBar.Build"
 }
+local Flag = nil
 
-if not buildModeLaunchModule:hasBuildMode() or VRService.VREnabled then
-	var1 = false
-elseif fFlagBuildExperienceInGameShell then
-	local displaySize = var3.GetDisplayStore(false).getDisplaySize(false)
-	var1 = if displaySize ~= nil then displaySize == Enum.DisplaySize.Small else true
+if BuildModeLaunchModule:hasBuildMode() and not VRService.VREnabled then
+	if FFlagBuildExperienceInGameShell then
+		local DisplaySize = DisplayModule.GetDisplayStore(false).getDisplaySize(false)
+		Flag = DisplaySize == nil or DisplaySize == Enum.DisplaySize.Small
+	else
+		Flag = true
+	end
 else
-	var1 = true
+	Flag = false
 end
-t.initialAvailability = if var1 then serviceModule.AvailabilitySignal.Available else serviceModule.AvailabilitySignal.Unavailable
+config.initialAvailability = if Flag then ServiceModule.AvailabilitySignal.Available else ServiceModule.AvailabilitySignal.Unavailable
 
-function t.activated(_)
-	-- upvalues: buildExperienceModule (ref), fFlagBuildExperienceInGameShell (ref)
-	local assistantBuildStore = buildExperienceModule.GetAssistantBuildStore()
+function config:activated() --[[ Line: 38 ]]
+	-- upvalues: BuildExperienceModule (copy), FFlagBuildExperienceInGameShell (copy)
+	local AssistantBuildStore = BuildExperienceModule.GetAssistantBuildStore()
 	
-	if fFlagBuildExperienceInGameShell then
-		assistantBuildStore.activate()
-		
-		return
-	elseif assistantBuildStore.getIsDisabled() then
-		assistantBuildStore.setIsDisabledTooltipOpen(not assistantBuildStore.getIsDisabledTooltipOpen())
+	if FFlagBuildExperienceInGameShell then
+		AssistantBuildStore.activate()
 		
 		return
 	end
-	assistantBuildStore.setIsDisabledTooltipOpen(false)
-	buildExperienceModule.GetPlayButtonStore().setIsActive(true)
+	if AssistantBuildStore.getIsDisabled() then
+		AssistantBuildStore.setIsDisabledTooltipOpen(not AssistantBuildStore.getIsDisabledTooltipOpen())
+		
+		return
+	else
+		AssistantBuildStore.setIsDisabledTooltipOpen(false)
+		BuildExperienceModule.GetPlayButtonStore().setIsActive(true)
+	end
 end
 
-t.components = {
-	Icon = function(_)
-		-- upvalues: reactModule (ref), buildExperienceModule (ref), buttonVariant (ref)
-		return reactModule.createElement(buildExperienceModule.AssistantBuild, { variant = buttonVariant.Utility })
+config.components = {
+	Icon = function(_) --[[ Line: 50 ]]
+		-- upvalues: ReactModule (copy), BuildExperienceModule (copy), ButtonVariant (copy)
+		return ReactModule.createElement(BuildExperienceModule.AssistantBuild, { variant = ButtonVariant.Utility })
 	end
 }
-local var4 = serviceModule:register(t)
+local RegisterResult = ServiceModule:register(config)
 
-if fFlagBuildExperienceInGameShell then
-	var4._disposeDisplaySizeEffect = var2.createEffect(function(p1)
-		-- upvalues: buildModeLaunchModule (ref), VRService (ref), fFlagBuildExperienceInGameShell (ref), var3 (ref), var4 (ref)
-		local var5
-		if not buildModeLaunchModule:hasBuildMode() or VRService.VREnabled then
-			var5 = false
-		elseif fFlagBuildExperienceInGameShell then
-			local displaySize = var3.GetDisplayStore(p1).getDisplaySize(p1)
-			var5 = if displaySize ~= nil then displaySize == Enum.DisplaySize.Small else true
+if FFlagBuildExperienceInGameShell then
+	RegisterResult._disposeDisplaySizeEffect = SignalsModule.createEffect(function(p1) --[[ Line: 60 ]]
+		-- upvalues: BuildModeLaunchModule (copy), VRService (copy), FFlagBuildExperienceInGameShell (copy), DisplayModule (copy), RegisterResult (copy)
+		local Flag = nil
+		if BuildModeLaunchModule:hasBuildMode() and not VRService.VREnabled then
+			if FFlagBuildExperienceInGameShell then
+				local DisplaySize = DisplayModule.GetDisplayStore(p1).getDisplaySize(p1)
+				Flag = DisplaySize == nil or DisplaySize == Enum.DisplaySize.Small
+			else
+				Flag = true
+			end
 		else
-			var5 = true
+			Flag = false
 		end
-		if var5 then
-			var4.availability:available()
+		if Flag then
+			RegisterResult.availability:available()
 			
 			return
+		else
+			RegisterResult.availability:unavailable()
 		end
-		var4.availability:unavailable()
 	end)
 end
-return var4
+return RegisterResult

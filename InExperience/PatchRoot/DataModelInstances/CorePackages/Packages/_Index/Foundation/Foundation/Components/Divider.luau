@@ -1,1 +1,1 @@
-﻿return require(script.Divider)
+﻿return (require(script.Divider))

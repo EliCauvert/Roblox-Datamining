@@ -1,42 +1,42 @@
-﻿local profilePlatform = script:FindFirstAncestor("ProfilePlatform")
-local parent = profilePlatform.Parent
-local sharedFlagsModule = require(parent.SharedFlags)
-local url = require(parent.Http).Url
-local appPage = require(parent.RobloxAppEnums).AppPage
-local navigateDown = require(parent.NavigationRodux).Thunks.NavigateDown
-local fFlagSignalsNavP3Dispatch = sharedFlagsModule.FFlagSignalsNavP3Dispatch
-local var1 = if fFlagSignalsNavP3Dispatch then require(parent.RobloxAppNavigation).NavigationCommands else nil
-local textKeysModule = require(profilePlatform.Common.TextKeys)
-local enumsModule = require(profilePlatform.Common.Enums)
-local _ = require(profilePlatform.Components.CTARow.Types)
-local eventNamesModule = require(profilePlatform.Analytics.EventNames)
-local profileTypes = enumsModule.ProfileTypes
+﻿local ProfilePlatform = script:FindFirstAncestor("ProfilePlatform")
+local Parent = ProfilePlatform.Parent
+local Url = require(Parent.Http).Url
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local NavigateDownFunction = require(Parent.NavigationRodux).Thunks.NavigateDown
+local FFlagSignalsNavP3Dispatch = require(Parent.SharedFlags).FFlagSignalsNavP3Dispatch
+local NavigationCommands = if FFlagSignalsNavP3Dispatch then require(Parent.RobloxAppNavigation).NavigationCommands else nil
+local TextKeysModule = require(ProfilePlatform.Common.TextKeys)
+local EnumsModule = require(ProfilePlatform.Common.Enums)
+local _ = require(ProfilePlatform.Components.CTARow.Types)
+local EventNamesModule = require(ProfilePlatform.Analytics.EventNames)
+local ProfileTypes = EnumsModule.ProfileTypes
 
 return {
-	[enumsModule.ProfileActions.TradeItems] = if require(profilePlatform.Flags.FFlagProfilePlatformEnableTradeItems) then function(p1)
-		-- upvalues: enumsModule (ref), profileTypes (ref), eventNamesModule (ref), appPage (ref), url (ref), textKeysModule (ref), fFlagSignalsNavP3Dispatch (ref), var1 (ref), navigateDown (ref)
+	[EnumsModule.ProfileActions.TradeItems] = if require(ProfilePlatform.Flags.FFlagProfilePlatformEnableTradeItems) then function(p1) --[[ Line: 28 ]]
+		-- upvalues: EnumsModule (copy), ProfileTypes (copy), EventNamesModule (copy), AppPage (copy), Url (copy), TextKeysModule (copy), FFlagSignalsNavP3Dispatch (copy), NavigationCommands (copy), NavigateDownFunction (copy)
 		return {
-			text = p1.localized[enumsModule.ProfileActions.TradeItems],
+			text = p1.localized[EnumsModule.ProfileActions.TradeItems],
 			onActivated = {
-				[profileTypes.User] = function()
-					-- upvalues: p1 (ref), enumsModule (copy), eventNamesModule (copy), appPage (copy), url (copy), textKeysModule (copy), fFlagSignalsNavP3Dispatch (copy), var1 (copy), navigateDown (copy)
-					if p1.buttonSurface == enumsModule.ButtonSurface.ContextualMenu then
-						p1.analytics.fireAnalyticsEvent(eventNamesModule.ContextualMenuButtonTradeItems, { buttonSurface = p1.buttonSurface })
+				[ProfileTypes.User] = function() --[[ Line: 32 ]]
+					-- upvalues: p1 (copy), EnumsModule (upval), EventNamesModule (upval), AppPage (upval), Url (upval), TextKeysModule (upval), FFlagSignalsNavP3Dispatch (upval), NavigationCommands (upval), NavigateDownFunction (upval)
+					if p1.buttonSurface == EnumsModule.ButtonSurface.ContextualMenu then
+						p1.analytics.fireAnalyticsEvent(EventNamesModule.ContextualMenuButtonTradeItems, { buttonSurface = p1.buttonSurface })
 					else
-						p1.analytics.fireAnalyticsEvent(eventNamesModule.CTAButtonTradeItems, { buttonSurface = p1.buttonSurface })
+						p1.analytics.fireAnalyticsEvent(EventNamesModule.CTAButtonTradeItems, { buttonSurface = p1.buttonSurface })
 					end
-					local t = {
-						name = appPage.GenericWebPage,
-						detail = `{url.BASE_URL}users/{p1.profileId}/trade`,
-						extraProps = { titleKey = textKeysModule.TradeItems }
+					local config = {
+						name = AppPage.GenericWebPage,
+						detail = `{Url.BASE_URL}users/{p1.profileId}/trade`,
+						extraProps = { titleKey = TextKeysModule.TradeItems }
 					}
 					
-					if fFlagSignalsNavP3Dispatch then
-						var1.down(var1.fromLegacyPage(t))
+					if FFlagSignalsNavP3Dispatch then
+						NavigationCommands.down(NavigationCommands.fromLegacyPage(config))
 						
 						return
+					else
+						p1.dispatch(NavigateDownFunction(config))
 					end
-					p1.dispatch(navigateDown(t))
 				end
 			}
 		}

@@ -1,37 +1,38 @@
-﻿local contextActionService = game:GetService("ContextActionService")
-local contextActionEvent = require(game:GetService("CorePackages").Packages.Roact).Component:extend("ContextActionEvent")
+﻿local ContextActionService = game:GetService("ContextActionService")
+local ContextActionEvent = require(game:GetService("CorePackages").Packages.Roact).Component:extend("ContextActionEvent")
 
-function contextActionEvent.render(_)
+function ContextActionEvent:render() --[[ Line: 29 ]]
 	return nil
 end
 
-function contextActionEvent.didMount(p1)
-	-- upvalues: contextActionService (ref)
+function ContextActionEvent.didMount(p1) --[[ Line: 33 ]]
+	-- upvalues: ContextActionService (copy)
 	if p1.props.actionPriority then
-		contextActionService:BindCoreActionAtPriority(p1.props.name, p1.props.callback, false, 2000 + p1.props.actionPriority, unpack(p1.props.binds))
+		ContextActionService:BindCoreActionAtPriority(p1.props.name, p1.props.callback, false, 2000 + p1.props.actionPriority, unpack(p1.props.binds))
 		
 		return
+	else
+		ContextActionService:BindCoreAction(p1.props.name, p1.props.callback, false, unpack(p1.props.binds))
 	end
-	contextActionService:BindCoreAction(p1.props.name, p1.props.callback, false, unpack(p1.props.binds))
 end
 
-function contextActionEvent.didUpdate(p1, p2)
-	-- upvalues: contextActionService (ref)
+function ContextActionEvent.didUpdate(p1, p2) --[[ Line: 41 ]]
+	-- upvalues: ContextActionService (copy)
 	if p1.props.callback ~= p2.callback or p1.props.name ~= p2.name then
-		contextActionService:UnbindCoreAction(p2.name)
+		ContextActionService:UnbindCoreAction(p2.name)
 		
 		if p1.props.actionPriority then
-			contextActionService:BindCoreActionAtPriority(p1.props.name, p1.props.callback, false, 2000 + p1.props.actionPriority, unpack(p1.props.binds))
+			ContextActionService:BindCoreActionAtPriority(p1.props.name, p1.props.callback, false, 2000 + p1.props.actionPriority, unpack(p1.props.binds))
 			
 			return
 		end
-		contextActionService:BindCoreAction(p1.props.name, p1.props.callback, false, unpack(p1.props.binds))
+		ContextActionService:BindCoreAction(p1.props.name, p1.props.callback, false, unpack(p1.props.binds))
 	end
 end
 
-function contextActionEvent.willUnmount(p1)
-	-- upvalues: contextActionService (ref)
-	contextActionService:UnbindCoreAction(p1.props.name)
+function ContextActionEvent.willUnmount(p1) --[[ Line: 52 ]]
+	-- upvalues: ContextActionService (copy)
+	ContextActionService:UnbindCoreAction(p1.props.name)
 end
 
-return contextActionEvent
+return ContextActionEvent

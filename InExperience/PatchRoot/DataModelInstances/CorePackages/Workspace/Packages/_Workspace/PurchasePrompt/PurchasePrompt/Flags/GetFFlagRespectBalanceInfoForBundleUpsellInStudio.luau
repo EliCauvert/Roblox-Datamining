@@ -1,5 +1,5 @@
 ﻿game:DefineFastFlag("RespectBalanceInfoForBundleUpsellInStudio", false)
 
-return function()
+return function() --[[ Line: 3 ]]
 	return game:GetFastFlag("RespectBalanceInfoForBundleUpsellInStudio")
 end

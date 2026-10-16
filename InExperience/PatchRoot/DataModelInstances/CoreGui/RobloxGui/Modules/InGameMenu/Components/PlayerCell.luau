@@ -1,74 +1,73 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local userInputService = game:GetService("UserInputService")
-local reactModule = require(corePackagesService.Packages.React)
-local verifiedBadgesModule = require(corePackagesService.Workspace.Packages.VerifiedBadges)
-local inGameMenuDependenciesModule = require(corePackagesService.Packages.InGameMenuDependencies)
-local roact = inGameMenuDependenciesModule.Roact
-local UIBlox = inGameMenuDependenciesModule.UIBlox
-local cryo = inGameMenuDependenciesModule.Cryo
-local t = inGameMenuDependenciesModule.t
-local cell = UIBlox.App.Table.Cell
-local imageSetLabel = UIBlox.Core.ImageSet.ImageSetLabel
-local foundationModule = require(corePackagesService.Packages.Foundation)
-local image = foundationModule.Image
-local fFlagCoreUiMigrateUIBloxToFoundation = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
-local loadableImage = UIBlox.App.Loading.LoadableImage
-local loadingStrategy = UIBlox.App.Loading.Enum.LoadingStrategy
-local images = UIBlox.App.ImageSet.Images
-local withFoundationOrUIBloxStyle = require(corePackagesService.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
-local var1 = if fFlagCoreUiMigrateUIBloxToFoundation then foundationModule.UNSTABLE.withCursorMigration else UIBlox.App.SelectionImage.withSelectionCursorProvider
-local parent = script.Parent.Parent
-local assetsModule = require(parent.Resources.Assets)
-local themedTextLabelModule = require(parent.Components.ThemedTextLabel)
-local uDim = UDim.new(0, 24)
-local playerCell = roact.PureComponent:extend("PlayerCell")
-playerCell.validateProps = t.strictInterface({
-	userId = t.number,
-	username = t.string,
-	displayName = t.optional(t.string),
-	hasVerifiedBadge = t.optional(t.boolean),
-	isOnline = t.optional(t.boolean),
-	isSelected = t.optional(t.boolean),
-	LayoutOrder = t.union(t.integer, t.table),
-	Visible = t.optional(t.boolean),
-	loadingStrategy = t.optional(loadingStrategy.isEnumValue),
-	onActivated = t.optional(t.callback),
-	memoKey = t.optional(t.number),
-	[roact.Children] = t.optional(t.table),
-	[roact.Change.AbsolutePosition] = t.optional(t.callback),
-	forwardRef = t.optional(t.union(t.callback, t.table)),
-	UserInputService = t.optional(t.union(t.Instance, t.table))
+﻿local CorePackages = game:GetService("CorePackages")
+local UserInputService = game:GetService("UserInputService")
+local ReactModule = require(CorePackages.Packages.React)
+local VerifiedBadgesModule = require(CorePackages.Workspace.Packages.VerifiedBadges)
+local InGameMenuDependenciesModule = require(CorePackages.Packages.InGameMenuDependencies)
+local Roact = InGameMenuDependenciesModule.Roact
+local UIBlox = InGameMenuDependenciesModule.UIBlox
+local Cryo = InGameMenuDependenciesModule.Cryo
+local T = InGameMenuDependenciesModule.t
+local Cell = UIBlox.App.Table.Cell
+local ImageSetLabel = UIBlox.Core.ImageSet.ImageSetLabel
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local Image = FoundationModule.Image
+local FFlagCoreUiMigrateUIBloxToFoundation = require(CorePackages.Workspace.Packages.SharedFlags).FFlagCoreUiMigrateUIBloxToFoundation
+local LoadableImage = UIBlox.App.Loading.LoadableImage
+local Images = UIBlox.App.ImageSet.Images
+local WithFoundationOrUIBloxStyleFunction = require(CorePackages.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
+local WithCursorMigration = if FFlagCoreUiMigrateUIBloxToFoundation then FoundationModule.UNSTABLE.withCursorMigration else UIBlox.App.SelectionImage.withSelectionCursorProvider
+local Parent = script.Parent.Parent
+local AssetsModule = require(Parent.Resources.Assets)
+local ThemedTextLabelModule = require(Parent.Components.ThemedTextLabel)
+local _UDim = UDim.new(0, 24)
+local PlayerCell = Roact.PureComponent:extend("PlayerCell")
+PlayerCell.validateProps = T.strictInterface({
+	userId = T.number,
+	username = T.string,
+	displayName = T.optional(T.string),
+	hasVerifiedBadge = T.optional(T.boolean),
+	isOnline = T.optional(T.boolean),
+	isSelected = T.optional(T.boolean),
+	LayoutOrder = T.union(T.integer, T.table),
+	Visible = T.optional(T.boolean),
+	loadingStrategy = T.optional(UIBlox.App.Loading.Enum.LoadingStrategy.isEnumValue),
+	onActivated = T.optional(T.callback),
+	memoKey = T.optional(T.number),
+	[Roact.Children] = T.optional(T.table),
+	[Roact.Change.AbsolutePosition] = T.optional(T.callback),
+	forwardRef = T.optional(T.union(T.callback, T.table)),
+	UserInputService = T.optional(T.union(T.Instance, T.table))
 })
-playerCell.defaultProps = { Visible = true, UserInputService = userInputService }
+PlayerCell.defaultProps = { Visible = true, UserInputService = UserInputService }
 
-function playerCell.init(p1)
-	function p0.onActivated()
-		-- upvalues: p1 (ref)
+function PlayerCell.init(p1) --[[ Line: 71 ]]
+	function p1.onActivated() --[[ Line: 72 ]]
+		-- upvalues: p1 (copy)
 		if p1.props.onActivated and p1.props.userId then
 			p1.props.onActivated(p1.props.userId)
 		end
 	end
 end
 
-function playerCell.renderButtons(p1)
-	-- upvalues: roact (ref), cryo (ref)
-	return cryo.Dictionary.join(p1.props[roact.Children] or {}, {
-		List = roact.createElement("UIListLayout", {
+function PlayerCell.renderButtons(p1) --[[ Line: 79 ]]
+	-- upvalues: Roact (copy), Cryo (copy)
+	return (Cryo.Dictionary.join(p1.props[Roact.Children] or {}, {
+		List = Roact.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Horizontal,
 			HorizontalAlignment = Enum.HorizontalAlignment.Right,
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			VerticalAlignment = Enum.VerticalAlignment.Center,
 			Padding = UDim.new(0, 5)
 		})
-	})
+	}))
 end
 
-function playerCell.renderWithSelectionCursor(p1, _)
-	-- upvalues: withFoundationOrUIBloxStyle (ref), roact (ref), uDim (ref), loadableImage (ref), fFlagCoreUiMigrateUIBloxToFoundation (ref), image (ref), imageSetLabel (ref), images (ref), assetsModule (ref), cell (ref), verifiedBadgesModule (ref), themedTextLabelModule (ref)
-	local props = p1.props
-	local var2 = if props.displayName ~= "" then props.displayName else props.username
+function PlayerCell.renderWithSelectionCursor(p1, _) --[[ Line: 94 ]]
+	-- upvalues: WithFoundationOrUIBloxStyleFunction (copy), Roact (copy), _UDim (copy), LoadableImage (copy), FFlagCoreUiMigrateUIBloxToFoundation (copy), Image (copy), ImageSetLabel (copy), Images (copy), AssetsModule (copy), Cell (copy), VerifiedBadgesModule (copy), ThemedTextLabelModule (copy)
+	local Props = p1.props
+	local Username = if Props.displayName == "" then Props.username else Props.displayName or Props.username
 	
-	return withFoundationOrUIBloxStyle(function(p2)
+	return WithFoundationOrUIBloxStyleFunction(function(p2) --[[ Line: 104 ]]
 		return {
 			Theme = {
 				BackgroundContrast = {
@@ -85,151 +84,151 @@ function playerCell.renderWithSelectionCursor(p1, _)
 				}
 			}
 		}
-	end, function(p2)
-		-- upvalues: p1 (ref), roact (copy), uDim (copy), loadableImage (copy), props (ref), fFlagCoreUiMigrateUIBloxToFoundation (copy), image (copy), imageSetLabel (copy), images (copy), assetsModule (copy), cell (copy), verifiedBadgesModule (copy), themedTextLabelModule (copy), var2 (ref)
-		local backgroundContrast = p2.Theme.BackgroundContrast
-		local var3 = 1.1
+	end, function(p2) --[[ Line: 112 ]]
+		-- upvalues: p1 (copy), Roact (upval), _UDim (upval), LoadableImage (upval), Props (copy), FFlagCoreUiMigrateUIBloxToFoundation (upval), Image (upval), ImageSetLabel (upval), Images (upval), AssetsModule (upval), Cell (upval), VerifiedBadgesModule (upval), ThemedTextLabelModule (upval), Username (copy)
+		local BackgroundContrast = p2.Theme.BackgroundContrast
+		local v1 = 1.1
 		
 		if p1.props.isSelected then
-			backgroundContrast = p2.Theme.BackgroundOnHover
-			var3 = 0.23
+			BackgroundContrast = p2.Theme.BackgroundOnHover
+			v1 = 0.23
 		end
-		local color = backgroundContrast.Color
-		local t = {
-			Corner = roact.createElement("UICorner", { CornerRadius = UDim.new(0, 3) }),
-			Border = roact.createElement("UIStroke", {
+		local Color = BackgroundContrast.Color
+		local config = {
+			Corner = Roact.createElement("UICorner", { CornerRadius = UDim.new(0, 3) }),
+			Border = Roact.createElement("UIStroke", {
 				Transparency = 0,
 				Thickness = 2,
 				ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
-				Color = Color3.new(color.R * var3, color.G * var3, color.B * var3)
+				Color = Color3.new(Color.R * v1, Color.G * v1, Color.B * v1)
 			})
 		}
-		local t_1 = {
-			BorderRadius = roact.createElement("UICorner", { CornerRadius = uDim }),
-			PlayerIcon = roact.createElement(loadableImage, {
+		local config1 = {
+			BorderRadius = Roact.createElement("UICorner", { CornerRadius = _UDim }),
+			PlayerIcon = Roact.createElement(LoadableImage, {
 				BackgroundTransparency = 1,
 				ZIndex = 2,
 				LayoutOrder = 1,
 				useShimmerAnimationWhileLoading = true,
 				loadingStrategy = p1.props.loadingStrategy,
 				Size = UDim2.fromScale(1, 1),
-				ImageColor3 = props.isOnline and Color3.fromRGB(255, 255, 255) or Color3.fromRGB(115, 115, 115),
-				Image = if props.userId > 0 then "rbxthumb://type=AvatarHeadShot&id=" .. props.userId .. "&w=60&h=60" else "",
-				renderOnFailed = function()
-					-- upvalues: fFlagCoreUiMigrateUIBloxToFoundation (copy), roact (copy), image (copy), uDim (copy), imageSetLabel (copy), images (copy)
-					return if fFlagCoreUiMigrateUIBloxToFoundation then roact.createElement(image, {
+				ImageColor3 = Props.isOnline and Color3.fromRGB(255, 255, 255) or Color3.fromRGB(115, 115, 115),
+				Image = Props.userId > 0 and "rbxthumb://type=AvatarHeadShot&id=" .. Props.userId .. "&w=60&h=60" or "",
+				renderOnFailed = function() --[[ Line: 152 ]]
+					-- upvalues: FFlagCoreUiMigrateUIBloxToFoundation (upval), Roact (upval), Image (upval), _UDim (upval), ImageSetLabel (upval), Images (upval)
+					return if FFlagCoreUiMigrateUIBloxToFoundation then Roact.createElement(Image, {
 						Image = "icons/common/user",
 						ZIndex = 2,
 						LayoutOrder = 1,
 						Size = UDim2.fromScale(1, 1),
-						cornerRadius = uDim
-					}) else roact.createElement(imageSetLabel, {
+						cornerRadius = _UDim
+					}) else Roact.createElement(ImageSetLabel, {
 						BackgroundTransparency = 1,
 						ZIndex = 2,
 						LayoutOrder = 1,
 						Size = UDim2.fromScale(1, 1),
-						Image = images["icons/common/user"]
+						Image = Images["icons/common/user"]
 					}, {
-						Corner = roact.createElement("UICorner", { CornerRadius = uDim })
+						Corner = Roact.createElement("UICorner", { CornerRadius = _UDim })
 					})
 				end,
-				cornerRadius = uDim
+				cornerRadius = _UDim
 			}),
-			OnlineIndicator = p1.props.isOnline and ((if fFlagCoreUiMigrateUIBloxToFoundation then roact.createElement(image, {
+			OnlineIndicator = p1.props.isOnline and (if FFlagCoreUiMigrateUIBloxToFoundation then Roact.createElement(Image, {
 				ZIndex = 3,
 				AnchorPoint = Vector2.new(1, 1),
-				Image = assetsModule.Images.Circle,
+				Image = AssetsModule.Images.Circle,
 				imageStyle = {
 					Transparency = 0,
-					Color3 = if props.isOnline then p2.Theme.OnlineStatus.Color else nil
+					Color3 = Props.isOnline and p2.Theme.OnlineStatus.Color or nil
 				},
 				Position = UDim2.new(1, -3, 1, -3),
 				Size = UDim2.new(0, 6, 0, 6)
-			}, t) else roact.createElement(imageSetLabel, {
+			}, config) else Roact.createElement(ImageSetLabel, {
 				ZIndex = 3,
 				AnchorPoint = Vector2.new(1, 1),
-				Image = assetsModule.Images.Circle,
-				ImageColor3 = if props.isOnline then p2.Theme.OnlineStatus.Color else nil,
+				Image = AssetsModule.Images.Circle,
+				ImageColor3 = Props.isOnline and p2.Theme.OnlineStatus.Color or nil,
 				Position = UDim2.new(1, -3, 1, -3),
 				Size = UDim2.new(0, 6, 0, 6)
-			}, t)) or nil)
+			}, config)) or nil
 		}
 		
-		return roact.createElement(cell, {
-			background = p1.props.isSelected and roact.createElement("Frame", {
+		return Roact.createElement(Cell, {
+			background = p1.props.isSelected and Roact.createElement("Frame", {
 				Size = UDim2.new(1, 0, 1, 0),
-				BackgroundColor3 = color,
-				BackgroundTransparency = backgroundContrast.Transparency
+				BackgroundColor3 = Color,
+				BackgroundTransparency = BackgroundContrast.Transparency
 			}) or nil,
 			onActivated = p1.onActivated,
-			[roact.Change.AbsolutePosition] = p1.props[roact.Change.AbsolutePosition],
-			[roact.Ref] = p1.props.forwardRef or nil,
-			layoutOrder = props.LayoutOrder,
+			[Roact.Change.AbsolutePosition] = p1.props[Roact.Change.AbsolutePosition],
+			[Roact.Ref] = p1.props.forwardRef or nil,
+			layoutOrder = Props.LayoutOrder,
 			size = UDim2.new(1, 0, 0, 72),
-			head = roact.createElement("Frame", {
+			head = Roact.createElement("Frame", {
 				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
 				AnchorPoint = Vector2.new(0, 0),
 				Size = UDim2.new(1, -20, 0, 72),
 				AutomaticSize = Enum.AutomaticSize.XY
 			}, {
-				HeadListLayout = roact.createElement("UIListLayout", {
+				HeadListLayout = Roact.createElement("UIListLayout", {
 					FillDirection = Enum.FillDirection.Horizontal,
 					SortOrder = Enum.SortOrder.LayoutOrder,
 					VerticalAlignment = Enum.VerticalAlignment.Center
 				}),
-				AvatarBackground = if fFlagCoreUiMigrateUIBloxToFoundation then roact.createElement(image, {
+				AvatarBackground = if FFlagCoreUiMigrateUIBloxToFoundation then Roact.createElement(Image, {
 					Image = "component_assets/userBG_dark",
 					Size = UDim2.new(0, 48, 0, 48)
-				}, t_1) else roact.createElement(imageSetLabel, {
+				}, config1) else Roact.createElement(ImageSetLabel, {
 					BackgroundTransparency = 1,
-					Image = images["component_assets/userBG_dark"],
+					Image = Images["component_assets/userBG_dark"],
 					Size = UDim2.new(0, 48, 0, 48)
-				}, t_1),
-				NameContainer = roact.createElement("Frame", {
+				}, config1),
+				NameContainer = Roact.createElement("Frame", {
 					BackgroundTransparency = 1,
 					LayoutOrder = 2,
 					Size = UDim2.new(1, -68, 0, 72),
 					Position = UDim2.fromOffset(48, 0),
 					AnchorPoint = Vector2.new(0, 0.5)
 				}, {
-					NameListLayout = roact.createElement("UIListLayout", {
+					NameListLayout = Roact.createElement("UIListLayout", {
 						FillDirection = Enum.FillDirection.Vertical,
 						SortOrder = Enum.SortOrder.LayoutOrder,
 						VerticalAlignment = Enum.VerticalAlignment.Center
 					}),
-					NamePadding = roact.createElement("UIPadding", { PaddingLeft = UDim.new(0, 6) }),
-					DisplayNameLabel = roact.createElement(verifiedBadgesModule.EmojiWrapper, {
-						emoji = if props.hasVerifiedBadge then verifiedBadgesModule.emoji.verified else "",
+					NamePadding = Roact.createElement("UIPadding", { PaddingLeft = UDim.new(0, 6) }),
+					DisplayNameLabel = Roact.createElement(VerifiedBadgesModule.EmojiWrapper, {
+						emoji = if Props.hasVerifiedBadge then VerifiedBadgesModule.emoji.verified else "",
 						automaticSize = Enum.AutomaticSize.None,
 						size = UDim2.new(1, -40, 0, 20)
 					}, {
-						DisplayNameLabel = roact.createElement(themedTextLabelModule, {
+						DisplayNameLabel = Roact.createElement(ThemedTextLabelModule, {
 							fontKey = "CaptionHeader",
 							themeKey = "TextEmphasis",
 							BackgroundTransparency = 1,
 							LayoutOrder = 1,
-							Text = var2 or props.username,
+							Text = Username or Props.username,
 							Size = UDim2.new(1, 0, 0, 20),
-							AutomaticSize = if props.hasVerifiedBadge then Enum.AutomaticSize.XY else Enum.AutomaticSize.None,
+							AutomaticSize = if Props.hasVerifiedBadge then Enum.AutomaticSize.XY else Enum.AutomaticSize.None,
 							TextXAlignment = Enum.TextXAlignment.Left,
 							TextTruncate = Enum.TextTruncate.AtEnd
 						})
 					}),
-					UsernameLabel = roact.createElement(themedTextLabelModule, {
+					UsernameLabel = Roact.createElement(ThemedTextLabelModule, {
 						fontKey = "Footer",
 						themeKey = "TextDefault",
 						BackgroundTransparency = 1,
 						LayoutOrder = 2,
 						AnchorPoint = Vector2.new(0, 0.5),
 						Size = UDim2.new(1, 0, 0, 14),
-						Text = "@" .. props.username,
+						Text = "@" .. Props.username,
 						TextXAlignment = Enum.TextXAlignment.Left,
 						TextTruncate = Enum.TextTruncate.AtEnd
 					})
 				})
 			}),
-			tail = roact.createElement("Frame", {
+			tail = Roact.createElement("Frame", {
 				BackgroundTransparency = 1,
 				AnchorPoint = Vector2.new(1, 0),
 				Position = UDim2.new(1, 0, 0, 0),
@@ -239,15 +238,15 @@ function playerCell.renderWithSelectionCursor(p1, _)
 	end)
 end
 
-function playerCell.render(p1)
-	-- upvalues: var1 (ref)
-	return var1(function(p2)
-		-- upvalues: p1 (ref)
+function PlayerCell.render(p1) --[[ Line: 291 ]]
+	-- upvalues: WithCursorMigration (copy)
+	return WithCursorMigration(function(p2) --[[ Line: 292 ]]
+		-- upvalues: p1 (copy)
 		return p1:renderWithSelectionCursor(p2)
 	end)
 end
 
-return reactModule.memo(playerCell, function(p1, p2)
-	-- upvalues: roact (ref)
-	return p1.isSelected == p2.isSelected and (p1.isOnline == p2.isOnline and (p1[roact.Change.AbsolutePosition] == p2[roact.Change.AbsolutePosition] and (p1.forwardRef == p2.forwardRef and (p1.memoKey == p2.memoKey and p1.loadingStrategy == p2.loadingStrategy))))
+return ReactModule.memo(PlayerCell, function(p1, p2): boolean --[[ Line: 297 ]]
+	-- upvalues: Roact (copy)
+	return p1.isSelected == p2.isSelected and (p1.isOnline == p2.isOnline and (p1[Roact.Change.AbsolutePosition] == p2[Roact.Change.AbsolutePosition] and (p1.forwardRef == p2.forwardRef and p1.memoKey == p2.memoKey))) and p1.loadingStrategy == p2.loadingStrategy
 end)

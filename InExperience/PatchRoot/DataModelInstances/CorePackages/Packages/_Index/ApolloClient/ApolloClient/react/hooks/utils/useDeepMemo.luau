@@ -1,16 +1,15 @@
-﻿local t = {}
-local parent = script.Parent.Parent.Parent.Parent
-local useRef = require(parent.Parent.React).useRef
-local equalModule = require(parent.jsutils.equal)
+﻿local Parent = script.Parent.Parent.Parent.Parent
+local UseRefFunction = require(Parent.Parent.React).useRef
+local EqualModule = require(Parent.jsutils.equal)
 
-function t.useDeepMemo(p1, p2)
-	-- upvalues: useRef (ref), equalModule (ref)
-	local var1 = useRef(nil)
-	
-	if not var1.current or not equalModule(p2, var1.current.key) then
-		var1.current = { key = p2, value = p1() }
+return {
+	useDeepMemo = function(Callback, Key) --[[ Line: 26 ]]
+		-- upvalues: UseRefFunction (copy), EqualModule (copy)
+		local UseRefResult = UseRefFunction(nil)
+		
+		if not UseRefResult.current or not EqualModule(Key, UseRefResult.current.key) then
+			UseRefResult.current = { key = Key, value = Callback() }
+		end
+		return UseRefResult.current.value
 	end
-	return var1.current.value
-end
-
-return t
+}

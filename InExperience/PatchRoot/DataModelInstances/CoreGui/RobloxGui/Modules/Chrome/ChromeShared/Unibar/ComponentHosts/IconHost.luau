@@ -1,529 +1,533 @@
-﻿local chromeShared = script:FindFirstAncestor("ChromeShared")
-local corePackagesService = game:GetService("CorePackages")
-local coreGuiService = game:GetService("CoreGui")
-local userInputService = game:GetService("UserInputService")
-local reactModule = require(corePackagesService.Packages.React)
-local sharedFlagsModule = require(corePackagesService.Workspace.Packages.SharedFlags)
-local fFlagEnableConsoleExpControls = sharedFlagsModule.FFlagEnableConsoleExpControls
-local fFlagEnableWhatsNew = sharedFlagsModule.FFlagEnableWhatsNew
-local var1 = if fFlagEnableWhatsNew then require(corePackagesService.Workspace.Packages.WhatsNew).WhatsNewAnchor else nil
-local flagsModule = require(script.Parent.Parent.Parent.Parent.Flags)
-local fFlagUnibarMenuOpenHamburger = flagsModule.FFlagUnibarMenuOpenHamburger
-local fFlagUnibarMenuOpenSubmenu = flagsModule.FFlagUnibarMenuOpenSubmenu
-local flagsModule_1 = require(chromeShared.Flags)
-local fFlagChromeNineDotActivityIndicator = flagsModule_1.FFlagChromeNineDotActivityIndicator
-local fFlagTokenizeUnibarConstantsWithStyleProvider = flagsModule_1.FFlagTokenizeUnibarConstantsWithStyleProvider
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local foundationModule = require(corePackagesService.Packages.Foundation)
-local useCursor = foundationModule.Hooks.useCursor
-local statusIndicator = foundationModule.StatusIndicator
-local statusIndicatorVariant = foundationModule.Enums.StatusIndicatorVariant
-local interactable = UIBloxModule.Core.Control.Interactable
-local controlState = UIBloxModule.Core.Control.Enum.ControlState
-local useStyle = UIBloxModule.Core.Style.useStyle
-local withTooltip = UIBloxModule.App.Dialog.TooltipV2.withTooltip
-local constantsModule = require(chromeShared.Unibar.Constants)
-local serviceModule = require(chromeShared.Service)
-local chromeAnalyticsModule = require(chromeShared.Analytics.ChromeAnalytics)
-local unibarStyle = require(corePackagesService.Workspace.Packages.Chrome).UnibarStyle
-local useObservableValueModule = require(chromeShared.Hooks.useObservableValue)
-local useMappedObservableValueBindingModule = require(chromeShared.Hooks.useMappedObservableValueBinding)
-local useTimeHysteresisModule = require(chromeShared.Hooks.useTimeHysteresis)
-local shouldRejectMultiTouchModule = require(chromeShared.Utility.shouldRejectMultiTouch)
-local chatNotificationBadgeModule = require(script.Parent.ChatNotificationBadge)
-local nineDotActivityIndicatorModule = require(script.Parent.NineDotActivityIndicator)
-local nineDotNotificationBadgeModule = require(script.Parent.NineDotNotificationBadge)
-local isInExperienceUIVREnabled = require(corePackagesService.Workspace.Packages.SharedExperimentDefinition).isInExperienceUIVREnabled
-local isSpatial = nil
-local panel3DInSpatialUI = nil
-local panelType = nil
-local tooltipOrientation = nil
-local tooltipCallout = nil
-local SPATIAL_TOOLTIP_SPACING = nil
-local _ = nil
-local _ = nil
-local var2 = nil
+﻿local ChromeShared = script:FindFirstAncestor("ChromeShared")
+local CorePackages = game:GetService("CorePackages")
+local CoreGui = game:GetService("CoreGui")
+local UserInputService = game:GetService("UserInputService")
+local ReactModule = require(CorePackages.Packages.React)
+local SharedFlagsModule = require(CorePackages.Workspace.Packages.SharedFlags)
+local FFlagEnableConsoleExpControls = SharedFlagsModule.FFlagEnableConsoleExpControls
+local FFlagEnableWhatsNew = SharedFlagsModule.FFlagEnableWhatsNew
+local WhatsNewAnchor = if FFlagEnableWhatsNew then require(CorePackages.Workspace.Packages.WhatsNew).WhatsNewAnchor else nil
+local FlagsModule = require(script.Parent.Parent.Parent.Parent.Flags)
+local FFlagUnibarMenuOpenHamburger = FlagsModule.FFlagUnibarMenuOpenHamburger
+local FFlagUnibarMenuOpenSubmenu = FlagsModule.FFlagUnibarMenuOpenSubmenu
+local FlagsModule1 = require(ChromeShared.Flags)
+local FFlagChromeNineDotActivityIndicator = FlagsModule1.FFlagChromeNineDotActivityIndicator
+local FFlagTokenizeUnibarConstantsWithStyleProvider = FlagsModule1.FFlagTokenizeUnibarConstantsWithStyleProvider
+local UIBloxModule = require(CorePackages.Packages.UIBlox)
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local UseCursorFunction = FoundationModule.Hooks.useCursor
+local StatusIndicator = FoundationModule.StatusIndicator
+local StatusIndicatorVariant = FoundationModule.Enums.StatusIndicatorVariant
+local Interactable = UIBloxModule.Core.Control.Interactable
+local ControlState = UIBloxModule.Core.Control.Enum.ControlState
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local WithTooltipFunction = UIBloxModule.App.Dialog.TooltipV2.withTooltip
+local ConstantsModule = require(ChromeShared.Unibar.Constants)
+local ServiceModule = require(ChromeShared.Service)
+local ChromeAnalyticsModule = require(ChromeShared.Analytics.ChromeAnalytics)
+local UnibarStyle = require(CorePackages.Workspace.Packages.Chrome).UnibarStyle
+local UseObservableValueModule = require(ChromeShared.Hooks.useObservableValue)
+local UseMappedObservableValueBindingModule = require(ChromeShared.Hooks.useMappedObservableValueBinding)
+local UseTimeHysteresisModule = require(ChromeShared.Hooks.useTimeHysteresis)
+local ShouldRejectMultiTouchModule = require(ChromeShared.Utility.shouldRejectMultiTouch)
+local ChatNotificationBadgeModule = require(script.Parent.ChatNotificationBadge)
+local NineDotActivityIndicatorModule = require(script.Parent.NineDotActivityIndicator)
+local NineDotNotificationBadgeModule = require(script.Parent.NineDotNotificationBadge)
+local IsInExperienceUIVREnabled = require(CorePackages.Workspace.Packages.SharedExperimentDefinition).isInExperienceUIVREnabled
+local IsSpatialFunction = nil
+local Panel3DInSpatialUI = nil
+local PanelType = nil
+local TooltipOrientation = nil
+local TooltipCallout = nil
+local SPATIALTOOLTIPSPACING = nil
+local NewResult = nil
 
-if isInExperienceUIVREnabled then
-	isSpatial = require(corePackagesService.Workspace.Packages.AppCommonLib).isSpatial
-	local vrSpatialUiModule = require(corePackagesService.Workspace.Packages.VrSpatialUi)
-	panel3DInSpatialUI = vrSpatialUiModule.Panel3DInSpatialUI
-	panelType = vrSpatialUiModule.Constants.PanelType
-	tooltipOrientation = UIBloxModule.App.Dialog.Enum.TooltipOrientation
-	tooltipCallout = UIBloxModule.App.Dialog.TooltipCallout
-	SPATIAL_TOOLTIP_SPACING = vrSpatialUiModule.Constants.SPATIAL_TOOLTIP_SPACING
-	local mappedSignal = require(chromeShared.Service.ChromeUtils).MappedSignal
-	local bottomBarVisibility = vrSpatialUiModule.UIManager.getInstance():getBottomBarVisibility()
+if IsInExperienceUIVREnabled then
+	IsSpatialFunction = require(CorePackages.Workspace.Packages.AppCommonLib).isSpatial
+	local VrSpatialUiModule = require(CorePackages.Workspace.Packages.VrSpatialUi)
+	Panel3DInSpatialUI = VrSpatialUiModule.Panel3DInSpatialUI
+	PanelType = VrSpatialUiModule.Constants.PanelType
+	TooltipOrientation = UIBloxModule.App.Dialog.Enum.TooltipOrientation
+	TooltipCallout = UIBloxModule.App.Dialog.TooltipCallout
+	SPATIALTOOLTIPSPACING = VrSpatialUiModule.Constants.SPATIAL_TOOLTIP_SPACING
+	local MappedSignal = require(ChromeShared.Service.ChromeUtils).MappedSignal
+	local BottomBarVisibility = VrSpatialUiModule.UIManager.getInstance():getBottomBarVisibility()
 	
-	if bottomBarVisibility and isSpatial() then
-		var2 = mappedSignal.new(bottomBarVisibility, function()
-			-- upvalues: bottomBarVisibility (ref)
-			return bottomBarVisibility:get()
+	if BottomBarVisibility and IsSpatialFunction() then
+		NewResult = MappedSignal.new(BottomBarVisibility, function() --[[ Line: 76 ]]
+			-- upvalues: BottomBarVisibility (copy)
+			return BottomBarVisibility:get()
 		end)
 	end
 end
-local var3 = if fFlagEnableConsoleExpControls then require(chromeShared.Parent.Parent.TopBar.Components.MenuIconContext) else nil
+local MenuIconContextModule = if FFlagEnableConsoleExpControls then require(ChromeShared.Parent.Parent.TopBar.Components.MenuIconContext) else nil
 local t = {}
 
-function areTooltipsDisplaying()
-	-- upvalues: t (ref)
-	local currentTime = tick()
+function areTooltipsDisplaying(): boolean --[[ Line: 97 ]]
+	-- upvalues: t (copy)
+	local CurrentTime = tick()
 	
-	for i, v in t do
-		if v.displaying or currentTime - v.time < 0.15 then
+	for _, value in t do
+		if value.displaying or CurrentTime - value.time < 0.15 then
 			return true
 		end
 	end
 	return false
 end
 
-function logTooltipState(p1, p2)
-	-- upvalues: t (ref)
-	if not t[p1] or t[p1].displaying ~= p2 then
-		t[p1] = { displaying = p2, time = tick() }
+function logTooltipState(Key, Displaying) --[[ Line: 109 ]]
+	-- upvalues: t (copy)
+	if not t[Key] or t[Key].displaying ~= Displaying then
+		t[Key] = { displaying = Displaying, time = tick() }
 	end
 end
 
-function NotificationBadge(p1)
-	-- upvalues: reactModule (ref), fFlagTokenizeUnibarConstantsWithStyleProvider (ref), unibarStyle (ref), constantsModule (ref), statusIndicator (ref), statusIndicatorVariant (ref), fFlagChromeNineDotActivityIndicator (ref), nineDotActivityIndicatorModule (ref)
+function NotificationBadge(p1) --[[ Line: 129 ]]
+	-- upvalues: ReactModule (copy), FFlagTokenizeUnibarConstantsWithStyleProvider (copy), UnibarStyle (copy), ConstantsModule (copy), StatusIndicator (copy), StatusIndicatorVariant (copy), FFlagChromeNineDotActivityIndicator (copy), NineDotActivityIndicatorModule (copy)
 	if not p1.integration then
 		return nil
 	end
-	local ICON_BADGE_OFFSET_X, ICON_BADGE_OFFSET_Y
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local _ = nil
-	local var4 = if p1.integration.integration then p1.integration.integration.notification else nil
-	local var5, var6 = reactModule.useBinding(var4 and var4:get().value or 0)
-	local var7 = var6
-	local var8, var9 = reactModule.useState(false)
-	local var10 = var9
-	reactModule.useEffect(function()
-		-- upvalues: var4 (ref), var10 (write), var7 (write)
-		if var4 then
-			local var11 = var4:connect(function()
-				-- upvalues: var4 (copy), var10 (copy), var7 (copy)
-				local value = var4:get().value or 0
-				var10(value > 0)
-				var7(value)
-			end)
-			
-			return function()
-				-- upvalues: var11 (ref)
-				var11:disconnect()
-			end
+	local UseBindingResult2 = nil
+	local UseStateResult2 = nil
+	local Notification = p1.integration.integration and p1.integration.integration.notification or nil
+	local UseBindingResult
+	UseBindingResult, UseBindingResult2 = ReactModule.useBinding(Notification and Notification:get().value or 0)
+	local UseStateResult
+	UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	ReactModule.useEffect(function() --[[ Line: 141 ]]
+		-- upvalues: Notification (copy), UseStateResult2 (ref), UseBindingResult2 (ref)
+		if not Notification then return end
+		local Connection = Notification:connect(function() --[[ Line: 146 ]]
+			-- upvalues: Notification (upval), UseStateResult2 (upval), UseBindingResult2 (upval)
+			local Value = Notification:get().value or 0
+			UseStateResult2(Value > 0)
+			UseBindingResult2(Value)
+		end)
+		
+		return function() --[[ Line: 151 ]]
+			-- upvalues: Connection (copy)
+			Connection:disconnect()
 		end
 	end, { p1.integration.integration.id })
-	local _ = nil
-	local _ = nil
-	local _ = nil
+	local ICONBADGEOFFSETX = nil
+	local ICONBADGEOFFSETY = nil
 	
-	if fFlagTokenizeUnibarConstantsWithStyleProvider then
-		local var11 = unibarStyle.use()
-		ICON_BADGE_OFFSET_X = var11.ICON_BADGE_OFFSET_X
-		ICON_BADGE_OFFSET_Y = var11.ICON_BADGE_OFFSET_Y
+	if FFlagTokenizeUnibarConstantsWithStyleProvider then
+		local UseResult = UnibarStyle.use()
+		ICONBADGEOFFSETX = UseResult.ICON_BADGE_OFFSET_X
+		ICONBADGEOFFSETY = UseResult.ICON_BADGE_OFFSET_Y
 	else
-		ICON_BADGE_OFFSET_X = constantsModule.ICON_BADGE_OFFSET_X
-		ICON_BADGE_OFFSET_Y = constantsModule.ICON_BADGE_OFFSET_Y
+		ICONBADGEOFFSETX = ConstantsModule.ICON_BADGE_OFFSET_X
+		ICONBADGEOFFSETY = ConstantsModule.ICON_BADGE_OFFSET_Y
 	end
-	local minBadgeCount = p1.minBadgeCount or 0
-	local var12 = var8 or minBadgeCount > 0
+	local MinBadgeCount = p1.minBadgeCount or 0
+	local UseStateResult1 = UseStateResult or MinBadgeCount > 0
+	local MapResult = UseBindingResult:map(function(p2: number): number --[[ Line: 172 ]]
+		-- upvalues: MinBadgeCount (copy)
+		return (math.min(math.max(p2, MinBadgeCount), 99))
+	end)
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
 		ZIndex = 2,
 		Size = UDim2.fromScale(1, 1),
-		Visible = p1.toggleTransition and p1.toggleTransition:map(function(_)
+		Visible = p1.toggleTransition and p1.toggleTransition:map(function(_): boolean --[[ Line: 179 ]]
 			return true
 		end) or true
 	}, {
-		Badge = if var12 then reactModule.createElement(statusIndicator, {
-			value = var5:map(function(p2)
-				-- upvalues: minBadgeCount (ref)
-				return math.min(math.max(p2, minBadgeCount), 99)
-			end),
-			variant = statusIndicatorVariant.Emphasis,
+		Badge = if UseStateResult1 then ReactModule.createElement(StatusIndicator, {
+			value = MapResult,
+			variant = StatusIndicatorVariant.Emphasis,
 			AnchorPoint = Vector2.new(0, 0),
-			Position = UDim2.new(0, ICON_BADGE_OFFSET_X, 0, ICON_BADGE_OFFSET_Y)
+			Position = UDim2.new(0, ICONBADGEOFFSETX, 0, ICONBADGEOFFSETY)
 		}) else nil,
-		ActivityIndicator = if fFlagChromeNineDotActivityIndicator and p1.integration.id == "nine_dot" then reactModule.createElement(nineDotActivityIndicatorModule, {
-			hasNotificationBadge = var12,
-			position = UDim2.new(0, ICON_BADGE_OFFSET_X, 0, ICON_BADGE_OFFSET_Y),
+		ActivityIndicator = if FFlagChromeNineDotActivityIndicator and p1.integration.id == "nine_dot" then ReactModule.createElement(NineDotActivityIndicatorModule, {
+			hasNotificationBadge = UseStateResult1,
+			position = UDim2.new(0, ICONBADGEOFFSETX, 0, ICONBADGEOFFSETY),
 			visible = p1.showNineDotActivityIndicator == true
 		}) else nil
 	})
 end
 
-function NotificationIndicator(p1)
-	-- upvalues: useObservableValueModule (ref), serviceModule (ref), reactModule (ref)
-	local var4 = useObservableValueModule(serviceModule:notificationIndicator())
-	p1.setIconVisible(if var4 then false else true)
+function NotificationIndicator(p1) --[[ Line: 213 ]]
+	-- upvalues: UseObservableValueModule (copy), ServiceModule (copy), ReactModule (copy)
+	local UseObservableValueModuleResult = UseObservableValueModule(ServiceModule:notificationIndicator())
+	p1.setIconVisible(not UseObservableValueModuleResult)
 	
-	return reactModule.createElement("Frame", {
+	return (ReactModule.createElement("Frame", {
 		Name = "NotificationIndicatorFrame",
 		BorderSizePixel = 0,
 		BackgroundTransparency = 1,
 		Size = UDim2.new(1, 0, 1, 0)
 	}, {
-		IntegrationIcon = var4 and var4.component(p1) or nil,
-		UIListLayout = reactModule.createElement("UIListLayout", {
+		IntegrationIcon = UseObservableValueModuleResult and UseObservableValueModuleResult.component(p1) or nil,
+		UIListLayout = ReactModule.createElement("UIListLayout", {
 			FillDirection = Enum.FillDirection.Horizontal,
 			VerticalAlignment = Enum.VerticalAlignment.Center,
 			HorizontalAlignment = Enum.HorizontalAlignment.Center
 		})
-	})
+	}))
 end
 
-function HighlightCircle(p1)
-	-- upvalues: fFlagTokenizeUnibarConstantsWithStyleProvider (ref), unibarStyle (ref), constantsModule (ref), reactModule (ref)
-	local _ = nil
-	
-	return reactModule.createElement("Frame", {
+function HighlightCircle(p1) --[[ Line: 232 ]]
+	-- upvalues: FFlagTokenizeUnibarConstantsWithStyleProvider (copy), UnibarStyle (copy), ConstantsModule (copy), ReactModule (copy)
+	return ReactModule.createElement("Frame", {
 		BorderSizePixel = 0,
 		Name = p1.name or "Highlighter",
-		Size = if fFlagTokenizeUnibarConstantsWithStyleProvider then unibarStyle.use().ICON_HIGHLIGHT_SIZE else constantsModule.ICON_HIGHLIGHT_SIZE,
+		Size = if FFlagTokenizeUnibarConstantsWithStyleProvider then UnibarStyle.use().ICON_HIGHLIGHT_SIZE else ConstantsModule.ICON_HIGHLIGHT_SIZE,
 		AnchorPoint = Vector2.new(0.5, 0.5),
 		Position = UDim2.new(0.5, 0, 0.5, 0),
 		BackgroundColor3 = p1.color.Color,
 		BackgroundTransparency = p1.color.Transparency,
 		Visible = p1.visible
 	}, {
-		corner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) })
+		corner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) })
 	})
 end
 
-function TooltipButton(p1)
-	-- upvalues: fFlagTokenizeUnibarConstantsWithStyleProvider (ref), unibarStyle (ref), constantsModule (ref), reactModule (ref), useTimeHysteresisModule (ref), isInExperienceUIVREnabled (ref), isSpatial (write), useObservableValueModule (ref), serviceModule (ref), var2 (write), controlState (ref), chromeAnalyticsModule (ref), userInputService (ref), shouldRejectMultiTouchModule (ref), fFlagEnableConsoleExpControls (ref), var3 (ref), interactable (ref), fFlagUnibarMenuOpenHamburger (ref), fFlagUnibarMenuOpenSubmenu (ref), useCursor (ref), foundationModule (ref), panel3DInSpatialUI (write), panelType (write), SPATIAL_TOOLTIP_SPACING (write), tooltipCallout (write), tooltipOrientation (write), withTooltip (ref), coreGuiService (ref)
-	local var4, var5
-	local _ = nil
-	local var6 = if fFlagTokenizeUnibarConstantsWithStyleProvider then unibarStyle.use().ICON_HIGHLIGHT_SIZE else constantsModule.ICON_HIGHLIGHT_SIZE
-	local var7 = reactModule.useRef(nil)
-	local secondaryAction = p1.integration.integration.secondaryAction
-	local draggable = p1.integration.integration.draggable or false
-	local var8 = reactModule.useRef(nil)
-	reactModule.useEffect(function()
-		-- upvalues: var8 (ref)
-		return function()
-			-- upvalues: var8 (copy)
-			if var8.current then
-				var8.current:Disconnect()
-				var8.current = nil
+function TooltipButton(p1) --[[ Line: 262 ]]
+	-- upvalues: FFlagTokenizeUnibarConstantsWithStyleProvider (copy), UnibarStyle (copy), ConstantsModule (copy), ReactModule (copy), UseTimeHysteresisModule (copy), IsInExperienceUIVREnabled (copy), IsSpatialFunction (ref), UseObservableValueModule (copy), ServiceModule (copy), NewResult (ref), ControlState (copy), ChromeAnalyticsModule (copy), UserInputService (copy), ShouldRejectMultiTouchModule (copy), FFlagEnableConsoleExpControls (copy), MenuIconContextModule (copy), Interactable (copy), FFlagUnibarMenuOpenHamburger (copy), FFlagUnibarMenuOpenSubmenu (copy), UseCursorFunction (copy), FoundationModule (copy), Panel3DInSpatialUI (ref), PanelType (ref), SPATIALTOOLTIPSPACING (ref), TooltipCallout (ref), TooltipOrientation (ref), WithTooltipFunction (copy), CoreGui (copy)
+	local ICONHIGHLIGHTSIZE = nil
+	ICONHIGHLIGHTSIZE = if FFlagTokenizeUnibarConstantsWithStyleProvider then UnibarStyle.use().ICON_HIGHLIGHT_SIZE else ConstantsModule.ICON_HIGHLIGHT_SIZE
+	local UseRefResult = ReactModule.useRef(nil)
+	local SecondaryAction = p1.integration.integration.secondaryAction
+	local Draggable = p1.integration.integration.draggable or false
+	local UseRefResult1 = ReactModule.useRef(nil)
+	ReactModule.useEffect(function() --[[ Line: 278 ]]
+		-- upvalues: UseRefResult1 (copy)
+		return function() --[[ Line: 279 ]]
+			-- upvalues: UseRefResult1 (upval)
+			if UseRefResult1.current then
+				UseRefResult1.current:Disconnect()
+				UseRefResult1.current = nil
 			end
 		end
 	end, {})
-	local _ = nil
-	local _ = nil
+	local UseTimeHysteresisModuleResult2 = nil
+	local UseTimeHysteresisModuleResult = nil
 	
-	if secondaryAction then
-		local var9, var10 = useTimeHysteresisModule(0.05, 0.15, 0.35)
-		var4 = var9
-		var5 = var10
+	if SecondaryAction then
+		UseTimeHysteresisModuleResult, UseTimeHysteresisModuleResult2 = UseTimeHysteresisModule(0.05, 0.15, 0.35)
 	else
-		local var11, var12 = useTimeHysteresisModule(0.6, 0.65, 0.7)
-		var4 = var11
-		var5 = var12
+		UseTimeHysteresisModuleResult, UseTimeHysteresisModuleResult2 = UseTimeHysteresisModule(0.6, 0.65, 0.7)
 	end
-	local var13, var14 = useTimeHysteresisModule(0, 0, 0.65)
-	local var15, var16 = reactModule.useState(false)
-	local var17, var18 = useTimeHysteresisModule(0, 1)
-	local var19 = if isInExperienceUIVREnabled then isSpatial() else nil
-	local var20 = false
+	local UseTimeHysteresisModuleResult1, UseTimeHysteresisModuleResult2_1 = UseTimeHysteresisModule(0, 0, 0.65)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseTimeHysteresisModuleResult3, UseTimeHysteresisModuleResult2_2 = UseTimeHysteresisModule(0, 1)
+	local IsSpatial = if IsInExperienceUIVREnabled then IsSpatialFunction() else nil
+	local UseObservableValueModuleResult = if IsInExperienceUIVREnabled then UseObservableValueModule(ServiceModule:getTopBarVisibiity()) else nil
+	local UseObservableValueModuleResult1 = if IsInExperienceUIVREnabled and NewResult then UseObservableValueModule(NewResult) else nil
+	local Flag = false
 	
-	if isInExperienceUIVREnabled and var19 and (not (if isInExperienceUIVREnabled then useObservableValueModule(serviceModule:getTopBarVisibiity()) else nil) and not (if isInExperienceUIVREnabled and var2 then useObservableValueModule(var2) else nil)) then
-		var20 = true
-		draggable = draggable and not var20
+	if IsInExperienceUIVREnabled and IsSpatial and not UseObservableValueModuleResult and not UseObservableValueModuleResult1 then
+		Flag = true
+		Draggable = Draggable and not Flag
 	end
-	local var21
-	local var22 = reactModule.useCallback(function(p2, p3)
-		-- upvalues: isInExperienceUIVREnabled (copy), var20 (write), controlState (copy), serviceModule (copy), p1 (ref), var5 (write), var13 (ref), var18 (ref)
-		if isInExperienceUIVREnabled and var20 then return end
-		if p3 == controlState.Selected and (p2 == controlState.Default or p2 == controlState.Hover) then
-			serviceModule:setSelected(p1.integration.id)
-		elseif p3 == controlState.Selected and p2 == controlState.Default then
-			serviceModule:setSelected(p1.integration.id)
+	local UseResult = ReactModule.useCallback(function(Default, Default1) --[[ Line: 317 ]]
+		-- upvalues: IsInExperienceUIVREnabled (upval), Flag (ref), ControlState (upval), ServiceModule (upval), p1 (copy), UseTimeHysteresisModuleResult2 (ref), UseTimeHysteresisModuleResult1 (copy), UseTimeHysteresisModuleResult2_2 (copy)
+		if IsInExperienceUIVREnabled and Flag then return end
+		if Default1 == ControlState.Selected and (Default == ControlState.Default or Default == ControlState.Hover) then
+			ServiceModule:setSelected(p1.integration.id)
+		elseif Default1 == ControlState.Selected and Default == ControlState.Default then
+			ServiceModule:setSelected(p1.integration.id)
 		end
-		local var23 = p3 ~= controlState.Default
-		p1.setHovered(var23)
-		local var24 = p3 == controlState.Hover
-		var5(var24, if var24 then var13 else areTooltipsDisplaying())
+		local IsNotDefaultMatch = Default1 ~= ControlState.Default
+		p1.setHovered(IsNotDefaultMatch)
+		local IsDefaultMatch = Default1 == ControlState.Hover
+		UseTimeHysteresisModuleResult2(IsDefaultMatch, IsDefaultMatch and UseTimeHysteresisModuleResult1 or areTooltipsDisplaying())
 		
-		if var24 then
-			serviceModule:onIntegrationHovered():fire(p1.integration.id)
+		if IsDefaultMatch then
+			ServiceModule:onIntegrationHovered():fire(p1.integration.id)
 		end
-		if not var23 then
-			var18(false)
+		if not IsNotDefaultMatch then
+			UseTimeHysteresisModuleResult2_2(false)
 		end
-	end, if isInExperienceUIVREnabled then {
-		p1.setHovered, var5, var18, var13, var19, var20
-	} else { p1.setHovered, var5, var18, var13 })
-	local var23 = reactModule.useCallback(function(_, p2)
-		-- upvalues: draggable (write), var18 (ref), chromeAnalyticsModule (copy), p1 (ref), var8 (ref), userInputService (copy), shouldRejectMultiTouchModule (copy), serviceModule (copy), constantsModule (copy)
-		if not draggable then return end
-		if p2.UserInputType == Enum.UserInputType.MouseButton1 or p2.UserInputType == Enum.UserInputType.Touch then
-			local position = p2.Position
-			var18(true, true)
-			chromeAnalyticsModule.default:onIconTouchBegan(p1.integration.id)
+	end, if IsInExperienceUIVREnabled then {
+		p1.setHovered, UseTimeHysteresisModuleResult2,
+		UseTimeHysteresisModuleResult2_2, UseTimeHysteresisModuleResult1, IsSpatial,
+		Flag
+	} else {
+		p1.setHovered,
+		UseTimeHysteresisModuleResult2,
+		UseTimeHysteresisModuleResult2_2,
+		UseTimeHysteresisModuleResult1
+	})
+	local UseResult1 = ReactModule.useCallback(function(_, Input) --[[ Line: 353 ]]
+		-- upvalues: Draggable (ref), UseTimeHysteresisModuleResult2_2 (copy), ChromeAnalyticsModule (upval), p1 (copy), UseRefResult1 (copy), UserInputService (upval), ShouldRejectMultiTouchModule (upval), ServiceModule (upval), ConstantsModule (upval)
+		if not Draggable then return end
+		if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
+			local Position = Input.Position
+			UseTimeHysteresisModuleResult2_2(true, true)
+			ChromeAnalyticsModule.default:onIconTouchBegan(p1.integration.id)
 			
-			if not var8.current then
-				var8.current = userInputService.InputChanged:Connect(function(p3, _)
-					-- upvalues: shouldRejectMultiTouchModule (copy), p2 (ref), serviceModule (copy), p1 (copy), var8 (copy), position (ref), constantsModule (copy), chromeAnalyticsModule (copy)
-					if shouldRejectMultiTouchModule(p2, p3) then return end
-					if serviceModule:isWindowOpen(p1.integration.id) or not var8.current then return end
-					if constantsModule.DRAG_MAGNITUDE_THRESHOLD < math.abs((position - p3.Position).Magnitude) then
-						chromeAnalyticsModule.default:onIconDrag(p1.integration.id)
-						serviceModule:storeChromeInteracted()
-						serviceModule:toggleWindow(p1.integration.id)
-						serviceModule:gesture(p1.integration.id, var8, p2)
+			if not UseRefResult1.current then
+				UseRefResult1.current = UserInputService.InputChanged:Connect(function(Input1, _) --[[ Line: 366 ]]
+					-- upvalues: ShouldRejectMultiTouchModule (upval), Input (copy), ServiceModule (upval), p1 (upval), UseRefResult1 (upval), Position (copy), ConstantsModule (upval), ChromeAnalyticsModule (upval)
+					if ShouldRejectMultiTouchModule(Input, Input1) then return end
+					if ServiceModule:isWindowOpen(p1.integration.id) or not UseRefResult1.current then return end
+					if ConstantsModule.DRAG_MAGNITUDE_THRESHOLD < math.abs((Position - Input1.Position).Magnitude) then
+						ChromeAnalyticsModule.default:onIconDrag(p1.integration.id)
+						ServiceModule:storeChromeInteracted()
+						ServiceModule:toggleWindow(p1.integration.id)
+						ServiceModule:gesture(p1.integration.id, UseRefResult1, Input)
 					end
 				end)
 			end
 		end
-	end, { draggable })
-	local var24 = reactModule.useCallback(function(_, p2)
-		-- upvalues: draggable (write), var18 (ref), var8 (ref), serviceModule (copy), p1 (ref)
-		if not draggable then return end
-		if p2.UserInputType == Enum.UserInputType.MouseButton1 or p2.UserInputType == Enum.UserInputType.Touch then
-			var18(false)
+	end, { Draggable })
+	local UseResult2 = ReactModule.useCallback(function(_, Input) --[[ Line: 392 ]]
+		-- upvalues: Draggable (ref), UseTimeHysteresisModuleResult2_2 (copy), UseRefResult1 (copy), ServiceModule (upval), p1 (copy)
+		if not Draggable then return end
+		if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
+			UseTimeHysteresisModuleResult2_2(false)
 			
-			if var8.current then
-				var8.current:Disconnect()
-				var8.current = nil
-				serviceModule:gesture(p1.integration.id, nil)
+			if UseRefResult1.current then
+				UseRefResult1.current:Disconnect()
+				UseRefResult1.current = nil
+				ServiceModule:gesture(p1.integration.id, nil)
 			end
 		end
-	end, { draggable })
+	end, { Draggable })
+	local NoUseTimeHysteresisModuleResult3: boolean = if UseTimeHysteresisModuleResult or UseTimeHysteresisModuleResult1 then not UseTimeHysteresisModuleResult3 else UseStateResult and not UseTimeHysteresisModuleResult3
 	
-	if not var4 and not var13 then
-		var21 = var15 and not var17
+	if IsInExperienceUIVREnabled and NoUseTimeHysteresisModuleResult3 and Flag then
+		NoUseTimeHysteresisModuleResult3 = false
 	end
-	if isInExperienceUIVREnabled and var21 and var20 then
-		var21 = false
-	end
-	logTooltipState(p1.integration.id, var21)
-	local var25 = if fFlagEnableConsoleExpControls then reactModule.useContext(var3) else nil
-	local var26 = reactModule.useCallback(function(p2)
-		-- upvalues: fFlagEnableConsoleExpControls (copy), serviceModule (copy), reactModule (copy), interactable (copy), constantsModule (copy), p1 (ref), var6 (write), var22 (ref), var7 (ref), fFlagUnibarMenuOpenHamburger (copy), fFlagUnibarMenuOpenSubmenu (copy), useCursor (copy), foundationModule (copy), var21 (write), secondaryAction (ref), var25 (ref), var23 (ref), var24 (ref), isInExperienceUIVREnabled (copy), var19 (ref), var20 (write), var18 (ref), var8 (ref)
-		return reactModule.createElement(interactable, {
-			Name = (if fFlagEnableConsoleExpControls then constantsModule.ICON_NAME_PREFIX else "IconHitArea_") .. p6.integration.id,
-			Size = var6,
+	logTooltipState(p1.integration.id, NoUseTimeHysteresisModuleResult3)
+	local UseContextResult = if FFlagEnableConsoleExpControls then ReactModule.useContext(MenuIconContextModule) else nil
+	local UseResult3 = ReactModule.useCallback(function(p2) --[[ Line: 420 ]]
+		-- upvalues: FFlagEnableConsoleExpControls (upval), ServiceModule (upval), ReactModule (upval), Interactable (upval), ConstantsModule (upval), p1 (copy), ICONHIGHLIGHTSIZE (ref), UseResult (copy), UseRefResult (copy), FFlagUnibarMenuOpenHamburger (upval), FFlagUnibarMenuOpenSubmenu (upval), UseCursorFunction (upval), FoundationModule (upval), NoUseTimeHysteresisModuleResult3 (ref), SecondaryAction (copy), UseContextResult (copy), UseResult1 (copy), UseResult2 (copy), IsInExperienceUIVREnabled (upval), IsSpatial (copy), Flag (ref), UseTimeHysteresisModuleResult2_2 (copy), UseRefResult1 (copy)
+		local Id = if FFlagEnableConsoleExpControls then ServiceModule:menuList():get()[1].id else nil
+		
+		return ReactModule.createElement(Interactable, {
+			Name = (if FFlagEnableConsoleExpControls then ConstantsModule.ICON_NAME_PREFIX else "IconHitArea_") .. p1.integration.id,
+			Size = ICONHIGHLIGHTSIZE,
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
-			onStateChanged = var22,
-			ref = var7,
-			SelectionOrder = if fFlagUnibarMenuOpenHamburger or fFlagUnibarMenuOpenSubmenu then p1.integration.order else 100 - p1.integration.order,
-			Position = p1.isCurrentlyOpenSubMenu:map(function(p3)
-				-- upvalues: fFlagEnableConsoleExpControls (copy)
-				return UDim2.new(0.5, 0, 0.5, if fFlagEnableConsoleExpControls or not p3 then 0 else 1)
+			onStateChanged = UseResult,
+			ref = UseRefResult,
+			SelectionOrder = if FFlagUnibarMenuOpenHamburger or FFlagUnibarMenuOpenSubmenu then p1.integration.order else 100 - p1.integration.order,
+			Position = p1.isCurrentlyOpenSubMenu:map(function(p3): UDim2 --[[ Line: 438 ]]
+				-- upvalues: FFlagEnableConsoleExpControls (upval)
+				return UDim2.new(0.5, 0, 0.5, if FFlagEnableConsoleExpControls or not p3 then 0 else 1)
 			end),
-			SelectionImageObject = useCursor(foundationModule.Enums.CursorType.SkinToneCircle),
+			SelectionImageObject = UseCursorFunction(FoundationModule.Enums.CursorType.SkinToneCircle),
 			SelectionGroup = true,
 			SelectionBehaviorUp = Enum.SelectionBehavior.Stop,
-			SelectionBehaviorDown = p1.isCurrentlyOpenSubMenu:map(function(p3)
-				-- upvalues: var21 (copy), secondaryAction (copy)
-				return if var21 and secondaryAction or p3 then Enum.SelectionBehavior.Escape else Enum.SelectionBehavior.Stop
+			SelectionBehaviorDown = p1.isCurrentlyOpenSubMenu:map(function(p3) --[[ Line: 444 ]]
+				-- upvalues: NoUseTimeHysteresisModuleResult3 (upval), SecondaryAction (upval)
+				return if NoUseTimeHysteresisModuleResult3 and SecondaryAction or p3 then Enum.SelectionBehavior.Escape else Enum.SelectionBehavior.Stop
 			end),
-			NextSelectionLeft = if fFlagEnableConsoleExpControls and p1.integration.id == (if fFlagEnableConsoleExpControls then serviceModule:menuList():get()[1].id else nil) then var25.menuIconRef else nil,
-			[reactModule.Change.AbsolutePosition] = p2,
-			[reactModule.Change.AbsoluteSize] = p2,
-			[reactModule.Event.InputBegan] = var23,
-			[reactModule.Event.InputEnded] = var24,
-			[reactModule.Event.Activated] = function()
-				-- upvalues: isInExperienceUIVREnabled (copy), var19 (copy), var20 (copy), serviceModule (copy), var18 (copy), p1 (copy), var8 (copy)
-				if isInExperienceUIVREnabled and var19 then
-					if var20 then return end
-					serviceModule:onTriggerVRToggleButton():fire(true)
+			NextSelectionLeft = if FFlagEnableConsoleExpControls and p1.integration.id == Id then UseContextResult.menuIconRef else nil,
+			[ReactModule.Change.AbsolutePosition] = p2,
+			[ReactModule.Change.AbsoluteSize] = p2,
+			[ReactModule.Event.InputBegan] = UseResult1,
+			[ReactModule.Event.InputEnded] = UseResult2,
+			[ReactModule.Event.Activated] = function() --[[ Line: 458 ]]
+				-- upvalues: IsInExperienceUIVREnabled (upval), IsSpatial (upval), Flag (upval), ServiceModule (upval), UseTimeHysteresisModuleResult2_2 (upval), p1 (upval), UseRefResult1 (upval)
+				if IsInExperienceUIVREnabled and IsSpatial then
+					if Flag then return end
+					ServiceModule:onTriggerVRToggleButton():fire(true)
 				end
-				var18(true, true)
+				UseTimeHysteresisModuleResult2_2(true, true)
 				p1.integration.activated()
 				
-				if var8.current then
-					var8.current:Disconnect()
-					var8.current = nil
-					serviceModule:gesture(p1.integration.id, nil)
+				if UseRefResult1.current then
+					UseRefResult1.current:Disconnect()
+					UseRefResult1.current = nil
+					ServiceModule:gesture(p1.integration.id, nil)
 				end
 			end
 		}, {
-			corner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) })
+			corner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(1, 0) })
 		})
 	end, {
-		var22, var5, var18, var23, var24, p1.isCurrentlyOpenSubMenu, var21,
-		secondaryAction, if isInExperienceUIVREnabled then var20 else nil,
-		if fFlagEnableConsoleExpControls then var25.menuIconRef else nil
+		UseResult, UseTimeHysteresisModuleResult2, UseTimeHysteresisModuleResult2_2,
+		UseResult1, UseResult2, p1.isCurrentlyOpenSubMenu,
+		NoUseTimeHysteresisModuleResult3, SecondaryAction,
+		if IsInExperienceUIVREnabled then Flag else nil,
+		if FFlagEnableConsoleExpControls then UseContextResult.menuIconRef else nil
 	})
-	local var27 = reactModule.useRef(nil)
-	local var28 = reactModule.useCallback(function(p2)
-		-- upvalues: var27 (ref), var14 (ref)
-		local mouseEnterConnection = nil
-		local mouseLeaveConnection = nil
-		local destroyingConnection = nil
+	local UseRefResult2 = ReactModule.useRef(nil)
+	local UseResult4 = ReactModule.useCallback(function(Frame: Frame) --[[ Line: 495 ]]
+		-- upvalues: UseRefResult2 (copy), UseTimeHysteresisModuleResult2_1 (copy)
+		local MouseEnterConnection = nil
+		local MouseLeaveConnection = nil
+		local DestroyingConnection = nil
 		
-		local var29 = function()
-			-- upvalues: mouseEnterConnection (write), mouseLeaveConnection (write), destroyingConnection (write)
-			if mouseEnterConnection then
-				mouseEnterConnection:disconnect()
-				mouseEnterConnection = nil
+		local function v100() --[[ Line: 502 ]]
+			-- upvalues: MouseEnterConnection (ref), MouseLeaveConnection (ref), DestroyingConnection (ref)
+			if MouseEnterConnection then
+				MouseEnterConnection:disconnect()
+				MouseEnterConnection = nil
 			end
-			if mouseLeaveConnection then
-				mouseLeaveConnection:disconnect()
-				mouseLeaveConnection = nil
+			if MouseLeaveConnection then
+				MouseLeaveConnection:disconnect()
+				MouseLeaveConnection = nil
 			end
-			if destroyingConnection then
-				destroyingConnection:disconnect()
-				destroyingConnection = nil
+			if DestroyingConnection then
+				DestroyingConnection:disconnect()
+				DestroyingConnection = nil
 			end
 		end
 		
-		if p2 ~= var27.current then
-			pcall(var29)
+		if Frame ~= UseRefResult2.current then
+			pcall(v100)
 			
-			if p2 then
-				mouseEnterConnection = p2.MouseEnter:Connect(function()
-					-- upvalues: var14 (copy)
-					var14(true, true)
+			if Frame then
+				MouseEnterConnection = Frame.MouseEnter:Connect(function() --[[ Line: 520 ]]
+					-- upvalues: UseTimeHysteresisModuleResult2_1 (upval)
+					UseTimeHysteresisModuleResult2_1(true, true)
 				end)
-				mouseLeaveConnection = p2.MouseLeave:Connect(function()
-					-- upvalues: var14 (copy)
-					var14(false)
+				MouseLeaveConnection = Frame.MouseLeave:Connect(function() --[[ Line: 523 ]]
+					-- upvalues: UseTimeHysteresisModuleResult2_1 (upval)
+					UseTimeHysteresisModuleResult2_1(false)
 				end)
-				destroyingConnection = p2.Destroying:Connect(function()
-					-- upvalues: var14 (copy)
-					var14(false)
+				DestroyingConnection = Frame.Destroying:Connect(function() --[[ Line: 526 ]]
+					-- upvalues: UseTimeHysteresisModuleResult2_1 (upval)
+					UseTimeHysteresisModuleResult2_1(false)
 				end)
 			end
-			var27.current = p2
+			UseRefResult2.current = Frame
 		end
-	end, { var14 })
-	local var29 = if secondaryAction then {
-		text = secondaryAction.label,
-		onStateChanged = function(_, p2)
-			-- upvalues: controlState (copy), var16 (ref)
-			if p2 == controlState.Selected then
-				var16(true)
+	end, { UseTimeHysteresisModuleResult2_1 })
+	local Config = if SecondaryAction then {
+		text = SecondaryAction.label,
+		onStateChanged = function(_, p2) --[[ Line: 537 ]]
+			-- upvalues: ControlState (upval), UseStateResult2 (copy)
+			if p2 == ControlState.Selected then
+				UseStateResult2(true)
 				
 				return
+			else
+				UseStateResult2(false)
 			end
-			var16(false)
 		end,
-		onActivated = function()
-			-- upvalues: secondaryAction (ref), p1 (ref)
-			secondaryAction.activated(p1.integration)
+		onActivated = function() --[[ Line: 544 ]]
+			-- upvalues: SecondaryAction (copy), p1 (copy)
+			SecondaryAction.activated(p1.integration)
 		end,
-		NextSelectionUp = var7,
-		NextSelectionLeft = var7,
-		NextSelectionRight = var7,
-		NextSelectionDown = var7
+		NextSelectionUp = UseRefResult,
+		NextSelectionLeft = UseRefResult,
+		NextSelectionRight = UseRefResult,
+		NextSelectionDown = UseRefResult
 	} else nil
 	
-	if not isInExperienceUIVREnabled or not var19 then
-		return withTooltip({
+	if IsInExperienceUIVREnabled and IsSpatial then
+		local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(Vector2.zero)
+		local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(Vector2.zero)
+		
+		return ReactModule.createElement(ReactModule.Fragment, nil, {
+			VRSpatialTooltip = if NoUseTimeHysteresisModuleResult3 and Panel3DInSpatialUI then ReactModule.createElement(Panel3DInSpatialUI, {
+				panelType = PanelType.ToolTipsContainer,
+				renderFunction = function(p2) --[[ Line: 570 ]]
+					-- upvalues: UseBindingResult (copy), UseBindingResult1 (copy), SPATIALTOOLTIPSPACING (upval), ReactModule (upval), TooltipCallout (upval), p1 (copy), TooltipOrientation (upval), Config (copy), SecondaryAction (copy), UseResult4 (copy)
+					return ReactModule.createElement(TooltipCallout, {
+						distanceOffset = 0,
+						textAlignment = Enum.TextXAlignment.Center,
+						headerText = p1.integration.integration.label,
+						orientation = TooltipOrientation.Top,
+						triggerPointCenter = Vector2.new(UseBindingResult:getValue().X + UseBindingResult1:getValue().X / 2, p2.Y - SPATIALTOOLTIPSPACING),
+						contentOffsetVector = Vector2.zero,
+						triggerPointRadius = Vector2.zero,
+						buttonProps = Config,
+						ref = if SecondaryAction then UseResult4 else nil
+					})
+				end
+			}) else nil,
+			UseResult3((ReactModule.useCallback(function(Frame: Frame) --[[ Line: 558 ]]
+				-- upvalues: UseBindingResult2 (copy), UseBindingResult2_1 (copy)
+				UseBindingResult2(Frame.AbsolutePosition)
+				UseBindingResult2_1(Frame.AbsoluteSize)
+			end, { UseBindingResult2, UseBindingResult2_1 })))
+		})
+	else
+		return WithTooltipFunction({
 			headerText = p1.integration.integration.label,
 			hotkeyCodes = p1.integration.integration.hotkeyCodes,
 			textAlignment = Enum.TextXAlignment.Left,
-			buttonProps = var29,
-			ref = if secondaryAction then var28 else nil
+			buttonProps = Config,
+			ref = if SecondaryAction then UseResult4 else nil
 		}, {
 			DisplayOrder = 10,
-			active = var21,
-			guiTarget = coreGuiService
-		}, var26)
+			active = NoUseTimeHysteresisModuleResult3,
+			guiTarget = CoreGui
+		}, UseResult3)
 	end
-	local var30, var31 = reactModule.useBinding(Vector2.zero)
-	local var32, var33 = reactModule.useBinding(Vector2.zero)
-	
-	return reactModule.createElement(reactModule.Fragment, nil, {
-		VRSpatialTooltip = if var21 and panel3DInSpatialUI then reactModule.createElement(panel3DInSpatialUI, {
-			panelType = panelType.ToolTipsContainer,
-			renderFunction = function(p2)
-				-- upvalues: var30 (ref), var32 (ref), SPATIAL_TOOLTIP_SPACING (copy), reactModule (copy), tooltipCallout (copy), p1 (ref), tooltipOrientation (copy), var29 (ref), secondaryAction (ref), var28 (ref)
-				return reactModule.createElement(tooltipCallout, {
-					distanceOffset = 0,
-					textAlignment = Enum.TextXAlignment.Center,
-					headerText = p1.integration.integration.label,
-					orientation = tooltipOrientation.Top,
-					triggerPointCenter = Vector2.new(var30:getValue().X + var32:getValue().X / 2, p2.Y - SPATIAL_TOOLTIP_SPACING),
-					contentOffsetVector = Vector2.zero,
-					triggerPointRadius = Vector2.zero,
-					buttonProps = var29,
-					ref = if secondaryAction then var28 else nil
-				})
-			end
-		}) else nil,
-		var26(reactModule.useCallback(function(p2)
-			-- upvalues: var31 (ref), var33 (ref)
-			var31(p2.AbsolutePosition)
-			var33(p2.AbsoluteSize)
-		end, { var31, var33 }))
-	})
 end
 
-function IconHost(p1)
-	-- upvalues: reactModule (ref), useStyle (ref), fFlagTokenizeUnibarConstantsWithStyleProvider (ref), unibarStyle (ref), constantsModule (ref), useMappedObservableValueBindingModule (ref), serviceModule (ref), chatNotificationBadgeModule (ref), fFlagChromeNineDotActivityIndicator (ref), nineDotNotificationBadgeModule (ref), fFlagEnableConsoleExpControls (ref), fFlagEnableWhatsNew (ref), var1 (ref)
-	if not p1.integration or not p1.integration.component then
+function IconHost(IconHostProps) --[[ Line: 609 ]]
+	-- upvalues: ReactModule (copy), UseStyleFunction (copy), FFlagTokenizeUnibarConstantsWithStyleProvider (copy), UnibarStyle (copy), ConstantsModule (copy), UseMappedObservableValueBindingModule (copy), ServiceModule (copy), ChatNotificationBadgeModule (copy), FFlagChromeNineDotActivityIndicator (copy), NineDotNotificationBadgeModule (copy), FFlagEnableConsoleExpControls (copy), FFlagEnableWhatsNew (copy), WhatsNewAnchor (copy)
+	if not IconHostProps.integration or not IconHostProps.integration.component then
 		warn("IconHost has no component to render")
 	end
-	local var4, var5 = reactModule.useBinding(false)
-	local var6, var7 = reactModule.useBinding(true)
-	local _ = nil
-	local backgroundOnHover = useStyle().Theme.BackgroundOnHover
-	local var8 = if fFlagTokenizeUnibarConstantsWithStyleProvider then unibarStyle.use().ICON_CELL_WIDTH else constantsModule.ICON_CELL_WIDTH
-	local var9 = useMappedObservableValueBindingModule(serviceModule:currentSubMenu(), function(p2)
-		-- upvalues: p1 (ref)
-		return p2 == p1.integration.id
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(false)
+	local UseBindingResult1, UseBindingResult2_1 = ReactModule.useBinding(true)
+	local BackgroundOnHover = UseStyleFunction().Theme.BackgroundOnHover
+	local ICONCELLWIDTH = if FFlagTokenizeUnibarConstantsWithStyleProvider then UnibarStyle.use().ICON_CELL_WIDTH else ConstantsModule.ICON_CELL_WIDTH
+	local UseMappedObservableValueBindingModuleResult = UseMappedObservableValueBindingModule(ServiceModule:currentSubMenu(), function(Id): boolean --[[ Line: 632 ]]
+		-- upvalues: IconHostProps (copy)
+		return Id == IconHostProps.integration.id
 	end)
 	local list = {
-		reactModule.createElement("Frame", {
+		ReactModule.createElement("Frame", {
 			Name = "IntegrationIconFrame",
 			BorderSizePixel = 0,
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 1, 0),
-			Visible = var6
+			Visible = UseBindingResult1
 		}, {
-			IntegrationIcon = p1.integration and (p1.integration.component and (p1.integration.component(p1) or nil)),
-			UIListLayout = reactModule.createElement("UIListLayout", {
+			IntegrationIcon = IconHostProps.integration and IconHostProps.integration.component and IconHostProps.integration.component(IconHostProps) or nil,
+			UIListLayout = ReactModule.createElement("UIListLayout", {
 				FillDirection = Enum.FillDirection.Horizontal,
 				VerticalAlignment = Enum.VerticalAlignment.Center,
 				HorizontalAlignment = Enum.HorizontalAlignment.Center
 			})
 		}),
-		if p1.integration.integration.flashNotificationSource then reactModule.createElement(NotificationIndicator, { integration = p1.integration, setIconVisible = var7 }) else nil,
-		reactModule.createElement(HighlightCircle, {
+		if IconHostProps.integration.integration.flashNotificationSource then ReactModule.createElement(NotificationIndicator, {
+			integration = IconHostProps.integration,
+			setIconVisible = UseBindingResult2_1
+		}) else nil,
+		ReactModule.createElement(HighlightCircle, {
 			name = "SelectedHighlighter",
-			color = backgroundOnHover,
-			visible = var9
+			color = BackgroundOnHover,
+			visible = UseMappedObservableValueBindingModuleResult
 		}),
-		reactModule.createElement(HighlightCircle, {
+		ReactModule.createElement(HighlightCircle, {
 			name = "Highlighter",
-			color = backgroundOnHover,
-			visible = var4
+			color = BackgroundOnHover,
+			visible = UseBindingResult
 		}),
-		if p1.integration.id == "chat" then reactModule.createElement(chatNotificationBadgeModule, {
-			iconHostProps = p1,
+		if IconHostProps.integration.id == "chat" then ReactModule.createElement(ChatNotificationBadgeModule, {
+			iconHostProps = IconHostProps,
 			NotificationBadge = NotificationBadge
-		}) elseif fFlagChromeNineDotActivityIndicator and p1.integration.id == "nine_dot" then reactModule.createElement(nineDotNotificationBadgeModule, {
-			iconHostProps = p1,
+		}) elseif FFlagChromeNineDotActivityIndicator and IconHostProps.integration.id == "nine_dot" then ReactModule.createElement(NineDotNotificationBadgeModule, {
+			iconHostProps = IconHostProps,
 			NotificationBadge = NotificationBadge
-		}) else reactModule.createElement(NotificationBadge, p1),
-		if p1.disableButtonBehaviors then nil else reactModule.createElement(TooltipButton, {
-			integration = p1.integration,
-			setHovered = var5,
-			isCurrentlyOpenSubMenu = var9
+		}) else ReactModule.createElement(NotificationBadge, IconHostProps),
+		if IconHostProps.disableButtonBehaviors then nil else ReactModule.createElement(TooltipButton, {
+			integration = IconHostProps.integration,
+			setHovered = UseBindingResult2,
+			isCurrentlyOpenSubMenu = UseMappedObservableValueBindingModuleResult
 		})
 	}
-	local t = {
+	local config = {
 		BorderSizePixel = 0,
 		BackgroundTransparency = 1,
-		Size = UDim2.new(0, var8, 0, var8),
-		LayoutOrder = p1.integration.order,
-		Position = p1.position,
-		Visible = p1.visible,
-		ZIndex = if fFlagEnableConsoleExpControls then nil else p1.integration.order
+		Size = UDim2.new(0, ICONCELLWIDTH, 0, ICONCELLWIDTH),
+		LayoutOrder = IconHostProps.integration.order,
+		Position = IconHostProps.position,
+		Visible = IconHostProps.visible,
+		ZIndex = if FFlagEnableConsoleExpControls then nil else IconHostProps.integration.order
 	}
 	
-	return if fFlagEnableWhatsNew then reactModule.createElement("Frame", t, {
-		WhatsNewAnchor = reactModule.createElement(var1, { tag = "size-full", anchorId = p1.integration.id }, list)
-	}) else reactModule.createElement("Frame", t, list)
+	return if FFlagEnableWhatsNew then ReactModule.createElement("Frame", config, {
+		WhatsNewAnchor = ReactModule.createElement(WhatsNewAnchor, {
+			tag = "size-full",
+			anchorId = IconHostProps.integration.id
+		}, list)
+	}) else ReactModule.createElement("Frame", config, list)
 end
 
 return IconHost

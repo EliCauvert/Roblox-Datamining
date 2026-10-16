@@ -1,8 +1,8 @@
-﻿local parent = script.Parent
-local inputTypeModule = require(parent.Parent.Enums.InputType)
-local useInputTypeModule = require(parent.useInputType)
+﻿local Parent = script.Parent
+local InputTypeModule = require(Parent.Parent.Enums.InputType)
+local UseInputTypeModule = require(Parent.useInputType)
 
-return function()
-	-- upvalues: useInputTypeModule (ref), inputTypeModule (ref)
-	return useInputTypeModule() == inputTypeModule.Gamepad
+return function(): boolean --[[ Line: 11 | Named "useIsGamepad" ]]
+	-- upvalues: UseInputTypeModule (copy), InputTypeModule (copy)
+	return UseInputTypeModule() == InputTypeModule.Gamepad
 end

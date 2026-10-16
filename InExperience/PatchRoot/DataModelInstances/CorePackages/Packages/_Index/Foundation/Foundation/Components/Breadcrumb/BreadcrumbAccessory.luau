@@ -1,45 +1,45 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local parent = foundation.Parent
-local reactModule = require(parent.React)
-local uiblox = require(parent.BuilderIcons).Migration.uiblox
-local avatarIconModule = require(foundation.Components.AvatarIcon)
-local iconModule = require(foundation.Components.Icon)
-local imageModule = require(foundation.Components.Image)
-local _ = require(foundation.Components.Types)
-local iconMigrationUtilsModule = require(foundation.Utility.iconMigrationUtils)
-local isMigrated = iconMigrationUtilsModule.isMigrated
-local isBuilderOrMigratedIcon = iconMigrationUtilsModule.isBuilderOrMigratedIcon
-local accessoryTypeModule = require(foundation.Enums.AccessoryType)
-local _ = require(foundation.Enums.AvatarIconSize)
-local _ = require(foundation.Enums.IconSize)
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local Parent = Foundation.Parent
+local ReactModule = require(Parent.React)
+local Uiblox = require(Parent.BuilderIcons).Migration.uiblox
+local AvatarIconModule = require(Foundation.Components.AvatarIcon)
+local IconModule = require(Foundation.Components.Icon)
+local ImageModule = require(Foundation.Components.Image)
+local _ = require(Foundation.Components.Types)
+local IconMigrationUtilsModule = require(Foundation.Utility.iconMigrationUtils)
+local IsMigratedFunction = IconMigrationUtilsModule.isMigrated
+local IsBuilderOrMigratedIconFunction = IconMigrationUtilsModule.isBuilderOrMigratedIcon
+local AccessoryTypeModule = require(Foundation.Enums.AccessoryType)
+local _ = require(Foundation.Enums.AvatarIconSize)
+local _ = require(Foundation.Enums.IconSize)
 
-return reactModule.memo(function(p1)
-	-- upvalues: accessoryTypeModule (ref), reactModule (ref), avatarIconModule (ref), isBuilderOrMigratedIcon (ref), iconModule (ref), isMigrated (ref), uiblox (ref), imageModule (ref)
-	local variant = p1.variant
-	local var1 = if type(p1.config) == "string" then { iconName = p1.config } else p1.config
+return ReactModule.memo(function(Frame: Frame) --[[ Line: 46 | Named "BreadcrumbAccessory" ]]
+	-- upvalues: AccessoryTypeModule (copy), ReactModule (copy), AvatarIconModule (copy), IsBuilderOrMigratedIconFunction (copy), IconModule (copy), IsMigratedFunction (copy), Uiblox (copy), ImageModule (copy)
+	local Variant = Frame.variant
+	local Config = if type(Frame.config) == "string" then { iconName = Frame.config } else Frame.config
 	
-	if var1.type == accessoryTypeModule.Avatar then
-		return reactModule.createElement(avatarIconModule, {
-			userId = var1.userId,
-			size = variant.avatarSize,
-			LayoutOrder = p1.LayoutOrder,
-			testId = p1.testId
+	if Config.type == AccessoryTypeModule.Avatar then
+		return ReactModule.createElement(AvatarIconModule, {
+			userId = Config.userId,
+			size = Variant.avatarSize,
+			LayoutOrder = Frame.LayoutOrder,
+			testId = Frame.testId
+		})
+	else
+		local IconName = Config.iconName
+		
+		return if IsBuilderOrMigratedIconFunction(IconName) then ReactModule.createElement(IconModule, {
+			name = if IsMigratedFunction(IconName) then Uiblox[IconName].name else IconName,
+			variant = if IsMigratedFunction(IconName) then Uiblox[IconName].variant else Config.iconVariant,
+			size = Variant.iconSize,
+			style = Variant.style,
+			LayoutOrder = Frame.LayoutOrder,
+			testId = Frame.testId
+		}) else ReactModule.createElement(ImageModule, {
+			Image = IconName,
+			tag = Variant.tag,
+			LayoutOrder = Frame.LayoutOrder,
+			testId = Frame.testId
 		})
 	end
-	local iconName = var1.iconName
-	
-	return if isBuilderOrMigratedIcon(iconName) then reactModule.createElement(iconModule, {
-		name = if isMigrated(iconName) then uiblox[iconName].name else iconName,
-		variant = if isMigrated(iconName) then uiblox[iconName].variant else var1.iconVariant,
-		size = variant.iconSize,
-		style = variant.style,
-		LayoutOrder = p1.LayoutOrder,
-		testId = p1.testId
-	}) else reactModule.createElement(imageModule, {
-		Image = iconName,
-		Size = variant.size,
-		cornerRadius = variant.cornerRadius,
-		LayoutOrder = p1.LayoutOrder,
-		testId = p1.testId
-	})
 end)

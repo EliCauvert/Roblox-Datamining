@@ -1,38 +1,39 @@
-﻿local getFStringPioneerLaunchPlaceId = require(script:FindFirstAncestor("PioneerUtils").Parent.SharedFlags).GetFStringPioneerLaunchPlaceId
-local pioneerDataModelApiEngineFeature = game:GetEngineFeature("PioneerDataModelApi")
-local t = {
-	isPioneerApp = function()
-		-- upvalues: pioneerDataModelApiEngineFeature (ref)
-		return if pioneerDataModelApiEngineFeature then game:IsPioneerApp() == true else false
+﻿local GetFStringPioneerLaunchPlaceIdFunction = require(script:FindFirstAncestor("PioneerUtils").Parent.SharedFlags).GetFStringPioneerLaunchPlaceId
+local PioneerDataModelApiEngineFeature = game:GetEngineFeature("PioneerDataModelApi")
+local PioneerInfoModule = {
+	isPioneerApp = function(): boolean --[[ Line: 12 ]]
+		-- upvalues: PioneerDataModelApiEngineFeature (copy)
+		return if PioneerDataModelApiEngineFeature then game:IsPioneerApp() == true else false
 	end,
-	getPioneerSource = function()
-		-- upvalues: pioneerDataModelApiEngineFeature (ref)
-		return if pioneerDataModelApiEngineFeature then game:GetPioneerSource() else nil
+	getPioneerSource = function() --[[ Line: 20 ]]
+		-- upvalues: PioneerDataModelApiEngineFeature (copy)
+		return if PioneerDataModelApiEngineFeature then game:GetPioneerSource() else nil
 	end
 }
 
-function t.isDaveyBazooka()
-	-- upvalues: t (ref)
-	local ok, status = pcall(function()
-		-- upvalues: t (copy)
-		return t.getPioneerSource() == Enum.PioneerSource.DaveyBazooka
+function PioneerInfoModule.isDaveyBazooka() --[[ Line: 28 ]]
+	-- upvalues: PioneerInfoModule (copy)
+	local Success, Result = pcall(function(): boolean --[[ Line: 29 ]]
+		-- upvalues: PioneerInfoModule (upval)
+		return PioneerInfoModule.getPioneerSource() == Enum.PioneerSource.DaveyBazooka
 	end)
 	
-	return ok and status
+	return Success and Result
 end
 
-function t.getPioneerRootPlaceId()
-	-- upvalues: getFStringPioneerLaunchPlaceId (ref), pioneerDataModelApiEngineFeature (ref)
-	local var1 = getFStringPioneerLaunchPlaceId()
+function PioneerInfoModule.getPioneerRootPlaceId() --[[ Line: 35 ]]
+	-- upvalues: GetFStringPioneerLaunchPlaceIdFunction (copy), PioneerDataModelApiEngineFeature (copy)
+	local FStringPioneerLaunchPlaceId = GetFStringPioneerLaunchPlaceIdFunction()
 	
-	if var1 then
-		return var1
-	elseif not pioneerDataModelApiEngineFeature then
+	if FStringPioneerLaunchPlaceId then
+		return FStringPioneerLaunchPlaceId
+	elseif PioneerDataModelApiEngineFeature then
+		local PioneerRootPlaceId: number = game:GetPioneerRootPlaceId()
+		
+		return if type(PioneerRootPlaceId) == "number" and PioneerRootPlaceId > 0 then PioneerRootPlaceId else nil
+	else
 		return nil
 	end
-	local pioneerRootPlaceId = game:GetPioneerRootPlaceId()
-	
-	return if type(pioneerRootPlaceId) == "number" and pioneerRootPlaceId > 0 then pioneerRootPlaceId else nil
 end
 
-return t
+return PioneerInfoModule

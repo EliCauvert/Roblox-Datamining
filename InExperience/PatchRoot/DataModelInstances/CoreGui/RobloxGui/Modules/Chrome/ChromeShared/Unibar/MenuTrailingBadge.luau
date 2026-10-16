@@ -1,124 +1,113 @@
-﻿local chromeShared = script:FindFirstAncestor("ChromeShared")
-local corePackagesService = game:GetService("CorePackages")
-local reactModule = require(corePackagesService.Packages.React)
-local foundationModule = require(corePackagesService.Packages.Foundation)
-local badge = foundationModule.Badge
-local view = foundationModule.View
-local badgeVariant = foundationModule.Enums.BadgeVariant
-local badgeShape = foundationModule.Enums.BadgeShape
-local signalsModule = require(corePackagesService.Packages.Signals)
-local signalsReactModule = require(corePackagesService.Packages.SignalsReact)
-local useLocalization = require(corePackagesService.Workspace.Packages.Localization).Hooks.useLocalization
-local fFlagEnableCustomTextInMenuTrailingBadge = require(corePackagesService.Workspace.Packages.SharedFlags).FFlagEnableCustomTextInMenuTrailingBadge
-local serviceModule = require(chromeShared.Service)
-local localStoreModule = require(chromeShared.Service.LocalStore)
-local _ = require(corePackagesService.Workspace.Packages.Chrome)
-local var1 = signalsModule.createSignal(nil)
+﻿local ChromeShared = script:FindFirstAncestor("ChromeShared")
+local CorePackages = game:GetService("CorePackages")
+local ReactModule = require(CorePackages.Packages.React)
+local FoundationModule = require(CorePackages.Packages.Foundation)
+local Badge = FoundationModule.Badge
+local View = FoundationModule.View
+local BadgeVariant = FoundationModule.Enums.BadgeVariant
+local BadgeShape = FoundationModule.Enums.BadgeShape
+local SignalsReactModule = require(CorePackages.Packages.SignalsReact)
+local UseLocalizationFunction = require(CorePackages.Workspace.Packages.Localization).Hooks.useLocalization
+local FFlagEnableCustomTextInMenuTrailingBadge = require(CorePackages.Workspace.Packages.SharedFlags).FFlagEnableCustomTextInMenuTrailingBadge
+local ServiceModule = require(ChromeShared.Service)
+local LocalStoreModule = require(ChromeShared.Service.LocalStore)
+local _ = require(CorePackages.Workspace.Packages.Chrome)
+local Signal = require(CorePackages.Packages.Signals).createSignal(nil)
 local t = {}
 
-local function _(p1, p2)
-	-- upvalues: t (ref), localStoreModule (ref)
+local function _(p1, p2): boolean --[[ Line: 81 | Named "hasBeenDismissed" ]]
+	-- upvalues: t (copy), LocalStoreModule (copy)
 	if t[p1] then
 		return true
 	end
-	local maxViewCount = p2.maxViewCount
+	local MaxViewCount: number = p2.maxViewCount
 	
-	if maxViewCount <= 0 then
+	if MaxViewCount <= 0 then
 		return true
+	else
+		local Value = LocalStoreModule.getValue(p2.localStorageKey)
+		
+		return MaxViewCount <= (if type(Value) == "number" then Value else 0)
 	end
-	local value = localStoreModule.getValue(p2.localStorageKey)
-	
-	return maxViewCount <= (if type(value) == "number" then value else 0)
 end
 
-local _ = function(p1)
-	-- upvalues: localStoreModule (ref)
-	if p1.maxViewCount <= 0 then
+local _ = function(p1) --[[ Line: 99 | Named "recordView" ]]
+	-- upvalues: LocalStoreModule (copy)
+	if p1.maxViewCount > 0 then
+		local Value = LocalStoreModule.getValue(p1.localStorageKey)
+		LocalStoreModule.storeForLocalPlayer(p1.localStorageKey, (if type(Value) == "number" then Value else 0) + 1)
+		
 		return
 	end
-	local value = localStoreModule.getValue(p1.localStorageKey)
-	localStoreModule.storeForLocalPlayer(p1.localStorageKey, (if type(value) == "number" then value else 0) + 1)
 end
 
-local function renderBadge(p1, p2)
-	-- upvalues: reactModule (ref), view (ref), badge (ref), badgeVariant (ref), badgeShape (ref)
-	return reactModule.createElement(view, { tag = "auto-xy", LayoutOrder = p2 }, {
-		Badge = reactModule.createElement(badge, {
-			text = p1,
-			variant = badgeVariant.Emphasis,
-			shape = badgeShape.Box
+local function renderBadge(Text, LayoutOrder) --[[ Line: 108 ]]
+	-- upvalues: ReactModule (copy), View (copy), Badge (copy), BadgeVariant (copy), BadgeShape (copy)
+	return ReactModule.createElement(View, { tag = "auto-xy", LayoutOrder = LayoutOrder }, {
+		Badge = ReactModule.createElement(Badge, {
+			text = Text,
+			variant = BadgeVariant.Emphasis,
+			shape = BadgeShape.Box
 		})
 	})
 end
 
-return function(p1)
-	-- upvalues: fFlagEnableCustomTextInMenuTrailingBadge (ref), signalsReactModule (ref), var1 (ref), reactModule (ref), t (ref), localStoreModule (ref), useLocalization (ref), serviceModule (ref), renderBadge (ref)
-	local useSignalState
-	local integrationId = p1.integrationId
-	local config = p1.config
-	
-	if fFlagEnableCustomTextInMenuTrailingBadge then
-		useSignalState = signalsReactModule.useSignalState
-		useSignalState = useSignalState(config.customText or var1)
-	else
-		useSignalState = nil
-	end
-	local var2, var3 = reactModule.useState(function()
-		-- upvalues: integrationId (ref), config (ref), t (copy), localStoreModule (copy), useSignalState (ref)
-		local var4
-		local var5 = config
-		
-		if t[integrationId] then
-			var4 = true
+return function(p1) --[[ Line: 121 | Named "MenuTrailingBadge" ]]
+	-- upvalues: FFlagEnableCustomTextInMenuTrailingBadge (copy), SignalsReactModule (copy), Signal (copy), ReactModule (copy), t (copy), LocalStoreModule (copy), UseLocalizationFunction (copy), ServiceModule (copy), renderBadge (copy)
+	local IntegrationId = p1.integrationId
+	local Config = p1.config
+	local UseSignalStateResult = if FFlagEnableCustomTextInMenuTrailingBadge then SignalsReactModule.useSignalState(Config.customText or Signal) else nil
+	local UseStateResult, UseStateResult2 = ReactModule.useState(function(): boolean --[[ Line: 141 ]]
+		-- upvalues: IntegrationId (copy), Config (copy), t (upval), LocalStoreModule (upval), UseSignalStateResult (copy)
+		local Flag = nil
+		if t[IntegrationId] then
+			Flag = true
 		else
-			local maxViewCount = var5.maxViewCount
+			local MaxViewCount: number = Config.maxViewCount
 			
-			if maxViewCount <= 0 then
-				var4 = true
+			if MaxViewCount <= 0 then
+				Flag = true
 			else
-				local value = localStoreModule.getValue(var5.localStorageKey)
-				var4 = maxViewCount <= (if type(value) == "number" then value else 0)
+				local Value = LocalStoreModule.getValue(Config.localStorageKey)
+				Flag = MaxViewCount <= (if type(Value) == "number" then Value else 0)
 			end
 		end
-		local var6 = not var4
+		local NoFlag = not Flag
 		
-		if var6 and useSignalState == nil then
-			local var7 = config
-			
-			if var7.maxViewCount <= 0 then
-				return var6
+		if NoFlag and UseSignalStateResult == nil then
+			if Config.maxViewCount <= 0 then
+				return NoFlag
 			end
-			local value = localStoreModule.getValue(var7.localStorageKey)
-			localStoreModule.storeForLocalPlayer(var7.localStorageKey, (if type(value) == "number" then value else 0) + 1)
+			local Value = LocalStoreModule.getValue(Config.localStorageKey)
+			LocalStoreModule.storeForLocalPlayer(Config.localStorageKey, (if type(Value) == "number" then Value else 0) + 1)
 		end
-		return var6
+		return NoFlag
 	end)
-	local var4 = useLocalization({ text = "Feature.Catalog.Label.New" })
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref), serviceModule (copy), integrationId (ref), t (copy), localStoreModule (copy), config (ref), var3 (ref)
-		if var2 then
-			local var5 = serviceModule:onIntegrationActivated():connect(function(p2)
-				-- upvalues: integrationId (copy), t (copy), localStoreModule (copy), config (copy), var3 (copy)
-				if p2 == integrationId then
-					t[integrationId] = true
-					localStoreModule.storeForLocalPlayer(config.localStorageKey, config.maxViewCount)
-					var3(false)
-					
-					return
-				end
-			end)
-			
-			return function()
-				-- upvalues: var5 (ref)
-				var5:disconnect()
+	local FeatureCatalogLabelNew = UseLocalizationFunction({ text = "Feature.Catalog.Label.New" })
+	ReactModule.useEffect(function() --[[ Line: 155 ]]
+		-- upvalues: UseStateResult (copy), ServiceModule (upval), IntegrationId (copy), t (upval), LocalStoreModule (upval), Config (copy), UseStateResult2 (copy)
+		if not UseStateResult then return end
+		local Connection = ServiceModule:onIntegrationActivated():connect(function(IntegrationId1) --[[ Line: 160 ]]
+			-- upvalues: IntegrationId (upval), t (upval), LocalStoreModule (upval), Config (upval), UseStateResult2 (upval)
+			if IntegrationId1 == IntegrationId then
+				t[IntegrationId] = true
+				LocalStoreModule.storeForLocalPlayer(Config.localStorageKey, Config.maxViewCount)
+				UseStateResult2(false)
+				
+				return
 			end
+		end)
+		
+		return function() --[[ Line: 169 ]]
+			-- upvalues: Connection (copy)
+			Connection:disconnect()
 		end
 	end, {
-		integrationId,
-		config.localStorageKey,
-		config.maxViewCount,
-		var2
+		IntegrationId,
+		Config.localStorageKey,
+		Config.maxViewCount,
+		UseStateResult
 	})
 	
-	return if useSignalState == nil then if var2 then renderBadge(var4.text, p1.layoutOrder) else nil else renderBadge(useSignalState, p1.layoutOrder)
+	return if UseSignalStateResult == nil then if UseStateResult then renderBadge(FeatureCatalogLabelNew.text, p1.layoutOrder) else nil else renderBadge(UseSignalStateResult, p1.layoutOrder)
 end

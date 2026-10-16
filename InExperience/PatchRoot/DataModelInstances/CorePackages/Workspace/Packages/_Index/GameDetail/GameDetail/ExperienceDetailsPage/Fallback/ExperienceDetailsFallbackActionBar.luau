@@ -1,39 +1,39 @@
-﻿local parent = script:FindFirstAncestor("GameDetail").Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local view = foundationModule.View
-local skeleton = foundationModule.Skeleton
-local radius = foundationModule.Enums.Radius
-local buttonSize = foundationModule.Enums.ButtonSize
-local useTokens = foundationModule.Hooks.useTokens
-local useGameInfoModule = require(script.Parent.Parent.useGameInfo)
-local playButton = require(parent.GamePlayButton).PlayButton
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagSduiEdpPersistentActionBarPlayButton = sharedFlagsModule.FFlagSduiEdpPersistentActionBarPlayButton
-local fFlagLuaAppLaunchWhenLoadingEdp = sharedFlagsModule.FFlagLuaAppLaunchWhenLoadingEdp
-local fFlagEnableGameJoinEarlyAccess = sharedFlagsModule.FFlagEnableGameJoinEarlyAccess
+﻿local Parent = script:FindFirstAncestor("GameDetail").Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local Skeleton = FoundationModule.Skeleton
+local Radius = FoundationModule.Enums.Radius
+local ButtonSize = FoundationModule.Enums.ButtonSize
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local UseGameInfoModule = require(script.Parent.Parent.useGameInfo)
+local PlayButton = require(Parent.GamePlayButton).PlayButton
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagSduiEdpPersistentActionBarPlayButton = SharedFlagsModule.FFlagSduiEdpPersistentActionBarPlayButton
+local FFlagLuaAppLaunchWhenLoadingEdp = SharedFlagsModule.FFlagLuaAppLaunchWhenLoadingEdp
+local FFlagEnableGameJoinEarlyAccess = SharedFlagsModule.FFlagEnableGameJoinEarlyAccess
 
 return {
-	Skeleton = reactModule.memo(function(p1)
-		-- upvalues: useTokens (ref), reactModule (ref), view (ref), fFlagSduiEdpPersistentActionBarPlayButton (ref), skeleton (ref), radius (ref), playButton (ref), buttonSize (ref), foundationModule (ref), fFlagLuaAppLaunchWhenLoadingEdp (ref), fFlagEnableGameJoinEarlyAccess (ref)
-		local size1200 = useTokens().Size.Size_1200
+	Skeleton = ReactModule.memo(function(p1) --[[ Line: 31 | Named "ExperienceDetailsActionBarSkeleton" ]]
+		-- upvalues: UseTokensFunction (copy), ReactModule (copy), View (copy), FFlagSduiEdpPersistentActionBarPlayButton (copy), Skeleton (copy), Radius (copy), PlayButton (copy), ButtonSize (copy), FoundationModule (copy), FFlagLuaAppLaunchWhenLoadingEdp (copy), FFlagEnableGameJoinEarlyAccess (copy)
+		local Size1200 = UseTokensFunction().Size.Size_1200
 		
-		return reactModule.createElement(view, {
+		return ReactModule.createElement(View, {
 			testId = "--edp-fallback-action-bar-skeleton",
-			tag = if fFlagSduiEdpPersistentActionBarPlayButton then "row align-y-center gap-small auto-xy" else "row align-y-center gap-small size-full-0 auto-y padding-x-medium padding-top-medium bg-surface-0 stroke-default"
+			tag = if FFlagSduiEdpPersistentActionBarPlayButton then "row align-y-center gap-small auto-xy" else "row align-y-center gap-small size-full-0 auto-y padding-x-medium padding-top-medium bg-surface-0 stroke-default"
 		}, {
-			IconButtonSkeleton1 = reactModule.createElement(skeleton, {
+			IconButtonSkeleton1 = ReactModule.createElement(Skeleton, {
 				LayoutOrder = 1,
-				Size = UDim2.fromOffset(size1200, size1200),
-				radius = radius.Medium
+				Size = UDim2.fromOffset(Size1200, Size1200),
+				radius = Radius.Medium
 			}),
-			IconButtonSkeleton2 = reactModule.createElement(skeleton, {
+			IconButtonSkeleton2 = ReactModule.createElement(Skeleton, {
 				LayoutOrder = 2,
-				Size = UDim2.fromOffset(size1200, size1200),
-				radius = radius.Medium
+				Size = UDim2.fromOffset(Size1200, Size1200),
+				radius = Radius.Medium
 			}),
-			PlayBtnContainer = if fFlagSduiEdpPersistentActionBarPlayButton then nil else reactModule.createElement(view, { tag = "grow auto-y", LayoutOrder = 3 }, {
-				PlayBtn = reactModule.createElement(playButton, {
+			PlayBtnContainer = if FFlagSduiEdpPersistentActionBarPlayButton then nil else ReactModule.createElement(View, { tag = "grow auto-y", LayoutOrder = 3 }, {
+				PlayBtn = ReactModule.createElement(PlayButton, {
 					useUIBloxButton = true,
 					launchOnReleaseAfterUnmount = true,
 					testId = "--edp-fallback-play-button",
@@ -42,25 +42,26 @@ return {
 					launchSource = p1.launchSource,
 					experienceJoinData = p1.experienceJoinData,
 					placeId = p1.placeIdOverride,
-					buttonSize = buttonSize.Large,
-					fillBehavior = foundationModule.Enums.FillBehavior.Fill,
-					launchWhenLoading = if fFlagLuaAppLaunchWhenLoadingEdp then true else nil,
-					enableEarlyAccessPlusTooltip = if fFlagEnableGameJoinEarlyAccess then true else nil,
-					enableEarlyAccessState = if fFlagEnableGameJoinEarlyAccess then true else nil
+					buttonSize = ButtonSize.Large,
+					fillBehavior = FoundationModule.Enums.FillBehavior.Fill,
+					launchWhenLoading = if FFlagLuaAppLaunchWhenLoadingEdp then true else nil,
+					enableEarlyAccessPlusTooltip = if FFlagEnableGameJoinEarlyAccess then true else nil,
+					enableEarlyAccessState = if FFlagEnableGameJoinEarlyAccess then true else nil
 				})
 			})
 		})
 	end),
-	Error = reactModule.memo(function(p1)
-		-- upvalues: useGameInfoModule (ref), fFlagSduiEdpPersistentActionBarPlayButton (ref), reactModule (ref), view (ref), playButton (ref), buttonSize (ref), foundationModule (ref), fFlagLuaAppLaunchWhenLoadingEdp (ref), fFlagEnableGameJoinEarlyAccess (ref)
-		local var1 = useGameInfoModule(p1.universeId)
+	Error = ReactModule.memo(function(p1) --[[ Line: 74 | Named "ExperienceDetailsActionBarError" ]]
+		-- upvalues: UseGameInfoModule (copy), FFlagSduiEdpPersistentActionBarPlayButton (copy), ReactModule (copy), View (copy), PlayButton (copy), ButtonSize (copy), FoundationModule (copy), FFlagLuaAppLaunchWhenLoadingEdp (copy), FFlagEnableGameJoinEarlyAccess (copy)
+		local UseGameInfoModuleResult = UseGameInfoModule(p1.universeId)
+		local IsIsUnavailable: boolean = UseGameInfoModuleResult ~= nil and UseGameInfoModuleResult.isUnavailable == true
 		
-		return if var1 ~= nil and var1.isUnavailable == true then nil elseif fFlagSduiEdpPersistentActionBarPlayButton then nil else reactModule.createElement(view, {
+		return if IsIsUnavailable then nil elseif FFlagSduiEdpPersistentActionBarPlayButton then nil else ReactModule.createElement(View, {
 			tag = "row align-y-center gap-small size-full-0 auto-y padding-x-medium padding-top-medium bg-surface-0 stroke-default",
 			testId = "--edp-fallback-action-bar-error"
 		}, {
-			PlayBtnContainer = reactModule.createElement(view, { tag = "grow auto-y", LayoutOrder = 1 }, {
-				PlayBtn = reactModule.createElement(playButton, {
+			PlayBtnContainer = ReactModule.createElement(View, { tag = "grow auto-y", LayoutOrder = 1 }, {
+				PlayBtn = ReactModule.createElement(PlayButton, {
 					useUIBloxButton = true,
 					launchOnReleaseAfterUnmount = true,
 					testId = "--edp-fallback-play-button",
@@ -69,11 +70,11 @@ return {
 					launchSource = p1.launchSource,
 					experienceJoinData = p1.experienceJoinData,
 					placeId = p1.placeIdOverride,
-					buttonSize = buttonSize.Large,
-					fillBehavior = foundationModule.Enums.FillBehavior.Fill,
-					launchWhenLoading = if fFlagLuaAppLaunchWhenLoadingEdp then true else nil,
-					enableEarlyAccessPlusTooltip = if fFlagEnableGameJoinEarlyAccess then true else nil,
-					enableEarlyAccessState = if fFlagEnableGameJoinEarlyAccess then true else nil
+					buttonSize = ButtonSize.Large,
+					fillBehavior = FoundationModule.Enums.FillBehavior.Fill,
+					launchWhenLoading = if FFlagLuaAppLaunchWhenLoadingEdp then true else nil,
+					enableEarlyAccessPlusTooltip = if FFlagEnableGameJoinEarlyAccess then true else nil,
+					enableEarlyAccessState = if FFlagEnableGameJoinEarlyAccess then true else nil
 				})
 			})
 		})

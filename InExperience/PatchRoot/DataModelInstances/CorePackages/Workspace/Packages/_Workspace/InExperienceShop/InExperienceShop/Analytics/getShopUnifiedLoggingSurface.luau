@@ -1,7 +1,7 @@
-﻿local unifiedLoggingSurface = require(script:FindFirstAncestor("InExperienceShop").Parent.AvatarExperienceNavigation).Enums.UnifiedLoggingSurface
-local constantsModule = require(script.Parent.Constants)
+﻿local UnifiedLoggingSurface = require(script:FindFirstAncestor("InExperienceShop").Parent.AvatarExperienceNavigation).Enums.UnifiedLoggingSurface
+local ConstantsModule = require(script.Parent.Constants)
 
-return function(p1)
-	-- upvalues: constantsModule (ref), unifiedLoggingSurface (ref)
-	return if p1 == constantsModule.ShopPageType.Home then unifiedLoggingSurface.IN_EXPERIENCE_SHOP_HOME elseif p1 == constantsModule.ShopPageType.Search then unifiedLoggingSurface.IN_EXPERIENCE_SHOP_SEARCH else unifiedLoggingSurface.IN_EXPERIENCE_SHOP_DETAILS
+return function(Home) --[[ Line: 11 | Named "getShopUnifiedLoggingSurface" ]]
+	-- upvalues: ConstantsModule (copy), UnifiedLoggingSurface (copy)
+	return if Home == ConstantsModule.ShopPageType.Home then UnifiedLoggingSurface.IN_EXPERIENCE_SHOP_HOME elseif Home == ConstantsModule.ShopPageType.Search then UnifiedLoggingSurface.IN_EXPERIENCE_SHOP_SEARCH else UnifiedLoggingSurface.IN_EXPERIENCE_SHOP_DETAILS
 end

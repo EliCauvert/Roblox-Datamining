@@ -1,48 +1,51 @@
-﻿local parent = script:FindFirstAncestor("Moments").Parent
-local appPage = require(parent.RobloxAppEnums).AppPage
-local navigationRoduxModule = require(parent.NavigationRodux)
-local selectors = navigationRoduxModule.Selectors
-local sharedFlagsModule = require(parent.SharedFlags)
-local fFlagUseNavigationSelectors = sharedFlagsModule.FFlagUseNavigationSelectors
-local fFlagSignalsNavP3hMisc = sharedFlagsModule.FFlagSignalsNavP3hMisc
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local useSignalState = require(parent.SignalsReact).useSignalState
-local reactModule = require(parent.React)
-local var1 = if fFlagSignalsNavP3hMisc then navigationRoduxModule.GetLegacyNavigationStore else nil
-local var2 = if fFlagSignalsNavP3hMisc then require(parent.RobloxAppNavigation).isNavigationAvailable else nil
+﻿local Parent = script:FindFirstAncestor("Moments").Parent
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local NavigationRoduxModule = require(Parent.NavigationRodux)
+local Selectors = NavigationRoduxModule.Selectors
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FFlagUseNavigationSelectors = SharedFlagsModule.FFlagUseNavigationSelectors
+local FFlagSignalsNavP3hMisc = SharedFlagsModule.FFlagSignalsNavP3hMisc
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local ReactModule = require(Parent.React)
+local GetLegacyNavigationStore = if FFlagSignalsNavP3hMisc then NavigationRoduxModule.GetLegacyNavigationStore else nil
+local IsNavigationAvailable = if FFlagSignalsNavP3hMisc then require(Parent.RobloxAppNavigation).isNavigationAvailable else nil
 
-local function routeContainsMoments(p1)
-	-- upvalues: appPage (ref)
-	if type(p1) ~= "table" then
+local function routeContainsMoments(SelectCurrentLegacyRouteResult): boolean --[[ Line: 35 ]]
+	-- upvalues: AppPage (copy)
+	if type(SelectCurrentLegacyRouteResult) ~= "table" then
 		return false
 	end
-	for i, v in p1 do
-		if type(v) == "table" and v.name == appPage.Moments then
+	for _, value in SelectCurrentLegacyRouteResult do
+		if type(value) == "table" and value.name == AppPage.Moments then
 			return true
 		end
 	end
 	return false
 end
 
-return function()
-	-- upvalues: fFlagSignalsNavP3hMisc (ref), var1 (ref), reactModule (ref), appPage (ref), useSignalState (ref), var2 (ref), useSelector (ref), fFlagUseNavigationSelectors (ref), routeContainsMoments (ref), selectors (ref)
-	if not fFlagSignalsNavP3hMisc then
-		return useSelector(function(p2)
-			-- upvalues: fFlagUseNavigationSelectors (copy), routeContainsMoments (copy), selectors (copy)
-			if not p2.Navigation then
+return function() --[[ Line: 47 | Named "useMomentsTabIsVisible" ]]
+	-- upvalues: FFlagSignalsNavP3hMisc (copy), GetLegacyNavigationStore (copy), ReactModule (copy), AppPage (copy), UseSignalStateFunction (copy), IsNavigationAvailable (copy), UseSelectorFunction (copy), FFlagUseNavigationSelectors (copy), routeContainsMoments (copy), Selectors (copy)
+	if FFlagSignalsNavP3hMisc then
+		local LegacyNavigationStore = GetLegacyNavigationStore(false)
+		local UseSignalStateResult = UseSignalStateFunction((ReactModule.useMemo(function() --[[ Line: 50 ]]
+			-- upvalues: LegacyNavigationStore (copy), AppPage (upval)
+			return LegacyNavigationStore.getRouteContainsPageSignal(AppPage.Moments)
+		end, {})))
+		
+		return not IsNavigationAvailable() or UseSignalStateResult
+	else
+		return UseSelectorFunction(function(p1) --[[ Line: 60 ]]
+			-- upvalues: FFlagUseNavigationSelectors (upval), routeContainsMoments (upval), Selectors (upval)
+			if not p1.Navigation then
 				return true
-			elseif fFlagUseNavigationSelectors then
-				return routeContainsMoments(selectors.selectCurrentLegacyRoute(p2))
+			elseif FFlagUseNavigationSelectors then
+				return (routeContainsMoments(Selectors.selectCurrentLegacyRoute(p1)))
+			else
+				local History = p1.Navigation.history
+				
+				return if History then routeContainsMoments(History[#History]) else false
 			end
-			local history = p2.Navigation.history
-			
-			return if history then routeContainsMoments(history[#history]) else false
 		end)
 	end
-	local var3 = var1(false)
-	
-	return if var2() then useSignalState(reactModule.useMemo(function()
-		-- upvalues: var3 (ref), appPage (copy)
-		return var3.getRouteContainsPageSignal(appPage.Moments)
-	end, {})) else true
 end

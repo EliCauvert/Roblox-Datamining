@@ -1,48 +1,52 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local userInputService = game:GetService("UserInputService")
-local textService = game:GetService("TextService")
-local cryoModule = require(corePackagesService.Packages.Cryo)
-local roactModule = require(corePackagesService.Packages.Roact)
-local scrollingTextBox = roactModule.Component:extend("ScrollingTextBox")
+﻿local CorePackages = game:GetService("CorePackages")
+local UserInputService = game:GetService("UserInputService")
+local TextService = game:GetService("TextService")
+local CryoModule = require(CorePackages.Packages.Cryo)
+local RoactModule = require(CorePackages.Packages.Roact)
+local ScrollingTextBox = RoactModule.Component:extend("ScrollingTextBox")
 
-function scrollingTextBox.init(p1, p2)
-	-- upvalues: textService (ref), roactModule (ref)
-	local aTextSize = textService:GetTextSize("A", p2.TextSize, p2.Font, Vector2.new(0, 0))
+function ScrollingTextBox.init(p1, Label) --[[ Line: 12 ]]
+	-- upvalues: TextService (copy), RoactModule (copy)
+	local ATextSize = TextService:GetTextSize("A", Label.TextSize, Label.Font, Vector2.new(0, 0))
 	
-	function p0.adjustOffset()
-		-- upvalues: p1 (ref)
+	function p1.adjustOffset() --[[ Line: 15 ]]
+		-- upvalues: p1 (copy)
 		if p1.clipBox.current and p1.textboxRef.current then
-			local fontDims = p1.state.fontDims
-			local var1 = p1.textboxRef.current.CursorPosition - 1
-			local var2 = var1 - math.ceil(p1.state.innerXOffset / fontDims.X)
-			local floored = math.floor(p1.clipBox.current.AbsoluteSize.X * 0.9 / fontDims.X)
+			local FontDims = p1.state.fontDims
+			local CursorPositionDelta = p1.textboxRef.current.CursorPosition - 1
+			local CursorPositionDeltaDelta = CursorPositionDelta - math.ceil(p1.state.innerXOffset / FontDims.X)
+			local Floored = math.floor(p1.clipBox.current.AbsoluteSize.X * 0.9 / FontDims.X)
 			
-			if floored < var2 then
-				p1:setState({ innerXOffset = (var1 - floored) * fontDims.X })
+			if Floored < CursorPositionDeltaDelta then
+				p1:setState({
+					innerXOffset = (CursorPositionDelta - Floored) * FontDims.X
+				})
 				
 				return
-			elseif var2 < 0 then
-				p1:setState({ innerXOffset = var1 * fontDims.X })
+			end
+			if CursorPositionDeltaDelta < 0 then
+				p1:setState({ innerXOffset = CursorPositionDelta * FontDims.X })
 			end
 		end
 	end
 	
-	p1.clipBox = roactModule.createRef()
-	p1.textboxRef = p1.props.forwardRef or roactModule.createRef()
-	p1.state = { innerXOffset = 0, fontDims = aTextSize }
+	p1.clipBox = RoactModule.createRef()
+	p1.textboxRef = p1.props.forwardRef or RoactModule.createRef()
+	p1.state = { innerXOffset = 0, fontDims = ATextSize }
 end
 
-function scrollingTextBox.didMount(p1)
-	-- upvalues: userInputService (ref)
+function ScrollingTextBox.didMount(p1) --[[ Line: 49 ]]
+	-- upvalues: UserInputService (copy)
 	if not p1.onFocusConnection then
-		p1.onFocusConnection = userInputService.InputBegan:Connect(function(p2)
-			-- upvalues: p1 (ref)
+		p1.onFocusConnection = UserInputService.InputBegan:Connect(function(Input) --[[ Line: 51 ]]
+			-- upvalues: p1 (copy)
 			if p1.textboxRef.current and p1.textboxRef.current:IsFocused() then
-				if p2.KeyCode == Enum.KeyCode.Home then
+				if Input.KeyCode == Enum.KeyCode.Home then
 					p1.textboxRef.current.CursorPosition = 0
 					
 					return
-				elseif p2.KeyCode == Enum.KeyCode.End then
+				end
+				if Input.KeyCode == Enum.KeyCode.End then
 					p1.textboxRef.current.CursorPosition = #p1.textboxRef.current.text + 1
 					
 					return
@@ -53,27 +57,27 @@ function scrollingTextBox.didMount(p1)
 	end
 end
 
-function scrollingTextBox.willUnmount(p1)
+function ScrollingTextBox.willUnmount(p1) --[[ Line: 66 ]]
 	if p1.onFocusConnection then
 		p1.onFocusConnection:Disconnect()
 		p1.onFocusConnection = nil
 	end
 end
 
-function scrollingTextBox.render(p1)
-	-- upvalues: roactModule (ref)
-	local innerXOffset = p1.state.innerXOffset
+function ScrollingTextBox.render(p1) --[[ Line: 73 ]]
+	-- upvalues: RoactModule (copy)
+	local InnerXOffset = p1.state.innerXOffset
 	
-	return roactModule.createElement("Frame", {
+	return RoactModule.createElement("Frame", {
 		Position = p1.props.Position,
 		Size = p1.props.Size,
 		BackgroundTransparency = 1,
 		ClipsDescendants = true,
-		[roactModule.Ref] = p1.clipBox
+		[RoactModule.Ref] = p1.clipBox
 	}, {
-		TextBox = roactModule.createElement("TextBox", {
-			Position = UDim2.new(0, -innerXOffset, 0, 0),
-			Size = UDim2.new(1, innerXOffset, 1, 0),
+		TextBox = RoactModule.createElement("TextBox", {
+			Position = UDim2.new(0, -InnerXOffset, 0, 0),
+			Size = UDim2.new(1, InnerXOffset, 1, 0),
 			BackgroundTransparency = 1,
 			ShowNativeInput = p1.props.ShowNativeInput,
 			ClearTextOnFocus = p1.props.ClearTextOnFocus,
@@ -83,14 +87,14 @@ function scrollingTextBox.render(p1)
 			Text = p1.props.Text,
 			Font = p1.props.Font,
 			PlaceholderText = p1.props.PlaceholderText,
-			[roactModule.Ref] = p1.textboxRef,
-			[roactModule.Change.CursorPosition] = p1.adjustOffset,
-			[roactModule.Event.FocusLost] = p1.props.TextBoxFocusLost
+			[RoactModule.Ref] = p1.textboxRef,
+			[RoactModule.Change.CursorPosition] = p1.adjustOffset,
+			[RoactModule.Event.FocusLost] = p1.props.TextBoxFocusLost
 		})
 	})
 end
 
-return roactModule.forwardRef(function(p1, p2)
-	-- upvalues: roactModule (ref), scrollingTextBox (ref), cryoModule (ref)
-	return roactModule.createElement(scrollingTextBox, cryoModule.Dictionary.join(p1, { forwardRef = p2 }))
+return RoactModule.forwardRef(function(p1, ForwardRef) --[[ Line: 119 ]]
+	-- upvalues: RoactModule (copy), ScrollingTextBox (copy), CryoModule (copy)
+	return RoactModule.createElement(ScrollingTextBox, CryoModule.Dictionary.join(p1, { forwardRef = ForwardRef }))
 end)

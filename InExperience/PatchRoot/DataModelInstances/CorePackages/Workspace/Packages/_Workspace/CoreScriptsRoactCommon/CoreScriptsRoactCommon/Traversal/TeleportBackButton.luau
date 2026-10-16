@@ -1,50 +1,50 @@
-﻿local teleportService = game:GetService("TeleportService")
-local coreScriptsRoactCommon = script:FindFirstAncestor("CoreScriptsRoactCommon")
-local parent = coreScriptsRoactCommon.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local view = foundationModule.View
-local text = foundationModule.Text
-local icon = foundationModule.Icon
-local iconName = foundationModule.Enums.IconName
-local iconSize = foundationModule.Enums.IconSize
-local useTeleportBackModule = require(coreScriptsRoactCommon.Hooks.useTeleportBack)
-local traversalTelemetryModule = require(script.Parent.TraversalTelemetry)
+﻿local TeleportService = game:GetService("TeleportService")
+local CoreScriptsRoactCommon = script:FindFirstAncestor("CoreScriptsRoactCommon")
+local Parent = CoreScriptsRoactCommon.Parent
+local ReactModule = require(Parent.React)
+local FoundationModule = require(Parent.Foundation)
+local View = FoundationModule.View
+local Text = FoundationModule.Text
+local Icon = FoundationModule.Icon
+local IconName = FoundationModule.Enums.IconName
+local IconSize = FoundationModule.Enums.IconSize
+local UseTeleportBackModule = require(CoreScriptsRoactCommon.Hooks.useTeleportBack)
+local TraversalTelemetryModule = require(script.Parent.TraversalTelemetry)
 
-return reactModule.memo(reactModule.forwardRef(function(p1, p2)
-	-- upvalues: teleportService (ref), useTeleportBackModule (ref), foundationModule (ref), reactModule (ref), view (ref), traversalTelemetryModule (ref), icon (ref), iconName (ref), iconSize (ref), text (ref)
-	local var1, var2 = teleportService:GetThirdPartyTeleportInfo(false)
-	local var3 = useTeleportBackModule(var2)
-	local var4 = foundationModule.Hooks.useTokens()
-	local foreground = var4.Color.ActionStandard.Foreground
+return ReactModule.memo(ReactModule.forwardRef(function(p1, Ref) --[[ Line: 23 | Named "TeleportBackButton" ]]
+	-- upvalues: TeleportService (copy), UseTeleportBackModule (copy), FoundationModule (copy), ReactModule (copy), View (copy), TraversalTelemetryModule (copy), Icon (copy), IconName (copy), IconSize (copy), Text (copy)
+	local ThirdPartyTeleportInfo, ThirdPartyTeleportInfo2 = TeleportService:GetThirdPartyTeleportInfo(false)
+	local UseTeleportBackModuleResult = UseTeleportBackModule(ThirdPartyTeleportInfo2)
+	local UseTokensResult = FoundationModule.Hooks.useTokens()
+	local Foreground = UseTokensResult.Color.ActionStandard.Foreground
 	
-	return reactModule.createElement(view, {
+	return ReactModule.createElement(View, {
 		tag = "padding-left-small padding-right-medium align-x-center align-y-center auto-x bg-over-media-0 radius-circle row size-0-1100",
-		onActivated = function()
-			-- upvalues: traversalTelemetryModule (copy), var1 (ref), var3 (ref)
-			traversalTelemetryModule.sendBackButtonActionEvent({
+		onActivated = function() --[[ Line: 32 ]]
+			-- upvalues: TraversalTelemetryModule (upval), ThirdPartyTeleportInfo (copy), UseTeleportBackModuleResult (copy)
+			TraversalTelemetryModule.sendBackButtonActionEvent({
 				integration_id = "back_button",
 				event_type = "click",
-				destination_universe_id = var1
+				destination_universe_id = ThirdPartyTeleportInfo
 			})
-			var3()
+			UseTeleportBackModuleResult()
 		end,
-		ref = p2
+		ref = Ref
 	}, {
-		TeleportBackIcon = reactModule.createElement(icon, {
+		TeleportBackIcon = ReactModule.createElement(Icon, {
 			LayoutOrder = 1,
-			name = iconName.ChevronLargeLeft,
-			style = foreground,
-			size = iconSize.Medium
+			name = IconName.ChevronLargeLeft,
+			style = Foreground,
+			size = IconSize.Medium
 		}),
-		TeleportText = p1.text and reactModule.createElement(text, {
+		TeleportText = p1.text and ReactModule.createElement(Text, {
 			tag = "auto-x size-0-full text-truncate-split text-label-medium",
 			LayoutOrder = 2,
 			Text = p1.text,
 			sizeConstraint = p1.textLimitWidth and {
-				MaxSize = Vector2.new(p1.textLimitWidth, var4.Size.Size_1100)
+				MaxSize = Vector2.new(p1.textLimitWidth, UseTokensResult.Size.Size_1100)
 			},
-			textStyle = foreground
+			textStyle = Foreground
 		})
 	})
 end))

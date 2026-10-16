@@ -1,63 +1,63 @@
-﻿local graphQLServer = script:FindFirstAncestor("GraphQLServer")
-local virtualEventConnectorModule = require(graphQLServer.graphql.connectors.VirtualEventConnector)
-local findVirtualEventById = virtualEventConnectorModule.findVirtualEventById
-local findVirtualEventsByUniverseId = virtualEventConnectorModule.findVirtualEventsByUniverseId
-local findRsvpCountersByVirtualEventId = virtualEventConnectorModule.findRsvpCountersByVirtualEventId
-local findRsvpsByVirtualEventId = virtualEventConnectorModule.findRsvpsByVirtualEventId
-local updateRsvpStatus = virtualEventConnectorModule.updateRsvpStatus
-local neverShowNotificationModalAgain = virtualEventConnectorModule.neverShowNotificationModalAgain
-local enablePushNotifications = virtualEventConnectorModule.enablePushNotifications
-local experienceConnectorModule = require(graphQLServer.graphql.connectors.ExperienceConnector)
-local findExperienceDetailsByUniverseId = experienceConnectorModule.findExperienceDetailsByUniverseId
-local findExperienceMediaByUniverseId = experienceConnectorModule.findExperienceMediaByUniverseId
-local _ = require(graphQLServer.graphql.generatedTypes)
+﻿local GraphQLServer = script:FindFirstAncestor("GraphQLServer")
+local VirtualEventConnectorModule = require(GraphQLServer.graphql.connectors.VirtualEventConnector)
+local FindVirtualEventByIdFunction = VirtualEventConnectorModule.findVirtualEventById
+local FindVirtualEventsByUniverseIdFunction = VirtualEventConnectorModule.findVirtualEventsByUniverseId
+local FindRsvpCountersByVirtualEventIdFunction = VirtualEventConnectorModule.findRsvpCountersByVirtualEventId
+local FindRsvpsByVirtualEventIdFunction = VirtualEventConnectorModule.findRsvpsByVirtualEventId
+local UpdateRsvpStatusFunction = VirtualEventConnectorModule.updateRsvpStatus
+local NeverShowNotificationModalAgainFunction = VirtualEventConnectorModule.neverShowNotificationModalAgain
+local EnablePushNotificationsFunction = VirtualEventConnectorModule.enablePushNotifications
+local ExperienceConnectorModule = require(GraphQLServer.graphql.connectors.ExperienceConnector)
+local FindExperienceDetailsByUniverseIdFunction = ExperienceConnectorModule.findExperienceDetailsByUniverseId
+local FindExperienceMediaByUniverseIdFunction = ExperienceConnectorModule.findExperienceMediaByUniverseId
+local _ = require(GraphQLServer.graphql.generatedTypes)
 
 return {
 	VirtualEventMutations = {
-		neverShowNotificationModalAgain = function(_, _, p1)
-			-- upvalues: neverShowNotificationModalAgain (ref)
-			return neverShowNotificationModalAgain(p1.fetchImpl)
+		neverShowNotificationModalAgain = function(_, _, p1) --[[ Line: 19 ]]
+			-- upvalues: NeverShowNotificationModalAgainFunction (copy)
+			return NeverShowNotificationModalAgainFunction(p1.fetchImpl)
 		end,
-		enablePushNotifications = function(_, _, p1)
-			-- upvalues: enablePushNotifications (ref)
-			return enablePushNotifications(p1.fetchImpl)
+		enablePushNotifications = function(_, _, p1) --[[ Line: 22 ]]
+			-- upvalues: EnablePushNotificationsFunction (copy)
+			return EnablePushNotificationsFunction(p1.fetchImpl)
 		end
 	},
 	VirtualEvent = {
-		experienceDetails = function(p1, _, p2)
-			-- upvalues: findExperienceDetailsByUniverseId (ref)
-			return findExperienceDetailsByUniverseId(tostring(p1.universeId), p2.fetchImpl)
+		experienceDetails = function(p1, _, p2) --[[ Line: 27 ]]
+			-- upvalues: FindExperienceDetailsByUniverseIdFunction (copy)
+			return FindExperienceDetailsByUniverseIdFunction(tostring(p1.universeId), p2.fetchImpl)
 		end,
-		media = function(p1, _, p2)
-			-- upvalues: findExperienceMediaByUniverseId (ref)
-			return findExperienceMediaByUniverseId(tostring(p1.universeId), p2.fetchImpl)
+		media = function(p1, _, p2) --[[ Line: 30 ]]
+			-- upvalues: FindExperienceMediaByUniverseIdFunction (copy)
+			return FindExperienceMediaByUniverseIdFunction(tostring(p1.universeId), p2.fetchImpl)
 		end,
-		rsvpCounters = function(p1, _, p2)
-			-- upvalues: findRsvpCountersByVirtualEventId (ref)
-			return findRsvpCountersByVirtualEventId(p1.id, p2.fetchImpl)
+		rsvpCounters = function(p1, _, p2) --[[ Line: 33 ]]
+			-- upvalues: FindRsvpCountersByVirtualEventIdFunction (copy)
+			return FindRsvpCountersByVirtualEventIdFunction(p1.id, p2.fetchImpl)
 		end,
-		rsvps = function(p1, _, p2)
-			-- upvalues: findRsvpsByVirtualEventId (ref)
-			return findRsvpsByVirtualEventId(p1.id, p2.fetchImpl)
+		rsvps = function(p1, _, p2) --[[ Line: 36 ]]
+			-- upvalues: FindRsvpsByVirtualEventIdFunction (copy)
+			return FindRsvpsByVirtualEventIdFunction(p1.id, p2.fetchImpl)
 		end
 	},
 	Mutation = {
-		virtualEvents = function()
+		virtualEvents = function() --[[ Line: 41 ]]
 			return {}
 		end,
-		virtualEventRsvp = function(_, p1, p2)
-			-- upvalues: updateRsvpStatus (ref)
-			return updateRsvpStatus(p1.id, p1.rsvpStatus, p2.fetchImpl)
+		virtualEventRsvp = function(_, p1, p2) --[[ Line: 44 ]]
+			-- upvalues: UpdateRsvpStatusFunction (copy)
+			return UpdateRsvpStatusFunction(p1.id, p1.rsvpStatus, p2.fetchImpl)
 		end
 	},
 	Query = {
-		virtualEvent = function(_, p1, p2)
-			-- upvalues: findVirtualEventById (ref)
-			return findVirtualEventById(p1.id, p2.fetchImpl)
+		virtualEvent = function(_, p1, p2) --[[ Line: 49 ]]
+			-- upvalues: FindVirtualEventByIdFunction (copy)
+			return FindVirtualEventByIdFunction(p1.id, p2.fetchImpl)
 		end,
-		virtualEventsByUniverseId = function(_, p1, p2)
-			-- upvalues: findVirtualEventsByUniverseId (ref)
-			return findVirtualEventsByUniverseId(p1.universeId, p1.options, p2.fetchImpl)
+		virtualEventsByUniverseId = function(_, p1, p2) --[[ Line: 52 ]]
+			-- upvalues: FindVirtualEventsByUniverseIdFunction (copy)
+			return FindVirtualEventsByUniverseIdFunction(p1.universeId, p1.options, p2.fetchImpl)
 		end
 	}
 }

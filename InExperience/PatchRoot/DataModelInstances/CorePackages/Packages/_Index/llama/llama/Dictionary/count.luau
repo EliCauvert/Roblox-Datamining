@@ -1,18 +1,18 @@
-﻿local function alwaysTrue()
+﻿local function alwaysTrue(): boolean --[[ Line: 2 ]]
 	return true
 end
 
-return function(p1, p2)
-	-- upvalues: alwaysTrue (ref)
-	local var1 = type(p1)
-	assert(var1 == "table", "expected a table for first argument, got " .. var1)
-	local var2 = 0
-	p2 = p2 or alwaysTrue
+return function(List, p1): number --[[ Line: 6 | Named "count" ]]
+	-- upvalues: alwaysTrue (copy)
+	local ValueType = type(List)
+	assert(ValueType == "table", "expected a table for first argument, got " .. ValueType)
+	local Count = 0
+	local Callback = p1 or alwaysTrue
 	
-	for i, v in pairs(p1) do
-		if p2(v, i) then
-			var2 += 1
+	for i, value in pairs(List) do
+		if Callback(value, i) then
+			Count += 1
 		end
 	end
-	return var2
+	return Count
 end

@@ -1,45 +1,45 @@
-﻿local dataHydrationModule = require(script:FindFirstAncestor("HomeStore").Parent.DataHydration)
+﻿local DataHydrationModule = require(script:FindFirstAncestor("HomeStore").Parent.DataHydration)
 local _ = require(script.Parent.FriendRecommendationTypes)
-local recommendationTypeModule = require(script.Parent.RecommendationType)
+local RecommendationTypeModule = require(script.Parent.RecommendationType)
 
-return function()
-	-- upvalues: dataHydrationModule (ref), recommendationTypeModule (ref)
-	local var1 = dataHydrationModule.createDataCache()
-	local t = {}
+return function() --[[ Line: 16 | Named "createFriendRecommendationsStore" ]]
+	-- upvalues: DataHydrationModule (copy), RecommendationTypeModule (copy)
+	local DataCache = DataHydrationModule.createDataCache()
+	local T = {}
 	
 	return {
-		getFriendRecommendation = function(p1)
-			-- upvalues: var1 (ref), recommendationTypeModule (copy)
-			local item = var1.getItem(p1)
+		getFriendRecommendation = function(p1) --[[ Line: 20 ]]
+			-- upvalues: DataCache (copy), RecommendationTypeModule (upval)
+			local Item = DataCache.getItem(p1)
 			
 			return {
-				data = function(p2)
-					-- upvalues: item (ref), recommendationTypeModule (copy)
-					local var2 = item.data(p2)
+				data = function(p2) --[[ Line: 23 ]]
+					-- upvalues: Item (copy), RecommendationTypeModule (upval)
+					local DataResult = Item.data(p2)
 					
-					return if var2 and var2.recommendationType ~= recommendationTypeModule.Invalid then var2 else nil
+					return if DataResult and DataResult.recommendationType ~= RecommendationTypeModule.Invalid then DataResult else nil
 				end,
-				status = item.status
+				status = Item.status
 			}
 		end,
-		replaceFriendRecommendations = function(p1)
-			-- upvalues: t (write), var1 (ref), recommendationTypeModule (copy)
-			for i in t do
-				if p1[i] == nil then
-					var1.replaceItem(i, { recommendationType = recommendationTypeModule.Invalid })
+		replaceFriendRecommendations = function(List) --[[ Line: 31 ]]
+			-- upvalues: T (ref), DataCache (copy), RecommendationTypeModule (upval)
+			for i in T do
+				if List[i] == nil then
+					DataCache.replaceItem(i, { recommendationType = RecommendationTypeModule.Invalid })
 				end
 			end
-			var1.replaceItems(p1)
-			t = {}
+			DataCache.replaceItems(List)
+			T = {}
 			
-			for i_1 in p1 do
-				t[i_1] = true
+			for i1 in List do
+				T[i1] = true
 			end
 		end,
-		dispose = function()
-			-- upvalues: t (write), var1 (ref)
-			t = {}
-			var1.dispose()
+		dispose = function() --[[ Line: 48 ]]
+			-- upvalues: T (ref), DataCache (copy)
+			T = {}
+			DataCache.dispose()
 		end
 	}
 end

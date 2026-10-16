@@ -1,43 +1,44 @@
-﻿local parent = script:FindFirstAncestor("SduiSharedContent").Parent
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local appPage = require(parent.RobloxAppEnums).AppPage
-local sduiErrorType = sduiCoreSystemModule.SduiErrors.SduiErrorType
-local sduiActionType = sduiCoreSystemModule.SduiActionType
-local getStringParam = sduiCoreSystemModule.SduiActionParams.getStringParam
+﻿local Parent = script:FindFirstAncestor("SduiSharedContent").Parent
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local SduiErrorType = SduiCoreSystemModule.SduiErrors.SduiErrorType
+local SduiActionType = SduiCoreSystemModule.SduiActionType
+local GetStringParamFunction = SduiCoreSystemModule.SduiActionParams.getStringParam
 
-return function(p1, _, p2, _)
-	-- upvalues: sduiErrorType (ref), sduiActionType (ref), getStringParam (ref), appPage (ref)
-	local var1 = if p1 then p1.actionParams else nil
+return function(p1, _, p2, _) --[[ Line: 21 | Named "SduiNavigateAction" ]]
+	-- upvalues: SduiErrorType (copy), SduiActionType (copy), GetStringParamFunction (copy), AppPage (copy)
+	local ActionParams = p1 and p1.actionParams or nil
 	
-	if var1 == nil then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if ActionParams == nil then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			message = "Missing actionParams",
-			name = sduiActionType.Navigate
+			name = SduiActionType.Navigate
 		}, p2.appPage)
 		
 		return
 	end
-	local var2 = getStringParam(var1, "destination")
+	local Destination = GetStringParamFunction(ActionParams, "destination")
 	
-	if var2 == nil then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if Destination == nil then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			message = "Missing actionParam: destination",
 			propName = "destination",
-			name = sduiActionType.Navigate
+			name = SduiActionType.Navigate
 		}, p2.appPage)
 		
 		return
 	end
-	local var3 = appPage[var2]
+	local AppPageEntry = AppPage[Destination]
 	
-	if var3 == nil then
-		p2.dependencies.logger.reportError(sduiErrorType.InvalidActionParams, {
+	if AppPageEntry == nil then
+		p2.dependencies.logger.reportError(SduiErrorType.InvalidActionParams, {
 			propName = "destination",
-			name = sduiActionType.Navigate,
-			message = `Unknown destination: {var2}`
+			name = SduiActionType.Navigate,
+			message = `Unknown destination: {Destination}`
 		}, p2.appPage)
 		
 		return
+	else
+		p2.dependencies.getNavigation().navigate(AppPageEntry)
 	end
-	p2.dependencies.getNavigation().navigate(var3)
 end

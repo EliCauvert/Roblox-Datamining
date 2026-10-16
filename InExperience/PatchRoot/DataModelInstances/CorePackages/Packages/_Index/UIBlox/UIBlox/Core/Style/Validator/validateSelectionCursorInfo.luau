@@ -1,10 +1,10 @@
-﻿local tModule = require(script.Parent.Parent.Parent.Parent.Parent.t)
+﻿local TModule = require(script.Parent.Parent.Parent.Parent.Parent.t)
 
-return tModule.strictInterface({
-	Color = tModule.Color3,
-	AnimatedColor = tModule.Color3,
-	Transparency = tModule.numberConstrained(0, 1),
-	GradientRotationSpeed = tModule.number,
-	GradientColorSequence = tModule.ColorSequence,
-	GradientTransparencySequence = tModule.NumberSequence
+return TModule.strictInterface({
+	Color = TModule.Color3,
+	AnimatedColor = TModule.Color3,
+	Transparency = TModule.numberConstrained(0, 1),
+	GradientRotationSpeed = TModule.number,
+	GradientColorSequence = TModule.ColorSequence,
+	GradientTransparencySequence = TModule.NumberSequence
 })

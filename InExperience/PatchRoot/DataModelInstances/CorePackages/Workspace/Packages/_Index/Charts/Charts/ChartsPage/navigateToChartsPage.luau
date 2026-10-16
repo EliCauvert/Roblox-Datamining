@@ -1,17 +1,17 @@
-﻿local charts = script:FindFirstAncestor("Charts")
-local parent = charts.Parent
-local appPage = require(parent.RobloxAppEnums).AppPage
-local sduiSurfaceLoadTimeTracker = require(parent.SduiSharedUtilities).SduiSurfaceLoadTimeTracker
-local fetchChartsPageModule = require(charts.ChartsPage.fetchChartsPage)
-local chartsConstantsModule = require(charts.ChartsPage.ChartsConstants)
+﻿local Charts = script:FindFirstAncestor("Charts")
+local Parent = Charts.Parent
+local AppPage = require(Parent.RobloxAppEnums).AppPage
+local SduiSurfaceLoadTimeTracker = require(Parent.SduiSharedUtilities).SduiSurfaceLoadTimeTracker
+local FetchChartsPageModule = require(Charts.ChartsPage.fetchChartsPage)
+local ChartsConstantsModule = require(Charts.ChartsPage.ChartsConstants)
 
-return function(p1)
-	-- upvalues: sduiSurfaceLoadTimeTracker (ref), chartsConstantsModule (ref), fetchChartsPageModule (ref), appPage (ref)
-	local var1 = sduiSurfaceLoadTimeTracker.createLoadTimerWithSurfaceLoadTime(chartsConstantsModule.ConfigKey, {
-		eventName = chartsConstantsModule.SurfaceLoadTimeEventName,
+return function(p1) --[[ Line: 10 | Named "navigateToChartsPage" ]]
+	-- upvalues: SduiSurfaceLoadTimeTracker (copy), ChartsConstantsModule (copy), FetchChartsPageModule (copy), AppPage (copy)
+	local LoadTimerWithSurfaceLoadTime = SduiSurfaceLoadTimeTracker.createLoadTimerWithSurfaceLoadTime(ChartsConstantsModule.ConfigKey, {
+		eventName = ChartsConstantsModule.SurfaceLoadTimeEventName,
 		metadata = { page = "navigate" }
 	})
-	var1.start("navigate")
-	fetchChartsPageModule(var1)
-	p1.navigate(appPage.Games, { pageTimer = var1 })
+	LoadTimerWithSurfaceLoadTime.start("navigate")
+	FetchChartsPageModule(LoadTimerWithSurfaceLoadTime)
+	p1.navigate(AppPage.Games, { pageTimer = LoadTimerWithSurfaceLoadTime })
 end

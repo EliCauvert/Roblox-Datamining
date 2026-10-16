@@ -1,15 +1,15 @@
-﻿local parent = script.Parent.Parent
-local purchaseErrorModule = require(parent.Enums.PurchaseError)
-local _ = require(parent.Misc.Constants)
-local promiseModule = require(parent.Promise)
+﻿local Parent = script.Parent.Parent
+local PurchaseErrorModule = require(Parent.Enums.PurchaseError)
+local _ = require(Parent.Misc.Constants)
+local PromiseModule = require(Parent.Promise)
 
-return function(p1, p2, p3)
-	-- upvalues: promiseModule (ref), purchaseErrorModule (ref)
-	return p1.performCreatorStorePurchase(p2, p3):andThen(function(p4)
-		-- upvalues: promiseModule (copy), purchaseErrorModule (copy)
-		return if p4.purchaseTransactionStatus == "PURCHASE_TRANSACTION_STATUS_ALREADY_OWNED" or p4.purchaseTransactionStatus == "PURCHASE_TRANSACTION_STATUS_SUCCESS" then promiseModule.resolve(p4) else promiseModule.reject(purchaseErrorModule.UnknownFailure)
-	end, function(_)
-		-- upvalues: promiseModule (copy), purchaseErrorModule (copy)
-		return promiseModule.reject(purchaseErrorModule.UnknownFailure)
+return function(p1, p2, p3) --[[ Line: 7 | Named "performCreatorStorePurchase" ]]
+	-- upvalues: PromiseModule (copy), PurchaseErrorModule (copy)
+	return p1.performCreatorStorePurchase(p2, p3):andThen(function(Result) --[[ Line: 8 ]]
+		-- upvalues: PromiseModule (upval), PurchaseErrorModule (upval)
+		return if Result.purchaseTransactionStatus == "PURCHASE_TRANSACTION_STATUS_ALREADY_OWNED" or Result.purchaseTransactionStatus == "PURCHASE_TRANSACTION_STATUS_SUCCESS" then PromiseModule.resolve(Result) else PromiseModule.reject(PurchaseErrorModule.UnknownFailure)
+	end, function(_) --[[ Line: 17 ]]
+		-- upvalues: PromiseModule (upval), PurchaseErrorModule (upval)
+		return PromiseModule.reject(PurchaseErrorModule.UnknownFailure)
 	end)
 end

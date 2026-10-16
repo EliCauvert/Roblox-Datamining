@@ -1,17 +1,17 @@
-﻿local parent = script:FindFirstAncestor("GraphQLServer").Parent
-local httpService = game:GetService("HttpService")
-local cryoModule = require(parent.Cryo)
+﻿local Parent = script:FindFirstAncestor("GraphQLServer").Parent
+local HttpService = game:GetService("HttpService")
+local CryoModule = require(Parent.Cryo)
 local _ = require(script.Parent.Parent.generatedTypes)
-local _ = require(parent.LuauPolyfill)
-local profileInsightsConnectorModule = require(script.Parent.Parent.connectors.ProfileInsightsConnector)
-local findProfileInsightsByUserIds = profileInsightsConnectorModule.findProfileInsightsByUserIds
-local findProfileInsightsByUserIdsFeed = profileInsightsConnectorModule.findProfileInsightsByUserIdsFeed
-local fFlagPlayerSearchEnableOnlineFrequents = require(parent.SharedFlags).FFlagPlayerSearchEnableOnlineFrequents
+local _ = require(Parent.LuauPolyfill)
+local ProfileInsightsConnectorModule = require(script.Parent.Parent.connectors.ProfileInsightsConnector)
+local FindProfileInsightsByUserIdsFunction = ProfileInsightsConnectorModule.findProfileInsightsByUserIds
+local FindProfileInsightsByUserIdsFeedFunction = ProfileInsightsConnectorModule.findProfileInsightsByUserIdsFeed
+local FFlagPlayerSearchEnableOnlineFrequents = require(Parent.SharedFlags).FFlagPlayerSearchEnableOnlineFrequents
 
-local _ = function(p1, p2)
-	for i, v in p1.profileInsights do
-		if v[p2] then
-			return v[p2]
+local function _(p1, p2) --[[ Line: 25 ]]
+	for _, profileInsight in p1.profileInsights do
+		if profileInsight[p2] then
+			return profileInsight[p2]
 		end
 	end
 	return {}
@@ -19,127 +19,130 @@ end
 
 return {
 	ProfileInsights = {
-		targetUserId = function(p3)
+		targetUserId = function(p3) --[[ Line: 39 ]]
 			return p3.targetUser
 		end,
-		mutualFriends = function(p3)
-			-- upvalues: cryoModule (ref)
-			local t
-			local _ = nil
-			
-			for i, v in p3.profileInsights do
-				if v.mutualFriendInsight then
-					t = v.mutualFriendInsight
-					local var1 = if t then t.mutualFriends else {}
+		mutualFriends = function(p3) --[[ Line: 42 ]]
+			-- upvalues: CryoModule (copy)
+			local MutualFriendInsight = nil
+			for _, profileInsight in p3.profileInsights do
+				if profileInsight.mutualFriendInsight then
+					MutualFriendInsight = profileInsight.mutualFriendInsight
+					local MutualFriends = if MutualFriendInsight then MutualFriendInsight.mutualFriends else {}
 					
-					return if var1 then cryoModule.List.foldLeft(cryoModule.Dictionary.keys(var1), function(p4, p5)
-						-- upvalues: var1 (ref)
-						local var2 = var1[p5]
-						table.insert(p4, {
-							id = p5,
-							username = var2.username,
-							displayName = var2.displayName
+					return if MutualFriends then CryoModule.List.foldLeft(CryoModule.Dictionary.keys(MutualFriends), function(List, Id) --[[ Line: 53 ]]
+						-- upvalues: MutualFriends (copy)
+						local MutualFriend = MutualFriends[Id]
+						table.insert(List, {
+							id = Id,
+							username = MutualFriend.username,
+							displayName = MutualFriend.displayName
 						})
 						
-						return p4
+						return List
 					end, {}) else {}
 				end
 			end
-			t = {}
+			MutualFriendInsight = {}
 		end,
-		isOfflineFrequents = function(p4)
-			-- upvalues: fFlagPlayerSearchEnableOnlineFrequents (ref)
-			local t
-			local _ = nil
-			local _ = nil
-			
-			for i, v in p4.profileInsights do
-				if v.offlineFrequentsInsight then
-					t = v.offlineFrequentsInsight
-					local t_1
-					if fFlagPlayerSearchEnableOnlineFrequents then
-						for i, v in p4.profileInsights do
-							if v.playedTogetherInsight then
-								t_1 = v.playedTogetherInsight
+		isOfflineFrequents = function(p4): boolean --[[ Line: 64 ]]
+			-- upvalues: FFlagPlayerSearchEnableOnlineFrequents (copy)
+			local OfflineFrequentsInsight = nil
+			for _, profileInsight in p4.profileInsights do
+				if profileInsight.offlineFrequentsInsight then
+					OfflineFrequentsInsight = profileInsight.offlineFrequentsInsight
+					local PlayedTogetherInsight = nil
+					if FFlagPlayerSearchEnableOnlineFrequents then
+						for _, profileInsight1 in p4.profileInsights do
+							if profileInsight1.playedTogetherInsight then
+								PlayedTogetherInsight = profileInsight1.playedTogetherInsight
+							else
+								continue
 							end
 						end
-						t_1 = {}
+						PlayedTogetherInsight = {}
 					else
-						t_1 = nil
+						PlayedTogetherInsight = nil
 					end
-					return if fFlagPlayerSearchEnableOnlineFrequents then t and t.havePlayedTogether or t_1 and t_1.havePlayedTogether else t and t.havePlayedTogether
+					if not FFlagPlayerSearchEnableOnlineFrequents then
+						return if OfflineFrequentsInsight and OfflineFrequentsInsight.havePlayedTogether then true else false
+					elseif OfflineFrequentsInsight and OfflineFrequentsInsight.havePlayedTogether or PlayedTogetherInsight and PlayedTogetherInsight.havePlayedTogether then
+						return true
+					else
+						return false
+					end
 				end
 			end
-			t = {}
+			OfflineFrequentsInsight = {}
 		end,
-		friendshipAgeUnixSeconds = function(p5)
-			local t
-			for i, v in p5.profileInsights do
-				if v.friendshipAgeInsight then
-					t = v.friendshipAgeInsight
-					return if t.friendsSinceDateTime then t.friendsSinceDateTime.seconds else -1
+		friendshipAgeUnixSeconds = function(p5) --[[ Line: 80 ]]
+			local FriendshipAgeInsight = nil
+			for _, profileInsight in p5.profileInsights do
+				if profileInsight.friendshipAgeInsight then
+					FriendshipAgeInsight = profileInsight.friendshipAgeInsight
+					return FriendshipAgeInsight.friendsSinceDateTime and FriendshipAgeInsight.friendsSinceDateTime.seconds or -1
 				end
 			end
-			t = {}
+			FriendshipAgeInsight = {}
 		end,
-		friendRequestOriginSource = function(p6)
-			local t
-			for i, v in p6.profileInsights do
-				if v.friendRequestOriginInsight then
-					t = v.friendRequestOriginInsight
-					return t.friendRequestOriginSource or -1
+		friendRequestOriginSource = function(p6) --[[ Line: 85 ]]
+			local FriendRequestOriginInsight = nil
+			for _, profileInsight in p6.profileInsights do
+				if profileInsight.friendRequestOriginInsight then
+					FriendRequestOriginInsight = profileInsight.friendRequestOriginInsight
+					return FriendRequestOriginInsight.friendRequestOriginSource or -1
 				end
 			end
-			t = {}
+			FriendRequestOriginInsight = {}
 		end,
-		accountCreationDateUnixSeconds = function(p7)
-			local t
-			for i, v in p7.profileInsights do
-				if v.accountCreationDateInsight then
-					t = v.accountCreationDateInsight
-					return if t.accountCreatedDateTime then t.accountCreatedDateTime.seconds else -1
+		accountCreationDateUnixSeconds = function(p7) --[[ Line: 90 ]]
+			local AccountCreationDateInsight = nil
+			for _, profileInsight in p7.profileInsights do
+				if profileInsight.accountCreationDateInsight then
+					AccountCreationDateInsight = profileInsight.accountCreationDateInsight
+					return AccountCreationDateInsight.accountCreatedDateTime and AccountCreationDateInsight.accountCreatedDateTime.seconds or -1
 				end
 			end
-			t = {}
+			AccountCreationDateInsight = {}
 		end,
-		localizedCountryName = function(p8)
-			local t
-			for i, v in p8.profileInsights do
-				if v.accountLocationInsight then
-					t = v.accountLocationInsight
-					return if t then t.localizedCountryName else ""
+		localizedCountryName = function(p8) --[[ Line: 98 ]]
+			local AccountLocationInsight = nil
+			for _, profileInsight in p8.profileInsights do
+				if profileInsight.accountLocationInsight then
+					AccountLocationInsight = profileInsight.accountLocationInsight
+					return AccountLocationInsight and AccountLocationInsight.localizedCountryName or ""
 				end
 			end
-			t = {}
+			AccountLocationInsight = {}
 		end,
-		userAgeVerifiedBracket = function(p9)
-			local t
-			for i, v in p9.profileInsights do
-				if v.userAgeVerifiedInsight then
-					t = v.userAgeVerifiedInsight
-					return if t and t.namespace and t.verifiedAgeBandLabel then `{t.namespace}.{t.verifiedAgeBandLabel}` else ""
+		userAgeVerifiedBracket = function(p9): string --[[ Line: 102 ]]
+			local UserAgeVerifiedInsight = nil
+			for _, profileInsight in p9.profileInsights do
+				if profileInsight.userAgeVerifiedInsight then
+					UserAgeVerifiedInsight = profileInsight.userAgeVerifiedInsight
+					return if UserAgeVerifiedInsight and UserAgeVerifiedInsight.namespace and UserAgeVerifiedInsight.verifiedAgeBandLabel then `{UserAgeVerifiedInsight.namespace}.{UserAgeVerifiedInsight.verifiedAgeBandLabel}` else ""
 				end
 			end
-			t = {}
+			UserAgeVerifiedInsight = {}
 		end
 	},
 	ProfileInsightsPages = {
-		id = function(p10)
-			-- upvalues: httpService (ref)
-			return if p10.pageId then p10.pageId else httpService:GenerateGUID(false)
+		id = function(p10) --[[ Line: 118 ]]
+			-- upvalues: HttpService (copy)
+			return if p10.pageId then p10.pageId else HttpService:GenerateGUID(false)
 		end,
-		profileInsights = function(p10)
+		profileInsights = function(p10) --[[ Line: 121 ]]
 			return p10.profileInsights
 		end
 	},
 	Query = {
-		profilesInsights = function(_, p10, p11)
-			-- upvalues: findProfileInsightsByUserIdsFeed (ref), fFlagPlayerSearchEnableOnlineFrequents (ref)
-			return findProfileInsightsByUserIdsFeed(p10.userIds, p10.count, p10.pageId, if fFlagPlayerSearchEnableOnlineFrequents then p10.rankingStrategy else nil, p11.fetchImpl)
+		profilesInsights = function(_, p10, p11) --[[ Line: 127 ]]
+			-- upvalues: FindProfileInsightsByUserIdsFeedFunction (copy), FFlagPlayerSearchEnableOnlineFrequents (copy)
+			return FindProfileInsightsByUserIdsFeedFunction(p10.userIds, p10.count, p10.pageId, if FFlagPlayerSearchEnableOnlineFrequents then p10.rankingStrategy else nil, p11.fetchImpl)
 		end,
-		profilesInsightsByUserIds = function(_, p10, p11)
-			-- upvalues: findProfileInsightsByUserIds (ref)
-			return findProfileInsightsByUserIds(p10.userIds, p10.count, p10.rankingStrategy, p11.fetchImpl)
+		profilesInsightsByUserIds = function(_, p10, p11) --[[ Line: 136 ]]
+			-- upvalues: FindProfileInsightsByUserIdsFunction (copy)
+			return FindProfileInsightsByUserIdsFunction(p10.userIds, p10.count, p10.rankingStrategy, p11.fetchImpl)
 		end
 	}
 }

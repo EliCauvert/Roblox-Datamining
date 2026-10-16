@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.PlaceInfoRodux.PlaceInfoRodux)
+﻿return (require(script.Parent._Workspace.PlaceInfoRodux.PlaceInfoRodux))

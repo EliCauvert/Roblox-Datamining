@@ -1,18 +1,17 @@
-﻿local parent = script:FindFirstAncestor("AppBlox").Parent
-local detailsPageTemplateModule = require(script.Parent.DetailsPageTemplate)
-local detailsPageTenfootTemplateModule = require(script.Parent.DetailsPageTenfootTemplate)
-local deviceType = require(parent.RobloxAppEnums).DeviceType
-local reactModule = require(parent.React)
-local t = {
-	[deviceType.Console] = detailsPageTenfootTemplateModule,
-	[deviceType.Phone] = detailsPageTemplateModule,
-	[deviceType.Desktop] = detailsPageTemplateModule,
-	[deviceType.Unknown] = detailsPageTemplateModule,
-	[deviceType.Tablet] = detailsPageTemplateModule,
-	[deviceType.VR] = detailsPageTemplateModule
+﻿local Parent = script:FindFirstAncestor("AppBlox").Parent
+local DetailsPageTemplateModule = require(script.Parent.DetailsPageTemplate)
+local DeviceType = require(Parent.RobloxAppEnums).DeviceType
+local ReactModule = require(Parent.React)
+local config = {
+	[DeviceType.Console] = require(script.Parent.DetailsPageTenfootTemplate),
+	[DeviceType.Phone] = DetailsPageTemplateModule,
+	[DeviceType.Desktop] = DetailsPageTemplateModule,
+	[DeviceType.Unknown] = DetailsPageTemplateModule,
+	[DeviceType.Tablet] = DetailsPageTemplateModule,
+	[DeviceType.VR] = DetailsPageTemplateModule
 }
 
-return function(p1)
-	-- upvalues: t (ref), detailsPageTemplateModule (ref), reactModule (ref)
-	return reactModule.createElement(t[p1.deviceType] or detailsPageTemplateModule, p1.detailsPageProps)
+return function(p1) --[[ Line: 32 | Named "DetailsPageTemplateSelector" ]]
+	-- upvalues: config (copy), DetailsPageTemplateModule (copy), ReactModule (copy)
+	return ReactModule.createElement(config[p1.deviceType] or DetailsPageTemplateModule, p1.detailsPageProps)
 end

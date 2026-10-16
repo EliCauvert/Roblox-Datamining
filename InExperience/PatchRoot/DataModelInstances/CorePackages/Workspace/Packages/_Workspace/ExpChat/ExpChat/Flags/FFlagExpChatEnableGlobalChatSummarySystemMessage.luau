@@ -1,1 +1,4 @@
-﻿return game:GetEngineFeature("EnableGlobalChat3pSummary") and (game:DefineFastFlag("ExpChatEnableGlobalChatSummarySystemMessage", false) and require(script.Parent.FFlagEnableInExpChatSummaryOnLua))
+﻿local ExpChatEnableGlobalChatSummarySystemMessage = game:DefineFastFlag("ExpChatEnableGlobalChatSummarySystemMessage", false)
+local FFlagEnableInExpChatSummaryOnLuaModule = require(script.Parent.FFlagEnableInExpChatSummaryOnLua)
+
+return game:GetEngineFeature("EnableGlobalChat3pSummary") and (ExpChatEnableGlobalChatSummarySystemMessage and FFlagEnableInExpChatSummaryOnLuaModule)

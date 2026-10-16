@@ -1,51 +1,51 @@
-﻿local httpService = game:GetService("HttpService")
-local cryoModule = require(game:GetService("CorePackages").Packages.Cryo)
+﻿local HttpService = game:GetService("HttpService")
+local CryoModule = require(game:GetService("CorePackages").Packages.Cryo)
 local _ = require(script.Parent.VoiceChatServiceManager)
-local getSortedPlayers = require(script.Parent.VoiceUsersByProximity).getSortedPlayers
+local GetSortedPlayersFunction = require(script.Parent.VoiceUsersByProximity).getSortedPlayers
 
-return function(p1, p2, p3)
-	-- upvalues: cryoModule (ref), getSortedPlayers (ref), httpService (ref)
-	local abuserUserIdPlayerByUserId = p1:GetPlayerByUserId(p3.abuserUserId)
-	local var1 = if abuserUserIdPlayerByUserId and abuserUserIdPlayerByUserId.Character and abuserUserIdPlayerByUserId.Character.PrimaryPart then abuserUserIdPlayerByUserId.Character.PrimaryPart.Position else nil
+return function(Players, p1, p2) --[[ Line: 21 ]]
+	-- upvalues: CryoModule (copy), GetSortedPlayersFunction (copy), HttpService (copy)
+	local Player = Players:GetPlayerByUserId(p2.abuserUserId)
+	local Position = if Player and Player.Character and Player.Character.PrimaryPart then Player.Character.PrimaryPart.Position else nil
 	
-	return httpService:JSONEncode({
+	return HttpService:JSONEncode({
 		tags = {
 			ENTRY_POINT = { valueList = { { data = "in-experience" } } },
-			SUBMITTER_USER_ID = { valueList = { { data = tostring(p3.localUserId) } } },
-			REPORT_TARGET_USER_ID = { valueList = { { data = tostring(p3.abuserUserId) } } },
-			REPORTED_ABUSE_CATEGORY = { valueList = { { data = p3.abuseReason } } },
-			REPORTER_COMMENT = { valueList = { { data = p3.abuseComment } } },
+			SUBMITTER_USER_ID = { valueList = { { data = tostring(p2.localUserId) } } },
+			REPORT_TARGET_USER_ID = { valueList = { { data = tostring(p2.abuserUserId) } } },
+			REPORTED_ABUSE_CATEGORY = { valueList = { { data = p2.abuseReason } } },
+			REPORTER_COMMENT = { valueList = { { data = p2.abuseComment } } },
 			IS_PLACE_VOICE_ENABLED = { valueList = { { data = "true" } } },
 			VOICE_USER_IDS_FROM_CLIENT = {
-				valueList = cryoModule.List.map(p3.sortedPlayerListUserIds, function(p4)
-					return { data = tostring(p4) }
+				valueList = CryoModule.List.map(p2.sortedPlayerListUserIds, function(p3) --[[ Line: 47 ]]
+					return { data = tostring(p3) }
 				end)
 			},
 			IN_EXP_MENU_OPENED_UNIX_MILLI = {
-				valueList = { { data = tostring(p3.inExpMenuOpenedUnixMilli) } }
+				valueList = { { data = tostring(p2.inExpMenuOpenedUnixMilli) } }
 			},
 			VOICE_CHANNEL_ID = {
 				valueList = {
 					{
-						data = tostring(if game:GetEngineFeature("VoiceChatServiceExposesChannelId") then p2.service:GetChannelId() else p2.service:GetGroupId())
+						data = tostring(if game:GetEngineFeature("VoiceChatServiceExposesChannelId") then p1.service:GetChannelId() else p1.service:GetGroupId())
 					}
 				}
 			},
 			VOICE_USER_COUNT = {
 				valueList = {
 					{
-						data = tostring(#cryoModule.Dictionary.values(p2.participants))
+						data = tostring(#CryoModule.Dictionary.values(p1.participants))
 					}
 				}
 			},
 			VOICE_IMPACTED_USER_COUNT = {
 				valueList = {
 					{
-						data = tostring(if var1 then #getSortedPlayers(p1, p2, var1, 160, nil, abuserUserIdPlayerByUserId) else 0)
+						data = tostring(if Position then #GetSortedPlayersFunction(Players, p1, Position, 160, nil, Player) else 0)
 					}
 				}
 			},
-			REPORTED_ABUSE_VECTOR = { valueList = { { data = p3.abuseVector } } }
+			REPORTED_ABUSE_VECTOR = { valueList = { { data = p2.abuseVector } } }
 		}
 	})
 end

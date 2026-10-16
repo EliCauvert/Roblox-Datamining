@@ -1,42 +1,44 @@
-﻿local legacyFriendsRodux = script:FindFirstAncestor("LegacyFriendsRodux")
-local parent = legacyFriendsRodux.Parent
-local immutable = require(parent.AppCommonLib).Immutable
-local retrievalStatus = require(parent.Http).Enum.RetrievalStatus
-local fetchUserFriendsStarted = require(legacyFriendsRodux.Actions).FetchUserFriendsStarted
-local fetchUserFriendsFailed = require(legacyFriendsRodux.Actions).FetchUserFriendsFailed
-local fetchUserFriendsCompleted = require(legacyFriendsRodux.Actions).FetchUserFriendsCompleted
+﻿local LegacyFriendsRodux = script:FindFirstAncestor("LegacyFriendsRodux")
+local Parent = LegacyFriendsRodux.Parent
+local Immutable = require(Parent.AppCommonLib).Immutable
+local RetrievalStatus = require(Parent.Http).Enum.RetrievalStatus
+local FetchUserFriendsStarted = require(LegacyFriendsRodux.Actions).FetchUserFriendsStarted
+local FetchUserFriendsFailed = require(LegacyFriendsRodux.Actions).FetchUserFriendsFailed
+local FetchUserFriendsCompleted = require(LegacyFriendsRodux.Actions).FetchUserFriendsCompleted
 
-local function setFieldPerUser(value, p1, p2, p3)
-	-- upvalues: immutable (ref)
-	return immutable.JoinDictionaries(value, {
-		[p1] = immutable.JoinDictionaries(value[p1] or {}, { [p2] = p3 })
+local function setFieldPerUser(RetrievalStatus, p1, UserId, Done) --[[ Line: 11 ]]
+	-- upvalues: Immutable (copy)
+	return Immutable.JoinDictionaries(RetrievalStatus, {
+		[p1] = Immutable.JoinDictionaries(RetrievalStatus[p1] or {}, { [UserId] = Done })
 	})
 end
 
-local function _(value, p1, p2)
-	-- upvalues: setFieldPerUser (ref)
-	return setFieldPerUser(value, "retrievalStatus", p1, p2)
+local function _(p1, p2, p3) --[[ Line: 20 | Named "setRetrievalStatus" ]]
+	-- upvalues: setFieldPerUser (copy)
+	return setFieldPerUser(p1, "retrievalStatus", p2, p3)
 end
 
-local _ = function(value, p1, p2)
-	-- upvalues: setFieldPerUser (ref)
-	return setFieldPerUser(value, "retrievalFailureResponse", p1, p2)
+local _ = function(p1, p2, p3) --[[ Line: 24 | Named "setRetrievalFailureResponse" ]]
+	-- upvalues: setFieldPerUser (copy)
+	return setFieldPerUser(p1, "retrievalFailureResponse", p2, p3)
 end
 
-return function(p1, p2)
-	-- upvalues: fetchUserFriendsStarted (ref), retrievalStatus (ref), setFieldPerUser (ref), fetchUserFriendsFailed (ref), fetchUserFriendsCompleted (ref)
-	p1 = p1 or { retrievalStatus = {}, retrievalFailureResponse = {} }
+return function(p1, p2) --[[ Line: 28 ]]
+	-- upvalues: FetchUserFriendsStarted (copy), RetrievalStatus (copy), setFieldPerUser (copy), FetchUserFriendsFailed (copy), FetchUserFriendsCompleted (copy)
+	local P10 = p1 or { retrievalStatus = {}, retrievalFailureResponse = {} }
 	
-	if p2.type == fetchUserFriendsStarted.name then
-		p1 = setFieldPerUser(p1, "retrievalStatus", p2.userId, retrievalStatus.Fetching)
+	if p2.type == FetchUserFriendsStarted.name then
+		P10 = setFieldPerUser(P10, "retrievalStatus", p2.userId, RetrievalStatus.Fetching)
 		
-		return p1
-	elseif p2.type == fetchUserFriendsFailed.name then
-		p1 = setFieldPerUser(setFieldPerUser(p1, "retrievalStatus", p2.userId, retrievalStatus.Failed), "retrievalFailureResponse", p2.userId, p2.response)
-		
-		return p1
-	elseif p2.type == fetchUserFriendsCompleted.name then
-		p1 = setFieldPerUser(p1, "retrievalStatus", p2.userId, retrievalStatus.Done)
+		return P10
 	end
-	return p1
+	if p2.type == FetchUserFriendsFailed.name then
+		P10 = setFieldPerUser(setFieldPerUser(P10, "retrievalStatus", p2.userId, RetrievalStatus.Failed), "retrievalFailureResponse", p2.userId, p2.response)
+		
+		return P10
+	end
+	if p2.type == FetchUserFriendsCompleted.name then
+		P10 = setFieldPerUser(P10, "retrievalStatus", p2.userId, RetrievalStatus.Done)
+	end
+	return P10
 end

@@ -1,6 +1,6 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
-local avatarExperienceCommonModule = require(parent.AvatarExperienceCommon)
-local t = {
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceCatalog").Parent
+local AvatarExperienceCommonModule = require(Parent.AvatarExperienceCommon)
+local WidgetConstantsModule = {
 	Templates = {
 		ItemGroup = "ItemGroup",
 		Carousel = "Carousel",
@@ -21,7 +21,7 @@ local t = {
 		OrganicContent = "OrganicContent",
 		MakeupLooksWidget = "MakeupTabWidget",
 		SearchLandingPageRecentlyViewedWidget = "SearchLandingPageRecentlyViewedWidget",
-		AdvancedBodiesWidget = if require(parent.AvatarExperienceFlags).FFlagAXTallTilesForAdvancedBodiesWidget then "AdvancedBodiesWidget" else nil
+		AdvancedBodiesWidget = if require(Parent.AvatarExperienceFlags).FFlagAXTallTilesForAdvancedBodiesWidget then "AdvancedBodiesWidget" else nil
 	},
 	ActionType = {
 		IMPRESSION = 0,
@@ -38,8 +38,8 @@ local t = {
 		Look = "Look"
 	}
 }
-t.TypeToImageInfo = {
-	[t.Types.ProfilePictureEditorWidget] = {
+WidgetConstantsModule.TypeToImageInfo = {
+	[WidgetConstantsModule.Types.ProfilePictureEditorWidget] = {
 		backgroundImageDark = "rbxasset://textures/AvatarEditorImages/AvatarEditor.png",
 		backgroundImageLight = "rbxasset://textures/AvatarEditorImages/AvatarEditor_LightTheme.png",
 		contentImageDark = "rbxasset://textures/ui/AvatarExperience/Profile_Picture_Group.png",
@@ -48,7 +48,7 @@ t.TypeToImageInfo = {
 		widthHeightRatio = 1.91
 	}
 }
-t.ContextWidgets = {
+WidgetConstantsModule.ContextWidgets = {
 	MySharedAvatars = {
 		Title = "Feature.Avatar.Heading.MySharedAvatarsTitle",
 		RequestId = "4e42a6c6-84d9-4a0c-863d-8c1c12158645",
@@ -62,6 +62,6 @@ t.ContextWidgets = {
 		Context = "SearchLandingPageRecentlyViewedWidget"
 	}
 }
-t.WidgetExposureMetadata = avatarExperienceCommonModule.Constants.IXP_WIDGET_LAYER_EXPOSURE
+WidgetConstantsModule.WidgetExposureMetadata = AvatarExperienceCommonModule.Constants.IXP_WIDGET_LAYER_EXPOSURE
 
-return t
+return WidgetConstantsModule

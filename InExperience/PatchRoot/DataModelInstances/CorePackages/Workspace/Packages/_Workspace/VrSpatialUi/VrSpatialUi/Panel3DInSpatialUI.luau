@@ -1,81 +1,83 @@
-﻿local vrSpatialUi = script:FindFirstAncestor("VrSpatialUi")
-local guiService = game:GetService("GuiService")
-local parent = vrSpatialUi.Parent
-local UIBloxModule = require(parent.UIBlox)
-local reactModule = require(parent.React)
-local subscribeToBinding = reactModule.__subscribeToBinding
-local constants = UIBloxModule.Core.VR.Constants
-local panel3D = UIBloxModule.Core.VR.Panel3D
-local UIManagerModule = require(vrSpatialUi.UIManager)
-local _ = require(vrSpatialUi.Constants)
-local registerRoactPanelModule = require(vrSpatialUi.registerRoactPanel)
-local useHeadScaleModule = require(vrSpatialUi.Hooks.useHeadScale)
-local inExperienceUIVRIXP = require(parent.SharedExperimentDefinition).InExperienceUIVRIXP
+﻿local VrSpatialUi = script:FindFirstAncestor("VrSpatialUi")
+local GuiService = game:GetService("GuiService")
+local Parent = VrSpatialUi.Parent
+local UIBloxModule = require(Parent.UIBlox)
+local ReactModule = require(Parent.React)
+local SubscribeToBindingFunction = ReactModule.__subscribeToBinding
+local Constants = UIBloxModule.Core.VR.Constants
+local Panel3D = UIBloxModule.Core.VR.Panel3D
+local UIManagerModule = require(VrSpatialUi.UIManager)
+local _ = require(VrSpatialUi.Constants)
+local RegisterRoactPanelModule = require(VrSpatialUi.registerRoactPanel)
+local UseHeadScaleModule = require(VrSpatialUi.Hooks.useHeadScale)
+local InExperienceUIVRIXP = require(Parent.SharedExperimentDefinition).InExperienceUIVRIXP
 
-return reactModule.memo(function(p1)
-	-- upvalues: UIManagerModule (ref), inExperienceUIVRIXP (ref), reactModule (ref), useHeadScaleModule (ref), panel3D (ref), constants (ref), guiService (ref), registerRoactPanelModule (ref), subscribeToBinding (ref)
-	local panelTypeScaledPartSizeInPixel = UIManagerModule.getInstance():getScaledPartSizeInPixel(p1.panelType)
-	local panelTypePanelSizeInPixel = UIManagerModule.getInstance():getPanelSizeInPixel(p1.panelType)
-	local var1 = if inExperienceUIVRIXP:isSpatialUIScalingFixEnabled() then reactModule.useRef(nil) else nil
-	local var2, _ = useHeadScaleModule(var1, panelTypeScaledPartSizeInPixel)
-	local var3 = nil
+return ReactModule.memo(function(p1) --[[ Line: 28 | Named "Panel3DInSpatialUI" ]]
+	-- upvalues: UIManagerModule (copy), InExperienceUIVRIXP (copy), ReactModule (copy), UseHeadScaleModule (copy), Panel3D (copy), Constants (copy), GuiService (copy), RegisterRoactPanelModule (copy), SubscribeToBindingFunction (copy)
+	local ScaledPartSizeInPixel = UIManagerModule.getInstance():getScaledPartSizeInPixel(p1.panelType)
+	local PanelSizeInPixel = UIManagerModule.getInstance():getPanelSizeInPixel(p1.panelType)
+	local UseRefResult = if InExperienceUIVRIXP:isSpatialUIScalingFixEnabled() then ReactModule.useRef(nil) else nil
+	local UseHeadScaleModuleResult, _ = UseHeadScaleModule(UseRefResult, ScaledPartSizeInPixel)
+	local Callback = nil
 	
-	return reactModule.createElement(panel3D, {
+	return ReactModule.createElement(Panel3D, {
 		lerp = true,
 		tilt = 0,
 		faceCamera = true,
 		curvature = 0,
 		panelName = p1.panelType,
-		partRef = var1,
-		partSize = if inExperienceUIVRIXP:isSpatialUIScalingFixEnabled() then panelTypeScaledPartSizeInPixel else panelTypeScaledPartSizeInPixel * var2,
-		virtualScreenSize = if inExperienceUIVRIXP:isSpatialUIScalingFixEnabled() then panelTypePanelSizeInPixel else panelTypePanelSizeInPixel * var2,
+		partRef = UseRefResult,
+		partSize = if InExperienceUIVRIXP:isSpatialUIScalingFixEnabled() then ScaledPartSizeInPixel else ScaledPartSizeInPixel * UseHeadScaleModuleResult,
+		virtualScreenSize = if InExperienceUIVRIXP:isSpatialUIScalingFixEnabled() then PanelSizeInPixel else PanelSizeInPixel * UseHeadScaleModuleResult,
 		offset = CFrame.new(0, 0, 0),
-		anchoring = constants.AnchoringTypes.PanelManaged,
-		parent = guiService.CoreGuiFolder,
-		connectPanelManagerFunction = function(p2)
-			-- upvalues: registerRoactPanelModule (copy), p1 (ref), subscribeToBinding (copy), var3 (write), UIManagerModule (copy)
+		anchoring = Constants.AnchoringTypes.PanelManaged,
+		parent = GuiService.CoreGuiFolder,
+		connectPanelManagerFunction = function(p2) --[[ Line: 47 ]]
+			-- upvalues: RegisterRoactPanelModule (upval), p1 (copy), SubscribeToBindingFunction (upval), Callback (ref), UIManagerModule (upval)
 			if p2 then
-				registerRoactPanelModule(p2, p1.panelType, p1.visibilityObservable, p1.keepVisibleWhenTopBarHidden)
+				RegisterRoactPanelModule(p2, p1.panelType, p1.visibilityObservable, p1.keepVisibleWhenTopBarHidden)
 				
 				if p1.keepVisibleWhenTopBarHidden and p1.controlsVisible and p2.current then
-					local current = p2.current
-					local adornee = current.Adornee
-					local active = current.Active
-					local canQuery = adornee.CanQuery
-					local var4 = subscribeToBinding(p1.controlsVisible, function(p3)
-						-- upvalues: current (ref), active (ref), adornee (ref), canQuery (ref)
-						current.Active = active and p3
-						adornee.CanQuery = canQuery and p3
+					local Current = p2.current
+					local Adornee = Current.Adornee
+					local Active = Current.Active
+					local CanQuery = Adornee.CanQuery
+					local SubscribeToBindingResult = SubscribeToBindingFunction(p1.controlsVisible, function(p3) --[[ Line: 59 | Named "updateInput" ]]
+						-- upvalues: Current (copy), Active (copy), Adornee (copy), CanQuery (copy)
+						Current.Active = Active and p3
+						Adornee.CanQuery = CanQuery and p3
 					end)
-					local value = p1.controlsVisible:getValue()
-					current.Active = active and value
-					adornee.CanQuery = canQuery and value
+					local Value = p1.controlsVisible:getValue()
+					Current.Active = Active and Value
+					Adornee.CanQuery = CanQuery and Value
 					
-					var3 = function()
-						-- upvalues: var4 (ref), current (ref), adornee (ref), active (ref), canQuery (ref)
-						var4()
-						current.Active = active
-						adornee.CanQuery = canQuery
+					Callback = function() --[[ Line: 66 ]]
+						-- upvalues: SubscribeToBindingResult (copy), Current (copy), Adornee (copy), Active (copy), CanQuery (copy)
+						SubscribeToBindingResult()
+						Current.Active = Active
+						Adornee.CanQuery = CanQuery
 					end
 					
 					return
 				end
-			elseif var3 then
-				var3()
-				var3 = nil
+			else
+				if Callback then
+					Callback()
+					Callback = nil
+				end
+				UIManagerModule.getInstance():removeRoactPanel(p1.panelType)
 			end
-			UIManagerModule.getInstance():removeRoactPanel(p1.panelType)
 		end,
 		zOffset = p1.zOffset or 1
 	}, {
-		ContentContainer = if p1.requireCanvasGroup then reactModule.createElement("CanvasGroup", {
+		ContentContainer = if p1.requireCanvasGroup then ReactModule.createElement("CanvasGroup", {
 			BackgroundTransparency = 1,
 			Name = "AnimatablePanelManagedContent",
 			BorderSizePixel = 0,
 			GroupTransparency = 0,
 			Size = UDim2.new(1, 0, 1, 0)
 		}, {
-			Content = p1.renderFunction(if inExperienceUIVRIXP:isSpatialUIScalingFixEnabled() then panelTypePanelSizeInPixel else panelTypePanelSizeInPixel * var2)
-		}) else p1.renderFunction(if inExperienceUIVRIXP:isSpatialUIScalingFixEnabled() then panelTypePanelSizeInPixel else panelTypePanelSizeInPixel * var2)
+			Content = p1.renderFunction(if InExperienceUIVRIXP:isSpatialUIScalingFixEnabled() then PanelSizeInPixel else PanelSizeInPixel * UseHeadScaleModuleResult)
+		}) else p1.renderFunction(if InExperienceUIVRIXP:isSpatialUIScalingFixEnabled() then PanelSizeInPixel else PanelSizeInPixel * UseHeadScaleModuleResult)
 	})
 end)

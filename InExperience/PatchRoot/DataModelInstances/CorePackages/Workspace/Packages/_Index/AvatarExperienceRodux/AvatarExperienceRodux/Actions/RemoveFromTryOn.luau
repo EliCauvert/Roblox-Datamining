@@ -1,3 +1,3 @@
-﻿return require(script:FindFirstAncestor("AvatarExperienceRodux").Parent.Rodux).makeActionCreator(script.Name, function(p1, p2)
-	return { itemId = p1, itemType = p2 }
+﻿return require(script:FindFirstAncestor("AvatarExperienceRodux").Parent.Rodux).makeActionCreator(script.Name, function(ItemId, ItemType) --[[ Line: 10 ]]
+	return { itemId = ItemId, itemType = ItemType }
 end)

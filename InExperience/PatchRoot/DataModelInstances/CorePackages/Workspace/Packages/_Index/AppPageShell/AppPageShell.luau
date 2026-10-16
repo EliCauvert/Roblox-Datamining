@@ -1,14 +1,11 @@
-﻿local _script = script
-local pageConstantsModule = require(script.PageConstants)
-local pageContextModule = require(script.PageContext)
-local _ = require(script.PageTypes)
+﻿local _ = require(script.PageTypes)
 local _ = require(script.createPageScrollStore)
 
 return {
 	Page = require(script.Page),
-	PageContext = pageContextModule,
+	PageContext = require(script.PageContext),
 	PullToRefreshSpinner = require(script.PullToRefreshSpinner),
-	scrollToTop = require(_script.scrollToTop),
-	PageContentMode = pageConstantsModule.PageContentMode,
+	scrollToTop = require(script.scrollToTop),
+	PageContentMode = require(script.PageConstants).PageContentMode,
 	["jest.config"] = script["jest.config"]
 }

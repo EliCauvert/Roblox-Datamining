@@ -1,26 +1,26 @@
-﻿local chrome = script:FindFirstAncestor("Chrome")
-local reactModule = require(chrome.Parent.React)
-local _ = require(chrome.Common.Types)
+﻿local Chrome = script:FindFirstAncestor("Chrome")
+local ReactModule = require(Chrome.Parent.React)
+local _ = require(Chrome.Common.Types)
 
-return function(p1)
-	-- upvalues: reactModule (ref)
-	local var1, var2 = reactModule.useState(if p1 == nil then nil else p1:get())
-	reactModule.useEffect(function()
-		-- upvalues: p1 (ref), var2 (ref), var1 (ref)
+return function(p1) --[[ Line: 11 ]]
+	-- upvalues: ReactModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(if p1 == nil then nil else p1:get())
+	ReactModule.useEffect(function() --[[ Line: 14 ]]
+		-- upvalues: p1 (copy), UseStateResult2 (copy), UseStateResult (copy)
 		if p1 == nil then return end
-		local var3 = p1:connect(function(p2)
-			-- upvalues: var2 (copy)
-			var2(p2)
+		local Connection = p1:connect(function(p2) --[[ Line: 19 ]]
+			-- upvalues: UseStateResult2 (upval)
+			UseStateResult2(p2)
 		end)
 		
-		if var1 ~= p1:get() then
-			var2(p1:get())
+		if UseStateResult ~= p1:get() then
+			UseStateResult2(p1:get())
 		end
-		return function()
-			-- upvalues: var3 (ref)
-			var3:disconnect()
+		return function() --[[ Line: 29 ]]
+			-- upvalues: Connection (copy)
+			Connection:disconnect()
 		end
 	end, { p1 })
 	
-	return var1
+	return UseStateResult
 end

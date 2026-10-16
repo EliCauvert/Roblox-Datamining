@@ -1,6 +1,6 @@
-﻿return function(p1, p2)
-	for i, v in ipairs(p1) do
-		if p2(v, i) then
+﻿return function(List, Callback) --[[ Line: 10 | Named "findIndex" ]]
+	for i, value in ipairs(List) do
+		if Callback(value, i) then
 			return i
 		end
 	end

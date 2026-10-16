@@ -1,65 +1,67 @@
-﻿local httpService = game:GetService("HttpService")
-local momentsCommonModule = require(script:FindFirstAncestor("Moments").Parent.MomentsCommon)
-local eventNames = momentsCommonModule.Analytics.EventNames
-local reportMomentsComments = momentsCommonModule.Analytics.reportMomentsComments
-local reportMomentsCommentAction = momentsCommonModule.Analytics.reportMomentsCommentAction
+﻿local HttpService = game:GetService("HttpService")
+local MomentsCommonModule = require(script:FindFirstAncestor("Moments").Parent.MomentsCommon)
+local EventNames = MomentsCommonModule.Analytics.EventNames
+local ReportMomentsCommentsFunction = MomentsCommonModule.Analytics.reportMomentsComments
+local ReportMomentsCommentActionFunction = MomentsCommonModule.Analytics.reportMomentsCommentAction
 
-return function(p1, p2, p3, p4, p5, p6, p7)
-	-- upvalues: momentsCommonModule (ref), httpService (ref), reportMomentsComments (ref), reportMomentsCommentAction (ref), eventNames (ref)
-	p4 = p4 or momentsCommonModule.Analytics.fireAnalyticsEvent
-	p5 = p5 or httpService:GenerateGUID(false)
-	local var1 = false
-	local var2 = false
-	local var3 = false
+return function(FeedItemId, Surface, Callback, p1, p2, p3, Callback2) --[[ Line: 26 | Named "createCommentsAnalyticsSession" ]]
+	-- upvalues: MomentsCommonModule (copy), HttpService (copy), ReportMomentsCommentsFunction (copy), ReportMomentsCommentActionFunction (copy), EventNames (copy)
+	local Callback1 = p1 or MomentsCommonModule.Analytics.fireAnalyticsEvent
+	local P3 = p2 or HttpService:GenerateGUID(false)
+	local Flag = false
+	local Flag1 = false
+	local Flag2 = false
 	
-	local function logEvent(p8, p9)
-		-- upvalues: var3 (write), p3 (ref), p1 (ref), p2 (ref), p5 (ref), p4 (ref), reportMomentsComments (copy), p6 (ref)
-		if var3 or not p3() then
+	local function logEvent(MomentCommentsPanelClosed, p4) --[[ Line: 41 ]]
+		-- upvalues: Flag2 (ref), Callback (copy), FeedItemId (copy), Surface (copy), P3 (copy), Callback1 (copy), ReportMomentsCommentsFunction (upval), p3 (copy)
+		if not Flag2 and Callback() then
+			local Copy = table.clone(p4 or {})
+			Copy.feedItemId = FeedItemId
+			Copy.surface = Surface
+			Copy.commentPanelSessionId = P3
+			Callback1(MomentCommentsPanelClosed, Copy)
+			ReportMomentsCommentsFunction(MomentCommentsPanelClosed, Copy, p3)
+			
 			return
 		end
-		local cloned = table.clone(p9 or {})
-		cloned.feedItemId = p1
-		cloned.surface = p2
-		cloned.commentPanelSessionId = p5
-		p4(p8, cloned)
-		reportMomentsComments(p8, cloned, p6)
 	end
 	
 	return {
-		open = function()
-			-- upvalues: var2 (write), logEvent (ref), eventNames (copy), p7 (ref)
-			if not var2 then
-				var2 = true
-				logEvent(eventNames.MomentCommentsPanelOpened, if p7 then p7() else nil)
+		open = function() --[[ Line: 63 ]]
+			-- upvalues: Flag1 (ref), logEvent (copy), EventNames (upval), Callback2 (copy)
+			if not Flag1 then
+				Flag1 = true
+				logEvent(EventNames.MomentCommentsPanelOpened, if Callback2 then Callback2() else nil)
 			end
 		end,
-		startView = function()
-			-- upvalues: var3 (write), var1 (write)
-			if not var3 then
-				var1 = true
+		startView = function() --[[ Line: 69 ]]
+			-- upvalues: Flag2 (ref), Flag (ref)
+			if not Flag2 then
+				Flag = true
 			end
 		end,
-		finishView = function(p8)
-			-- upvalues: var1 (write), logEvent (ref), eventNames (copy)
-			if var1 then
-				var1 = false
-				logEvent(eventNames.MomentCommentsPanelClosed, { closeReason = p8 })
+		finishView = function(CloseReason) --[[ Line: 74 ]]
+			-- upvalues: Flag (ref), logEvent (copy), EventNames (upval)
+			if Flag then
+				Flag = false
+				logEvent(EventNames.MomentCommentsPanelClosed, { closeReason = CloseReason })
 			end
 		end,
-		cancel = function()
-			-- upvalues: var3 (write), var1 (write)
-			var3 = true
-			var1 = false
+		cancel = function() --[[ Line: 80 ]]
+			-- upvalues: Flag2 (ref), Flag (ref)
+			Flag2 = true
+			Flag = false
 		end,
 		logEvent = logEvent,
-		logRealtimeEvent = function(p8, p9)
-			-- upvalues: var3 (write), p3 (ref), p2 (ref), reportMomentsCommentAction (copy), p6 (ref)
-			if var3 or not p3() then
+		logRealtimeEvent = function(p4, Tbl) --[[ Line: 53 ]]
+			-- upvalues: Flag2 (ref), Callback (copy), Surface (copy), ReportMomentsCommentActionFunction (upval), p3 (copy)
+			if not Flag2 and Callback() then
+				local Copy = table.clone(Tbl)
+				Copy.surface = Surface
+				ReportMomentsCommentActionFunction(p4, Copy, p3)
+				
 				return
 			end
-			local cloned = table.clone(p9)
-			cloned.surface = p2
-			reportMomentsCommentAction(p8, cloned, p6)
 		end
 	}
 end

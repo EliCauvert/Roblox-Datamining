@@ -1,27 +1,27 @@
-﻿local commerceService = game:GetService("CommerceService")
-local commercePurchaseApp = script:FindFirstAncestor("CommercePurchaseApp")
-local parent = commercePurchaseApp.Parent
-local reactModule = require(parent.React)
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local useSelector = require(parent.RoactUtils).Hooks.RoactRodux.useSelector
-local commercePurchaseEndedModule = require(commercePurchaseApp.Store.Actions.CommercePurchaseEnded)
-local selectErrorCodeModule = require(commercePurchaseApp.Store.Selectors.selectErrorCode)
-local selectCommerceProductIdModule = require(commercePurchaseApp.Store.Selectors.selectCommerceProductId)
-local _ = require(commercePurchaseApp.Enums.ErrorCodeEnum)
+﻿local CommerceService = game:GetService("CommerceService")
+local CommercePurchaseApp = script:FindFirstAncestor("CommercePurchaseApp")
+local Parent = CommercePurchaseApp.Parent
+local ReactModule = require(Parent.React)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local CommercePurchaseEndedModule = require(CommercePurchaseApp.Store.Actions.CommercePurchaseEnded)
+local SelectErrorCodeModule = require(CommercePurchaseApp.Store.Selectors.selectErrorCode)
+local SelectCommerceProductIdModule = require(CommercePurchaseApp.Store.Selectors.selectCommerceProductId)
+local _ = require(CommercePurchaseApp.Enums.ErrorCodeEnum)
 local _ = require(script.Parent.CommercePurchaseError)
 
-return function()
-	-- upvalues: useSelector (ref), selectErrorCodeModule (ref), selectCommerceProductIdModule (ref), useDispatch (ref), reactModule (ref), commerceService (ref), commercePurchaseEndedModule (ref)
-	local var1 = useSelector(selectErrorCodeModule)
-	local var2 = useSelector(selectCommerceProductIdModule)
-	local var3 = useDispatch()
+return function() --[[ Line: 15 | Named "useCommercePurchaseErrorProps" ]]
+	-- upvalues: UseSelectorFunction (copy), SelectErrorCodeModule (copy), SelectCommerceProductIdModule (copy), UseDispatchFunction (copy), ReactModule (copy), CommerceService (copy), CommercePurchaseEndedModule (copy)
+	local UseSelectorResult = UseSelectorFunction(SelectErrorCodeModule)
+	local UseSelectorResult1 = UseSelectorFunction(SelectCommerceProductIdModule)
+	local UseDispatchResult = UseDispatchFunction()
 	
 	return {
-		onDismiss = reactModule.useCallback(function()
-			-- upvalues: commerceService (copy), var2 (ref), var3 (ref), commercePurchaseEndedModule (copy)
-			commerceService:SignalPromptCommerceProductPurchaseFinished(var2, false)
-			var3(commercePurchaseEndedModule())
-		end, { var2, var3 }),
-		errorCode = var1
+		onDismiss = ReactModule.useCallback(function() --[[ Line: 20 ]]
+			-- upvalues: CommerceService (upval), UseSelectorResult1 (copy), UseDispatchResult (copy), CommercePurchaseEndedModule (upval)
+			CommerceService:SignalPromptCommerceProductPurchaseFinished(UseSelectorResult1, false)
+			UseDispatchResult(CommercePurchaseEndedModule())
+		end, { UseSelectorResult1, UseDispatchResult }),
+		errorCode = UseSelectorResult
 	}
 end

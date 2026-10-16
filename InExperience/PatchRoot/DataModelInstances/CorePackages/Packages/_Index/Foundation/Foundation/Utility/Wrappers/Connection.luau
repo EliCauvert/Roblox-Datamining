@@ -1,5 +1,5 @@
 ﻿return {
-	Disconnect = function(p1)
-		return p1:Disconnect()
+	Disconnect = function(Connection) --[[ Line: 2 ]]
+		return Connection:Disconnect()
 	end
 }

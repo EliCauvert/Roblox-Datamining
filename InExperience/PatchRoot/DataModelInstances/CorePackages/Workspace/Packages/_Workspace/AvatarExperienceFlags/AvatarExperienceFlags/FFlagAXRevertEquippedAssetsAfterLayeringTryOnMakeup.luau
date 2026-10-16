@@ -1,1 +1,3 @@
-﻿return game:DefineFastFlag("AXRevertEquippedAssetsAfterLayeringTryOnMakeup", false) and require(script.Parent.FFlagAXCatalogMakeupSupport)
+﻿local FFlagAXCatalogMakeupSupportModule = require(script.Parent.FFlagAXCatalogMakeupSupport)
+
+return game:DefineFastFlag("AXRevertEquippedAssetsAfterLayeringTryOnMakeup", false) and FFlagAXCatalogMakeupSupportModule

@@ -1,65 +1,64 @@
-﻿local scrollIntervalTrackerModule = require(script:FindFirstAncestor("IntervalPerformanceTracker").Parent.ScrollIntervalTracker)
-local intervalPerformanceTrackerModule = require(script.Parent.IntervalPerformanceTracker)
+﻿local ScrollIntervalTrackerModule = require(script:FindFirstAncestor("IntervalPerformanceTracker").Parent.ScrollIntervalTracker)
+local IntervalPerformanceTrackerModule = require(script.Parent.IntervalPerformanceTracker)
 local list = {
 	"duration", "averageFPS", "framesCount", "longestFrameTime", "frameTimeAvgMs",
 	"frameTimeStdDevMs", "frameTimeDistributionMs", "frameBuckets",
 	"rawFrameTimesMs", "rawScrollPositionSamplesCsv"
 }
 
-return function(p1, p2, p3, p4)
-	-- upvalues: list (ref), intervalPerformanceTrackerModule (ref), scrollIntervalTrackerModule (ref)
-	local var1 = if p4 and p4.metricsToTrack then p4.metricsToTrack else list
-	local var2 = if p4 and p4.countersEnabled ~= nil then p4.countersEnabled else true
-	local var3 = if p4 and p4.eventStreamEnabled ~= nil then p4.eventStreamEnabled else true
-	local var4 = if p4 then p4.scrollOptions else nil
-	local var5 = if p4 and p4.trackScrollType ~= nil then p4.trackScrollType else true
-	local var6 = if p4 then p4.extraFields else nil
-	local var7 = false
+return function(p1, p2, p3, p4) --[[ Line: 65 | Named "createScrollIntervalPerformanceTracker" ]]
+	-- upvalues: list (copy), IntervalPerformanceTrackerModule (copy), ScrollIntervalTrackerModule (copy)
+	local MetricsToTrack = if p4 and p4.metricsToTrack then p4.metricsToTrack else list
+	local NoP3 = not p4 or p4.countersEnabled == nil or p4.countersEnabled
+	local NoP3_1 = not p4 or p4.eventStreamEnabled == nil or p4.eventStreamEnabled
+	local NoP3_2 = not p4 or p4.trackScrollType == nil or p4.trackScrollType
+	local ExtraFields = if p4 then p4.extraFields else nil
+	local Flag = false
 	
-	local function _()
-		-- upvalues: var7 (write), var5 (ref), var6 (ref)
-		local var8 = if var7 then "warm" else "cold"
+	local function _() --[[ Line: 84 | Named "buildExtraFields" ]]
+		-- upvalues: Flag (ref), NoP3_2 (copy), ExtraFields (copy)
+		local Warm: string = if Flag then "warm" else "cold"
 		
-		if not var5 then
-			return var6
+		if not NoP3_2 then
+			return ExtraFields
 		end
 		local t = {}
 		
-		if var6 then
-			for i, v in var6 do
-				t[i] = v
+		if ExtraFields then
+			for i, extraField in ExtraFields do
+				t[i] = extraField
 			end
 		end
-		t.scroll_type = var8
+		t.scroll_type = Warm
 		
 		return t
 	end
 	
-	return scrollIntervalTrackerModule.createScrollIntervalTracker(function(_)
-		-- upvalues: intervalPerformanceTrackerModule (copy), p1 (ref), var1 (ref), var2 (ref), var3 (ref), var7 (write), var5 (ref), var6 (ref), p2 (ref)
-		local var9
-		local var10 = nil
-		local var11 = if var7 then "warm" else "cold"
+	return ScrollIntervalTrackerModule.createScrollIntervalTracker(function(_): boolean --[[ Line: 101 | Named "tryStart" ]]
+		-- upvalues: IntervalPerformanceTrackerModule (upval), p1 (copy), MetricsToTrack (copy), NoP3 (copy), NoP3_1 (copy), Flag (ref), NoP3_2 (copy), ExtraFields (copy), p2 (copy)
+		local v1 = nil
+		local Warm: string = if Flag then "warm" else "cold"
+		local ExtraFields1 = nil
 		
-		if var5 then
+		if NoP3_2 then
 			local t = {}
 			
-			if var6 then
-				for i, v in var6 do
-					t[i] = v
+			if ExtraFields then
+				for i, extraField in ExtraFields do
+					t[i] = extraField
 				end
 			end
-			t.scroll_type = var11
-			var9 = t
+			t.scroll_type = Warm
+			ExtraFields1 = t
 		else
-			var9 = var6
+			ExtraFields1 = ExtraFields
 		end
-		intervalPerformanceTrackerModule:startTracking(p1, var10, var1, var2, var3, var9, p2)
-		var7 = true
+		IntervalPerformanceTrackerModule:startTracking(p1, v1, MetricsToTrack, NoP3, NoP3_1, ExtraFields1, p2)
+		Flag = true
 		
 		return true
-	end, function(_)
-		-- upvalues: intervalPerformanceTrackerModule (copy), p1 (ref)
-		intervalPerformanceTrackerModule:stopAndLogTracking(p1)
-	end, p2, p3, var4)
+	end, function(_) --[[ Line: 115 | Named "finish" ]]
+		-- upvalues: IntervalPerformanceTrackerModule (upval), p1 (copy)
+		IntervalPerformanceTrackerModule:stopAndLogTracking(p1)
+	end, p2, p3, if p4 then p4.scrollOptions else nil)
 end

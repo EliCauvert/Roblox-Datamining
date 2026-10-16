@@ -1,18 +1,19 @@
-﻿local function deepCopy(p1, p2)
-	-- upvalues: deepCopy (ref)
-	if type(p1) ~= "table" then
-		return p1
-	elseif p2 and p2[p1] then
-		return p2[p1]
+﻿local function deepCopy(Key, p1) --[[ Line: 9 ]]
+	-- upvalues: deepCopy (copy)
+	if type(Key) ~= "table" then
+		return Key
 	end
-	p2 = p2 or {}
-	local tbl = setmetatable({}, getmetatable(p1))
-	p2[p1] = tbl
+	if p1 and p1[Key] then
+		return p1[Key]
+	end
+	local P1 = p1 or {}
+	local self = setmetatable({}, (getmetatable(Key)))
+	P1[Key] = self
 	
-	for i, v in pairs(p1) do
-		tbl[deepCopy(i, p2)] = deepCopy(v, p2)
+	for i, value in pairs(Key) do
+		self[deepCopy(i, P1)] = deepCopy(value, P1)
 	end
-	return tbl
+	return self
 end
 
 return deepCopy

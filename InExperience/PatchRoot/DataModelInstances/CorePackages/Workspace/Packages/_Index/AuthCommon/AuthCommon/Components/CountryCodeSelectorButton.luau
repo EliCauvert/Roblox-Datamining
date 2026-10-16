@@ -1,54 +1,53 @@
-﻿local parent = script:FindFirstAncestor("AuthCommon").Parent
-local roactModule = require(parent.Roact)
-local appFonts = require(parent.Style).AppFonts
-local colors = require(parent.Style).Colors
-local white = colors.White
-local gray2 = colors.Gray2
-local countryCodeSelectorButton = roactModule.PureComponent:extend("CountryCodeSelectorButton")
-local text = require(parent.AppCommonLib).Text
+﻿local Parent = script:FindFirstAncestor("AuthCommon").Parent
+local RoactModule = require(Parent.Roact)
+local AppFonts = require(Parent.Style).AppFonts
+local Colors = require(Parent.Style).Colors
+local White = Colors.White
+local Gray2 = Colors.Gray2
+local CountryCodeSelectorButton = RoactModule.PureComponent:extend("CountryCodeSelectorButton")
+local Text = require(Parent.AppCommonLib).Text
 
-function countryCodeSelectorButton.init(p1)
-	function p0.selectionCallback()
-		-- upvalues: p1 (ref)
+function CountryCodeSelectorButton.init(p1) --[[ Line: 14 ]]
+	function p1.selectionCallback() --[[ Line: 15 ]]
+		-- upvalues: p1 (copy)
 		if p1.props.ListButtonProps.SelectionCallback then
 			p1.props.ListButtonProps.SelectionCallback(p1.props.Data)
 		end
 	end
 end
 
-function countryCodeSelectorButton.render(p1)
-	-- upvalues: text (ref), appFonts (ref), roactModule (ref), white (ref), gray2 (ref)
-	local localizedName = p1.props.Data.localizedName or ""
-	local text_1 = "+" .. (p1.props.Data.prefix or "")
-	local textSize = p1.props.ListButtonProps.TextSize
+function CountryCodeSelectorButton.render(p1) --[[ Line: 22 ]]
+	-- upvalues: Text (copy), AppFonts (copy), RoactModule (copy), White (copy), Gray2 (copy)
+	local Text1 = "+" .. (p1.props.Data.prefix or "")
+	local TextSize = p1.props.ListButtonProps.TextSize
 	
-	return roactModule.createElement("TextButton", {
+	return RoactModule.createElement("TextButton", {
 		Size = p1.props.Size,
 		BackgroundTransparency = 1,
 		LayoutOrder = p1.props.LayoutOrder,
 		Text = "",
-		[roactModule.Event.Activated] = p1.selectionCallback
+		[RoactModule.Event.Activated] = p1.selectionCallback
 	}, {
-		CountryName = roactModule.createElement("TextLabel", {
+		CountryName = RoactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
-			Size = UDim2.new(1, -text.GetTextWidth(text_1, appFonts.default:getDefault(), textSize), 1, 0),
-			Text = localizedName,
-			Font = appFonts.default:getDefault(),
-			TextColor3 = white,
-			TextSize = textSize,
+			Size = UDim2.new(1, -Text.GetTextWidth(Text1, AppFonts.default:getDefault(), TextSize), 1, 0),
+			Text = p1.props.Data.localizedName or "",
+			Font = AppFonts.default:getDefault(),
+			TextColor3 = White,
+			TextSize = TextSize,
 			TextXAlignment = Enum.TextXAlignment.Left,
 			TextTruncate = Enum.TextTruncate.AtEnd
 		}),
-		CountryPrefix = roactModule.createElement("TextLabel", {
+		CountryPrefix = RoactModule.createElement("TextLabel", {
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, 0, 1, 0),
-			Text = text_1,
-			Font = appFonts.default:getDefault(),
-			TextColor3 = gray2,
-			TextSize = textSize,
+			Text = Text1,
+			Font = AppFonts.default:getDefault(),
+			TextColor3 = Gray2,
+			TextSize = TextSize,
 			TextXAlignment = Enum.TextXAlignment.Right
 		})
 	})
 end
 
-return countryCodeSelectorButton
+return CountryCodeSelectorButton

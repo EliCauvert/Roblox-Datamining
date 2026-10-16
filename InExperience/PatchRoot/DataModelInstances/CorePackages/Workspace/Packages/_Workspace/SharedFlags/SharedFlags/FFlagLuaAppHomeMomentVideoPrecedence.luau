@@ -1,0 +1,3 @@
+﻿local FFlagLuaAppHomeMomentVideoFallbackModule = require(script.Parent.FFlagLuaAppHomeMomentVideoFallback)
+
+return game:DefineFastFlag("LuaAppHomeMomentVideoPrecedence", false) and FFlagLuaAppHomeMomentVideoFallbackModule

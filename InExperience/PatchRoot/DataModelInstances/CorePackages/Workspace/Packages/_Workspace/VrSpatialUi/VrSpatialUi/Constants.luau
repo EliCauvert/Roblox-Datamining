@@ -1,22 +1,19 @@
-﻿local var1
-local parent = script:FindFirstAncestor("VrSpatialUi").Parent
-local inExperienceUIVRIXP = require(parent.SharedExperimentDefinition).InExperienceUIVRIXP
-local isInExperienceUIVREnabled = require(parent.SharedExperimentDefinition).isInExperienceUIVREnabled
-local var2 = if isInExperienceUIVREnabled then require(parent.LuauPolyfill) else nil
-local vector2 = Vector2.new(0, 0)
-local cFrame = CFrame.new(0, 0, 0)
-local var3 = game:DefineFastInt("SpatialUIResolutionScale", 100) / 100
-local spatialUIPanelDragBarDistance = game:DefineFastInt("SpatialUIPanelDragBarDistance", 10)
-local spatialUIPanelZOffset = game:DefineFastInt("SpatialUIPanelZOffset", 100)
-local fFlagEnableInExperienceUIPCVRFix = require(parent.SharedFlags).FFlagEnableInExperienceUIPCVRFix
-local spatialUIChromeSubMenuHeight = game:DefineFastInt("SpatialUIChromeSubMenuHeight", 448)
-local t = {
+﻿local Parent = script:FindFirstAncestor("VrSpatialUi").Parent
+local InExperienceUIVRIXP = require(Parent.SharedExperimentDefinition).InExperienceUIVRIXP
+local IsInExperienceUIVREnabled = require(Parent.SharedExperimentDefinition).isInExperienceUIVREnabled
+local LuauPolyfillModule = if IsInExperienceUIVREnabled then require(Parent.LuauPolyfill) else nil
+local _Vector2 = Vector2.new(0, 0)
+local _CFrame = CFrame.new(0, 0, 0)
+local SpatialUIPanelZOffset: number = game:DefineFastInt("SpatialUIPanelZOffset", 100)
+local FFlagEnableInExperienceUIPCVRFix = require(Parent.SharedFlags).FFlagEnableInExperienceUIPCVRFix
+local SpatialUIChromeSubMenuHeight = game:DefineFastInt("SpatialUIChromeSubMenuHeight", 448)
+local SpatialUIType = {
 	ScreenUI = "ScreenUI",
 	SpatialUI = "SpatialUI",
 	SpatialUIPartOnly = "SpatialUIPartOnly",
 	SpatialUIRoact = "SpatialUIRoact"
 }
-local t_1 = {
+local PanelType = {
 	Chat = "Chat",
 	RobloxGui = "RobloxGui",
 	BottomBar = "BottomBar",
@@ -24,298 +21,285 @@ local t_1 = {
 	ChromeSubMenu = "ChromeSubMenu",
 	ToolTipsContainer = "ToolTipsContainer"
 }
-local t_2 = {
+local SpatialUIGroupType = {
 	MainUIGroup = "MainUIGroup",
 	MenuUIGroup = "MenuUIGroup",
 	ChatUIGroup = "ChatUIGroup",
 	ChromeSubMenuUIGroup = "ChromeSubMenuUIGroup",
 	WristUIGroup = "WristUIGroup"
 }
-local var4 = 800 / var3
+local v1 = 800 / (game:DefineFastInt("SpatialUIResolutionScale", 100) / 100)
 
-local function _(p1)
-	-- upvalues: var4 (ref)
-	return p1 / var4
+local function _(p1) --[[ Line: 174 | Named "pixelToScaledSize" ]]
+	-- upvalues: v1 (copy)
+	return p1 / v1
 end
 
-local _ = function(p1, p2)
-	-- upvalues: var4 (ref)
-	return Vector2.new(p1 / var4, p2 / var4)
+local _ = function(p1, p2): Vector2 --[[ Line: 178 | Named "getScaledResolutionForPart" ]]
+	-- upvalues: v1 (copy)
+	return Vector2.new(p1 / v1, p2 / v1)
 end
 
-local _ = function(p1, p2, p3)
-	-- upvalues: var4 (ref)
-	local var5 = p3 / var4
+local _ = function(Vector, Vector1, p1): Vector2 --[[ Line: 182 | Named "panelDistanceWithSpacing" ]]
+	-- upvalues: v1 (copy)
+	local v2 = p1 / v1
 	
-	return Vector2.new(p1.X * 0.5 + p2.X * 0.5 + var5, p1.Y * 0.5 + p2.Y * 0.5 + var5)
+	return Vector2.new(Vector.X * 0.5 + Vector1.X * 0.5 + v2, Vector.Y * 0.5 + Vector1.Y * 0.5 + v2)
 end
 
-local _ = function(p1, p2)
+local _ = function(p1, p2) --[[ Line: 189 | Named "alignPanelLeftToAnchor" ]]
 	return p2.X * 0.5 - p1.X * 0.5
 end
 
-local _ = function(p1, p2)
+local _ = function(p1, p2) --[[ Line: 193 | Named "alignPanelTopToAnchor" ]]
 	return p1.Y * 0.5 - p2.Y * 0.5
 end
 
-local _ = function(p1, p2)
+local _ = function(p1, p2) --[[ Line: 197 | Named "alignPanelBottomToAnchor" ]]
 	return p2.Y * 0.5 - p1.Y * 0.5
 end
 
-local _ = function()
-	-- upvalues: inExperienceUIVRIXP (ref), spatialUIPanelZOffset (ref)
-	return if inExperienceUIVRIXP:isMovePanelToCenter() then spatialUIPanelZOffset / 1000 else 0
+local _ = function(): number --[[ Line: 201 | Named "getAdditionalZOffsetIfNeeded" ]]
+	-- upvalues: InExperienceUIVRIXP (copy), SpatialUIPanelZOffset (copy)
+	return if InExperienceUIVRIXP:isMovePanelToCenter() then SpatialUIPanelZOffset / 1000 else 0
 end
 
-local t_3 = {
+local config = {
 	PANEL_TO_PANEL = 10,
 	PANEL_TO_BOTTOMBAR = 10,
 	PANEL_TO_CHROME_BOTTOM_OFFSET = 24,
-	PANEL_TO_DRAGBAR = spatialUIPanelDragBarDistance
+	PANEL_TO_DRAGBAR = game:DefineFastInt("SpatialUIPanelDragBarDistance", 10)
 }
 
-local function getPanelAroundLeftOrRightEdgeRotation(value, p1)
-	-- upvalues: t_3 (ref), var4 (ref)
-	local var5 = value.X * 0.5 + t_3.PANEL_TO_PANEL / var4 * 0.5
-	local var6 = if p1 > 0 then Vector3.new(var5, 0, 0) else Vector3.new(-1 * var5, 0, 0)
+local function getPanelAroundLeftOrRightEdgeRotation(Vector, Degrees: number): CFrame --[[ Line: 218 ]]
+	-- upvalues: config (copy), v1 (copy)
+	local NewX = Vector.X * 0.5 + config.PANEL_TO_PANEL / v1 * 0.5
+	local _Vector3: Vector3 = if Degrees > 0 then Vector3.new(NewX, 0, 0) else Vector3.new(-1 * NewX, 0, 0)
 	
-	return CFrame.new(var6) * CFrame.fromAxisAngle(Vector3.new(0, 1, 0), math.rad(p1)) * CFrame.new(-var6)
+	return CFrame.new(_Vector3) * CFrame.fromAxisAngle(vector.create(0, 1, 0), (math.rad(Degrees))) * CFrame.new(-_Vector3)
 end
 
-local var5 = if isInExperienceUIVREnabled then Vector2.new(943 / var4, 640 / var4) else Vector2.new(0.532, 0.3395) * 3.333333333333
-local var6 = if isInExperienceUIVREnabled then Vector2.new(434 / var4, 264 / var4) else Vector2.new(0.1365, 0.1995) * 3.333333333333
-local var7 = if isInExperienceUIVREnabled then Vector2.new(800 / var4, 640 / var4) else Vector2.new(0.532, 0.3395) * 3.333333333333
-local var8 = if isInExperienceUIVREnabled then Vector2.new(317 / var4, (if fFlagEnableInExperienceUIPCVRFix then spatialUIChromeSubMenuHeight else 292) / var4) else vector2
-local var9 = if isInExperienceUIVREnabled then Vector2.new(943 / var4, 64 / var4) else vector2
-local var10 = if isInExperienceUIVREnabled then Vector2.new(var9.X, 120 / var4) else vector2
-local var11 = if isInExperienceUIVREnabled then Vector2.new(296 / var4, 40 / var4) else vector2
-local var12 = if isInExperienceUIVREnabled then {
-	[t_2.MenuUIGroup] = getPanelAroundLeftOrRightEdgeRotation(var7, if inExperienceUIVRIXP:isMovePanelToCenter() then 0 else 15),
-	[t_2.ChatUIGroup] = getPanelAroundLeftOrRightEdgeRotation(var6, if inExperienceUIVRIXP:isMovePanelToCenter() then 0 else -15)
+local _Vector2_1: Vector2 = if IsInExperienceUIVREnabled then Vector2.new(943 / v1, 640 / v1) else Vector2.new(0.532, 0.3395) * 3.3333333333333335
+local _Vector2_2: Vector2 = if IsInExperienceUIVREnabled then Vector2.new(434 / v1, 264 / v1) else Vector2.new(0.1365, 0.1995) * 3.3333333333333335
+local _Vector2_3: Vector2 = if IsInExperienceUIVREnabled then Vector2.new(800 / v1, 640 / v1) else Vector2.new(0.532, 0.3395) * 3.3333333333333335
+local _Vector2_4: Vector2 = if IsInExperienceUIVREnabled then Vector2.new(317 / v1, (if FFlagEnableInExperienceUIPCVRFix then SpatialUIChromeSubMenuHeight else 292) / v1) else _Vector2
+local _Vector2_5: Vector2 = if IsInExperienceUIVREnabled then Vector2.new(943 / v1, 64 / v1) else _Vector2
+local _Vector2_6: Vector2 = if IsInExperienceUIVREnabled then Vector2.new(_Vector2_5.X, 120 / v1) else _Vector2
+local _Vector2_7: Vector2 = if IsInExperienceUIVREnabled then Vector2.new(296 / v1, 40 / v1) else _Vector2
+local Config = if IsInExperienceUIVREnabled then {
+	[SpatialUIGroupType.MenuUIGroup] = getPanelAroundLeftOrRightEdgeRotation(_Vector2_3, if InExperienceUIVRIXP:isMovePanelToCenter() then 0 else 15),
+	[SpatialUIGroupType.ChatUIGroup] = getPanelAroundLeftOrRightEdgeRotation(_Vector2_2, if InExperienceUIVRIXP:isMovePanelToCenter() then 0 else -15)
 } else {}
+local UiGroupElementOffset = nil
 
-if isInExperienceUIVREnabled then
-	local var13
-	local new = CFrame.new
+if IsInExperienceUIVREnabled then
+	local NewFunction1 = CFrame.new
+	local ScaledX = nil
 	
-	if inExperienceUIVRIXP:isMovePanelToCenter() then
-		var13 = 0
+	if InExperienceUIVRIXP:isMovePanelToCenter() then
+		ScaledX = 0
 	else
-		local var14 = t_3.PANEL_TO_PANEL / var4
-		var13 = -1 * Vector2.new(var5.X * 0.5 + var7.X * 0.5 + var14, var5.Y * 0.5 + var7.Y * 0.5 + var14).X
+		local PANELTOPANELRatio = config.PANEL_TO_PANEL / v1
+		ScaledX = -1 * Vector2.new(_Vector2_1.X * 0.5 + _Vector2_3.X * 0.5 + PANELTOPANELRatio, _Vector2_1.Y * 0.5 + _Vector2_3.Y * 0.5 + PANELTOPANELRatio).X
 	end
-	var1 = new(var13, var5.Y * 0.5 - var7.Y * 0.5, if inExperienceUIVRIXP:isMovePanelToCenter() then spatialUIPanelZOffset / 1000 else 0) * var12[t_2.MenuUIGroup]
+	UiGroupElementOffset = NewFunction1(ScaledX, _Vector2_1.Y * 0.5 - _Vector2_3.Y * 0.5, if InExperienceUIVRIXP:isMovePanelToCenter() then SpatialUIPanelZOffset / 1000 else 0) * Config[SpatialUIGroupType.MenuUIGroup]
 else
-	var1 = CFrame.new(0.4, -0.36, 0) * CFrame.Angles(0, 3.14159265359, 0)
+	UiGroupElementOffset = CFrame.new(0.4, -0.36, 0) * CFrame.Angles(0, 3.141592653589793, 0)
 end
-local var15
-if isInExperienceUIVREnabled then
-	local var16
-	local new = CFrame.new
+local _CFrame1 = nil
+if IsInExperienceUIVREnabled then
+	local NewFunction = CFrame.new
+	local XDelta = nil
 	
-	if inExperienceUIVRIXP:isMovePanelToCenter() then
-		var16 = var6.X * 0.5 - var5.X * 0.5
+	if InExperienceUIVRIXP:isMovePanelToCenter() then
+		XDelta = _Vector2_2.X * 0.5 - _Vector2_1.X * 0.5
 	else
-		local var17 = t_3.PANEL_TO_PANEL / var4
-		var16 = Vector2.new(var5.X * 0.5 + var6.X * 0.5 + var17, var5.Y * 0.5 + var6.Y * 0.5 + var17).X
+		local PANELTOPANELRatio = config.PANEL_TO_PANEL / v1
+		XDelta = Vector2.new(_Vector2_1.X * 0.5 + _Vector2_2.X * 0.5 + PANELTOPANELRatio, _Vector2_1.Y * 0.5 + _Vector2_2.Y * 0.5 + PANELTOPANELRatio).X
 	end
-	var15 = new(var16, var5.Y * 0.5 - var6.Y * 0.5, if inExperienceUIVRIXP:isMovePanelToCenter() then spatialUIPanelZOffset / 1000 else 0) * var12[t_2.ChatUIGroup]
+	_CFrame1 = NewFunction(XDelta, _Vector2_1.Y * 0.5 - _Vector2_2.Y * 0.5, if InExperienceUIVRIXP:isMovePanelToCenter() then SpatialUIPanelZOffset / 1000 else 0) * Config[SpatialUIGroupType.ChatUIGroup]
 else
-	var15 = CFrame.new(var5.X * 0.5 + var6.X * 0.5 + 0.066666666667, (var5.Y - var6.Y) / 2, 0)
+	_CFrame1 = CFrame.new(_Vector2_1.X * 0.5 + _Vector2_2.X * 0.5 + 0.06666666666666667, (_Vector2_1.Y - _Vector2_2.Y) / 2, 0)
 end
-local var18 = if isInExperienceUIVREnabled then CFrame.new(0, var8.Y * 0.5 - var5.Y * 0.5 + t_3.PANEL_TO_CHROME_BOTTOM_OFFSET / var4, if inExperienceUIVRIXP:isMovePanelToCenter() then spatialUIPanelZOffset / 1000 else 0) * CFrame.Angles(0, 3.14159265359, 0) else cFrame
-local var19 = if isInExperienceUIVREnabled then CFrame.new(0, var10.Y * 0.5 - var5.Y * 0.5 - t_3.PANEL_TO_BOTTOMBAR / var4, if inExperienceUIVRIXP:isMovePanelToCenter() then spatialUIPanelZOffset / 1000 else 0) * CFrame.Angles(0, 3.14159265359, 0) else cFrame
-local t_4 = {
-	[t_1.Chat] = {
-		type = t.SpatialUI,
+local _CFrame2: CFrame = if IsInExperienceUIVREnabled then CFrame.new(0, _Vector2_4.Y * 0.5 - _Vector2_1.Y * 0.5 + config.PANEL_TO_CHROME_BOTTOM_OFFSET / v1, if InExperienceUIVRIXP:isMovePanelToCenter() then SpatialUIPanelZOffset / 1000 else 0) * CFrame.Angles(0, 3.141592653589793, 0) else _CFrame
+local _CFrame3: CFrame = if IsInExperienceUIVREnabled then CFrame.new(0, _Vector2_6.Y * 0.5 - _Vector2_1.Y * 0.5 - config.PANEL_TO_BOTTOMBAR / v1, if InExperienceUIVRIXP:isMovePanelToCenter() then SpatialUIPanelZOffset / 1000 else 0) * CFrame.Angles(0, 3.141592653589793, 0) else _CFrame
+local AssignResult = {
+	[PanelType.Chat] = {
+		type = SpatialUIType.SpatialUI,
 		spatialPanelProps = {
 			name = "ExperienceChat",
 			faceCamera = true,
 			lerp = true,
-			partSize = var6,
-			virtualScreenSize = var6 * var4
+			partSize = _Vector2_2,
+			virtualScreenSize = _Vector2_2 * v1
 		}
 	},
-	[t_1.RobloxGui] = {
-		type = t.SpatialUIPartOnly,
+	[PanelType.RobloxGui] = {
+		type = SpatialUIType.SpatialUIPartOnly,
 		spatialPanelProps = {
 			name = "RobloxGuiPanel-PartOnly",
 			faceCamera = true,
 			lerp = true,
 			transparency = 0.5,
-			partSize = var5
+			partSize = _Vector2_1
 		}
 	}
 }
 
-if isInExperienceUIVREnabled then
-	t_4 = var2.Object.assign(t_4, {
-		[t_1.MoreMenu] = {
-			type = t.SpatialUI,
+if IsInExperienceUIVREnabled then
+	AssignResult = LuauPolyfillModule.Object.assign(AssignResult, {
+		[PanelType.MoreMenu] = {
+			type = SpatialUIType.SpatialUI,
 			spatialPanelProps = {
 				name = "MoreMenu",
 				faceCamera = true,
 				lerp = true,
-				partSize = var7,
-				virtualScreenSize = var7 * var4
+				partSize = _Vector2_3,
+				virtualScreenSize = _Vector2_3 * v1
 			}
 		},
-		[t_1.ChromeSubMenu] = {
-			type = t.SpatialUI,
+		[PanelType.ChromeSubMenu] = {
+			type = SpatialUIType.SpatialUI,
 			spatialPanelProps = {
 				name = "ChromeSubMenu",
 				faceCamera = true,
 				lerp = true,
-				partSize = var8,
-				virtualScreenSize = var8 * var4
+				partSize = _Vector2_4,
+				virtualScreenSize = _Vector2_4 * v1
 			}
 		},
-		[t_1.ToolTipsContainer] = {
-			type = t.SpatialUI,
+		[PanelType.ToolTipsContainer] = {
+			type = SpatialUIType.SpatialUI,
 			spatialPanelProps = {
 				name = "ToolTipsContainer",
 				faceCamera = true,
 				lerp = true,
-				partSize = var10,
-				virtualScreenSize = var10 * var4
+				partSize = _Vector2_6,
+				virtualScreenSize = _Vector2_6 * v1
 			}
 		}
 	})
 end
-local var20
-local t_5 = {
-	[t_1.Chat] = {
-		uiGroup = if isInExperienceUIVREnabled then t_2.ChatUIGroup else t_2.MainUIGroup,
-		cameraFixedPanelProp = { uiGroupElementOffset = var15 }
+local AssignResult1 = {
+	[PanelType.Chat] = {
+		uiGroup = if IsInExperienceUIVREnabled then SpatialUIGroupType.ChatUIGroup else SpatialUIGroupType.MainUIGroup,
+		cameraFixedPanelProp = { uiGroupElementOffset = _CFrame1 }
 	},
-	[t_1.RobloxGui] = {
-		uiGroup = t_2.MainUIGroup,
+	[PanelType.RobloxGui] = {
+		uiGroup = SpatialUIGroupType.MainUIGroup,
 		cameraFixedPanelProp = { uiGroupElementOffset = CFrame.new(0, 0, 0) }
 	}
 }
 
-if isInExperienceUIVREnabled then
-	t_5 = var2.Object.assign(t_5, {
-		[t_1.MoreMenu] = {
-			uiGroup = t_2.MenuUIGroup,
-			cameraFixedPanelProp = { uiGroupElementOffset = var1 }
+if IsInExperienceUIVREnabled then
+	AssignResult1 = LuauPolyfillModule.Object.assign(AssignResult1, {
+		[PanelType.MoreMenu] = {
+			uiGroup = SpatialUIGroupType.MenuUIGroup,
+			cameraFixedPanelProp = { uiGroupElementOffset = UiGroupElementOffset }
 		},
-		[t_1.ChromeSubMenu] = {
-			uiGroup = t_2.ChromeSubMenuUIGroup,
-			cameraFixedPanelProp = { uiGroupElementOffset = var18 }
+		[PanelType.ChromeSubMenu] = {
+			uiGroup = SpatialUIGroupType.ChromeSubMenuUIGroup,
+			cameraFixedPanelProp = { uiGroupElementOffset = _CFrame2 }
 		},
-		[t_1.ToolTipsContainer] = {
-			uiGroup = t_2.MainUIGroup,
-			cameraFixedPanelProp = { uiGroupElementOffset = var19 }
+		[PanelType.ToolTipsContainer] = {
+			uiGroup = SpatialUIGroupType.MainUIGroup,
+			cameraFixedPanelProp = { uiGroupElementOffset = _CFrame3 }
 		}
 	})
 end
-if isInExperienceUIVREnabled then
-	local var21 = t_3.PANEL_TO_BOTTOMBAR / var4
-	var20 = CFrame.new(0, -1 * Vector2.new(var5.X * 0.5 + var9.X * 0.5 + var21, var5.Y * 0.5 + var9.Y * 0.5 + var21).Y, 0) * CFrame.Angles(0, 3.14159265359, 0)
+local v2 = nil
+if IsInExperienceUIVREnabled then
+	local PANELTOBOTTOMBARRatio = config.PANEL_TO_BOTTOMBAR / v1
+	v2 = CFrame.new(0, -1 * Vector2.new(_Vector2_1.X * 0.5 + _Vector2_5.X * 0.5 + PANELTOBOTTOMBARRatio, _Vector2_1.Y * 0.5 + _Vector2_5.Y * 0.5 + PANELTOBOTTOMBARRatio).Y, 0) * CFrame.Angles(0, 3.141592653589793, 0)
 else
-	var20 = CFrame.new(0, -var5.Y * 0.5 - 0.075 - 0.033333333333, 0) * CFrame.Angles(0, 3.14159265359, 0)
+	v2 = CFrame.new(0, -_Vector2_1.Y * 0.5 - 0.075 - 0.03333333333333333, 0) * CFrame.Angles(0, 3.141592653589793, 0)
 end
-local t_6 = {
-	[t_1.BottomBar] = t_2.MainUIGroup,
-	[t_1.MoreMenu] = if isInExperienceUIVREnabled then t_2.MenuUIGroup else t_2.MainUIGroup
+local AssignResult2 = {
+	[PanelType.BottomBar] = SpatialUIGroupType.MainUIGroup,
+	[PanelType.MoreMenu] = if IsInExperienceUIVREnabled then SpatialUIGroupType.MenuUIGroup else SpatialUIGroupType.MainUIGroup
 }
 
-if isInExperienceUIVREnabled then
-	t_6 = var2.Object.assign(t_6, {
-		[t_1.Chat] = t_2.ChatUIGroup,
-		[t_1.ChromeSubMenu] = t_2.ChromeSubMenuUIGroup,
-		[t_1.ToolTipsContainer] = t_2.MainUIGroup
+if IsInExperienceUIVREnabled then
+	AssignResult2 = LuauPolyfillModule.Object.assign(AssignResult2, {
+		[PanelType.Chat] = SpatialUIGroupType.ChatUIGroup,
+		[PanelType.ChromeSubMenu] = SpatialUIGroupType.ChromeSubMenuUIGroup,
+		[PanelType.ToolTipsContainer] = SpatialUIGroupType.MainUIGroup
 	})
 end
-local t_7 = { [t_1.BottomBar] = var20, [t_1.MoreMenu] = var1 }
+local AssignResult3 = {
+	[PanelType.BottomBar] = v2,
+	[PanelType.MoreMenu] = UiGroupElementOffset
+}
 
-if isInExperienceUIVREnabled then
-	t_7 = var2.Object.assign(t_7, {
-		[t_1.Chat] = var15,
-		[t_1.ChromeSubMenu] = var18,
-		[t_1.ToolTipsContainer] = var19
+if IsInExperienceUIVREnabled then
+	AssignResult3 = LuauPolyfillModule.Object.assign(AssignResult3, {
+		[PanelType.Chat] = _CFrame1,
+		[PanelType.ChromeSubMenu] = _CFrame2,
+		[PanelType.ToolTipsContainer] = _CFrame3
 	})
 end
-local function getDragBarOffsetForPanel(value, p1, p2, p3)
-	-- upvalues: t_4 (write), vector2 (ref), t_3 (ref), t_7 (write), var11 (ref), var4 (ref)
-	local var22
-	local _ = nil
-	
-	if p1 then
-		var22 = p1
+local function getDragBarOffsetForPanel(BottomBar, Vector, Enabled, Amount): CFrame --[[ Line: 452 ]]
+	-- upvalues: AssignResult (ref), _Vector2 (copy), config (copy), AssignResult3 (ref), _Vector2_7 (copy), v1 (copy)
+	local PartSize = nil
+	if Vector then
+		PartSize = Vector
 	else
-		local spatialPanelProps = t_4[value].spatialPanelProps
-		var22 = if spatialPanelProps then spatialPanelProps.partSize else vector2
+		local SpatialPanelProps = AssignResult[BottomBar].spatialPanelProps
+		PartSize = if SpatialPanelProps then SpatialPanelProps.partSize else _Vector2
 	end
-	local PANEL_TO_DRAGBAR = t_3.PANEL_TO_DRAGBAR
+	local PANELTODRAGBAR = config.PANEL_TO_DRAGBAR
 	
-	if p3 then
-		PANEL_TO_DRAGBAR += p3
+	if Amount then
+		PANELTODRAGBAR += Amount
 	end
-	local var23 = t_7[value]
+	local AssignResultEntry = AssignResult3[BottomBar]
 	
-	if p2 == true then
-		var23 *= CFrame.Angles(0, -3.14159265359, 0)
+	if Enabled == true then
+		AssignResultEntry *= CFrame.Angles(0, -3.141592653589793, 0)
 	end
-	local var24 = PANEL_TO_DRAGBAR / var4
+	local PANELTODRAGBARRatio = PANELTODRAGBAR / v1
 	
-	return var23 * CFrame.new(0, -1 * Vector2.new(var22.X * 0.5 + var11.X * 0.5 + var24, var22.Y * 0.5 + var11.Y * 0.5 + var24).Y, 0)
+	return AssignResultEntry * CFrame.new(0, -1 * Vector2.new(PartSize.X * 0.5 + _Vector2_7.X * 0.5 + PANELTODRAGBARRatio, PartSize.Y * 0.5 + _Vector2_7.Y * 0.5 + PANELTODRAGBARRatio).Y, 0)
 end
 
-local t_8 = {
-	[t_2.MainUIGroup] = CFrame.new(0, t_7[t_1.BottomBar].Y - 0.075 - 0.066666666667, 0)
+local AssignResult4 = {
+	[SpatialUIGroupType.MainUIGroup] = CFrame.new(0, AssignResult3[PanelType.BottomBar].Y - 0.075 - 0.06666666666666667, 0)
 }
 
-if isInExperienceUIVREnabled then
-	local assign = var2.Object.assign
-	local var22 = t_8
-	local t_9 = {
-		[t_2.MainUIGroup] = getDragBarOffsetForPanel(t_1.BottomBar, var9, true)
-	}
-	local chatUIGroup = t_2.ChatUIGroup
-	local chat = t_1.Chat
-	local _ = nil
-	local spatialPanelProps = t_4[chat].spatialPanelProps
-	local var23 = if spatialPanelProps then spatialPanelProps.partSize else vector2
-	local var24 = t_3.PANEL_TO_DRAGBAR / var4
-	t_9[chatUIGroup] = t_7[chat] * CFrame.new(0, -1 * Vector2.new(var23.X * 0.5 + var11.X * 0.5 + var24, var23.Y * 0.5 + var11.Y * 0.5 + var24).Y, 0)
-	local menuUIGroup = t_2.MenuUIGroup
-	local moreMenu = t_1.MoreMenu
-	local _ = nil
-	local spatialPanelProps_1 = t_4[moreMenu].spatialPanelProps
-	local var25 = if spatialPanelProps_1 then spatialPanelProps_1.partSize else vector2
-	local var26 = t_3.PANEL_TO_DRAGBAR / var4
-	t_9[menuUIGroup] = t_7[moreMenu] * CFrame.new(0, -1 * Vector2.new(var25.X * 0.5 + var11.X * 0.5 + var26, var25.Y * 0.5 + var11.Y * 0.5 + var26).Y, 0)
-	local chromeSubMenuUIGroup = t_2.ChromeSubMenuUIGroup
-	local chromeSubMenu = t_1.ChromeSubMenu
-	local _ = nil
-	local spatialPanelProps_2 = t_4[chromeSubMenu].spatialPanelProps
-	local var27 = if spatialPanelProps_2 then spatialPanelProps_2.partSize else vector2
-	local PANEL_TO_DRAGBAR = t_3.PANEL_TO_DRAGBAR
-	local var28 = t_7[chromeSubMenu] * CFrame.Angles(0, -3.14159265359, 0)
-	local new = CFrame.new
-	local var29 = 0
-	local var30 = -1
-	local var31 = var27
-	local var32 = PANEL_TO_DRAGBAR / var4
-	t_9[chromeSubMenuUIGroup] = var28 * new(var29, var30 * Vector2.new(var31.X * 0.5 + var11.X * 0.5 + var32, var31.Y * 0.5 + var11.Y * 0.5 + var32).Y, 0)
-	t_8 = assign(var22, t_9)
+if IsInExperienceUIVREnabled then
+	local Chat = PanelType.Chat
+	local SpatialPanelProps = AssignResult[Chat].spatialPanelProps
+	local PartSize = if SpatialPanelProps then SpatialPanelProps.partSize else _Vector2
+	local PANELTODRAGBARRatio = config.PANEL_TO_DRAGBAR / v1
+	local MoreMenu = PanelType.MoreMenu
+	local SpatialPanelProps1 = AssignResult[MoreMenu].spatialPanelProps
+	local PartSize1 = if SpatialPanelProps1 then SpatialPanelProps1.partSize else _Vector2
+	local PANELTODRAGBARRatio1 = config.PANEL_TO_DRAGBAR / v1
+	local ChromeSubMenu = PanelType.ChromeSubMenu
+	local SpatialPanelProps2 = AssignResult[ChromeSubMenu].spatialPanelProps
+	local PartSize2 = if SpatialPanelProps2 then SpatialPanelProps2.partSize else _Vector2
+	local PANELTODRAGBARRatio2 = config.PANEL_TO_DRAGBAR / v1
+	AssignResult4 = LuauPolyfillModule.Object.assign(AssignResult4, {
+		[SpatialUIGroupType.MainUIGroup] = getDragBarOffsetForPanel(PanelType.BottomBar, _Vector2_5, true),
+		[SpatialUIGroupType.ChatUIGroup] = AssignResult3[Chat] * CFrame.new(0, -1 * Vector2.new(PartSize.X * 0.5 + _Vector2_7.X * 0.5 + PANELTODRAGBARRatio, PartSize.Y * 0.5 + _Vector2_7.Y * 0.5 + PANELTODRAGBARRatio).Y, 0),
+		[SpatialUIGroupType.MenuUIGroup] = AssignResult3[MoreMenu] * CFrame.new(0, -1 * Vector2.new(PartSize1.X * 0.5 + _Vector2_7.X * 0.5 + PANELTODRAGBARRatio1, PartSize1.Y * 0.5 + _Vector2_7.Y * 0.5 + PANELTODRAGBARRatio1).Y, 0),
+		[SpatialUIGroupType.ChromeSubMenuUIGroup] = AssignResult3[ChromeSubMenu] * CFrame.Angles(0, -3.141592653589793, 0) * CFrame.new(0, -1 * Vector2.new(PartSize2.X * 0.5 + _Vector2_7.X * 0.5 + PANELTODRAGBARRatio2, PartSize2.Y * 0.5 + _Vector2_7.Y * 0.5 + PANELTODRAGBARRatio2).Y, 0)
+	})
 end
 return {
 	BOTTOM_BAR_BASE_PART_SIZE = 0.15,
 	SPATIAL_TOOLTIP_SPACING = 2,
-	SpatialUIType = t,
-	SpatialUIGroupType = t_2,
-	PanelType = t_1,
+	SpatialUIType = SpatialUIType,
+	SpatialUIGroupType = SpatialUIGroupType,
+	PanelType = PanelType,
 	DEFAULT_VR_PANEL_SIZE = Vector2.new(10, 10),
-	VR_PANEL_RESOLUTION_MULTIPLIER = var4,
-	COMPAT_PANEL_PROPS_MAP = t_4,
-	SPATIAL_PANEL_POSITION_PROPS_MAP = t_5,
-	ROACT_PANEL_UIGROUP_MAP = t_6,
-	ROACT_PANEL_UIGROUP_ELEMENT_OFFSET_MAP = t_7,
-	UIGROUP_DRAGBAR_OFFSET_MAP = t_8,
-	UIGROUP_INITITIAL_ROTATION_MAP = var12,
-	DRAG_BAR_SIZE = var11,
-	BOTTOM_BAR_SIZE = var9
+	VR_PANEL_RESOLUTION_MULTIPLIER = v1,
+	COMPAT_PANEL_PROPS_MAP = AssignResult,
+	SPATIAL_PANEL_POSITION_PROPS_MAP = AssignResult1,
+	ROACT_PANEL_UIGROUP_MAP = AssignResult2,
+	ROACT_PANEL_UIGROUP_ELEMENT_OFFSET_MAP = AssignResult3,
+	UIGROUP_DRAGBAR_OFFSET_MAP = AssignResult4,
+	UIGROUP_INITITIAL_ROTATION_MAP = Config,
+	DRAG_BAR_SIZE = _Vector2_7,
+	BOTTOM_BAR_SIZE = _Vector2_5
 }

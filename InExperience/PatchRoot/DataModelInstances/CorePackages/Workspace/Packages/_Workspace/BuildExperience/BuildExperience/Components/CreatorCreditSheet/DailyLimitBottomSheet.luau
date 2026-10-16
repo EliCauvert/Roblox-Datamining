@@ -1,203 +1,208 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local localizationService = game:GetService("LocalizationService")
-local foundationModule = require(parent.Foundation)
-local numberLocalization = require(parent.Localization).NumberLocalization
-local reactModule = require(parent.React)
-local sharedFlagsModule = require(parent.SharedFlags)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local localizationStringsModule = require(buildExperience.LocalizationStrings)
-local getFFlagLuaAppEnableOpenTypeSupport = sharedFlagsModule.GetFFlagLuaAppEnableOpenTypeSupport
-local button = foundationModule.Button
-local chip = foundationModule.Chip
-local icon = foundationModule.Icon
-local iconButton = foundationModule.IconButton
-local text = foundationModule.Text
-local view = foundationModule.View
-local sheet = foundationModule.Sheet
-local buttonVariant = foundationModule.Enums.ButtonVariant
-local chipSize = foundationModule.Enums.ChipSize
-local chipVariant = foundationModule.Enums.ChipVariant
-local fillBehavior = foundationModule.Enums.FillBehavior
-local iconName = foundationModule.Enums.IconName
-local iconSize = foundationModule.Enums.IconSize
-local inputSize = foundationModule.Enums.InputSize
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local LocalizationService = game:GetService("LocalizationService")
+local FoundationModule = require(Parent.Foundation)
+local NumberLocalization = require(Parent.Localization).NumberLocalization
+local ReactModule = require(Parent.React)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local LocalizationStringsModule = require(BuildExperience.LocalizationStrings)
+local GetFFlagLuaAppEnableOpenTypeSupportFunction = require(Parent.SharedFlags).GetFFlagLuaAppEnableOpenTypeSupport
+local Button = FoundationModule.Button
+local Chip = FoundationModule.Chip
+local Icon = FoundationModule.Icon
+local IconButton = FoundationModule.IconButton
+local Text = FoundationModule.Text
+local View = FoundationModule.View
+local Sheet = FoundationModule.Sheet
+local ButtonVariant = FoundationModule.Enums.ButtonVariant
+local ChipSize = FoundationModule.Enums.ChipSize
+local ChipVariant = FoundationModule.Enums.ChipVariant
+local FillBehavior = FoundationModule.Enums.FillBehavior
+local IconName = FoundationModule.Enums.IconName
+local IconSize = FoundationModule.Enums.IconSize
+local InputSize = FoundationModule.Enums.InputSize
 local list = { 2000, 5000 }
 
-local function _(p1)
-	-- upvalues: numberLocalization (ref), localizationService (ref)
-	return numberLocalization.localize(string.format("%.0f", math.floor(p1)), localizationService.RobloxLocaleId)
+local function _(Value: number) --[[ Line: 85 | Named "formatNumber" ]]
+	-- upvalues: NumberLocalization (copy), LocalizationService (copy)
+	return NumberLocalization.localize(string.format("%.0f", (math.floor(Value))), LocalizationService.RobloxLocaleId)
 end
 
-local function DailyLimitBottomSheetContent(p1)
-	-- upvalues: useLocalization (ref), localizationStringsModule (ref), numberLocalization (ref), localizationService (ref), reactModule (ref), chip (ref), iconName (ref), chipVariant (ref), chipSize (ref), list (ref), sheet (ref), text (ref), view (ref), iconButton (ref), buttonVariant (ref), inputSize (ref), icon (ref), iconSize (ref), getFFlagLuaAppEnableOpenTypeSupport (ref), button (ref), fillBehavior (ref)
-	local additionalUsed = p1.additionalUsed or 0
-	local var1 = useLocalization({
+local function DailyLimitBottomSheetContent(p1) --[[ Line: 89 ]]
+	-- upvalues: UseLocalizationFunction (copy), LocalizationStringsModule (copy), NumberLocalization (copy), LocalizationService (copy), ReactModule (copy), Chip (copy), IconName (copy), ChipVariant (copy), ChipSize (copy), list (copy), Sheet (copy), Text (copy), View (copy), IconButton (copy), ButtonVariant (copy), InputSize (copy), Icon (copy), IconSize (copy), GetFFlagLuaAppEnableOpenTypeSupportFunction (copy), Button (copy), FillBehavior (copy)
+	local AdditionalUsed = p1.additionalUsed or 0
+	local UseLocalizationResult = UseLocalizationFunction({
 		belowSpend = {
-			localizationStringsModule.CREATOR_CREDIT_LIMIT_BELOW_SPEND,
-			ALREADY_SPENT = numberLocalization.localize(string.format("%.0f", math.floor(additionalUsed)), localizationService.RobloxLocaleId)
+			LocalizationStringsModule.CREATOR_CREDIT_LIMIT_BELOW_SPEND,
+			ALREADY_SPENT = NumberLocalization.localize(string.format("%.0f", (math.floor(AdditionalUsed))), LocalizationService.RobloxLocaleId)
 		},
-		confirm = localizationStringsModule.CREATOR_CREDIT_LIMIT_SHEET_CONFIRM,
-		noLimit = localizationStringsModule.CREATOR_CREDIT_LIMIT_SHEET_NO_LIMIT,
-		saveError = localizationStringsModule.CREATOR_CREDIT_SETTINGS_SAVE_ERROR,
-		title = localizationStringsModule.CREATOR_CREDIT_LIMIT_SHEET_TITLE
+		confirm = LocalizationStringsModule.CREATOR_CREDIT_LIMIT_SHEET_CONFIRM,
+		noLimit = LocalizationStringsModule.CREATOR_CREDIT_LIMIT_SHEET_NO_LIMIT,
+		saveError = LocalizationStringsModule.CREATOR_CREDIT_SETTINGS_SAVE_ERROR,
+		title = LocalizationStringsModule.CREATOR_CREDIT_LIMIT_SHEET_TITLE
 	})
-	local belowSpend = var1.belowSpend
-	local confirm = var1.confirm
-	local noLimit = var1.noLimit
-	local saveError = var1.saveError
-	local title = var1.title
-	local testId = p1.testId or "creator-credit-limit-sheet"
-	local var2 = p1.isSaving == true
-	local var3, var4 = reactModule.useState(math.max(p1.initialValue or 500, 100))
-	local var5, var6 = reactModule.useState(p1.initialIsNoLimit == true)
-	local var7 = reactModule.useCallback(function()
-		-- upvalues: var6 (ref), var4 (ref)
-		var6(false)
-		var4(function(p2)
-			return math.max(p2 - 500, 100)
+	local BelowSpend = UseLocalizationResult.belowSpend
+	local Confirm = UseLocalizationResult.confirm
+	local NoLimit = UseLocalizationResult.noLimit
+	local SaveError = UseLocalizationResult.saveError
+	local Title = UseLocalizationResult.title
+	local TestId = p1.testId or "creator-credit-limit-sheet"
+	local IsIsSaving = p1.isSaving == true
+	local UseStateResult, UseStateResult2 = ReactModule.useState((math.max(p1.initialValue or 500, 100)))
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(p1.initialIsNoLimit == true)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 114 ]]
+		-- upvalues: UseStateResult2_1 (copy), UseStateResult2 (copy)
+		UseStateResult2_1(false)
+		UseStateResult2(function(p2: number): number --[[ Line: 116 ]]
+			return (math.max(p2 - 500, 100))
 		end)
 	end, {})
-	local var8 = reactModule.useCallback(function()
-		-- upvalues: var6 (ref), var4 (ref)
-		var6(false)
-		var4(function(p2)
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 121 ]]
+		-- upvalues: UseStateResult2_1 (copy), UseStateResult2 (copy)
+		UseStateResult2_1(false)
+		UseStateResult2(function(p2: number): number --[[ Line: 123 ]]
 			return p2 + 500
 		end)
 	end, {})
-	local var9 = reactModule.useCallback(function(p2)
-		-- upvalues: var6 (ref), var4 (ref)
-		var6(false)
-		var4(math.max(p2, 100))
+	local UseResult2 = ReactModule.useCallback(function(p2: number) --[[ Line: 128 ]]
+		-- upvalues: UseStateResult2_1 (copy), UseStateResult2 (copy)
+		UseStateResult2_1(false)
+		UseStateResult2((math.max(p2, 100)))
 	end, {})
-	local var10 = reactModule.useCallback(function()
-		-- upvalues: var6 (ref)
-		var6(true)
-	end, {})
-	local var11 = not var5 and var3 < additionalUsed
-	local var12 = if var11 then belowSpend elseif p1.saveError then saveError else nil
-	local var13 = reactModule.useCallback(function()
-		-- upvalues: var5 (ref), p1 (ref), var3 (ref), additionalUsed (ref)
-		if var5 then
+	local IsUseStateResultBelow: boolean = not UseStateResult1 and UseStateResult < AdditionalUsed
+	local BelowSpend1 = if IsUseStateResultBelow then BelowSpend elseif p1.saveError then SaveError else nil
+	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 142 ]]
+		-- upvalues: UseStateResult1 (copy), p1 (copy), UseStateResult (copy), AdditionalUsed (copy)
+		if UseStateResult1 then
 			p1.onConfirm(nil)
 			
 			return
-		elseif var3 < additionalUsed then
+		end
+		if UseStateResult >= AdditionalUsed then
+			p1.onConfirm(UseStateResult)
+			
 			return
 		end
-		p1.onConfirm(var3)
-	end, { var3, additionalUsed, var5, p1.onConfirm })
-	local t = {
-		NoLimit = reactModule.createElement(chip, {
+	end, {
+		UseStateResult,
+		AdditionalUsed,
+		UseStateResult1,
+		p1.onConfirm
+	})
+	local config = {
+		NoLimit = ReactModule.createElement(Chip, {
 			LayoutOrder = 1,
-			text = noLimit,
-			leading = iconName.CircleX,
-			variant = chipVariant.Standard,
-			size = chipSize.Medium,
-			onActivated = var10,
-			isDisabled = var2,
-			testId = `{testId}-preset-no-limit`
+			text = NoLimit,
+			leading = IconName.CircleX,
+			variant = ChipVariant.Standard,
+			size = ChipSize.Medium,
+			onActivated = ReactModule.useCallback(function() --[[ Line: 133 ]]
+				-- upvalues: UseStateResult2_1 (copy)
+				UseStateResult2_1(true)
+			end, {}),
+			isDisabled = IsIsSaving,
+			testId = `{TestId}-preset-no-limit`
 		})
 	}
 	
-	for i, v in list do
-		t[`Preset{v}`] = reactModule.createElement(chip, {
+	for i, value in list do
+		config[`Preset{value}`] = ReactModule.createElement(Chip, {
 			LayoutOrder = 1 + i,
-			text = numberLocalization.localize(string.format("%.0f", math.floor(v)), localizationService.RobloxLocaleId),
-			leading = iconName.Robux,
-			variant = chipVariant.Standard,
-			size = chipSize.Medium,
-			onActivated = function()
-				-- upvalues: var9 (ref), v (ref)
-				var9(v)
+			text = NumberLocalization.localize(string.format("%.0f", (math.floor(value))), LocalizationService.RobloxLocaleId),
+			leading = IconName.Robux,
+			variant = ChipVariant.Standard,
+			size = ChipSize.Medium,
+			onActivated = function() --[[ Line: 182 ]]
+				-- upvalues: UseResult2 (copy), value (copy)
+				UseResult2(value)
 			end,
-			isDisabled = var2,
-			testId = `{testId}-preset-{v}`
+			isDisabled = IsIsSaving,
+			testId = `{TestId}-preset-{value}`
 		})
 	end
-	return reactModule.createElement(sheet.Root, {
+	return ReactModule.createElement(Sheet.Root, {
 		isOpen = true,
 		preferCenterSheet = true,
 		onClose = p1.onCancel
 	}, {
-		Header = reactModule.createElement(sheet.Header, { hasCloseAffordance = true }, {
-			Title = reactModule.createElement(text, {
+		Header = ReactModule.createElement(Sheet.Header, { hasCloseAffordance = true }, {
+			Title = ReactModule.createElement(Text, {
 				tag = "auto-xy text-heading-small content-emphasis",
-				Text = title
+				Text = Title
 			})
 		}),
-		Content = reactModule.createElement(sheet.Content, nil, {
-			Body = reactModule.createElement(view, { tag = "col gap-large size-full-0 auto-y" }, {
-				Stepper = reactModule.createElement(view, {
+		Content = ReactModule.createElement(Sheet.Content, nil, {
+			Body = ReactModule.createElement(View, { tag = "col gap-large size-full-0 auto-y" }, {
+				Stepper = ReactModule.createElement(View, {
 					LayoutOrder = 1,
 					tag = "row align-x-center align-y-center gap-large size-full-0 auto-y padding-y-medium"
 				}, {
-					Minus = reactModule.createElement(iconButton, {
+					Minus = ReactModule.createElement(IconButton, {
 						LayoutOrder = 1,
 						isCircular = true,
-						icon = iconName.MinusSmall,
-						variant = buttonVariant.Utility,
-						size = inputSize.Medium,
-						onActivated = var7,
-						isDisabled = var2 or (var5 or var3 <= 100),
-						testId = `{testId}-decrement`
+						icon = IconName.MinusSmall,
+						variant = ButtonVariant.Utility,
+						size = InputSize.Medium,
+						onActivated = UseResult,
+						isDisabled = IsIsSaving or (UseStateResult1 or UseStateResult <= 100),
+						testId = `{TestId}-decrement`
 					}),
-					ValueDisplay = reactModule.createElement(view, {
+					ValueDisplay = ReactModule.createElement(View, {
 						LayoutOrder = 2,
 						tag = "row align-y-center gap-small auto-xy"
 					}, {
-						IconEl = reactModule.createElement(icon, {
+						IconEl = ReactModule.createElement(Icon, {
 							LayoutOrder = 1,
 							tag = "auto-xy content-emphasis",
-							name = if var5 then iconName.CircleX else iconName.Robux,
-							size = iconSize.Large
+							name = if UseStateResult1 then IconName.CircleX else IconName.Robux,
+							size = IconSize.Large
 						}),
-						Amount = reactModule.createElement(text, {
+						Amount = ReactModule.createElement(Text, {
 							LayoutOrder = 2,
 							tag = "auto-xy text-heading-medium content-emphasis",
-							Text = if var5 then noLimit else numberLocalization.localize(string.format("%.0f", math.floor(var3)), localizationService.RobloxLocaleId),
-							OpenTypeFeatures = if getFFlagLuaAppEnableOpenTypeSupport() then "tnum" else nil,
-							testId = `{testId}-value`
+							Text = if UseStateResult1 then NoLimit else NumberLocalization.localize(string.format("%.0f", (math.floor(UseStateResult))), LocalizationService.RobloxLocaleId),
+							OpenTypeFeatures = if GetFFlagLuaAppEnableOpenTypeSupportFunction() then "tnum" else nil,
+							testId = `{TestId}-value`
 						})
 					}),
-					Plus = reactModule.createElement(iconButton, {
+					Plus = ReactModule.createElement(IconButton, {
 						LayoutOrder = 3,
 						isCircular = true,
-						icon = iconName.PlusSmall,
-						variant = buttonVariant.Utility,
-						size = inputSize.Medium,
-						onActivated = var8,
-						isDisabled = var2 or var5,
-						testId = `{testId}-increment`
+						icon = IconName.PlusSmall,
+						variant = ButtonVariant.Utility,
+						size = InputSize.Medium,
+						onActivated = UseResult1,
+						isDisabled = IsIsSaving or UseStateResult1,
+						testId = `{TestId}-increment`
 					})
 				}),
-				Chips = reactModule.createElement(view, {
+				Chips = ReactModule.createElement(View, {
 					LayoutOrder = 2,
 					tag = "row align-x-center align-y-center gap-small size-full-0 auto-y"
-				}, t),
-				Error = if var12 then reactModule.createElement(text, {
+				}, config),
+				Error = if BelowSpend1 then ReactModule.createElement(Text, {
 					LayoutOrder = 3,
 					tag = "size-full-0 auto-y text-caption-medium text-wrap text-align-x-center content-system-alert",
-					Text = var12,
-					testId = if var11 then `{testId}-below-spend-error` else `{testId}-save-error`
+					Text = BelowSpend1,
+					testId = if IsUseStateResultBelow then `{TestId}-below-spend-error` else `{TestId}-save-error`
 				}) else nil
 			})
 		}),
-		Actions = reactModule.createElement(sheet.Actions, nil, {
-			Confirm = reactModule.createElement(button, {
-				text = confirm,
-				size = inputSize.Large,
-				variant = buttonVariant.Emphasis,
-				fillBehavior = fillBehavior.Fill,
-				onActivated = var13,
-				isDisabled = var2 or var11,
-				testId = `{testId}-confirm`
+		Actions = ReactModule.createElement(Sheet.Actions, nil, {
+			Confirm = ReactModule.createElement(Button, {
+				text = Confirm,
+				size = InputSize.Large,
+				variant = ButtonVariant.Emphasis,
+				fillBehavior = FillBehavior.Fill,
+				onActivated = UseResult3,
+				isDisabled = IsIsSaving or IsUseStateResultBelow,
+				testId = `{TestId}-confirm`
 			})
 		})
 	})
 end
 
-return function(p2)
-	-- upvalues: reactModule (ref), DailyLimitBottomSheetContent (ref)
-	return if p2.isOpen then reactModule.createElement(DailyLimitBottomSheetContent, p2) else nil
+return function(p2) --[[ Line: 294 | Named "DailyLimitBottomSheet" ]]
+	-- upvalues: ReactModule (copy), DailyLimitBottomSheetContent (copy)
+	return if p2.isOpen then ReactModule.createElement(DailyLimitBottomSheetContent, p2) else nil
 end

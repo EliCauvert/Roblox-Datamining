@@ -1,6 +1,6 @@
-﻿local string = require(script.Parent.Parent.Parent.LuauPolyfill).String
+﻿local String = require(script.Parent.Parent.Parent.LuauPolyfill).String
 
-return function(p1)
-	-- upvalues: string (ref)
-	return "\"\\u" .. string.slice("0000" .. string.format("%x", p1), -4):upper() .. "\""
+return function(p1): string --[[ Line: 6 ]]
+	-- upvalues: String (copy)
+	return "\"\\u" .. String.slice("0000" .. string.format("%x", p1), -4):upper() .. "\""
 end

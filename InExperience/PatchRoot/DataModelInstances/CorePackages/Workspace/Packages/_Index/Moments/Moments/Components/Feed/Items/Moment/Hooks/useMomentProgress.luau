@@ -1,25 +1,26 @@
-﻿local signalsModule = require(script:FindFirstAncestor("Moments").Parent.Signals)
-local momentContextModule = require(script.Parent.Parent.MomentContext)
-local t = { time = 0, duration = 0, ratio = 0 }
+﻿local SignalsModule = require(script:FindFirstAncestor("Moments").Parent.Signals)
+local MomentContextModule = require(script.Parent.Parent.MomentContext)
+local config = { time = 0, duration = 0, ratio = 0 }
 
-return function()
-	-- upvalues: momentContextModule (ref), signalsModule (ref), t (ref)
-	local var1 = momentContextModule.useMoment()
+return function() --[[ Line: 20 | Named "useMomentProgress" ]]
+	-- upvalues: MomentContextModule (copy), SignalsModule (copy), config (copy)
+	local UseMomentResult = MomentContextModule.useMoment()
 	
-	return signalsModule.createComputed(function(p1)
-		-- upvalues: var1 (ref), t (copy)
-		local controller = var1.controller
+	return (SignalsModule.createComputed(function(p1) --[[ Line: 23 ]]
+		-- upvalues: UseMomentResult (copy), config (upval)
+		local Controller = UseMomentResult.controller
 		
-		if controller == nil then
-			return t
+		if Controller == nil then
+			return config
+		else
+			local Position = Controller.getPosition(p1)
+			local Duration: number = Controller.getState(p1).duration
+			
+			return if Duration <= 0 then config else {
+				time = Position,
+				duration = Duration,
+				ratio = Position / Duration
+			}
 		end
-		local position = controller.getPosition(p1)
-		local duration = controller.getState(p1).duration
-		
-		return if duration <= 0 then t else {
-			time = position,
-			duration = duration,
-			ratio = position / duration
-		}
-	end)
+	end))
 end

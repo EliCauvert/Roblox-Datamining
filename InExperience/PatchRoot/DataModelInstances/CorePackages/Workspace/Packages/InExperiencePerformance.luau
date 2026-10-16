@@ -1,1 +1,1 @@
-﻿return require(script.Parent._Workspace.InExperiencePerformance.InExperiencePerformance)
+﻿return (require(script.Parent._Workspace.InExperiencePerformance.InExperiencePerformance))

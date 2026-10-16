@@ -1,1 +1,4 @@
-﻿return game:DefineFastFlag("LuaAppSduiSponsoredOneByTwoTile", false) and (require(script.Parent.FFlagLuaAppSduiSponsoredTwoByOneTile) and require(script.Parent.FFlagLuaAppEnableHomepageOneByTwoTile))
+﻿local FFlagLuaAppSduiSponsoredTwoByOneTileModule = require(script.Parent.FFlagLuaAppSduiSponsoredTwoByOneTile)
+local FFlagLuaAppEnableHomepageOneByTwoTileModule = require(script.Parent.FFlagLuaAppEnableHomepageOneByTwoTile)
+
+return game:DefineFastFlag("LuaAppSduiSponsoredOneByTwoTile", false) and (FFlagLuaAppSduiSponsoredTwoByOneTileModule and FFlagLuaAppEnableHomepageOneByTwoTileModule)

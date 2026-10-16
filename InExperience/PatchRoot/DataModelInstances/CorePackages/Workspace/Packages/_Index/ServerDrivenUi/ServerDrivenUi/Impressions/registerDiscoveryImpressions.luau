@@ -1,68 +1,68 @@
-﻿local serverDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
-local parent = serverDrivenUi.Parent
-local sduiCoreSystemModule = require(parent.SduiCoreSystem)
-local sduiImpressionEventType = sduiCoreSystemModule.SduiImpressionEventType
-local getSduiImpressionHandlerRegistry = sduiCoreSystemModule.getSduiImpressionHandlerRegistry
-local fFlagSduiDevStoreSeeAllImpressionsLogging = require(parent.SharedFlags).FFlagSduiDevStoreSeeAllImpressionsLogging
-local fFlagSduiQueryImpressionsLogging = require(parent.SharedFlags).FFlagSduiQueryImpressionsLogging
+﻿local ServerDrivenUi = script:FindFirstAncestor("ServerDrivenUi")
+local Parent = ServerDrivenUi.Parent
+local SduiCoreSystemModule = require(Parent.SduiCoreSystem)
+local SduiImpressionEventType = SduiCoreSystemModule.SduiImpressionEventType
+local GetSduiImpressionHandlerRegistryFunction = SduiCoreSystemModule.getSduiImpressionHandlerRegistry
+local FFlagSduiDevStoreSeeAllImpressionsLogging = require(Parent.SharedFlags).FFlagSduiDevStoreSeeAllImpressionsLogging
+local FFlagSduiQueryImpressionsLogging = require(Parent.SharedFlags).FFlagSduiQueryImpressionsLogging
 
-return function()
-	-- upvalues: sduiImpressionEventType (ref), serverDrivenUi (ref), fFlagSduiDevStoreSeeAllImpressionsLogging (ref), fFlagSduiQueryImpressionsLogging (ref), getSduiImpressionHandlerRegistry (ref)
-	getSduiImpressionHandlerRegistry().registerImpressionHandlerConfigs({
-		[sduiImpressionEventType.filterImpressions] = {
+return function() --[[ Line: 14 | Named "registerDiscoveryImpressions" ]]
+	-- upvalues: SduiImpressionEventType (copy), ServerDrivenUi (copy), FFlagSduiDevStoreSeeAllImpressionsLogging (copy), FFlagSduiQueryImpressionsLogging (copy), GetSduiImpressionHandlerRegistryFunction (copy)
+	GetSduiImpressionHandlerRegistryFunction().registerImpressionHandlerConfigs({
+		[SduiImpressionEventType.filterImpressions] = {
 			skipItemImpressionsLog = true,
-			lazyHandler = function()
-				-- upvalues: serverDrivenUi (copy)
-				return require(serverDrivenUi.Impressions.SduiFilterImpressionsHandler)
+			lazyHandler = function() --[[ Line: 17 ]]
+				-- upvalues: ServerDrivenUi (upval)
+				return require(ServerDrivenUi.Impressions.SduiFilterImpressionsHandler)
 			end
 		},
-		[sduiImpressionEventType.gameImpressions] = {
+		[SduiImpressionEventType.gameImpressions] = {
 			skipItemImpressionsLog = false,
-			lazyHandler = function()
-				-- upvalues: serverDrivenUi (copy)
-				return require(serverDrivenUi.Impressions.SduiGameImpressionsHandler)
+			lazyHandler = function() --[[ Line: 23 ]]
+				-- upvalues: ServerDrivenUi (upval)
+				return require(ServerDrivenUi.Impressions.SduiGameImpressionsHandler)
 			end
 		},
-		[sduiImpressionEventType.socialLinksImpressions] = {
+		[SduiImpressionEventType.socialLinksImpressions] = {
 			skipItemImpressionsLog = false,
-			lazyHandler = function()
-				-- upvalues: serverDrivenUi (copy)
-				return require(serverDrivenUi.Impressions.SduiSocialLinksImpressionsHandler)
+			lazyHandler = function() --[[ Line: 29 ]]
+				-- upvalues: ServerDrivenUi (upval)
+				return require(ServerDrivenUi.Impressions.SduiSocialLinksImpressionsHandler)
 			end
 		},
-		[sduiImpressionEventType.virtualEventImpressions] = {
+		[SduiImpressionEventType.virtualEventImpressions] = {
 			skipItemImpressionsLog = false,
-			lazyHandler = function()
-				-- upvalues: serverDrivenUi (copy)
-				return require(serverDrivenUi.Impressions.SduiVirtualEventImpressionsHandler)
+			lazyHandler = function() --[[ Line: 35 ]]
+				-- upvalues: ServerDrivenUi (upval)
+				return require(ServerDrivenUi.Impressions.SduiVirtualEventImpressionsHandler)
 			end
 		},
-		[sduiImpressionEventType.experienceStoreImpressions] = {
+		[SduiImpressionEventType.experienceStoreImpressions] = {
 			skipItemImpressionsLog = false,
-			lazyHandler = function()
-				-- upvalues: serverDrivenUi (copy)
-				return require(serverDrivenUi.Impressions.SduiEdpStoreImpressionsHandler)
+			lazyHandler = function() --[[ Line: 41 ]]
+				-- upvalues: ServerDrivenUi (upval)
+				return require(ServerDrivenUi.Impressions.SduiEdpStoreImpressionsHandler)
 			end
 		},
-		[sduiImpressionEventType.marketplaceItemImpressions] = {
+		[SduiImpressionEventType.marketplaceItemImpressions] = {
 			skipItemImpressionsLog = false,
-			lazyHandler = function()
-				-- upvalues: serverDrivenUi (copy)
-				return require(serverDrivenUi.Impressions.SduiMarketplaceItemImpressionsHandler)
+			lazyHandler = function() --[[ Line: 47 ]]
+				-- upvalues: ServerDrivenUi (upval)
+				return require(ServerDrivenUi.Impressions.SduiMarketplaceItemImpressionsHandler)
 			end
 		},
-		[sduiImpressionEventType.devStoreSeeAllImpressions] = if fFlagSduiDevStoreSeeAllImpressionsLogging then {
+		[SduiImpressionEventType.devStoreSeeAllImpressions] = if FFlagSduiDevStoreSeeAllImpressionsLogging then {
 			skipItemImpressionsLog = false,
-			lazyHandler = function()
-				-- upvalues: serverDrivenUi (copy)
-				return require(serverDrivenUi.Impressions.SduiDevStoreSeeAllImpressionsHandler)
+			lazyHandler = function() --[[ Line: 54 ]]
+				-- upvalues: ServerDrivenUi (upval)
+				return require(ServerDrivenUi.Impressions.SduiDevStoreSeeAllImpressionsHandler)
 			end
 		} else nil,
-		[sduiImpressionEventType.queryImpressions] = if fFlagSduiQueryImpressionsLogging then {
+		[SduiImpressionEventType.queryImpressions] = if FFlagSduiQueryImpressionsLogging then {
 			skipItemImpressionsLog = true,
-			lazyHandler = function()
-				-- upvalues: serverDrivenUi (copy)
-				return require(serverDrivenUi.Impressions.SduiQueryImpressionsHandler)
+			lazyHandler = function() --[[ Line: 62 ]]
+				-- upvalues: ServerDrivenUi (upval)
+				return require(ServerDrivenUi.Impressions.SduiQueryImpressionsHandler)
 			end
 		} else nil
 	})

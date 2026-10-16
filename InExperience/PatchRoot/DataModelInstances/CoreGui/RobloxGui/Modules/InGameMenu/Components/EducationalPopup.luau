@@ -1,57 +1,51 @@
-﻿local guiService = game:GetService("GuiService")
-local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
-local inGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
-local roact = inGameMenuDependenciesModule.Roact
-local roactRodux = inGameMenuDependenciesModule.RoactRodux
-local t = inGameMenuDependenciesModule.t
-local images = inGameMenuDependenciesModule.UIBlox.App.ImageSet.Images
-local parent = script.Parent.Parent
-local withLocalizationModule = require(parent.Localization.withLocalization)
-local closeNativeClosePromptModule = require(parent.Actions.CloseNativeClosePrompt)
-local leaveGameModule = require(parent.Utility.LeaveGame)
-local educationalPopupDialogModule = require(script.Parent.EducationalPopupDialog)
-local sendAnalyticsModule = require(parent.Utility.SendAnalytics)
-local notificationTypeList = guiService:GetNotificationTypeList()
-local _ = {
-	EventContext = "educational_popup",
-	ConfirmName = "educational_confirmed",
-	CancelName = "educational_close_app",
-	DismissName = "educational_dismiss_prompt"
-}
-local educationalPopup = roact.PureComponent:extend("EducationalPopup")
-educationalPopup.validateProps = t.strictInterface({
-	screenSize = t.Vector2,
-	onDismiss = t.callback,
-	onConfirm = t.callback,
-	isClosingApp = t.boolean
+﻿local GuiService = game:GetService("GuiService")
+local RbxAnalyticsService = game:GetService("RbxAnalyticsService")
+local InGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
+local Roact = InGameMenuDependenciesModule.Roact
+local RoactRodux = InGameMenuDependenciesModule.RoactRodux
+local T = InGameMenuDependenciesModule.t
+local Images = InGameMenuDependenciesModule.UIBlox.App.ImageSet.Images
+local Parent = script.Parent.Parent
+local WithLocalizationModule = require(Parent.Localization.withLocalization)
+local CloseNativeClosePromptModule = require(Parent.Actions.CloseNativeClosePrompt)
+local LeaveGameModule = require(Parent.Utility.LeaveGame)
+local EducationalPopupDialogModule = require(script.Parent.EducationalPopupDialog)
+local SendAnalyticsModule = require(Parent.Utility.SendAnalytics)
+local NotificationTypeList = GuiService:GetNotificationTypeList()
+local EducationalPopup = Roact.PureComponent:extend("EducationalPopup")
+EducationalPopup.validateProps = T.strictInterface({
+	screenSize = T.Vector2,
+	onDismiss = T.callback,
+	onConfirm = T.callback,
+	isClosingApp = T.boolean
 })
 
-function educationalPopup.init(p1)
-	-- upvalues: sendAnalyticsModule (ref), guiService (ref), notificationTypeList (ref)
-	function p0.onCancel()
-		-- upvalues: sendAnalyticsModule (copy), guiService (copy), notificationTypeList (copy)
-		sendAnalyticsModule("educational_popup", "educational_close_app", {})
-		guiService:BroadcastNotification("", notificationTypeList.NATIVE_EXIT)
+function EducationalPopup.init(p1) --[[ Line: 39 ]]
+	-- upvalues: SendAnalyticsModule (copy), GuiService (copy), NotificationTypeList (copy)
+	function p1.onCancel() --[[ Line: 40 ]]
+		-- upvalues: SendAnalyticsModule (upval), GuiService (upval), NotificationTypeList (upval)
+		SendAnalyticsModule("educational_popup", "educational_close_app", {})
+		GuiService:BroadcastNotification("", NotificationTypeList.NATIVE_EXIT)
 	end
 end
 
-function educationalPopup.render(p1)
-	-- upvalues: withLocalizationModule (ref), roact (ref), educationalPopupDialogModule (ref), images (ref)
-	return withLocalizationModule({
+function EducationalPopup.render(p1) --[[ Line: 46 ]]
+	-- upvalues: WithLocalizationModule (copy), Roact (copy), EducationalPopupDialogModule (copy), Images (copy)
+	return WithLocalizationModule({
 		title = "CoreScripts.InGameMenu.ExitModal.Title",
 		subtitle = "CoreScripts.InGameMenu.ExitModal.Subtitle",
 		bodyTextOpenMenu = "CoreScripts.InGameMenu.ExitModal.BodyTextOpenMenu",
 		bodyTextClickHome = "CoreScripts.InGameMenu.ExitModal.BodyTextClickHome",
 		actionExit = "CoreScripts.InGameMenu.ExitModal.ActionExit",
 		actionHome = "CoreScripts.InGameMenu.ExitModal.ActionHome"
-	})(function(p2)
-		-- upvalues: roact (copy), educationalPopupDialogModule (copy), images (copy), p1 (ref)
-		return roact.createElement(educationalPopupDialogModule, {
+	})(function(p2) --[[ Line: 54 ]]
+		-- upvalues: Roact (upval), EducationalPopupDialogModule (upval), Images (upval), p1 (copy)
+		return Roact.createElement(EducationalPopupDialogModule, {
 			blurBackground = true,
 			bodyContents = {
 				{ isSystemMenuIcon = true, text = p2.bodyTextOpenMenu },
 				{
-					icon = images["icons/menu/home_off"],
+					icon = Images["icons/menu/home_off"],
 					text = p2.bodyTextClickHome
 				}
 			},
@@ -71,30 +65,30 @@ function educationalPopup.render(p1)
 	end)
 end
 
-function educationalPopup.didUpdate(p1)
-	-- upvalues: guiService (ref)
-	guiService:SetMenuIsOpen(p1.props.isClosingApp, "EducationalPopup")
+function EducationalPopup.didUpdate(p1) --[[ Line: 86 ]]
+	-- upvalues: GuiService (copy)
+	GuiService:SetMenuIsOpen(p1.props.isClosingApp, "EducationalPopup")
 end
 
-return roactRodux.UNSTABLE_connect2(function(p1, _)
+return RoactRodux.UNSTABLE_connect2(function(p1, _) --[[ Line: 91 ]]
 	return {
 		isClosingApp = p1.nativeClosePrompt.closingApp,
 		screenSize = p1.screenSize
 	}
-end, function(p1)
-	-- upvalues: closeNativeClosePromptModule (ref), rbxAnalyticsService (ref), sendAnalyticsModule (ref), leaveGameModule (ref)
+end, function(Callback) --[[ Line: 96 ]]
+	-- upvalues: CloseNativeClosePromptModule (copy), RbxAnalyticsService (copy), SendAnalyticsModule (copy), LeaveGameModule (copy)
 	return {
-		onDismiss = function()
-			-- upvalues: p1 (ref), closeNativeClosePromptModule (copy), rbxAnalyticsService (copy), sendAnalyticsModule (copy)
-			p1(closeNativeClosePromptModule())
-			rbxAnalyticsService:ReportCounter("EducationalPopup_Dismiss", 1)
-			sendAnalyticsModule("educational_popup", "educational_dismiss_prompt", {})
+		onDismiss = function() --[[ Line: 98 ]]
+			-- upvalues: Callback (copy), CloseNativeClosePromptModule (upval), RbxAnalyticsService (upval), SendAnalyticsModule (upval)
+			Callback(CloseNativeClosePromptModule())
+			RbxAnalyticsService:ReportCounter("EducationalPopup_Dismiss", 1)
+			SendAnalyticsModule("educational_popup", "educational_dismiss_prompt", {})
 		end,
-		onConfirm = function()
-			-- upvalues: rbxAnalyticsService (copy), sendAnalyticsModule (copy), leaveGameModule (copy)
-			rbxAnalyticsService:ReportCounter("EducationalPopup_Confirm", 1)
-			sendAnalyticsModule("educational_popup", "educational_confirmed", {})
-			leaveGameModule()
+		onConfirm = function() --[[ Line: 103 ]]
+			-- upvalues: RbxAnalyticsService (upval), SendAnalyticsModule (upval), LeaveGameModule (upval)
+			RbxAnalyticsService:ReportCounter("EducationalPopup_Confirm", 1)
+			SendAnalyticsModule("educational_popup", "educational_confirmed", {})
+			LeaveGameModule()
 		end
 	}
-end)(educationalPopup)
+end)(EducationalPopup)

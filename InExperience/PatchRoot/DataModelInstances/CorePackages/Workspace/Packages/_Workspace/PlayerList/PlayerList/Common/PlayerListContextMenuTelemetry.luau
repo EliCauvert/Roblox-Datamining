@@ -1,48 +1,51 @@
-﻿local telemetryService = game:GetService("TelemetryService")
-local playerListContextMenuTelemetryThrottleHundredthsPercent = game:DefineFastInt("PlayerListContextMenuTelemetryThrottleHundredthsPercent", 10000)
+﻿local TelemetryService = game:GetService("TelemetryService")
+local PlayerListContextMenuTelemetryThrottleHundredthsPercent = game:DefineFastInt("PlayerListContextMenuTelemetryThrottleHundredthsPercent", 10000)
 local _ = require(script.Parent.PlayerListContextMenuTelemetryAction)
-local list = { 2026, 8, 4 }
-local t = {
+local LastUpdated = { 2026, 8, 4 }
+local config = {
 	eventName = "coreui_playerlist_context_menu_action",
 	description = "Fired when the PlayerList contextual menu is opened, closed, or an action row is activated.",
 	backends = { "EventIngest" },
-	throttlingPercentage = playerListContextMenuTelemetryThrottleHundredthsPercent,
-	lastUpdated = list
+	throttlingPercentage = PlayerListContextMenuTelemetryThrottleHundredthsPercent,
+	lastUpdated = LastUpdated
 }
-local t_1 = {
+local config1 = {
 	eventName = "coreui_playerlist_context_menu_action",
 	description = "Counter for PlayerList contextual menu open / close / action activations.",
 	backends = { "RobloxTelemetryCounter" },
-	throttlingPercentage = playerListContextMenuTelemetryThrottleHundredthsPercent,
-	lastUpdated = list
+	throttlingPercentage = PlayerListContextMenuTelemetryThrottleHundredthsPercent,
+	lastUpdated = LastUpdated
 }
 
 return {
-	logAction = function(p1, p2)
-		-- upvalues: telemetryService (write), t (ref), t_1 (ref)
-		local list = {
+	logAction = function(Action, p1) --[[ Line: 43 ]]
+		-- upvalues: TelemetryService (ref), config (copy), config1 (copy)
+		local StandardizedFields = {
 			"addPlaceId",
 			"addUniverseId",
 			"addSessionInfo",
 			"addSessionId",
 			"addPlaySessionId"
 		}
-		local t_2 = { action = p1 }
+		local CustomFields = { action = Action }
 		
-		if p2 ~= nil then
-			if p2.isSelf ~= nil then
-				t_2.is_self = tostring(p2.isSelf)
+		if p1 ~= nil then
+			if p1.isSelf ~= nil then
+				CustomFields.is_self = tostring(p1.isSelf)
 			end
-			if p2.friendStatus ~= nil then
-				t_2.friend_status = p2.friendStatus
+			if p1.friendStatus ~= nil then
+				CustomFields.friend_status = p1.friendStatus
 			end
 		end
-		local t_3 = { standardizedFields = list, customFields = t_2 }
-		telemetryService:LogEvent(t, t_3)
-		telemetryService:LogCounter(t_1, t_3, 1)
+		local config2 = {
+			standardizedFields = StandardizedFields,
+			customFields = CustomFields
+		}
+		TelemetryService:LogEvent(config, config2)
+		TelemetryService:LogCounter(config1, config2, 1)
 	end,
-	_setServicesForTesting = function(value)
-		-- upvalues: telemetryService (write)
-		telemetryService = value
+	_setServicesForTesting = function(p1) --[[ Line: 65 ]]
+		-- upvalues: TelemetryService (ref)
+		TelemetryService = p1
 	end
 }

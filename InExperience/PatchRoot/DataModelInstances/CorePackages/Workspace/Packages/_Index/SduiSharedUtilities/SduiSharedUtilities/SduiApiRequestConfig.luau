@@ -1,7 +1,7 @@
-﻿local sduiSharedUtilities = script:FindFirstAncestor("SduiSharedUtilities")
-local _ = require(sduiSharedUtilities.SduiApiStorePostConfig)
-local _ = require(sduiSharedUtilities.SduiIntegrationTypes)
-local _ = require(sduiSharedUtilities.SduiLoadTimer)
-local _ = require(sduiSharedUtilities.SduiRetryPolicy)
+﻿local SduiSharedUtilities = script:FindFirstAncestor("SduiSharedUtilities")
+local _ = require(SduiSharedUtilities.SduiApiStorePostConfig)
+local _ = require(SduiSharedUtilities.SduiIntegrationTypes)
+local _ = require(SduiSharedUtilities.SduiLoadTimer)
+local _ = require(SduiSharedUtilities.SduiRetryPolicy)
 
 return {}

@@ -1,28 +1,28 @@
-﻿local corePackagesService = game:GetService("CorePackages")
-local roactModule = require(corePackagesService.Packages.Roact)
-local tModule = require(corePackagesService.Packages.t)
-local UIBloxModule = require(corePackagesService.Packages.UIBlox)
-local withFoundationOrUIBloxStyle = require(corePackagesService.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
-local buttonType = UIBloxModule.App.Button.Enum.ButtonType
-local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
-local fFlagAddNewPlayerListMobileFocusNav = require(corePackagesService.Workspace.Packages.PlayerList).Flags.FFlagAddNewPlayerListMobileFocusNav
-local actionModal = roactModule.PureComponent:extend("ActionModal")
-actionModal.defaultProps = { screenSize = Vector2.new(1000, 1000) }
-actionModal.validateProps = tModule.interface({
-	block = tModule.callback,
-	blockText = tModule.string,
-	blockAndReport = tModule.callback,
-	blockAndReportText = tModule.string,
-	cancel = tModule.callback,
-	cancelText = tModule.string,
-	body = tModule.string,
-	title = tModule.string,
-	screenSize = tModule.optional(tModule.Vector2)
+﻿local CorePackages = game:GetService("CorePackages")
+local RoactModule = require(CorePackages.Packages.Roact)
+local TModule = require(CorePackages.Packages.t)
+local UIBloxModule = require(CorePackages.Packages.UIBlox)
+local WithFoundationOrUIBloxStyleFunction = require(CorePackages.Workspace.Packages.CoreGuiCommon).withFoundationOrUIBloxStyle
+local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
+local InteractiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
+local FFlagAddNewPlayerListMobileFocusNav = require(CorePackages.Workspace.Packages.PlayerList).Flags.FFlagAddNewPlayerListMobileFocusNav
+local ActionModal = RoactModule.PureComponent:extend("ActionModal")
+ActionModal.defaultProps = { screenSize = Vector2.new(1000, 1000) }
+ActionModal.validateProps = TModule.interface({
+	block = TModule.callback,
+	blockText = TModule.string,
+	blockAndReport = TModule.callback,
+	blockAndReportText = TModule.string,
+	cancel = TModule.callback,
+	cancelText = TModule.string,
+	body = TModule.string,
+	title = TModule.string,
+	screenSize = TModule.optional(TModule.Vector2)
 })
 
-function actionModal.render(p1)
-	-- upvalues: withFoundationOrUIBloxStyle (ref), roactModule (ref), interactiveAlert (ref), fFlagAddNewPlayerListMobileFocusNav (ref), buttonType (ref)
-	return withFoundationOrUIBloxStyle(function(p2)
+function ActionModal.render(p1) --[[ Line: 35 ]]
+	-- upvalues: WithFoundationOrUIBloxStyleFunction (copy), RoactModule (copy), InteractiveAlert (copy), FFlagAddNewPlayerListMobileFocusNav (copy), ButtonType (copy)
+	return WithFoundationOrUIBloxStyleFunction(function(p2) --[[ Line: 36 ]]
 		return {
 			Theme = {
 				Overlay = {
@@ -31,9 +31,9 @@ function actionModal.render(p1)
 				}
 			}
 		}
-	end, function(p2)
-		-- upvalues: roactModule (copy), p1 (ref), interactiveAlert (copy), fFlagAddNewPlayerListMobileFocusNav (copy), buttonType (copy)
-		return roactModule.createElement("ImageButton", {
+	end, function(p2) --[[ Line: 45 ]]
+		-- upvalues: RoactModule (upval), p1 (copy), InteractiveAlert (upval), FFlagAddNewPlayerListMobileFocusNav (upval), ButtonType (upval)
+		return RoactModule.createElement("ImageButton", {
 			Size = UDim2.new(1, 0, 1, 0),
 			BackgroundTransparency = p2.Theme.Overlay.Transparency,
 			BackgroundColor3 = p2.Theme.Overlay.Color,
@@ -41,32 +41,32 @@ function actionModal.render(p1)
 			AutoButtonColor = false,
 			Selectable = false,
 			Visible = p1.props.Visible,
-			[roactModule.Event.Activated] = p1.props.cancel
+			[RoactModule.Event.Activated] = p1.props.cancel
 		}, {
-			AlertModal = roactModule.createElement(interactiveAlert, {
+			AlertModal = RoactModule.createElement(InteractiveAlert, {
 				richText = true,
 				screenSize = p1.props.screenSize,
 				title = p1.props.title,
 				bodyText = p1.props.body,
-				isRoactGamepadEnabled = if fFlagAddNewPlayerListMobileFocusNav then false else nil,
+				isRoactGamepadEnabled = not FFlagAddNewPlayerListMobileFocusNav and nil,
 				buttonStackInfo = {
 					buttons = {
 						{
-							buttonType = buttonType.Secondary,
+							buttonType = ButtonType.Secondary,
 							props = {
 								text = p1.props.cancelText,
 								onActivated = p1.props.cancel
 							}
 						},
 						{
-							buttonType = buttonType.Alert,
+							buttonType = ButtonType.Alert,
 							props = {
 								text = p1.props.blockAndReportText,
 								onActivated = p1.props.blockAndReport
 							}
 						},
 						{
-							buttonType = buttonType.Alert,
+							buttonType = ButtonType.Alert,
 							props = { text = p1.props.blockText, onActivated = p1.props.block }
 						}
 					}
@@ -76,4 +76,4 @@ function actionModal.render(p1)
 	end)
 end
 
-return actionModal
+return ActionModal

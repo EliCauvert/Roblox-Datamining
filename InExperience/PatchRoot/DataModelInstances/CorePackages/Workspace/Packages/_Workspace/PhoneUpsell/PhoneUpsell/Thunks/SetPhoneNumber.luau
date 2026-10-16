@@ -1,23 +1,23 @@
-﻿local httpService = game:GetService("HttpService")
-local phoneUpsell = script:FindFirstAncestor("PhoneUpsell")
-local parent = phoneUpsell.Parent
-local promiseModule = require(parent.Promise)
-local postSetPhoneModule = require(phoneUpsell.Http.Requests.PostSetPhone)
-local isStringPhone = require(parent.AuthCommon).Utils.isStringPhone
+﻿local HttpService = game:GetService("HttpService")
+local PhoneUpsell = script:FindFirstAncestor("PhoneUpsell")
+local Parent = PhoneUpsell.Parent
+local PromiseModule = require(Parent.Promise)
+local PostSetPhoneModule = require(PhoneUpsell.Http.Requests.PostSetPhone)
+local IsStringPhoneFunction = require(Parent.AuthCommon).Utils.isStringPhone
 
-return function(p1, p2, p3, p4, p5)
-	-- upvalues: isStringPhone (ref), promiseModule (ref), postSetPhoneModule (ref), httpService (ref)
-	return function()
-		-- upvalues: isStringPhone (copy), p3 (ref), p4 (ref), promiseModule (copy), postSetPhoneModule (copy), p1 (ref), p2 (ref), p5 (ref), httpService (copy)
-		return if isStringPhone(p3 .. p3) then postSetPhoneModule(p1, p2, p3, p4, p5):andThen(function(_)
-			-- upvalues: promiseModule (copy)
-			return promiseModule.resolve()
-		end, function(p6)
-			-- upvalues: httpService (copy), promiseModule (copy)
-			return promiseModule.reject({
+return function(p1, p2, p3, p4, p5) --[[ Line: 16 ]]
+	-- upvalues: IsStringPhoneFunction (copy), PromiseModule (copy), PostSetPhoneModule (copy), HttpService (copy)
+	return function() --[[ Line: 17 ]]
+		-- upvalues: IsStringPhoneFunction (upval), p3 (copy), p4 (copy), PromiseModule (upval), PostSetPhoneModule (upval), p1 (copy), p2 (copy), p5 (copy), HttpService (upval)
+		return if IsStringPhoneFunction(p3 .. p4) then PostSetPhoneModule(p1, p2, p3, p4, p5):andThen(function(_) --[[ Line: 23 ]]
+			-- upvalues: PromiseModule (upval)
+			return PromiseModule.resolve()
+		end, function(p6) --[[ Line: 25 ]]
+			-- upvalues: HttpService (upval), PromiseModule (upval)
+			return PromiseModule.reject({
 				PhoneRegexFailed = false,
-				ErrorCode = if p6.Body then httpService:JSONDecode(p6.Body).errors[1].code else 0
+				ErrorCode = if p6.Body then HttpService:JSONDecode(p6.Body).errors[1].code else 0
 			})
-		end) else promiseModule.reject({ PhoneRegexFailed = true })
+		end) else PromiseModule.reject({ PhoneRegexFailed = true })
 	end
 end

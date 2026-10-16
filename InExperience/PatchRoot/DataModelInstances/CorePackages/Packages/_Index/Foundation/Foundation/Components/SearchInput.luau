@@ -1,1 +1,1 @@
-﻿return require(script.SearchInput)
+﻿return (require(script.SearchInput))

@@ -1,13 +1,13 @@
-﻿local jestConfigsModule = require(script.Parent.Parent.Dev.JestConfigs)
+﻿local JestConfigsModule = require(script.Parent.Parent.Dev.JestConfigs)
 
 return {
 	displayName = "EditProfileBackground",
 	testMatch = { "**/*.test" },
 	setupFilesAfterEnv = {
-		jestConfigsModule.setupFiles.LogHandler,
-		jestConfigsModule.setupFiles.UIBloxInitializer,
-		jestConfigsModule.setupFiles.createPromiseRejectionHandler(),
+		JestConfigsModule.setupFiles.LogHandler,
+		JestConfigsModule.setupFiles.UIBloxInitializer,
+		JestConfigsModule.setupFiles.createPromiseRejectionHandler(),
 		script.Parent.TestHelpers.collisionMatcherSetup,
-		jestConfigsModule.setupFiles.RetryTimes
+		JestConfigsModule.setupFiles.RetryTimes
 	}
 }

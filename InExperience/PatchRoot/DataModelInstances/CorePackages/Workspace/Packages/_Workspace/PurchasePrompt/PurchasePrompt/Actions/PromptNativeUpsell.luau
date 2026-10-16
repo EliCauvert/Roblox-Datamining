@@ -1,1 +1,1 @@
-﻿return require(script.Parent.makeActionCreator)(script.Name, "robuxProductId", "productId", "robuxPurchaseAmount", "robuxAmountBeforeBonus", "price", "itemProductId", "itemName", "universeId")
+﻿return (require(script.Parent.makeActionCreator)(script.Name, "robuxProductId", "productId", "robuxPurchaseAmount", "robuxAmountBeforeBonus", "price", "itemProductId", "itemName", "universeId"))

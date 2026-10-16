@@ -1,19 +1,17 @@
-﻿return function(p1)
-	local var1 = ""
-	local var2 = 0
+﻿return function(Text: string): string --[[ Line: 4 | Named "cleanRichTextTags" ]]
+	local Text1 = ""
+	local Count = 0
 	
-	for i = 1, #p1 do
-		local substring = string.sub(p1, i, i)
+	for i = 1, #Text do
+		local Segment = string.sub(Text, i, i)
 		
-		if substring == "<" then
-			var2 += 1
-			continue
-		end
-		if substring == ">" and var2 > 0 then
-			var2 -= 1
-		elseif var2 == 0 then
-			var1 ..= substring
+		if Segment == "<" then
+			Count += 1
+		elseif Segment == ">" and Count > 0 then
+			Count -= 1
+		elseif Count == 0 then
+			Text1 ..= Segment
 		end
 	end
-	return if var2 == 0 then var1 else p1
+	return if Count == 0 then Text1 else Text
 end

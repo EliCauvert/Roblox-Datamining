@@ -1,38 +1,38 @@
-﻿local friendsCommon = script:FindFirstAncestor("FriendsCommon")
-local parent = friendsCommon.Parent
-local reactModule = require(parent.React)
-local apolloFriendsModule = require(parent.ApolloFriends)
-local queries = require(parent.ApolloLocalState).queries
-local userIdExists = require(parent.SocialCommon).Utils.userIdExists
-local apolloClientModule = require(parent.ApolloClient)
-local useQuery = apolloClientModule.useQuery
-local useApolloClient = apolloClientModule.useApolloClient
-local useLocalUserId = require(parent.RobloxAppHooks).useLocalUserId
-local handleFriendshipEventModule = require(friendsCommon.EventHandlers.handleFriendshipEvent)
-local fFlagFriendSortedByPresenceSignalsImplementation = require(parent.SharedFlags).FFlagFriendSortedByPresenceSignalsImplementation
+﻿local FriendsCommon = script:FindFirstAncestor("FriendsCommon")
+local Parent = FriendsCommon.Parent
+local ReactModule = require(Parent.React)
+local ApolloFriendsModule = require(Parent.ApolloFriends)
+local Queries = require(Parent.ApolloLocalState).queries
+local UserIdExistsFunction = require(Parent.SocialCommon).Utils.userIdExists
+local ApolloClientModule = require(Parent.ApolloClient)
+local UseQueryFunction = ApolloClientModule.useQuery
+local UseApolloClientFunction = ApolloClientModule.useApolloClient
+local UseLocalUserIdFunction = require(Parent.RobloxAppHooks).useLocalUserId
+local HandleFriendshipEventModule = require(FriendsCommon.EventHandlers.handleFriendshipEvent)
+local FFlagFriendSortedByPresenceSignalsImplementation = require(Parent.SharedFlags).FFlagFriendSortedByPresenceSignalsImplementation
 
-return function()
-	-- upvalues: useLocalUserId (ref), fFlagFriendSortedByPresenceSignalsImplementation (ref), useApolloClient (ref), useQuery (ref), queries (ref), userIdExists (ref), apolloFriendsModule (ref), reactModule (ref), handleFriendshipEventModule (ref)
-	local var1 = useLocalUserId()
-	local var2 = if fFlagFriendSortedByPresenceSignalsImplementation then nil else useApolloClient()
-	local var3 = if fFlagFriendSortedByPresenceSignalsImplementation then nil else useQuery(queries.onlineFriendsByUserId, {
+return function() --[[ Line: 25 | Named "useHandleFriendshipEvent" ]]
+	-- upvalues: UseLocalUserIdFunction (copy), FFlagFriendSortedByPresenceSignalsImplementation (copy), UseApolloClientFunction (copy), UseQueryFunction (copy), Queries (copy), UserIdExistsFunction (copy), ApolloFriendsModule (copy), ReactModule (copy), HandleFriendshipEventModule (copy)
+	local UseLocalUserIdResult = UseLocalUserIdFunction()
+	local UseApolloClientResult = if FFlagFriendSortedByPresenceSignalsImplementation then nil else UseApolloClientFunction()
+	local UseQueryResult = if FFlagFriendSortedByPresenceSignalsImplementation then nil else UseQueryFunction(Queries.onlineFriendsByUserId, {
 		notifyOnNetworkStatusChange = true,
-		skip = not userIdExists(var1),
+		skip = not UserIdExistsFunction(UseLocalUserIdResult),
 		variables = {
-			userId = var1,
-			sort = apolloFriendsModule.Enums.Sort.FriendshipScore
+			userId = UseLocalUserIdResult,
+			sort = ApolloFriendsModule.Enums.Sort.FriendshipScore
 		}
 	})
 	
-	return reactModule.useCallback(function(p1)
-		-- upvalues: handleFriendshipEventModule (copy), var1 (ref), fFlagFriendSortedByPresenceSignalsImplementation (copy), var3 (ref), var2 (ref)
-		handleFriendshipEventModule({
-			localUserId = var1,
-			onlineFriendsRef = if fFlagFriendSortedByPresenceSignalsImplementation then nil else var3,
-			apolloClient = if fFlagFriendSortedByPresenceSignalsImplementation then nil else var2,
-			friendshipUpdate = p1
+	return (ReactModule.useCallback(function(FriendshipUpdate) --[[ Line: 41 ]]
+		-- upvalues: HandleFriendshipEventModule (upval), UseLocalUserIdResult (copy), FFlagFriendSortedByPresenceSignalsImplementation (upval), UseQueryResult (copy), UseApolloClientResult (copy)
+		HandleFriendshipEventModule({
+			localUserId = UseLocalUserIdResult,
+			onlineFriendsRef = if FFlagFriendSortedByPresenceSignalsImplementation then nil else UseQueryResult,
+			apolloClient = if FFlagFriendSortedByPresenceSignalsImplementation then nil else UseApolloClientResult,
+			friendshipUpdate = FriendshipUpdate
 		})
 	end, {
-		if fFlagFriendSortedByPresenceSignalsImplementation then nil else var3
-	})
+		if FFlagFriendSortedByPresenceSignalsImplementation then nil else UseQueryResult
+	}))
 end

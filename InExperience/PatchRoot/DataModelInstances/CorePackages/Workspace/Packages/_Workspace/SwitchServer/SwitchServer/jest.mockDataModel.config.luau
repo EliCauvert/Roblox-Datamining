@@ -1,12 +1,12 @@
-﻿local jestConfigsModule = require(script.Parent.Parent.Dev.JestConfigs)
+﻿local JestConfigsModule = require(script.Parent.Parent.Dev.JestConfigs)
 
 return {
 	displayName = "SwitchServer-MockDataModel",
 	mockDataModel = true,
 	testMatch = { "**/createSwitchServerStore.test" },
 	setupFilesAfterEnv = {
-		jestConfigsModule.setupFiles.LogHandler,
-		jestConfigsModule.setupFiles.createPromiseRejectionHandler(),
-		jestConfigsModule.setupFiles.RetryTimes
+		JestConfigsModule.setupFiles.LogHandler,
+		JestConfigsModule.setupFiles.createPromiseRejectionHandler(),
+		JestConfigsModule.setupFiles.RetryTimes
 	}
 }

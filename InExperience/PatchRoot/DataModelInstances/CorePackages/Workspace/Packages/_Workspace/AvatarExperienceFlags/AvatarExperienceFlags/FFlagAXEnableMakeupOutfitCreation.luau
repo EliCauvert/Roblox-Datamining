@@ -1,1 +1,4 @@
-﻿return game:DefineFastFlag("AXEnableMakeupOutfitCreation", false) and (require(script.Parent.FFlagAXOutfitPageRevamp) and game:GetEngineFeature("AvatarEditorServiceV4CreateOutfitType"))
+﻿local FFlagAXOutfitPageRevampModule = require(script.Parent.FFlagAXOutfitPageRevamp)
+local AvatarEditorServiceV4CreateOutfitTypeEngineFeature = game:GetEngineFeature("AvatarEditorServiceV4CreateOutfitType")
+
+return game:DefineFastFlag("AXEnableMakeupOutfitCreation", false) and (FFlagAXOutfitPageRevampModule and AvatarEditorServiceV4CreateOutfitTypeEngineFeature)

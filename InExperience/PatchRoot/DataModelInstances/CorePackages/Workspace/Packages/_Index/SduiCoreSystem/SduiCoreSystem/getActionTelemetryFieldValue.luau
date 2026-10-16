@@ -1,17 +1,21 @@
-﻿local sduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
-local findAnalyticsFieldInAncestorsModule = require(sduiCoreSystem.findAnalyticsFieldInAncestors)
-local _ = require(sduiCoreSystem.SduiBuilderTypes)
-local _ = require(sduiCoreSystem.SduiConfigTypes)
+﻿local SduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
+local FindAnalyticsFieldInAncestorsModule = require(SduiCoreSystem.findAnalyticsFieldInAncestors)
+local _ = require(SduiCoreSystem.SduiBuilderTypes)
+local _ = require(SduiCoreSystem.SduiConfigTypes)
 
-return function(p1, p2, p3, p4)
-	-- upvalues: findAnalyticsFieldInAncestorsModule (ref)
-	local var1 = findAnalyticsFieldInAncestorsModule(p3, p2)
+return function(p1, p2, p3, p4) --[[ Line: 12 | Named "getActionTelemetryFieldValue" ]]
+	-- upvalues: FindAnalyticsFieldInAncestorsModule (copy)
+	local AnalyticsFieldInAncestorsModule = FindAnalyticsFieldInAncestorsModule(p3, p2)
 	
-	if var1 ~= nil then
-		return var1
-	elseif p1 then
-		local actionParams = p1.actionParams
-		
-		return if actionParams and actionParams[p3] ~= nil then actionParams[p3] else p4
+	if AnalyticsFieldInAncestorsModule ~= nil then
+		return AnalyticsFieldInAncestorsModule
 	end
+	if p1 then
+		local ActionParams = p1.actionParams
+		
+		if ActionParams and ActionParams[p3] ~= nil then
+			return ActionParams[p3]
+		end
+	end
+	return p4
 end

@@ -1,29 +1,29 @@
-﻿local appChat = script:FindFirstAncestor("AppChat")
-local parent = appChat.Parent
-local reactModule = require(parent.React)
-local signalsReactModule = require(parent.SignalsReact)
-local getTopBarStoreModule = require(appChat.Stores.GetTopBarStore)
+﻿local AppChat = script:FindFirstAncestor("AppChat")
+local Parent = AppChat.Parent
+local ReactModule = require(Parent.React)
+local SignalsReactModule = require(Parent.SignalsReact)
+local GetTopBarStoreModule = require(AppChat.Stores.GetTopBarStore)
 
-return function(p1)
-	-- upvalues: getTopBarStoreModule (ref), signalsReactModule (ref), reactModule (ref)
-	local screenName = p1.screenName
-	local render = p1.render
-	local var1 = getTopBarStoreModule(false)
-	local var2 = signalsReactModule.useSignalState(var1.getScreenTopBar(screenName))
+return function(p1) --[[ Line: 17 | Named "TopBarFromStore" ]]
+	-- upvalues: GetTopBarStoreModule (copy), SignalsReactModule (copy), ReactModule (copy)
+	local ScreenName = p1.screenName
+	local RenderFunction = p1.render
+	local TopBarStoreModule = GetTopBarStoreModule(false)
+	local UseSignalStateResult = SignalsReactModule.useSignalState((TopBarStoreModule.getScreenTopBar(ScreenName)))
 	
-	return render(reactModule.useMemo(function()
-		-- upvalues: screenName (ref), var2 (ref), var1 (ref)
+	return RenderFunction((ReactModule.useMemo(function() --[[ Line: 25 ]]
+		-- upvalues: ScreenName (copy), UseSignalStateResult (copy), TopBarStoreModule (copy)
 		return {
-			getScreenTopBar = function(p2)
-				-- upvalues: screenName (copy), var2 (copy), var1 (copy)
-				return if p2 == screenName then var2 else var1.getScreenTopBar(p2)(false)
+			getScreenTopBar = function(ScreenName1) --[[ Line: 27 ]]
+				-- upvalues: ScreenName (upval), UseSignalStateResult (upval), TopBarStoreModule (upval)
+				return if ScreenName1 == ScreenName then UseSignalStateResult else TopBarStoreModule.getScreenTopBar(ScreenName1)(false)
 			end,
-			setScreenTopBar = var1.setScreenTopBar
+			setScreenTopBar = TopBarStoreModule.setScreenTopBar
 		}
 	end, {
-		screenName,
-		var2,
-		var1.getScreenTopBar,
-		var1.setScreenTopBar
-	}))
+		ScreenName,
+		UseSignalStateResult,
+		TopBarStoreModule.getScreenTopBar,
+		TopBarStoreModule.setScreenTopBar
+	})))
 end

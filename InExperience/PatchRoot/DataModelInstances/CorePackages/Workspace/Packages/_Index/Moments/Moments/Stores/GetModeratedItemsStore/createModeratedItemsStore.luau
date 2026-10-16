@@ -1,46 +1,46 @@
-﻿local parent = script:FindFirstAncestor("Moments").Parent
-local signalsModule = require(parent.Signals)
-local cryoModule = require(parent.Cryo)
-local createSignal = signalsModule.createSignal
-local createComputed = signalsModule.createComputed
+﻿local Parent = script:FindFirstAncestor("Moments").Parent
+local SignalsModule = require(Parent.Signals)
+local CryoModule = require(Parent.Cryo)
+local CreateSignalFunction = SignalsModule.createSignal
+local CreateComputedFunction = SignalsModule.createComputed
 
-return function()
-	-- upvalues: createSignal (ref), createComputed (ref), cryoModule (ref)
-	local var1, var2 = createSignal({})
+return function() --[[ Line: 18 | Named "createModeratedItemsStore" ]]
+	-- upvalues: CreateSignalFunction (copy), CreateComputedFunction (copy), CryoModule (copy)
+	local Signal, Signal2 = CreateSignalFunction({})
 	local t = {}
 	
 	return {
-		getItems = var1,
-		getIsModerated = function(p1)
-			-- upvalues: t (ref), createComputed (copy), var1 (ref)
-			if t[p1] == nil then
-				t[p1] = createComputed(function(p2)
-					-- upvalues: var1 (copy), p1 (ref)
-					return table.find(var1(p2), p1) ~= nil
+		getItems = Signal,
+		getIsModerated = function(Value) --[[ Line: 22 ]]
+			-- upvalues: t (copy), CreateComputedFunction (upval), Signal (copy)
+			if t[Value] == nil then
+				t[Value] = CreateComputedFunction(function(p1): boolean --[[ Line: 24 ]]
+					-- upvalues: Signal (upval), Value (copy)
+					return table.find(Signal(p1), Value) ~= nil
 				end)
 			end
-			return t[p1]
+			return t[Value]
 		end,
-		markReported = function(p1)
-			-- upvalues: var1 (ref), var2 (ref), cryoModule (copy)
-			local var3 = var1(false)
+		markReported = function(Value) --[[ Line: 31 ]]
+			-- upvalues: Signal (copy), Signal2 (copy), CryoModule (upval)
+			local SignalResult = Signal(false)
 			
-			if not table.find(var3, p1) then
-				var2(cryoModule.List.join(var3, { p1 }))
+			if not table.find(SignalResult, Value) then
+				Signal2((CryoModule.List.join(SignalResult, { Value })))
 			end
 		end,
-		addModeratedItems = function(p1)
-			-- upvalues: var1 (ref), var2 (ref), cryoModule (copy)
-			local var3 = var1(false)
-			local t = {}
+		addModeratedItems = function(List) --[[ Line: 38 ]]
+			-- upvalues: Signal (copy), Signal2 (copy), CryoModule (upval)
+			local SignalResult = Signal(false)
+			local List1 = {}
 			
-			for i, v in p1 do
-				if not table.find(var3, v) then
-					table.insert(t, v)
+			for _, value in List do
+				if not table.find(SignalResult, value) then
+					table.insert(List1, value)
 				end
 			end
-			if #t > 0 then
-				var2(cryoModule.List.join(var3, t))
+			if #List1 > 0 then
+				Signal2((CryoModule.List.join(SignalResult, List1)))
 			end
 		end
 	}

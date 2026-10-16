@@ -1,244 +1,258 @@
-﻿local gameTile = script:FindFirstAncestor("GameTile")
-local coPlayFooterModule = require(gameTile.Footer.CoPlayFooter)
-local usePlayerCountTextModule = require(gameTile.Footer.usePlayerCountText)
-local _ = require(gameTile.GameTileTypes)
-local parent = gameTile.Parent
-local reactModule = require(parent.React)
-local UIBloxModule = require(parent.UIBlox)
-local foundationModule = require(parent.Foundation)
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local useStyle = UIBloxModule.Core.Style.useStyle
-local styledTextLabel = UIBloxModule.App.Text.StyledTextLabel
-local statGroup = UIBloxModule.App.Indicator.StatGroup
-local textFooter = UIBloxModule.App.Tile.ExperienceTileMetadata.TextFooter
-local coPlayFooter = UIBloxModule.App.Tile.ExperienceTileMetadata.CoPlayFooter
-local socialProofFooter = UIBloxModule.App.Tile.ExperienceTileMetadata.SocialProofFooter
-local tooltipOrientation = UIBloxModule.App.Dialog.Enum.TooltipOrientation
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local colors = require(parent.Style).Colors
-local useDesignTokens = require(parent.Style).useDesignTokens
-local sponsoredTooltipHover = require(parent.Ads).SponsoredTooltipHover
-local argCheckModule = require(parent.ArgCheck)
-local getUserInputIsSelectionOnlyModule = require(gameTile.Footer.getUserInputIsSelectionOnly)
-local uDim2 = UDim2.fromScale(1, 1)
+﻿local GameTile = script:FindFirstAncestor("GameTile")
+local CoPlayFooterModule = require(GameTile.Footer.CoPlayFooter)
+local UsePlayerCountTextModule = require(GameTile.Footer.usePlayerCountText)
+local _ = require(GameTile.GameTileTypes)
+local Parent = GameTile.Parent
+local ReactModule = require(Parent.React)
+local UIBloxModule = require(Parent.UIBlox)
+local FoundationModule = require(Parent.Foundation)
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local StyledTextLabel = UIBloxModule.App.Text.StyledTextLabel
+local StatGroup = UIBloxModule.App.Indicator.StatGroup
+local TextFooter = UIBloxModule.App.Tile.ExperienceTileMetadata.TextFooter
+local CoPlayFooter = UIBloxModule.App.Tile.ExperienceTileMetadata.CoPlayFooter
+local SocialProofFooter = UIBloxModule.App.Tile.ExperienceTileMetadata.SocialProofFooter
+local TooltipOrientation = UIBloxModule.App.Dialog.Enum.TooltipOrientation
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local Colors = require(Parent.Style).Colors
+local UseDesignTokensFunction = require(Parent.Style).useDesignTokens
+local SponsoredTooltipHover = require(Parent.Ads).SponsoredTooltipHover
+local ArgCheckModule = require(Parent.ArgCheck)
+local GetUserInputIsSelectionOnlyModule = require(GameTile.Footer.getUserInputIsSelectionOnly)
+local _UDim2 = UDim2.fromScale(1, 1)
 
-return function(p1)
-	-- upvalues: argCheckModule (ref), usePlayerCountTextModule (ref), useStyle (ref), useDesignTokens (ref), useLocalization (ref), getUserInputIsSelectionOnlyModule (ref), reactModule (ref), styledTextLabel (ref), sponsoredTooltipHover (ref), tooltipOrientation (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), uDim2 (ref), coPlayFooter (ref), colors (ref), coPlayFooterModule (ref), textFooter (ref), socialProofFooter (ref), statGroup (ref)
+return function(p1) --[[ Line: 31 ]]
+	-- upvalues: ArgCheckModule (copy), UsePlayerCountTextModule (copy), UseStyleFunction (copy), UseDesignTokensFunction (copy), UseLocalizationFunction (copy), GetUserInputIsSelectionOnlyModule (copy), ReactModule (copy), StyledTextLabel (copy), SponsoredTooltipHover (copy), TooltipOrientation (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), _UDim2 (copy), CoPlayFooter (copy), Colors (copy), CoPlayFooterModule (copy), TextFooter (copy), SocialProofFooter (copy), StatGroup (copy)
 	if p1.automaticSize then
-		argCheckModule.isNotNil(p1.size, "If props.automaticSize is defined, props.size should also be defined.  Otherwise size falls back to a 1, 1 scale for this component.")
+		ArgCheckModule.isNotNil(p1.size, "If props.automaticSize is defined, props.size should also be defined.  Otherwise size falls back to a 1, 1 scale for this component.")
 	end
-	local isShowSponsoredLabel = p1.isSponsored and p1.isShowSponsoredLabel
-	local isStatsOnly = p1.isStatsOnly
-	local isPlayable = p1.isPlayable
-	local requiresPurchase = p1.requiresPurchase
-	local rating = p1.rating or ""
-	local playingCount = p1.playingCount or 0
-	local coPlayFriends = p1.coPlayFriends
-	local showAgeRating = p1.showAgeRating
-	local ageRatingTextLabel = p1.ageRatingTextLabel
-	local useExperienceTileMetadata = p1.useExperienceTileMetadata
-	local onActivateSponsoredTooltip = p1.onActivateSponsoredTooltip
-	local var1 = usePlayerCountTextModule(playingCount)
-	local var2 = useStyle()
-	local font = var2.Font
-	local theme = var2.Theme
-	local global = useDesignTokens().Global
-	local var3 = useLocalization({
+	local IsShowSponsoredLabel = p1.isSponsored and p1.isShowSponsoredLabel
+	local IsStatsOnly = p1.isStatsOnly
+	local IsPlayable = p1.isPlayable
+	local RequiresPurchase = p1.requiresPurchase
+	local Rating = p1.rating or ""
+	local CoPlayFriends = p1.coPlayFriends
+	local ShowAgeRating = p1.showAgeRating
+	local AgeRatingTextLabel = p1.ageRatingTextLabel
+	local UseExperienceTileMetadata = p1.useExperienceTileMetadata
+	local OnActivateSponsoredTooltip = p1.onActivateSponsoredTooltip
+	local UsePlayerCountTextModuleResult = UsePlayerCountTextModule(p1.playingCount or 0)
+	local UseStyleResult = UseStyleFunction()
+	local UseStyleResultFont = UseStyleResult.Font
+	local Theme = UseStyleResult.Theme
+	local Size = UseDesignTokensFunction().Size
+	local UseLocalizationResult = UseLocalizationFunction({
 		sponsoredText = "Feature.GamePage.Label.Sponsored",
 		notPlayableText = "Feature.ExperienceDetails.Label.NotPlayable",
-		ageRatingText = ageRatingTextLabel or nil,
-		friendsText = if useExperienceTileMetadata then "CommonUI.Features.Label.Friends" else nil
+		ageRatingText = AgeRatingTextLabel or nil,
+		friendsText = if UseExperienceTileMetadata then "CommonUI.Features.Label.Friends" else nil
 	})
 	
-	if isStatsOnly then
-		if isShowSponsoredLabel then
-			local var4 = getUserInputIsSelectionOnlyModule()
-			
-			return if useExperienceTileMetadata then reactModule.createElement("Frame", {
+	if not IsStatsOnly then
+		if IsShowSponsoredLabel then
+			local UserInputIsSelectionOnlyModule = GetUserInputIsSelectionOnlyModule()
+			local Frame = ReactModule.createElement("Frame", {
+				BackgroundTransparency = 1,
 				BorderSizePixel = 0,
-				Size = UDim2.fromScale(1, 1),
-				BackgroundColor3 = var2.Tokens.Color.Shift.Shift_200.Color3,
-				BackgroundTransparency = var2.Tokens.Color.Shift.Shift_200.Transparency
+				Size = UDim2.new(1, 0, 1, 0)
 			}, {
-				Layout = reactModule.createElement("UIListLayout", {
+				Layout = ReactModule.createElement("UIListLayout", {
 					SortOrder = Enum.SortOrder.LayoutOrder,
 					FillDirection = Enum.FillDirection.Horizontal,
 					VerticalAlignment = Enum.VerticalAlignment.Center,
 					HorizontalAlignment = Enum.HorizontalAlignment.Center,
 					Padding = UDim.new(0, 4)
 				}),
-				Text = reactModule.createElement("TextLabel", {
+				SponsoredText = ReactModule.createElement(StyledTextLabel, {
+					lineHeight = 1,
+					richText = false,
+					layoutOrder = 1,
+					colorStyle = Theme.TextEmphasis,
+					fontStyle = UseStyleResultFont.CaptionHeader,
+					textXAlignment = Enum.TextXAlignment.Center,
+					textYAlignment = Enum.TextYAlignment.Center,
+					automaticSize = Enum.AutomaticSize.X,
+					size = UDim2.new(0, 0, 1, 0),
+					text = UseLocalizationResult.sponsoredText,
+					textTruncate = Enum.TextTruncate.AtEnd
+				}),
+				SponsoredTooltip = ReactModule.createElement(SponsoredTooltipHover, {
+					layoutOrder = 2,
+					tooltipOrientation = TooltipOrientation.Bottom,
+					onActivateTooltip = OnActivateSponsoredTooltip,
+					size = UDim2.new(0, 16, 0, 16),
+					color = Theme.TextEmphasis.Color,
+					selectable = UserInputIsSelectionOnlyModule
+				})
+			})
+			
+			return if UseExperienceTileMetadata then ReactModule.createElement("Frame", {
+				BorderSizePixel = 0,
+				Size = UDim2.fromScale(1, 1),
+				BackgroundColor3 = UseStyleResult.Tokens.Color.Shift.Shift_200.Color3,
+				BackgroundTransparency = UseStyleResult.Tokens.Color.Shift.Shift_200.Transparency
+			}, {
+				Layout = ReactModule.createElement("UIListLayout", {
+					SortOrder = Enum.SortOrder.LayoutOrder,
+					FillDirection = Enum.FillDirection.Horizontal,
+					VerticalAlignment = Enum.VerticalAlignment.Center,
+					HorizontalAlignment = Enum.HorizontalAlignment.Center,
+					Padding = UDim.new(0, 4)
+				}),
+				Text = ReactModule.createElement("TextLabel", {
 					BackgroundTransparency = 1,
 					BorderSizePixel = 0,
 					LayoutOrder = 1,
 					Size = UDim2.new(0, 0, 1, 0),
 					AutomaticSize = Enum.AutomaticSize.X,
-					Text = var3.sponsoredText,
+					Text = UseLocalizationResult.sponsoredText,
 					TextXAlignment = Enum.TextXAlignment.Center,
 					TextYAlignment = Enum.TextYAlignment.Center,
-					Font = if foundationFontFaceMigration then nil else var2.Font.CaptionHeader.Font,
-					FontFace = if foundationFontFaceMigration then normalizeFontFace(var2.Tokens.Typography.CaptionLarge.Font) else nil,
-					TextSize = var2.Font.BaseSize * var2.Font.CaptionHeader.RelativeSize,
-					TextColor3 = var2.Tokens.Color.Content.Emphasis.Color3,
-					TextTransparency = var2.Tokens.Color.Content.Emphasis.Transparency
+					Font = if FoundationFontFaceMigration then nil else UseStyleResult.Font.CaptionHeader.Font,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.CaptionLarge.Font) else nil,
+					TextSize = UseStyleResult.Font.BaseSize * UseStyleResult.Font.CaptionHeader.RelativeSize,
+					TextColor3 = UseStyleResult.Tokens.Color.Content.Emphasis.Color3,
+					TextTransparency = UseStyleResult.Tokens.Color.Content.Emphasis.Transparency
 				}),
-				SponsoredTooltip = reactModule.createElement(sponsoredTooltipHover, {
+				SponsoredTooltip = ReactModule.createElement(SponsoredTooltipHover, {
 					layoutOrder = 2,
 					supportTenFootUi = true,
-					tooltipOrientation = tooltipOrientation.Bottom,
-					onActivateTooltip = onActivateSponsoredTooltip,
+					tooltipOrientation = TooltipOrientation.Bottom,
+					onActivateTooltip = OnActivateSponsoredTooltip,
 					size = UDim2.new(0, 16, 0, 16),
-					color = var2.Tokens.Color.Content.Emphasis.Color3,
-					selectable = var4
+					color = UseStyleResult.Tokens.Color.Content.Emphasis.Color3,
+					selectable = UserInputIsSelectionOnlyModule
 				})
 			}, {
-				UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, var2.Tokens.Radius.Small) })
-			}) else reactModule.createElement("Frame", {
-				Size = p1.size or uDim2,
+				UICorner = ReactModule.createElement("UICorner", {
+					CornerRadius = UDim.new(0, UseStyleResult.Tokens.Radius.Small)
+				})
+			}) else ReactModule.createElement("Frame", {
+				Size = p1.size or _UDim2,
 				Position = p1.position,
 				AnchorPoint = p1.anchorPoint,
 				LayoutOrder = p1.layoutOrder,
-				BackgroundTransparency = theme.UIDefault.Transparency,
-				BackgroundColor3 = theme.UIDefault.Color,
+				BackgroundTransparency = Theme.UIDefault.Transparency,
+				BackgroundColor3 = Theme.UIDefault.Color,
 				AutomaticSize = p1.automaticSize
 			}, {
-				UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 4) }),
-				SponsoredLabel = reactModule.createElement("Frame", {
-					BackgroundTransparency = 1,
-					BorderSizePixel = 0,
-					Size = UDim2.new(1, 0, 1, 0)
-				}, {
-					Layout = reactModule.createElement("UIListLayout", {
-						SortOrder = Enum.SortOrder.LayoutOrder,
-						FillDirection = Enum.FillDirection.Horizontal,
-						VerticalAlignment = Enum.VerticalAlignment.Center,
-						HorizontalAlignment = Enum.HorizontalAlignment.Center,
-						Padding = UDim.new(0, 4)
-					}),
-					SponsoredText = reactModule.createElement(styledTextLabel, {
-						lineHeight = 1,
-						richText = false,
-						layoutOrder = 1,
-						colorStyle = theme.TextEmphasis,
-						fontStyle = font.CaptionHeader,
-						textXAlignment = Enum.TextXAlignment.Center,
-						textYAlignment = Enum.TextYAlignment.Center,
-						automaticSize = Enum.AutomaticSize.X,
-						size = UDim2.new(0, 0, 1, 0),
-						text = var3.sponsoredText,
-						textTruncate = Enum.TextTruncate.AtEnd
-					}),
-					SponsoredTooltip = reactModule.createElement(sponsoredTooltipHover, {
-						layoutOrder = 2,
-						tooltipOrientation = tooltipOrientation.Bottom,
-						onActivateTooltip = onActivateSponsoredTooltip,
-						size = UDim2.new(0, 16, 0, 16),
-						color = theme.TextEmphasis.Color,
-						selectable = var4
-					})
-				})
+				UICorner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 4) }),
+				SponsoredLabel = Frame
 			})
-		elseif coPlayFriends and next(coPlayFriends) then
-			return if useExperienceTileMetadata then reactModule.createElement(coPlayFooter, {
+		elseif CoPlayFriends and next(CoPlayFriends) then
+			return if UseExperienceTileMetadata then ReactModule.createElement(CoPlayFooter, {
 				showEmphasisBorder = true,
 				faceGroupCount = 2,
-				users = coPlayFriends,
-				labelText = var3.friendsText,
+				users = CoPlayFriends,
+				labelText = UseLocalizationResult.friendsText,
 				styleProps = {
 					badgeBorderWidth = 3,
-					faceWidth = global.Size_250,
-					faceHeight = global.Size_250,
-					faceGroupGap = -global.Space_75,
-					containerGap = global.Space_50,
-					badgeHeight = global.Size_250,
-					fontStyle = var2.Font.CaptionHeader,
-					badgeSpacingLeading = global.Space_50,
-					badgeSpacingTrailing = global.Space_50,
-					badgeBackgroundColor = { Transparency = 0, Color = colors.Smoke },
-					badgeContentColor = { Transparency = 0, Color = colors.White }
+					faceWidth = Size.Size_500,
+					faceHeight = Size.Size_500,
+					faceGroupGap = -Size.Size_150,
+					containerGap = Size.Size_100,
+					badgeHeight = Size.Size_500,
+					fontStyle = UseStyleResult.Font.CaptionHeader,
+					badgeSpacingLeading = Size.Size_100,
+					badgeSpacingTrailing = Size.Size_100,
+					badgeBackgroundColor = { Transparency = 0, Color = Colors.Smoke },
+					badgeContentColor = { Transparency = 0, Color = Colors.White }
 				}
-			}) else reactModule.createElement("Frame", {
+			}) else ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
-				Size = p1.size or uDim2,
+				Size = p1.size or _UDim2,
 				Position = p1.position,
 				AnchorPoint = p1.anchorPoint,
 				LayoutOrder = p1.layoutOrder,
 				AutomaticSize = p1.automaticSize
 			}, {
-				CoPlayFooter = reactModule.createElement(coPlayFooterModule, { friends = coPlayFriends })
+				CoPlayFooter = ReactModule.createElement(CoPlayFooterModule, { friends = CoPlayFriends })
 			})
-		elseif showAgeRating then
-			local var5 = if p1.localizedAgeRatingTextLabel then p1.localizedAgeRatingTextLabel else var3.ageRatingText
+		elseif ShowAgeRating then
+			local LocalizedAgeRatingTextLabel = if p1.localizedAgeRatingTextLabel then p1.localizedAgeRatingTextLabel else UseLocalizationResult.ageRatingText
 			
-			return if useExperienceTileMetadata then reactModule.createElement(textFooter, { text = var5 }) else reactModule.createElement("Frame", {
+			return if UseExperienceTileMetadata then ReactModule.createElement(TextFooter, { text = LocalizedAgeRatingTextLabel }) else ReactModule.createElement("Frame", {
 				BackgroundTransparency = 1,
-				Size = p1.size or uDim2,
+				Size = p1.size or _UDim2,
 				Position = p1.position,
 				AnchorPoint = p1.anchorPoint,
 				LayoutOrder = p1.layoutOrder,
 				AutomaticSize = p1.automaticSize
 			}, {
-				UIPadding = reactModule.createElement("UIPadding", {
+				UIPadding = ReactModule.createElement("UIPadding", {
 					PaddingTop = UDim.new(0, 2),
 					PaddingRight = UDim.new(0, 0),
 					PaddingBottom = UDim.new(0, 2),
 					PaddingLeft = UDim.new(0, 0)
 				}),
-				AgeRatingLabel = reactModule.createElement(styledTextLabel, {
+				AgeRatingLabel = ReactModule.createElement(StyledTextLabel, {
 					lineHeight = 1,
 					richText = false,
-					colorStyle = theme.TextEmphasis,
-					fontStyle = font.CaptionHeader,
+					colorStyle = Theme.TextEmphasis,
+					fontStyle = UseStyleResultFont.CaptionHeader,
 					textXAlignment = Enum.TextXAlignment.Left,
 					textYAlignment = Enum.TextYAlignment.Center,
 					size = UDim2.new(1, 0, 2, 0),
-					text = var5,
+					text = LocalizedAgeRatingTextLabel,
+					textTruncate = Enum.TextTruncate.AtEnd
+				})
+			})
+		elseif p1.showFriendActivity and not UseExperienceTileMetadata then
+			local BodyFont = UseStyleResultFont.Body.Font
+			
+			return ReactModule.createElement("TextLabel", {
+				BackgroundTransparency = 1,
+				Size = p1.size or _UDim2,
+				TextColor3 = Theme.TextMuted.Color,
+				Font = if FoundationFontFaceMigration then nil else BodyFont,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font) else nil,
+				TextXAlignment = Enum.TextXAlignment.Left,
+				TextYAlignment = Enum.TextYAlignment.Center,
+				Text = p1.friendActivityTitle,
+				TextTruncate = Enum.TextTruncate.AtEnd,
+				TextSize = UseStyleResultFont.BaseSize * UseStyleResultFont.Body.RelativeSize,
+				TextTransparency = Theme.TextMuted.Transparency
+			})
+		elseif IsPlayable == false and not RequiresPurchase then
+			return if UseExperienceTileMetadata then ReactModule.createElement(TextFooter, { text = UseLocalizationResult.notPlayableText }) else ReactModule.createElement("Frame", {
+				BackgroundTransparency = 1,
+				Size = p1.size or _UDim2,
+				Position = p1.position,
+				AnchorPoint = p1.anchorPoint,
+				LayoutOrder = p1.layoutOrder,
+				AutomaticSize = p1.automaticSize
+			}, {
+				UICorner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 4) }),
+				PlayabilityLabel = ReactModule.createElement(StyledTextLabel, {
+					lineHeight = 1,
+					richText = false,
+					colorStyle = Theme.TextMuted,
+					fontStyle = UseStyleResultFont.CaptionHeader,
+					textXAlignment = Enum.TextXAlignment.Left,
+					textYAlignment = Enum.TextYAlignment.Center,
+					size = UDim2.new(1, 0, 1, 0),
+					text = UseLocalizationResult.notPlayableText,
 					textTruncate = Enum.TextTruncate.AtEnd
 				})
 			})
 		end
-		return if p1.showFriendActivity and not useExperienceTileMetadata then reactModule.createElement("TextLabel", {
-			BackgroundTransparency = 1,
-			Size = p1.size or uDim2,
-			TextColor3 = theme.TextMuted.Color,
-			Font = if foundationFontFaceMigration then nil else font.Body.Font,
-			FontFace = if foundationFontFaceMigration then normalizeFontFace(var2.Tokens.Typography.BodyLarge.Font) else nil,
-			TextXAlignment = Enum.TextXAlignment.Left,
-			TextYAlignment = Enum.TextYAlignment.Center,
-			Text = p1.friendActivityTitle,
-			TextTruncate = Enum.TextTruncate.AtEnd,
-			TextSize = font.BaseSize * font.Body.RelativeSize,
-			TextTransparency = theme.TextMuted.Transparency
-		}) elseif isPlayable == false and not requiresPurchase then if useExperienceTileMetadata then reactModule.createElement(textFooter, { text = var3.notPlayableText }) else reactModule.createElement("Frame", {
-			BackgroundTransparency = 1,
-			Size = p1.size or uDim2,
-			Position = p1.position,
-			AnchorPoint = p1.anchorPoint,
-			LayoutOrder = p1.layoutOrder,
-			AutomaticSize = p1.automaticSize
-		}, {
-			UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 4) }),
-			PlayabilityLabel = reactModule.createElement(styledTextLabel, {
-				lineHeight = 1,
-				richText = false,
-				colorStyle = theme.TextMuted,
-				fontStyle = font.CaptionHeader,
-				textXAlignment = Enum.TextXAlignment.Left,
-				textYAlignment = Enum.TextYAlignment.Center,
-				size = UDim2.new(1, 0, 1, 0),
-				text = var3.notPlayableText,
-				textTruncate = Enum.TextTruncate.AtEnd
-			})
-		}) elseif useExperienceTileMetadata then reactModule.createElement(socialProofFooter, { ratingText = rating, playingText = var1 }) else reactModule.createElement("Frame", {
-			BackgroundTransparency = 1,
-			Size = p1.size or uDim2,
-			Position = p1.position,
-			AnchorPoint = p1.anchorPoint,
-			LayoutOrder = p1.layoutOrder,
-			AutomaticSize = p1.automaticSize
-		}, {
-			ExperienceStats = reactModule.createElement(statGroup, { ratingText = rating, playingText = var1 })
-		})
 	end
+	return if UseExperienceTileMetadata then ReactModule.createElement(SocialProofFooter, {
+		ratingText = Rating,
+		playingText = UsePlayerCountTextModuleResult
+	}) else ReactModule.createElement("Frame", {
+		BackgroundTransparency = 1,
+		Size = p1.size or _UDim2,
+		Position = p1.position,
+		AnchorPoint = p1.anchorPoint,
+		LayoutOrder = p1.layoutOrder,
+		AutomaticSize = p1.automaticSize
+	}, {
+		ExperienceStats = ReactModule.createElement(StatGroup, {
+			ratingText = Rating,
+			playingText = UsePlayerCountTextModuleResult
+		})
+	})
 end

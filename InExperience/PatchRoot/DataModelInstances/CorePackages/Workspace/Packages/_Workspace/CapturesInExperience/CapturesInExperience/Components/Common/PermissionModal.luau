@@ -1,73 +1,71 @@
-﻿local parent = script.Parent.Parent.Parent
-local parent_1 = parent.Parent
-local localizationModule = require(parent_1.Localization)
-local default = require(parent_1.PermissionsProtocol).PermissionsProtocol.default
-local reactModule = require(parent_1.React)
-local robloxAppHooksModule = require(parent_1.RobloxAppHooks)
-local UIBloxModule = require(parent_1.UIBlox)
-local useCallback = reactModule.useCallback
-local useLocalization = localizationModule.Hooks.useLocalization
-local useScreenSize = robloxAppHooksModule.useScreenSize
-local useStyle = UIBloxModule.Core.Style.useStyle
-local eventNamesModule = require(parent.Analytics.EventNames)
-local useAnalyticsModule = require(parent.Analytics.useAnalytics)
-local buttonType = UIBloxModule.App.Button.Enum.ButtonType
-local interactiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
+﻿local Parent = script.Parent.Parent.Parent
+local Parent1 = Parent.Parent
+local Default = require(Parent1.PermissionsProtocol).PermissionsProtocol.default
+local ReactModule = require(Parent1.React)
+local UIBloxModule = require(Parent1.UIBlox)
+local UseCallbackFunction = ReactModule.useCallback
+local UseLocalizationFunction = require(Parent1.Localization).Hooks.useLocalization
+local UseScreenSizeFunction = require(Parent1.RobloxAppHooks).useScreenSize
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local EventNamesModule = require(Parent.Analytics.EventNames)
+local UseAnalyticsModule = require(Parent.Analytics.useAnalytics)
+local ButtonType = UIBloxModule.App.Button.Enum.ButtonType
+local InteractiveAlert = UIBloxModule.App.Dialog.Alert.InteractiveAlert
 
-return function(p1)
-	-- upvalues: useScreenSize (ref), useStyle (ref), useAnalyticsModule (ref), useLocalization (ref), useCallback (ref), default (ref), eventNamesModule (ref), reactModule (ref), interactiveAlert (ref), buttonType (ref)
-	local var1 = useScreenSize()
-	local var2 = useStyle()
-	local var3 = useAnalyticsModule()
-	local var4 = useLocalization({
+return function(p1) --[[ Line: 27 ]]
+	-- upvalues: UseScreenSizeFunction (copy), UseStyleFunction (copy), UseAnalyticsModule (copy), UseLocalizationFunction (copy), UseCallbackFunction (copy), Default (copy), EventNamesModule (copy), ReactModule (copy), InteractiveAlert (copy), ButtonType (copy)
+	local UseScreenSizeResult = UseScreenSizeFunction()
+	local UseStyleResult = UseStyleFunction()
+	local UseAnalyticsModuleResult = UseAnalyticsModule()
+	local UseLocalizationResult = UseLocalizationFunction({
 		alertBody = "Feature.Captures.Description.AllowPhotoAccessInfo",
 		alertTitle = "Feature.Captures.Title.AllowPhotoAccessInfo",
 		accessDeniedCTA = "Feature.Captures.Action.AllowPhotoAccessDeclined",
 		accessAllowedCTA = "Feature.Captures.Action.AllowPhotoAccessAccepted"
 	})
-	local theme = var2.Theme
+	local Theme = UseStyleResult.Theme
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		Active = true,
-		BackgroundColor3 = theme.Overlay.Color,
-		BackgroundTransparency = theme.Overlay.Transparency,
+		BackgroundColor3 = Theme.Overlay.Color,
+		BackgroundTransparency = Theme.Overlay.Transparency,
 		Size = UDim2.new(1, 0, 1, 0),
 		Visible = p1.visible,
 		ZIndex = p1.zIndex
 	}, {
-		Alert = reactModule.createElement(interactiveAlert, {
+		Alert = ReactModule.createElement(InteractiveAlert, {
 			isMiddleContentFocusable = false,
-			bodyText = var4.alertBody,
+			bodyText = UseLocalizationResult.alertBody,
 			buttonStackInfo = {
 				buttons = {
 					{
-						buttonType = buttonType.Secondary,
+						buttonType = ButtonType.Secondary,
 						props = {
-							onActivated = useCallback(function()
-								-- upvalues: var3 (ref), eventNamesModule (copy), p1 (ref)
-								var3.fireEvent(eventNamesModule.CapturesSavePermissionModalCancelPressed)
+							onActivated = UseCallbackFunction(function() --[[ Line: 48 ]]
+								-- upvalues: UseAnalyticsModuleResult (copy), EventNamesModule (upval), p1 (copy)
+								UseAnalyticsModuleResult.fireEvent(EventNamesModule.CapturesSavePermissionModalCancelPressed)
 								p1.closeModal()
 							end, { p1.closeModal }),
-							text = var4.accessDeniedCTA
+							text = UseLocalizationResult.accessDeniedCTA
 						}
 					},
 					{
-						buttonType = buttonType.PrimarySystem,
+						buttonType = ButtonType.PrimarySystem,
 						props = {
-							onActivated = useCallback(function()
-								-- upvalues: default (copy), var3 (ref), eventNamesModule (copy), p1 (ref)
-								default:requestPermissions({ default.Permissions.WRITE_MEDIA_STORAGE })
-								var3.fireEvent(eventNamesModule.CapturesSavePermissionModalAllowPressed)
+							onActivated = UseCallbackFunction(function() --[[ Line: 42 ]]
+								-- upvalues: Default (upval), UseAnalyticsModuleResult (copy), EventNamesModule (upval), p1 (copy)
+								Default:requestPermissions({ Default.Permissions.WRITE_MEDIA_STORAGE })
+								UseAnalyticsModuleResult.fireEvent(EventNamesModule.CapturesSavePermissionModalAllowPressed)
 								p1.closeModal()
 							end, { p1.closeModal }),
-							text = var4.accessAllowedCTA
+							text = UseLocalizationResult.accessAllowedCTA
 						}
 					}
 				}
 			},
 			position = UDim2.fromScale(0.5, 0.5),
-			screenSize = var1,
-			title = var4.alertTitle
+			screenSize = UseScreenSizeResult,
+			title = UseLocalizationResult.alertTitle
 		})
 	})
 end

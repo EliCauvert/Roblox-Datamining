@@ -1,1 +1,1 @@
-﻿return require(game:GetService("CorePackages").Packages.LuauPolyfill)
+﻿return (require(game:GetService("CorePackages").Packages.LuauPolyfill))

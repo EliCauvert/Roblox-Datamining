@@ -1,46 +1,46 @@
-﻿local sduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
-local parent = sduiCoreSystem.Parent
-local signalsModule = require(parent.Signals)
-local _ = require(parent.Foundation)
-local sduiErrorsModule = require(sduiCoreSystem.SduiErrors)
-local sduiLoggerModule = require(sduiCoreSystem.SduiLogger)
+﻿local SduiCoreSystem = script:FindFirstAncestor("SduiCoreSystem")
+local Parent = SduiCoreSystem.Parent
+local SignalsModule = require(Parent.Signals)
+local _ = require(Parent.Foundation)
+local SduiErrorsModule = require(SduiCoreSystem.SduiErrors)
+local SduiLoggerModule = require(SduiCoreSystem.SduiLogger)
 
-local function _()
-	-- upvalues: signalsModule (ref), sduiLoggerModule (ref), sduiErrorsModule (ref)
-	local var1, var2 = signalsModule.createSignal(nil)
+local function _() --[[ Line: 22 | Named "createSduiTokensStore" ]]
+	-- upvalues: SignalsModule (copy), SduiLoggerModule (copy), SduiErrorsModule (copy)
+	local Signal, Signal2 = SignalsModule.createSignal(nil)
 	
 	return {
-		getTokens = function(p1, p2)
-			-- upvalues: var1 (ref), sduiLoggerModule (copy), sduiErrorsModule (copy)
-			local var3 = var1(p1)
+		getTokens = function(p1, p2) --[[ Line: 25 ]]
+			-- upvalues: Signal (copy), SduiLoggerModule (upval), SduiErrorsModule (upval)
+			local v1 = Signal(p1)
 			
-			if var3 == nil then
-				sduiLoggerModule.reportError(sduiErrorsModule.SduiErrorType.GetNilTokens, { message = "Getting tokens before they were set" }, p2)
+			if v1 == nil then
+				SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.GetNilTokens, { message = "Getting tokens before they were set" }, p2)
 			end
-			return var3
+			return v1
 		end,
-		setTokens = var2
+		setTokens = Signal2
 	}
 end
 
-local var1 = nil
+local Config = nil
 
-return function()
-	-- upvalues: var1 (write), signalsModule (ref), sduiLoggerModule (ref), sduiErrorsModule (ref)
-	if var1 == nil then
-		local var2, var3 = signalsModule.createSignal(nil)
-		var1 = {
-			getTokens = function(p1, p2)
-				-- upvalues: var2 (ref), sduiLoggerModule (copy), sduiErrorsModule (copy)
-				local var4 = var2(p1)
+return function() --[[ Line: 43 | Named "getSduiTokensStore" ]]
+	-- upvalues: Config (ref), SignalsModule (copy), SduiLoggerModule (copy), SduiErrorsModule (copy)
+	if Config == nil then
+		local Signal, Signal2 = SignalsModule.createSignal(nil)
+		Config = {
+			getTokens = function(p1, p2) --[[ Line: 25 ]]
+				-- upvalues: Signal (copy), SduiLoggerModule (upval), SduiErrorsModule (upval)
+				local v1 = Signal(p1)
 				
-				if var4 == nil then
-					sduiLoggerModule.reportError(sduiErrorsModule.SduiErrorType.GetNilTokens, { message = "Getting tokens before they were set" }, p2)
+				if v1 == nil then
+					SduiLoggerModule.reportError(SduiErrorsModule.SduiErrorType.GetNilTokens, { message = "Getting tokens before they were set" }, p2)
 				end
-				return var4
+				return v1
 			end,
-			setTokens = var3
+			setTokens = Signal2
 		}
 	end
-	return var1
+	return Config
 end

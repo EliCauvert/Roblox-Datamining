@@ -1,19 +1,19 @@
-﻿local friendsLanding = script:FindFirstAncestor("FriendsLanding")
-local dependenciesModule = require(friendsLanding.dependencies)
-local roact = dependenciesModule.Roact
-local llama = dependenciesModule.llama
-local profileQRCode = dependenciesModule.ProfileQRCode
-local contexts = dependenciesModule.SocialLuaAnalytics.Analytics.Enums.Contexts
-local friendsLandingContextModule = require(friendsLanding.FriendsLandingContext)
+﻿local FriendsLanding = script:FindFirstAncestor("FriendsLanding")
+local DependenciesModule = require(FriendsLanding.dependencies)
+local Roact = DependenciesModule.Roact
+local Llama = DependenciesModule.llama
+local ProfileQRCode = DependenciesModule.ProfileQRCode
+local Contexts = DependenciesModule.SocialLuaAnalytics.Analytics.Enums.Contexts
+local FriendsLandingContextModule = require(FriendsLanding.FriendsLandingContext)
 
-return function(p1)
-	-- upvalues: friendsLandingContextModule (ref), roact (ref), profileQRCode (ref), llama (ref), contexts (ref)
-	return roact.createElement(profileQRCode.ProfileQRCodeEntryPoint, llama.Dictionary.join(p1, {
-		onClose = function()
-			-- upvalues: p1 (ref)
+return function(p1) --[[ Line: 10 ]]
+	-- upvalues: FriendsLandingContextModule (copy), Roact (copy), ProfileQRCode (copy), Llama (copy), Contexts (copy)
+	return Roact.createElement(ProfileQRCode.ProfileQRCodeEntryPoint, Llama.Dictionary.join(p1, {
+		onClose = function() --[[ Line: 16 ]]
+			-- upvalues: p1 (copy)
 			p1.navigation.goBack()
 		end,
-		source = contexts.AddFriends,
-		robloxEventReceiver = friendsLandingContextModule.useContext().robloxEventReceiver
+		source = Contexts.AddFriends,
+		robloxEventReceiver = FriendsLandingContextModule.useContext().robloxEventReceiver
 	}))
 end

@@ -1,85 +1,90 @@
-﻿local parent = script:FindFirstAncestor("AvatarExperienceCommon").Parent
-local reactModule = require(parent.React)
-local cryoModule = require(parent.Cryo)
-local view = require(parent.Foundation).View
-local roactGamepadModule = require(parent.RoactGamepad)
-local focusable = roactGamepadModule.Focusable
-local _ = require(parent.Dash)
-local checkboxButtonItemModule = require(script.Parent.CheckboxButtonItem)
+﻿local Parent = script:FindFirstAncestor("AvatarExperienceCommon").Parent
+local ReactModule = require(Parent.React)
+local CryoModule = require(Parent.Cryo)
+local View = require(Parent.Foundation).View
+local RoactGamepadModule = require(Parent.RoactGamepad)
+local Focusable = RoactGamepadModule.Focusable
+local _ = require(Parent.Dash)
+local CheckboxButtonItemModule = require(script.Parent.CheckboxButtonItem)
 
-local function CheckboxGroup(p1)
-	-- upvalues: roactGamepadModule (ref), reactModule (ref), focusable (ref), checkboxButtonItemModule (ref), view (ref)
-	local var1 = roactGamepadModule.useRefCache()
-	local var2, var3 = reactModule.useBinding(0)
-	local var4 = roactGamepadModule.useRefCache()
-	local var5 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref), var4 (ref), var3 (ref)
-		local var6 = 0
+local function CheckboxGroup(Gui) --[[ Line: 65 ]]
+	-- upvalues: RoactGamepadModule (copy), ReactModule (copy), Focusable (copy), CheckboxButtonItemModule (copy), View (copy)
+	local UseRefCacheResult = RoactGamepadModule.useRefCache()
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
+	local UseRefCacheResult1 = RoactGamepadModule.useRefCache()
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 71 ]]
+		-- upvalues: Gui (copy), UseRefCacheResult1 (copy), UseBindingResult2 (copy)
+		local Total = 0
 		
-		for i, v in p1.items do
-			var6 += var4[v.id].current or 0
+		for _, item in Gui.items do
+			Total += UseRefCacheResult1[item.id].current or 0
 		end
-		var3(var6)
+		UseBindingResult2(Total)
 		
-		if p1.onHeightChanged then
-			p1.onHeightChanged(var6)
+		if Gui.onHeightChanged then
+			Gui.onHeightChanged(Total)
 		end
-	end, { p1.items, var4, var3, p1.onHeightChanged })
-	local t = {
-		layout = reactModule.createElement("UIListLayout", {
+	end, {
+		Gui.items,
+		UseRefCacheResult1,
+		UseBindingResult2,
+		Gui.onHeightChanged
+	})
+	local config = {
+		layout = ReactModule.createElement("UIListLayout", {
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			Padding = UDim.new(0, 1)
 		})
 	}
 	
-	for i, v in p1.items do
-		local var7 = if p1.selectedValue then table.find(p1.selectedValue, v.id) ~= nil else false
-		local var8 = var1["defaultChild-" .. i]
-		t["checkboxItem" .. v.id] = reactModule.createElement(focusable[checkboxButtonItemModule], {
-			id = v.id,
-			text = v.text,
-			onActivated = p1.onActivated,
-			isSelected = var7,
-			isDisabled = v.isDisabled,
-			layoutOrder = i,
-			itemHeight = p1.itemHeight,
-			customView = v.customView,
-			expandedView = v.expandedView,
-			expandedViewHeight = v.expandedViewHeight,
-			useDefaultControlState = p1.useDefaultControlState,
-			hideDivider = p1.hideDividers or i == #p1.items,
-			ref = var1[i],
-			defaultChildRef = var8,
-			defaultChild = var8,
-			restorePreviousChildFocus = var7,
-			NextSelectionUp = if i > 1 then var1[i - 1] else nil,
-			NextSelectionDown = if i < #p1.items then var1[i + 1] else nil,
-			onHeightChanged = reactModule.useCallback(function(p2)
-				-- upvalues: var4 (ref), v (ref), var5 (ref)
-				var4[v.id].current = p2
-				var5()
-			end, { v.id, var4, var5 })
+	for LayoutOrder, item in Gui.items do
+		local HasFoundIndex: boolean = if Gui.selectedValue then table.find(Gui.selectedValue, item.id) ~= nil else false
+		local UseRefCacheResultEntry = UseRefCacheResult["defaultChild-" .. LayoutOrder]
+		config["checkboxItem" .. item.id] = ReactModule.createElement(Focusable[CheckboxButtonItemModule], {
+			id = item.id,
+			text = item.text,
+			onActivated = Gui.onActivated,
+			isSelected = HasFoundIndex,
+			isDisabled = item.isDisabled,
+			layoutOrder = LayoutOrder,
+			itemHeight = Gui.itemHeight,
+			customView = item.customView,
+			expandedView = item.expandedView,
+			expandedViewHeight = item.expandedViewHeight,
+			useDefaultControlState = Gui.useDefaultControlState,
+			hideDivider = Gui.hideDividers or LayoutOrder == #Gui.items,
+			ref = UseRefCacheResult[LayoutOrder],
+			defaultChildRef = UseRefCacheResultEntry,
+			defaultChild = UseRefCacheResultEntry,
+			restorePreviousChildFocus = HasFoundIndex,
+			NextSelectionUp = if LayoutOrder > 1 then UseRefCacheResult[LayoutOrder - 1] else nil,
+			NextSelectionDown = if LayoutOrder < #Gui.items then UseRefCacheResult[LayoutOrder + 1] else nil,
+			onHeightChanged = ReactModule.useCallback(function(Current) --[[ Line: 116 ]]
+				-- upvalues: UseRefCacheResult1 (copy), item (copy), UseResult (copy)
+				UseRefCacheResult1[item.id].current = Current
+				UseResult()
+			end, { item.id, UseRefCacheResult1, UseResult })
 		})
 	end
-	local var9 = p1.items and #p1.items > 0
+	local v1: boolean = Gui.items and #Gui.items > 0
 	
-	return reactModule.createElement(if var9 then focusable[view] else view, {
+	return ReactModule.createElement(v1 and Focusable[View] or View, {
 		BackgroundTransparency = 1,
-		defaultChild = if var9 then var1[1] else nil,
-		Size = var2:map(function(p2)
-			return UDim2.new(1, 0, 0, p2)
+		defaultChild = v1 and UseRefCacheResult[1] or nil,
+		Size = UseBindingResult:map(function(YOffset): UDim2 --[[ Line: 127 ]]
+			return UDim2.new(1, 0, 0, YOffset)
 		end),
-		LayoutOrder = p1.layoutOrder,
-		NextSelectionLeft = p1.NextSelectionLeft,
-		NextSelectionRight = p1.NextSelectionRight,
-		NextSelectionDown = p1.NextSelectionDown,
-		NextSelectionUp = p1.NextSelectionUp,
-		restorePreviousChildFocus = var9 or nil,
-		ref = p1.frameRef
-	}, t)
+		LayoutOrder = Gui.layoutOrder,
+		NextSelectionLeft = Gui.NextSelectionLeft,
+		NextSelectionRight = Gui.NextSelectionRight,
+		NextSelectionDown = Gui.NextSelectionDown,
+		NextSelectionUp = Gui.NextSelectionUp,
+		restorePreviousChildFocus = v1 or nil,
+		ref = Gui.frameRef
+	}, config)
 end
 
-return reactModule.forwardRef(function(p2, p3)
-	-- upvalues: reactModule (ref), CheckboxGroup (ref), cryoModule (ref)
-	return reactModule.createElement(CheckboxGroup, cryoModule.Dictionary.join(p2, { frameRef = p3 }))
+return ReactModule.forwardRef(function(p1, FrameRef) --[[ Line: 141 ]]
+	-- upvalues: ReactModule (copy), CheckboxGroup (copy), CryoModule (copy)
+	return ReactModule.createElement(CheckboxGroup, CryoModule.Dictionary.join(p1, { frameRef = FrameRef }))
 end)

@@ -1,58 +1,58 @@
-﻿local eventNamesModule = require(script.Parent.Enums.EventNames)
+﻿local EventNamesModule = require(script.Parent.Enums.EventNames)
 
 return {
-	[eventNamesModule.ContactImportModalPageLoad] = {
+	[EventNamesModule.ContactImportModalPageLoad] = {
 		name = game:DefineFastString("ContactImportModalPageLoadCounter", "ContactImportModalPageLoad")
 	},
-	[eventNamesModule.ContactImportModalClose] = {
+	[EventNamesModule.ContactImportModalClose] = {
 		name = game:DefineFastString("ContactImportModalCloseCounter", "ContactImportModalClose")
 	},
-	[eventNamesModule.ContactImportModalContinue] = {
+	[EventNamesModule.ContactImportModalContinue] = {
 		name = game:DefineFastString("ContactImportModalContinueCounter", "ContactImportModalContinue")
 	},
-	[eventNamesModule.ContactImportModalAddFriends] = {
+	[EventNamesModule.ContactImportModalAddFriends] = {
 		name = game:DefineFastString("ContactImportModalAddFriendsCounter", "ContactImportModalAddFriends")
 	},
-	[eventNamesModule.ContactsListLoaded] = {
+	[EventNamesModule.ContactsListLoaded] = {
 		name = game:DefineFastString("ContactsListLoadedCounter", "ContactsListLoaded")
 	},
-	[eventNamesModule.RequestFriendship] = {
+	[EventNamesModule.RequestFriendship] = {
 		name = game:DefineFastString("ContactImporterRequestFriendshipCounter", "ContactImporterFriendshipRequest")
 	},
-	[eventNamesModule.InviteContact] = {
+	[EventNamesModule.InviteContact] = {
 		name = game:DefineFastString("ContactImporterInviteContactCounter", "ContactImporterInviteContact")
 	},
-	[eventNamesModule.ContactImportingTime] = {
+	[EventNamesModule.ContactImportingTime] = {
 		name = game:DefineFastString("ContactImportingTimeStat", "ContactImportingTime")
 	},
-	[eventNamesModule.CloseContactListButton] = {
+	[EventNamesModule.CloseContactListButton] = {
 		name = game:DefineFastString("CloseContactListButtonCounter", "CloseContactListButton")
 	},
-	[eventNamesModule.CloseContactListCross] = {
+	[EventNamesModule.CloseContactListCross] = {
 		name = game:DefineFastString("CloseContactListCrossCounter", "CloseContactListCross")
 	},
-	[eventNamesModule.PhoneVerificationWebview] = {
+	[EventNamesModule.PhoneVerificationWebview] = {
 		name = game:DefineFastString("PhoneVerificationWebviewCounter", "PhoneVerificationWebview")
 	},
-	[eventNamesModule.PhoneVerificationClose] = {
+	[EventNamesModule.PhoneVerificationClose] = {
 		name = game:DefineFastString("PhoneVerificationCloseCounter", "PhoneVerificationCloseWebview")
 	},
-	[eventNamesModule.FailedGetContactsFromDevice] = {
+	[EventNamesModule.FailedGetContactsFromDevice] = {
 		name = game:DefineFastString("FailedGetContactsFromDeviceCounter", "FailedGetContactsFromDevice")
 	},
-	[eventNamesModule.FailedFormatContactsFromDevice] = {
+	[EventNamesModule.FailedFormatContactsFromDevice] = {
 		name = game:DefineFastString("FailedFormatContactsFromDeviceCounter", "FailedFormatContactsFromDevice")
 	},
-	[eventNamesModule.FailedUploadContactsFromDevice] = {
+	[EventNamesModule.FailedUploadContactsFromDevice] = {
 		name = game:DefineFastString("FailedUploadContactsFromDeviceCounter", "FailedUploadContactsFromDevice")
 	},
-	[eventNamesModule.FailedFindContacts] = {
+	[EventNamesModule.FailedFindContacts] = {
 		name = game:DefineFastString("FailedFindContactsCounter", "FailedFindContacts")
 	},
-	[eventNamesModule.FailedGetContactEntities] = {
+	[EventNamesModule.FailedGetContactEntities] = {
 		name = game:DefineFastString("FailedGetContactEntitiesCounter", "FailedGetContactEntities")
 	},
-	[eventNamesModule.FindFriendsButtonClicked] = {
+	[EventNamesModule.FindFriendsButtonClicked] = {
 		name = game:DefineFastString("FindFriendsButtonClickedCounter", "FindFriendsButtonClicked")
 	}
 }

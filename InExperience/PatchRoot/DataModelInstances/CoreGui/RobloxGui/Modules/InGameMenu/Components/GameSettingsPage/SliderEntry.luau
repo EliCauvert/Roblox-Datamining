@@ -1,57 +1,57 @@
-﻿local guiService = game:GetService("GuiService")
-local inGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
-local roact = inGameMenuDependenciesModule.Roact
-local t = inGameMenuDependenciesModule.t
-local inputLabelModule = require(script.Parent.InputLabel)
-local sliderWithInputModule = require(script.Parent.Parent.Parent.Components.SliderWithInput)
-local sliderEntry = roact.PureComponent:extend("SliderEntry")
-sliderEntry.validateProps = t.strictInterface({
-	LayoutOrder = t.integer,
-	labelKey = t.string,
-	min = t.number,
-	max = t.number,
-	stepInterval = t.number,
-	keyboardInputStepInterval = t.optional(t.numberPositive),
-	value = t.number,
-	disabled = t.optional(t.boolean),
-	valueChanged = t.callback,
-	canCaptureFocus = t.optional(t.boolean),
-	isMenuOpen = t.optional(t.boolean),
-	buttonRef = t.optional(t.table)
+﻿local GuiService = game:GetService("GuiService")
+local InGameMenuDependenciesModule = require(game:GetService("CorePackages").Packages.InGameMenuDependencies)
+local Roact = InGameMenuDependenciesModule.Roact
+local T = InGameMenuDependenciesModule.t
+local InputLabelModule = require(script.Parent.InputLabel)
+local SliderWithInputModule = require(script.Parent.Parent.Parent.Components.SliderWithInput)
+local SliderEntry = Roact.PureComponent:extend("SliderEntry")
+SliderEntry.validateProps = T.strictInterface({
+	LayoutOrder = T.integer,
+	labelKey = T.string,
+	min = T.number,
+	max = T.number,
+	stepInterval = T.number,
+	keyboardInputStepInterval = T.optional(T.numberPositive),
+	value = T.number,
+	disabled = T.optional(T.boolean),
+	valueChanged = T.callback,
+	canCaptureFocus = T.optional(T.boolean),
+	isMenuOpen = T.optional(T.boolean),
+	buttonRef = T.optional(T.table)
 })
 
-function sliderEntry.init(p1)
+function SliderEntry.init(p1) --[[ Line: 29 ]]
 	p1.state = { isFrameSelectable = true }
 end
 
-function sliderEntry.render(p1)
-	-- upvalues: roact (ref), guiService (ref), inputLabelModule (ref), sliderWithInputModule (ref)
-	local buttonRef = p1.props.buttonRef or roact.createRef()
+function SliderEntry.render(p1) --[[ Line: 35 ]]
+	-- upvalues: Roact (copy), GuiService (copy), InputLabelModule (copy), SliderWithInputModule (copy)
+	local ButtonRef = p1.props.buttonRef or Roact.createRef()
 	
-	return roact.createElement("Frame", {
+	return Roact.createElement("Frame", {
 		BackgroundTransparency = 1,
 		Size = UDim2.new(1, 0, 0, 92),
 		LayoutOrder = p1.props.LayoutOrder,
 		Selectable = p1.state.isFrameSelectable,
-		[roact.Event.SelectionGained] = function()
-			-- upvalues: guiService (copy), buttonRef (ref), p1 (ref)
-			guiService.SelectedCoreObject = buttonRef:getValue()
+		[Roact.Event.SelectionGained] = function() --[[ Line: 45 ]]
+			-- upvalues: GuiService (upval), ButtonRef (copy), p1 (copy)
+			GuiService.SelectedCoreObject = ButtonRef:getValue()
 			p1:setState({ isFrameSelectable = false })
 		end
 	}, {
-		Padding = roact.createElement("UIPadding", {
+		Padding = Roact.createElement("UIPadding", {
 			PaddingLeft = UDim.new(0, 24),
 			PaddingTop = UDim.new(0, 12),
 			PaddingRight = UDim.new(0, 30),
 			PaddingBottom = UDim.new(0, 24)
 		}),
-		Label = roact.createElement(inputLabelModule, {
+		Label = Roact.createElement(InputLabelModule, {
 			Size = UDim2.new(1, 0, 0, 24),
 			localizationKey = p1.props.labelKey,
 			Position = UDim2.new(0, 0, 0, 0),
 			AnchorPoint = Vector2.new(0, 0)
 		}),
-		Slider = roact.createElement(sliderWithInputModule, {
+		Slider = Roact.createElement(SliderWithInputModule, {
 			min = p1.props.min,
 			max = p1.props.max,
 			stepInterval = p1.props.stepInterval,
@@ -62,17 +62,17 @@ function sliderEntry.render(p1)
 			valueChanged = p1.props.valueChanged,
 			canCaptureFocus = p1.props.canCaptureFocus,
 			isMenuOpen = p1.props.isMenuOpen,
-			sliderDotRef = buttonRef,
-			onSelectionLost = function()
-				-- upvalues: p1 (ref)
+			sliderDotRef = ButtonRef,
+			onSelectionLost = function() --[[ Line: 81 ]]
+				-- upvalues: p1 (copy)
 				p1:setState({ isFrameSelectable = true })
 			end,
-			onSelectionGained = function()
-				-- upvalues: p1 (ref)
+			onSelectionGained = function() --[[ Line: 86 ]]
+				-- upvalues: p1 (copy)
 				p1:setState({ isFrameSelectable = false })
 			end
 		})
 	})
 end
 
-return sliderEntry
+return SliderEntry

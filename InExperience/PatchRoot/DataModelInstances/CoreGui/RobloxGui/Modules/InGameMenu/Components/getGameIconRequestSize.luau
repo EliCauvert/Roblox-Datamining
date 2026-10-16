@@ -1,4 +1,4 @@
-﻿local argCheckModule = require(game:GetService("CorePackages").Workspace.Packages.ArgCheck)
+﻿local ArgCheckModule = require(game:GetService("CorePackages").Workspace.Packages.ArgCheck)
 local list = {
 	50,
 	128,
@@ -7,15 +7,15 @@ local list = {
 	512
 }
 
-return function(p1)
-	-- upvalues: argCheckModule (ref), list (ref)
-	argCheckModule.isNonNegativeNumber(p1, "Game Icon Size")
-	local listCount = #list
+return function(p1) --[[ Line: 15 ]]
+	-- upvalues: ArgCheckModule (copy), list (copy)
+	ArgCheckModule.isNonNegativeNumber(p1, "Game Icon Size")
+	local CountList = #list
 	
-	for i, v in ipairs(list) do
-		if p1 <= v then
-			return v
+	for _, value in ipairs(list) do
+		if p1 <= value then
+			return value
 		end
 	end
-	return list[listCount]
+	return list[CountList]
 end

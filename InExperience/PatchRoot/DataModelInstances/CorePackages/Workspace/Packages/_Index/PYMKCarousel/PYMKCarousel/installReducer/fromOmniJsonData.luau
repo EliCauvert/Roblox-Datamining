@@ -1,6 +1,6 @@
-﻿local result = require(script:FindFirstAncestor("PYMKCarousel").dependencies).Result
+﻿local Result = require(script:FindFirstAncestor("PYMKCarousel").dependencies).Result
 
-return function(p1)
-	-- upvalues: result (ref)
-	return result.success(p1)
+return function(p1) --[[ Line: 6 ]]
+	-- upvalues: Result (copy)
+	return Result.success(p1)
 end

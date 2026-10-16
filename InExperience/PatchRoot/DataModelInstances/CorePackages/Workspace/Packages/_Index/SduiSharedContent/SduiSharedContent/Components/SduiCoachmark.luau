@@ -1,106 +1,115 @@
-﻿local sduiSharedContent = script:FindFirstAncestor("SduiSharedContent")
-local parent = sduiSharedContent.Parent
-local reactModule = require(parent.React)
-local foundationModule = require(parent.Foundation)
-local navigationModule = require(parent.Navigation)
-local drawerModule = require(parent.Drawer)
-local roactUtilsModule = require(parent.RoactUtils)
-local signalsReactModule = require(parent.SignalsReact)
-local streamNotificationsModule = require(parent.StreamNotifications)
-local sendCoachmarkImpressionModule = require(sduiSharedContent.Analytics.sendCoachmarkImpression)
-local luaAppUseNavFocusInSduiCoachmark = game:DefineFastFlag("LuaAppUseNavFocusInSduiCoachmark", false)
-local luaAppCoachmarkImpression = game:DefineFastFlag("LuaAppCoachmarkImpression", false)
-local luaAppHideSduiCoachmarkWhenFlyoutOpen = game:DefineFastFlag("LuaAppHideSduiCoachmarkWhenFlyoutOpen", false)
-local luaAppHideSduiCoachmarkWhenCentralOverlayOpen = game:DefineFastFlag("LuaAppHideSduiCoachmarkWhenCentralOverlayOpen", false)
-local luaAppHideSduiCoachmarkWhenNotificationStreamOpen = game:DefineFastFlag("LuaAppHideSduiCoachmarkWhenNotificationStreamOpen", false)
-local coachmark = foundationModule.Coachmark
-local useNavigationFocus = navigationModule.useNavigationFocus
-local useDrawerVisible = drawerModule.Hooks.useDrawerVisible
-local useSelector = roactUtilsModule.Hooks.RoactRodux.useSelector
-local useSignalState = signalsReactModule.useSignalState
-local streamNotificationStore = streamNotificationsModule.StreamNotificationStore
-local collectionService = game:GetService("CollectionService")
+﻿local SduiSharedContent = script:FindFirstAncestor("SduiSharedContent")
+local Parent = SduiSharedContent.Parent
+local ReactModule = require(Parent.React)
+local SendCoachmarkImpressionModule = require(SduiSharedContent.Analytics.sendCoachmarkImpression)
+local FFlagPromptsCoachmarkImpressionOnShow = require(Parent.SharedFlags).FFlagPromptsCoachmarkImpressionOnShow
+local LuaAppUseNavFocusInSduiCoachmark = game:DefineFastFlag("LuaAppUseNavFocusInSduiCoachmark", false)
+local LuaAppCoachmarkImpression = game:DefineFastFlag("LuaAppCoachmarkImpression", false)
+local LuaAppHideSduiCoachmarkWhenFlyoutOpen = game:DefineFastFlag("LuaAppHideSduiCoachmarkWhenFlyoutOpen", false)
+local LuaAppHideSduiCoachmarkWhenCentralOverlayOpen = game:DefineFastFlag("LuaAppHideSduiCoachmarkWhenCentralOverlayOpen", false)
+local LuaAppHideSduiCoachmarkWhenNotificationStreamOpen = game:DefineFastFlag("LuaAppHideSduiCoachmarkWhenNotificationStreamOpen", false)
+local Coachmark = require(Parent.Foundation).Coachmark
+local UseNavigationFocusFunction = require(Parent.Navigation).useNavigationFocus
+local UseDrawerVisibleFunction = require(Parent.Drawer).Hooks.useDrawerVisible
+local UseSelectorFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useSelector
+local UseSignalStateFunction = require(Parent.SignalsReact).useSignalState
+local StreamNotificationStore = require(Parent.StreamNotifications).StreamNotificationStore
+local CollectionService = game:GetService("CollectionService")
 
-return reactModule.memo(function(p1)
-	-- upvalues: reactModule (ref), luaAppUseNavFocusInSduiCoachmark (ref), useNavigationFocus (ref), luaAppHideSduiCoachmarkWhenFlyoutOpen (ref), useDrawerVisible (ref), luaAppHideSduiCoachmarkWhenCentralOverlayOpen (ref), useSelector (ref), luaAppHideSduiCoachmarkWhenNotificationStreamOpen (ref), useSignalState (ref), streamNotificationStore (ref), collectionService (ref), luaAppCoachmarkImpression (ref), sendCoachmarkImpressionModule (ref), coachmark (ref)
-	local var1 = reactModule.useRef(nil)
-	local var2, var3 = reactModule.useState(false)
-	local var4, var5 = reactModule.useState(false)
-	local var6 = if luaAppUseNavFocusInSduiCoachmark then useNavigationFocus() else nil
-	local var7 = if luaAppHideSduiCoachmarkWhenFlyoutOpen then useDrawerVisible() else false
-	local var8 = if luaAppHideSduiCoachmarkWhenCentralOverlayOpen then useSelector(function(p2)
+return ReactModule.memo(function(p1) --[[ Line: 49 | Named "SduiCoachmark" ]]
+	-- upvalues: ReactModule (copy), LuaAppUseNavFocusInSduiCoachmark (copy), UseNavigationFocusFunction (copy), LuaAppHideSduiCoachmarkWhenFlyoutOpen (copy), UseDrawerVisibleFunction (copy), LuaAppHideSduiCoachmarkWhenCentralOverlayOpen (copy), UseSelectorFunction (copy), LuaAppHideSduiCoachmarkWhenNotificationStreamOpen (copy), UseSignalStateFunction (copy), StreamNotificationStore (copy), CollectionService (copy), LuaAppCoachmarkImpression (copy), FFlagPromptsCoachmarkImpressionOnShow (copy), SendCoachmarkImpressionModule (copy), Coachmark (copy)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(false)
+	local UseNavigationFocusResult = if LuaAppUseNavFocusInSduiCoachmark then UseNavigationFocusFunction() else nil
+	local UseDrawerVisibleResult = if LuaAppHideSduiCoachmarkWhenFlyoutOpen then UseDrawerVisibleFunction() else false
+	local UseSelectorResult = if LuaAppHideSduiCoachmarkWhenCentralOverlayOpen then UseSelectorFunction(function(p2): boolean --[[ Line: 56 ]]
 		return p2.CentralOverlay.OverlayType ~= nil
 	end) else nil
-	local var9 = if luaAppHideSduiCoachmarkWhenNotificationStreamOpen then useSignalState(streamNotificationStore.getStreamPresented) else nil
-	reactModule.useEffect(function()
-		-- upvalues: var1 (ref), var5 (ref), collectionService (copy), p1 (ref)
-		local function onTagAdded(p2)
-			-- upvalues: var1 (copy), var5 (copy)
-			if p2:IsA("GuiObject") then
-				var1.current = p2
-				var5(true)
+	local UseSignalStateResult = if LuaAppHideSduiCoachmarkWhenNotificationStreamOpen then UseSignalStateFunction(StreamNotificationStore.getStreamPresented) else nil
+	ReactModule.useEffect(function() --[[ Line: 64 ]]
+		-- upvalues: UseRefResult (copy), UseStateResult2_1 (copy), CollectionService (upval), p1 (copy)
+		local function onTagAdded(Tagged) --[[ Line: 65 ]]
+			-- upvalues: UseRefResult (upval), UseStateResult2_1 (upval)
+			if Tagged:IsA("GuiObject") then
+				UseRefResult.current = Tagged
+				UseStateResult2_1(true)
 				
 				return
 			end
 		end
 		
-		local function onTagRemoved(_)
-			-- upvalues: var1 (copy), var5 (copy)
-			var1.current = nil
-			var5(false)
+		local function onTagRemoved(_) --[[ Line: 73 ]]
+			-- upvalues: UseRefResult (upval), UseStateResult2_1 (upval)
+			UseRefResult.current = nil
+			UseStateResult2_1(false)
 		end
 		
-		for i, v in collectionService:GetTagged(p1.collectionServiceAnchorTag) do
-			if v:IsA("GuiObject") then
-				if not v:IsA("GuiObject") then break end
-				var1.current = v
-				var5(true)
+		for _, Gui in CollectionService:GetTagged(p1.collectionServiceAnchorTag) do
+			if Gui:IsA("GuiObject") then
+				if not Gui:IsA("GuiObject") then break end
+				UseRefResult.current = Gui
+				UseStateResult2_1(true)
 				break
+			else
+				continue
 			end
 		end
-		local var10 = collectionService:GetInstanceAddedSignal(p1.collectionServiceAnchorTag):Connect(onTagAdded)
-		local var11 = collectionService:GetInstanceRemovedSignal(p1.collectionServiceAnchorTag):Connect(onTagRemoved)
+		local Connection = CollectionService:GetInstanceAddedSignal(p1.collectionServiceAnchorTag):Connect(onTagAdded)
+		local Connection1 = CollectionService:GetInstanceRemovedSignal(p1.collectionServiceAnchorTag):Connect(onTagRemoved)
 		
-		return function()
-			-- upvalues: var10 (ref), var11 (ref)
-			var10:Disconnect()
-			var11:Disconnect()
+		return function() --[[ Line: 90 ]]
+			-- upvalues: Connection (copy), Connection1 (copy)
+			Connection:Disconnect()
+			Connection1:Disconnect()
 		end
 	end, { p1.collectionServiceAnchorTag })
-	local var12 = reactModule.useCallback(function()
-		-- upvalues: var3 (ref), p1 (ref)
-		var3(true)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 96 ]]
+		-- upvalues: UseStateResult2 (copy), p1 (copy)
+		UseStateResult2(true)
 		
 		if p1.onClose then
 			p1.onClose()
 		end
 	end, { p1.onClose })
 	
-	if luaAppCoachmarkImpression then
-		local var13 = reactModule.useRef(false)
-		local var14 = var4 and (not var2 and (not (luaAppUseNavFocusInSduiCoachmark and not var6) and (not (luaAppHideSduiCoachmarkWhenFlyoutOpen and var7) and (not (luaAppHideSduiCoachmarkWhenCentralOverlayOpen and var8) and not (luaAppHideSduiCoachmarkWhenNotificationStreamOpen and var9)))))
-		reactModule.useEffect(function()
-			-- upvalues: var14 (ref), var13 (ref), p1 (ref), sendCoachmarkImpressionModule (copy)
-			if not var14 or var13.current then return end
-			local media = p1.media
-			sendCoachmarkImpressionModule(p1.collectionServiceAnchorTag, if typeof(media) == "table" and next(media) == nil then false else media ~= nil)
-			var13.current = true
-		end, { var14, p1.collectionServiceAnchorTag, p1.media })
+	if LuaAppCoachmarkImpression or FFlagPromptsCoachmarkImpressionOnShow then
+		local UseRefResult1 = ReactModule.useRef(false)
+		local Inverted: boolean = UseStateResult1 and (not UseStateResult and (not (LuaAppUseNavFocusInSduiCoachmark and not UseNavigationFocusResult) and (not (LuaAppHideSduiCoachmarkWhenFlyoutOpen and UseDrawerVisibleResult) and (not (LuaAppHideSduiCoachmarkWhenCentralOverlayOpen and UseSelectorResult) and not (LuaAppHideSduiCoachmarkWhenNotificationStreamOpen and UseSignalStateResult)))))
+		ReactModule.useEffect(function() --[[ Line: 113 ]]
+			-- upvalues: Inverted (copy), UseRefResult1 (copy), FFlagPromptsCoachmarkImpressionOnShow (upval), p1 (copy), LuaAppCoachmarkImpression (upval), SendCoachmarkImpressionModule (upval)
+			if not Inverted or UseRefResult1.current then return end
+			if FFlagPromptsCoachmarkImpressionOnShow and p1.onShown then
+				p1.onShown()
+			end
+			if LuaAppCoachmarkImpression then
+				local Media = p1.media
+				SendCoachmarkImpressionModule(p1.collectionServiceAnchorTag, (typeof(Media) ~= "table" or next(Media) ~= nil) and Media ~= nil)
+			end
+			UseRefResult1.current = true
+		end, {
+			Inverted,
+			p1.collectionServiceAnchorTag,
+			p1.media,
+			if FFlagPromptsCoachmarkImpressionOnShow then p1.onShown else nil
+		})
 		
-		return if var14 then reactModule.createElement(coachmark, {
-			title = p1.title,
-			text = p1.body,
-			isOpen = if luaAppUseNavFocusInSduiCoachmark then true else var4 and not var2,
-			side = p1.side,
-			align = p1.align,
-			anchorRef = var1,
-			onClose = var12,
-			actions = p1.actions,
-			media = p1.media,
-			testId = p1.testId
-		}) else nil
-	elseif var4 and not var2 and (not luaAppUseNavFocusInSduiCoachmark or var6) and ((not luaAppHideSduiCoachmarkWhenFlyoutOpen or not var7) and (not luaAppHideSduiCoachmarkWhenCentralOverlayOpen or not var8)) and (not luaAppHideSduiCoachmarkWhenNotificationStreamOpen or not var9) then
-	else
+		if not Inverted then
+			return nil
+		end
+	elseif not UseStateResult1 or UseStateResult or LuaAppUseNavFocusInSduiCoachmark and not UseNavigationFocusResult or LuaAppHideSduiCoachmarkWhenFlyoutOpen and UseDrawerVisibleResult or LuaAppHideSduiCoachmarkWhenCentralOverlayOpen and UseSelectorResult or LuaAppHideSduiCoachmarkWhenNotificationStreamOpen and UseSignalStateResult then
 		return nil
 	end
+	return ReactModule.createElement(Coachmark, {
+		title = p1.title,
+		text = p1.body,
+		isOpen = if LuaAppUseNavFocusInSduiCoachmark then true else UseStateResult1 and not UseStateResult,
+		side = p1.side,
+		align = p1.align,
+		anchorRef = UseRefResult,
+		onClose = UseResult,
+		actions = p1.actions,
+		media = p1.media,
+		testId = p1.testId
+	})
 end)

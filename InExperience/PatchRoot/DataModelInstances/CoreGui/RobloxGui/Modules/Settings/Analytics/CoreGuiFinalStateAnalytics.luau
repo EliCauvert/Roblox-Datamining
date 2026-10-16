@@ -1,35 +1,35 @@
-﻿local starterGuiService = game:GetService("StarterGui")
-local rbxAnalyticsService = game:GetService("RbxAnalyticsService")
-local eventStream = require(game:GetService("CorePackages").Workspace.Packages.Analytics).AnalyticsReporters.EventStream
-local t = {}
-t.__index = t
+﻿local StarterGui = game:GetService("StarterGui")
+local RbxAnalyticsService = game:GetService("RbxAnalyticsService")
+local EventStream = require(game:GetService("CorePackages").Workspace.Packages.Analytics).AnalyticsReporters.EventStream
+local CoreGuiFinalStateAnalyticsModule = {}
+CoreGuiFinalStateAnalyticsModule.__index = CoreGuiFinalStateAnalyticsModule
 
-function t.new()
-	-- upvalues: eventStream (ref), rbxAnalyticsService (ref), t (ref)
-	local t_1 = { evenStream = eventStream.new(rbxAnalyticsService) }
-	setmetatable(t_1, t)
+function CoreGuiFinalStateAnalyticsModule.new() --[[ Line: 22 ]]
+	-- upvalues: EventStream (copy), RbxAnalyticsService (copy), CoreGuiFinalStateAnalyticsModule (copy)
+	local config = { evenStream = EventStream.new(RbxAnalyticsService) }
+	setmetatable(config, CoreGuiFinalStateAnalyticsModule)
 	
-	return t_1
+	return config
 end
 
-function t:sendCoreGuiFinalAnalytic()
-	-- upvalues: rbxAnalyticsService (ref), starterGuiService (ref)
-	local t = {
+function CoreGuiFinalStateAnalyticsModule:sendCoreGuiFinalAnalytic() --[[ Line: 30 ]]
+	-- upvalues: RbxAnalyticsService (copy), StarterGui (copy)
+	local config = {
 		placeid = tostring(game.PlaceId),
 		universeid = tostring(game.GameId),
-		sessionid = rbxAnalyticsService:GetSessionId()
+		sessionid = RbxAnalyticsService:GetSessionId()
 	}
 	
-	for i, v in Enum.CoreGuiType:GetEnumItems() do
-		t[v.Name] = tostring(starterGuiService:GetCoreGuiEnabled(v))
+	for _, enumItem in Enum.CoreGuiType:GetEnumItems() do
+		config[enumItem.Name] = tostring(StarterGui:GetCoreGuiEnabled(enumItem))
 	end
-	local var1 = ""
-	pcall(function()
-		-- upvalues: var1 (write), starterGuiService (copy)
-		var1 = tostring(starterGuiService:GetCore("ResetButtonCallback"))
+	local Text = ""
+	pcall(function() --[[ Line: 43 ]]
+		-- upvalues: Text (ref), StarterGui (upval)
+		Text = tostring(StarterGui:GetCore("ResetButtonCallback"))
 	end)
-	t.ResetButtonCallback = var1
-	self.evenStream:sendEventDeferred("core_gui_final_state", "core_gui_final_state", t)
+	config.ResetButtonCallback = Text
+	self.evenStream:sendEventDeferred("core_gui_final_state", "core_gui_final_state", config)
 end
 
-return t
+return CoreGuiFinalStateAnalyticsModule

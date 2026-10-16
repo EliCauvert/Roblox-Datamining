@@ -1,14 +1,14 @@
-﻿local foundation = script:FindFirstAncestor("Foundation")
-local inputSizeModule = require(foundation.Enums.InputSize)
-local inputLabelSizeModule = require(foundation.Enums.InputLabelSize)
-local t = {
-	[inputSizeModule.Large] = inputLabelSizeModule.Large,
-	[inputSizeModule.Medium] = inputLabelSizeModule.Medium,
-	[inputSizeModule.Small] = inputLabelSizeModule.Small,
-	[inputSizeModule.XSmall] = inputLabelSizeModule.XSmall
+﻿local Foundation = script:FindFirstAncestor("Foundation")
+local InputSizeModule = require(Foundation.Enums.InputSize)
+local InputLabelSizeModule = require(Foundation.Enums.InputLabelSize)
+local config = {
+	[InputSizeModule.Large] = InputLabelSizeModule.Large,
+	[InputSizeModule.Medium] = InputLabelSizeModule.Medium,
+	[InputSizeModule.Small] = InputLabelSizeModule.Small,
+	[InputSizeModule.XSmall] = InputLabelSizeModule.XSmall
 }
 
-return function(p1)
-	-- upvalues: t (ref)
-	return t[p1]
+return function(p1) --[[ Line: 19 | Named "getInputTextSize" ]]
+	-- upvalues: config (copy)
+	return config[p1]
 end

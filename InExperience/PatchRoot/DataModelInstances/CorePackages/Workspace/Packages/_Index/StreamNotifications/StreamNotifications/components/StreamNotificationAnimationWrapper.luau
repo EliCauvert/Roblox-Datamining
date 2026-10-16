@@ -1,130 +1,129 @@
-﻿local streamNotifications = script:FindFirstAncestor("StreamNotifications")
-local parent = streamNotifications.Parent
-local reactModule = require(parent.React)
-local constantsModule = require(streamNotifications.constants)
-local reactOtterModule = require(parent.ReactOtter)
-local sharedFlagsModule = require(parent.SharedFlags)
-local UIBloxModule = require(parent.UIBlox)
-local useStyle = UIBloxModule.Core.Style.useStyle
-local darkTheme = UIBloxModule.App.Style.Themes.DarkTheme
-local streamNotificationDropdownExperimentationModule = require(streamNotifications.StreamNotificationDropdownExperimentation)
-local notificationsCommonModule = require(parent.NotificationsCommon)
-local notificationCard = notificationsCommonModule.NotificationCard
-local notificationCardProvider = notificationsCommonModule.NotificationCardProvider
-local marshalStreamNotificationData = notificationsCommonModule.NotificationHelper.marshalStreamNotificationData
-local useImpressionsTagger = require(parent.Impressions).useImpressionsTagger
-local fFlagStreamNotificationImpressionLogging = sharedFlagsModule.FFlagStreamNotificationImpressionLogging
-local t = { stiffness = 207, damping = 24, mass = 1 }
+﻿local StreamNotifications = script:FindFirstAncestor("StreamNotifications")
+local Parent = StreamNotifications.Parent
+local ReactModule = require(Parent.React)
+local ConstantsModule = require(StreamNotifications.constants)
+local ReactOtterModule = require(Parent.ReactOtter)
+local UIBloxModule = require(Parent.UIBlox)
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local DarkTheme = UIBloxModule.App.Style.Themes.DarkTheme
+local StreamNotificationDropdownExperimentationModule = require(StreamNotifications.StreamNotificationDropdownExperimentation)
+local NotificationsCommonModule = require(Parent.NotificationsCommon)
+local NotificationCard = NotificationsCommonModule.NotificationCard
+local NotificationCardProvider = NotificationsCommonModule.NotificationCardProvider
+local MarshalStreamNotificationDataFunction = NotificationsCommonModule.NotificationHelper.marshalStreamNotificationData
+local UseImpressionsTaggerFunction = require(Parent.Impressions).useImpressionsTagger
+local FFlagStreamNotificationImpressionLogging = require(Parent.SharedFlags).FFlagStreamNotificationImpressionLogging
+local config = { stiffness = 207, damping = 24, mass = 1 }
 
-return function(p1)
-	-- upvalues: useStyle (ref), streamNotificationDropdownExperimentationModule (ref), marshalStreamNotificationData (ref), reactModule (ref), reactOtterModule (ref), t (ref), constantsModule (ref), fFlagStreamNotificationImpressionLogging (ref), useImpressionsTagger (ref), darkTheme (ref), notificationCardProvider (ref), notificationCard (ref)
-	local var1 = useStyle()
-	local dropdownEnabled = streamNotificationDropdownExperimentationModule.getDropdownEnabled()
-	local var2 = marshalStreamNotificationData(p1.notification)
-	local var3 = reactModule.useRef(nil)
-	local var4, var5 = reactModule.useState(0)
-	local var6, var7 = reactOtterModule.useAnimatedBinding({
+return function(p1) --[[ Line: 51 ]]
+	-- upvalues: UseStyleFunction (copy), StreamNotificationDropdownExperimentationModule (copy), MarshalStreamNotificationDataFunction (copy), ReactModule (copy), ReactOtterModule (copy), config (copy), ConstantsModule (copy), FFlagStreamNotificationImpressionLogging (copy), UseImpressionsTaggerFunction (copy), DarkTheme (copy), NotificationCardProvider (copy), NotificationCard (copy)
+	local UseStyleResult = UseStyleFunction()
+	local DropdownEnabled = StreamNotificationDropdownExperimentationModule.getDropdownEnabled()
+	local MarshalStreamNotificationDataResult = MarshalStreamNotificationDataFunction(p1.notification)
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(0)
+	local UseAnimatedBindingResult, UseAnimatedBindingResult2 = ReactOtterModule.useAnimatedBinding({
 		dismissHeight = 1,
 		transparency = 1,
 		collapsedHeight = if p1.collapsed then 0 else 1,
 		collapsedWidth = if p1.collapsed then 1 else 0
-	}, function()
-		-- upvalues: p1 (ref)
+	}, function() --[[ Line: 63 ]]
+		-- upvalues: p1 (copy)
 		if p1.notification.dismiss then
 			p1.finishDismissNotification(p1.notification.id)
 		end
 	end)
-	reactModule.useEffect(function()
-		-- upvalues: var7 (ref), reactOtterModule (copy), p1 (ref), t (copy)
-		var7({
-			dismissHeight = reactOtterModule.spring(if p1.notification.dismiss then 0 else 1, t),
-			transparency = reactOtterModule.spring(if p1.notification.dismiss then 0 else 1, t),
-			collapsedHeight = reactOtterModule.spring(if p1.collapsed then 0 else 1, t),
-			collapsedWidth = reactOtterModule.spring(if p1.collapsed then 1 else 0, t)
+	ReactModule.useEffect(function() --[[ Line: 70 ]]
+		-- upvalues: UseAnimatedBindingResult2 (copy), ReactOtterModule (upval), p1 (copy), config (upval)
+		UseAnimatedBindingResult2({
+			dismissHeight = ReactOtterModule.spring(if p1.notification.dismiss then 0 else 1, config),
+			transparency = ReactOtterModule.spring(if p1.notification.dismiss then 0 else 1, config),
+			collapsedHeight = ReactOtterModule.spring(if p1.collapsed then 0 else 1, config),
+			collapsedWidth = ReactOtterModule.spring(if p1.collapsed then 1 else 0, config)
 		})
 	end, { p1.notification.dismiss, p1.collapsed })
 	
-	local var8 = function(p2)
-		-- upvalues: p1 (ref)
+	local function v21(Frame) --[[ Line: 79 ]]
+		-- upvalues: p1 (copy)
 		if p1.onHeightChange then
-			p1.onHeightChange(p1.layoutOrder, p2.AbsoluteSize.Y)
+			p1.onHeightChange(p1.layoutOrder, Frame.AbsoluteSize.Y)
 		end
 	end
 	
-	local var9 = function(p2)
-		-- upvalues: p1 (ref), dropdownEnabled (ref), constantsModule (copy), var5 (ref)
+	local function v22(Frame) --[[ Line: 85 ]]
+		-- upvalues: p1 (copy), DropdownEnabled (copy), ConstantsModule (upval), UseStateResult2 (copy)
 		if p1.notification.dismiss ~= true then
-			var5(p2.AbsoluteSize.Y + (if dropdownEnabled then 0 else constantsModule.DefaultPadding))
+			UseStateResult2(Frame.AbsoluteSize.Y + (if DropdownEnabled then 0 else ConstantsModule.DefaultPadding))
 		end
 	end
 	
-	local var10 = 0
-	local var11 = 0
+	local ScaledDefaultPadding = 0
+	local ScaledDefaultPadding1 = 0
 	
-	if not dropdownEnabled then
-		var10 = constantsModule.DefaultPadding * 2
+	if not DropdownEnabled then
+		ScaledDefaultPadding = ConstantsModule.DefaultPadding * 2
 		
 		if p1.layoutOrder == 2 then
-			var11 = constantsModule.DefaultPadding * 2
+			ScaledDefaultPadding1 = ConstantsModule.DefaultPadding * 2
 		elseif p1.layoutOrder == 3 then
-			var11 = constantsModule.DefaultPadding * 4
+			ScaledDefaultPadding1 = ConstantsModule.DefaultPadding * 4
 		elseif p1.layoutOrder >= 4 then
-			var11 = constantsModule.DefaultPadding * 6
+			ScaledDefaultPadding1 = ConstantsModule.DefaultPadding * 6
 		end
 	end
-	if fFlagStreamNotificationImpressionLogging then
-		useImpressionsTagger(var3, p1.impressionsTag, p1.impressionIndex)
+	if FFlagStreamNotificationImpressionLogging then
+		UseImpressionsTaggerFunction(UseRefResult, p1.impressionsTag, p1.impressionIndex)
 	end
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		BackgroundTransparency = 1,
-		ref = var3,
-		Size = var6:map(function(p2)
-			-- upvalues: p1 (ref), var10 (write), var11 (write), var4 (ref), dropdownEnabled (ref), constantsModule (copy)
-			return if p1.layoutOrder == 1 and p1.collapsed then UDim2.new(1, -(var10 + var11 * p2.collapsedWidth), 0, p2.collapsedHeight * p2.dismissHeight * var4 + (if dropdownEnabled then 0 else constantsModule.DefaultPadding)) else UDim2.new(1, -(var10 + var11 * p2.collapsedWidth), 0, p2.collapsedHeight * p2.dismissHeight * var4)
+		ref = UseRefResult,
+		Size = UseAnimatedBindingResult:map(function(p2): UDim2 --[[ Line: 114 ]]
+			-- upvalues: p1 (copy), ScaledDefaultPadding (ref), ScaledDefaultPadding1 (ref), UseStateResult (copy), DropdownEnabled (copy), ConstantsModule (upval)
+			return if p1.layoutOrder == 1 and p1.collapsed then UDim2.new(1, -(ScaledDefaultPadding + ScaledDefaultPadding1 * p2.collapsedWidth), 0, p2.collapsedHeight * p2.dismissHeight * UseStateResult + (if DropdownEnabled then 0 else ConstantsModule.DefaultPadding)) else UDim2.new(1, -(ScaledDefaultPadding + ScaledDefaultPadding1 * p2.collapsedWidth), 0, p2.collapsedHeight * p2.dismissHeight * UseStateResult)
 		end),
-		ClipsDescendants = if p1.layoutOrder == 1 or not p1.collapsed then false else true,
+		ClipsDescendants = p1.layoutOrder ~= 1 and p1.collapsed,
 		LayoutOrder = p1.layoutOrder or 1,
 		ZIndex = if p1.layoutOrder then -p1.layoutOrder else 1
 	}, {
-		DismissFrame = reactModule.createElement("Frame", {
-			Size = var6:map(function(p2)
-				-- upvalues: var4 (ref)
-				return UDim2.new(1, 0, 0, p2.dismissHeight * var4)
+		DismissFrame = ReactModule.createElement("Frame", {
+			Size = UseAnimatedBindingResult:map(function(p2): UDim2 --[[ Line: 138 ]]
+				-- upvalues: UseStateResult (copy)
+				return UDim2.new(1, 0, 0, p2.dismissHeight * UseStateResult)
 			end),
 			BackgroundTransparency = 1,
 			ClipsDescendants = true,
 			LayoutOrder = p1.layoutOrder,
-			[reactModule.Change.AbsoluteSize] = var8
+			[ReactModule.Change.AbsoluteSize] = v21
 		}, {
-			FadeFrame = reactModule.createElement("Frame", {
+			FadeFrame = ReactModule.createElement("Frame", {
 				ZIndex = 2,
 				AutomaticSize = Enum.AutomaticSize.Y,
 				Size = UDim2.new(1, 0, 1, 0),
-				BackgroundColor3 = if var1.theme == darkTheme then var1.Theme.Overlay.Color else var1.Theme.BackgroundMuted.Color,
-				BackgroundTransparency = var6:map(function(p2)
+				BackgroundColor3 = if UseStyleResult.theme == DarkTheme then UseStyleResult.Theme.Overlay.Color else UseStyleResult.Theme.BackgroundMuted.Color,
+				BackgroundTransparency = UseAnimatedBindingResult:map(function(p2) --[[ Line: 152 ]]
 					return p2.transparency
 				end),
 				Position = UDim2.fromScale(0.5, 0),
 				AnchorPoint = Vector2.new(0.5, 0)
 			}, {}),
-			InnerFrame = reactModule.createElement("Frame", {
+			InnerFrame = ReactModule.createElement("Frame", {
 				AutomaticSize = Enum.AutomaticSize.Y,
 				Size = UDim2.new(1, 0, 0, 0),
 				BackgroundTransparency = 1,
 				ZIndex = 1,
 				Position = UDim2.fromScale(0.5, 0),
 				AnchorPoint = Vector2.new(0.5, 0),
-				[reactModule.Change.AbsoluteSize] = var9
+				[ReactModule.Change.AbsoluteSize] = v22
 			}, {
-				reactModule.createElement(notificationCardProvider, {
+				ReactModule.createElement(NotificationCardProvider, {
 					isCompact = false,
 					notificationPayload = p1.notification,
-					state = var2.state,
+					state = MarshalStreamNotificationDataResult.state,
 					readOnly = if p1.collapsed then true else false,
 					handleActions = p1.handleActions,
 					openMetaActions = p1.openMetaActions
 				}, {
-					NotificationCard = reactModule.createElement(notificationCard, { isHover = false, layoutOrder = p1.layoutOrder })
+					NotificationCard = ReactModule.createElement(NotificationCard, { isHover = false, layoutOrder = p1.layoutOrder })
 				})
 			})
 		})

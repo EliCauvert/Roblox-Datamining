@@ -1,5 +1,5 @@
 ﻿game:DefineFastInt("RobloxConnectFtuxShowDelayMs", 3000)
 
-return function()
+return function() --[[ Line: 3 ]]
 	return game:GetFastInt("RobloxConnectFtuxShowDelayMs")
 end

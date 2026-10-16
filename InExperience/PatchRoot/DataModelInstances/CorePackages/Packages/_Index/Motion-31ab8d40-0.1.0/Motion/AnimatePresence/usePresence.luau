@@ -1,23 +1,23 @@
-﻿local reactModule = require(script.Parent.Parent.Parent.React)
-local presenceContextModule = require(script.Parent.PresenceContext)
-local isPresent = require(script.Parent.PresenceUtils).isPresent
+﻿local ReactModule = require(script.Parent.Parent.Parent.React)
+local PresenceContextModule = require(script.Parent.PresenceContext)
+local IsPresentFunction = require(script.Parent.PresenceUtils).isPresent
 
-return function()
-	-- upvalues: reactModule (ref), presenceContextModule (ref), isPresent (ref)
-	local var1 = reactModule.useContext(presenceContextModule)
-	local id = var1.id
-	local _ = var1.isPresent
-	local onExitComplete = var1.onExitComplete
+return function() --[[ Line: 37 | Named "usePresence" ]]
+	-- upvalues: ReactModule (copy), PresenceContextModule (copy), IsPresentFunction (copy)
+	local UseContextResult = ReactModule.useContext(PresenceContextModule)
+	local Id = UseContextResult.id
+	local _ = UseContextResult.isPresent
+	local OnExitCompleteFunction = UseContextResult.onExitComplete
 	
 	return {
-		isPresent = isPresent(var1),
-		id = id,
-		onExitComplete = reactModule.useCallback(function()
-			-- upvalues: onExitComplete (ref), id (ref)
-			if onExitComplete then
-				onExitComplete(id)
+		isPresent = IsPresentFunction(UseContextResult),
+		id = Id,
+		onExitComplete = ReactModule.useCallback(function() --[[ Line: 49 ]]
+			-- upvalues: OnExitCompleteFunction (copy), Id (copy)
+			if OnExitCompleteFunction then
+				OnExitCompleteFunction(Id)
 			end
-		end, { onExitComplete, id }),
-		passThroughData = var1.passThroughData
+		end, { OnExitCompleteFunction, Id }),
+		passThroughData = UseContextResult.passThroughData
 	}
 end

@@ -1,48 +1,42 @@
-﻿local parent = script:FindFirstAncestor("SocialBlockingModal").Parent
-local reactModule = require(parent.React)
-local useDispatch = require(parent.RoactUtils).Hooks.RoactRodux.useDispatch
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local setCurrentToastMessage = require(parent.ToastRodux).Actions.SetCurrentToastMessage
-local _ = {
-	BLOCK_TARGET_ALREADY_BLOCKED_ERROR = 1,
-	USER_BLOCKING_LIMIT_REACHED_API_ERROR = 2,
-	UNBLOCK_TARGET_NOT_BLOCKED_ERROR = 4,
-	PARENT_BLOCKED_TARGET_USER_ERROR = 14
-}
+﻿local Parent = script:FindFirstAncestor("SocialBlockingModal").Parent
+local ReactModule = require(Parent.React)
+local UseDispatchFunction = require(Parent.RoactUtils).Hooks.RoactRodux.useDispatch
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local SetCurrentToastMessageFunction = require(Parent.ToastRodux).Actions.SetCurrentToastMessage
 
-return function()
-	-- upvalues: useDispatch (ref), useLocalization (ref), reactModule (ref), setCurrentToastMessage (ref)
-	local var1 = useDispatch()
-	local var2 = useLocalization({
+return function() --[[ Line: 17 | Named "useShowToastOnError" ]]
+	-- upvalues: UseDispatchFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), SetCurrentToastMessageFunction (copy)
+	local UseDispatchResult = UseDispatchFunction()
+	local UseLocalizationResult = UseLocalizationFunction({
 		somethingIsWrongToast = "Feature.Toast.NetworkingError.SomethingIsWrong",
 		blockLimitReachedToast = "Feature.Profile.Message.BlockError",
 		blocktargetAlreadyBlockedToast = "Feature.Friends.Error.TargetAlreadyBlockedError"
 	})
 	
-	return reactModule.useCallback(function(p1)
-		-- upvalues: var1 (ref), setCurrentToastMessage (copy), var2 (ref)
-		local body
-		if p1 then
-			body = p1.Body and (tonumber(p1.Body) or nil)
-		end
-		if body == 1 then
-			var1(setCurrentToastMessage({
+	return ReactModule.useCallback(function(p1) --[[ Line: 25 ]]
+		-- upvalues: UseDispatchResult (copy), SetCurrentToastMessageFunction (upval), UseLocalizationResult (copy)
+		local Number = p1 and p1.Body and tonumber(p1.Body) or nil
+		
+		if Number == 1 then
+			UseDispatchResult(SetCurrentToastMessageFunction({
 				isLocalized = true,
-				toastMessage = var2.blocktargetAlreadyBlockedToast
-			}))
-			
-			return
-		elseif body == 2 then
-			var1(setCurrentToastMessage({
-				isLocalized = true,
-				toastMessage = var2.blockLimitReachedToast
+				toastMessage = UseLocalizationResult.blocktargetAlreadyBlockedToast
 			}))
 			
 			return
 		end
-		var1(setCurrentToastMessage({
-			isLocalized = true,
-			toastMessage = var2.somethingIsWrongToast
-		}))
-	end, { var1, var2 })
+		if Number == 2 then
+			UseDispatchResult(SetCurrentToastMessageFunction({
+				isLocalized = true,
+				toastMessage = UseLocalizationResult.blockLimitReachedToast
+			}))
+			
+			return
+		else
+			UseDispatchResult(SetCurrentToastMessageFunction({
+				isLocalized = true,
+				toastMessage = UseLocalizationResult.somethingIsWrongToast
+			}))
+		end
+	end, { UseDispatchResult, UseLocalizationResult })
 end

@@ -1,148 +1,163 @@
-﻿local progressLoading = script:FindFirstAncestor("ProgressLoading")
-local parent = progressLoading.Parent
-local coreGuiService = game:GetService("CoreGui")
-local experienceService = game:GetService("ExperienceService")
-local guiService = game:GetService("GuiService")
-local runService = game:GetService("RunService")
-local loadingScreenTelemetryModule = require(progressLoading.LoadingScreenTelemetry)
-local placeLauncherStateModule = require(progressLoading.Enums.PlaceLauncherState)
-local getLoadingScreenStoreModule = require(progressLoading.Stores.getLoadingScreenStore)
-local foundationModule = require(parent.Foundation)
-local useLocalization = require(parent.Localization).Hooks.useLocalization
-local reactModule = require(parent.React)
-local _ = require(parent.Signals)
-local signalsReactModule = require(parent.SignalsReact)
-local queuePositionEnabledEngineFeature = game:GetEngineFeature("QueuePositionEnabled")
-local sharedFlagsModule = require(parent.SharedFlags)
-local fIntAutoJoinNewServerTimeMs = sharedFlagsModule.FIntAutoJoinNewServerTimeMs
-local fFlagEnableLuaAppsFollowUserId = game:GetEngineFeature("ExperienceServiceFollowUserIdEnabled") and sharedFlagsModule.FFlagEnableLuaAppsFollowUserId
-local useTokens = foundationModule.Hooks.useTokens
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
+﻿local ProgressLoading = script:FindFirstAncestor("ProgressLoading")
+local Parent = ProgressLoading.Parent
+local CoreGui = game:GetService("CoreGui")
+local ExperienceService = game:GetService("ExperienceService")
+local GuiService = game:GetService("GuiService")
+local RunService = game:GetService("RunService")
+local LoadingScreenTelemetryModule = require(ProgressLoading.LoadingScreenTelemetry)
+local PlaceLauncherStateModule = require(ProgressLoading.Enums.PlaceLauncherState)
+local GetLoadingScreenStoreModule = require(ProgressLoading.Stores.getLoadingScreenStore)
+local FoundationModule = require(Parent.Foundation)
+local UseLocalizationFunction = require(Parent.Localization).Hooks.useLocalization
+local ReactModule = require(Parent.React)
+local _ = require(Parent.Signals)
+local SignalsReactModule = require(Parent.SignalsReact)
+local QueuePositionEnabledEngineFeature = game:GetEngineFeature("QueuePositionEnabled")
+local SharedFlagsModule = require(Parent.SharedFlags)
+local FIntAutoJoinNewServerTimeMs = SharedFlagsModule.FIntAutoJoinNewServerTimeMs
+local FFlagEnableLuaAppsFollowUserId = SharedFlagsModule.FFlagEnableLuaAppsFollowUserId
+local FFlagEnableLuaAppsFollowUserId1 = game:GetEngineFeature("ExperienceServiceFollowUserIdEnabled") and FFlagEnableLuaAppsFollowUserId
+local UseTokensFunction = FoundationModule.Hooks.useTokens
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
 
-local function getStoreJoinState(p1)
-	-- upvalues: getLoadingScreenStoreModule (ref)
-	local var1 = getLoadingScreenStoreModule(p1)
+local function getStoreJoinState(p1) --[[ Line: 36 ]]
+	-- upvalues: GetLoadingScreenStoreModule (copy)
+	local LoadingScreenStoreModule = GetLoadingScreenStoreModule(p1)
 	
-	return if p1 and var1 and var1.getJoinState then var1.getJoinState(p1) else ""
+	return if p1 and LoadingScreenStoreModule and LoadingScreenStoreModule.getJoinState then LoadingScreenStoreModule.getJoinState(p1) else ""
 end
 
-local function getStoreServerStatusText(p1)
-	-- upvalues: getLoadingScreenStoreModule (ref)
-	local var1 = getLoadingScreenStoreModule(p1)
+local function getStoreServerStatusText(p1) --[[ Line: 44 ]]
+	-- upvalues: GetLoadingScreenStoreModule (copy)
+	local LoadingScreenStoreModule = GetLoadingScreenStoreModule(p1)
 	
-	return if p1 and var1 and var1.getServerStatusText then var1.getServerStatusText(p1) else ""
+	return if p1 and LoadingScreenStoreModule and LoadingScreenStoreModule.getServerStatusText then LoadingScreenStoreModule.getServerStatusText(p1) else ""
 end
 
-return reactModule.memo(function(p1)
-	-- upvalues: useTokens (ref), useLocalization (ref), reactModule (ref), guiService (ref), signalsReactModule (ref), getStoreJoinState (ref), getStoreServerStatusText (ref), fIntAutoJoinNewServerTimeMs (ref), runService (ref), experienceService (ref), placeLauncherStateModule (ref), fFlagEnableLuaAppsFollowUserId (ref), loadingScreenTelemetryModule (ref), queuePositionEnabledEngineFeature (ref), foundationModule (ref), foundationFontFaceMigration (ref), normalizeFontFace (ref), coreGuiService (ref)
-	local var1 = useTokens()
-	local var2 = useLocalization({
+return ReactModule.memo(function(p1) --[[ Line: 61 ]]
+	-- upvalues: UseTokensFunction (copy), UseLocalizationFunction (copy), ReactModule (copy), GuiService (copy), SignalsReactModule (copy), getStoreJoinState (copy), getStoreServerStatusText (copy), FIntAutoJoinNewServerTimeMs (copy), RunService (copy), ExperienceService (copy), PlaceLauncherStateModule (copy), FFlagEnableLuaAppsFollowUserId1 (copy), LoadingScreenTelemetryModule (copy), QueuePositionEnabledEngineFeature (copy), FoundationModule (copy), FoundationFontFaceMigration (copy), NormalizeFontFaceFunction (copy), CoreGui (copy)
+	local UseTokensResult = UseTokensFunction()
+	local UseLocalizationResult = UseLocalizationFunction({
 		friendsServerIsFullJoiningNewServer = "InGame.ConnectionError.Description.FriendsServerIsFullJoiningNewServer",
 		friendsServerIsFullWaitingToJoin = "InGame.ConnectionError.Description.FriendsServerIsFullWaitingToJoin",
 		joinTheLine = "InGame.ConnectionError.Action.JoinTheLine",
 		wantToJoinYourFriend = "InGame.ConnectionError.Description.WantToJoinYourFriend"
 	})
-	local var3 = reactModule.useRef(0)
-	local var4 = reactModule.useRef(1e999)
-	local var5 = reactModule.useCallback(function()
-		-- upvalues: var3 (ref), var4 (ref), guiService (copy)
-		if var3.current == 0 then
-			var3.current = 1
-			var4.current = tick()
+	local UseRefResult = ReactModule.useRef(0)
+	local UseRefResult1 = ReactModule.useRef(1e999)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 72 ]]
+		-- upvalues: UseRefResult (copy), UseRefResult1 (copy), GuiService (upval)
+		if UseRefResult.current == 0 then
+			UseRefResult.current = 1
+			UseRefResult1.current = tick()
 			
 			return
-		elseif tick() - var4.current <= 0.5 then
-			guiService:ShowStatsBasedOnInputString("ConnectionHealth")
 		end
-		var3.current = 0
-		var4.current = 1e999
+		if tick() - UseRefResult1.current <= 0.5 then
+			GuiService:ShowStatsBasedOnInputString("ConnectionHealth")
+		end
+		UseRefResult.current = 0
+		UseRefResult1.current = 1e999
 	end, {})
-	local var6 = reactModule.useCallback(function()
-		-- upvalues: p1 (ref), var5 (ref)
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 87 ]]
+		-- upvalues: p1 (copy), UseResult (copy)
 		if not p1.isSubjectToChinaPolicies then
-			var5()
+			UseResult()
 		end
-	end, { p1.isSubjectToChinaPolicies, var5 })
-	local var7 = signalsReactModule.useSignalState(getStoreJoinState)
-	local var8 = signalsReactModule.useSignalBinding(getStoreServerStatusText)
-	local var9, var10 = reactModule.useBinding(0)
-	local var11 = reactModule.useRef(nil)
-	local var12, var13 = reactModule.useState(false)
-	local var14 = reactModule.useRef(nil)
-	local var15 = reactModule.useCallback(function()
-		-- upvalues: var13 (ref), var14 (ref)
-		var13(false)
+	end, { p1.isSubjectToChinaPolicies, UseResult })
+	local UseSignalStateResult = SignalsReactModule.useSignalState(getStoreJoinState)
+	local UseSignalBindingResult = SignalsReactModule.useSignalBinding(getStoreServerStatusText)
+	local UseBindingResult, UseBindingResult2 = ReactModule.useBinding(0)
+	local UseRefResult2 = ReactModule.useRef(nil)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local UseRefResult3 = ReactModule.useRef(nil)
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 102 ]]
+		-- upvalues: UseStateResult2 (copy), UseRefResult3 (copy)
+		UseStateResult2(false)
 		
-		if var14.current then
-			var14.current:Disconnect()
-			var14.current = nil
+		if UseRefResult3.current then
+			UseRefResult3.current:Disconnect()
+			UseRefResult3.current = nil
 		end
 	end, {})
-	local var16 = reactModule.useCallback(function()
-		-- upvalues: var14 (ref), var13 (ref), fIntAutoJoinNewServerTimeMs (copy), runService (copy), var10 (ref), experienceService (copy), p1 (ref)
-		if var14.current then
+	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 110 ]]
+		-- upvalues: UseRefResult3 (copy), UseStateResult2 (copy), FIntAutoJoinNewServerTimeMs (upval), RunService (upval), UseBindingResult2 (copy), ExperienceService (upval), p1 (copy)
+		if not UseRefResult3.current then
+			UseStateResult2(true)
+			local ClockTime = os.clock()
+			local FIntAutoJoinNewServerTimeMsRatio = FIntAutoJoinNewServerTimeMs / 1000
+			UseRefResult3.current = RunService.Heartbeat:Connect(function() --[[ Line: 120 ]]
+				-- upvalues: ClockTime (copy), FIntAutoJoinNewServerTimeMsRatio (copy), UseBindingResult2 (upval), ExperienceService (upval), p1 (upval), UseRefResult3 (upval)
+				local ClampedValue = math.clamp((os.clock() - ClockTime) / FIntAutoJoinNewServerTimeMsRatio * 100, 0, 100)
+				UseBindingResult2(ClampedValue)
+				
+				if ClampedValue >= 100 then
+					ExperienceService:LaunchExperience({ placeId = p1.placeId })
+					
+					if UseRefResult3.current then
+						UseRefResult3.current:Disconnect()
+						UseRefResult3.current = nil
+					end
+				end
+			end)
+			
 			return
 		end
-		var13(true)
-		local processTime = os.clock()
-		local var17 = fIntAutoJoinNewServerTimeMs / 1000
-		var14.current = runService.Heartbeat:Connect(function()
-			-- upvalues: processTime (ref), var17 (ref), var10 (copy), experienceService (copy), p1 (copy), var14 (copy)
-			local clampedValue = math.clamp((os.clock() - processTime) / var17 * 100, 0, 100)
-			var10(clampedValue)
-			
-			if clampedValue >= 100 then
-				experienceService:LaunchExperience({ placeId = p1.placeId })
-				
-				if var14.current then
-					var14.current:Disconnect()
-					var14.current = nil
-				end
-			end
-		end)
 	end, { p1.placeId })
-	reactModule.useEffect(function()
-		-- upvalues: var7 (ref), placeLauncherStateModule (copy), var11 (ref)
-		if var7 == placeLauncherStateModule.Queued then
-			var11.current = os.clock()
+	ReactModule.useEffect(function() --[[ Line: 134 ]]
+		-- upvalues: UseSignalStateResult (copy), PlaceLauncherStateModule (upval), UseRefResult2 (copy)
+		if UseSignalStateResult == PlaceLauncherStateModule.Queued then
+			UseRefResult2.current = os.clock()
 		end
-	end, { var7 })
-	reactModule.useEffect(function()
-		-- upvalues: var7 (ref), placeLauncherStateModule (copy), fFlagEnableLuaAppsFollowUserId (copy), experienceService (copy), var16 (ref), var15 (ref)
-		if var7 == placeLauncherStateModule.Queued and fFlagEnableLuaAppsFollowUserId and experienceService:GetFollowUserId() > 0 then
-			var16()
+	end, { UseSignalStateResult })
+	ReactModule.useEffect(function() --[[ Line: 140 ]]
+		-- upvalues: UseSignalStateResult (copy), PlaceLauncherStateModule (upval), FFlagEnableLuaAppsFollowUserId1 (upval), ExperienceService (upval), UseResult3 (copy), UseResult2 (copy)
+		if UseSignalStateResult == PlaceLauncherStateModule.Queued and FFlagEnableLuaAppsFollowUserId1 and ExperienceService:GetFollowUserId() > 0 then
+			UseResult3()
 		else
-			var15()
+			UseResult2()
 		end
-		return function()
-			-- upvalues: var15 (copy)
-			var15()
+		return function() --[[ Line: 151 ]]
+			-- upvalues: UseResult2 (upval)
+			UseResult2()
 		end
-	end, { var7, var16, var15 })
+	end, { UseSignalStateResult, UseResult3, UseResult2 })
+	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 156 ]]
+		-- upvalues: UseResult2 (copy), UseRefResult2 (copy), LoadingScreenTelemetryModule (upval), FFlagEnableLuaAppsFollowUserId1 (upval), ExperienceService (upval), p1 (copy), QueuePositionEnabledEngineFeature (upval)
+		UseResult2()
+		LoadingScreenTelemetryModule.logQueuedStateButtonClick({
+			buttonName = "JoinTheLine",
+			joinTargetUserId = if FFlagEnableLuaAppsFollowUserId1 then ExperienceService:GetFollowUserId() else nil,
+			placeId = p1.placeId,
+			positionInQueue = if QueuePositionEnabledEngineFeature then ExperienceService:GetQueuePosition() else nil,
+			timeElapsedMs = if UseRefResult2.current then math.floor((os.clock() - UseRefResult2.current) * 1000) else nil,
+			universeId = p1.universeId
+		})
+	end, { p1.placeId, p1.universeId, UseResult2 })
 	
-	return reactModule.createElement(foundationModule.View, {
+	return ReactModule.createElement(FoundationModule.View, {
 		AutoLocalize = true,
 		tag = "col align-x-center align-y-bottom gap-xxlarge",
 		AnchorPoint = p1.anchorPoint,
 		Position = p1.position,
 		Size = p1.size
 	}, {
-		ServerStatusContainer = reactModule.createElement(foundationModule.View, {
+		ServerStatusContainer = ReactModule.createElement(FoundationModule.View, {
 			AutoLocalize = true,
 			LayoutOrder = 1,
 			tag = "col align-x-center align-y-bottom gap-xsmall auto-xy",
-			onActivated = var6,
+			onActivated = UseResult1,
 			stateLayer = {
-				affordance = foundationModule.Enums.StateLayerAffordance.None
+				affordance = FoundationModule.Enums.StateLayerAffordance.None
 			}
 		}, {
-			QueuedDescriptionText = if var7 == placeLauncherStateModule.Queued and fFlagEnableLuaAppsFollowUserId and experienceService:GetFollowUserId() > 0 then reactModule.createElement(foundationModule.Text, {
+			QueuedDescriptionText = if UseSignalStateResult == PlaceLauncherStateModule.Queued and FFlagEnableLuaAppsFollowUserId1 and ExperienceService:GetFollowUserId() > 0 then ReactModule.createElement(FoundationModule.Text, {
 				LayoutOrder = 1,
 				tag = "auto-xy text-title-medium content-system-contrast",
-				Text = if var12 then var2.friendsServerIsFullJoiningNewServer else var2.friendsServerIsFullWaitingToJoin
+				Text = if UseStateResult then UseLocalizationResult.friendsServerIsFullJoiningNewServer else UseLocalizationResult.friendsServerIsFullWaitingToJoin
 			}) else nil,
-			ServerStatusText = reactModule.createElement("TextLabel", {
+			ServerStatusText = ReactModule.createElement("TextLabel", {
 				AutoLocalize = true,
 				BackgroundTransparency = 1,
 				LayoutOrder = 2,
@@ -152,50 +167,39 @@ return reactModule.memo(function(p1)
 				ZIndex = 2,
 				AutomaticSize = Enum.AutomaticSize.Y,
 				Size = UDim2.new(1, 0, 0, 0),
-				Font = if foundationFontFaceMigration then nil else var1.Typography.TitleMedium.Font,
-				FontFace = if foundationFontFaceMigration then normalizeFontFace(var1.Typography.TitleMedium.Font) else nil,
-				TextSize = var1.Typography.TitleMedium.FontSize,
-				TextColor3 = var1.Color.System.Contrast.Color3,
-				Text = var8,
+				Font = if FoundationFontFaceMigration then nil else UseTokensResult.Typography.TitleMedium.Font,
+				FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseTokensResult.Typography.TitleMedium.Font) else nil,
+				TextSize = UseTokensResult.Typography.TitleMedium.FontSize,
+				TextColor3 = UseTokensResult.Color.System.Contrast.Color3,
+				Text = UseSignalBindingResult,
 				TextXAlignment = Enum.TextXAlignment.Center,
 				TextYAlignment = Enum.TextYAlignment.Center,
-				RootLocalizationTable = coreGuiService:FindFirstChild("CoreScriptLocalization")
+				RootLocalizationTable = CoreGui:FindFirstChild("CoreScriptLocalization")
 			})
 		}),
-		ProgressBarContainer = if var12 then reactModule.createElement(foundationModule.View, {
+		ProgressBarContainer = if UseStateResult then ReactModule.createElement(FoundationModule.View, {
 			LayoutOrder = 2,
 			tag = "col align-x-center align-y-bottom gap-xsmall size-full-0 auto-y",
 			sizeConstraint = { MaxSize = Vector2.new(277, 1e999) }
 		}, {
-			ProgressBar = reactModule.createElement(foundationModule.Progress, {
-				shape = foundationModule.Enums.ProgressShape.Bar,
-				value = var9
+			ProgressBar = ReactModule.createElement(FoundationModule.Progress, {
+				shape = FoundationModule.Enums.ProgressShape.Bar,
+				value = UseBindingResult
 			})
 		}) else nil,
-		ActionContainer = if var7 == placeLauncherStateModule.Queued and var12 and (fFlagEnableLuaAppsFollowUserId and experienceService:GetFollowUserId() > 0) then reactModule.createElement(foundationModule.View, {
+		ActionContainer = if UseSignalStateResult == PlaceLauncherStateModule.Queued and UseStateResult and FFlagEnableLuaAppsFollowUserId1 and ExperienceService:GetFollowUserId() > 0 then ReactModule.createElement(FoundationModule.View, {
 			LayoutOrder = 3,
 			tag = "col align-x-center align-y-bottom gap-xsmall auto-xy"
 		}, {
-			ActionButtonDescriptionText = reactModule.createElement(foundationModule.Text, {
+			ActionButtonDescriptionText = ReactModule.createElement(FoundationModule.Text, {
 				LayoutOrder = 1,
 				tag = "auto-xy text-body-medium content-system-contrast",
-				Text = var2.wantToJoinYourFriend
+				Text = UseLocalizationResult.wantToJoinYourFriend
 			}),
-			ActionButton = reactModule.createElement(foundationModule.Button, {
+			ActionButton = ReactModule.createElement(FoundationModule.Button, {
 				LayoutOrder = 2,
-				onActivated = reactModule.useCallback(function()
-					-- upvalues: var15 (ref), var11 (ref), loadingScreenTelemetryModule (copy), fFlagEnableLuaAppsFollowUserId (copy), experienceService (copy), p1 (ref), queuePositionEnabledEngineFeature (copy)
-					var15()
-					loadingScreenTelemetryModule.logQueuedStateButtonClick({
-						buttonName = "JoinTheLine",
-						joinTargetUserId = if fFlagEnableLuaAppsFollowUserId then experienceService:GetFollowUserId() else nil,
-						placeId = p1.placeId,
-						positionInQueue = if queuePositionEnabledEngineFeature then experienceService:GetQueuePosition() else nil,
-						timeElapsedMs = if var11.current then math.floor((os.clock() - var11.current) * 1000) else nil,
-						universeId = p1.universeId
-					})
-				end, { p1.placeId, p1.universeId, var15 }),
-				text = var2.joinTheLine
+				onActivated = UseResult4,
+				text = UseLocalizationResult.joinTheLine
 			})
 		}) else nil
 	})

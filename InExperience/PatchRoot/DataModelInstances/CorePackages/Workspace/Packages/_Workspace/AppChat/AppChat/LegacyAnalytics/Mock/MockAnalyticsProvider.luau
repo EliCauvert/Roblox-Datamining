@@ -1,12 +1,12 @@
-﻿local parent = script:FindFirstAncestor("AppChat").Parent
-local roactModule = require(parent.Roact)
-local analytics = require(parent.Analytics).Analytics
-local roactChatAnalyticsModule = require(script.Parent.Parent.RoactChatAnalytics)
-local analyticsContextModule = require(script.Parent.Parent.AnalyticsContext)
+﻿local Parent = script:FindFirstAncestor("AppChat").Parent
+local RoactModule = require(Parent.Roact)
+local Analytics = require(Parent.Analytics).Analytics
+local RoactChatAnalyticsModule = require(script.Parent.Parent.RoactChatAnalytics)
+local AnalyticsContextModule = require(script.Parent.Parent.AnalyticsContext)
 
-return function(p1)
-	-- upvalues: analytics (ref), roactModule (ref), analyticsContextModule (ref), roactChatAnalyticsModule (ref)
-	return roactModule.createElement(analyticsContextModule.Provider, {
-		value = roactChatAnalyticsModule.new(analytics.mock(), tostring(math.random(999999999)))
-	}, roactModule.oneChild(p1[roactModule.Children]))
+return function(p1) --[[ Line: 9 ]]
+	-- upvalues: Analytics (copy), RoactModule (copy), AnalyticsContextModule (copy), RoactChatAnalyticsModule (copy)
+	return RoactModule.createElement(AnalyticsContextModule.Provider, {
+		value = RoactChatAnalyticsModule.new(Analytics.mock(), (tostring(math.random(999999999))))
+	}, RoactModule.oneChild(p1[RoactModule.Children]))
 end

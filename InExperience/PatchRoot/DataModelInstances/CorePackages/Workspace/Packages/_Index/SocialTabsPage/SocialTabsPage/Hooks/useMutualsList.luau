@@ -1,39 +1,39 @@
-﻿local socialTabsPage = script:FindFirstAncestor("SocialTabsPage")
-local parent = socialTabsPage.Parent
-local reactModule = require(parent.React)
-local useSignalProfileInsightsByUserId = require(parent.ProfileInsights).useSignalProfileInsightsByUserId
-local usePageSizeModule = require(socialTabsPage.Hooks.usePageSize)
+﻿local SocialTabsPage = script:FindFirstAncestor("SocialTabsPage")
+local Parent = SocialTabsPage.Parent
+local ReactModule = require(Parent.React)
+local UseSignalProfileInsightsByUserIdFunction = require(Parent.ProfileInsights).useSignalProfileInsightsByUserId
+local UsePageSizeModule = require(SocialTabsPage.Hooks.usePageSize)
 
-return function(p1)
-	-- upvalues: usePageSizeModule (ref), useSignalProfileInsightsByUserId (ref), reactModule (ref)
-	local var1 = usePageSizeModule()
-	local var2, var3 = useSignalProfileInsightsByUserId({ rankingStrategy = "tc_info_boost", userId = p1 })
-	local var4 = if var2 and var2.mutualFriends then var2.mutualFriends else {}
-	local var5, var6 = reactModule.useState(var1)
-	reactModule.useEffect(function()
-		-- upvalues: var6 (ref), var1 (ref)
-		var6(var1)
-	end, { p1, var1 })
+return function(UserId) --[[ Line: 24 | Named "useMutualsList" ]]
+	-- upvalues: UsePageSizeModule (copy), UseSignalProfileInsightsByUserIdFunction (copy), ReactModule (copy)
+	local UsePageSizeModuleResult = UsePageSizeModule()
+	local UseSignalProfileInsightsByUserIdResult, UseSignalProfileInsightsByUserIdResult2 = UseSignalProfileInsightsByUserIdFunction({ rankingStrategy = "tc_info_boost", userId = UserId })
+	local MutualFriends = if UseSignalProfileInsightsByUserIdResult and UseSignalProfileInsightsByUserIdResult.mutualFriends then UseSignalProfileInsightsByUserIdResult.mutualFriends else {}
+	local UseStateResult, UseStateResult2 = ReactModule.useState(UsePageSizeModuleResult)
+	ReactModule.useEffect(function() --[[ Line: 38 ]]
+		-- upvalues: UseStateResult2 (copy), UsePageSizeModuleResult (copy)
+		UseStateResult2(UsePageSizeModuleResult)
+	end, { UserId, UsePageSizeModuleResult })
 	
 	return {
-		mutualFriends = reactModule.useMemo(function()
-			-- upvalues: var5 (ref), var4 (ref)
-			local t = {}
+		mutualFriends = ReactModule.useMemo(function() --[[ Line: 42 ]]
+			-- upvalues: UseStateResult (copy), MutualFriends (copy)
+			local List = {}
 			
-			for i = 1, math.min(var5, #var4) do
-				table.insert(t, var4[i])
+			for i = 1, math.min(UseStateResult, #MutualFriends) do
+				table.insert(List, MutualFriends[i])
 			end
-			return t
-		end, { var4, var5 }),
-		isLoading = var3,
-		hasMore = var5 < #var4,
-		loadMore = reactModule.useCallback(function()
-			-- upvalues: var6 (ref), var1 (ref), var4 (ref)
-			var6(function(p2)
-				-- upvalues: var1 (copy), var4 (copy)
-				return math.min(p2 + var1, #var4)
+			return List
+		end, { MutualFriends, UseStateResult }),
+		isLoading = UseSignalProfileInsightsByUserIdResult2,
+		hasMore = UseStateResult < #MutualFriends,
+		loadMore = ReactModule.useCallback(function() --[[ Line: 52 ]]
+			-- upvalues: UseStateResult2 (copy), UsePageSizeModuleResult (copy), MutualFriends (copy)
+			UseStateResult2(function(p1): number --[[ Line: 53 ]]
+				-- upvalues: UsePageSizeModuleResult (upval), MutualFriends (upval)
+				return (math.min(p1 + UsePageSizeModuleResult, #MutualFriends))
 			end)
-		end, { var4, var1 }),
-		totalCount = #var4
+		end, { MutualFriends, UsePageSizeModuleResult }),
+		totalCount = #MutualFriends
 	}
 end

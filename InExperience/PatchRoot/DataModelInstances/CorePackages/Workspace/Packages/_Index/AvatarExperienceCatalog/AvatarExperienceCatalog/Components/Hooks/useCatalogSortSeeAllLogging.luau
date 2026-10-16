@@ -1,25 +1,26 @@
-﻿local avatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
-local parent = avatarExperienceCatalog.Parent
-local reactModule = require(parent.React)
-local _ = require(parent.AvatarExperienceCommon)
-local impressionEnums = require(parent.AvatarExperienceAnalytics).Enums.ImpressionEnums
-local useCatalogPageMonolithDependenciesModule = require(avatarExperienceCatalog.Providers.useCatalogPageMonolithDependencies)
+﻿local AvatarExperienceCatalog = script:FindFirstAncestor("AvatarExperienceCatalog")
+local Parent = AvatarExperienceCatalog.Parent
+local ReactModule = require(Parent.React)
+local _ = require(Parent.AvatarExperienceCommon)
+local ImpressionEnums = require(Parent.AvatarExperienceAnalytics).Enums.ImpressionEnums
+local UseCatalogPageMonolithDependenciesModule = require(AvatarExperienceCatalog.Providers.useCatalogPageMonolithDependencies)
 
-return function(p1, p2)
-	-- upvalues: useCatalogPageMonolithDependenciesModule (ref), reactModule (ref), impressionEnums (ref)
-	local catalogAnalytics = useCatalogPageMonolithDependenciesModule().catalogAnalytics
-	local var1 = reactModule.useRef(nil)
-	local var2 = reactModule.useCallback(function()
-		-- upvalues: catalogAnalytics (ref), p2 (ref), impressionEnums (copy), p1 (ref)
-		catalogAnalytics.widgetInteractionV2(p2, impressionEnums.ActionType.SEE_ALL)
+return function(Callback, p1) --[[ Line: 26 | Named "useCatalogSortSeeAllLogging" ]]
+	-- upvalues: UseCatalogPageMonolithDependenciesModule (copy), ReactModule (copy), ImpressionEnums (copy)
+	local CatalogAnalytics = UseCatalogPageMonolithDependenciesModule().catalogAnalytics
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 35 ]]
+		-- upvalues: CatalogAnalytics (copy), p1 (copy), ImpressionEnums (upval), Callback (copy)
+		CatalogAnalytics.widgetInteractionV2(p1, ImpressionEnums.ActionType.SEE_ALL)
 		
-		if p1 then
-			p1()
+		if Callback then
+			Callback()
 		end
-	end, { p1, catalogAnalytics, p2 })
+	end, { Callback, CatalogAnalytics, p1 })
+	local UseRefResult = ReactModule.useRef(nil)
 	
-	if p1 then
-		return var1, var2
+	if Callback then
+		return UseRefResult, UseResult
+	else
+		return UseRefResult, nil
 	end
-	return var1, nil
 end

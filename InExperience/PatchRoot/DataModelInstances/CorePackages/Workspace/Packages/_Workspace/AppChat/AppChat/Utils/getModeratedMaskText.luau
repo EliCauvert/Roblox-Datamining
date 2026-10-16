@@ -1,8 +1,8 @@
-﻿local sharedFlagsModule = require(script:FindFirstAncestor("AppChat").Parent.SharedFlags)
-local fIntFriendsChatModeratedMaskMinLength = sharedFlagsModule.FIntFriendsChatModeratedMaskMinLength
-local fIntFriendsChatModeratedMaskMaxLength = sharedFlagsModule.FIntFriendsChatModeratedMaskMaxLength
+﻿local SharedFlagsModule = require(script:FindFirstAncestor("AppChat").Parent.SharedFlags)
+local FIntFriendsChatModeratedMaskMinLength = SharedFlagsModule.FIntFriendsChatModeratedMaskMinLength
+local FIntFriendsChatModeratedMaskMaxLength = SharedFlagsModule.FIntFriendsChatModeratedMaskMaxLength
 
-return function(p1)
-	-- upvalues: fIntFriendsChatModeratedMaskMaxLength (ref), fIntFriendsChatModeratedMaskMinLength (ref)
-	return string.rep("#", fIntFriendsChatModeratedMaskMinLength + string.byte(p1, #p1) % (fIntFriendsChatModeratedMaskMaxLength - fIntFriendsChatModeratedMaskMinLength + 1))
+return function(Text: string): string --[[ Line: 17 | Named "getModeratedMaskText" ]]
+	-- upvalues: FIntFriendsChatModeratedMaskMaxLength (copy), FIntFriendsChatModeratedMaskMinLength (copy)
+	return string.rep("#", FIntFriendsChatModeratedMaskMinLength + string.byte(Text, #Text) % (FIntFriendsChatModeratedMaskMaxLength - FIntFriendsChatModeratedMaskMinLength + 1))
 end

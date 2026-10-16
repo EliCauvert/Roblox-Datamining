@@ -1,9 +1,9 @@
 ﻿local IXPService = game:GetService("IXPService")
-local parent = script:FindFirstAncestor("AppChat").Parent
-local reactModule = require(parent.React)
-local roactNavigationModule = require(parent.RoactNavigation)
-local useNavigation = require(parent.Navigation).useNavigation
-local t = {
+local Parent = script:FindFirstAncestor("AppChat").Parent
+local ReactModule = require(Parent.React)
+local RoactNavigationModule = require(Parent.RoactNavigation)
+local UseNavigationFunction = require(Parent.Navigation).useNavigation
+local IXPNavigationUtils = {
 	ExposureKind = {
 		FlagLinked = "FlagLinked",
 		BrowserTracker = "BrowserTracker",
@@ -11,147 +11,149 @@ local t = {
 		Creator = "Creator"
 	}
 }
-local t_1 = { remove = function() end }
-local t_2 = {
-	[t.ExposureKind.FlagLinked] = "LogFlagLinkedUserLayerExposure",
-	[t.ExposureKind.BrowserTracker] = "LogBrowserTrackerLayerExposure",
-	[t.ExposureKind.UserLayer] = "LogUserLayerExposure",
-	[t.ExposureKind.Creator] = "LogCreatorLayerExposure"
+local config = { remove = function() --[[ Line: 102 ]] end }
+local config1 = {
+	[IXPNavigationUtils.ExposureKind.FlagLinked] = "LogFlagLinkedUserLayerExposure",
+	[IXPNavigationUtils.ExposureKind.BrowserTracker] = "LogBrowserTrackerLayerExposure",
+	[IXPNavigationUtils.ExposureKind.UserLayer] = "LogUserLayerExposure",
+	[IXPNavigationUtils.ExposureKind.Creator] = "LogCreatorLayerExposure"
 }
-local var1 = IXPService
+local IXPService1 = IXPService
 
-local function _(p1)
+local function _(p1) --[[ Line: 119 | Named "normalizeLayers" ]]
 	return if type(p1) == "string" then { p1 } else p1
 end
 
-local _ = function(p1)
-	if p1 == nil then
+local _ = function(List) --[[ Line: 128 | Named "isAnyFlagEnabled" ]]
+	if List == nil then
 		return true
-	elseif type(p1) == "boolean" then
-		return p1
 	end
-	for i, v in p1 do
-		if v then
+	if type(List) == "boolean" then
+		return List
+	end
+	for _, value in List do
+		if value then
 			return true
 		end
 	end
 	return false
 end
 
-local function logExposure(p2, p3)
-	-- upvalues: t (ref), t_2 (ref), var1 (write)
-	p3 = p3 or t.ExposureKind.FlagLinked
-	
-	for i, v in p2 do
-		local var2 = t_2[p3]
-		local var3 = if var2 then var1[var2] else nil
+local function logExposure(List, Kind) --[[ Line: 146 ]]
+	-- upvalues: IXPNavigationUtils (copy), config1 (copy), IXPService1 (ref)
+	local Kind1 = Kind or IXPNavigationUtils.ExposureKind.FlagLinked
+	for _, value in List do
+		local Entry = config1[Kind1]
+		local IXPServiceEntry: (any, any) -> () = if Entry then IXPService1[Entry] else nil
 		
-		if var3 then
-			var3(var1, v)
+		if IXPServiceEntry then
+			IXPServiceEntry(IXPService1, value)
 		end
 	end
 end
 
-function t.createExposureHandler(p4, p5)
-	-- upvalues: logExposure (ref)
-	local var4 = if type(p4) == "string" then { p4 } else p4
-	local var5 = if p5 then p5.flags else nil
-	local var6 = if p5 then p5.kind else nil
+function IXPNavigationUtils.createExposureHandler(p1, p2) --[[ Line: 167 ]]
+	-- upvalues: logExposure (copy)
+	local List = if type(p1) == "string" then { p1 } else p1
+	local Flags = if p2 then p2.flags else nil
+	local Kind = if p2 then p2.kind else nil
 	
-	return function()
-		-- upvalues: var5 (ref), logExposure (copy), var4 (ref), var6 (ref)
-		local var7
-		local var8 = var5
-		
-		if var8 == nil then
-			var7 = true
-		elseif type(var8) == "boolean" then
-			var7 = var8
+	return function() --[[ Line: 175 ]]
+		-- upvalues: Flags (copy), logExposure (upval), List (copy), Kind (copy)
+		local Flag = nil
+		if Flags == nil then
+			Flag = true
+		elseif type(Flags) == "boolean" then
+			Flag = Flags
 		else
-			for i, v in var8 do
-				if v then
-					var7 = true
+			Flag = false
+			
+			for _, flag in Flags do
+				if flag then
+					Flag = true
+					break
 				end
 			end
-			var7 = false
 		end
-		if var7 then
-			logExposure(var4, var6)
+		if Flag then
+			logExposure(List, Kind)
 		end
 	end
 end
 
-function t.useExposureOnFocus(p6, p7)
-	-- upvalues: useNavigation (ref), reactModule (ref), t (ref), roactNavigationModule (ref)
-	local var7 = useNavigation()
-	local var8 = if p7 then p7.flags else nil
-	local var9 = if p7 then p7.kind else nil
-	reactModule.useEffect(function()
-		-- upvalues: var7 (ref), var8 (ref), t (copy), p6 (ref), var9 (ref), roactNavigationModule (copy)
-		if var7 then
-			local var10
-			local var11 = var8
-			
-			if var11 == nil then
-				var10 = true
-			elseif type(var11) == "boolean" then
-				var10 = var11
+function IXPNavigationUtils.useExposureOnFocus(p3, p4) --[[ Line: 193 ]]
+	-- upvalues: UseNavigationFunction (copy), ReactModule (copy), IXPNavigationUtils (copy), RoactNavigationModule (copy)
+	local UseNavigationResult = UseNavigationFunction()
+	local Flags = if p4 then p4.flags else nil
+	local Kind = if p4 then p4.kind else nil
+	ReactModule.useEffect(function() --[[ Line: 198 ]]
+		-- upvalues: UseNavigationResult (copy), Flags (copy), IXPNavigationUtils (upval), p3 (copy), Kind (copy), RoactNavigationModule (upval)
+		if UseNavigationResult then
+			local Flag = nil
+			if Flags == nil then
+				Flag = true
+			elseif type(Flags) == "boolean" then
+				Flag = Flags
 			else
-				for i, v in var11 do
-					if v then
-						var10 = true
+				Flag = false
+				
+				for _, flag in Flags do
+					if flag then
+						Flag = true
+						break
 					end
 				end
-				var10 = false
 			end
-			if not var10 then
-				return nil
-			end
-			local var12 = t.createExposureHandler(p6, { flags = var8, kind = var9 })
-			local var13 = var7.addListener(roactNavigationModule.Events.WillFocus, var12)
-			
-			if var7.isFocused and var7.isFocused() then
-				var12()
-			end
-			return function()
-				-- upvalues: var13 (ref)
-				var13.remove()
+			if Flag then
+				local Exposure: () -> () = IXPNavigationUtils.createExposureHandler(p3, { flags = Flags, kind = Kind })
+				local AddListenerResult = UseNavigationResult.addListener(RoactNavigationModule.Events.WillFocus, Exposure)
+				
+				if UseNavigationResult.isFocused and UseNavigationResult.isFocused() then
+					Exposure()
+				end
+				return function() --[[ Line: 213 ]]
+					-- upvalues: AddListenerResult (copy)
+					AddListenerResult.remove()
+				end
 			end
 		end
-	end, { var7, p6, var8, var9 })
+		return nil
+	end, { UseNavigationResult, p3, Flags, Kind })
 end
 
-function t.registerExposureOnFocus(p8, p9, p10)
-	-- upvalues: t_1 (ref), roactNavigationModule (ref), t (ref)
-	if not p8 then
-		return t_1
+function IXPNavigationUtils.registerExposureOnFocus(p5, p6, p7) --[[ Line: 231 ]]
+	-- upvalues: config (copy), RoactNavigationModule (copy), IXPNavigationUtils (copy)
+	if not p5 then
+		return config
 	end
-	local var10
-	local var11 = if p10 then p10.flags else nil
+	local Flags = if p7 then p7.flags else nil
+	local Flag = nil
 	
-	if var11 == nil then
-		var10 = true
-	elseif type(var11) == "boolean" then
-		var10 = var11
+	if Flags == nil then
+		Flag = true
+	elseif type(Flags) == "boolean" then
+		Flag = Flags
 	else
-		for i, v in var11 do
-			if v then
-				var10 = true
+		Flag = false
+		
+		for _, flag in Flags do
+			if flag then
+				Flag = true
+				break
 			end
 		end
-		var10 = false
 	end
-	return if var10 then p8.addListener(roactNavigationModule.Events.WillFocus, t.createExposureHandler(p9, p10)) else t_1
+	return if Flag then p5.addListener(RoactNavigationModule.Events.WillFocus, IXPNavigationUtils.createExposureHandler(p6, p7)) else config
 end
 
-function t.setMocksForTesting(value)
-	-- upvalues: var1 (write)
-	var1 = value or var1
+function IXPNavigationUtils.setMocksForTesting(p8) --[[ Line: 251 ]]
+	-- upvalues: IXPService1 (ref)
+	IXPService1 = p8 or IXPService1
 end
 
-function t.restoreDefaultsAfterTesting()
-	-- upvalues: var1 (write), IXPService (ref)
-	var1 = IXPService
+function IXPNavigationUtils.restoreDefaultsAfterTesting() --[[ Line: 255 ]]
+	-- upvalues: IXPService1 (ref), IXPService (copy)
+	IXPService1 = IXPService
 end
 
-return t
+return IXPNavigationUtils

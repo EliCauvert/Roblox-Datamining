@@ -1,20 +1,20 @@
-﻿local toRectModule = require(script.Parent.toRect)
-local returnValueModule = require(script.Parent.returnValue)
+﻿local ToRectModule = require(script.Parent.toRect)
+local ReturnValueModule = require(script.Parent.returnValue)
 
-local function _(p1, p2)
-	return p2.Min.X <= p1.X and (p1.X <= p2.Max.X and (p2.Min.Y <= p1.Y and p1.Y <= p2.Max.Y))
+local function _(Vector, p1): boolean --[[ Line: 4 | Named "isPointInside" ]]
+	return p1.Min.X <= Vector.X and (Vector.X <= p1.Max.X and p1.Min.Y <= Vector.Y) and Vector.Y <= p1.Max.Y
 end
 
-return function(p1, p2)
-	-- upvalues: toRectModule (ref), returnValueModule (ref)
-	local var1 = toRectModule(p1)
-	local var2 = toRectModule(p2)
-	local min = var1.Min
-	local var3 = var2.Min.X <= min.X and (min.X <= var2.Max.X and (var2.Min.Y <= min.Y and min.Y <= var2.Max.Y))
+return function(p1, p2) --[[ Line: 26 | Named "inside" ]]
+	-- upvalues: ToRectModule (copy), ReturnValueModule (copy)
+	local RectModule = ToRectModule(p1)
+	local RectModule1 = ToRectModule(p2)
+	local Min = RectModule.Min
+	local IsYBelow: boolean = RectModule1.Min.X <= Min.X and (Min.X <= RectModule1.Max.X and (RectModule1.Min.Y <= Min.Y and Min.Y <= RectModule1.Max.Y))
 	
-	if var3 then
-		local max = var1.Max
-		var3 = var2.Min.X <= max.X and (max.X <= var2.Max.X and (var2.Min.Y <= max.Y and max.Y <= var2.Max.Y))
+	if IsYBelow then
+		local Max = RectModule.Max
+		IsYBelow = RectModule1.Min.X <= Max.X and (Max.X <= RectModule1.Max.X and RectModule1.Min.Y <= Max.Y) and Max.Y <= RectModule1.Max.Y
 	end
-	return returnValueModule(var3, "Is inside the element", "Is not inside the element")
+	return ReturnValueModule(IsYBelow, "Is inside the element", "Is not inside the element")
 end

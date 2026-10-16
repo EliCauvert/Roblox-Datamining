@@ -1,56 +1,56 @@
-﻿local performFetch = require(game:GetService("CorePackages").Workspace.Packages.Http).PerformFetch
-local parent = script.Parent.Parent
-local thunkModule = require(parent.Thunk)
-local networkModule = require(parent.Services.Network)
-local sendCounterModule = require(parent.Thunks.SendCounter)
-local constantsModule = require(parent.Constants)
-local setAssetsModule = require(parent.Actions.SetAssets)
-local getProductInfoModule = require(parent.Thunks.GetProductInfo)
-local getAssetBundlesModule = require(parent.Thunks.GetAssetBundles)
-local getVersionInfoModule = require(parent.Thunks.GetVersionInfo)
-local list = { networkModule }
+﻿local PerformFetch = require(game:GetService("CorePackages").Workspace.Packages.Http).PerformFetch
+local Parent = script.Parent.Parent
+local ThunkModule = require(Parent.Thunk)
+local NetworkModule = require(Parent.Services.Network)
+local SendCounterModule = require(Parent.Thunks.SendCounter)
+local ConstantsModule = require(Parent.Constants)
+local SetAssetsModule = require(Parent.Actions.SetAssets)
+local GetProductInfoModule = require(Parent.Thunks.GetProductInfo)
+local GetAssetBundlesModule = require(Parent.Thunks.GetAssetBundles)
+local GetVersionInfoModule = require(Parent.Thunks.GetVersionInfo)
+local list = { NetworkModule }
 
-return function(value)
-	-- upvalues: thunkModule (ref), list (ref), networkModule (ref), performFetch (ref), getProductInfoModule (ref), getAssetBundlesModule (ref), getVersionInfoModule (ref), setAssetsModule (ref), sendCounterModule (ref), constantsModule (ref)
-	return thunkModule.new(script.Name, list, function(p1, p2)
-		-- upvalues: networkModule (copy), value (ref), performFetch (copy), getProductInfoModule (copy), getAssetBundlesModule (copy), getVersionInfoModule (copy), setAssetsModule (copy), sendCounterModule (copy), constantsModule (copy)
-		local var1 = p2[networkModule]
-		local t = {}
+return function(p1) --[[ Line: 19 | Named "BatchGetAssets" ]]
+	-- upvalues: ThunkModule (copy), list (copy), NetworkModule (copy), PerformFetch (copy), GetProductInfoModule (copy), GetAssetBundlesModule (copy), GetVersionInfoModule (copy), SetAssetsModule (copy), SendCounterModule (copy), ConstantsModule (copy)
+	return ThunkModule.new(script.Name, list, function(p2, p3) --[[ Line: 20 ]]
+		-- upvalues: NetworkModule (upval), p1 (copy), PerformFetch (upval), GetProductInfoModule (upval), GetAssetBundlesModule (upval), GetVersionInfoModule (upval), SetAssetsModule (upval), SendCounterModule (upval), ConstantsModule (upval)
+		local v1 = p3[NetworkModule]
+		local List = {}
 		
-		if value then
-			for i, v in value do
-				table.insert(t, tonumber(v.assetId))
+		if p1 then
+			for _, value in p1 do
+				table.insert(List, (tonumber(value.assetId)))
 			end
 		end
-		return performFetch.Single("BatchGetAssets", function()
-			-- upvalues: var1 (ref), t (ref), p1 (ref), getProductInfoModule (copy), getAssetBundlesModule (copy), getVersionInfoModule (copy), setAssetsModule (copy), sendCounterModule (copy), constantsModule (copy)
-			return var1.getBatchItemDetails(t, Enum.AvatarItemType.Asset):andThen(function(p3)
-				-- upvalues: p1 (copy), getProductInfoModule (copy), getAssetBundlesModule (copy), getVersionInfoModule (copy), setAssetsModule (copy), sendCounterModule (copy), constantsModule (copy)
-				local t = {}
+		return PerformFetch.Single("BatchGetAssets", function() --[[ Line: 30 ]]
+			-- upvalues: v1 (copy), List (copy), p2 (copy), GetProductInfoModule (upval), GetAssetBundlesModule (upval), GetVersionInfoModule (upval), SetAssetsModule (upval), SendCounterModule (upval), ConstantsModule (upval)
+			return v1.getBatchItemDetails(List, Enum.AvatarItemType.Asset):andThen(function(Result) --[[ Line: 31 ]]
+				-- upvalues: p2 (upval), GetProductInfoModule (upval), GetAssetBundlesModule (upval), GetVersionInfoModule (upval), SetAssetsModule (upval), SendCounterModule (upval), ConstantsModule (upval)
+				local List = {}
 				
-				for i, v in p3 do
-					table.insert(t, { assetId = tostring(v.Id) })
+				for _, value in Result do
+					table.insert(List, { assetId = tostring(value.Id) })
 				end
-				for i, v_1 in t do
-					coroutine.wrap(function()
-						-- upvalues: p1 (copy), getProductInfoModule (copy), v_1 (ref), getAssetBundlesModule (copy), getVersionInfoModule (copy)
-						p1:dispatch(getProductInfoModule(v_1.assetId))
+				for _, value1 in List do
+					coroutine.wrap(function() --[[ Line: 38 ]]
+						-- upvalues: p2 (upval), GetProductInfoModule (upval), value1 (copy), GetAssetBundlesModule (upval), GetVersionInfoModule (upval)
+						p2:dispatch(GetProductInfoModule(value1.assetId))
 						
-						if v_1.parentBundleId == nil then
-							p1:dispatch(getAssetBundlesModule(v_1.assetId))
+						if value1.parentBundleId == nil then
+							p2:dispatch(GetAssetBundlesModule(value1.assetId))
 						end
-						p1:dispatch(getVersionInfoModule(v_1.assetId))
+						p2:dispatch(GetVersionInfoModule(value1.assetId))
 					end)()
 				end
-				p1:dispatch(setAssetsModule(t))
-				p1:dispatch(sendCounterModule(constantsModule.Counters.BatchGetAssets .. constantsModule.CounterSuffix.RequestSucceeded))
-			end, function(_)
-				-- upvalues: p1 (copy), sendCounterModule (copy), constantsModule (copy)
-				p1:dispatch(sendCounterModule(constantsModule.Counters.BatchGetAssets .. constantsModule.CounterSuffix.RequestRejected))
+				p2:dispatch(SetAssetsModule(List))
+				p2:dispatch(SendCounterModule(ConstantsModule.Counters.BatchGetAssets .. ConstantsModule.CounterSuffix.RequestSucceeded))
+			end, function(_) --[[ Line: 60 ]]
+				-- upvalues: p2 (upval), SendCounterModule (upval), ConstantsModule (upval)
+				p2:dispatch(SendCounterModule(ConstantsModule.Counters.BatchGetAssets .. ConstantsModule.CounterSuffix.RequestRejected))
 			end)
-		end)(p1):catch(function(_)
-			-- upvalues: p1 (ref), sendCounterModule (copy), constantsModule (copy)
-			p1:dispatch(sendCounterModule(constantsModule.Counters.BatchGetAssets .. constantsModule.CounterSuffix.RequestFailed))
+		end)(p2):catch(function(_) --[[ Line: 65 ]]
+			-- upvalues: p2 (copy), SendCounterModule (upval), ConstantsModule (upval)
+			p2:dispatch(SendCounterModule(ConstantsModule.Counters.BatchGetAssets .. ConstantsModule.CounterSuffix.RequestFailed))
 		end)
 	end)
 end

@@ -1,24 +1,24 @@
-﻿local parent = script:FindFirstAncestor("ExpChat").Parent
-local reactModule = require(parent.React)
-local parentModule = require(script.Parent)
-local clientSettingsUtilityModule = require(script.Parent.ClientSettingsUtility)
-local fFlagExpChatAddressFrame0Flash = require(parent.ChatUIPrimitives).Flags.FFlagExpChatAddressFrame0Flash
+﻿local Parent = script:FindFirstAncestor("ExpChat").Parent
+local ReactModule = require(Parent.React)
+local ParentModule = require(script.Parent)
+local ClientSettingsUtilityModule = require(script.Parent.ClientSettingsUtility)
+local FFlagExpChatAddressFrame0Flash = require(Parent.ChatUIPrimitives).Flags.FFlagExpChatAddressFrame0Flash
 
-return function(p1)
-	-- upvalues: reactModule (ref), parentModule (ref), fFlagExpChatAddressFrame0Flash (ref), clientSettingsUtilityModule (ref)
-	local var1 = reactModule.useContext(parentModule)
-	local var2, var3 = reactModule.useState({
-		BackgroundColor3 = if fFlagExpChatAddressFrame0Flash then clientSettingsUtilityModule.getBackgroundColor(p1, var1) else nil,
-		BackgroundColor = if not fFlagExpChatAddressFrame0Flash then clientSettingsUtilityModule.getBackgroundColor(p1, var1) else nil,
-		BackgroundTransparency = clientSettingsUtilityModule.getBackgroundTransparency(p1, var1)
+return function(p1) --[[ Line: 11 ]]
+	-- upvalues: ReactModule (copy), ParentModule (copy), FFlagExpChatAddressFrame0Flash (copy), ClientSettingsUtilityModule (copy)
+	local UseContextResult = ReactModule.useContext(ParentModule)
+	local UseStateResult, UseStateResult2 = ReactModule.useState({
+		BackgroundColor3 = if FFlagExpChatAddressFrame0Flash then ClientSettingsUtilityModule.getBackgroundColor(p1, UseContextResult) else nil,
+		BackgroundColor = if FFlagExpChatAddressFrame0Flash then nil else ClientSettingsUtilityModule.getBackgroundColor(p1, UseContextResult),
+		BackgroundTransparency = ClientSettingsUtilityModule.getBackgroundTransparency(p1, UseContextResult)
 	})
-	reactModule.useEffect(function()
-		-- upvalues: var3 (ref), clientSettingsUtilityModule (copy), p1 (ref), var1 (ref)
-		var3({
-			BackgroundColor3 = clientSettingsUtilityModule.getBackgroundColor(p1, var1),
-			BackgroundTransparency = clientSettingsUtilityModule.getBackgroundTransparency(p1, var1)
+	ReactModule.useEffect(function() --[[ Line: 24 ]]
+		-- upvalues: UseStateResult2 (copy), ClientSettingsUtilityModule (upval), p1 (copy), UseContextResult (copy)
+		UseStateResult2({
+			BackgroundColor3 = ClientSettingsUtilityModule.getBackgroundColor(p1, UseContextResult),
+			BackgroundTransparency = ClientSettingsUtilityModule.getBackgroundTransparency(p1, UseContextResult)
 		})
-	end, { p1, var1 })
+	end, { p1, UseContextResult })
 	
-	return var2
+	return UseStateResult
 end

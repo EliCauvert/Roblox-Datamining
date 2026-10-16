@@ -1,52 +1,52 @@
-﻿local getLegacyNavigationStore = require(script:FindFirstAncestor("AvatarExperienceAnalytics").Parent.NavigationRodux).GetLegacyNavigationStore
-local sendAXCounterV2Module = require(script.Parent.Parent.sendAXCounterV2)
-local var1 = nil
+﻿local GetLegacyNavigationStoreFunction = require(script:FindFirstAncestor("AvatarExperienceAnalytics").Parent.NavigationRodux).GetLegacyNavigationStore
+local SendAXCounterV2Module = require(script.Parent.Parent.sendAXCounterV2)
+local PageProvider = nil
 
-local function _()
-	-- upvalues: getLegacyNavigationStore (ref)
-	local ok, status = pcall(function()
-		-- upvalues: getLegacyNavigationStore (copy)
-		return getLegacyNavigationStore(false).getCurrentLegacyRoute(false)
+local function _() --[[ Line: 31 | Named "fallbackPageName" ]]
+	-- upvalues: GetLegacyNavigationStoreFunction (copy)
+	local Success, Result = pcall(function() --[[ Line: 32 ]]
+		-- upvalues: GetLegacyNavigationStoreFunction (upval)
+		return GetLegacyNavigationStoreFunction(false).getCurrentLegacyRoute(false)
 	end)
 	
-	return if ok and status ~= nil and #status ~= 0 then status[#status].name else nil
+	return if Success and Result ~= nil and #Result ~= 0 then Result[#Result].name else nil
 end
 
 return {
 	UNKNOWN = "Unknown",
 	UNREGISTERED = "Unregistered",
-	setPageProvider = function(value)
-		-- upvalues: var1 (write)
-		var1 = value
+	setPageProvider = function(Value) --[[ Line: 21 ]]
+		-- upvalues: PageProvider (ref)
+		PageProvider = Value
 	end,
-	getPageFields = function()
-		-- upvalues: var1 (write), sendAXCounterV2Module (ref), getLegacyNavigationStore (ref)
-		if var1 ~= nil then
-			local ok, status, var2 = pcall(var1)
+	getPageFields = function() --[[ Line: 42 ]]
+		-- upvalues: PageProvider (ref), SendAXCounterV2Module (copy), GetLegacyNavigationStoreFunction (copy)
+		local PageProvider1 = PageProvider
+		
+		if PageProvider1 ~= nil then
+			local Success, Result, Result3 = pcall(PageProvider1)
 			
-			if ok then
-				if status ~= nil then
-					return {
-						navigationPage = status,
-						navigationOpaquePage = var2 or "Unknown"
-					}
-				end
-			else
-				sendAXCounterV2Module("UnifiedEventPageResolutionFailed", { Source = "provider" })
+			if not Success then
+				SendAXCounterV2Module("UnifiedEventPageResolutionFailed", { Source = "provider" })
+			elseif Result ~= nil then
+				return {
+					navigationPage = Result,
+					navigationOpaquePage = Result3 or "Unknown"
+				}
 			end
 		end
-		local ok, status = pcall(function()
-			-- upvalues: getLegacyNavigationStore (copy)
-			return getLegacyNavigationStore(false).getCurrentLegacyRoute(false)
+		local Success1, Result1 = pcall(function() --[[ Line: 32 ]]
+			-- upvalues: GetLegacyNavigationStoreFunction (upval)
+			return GetLegacyNavigationStoreFunction(false).getCurrentLegacyRoute(false)
 		end)
-		local var3 = if ok and status ~= nil and #status ~= 0 then status[#status].name else nil
+		local Name = if Success1 and Result1 ~= nil and #Result1 ~= 0 then Result1[#Result1].name else nil
 		
-		return if var3 == nil then {
+		return if Name == nil then {
 			navigationPage = "Unknown",
 			navigationOpaquePage = "Unknown"
 		} else {
-			navigationPage = var3,
-			navigationOpaquePage = if var1 == nil then "Unregistered" else "Unknown"
+			navigationPage = Name,
+			navigationOpaquePage = if PageProvider1 == nil then "Unregistered" else "Unknown"
 		}
 	end
 }

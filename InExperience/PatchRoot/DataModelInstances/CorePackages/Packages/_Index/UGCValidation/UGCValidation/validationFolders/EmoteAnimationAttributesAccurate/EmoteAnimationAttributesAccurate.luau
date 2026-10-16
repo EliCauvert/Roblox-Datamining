@@ -1,63 +1,59 @@
-﻿local parent = script.Parent.Parent.Parent
-local publishService = game:GetService("PublishService")
-local constantsModule = require(parent.Constants)
-local _ = require(parent.util.Types)
-local validationEnumsModule = require(parent.validationSystem.ValidationEnums)
-local errorSourceStringsModule = require(parent.validationSystem.ErrorSourceStrings)
+﻿local Parent = script.Parent.Parent.Parent
+local PublishService = game:GetService("PublishService")
+local ConstantsModule = require(Parent.Constants)
+local _ = require(Parent.util.Types)
+local ValidationEnumsModule = require(Parent.validationSystem.ValidationEnums)
+local ErrorSourceStringsModule = require(Parent.validationSystem.ErrorSourceStrings)
 game:DefineFastFlag("UGCValidateEmoteAttributes", false)
-local t = {
-	categories = { validationEnumsModule.UploadCategory.EMOTE_ANIMATION },
-	requiredData = {},
-	conditionalData = { validationEnumsModule.SharedDataMember.curveAnimations },
-	fflag = function()
-		return game:GetFastFlag("UGCValidateEmoteAttributes") and game:GetEngineFeature("EngineTagEmoteMaxPartTranslation")
-	end,
-	expectedFailures = {},
-	prereqTests = {}
-}
-local emoteIsUGCAttributeName = constantsModule.EmoteIsUGCAttributeName
-local emoteMaxPartTranslationAttributeName = constantsModule.EmoteMaxPartTranslationAttributeName
+local EmoteIsUGCAttributeName = ConstantsModule.EmoteIsUGCAttributeName
+local EmoteMaxPartTranslationAttributeName = ConstantsModule.EmoteMaxPartTranslationAttributeName
 
-local function _(p1)
+local function _(p1: number) --[[ Line: 18 | Named "toFiniteNumber" ]]
 	return if typeof(p1) == "number" and p1 > -1e999 and p1 < 1e999 then p1 else nil
 end
 
-function t.run(p1, p2)
-	-- upvalues: emoteIsUGCAttributeName (ref), errorSourceStringsModule (ref), emoteMaxPartTranslationAttributeName (ref), publishService (ref)
-	for i, v in p2.curveAnimations do
-		if v:GetAttribute(emoteIsUGCAttributeName) == true then
-			local var1 = v:GetAttribute(emoteMaxPartTranslationAttributeName)
-			local var2 = if typeof(var1) == "number" and var1 > -1e999 and var1 < 1e999 then var1 else nil
-			
-			if var2 ~= nil then
-				var1 = v:Clone()
-				publishService:TagEmoteAnimation(var1)
-				local var3 = var1:GetAttribute(emoteMaxPartTranslationAttributeName)
-				local var4 = if typeof(var3) == "number" and var3 > -1e999 and var3 < 1e999 then var3 else nil
-				var1:Destroy()
-				
-				if var4 ~= nil then
-					if math.abs(var2 - var4) > 0.00001 then
-						p1:fail(errorSourceStringsModule.Keys.EmoteAnimation_MaxPartTranslationMismatch, {
-							taggedTranslation = tostring(var2),
-							calculatedTranslation = tostring(var4)
-						})
-						
-						return
-					end
-				end
-				p1:fail(errorSourceStringsModule.Keys.EmoteAnimation_MaxPartTranslationCalcFailed)
-				
-				return
+return {
+	categories = { ValidationEnumsModule.UploadCategory.EMOTE_ANIMATION },
+	requiredData = {},
+	conditionalData = { ValidationEnumsModule.SharedDataMember.curveAnimations },
+	fflag = function() --[[ Line: 30 ]]
+		return game:GetFastFlag("UGCValidateEmoteAttributes") and game:GetEngineFeature("EngineTagEmoteMaxPartTranslation")
+	end,
+	expectedFailures = {},
+	prereqTests = {},
+	run = function(p1, p2) --[[ Line: 36 ]]
+		-- upvalues: EmoteIsUGCAttributeName (copy), ErrorSourceStringsModule (copy), EmoteMaxPartTranslationAttributeName (copy), PublishService (copy)
+		local Attribute2 = nil
+		local Attribute1 = nil
+		for _, curveAnimation in p2.curveAnimations do
+			if curveAnimation:GetAttribute(EmoteIsUGCAttributeName) ~= true then
+				p1:fail(ErrorSourceStringsModule.Keys.EmoteAnimation_InvalidUGCAttribute)
+				break
 			end
-			p1:fail(errorSourceStringsModule.Keys.EmoteAnimation_InvalidMaxPartTranslationAttribute)
+			local Attribute: number = curveAnimation:GetAttribute(EmoteMaxPartTranslationAttributeName)
+			Attribute1 = if typeof(Attribute) == "number" and Attribute > -1e999 and Attribute < 1e999 then Attribute else nil
 			
-			return
+			if Attribute1 == nil then
+				p1:fail(ErrorSourceStringsModule.Keys.EmoteAnimation_InvalidMaxPartTranslationAttribute)
+				break
+			end
+			local CurveAnimationClone = curveAnimation:Clone()
+			PublishService:TagEmoteAnimation(CurveAnimationClone)
+			local Attribute3: number = CurveAnimationClone:GetAttribute(EmoteMaxPartTranslationAttributeName)
+			Attribute2 = if typeof(Attribute3) == "number" and Attribute3 > -1e999 and Attribute3 < 1e999 then Attribute3 else nil
+			CurveAnimationClone:Destroy()
+			
+			if Attribute2 == nil then
+				p1:fail(ErrorSourceStringsModule.Keys.EmoteAnimation_MaxPartTranslationCalcFailed)
+				break
+			end
+			if math.abs(Attribute1 - Attribute2) > 0.00001 then
+				p1:fail(ErrorSourceStringsModule.Keys.EmoteAnimation_MaxPartTranslationMismatch, {
+					taggedTranslation = tostring(Attribute1),
+					calculatedTranslation = tostring(Attribute2)
+				})
+				break
+			end
 		end
-		p1:fail(errorSourceStringsModule.Keys.EmoteAnimation_InvalidUGCAttribute)
-		
-		return
 	end
-end
-
-return t
+}

@@ -1,34 +1,35 @@
-﻿local appStorageService = game:GetService("AppStorageService")
-local t = {
-	canUseAppStorage = function()
+﻿local AppStorageService = game:GetService("AppStorageService")
+local RobloxPlusUnifiedBuyModalBannerImpressionModule = {
+	canUseAppStorage = function() --[[ Line: 16 ]]
 		return game:GetEngineFeature("RobloxPlusImpressionStorageKey")
 	end
 }
 
-function t.getImpressionCount()
-	-- upvalues: t (ref), appStorageService (ref)
-	if not t.canUseAppStorage() then
+function RobloxPlusUnifiedBuyModalBannerImpressionModule.getImpressionCount(): number --[[ Line: 20 ]]
+	-- upvalues: RobloxPlusUnifiedBuyModalBannerImpressionModule (copy), AppStorageService (copy)
+	if RobloxPlusUnifiedBuyModalBannerImpressionModule.canUseAppStorage() then
+		local Success, Result = pcall(function() --[[ Line: 24 ]]
+			-- upvalues: AppStorageService (upval)
+			return AppStorageService:GetItem("RobloxPlusUpsellBannerUnifiedBuyModalImpressionCount")
+		end)
+		
+		return Success and typeof(Result) == "string" and Result ~= "" and tonumber(Result) or 0
+	else
 		return 1e999
 	end
-	local ok, status = pcall(function()
-		-- upvalues: appStorageService (copy)
-		return appStorageService:GetItem("RobloxPlusUpsellBannerUnifiedBuyModalImpressionCount")
-	end)
-	
-	return if ok and typeof(status) == "string" and status ~= "" then tonumber(status) or 0 else 0
 end
 
-function t.incrementImpressionCount()
-	-- upvalues: t (ref), appStorageService (ref)
-	if t.canUseAppStorage() then
-		pcall(function()
-			-- upvalues: t (copy), appStorageService (copy)
-			appStorageService:SetItem("RobloxPlusUpsellBannerUnifiedBuyModalImpressionCount", tostring(t.getImpressionCount() + 1))
-			appStorageService:Flush()
+function RobloxPlusUnifiedBuyModalBannerImpressionModule.incrementImpressionCount() --[[ Line: 33 ]]
+	-- upvalues: RobloxPlusUnifiedBuyModalBannerImpressionModule (copy), AppStorageService (copy)
+	if RobloxPlusUnifiedBuyModalBannerImpressionModule.canUseAppStorage() then
+		pcall(function() --[[ Line: 37 ]]
+			-- upvalues: RobloxPlusUnifiedBuyModalBannerImpressionModule (upval), AppStorageService (upval)
+			AppStorageService:SetItem("RobloxPlusUpsellBannerUnifiedBuyModalImpressionCount", (tostring(RobloxPlusUnifiedBuyModalBannerImpressionModule.getImpressionCount() + 1)))
+			AppStorageService:Flush()
 		end)
 		
 		return
 	end
 end
 
-return t
+return RobloxPlusUnifiedBuyModalBannerImpressionModule

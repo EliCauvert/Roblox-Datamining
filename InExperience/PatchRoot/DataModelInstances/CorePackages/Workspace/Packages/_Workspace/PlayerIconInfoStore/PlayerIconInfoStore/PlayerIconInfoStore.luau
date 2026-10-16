@@ -1,70 +1,70 @@
-﻿local createSignal = require(script.Parent.Parent.Signals).createSignal
+﻿local CreateSignalFunction = require(script.Parent.Parent.Signals).createSignal
 local t = {}
 
-local function _(p1)
+local function _(CreatorId) --[[ Line: 25 | Named "createDefaultPlayerIconInfo" ]]
 	return {
 		avatarIcon = nil,
 		specialGroupIcon = nil,
-		isPlaceOwner = game.CreatorType == Enum.CreatorType.User and p1 == game.CreatorId
+		isPlaceOwner = game.CreatorType == Enum.CreatorType.User and CreatorId == game.CreatorId
 	}
 end
 
-local _ = function(value)
-	-- upvalues: t (write), createSignal (ref)
-	if not t[value] then
-		local var1, var2 = createSignal({
+local _ = function(CreatorId) --[[ Line: 33 | Named "getOrCreatePlayerSignal" ]]
+	-- upvalues: t (ref), CreateSignalFunction (copy)
+	if not t[CreatorId] then
+		local Signal, Signal2 = CreateSignalFunction({
 			avatarIcon = nil,
 			specialGroupIcon = nil,
-			isPlaceOwner = game.CreatorType == Enum.CreatorType.User and value == game.CreatorId
+			isPlaceOwner = game.CreatorType == Enum.CreatorType.User and CreatorId == game.CreatorId
 		})
-		t[value] = { getter = var1, setter = var2 }
+		t[CreatorId] = { getter = Signal, setter = Signal2 }
 	end
-	return t[value]
+	return t[CreatorId]
 end
 
 return {
-	getPlayerIconInfoReactive = function(p1)
-		-- upvalues: t (write), createSignal (ref)
-		if not t[p1] then
-			local var1, var2 = createSignal({
+	getPlayerIconInfoReactive = function(CreatorId) --[[ Line: 41 ]]
+		-- upvalues: t (ref), CreateSignalFunction (copy)
+		if not t[CreatorId] then
+			local Signal, Signal2 = CreateSignalFunction({
 				avatarIcon = nil,
 				specialGroupIcon = nil,
-				isPlaceOwner = game.CreatorType == Enum.CreatorType.User and p1 == game.CreatorId
+				isPlaceOwner = game.CreatorType == Enum.CreatorType.User and CreatorId == game.CreatorId
 			})
-			t[p1] = { getter = var1, setter = var2 }
+			t[CreatorId] = { getter = Signal, setter = Signal2 }
 		end
-		return t[p1].getter
+		return t[CreatorId].getter
 	end,
-	setPlayerIconInfo = function(value, p1)
-		-- upvalues: t (write), createSignal (ref)
-		if not t[value] then
-			local var1, var2 = createSignal({
+	setPlayerIconInfo = function(CreatorId, p1) --[[ Line: 46 ]]
+		-- upvalues: t (ref), CreateSignalFunction (copy)
+		if not t[CreatorId] then
+			local Signal, Signal2 = CreateSignalFunction({
 				avatarIcon = nil,
 				specialGroupIcon = nil,
-				isPlaceOwner = game.CreatorType == Enum.CreatorType.User and value == game.CreatorId
+				isPlaceOwner = game.CreatorType == Enum.CreatorType.User and CreatorId == game.CreatorId
 			})
-			t[value] = { getter = var1, setter = var2 }
+			t[CreatorId] = { getter = Signal, setter = Signal2 }
 		end
-		t[value].setter(p1)
+		t[CreatorId].setter(p1)
 	end,
-	addPlayer = function(p1)
-		-- upvalues: t (write), createSignal (ref)
-		if not t[p1] then
-			local var1, var2 = createSignal({
+	addPlayer = function(CreatorId) --[[ Line: 51 ]]
+		-- upvalues: t (ref), CreateSignalFunction (copy)
+		if not t[CreatorId] then
+			local Signal, Signal2 = CreateSignalFunction({
 				avatarIcon = nil,
 				specialGroupIcon = nil,
-				isPlaceOwner = game.CreatorType == Enum.CreatorType.User and p1 == game.CreatorId
+				isPlaceOwner = game.CreatorType == Enum.CreatorType.User and CreatorId == game.CreatorId
 			})
-			t[p1] = { getter = var1, setter = var2 }
+			t[CreatorId] = { getter = Signal, setter = Signal2 }
 		end
-		local _ = t[p1]
+		local _ = t[CreatorId]
 	end,
-	removePlayer = function(p1)
-		-- upvalues: t (write)
-		t[p1] = nil
+	removePlayer = function(Key) --[[ Line: 56 ]]
+		-- upvalues: t (ref)
+		t[Key] = nil
 	end,
-	cleanUp = function()
-		-- upvalues: t (write)
+	cleanUp = function() --[[ Line: 60 ]]
+		-- upvalues: t (ref)
 		t = {}
 	end
 }

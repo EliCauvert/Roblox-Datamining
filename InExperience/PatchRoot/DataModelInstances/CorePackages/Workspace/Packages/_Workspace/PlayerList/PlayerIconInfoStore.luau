@@ -1,1 +1,1 @@
-﻿return require(script.Parent.Parent.Parent._Workspace.PlayerIconInfoStore.PlayerIconInfoStore)
+﻿return (require(script.Parent.Parent.Parent._Workspace.PlayerIconInfoStore.PlayerIconInfoStore))

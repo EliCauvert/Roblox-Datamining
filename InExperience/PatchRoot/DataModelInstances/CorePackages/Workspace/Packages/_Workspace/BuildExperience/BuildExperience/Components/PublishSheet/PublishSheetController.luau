@@ -1,87 +1,108 @@
-﻿local buildExperience = script:FindFirstAncestor("BuildExperience")
-local parent = buildExperience.Parent
-local _ = require(parent.DataHydration)
-local reactModule = require(parent.React)
-local publishBottomSheetContainerModule = require(script.Parent.PublishBottomSheetContainer)
-local versionHistoryContainerModule = require(buildExperience.Components.VersionHistory.VersionHistoryContainer)
-local gameInfoUtilsModule = require(buildExperience.utils.GameInfoUtils)
-local screens = require(buildExperience.Components.BuildPillMenu.BuildOverflowMenuScreens).Screens
+﻿local BuildExperience = script:FindFirstAncestor("BuildExperience")
+local Parent = BuildExperience.Parent
+local _ = require(Parent.DataHydration)
+local ReactModule = require(Parent.React)
+local PublishBottomSheetContainerModule = require(script.Parent.PublishBottomSheetContainer)
+local VersionHistoryContainerModule = require(BuildExperience.Components.VersionHistory.VersionHistoryContainer)
+local GameInfoUtilsModule = require(BuildExperience.utils.GameInfoUtils)
+local Screens = require(BuildExperience.Components.BuildPillMenu.BuildOverflowMenuScreens).Screens
 
-local function _(p1, p2)
-	-- upvalues: gameInfoUtilsModule (ref)
-	return if p1.placeId == nil then if gameInfoUtilsModule.isGameInfoReady(p2) then tonumber(p2.rootPlaceId) else nil else p1.placeId
+local function _(p1, p2) --[[ Line: 45 | Named "resolvePlaceId" ]]
+	-- upvalues: GameInfoUtilsModule (copy)
+	return if p1.placeId == nil then if GameInfoUtilsModule.isGameInfoReady(p2) then tonumber(p2.rootPlaceId) else nil else p1.placeId
 end
 
-return function(p1)
-	-- upvalues: reactModule (ref), gameInfoUtilsModule (ref), screens (ref), publishBottomSheetContainerModule (ref), versionHistoryContainerModule (ref)
-	local var1, var2 = reactModule.useState(false)
-	local navigateToSubPage = p1.navigateToSubPage
-	local onClose = p1.onClose
-	local target = p1.target
-	local var3 = gameInfoUtilsModule.useGameInfo(target.universeId)
-	local var4 = if target.placeId ~= nil then if gameInfoUtilsModule.isGameInfoReady(var3) then tonumber(var3.rootPlaceId) else nil else target.placeId
-	local var5 = reactModule.useMemo(function()
-		-- upvalues: target (ref), var4 (ref)
+return function(p1) --[[ Line: 55 | Named "PublishSheetController" ]]
+	-- upvalues: ReactModule (copy), GameInfoUtilsModule (copy), Screens (copy), PublishBottomSheetContainerModule (copy), VersionHistoryContainerModule (copy)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(false)
+	local NavigateToSubPageFunction = p1.navigateToSubPage
+	local OnCloseFunction = p1.onClose
+	local Target = p1.target
+	local UseGameInfoResult = GameInfoUtilsModule.useGameInfo(Target.universeId)
+	local Number = if Target.placeId == nil then if GameInfoUtilsModule.isGameInfoReady(UseGameInfoResult) then tonumber(UseGameInfoResult.rootPlaceId) else nil else Target.placeId
+	local UseMemoResult = ReactModule.useMemo(function() --[[ Line: 65 ]]
+		-- upvalues: Target (copy), Number (copy)
 		return {
-			universeId = target.universeId,
-			placeId = var4,
-			sessionId = target.sessionId,
-			experienceName = target.experienceName,
-			gameIcon = target.gameIcon,
-			isNewGameTarget = target.isNewGameTarget
+			universeId = Target.universeId,
+			placeId = Number,
+			sessionId = Target.sessionId,
+			experienceName = Target.experienceName,
+			gameIcon = Target.gameIcon,
+			isNewGameTarget = Target.isNewGameTarget
 		}
 	end, {
-		target.universeId, var4, target.sessionId, target.experienceName,
-		target.gameIcon, target.isNewGameTarget
+		Target.universeId, Number, Target.sessionId, Target.experienceName,
+		Target.gameIcon, Target.isNewGameTarget
 	})
-	local var6 = gameInfoUtilsModule.isTitleDescriptionReady(var3)
+	local IsTitleDescriptionReady = GameInfoUtilsModule.isTitleDescriptionReady(UseGameInfoResult)
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 86 ]]
+		-- upvalues: IsTitleDescriptionReady (copy), OnCloseFunction (copy), NavigateToSubPageFunction (copy), Screens (upval), UseMemoResult (copy)
+		if IsTitleDescriptionReady then
+			OnCloseFunction()
+			NavigateToSubPageFunction(Screens.BuildTitleDescription, UseMemoResult)
+			
+			return
+		end
+	end, {
+		OnCloseFunction,
+		NavigateToSubPageFunction,
+		IsTitleDescriptionReady,
+		UseMemoResult
+	})
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 94 ]]
+		-- upvalues: OnCloseFunction (copy), NavigateToSubPageFunction (copy), Screens (upval), UseMemoResult (copy)
+		OnCloseFunction()
+		NavigateToSubPageFunction(Screens.BuildMediaSelection, UseMemoResult)
+	end, {
+		OnCloseFunction,
+		NavigateToSubPageFunction,
+		UseMemoResult
+	})
+	local UseResult2 = ReactModule.useCallback(function() --[[ Line: 99 ]]
+		-- upvalues: Number (copy), OnCloseFunction (copy), NavigateToSubPageFunction (copy), Screens (upval), UseMemoResult (copy)
+		if Number ~= nil then
+			OnCloseFunction()
+			NavigateToSubPageFunction(Screens.BuildVersionTitleDescription, UseMemoResult)
+			
+			return
+		end
+	end, {
+		OnCloseFunction,
+		NavigateToSubPageFunction,
+		Number,
+		UseMemoResult
+	})
+	local UseResult3 = ReactModule.useCallback(function() --[[ Line: 107 ]]
+		-- upvalues: Number (copy), OnCloseFunction (copy), UseStateResult2 (copy)
+		if Number ~= nil then
+			OnCloseFunction()
+			UseStateResult2(true)
+			
+			return
+		end
+	end, { OnCloseFunction, Number })
+	local UseResult4 = ReactModule.useCallback(function() --[[ Line: 115 ]]
+		-- upvalues: UseStateResult2 (copy)
+		UseStateResult2(false)
+	end, {})
 	
-	return reactModule.createElement(reactModule.Fragment, nil, {
-		PublishSheet = if p1.isOpen then reactModule.createElement(publishBottomSheetContainerModule, {
+	return ReactModule.createElement(ReactModule.Fragment, nil, {
+		PublishSheet = if p1.isOpen then ReactModule.createElement(PublishBottomSheetContainerModule, {
 			isOpen = true,
-			target = var5,
-			gameInfo = var3,
-			onClose = onClose,
-			onOpenTitleDescriptionPage = reactModule.useCallback(function()
-				-- upvalues: var6 (ref), onClose (ref), navigateToSubPage (ref), screens (copy), var5 (ref)
-				if var6 then
-					onClose()
-					navigateToSubPage(screens.BuildTitleDescription, var5)
-					
-					return
-				end
-			end, { onClose, navigateToSubPage, var6, var5 }),
-			onOpenMediaSelectionPage = reactModule.useCallback(function()
-				-- upvalues: onClose (ref), navigateToSubPage (ref), screens (copy), var5 (ref)
-				onClose()
-				navigateToSubPage(screens.BuildMediaSelection, var5)
-			end, { onClose, navigateToSubPage, var5 }),
-			onOpenVersionTitleDescriptionPage = reactModule.useCallback(function()
-				-- upvalues: var4 (ref), onClose (ref), navigateToSubPage (ref), screens (copy), var5 (ref)
-				if var4 == nil then
-					return
-				end
-				onClose()
-				navigateToSubPage(screens.BuildVersionTitleDescription, var5)
-			end, { onClose, navigateToSubPage, var4, var5 }),
-			onOpenVersionHistory = reactModule.useCallback(function()
-				-- upvalues: var4 (ref), onClose (ref), var2 (ref)
-				if var4 == nil then
-					return
-				end
-				onClose()
-				var2(true)
-			end, { onClose, var4 }),
+			target = UseMemoResult,
+			gameInfo = UseGameInfoResult,
+			onClose = OnCloseFunction,
+			onOpenTitleDescriptionPage = UseResult,
+			onOpenMediaSelectionPage = UseResult1,
+			onOpenVersionTitleDescriptionPage = UseResult2,
+			onOpenVersionHistory = UseResult3,
 			showPreviewButton = p1.showPreviewButton
 		}) else nil,
-		VersionHistory = if var1 and var4 ~= nil then reactModule.createElement(versionHistoryContainerModule, {
+		VersionHistory = if UseStateResult and Number ~= nil then ReactModule.createElement(VersionHistoryContainerModule, {
 			isOpen = true,
 			testId = "build-publish-version-history",
-			placeId = var4,
-			onClose = reactModule.useCallback(function()
-				-- upvalues: var2 (ref)
-				var2(false)
-			end, {})
+			placeId = Number,
+			onClose = UseResult4
 		}) else nil
 	})
 end

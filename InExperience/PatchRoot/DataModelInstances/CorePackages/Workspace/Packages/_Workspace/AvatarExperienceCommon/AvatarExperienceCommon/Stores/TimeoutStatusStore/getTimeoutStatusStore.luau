@@ -1,3 +1,3 @@
-﻿local avatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
+﻿local AvatarExperienceCommon = script:FindFirstAncestor("AvatarExperienceCommon")
 
-return require(avatarExperienceCommon.Parent.Signals).createComputed(require(avatarExperienceCommon.Stores.TimeoutStatusStore.createTimeoutStatusStore))
+return require(AvatarExperienceCommon.Parent.Signals).createComputed((require(AvatarExperienceCommon.Stores.TimeoutStatusStore.createTimeoutStatusStore)))

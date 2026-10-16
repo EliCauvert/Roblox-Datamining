@@ -1,32 +1,32 @@
-﻿local parent = script:FindFirstAncestor("FriendsChat").Parent
-local reactModule = require(parent.React)
-local _ = require(parent.Signals)
-local useChatWindowModule = require(script.Parent.Parent.Bridge.useChatWindow)
-local name = require(parent.ExpChatShared).Logger:new(script.Name)
+﻿local Parent = script:FindFirstAncestor("FriendsChat").Parent
+local ReactModule = require(Parent.React)
+local _ = require(Parent.Signals)
+local UseChatWindowModule = require(script.Parent.Parent.Bridge.useChatWindow)
+local NewResult = require(Parent.ExpChatShared).Logger:new(script.Name)
 
-return function(p1)
-	-- upvalues: useChatWindowModule (ref), reactModule (ref), name (ref)
-	local var1 = useChatWindowModule()
-	local var2 = reactModule.useCallback(function()
-		-- upvalues: name (copy)
-		name:warning("resetTargetChannel called on FriendsChatMessageList; not supported")
+return function(p1) --[[ Line: 44 | Named "FriendsChatMessageList" ]]
+	-- upvalues: UseChatWindowModule (copy), ReactModule (copy), NewResult (copy)
+	local UseChatWindowModuleResult = UseChatWindowModule()
+	local UseResult = ReactModule.useCallback(function() --[[ Line: 51 ]]
+		-- upvalues: NewResult (upval)
+		NewResult:warning("resetTargetChannel called on FriendsChatMessageList; not supported")
 	end, {})
-	local var3 = reactModule.useCallback(function()
-		-- upvalues: name (copy)
-		name:warning("activateWhisperMode called on FriendsChatMessageList; not supported")
+	local UseResult1 = ReactModule.useCallback(function() --[[ Line: 54 ]]
+		-- upvalues: NewResult (upval)
+		NewResult:warning("activateWhisperMode called on FriendsChatMessageList; not supported")
 	end, {})
-	local var4 = reactModule.useRef(nil)
-	local onViewportAbsoluteSizeChanged = p1.onViewportAbsoluteSizeChanged
-	reactModule.useEffect(function()
-		-- upvalues: var4 (ref), onViewportAbsoluteSizeChanged (ref)
-		local current = var4.current
+	local UseRefResult = ReactModule.useRef(nil)
+	local OnViewportAbsoluteSizeChangedFunction = p1.onViewportAbsoluteSizeChanged
+	ReactModule.useEffect(function() --[[ Line: 63 ]]
+		-- upvalues: UseRefResult (copy), OnViewportAbsoluteSizeChangedFunction (copy)
+		local Current = UseRefResult.current
 		
-		if current and onViewportAbsoluteSizeChanged then
-			onViewportAbsoluteSizeChanged(current)
+		if Current and OnViewportAbsoluteSizeChangedFunction then
+			OnViewportAbsoluteSizeChangedFunction(Current)
 		end
-	end, { onViewportAbsoluteSizeChanged })
+	end, { OnViewportAbsoluteSizeChangedFunction })
 	
-	return reactModule.createElement("Frame", {
+	return ReactModule.createElement("Frame", {
 		Name = "FriendsChatWindowSlot",
 		BackgroundTransparency = 1,
 		BorderSizePixel = 0,
@@ -34,24 +34,24 @@ return function(p1)
 		LayoutOrder = p1.layoutOrder,
 		Size = UDim2.fromScale(1, 0)
 	}, {
-		flex = reactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.Fill }),
-		messageMask = reactModule.createElement("CanvasGroup", {
+		flex = ReactModule.createElement("UIFlexItem", { FlexMode = Enum.UIFlexMode.Fill }),
+		messageMask = ReactModule.createElement("CanvasGroup", {
 			Name = "FriendsChatMessageMask",
 			BackgroundTransparency = 1,
 			BorderSizePixel = 0,
 			ClipsDescendants = true,
 			GroupTransparency = 0,
 			Size = UDim2.fromScale(1, 1),
-			[reactModule.Change.AbsoluteSize] = p1.onViewportAbsoluteSizeChanged,
-			ref = var4
+			[ReactModule.Change.AbsoluteSize] = p1.onViewportAbsoluteSizeChanged,
+			ref = UseRefResult
 		}, {
-			fade = reactModule.createElement("UIGradient", { Rotation = 90, Transparency = p1.messageFadeSequence }),
-			window = reactModule.createElement(var1, {
+			fade = ReactModule.createElement("UIGradient", { Rotation = 90, Transparency = p1.messageFadeSequence }),
+			window = ReactModule.createElement(UseChatWindowModuleResult, {
 				suppressBackground = true,
 				disableLineReporting = true,
 				size = UDim2.fromScale(1, 1),
 				isChannelBarVisible = p1.isChannelBarVisible,
-				scrollResetKey = "FriendsChat:" .. p0.conversationId,
+				scrollResetKey = "FriendsChat:" .. p1.conversationId,
 				scrollToTopOnReset = p1.scrollToTopOnReset,
 				onCanvasPositionChanged = p1.onCanvasPositionChanged,
 				contentTopPadding = p1.contentTopPadding,
@@ -64,8 +64,8 @@ return function(p1)
 				onUnhovered = p1.onUnhovered,
 				onAbsoluteSizeChanged = p1.onAbsoluteSizeChanged,
 				onAbsolutePositionChanged = p1.onAbsolutePositionChanged,
-				resetTargetChannel = var2,
-				activateWhisperMode = var3
+				resetTargetChannel = UseResult,
+				activateWhisperMode = UseResult1
 			})
 		})
 	})

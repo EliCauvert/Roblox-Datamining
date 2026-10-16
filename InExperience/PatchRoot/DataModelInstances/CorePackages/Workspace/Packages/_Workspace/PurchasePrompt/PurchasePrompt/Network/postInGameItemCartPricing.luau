@@ -1,38 +1,38 @@
-﻿local parent = script.Parent.Parent
-local _ = require(parent.Parent.PurchasePromptLite)
-local promiseModule = require(parent.Promise)
-local _ = require(parent.types)
-local unifiedPurchaseTelemetryModule = require(parent.Events.UnifiedPurchaseTelemetry)
-local logUnifiedPurchaseTelemetryCounterModule = require(parent.Utils.logUnifiedPurchaseTelemetryCounter)
+﻿local Parent = script.Parent.Parent
+local _ = require(Parent.Parent.PurchasePromptLite)
+local PromiseModule = require(Parent.Promise)
+local _ = require(Parent.types)
+local UnifiedPurchaseTelemetryModule = require(Parent.Events.UnifiedPurchaseTelemetry)
+local LogUnifiedPurchaseTelemetryCounterModule = require(Parent.Utils.logUnifiedPurchaseTelemetryCounter)
 
-local function buildRequestBody(p1, p2, p3, p4)
-	local t = { userId = p1, featureKey = p2, items = p3 }
+local function buildRequestBody(UserId, FeatureKey, Items, List) --[[ Line: 26 ]]
+	local config = { userId = UserId, featureKey = FeatureKey, items = Items }
 	
-	if p4 ~= nil and #p4 > 0 then
-		local t_1 = {}
+	if List ~= nil and #List > 0 then
+		local OfferSelections = {}
 		
-		for i, v in p4 do
-			table.insert(t_1, {
+		for _, OfferId in List do
+			table.insert(OfferSelections, {
 				selectionType = "OFFER_SELECTION_TYPE_EXCLUDED",
-				offerId = v
+				offerId = OfferId
 			})
 		end
-		t.offerSelections = t_1
+		config.offerSelections = OfferSelections
 	end
-	return t
+	return config
 end
 
-return function(p5, p6, p7, p8, p9, p10, p11)
-	-- upvalues: promiseModule (ref), buildRequestBody (ref), logUnifiedPurchaseTelemetryCounterModule (ref), unifiedPurchaseTelemetryModule (ref)
-	return if p8 == nil or #p8 == 0 or p5.postInGameItemCartPricing == nil then promiseModule.resolve(nil) else p5.postInGameItemCartPricing(buildRequestBody(p6, p7, p8, p9)):andThen(function(p12)
-		-- upvalues: logUnifiedPurchaseTelemetryCounterModule (copy), unifiedPurchaseTelemetryModule (copy), p10 (ref), p11 (ref)
-		logUnifiedPurchaseTelemetryCounterModule(unifiedPurchaseTelemetryModule.UnifiedCartPricingFetchSucceededCounter, p10, p11)
+return function(p1, UserId, FeatureKey, Items, p2, p3, p4) --[[ Line: 52 | Named "postInGameItemCartPricing" ]]
+	-- upvalues: PromiseModule (copy), buildRequestBody (copy), LogUnifiedPurchaseTelemetryCounterModule (copy), UnifiedPurchaseTelemetryModule (copy)
+	return if Items == nil or #Items == 0 or p1.postInGameItemCartPricing == nil then PromiseModule.resolve(nil) else p1.postInGameItemCartPricing((buildRequestBody(UserId, FeatureKey, Items, p2))):andThen(function(Result) --[[ Line: 72 ]]
+		-- upvalues: LogUnifiedPurchaseTelemetryCounterModule (upval), UnifiedPurchaseTelemetryModule (upval), p3 (copy), p4 (copy)
+		LogUnifiedPurchaseTelemetryCounterModule(UnifiedPurchaseTelemetryModule.UnifiedCartPricingFetchSucceededCounter, p3, p4)
 		
-		return p12
-	end):catch(function(p12)
-		-- upvalues: logUnifiedPurchaseTelemetryCounterModule (copy), unifiedPurchaseTelemetryModule (copy), p10 (ref), p11 (ref)
-		logUnifiedPurchaseTelemetryCounterModule(unifiedPurchaseTelemetryModule.UnifiedCartPricingFetchFailedCounter, p10, p11)
-		warn(string.format("postInGameItemCartPricing failed: %s", tostring(p12)))
+		return Result
+	end):catch(function(Err) --[[ Line: 80 ]]
+		-- upvalues: LogUnifiedPurchaseTelemetryCounterModule (upval), UnifiedPurchaseTelemetryModule (upval), p3 (copy), p4 (copy)
+		LogUnifiedPurchaseTelemetryCounterModule(UnifiedPurchaseTelemetryModule.UnifiedCartPricingFetchFailedCounter, p3, p4)
+		warn(string.format("postInGameItemCartPricing failed: %s", (tostring(Err))))
 		
 		return nil
 	end)

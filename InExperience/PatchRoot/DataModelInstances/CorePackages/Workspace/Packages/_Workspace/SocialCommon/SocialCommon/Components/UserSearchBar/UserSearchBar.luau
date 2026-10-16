@@ -1,26 +1,25 @@
-﻿local parent = script:FindFirstAncestor("SocialCommon").Parent
-local callbackInputBox = require(parent.LuaSocialLibrariesDeps).SocialLibraries.config({}).Components.CallbackInputBox
-local reactModule = require(parent.React)
-local roactAppExperimentModule = require(parent.RoactAppExperiment)
-local text = require(parent.AppCommonLib).Text
-local dashModule = require(parent.Dash)
-local UIBloxModule = require(parent.UIBlox)
-local iconSize = UIBloxModule.App.Constant.IconSize
-local textButton = UIBloxModule.App.Button.TextButton
-local images = UIBloxModule.App.ImageSet.Images
-local imageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
-local useStyle = UIBloxModule.Core.Style.useStyle
-local foundationModule = require(parent.Foundation)
-local icon = foundationModule.Icon
-local enums = foundationModule.Enums
-local getTextSize = require(parent.Style).GetTextSize
-local normalizeFontFace = foundationModule.Utility.normalizeFontFace
-local foundationFontFaceMigration = foundationModule.Utility.Flags.FoundationFontFaceMigration
-local clearSmall = images["icons/actions/edit/clear_small"]
-local fFlagDisableAutocorrectSocialUserSearch = require(parent.SharedFlags).FFlagDisableAutocorrectSocialUserSearch
-local fFlagLuaAppLogSocialUserSearchUXExposure = require(parent.SharedFlags).FFlagLuaAppLogSocialUserSearchUXExposure
-local disableAutocorrectExperimentLayer = game:DefineFastString("DisableAutocorrectExperimentLayer", "Social.UserSearchUX")
-local t = {
+﻿local Parent = script:FindFirstAncestor("SocialCommon").Parent
+local CallbackInputBox = require(Parent.LuaSocialLibrariesDeps).SocialLibraries.config({}).Components.CallbackInputBox
+local ReactModule = require(Parent.React)
+local RoactAppExperimentModule = require(Parent.RoactAppExperiment)
+local Text = require(Parent.AppCommonLib).Text
+local DashModule = require(Parent.Dash)
+local UIBloxModule = require(Parent.UIBlox)
+local IconSize = UIBloxModule.App.Constant.IconSize
+local TextButton = UIBloxModule.App.Button.TextButton
+local ImageSetLabel = UIBloxModule.Core.ImageSet.ImageSetLabel
+local UseStyleFunction = UIBloxModule.Core.Style.useStyle
+local FoundationModule = require(Parent.Foundation)
+local Icon = FoundationModule.Icon
+local Enums = FoundationModule.Enums
+local GetTextSizeFunction = require(Parent.Style).GetTextSize
+local NormalizeFontFaceFunction = FoundationModule.Utility.normalizeFontFace
+local FoundationFontFaceMigration = FoundationModule.Utility.Flags.FoundationFontFaceMigration
+local IconsActionsEditClearSmall = UIBloxModule.App.ImageSet.Images["icons/actions/edit/clear_small"]
+local FFlagDisableAutocorrectSocialUserSearch = require(Parent.SharedFlags).FFlagDisableAutocorrectSocialUserSearch
+local FFlagLuaAppLogSocialUserSearchUXExposure = require(Parent.SharedFlags).FFlagLuaAppLogSocialUserSearchUXExposure
+local DisableAutocorrectExperimentLayer = game:DefineFastString("DisableAutocorrectExperimentLayer", "Social.UserSearchUX")
+local config = {
 	cancelText = "Cancel",
 	searchPlaceholderText = "Text",
 	initialInputText = nil,
@@ -29,162 +28,143 @@ local t = {
 	captureFocusOnMount = false,
 	cancelCallback = nil,
 	textChangedCallback = nil,
-	focusChangedCallback = function() end
+	focusChangedCallback = function() --[[ Line: 75 ]] end
 }
 
-return function(p1)
-	-- upvalues: fFlagDisableAutocorrectSocialUserSearch (ref), roactAppExperimentModule (ref), disableAutocorrectExperimentLayer (ref), fFlagLuaAppLogSocialUserSearchUXExposure (ref), dashModule (ref), t (ref), useStyle (ref), reactModule (ref), foundationFontFaceMigration (ref), getTextSize (ref), text (ref), textButton (ref), imageSetLabel (ref), icon (ref), enums (ref), normalizeFontFace (ref), callbackInputBox (ref), clearSmall (ref), iconSize (ref)
-	local createElement_3
-	local var1 = if fFlagDisableAutocorrectSocialUserSearch then roactAppExperimentModule.useUserExperiment({ disableAutocorrectExperimentLayer }, function(p2)
-		-- upvalues: disableAutocorrectExperimentLayer (copy)
-		return (p2[disableAutocorrectExperimentLayer] or {}).disableAutocorrectSocialUserSearch
-	end, not fFlagLuaAppLogSocialUserSearchUXExposure) else nil
-	local var2 = dashModule.join(t, p1 or {})
-	local var3 = useStyle()
-	local var4 = reactModule.useRef(nil)
-	local var5, var6 = reactModule.useState(nil)
-	local var7, var8 = reactModule.useState(nil)
-	reactModule.useEffect(function()
-		-- upvalues: var2 (ref)
-		if var2.onSelectCallback then
-			var2.onSelectCallback()
+return function(p1) --[[ Line: 78 ]]
+	-- upvalues: FFlagDisableAutocorrectSocialUserSearch (copy), RoactAppExperimentModule (copy), DisableAutocorrectExperimentLayer (copy), FFlagLuaAppLogSocialUserSearchUXExposure (copy), DashModule (copy), config (copy), UseStyleFunction (copy), ReactModule (copy), FoundationFontFaceMigration (copy), GetTextSizeFunction (copy), Text (copy), TextButton (copy), ImageSetLabel (copy), Icon (copy), Enums (copy), NormalizeFontFaceFunction (copy), CallbackInputBox (copy), IconsActionsEditClearSmall (copy), IconSize (copy)
+	local UseUserExperimentResult = if FFlagDisableAutocorrectSocialUserSearch then RoactAppExperimentModule.useUserExperiment({ DisableAutocorrectExperimentLayer }, function(p2) --[[ Line: 80 ]]
+		-- upvalues: DisableAutocorrectExperimentLayer (upval)
+		return (p2[DisableAutocorrectExperimentLayer] or {}).disableAutocorrectSocialUserSearch
+	end, not FFlagLuaAppLogSocialUserSearchUXExposure) else nil
+	local JoinResult = DashModule.join(config, p1 or {})
+	local UseStyleResult = UseStyleFunction()
+	local UseRefResult = ReactModule.useRef(nil)
+	local UseStateResult, UseStateResult2 = ReactModule.useState(nil)
+	local UseStateResult1, UseStateResult2_1 = ReactModule.useState(nil)
+	ReactModule.useEffect(function() --[[ Line: 93 ]]
+		-- upvalues: JoinResult (copy)
+		if JoinResult.onSelectCallback then
+			JoinResult.onSelectCallback()
 		end
-		if var2.resetOnMount then
-			var2.resetOnMount()
+		if JoinResult.resetOnMount then
+			JoinResult.resetOnMount()
 		end
 	end, {})
-	local header2 = var3.Font.Header2
-	local var9 = var3.Font.BaseSize * header2.RelativeSize
-	local uDim = UDim.new(0, 4)
-	local var10 = if var2.isDisabled then UDim2.new(1, 0, 1, 0) else UDim2.new(1, (-(if foundationFontFaceMigration then getTextSize(var2.cancelText, var9, var3.Tokens.Typography.TitleLarge.Font, Vector2.new(10000, 10000)).X else text.GetTextWidth(var2.cancelText, header2.Font, var9))) - 12, 1, 0)
-	local body = var3.Font.Body
-	local var11 = var3.Font.BaseSize * body.RelativeSize
+	local Header2 = UseStyleResult.Font.Header2
+	local ScaledBaseSize = UseStyleResult.Font.BaseSize * Header2.RelativeSize
+	local X = if FoundationFontFaceMigration then GetTextSizeFunction(JoinResult.cancelText, ScaledBaseSize, UseStyleResult.Tokens.Typography.TitleLarge.Font, Vector2.new(10000, 10000)).X else Text.GetTextWidth(JoinResult.cancelText, Header2.Font, ScaledBaseSize)
+	local Body = UseStyleResult.Font.Body
+	local ScaledBaseSize1 = UseStyleResult.Font.BaseSize * Body.RelativeSize
 	
-	local var12 = function(p2, p3)
-		-- upvalues: var2 (ref), var6 (ref), var3 (ref), var8 (ref)
-		if var2.focusChangedCallback then
-			var2.focusChangedCallback(p2, p3)
+	local function FocusChangedCallback(p2, p3) --[[ Line: 124 ]]
+		-- upvalues: JoinResult (copy), UseStateResult2 (copy), UseStyleResult (copy), UseStateResult2_1 (copy)
+		if JoinResult.focusChangedCallback then
+			JoinResult.focusChangedCallback(p2, p3)
 		end
 		if p2 then
-			var6(var3.Theme.SecondaryOnHover.Color)
-			var8(var3.Theme.SecondaryOnHover.Transparency)
+			UseStateResult2(UseStyleResult.Theme.SecondaryOnHover.Color)
+			UseStateResult2_1(UseStyleResult.Theme.SecondaryOnHover.Transparency)
 			
 			return
+		else
+			UseStateResult2(UseStyleResult.Theme.Divider.Color)
+			UseStateResult2_1(UseStyleResult.Theme.Divider.Transparency)
 		end
-		var6(var3.Theme.Divider.Color)
-		var8(var3.Theme.Divider.Transparency)
 	end
 	
-	local createElement = reactModule.createElement
-	local var13 = "Frame"
-	local t_1 = {
+	return ReactModule.createElement("Frame", {
 		BorderSizePixel = 0,
-		BackgroundTransparency = var3.Theme.BackgroundDefault.Transparency,
-		BackgroundColor3 = var3.Theme.BackgroundDefault.Color,
+		BackgroundTransparency = UseStyleResult.Theme.BackgroundDefault.Transparency,
+		BackgroundColor3 = UseStyleResult.Theme.BackgroundDefault.Color,
 		Size = UDim2.new(1, 0, 1, 0),
-		LayoutOrder = var2.LayoutOrder
-	}
-	local t_2 = {
-		Layout = reactModule.createElement("UIListLayout", {
-			VerticalAlignment = Enum.VerticalAlignment.Center,
-			HorizontalAlignment = Enum.HorizontalAlignment.Left,
-			FillDirection = Enum.FillDirection.Horizontal,
-			SortOrder = Enum.SortOrder.LayoutOrder,
-			Padding = uDim
-		}),
-		Padding = reactModule.createElement("UIPadding", {
-			PaddingTop = UDim.new(0, 6),
-			PaddingBottom = UDim.new(0, 6)
-		}),
-		CancelTextButton = if var2.isDisabled then nil else var2.cancelCallback and reactModule.createElement(textButton, {
-			layoutOrder = 2,
-			text = var2.cancelText,
-			onActivated = var2.cancelCallback
-		})
-	}
-	local createElement_1 = reactModule.createElement
-	local t_3 = {
-		BorderSizePixel = 0,
-		LayoutOrder = 1,
-		Size = var10,
-		BackgroundColor3 = var3.Theme.UIMuted.Color,
-		BackgroundTransparency = var3.Theme.UIMuted.Transparency
-	}
-	local t_4 = {
-		UICorner = reactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 4) }),
-		UIStroke = reactModule.createElement("UIStroke", {
-			Thickness = 1,
-			Color = var5 or var3.Theme.Divider.Color,
-			Transparency = var7 or var3.Theme.Divider.Transparency
-		}),
-		UIListLayout = reactModule.createElement("UIListLayout", {
+		LayoutOrder = JoinResult.LayoutOrder
+	}, {
+		Layout = ReactModule.createElement("UIListLayout", {
 			VerticalAlignment = Enum.VerticalAlignment.Center,
 			HorizontalAlignment = Enum.HorizontalAlignment.Left,
 			FillDirection = Enum.FillDirection.Horizontal,
 			SortOrder = Enum.SortOrder.LayoutOrder,
 			Padding = UDim.new(0, 4)
 		}),
-		UIPadding = reactModule.createElement("UIPadding", {
-			PaddingLeft = UDim.new(0, 10),
-			PaddingRight = UDim.new(0, 10)
+		Padding = ReactModule.createElement("UIPadding", {
+			PaddingTop = UDim.new(0, 6),
+			PaddingBottom = UDim.new(0, 6)
 		}),
-		SearchIcon = reactModule.createElement(icon, {
-			name = enums.IconName.MagnifyingGlass,
-			size = enums.IconSize.Medium
+		CancelTextButton = if JoinResult.isDisabled then nil else JoinResult.cancelCallback and ReactModule.createElement(TextButton, {
+			layoutOrder = 2,
+			text = JoinResult.cancelText,
+			onActivated = JoinResult.cancelCallback
+		}),
+		FilterBoxBackground = ReactModule.createElement(ImageSetLabel, {
+			BorderSizePixel = 0,
+			LayoutOrder = 1,
+			Size = if JoinResult.isDisabled then UDim2.new(1, 0, 1, 0) else UDim2.new(1, -X - 12, 1, 0),
+			BackgroundColor3 = UseStyleResult.Theme.UIMuted.Color,
+			BackgroundTransparency = UseStyleResult.Theme.UIMuted.Transparency
+		}, {
+			UICorner = ReactModule.createElement("UICorner", { CornerRadius = UDim.new(0, 4) }),
+			UIStroke = ReactModule.createElement("UIStroke", {
+				Thickness = 1,
+				Color = UseStateResult or UseStyleResult.Theme.Divider.Color,
+				Transparency = UseStateResult1 or UseStyleResult.Theme.Divider.Transparency
+			}),
+			UIListLayout = ReactModule.createElement("UIListLayout", {
+				VerticalAlignment = Enum.VerticalAlignment.Center,
+				HorizontalAlignment = Enum.HorizontalAlignment.Left,
+				FillDirection = Enum.FillDirection.Horizontal,
+				SortOrder = Enum.SortOrder.LayoutOrder,
+				Padding = UDim.new(0, 4)
+			}),
+			UIPadding = ReactModule.createElement("UIPadding", {
+				PaddingLeft = UDim.new(0, 10),
+				PaddingRight = UDim.new(0, 10)
+			}),
+			SearchIcon = ReactModule.createElement(Icon, {
+				name = Enums.IconName.MagnifyingGlass,
+				size = Enums.IconSize.Medium
+			}),
+			FilterBoxContainer = ReactModule.createElement("Frame", {
+				BackgroundTransparency = 1,
+				LayoutOrder = 2,
+				Size = UDim2.new(1, -28, 1, 0)
+			}, {
+				filterBox = if JoinResult.isDisabled then ReactModule.createElement("TextLabel", {
+					BackgroundTransparency = 1,
+					Text = JoinResult.searchPlaceholderText,
+					TextXAlignment = Enum.TextXAlignment.Left,
+					TextYAlignment = Enum.TextYAlignment.Center,
+					Size = UDim2.fromScale(1, 1),
+					TextSize = ScaledBaseSize1,
+					Font = if FoundationFontFaceMigration then nil else Body.Font,
+					FontFace = if FoundationFontFaceMigration then NormalizeFontFaceFunction(UseStyleResult.Tokens.Typography.BodyLarge.Font) else nil,
+					TextColor3 = UseStyleResult.Theme.TextDefault.Color,
+					TextTransparency = UseStyleResult.Theme.TextMuted.Transparency
+				}) else ReactModule.createElement(CallbackInputBox, {
+					clearButtonDisabled = false,
+					initialInputText = JoinResult.initialInputText,
+					inputTextColor3 = UseStyleResult.Theme.TextEmphasis.Color,
+					inputTextFont = Body.Font,
+					inputTextSize = ScaledBaseSize1,
+					inputTextTransparency = UseStyleResult.Theme.TextEmphasis.Transparency,
+					inputTextXAlignment = Enum.TextXAlignment.Left,
+					textInputType = if FFlagDisableAutocorrectSocialUserSearch and UseUserExperimentResult then Enum.TextInputType.NoSuggestions else nil,
+					returnKeyType = if FFlagDisableAutocorrectSocialUserSearch and UseUserExperimentResult then Enum.ReturnKeyType.Search else nil,
+					placeholderText = JoinResult.searchPlaceholderText,
+					placeholderTextColor3 = UseStyleResult.Theme.TextDefault.Color,
+					placeholderTextTransparency = UseStyleResult.Theme.TextMuted.Transparency,
+					captureFocusOnMount = JoinResult.captureFocusOnMount,
+					clearIcon = IconsActionsEditClearSmall,
+					clearIconColor3 = UseStyleResult.Theme.IconEmphasis.Color,
+					clearIconTransparency = UseStyleResult.Theme.IconEmphasis.Transparency,
+					clearButtonSize = IconSize.Small,
+					textChangedCallback = JoinResult.textChangedCallback,
+					onSelectCallback = JoinResult.onSelectCallback,
+					focusChangedCallback = FocusChangedCallback,
+					returnPressedFromOnScreenKeyboardCallback = JoinResult.returnPressedFromOnScreenKeyboardCallback,
+					inputBoxRef = UseRefResult
+				})
+			})
 		})
-	}
-	local createElement_2 = reactModule.createElement
-	local var14 = "Frame"
-	local t_5 = {
-		BackgroundTransparency = 1,
-		LayoutOrder = 2,
-		Size = UDim2.new(1, -28, 1, 0)
-	}
-	local t_6 = {}
-	
-	if var2.isDisabled then
-		createElement_3 = reactModule.createElement("TextLabel", {
-			BackgroundTransparency = 1,
-			Text = var2.searchPlaceholderText,
-			TextXAlignment = Enum.TextXAlignment.Left,
-			TextYAlignment = Enum.TextYAlignment.Center,
-			Size = UDim2.fromScale(1, 1),
-			TextSize = var11,
-			Font = if foundationFontFaceMigration then nil else body.Font,
-			FontFace = if foundationFontFaceMigration then normalizeFontFace(var3.Tokens.Typography.BodyLarge.Font) else nil,
-			TextColor3 = var3.Theme.TextDefault.Color,
-			TextTransparency = var3.Theme.TextMuted.Transparency
-		})
-	else
-		createElement_3 = reactModule.createElement
-		createElement_3 = createElement_3(callbackInputBox, {
-			clearButtonDisabled = false,
-			initialInputText = var2.initialInputText,
-			inputTextColor3 = var3.Theme.TextEmphasis.Color,
-			inputTextFont = body.Font,
-			inputTextSize = var11,
-			inputTextTransparency = var3.Theme.TextEmphasis.Transparency,
-			inputTextXAlignment = Enum.TextXAlignment.Left,
-			textInputType = if fFlagDisableAutocorrectSocialUserSearch and var1 then Enum.TextInputType.NoSuggestions else nil,
-			returnKeyType = if fFlagDisableAutocorrectSocialUserSearch and var1 then Enum.ReturnKeyType.Search else nil,
-			placeholderText = var2.searchPlaceholderText,
-			placeholderTextColor3 = var3.Theme.TextDefault.Color,
-			placeholderTextTransparency = var3.Theme.TextMuted.Transparency,
-			captureFocusOnMount = var2.captureFocusOnMount,
-			clearIcon = clearSmall,
-			clearIconColor3 = var3.Theme.IconEmphasis.Color,
-			clearIconTransparency = var3.Theme.IconEmphasis.Transparency,
-			clearButtonSize = iconSize.Small,
-			textChangedCallback = var2.textChangedCallback,
-			onSelectCallback = var2.onSelectCallback,
-			focusChangedCallback = var12,
-			returnPressedFromOnScreenKeyboardCallback = var2.returnPressedFromOnScreenKeyboardCallback,
-			inputBoxRef = var4
-		})
-	end
-	t_6.filterBox = createElement_3
-	t_4.FilterBoxContainer = createElement_2(var14, t_5, t_6)
-	t_2.FilterBoxBackground = createElement_1(imageSetLabel, t_3, t_4)
-	
-	return createElement(var13, t_1, t_2)
+	})
 end

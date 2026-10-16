@@ -1,3 +1,3 @@
-﻿local parent = script:FindFirstAncestor("ExpChatServer").Parent
+﻿local Parent = script:FindFirstAncestor("ExpChatServer").Parent
 
-return require(parent.Rodux).combineReducers({ Players = require(parent.ExpChatShared).Reducers.Players })
+return require(Parent.Rodux).combineReducers({ Players = require(Parent.ExpChatShared).Reducers.Players })

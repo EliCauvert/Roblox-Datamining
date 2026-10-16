@@ -1,8 +1,8 @@
-﻿local audioDuckingFastInts = require(script:FindFirstAncestor("MomentsCreation").Parent.MomentsCommon).Media.audioDuckingFastInts
+﻿local AudioDuckingFastInts = require(script:FindFirstAncestor("MomentsCreation").Parent.MomentsCommon).Media.audioDuckingFastInts
 
-return function()
-	-- upvalues: audioDuckingFastInts (ref)
-	local compressorParams = audioDuckingFastInts.getCompressorParams()
+return function(): number --[[ Line: 19 | Named "getTtsDuckScalar" ]]
+	-- upvalues: AudioDuckingFastInts (copy)
+	local CompressorParams = AudioDuckingFastInts.getCompressorParams()
 	
-	return if compressorParams.ratio <= 0 then 1 else math.clamp(10 ^ ((compressorParams.makeupGain - -compressorParams.threshold * (1 - 1 / compressorParams.ratio)) / 20), 0, 1)
+	return if CompressorParams.ratio <= 0 then 1 else math.clamp(10 ^ ((CompressorParams.makeupGain - -CompressorParams.threshold * (1 - 1 / CompressorParams.ratio)) / 20), 0, 1)
 end

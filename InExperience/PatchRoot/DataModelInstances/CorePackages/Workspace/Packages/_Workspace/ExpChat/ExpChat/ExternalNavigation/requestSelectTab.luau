@@ -1,27 +1,28 @@
-﻿local expChat = script:FindFirstAncestor("ExpChat")
-local parent = expChat.Parent
-local expChatSharedModule = require(parent.ExpChatShared)
-local getChannelTabsStoreModule = require(expChat.Stores.GetChannelTabsStore)
-local fFlagExpChatUseChannelTabsStore = require(parent.SharedFlags).FFlagExpChatUseChannelTabsStore
+﻿local ExpChat = script:FindFirstAncestor("ExpChat")
+local Parent = ExpChat.Parent
+local ExpChatSharedModule = require(Parent.ExpChatShared)
+local GetChannelTabsStoreModule = require(ExpChat.Stores.GetChannelTabsStore)
+local FFlagExpChatUseChannelTabsStore = require(Parent.SharedFlags).FFlagExpChatUseChannelTabsStore
 
-return function(p1)
-	-- upvalues: expChatSharedModule (ref), fFlagExpChatUseChannelTabsStore (ref), getChannelTabsStoreModule (ref)
-	local store = expChatSharedModule.context.store
+return function(p1): boolean --[[ Line: 14 | Named "requestSelectTab" ]]
+	-- upvalues: ExpChatSharedModule (copy), FFlagExpChatUseChannelTabsStore (copy), GetChannelTabsStoreModule (copy)
+	local Store = ExpChatSharedModule.context.store
 	
-	if store == nil then
+	if Store == nil then
 		return false
+	elseif not FFlagExpChatUseChannelTabsStore then
+		local ChannelTabs = Store:getState().ChannelTabs
+		
+		return ChannelTabs ~= nil and ChannelTabs.allChannelTabs[p1] ~= nil
+	else
+		local ChannelTabsStoreModule = GetChannelTabsStoreModule(false)
+		
+		if ChannelTabsStoreModule.getChannelTabsState(false).allChannelTabs[p1] == nil then
+			return false
+		else
+			ChannelTabsStoreModule.setTargetChannel(p1, false)
+			
+			return true
+		end
 	end
-	local channelTabs = store:getState().ChannelTabs
-	
-	if channelTabs == nil or channelTabs.allChannelTabs[p1] == nil then
-		return false
-	end
-	local var1 = if fFlagExpChatUseChannelTabsStore then getChannelTabsStoreModule(false) else nil
-	
-	if var1 and var1.getChannelTabsState(false).allChannelTabs[p1] == nil then
-		return false
-	elseif var1 then
-		var1.setTargetChannel(p1, false)
-	end
-	return true
 end

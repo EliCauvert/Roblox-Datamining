@@ -1,184 +1,183 @@
-﻿local coreGuiService = game:GetService("CoreGui")
-local corePackagesService = game:GetService("CorePackages")
-local robloxGui = coreGuiService.RobloxGui
-local shell = robloxGui:FindFirstChild("Modules"):FindFirstChild("Shell")
-local analyticsModule = require(script.Parent.Analytics)
-local appStateModule = require(script.Parent.AppState)
-local globalSettingsModule = require(script.Parent.GlobalSettings)
-local screenItemModule = require(script.Parent.Models.ScreenItem)
-local pageHeartbeatTimerModule = require(script.Parent.PageHeartbeatTimer)
-local insertScreenModule = require(script.Parent.Actions.InsertScreen)
-local removeScreenModule = require(script.Parent.Actions.RemoveScreen)
-local contentHistoryModule = require(shell.XboxPrimaryNav:FindFirstChild("contentHistory"))
-local getFIntXboxPrimaryNavABLoggingModule = require(shell.Flags.GetFIntXboxPrimaryNavABLogging)
-local create = require(corePackagesService.Workspace.Packages.AppCommonLib).Create
+﻿local CoreGui = game:GetService("CoreGui")
+local RobloxGui = CoreGui.RobloxGui
+local Shell = RobloxGui:FindFirstChild("Modules"):FindFirstChild("Shell")
+local AnalyticsModule = require(script.Parent.Analytics)
+local AppStateModule = require(script.Parent.AppState)
+local GlobalSettingsModule = require(script.Parent.GlobalSettings)
+local ScreenItemModule = require(script.Parent.Models.ScreenItem)
+local PageHeartbeatTimerModule = require(script.Parent.PageHeartbeatTimer)
+local InsertScreenModule = require(script.Parent.Actions.InsertScreen)
+local RemoveScreenModule = require(script.Parent.Actions.RemoveScreen)
+local ContentHistoryModule = require(Shell.XboxPrimaryNav:FindFirstChild("contentHistory"))
+local GetFIntXboxPrimaryNavABLoggingModule = require(Shell.Flags.GetFIntXboxPrimaryNavABLogging)
+local CreateFunction = require(game:GetService("CorePackages").Workspace.Packages.AppCommonLib).Create
 local t = {}
-local t_1 = {}
-local t_2 = { [1] = robloxGui }
+local config = { [1] = RobloxGui }
 
-local function _(p1)
-	-- upvalues: globalSettingsModule (ref)
-	return if p1.GetPriority ~= nil then p1:GetPriority() else globalSettingsModule.DefaultPriority
+local function _(p1) --[[ Line: 25 | Named "getScreenPriority" ]]
+	-- upvalues: GlobalSettingsModule (copy)
+	return if p1.GetPriority == nil then GlobalSettingsModule.DefaultPriority else p1:GetPriority()
 end
 
-local function setRBXEventStream_Screen(value, p1)
-	-- upvalues: analyticsModule (ref)
-	if value and type(value.GetAnalyticsInfo) == "function" then
-		local analyticsInfo = value:GetAnalyticsInfo()
+local function setRBXEventStream_Screen(Screen, Status) --[[ Line: 33 ]]
+	-- upvalues: AnalyticsModule (copy)
+	if Screen and type(Screen.GetAnalyticsInfo) == "function" then
+		local AnalyticsInfo = Screen:GetAnalyticsInfo()
 		
-		if type(analyticsInfo) == "table" and analyticsInfo[analyticsModule.WidgetNames("WidgetId")] then
-			analyticsInfo.Status = p1
-			analyticsModule.SetRBXEventStream("Widget", analyticsInfo)
+		if type(AnalyticsInfo) == "table" and AnalyticsInfo[AnalyticsModule.WidgetNames("WidgetId")] then
+			AnalyticsInfo.Status = Status
+			AnalyticsModule.SetRBXEventStream("Widget", AnalyticsInfo)
 		end
 	end
 end
 
-function t.GetScreenGuiByPriority(_, p1)
-	-- upvalues: t_2 (ref), create (ref), coreGuiService (ref)
-	local maxValue = math.max(1, p1)
-	
-	if not t_2[maxValue] then
-		for i = 1, maxValue do
-			if not t_2[i] then
-				t_2[i] = create("ScreenGui")({
-					Name = "AppShell" .. tostring(i),
-					Parent = coreGuiService
-				})
+local ScreenManager = {
+	GetScreenGuiByPriority = function(_, p1: number) --[[ Line: 43 ]]
+		-- upvalues: config (copy), CreateFunction (copy), CoreGui (copy)
+		local Largest = math.max(1, p1)
+		
+		if not config[Largest] then
+			for i = 1, Largest do
+				if not config[i] then
+					config[i] = CreateFunction("ScreenGui")({ Name = "AppShell" .. tostring(i), Parent = CoreGui })
+				end
 			end
 		end
+		return config[Largest]
 	end
-	return t_2[maxValue]
-end
+}
 
-function t.OpenScreen(_, p2, p3)
-	-- upvalues: t_1 (ref), screenItemModule (ref), globalSettingsModule (ref), getFIntXboxPrimaryNavABLoggingModule (ref), t (ref), contentHistoryModule (ref), appStateModule (ref), insertScreenModule (ref)
-	if p3 == nil then
-		p3 = true
+function ScreenManager:OpenScreen(Screen, HidePrevious: boolean) --[[ Line: 60 ]]
+	-- upvalues: t (copy), ScreenItemModule (copy), GlobalSettingsModule (copy), GetFIntXboxPrimaryNavABLoggingModule (copy), ScreenManager (copy), ContentHistoryModule (copy), AppStateModule (copy), InsertScreenModule (copy)
+	if HidePrevious == nil then
+		HidePrevious = true
 	end
-	local t_2 = { hidePrevious = p3 }
-	local var1 = tostring(p2)
-	t_1[var1] = { isShown = false, screen = p2 }
-	local new = screenItemModule.new
-	new = new(var1, if p2.GetPriority ~= nil then p2:GetPriority() else globalSettingsModule.DefaultPriority, t_2)
+	local config = { hidePrevious = HidePrevious }
+	local Text = tostring(Screen)
+	t[Text] = { isShown = false, screen = Screen }
+	local NewScreenItem = ScreenItemModule.new(Text, if Screen.GetPriority == nil then GlobalSettingsModule.DefaultPriority else Screen:GetPriority(), config)
 	
-	if getFIntXboxPrimaryNavABLoggingModule() > 0 then
-		local topScreen = t:GetTopScreen()
+	if GetFIntXboxPrimaryNavABLoggingModule() > 0 then
+		local TopScreen = ScreenManager:GetTopScreen()
 		
-		if topScreen then
-			contentHistoryModule:setLastSelectedContent(topScreen)
+		if TopScreen then
+			ContentHistoryModule:setLastSelectedContent(TopScreen)
 		end
 	end
-	appStateModule.store:dispatch(insertScreenModule(new))
+	AppStateModule.store:dispatch(InsertScreenModule(NewScreenItem))
 end
 
-function t.CloseCurrent(_, p2)
-	-- upvalues: appStateModule (ref), t_1 (ref), removeScreenModule (ref)
-	local screenList = appStateModule.store:getState().ScreenList
-	local var1 = #screenList > 0 and screenList[1]
+function ScreenManager:CloseCurrent(p2) --[[ Line: 87 ]]
+	-- upvalues: AppStateModule (copy), t (copy), RemoveScreenModule (copy)
+	local ScreenList = AppStateModule.store:getState().ScreenList
+	local Screen = #ScreenList > 0 and ScreenList[1]
 	
-	if not var1 or not t_1[var1.id] then return end
-	if p2 and var1.id ~= tostring(p2) then
+	if not Screen or not t[Screen.id] then return end
+	if not p2 or Screen.id == tostring(p2) then
+		AppStateModule.store:dispatch(RemoveScreenModule(Screen))
+		
 		return
 	end
-	appStateModule.store:dispatch(removeScreenModule(var1))
 end
 
-local function handleScreensRemoved(p2)
-	-- upvalues: t_1 (ref), setRBXEventStream_Screen (ref)
-	local t = {}
+local function handleScreensRemoved(ScreenList) --[[ Line: 104 ]]
+	-- upvalues: t (copy), setRBXEventStream_Screen (copy)
+	local t1 = {}
 	
-	for i, v in ipairs(p2) do
-		t[v.id] = true
+	for _, value in ipairs(ScreenList) do
+		t1[value.id] = true
 	end
-	local t_2 = {}
+	local List = {}
 	
-	for i_1, v_1 in pairs(t_1) do
-		if not t[i_1] then
-			table.insert(t_2, i_1)
+	for i, _ in pairs(t) do
+		if not t1[i] then
+			table.insert(List, i)
 		end
 	end
-	for i_2, v_2 in ipairs(t_2) do
-		local var1 = t_1[v_2]
+	for _, value1 in ipairs(List) do
+		local Entry = t[value1]
 		
-		if var1 then
-			local screen = var1.screen
-			screen:RemoveFocus()
-			screen:Hide()
+		if Entry then
+			local Screen = Entry.screen
+			Screen:RemoveFocus()
+			Screen:Hide()
 			
-			if screen.ScreenRemoved then
-				screen:ScreenRemoved()
+			if Screen.ScreenRemoved then
+				Screen:ScreenRemoved()
 			end
-			setRBXEventStream_Screen(screen, "Close")
+			setRBXEventStream_Screen(Screen, "Close")
 		end
-		t_1[v_2] = nil
+		t[value1] = nil
 	end
 end
 
-local function handleScreensAdded(p3)
-	-- upvalues: t_1 (ref), setRBXEventStream_Screen (ref), pageHeartbeatTimerModule (ref), analyticsModule (ref)
-	for i = #p3, 1, -1 do
-		local id = t_1[p3[i].id]
+local function handleScreensAdded(ScreenList) --[[ Line: 136 ]]
+	-- upvalues: t (copy), setRBXEventStream_Screen (copy), PageHeartbeatTimerModule (copy), AnalyticsModule (copy)
+	for i = #ScreenList, 1, -1 do
+		local Entry = t[ScreenList[i].id]
 		
-		if not id then
-			continue
-		end
-		local screen = id.screen
-		
-		if i > 1 then
-			local hidePrevious = true
-			local var2 = p3[i - 1]
+		if Entry then
+			local Screen = Entry.screen
 			
-			if var2 and var2.data then
-				hidePrevious = var2.data.hidePrevious
+			if i > 1 then
+				local HidePrevious = true
+				local Screen1 = ScreenList[i - 1]
+				
+				if Screen1 and Screen1.data then
+					HidePrevious = Screen1.data.hidePrevious
+				end
+				Screen:RemoveFocus()
+				
+				if HidePrevious then
+					Screen:Hide()
+					Entry.isShown = false
+				end
+				if not Entry.isShown and not HidePrevious then
+					Screen:Show()
+					Entry.isShown = true
+				end
+			else
+				if not Entry.isShown then
+					Screen:Show()
+					Entry.isShown = true
+					setRBXEventStream_Screen(Screen, "Show")
+				end
+				Screen:Focus()
+				setRBXEventStream_Screen(Screen, "Focus")
+				local AnalyticsInfo = Entry.screen.GetAnalyticsInfo and Entry.screen.GetAnalyticsInfo()
+				
+				if AnalyticsInfo then
+					PageHeartbeatTimerModule.onPageChanged(AnalyticsInfo[AnalyticsModule.WidgetNames("WidgetId")])
+				end
 			end
-			screen:RemoveFocus()
-			
-			if hidePrevious then
-				screen:Hide()
-				id.isShown = false
-			end
-			if not id.isShown and not hidePrevious then
-				screen:Show()
-				id.isShown = true
-			end
-		elseif not id.isShown then
-			screen:Show()
-			id.isShown = true
-			setRBXEventStream_Screen(screen, "Show")
-		end
-		screen:Focus()
-		setRBXEventStream_Screen(screen, "Focus")
-		local var3 = id.screen.GetAnalyticsInfo and id.screen.GetAnalyticsInfo()
-		
-		if var3 then
-			pageHeartbeatTimerModule.onPageChanged(var3[analyticsModule.WidgetNames("WidgetId")])
 		end
 	end
-	analyticsModule.reportPageChanged()
+	AnalyticsModule.reportPageChanged()
 end
 
-local _ = function(p4)
-	-- upvalues: handleScreensRemoved (ref), handleScreensAdded (ref)
-	handleScreensRemoved(p4)
-	handleScreensAdded(p4)
+local _ = function(p2) --[[ Line: 181 | Named "update" ]]
+	-- upvalues: handleScreensRemoved (copy), handleScreensAdded (copy)
+	handleScreensRemoved(p2)
+	handleScreensAdded(p2)
 end
 
-appStateModule.store.changed:connect(function(p4, p5)
-	-- upvalues: handleScreensRemoved (ref), handleScreensAdded (ref)
-	local screenList = p4.ScreenList
+AppStateModule.store.changed:connect(function(Value, p2) --[[ Line: 186 ]]
+	-- upvalues: handleScreensRemoved (copy), handleScreensAdded (copy)
+	local ScreenList = Value.ScreenList
 	
-	if screenList == p5.ScreenList then
+	if ScreenList ~= p2.ScreenList then
+		handleScreensRemoved(ScreenList)
+		handleScreensAdded(ScreenList)
+		
 		return
 	end
-	handleScreensRemoved(screenList)
-	handleScreensAdded(screenList)
 end)
 
-function t.GetTopScreen(_)
-	-- upvalues: appStateModule (ref), t_1 (ref)
-	local screenList = appStateModule.store:getState().ScreenList
+function ScreenManager:GetTopScreen() --[[ Line: 197 ]]
+	-- upvalues: AppStateModule (copy), t (copy)
+	local ScreenList = AppStateModule.store:getState().ScreenList
 	
-	return if screenList and #screenList > 0 then t_1[screenList[1].id].screen else nil
+	return if ScreenList and #ScreenList > 0 then t[ScreenList[1].id].screen else nil
 end
 
-return t
+return ScreenManager

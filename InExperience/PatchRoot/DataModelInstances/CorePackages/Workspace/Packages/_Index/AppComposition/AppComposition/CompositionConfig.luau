@@ -1,77 +1,82 @@
-﻿local appComposition = script:FindFirstAncestor("AppComposition")
-local parent = appComposition.Parent
-local breakpoint = require(parent.Foundation).Enums.Breakpoint
-local _ = require(appComposition.AppCompositionTypes)
-local fFlagEnableSplitPane = require(parent.SharedFlags).FFlagEnableSplitPane
-local regionName = require(appComposition.AppCompositionEnums).RegionName
+﻿local AppComposition = script:FindFirstAncestor("AppComposition")
+local Parent = AppComposition.Parent
+local Breakpoint = require(Parent.Foundation).Enums.Breakpoint
+local _ = require(AppComposition.AppCompositionTypes)
+local FFlagEnableSplitPane = require(Parent.SharedFlags).FFlagEnableSplitPane
+local RegionName = require(AppComposition.AppCompositionEnums).RegionName
 
-local function getBaseConfig(p1, p2)
-	-- upvalues: breakpoint (ref)
-	local _ = nil
-	
-	if p1 == breakpoint.XSmall then
-		local size300 = p2.Size.Size_300
+local function getRegionOverrides(SupportRegion) --[[ Line: 24 ]]
+	-- upvalues: RegionName (copy)
+	return if SupportRegion == RegionName.SupportRegion then { widthScale = 0.33, minWidth = 355 } else nil
+end
+
+local function getBaseConfig(Large, p1) --[[ Line: 34 ]]
+	-- upvalues: Breakpoint (copy)
+	if Large == Breakpoint.XSmall then
+		local Size300: number = p1.Size.Size_300
 		
 		return {
 			columns = 3,
-			margin = size300,
-			gutter = p2.Gutter.Small,
-			carouselPeek = 2 * size300
+			margin = Size300,
+			gutter = p1.Gutter.Small,
+			carouselPeek = 2 * Size300
 		}
-	elseif p1 == breakpoint.Small then
-		local small = p2.Margin.Small
+	elseif Large == Breakpoint.Small then
+		local Small: number = p1.Margin.Small
 		
 		return {
 			columns = 6,
-			margin = small,
-			gutter = p2.Gutter.Medium,
-			carouselPeek = 2 * small
+			margin = Small,
+			gutter = p1.Gutter.Medium,
+			carouselPeek = 2 * Small
+		}
+	else
+		return if Large == Breakpoint.Medium then {
+			columns = 12,
+			carouselPeek = 0,
+			margin = p1.Size.Size_800,
+			gutter = p1.Gutter.Large
+		} elseif Large == Breakpoint.Large then {
+			columns = 12,
+			carouselPeek = 0,
+			margin = p1.Size.Size_800,
+			gutter = p1.Gutter.Large
+		} elseif Large == Breakpoint.XLarge then {
+			columns = 12,
+			carouselPeek = 0,
+			margin = p1.Size.Size_1600,
+			gutter = p1.Gutter.XLarge
+		} else {
+			columns = 12,
+			carouselPeek = 0,
+			margin = p1.Size.Size_1600,
+			gutter = p1.Gutter.XLarge
 		}
 	end
-	return if p1 == breakpoint.Medium then {
-		columns = 12,
-		carouselPeek = 0,
-		margin = p2.Size.Size_800,
-		gutter = p2.Gutter.Large
-	} elseif p1 == breakpoint.Large then {
-		columns = 12,
-		carouselPeek = 0,
-		margin = p2.Size.Size_800,
-		gutter = p2.Gutter.Large
-	} elseif p1 == breakpoint.XLarge then {
-		columns = 12,
-		carouselPeek = 0,
-		margin = p2.Size.Size_1600,
-		gutter = p2.Gutter.XLarge
-	} else {
-		columns = 12,
-		carouselPeek = 0,
-		margin = p2.Size.Size_1600,
-		gutter = p2.Gutter.XLarge
-	}
+end
+
+local function resolveLayout(p1, p2) --[[ Line: 89 ]]
+	-- upvalues: getBaseConfig (copy)
+	return (getBaseConfig(p1, p2))
+end
+
+local function getRegionLayout(SupportRegion, p1, p2) --[[ Line: 93 ]]
+	-- upvalues: getBaseConfig (copy), RegionName (copy)
+	local BaseConfig = getBaseConfig(p1, p2)
+	local Config = if SupportRegion == RegionName.SupportRegion then { widthScale = 0.33, minWidth = 355 } else nil
+	
+	if Config then
+		BaseConfig.width = Config.width
+		BaseConfig.widthScale = Config.widthScale
+		BaseConfig.minWidth = Config.minWidth
+		BaseConfig.maxWidth = Config.maxWidth
+	end
+	return BaseConfig
 end
 
 return {
 	getBaseConfig = getBaseConfig,
-	resolveLayout = if fFlagEnableSplitPane then function(p1, p2)
-		-- upvalues: getBaseConfig (ref)
-		return getBaseConfig(p1, p2)
-	end else nil,
-	getRegionOverrides = if fFlagEnableSplitPane then function(p1)
-		-- upvalues: regionName (ref)
-		return if p1 == regionName.SupportRegion then { widthScale = 0.33, minWidth = 355 } else nil
-	end else nil,
-	getRegionLayout = if fFlagEnableSplitPane then function(p1, p2, p3)
-		-- upvalues: getBaseConfig (ref), regionName (ref)
-		local var1 = getBaseConfig(p2, p3)
-		local var2 = if p1 == regionName.SupportRegion then { widthScale = 0.33, minWidth = 355 } else nil
-		
-		if var2 then
-			var1.width = var2.width
-			var1.widthScale = var2.widthScale
-			var1.minWidth = var2.minWidth
-			var1.maxWidth = var2.maxWidth
-		end
-		return var1
-	end else nil
+	resolveLayout = if FFlagEnableSplitPane then resolveLayout else nil,
+	getRegionOverrides = if FFlagEnableSplitPane then getRegionOverrides else nil,
+	getRegionLayout = if FFlagEnableSplitPane then getRegionLayout else nil
 }

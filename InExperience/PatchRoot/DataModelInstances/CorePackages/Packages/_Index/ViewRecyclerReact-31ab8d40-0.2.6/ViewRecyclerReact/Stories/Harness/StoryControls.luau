@@ -9,39 +9,39 @@
 		4,
 		8
 	}),
-	options = function(p1, p2)
-		local list = { p1 }
+	options = function(p1, List) --[[ Line: 8 ]]
+		local List1 = { p1 }
 		
-		for i, v in p2 do
-			if v ~= p1 then
-				table.insert(list, v)
+		for _, value in List do
+			if value ~= p1 then
+				table.insert(List1, value)
 			end
 		end
-		return list
+		return List1
 	end,
-	merge = function(p3, p4)
-		local cloned = table.clone(p3)
+	merge = function(Tbl, List) --[[ Line: 18 ]]
+		local Copy = table.clone(Tbl)
 		
-		if p4 ~= nil then
-			for i, v in p4 do
-				cloned[i] = if type(v) == "table" then v[1] else v
+		if List ~= nil then
+			for i, value in List do
+				Copy[i] = if type(value) == "table" then value[1] else value
 			end
 		end
-		return cloned
+		return Copy
 	end,
-	positiveInteger = function(p5, p6)
-		return if type(p5) == "number" and p5 == p5 then math.max(1, math.round(p5)) else p6
+	positiveInteger = function(Value: number, p2) --[[ Line: 28 ]]
+		return if type(Value) == "number" and Value == Value then math.max(1, (math.round(Value))) else p2
 	end,
-	nonNegativeNumber = function(p5, p6)
-		return if type(p5) == "number" and p5 == p5 then math.max(0, p5) else p6
+	nonNegativeNumber = function(p2: number, p3) --[[ Line: 35 ]]
+		return if type(p2) == "number" and p2 == p2 then math.max(0, p2) else p3
 	end,
-	resolveAxis = function(p5, p6)
-		return if p5 == "horizontal" then p6.Axis.X else p6.Axis.Y
+	resolveAxis = function(p2, p3) --[[ Line: 42 ]]
+		return if p2 == "horizontal" then p3.Axis.X else p3.Axis.Y
 	end,
-	resolveAlignment = function(p5, p6)
-		return if p5 == "start" then p6.ScrollAlignment.Start elseif p5 == "end" then p6.ScrollAlignment.End else p6.ScrollAlignment.Center
+	resolveAlignment = function(p2, p3) --[[ Line: 46 ]]
+		return if p2 == "start" then p3.ScrollAlignment.Start elseif p2 == "end" then p3.ScrollAlignment.End else p3.ScrollAlignment.Center
 	end,
-	resolvePresentationMode = function(p5, p6)
-		return if p5 == "untilCommit" then p6.RecyclableViewReadiness.ReadyOnCommit else p6.RecyclableViewReadiness.ReadyOnAssignment
+	resolvePresentationMode = function(p2, p3) --[[ Line: 55 ]]
+		return if p2 == "untilCommit" then p3.RecyclableViewReadiness.ReadyOnCommit else p3.RecyclableViewReadiness.ReadyOnAssignment
 	end
 }
